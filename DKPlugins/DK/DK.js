@@ -22,9 +22,8 @@ var DK_SHOW = 5;
 var DK_HIDE = 6;
 //var events = [];
 
-function warn(str) {
-    console.warn(str);
-    return false;
+var byId = function(id) {
+    return document.getElementById(id);
 }
 
 function error(str) {
@@ -32,8 +31,9 @@ function error(str) {
     return false;
 }
 
-var byId = function(id) {
-    return document.getElementById(id);
+function warn(str) {
+    console.warn(str);
+    return true;
 }
 
 //These are use for rem units and zoom level. They are already in DK.css
@@ -358,12 +358,12 @@ function DK_LoadCss(url) {
 
 /////////////////////////////////
 function DK_LoadJs(url, callback) {
-    if (!url) 
+    if (!url)
         return error("DK.js: DK_LoadJs(" + url + "): url invalid");
 
     if (DK_GetObjects().indexOf(url) !== -1) {
-    	callback && callback(false);
-        return warn(url+" already loaded");
+        callback && callback(false);
+        return warn(url + " already loaded");
     }
 
     //TEST: already loaded, remove it first
@@ -372,9 +372,9 @@ function DK_LoadJs(url, callback) {
 
     var file = url.substring(url.lastIndexOf("/") + 1);
 
-    if (!file) 
+    if (!file)
         return error("file invalid");
-    
+
     // Adding the script tag to the head as suggested before
     var head = document.getElementsByTagName('head')[0];
     var script = document.createElement('script');
@@ -405,10 +405,10 @@ function DK_LoadJs(url, callback) {
         }
     }
     ;
-    script.onerror = function(){ 
-        return error("Could not load "+url);
+    script.onerror = function() {
+        return error("Could not load " + url);
     }
- 
+
     //FIXME - DigitalKnob can't trigger onload yet, so we do this
     if (DK_GetJSEngine() === "Duktape") {
         var func = init;
@@ -429,7 +429,7 @@ function DK_LoadHtml(url, parent) {
     if (!url)
         return error("url is invalid");
 
-    if (url.indexOf(".html") === -1) 
+    if (url.indexOf(".html") === -1)
         return error("url is not a valid .html file");
 
     if (url === ".html")
@@ -448,7 +448,7 @@ function DK_LoadHtml(url, parent) {
     var temp = document.createElement("temp");
     temp.innerHTML = string;
     var nodes = temp.childNodes;
-    if (!nodes) 
+    if (!nodes)
         return error("DK.js: DK_LoadHtml(" + url + ", " + parent + "): Could not get nodes from file url");
     if (nodes.length > 1) {
         for (var i = 0; i < nodes.length; i++) {

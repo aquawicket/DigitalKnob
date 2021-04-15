@@ -1,199 +1,223 @@
 "use strict";
-
+// https://console.spec.whatwg.org/
 // https://developer.mozilla.org/en-US/docs/Web/API/console
-const consoleLimit = 100;
-let dkconsole = new Object;
-dkconsole.log = console.log;
-dkconsole.info = console.info;
-dkconsole.debug = console.debug;
-dkconsole.warn = console.warn;
-dkconsole.error = console.error;
-dkconsole.trace = console.trace;
-dkconsole.assert = console.assert;
-dkconsole.group = console.group;
+// https://developer.mozilla.org/en-US/docs/Web/API/Console#outputting_text_to_the_console
 
+const dkconsole = {};
 
-//intercept console with dkconsole
-//Example: If you use dkconsole.log, it will only log to the dk console.
-// If you use console.log, it will go to the dkconsole frame AND the browser console.
-// If you use console_log, it will only log the browser console.
+//intercept console and reroute it to xconsole and dkconsole
+//Example:
+// If you use console.log, it will now go to the dkconsole AND the browser console.
+// If you use dkconsole.log, it will only log to the dkconsole.
+// If you use xconsole.log, it will only log the browser console.
 // Note: some messages cannot be withheld from the browser console.
-const console_log = console.log;
-const console_info = console.info;
-const console_debug = console.debug;
-const console_warn = console.warn;
-const console_error = console.error;
-const console_trace = console.trace;
-const console_assert = console.assert;
-const console_group = console.group;
-console.on = true;
-console_log.on = true;
-console_info.on = true;
-console_debug.on = true;
-console_warn.on = true;
-console_error.on = true;
-console_trace.on = true;
-console_assert.on = true;
-console_group.on = true;
+const xconsole = {};
 (function() {
-     console.log = function() {
-        dkconsole.log.apply(this, Array.prototype.slice.call(arguments));
-        console.on && console_log.on && console_log.apply(this, Array.prototype.slice.call(DKConsole_SpanFilter(arguments)));
+    xconsole.on = true;
+    xconsole.assert = console.assert;
+    xconsole.clear = console.clear;
+    xconsole.context = console.context;
+    xconsole.count = console.count;
+    xconsole.countReset = console.countReset;
+    xconsole.debug = console.debug;
+    xconsole.dir = console.dir;
+    xconsole.dirxml = console.dirxml;
+    xconsole.error = console.error;
+    xconsole.group = console.group;
+    xconsole.groupCollapsed = console.groupCollapsed;
+    xconsole.groupEnd = console.groupEnd;
+    xconsole.info = console.info;
+    xconsole.log = console.log;
+    xconsole.memory = console.memory;
+    xconsole.profile = console.profile;
+    xconsole.profileEnd = console.profileEnd;
+    xconsole.table = console.table;
+    xconsole.time = console.time;
+    xconsole.timeEnd = console.timeEnd;
+    xconsole.timeLog = console.timeLog;
+    xconsole.timeStamp = console.timeStamp;
+    xconsole.trace = console.trace;
+    xconsole.warn = console.warn;
+
+    console.assert = function() {
+        xconsole.on && xconsole.assert.apply(this, Array.prototype.slice.call(arguments));
+        dkconsole.assert && dkconsole.assert.apply(this, Array.prototype.slice.call(arguments));
     }
-    console.info = function() {
-        dkconsole.info.apply(this, Array.prototype.slice.call(arguments));
-        console.on && console_info.on && console_info.apply(this, Array.prototype.slice.call(DKConsole_SpanFilter(arguments)));
+    console.clear = function() {
+        xconsole.on && xconsole.clear.apply(this, Array.prototype.slice.call(arguments));
+        dkconsole.clear && dkconsole.clear.apply(this, Array.prototype.slice.call(arguments));
+    }
+    console.context = function() {
+        xconsole.on && xconsole.context.apply(this, Array.prototype.slice.call(arguments));
+        dkconsole.context && dkconsole.context.apply(this, Array.prototype.slice.call(arguments));
+    }
+    console.count = function() {
+        xconsole.on && xconsole.count.apply(this, Array.prototype.slice.call(arguments));
+        dkconsole.count && dkconsole.count.apply(this, Array.prototype.slice.call(arguments));
+    }
+    console.countReset = function() {
+        xconsole.on && xconsole.countReset.apply(this, Array.prototype.slice.call(arguments));
+        dkconsole.countReset && dkconsole.countReset.apply(this, Array.prototype.slice.call(arguments));
     }
     console.debug = function() {
-        dkconsole.debug.apply(this, Array.prototype.slice.call(arguments));
-        console.on && console_debug.on && console_debug.apply(this, Array.prototype.slice.call(DKConsole_SpanFilter(arguments)));
+        xconsole.on && xconsole.debug.apply(this, Array.prototype.slice.call(arguments));
+        dkconsole.debug && dkconsole.debug.apply(this, Array.prototype.slice.call(arguments));
     }
-    console.warn = function() {
-        dkconsole.warn.apply(this, Array.prototype.slice.call(arguments));
-        console.on && console_warn.on && console_warn.apply(this, Array.prototype.slice.call(DKConsole_SpanFilter(arguments)));
+    console.dir = function() {
+        xconsole.on && xconsole.dir.apply(this, Array.prototype.slice.call(arguments));
+        dkconsole.dir && dkconsole.dir.apply(this, Array.prototype.slice.call(arguments));
+    }
+    console.dirxml = function() {
+        xconsole.on && xconsole.dirxml.apply(this, Array.prototype.slice.call(arguments));
+        dkconsole.dirxml && dkconsole.dirxml.apply(this, Array.prototype.slice.call(arguments));
     }
     console.error = function() {
-        dkconsole.error.apply(this, Array.prototype.slice.call(arguments));
-        console.on && console_error.on && console_error.apply(this, Array.prototype.slice.call(DKConsole_SpanFilter(arguments)));
-    }
-    console.trace = function() {
-        dkconsole.trace.apply(this, Array.prototype.slice.call(arguments));
-        console.on && console_trace.on && console_trace.apply(this, Array.prototype.slice.call(DKConsole_SpanFilter(arguments)));
-    }
-    console.assert = function() {
-        dkconsole.assert.apply(this, Array.prototype.slice.call(arguments));
-        console.on && console_assert.on && console_assert.apply(this, Array.prototype.slice.call(DKConsole_SpanFilter(arguments)));
+        xconsole.on && xconsole.error.apply(this, Array.prototype.slice.call(arguments));
+        dkconsole.error && dkconsole.error.apply(this, Array.prototype.slice.call(arguments));
     }
     console.group = function() {
-        dkconsole.group.apply(this, Array.prototype.slice.call(arguments));
-        console.on && console_group.on && console_group.apply(this, Array.prototype.slice.call(DKConsole_SpanFilter(arguments)));
+        xconsole.on && xconsole.group.apply(this, Array.prototype.slice.call(arguments));
+        dkconsole.group && dkconsole.group.apply(this, Array.prototype.slice.call(arguments));
     }
-    console.message = function() {
-        dkconsole.message.apply(this, Array.prototype.slice.call(arguments));
-        console.on && console_log.on && console_log.apply(this, Array.prototype.slice.call(DKConsole_ColorChromeConsole(arguments)));
+    console.groupCollapsed = function() {
+        xconsole.on && xconsole.groupCollapsed.apply(this, Array.prototype.slice.call(arguments));
+        dkconsole.groupCollapsed && dkconsole.groupCollapsed.apply(this, Array.prototype.slice.call(arguments));
+    }
+    console.groupEnd = function() {
+        xconsole.on && xconsole.groupEnd.apply(this, Array.prototype.slice.call(arguments));
+        dkconsole.groupEnd && dkconsole.groupEnd.apply(this, Array.prototype.slice.call(arguments));
+    }
+    console.info = function() {
+        xconsole.on && xconsole.info.apply(this, Array.prototype.slice.call(arguments));
+        dkconsole.info && dkconsole.info.apply(this, Array.prototype.slice.call(arguments));
+    }
+    console.log = function() {
+        xconsole.on && xconsole.log.apply(this, Array.prototype.slice.call(arguments));
+        dkconsole.log && dkconsole.log.apply(this, Array.prototype.slice.call(arguments));
+    }
+    //console.memory;
+    console.profile = function() {
+        xconsole.on && xconsole.profile.apply(this, Array.prototype.slice.call(arguments));
+        dkconsole.profile && dkconsole.profile.apply(this, Array.prototype.slice.call(arguments));
+    }
+    console.profileEnd = function() {
+        xconsole.on && xconsole.profileEnd.apply(this, Array.prototype.slice.call(arguments));
+        dkconsole.profileEnd && dkconsole.profileEnd.apply(this, Array.prototype.slice.call(arguments));
+    }
+    console.table = function() {
+        xconsole.on && xconsole.table.apply(this, Array.prototype.slice.call(arguments));
+        dkconsole.table && dkconsole.table.apply(this, Array.prototype.slice.call(arguments));
+    }
+    console.time = function() {
+        xconsole.on && xconsole.time.apply(this, Array.prototype.slice.call(arguments));
+        dkconsole.time && dkconsole.time.apply(this, Array.prototype.slice.call(arguments));
+    }
+    console.timeEnd = function() {
+        xconsole.on && xconsole.timeEnd.apply(this, Array.prototype.slice.call(arguments));
+        dkconsole.timeEnd && dkconsole.timeEnd.apply(this, Array.prototype.slice.call(arguments));
+    }
+    console.timeLog = function() {
+        xconsole.on && xconsole.timeLog.apply(this, Array.prototype.slice.call(arguments));
+        dkconsole.timeLog && dkconsole.timeLog.apply(this, Array.prototype.slice.call(arguments));
+    }
+    console.timeStamp = function() {
+        xconsole.on && xconsole.timeStamp.apply(this, Array.prototype.slice.call(arguments));
+        dkconsole.timeStamp && dkconsole.timeStamp.apply(this, Array.prototype.slice.call(arguments));
+    }
+    console.trace = function() {
+        xconsole.on && xconsole.trace.apply(this, Array.prototype.slice.call(arguments));
+        dkconsole.trace && dkconsole.trace.apply(this, Array.prototype.slice.call(arguments));
+    }
+    console.warn = function() {
+        xconsole.on && xconsole.warn.apply(this, Array.prototype.slice.call(arguments));
+        dkconsole.warn && dkconsole.warn.apply(this, Array.prototype.slice.call(arguments));
     }
 }());
-            
-function DKConsole_SpanFilter(args) {
-    let argArray = [];
-    if (args.length) {
-        const startTagRe = /<span\s+style=(['"])([^'"]*)\1\s*>/gi;
-        const endTagRe = /<\/span>/gi;
-        let reResultArray;
-        if(typeof args[0].replace !== "function"){ return args; }
-        argArray.push(args[0].replace(startTagRe, '%c').replace(endTagRe, '%c'));
-        while (reResultArray = startTagRe.exec(args[0])) {
-            argArray.push(reResultArray[2]);
-            argArray.push('');
-        }
-        // pass through subsequent args since chrome dev tools does not (yet) support console.log styling of the following form: console.log('%cBlue!', 'color: blue;', '%cRed!', 'color: red;');
-        for (let n = 1; n < args.length; n++) {
-            argArray.push(args[n]);
-        }
-    }
-    return argArray;
-}
 
-function DKConsole_ColorChromeConsole(args) {
-
-    let argArray = [];
-        argArray.push("%c "+args[0]);
-    if(args[1] === "red"){
-        argArray.push(["padding: 2px 10px 2px 0px", "background-color: rgb(41,0,0)", "color: rgb(255,128,128)"].join(";"));
-    }
-    if(args[1] === "yellow"){
-        argArray.push(["padding: 2px 10px 2px 0px", "background-color: rgb(51,43,0)", "color: rgb(255,221,158)"].join(";"));
-    }
-    if(args[1] === "blue"){
-        argArray.push(["padding: 2px 10px 2px 0px", "background-color: rgb(36,36,36)", "color: rgb(77,136,255)"].join(";"));
-    }
-    if(args[1] === "green"){
-        argArray.push(["padding: 2px 10px 2px 0px", "background-color: rgb(0,41,0)", "color: rgb(128,255,128)"].join(";"));
-    }
-    return argArray;
-}
-
-function DKConsole_Create(parent, id, top, bottom, left, right, width, height) {
+dkconsole.Create = function dkconsole_Create(parent, id, top, bottom, left, right, width, height) {
     DK_Create("DKGui/DKConsole.css");
-    const dkconsoleFrame = document.createElement("div");
-    dkconsoleFrame.style.padding = "0rem";
-    dkconsoleFrame.style.margin = "0rem";
-    dkconsoleFrame.id = id;
-    dkconsoleFrame.style.position = "absolute";
-    dkconsoleFrame.style.top = top;
-    dkconsoleFrame.style.bottom = bottom;
-    dkconsoleFrame.style.left = left;
-    dkconsoleFrame.style.right = right;
-    dkconsoleFrame.style.width = width;
-    dkconsoleFrame.style.height = height;
-    dkconsoleFrame.style.borderColor = "rgb(58,58,58)";
-    dkconsoleFrame.style.borderStyle = "solid";
-    dkconsoleFrame.style.borderWidth = "1rem";
-    dkconsoleFrame.style.boxSizing = "border-box";
-    dkconsoleFrame.style.borderTopWidth = "5rem";
-    dkconsoleFrame.oncontextmenu = function dkconsoleFrame_oncontextmenu(event){
+    dkconsole.limit = 100;
+    const container = document.createElement("div");
+    container.style.padding = "0rem";
+    container.style.margin = "0rem";
+    container.id = id;
+    container.style.position = "absolute";
+    container.style.top = top;
+    container.style.bottom = bottom;
+    container.style.left = left;
+    container.style.right = right;
+    container.style.width = width;
+    container.style.height = height;
+    container.style.borderColor = "rgb(58,58,58)";
+    container.style.borderStyle = "solid";
+    container.style.borderWidth = "1rem";
+    container.style.boxSizing = "border-box";
+    container.style.borderTopWidth = "5rem";
+    container.oncontextmenu = function container_oncontextmenu(event) {
         event.preventDefault();
         const menu = DKMenu_CreateInstance();
-        DKMenu_AddItem(menu, "Clear", function DKMenu_Close(){
-            dkconsole.innerHTML = "";
+        DKMenu_AddItem(menu, "Clear", function DKMenu_Clear() {
+            dkconsole.clear();
         });
-        DKMenu_AddItem(menu, "Cancel", function DKMenu_Cancel(){
+        DKMenu_AddItem(menu, "Cancel", function DKMenu_Cancel() {
             console.log("cancel");
         });
-    };
-    parent.appendChild(dkconsoleFrame);
+    }
+    ;
+    parent.appendChild(container);
 
-    dkconsole = document.createElement("div");
-    dkconsole.className = "dkconsole";
-    dkconsole.style.position = "absolute";
-    dkconsole.style.padding = "0rem";
-    dkconsole.style.backgroundColor = "rgb(36,36,36)";
-    dkconsole.style.color = "white";
-    dkconsole.style.fontColor = "white";
-    dkconsole.style.top = "0rem";
-    dkconsole.style.bottom = "20rem";
-    dkconsole.style.left = "0rem";
-    dkconsole.style.right = "0rem";
-    //dkconsole.style.width = "";
-    //dkconsole.style.height = "";
-    dkconsole.style.visibility = "visible";
-    dkconsole.style.overflow = "auto";
-    dkconsoleFrame.appendChild(dkconsole);
+    const div = document.createElement("div");
+    div.className = "dkconsole";
+    div.style.position = "absolute";
+    div.style.padding = "0rem";
+    div.style.backgroundColor = "rgb(36,36,36)";
+    div.style.color = "white";
+    div.style.fontColor = "white";
+    div.style.top = "0rem";
+    div.style.bottom = "20rem";
+    div.style.left = "0rem";
+    div.style.right = "0rem";
+    //div.style.width = "";
+    //div.style.height = "";
+    div.style.visibility = "visible";
+    div.style.overflow = "auto";
+    container.appendChild(div);
 
-    //command box
-    const cmdbox = document.createElement("input");
-    cmdbox.type = "text";
-    cmdbox.style.position = "absolute";
-    cmdbox.style.left = "0rem";
-    cmdbox.style.bottom = "0rem";
-    cmdbox.style.right = "0rem";
-    cmdbox.style.height = "20rem";
-    cmdbox.style.width = "100%";
-    cmdbox.style.backgroundColor = "rgb(150,150,150)";
-    dkconsoleFrame.style.borderColor = "rgb(40,40,40)";
-    cmdbox.onkeydown = function cmdboxOnKeydownCallback(event) {
+    const command = document.createElement("input");
+    command.type = "text";
+    command.style.position = "absolute";
+    command.style.left = "0rem";
+    command.style.bottom = "0rem";
+    command.style.right = "0rem";
+    command.style.height = "20rem";
+    command.style.width = "100%";
+    command.style.backgroundColor = "rgb(150,150,150)";
+    command.style.borderColor = "rgb(40,40,40)";
+    command.onkeydown = function command_onkeydown(event) {
         const key = event.charCode || event.keyCode;
         if (key === 13) {
             //enter
-            if (cmdbox.value === "clear" || cmdbox.value === "cls") {
-                dkconsole.innerHTML = "";
-                cmdbox.value = "";
+            if (command.value === "clear" || command.value === "cls") {
+                dkconsole.clear();
+                command.value = "";
                 return;
             }
-            console.debug("RUN Javascript -> " + cmdbox.value);
+            console.debug("RUN Javascript -> " + command.value);
 
             try {
-                eval(cmdbox.value);
+                eval(command.value);
             } catch (x) {
                 console.error("eval failed", x.stack);
             }
-
-            cmdbox.value = "";
+            command.value = "";
         }
     }
-    dkconsoleFrame.appendChild(cmdbox);
+    container.appendChild(command);
 
-    dkconsole.message = function(msg, style) {
+    dkconsole.log = function dkconsole_log() {
+
+        const args = dkconsole.ColorChromeConsole(arguments);
+
         const msgDiv = document.createElement("div");
         msgDiv.style.width = "100%";
         msgDiv.style.fontSize = "12rem";
@@ -208,79 +232,130 @@ function DKConsole_Create(parent, id, top, bottom, left, right, width, height) {
         msgDiv.style.borderLeftWidth = "0rem";
         msgDiv.style.borderRightWidth = "0rem";
 
-        const msgText = document.createElement("span");
-        msgText.className = "dkconsole";
+        const msgSpan = document.createElement("span");
+        //msgSpan.className = "dkconsole";
         //TODO: If the message is the same as the last, just have a count next to the original. 
-        msgText.innerHTML = msg;
+        msgSpan.innerHTML = arguments[0];
 
-        if (style === "red") {
-            msgText.style.color = "rgb(255,128,128)";
+        if (arguments[1] === "red") {
+            msgSpan.style.color = "rgb(255,128,128)";
             msgDiv.style.backgroundColor = "rgb(41,0,0)";
             msgDiv.style.borderColor = "rgb(92,0,0)";
-        } else if (style === "yellow") {
-            msgText.style.color = "rgb(255,221,158)";
+        } else if (arguments[1] === "yellow") {
+            msgSpan.style.color = "rgb(255,221,158)";
             msgDiv.style.backgroundColor = "rgb(51,43,0)";
             msgDiv.style.borderColor = "rgb(102,85,0)";
-        } else if (style === "blue") {
-            msgText.style.color = "rgb(77,136,255)";
+        } else if (arguments[1] === "blue") {
+            msgSpan.style.color = "rgb(77,136,255)";
             msgDiv.style.backgroundColor = "rgb(36,36,36)";
             msgDiv.style.borderColor = "rgb(58,58,58)";
-        } else if (style === "green") {
-            msgText.style.color = "rgb(128,255,128)";
+        } else if (arguments[1] === "green") {
+            msgSpan.style.color = "rgb(128,255,128)";
             msgDiv.style.backgroundColor = "rgb(0,41,0)";
             msgDiv.style.borderColor = "rgb(0,92,0)";
         } else {
-            msgText.style.color = "rgb(213,213,213)";
+            msgSpan.style.color = "rgb(213,213,213)";
             msgDiv.style.backgroundColor = "rgb(36,36,36)";
             msgDiv.style.borderColor = "rgb(58,58,58)";
         }
 
-        dkconsole.appendChild(msgDiv);
-        msgDiv.appendChild(msgText);
-        dkconsole.scrollTop = dkconsole.scrollHeight;
+        div.appendChild(msgDiv);
+        msgDiv.appendChild(msgSpan);
+        div.scrollTop = div.scrollHeight;
 
         //Limit the number of stored lines
-        if (dkconsole.childElementCount > consoleLimit) {
-            dkconsole.removeChild(dkconsole.firstChild);
+        if (div.childElementCount > dkconsole.limit) {
+            div.removeChild(div.firstChild);
         }
 
         return msgDiv.innerHTML;
     }
 
-    dkconsole.log = function(str) {
-        dkconsole.message(str);
+    //Set up dkconsole variables
+    dkconsole.assert;
+    dkconsole.clear = function() {
+        div.innerHTML = "";
+    }
+    dkconsole.context;
+    dkconsole.count;
+    dkconsole.countReset;
+    dkconsole.debug = function dkconsole_debug(str) {
+        dkconsole.log(str, "blue");
+    }
+    dkconsole.dir;
+    dkconsole.dirxml;
+    dkconsole.error = function dkconsole_error(str) {
+        if (!str)
+            return warn("str invalid");
+        str = DKTrace_StackToConsoleString(str, "dkconsole_error");
+        dkconsole.log(str, "red");
+    }
+    dkconsole.group = function dkconsole_group(str, style) {
+        dkconsole.log(str, style);
+    }
+    dkconsole.groupCollapsed;
+    dkconsole.groupEnd;
+    dkconsole.info = function dkconsole_info(str, style) {
+        dkconsole.log(str, style);
+    }
+    //dkconsole.log = function(str, style) {
+    //    dkconsole.log(str, style);
+    //}
+    dkconsole.memory;
+    dkconsole.profile;
+    dkconsole.profileEnd;
+    dkconsole.table;
+    dkconsole.time;
+    dkconsole.timeEnd;
+    dkconsole.timeLog;
+    dkconsole.timeStamp;
+    dkconsole.trace = function dkconsole_trace(str, style) {
+        str = StackToConsoleString(str, "dkconsole_trace");
+        dkconsole.log(str, style);
+    }
+    dkconsole.warn = function dkconsole_warn(str) {
+        dkconsole.log(str, "yellow");
     }
 
-    dkconsole.info = function(str) {
-        dkconsole.message(str);
-    }
+    return container;
+}
 
-    dkconsole.debug = function(str) {
-        dkconsole.message(str, "blue");
-    }
-
-    dkconsole.warn = function(str) {
-        dkconsole.message(str, "yellow");
-    }
-
-    //https://developer.mozilla.org/en-US/docs/Web/API/Console/error
-    dkconsole.error = function(arg) {
-        if (!arg) {
-            dkconsole.warn("WARNING: dkconsole.error requires a valid argument");
-            return false;
+dkconsole.SpanFilter = function(args) {
+    let argArray = [];
+    if (args.length) {
+        const startTagRe = /<span\s+style=(['"])([^'"]*)\1\s*>/gi;
+        const endTagRe = /<\/span>/gi;
+        let reResultArray;
+        if (typeof args[0].replace !== "function") {
+            return args;
         }
-        const errMsg = DKTrace_StackToConsoleString(arg, "dkconsole.error");
-        dkconsole.message(errMsg, "red");
+        argArray.push(args[0].replace(startTagRe, '%c').replace(endTagRe, '%c'));
+        while (reResultArray = startTagRe.exec(args[0])) {
+            argArray.push(reResultArray[2]);
+            argArray.push('');
+        }
+        // pass through subsequent args since chrome dev tools does not (yet) support console.log styling of the following form: console.log('%cBlue!', 'color: blue;', '%cRed!', 'color: red;');
+        for (let n = 1; n < args.length; n++) {
+            argArray.push(args[n]);
+        }
     }
+    return argArray;
+}
 
-    dkconsole.trace = function(str) {
-        const stackStr = StackToConsoleString(str, "dkconsole.trace");
-        dkconsole.message(stackStr);
+dkconsole.ColorChromeConsole = function(args) {
+    let argArray = [];
+    argArray.push("%c " + args[0]);
+    if (args[1] === "red") {
+        argArray.push(["padding: 2px 10px 2px 0px", "background-color: rgb(41,0,0)", "color: rgb(255,128,128)"].join(";"));
     }
-
-    dkconsole.group = function(str) {
-        dkconsole.message(str);
+    if (args[1] === "yellow") {
+        argArray.push(["padding: 2px 10px 2px 0px", "background-color: rgb(51,43,0)", "color: rgb(255,221,158)"].join(";"));
     }
-
-    return dkconsole;
+    if (args[1] === "blue") {
+        argArray.push(["padding: 2px 10px 2px 0px", "background-color: rgb(36,36,36)", "color: rgb(77,136,255)"].join(";"));
+    }
+    if (args[1] === "green") {
+        argArray.push(["padding: 2px 10px 2px 0px", "background-color: rgb(0,41,0)", "color: rgb(128,255,128)"].join(";"));
+    }
+    return argArray;
 }
