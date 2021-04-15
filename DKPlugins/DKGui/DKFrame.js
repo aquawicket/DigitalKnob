@@ -76,12 +76,6 @@ function DKFrame_Create(ele) {
     return frame;
 }
 
-/*
-function DKFrame_Html(id) {
-    DKFrame_Create(byId(id));
-}
-*/
-
 function DKFrame_SetTitle(element, title) {
     if (typeof element !== "object")
         return error("element invalid\n");
