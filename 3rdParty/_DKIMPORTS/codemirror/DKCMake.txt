@@ -1,0 +1,3 @@
+### INSTALL ###
+DKINSTALL(https://codemirror.net/codemirror.zip codemirror)
+DKSET(CODEMIRROR ${3RDPARTY}/codemirror)
