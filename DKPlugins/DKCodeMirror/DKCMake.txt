@@ -1,3 +1,4 @@
-#DKDEPEND(codemirror)
-
+DKDEPEND(codemirror)
+DKCOPY(${CODEMIRROR}/ ${DKPLUGINS}/DKCodeMirror/ FALSE)
+DKCOPY(${CODEMIRROR}/ ${DKPLUGINS}/DKCodeMirror/ FALSE)
 DKASSETS(DKCodeMirror)
