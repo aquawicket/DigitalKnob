@@ -31,8 +31,8 @@ if (DK_GetBrowser() !== "CEF" && DK_GetBrowser() !== "RML") {
 
 //////////////////////
 function DKFile_Init() {
-    if(!PHP)
-        return warn("PHP is unavailable");
+    //if(!PHP)
+    //    return warn("PHP is unavailable");
         
     PHP_GetAssetsPath(function(rval){
         online_assets = rval;

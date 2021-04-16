@@ -759,14 +759,16 @@ function DK_IE() {
     return rv;
 }
 
+/*
 function DK_FileToString(url) {
     return ajaxGetUrl(url);
 }
+*/
 
 function DK_FileToStringAsync(url, callback){
     DK_SendRequest(url, function(success, url, data){
         success && callback && callback(data);
-    }, "POST");
+    });
 }
 
 function DK_Sleep(milliseconds) {
@@ -1115,6 +1117,7 @@ function AjaxGet(url, output) {
     return true;
 }
 
+/*
 ////////////////////////
 function ajaxGetUrl(url) {
     var response = new Object();
@@ -1140,8 +1143,8 @@ function ajaxGetUrl(url) {
     }
     */
 
-    return response.value;
-}
+    //return response.value;
+//}
 
 function DK_SendRequest(url, callback, post) {
     if (!url) {
