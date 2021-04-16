@@ -1,5 +1,7 @@
 "use strict";
 
+const PHP = false;
+
 function PHP_Debug_Func(callback) {
     DKPhp_CallPhpFunc(arguments);
 }

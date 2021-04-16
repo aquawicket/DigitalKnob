@@ -759,12 +759,16 @@ function DK_IE() {
     return rv;
 }
 
-/////////////////////////////
 function DK_FileToString(url) {
     return ajaxGetUrl(url);
 }
 
-///////////////////////////////
+function DK_FileToStringAsync(url, callback){
+    DK_SendRequest(url, function(success, url, data){
+        success && callback && callback(data);
+    }, "POST");
+}
+
 function DK_Sleep(milliseconds) {
     var start = new Date().getTime();
     for (var i = 0; i < 1e7; i++) {
@@ -774,7 +778,6 @@ function DK_Sleep(milliseconds) {
     }
 }
 
-////////////////////////////
 function DK_ClearSelection() {
     //Clear text selection
     if (document.selection) {
