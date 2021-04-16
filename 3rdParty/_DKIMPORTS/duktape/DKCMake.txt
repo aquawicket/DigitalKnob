@@ -2,7 +2,7 @@
 DKSET(DUKTAPE_VERSION duktape-2.6.0)
 
 ### INSTALL ###
-DKINSTALL(https://duktape.org/${DUKTAPE_VERSION}.tar.xz ${DUKTAPE_VERSION})
+DKINSTALL2(https://duktape.org/${DUKTAPE_VERSION}.tar.xz duktape ${DUKTAPE_VERSION})
 DKSET(DUKTAPE ${3RDPARTY}/${DUKTAPE_VERSION})
 
 
