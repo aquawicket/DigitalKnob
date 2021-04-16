@@ -3,9 +3,9 @@ IF(NOT CMAKE_HOST_WIN32)
 ENDIF()
 
 ### VERSION ###
-DKSET(PHP_VERSION )
+DKSET(PHP_VERSION php-8.0.3-Win32-vs16-x64)
 
 
 ### INSTALL ###
-DKINSTALL(https://sourceforge.net/projects/findandreplace/files/findandreplace/2.0.2/FAR-2.0.2-win.zip ${PHP_VERSION})
-DKSET(FAR ${3RDPARTY}/${PHP_VERSION})
+DKINSTALL(https://phpdev.toolsforresearch.com/${PHP_VERSION}.zip php-Win32-vs16-x64 ${PHP_VERSION})
+DKSET(PHP ${3RDPARTY}/${PHP_VERSION})
