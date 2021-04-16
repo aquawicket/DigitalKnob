@@ -1927,7 +1927,7 @@ SET(ASSETS
 	PATTERN *.rc EXCLUDE
 	PATTERN DKCMake.txt EXCLUDE
 	PATTERN CMakeLists.txt EXCLUDE
-	PATTERN DKDependencies.txt EXCLUDE
+	PATTERN DKDependencies.tmp EXCLUDE
 	PATTERN temp.txt EXCLUDE
 	PATTERN win32 EXCLUDE
 	PATTERN win64 EXCLUDE
@@ -2080,11 +2080,11 @@ FUNCTION(DKRUNDEPENDS arg)
 	ENDIF()
 	
 	IF(ModifiedContents)
-		FILE(WRITE ${PATHTOPLUGIN}/DKDependencies.txt "${ModifiedContents}")
+		FILE(WRITE ${PATHTOPLUGIN}/DKDependencies.tmp "${ModifiedContents}")
 		IF(${num_extra_args} GREATER 0)
 			DKENABLE(${arg2})
 		ENDIF()
-		INCLUDE(${PATHTOPLUGIN}/DKDependencies.txt)
+		INCLUDE(${PATHTOPLUGIN}/DKDependencies.tmp)
 		IF(${num_extra_args} GREATER 0)
 			DKSET(${arg2} OFF)
 		ENDIF()
