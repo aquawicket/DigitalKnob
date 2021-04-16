@@ -1,4 +1,4 @@
-DKDEPEND(curl-7.34.0)
+DKDEPEND(curl)
 DKDEPEND(DKFile)
 DKDEPEND(DKThread)
 
