@@ -1,7 +1,9 @@
+### VERSION ###
+DKSET(FLAC_VERSION flac-1.3.2)
+
 ### INSTALL ###
-## DKINSTALL(www.internet.com/flac-1.3.2.zip flac-1.3.2) ## find an online link
-## DKINSTALL(${DKWEB}/Download/flac-1.3.2.zip flac-1.3.2)
-DKSET(FLAC ${3RDPARTY}/flac-1.3.2)
+DKINSTALL2(www.internet.com/${FLAC_VERSION}.zip flac ${FLAC_VERSION}) ##FIXME: find an online link
+DKSET(FLAC ${3RDPARTY}/${FLAC_VERSION})
 
 
 ### LINK ###
