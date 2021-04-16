@@ -9,11 +9,12 @@ IF(WIN)
 	DKDEPEND(msys)
 ENDIF()
 
+### VERSION ###
+DKSET(XZ_VERSION xz-5.2.0)
 
 ### INSTALL ###
-DKINSTALL(https://astuteinternet.dl.sourceforge.net/project/lzmautils/xz-5.2.0.tar.gz xz-5.2.0)
-## DKINSTALL(${DKWEB}/Download/xz-5.2.0.tar.gz xz-5.2.0)
-DKSET(XZ ${3RDPARTY}/xz-5.2.0)
+DKINSTALL2(https://astuteinternet.dl.sourceforge.net/project/lzmautils/${XZ_VERSION}.tar.gz xz ${XZ_VERSION})
+DKSET(XZ ${3RDPARTY}/${XZ_VERSION})
 
 
 ### LINK ###
@@ -100,8 +101,8 @@ LINUX_RELEASE_COMMAND(../../configure --disable-shared --enable-static)
 LINUX_RELEASE_COMMAND(make)
 
 
-## ANDROID_NDK_DEBUG(xz-5.2.0)
-## ANDROID_NDK_RELEASE(xz-5.2.0)
+## ANDROID_NDK_DEBUG(${XZ_VERSION})
+## ANDROID_NDK_RELEASE(${XZ_VERSION})
 
 
 DKSETPATH(${XZ}/${OS}/Debug)
