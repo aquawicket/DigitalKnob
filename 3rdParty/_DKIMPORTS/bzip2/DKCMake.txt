@@ -1,5 +1,5 @@
 ### VERSION ###
-DKSET(BZIP2_VERSION ${BZIP2_VERSION})
+DKSET(BZIP2_VERSION bzip2-1.0.6)
 
 ### INSTALL ###
 DKINSTALL2(ftp://sourceware.org/pub/bzip2/${BZIP2_VERSION}.tar.gz bzip2 ${BZIP2_VERSION})
