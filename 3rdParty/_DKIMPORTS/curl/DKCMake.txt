@@ -7,7 +7,6 @@ DKDEPEND(openssl-1.0.2h-vs2015)
 
 ### INSTALL ###
 DKINSTALL2(https://curl.haxx.se/download/${CURL_VERSION}.zip curl ${CURL_VERSION})
-## DKINSTALL(${DKWEB}/Download/${CURL_VERSION}.zip ${CURL_VERSION})
 DKSET(CURL ${3RDPARTY}/${CURL_VERSION})
 
 
