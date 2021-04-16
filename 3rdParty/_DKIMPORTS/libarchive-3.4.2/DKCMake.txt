@@ -8,7 +8,7 @@ ENDIF()
 
 DKDEPEND(xz)
 IF(NOT WIN_64)
-	DKDEPEND(bzip2-1.0.6)
+	DKDEPEND(bzip2)
 ENDIF()
 
 
