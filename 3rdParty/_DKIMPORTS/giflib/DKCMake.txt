@@ -1,7 +1,9 @@
+### VERSION ###
+DKSET(GIF_VERSION giflib-5.1.1)
+
 ### INSTALL ###
-DKINSTALL(https://sourceforge.net/projects/giflib/files/giflib-5.1.1.tar.gz giflib-5.1.1)
-## DKINSTALL(${DKWEB}/Download/giflib-5.1.1.tar.gz giflib-5.1.1)
-DKSET(GIF ${3RDPARTY}/giflib-5.1.1)
+DKINSTALL2(https://sourceforge.net/projects/giflib/files/${GIF_VERSION}.tar.gz giflib ${GIF_VERSION})
+DKSET(GIF ${3RDPARTY}/${GIF_VERSION})
 
 
 ### LINK ###
@@ -95,5 +97,5 @@ LINUX_RELEASE_COMMAND(../../configure --disable-shared --enable-static)
 LINUX_RELEASE_COMMAND(make)
 
 
-ANDROID_NDK_DEBUG(giflib-5.1.1)
-ANDROID_NDK_RELEASE(giflib-5.1.1)
+ANDROID_NDK_DEBUG(${GIF_VERSION})
+ANDROID_NDK_RELEASE(${GIF_VERSION})
