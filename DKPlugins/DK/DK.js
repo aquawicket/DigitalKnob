@@ -1194,12 +1194,12 @@ function DK_SendRequest(url, callback, post) {
         //console.log("XMLHttpRequest.onreadystatechange(" + event + ")");
         callback(false, url, event.type);
         //console.error("GET <a href=' " + url + " ' target='_blank' style='color:rgb(213,213,213)'>" + url + "</a> onabort");
-        return error("xhr.abort");
+        return warn("xhr.abort");
     }
     xhr.onerror = function(event) {
         //console.error("GET <a href=' " + url + " ' target='_blank' style='color:rgb(213,213,213)'>" + url + "</a> onerror");
         callback(false, url, event.type);
-        return error("xhr.error");
+        return warn("xhr.error");
     }
     xhr.onload = function(event) {//console.log("XMLHttpRequest.onload(" + event + ")");
     }
