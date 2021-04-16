@@ -1,8 +1,10 @@
 ### VERSION ###
-DKSET(SDL_VERSION SDL2-2.0.14)
+DKSET(SDL2_VERSION SDL2-2.0.14)
 
 ### INSTALL ###
 DKINSTALL2(https://www.libsdl.org/release/${SDL2_VERSION}.zip SDL2 ${SDL2_VERSION})
+
+##FIXME: ALL occurences of the SDL variable need to be changed to SDL2
 DKSET(SDL ${3RDPARTY}/${SDL2_VERSION})
 
 
