@@ -15,9 +15,9 @@ const dkClock = new Object;
 
 function DKClock_GetSunrise(latitude, longitude, zenith){
     const date = new Date().sunrise(latitude, longitude, zenith);
-    dkClock.sunrize = date.getHours() + (date.getMinutes() * .01);
-    console.log("Sunrise "+dkClock.sunrize);
-    return dkClock.sunrize;
+    dkClock.sunrise = date.getHours() + (date.getMinutes() * .01);
+    console.log("Sunrise "+dkClock.sunrise);
+    return dkClock.sunrise;
 }
 
 function DKClock_GetSunset(latitude, longitude, zenith){
