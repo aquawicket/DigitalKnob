@@ -1,5 +1,5 @@
 DKDEPEND(DKCurl)
 DKDEPEND(DKArchive)
-DKDEPEND(ImageMagick-7.0.11-6-portable-Q16-x86)
+DKDEPEND(ImageMagick-7.0.11-7-portable-Q16-x86)
 
 DKASSETS(DKBuild)

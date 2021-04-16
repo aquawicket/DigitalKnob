@@ -1,11 +1,13 @@
 var DKWEB = "http://127.0.0.1"
-var IMAGEMAGICK = "C:/digitalknob/DK/3rdParty/ImageMagick-7.0.2-10-portable-Q16-x86/convert.exe";
+var IMAGEMAGICK_VERSION = "ImageMagick-7.0.11-7-portable-Q16-x86";
+var IMAGEMAGICK_DOWNLOAD = "http://ftp.icm.edu.pl/packages/ImageMagick/binaries/"+IMAGEMAGICK_VERSION+".zip";
+var IMAGEMAGICK_CONVERT = "C:/digitalknob/DK/3rdParty/"+IMAGEMAGICK_VERSION+"/convert.exe";
 
 /////////////////////////
 function IconMaker_Init()
 {
-	IMAGEMAGICK = CPP_DKFile_GetShortName(IMAGEMAGICK);
-	console.log("IMAGEMAGICK="+IMAGEMAGICK);
+	IMAGEMAGICK_CONVERT = CPP_DKFile_GetShortName(IMAGEMAGICK_CONVERT);
+	console.log("IMAGEMAGICK_CONVERT = "+IMAGEMAGICK_CONVERT);
 }
 
 ////////////////////////
@@ -22,8 +24,8 @@ function IconMaker_Create(AppPath)
 	
 	//Create Windows Icon
 	CPP_DKFile_MkDir(AppPath+"/icons/windows");
-	CPP_DKDuktape_Execute(IMAGEMAGICK+" "+AppPath+"/icons/icon.png -define icon:auto-resize=256,128,64,48,32,16 "+AppPath+"/icons/windows/icon.ico");
-	CPP_DKDuktape_Execute(IMAGEMAGICK+" "+AppPath+"/icons/icon.png -define icon:auto-resize=16 "+AppPath+"/assets/favicon.ico");
+	CPP_DKDuktape_Execute(IMAGEMAGICK_CONVERT+" "+AppPath+"/icons/icon.png -define icon:auto-resize=256,128,64,48,32,16 "+AppPath+"/icons/windows/icon.ico");
+	CPP_DKDuktape_Execute(IMAGEMAGICK_CONVERT+" "+AppPath+"/icons/icon.png -define icon:auto-resize=16 "+AppPath+"/assets/favicon.ico");
 	
 	//Create Mac Icons
 	if(CPP_DKDuktape_GetOS() === "Mac"){
@@ -48,15 +50,15 @@ function IconMaker_Create(AppPath)
 	//Create Android Icons
 	CPP_DKFile_MkDir(AppPath+"/icons/android");
 	CPP_DKFile_MkDir(AppPath+"/icons/android/drawable-hdpi");
-	CPP_DKDuktape_Execute(IMAGEMAGICK+" "+AppPath+"/icons/icon.png -resize 72x72 "+AppPath+"/icons/android/drawable-hdpi/icon.png");
+	CPP_DKDuktape_Execute(IMAGEMAGICK_CONVERT+" "+AppPath+"/icons/icon.png -resize 72x72 "+AppPath+"/icons/android/drawable-hdpi/icon.png");
 	CPP_DKFile_MkDir(AppPath+"/icons/android/drawable-ldpi");
-	CPP_DKDuktape_Execute(IMAGEMAGICK+" "+AppPath+"/icons/icon.png -resize 36x36 "+AppPath+"/icons/android/drawable-ldpi/icon.png");
+	CPP_DKDuktape_Execute(IMAGEMAGICK_CONVERT+" "+AppPath+"/icons/icon.png -resize 36x36 "+AppPath+"/icons/android/drawable-ldpi/icon.png");
 	CPP_DKFile_MkDir(AppPath+"/icons/android/drawable-mdpi");
-	CPP_DKDuktape_Execute(IMAGEMAGICK+" "+AppPath+"/icons/icon.png -resize 48x48 "+AppPath+"/icons/android/drawable-mdpi/icon.png");
+	CPP_DKDuktape_Execute(IMAGEMAGICK_CONVERT+" "+AppPath+"/icons/icon.png -resize 48x48 "+AppPath+"/icons/android/drawable-mdpi/icon.png");
 	CPP_DKFile_MkDir(AppPath+"/icons/android/drawable-xhdpi");
-	CPP_DKDuktape_Execute(IMAGEMAGICK+" "+AppPath+"/icons/icon.png -resize 96x96 "+AppPath+"/icons/android/drawable-xhdpi/icon.png");
+	CPP_DKDuktape_Execute(IMAGEMAGICK_CONVERT+" "+AppPath+"/icons/icon.png -resize 96x96 "+AppPath+"/icons/android/drawable-xhdpi/icon.png");
 	CPP_DKFile_MkDir(AppPath+"/icons/android/drawable-xxhdpi");
-	CPP_DKDuktape_Execute(IMAGEMAGICK+" "+AppPath+"/icons/icon.png -resize 144x144 "+AppPath+"/icons/android/drawable-xxhdpi/icon.png");
+	CPP_DKDuktape_Execute(IMAGEMAGICK_CONVERT+" "+AppPath+"/icons/icon.png -resize 144x144 "+AppPath+"/icons/android/drawable-xxhdpi/icon.png");
 	
 	//Create iOS Icons
 	//CPP_DKFile_MkDir(AppPath+"/icons/ios");
@@ -70,7 +72,7 @@ function IconMaker_ValidateImageMagick()
 {
 	console.log("Looking for ImageMagick...");
 	//console.log(SVN);
-	if(!CPP_DKFile_Exists(IMAGEMAGICK)){
+	if(!CPP_DKFile_Exists(IMAGEMAGICK_CONVERT)){
 		console.log("Installing ImageMagick...");
 		IconMaker_InstallImageMagick();
 	}
@@ -81,9 +83,8 @@ function IconMaker_ValidateImageMagick()
 function IconMaker_InstallImageMagick()
 {
 	CPP_DKFile_MkDir("C:/digitalknob/DK/Download");
-	var datapath = "C:/digitalknob/DK/Download/ImageMagick-7.0.2-10-portable-Q16-x86.zip";
+	var datapath = "C:/digitalknob/DK/Download/"+IMAGEMAGICK_VERSION+".zip";
 	
-	// http://ftp.icm.edu.pl/packages/ImageMagick/binaries/ImageMagick-7.0.2-10-portable-Q16-x86.zip
-	CPP_DKCurl_Download(DKWEB+"/Download/Tools/ImageMagick-7.0.2-10-portable-Q16-x86.zip", datapath);
-	CPP_DKArchive_Extract(datapath, "C:/digitalknob/DK/3rdParty/ImageMagick-7.0.2-10-portable-Q16-x86");
+	CPP_DKCurl_Download(IMAGEMAGICK_DOWNLOAD, datapath);
+	CPP_DKArchive_Extract(datapath, "C:/digitalknob/DK/3rdParty/"+IMAGEMAGICK_VERSION);
 }
