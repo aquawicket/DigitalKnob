@@ -12,7 +12,7 @@ IF(NOT WIN_64)
 ENDIF()
 
 ### VERSION ###
-DKSET(ARCHIVE_VERSION ${ARCHIVE_VERSION})
+DKSET(ARCHIVE_VERSION libarchive-3.4.2)
 
 ### INSTALL ###
 DKINSTALL2(https://www.libarchive.org/downloads/${ARCHIVE_VERSION}.zip libarchive ${ARCHIVE_VERSION})
