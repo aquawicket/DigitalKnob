@@ -1,4 +1,4 @@
-DKDEPEND(threadpool-0_2_5-src)
+DKDEPEND(threadpool)
 IF(USE_DKCef)
 	DKDEPEND(DKCef)
 ENDIF()
@@ -12,4 +12,4 @@ ENDIF()
 
 DKPLUGIN(DKThread)
 DKASSETS(DKThread)
-DKINCLUDE(${3RDPARTY}/threadpool-0_2_5-src)
+DKINCLUDE(${THREADPOOL})
