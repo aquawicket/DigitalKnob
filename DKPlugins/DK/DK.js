@@ -3,6 +3,8 @@
 eval("var __temp = null");
 const use_strict = (typeof __temp === "undefined");
 
+const dk = new Object;
+
 console.log("*** DigitalKnob ***");
 console.log("use_strict is set to: " + use_strict);
 console.log("Browser = " + DK_GetBrowser());
@@ -1151,7 +1153,7 @@ function DK_SendRequest(url, callback, post) {
         console.error("url invalid");
     }
     if (callback.length < 3) {
-        console.error("callback requires 3 arguments");
+        console.error("callback requires 3 arguments (success, url, data)");
     }
 
     var xhr = "";
@@ -1178,7 +1180,7 @@ function DK_SendRequest(url, callback, post) {
         return error("Error creating xhr object");
     }
 
-    if (!post) {
+    if (post !== "POST") {
         xhr.open("GET", url, true);
     } else {
         xhr.open("POST", url, true);

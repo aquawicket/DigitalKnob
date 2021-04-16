@@ -3,7 +3,7 @@
 // https://developer.mozilla.org/en-US/docs/Web/API/console
 // https://developer.mozilla.org/en-US/docs/Web/API/Console#outputting_text_to_the_console
 
-const dkconsole = {};
+const dkconsole = new Object;
 
 //intercept console and reroute it to xconsole and dkconsole
 //Example:
@@ -11,7 +11,7 @@ const dkconsole = {};
 // If you use dkconsole.log, it will only log to the dkconsole.
 // If you use xconsole.log, it will only log the browser console.
 // Note: some messages cannot be withheld from the browser console.
-const xconsole = {};
+const xconsole = new Object;
 (function() {
     xconsole.on = true;
     xconsole.assert = console.assert;
