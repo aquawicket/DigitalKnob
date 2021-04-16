@@ -3,7 +3,7 @@ DKSET(CURL_VERSION curl-7.34.0)
 
 ### DEPENDS ###
 DKDEPEND(zlib)
-DKDEPEND(openssl-1.0.2h-vs2015)
+DKDEPEND(openssl-vs2015)
 
 ### INSTALL ###
 DKINSTALL2(https://curl.haxx.se/download/${CURL_VERSION}.zip curl ${CURL_VERSION})
