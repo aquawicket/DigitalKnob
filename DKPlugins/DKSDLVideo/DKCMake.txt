@@ -2,7 +2,7 @@ IF(WIN)
 	RETURN()
 ENDIF()
 
-DKDEPEND(waave-3.01)
+DKDEPEND(waave)
 DKDEPEND(DKVideo)
 DKDEPEND(DKSDLWindow)
 

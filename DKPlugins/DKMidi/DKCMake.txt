@@ -8,7 +8,7 @@ IF(IOSSIM)
 	RETURN()
 ENDIF()
 
-DKDEPEND(rtmidi-2.1.0)
+DKDEPEND(rtmidi)
 
 DKPLUGIN(DKMidi)
 DKASSETS(DKMidi)

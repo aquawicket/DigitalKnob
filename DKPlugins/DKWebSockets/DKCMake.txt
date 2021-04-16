@@ -5,9 +5,9 @@ IF(LINUX)
 	##RETURN()
 ENDIF()
 
-##DKDEPEND(libwebsockets-2.2-stable)
-##DKDEPEND(uWebSockets-master)
-DKDEPEND(uWebSockets-0.14)
+##DKDEPEND(libwebsockets)
+##DKDEPEND(uWebSockets)
+DKDEPEND(uWebSockets)
 
 DKPLUGIN(DKWebSockets)
 DKASSETS(DKWebSockets)

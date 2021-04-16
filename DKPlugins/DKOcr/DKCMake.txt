@@ -1,6 +1,6 @@
-DKDEPEND(tesseract-3.05)
+DKDEPEND(tesseract)
 DKDEPEND(DKImageMagick)
-##DKDEPEND(podofo-0.9.5)
+##DKDEPEND(podofo)
 
 DKPLUGIN(DKOcr)
 DKASSETS(DKOcr)

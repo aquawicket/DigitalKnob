@@ -1,3 +1,3 @@
-DKDEPEND(opencv-3.4.1)
+DKDEPEND(opencv)
 
 DKPLUGIN(DKScreenRecorder)

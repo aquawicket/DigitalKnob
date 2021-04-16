@@ -1,7 +1,7 @@
 ########## THIS PLUGIN IS OBSOLETE, PLEASE USE DKWebSockets ##########
 
 DKDEPEND(DKThread)
-##DKDEPEND(libwebsockets-2.2-stable)
-DKDEPEND(libwebsockets-2.2)
+##DKDEPEND(libwebsockets)
+DKDEPEND(libwebsockets)
 
 DKPLUGIN(DKServer)
