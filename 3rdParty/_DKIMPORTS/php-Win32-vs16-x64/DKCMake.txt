@@ -1,0 +1,11 @@
+IF(NOT CMAKE_HOST_WIN32)
+	RETURN()
+ENDIF()
+
+### VERSION ###
+DKSET(PHP_VERSION )
+
+
+### INSTALL ###
+DKINSTALL(https://sourceforge.net/projects/findandreplace/files/findandreplace/2.0.2/FAR-2.0.2-win.zip ${PHP_VERSION})
+DKSET(FAR ${3RDPARTY}/${PHP_VERSION})
