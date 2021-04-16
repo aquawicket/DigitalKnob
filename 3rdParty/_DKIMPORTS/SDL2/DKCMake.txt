@@ -1,5 +1,5 @@
 ### VERSION ###
-DKSET(SDL_VERSION SDL2-2.0.8)
+DKSET(SDL_VERSION SDL2-2.0.14)
 
 ### INSTALL ###
 DKINSTALL2(https://www.libsdl.org/release/${SDL2_VERSION}.zip SDL2 ${SDL2_VERSION})
