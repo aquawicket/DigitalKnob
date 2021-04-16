@@ -127,11 +127,10 @@ function DKBuild_ValidateVC2019()
 function DKBuild_InstallVC2019()
 {
 	console.log("Installing Visual Studio 2019");
-	var datapath = DKAssets_LocalAssets();
+	var datapath = CPP_DKAssets_LocalAssets();
 	
 	CPP_DKCurl_Download("https://download.visualstudio.microsoft.com/download/pr/5e397ebe-38b2-4e18-a187-ac313d07332a/169156e6e9a005d49b357c42240184dc1e3ccc28ebc777e70d49257c074f77e8/vs_Community.exe", datapath);
-	//CPP_DKCurl_Download("http://DigitalKnob.com/Download/Tools/vs_Community.exe", datapath);
-	CPP_DKDuktape_System(datapath+"vs_Community.exe");
+	CPP_DKDuktape_System(datapath+"/vs_Community.exe");
 }
 
 //////////////////////////////
