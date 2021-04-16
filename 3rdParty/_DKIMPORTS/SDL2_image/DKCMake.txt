@@ -21,7 +21,8 @@ ENDIF()
 ## DKDEPEND(freetype)
 
 ### VERSION ###
-DKSET(SDLIMAGE_VERSION SDL2_image-2.0.5)
+DKSET(SDLIMAGE_VERSION SDL2_image-2.0.1)
+#DKSET(SDLIMAGE_VERSION SDL2_image-2.0.5)
 
 ### INSTALL ###
 DKINSTALL2(https://www.libsdl.org/projects/SDL_image/release/${SDLIMAGE_VERSION}.zip SDL2_image ${SDLIMAGE_VERSION})
