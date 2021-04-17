@@ -244,7 +244,7 @@ function DK_Create(data, callback) {
         }
     }
     if (arry[0] === "DKJavascript") {
-        if (!DK_LoadJs(arry[1], function(rval) {
+        if (!DK_LoadJs(arry[1], function DK_LoadJs_onload(rval) {
             if (callback) {
                 callback(rval);
             } else {//console.error("DK_Create(" + data + "): does not have a callback");
@@ -254,13 +254,20 @@ function DK_Create(data, callback) {
         }
     }
     if (arry[0] === "DKHtml") {
-        if (!DK_LoadHtml(arry[1], arry[2])) {
+        if (!DK_LoadHtml(arry[1], arry[2], function() {
+            if (typeof callback === "function") {
+                callback();
+            } else {
+                console.warn("DK_Create(" + data + "): does not have a callback");
+            }
+        }))
             return error("DK_LoadHtml failed");
-        }
+        /*
         if (typeof callback === "function") {
-            callback();
+            //callback();
         } else {//console.error("DK_Create("+data+"): does not have a callback");
         }
+        */
     }
     if (arry[0] === "DKCss") {
         if (!DK_LoadCss(arry[1])) {
@@ -276,71 +283,56 @@ function DK_Create(data, callback) {
 
 ///////////////////////
 function DK_Close(data) {
-    console.log("DK_Close(" + data + ")");
     if (!data) {
-        return error("DK_Close(" + data + "): data empty");
+        return error("data is invalid");
     }
 
     var arry = data.split(",");
-    if (arry[0].indexOf(".html") > -1) {
+    if (arry[0].includes(".html")) {
         arry.splice(0, 0, "DKHtml");
-    } else if (arry[0].indexOf(".js") > -1) {
+    } else if (arry[0].includes(".js")) {
         arry.splice(0, 0, "DKJavascript");
-    } else if (arry[0].indexOf(".css") > -1) {
+    } else if (arry[0].includes(".css")) {
         arry.splice(0, 0, "DKCss");
     }
 
     var file = DKFile_GetFilename(arry[1]);
     if (!file) {
-        return error("DK_Close(" + data + "): file invalid");
+        return error("file invalid");
     }
 
     if (arry[0] === "DKJavascript") {
-        var end = file.replace(".js", "");
-        end += "_End";
-        eval(end + "()");
-
-        //FIXME
-        /*
-		console.log(end);
-		var func = window[end]; //Plugin_End() //FIXME
-		if(typeof func === 'function'){
-			
-			func(); // Call the jsclass_End() function
+        var plugin = file.replace(".js", "");
+		var plugin_End = window[plugin+"_End"];
+		if(typeof plugin_End !== 'function'){
+			return warn(plugin_End+" is not a function");
 		}
-		else{
-			console.warn("DK_Close(data): "+func+" is not a function");
-		}
-		*/
-
+		plugin_End();	
         var script = byId(arry[1]);
         if (!script) {
-            //console.warn("DK_Close("+data+"): "+arry[1]+" does not exist");
-            return error("script invalid");
+            return warn("script invalid");
         }
         script.parentNode.removeChild(script);
-        //console.log("Closed "+arry[1]);
+        return true;
     }
     if (arry[0] === "DKHtml") {
         var element = byId(arry[1]);
         if (!element) {
-            //console.warn("DK_Close("+data+"): "+file+" does not exist");
-            return error("element invalid");
+            return warn("element invalid");
         }
         element.parentNode.removeChild(element);
-        //console.log("Closed "+arry[1]);
+        return true;
     }
     if (arry[0] === "DKCss") {
         var css = byId(arry[1]);
         if (!css) {
-            //console.error("DK_Close("+data+"): "+arry[1]+" does not exist");
-            return error("css invalid");
+            return warn("css invalid");
         }
         css.parentNode.removeChild(css);
-        //console.log("Closed "+arry[1]);
+        return true;
     }
 
-    return true;
+    return error("arry[0] invalid");
 }
 
 ////////////////////////
@@ -429,7 +421,7 @@ function DK_LoadJs(url, callback) {
 }
 
 /////////////////////////////////
-function DK_LoadHtml(url, parent) {
+function DK_LoadHtml(url, parent, callback) {
     //TODO: the id of the root element in the html file should be the file path..   I.E. MyPlugin/MyPlugin.html
     if (!url)
         return error("url is invalid");
@@ -443,50 +435,54 @@ function DK_LoadHtml(url, parent) {
     if (DK_GetObjects().indexOf(url) !== -1)
         return warn("DK.js: DK_LoadHtml(" + url + ", parent): url already loaded");
 
-    var string = DK_FileToString(url);
+    //var string = DK_FileToString(url);
+    DK_FileToStringAsync(url, function(string) {
 
-    //Create an empty widget
-    if (!string || string === "ERROR") {
-        string = "<div id=\"" + url + "\" style=\"position:absolute;top:200rem;left:200rem;width:200rem;height:200rem;background-color:rgb(230,230,230);\"></div>";
-    }
-
-    var temp = document.createElement("temp");
-    temp.innerHTML = string;
-    var nodes = temp.childNodes;
-    if (!nodes)
-        return error("DK.js: DK_LoadHtml(" + url + ", " + parent + "): Could not get nodes from file url");
-    if (nodes.length > 1) {
-        for (var i = 0; i < nodes.length; i++) {
-            console.warn("node[" + i + "]: " + nodes[i]);
+        //Create an empty widget
+        if (!string || string === "ERROR") {
+            string = "<div id=\"" + url + "\" style=\"position:absolute;top:200rem;left:200rem;width:200rem;height:200rem;background-color:rgb(230,230,230);\"></div>";
         }
 
-        console.warn("###############################################");
-        console.warn("DK.js: DK_LoadHtml(" + url + ", " + parent + "): Too many nodes in file");
-        //console.log(temp.innerHTML);
-        console.warn("You either have too many root nodes in your html file or, you have extra whitespace at the begining or the end of the file");
-        console.warn("###############################################");
-        //return false;
-    }
+        var temp = document.createElement("temp");
+        temp.innerHTML = string;
+        var nodes = temp.childNodes;
+        if (!nodes)
+            return error("DK.js: DK_LoadHtml(" + url + ", " + parent + "): Could not get nodes from file url");
+        if (nodes.length > 1) {
+            for (var i = 0; i < nodes.length; i++) {
+                console.warn("node[" + i + "]: " + nodes[i]);
+            }
 
-    if (nodes[0].id !== url) {
-        console.warn("DK.js: DK_LoadHtml(" + url + ",parent): did not match the node id (" + nodes[0].id + ")");
-        nodes[0].id = url;
-        console.warn("DK.js: DK_LoadHtml(" + url + ",parent): please fix the id");
-    }
-    if (parent && byId(parent)) {
-        //console.log("DK.js:DK_LoadHtml(): appending to parent");
-        byId(parent).appendChild(nodes[0]);
-    } else {
-        //console.log("DK.js:DK_LoadHtml(): appending to body");
-        document.body.appendChild(nodes[0]);
-    }
+            console.warn("###############################################");
+            console.warn("DK.js: DK_LoadHtml(" + url + ", " + parent + "): Too many nodes in file");
+            //console.log(temp.innerHTML);
+            console.warn("You either have too many root nodes in your html file or, you have extra whitespace at the begining or the end of the file");
+            console.warn("###############################################");
+            //return false;
+        }
 
-    //FIXME - CEF seems to do this automatically. DKRml need to act the same.
-    //var elements = document.getElementsByTagName("temp");
-    //if(elements){ console.log("getElementsByTagName(temp).length: "+elements.length); }
-    //if(elements[0]){ console.log("elements[0].innerHTML: "+elements[0].innerHTML); }
-    //if(elements[0]){ document.removeChild(elements[0]); }
+        if (nodes[0].id !== url) {
+            console.warn("DK.js: DK_LoadHtml(" + url + ",parent): did not match the node id (" + nodes[0].id + ")");
+            nodes[0].id = url;
+            console.warn("DK.js: DK_LoadHtml(" + url + ",parent): please fix the id");
+        }
+        if (parent && byId(parent)) {
+            //console.log("DK.js:DK_LoadHtml(): appending to parent");
+            byId(parent).appendChild(nodes[0]);
+        } else {
+            //console.log("DK.js:DK_LoadHtml(): appending to body");
+            document.body.appendChild(nodes[0]);
+        }
 
+        //FIXME - CEF seems to do this automatically. DKRml need to act the same.
+        //var elements = document.getElementsByTagName("temp");
+        //if(elements){ console.log("getElementsByTagName(temp).length: "+elements.length); }
+        //if(elements[0]){ console.log("elements[0].innerHTML: "+elements[0].innerHTML); }
+        //if(elements[0]){ document.removeChild(elements[0]); }
+
+        callback && callback();
+        return true;
+    });
     return true;
 }
 
@@ -767,8 +763,8 @@ function DK_FileToString(url) {
 }
 */
 
-function DK_FileToStringAsync(url, callback){
-    DK_SendRequest(url, function(success, url, data){
+function DK_FileToStringAsync(url, callback) {
+    DK_SendRequest(url, function(success, url, data) {
         success && callback && callback(data);
     });
 }
@@ -795,9 +791,8 @@ function DK_ClearSelection() {
 function DK_GetElements(element) {
     var string = "";
     //var nodes = byId(id).getElementsByTagName('*'); //all children recursively
-    if (typeof (element) !== "object") {
-        console.error("DK_GetElements(): element not an object");
-    }
+    if (typeof element !== "object") 
+        console.error("element invalid");
     var nodes = element.childNodes;
     for (var i = 0; i < nodes.length; i++) {
         if (nodes[i].id) {
@@ -1145,7 +1140,7 @@ function ajaxGetUrl(url) {
     }
     */
 
-    //return response.value;
+//return response.value;
 //}
 
 function DK_SendRequest(url, callback, post) {
