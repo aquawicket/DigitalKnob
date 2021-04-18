@@ -3,7 +3,7 @@
 eval("var __temp = null");
 const use_strict = (typeof __temp === "undefined");
 
-const dk = new Object;
+window.dk = new Object;
 
 console.log("*** DigitalKnob ***");
 console.log("use_strict is set to: " + use_strict);
@@ -228,6 +228,30 @@ function Log(string, lvl) {
     //DKSendEvent("DKConsole.html", "DKNotify", string);
 }
 */
+dk.getPlugin = function(url) {
+    if (!url)
+        return error("url invalid");
+    var file = url;
+    file = file.substring(file.lastIndexOf("/") + 1);
+    if (!file)
+        return error("file invalid");
+    var pluginName = file;
+    if (!pluginName)
+        return error("pluginName invalid");
+    pluginName = pluginName.substring(0, pluginName.lastIndexOf("."));
+    pluginName = pluginName.toLowerCase();
+    if (pluginName.substring(0, 2) !== "dk") {
+        //return error(file+" is not a valid filename for a dk plugin");
+        return false;
+    }
+    pluginName = pluginName.slice(2);
+    var plugin = dk[pluginName];
+    if (!plugin)
+        return error(file + " does not contain a dk." + pluginName + " Object");
+    console.log("loading dk." + pluginName + " plugin");
+    plugin.name = pluginName;
+    return plugin;
+}
 
 //////////////////////////////////
 function DK_Create(data, callback) {
@@ -287,44 +311,36 @@ function DK_Close(data) {
         return error("data is invalid");
     }
 
-    var arry = data.split(",");
-    if (arry[0].includes(".html")) {
-        arry.splice(0, 0, "DKHtml");
-    } else if (arry[0].includes(".js")) {
-        arry.splice(0, 0, "DKJavascript");
-    } else if (arry[0].includes(".css")) {
-        arry.splice(0, 0, "DKCss");
-    }
+    data = data.split(",");
+    (data[0].includes(".css")) && data.splice(0, 0, "DKCss");
+    (data[0].includes(".html")) && data.splice(0, 0, "DKHtml");
+    (data[0].includes(".js")) && data.splice(0, 0, "DKJavascript");
 
-    var file = DKFile_GetFilename(arry[1]);
-    if (!file) {
-        return error("file invalid");
-    }
-
-    if (arry[0] === "DKJavascript") {
-        var plugin = file.replace(".js", "");
-		var plugin_End = window[plugin+"_End"];
-		if(typeof plugin_End !== 'function'){
-			return warn(plugin_End+" is not a function");
-		}
-		plugin_End();	
-        var script = byId(arry[1]);
+    if (data[0] === "DKJavascript") {
+        var plugin = dk.getPlugin(data[1]);
+        if (plugin && plugin.end) {
+            console.log("running dk." + plugin.name + ".end()");
+            plugin.end();
+        }
+        var script = byId(data[1]);
         if (!script) {
             return warn("script invalid");
         }
         script.parentNode.removeChild(script);
         return true;
     }
-    if (arry[0] === "DKHtml") {
-        var element = byId(arry[1]);
+
+    if (data[0] === "DKHtml") {
+        var element = byId(data[1]);
         if (!element) {
             return warn("element invalid");
         }
         element.parentNode.removeChild(element);
         return true;
     }
-    if (arry[0] === "DKCss") {
-        var css = byId(arry[1]);
+
+    if (data[0] === "DKCss") {
+        var css = byId(data[1]);
         if (!css) {
             return warn("css invalid");
         }
@@ -332,16 +348,16 @@ function DK_Close(data) {
         return true;
     }
 
-    return error("arry[0] invalid");
+    return error("data[1] invalid");
 }
 
 ////////////////////////
 function DK_LoadCss(url) {
     if (!url)
-        return error("DK.js: DK_LoadCss(" + url + "): url invalid");
+        return error("url invalid");
 
     if (DK_GetObjects().indexOf(url) !== -1)
-        return warn("DK.js: DK_LoadCss(" + url + "): url already loaded");
+        return warn(url+" already loaded");
 
     var head = document.getElementsByTagName('head')[0];
     var link = document.createElement('link');
@@ -353,7 +369,6 @@ function DK_LoadCss(url) {
     return true;
 }
 
-/////////////////////////////////
 function DK_LoadJs(url, callback) {
     if (!url)
         return error("DK.js: DK_LoadJs(" + url + "): url invalid");
@@ -367,10 +382,10 @@ function DK_LoadJs(url, callback) {
     if (byId(url))
         byId(url).parentNode.removeChild(byId(url));
 
-    var file = url.substring(url.lastIndexOf("/") + 1);
+    //var file = url.substring(url.lastIndexOf("/") + 1);
 
-    if (!file)
-        return error("file invalid");
+    //if (!file)
+        //return error("file invalid");
 
     // Adding the script tag to the head as suggested before
     var head = document.getElementsByTagName('head')[0];
@@ -382,8 +397,8 @@ function DK_LoadJs(url, callback) {
     script.setAttribute('async', true);
     script.setAttribute('src', url);
 
-    var init = file.replace(".js", "");
-    init += "_Init";
+    //var pluginName = file.replace('.js', '');
+    //var pluginInit = pluginName + "_Init";
     head.appendChild(script);
 
     ////////// CALLBACKS
@@ -391,19 +406,17 @@ function DK_LoadJs(url, callback) {
     script.onload = script.onreadystatechange = function() {
         //FIXME - DigitalKnob can't trigger onload yet.
         if (!done && (!this.readyState || this.readyState === "loaded" || this.readyState === "complete")) {
-            var func = window[init];
-            //Plugin_Init()    
-            if (typeof func === 'function') {
-                func();
-            } else {//console.warn(init+" is not defined");
+            var plugin = dk.getPlugin(url);
+            if (plugin && plugin.init) {
+                console.log("running dk."+plugin.name+".init()");
+                plugin.init();
             }
             done = true;
             callback && callback(true);
         }
     }
-    ;
     script.onerror = function() {
-        return error("Could not load " + url);
+        return error("onerror: " + url);
     }
 
     //FIXME - DigitalKnob can't trigger onload yet, so we do this
@@ -420,7 +433,6 @@ function DK_LoadJs(url, callback) {
     return true;
 }
 
-/////////////////////////////////
 function DK_LoadHtml(url, parent, callback) {
     //TODO: the id of the root element in the html file should be the file path..   I.E. MyPlugin/MyPlugin.html
     if (!url)
@@ -787,22 +799,22 @@ function DK_ClearSelection() {
     }
 }
 
-////////////////////////////////
+/*
 function DK_GetElements(element) {
-    var string = "";
+    var string;
     //var nodes = byId(id).getElementsByTagName('*'); //all children recursively
-    if (typeof element !== "object") 
-        console.error("element invalid");
+    if (!element || element.childNodes) 
+        return error("element invalid");
     var nodes = element.childNodes;
-    for (var i = 0; i < nodes.length; i++) {
+    for (var n = 0; n < nodes.length; n++) {
         if (nodes[i].id) {
             string += nodes[i].id;
             string += ",";
         }
     }
-    //console.log("GetElements("+id+"): -> "+string+"\n");
     return string;
 }
+*/
 
 //////////////////////////////
 function DK_GetAvailableId(id) {

@@ -1,37 +1,37 @@
-const dkmessagebox = new Object;
+dk.messagebox = new Object;
 
-dkmessagebox.init = function DKMessageBox_Init() {/*
-	DK_Create("DKGui/DKMessageBox.html");
-	byId("DKMessageBoxOk").addEventListener("click", DKMessageBox_OnEvent);
-	byId("DKMessageBoxCancel").addEventListener("click", DKMessageBox_OnEvent);
+dk.messagebox.init = function dk_messagebox_init() {/*
+	DK_Create("DKGui/dk.messagebox.html");
+	byId("DKMessageBoxOk").addEventListener("click", dk_messagebox_OnEvent);
+	byId("DKMessageBoxCancel").addEventListener("click", dk_messagebox_OnEvent);
 	*/
 }
 
-dkmessagebox.end = function DKMessageBox_End() {
-    byId("DKMessageBoxOk").removeEventListener("click", DKMessageBox_OnEvent);
-    byId("DKMessageBoxCancel").removeEventListener("click", DKMessageBox_OnEvent);
+dk.messagebox.end = function dk_messagebox_end() {
+    byId("DKMessageBoxOk").removeEventListener("click", dk.messagebox.onevent);
+    byId("DKMessageBoxCancel").removeEventListener("click", dk.messagebox.onevent);
     DK_Close("DKGui/DKMessageBox.html");
 }
 
-dkmessagebox.onevent = function DKMessageBox_OnEvent(event) {
+dk.messagebox.onevent = function dk_messagebox_onevent(event) {
     if (event.currentTarget.id === "DKMessageBoxOk") {
         if (byId("DKMessageBoxInput").value)
-            dkmessagebox.callback && dkmessagebox.callback(byId("DKMessageBoxInput").value);
+            dk.messagebox.callback && dk.messagebox.callback(byId("DKMessageBoxInput").value);
         else
-            dkmessagebox.callback && dkmessagebox.callback(true);
+            dk.messagebox.callback && dk.messagebox.callback(true);
 
-        dkframe.close(byId("DKGui/DKMessageBox.html"));
+        dk.frame.close(byId("DKGui/DKMessageBox.html"));
         return true;
     }
 
     if (event.currentTarget.id === "DKMessageBoxCancel") {
-        dkmessagebox.callback && dkmessagebox.callback(false);
-        dkframe.close(byId("DKGui/DKMessageBox.html"));
+        dk.messagebox.callback && dk.messagebox.callback(false);
+        dk.frame.close(byId("DKGui/DKMessageBox.html"));
         return true;
     }
 }
 
-dkmessagebox.message = function DKMessageBox_Message(message) {
+dk.messagebox.message = function dk_messagebox_message(message) {
     byId("DKMessageBoxText").innerHTML = message;
     byId("DKMessageBoxInput").style.display = "none";
     byId("DKMessageBoxCancel").style.display = "none";
@@ -41,9 +41,9 @@ dkmessagebox.message = function DKMessageBox_Message(message) {
     byId("DKGui/DKMessageBox.html").style.visibility = "visible";
 }
 
-dkmessagebox.confirm = function DKMessageBox_Confirm(message, callback) {
+dk.messagebox.confirm = function dk_messagebox_confirm(message, callback) {
     DK_Create("DKGui/DKMessageBox.html", function() {
-        dkframe.create(byId("DKGui/DKMessageBox.html"));
+        dk.frame.create(byId("DKGui/DKMessageBox.html"));
         DKMessageBoxText.innerHTML = message;
         DKMessageBoxInput.style.display = "none";
         DKMessageBoxText.style.display = "block";
@@ -53,13 +53,13 @@ dkmessagebox.confirm = function DKMessageBox_Confirm(message, callback) {
         byId("DKGui/DKMessageBox.html").style.display = "block";
         byId("DKGui/DKMessageBox.html").style.visibility = "visible";
 
-        DKMessageBoxOk.addEventListener("click", dkmessagebox.onevent);
-        DKMessageBoxCancel.addEventListener("click", dkmessagebox.onevent);
-        dkmessagebox.callback = callback;
+        DKMessageBoxOk.addEventListener("click", dk.messagebox.onevent);
+        DKMessageBoxCancel.addEventListener("click", dk.messagebox.onevent);
+        dk.messagebox.callback = callback;
     });
 }
 
-dkmessagebox.value = function DKMessageBox_Value(message, callback) {
+dk.messagebox.value = function dk_messagebox_value(message, callback) {
     byId("DKMessageBoxText").innerHTML = message;
     byId("DKMessageBoxText").style.display = "block";
     byId("DKMessageBoxText").style.visibility = "visible";
@@ -69,5 +69,5 @@ dkmessagebox.value = function DKMessageBox_Value(message, callback) {
     byId("DKMessageBoxCancel").style.visibility = "visible";
     byId("DKGui/DKMessageBox.html").style.display = "block";
     byId("DKGui/DKMessageBox.html").style.visibility = "visible";
-    dkmessagebox.callback = callback;
+    dk.messagebox.callback = callback;
 }
