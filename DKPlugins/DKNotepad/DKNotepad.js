@@ -2,9 +2,9 @@ var currentFile;
 
 /////////////////////////
 function DKNotepad_Init() {
-    DK_Create("DKNotepad/DKNotepad.html", function() {
-        DK_Create("DKNotepad/DKNotepadShortcuts.js");
-        DK_Create("DKNotepad/DKNotepad.css");
+    dk.create("DKNotepad/DKNotepad.html", function dk_create_callback() {
+        dk.create("DKNotepad/DKNotepadShortcuts.js");
+        dk.create("DKNotepad/DKNotepad.css");
         //byId("DKNotepad.html").addEventListener("SetFile", DKNotepad_OnEvent);
         byId("DKNotepad/DKNotepad.html").addEventListener("OpenFile", DKNotepad_OnEvent);
         byId("DKNotepad/DKNotepad.html").addEventListener("SaveFile", DKNotepad_OnEvent);
@@ -34,7 +34,7 @@ function DKNotepad_End() {
 /////////////////////////////////
 function DKNotepad_OnEvent(event) {
     if (event.type === "contextmenu") {
-        DK_Create("DKNotepad/DKNotepadMenu.js", function() {
+        dk.create("DKNotepad/DKNotepadMenu.js", function() {
             DKMenu_ValidatePosition("DKNotepad/DKNotepadMenu.html");
         });
     }
@@ -48,19 +48,19 @@ function DKNotepad_OnEvent(event) {
     //	DKNotepad_Open(event.value);
     //}
     if (event.currentTarget.id === "DKNotepad_File") {
-        DK_Create("DKNotepad/DKNotepadFile.js", function() {});
+        dk.create("DKNotepad/DKNotepadFile.js", function() {});
     }
     if (event.currentTarget.id === "DKNotepad_Edit") {
-        DK_Create("DKNotepad/DKNotepadEdit.js", function() {});
+        dk.create("DKNotepad/DKNotepadEdit.js", function() {});
     }
     if (event.currentTarget.id === "DKNotepad_Format") {
-        DK_Create("DKNotepad/DKNotepadFormat.js", function() {});
+        dk.create("DKNotepad/DKNotepadFormat.js", function() {});
     }
     if (event.currentTarget.id === "DKNotepad_View") {
-        DK_Create("DKNotepad/DKNotepadView.js", function() {});
+        dk.create("DKNotepad/DKNotepadView.js", function() {});
     }
     if (event.currentTarget.id === "DKNotepad_Help") {
-        DK_Create("DKNotepad/DKNotepadHelp.js", function() {});
+        dk.create("DKNotepad/DKNotepadHelp.js", function() {});
     }
 }
 

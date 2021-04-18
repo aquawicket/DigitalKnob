@@ -1,6 +1,7 @@
 //https://stackoverflow.com/a/36317375/688352
+dk.errorhandler = new Object;
 
-function DKErrorHandler_Create() {
+dk.errorhandler.create = function dk_errorhandler_create() {
 
     // Capture error data for debugging in web console
     let captures = [];

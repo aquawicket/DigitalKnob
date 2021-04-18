@@ -1,46 +1,46 @@
 "use strict";
 
-//const PHP = false;
+dk.php = new Object;
 
-function PHP_Debug_Func(callback) {
-    DKPhp_CallPhpFunc(arguments);
+dk.php.debugFunc = function dk_php_debugFunc(callback) {
+    dk.php.callPhpFunc(arguments);
 }
 
-function PHP_GetRemoteAddress(callback) {
-    DKPhp_CallPhpFunc(arguments);
+dk.php.getRemoteAddres = function dk_php_getRemoteAddress(callback) {
+    dk.php.callPhpFunc(arguments);
 }
 
-function PHP_GetRemoteUser(callback) {
-    DKPhp_CallPhpFunc(arguments);
+dk.php.getRemoteUser = function dk_php_getRemoteUser(callback) {
+    dk.php.callPhpFunc(arguments);
 }
 
-function PHP_GetTime(callback) {
-    DKPhp_CallPhpFunc(arguments);
+dk.php.getTime = function dk_php_getTime(callback) {
+    dk.php.callPhpFunc(arguments);
 }
 
-function PHP_StringToFile(file, data, mode, callback) {
-    DKPhp_CallPhpFunc(arguments);
+dk.php.stringToFile = function dk_php_stringToFile(file, data, mode, callback) {
+    dk.php.callPhpFunc(arguments);
 }
 
-function PHP_FileToString(file, data, callback) {
-    DKPhp_CallPhpFunc(arguments);
+dk.php.fileToString = function dk_php_fileToString(file, data, callback) {
+    dk.php.callPhpFunc(arguments);
 }
 
-function PHP_PushDKAssets(callback) {
-    DKPhp_CallPhpFunc(arguments);
+dk.php.pushDKAssets = function dk_php_pushDKAssets(callback) {
+    dk.php.callPhpFunc(arguments);
 }
 
-function PHP_GetAssetsPath(callback) {
-    DKPhp_CallPhpFunc(arguments);
+dk.php.getAssetsPath = function dk_php_getAssetsPath(callback) {
+    dk.php.callPhpFunc(arguments);
 }
-//function DKPhp_noCB(rVal) {}
+//dk.php.noCB = function dk_php_noCB(rVal) {}
 
-function DKPhp_CallPhpFunc(args) {
+dk.php.callPhpFunc = function dk_php_callPhpFunc(args) {
     //const args = arguments;
     let func = DKTrace_GetCurrentFunctionName(1);
-    const n = func.indexOf("_") + 1;
-    func = func.substring(n, func.length);
-    let funcName = func.replace("PHP_", "");
+    //const n = func.indexOf("_") + 1;
+    //func = func.substring(n, func.length);
+    let funcName = func.replace("Object.dk_php_", "");
     const jsonData = {
         func: funcName,
         args: []
@@ -56,13 +56,13 @@ function DKPhp_CallPhpFunc(args) {
     }
     let path = "";
     if (location.protocol == "file:") {
-        path = "";//
+        path = "";
         path = "http://127.0.0.1:8000/"
     }
     const str = JSON.stringify(jsonData);
-    //console.log("DKPhp_CallPhpFunc(): str = "+str);
+    //console.log("dk.php.callPhpFunc(): str = "+str);
     const data = "x=" + encodeURIComponent(str);
-    //console.log("DKPhp_CallPhpFunc(): data = "+data);
+    //console.log("dk.php.callPhpFunc(): data = "+data);
     const url = path + "DK/DK.php?" + data;
     dk.sendRequest(url, function(success, url, rVal) {
         if (args && typeof (args[args.length - 1]) === "function") {
@@ -72,7 +72,7 @@ function DKPhp_CallPhpFunc(args) {
     }, "POST");
 }
 
-function DKPhp_Call() {
+dk.php.call = function dk_php_call() {
     if (typeof arguments[0] !== "string")
         return error("arguments[0] invalid");
 
@@ -94,9 +94,9 @@ function DKPhp_Call() {
         path = "http://127.0.0.1:8000/"
     }
     const str = JSON.stringify(jsonData);
-    //console.log("DKPhp_CallPhpFunc(): str = "+str);
+    //console.log("dk.php.callPhpFunc(): str = "+str);
     const data = "x=" + encodeURIComponent(str);
-    //console.log("DKPhp_CallPhpFunc(): data = "+data);
+    //console.log("dk.php.callPhpFunc(): data = "+data);
     const url = path + "DK/DK.php?" + data;
     const args = arguments;
     dk.sendRequest(url, function(success, url, rVal) {
@@ -108,7 +108,7 @@ function DKPhp_Call() {
 }
 
 /*
-function DKPhp_CallPhpFunction(str, callback) {
+dk.php.callPhpFunction = function dk_php_callPhpFunction(str, callback) {
     const func = str.split("(").shift();
     str = str.replace(func, "");
     str = str.replace("(", "");

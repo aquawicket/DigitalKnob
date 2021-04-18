@@ -15,8 +15,8 @@ window.onunhandledrejection = function(event) {
 }
 	
 function DKTrace_EditFile(file){
-    dk.create("DKNotepad/DKNotepad.js", function DKTrace_EditFileCallback(){
-        DKFrame_Create("DKNotepad/DKNotepad.html");
+    dk.create("DKNotepad/DKNotepad.js", function dk_create_callback(){
+        dk.frame.create(byId("DKNotepad/DKNotepad.html"));
         DKNotepad_Open(file);
     });
 }

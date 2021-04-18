@@ -9,6 +9,10 @@ dkdebug.keyHistory = new Array;
 dkdebug.debug = function dkdebug_debug() {
     console.log("dkdebug.debug");
 
+    PHP_Debug_Func("one", "two", "three", function(rval) {
+        //console.log(rval);
+    });
+    
     //console.log("Multiple styles: %cred %corange", "color: red", "color: orange", "Additional unformatted message");
     //dkcodemirror.Create();
     
@@ -26,7 +30,7 @@ dkdebug.debug = function dkdebug_debug() {
     */
     
 
-    //HP_Debug_Func("one", "two", "three", function(rval) {
+    //PHP_Debug_Func("one", "two", "three", function(rval) {
     //    console.log(rval);
     //});
     

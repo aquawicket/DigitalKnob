@@ -1,7 +1,7 @@
 <?php
-header_status(500);
+//header_status(500);
 header('Access-Control-Allow-Origin: *');
-//header('Content-Type: application/json; charset=UTF-8');
+header('Content-Type: application/json; charset=UTF-8');
 
 function header_status($statusCode) {
     static $status_codes = null;
@@ -68,7 +68,7 @@ function header_status($statusCode) {
 }
 
 function error($string){
-	//header_status(500);
+	header_status(500);
     die($string);
 }
 
@@ -133,7 +133,7 @@ if($_REQUEST["x"]){
     */
 }
 
-function Debug_Func($var1, $var2, $var3)
+function debugFunc($var1, $var2, $var3)
 {
 	if(1){
 		return error("An Error occured in Debug_Func!");
@@ -142,7 +142,7 @@ function Debug_Func($var1, $var2, $var3)
 }
 
 //https://www.php.net/manual/en/function.file-put-contents.php
-function StringToFile($file, $data, $mode)
+function stringToFile($file, $data, $mode)
 {   
     if($mode == "FILE_APPEND"){
         if(!file_put_contents($file, $data, FILE_APPEND)){
@@ -154,12 +154,12 @@ function StringToFile($file, $data, $mode)
     		return error("StringToFile(): failed\n");
     	}
     }
-    header_status(200);
+    //header_status(200);
     return "File saved successfully";
 }
 
 //https://www.php.net/manual/en/function.file-get-contents.php
-function FileToString($file)
+function fileToString($file)
 {    
     $str = file_get_contents($file);
     if(!$str){
@@ -168,7 +168,7 @@ function FileToString($file)
     return $str;
 }
 
-function GetTime()
+function getTime()
 {
 	$str = "Today is " . date("Y/m/d") . "<br>";
     $str .= "Today is " . date("Y.m.d") . "<br>";
@@ -177,7 +177,7 @@ function GetTime()
     return $str;
 }
 
-function GetRemoteAddress()
+function getRemoteAddress()
 {
 	$ipaddress = '';
     if (isset($_SERVER['REMOTE_ADDR']))
@@ -195,12 +195,12 @@ function GetRemoteAddress()
     return $ipaddress;
 }
 
-function GetRemoteUser()
+function getRemoteUser()
 {
 	return $_SERVER["REMOTE_USER"];
 }
 
-function GetAssetsPath()
+function getAssetsPath()
 {
     $assetsPath = dirname(__DIR__);
     if(basename($assetsPath) != "assets"){
@@ -212,7 +212,7 @@ function GetAssetsPath()
     return $assetsPath;
 }
 
-function GetDKPath()
+function getDKPath()
 {
     $dkPath = dirname(__DIR__);
     $n = 1;
@@ -225,7 +225,7 @@ function GetDKPath()
     return error("could not find digitalknob path \n");
 }
 
-function GetDKPluginsPath()
+function getDKPluginsPath()
 {
     $dkPluginsPath = dirname(__DIR__);
     $n = 1;
@@ -239,7 +239,7 @@ function GetDKPluginsPath()
     return error("cound not find DKPlugins path");
 }
 
-function PushDKAssets()
+function pushDKAssets()
 {
 	//Fist get all fot he paths
 	$assetsPath = GetAssetsPath();
@@ -283,10 +283,8 @@ function PushDKAssets()
 			    //echo $dest."\n";
 			    if (!copy($src, $dest)) {
                     echo "failed to copy $src\n";
-                    //return false;
                 }else{
                 	echo "copied to $dest\n";
-                	//return true;
                 }
 		    }
 		    if($dkPluginsPath2 && is_dir($dkPluginsPath2."\\".$assetsList[$n])){
@@ -294,11 +292,9 @@ function PushDKAssets()
 			    //echo $dest."\n";
 			    if (!copy($src, $dest)) {
                     echo "failed to copy $src\n";
-                    //return false;
                 }
                 else{
                 	echo "copied to $dest\n";
-                	//return true;
                 }
 		    }
         }

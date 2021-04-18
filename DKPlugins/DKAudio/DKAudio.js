@@ -4,7 +4,7 @@
 let DKAudio_lastVolume = 0.0;
 
 function DKAudio_Init() {
-    DK_Create("DKAudio");
+    dk.create("DKAudio");
 }
 
 function DKAudio_End() {
