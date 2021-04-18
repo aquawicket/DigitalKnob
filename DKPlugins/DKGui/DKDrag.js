@@ -6,7 +6,7 @@ function DKDrag_AttachDrags(parent) {
     const elements = parent.getElementsByTagName('*');
     for (let n = 0; n < elements.length; n++) {
         const element = elements[n];
-        if (!DK_IE() && DK_GetBrowser() !== "RML") {
+        if (!dk.iE() && dk.getBrowser() !== "RML") {
             element.style.setProperty("pointer-events", "all");
         }
 
@@ -26,7 +26,7 @@ function DKDrag_AttachDrags(parent) {
 }
 
 function DKDrag_AddDragHandle(element, drag_element) {
-    if (!DK_IE() && DK_GetBrowser() !== "RML") {
+    if (!dk.iE() && dk.getBrowser() !== "RML") {
         element.style.setProperty("pointer-events", "all");
     }
     element.onmousedown = function(event) {
@@ -39,7 +39,7 @@ function DKDrag_AddDragHandle(element, drag_element) {
 }
 
 function DKDrag_RemoveDragHandle(element) {
-    if (!DK_IE()) {//element.style.setProperty("pointer-events","none");
+    if (!dk.iE()) {//element.style.setProperty("pointer-events","none");
     }
     element.onmousedown = 0;
     //element.removeEventListener('touchstart', function(event){ DragStart(event, drag);});
@@ -49,7 +49,7 @@ function DKDrag_DragStart(event, element) {
     if (!event) {
         event = window.event;
     }
-    if (DK_IE()) {
+    if (dk.iE()) {
         DKDrag.mouseStartX = event.clientX + document.documentElement.scrollLeft + document.body.scrollLeft;
         DKDrag.mouseStartY = event.clientY + document.documentElement.scrollTop + document.body.scrollTop;
     } else {
@@ -74,7 +74,7 @@ function DKDrag_DragMove(event, element) {
     }
     let x;
     let y;
-    if (DK_IE()) {
+    if (dk.iE()) {
         x = event.clientX + document.documentElement.scrollLeft + document.body.scrollLeft;
         y = event.clientY + document.documentElement.scrollTop + document.body.scrollTop;
     } else {
@@ -124,7 +124,7 @@ function DKDrag_DragStop(event) {
 
 
 function DKDrag_AddResizeHandle(element, resize_element) {
-    if (!DK_IE() && DK_GetBrowser() !== "RML") {
+    if (!dk.iE() && dk.getBrowser() !== "RML") {
         element.style.setProperty("pointer-events", "all");
     }
     element.onmousedown = function(event) {
@@ -137,7 +137,7 @@ function DKDrag_AddResizeHandle(element, resize_element) {
 }
 
 function DKDrag_RemoveResizeHandle(element) {
-    if (!DK_IE()) {//element.style.setProperty("pointer-events","none");
+    if (!dk.iE()) {//element.style.setProperty("pointer-events","none");
     }
     element.onmousedown = 0;
     //element.removeEventListener('touchstart', function(event){ DragStart(event, drag);});
@@ -147,7 +147,7 @@ function DKDrag_ResizeStart(event, element) {
     if (!event) {
         event = window.event;
     }
-    if (DK_IE()) {
+    if (dk.iE()) {
         DKDrag.mouseStartX = event.clientX + document.documentElement.scrollLeft + document.body.scrollLeft;
         DKDrag.mouseStartY = event.clientY + document.documentElement.scrollTop + document.body.scrollTop;
     } else {
@@ -172,7 +172,7 @@ function DKDrag_ResizeMove(event, element) {
     }
     let x;
     let y;
-    if (DK_IE()) {
+    if (dk.iE()) {
         x = event.clientX + document.documentElement.scrollLeft + document.body.scrollLeft;
         y = event.clientY + document.documentElement.scrollTop + document.body.scrollTop;
     } else {

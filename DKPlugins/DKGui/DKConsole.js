@@ -135,7 +135,7 @@ const xconsole = new Object;
 }());
 
 dkconsole.Create = function dkconsole_Create(parent, id, top, bottom, left, right, width, height) {
-    DK_Create("DKGui/DKConsole.css");
+    dk.create("DKGui/DKConsole.css");
     dkconsole.limit = 100;
     const container = document.createElement("div");
     container.style.padding = "0rem";

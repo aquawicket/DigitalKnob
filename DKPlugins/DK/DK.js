@@ -1,32 +1,33 @@
 "use strict";
-
-eval("var __temp = null");
-const use_strict = (typeof __temp === "undefined");
-
 window.dk = new Object;
 
-console.log("*** DigitalKnob ***");
-console.log("use_strict is set to: " + use_strict);
-console.log("Browser = " + DK_GetBrowser());
-console.log("JSEngine = " + DK_GetJSEngine());
 
-var LOG_DEBUG = false;
-var LOG_INFO = true;
-var LOG_WARNINGS = true;
-var LOG_ERRORS = true;
-var LOG_FILE = true;
-var LOG_SHOW = "";
-//comma seperated
-var LOG_HIDE = "";
-//comma seperated
-var LOG_LINES = false;
-var DK_ERROR = 1;
-var DK_WARN = 2;
-var DK_INFO = 3;
-var DK_DEBUG = 4;
-var DK_SHOW = 5;
-var DK_HIDE = 6;
-//var events = [];
+dk.init = function dk_init() {
+    eval("var __temp = null");
+    const use_strict = (typeof __temp === "undefined");
+    console.log("*** DigitalKnob ***");
+    console.log("use_strict is set to: " + use_strict);
+    console.log("Browser = " + dk.getBrowser());
+    console.log("JSEngine = " + dk.getJSEngine());
+
+    var LOG_DEBUG = false;
+    var LOG_INFO = true;
+    var LOG_WARNINGS = true;
+    var LOG_ERRORS = true;
+    var LOG_FILE = true;
+    var LOG_SHOW = "";
+    //comma seperated
+    var LOG_HIDE = "";
+    //comma seperated
+    var LOG_LINES = false;
+    var DK_ERROR = 1;
+    var DK_WARN = 2;
+    var DK_INFO = 3;
+    var DK_DEBUG = 4;
+    var DK_SHOW = 5;
+    var DK_HIDE = 6;
+    //var events = [];
+}
 
 var byId = function(id) {
     return document.getElementById(id);
@@ -52,32 +53,32 @@ document.onselectstart = function() {
 }
 
 // Dummy functions only implemented in c++
-//function DK_DoFrame(){ /*console.warn("DK_ClearEvents(): not available for "+DK_GetBrowser());*/ }
-//function EventLoop(){ /*console.warn("DK_ClearEvents(): not available for "+DK_GetBrowser());*/ }
+//function DK_DoFrame(){ /*console.warn("DK_ClearEvents(): not available for "+dk.getBrowser());*/ }
+//function EventLoop(){ /*console.warn("DK_ClearEvents(): not available for "+dk.getBrowser());*/ }
 //EventLoop.run = function(){};
 
 //https://stackoverflow.com/a/11035042/688352
 /*
-if(DK_GetBrowser() !== "CEF" && DK_GetBrowser() !== "RML"){
-	var DK_ClearEvents = function(){ console.warn("DK_ClearEvents(): not available for "+DK_GetBrowser()); }
-	var DKRocket_Reload = function(){ console.warn("DKRocket_Reload(): not available for "+DK_GetBrowser()); }
-	var DK_CallFunc = function(var1, var2, var3){ console.warn("DK_CallFunc(): not available for "+DK_GetBrowser()); return ""; }
-	var DK_Queue = function(var1, var2, var3){ console.warn("DK_Queue(): not available for "+DK_GetBrowser()); }
-	var DK_LeftClick = function(){ console.warn("DK_LeftClick(): not available for "+DK_GetBrowser()); }
-	var DK_RightClick = function(){ console.warn("DK_RightClick(): not available for "+DK_GetBrowser()); }
-	var DK_SetCursorPos = function(){ console.warn("DK_SetCursorPos(): not available for "+DK_GetBrowser()); }
-	var DKHook_GetWindows = function(){ console.warn("DKHook_GetWindows(): not available for "+DK_GetBrowser()); }
-	var DK_Crash = function(){ console.warn("DK_Crash(): not available for "+DK_GetBrowser()); }
-	var DK_LogGuiConsole = function(){ console.warn("DK_LogGuiConsole(): not available for "+DK_GetBrowser()); }
-	var DK_GetFunctions = function(){ console.warn("DK_GetFunctions(): not available for "+DK_GetBrowser()); }
-	var DK_PrintFunctions = function(){ console.warn("DK_PrintFunctions(): not available for "+DK_GetBrowser()); }
-	var DK_GetPixelUnderMouse = function(){ console.warn("DK_GetPixelUnderMouse(): not available for "+DK_GetBrowser()); return ""; }
-	var DK_ShowConsole = function(){ console.warn("DK_ShowConsole(): not available for "+DK_GetBrowser()); return ""; }
-	var DK_HideConsole = function(){ console.warn("DK_HideConsole(): not available for "+DK_GetBrowser()); return ""; }
-	var DK_CpuUsed = function(){console.warn("DK_CpuUsed(): not available for "+DK_GetBrowser()); return ""; }
-	var DK_CpuUsedByApp = function(){ console.warn("DK_CpuUsedByApp(): not available for "+DK_GetBrowser()); return ""; }
-	var DK_PhysicalMemory = function(){ console.warn("DK_PhysicalMemory(): not available for "+DK_GetBrowser()); return ""; }
-	var DK_PhysicalMemoryUsedByApp = function(){ console.warn("DK_PhysicalMemoryUsedByApp(): not available for "+DK_GetBrowser()); return ""; }
+if(dk.getBrowser() !== "CEF" && dk.getBrowser() !== "RML"){
+	var DK_ClearEvents = function(){ console.warn("DK_ClearEvents(): not available for "+dk.getBrowser()); }
+	var DKRocket_Reload = function(){ console.warn("DKRocket_Reload(): not available for "+dk.getBrowser()); }
+	var DK_CallFunc = function(var1, var2, var3){ console.warn("DK_CallFunc(): not available for "+dk.getBrowser()); return ""; }
+	var DK_Queue = function(var1, var2, var3){ console.warn("DK_Queue(): not available for "+dk.getBrowser()); }
+	var DK_LeftClick = function(){ console.warn("DK_LeftClick(): not available for "+dk.getBrowser()); }
+	var DK_RightClick = function(){ console.warn("DK_RightClick(): not available for "+dk.getBrowser()); }
+	var DK_SetCursorPos = function(){ console.warn("DK_SetCursorPos(): not available for "+dk.getBrowser()); }
+	var DKHook_GetWindows = function(){ console.warn("DKHook_GetWindows(): not available for "+dk.getBrowser()); }
+	var DK_Crash = function(){ console.warn("DK_Crash(): not available for "+dk.getBrowser()); }
+	var DK_LogGuiConsole = function(){ console.warn("DK_LogGuiConsole(): not available for "+dk.getBrowser()); }
+	var DK_GetFunctions = function(){ console.warn("DK_GetFunctions(): not available for "+dk.getBrowser()); }
+	var DK_PrintFunctions = function(){ console.warn("DK_PrintFunctions(): not available for "+dk.getBrowser()); }
+	var DK_GetPixelUnderMouse = function(){ console.warn("DK_GetPixelUnderMouse(): not available for "+dk.getBrowser()); return ""; }
+	var DK_ShowConsole = function(){ console.warn("DK_ShowConsole(): not available for "+dk.getBrowser()); return ""; }
+	var DK_HideConsole = function(){ console.warn("DK_HideConsole(): not available for "+dk.getBrowser()); return ""; }
+	var DK_CpuUsed = function(){console.warn("DK_CpuUsed(): not available for "+dk.getBrowser()); return ""; }
+	var DK_CpuUsedByApp = function(){ console.warn("DK_CpuUsedByApp(): not available for "+dk.getBrowser()); return ""; }
+	var DK_PhysicalMemory = function(){ console.warn("DK_PhysicalMemory(): not available for "+dk.getBrowser()); return ""; }
+	var DK_PhysicalMemoryUsedByApp = function(){ console.warn("DK_PhysicalMemoryUsedByApp(): not available for "+dk.getBrowser()); return ""; }
 }
 */
 
@@ -90,13 +91,13 @@ function myTimer() {
 
 ///////////////////////////////////////////////////
 document.addEventListener("mousemove", function(e) {
-    if (DK_IE()) {
+    if (dk.iE()) {
         // grab the x-y pos.s if browser is IE
         window.mouseX = e.clientX + document.body.scrollLeft
         window.mouseY = e.clientY + document.body.scrollTop
     }
     //FIXME
-    if (DK_GetBrowser() === "RML") {
+    if (dk.getBrowser() === "RML") {
         window.mouseX = e.clientX;
         window.mouseY = e.clientY;
     } else {
@@ -194,7 +195,7 @@ function Log(string, lvl) {
             return fileline + "  ";
         }
 
-        if (DK_GetBrowser() === "CHROME" || DK_GetBrowser() === "CEF") {
+        if (dk.getBrowser() === "CHROME" || dk.getBrowser() === "CEF") {
             if (lvl === DK_ERROR) {
                 //alert("ERROR: "+string);
                 //throw "ERROR: "+string;
@@ -253,8 +254,7 @@ dk.getPlugin = function(url) {
     return plugin;
 }
 
-//////////////////////////////////
-function DK_Create(data, callback) {
+dk.create = function dk_create(data, callback) {
     var arry = data.split(",");
     if (arry[0].indexOf(".html") > -1)
         arry.splice(0, 0, "DKHtml");
@@ -263,12 +263,12 @@ function DK_Create(data, callback) {
     else if (arry[0].indexOf(".css") > -1)
         arry.splice(0, 0, "DKCss");
     else {
-        if (DK_GetBrowser() === "CEF" || DK_GetBrowser() === "RML") {
+        if (dk.getBrowser() === "CEF" || dk.getBrowser() === "RML") {
             CPP_DKDuktape_Create(data);
         }
     }
     if (arry[0] === "DKJavascript") {
-        if (!DK_LoadJs(arry[1], function DK_LoadJs_onload(rval) {
+        if (!dk.loadJs(arry[1], function dk_loadJs_onload(rval) {
             if (callback) {
                 callback(rval);
             } else {//console.error("DK_Create(" + data + "): does not have a callback");
@@ -278,7 +278,7 @@ function DK_Create(data, callback) {
         }
     }
     if (arry[0] === "DKHtml") {
-        if (!DK_LoadHtml(arry[1], arry[2], function() {
+        if (!dk.loadHtml(arry[1], arry[2], function() {
             if (typeof callback === "function") {
                 callback();
             } else {
@@ -294,7 +294,7 @@ function DK_Create(data, callback) {
         */
     }
     if (arry[0] === "DKCss") {
-        if (!DK_LoadCss(arry[1])) {
+        if (!dk.loadCss(arry[1])) {
             return error("DK_LoadCss failed");
         }
         if (callback) {
@@ -305,8 +305,7 @@ function DK_Create(data, callback) {
     return true;
 }
 
-///////////////////////
-function DK_Close(data) {
+dk.close = function dk_close(data) {
     if (!data) {
         return error("data is invalid");
     }
@@ -351,13 +350,12 @@ function DK_Close(data) {
     return error("data[1] invalid");
 }
 
-////////////////////////
-function DK_LoadCss(url) {
+dk.loadCss = function dk_loadCss(url) {
     if (!url)
         return error("url invalid");
 
-    if (DK_GetObjects().indexOf(url) !== -1)
-        return warn(url+" already loaded");
+    if (dk.getObjects().indexOf(url) !== -1)
+        return warn(url + " already loaded");
 
     var head = document.getElementsByTagName('head')[0];
     var link = document.createElement('link');
@@ -369,24 +367,16 @@ function DK_LoadCss(url) {
     return true;
 }
 
-function DK_LoadJs(url, callback) {
+dk.loadJs = function dk_loadJs(url, callback) {
     if (!url)
-        return error("DK.js: DK_LoadJs(" + url + "): url invalid");
-
-    if (DK_GetObjects().indexOf(url) !== -1) {
+        return error("url invalid");
+    if (dk.getObjects().indexOf(url) !== -1) {
         callback && callback(false);
         return warn(url + " already loaded");
     }
-
     //TEST: already loaded, remove it first
     if (byId(url))
         byId(url).parentNode.removeChild(byId(url));
-
-    //var file = url.substring(url.lastIndexOf("/") + 1);
-
-    //if (!file)
-        //return error("file invalid");
-
     // Adding the script tag to the head as suggested before
     var head = document.getElementsByTagName('head')[0];
     var script = document.createElement('script');
@@ -396,31 +386,28 @@ function DK_LoadJs(url, callback) {
     //script.async = true; // optionally
     script.setAttribute('async', true);
     script.setAttribute('src', url);
-
-    //var pluginName = file.replace('.js', '');
-    //var pluginInit = pluginName + "_Init";
     head.appendChild(script);
 
-    ////////// CALLBACKS
+    ////// CALLBACKS
     var done = false;
     script.onload = script.onreadystatechange = function() {
         //FIXME - DigitalKnob can't trigger onload yet.
         if (!done && (!this.readyState || this.readyState === "loaded" || this.readyState === "complete")) {
             var plugin = dk.getPlugin(url);
             if (plugin && plugin.init) {
-                console.log("running dk."+plugin.name+".init()");
+                console.log("running dk." + plugin.name + ".init()");
                 plugin.init();
             }
             done = true;
             callback && callback(true);
         }
     }
-    script.onerror = function() {
+    script.onerror = function script_onerror() {
         return error("onerror: " + url);
     }
 
     //FIXME - DigitalKnob can't trigger onload yet, so we do this
-    if (DK_GetJSEngine() === "Duktape") {
+    if (dk.getJSEngine() === "Duktape") {
         var func = init;
         //Plugin_Init() 
         if (eval("typeof " + func) === "function") {
@@ -433,7 +420,7 @@ function DK_LoadJs(url, callback) {
     return true;
 }
 
-function DK_LoadHtml(url, parent, callback) {
+dk.loadHtml = function dk_loadHtml(url, parent, callback) {
     //TODO: the id of the root element in the html file should be the file path..   I.E. MyPlugin/MyPlugin.html
     if (!url)
         return error("url is invalid");
@@ -444,11 +431,11 @@ function DK_LoadHtml(url, parent, callback) {
     if (url === ".html")
         url = "New.html";
 
-    if (DK_GetObjects().indexOf(url) !== -1)
-        return warn("DK.js: DK_LoadHtml(" + url + ", parent): url already loaded");
+    if (dk.getObjects().indexOf(url) !== -1)
+        return warn("DK.js: dk.loadHtml(" + url + ", parent): url already loaded");
 
     //var string = DK_FileToString(url);
-    DK_FileToStringAsync(url, function(string) {
+    dk.fileToStringAsync(url, function(string) {
 
         //Create an empty widget
         if (!string || string === "ERROR") {
@@ -459,14 +446,14 @@ function DK_LoadHtml(url, parent, callback) {
         temp.innerHTML = string;
         var nodes = temp.childNodes;
         if (!nodes)
-            return error("DK.js: DK_LoadHtml(" + url + ", " + parent + "): Could not get nodes from file url");
+            return error("DK.js: dk.loadHtml(" + url + ", " + parent + "): Could not get nodes from file url");
         if (nodes.length > 1) {
             for (var i = 0; i < nodes.length; i++) {
                 console.warn("node[" + i + "]: " + nodes[i]);
             }
 
             console.warn("###############################################");
-            console.warn("DK.js: DK_LoadHtml(" + url + ", " + parent + "): Too many nodes in file");
+            console.warn("DK.js: dk.loadHtml(" + url + ", " + parent + "): Too many nodes in file");
             //console.log(temp.innerHTML);
             console.warn("You either have too many root nodes in your html file or, you have extra whitespace at the begining or the end of the file");
             console.warn("###############################################");
@@ -474,15 +461,15 @@ function DK_LoadHtml(url, parent, callback) {
         }
 
         if (nodes[0].id !== url) {
-            console.warn("DK.js: DK_LoadHtml(" + url + ",parent): did not match the node id (" + nodes[0].id + ")");
+            console.warn("DK.js: dk.loadHtml(" + url + ",parent): did not match the node id (" + nodes[0].id + ")");
             nodes[0].id = url;
-            console.warn("DK.js: DK_LoadHtml(" + url + ",parent): please fix the id");
+            console.warn("DK.js: dk.loadHtml(" + url + ",parent): please fix the id");
         }
         if (parent && byId(parent)) {
-            //console.log("DK.js:DK_LoadHtml(): appending to parent");
+            //console.log("DK.js:dk.loadHtml(): appending to parent");
             byId(parent).appendChild(nodes[0]);
         } else {
-            //console.log("DK.js:DK_LoadHtml(): appending to body");
+            //console.log("DK.js:dk.loadHtml(): appending to body");
             document.body.appendChild(nodes[0]);
         }
 
@@ -498,8 +485,7 @@ function DK_LoadHtml(url, parent, callback) {
     return true;
 }
 
-//////////////////////////////
-function DK_CheckFileSupport() {
+dk.checkFileSupport = function dk_checkFileSupport() {
     if (window.File && window.FileReader && window.FileList && window.Blob) {
         console.log("File support OK");
     } else {
@@ -508,8 +494,7 @@ function DK_CheckFileSupport() {
 }
 
 /*
-//////////////////////////////
-function PreventDefault(event)
+dk.preventDefault = function dk_preventDefault(event)
 {
 	if(event.stopPropagation) {
         event.preventDefault();
@@ -518,8 +503,7 @@ function PreventDefault(event)
     }
 }
 
-///////////////////////////////
-function StopPropagation(event)
+dk.stopPropagation = function dk_stopPropagation(event)
 {
 	if(event.stopPropagation) {
         event.stopPropagation();
@@ -529,16 +513,14 @@ function StopPropagation(event)
 }
 */
 
-/////////////////////////////////////////
-function setCookie(cname, cvalue, exdays) {
+dk.setCookie = function dk_setCookie(cname, cvalue, exdays) {
     var d = new Date();
     d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
     var expires = "expires=" + d.toUTCString();
     document.cookie = cname + "=" + cvalue + "; " + expires;
 }
 
-/////////////////////////
-function getCookie(cname) {
+dk.getCookie = function dk_getCookie(cname) {
     var name = cname + "=";
     var ca = document.cookie.split(';');
     for (var i = 0; i < ca.length; i++) {
@@ -551,8 +533,7 @@ function getCookie(cname) {
     return "";
 }
 
-//////////////////////////
-function makeStruct(names) {
+dk.makeStruct = function dk_makeStruct(names) {
     var names = names.split(' ');
     var count = names.length;
     function constructor() {
@@ -568,8 +549,7 @@ function makeStruct(names) {
     //alert(row.speaker); // displays: john
 }
 
-//////////////////////////////////
-function replace(str, old, newstr) {
+dk.replace = function dk_replace(str, old, newstr) {
     var re = new RegExp(old,'g');
     return str.replace(re, newstr);
 }
@@ -583,8 +563,7 @@ if (typeof String.prototype.trim !== 'function') {
 
 /*
 This is a misleading function.
-/////////////////////
-function DK_IsLocal() {
+dk.isLocal = function dk_isLocal() {
     switch (window.location.protocol) {
     case 'http:':
     case 'https:':
@@ -602,20 +581,17 @@ function DK_IsLocal() {
 */
 
 /*
-/////////////////////
-function DK_GetTime() {
+dk.getTime = function DK_GetTime() {
     DKClock_GetStandardTime()
 }
 
-/////////////////////
-function DK_GetDate() {
+dk.getDate = function dk_getDate() {
     DKClock_GetDate()
 }
 */
 
 /*
-/////////////////////
-function DK_Refresh()
+dk.refresh = function dk_refresh()
 {	
 	//window.location.href = href+"index.html";
 	window.location.hash = "";
@@ -623,8 +599,7 @@ function DK_Refresh()
 }
 */
 
-///////////////////////////
-function DK_Available(name) {
+dk.available = function dk_available(name) {
     //FIXME: This function needs to be investigated
     if (name === "DKWidget") {
         return true;
@@ -637,8 +612,7 @@ function DK_Available(name) {
     return false;
 }
 
-////////////////////////
-function DK_GetObjects() {
+dk.getObjects = function dk_getObjects() {
     // Search the Dom for all scripts (.js files)
     var jsfiles = "";
     var elements = document.getElementsByTagName("script");
@@ -685,8 +659,7 @@ function DK_GetObjects() {
     return jsfiles + cssfiles + htmlfiles;
 }
 
-///////////////////
-function DK_GetOS() {
+dk.getOS = function dk_GetOS() {
     var userAgent = navigator.userAgent || navigator.vendor || window.opera;
     // Windows Phone must come first because its UA also contains "Android"
     if (/windows phone/i.test(userAgent)) {
@@ -710,8 +683,7 @@ function DK_GetOS() {
     return os_value;
 }
 
-////////////////////////
-function DK_GetBrowser() {
+dk.getBrowser = function dk_getBrowser() {
     if (navigator.userAgent.indexOf("Rml") !== -1) {
         return "RML";
     } else if ((navigator.userAgent.indexOf("Opera") || navigator.userAgent.indexOf('OPR')) !== -1) {
@@ -732,8 +704,7 @@ function DK_GetBrowser() {
     }
 }
 
-/////////////////////////
-function DK_GetJSEngine() {
+dk.getJSEngine = function dk_getJSEngine() {
     if (navigator.product === "Duktape") {
         return "Duktape"
     }
@@ -749,8 +720,7 @@ function DK_GetJSEngine() {
     return "UNKNOWN JAVASCRIPT ENGINE"
 }
 
-////////////////
-function DK_IE() {
+dk.iE = function dk_iE() {
     var rv = 0;
     if (navigator.appName === 'Microsoft Internet Explorer') {
         var ua = navigator.userAgent;
@@ -770,18 +740,18 @@ function DK_IE() {
 }
 
 /*
-function DK_FileToString(url) {
+dk.fileToString = function dk_fileToString(url) {
     return ajaxGetUrl(url);
 }
 */
 
-function DK_FileToStringAsync(url, callback) {
-    DK_SendRequest(url, function(success, url, data) {
+dk.fileToStringAsync = function dk_fileToStringAsync(url, callback) {
+    dk.sendRequest(url, function(success, url, data) {
         success && callback && callback(data);
     });
 }
 
-function DK_Sleep(milliseconds) {
+dk.sleep = function dk_sleep(milliseconds) {
     var start = new Date().getTime();
     for (var i = 0; i < 1e7; i++) {
         if ((new Date().getTime() - start) > milliseconds) {
@@ -790,7 +760,7 @@ function DK_Sleep(milliseconds) {
     }
 }
 
-function DK_ClearSelection() {
+dk.clearSelection = function dk_clearSelection() {
     //Clear text selection
     if (document.selection) {
         document.selection.empty();
@@ -800,7 +770,7 @@ function DK_ClearSelection() {
 }
 
 /*
-function DK_GetElements(element) {
+dk.getElements - function dk_getElements(element) {
     var string;
     //var nodes = byId(id).getElementsByTagName('*'); //all children recursively
     if (!element || element.childNodes) 
@@ -816,8 +786,7 @@ function DK_GetElements(element) {
 }
 */
 
-//////////////////////////////
-function DK_GetAvailableId(id) {
+dk.getAvailableId = function dk_getAvailableId(id) {
     var out = id;
     var i = 0;
 
@@ -838,11 +807,9 @@ function DK_GetAvailableId(id) {
 
 // *** UNKNOWN *please test* *** //
 
-//////////////////////////////////
-function DK_GetInnerHtmlString(id) {
+dk.getInnerHtmlString = function dk_getInnerHtmlString(id) {
     if (!id) {
-        console.warn("DK_GetInnerHtmlString(): empty id\n");
-        return "";
+        return error("id invalid");
     }
     var element = byId(id);
     for (var i = 0; i < element.childNodes.length; i++) {
@@ -853,8 +820,7 @@ function DK_GetInnerHtmlString(id) {
     }
 }
 
-//////////////////////////////////////////
-function DK_SetInnerHtmlString(id, string) {
+dk.setInnerHtmlString = function dk_setInnerHtmlString(id, string) {
     var element = byId(id);
     for (var i = 0; i < element.childNodes.length; i++) {
         var curNode = element.childNodes[i];
@@ -867,8 +833,7 @@ function DK_SetInnerHtmlString(id, string) {
 
 // *** EVENTS & VALUES *** //
 
-//////////////////////////////
-function DK_GetValue(variable) {
+dk.getValue = function dk_getValue(variable) {
     //FIXME: phase this function out. This function will become obsolete.
     console.error("DK_GetValue(): this function is deprecated and will be obsolete");
 
@@ -1004,19 +969,19 @@ function DK_GetValue(variable) {
     return error("ERROR: DK_GetValue(): unknown type\n");
 }
 
-function DK_PreloadFile(url) {
+dk.preloadFile = function dk_preloadFile(url) {
     var file = new Object();
     file.src = url;
     return file;
 }
 
-function DK_PreloadImage(url) {
+dk.preloadImage = function dk_preloadImage(url) {
     var img = new Image();
     img.src = url;
     return img;
 }
 
-function DK_SaveToLocalStorage(name, string) {
+dk.saveToLocalStorage = function dk_saveToLocalStorage(name, string) {
     if (!name)
         return error("name invalid");
     if (!string)
@@ -1025,17 +990,17 @@ function DK_SaveToLocalStorage(name, string) {
     localStorage.setItem(name, string);
 }
 
-function DK_LoadFromLocalStorage(name) {
+dk.loadFromLocalStorage = function dk_loadFromLocalStorage(name) {
     if (!name)
         return error("name invalid");
     return localStorage.getItem(name);
 }
 
-function DK_RemoveFromLocalStorage(name) {
+dk.removeFromLocalStorage = function dk_removeFromLocalStorage(name) {
     localStorage.removeItem(name);
 }
 
-function DK_IsOnline() {
+dk.isOnline = function dk_isOnline() {
     if (navigator.onLine)
         return true;
     else
@@ -1076,7 +1041,7 @@ Number.prototype.clamp = function(min, max) {
 /////////////////////////////////////////////////////////////////
 
 /////////////////////////////
-function AjaxGet(url, output) {
+dk.ajaxGet = function dk_ajaxGet(url, output) {
     var request = "";
     try {
         request = new XMLHttpRequest();
@@ -1127,8 +1092,7 @@ function AjaxGet(url, output) {
 }
 
 /*
-////////////////////////
-function ajaxGetUrl(url) {
+dk.ajaxGetUrl = function dk_ajaxGetUrl(url) {
     var response = new Object();
     AjaxGet(url, response);
 
@@ -1155,7 +1119,7 @@ function ajaxGetUrl(url) {
 //return response.value;
 //}
 
-function DK_SendRequest(url, callback, post) {
+dk.sendRequest = function dk_sendRequest(url, callback, post) {
     if (!url) {
         console.error("url invalid");
     }
@@ -1191,7 +1155,7 @@ function DK_SendRequest(url, callback, post) {
         xhr.open("GET", url, true);
     } else {
         xhr.open("POST", url, true);
-        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        //xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     }
     xhr.timeout = 20000;
 
@@ -1220,6 +1184,7 @@ function DK_SendRequest(url, callback, post) {
         //console.log("XMLHttpRequest.onreadystatechange(" + event + ")");
         if (xhr.readyState === 4) {
             if (xhr.status >= 200 && xhr.status < 400 || !xhr.status) {
+                //const decodedResponse = decodeURI(xhr.responseText);
                 callback(true, url, xhr.responseText);
             } else {
                 //console.error("GET <a href=' " + url + " ' target='_blank' style='color:rgb(213,213,213)'>" + url + "</a> onreadystatechange");
@@ -1238,7 +1203,7 @@ function DK_SendRequest(url, callback, post) {
     xhr.send();
 }
 
-function CheckForUNICODE(str) {
+dk.checkForUNICODE = function dk_checkForUNICODE(str) {
     for (var i = 0, n = str.length; i < n; i++) {
         if (str.charCodeAt(i) > 255) {
             console.warn("Found UNICODE character at " + i);
@@ -1249,6 +1214,8 @@ function CheckForUNICODE(str) {
     return false;
 }
 
-function ValidateStrict(str) {
+dk.validateStrict = function dk_validateStrict(str) {
     return str;
 }
+
+dk.init();

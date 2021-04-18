@@ -54,8 +54,8 @@ dk.frame.close = function dk_frame_close(element) {
     if (frame.content.id.includes(".html")) {
         var htmlfile = frame.content.id;
         var jsfile = htmlfile.replace(".html", ".js");
-        jsfile && DK_Close(jsfile);
-        htmlfile && DK_Close(htmlfile);
+        jsfile && dk.close(jsfile);
+        htmlfile && dk.close(htmlfile);
     }
     /*
     //TODO if the Frame contains an iFrame, we need to call DKCef_CloseBrowser(n) on the associated iFrame
@@ -145,7 +145,7 @@ dk.frame.createFrame = function dk_frame_createFrame(title, width, height) {
     frame.style.height = newheight + "rem";
     frame.style.backgroundColor = "rgb(150,150,150)";
     frame.style.borderColor = "rgb(0,0,0)";
-    (DK_GetBrowser() !== "RML") && (frame.style.borderStyle = "solid");
+    (dk.getBrowser() !== "RML") && (frame.style.borderStyle = "solid");
     frame.style.borderWidth = "1rem";
     frame.style.minWidth = "62rem";
     frame.style.minHeight = "30rem";
@@ -290,7 +290,7 @@ dk.frame.reload = function dk_frame_reload(element) {
         return error("htmlfile invalid");
 
     dk.frame.close(frame.content);
-    DK_Create(jsfile, function() {
+    dk.create(jsfile, function() {
         dk.frame.create(byId(htmlfile));
     });
 }

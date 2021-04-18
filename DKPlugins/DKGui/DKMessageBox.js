@@ -1,7 +1,7 @@
 dk.messagebox = new Object;
 
 dk.messagebox.init = function dk_messagebox_init() {/*
-	DK_Create("DKGui/dk.messagebox.html");
+	dk.create("DKGui/dk.messagebox.html");
 	byId("DKMessageBoxOk").addEventListener("click", dk_messagebox_OnEvent);
 	byId("DKMessageBoxCancel").addEventListener("click", dk_messagebox_OnEvent);
 	*/
@@ -10,7 +10,7 @@ dk.messagebox.init = function dk_messagebox_init() {/*
 dk.messagebox.end = function dk_messagebox_end() {
     byId("DKMessageBoxOk").removeEventListener("click", dk.messagebox.onevent);
     byId("DKMessageBoxCancel").removeEventListener("click", dk.messagebox.onevent);
-    DK_Close("DKGui/DKMessageBox.html");
+    dk.close("DKGui/DKMessageBox.html");
 }
 
 dk.messagebox.onevent = function dk_messagebox_onevent(event) {
@@ -42,7 +42,7 @@ dk.messagebox.message = function dk_messagebox_message(message) {
 }
 
 dk.messagebox.confirm = function dk_messagebox_confirm(message, callback) {
-    DK_Create("DKGui/DKMessageBox.html", function() {
+    dk.create("DKGui/DKMessageBox.html", function() {
         dk.frame.create(byId("DKGui/DKMessageBox.html"));
         DKMessageBoxText.innerHTML = message;
         DKMessageBoxInput.style.display = "none";

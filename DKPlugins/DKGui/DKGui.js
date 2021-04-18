@@ -2,7 +2,7 @@
 
 function DKGui_CreateElement(parent, tag, id) {
     var ele = document.createElement(tag);
-    ele.id = DK_GetAvailableId(id);
+    ele.id = dk.getAvailableId(id);
     parent.appendChild(ele);
     //This is not working on IE
     return ele;
@@ -10,7 +10,7 @@ function DKGui_CreateElement(parent, tag, id) {
 
 function DKGui_CreateElementBefore(parent, tag, id) {
     var ele = document.createElement(tag);
-    ele.id = DK_GetAvailableId(id);
+    ele.id = dk.getAvailableId(id);
     parent.parentNode.insertBefore(ele, parent);
     return ele;
 }

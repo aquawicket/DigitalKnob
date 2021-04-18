@@ -56,6 +56,7 @@ function DKPhp_CallPhpFunc(args) {
     }
     let path = "";
     if (location.protocol == "file:") {
+        path = "";//
         path = "http://127.0.0.1:8000/"
     }
     const str = JSON.stringify(jsonData);
@@ -63,7 +64,7 @@ function DKPhp_CallPhpFunc(args) {
     const data = "x=" + encodeURIComponent(str);
     //console.log("DKPhp_CallPhpFunc(): data = "+data);
     const url = path + "DK/DK.php?" + data;
-    DK_SendRequest(url, function(success, url, rVal) {
+    dk.sendRequest(url, function(success, url, rVal) {
         if (args && typeof (args[args.length - 1]) === "function") {
             args[args.length - 1](rVal);
         } else {//console.log(rVal);
@@ -98,7 +99,7 @@ function DKPhp_Call() {
     //console.log("DKPhp_CallPhpFunc(): data = "+data);
     const url = path + "DK/DK.php?" + data;
     const args = arguments;
-    DK_SendRequest(url, function(success, url, rVal) {
+    dk.sendRequest(url, function(success, url, rVal) {
         if (args && typeof (args[args.length - 1]) === "function") {
             args[args.length - 1](rVal);
         } else {//console.log(rVal);
@@ -125,7 +126,7 @@ function DKPhp_CallPhpFunction(str, callback) {
     }
     const data = "x=" + encodeURIComponent(JSON.stringify(jsonData));
     const url = "DK/DK.php?" + data;
-    DK_SendRequest(url, function(success, url, data) {
+    dk.sendRequest(url, function(success, url, data) {
         callback(data);
     });
 }
