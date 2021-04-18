@@ -1,7 +1,9 @@
 "use strict";
 
+dk.validate = new Object;
+
 //https://stackoverflow.com/a/9337047/688352
-function DKValidate_IsValidVarName(name) {
+dk.validate.isValidVarName = function dk_validate_isValidVarName(var_name) {
     try {
         Function('var ' + var_name);
     } catch (e) {
@@ -10,8 +12,8 @@ function DKValidate_IsValidVarName(name) {
     return true;
 }
 
-function DKValidate_IsValidCallStack(stack) {//TODO
+dk.validate.isValidCallStack = function dk_validate_isValidCallStack(stack) {//TODO
 }
 
-function DKValidate_IsValidEmail(email) {//TODO
+dk.validate.isValidEmail = function dk_validate_isValidEmail(email) {//TODO
 }

@@ -1,7 +1,7 @@
 "use strict";
 
 dk.debug = new Object;
-dk.debug.keyHistory = new Array;
+
 
 ////////////////////////////////////
 ///  A Convienient Debug Function
@@ -9,9 +9,18 @@ dk.debug.keyHistory = new Array;
 dk.debug.debugFunc = function dk_debug_debugFunc() {
     console.log("dk.debug.debugFunc");
 
+    var varName = "testABC";
+    if(dk.validate.isValidVarName(varName)){
+        console.log(varName+" is a valid variable name");
+    }else{
+        console.log(varName+" is NOT a valid variable name");
+    }
+
+    /*
     dk.php.debugFunc("one", "two", "three", function(rval) {
         console.log(rval);
     });
+    */
     
     //console.log("Multiple styles: %cred %corange", "color: red", "color: orange", "Additional unformatted message");
     //dk.codemirror.Create();
@@ -29,11 +38,11 @@ dk.debug.debugFunc = function dk_debug_debugFunc() {
     });
     */
     
-
-    //dk.php.debugFunc("one", "two", "three", function(rval) {
-    //    console.log(rval);
-    //});
-    
+    /*
+    dk.php.debugFunc("one", "two", "three", function(rval) {
+        console.log(rval);
+    });
+    */    
 
     /*
     dk.php.getRemoteAddress(function(rval) {
@@ -51,8 +60,10 @@ dk.debug.debugFunc = function dk_debug_debugFunc() {
     dk.frame.create(test);
     */
 
-    //var result =  1+11+8*9+2/14*8-4;
-    //console.log("it's "+result+" ...  computers never lie");
+    /*
+    var result =  1+11+8*9+2/14*8-4;
+    console.log("it's "+result+" ...  computers never lie");
+    */
 
     /*
     dk.gui.confirmBox("do this?", function(){
@@ -72,13 +83,13 @@ dk.debug.debugFunc = function dk_debug_debugFunc() {
         console.info("resized: x:"+resizableDiv.style.width+" y:"+resizableDiv.style.height);
     });
     //only works on window object
-    //resizableDiv.onresize = function() {
-    //    console.info("resized: x:" + resizableDiv.style.width + " y:" + resizableDiv.style.height);
-    //}
+    resizableDiv.onresize = function() {
+        console.info("resized: x:" + resizableDiv.style.width + " y:" + resizableDiv.style.height);
+    }
     */
 
     /*
-    //Update time on all devices
+    //Update time on all Tasmota devices
     const dateInMilliseconds = GetDateInMilliseconds();
     for (let n = 0; n < devices.length; n++) {
         const cmnd = "timezone -7";
@@ -95,7 +106,7 @@ dk.debug.debugFunc = function dk_debug_debugFunc() {
     */
 
     /*
-    //Get time from all devices
+    //Get time from all Tasmota devices
     for (let n = 0; n < devices.length; n++) {
         const cmnd = "time";
         const url = "http://" + devices[n].ip + "/cm?cmnd=" + encodeURIComponent(cmnd).replace(";", "%3B");
@@ -106,7 +117,9 @@ dk.debug.debugFunc = function dk_debug_debugFunc() {
     }
     */
 
-    //DKCreateFramedWindow("testWindow", 300, 300);
+    /*
+    DKCreateFramedWindow("testWindow", 300, 300);
+    */
 
     /*
     // Test console
@@ -171,9 +184,11 @@ dk.debug.debugFunc = function dk_debug_debugFunc() {
     }
     */
 }
+/////////////////////////////////////////////
 
 
 dk.debug.init = function dk_debug_init() {
+    dk.debug.keyHistory = new Array;
     document.addEventListener("keydown", dk.debug.onevent);
 }
 
@@ -183,7 +198,6 @@ dk.debug.end = function dk_debug_end() {
 
 dk.debug.onevent = function dk_debug_onevent(event) {
     if (event.type === "keydown") {
-        console.log("keydowwn");
         dk.debug.logKey(event.code);
         dk.debug.checkKeys();
     }
@@ -206,53 +220,58 @@ dk.debug.logKey = function dk_debug_logKey(code) {
 }
 
 dk.debug.checkKeys = function dk_debug_checkKeys() {
-    var string;
+    var string = "";
     for (var n = 0; n < dk.debug.keyHistory.length; n++) {
         string += dk.debug.keyToChar(dk.debug.keyHistory[n]);
     }
-
+    
     //check for commands
-    if (string.indexOf("dkreload") !== -1) {
-        console.log("*** dk.debug.Refresh() ***");
+    if (string.includes("dkreload")) {
+        console.log("*** dk.debug.reload() ***");
         dk.debug.refresh();
         dk.debug.keyHistory = [];
     }
-    if (string.indexOf("dkpush") !== -1) {
+    if (string.includes("dkpush")) {
         console.log("*** dk.debug.pushDKFiles() ***");
         dk.debug.pushDKFiles();
         dk.debug.keyHistory = [];
     }
-    if (string.indexOf("dkclear") !== -1) {
+    if (string.includes("dkclear")) {
         console.log("*** dk.debug.clearConsole() ***");
         dk.debug.clearConsole();
         dk.debug.keyHistory = [];
     }
-    if (string.indexOf("console.log") !== -1) {
+    if (string.includes("dkinfo")) {
         console.log("*** dk.debug.printInfo() ***");
         dk.debug.printInfo();
         dk.debug.keyHistory = [];
     }
-    if (string.indexOf("dkconsole") !== -1) {
-        console.log("*** dk.debug.shoeConsole() ***");
+    if (string.includes("dkconsole")) {
+        console.log("*** dk.debug.showConsole() ***");
         dk.debug.showConsole();
         dk.debug.keyHistory = [];
     }
-    if (string.indexOf("dksource") !== -1) {
+    if (string.includes("dksource")) {
         console.log("*** dk.debug.getSource() ***");
         dk.debug.getSource();
         dk.debug.keyHistory = [];
     }
-    if (string.indexOf("dkcrash") !== -1) {
-        console.log("*** dk.debug.crash() ***");
-        dk.debug.crash();
+    if (string.includes("dkcrashcpp")) {
+        console.log("*** dk.debug.crashCPP() ***");
+        dk.debug.crashCPP();
         dk.debug.keyHistory = [];
     }
-    if (string.indexOf("dkeditor") !== -1) {
+    if (string.includes("dkcrashjs")) {
+        console.log("*** dk.debug.crashJS() ***");
+        dk.debug.crashJS();
+        dk.debug.keyHistory = [];
+    }
+    if (string.includes("dkeditor")) {
         console.log("*** dk.debug.editor() ***");
         dk.debug.editor();
         dk.debug.keyHistory = [];
     }
-    if (string.indexOf("dkdebug") !== -1) {
+    if (string.includes("dkdebug")) {
         console.log("*** dk.debug.debugger() ***");
         dk.debug.debugger();
         dk.debug.keyHistory = [];
@@ -323,7 +342,15 @@ dk.debug.refresh = function dk_debug_refresh() {
     window.location.reload(true);
 }
 
-dk.debug.pushDkFiles = function dk_debug_pushDKFiles() {
+dk.debug.pushDKFiles = function dk_debug_pushDKFiles() {
+    //This is the pure js method
+    dk.php.pushDKAssets(function dk_php_pushDKAssetsCallback(rval) {
+        console.log(rval);
+        console.log("done copying assets");
+    });
+
+    /*
+    //This is the js->cpp method
     var assets = CPP_DKAssets_LocalAssets();
     if (!assets) {
         console.error("assets is invalid");
@@ -370,6 +397,7 @@ dk.debug.pushDkFiles = function dk_debug_pushDKFiles() {
             }
         }
     }
+    */
 }
 
 dk.debug.clearConsole = function dk_debug_clearConsole() {
@@ -391,7 +419,7 @@ dk.debug.clearConsole = function dk_debug_clearConsole() {
 dk.debug.printInfo = function dk_debug_printInfo() {
     console.log("\n");
     console.log("**** DKOBJECTS ****");
-    var objects = DK_GetObjects();
+    var objects = dk.getObjects();
     var arry = objects.split(",");
     for (var n = 0; n < arry.length; n++) {
         if (!arry[n]) {
@@ -402,7 +430,7 @@ dk.debug.printInfo = function dk_debug_printInfo() {
     console.log("\n");
 
     console.log("**** DKEVENTS ****");
-    var events = DK_GetEvents();
+    var events = dk.getEvents();
     var arry = events.split(",");
     for (var n = 0; n < arry.length; n++) {
         if (!arry[n]) {
@@ -413,7 +441,7 @@ dk.debug.printInfo = function dk_debug_printInfo() {
     console.log("\n");
 
     console.log("**** DKEVENTS ****");
-    var events = DK_GetFunctions();
+    var events = dk.getFunctions();
     var arry = events.split(",");
     for (var n = 0; n < arry.length; n++) {
         if (!arry[n])
@@ -424,16 +452,16 @@ dk.debug.printInfo = function dk_debug_printInfo() {
 }
 
 dk.debug.function = function dk_debug_showConsole() {
-    DK_ShowConsole();
+    dk.showConsole();
 }
 
 dk.debug.getSource = function dk_debug_getSource() {
-    DK_Create("DKWidgetJS");
+    dk.create("DKWidgetJS");
     var source = document.documentElement.outerHTML;
     var assets = CPP_DKAssets_LocalAssets();
 
-    if (DK_GetBrowser() === "RML") {
-        CPP_DKFile_StringToFile(source, assets + "Rocket_Source.html");
+    if (dk.getBrowser() === "RML") {
+        CPP_DKFile_StringToFile(source, assets + "RmlUi_Source.html");
     } else {
         CPP_DKFile_StringToFile(source, assets + "Browser_Source.html");
     }
@@ -448,14 +476,14 @@ dk.debug.crashJS = function dk_debug_crashJS() {
 }
 
 dk.debug.editor = function dk_debug_editor() {
-    DK_Create("DKEditor/DKEditor.js", function() {});
+    dk.create("DKEditor/DKEditor.js", function() {});
 }
 
 dk.debug.debugger = function dk_debug_debugger() {
-    if (DK_GetBrowser() === "RML" || DK_GetJSEngine() === "Duktape") {
+    if (dk.getBrowser() === "RML" || dk.getJSEngine() === "Duktape") {
         dkrml.debuggerToggle();
     }
-    if (DK_GetBrowser() === "CEF") {
+    if (dk.getBrowser() === "CEF") {
         dkcef.showDevTools(0);
     }
 }

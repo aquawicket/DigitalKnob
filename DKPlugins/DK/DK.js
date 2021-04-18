@@ -597,25 +597,6 @@ dk.isLocal = function dk_isLocal() {
 }
 */
 
-/*
-dk.getTime = function DK_GetTime() {
-    DKClock_GetStandardTime()
-}
-
-dk.getDate = function dk_getDate() {
-    DKClock_GetDate()
-}
-*/
-
-/*
-dk.refresh = function dk_refresh()
-{	
-	//window.location.href = href+"index.html";
-	window.location.hash = "";
-	window.location.reload(true);
-}
-*/
-
 dk.available = function dk_available(name) {
     //FIXME: This function needs to be investigated
     if (name === "DKWidget") {
@@ -852,69 +833,68 @@ dk.setInnerHtmlString = function dk_setInnerHtmlString(id, string) {
 
 dk.getValue = function dk_getValue(variable) {
     //FIXME: phase this function out. This function will become obsolete.
-    console.error("DK_GetValue(): this function is deprecated and will be obsolete");
+    console.error("dk.getValue(): this function is deprecated and will be obsolete");
 
     if (typeof variable === "string") {
         //id
         var ele = byId(variable);
         if (!ele) {
-            console.log("DK_GetValue(" + variable + "): Cannot find element\n");
-            /*return false;*/
+            return error("ele invalid");
         }
         if (ele) {
             if (ele.type && ele.type === "checkbox") {
-                console.debug("DK_GetValue(): returning ele.checked\n");
+                console.debug("dk.getValue(): returning ele.checked\n");
                 return ele.checked;
             }
             if (!ele.value) {
-                console.debug("DK_GetValue(): returning ele.innerHTML\n");
+                console.debug("dk.getValue(): returning ele.innerHTML\n");
                 return ele.innerHTML;
             }
-            console.debug("DK_GetValue(): returning ele.value\n");
+            console.debug("dk.getValue(): returning ele.value\n");
             return ele.value;
         }
 
-        return error("DK_GetValue(" + variable + "): Could not get value\n");
+        return error("return value invalid");
     }
 
     if (typeof variable === "object") {
         if (variable.nodeType === 1) {
             if (variable.tagName === "INPUT") {
-                console.debug("DK_GetValue(): returning variable.value\n");
+                console.debug("dk.getValue(): returning variable.value");
                 return variable.value;
             }
-            console.debug("DK_GetValue(): returning variable.innerHTML\n");
+            console.debug("dk.getValue(): returning variable.innerHTML");
             return variable.innerHTML;
         }
         if (variable.type) {
             //event
             var event = variable;
             if (variable.type === "mousedown") {
-                console.debug("DK_GetValue(): returning GetMouseButton(variable)\n");
+                console.debug("dk.getValue(): returning GetMouseButton(variable)");
                 return GetMouseButton(variable);
             }
             if (variable.type === "mouseup") {
-                console.debug("DK_GetValue(): returning GetMouseButton(variable)\n");
+                console.debug("dk.getValue(): returning GetMouseButton(variable)");
                 return GetMouseButton(variable);
             }
             if (variable.type === "click") {
                 if (variable.target && variable.target.value) {
-                    console.debug("DK_GetValue(): returning variable.target.value\n");
+                    console.debug("dk.getValue(): returning variable.target.value");
                     return variable.target.value;
                 }
-                console.debug("DK_GetValue(): returning GetMouseButton(variable)\n");
+                console.debug("dk.getValue(): returning GetMouseButton(variable)");
                 return GetMouseButton(variable);
             }
             if (variable.type === "dblclick") {
-                console.debug("DK_GetValue(): returning GetMouseButton(variable)\n");
+                console.debug("dk.getValue(): returning GetMouseButton(variable)\n");
                 return GetMouseButton(variable);
             }
             if (variable.type === "contextmenu") {
-                console.debug("DK_GetValue(): returning GetMouseButton(variable)\n");
+                console.debug("dk.getValue(): returning GetMouseButton(variable)\n");
                 return GetMouseButton(variable);
             }
             if (variable.type === "mousemove") {
-                console.debug("DK_GetValue(): returning event.clientX+", "+event.clientY+", "+event.screenX+", "+event.screenY\n");
+                console.debug("dk.getValue(): returning event.clientX+", "+event.clientY+", "+event.screenX+", "+event.screenY\n");
                 return event.clientX + "," + event.clientY + "," + event.screenX + "," + event.screenY;
             }
             if (variable.type === "mouseover") {
@@ -922,7 +902,7 @@ dk.getValue = function dk_getValue(variable) {
                     return window.event.srcElement.id;
                 }
                 //if(!event.target){ return event.srcElement.id; }
-                console.debug("DK_GetValue(): returning event.target.id\n");
+                console.debug("dk.getValue(): returning event.target.id\n");
                 return event.target.id;
             }
             if (variable.type === "mouseout") {
@@ -930,7 +910,7 @@ dk.getValue = function dk_getValue(variable) {
                     return window.event.srcElement.id;
                 }
                 //if(!event.target){ return event.srcElement.id; }
-                console.debug("DK_GetValue(): returning event.target.id\n");
+                console.debug("dk.getValue(): returning event.target.id\n");
                 return event.target.id;
             }
             if (variable.type === "wheel") {
@@ -947,43 +927,43 @@ dk.getValue = function dk_getValue(variable) {
                 d = d < 1 ? d < -1 ? (-Math.pow(d, 2) - n1) / n : d : (Math.pow(d, 2) + n1) / n;
                 // Delta *should* not be greater than 2...
                 event.delta = Math.min(Math.max(d / 2, -1), 1) * 2;
-                console.debug("DK_GetValue(): returning event.delta\n");
+                console.debug("dk.getValue(): returning event.delta\n");
                 return event.delta;
             }
             if (variable.type === "keypress") {
-                console.debug("DK_GetValue(): returning GetCharCode(variable)\n");
+                console.debug("dk.getValue(): returning GetCharCode(variable)\n");
                 return GetCharCode(variable);
             }
             if (variable.type === "keydown") {
-                console.debug("DK_GetValue(): returning GetKeyCode(variable)\n");
+                console.debug("dk.getValue(): returning GetKeyCode(variable)\n");
                 return GetKeyCode(variable);
             }
             if (variable.type === "keyup") {
-                console.debug("DK_GetValue(): returning GetCharCode(variable)\n");
+                console.debug("dk.getValue(): returning GetCharCode(variable)\n");
                 return GetKeyCode(variable);
             }
             if (variable.type === "resize") {
                 var width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
                 var height = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
-                console.debug("DK_GetValue(): returning width+", "+height\n");
+                console.debug("dk.getValue(): returning width+", "+height\n");
                 return width + "," + height;
             }
             var ele = DK_GetElement(event);
             //FIXME
-            console.debug("DK_GetValue(): returning ele.value\n");
+            console.debug("dk.getValue(): returning ele.value\n");
             return ele.value;
         } else {
             //element or other object
             if (variable.value) {
-                console.debug("DK_GetValue(): returning variable.value\n");
+                console.debug("dk.getValue(): returning variable.value\n");
                 return variable.value;
             }
-            console.debug("DK_GetValue(): returning variable[2]\n");
+            console.debug("dk.getValue(): returning variable[2]\n");
             return variable[2];
         }
     }
 
-    return error("ERROR: DK_GetValue(): unknown type\n");
+    return error("ERROR: dk.getValue(): unknown type\n");
 }
 
 dk.preloadFile = function dk_preloadFile(url) {
@@ -1003,7 +983,6 @@ dk.saveToLocalStorage = function dk_saveToLocalStorage(name, string) {
         return error("name invalid");
     if (!string)
         return error("string invalid");
-
     localStorage.setItem(name, string);
 }
 
@@ -1039,25 +1018,8 @@ Number.prototype.clamp = function(min, max) {
     return Math.min(Math.max(this, min), max);
 }
 
-//////////////////////////////////////////////////////////////////
-//  We can take a ajaxGetUrl(url) call and give back php stuff
-//
-//  Single return value 
-//	ajaxGetUrl("http://DigitalKnob.com/assets/DKText.php?text=hello world");      
-//	returns "hello world"
-//
-//	Multiple return values are comma separated.
-//	ajaxGetUrl("http://digitalknob.com/assets/DKMySql.php?Query=SHOW TABLES");     
-//	returns "1,User"
-//  
-//	Multidimensional return values are also comma separated with the first value specifying the number of fields in each row.
-//  ajaxGetUrl("http://digitalknob.com/assets/DKMySql.php?Query=SELECT * FROM User");
-//  returns "3,1,aquawicket@hotmail.com,peanut123,2,aquawicket@gmail.com,peanut456"
-//	the first value of "3" specifies that the array should be broken into rows of 3
-//
-/////////////////////////////////////////////////////////////////
 
-/////////////////////////////
+/*
 dk.ajaxGet = function dk_ajaxGet(url, output) {
     var request = "";
     try {
@@ -1107,6 +1069,7 @@ dk.ajaxGet = function dk_ajaxGet(url, output) {
     //}
     return true;
 }
+*/
 
 /*
 dk.ajaxGetUrl = function dk_ajaxGetUrl(url) {
@@ -1168,11 +1131,11 @@ dk.sendRequest = function dk_sendRequest(url, dk_sendRequest_callback, post) {
         return error("Error creating xhr object");
     }
 
-    if (post !== "POST") {
+    if (post === "GET") {
         xhr.open("GET", url, true);
     } else {
         xhr.open("POST", url, true);
-        //xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     }
     xhr.timeout = 20000;
 
