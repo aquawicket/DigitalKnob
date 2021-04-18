@@ -1,6 +1,8 @@
 "use strict";
 
-const DKJson_PrettyJson = function(jsonStr) {
+dk.json = new Object;
+
+dk.json.prettyJson = function dk_json_prettyJson(jsonStr) {
     if (typeof jsonStr !== 'string')
         return error("jsonStr invalid");
 
@@ -8,7 +10,7 @@ const DKJson_PrettyJson = function(jsonStr) {
     return JSON.stringify(prettyJson, undefined, 4);
 }
 
-const DKJson_HighlightJson = function(jsonStr) {
+dk.json.highlightJson = function dk_json_highlightJson(jsonStr) {
     if (typeof jsonStr !== 'string')
         return error("jsonStr invalid");
 
@@ -35,7 +37,7 @@ const DKJson_HighlightJson = function(jsonStr) {
 }
 
 ///Takes care of circular refrences in objects
-function DKJson_StringifyJson(obj) {
+dk.json.stringifyJson = function dk_json_stringifyJson(obj) {
     if (typeof obj !== 'object')
         return error("obj invalid");
 
@@ -57,7 +59,7 @@ function DKJson_StringifyJson(obj) {
 
 /*
 //search the object for a keyName's value that matches value
-function DKJson_FindMatch(obj, key, value) {
+dk.json.findMatch = function dk_json_findMatch(obj, key, value) {
     if (obj.length) {
         //array of objects
         for (let n = 0; n < obj.length; n++) {
@@ -75,7 +77,7 @@ function DKJson_FindMatch(obj, key, value) {
 
 /*
 //search the object for a key value that includes value
-function DKJson_FindPartialMatch(obj, key, value) {
+dk.json.findPartialMatch = function dk.json.findPartialMatch(obj, key, value) {
     if (obj.length) {
         //array of objects
         for (let n = 0; n < obj.length; n++) {
@@ -97,7 +99,7 @@ function DKJson_FindPartialMatch(obj, key, value) {
 }
 */
 
-function DKJson_FindPartialMatch(obj, key, value) {
+dk.json.findPartialMatch = function dk_json_findPartialMatch(obj, key, value) {
     //console.log(obj.length);
     let foundObj;
     JSON.stringify(obj, (_,nestedValue)=>{

@@ -37,7 +37,7 @@ dk.php.getAssetsPath = function dk_php_getAssetsPath(callback) {
 
 dk.php.callPhpFunc = function dk_php_callPhpFunc(args) {
     //const args = arguments;
-    let func = DKTrace_GetCurrentFunctionName(1);
+    let func = dk.trace.getCurrentFunctionName(1);
     //const n = func.indexOf("_") + 1;
     //func = func.substring(n, func.length);
     let funcName = func.replace("Object.dk_php_", "");

@@ -1,5 +1,7 @@
 "use strict";
 
+dk.trace = new Object;
+
 window.onerror = function(msg, url, lineNo, columnNo, err) {
     if (!err) {
         return error("window.onerror failed: err variable invalid");
@@ -9,33 +11,32 @@ window.onerror = function(msg, url, lineNo, columnNo, err) {
 
 //https://stackoverflow.com/a/49560222/688352
 //https://developer.mozilla.org/en-US/docs/Web/API/WindowEventHandlers/onunhandledrejection
-
 window.onunhandledrejection = function(event) {
     return error(event);
 }
 	
-function DKTrace_EditFile(file){
+dk.trace.editFile = function dk_trace_editFile(file){
     dk.create("DKNotepad/DKNotepad.js", function dk_create_callback(){
         dk.frame.create(byId("DKNotepad/DKNotepad.html"));
         DKNotepad_Open(file);
     });
 }
 
-function DKTrace_StackToConsoleString(arg, deleteTo) {
+dk.trace.stackToConsoleString = function dk_trace_stackToConsoleString(arg, deleteTo) {
     let jsonStack;
     if (arg instanceof Error) {
         if (arg.stack) {
-            jsonStack = DKTrace_StackToJSON(arg.stack);
+            jsonStack = dk.trace.stackToJSON(arg.stack);
         } else if (arg instanceof DOMException) {
             const str = arg.name + " " + arg.message;
-            jsonStack = DKTrace_StackToJSON(DKTrace_GetStack(str));
+            jsonStack = dk.trace.stackToJSON(dk.trace.getStack(str));
         } else {
             return error("arg is an instance of Error, but it doesn't have a stack");
         }
     } else if (arg instanceof PromiseRejectionEvent) {
-        jsonStack = DKTrace_StackToJSON(DKTrace_GetStack(arg.reason));
+        jsonStack = dk.trace.stackToJSON(dk.trace.getStack(arg.reason));
     } else if (typeof arg === 'string') {
-        jsonStack = DKTrace_StackToJSON(DKTrace_GetStack(arg));
+        jsonStack = dk.trace.stackToJSON(dk.trace.getStack(arg));
     } else {
         return error("StackToConsoleString(): typeof arg invalid: " + typeof arg);
     }
@@ -53,13 +54,13 @@ function DKTrace_StackToConsoleString(arg, deleteTo) {
     let str = jsonStack[0].msg + "<br>";
     for (let n = 1; n < jsonStack.length; n++) {
         str += "  at " + jsonStack[n].func + " ";
-        str += "(<a href='#' onClick='DKTrace_EditFile(\""+jsonStack[n].filePath+"\")' style='color:rgb(213,213,213)'>" + jsonStack[n].file + ":" + jsonStack[n].lineNum + "</a>)<br>";
+        str += "(<a href='#' onClick='dk.trace.editFile(\""+jsonStack[n].filePath+"\")' style='color:rgb(213,213,213)'>" + jsonStack[n].file + ":" + jsonStack[n].lineNum + "</a>)<br>";
     }
 
     return str;
 }
 
-function DKTrace_IsStrict() {
+dk.trace.isStrict = function dk_trace_isStrict() {
     if (eval("var __temp = null"),
     (typeof __temp === "undefined")) {
         return true;
@@ -67,7 +68,7 @@ function DKTrace_IsStrict() {
     return false;
 }
 
-function DKTrace_GetStack(msg) {
+dk.trace.getStack = function dk_trace_getStack(msg) {
     const e = new Error(msg);
     if (!e.stack) {
         try {
@@ -83,7 +84,7 @@ function DKTrace_GetStack(msg) {
     return e.stack;
 }
 
-function DKTrace_StackToJSON(stack) {
+dk.trace.stackToJSON = function dk_trace_stackToJSON(stack) {
     if (!stack || typeof stack !== 'string') {
         return error("StackToJSON(): invalid stack");
     }
@@ -135,8 +136,8 @@ function DKTrace_StackToJSON(stack) {
     return jsonStack;
 }
 
-function DKTrace_LastStackCall() {
-    const stack = DKTrace_StackToJSON(DKTrace_GetStack());
+dk.trace.lastStackCall = function dk_trace_lastStackCall() {
+    const stack = dk.trace.stackToJSON(dk.trace.getStack());
     let nn;
     for (let n = 1; n < stack.length; n++) {
         if (stack[n].func === "LastStackCall") {
@@ -152,12 +153,12 @@ function DKTrace_LastStackCall() {
     return str;
 }
 
-function DKTrace_GetArguments(func, getArgValues) {
+dk.trace.getArguments = function dk_trace_getArguments(func, getArgValues) {
     let argsString = "";
     let count = 0;
     const fn = window[func];
     if (!fn) {
-        console.error(DKTrace_LastStackCall() + "<br>" + "  at if(!fn)");
+        console.error(dk.trace.lastStackCall() + "<br>" + "  at if(!fn)");
         return "";
     }
     argsString += new RegExp('(?:' + fn.name + '\\s*|^)\\s*\\((.*?)\\)').exec(fn.toString().replace(/\n/g, ''))[1].replace(/\/\*.*?\*\//g, '').replace(/ /g, '');
@@ -183,6 +184,6 @@ function DKTrace_GetArguments(func, getArgValues) {
     return argsString;
 }
 
-function DKTrace_GetCurrentFunctionName(n) {
+dk.trace.getCurrentFunctionName = function dk_trace_getCurrentFunctionName(n) {
     return new Error().stack.split('\n')[2 + n].trim().split(" ")[1];
 }

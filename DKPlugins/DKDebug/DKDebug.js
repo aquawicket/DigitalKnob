@@ -1,20 +1,20 @@
 "use strict";
 
-const dkdebug = new Object;
-dkdebug.keyHistory = new Array;
+dk.debug = new Object;
+dk.debug.keyHistory = new Array;
 
 ////////////////////////////////////
 ///  A Convienient Debug Function
 ///////////////////////////////////
-dkdebug.debug = function dkdebug_debug() {
-    console.log("dkdebug.debug");
+dk.debug.debugFunc = function dk_debug_debugFunc() {
+    console.log("dk.debug.debugFunc");
 
-    PHP_Debug_Func("one", "two", "three", function(rval) {
-        //console.log(rval);
+    dk.php.debugFunc("one", "two", "three", function(rval) {
+        console.log(rval);
     });
     
     //console.log("Multiple styles: %cred %corange", "color: red", "color: orange", "Additional unformatted message");
-    //dkcodemirror.Create();
+    //dk.codemirror.Create();
     
     //throw new Error( 'No worries. Just testing...' );
     /*
@@ -24,19 +24,19 @@ dkdebug.debug = function dkdebug_debug() {
     */
     
     /*
-    DKPhp_Call("Debug_Func", "one", "two", "three", function(rval){
+    dk.php.call("Debug_Func", "one", "two", "three", function(rval){
         console.log(rval);
     });
     */
     
 
-    //PHP_Debug_Func("one", "two", "three", function(rval) {
+    //dk.php.debugFunc("one", "two", "three", function(rval) {
     //    console.log(rval);
     //});
     
 
     /*
-    PHP_GetRemoteAddress(function(rval) {
+    dk.php.getRemoteAddress(function(rval) {
         console.log(rval);
     });
     */
@@ -48,14 +48,14 @@ dkdebug.debug = function dkdebug_debug() {
     test.style.height = "300rem";
     test.style.backgroundColor = "rgb(0,0,0)";
     document.body.appendChild(test);
-    DKFrame_Html("test");
+    dk.frame.create(test);
     */
 
     //var result =  1+11+8*9+2/14*8-4;
     //console.log("it's "+result+" ...  computers never lie");
 
     /*
-    DKGui_ConfirmBox("do this?", function(){
+    dk.gui.confirmBox("do this?", function(){
         console.log("confirm callback");
     });
     */
@@ -117,10 +117,10 @@ dkdebug.debug = function dkdebug_debug() {
 
     /*
     //Test PHP functions
-    PHP_StringToFile("test.txt", "Appended string\n", "FILE_APPEND", function(rVal) {
+    dk.php.stringToFile("test.txt", "Appended string\n", "FILE_APPEND", function(rVal) {
         console.log("characters written: " + rVal);
     });
-    PHP_GetTime(function(rVal) {
+    dk.php.getTime(function(rVal) {
         console.log(rVal);
     });
     */
@@ -173,19 +173,19 @@ dkdebug.debug = function dkdebug_debug() {
 }
 
 
-dkdebug.init = function dkdebug_init() {
-    document.addEventListener("keydown", dkdebug.onevent);
+dk.debug.init = function dk_debug_init() {
+    document.addEventListener("keydown", dk.debug.onevent);
 }
 
-dkdebug.end = function dkdebug_end() {
-    document.removeEventListener("keydown", dkdebug.onevent);
+dk.debug.end = function dk_debug_end() {
+    document.removeEventListener("keydown", dk.debug.onevent);
 }
 
-dkdebug.onevent = function dkdebug_onevent(event) {
+dk.debug.onevent = function dk_debug_onevent(event) {
     if (event.type === "keydown") {
         console.log("keydowwn");
-        dkdebug_logKey(event.code);
-        dkdebug_checkKeys();
+        dk.debug.logKey(event.code);
+        dk.debug.checkKeys();
     }
 
     if (event.type === "keydown" && event.code === "F12") {
@@ -198,68 +198,68 @@ dkdebug.onevent = function dkdebug_onevent(event) {
     }
 }
 
-dkdebug.logKey = function dkdebug_logKey(code) {
-    if (dkdebug.keyHistory.length > 20) {
-        dkdebug.keyHistory.shift();
+dk.debug.logKey = function dk_debug_logKey(code) {
+    if (dk.debug.keyHistory.length > 20) {
+        dk.debug.keyHistory.shift();
     }
-    dkdebug.keyHistory[dkdebug.keyHistory.length] = code;
+    dk.debug.keyHistory[dk.debug.keyHistory.length] = code;
 }
 
-dkdebug.checkKeys = function dkdebug_checkKeys() {
+dk.debug.checkKeys = function dk_debug_checkKeys() {
     var string;
-    for (var n = 0; n < dkdebug.keyHistory.length; n++) {
-        string += dkdebug_keyToChar(dkdebug.keyHistory[n]);
+    for (var n = 0; n < dk.debug.keyHistory.length; n++) {
+        string += dk.debug.keyToChar(dk.debug.keyHistory[n]);
     }
 
     //check for commands
     if (string.indexOf("dkreload") !== -1) {
-        console.log("*** dkdebug_Refresh() ***");
-        dkdebug_refresh();
-        dkdebug.keyHistory = [];
+        console.log("*** dk.debug.Refresh() ***");
+        dk.debug.refresh();
+        dk.debug.keyHistory = [];
     }
     if (string.indexOf("dkpush") !== -1) {
-        console.log("*** dkdebug.pushDKFiles() ***");
-        dkdebug_pushDKFiles();
-        dkdebug.keyHistory = [];
+        console.log("*** dk.debug.pushDKFiles() ***");
+        dk.debug.pushDKFiles();
+        dk.debug.keyHistory = [];
     }
     if (string.indexOf("dkclear") !== -1) {
-        console.log("*** dkdebug.clearConsole() ***");
-        dkdebug_clearConsole();
-        dkdebug.keyHistory = [];
+        console.log("*** dk.debug.clearConsole() ***");
+        dk.debug.clearConsole();
+        dk.debug.keyHistory = [];
     }
     if (string.indexOf("console.log") !== -1) {
-        console.log("*** dkdebug.printInfo() ***");
-        dkdebug_printInfo();
-        dkdebug.keyHistory = [];
+        console.log("*** dk.debug.printInfo() ***");
+        dk.debug.printInfo();
+        dk.debug.keyHistory = [];
     }
     if (string.indexOf("dkconsole") !== -1) {
-        console.log("*** dkdebug.shoeConsole() ***");
-        dkdebug_showConsole();
-        dkdebug.keyHistory = [];
+        console.log("*** dk.debug.shoeConsole() ***");
+        dk.debug.showConsole();
+        dk.debug.keyHistory = [];
     }
     if (string.indexOf("dksource") !== -1) {
-        console.log("*** dkdebug.getSource() ***");
-        dkdebug_getSource();
-        dkdebug.keyHistory = [];
+        console.log("*** dk.debug.getSource() ***");
+        dk.debug.getSource();
+        dk.debug.keyHistory = [];
     }
     if (string.indexOf("dkcrash") !== -1) {
-        console.log("*** dkdebug.crash() ***");
-        dkdebug_crash();
-        dkdebug.keyHistory = [];
+        console.log("*** dk.debug.crash() ***");
+        dk.debug.crash();
+        dk.debug.keyHistory = [];
     }
     if (string.indexOf("dkeditor") !== -1) {
-        console.log("*** dkdebug.editor() ***");
-        dkdebug_editor();
-        dkdebug.keyHistory = [];
+        console.log("*** dk.debug.editor() ***");
+        dk.debug.editor();
+        dk.debug.keyHistory = [];
     }
     if (string.indexOf("dkdebug") !== -1) {
-        console.log("*** dkdebug.debugger() ***");
-        dkdebug_debugger();
-        dkdebug.keyHistory = [];
+        console.log("*** dk.debug.debugger() ***");
+        dk.debug.debugger();
+        dk.debug.keyHistory = [];
     }
 }
 
-dkdebug.keyToChar = function dkdebug_keyToChar(key) {
+dk.debug.keyToChar = function dk_debug_keyToChar(key) {
     if (key === "KeyA")
         return "a"
     if (key === "KeyB")
@@ -315,15 +315,15 @@ dkdebug.keyToChar = function dkdebug_keyToChar(key) {
     return false;
 }
 
-dkdebug.reload = function dkdebug_reload() {
+dk.debug.reload = function dk_debug_reload() {
     window.location.reload(true);
 }
 
-dkdebug.refresh = function dkdebug_refresh() {
+dk.debug.refresh = function dk_debug_refresh() {
     window.location.reload(true);
 }
 
-dkdebug.pushDkFiles = function dkdebug_pushDKFiles() {
+dk.debug.pushDkFiles = function dk_debug_pushDKFiles() {
     var assets = CPP_DKAssets_LocalAssets();
     if (!assets) {
         console.error("assets is invalid");
@@ -345,7 +345,7 @@ dkdebug.pushDkFiles = function dkdebug_pushDKFiles() {
     }
     var temp = CPP_DKFile_DirectoryContents(DKPATH);
     if (!temp) {
-        console.log("dkdebug_PushDKFiles() variable temp is invalid");
+        console.log("dk.debug.PushDKFiles() variable temp is invalid");
         return false;
     }
     var folders = temp.split(",");
@@ -372,7 +372,7 @@ dkdebug.pushDkFiles = function dkdebug_pushDKFiles() {
     }
 }
 
-dkdebug.clearConsole = function dkdebug_clearConsole() {
+dk.debug.clearConsole = function dk_debug_clearConsole() {
     var api;
     if (typeof console === 'undefined')
         return error("console invalid");
@@ -388,7 +388,7 @@ dkdebug.clearConsole = function dkdebug_clearConsole() {
     api.clear();
 }
 
-dkdebug.printInfo = function dkdebug_printInfo() {
+dk.debug.printInfo = function dk_debug_printInfo() {
     console.log("\n");
     console.log("**** DKOBJECTS ****");
     var objects = DK_GetObjects();
@@ -423,11 +423,11 @@ dkdebug.printInfo = function dkdebug_printInfo() {
     console.log("\n");
 }
 
-dkdebug.function = function dkdebug_showConsole() {
+dk.debug.function = function dk_debug_showConsole() {
     DK_ShowConsole();
 }
 
-dkdebug.getSource = function dkdebug_getSource() {
+dk.debug.getSource = function dk_debug_getSource() {
     DK_Create("DKWidgetJS");
     var source = document.documentElement.outerHTML;
     var assets = CPP_DKAssets_LocalAssets();
@@ -439,19 +439,19 @@ dkdebug.getSource = function dkdebug_getSource() {
     }
 }
 
-dkdebug.crashCPP = function dkdebug_crashCPP() {
+dk.debug.crashCPP = function dk_debug_crashCPP() {
     CPP_DKDuktape_Crash();
 }
 
-dkdebug.crashJS = function dkdebug_crashJS() {
+dk.debug.crashJS = function dk_debug_crashJS() {
     throw new Error('CRASH TEST');
 }
 
-dkdebug.editor = function dkdebug_editor() {
+dk.debug.editor = function dk_debug_editor() {
     DK_Create("DKEditor/DKEditor.js", function() {});
 }
 
-dkdebug.debugger = function dkdebug_debugger() {
+dk.debug.debugger = function dk_debug_debugger() {
     if (DK_GetBrowser() === "RML" || DK_GetJSEngine() === "Duktape") {
         dkrml.debuggerToggle();
     }

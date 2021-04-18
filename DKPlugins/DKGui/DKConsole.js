@@ -287,7 +287,7 @@ dkconsole.Create = function dkconsole_Create(parent, id, top, bottom, left, righ
     dkconsole.error = function dkconsole_error(str) {
         if (!str)
             return warn("str invalid");
-        str = DKTrace_StackToConsoleString(str, "dkconsole_error");
+        str = dk.trace.stackToConsoleString(str, "dkconsole_error");
         dkconsole.log(str, "red");
     }
     dkconsole.group = function dkconsole_group(str, style) {
