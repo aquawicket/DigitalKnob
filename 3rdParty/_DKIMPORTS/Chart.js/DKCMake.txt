@@ -1,0 +1,6 @@
+### VERSION ###
+DKSET(CHARTJS_VERSION Chart.js-3.1.1)
+
+### INSTALL ###
+DKINSTALL(https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.1.1/chart.min.js Chart.js ${CHARTJS_VERSION})
+DKSET(CHARTJS ${3RDPARTY}/${CHARTJS_VERSION})
