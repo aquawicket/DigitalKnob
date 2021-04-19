@@ -16,16 +16,16 @@ dk.clock = {
 
     getSunrise: function dk_clock_getSunrise(latitude, longitude, zenith) {
         const date = new Date().sunrise(latitude, longitude, zenith);
-        const sunrise = date.getHours() + (date.getMinutes() * .01);
-        console.log("Sunrise " + sunrise);
-        return sunrise;
+        dk.clock.sunrise = date.getHours() + (date.getMinutes() * .01);
+        console.log("Sunrise " + dk.clock.sunrise);
+        return dk.clock.sunrise;
     },
 
     getSunset: function dk_clock_getSunset(latitude, longitude, zenith) {
         const date = new Date().sunset(latitude, longitude, zenith);
-        const sunset = date.getHours() + (date.getMinutes() * .01);
-        console.log("Sunset " + sunset);
-        return sunset
+        dk.clock.sunset = date.getHours() + (date.getMinutes() * .01);
+        console.log("Sunset " + dk.clock.sunset);
+        return dk.clock.sunset
     },
 
     getDateInMilliseconds: function dk_clock_getDateInMilliseconds() {
@@ -72,7 +72,7 @@ dk.clock = {
 
     update: function dk_clock_update() {
         const currentdate = new Date();
-        const time = currentdate.getHours() + (currentdate.getMinutes() * .01);
+        dk.clock.time = currentdate.getHours() + (currentdate.getMinutes() * .01);
         let dayOfWeek;
         switch (currentdate.getDay()) {
         case 0:
