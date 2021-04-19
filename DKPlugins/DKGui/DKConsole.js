@@ -3,12 +3,12 @@
 // https://developer.mozilla.org/en-US/docs/Web/API/console
 // https://developer.mozilla.org/en-US/docs/Web/API/Console#outputting_text_to_the_console
 
-const dkconsole = new Object;
+dk.console = new Object;
 
-//intercept console and reroute it to xconsole and dkconsole
+//intercept console and reroute it to xconsole and dk.console
 //Example:
-// If you use console.log, it will now go to the dkconsole AND the browser console.
-// If you use dkconsole.log, it will only log to the dkconsole.
+// If you use console.log, it will now go to the dk.console AND the browser console.
+// If you use dk.console.log, it will only log to the dk.console.
 // If you use xconsole.log, it will only log the browser console.
 // Note: some messages cannot be withheld from the browser console.
 const xconsole = new Object;
@@ -41,102 +41,102 @@ const xconsole = new Object;
 
     console.assert = function() {
         xconsole.on && xconsole.assert.apply(this, Array.prototype.slice.call(arguments));
-        dkconsole.assert && dkconsole.assert.apply(this, Array.prototype.slice.call(arguments));
+        dk.console.assert && dk.console.assert.apply(this, Array.prototype.slice.call(arguments));
     }
     console.clear = function() {
         xconsole.on && xconsole.clear.apply(this, Array.prototype.slice.call(arguments));
-        dkconsole.clear && dkconsole.clear.apply(this, Array.prototype.slice.call(arguments));
+        dk.console.clear && dk.console.clear.apply(this, Array.prototype.slice.call(arguments));
     }
     console.context = function() {
         xconsole.on && xconsole.context.apply(this, Array.prototype.slice.call(arguments));
-        dkconsole.context && dkconsole.context.apply(this, Array.prototype.slice.call(arguments));
+        dk.console.context && dk.console.context.apply(this, Array.prototype.slice.call(arguments));
     }
     console.count = function() {
         xconsole.on && xconsole.count.apply(this, Array.prototype.slice.call(arguments));
-        dkconsole.count && dkconsole.count.apply(this, Array.prototype.slice.call(arguments));
+        dk.console.count && dk.console.count.apply(this, Array.prototype.slice.call(arguments));
     }
     console.countReset = function() {
         xconsole.on && xconsole.countReset.apply(this, Array.prototype.slice.call(arguments));
-        dkconsole.countReset && dkconsole.countReset.apply(this, Array.prototype.slice.call(arguments));
+        dk.console.countReset && dk.console.countReset.apply(this, Array.prototype.slice.call(arguments));
     }
     console.debug = function() {
         xconsole.on && xconsole.debug.apply(this, Array.prototype.slice.call(arguments));
-        dkconsole.debug && dkconsole.debug.apply(this, Array.prototype.slice.call(arguments));
+        dk.console.debug && dk.console.debug.apply(this, Array.prototype.slice.call(arguments));
     }
     console.dir = function() {
         xconsole.on && xconsole.dir.apply(this, Array.prototype.slice.call(arguments));
-        dkconsole.dir && dkconsole.dir.apply(this, Array.prototype.slice.call(arguments));
+        dk.console.dir && dk.console.dir.apply(this, Array.prototype.slice.call(arguments));
     }
     console.dirxml = function() {
         xconsole.on && xconsole.dirxml.apply(this, Array.prototype.slice.call(arguments));
-        dkconsole.dirxml && dkconsole.dirxml.apply(this, Array.prototype.slice.call(arguments));
+        dk.console.dirxml && dk.console.dirxml.apply(this, Array.prototype.slice.call(arguments));
     }
     console.error = function() {
         xconsole.on && xconsole.error.apply(this, Array.prototype.slice.call(arguments));
-        dkconsole.error && dkconsole.error.apply(this, Array.prototype.slice.call(arguments));
+        dk.console.error && dk.console.error.apply(this, Array.prototype.slice.call(arguments));
     }
     console.group = function() {
         xconsole.on && xconsole.group.apply(this, Array.prototype.slice.call(arguments));
-        dkconsole.group && dkconsole.group.apply(this, Array.prototype.slice.call(arguments));
+        dk.console.group && dk.console.group.apply(this, Array.prototype.slice.call(arguments));
     }
     console.groupCollapsed = function() {
         xconsole.on && xconsole.groupCollapsed.apply(this, Array.prototype.slice.call(arguments));
-        dkconsole.groupCollapsed && dkconsole.groupCollapsed.apply(this, Array.prototype.slice.call(arguments));
+        dk.console.groupCollapsed && dk.console.groupCollapsed.apply(this, Array.prototype.slice.call(arguments));
     }
     console.groupEnd = function() {
         xconsole.on && xconsole.groupEnd.apply(this, Array.prototype.slice.call(arguments));
-        dkconsole.groupEnd && dkconsole.groupEnd.apply(this, Array.prototype.slice.call(arguments));
+        dk.console.groupEnd && dk.console.groupEnd.apply(this, Array.prototype.slice.call(arguments));
     }
     console.info = function() {
         xconsole.on && xconsole.info.apply(this, Array.prototype.slice.call(arguments));
-        dkconsole.info && dkconsole.info.apply(this, Array.prototype.slice.call(arguments));
+        dk.console.info && dk.console.info.apply(this, Array.prototype.slice.call(arguments));
     }
     console.log = function() {
         xconsole.on && xconsole.log.apply(this, Array.prototype.slice.call(arguments));
-        dkconsole.log && dkconsole.log.apply(this, Array.prototype.slice.call(arguments));
+        dk.console.log && dk.console.log.apply(this, Array.prototype.slice.call(arguments));
     }
     //console.memory;
     console.profile = function() {
         xconsole.on && xconsole.profile.apply(this, Array.prototype.slice.call(arguments));
-        dkconsole.profile && dkconsole.profile.apply(this, Array.prototype.slice.call(arguments));
+        dk.console.profile && dk.console.profile.apply(this, Array.prototype.slice.call(arguments));
     }
     console.profileEnd = function() {
         xconsole.on && xconsole.profileEnd.apply(this, Array.prototype.slice.call(arguments));
-        dkconsole.profileEnd && dkconsole.profileEnd.apply(this, Array.prototype.slice.call(arguments));
+        dk.console.profileEnd && dk.console.profileEnd.apply(this, Array.prototype.slice.call(arguments));
     }
     console.table = function() {
         xconsole.on && xconsole.table.apply(this, Array.prototype.slice.call(arguments));
-        dkconsole.table && dkconsole.table.apply(this, Array.prototype.slice.call(arguments));
+        dk.console.table && dk.console.table.apply(this, Array.prototype.slice.call(arguments));
     }
     console.time = function() {
         xconsole.on && xconsole.time.apply(this, Array.prototype.slice.call(arguments));
-        dkconsole.time && dkconsole.time.apply(this, Array.prototype.slice.call(arguments));
+        dk.console.time && dk.console.time.apply(this, Array.prototype.slice.call(arguments));
     }
     console.timeEnd = function() {
         xconsole.on && xconsole.timeEnd.apply(this, Array.prototype.slice.call(arguments));
-        dkconsole.timeEnd && dkconsole.timeEnd.apply(this, Array.prototype.slice.call(arguments));
+        dk.console.timeEnd && dk.console.timeEnd.apply(this, Array.prototype.slice.call(arguments));
     }
     console.timeLog = function() {
         xconsole.on && xconsole.timeLog.apply(this, Array.prototype.slice.call(arguments));
-        dkconsole.timeLog && dkconsole.timeLog.apply(this, Array.prototype.slice.call(arguments));
+        dk.console.timeLog && dk.console.timeLog.apply(this, Array.prototype.slice.call(arguments));
     }
     console.timeStamp = function() {
         xconsole.on && xconsole.timeStamp.apply(this, Array.prototype.slice.call(arguments));
-        dkconsole.timeStamp && dkconsole.timeStamp.apply(this, Array.prototype.slice.call(arguments));
+        dk.console.timeStamp && dk.console.timeStamp.apply(this, Array.prototype.slice.call(arguments));
     }
     console.trace = function() {
         xconsole.on && xconsole.trace.apply(this, Array.prototype.slice.call(arguments));
-        dkconsole.trace && dkconsole.trace.apply(this, Array.prototype.slice.call(arguments));
+        dk.console.trace && dk.console.trace.apply(this, Array.prototype.slice.call(arguments));
     }
     console.warn = function() {
         xconsole.on && xconsole.warn.apply(this, Array.prototype.slice.call(arguments));
-        dkconsole.warn && dkconsole.warn.apply(this, Array.prototype.slice.call(arguments));
+        dk.console.warn && dk.console.warn.apply(this, Array.prototype.slice.call(arguments));
     }
 }());
 
-dkconsole.Create = function dkconsole_Create(parent, id, top, bottom, left, right, width, height) {
+dk.console.create = function dk_console_create(parent, id, top, bottom, left, right, width, height) {
     dk.create("DKGui/DKConsole.css");
-    dkconsole.limit = 100;
+    dk.console.limit = 100;
     const container = document.createElement("div");
     container.style.padding = "0rem";
     container.style.margin = "0rem";
@@ -157,7 +157,7 @@ dkconsole.Create = function dkconsole_Create(parent, id, top, bottom, left, righ
         event.preventDefault();
         const menu = dk.menu.createInstance();
         dk.menu.addItem(menu, "Clear", function DKMenu_Clear() {
-            dkconsole.clear();
+            dk.console.clear();
         });
         dk.menu.addItem(menu, "Cancel", function DKMenu_Cancel() {
             console.log("cancel");
@@ -198,7 +198,7 @@ dkconsole.Create = function dkconsole_Create(parent, id, top, bottom, left, righ
         if (key === 13) {
             //enter
             if (command.value === "clear" || command.value === "cls") {
-                dkconsole.clear();
+                dk.console.clear();
                 command.value = "";
                 return;
             }
@@ -214,9 +214,9 @@ dkconsole.Create = function dkconsole_Create(parent, id, top, bottom, left, righ
     }
     container.appendChild(command);
 
-    dkconsole.log = function dkconsole_log() {
+    dk.console.log = function dk_console_log() {
 
-        const args = dkconsole.ColorChromeConsole(arguments);
+        const args = dk.console.ColorChromeConsole(arguments);
 
         const msgDiv = document.createElement("div");
         msgDiv.style.width = "100%";
@@ -264,63 +264,63 @@ dkconsole.Create = function dkconsole_Create(parent, id, top, bottom, left, righ
         div.scrollTop = div.scrollHeight;
 
         //Limit the number of stored lines
-        if (div.childElementCount > dkconsole.limit) {
+        if (div.childElementCount > dk.console.limit) {
             div.removeChild(div.firstChild);
         }
 
         return msgDiv.innerHTML;
     }
 
-    //Set up dkconsole variables
-    dkconsole.assert;
-    dkconsole.clear = function() {
+    //Set up dk.console variables
+    dk.console.assert;
+    dk.console.clear = function() {
         div.innerHTML = "";
     }
-    dkconsole.context;
-    dkconsole.count;
-    dkconsole.countReset;
-    dkconsole.debug = function dkconsole_debug(str) {
-        dkconsole.log(str, "blue");
+    dk.console.context;
+    dk.console.count;
+    dk.console.countReset;
+    dk.console.debug = function dk_console_debug(str) {
+        dk.console.log(str, "blue");
     }
-    dkconsole.dir;
-    dkconsole.dirxml;
-    dkconsole.error = function dkconsole_error(str) {
+    dk.console.dir;
+    dk.console.dirxml;
+    dk.console.error = function dk_console_error(str) {
         if (!str)
             return warn("str invalid");
-        str = dk.trace.stackToConsoleString(str, "dkconsole_error");
-        dkconsole.log(str, "red");
+        str = dk.trace.stackToConsoleString(str, "dk.console_error");
+        dk.console.log(str, "red");
     }
-    dkconsole.group = function dkconsole_group(str, style) {
-        dkconsole.log(str, style);
+    dk.console.group = function dk_console_group(str, style) {
+        dk.console.log(str, style);
     }
-    dkconsole.groupCollapsed;
-    dkconsole.groupEnd;
-    dkconsole.info = function dkconsole_info(str, style) {
-        dkconsole.log(str, style);
+    dk.console.groupCollapsed;
+    dk.console.groupEnd;
+    dk.console.info = function dk_console_info(str, style) {
+        dk.console.log(str, style);
     }
-    //dkconsole.log = function(str, style) {
-    //    dkconsole.log(str, style);
+    //dk.console.log = function(str, style) {
+    //    dk.console.log(str, style);
     //}
-    dkconsole.memory;
-    dkconsole.profile;
-    dkconsole.profileEnd;
-    dkconsole.table;
-    dkconsole.time;
-    dkconsole.timeEnd;
-    dkconsole.timeLog;
-    dkconsole.timeStamp;
-    dkconsole.trace = function dkconsole_trace(str, style) {
-        str = StackToConsoleString(str, "dkconsole_trace");
-        dkconsole.log(str, style);
+    dk.console.memory;
+    dk.console.profile;
+    dk.console.profileEnd;
+    dk.console.table;
+    dk.console.time;
+    dk.console.timeEnd;
+    dk.console.timeLog;
+    dk.console.timeStamp;
+    dk.console.trace = function dk_console_trace(str, style) {
+        str = StackToConsoleString(str, "dk.console_trace");
+        dk.console.log(str, style);
     }
-    dkconsole.warn = function dkconsole_warn(str) {
-        dkconsole.log(str, "yellow");
+    dk.console.warn = function dk_console_warn(str) {
+        dk.console.log(str, "yellow");
     }
 
     return container;
 }
 
-dkconsole.SpanFilter = function(args) {
+dk.console.SpanFilter = function(args) {
     let argArray = [];
     if (args.length) {
         const startTagRe = /<span\s+style=(['"])([^'"]*)\1\s*>/gi;
@@ -342,7 +342,7 @@ dkconsole.SpanFilter = function(args) {
     return argArray;
 }
 
-dkconsole.ColorChromeConsole = function(args) {
+dk.console.ColorChromeConsole = function(args) {
     let argArray = [];
     argArray.push("%c " + args[0]);
     if (args[1] === "red") {
