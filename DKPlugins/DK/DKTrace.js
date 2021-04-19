@@ -26,17 +26,17 @@ dk.trace.stackToConsoleString = function dk_trace_stackToConsoleString(arg, dele
     let jsonStack;
     if (arg instanceof Error) {
         if (arg.stack) {
-            jsonStack = dk.trace.stackToJSON(arg.stack);
+            jsonStack = this.stackToJSON(arg.stack);
         } else if (arg instanceof DOMException) {
             const str = arg.name + " " + arg.message;
-            jsonStack = dk.trace.stackToJSON(dk.trace.getStack(str));
+            jsonStack = stackToJSON(this.getStack(str));
         } else {
             return error("arg is an instance of Error, but it doesn't have a stack");
         }
     } else if (arg instanceof PromiseRejectionEvent) {
-        jsonStack = dk.trace.stackToJSON(dk.trace.getStack(arg.reason));
+        jsonStack = this.stackToJSON(this.getStack(arg.reason));
     } else if (typeof arg === 'string') {
-        jsonStack = dk.trace.stackToJSON(dk.trace.getStack(arg));
+        jsonStack = this.stackToJSON(this.getStack(arg));
     } else {
         return error("StackToConsoleString(): typeof arg invalid: " + typeof arg);
     }
@@ -137,7 +137,7 @@ dk.trace.stackToJSON = function dk_trace_stackToJSON(stack) {
 }
 
 dk.trace.lastStackCall = function dk_trace_lastStackCall() {
-    const stack = dk.trace.stackToJSON(dk.trace.getStack());
+    const stack = this.stackToJSON(this.getStack());
     let nn;
     for (let n = 1; n < stack.length; n++) {
         if (stack[n].func === "LastStackCall") {
@@ -158,7 +158,7 @@ dk.trace.getArguments = function dk_trace_getArguments(func, getArgValues) {
     let count = 0;
     const fn = window[func];
     if (!fn) {
-        console.error(dk.trace.lastStackCall() + "<br>" + "  at if(!fn)");
+        console.error(this.lastStackCall() + "<br>" + "  at if(!fn)");
         return "";
     }
     argsString += new RegExp('(?:' + fn.name + '\\s*|^)\\s*\\((.*?)\\)').exec(fn.toString().replace(/\n/g, ''))[1].replace(/\/\*.*?\*\//g, '').replace(/ /g, '');

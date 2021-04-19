@@ -2,44 +2,43 @@
 
 dk.file = new Object;
 
-dk.appfilename;
-dk.local_assets;
-dk.online_assets;
-
-if (dk.getBrowser() !== "CEF" && dk.getBrowser() !== "RML") {
-    var DKFile_ChDir = function() {
-        console.warn("DKFile_ChDir(): not available for " + dk.getBrowser());
+if (!dk.hasCPP()) {
+    dk.file.chDir = function dk_file_chDir() {
+        return warn("dk.file.chDir(): not available for " + dk.getBrowser());
     }
-    var DKFile_CopyFolder = function(src, dst, overwrite, recursive) {
-        console.warn("DKFile_CopyDirectory(): not available for " + dk.getBrowser());
+    dk.file.copyFolder = function dk_file_copyFolder(src, dst, overwrite, recursive) {
+        return warn("dk.file.copyDirectory(): not available for " + dk.getBrowser());
     }
-    var DKFile_GetExeName = function() {
-        console.warn("DKFile_GetExeName(): not available for " + dk.getBrowser());
+    dk.file.getExeName = function dk_file_getExeName() {
+        return warn("dk.file.getExeName(): not available for " + dk.getBrowser());
     }
-    var DKFile_GetFullExeName = function() {
-        console.warn("DKFile_GetFullExeName(): not available for " + dk.getBrowser());
+    dk.file.getFullExeName = function dk_file_getFullExeName() {
+        return warn("dk.file.getFullExeName(): not available for " + dk.getBrowser());
     }
-    var DKFile_GetModifiedTime = function() {
-        console.warn("DKFile_GetModifiedTime(): not available for " + dk.getBrowser());
+    dk.file.getModifiedTime = function dk_file_getModifiedTime() {
+        return warn("dk.file.getModifiedTime(): not available for " + dk.getBrowser());
     }
-    var DKFile_GetShortName = function() {
-        console.warn("DKFile_GetShortName(): not available for " + dk.getBrowser());
+    dk.file.getShortName = function dk_file_getShortName() {
+        return warn("dk.file.getShortName(): not available for " + dk.getBrowser());
     }
-    var DKFile_MkDir = function() {
-        console.warn("DKFile_MkDir(): not available for " + dk.getBrowser());
+    dk.file.mkDir = function dk_file_mkDir() {
+        return warn("dk.file.mkDir(): not available for " + dk.getBrowser());
     }
-    var DKFile_GetDrives = function() {
-        console.warn("DKFile_GetDrives(): not available for " + dk.getBrowser());
+    dk.file.getDrives = function dk_file_getDrives() {
+        return warn("dk.file.getDrives(): not available for " + dk.getBrowser());
     }
 }
 
-dk.file.init = function DKFile_Init() {
-    dk.php.getAssetsPath(function(rval){
-        dk.file.online_assets = rval;
+dk.file.init = function dk_file_init() {
+    dk.file.appFilename = "";
+    dk.file.localAssets = "";
+    dk.file.onlineAssets = "";
+    dk.php.getAssetsPath(function(data) {
+        dk.file.onlineAssets = data;
     });
 }
 
-dk.file.urlExists = function UrlExists(url, fn) {
+dk.file.urlExists = function dk_file_urlExists(url, callback) {
     var request = "";
     try {
         request = new XMLHttpRequest();
@@ -60,43 +59,28 @@ dk.file.urlExists = function UrlExists(url, fn) {
         request = new ActiveXObject("Microsoft.XMLHTTP");
     } catch (e) {}
     if (!request) {
-        console.error("AJAX ERROR: Error creating request object");
-        return;
-        // false;
+        return error("AJAX ERROR: Error creating request object");
     }
-
-    request.onreadystatechange = function() {
+    request.onreadystatechange = function onreadystatechange_callback() {
         if (request.readyState == 4) {
             if (request.status == 200 || request.status == 0) {
-                //output.value = request.responseText;
                 console.warn(url + " status: " + request.status);
-                fn && fn(true);
+                callback && callback(true);
                 return true;
             } else {
                 console.warn("AJAX ERROR: " + request.statusText);
-                //report error
                 console.warn(url + " status: " + request.status);
-                fn && fn(false);
-                //return;// false;
+                callback && callback(false);
             }
         }
     }
-
-    //try{ 
     request.open("HEAD", url);
-    //request.open("GET",url); 
     request.send();
-    //}
-    //catch(err){
-    //output.value = "";
-    //	return;// false;
-    //}
-    //return;// true;
 }
 
-if (dk.getBrowser() !== "CEF" && dk.getBrowser() !== "RML") {
+if (!dk.hasCPP()) {
     dk.file.getShortName = function dk_file_getShortName(path) {
-        console.warn("DKFile_GetShortName(): not available for browser");
+        return warn("dk.file.GetShortName(): not available for browser");
     }
 } else {
     dk.file.getShortName = function dk_file_getShortName(path) {
@@ -104,9 +88,9 @@ if (dk.getBrowser() !== "CEF" && dk.getBrowser() !== "RML") {
     }
 }
 
-if (dk.getBrowser() !== "CEF" && dk.getBrowser() !== "RML") {
+if (!dk.hasCPP()) {
     dk.file.rename = function dk_file_rename(oldvalue, newvalue, overwrite) {
-        console.warn("DKFile_Rename(): not implemented for browser");
+        return warn("dk.file.Rename(): not implemented for browser");
     }
 } else {
     dk.file.rename = function dk_file_rename(oldvalue, newvalue, overwrite) {
@@ -114,108 +98,97 @@ if (dk.getBrowser() !== "CEF" && dk.getBrowser() !== "RML") {
     }
 }
 
-if (dk.getBrowser() !== "CEF" && dk.getBrowser() !== "RML") {
-    dk.file.exists = function dk_file_exists(path, fn) {
-        if (!path) {
+if (!dk.hasCPP()) {
+    dk.file.exists = function dk_file_exists(path, callback) {
+        if (!path)
             return error("path invalid");
-        }
-
-        dir = DKFile_GetAbsolutePath(path);
-        if (DKFile_IsDirectory(dir)) {
-            fn && fn(true);
+        dir = dk.file.getAbsolutePath(path);
+        if (dk.file.isDirectory(dir)) {
+            callback && callback(true);
             return true;
         }
-
-        UrlExists(path, function(rval) {
-            fn && fn(rval);
+        dk.file.urlExists(path, function(rval) {
+            callback && callback(rval);
             return rval;
         });
     }
 }
 
+//FIXME
 dk.file.verifyPath = function dk_file_verifyPath(path) {
-    //FIXME
-    console.log("DKFile_VerifyPath(" + path + "): FIXME");
-    return true;
-
-    if (!path) {
+    return warn("FIXME: dk.file.verifyPath(" + path + ")");
+    if (!path)
         return error("path invalid");
-    }
-
-    console.log("DKFile_VerifyPath(" + path + "): checking " + path);
-    if (DKFile_Exists(path)) {
-        console.log("DKFile_VerifyPath(" + path + "): Found " + path);
+    console.log("dk.file.verifyPath(" + path + "): checking " + path);
+    if (dk.file.exists(path)) {
+        console.log("dk.file.verifyPath(" + path + "): Found " + path);
         return path;
     }
 
     var assets = DKAssets_LocalAssets();
-    console.log("DKFile_VerifyPath(" + path + "): checking " + assets + path);
-    if (DKFile_Exists(assets + path)) {
-        console.log("DKFile_VerifyPath(" + path + "): Found " + assets + path);
+    console.log("dk.file.VerifyPath(" + path + "): checking " + assets + path);
+    if (dk.file.Exists(assets + path)) {
+        console.log("dk.file.VerifyPath(" + path + "): Found " + assets + path);
         return assets + path;
     }
 
-    console.error("DKFile_VerifyPath(" + path + ") Cannot find " + path);
-    return false;
+    return error("dk.file.verifyPath(" + path + ") Cannot find " + path);
 }
 
 dk.file.printFiles = function dk_file_printFiles() {
-    return ajaxGetUrl(online_assets + "/DKFile/DKFile.php?PrintFiles=1");
+    return ajaxGetUrl(dk.file.onlineAssets + "/DKFile/DKFile.php?PrintFiles=1");
 }
 
 dk.file.getFilename = function dk_file_getFilename(path) {
-    if (!path) {
+    if (!path)
         return error("path invalid");
-    }
     var n = path.lastIndexOf("/");
     var out = path.substring(n + 1, path.length);
-    //console.log("DKFile_GetFileName("+path+") -> "+out)
+    //console.log("dk.file.GetFileName("+path+") -> "+out)
     return path.substring(n + 1, path.length);
 }
 
-dk.file.saveFile = function dk_file_saveFile(path, data) {
-    //var send = phpurl;
-    //if(realpath){
-    //var filename = DKFile_GetFilename(path);
-    //path = realpath+path;
-    //}
-    //path = path.replace(datapath, realpath);
-    //path = path.replace(online_assets, realpath);
-    //path = realpath+path;
+dk.file.saveFile = function dk_file_saveFile(path, data) {//var send = phpurl;
+//if(realpath){
+//var filename = dk.file.GetFilename(path);
+//path = realpath+path;
+//}
+//path = path.replace(datapath, realpath);
+//path = path.replace(dk.file.onlineAssets, realpath);
+//path = realpath+path;
 
-    //console.log("DKFile_SaveFile: "+path);
-    /*
-    let send = online_assets + "\\DKFile\\DKFile.php?SaveFile=";
+//console.log("dk.file.SaveFile: "+path);
+/*
+    let send = dk.file.onlineAssets + "\\DKFile\\DKFile.php?SaveFile=";
     send += path;
     send += "&data="
     send += data;
 
-    PHP_StringToFile(path, data, "OVERWRITE", function(rVal) {
+    dk.php.stringToFile(path, data, "OVERWRITE", function(rVal) {
         console.log("characters written: " + rVal);
     });
     */
 
-    /*
-    DK_SendRequest(send, function DK_SendRequestCallback(success, url, data){
-        console.log("DK_SendRequestCallback(): success = "+success);
-        //console.log("DK_SendRequestCallback(): url = "+url);
-        console.log("DK_SendRequestCallback(): data = "+data);
+/*
+    dk.sendRequest(send, function dk_sendRequest_callback(success, url, data){
+        console.log("dk_sendRequest_callback(): success = "+success);
+        //console.log("dk_sendRequest_callback(): url = "+url);
+        console.log("dk_sendRequest_callback(): data = "+data);
     });
     */
 
-    //var response = ajaxGetUrl(send);
-    //console.log(response);
+//var response = ajaxGetUrl(send);
+//console.log(response);
 
-    //FIXME
-    //if(response.indexOf("console.error") !== -1){
-    //	return false;
-    //}
-    //console.log("Saved file: " + path);
-    //return true;
+//FIXME
+//if(response.indexOf("console.error") !== -1){
+//	return false;
+//}
+//console.log("Saved file: " + path);
+//return true;
 }
 
-///////////////////////////////////////////////////////////
-if (dk.getBrowser() !== "CEF" && dk.getBrowser() !== "RML") {
+if (!dk.hasCPP()) {
     dk.file.getSetting = function dk_file_getSetting(file, param) {
         //file is ignored in browser. We use cookie instead.
         if (!file) {
@@ -223,28 +196,21 @@ if (dk.getBrowser() !== "CEF" && dk.getBrowser() !== "RML") {
         } else {
             //If the variable looks like this: [VARIABLE]
             //then we return everything up to the next [VARIABLE] or to the end of the file.
-            var str = DK_FileToString(file);
-            if (!str) {
+            var str = dk.fileToString(file);
+            if (!str)
                 return "";
-            }
             if (param.indexOf("[") !== -1 && param.indexOf("]") !== -1) {
                 var begin = str.indexOf(param);
-                if (begin === -1) {
+                if (begin === -1) 
                     return "";
-                }
-
                 var start = str.indexOf("]", begin);
                 var end = str.indexOf("[", start);
-                if (end === -1) {
+                if (end === -1) 
                     end = str.length;
-                }
-
                 var out = str.substr(start + 1, end - start - 1);
-
                 replace(out, "\r", "");
                 replace(out, "\n", " ");
                 out = out.trim();
-                //console.log("DKFile_GetSetting("+file+", "+param+") -> "+out);
                 return out;
             }
 
@@ -252,24 +218,20 @@ if (dk.getBrowser() !== "CEF" && dk.getBrowser() !== "RML") {
             //then we return the rest of the line
             var string = param + " ";
             var begin = str.indexOf(string, 0);
-            if (begin === -1) {
+            if (begin === -1)
                 return "";
-            }
             var start = str.indexOf(" ", begin);
             var end = str.indexOf("\n", start);
-
             var out = filestring.substr(start + 1, end - start - 1);
             replace(out, "\r", "");
             replace(out, "\n", "");
             out = out.trim();
-            //console.log("DKFile_GetSetting("+file+", "+param+") -> "+out);
             return out;
         }
     }
 }
 
-///////////////////////////////////////////////////////////
-if (dk.getBrowser() !== "CEF" && dk.getBrowser() !== "RML") {
+if (!dk.hasCPP()) {
     dk.file.setSetting = function dk_file_setSetting(file, param, value) {
         //file is ignored in browser. We use cookie instead.
         if (!file) {
@@ -278,11 +240,9 @@ if (dk.getBrowser() !== "CEF" && dk.getBrowser() !== "RML") {
             var path = file;
             //if(!DKAssets::VerifyPath(path)){ return false;}
 
-            var filestring = DKFile_FileToString(path);
-            if (!filestring) {
+            var filestring = dk.file.FileToString(path);
+            if (!filestring)
                 return error("filestring invalid");
-            }
-
             //If the variable looks like this: [VARIABLE]
             //then we return everything up to the next [VARIABLE] or to the end of the file.
             if (param.indexOf("[") !== -1 && param.indexOf("]") !== -1) {
@@ -290,20 +250,18 @@ if (dk.getBrowser() !== "CEF" && dk.getBrowser() !== "RML") {
                 if (begin === -1) {
                     filestring = filestring.concat("\n" + param + " " + value);
                     //create entry
-                    DKFile_StringToFile(filestring, path);
+                    dk.file.stringToFile(filestring, path);
                     console.log("WROTE: " + filestring + " TO: " + path);
                     return true;
                 }
                 var start = filestring.indexOf("]", begin);
                 var end = filestring.indexOf("[", start);
-                if (end === -1) {
+                if (end === -1)
                     end = filestring.length;
-                }
-
                 var out = " " + value;
                 var oldstr = filestring.substr(start + 1, end - start - 1);
                 filestring = replace(filestring, oldstr, out);
-                DKFile_StringToFile(filestring, path);
+                dk.file.stringToFile(filestring, path);
                 console.log("WROTE: " + filestring + " TO: " + path);
                 return true;
             }
@@ -311,22 +269,19 @@ if (dk.getBrowser() !== "CEF" && dk.getBrowser() !== "RML") {
             //If the variable looks like this:  VARIABLE 
             //then we return the rest of the line
             var string = setting + " ";
-
             var begin = filestring.indexOf(string, 0);
             if (temp === -1) {
                 filestring = filestring.concat("\n" + setting + " " + value);
                 //create entry
-                DKFile_StringToFile(filestring, file);
+                dk.file.stringToFile(filestring, file);
                 console.log("WROTE: " + filestring + " TO: " + file);
                 return true;
             }
             var start = filestring.indexOf(" ", begin);
             var end = filestring.indexOf("\n", start);
-
             var oldstr = filestring.substr(start + 1, end - start - 1);
             filestring.replace(filestring, oldstr, value);
-            DKFile_StringToFile(filestring, file);
-
+            dk.file.stringToFile(filestring, file);
             console.log("WROTE: " + filestring + " TO: " + file);
             return true;
         }
@@ -334,29 +289,24 @@ if (dk.getBrowser() !== "CEF" && dk.getBrowser() !== "RML") {
 }
 
 dk.file.fileToString = function dk_file_fileToString(url) {
-    console.log("DKFile_FileToString(" + url + ")");
-    if (typeof absolutepath !== "undefined") {
+    if (typeof absolutepath !== "undefined")
         url = url.replace(absolutepath, "");
-    }
-
-    //var path = DKFile_VerifyPath(url);
-    if (!url) {
-        return;
-    }
+    //var path = dk.file.VerifyPath(url);
+    if (!url)
+        return error("url invalid");
     //if(url.indexOf("http") > -1 && url.indexOf("digitalknob.com") === -1){
     //	return ajaxGetUrl("http://cors.io/?u="+url);
     //}
     return ajaxGetUrl(url);
 }
 
-if (dk.getBrowser() !== "CEF" && dk.getBrowser() !== "RML") {
+if (!dk.hasCPP()) {
     dk.file.stringToFile = function dk_file_stringToFile(data, path) {
         if (typeof absolutepath !== "undefined") {
-            if (!path.includes(absolutepath)) {
+            if (!path.includes(absolutepath)) 
                 path = absolutepath + path;
-            }
         }
-        
+
         /*
         data = replace(data, ": ", ":");
         data = replace(data, "; ", ";");
@@ -367,17 +317,15 @@ if (dk.getBrowser() !== "CEF" && dk.getBrowser() !== "RML") {
         */
 
         data = encodeURIComponent(data).replace(";", "%3B");
-        //console.log("StringToFile("+data+", "+path+")");
-        DKFile_SaveFile(path, data);
+        dk.file.saveFile(path, data);
     }
 } else {
     dk.file.stringToFile = function dk_file_stringToFile(data, path) {
         return CPP_DKFile_StringToFile(data, path)
-    };
+    }
 }
 
-///////////////////////////////////////////////////////////
-if (dk.getBrowser() !== "CEF" && dk.getBrowser() !== "RML") {
+if (!dk.hasCPP()) {
     dk.file.directoryConstnts = function dk_file_directoryContents(url) {
         //TEST
         url = url.replace("http://localhost/", ".");
@@ -385,19 +333,16 @@ if (dk.getBrowser() !== "CEF" && dk.getBrowser() !== "RML") {
         url = url.replace("http://127.0.0.1/", ".");
         //FIXME
 
-        console.debug("DKFile_DirectoryContents(" + url + ")");
-        if (url.indexOf(":") > -1) {
-            console.error("DKFile_DirectoryContents(" + url + "): url has :");
-            return;
-        }
-        if (!online_assets) {
-            console.error("DKFile_DirectoryContents(url): online_assets not set")
-        }
+        console.debug("dk.file.DirectoryContents(" + url + ")");
+        if (url.indexOf(":") > -1)
+            return error("url has : character");
+        if (!dk.file.onlineAssets)
+            return error("dk.file.onlineAssets not set")
         //var assets = DKAssets_LocalAssets();
-        //url = url.replace(assets, online_assets);
-        //var path = DKFile_VerifyPath(url);
+        //url = url.replace(assets, dk.file.onlineAssets);
+        //var path = dk.file.verifyPath(url);
         //if(!path){ return 0; }
-        send = online_assets + "DKFile/DKFile.php?DirectoryContents=" + url;
+        send = dk.file.onlineAssets + "DKFile/DKFile.php?DirectoryContents=" + url;
         console.log("ajaxGetUrl(" + send + ")");
         var result = ajaxGetUrl(send);
         return result;
@@ -405,56 +350,47 @@ if (dk.getBrowser() !== "CEF" && dk.getBrowser() !== "RML") {
 } else {
     dk.file.directoryContents = function dk_file_directoryContents(url) {
         return CPP_DKFile_DirectoryContents(url)
-    };
+    }
 }
 
-///////////////////////////////////////////////////////////
-if (dk.getBrowser() !== "CEF" && dk.getBrowser() !== "RML") {
+if (!dk.hasCPP()) {
     dk.file.getAbsolutePath = function dk_file_getAbsolutePath(url) {
-        //console.debug("DKFile_GetAbsolutePath("+url+")");
-        if (!url) {
+        if (!url)
             url = "/";
-        }
-        if (url.indexOf("file:///") > -1) {
+        if (url.includes("file:///"))
             url = pathname;
-        }
-
         url = url.replace(protocol + "//" + hostname + "/", "");
         url = url.replace("//", "/");
-        //console.debug("DKFile_GetAbsolutePath("+url+")");
-
-        send = online_assets + "DKFile/DKFile.php?GetAbsolutePath=" + url;
+        //console.debug("dk.file.getAbsolutePath("+url+")");
+        send = dk.file.onlineAssets + "DKFile/DKFile.php?GetAbsolutePath=" + url;
         var result = ajaxGetUrl(send);
-
         //result = result.replace(protocol+"//"+hostname+"/","");
         //result = result.replace("//","/");
-
-        console.debug("DKFile_GetAbsolutePath(" + url + ") -> " + result);
+        console.debug("dk.file.getAbsolutePath(" + url + ") -> " + result);
         return result;
     }
 } else {
     dk.file.getAbsolutePath = function dk_file_getAbsolutePath(url) {
         return CPP_DKFile_GetAbsolutePath(url)
-    };
+    }
 }
 
 dk.file.getRelativePath = function dk_file_getRelativePath(apath, datapath) {
     //var rpath = apath.replace(pathname,"");
     //var rpath = rpath.replace("/home/content/a/q/u/aquawicket1/html/DigitalKnob.com/DKApp/","");
-    //send = online_assets+"/DKFile/DKFile.php?GetRelativePath="+url;
+    //send = dk.file.onlineAssets+"/DKFile/DKFile.php?GetRelativePath="+url;
     //var result = ajaxGetUrl(send);
-    //console.log("DKFile_GetRelativePath("+url+") -> "+result);
+    //console.log("dk.file.GetRelativePath("+url+") -> "+result);
     return apath;
 }
 
-if (dk.getBrowser() !== "CEF" && dk.getBrowser() !== "RML") {
+if (!dk.hasCPP()) {
     dk.file.isDirectory = function dk_file_isDirectory(url) {
-        send = online_assets + "/DKFile/DKFile.php?IsDirectory=" + url;
+        send = dk.file.onlineAssets + "/DKFile/DKFile.php?IsDirectory=" + url;
         var result = ajaxGetUrl(send);
-        //console.log("DKFile_IsDirectory("+url+") ->"+result);
-        if (result === "0") {
+        //console.log("dk.file.IsDirectory("+url+") ->"+result);
+        if (result === "0")
             return false;
-        }
         return true;
     }
 } else {
@@ -469,10 +405,10 @@ dk.file.getExtention = function dk_file_getExtention(url) {
     return out;
 }
 
-if (dk.getBrowser() !== "CEF" && dk.getBrowser() !== "RML") {
+if (!dk.hasCPP()) {
     dk.file.delete = function dk_file_delete(url) {
         console.log("Deleting: " + url);
-        send = online_assets + "/DKFile/DKFile.php?Delete=" + url;
+        send = dk.file.onlineAssets + "/DKFile/DKFile.php?Delete=" + url;
         var result = ajaxGetUrl(send);
         return result;
     }

@@ -232,6 +232,14 @@ function Log(string, lvl) {
     //DKSendEvent("DKConsole.html", "DKNotify", string);
 }
 */
+dk.hasCPP = function dk_hasCPP() {
+    if (dk.getBrowser() === "CEF")
+        return true;
+    if (dk.getBrowser() === "RML")
+        return true;
+    if (dk.getJSEngine() === "Duktape")
+    return false;
+}
 
 dk.getPlugin = function(url) {
     if (!url)
@@ -1017,7 +1025,6 @@ dk.isOnline = function dk_isOnline() {
 Number.prototype.clamp = function(min, max) {
     return Math.min(Math.max(this, min), max);
 }
-
 
 /*
 dk.ajaxGet = function dk_ajaxGet(url, output) {

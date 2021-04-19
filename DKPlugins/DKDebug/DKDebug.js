@@ -8,19 +8,21 @@ dk.debug = new Object;
 ///////////////////////////////////
 dk.debug.debugFunc = function dk_debug_debugFunc() {
     console.log("dk.debug.debugFunc");
-
+    
+    /*
     var varName = "testABC";
     if(dk.validate.isValidVarName(varName)){
         console.log(varName+" is a valid variable name");
     }else{
         console.log(varName+" is NOT a valid variable name");
     }
+    */
 
-    /*
+    
     dk.php.debugFunc("one", "two", "three", function(rval) {
         console.log(rval);
     });
-    */
+    
     
     //console.log("Multiple styles: %cred %corange", "color: red", "color: orange", "Additional unformatted message");
     //dk.codemirror.Create();
