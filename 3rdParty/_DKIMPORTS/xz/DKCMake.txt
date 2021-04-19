@@ -13,7 +13,7 @@ ENDIF()
 DKSET(XZ_VERSION xz-5.2.0)
 
 ### INSTALL ###
-DKINSTALL2(https://astuteinternet.dl.sourceforge.net/project/lzmautils/${XZ_VERSION}.tar.gz xz ${XZ_VERSION})
+DKINSTALL(https://astuteinternet.dl.sourceforge.net/project/lzmautils/${XZ_VERSION}.tar.gz xz ${XZ_VERSION})
 DKSET(XZ ${3RDPARTY}/${XZ_VERSION})
 
 

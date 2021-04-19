@@ -2,7 +2,7 @@
 DKSET(JPEG_VERSION jpeg-6b)
 
 ### INSTALL ###
-DKINSTALL2(www.internet.com/jpegsr6b.zip jpeg ${JPEG_VERSION}) ##FIXME: find an online link
+DKINSTALL(www.internet.com/jpegsr6b.zip jpeg ${JPEG_VERSION}) ##FIXME: find an online link
 DKSET(JPEG ${3RDPARTY}/${JPEG_VERSION})
 
 

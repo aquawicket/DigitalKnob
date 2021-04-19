@@ -9,7 +9,7 @@ ENDIF()
 
 
 ### INSTALL ###
-DKINSTALL(https://codeload.github.com/moritz-wundke/Boost-for-Android/zip/devel Boost-for-Android-devel)
+DKINSTALL(https://codeload.github.com/moritz-wundke/Boost-for-Android/zip/devel Boost-for-Android-devel Boost-for-Android-devel)
 DKSET(BOOST_DEV ${3RDPARTY}/Boost-for-Android-devel)
 
 ##FIXME: this get's overwritten

@@ -2,7 +2,7 @@
 DKSET(TIFF_VERSION tiff-4.0.3)
 
 ### INSTALL ###
-DKINSTALL2(https://download.osgeo.org/libtiff/old/${TIFF_VERSION}.zip tiff ${TIFF_VERSION})
+DKINSTALL(https://download.osgeo.org/libtiff/old/${TIFF_VERSION}.zip tiff ${TIFF_VERSION})
 DKSET(TIFF ${3RDPARTY}/${TIFF_VERSION})
 
 

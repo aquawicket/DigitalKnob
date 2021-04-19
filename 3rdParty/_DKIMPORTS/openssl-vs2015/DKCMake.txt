@@ -6,7 +6,7 @@ ENDIF()
 DKSET(OPENSSL_VERSION openssl-1.0.2h-vs2015)
 
 ### INSTALL ###
-DKINSTALL2(https://www.npcglib.org/~stathis/downloads/${OPENSSL_VERSION}.7z openssl-vs2015 ${OPENSSL_VERSION})
+DKINSTALL(https://www.npcglib.org/~stathis/downloads/${OPENSSL_VERSION}.7z openssl-vs2015 ${OPENSSL_VERSION})
 DKSET(OPENSSL ${3RDPARTY}/${OPENSSL_VERSION})
 
 

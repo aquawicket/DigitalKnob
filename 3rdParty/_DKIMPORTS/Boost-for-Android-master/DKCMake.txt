@@ -9,7 +9,7 @@ ENDIF()
 
 
 ### INSTALL ###
-DKINSTALL(https://codeload.github.com/moritz-wundke/Boost-for-Android/zip/master Boost-for-Android-master)
+DKINSTALL(https://codeload.github.com/moritz-wundke/Boost-for-Android/zip/master Boost-for-Android-master Boost-for-Android-master)
 DKRENAME(${DKDOWNLOAD}/master ${DKDOWNLOAD}/Boost-for-Android-master.zip)
 DKSET(BOOST ${3RDPARTY}/Boost-for-Android-master)
 

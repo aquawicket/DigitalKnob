@@ -6,8 +6,7 @@ ENDIF()
 
 
 ### INSTALL ###
-DKINSTALL(https://www.sfml-dev.org/files/SFML-2.4.2-sources.zip SFML-2.4.2)
-## DKINSTALL(${DKWEB}/Download/SFML-2.4.2.zip SFML-2.4.2)
+DKINSTALL(https://www.sfml-dev.org/files/SFML-2.4.2-sources.zip SFML-2.4.2 SFML-2.4.2)
 DKSET(SFML ${3RDPARTY}/SFML-2.4.2)
 
 

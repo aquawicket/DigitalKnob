@@ -5,7 +5,6 @@ ENDIF()
 
 ### INSTALL ###
 ## DKINSTALL(www.internet.com/cef_binary_3.3325.1750.gaabe4c4_linux32.tar.bz2 cef_binary_3.3325.1750.gaabe4c4_linux32)
-## DKINSTALL(${DKWEB}/Download/cef_binary_3.3325.1750.gaabe4c4_linux32.tar.bz2 cef_binary_3.3325.1750.gaabe4c4_linux32)
 DKSET(CEF ${3RDPARTY}/cef_binary_3.3325.1750.gaabe4c4_linux32)
 
 

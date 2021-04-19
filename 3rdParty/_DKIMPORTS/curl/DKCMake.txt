@@ -6,7 +6,7 @@ DKDEPEND(zlib)
 DKDEPEND(openssl-vs2015)
 
 ### INSTALL ###
-DKINSTALL2(https://curl.haxx.se/download/${CURL_VERSION}.zip curl ${CURL_VERSION})
+DKINSTALL(https://curl.haxx.se/download/${CURL_VERSION}.zip curl ${CURL_VERSION})
 DKSET(CURL ${3RDPARTY}/${CURL_VERSION})
 
 

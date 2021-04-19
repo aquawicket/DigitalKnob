@@ -6,7 +6,7 @@ DKSET(PNG_VERSION libpng-${PNG_MAJOR_VERSION}.${PNG_MINOR_VERSION}.${PNG_BUILD_V
 
 
 ### INSTALL ###
-DKINSTALL2(https://sourceforge.net/projects/libpng/files/libpng${PNG_MAJOR_VERSION}${PNG_MINOR_VERSION}/${PNG_MAJOR_VERSION}.${PNG_MINOR_VERSION}.0-oldbetas/${PNG_VERSION}.tar.gz libpng ${PNG_VERSION})
+DKINSTALL(https://sourceforge.net/projects/libpng/files/libpng${PNG_MAJOR_VERSION}${PNG_MINOR_VERSION}/${PNG_MAJOR_VERSION}.${PNG_MINOR_VERSION}.0-oldbetas/${PNG_VERSION}.tar.gz libpng ${PNG_VERSION})
 DKSET(PNG ${3RDPARTY}/${PNG_VERSION})
 
 

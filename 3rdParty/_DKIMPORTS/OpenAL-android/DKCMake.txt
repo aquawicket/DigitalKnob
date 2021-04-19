@@ -4,8 +4,7 @@ ENDIF()
 
 
 ### INSTALL ###
-## DKINSTALL(www.internet.com/OpenAL-android.zip OpenAL-android)
-## DKINSTALL(${DKWEB}/Download/OpenAL-android.zip OpenAL-android)
+## DKINSTALL(www.internet.com/OpenAL-android.zip OpenAL-android OpenAL-android)
 
 
 ### LINK ###

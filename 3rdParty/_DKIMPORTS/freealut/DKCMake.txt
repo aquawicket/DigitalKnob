@@ -12,7 +12,7 @@ DKSET(FREEALUT_VERSION freealut-1.1.0-src)
 
 
 ### INSTALL ###
-DKINSTALL2(www.internet.com/${FREEALUT_VERSION}.zip freealut ${FREEALUT_VERSION}) ##FIXME: find an online link
+DKINSTALL(www.internet.com/${FREEALUT_VERSION}.zip freealut ${FREEALUT_VERSION}) ##FIXME: find an online link
 DKSET(FREEALUT ${3RDPARTY}/${FREEALUT_VERSION})
 
 

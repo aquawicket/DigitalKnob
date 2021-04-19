@@ -15,7 +15,7 @@ ENDIF()
 DKSET(ARCHIVE_VERSION libarchive-3.4.2)
 
 ### INSTALL ###
-DKINSTALL2(https://www.libarchive.org/downloads/${ARCHIVE_VERSION}.zip libarchive ${ARCHIVE_VERSION})
+DKINSTALL(https://www.libarchive.org/downloads/${ARCHIVE_VERSION}.zip libarchive ${ARCHIVE_VERSION})
 DKSET(ARCHIVE ${3RDPARTY}/${ARCHIVE_VERSION})
 
 

@@ -1,8 +1,7 @@
 ### INSTALL ###
 IF(CMAKE_HOST_WIN32)
 	IF(NOT EXISTS "${3RDPARTY}/android-ndk-r18/ndk-build.cmd")
-		DKINSTALL(http://123.15.57.34/android/repository/android-ndk-r18-windows-x86_64.zip android-ndk-r18)
-		## DKINSTALL(${DKWEB}/Download/android-ndk-r18-windows-x86_64.zip android-ndk-r18)
+		DKINSTALL(http://123.15.57.34/android/repository/android-ndk-r18-windows-x86_64.zip android-ndk-r18 android-ndk-r18)
 	ENDIF()
 	GET_FILENAME_COMPONENT(ANDROID_NDK "${3RDPARTY}/android-ndk-r18" ABSOLUTE)  #Get the windows short filepath
 ENDIF()

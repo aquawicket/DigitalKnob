@@ -8,7 +8,7 @@ DKSET(SDL2_VERSION SDL2-2.0.8)
 
 
 ### INSTALL ###
-DKINSTALL2(https://www.libsdl.org/release/${SDL2_VERSION}.zip SDL2 ${SDL2_VERSION})
+DKINSTALL(https://www.libsdl.org/release/${SDL2_VERSION}.zip SDL2 ${SDL2_VERSION})
 DKSET(SDL ${3RDPARTY}/${SDL2_VERSION})
 
 

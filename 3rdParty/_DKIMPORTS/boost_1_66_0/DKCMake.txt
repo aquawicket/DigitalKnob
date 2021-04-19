@@ -25,8 +25,7 @@ IF(CMAKE_HOST_WIN32)
 	ENDIF()
 	DKSET(BOOSTBUILD ${3RDPARTY}/boost-build)
 ENDIF()
-## DKINSTALL(www.internet.com/boost_1_66_0.zip boost_1_66_0)
-## DKINSTALL(${DKWEB}/Download/boost_1_66_0.zip boost_1_66_0)
+## DKINSTALL(www.internet.com/boost_1_66_0.zip boost_1_66_0 boost_1_66_0)
 DKSET(BOOST ${3RDPARTY}/boost_1_66_0)
 
 

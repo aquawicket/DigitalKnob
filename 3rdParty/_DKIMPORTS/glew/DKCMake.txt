@@ -2,7 +2,7 @@
 DKSET(GLEW_VERSION glew-2.1.0)
 
 ### INSTALL ###
-DKINSTALL2(https://versaweb.dl.sourceforge.net/project/glew/glew/2.1.0/${GLEW_VERSION}.zip glew ${GLEW_VERSION})
+DKINSTALL(https://versaweb.dl.sourceforge.net/project/glew/glew/2.1.0/${GLEW_VERSION}.zip glew ${GLEW_VERSION})
 DKSET(GLEW ${3RDPARTY}/${GLEW_VERSION})
 
 

@@ -226,22 +226,8 @@ FUNCTION(DKLINKDIR arg)
 	ENDIF()
 ENDFUNCTION()
 
-###################################
-#FUNCTION(DKINSTALL url folder_name)
-#	IF(EXISTS ${3RDPARTY}/${folder_name})
-#		###
-#	ELSE()
-#		DKSET(CURRENT_DIR ${DIGITALKNOB}/Download)
-#		DKDOWNLOAD(${url})
-#		GET_FILENAME_COMPONENT(filename ${url} NAME)
-#		DKEXTRACT(${DIGITALKNOB}/Download/${filename} ${3RDPARTY})
-#	ENDIF()
-#		FILE(MAKE_DIRECTORY ${3RDPARTY}/${folder_name}/${OS})
-#		FILE(COPY ${DKIMPORTS}/${folder_name}/ DESTINATION ${3RDPARTY}/${folder_name})
-#ENDFUNCTION()
-
 ######################################################
-FUNCTION(DKINSTALL2 url import_folder 3rdparty_folder)
+FUNCTION(DKINSTALL url import_folder 3rdparty_folder)
 	IF(EXISTS ${3RDPARTY}/${3rdparty_folder})
 		###
 	ELSE()

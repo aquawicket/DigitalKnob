@@ -9,6 +9,6 @@ DKSET(UPX_VERSION upx-${UPX_MAJOR_VERSION}.${UPX_MINOR_VERSION}-win64)
 
 ### INSTALL ###
 IF(NOT EXISTS ${3RDPARTY}/${UPX_VERSION})	
-	DKINSTALL2(https://github.com/upx/upx/releases/download/v${UPX_MAJOR_VERSION}.${UPX_MINOR_VERSION}/${UPX_VERSION}.zip upx-win64 ${UPX_VERSION})
+	DKINSTALL(https://github.com/upx/upx/releases/download/v${UPX_MAJOR_VERSION}.${UPX_MINOR_VERSION}/${UPX_VERSION}.zip upx-win64 ${UPX_VERSION})
 ENDIF()
 DKSET(UPX ${3RDPARTY}/UPX_VERSION)

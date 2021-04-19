@@ -1,6 +1,5 @@
 ### INSTALL ###
-## DKINSTALL(www.internet.com/ImageMagick-7.0.7-22.zip ImageMagick-7.0.7-22)
-## DKINSTALL(${DKWEB}/Download/ImageMagick-7.0.7-22.zip ImageMagick-7.0.7-22)
+## DKINSTALL(www.internet.com/ImageMagick-7.0.7-22.zip ImageMagick-7.0.7-22 ImageMagick-7.0.7-22)
 DKSET(IMAGEMAGICK ${3RDPARTY}/ImageMagick-7.0.7-22)
 
 

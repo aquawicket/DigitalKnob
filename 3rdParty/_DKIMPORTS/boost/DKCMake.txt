@@ -31,7 +31,7 @@ ENDIF()
 
 
 ### INSTALL ###
-DKINSTALL2(https://dl.bintray.com/boostorg/release/${BOOST_VERSION_MAJOR}.${BOOST_VERSION_MINOR}.${BOOST_VERSION_BUILD}/source/${BOOST_VERSION}.zip boost ${BOOST_VERSION})
+DKINSTALL(https://dl.bintray.com/boostorg/release/${BOOST_VERSION_MAJOR}.${BOOST_VERSION_MINOR}.${BOOST_VERSION_BUILD}/source/${BOOST_VERSION}.zip boost ${BOOST_VERSION})
 DKSET(BOOST ${3RDPARTY}/${BOOST_VERSION})
 
 

@@ -1,6 +1,5 @@
 ### INSTALL ###
-## DKINSTALL(www.internet.com/bullet-2.82-r2704.zip bullet-2.82-r2704)
-## DKINSTALL(${DKWEB}/Download/bullet-2.82-r2704.zip bullet-2.82-r2704)
+## DKINSTALL(www.internet.com/bullet-2.82-r2704.zip bullet-2.82-r2704 bullet-2.82-r2704)
 DKSET(BULLET ${3RDPARTY}/bullet-2.82-r2704)
 
 

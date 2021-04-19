@@ -7,7 +7,7 @@ DKSET(ZLIB_VERSION zlib-1.2.11)
 
 
 ### INSTALL ###
-DKINSTALL2(https://www.zlib.net/${ZLIB_VERSION}.tar.gz zlib ${ZLIB_VERSION})
+DKINSTALL(https://www.zlib.net/${ZLIB_VERSION}.tar.gz zlib ${ZLIB_VERSION})
 DKSET(ZLIB ${3RDPARTY}/${ZLIB_VERSION})
 
 

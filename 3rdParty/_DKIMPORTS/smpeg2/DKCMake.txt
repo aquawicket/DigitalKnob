@@ -5,7 +5,7 @@ DKDEPEND(DKSDLWindow)
 DKSET(SMPEG2_VERSION smpeg2-2.0.0)
 
 ### INSTALL ###
-DKINSTALL2(https://www.libsdl.org/projects/smpeg/release/${SMPEG2_VERSION}.tar.gz smpeg2 ${SMPEG2_VERSION})
+DKINSTALL(https://www.libsdl.org/projects/smpeg/release/${SMPEG2_VERSION}.tar.gz smpeg2 ${SMPEG2_VERSION})
 DKSET(SMPEG2 ${3RDPARTY}/${SMPEG2_VERSION})
 
 

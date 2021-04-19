@@ -3,7 +3,7 @@ DKSET(ICONV_VERSION libiconv-1.14)
 
 
 ### INSTALL ###
-DKINSTALL2(https://ftp.gnu.org/gnu/libiconv/${ICONV_VERSION}.tar.gz libiconv ${ICONV_VERSION})
+DKINSTALL(https://ftp.gnu.org/gnu/libiconv/${ICONV_VERSION}.tar.gz libiconv ${ICONV_VERSION})
 DKSET(ICONV ${3RDPARTY}/${ICONV_VERSION})
 
 

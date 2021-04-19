@@ -2,9 +2,8 @@
 DKDEPEND(DKSDLWindow)
 
 ### INSTALL ###
-DKINSTALL(https://github.com/theMealena/SDL2_giflib_sa/archive/master.zip SDL2_giflib_sa-master)
+DKINSTALL(https://github.com/theMealena/SDL2_giflib_sa/archive/master.zip SDL2_giflib_sa-master SDL2_giflib_sa-master)
 DKRENAME(${DKDOWNLOAD}/master.zip ${DKDOWNLOAD}/SDL2_giflib_sa-master.zip)
-##DKINSTALL(${DKWEB}/Download/SDL2_giflib_sa-master.zip SDL2_giflib_sa-master)
 DKSET(SDLGIF ${3RDPARTY}/SDL2_giflib_sa-master)
 DKDEFINE(USE_SDL2_gif)
 

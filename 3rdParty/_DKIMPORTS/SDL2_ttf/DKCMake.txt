@@ -7,7 +7,7 @@ DKSET(SDLTTF_VERSION SDL2_ttf-2.0.14)
 
 
 ### INSTALL ###
-DKINSTALL2(https://www.libsdl.org/projects/SDL_ttf/release/${SDLTTF_VERSION}.zip SDL2_ttf ${SDLTTF_VERSION})
+DKINSTALL(https://www.libsdl.org/projects/SDL_ttf/release/${SDLTTF_VERSION}.zip SDL2_ttf ${SDLTTF_VERSION})
 DKSET(SDLTTF ${3RDPARTY}/${SDLTTF_VERSION})
 
 

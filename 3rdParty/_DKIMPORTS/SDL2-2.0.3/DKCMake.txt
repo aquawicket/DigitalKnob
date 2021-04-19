@@ -1,6 +1,5 @@
 ### INSTALL ###
-## DKINSTALL(www.internet.com/SDL2-2.0.3.zip SDL2-2.0.3)
-## DKINSTALL(${DKWEB}/Download/SDL2-2.0.3.zip SDL2-2.0.3)
+## DKINSTALL(www.internet.com/SDL2-2.0.3.zip SDL2-2.0.3 SDL2-2.0.3)
 DKSET(SDL ${3RDPARTY}/SDL2-2.0.3)
 
 

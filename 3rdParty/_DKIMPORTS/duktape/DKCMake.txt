@@ -3,8 +3,8 @@ DKSET(DUKTAPE_VERSION duktape-2.6.0)
 ##DKSET(DUKTAPE_VERSION duktape-master)
 
 ### INSTALL ###
-##DKINSTALL2(https://github.com/svaarala/duktape/archive/refs/heads/master.zip duktape ${DUKTAPE_VERSION})
-DKINSTALL2(https://duktape.org/${DUKTAPE_VERSION}.tar.xz duktape ${DUKTAPE_VERSION})
+##DKINSTALL(https://github.com/svaarala/duktape/archive/refs/heads/master.zip duktape ${DUKTAPE_VERSION})
+DKINSTALL(https://duktape.org/${DUKTAPE_VERSION}.tar.xz duktape ${DUKTAPE_VERSION})
 DKSET(DUKTAPE ${3RDPARTY}/${DUKTAPE_VERSION})
 
 
