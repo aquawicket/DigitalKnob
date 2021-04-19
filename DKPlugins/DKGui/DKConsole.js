@@ -155,11 +155,11 @@ dkconsole.Create = function dkconsole_Create(parent, id, top, bottom, left, righ
     container.style.borderTopWidth = "5rem";
     container.oncontextmenu = function container_oncontextmenu(event) {
         event.preventDefault();
-        const menu = DKMenu_CreateInstance();
-        DKMenu_AddItem(menu, "Clear", function DKMenu_Clear() {
+        const menu = dk.menu.createInstance();
+        dk.menu.addItem(menu, "Clear", function DKMenu_Clear() {
             dkconsole.clear();
         });
-        DKMenu_AddItem(menu, "Cancel", function DKMenu_Cancel() {
+        dk.menu.addItem(menu, "Cancel", function DKMenu_Cancel() {
             console.log("cancel");
         });
     }

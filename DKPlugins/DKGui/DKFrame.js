@@ -89,7 +89,7 @@ dk.frame.create = function dk_frame_create(element) {
     if (!element.id)
         return error("element.id invalid");
 
-    var title = DKFile_GetFilename(element.id);
+    var title = dk.file.getFilename(element.id);
     title && (title = title.replace(".html", ""));
 
     //stop if frame already exsists, multiple windows not ready yet.
@@ -131,7 +131,7 @@ dk.frame.createFrame = function dk_frame_createFrame(title, width, height) {
     var newheight = parseFloat(height) + 21;
     var newtop = parseFloat((window.innerHeight / 2) - (newheight / 2) - 1);
     var newleft = parseFloat((window.innerWidth / 2) - (width / 2) - 1)
-    let frame = DKGui_CreateElement(document.body, "div", "dk_frame_frame");
+    let frame = dk.gui.createElement(document.body, "div", "dk_frame_frame");
     dk.frame.frames.push(frame);
     frame = dk.frame.setCurrentFrame(frame);
     if (!frame)
@@ -153,7 +153,7 @@ dk.frame.createFrame = function dk_frame_createFrame(title, width, height) {
         dk.frame.bringToFront(event.currentTarget);
     }
 
-    frame.titlebar = DKGui_CreateElement(frame, "div", "dk_frame_titlebar");
+    frame.titlebar = dk.gui.createElement(frame, "div", "dk_frame_titlebar");
     frame.titlebar.style.position = "absolute";
     frame.titlebar.style.width = "100%";
     frame.titlebar.style.height = "21rem";
@@ -162,9 +162,9 @@ dk.frame.createFrame = function dk_frame_createFrame(title, width, height) {
         dk.frame.maximize(event.currentTarget);
     }
     ;
-    DKDrag_AddDragHandle(frame.titlebar, frame);
+    dk.drag.addDragHandle(frame.titlebar, frame);
 
-    frame.titlebar.text = DKGui_CreateElement(frame.titlebar, "div", "dk_frame_titlebartext");
+    frame.titlebar.text = dk.gui.createElement(frame.titlebar, "div", "dk_frame_titlebartext");
     frame.titlebar.text.style.position = "absolute";
     frame.titlebar.text.style.width = "100%";
     frame.titlebar.text.style.height = "100%";
@@ -176,7 +176,7 @@ dk.frame.createFrame = function dk_frame_createFrame(title, width, height) {
     frame.titlebar.text.style.cursor = "default";
     frame.titlebar.text.innerHTML = title;
 
-    frame.reload = DKGui_CreateElement(frame, "img", "dk_frame_reload");
+    frame.reload = dk.gui.createElement(frame, "img", "dk_frame_reload");
     frame.reload.setAttribute("src", "DKGui/reload.png");
     frame.reload.style.position = "absolute";
     frame.reload.style.top = "1rem";
@@ -186,7 +186,7 @@ dk.frame.createFrame = function dk_frame_createFrame(title, width, height) {
         dk.frame.reload(event.currentTarget);
     }
 
-    var minimize = DKGui_CreateElement(frame, "img", "dk_frame_minimize");
+    var minimize = dk.gui.createElement(frame, "img", "dk_frame_minimize");
     minimize.setAttribute("src", "DKGui/minimize.png");
     minimize.style.position = "absolute";
     minimize.style.top = "0rem";
@@ -196,7 +196,7 @@ dk.frame.createFrame = function dk_frame_createFrame(title, width, height) {
         dk.frame.minimize(event.currentTarget);
     }
 
-    var maximize = DKGui_CreateElement(frame, "img", "dk_frame_maximize");
+    var maximize = dk.gui.createElement(frame, "img", "dk_frame_maximize");
     maximize.setAttribute("src", "DKGui/maximize.png");
     maximize.style.position = "absolute";
     maximize.style.top = "0rem";
@@ -206,7 +206,7 @@ dk.frame.createFrame = function dk_frame_createFrame(title, width, height) {
         dk.frame.maximize(event.currentTarget);
     }
 
-    var close = DKGui_CreateElement(frame, "img", "dk_frame_close");
+    var close = dk.gui.createElement(frame, "img", "dk_frame_close");
     close.setAttribute("src", "DKGui/close.png");
     close.style.position = "absolute";
     close.style.top = "0rem";
@@ -223,20 +223,25 @@ dk.frame.createResize = function dk_frame_createResize(frame) {
     frame = dk.frame.setCurrentFrame(frame);
     if (!frame)
         return false;
-    frame.resize = DKGui_CreateElement(frame, "div", "dk_frame_resize");
+    frame.resizeImage = dk.gui.createElement(frame, "img", "dk_frame_resizeImage");
+    frame.resizeImage.setAttribute("src", "DKGui/resize.png");
+    frame.resizeImage.style.removeProperty("top");
+    frame.resizeImage.style.position = "absolute";
+    frame.resizeImage.style.right = "0rem";
+    frame.resizeImage.style.bottom = "0rem";
+    frame.resizeImage.style.width = "18rem";
+    frame.resizeImage.style.height = "18rem";
+
+    frame.resize = dk.gui.createElement(frame, "div", "dk_frame_resize");
     frame.resize.style.removeProperty("top");
     frame.resize.style.position = "absolute";
     frame.resize.style.right = "0rem";
     frame.resize.style.bottom = "0rem";
-    frame.resize.style.width = "16rem";
-    frame.resize.style.height = "16rem";
-
-    frame.resizeImage = DKGui_CreateElement(frame.resize, "img", "dk_frame_resizeImage");
-    frame.resizeImage.setAttribute("src", "DKGui/resize.png");
-    frame.resizeImage.style.position = "absolute";
-    frame.resizeImage.style.top = "0rem";
-    frame.resizeImage.style.right = "0rem";
-    DKDrag_AddResizeHandle(frame.resizeImage, frame);
+    frame.resize.style.width = "18rem";
+    frame.resize.style.height = "18rem";
+    frame.resize.style.cursor = "nw-resize";
+    
+    dk.drag.addResizeHandle(frame.resize, frame);
     return frame.resize;
 }
 

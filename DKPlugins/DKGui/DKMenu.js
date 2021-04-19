@@ -1,12 +1,12 @@
 "use strict";
 
-//////////////////////
-function DKMenu_Init() {}
+dk.menu = new Object;
 
-/////////////////////
-function DKMenu_End() {}
+dk.menu.init = function dk_menu_init() {}
 
-function DKMenu_CreateInstance() {
+dk.menu.end = function dk_menu_end() {}
+
+dk.menu.createInstance = function dk_menu_createInstance() {
     let dkmenu = document.createElement("div");
     dkmenu.id = "id";
     dkmenu.style.position = "absolute";
@@ -30,11 +30,11 @@ function DKMenu_CreateInstance() {
     }, {
         once: true
     });
-    DKMenu_ValidatePosition(dkmenu);
+    dk.menu.validatePosition(dkmenu);
     return dkmenu;
 }
 
-function DKMenu_AddItem(menu, label, callback) {
+dk.menu.addItem = function dk_menu_addItem(menu, label, callback) {
     let dkmenuItem = document.createElement("div");
     dkmenuItem.innerHTML = label;
     dkmenuItem.class = "option";
@@ -52,26 +52,25 @@ function DKMenu_AddItem(menu, label, callback) {
     dkmenuItem.style.borderLeftWidth = "0rem";
     dkmenuItem.style.borderRightWidth = "0rem";
     dkmenuItem.onmousedown = callback;
-    dkmenuItem.onmouseover = function dkmenuItem_onmouseover(){
-    	dkmenuItem.style.backgroundColor = "rgb(40,40,40)";
-    	dkmenuItem.style.color = "rgb(255,255,255)";
-    };
-    dkmenuItem.onmouseout = function dkmenuItem_onmouseout(){
-    	dkmenuItem.style.backgroundColor = "rgb(20,20,20)";
-    	dkmenuItem.style.color = "rgb(200,200,200)";
-    };
+    dkmenuItem.onmouseover = function dk_menu_item_onmouseover() {
+        dkmenuItem.style.backgroundColor = "rgb(40,40,40)";
+        dkmenuItem.style.color = "rgb(255,255,255)";
+    }
+    ;
+    dkmenuItem.onmouseout = function dk_menu_item_onmouseout() {
+        dkmenuItem.style.backgroundColor = "rgb(20,20,20)";
+        dkmenuItem.style.color = "rgb(200,200,200)";
+    }
     menu.appendChild(dkmenuItem);
-    DKMenu_ValidatePosition(menu);
+    dk.menu.validatePosition(menu);
 }
 
-function DKMenu_ValidatePosition(menu) {
+dk.menu.validatePosition = function dk_menu_validatePosition(menu) {
     if (!menu)
         return error("menu invalid");
 
     menu.style.top = window.mouseY + "px";
-    //menu.style.top = window.mouseY + "rem";
     menu.style.left = window.mouseX + "px";
-    //menu.style.left = window.mouseX + "rem";
     menu.style.removeProperty("right");
 
     //make sure menu is within window
@@ -82,25 +81,12 @@ function DKMenu_ValidatePosition(menu) {
     var width = Number(menu.clientWidth);
     var height = Number(menu.clientHeight);
 
-    /*
-    console.debug("win_width = "+win_width+"\n");
-    console.debug("win_height = "+win_height+"\n");
-    console.debug("top = "+top+"\n");
-    console.debug("left = "+left+"\n");
-    console.debug("width = "+width+"\n");
-    console.debug("height = "+height+"\n");
-    */
-
-    if(top + height > win_height){
-		top = win_height - height;
-		menu.style.top = top+"px";
-		//menu.style.top = top+"rem";
-		//console.debug("new top = "+top+"\n");
-	}
-	if(left + width > win_width){
-		left = win_width - width;
-		menu.style.left = left+"px";
-		//menu.style.left = left+"rem";
-		//console.debug("new left = "+left+"\n");
-	}
+    if (top + height > win_height) {
+        top = win_height - height;
+        menu.style.top = top + "px";
+    }
+    if (left + width > win_width) {
+        left = win_width - width;
+        menu.style.left = left + "px";
+    }
 }
