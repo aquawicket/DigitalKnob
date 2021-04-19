@@ -5,10 +5,12 @@ IF(IOS)
 	RETURN()
 ENDIF()
 
+### VERSION ###
+DKSET(RTMIDI_VERSION rtmidi-2.1.0)
+
 ### INSTALL ###
-DKINSTALL(http://www.music.mcgill.ca/~gary/rtmidi/release/rtmidi-2.1.0.tar.gz rtmidi-2.1.0)
-## DKINSTALL(${DKWEB}/Download/rtmidi-2.1.0.tar.gz rtmidi-2.1.0) 
-DKSET(RTMIDI ${3RDPARTY}/rtmidi-2.1.0)
+DKINSTALL(http://www.music.mcgill.ca/~gary/rtmidi/release/rtmidi-2.1.0.tar.gz rtmidi ${RTMIDI_VERSION})
+DKSET(RTMIDI ${3RDPARTY}/${RTMIDI_VERSION})
 
 
 ### LINK ###
