@@ -163,7 +163,6 @@ dk.console.create = function dk_console_create(parent, id, top, bottom, left, ri
             console.log("cancel");
         });
     }
-    ;
     parent.appendChild(container);
 
     const div = document.createElement("div");

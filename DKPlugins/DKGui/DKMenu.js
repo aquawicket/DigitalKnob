@@ -6,7 +6,7 @@ dk.menu.init = function dk_menu_init() {}
 
 dk.menu.end = function dk_menu_end() {}
 
-dk.menu.createInstance = function dk_menu_createInstance() {
+dk.menu.createInstance = function dk_menu_createInstance(parent) {
     let dkmenu = document.createElement("div");
     dkmenu.id = "id";
     dkmenu.style.position = "absolute";
@@ -24,8 +24,13 @@ dk.menu.createInstance = function dk_menu_createInstance() {
     dkmenu.style.borderLeftWidth = "1rem";
     dkmenu.style.borderRightWidth = "1rem";
     dkmenu.style.borderBottomWidth = "0rem";
-    document.body.appendChild(dkmenu);
-    document.addEventListener('mousedown', function() {
+    if(parent){
+        parent.appendChild(dkmenu);
+    }else{
+        document.body.appendChild(dkmenu);
+    }
+    document.addEventListener('mousedown', function(event) {
+        //event.stopPropagation();
         dkmenu.parentElement.removeChild(dkmenu);
     }, {
         once: true
@@ -51,7 +56,10 @@ dk.menu.addItem = function dk_menu_addItem(menu, label, callback) {
     dkmenuItem.style.borderTopWidth = "0rem";
     dkmenuItem.style.borderLeftWidth = "0rem";
     dkmenuItem.style.borderRightWidth = "0rem";
-    dkmenuItem.onmousedown = callback;
+    dkmenuItem.onmousedown = function onmousedown_callback(event){
+        event.stopPropagation();
+        callback && callback(event);
+    }
     dkmenuItem.onmouseover = function dk_menu_item_onmouseover() {
         dkmenuItem.style.backgroundColor = "rgb(40,40,40)";
         dkmenuItem.style.color = "rgb(255,255,255)";

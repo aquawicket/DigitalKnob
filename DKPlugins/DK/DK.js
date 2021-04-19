@@ -1,7 +1,7 @@
 "use strict";
 
 //Duktape
-const dk = new Object;
+//const dk = new Object;
 //Browser
 window.dk = new Object;
 
@@ -264,11 +264,10 @@ dk.getPlugin = function(url) {
         return false;
     }
     pluginName = pluginName.slice(2);
-    var plugin = dk[pluginName];
+    let plugin = dk[pluginName];
     if (!plugin) {
         return warn(file + " does not contain a dk." + pluginName + " Object");
     }
-    console.log("loading dk." + pluginName + " plugin");
     plugin.name = pluginName;
     return plugin;
 }
@@ -336,6 +335,7 @@ dk.close = function dk_close(data) {
 
     if (data[0] === "DKJavascript") {
         var plugin = dk.getPlugin(data[1]);
+        console.log("closing dk." + plugin.name + " plugin");
         if (plugin && plugin.end) {
             console.log("running dk." + plugin.name + ".end()");
             plugin.end();
@@ -414,6 +414,7 @@ dk.loadJs = function dk_loadJs(url, dk_loadJs_callback) {
         if (!done && (!this.readyState || this.readyState === "loaded" || this.readyState === "complete")) {
 
             var plugin = dk.getPlugin(url);
+            console.log("loading dk." + plugin.name + " plugin");
 
             //FIXME: This is the old way to run init on plugins
             var old_plugin = url.substring(url.lastIndexOf("/") + 1);
@@ -781,8 +782,7 @@ dk.clearSelection = function dk_clearSelection() {
     }
 }
 
-/*
-dk.getElements - function dk_getElements(element) {
+dk.getElements = function dk_getElements(element) {
     var string;
     //var nodes = byId(id).getElementsByTagName('*'); //all children recursively
     if (!element || element.childNodes) 
@@ -796,7 +796,6 @@ dk.getElements - function dk_getElements(element) {
     }
     return string;
 }
-*/
 
 dk.getAvailableId = function dk_getAvailableId(id) {
     var out = id;

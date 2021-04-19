@@ -161,7 +161,6 @@ dk.frame.createFrame = function dk_frame_createFrame(title, width, height) {
     frame.titlebar.ondblclick = function dk_frame_titlebar_ondblclick(event) {
         dk.frame.maximize(event.currentTarget);
     }
-    ;
     dk.drag.addDragHandle(frame.titlebar, frame);
 
     frame.titlebar.text = dk.gui.createElement(frame.titlebar, "div", "dk_frame_titlebartext");

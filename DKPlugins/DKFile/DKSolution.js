@@ -1,18 +1,18 @@
 dk.solution = new Object;
 
-dk.solution = function dk_solution_init() {
+dk.solution.init = function dk_solution_init() {
     dk.create("DKFile/DKSolution.css");
-    dk.create("DKFile/DKSolution.html");
+    dk.create("DKFile/DKSolution.html", function(){
+       byId("DKSolutionUp").addEventListener("click", dk.solution.onevent);
+        byId("DKSolutionMenu").addEventListener("click", dk.solution.onevent);
+        byId("DKSolutionMenu").addEventListener("contextmenu", dk.solution.onevent);
+        byId("DKSolutionPath").addEventListener("keypress", dk.solution.onevent); 
+        //dk.solution.openFolder(byId("DKSolutionPath").value);
+    });
     dk.create("DKFile/DKFileAssociation.js");
-    byId("DKSolutionUp").addEventListener("click", dk.solution.onevent);
-    byId("DKSolutionMenu").addEventListener("click", dk.solution.onevent);
-    byId("DKSolutionMenu").addEventListener("contextmenu", dk.solution.onevent);
-    byId("DKSolutionPath").addEventListener("keypress", dk.solution.onevent);
-
-    //dk.solution.openFolder(byId("DKSolutionPath").value);
 }
 
-dk.solution = function dk_solution_end() {
+dk.solution.end = function dk_solution_end() {
     byId("DKSolutionUp").removeEventListener("click", dk.solution.onevent);
     byId("DKSolutionMenu").removeEventListener("click", dk.solution.onevent);
     byId("DKSolutionMenu").removeEventListener("contextmenu", dk.solution.onevent);
@@ -21,9 +21,9 @@ dk.solution = function dk_solution_end() {
     DK_Close("DKFile/DKSolution.css");
 }
 
-dk.solution = function dk_solution_onevent(event) {
+dk.solution.onevent = function dk_solution_onevent(event) {
     console.debug("dk.solution.onevent(" + event.currentTarget.id + "," + event.type + "," + event.value + ")");
-    dk.solution.Select(event.currentTarget.id);
+    dk.solution.select(event.currentTarget.id);
 
     if (event.currentTarget.id === "click") {
         DK_StopPropagation(event);
@@ -36,7 +36,7 @@ dk.solution = function dk_solution_onevent(event) {
         event.preventDefault();
         dk.create("DKFile/DKSolutionMenu.js", function() {
             DKMenu_ValidatePosition("DKFile/DKSolutionMenu.html");
-            var file = byId(id).value;);
+            var file = byId(id).value;
             if (!file) {
                 file = byId("DKSolutionPath").value + "/";
             }
@@ -75,7 +75,7 @@ dk.solution = function dk_solution_onevent(event) {
 }
 
 dk.solution.select = function dk_solution_select(id) {
-    var elements = DK_GetElements(byId("DKSolutionMenu"));
+    var elements = dk.getElements(byId("DKSolutionMenu"));
     var arry = elements.split(",");
     for (var i = 0; i < arry.length - 1; i++) {
         if (!arry[i]) {
