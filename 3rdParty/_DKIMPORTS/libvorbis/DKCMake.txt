@@ -3,7 +3,7 @@ DKSET(VORBIS_VERSION libvorbis-1.3.5)
 
 
 ### INSTALL ###
-DKINSTALL(https://ftp.osuosl.org/pub/xiph/releases/vorbis/libvorbis-1.3.5.zip libvorbis ${VORBIS_VERSION})
+DKINSTALL(https://ftp.osuosl.org/pub/xiph/releases/vorbis/${VORBIS_VERSION}.zip libvorbis ${VORBIS_VERSION})
 
 DKSET(VORBIS ${3RDPARTY}/${VORBIS_VERSION})
 
