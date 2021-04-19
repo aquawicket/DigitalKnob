@@ -28,5 +28,6 @@ bool DKImageMagick::PdfToBmp(DKString& filein, DKString& fileout)
 /////////////////////////////////////////////////////////////////
 bool DKImageMagick::PdfToPng(DKString& filein, DKString& fileout)
 {
-	return DKUtil::System(DKFile::local_assets+"/DKImageMagick/magick.exe convert -density 300 "+filein+" "+fileout);
+	DKString ret;
+	return DKUtil::System(DKFile::local_assets+"/DKImageMagick/magick.exe convert -density 300 "+filein+" "+fileout, ret);
 }
