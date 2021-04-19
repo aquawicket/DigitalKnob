@@ -414,7 +414,7 @@ dk.loadJs = function dk_loadJs(url, dk_loadJs_callback) {
         if (!done && (!this.readyState || this.readyState === "loaded" || this.readyState === "complete")) {
 
             var plugin = dk.getPlugin(url);
-            console.log("loading dk." + plugin.name + " plugin");
+            plugin && console.log("loading dk." + plugin.name + " plugin");
 
             //FIXME: This is the old way to run init on plugins
             var old_plugin = url.substring(url.lastIndexOf("/") + 1);

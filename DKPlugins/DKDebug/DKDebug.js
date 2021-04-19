@@ -2,14 +2,13 @@
 
 dk.debug = new Object;
 
-
 ////////////////////////////////////
 ///  A Convienient Debug Function
 ///////////////////////////////////
 dk.debug.debugFunc = function dk_debug_debugFunc() {
     console.log("dk.debug.debugFunc");
-    
-    dk.php.call('GET',"/DKFile/DKFile.php","DirectoryContents",".",console.log);
+
+    dk.php.call('GET', "/DKFile/DKFile.php", "DirectoryContents", ".", console.log);
 
     /*
     let address = "aquawicket@hotmail.com";
@@ -91,8 +90,6 @@ dk.debug.debugFunc = function dk_debug_debugFunc() {
     dk.php.call('GET','/DKFile/DKFile.php', 'GetServerInfo', 'ORIG_PATH_INFO', console.log);
     */
 
-
-
     //dk.php.call("/DKFile/DKFile.php", "PathExists", "/", function(rval){
     //    rval && console.log(rval);
     //});
@@ -111,29 +108,28 @@ dk.debug.debugFunc = function dk_debug_debugFunc() {
         console.log(rval);
     });
     */
-    
-    
+
     //console.log("Multiple styles: %cred %corange", "color: red", "color: orange", "Additional unformatted message");
     //dk.codemirror.Create();
-    
+
     //throw new Error( 'No worries. Just testing...' );
     /*
     if(1){
         return error("testing errors");
     }
     */
-    
+
     /*
     dk.php.call("Debug_Func", "one", "two", "three", function(rval){
         console.log(rval);
     });
     */
-    
+
     /*
     dk.php.debugFunc("one", "two", "three", function(rval) {
         console.log(rval);
     });
-    */    
+    */
 
     /*
     dk.php.getRemoteAddress(function(rval) {
@@ -277,7 +273,6 @@ dk.debug.debugFunc = function dk_debug_debugFunc() {
 }
 /////////////////////////////////////////////
 
-
 dk.debug.init = function dk_debug_init() {
     dk.debug.keyHistory = new Array;
     document.addEventListener("keydown", dk.debug.onevent);
@@ -294,11 +289,13 @@ dk.debug.onevent = function dk_debug_onevent(event) {
     }
 
     if (event.type === "keydown" && event.code === "F12") {
-        if (typeof dkcef.showDevTools === 'function') {
-            dkcef.showDevTools(0);
-        }
-        if (typeof dkrml.debuggerOn === 'function') {
-            dkrml.debuggerOn();
+        if (dk.hasCPP) {
+            if (typeof dkcef.showDevTools === 'function') {
+                dkcef.showDevTools(0);
+            }
+            if (typeof dkrml.debuggerOn === 'function') {
+                dkrml.debuggerOn();
+            }
         }
     }
 }
@@ -315,7 +312,7 @@ dk.debug.checkKeys = function dk_debug_checkKeys() {
     for (var n = 0; n < dk.debug.keyHistory.length; n++) {
         string += dk.debug.keyToChar(dk.debug.keyHistory[n]);
     }
-    
+
     //check for commands
     if (string.includes("dkreload")) {
         console.log("*** dk.debug.reload() ***");
