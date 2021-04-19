@@ -249,14 +249,24 @@ FUNCTION(DKINSTALL2 url import_folder 3rdparty_folder)
 		DKDOWNLOAD(${url})
 		GET_FILENAME_COMPONENT(filename ${url} NAME)
 		DKEXTRACT(${DIGITALKNOB}/Download/${filename} ${3RDPARTY}/UNZIPPED)
-		IF(EXISTS ${3RDPARTY}/UNZIPPED/${3rdparty_folder})
-			FILE(RENAME ${3RDPARTY}/UNZIPPED/${3rdparty_folder} ${3RDPARTY}/${3rdparty_folder})##Actually Moves the folder
-			DKREMOVE(${3RDPARTY}/UNZIPPED)
+		
+		#We either have a root folder in /UNZIPPED, or multiple files without a root folder
+		FILE(GLOB items RELATIVE "${3RDPARTY}/UNZIPPED/" "${3RDPARTY}/UNZIPPED/*")
+		LIST(LENGTH items count)
+		IF(${count} GREATER 1)
+			#Zip extracted with no root folder, Rename UNZIPPED and move to 3rdParty
+			FILE(RENAME ${3RDPARTY}/UNZIPPED ${3RDPARTY}/${3rdparty_folder})
 		ELSE()
-			FILE(RENAME ${3RDPARTY}/UNZIPPED ${3RDPARTY}/${3rdparty_folder})##Actually Moves the folder
+			IF(EXISTS ${3RDPARTY}/UNZIPPED/${3rdparty_folder}) ##Zip extracted to expected folder. Move the folder to 3rdParty
+				FILE(RENAME ${3RDPARTY}/UNZIPPED/${3rdparty_folder} ${3RDPARTY}/${3rdparty_folder})
+				DKREMOVE(${3RDPARTY}/UNZIPPED)
+			ELSE() #Zip extracted to a root folder, but not named what we expected. Rename and move folder to 3rdParty
+				FILE(RENAME ${3RDPARTY}/UNZIPPED/${items} ${3RDPARTY}/${3rdparty_folder})
+				DKREMOVE(${3RDPARTY}/UNZIPPED)
+			ENDIF() 
 		ENDIF()
 	ENDIF()
-		FILE(MAKE_DIRECTORY ${3RDPARTY}/${3rdparty_folder}/${OS})
+		#FILE(MAKE_DIRECTORY ${3RDPARTY}/${3rdparty_folder}/${OS})
 		FILE(COPY ${DKIMPORTS}/${import_folder}/ DESTINATION ${3RDPARTY}/${3rdparty_folder})
 ENDFUNCTION()
 
