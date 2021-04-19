@@ -1,42 +1,38 @@
 "use strict";
 
-function DK_Cut(ele) {
+dk.clipboard = new Object;
+
+
+dk.clipboard.cut = function dk_clipboard_cut(ele) {
     var text = "";
-    if (window.getSelection) {
+    if (window.getSelection)
         text = window.getSelection().toString();
-    } else if (document.selection && document.selection.type !== "Control") {
+    else if (document.selection && document.selection.type !== "Control")
         text = document.selection.createRange().text;
-    }
-    //console.debug("DK_Cut("+ele.id+"): text = "+text+"\n");
-    DKClipboard_CopyToClipboard(text);
-    DKClipboard_RemoveSelection(id);
+    dk.clipboard.copyToClipboard(text);
+    dk.clipboard.removeSelection(id);
 }
 
-function DK_Copy(ele) {
+dk.clipboard.copy = function dk_clipboard_copy(ele) {
     var text = "";
-    if (window.getSelection) {
+    if (window.getSelection)
         text = window.getSelection().toString();
-    } else if (document.selection && document.selection.type !== "Control") {
+    else if (document.selection && document.selection.type !== "Control")
         text = document.selection.createRange().text;
-    }
-
-    //console.debug("DK_Copy("+ele.id+"): text = "+text+"\n");
-    DKClipboard_CopyToClipboard(text);
+    dk.clipboard.copyToClipboard(text);
 }
 
-function DKClipboard_Paste(ele) {
-    DKClipboard_RemoveSelection(ele);
+dk.clipboard.paste = function dk_clipboard_paste(ele) {
+    dk.clipboard.removeSelection(ele);
     ele.focus();
     ele.select();
     document.execCommand('Paste');
 }
 
-function DKClipboard_CopyToClipboard(text) {
-    if (window.clipboardData && window.clipboardData.setData) {
-        // IE specific code path to prevent textarea being shown while dialog is visible.
+dk.clipboard.copyToClipboard = function dk_clipboard_copyToClipboard(text) {
+    if (window.clipboardData && window.clipboardData.setData)
         return clipboardData.setData("Text", text);
-
-    } else if (document.queryCommandSupported && document.queryCommandSupported("copy")) {
+    else if (document.queryCommandSupported && document.queryCommandSupported("copy")) {
         var textarea = document.createElement("textarea");
         textarea.textContent = text;
         textarea.style.position = "fixed";
@@ -54,7 +50,7 @@ function DKClipboard_CopyToClipboard(text) {
     }
 }
 
-function DKClipboard_RemoveSelection(ele) {
+dk.clipboard.removeSelection = function dk_clipboard_removeSelection(ele) {
     var text = ele.value;
     text = text.slice(0, ele.selectionStart) + text.slice(ele.selectionEnd);
     ele.value = text;
