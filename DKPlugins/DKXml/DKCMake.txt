@@ -2,7 +2,7 @@ DKDEPEND(libxml2)
 DKDEPEND(pugixml)
 
 
-DKCOPY(${3RDPARTY}/${PUGIXML}/src/pugixml.cpp ${DKPLUGINS}/DKXml/pugixml.cpp FALSE)
+DKCOPY(${PUGIXML}/src/pugixml.cpp ${DKPLUGINS}/DKXml/pugixml.cpp FALSE)
 DKINCLUDE(${PUGIXML}/src)
 DKINCLUDE(${XML2}/include)
 DKPLUGIN(DKXml)
