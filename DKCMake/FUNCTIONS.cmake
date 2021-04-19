@@ -234,6 +234,10 @@ FUNCTION(DKINSTALL url import_folder 3rdparty_folder)
 		DKSET(CURRENT_DIR ${DIGITALKNOB}/Download)
 		DKDOWNLOAD(${url})
 		GET_FILENAME_COMPONENT(filename ${url} NAME)
+		
+		#Make sure is it an archive before extracting
+		GET_FILENAME_COMPONENT(extention ${url} EXT)
+		MESSAGE("DKINSTALL() the file's extention is ${extention}")
 		DKEXTRACT(${DIGITALKNOB}/Download/${filename} ${3RDPARTY}/UNZIPPED)
 		
 		#We either have a root folder in /UNZIPPED, or multiple files without a root folder
