@@ -1,24 +1,27 @@
 <?php
-
 header('Access-Control-Allow-Origin: *');
 include("../DK/DK.php");
 
-/////////////////////////
-function PathExists($path)
-{
-	$file_headers = @get_headers($path);
-	return $file_headers[0];
-}
-if($_GET["PathExists"])
-{
-	echo PathExists($_GET["PathExists"]);
+function GetServerInfo($param){
+	if(isset($_SERVER[$param])){
+	    echo "$"."_SERVER[".$param."] = ".$_SERVER[$param];
+	}
 }
 
-//////////////////////
-function Upload($path)
-{
-	$target_dir = $path; //example /home/user/www/";
-	$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+function PathExists($path){
+	if(file_exists($path)){
+        return 1;
+	}
+	return 0;
+	/*
+	$file_headers = @get_headers($path);
+	return $file_headers[0] ?? 0;
+	*/
+}
+
+function Upload($src, $dest){
+	//$target_dir //example /home/user/www/";
+	//$dest = $target_dir + $target_file;
 	//$fileType = pathinfo($target_file,PATHINFO_EXTENSION);
 	// Check if image file is a actual image or fake image
 	//if(!isset($_POST["submit"])){
@@ -29,10 +32,10 @@ function Upload($path)
 	//if($check == false){
 	//	return; "File is not an image.";
 	//}
-
+    
 	// Check if file already exists
-	if(file_exists($target_file)){
-		return "Sorry, file ".$target_file." already exists.";
+	if(file_exists($dest)){
+		return "Sorry, file ".$dest." already exists.";
 	}
 	// Check file size
 	if($_FILES["fileToUpload"]["size"] > 5000000){
@@ -46,12 +49,6 @@ function Upload($path)
 	}
 	return "ERROR";
 }
-if($_GET["Upload"])
-{
-	Upload($_GET["Upload"]);
-	header('Location: '.$_GET["Redirect"].'');
-	die;
-}
 
 //////////////////////
 function Delete($file)
@@ -61,10 +58,6 @@ function Delete($file)
 	}
 	return "could not delete file";
 }
-if($_GET["Delete"])
-{
-	echo Delete($_GET["Delete"]);
-}
 
 //////////////////////////////
 function GetRelativePath($dir)
@@ -72,10 +65,6 @@ function GetRelativePath($dir)
 	$aPath = GetAbsolutePath($dir);
 	$dir = str_replace($aPath,"",$dir);
 	return $dir;
-}
-if($_GET["GetRelativePath"])
-{
-	echo GetRelativePath($_GET["GetRelativePath"]);
 }
 
 //////////////////////////////
@@ -91,10 +80,6 @@ function GetAbsolutePath($dir)
 	//return pathinfo($aPath,PATHINFO_DIRNAME)."/".pathinfo($aPath,PATHINFO_BASENAME);
 	return $aPath;
 }
-if($_GET["GetAbsolutePath"])
-{
-	echo GetAbsolutePath($_GET["GetAbsolutePath"]);
-}
 
 //////////////////////////
 function IsDirectory($dir)
@@ -106,15 +91,11 @@ function IsDirectory($dir)
 		return "0";
 	}
 }
-if($_GET["IsDirectory"])
-{
-	echo IsDirectory($_GET["IsDirectory"]);
-}
 
 ////////////////////////////////
 function DirectoryContents($dir)
 {
-	//echo "php: DirectoryContents";
+	$root = $_SERVER['DOCUMENT_ROOT']."/";
 	$myDirectory = opendir($dir);
 	while($entryName = readdir($myDirectory)){
 		$dirArray[] = $entryName;
@@ -152,51 +133,8 @@ function DirectoryContents($dir)
 	}
 	return implode(",",$final);
 }
-if($_GET["DirectoryContents"]){
-	echo DirectoryContents($_GET["DirectoryContents"]);
-}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+/*	
 //////////////////////////////////////
 if($printFiles = $_GET["PrintFiles"]){
 	if($_SERVER["SERVER_NAME"] == "127.0.0.1"){
@@ -238,29 +176,27 @@ if($printFiles = $_GET["PrintFiles"]){
 		}
 	}
 }
+*/
 
-//////////////////////////////////
-if($readFile = $_GET["ReadFile"]){
-	if(file_exists($readFile)){
+function ReadTheFile($readFile){ 
+    if(file_exists($readFile)){
 		if(filesize($readFile) > 0){
 			//now lets load the file
-			$fh = fopen($readFile, 'r') or die("MESSAGE:can't open file");
+			$fh = fopen($readFile, 'r') or die("can't open file");
 			$code = fread($fh, filesize($readFile));
 			fclose($fh);
 			echo $code;
 		}
 		else{
-			//file is blank
+	        echo "file ".$readFile." is blank";
 		}
 	}
 	else{
-		echo "MESSAGE:file ".$readFile." does not exist";
+		echo "file ".$readFile." does not exist";
 	}
-	die;
 }
 
-////////////////////////////////
-function SaveFile($file, $data){
+function saveFile($file, $data){
 	echo "SaveFile($file,$data)";
 	$data=stripslashes($data); //FIXME  don't do this if server is local
 	if(file_exists($file)){ //Update the file
@@ -287,23 +223,7 @@ function SaveFile($file, $data){
 	return "No Error";
 }
 
-/////////////////////
-if($_GET["SaveFile"])
-{
-	if(!$_GET["data"]){ echo "DKERROR: data variable empty"; }
-	echo SaveFile($_GET["SaveFile"], $_GET["data"]);
-	die();
-}
-
 /*
-//////////////////////////////////
-if($saveFile = $_POST["SaveFile"]){
-	$data = $_POST["data"];
-	echo SaveFile($saveFile, $data);
-	die();
-}
-*/
-
 ////////////////////////////////////////
 if($publishFile = $_POST["PublishFile"]){
 	$data = $_POST["data"];
@@ -338,5 +258,5 @@ if($publishFile = $_POST["PublishFile"]){
 	}
 	die;
 }
-
+*/
 ?>

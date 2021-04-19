@@ -72,16 +72,20 @@ dk.php.callPhpFunc = function dk_php_callPhpFunc(args) {
     }, "POST");
 }
 
-dk.php.call = function dk_php_call() {
-    if (typeof arguments[0] !== "string")
-        return error("arguments[0] invalid");
+//dk.php.call("GET", "/DK/DK.php", "Function", "args", "args", callback);
+dk.php.call = function dk_php_call(httpMethod, phpPath, funcName) {
+    //if (typeof phpPath !== "string")
+    //    return error("phpPath invalid");
+    !httpMethod && (httpMethod = "GET");
+    !phpPath && (phpPath = "/DK/DK.php");
+    if (typeof funcName !== "string")
+        return error("funcName invalid");
 
-    const funcName = arguments[0];
     const jsonData = {
         func: funcName,
         args: []
     };
-    for (let n = 1; arguments && n < arguments.length; n++) {
+    for (let n = 3; arguments && n < arguments.length; n++) {
         if (typeof (arguments[n]) === "function") {
             continue;
         }
@@ -91,20 +95,18 @@ dk.php.call = function dk_php_call() {
     }
     let path = "";
     if (location.protocol == "file:") {
-        path = "http://127.0.0.1:8000/"
+        path = "http://127.0.0.1:8000"
     }
     const str = JSON.stringify(jsonData);
-    //console.log("dk.php.callPhpFunc(): str = "+str);
     const data = "x=" + encodeURIComponent(str);
-    //console.log("dk.php.callPhpFunc(): data = "+data);
-    const url = path + "DK/DK.php?" + data;
+    const url = path + phpPath + "?" + data;
     const args = arguments;
     dk.sendRequest(url, function(success, url, rVal) {
         if (args && typeof (args[args.length - 1]) === "function") {
             args[args.length - 1](rVal);
         } else {//console.log(rVal);
         }
-    }, "POST");
+    }, httpMethod);
 }
 
 /*

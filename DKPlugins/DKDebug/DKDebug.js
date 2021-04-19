@@ -9,6 +9,94 @@ dk.debug = new Object;
 dk.debug.debugFunc = function dk_debug_debugFunc() {
     console.log("dk.debug.debugFunc");
     
+    dk.php.call('GET',"/DKFile/DKFile.php","DirectoryContents",".",console.log);
+
+    /*
+    let address = "aquawicket@hotmail.com";
+    let subject = "Test PHP email";
+    let msg = "testing if php mail sending is still successful";
+    dk.php.call('GET',"/DK/DK.php", "sendEmail", address, subject, msg, console.log);
+    */
+
+    /*
+    let path = ".";
+    dk.php.call('GET','/DKFile/DKFile.php', 'IsDirectory', path, console.log);
+    */
+
+    /*
+    let path = ".";
+    dk.php.call('GET','/DKFile/DKFile.php', 'IsDirectory', path, function(rval){
+        rval && console.debug("true");
+        !rval && console.debug("false");
+    });
+    */
+
+    /*
+    let path = "";
+    dk.php.call('GET','/DKFile/DKFile.php', 'GetAbsolutePath', path, console.log);
+    */
+
+    /*
+    let path = "../DK/../";
+    dk.php.call('GET','/DKFile/DKFile.php', 'GetRelativePath', path, console.log);
+    */
+
+    /*
+    let path = ".";
+    dk.php.call('GET','/DKFile/DKFile.php', 'PathExists', path, function(rval){
+        rval && console.debug("true");
+        !rval && console.debug("false");
+    });
+    */
+
+    /*
+    dk.php.call('GET','/DKFile/DKFile.php', 'GetServerInfo', 'PHP_SELF', console.log);
+    dk.php.call('GET','/DKFile/DKFile.php', 'GetServerInfo', 'GATEWAY_INTERFACE', console.log);
+    dk.php.call('GET','/DKFile/DKFile.php', 'GetServerInfo', 'SERVER_ADDR', console.log);
+    dk.php.call('GET','/DKFile/DKFile.php', 'GetServerInfo', 'SERVER_NAME', console.log);
+    dk.php.call('GET','/DKFile/DKFile.php', 'GetServerInfo', 'SERVER_SOFTWARE', console.log);
+    dk.php.call('GET','/DKFile/DKFile.php', 'GetServerInfo', 'SERVER_PROTOCOL', console.log);
+    dk.php.call('GET','/DKFile/DKFile.php', 'GetServerInfo', 'REQUEST_METHOD', console.log);
+    dk.php.call('GET','/DKFile/DKFile.php', 'GetServerInfo', 'REQUEST_TIME', console.log);
+    dk.php.call('GET','/DKFile/DKFile.php', 'GetServerInfo', 'REQUEST_TIME_FLOAT', console.log);
+    dk.php.call('GET','/DKFile/DKFile.php', 'GetServerInfo', 'QUERY_STRING', console.log);
+    dk.php.call('GET','/DKFile/DKFile.php', 'GetServerInfo', 'DOCUMENT_ROOT', console.log);
+    dk.php.call('GET','/DKFile/DKFile.php', 'GetServerInfo', 'HTTP_ACCEPT', console.log);
+    dk.php.call('GET','/DKFile/DKFile.php', 'GetServerInfo', 'HTTP_ACCEPT_CHARSET', console.log);
+    dk.php.call('GET','/DKFile/DKFile.php', 'GetServerInfo', 'HTTP_ACCEPT_ENCODING', console.log);
+    dk.php.call('GET','/DKFile/DKFile.php', 'GetServerInfo', 'HTTP_ACCEPT_LANGUAGE', console.log);
+    dk.php.call('GET','/DKFile/DKFile.php', 'GetServerInfo', 'HTTP_CONNECTION', console.log);
+    dk.php.call('GET','/DKFile/DKFile.php', 'GetServerInfo', 'HTTP_HOST', console.log);
+    dk.php.call('GET','/DKFile/DKFile.php', 'GetServerInfo', 'HTTP_REFERER', console.log);
+    dk.php.call('GET','/DKFile/DKFile.php', 'GetServerInfo', 'HTTP_USER_AGENT', console.log);
+    dk.php.call('GET','/DKFile/DKFile.php', 'GetServerInfo', 'HTTPS', console.log);
+    dk.php.call('GET','/DKFile/DKFile.php', 'GetServerInfo', 'REMOTE_ADDR', console.log);
+    dk.php.call('GET','/DKFile/DKFile.php', 'GetServerInfo', 'REMOTE_HOST', console.log);
+    dk.php.call('GET','/DKFile/DKFile.php', 'GetServerInfo', 'REMOTE_PORT', console.log);
+    dk.php.call('GET','/DKFile/DKFile.php', 'GetServerInfo', 'REMOTE_USER', console.log);
+    dk.php.call('GET','/DKFile/DKFile.php', 'GetServerInfo', 'REDIRECT_REMOTE_USER', console.log);
+    dk.php.call('GET','/DKFile/DKFile.php', 'GetServerInfo', 'SCRIPT_FILENAME', console.log);
+    dk.php.call('GET','/DKFile/DKFile.php', 'GetServerInfo', 'SERVER_ADMIN', console.log);
+    dk.php.call('GET','/DKFile/DKFile.php', 'GetServerInfo', 'SERVER_PORT', console.log);
+    dk.php.call('GET','/DKFile/DKFile.php', 'GetServerInfo', 'SERVER_SIGNATURE', console.log);
+    dk.php.call('GET','/DKFile/DKFile.php', 'GetServerInfo', 'PATH_TRANSLATED', console.log);
+    dk.php.call('GET','/DKFile/DKFile.php', 'GetServerInfo', 'SCRIPT_NAME', console.log);
+    dk.php.call('GET','/DKFile/DKFile.php', 'GetServerInfo', 'SCRIPT_URI', console.log);
+    dk.php.call('GET','/DKFile/DKFile.php', 'GetServerInfo', 'REQUEST_URI', console.log);
+    dk.php.call('GET','/DKFile/DKFile.php', 'GetServerInfo', 'PHP_AUTH_DIGEST', console.log);
+    dk.php.call('GET','/DKFile/DKFile.php', 'GetServerInfo', 'PHP_AUTH_USER', console.log);
+    dk.php.call('GET','/DKFile/DKFile.php', 'GetServerInfo', 'PHP_AUTH_PW', console.log);
+    dk.php.call('GET','/DKFile/DKFile.php', 'GetServerInfo', 'AUTH_TYPE', console.log);
+    dk.php.call('GET','/DKFile/DKFile.php', 'GetServerInfo', 'PATH_INFO', console.log);
+    dk.php.call('GET','/DKFile/DKFile.php', 'GetServerInfo', 'ORIG_PATH_INFO', console.log);
+    */
+
+
+
+    //dk.php.call("/DKFile/DKFile.php", "PathExists", "/", function(rval){
+    //    rval && console.log(rval);
+    //});
+
     /*
     var varName = "testABC";
     if(dk.validate.isValidVarName(varName)){
@@ -18,10 +106,11 @@ dk.debug.debugFunc = function dk_debug_debugFunc() {
     }
     */
 
-    
+    /*
     dk.php.debugFunc("one", "two", "three", function(rval) {
         console.log(rval);
     });
+    */
     
     
     //console.log("Multiple styles: %cred %corange", "color: red", "color: orange", "Additional unformatted message");

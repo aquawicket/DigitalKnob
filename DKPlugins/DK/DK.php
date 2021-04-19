@@ -301,4 +301,10 @@ function pushDKAssets()
 	}
 }
 
+
+function sendEmail($address, $subject, $msg){
+    $msg = wordwrap($msg,70);
+    // send email
+    mail($address,$subject,$msg);
+}
 ?>

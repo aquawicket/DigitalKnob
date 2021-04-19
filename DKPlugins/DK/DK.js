@@ -1,4 +1,8 @@
 "use strict";
+
+//Duktape
+const dk = new Object;
+//Browser
 window.dk = new Object;
 
 dk.init = function dk_init() {
@@ -9,6 +13,7 @@ dk.init = function dk_init() {
     console.log("Browser = " + dk.getBrowser());
     console.log("JSEngine = " + dk.getJSEngine());
 
+    /*
     var LOG_DEBUG = false;
     var LOG_INFO = true;
     var LOG_WARNINGS = true;
@@ -26,6 +31,7 @@ dk.init = function dk_init() {
     var DK_SHOW = 5;
     var DK_HIDE = 6;
     //var events = [];
+*/
 }
 
 var byId = function(id) {
@@ -238,7 +244,7 @@ dk.hasCPP = function dk_hasCPP() {
     if (dk.getBrowser() === "RML")
         return true;
     if (dk.getJSEngine() === "Duktape")
-    return false;
+        return false;
 }
 
 dk.getPlugin = function(url) {
@@ -1106,7 +1112,14 @@ dk.ajaxGetUrl = function dk_ajaxGetUrl(url) {
 //return response.value;
 //}
 
-dk.sendRequest = function dk_sendRequest(url, dk_sendRequest_callback, post) {
+
+//https://developer.mozilla.org/en-US/docs/Web/HTTP
+//https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers
+//https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods
+//https://developer.mozilla.org/en-US/docs/Web/HTTP/Status
+//https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy
+
+dk.sendRequest = function dk_sendRequest(url, dk_sendRequest_callback, httpMethod) {
     if (!url) {
         console.error("url invalid");
     }
@@ -1138,12 +1151,26 @@ dk.sendRequest = function dk_sendRequest(url, dk_sendRequest_callback, post) {
         return error("Error creating xhr object");
     }
 
-    if (post === "GET") {
-        xhr.open("GET", url, true);
-    } else {
-        xhr.open("POST", url, true);
-        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-    }
+    if (httpMethod) {
+        switch (httpMethod) {
+        case "GET":
+        case "POST":
+        case "PUT":
+        case "HEAD":
+        case "DELETE":
+        case "PATCH":
+        case "OPTIONS":
+        case "CONNECT":
+        case "TRACE":
+            break;
+        default:
+            return error("httpMethod invalid");
+        }
+    } else
+        httpMethod = "GET";
+
+    xhr.open(httpMethod, url, true);
+    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     xhr.timeout = 20000;
 
     //Possible error codes
