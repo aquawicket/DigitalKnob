@@ -13,7 +13,8 @@ var CMAKE = "";
 var NDK = "";
 var NDK_NAME = "android-ndk-r21e";
 var VC2019 = "C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/MSBuild/Current/Bin/MSBuild.exe";
-VC2019 = CPP_DKFile_GetShortName(VC2019);
+//VC2019 = CPP_DKFile_GetShortName(VC2019);
+VC2019 = DKBuild_GetShortPath(VC2019);
 var GCC = "/usr/bin/g++";
 var XCODE = "/Applications/Xcode.app";
 var APP_LIST = [];
@@ -68,6 +69,9 @@ function DKBuild_GetShortPath(fullPath){
 	var getShortPath = local_assets+"/DKFile/getShortPath.cmd";
 	var shortPath = CPP_DKDuktape_Execute(getShortPath+' "'+fullPath+'"');
 	shortPath = shortPath.slice(0, -1)
+	while(shortPath.includes("\\")){
+		shortPath = shortPath.replace("\\","/");
+	}
 	return shortPath;
 }
 
