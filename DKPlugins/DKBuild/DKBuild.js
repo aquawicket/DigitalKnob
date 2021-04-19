@@ -61,6 +61,16 @@ function DKBuild_End()
 	
 }
 
+//This is and alternative way to get windows short paths
+////////////////////////////////////////
+function DKBuild_GetShortPath(fullPath){
+	var local_assets = CPP_DKAssets_LocalAssets();
+	var getShortPath = local_assets+"/DKFile/getShortPath.cmd";
+	var shortPath = CPP_DKDuktape_Execute(getShortPath+' "'+fullPath+'"');
+	shortPath = shortPath.slice(0, -1)
+	return shortPath;
+}
+
 ////////////////////////////////
 function DKBuild_ValidateCmake()
 {
