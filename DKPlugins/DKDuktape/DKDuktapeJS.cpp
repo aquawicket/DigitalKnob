@@ -1057,15 +1057,17 @@ int DKDuktapeJS::StrokeKey(duk_context* ctx)
 	return 1;
 }
 
-//////////////////////////////////
+/////////////////////////////////////////
 int DKDuktapeJS::System(duk_context* ctx)
 {
 	DKString command = duk_require_string(ctx, 0);
-	if(!DKUtil::System(command)){ return 0; }
+	DKString out;
+	if(!DKUtil::System(command, out)){ return 0; }
+	duk_push_string(ctx, out.c_str());
 	return 1;
 }
 
-//////////////////////////////////////////
+/////////////////////////////////////////////////
 int DKDuktapeJS::TurnOffMonitor(duk_context* ctx)
 {
 	if(!DKUtil::TurnOffMonitor()){ return 0; }

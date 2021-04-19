@@ -991,13 +991,15 @@ bool DKUtil::StrokeKey(const int& key)
 	return false;
 }
 
-////////////////////////////////////////////
-bool DKUtil::System(const DKString& command)
+///////////////////////////////////////////////////////////
+bool DKUtil::System(const DKString& command, DKString& out)
 {
 	DKDEBUGFUNC(command);
 #if !defined(IOS)
-	int rval = system(command.c_str());
-	//DKINFO("DKUtil::System(): returned "+toString(rval)+"\n");
+	int ret = system(command.c_str());
+	std::stringstream buffer;
+	buffer << ret;
+	out = buffer.str();
 	return true;
 #endif
 	return false;

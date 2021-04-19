@@ -21,7 +21,8 @@ bool DKConsole::Init()
 int DKConsole::clear(duk_context* ctx)
 {
 	//FIXME - make this work on all OS's
-	if(!DKUtil::System("cls")){ return 0; }
+	DKString out;
+	if(!DKUtil::System("cls", out)){ return 0; }
 	return 1;
 }
 

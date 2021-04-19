@@ -75,7 +75,7 @@ public:
 	static bool SetVolume(int& percent);
 	static bool Sleep(const int& milliseconds);
 	static bool StrokeKey(const int& key);
-	static bool System(const DKString& command);
+	static bool System(const DKString& command, DKString& ret);
 	static bool TurnOffMonitor();
 	static bool TurnOnMonitor();
 	static bool UpdateFps();
