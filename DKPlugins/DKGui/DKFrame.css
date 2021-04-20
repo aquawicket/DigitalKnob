@@ -1,0 +1,16 @@
+[target="frame"] {
+  /*font-color: #fcfbfb;*/
+  color:#373434;
+  background-color: #64648c;
+}
+
+[target="titlebar"] {
+  font-color: #fcfbfb;
+  color: blue;
+  background-color: #030105;
+}
+
+[target="titlebartext"] {
+  color: #2e29a7
+  background-color: #3a0a0a;
+}

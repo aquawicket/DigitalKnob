@@ -136,15 +136,16 @@ dk.frame.createFrame = function dk_frame_createFrame(title, width, height) {
     frame = dk.frame.setCurrentFrame(frame);
     if (!frame)
         return false;
-
+    frame.target = "titlebar";
+    frame.setAttribute("target","frame");
     frame.style.position = "absolute";
     frame.style.overflow = "hidden";
     frame.style.top = newtop + "px";
     frame.style.left = newleft + "px";
     frame.style.width = width + "rem";
     frame.style.height = newheight + "rem";
-    frame.style.backgroundColor = "rgb(150,150,150)";
-    frame.style.borderColor = "rgb(0,0,0)";
+    //frame.style.backgroundColor = "rgb(150,150,150)";
+    //frame.style.borderColor = "rgb(0,0,0)";
     (dk.getBrowser() !== "RML") && (frame.style.borderStyle = "solid");
     frame.style.borderWidth = "1rem";
     frame.style.minWidth = "62rem";
@@ -154,16 +155,18 @@ dk.frame.createFrame = function dk_frame_createFrame(title, width, height) {
     }
 
     frame.titlebar = dk.gui.createElement(frame, "div", "dk_frame_titlebar");
+    frame.titlebar.setAttribute("target","titlebar");
     frame.titlebar.style.position = "absolute";
     frame.titlebar.style.width = "100%";
     frame.titlebar.style.height = "21rem";
-    frame.titlebar.style.backgroundColor = "rgb(200,200,200)";
+    //frame.titlebar.style.backgroundColor = "rgb(200,200,200)";
     frame.titlebar.ondblclick = function dk_frame_titlebar_ondblclick(event) {
         dk.frame.maximize(event.currentTarget);
     }
     dk.drag.addDragHandle(frame.titlebar, frame);
 
     frame.titlebar.text = dk.gui.createElement(frame.titlebar, "div", "dk_frame_titlebartext");
+    frame.titlebar.setAttribute("target","titlebartext");
     frame.titlebar.text.style.position = "absolute";
     frame.titlebar.text.style.width = "100%";
     frame.titlebar.text.style.height = "100%";
@@ -171,7 +174,7 @@ dk.frame.createFrame = function dk_frame_createFrame(title, width, height) {
     frame.titlebar.text.style.paddingLeft = "4rem";
     frame.titlebar.text.style.fontSize = "15rem";
     frame.titlebar.text.style.fontWeight = "bold";
-    frame.titlebar.text.style.color = "rgb(25,25,25)";
+    //frame.titlebar.text.style.color = "rgb(25,25,25)";
     frame.titlebar.text.style.cursor = "default";
     frame.titlebar.text.innerHTML = title;
 
@@ -231,16 +234,63 @@ dk.frame.createResize = function dk_frame_createResize(frame) {
     frame.resizeImage.style.width = "18rem";
     frame.resizeImage.style.height = "18rem";
 
-    frame.resize = dk.gui.createElement(frame, "div", "dk_frame_resize");
-    frame.resize.style.removeProperty("top");
-    frame.resize.style.position = "absolute";
-    frame.resize.style.right = "0rem";
-    frame.resize.style.bottom = "0rem";
-    frame.resize.style.width = "18rem";
-    frame.resize.style.height = "18rem";
-    frame.resize.style.cursor = "nw-resize";
+    frame.resizeCorner = dk.gui.createElement(frame, "div", "dk_frame_resize_corner");
+    frame.resizeCorner.style.removeProperty("top");
+    frame.resizeCorner.style.position = "absolute";
+    frame.resizeCorner.style.right = "0rem";
+    frame.resizeCorner.style.bottom = "0rem";
+    frame.resizeCorner.style.width = "16rem";
+    frame.resizeCorner.style.height = "16rem";
+    frame.resizeCorner.style.cursor = "nw-resize";
+    dk.drag.addResizeHandle(frame.resizeCorner, frame);
+
+    /*
+    //FIXME: Top and Left require simultaneous reposisioning and sizing 
+    frame.resizeTop = dk.gui.createElement(frame, "div", "dk_frame_resize_top");
+    frame.resizeTop.style.removeProperty("bottom");
+    frame.resizeTop.style.removeProperty("width");
+    frame.resizeTop.style.position = "absolute";
+    frame.resizeTop.style.top = "0rem";
+    frame.resizeTop.style.left = "0rem";
+    frame.resizeTop.style.right = "0rem";
+    frame.resizeTop.style.height = "3rem";
+    frame.resizeTop.style.cursor = "n-resize";
+    dk.drag.addResizeHandle(frame.resizeTop, frame);
+
+    frame.resizeLeft = dk.gui.createElement(frame, "div", "dk_frame_resize_left");
+    frame.resizeLeft.style.removeProperty("right");
+    frame.resizeLeft.style.removeProperty("height");
+    frame.resizeLeft.style.position = "absolute";
+    frame.resizeLeft.style.top = "0rem";
+    frame.resizeLeft.style.bottom = "0rem";
+    frame.resizeLeft.style.left = "0rem";
+    frame.resizeLeft.style.width = "3rem";
+    frame.resizeLeft.style.cursor = "e-resize";
+    dk.drag.addResizeHandle(frame.resizeLeft, frame);
+    */
+
+    frame.resizeRight = dk.gui.createElement(frame, "div", "dk_frame_resize_right");
+    frame.resizeRight.style.removeProperty("left");
+    frame.resizeRight.style.removeProperty("height");
+    frame.resizeRight.style.position = "absolute";
+    frame.resizeRight.style.top = "0rem";
+    frame.resizeRight.style.bottom = "16rem";
+    frame.resizeRight.style.right = "0rem";
+    frame.resizeRight.style.width = "3rem";
+    frame.resizeRight.style.cursor = "e-resize";
+    dk.drag.addResizeHandle(frame.resizeRight, frame);
     
-    dk.drag.addResizeHandle(frame.resize, frame);
+    frame.resizeBottom = dk.gui.createElement(frame, "div", "dk_frame_resize_bottom");
+    frame.resizeBottom.style.removeProperty("top");
+    frame.resizeBottom.style.removeProperty("width");
+    frame.resizeBottom.style.position = "absolute";
+    frame.resizeBottom.style.bottom = "0rem";
+    frame.resizeBottom.style.left = "0rem";
+    frame.resizeBottom.style.right = "16rem";
+    frame.resizeBottom.style.height = "3rem";
+    frame.resizeBottom.style.cursor = "n-resize";
+    dk.drag.addResizeHandle(frame.resizeBottom, frame);
+
     return frame.resize;
 }
 
