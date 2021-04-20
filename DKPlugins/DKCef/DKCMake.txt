@@ -189,7 +189,7 @@ IF(RASPBERRY_64)
 		DKCOPY(${CEF}/Resources ${DKPROJECT}/assets/DKCef TRUE)
 		DKCOPY(${CEF}/Debug ${DKPROJECT}/raspberry64/Debug TRUE)
 		DKCOPY(${CEF}/Resources/icudtl.dat ${DKPROJECT}/raspberry64/Debug TRUE)
-	ENDIF(
+	ENDIF()
 	IF(RELEASE)
 		DKCOPY(${CEF}/Release ${DKPROJECT}/assets/DKCef TRUE)
 		DKCOPY(${CEF}/Resources/icudtl.dat ${DKPROJECT}/assets/DKCef TRUE)
