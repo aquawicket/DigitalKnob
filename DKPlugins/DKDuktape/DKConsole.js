@@ -27,7 +27,7 @@ var Console = function(pointer)
 		CPP_DKConsole_error("console.trace() not implemented\n");
 	}
 	Console.prototype.warn = function(msg){
-			CPP_DKConsole_warn(msg+"\n");
+		CPP_DKConsole_warn(msg+"\n");
 	}
 }
 

@@ -289,7 +289,7 @@ dk.debug.onevent = function dk_debug_onevent(event) {
     }
 
     if (event.type === "keydown" && event.code === "F12") {
-        if (dk.hasCPP) {
+        if (dk.hasCPP()) {
             if (typeof dkcef.showDevTools === 'function') {
                 dkcef.showDevTools(0);
             }

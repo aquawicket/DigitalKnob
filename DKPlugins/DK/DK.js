@@ -8,10 +8,10 @@ window.dk = new Object;
 dk.init = function dk_init() {
     eval("var __temp = null");
     const use_strict = (typeof __temp === "undefined");
-    console.log("*** DigitalKnob ***");
-    console.log("use_strict is set to: " + use_strict);
-    console.log("Browser = " + dk.getBrowser());
-    console.log("JSEngine = " + dk.getJSEngine());
+    console.debug("*** DigitalKnob ***");
+    console.debug("use_strict is set to: " + use_strict);
+    console.debug("Browser = " + dk.getBrowser());
+    console.debug("JSEngine = " + dk.getJSEngine());
 
     /*
     var LOG_DEBUG = false;
@@ -31,7 +31,7 @@ dk.init = function dk_init() {
     var DK_SHOW = 5;
     var DK_HIDE = 6;
     //var events = [];
-*/
+    */
 }
 
 var byId = function(id) {
@@ -785,7 +785,7 @@ dk.clearSelection = function dk_clearSelection() {
 dk.getElements = function dk_getElements(element) {
     var string;
     //var nodes = byId(id).getElementsByTagName('*'); //all children recursively
-    if (!element || element.childNodes) 
+    if (!element || element.childNodes)
         return error("element invalid");
     var nodes = element.childNodes;
     for (var n = 0; n < nodes.length; n++) {
@@ -1110,7 +1110,6 @@ dk.ajaxGetUrl = function dk_ajaxGetUrl(url) {
 
 //return response.value;
 //}
-
 
 //https://developer.mozilla.org/en-US/docs/Web/HTTP
 //https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers

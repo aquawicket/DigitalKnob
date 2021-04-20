@@ -105,7 +105,7 @@ dk.gui.createButton = function dk_gui_createButton(parent, id, top, bottom, left
     return button;
 }
 
-dk.gui.createImageButton = function dk_gui_ceateImageButton(parent, id, src, top, bottom, left, right, width, height, onclick) {
+dk.gui.createImageButton = function dk_gui_createImageButton(parent, id, src, top, bottom, left, right, width, height, onclick) {
     const button = document.createElement("img");
     button.id = id;
     button.src = src;

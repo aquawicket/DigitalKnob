@@ -38,6 +38,29 @@ dk.frame.iFrame = function dk_frame_Iframe(title, url, width, height) {
     return iframe;
 }
 */
+dk.frame.createNewWindow = function dk_frame_createNewWindow(title, width, height){
+    const div = document.createElement("div");
+    div.id = title;
+    //div.style.position = "absolute";
+    div.style.width = width;
+    div.style.height = height;
+    div.style.overflow = "auto";
+    //div.style.fontSize = "12rem";
+    //div.style.fontFamily = "Consolas, Lucinda, Console, Courier New, monospace";
+    //div.style.whiteSpace = "pre-wrap";
+    //div.style.boxSizing = "border-box";
+    //div.style.padding = "2rem";
+    //div.style.paddingLeft = "20rem";
+    //div.style.borderStyle = "solid";
+    //div.style.borderWidth = "1rem";
+    //div.style.borderTopWidth = "0rem";
+    //div.style.borderLeftWidth = "0rem";
+    //div.style.borderRightWidth = "0rem";
+    //div.style.backgroundColor = "rgb(36,36,36)";
+    //document.body.appendChild(div);
+    dk.frame.create(div);
+    return div;
+}
 
 dk.frame.bringToFront = function dk_frame_bringToFront(frame) {
     frame = dk.frame.setCurrentFrame(frame);

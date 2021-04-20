@@ -18,23 +18,9 @@ dk.php.getTime = function dk_php_getTime(callback) {
     dk.php.callPhpFunc(arguments);
 }
 
-dk.php.stringToFile = function dk_php_stringToFile(file, data, mode, callback) {
-    dk.php.callPhpFunc(arguments);
-}
-
-dk.php.fileToString = function dk_php_fileToString(file, data, callback) {
-    dk.php.callPhpFunc(arguments);
-}
-
-dk.php.pushDKAssets = function dk_php_pushDKAssets(callback) {
-    dk.php.callPhpFunc(arguments);
-}
-
-dk.php.getAssetsPath = function dk_php_getAssetsPath(callback) {
-    dk.php.callPhpFunc(arguments);
-}
 //dk.php.noCB = function dk_php_noCB(rVal) {}
 
+/*
 dk.php.callPhpFunc = function dk_php_callPhpFunc(args) {
     //const args = arguments;
     let func = dk.trace.getCurrentFunctionName(1);
@@ -71,6 +57,7 @@ dk.php.callPhpFunc = function dk_php_callPhpFunc(args) {
         }
     }, "POST");
 }
+*/
 
 //dk.php.call("GET", "/DK/DK.php", "Function", "args", "args", callback);
 dk.php.call = function dk_php_call(httpMethod, phpPath, funcName) {

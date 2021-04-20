@@ -78,8 +78,8 @@ dk.menu.addItem = function dk_menu_addItem(menu, label, callback) {
     dkmenuItem.style.borderLeftWidth = "0rem";
     dkmenuItem.style.borderRightWidth = "0rem";
     dkmenuItem.onmousedown = function onmousedown_callback(event){
-        event.stopPropagation();
         callback && callback(event);
+        //event.stopPropagation();
     }
     menu.appendChild(dkmenuItem);
     dk.menu.validatePosition(menu);
