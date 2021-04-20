@@ -6,9 +6,18 @@ dk.debug = new Object;
 ///  A Convienient Debug Function
 ///////////////////////////////////
 dk.debug.debugFunc = function dk_debug_debugFunc() {
-    console.log("dk.debug.debugFunc");
+    //console.log("dk.debug.debugFunc");
 
-    dk.php.call('GET', "/DKFile/DKFile.php", "DirectoryContents", ".", console.log);
+    //Test if a url exists. Can use straight ajax,"thows console error if url does not exist", or php.
+    const usePhp = 0;
+    dk.file.urlExists(".", function dk_file_urlExists_callback(rval){
+        if(rval)
+            console.log("path exists");
+        else
+            console.log("path does not exist");
+    }, usePhp);
+
+    //dk.php.call('GET', "/DKFile/DKFile.php", "DirectoryContents", ".", console.log);
 
     /*
     let address = "aquawicket@hotmail.com";

@@ -33,50 +33,44 @@ dk.file.init = function dk_file_init() {
     dk.file.appFilename = "";
     dk.file.localAssets = "";
     dk.file.onlineAssets = "";
-    dk.php.call("GET", "/DKFile/DKFile.php", "getAssetsPath", function(data) {
-        dk.file.onlineAssets = data;
-        console.debug("discovered onlineAssets");
+    dk.php.call("GET", "/DKFile/DKFile.php", "getAssetsPath", function dk_php_getAssetsPath_callback(rval) {
+        rval && (dk.file.onlineAssets = rval);
+        // && console.debug("dk.file.onlineAssets = " + rval);
     });
 }
 
-dk.file.urlExists = function dk_file_urlExists(url, callback) {
-    var request = "";
-    try {
-        request = new XMLHttpRequest();
-    } catch (e) {}
-    try {
-        request = new ActiveXObject("Msxml3.XMLHTTP");
-    } catch (e) {}
-    try {
-        request = new ActiveXObject("Msxml2.XMLHTTP.6.0");
-    } catch (e) {}
-    try {
-        request = new ActiveXObject("Msxml2.XMLHTTP.3.0");
-    } catch (e) {}
-    try {
-        request = new ActiveXObject("Msxml2.XMLHTTP");
-    } catch (e) {}
-    try {
-        request = new ActiveXObject("Microsoft.XMLHTTP");
-    } catch (e) {}
-    if (!request) {
-        return error("AJAX ERROR: Error creating request object");
-    }
-    request.onreadystatechange = function onreadystatechange_callback() {
-        if (request.readyState == 4) {
-            if (request.status == 200 || request.status == 0) {
-                console.warn(url + " status: " + request.status);
-                callback && callback(true);
-                return true;
-            } else {
-                console.warn("AJAX ERROR: " + request.statusText);
-                console.warn(url + " status: " + request.status);
+dk.file.pushDKAssets = function dk_file_pushDKAssets() {
+    dk.php.call("POST", "/DKFile/DKFile.php", "pushDKAssets", function dk_php_pushDKAssets_callback(rval) {
+        rval && console.log(rval) && console.log("done copying assets");
+    });
+}
+
+dk.file.urlExists = function dk_file_urlExists(url, callback, usePhp) {
+    if (!usePhp) {
+        dk.sendRequest(url, function dk_sendRequest_callback(success, url, rval) {
+            if (!callback)
+                return error("callback invalid");
+            if (success && url && rval && callback)
+                callback(true);
+            else if (!rval && callback)
                 callback && callback(false);
-            }
-        }
+            else
+                return error("unknown error");
+
+        }, "HEAD");
+    } else {
+        dk.php.call("POST", "/DKFile/DKFile.php", "urlExists", function dk_php_urlExists_callback(rval) {
+            if (!callback)
+                return error("callback invalid");
+            if (rval == "1" && callback)
+                callback(true);
+            else if (!rval && callback)
+                callback && callback(false);
+            else
+                //PHPERROR: output to console
+                return error(rval);
+        });
     }
-    request.open("HEAD", url);
-    request.send();
 }
 
 if (!dk.hasCPP()) {
@@ -202,11 +196,11 @@ if (!dk.hasCPP()) {
                 return "";
             if (param.indexOf("[") !== -1 && param.indexOf("]") !== -1) {
                 var begin = str.indexOf(param);
-                if (begin === -1) 
+                if (begin === -1)
                     return "";
                 var start = str.indexOf("]", begin);
                 var end = str.indexOf("[", start);
-                if (end === -1) 
+                if (end === -1)
                     end = str.length;
                 var out = str.substr(start + 1, end - start - 1);
                 replace(out, "\r", "");
@@ -304,7 +298,7 @@ dk.file.fileToString = function dk_file_fileToString(url) {
 if (!dk.hasCPP()) {
     dk.file.stringToFile = function dk_file_stringToFile(data, path) {
         if (typeof absolutepath !== "undefined") {
-            if (!path.includes(absolutepath)) 
+            if (!path.includes(absolutepath))
                 path = absolutepath + path;
         }
 

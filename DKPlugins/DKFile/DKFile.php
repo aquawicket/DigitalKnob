@@ -2,6 +2,17 @@
 header('Access-Control-Allow-Origin: *');
 include("../DK/DK.php");
 
+function urlExists($path){
+	if(file_exists($path)){
+        return 1;
+	}
+	return 0;
+	/*
+	$file_headers = @get_headers($path);
+	return $file_headers[0] ?? 0;
+	*/
+}
+
 function getAssetsPath(){
     $assetsPath = dirname(__DIR__);
     if(basename($assetsPath) != "assets"){
@@ -106,17 +117,6 @@ function GetServerInfo($param){
 	if(isset($_SERVER[$param])){
 	    echo "$"."_SERVER[".$param."] = ".$_SERVER[$param];
 	}
-}
-
-function PathExists($path){
-	if(file_exists($path)){
-        return 1;
-	}
-	return 0;
-	/*
-	$file_headers = @get_headers($path);
-	return $file_headers[0] ?? 0;
-	*/
 }
 
 function Upload($src, $dest){

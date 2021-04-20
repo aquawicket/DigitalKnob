@@ -1174,15 +1174,14 @@ dk.sendRequest = function dk_sendRequest(url, dk_sendRequest_callback, httpMetho
     //Possible error codes
     //https://github.com/richardwilkes/cef/blob/master/cef/enums_gen.go
     xhr.onabort = function(event) {
-        //console.log("XMLHttpRequest.onreadystatechange(" + event + ")");
-        dk_sendRequest_callback(false, url, event.type);
+        //dk_sendRequest_callback(false, url, event.type);
         //console.error("GET <a href=' " + url + " ' target='_blank' style='color:rgb(213,213,213)'>" + url + "</a> onabort");
-        return warn("xhr.abort");
+        return warn("XMLHttpRequest.onabort");
     }
     xhr.onerror = function(event) {
+        //dk_sendRequest_callback(false, url, event.type);
         //console.error("GET <a href=' " + url + " ' target='_blank' style='color:rgb(213,213,213)'>" + url + "</a> onerror");
-        dk_sendRequest_callback(false, url, event.type);
-        return warn("xhr.error");
+        return warn("XMLHttpRequest.onerror");
     }
     xhr.onload = function(event) {//console.log("XMLHttpRequest.onload(" + event + ")");
     }
@@ -1201,15 +1200,14 @@ dk.sendRequest = function dk_sendRequest(url, dk_sendRequest_callback, httpMetho
             } else {
                 //console.error("GET <a href=' " + url + " ' target='_blank' style='color:rgb(213,213,213)'>" + url + "</a> onreadystatechange");
                 dk_sendRequest_callback(false, url, xhr.responseText);
-                return error(xhr.responseText);
+                return warn("XMLHttpRequest.onreadystatechange: "+xhr.responseText);
             }
         }
     }
     xhr.ontimeout = function(event) {
-        dk_sendRequest_callback(false, url, event.type);
+        //dk_sendRequest_callback(false, url, event.type);
         //console.error("GET <a href=' " + url + " ' target='_blank' style='color:rgb(213,213,213)'>" + url + "</a> net::ERR_CONNECTION_TIMED_OUT");
-        //console.error("timeout");
-        return false;
+        return warn("XMLHttpRequest.ontimeout");
     }
 
     xhr.send();
