@@ -268,7 +268,7 @@ bool DKDuktape::DumpError(const DKString& code)
 		if(same(lineNumber, toString(currentLine))) {
 			lineString = line;
 		}
-		std::cout << line << std::endl;
+		//std::cout << line << std::endl;
 		codeWithLineNumbers += toString(currentLine)+"  "+line+"\n";
 		currentLine++;
 	}
@@ -340,10 +340,12 @@ bool DKDuktape::LoadJSString(const DKString& url, const DKString& string)
 	if(string.empty()){ return false; }
 	//if(FileLoaded(url)){ return false; } //prevent url from loading twice
 
+	/*
 	if(has(string,"//BROWSER")){
 		DKINFO("Ignoring: "+url+" is a browser only file. \n");
 		return false;
 	}
+	*/
 
 	if(duk_peval_string(ctx, string.c_str()) != 0){
 		DKDuktape::DumpError(string);
