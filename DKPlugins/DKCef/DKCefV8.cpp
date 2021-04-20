@@ -562,7 +562,8 @@ bool DKCefV8::System(CefArgs args, CefReturn retval)
 {
 	DKDEBUGFUNC(args, retval);
 	DKString command = args->GetString(0);
-	return DKUtil::System(command);
+	DKString ret;
+	return DKUtil::System(command, ret);
 }
 
 ////////////////////////////////////////////////////////////
