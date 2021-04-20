@@ -42,7 +42,7 @@ bool DKDuktapeJS::Init()
 
 	DKDuktape::AttachFunction("CPP_DKDuktape_DKDEBUGFUNC", DKDuktapeJS::_DKDEBUGFUNC);
 	DKDuktape::AttachFunction("CPP_DKDuktape_DKDEBUGVARS", DKDuktapeJS::_DKDEBUGVARS);
-	//DKDuktape::AttachFunction("DKAddEvent", DKDuktapeJS::_AddEvent);
+	DKDuktape::AttachFunction("CPP_DKDuktape_AddEvent", DKDuktapeJS::_AddEvent);
 	DKDuktape::AttachFunction("CPP_DKDuktape_Available", DKDuktapeJS::_Available);
 	DKDuktape::AttachFunction("CPP_DKDuktape_Close", DKDuktapeJS::_Close);
 	DKDuktape::AttachFunction("CPP_DKDuktape_Create", DKDuktapeJS::_Create);
@@ -75,7 +75,7 @@ bool DKDuktapeJS::Init()
 	DKDuktape::AttachFunction("CPP_DKDuktape_GetFramerate", DKDuktapeJS::GetFramerate);
 	DKDuktape::AttachFunction("CPP_DKDuktape_GetFrames", DKDuktapeJS::GetFrames);
 	DKDuktape::AttachFunction("CPP_DKDuktape_GetFunctions", DKDuktapeJS::GetFunctions);
-	//DKDuktape::AttachFunction("CPP_DKDuktape_GetId", DKDuktapeJS::GetId);
+	DKDuktape::AttachFunction("CPP_DKDuktape_GetId", DKDuktapeJS::GetId);
 	DKDuktape::AttachFunction("CPP_DKDuktape_GetJSEngine", DKDuktapeJS::GetJSEngine);
 	DKDuktape::AttachFunction("CPP_DKDuktape_GetKey", DKDuktapeJS::GetKey);
 	DKDuktape::AttachFunction("CPP_DKDuktape_GetLocalIP", DKDuktapeJS::GetLocalIP);
@@ -89,7 +89,7 @@ bool DKDuktapeJS::Init()
 	DKDuktape::AttachFunction("CPP_DKDuktape_GetScreenWidth", DKDuktapeJS::GetScreenWidth);
 	DKDuktape::AttachFunction("CPP_DKDuktape_GetTicks", DKDuktapeJS::GetTicks);
 	DKDuktape::AttachFunction("CPP_DKDuktape_GetTime", DKDuktapeJS::GetTime);
-	//DKDuktape::AttachFunction("CPP_DKDuktape_GetType", DKDuktapeJS::GetType);
+	DKDuktape::AttachFunction("CPP_DKDuktape_GetType", DKDuktapeJS::GetType);
 	DKDuktape::AttachFunction("CPP_DKDuktape_GetUsername", DKDuktapeJS::GetUsername);
 	DKDuktape::AttachFunction("CPP_DKDuktape_GetValue", DKDuktapeJS::GetValue);
 	DKDuktape::AttachFunction("CPP_DKDuktape_GetVolume", DKDuktapeJS::GetVolume);
