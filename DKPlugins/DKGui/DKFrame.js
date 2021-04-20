@@ -136,7 +136,7 @@ dk.frame.createFrame = function dk_frame_createFrame(title, width, height) {
     frame = dk.frame.setCurrentFrame(frame);
     if (!frame)
         return false;
-    frame.target = "titlebar";
+    frame.target = "frame";
     frame.setAttribute("target","frame");
     frame.style.position = "absolute";
     frame.style.overflow = "hidden";
@@ -155,7 +155,9 @@ dk.frame.createFrame = function dk_frame_createFrame(title, width, height) {
     }
 
     frame.titlebar = dk.gui.createElement(frame, "div", "dk_frame_titlebar");
+    frame.titlebar.target = "titlebar";
     frame.titlebar.setAttribute("target","titlebar");
+    
     frame.titlebar.style.position = "absolute";
     frame.titlebar.style.width = "100%";
     frame.titlebar.style.height = "21rem";
@@ -166,7 +168,9 @@ dk.frame.createFrame = function dk_frame_createFrame(title, width, height) {
     dk.drag.addDragHandle(frame.titlebar, frame);
 
     frame.titlebar.text = dk.gui.createElement(frame.titlebar, "div", "dk_frame_titlebartext");
-    frame.titlebar.setAttribute("target","titlebartext");
+    frame.titlebar.text.target = "titlebartext";
+    frame.titlebar.text.setAttribute("target","titlebartext");
+    
     frame.titlebar.text.style.position = "absolute";
     frame.titlebar.text.style.width = "100%";
     frame.titlebar.text.style.height = "100%";
