@@ -3,7 +3,7 @@ var working = true;
 //////////////////////////////
 function DKBuildConsole_Init()
 {
-	CPP_DKDuktape_Create("DKBuild/DKBuild.js");
+	CPP_DK_Create("DKBuild/DKBuild.js");
 	DKBuild_ValidateCmake();
 	//DKBuild_ValidateVC2015();
 	DKBuild_ValidateVC2019();
@@ -18,7 +18,7 @@ function DKBuildConsole_Init()
 /////////////////////////////
 function DKBuildConsole_End()
 {
-	CPP_DKDuktape_Close("DKBuild/DKBuild.js");
+	CPP_DK_Close("DKBuild/DKBuild.js");
 }
 
 //////////////////////////////////////
@@ -36,20 +36,20 @@ function DKBuildConsole_ChooseUpdate()
 	
 	var key = 10;
 	while(key === 10){ //unix fix
-		key = CPP_DKDuktape_GetKey();
+		key = CPP_DK_GetKey();
 	}
 	
 	//console.log("Key pressed: "+String(key)+"");
 	
 	if(key === 27){ //Esc key
-		CPP_DKDuktape_Exit();
+		CPP_DK_Exit();
 	}
 	if(key === 121){ //y key
-		CPP_DKDuktape_Create("DKGit/DKGit.js");
+		CPP_DK_Create("DKGit/DKGit.js");
 		DKGit_GitUpdate();
 	}
 	if(key === 99){ //c key
-		CPP_DKDuktape_Create("DKGit/DKGit.js");
+		CPP_DK_Create("DKGit/DKGit.js");
 		DKGit_GitCommit();
 	}
 	if(key === 114){ //r key
@@ -87,11 +87,11 @@ function DKBuildConsole_SelectOs()
 
 	var key = 10;
 	while(key === 10){ //unix fix
-		key = CPP_DKDuktape_GetKey();
+		key = CPP_DK_GetKey();
 	}
 	//console.log("Key pressed: "+String(key)+"");
 	if(key === 27){
-		CPP_DKDuktape_Exit();
+		CPP_DK_Exit();
 	}
 	if(key === 49){
 		OS = "win32";
@@ -152,11 +152,11 @@ function DKBuildConsole_SelectApp()
 	
 	var key = 10;
 	while(key === 10){ //unix fix
-		key = CPP_DKDuktape_GetKey();
+		key = CPP_DK_GetKey();
 	}
 	//console.log("Key pressed: "+String(key)+"");
 	if(key === 27){
-		CPP_DKDuktape_Exit();
+		CPP_DK_Exit();
 	}
 	
 	DKBuildConsole_KeyToApp(key);
@@ -178,11 +178,11 @@ function DKBuildConsole_SelectType()
 	
 	var key = 10;
 	while(key === 10){ //unix fix
-		key = CPP_DKDuktape_GetKey();
+		key = CPP_DK_GetKey();
 	}
 	//console.log("Key pressed: "+String(key)+"");
 	if(key === 27){
-		CPP_DKDuktape_Exit();
+		CPP_DK_Exit();
 	}
 	if(key === 49){
 		TYPE = "Debug";
@@ -210,8 +210,8 @@ function DKBuildConsole_Process()
 	
 	if(!CPP_DKFile_Exists(DKPATH+"/DK/DKPlugins")){
 		console.error("ERROR: can't find "+DKPATH+" ");
-		CPP_DKDuktape_GetKey();
-		CPP_DKDuktape_Exit();
+		CPP_DK_GetKey();
+		CPP_DK_Exit();
 	}
 	
 	while(OS === ""){
@@ -237,7 +237,7 @@ function DKBuildConsole_Process()
 	console.log("###########################");
 
 	console.log("Press any key to Build");
-	CPP_DKDuktape_GetKey();
+	CPP_DK_GetKey();
 	
 	DKBuild_DoResults();
 }

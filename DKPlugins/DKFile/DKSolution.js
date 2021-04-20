@@ -102,8 +102,8 @@ dk.solution.openFile = function dk_solution_openFile(path) {
     if (DK_GetOS() !== "Android") {
         aPath = DKFile_GetAbsolutePath(path);
     }
-    if (!CPP_DKDuktape_Run(aPath, ""))
-        return error("CPP_DKDuktape_Run() failed");
+    if (!CPP_DK_Run(aPath, ""))
+        return error("CPP_DK_Run() failed");
     return true;
 }
 

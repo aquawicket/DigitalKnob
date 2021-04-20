@@ -50,7 +50,7 @@ function SendBugReport_SendReport()
 	byId("SendBugReport_Image").style.visibility = "visible";
 	byId("SendBugReport_Sending").style.display = "block";
 	byId("SendBugReport_Sending").style.visibility = "visible";
-	CPP_DKDuktape_DoFrame();
+	CPP_DK_DoFrame();
 	
 	var num = Math.floor((Math.random() * 99999999) + 1);
 	CPP_DKDebug_SendBugReport(num.toString());

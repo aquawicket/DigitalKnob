@@ -556,7 +556,7 @@ dk.debug.getSource = function dk_debug_getSource() {
 }
 
 dk.debug.crashCPP = function dk_debug_crashCPP() {
-    CPP_DKDuktape_Crash();
+    CPP_DK_Crash();
 }
 
 dk.debug.crashJS = function dk_debug_crashJS() {

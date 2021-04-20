@@ -11,23 +11,23 @@ bool DKScreen::Init()
 	DKDEBUGFUNC();
 
 	//Properties
-	DKDuktape::AttachFunction("CPP_DKDuktape_DKScreen_availTop", DKScreen::availTop);
-	DKDuktape::AttachFunction("CPP_DKDuktape_DKScreen_availLeft", DKScreen::availLeft);
-	DKDuktape::AttachFunction("CPP_DKDuktape_DKScreen_availHeight", DKScreen::availHeight);
-	DKDuktape::AttachFunction("CPP_DKDuktape_DKScreen_availWidth", DKScreen::availWidth);
-	DKDuktape::AttachFunction("CPP_DKDuktape_DKScreen_colorDepth", DKScreen::colorDepth);
-	DKDuktape::AttachFunction("CPP_DKDuktape_DKScreen_height", DKScreen::height);
-	DKDuktape::AttachFunction("CPP_DKDuktape_DKScreen_left", DKScreen::left);
-	DKDuktape::AttachFunction("CPP_DKDuktape_DKScreen_orientation", DKScreen::orientation);
-	DKDuktape::AttachFunction("CPP_DKDuktape_DKScreen_pixelDepth", DKScreen::pixelDepth);
-	DKDuktape::AttachFunction("CPP_DKDuktape_DKScreen_top", DKScreen::top);
-	DKDuktape::AttachFunction("CPP_DKDuktape_DKScreen_width", DKScreen::width);
-	DKDuktape::AttachFunction("CPP_DKDuktape_DKScreen_mozEnabled", DKScreen::mozEnabled);
-	DKDuktape::AttachFunction("CPP_DKDuktape_DKScreen_mozBrightness", DKScreen::mozBrightness);
+	DKDuktape::AttachFunction("CPP_DKScreen_availTop", DKScreen::availTop);
+	DKDuktape::AttachFunction("CPP_DKScreen_availLeft", DKScreen::availLeft);
+	DKDuktape::AttachFunction("CPP_DKScreen_availHeight", DKScreen::availHeight);
+	DKDuktape::AttachFunction("CPP_DKScreen_availWidth", DKScreen::availWidth);
+	DKDuktape::AttachFunction("CPP_DKScreen_colorDepth", DKScreen::colorDepth);
+	DKDuktape::AttachFunction("CPP_DKScreen_height", DKScreen::height);
+	DKDuktape::AttachFunction("CPP_DKScreen_left", DKScreen::left);
+	DKDuktape::AttachFunction("CPP_DKScreen_orientation", DKScreen::orientation);
+	DKDuktape::AttachFunction("CPP_DKScreen_pixelDepth", DKScreen::pixelDepth);
+	DKDuktape::AttachFunction("CPP_DKScreen_top", DKScreen::top);
+	DKDuktape::AttachFunction("CPP_DKScreen_width", DKScreen::width);
+	DKDuktape::AttachFunction("CPP_DKScreen_mozEnabled", DKScreen::mozEnabled);
+	DKDuktape::AttachFunction("CPP_DKScreen_mozBrightness", DKScreen::mozBrightness);
 
 	//Methods
-	DKDuktape::AttachFunction("CPP_DKDuktape_DKScreen_lockOrientation", DKScreen::lockOrientation);
-	DKDuktape::AttachFunction("CPP_DKDuktape_DKScreen_unlockOrientations", DKScreen::unlockOrientation);
+	DKDuktape::AttachFunction("CPP_DKScreen_lockOrientation", DKScreen::lockOrientation);
+	DKDuktape::AttachFunction("CPP_DKScreen_unlockOrientations", DKScreen::unlockOrientation);
 
 	DKClass::DKCreate("/DKDuktape/DKScreen.js");
 	return true;

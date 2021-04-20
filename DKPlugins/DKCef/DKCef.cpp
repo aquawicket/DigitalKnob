@@ -809,7 +809,7 @@ bool DKCef::SendEvent(const DKString& id, const DKString& type, const DKString& 
 		return false;
 	}
 	//DKString string = "DKSendEvent(\""+id+"\",\""+type+"\",\""+value+"\");";
-	DKString string = "CPP_DKDuktape_SendEvent(\""+id+"\",\""+type+"\",\""+value+"\");";
+	DKString string = "CPP_DK_SendEvent(\""+id+"\",\""+type+"\",\""+value+"\");";
 	frame->ExecuteJavaScript(string.c_str(), frame->GetURL(), 0);
 
 	/*

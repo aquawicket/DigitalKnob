@@ -82,7 +82,7 @@ var Navigator = function(pointer)
 	});
 	Object.defineProperty(this, "platform",{ //Read only
 		configurable: true,
-		get: function(){ return CPP_DKDuktape_DKNavigator_platform(); } 
+		get: function(){ return CPP_DKNavigatorplatform(); } 
 	});
 	Object.defineProperty(this, "plugins",{ //Read only
 		configurable: true,

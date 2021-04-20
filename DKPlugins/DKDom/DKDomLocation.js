@@ -45,7 +45,7 @@ var Location = function(pointer)
 		CPP_DKDomLocation_href(url); 
 	}
 	Location.prototype.reload = function(forcedReload){
-		CPP_DKDuktape_Reload();
+		CPP_DK_Reload();
 		//CPP_DKDomLocation_reload(forcedReload); 
 	}
 	Location.prototype.replace = function(url){

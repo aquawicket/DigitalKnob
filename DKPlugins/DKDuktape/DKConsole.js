@@ -5,29 +5,29 @@ var Console = function(pointer)
 {	
 	Console.prototype.assert = function(assertion, msg){
 		if(assertion){ return; }
-		CPP_DKDuktape_DKConsole_error(msg+"\n");
+		CPP_DKConsole_error(msg+"\n");
 	}
 	Console.prototype.clear = function(){
-		CPP_DKDuktape_DKConsole_clear();
+		CPP_DKConsole_clear();
 	}
 	Console.prototype.debug = function(msg){
-		CPP_DKDuktape_DKConsole_debug(msg+"\n");
+		CPP_DKConsole_debug(msg+"\n");
 	}
 	Console.prototype.error = function(msg){
-		CPP_DKDuktape_DKConsole_error(msg+"\n");
+		CPP_DKConsole_error(msg+"\n");
 	}
 	Console.prototype.exception = Console.prototype.error; //Deprecated
 	Console.prototype.info = function(msg){
-		CPP_DKDuktape_DKConsole_info(msg+"\n");
+		CPP_DKConsole_info(msg+"\n");
 	}
 	Console.prototype.log = function(msg){
-		CPP_DKDuktape_DKConsole_info(msg+"\n");
+		CPP_DKConsole_info(msg+"\n");
 	}
 	Console.prototype.trace = function(){
-		CPP_DKDuktape_DKConsole_error("console.trace() not implemented\n");
+		CPP_DKConsole_error("console.trace() not implemented\n");
 	}
 	Console.prototype.warn = function(msg){
-			CPP_DKDuktape_DKConsole_warn(msg+"\n");
+			CPP_DKConsole_warn(msg+"\n");
 	}
 }
 

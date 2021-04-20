@@ -2,7 +2,7 @@
 function DKThreadPoolDlg_Init()
 {
 	DK_Create("DKThreadPool");
-	//if(!CPP_DKDuktape_Valid("DKWidgetJS,DKWidgetJS0")){ return; }  //FIXME: This was here for a reason.
+	//if(!CPP_DK_Valid("DKWidgetJS,DKWidgetJS0")){ return; }  //FIXME: This was here for a reason.
 	DK_Create("DKThread/DKThreadPoolDlg.html"); 
 	byId("DKThread/DKThreadPoolDlg.html").addEventListener("Update", DKThreadPoolDlg_OnEvent);
 }
@@ -25,7 +25,7 @@ function DKThreadPoolDlg_OnEvent(event)
 ///////////////////////////////////
 function DKThreadPoolDlg_OnUpdate()
 {
-	if(!CPP_DKDuktape_Valid("DKWidgetJS,DKWidgetJS0")){ return; }
+	if(!CPP_DK_Valid("DKWidgetJS,DKWidgetJS0")){ return; }
 	console.log("Update DKThreadPool\n");
 	byId("DKThreadPoolDlg.html").innerHTML = "";
 
