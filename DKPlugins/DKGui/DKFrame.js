@@ -136,7 +136,7 @@ dk.frame.createFrame = function dk_frame_createFrame(title, width, height) {
     frame = dk.frame.setCurrentFrame(frame);
     if (!frame)
         return false;
-    frame.target = "frame";
+    //See DKFrame.css for styling    
     frame.setAttribute("target","frame");
     frame.style.position = "absolute";
     frame.style.overflow = "hidden";
@@ -144,41 +144,30 @@ dk.frame.createFrame = function dk_frame_createFrame(title, width, height) {
     frame.style.left = newleft + "px";
     frame.style.width = width + "rem";
     frame.style.height = newheight + "rem";
-    //frame.style.backgroundColor = "rgb(150,150,150)";
-    //frame.style.borderColor = "rgb(0,0,0)";
     (dk.getBrowser() !== "RML") && (frame.style.borderStyle = "solid");
-    frame.style.borderWidth = "1rem";
     frame.style.minWidth = "62rem";
     frame.style.minHeight = "30rem";
     frame.onmousedown = function dk_frame_frame_onmousedown(event) {
         dk.frame.bringToFront(event.currentTarget);
     }
 
+    //See DKFrame.css for styling
     frame.titlebar = dk.gui.createElement(frame, "div", "dk_frame_titlebar");
-    frame.titlebar.target = "titlebar";
     frame.titlebar.setAttribute("target","titlebar");
-    
     frame.titlebar.style.position = "absolute";
     frame.titlebar.style.width = "100%";
     frame.titlebar.style.height = "21rem";
-    //frame.titlebar.style.backgroundColor = "rgb(200,200,200)";
     frame.titlebar.ondblclick = function dk_frame_titlebar_ondblclick(event) {
         dk.frame.maximize(event.currentTarget);
     }
     dk.drag.addDragHandle(frame.titlebar, frame);
 
+    //See DKFrame.css for styling
     frame.titlebar.text = dk.gui.createElement(frame.titlebar, "div", "dk_frame_titlebartext");
-    frame.titlebar.text.target = "titlebartext";
     frame.titlebar.text.setAttribute("target","titlebartext");
-    
     frame.titlebar.text.style.position = "absolute";
     frame.titlebar.text.style.width = "100%";
     frame.titlebar.text.style.height = "100%";
-    frame.titlebar.text.style.paddingTop = "2rem";
-    frame.titlebar.text.style.paddingLeft = "4rem";
-    frame.titlebar.text.style.fontSize = "15rem";
-    frame.titlebar.text.style.fontWeight = "bold";
-    //frame.titlebar.text.style.color = "rgb(25,25,25)";
     frame.titlebar.text.style.cursor = "default";
     frame.titlebar.text.innerHTML = title;
 

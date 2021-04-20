@@ -1,11 +1,17 @@
 [target="frame"] {
-    background-color: #766a6a
-}
-
-[target="titlebartext"] {
-    color:#fcfafa
+    background-color: #766a6a;
+    border-color: rgb(0,0,0);
+    border-width: 1rem;
 }
 
 [target="titlebar"] {
-    background-color: #12061a;
+    background-color: #3d1855;
+}
+
+[target="titlebartext"] {
+    color:#fcfafa;
+    padding-top: 2rem;
+    padding-left: 4rem;
+    font-size: 15rem;
+    font-weight: bold;
 }

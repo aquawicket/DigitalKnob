@@ -17,7 +17,7 @@ dk.menu.createInstance = function dk_menu_createInstance(parent) {
     dkmenu.style.width = "150rem";
     dkmenu.style.minHeight = "18rem";
     //dkmenu.style.boxSizing = "border-box";
-    dkmenu.style.borderColor = "rgb(60,60,60)";
+    //dkmenu.style.borderColor = "rgb(60,60,60)";
     dkmenu.style.borderStyle = "solid";
     dkmenu.style.borderWidth = "1rem";
     dkmenu.style.borderTopWidth = "1rem";
@@ -43,14 +43,14 @@ dk.menu.addItem = function dk_menu_addItem(menu, label, callback) {
     let dkmenuItem = document.createElement("div");
     dkmenuItem.innerHTML = label;
     dkmenuItem.class = "option";
-    dkmenuItem.style.backgroundColor = "rgb(20,20,20)";
-    dkmenuItem.style.color = "rgb(170,170,170)";
+    //dkmenuItem.style.backgroundColor = "rgb(20,20,20)";
+    //dkmenuItem.style.color = "rgb(170,170,170)";
     dkmenuItem.style.paddingTop = "2rem";
     dkmenuItem.style.paddingLeft = "4rem";
     dkmenuItem.style.cursor = "pointer";
     dkmenuItem.style.whiteSpace = "pre-wrap";
     dkmenuItem.style.boxSizing = "border-box";
-    dkmenuItem.style.borderColor = "rgb(60,60,60)";
+    //dkmenuItem.style.borderColor = "rgb(60,60,60)";
     dkmenuItem.style.borderStyle = "solid";
     dkmenuItem.style.borderBottomWidth = "1rem";
     dkmenuItem.style.borderTopWidth = "0rem";
@@ -61,13 +61,13 @@ dk.menu.addItem = function dk_menu_addItem(menu, label, callback) {
         callback && callback(event);
     }
     dkmenuItem.onmouseover = function dk_menu_item_onmouseover() {
-        dkmenuItem.style.backgroundColor = "rgb(40,40,40)";
-        dkmenuItem.style.color = "rgb(255,255,255)";
+        //dkmenuItem.style.backgroundColor = "rgb(40,40,40)";
+        //dkmenuItem.style.color = "rgb(255,255,255)";
     }
     ;
     dkmenuItem.onmouseout = function dk_menu_item_onmouseout() {
-        dkmenuItem.style.backgroundColor = "rgb(20,20,20)";
-        dkmenuItem.style.color = "rgb(200,200,200)";
+        //dkmenuItem.style.backgroundColor = "rgb(20,20,20)";
+        //dkmenuItem.style.color = "rgb(200,200,200)";
     }
     menu.appendChild(dkmenuItem);
     dk.menu.validatePosition(menu);
