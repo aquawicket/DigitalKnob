@@ -30,7 +30,7 @@ bool DKSDLCef::Init()
 	_scrollFactor = 120.0f;
 
 	DKSDLWindow::AddEventFunc(&DKSDLCef::Handle, this);
-	DKSDLWindow::AddDrawFuncFirst(&DKSDLCef::Draw, this);
+	DKSDLWindow::AddRenderFuncFirst(&DKSDLCef::Draw, this);
 	DKClass::RegisterFunc("DKSDLCef::OnClick", &DKSDLCef::OnClick, this);
 	DKClass::RegisterFunc("DKSDLCef::OnMouseOver", &DKSDLCef::OnMouseOver, this);
 	DKClass::RegisterFunc("DKSDLCef::OnResize", &DKSDLCef::OnResize, this);
