@@ -1,5 +1,5 @@
-var url = CPP_DKAssets_LocalAssets()+"index.html";
-//var url = CPP_DKAssets_LocalAssets()+"DKWebTest/index.html";
+var url = CPP_DKAssets_LocalAssets()+"/index.html";
+//var url = CPP_DKAssets_LocalAssets()+"/DKWebTest/index.html";
 
 /*
 //// Create Cef window ////
