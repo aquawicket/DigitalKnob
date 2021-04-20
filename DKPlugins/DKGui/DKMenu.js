@@ -7,7 +7,9 @@ dk.menu.init = function dk_menu_init() {}
 dk.menu.end = function dk_menu_end() {}
 
 dk.menu.createInstance = function dk_menu_createInstance(parent) {
+
     let dkmenu = document.createElement("div");
+    dkmenu.setAttribute("target","dkmenu");
     dkmenu.id = "id";
     dkmenu.style.position = "absolute";
     dkmenu.style.padding = "0rem";
@@ -41,6 +43,7 @@ dk.menu.createInstance = function dk_menu_createInstance(parent) {
 
 dk.menu.addItem = function dk_menu_addItem(menu, label, callback) {
     let dkmenuItem = document.createElement("div");
+    dkmenuItem.setAttribute("target","dkmenuItem");
     dkmenuItem.innerHTML = label;
     dkmenuItem.class = "option";
     //dkmenuItem.style.backgroundColor = "rgb(20,20,20)";
