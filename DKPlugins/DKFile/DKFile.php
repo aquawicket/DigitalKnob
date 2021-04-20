@@ -3,7 +3,6 @@ header('Access-Control-Allow-Origin: *');
 include("../DK/DK.php");
 
 function urlExists($path){
-	return "uh oh";
 	if(file_exists($path)){
         return 1;
 	}

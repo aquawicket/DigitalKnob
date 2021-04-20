@@ -68,7 +68,7 @@ function header_status($statusCode) {
 }
 
 function trySuccess($message){
-    die(json_encode(array('status'=>'success', 'message'=>$message)));
+    die("\n".json_encode(array('status'=>'success', 'message'=>$message)));
 }
 
 function error($message){
@@ -94,8 +94,8 @@ if($_REQUEST["x"]){
         }
     }
 
-    trySuccess(call_user_func_array($func,$values));
-
+    $response = call_user_func_array($func,$values);
+    trySuccess($response);
     //echo "\n_REQUEST[x] json = \n".$json."\n\n";
 
     /*

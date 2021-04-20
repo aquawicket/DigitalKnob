@@ -3,9 +3,9 @@
 dk.trace = new Object;
 
 window.onerror = function(msg, url, lineNo, columnNo, err) {
-    if (!err) {
-        return error("window.onerror failed: err variable invalid");
-    }
+    if (!err && !msg)
+        return error("window.onerror failed: err and msg variables invalid");
+        err = err ? err : msg;
     return error(err);
 }
 

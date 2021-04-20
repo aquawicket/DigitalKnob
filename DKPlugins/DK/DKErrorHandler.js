@@ -55,7 +55,7 @@ dk.errorhandler.create = function dk_errorhandler_create() {
     //Handle ajax request errors.
     function handleXMLHttp() {
         const sendx = XMLHttpRequest.prototype.send;
-        window.XMLHttpRequest.prototype.send = function() {
+        window.XMLHttpRequest.prototype.send = function window_XMLHttpRequest_prototype_send() {
             handleAsync(this);
             return sendx.apply(this, arguments);
         }
@@ -70,7 +70,7 @@ dk.errorhandler.create = function dk_errorhandler_create() {
         // but not sure yet. This is at least a start, and works on chrome.
         function ImageOverride() {
             let img = new ImageOriginal;
-            onnext(function() {
+            onnext(function onnext() {
                 handleAsync(img);
             });
             return img;
@@ -87,7 +87,7 @@ dk.errorhandler.create = function dk_errorhandler_create() {
         // Not ideal to override stuff, but it helps with debugging.
         function HTMLScriptElementOverride() {
             let script = new HTMLScriptElement;
-            onnext(function() {
+            onnext(function onnext() {
                 handleAsync(script);
             });
             return script;
@@ -209,7 +209,7 @@ dk.errorhandler.create = function dk_errorhandler_create() {
         setTimeout(fn, 0);
     }
 
-    window.onanyerror = function(entity) {
+    window.onanyerror = function window_onanyerror(entity) {
         console.debug(entity);
     }
 

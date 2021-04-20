@@ -59,7 +59,7 @@ dk.file.urlExists = function dk_file_urlExists(url, callback, usePhp) {
 
         }, "HEAD");
     } else {
-        dk.php.call("POST", "/DKFile/DKFile.php", "urlExists", function dk_php_urlExists_callback(rval) {
+        dk.php.call("POST", "/DKFile/DKFile.php", "urlExists", url, function dk_php_urlExists_callback(rval) {
             if (!callback)
                 return error("callback invalid");
             if (rval == "1" && callback)

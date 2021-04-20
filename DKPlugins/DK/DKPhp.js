@@ -88,7 +88,7 @@ dk.php.call = function dk_php_call(httpMethod, phpPath, funcName) {
     const data = "x=" + encodeURIComponent(str);
     const url = path + phpPath + "?" + data;
     const args = arguments;
-    dk.sendRequest(url, function(success, url, rval) {
+    dk.sendRequest(url, function dk_sendRequest_callback(success, url, rval) {
         var beforeLastLine = rval.substr(0, rval.lastIndexOf("\n")+1);
         var lastLine = rval.substr(rval.lastIndexOf("\n")+1);
         let rJson;
@@ -101,7 +101,7 @@ dk.php.call = function dk_php_call(httpMethod, phpPath, funcName) {
             return warn("We appear to have gotten JSON compatable data with no status key"+rval);
         if (rJson.status !== "success")    
             return error(rJson.message);
-        if (rJson.status === "success" && rJson.message === null)
+        if (rJson.status === "success" && beforeLastLine !== "")// && rJson.message === null)
             console.log(beforeLastLine);//&& console.log("rJson.message === null"); 
         if (args && typeof (args[args.length - 1]) === "function")
             args[args.length - 1](rJson.message);
