@@ -9,7 +9,7 @@ dk.debug.debugFunc = function dk_debug_debugFunc() {
     //console.log("dk.debug.debugFunc");
 
     //Test if a url exists. Can use straight ajax,"thows console error if url does not exist", or php.
-    const usePhp = 0;
+    const usePhp = 1;
     dk.file.urlExists(".", function dk_file_urlExists_callback(rval){
         if(rval)
             console.log("path exists");

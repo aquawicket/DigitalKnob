@@ -88,12 +88,25 @@ dk.php.call = function dk_php_call(httpMethod, phpPath, funcName) {
     const data = "x=" + encodeURIComponent(str);
     const url = path + phpPath + "?" + data;
     const args = arguments;
-    dk.sendRequest(url, function(success, url, rVal) {
-        if (args && typeof (args[args.length - 1]) === "function") {
-            args[args.length - 1](rVal);
-        } else {//console.log(rVal);
+    dk.sendRequest(url, function(success, url, rval) {
+        var beforeLastLine = rval.substr(0, rval.lastIndexOf("\n")+1);
+        var lastLine = rval.substr(rval.lastIndexOf("\n")+1);
+        let rJson;
+        try {
+            rJson = JSON.parse(lastLine);
+        } catch {
+            return error(rval);
         }
+        if (!rJson.status)
+            return warn("We appear to have gotten JSON compatable data with no status key"+rval);
+        if (rJson.status !== "success")    
+            return error(rJson.message);
+        if (rJson.status === "success" && rJson.message === null)
+            console.log(beforeLastLine);//&& console.log("rJson.message === null"); 
+        if (args && typeof (args[args.length - 1]) === "function")
+            args[args.length - 1](rJson.message);
     }, httpMethod);
+
 }
 
 /*

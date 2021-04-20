@@ -286,8 +286,8 @@ dk.console.create = function dk_console_create(parent, id, top, bottom, left, ri
     dk.console.error = function dk_console_error(str) {
         if (!str)
             return warn("str invalid");
-        str = dk.trace.stackToConsoleString(str, "dk.console_error");
-        dk.console.log(str, "red");
+        const newstr = str+"\n"+dk.trace.stackToConsoleString("", "dk.console_error");
+        dk.console.log(newstr, "red");
     }
     dk.console.group = function dk_console_group(str, style) {
         dk.console.log(str, style);

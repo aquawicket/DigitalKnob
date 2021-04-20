@@ -67,9 +67,13 @@ function header_status($statusCode) {
     }
 }
 
-function error($string){
-	header_status(500);
-    die($string);
+function trySuccess($message){
+    die(json_encode(array('status'=>'success', 'message'=>$message)));
+}
+
+function error($message){
+	//header_status(500);
+    die(json_encode(array('status'=>'error', 'message'=>$message)));
 }
 
 ////////////////////////
@@ -90,11 +94,7 @@ if($_REQUEST["x"]){
         }
     }
 
-    $result = call_user_func_array($func,$values);
-    if(!empty($result)){
-    	echo $result;
-    	//print json_encode($result);
-    }
+    trySuccess(call_user_func_array($func,$values));
 
     //echo "\n_REQUEST[x] json = \n".$json."\n\n";
 
