@@ -1,3 +1,3 @@
 DKDEPEND(Chart.js)
-#DKCOPY(${CHARTJS}/ ${DKPLUGINS}/DKChart FALSE)
+DKCOPY(${CHARTJS}/chart.min.js ${DKPLUGINS}/DKChart/chart.min.js FALSE)
 DKASSETS(DKChart)
