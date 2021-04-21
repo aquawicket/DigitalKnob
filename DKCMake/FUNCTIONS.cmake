@@ -293,8 +293,8 @@ FUNCTION(DKINSTALL url import_folder 3rdparty_folder)
 					DKREMOVE(${3RDPARTY}/UNZIPPED)
 				ENDIF() 
 			ENDIF()
-		ELSE() #NOT ARCHIVE
-			FILE(COPY ${DIGITALKNOB}/Download/${filename} ${3RDPARTY}/${3rdparty_folder})
+		ELSE() #NOT ARCHIVE, just copy the file into it's 3rdParty folder
+			FILE(COPY ${DIGITALKNOB}/Download/${filename} ${3RDPARTY}/${3rdparty_folder}/${filename})
 		ENDIF()
 	ENDIF()
 		#FILE(MAKE_DIRECTORY ${3RDPARTY}/${3rdparty_folder}/${OS})
