@@ -300,16 +300,6 @@ if (!dk.hasCPP()) {
             if (!path.includes(absolutepath))
                 path = absolutepath + path;
         }
-
-        /*
-        data = replace(data, ": ", ":");
-        data = replace(data, "; ", ";");
-        data = replace(data, ", ", ",");
-        data = replace(data, " ", "%20");
-        data = replace(data, "'", "%27");
-        data = replace(data, "\n", "%0A");
-        */
-
         data = encodeURIComponent(data).replace(";", "%3B");
         dk.file.saveFile(path, data);
     }

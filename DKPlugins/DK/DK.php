@@ -76,11 +76,6 @@ function error($message){
     die(json_encode(array('status'=>'error', 'message'=>$message)));
 }
 
-////////////////////////
-function DKINFO($string){
-	return $string;
-}
-
 if($_REQUEST["x"]){
 	$json = urldecode($_REQUEST["x"]);
 	$obj = json_decode($json);
@@ -141,35 +136,13 @@ function debugFunc($var1, $var2, $var3)
 	return $var2;
 }
 
-//https://www.php.net/manual/en/function.file-put-contents.php
-function stringToFile($file, $data, $mode)
-{   
-    if($mode == "FILE_APPEND"){
-        if(!file_put_contents($file, $data, FILE_APPEND)){
-        	return error("StringToFile(): failed\n");
-        }
-    }
-    else{
-    	if(!file_put_contents($file, $data)){
-    		return error("StringToFile(): failed\n");
-    	}
-    }
-    //header_status(200);
-    return "File saved successfully";
+function GetServerInfo($param){
+	if(isset($_SERVER[$param])){
+	    echo "$"."_SERVER[".$param."] = ".$_SERVER[$param];
+	}
 }
 
-//https://www.php.net/manual/en/function.file-get-contents.php
-function fileToString($file)
-{    
-    $str = file_get_contents($file);
-    if(!$str){
-    	return error("FileToString() failed");
-    }
-    return $str;
-}
-
-function getTime()
-{
+function getTime(){
 	$str = "Today is " . date("Y/m/d") . "<br>";
     $str .= "Today is " . date("Y.m.d") . "<br>";
     $str .= "Today is " . date("Y-m-d") . "<br>";
@@ -177,8 +150,7 @@ function getTime()
     return $str;
 }
 
-function getRemoteAddress()
-{
+function getRemoteAddress(){
 	$ipaddress = '';
     if (isset($_SERVER['REMOTE_ADDR']))
         $ipaddress = $_SERVER['REMOTE_ADDR'];
@@ -195,8 +167,7 @@ function getRemoteAddress()
     return $ipaddress;
 }
 
-function getRemoteUser()
-{
+function getRemoteUser(){
 	return $_SERVER["REMOTE_USER"];
 }
 

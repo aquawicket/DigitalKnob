@@ -110,15 +110,6 @@ function pushDKAssets(){
 	}
 }
 
-
-
-
-function GetServerInfo($param){
-	if(isset($_SERVER[$param])){
-	    echo "$"."_SERVER[".$param."] = ".$_SERVER[$param];
-	}
-}
-
 function Upload($src, $dest){
 	//$target_dir //example /home/user/www/";
 	//$dest = $target_dir + $target_file;
@@ -359,4 +350,31 @@ if($publishFile = $_POST["PublishFile"]){
 	die;
 }
 */
+
+//https://www.php.net/manual/en/function.file-get-contents.php
+function fileToString($file)
+{    
+    $str = file_get_contents($file);
+    if(!$str){
+    	return error("FileToString() failed");
+    }
+    return $str;
+}
+
+//https://www.php.net/manual/en/function.file-put-contents.php
+function stringToFile($file, $data, $mode)
+{   
+    if($mode == "FILE_APPEND"){
+        if(!file_put_contents($file, $data, FILE_APPEND)){
+        	return error("StringToFile(): failed\n");
+        }
+    }
+    else{
+    	if(!file_put_contents($file, $data)){
+    		return error("StringToFile(): failed\n");
+    	}
+    }
+    //header_status(200);
+    return "File saved successfully";
+}
 ?>
