@@ -40,6 +40,7 @@ dk.file.init = function dk_file_init() {
 }
 
 dk.file.pushDKAssets = function dk_file_pushDKAssets() {
+    console.log("Pushing assets to local repository");
     dk.php.call("POST", "/DKFile/DKFile.php", "pushDKAssets", function dk_php_pushDKAssets_callback(rval) {
         rval && console.log(rval) && console.log("done copying assets");
     });

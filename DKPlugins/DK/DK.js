@@ -784,10 +784,13 @@ dk.clearSelection = function dk_clearSelection() {
 
 dk.getElements = function dk_getElements(element) {
     var string;
-    //var nodes = byId(id).getElementsByTagName('*'); //all children recursively
-    if (!element || element.childNodes)
+    
+    if (!element)
         return error("element invalid");
+    //var nodes = element.getElementsByTagName('*'); //all children recursively    
     var nodes = element.childNodes;
+    if (!nodes)
+        return error("nodes invalid");
     for (var n = 0; n < nodes.length; n++) {
         if (nodes[i].id) {
             string += nodes[i].id;
@@ -800,7 +803,6 @@ dk.getElements = function dk_getElements(element) {
 dk.getAvailableId = function dk_getAvailableId(id) {
     var out = id;
     var i = 0;
-
     while (byId(out)) {
         //if there is a .  the number must come before
         var n = id.lastIndexOf(".");
@@ -813,7 +815,6 @@ dk.getAvailableId = function dk_getAvailableId(id) {
         i++;
     }
     return out;
-    //console.log("GetAvailableId("+id+")-> "+out+"\n");
 }
 
 // *** UNKNOWN *please test* *** //
@@ -1118,12 +1119,11 @@ dk.ajaxGetUrl = function dk_ajaxGetUrl(url) {
 //https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy
 
 dk.sendRequest = function dk_sendRequest(url, dk_sendRequest_callback, httpMethod) {
-    if (!url) {
-        console.error("url invalid");
-    }
-    if (dk_sendRequest_callback.length < 3) {
-        console.error("dk_sendRequest_callback requires 3 arguments (success, url, data)");
-    }
+    const debugXhr = false;
+    if (!url)
+        return error("url invalid");
+    if (dk_sendRequest_callback.length < 3)
+        return error("dk_sendRequest_callback requires 3 arguments (success, url, data)");
 
     var xhr = "";
     try {
@@ -1145,9 +1145,8 @@ dk.sendRequest = function dk_sendRequest(url, dk_sendRequest_callback, httpMetho
         xhr = new ActiveXObject("Microsoft.XMLHTTP");
     } catch (e) {}
 
-    if (!xhr) {
+    if (!xhr)
         return error("Error creating xhr object");
-    }
 
     if (httpMethod) {
         switch (httpMethod) {
@@ -1167,6 +1166,11 @@ dk.sendRequest = function dk_sendRequest(url, dk_sendRequest_callback, httpMetho
     } else
         httpMethod = "GET";
 
+    //DEBUG
+    let file;
+    debugXhr && (file = url.substring(url.lastIndexOf("/") + 1));
+    debugXhr && file.includes("?") && (file = file.substring(0, file.lastIndexOf("?")));
+
     xhr.open(httpMethod, url, true);
     xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     xhr.timeout = 20000;
@@ -1174,47 +1178,50 @@ dk.sendRequest = function dk_sendRequest(url, dk_sendRequest_callback, httpMetho
     //Possible error codes
     //https://github.com/richardwilkes/cef/blob/master/cef/enums_gen.go
     xhr.onabort = function(event) {
-        //dk_sendRequest_callback(false, url, event.type);
-        //console.error("GET <a href=' " + url + " ' target='_blank' style='color:rgb(213,213,213)'>" + url + "</a> onabort");
-        return warn("XMLHttpRequest.onabort");
+        dk_sendRequest_callback(false, url, xhr.responseText);
+        dk.console.error("GET <a href=' " + url + " ' target='_blank' style='color:rgb(213,213,213)'>" + url + "</a> onabort");
+        debugXhr && console.debug("XMLHttpRequest.onabort(): " + file + " readyState:" + xhr.readyState + " status:" + xhr.status);
     }
     xhr.onerror = function(event) {
-        //dk_sendRequest_callback(false, url, event.type);
-        //console.error("GET <a href=' " + url + " ' target='_blank' style='color:rgb(213,213,213)'>" + url + "</a> onerror");
-        return warn("XMLHttpRequest.onerror");
+        dk_sendRequest_callback(false, url, xhr.responseText);
+        dk.console.error("GET <a href=' " + url + " ' target='_blank' style='color:rgb(213,213,213)'>" + url + "</a> onerror");
+        debugXhr && console.debug("XMLHttpRequest.onabort(): " + file + " readyState:" + xhr.readyState + " status:" + xhr.status);
     }
-    xhr.onload = function(event) {//console.log("XMLHttpRequest.onload(" + event + ")");
+    xhr.onload = function(event) {
+        debugXhr && console.debug("XMLHttpRequest.onload(): " + file + " readyState:" + xhr.readyState + " status:" + xhr.status);
+        dk_sendRequest_callback(true, url, xhr.responseText);
     }
-    xhr.onloadend = function(event) {//console.log("XMLHttpRequest.onloadend(" + event + ")");
+    xhr.onloadend = function(event) {
+        debugXhr && console.debug("XMLHttpRequest.onloadend(): " + file + " readyState:" + xhr.readyState + " status:" + xhr.status);
     }
-    xhr.onloadstart = function(event) {//console.log("XMLHttpRequest.onloadstart(" + event + ")");
+    xhr.onloadstart = function(event) {
+        debugXhr && console.debug("XMLHttpRequest.onloadstart(): " + file + " readyState:" + xhr.readyState + " status:" + xhr.status);
     }
-    xhr.onprogress = function(event) {//console.log("XMLHttpRequest.onprogress(" + event + ")");
+    xhr.onprogress = function(event) {
+        debugXhr && console.debug("XMLHttpRequest.onprogress(): " + file + " readyState:" + xhr.readyState + " status:" + xhr.status);
     }
     xhr.onreadystatechange = function(event) {
-        //console.log("XMLHttpRequest.onreadystatechange(" + event + ")");
+        debugXhr && console.log("XMLHttpRequest.onreadystatechange(): " + file + " readyState:" + xhr.readyState + " status:" + xhr.status);
+        /*
         if (xhr.readyState === 4) {
-            if (xhr.status >= 200 && xhr.status < 400 || !xhr.status) {
-                //const decodedResponse = decodeURI(xhr.responseText);
+            if (xhr.status >= 200 && xhr.status < 400 || !xhr.status)
                 dk_sendRequest_callback(true, url, xhr.responseText);
-            } else {
-                //console.error("GET <a href=' " + url + " ' target='_blank' style='color:rgb(213,213,213)'>" + url + "</a> onreadystatechange");
+            else
                 dk_sendRequest_callback(false, url, xhr.responseText);
-                return warn("XMLHttpRequest.onreadystatechange: "+xhr.responseText);
-            }
         }
+        */
     }
     xhr.ontimeout = function(event) {
-        //dk_sendRequest_callback(false, url, event.type);
-        //console.error("GET <a href=' " + url + " ' target='_blank' style='color:rgb(213,213,213)'>" + url + "</a> net::ERR_CONNECTION_TIMED_OUT");
-        return warn("XMLHttpRequest.ontimeout");
+        dk_sendRequest_callback(false, url, xhr.responseText);
+        dk.console.error("GET <a href=' " + url + " ' target='_blank' style='color:rgb(213,213,213)'>" + url + "</a> net::ERR_CONNECTION_TIMED_OUT");
+        debugXhr && console.debug("XMLHttpRequest.onabort(): " + file + " readyState:" + xhr.readyState + " status:" + xhr.status);
     }
 
     xhr.send();
 }
 
 dk.checkForUNICODE = function dk_checkForUNICODE(str) {
-    for (var i = 0, n = str.length; i < n; i++) {
+    for (let i = 0, n = str.length; i < n; i++) {
         if (str.charCodeAt(i) > 255) {
             console.warn("Found UNICODE character at " + i);
             console.log(0, str.substring(i));
