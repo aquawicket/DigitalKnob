@@ -111,6 +111,9 @@ FUNCTION(DKCOPY arg arg2 overwrite)
 		IF(IS_DIRECTORY ${arg})
 			FILE(GLOB_RECURSE allfiles RELATIVE "${arg}/" "${arg}/*")
 			FOREACH(each_file ${allfiles})
+				if(${each_file} STREQUAL "DKCMake.txt")
+					continue()
+				endif()
 				SET(sourcefile "${arg}/${each_file}")
 				SET(destinationfile "${arg2}/${each_file}")
 				IF(overwrite)
@@ -298,6 +301,8 @@ FUNCTION(DKINSTALL url import_folder 3rdparty_folder)
 		ENDIF()
 	ENDIF()
 		#FILE(MAKE_DIRECTORY ${3RDPARTY}/${3rdparty_folder}/${OS})
+		
+		#DKCOPY will block copying DKCMake.txt, so we are using FILE(COPY) instead
 		FILE(COPY ${DKIMPORTS}/${import_folder}/ DESTINATION ${3RDPARTY}/${3rdparty_folder})
 ENDFUNCTION()
 
