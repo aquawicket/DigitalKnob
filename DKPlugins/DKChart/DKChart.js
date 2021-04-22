@@ -32,6 +32,7 @@ dk.chart.create = function dk_chart_create(parent, id, top, bottom, left, right,
     //chartCanvas.style.right = "0rem";
     chartCanvas.style.width = "100%";
     chartCanvas.style.height = "100%";
+    
     const ctx = chartCanvas.getContext('2d');
     chartDiv.appendChild(chartCanvas);
 
@@ -41,6 +42,6 @@ dk.chart.create = function dk_chart_create(parent, id, top, bottom, left, right,
     //this.lineChart.resize("100%","100%");
     });
 	
-	return chartDiv;
+	return ctx;
 }
 
