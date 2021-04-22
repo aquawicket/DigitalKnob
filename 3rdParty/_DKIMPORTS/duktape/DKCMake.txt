@@ -3,11 +3,12 @@ DKDEPEND(nodejs)
 
 ### VERSION ###
 ##DKSET(DUKTAPE_VERSION duktape-2.6.0)
-##DKSET(DUKTAPE_VERSION duktape-let-support)
-DKSET(DUKTAPE_VERSION duktape-master)
+DKSET(DUKTAPE_VERSION duktape-let-support)
+##DKSET(DUKTAPE_VERSION duktape-master)
 
 ### INSTALL ###
-DKINSTALL(https://github.com/svaarala/duktape/archive/refs/heads/master.zip duktape ${DUKTAPE_VERSION})
+DKINSTALL(https://codeload.github.com/Squareys/duktape/zip/refs/heads/let-support duktape ${DUKTAPE_VERSION})
+##DKINSTALL(https://github.com/svaarala/duktape/archive/refs/heads/master.zip duktape ${DUKTAPE_VERSION})
 ##DKINSTALL(https://duktape.org/${DUKTAPE_VERSION}.tar.xz duktape ${DUKTAPE_VERSION})
 DKSET(DUKTAPE ${3RDPARTY}/${DUKTAPE_VERSION})
 ##WIN32_COMMAND(${PYTHON_EXE}/Scripts/pip install PyYAML)

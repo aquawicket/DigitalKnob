@@ -55,7 +55,12 @@ ENDFUNCTION()
 ########################
 FUNCTION(DKDOWNLOAD arg)
 	##https://cmake.org/pipermail/cmake/2012-September/052205.html/
-	GET_FILENAME_COMPONENT(filename ${arg} NAME)
+	if(${ARGC} EQUAL 1)
+		GET_FILENAME_COMPONENT(filename ${arg} NAME)
+	endif()
+	if(${ARGC} EQUAL 2)
+		SET(filename ${ARGV1})
+	endif()
 	IF(NOT EXISTS ${CURRENT_DIR}/${filename})
 		MESSAGE(STATUS "downloading... ${filename}")
 		FILE(DOWNLOAD ${arg} ${CURRENT_DIR}/${filename} SHOW_PROGRESS 
@@ -242,6 +247,7 @@ FUNCTION(DKINSTALL url import_folder 3rdparty_folder)
 		DKSET(ARCHIVE ON)
 		GET_FILENAME_COMPONENT(extention ${url} LAST_EXT)
 		DKSET(FILETYPE "UNKNOWN")
+		if(${extention})
 		if(${extention} STREQUAL ".exe")
 			DKSET(FILETYPE "Executable")
 		endif()
@@ -268,6 +274,7 @@ FUNCTION(DKINSTALL url import_folder 3rdparty_folder)
 		endif()
 		if(${extention} STREQUAL ".zip")
 			DKSET(FILETYPE "Archive")
+		endif()
 		endif()
 		##If the file type is unknown, we'll still try to extract it like a compressed file anyway
 		##It's better the have a chance at success then to spend 2 hours dead in the water ;) 
@@ -303,9 +310,9 @@ FUNCTION(DKINSTALL url import_folder 3rdparty_folder)
 		#FILE(MAKE_DIRECTORY ${3RDPARTY}/${3rdparty_folder}/${OS})
 		
 		#DKCOPY will block copying DKCMake.txt, so we are using FILE(COPY) instead
-		if(${import_folder})
+		#if(${import_folder})
 		FILE(COPY ${DKIMPORTS}/${import_folder}/ DESTINATION ${3RDPARTY}/${3rdparty_folder})
-		endif()
+		#endif()
 ENDFUNCTION()
 
 
