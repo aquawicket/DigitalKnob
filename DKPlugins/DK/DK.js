@@ -1,6 +1,6 @@
 "use strict";
 
-!window.dk && (window.dk = new Object);
+window.dk = new Object;
 
 dk.init = function dk_init() {
     eval("var __temp = null");
@@ -236,7 +236,6 @@ function Log(string, lvl) {
 }
 */
 dk.hasCPP = function dk_hasCPP() {
-    console.debug("dk.hasCPP()");
     if (dk.getBrowser() === "CEF")
         return true;
     if (dk.getBrowser() === "RML")
