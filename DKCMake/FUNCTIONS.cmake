@@ -303,7 +303,9 @@ FUNCTION(DKINSTALL url import_folder 3rdparty_folder)
 		#FILE(MAKE_DIRECTORY ${3RDPARTY}/${3rdparty_folder}/${OS})
 		
 		#DKCOPY will block copying DKCMake.txt, so we are using FILE(COPY) instead
+		if(${import_folder})
 		FILE(COPY ${DKIMPORTS}/${import_folder}/ DESTINATION ${3RDPARTY}/${3rdparty_folder})
+		endif()
 ENDFUNCTION()
 
 

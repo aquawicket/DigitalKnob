@@ -1,12 +1,24 @@
+##DKDEPEND(python)
+DKDEPEND(nodejs)
+
 ### VERSION ###
-DKSET(DUKTAPE_VERSION duktape-2.6.0)
-##DKSET(DUKTAPE_VERSION duktape-master)
+##DKSET(DUKTAPE_VERSION duktape-2.6.0)
+##DKSET(DUKTAPE_VERSION duktape-let-support)
+DKSET(DUKTAPE_VERSION duktape-master)
 
 ### INSTALL ###
-##DKINSTALL(https://github.com/svaarala/duktape/archive/refs/heads/master.zip duktape ${DUKTAPE_VERSION})
-DKINSTALL(https://duktape.org/${DUKTAPE_VERSION}.tar.xz duktape ${DUKTAPE_VERSION})
+DKINSTALL(https://github.com/svaarala/duktape/archive/refs/heads/master.zip duktape ${DUKTAPE_VERSION})
+##DKINSTALL(https://duktape.org/${DUKTAPE_VERSION}.tar.xz duktape ${DUKTAPE_VERSION})
 DKSET(DUKTAPE ${3RDPARTY}/${DUKTAPE_VERSION})
+##WIN32_COMMAND(${PYTHON_EXE}/Scripts/pip install PyYAML)
+##WIN32_COMMAND(${PYTHON_EXE}/python ${DUKTAPE}/util/dist.py)
 
+DKSETPATH(${DIGITALKNOB}/Download)
+DKDOWNLOAD(https://codeload.github.com/nodeca/js-yaml/zip/refs/tags/3.14.1)
+DKEXTRACT(${DIGITALKNOB}/Download/3.14.1 ${DUKTAPE}/src-tools/lib/extdeps/)
+DKRENAME(${DUKTAPE}/src-tools/lib/extdeps/js-yaml-3.14.1 ${DUKTAPE}/src-tools/lib/extdeps/js-yaml)
+DKSET(QUEUE_BUILD ON)
+WIN32_COMMAND(${NODE_EXE} ${DUKTAPE}/src-tools/index.js configure --output-directory ${DUKTAPE}/src --source-directory ${DUKTAPE}/src-input --config-directory ${DUKTAPE}/config)
 
 ### LINK ###
 IF(WIN)

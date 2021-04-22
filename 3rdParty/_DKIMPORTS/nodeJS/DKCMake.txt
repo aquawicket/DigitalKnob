@@ -1,11 +1,7 @@
-IF(NOT ANDROID)
-	RETURN()
-ENDIF()
+### VERSION ###
+DKSET(NODEJS_VERSION node-v14.16.1-win-x86)
 
 ### INSTALL ###
-IF(NOT EXISTS "C:/Program Files/nodejs")
-	DKSETPATH(${DIGITALKNOB}/Download)
-	## DKDOWNLOAD(www.internet.com/node-v4.4.7-x64.msi) ## find an online link
-	## DKDOWNLOAD(${DKWEB}/Download/Tools/node-v4.4.7-x64.msi)
-	WIN32_COMMAND(${DIGITALKNOB}/Download/node-v4.4.7-x64.msi)
-ENDIF()
+DKINSTALL(https://nodejs.org/dist/v14.16.1/node-v14.16.1-win-x86.zip nodejs ${NODEJS_VERSION})
+DKSET(NODEJS ${3RDPARTY}/${NODEJS_VERSION})
+DKSET(NODE_EXE ${NODEJS}/node.exe)
