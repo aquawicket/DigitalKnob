@@ -1,9 +1,6 @@
 "use strict";
 
-//Duktape
-//const dk = new Object;
-//Browser
-window.dk = new Object;
+!window.dk && (window.dk = new Object);
 
 dk.init = function dk_init() {
     eval("var __temp = null");
@@ -239,6 +236,7 @@ function Log(string, lvl) {
 }
 */
 dk.hasCPP = function dk_hasCPP() {
+    console.debug("dk.hasCPP()");
     if (dk.getBrowser() === "CEF")
         return true;
     if (dk.getBrowser() === "RML")
@@ -439,7 +437,21 @@ dk.loadJs = function dk_loadJs(url, dk_loadJs_callback) {
     }
 
     //FIXME - DigitalKnob can't trigger onload yet, so we do this
+    
     if (dk.getJSEngine() === "Duktape") {
+        var plugin = dk.getPlugin(url);
+        plugin && console.log("loading dk." + plugin.name + " plugin");
+        if (plugin && plugin.init) {
+                console.log("running dk." + plugin.name + ".init()");
+                plugin.init();
+            } else if (typeof old_plugin === 'function') {
+                console.warn("FIXME: (" + url + ") This plugin uses Init the old way");
+                old_plugin();
+            } else {
+                done = true;
+                dk_loadJs_callback && dk_loadJs_callback(true);
+            }
+        /*
         var func = init;
         //Plugin_Init() 
         if (eval("typeof " + func) === "function") {
@@ -447,7 +459,8 @@ dk.loadJs = function dk_loadJs(url, dk_loadJs_callback) {
         } else {
             console.warn(init + " is not defined");
         }
-        callback && callback(true);
+        */
+        //dk_loadJs_callback && dk_loadJs_callback(true);
     }
     return true;
 }
@@ -1234,5 +1247,6 @@ dk.checkForUNICODE = function dk_checkForUNICODE(str) {
 dk.validateStrict = function dk_validateStrict(str) {
     return str;
 }
+
 
 dk.init();
