@@ -39,7 +39,7 @@ dk.php.call = function dk_php_call(httpMethod, phpPath, funcName) {
         let rJson;
         try {
             rJson = JSON.parse(lastLine);
-        } catch {
+        } catch(e) {
             return error(rval);
         }
         if (!rJson.status)

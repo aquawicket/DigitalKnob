@@ -231,4 +231,6 @@ Object.assign(Window.prototype, GlobalEventHandlers); //mixin
 var window = new Window("window"); //Create the global window object
 var dk = new Object;
 window.dk = dk;
+dk.duktape = true;
+const duktape = true;
 

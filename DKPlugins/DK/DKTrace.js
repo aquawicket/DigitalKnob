@@ -153,6 +153,7 @@ dk.trace.lastStackCall = function dk_trace_lastStackCall() {
     return str;
 }
 
+
 dk.trace.getArguments = function dk_trace_getArguments(func, getArgValues) {
     let argsString = "";
     let count = 0;
@@ -173,6 +174,7 @@ dk.trace.getArguments = function dk_trace_getArguments(func, getArgValues) {
         return argsString;
     }
     let args = argsString.split(",");
+    //FIXME: duktape
     for (let val of fn.arguments) {
         if (count > 0) {
             args[count] = " " + args[count];
@@ -183,6 +185,7 @@ dk.trace.getArguments = function dk_trace_getArguments(func, getArgValues) {
     argsString = args.toString();
     return argsString;
 }
+
 
 dk.trace.getCurrentFunctionName = function dk_trace_getCurrentFunctionName(n) {
     return new Error().stack.split('\n')[2 + n].trim().split(" ")[1];

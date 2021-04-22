@@ -1,6 +1,7 @@
 "use strict";
 
 window.dk = new Object;
+const duktape = window.duktape; 
 
 dk.init = function dk_init() {
     eval("var __temp = null");
@@ -240,8 +241,10 @@ dk.hasCPP = function dk_hasCPP() {
         return true;
     if (dk.getBrowser() === "RML")
         return true;
-    if (dk.getJSEngine() === "Duktape")
+    if (dk.getJSEngine() === "Duktape"){
+        dk.duktape = true;
         return false;
+    }
 }
 
 dk.getPlugin = function(url) {
@@ -1183,6 +1186,7 @@ dk.sendRequest = function dk_sendRequest(url, dk_sendRequest_callback, httpMetho
     debugXhr && (file = url.substring(url.lastIndexOf("/") + 1));
     debugXhr && file.includes("?") && (file = file.substring(0, file.lastIndexOf("?")));
 
+    //FIXME: duktape
     xhr.open(httpMethod, url, true);
     xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     xhr.timeout = 20000;

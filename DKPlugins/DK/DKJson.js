@@ -102,6 +102,7 @@ dk.json.findPartialMatch = function dk.json.findPartialMatch(obj, key, value) {
 dk.json.findPartialMatch = function dk_json_findPartialMatch(obj, key, value) {
     //console.log(obj.length);
     let foundObj;
+    //FIXME: duktape
     JSON.stringify(obj, (_,nestedValue)=>{
         if (nestedValue && nestedValue[key] && (value.includes(nestedValue[key]) || nestedValue[key].includes(value))) {
             foundObj = nestedValue;
