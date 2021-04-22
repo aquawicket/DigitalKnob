@@ -33,7 +33,7 @@ dk.php.call = function dk_php_call(httpMethod, phpPath, funcName) {
     const args = arguments;
     dk.sendRequest(url, function dk_sendRequest_callback(success, url, rval) {
         if (!success)
-            return error("dk.php.call request failed");
+            return error("dk.php.call request failed, is php server running?");
         var beforeLastLine = rval.substr(0, rval.lastIndexOf("\n") + 1);
         var lastLine = rval.substr(rval.lastIndexOf("\n") + 1);
         let rJson;
