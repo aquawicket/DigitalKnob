@@ -12,16 +12,16 @@ DKINSTALL(https://codeload.github.com/Squareys/duktape/zip/refs/heads/let-suppor
 ##DKINSTALL(https://duktape.org/${DUKTAPE_VERSION}.tar.xz duktape ${DUKTAPE_VERSION})
 DKSET(DUKTAPE ${3RDPARTY}/${DUKTAPE_VERSION})
 
-#IF(NOT EXISTS ${DUKTAPE}/src)
+IF(NOT EXISTS ${DUKTAPE}/src)
 DKSETPATH(${DUKTAPE})
+DKSET(QUEUE_BUILD ON)
 WIN32_COMMAND(${PYTHON}/Scripts/pip install PyYAML)
 WIN32_COMMAND(${PYTHON_EXE} ${DUKTAPE}/util/dist.py)
 DKCOPY(${DUKTAPE}/dist/src/ ${DUKTAPE}/src TRUE)
 
 #DKINSTALL(https://codeload.github.com/nodeca/js-yaml/zip/refs/tags/3.14.1 js-yaml-3.14.1 ${DUKTAPE_VERSION}/src-tools/lib/extdeps/js-yaml)
-#DKSET(QUEUE_BUILD ON)
 #WIN32_COMMAND(${NODE_EXE} ${DUKTAPE}/src-tools/index.js configure --output-directory ${DUKTAPE}/src --source-directory ${DUKTAPE}/src-input --config-directory ${DUKTAPE}/config)
-#ENDIF()
+ENDIF()
 
 ### LINK ###
 IF(WIN)
