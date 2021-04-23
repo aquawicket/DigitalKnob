@@ -7,7 +7,7 @@ dk.drag.attachDrags = function dk_drag_attachDrags(parent) {
     const elements = parent.getElementsByTagName('*');
     for (let n = 0; n < elements.length; n++) {
         const element = elements[n];
-        if (!dk.iE() && dk.getBrowser() !== "RML") 
+        if (!dk.iE() && dk.getBrowser() !== "RML")
             element.style.setProperty("pointer-events", "all");
         if (element.getAttribute("drag") !== null) {
             var drag_element = element.getAttribute("drag");
@@ -52,8 +52,10 @@ dk.drag.dragStart = function dk_drag_dragStart(event, element) {
         dk.drag.info.mouseStartX = event.clientX + document.documentElement.scrollLeft + document.body.scrollLeft;
         dk.drag.info.mouseStartY = event.clientY + document.documentElement.scrollTop + document.body.scrollTop;
     } else {
-        dk.drag.info.mouseStartX = event.clientX + window.scrollX;// || parseInt(event.changedTouches[0].clientX);
-        dk.drag.info.mouseStartY = event.clientY + window.scrollY;// || parseInt(event.changedTouches[0].clientY);
+        dk.drag.info.mouseStartX = event.clientX + window.scrollX;
+        // || parseInt(event.changedTouches[0].clientX);
+        dk.drag.info.mouseStartY = event.clientY + window.scrollY;
+        // || parseInt(event.changedTouches[0].clientY);
     }
     dk.drag.info.objectX = dk.gui.getLeftPx(element);
     dk.drag.info.objectY = dk.gui.getTopPx(element);
@@ -76,8 +78,10 @@ dk.drag.dragMove = function dk_drag_dragMove(event, element) {
         x = event.clientX + document.documentElement.scrollLeft + document.body.scrollLeft;
         y = event.clientY + document.documentElement.scrollTop + document.body.scrollTop;
     } else {
-        x = event.clientX + window.scrollX;// || parseInt(event.changedTouches[0].clientX);
-        y = event.clientY + window.scrollY;// || parseInt(event.changedTouches[0].clientY);
+        x = event.clientX + window.scrollX;
+        // || parseInt(event.changedTouches[0].clientX);
+        y = event.clientY + window.scrollY;
+        // || parseInt(event.changedTouches[0].clientY);
     }
     if (element.style.left)
         element.style.left = dk.gui.pos(dk.drag.info.objectX + x - dk.drag.info.mouseStartX);
@@ -143,8 +147,10 @@ dk.drag.resizeStart = function dk_drag_resizeStart(event, element) {
         dk.drag.info.mouseStartX = event.clientX + document.documentElement.scrollLeft + document.body.scrollLeft;
         dk.drag.info.mouseStartY = event.clientY + document.documentElement.scrollTop + document.body.scrollTop;
     } else {
-        dk.drag.info.mouseStartX = event.clientX + window.scrollX;// || parseInt(event.changedTouches[0].clientX);
-        dk.drag.info.mouseStartY = event.clientY + window.scrollY;// || parseInt(event.changedTouches[0].clientY);
+        dk.drag.info.mouseStartX = event.clientX + window.scrollX;
+        // || parseInt(event.changedTouches[0].clientX);
+        dk.drag.info.mouseStartY = event.clientY + window.scrollY;
+        // || parseInt(event.changedTouches[0].clientY);
     }
     dk.drag.info.objectX = dk.gui.getWidthPx(element);
     dk.drag.info.objectY = dk.gui.getHeightPx(element);
@@ -167,9 +173,32 @@ dk.drag.resizeMove = function dk_drag_resizeMove(event, element) {
         x = event.clientX + document.documentElement.scrollLeft + document.body.scrollLeft;
         y = event.clientY + document.documentElement.scrollTop + document.body.scrollTop;
     } else {
-        x = event.clientX + window.scrollX;// || parseInt(event.changedTouches[0].clientX);
-        y = event.clientY + window.scrollY;// || parseInt(event.changedTouches[0].clientY);
+        x = event.clientX + window.scrollX;
+        // || parseInt(event.changedTouches[0].clientX);
+        y = event.clientY + window.scrollY;
+        // || parseInt(event.changedTouches[0].clientY);
     }
+
+    //TODO - resizing of the top and left borders
+    // we need a way indentify wich border we are sizing
+    if (element.id.includes("top")) {
+        console.log("top detected");
+        if ((dk.drag.info.objectX + x - dk.drag.info.mouseStartX) > 1) {
+            let placeholder;
+            //element.style.left = dk.gui.pos(dk.drag.info.objectX + x - dk.drag.info.mouseStartX);
+        }
+    }
+    if (element.id.includes("left")) {
+        console.log("left detected");
+        if ((dk.drag.info.objectY + y - dk.drag.info.mouseStartY) > 1) {
+            let placeholder;
+            //element.style.top = dk.gui.pos(dk.drag.info.objectY + y - dk.drag.info.mouseStartY);
+        }
+    }
+
+    if ((dk.drag.info.objectY + y - dk.drag.info.mouseStartY) > 1)
+        element.style.top = dk.gui.pos(dk.drag.info.objectY + y - dk.drag.info.mouseStartY);
+
     if ((dk.drag.info.objectX + x - dk.drag.info.mouseStartX) > 1)
         element.style.width = dk.gui.pos(dk.drag.info.objectX + x - dk.drag.info.mouseStartX);
     if ((dk.drag.info.objectY + y - dk.drag.info.mouseStartY) > 1)

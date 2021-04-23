@@ -38,10 +38,12 @@ dk.chart.create = function dk_chart_create(parent, id, top, bottom, left, right,
 
     //FIXME - do proper refreshing on resize    
     dk.gui.addResizeHandler(chartCanvas, function() {//console.debug("chartCanvas resized: x:"+chartCanvas.style.width+" y:"+chartCanvas.style.height);
-    //chartCanvas.style.height = "100%";
-    //this.lineChart.resize("100%","100%");
+        //chartCanvas.width = window.innerWidth;
+        //chartCanvas.height = window.innerHeight;
+        //chartCanvas.style.height = "100%";
+        //this.lineChart.update;
     });
 	
-	return ctx;
+	return chartCanvas;
 }
 

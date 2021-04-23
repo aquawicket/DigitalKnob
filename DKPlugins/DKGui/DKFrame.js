@@ -6,38 +6,6 @@ dk.frame.frames = new Array;
 dk.frame.Init = function dk_frame_Init() {}
 dk.frame.End = function dk_frame_End() {}
 
-/*
-dk.frame.iFrame = function dk_frame_Iframe(title, url, width, height) {
-    if (typeof title !== "string")
-        return error("title invalid\n");
-    if (typeof url !== "string")
-        return error("url invalid\n");
-
-    var frame = dk.frame.createFrame(byId(title), width, height);
-    var iframe = DKGui_CreateElement(frame, "iframe", title);
-    iframe.src = url;
-    // This will call DKRocketToRML::PostProcess() again
-    iframe.width = "100%";
-    iframe.height = "100%";
-    iframe.style.borderWidth = "0rem";
-    iframe.style.position = "absolute";
-    iframe.style.top = "21rem";
-    iframe.style.left = "0rem";
-    iframe.style.width = "100%";
-    iframe.style.bottom = "0rem";
-    iframe.style.removeProperty("height");
-    iframe.style.removeProperty("right");
-    frame.addEventListener("mousedown", dk.frame.onevent);
-
-    dk.frame.createResize(frame);
-
-    //var currentBrowser = DKCef_GetCurrentBrowser();
-    //DKCef_SetUrl(currentBrowser, url);
-    //dk.frame.createResize(frame);
-    //DKCef_SetFocus();
-    return iframe;
-}
-*/
 dk.frame.createNewWindow = function dk_frame_createNewWindow(title, width, height){
     const div = document.createElement("div");
     div.id = title;
@@ -80,6 +48,7 @@ dk.frame.close = function dk_frame_close(element) {
         jsfile && dk.close(jsfile);
         htmlfile && dk.close(htmlfile);
     }
+
     /*
     //TODO if the Frame contains an iFrame, we need to call DKCef_CloseBrowser(n) on the associated iFrame
     if (frame.content.id.includes("iframe_")) {
@@ -90,6 +59,7 @@ dk.frame.close = function dk_frame_close(element) {
         }
     }
     */
+
     if (frame === document.body)
         return warn("frame === document.body");
     frame.parentNode.removeChild(frame);
@@ -100,9 +70,8 @@ dk.frame.close = function dk_frame_close(element) {
 }
 
 dk.frame.closeAll = function dk_frame_closeAll() {
-    for (var n = 0; n < dk.frame.frames.length; n++) {
+    for (var n = 0; n < dk.frame.frames.length; n++)
         dk.frame.close(dk.frame.frames[n].content);
-    }
     return true;
 }
 
@@ -114,11 +83,6 @@ dk.frame.create = function dk_frame_create(element) {
 
     var title = dk.file.getFilename(element.id);
     title && (title = title.replace(".html", ""));
-
-    //stop if frame already exsists, multiple windows not ready yet.
-    //if(DK_ElementExists(title+"_frame")){
-    //	return warn("frame already exists\n");
-    //}
 
     var width = element.style.width;
     var height = element.style.height;
@@ -154,7 +118,8 @@ dk.frame.createFrame = function dk_frame_createFrame(title, width, height) {
     var newheight = parseFloat(height) + 21;
     var newtop = parseFloat((window.innerHeight / 2) - (newheight / 2) - 1);
     var newleft = parseFloat((window.innerWidth / 2) - (width / 2) - 1)
-    let frame = dk.gui.createElement(document.body, "div", "dk_frame_frame");
+    let frame = dk.gui.createElement(document.body, "div", "dk_frame_box");
+    //add the frame to an array list
     dk.frame.frames.push(frame);
     frame = dk.frame.setCurrentFrame(frame);
     if (!frame)
@@ -260,8 +225,6 @@ dk.frame.createResize = function dk_frame_createResize(frame) {
     frame.resizeCorner.style.cursor = "nw-resize";
     dk.drag.addResizeHandle(frame.resizeCorner, frame);
 
-    /*
-    //FIXME: Top and Left require simultaneous reposisioning and sizing 
     frame.resizeTop = dk.gui.createElement(frame, "div", "dk_frame_resize_top");
     frame.resizeTop.style.removeProperty("bottom");
     frame.resizeTop.style.removeProperty("width");
@@ -283,7 +246,6 @@ dk.frame.createResize = function dk_frame_createResize(frame) {
     frame.resizeLeft.style.width = "3rem";
     frame.resizeLeft.style.cursor = "e-resize";
     dk.drag.addResizeHandle(frame.resizeLeft, frame);
-    */
 
     frame.resizeRight = dk.gui.createElement(frame, "div", "dk_frame_resize_right");
     frame.resizeRight.style.removeProperty("left");
@@ -342,10 +304,11 @@ dk.frame.minimize = function dk_frame_minimize(element) {
         return error("element invalid");
     var frame = dk.frame.setCurrentFrame(element.parentNode);
     if (!frame)
-        return false;
+        return error("frame invalid");
     //TODO
 }
 
+//FIXME - there is some work to be done here
 dk.frame.reload = function dk_frame_reload(element) {
     if (!element || !element.id || !element.parentNode)
         return error("element invalid");
@@ -363,19 +326,6 @@ dk.frame.reload = function dk_frame_reload(element) {
     dk.create(jsfile, function() {
         dk.frame.create(byId(htmlfile));
     });
-}
-
-dk.frame.restoreSize = function dk_frame_restoreSize(frame) {
-    var frame = dk.frame.setCurrentFrame(frame);
-    if (!frame)
-        return false;
-    frame.style.top = frame.top;
-    frame.style.bottom = frame.bottom;
-    frame.style.left = frame.left;
-    frame.style.right = frame.right;
-    frame.style.width = frame.width;
-    frame.style.height = frame.height;
-    return true;
 }
 
 dk.frame.setCurrentFrame = function dk_frame_setCurrentFrame(frame) {
@@ -412,3 +362,49 @@ dk.frame.storeSize = function dk_frame_storeSize(frame) {
     frame.height = frame.style.height;
     return true;
 }
+
+dk.frame.restoreSize = function dk_frame_restoreSize(frame) {
+    var frame = dk.frame.setCurrentFrame(frame);
+    if (!frame)
+        return false;
+    frame.style.top = frame.top;
+    frame.style.bottom = frame.bottom;
+    frame.style.left = frame.left;
+    frame.style.right = frame.right;
+    frame.style.width = frame.width;
+    frame.style.height = frame.height;
+    return true;
+}
+
+/*
+dk.frame.iFrame = function dk_frame_Iframe(title, url, width, height) {
+    if (typeof title !== "string")
+        return error("title invalid\n");
+    if (typeof url !== "string")
+        return error("url invalid\n");
+
+    var frame = dk.frame.createFrame(byId(title), width, height);
+    var iframe = DKGui_CreateElement(frame, "iframe", title);
+    iframe.src = url;
+    // This will call DKRocketToRML::PostProcess() again
+    iframe.width = "100%";
+    iframe.height = "100%";
+    iframe.style.borderWidth = "0rem";
+    iframe.style.position = "absolute";
+    iframe.style.top = "21rem";
+    iframe.style.left = "0rem";
+    iframe.style.width = "100%";
+    iframe.style.bottom = "0rem";
+    iframe.style.removeProperty("height");
+    iframe.style.removeProperty("right");
+    frame.addEventListener("mousedown", dk.frame.onevent);
+
+    dk.frame.createResize(frame);
+
+    //var currentBrowser = DKCef_GetCurrentBrowser();
+    //DKCef_SetUrl(currentBrowser, url);
+    //dk.frame.createResize(frame);
+    //DKCef_SetFocus();
+    return iframe;
+}
+*/
