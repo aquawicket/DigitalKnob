@@ -1,6 +1,6 @@
 DKDEPEND(duktape)
 
-DKCOPY(${DUKTAPE}/src/duktape.c ${DKPLUGINS}/DKDuktape/duktape.cpp TRUE)
+DKCOPY(${DUKTAPE}/src/duktape.c ${DKPLUGINS}/DKDuktape/duktape.cpp FALSE)
 DKCOPY(${DUKTAPE}/examples/eventloop/poll.c ${DKPLUGINS}/DKDuktape/poll.cpp FALSE)
 DKCOPY(${DUKTAPE}/examples/eventloop/ecma_eventloop.js ${DKPLUGINS}/DKDuktape/ecma_eventloop.js FALSE)
 DKCOPY(${DUKTAPE}/examples/eventloop/c_eventloop.c ${DKPLUGINS}/DKDuktape/c_eventloop.cpp FALSE)
