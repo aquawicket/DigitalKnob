@@ -68,7 +68,7 @@ dk.resize.create = function dk_resize_create(element) {
     dk.resize.bottom.style.cursor = "n-resize";
     dk.resize.addHandle(dk.resize.bottom, element);
 
-    return element;
+    return this;
 }
 
 dk.resize.addHandle = function dk_resize_addHandle(element, resize_element, side) {

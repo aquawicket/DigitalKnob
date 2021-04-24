@@ -1,7 +1,7 @@
 "use strict";
 
 window.dk = new Object;
-const duktape = window.duktape; 
+const duktape = window.duktape;
 
 dk.init = function dk_init() {
     eval("var __temp = null");
@@ -241,7 +241,7 @@ dk.hasCPP = function dk_hasCPP() {
         return true;
     if (dk.getBrowser() === "RML")
         return true;
-    if (dk.getJSEngine() === "Duktape"){
+    if (dk.getJSEngine() === "Duktape") {
         dk.duktape = true;
         return false;
     }
@@ -296,20 +296,14 @@ dk.create = function dk_create(data, dk_create_callback) {
         }
     }
     if (arry[0] === "DKHtml") {
-        if (!dk.loadHtml(arry[1], arry[2], function dk_loadHtml_callback() {
+        if (!dk.loadHtml(arry[1], arry[2], function dk_loadHtml_callback(element) {
             if (typeof dk_create_callback === "function") {
-                dk_create_callback();
+                dk_create_callback(element);
             } else {
                 console.warn("DK_Create(" + data + "): does not have a callback");
             }
         }))
             return error("DK_LoadHtml failed");
-        /*
-        if (typeof callback === "function") {
-            //callback();
-        } else {//console.error("DK_Create("+data+"): does not have a callback");
-        }
-        */
     }
     if (arry[0] === "DKCss") {
         if (!dk.loadCss(arry[1])) {
@@ -439,20 +433,20 @@ dk.loadJs = function dk_loadJs(url, dk_loadJs_callback) {
     }
 
     //FIXME - DigitalKnob can't trigger onload yet, so we do this
-    
+
     if (dk.getJSEngine() === "Duktape") {
         var plugin = dk.getPlugin(url);
         plugin && console.log("loading dk." + plugin.name + " plugin");
         if (plugin && plugin.init) {
-                console.log("running dk." + plugin.name + ".init()");
-                plugin.init();
-            } else if (typeof old_plugin === 'function') {
-                console.warn("FIXME: (" + url + ") This plugin uses Init the old way");
-                old_plugin();
-            } else {
-                done = true;
-                dk_loadJs_callback && dk_loadJs_callback(true);
-            }
+            console.log("running dk." + plugin.name + ".init()");
+            plugin.init();
+        } else if (typeof old_plugin === 'function') {
+            console.warn("FIXME: (" + url + ") This plugin uses Init the old way");
+            old_plugin();
+        } else {
+            done = true;
+            dk_loadJs_callback && dk_loadJs_callback(true);
+        }
         /*
         var func = init;
         //Plugin_Init() 
@@ -471,53 +465,34 @@ dk.loadHtml = function dk_loadHtml(url, parent, dk_loadHtml_callback) {
     //TODO: the id of the root element in the html file should be the file path..   I.E. MyPlugin/MyPlugin.html
     if (!url)
         return error("url is invalid");
-
     if (url.indexOf(".html") === -1)
         return error("url is not a valid .html file");
-
-    if (url === ".html")
-        url = "New.html";
-
+    //if (url === ".html")
+    //    url = "New.html";
     if (dk.getObjects().indexOf(url) !== -1)
-        return warn("DK.js: dk.loadHtml(" + url + ", parent): url already loaded");
+        console.warn(url+" already loaded");
 
-    //var string = DK_FileToString(url);
     dk.fileToStringAsync(url, function(string) {
-
         //Create an empty widget
-        if (!string || string === "ERROR") {
-            string = "<div id=\"" + url + "\" style=\"position:absolute;top:200rem;left:200rem;width:200rem;height:200rem;background-color:rgb(230,230,230);\"></div>";
-        }
+        //if (!string)
+        //    string = "<div id=\"" + url + "\" style=\"position:absolute;top:200rem;left:200rem;width:200rem;height:200rem;background-color:rgb(230,230,230);\"></div>";
 
-        var temp = document.createElement("temp");
-        temp.innerHTML = string;
-        var nodes = temp.childNodes;
+        var container = document.createElement("div");
+        container.innerHTML = string.trim();
+        var nodes = container.childNodes;
         if (!nodes)
-            return error("DK.js: dk.loadHtml(" + url + ", " + parent + "): Could not get nodes from file url");
-        if (nodes.length > 1) {
-            for (var i = 0; i < nodes.length; i++) {
-                console.warn("node[" + i + "]: " + nodes[i]);
-            }
-
-            console.warn("###############################################");
-            console.warn("DK.js: dk.loadHtml(" + url + ", " + parent + "): Too many nodes in file");
-            //console.log(temp.innerHTML);
-            console.warn("You either have too many root nodes in your html file or, you have extra whitespace at the begining or the end of the file");
-            console.warn("###############################################");
-            //return false;
-        }
-
-        if (nodes[0].id !== url) {
-            console.warn("DK.js: dk.loadHtml(" + url + ",parent): did not match the node id (" + nodes[0].id + ")");
-            nodes[0].id = url;
-            console.warn("DK.js: dk.loadHtml(" + url + ",parent): please fix the id");
-        }
+            return error("Could not get nodes from "+url);
+        if (nodes.length > 1)
+            console.warn("Multiple root nodes in "+url+ ", wrapping in a new div");
+        else
+            container = nodes[0];
+        container.id = dk.getAvailableId(url);
+        container.setAttribute("url", url);
         if (parent && byId(parent)) {
-            //console.log("DK.js:dk.loadHtml(): appending to parent");
-            byId(parent).appendChild(nodes[0]);
+            console.warn("An element should be used instaed of an id here");
+            byId(parent).appendChild(container);
         } else {
-            //console.log("DK.js:dk.loadHtml(): appending to body");
-            document.body.appendChild(nodes[0]);
+            document.body.appendChild(container);
         }
 
         //FIXME - CEF seems to do this automatically. DKRml need to act the same.
@@ -526,8 +501,8 @@ dk.loadHtml = function dk_loadHtml(url, parent, dk_loadHtml_callback) {
         //if(elements[0]){ console.log("elements[0].innerHTML: "+elements[0].innerHTML); }
         //if(elements[0]){ document.removeChild(elements[0]); }
 
-        dk_loadHtml_callback && dk_loadHtml_callback();
-        return true;
+        dk_loadHtml_callback && dk_loadHtml_callback(container);
+        return container;
     });
     return true;
 }
@@ -799,7 +774,7 @@ dk.clearSelection = function dk_clearSelection() {
 
 dk.getElements = function dk_getElements(element) {
     var string;
-    
+
     if (!element)
         return error("element invalid");
     //var nodes = element.getElementsByTagName('*'); //all children recursively    
@@ -1250,6 +1225,5 @@ dk.checkForUNICODE = function dk_checkForUNICODE(str) {
 dk.validateStrict = function dk_validateStrict(str) {
     return str;
 }
-
 
 dk.init();

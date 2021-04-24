@@ -1,17 +1,69 @@
-[target="frame"] {
+[frame="frame"] {
+    position: absolute;
+    overflow: hidden;
+    min-width: 62rem;
+    min-height: 20rem;
     background-color: #766a6a;
+    border-style: solid;
     border-color: rgb(0,0,0);
     border-width: 1rem;
 }
 
-[target="titlebar"] {
-    background-color: #3d1855;
+[frame="content"] {
+    position: absolute;
+    top: 21rem;
+    bottom: 0rem;
+    left: 0rem;
+    right: 0rem;
+    height: unset;
 }
 
-[target="titlebartext"] {
-    color:#fcfafa;
+[frame="titlebar"] {
+    position: absolute;
+    top: 0rem;
+    left: 0rem;
+    right: 0rem;
+    height: 21rem;
+    background-color: #151416;
+}
+
+[frame="titlebartext"] {
+    position: absolute;
+    cursor: default;
+    color: #d9cbe0;
     padding-top: 2rem;
+    padding-bottom: 2rem;
     padding-left: 4rem;
+    padding-right: 4rem;
     font-size: 15rem;
     font-weight: bold;
+    white-space: nowrap;
+}
+
+[frame="reload"] {
+    position: absolute;
+    top: 1rem;
+    right: 65rem;
+    height: 18rem;
+}
+
+[frame="minimize"] {
+    position: absolute;
+    top: 0rem;
+    right: 42rem;
+    height: 20rem;
+}
+
+[frame="maximize"] {
+    position: absolute;
+    top: 0rem;
+    right: 21rem;
+    height: 20rem;
+}
+
+[frame="close"] {
+    position: absolute;
+    top: 0rem;
+    right: 0rem;
+    height: 20rem;
 }

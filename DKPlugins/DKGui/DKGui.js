@@ -23,7 +23,7 @@ dk.gui.getLeftPx = function dk_gui_getLeftPx(element) {
     if (!element.style.left)
         return 0;
     if (element.style.left.indexOf("%") > -1)
-        return parseInt(element.style.left) * WindowWidth() / 100;
+        return parseInt(element.style.left) * window.innerWidth / 100;
     return parseInt(element.style.left);
 }
 
@@ -33,7 +33,7 @@ dk.gui.getTopPx = function dk_gui_getTopPx(element) {
     if (!element.style.top)
         return 0;
     if (element.style.top.indexOf("%") > -1)
-        return parseInt(element.style.top) * WindowHeight() / 100;
+        return parseInt(element.style.top) * window.innerHeight / 100;
     return parseInt(element.style.top);
 }
 
@@ -43,7 +43,7 @@ dk.gui.getWidthPx = function dk_gui_getWidthPx(element) {
     if (!element.style.width)
         return 0;
     if (element.style.width.indexOf("%") > -1)
-        return parseInt(element.style.width) * WindowWidth() / 100;
+        return parseInt(element.style.width) * window.innerWidth / 100;
     return parseInt(element.style.width);
 }
 
@@ -53,7 +53,7 @@ dk.gui.getHeightPx = function dk_gui_getHeightPx(element) {
     if (!element.style.height)
         return 0;
     if (element.style.height.includes("%"))
-        return parseInt(element.style.height) * WindowHeight() / 100;
+        return parseInt(element.style.height) * window.innerHeight / 100;
     return parseInt(element.style.height);
 }
 

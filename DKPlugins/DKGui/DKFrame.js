@@ -6,7 +6,7 @@ dk.frame.frames = new Array;
 dk.frame.Init = function dk_frame_Init() {}
 dk.frame.End = function dk_frame_End() {}
 
-dk.frame.createNewWindow = function dk_frame_createNewWindow(title, width, height){
+dk.frame.createNewWindow = function dk_frame_createNewWindow(title, width, height) {
     const div = document.createElement("div");
     div.id = title;
     //div.style.position = "absolute";
@@ -31,22 +31,22 @@ dk.frame.createNewWindow = function dk_frame_createNewWindow(title, width, heigh
 }
 
 dk.frame.bringToFront = function dk_frame_bringToFront(frame) {
-    frame = dk.frame.setCurrentFrame(frame);
+    frame = dk.frame.getFrame(frame);
     if (!frame)
         return false;
     (document.body.lastChild !== frame) && document.body.appendChild(frame);
 }
 
 dk.frame.close = function dk_frame_close(element) {
-    if (!element || !element.parentNode)
+    if (!element)
         return error("element invalid");
-    var frame = dk.frame.setCurrentFrame(element.parentNode);
+    var frame = this.getFrame(element);
 
-    if (frame.content.id.includes(".html")) {
+    if (frame.content.id && frame.content.id.includes(".html")) {
         var htmlfile = frame.content.id;
-        var jsfile = htmlfile.replace(".html", ".js");
-        jsfile && dk.close(jsfile);
-        htmlfile && dk.close(htmlfile);
+        //var jsfile = htmlfile.replace(".html", ".js");
+        //jsfile && dk.close(jsfile);
+        //htmlfile && dk.close(htmlfile);
     }
 
     /*
@@ -93,17 +93,11 @@ dk.frame.create = function dk_frame_create(element) {
 
     let frame = dk.frame.createFrame(title, width, height);
     frame.content = element;
-    frame.content.style.position = "absolute";
-    frame.content.style.top = "21rem";
-    frame.content.style.left = "0rem";
-    frame.content.style.width = "100%";
-    frame.content.style.bottom = "-1rem";
-    frame.content.style.removeProperty("right");
-    frame.content.style.removeProperty("height")
+    frame.content.setAttribute("frame", "content");
     frame.appendChild(frame.content);
-    
-    dk.resize.create(frame);
-    return frame;
+
+    frame.resize = dk.resize.create(frame);
+    return this;
 }
 
 dk.frame.createFrame = function dk_frame_createFrame(title, width, height) {
@@ -121,81 +115,67 @@ dk.frame.createFrame = function dk_frame_createFrame(title, width, height) {
     let frame = dk.gui.createElement(document.body, "div", "dk_frame_box");
     //add the frame to an array list
     dk.frame.frames.push(frame);
-    frame = dk.frame.setCurrentFrame(frame);
+    frame = dk.frame.getFrame(frame);
     if (!frame)
-        return false;
+        return error("frame invalid");
+
     //See DKFrame.css for styling    
-    frame.setAttribute("target","frame");
-    frame.style.position = "absolute";
-    frame.style.overflow = "hidden";
+    frame.setAttribute("frame", "frame");
     frame.style.top = newtop + "px";
     frame.style.left = newleft + "px";
     frame.style.width = width + "rem";
     frame.style.height = newheight + "rem";
-    (dk.getBrowser() !== "RML") && (frame.style.borderStyle = "solid");
-    frame.style.minWidth = "62rem";
-    frame.style.minHeight = "30rem";
     frame.onmousedown = function dk_frame_frame_onmousedown(event) {
+        (document.body.lastChild !== frame) && (frame.mousedown_target = event.target);
         dk.frame.bringToFront(event.currentTarget);
+    }
+    frame.onmouseup = function dk_frame_frame_onmouseup(event) {
+        (frame.mousedown_target == event.target) && event.target.click();
+        frame.mousedown_target = null;
     }
 
     //See DKFrame.css for styling
     frame.titlebar = dk.gui.createElement(frame, "div", "dk_frame_titlebar");
-    frame.titlebar.setAttribute("target","titlebar");
-    frame.titlebar.style.position = "absolute";
-    frame.titlebar.style.width = "100%";
-    frame.titlebar.style.height = "21rem";
+    frame.titlebar.setAttribute("frame", "titlebar");
     frame.titlebar.ondblclick = function dk_frame_titlebar_ondblclick(event) {
+        event.stopPropagation();
         dk.frame.maximize(event.currentTarget);
     }
     dk.drag.addHandle(frame.titlebar, frame);
 
     //See DKFrame.css for styling
-    frame.titlebar.text = dk.gui.createElement(frame.titlebar, "div", "dk_frame_titlebartext");
-    frame.titlebar.text.setAttribute("target","titlebartext");
-    frame.titlebar.text.style.position = "absolute";
-    frame.titlebar.text.style.width = "100%";
-    frame.titlebar.text.style.height = "100%";
-    frame.titlebar.text.style.cursor = "default";
-    frame.titlebar.text.innerHTML = title;
+    frame.titlebartext = dk.gui.createElement(frame.titlebar, "div", "dk_frame_titlebartext");
+    frame.titlebartext.setAttribute("frame", "titlebartext");
+    frame.titlebartext.innerHTML = title;
 
-    frame.reload = dk.gui.createElement(frame, "img", "dk_frame_reload");
+    frame.reload = dk.gui.createElement(frame.titlebar, "img", "dk_frame_reload");
+    frame.reload.setAttribute("frame", "reload");
     frame.reload.setAttribute("src", "DKGui/reload.png");
-    frame.reload.style.position = "absolute";
-    frame.reload.style.top = "1rem";
-    frame.reload.style.right = "65rem";
-    frame.reload.style.height = "18rem";
     frame.reload.onmousedown = function dk_frame_reload_onmousedown(event) {
+        event.stopPropagation();
         dk.frame.reload(event.currentTarget);
     }
 
-    var minimize = dk.gui.createElement(frame, "img", "dk_frame_minimize");
-    minimize.setAttribute("src", "DKGui/minimize.png");
-    minimize.style.position = "absolute";
-    minimize.style.top = "0rem";
-    minimize.style.right = "42rem";
-    minimize.style.height = "20rem;"
-    minimize.onmousedown = function dk_frame_minimize_onmousedown(event) {
+    frame.minimize = dk.gui.createElement(frame.titlebar, "img", "dk_frame_minimize");
+    frame.minimize.setAttribute("frame", "minimize");
+    frame.minimize.setAttribute("src", "DKGui/minimize.png");
+    frame.minimize.onmousedown = function dk_frame_minimize_onmousedown(event) {
+        event.stopPropagation();
         dk.frame.minimize(event.currentTarget);
     }
 
-    var maximize = dk.gui.createElement(frame, "img", "dk_frame_maximize");
-    maximize.setAttribute("src", "DKGui/maximize.png");
-    maximize.style.position = "absolute";
-    maximize.style.top = "0rem";
-    maximize.style.right = "21rem";
-    maximize.style.height = "20rem";
-    maximize.onmousedown = function dk_frame_maximize_onmousedown(event) {
+    frame.maximize = dk.gui.createElement(frame.titlebar, "img", "dk_frame_maximize");
+    frame.maximize.setAttribute("frame", "maximize");
+    frame.maximize.setAttribute("src", "DKGui/maximize.png");
+    frame.maximize.onmousedown = function dk_frame_maximize_onmousedown(event) {
+        event.stopPropagation();
         dk.frame.maximize(event.currentTarget);
     }
 
-    var close = dk.gui.createElement(frame, "img", "dk_frame_close");
-    close.setAttribute("src", "DKGui/close.png");
-    close.style.position = "absolute";
-    close.style.top = "0rem";
-    close.style.right = "0rem";
-    close.style.height = "20rem";
-    close.onmousedown = function dk_frame_close_onmousedown(event) {
+    frame.close = dk.gui.createElement(frame.titlebar, "img", "dk_frame_close");
+    frame.close.setAttribute("frame", "close");
+    frame.close.setAttribute("src", "DKGui/close.png");
+    frame.close.onmousedown = function dk_frame_close_onmousedown(event) {
         event.stopPropagation();
         dk.frame.close(event.currentTarget);
     }
@@ -205,17 +185,14 @@ dk.frame.createFrame = function dk_frame_createFrame(title, width, height) {
 dk.frame.maximize = function dk_frame_maximize(element) {
     if (!element || !element.parentNode)
         return error("element invalid");
-    var frame = dk.frame.setCurrentFrame(element.parentNode);
+    const frame = dk.frame.getFrame(element);
     if (!frame)
-        return false;
-    var top = frame.style.top;
-    var bottom = frame.style.bottom;
-    var left = frame.style.left;
-    var right = frame.style.right;
-    if (top === "0rem" && bottom === "0rem" && left === "0rem" && right === "0rem" || top === "0px" && bottom === "0px" && left === "0px" && right === "0px") {
+        return error("frame invalid");
+    if (frame.maximized) {
         dk.frame.restoreSize(frame);
         frame.content.style.width = parseInt(frame.style.width) + "rem";
         frame.content.style.height = parseInt(frame.style.height) - 21 + "rem";
+        frame.maximized = false;
     } else {
         dk.frame.storeSize(frame);
         frame.style.top = "0rem";
@@ -226,23 +203,59 @@ dk.frame.maximize = function dk_frame_maximize(element) {
         frame.style.removeProperty("height");
         frame.content.style.width = "100%";
         frame.content.style.height = "100%";
+        frame.maximized = true;
     }
 }
 
 dk.frame.minimize = function dk_frame_minimize(element) {
     if (!element || !element.parentNode)
         return error("element invalid");
-    var frame = dk.frame.setCurrentFrame(element.parentNode);
+    var frame = dk.frame.getFrame(element);
     if (!frame)
         return error("frame invalid");
-    //TODO
+    var top = frame.style.top;
+    var bottom = frame.style.bottom;
+    var left = frame.style.left;
+    var right = frame.style.right;
+    if (!frame.minimized) {
+        dk.frame.storeSize(frame);
+        frame.style.left = "0rem";
+        frame.style.bottom = "0rem";
+        frame.style.width = frame.titlebartext.offsetWidth;
+        frame.style.height = "20rem";
+        frame.style.removeProperty("top");
+        frame.style.removeProperty("right");
+        //frame.content.style.width = "100%";
+        //frame.content.style.height = "100%";
+        frame.reload.style.visibility = "hidden";
+        frame.minimize.style.visibility = "hidden";
+        frame.maximize.style.visibility = "hidden";
+        frame.close.style.visibility = "hidden";
+        frame.resize.image.style.visibility = "hidden";
+        frame.resize.corner.style.visibility = "hidden";
+        frame.titlebar.onclick = function dk_frame_titlebar_onclick(event) {
+            event.stopPropagation();
+            dk.frame.minimize(frame.minimize);
+        }
+        frame.minimized = true;
+    } else {
+        dk.frame.restoreSize(frame);
+        frame.reload.style.visibility = "visible";
+        frame.minimize.style.visibility = "visible";
+        frame.maximize.style.visibility = "visible";
+        frame.close.style.visibility = "visible";
+        frame.resize.image.style.visibility = "visible";
+        frame.resize.corner.style.visibility = "visible";
+        frame.titlebar.onclick = null;
+        frame.minimized = false;
+    }
 }
 
 //FIXME - there is some work to be done here
 dk.frame.reload = function dk_frame_reload(element) {
     if (!element || !element.id || !element.parentNode)
         return error("element invalid");
-    var frame = dk.frame.setCurrentFrame(element.parentNode);
+    var frame = dk.frame.getFrame(element);
     if (!frame || !frame.content)
         return "frame invalid";
     const jsfile = frame.content.id.replace(".html", ".js");
@@ -258,22 +271,26 @@ dk.frame.reload = function dk_frame_reload(element) {
     });
 }
 
-dk.frame.setCurrentFrame = function dk_frame_setCurrentFrame(frame) {
-    for (let n = 0; n < dk.frame.frames.length; n++) {
-        if (dk.frame.frames[n] === frame) {
-            return dk.frame.frames[n];
+dk.frame.getFrame = function dk_frame_getFrame(element) {
+    if (!element)
+        return error("element invalid");
+    while (element && element !== document) {
+        for (let n = 0; n < dk.frame.frames.length; n++) {
+            if (dk.frame.frames[n] === element)
+                return dk.frame.frames[n];
         }
+        element = element.parentElement;
     }
     return error("dk.frame.frames[n] invalid");
 }
 
 dk.frame.setTitle = function dk_frame_setTitle(element, title) {
-    if (!element || !element.parentNode)
+    if (!element)
         return error("element invalid\n");
     if (typeof title !== "string")
         return error("title invalid\n");
 
-    var frame = dk.frame.setCurrentFrame(element.parentNode);
+    var frame = dk.frame.getFrame(element);
     !frame.titlebar && (frame.titlebar = frame.firstChild);
     !frame.titlebar.text && (frame.titlebar.text = frame.titlebar.firstChild);
     frame.titlebar.text && (frame.titlebar.text.innerHTML = title);
@@ -281,7 +298,7 @@ dk.frame.setTitle = function dk_frame_setTitle(element, title) {
 }
 
 dk.frame.storeSize = function dk_frame_storeSize(frame) {
-    var frame = dk.frame.setCurrentFrame(frame);
+    var frame = dk.frame.getFrame(frame);
     if (!frame)
         return false;
     frame.top = frame.style.top;
@@ -294,7 +311,7 @@ dk.frame.storeSize = function dk_frame_storeSize(frame) {
 }
 
 dk.frame.restoreSize = function dk_frame_restoreSize(frame) {
-    var frame = dk.frame.setCurrentFrame(frame);
+    var frame = dk.frame.getFrame(frame);
     if (!frame)
         return false;
     frame.style.top = frame.top;
@@ -327,7 +344,7 @@ dk.frame.iFrame = function dk_frame_Iframe(title, url, width, height) {
     iframe.style.bottom = "0rem";
     iframe.style.removeProperty("height");
     iframe.style.removeProperty("right");
-    frame.addEventListener("mousedown", dk.frame.onevent);
+    frame.onmousedown = dk.frame.onevent;
 
     dk.frame.createResize(frame);
 
