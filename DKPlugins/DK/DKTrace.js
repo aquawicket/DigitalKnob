@@ -5,7 +5,7 @@ dk.trace = new Object;
 window.onerror = function(msg, url, lineNo, columnNo, err) {
     if (!err && !msg)
         return error("window.onerror failed: err and msg variables invalid");
-        err = err ? err : msg;
+    err = err ? err : msg;
     return error(err);
 }
 
@@ -14,9 +14,9 @@ window.onerror = function(msg, url, lineNo, columnNo, err) {
 window.onunhandledrejection = function(event) {
     return error(event);
 }
-	
-dk.trace.editFile = function dk_trace_editFile(file){
-    dk.create("DKNotepad/DKNotepad.js", function dk_create_callback(){
+
+dk.trace.editFile = function dk_trace_editFile(file) {
+    dk.create("DKNotepad/DKNotepad.js", function dk_create_callback() {
         dk.frame.create(byId("DKNotepad/DKNotepad.html"));
         DKNotepad_Open(file);
     });
@@ -54,7 +54,7 @@ dk.trace.stackToConsoleString = function dk_trace_stackToConsoleString(arg, dele
     let str = jsonStack[0].msg + "<br>";
     for (let n = 1; n < jsonStack.length; n++) {
         str += "  at " + jsonStack[n].func + " ";
-        str += "(<a href='#' onClick='dk.trace.editFile(\""+jsonStack[n].filePath+"\")' style='color:rgb(213,213,213)'>" + jsonStack[n].file + ":" + jsonStack[n].lineNum + "</a>)<br>";
+        str += "(<a href='#' onClick='dk.trace.editFile(\"" + jsonStack[n].filePath + "\")' style='color:rgb(213,213,213)'>" + jsonStack[n].file + ":" + jsonStack[n].lineNum + "</a>)<br>";
     }
 
     return str;
@@ -106,7 +106,7 @@ dk.trace.stackToJSON = function dk_trace_stackToJSON(stack) {
         line = line.replace(")", "");
 
         const func = line.split(" ").shift();
-        line = line.replace(func+" ", "");
+        line = line.replace(func + " ", "");
 
         // some stack lines don't have a valid function name
         /*
@@ -145,14 +145,13 @@ dk.trace.lastStackCall = function dk_trace_lastStackCall() {
             break;
         }
     }
-    if (!nn) 
+    if (!nn)
         return error("LastStackCall(): could not find 'LastStackCall' in the stack");
 
     let str = "LastStackCall: " + stack[nn].func;
     str += "(<a href='" + stack[nn].filePath + "' target='_blank' style='color:rgb(213,213,213)'>" + stack[nn].file + ":" + stack[nn].lineNum + "</a>)";
     return str;
 }
-
 
 dk.trace.getArguments = function dk_trace_getArguments(func, getArgValues) {
     let argsString = "";
@@ -185,7 +184,6 @@ dk.trace.getArguments = function dk_trace_getArguments(func, getArgValues) {
     argsString = args.toString();
     return argsString;
 }
-
 
 dk.trace.getCurrentFunctionName = function dk_trace_getCurrentFunctionName(n) {
     return new Error().stack.split('\n')[2 + n].trim().split(" ")[1];

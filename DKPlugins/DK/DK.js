@@ -470,7 +470,7 @@ dk.loadHtml = function dk_loadHtml(url, parent, dk_loadHtml_callback) {
     //if (url === ".html")
     //    url = "New.html";
     if (dk.getObjects().indexOf(url) !== -1)
-        console.warn(url+" already loaded");
+        console.warn(url + " already loaded");
 
     dk.fileToStringAsync(url, function(string) {
         //Create an empty widget
@@ -481,9 +481,9 @@ dk.loadHtml = function dk_loadHtml(url, parent, dk_loadHtml_callback) {
         container.innerHTML = string.trim();
         var nodes = container.childNodes;
         if (!nodes)
-            return error("Could not get nodes from "+url);
+            return error("Could not get nodes from " + url);
         if (nodes.length > 1)
-            console.warn("Multiple root nodes in "+url+ ", wrapping in a new div");
+            console.warn("Multiple root nodes in " + url + ", wrapping in a new div");
         else
             container = nodes[0];
         container.id = dk.getAvailableId(url);

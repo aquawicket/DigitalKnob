@@ -3,20 +3,19 @@
 dk.messagebox = new Object;
 dk.messagebox.boxes = new Array;
 
-dk.messagebox.init = function dk_messagebox_init() {
-}
+dk.messagebox.init = function dk_messagebox_init() {}
 
-dk.messagebox.end = function dk_messagebox_end() {
-    //dk.messagebox.closeAll();
+dk.messagebox.end = function dk_messagebox_end() {//dk.messagebox.closeAll();
 }
 
 dk.messagebox.close = function dk_messagebox_close(node) {
     const box = dk.messagebox.getBox(node);
+    box.close = null;
     const frame = dk.frame.getFrame(box);
     if (frame)
         dk.frame.close(box);
-    else
-        box.parentNode.removeChild(box);
+
+    box.parentNode.removeChild(box);    
     let index = dk.messagebox.boxes.indexOf(box);
     if (index > -1)
         dk.messagebox.boxes.splice(index, 1);
@@ -29,12 +28,13 @@ dk.messagebox.closeAll = function dk_messagebox_closeAll() {
     }
 }
 
-dk.messagebox.create = function dk_messagebox_create(callback) { 
+dk.messagebox.create = function dk_messagebox_create(callback) {
     dk.create("DKGui/DKMessageBox.html", function(box) {
         if (!box)
             return error("invalid box");
-        
+
         dk.messagebox.boxes.push(box);
+        box.close = dk.messagebox.close;
         box.message = box.querySelector("[dkmessagebox='message']");
         box.input = box.querySelector("[dkmessagebox='input']");
         box.cancel = box.querySelector("[dkmessagebox='cancel']");
@@ -101,7 +101,6 @@ dk.messagebox.confirm = function dk_messagebox_confirm(message, callback) {
             dk.messagebox.close(event.currentTarget);
         }
         box.cancel.onclick = function() {
-            console.log("cancel clicked");
             callback && callback(false);
             dk.messagebox.close(event.currentTarget);
         }

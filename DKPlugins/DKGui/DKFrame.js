@@ -41,8 +41,11 @@ dk.frame.close = function dk_frame_close(element) {
     if (!element)
         return error("element invalid");
     var frame = this.getFrame(element);
-
-    if (frame.content.id && frame.content.id.includes(".html")) {
+    
+    if(frame.content && frame.content.close){
+        frame.content.close(frame.content);
+    }
+    if (frame.content && frame.content.id && frame.content.id.includes(".html")) {
         var htmlfile = frame.content.id;
         //var jsfile = htmlfile.replace(".html", ".js");
         //jsfile && dk.close(jsfile);
@@ -62,7 +65,7 @@ dk.frame.close = function dk_frame_close(element) {
 
     if (frame === document.body)
         return warn("frame === document.body");
-    frame.parentNode.removeChild(frame);
+    frame.parentNode && frame.parentNode.removeChild(frame);
     var index = dk.frame.frames.indexOf(frame);
     if (index > -1)
         dk.frame.frames.splice(index, 1);
