@@ -234,7 +234,7 @@ dk.frame.createResize = function dk_frame_createResize(frame) {
     frame.resizeTop.style.right = "0rem";
     frame.resizeTop.style.height = "3rem";
     frame.resizeTop.style.cursor = "n-resize";
-    dk.drag.addResizeHandle(frame.resizeTop, frame);
+    dk.drag.addResizeHandle(frame.resizeTop, frame, "top");
 
     frame.resizeLeft = dk.gui.createElement(frame, "div", "dk_frame_resize_left");
     frame.resizeLeft.style.removeProperty("right");
@@ -245,7 +245,7 @@ dk.frame.createResize = function dk_frame_createResize(frame) {
     frame.resizeLeft.style.left = "0rem";
     frame.resizeLeft.style.width = "3rem";
     frame.resizeLeft.style.cursor = "e-resize";
-    dk.drag.addResizeHandle(frame.resizeLeft, frame);
+    dk.drag.addResizeHandle(frame.resizeLeft, frame, "left");
 
     frame.resizeRight = dk.gui.createElement(frame, "div", "dk_frame_resize_right");
     frame.resizeRight.style.removeProperty("left");
