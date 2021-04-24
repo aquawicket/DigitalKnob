@@ -146,6 +146,9 @@ dk.frame.createFrame = function dk_frame_createFrame(title, width, height) {
     }
     dk.drag.addHandle(frame.titlebar, frame);
 
+    frame.titlebaricon = dk.gui.createElement(frame.titlebar, "img", "dk_frame_titlebaricon");
+    frame.titlebaricon.setAttribute("dk_frame", "titlebaricon");
+    
     //See DKFrame.css for styling
     frame.titlebartext = dk.gui.createElement(frame.titlebar, "div", "dk_frame_titlebartext");
     frame.titlebartext.setAttribute("dk_frame", "titlebartext");

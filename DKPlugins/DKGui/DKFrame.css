@@ -27,13 +27,20 @@
     background-color: #151416;
 }
 
+[dk_frame="titlebaricon"] {
+    position: absolute;
+    padding-top: 2rem;
+    padding-left:2rem;
+    width:16rem;
+}
+
 [dk_frame="titlebartext"] {
     position: absolute;
     cursor: default;
     color: #d9cbe0;
     padding-top: 2rem;
     padding-bottom: 2rem;
-    padding-left: 4rem;
+    padding-left: 20rem;
     padding-right: 4rem;
     font-size: 15rem;
     font-weight: bold;

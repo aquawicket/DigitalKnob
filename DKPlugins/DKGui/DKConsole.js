@@ -138,6 +138,7 @@ dk.console.create = function dk_console_create(parent, id, top, bottom, left, ri
     dk.create("DKGui/DKConsole.css");
     dk.console.limit = 100;
     const container = document.createElement("div");
+    dk.console.container = container;
     container.style.padding = "0rem";
     container.style.margin = "0rem";
     container.id = id;
