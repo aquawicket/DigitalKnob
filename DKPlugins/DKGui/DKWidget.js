@@ -18,9 +18,31 @@ const DKWidget = function() {
     DKWidget.prototype.create = function() {
         //console.log("DKWidget.create() called");
     }
+    DKWidget.prototype.getInstance = function(instance) {
+        console.log("DKWidget.getInstance() called");
+        let index = DKWidget.instances.indexOf(instance);
+        if(index > -1)
+            console.debug("Loos like we can us indexOf to access the instance as well :)");
+        for (var n = 0; n < DKWidget.instances.length; n++) {
+            if (DKWidget.instances[n].instance === instance) {
+                return DKWidget.instances[n];
+            }
+        }
+    }
+    DKWidget.prototype.removeInstance = function(instance) {
+        console.debug("DKWidget.removeInstance() called");
+        for (var n = 0; n < DKWidget.instances.length; n++) {
+            if (DKWidget.instances[n].instance === instance) {
+                console.debug("TODO: this is where you remove the instance from the array");
+            }
+        }
+        let index = DKWidget.instances.indexOf(instance);
+        if(index > -1)
+            console.debug("Loos like we can us indexOf to access the instance as well :)");
+    }
     DKWidget.prototype.getInstanceInfo = function(callerName) {
         //console.log("DKWidget.getInstanceIndex() called");
-        for (var n = 0; n < instances.length; n++) {
+        for (var n = 0; n < DKWidget.instances.length; n++) {
             if (DKWidget.instances[n].instance === this.instance) {
                 console.log("(INSTANCE) name:" + callerName + " index:" + n + " total:" + DKWidget.instances.length);
                 return n;
@@ -29,12 +51,12 @@ const DKWidget = function() {
     }
 
     DKWidget.prototype.setElement = function(element){
-        console.debug("DKWidget.setElement() called");
+        //console.debug("DKWidget.setElement() called");
         this.element = element;
     }
 
     DKWidget.prototype.getElement = function(element){
-        console.debug("DKWidget.getElement() called");
+        //console.debug("DKWidget.getElement() called");
         return this.element;
     }
 

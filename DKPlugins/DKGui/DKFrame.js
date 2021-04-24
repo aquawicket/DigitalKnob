@@ -37,21 +37,32 @@ dk.frame.bringToFront = function dk_frame_bringToFront(frame) {
     (document.body.lastChild !== frame) && document.body.appendChild(frame);
 }
 
-dk.frame.close = function dk_frame_close(element) {
-    if (!element)
-        return error("element invalid");
-    var frame = this.getFrame(element);
-    
-    //console.log(frame.content instanceof DKWidget);
-
-    if(frame.content && frame.content.close){
-        frame.content.close(frame.content);
+dk.frame.close = function dk_frame_close(obj) {
+    //Remove the contents of the frame
+    if (!obj)
+        return error("obj invalid");
+    if (obj instanceof DKWidget) {
+        console.debug("obj is an instanceof DKWidget");
+        obj.close();
     }
-    if (frame.content && frame.content.id && frame.content.id.includes(".html")) {
+    var frame = this.getFrame(obj);
+    if (!frame)
+        return error("frame invalid");
+
+    if (frame && frame.contentInstance && frame.contentInstance instanceof DKWidget) {
+        console.debug("frame.contentInstance is an instanceof DKWidget");
+        frame.contentInstance.close();
+    } else if (frame.content && frame.content.close) {
+        console.debug("frame.content has it's own close() function");
+        frame.content.close(frame.content);
+    } else if (frame.content && frame.content.id && frame.content.id.includes(".html")) {
+        console.debug("obj seems to be a plugin sill closing by filename ");
         var htmlfile = frame.content.id;
-        //var jsfile = htmlfile.replace(".html", ".js");
-        //jsfile && dk.close(jsfile);
-        //htmlfile && dk.close(htmlfile);
+        var jsfile = htmlfile.replace(".html", ".js");
+        jsfile && dk.close(jsfile);
+        htmlfile && dk.close(htmlfile);
+    } else {
+        console.info("Not a dkplugin, just some javascript html. we can just close the frame.")
     }
 
     /*
@@ -65,6 +76,8 @@ dk.frame.close = function dk_frame_close(element) {
     }
     */
 
+    //Now finally, remove the frame and it's instance
+    console.debug("closing the frame");
     if (frame === document.body)
         return warn("frame === document.body");
     frame.parentNode && frame.parentNode.removeChild(frame);
@@ -80,11 +93,20 @@ dk.frame.closeAll = function dk_frame_closeAll() {
     return true;
 }
 
-dk.frame.create = function dk_frame_create(element) {
-    if (!element)
-        return error("element invalid");
-    if (!element.id)
-        return error("element.id invalid");
+dk.frame.create = function dk_frame_create(obj) {
+    if (!obj)
+        return error("obj invalid");
+    let element;
+    if (obj instanceof DKWidget) {
+        console.debug("obj is and instance of DKWidget");
+        element = obj.getElement();
+    } else {
+        console.debug("looks like obj is and html")
+        element = obj;
+        if (!element.id)
+            return error("element.id invalid");
+            console.debug("element.id is "+element.id);
+    }
 
     var title = dk.file.getFilename(element.id);
     title && (title = title.replace(".html", ""));
@@ -97,10 +119,11 @@ dk.frame.create = function dk_frame_create(element) {
     //height = height.replace("rem", "");
 
     let frame = dk.frame.createFrame(title, width, height);
+    if (obj instanceof DKWidget)
+        frame.contentInstance = obj;
     frame.content = element;
     frame.content.setAttribute("dk_frame", "content");
     frame.appendChild(frame.content);
-
     frame.resize = dk.resize.create(frame);
     return this;
 }
@@ -289,7 +312,8 @@ dk.frame.getFrame = function dk_frame_getFrame(element) {
         }
         element = element.parentElement;
     }
-    return false;//error("dk.frame.frames[n] invalid");
+    return false;
+    //error("dk.frame.frames[n] invalid");
 }
 
 dk.frame.setTitle = function dk_frame_setTitle(element, title) {
