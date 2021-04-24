@@ -327,6 +327,7 @@ dk.frame.setTitle = function dk_frame_setTitle(element, title) {
         return error("frame invalid");
     
     /*
+    //This works too
     const titlebartext = frame.querySelector("[dk_frame='titlebartext']");        
     if(!titlebartext)
         return error("titlebatext invalid");
