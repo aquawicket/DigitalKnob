@@ -101,8 +101,8 @@ dk.frame.create = function dk_frame_create(element) {
     frame.content.style.removeProperty("right");
     frame.content.style.removeProperty("height")
     frame.appendChild(frame.content);
-    dk.frame.createResize(frame);
-    //dk.frame.frames.push(frame);
+    
+    dk.resize.create(frame);
     return frame;
 }
 
@@ -148,7 +148,7 @@ dk.frame.createFrame = function dk_frame_createFrame(title, width, height) {
     frame.titlebar.ondblclick = function dk_frame_titlebar_ondblclick(event) {
         dk.frame.maximize(event.currentTarget);
     }
-    dk.drag.addDragHandle(frame.titlebar, frame);
+    dk.drag.addHandle(frame.titlebar, frame);
 
     //See DKFrame.css for styling
     frame.titlebar.text = dk.gui.createElement(frame.titlebar, "div", "dk_frame_titlebartext");
@@ -200,76 +200,6 @@ dk.frame.createFrame = function dk_frame_createFrame(title, width, height) {
         dk.frame.close(event.currentTarget);
     }
     return frame;
-}
-
-dk.frame.createResize = function dk_frame_createResize(frame) {
-    frame = dk.frame.setCurrentFrame(frame);
-    if (!frame)
-        return false;
-    frame.resizeImage = dk.gui.createElement(frame, "img", "dk_frame_resizeImage");
-    frame.resizeImage.setAttribute("src", "DKGui/resize.png");
-    frame.resizeImage.style.removeProperty("top");
-    frame.resizeImage.style.position = "absolute";
-    frame.resizeImage.style.right = "0rem";
-    frame.resizeImage.style.bottom = "0rem";
-    frame.resizeImage.style.width = "18rem";
-    frame.resizeImage.style.height = "18rem";
-
-    frame.resizeCorner = dk.gui.createElement(frame, "div", "dk_frame_resize_corner");
-    frame.resizeCorner.style.removeProperty("top");
-    frame.resizeCorner.style.position = "absolute";
-    frame.resizeCorner.style.right = "0rem";
-    frame.resizeCorner.style.bottom = "0rem";
-    frame.resizeCorner.style.width = "16rem";
-    frame.resizeCorner.style.height = "16rem";
-    frame.resizeCorner.style.cursor = "nw-resize";
-    dk.drag.addResizeHandle(frame.resizeCorner, frame);
-
-    frame.resizeTop = dk.gui.createElement(frame, "div", "dk_frame_resize_top");
-    frame.resizeTop.style.removeProperty("bottom");
-    frame.resizeTop.style.removeProperty("width");
-    frame.resizeTop.style.position = "absolute";
-    frame.resizeTop.style.top = "0rem";
-    frame.resizeTop.style.left = "0rem";
-    frame.resizeTop.style.right = "0rem";
-    frame.resizeTop.style.height = "3rem";
-    frame.resizeTop.style.cursor = "n-resize";
-    dk.drag.addResizeHandle(frame.resizeTop, frame, "top");
-
-    frame.resizeLeft = dk.gui.createElement(frame, "div", "dk_frame_resize_left");
-    frame.resizeLeft.style.removeProperty("right");
-    frame.resizeLeft.style.removeProperty("height");
-    frame.resizeLeft.style.position = "absolute";
-    frame.resizeLeft.style.top = "0rem";
-    frame.resizeLeft.style.bottom = "0rem";
-    frame.resizeLeft.style.left = "0rem";
-    frame.resizeLeft.style.width = "3rem";
-    frame.resizeLeft.style.cursor = "e-resize";
-    dk.drag.addResizeHandle(frame.resizeLeft, frame, "left");
-
-    frame.resizeRight = dk.gui.createElement(frame, "div", "dk_frame_resize_right");
-    frame.resizeRight.style.removeProperty("left");
-    frame.resizeRight.style.removeProperty("height");
-    frame.resizeRight.style.position = "absolute";
-    frame.resizeRight.style.top = "0rem";
-    frame.resizeRight.style.bottom = "16rem";
-    frame.resizeRight.style.right = "0rem";
-    frame.resizeRight.style.width = "3rem";
-    frame.resizeRight.style.cursor = "e-resize";
-    dk.drag.addResizeHandle(frame.resizeRight, frame);
-    
-    frame.resizeBottom = dk.gui.createElement(frame, "div", "dk_frame_resize_bottom");
-    frame.resizeBottom.style.removeProperty("top");
-    frame.resizeBottom.style.removeProperty("width");
-    frame.resizeBottom.style.position = "absolute";
-    frame.resizeBottom.style.bottom = "0rem";
-    frame.resizeBottom.style.left = "0rem";
-    frame.resizeBottom.style.right = "16rem";
-    frame.resizeBottom.style.height = "3rem";
-    frame.resizeBottom.style.cursor = "n-resize";
-    dk.drag.addResizeHandle(frame.resizeBottom, frame);
-
-    return frame.resize;
 }
 
 dk.frame.maximize = function dk_frame_maximize(element) {
