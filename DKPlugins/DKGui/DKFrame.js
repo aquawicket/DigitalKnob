@@ -323,9 +323,17 @@ dk.frame.setTitle = function dk_frame_setTitle(element, title) {
         return error("title invalid\n");
 
     var frame = dk.frame.getFrame(element);
-    !frame.titlebar && (frame.titlebar = frame.firstChild);
-    !frame.titlebar.text && (frame.titlebar.text = frame.titlebar.firstChild);
-    frame.titlebar.text && (frame.titlebar.text.innerHTML = title);
+    if(!frame)
+        return error("frame invalid");
+    
+    /*
+    const titlebartext = frame.querySelector("[dk_frame='titlebartext']");        
+    if(!titlebartext)
+        return error("titlebatext invalid");
+    titlebartext.innerHTML = title;
+    */
+
+    frame.titlebartext && (frame.titlebartext.innerHTML = title);
     return true;
 }
 
