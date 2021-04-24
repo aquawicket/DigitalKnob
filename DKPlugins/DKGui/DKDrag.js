@@ -23,8 +23,14 @@ dk.drag.start = function dk_drag_start(event, element) {
         dk.drag.mouseStartX = event.clientX + window.scrollX || parseInt(event.changedTouches[0].clientX);
         dk.drag.mouseStartY = event.clientY + window.scrollY || parseInt(event.changedTouches[0].clientY);
     }
-    dk.drag.positionX = dk.gui.getLeftPx(element);
-    dk.drag.positionY = dk.gui.getTopPx(element);
+    if (element.style.left)
+        dk.drag.positionX = dk.gui.getLeftPx(element);
+    else
+        dk.drag.positionX = parseInt(element.style.right);
+    if (element.style.top)
+        dk.drag.positionY = dk.gui.getTopPx(element);
+    else
+        dk.drag.positionY = parseInt(element.style.bottom);
     document.body.onmousemove = document.body.ontouchmove = function(event) {
         dk.drag.move(event, element);
     }
@@ -42,8 +48,8 @@ dk.drag.move = function dk_drag_move(event, element) {
         x = event.clientX + document.documentElement.scrollLeft + document.body.scrollLeft;
         y = event.clientY + document.documentElement.scrollTop + document.body.scrollTop;
     } else {
-        x = event.clientX + window.scrollX || parseInt(event.changedTouches[0].clientX);
-        y = event.clientY + window.scrollY || parseInt(event.changedTouches[0].clientY);
+        x = event.clientX + window.scrollX || event.changedTouches && parseInt(event.changedTouches[0].clientX);
+        y = event.clientY + window.scrollY || event.changedTouches && parseInt(event.changedTouches[0].clientY);
     }
     if (element.style.left)
         element.style.left = dk.gui.pos(dk.drag.positionX + x - dk.drag.mouseStartX);

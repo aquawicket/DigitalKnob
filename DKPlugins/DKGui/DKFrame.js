@@ -42,6 +42,8 @@ dk.frame.close = function dk_frame_close(element) {
         return error("element invalid");
     var frame = this.getFrame(element);
     
+    //console.log(frame.content instanceof DKWidget);
+
     if(frame.content && frame.content.close){
         frame.content.close(frame.content);
     }
@@ -148,7 +150,7 @@ dk.frame.createFrame = function dk_frame_createFrame(title, width, height) {
 
     frame.titlebaricon = dk.gui.createElement(frame.titlebar, "img", "dk_frame_titlebaricon");
     frame.titlebaricon.setAttribute("dk_frame", "titlebaricon");
-    
+
     //See DKFrame.css for styling
     frame.titlebartext = dk.gui.createElement(frame.titlebar, "div", "dk_frame_titlebartext");
     frame.titlebartext.setAttribute("dk_frame", "titlebartext");
@@ -287,7 +289,7 @@ dk.frame.getFrame = function dk_frame_getFrame(element) {
         }
         element = element.parentElement;
     }
-    return error("dk.frame.frames[n] invalid");
+    return false;//error("dk.frame.frames[n] invalid");
 }
 
 dk.frame.setTitle = function dk_frame_setTitle(element, title) {
