@@ -1,4 +1,4 @@
-[frame="frame"] {
+[dk_frame="frame"] {
     position: absolute;
     overflow: hidden;
     min-width: 62rem;
@@ -9,7 +9,7 @@
     border-width: 1rem;
 }
 
-[frame="content"] {
+[dk_frame="content"] {
     position: absolute;
     top: 21rem;
     bottom: 0rem;
@@ -18,7 +18,7 @@
     height: unset;
 }
 
-[frame="titlebar"] {
+[dk_frame="titlebar"] {
     position: absolute;
     top: 0rem;
     left: 0rem;
@@ -27,7 +27,7 @@
     background-color: #151416;
 }
 
-[frame="titlebartext"] {
+[dk_frame="titlebartext"] {
     position: absolute;
     cursor: default;
     color: #d9cbe0;
@@ -40,28 +40,28 @@
     white-space: nowrap;
 }
 
-[frame="reload"] {
+[dk_frame="reload"] {
     position: absolute;
     top: 1rem;
     right: 65rem;
     height: 18rem;
 }
 
-[frame="minimize"] {
+[dk_frame="minimize"] {
     position: absolute;
     top: 0rem;
     right: 42rem;
     height: 20rem;
 }
 
-[frame="maximize"] {
+[dk_frame="maximize"] {
     position: absolute;
     top: 0rem;
     right: 21rem;
     height: 20rem;
 }
 
-[frame="close"] {
+[dk_frame="close"] {
     position: absolute;
     top: 0rem;
     right: 0rem;

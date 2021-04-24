@@ -13,7 +13,7 @@ dk.menu.init = function dk_menu_init(){
 dk.menu.createInstance = function dk_menu_createInstance(parent) {
 
     let dkmenu = document.createElement("div");
-    dkmenu.setAttribute("target","dkmenu");
+    dkmenu.setAttribute("dk_menu","dkmenu");
     //These stles can be found in DKMenu.css
     //dkmenu.style.boxSizing = "border-box";
     //dkmenu.style.borderColor = "rgb(60,60,60)";
@@ -48,7 +48,7 @@ dk.menu.createInstance = function dk_menu_createInstance(parent) {
 
 dk.menu.addItem = function dk_menu_addItem(menu, label, callback) {
     let dkmenuItem = document.createElement("div");
-    dkmenuItem.setAttribute("target","dkmenuItem");
+    dkmenuItem.setAttribute("dk_menu","dkmenuItem");
     //These stles are now  done in DKMenu.css
     //dkmenuItem.style.backgroundColor = "rgb(20,20,20)";
     //dkmenuItem.style.color = "rgb(170,170,170)";

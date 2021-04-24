@@ -89,6 +89,7 @@ dk.gui.pos = function dk_gui_pos(position) {
 
 dk.gui.createButton = function dk_gui_createButton(parent, id, top, bottom, left, right, width, height, onclick) {
     const button = document.createElement("button");
+    button.setAttribute("dk_gui", "button");
     button.id = id;
     button.innerHTML = id;
     button.style.position = "absolute";
@@ -107,6 +108,7 @@ dk.gui.createButton = function dk_gui_createButton(parent, id, top, bottom, left
 
 dk.gui.createImageButton = function dk_gui_createImageButton(parent, id, src, top, bottom, left, right, width, height, onclick) {
     const button = document.createElement("img");
+    button.setAttribute("dk_gui", "img_button");
     button.id = id;
     button.src = src;
     button.style.position = "absolute";

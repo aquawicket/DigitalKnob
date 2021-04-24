@@ -96,7 +96,7 @@ dk.frame.create = function dk_frame_create(element) {
 
     let frame = dk.frame.createFrame(title, width, height);
     frame.content = element;
-    frame.content.setAttribute("frame", "content");
+    frame.content.setAttribute("dk_frame", "content");
     frame.appendChild(frame.content);
 
     frame.resize = dk.resize.create(frame);
@@ -123,7 +123,7 @@ dk.frame.createFrame = function dk_frame_createFrame(title, width, height) {
         return error("frame invalid");
 
     //See DKFrame.css for styling    
-    frame.setAttribute("frame", "frame");
+    frame.setAttribute("dk_frame", "frame");
     frame.style.top = newtop + "px";
     frame.style.left = newleft + "px";
     frame.style.width = width + "rem";
@@ -139,7 +139,7 @@ dk.frame.createFrame = function dk_frame_createFrame(title, width, height) {
 
     //See DKFrame.css for styling
     frame.titlebar = dk.gui.createElement(frame, "div", "dk_frame_titlebar");
-    frame.titlebar.setAttribute("frame", "titlebar");
+    frame.titlebar.setAttribute("dk_frame", "titlebar");
     frame.titlebar.ondblclick = function dk_frame_titlebar_ondblclick(event) {
         event.stopPropagation();
         dk.frame.maximize(event.currentTarget);
@@ -148,11 +148,11 @@ dk.frame.createFrame = function dk_frame_createFrame(title, width, height) {
 
     //See DKFrame.css for styling
     frame.titlebartext = dk.gui.createElement(frame.titlebar, "div", "dk_frame_titlebartext");
-    frame.titlebartext.setAttribute("frame", "titlebartext");
+    frame.titlebartext.setAttribute("dk_frame", "titlebartext");
     frame.titlebartext.innerHTML = title;
 
     frame.reload = dk.gui.createElement(frame.titlebar, "img", "dk_frame_reload");
-    frame.reload.setAttribute("frame", "reload");
+    frame.reload.setAttribute("dk_frame", "reload");
     frame.reload.setAttribute("src", "DKGui/reload.png");
     frame.reload.onmousedown = function dk_frame_reload_onmousedown(event) {
         event.stopPropagation();
@@ -160,7 +160,7 @@ dk.frame.createFrame = function dk_frame_createFrame(title, width, height) {
     }
 
     frame.minimize = dk.gui.createElement(frame.titlebar, "img", "dk_frame_minimize");
-    frame.minimize.setAttribute("frame", "minimize");
+    frame.minimize.setAttribute("dk_frame", "minimize");
     frame.minimize.setAttribute("src", "DKGui/minimize.png");
     frame.minimize.onmousedown = function dk_frame_minimize_onmousedown(event) {
         event.stopPropagation();
@@ -168,7 +168,7 @@ dk.frame.createFrame = function dk_frame_createFrame(title, width, height) {
     }
 
     frame.maximize = dk.gui.createElement(frame.titlebar, "img", "dk_frame_maximize");
-    frame.maximize.setAttribute("frame", "maximize");
+    frame.maximize.setAttribute("dk_frame", "maximize");
     frame.maximize.setAttribute("src", "DKGui/maximize.png");
     frame.maximize.onmousedown = function dk_frame_maximize_onmousedown(event) {
         event.stopPropagation();
@@ -176,7 +176,7 @@ dk.frame.createFrame = function dk_frame_createFrame(title, width, height) {
     }
 
     frame.close = dk.gui.createElement(frame.titlebar, "img", "dk_frame_close");
-    frame.close.setAttribute("frame", "close");
+    frame.close.setAttribute("dk_frame", "close");
     frame.close.setAttribute("src", "DKGui/close.png");
     frame.close.onmousedown = function dk_frame_close_onmousedown(event) {
         event.stopPropagation();
