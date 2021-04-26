@@ -55,7 +55,7 @@ dk.file.urlExists = function dk_file_urlExists(url, callback, usePhp) {
             else if (!rval && callback)
                 callback && callback(false);
             else
-                 return error("Unexpected Result: rval = "+rval);
+                return error("Unexpected Result: rval = " + rval);
 
         }, "HEAD");
     } else {
@@ -67,7 +67,7 @@ dk.file.urlExists = function dk_file_urlExists(url, callback, usePhp) {
             else if (!rval && callback)
                 callback && callback(false);
             else
-                return error("Unexpected Result: rval = "+rval);
+                return error("Unexpected Result: rval = " + rval);
         });
     }
 }
@@ -294,18 +294,41 @@ dk.file.fileToString = function dk_file_fileToString(url) {
     return ajaxGetUrl(url);
 }
 
+// dk.file.fileToString(path, callback)
 if (!dk.hasCPP()) {
-    dk.file.stringToFile = function dk_file_stringToFile(data, path) {
-        if (typeof absolutepath !== "undefined") {
-            if (!path.includes(absolutepath))
-                path = absolutepath + path;
-        }
-        data = encodeURIComponent(data).replace(";", "%3B");
-        dk.file.saveFile(path, data);
+    dk.file.fileToString = function dk_file_fileToString(path, callback) {
+        let assets = dk.file.onlineAssets;
+        if (!assets)
+            return error("assets invalid");
+        path = path.replace(" ", "_");
+        path = assets + "/" + path;
+        dk.php.call('POST', "/DKFile/DKFile.php", "fileToString", path, function(str) {
+            callback && callback(str);
+        });
     }
 } else {
-    dk.file.stringToFile = function dk_file_stringToFile(data, path) {
-        return CPP_DKFile_StringToFile(data, path)
+    dk.file.fileToString = function dk_file_fileToString(path, callback) {
+        const str = CPP_DKFile_FileToString(path);
+        callback && callback(str);
+    }
+}
+
+// dk.file.stringToFile(str, path, flags, callback)
+if (!dk.hasCPP()) {
+    dk.file.stringToFile = function dk_file_stringToFile(str, path, flags, callback) {
+        let assets = dk.file.onlineAssets;
+        if (!assets)
+            return error("assets invalid");
+        path = path.replace(" ", "_");
+        path = assets + "/" + path;
+        dk.php.call('POST', "/DKFile/DKFile.php", "stringToFile", path, str, flags, function(rval) {
+            callback && callback(rval);
+        });
+    }
+} else {
+    dk.file.stringToFile = function dk_file_stringToFile(str, path, flags, callback) {
+        const rval = CPP_DKFile_StringToFile(data, path);
+        callback && callback(rval);
     }
 }
 

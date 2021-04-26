@@ -191,6 +191,10 @@ dk.trace.getArguments = function dk_trace_getArguments(func, getArgValues) {
     return argsString;
 }
 
-dk.trace.getCurrentFunctionName = function dk_trace_getCurrentFunctionName(n) {
-    return new Error().stack.split('\n')[2 + n].trim().split(" ")[1];
+dk.trace.getFunctionName = function dk_trace_getFunctionName() {
+    return dk.trace.stackToJSON(dk.trace.getStack())[4].func;
+}
+
+dk.trace.getFilename = function dk_trace_getFilename() {
+    return dk.trace.stackToJSON(dk.trace.getStack())[4].filePath.split("/").pop();
 }

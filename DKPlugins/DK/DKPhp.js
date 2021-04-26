@@ -4,10 +4,14 @@ dk.php = new Object;
 
 //dk.php.call("GET", "/DK/DK.php", "Function", "args", "args", callback);
 dk.php.call = function dk_php_call(httpMethod, phpPath, funcName) {
-    //if (typeof phpPath !== "string")
-    //    return error("phpPath invalid");
+    const allowed = ["DK.js","DKFile.js","DKDebug.js"];
+    const callerFilename = dk.trace.getFilename();
+    if(!allowed.includes(callerFilename))
+        return error("dk.php.call(): Permission Denied for "+callerFilename);
+    
+    if (!phpPath)
+        return error("phpPath invalid");
     !httpMethod && (httpMethod = "GET");
-    !phpPath && (phpPath = "/DK/DK.php");
     if (typeof funcName !== "string")
         return error("funcName invalid");
 

@@ -71,36 +71,19 @@ dk.json.findPartialMatch = function dk_json_findPartialMatch(obj, key, value) {
     return foundObj;
 }
 
-dk.json.saveJsonToFile = function(json, file, callback){
-    let assets = dk.file.onlineAssets;
+dk.json.saveJsonToFile = function(json, path, flags, callback){
     const str = JSON.stringify(json);
-    file = file.replace(" ", "_");
-    const dest = assets + "/" + file;
-    assets && dk.php.call('POST', "/DKFile/DKFile.php", "stringToFile", dest, str, "", function(rval){
+    dk.file.stringToFile(str, path, flags, function(rval){
         callback && callback(rval);
     });
 }
 
-dk.json.appendJsonToFile = function(json, file, callback){
-    let assets = dk.file.onlineAssets;
-    const str = JSON.stringify(json);
-    file = file.replace(" ", "_");
-    const dest = assets + "/" + file;
-    assets && dk.php.call('POST', "/DKFile/DKFile.php", "stringToFile", dest, str, "FILE_APPEND", function(rval){
-        callback && callback(rval);
-    });
-}
-
-dk.json.loadJsonFromFile = function(file, callback){
-    let assets = dk.file.onlineAssets;
-    file = file.replace(" ", "_");
-    const src = assets + "/" + file;
-    assets && dk.php.call('POST', "/DKFile/DKFile.php", "fileToString", src, function(str){ 
+dk.json.loadJsonFromFile = function(path, callback){
+    dk.file.fileToString(path, function(str){
         const json = JSON.parse(str);
         callback && callback(json);
     });   
 }
-
 
 dk.json.saveToLocalStorage = function dk_json_saveToLocalStorage(label, json){
     const str = JSON.stringify(json);

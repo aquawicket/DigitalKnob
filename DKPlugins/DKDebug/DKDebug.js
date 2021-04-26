@@ -8,22 +8,23 @@ dk.debug = new Object;
 dk.debug.debugFunc = function dk_debug_debugFunc() {
     //console.log("dk.debug.debugFunc");
 
-
-    //dk.console.log("dk.console.log test");
-    //dk.console.info("dk.console.info test");
-    //dk.console.debug("dk.console.debug test");
-    //dk.console.trace("dk.console.trace test");
-    //dk.console.warn("dk.console.warn test");
-    //dk.console.error("dk.console.error test");
-    //console.log("console.log test");
-    //console.info("console.info test");
-    //console.debug("console.debug test");
+    /*
+    dk.console.log("dk.console.log test");
+    dk.console.info("dk.console.info test");
+    dk.console.debug("dk.console.debug test");
+    dk.console.trace("dk.console.trace test");
+    dk.console.warn("dk.console.warn test");
+    dk.console.error("dk.console.error test");
+    console.log("console.log test");
+    console.info("console.info test");
+    console.debug("console.debug test");
     console.trace("console.trace test", "arg2");
     console.warn("console.warn test");
     console.error("console.error test");
-
-
+    */
+    
     //Test if a url exists. Can use straight ajax,"thows console error if url does not exist", or php.
+    /*
     const usePhp = 1;
     dk.file.urlExists(".", function dk_file_urlExists_callback(rval){
         if(rval)
@@ -31,6 +32,7 @@ dk.debug.debugFunc = function dk_debug_debugFunc() {
         else
             console.log("path does not exist");
     }, usePhp);
+    */
 
     //dk.php.call('GET', "/DKFile/DKFile.php", "DirectoryContents", ".", console.log);
 
@@ -128,10 +130,10 @@ dk.debug.debugFunc = function dk_debug_debugFunc() {
     */
 
     /*
-    dk.php.debugFunc("one", "two", "three", function(rval) {
+    dk.php.call("GET", "/DK/DK.php", "debugFunc", "one", "two", "three", function(rval) {
         console.log(rval);
     });
-    */
+    */    
 
     //console.log("Multiple styles: %cred %corange", "color: red", "color: orange", "Additional unformatted message");
     //dk.codemirror.Create();
