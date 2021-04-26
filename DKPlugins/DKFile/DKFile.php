@@ -2,26 +2,68 @@
 header('Access-Control-Allow-Origin: *');
 include("../DK/DK.php");
 
+// Base PHP File Functions
+
+// https://www.php.net/manual/en/function.file-exists.php
 function urlExists($path){
-	if(file_exists($path)){
-        return 1;
-	}
-	return 0;
-	/*
-	$file_headers = @get_headers($path);
-	return $file_headers[0] ?? 0;
-	*/
+	return file_exists($path);
+}
+
+// https://www.php.net/manual/en/function.unlink.php
+function delete($file){
+	return unlink($file);
+}
+
+// https://www.php.net/manual/en/function.is-dir
+function isDir($dir){
+	return is_dir($dir);
+}
+
+// https://www.php.net/manual/en/function.mkdir.php
+function makeDir($pathname, $mode = 0777, $recursive = false){
+    if(!mkdir($structure, $mode, $recursive))
+        return error("makeDir() failed");
+    return true;
+}
+
+// https://www.php.net/manual/en/function.file-get-contents.php
+function fileToString($filename, $use_include_path = false){    
+    $str = file_get_contents($filename, $use_include_path);
+    if($str === false)
+    	return error("fileToString() failed");
+    return $str;
+}
+
+// https://www.php.net/manual/en/function.file-put-contents.php
+function stringToFile($filename, $data, $flags = 0){
+    if($flags === "FILE_APPEND"){ $flags = FILE_APPEND; }
+    if($flags === "FILE_USE_INCLUDE_PATH"){ $flags = FILE_USE_INCLUDE_PATH; }
+    if($flags === "LOCK_EX"){ $flags = LOCK_EX; }
+    $bytes = file_put_contents($filename, $data, $flags);
+    if($bytes === false)
+        return error("stringToFile(): failed\n");
+    return $bytes;
+}
+
+
+// Extended PHP File Functions 
+
+function getAbsolutePath($dir){
+	$root = substr($_SERVER['SCRIPT_FILENAME'], 0, -strlen($_SERVER['SCRIPT_NAME'])+1);
+	if(strpos($dir, $root) !== false)
+		$aPath = $dir;
+	else
+		$aPath = $root.$dir;
+	//return pathinfo($aPath,PATHINFO_DIRNAME)."/".pathinfo($aPath,PATHINFO_BASENAME);
+	return $aPath;
 }
 
 function getAssetsPath(){
-	echo "getAssetsPath()";
     $assetsPath = dirname(__DIR__);
-    if(basename($assetsPath) != "assets"){
+    if(basename($assetsPath) != "assets")
         return error("assetsPath does not contain an assets folder \n");
-    }
-    if(!is_dir($assetsPath)){
+    if(!is_dir($assetsPath))
     	return error("assetsPath is an invalid directory \n");
-    }
     return $assetsPath;
 }
 
@@ -30,9 +72,8 @@ function getDKPath(){
     $n = 1;
     while(is_dir($dkPath) && $n < 10){
         $dkPath = dirname(__DIR__, $n++);
-        if(basename($dkPath) == "digitalknob"){
+        if(basename($dkPath) == "digitalknob")
         	return $dkPath;
-        }
     }
     return error("could not find digitalknob path \n");
 }
@@ -50,67 +91,68 @@ function getDKPluginsPath(){
     return error("cound not find DKPlugins path");
 }
 
+function getRelativePath($dir){
+	$aPath = GetAbsolutePath($dir);
+	$dir = str_replace($aPath,"",$dir);
+	return $dir;
+}
+
 function pushDKAssets(){
 	//Fist get all fot he paths
 	$assetsPath = GetAssetsPath();
-	if(!$assetsPath){
+	if(!$assetsPath)
 		return error("assetsPath is invalid");
-	}
-	
     $dkPath = GetDKPath();
-    if(!$dkPath){
+    if(!$dkPath)
 		return error("dkPath is invalid");
-    }
     echo "dkPath = ".$dkPath."\n";
-    
     $dkPluginsPath = $dkPath."\DK\DKPlugins";
-    if(!is_dir($dkPluginsPath)){
+    if(!is_dir($dkPluginsPath))
     	return error("dkPluginsPath is invalid");
-    }
     echo "dkPluginsPath = ".$dkPluginsPath."\n";
 
     //we may or may not have a second plugins path
     $dkPluginsPath2 = GetDKPluginsPath();
-    if($dkPluginsPath2 == $dkPluginsPath){
+    if($dkPluginsPath2 == $dkPluginsPath)
 		$dkPluginsPath2 = 0;
-	}
-	else{
+	else
 		echo "dkPluginsPath2 = ".$dkPluginsPath2."\n";
-	}
 
     //Now copy matching matching folders to the DKPlugins path(s)
 	$assetsList = scandir($assetsPath);
 	for($n = 2; $n < count($assetsList); $n++){
-		if(!is_dir($assetsPath."\\".$assetsList[$n])){ continue; }
+		if(!is_dir($assetsPath."\\".$assetsList[$n])) 
+		    continue;
 		$assetFolder = $assetsPath."\\".$assetsList[$n];
 		$assetFiles = scandir($assetFolder);
         for($nn = 2; $nn < count($assetFiles); $nn++){
-            if(is_dir($assetFolder."\\".$assetFiles[$nn])){ continue; }
+            if(is_dir($assetFolder."\\".$assetFiles[$nn])) 
+                continue; 
             $src = $assetFolder."\\".$assetFiles[$nn];
             //echo $src." -> ";
             if(is_dir($dkPluginsPath."\\".$assetsList[$n])){
             	$dest = $dkPluginsPath."\\".$assetsList[$n]."\\".$assetFiles[$nn];
 			    //echo $dest."\n";
-			    if (!copy($src, $dest)) {
+			    if (!copy($src, $dest))
                     echo "failed to copy $src\n";
-                }else{
+                else
                 	echo "copied to $dest\n";
-                }
 		    }
 		    if($dkPluginsPath2 && is_dir($dkPluginsPath2."\\".$assetsList[$n])){
 			    $dest = $dkPluginsPath2."\\".$assetsList[$n]."\\".$assetFiles[$nn];
 			    //echo $dest."\n";
-			    if (!copy($src, $dest)) {
+			    if (!copy($src, $dest))
                     echo "failed to copy $src\n";
-                }
-                else{
+                else
                 	echo "copied to $dest\n";
-                }
 		    }
         }
 	}
 }
 
+
+
+/*
 function Upload($src, $dest){
 	//$target_dir //example /home/user/www/";
 	//$dest = $target_dir + $target_file;
@@ -141,49 +183,9 @@ function Upload($src, $dest){
 	}
 	return "ERROR";
 }
+*/
 
-//////////////////////
-function Delete($file)
-{
-	if(unlink($file)){
-		return "file deleted";
-	}
-	return "could not delete file";
-}
-
-//////////////////////////////
-function GetRelativePath($dir)
-{
-	$aPath = GetAbsolutePath($dir);
-	$dir = str_replace($aPath,"",$dir);
-	return $dir;
-}
-
-//////////////////////////////
-function GetAbsolutePath($dir)
-{
-	$root = substr($_SERVER['SCRIPT_FILENAME'], 0, -strlen($_SERVER['SCRIPT_NAME'])+1);
-	if(strpos($dir, $root) !== FALSE){
-		$aPath = $dir;
-	}
-	else{
-		$aPath = $root.$dir;
-	}
-	//return pathinfo($aPath,PATHINFO_DIRNAME)."/".pathinfo($aPath,PATHINFO_BASENAME);
-	return $aPath;
-}
-
-//////////////////////////
-function IsDirectory($dir)
-{
-	if(is_dir($dir)){
-		return "1";
-	}
-	else{
-		return "0";
-	}
-}
-
+/*
 ////////////////////////////////
 function DirectoryContents($dir)
 {
@@ -225,7 +227,8 @@ function DirectoryContents($dir)
 	}
 	return implode(",",$final);
 }
-	
+*/
+
 /*	
 //////////////////////////////////////
 if($printFiles = $_GET["PrintFiles"]){
@@ -270,6 +273,7 @@ if($printFiles = $_GET["PrintFiles"]){
 }
 */
 
+/*
 function ReadTheFile($readFile){ 
     if(file_exists($readFile)){
 		if(filesize($readFile) > 0){
@@ -287,7 +291,9 @@ function ReadTheFile($readFile){
 		echo "file ".$readFile." does not exist";
 	}
 }
+*/
 
+/*
 function saveFile($file, $data){
 	echo "SaveFile($file,$data)";
 	$data=stripslashes($data); //FIXME  don't do this if server is local
@@ -314,6 +320,7 @@ function saveFile($file, $data){
 	}
 	return "No Error";
 }
+*/
 
 /*
 ////////////////////////////////////////
@@ -351,38 +358,4 @@ if($publishFile = $_POST["PublishFile"]){
 	die;
 }
 */
-
-//https://www.php.net/manual/en/function.mkdir.php
-function MakeDir($pathname, $mode = 0777, $recursive = false){
-    if(!mkdir($structure, $mode, $recursive)){
-        return error("MakeDir() failed");
-    }
-}
-
-//https://www.php.net/manual/en/function.file-get-contents.php
-function fileToString($file)
-{    
-    $str = file_get_contents($file);
-    if(!$str){
-    	return error("FileToString() failed");
-    }
-    return $str;
-}
-
-//https://www.php.net/manual/en/function.file-put-contents.php
-function stringToFile($file, $data, $mode)
-{   
-    if($mode == "FILE_APPEND"){
-        if(!file_put_contents($file, $data, FILE_APPEND)){
-        	return error("StringToFile(): failed\n");
-        }
-    }
-    else{
-    	if(!file_put_contents($file, $data)){
-    		return error("StringToFile(): failed\n");
-    	}
-    }
-    //header_status(200);
-    return "File saved successfully";
-}
 ?>

@@ -983,6 +983,7 @@ dk.preloadImage = function dk_preloadImage(url) {
 }
 
 dk.saveToLocalStorage = function dk_saveToLocalStorage(name, string) {
+    //console.debug("dk_saveToLocalStorage("+name+", "+string+")");
     if (!name)
         return error("name invalid");
     if (!string)

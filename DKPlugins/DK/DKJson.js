@@ -57,6 +57,62 @@ dk.json.stringifyJson = function dk_json_stringifyJson(obj) {
     return JSON.stringify(obj2);
 }
 
+dk.json.findPartialMatch = function dk_json_findPartialMatch(obj, key, value) {
+    //console.log(obj.length);
+    let foundObj;
+    //FIXME: duktape
+    JSON.stringify(obj, (_,nestedValue)=>{
+        if (nestedValue && nestedValue[key] && (value.includes(nestedValue[key]) || nestedValue[key].includes(value))) {
+            foundObj = nestedValue;
+        }
+        return nestedValue;
+    }
+    );
+    return foundObj;
+}
+
+dk.json.saveJsonToFile = function(json, file, callback){
+    let assets = dk.file.onlineAssets;
+    const str = JSON.stringify(json);
+    file = file.replace(" ", "_");
+    const dest = assets + "/" + file;
+    assets && dk.php.call('POST', "/DKFile/DKFile.php", "stringToFile", dest, str, "", function(rval){
+        callback && callback(rval);
+    });
+}
+
+dk.json.appendJsonToFile = function(json, file, callback){
+    let assets = dk.file.onlineAssets;
+    const str = JSON.stringify(json);
+    file = file.replace(" ", "_");
+    const dest = assets + "/" + file;
+    assets && dk.php.call('POST', "/DKFile/DKFile.php", "stringToFile", dest, str, "FILE_APPEND", function(rval){
+        callback && callback(rval);
+    });
+}
+
+dk.json.loadJsonFromFile = function(file, callback){
+    let assets = dk.file.onlineAssets;
+    file = file.replace(" ", "_");
+    const src = assets + "/" + file;
+    assets && dk.php.call('POST', "/DKFile/DKFile.php", "fileToString", src, function(str){ 
+        const json = JSON.parse(str);
+        callback && callback(json);
+    });   
+}
+
+
+dk.json.saveToLocalStorage = function dk_json_saveToLocalStorage(label, json){
+    const str = JSON.stringify(json);
+    dk.saveToLocalStorage(label, str);
+}
+
+dk.json.loadFromLocalStorage = function dk_json_loadFromLocalStorage(label) {
+    const str = dk.loadFromLocalStorage(label);
+    const json = JSON.parse(str);
+    return json;
+}
+
 /*
 //search the object for a keyName's value that matches value
 dk.json.findMatch = function dk_json_findMatch(obj, key, value) {
@@ -98,17 +154,3 @@ dk.json.findPartialMatch = function dk.json.findPartialMatch(obj, key, value) {
     return false;
 }
 */
-
-dk.json.findPartialMatch = function dk_json_findPartialMatch(obj, key, value) {
-    //console.log(obj.length);
-    let foundObj;
-    //FIXME: duktape
-    JSON.stringify(obj, (_,nestedValue)=>{
-        if (nestedValue && nestedValue[key] && (value.includes(nestedValue[key]) || nestedValue[key].includes(value))) {
-            foundObj = nestedValue;
-        }
-        return nestedValue;
-    }
-    );
-    return foundObj;
-}

@@ -32,7 +32,7 @@ dk.php.call = function dk_php_call(httpMethod, phpPath, funcName) {
     const url = path + phpPath + "?" + data;
     const args = arguments;
     dk.sendRequest(url, function dk_sendRequest_callback(success, url, rval) {
-        rval && console.log(rval);
+        //rval && console.debug(rval);
         if (!success)
             return error("dk.php.call request failed, is php server running?");
         const beforeLastLine = rval.substr(0, rval.lastIndexOf("\n") + 1);
