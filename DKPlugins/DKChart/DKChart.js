@@ -5,9 +5,10 @@ dk.chart = new Object;
 
 dk.chart.init = function dk_chart_init() {
     //dk.create("https://momentjs.com/downloads/moment.min.js");
-    dk.create("DKTasmota/moment.min.js");
+    dk.create("DKTasmota/moment.min.js", function(){
     //dk.create("https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js");
     dk.create("DKChart/chart.min.js");
+    });
 }
 
 dk.chart.create = function dk_chart_create(parent, id, top, bottom, left, right, width, height) {

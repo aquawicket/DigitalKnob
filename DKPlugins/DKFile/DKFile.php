@@ -14,6 +14,7 @@ function urlExists($path){
 }
 
 function getAssetsPath(){
+	echo "getAssetsPath()";
     $assetsPath = dirname(__DIR__);
     if(basename($assetsPath) != "assets"){
         return error("assetsPath does not contain an assets folder \n");
@@ -350,6 +351,13 @@ if($publishFile = $_POST["PublishFile"]){
 	die;
 }
 */
+
+//https://www.php.net/manual/en/function.mkdir.php
+function MakeDir($pathname, $mode = 0777, $recursive = false){
+    if(!mkdir($structure, $mode, $recursive)){
+        return error("MakeDir() failed");
+    }
+}
 
 //https://www.php.net/manual/en/function.file-get-contents.php
 function fileToString($file)

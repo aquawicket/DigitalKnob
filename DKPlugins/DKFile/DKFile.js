@@ -34,8 +34,7 @@ dk.file.init = function dk_file_init() {
     dk.file.localAssets = "";
     dk.file.onlineAssets = "";
     dk.php.call("GET", "/DKFile/DKFile.php", "getAssetsPath", function dk_php_getAssetsPath_callback(rval) {
-        rval && (dk.file.onlineAssets = rval);
-        // && console.debug("dk.file.onlineAssets = " + rval);
+        rval && (dk.file.onlineAssets = rval) && console.debug("dk.file.onlineAssets = " + rval);
     });
 }
 

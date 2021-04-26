@@ -1,5 +1,5 @@
 "use strict";
-// https://console.spec.whatwg.org/
+// @https://console.spec.whatwg.org/
 // https://developer.mozilla.org/en-US/docs/Web/API/console
 // https://developer.mozilla.org/en-US/docs/Web/API/Console#outputting_text_to_the_console
 
@@ -139,35 +139,28 @@ dk.console.create = function dk_console_create(parent, id, top, bottom, left, ri
     dk.console.limit = 100;
     const container = document.createElement("div");
     dk.console.container = container;
-    container.style.padding = "0rem";
-    container.style.margin = "0rem";
+    container.setAttribute("dk_console","container");
     container.id = id;
-    container.style.position = "absolute";
     container.style.top = top;
     container.style.bottom = bottom;
     container.style.left = left;
     container.style.right = right;
     container.style.width = width;
     container.style.height = height;
-    container.style.borderColor = "rgb(58,58,58)";
-    container.style.borderStyle = "solid";
-    container.style.borderWidth = "1rem";
-    container.style.boxSizing = "border-box";
-    container.style.borderTopWidth = "5rem";
     container.oncontextmenu = function container_oncontextmenu(event) {
         event.preventDefault();
         const menu = dk.menu.createInstance();
-        dk.menu.addItem(menu, "Clear", function DKMenu_Clear() {
+        dk.menu.addItem(menu, "Clear console", function DKMenu_Clear() {
             dk.console.clear();
         });
-        dk.menu.addItem(menu, "Cancel", function DKMenu_Cancel() {
-            console.log("cancel");
-        });
+        //dk.menu.addItem(menu, "Cancel", function DKMenu_Cancel() {
+        //    console.log("cancel");
+        //});
     }
     parent.appendChild(container);
 
     const div = document.createElement("div");
-    div.className = "dkconsole";
+    div.setAttribute("dk_console","div");
     div.style.position = "absolute";
     div.style.padding = "0rem";
     div.style.backgroundColor = "rgb(36,36,36)";
@@ -184,6 +177,7 @@ dk.console.create = function dk_console_create(parent, id, top, bottom, left, ri
     container.appendChild(div);
 
     const command = document.createElement("input");
+    command.setAttribute("dk_console","command");
     command.type = "text";
     command.style.position = "absolute";
     command.style.left = "0rem";
@@ -214,11 +208,11 @@ dk.console.create = function dk_console_create(parent, id, top, bottom, left, ri
     }
     container.appendChild(command);
 
-    dk.console.log = function dk_console_log() {
-
+    dk.console.Logger = function dl_console_Logger(){
         const args = dk.console.ColorChromeConsole(arguments);
 
         const msgDiv = document.createElement("div");
+        msgDiv.setAttribute("dk_console","msgDiv");
         msgDiv.style.width = "100%";
         msgDiv.style.fontSize = "12rem";
         msgDiv.style.fontFamily = "Consolas, Lucinda, Console, Courier New, monospace";
@@ -236,7 +230,8 @@ dk.console.create = function dk_console_create(parent, id, top, bottom, left, ri
         //msgSpan.className = "dkconsole";
         //TODO: If the message is the same as the last, just have a count next to the original. 
         msgSpan.innerHTML = arguments[0];
-
+        msgSpan.setAttribute("dk_console","msgSpan");
+        
         if (arguments[1] === "red") {
             msgSpan.style.color = "rgb(255,128,128)";
             msgDiv.style.backgroundColor = "rgb(41,0,0)";
@@ -280,27 +275,27 @@ dk.console.create = function dk_console_create(parent, id, top, bottom, left, ri
     dk.console.count;
     dk.console.countReset;
     dk.console.debug = function dk_console_debug(str) {
-        dk.console.log(str, "blue");
+        dk.console.Logger(str, "blue");
     }
     dk.console.dir;
     dk.console.dirxml;
     dk.console.error = function dk_console_error(str) {
         if (!str)
             return warn("str invalid");
-        const newstr = str+"\n"+dk.trace.stackToConsoleString("", "dk.console_error");
-        dk.console.log(newstr, "red");
+        const newstr = str+"\n"+dk.trace.stackToConsoleString("", "console.error");
+        dk.console.Logger(newstr, "red");
     }
     dk.console.group = function dk_console_group(str, style) {
-        dk.console.log(str, style);
+        dk.console.Logger(str, style);
     }
     dk.console.groupCollapsed;
     dk.console.groupEnd;
     dk.console.info = function dk_console_info(str, style) {
-        dk.console.log(str, style);
+        dk.console.Logger(str, style);
     }
-    //dk.console.log = function(str, style) {
-    //    dk.console.log(str, style);
-    //}
+    dk.console.log = function(str, style) {
+        dk.console.Logger(str, style);
+    }
     dk.console.memory;
     dk.console.profile;
     dk.console.profileEnd;
@@ -310,11 +305,16 @@ dk.console.create = function dk_console_create(parent, id, top, bottom, left, ri
     dk.console.timeLog;
     dk.console.timeStamp;
     dk.console.trace = function dk_console_trace(str, style) {
-        str = StackToConsoleString(str, "dk.console_trace");
-        dk.console.log(str, style);
+        if (!str)
+            return warn("str invalid");
+        const newstr = str+"\n"+dk.trace.stackToConsoleString("", "console.trace");
+        dk.console.Logger(newstr);
     }
     dk.console.warn = function dk_console_warn(str) {
-        dk.console.log(str, "yellow");
+        if (!str)
+            return warn("str invalid");
+        const newstr = str+"\n"+dk.trace.stackToConsoleString("", "console.warn");
+        dk.console.Logger(newstr, "yellow");
     }
 
     return container;

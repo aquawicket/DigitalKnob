@@ -24,34 +24,40 @@ dk.trace.editFile = function dk_trace_editFile(file) {
 
 dk.trace.stackToConsoleString = function dk_trace_stackToConsoleString(arg, deleteTo) {
     let jsonStack;
+    let headerMsg = false;
     if (arg instanceof Error) {
         if (arg.stack) {
+            headerMsg = true;
             jsonStack = this.stackToJSON(arg.stack);
         } else if (arg instanceof DOMException) {
+            headerMsg = true;
             const str = arg.name + " " + arg.message;
             jsonStack = stackToJSON(this.getStack(str));
         } else {
             return error("arg is an instance of Error, but it doesn't have a stack");
         }
     } else if (arg instanceof PromiseRejectionEvent) {
+        headerMsg = true;
         jsonStack = this.stackToJSON(this.getStack(arg.reason));
     } else if (typeof arg === 'string') {
         jsonStack = this.stackToJSON(this.getStack(arg));
+    } else if (!arg) {
+        jsonStack = this.stackToJSON(this.getStack());
     } else {
         return error("StackToConsoleString(): typeof arg invalid: " + typeof arg);
     }
 
-    //deleteTo = 0;
     //Remove calls up to the function specified in deleteTo
     if (deleteTo) {
         for (let n = 1; n < jsonStack.length; n++) {
-            if (jsonStack[n].func.includes(deleteTo)) {
+            if (jsonStack[n].func === deleteTo) {
                 jsonStack.splice(1, n);
             }
         }
     }
 
-    let str = jsonStack[0].msg + "<br>";
+    let str;
+    headerMsg ? str = jssonStack[0] : str = "";
     for (let n = 1; n < jsonStack.length; n++) {
         str += "  at " + jsonStack[n].func + " ";
         str += "(<a href='#' onClick='dk.trace.editFile(\"" + jsonStack[n].filePath + "\")' style='color:rgb(213,213,213)'>" + jsonStack[n].file + ":" + jsonStack[n].lineNum + "</a>)<br>";

@@ -32,47 +32,30 @@ dk.php.call = function dk_php_call(httpMethod, phpPath, funcName) {
     const url = path + phpPath + "?" + data;
     const args = arguments;
     dk.sendRequest(url, function dk_sendRequest_callback(success, url, rval) {
+        rval && console.log(rval);
         if (!success)
             return error("dk.php.call request failed, is php server running?");
-        var beforeLastLine = rval.substr(0, rval.lastIndexOf("\n") + 1);
-        var lastLine = rval.substr(rval.lastIndexOf("\n") + 1);
+        const beforeLastLine = rval.substr(0, rval.lastIndexOf("\n") + 1);
+        if (beforeLastLine !== "" && beforeLastLine !== "\n")
+            console.log(beforeLastLine);
+        const lastLine = rval.substr(rval.lastIndexOf("\n") + 1);
         let rJson;
         try {
             rJson = JSON.parse(lastLine);
         } catch(e) {
+            !rval && (rval = e.message);
             return error(rval);
         }
         if (!rJson.status)
             return warn("We appear to have gotten JSON compatable data with no status key" + rval);
         if (rJson.status !== "success")
             return error(rJson.message);
-        if (rJson.status === "success" && beforeLastLine !== "")
-            // && rJson.message === null)
-            console.log(beforeLastLine);
-        //&& console.log("rJson.message === null"); 
+        //if (rJson.status === "success" && beforeLastLine !== "" && beforeLastLine !== "\n")
+        //    console.log(beforeLastLine);
         if (args && typeof (args[args.length - 1]) === "function")
             args[args.length - 1](rJson.message);
     }, httpMethod);
-
 }
-
-/*
-dk.php.debugFunc = function dk_php_debugFunc(callback) {
-    dk.php.callPhpFunc(arguments);
-}
-
-dk.php.getRemoteAddres = function dk_php_getRemoteAddress(callback) {
-    dk.php.callPhpFunc(arguments);
-}
-
-dk.php.getRemoteUser = function dk_php_getRemoteUser(callback) {
-    dk.php.callPhpFunc(arguments);
-}
-
-dk.php.getTime = function dk_php_getTime(callback) {
-    dk.php.callPhpFunc(arguments);
-}
-*/
 
 //dk.php.noCB = function dk_php_noCB(rVal) {}
 

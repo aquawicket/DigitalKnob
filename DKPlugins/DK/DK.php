@@ -1,5 +1,4 @@
 <?php
-//header_status(500);
 header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json; charset=UTF-8');
 
@@ -90,6 +89,7 @@ if($_REQUEST["x"]){
     }
 
     $response = call_user_func_array($func,$values);
+    //echo $response;
     trySuccess($response);
     //echo "\n_REQUEST[x] json = \n".$json."\n\n";
 

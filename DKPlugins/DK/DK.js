@@ -1115,26 +1115,25 @@ dk.sendRequest = function dk_sendRequest(url, dk_sendRequest_callback, httpMetho
     if (dk_sendRequest_callback.length < 3)
         return error("dk_sendRequest_callback requires 3 arguments (success, url, data)");
 
-    var xhr = "";
+    var xhr;
     try {
-        xhr = new XMLHttpRequest();
+        !xhr && (xhr = new XMLHttpRequest());
     } catch (e) {}
     try {
-        xhr = new ActiveXObject("Msxml3.XMLHTTP");
+        !xhr && (xhr = new ActiveXObject("Msxml3.XMLHTTP"));
     } catch (e) {}
     try {
-        xhr = new ActiveXObject("Msxml2.XMLHTTP.6.0");
+        !xhr && (xhr = new ActiveXObject("Msxml2.XMLHTTP.6.0"));
     } catch (e) {}
     try {
-        xhr = new ActiveXObject("Msxml2.XMLHTTP.3.0");
+        !xhr && (xhr = new ActiveXObject("Msxml2.XMLHTTP.3.0"));
     } catch (e) {}
     try {
-        xhr = new ActiveXObject("Msxml2.XMLHTTP");
+        !xhr && (xhr = new ActiveXObject("Msxml2.XMLHTTP"));
     } catch (e) {}
     try {
-        xhr = new ActiveXObject("Microsoft.XMLHTTP");
+        !xhr && (xhr = new ActiveXObject("Microsoft.XMLHTTP"));
     } catch (e) {}
-
     if (!xhr)
         return error("Error creating xhr object");
 
@@ -1170,12 +1169,12 @@ dk.sendRequest = function dk_sendRequest(url, dk_sendRequest_callback, httpMetho
     //https://github.com/richardwilkes/cef/blob/master/cef/enums_gen.go
     xhr.onabort = function(event) {
         dk_sendRequest_callback(false, url, xhr.responseText);
-        dk.console.error("GET <a href=' " + url + " ' target='_blank' style='color:rgb(213,213,213)'>" + url + "</a> onabort");
+        dk.console.error && dk.console.error("GET <a href=' " + url + " ' target='_blank' style='color:rgb(213,213,213)'>" + url + "</a> onabort");
         debugXhr && console.debug("XMLHttpRequest.onabort(): " + file + " readyState:" + xhr.readyState + " status:" + xhr.status);
     }
     xhr.onerror = function(event) {
         dk_sendRequest_callback(false, url, xhr.responseText);
-        dk.console.error("GET <a href=' " + url + " ' target='_blank' style='color:rgb(213,213,213)'>" + url + "</a> onerror");
+        dk.console.error && dk.console.error("GET <a href=' " + url + " ' target='_blank' style='color:rgb(213,213,213)'>" + url + "</a> onerror");
         debugXhr && console.debug("XMLHttpRequest.onabort(): " + file + " readyState:" + xhr.readyState + " status:" + xhr.status);
     }
     xhr.onload = function(event) {
@@ -1204,7 +1203,7 @@ dk.sendRequest = function dk_sendRequest(url, dk_sendRequest_callback, httpMetho
     }
     xhr.ontimeout = function(event) {
         dk_sendRequest_callback(false, url, xhr.responseText);
-        dk.console.error("GET <a href=' " + url + " ' target='_blank' style='color:rgb(213,213,213)'>" + url + "</a> net::ERR_CONNECTION_TIMED_OUT");
+        dk.console.error && dk.console.error("GET <a href=' " + url + " ' target='_blank' style='color:rgb(213,213,213)'>" + url + "</a> net::ERR_CONNECTION_TIMED_OUT");
         debugXhr && console.debug("XMLHttpRequest.onabort(): " + file + " readyState:" + xhr.readyState + " status:" + xhr.status);
     }
 

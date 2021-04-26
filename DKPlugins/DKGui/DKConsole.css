@@ -1,8 +1,39 @@
-div.DKConsole {
+[dk_console="container"] {
+    padding: 0rem;
+    margin: 0rem;
+    position: absolute;
+    borderColor: rgb(58,58,58);
+    borderStyle: solid;
+    borderWidth: 1rem;
+    boxSizing: border-box;
+    borderTopWidth: 5rem;
+}
+
+[dk_console="div"] {
     padding: 5rem;
     font-size: 10rem;
 }
+[dk_console="command"] {
+}
+[dk_console="msgDiv"] {
+    width: 100%;
+    fontSize: 12rem;
+    fontFamily: Consolas, Lucinda, Console, Courier New, monospace;
+    whiteSpace: pre-wrap;
+    boxSizing: border-box;
+    padding: 2rem;
+    paddingLeft: 20rem;
+    borderStyle: solid;
+    borderWidth: 1rem;
+    borderTopWidth: 0rem;
+    borderLeftWidth: 0rem;
+}
+[dk_console="msgSpan"] {
+}
 
+
+
+/*
 a:link.DKConsole, a:visited.DKConsole, a:hover.DKConsole {
     color: green;
     background-color: transparent;
@@ -16,3 +47,4 @@ a:hover.DKConsole {
 a:active.DKConsole {
     color: white;
 }
+*/
