@@ -2,49 +2,34 @@
     padding: 0rem;
     margin: 0rem;
     position: absolute;
-    borderColor: rgb(58,58,58);
-    borderStyle: solid;
-    borderWidth: 1rem;
-    boxSizing: border-box;
-    borderTopWidth: 5rem;
+    border-color: rgb(58,58,58);
+    border-style: solid;
+    border-width: 1rem;
+    box-sizing: border-box;
+    border-top-width: 5rem;
 }
 
 [dk_console="div"] {
     padding: 5rem;
     font-size: 10rem;
 }
+
 [dk_console="command"] {
 }
+
 [dk_console="msgDiv"] {
     width: 100%;
-    fontSize: 12rem;
-    fontFamily: Consolas, Lucinda, Console, Courier New, monospace;
-    whiteSpace: pre-wrap;
-    boxSizing: border-box;
+    font-size: 12rem;
+    font-family: Consolas, Lucinda, Console, Courier New, monospace;
+    white-space: pre-wrap;
+    box-sizing: border-box;
     padding: 2rem;
-    paddingLeft: 20rem;
-    borderStyle: solid;
-    borderWidth: 1rem;
-    borderTopWidth: 0rem;
-    borderLeftWidth: 0rem;
+    padding-left: 20rem;
+    border-style: solid;
+    border-width: 1rem;
+    border-top-width: 0rem;
+    border-left-width: 0rem;
 }
+
 [dk_console="msgSpan"] {
 }
-
-
-
-/*
-a:link.DKConsole, a:visited.DKConsole, a:hover.DKConsole {
-    color: green;
-    background-color: transparent;
-    text-decoration: none;
-}
-
-a:hover.DKConsole {
-    color: #9bf59b;
-}
-
-a:active.DKConsole {
-    color: white;
-}
-*/

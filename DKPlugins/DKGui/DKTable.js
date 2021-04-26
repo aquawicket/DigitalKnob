@@ -32,6 +32,7 @@ dk.table = new Object;
 
 dk.table.create = function dk_table_create(parent, id, top, bottom, left, right, width, height) {
     const table = document.createElement('table');
+    table.setAttribute("dk_table", "table");
     table.id = id;
     table.style.position = "absolute";
     table.style.top = top;

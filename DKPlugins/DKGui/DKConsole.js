@@ -213,18 +213,6 @@ dk.console.create = function dk_console_create(parent, id, top, bottom, left, ri
 
         const msgDiv = document.createElement("div");
         msgDiv.setAttribute("dk_console","msgDiv");
-        msgDiv.style.width = "100%";
-        msgDiv.style.fontSize = "12rem";
-        msgDiv.style.fontFamily = "Consolas, Lucinda, Console, Courier New, monospace";
-        msgDiv.style.whiteSpace = "pre-wrap";
-        msgDiv.style.boxSizing = "border-box";
-        msgDiv.style.padding = "2rem";
-        msgDiv.style.paddingLeft = "20rem";
-        msgDiv.style.borderStyle = "solid";
-        msgDiv.style.borderWidth = "1rem";
-        msgDiv.style.borderTopWidth = "0rem";
-        msgDiv.style.borderLeftWidth = "0rem";
-        msgDiv.style.borderRightWidth = "0rem";
 
         const msgSpan = document.createElement("span");
         //msgSpan.className = "dkconsole";
