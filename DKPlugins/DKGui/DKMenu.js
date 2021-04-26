@@ -18,11 +18,12 @@ dk.menu.createInstance = function dk_menu_createInstance(parent) {
     //dkmenu.style.boxSizing = "border-box";
     //dkmenu.style.borderColor = "rgb(60,60,60)";
     dkmenu.id = "id";
-    dkmenu.style.position = "absolute";
-    dkmenu.style.padding = "0rem";
     dkmenu.style.top = window.mouseY + "rem";
     dkmenu.style.left = window.mouseX + "rem";
     dkmenu.style.removeProperty("right");
+    /*
+    dkmenu.style.position = "absolute";
+    dkmenu.style.padding = "0rem";
     dkmenu.style.width = "150rem";
     dkmenu.style.minHeight = "18rem";
     dkmenu.style.borderStyle = "solid";
@@ -31,13 +32,13 @@ dk.menu.createInstance = function dk_menu_createInstance(parent) {
     dkmenu.style.borderLeftWidth = "1rem";
     dkmenu.style.borderRightWidth = "1rem";
     dkmenu.style.borderBottomWidth = "0rem";
+    */
     if(parent){
         parent.appendChild(dkmenu);
     }else{
         document.body.appendChild(dkmenu);
     }
     document.addEventListener('mousedown', function(event) {
-        //event.stopPropagation();
         dkmenu.parentElement.removeChild(dkmenu);
     }, {
         once: true
