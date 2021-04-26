@@ -98,10 +98,10 @@ dk.frame.create = function dk_frame_create(obj) {
         return error("obj invalid");
     let element;
     if (obj instanceof DKWidget) {
-        console.debug("obj is and instance of DKWidget");
+        console.debug("dk.frame.create(): obj is an instance of DKWidget");
         element = obj.getElement();
     } else {
-        console.debug("looks like obj is and html")
+        console.debug("dk.frame.create(): looks like obj is and html")
         element = obj;
         if (!element.id)
             return error("element.id invalid");

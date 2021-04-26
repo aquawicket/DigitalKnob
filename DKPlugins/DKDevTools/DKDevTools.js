@@ -1,6 +1,6 @@
 "use strict";
 
-dk.devtools = new DKWidget;
+dk.devtools = new Object;
 
 dk.devtools.init = function dk_devtools_init() {
     dk.preloadImage("DKDevTools/developer.png");
@@ -29,12 +29,14 @@ dk.devtools.create = function dk_devtools_create() {
     dk.drag.addHandle(dragDiv, elem);
 }
 
-dk.devtools.close = function dk_devtools_close(){
-    console.debug("dk.devtools.close() called");
-    dk.devtools.removeInstance(dk.devtools.instance);
-}
+//dk.devtools.close = function dk_devtools_close(){
+//    console.debug("dk.devtools.close() called");
+//    DKWidget.close();
+//dk.devtools.removeInstance(dk.devtools.instance);
+//}
 
 dk.devtools.show = function dk_devtools_show() {
+    dk.devtools = new DKWidget;
     if (typeof dk.devtools.div === "object" && dk.frame.getFrame(dk.devtools.div))
         return;
     const div = document.createElement("div");
@@ -52,11 +54,12 @@ dk.devtools.show = function dk_devtools_show() {
 
     const frame = dk.frame.getFrame(div);
     frame.titlebaricon.src = "DKDevTools/developer.png";
-    dk.devtools.addTools();
-}
 
-dk.devtools.addTools = function dk_devtools_addTools() {
-    const div = dk.devtools.getElement();
-    dk.gui.createButton(div, "DEBUG", "5rem", "", "5rem", "", "63rem", "20rem", dk.debug.debugFunc);
-    dk.gui.createButton(div, "Push Assets", "25rem", "", "5rem", "", "90rem", "20rem", dk.file.pushDKAssets);
+    dk.devtools.addTools = function dk_devtools_addTools() {
+        const div = dk.devtools.getElement();
+        dk.gui.createButton(div, "DEBUG", "5rem", "", "5rem", "", "63rem", "20rem", dk.debug.debugFunc);
+        dk.gui.createButton(div, "Push Assets", "25rem", "", "5rem", "", "90rem", "20rem", dk.file.pushDKAssets);
+    }
+
+    dk.devtools.addTools();
 }
