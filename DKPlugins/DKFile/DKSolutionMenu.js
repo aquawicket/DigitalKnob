@@ -4,7 +4,7 @@ DKSolutionMenu_file = "";
 //////////////////////////////
 function DKSolutionMenu_Init()
 {
-	DK_Create("DKFile/DKSolutionMenu.html", function(){
+	dk.create("DKFile/DKSolutionMenu.html", function(){
     	document.addEventListener("mousedown", DKSolutionMenu_OnEvent);
     	byId("DKSolutionMenu_Open").addEventListener("click", DKSolutionMenu_OnEvent);
     	byId("DKSolutionMenu_OpenHere").addEventListener("click", DKSolutionMenu_OnEvent);

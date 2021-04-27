@@ -150,6 +150,50 @@ function pushDKAssets(){
 	}
 }
 
+function directoryContents($dir){
+	echo "directoryContents(".$dir.")\n";
+	//echo "dir = ".$dir."\n";
+	$root = $_SERVER['DOCUMENT_ROOT']."\\";
+	//echo "root = ".$root."\n";
+	echo "opendir($root.$dir)\n";
+	$myDirectory = opendir($root.$dir);
+	while($entryName = readdir($myDirectory)){
+		//echo "entryName = ".$entryName."\n";
+		$dirArray[] = $entryName;
+	}
+	closedir($myDirectory);
+	
+	//Lets sort in alpha order with folders on top
+	for ($i = 1; $i < count($dirArray); $i++) {
+		//echo "if(dir == '.')\n";
+		if($dir == "."){
+            //echo "if(filetype($root.$dirArray[$i]) == 'dir'\n";
+    		if(filetype($root.$dirArray[$i]) == "dir")
+				$folders[] = $dirArray[$i];
+			else
+				$files[] = $dirArray[$i];
+		}
+		else{
+	        //echo "else {\n";
+            //echo "if(filetype(".$root.$dir.$dirArray[$i].") == 'dir')\n";
+			if(filetype($root.$dir.$dirArray[$i]) == "dir")
+				$folders[] = $dirArray[$i];
+			else
+				$files[] = $dirArray[$i];
+		}
+	}
+	
+	natcasesort($folders);	
+	if(count($files) > 0){
+		natcasesort($files);
+		$final = array_merge ($folders, $files);
+	}
+	else{
+		$final = $folders;
+		$final = $files;
+	}
+	return implode(",", $final);
+}
 
 
 /*
@@ -182,50 +226,6 @@ function Upload($src, $dest){
 		return "Sorry, there was an error uploading your file.";
 	}
 	return "ERROR";
-}
-*/
-
-/*
-////////////////////////////////
-function DirectoryContents($dir)
-{
-	$root = $_SERVER['DOCUMENT_ROOT']."/";
-	$myDirectory = opendir($dir);
-	while($entryName = readdir($myDirectory)){
-		$dirArray[] = $entryName;
-	}
-	closedir($myDirectory);
-	
-	//Lets sort in alpha order with folders on top
-	for ($i = 1; $i < count($dirArray); $i++) {
-		if($dir == "."){
-    		if(filetype($root.$dirArray[$i]) == "dir"){
-				$folders[] = $dirArray[$i];
-			}
-			else{
-				$files[] = $dirArray[$i];
-			}
-		}
-		else{
-			if(filetype($root.$dir."/".$dirArray[$i]) == "dir"){
-				$folders[] = $dirArray[$i];
-			}
-			else{
-				$files[] = $dirArray[$i];
-			}
-		}
-	}
-	
-	natcasesort($folders);	
-	if(count($files) > 0){
-		natcasesort($files);
-		$final = array_merge ($folders, $files);
-	}
-	else{
-		$final = $folders;
-		$final = $files;
-	}
-	return implode(",",$final);
 }
 */
 

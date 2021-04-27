@@ -1,164 +1,197 @@
-/////////////////////////////////
-function DKFileAssociation_Init()
-{
+"use strict";
 
+dk.fileassociation = new DKWidget("dk.fileassociation");
+
+dk.fileassociation.init = function dk_fileassociation_init() {}
+
+dk.fileassociation.end = function dk_fileassociation_end() {}
+
+dk.fileassociation.onevent = function dk_fileassociation_onevent(event) {
+    console.debug("dk.fileassociation.onevent(" + event.currentTarget.id + "," + event.type + "," + event.value + ")");
 }
 
-////////////////////////////////
-function DKFileAssociation_End()
-{
-
+dk.fileassociation.open = function dk_fileAssociation_open(file) {
+    if (file.indexOf(".") === -1) {
+        return false;
+    }
+    if (file.indexOf(".js") !== -1) {
+        dk.fileassociation.openjs(file);
+        return true;
+    }
+    if (file.indexOf(".html") !== -1) {
+        dk.fileassociation.openhtml(file);
+        return true;
+    }
+    if (file.indexOf(".css") !== -1) {
+        dk.fileassociation.opencss(file);
+        return true;
+    }
+    if (file.indexOf(".png") !== -1) {
+        dk.fileassociation.openimage(file);
+        return true;
+    }
+    if (file.indexOf(".bmp") !== -1) {
+        dk.fileassociation.openimage(file);
+        return true;
+    }
+    if (file.indexOf(".gif") !== -1) {
+        dk.fileassociation.openimage(file);
+        return true;
+    }
+    if (file.indexOf(".jpeg") !== -1) {
+        dk.fileassociation.openimage(file);
+        return true;
+    }
+    if (file.indexOf(".jpg") !== -1) {
+        dk.fileassociation.openimage(file);
+        return true;
+    }
+    if (file.indexOf(".tiff") !== -1) {
+        dk.fileassociation.openimage(file);
+        return true;
+    }
+    if (file.indexOf(".tif") !== -1) {
+        dk.fileassociation.openimage(file);
+        return true;
+    }
+    if (file.indexOf(".osgt") !== -1) {
+        dk.fileassociation.openmodel(file);
+        return true;
+    }
+    if (file.indexOf(".osg") !== -1) {
+        dk.fileassociation.openmodel(file);
+        return true;
+    }
+    if (file.indexOf(".wav") !== -1) {
+        dk.fileassociation.openaudio(file);
+        return true;
+    }
+    if (file.indexOf(".mp3") !== -1) {
+        dk.fileassociation.openaudio(file);
+        return true;
+    }
+    if (file.indexOf(".avi") !== -1) {
+        dk.fileassociation.openvideo(file);
+        return true;
+    }
+    if (file.indexOf(".mkv") !== -1) {
+        dk.fileassociation.openvideo(file);
+        return true;
+    }
+    if (file.indexOf(".mp4") !== -1) {
+        dk.fileassociation.openvideo(file);
+        return true;
+    }
+    dk.fileassociation.opentext(file);
+    return true;
 }
 
-/////////////////////////////////////////
-function DKFileAssociation_OnEvent(event)
-{
-	console.debug("DKFileAssociation_OnEvent("+event.currentTarget.id+","+event.type+","+event.value+")");
+dk.fileassociation.openhtml = function dk_fileassociation_openHtml(path) {
+    //path = path.replace(absolutepath, "");
+
+    var id = path.replace(CPP_DKAssets_LocalAssets(), "");
+    //var id = DKFile_GetFilename(path);
+    if (dk.create(id)) {
+        //dk.fileassociation.AddDragHandles(id);
+        dk.frame.create(id);
+        //dk.fileassociation.SelectElement(id);
+    }
+    //FIXME
+    return error("FIXME");
+
+    //TODO - to use files outside of the data directory, we need to append the datapath
+    //var the_path = path.replace(id, "");
+    //console.log("DK_AppendDataPath("+the_path+")");
+    //AppendDataPath(the_path);
+
+    dk.file.fileToString(path, function(str){
+        filedata = str;
+    });
+    if (!filedata)
+        return false;
+    //if(!HtmlToRml(filedata)){ return false; }
+
+    //Parse the sting into an element
+    var temp = dk.createElement(document.body, "temp", "temporary");
+    temp.innerHTML = filedata;
+
+    //if(DK_GetNumChildren(temp) === 0){
+    //	return error("Error loading path: "+id+": could not create node");
+    //}
+
+    //Make sure there is only 1 child
+    //if(DK_GetNumChildren(temp) > 1){
+    //	return error("Error loading path: "+id+" has more than one root node");
+    //}
+
+    console.log("temp: " + temp.id);
+    var element = temp.firstChild;
+    //console.log("element = "+element);
+    //DKElement* element = temp->GetFirstChild();
+    //byId(element).id = id;
+
+    document.body.appendChild(element);
+    temp.parentNode.removeChild(temp);
+    //Show(id);
+    //dk.fileassociation.AddDragHandles(id);
+    //dk.fileassociation.SelectElement(id);
 }
 
-/////////////////////////////////////
-function DKFileAssociation_Open(file)
-{
-	if(file.indexOf(".") === -1 ){ return false; }
-	if(file.indexOf(".js") !== -1 ){ DKFileAssociation_OpenJS(file); return true; }
-	if(file.indexOf(".html") !== -1 ){ DKFileAssociation_OpenHtml(file); return true; }
-	if(file.indexOf(".css") !== -1 ){ DKFileAssociation_OpenCss(file); return true; }
-	if(file.indexOf(".png") !== -1 ){ DKFileAssociation_OpenImage(file); return true; }
-	if(file.indexOf(".bmp") !== -1 ){ DKFileAssociation_OpenImage(file); return true; }
-	if(file.indexOf(".gif") !== -1 ){ DKFileAssociation_OpenImage(file); return true; }
-	if(file.indexOf(".jpeg") !== -1 ){ DKFileAssociation_OpenImage(file); return true; }
-	if(file.indexOf(".jpg") !== -1 ){ DKFileAssociation_OpenImage(file); return true; }
-	if(file.indexOf(".tiff") !== -1 ){ DKFileAssociation_OpenImage(file); return true; }
-	if(file.indexOf(".tif") !== -1 ){ DKFileAssociation_OpenImage(file); return true; }
-	if(file.indexOf(".osgt") !== -1 ){ DKFileAssociation_OpenModel(file); return true; }
-	if(file.indexOf(".osg") !== -1 ){ DKFileAssociation_OpenModel(file); return true; }
-	if(file.indexOf(".wav") !== -1 ){ DKFileAssociation_OpenAudio(file); return true; }
-	if(file.indexOf(".mp3") !== -1 ){ DKFileAssociation_OpenAudio(file); return true; }
-	if(file.indexOf(".avi") !== -1 ){ DKFileAssociation_OpenVideo(file); return true; }
-	if(file.indexOf(".mkv") !== -1 ){ DKFileAssociation_OpenVideo(file); return true; }
-	if(file.indexOf(".mp4") !== -1 ){ DKFileAssociation_OpenVideo(file); return true; }
-	DKFileAssociation_OpenText(file); return true;
+dk.fileassociation.openjs = function dk_fileassociation_openjs(path) {
+    //path = path.replace(absolutepath, "");
+
+    var id = path.replace(DKAssets_LocalAssets(), "");
+    dk.create(id, function(rval) {
+        if (!rval) {
+            return;
+        }
+        id = id.replace(".js", ".html");
+        dk.frame.create(id);
+    });
 }
 
-
-/////////////////////////////////////////
-function DKFileAssociation_OpenHtml(path)
-{
-	//path = path.replace(absolutepath, "");
-	
-	var id = path.replace(CPP_DKAssets_LocalAssets(),"");
-	//var id = DKFile_GetFilename(path);
-	if(DK_Create(id)){
-		//DKFileAssociation_AddDragHandles(id);
-		DKFrame_Html(id);
-		//DKFileAssociation_SelectElement(id);
-	};
-	
-	
-	//FIXME
-	return error("FIXME");
-	
-	//TODO - to use files outside of the data directory, we need to append the datapath
-	//var the_path = path.replace(id, "");
-	//console.log("DK_AppendDataPath("+the_path+")");
-	//AppendDataPath(the_path);
-
-	var filedata = DKFile_FileToString(path);
-	if(!filedata){ return false; }
-	//if(!HtmlToRml(filedata)){ return false; }
-
-	//Parse the sting into an element
-	var temp = DK_CreateElement(document.body, "temp", "temporary");
-	temp.innerHTML = filedata;
-
-	//if(DK_GetNumChildren(temp) === 0){
-	//	return error("Error loading path: "+id+": could not create node");
-	//}
-
-	//Make sure there is only 1 child
-	//if(DK_GetNumChildren(temp) > 1){
-	//	return error("Error loading path: "+id+" has more than one root node");
-	//}
-
-	console.log("temp: "+temp.id);
-	var element = temp.firstChild;
-	//console.log("element = "+element);
-	//DKElement* element = temp->GetFirstChild();
-	//byId(element).id = id;
-	
-	document.body.appendChild(element);
-	temp.parentNode.removeChild(temp);
-	//Show(id);
-	//DKFileAssociation_AddDragHandles(id);
-	//DKFileAssociation_SelectElement(id);
+dk.fileassociation.opencss = function dk_fileAssociation_opencss(path) {
+    var id = path.replace(CPP_DKAssets_LocalAssets(), "");
+    dk.create(id, function(rval) {
+        if (!rval)
+            return;
+    });
 }
 
-///////////////////////////////////////
-function DKFileAssociation_OpenJS(path)
-{
-	//path = path.replace(absolutepath, "");
-		
-	var id = path.replace(DKAssets_LocalAssets(),"");
-	DK_Create(id, function(rval){
-		if(!rval){ return; }
-		id = id.replace(".js",".html");
-		DKFrame_Html(id);
-	});
+dk.fileassociation.opentext = function dk_fileassociation_opentext(path) {
+    //DK_Toggle("DKNotepad.html");
+    dk.create("DKNotepad/DKNotepad.js", function() {
+        dk.frame.create("DKNotepad/DKNotepad.html");
+        dk.notepad.open(path);
+    });
 }
 
-////////////////////////////////////////
-function DKFileAssociation_OpenCss(path)
-{
-	var id = path.replace(CPP_DKAssets_LocalAssets(),"");
-	DK_Create(id, function(rval){
-		if(!rval){ return; }
-	});
+dk.fileassociation.openimage = function dk_fileassociation_openimage(path) {
+    dk.create("DKPaint/DKPaint.js", function() {
+        dk.frame.create(byId("DKPaint/DKPaint.html"));
+        dk.paint.open(path);
+    });
 }
 
-/////////////////////////////////////////
-function DKFileAssociation_OpenText(path)
-{
-	//DK_Toggle("DKNotepad.html");
-	DK_Create("DKNotepad/DKNotepad.js", function(){
-		DKFrame_Html("DKNotepad/DKNotepad.html");
-		DKNotepad_Open(path);
-	});
+dk.fileassociation.openmodel = function dk_fileAssociation_openmodel(path) {
+    dk.create("DKOSGManipulator,,DKOSGWindow", function() {});
+    dk.create("DKOSGModel,,DKWindow," + path, function() {});
 }
 
-//////////////////////////////////////////
-function DKFileAssociation_OpenImage(path)
-{
-	DK_Create("DKPaint/DKPaint.js", function(){
-		DKFrame_Html("DKPaint/DKPaint.html");
-		DKPaint_Open(path);
-	});
+dk.fileassociation.openaudio = function dkfileassociation_openaudio(path) {
+    //var file = DKFile_GetFilename(path);
+    dk.create("DKAudio", function() {
+        dk.audio.playSound(path);
+    });
+
+    //dk.create("DKOSGAudio,"+file+",DKOSGWindow,"+path);
+    //DKOSGAudio_Play("DKOSGAudio,"+file);
+
+    //dk.create("DKSDLAudio,"+file+",DKSDLWindow,"+path);
+    //DKSDLAudio_Play("DKSDLAudio,"+file);
 }
 
-//////////////////////////////////////////
-function DKFileAssociation_OpenModel(path)
-{
-	DK_Create("DKOSGManipulator,,DKOSGWindow", function(){});
-	DK_Create("DKOSGModel,,DKWindow,"+path, function(){});
-}
-
-//////////////////////////////////////////
-function DKFileAssociation_OpenAudio(path)
-{
-	//var file = DKFile_GetFilename(path);
-	DK_Create("DKAudio", function(){
-		DKAudio_PlaySound(path);
-	});
-	
-	//DK_Create("DKOSGAudio,"+file+",DKOSGWindow,"+path);
-	//DKOSGAudio_Play("DKOSGAudio,"+file);
-	
-	//DK_Create("DKSDLAudio,"+file+",DKSDLWindow,"+path);
-	//DKSDLAudio_Play("DKSDLAudio,"+file);
-}
-
-//////////////////////////////////////////
-function DKFileAssociation_OpenVideo(path)
-{
-	//FIXME
-	DKVideo_Play(path);
+dk.fileassociation.openvideo = function dkfileassociation_openvideo(path) {
+    //FIXME
+    dk.video.play(path);
 }

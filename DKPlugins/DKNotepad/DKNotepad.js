@@ -1,57 +1,40 @@
 "use strict";
 
-//dk.notepad = new Object;
 dk.notepad = new DKWidget();
 
 dk.notepad.init = function dk_notepad_init() {
     dk.create("DKNotepad/DKNotepadShortcuts.js");
     dk.create("DKNotepad/DKNotepad.css");
-    dk.create("DKNotepad/DKNotepad.html", function dk_create_callback() {
+    dk.create("DKNotepad/DKNotepad.html", function dk_create_callback(html) {
+        if (!html)
+            return error("html invalid");
+        dk.notepad.html = html;
+        html.menubar = html.querySelector("[dk_notepad='menubar']");
+        html.file = html.querySelector("[dk_notepad='file']");
+        html.edit = html.querySelector("[dk_notepad='edit']");
+        html.format = html.querySelector("[dk_notepad='format']");
+        html.view = html.querySelector("[dk_notepad='view']");
+        html.help = html.querySelector("[dk_notepad='help']");
+        html.container = html.querySelector("[dk_notepad='container']");
+        html.text = html.querySelector("[dk_notepad='text']");
+
         //byId("DKNotepad.html").addEventListener("SetFile", dk.notepad.onevent);
         //byId("DKNotepad/DKNotepad.html").addEventListener("OpenFile", dk.notepad.onevent);
         //byId("DKNotepad/DKNotepad.html").addEventListener("SaveFile", dk.notepad.onevent);
         //byId("DKNotepad_Text").addEventListener("contextmenu", dk.notepad.onevent);
-        //byId("DKNotepad_File").addEventListener("click", dk.notepad.onevent);
-        byId("DKNotepad_File").onclick = function(event) {
+        html.file.onclick = function(event) {
             event.preventDefault();
-            const menu = dk.menu.createInstance(byId("DKNotepad_Container"));
-            dk.menu.addItem(menu, "New", function() {
-                console.log("New")
-            });
-            dk.menu.addItem(menu, "Open", function() {
-                console.log("Open");
-                dk.notepad.open();
-            });
-            dk.menu.addItem(menu, "Save", function() {
-                console.log("Save");
-            });
-            dk.menu.addItem(menu, "SaveAs", function() {
-                console.log("SaveAs");
-            });
-            dk.menu.addItem(menu, "Print", function() {
-                console.log("Print");
-            });
-            dk.menu.addItem(menu, "Exit", function(event) {
-                //dk.close("DKNotepad/DKNotepad.js");
-                dk.frame.close(byId("DKNotepad/DKNotepad.html"));
-            });
-            menu.style.top = "0rem";
-            menu.style.left = "0rem";
-            menu.style.width = "80rem";
+            dk.create("DKNotepad/dk.notepad.file.js");
         }
-
-        // byId("DKNotepad_Edit").addEventListener("click", dk.notepad.onevent);
-        // byId("DKNotepad_Format").addEventListener("click", dk.notepad.onevent);
-        // byId("DKNotepad_View").addEventListener("click", dk.notepad.onevent);
-        // byId("DKNotepad_Help").addEventListener("click", dk.notepad.onevent);
-        let notepad = byId("DKNotepad/DKNotepad.html");
-        dk.notepad.currentFile;
-        dk.notepad.setElement(notepad);
+        dk.notepad.currentFile = "";
+        
+        dk.notepad.setElement(html);
         dk.frame.create(dk.notepad);
-    });    
+    });
 }
 
 dk.notepad.end = function dk_notepad_end() {
+    /*
     byId("DKNotepad/DKNotepad.html").removeEventListener("OpenFile", dk.notepad.onevent);
     byId("DKNotepad/DKNotepad.html").removeEventListener("SaveFile", dk.notepad.onevent);
     byId("DKNotepad_Text").removeEventListener("contextmenu", dk.notepad.onevent);
@@ -60,6 +43,8 @@ dk.notepad.end = function dk_notepad_end() {
     byId("DKNotepad_Format").removeEventListener("click", dk.notepad.onevent);
     byId("DKNotepad_View").removeEventListener("click", dk.notepad.onevent);
     byId("DKNotepad_Help").removeEventListener("click", dk.notepad.onevent);
+    */
+    dk.notepad.file.close();
     dk.close("DKNotepad/DKNotepad.html");
     dk.close("DKNotepad/DKNotepad.css");
     dk.close("DKNotepad/DKNotepadShortcuts.js");

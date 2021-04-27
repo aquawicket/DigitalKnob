@@ -1,7 +1,7 @@
 "use strict";
 
 //Multiple instances of DKWidget derived objects are allowed by default.
-//To make it singleton, simpily pass "singleton" to your new DKWidget("singleton") call;
+//To make it singleton, simpily pass a unique name to your new DKWidget() call. I.E.  const colorSettingsWindow = new DKWidget("ColorSettingWindow");
 //You can also make semi-singleton objects that use an identifier to differentiate between mucitiple objects 
 //The identifier vabliable can be a label, name, and item number.. just something unique to that object instance. 
 //The DKWidget constructor will not allwow multiple instances with the same identifier value to be created
@@ -11,7 +11,7 @@
 //A typical DKWidget might look something like this.
 const CreateMyWidget = function()
 {
-    const myWidget = new DKWidget("singleton");
+    const myWidget = new DKWidget("myWidget");
     if (!myWidget.ok)
         return;
 
@@ -63,14 +63,14 @@ const DKWidget = function(identifier) {
     }
 
     DKWidget.prototype.setElement = function(element) {
-        //console.debug("DKWidget.setElement() called");
-        if(typeof element != "object")
-            return error("setElement required element of type object");
+        if(!element instanceof EventTarget)
+            return error("setElement() requires an element node thats an instanceof EventTarget");
         this.element = element;
     }
 
     DKWidget.prototype.getElement = function() {
-        //console.debug("DKWidget.getElement() called");
+        if(!this.element)
+            return error("DKWidget.getElement(): element not set, please use yourDKWidget.setElement(elem)");
         return this.element;
     }
 

@@ -333,7 +333,7 @@ if (!dk.hasCPP()) {
 }
 
 if (!dk.hasCPP()) {
-    dk.file.directoryConstnts = function dk_file_directoryContents(url) {
+    dk.file.directoryContents = function dk_file_directoryContents(url, callback) {
         //TEST
         url = url.replace("http://localhost/", ".");
         //FIXME
@@ -349,10 +349,16 @@ if (!dk.hasCPP()) {
         //url = url.replace(assets, dk.file.onlineAssets);
         //var path = dk.file.verifyPath(url);
         //if(!path){ return 0; }
-        send = dk.file.onlineAssets + "DKFile/DKFile.php?DirectoryContents=" + url;
-        console.log("ajaxGetUrl(" + send + ")");
-        var result = ajaxGetUrl(send);
-        return result;
+
+        dk.php.call('POST', "/DKFile/DKFile.php", "directoryContents", url, function(results) {
+            results && console.debug(results);
+            callback && callback(results)
+        });
+
+        //send = dk.file.onlineAssets + "DKFile/DKFile.php?DirectoryContents=" + url;
+        //console.log("ajaxGetUrl(" + send + ")");
+        //var result = ajaxGetUrl(send);
+        //return result;
     }
 } else {
     dk.file.directoryContents = function dk_file_directoryContents(url) {
@@ -361,20 +367,19 @@ if (!dk.hasCPP()) {
 }
 
 if (!dk.hasCPP()) {
-    dk.file.getAbsolutePath = function dk_file_getAbsolutePath(url) {
+    dk.file.getAbsolutePath = function dk_file_getAbsolutePath(url, callback) {
         if (!url)
             url = "/";
         if (url.includes("file:///"))
             url = pathname;
-        url = url.replace(protocol + "//" + hostname + "/", "");
+        url = url.replace(location.protocol + "//" + location.hostname + "/", "");
         url = url.replace("//", "/");
         //console.debug("dk.file.getAbsolutePath("+url+")");
-        send = dk.file.onlineAssets + "DKFile/DKFile.php?GetAbsolutePath=" + url;
-        var result = ajaxGetUrl(send);
-        //result = result.replace(protocol+"//"+hostname+"/","");
-        //result = result.replace("//","/");
-        console.debug("dk.file.getAbsolutePath(" + url + ") -> " + result);
-        return result;
+
+        dk.php.call('POST', "/DKFile/DKFile.php", "getAbsolutePath", url, function(results) {
+            results && console.debug(results);
+            callback && callback(results)
+        });
     }
 } else {
     dk.file.getAbsolutePath = function dk_file_getAbsolutePath(url) {
@@ -392,16 +397,16 @@ dk.file.getRelativePath = function dk_file_getRelativePath(apath, datapath) {
 }
 
 if (!dk.hasCPP()) {
-    dk.file.isDirectory = function dk_file_isDirectory(url) {
-        send = dk.file.onlineAssets + "/DKFile/DKFile.php?IsDirectory=" + url;
-        var result = ajaxGetUrl(send);
-        //console.log("dk.file.IsDirectory("+url+") ->"+result);
-        if (result === "0")
-            return false;
-        return true;
+    dk.file.isDir = function dk_file_isDir(url) {
+        dk.php.call('POST', "/DKFile/DKFile.php", "isDir", url, function(result) {
+            result && console.debug(result);
+            if(result === "0")
+                return false;
+            return true;
+        });        
     }
 } else {
-    dk.file.isDirectory = function dk_file_isDirectory(url) {
+    dk.file.isDir = function dk_file_isDirectory(url) {
         return CPP_DKFile_IsDirectory(url);
     }
 }

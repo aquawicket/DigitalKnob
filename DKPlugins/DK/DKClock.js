@@ -34,12 +34,12 @@ dk.clock = {
     },
 
     create: function dk_clock_create(parent, id, top, bottom, left, right, width, weight) {
-        const clock = document.createElement("a");
-        clock.id = id;
-        clock.style.position = "absolute";
-        clock.style.top = top;
-        clock.style.right = right;
-        parent.appendChild(clock);
+        dk.clock.html = document.createElement("a");
+        dk.clock.html.id = id;
+        dk.clock.html.style.position = "absolute";
+        dk.clock.html.style.top = top;
+        dk.clock.html.style.right = right;
+        parent.appendChild(dk.clock.html);
         window.setInterval(this.update, 1000);
     },
 
@@ -101,8 +101,8 @@ dk.clock = {
         }
 
         const datetime = dayOfWeek + " " + (currentdate.getMonth() + 1) + "/" + currentdate.getDate() + "/" + currentdate.getFullYear() + "  " + currentdate.getHours() + ":" + currentdate.getMinutes() + ":" + currentdate.getSeconds();
-        if (byId("clock")) {
-            byId("clock").innerHTML = datetime;
+        if (dk.clock.html) {
+            dk.clock.html.innerHTML = datetime;
         }
     }
 }

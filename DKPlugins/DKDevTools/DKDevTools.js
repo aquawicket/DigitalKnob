@@ -30,7 +30,7 @@ dk.devtools.create = function dk_devtools_create() {
 }
 
 dk.devtools.show = function dk_devtools_show() {
-    dk.devtools = new DKWidget("singleton");
+    dk.devtools = new DKWidget("dk.devtools");
     if(!dk.devtools.ok)
         return;
         

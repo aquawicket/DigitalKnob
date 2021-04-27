@@ -1,11 +1,9 @@
-#DKNotepad\/DKNotepad\.html
-{
+[dk_notepad="notepad"] {
 	position:absolute;
 	overflow:hidden;
 }
 
-#DKNotepad_Menubar
-{
+[dk_notepad="menubar"] {
 	position:absolute;
 	width:100%;
 	height:20px;
@@ -14,8 +12,7 @@
 	cursor:default;
 }
 
-#DKNotepad_File
-{
+[dk_notepad="file"] {
 	position:absolute;
 	top:2px;
 	top:2rem;
@@ -25,8 +22,7 @@
 	width:35rem;
 }
 
-#DKNotepad_Edit
-{
+[dk_notepad="edit"] {
 	position:absolute;
 	top:2px;
 	top:2rem;
@@ -36,8 +32,7 @@
 	width:35rem;
 }
 
-#DKNotepad_Format
-{
+[dk_notepad="format"] {
 	position:absolute;
 	top:2px;
 	top:2rem;
@@ -47,8 +42,7 @@
 	width:50rem;
 }
 
-#DKNotepad_View
-{
+[dk_notepad="view"] {
 	position:absolute;
 	top:2px;
 	top:2rem;
@@ -58,8 +52,7 @@
 	width:35rem;
 }
 
-#DKNotepad_Help
-{
+[dk_notepad="help"] {
 	position:absolute;
 	top:2px;
 	top:2rem;
@@ -69,8 +62,7 @@
 	width:35rem;
 }
 
-#DKNotepad_Container
-{
+[dk_notepad="container"] {
 	position:absolute;
 	top:20px;
 	top:20rem;
@@ -82,8 +74,7 @@
 	bottom:0rem;
 }
 
-#DKNotepad_Text
-{
+[dk_notepad="text"] {
 	position:absolute;
 	top:0px;
 	top:0rem;

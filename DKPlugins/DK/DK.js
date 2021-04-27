@@ -259,11 +259,23 @@ dk.getPlugin = function(url) {
         return error("pluginName invalid");
     pluginName = pluginName.substring(0, pluginName.lastIndexOf("."));
     pluginName = pluginName.toLowerCase();
-    if (pluginName.substring(0, 2) !== "dk") {
-        //return error(file+" is not a valid filename for a dk plugin");
+    /*
+    if(pluginName.substring(0,3) === "dk."){
+        //pluginName = pluginName.slice(3);
+        const dk_ = window["dk"];
+        const dk_notepad = dk_["notepad"];
+        if(dk_notepad){
+            const dk_notepad_file = dk_notepad["file"];
+            const dk_npf = window["dk"]["notepad"]["file"];
+            console.log("yup");
+        }
+    }
+    */
+    if(pluginName.substring(0, 2) === "dk"){
+        pluginName = pluginName.slice(2);
+    } else{
         return false;
     }
-    pluginName = pluginName.slice(2);
     let plugin = dk[pluginName];
     if (!plugin) {
         return warn(file + " does not contain a dk." + pluginName + " Object");
@@ -1225,5 +1237,6 @@ dk.checkForUNICODE = function dk_checkForUNICODE(str) {
 dk.validateStrict = function dk_validateStrict(str) {
     return str;
 }
+
 
 dk.init();

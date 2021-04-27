@@ -18,7 +18,7 @@ window.onunhandledrejection = function(event) {
 dk.trace.editFile = function dk_trace_editFile(file) {
     dk.create("DKNotepad/DKNotepad.js", function dk_create_callback() {
         dk.frame.create(byId("DKNotepad/DKNotepad.html"));
-        DKNotepad_Open(file);
+        dk.notepad.open(file);
     });
 }
 

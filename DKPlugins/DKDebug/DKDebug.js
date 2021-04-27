@@ -8,7 +8,46 @@ dk.debug = new Object;
 dk.debug.debugFunc = function dk_debug_debugFunc() {
     //console.log("dk.debug.debugFunc");
 
+    //Object by dot path experament
+    const OBJ = function OBJ(dotPath) {
+        const objstrings = dotPath.split(".");
+        console.debug("OBJ(" + dotPath + ")");
+        console.debug(objstrings.length + " suspected objects in the path");
+
+        const objs = [window];
+        for (let n = 0; n < objstrings.length; n++) {
+            //objs.push()
+            objs.push(objs[n][objstrings[n]]);
+            if (objs[n + 1] === undefined) {
+                let errmsg = "";
+                for (let nn = 0; nn < n + 1; nn++) {
+                    if (nn === n)
+                        errmsg += "(";
+                    errmsg += objstrings[nn];
+                    if (nn === n)
+                        errmsg += ")";
+                    if (nn < n)
+                        errmsg += ".";
+                }
+                console.log("Error: " + errmsg + " is " + objs[n + 1]);
+                return false;
+            }
+        }
+        return objs[objs.length - 1] || true;
+    }
+    //OBJ("dk.clock.html.style").color = "rgb(0,0,0)";
+    OBJ("dk.clock.html2.style.color") && (dk.clock.html.style.color = "rgb(200,0,200)");
+
+
+    //const clock_face = window['dk']['clock']['html']['innerHTML'];
+    //console.log(clock_face);
+
+    /*
     //A typical DKWidget might look something like this. 
+    const myObject = new DKWidget("singleton");
+    if (!myObject.ok)
+        return;
+
     const myDiv = document.createElement("div");
     myDiv.id = "MyWidget";
     myDiv.style.width = "200px";
@@ -23,12 +62,9 @@ dk.debug.debugFunc = function dk_debug_debugFunc() {
     text.style.color = "rgb(0,0,0)";
     myDiv.appendChild(text);
 
-    const myObject = new DKWidget(this);
-    if (!myObject.ok)
-        return;
     myObject.setElement(myDiv);
     dk.frame.create(myObject);
-
+    */
 
     /*
     dk.console.log("dk.console.log test");
@@ -44,7 +80,7 @@ dk.debug.debugFunc = function dk_debug_debugFunc() {
     console.warn("console.warn test");
     console.error("console.error test");
     */
-    
+
     //Test if a url exists. Can use straight ajax,"thows console error if url does not exist", or php.
     /*
     const usePhp = 1;
@@ -155,7 +191,7 @@ dk.debug.debugFunc = function dk_debug_debugFunc() {
     dk.php.call("GET", "/DK/DK.php", "debugFunc", "one", "two", "three", function(rval) {
         console.log(rval);
     });
-    */    
+    */
 
     //console.log("Multiple styles: %cred %corange", "color: red", "color: orange", "Additional unformatted message");
     //dk.codemirror.Create();
