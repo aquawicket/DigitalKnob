@@ -49,6 +49,7 @@ const DKWidget = function(singleton) {
     }
 
     //EXECUTION STARTS HERE
+
     if (singleton) {
         this.singleton = singleton;
         for(let n=0; n<DKWidget.instances.length; n++){
