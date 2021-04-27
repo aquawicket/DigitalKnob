@@ -6,29 +6,7 @@ dk.frame.frames = new Array;
 dk.frame.Init = function dk_frame_Init() {}
 dk.frame.End = function dk_frame_End() {}
 
-dk.frame.createNewWindow = function dk_frame_createNewWindow(title, width, height) {
-    const div = document.createElement("div");
-    div.id = title;
-    //div.style.position = "absolute";
-    div.style.width = width;
-    div.style.height = height;
-    div.style.overflow = "auto";
-    //div.style.fontSize = "12rem";
-    //div.style.fontFamily = "Consolas, Lucinda, Console, Courier New, monospace";
-    //div.style.whiteSpace = "pre-wrap";
-    //div.style.boxSizing = "border-box";
-    //div.style.padding = "2rem";
-    //div.style.paddingLeft = "20rem";
-    //div.style.borderStyle = "solid";
-    //div.style.borderWidth = "1rem";
-    //div.style.borderTopWidth = "0rem";
-    //div.style.borderLeftWidth = "0rem";
-    //div.style.borderRightWidth = "0rem";
-    //div.style.backgroundColor = "rgb(36,36,36)";
-    //document.body.appendChild(div);
-    dk.frame.create(div);
-    return div;
-}
+
 
 dk.frame.bringToFront = function dk_frame_bringToFront(frame) {
     frame = dk.frame.getFrame(frame);
@@ -50,9 +28,6 @@ dk.frame.close = function dk_frame_close(obj) {
     if (frame && frame.contentInstance && frame.contentInstance instanceof DKWidget) {
         console.debug("dk.frame.close(): frame.contentInstance is an instanceof DKWidget");
         frame.contentInstance.close();
-        //} else if (frame.content && frame.content.close) {
-        //    console.debug("frame.content has it's own close() function");
-        //    frame.content.close(frame.content);
     } else if (frame.content && frame.content.id && frame.content.id.includes(".html")) {
         console.debug("dk.frame.close(): obj seems to be a plugin sill closing by filename ");
         var htmlfile = frame.content.id;
@@ -99,11 +74,10 @@ dk.frame.create = function dk_frame_create(obj) {
         console.debug("dk.frame.create(): obj is an instance of DKWidget");
         element = obj.getElement();
     } else {
-        console.debug("dk.frame.create(): looks like obj is a html")
+        console.warn("dk.frame.create(): obj is not a instance of DKWidget. It is recommended to dirive from a new DKWidget instance")
         element = obj;
         if (!element.id)
             return error("element.id invalid");
-        console.debug("element.id is " + element.id);
     }
 
     var title = dk.file.getFilename(element.id);
@@ -236,10 +210,10 @@ dk.frame.maximize = function dk_frame_maximize(element) {
     }
 }
 
-dk.frame.minimize = function dk_frame_minimize(element) {
-    if (!element || !element.parentNode)
-        return error("element invalid");
-    var frame = dk.frame.getFrame(element);
+dk.frame.minimize = function dk_frame_minimize(obj) {
+    if (!obj)
+        return error("obj invalid");
+    var frame = dk.frame.getFrame(obj);
     if (!frame)
         return error("frame invalid");
     var top = frame.style.top;
@@ -280,20 +254,22 @@ dk.frame.minimize = function dk_frame_minimize(element) {
     }
 }
 
-//FIXME - there is some work to be done here
-dk.frame.reload = function dk_frame_reload(element) {
-    if (!element || !element.id || !element.parentNode)
-        return error("element invalid");
-    var frame = dk.frame.getFrame(element);
-    if (!frame || !frame.content)
+dk.frame.reload = function dk_frame_reload(obj) {
+    if (!obj)
+        return error("obj invalid");
+    var frame = dk.frame.getFrame(obj);
+    if (!frame)
         return "frame invalid";
+    
+    console.debug("FIXME: more work to be down to complete dk.frame.reload()");
+    return false;
+    
     const jsfile = frame.content.id.replace(".html", ".js");
     if (!jsfile)
         return error("jsfile invalid");
     const htmlfile = frame.content.id.replace(".js", ".html");
     if (!htmlfile)
         return error("htmlfile invalid");
-
     dk.frame.close(frame.content);
     dk.create(jsfile, function() {
         dk.frame.create(byId(htmlfile));
@@ -303,14 +279,12 @@ dk.frame.reload = function dk_frame_reload(element) {
 dk.frame.getFrame = function dk_frame_getFrame(obj) {
     if (!obj)
         return error("obj invalid");
-    
     let element;
     if (obj instanceof DKWidget) {
         element = obj.getElement();
     }else{
         element = obj;
     }
-
     while (element && element !== document) {
         for (let n = 0; n < dk.frame.frames.length; n++) {
             if (dk.frame.frames[n] === element)
@@ -318,8 +292,7 @@ dk.frame.getFrame = function dk_frame_getFrame(obj) {
         }
         element = element.parentElement;
     }
-    return false;
-    //error("dk.frame.frames[n] invalid");
+    return error("dk.frame.frames[n] invalid");
 }
 
 dk.frame.setTitle = function dk_frame_setTitle(obj, title) {
@@ -327,19 +300,9 @@ dk.frame.setTitle = function dk_frame_setTitle(obj, title) {
         return error("obj invalid");
     if (!title)
         return error("title invalid");
-
     var frame = dk.frame.getFrame(obj);
     if (!frame)
         return error("frame invalid");
-
-    /*
-    //This works too
-    const titlebartext = frame.querySelector("[dk_frame='titlebartext']");        
-    if(!titlebartext)
-        return error("titlebatext invalid");
-    titlebartext.innerHTML = title;
-    */
-
     frame.titlebartext && (frame.titlebartext.innerHTML = title);
     return true;
 }
@@ -369,6 +332,32 @@ dk.frame.restoreSize = function dk_frame_restoreSize(frame) {
     frame.style.height = frame.height;
     return true;
 }
+
+/*
+dk.frame.createNewWindow = function dk_frame_createNewWindow(title, width, height) {
+    const div = document.createElement("div");
+    div.id = title;
+    //div.style.position = "absolute";
+    div.style.width = width;
+    div.style.height = height;
+    div.style.overflow = "auto";
+    //div.style.fontSize = "12rem";
+    //div.style.fontFamily = "Consolas, Lucinda, Console, Courier New, monospace";
+    //div.style.whiteSpace = "pre-wrap";
+    //div.style.boxSizing = "border-box";
+    //div.style.padding = "2rem";
+    //div.style.paddingLeft = "20rem";
+    //div.style.borderStyle = "solid";
+    //div.style.borderWidth = "1rem";
+    //div.style.borderTopWidth = "0rem";
+    //div.style.borderLeftWidth = "0rem";
+    //div.style.borderRightWidth = "0rem";
+    //div.style.backgroundColor = "rgb(36,36,36)";
+    //document.body.appendChild(div);
+    dk.frame.create(div);
+    return div;
+}
+*/
 
 /*
 dk.frame.iFrame = function dk_frame_Iframe(title, url, width, height) {
