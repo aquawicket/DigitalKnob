@@ -15,28 +15,27 @@ dk.frame.create = function dk_frame_create(obj) {
         element = obj.getElement();
     } else {
         console.warn("dk.frame.create(): obj is not a instance of DKWidget. It is recommended to derive from a new DKWidget instance")
-        element = obj;
-        if (!element.id)
-            return error("element.id invalid");
+        if(typeof obj === Object)
+            element = obj;
+        else
+            element = byId(obj)
     }
 
-    var title = dk.file.getFilename(element.id);
-    title && (title = title.replace(".html", ""));
+    if(element.id){
+        var title = dk.file.getFilename(element.id);
+        title && (title = title.replace(".html", ""));
+    }
 
     var width = element.style.width;
     var height = element.style.height;
     !width.includes("%") && (width = parseInt(width));
     !height.includes("%") && (height = parseInt(height));
-    //width = width.replace("rem", "");
-    //height = height.replace("rem", "");
 
     let frame = dk.frame.createFrame(title, width, height);
     if (obj instanceof DKWidget)
         frame.contentInstance = obj;
     frame.content = element;
     frame.content.setAttribute("dk_frame", "content");
-    frame.appendChild(frame.content);
-
     frame.content.style.position = "absolute";
     frame.content.style.top = "21rem";
     frame.content.style.bottom = "0rem";
@@ -44,20 +43,13 @@ dk.frame.create = function dk_frame_create(obj) {
     frame.content.style.right = "0rem";
     frame.content.style.removeProperty("height");
     frame.content.style.removeProperty("width");
-
-    //frame.content.style.top = "21rem";
-    //frame.content.style.bottom = "0rem";
-    //frame.content.style.left = "0rem";
-    //frame.content.style.right = "0rem";
+    frame.appendChild(frame.content);
 
     frame.resize = dk.resize.create(frame);
-
-
     return this;
 }
 
 dk.frame.close = function dk_frame_close(obj) {
-    console.debug("dk.frame.close() called");
     //Remove the contents of the frame
     if (!obj)
         return error("obj invalid");
@@ -67,7 +59,6 @@ dk.frame.close = function dk_frame_close(obj) {
         return error("frame invalid");
 
     if (frame && frame.contentInstance && frame.contentInstance instanceof DKWidget) {
-        console.debug("dk.frame.close(): frame.contentInstance is an instanceof DKWidget");
         frame.contentInstance.close();
     } else if (frame.content && frame.content.id && frame.content.id.includes(".html")) {
         console.debug("dk.frame.close(): obj seems to be a plugin sill closing by filename ");

@@ -73,7 +73,6 @@ const DKWidget = function(identifier) {
     }
 
     DKWidget.prototype.close = function() {
-        console.debug("DKWidget.close() called");
         const index = DKWidget.instances.indexOf(this.instance);
         if (index <= -1)
             return error("Unable to find instance in DKWidget");
@@ -97,7 +96,7 @@ const DKWidget = function(identifier) {
             this.identifier = identifier;
             for (let n = 0; n < DKWidget.instances.length; n++) {
                 if (DKWidget.instances[n].identifier == this.identifier) {
-                    console.error("A DKWidget instance with the same identifier already exists");
+                    console.error("A DKWidget instance with the same identifier value already exists");
                     DKWidget.instances[n].ok = false;
                     return DKWidget.instances[n];
                 }

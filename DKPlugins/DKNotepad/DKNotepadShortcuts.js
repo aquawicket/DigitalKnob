@@ -1,18 +1,19 @@
-//////////////////////////////////
-function DKNotepadShortcuts_Init()
+"use strict";
+
+dk.notepadshortcuts = new Object;
+
+dk.notepadshortcuts.init = function dk_notepadshortcuts_init()
 {
-	document.addEventListener("keydown", DKNotepadShortcuts_OnEvent);
+	document.addEventListener("keydown", dk.notepadshortcuts.onevent);
 }
 
-/////////////////////////////////
-function DKNotepadShortcuts_End()
+dk.notepadshortcuts.end = function dk_notepadshortcuts_end()
 {
-	document.removeEventListener("keydown", DKNotepadShortcuts_OnEvent);
+	document.removeEventListener("keydown", dk.notepadshortcuts.onevent);
 }
 
-//////////////////////////////////////////
-function DKNotepadShortcuts_OnEvent(event)
+dk.notepadshortcuts.onevent = function dk_notepadshortcuts_onevent(event)
 {
-	console.warn("DKNotepadShortcuts_OnEvent(): event.type:"+event.type);
+	console.warn("dk.notepadshortcut.onevent(): event.type:"+event.type);
 	console.warn("event.code = "+event.code);
 }
