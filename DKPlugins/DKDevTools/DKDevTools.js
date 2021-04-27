@@ -29,33 +29,22 @@ dk.devtools.create = function dk_devtools_create() {
     dk.drag.addHandle(dragDiv, elem);
 }
 
-//dk.devtools.close = function dk_devtools_close(){
-//    console.debug("dk.devtools.close() called");
-//    DKWidget.close();
-//dk.devtools.removeInstance(dk.devtools.instance);
-//}
-
 dk.devtools.show = function dk_devtools_show() {
-    dk.devtools = new DKWidget(this);
-    if(!dk.devtools.ok)
-        return;
-
     const div = document.createElement("div");
-    dk.devtools.setElement(div);
     div.id = "DKDevTools";
     div.style.position = "absolute";
     div.style.width = "200rem";
     div.style.height = "300rem";
-    //div.close = dk.devtools.close;
-    document.body.appendChild(div);
 
-    // This is the magic: Review this
-    //console.debug(dk.devtools.instance instanceof DKWidget);
-    dk.frame.create(dk.devtools.instance);
-
-    const frame = dk.frame.getFrame(div);
+    dk.devtools = new DKWidget("singleton");
+    if(!dk.devtools.ok)
+        return;
+    dk.devtools.setElement(div);
+    dk.frame.create(dk.devtools);
+    
+    const frame = dk.frame.getFrame(dk.devtools);
     frame.titlebaricon.src = "DKDevTools/developer.png";
-
+    
     dk.devtools.addTools = function dk_devtools_addTools() {
         const div = dk.devtools.getElement();
         dk.gui.createButton(div, "DEBUG", "5rem", "", "5rem", "", "63rem", "20rem", dk.debug.debugFunc);

@@ -8,6 +8,28 @@ dk.debug = new Object;
 dk.debug.debugFunc = function dk_debug_debugFunc() {
     //console.log("dk.debug.debugFunc");
 
+    //A typical DKWidget might look something like this. 
+    const myDiv = document.createElement("div");
+    myDiv.id = "MyWidget";
+    myDiv.style.width = "200px";
+    myDiv.style.height = "200px";
+    myDiv.style.backgroundColor = "rgb(50,50,50)";
+
+    const text = document.createElement("span");
+    text.innerHTML = "some content"
+    text.style.position = "absolute";
+    text.style.bottom = "60px";
+    text.style.right = "70px";
+    text.style.color = "rgb(0,0,0)";
+    myDiv.appendChild(text);
+
+    const myObject = new DKWidget(this);
+    if (!myObject.ok)
+        return;
+    myObject.setElement(myDiv);
+    dk.frame.create(myObject);
+
+
     /*
     dk.console.log("dk.console.log test");
     dk.console.info("dk.console.info test");

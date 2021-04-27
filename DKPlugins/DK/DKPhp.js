@@ -6,8 +6,10 @@ dk.php = new Object;
 dk.php.call = function dk_php_call(httpMethod, phpPath, funcName) {
     const allowed = ["DK.js","DKFile.js","DKDebug.js"];
     const callerFilename = dk.trace.getFilename();
-    if(!allowed.includes(callerFilename))
-        return error("dk.php.call(): Permission Denied for "+callerFilename);
+    if(!allowed.includes(callerFilename)){
+        console.log("PHP Permission Denied for "+callerFilename);
+        return false;
+    }
     
     if (!phpPath)
         return error("phpPath invalid");

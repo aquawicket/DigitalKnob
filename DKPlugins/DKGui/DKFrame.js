@@ -14,7 +14,7 @@ dk.frame.create = function dk_frame_create(obj) {
     if (obj instanceof DKWidget) {
         element = obj.getElement();
     } else {
-        console.warn("dk.frame.create(): obj is not a instance of DKWidget. It is recommended to dirive from a new DKWidget instance")
+        console.warn("dk.frame.create(): obj is not a instance of DKWidget. It is recommended to derive from a new DKWidget instance")
         element = obj;
         if (!element.id)
             return error("element.id invalid");
@@ -36,7 +36,23 @@ dk.frame.create = function dk_frame_create(obj) {
     frame.content = element;
     frame.content.setAttribute("dk_frame", "content");
     frame.appendChild(frame.content);
+
+    frame.content.style.position = "absolute";
+    frame.content.style.top = "21rem";
+    frame.content.style.bottom = "0rem";
+    frame.content.style.left = "0rem";
+    frame.content.style.right = "0rem";
+    frame.content.style.removeProperty("height");
+    frame.content.style.removeProperty("width");
+    
+    //frame.content.style.top = "21rem";
+    //frame.content.style.bottom = "0rem";
+    //frame.content.style.left = "0rem";
+    //frame.content.style.right = "0rem";
+
     frame.resize = dk.resize.create(frame);
+
+
     return this;
 }
 

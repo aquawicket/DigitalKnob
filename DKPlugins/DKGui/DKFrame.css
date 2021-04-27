@@ -4,9 +4,19 @@
     min-width: 62rem;
     min-height: 20rem;
     background-color: #766a6a;
-    border-style: solid;
-    border-color: rgb(0,0,0);
+}
+
+[dk_frame="frame"]::after {
+    content: '';
+    position: absolute;
+    border-style:solid;
     border-width: 1rem;
+    border-color: black;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    pointer-events: none;
 }
 
 [dk_frame="content"] {
@@ -16,6 +26,7 @@
     left: 0rem;
     right: 0rem;
     height: unset;
+    width: unset;
 }
 
 [dk_frame="titlebar"] {
@@ -50,8 +61,10 @@
 [dk_frame="reload"] {
     position: absolute;
     top: 1rem;
-    right: 65rem;
-    height: 18rem;
+    right: 63rem;
+    height: 19rem;
+    background-color: rgb(212 210 212);
+
 }
 
 [dk_frame="minimize"] {

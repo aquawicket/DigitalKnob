@@ -6,7 +6,32 @@
 //The DKWidget constructor will not allwow multiple instances of the singleton varable to exist. 
 //After creating the DKWidget object, check it's .ok derived variable before continuing processing.
 
-const DKWidget = function(singleton) {
+(function() {
+
+    //A typical DKWidget might look something like this. 
+    const myDiv = document.createElement("div");
+    myDiv.id = "MyWidget";
+    myDiv.style.width = "200px";
+    myDiv.style.height = "200px";
+    myDiv.style.backgroundColor = "rgb(50,50,50)";
+
+    const text = document.createElement("span");
+    text.innerHTML = "some content"
+    text.style.position = "absolute";
+    text.style.bottom = "60px";
+    text.style.right = "70px";
+    text.style.color = "rgb(0,0,0)";
+    myDiv.appendChild(text);
+
+    const myObject = new DKWidget(this);
+    if (!myObject.ok)
+        return;
+    myObject.setElement(myDiv);
+    dk.frame.create(myObject);
+}
+)
+
+const DKWidget = function() {
     DKWidget.prototype.getInstance = function(instance) {
         //console.debug("DKWidget.getInstance() called");
         const index = DKWidget.instances.indexOf(instance);
@@ -55,13 +80,24 @@ const DKWidget = function(singleton) {
     }
 
     //EXECUTION STARTS HERE
-    if (singleton) {
-        this.singleton = singleton;
-        for(let n=0; n<DKWidget.instances.length; n++){
-            if(DKWidget.instances[n].singleton == this.singleton){
-                console.error("this.singleton already exists in DKWidget");
-                DKWidget.instances[n].ok = false;
-                return false;
+    if (arguments.length) {
+        if (arguments[0] === undefined) {
+            let errmsg = "DKWidget was invoked with an argument that evaluated to undefined.\n";
+            errmsg += "Please try a different variable to differentiate this object across multiple instances.\n";
+            errmsg += "If you wish to make this object completley singleton, simply pass a 1 or 'singleton' to DKWidget()\n";
+            return error(errmsg);
+        }
+
+        const singleton = arguments[0];
+        console.debug("DKWidget("+singleton+")");
+        if (singleton) {
+            this.singleton = singleton;
+            for (let n = 0; n < DKWidget.instances.length; n++) {
+                if (DKWidget.instances[n].singleton == this.singleton) {
+                    console.error("this.singleton already exists in DKWidget");
+                    DKWidget.instances[n].ok = false;
+                    return false;
+                }
             }
         }
     }
