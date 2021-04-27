@@ -53,7 +53,9 @@ const DKWidget = function(singleton) {
         this.singleton = singleton;
         for(let n=0; n<DKWidget.instances.length; n++){
             if(DKWidget.instances[n].singleton === this.singleton){
-                return error("this.singleton already exists in DKWidget");
+                console.error("this.singleton already exists in DKWidget");
+                DKWidget.instances[n].ok = false;
+                return false;
             }
         }
     }
@@ -66,6 +68,7 @@ const DKWidget = function(singleton) {
     }
     console.debug("creating new instance of DKWidget");
     DKWidget.instances.push(this.instance);
+    DKWidget.instances[DKWidget.instances.length - 1].ok = true;
     return DKWidget.instances[DKWidget.instances.length - 1];
 }
 

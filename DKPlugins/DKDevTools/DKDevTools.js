@@ -36,9 +36,9 @@ dk.devtools.create = function dk_devtools_create() {
 //}
 
 dk.devtools.show = function dk_devtools_show() {
-    if(dk.devtools.singleton)
-        return;
     dk.devtools = new DKWidget(true);
+    if(!dk.devtools.ok)
+        return;
     //if (typeof dk.devtools.div === "object" && dk.frame.getFrame(dk.devtools.div))
     //    return;
     const div = document.createElement("div");
