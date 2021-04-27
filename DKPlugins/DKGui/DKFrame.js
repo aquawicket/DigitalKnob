@@ -38,25 +38,23 @@ dk.frame.bringToFront = function dk_frame_bringToFront(frame) {
 }
 
 dk.frame.close = function dk_frame_close(obj) {
+    console.debug("dk.frame.close() called");
     //Remove the contents of the frame
     if (!obj)
         return error("obj invalid");
-    if (obj instanceof DKWidget) {
-        console.debug("obj is an instanceof DKWidget");
-        obj.close();
-    }
+
     var frame = this.getFrame(obj);
     if (!frame)
         return error("frame invalid");
 
     if (frame && frame.contentInstance && frame.contentInstance instanceof DKWidget) {
-        console.debug("frame.contentInstance is an instanceof DKWidget");
+        console.debug("dk.frame.close(): frame.contentInstance is an instanceof DKWidget");
         frame.contentInstance.close();
-    } else if (frame.content && frame.content.close) {
-        console.debug("frame.content has it's own close() function");
-        frame.content.close(frame.content);
+        //} else if (frame.content && frame.content.close) {
+        //    console.debug("frame.content has it's own close() function");
+        //    frame.content.close(frame.content);
     } else if (frame.content && frame.content.id && frame.content.id.includes(".html")) {
-        console.debug("obj seems to be a plugin sill closing by filename ");
+        console.debug("dk.frame.close(): obj seems to be a plugin sill closing by filename ");
         var htmlfile = frame.content.id;
         var jsfile = htmlfile.replace(".html", ".js");
         jsfile && dk.close(jsfile);
@@ -76,8 +74,8 @@ dk.frame.close = function dk_frame_close(obj) {
     }
     */
 
-    //Now finally, remove the frame and it's instance
-    console.debug("closing the frame");
+    //Remove the frame and it's instance
+    //console.debug("closing the frame");
     if (frame === document.body)
         return warn("frame === document.body");
     frame.parentNode && frame.parentNode.removeChild(frame);
@@ -101,11 +99,11 @@ dk.frame.create = function dk_frame_create(obj) {
         console.debug("dk.frame.create(): obj is an instance of DKWidget");
         element = obj.getElement();
     } else {
-        console.debug("dk.frame.create(): looks like obj is and html")
+        console.debug("dk.frame.create(): looks like obj is a html")
         element = obj;
         if (!element.id)
             return error("element.id invalid");
-            console.debug("element.id is "+element.id);
+        console.debug("element.id is " + element.id);
     }
 
     var title = dk.file.getFilename(element.id);
@@ -323,9 +321,9 @@ dk.frame.setTitle = function dk_frame_setTitle(element, title) {
         return error("title invalid\n");
 
     var frame = dk.frame.getFrame(element);
-    if(!frame)
+    if (!frame)
         return error("frame invalid");
-    
+
     /*
     //This works too
     const titlebartext = frame.querySelector("[dk_frame='titlebartext']");        

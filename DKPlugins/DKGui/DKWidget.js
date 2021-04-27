@@ -1,23 +1,6 @@
 "use strict";
 
-const DKWidget = function() {
-    /*
-    DKWidget.prototype.storeInstance = function() {
-        this.instance = this;
-        const index = DKWidget.instances.indexOf(this.instance);
-        if (index > -1) {
-            console.warn("this.instance already exists in DKWidget");
-            return DKWidget.instances[index];
-        }
-        console.debug("pushing new DKWidget instance");
-        DKWidget.instances.push(this);
-        return DKWidget.instances[DKWidget.instances.length - 1];
-    }
-    */
-
-    DKWidget.prototype.create = function() {//console.log("DKWidget.create() called");
-    }
-
+const DKWidget = function(singleton) {
     DKWidget.prototype.getInstance = function(instance) {
         //console.debug("DKWidget.getInstance() called");
         const index = DKWidget.instances.indexOf(instance);
@@ -60,20 +43,29 @@ const DKWidget = function() {
         const index = DKWidget.instances.indexOf(this.instance);
         if (index <= -1)
             return error("Unable to find instance in DKWidget");
+        delete DKWidget.instances[index].singleton;
         DKWidget.instances[index].removeInstance(DKWidget.instances[index]);
         return true;
     }
 
     //EXECUTION STARTS HERE
+    if (singleton) {
+        this.singleton = singleton;
+        for(let n=0; n<DKWidget.instances.length; n++){
+            if(DKWidget.instances[n].singleton === this.singleton){
+                return error("this.singleton already exists in DKWidget");
+            }
+        }
+    }
+
     this.instance = this;
     const index = DKWidget.instances.indexOf(this.instance);
     if (index > -1) {
         console.warn("this.instance already exists in DKWidget");
         return DKWidget.instances[index];
     }
-    //this.storeInstance();
-    console.debug("pushing new DKWidget instance");
-    DKWidget.instances.push(this);
+    console.debug("creating new instance of DKWidget");
+    DKWidget.instances.push(this.instance);
     return DKWidget.instances[DKWidget.instances.length - 1];
 }
 

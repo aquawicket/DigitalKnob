@@ -36,9 +36,11 @@ dk.devtools.create = function dk_devtools_create() {
 //}
 
 dk.devtools.show = function dk_devtools_show() {
-    dk.devtools = new DKWidget;
-    if (typeof dk.devtools.div === "object" && dk.frame.getFrame(dk.devtools.div))
+    if(dk.devtools.singleton)
         return;
+    dk.devtools = new DKWidget(true);
+    //if (typeof dk.devtools.div === "object" && dk.frame.getFrame(dk.devtools.div))
+    //    return;
     const div = document.createElement("div");
     dk.devtools.setElement(div);
     div.id = "DKDevTools";
