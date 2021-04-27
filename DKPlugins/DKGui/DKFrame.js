@@ -7,12 +7,37 @@ dk.frame.Init = function dk_frame_Init() {}
 dk.frame.End = function dk_frame_End() {}
 
 
+dk.frame.create = function dk_frame_create(obj) {
+    if (!obj)
+        return error("obj invalid");
+    let element;
+    if (obj instanceof DKWidget) {
+        element = obj.getElement();
+    } else {
+        console.warn("dk.frame.create(): obj is not a instance of DKWidget. It is recommended to dirive from a new DKWidget instance")
+        element = obj;
+        if (!element.id)
+            return error("element.id invalid");
+    }
 
-dk.frame.bringToFront = function dk_frame_bringToFront(frame) {
-    frame = dk.frame.getFrame(frame);
-    if (!frame)
-        return false;
-    (document.body.lastChild !== frame) && document.body.appendChild(frame);
+    var title = dk.file.getFilename(element.id);
+    title && (title = title.replace(".html", ""));
+
+    var width = element.style.width;
+    var height = element.style.height;
+    !width.includes("%") && (width = parseInt(width));
+    !height.includes("%") && (height = parseInt(height));
+    //width = width.replace("rem", "");
+    //height = height.replace("rem", "");
+
+    let frame = dk.frame.createFrame(title, width, height);
+    if (obj instanceof DKWidget)
+        frame.contentInstance = obj;
+    frame.content = element;
+    frame.content.setAttribute("dk_frame", "content");
+    frame.appendChild(frame.content);
+    frame.resize = dk.resize.create(frame);
+    return this;
 }
 
 dk.frame.close = function dk_frame_close(obj) {
@@ -60,44 +85,29 @@ dk.frame.close = function dk_frame_close(obj) {
     return true;
 }
 
-dk.frame.closeAll = function dk_frame_closeAll() {
-    for (var n = 0; n < dk.frame.frames.length; n++)
-        dk.frame.close(dk.frame.frames[n].content);
-    return true;
-}
-
-dk.frame.create = function dk_frame_create(obj) {
+dk.frame.getFrame = function dk_frame_getFrame(obj) {
     if (!obj)
         return error("obj invalid");
     let element;
     if (obj instanceof DKWidget) {
-        console.debug("dk.frame.create(): obj is an instance of DKWidget");
         element = obj.getElement();
-    } else {
-        console.warn("dk.frame.create(): obj is not a instance of DKWidget. It is recommended to dirive from a new DKWidget instance")
+    }else{
         element = obj;
-        if (!element.id)
-            return error("element.id invalid");
     }
+    while (element && element !== document) {
+        for (let n = 0; n < dk.frame.frames.length; n++) {
+            if (dk.frame.frames[n] === element)
+                return dk.frame.frames[n];
+        }
+        element = element.parentElement;
+    }
+    return error("dk.frame.frames[n] invalid");
+}
 
-    var title = dk.file.getFilename(element.id);
-    title && (title = title.replace(".html", ""));
-
-    var width = element.style.width;
-    var height = element.style.height;
-    !width.includes("%") && (width = parseInt(width));
-    !height.includes("%") && (height = parseInt(height));
-    //width = width.replace("rem", "");
-    //height = height.replace("rem", "");
-
-    let frame = dk.frame.createFrame(title, width, height);
-    if (obj instanceof DKWidget)
-        frame.contentInstance = obj;
-    frame.content = element;
-    frame.content.setAttribute("dk_frame", "content");
-    frame.appendChild(frame.content);
-    frame.resize = dk.resize.create(frame);
-    return this;
+dk.frame.closeAll = function dk_frame_closeAll() {
+    for (var n = 0; n < dk.frame.frames.length; n++)
+        dk.frame.close(dk.frame.frames[n].content);
+    return true;
 }
 
 dk.frame.createFrame = function dk_frame_createFrame(title, width, height) {
@@ -185,10 +195,17 @@ dk.frame.createFrame = function dk_frame_createFrame(title, width, height) {
     return frame;
 }
 
-dk.frame.maximize = function dk_frame_maximize(element) {
-    if (!element || !element.parentNode)
-        return error("element invalid");
-    const frame = dk.frame.getFrame(element);
+dk.frame.bringToFront = function dk_frame_bringToFront(frame) {
+    frame = dk.frame.getFrame(frame);
+    if (!frame)
+        return false;
+    (document.body.lastChild !== frame) && document.body.appendChild(frame);
+}
+
+dk.frame.maximize = function dk_frame_maximize(obj) {
+    if (!obj)
+        return error("obj invalid");
+    const frame = dk.frame.getFrame(obj);
     if (!frame)
         return error("frame invalid");
     if (frame.maximized) {
@@ -263,7 +280,7 @@ dk.frame.reload = function dk_frame_reload(obj) {
     
     console.debug("FIXME: more work to be down to complete dk.frame.reload()");
     return false;
-    
+
     const jsfile = frame.content.id.replace(".html", ".js");
     if (!jsfile)
         return error("jsfile invalid");
@@ -274,25 +291,6 @@ dk.frame.reload = function dk_frame_reload(obj) {
     dk.create(jsfile, function() {
         dk.frame.create(byId(htmlfile));
     });
-}
-
-dk.frame.getFrame = function dk_frame_getFrame(obj) {
-    if (!obj)
-        return error("obj invalid");
-    let element;
-    if (obj instanceof DKWidget) {
-        element = obj.getElement();
-    }else{
-        element = obj;
-    }
-    while (element && element !== document) {
-        for (let n = 0; n < dk.frame.frames.length; n++) {
-            if (dk.frame.frames[n] === element)
-                return dk.frame.frames[n];
-        }
-        element = element.parentElement;
-    }
-    return error("dk.frame.frames[n] invalid");
 }
 
 dk.frame.setTitle = function dk_frame_setTitle(obj, title) {
