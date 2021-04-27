@@ -1,16 +1,22 @@
 "use strict";
 
 //Multiple instances of DKWidget derived objects are allowed by default.
-//To make it singleton, you need to pass a variable that is unique to the object.
-//The vabliable can be the objects "this" pointer, a label, name,.. just something unique to that object instance. 
-//The DKWidget constructor will not allwow multiple instances of the singleton varable to exist. 
+//To make it singleton, simpily pass "singleton" to your new DKWidget("singleton") call;
+//You can also make semi-singleton objects that use an identifier to differentiate between mucitiple objects 
+//The identifier vabliable can be a label, name, and item number.. just something unique to that object instance. 
+//The DKWidget constructor will not allwow multiple instances with the same identifier value to be created
 //After creating the DKWidget object, check it's .ok derived variable before continuing processing.
+//To use other gui compenents with your widget, like dk.frame, the you widgets base element with .setElement(element);
 
-(function() {
+//A typical DKWidget might look something like this.
+const CreateMyWidget = function()
+{
+    const myWidget = new DKWidget("singleton");
+    if (!myWidget.ok)
+        return;
 
-    //A typical DKWidget might look something like this. 
     const myDiv = document.createElement("div");
-    myDiv.id = "MyWidget";
+    myDiv.id = "My_Widget";
     myDiv.style.width = "200px";
     myDiv.style.height = "200px";
     myDiv.style.backgroundColor = "rgb(50,50,50)";
@@ -23,13 +29,10 @@
     text.style.color = "rgb(0,0,0)";
     myDiv.appendChild(text);
 
-    const myObject = new DKWidget(this);
-    if (!myObject.ok)
-        return;
-    myObject.setElement(myDiv);
-    dk.frame.create(myObject);
+    myWidget.setElement(myDiv);
+    dk.frame.create(myWidget);
 }
-)
+
 
 const DKWidget = function(identifier) {
     DKWidget.prototype.getInstance = function(instance) {
