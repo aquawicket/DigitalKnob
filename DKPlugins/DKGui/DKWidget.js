@@ -49,11 +49,10 @@ const DKWidget = function(singleton) {
     }
 
     //EXECUTION STARTS HERE
-
     if (singleton) {
         this.singleton = singleton;
         for(let n=0; n<DKWidget.instances.length; n++){
-            if(DKWidget.instances[n].singleton === this.singleton){
+            if(DKWidget.instances[n].singleton == this.singleton){
                 console.error("this.singleton already exists in DKWidget");
                 DKWidget.instances[n].ok = false;
                 return false;

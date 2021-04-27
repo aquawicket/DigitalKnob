@@ -300,9 +300,17 @@ dk.frame.reload = function dk_frame_reload(element) {
     });
 }
 
-dk.frame.getFrame = function dk_frame_getFrame(element) {
-    if (!element)
-        return error("element invalid");
+dk.frame.getFrame = function dk_frame_getFrame(obj) {
+    if (!obj)
+        return error("obj invalid");
+    
+    let element;
+    if (obj instanceof DKWidget) {
+        element = obj.getElement();
+    }else{
+        element = obj;
+    }
+
     while (element && element !== document) {
         for (let n = 0; n < dk.frame.frames.length; n++) {
             if (dk.frame.frames[n] === element)
@@ -314,13 +322,13 @@ dk.frame.getFrame = function dk_frame_getFrame(element) {
     //error("dk.frame.frames[n] invalid");
 }
 
-dk.frame.setTitle = function dk_frame_setTitle(element, title) {
-    if (!element)
-        return error("element invalid\n");
-    if (typeof title !== "string")
-        return error("title invalid\n");
+dk.frame.setTitle = function dk_frame_setTitle(obj, title) {
+    if (!obj)
+        return error("obj invalid");
+    if (!title)
+        return error("title invalid");
 
-    var frame = dk.frame.getFrame(element);
+    var frame = dk.frame.getFrame(obj);
     if (!frame)
         return error("frame invalid");
 
