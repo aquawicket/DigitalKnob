@@ -30,18 +30,19 @@ dk.devtools.create = function dk_devtools_create() {
 }
 
 dk.devtools.show = function dk_devtools_show() {
+    dk.devtools = new DKWidget("singleton");
+    if(!dk.devtools.ok)
+        return;
+        
     const div = document.createElement("div");
     div.id = "DKDevTools";
     div.style.position = "absolute";
     div.style.width = "200rem";
     div.style.height = "300rem";
 
-    dk.devtools = new DKWidget("singleton");
-    if(!dk.devtools.ok)
-        return;
     dk.devtools.setElement(div);
     dk.frame.create(dk.devtools);
-    
+
     const frame = dk.frame.getFrame(dk.devtools);
     frame.titlebaricon.src = "DKDevTools/developer.png";
     

@@ -31,7 +31,7 @@
 }
 )
 
-const DKWidget = function() {
+const DKWidget = function(identifier) {
     DKWidget.prototype.getInstance = function(instance) {
         //console.debug("DKWidget.getInstance() called");
         const index = DKWidget.instances.indexOf(instance);
@@ -88,26 +88,29 @@ const DKWidget = function() {
             return error(errmsg);
         }
 
-        const singleton = arguments[0];
-        console.debug("DKWidget("+singleton+")");
-        if (singleton) {
-            this.singleton = singleton;
+        const identifier = arguments[0];
+        console.debug("DKWidget("+identifier+")");
+        if (identifier) {
+            this.identifier = identifier;
             for (let n = 0; n < DKWidget.instances.length; n++) {
-                if (DKWidget.instances[n].singleton == this.singleton) {
-                    console.error("this.singleton already exists in DKWidget");
+                if (DKWidget.instances[n].identifier == this.identifier) {
+                    console.error("A DKWidget instance with the same identifier already exists");
                     DKWidget.instances[n].ok = false;
-                    return false;
+                    return DKWidget.instances[n];
                 }
             }
         }
     }
-
     this.instance = this;
+    
+    //Not sure how this can happen, just to be safe...
     const index = DKWidget.instances.indexOf(this.instance);
     if (index > -1) {
         console.warn("this.instance already exists in DKWidget");
+        DKWidget.instances[index].ok = false;
         return DKWidget.instances[index];
     }
+
     console.debug("creating new instance of DKWidget");
     DKWidget.instances.push(this.instance);
     DKWidget.instances[DKWidget.instances.length - 1].ok = true;

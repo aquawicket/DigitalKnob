@@ -44,7 +44,7 @@ dk.frame.create = function dk_frame_create(obj) {
     frame.content.style.right = "0rem";
     frame.content.style.removeProperty("height");
     frame.content.style.removeProperty("width");
-    
+
     //frame.content.style.top = "21rem";
     //frame.content.style.bottom = "0rem";
     //frame.content.style.left = "0rem";
@@ -347,8 +347,11 @@ dk.frame.restoreSize = function dk_frame_restoreSize(frame) {
     return true;
 }
 
-/*
 dk.frame.createNewWindow = function dk_frame_createNewWindow(title, width, height) {
+    const newWin = new DKWidget(title);
+    if(!newWin.ok)
+        return false;
+        
     const div = document.createElement("div");
     div.id = title;
     //div.style.position = "absolute";
@@ -368,10 +371,11 @@ dk.frame.createNewWindow = function dk_frame_createNewWindow(title, width, heigh
     //div.style.borderRightWidth = "0rem";
     //div.style.backgroundColor = "rgb(36,36,36)";
     //document.body.appendChild(div);
-    dk.frame.create(div);
+    
+    newWin.setElement(div);    
+    dk.frame.create(newWin);
     return div;
 }
-*/
 
 /*
 dk.frame.iFrame = function dk_frame_Iframe(title, url, width, height) {
