@@ -4,13 +4,13 @@ dk.php = new Object;
 
 //dk.php.call("GET", "/DK/DK.php", "Function", "args", "args", callback);
 dk.php.call = function dk_php_call(httpMethod, phpPath, funcName) {
-    const allowed = ["DK.js","DKFile.js","DKDebug.js"];
+    const allowed = ["DK.js", "DKFile.js", "DKDebug.js"];
     const callerFilename = dk.trace.getFilename();
-    if(!allowed.includes(callerFilename)){
-        console.log("PHP Permission Denied for "+callerFilename);
+    if (!allowed.includes(callerFilename)) {
+        console.log("PHP Permission Denied for " + callerFilename);
         return false;
     }
-    
+
     if (!phpPath)
         return error("phpPath invalid");
     !httpMethod && (httpMethod = "GET");
@@ -37,7 +37,16 @@ dk.php.call = function dk_php_call(httpMethod, phpPath, funcName) {
     const data = "x=" + encodeURIComponent(str);
     const url = path + phpPath + "?" + data;
     const args = arguments;
+
+    const php_error = function(msg) {
+        console.error(msg);
+        if (args && typeof (args[args.length - 1]) === "function")
+            args[args.length - 1](msg);
+        return false;
+    }
+
     dk.sendRequest(url, function dk_sendRequest_callback(success, url, rval) {
+
         //rval && console.debug(rval);
         if (!success)
             return error("dk.php.call request failed, is php server running?");
@@ -48,16 +57,17 @@ dk.php.call = function dk_php_call(httpMethod, phpPath, funcName) {
         let rJson;
         try {
             rJson = JSON.parse(lastLine);
-        } catch(e) {
+        } catch (e) {
             !rval && (rval = e.message);
             return error(rval);
         }
         if (!rJson.status)
             return warn("We appear to have gotten JSON compatable data with no status key" + rval);
         if (rJson.status !== "success")
-            return error(rJson.message);
+            return php_error("php: " + rJson.message);
         //if (rJson.status === "success" && beforeLastLine !== "" && beforeLastLine !== "\n")
         //    console.log(beforeLastLine);
+
         if (args && typeof (args[args.length - 1]) === "function")
             args[args.length - 1](rJson.message);
     }, httpMethod);

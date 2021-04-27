@@ -8,6 +8,8 @@ dk.debug = new Object;
 dk.debug.debugFunc = function dk_debug_debugFunc() {
     //console.log("dk.debug.debugFunc");
 
+    const rtn = dk.file.makeDir("Test", "","", function(result){ console.debug(result); } );
+    /*
     //Object by dot path experament
     const OBJ = function OBJ(dotPath) {
         const objstrings = dotPath.split(".");
@@ -37,7 +39,7 @@ dk.debug.debugFunc = function dk_debug_debugFunc() {
     }
     //OBJ("dk.clock.html.style").color = "rgb(0,0,0)";
     OBJ("dk.clock.html2.style.color") && (dk.clock.html.style.color = "rgb(200,0,200)");
-
+    */
 
     //const clock_face = window['dk']['clock']['html']['innerHTML'];
     //console.log(clock_face);

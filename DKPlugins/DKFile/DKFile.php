@@ -21,8 +21,8 @@ function isDir($dir){
 
 // https://www.php.net/manual/en/function.mkdir.php
 function makeDir($pathname, $mode = 0777, $recursive = false){
-    if(!mkdir($structure, $mode, $recursive))
-        return error("makeDir() failed");
+    if(!mkdir($pathname, $mode, $recursive))
+        return false;
     return true;
 }
 

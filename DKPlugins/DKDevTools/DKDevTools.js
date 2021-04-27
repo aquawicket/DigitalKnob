@@ -31,9 +31,9 @@ dk.devtools.create = function dk_devtools_create() {
 
 dk.devtools.show = function dk_devtools_show() {
     dk.devtools = new DKWidget("dk.devtools");
-    if(!dk.devtools.ok)
+    if (!dk.devtools.ok)
         return;
-        
+
     const div = document.createElement("div");
     div.id = "DKDevTools";
     div.style.position = "absolute";
@@ -45,11 +45,15 @@ dk.devtools.show = function dk_devtools_show() {
 
     const frame = dk.frame.getFrame(dk.devtools);
     frame.titlebaricon.src = "DKDevTools/developer.png";
-    
+
     dk.devtools.addTools = function dk_devtools_addTools() {
         const div = dk.devtools.getElement();
         dk.gui.createButton(div, "DEBUG", "5rem", "", "5rem", "", "63rem", "20rem", dk.debug.debugFunc);
-        dk.gui.createButton(div, "Push Assets", "25rem", "", "5rem", "", "90rem", "20rem", dk.file.pushDKAssets);
+        dk.gui.createButton(div, "Push Assets", "25rem", "", "5rem", "", "90rem", "20rem", function() {
+            dk.file.pushDKAssets(function(result){
+                console.log("done copying assets. result = "+result);
+            });
+        });
     }
 
     dk.devtools.addTools();
