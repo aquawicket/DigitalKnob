@@ -1,5 +1,11 @@
 "use strict";
 
+//Multiple instances of DKWidget derived objects are allowed by default.
+//To make it singleton, you need to pass a variable that is unique to the object.
+//The vabliable can be the objects "this" pointer, a label, name,.. just something unique to that object instance. 
+//The DKWidget constructor will not allwow multiple instances of the singleton varable to exist. 
+//After creating the DKWidget object, check it's .ok derived variable before continuing processing.
+
 const DKWidget = function(singleton) {
     DKWidget.prototype.getInstance = function(instance) {
         //console.debug("DKWidget.getInstance() called");
