@@ -3,8 +3,8 @@
 dk.frame = new Object;
 dk.frame.frames = new Array;
 
-dk.frame.Init = function dk_frame_Init() {}
-dk.frame.End = function dk_frame_End() {}
+dk.frame.init = function dk_frame_init() {}
+dk.frame.end = function dk_frame_end() {}
 
 
 dk.frame.create = function dk_frame_create(obj) {

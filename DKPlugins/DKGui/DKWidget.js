@@ -64,10 +64,12 @@ const DKWidget = function(identifier) {
 
     DKWidget.prototype.setElement = function(element) {
         //console.debug("DKWidget.setElement() called");
+        if(typeof element != "object")
+            return error("setElement required element of type object");
         this.element = element;
     }
 
-    DKWidget.prototype.getElement = function(element) {
+    DKWidget.prototype.getElement = function() {
         //console.debug("DKWidget.getElement() called");
         return this.element;
     }
