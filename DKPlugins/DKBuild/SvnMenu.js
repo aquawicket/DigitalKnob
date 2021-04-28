@@ -1,5 +1,5 @@
 ///////////////////////
-function SvnMenu_init()()
+function SvnMenu_init()()()
 {
 	dk.create("DKBuild/SvnMenu.html");
 	byId("SvnMenu.html").style.top = DKWindow_GetMouseY()+"px";

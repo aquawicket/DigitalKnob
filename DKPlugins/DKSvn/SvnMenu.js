@@ -1,7 +1,7 @@
 var SVN = "";
 
 ///////////////////////
-function SvnMenu_init()()
+function SvnMenu_init()()()
 {
 	dk.create("DKThreadPool");
 

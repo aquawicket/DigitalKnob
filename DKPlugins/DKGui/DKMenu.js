@@ -2,11 +2,11 @@
 
 dk.menu = new Object;
 
-dk.menu.init = function dk_menu_init() {}
+dk.menu.init = function dk_menu_init()() {}
 
 dk.menu.end = function dk_menu_end() {}
 
-dk.menu.init = function dk_menu_init(){
+dk.menu.init = function dk_menu_init()(){
     dk.create("DKGui/DKMenu.css");
 }
 

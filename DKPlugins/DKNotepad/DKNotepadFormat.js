@@ -1,5 +1,5 @@
 /////////////////////////////
-function DKNotepadFormat_init()()
+function DKNotepadFormat_init()()()
 {
 	dk.create("DKNotepad/DKNotepadFormat.html,DKNotepad/DKNotepad.html");
 	document.addEventListener("mousedown", DKNotepadFormat_onevent);

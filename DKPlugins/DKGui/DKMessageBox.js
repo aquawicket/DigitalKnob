@@ -3,7 +3,7 @@
 dk.messagebox = new Object;
 dk.messagebox.boxes = new Array;
 
-dk.messagebox.init = function dk_messagebox_init() {}
+dk.messagebox.init = function dk_messagebox_init()() {}
 
 dk.messagebox.end = function dk_messagebox_end() {//dk.messagebox.closeAll();
 }

@@ -2,7 +2,7 @@
 
 dk.notepadshortcuts = new Object;
 
-dk.notepadshortcuts.init = function dk_notepadshortcuts_init()
+dk.notepadshortcuts.init = function dk_notepadshortcuts_init()()
 {
 	document.addEventListener("keydown", dk.notepadshortcuts.onevent);
 }

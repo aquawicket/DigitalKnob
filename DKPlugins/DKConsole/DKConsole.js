@@ -1,7 +1,7 @@
 var DKConsole_color = "black";
 
 /////////////////////////
-function DKConsole_init()()
+function DKConsole_init()()()
 {
 	dk.create("DKConsole/DKConsole.css");
 	dk.create("DKConsole/DKConsole.html");

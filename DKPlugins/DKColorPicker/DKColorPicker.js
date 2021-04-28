@@ -4,9 +4,9 @@ var event_type;
 var event_id;
 
 /////////////////////////////
-function DKColorPicker_init()()
+function DKColorPicker_init()()()
 {
-	console.log("DKColorPicker_init()()");
+	console.log("DKColorPicker_init()()()");
 	dk.create("DKColorPicker/DKColorPicker.css");
 	dk.create("DKColorPicker/DKColorPicker.html");
 	byId("DKColorPicker/DKColorPicker.html").addEventListener("GetColor", DKColorPicker_onevent);

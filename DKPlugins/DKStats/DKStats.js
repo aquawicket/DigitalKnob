@@ -1,5 +1,5 @@
 ///////////////////////
-function DKStats_init()()
+function DKStats_init()()()
 {
 	dk.create("DKStats/DKStats.html");
 	window.addEventListener("second", DKStats_onevent);

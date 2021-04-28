@@ -1,5 +1,5 @@
 ////////////////////////
-function DKWindow_init()()
+function DKWindow_init()()()
 {
 
 }

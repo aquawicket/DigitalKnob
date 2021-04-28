@@ -3,7 +3,7 @@ var ANDROIDSTUDIO = "C:/Program Files/Android/Android Studio/bin/studio64.exe";
 TYPE = byId("BuildType").innerHTML;
 
 /////////////////////////////
-function AndroidImport_init()()
+function AndroidImport_init()()()
 {
 	dk.create("DKHandles");
 	ANDROIDSTUDIO = DKFile_GetShortName(ANDROIDSTUDIO);

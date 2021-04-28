@@ -453,7 +453,7 @@ function LoadJs(url, callback)
 	//}
 	
 	var init = file.replace(".js", "");
-	init += "_init()";
+	init += "_init()()";
 	
 	head.appendChild(script);
 	
@@ -462,7 +462,7 @@ function LoadJs(url, callback)
 	script.onload = script.onreadystatechange = function(){ //FIXME - DigitalKnob can't trigger onload yet.
 		if(!done && (!this.readyState || this.readyState === "loaded" || this.readyState === "complete")){
 			//DKINFO("Loaded: "+url+"\n");
-			var func = window[init]; //Plugin_init()()    
+			var func = window[init]; //Plugin_init()()()    
 			if(typeof func === 'function'){ 
 				//DKINFO("Calling: "+init+"\n");
 				func(); //Init
@@ -483,7 +483,7 @@ function LoadJs(url, callback)
 	//FIXME - DigitalKnob can't trigger onload yet, so we do this
 	if(DK_GetJSEngine() === "Duktape"){
 		//DKINFO("Loaded: "+url+"\n");
-		var func = init; //Plugin_init()() 
+		var func = init; //Plugin_init()()() 
 		if(eval("typeof "+func) === "function"){
 			//DKINFO("Calling: "+init+"\n");
 			eval(func)(); //Init

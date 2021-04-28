@@ -1,7 +1,7 @@
 var pos;
 var animation;
 ///////////////////////
-function Taskbar_init()()
+function Taskbar_init()()()
 {
 	dk.create("DKOS/Taskbar.html,DKOS/DKOS.html", function(){
 	//dk.create("DKOS/Taskbar.html", function(){

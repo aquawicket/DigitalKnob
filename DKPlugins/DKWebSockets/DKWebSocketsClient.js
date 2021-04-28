@@ -1,7 +1,7 @@
 var websocket;
 
 //////////////////////////////////
-function DKWebSocketsClient_init()()
+function DKWebSocketsClient_init()()()
 {
 	dk.create("DKWebSockets/DKWebSocketsClient.html", function(){
 		window.addEventListener("DKWebSockets_OnMessageFromServer", DKWebSocketsClient_onevent);

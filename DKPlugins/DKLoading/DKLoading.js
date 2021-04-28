@@ -1,5 +1,5 @@
 /////////////////////////
-function DKLoading_init()()
+function DKLoading_init()()()
 {
 	dk.create("DKLoading/DKLoading.html");
 }

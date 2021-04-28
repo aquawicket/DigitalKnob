@@ -1,5 +1,5 @@
 ////////////////////////////
-function DKMidiDialog_init()()
+function DKMidiDialog_init()()()
 {
 	dk.create("DKMidi/DKMidiDialog.css");
 	dk.create("DKMidi/DKMidiDialog.html");

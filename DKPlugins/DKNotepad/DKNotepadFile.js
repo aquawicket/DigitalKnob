@@ -2,7 +2,7 @@
 
 dk.notepadfile = new DKWidget("dk.notepadfile");
 
-dk.notepadfile.init = function dk_notepad_file_init() {
+dk.notepadfile.init = function dk_notepad_file_init()() {
 
     const menu = dk.menu.createInstance(dk.notepad.html.container);
     dk.menu.addItem(menu, "New", function() {

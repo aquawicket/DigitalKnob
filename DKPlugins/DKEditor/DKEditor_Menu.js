@@ -1,5 +1,5 @@
 /////////////////////////////
-function DKEditor_Menu_init()()
+function DKEditor_Menu_init()()()
 {
 	dk.create("DKEditor/DKEditor_Menu.html");
 	document.addEventListener("mousedown", DKEditor_Menu_onevent);

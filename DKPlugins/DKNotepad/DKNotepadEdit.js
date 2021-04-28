@@ -1,5 +1,5 @@
 /////////////////////////////
-function DKNotepadEdit_init()()
+function DKNotepadEdit_init()()()
 {
 	dk.create("DKNotepad/DKNotepadEdit.html,DKNotepad/DKNotepad.html");
 	document.addEventListener("mousedown", DKNotepadEdit_onevent);

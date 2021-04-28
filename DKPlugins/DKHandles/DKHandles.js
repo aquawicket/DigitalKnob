@@ -1,5 +1,5 @@
 /////////////////////////
-function DKHandles_init()()
+function DKHandles_init()()()
 {
 	dk.create("DKHandles");
 	dk.create("DKHandles/DKHandles.html");

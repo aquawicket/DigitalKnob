@@ -21,7 +21,7 @@ var APP_LIST = [];
 
 
 ///////////////////////
-function DKBuild_init()()
+function DKBuild_init()()()
 {
 	CPP_DK_Create("DKCurl");
 

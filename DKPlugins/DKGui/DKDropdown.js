@@ -1,5 +1,5 @@
 //////////////////////////
-function DKDropdown_init()()
+function DKDropdown_init()()()
 {
 
 }

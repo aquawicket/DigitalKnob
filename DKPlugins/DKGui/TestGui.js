@@ -1,5 +1,5 @@
 ///////////////////////
-function TestGui_init()()
+function TestGui_init()()()
 {
 	dk.create("DKGui/TestGui.html");
 }

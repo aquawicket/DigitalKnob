@@ -5,7 +5,7 @@ dk.solutionmenu.id = "";
 dk.solutionmenu.file = "";
 
 
-dk.solutionmenu.init = function dk_solutionmenu_init()
+dk.solutionmenu.init = function dk_solutionmenu_init()()
 {
 	dk.create("DKFile/DKSolutionMenu.html", function(){
     	document.addEventListener("mousedown", dk.solutionmenu.onevent);

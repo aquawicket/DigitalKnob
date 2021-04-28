@@ -3,7 +3,7 @@ var clock_date;
 var second_flag = false;
 
 /////////////////////
-function Clock_init()()
+function Clock_init()()()
 {
 	dk.create("DKOS/Clock.html,DKOS/Taskbar.html", function(){
 		window.addEventListener("second", Clock_onevent);

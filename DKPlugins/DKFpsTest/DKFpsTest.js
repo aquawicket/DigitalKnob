@@ -1,6 +1,6 @@
 
 /////////////////////////
-function DKFpsTest_init()()
+function DKFpsTest_init()()()
 {
 	dk.create("DKFpsTest/DKFpsTest.html", function(){});
 

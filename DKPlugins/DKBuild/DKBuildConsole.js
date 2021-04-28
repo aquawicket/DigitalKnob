@@ -1,7 +1,7 @@
 var working = true;
 
 //////////////////////////////
-function DKBuildConsole_init()()
+function DKBuildConsole_init()()()
 {
 	CPP_DK_Create("DKBuild/DKBuild.js");
 	DKBuild_ValidateCmake();

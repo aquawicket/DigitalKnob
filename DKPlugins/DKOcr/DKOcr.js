@@ -1,5 +1,5 @@
 /////////////////////
-function DKOcr_init()()
+function DKOcr_init()()()
 {
 	dk.create("DKOcr");
 	dk.create("DKOcr/DKOcr.html");

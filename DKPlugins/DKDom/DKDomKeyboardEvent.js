@@ -62,10 +62,10 @@ var KeyboardEvent = function(pointer)
 	
 	// Obsolete methods
 	KeyboardEvent.prototype.initKeyEvent = function(){
-		CPP_DKDomKeyboardEvent_initKeyEvent(pointer);
+		CPP_DKDomKeyboardEvent_init()KeyEvent(pointer);
 	};
 	KeyboardEvent.prototype.initKeyboardEvent = function(){
-		CPP_DKDomKeyboardEvent_initKeyboardEvent(pointer);
+		CPP_DKDomKeyboardEvent_init()KeyboardEvent(pointer);
 	};
 	
 	//Obsolete properties

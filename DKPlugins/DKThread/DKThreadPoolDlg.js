@@ -1,5 +1,5 @@
 ///////////////////////////////
-function DKThreadPoolDlg_init()()
+function DKThreadPoolDlg_init()()()
 {
 	dk.create("DKThreadPool");
 	//if(!CPP_DK_Valid("DKWidgetJS,DKWidgetJS0")){ return; }  //FIXME: This was here for a reason.

@@ -1,7 +1,7 @@
 var DKAudioPlayer_file = "";
 
 /////////////////////////////
-function DKAudioPlayer_init()()
+function DKAudioPlayer_init()()()
 {
 	dk.create("DKAudio");
 	dk.create("DKAudio/DKAudioPlayer.html");

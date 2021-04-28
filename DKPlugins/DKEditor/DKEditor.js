@@ -1,5 +1,5 @@
 ////////////////////////
-function DKEditor_init()()
+function DKEditor_init()()()
 {
 	dk.create("DKEditor/DKEditor.css");
 	dk.create("DKEditor/DKEditor.html");

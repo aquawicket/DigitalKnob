@@ -1,5 +1,5 @@
 ///////////////////////////
-function DKAdminMenu_init()()
+function DKAdminMenu_init()()()
 {
 	dk.create("DKAdmin/DKAdminMenu.html", function(){
 		document.addEventListener("mousedown", DKAdminMenu_onevent);

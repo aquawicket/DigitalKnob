@@ -4,7 +4,7 @@ var IMAGEMAGICK_DOWNLOAD = "http://ftp.icm.edu.pl/packages/ImageMagick/binaries/
 var IMAGEMAGICK_CONVERT = "C:/digitalknob/DK/3rdParty/"+IMAGEMAGICK_VERSION+"/convert.exe";
 
 /////////////////////////
-function IconMaker_init()()
+function IconMaker_init()()()
 {
 	IMAGEMAGICK_CONVERT = CPP_DKFile_GetShortName(IMAGEMAGICK_CONVERT);
 	console.log("IMAGEMAGICK_CONVERT = "+IMAGEMAGICK_CONVERT);

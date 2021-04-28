@@ -2,7 +2,7 @@
 
 dk.devtools = new Object;
 
-dk.devtools.init = function dk_devtools_init() {
+dk.devtools.init = function dk_devtools_init()() {
     dk.preloadImage("DKDevTools/developer.png");
     dk.create("DKDebug/DKDebug.js");
 }
