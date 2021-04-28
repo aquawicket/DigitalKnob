@@ -531,7 +531,8 @@ bool DKLinux::CpuUsedByApp(int& cpu)
 bool DKLinux::TurnOffMonitor()
 {
 	DKDEBUGFUNC();
-	return DKUtil::System("xset dpms force off");
+	DKString rtn;
+	return DKUtil::System("xset dpms force off", rtn);
 }
 
 /////////////////////////////
