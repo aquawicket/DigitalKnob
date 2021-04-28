@@ -3,7 +3,7 @@
 
 dk.audio = new Object;
 
-dk.audio.init = function dk_audio_init()() {
+dk.audio.init = function dk_audio_init() {
     dk.create("DKAudio");
     dk.audio.lastValume = 0.0;
 }

@@ -13,7 +13,7 @@ function DesktopMenu_init()
 }
 
 //////////////////////////
-function DesktopMenu_end()()
+function DesktopMenu_end()
 {
 	document.removeEventListener("mousedown", DesktopMenu_onevent);
 	byId("OpenBackgtoundMenu").removeEventListener("click", DesktopMenu_onevent);

@@ -13,7 +13,7 @@ function DKWebSocketsServer_init()
 }
 
 /////////////////////////////////
-function DKWebSocketsServer_end()()
+function DKWebSocketsServer_end()
 {
 	window.removeEventListener("DKWebSockets_OnMessageFromClient", DKWebSocketsServer_onevent);
 	byId("DKWebSocketsServer_CloseServer").removeEventListener("click", DKWebSocketsServer_onevent);

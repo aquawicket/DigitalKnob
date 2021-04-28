@@ -29,7 +29,7 @@ function DKInput_init()
 }
 
 //////////////////////
-function DKInput_end()()
+function DKInput_end()
 {
 	window.removeEventListener("keypress", DKInput_onevent);
 	window.removeEventListener("keydown", DKInput_onevent);

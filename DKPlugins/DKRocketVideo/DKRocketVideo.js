@@ -11,7 +11,7 @@ function DKRocketVideo_init()
 }
 
 ////////////////////////////
-function DKRocketVideo_end()()
+function DKRocketVideo_end()
 {
 	byId("DKRocketVideo_playpause").removeEventListener("click", DKRocketVideo_onevent);
 	byId("DKRocketVideo_position").removeEventListener("click", DKRocketVideo_onevent);

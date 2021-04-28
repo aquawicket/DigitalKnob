@@ -26,7 +26,7 @@ function DKSaveFile_init() {
 }
 
 /////////////////////////
-function DKSaveFile_end()() {
+function DKSaveFile_end() {
     byId("DKFile/DKSaveFile.html").removeEventListener("SetFile", DKSaveFile_onevent);
     byId("DKSaveFileCancel").removeEventListener("click", DKSaveFile_onevent);
     byId("DKSaveFileOK").removeEventListener("click", DKSaveFile_onevent);

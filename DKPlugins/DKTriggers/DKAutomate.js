@@ -22,7 +22,7 @@ function DKAutomate_init()
 }
 
 /////////////////////////
-function DKAutomate_end()()
+function DKAutomate_end()
 {
 	byId("DKTriggers/DKAutomate.html", "keydown", DKAutomate_onevent);
 	//window.removeEventListener("midi", DKAutomate_onevent);

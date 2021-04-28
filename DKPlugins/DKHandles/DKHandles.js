@@ -19,7 +19,7 @@ function DKHandles_init()
 }
 
 ////////////////////////
-function DKHandles_end()()
+function DKHandles_end()
 {
 	document.removeEventListener("click", DKHandles_onevent);
 	document.removeEventListener("DKHandles_WindowChanged", DKHandles_onevent);

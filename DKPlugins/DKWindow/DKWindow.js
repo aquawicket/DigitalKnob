@@ -5,7 +5,7 @@ function DKWindow_init()
 }
 
 ///////////////////////
-function DKWindow_end()()
+function DKWindow_end()
 {
 
 }

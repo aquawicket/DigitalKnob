@@ -5,7 +5,7 @@ function DKDropdown_init()
 }
 
 /////////////////////////
-function DKDropdown_end()()
+function DKDropdown_end()
 {
 	
 }

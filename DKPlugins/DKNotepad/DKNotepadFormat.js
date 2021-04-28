@@ -8,7 +8,7 @@ function DKNotepadFormat_init()
 }
 
 //////////////////////////////
-function DKNotepadFormat_end()()
+function DKNotepadFormat_end()
 {
 	document.removeEventListener("mousedown", DKNotepadFormat_onevent);
 	byId("DKNotepadFormat_WordWrap").removeEventListener("click", DKNotepadFormat_onevent);

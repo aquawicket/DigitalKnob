@@ -28,7 +28,7 @@ function TaskbarMenu_init()
 }
 
 //////////////////////////
-function TaskbarMenu_end()()
+function TaskbarMenu_end()
 {
 	document.removeEventListener("mousedown", TaskbarMenu_onevent);
 	byId("OpenSource").removeEventListener("click", TaskbarMenu_onevent);

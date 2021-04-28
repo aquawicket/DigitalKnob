@@ -47,7 +47,7 @@ function DKBuildGUI_init()
 }
 
 /////////////////////////
-function DKBuildGUI_end()()
+function DKBuildGUI_end()
 {
 	byId("AppList").removeEventListener("change", DKBuildGUI_onevent);
 	byId("OSList").removeEventListener("change", DKBuildGUI_onevent);

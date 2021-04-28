@@ -63,7 +63,7 @@ function DKFpsTest_init()
 }
 
 ////////////////////////
-function DKFpsTest_end()()
+function DKFpsTest_end()
 {
 	
 }

@@ -2,7 +2,7 @@
 
 dk.notepadhelp = new Object;
 
-dk.notepadhelp.init = function dk_notepadhelp_init()() {
+dk.notepadhelp.init = function dk_notepadhelp_init() {
     dk.create("DKNotepad/DKNotepadHelp.html,DKNotepad/DKNotepad.html", function() {
         document.addEventListener("mousedown", dk.notepadhelp.onevent);
         byId("DKNotepadHelp_ViewHelp").addEventListener("click", dk.notepadhelp.onevent);

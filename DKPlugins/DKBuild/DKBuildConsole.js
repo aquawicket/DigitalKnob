@@ -16,7 +16,7 @@ function DKBuildConsole_init()
 }
 
 /////////////////////////////
-function DKBuildConsole_end()()
+function DKBuildConsole_end()
 {
 	CPP_dk.close("DKBuild/DKBuild.js");
 }

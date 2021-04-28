@@ -16,7 +16,7 @@ function DKColorPicker_init()
 }
 
 ////////////////////////////
-function DKColorPicker_end()()
+function DKColorPicker_end()
 {
 	byId("DKColorPicker/DKColorPicker.html").removeEventListener("GetColor", DKColorPicker_onevent);
 	byId("DKColorPickerBar").removeEventListener("mousedown", DKColorPicker_onevent);

@@ -8,7 +8,7 @@ function BackgroundMenu_init()
 }
 
 /////////////////////////////
-function BackgroundMenu_end()()
+function BackgroundMenu_end()
 {
 	dk.close("DKOS/BackgroundMenu.html");
 }

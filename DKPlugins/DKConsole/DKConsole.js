@@ -12,7 +12,7 @@ function DKConsole_init()
 }
 
 ////////////////////////
-function DKConsole_end()()
+function DKConsole_end()
 {
 	window.removeEventListener("color", DKConsole_onevent);
 	window.removeEventListener("notify", DKConsole_onevent);

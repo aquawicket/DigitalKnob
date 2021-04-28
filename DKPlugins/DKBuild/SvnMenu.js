@@ -10,7 +10,7 @@ function SvnMenu_init()
 }
 
 //////////////////////
-function SvnMenu_end()()
+function SvnMenu_end()
 {
 	document.addEventListener("mousedown", SvnMenu_onevent);
 	byId("Svn Update").addEventListener("click", SvnMenu_onevent);

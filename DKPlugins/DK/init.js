@@ -11,7 +11,7 @@ else{ USE_WEBVIEW = 0; }
 function init_init(){}
 
 /////////////////////
-function init_end()(){}
+function init_end(){}
 
 ////////////////////////////
 function init_OnEvent(event)  //Duktape

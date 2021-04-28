@@ -8,7 +8,7 @@ function DKGit_init()
 }
 
 ////////////////////
-function DKGit_end()()
+function DKGit_end()
 {
 
 }

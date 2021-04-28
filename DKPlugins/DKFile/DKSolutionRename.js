@@ -11,7 +11,7 @@ function DKSolutionRename_init()
 }
 
 ///////////////////////////////
-function DKSolutionRename_end()()
+function DKSolutionRename_end()
 {
 	document.removeEventListener("mousedown", DKSolutionRename_onevent);
 	byId("DKSolutionRename_box").removeEventListener("keydown", DKSolutionRename_onevent);

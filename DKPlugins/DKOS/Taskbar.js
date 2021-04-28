@@ -19,7 +19,7 @@ function Taskbar_init()
 }
 
 //////////////////////
-function Taskbar_end()()
+function Taskbar_end()
 {
 	byId("start").removeEventListener("click", Taskbar_onevent);
 	byId("test_animate").removeEventListener("click", Taskbar_onevent);

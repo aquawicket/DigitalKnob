@@ -25,7 +25,7 @@ function DKSvn_init()
 }
 
 ////////////////////
-function DKSvn_end()()
+function DKSvn_end()
 {
 
 }

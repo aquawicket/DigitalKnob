@@ -29,7 +29,7 @@ function SvnMenu_init()
 }
 
 //////////////////////
-function SvnMenu_end()()
+function SvnMenu_end()
 {
 	document.removeEventListener("mousedown", SvnMenu_onevent);
 	byId("Git Update").removeEventListener("click", SvnMenu_onevent);

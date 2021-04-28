@@ -8,7 +8,7 @@ function DKStats_init()
 }
 
 //////////////////////
-function DKStats_end()()
+function DKStats_end()
 {
 	window.removeEventListener("second", DKStats_onevent);
 	//byId("DKStats/DKStats.html").removeEventListener("click", DKStats_onevent);

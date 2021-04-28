@@ -6,7 +6,7 @@ function Input_init()
 }
 
 ////////////////////
-function Input_end()()
+function Input_end()
 {
 	byId("Input_Text").removeEventListener("keydown", Input_onevent);
 	dk.close("DKDebug/Input.html");

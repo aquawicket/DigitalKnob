@@ -15,7 +15,7 @@ function DKAudioPlayer_init()
 }
 
 ////////////////////////////
-function DKAudioPlayer_end()()
+function DKAudioPlayer_end()
 {
 	window.removeEventListener("timeupdate", DKAudioPlayer_onevent);
 	window.removeEventListener("ended", DKAudioPlayer_onevent);

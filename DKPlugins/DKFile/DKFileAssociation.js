@@ -2,7 +2,7 @@
 
 dk.fileassociation = new DKWidget("dk.fileassociation");
 
-dk.fileassociation.init = function dk_fileassociation_init()() {}
+dk.fileassociation.init = function dk_fileassociation_init() {}
 
 dk.fileassociation.end = function dk_fileassociation_end() {}
 

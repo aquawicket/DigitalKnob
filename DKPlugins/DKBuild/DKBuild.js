@@ -57,7 +57,7 @@ function DKBuild_init()
 }
 
 //////////////////////
-function DKBuild_end()()
+function DKBuild_end()
 {
 	
 }

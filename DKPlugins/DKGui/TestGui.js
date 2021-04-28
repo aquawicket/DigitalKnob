@@ -5,7 +5,7 @@ function TestGui_init()
 }
 
 //////////////////////
-function TestGui_end()()
+function TestGui_end()
 {
 	
 }

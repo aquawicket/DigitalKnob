@@ -359,7 +359,7 @@ dk.debug.debugFunc = function dk_debug_debugFunc() {
 }
 /////////////////////////////////////////////
 
-dk.debug.init = function dk_debug_init()() {
+dk.debug.init = function dk_debug_init() {
     dk.debug.keyHistory = new Array;
     document.addEventListener("keydown", dk.debug.onevent);
 }

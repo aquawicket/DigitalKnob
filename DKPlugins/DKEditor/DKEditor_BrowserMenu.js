@@ -8,7 +8,7 @@ function DKEditor_BrowserMenu_init()
 }
 
 ///////////////////////////////////
-function DKEditor_BrowserMenu_end()()
+function DKEditor_BrowserMenu_end()
 {
 	document.removeEventListener("mousedown", DKEditor_BrowserMenu_onevent);
 	dk.close("DKEditor/DKEditor_BrowserMenu.html");

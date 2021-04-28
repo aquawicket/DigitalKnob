@@ -7,7 +7,7 @@ function DKMidiDialog_init()
 }
 
 ///////////////////////////
-function DKMidiDialog_end()()
+function DKMidiDialog_end()
 {
 	//DKRemoveEvents(DKMidiDialog_onevent);
 	dk.close("DKMidi/DKMidiDialog.html");

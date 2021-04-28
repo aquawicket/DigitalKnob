@@ -8,7 +8,7 @@ function DKThreadPoolDlg_init()
 }
 
 //////////////////////////////
-function DKThreadPoolDlg_end()()
+function DKThreadPoolDlg_end()
 {
 	byId("DKThread/DKThreadPoolDlg.html").removeEventListener("Update", DKThreadPoolDlg_onevent);
 	dk.close("DKThread/DKThreadPoolDlg.html");

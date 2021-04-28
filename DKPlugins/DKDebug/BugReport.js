@@ -7,7 +7,7 @@ function BugReport_init()
 }
 
 ////////////////////////
-function BugReport_end()()
+function BugReport_end()
 {
 	byId("BugReport_Image").removeEventListener("click", BugReport_onevent);
 	byId("BugReport_Text").removeEventListener("click", BugReport_onevent);

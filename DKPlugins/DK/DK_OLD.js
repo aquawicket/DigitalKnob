@@ -337,10 +337,10 @@ function DKClose(data)
 		//FIXME
 		/*
 		console.log(end);
-		var func = window[end]; //Plugin_end()() //FIXME
+		var func = window[end]; //Plugin_end() //FIXME
 		if(typeof func === 'function'){
 			
-			func(); // Call the jsclass_end()() function
+			func(); // Call the jsclass_end() function
 		}
 		else{
 			console.warn("DKClose(data): "+func+" is not a function\n");

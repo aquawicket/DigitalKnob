@@ -13,7 +13,7 @@ function RunMenu_init()
 }
 
 //////////////////////
-function RunMenu_end()()
+function RunMenu_end()
 {
 	document.removeEventListener("mousedown", RunMenu_onevent);
 	byId("Build App").removeEventListener("click", RunMenu_onevent);

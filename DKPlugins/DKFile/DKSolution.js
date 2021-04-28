@@ -2,7 +2,7 @@
 
 dk.solution = new DKWidget("dk.solution");
 
-dk.solution.init = function dk_solution_init()() {
+dk.solution.init = function dk_solution_init() {
     dk.create("DKFile/DKSolution.css");
     dk.create("DKFile/DKFileAssociation.js");
     dk.create("DKFile/DKSolution.html", function dk_create_callback(html) {

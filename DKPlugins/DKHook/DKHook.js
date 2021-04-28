@@ -11,7 +11,7 @@ function DKHook_init()
 }
 
 /////////////////////
-function DKHook_end()()
+function DKHook_end()
 {
 	window.removeEventListener("mousemove", DKHook_onevent);
 	window.removeEventListener("mousedown", DKHook_onevent);

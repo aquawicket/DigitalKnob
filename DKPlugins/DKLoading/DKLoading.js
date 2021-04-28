@@ -5,7 +5,7 @@ function DKLoading_init()
 }
 
 ////////////////////////
-function DKLoading_end()()
+function DKLoading_end()
 {
 	dk.close("DKLoading/DKLoading.html");
 }

@@ -9,7 +9,7 @@ function DKPaintMenu_init()
 }
 
 //////////////////////////
-function DKPaintMenu_end()()
+function DKPaintMenu_end()
 {
 	document.removeEventListener("mousedown", DKPaintMenu_onevent);
 	byId("DKPaintMenu_Cut").removeEventListener("click", DKPaintMenu_onevent);

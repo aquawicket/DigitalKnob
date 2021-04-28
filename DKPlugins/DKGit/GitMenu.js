@@ -33,7 +33,7 @@ function GitMenu_init()
 }
 
 //////////////////////
-function GitMenu_end()()
+function GitMenu_end()
 {
 	document.removeEventListener("mousedown", GitMenu_onevent);
 	byId("Git Update").removeEventListener("click", GitMenu_onevent);

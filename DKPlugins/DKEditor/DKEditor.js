@@ -20,7 +20,7 @@ function DKEditor_init()
 }
 
 ///////////////////////
-function DKEditor_end()()
+function DKEditor_end()
 {
 	byId("DKEditor_edit").removeEventListener("click", DKEditor_onevent);
 	byId("DKEditor_edit").removeEventListener("contextmenu", DKEditor_onevent);

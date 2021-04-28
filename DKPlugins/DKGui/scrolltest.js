@@ -13,7 +13,7 @@ function scrolltest_init()
 }
 
 /////////////////////////
-function scrolltest_end()()
+function scrolltest_end()
 {
 	byId("bottomdiv").removeEventListener("mousedown", scrolltest_onevent);
 }

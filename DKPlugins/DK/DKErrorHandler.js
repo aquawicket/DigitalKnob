@@ -2,7 +2,7 @@
 
 dk.errorhandler = new Object;
 
-dk.errorhandler.init = function dk_errorhandler_init()(){}
+dk.errorhandler.init = function dk_errorhandler_init(){}
 dk.errorhandler.init = function dk_errorhandler_end(){}
 
 dk.errorhandler.create = function dk_errorhandler_create() {

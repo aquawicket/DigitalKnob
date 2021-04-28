@@ -3,7 +3,7 @@
 dk.notepadmenu = new Object;
 
 /////////////////////////////
-dk.notepadmenu.init = function dk_notepadmenu_init()() {
+dk.notepadmenu.init = function dk_notepadmenu_init() {
     dk.create("DKNotepad/DKNotepadMenu.html", function() {
         document.addEventListener("mousedown", dk.notepadmenu.onevent);
         byId("DKNotepadMenu_Cut").addEventListener("mousedown", dk.notepadmenu.onevent);

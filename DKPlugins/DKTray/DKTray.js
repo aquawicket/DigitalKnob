@@ -25,7 +25,7 @@ function DKTray_init()
 }
 
 /////////////////////
-function DKTray_end()()
+function DKTray_end()
 {
 	ById("DKTray").removeEventListener("1000", DKTray_onevent);
 	byId("DKTray").removeEventListener("1001", DKTray_onevent);

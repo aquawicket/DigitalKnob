@@ -2,7 +2,7 @@
 
 dk.notepadfile = new DKWidget("dk.notepadfile");
 
-dk.notepadfile.init = function dk_notepad_file_init()() {
+dk.notepadfile.init = function dk_notepad_file_init() {
 
     const menu = dk.menu.createInstance(dk.notepad.html.container);
     dk.menu.addItem(menu, "New", function() {
@@ -42,7 +42,7 @@ dk.notepadfile.init = function dk_notepad_file_init()() {
 
 /*
 ////////////////////////////
-function DKNotepadFile_end()() {/*
+function DKNotepadFile_end() {/*
 	document.removeEventListener("mousedown", DKNotepadFile_onevent);
 	byId("DKNotepadFile_New").removeEventListener("click", DKNotepadFile_onevent); //FIXME:   DKNotepadFile_New undefined
 	byId("DKNotepadFile_Open").removeEventListener("click", DKNotepadFile_onevent);

@@ -12,7 +12,7 @@ function Clock_init()
 }
 
 ////////////////////
-function Clock_end()()
+function Clock_end()
 {
 	window.removeEventListener("second", Clock_onevent);
 	dk.close("DKOS/Clock.html");

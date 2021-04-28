@@ -48,7 +48,7 @@ function DKTriggers_init()
 }
 
 /////////////////////////
-function DKTriggers_end()()
+function DKTriggers_end()
 {
 	window.removeEventListener("gui", DKTrigger_onevent); //C++
 	window.removeEventListener("midi", DKTrigger_onevent); //C++

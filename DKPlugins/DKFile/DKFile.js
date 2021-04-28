@@ -27,7 +27,7 @@ if (!dk.hasCPP()) {/*
     */
 }
 
-dk.file.init = function dk_file_init()() {
+dk.file.init = function dk_file_init() {
     dk.file.appFilename = "";
     dk.file.localAssets = "";
     dk.file.onlineAssets = "";

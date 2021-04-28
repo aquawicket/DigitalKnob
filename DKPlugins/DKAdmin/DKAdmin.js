@@ -15,7 +15,7 @@ function DKAdmin_init()
 }
 
 //////////////////////
-function DKAdmin_end()()
+function DKAdmin_end()
 {
 	byId("AdminBadge").removeEventListener("click", DKAdmin_onevent);
 	dk.close("DKAdmin/DKAdmin.html");

@@ -26,7 +26,7 @@ function DKAdminMenu_init()
 }
 
 //////////////////////////
-function DKAdminMenu_end()()
+function DKAdminMenu_end()
 {
 	document.removeEventListener("mousedown", DKAdminMenu_onevent);
 	byId("OpenSource").removeEventListener("click", DKAdminMenu_onevent);

@@ -25,7 +25,7 @@ function DKOpenFile_init() {
 }
 
 /////////////////////////
-function DKOpenFile_end()() {
+function DKOpenFile_end() {
     byId("DKFile/DKOpenFile.html").removeEventListener("GetFile", DKOpenFile_onevent);
     byId("DKFile/DKOpenFile.html").removeEventListener("GetFile", DKOpenFile_onevent);
     byId("DKOpenFileCancel").removeEventListener("click", DKOpenFile_onevent);

@@ -7,7 +7,7 @@ function LibraryMenu_init()
 }
 
 //////////////////////////
-function LibraryMenu_end()()
+function LibraryMenu_end()
 {
 	document.removeEventListener("mousedown", LibraryMenu_onevent);
 	byId("Build Libraries").removeEventListener("click", LibraryMenu_onevent);

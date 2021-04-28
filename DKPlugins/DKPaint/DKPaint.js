@@ -12,7 +12,7 @@ function DKPaint_init()
 }
 
 //////////////////////
-function DKPaint_end()()
+function DKPaint_end()
 {
 	//byId("DKPaint_Save").removeEventListener("click", DKPaint_onevent);
 	byId("DKPaint/DKPaint.html").removeEventListener("contextmenu", DKPaint_onevent);

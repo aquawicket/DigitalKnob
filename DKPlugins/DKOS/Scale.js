@@ -8,7 +8,7 @@ function Scale_init()
 }
 
 ////////////////////
-function Scale_end()()
+function Scale_end()
 {
 	byId("scale_minus").removeEventListener("mousedown", Scale_onevent);
 	byId("scale_plus").removeEventListener("mousedown", Scale_onevent);

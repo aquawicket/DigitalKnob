@@ -10,7 +10,7 @@ function DKLogin_init()
 }
 
 //////////////////////
-function DKLogin_end()()
+function DKLogin_end()
 {
 	byId("DKLoginFacebook").addEventListener("click", DKLogin_onevent);
 	dk.close("DKLogin/DKLogin.html");

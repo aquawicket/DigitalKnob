@@ -8,7 +8,7 @@ function DKDisplay_init()
 }
 
 ////////////////////////
-function DKDisplay_end()()
+function DKDisplay_end()
 {
 	byId("DKDisplay_Button").removeEventListener("click", DKDisplay_onevent);
 	//window.removeEventListener("second", DKDisplay_onevent);

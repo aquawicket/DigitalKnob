@@ -8,7 +8,7 @@ function DKWebviewTest_init()
 }
 
 ////////////////////////////
-function DKWebviewTest_end()()
+function DKWebviewTest_end()
 {
 	window.addEventListener("mousedown", DKWebviewTest_onevent);
 	window.addEventListener("keydown", DKWebviewTest_onevent);

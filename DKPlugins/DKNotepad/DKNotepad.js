@@ -2,7 +2,7 @@
 
 dk.notepad = new DKWidget();
 
-dk.notepad.init = function dk_notepad_init()() {
+dk.notepad.init = function dk_notepad_init() {
     dk.create("DKNotepad/DKNotepadShortcuts.js");
     dk.create("DKNotepad/DKNotepad.css");
     dk.create("DKNotepad/DKNotepad.html", function dk_create_callback(html) {

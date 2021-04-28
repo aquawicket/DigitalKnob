@@ -7,7 +7,7 @@ function SendBugReport_init()
 }
 
 ////////////////////////////
-function SendBugReport_end()()
+function SendBugReport_end()
 {
 	byId("SendBugReport_Button").removeEventListener("click", SendBugReport_onevent);
 	dk.close("DKDebug/SendBugReport.html");

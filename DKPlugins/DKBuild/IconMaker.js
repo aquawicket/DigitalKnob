@@ -11,7 +11,7 @@ function IconMaker_init()
 }
 
 ////////////////////////
-function IconMaker_end()()
+function IconMaker_end()
 {
 
 }
