@@ -17,6 +17,10 @@ DKSET(DUKTAPE ${3RDPARTY}/${DUKTAPE_VERSION})
 IF(NOT EXISTS ${DUKTAPE}/src)
 DKSETPATH(${DUKTAPE})
 DKSET(QUEUE_BUILD ON)
+
+LINUX_COMMAND(sudo apt-get install python python-yaml)
+LINUX_COMMAND(python ${DUKTAPE}/util/dist.py)
+
 WIN32_COMMAND(${PYTHON}/Scripts/pip install PyYAML)
 WIN32_COMMAND(${PYTHON_EXE} ${DUKTAPE}/util/dist.py)
 DKCOPY(${DUKTAPE}/dist/src/ ${DUKTAPE}/src TRUE)
