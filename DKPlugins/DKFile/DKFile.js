@@ -409,10 +409,9 @@ dk.file.getRelativePath = function dk_file_getRelativePath(apath, datapath) {
 if (!dk.hasCPP()) {
     dk.file.isDir = function dk_file_isDir(url, callback) {
         url = dk.file.onlineAssets+url;
-        console.debug("testing if "+url+" is a Dir");
+        //console.debug("testing if "+url+" is a Dir");
         dk.php.call('GET', "/DKFile/DKFile.php", "isDir", url, function dk_php_call_callback(result) {
-            console.debug("isDir: url: "+url+" result:"+result);
-
+            //console.debug("isDir: url: "+url+" result:"+result);
             callback && callback(result);
         });
     }
@@ -424,6 +423,8 @@ if (!dk.hasCPP()) {
 }
 
 dk.file.getExtention = function dk_file_getExtention(url) {
+    if(!url)
+        return;
     var n = url.lastIndexOf(".");
     var out = url.substring(n + 1, url.length);
     return out;

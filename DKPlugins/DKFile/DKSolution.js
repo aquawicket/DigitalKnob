@@ -117,7 +117,7 @@ dk.solution.openFile = function dk_solution_openFile(path) {
 
 dk.solution.openHere = function dk_solution_openHere(path) {
     var aPath = path;
-    if (DK_GetOS() !== "Android") {
+    if (dk.getOS !== "Android") {
         aPath = CPP_DKFile_GetAbsolutePath(path);
         if (typeof (absolutepath) === 'string')
             aPath = aPath.replace(absolutepath, "");
@@ -162,66 +162,73 @@ dk.solution.updatePath = function dk_solution_updatePath(path) {
     dk.file.directoryContents(aPath, function dk_file_directoryContents_callback(results) {
         if (!results)
             return false;
-        var files = results.split(",");
+        const files = results.split(",");
         byId("DKSolutionMenu").innerHTML = "";
         //Clear it
-        for (var d = 0; d < files.length; d++) {
-            if (dk.file.isDir(aPath + "/" + files[d])) {
-                //Folders
-                var element2 = DK_CreateElement(byId("DKSolutionMenu"), "div", "DKSolutionFolder");
-                element2.setAttribute("class", "option");
-                var value = aPath + "/" + files[d] + "/";
-                element2.setAttribute("value", value);
-                element2.style.whiteSpace = "nowrap";
-                element2.addEventListener("click", dk.solution.onevent);
-                element2.style.paddingLeft = "17px";
-                element2.innerHTML = files[d];
-                element2.style.backgroundImage = "url(\"DKFile/folder.png\")";
-                element2.style.backgroundRepeat = "no-repeat";
-                element3.cursor = "pointer";
-                //element2.addEventListener("click", dk.solution.onevent);
-                //element2.addEventListener("dblclick", dk.solution.onevent);
-                //element2.addEventListener("contextmenu", dk.solution.onevent);
-                element2.onclick = dk.solution.onevent;
-                element2.ondblclick = dk.solution.onevent;
-                element2.oncontextmenu = dk.solution.onevent;
-            }
-        }
+        for (let d = 0; d < files.length; d++) {
+            dk.file.isDir(aPath + "/" + files[d], function(result) {
 
-        for (var f = 0; f < files.length; f++) {
-            if (!dk.file.isDir(aPath + "/" + files[f])) {
-                //Files
-                var element3 = dk.gui.createElement(byId("DKSolutionMenu"), "div", "DKSolutionFile");
-                element3.setAttribute("class", "option");
-                var value = aPath + "/" + files[f];
-                element3.setAttribute("value", value);
-                element3.style.whiteSpace = "nowrap";
-                element3.style.paddingLeft = "17px";
-                element3.style.backgroundRepeat = "no-repeat";
-                element3.cursor = "pointer";
-                element3.innerHTML = files[f];
-                //element3.addEventListener("click", dk.solution.onevent);
-                //element3.addEventListener("dblclick", dk.solution.onevent);
-                //element3.addEventListener("contextmenu", dk.solution.onevent);
-                element3.onclick = dk.solution.onevent;
-                element3.ondblclick = dk.solution.onevent;
-                element3.oncontextmenu = dk.solution.onevent;
-
-                var extension = dk.file.getExtention(files[f]);
-                if ((extension === "png") || (extension === "jpeg") || (extension === "jpg") || (extension === "bmp") || (extension === "tiff") || (extension === "tif") || (extension === "gif") || (extension === "tga") || (extension === "ico")) {
-                    element3.style.backgroundImage = "url(\"DKFile/picture.png\")";
-                } else if ((extension === "osg") || (extension === "osgb") || (extension === "osgt") || (extension === "3dm") || (extension === "3ds") || (extension === "ac") || (extension === "ascii") || (extension === "blend") || (extension === "bvh") || (extension === "c4d") || (extension === "dae") || (extension === "dds") || (extension === "dgn") || (extension === "dwg") || (extension === "dxf") || (extension === "fbx") || (extension === "lwo") || (extension === "lws") || (extension === "ma") || (extension === "max") || (extension === "mb") || (extension === "mesh") || (extension === "mtl") || (extension === "obj") || (extension === "pov") || (extension === "skp") || (extension === "stl") || (extension === "ztl")) {
-                    element3.style.backgroundImage = "url(\"DKFile/cube.png\")";
-                } else if ((extension === "js")) {
-                    element3.style.backgroundImage = "url(\"DKFile/js.png\")";
-                } else if ((extension === "sln")) {
-                    element3.style.backgroundImage = "url(\"DKFile/sln.png\")";
-                } else if ((extension === "html") || (extension === "htm")) {
-                    element3.style.backgroundImage = "url(\"DKFile/html.png\")";
-                } else {
-                    element3.style.backgroundImage = "url(\"DKFile/file.png\")";
+                if (result) {
+                    //Folders
+                    var element2 = dk.gui.createElement(byId("DKSolutionMenu"), "div", "DKSolutionFolder");
+                    element2.setAttribute("class", "option");
+                    var value = aPath + "/" + files[d] + "/";
+                    element2.setAttribute("value", value);
+                    element2.style.whiteSpace = "nowrap";
+                    element2.addEventListener("click", dk.solution.onevent);
+                    element2.style.paddingLeft = "17px";
+                    element2.innerHTML = files[d];
+                    element2.style.backgroundImage = "url(\"DKFile/folder.png\")";
+                    element2.style.backgroundRepeat = "no-repeat";
+                    element2.cursor = "pointer";
+                    element2.addEventListener("click", dk.solution.onevent);
+                    element2.addEventListener("dblclick", dk.solution.onevent);
+                    element2.addEventListener("contextmenu", dk.solution.onevent);
+                    //element2.onclick = dk.solution.onevent;
+                    //element2.ondblclick = dk.solution.onevent;
+                    //element2.oncontextmenu = dk.solution.onevent;
                 }
-            }
+
+            });
+        }
+        for (let f = 0; f < files.length; f++) {
+            dk.file.isDir(aPath + "/" + files[f], function(result) {
+
+                if (!result) {
+                    //Files
+                    var element3 = dk.gui.createElement(byId("DKSolutionMenu"), "div", "DKSolutionFile");
+                    element3.setAttribute("class", "option");
+                    var value = aPath + "/" + files[f];
+                    element3.setAttribute("value", value);
+                    element3.style.whiteSpace = "nowrap";
+                    element3.style.paddingLeft = "17px";
+                    element3.style.backgroundRepeat = "no-repeat";
+                    element3.cursor = "pointer";
+                    element3.innerHTML = files[f];
+                    element3.addEventListener("click", dk.solution.onevent);
+                    element3.addEventListener("dblclick", dk.solution.onevent);
+                    element3.addEventListener("contextmenu", dk.solution.onevent);
+                    //element3.onclick = dk.solution.onevent;
+                    //element3.ondblclick = dk.solution.onevent;
+                    //element3.oncontextmenu = dk.solution.onevent;
+
+                    var extension = dk.file.getExtention(files[f]);
+                    if ((extension === "png") || (extension === "jpeg") || (extension === "jpg") || (extension === "bmp") || (extension === "tiff") || (extension === "tif") || (extension === "gif") || (extension === "tga") || (extension === "ico")) {
+                        element3.style.backgroundImage = "url(\"DKFile/picture.png\")";
+                    } else if ((extension === "osg") || (extension === "osgb") || (extension === "osgt") || (extension === "3dm") || (extension === "3ds") || (extension === "ac") || (extension === "ascii") || (extension === "blend") || (extension === "bvh") || (extension === "c4d") || (extension === "dae") || (extension === "dds") || (extension === "dgn") || (extension === "dwg") || (extension === "dxf") || (extension === "fbx") || (extension === "lwo") || (extension === "lws") || (extension === "ma") || (extension === "max") || (extension === "mb") || (extension === "mesh") || (extension === "mtl") || (extension === "obj") || (extension === "pov") || (extension === "skp") || (extension === "stl") || (extension === "ztl")) {
+                        element3.style.backgroundImage = "url(\"DKFile/cube.png\")";
+                    } else if ((extension === "js")) {
+                        element3.style.backgroundImage = "url(\"DKFile/js.png\")";
+                    } else if ((extension === "sln")) {
+                        element3.style.backgroundImage = "url(\"DKFile/sln.png\")";
+                    } else if ((extension === "html") || (extension === "htm")) {
+                        element3.style.backgroundImage = "url(\"DKFile/html.png\")";
+                    } else {
+                        element3.style.backgroundImage = "url(\"DKFile/file.png\")";
+                    }
+                }
+
+            });
         }
 
         byId("DKSolutionPath").value = aPath;

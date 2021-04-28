@@ -9,18 +9,18 @@ dk.solutionmenu.init = function dk_solutionmenu_init()
 {
 	dk.create("DKFile/DKSolutionMenu.html", function(){
     	document.addEventListener("mousedown", dk.solutionmenu.onevent);
-    	byId("DKSolutionMenu_Open").onclick = dk.solutionmenu.onevent;
-    	byId("DKSolutionMenu_OpenHere").onclick = dk.solutionmenu.onevent;
-    	byId("DKSolutionMenu_NewFile").onclick = dk.solutionmenu.onevent;
-    	byId("DKSolutionMenu_NewFolder").onclick = dk.solutionmenu.onevent;
-    	byId("DKSolutionMenu_Rename").onclick = dk.solutionmenu.onevent;
-    	byId("DKSolutionMenu_Delete").onclick = dk.solutionmenu.onevent;
-    	byId("DKSolutionMenu_Copy").onclick = dk.solutionmenu.onevent;
-    	byId("DKSolutionMenu_Cut").onclick = dk.solutionmenu.onevent;
-    	byId("DKSolutionMenu_Paste").onclick = dk.solutionmenu.onevent;
-	    byId("DKSolutionMenu_Import").onclick = dk.solutionmenu.onevent;
-    	byId("DKSolutionMenu_GitAdd").onclick = dk.solutionmenu.onevent;
-	    byId("DKSolutionMenu_UpxCompress").onclick = dk.solutionmenu.onevent;
+    	byId("DKSolutionMenu_Open").onclick = dk.solutionmenu.open;
+    	byId("DKSolutionMenu_OpenHere").onclick = dk.solutionmenu.openHere;
+    	byId("DKSolutionMenu_NewFile").onclick = dk.solutionmenu.newFile;
+    	byId("DKSolutionMenu_NewFolder").onclick = dk.solutionmenu.newFolder;
+    	byId("DKSolutionMenu_Rename").onclick = dk.solutionmenu.rename;
+    	byId("DKSolutionMenu_Delete").onclick = dk.solutionmenu.delete;
+    	byId("DKSolutionMenu_Copy").onclick = dk.solutionmenu.copy;
+    	byId("DKSolutionMenu_Cut").onclick = dk.solutionmenu.cut;
+    	byId("DKSolutionMenu_Paste").onclick = dk.solutionmenu.paste;
+	    byId("DKSolutionMenu_Import").onclick = dk.solutionmenu.import;
+    	byId("DKSolutionMenu_GitAdd").onclick = dk.solutionmenu.gitAdd;
+	    byId("DKSolutionMenu_UpxCompress").onclick = dk.solutionmenu.upxCompress;
     });
 }
 
