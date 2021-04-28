@@ -1,12 +1,12 @@
 //////////////////////////////////
 function DKWebSocketsServer_Init()
 {
-	DK_Create("DKWebSockets");
-	DK_Create("DKWebSockets/DKWebSocketsServer.html", function(){
-		window.addEventListener("DKWebSockets_OnMessageFromClient", DKWebSocketsServer_OnEvent);
-		byId("DKWebSocketsServer_CloseServer").addEventListener("click", DKWebSocketsServer_OnEvent);
-		byId("DKWebSocketsServer_CreateServer").addEventListener("click", DKWebSocketsServer_OnEvent);
-		byId("DKWebSocketsServer_MessageToClient").addEventListener("click", DKWebSocketsServer_OnEvent);
+	dk.create("DKWebSockets");
+	dk.create("DKWebSockets/DKWebSocketsServer.html", function(){
+		window.addEventListener("DKWebSockets_OnMessageFromClient", DKWebSocketsServer_onevent);
+		byId("DKWebSocketsServer_CloseServer").addEventListener("click", DKWebSocketsServer_onevent);
+		byId("DKWebSocketsServer_CreateServer").addEventListener("click", DKWebSocketsServer_onevent);
+		byId("DKWebSocketsServer_MessageToClient").addEventListener("click", DKWebSocketsServer_onevent);
 		byId("DKWebSocketsServer_IpAddress").value = DK_GetLocalIP();
 		byId("DKWebSocketsServer_Port").value = "80";
 	});
@@ -15,11 +15,11 @@ function DKWebSocketsServer_Init()
 /////////////////////////////////
 function DKWebSocketsServer_End()
 {
-	window.removeEventListener("DKWebSockets_OnMessageFromClient", DKWebSocketsServer_OnEvent);
-	byId("DKWebSocketsServer_CloseServer").removeEventListener("click", DKWebSocketsServer_OnEvent);
-	byId("DKWebSocketsServer_CreateServer").removeEventListener("click", DKWebSocketsServer_OnEvent);
-	byId("DKWebSocketsServer_MessageToClient").removeEventListener("click", DKWebSocketsServer_OnEvent);
-	DK_Close("DKWebSocketsServer/DKWebSocketsServer.html");
+	window.removeEventListener("DKWebSockets_OnMessageFromClient", DKWebSocketsServer_onevent);
+	byId("DKWebSocketsServer_CloseServer").removeEventListener("click", DKWebSocketsServer_onevent);
+	byId("DKWebSocketsServer_CreateServer").removeEventListener("click", DKWebSocketsServer_onevent);
+	byId("DKWebSocketsServer_MessageToClient").removeEventListener("click", DKWebSocketsServer_onevent);
+	dk.close("DKWebSocketsServer/DKWebSocketsServer.html");
 }
 
 //////////////////////////////////////////

@@ -1,17 +1,17 @@
 ////////////////////////////
 function SendBugReport_Init()
 {
-	DK_Create("DKDebug/SendBugReport.css");
-	DK_Create("DKDebug/SendBugReport.html");
-	byId("SendBugReport_Button").addEventListener("click", SendBugReport_OnEvent);
+	dk.create("DKDebug/SendBugReport.css");
+	dk.create("DKDebug/SendBugReport.html");
+	byId("SendBugReport_Button").addEventListener("click", SendBugReport_onevent);
 }
 
 ////////////////////////////
 function SendBugReport_End()
 {
-	byId("SendBugReport_Button").removeEventListener("click", SendBugReport_OnEvent);
-	DK_Close("DKDebug/SendBugReport.html");
-	DK_Close("DKDebug/SendBugReport.css");
+	byId("SendBugReport_Button").removeEventListener("click", SendBugReport_onevent);
+	dk.close("DKDebug/SendBugReport.html");
+	dk.close("DKDebug/SendBugReport.css");
 }
 
 /////////////////////////////////////
@@ -36,7 +36,7 @@ function SendBugReport_CreateReport()
 	
 	byId("DKDebug/SendBugReport.html").style.display = "none";
 	//TODO: say thank you here
-	DK_Create("DKGui/DKMessageBox.js", function(){
+	dk.create("DKGui/DKMessageBox.js", function(){
 		DKFrame_Html("DKGui/DKMessageBox.html");
 		DKMessageBox_Message("Thank You :)");	
 		DKFrame_Close("DKDebug/SendBugReport.html");

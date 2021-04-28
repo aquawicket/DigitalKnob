@@ -4,18 +4,18 @@ DKSolutionRename_file = "";
 ////////////////////////////////
 function DKSolutionRename_Init()
 {
-	DK_Create("DKFile/DKSolutionRename.html,DKSolutionMenu");
-	document.addEventListener("mousedown", DKSolutionRename_OnEvent);
-	byId("DKSolutionRename_box").addEventListener("keydown", DKSolutionRename_OnEvent);
+	dk.create("DKFile/DKSolutionRename.html,DKSolutionMenu");
+	document.addEventListener("mousedown", DKSolutionRename_onevent);
+	byId("DKSolutionRename_box").addEventListener("keydown", DKSolutionRename_onevent);
 	byId("DKSolutionRename_box").focus();
 }
 
 ///////////////////////////////
 function DKSolutionRename_End()
 {
-	document.removeEventListener("mousedown", DKSolutionRename_OnEvent);
-	byId("DKSolutionRename_box").removeEventListener("keydown", DKSolutionRename_OnEvent);
-	DK_Close("DKFile/DKSolutionRename.html");
+	document.removeEventListener("mousedown", DKSolutionRename_onevent);
+	byId("DKSolutionRename_box").removeEventListener("keydown", DKSolutionRename_onevent);
+	dk.close("DKFile/DKSolutionRename.html");
 }
 
 ////////////////////////////////////////
@@ -33,7 +33,7 @@ function DKSolutionRename_OnEvent(event)
 		}
 	}
 	DKSolutionRename_Rename();
-	DK_Close("DKFile/DKSolutionRename.js");
+	dk.close("DKFile/DKSolutionRename.js");
 }
 
 ///////////////////////////////////

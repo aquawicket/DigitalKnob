@@ -3,22 +3,22 @@ var websocket;
 //////////////////////////////////
 function DKWebSocketsClient_Init()
 {
-	DK_Create("DKWebSockets/DKWebSocketsClient.html", function(){
-		window.addEventListener("DKWebSockets_OnMessageFromServer", DKWebSocketsClient_OnEvent);
-		byId("DKWebSocketsClient_CreateClient").addEventListener("click", DKWebSocketsClient_OnEvent);
-		byId("DKWebSocketsClient_CloseClient").addEventListener("click", DKWebSocketsClient_OnEvent);
-		byId("DKWebSocketsClient_MessageToServer").addEventListener("click", DKWebSocketsClient_OnEvent);
+	dk.create("DKWebSockets/DKWebSocketsClient.html", function(){
+		window.addEventListener("DKWebSockets_OnMessageFromServer", DKWebSocketsClient_onevent);
+		byId("DKWebSocketsClient_CreateClient").addEventListener("click", DKWebSocketsClient_onevent);
+		byId("DKWebSocketsClient_CloseClient").addEventListener("click", DKWebSocketsClient_onevent);
+		byId("DKWebSocketsClient_MessageToServer").addEventListener("click", DKWebSocketsClient_onevent);
 	});
 }
 
 /////////////////////////////////
 function DKWebSocketsClient_End()
 {
-	window.removeEventListener("DKWebSockets_OnMessageFromServer", DKWebSocketsClient_OnEvent);
-	byId("DKWebSocketsClient_CreateClient").removeEventListener("click", DKWebSocketsClient_OnEvent);
-	byId("DKWebSocketsClient_CloseClient").removeEventListener("click", DKWebSocketsClient_OnEvent);
-	byId("DKWebSocketsClient_MessageToServer").removeEventListener("click", DKWebSocketsClient_OnEvent);
-	DK_Close("DKWebSockets/DKWebSocketsClient.html");
+	window.removeEventListener("DKWebSockets_OnMessageFromServer", DKWebSocketsClient_onevent);
+	byId("DKWebSocketsClient_CreateClient").removeEventListener("click", DKWebSocketsClient_onevent);
+	byId("DKWebSocketsClient_CloseClient").removeEventListener("click", DKWebSocketsClient_onevent);
+	byId("DKWebSocketsClient_MessageToServer").removeEventListener("click", DKWebSocketsClient_onevent);
+	dk.close("DKWebSockets/DKWebSocketsClient.html");
 }
 
 //////////////////////////////////////////

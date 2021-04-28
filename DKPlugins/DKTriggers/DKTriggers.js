@@ -39,23 +39,23 @@ function DKTriggers_Init()
 
 	//assets = DKAssets_LocalAssets();
 	DKTrigger_LoadTriggers("USER/triggers.txt");
-	window.addEventListener("gui", DKTrigger_OnEvent); //C++
-	window.addEventListener("midi", DKTrigger_OnEvent); //C++
-	window.addEventListener("keydown", DKTrigger_OnEvent);
-	window.addEventListener("keyup", DKTrigger_OnEvent);
-	window.addEventListener("resize", DKTrigger_OnEvent);
-	window.addEventListener("ToggleTriggers", DKTrigger_OnEvent); //JS
+	window.addEventListener("gui", DKTrigger_onevent); //C++
+	window.addEventListener("midi", DKTrigger_onevent); //C++
+	window.addEventListener("keydown", DKTrigger_onevent);
+	window.addEventListener("keyup", DKTrigger_onevent);
+	window.addEventListener("resize", DKTrigger_onevent);
+	window.addEventListener("ToggleTriggers", DKTrigger_onevent); //JS
 }
 
 /////////////////////////
 function DKTriggers_End()
 {
-	window.removeEventListener("gui", DKTrigger_OnEvent); //C++
-	window.removeEventListener("midi", DKTrigger_OnEvent); //C++
-	window.removeEventListener("keydown", DKTrigger_OnEvent);
-	window.removeEventListener("keyup", DKTrigger_OnEvent);
-	window.removeEventListener("resize", DKTrigger_OnEvent);
-	window.removeEventListener("ToggleTriggers", DKTrigger_OnEvent); //JS
+	window.removeEventListener("gui", DKTrigger_onevent); //C++
+	window.removeEventListener("midi", DKTrigger_onevent); //C++
+	window.removeEventListener("keydown", DKTrigger_onevent);
+	window.removeEventListener("keyup", DKTrigger_onevent);
+	window.removeEventListener("resize", DKTrigger_onevent);
+	window.removeEventListener("ToggleTriggers", DKTrigger_onevent); //JS
 }
 
 /////////////////////////////////
@@ -308,7 +308,7 @@ function DKTrigger_FireTrigger(trigger)
 			continue;
 		}
 		if(command === "Message"){
-			DK_Create("DKGui/DKMessageBox.js", function(){
+			dk.create("DKGui/DKMessageBox.js", function(){
 				DKMessageBox_Message(var1);
 			});
 			continue;
@@ -437,7 +437,7 @@ function DKTrigger_AddEvents()
 	console.log("Adding events to gui causes . . .\n");
 	for(var c = 0; c < causes.length; c++){
 		if(causes[c].command === "gui"){
-			byId(causes[c].var1).addEventListener(causes[c].var2, DKTrigger_OnEvent);
+			byId(causes[c].var1).addEventListener(causes[c].var2, DKTrigger_onevent);
 		}
 	}
 }

@@ -1,17 +1,17 @@
 ///////////////////////////
 function LibraryMenu_Init()
 {
-	DK_Create("DKBuild/LibraryMenu.html");
-	document.addEventListener("mousedown", LibraryMenu_OnEvent);
-	byId("Build Libraries").addEventListener("click", LibraryMenu_OnEvent);
+	dk.create("DKBuild/LibraryMenu.html");
+	document.addEventListener("mousedown", LibraryMenu_onevent);
+	byId("Build Libraries").addEventListener("click", LibraryMenu_onevent);
 }
 
 //////////////////////////
 function LibraryMenu_End()
 {
-	document.removeEventListener("mousedown", LibraryMenu_OnEvent);
-	byId("Build Libraries").removeEventListener("click", LibraryMenu_OnEvent);
-	DK_Close("DKBuild/LibraryMenu.html");
+	document.removeEventListener("mousedown", LibraryMenu_onevent);
+	byId("Build Libraries").removeEventListener("click", LibraryMenu_onevent);
+	dk.close("DKBuild/LibraryMenu.html");
 }
 
 ///////////////////////////////////
@@ -28,5 +28,5 @@ function LibraryMenu_OnEvent(event)
 			return;
 		}
 	}
-	DK_Close("DKBuild/LibraryMenu.js");
+	dk.close("DKBuild/LibraryMenu.js");
 }

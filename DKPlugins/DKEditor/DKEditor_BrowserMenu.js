@@ -1,8 +1,8 @@
 ////////////////////////////////////
 function DKEditor_BrowserMenu_Init()
 {
-	DK_Create("DKEditor/DKEditor_BrowserMenu.html");
-	document.addEventListener("mousedown", DKEditor_BrowserMenu_OnEvent);
+	dk.create("DKEditor/DKEditor_BrowserMenu.html");
+	document.addEventListener("mousedown", DKEditor_BrowserMenu_onevent);
 	
 	DKEditor_BrowserMenu_Populate();
 }
@@ -10,8 +10,8 @@ function DKEditor_BrowserMenu_Init()
 ///////////////////////////////////
 function DKEditor_BrowserMenu_End()
 {
-	document.removeEventListener("mousedown", DKEditor_BrowserMenu_OnEvent);
-	DK_Close("DKEditor/DKEditor_BrowserMenu.html");
+	document.removeEventListener("mousedown", DKEditor_BrowserMenu_onevent);
+	dk.close("DKEditor/DKEditor_BrowserMenu.html");
 }
 
 ////////////////////////////////////////////
@@ -42,7 +42,7 @@ function DKEditor_BrowserMenu_OnEvent(event)
 		}
 	}
 	
-	DK_Close("DKEditor/DKEditor_BrowserMenu.js");
+	dk.close("DKEditor/DKEditor_BrowserMenu.js");
 }
 
 ////////////////////////////////////////
@@ -61,7 +61,7 @@ function DKEditor_BrowserMenu_AddChrome()
 	var chrome = DK_CreateElement(byId("DKEditor/DKEditor_BrowserMenu.html"), "div", "DKEditor_BrowserMenu_Chrome");
 	chrome.class = "option";
 	chrome.innerHTML = "Chrome";
-	chrome.addEventListener("click", DKEditor_BrowserMenu_OnEvent);
+	chrome.addEventListener("click", DKEditor_BrowserMenu_onevent);
 }
 
 
@@ -71,7 +71,7 @@ function DKEditor_BrowserMenu_AddFirefox()
 	var firefox = DK_CreateElement(byId("DKEditor/DKEditor_BrowserMenu.html"), "div", "DKEditor_BrowserMenu_Firefox");
 	firefox.class = "option";
 	firefox.innerHTML = "Firefox";
-	firefox.addEventListener("click", DKEditor_BrowserMenu_OnEvent);
+	firefox.addEventListener("click", DKEditor_BrowserMenu_onevent);
 }
 
 /////////////////////////////////////
@@ -80,7 +80,7 @@ function DKEditor_BrowserMenu_AddIE()
 	var ie = DK_CreateElement(byId("DKEditor/DKEditor_BrowserMenu.html"), "div", "DKEditor_BrowserMenu_IE");
 	ie.class = "option";
 	ie.innerHTML = "Internet Explorer";
-	ie.addEventListener("click", DKEditor_BrowserMenu_OnEvent);
+	ie.addEventListener("click", DKEditor_BrowserMenu_onevent);
 }
 
 ////////////////////////////////////////
@@ -89,7 +89,7 @@ function DKEditor_BrowserMenu_AddOpera()
 	var opera = DK_CreateElement(byId("DKEditor/DKEditor_BrowserMenu.html"), "div", "DKEditor_BrowserMenu_Opera");
 	opera.class = "option";
 	opera.innerHTML = "Opera";
-	opera.addEventListener("click", DKEditor_BrowserMenu_OnEvent);
+	opera.addEventListener("click", DKEditor_BrowserMenu_onevent);
 }
 
 /////////////////////////////////////////
@@ -98,5 +98,5 @@ function DKEditor_BrowserMenu_AddSafari()
 	var safari = DK_CreateElement(byId("DKEditor/DKEditor_BrowserMenu.html"), "div", "DKEditor_BrowserMenu_Safari");
 	safari.class = "option";
 	safari.innerHTML = "Safari";
-	safari.addEventListener("click", DKEditor_BrowserMenu_OnEvent);
+	safari.addEventListener("click", DKEditor_BrowserMenu_onevent);
 }

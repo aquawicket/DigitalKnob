@@ -1,31 +1,31 @@
 ///////////////////////////
 function DesktopMenu_Init()
 {
-	DK_Create("DKOS/DesktopMenu.html");
+	dk.create("DKOS/DesktopMenu.html");
 	//byId("DKOS/DesktopMenu.html").style.top = DKWindow_GetMouseY()+"px";
 	//byId("DKOS/DesktopMenu.html").style.left = DKWindow_GetMouseX()+"px";
 	byId("DKOS/DesktopMenu.html").style.top = "100px";
 	byId("DKOS/DesktopMenu.html").style.left = "100px";
 	
-	document.addEventListener("mousedown", DesktopMenu_OnEvent);
-	byId("OpenBackgtoundMenu").addEventListener("click", DesktopMenu_OnEvent);
-	byId("ToggleFullscreen").addEventListener("click", DesktopMenu_OnEvent);
+	document.addEventListener("mousedown", DesktopMenu_onevent);
+	byId("OpenBackgtoundMenu").addEventListener("click", DesktopMenu_onevent);
+	byId("ToggleFullscreen").addEventListener("click", DesktopMenu_onevent);
 }
 
 //////////////////////////
 function DesktopMenu_End()
 {
-	document.removeEventListener("mousedown", DesktopMenu_OnEvent);
-	byId("OpenBackgtoundMenu").removeEventListener("click", DesktopMenu_OnEvent);
-	byId("ToggleFullscreen").removeEventListener("click", DesktopMenu_OnEvent);
-	DK_Close("DKOS/DesktopMenu.html");
+	document.removeEventListener("mousedown", DesktopMenu_onevent);
+	byId("OpenBackgtoundMenu").removeEventListener("click", DesktopMenu_onevent);
+	byId("ToggleFullscreen").removeEventListener("click", DesktopMenu_onevent);
+	dk.close("DKOS/DesktopMenu.html");
 }
 
 ///////////////////////////////////
 function DesktopMenu_OnEvent(event)
 {
 	if(event.currentTarget.id === "OpenBackgtoundMenu"){
-		DK_Create("DKOS/BackgroundMenu.js", function(){
+		dk.create("DKOS/BackgroundMenu.js", function(){
 			DKFrame_Html("DKOS/BackgroundMenu.html");
 		});
 	}
@@ -38,7 +38,7 @@ function DesktopMenu_OnEvent(event)
 			return;
 		}
 	}
-	DK_Close("DKOS/DesktopMenu.js");
+	dk.close("DKOS/DesktopMenu.js");
 }
 
 ///////////////////////////////////

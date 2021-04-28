@@ -294,14 +294,14 @@ dk.create = function dk_create(data, dk_create_callback) {
         arry.splice(0, 0, "DKCss");
     else {
         if (dk.getBrowser() === "CEF" || dk.getBrowser() === "RML") {
-            CPP_DK_Create(data);
+            CPP_dk.create(data);
         }
     }
     if (arry[0] === "DKJavascript") {
         if (!dk.loadJs(arry[1], function dk_loadJs_callback(rval) {
             if (dk_create_callback) {
                 dk_create_callback(rval);
-            } else {//console.error("DK_Create(" + data + "): does not have a callback");
+            } else {//console.error("dk.create(" + data + "): does not have a callback");
             }
         })) {
             return error("DK_LoadJs failed");
@@ -312,7 +312,7 @@ dk.create = function dk_create(data, dk_create_callback) {
             if (typeof dk_create_callback === "function") {
                 dk_create_callback(element);
             } else {
-                console.warn("DK_Create(" + data + "): does not have a callback");
+                console.warn("dk.create(" + data + "): does not have a callback");
             }
         }))
             return error("DK_LoadHtml failed");
@@ -323,7 +323,7 @@ dk.create = function dk_create(data, dk_create_callback) {
         }
         if (dk_create_callback) {
             dk_create_callback();
-        } else {//console.error("DK_Create("+data+"): does not have a callback");
+        } else {//console.error("dk.create("+data+"): does not have a callback");
         }
     }
     return true;

@@ -3,7 +3,7 @@ var working = true;
 //////////////////////////////
 function DKBuildConsole_Init()
 {
-	CPP_DK_Create("DKBuild/DKBuild.js");
+	CPP_dk.create("DKBuild/DKBuild.js");
 	DKBuild_ValidateCmake();
 	//DKBuild_ValidateVC2015();
 	DKBuild_ValidateVC2019();
@@ -18,7 +18,7 @@ function DKBuildConsole_Init()
 /////////////////////////////
 function DKBuildConsole_End()
 {
-	CPP_DK_Close("DKBuild/DKBuild.js");
+	CPP_dk.close("DKBuild/DKBuild.js");
 }
 
 //////////////////////////////////////
@@ -45,11 +45,11 @@ function DKBuildConsole_ChooseUpdate()
 		CPP_DK_Exit();
 	}
 	if(key === 121){ //y key
-		CPP_DK_Create("DKGit/DKGit.js");
+		CPP_dk.create("DKGit/DKGit.js");
 		DKGit_GitUpdate();
 	}
 	if(key === 99){ //c key
-		CPP_DK_Create("DKGit/DKGit.js");
+		CPP_dk.create("DKGit/DKGit.js");
 		DKGit_GitCommit();
 	}
 	if(key === 114){ //r key

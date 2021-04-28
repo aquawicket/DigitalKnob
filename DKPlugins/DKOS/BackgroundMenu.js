@@ -1,7 +1,7 @@
 //////////////////////////////
 function BackgroundMenu_Init()
 {
-	DK_Create("DKOS/BackgroundMenu.html");
+	dk.create("DKOS/BackgroundMenu.html");
 	var file = byId("Background").getAttribute("src");
 	//console.log("file="+file+"\n");
 	byId("BackgroundMenu_Image").setAttribute("src", file);
@@ -10,7 +10,7 @@ function BackgroundMenu_Init()
 /////////////////////////////
 function BackgroundMenu_End()
 {
-	DK_Close("DKOS/BackgroundMenu.html");
+	dk.close("DKOS/BackgroundMenu.html");
 }
 
 //////////////////////////////////////

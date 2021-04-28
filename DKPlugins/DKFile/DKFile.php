@@ -98,7 +98,7 @@ function getRelativePath($dir){
 }
 
 function pushDKAssets(){
-	//Fist get all fot he paths
+	//Fist get all of the paths
 	$assetsPath = GetAssetsPath();
 	if(!$assetsPath)
 		return error("assetsPath is invalid");
@@ -134,7 +134,7 @@ function pushDKAssets(){
             	$dest = $dkPluginsPath."\\".$assetsList[$n]."\\".$assetFiles[$nn];
 			    //echo $dest."\n";
 			    if (!copy($src, $dest))
-                    echo "failed to copy $src\n";
+                    echo "FAILED to copy $src\n";
                 else
                 	echo "copied to $dest\n";
 		    }
@@ -148,6 +148,8 @@ function pushDKAssets(){
 		    }
         }
 	}
+	return error("test error");
+	return true;
 }
 
 function directoryContents($dir){

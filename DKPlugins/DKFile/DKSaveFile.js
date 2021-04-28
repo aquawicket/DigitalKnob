@@ -9,13 +9,13 @@ var rPath;
 
 //////////////////////////
 function DKSaveFile_Init() {
-    DK_Create("DKFile/DKSaveFile.css");
-    DK_Create("DKFile/DKSaveFile.html");
-    byId("DKFile/DKSaveFile.html").addEventListener("SetFile", DKSaveFile_OnEvent);
-    byId("DKSaveFileCancel").addEventListener("click", DKSaveFile_OnEvent);
-    byId("DKSaveFileOK").addEventListener("click", DKSaveFile_OnEvent);
-    byId("DKSaveFileUp").addEventListener("click", DKSaveFile_OnEvent);
-    byId("DKSaveFilePath").addEventListener("input", DKSaveFile_OnEvent);
+    dk.create("DKFile/DKSaveFile.css");
+    dk.create("DKFile/DKSaveFile.html");
+    byId("DKFile/DKSaveFile.html").addEventListener("SetFile", DKSaveFile_onevent);
+    byId("DKSaveFileCancel").addEventListener("click", DKSaveFile_onevent);
+    byId("DKSaveFileOK").addEventListener("click", DKSaveFile_onevent);
+    byId("DKSaveFileUp").addEventListener("click", DKSaveFile_onevent);
+    byId("DKSaveFilePath").addEventListener("input", DKSaveFile_onevent);
 
     aPath = "";
     rPath = "";
@@ -27,13 +27,13 @@ function DKSaveFile_Init() {
 
 /////////////////////////
 function DKSaveFile_End() {
-    byId("DKFile/DKSaveFile.html").removeEventListener("SetFile", DKSaveFile_OnEvent);
-    byId("DKSaveFileCancel").removeEventListener("click", DKSaveFile_OnEvent);
-    byId("DKSaveFileOK").removeEventListener("click", DKSaveFile_OnEvent);
-    byId("DKSaveFileUp").removeEventListener("click", DKSaveFile_OnEvent);
-    byId("DKSaveFilePath").removeEventListener("input", DKSaveFile_OnEvent);
-    DK_Close("DKFile/DKSaveFile.html");
-    DK_Close("DKFile/DKSaveFile.css");
+    byId("DKFile/DKSaveFile.html").removeEventListener("SetFile", DKSaveFile_onevent);
+    byId("DKSaveFileCancel").removeEventListener("click", DKSaveFile_onevent);
+    byId("DKSaveFileOK").removeEventListener("click", DKSaveFile_onevent);
+    byId("DKSaveFileUp").removeEventListener("click", DKSaveFile_onevent);
+    byId("DKSaveFilePath").removeEventListener("input", DKSaveFile_onevent);
+    dk.close("DKFile/DKSaveFile.html");
+    dk.close("DKFile/DKSaveFile.css");
 }
 
 //////////////////////////////////
@@ -174,7 +174,7 @@ function DKSaveFile_UpdatePath(path) {
             var value = aPath + "/" + files[d];
             element2.value = value;
             element2.style.whiteSpace = "nowrap";
-            element2.addEventListener("click", DKSaveFile_OnEvent);
+            element2.addEventListener("click", DKSaveFile_onevent);
             element2.style.paddingLeft = "17px";
             element2.innerHTML = files[d];
             element2.style.backgroundImage = "url(\"DKFile/folder.png\")";
@@ -192,7 +192,7 @@ function DKSaveFile_UpdatePath(path) {
             element3.style.paddingLeft = "17px";
             element3.style.backgroundRepeat = "no-repeat";
             element3.innerHTML = files[f];
-            element3.addEventListener("click", DKSaveFile_OnEvent);
+            element3.addEventListener("click", DKSaveFile_onevent);
 
             var extension = CPP_DKFile_GetExtention(files[f]);
             if ((extension === "png") || (extension === "jpeg") || (extension === "jpg") || (extension === "bmp") || (extension === "tiff") || (extension === "tif") || (extension === "gif") || (extension === "tga") || (extension === "ico")) {

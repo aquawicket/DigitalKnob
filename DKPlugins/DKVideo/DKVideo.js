@@ -1,8 +1,8 @@
 //BROWSER
 
-DK_Create("WEB/video-js/video-js.css");
-DK_Create("WEB/video-js/video.js");
-DK_Create("WEB/videojs-youtube-master/src/youtube.js");
+dk.create("WEB/video-js/video-js.css");
+dk.create("WEB/video-js/video.js");
+dk.create("WEB/videojs-youtube-master/src/youtube.js");
 var registered = 0;
 	
 ///////////////////////

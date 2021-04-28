@@ -3,16 +3,16 @@ var animation;
 ///////////////////////
 function Taskbar_Init()
 {
-	DK_Create("DKOS/Taskbar.html,DKOS/DKOS.html", function(){
-	//DK_Create("DKOS/Taskbar.html", function(){
-	DK_Create("DKOS/Clock.js", function(){
-	DK_Create("DKOS/Scale.js", function(){
+	dk.create("DKOS/Taskbar.html,DKOS/DKOS.html", function(){
+	//dk.create("DKOS/Taskbar.html", function(){
+	dk.create("DKOS/Clock.js", function(){
+	dk.create("DKOS/Scale.js", function(){
 		if(DK_GetBrowser() === "RML"){
-			DK_Create("DKDebug/BugReport.js", function(){});
+			dk.create("DKDebug/BugReport.js", function(){});
 				byId("DKOS/Taskbar.html").appendChild(byId("DKDebug/BugReport.html")); //reparent
 		}
-		byId("start").addEventListener("click", Taskbar_OnEvent);
-		byId("test_animate").addEventListener("click", Taskbar_OnEvent);
+		byId("start").addEventListener("click", Taskbar_onevent);
+		byId("test_animate").addEventListener("click", Taskbar_onevent);
 	});
 	});
 	});
@@ -21,19 +21,19 @@ function Taskbar_Init()
 //////////////////////
 function Taskbar_End()
 {
-	byId("start").removeEventListener("click", Taskbar_OnEvent);
-	byId("test_animate").removeEventListener("click", Taskbar_OnEvent);
-	DK_Close("DKOS/Taskbar.html");
-	DK_Close("DKOS/Scale.js");
-	DK_Close("DKOS/Clock.js");
-	DK_Close("DKDebug/BugReport.js");
+	byId("start").removeEventListener("click", Taskbar_onevent);
+	byId("test_animate").removeEventListener("click", Taskbar_onevent);
+	dk.close("DKOS/Taskbar.html");
+	dk.close("DKOS/Scale.js");
+	dk.close("DKOS/Clock.js");
+	dk.close("DKDebug/BugReport.js");
 }
 
 ///////////////////////////////
 function Taskbar_OnEvent(event)
 {
 	if(event.currentTarget.id === "start"){
-		DK_Create("DKOS/TaskbarMenu.js", function(){});
+		dk.create("DKOS/TaskbarMenu.js", function(){});
 	}
 	if(event.currentTarget.id === "test_animate"){
 		console.log("Taskbar_OnEvent(): animate");

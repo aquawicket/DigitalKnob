@@ -1,29 +1,29 @@
 ///////////////////////
 function RunMenu_Init()
 {
-	DK_Create("DKBuild/RunMenu.html");
-	document.addEventListener("mousedown", RunMenu_OnEvent);
-	byId("Build App").addEventListener("click", RunMenu_OnEvent);
-	byId("Rebuild App").addEventListener("click", RunMenu_OnEvent);
-	byId("Rebuild All").addEventListener("click", RunMenu_OnEvent);
-	byId("Copy Assets").addEventListener("click", RunMenu_OnEvent);
-	byId("Run App").addEventListener("click", RunMenu_OnEvent);
-	byId("Generate Docs").addEventListener("click", RunMenu_OnEvent);
-	byId("Export to Android Studio").addEventListener("click", RunMenu_OnEvent);
+	dk.create("DKBuild/RunMenu.html");
+	document.addEventListener("mousedown", RunMenu_onevent);
+	byId("Build App").addEventListener("click", RunMenu_onevent);
+	byId("Rebuild App").addEventListener("click", RunMenu_onevent);
+	byId("Rebuild All").addEventListener("click", RunMenu_onevent);
+	byId("Copy Assets").addEventListener("click", RunMenu_onevent);
+	byId("Run App").addEventListener("click", RunMenu_onevent);
+	byId("Generate Docs").addEventListener("click", RunMenu_onevent);
+	byId("Export to Android Studio").addEventListener("click", RunMenu_onevent);
 }
 
 //////////////////////
 function RunMenu_End()
 {
-	document.removeEventListener("mousedown", RunMenu_OnEvent);
-	byId("Build App").removeEventListener("click", RunMenu_OnEvent);
-	byId("Rebuild App").removeEventListener("click", RunMenu_OnEvent);
-	byId("Rebuild All").removeEventListener("click", RunMenu_OnEvent);
-	byId("Copy Assets").removeEventListener("click", RunMenu_OnEvent);
-	byId("Run App").removeEventListener("click", RunMenu_OnEvent);
-	byId("Generate Docs").removeEventListener("click", RunMenu_OnEvent);
-	byId("Export to Android Studio").removeEventListener("click", RunMenu_OnEvent);
-	DK_Close("DKBuild/RunMenu.html");
+	document.removeEventListener("mousedown", RunMenu_onevent);
+	byId("Build App").removeEventListener("click", RunMenu_onevent);
+	byId("Rebuild App").removeEventListener("click", RunMenu_onevent);
+	byId("Rebuild All").removeEventListener("click", RunMenu_onevent);
+	byId("Copy Assets").removeEventListener("click", RunMenu_onevent);
+	byId("Run App").removeEventListener("click", RunMenu_onevent);
+	byId("Generate Docs").removeEventListener("click", RunMenu_onevent);
+	byId("Export to Android Studio").removeEventListener("click", RunMenu_onevent);
+	dk.close("DKBuild/RunMenu.html");
 }
 
 ///////////////////////////////
@@ -134,7 +134,7 @@ function RunMenu_OnEvent(event)
 	
 	if(event.currentTarget.id === "Export to Android Studio"){
 		console.log("Export to Android Studio\n");
-		DK_Create("DKBuild/AndroidImport.js", function(){
+		dk.create("DKBuild/AndroidImport.js", function(){
 			AndroidImport_Import();
 		});
 	}
@@ -144,5 +144,5 @@ function RunMenu_OnEvent(event)
 			return;
 		}
 	}
-	DK_Close("DKBuild/RunMenu.js");
+	dk.close("DKBuild/RunMenu.js");
 }

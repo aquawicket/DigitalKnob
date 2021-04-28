@@ -19,18 +19,18 @@ function IconMaker_End()
 //////////////////////////////////
 function IconMaker_Create(AppPath)
 {
-	CPP_DK_Create("DKArchiveJS");
+	CPP_dk.create("DKArchiveJS");
 	IconMaker_ValidateImageMagick();
 	
 	//Create Windows Icon
-	CPP_DKFile_MkDir(AppPath+"/icons/windows");
+	CPP_dk.file.makeDir(AppPath+"/icons/windows");
 	CPP_DK_Execute(IMAGEMAGICK_CONVERT+" "+AppPath+"/icons/icon.png -define icon:auto-resize=256,128,64,48,32,16 "+AppPath+"/icons/windows/icon.ico");
 	CPP_DK_Execute(IMAGEMAGICK_CONVERT+" "+AppPath+"/icons/icon.png -define icon:auto-resize=16 "+AppPath+"/assets/favicon.ico");
 	
 	//Create Mac Icons
 	if(CPP_DK_GetOS() === "Mac"){
-		CPP_DKFile_MkDir(AppPath+"/icons/mac");
-		CPP_DKFile_MkDir(AppPath+"/icons/mac/icons.iconset");
+		CPP_dk.file.makeDir(AppPath+"/icons/mac");
+		CPP_dk.file.makeDir(AppPath+"/icons/mac/icons.iconset");
 		CPP_DK_Execute("sips -z 16 16 "+AppPath+"/icons/icon.png --out "+AppPath+"/icons/mac/icons.iconset/icon_16x16.png");
 		CPP_DK_Execute("sips -z 32 32 "+AppPath+"/icons/icon.png --out "+AppPath+"/icons/mac/icons.iconset/icon_16x16@2x.png");
 		CPP_DK_Execute("sips -z 32 32 "+AppPath+"/icons/icon.png --out "+AppPath+"/icons/mac/icons.iconset/icon_32x32.png");
@@ -45,26 +45,26 @@ function IconMaker_Create(AppPath)
 	}
 	
 	//Create Linux Icons
-	//CPP_DKFile_MkDir(AppPath+"/icons/linux");
+	//CPP_dk.file.makeDir(AppPath+"/icons/linux");
 	
 	//Create Android Icons
-	CPP_DKFile_MkDir(AppPath+"/icons/android");
-	CPP_DKFile_MkDir(AppPath+"/icons/android/drawable-hdpi");
+	CPP_dk.file.makeDir(AppPath+"/icons/android");
+	CPP_dk.file.makeDir(AppPath+"/icons/android/drawable-hdpi");
 	CPP_DK_Execute(IMAGEMAGICK_CONVERT+" "+AppPath+"/icons/icon.png -resize 72x72 "+AppPath+"/icons/android/drawable-hdpi/icon.png");
-	CPP_DKFile_MkDir(AppPath+"/icons/android/drawable-ldpi");
+	CPP_dk.file.makeDir(AppPath+"/icons/android/drawable-ldpi");
 	CPP_DK_Execute(IMAGEMAGICK_CONVERT+" "+AppPath+"/icons/icon.png -resize 36x36 "+AppPath+"/icons/android/drawable-ldpi/icon.png");
-	CPP_DKFile_MkDir(AppPath+"/icons/android/drawable-mdpi");
+	CPP_dk.file.makeDir(AppPath+"/icons/android/drawable-mdpi");
 	CPP_DK_Execute(IMAGEMAGICK_CONVERT+" "+AppPath+"/icons/icon.png -resize 48x48 "+AppPath+"/icons/android/drawable-mdpi/icon.png");
-	CPP_DKFile_MkDir(AppPath+"/icons/android/drawable-xhdpi");
+	CPP_dk.file.makeDir(AppPath+"/icons/android/drawable-xhdpi");
 	CPP_DK_Execute(IMAGEMAGICK_CONVERT+" "+AppPath+"/icons/icon.png -resize 96x96 "+AppPath+"/icons/android/drawable-xhdpi/icon.png");
-	CPP_DKFile_MkDir(AppPath+"/icons/android/drawable-xxhdpi");
+	CPP_dk.file.makeDir(AppPath+"/icons/android/drawable-xxhdpi");
 	CPP_DK_Execute(IMAGEMAGICK_CONVERT+" "+AppPath+"/icons/icon.png -resize 144x144 "+AppPath+"/icons/android/drawable-xxhdpi/icon.png");
 	
 	//Create iOS Icons
-	//CPP_DKFile_MkDir(AppPath+"/icons/ios");
+	//CPP_dk.file.makeDir(AppPath+"/icons/ios");
 	
 	//Create iOS 7 Icons
-	//CPP_DKFile_MkDir(AppPath+"/icons/ios7");
+	//CPP_dk.file.makeDir(AppPath+"/icons/ios7");
 }
 
 ////////////////////////////////////////
@@ -82,7 +82,7 @@ function IconMaker_ValidateImageMagick()
 ///////////////////////////////////////
 function IconMaker_InstallImageMagick()
 {
-	CPP_DKFile_MkDir("C:/digitalknob/DK/Download");
+	CPP_dk.file.makeDir("C:/digitalknob/DK/Download");
 	var datapath = "C:/digitalknob/DK/Download/"+IMAGEMAGICK_VERSION+".zip";
 	
 	CPP_DKCurl_Download(IMAGEMAGICK_DOWNLOAD, datapath);

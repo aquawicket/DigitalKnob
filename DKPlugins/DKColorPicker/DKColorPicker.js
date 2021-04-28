@@ -7,25 +7,25 @@ var event_id;
 function DKColorPicker_Init()
 {
 	console.log("DKColorPicker_Init()");
-	DK_Create("DKColorPicker/DKColorPicker.css");
-	DK_Create("DKColorPicker/DKColorPicker.html");
-	byId("DKColorPicker/DKColorPicker.html").addEventListener("GetColor", DKColorPicker_OnEvent);
-	byId("DKColorPickerBar").addEventListener("mousedown", DKColorPicker_OnEvent);
-	byId("DKColorHover").addEventListener("mousedown", DKColorPicker_OnEvent);
-	byId("DKColorPickerOK").addEventListener("click", DKColorPicker_OnEvent);
+	dk.create("DKColorPicker/DKColorPicker.css");
+	dk.create("DKColorPicker/DKColorPicker.html");
+	byId("DKColorPicker/DKColorPicker.html").addEventListener("GetColor", DKColorPicker_onevent);
+	byId("DKColorPickerBar").addEventListener("mousedown", DKColorPicker_onevent);
+	byId("DKColorHover").addEventListener("mousedown", DKColorPicker_onevent);
+	byId("DKColorPickerOK").addEventListener("click", DKColorPicker_onevent);
 }
 
 ////////////////////////////
 function DKColorPicker_End()
 {
-	byId("DKColorPicker/DKColorPicker.html").removeEventListener("GetColor", DKColorPicker_OnEvent);
-	byId("DKColorPickerBar").removeEventListener("mousedown", DKColorPicker_OnEvent);
-	byId("DKColorHover").removeEventListener("mousedown", DKColorPicker_OnEvent);
-	byId("DKColorPickerOK").removeEventListener("click", DKColorPicker_OnEvent);
+	byId("DKColorPicker/DKColorPicker.html").removeEventListener("GetColor", DKColorPicker_onevent);
+	byId("DKColorPickerBar").removeEventListener("mousedown", DKColorPicker_onevent);
+	byId("DKColorHover").removeEventListener("mousedown", DKColorPicker_onevent);
+	byId("DKColorPickerOK").removeEventListener("click", DKColorPicker_onevent);
 	
 	//FIXME - Crash
-	//DK_Close("DKColorPicker/DKColorPicker.html");
-	//DK_Close("DKColorPicker/DKColorPicker.css");
+	//dk.close("DKColorPicker/DKColorPicker.html");
+	//dk.close("DKColorPicker/DKColorPicker.css");
 }
 
 /////////////////////////////////////

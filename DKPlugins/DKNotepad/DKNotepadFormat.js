@@ -1,19 +1,19 @@
 /////////////////////////////
 function DKNotepadFormat_Init()
 {
-	DK_Create("DKNotepad/DKNotepadFormat.html,DKNotepad/DKNotepad.html");
-	document.addEventListener("mousedown", DKNotepadFormat_OnEvent);
-	byId("DKNotepadFormat_WordWrap").addEventListener("click", DKNotepadFormat_OnEvent);
-	byId("DKNotepadFormat_Font").addEventListener("click", DKNotepadFormat_OnEvent);
+	dk.create("DKNotepad/DKNotepadFormat.html,DKNotepad/DKNotepad.html");
+	document.addEventListener("mousedown", DKNotepadFormat_onevent);
+	byId("DKNotepadFormat_WordWrap").addEventListener("click", DKNotepadFormat_onevent);
+	byId("DKNotepadFormat_Font").addEventListener("click", DKNotepadFormat_onevent);
 }
 
 //////////////////////////////
 function DKNotepadFormat_End()
 {
-	document.removeEventListener("mousedown", DKNotepadFormat_OnEvent);
-	byId("DKNotepadFormat_WordWrap").removeEventListener("click", DKNotepadFormat_OnEvent);
-	byId("DKNotepadFormat_Font").removeEventListener("click", DKNotepadFormat_OnEvent);
-	DK_Close("DKNotepad/DKNotepadFormat.html");
+	document.removeEventListener("mousedown", DKNotepadFormat_onevent);
+	byId("DKNotepadFormat_WordWrap").removeEventListener("click", DKNotepadFormat_onevent);
+	byId("DKNotepadFormat_Font").removeEventListener("click", DKNotepadFormat_onevent);
+	dk.close("DKNotepad/DKNotepadFormat.html");
 }
 
 ///////////////////////////////////////
@@ -31,7 +31,7 @@ function DKNotepadFormat_OnEvent(event)
 			return;
 		}
 	}
-	DK_Close("DKNotepad/DKNotepadFormat.js");
+	dk.close("DKNotepad/DKNotepadFormat.js");
 }
 
 ///////////////////////////////////

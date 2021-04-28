@@ -104,7 +104,7 @@ function DKGit_GitUpdate()
 	}
 	
 	if(CPP_DK_Available("DKAudio")){
-		DK_Create("DKAudio");
+		dk.create("DKAudio");
 	}
 	if(CPP_DK_Valid("DKAudioJS,DKAudioJS0")){
 		DKAudio_PlaySound("DKBuild/ding.wav");
@@ -150,7 +150,7 @@ function DKGit_GitCommit()
 	
 	/*
 	if(CPP_DK_Available("DKAudio")){
-		DK_Create("DKAudio");
+		dk.create("DKAudio");
 	}
 	if(CPP_DK_Valid("DKAudioJS,DKAudioJS0")){
 		DKAudio_PlaySound("DKBuild/ding.wav");

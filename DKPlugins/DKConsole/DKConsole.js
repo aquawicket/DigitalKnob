@@ -3,23 +3,23 @@ var DKConsole_color = "black";
 /////////////////////////
 function DKConsole_Init()
 {
-	DK_Create("DKConsole/DKConsole.css");
-	DK_Create("DKConsole/DKConsole.html");
-	window.addEventListener("color", DKConsole_OnEvent);
-	window.addEventListener("notify", DKConsole_OnEvent);
-	byId("DKConsole_Clear").addEventListener("click", DKConsole_OnEvent);
-	byId("DKConsole_Close").addEventListener("click", DKConsole_OnEvent);
+	dk.create("DKConsole/DKConsole.css");
+	dk.create("DKConsole/DKConsole.html");
+	window.addEventListener("color", DKConsole_onevent);
+	window.addEventListener("notify", DKConsole_onevent);
+	byId("DKConsole_Clear").addEventListener("click", DKConsole_onevent);
+	byId("DKConsole_Close").addEventListener("click", DKConsole_onevent);
 }
 
 ////////////////////////
 function DKConsole_End()
 {
-	window.removeEventListener("color", DKConsole_OnEvent);
-	window.removeEventListener("notify", DKConsole_OnEvent);
-	byId("DKConsole_Clear").removeEventListener("click", DKConsole_OnEvent);
-	byId("DKConsole_Close").removeEventListener("click", DKConsole_OnEvent);
-	DK_Close("DKConsole/DKConsole.html");
-	DK_Close("DKConsole/DKConsole.css");
+	window.removeEventListener("color", DKConsole_onevent);
+	window.removeEventListener("notify", DKConsole_onevent);
+	byId("DKConsole_Clear").removeEventListener("click", DKConsole_onevent);
+	byId("DKConsole_Close").removeEventListener("click", DKConsole_onevent);
+	dk.close("DKConsole/DKConsole.html");
+	dk.close("DKConsole/DKConsole.css");
 }
 
 /////////////////////////////////
@@ -30,7 +30,7 @@ function DKConsole_OnEvent(event)
 		byId("DKConsole_Content").innerHTML = ""; //clear
 	}
 	if(event.currentTarget.id === "DKConsole_Close"){
-		DK_Close("DKConsole/DKConsole.js");
+		dk.close("DKConsole/DKConsole.js");
 	}
 	
 	if(event.type === "color"){

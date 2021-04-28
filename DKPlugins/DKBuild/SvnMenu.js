@@ -1,21 +1,21 @@
 ///////////////////////
 function SvnMenu_Init()
 {
-	DK_Create("DKBuild/SvnMenu.html");
+	dk.create("DKBuild/SvnMenu.html");
 	byId("SvnMenu.html").style.top = DKWindow_GetMouseY()+"px";
 	byId("SvnMenu.html").style.left = DKWindow_GetMouseX()+"px";
-	document.addEventListener("mousedown", SvnMenu_OnEvent);
-	byId("Svn Update").addEventListener("click", SvnMenu_OnEvent);
-	byId("Svn Commit").addEventListener("click", SvnMenu_OnEvent);
+	document.addEventListener("mousedown", SvnMenu_onevent);
+	byId("Svn Update").addEventListener("click", SvnMenu_onevent);
+	byId("Svn Commit").addEventListener("click", SvnMenu_onevent);
 }
 
 //////////////////////
 function SvnMenu_End()
 {
-	document.addEventListener("mousedown", SvnMenu_OnEvent);
-	byId("Svn Update").addEventListener("click", SvnMenu_OnEvent);
-	byId("Svn Commit").addEventListener("click", SvnMenu_OnEvent);
-	DK_Close("DKBuild/SvnMenu.html");
+	document.addEventListener("mousedown", SvnMenu_onevent);
+	byId("Svn Update").addEventListener("click", SvnMenu_onevent);
+	byId("Svn Commit").addEventListener("click", SvnMenu_onevent);
+	dk.close("DKBuild/SvnMenu.html");
 }
 
 ///////////////////////////////
@@ -34,5 +34,5 @@ function SvnMenu_OnEvent(event)
 			return;
 		}
 	}
-	DK_Close("DKBuild/SvnMenu.js");
+	dk.close("DKBuild/SvnMenu.js");
 }

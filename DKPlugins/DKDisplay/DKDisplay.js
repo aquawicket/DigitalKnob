@@ -1,19 +1,19 @@
 /////////////////////////
 function DKDisplay_Init()
 {
-	DK_Create("DKDisplay/DKDisplay.html");
-	byId("DKDisplay_Button").addEventListener("click", DKDisplay_OnEvent);
-	//window.addEventListener("second", DKDisplay_OnEvent);
-	//byId("DKDisplay/DKDisplay.html").addEventListener("click", DKDisplay_OnEvent);
+	dk.create("DKDisplay/DKDisplay.html");
+	byId("DKDisplay_Button").addEventListener("click", DKDisplay_onevent);
+	//window.addEventListener("second", DKDisplay_onevent);
+	//byId("DKDisplay/DKDisplay.html").addEventListener("click", DKDisplay_onevent);
 }
 
 ////////////////////////
 function DKDisplay_End()
 {
-	byId("DKDisplay_Button").removeEventListener("click", DKDisplay_OnEvent);
-	//window.removeEventListener("second", DKDisplay_OnEvent);
-	//byId("DKDisplay/DKDisplay.html").removeEventListener("click", DKDisplay_OnEvent);
-	DK_Close("DKDisplay/DKDisplay.html");
+	byId("DKDisplay_Button").removeEventListener("click", DKDisplay_onevent);
+	//window.removeEventListener("second", DKDisplay_onevent);
+	//byId("DKDisplay/DKDisplay.html").removeEventListener("click", DKDisplay_onevent);
+	dk.close("DKDisplay/DKDisplay.html");
 }
 
 /////////////////////////////////

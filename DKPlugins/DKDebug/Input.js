@@ -1,15 +1,15 @@
 /////////////////////
 function Input_Init()
 {
-	DK_Create("DKDebug/Input.html");
-	byId("Input_Text").addEventListener("keydown", Input_OnEvent);
+	dk.create("DKDebug/Input.html");
+	byId("Input_Text").addEventListener("keydown", Input_onevent);
 }
 
 ////////////////////
 function Input_End()
 {
-	byId("Input_Text").removeEventListener("keydown", Input_OnEvent);
-	DK_Close("DKDebug/Input.html");
+	byId("Input_Text").removeEventListener("keydown", Input_onevent);
+	dk.close("DKDebug/Input.html");
 }
 
 /////////////////////////////

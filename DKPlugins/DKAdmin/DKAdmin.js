@@ -1,8 +1,8 @@
 ///////////////////////
 function DKAdmin_Init()
 {
-	DK_Create("DKAdmin/DKAdmin.html");
-	byId("AdminBadge").addEventListener("click", DKAdmin_OnEvent);
+	dk.create("DKAdmin/DKAdmin.html");
+	byId("AdminBadge").addEventListener("click", DKAdmin_onevent);
 	
 	//console.log("DK_GetBrowser() = "+DK_GetBrowser()+"\n");
 	if(DK_GetBrowser() === "RML"){
@@ -17,8 +17,8 @@ function DKAdmin_Init()
 //////////////////////
 function DKAdmin_End()
 {
-	byId("AdminBadge").removeEventListener("click", DKAdmin_OnEvent);
-	DK_Close("DKAdmin/DKAdmin.html");
+	byId("AdminBadge").removeEventListener("click", DKAdmin_onevent);
+	dk.close("DKAdmin/DKAdmin.html");
 }
 
 ///////////////////////////////
@@ -27,6 +27,6 @@ function DKAdmin_OnEvent(event)
 	console.log("DKAdmin_OnEvent("+event.currentTarget.id+","+event.type+","+event.value+")\n");
 	
 	if(event.currentTarget.id === "AdminBadge"){
-		DK_Create("DKAdmin/DKAdminMenu.js", function(){});
+		dk.create("DKAdmin/DKAdminMenu.js", function(){});
 	}
 }

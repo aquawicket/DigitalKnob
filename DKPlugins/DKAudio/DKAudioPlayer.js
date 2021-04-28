@@ -3,27 +3,27 @@ var DKAudioPlayer_file = "";
 /////////////////////////////
 function DKAudioPlayer_Init()
 {
-	DK_Create("DKAudio");
-	DK_Create("DKAudio/DKAudioPlayer.html");
-	window.addEventListener("timeupdate", DKAudioPlayer_OnEvent);
-	window.addEventListener("ended", DKAudioPlayer_OnEvent);
-	byId("DKAudioPlayer_playpause").addEventListener("click", DKAudioPlayer_OnEvent);
-	byId("DKAudioPlayer_position").addEventListener("input", DKAudioPlayer_OnEvent);
-	byId("DKAudioPlayer_speaker").addEventListener("click", DKAudioPlayer_OnEvent);
-	byId("DKAudioPlayer_volume").addEventListener("input", DKAudioPlayer_OnEvent);
+	dk.create("DKAudio");
+	dk.create("DKAudio/DKAudioPlayer.html");
+	window.addEventListener("timeupdate", DKAudioPlayer_onevent);
+	window.addEventListener("ended", DKAudioPlayer_onevent);
+	byId("DKAudioPlayer_playpause").addEventListener("click", DKAudioPlayer_onevent);
+	byId("DKAudioPlayer_position").addEventListener("input", DKAudioPlayer_onevent);
+	byId("DKAudioPlayer_speaker").addEventListener("click", DKAudioPlayer_onevent);
+	byId("DKAudioPlayer_volume").addEventListener("input", DKAudioPlayer_onevent);
 	byId("DKAudioPlayer_volume").value = "128";
 }
 
 ////////////////////////////
 function DKAudioPlayer_End()
 {
-	window.removeEventListener("timeupdate", DKAudioPlayer_OnEvent);
-	window.removeEventListener("ended", DKAudioPlayer_OnEvent);
-	byId("DKAudioPlayer_playpause").removeEventListener("click", DKAudioPlayer_OnEvent);
-	byId("DKAudioPlayer_position").removeEventListener("input", DKAudioPlayer_OnEvent);
-	byId("DKAudioPlayer_speaker").removeEventListener("click", DKAudioPlayer_OnEvent);
-	byId("DKAudioPlayer_volume").removeEventListener("input", DKAudioPlayer_OnEvent);
-	DK_Close("DKAudio/DKAudioPlayer.html");
+	window.removeEventListener("timeupdate", DKAudioPlayer_onevent);
+	window.removeEventListener("ended", DKAudioPlayer_onevent);
+	byId("DKAudioPlayer_playpause").removeEventListener("click", DKAudioPlayer_onevent);
+	byId("DKAudioPlayer_position").removeEventListener("input", DKAudioPlayer_onevent);
+	byId("DKAudioPlayer_speaker").removeEventListener("click", DKAudioPlayer_onevent);
+	byId("DKAudioPlayer_volume").removeEventListener("input", DKAudioPlayer_onevent);
+	dk.close("DKAudio/DKAudioPlayer.html");
 }
 
 /////////////////////////////////////

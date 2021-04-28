@@ -1,19 +1,19 @@
 /////////////////////////////
 function DKWebviewTest_Init()
 {
-	DK_Create("DKWebview/DKWebviewTest.html");
-	window.addEventListener("mousedown", DKWebviewTest_OnEvent);
-	window.addEventListener("keydown", DKWebviewTest_OnEvent);
-	byId("DKWebviewTest.html").addEventListener("mousedown", DKWebviewTest_OnEvent);
+	dk.create("DKWebview/DKWebviewTest.html");
+	window.addEventListener("mousedown", DKWebviewTest_onevent);
+	window.addEventListener("keydown", DKWebviewTest_onevent);
+	byId("DKWebviewTest.html").addEventListener("mousedown", DKWebviewTest_onevent);
 }
 
 ////////////////////////////
 function DKWebviewTest_End()
 {
-	window.addEventListener("mousedown", DKWebviewTest_OnEvent);
-	window.addEventListener("keydown", DKWebviewTest_OnEvent);
-	byId("DKWebviewTest.html").addEventListener("mousedown", DKWebviewTest_OnEvent);
-	DK_Close("DKWebviewTest.html");
+	window.addEventListener("mousedown", DKWebviewTest_onevent);
+	window.addEventListener("keydown", DKWebviewTest_onevent);
+	byId("DKWebviewTest.html").addEventListener("mousedown", DKWebviewTest_onevent);
+	dk.close("DKWebviewTest.html");
 }
 
 /////////////////////////////////////

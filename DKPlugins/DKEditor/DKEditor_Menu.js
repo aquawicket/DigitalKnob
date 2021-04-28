@@ -1,31 +1,31 @@
 /////////////////////////////
 function DKEditor_Menu_Init()
 {
-	DK_Create("DKEditor/DKEditor_Menu.html");
-	document.addEventListener("mousedown", DKEditor_Menu_OnEvent);
-	byId("DKEditor_Menu_Refresh").addEventListener("click", DKEditor_Menu_OnEvent);
-	byId("DKEditor_Menu_Reload").addEventListener("click", DKEditor_Menu_OnEvent);
-	byId("DKEditor_Menu_Notes").addEventListener("click", DKEditor_Menu_OnEvent);
-	byId("DKEditor_Menu_Assets").addEventListener("click", DKEditor_Menu_OnEvent);
-	byId("DKEditor_Menu_TestBrowserApp").addEventListener("click", DKEditor_Menu_OnEvent);
-	byId("DKEditor_Menu_DevTools").addEventListener("click", DKEditor_Menu_OnEvent);
-	byId("DKEditor_Menu_ClearConsole").addEventListener("click", DKEditor_Menu_OnEvent);
-	byId("DKEditor_Menu_ShowConsole").addEventListener("click", DKEditor_Menu_OnEvent);
-	byId("DKEditor_Menu_HideConsole").addEventListener("click", DKEditor_Menu_OnEvent);
-	byId("DKEditor_Menu_PushFiles").addEventListener("click", DKEditor_Menu_OnEvent);
-	byId("DKEditor_Menu_GitUpdate").addEventListener("click", DKEditor_Menu_OnEvent);
-	byId("DKEditor_Menu_GitCommit").addEventListener("click", DKEditor_Menu_OnEvent);
-	byId("DKEditor_Menu_NewFrame").addEventListener("click", DKEditor_Menu_OnEvent);
-	byId("DKEditor_Menu_Builder").addEventListener("click", DKEditor_Menu_OnEvent);
-	byId("DKEditor_Menu_Info").addEventListener("click", DKEditor_Menu_OnEvent);
-	byId("DKEditor_Menu_RefreshIcons").addEventListener("click", DKEditor_Menu_OnEvent);
-	byId("DKEditor_Menu_Report").addEventListener("click", DKEditor_Menu_OnEvent);
-	byId("DKEditor_Menu_Web").addEventListener("click", DKEditor_Menu_OnEvent);
-	byId("DKEditor_Menu_Web").addEventListener("click", DKEditor_Menu_OnEvent);
-	byId("DKEditor_Menu_Command_Input").addEventListener("change", DKEditor_Menu_OnEvent);
+	dk.create("DKEditor/DKEditor_Menu.html");
+	document.addEventListener("mousedown", DKEditor_Menu_onevent);
+	byId("DKEditor_Menu_Refresh").addEventListener("click", DKEditor_Menu_onevent);
+	byId("DKEditor_Menu_Reload").addEventListener("click", DKEditor_Menu_onevent);
+	byId("DKEditor_Menu_Notes").addEventListener("click", DKEditor_Menu_onevent);
+	byId("DKEditor_Menu_Assets").addEventListener("click", DKEditor_Menu_onevent);
+	byId("DKEditor_Menu_TestBrowserApp").addEventListener("click", DKEditor_Menu_onevent);
+	byId("DKEditor_Menu_DevTools").addEventListener("click", DKEditor_Menu_onevent);
+	byId("DKEditor_Menu_ClearConsole").addEventListener("click", DKEditor_Menu_onevent);
+	byId("DKEditor_Menu_ShowConsole").addEventListener("click", DKEditor_Menu_onevent);
+	byId("DKEditor_Menu_HideConsole").addEventListener("click", DKEditor_Menu_onevent);
+	byId("DKEditor_Menu_PushFiles").addEventListener("click", DKEditor_Menu_onevent);
+	byId("DKEditor_Menu_GitUpdate").addEventListener("click", DKEditor_Menu_onevent);
+	byId("DKEditor_Menu_GitCommit").addEventListener("click", DKEditor_Menu_onevent);
+	byId("DKEditor_Menu_NewFrame").addEventListener("click", DKEditor_Menu_onevent);
+	byId("DKEditor_Menu_Builder").addEventListener("click", DKEditor_Menu_onevent);
+	byId("DKEditor_Menu_Info").addEventListener("click", DKEditor_Menu_onevent);
+	byId("DKEditor_Menu_RefreshIcons").addEventListener("click", DKEditor_Menu_onevent);
+	byId("DKEditor_Menu_Report").addEventListener("click", DKEditor_Menu_onevent);
+	byId("DKEditor_Menu_Web").addEventListener("click", DKEditor_Menu_onevent);
+	byId("DKEditor_Menu_Web").addEventListener("click", DKEditor_Menu_onevent);
+	byId("DKEditor_Menu_Command_Input").addEventListener("change", DKEditor_Menu_onevent);
 	
 	/*
-	DK_Create("DKTooltip/DKTooltip.js", function(){});
+	dk.create("DKTooltip/DKTooltip.js", function(){});
 	DKTooltip_Add("DKEditor_Menu_Notes", "notes...");
 	DKTooltip_Add("DKEditor_Menu_Reload", "refresh the page");
 	DKTooltip_Add("DKEditor_Menu_Assets", "view DKTemplate asset files");
@@ -36,28 +36,28 @@ function DKEditor_Menu_Init()
 ////////////////////////////
 function DKEditor_Menu_End()
 {
-	document.removeEventListener("mousedown", DKEditor_Menu_OnEvent);
-	byId("DKEditor_Menu_Refresh").removeEventListener("click", DKEditor_Menu_OnEvent);
-	byId("DKEditor_Menu_Reload").removeEventListener("click", DKEditor_Menu_OnEvent);
-	byId("DKEditor_Menu_Notes").removeEventListener("click", DKEditor_Menu_OnEvent);
-	byId("DKEditor_Menu_Assets").removeEventListener("click", DKEditor_Menu_OnEvent);
-	byId("DKEditor_Menu_TestBrowserApp").removeEventListener("click", DKEditor_Menu_OnEvent);
-	byId("DKEditor_Menu_DevTools").removeEventListener("click", DKEditor_Menu_OnEvent);
-	byId("DKEditor_Menu_ClearConsole").removeEventListener("click", DKEditor_Menu_OnEvent);
-	byId("DKEditor_Menu_ShowConsole").removeEventListener("click", DKEditor_Menu_OnEvent);
-	byId("DKEditor_Menu_HideConsole").removeEventListener("click", DKEditor_Menu_OnEvent);
-	byId("DKEditor_Menu_PushFiles").removeEventListener("click", DKEditor_Menu_OnEvent);
-	byId("DKEditor_Menu_GitUpdate").removeEventListener("click", DKEditor_Menu_OnEvent);
-	byId("DKEditor_Menu_GitCommit").removeEventListener("click", DKEditor_Menu_OnEvent);
-	byId("DKEditor_Menu_NewFrame").removeEventListener("click", DKEditor_Menu_OnEvent);
-	byId("DKEditor_Menu_Builder").removeEventListener("click", DKEditor_Menu_OnEvent);
-	byId("DKEditor_Menu_Info").removeEventListener("click", DKEditor_Menu_OnEvent);
-	byId("DKEditor_Menu_RefreshIcons").removeEventListener("click", DKEditor_Menu_OnEvent);
-	byId("DKEditor_Menu_Report").removeEventListener("click", DKEditor_Menu_OnEvent);
-	byId("DKEditor_Menu_Web").removeEventListener("click", DKEditor_Menu_OnEvent);
-	byId("DKEditor_Menu_Web").removeEventListener("click", DKEditor_Menu_OnEvent);
-	byId("DKEditor_Menu_Command_Input").removeEventListener("change", DKEditor_Menu_OnEvent);
-	DK_Close("DKEditor/DKEditor_Menu.html");
+	document.removeEventListener("mousedown", DKEditor_Menu_onevent);
+	byId("DKEditor_Menu_Refresh").removeEventListener("click", DKEditor_Menu_onevent);
+	byId("DKEditor_Menu_Reload").removeEventListener("click", DKEditor_Menu_onevent);
+	byId("DKEditor_Menu_Notes").removeEventListener("click", DKEditor_Menu_onevent);
+	byId("DKEditor_Menu_Assets").removeEventListener("click", DKEditor_Menu_onevent);
+	byId("DKEditor_Menu_TestBrowserApp").removeEventListener("click", DKEditor_Menu_onevent);
+	byId("DKEditor_Menu_DevTools").removeEventListener("click", DKEditor_Menu_onevent);
+	byId("DKEditor_Menu_ClearConsole").removeEventListener("click", DKEditor_Menu_onevent);
+	byId("DKEditor_Menu_ShowConsole").removeEventListener("click", DKEditor_Menu_onevent);
+	byId("DKEditor_Menu_HideConsole").removeEventListener("click", DKEditor_Menu_onevent);
+	byId("DKEditor_Menu_PushFiles").removeEventListener("click", DKEditor_Menu_onevent);
+	byId("DKEditor_Menu_GitUpdate").removeEventListener("click", DKEditor_Menu_onevent);
+	byId("DKEditor_Menu_GitCommit").removeEventListener("click", DKEditor_Menu_onevent);
+	byId("DKEditor_Menu_NewFrame").removeEventListener("click", DKEditor_Menu_onevent);
+	byId("DKEditor_Menu_Builder").removeEventListener("click", DKEditor_Menu_onevent);
+	byId("DKEditor_Menu_Info").removeEventListener("click", DKEditor_Menu_onevent);
+	byId("DKEditor_Menu_RefreshIcons").removeEventListener("click", DKEditor_Menu_onevent);
+	byId("DKEditor_Menu_Report").removeEventListener("click", DKEditor_Menu_onevent);
+	byId("DKEditor_Menu_Web").removeEventListener("click", DKEditor_Menu_onevent);
+	byId("DKEditor_Menu_Web").removeEventListener("click", DKEditor_Menu_onevent);
+	byId("DKEditor_Menu_Command_Input").removeEventListener("change", DKEditor_Menu_onevent);
+	dk.close("DKEditor/DKEditor_Menu.html");
 }
 
 /////////////////////////////////////
@@ -75,14 +75,14 @@ function DKEditor_Menu_OnEvent(event)
 		DKDebug_Refresh();
 	}
 	if(event.currentTarget.id === "DKEditor_Menu_Notes"){
-		DK_Create("DKNotepad/DKNotepad.js", function(rval){
+		dk.create("DKNotepad/DKNotepad.js", function(rval){
 			if(!rval){ return; }
 			DKFrame_Html("DKNotepad/DKNotepad.html");
 			DKNotepad_Open(DKAssets_LocalAssets()+"/notes.txt");
 		});
 	}
 	if(event.currentTarget.id === "DKEditor_Menu_Assets"){
-		DK_Create("DKFile/DKSolution.js", function(rval){
+		dk.create("DKFile/DKSolution.js", function(rval){
 			if(!rval){ return; }
 			DKFrame_Html("DKFile/DKSolution.html");
 			DKFrame_SetTitle("DKFile/DKSolution.html", "File Explorer");
@@ -90,7 +90,7 @@ function DKEditor_Menu_OnEvent(event)
 		});
 	}
 	if(event.currentTarget.id === "DKEditor_Menu_TestBrowserApp"){
-		DK_Create("DKEditor/DKEditor_BrowserMenu.js", function(){
+		dk.create("DKEditor/DKEditor_BrowserMenu.js", function(){
 			DKMenu_ValidatePosition("DKEditor/DKEditor_BrowserMenu.html");
 		});
 		return;
@@ -119,7 +119,7 @@ function DKEditor_Menu_OnEvent(event)
 		DK_HideConsole();
 	}
 	if(event.currentTarget.id === "DKEditor_Menu_NewFrame"){
-		DK_Create("DKGui/DKMessageBox.js", function(rval){
+		dk.create("DKGui/DKMessageBox.js", function(rval){
 			if(!rval){ return; }
 			DKFrame_Html("DKGui/DKMessageBox.html");
 			DKMessageBox_GetValue("Enter name", function(rval){
@@ -130,7 +130,7 @@ function DKEditor_Menu_OnEvent(event)
 		});
 	}
 	if(event.currentTarget.id === "DKEditor_Menu_Builder"){
-		DK_Create("DKBuild/DKBuildGUI.js", function(rval){
+		dk.create("DKBuild/DKBuildGUI.js", function(rval){
 			if(!rval){ return; }
 			DKFrame_Html("DKBuild/DKBuildGUI.html");
 		});
@@ -142,12 +142,12 @@ function DKEditor_Menu_OnEvent(event)
 		DKDebug_PushDKFiles();
 	}
 	if(event.currentTarget.id === "DKEditor_Menu_GitUpdate"){
-		DK_Create("DKBuild/DKBuild.js", function(){
+		dk.create("DKBuild/DKBuild.js", function(){
 			DKBuild_GitUpdate();
 		});
 	}
 	if(event.currentTarget.id === "DKEditor_Menu_GitCommit"){
-		DK_Create("DKBuild/DKBuild.js", function(){
+		dk.create("DKBuild/DKBuild.js", function(){
 			DKBuild_GitCommit();
 		});
 	}
@@ -160,7 +160,7 @@ function DKEditor_Menu_OnEvent(event)
 		//NOTE: For Windows 10, use: "ie4uinit.exe -show"
 	}
 	if(event.currentTarget.id === "DKEditor_Menu_Report"){
-		DK_Create("DKDebug/SendBugReport.js", function(){
+		dk.create("DKDebug/SendBugReport.js", function(){
 			DKFrame_Html("DKDebug/SendBugReport.html");
 		});
 	}
@@ -188,5 +188,5 @@ function DKEditor_Menu_OnEvent(event)
 		}
 	}
 	
-	DK_Close("DKEditor/DKEditor_Menu.js");
+	dk.close("DKEditor/DKEditor_Menu.js");
 }

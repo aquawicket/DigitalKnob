@@ -1,13 +1,13 @@
 /////////////////////////
 function DKLoading_Init()
 {
-	DK_Create("DKLoading/DKLoading.html");
+	dk.create("DKLoading/DKLoading.html");
 }
 
 ////////////////////////
 function DKLoading_End()
 {
-	DK_Close("DKLoading/DKLoading.html");
+	dk.close("DKLoading/DKLoading.html");
 }
 
 /////////////////////////////////

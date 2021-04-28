@@ -2,7 +2,7 @@
 /////////////////////////
 function DKFpsTest_Init()
 {
-	DK_Create("DKFpsTest/DKFpsTest.html", function(){});
+	dk.create("DKFpsTest/DKFpsTest.html", function(){});
 
 	samplePoints = 10 //number of points to average for the red curve
 

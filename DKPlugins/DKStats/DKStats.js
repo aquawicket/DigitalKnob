@@ -1,18 +1,18 @@
 ///////////////////////
 function DKStats_Init()
 {
-	DK_Create("DKStats/DKStats.html");
-	window.addEventListener("second", DKStats_OnEvent);
-	//byId("DKStats/DKStats.html").addEventListener("click", DKStats_OnEvent);
+	dk.create("DKStats/DKStats.html");
+	window.addEventListener("second", DKStats_onevent);
+	//byId("DKStats/DKStats.html").addEventListener("click", DKStats_onevent);
 	DKStats_Update();
 }
 
 //////////////////////
 function DKStats_End()
 {
-	window.removeEventListener("second", DKStats_OnEvent);
-	//byId("DKStats/DKStats.html").removeEventListener("click", DKStats_OnEvent);
-	DK_Close("DKStats/DKStats.html");
+	window.removeEventListener("second", DKStats_onevent);
+	//byId("DKStats/DKStats.html").removeEventListener("click", DKStats_onevent);
+	dk.close("DKStats/DKStats.html");
 }
 
 ///////////////////////////////

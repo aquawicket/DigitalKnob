@@ -3,7 +3,7 @@ var SVN = "";
 ///////////////////////
 function SvnMenu_Init()
 {
-	DK_Create("DKThreadPool");
+	dk.create("DKThreadPool");
 
 	//SVN(DK_GetOS()+"\n");
 	if(DK_GetOS() === "Win32"){
@@ -21,20 +21,20 @@ function SvnMenu_Init()
 		SVN = "/usr/bin/git";
 	}
 
-	DK_Create("DKGit/SvnMenu.html", function(){
-		document.addEventListener("mousedown", SvnMenu_OnEvent);
-		byId("Git Update").addEventListener("click", SvnMenu_OnEvent);
-		byId("Git Commit").addEventListener("click", SvnMenu_OnEvent);
+	dk.create("DKGit/SvnMenu.html", function(){
+		document.addEventListener("mousedown", SvnMenu_onevent);
+		byId("Git Update").addEventListener("click", SvnMenu_onevent);
+		byId("Git Commit").addEventListener("click", SvnMenu_onevent);
 	});
 }
 
 //////////////////////
 function SvnMenu_End()
 {
-	document.removeEventListener("mousedown", SvnMenu_OnEvent);
-	byId("Git Update").removeEventListener("click", SvnMenu_OnEvent);
-	byId("Git Commit").removeEventListener("click", SvnMenu_OnEvent);
-	DK_Close("DKGit/SvnMenu.html");
+	document.removeEventListener("mousedown", SvnMenu_onevent);
+	byId("Git Update").removeEventListener("click", SvnMenu_onevent);
+	byId("Git Commit").removeEventListener("click", SvnMenu_onevent);
+	dk.close("DKGit/SvnMenu.html");
 }
 
 ///////////////////////////////
@@ -52,7 +52,7 @@ function SvnMenu_OnEvent(event)
 			return;
 		}
 	}
-	DK_Close("DKGit/SvnMenu.js");
+	dk.close("DKGit/SvnMenu.js");
 }
 
 //////////////////////////////
@@ -127,7 +127,7 @@ function SvnMenu_GitUpdate()
 	}
 	
 	if(CPP_DK_Available("DKAudio")){
-		DK_Create("DKAudio");
+		dk.create("DKAudio");
 	}
 	if(CPP_DK_Valid("DKAudioJS,DKAudioJS0")){
 		DKAudio_PlaySound("DKBuild/ding.wav");
@@ -171,7 +171,7 @@ function SvnMenu_GitCommit()
 	}
 	
 	if(CPP_DK_Available("DKAudio")){
-		DK_Create("DKAudio");
+		dk.create("DKAudio");
 	}
 	if(CPP_DK_Valid("DKAudioJS,DKAudioJS0")){
 		DKAudio_PlaySound("DKBuild/ding.wav");

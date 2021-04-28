@@ -1,20 +1,20 @@
 /////////////////////
 function DKOcr_Init()
 {
-	DK_Create("DKOcr");
-	DK_Create("DKOcr/DKOcr.html");
-	DK_Create("DKNotepad/DKNotepad.js", function(){
+	dk.create("DKOcr");
+	dk.create("DKOcr/DKOcr.html");
+	dk.create("DKNotepad/DKNotepad.js", function(){
 		DK_AppendChild("DKOcr/DKOcr.html", "DKNotepad/DKNotepad.html");
-		byId("DKNotepad/DKNotepad.html").removeEventListener("OpenFile", DKNotepad_OnEvent);
-		byId("DKNotepad/DKNotepad.html").addEventListener("OpenFile", DKOcr_OnEvent);
+		byId("DKNotepad/DKNotepad.html").removeEventListener("OpenFile", DKNotepad_onevent);
+		byId("DKNotepad/DKNotepad.html").addEventListener("OpenFile", DKOcr_onevent);
 	});
 }
 
 ////////////////////
 function DKOcr_End()
 {
-	byId("DKNotepad/DKNotepad.html").removeEventListener("OpenFile", DKOcr_OnEvent);
-	DK_Close("DKNotepad/DKNotepad.js");
+	byId("DKNotepad/DKNotepad.html").removeEventListener("OpenFile", DKOcr_onevent);
+	dk.close("DKNotepad/DKNotepad.js");
 }
 
 /////////////////////////////

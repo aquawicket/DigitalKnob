@@ -1,17 +1,17 @@
 ////////////////////////////
 function DKMidiDialog_Init()
 {
-	DK_Create("DKMidi/DKMidiDialog.css");
-	DK_Create("DKMidi/DKMidiDialog.html");
+	dk.create("DKMidi/DKMidiDialog.css");
+	dk.create("DKMidi/DKMidiDialog.html");
 	//DKMidiDialog_UpdatePorts();
 }
 
 ///////////////////////////
 function DKMidiDialog_End()
 {
-	//DKRemoveEvents(DKMidiDialog_OnEvent);
-	DK_Close("DKMidi/DKMidiDialog.html");
-	DK_Close("DKMidi/DKMidiDialog.css");
+	//DKRemoveEvents(DKMidiDialog_onevent);
+	dk.close("DKMidi/DKMidiDialog.html");
+	dk.close("DKMidi/DKMidiDialog.css");
 }
 
 ////////////////////////////////////
@@ -37,7 +37,7 @@ function DKMidiDialog_UpdatePorts()
 	for(var i=0; i<list.length; i++){
 		var element = DK_CreateElement(byId("DKMidiDialogInputs"), "option", "DKMidiDialogInput");
 		element.value = list[i];
-		element.addEventListener("click", DKMidiDialog_OnEvent);
+		element.addEventListener("click", DKMidiDialog_onevent);
 		element.innerHTML = list[i];
 	}
 
@@ -47,7 +47,7 @@ function DKMidiDialog_UpdatePorts()
 	for(var i=0; i<outlist.length; i++){
 		var element = DK_CreateElement(byId("DKMidiDialogOutputs"), "option", "DKMidiDialogOutput");
 		element.value = outlist[i];
-		element.addEventListener("click", DKMidiDialog_OnEvent);
+		element.addEventListener("click", DKMidiDialog_onevent);
 		element.innerHTML = outlist[i];
 	}
 	return true;

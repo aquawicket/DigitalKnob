@@ -5,8 +5,8 @@ var second_flag = false;
 /////////////////////
 function Clock_Init()
 {
-	DK_Create("DKOS/Clock.html,DKOS/Taskbar.html", function(){
-		window.addEventListener("second", Clock_OnEvent);
+	dk.create("DKOS/Clock.html,DKOS/Taskbar.html", function(){
+		window.addEventListener("second", Clock_onevent);
 		Clock_Update();
 	});
 }
@@ -14,8 +14,8 @@ function Clock_Init()
 ////////////////////
 function Clock_End()
 {
-	window.removeEventListener("second", Clock_OnEvent);
-	DK_Close("DKOS/Clock.html");
+	window.removeEventListener("second", Clock_onevent);
+	dk.close("DKOS/Clock.html");
 }
 
 /////////////////////////////

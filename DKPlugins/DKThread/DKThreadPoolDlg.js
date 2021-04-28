@@ -1,17 +1,17 @@
 ///////////////////////////////
 function DKThreadPoolDlg_Init()
 {
-	DK_Create("DKThreadPool");
+	dk.create("DKThreadPool");
 	//if(!CPP_DK_Valid("DKWidgetJS,DKWidgetJS0")){ return; }  //FIXME: This was here for a reason.
-	DK_Create("DKThread/DKThreadPoolDlg.html"); 
-	byId("DKThread/DKThreadPoolDlg.html").addEventListener("Update", DKThreadPoolDlg_OnEvent);
+	dk.create("DKThread/DKThreadPoolDlg.html"); 
+	byId("DKThread/DKThreadPoolDlg.html").addEventListener("Update", DKThreadPoolDlg_onevent);
 }
 
 //////////////////////////////
 function DKThreadPoolDlg_End()
 {
-	byId("DKThread/DKThreadPoolDlg.html").removeEventListener("Update", DKThreadPoolDlg_OnEvent);
-	DK_Close("DKThread/DKThreadPoolDlg.html");
+	byId("DKThread/DKThreadPoolDlg.html").removeEventListener("Update", DKThreadPoolDlg_onevent);
+	dk.close("DKThread/DKThreadPoolDlg.html");
 }
 
 ///////////////////////////////////////

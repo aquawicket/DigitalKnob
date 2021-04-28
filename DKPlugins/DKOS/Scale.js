@@ -1,18 +1,18 @@
 /////////////////////
 function Scale_Init()
 {
-	DK_Create("DKOS/Scale.html,DKOS/Taskbar.html", function(){
-	    byId("scale_minus").addEventListener("mousedown", Scale_OnEvent);
-	    byId("scale_plus").addEventListener("mousedown", Scale_OnEvent);
+	dk.create("DKOS/Scale.html,DKOS/Taskbar.html", function(){
+	    byId("scale_minus").addEventListener("mousedown", Scale_onevent);
+	    byId("scale_plus").addEventListener("mousedown", Scale_onevent);
 	});
 }
 
 ////////////////////
 function Scale_End()
 {
-	byId("scale_minus").removeEventListener("mousedown", Scale_OnEvent);
-	byId("scale_plus").removeEventListener("mousedown", Scale_OnEvent);
-	DK_Close("Scale.html");
+	byId("scale_minus").removeEventListener("mousedown", Scale_onevent);
+	byId("scale_plus").removeEventListener("mousedown", Scale_onevent);
+	dk.close("Scale.html");
 }
 
 /////////////////////////////

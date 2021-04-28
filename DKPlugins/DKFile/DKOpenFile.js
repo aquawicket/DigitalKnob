@@ -7,14 +7,14 @@ var rPath;
 
 //////////////////////////
 function DKOpenFile_Init() {
-    DK_Create("DKFile/DKOpenFile.css");
-    DK_Create("DKFile/DKOpenFile.html");
-    byId("DKFile/DKOpenFile.html").addEventListener("GetFile", DKOpenFile_OnEvent);
-    byId("DKFile/DKOpenFile.html").addEventListener("GetFile", DKOpenFile_OnEvent);
-    byId("DKOpenFileCancel").addEventListener("click", DKOpenFile_OnEvent);
-    byId("DKOpenFileOK").addEventListener("click", DKOpenFile_OnEvent);
-    byId("DKOpenFileUp").addEventListener("click", DKOpenFile_OnEvent);
-    byId("DKOpenFilePath").addEventListener("change", DKOpenFile_OnEvent);
+    dk.create("DKFile/DKOpenFile.css");
+    dk.create("DKFile/DKOpenFile.html");
+    byId("DKFile/DKOpenFile.html").addEventListener("GetFile", DKOpenFile_onevent);
+    byId("DKFile/DKOpenFile.html").addEventListener("GetFile", DKOpenFile_onevent);
+    byId("DKOpenFileCancel").addEventListener("click", DKOpenFile_onevent);
+    byId("DKOpenFileOK").addEventListener("click", DKOpenFile_onevent);
+    byId("DKOpenFileUp").addEventListener("click", DKOpenFile_onevent);
+    byId("DKOpenFilePath").addEventListener("change", DKOpenFile_onevent);
 
     aPath = "";
     rPath = "";
@@ -26,14 +26,14 @@ function DKOpenFile_Init() {
 
 /////////////////////////
 function DKOpenFile_End() {
-    byId("DKFile/DKOpenFile.html").removeEventListener("GetFile", DKOpenFile_OnEvent);
-    byId("DKFile/DKOpenFile.html").removeEventListener("GetFile", DKOpenFile_OnEvent);
-    byId("DKOpenFileCancel").removeEventListener("click", DKOpenFile_OnEvent);
-    byId("DKOpenFileOK").removeEventListener("click", DKOpenFile_OnEvent);
-    byId("DKOpenFileUp").removeEventListener("click", DKOpenFile_OnEvent);
-    byId("DKOpenFilePath").removeEventListener("change", DKOpenFile_OnEvent);
-    DK_Close("DKFile/DKOpenFile.html");
-    DK_Close("DKFile/DKOpenFile.css");
+    byId("DKFile/DKOpenFile.html").removeEventListener("GetFile", DKOpenFile_onevent);
+    byId("DKFile/DKOpenFile.html").removeEventListener("GetFile", DKOpenFile_onevent);
+    byId("DKOpenFileCancel").removeEventListener("click", DKOpenFile_onevent);
+    byId("DKOpenFileOK").removeEventListener("click", DKOpenFile_onevent);
+    byId("DKOpenFileUp").removeEventListener("click", DKOpenFile_onevent);
+    byId("DKOpenFilePath").removeEventListener("change", DKOpenFile_onevent);
+    dk.close("DKFile/DKOpenFile.html");
+    dk.close("DKFile/DKOpenFile.css");
 }
 
 //////////////////////////////////
@@ -158,7 +158,7 @@ function DKOpenFile_UpdatePath(path) {
             var value = aPath + "/" + files[d];
             element2.value = value;
             element2.style.whiteSpace = "nowrap";
-            element2.addEventListener("click", DKOpenFile_OnEvent);
+            element2.addEventListener("click", DKOpenFile_onevent);
             element2.style.paddingLeft = "17px";
             element2.innerHTML = files[d];
             element2.style.backgroundImage = "url(\"DKFile/folder.png\")";
@@ -176,7 +176,7 @@ function DKOpenFile_UpdatePath(path) {
             element3.style.paddingLeft = "17px";
             element3.style.backgroundRepeat = "no-repeat";
             element3.innerHTML = files[f];
-            element3.addEventListener("click", DKOpenFile_OnEvent);
+            element3.addEventListener("click", DKOpenFile_onevent);
 
             var extension = CPP_DKFile_GetExtention(files[f]);
             if ((extension === "png") || (extension === "jpeg") || (extension === "jpg") || (extension === "bmp") || (extension === "tiff") || (extension === "tif") || (extension === "gif") || (extension === "tga") || (extension === "ico")) {

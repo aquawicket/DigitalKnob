@@ -9,14 +9,14 @@ var DKApp_url   = "file:///"+DKAssets_LocalAssets()+"index.html";
 //var DKApp_url = "http://google.com";
 //var DKApp_url   = "file:///"+DKAssets_LocalAssets()+"index.html?plugin=DKNotepad/DKNotepad";
 
-DK_Create("DK/init.js", function(){}); //load DKApp_url using flags above, then call app_LoadPlugins()
+dk.create("DK/init.js", function(){}); //load DKApp_url using flags above, then call app_LoadPlugins()
 
 //////////////////////////
 function app_LoadPlugins()
 {
 	if(USE_SDL){
-		DK_Create("DKSDLText"); //Class contains SDL fps counter
+		dk.create("DKSDLText"); //Class contains SDL fps counter
 	}
-	DK_Create("DKTray/DKTray.js", function(){});
-	DK_Create("DKDebug/DKDebug.js", function(){});
+	dk.create("DKTray/DKTray.js", function(){});
+	dk.create("DKDebug/DKDebug.js", function(){});
 }

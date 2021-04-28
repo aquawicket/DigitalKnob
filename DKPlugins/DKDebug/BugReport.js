@@ -1,17 +1,17 @@
 /////////////////////////
 function BugReport_Init()
 {
-	DK_Create("DKDebug/BugReport.html");
-	byId("BugReport_Image").addEventListener("click", BugReport_OnEvent);
-	byId("BugReport_Text").addEventListener("click", BugReport_OnEvent);
+	dk.create("DKDebug/BugReport.html");
+	byId("BugReport_Image").addEventListener("click", BugReport_onevent);
+	byId("BugReport_Text").addEventListener("click", BugReport_onevent);
 }
 
 ////////////////////////
 function BugReport_End()
 {
-	byId("BugReport_Image").removeEventListener("click", BugReport_OnEvent);
-	byId("BugReport_Text").removeEventListener("click", BugReport_OnEvent);
-	DK_Close("DKDebug/BugReport.html");
+	byId("BugReport_Image").removeEventListener("click", BugReport_onevent);
+	byId("BugReport_Text").removeEventListener("click", BugReport_onevent);
+	dk.close("DKDebug/BugReport.html");
 }
 
 /////////////////////////////////
@@ -26,7 +26,7 @@ function BugReport_OnEvent(event)
 //////////////////////////////////
 function BugReport_SendBugReport()
 {
-	DK_Create("DKDebug/SendBugReport.js", function(){
+	dk.create("DKDebug/SendBugReport.js", function(){
 		DKFrame_Html("DKDebug/SendBugReport.html");
 	});
 }

@@ -3,8 +3,8 @@ var GIT = "";
 ///////////////////////
 function GitMenu_Init()
 {
-	DK_Create("DKBuild/DKBuild.js", function(){});
-	DK_Create("DKThreadPool");
+	dk.create("DKBuild/DKBuild.js", function(){});
+	dk.create("DKThreadPool");
 
 	//console.log(DK_GetOS()+"\n");
 	if(DK_GetOS() === "Win32"){
@@ -25,20 +25,20 @@ function GitMenu_Init()
 		GIT = "/usr/bin/git";
 	}
 
-	DK_Create("DKGit/GitMenu.html", function(){
-		document.addEventListener("mousedown", GitMenu_OnEvent);
-		byId("Git Update").addEventListener("click", GitMenu_OnEvent);
-		byId("Git Commit").addEventListener("click", GitMenu_OnEvent);
+	dk.create("DKGit/GitMenu.html", function(){
+		document.addEventListener("mousedown", GitMenu_onevent);
+		byId("Git Update").addEventListener("click", GitMenu_onevent);
+		byId("Git Commit").addEventListener("click", GitMenu_onevent);
 	});
 }
 
 //////////////////////
 function GitMenu_End()
 {
-	document.removeEventListener("mousedown", GitMenu_OnEvent);
-	byId("Git Update").removeEventListener("click", GitMenu_OnEvent);
-	byId("Git Commit").removeEventListener("click", GitMenu_OnEvent);
-	DK_Close("DKGit/GitMenu.html");
+	document.removeEventListener("mousedown", GitMenu_onevent);
+	byId("Git Update").removeEventListener("click", GitMenu_onevent);
+	byId("Git Commit").removeEventListener("click", GitMenu_onevent);
+	dk.close("DKGit/GitMenu.html");
 }
 
 ///////////////////////////////
@@ -56,7 +56,7 @@ function GitMenu_OnEvent(event)
 			return;
 		}
 	}
-	DK_Close("DKGit/GitMenu.js");
+	dk.close("DKGit/GitMenu.js");
 }
 
 //////////////////////////////
@@ -134,7 +134,7 @@ function GitMenu_GitUpdate()
 	}
 	
 	if(CPP_DK_Available("DKAudio")){
-		DK_Create("DKAudio");
+		dk.create("DKAudio");
 	}
 	if(CPP_DK_Valid("DKAudioJS,DKAudioJS0")){
 		DKAudio_PlaySound("DKBuild/ding.wav");
@@ -178,7 +178,7 @@ function GitMenu_GitCommit()
 	}
 	
 	if(CPP_DK_Available("DKAudio")){
-		DK_Create("DKAudio");
+		dk.create("DKAudio");
 	}
 	if(CPP_DK_Valid("DKAudioJS,DKAudioJS0")){
 		DKAudio_PlaySound("DKBuild/ding.wav");

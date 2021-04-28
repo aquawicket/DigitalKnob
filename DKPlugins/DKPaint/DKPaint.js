@@ -3,23 +3,23 @@ var currentFile;
 ///////////////////////
 function DKPaint_Init()
 {
-	DK_Create("DKPaint/DKPaint.css");
-	DK_Create("DKPaint/DKPaint.html");
-	//byId("DKPaint_Save").addEventListener("click", DKPaint_OnEvent);
-	byId("DKPaint/DKPaint.html").addEventListener("contextmenu", DKPaint_OnEvent);
-	byId("DKPaint_File").addEventListener("click", DKPaint_OnEvent);
-	byId("DKPaint/DKPaint.html").addEventListener("OpenFile", DKPaint_OnEvent);
+	dk.create("DKPaint/DKPaint.css");
+	dk.create("DKPaint/DKPaint.html");
+	//byId("DKPaint_Save").addEventListener("click", DKPaint_onevent);
+	byId("DKPaint/DKPaint.html").addEventListener("contextmenu", DKPaint_onevent);
+	byId("DKPaint_File").addEventListener("click", DKPaint_onevent);
+	byId("DKPaint/DKPaint.html").addEventListener("OpenFile", DKPaint_onevent);
 }
 
 //////////////////////
 function DKPaint_End()
 {
-	//byId("DKPaint_Save").removeEventListener("click", DKPaint_OnEvent);
-	byId("DKPaint/DKPaint.html").removeEventListener("contextmenu", DKPaint_OnEvent);
-	byId("DKPaint_File").removeEventListener("click", DKPaint_OnEvent);
-	byId("DKPaint/DKPaint.html").removeEventListener("OpenFile", DKPaint_OnEvent);
-	DK_Close("DKPaint/DKPaint.html");
-	DK_Close("DKPaint/DKPaint.css");
+	//byId("DKPaint_Save").removeEventListener("click", DKPaint_onevent);
+	byId("DKPaint/DKPaint.html").removeEventListener("contextmenu", DKPaint_onevent);
+	byId("DKPaint_File").removeEventListener("click", DKPaint_onevent);
+	byId("DKPaint/DKPaint.html").removeEventListener("OpenFile", DKPaint_onevent);
+	dk.close("DKPaint/DKPaint.html");
+	dk.close("DKPaint/DKPaint.css");
 }
 
 ///////////////////////////////
@@ -29,10 +29,10 @@ function DKPaint_OnEvent(event)
 		//DKNotepad_Save();
 	}
 	if(event.type === "contextmenu"){
-		DK_Create("DKPaint/DKPaintMenu.js", function(){});
+		dk.create("DKPaint/DKPaintMenu.js", function(){});
 	}
 	if(event.currentTarget.id === "DKPaint_File"){
-		DK_Create("DKPaint/DKPaintFile.js", function(){});
+		dk.create("DKPaint/DKPaintFile.js", function(){});
 	}
 	if(event.type === "OpenFile"){
 		var file = DK_GetValue(event);
@@ -71,8 +71,8 @@ function DKPaint_Open(file)
 //////////////////////////////////
 function DKPaint_LoadTif(filename)
 {
-	DK_Create("http://code.jquery.com/jquery-1.10.1.min.js", function(){
-	DK_Create("DKPaint/tiff.min.js", function(){
+	dk.create("http://code.jquery.com/jquery-1.10.1.min.js", function(){
+	dk.create("DKPaint/tiff.min.js", function(){
 		var xhr = new XMLHttpRequest();
 		xhr.open('GET', filename);
 		xhr.responseType = 'arraybuffer';

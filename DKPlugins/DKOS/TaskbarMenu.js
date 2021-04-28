@@ -5,24 +5,24 @@
 ///////////////////////////
 function TaskbarMenu_Init()
 {
-	DK_Create("DKOS/TaskbarMenu.html", function(){
-		document.addEventListener("mousedown", TaskbarMenu_OnEvent);
-		byId("OpenSource").addEventListener("click", TaskbarMenu_OnEvent);
-		byId("OpenDebug").addEventListener("click", TaskbarMenu_OnEvent);
-		byId("PushDKFiles").addEventListener("click", TaskbarMenu_OnEvent);
-		byId("ClearConsole").addEventListener("click", TaskbarMenu_OnEvent);
-		byId("Info").addEventListener("click", TaskbarMenu_OnEvent);
-		byId("Reload").addEventListener("click", TaskbarMenu_OnEvent);
-		byId("CloseDKGui").addEventListener("click", TaskbarMenu_OnEvent);
-		byId("FileExplorer").addEventListener("click", TaskbarMenu_OnEvent);
-		byId("OpenBuilder").addEventListener("click", TaskbarMenu_OnEvent);
-		byId("OpenNotepad").addEventListener("click", TaskbarMenu_OnEvent);
-		byId("InputTest").addEventListener("click", TaskbarMenu_OnEvent);
-		byId("OpenMessage").addEventListener("click", TaskbarMenu_OnEvent);
-		byId("OpenTetris").addEventListener("click", TaskbarMenu_OnEvent);
-		byId("OpenGoogle").addEventListener("click", TaskbarMenu_OnEvent);
-		byId("TaskbarMenu_Run").addEventListener("keydown", TaskbarMenu_OnEvent);
-		byId("Git").addEventListener("click", TaskbarMenu_OnEvent);
+	dk.create("DKOS/TaskbarMenu.html", function(){
+		document.addEventListener("mousedown", TaskbarMenu_onevent);
+		byId("OpenSource").addEventListener("click", TaskbarMenu_onevent);
+		byId("OpenDebug").addEventListener("click", TaskbarMenu_onevent);
+		byId("PushDKFiles").addEventListener("click", TaskbarMenu_onevent);
+		byId("ClearConsole").addEventListener("click", TaskbarMenu_onevent);
+		byId("Info").addEventListener("click", TaskbarMenu_onevent);
+		byId("Reload").addEventListener("click", TaskbarMenu_onevent);
+		byId("CloseDKGui").addEventListener("click", TaskbarMenu_onevent);
+		byId("FileExplorer").addEventListener("click", TaskbarMenu_onevent);
+		byId("OpenBuilder").addEventListener("click", TaskbarMenu_onevent);
+		byId("OpenNotepad").addEventListener("click", TaskbarMenu_onevent);
+		byId("InputTest").addEventListener("click", TaskbarMenu_onevent);
+		byId("OpenMessage").addEventListener("click", TaskbarMenu_onevent);
+		byId("OpenTetris").addEventListener("click", TaskbarMenu_onevent);
+		byId("OpenGoogle").addEventListener("click", TaskbarMenu_onevent);
+		byId("TaskbarMenu_Run").addEventListener("keydown", TaskbarMenu_onevent);
+		byId("Git").addEventListener("click", TaskbarMenu_onevent);
 		byId("TaskbarMenu_Run").focus();
 	});
 }
@@ -30,31 +30,31 @@ function TaskbarMenu_Init()
 //////////////////////////
 function TaskbarMenu_End()
 {
-	document.removeEventListener("mousedown", TaskbarMenu_OnEvent);
-	byId("OpenSource").removeEventListener("click", TaskbarMenu_OnEvent);
-	byId("OpenDebug").removeEventListener("click", TaskbarMenu_OnEvent);
-	byId("PushDKFiles").removeEventListener("click", TaskbarMenu_OnEvent);
-	byId("ClearConsole").removeEventListener("click", TaskbarMenu_OnEvent);
-	byId("Info").removeEventListener("click", TaskbarMenu_OnEvent);
-	byId("Reload").removeEventListener("click", TaskbarMenu_OnEvent);
-	byId("CloseDKGui").removeEventListener("click", TaskbarMenu_OnEvent);
-	byId("FileExplorer").removeEventListener("click", TaskbarMenu_OnEvent);
-	byId("OpenBuilder").removeEventListener("click", TaskbarMenu_OnEvent);
-	byId("OpenNotepad").removeEventListener("click", TaskbarMenu_OnEvent);
-	byId("InputTest").removeEventListener("click", TaskbarMenu_OnEvent);
-	byId("OpenMessage").removeEventListener("click", TaskbarMenu_OnEvent);
-	byId("OpenTetris").removeEventListener("click", TaskbarMenu_OnEvent);
-	byId("OpenGoogle").removeEventListener("click", TaskbarMenu_OnEvent);
-	byId("TaskbarMenu_Run").removeEventListener("keydown", TaskbarMenu_OnEvent);
-	byId("Git").removeEventListener("click", TaskbarMenu_OnEvent);
-	DK_Close("DKOS/TaskbarMenu.html");
+	document.removeEventListener("mousedown", TaskbarMenu_onevent);
+	byId("OpenSource").removeEventListener("click", TaskbarMenu_onevent);
+	byId("OpenDebug").removeEventListener("click", TaskbarMenu_onevent);
+	byId("PushDKFiles").removeEventListener("click", TaskbarMenu_onevent);
+	byId("ClearConsole").removeEventListener("click", TaskbarMenu_onevent);
+	byId("Info").removeEventListener("click", TaskbarMenu_onevent);
+	byId("Reload").removeEventListener("click", TaskbarMenu_onevent);
+	byId("CloseDKGui").removeEventListener("click", TaskbarMenu_onevent);
+	byId("FileExplorer").removeEventListener("click", TaskbarMenu_onevent);
+	byId("OpenBuilder").removeEventListener("click", TaskbarMenu_onevent);
+	byId("OpenNotepad").removeEventListener("click", TaskbarMenu_onevent);
+	byId("InputTest").removeEventListener("click", TaskbarMenu_onevent);
+	byId("OpenMessage").removeEventListener("click", TaskbarMenu_onevent);
+	byId("OpenTetris").removeEventListener("click", TaskbarMenu_onevent);
+	byId("OpenGoogle").removeEventListener("click", TaskbarMenu_onevent);
+	byId("TaskbarMenu_Run").removeEventListener("keydown", TaskbarMenu_onevent);
+	byId("Git").removeEventListener("click", TaskbarMenu_onevent);
+	dk.close("DKOS/TaskbarMenu.html");
 }
 
 ///////////////////////////////////
 function TaskbarMenu_OnEvent(event)
 {
 	if(event.currentTarget.id === "FileExplorer"){
-		DK_Create("DKFile/DKSolution.js", function(rval){
+		dk.create("DKFile/DKSolution.js", function(rval){
 			if(!rval){ return; }
 			DKFrame_Html("DKFile/DKSolution.html");
 			DKFrame_SetTitle("DKFile/DKSolution.html", "File Explorer");
@@ -62,41 +62,41 @@ function TaskbarMenu_OnEvent(event)
 		});
 	}
 	if(event.currentTarget.id === "OpenBuilder"){
-		DK_Create("DKBuild/DKBuildGUI.js", function(rval){
+		dk.create("DKBuild/DKBuildGUI.js", function(rval){
 			if(!rval){ return; }
 			DKFrame_Html("DKBuild/DKBuildGUI.html");
 		});
 	}
 	if(event.currentTarget.id === "OpenNotepad"){
-		DK_Create("DKFile/DKFileAssociation.js", function(){
+		dk.create("DKFile/DKFileAssociation.js", function(){
 			DKFileAssociation_Open("DKNotepad/DKNotepad.js");
 		});
 	}
 	if(event.currentTarget.id === "InputTest"){
-		DK_Create("DKFile/DKFileAssociation.js", function(){
+		dk.create("DKFile/DKFileAssociation.js", function(){
 			DKFileAssociation_Open("DKInputTest/DKInput.js");
 		});
 	}
 	if(event.currentTarget.id === "OpenMessage"){
-		DK_Create("DKGui/DKMessageBox.js", function(){
+		dk.create("DKGui/DKMessageBox.js", function(){
 			DKFrame_Html("DKGui/DKMessageBox.html");
 			DKMessageBox_Message("Test DKGui/DKMussageBox");
 		});
 	}
 	if(event.currentTarget.id === "OpenTetris"){
-		DK_Create("DKGui/DKFrame.js", function(){
+		dk.create("DKGui/DKFrame.js", function(){
 			DKFrame_Iframe("Tetris","http://www.lutanho.net/play/tetris.html",440,560);
 		});
 	}
 	if(event.currentTarget.id === "OpenGoogle"){
-		DK_Create("DKGui/DKFrame.js", function(){
+		dk.create("DKGui/DKFrame.js", function(){
 			DKFrame_Iframe("Google","https://google.com",640,480);
 		});
 	}
 	
 	if(event.currentTarget.id === "Git"){
-		DK_Create("DKGui/DKMenu.js", function(){
-		DK_Create("DKGit/GitMenu.js", function(){
+		dk.create("DKGui/DKMenu.js", function(){
+		dk.create("DKGit/GitMenu.js", function(){
 			//DKMenu_ValidatePosition("DKGit/GitMenu.html")
 			if(!window.mouseX){ window.mouseX = "10", window.mouseY = "10"; }
 			byId("DKGit/GitMenu.html").style.left = window.mouseX+"px";
@@ -106,11 +106,11 @@ function TaskbarMenu_OnEvent(event)
 	}
 	if(event.currentTarget.id === "OpenSource"){
 		//console.log("OpenSource\n");
-		DK_Create("DKWidgetJS");
+		dk.create("DKWidgetJS");
 		var source = document.body.outerHTML;
 		var assets = DKAssets_LocalAssets();
 		DKFile_StringToFile(source, assets+"source.html");
-		DK_Create("DKNotepad/DKNotepad.js", function(){
+		dk.create("DKNotepad/DKNotepad.js", function(){
 			DKFrame_Html("DKNotepad/DKNotepad.html");
 			DKNotepad_Open(assets+"source.html");
 			//console.log(source+"\n");
@@ -164,7 +164,7 @@ function TaskbarMenu_OnEvent(event)
 		location.reload();
 	}
 	if(event.currentTarget.id === "CloseDKGui"){
-		DK_Close("TaskbarMenu.js")
+		dk.close("TaskbarMenu.js")
 		CPP_DK_Exit();
 		return;
 	}
@@ -178,7 +178,7 @@ function TaskbarMenu_OnEvent(event)
 			return;
 		}
 	}
-	DK_Close("DKOS/TaskbarMenu.js");
+	dk.close("DKOS/TaskbarMenu.js");
 }
 
 /////////////////////////////////////

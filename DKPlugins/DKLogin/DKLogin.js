@@ -4,17 +4,17 @@ var FACEBOOK_NAME;
 ///////////////////////
 function DKLogin_Init()
 {
-	DK_Create("DKLogin/DKLogin.css");
-	DK_Create("DKLogin/DKLogin.html");
-	byId("DKLoginFacebook").addEventListener("click", DKLogin_OnEvent);
+	dk.create("DKLogin/DKLogin.css");
+	dk.create("DKLogin/DKLogin.html");
+	byId("DKLoginFacebook").addEventListener("click", DKLogin_onevent);
 }
 
 //////////////////////
 function DKLogin_End()
 {
-	byId("DKLoginFacebook").addEventListener("click", DKLogin_OnEvent);
-	DK_Close("DKLogin/DKLogin.html");
-	DK_Close("DKLogin/DKLogin.css");
+	byId("DKLoginFacebook").addEventListener("click", DKLogin_onevent);
+	dk.close("DKLogin/DKLogin.html");
+	dk.close("DKLogin/DKLogin.css");
 }
 
 ///////////////////////////////
@@ -22,7 +22,7 @@ function DKLogin_OnEvent(event)
 {
 	if(event.currentTarget.id === "DKLoginFacebook"){
 		console.log("DKLogin_OnEvent(): DKLoginFacebook\n");
-		DK_Create("DKLogin/DKFacebook.js", function(){
+		dk.create("DKLogin/DKFacebook.js", function(){
 			DKFacebookLogin(DKLogin_OnConnect);
 		});
 	}

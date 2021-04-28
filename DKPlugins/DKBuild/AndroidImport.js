@@ -5,7 +5,7 @@ TYPE = byId("BuildType").innerHTML;
 /////////////////////////////
 function AndroidImport_Init()
 {
-	DK_Create("DKHandles");
+	dk.create("DKHandles");
 	ANDROIDSTUDIO = DKFile_GetShortName(ANDROIDSTUDIO);
 	console.log("ANDROIDSTUDIO="+ANDROIDSTUDIO+"\n");
 }
@@ -39,9 +39,9 @@ function AndroidImport_Import()
 		return;
 	}
 	
-	DKFile_MkDir(WORKSPACE);
+	dk.file.makeDir(WORKSPACE);
 	DKFile_Delete(WORKSPACE+"/"+APP+"_"+TYPE);
-	DKFile_MkDir(WORKSPACE+"/"+APP+"_"+TYPE);
+	dk.file.makeDir(WORKSPACE+"/"+APP+"_"+TYPE);
 	DK_Run(ANDROIDSTUDIO, "");
 	
 	if(!DKHandles_WaitForWindow("Welcome to Android Studio", 60)){ //Check for 60 seconds
@@ -162,8 +162,8 @@ function AndroidImport_Import()
 	DKFile_StringToFile(gradle, WORKSPACE+"/"+APP+"_"+TYPE+"/app/build.gradle");
 	
 	//copy shared libs
-	DKFile_MkDir(WORKSPACE+"/"+APP+"_"+TYPE+"/app/src/main/jniLibs");
-	DKFile_MkDir(WORKSPACE+"/"+APP+"_"+TYPE+"/app/src/main/jniLibs/armeabi-v7a");
+	dk.file.makeDir(WORKSPACE+"/"+APP+"_"+TYPE+"/app/src/main/jniLibs");
+	dk.file.makeDir(WORKSPACE+"/"+APP+"_"+TYPE+"/app/src/main/jniLibs/armeabi-v7a");
 	if(TYPE === "Debug"){
 		DKFile_Copy(appdir+"/android32/Debug/libs/armeabi-v7a", WORKSPACE+"/"+APP+"_"+TYPE+"/app/src/main/jniLibs/armeabi-v7a", true);
 	}
@@ -173,7 +173,7 @@ function AndroidImport_Import()
 	
 	console.log("Import finished\n");
 	
-	DK_Create("DKAudio");
+	dk.create("DKAudio");
 	if(CPP_DK_Valid("DKAudioJS,DKAudioJS0")){
 		DKAudio_PlaySound("DKBuild/ding.wav");
 	}

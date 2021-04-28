@@ -1,48 +1,48 @@
 ///////////////////////////
 function DKAdminMenu_Init()
 {
-	DK_Create("DKAdmin/DKAdminMenu.html", function(){
-		document.addEventListener("mousedown", DKAdminMenu_OnEvent);
-		byId("OpenSource").addEventListener("click", DKAdminMenu_OnEvent);
-		byId("OpenDebug").addEventListener("click", DKAdminMenu_OnEvent);
-		byId("PushDKFiles").addEventListener("click", DKAdminMenu_OnEvent);
-		byId("ClearConsole").addEventListener("click", DKAdminMenu_OnEvent);
-		byId("Info").addEventListener("click", DKAdminMenu_OnEvent);
-		byId("Refresh").addEventListener("click", DKAdminMenu_OnEvent);
-		byId("CloseDKGui").addEventListener("click", DKAdminMenu_OnEvent);
-		byId("FileExplorer").addEventListener("click", DKAdminMenu_OnEvent);
-		byId("OpenStats").addEventListener("click", DKAdminMenu_OnEvent);
-		byId("TestIframe").addEventListener("click", DKAdminMenu_OnEvent);
-		byId("OpenNotepad").addEventListener("click", DKAdminMenu_OnEvent);
-		byId("DKAdminMenu_Run").addEventListener("keydown", DKAdminMenu_OnEvent);
-		byId("Git").addEventListener("click", DKAdminMenu_OnEvent);
+	dk.create("DKAdmin/DKAdminMenu.html", function(){
+		document.addEventListener("mousedown", DKAdminMenu_onevent);
+		byId("OpenSource").addEventListener("click", DKAdminMenu_onevent);
+		byId("OpenDebug").addEventListener("click", DKAdminMenu_onevent);
+		byId("PushDKFiles").addEventListener("click", DKAdminMenu_onevent);
+		byId("ClearConsole").addEventListener("click", DKAdminMenu_onevent);
+		byId("Info").addEventListener("click", DKAdminMenu_onevent);
+		byId("Refresh").addEventListener("click", DKAdminMenu_onevent);
+		byId("CloseDKGui").addEventListener("click", DKAdminMenu_onevent);
+		byId("FileExplorer").addEventListener("click", DKAdminMenu_onevent);
+		byId("OpenStats").addEventListener("click", DKAdminMenu_onevent);
+		byId("TestIframe").addEventListener("click", DKAdminMenu_onevent);
+		byId("OpenNotepad").addEventListener("click", DKAdminMenu_onevent);
+		byId("DKAdminMenu_Run").addEventListener("keydown", DKAdminMenu_onevent);
+		byId("Git").addEventListener("click", DKAdminMenu_onevent);
 
 		byId("DKAdminMenu_Run").focus();
 	});
 	
-	DK_Create("DKDebug/DKDebug.js", function(){});
-	DK_Create("DKGui/DKFrame.js", function(){});
-	DK_Create("DKGui/DKMenu.js", function(){});
+	dk.create("DKDebug/DKDebug.js", function(){});
+	dk.create("DKGui/DKFrame.js", function(){});
+	dk.create("DKGui/DKMenu.js", function(){});
 }
 
 //////////////////////////
 function DKAdminMenu_End()
 {
-	document.removeEventListener("mousedown", DKAdminMenu_OnEvent);
-	byId("OpenSource").removeEventListener("click", DKAdminMenu_OnEvent);
-	byId("OpenDebug").removeEventListener("click", DKAdminMenu_OnEvent);
-	byId("PushDKFiles").removeEventListener("click", DKAdminMenu_OnEvent);
-	byId("ClearConsole").removeEventListener("click", DKAdminMenu_OnEvent);
-	byId("Info").removeEventListener("click", DKAdminMenu_OnEvent);
-	byId("Refresh").removeEventListener("click", DKAdminMenu_OnEvent);
-	byId("CloseDKGui").removeEventListener("click", DKAdminMenu_OnEvent);
-	byId("FileExplorer").removeEventListener("click", DKAdminMenu_OnEvent);
-	byId("OpenStats").removeEventListener("click", DKAdminMenu_OnEvent);
-	byId("TestIframe").removeEventListener("click", DKAdminMenu_OnEvent);
-	byId("OpenNotepad").removeEventListener("click", DKAdminMenu_OnEvent);
-	byId("DKAdminMenu_Run").removeEventListener("keydown", DKAdminMenu_OnEvent);
-	byId("Git").removeEventListener("click", DKAdminMenu_OnEvent);
-	DK_Close("DKAdmin/DKAdminMenu.html");
+	document.removeEventListener("mousedown", DKAdminMenu_onevent);
+	byId("OpenSource").removeEventListener("click", DKAdminMenu_onevent);
+	byId("OpenDebug").removeEventListener("click", DKAdminMenu_onevent);
+	byId("PushDKFiles").removeEventListener("click", DKAdminMenu_onevent);
+	byId("ClearConsole").removeEventListener("click", DKAdminMenu_onevent);
+	byId("Info").removeEventListener("click", DKAdminMenu_onevent);
+	byId("Refresh").removeEventListener("click", DKAdminMenu_onevent);
+	byId("CloseDKGui").removeEventListener("click", DKAdminMenu_onevent);
+	byId("FileExplorer").removeEventListener("click", DKAdminMenu_onevent);
+	byId("OpenStats").removeEventListener("click", DKAdminMenu_onevent);
+	byId("TestIframe").removeEventListener("click", DKAdminMenu_onevent);
+	byId("OpenNotepad").removeEventListener("click", DKAdminMenu_onevent);
+	byId("DKAdminMenu_Run").removeEventListener("keydown", DKAdminMenu_onevent);
+	byId("Git").removeEventListener("click", DKAdminMenu_onevent);
+	dk.close("DKAdmin/DKAdminMenu.html");
 }
 
 ///////////////////////////////////
@@ -52,7 +52,7 @@ function DKAdminMenu_OnEvent(event)
 	
 	//selections
 	if(event.currentTarget.id === "FileExplorer"){
-		DK_Create("DKFile/DKSolution.js", function(rval){
+		dk.create("DKFile/DKSolution.js", function(rval){
 			if(!rval){ return; }
 			DKFrame_Html("DKFile/DKSolution.html");
 			DKFrame_SetTitle("DKFile/DKSolution.html", "File Explorer");
@@ -60,35 +60,35 @@ function DKAdminMenu_OnEvent(event)
 		});
 	}
 	if(event.currentTarget.id === "OpenNotepad"){
-		DK_Create("DKNotepad/DKNotepad.js", function(){
+		dk.create("DKNotepad/DKNotepad.js", function(){
 			DKFrame_Html("DKNotepad/DKNotepad.html");
 		});
 	}
 	if(event.currentTarget.id === "OpenStats"){
-		DK_Create("DKStats/DKStats.js", function(){
+		dk.create("DKStats/DKStats.js", function(){
 			DKFrame_Html("DKStats/DKStats.html");
 		});
 	}
 	if(event.currentTarget.id === "TestIframe"){
-		DK_Create("DKGui/DKFrame.js", function(){
+		dk.create("DKGui/DKFrame.js", function(){
 			DKFrame_Iframe("iframe Test", "https://google.com", 640, 480);
 		});
 	}
 
 	//bottom row selections
 	if(event.currentTarget.id === "Git"){
-		DK_Create("DKGit/GitMenu.js", function(){
+		dk.create("DKGit/GitMenu.js", function(){
 			DKMenu_ValidatePosition("DKGit/GitMenu.html");
 			byId("DKGit/GitMenu.html").style.top = DKWindow_GetMouseY()-30+"px";
 		});
 	}
 	if(event.currentTarget.id === "OpenSource"){
 		//console.log("OpenSource\n");
-		DK_Create("DKWidgetJS");
+		dk.create("DKWidgetJS");
 		var source = document.body.outerHTML;
 		var assets = DKAssets_LocalAssets();
 		DKFile_StringToFile(source, assets+"source.html");
-		DK_Create("DKNotepad/DKNotepad.js", function(){
+		dk.create("DKNotepad/DKNotepad.js", function(){
 			DKFrame_Html("DKNotepad/DKNotepad.html");
 			DKNotepad_Open(assets+"source.html");
 			//console.log(source+"\n");
@@ -126,7 +126,7 @@ function DKAdminMenu_OnEvent(event)
 		window.location.reload(true);
 	}
 	if(event.currentTarget.id === "CloseDKGui"){
-		DK_Close("DKAdminMenu.js")
+		dk.close("DKAdminMenu.js")
 		DK_Exit();
 		return;
 	}
@@ -140,7 +140,7 @@ function DKAdminMenu_OnEvent(event)
 			return;
 		}
 	}
-	DK_Close("DKAdmin/DKAdminMenu.js");
+	dk.close("DKAdmin/DKAdminMenu.js");
 }
 
 /////////////////////////////////////
@@ -155,7 +155,7 @@ function DKAdminMenu_Add(title, code)
 function DKAdminMenu_Run(command)
 {
 	if(command.indexOf("http://") === 0 || command.indexOf("https://") === 0 || command.indexOf("file://") === 0 || command.indexOf("chrome://") === 0){
-		DK_Create("DKGui/DKFrame.js", function(){
+		dk.create("DKGui/DKFrame.js", function(){
 			DKFrame_Iframe(command, command, 640, 480);
 		});
 		return;

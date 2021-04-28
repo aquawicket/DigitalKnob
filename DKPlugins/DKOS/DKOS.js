@@ -1,7 +1,7 @@
 ////////////////////
 function DKOS_Init() {
 	//console.debug("DKOS_Init()");
-	DK_Create("DKOS/DKOS.html", function(){
+	dk.create("DKOS/DKOS.html", function(){
 		document.documentElement.style.backgroundColor = "black";
 		document.body.style.margin = "0px";
 		document.body.style.overflow = "hidden";
@@ -17,10 +17,10 @@ function DKOS_Init() {
 			*/
 		}
 
-		//DK_Create("DKGui/DKFrame.js", function(){
-		//DK_Create("DKGui/DKMenu.js", function(){
-		DK_Create("DKOS/Desktop.js", function(){
-		DK_Create("DKOS/Taskbar.js", function(){
+		//dk.create("DKGui/DKFrame.js", function(){
+		//dk.create("DKGui/DKMenu.js", function(){
+		dk.create("DKOS/Desktop.js", function(){
+		dk.create("DKOS/Taskbar.js", function(){
 			if(OS === "iOS" || OS === "Android"){
 				//DK_SetScale(2);   FIXME
 			}

@@ -1,17 +1,17 @@
 /////////////////////////////
 function DKNotepadView_Init()
 {
-	DK_Create("DKNotepad/DKNotepadView.html,DKNotepad/DKNotepad.html");
-	document.addEventListener("mousedown", DKNotepadView_OnEvent);
-	byId("DKNotepadView_StatusBar").addEventListener("click", DKNotepadView_OnEvent);
+	dk.create("DKNotepad/DKNotepadView.html,DKNotepad/DKNotepad.html");
+	document.addEventListener("mousedown", DKNotepadView_onevent);
+	byId("DKNotepadView_StatusBar").addEventListener("click", DKNotepadView_onevent);
 }
 
 ////////////////////////////
 function DKNotepadView_End()
 {
-	document.removeEventListener("mousedown", DKNotepadView_OnEvent);
-	byId("DKNotepadView_StatusBar").removeEventListener("click", DKNotepadView_OnEvent);
-	DK_Close("DKNotepad/DKNotepadView.html");
+	document.removeEventListener("mousedown", DKNotepadView_onevent);
+	byId("DKNotepadView_StatusBar").removeEventListener("click", DKNotepadView_onevent);
+	dk.close("DKNotepad/DKNotepadView.html");
 }
 
 /////////////////////////////////////
@@ -26,5 +26,5 @@ function DKNotepadView_OnEvent(event)
 			return;
 		}
 	}
-	DK_Close("DKNotepad/DKNotepadView.js");
+	dk.close("DKNotepad/DKNotepadView.js");
 }

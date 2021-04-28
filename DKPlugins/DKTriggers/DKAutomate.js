@@ -1,21 +1,21 @@
 //////////////////////////
 function DKAutomate_Init()
 {
-	DK_Create("DKAssets");
-	DK_Create("DKTriggers/DKAutomate.html");
-	DK_Create("DKTriggers/DKAutomate2.js", function(){
-		byId("DKTriggers/DKAutomate.html", "keydown", DKAutomate_OnEvent);
-		//window.addEventListener("midi", DKAutomate_OnEvent);
-		//window.addEventListener("gui", DKAutomate_OnEvent); //all events
-		//byId("DKA-Title").addEventListener("click", DKAutomate_OnEvent);
-		byId("DKA-NewButton").addEventListener("click", DKAutomate_OnEvent);
-		byId("DKA-DeleteButton").addEventListener("click", DKAutomate_OnEvent);
-		byId("CancelButton").addEventListener("click", DKAutomate_OnEvent);
-		byId("SaveButton").addEventListener("click", DKAutomate_OnEvent);
-		byId("MidiDevices").addEventListener("click", DKAutomate_OnEvent);
-		byId("DKTriggers/DKAutomate.html").addEventListener("UpdateValues", DKAutomate_OnEvent);
+	dk.create("DKAssets");
+	dk.create("DKTriggers/DKAutomate.html");
+	dk.create("DKTriggers/DKAutomate2.js", function(){
+		byId("DKTriggers/DKAutomate.html", "keydown", DKAutomate_onevent);
+		//window.addEventListener("midi", DKAutomate_onevent);
+		//window.addEventListener("gui", DKAutomate_onevent); //all events
+		//byId("DKA-Title").addEventListener("click", DKAutomate_onevent);
+		byId("DKA-NewButton").addEventListener("click", DKAutomate_onevent);
+		byId("DKA-DeleteButton").addEventListener("click", DKAutomate_onevent);
+		byId("CancelButton").addEventListener("click", DKAutomate_onevent);
+		byId("SaveButton").addEventListener("click", DKAutomate_onevent);
+		byId("MidiDevices").addEventListener("click", DKAutomate_onevent);
+		byId("DKTriggers/DKAutomate.html").addEventListener("UpdateValues", DKAutomate_onevent);
 
-		DK_Create("DKTriggers/DKTriggers.js", function(){
+		dk.create("DKTriggers/DKTriggers.js", function(){
 			DKAutomate_UpdateValues();
 		});
 	});
@@ -24,20 +24,20 @@ function DKAutomate_Init()
 /////////////////////////
 function DKAutomate_End()
 {
-	byId("DKTriggers/DKAutomate.html", "keydown", DKAutomate_OnEvent);
-	//window.removeEventListener("midi", DKAutomate_OnEvent);
-	//window.removeEventListener("gui", DKAutomate_OnEvent); //all events
-	//byId("DKA-Title").removeEventListener("click", DKAutomate_OnEvent);
-	byId("DKA-NewButton").removeEventListener("click", DKAutomate_OnEvent);
-	byId("DKA-DeleteButton").removeEventListener("click", DKAutomate_OnEvent);
-	byId("CancelButton").removeEventListener("click", DKAutomate_OnEvent);
-	byId("SaveButton").removeEventListener("click", DKAutomate_OnEvent);
-	byId("MidiDevices").removeEventListener("click", DKAutomate_OnEvent);
-	byId("DKTriggers/DKAutomate.html").removeEventListener("UpdateValues", DKAutomate_OnEvent);
+	byId("DKTriggers/DKAutomate.html", "keydown", DKAutomate_onevent);
+	//window.removeEventListener("midi", DKAutomate_onevent);
+	//window.removeEventListener("gui", DKAutomate_onevent); //all events
+	//byId("DKA-Title").removeEventListener("click", DKAutomate_onevent);
+	byId("DKA-NewButton").removeEventListener("click", DKAutomate_onevent);
+	byId("DKA-DeleteButton").removeEventListener("click", DKAutomate_onevent);
+	byId("CancelButton").removeEventListener("click", DKAutomate_onevent);
+	byId("SaveButton").removeEventListener("click", DKAutomate_onevent);
+	byId("MidiDevices").removeEventListener("click", DKAutomate_onevent);
+	byId("DKTriggers/DKAutomate.html").removeEventListener("UpdateValues", DKAutomate_onevent);
 
-	DK_Close("DKTriggers/DKTriggers.js");
-	DK_Close("DKTriggers/DKAutomate2.js");
-	DK_Close("DKTriggers/DKAutomate.html");
+	dk.close("DKTriggers/DKTriggers.js");
+	dk.close("DKTriggers/DKAutomate2.js");
+	dk.close("DKTriggers/DKAutomate.html");
 }
 
 //////////////////////////////////
@@ -49,7 +49,7 @@ function DKAutomate_OnEvent(event)
 	
 	if(event.currentTarget.id === "DKA-NewButton"){
 		//console.log("DKA-NewButton\n");
-		DK_Create("DKGui/DKMessageBox.js", function(){
+		dk.create("DKGui/DKMessageBox.js", function(){
 			DKFrame_Html("DKGui/DKMessageBox.html");
 			DKMessageBox_GetValue("Enter trigger name", function(rval){
 				console.log("DKMessageBox_GetValue() rval = "+rval+"\n");
@@ -60,7 +60,7 @@ function DKAutomate_OnEvent(event)
 	}
 	
 	if(event.currentTarget.id === "DKA-DeleteButton"){
-		DK_Create("DKGui/DKMessageBox.js", function(){
+		dk.create("DKGui/DKMessageBox.js", function(){
 			DKFrame_Html("DKGui/DKMessageBox.html");
 			DKMessageBox_Confirm("Delete Trigger?", function(rval){
 				console.log("DKMessageBox_GetValue() rval = "+rval+"\n");
@@ -91,7 +91,7 @@ function DKAutomate_OnEvent(event)
 	}
 	
 	if(event.currentTarget.id === "MidiDevices"){
-		DK_Create("DKMidi/DKMidiDialog.js", function(){
+		dk.create("DKMidi/DKMidiDialog.js", function(){
 			byId("DKMidi/DKMidiDialog.html").style.display = "block";
 			byId("DKMidi/DKMidiDialog.html").style.visibility = "visible";
 		});
@@ -120,7 +120,7 @@ function DKAutomate_UpdateValues()
 		var option = DK_CreateElement(byId("DKA-TriggerList"), "option", "Trigger");
 		option.value = triggers[i];
 		option.innerHTML = triggers[i];
-		option.addEventListener("click", DKAutomate_OnEvent);
+		option.addEventListener("click", DKAutomate_onevent);
 	}
 }
 

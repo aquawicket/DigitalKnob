@@ -7,8 +7,8 @@ function DKTooltip_Init()
 ////////////////////////
 function DKTooltip_End()
 {
-	D//KRemoveEvents(DKTooltip_OnEvent);
-	DK_Close("DKTooltip/DKTooltip.html");
+	D//KRemoveEvents(DKTooltip_onevent);
+	dk.close("DKTooltip/DKTooltip.html");
 }
 
 /////////////////////////////////
@@ -19,16 +19,16 @@ function DKTooltip_OnEvent(event)
 		return;
 	}
 	
-	DK_Close("DKTooltip/DKTooltip.html");
+	dk.close("DKTooltip/DKTooltip.html");
 }
 
 //////////////////////////////////
 function DKTooltip_Add(id, string)
 {
 	byId(id).tooltip = string;
-	window.addEventListener("mousedown", DKTooltip_OnEvent);
-	byId(id).addEventListener("mouseenter", DKTooltip_OnEvent);
-	byId(id).addEventListener("mouseout", DKTooltip_OnEvent);
+	window.addEventListener("mousedown", DKTooltip_onevent);
+	byId(id).addEventListener("mouseenter", DKTooltip_onevent);
+	byId(id).addEventListener("mouseout", DKTooltip_onevent);
 }
 
 ///////////////////////////
@@ -37,10 +37,10 @@ function DKTooltip_Show(id)
 	setTimeout(function(){
 		var hover = document.elementFromPoint(window.mouseX, window.mouseY);
 		if(hover !== id){
-			DK_Close("DKTooltip/DKTooltip.html");
+			dk.close("DKTooltip/DKTooltip.html");
 			return;
 		}
-		DK_Create("DKTooltip/DKTooltip.html");
+		dk.create("DKTooltip/DKTooltip.html");
 		byId("DKTooltip/DKTooltip.html").innerHTML = byId(id).tooltip;
 		byId("DKTooltip/DKTooltip.html").style.top = mouseX+"px";
 		byId("DKTooltip/DKTooltip.html").style.left = mouseY+"px";
