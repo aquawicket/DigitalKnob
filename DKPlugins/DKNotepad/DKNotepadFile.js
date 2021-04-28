@@ -116,7 +116,7 @@ function DKNotepadFile_Save() {
     var text = byId("DKNotepad_Text").value;
     //var assets = DKAssets_LocalAssets();
     //console.log("DKNotepadFile_Save(): text = "+text);
-    dk.file.stringToFile(text, currentFile);
+    DKFile_StringToFile(text, currentFile);
     dk.create("DKGui/DKMessageBox.js", function() {
         DKFrame_Html("DKGui/DKMessageBox.html");
         DKMessageBox_Message("File Saved");

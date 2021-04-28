@@ -635,9 +635,9 @@ dk.debug.getSource = function dk_debug_getSource() {
     var assets = CPP_DKAssets_LocalAssets();
 
     if (dk.getBrowser() === "RML") {
-        CPP_dk.file.stringToFile(source, assets + "RmlUi_Source.html");
+        CPP_DKFile_StringToFile(source, assets + "RmlUi_Source.html");
     } else {
-        CPP_dk.file.stringToFile(source, assets + "Browser_Source.html");
+        CPP_DKFile_StringToFile(source, assets + "Browser_Source.html");
     }
 }
 

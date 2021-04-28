@@ -93,5 +93,5 @@ dk.notepad.open = function dk_notepad_open(file) {
 dk.notepad.save = function dk_notepad_save(file) {
     var text = byId("DKNotepad_Text").value;
     //console.log(("DKNotepad_Save("+file+"): text = "+text+"\n");
-    dk.file.stringToFile(text, file);
+    DKFile_StringToFile(text, file);
 }

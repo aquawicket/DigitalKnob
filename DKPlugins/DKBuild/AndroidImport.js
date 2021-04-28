@@ -159,7 +159,7 @@ function AndroidImport_Import()
 	gradle = gradle.replace("buildTypes", "sourceSets { main { jni.srcDirs = [] } } \n buildTypes");
 	
 	//write file
-	dk.file.stringToFile(gradle, WORKSPACE+"/"+APP+"_"+TYPE+"/app/build.gradle");
+	DKFile_StringToFile(gradle, WORKSPACE+"/"+APP+"_"+TYPE+"/app/build.gradle");
 	
 	//copy shared libs
 	dk.file.makeDir(WORKSPACE+"/"+APP+"_"+TYPE+"/app/src/main/jniLibs");

@@ -31,7 +31,7 @@ function SendBugReport_CreateReport()
 	
 	var assets = CPP_DKAssets_LocalAssets();
 	var log = CPP_DKFile_FileToString(assets+"log.txt");
-	CPP_dk.file.stringToFile(str+"\n\n"+log, assets+"log.txt");
+	CPP_DKFile_StringToFile(str+"\n\n"+log, assets+"log.txt");
 	SendBugReport_SendReport();
 	
 	byId("DKDebug/SendBugReport.html").style.display = "none";
