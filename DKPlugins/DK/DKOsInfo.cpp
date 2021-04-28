@@ -484,7 +484,7 @@ bool GetComputerName(DKString& computername)
 	return false;
 }
 
-
+#ifdef WIN32
 bool GetWinOSVersion(RTL_OSVERSIONINFOEXW& vi)
 {
 	ZeroMemory(&vi, sizeof(RTL_OSVERSIONINFOEXW));
@@ -536,3 +536,5 @@ bool GetWinProductInfo(RTL_OSVERSIONINFOEXW& vi, DWORD& dwType)
 	}
 	return false;
 }
+
+#endif 
