@@ -208,10 +208,10 @@ bool DKAssets::PackageAssets(DKString& dataFolder, DKString& headerFile)
 	DKDEBUGFUNC(dataFolder, headerFile);
 #if !defined(WIN32)
 	if (!DKArchive::Compress(dataFolder, dataFolder + "/../assets.zip")) {
-		return;
+		return false;
 	}
 	if (!DKUtil::Bin2C(dataFolder + "/../assets.zip", headerFile)) {
-		return;
+		return false;
 	}
 	//DKFile::Delete(dataFolder + "/../assets.zip"); //delete lingering zip file;
 
