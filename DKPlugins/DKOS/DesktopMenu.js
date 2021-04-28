@@ -1,5 +1,5 @@
 ///////////////////////////
-function DesktopMenu_Init()
+function DesktopMenu_init()()
 {
 	dk.create("DKOS/DesktopMenu.html");
 	//byId("DKOS/DesktopMenu.html").style.top = DKWindow_GetMouseY()+"px";
@@ -13,7 +13,7 @@ function DesktopMenu_Init()
 }
 
 //////////////////////////
-function DesktopMenu_End()
+function DesktopMenu_end()()
 {
 	document.removeEventListener("mousedown", DesktopMenu_onevent);
 	byId("OpenBackgtoundMenu").removeEventListener("click", DesktopMenu_onevent);

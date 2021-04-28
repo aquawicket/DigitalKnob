@@ -6,7 +6,7 @@ var aPath;
 var rPath;
 
 //////////////////////////
-function DKOpenFile_Init() {
+function DKOpenFile_init()() {
     dk.create("DKFile/DKOpenFile.css");
     dk.create("DKFile/DKOpenFile.html");
     byId("DKFile/DKOpenFile.html").addEventListener("GetFile", DKOpenFile_onevent);
@@ -25,7 +25,7 @@ function DKOpenFile_Init() {
 }
 
 /////////////////////////
-function DKOpenFile_End() {
+function DKOpenFile_end()() {
     byId("DKFile/DKOpenFile.html").removeEventListener("GetFile", DKOpenFile_onevent);
     byId("DKFile/DKOpenFile.html").removeEventListener("GetFile", DKOpenFile_onevent);
     byId("DKOpenFileCancel").removeEventListener("click", DKOpenFile_onevent);

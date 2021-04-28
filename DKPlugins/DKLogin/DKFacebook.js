@@ -1,7 +1,7 @@
 //https://developers.facebook.com/docs/javascript
 
 //////////////////////////
-function DKFacebook_Init()
+function DKFacebook_init()()
 {
 
 }

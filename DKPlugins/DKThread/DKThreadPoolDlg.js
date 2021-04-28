@@ -1,5 +1,5 @@
 ///////////////////////////////
-function DKThreadPoolDlg_Init()
+function DKThreadPoolDlg_init()()
 {
 	dk.create("DKThreadPool");
 	//if(!CPP_DK_Valid("DKWidgetJS,DKWidgetJS0")){ return; }  //FIXME: This was here for a reason.
@@ -8,7 +8,7 @@ function DKThreadPoolDlg_Init()
 }
 
 //////////////////////////////
-function DKThreadPoolDlg_End()
+function DKThreadPoolDlg_end()()
 {
 	byId("DKThread/DKThreadPoolDlg.html").removeEventListener("Update", DKThreadPoolDlg_onevent);
 	dk.close("DKThread/DKThreadPoolDlg.html");

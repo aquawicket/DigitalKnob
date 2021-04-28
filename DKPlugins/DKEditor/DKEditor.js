@@ -1,5 +1,5 @@
 ////////////////////////
-function DKEditor_Init()
+function DKEditor_init()()
 {
 	dk.create("DKEditor/DKEditor.css");
 	dk.create("DKEditor/DKEditor.html");
@@ -20,7 +20,7 @@ function DKEditor_Init()
 }
 
 ///////////////////////
-function DKEditor_End()
+function DKEditor_end()()
 {
 	byId("DKEditor_edit").removeEventListener("click", DKEditor_onevent);
 	byId("DKEditor_edit").removeEventListener("contextmenu", DKEditor_onevent);

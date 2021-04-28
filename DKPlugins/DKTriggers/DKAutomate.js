@@ -1,5 +1,5 @@
 //////////////////////////
-function DKAutomate_Init()
+function DKAutomate_init()()
 {
 	dk.create("DKAssets");
 	dk.create("DKTriggers/DKAutomate.html");
@@ -22,7 +22,7 @@ function DKAutomate_Init()
 }
 
 /////////////////////////
-function DKAutomate_End()
+function DKAutomate_end()()
 {
 	byId("DKTriggers/DKAutomate.html", "keydown", DKAutomate_onevent);
 	//window.removeEventListener("midi", DKAutomate_onevent);

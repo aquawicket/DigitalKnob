@@ -1,5 +1,5 @@
 ///////////////////////
-function SvnMenu_Init()
+function SvnMenu_init()()
 {
 	dk.create("DKBuild/SvnMenu.html");
 	byId("SvnMenu.html").style.top = DKWindow_GetMouseY()+"px";
@@ -10,7 +10,7 @@ function SvnMenu_Init()
 }
 
 //////////////////////
-function SvnMenu_End()
+function SvnMenu_end()()
 {
 	document.addEventListener("mousedown", SvnMenu_onevent);
 	byId("Svn Update").addEventListener("click", SvnMenu_onevent);

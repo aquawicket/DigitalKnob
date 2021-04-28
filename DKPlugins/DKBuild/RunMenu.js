@@ -1,5 +1,5 @@
 ///////////////////////
-function RunMenu_Init()
+function RunMenu_init()()
 {
 	dk.create("DKBuild/RunMenu.html");
 	document.addEventListener("mousedown", RunMenu_onevent);
@@ -13,7 +13,7 @@ function RunMenu_Init()
 }
 
 //////////////////////
-function RunMenu_End()
+function RunMenu_end()()
 {
 	document.removeEventListener("mousedown", RunMenu_onevent);
 	byId("Build App").removeEventListener("click", RunMenu_onevent);
@@ -66,7 +66,7 @@ function RunMenu_OnEvent(event)
 				var contents = DKFile_DirectoryContents(DKPATH);
 				var files = contents.split(",");
 				for(var i=0; i<files.length; i++){
-					if(DKFile_Exists(DKPATH+"/"+files[i]+"/DKApps/"+APP+"/"+OS+"/Release/"+APP+".exe")){
+					if(dk.file.extist(DKPATH+"/"+files[i]+"/DKApps/"+APP+"/"+OS+"/Release/"+APP+".exe")){
 						//console.log(DKPATH+"/"+files[i]+"/DKApps/"+APP+"/"+OS+"/Release/"+APP+".exe\n");
 						DK_Run(DKPATH+"/"+files[i]+"/DKApps/"+APP+"/"+OS+"/Release/"+APP+".exe");
 						return;
@@ -81,7 +81,7 @@ function RunMenu_OnEvent(event)
 				var contents = DKFile_DirectoryContents(DKPATH);
 				var files = contents.split(",");
 				for(var i=0; i<files.length; i++){
-					if(DKFile_Exists(DKPATH+"/"+files[i]+"/DKApps/"+APP+"/"+OS+"/Release/"+APP+"_64.exe")){
+					if(dk.file.extist(DKPATH+"/"+files[i]+"/DKApps/"+APP+"/"+OS+"/Release/"+APP+"_64.exe")){
 						//console.log(DKPATH+"/"+files[i]+"/DKApps/"+APP+"/"+OS+"/Release/"+APP+"_64.exe\n");
 						DK_Run(DKPATH+"/"+files[i]+"/DKApps/"+APP+"/"+OS+"/Release/"+APP+"_64.exe");
 						return;
@@ -106,13 +106,13 @@ function RunMenu_OnEvent(event)
 		if(DK_GetOS() === "Linux"){
 			//if(OS === "linux64"){
 				//console.log("TODO: Run linux apps from Linux\n");
-				if(DKFile_Exists(DKPATH+"/DKApps/"+APP+"/"+OS+"/Release/"+APP+".desktop")){
+				if(dk.file.extist(DKPATH+"/DKApps/"+APP+"/"+OS+"/Release/"+APP+".desktop")){
 					DK_Run(DKPATH+"/DKApps/"+APP+"/"+OS+"/Release/"+APP+".desktop");
 				}
 				var contents = DKFile_DirectoryContents(DKPATH);
 				var files = contents.split(",");
 				for(var i=0; i<files.length; i++){
-					if(DKFile_Exists(DKPATH+"/"+files[i]+"/DKApps/"+APP+"/"+OS+"/Release/"+APP+".desktop")){
+					if(dk.file.extist(DKPATH+"/"+files[i]+"/DKApps/"+APP+"/"+OS+"/Release/"+APP+".desktop")){
 						//console.log(DKPATH+"/"+files[i]+"/DKApps/"+APP+"/"+OS+"/Release/"+APP+".desktop\n");
 						DK_Run(DKPATH+"/"+files[i]+"/DKApps/"+APP+"/"+OS+"/Release/"+APP+".desktop");
 						return;

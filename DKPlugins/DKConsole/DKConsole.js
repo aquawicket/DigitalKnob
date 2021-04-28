@@ -1,7 +1,7 @@
 var DKConsole_color = "black";
 
 /////////////////////////
-function DKConsole_Init()
+function DKConsole_init()()
 {
 	dk.create("DKConsole/DKConsole.css");
 	dk.create("DKConsole/DKConsole.html");
@@ -12,7 +12,7 @@ function DKConsole_Init()
 }
 
 ////////////////////////
-function DKConsole_End()
+function DKConsole_end()()
 {
 	window.removeEventListener("color", DKConsole_onevent);
 	window.removeEventListener("notify", DKConsole_onevent);

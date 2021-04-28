@@ -1,7 +1,7 @@
 var SVN = "";
 
 ///////////////////////
-function SvnMenu_Init()
+function SvnMenu_init()()
 {
 	dk.create("DKThreadPool");
 
@@ -29,7 +29,7 @@ function SvnMenu_Init()
 }
 
 //////////////////////
-function SvnMenu_End()
+function SvnMenu_end()()
 {
 	document.removeEventListener("mousedown", SvnMenu_onevent);
 	byId("Git Update").removeEventListener("click", SvnMenu_onevent);
@@ -61,7 +61,7 @@ function SvnMenu_ValidateGit()
 	if(DK_GetBrowser() !== "RML"){ return; }
 	SVN("Looking for SVN\n");
 	//SVN(SVN+"\n");
-	if(!DKFile_Exists(SVN)){
+	if(!dk.file.extist(SVN)){
 		SVN("Please install SVN\n");
 		SvnMenu_InstallGit();
 	}

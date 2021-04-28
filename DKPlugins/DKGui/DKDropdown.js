@@ -1,11 +1,11 @@
 //////////////////////////
-function DKDropdown_Init()
+function DKDropdown_init()()
 {
 
 }
 
 /////////////////////////
-function DKDropdown_End()
+function DKDropdown_end()()
 {
 	
 }

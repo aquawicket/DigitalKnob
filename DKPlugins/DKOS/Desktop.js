@@ -1,5 +1,5 @@
 ///////////////////////
-function Desktop_Init()
+function Desktop_init()()
 {
 	dk.create("DKOS/Desktop.html,DKOS/DKOS.html", function(){
 		byId("Background").addEventListener("contextmenu", Desktop_onevent);
@@ -7,7 +7,7 @@ function Desktop_Init()
 }
 
 //////////////////////
-function Desktop_End()
+function Desktop_end()()
 {
 	byId("Background").removeEventListener("contextmenu", Desktop_onevent);
 	dk.close("DKOS/Desktop.html");

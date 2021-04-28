@@ -84,7 +84,7 @@ console.log("LOG_HIDE: "+LOG_HIDE);
 
 
 ////////////////////////
-function DKAssets_Init()
+function DKAssets_init()()
 {
 	
 }

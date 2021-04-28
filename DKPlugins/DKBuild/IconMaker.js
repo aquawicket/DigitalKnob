@@ -4,14 +4,14 @@ var IMAGEMAGICK_DOWNLOAD = "http://ftp.icm.edu.pl/packages/ImageMagick/binaries/
 var IMAGEMAGICK_CONVERT = "C:/digitalknob/DK/3rdParty/"+IMAGEMAGICK_VERSION+"/convert.exe";
 
 /////////////////////////
-function IconMaker_Init()
+function IconMaker_init()()
 {
 	IMAGEMAGICK_CONVERT = CPP_DKFile_GetShortName(IMAGEMAGICK_CONVERT);
 	console.log("IMAGEMAGICK_CONVERT = "+IMAGEMAGICK_CONVERT);
 }
 
 ////////////////////////
-function IconMaker_End()
+function IconMaker_end()()
 {
 
 }
@@ -72,7 +72,7 @@ function IconMaker_ValidateImageMagick()
 {
 	console.log("Looking for ImageMagick...");
 	//console.log(SVN);
-	if(!CPP_DKFile_Exists(IMAGEMAGICK_CONVERT)){
+	if(!CPP_dk.file.extist(IMAGEMAGICK_CONVERT)){
 		console.log("Installing ImageMagick...");
 		IconMaker_InstallImageMagick();
 	}

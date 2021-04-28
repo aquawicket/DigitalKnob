@@ -42,7 +42,7 @@ dk.notepadfile.init = function dk_notepad_file_init() {
 
 /*
 ////////////////////////////
-function DKNotepadFile_End() {/*
+function DKNotepadFile_end()() {/*
 	document.removeEventListener("mousedown", DKNotepadFile_onevent);
 	byId("DKNotepadFile_New").removeEventListener("click", DKNotepadFile_onevent); //FIXME:   DKNotepadFile_New undefined
 	byId("DKNotepadFile_Open").removeEventListener("click", DKNotepadFile_onevent);

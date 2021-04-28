@@ -1,5 +1,5 @@
 //////////////////////////
-function scrolltest_Init()
+function scrolltest_init()()
 {
 	dk.create("DKGui/scrolltest.html", function(){
 	dk.create("DKGui/scrolltest1.html", function(){
@@ -13,7 +13,7 @@ function scrolltest_Init()
 }
 
 /////////////////////////
-function scrolltest_End()
+function scrolltest_end()()
 {
 	byId("bottomdiv").removeEventListener("mousedown", scrolltest_onevent);
 }

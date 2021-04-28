@@ -1,5 +1,5 @@
 ////////////////////////////////////
-function DKEditor_BrowserMenu_Init()
+function DKEditor_BrowserMenu_init()()
 {
 	dk.create("DKEditor/DKEditor_BrowserMenu.html");
 	document.addEventListener("mousedown", DKEditor_BrowserMenu_onevent);
@@ -8,7 +8,7 @@ function DKEditor_BrowserMenu_Init()
 }
 
 ///////////////////////////////////
-function DKEditor_BrowserMenu_End()
+function DKEditor_BrowserMenu_end()()
 {
 	document.removeEventListener("mousedown", DKEditor_BrowserMenu_onevent);
 	dk.close("DKEditor/DKEditor_BrowserMenu.html");

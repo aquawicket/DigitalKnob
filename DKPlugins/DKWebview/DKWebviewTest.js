@@ -1,5 +1,5 @@
 /////////////////////////////
-function DKWebviewTest_Init()
+function DKWebviewTest_init()()
 {
 	dk.create("DKWebview/DKWebviewTest.html");
 	window.addEventListener("mousedown", DKWebviewTest_onevent);
@@ -8,7 +8,7 @@ function DKWebviewTest_Init()
 }
 
 ////////////////////////////
-function DKWebviewTest_End()
+function DKWebviewTest_end()()
 {
 	window.addEventListener("mousedown", DKWebviewTest_onevent);
 	window.addEventListener("keydown", DKWebviewTest_onevent);

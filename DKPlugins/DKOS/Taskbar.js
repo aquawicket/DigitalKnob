@@ -1,7 +1,7 @@
 var pos;
 var animation;
 ///////////////////////
-function Taskbar_Init()
+function Taskbar_init()()
 {
 	dk.create("DKOS/Taskbar.html,DKOS/DKOS.html", function(){
 	//dk.create("DKOS/Taskbar.html", function(){
@@ -19,7 +19,7 @@ function Taskbar_Init()
 }
 
 //////////////////////
-function Taskbar_End()
+function Taskbar_end()()
 {
 	byId("start").removeEventListener("click", Taskbar_onevent);
 	byId("test_animate").removeEventListener("click", Taskbar_onevent);

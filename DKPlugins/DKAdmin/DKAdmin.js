@@ -1,5 +1,5 @@
 ///////////////////////
-function DKAdmin_Init()
+function DKAdmin_init()()
 {
 	dk.create("DKAdmin/DKAdmin.html");
 	byId("AdminBadge").addEventListener("click", DKAdmin_onevent);
@@ -15,7 +15,7 @@ function DKAdmin_Init()
 }
 
 //////////////////////
-function DKAdmin_End()
+function DKAdmin_end()()
 {
 	byId("AdminBadge").removeEventListener("click", DKAdmin_onevent);
 	dk.close("DKAdmin/DKAdmin.html");

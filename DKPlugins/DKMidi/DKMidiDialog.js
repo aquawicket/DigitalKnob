@@ -1,5 +1,5 @@
 ////////////////////////////
-function DKMidiDialog_Init()
+function DKMidiDialog_init()()
 {
 	dk.create("DKMidi/DKMidiDialog.css");
 	dk.create("DKMidi/DKMidiDialog.html");
@@ -7,7 +7,7 @@ function DKMidiDialog_Init()
 }
 
 ///////////////////////////
-function DKMidiDialog_End()
+function DKMidiDialog_end()()
 {
 	//DKRemoveEvents(DKMidiDialog_onevent);
 	dk.close("DKMidi/DKMidiDialog.html");

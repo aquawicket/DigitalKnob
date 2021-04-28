@@ -8,7 +8,7 @@ var rPath;
 //var DKSaveFile_callback;
 
 //////////////////////////
-function DKSaveFile_Init() {
+function DKSaveFile_init()() {
     dk.create("DKFile/DKSaveFile.css");
     dk.create("DKFile/DKSaveFile.html");
     byId("DKFile/DKSaveFile.html").addEventListener("SetFile", DKSaveFile_onevent);
@@ -26,7 +26,7 @@ function DKSaveFile_Init() {
 }
 
 /////////////////////////
-function DKSaveFile_End() {
+function DKSaveFile_end()() {
     byId("DKFile/DKSaveFile.html").removeEventListener("SetFile", DKSaveFile_onevent);
     byId("DKSaveFileCancel").removeEventListener("click", DKSaveFile_onevent);
     byId("DKSaveFileOK").removeEventListener("click", DKSaveFile_onevent);

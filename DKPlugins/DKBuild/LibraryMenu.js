@@ -1,5 +1,5 @@
 ///////////////////////////
-function LibraryMenu_Init()
+function LibraryMenu_init()()
 {
 	dk.create("DKBuild/LibraryMenu.html");
 	document.addEventListener("mousedown", LibraryMenu_onevent);
@@ -7,7 +7,7 @@ function LibraryMenu_Init()
 }
 
 //////////////////////////
-function LibraryMenu_End()
+function LibraryMenu_end()()
 {
 	document.removeEventListener("mousedown", LibraryMenu_onevent);
 	byId("Build Libraries").removeEventListener("click", LibraryMenu_onevent);

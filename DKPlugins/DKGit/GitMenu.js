@@ -1,7 +1,7 @@
 var GIT = "";
 
 ///////////////////////
-function GitMenu_Init()
+function GitMenu_init()()
 {
 	dk.create("DKBuild/DKBuild.js", function(){});
 	dk.create("DKThreadPool");
@@ -33,7 +33,7 @@ function GitMenu_Init()
 }
 
 //////////////////////
-function GitMenu_End()
+function GitMenu_end()()
 {
 	document.removeEventListener("mousedown", GitMenu_onevent);
 	byId("Git Update").removeEventListener("click", GitMenu_onevent);
@@ -65,7 +65,7 @@ function GitMenu_ValidateGit()
 	if(DK_GetBrowser() !== "RML"){ return; }
 	console.log("Looking for GIT\n");
 	//console.log(GIT+"\n");
-	if(!CPP_DKFile_Exists(GIT)){
+	if(!CPP_dk.file.extist(GIT)){
 		console.log("Please install GIT\n");
 		GitMenu_InstallGit();
 	}

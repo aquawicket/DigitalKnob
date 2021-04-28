@@ -235,7 +235,7 @@ dk.solutionmenu.gitAdd = function dk_solutionmenu_gitAdd()
 		
 		console.log("dk.solutionmenu.file = "+dk.solutionmenu.file+"\n");
 		var search = dk.solutionmenu.file;
-		while(!DKFile_Exists(search+"/.git")){
+		while(!dk.file.extist(search+"/.git")){
 			var n = search.lastIndexOf("/");
 			if(n === -1){
 				console.warn("could not locate a .git folder\n");
@@ -259,7 +259,7 @@ dk.solutionmenu.upxCompress = function dk_solutionmenuuUpxCompress()
 		var upx = dkpath+"/DK/3rdParty/upx-3.95-win64/upx.exe";
 		console.log("upx = "+upx+"\n");
 		//upx compress the exe file
-		if(DKFile_Exists(upx)){
+		if(dk.file.extist(upx)){
 			console.warn("UPX compressing exe... please wait\n");
 			DK_Execute(upx+" -9 -v "+dk.solutionmenu.file);
 		}

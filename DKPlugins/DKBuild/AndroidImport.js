@@ -3,7 +3,7 @@ var ANDROIDSTUDIO = "C:/Program Files/Android/Android Studio/bin/studio64.exe";
 TYPE = byId("BuildType").innerHTML;
 
 /////////////////////////////
-function AndroidImport_Init()
+function AndroidImport_init()()
 {
 	dk.create("DKHandles");
 	ANDROIDSTUDIO = DKFile_GetShortName(ANDROIDSTUDIO);
@@ -23,13 +23,13 @@ function AndroidImport_Import()
 	var files = contents.split(",");
 	
 	for(var i=0; i<files.length; i++){ 
-		if(DKFile_Exists(DKPATH+"/"+files[i]+"/DKApps/"+APP)){
+		if(dk.file.extist(DKPATH+"/"+files[i]+"/DKApps/"+APP)){
 			appdir = DKPATH+"/"+files[i]+"/DKApps/"+APP;
 		}
 	}
 	
 	/*
-	if(DKFile_Exists(DKPATH+"/DKApps/"+APP)){
+	if(dk.file.extist(DKPATH+"/DKApps/"+APP)){
 		appdir = DKPATH+"/DKApps/"+APP;
 	}
 	*/
@@ -75,7 +75,7 @@ function AndroidImport_Import()
 		var url = DKFile_GetSetting(files[i], "[MYGIT]");
 		if(url){ //console.log("url = "+url+"\n");
 			var folder = files[i].replace(".txt",""); //console.log("folder = "+folder+"\n");
-			if(DKFile_Exists(DKPATH+"/"+folder+"/DKApps/"+APP+"/DKCMake.txt")){
+			if(dk.file.extist(DKPATH+"/"+folder+"/DKApps/"+APP+"/DKCMake.txt")){
 				appdir = folder+"/DKApps";
 			}
 		}

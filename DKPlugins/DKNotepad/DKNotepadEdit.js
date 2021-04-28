@@ -1,5 +1,5 @@
 /////////////////////////////
-function DKNotepadEdit_Init()
+function DKNotepadEdit_init()()
 {
 	dk.create("DKNotepad/DKNotepadEdit.html,DKNotepad/DKNotepad.html");
 	document.addEventListener("mousedown", DKNotepadEdit_onevent);
@@ -12,7 +12,7 @@ function DKNotepadEdit_Init()
 }
 
 ////////////////////////////
-function DKNotepadEdit_End()
+function DKNotepadEdit_end()()
 {
 	document.removeEventListener("mousedown", DKNotepadEdit_onevent);
 	byId("DKNotepadEdit_Undo").removeEventListener("click", DKNotepadEdit_onevent);

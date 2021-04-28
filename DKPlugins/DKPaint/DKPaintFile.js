@@ -1,5 +1,5 @@
 /////////////////////////////
-function DKPaintFile_Init()
+function DKPaintFile_init()()
 {
 	dk.create("DKPaint/DKPaintFile.html,DKPaint/DKPaint.html");
 	document.addEventListener("mousedown", DKPaintFile_onevent);
@@ -10,7 +10,7 @@ function DKPaintFile_Init()
 }
 
 //////////////////////////
-function DKPaintFile_End()
+function DKPaintFile_end()()
 {
 	document.removeEventListener("mousedown", DKPaintFile_onevent);
 	byId("DKPaintFile_Open").removeEventListener("click", DKPaintFile_onevent);

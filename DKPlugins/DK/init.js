@@ -8,10 +8,10 @@ if(DK_GetOS() === "Android" || DK_GetOS() === "iOS"){
 else{ USE_WEBVIEW = 0; }
 
 //////////////////////
-function init_Init(){}
+function init_init()(){}
 
 /////////////////////
-function init_End(){}
+function init_end()(){}
 
 ////////////////////////////
 function init_OnEvent(event)  //Duktape

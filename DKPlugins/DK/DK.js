@@ -425,7 +425,7 @@ dk.loadJs = function dk_loadJs(url, dk_loadJs_callback) {
             //FIXME: This is the old way to run init on plugins
             var old_plugin = url.substring(url.lastIndexOf("/") + 1);
             old_plugin = old_plugin.substring(0, old_plugin.lastIndexOf("."));
-            old_plugin = old_plugin + "_Init";
+            old_plugin = old_plugin + "_init()";
             old_plugin = window[old_plugin];
 
             if (plugin && plugin.init) {
@@ -461,7 +461,7 @@ dk.loadJs = function dk_loadJs(url, dk_loadJs_callback) {
         }
         /*
         var func = init;
-        //Plugin_Init() 
+        //Plugin_init()() 
         if (eval("typeof " + func) === "function") {
             eval(func)();
         } else {

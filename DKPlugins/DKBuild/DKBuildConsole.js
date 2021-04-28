@@ -1,7 +1,7 @@
 var working = true;
 
 //////////////////////////////
-function DKBuildConsole_Init()
+function DKBuildConsole_init()()
 {
 	CPP_dk.create("DKBuild/DKBuild.js");
 	DKBuild_ValidateCmake();
@@ -16,7 +16,7 @@ function DKBuildConsole_Init()
 }
 
 /////////////////////////////
-function DKBuildConsole_End()
+function DKBuildConsole_end()()
 {
 	CPP_dk.close("DKBuild/DKBuild.js");
 }
@@ -208,7 +208,7 @@ function DKBuildConsole_Process()
 	
 	DKBuildConsole_ChooseUpdate();
 	
-	if(!CPP_DKFile_Exists(DKPATH+"/DK/DKPlugins")){
+	if(!CPP_dk.file.extist(DKPATH+"/DK/DKPlugins")){
 		console.error("ERROR: can't find "+DKPATH+" ");
 		CPP_DK_GetKey();
 		CPP_DK_Exit();

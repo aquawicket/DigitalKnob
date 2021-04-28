@@ -1,6 +1,6 @@
 
 /////////////////////////
-function DKFpsTest_Init()
+function DKFpsTest_init()()
 {
 	dk.create("DKFpsTest/DKFpsTest.html", function(){});
 
@@ -63,7 +63,7 @@ function DKFpsTest_Init()
 }
 
 ////////////////////////
-function DKFpsTest_End()
+function DKFpsTest_end()()
 {
 	
 }

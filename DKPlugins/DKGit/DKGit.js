@@ -1,14 +1,14 @@
 var GIT = "";
 
 /////////////////////
-function DKGit_Init()
+function DKGit_init()()
 {	
 	DKGit_SetGitPath()
 	DKGit_ValidateGit();
 }
 
 ////////////////////
-function DKGit_End()
+function DKGit_end()()
 {
 
 }
@@ -40,7 +40,7 @@ function DKGit_ValidateGit()
 {
 	//if(CPP_DK_GetBrowser() !== "RML"){ return; }
 	console.log("Looking for GIT\n");
-	if(!CPP_DKFile_Exists(GIT)){
+	if(!CPP_dk.file.extist(GIT)){
 		DKGit_InstallGit();
 		DKGit_SetGitPath();
 	}

@@ -1,7 +1,7 @@
 var currentFile;
 
 ///////////////////////
-function DKPaint_Init()
+function DKPaint_init()()
 {
 	dk.create("DKPaint/DKPaint.css");
 	dk.create("DKPaint/DKPaint.html");
@@ -12,7 +12,7 @@ function DKPaint_Init()
 }
 
 //////////////////////
-function DKPaint_End()
+function DKPaint_end()()
 {
 	//byId("DKPaint_Save").removeEventListener("click", DKPaint_onevent);
 	byId("DKPaint/DKPaint.html").removeEventListener("contextmenu", DKPaint_onevent);

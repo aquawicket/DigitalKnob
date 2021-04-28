@@ -4,9 +4,9 @@ var event_type;
 var event_id;
 
 /////////////////////////////
-function DKColorPicker_Init()
+function DKColorPicker_init()()
 {
-	console.log("DKColorPicker_Init()");
+	console.log("DKColorPicker_init()()");
 	dk.create("DKColorPicker/DKColorPicker.css");
 	dk.create("DKColorPicker/DKColorPicker.html");
 	byId("DKColorPicker/DKColorPicker.html").addEventListener("GetColor", DKColorPicker_onevent);
@@ -16,7 +16,7 @@ function DKColorPicker_Init()
 }
 
 ////////////////////////////
-function DKColorPicker_End()
+function DKColorPicker_end()()
 {
 	byId("DKColorPicker/DKColorPicker.html").removeEventListener("GetColor", DKColorPicker_onevent);
 	byId("DKColorPickerBar").removeEventListener("mousedown", DKColorPicker_onevent);

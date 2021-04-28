@@ -6,7 +6,7 @@ dk.create("WEB/videojs-youtube-master/src/youtube.js");
 var registered = 0;
 	
 ///////////////////////
-function DKVideo_Init()
+function DKVideo_init()()
 {
 	videojs.options.flash.swf = "video-js/video-js.swf";
 }

@@ -1,5 +1,5 @@
 /////////////////////
-function DKOcr_Init()
+function DKOcr_init()()
 {
 	dk.create("DKOcr");
 	dk.create("DKOcr/DKOcr.html");
@@ -11,7 +11,7 @@ function DKOcr_Init()
 }
 
 ////////////////////
-function DKOcr_End()
+function DKOcr_end()()
 {
 	byId("DKNotepad/DKNotepad.html").removeEventListener("OpenFile", DKOcr_onevent);
 	dk.close("DKNotepad/DKNotepad.js");
@@ -33,7 +33,7 @@ function DKOcr_OnEvent(event)
 			
 			DKFile_Delete(assets+"/temp.png");
 			for(var i=0; i<1000; i++){
-				if(DKFile_Exists(assets+"/temp-"+i+".png")){
+				if(dk.file.extist(assets+"/temp-"+i+".png")){
 					DKFile_Delete(assets+"/temp-"+i+".png");
 				}
 				else{
@@ -47,7 +47,7 @@ function DKOcr_OnEvent(event)
 			
 			var pages = "";
 			for(var i=0; i<1000; i++){
-				if(DKFile_Exists(assets+"/temp-"+i+".png")){
+				if(dk.file.extist(assets+"/temp-"+i+".png")){
 					pages += DKOcr_ImageToText(assets+"/temp-"+i+".png");
 					byId("DKNotepad_Text").value = pages;
 				}
@@ -56,7 +56,7 @@ function DKOcr_OnEvent(event)
 					continue;
 				}
 			}
-			if(DKFile_Exists(assets+"/temp-0.png")){ return ; }
+			if(dk.file.extist(assets+"/temp-0.png")){ return ; }
 		}
 		
 		var text;

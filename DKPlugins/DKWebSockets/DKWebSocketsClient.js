@@ -1,7 +1,7 @@
 var websocket;
 
 //////////////////////////////////
-function DKWebSocketsClient_Init()
+function DKWebSocketsClient_init()()
 {
 	dk.create("DKWebSockets/DKWebSocketsClient.html", function(){
 		window.addEventListener("DKWebSockets_OnMessageFromServer", DKWebSocketsClient_onevent);
@@ -12,7 +12,7 @@ function DKWebSocketsClient_Init()
 }
 
 /////////////////////////////////
-function DKWebSocketsClient_End()
+function DKWebSocketsClient_end()()
 {
 	window.removeEventListener("DKWebSockets_OnMessageFromServer", DKWebSocketsClient_onevent);
 	byId("DKWebSocketsClient_CreateClient").removeEventListener("click", DKWebSocketsClient_onevent);

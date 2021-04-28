@@ -1,5 +1,5 @@
 //////////////////////
-function DKTray_Init()
+function DKTray_init()()
 {
 	if(DK_GetOS() !== "Win32" && DK_GetOS() !== "Win64"){
 		return;
@@ -25,7 +25,7 @@ function DKTray_Init()
 }
 
 /////////////////////
-function DKTray_End()
+function DKTray_end()()
 {
 	ById("DKTray").removeEventListener("1000", DKTray_onevent);
 	byId("DKTray").removeEventListener("1001", DKTray_onevent);

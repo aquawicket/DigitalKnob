@@ -1,5 +1,5 @@
 /////////////////////////
-function DKDisplay_Init()
+function DKDisplay_init()()
 {
 	dk.create("DKDisplay/DKDisplay.html");
 	byId("DKDisplay_Button").addEventListener("click", DKDisplay_onevent);
@@ -8,7 +8,7 @@ function DKDisplay_Init()
 }
 
 ////////////////////////
-function DKDisplay_End()
+function DKDisplay_end()()
 {
 	byId("DKDisplay_Button").removeEventListener("click", DKDisplay_onevent);
 	//window.removeEventListener("second", DKDisplay_onevent);

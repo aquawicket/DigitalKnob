@@ -1,5 +1,5 @@
 ///////////////////////
-function DKStats_Init()
+function DKStats_init()()
 {
 	dk.create("DKStats/DKStats.html");
 	window.addEventListener("second", DKStats_onevent);
@@ -8,7 +8,7 @@ function DKStats_Init()
 }
 
 //////////////////////
-function DKStats_End()
+function DKStats_end()()
 {
 	window.removeEventListener("second", DKStats_onevent);
 	//byId("DKStats/DKStats.html").removeEventListener("click", DKStats_onevent);

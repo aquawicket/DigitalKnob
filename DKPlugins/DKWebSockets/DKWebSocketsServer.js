@@ -1,5 +1,5 @@
 //////////////////////////////////
-function DKWebSocketsServer_Init()
+function DKWebSocketsServer_init()()
 {
 	dk.create("DKWebSockets");
 	dk.create("DKWebSockets/DKWebSocketsServer.html", function(){
@@ -13,7 +13,7 @@ function DKWebSocketsServer_Init()
 }
 
 /////////////////////////////////
-function DKWebSocketsServer_End()
+function DKWebSocketsServer_end()()
 {
 	window.removeEventListener("DKWebSockets_OnMessageFromClient", DKWebSocketsServer_onevent);
 	byId("DKWebSocketsServer_CloseServer").removeEventListener("click", DKWebSocketsServer_onevent);

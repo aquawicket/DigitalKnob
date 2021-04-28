@@ -1,5 +1,5 @@
 ////////////////////////////
-function SendBugReport_Init()
+function SendBugReport_init()()
 {
 	dk.create("DKDebug/SendBugReport.css");
 	dk.create("DKDebug/SendBugReport.html");
@@ -7,7 +7,7 @@ function SendBugReport_Init()
 }
 
 ////////////////////////////
-function SendBugReport_End()
+function SendBugReport_end()()
 {
 	byId("SendBugReport_Button").removeEventListener("click", SendBugReport_onevent);
 	dk.close("DKDebug/SendBugReport.html");

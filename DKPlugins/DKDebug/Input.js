@@ -1,12 +1,12 @@
 /////////////////////
-function Input_Init()
+function Input_init()()
 {
 	dk.create("DKDebug/Input.html");
 	byId("Input_Text").addEventListener("keydown", Input_onevent);
 }
 
 ////////////////////
-function Input_End()
+function Input_end()()
 {
 	byId("Input_Text").removeEventListener("keydown", Input_onevent);
 	dk.close("DKDebug/Input.html");

@@ -1,5 +1,5 @@
 /////////////////////////
-function DKHandles_Init()
+function DKHandles_init()()
 {
 	dk.create("DKHandles");
 	dk.create("DKHandles/DKHandles.html");
@@ -19,7 +19,7 @@ function DKHandles_Init()
 }
 
 ////////////////////////
-function DKHandles_End()
+function DKHandles_end()()
 {
 	document.removeEventListener("click", DKHandles_onevent);
 	document.removeEventListener("DKHandles_WindowChanged", DKHandles_onevent);

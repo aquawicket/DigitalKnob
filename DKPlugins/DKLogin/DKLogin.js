@@ -2,7 +2,7 @@ var FACEBOOK_ID;
 var FACEBOOK_NAME;
 
 ///////////////////////
-function DKLogin_Init()
+function DKLogin_init()()
 {
 	dk.create("DKLogin/DKLogin.css");
 	dk.create("DKLogin/DKLogin.html");
@@ -10,7 +10,7 @@ function DKLogin_Init()
 }
 
 //////////////////////
-function DKLogin_End()
+function DKLogin_end()()
 {
 	byId("DKLoginFacebook").addEventListener("click", DKLogin_onevent);
 	dk.close("DKLogin/DKLogin.html");

@@ -2,7 +2,7 @@ DKSolutionRename_id = "";
 DKSolutionRename_file = "";
 
 ////////////////////////////////
-function DKSolutionRename_Init()
+function DKSolutionRename_init()()
 {
 	dk.create("DKFile/DKSolutionRename.html,DKSolutionMenu");
 	document.addEventListener("mousedown", DKSolutionRename_onevent);
@@ -11,7 +11,7 @@ function DKSolutionRename_Init()
 }
 
 ///////////////////////////////
-function DKSolutionRename_End()
+function DKSolutionRename_end()()
 {
 	document.removeEventListener("mousedown", DKSolutionRename_onevent);
 	byId("DKSolutionRename_box").removeEventListener("keydown", DKSolutionRename_onevent);

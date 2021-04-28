@@ -1,7 +1,7 @@
 var SVN = "";
 
 /////////////////////
-function DKSvn_Init()
+function DKSvn_init()()
 {
 	dk.create("DKThreadPool");
 
@@ -25,7 +25,7 @@ function DKSvn_Init()
 }
 
 ////////////////////
-function DKSvn_End()
+function DKSvn_end()()
 {
 
 }
@@ -42,7 +42,7 @@ function DKSvn_ValidateSvn()
 	if(DK_GetBrowser() !== "RML"){ return; }
 	console.log(("Looking for SVN\n");
 	//console.log((SVN+"\n");
-	if(!DKFile_Exists(SVN)){
+	if(!dk.file.extist(SVN)){
 		console.log(("Please install SVN\n");
 		DKBuild_InstallSvn();
 	}
@@ -86,7 +86,7 @@ function DKSvn_SvnUpdate()
 	DK_Execute(SVN +" checkout https://github.com/aquawicket/DigitalKnob/trunk/ "+DKPATH);
 	
 	var mysvn = DKAssets_LocalAssets()+"mysvn.txt";
-	if(!DKFile_Exists(mysvn)){ mysvn = DKPATH+"/mysvn.txt"; } //check for /mysvn.txt
+	if(!dk.file.extist(mysvn)){ mysvn = DKPATH+"/mysvn.txt"; } //check for /mysvn.txt
 	
 	//TODO: Multipe user folders
 	

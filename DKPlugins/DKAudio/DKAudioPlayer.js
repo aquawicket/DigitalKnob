@@ -1,7 +1,7 @@
 var DKAudioPlayer_file = "";
 
 /////////////////////////////
-function DKAudioPlayer_Init()
+function DKAudioPlayer_init()()
 {
 	dk.create("DKAudio");
 	dk.create("DKAudio/DKAudioPlayer.html");
@@ -15,7 +15,7 @@ function DKAudioPlayer_Init()
 }
 
 ////////////////////////////
-function DKAudioPlayer_End()
+function DKAudioPlayer_end()()
 {
 	window.removeEventListener("timeupdate", DKAudioPlayer_onevent);
 	window.removeEventListener("ended", DKAudioPlayer_onevent);

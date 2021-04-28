@@ -1,5 +1,5 @@
 /////////////////////////
-function BugReport_Init()
+function BugReport_init()()
 {
 	dk.create("DKDebug/BugReport.html");
 	byId("BugReport_Image").addEventListener("click", BugReport_onevent);
@@ -7,7 +7,7 @@ function BugReport_Init()
 }
 
 ////////////////////////
-function BugReport_End()
+function BugReport_end()()
 {
 	byId("BugReport_Image").removeEventListener("click", BugReport_onevent);
 	byId("BugReport_Text").removeEventListener("click", BugReport_onevent);

@@ -331,16 +331,16 @@ function DKClose(data)
 	
 	if(arry[0] === "DKJavascript"){
 		var end = file.replace(".js", "");
-		end += "_End";
+		end += "_end()";
 		eval(end+"()");
 		
 		//FIXME
 		/*
 		console.log(end);
-		var func = window[end]; //Plugin_End() //FIXME
+		var func = window[end]; //Plugin_end()() //FIXME
 		if(typeof func === 'function'){
 			
-			func(); // Call the jsclass_End() function
+			func(); // Call the jsclass_end()() function
 		}
 		else{
 			console.warn("DKClose(data): "+func+" is not a function\n");
@@ -453,7 +453,7 @@ function LoadJs(url, callback)
 	//}
 	
 	var init = file.replace(".js", "");
-	init += "_Init";
+	init += "_init()";
 	
 	head.appendChild(script);
 	
@@ -462,7 +462,7 @@ function LoadJs(url, callback)
 	script.onload = script.onreadystatechange = function(){ //FIXME - DigitalKnob can't trigger onload yet.
 		if(!done && (!this.readyState || this.readyState === "loaded" || this.readyState === "complete")){
 			//DKINFO("Loaded: "+url+"\n");
-			var func = window[init]; //Plugin_Init()    
+			var func = window[init]; //Plugin_init()()    
 			if(typeof func === 'function'){ 
 				//DKINFO("Calling: "+init+"\n");
 				func(); //Init
@@ -483,7 +483,7 @@ function LoadJs(url, callback)
 	//FIXME - DigitalKnob can't trigger onload yet, so we do this
 	if(DK_GetJSEngine() === "Duktape"){
 		//DKINFO("Loaded: "+url+"\n");
-		var func = init; //Plugin_Init() 
+		var func = init; //Plugin_init()() 
 		if(eval("typeof "+func) === "function"){
 			//DKINFO("Calling: "+init+"\n");
 			eval(func)(); //Init

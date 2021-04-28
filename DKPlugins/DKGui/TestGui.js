@@ -1,11 +1,11 @@
 ///////////////////////
-function TestGui_Init()
+function TestGui_init()()
 {
 	dk.create("DKGui/TestGui.html");
 }
 
 //////////////////////
-function TestGui_End()
+function TestGui_end()()
 {
 	
 }

@@ -1,5 +1,5 @@
 ///////////////////////////
-function DKPaintMenu_Init()
+function DKPaintMenu_init()()
 {
 	dk.create("DKPaint/DKPaintMenu.html");
 	document.addEventListener("mousedown", DKPaintMenu_onevent);
@@ -9,7 +9,7 @@ function DKPaintMenu_Init()
 }
 
 //////////////////////////
-function DKPaintMenu_End()
+function DKPaintMenu_end()()
 {
 	document.removeEventListener("mousedown", DKPaintMenu_onevent);
 	byId("DKPaintMenu_Cut").removeEventListener("click", DKPaintMenu_onevent);

@@ -27,7 +27,7 @@ var trigger_events;
 
 
 //////////////////////////
-function DKTriggers_Init()
+function DKTriggers_init()()
 {
 	current_trigger;
 	triggers = [];
@@ -48,7 +48,7 @@ function DKTriggers_Init()
 }
 
 /////////////////////////
-function DKTriggers_End()
+function DKTriggers_end()()
 {
 	window.removeEventListener("gui", DKTrigger_onevent); //C++
 	window.removeEventListener("midi", DKTrigger_onevent); //C++
@@ -354,7 +354,7 @@ function DKTrigger_FireTrigger(trigger)
 function DKTrigger_LoadTriggers(file)
 {
 	var assets = DKAssets_LocalAssets();
-	if(!DKFile_Exists(assets+file)){ //FIXME: add to DKFile.js
+	if(!dk.file.extist(assets+file)){ //FIXME: add to DKFile.js
 		console.log("DKTrigger_LoadTriggers("+assets+file+"): Cannot find file\n");
 		return;
 	}

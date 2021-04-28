@@ -3,7 +3,7 @@
 // Start with a blank DKTaskbarMenu that forms to the number of elements in it.
 
 ///////////////////////////
-function TaskbarMenu_Init()
+function TaskbarMenu_init()()
 {
 	dk.create("DKOS/TaskbarMenu.html", function(){
 		document.addEventListener("mousedown", TaskbarMenu_onevent);
@@ -28,7 +28,7 @@ function TaskbarMenu_Init()
 }
 
 //////////////////////////
-function TaskbarMenu_End()
+function TaskbarMenu_end()()
 {
 	document.removeEventListener("mousedown", TaskbarMenu_onevent);
 	byId("OpenSource").removeEventListener("click", TaskbarMenu_onevent);

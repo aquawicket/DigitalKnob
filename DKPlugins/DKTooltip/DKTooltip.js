@@ -1,11 +1,11 @@
 /////////////////////////
-function DKTooltip_Init()
+function DKTooltip_init()()
 {
 
 }
 
 ////////////////////////
-function DKTooltip_End()
+function DKTooltip_end()()
 {
 	D//KRemoveEvents(DKTooltip_onevent);
 	dk.close("DKTooltip/DKTooltip.html");

@@ -1,5 +1,5 @@
 ///////////////////////////
-function DKAdminMenu_Init()
+function DKAdminMenu_init()()
 {
 	dk.create("DKAdmin/DKAdminMenu.html", function(){
 		document.addEventListener("mousedown", DKAdminMenu_onevent);
@@ -26,7 +26,7 @@ function DKAdminMenu_Init()
 }
 
 //////////////////////////
-function DKAdminMenu_End()
+function DKAdminMenu_end()()
 {
 	document.removeEventListener("mousedown", DKAdminMenu_onevent);
 	byId("OpenSource").removeEventListener("click", DKAdminMenu_onevent);

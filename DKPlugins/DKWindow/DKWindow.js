@@ -1,11 +1,11 @@
 ////////////////////////
-function DKWindow_Init()
+function DKWindow_init()()
 {
 
 }
 
 ///////////////////////
-function DKWindow_End()
+function DKWindow_end()()
 {
 
 }
