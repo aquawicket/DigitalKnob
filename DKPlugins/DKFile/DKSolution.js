@@ -64,11 +64,14 @@ dk.solution.onevent = function dk_solution_onevent(event) {
         //console.log(DK_GetValue(DK_GetId(event))+"\n");
         if (event.currentTarget.id.includes("DKSolutionFolder")) {
             //console.log("DKSolutionFolder\n");
-            dk.solution.openFolder(byId(event.currentTarget.id).value);
+            console.log("dk.solution.openFolder(byId(event.currentTarget.id).value = "+dk.solution.openFolder(byId(event.currentTarget.id).value));
+            const value = byId(event.currentTarget.id).getAttribute('value');
+            dk.solution.openFolder(value);
             return;
         }
-
-        dk.solution.openFile(byId(event.currentTarget.id).value);
+        if(!byId(event.currentTarget.id).value)
+            return error("value seems to be unsert")
+        dk.solution.openFile(value);//byId(event.currentTarget.id).value);
         //DK_ClearSelection();
         return;
     }
@@ -117,6 +120,7 @@ dk.solution.openFile = function dk_solution_openFile(path) {
 
 dk.solution.openHere = function dk_solution_openHere(path) {
     var aPath = path;
+ 
     if (dk.getOS !== "Android") {
         aPath = CPP_DKFile_GetAbsolutePath(path);
         if (typeof (absolutepath) === 'string')

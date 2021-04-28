@@ -180,7 +180,7 @@ dk.solutionmenu.newFolder = function dk_solutionmenu_newFolder()
 
 dk.solutionmenu.rename = function dk_solutionmenu_rename()
 {
-	var top1 = byId(dk.solutionmenu.id).offsetTop;
+	var top1 = byId("DKSolutionMenu").offsetTop;
 	var top2 = byId("DKSolutionMenu").offsetTop;
 	var top = top1 - top2 - 1;
 	
@@ -201,7 +201,7 @@ dk.solutionmenu.delete = function dk_solutionmenu_delete()
 			if(rval === true){
 				console.debug("dk.solutionmenu.Delete(): dk.solutionmenu.file = "+dk.solutionmenu.file);
 				dk.file.delete(dk.solutionmenu.file);
-				dk.solution.UpdatePath(byId("DKSolutionPath").value);
+				dk.solution.updatePath(byId("DKSolutionPath").value);
 			}
 		});
 	});
