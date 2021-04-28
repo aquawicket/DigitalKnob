@@ -1,5 +1,5 @@
 //////////////////////////
-function DKBuildGUI_init()()
+function DKBuildGUI_init()
 {
 	//dk.create("DKBuild/DKBuild.js", function(){});
 	dk.create("DKBuild/DKBuildGUI.html", function(){
@@ -47,7 +47,7 @@ function DKBuildGUI_init()()
 }
 
 /////////////////////////
-function DKBuildGUI_end()()
+function DKBuildGUI_end()
 {
 	byId("AppList").removeEventListener("change", DKBuildGUI_onevent);
 	byId("OSList").removeEventListener("change", DKBuildGUI_onevent);
