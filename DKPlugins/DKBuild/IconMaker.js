@@ -19,7 +19,7 @@ function IconMaker_end()()
 //////////////////////////////////
 function IconMaker_Create(AppPath)
 {
-	CPP_dk.create("DKArchiveJS");
+	CPP_DK_Create("DKArchiveJS");
 	IconMaker_ValidateImageMagick();
 	
 	//Create Windows Icon

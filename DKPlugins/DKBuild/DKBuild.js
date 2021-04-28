@@ -23,7 +23,7 @@ var APP_LIST = [];
 ///////////////////////
 function DKBuild_init()()
 {
-	CPP_dk.create("DKCurl");
+	CPP_DK_Create("DKCurl");
 
 	if(CPP_DK_GetOS() === "Win32"){
 		DKPATH = "C:/digitalknob";
@@ -437,7 +437,7 @@ function DKBuild_DoResults()
 	
 	//// Create Icons
 	if(CPP_DK_GetOS() === "Win32" || CPP_DK_GetOS() === "Win64"){
-		CPP_dk.create("DKBuild/IconMaker.js");
+		CPP_DK_Create("DKBuild/IconMaker.js");
 		IconMaker_Create(DKPATH+"/"+appdir+"/"+APP);
 	}
 	
@@ -996,7 +996,7 @@ function DKBuild_DoResults()
 	
 	/*
 	if(CPP_DK_Available("DKAudio")){
-		CPP_dk.create("DKAudio");
+		CPP_DK_Create("DKAudio");
 	}
 	if(CPP_DK_Valid("DKAudioJS,DKAudioJS0")){
 		DKAudio_PlaySound("DKBuild/ding.wav");

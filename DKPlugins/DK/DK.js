@@ -294,7 +294,7 @@ dk.create = function dk_create(data, dk_create_callback) {
         arry.splice(0, 0, "DKCss");
     else {
         if (dk.getBrowser() === "CEF" || dk.getBrowser() === "RML") {
-            CPP_dk.create(data);
+            CPP_DK_Create(data);
         }
     }
     if (arry[0] === "DKJavascript") {

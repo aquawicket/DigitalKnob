@@ -1,20 +1,20 @@
 //////////////////////////
-function DKBuildGUI_Init()
+function DKBuildGUI_init()()
 {
-	//DK_Create("DKBuild/DKBuild.js", function(){});
-	DK_Create("DKBuild/DKBuildGUI.html", function(){
-	DK_Create("DKFile/DKFile.js", function(){
-	DK_Create("DKBuild/DKBuild.js", function(rval){
-		//byId("AppList").addEventListener("click", DKBuildGUI_OnEvent);
-		byId("AppList").addEventListener("change", DKBuildGUI_OnEvent);
-		byId("OSList").addEventListener("change", DKBuildGUI_OnEvent);
-		byId("BuildType").addEventListener("change", DKBuildGUI_OnEvent);
-		byId("git").addEventListener("click", DKBuildGUI_OnEvent);
-		byId("libraries").addEventListener("click", DKBuildGUI_OnEvent);
-		byId("build").addEventListener("click", DKBuildGUI_OnEvent);
+	//dk.create("DKBuild/DKBuild.js", function(){});
+	dk.create("DKBuild/DKBuildGUI.html", function(){
+	dk.create("DKFile/DKFile.js", function(){
+	dk.create("DKBuild/DKBuild.js", function(rval){
+		//byId("AppList").addEventListener("click", DKBuildGUI_onevent);
+		byId("AppList").addEventListener("change", DKBuildGUI_onevent);
+		byId("OSList").addEventListener("change", DKBuildGUI_onevent);
+		byId("BuildType").addEventListener("change", DKBuildGUI_onevent);
+		byId("git").addEventListener("click", DKBuildGUI_onevent);
+		byId("libraries").addEventListener("click", DKBuildGUI_onevent);
+		byId("build").addEventListener("click", DKBuildGUI_onevent);
 	
 		//DKBuild_ValidateSvn();
-		DK_Create("DKGit/DKGit.js", function(){
+		dk.create("DKGit/DKGit.js", function(){
 			//DKGit_ValidateGit();
 		});
 		DKBuild_ValidateCmake();
@@ -47,16 +47,16 @@ function DKBuildGUI_Init()
 }
 
 /////////////////////////
-function DKBuildGUI_End()
+function DKBuildGUI_end()()
 {
-	byId("AppList").removeEventListener("change", DKBuildGUI_OnEvent);
-	byId("OSList").removeEventListener("change", DKBuildGUI_OnEvent);
-	byId("BuildType").removeEventListener("change", DKBuildGUI_OnEvent);
-	byId("git").removeEventListener("click", DKBuildGUI_OnEvent);
-	byId("libraries").removeEventListener("click", DKBuildGUI_OnEvent);
-	byId("build").removeEventListener("click", DKBuildGUI_OnEvent);
-	DK_Close("DKBuild/DKBuildGUI.html");
-	DK_Close("DKBuild/DKBuild.js");
+	byId("AppList").removeEventListener("change", DKBuildGUI_onevent);
+	byId("OSList").removeEventListener("change", DKBuildGUI_onevent);
+	byId("BuildType").removeEventListener("change", DKBuildGUI_onevent);
+	byId("git").removeEventListener("click", DKBuildGUI_onevent);
+	byId("libraries").removeEventListener("click", DKBuildGUI_onevent);
+	byId("build").removeEventListener("click", DKBuildGUI_onevent);
+	dk.close("DKBuild/DKBuildGUI.html");
+	dk.close("DKBuild/DKBuild.js");
 }
 
 //////////////////////////////////
@@ -79,17 +79,17 @@ function DKBuildGUI_OnEvent(event)
 		DKBuildGUI_BuildSelect();
 	}
 	if(event.currentTarget.id === "git"){
-		DK_Create("DKGit/GitMenu.js", function(){
+		dk.create("DKGit/GitMenu.js", function(){
 			DKMenu_ValidatePosition("DKGit/GitMenu.html");
 		});
 	}
 	if(event.currentTarget.id === "libraries"){
-		DK_Create("DKBuild/LibraryMenu.js", function(){
+		dk.create("DKBuild/LibraryMenu.js", function(){
 			DKMenu_ValidatePosition("DKBuild/LibraryMenu.html");
 		});
 	}
 	if(event.currentTarget.id === "build"){
-		DK_Create("DKBuild/RunMenu.js", function(){
+		dk.create("DKBuild/RunMenu.js", function(){
 			DKMenu_ValidatePosition("DKBuild/RunMenu.html");
 		});
 	}		
@@ -101,7 +101,7 @@ function DKBuildGUI_OnEvent(event)
 		//DKSendEvent("MenuRight.html", "SetPanel", "App");
 
 		//var apppath = DK_CallFunc("DKBuildGUI::GetAppPath", byId("AppList").value);
-		//DK_Create("AppExplorer.js");
+		//dk.create("AppExplorer.js");
 		//DKSendEvent("AppExplorer.html", "UpdateAppExplorer", apppath);
 	}
 	*/
@@ -128,7 +128,7 @@ function DKBuildGUI_AppSelect()
 {
 	// We can send events to classes that are not of DKWidget as well.
 	if(byId("AppList").value === "NEW APP"){
-		DK_Create("DKGui/DKMessageBox.js", function(){
+		dk.create("DKGui/DKMessageBox.js", function(){
 			DKSendEvent("DKGui/DKMessageBox.html", "GetInput", "NewApp,DKBuildGUI.html"); // To -> DKMessageBox
 		});
 		return;
@@ -174,13 +174,13 @@ function DKBuildGUI_UpdateLibs()
 	var id = DK_CreateElement(byId("LibList"), "option", "BuildLibraries");
 	id.value = "Build All Libraries";
 	id.innerHTML = "Build All Libraries";
-	id.addEventListener("click", DKBuildGUI_OnEvent);
+	id.addEventListener("click", DKBuildGUI_onevent);
 
 	for(i=0; i<libs.length; ++i){
 		var id2 = DK_CreateElement(byId("LibList"), "option", "LIBRARY");
 		id2.value = libs[i]);
 		id2.innerHTML = libs[i];
-		id2.addEventListener("click", DKBuildGUI_OnEvent);
+		id2.addEventListener("click", DKBuildGUI_onevent);
 	}
 }
 */

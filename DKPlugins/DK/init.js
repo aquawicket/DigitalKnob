@@ -30,11 +30,11 @@ function init_OnEvent(event)  //Duktape
 if(DK_GetJSEngine() === "Duktape"){ //C++: Create a window LoadPage() can support
 	if(USE_ROCKET && USE_CEF){
 		console.log("Creating SDL -> Rocket -> Cef -> GUI\n");
-		CPP_dk.create("DKWindow");
+		CPP_DK_Create("DKWindow");
 		DKWindow_Create();
-		CPP_dk.create("DKRocket");
+		CPP_DK_Create("DKRocket");
 		DKRocket_LoadUrl("DKRocket/blank.html");
-		CPP_dk.create("DKWidget");
+		CPP_DK_Create("DKWidget");
 		var iframe = DK_CreateElement(byId("body"), "iframe", "DKCef_frame");
 		iframe.style.position = "absolute";
 		iframe.style.top = "0rem";
@@ -48,18 +48,18 @@ if(DK_GetJSEngine() === "Duktape"){ //C++: Create a window LoadPage() can suppor
 	}
 	else if(USE_ROCKET){
 		console.log("Creating SDL -> ROCKET -> GUI\n");
-		CPP_dk.create("DKWindow");
+		CPP_DK_Create("DKWindow");
 		DKWindow_Create();
-		CPP_dk.create("DKRml");
+		CPP_DK_Create("DKRml");
 		DKRocket_LoadUrl("index.html");
 	}
 	else if(USE_SDL && USE_CEF){
 		console.log("Creating SDL -> CEF -> GUI\n");
-		CPP_dk.create("DKWindow");
+		CPP_DK_Create("DKWindow");
 		DKWindow_Create();
 		var width = DKWindow_GetWidth();
 		var height = DKWindow_GetHeight();
-		CPP_dk.create("DKCef");
+		CPP_DK_Create("DKCef");
 		DKCef_NewBrowser("SdlWindow", 0, 0, width, height, DKApp_url);
 		DKCef_SetFocus(0);
 		window.addEventListener("resize", init_onevent);
@@ -70,10 +70,10 @@ if(DK_GetJSEngine() === "Duktape"){ //C++: Create a window LoadPage() can suppor
 		var assets = DKAssets_LocalAssets();
 		var width = Number(DKFile_GetSetting(assets+"settings.txt", "[WIDTH]"));
 		var height = Number(DKFile_GetSetting(assets+"settings.txt", "[HEIGHT]"));
-		CPP_dk.create("DKCef");
+		CPP_DK_Create("DKCef");
 		DKCef_NewBrowser("CefWindow", 0, 0, width, height, DKApp_url);
 		DKCef_SetFocus(DKCef_GetCurrentBrowser());
-		CPP_dk.create("DKWindow");
+		CPP_DK_Create("DKWindow");
 	}
 	else if(USE_WEBVIEW){ //TODO
 		console.log("Creating WEBVIEW -> GUI\n");
