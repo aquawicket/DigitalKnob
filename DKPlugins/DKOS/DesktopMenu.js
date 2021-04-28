@@ -26,7 +26,7 @@ function DesktopMenu_OnEvent(event)
 {
 	if(event.currentTarget.id === "OpenBackgtoundMenu"){
 		dk.create("DKOS/BackgroundMenu.js", function(){
-			dk.file.create("DKOS/BackgroundMenu.html");
+			DKFrame_Html("DKOS/BackgroundMenu.html");
 		});
 	}
 	if(event.currentTarget.id === "ToggleFullscreen"){

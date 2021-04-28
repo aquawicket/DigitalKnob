@@ -84,7 +84,7 @@ dk.solutionmenu.onevent = function dk_solutionmenu_onevent(event)
 	
 	//FIXME
 	if(event.currentTarget === document){
-		if(byId("DKFile/DKSolutionMenu.html").contains(document.elementFromPoint(window.mouseX, window.mouseY))){
+		if((byId("DKFile/DKSolutionMenu.html") && byId("DKFile/DKSolutionMenu.html").contains(document.elementFromPoint(window.mouseX, window.mouseY))){
 			return;
 		}
 	}
@@ -194,11 +194,11 @@ dk.solutionmenu.rename = function dk_solutionmenu_rename()
 dk.solutionmenu.delete = function dk_solutionmenu_delete()
 {
 	dk.create("DKGui/DKMessageBox.js", function(){
-		dk.file.create("DKGui/DKMessageBox.html");
+		DKFrame_Html("DKGui/DKMessageBox.html");
 		DKMessageBox_Confirm("delete this file?", function(rval){
 			if(rval === true){
 				console.debug("dk.solutionmenu.Delete(): dk.solutionmenu.file = "+dk.solutionmenu.file);
-				DKFile_Delete(dk.solutionmenu.file);
+				dk.file.delete(dk.solutionmenu.file);
 				dk.solution.UpdatePath(byId("DKSolutionPath").value);
 			}
 		});

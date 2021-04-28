@@ -49,7 +49,7 @@ function DKPaintFile_OnEvent(event)
 function DKPaintFile_Open()
 {
 	dk.create("DKFile/DKOpenFile.js", function(){
-		dk.file.create("DKFile/DKOpenFile.html");
+		DKFrame_Html("DKFile/DKOpenFile.html");
 		DKSendEvent("DKFile/DKOpenFile.html", "GetFile", "DKPaint/DKPaint.html,OpenFile,/,absolute"); // To -> DKOpenFile
 	});
 }
