@@ -1,7 +1,7 @@
 var SVN = "";
 
 /////////////////////
-function DKSvn_init()()()
+function DKSvn_init()
 {
 	dk.create("DKThreadPool");
 

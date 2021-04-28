@@ -3,7 +3,7 @@ if(DK_GetBrowser() === "RML"){ rgba = "127"; }
 else{ rgba = "0.5"; }
 
 ///////////////////////
-function DKInput_init()()()
+function DKInput_init()
 {
 	dk.create("DKInputTest/DKInput.html", function(){
 		window.addEventListener("keypress", DKInput_onevent);

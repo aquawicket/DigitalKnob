@@ -27,7 +27,7 @@ var trigger_events;
 
 
 //////////////////////////
-function DKTriggers_init()()()
+function DKTriggers_init()
 {
 	current_trigger;
 	triggers = [];

@@ -1,5 +1,5 @@
 /////////////////////////////
-function DKRocketVideo_init()()()
+function DKRocketVideo_init()
 {
 	dk.create("DKRocketVideo/DKRocketVideo.html");
 	byId("DKRocketVideo_playpause").addEventListener("click", DKRocketVideo_onevent);

@@ -1,5 +1,5 @@
 //////////////////////////
-function scrolltest_init()()()
+function scrolltest_init()
 {
 	dk.create("DKGui/scrolltest.html", function(){
 	dk.create("DKGui/scrolltest1.html", function(){

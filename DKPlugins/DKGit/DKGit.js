@@ -1,7 +1,7 @@
 var GIT = "";
 
 /////////////////////
-function DKGit_init()()()
+function DKGit_init()
 {	
 	DKGit_SetGitPath()
 	DKGit_ValidateGit();

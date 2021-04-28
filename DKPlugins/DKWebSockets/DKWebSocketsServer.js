@@ -1,5 +1,5 @@
 //////////////////////////////////
-function DKWebSocketsServer_init()()()
+function DKWebSocketsServer_init()
 {
 	dk.create("DKWebSockets");
 	dk.create("DKWebSockets/DKWebSocketsServer.html", function(){

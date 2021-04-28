@@ -1,5 +1,5 @@
 ///////////////////////
-function RunMenu_init()()()
+function RunMenu_init()
 {
 	dk.create("DKBuild/RunMenu.html");
 	document.addEventListener("mousedown", RunMenu_onevent);

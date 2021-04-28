@@ -2,7 +2,7 @@ var FACEBOOK_ID;
 var FACEBOOK_NAME;
 
 ///////////////////////
-function DKLogin_init()()()
+function DKLogin_init()
 {
 	dk.create("DKLogin/DKLogin.css");
 	dk.create("DKLogin/DKLogin.html");

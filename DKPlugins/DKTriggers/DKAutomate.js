@@ -1,5 +1,5 @@
 //////////////////////////
-function DKAutomate_init()()()
+function DKAutomate_init()
 {
 	dk.create("DKAssets");
 	dk.create("DKTriggers/DKAutomate.html");

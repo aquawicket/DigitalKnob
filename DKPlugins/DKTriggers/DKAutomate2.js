@@ -1,5 +1,5 @@
 ///////////////////////////
-function DKAutomate2_init()()()
+function DKAutomate2_init()
 {
 	dk.create("DKTriggers/DKAutomate2.html,DKTriggers/DKAutomate.html", function(){
 		byId("DKTriggers/DKAutomate2.html").addEventListener("SelectTrigger", DKAutomate2_onevent);

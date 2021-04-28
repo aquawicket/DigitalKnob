@@ -1,5 +1,5 @@
 //////////////////////
-function DKTray_init()()()
+function DKTray_init()
 {
 	if(DK_GetOS() !== "Win32" && DK_GetOS() !== "Win64"){
 		return;

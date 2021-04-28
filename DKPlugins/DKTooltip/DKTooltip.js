@@ -1,5 +1,5 @@
 /////////////////////////
-function DKTooltip_init()()()
+function DKTooltip_init()
 {
 
 }

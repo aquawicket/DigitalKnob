@@ -1,7 +1,7 @@
 var currentFile;
 
 ///////////////////////
-function DKPaint_init()()()
+function DKPaint_init()
 {
 	dk.create("DKPaint/DKPaint.css");
 	dk.create("DKPaint/DKPaint.html");

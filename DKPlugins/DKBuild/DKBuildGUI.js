@@ -1,5 +1,5 @@
 //////////////////////////
-function DKBuildGUI_init()()()
+function DKBuildGUI_init()
 {
 	//dk.create("DKBuild/DKBuild.js", function(){});
 	dk.create("DKBuild/DKBuildGUI.html", function(){

@@ -8,7 +8,7 @@ var rPath;
 //var DKSaveFile_callback;
 
 //////////////////////////
-function DKSaveFile_init()()() {
+function DKSaveFile_init() {
     dk.create("DKFile/DKSaveFile.css");
     dk.create("DKFile/DKSaveFile.html");
     byId("DKFile/DKSaveFile.html").addEventListener("SetFile", DKSaveFile_onevent);

@@ -6,7 +6,7 @@ var aPath;
 var rPath;
 
 //////////////////////////
-function DKOpenFile_init()()() {
+function DKOpenFile_init() {
     dk.create("DKFile/DKOpenFile.css");
     dk.create("DKFile/DKOpenFile.html");
     byId("DKFile/DKOpenFile.html").addEventListener("GetFile", DKOpenFile_onevent);

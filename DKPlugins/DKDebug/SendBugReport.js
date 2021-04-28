@@ -1,5 +1,5 @@
 ////////////////////////////
-function SendBugReport_init()()()
+function SendBugReport_init()
 {
 	dk.create("DKDebug/SendBugReport.css");
 	dk.create("DKDebug/SendBugReport.html");

@@ -1,5 +1,5 @@
 //////////////////////////////
-function BackgroundMenu_init()()()
+function BackgroundMenu_init()
 {
 	dk.create("DKOS/BackgroundMenu.html");
 	var file = byId("Background").getAttribute("src");

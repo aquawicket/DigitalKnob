@@ -8,7 +8,7 @@ if(DK_GetOS() === "Android" || DK_GetOS() === "iOS"){
 else{ USE_WEBVIEW = 0; }
 
 //////////////////////
-function init_init()()(){}
+function init_init(){}
 
 /////////////////////
 function init_end()(){}

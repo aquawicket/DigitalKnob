@@ -2,7 +2,7 @@ DKSolutionRename_id = "";
 DKSolutionRename_file = "";
 
 ////////////////////////////////
-function DKSolutionRename_init()()()
+function DKSolutionRename_init()
 {
 	dk.create("DKFile/DKSolutionRename.html,DKSolutionMenu");
 	document.addEventListener("mousedown", DKSolutionRename_onevent);

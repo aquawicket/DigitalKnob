@@ -1,5 +1,5 @@
 ///////////////////////
-function DKAdmin_init()()()
+function DKAdmin_init()
 {
 	dk.create("DKAdmin/DKAdmin.html");
 	byId("AdminBadge").addEventListener("click", DKAdmin_onevent);

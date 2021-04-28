@@ -1,5 +1,5 @@
 /////////////////////////
-function DKDisplay_init()()()
+function DKDisplay_init()
 {
 	dk.create("DKDisplay/DKDisplay.html");
 	byId("DKDisplay_Button").addEventListener("click", DKDisplay_onevent);
