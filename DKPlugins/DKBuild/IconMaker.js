@@ -72,7 +72,7 @@ function IconMaker_ValidateImageMagick()
 {
 	console.log("Looking for ImageMagick...");
 	//console.log(SVN);
-	if(!CPP_dk.file.extist(IMAGEMAGICK_CONVERT)){
+	if(!CPP_DKFile_Exists(IMAGEMAGICK_CONVERT)){
 		console.log("Installing ImageMagick...");
 		IconMaker_InstallImageMagick();
 	}

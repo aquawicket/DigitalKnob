@@ -65,7 +65,7 @@ function GitMenu_ValidateGit()
 	if(DK_GetBrowser() !== "RML"){ return; }
 	console.log("Looking for GIT\n");
 	//console.log(GIT+"\n");
-	if(!CPP_dk.file.extist(GIT)){
+	if(!CPP_DKFile_Exists(GIT)){
 		console.log("Please install GIT\n");
 		GitMenu_InstallGit();
 	}

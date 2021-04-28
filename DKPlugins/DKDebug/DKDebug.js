@@ -532,7 +532,7 @@ dk.debug.pushDKFiles = function dk_debug_pushDKFiles() {
     }
     console.log("assets = " + assets);
     var search = assets;
-    while (!CPP_dk.file.extist(search + "/DK/DKPlugins")) {
+    while (!CPP_DKFile_Exists(search + "/DK/DKPlugins")) {
         var n = search.lastIndexOf("/");
         if (n === -1) {
             return error("could not locate a DKPlugins folder");
@@ -541,7 +541,7 @@ dk.debug.pushDKFiles = function dk_debug_pushDKFiles() {
         console.log(search + "");
     }
     DKPATH = search;
-    if (!CPP_dk.file.extist(DKPATH)) {
+    if (!CPP_DKFile_Exists(DKPATH)) {
         return error("Could not find search");
     }
     var temp = CPP_DKFile_DirectoryContents(DKPATH);
@@ -553,7 +553,7 @@ dk.debug.pushDKFiles = function dk_debug_pushDKFiles() {
     var plugin_folders = [];
     plugin_folders.push(DKPATH + "/DK/DKPlugins");
     for (var n = 0; n < folders.length; n++) {
-        if (CPP_dk.file.extist(DKPATH + "/" + folders[n] + "/DKPlugins"))
+        if (CPP_DKFile_Exists(DKPATH + "/" + folders[n] + "/DKPlugins"))
             plugin_folders.push(DKPATH + "/" + folders[n] + "/DKPlugins");
     }
     for (var n = 0; n < plugin_folders.length; n++) {
@@ -566,7 +566,7 @@ dk.debug.pushDKFiles = function dk_debug_pushDKFiles() {
     var folders = temp.split(",");
     for (var n = 0; n < folders.length; n++) {
         for (var nn = 0; nn < plugin_folders.length; nn++) {
-            if (CPP_dk.file.extist(plugin_folders[nn] + "/" + folders[n])) {
+            if (CPP_DKFile_Exists(plugin_folders[nn] + "/" + folders[n])) {
                 CPP_DKFile_CopyFolder(assets + "/" + folders[n], plugin_folders[nn] + "/" + folders[n], true, true);
             }
         }

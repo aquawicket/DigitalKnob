@@ -40,7 +40,7 @@ function DKGit_ValidateGit()
 {
 	//if(CPP_DK_GetBrowser() !== "RML"){ return; }
 	console.log("Looking for GIT\n");
-	if(!CPP_dk.file.extist(GIT)){
+	if(!CPP_DKFile_Exists(GIT)){
 		DKGit_InstallGit();
 		DKGit_SetGitPath();
 	}

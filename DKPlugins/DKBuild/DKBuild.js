@@ -80,7 +80,7 @@ function DKBuild_ValidateCmake()
 {
 	if(CPP_DK_GetBrowser() !== "RML"){ return; }
 	console.log("Looking for CMake");
-	if(!CPP_dk.file.extist(CMAKE)){
+	if(!CPP_DKFile_Exists(CMAKE)){
 		console.log("Please install CMake");
 		DKBuild_InstallCmake();
 	}
@@ -98,13 +98,13 @@ function DKBuild_InstallCmake()
 	var datapath = CPP_DKAssets_LocalAssets();
 	
 	if(CPP_DK_GetOS() === "Win32"){
-		if(!CPP_dk.file.extist(datapath+"/cmake-3.19.4-win32-x86.msi")){
+		if(!CPP_DKFile_Exists(datapath+"/cmake-3.19.4-win32-x86.msi")){
 			CPP_DKCurl_Download("https://cmake.org/files/v3.19/cmake-3.19.4-win32-x86.msi", datapath);
 		}
 		CPP_DK_System(datapath+"/cmake-3.19.4-win32-x86.msi");
 	}
 	else if(CPP_DK_GetOS() === "Win64"){
-		if(!CPP_dk.file.extist(datapath+"/cmake-3.19.4-win32-x86.msi")){
+		if(!CPP_DKFile_Exists(datapath+"/cmake-3.19.4-win32-x86.msi")){
 			CPP_DKCurl_Download("https://cmake.org/files/v3.19/cmake-3.19.4-win32-x86.msi", datapath);
 		}
 		CPP_DK_System(datapath+"/cmake-3.19.4-win32-x86.msi");
@@ -131,7 +131,7 @@ function DKBuild_ValidateVC2019()
 		return;
 	}
 	console.log("Looking for Visual Studio 2019");
-	if(!CPP_dk.file.extist(VC2019)){
+	if(!CPP_DKFile_Exists(VC2019)){
 		DKBuild_InstallVC2019();
 	}
 	console.log("Found Visual Studio 2019");
@@ -153,7 +153,7 @@ function DKBuild_ValidateGcc()
 	if(CPP_DK_GetOS() !== "Linux" && CPP_DK_GetOS() !== "Raspberry"){ return; }
 	if(CPP_DK_GetBrowser() !== "RML"){ return; }
 	console.log("Looking for GCC");
-	if(!CPP_dk.file.extist(GCC)){
+	if(!CPP_DKFile_Exists(GCC)){
 		console.log("Please install GCC");
 		DKBuild_InstallGcc();
 	}
@@ -173,7 +173,7 @@ function DKBuild_ValidateXcode()
 	if(CPP_DK_GetOS() !== "Mac"){ return; }
 	if(CPP_DK_GetBrowser() !== "RML"){ return; }
 	console.log("Looking for Xcode");
-	if(!CPP_dk.file.extist(XCODE)){
+	if(!CPP_DKFile_Exists(XCODE)){
 		console.log("Please install Xcode");
 		DKBuild_InstallXcode();
 	}
@@ -430,7 +430,7 @@ function DKBuild_DoResults()
 	var contents = CPP_DKFile_DirectoryContents(DKPATH);
 	var files = contents.split(",");
 	for(var i=0; i<files.length; i++){ 
-		if(CPP_dk.file.extist(DKPATH+"/"+files[i]+"/DKApps/"+APP)){
+		if(CPP_DKFile_Exists(DKPATH+"/"+files[i]+"/DKApps/"+APP)){
 			appdir = files[i]+"/DKApps";
 		}
 	}
@@ -463,13 +463,13 @@ function DKBuild_DoResults()
 		if(rtvalue.indexOf("errors occurred!") > -1){ return; }
 		
 		if(TYPE === "Debug" || TYPE === "ALL"){
-			if(CPP_dk.file.extist(DKPATH+"/"+appdir+"/"+APP+"/"+OS+"/Debug/"+APP+".exe")){
+			if(CPP_DKFile_Exists(DKPATH+"/"+appdir+"/"+APP+"/"+OS+"/Debug/"+APP+".exe")){
 				CPP_DKFile_Rename(DKPATH+"/"+appdir+"/"+APP+"/"+OS+"/Debug/"+APP+".exe", DKPATH+"/"+appdir+"/"+APP+"/"+OS+"/Release/"+APP+"_old.exe", true);
 			}		
 			CPP_DK_Execute(VC2019+" "+DKPATH+"/"+appdir+"/"+APP+"/"+OS+"/"+APP+".sln /p:Configuration=Debug");
 		}
 		if(TYPE === "Release" || TYPE === "ALL"){
-			if(CPP_dk.file.extist(DKPATH+"/"+appdir+"/"+APP+"/"+OS+"/Release/"+APP+".exe")){
+			if(CPP_DKFile_Exists(DKPATH+"/"+appdir+"/"+APP+"/"+OS+"/Release/"+APP+".exe")){
 				CPP_DKFile_Rename(DKPATH+"/"+appdir+"/"+APP+"/"+OS+"/Release/"+APP+".exe", DKPATH+"/"+appdir+"/"+APP+"/"+OS+"/Release/"+APP+"_old.exe", true);
 			}
 			CPP_DK_Execute(VC2019+" "+DKPATH+"/"+appdir+"/"+APP+"/"+OS+"/"+APP+".sln /p:Configuration=Release");
@@ -480,7 +480,7 @@ function DKBuild_DoResults()
 		
 		//upx compress the exe file
 		/*
-		if(CPP_dk.file.extist(DKPATH+"/DK/3rdParty/upx-3.95-win64/upx.exe")){
+		if(CPP_DKFile_Exists(DKPATH+"/DK/3rdParty/upx-3.95-win64/upx.exe")){
 			console.warn("UPX compressing exe... please wait");
 			CPP_DK_Execute(DKPATH+"/DK/3rdParty/upx-3.95-win64/upx.exe -9 -v "+DKPATH+"/"+appdir+"/"+APP+"/win32/Release/"+APP+".exe");
 		}
@@ -512,13 +512,13 @@ function DKBuild_DoResults()
 		if(rtvalue.indexOf("errors occurred!") > -1){ return; }
 		
 		if(TYPE === "Debug" || TYPE === "ALL"){
-			if(CPP_dk.file.extist(DKPATH+"/"+appdir+"/"+APP+"/"+OS+"/Debug/"+APP+"_64.exe")){
+			if(CPP_DKFile_Exists(DKPATH+"/"+appdir+"/"+APP+"/"+OS+"/Debug/"+APP+"_64.exe")){
 				CPP_DKFile_Rename(DKPATH+"/"+appdir+"/"+APP+"/"+OS+"/Debug/"+APP+"_64.exe", DKPATH+"/"+appdir+"/"+APP+"/"+OS+"/Release/"+APP+"_64_old.exe", true);
 			}
 			CPP_DK_Execute(VC2019+" "+DKPATH+"/"+appdir+"/"+APP+"/"+OS+"/"+APP+".sln /p:Configuration=Debug");
 		}
 		if(TYPE === "Release" || TYPE === "ALL"){
-			if(CPP_dk.file.extist(DKPATH+"/"+appdir+"/"+APP+"/"+OS+"/Release/"+APP+"_64.exe")){
+			if(CPP_DKFile_Exists(DKPATH+"/"+appdir+"/"+APP+"/"+OS+"/Release/"+APP+"_64.exe")){
 				CPP_DKFile_Rename(DKPATH+"/"+appdir+"/"+APP+"/"+OS+"/Release/"+APP+"_64.exe", DKPATH+"/"+appdir+"/"+APP+"/"+OS+"/Release/"+APP+"_64_old.exe", true);
 			}
 			CPP_DK_Execute(VC2019+" "+DKPATH+"/"+appdir+"/"+APP+"/"+OS+"/"+APP+".sln /p:Configuration=Release");
@@ -529,7 +529,7 @@ function DKBuild_DoResults()
 		
 		//upx compress the exe file
 		/*
-		if(CPP_dk.file.extist(DKPATH+"/3rdParty/upx-3.95-win64/upx.exe")){
+		if(CPP_DKFile_Exists(DKPATH+"/3rdParty/upx-3.95-win64/upx.exe")){
 			console.warn("UPX compressing exe... please wait");
 			CPP_DK_Execute(DKPATH+"/3rdParty/upx-3.95-win64/upx.exe -9 -v "+DKPATH+"/"+appdir+"/"+APP+"/win64/Release/"+APP+".exe");
 		}
@@ -589,7 +589,7 @@ function DKBuild_DoResults()
 			CPP_DKFile_StringToFile(info_plist, DKPATH+"/"+appdir+"/"+APP+"/mac64/Debug/"+APP+".app/Contents/info.plist");
 			
 			//update install_name_tool if cef present
-			if(CPP_dk.file.extist(DKPATH+"/"+appdir+"/"+APP+"/mac64/Debug/"+APP+".app/Contents/Frameworks/Chromium Embedded Framework.framework")){
+			if(CPP_DKFile_Exists(DKPATH+"/"+appdir+"/"+APP+"/mac64/Debug/"+APP+".app/Contents/Frameworks/Chromium Embedded Framework.framework")){
 				console.log("USING CHROMIUM EMBEDDED FRAMEWORK");
 				
 				var command = "install_name_tool -change \"@executable_path/Chromium Embedded Framework\" \"@executable_path/../../../../Frameworks/Chromium Embedded Framework.framework/Chromium Embedded Framework\" \""+DKPATH+"/"+appdir+"/"+APP+"/mac64/Debug/"+APP+".app/Contents/Frameworks/"+APP+" Helper.app/Contents/MacOS/"+APP+" Helper\"";
@@ -618,7 +618,7 @@ function DKBuild_DoResults()
 			CPP_DKFile_StringToFile(info_plist, DKPATH+"/"+appdir+"/"+APP+"/mac64/Release/"+APP+".app/Contents/info.plist");
 			
 			//update install_name_tool if cef present
-			if(CPP_dk.file.extist(DKPATH+"/"+appdir+"/"+APP+"/mac64/Release/"+APP+".app/Contents/Frameworks/Chromium Embedded Framework.framework")){
+			if(CPP_DKFile_Exists(DKPATH+"/"+appdir+"/"+APP+"/mac64/Release/"+APP+".app/Contents/Frameworks/Chromium Embedded Framework.framework")){
 				console.log("USING CHROMIUM EMBEDDED FRAMEWORK");
 				
 				var command = "install_name_tool -change \"@executable_path/Chromium Embedded Framework\" \"@executable_path/../../../../Frameworks/Chromium Embedded Framework.framework/Chromium Embedded Framework\" \""+DKPATH+"/"+appdir+"/"+APP+"/mac64/Release/"+APP+".app/Contents/Frameworks/"+APP+" Helper.app/Contents/MacOS/"+APP+" Helper\"";

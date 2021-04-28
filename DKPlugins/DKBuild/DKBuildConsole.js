@@ -208,7 +208,7 @@ function DKBuildConsole_Process()
 	
 	DKBuildConsole_ChooseUpdate();
 	
-	if(!CPP_dk.file.extist(DKPATH+"/DK/DKPlugins")){
+	if(!CPP_DKFile_Exists(DKPATH+"/DK/DKPlugins")){
 		console.error("ERROR: can't find "+DKPATH+" ");
 		CPP_DK_GetKey();
 		CPP_DK_Exit();
