@@ -399,7 +399,7 @@ function DKBuild_DoResults()
 	//Update the apps CmakeLists.txt file
 	//CPP_DKFile_Copy(DKPATH+"/DKPlugins/_DKImport/CMakeLists.txt", DKPATH+"/DKApps/"+APP+"/CMakeLists.txt", true);
 	//CPP_DKFile_Copy(DKPATH+"/DKPlugins/_DKIMPORT/", DKPATH+"/DKApps/"+APP+"/", false); //any missing files
-	//CPP_DKFile_StringToFile("",DKPATH+"/DKApps/"+APP+"/assets.zip");
+	//CPP_dk.file.stringToFile("",DKPATH+"/DKApps/"+APP+"/assets.zip");
 	
 	////// Create the cmake string
 	var cmake_string = "";
@@ -555,7 +555,7 @@ function DKBuild_DoResults()
 			//update the info.plist in include the logo icon
 			var info_plist = CPP_DKFile_FileToString(DKPATH+"/"+appdir+"/"+APP+"/mac32/Debug/"+APP+".app/Contents/info.plist");
 			info_plist = info_plist.replace("<dict>", "<dict><key>CFBundleIconFile</key><string>logo</string>");
-			CPP_DKFile_StringToFile(info_plist, DKPATH+"/"+appdir+"/"+APP+"/mac32/Debug/"+APP+".app/Contents/info.plist")
+			CPP_dk.file.stringToFile(info_plist, DKPATH+"/"+appdir+"/"+APP+"/mac32/Debug/"+APP+".app/Contents/info.plist")
 		}
 		if(TYPE === "Release" || TYPE === "ALL"){
 			CPP_DK_Execute("xcodebuild -target "+APP+" -configuration Release build");
@@ -563,7 +563,7 @@ function DKBuild_DoResults()
 			//update the info.plist in include the logo icon
 			var info_plist = CPP_DKFile_FileToString(DKPATH+"/"+appdir+"/"+APP+"/mac32/Release/"+APP+".app/Contents/info.plist");
 			info_plist = info_plist.replace("<dict>", "<dict><key>CFBundleIconFile</key><string>logo</string>");
-			CPP_DKFile_StringToFile(info_plist, DKPATH+"/"+appdir+"/"+APP+"/mac32/Release/"+APP+".app/Contents/info.plist")
+			CPP_dk.file.stringToFile(info_plist, DKPATH+"/"+appdir+"/"+APP+"/mac32/Release/"+APP+".app/Contents/info.plist")
 			
 			//update install_name_tool if cef present
 			//TODO
@@ -586,7 +586,7 @@ function DKBuild_DoResults()
 			//update the info.plist in include the logo icon
 			var info_plist = CPP_DKFile_FileToString(DKPATH+"/"+appdir+"/"+APP+"/mac64/Debug/"+APP+".app/Contents/info.plist");
 			info_plist = info_plist.replace("<dict>", "<dict><key>CFBundleIconFile</key><string>logo</string>");
-			CPP_DKFile_StringToFile(info_plist, DKPATH+"/"+appdir+"/"+APP+"/mac64/Debug/"+APP+".app/Contents/info.plist");
+			CPP_dk.file.stringToFile(info_plist, DKPATH+"/"+appdir+"/"+APP+"/mac64/Debug/"+APP+".app/Contents/info.plist");
 			
 			//update install_name_tool if cef present
 			if(CPP_DKFile_Exists(DKPATH+"/"+appdir+"/"+APP+"/mac64/Debug/"+APP+".app/Contents/Frameworks/Chromium Embedded Framework.framework")){
@@ -615,7 +615,7 @@ function DKBuild_DoResults()
 			//update the info.plist in include the logo icon
 			var info_plist = CPP_DKFile_FileToString(DKPATH+"/"+appdir+"/"+APP+"/mac64/Release/"+APP+".app/Contents/info.plist");
 			info_plist = info_plist.replace("<dict>", "<dict><key>CFBundleIconFile</key><string>logo</string>");
-			CPP_DKFile_StringToFile(info_plist, DKPATH+"/"+appdir+"/"+APP+"/mac64/Release/"+APP+".app/Contents/info.plist");
+			CPP_dk.file.stringToFile(info_plist, DKPATH+"/"+appdir+"/"+APP+"/mac64/Release/"+APP+".app/Contents/info.plist");
 			
 			//update install_name_tool if cef present
 			if(CPP_DKFile_Exists(DKPATH+"/"+appdir+"/"+APP+"/mac64/Release/"+APP+".app/Contents/Frameworks/Chromium Embedded Framework.framework")){
@@ -735,7 +735,7 @@ function DKBuild_DoResults()
 			string += "Name="+APP+"\n";
 			string += "Exec="+DKPATH+"/"+appdir+"/"+APP+"/linux32/Debug/"+APP+"\n";
 			string += "Icon="+DKPATH+"/"+appdir+"/"+APP+"/icons/icon.png\n";
-			CPP_DKFile_StringToFile(string, DKPATH+"/"+appdir+"/"+APP+"/linux32/Debug/"+APP+".desktop");
+			CPP_dk.file.stringToFile(string, DKPATH+"/"+appdir+"/"+APP+"/linux32/Debug/"+APP+".desktop");
 		}
 		if(TYPE === "Release" || TYPE === "ALL"){
 			if(LEVEL === "Rebuild" || LEVEL === "RebuildAll"){
@@ -757,7 +757,7 @@ function DKBuild_DoResults()
 			string += "Name="+APP+"\n";
 			string += "Exec="+DKPATH+"/"+appdir+"/"+APP+"/linux32/Release/"+APP+"\n";
 			string += "Icon="+DKPATH+"/"+appdir+"/"+APP+"/icons/icon.png\n";
-			CPP_DKFile_StringToFile(string, DKPATH+"/"+appdir+"/"+APP+"/linux32/Release/"+APP+".desktop");
+			CPP_dk.file.stringToFile(string, DKPATH+"/"+appdir+"/"+APP+"/linux32/Release/"+APP+".desktop");
 		}
 	}
 	
@@ -784,7 +784,7 @@ function DKBuild_DoResults()
 			string += "Name="+APP+"\n";
 			string += "Exec="+DKPATH+"/"+appdir+"/"+APP+"/linux64/Debug/"+APP+"\n";
 			string += "Icon="+DKPATH+"/"+appdir+"/"+APP+"/icons/icon.png\n";
-			CPP_DKFile_StringToFile(string, DKPATH+"/"+appdir+"/"+APP+"/linux64/Debug/"+APP+".desktop");
+			CPP_dk.file.stringToFile(string, DKPATH+"/"+appdir+"/"+APP+"/linux64/Debug/"+APP+".desktop");
 		}
 		if(TYPE === "Release" || TYPE === "ALL"){
 			if(LEVEL === "Rebuild" || LEVEL === "RebuildAll"){
@@ -806,7 +806,7 @@ function DKBuild_DoResults()
 			string += "Name="+APP+"\n";
 			string += "Exec="+DKPATH+"/"+appdir+"/"+APP+"/linux64/Release/"+APP+"\n";
 			string += "Icon="+DKPATH+"/"+appdir+"/"+APP+"/icons/icon.png\n";
-			CPP_DKFile_StringToFile(string, DKPATH+"/"+appdir+"/"+APP+"/linux64/Release/"+APP+".desktop");
+			CPP_dk.file.stringToFile(string, DKPATH+"/"+appdir+"/"+APP+"/linux64/Release/"+APP+".desktop");
 		}
 	}
 	
@@ -910,7 +910,7 @@ function DKBuild_DoResults()
 			string += "Name="+APP+"\n";
 			string += "Exec="+DKPATH+"/"+appdir+"/"+APP+"/raspberry32/Debug/"+APP+"\n";
 			string += "Icon="+DKPATH+"/"+appdir+"/"+APP+"/icons/icon.png\n";
-			CPP_DKFile_StringToFile(string, DKPATH+"/"+appdir+"/"+APP+"/linux32/Debug/"+APP+".desktop");
+			CPP_dk.file.stringToFile(string, DKPATH+"/"+appdir+"/"+APP+"/linux32/Debug/"+APP+".desktop");
 		}
 		if(TYPE === "Release" || TYPE === "ALL"){
 			if(LEVEL === "Rebuild" || LEVEL === "RebuildAll"){
@@ -932,7 +932,7 @@ function DKBuild_DoResults()
 			string += "Name="+APP+"\n";
 			string += "Exec="+DKPATH+"/"+appdir+"/"+APP+"/raspberry32/Release/"+APP+"\n";
 			string += "Icon="+DKPATH+"/"+appdir+"/"+APP+"/icons/icon.png\n";
-			CPP_DKFile_StringToFile(string, DKPATH+"/"+appdir+"/"+APP+"/raspberry32/Release/"+APP+".desktop");
+			CPP_dk.file.stringToFile(string, DKPATH+"/"+appdir+"/"+APP+"/raspberry32/Release/"+APP+".desktop");
 		}
 	}
 	
@@ -959,7 +959,7 @@ function DKBuild_DoResults()
 			string += "Name="+APP+"\n";
 			string += "Exec="+DKPATH+"/"+appdir+"/"+APP+"/raspberry64/Debug/"+APP+"\n";
 			string += "Icon="+DKPATH+"/"+appdir+"/"+APP+"/icons/icon.png\n";
-			CPP_DKFile_StringToFile(string, DKPATH+"/"+appdir+"/"+APP+"/raspberry64/Debug/"+APP+".desktop");
+			CPP_dk.file.stringToFile(string, DKPATH+"/"+appdir+"/"+APP+"/raspberry64/Debug/"+APP+".desktop");
 		}
 		if(TYPE === "Release" || TYPE === "ALL"){
 			if(LEVEL === "Rebuild" || LEVEL === "RebuildAll"){
@@ -981,7 +981,7 @@ function DKBuild_DoResults()
 			string += "Name="+APP+"\n";
 			string += "Exec="+DKPATH+"/"+appdir+"/"+APP+"/raspberry64/Release/"+APP+"\n";
 			string += "Icon="+DKPATH+"/"+appdir+"/"+APP+"/icons/icon.png\n";
-			CPP_DKFile_StringToFile(string, DKPATH+"/"+appdir+"/"+APP+"/raspberry64/Release/"+APP+".desktop");
+			CPP_dk.file.stringToFile(string, DKPATH+"/"+appdir+"/"+APP+"/raspberry64/Release/"+APP+".desktop");
 		}
 	}
 	

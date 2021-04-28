@@ -338,7 +338,7 @@ if (!dk.hasCPP()) {
     }
 } else {
     dk.file.stringToFile = function dk_file_stringToFile(str, path, flags, callback) {
-        const result = CPP_DKFile_StringToFile(data, path);
+        const result = CPP_dk.file.stringToFile(data, path);
         callback && callback(result);
     }
 }

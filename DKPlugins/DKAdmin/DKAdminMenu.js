@@ -87,7 +87,7 @@ function DKAdminMenu_OnEvent(event)
 		dk.create("DKWidgetJS");
 		var source = document.body.outerHTML;
 		var assets = DKAssets_LocalAssets();
-		DKFile_StringToFile(source, assets+"source.html");
+		dk.file.stringToFile(source, assets+"source.html");
 		dk.create("DKNotepad/DKNotepad.js", function(){
 			DKFrame_Html("DKNotepad/DKNotepad.html");
 			DKNotepad_Open(assets+"source.html");

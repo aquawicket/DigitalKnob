@@ -1,47 +1,50 @@
+
+dk.solutionmenu = new DKWidget("dk.solutionmenu");
+
 DKSolutionMenu_id = "";
 DKSolutionMenu_file = "";
 
 //////////////////////////////
-function DKSolutionMenu_Init()
+dk.solutionmenu. = function dk_solutionmenu_Init()
 {
 	dk.create("DKFile/DKSolutionMenu.html", function(){
-    	document.addEventListener("mousedown", DKSolutionMenu_onevent);
-    	byId("DKSolutionMenu_Open").addEventListener("click", DKSolutionMenu_onevent);
-    	byId("DKSolutionMenu_OpenHere").addEventListener("click", DKSolutionMenu_onevent);
-    	byId("DKSolutionMenu_NewFile").addEventListener("click", DKSolutionMenu_onevent);
-    	byId("DKSolutionMenu_NewFolder").addEventListener("click", DKSolutionMenu_onevent);
-    	byId("DKSolutionMenu_Rename").addEventListener("click", DKSolutionMenu_onevent);
-    	byId("DKSolutionMenu_Delete").addEventListener("click", DKSolutionMenu_onevent);
-    	byId("DKSolutionMenu_Copy").addEventListener("click", DKSolutionMenu_onevent);
-    	byId("DKSolutionMenu_Cut").addEventListener("click", DKSolutionMenu_onevent);
-    	byId("DKSolutionMenu_Paste").addEventListener("click", DKSolutionMenu_onevent);
-	    byId("DKSolutionMenu_Import").addEventListener("click", DKSolutionMenu_onevent);
-    	byId("DKSolutionMenu_GitAdd").addEventListener("click", DKSolutionMenu_onevent);
-	    byId("DKSolutionMenu_UpxCompress").addEventListener("click", DKSolutionMenu_onevent);
+    	document.addEventListener("mousedown", dk.solutionmenu.onevent);
+    	byId("DKSolutionMenu_Open").addEventListener("click", dk.solutionmenu.onevent);
+    	byId("DKSolutionMenu_OpenHere").addEventListener("click", dk.solutionmenu.onevent);
+    	byId("DKSolutionMenu_NewFile").addEventListener("click", dk.solutionmenu.onevent);
+    	byId("DKSolutionMenu_NewFolder").addEventListener("click", dk.solutionmenu.onevent);
+    	byId("DKSolutionMenu_Rename").addEventListener("click", dk.solutionmenu.onevent);
+    	byId("DKSolutionMenu_Delete").addEventListener("click", dk.solutionmenu.onevent);
+    	byId("DKSolutionMenu_Copy").addEventListener("click", dk.solutionmenu.onevent);
+    	byId("DKSolutionMenu_Cut").addEventListener("click", dk.solutionmenu.onevent);
+    	byId("DKSolutionMenu_Paste").addEventListener("click", dk.solutionmenu.onevent);
+	    byId("DKSolutionMenu_Import").addEventListener("click", dk.solutionmenu.onevent);
+    	byId("DKSolutionMenu_GitAdd").addEventListener("click", dk.solutionmenu.onevent);
+	    byId("DKSolutionMenu_UpxCompress").addEventListener("click", dk.solutionmenu.onevent);
     });
 }
 
 /////////////////////////////
-function DKSolutionMenu_End()
+dk.solutionmenu. = function dk_solutionmenu_End()
 {
-	document.removeEventListener("mousedown", DKSolutionMenu_onevent);
-	byId("DKSolutionMenu_Open").removeEventListener("click", DKSolutionMenu_onevent);
-	byId("DKSolutionMenu_OpenHere").removeEventListener("click", DKSolutionMenu_onevent);
-	byId("DKSolutionMenu_NewFile").removeEventListener("click", DKSolutionMenu_onevent);
-	byId("DKSolutionMenu_NewFolder").removeEventListener("click", DKSolutionMenu_onevent);
-	byId("DKSolutionMenu_Rename").removeEventListener("click", DKSolutionMenu_onevent);
-	byId("DKSolutionMenu_Delete").removeEventListener("click", DKSolutionMenu_onevent);
-	byId("DKSolutionMenu_Copy").removeEventListener("click", DKSolutionMenu_onevent);
-	byId("DKSolutionMenu_Cut").removeEventListener("click", DKSolutionMenu_onevent);
-	byId("DKSolutionMenu_Paste").removeEventListener("click", DKSolutionMenu_onevent);
-	byId("DKSolutionMenu_Import").removeEventListener("click", DKSolutionMenu_onevent);
-	byId("DKSolutionMenu_GitAdd").removeEventListener("click", DKSolutionMenu_onevent);
-	byId("DKSolutionMenu_UpxCompress").removeEventListener("click", DKSolutionMenu_onevent);
+	document.removeEventListener("mousedown", dk.solutionmenu.onevent);
+	byId("DKSolutionMenu_Open").removeEventListener("click", dk.solutionmenu.onevent);
+	byId("DKSolutionMenu_OpenHere").removeEventListener("click", dk.solutionmenu.onevent);
+	byId("DKSolutionMenu_NewFile").removeEventListener("click", dk.solutionmenu.onevent);
+	byId("DKSolutionMenu_NewFolder").removeEventListener("click", dk.solutionmenu.onevent);
+	byId("DKSolutionMenu_Rename").removeEventListener("click", dk.solutionmenu.onevent);
+	byId("DKSolutionMenu_Delete").removeEventListener("click", dk.solutionmenu.onevent);
+	byId("DKSolutionMenu_Copy").removeEventListener("click", dk.solutionmenu.onevent);
+	byId("DKSolutionMenu_Cut").removeEventListener("click", dk.solutionmenu.onevent);
+	byId("DKSolutionMenu_Paste").removeEventListener("click", dk.solutionmenu.onevent);
+	byId("DKSolutionMenu_Import").removeEventListener("click", dk.solutionmenu.onevent);
+	byId("DKSolutionMenu_GitAdd").removeEventListener("click", dk.solutionmenu.onevent);
+	byId("DKSolutionMenu_UpxCompress").removeEventListener("click", dk.solutionmenu.onevent);
 	dk.close("DKFile/DKSolutionMenu.html");
 }
 
 //////////////////////////////////////
-function DKSolutionMenu_OnEvent(event)
+dk.solutionmenu. = function dk_solutionmenu_OnEvent(event)
 {
 	console.debug("DKSolutionMenu_OnEvent("+event.currentTarget.id+","+event.type+")\n");
 	if(event.currentTarget.id === "DKSolutionMenu_Open"){
@@ -91,25 +94,25 @@ function DKSolutionMenu_OnEvent(event)
 }
 
 /////////////////////////////////
-function DKSolutionMenu_SetId(id)
+dk.solutionmenu. = function dk_solutionmenu_SetId(id)
 {
 	DKSolutionMenu_id = id;
 }
 
 /////////////////////////////////////
-function DKSolutionMenu_SetFile(file)
+dk.solutionmenu. = function dk_solutionmenu_SetFile(file)
 {
 	DKSolutionMenu_file = file;
 }
 
 //////////////////////////////
-function DKSolutionMenu_Open()
+dk.solutionmenu. = function dk_solutionmenu_Open()
 {
 	DKSolution_OpenFile(DKSolutionMenu_file);
 }
 
 //////////////////////////////////
-function DKSolutionMenu_OpenHere()
+dk.solutionmenu. = function dk_solutionmenu_OpenHere()
 {
 	console.log("DKSolutionMenu_OpenHere()");
 	var path = DKSolutionMenu_file;
@@ -121,7 +124,7 @@ function DKSolutionMenu_OpenHere()
 }
 
 /////////////////////////////////
-function DKSolutionMenu_NewFile()
+dk.solutionmenu. = function dk_solutionmenu_NewFile()
 {
 	if(!DKSolutionMenu_file){
 		console.error("DKSolutionMenu_NewFile(): DKSolutionMenu_file is invalid\n");
@@ -131,7 +134,7 @@ function DKSolutionMenu_NewFile()
 	var value = byId("DKSolutionPath").value;
 	console.log("DKSolutionMenu_NewFile(): value = "+value);
 	DKSolutionMenu_SetFile(value+"/New.txt");
-	DKFile_StringToFile("", DKSolutionMenu_file);
+	dk.file.stringToFile("", DKSolutionMenu_file);
 	DKSolution_UpdatePath(value);
 	
 	//Find the id
@@ -153,7 +156,7 @@ function DKSolutionMenu_NewFile()
 }
 
 ///////////////////////////////////
-function DKSolutionMenu_NewFolder()
+dk.solutionmenu. = function dk_solutionmenu_NewFolder()
 {
 	if(!DKSolutionMenu_file){
 		console.error("DKSolutionMenu_NewFile(): DKSolutionMenu_file is invalid\n");
@@ -183,7 +186,7 @@ function DKSolutionMenu_NewFolder()
 }
 
 ////////////////////////////////
-function DKSolutionMenu_Rename()
+dk.solutionmenu. = function dk_solutionmenu_Rename()
 {
 	var top1 = byId(DKSolutionMenu_id).offsetTop;
 	var top2 = byId("DKSolutionMenu").offsetTop;
@@ -199,7 +202,7 @@ function DKSolutionMenu_Rename()
 }
 
 ////////////////////////////////
-function DKSolutionMenu_Delete()
+dk.solutionmenu. = function dk_solutionmenu_Delete()
 {
 	dk.create("DKGui/DKMessageBox.js", function(){
 		DKFrame_Html("DKGui/DKMessageBox.html");
@@ -213,32 +216,27 @@ function DKSolutionMenu_Delete()
 	});
 }
 
-//////////////////////////////
-function DKSolutionMenu_Copy()
+dk.solutionmenu.copy = function dk_solutionmenu_copy()
 {
 	DK_SetClipboardFiles(DKSolutionMenu_file);
 }
 
-/////////////////////////////
-function DKSolutionMenu_Cut()
+dk.solutionmenu.cut = function dk_solutionmenu_cut()
 {
 	DK_SetClipboardFiles(DKSolutionMenu_file);
 }
 
-///////////////////////////////
-function DKSolutionMenu_Paste()
+dk.solutionmenu.paste = function dk_solutionmenu_paste()
 {
 	//TODO
 }
 
-////////////////////////////////
-function DKSolutionMenu_Import()
+dk.solutionmenu.import = function dk_solutionmenu_import()
 {
 	//TODO
 }
 
-////////////////////////////////
-function DKSolutionMenu_GitAdd()
+dk.solutionmenu.gitAdd = function dk_solutionmenu_gitAdd()
 {
 	dk.create("DKBuild/DKBuild.js", function(){
 		var git = GIT;       //from DKBuild.js
@@ -263,8 +261,7 @@ function DKSolutionMenu_GitAdd()
 	});
 }
 
-/////////////////////////////////////
-function DKSolutionMenu_UpxCompress()
+dk.solutionmenu.upxCompress = function dk_solutionmenuuUpxCompress()
 {
 	dk.create("DKBuild/DKBuild.js", function(){ //for DKPATH
 	

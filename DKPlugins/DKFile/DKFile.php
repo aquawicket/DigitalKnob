@@ -148,7 +148,6 @@ function pushDKAssets(){
 		    }
         }
 	}
-	return error("test error");
 	return true;
 }
 

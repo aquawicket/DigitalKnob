@@ -400,7 +400,7 @@ function DKTrigger_LoadTriggers(file)
 function DKTrigger_SaveTriggers(file)
 {
 	var assets = DKAssets_LocalAssets();
-	DKFile_StringToFile(" ", assets+file); //clear file
+	dk.file.stringToFile(" ", assets+file); //clear file
 	
 	DKFile_SetSetting(assets+file, "[TRIGGERS]", String(triggers.length));
 	DKFile_SetSetting(assets+file, "[CAUSES]", String(causes.length));
