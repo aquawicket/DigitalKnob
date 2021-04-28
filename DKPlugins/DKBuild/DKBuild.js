@@ -455,7 +455,7 @@ function DKBuild_DoResults()
 				//CPP_DKFile_Delete(DKPATH+"/"+appdir+"/"+APP+"/win32/Release");
 			}
 		}
-		CPP_dk.file.makeDir(DKPATH+"/"+appdir+"/"+APP+"/win32");
+		CPP_DKFile_MkDir(DKPATH+"/"+appdir+"/"+APP+"/win32");
 		CPP_DKFile_ChDir(DKPATH+"/"+appdir+"/"+APP+"/win32");
 		
 		var rtvalue = CPP_DK_Execute(CMAKE+" -G \"Visual Studio 16 2019\" -A Win32 "+cmake_string+DKPATH+"/DK");
@@ -506,7 +506,7 @@ function DKBuild_DoResults()
 				//CPP_DKFile_Delete(DKPATH+"/"+appdir+"/"+APP+"/win64/Release");
 			}
 		}
-		CPP_dk.file.makeDir(DKPATH+"/"+appdir+"/"+APP+"/win64");
+		CPP_DKFile_MkDir(DKPATH+"/"+appdir+"/"+APP+"/win64");
 		CPP_DKFile_ChDir(DKPATH+"/"+appdir+"/"+APP+"/win64");
 		var rtvalue = CPP_DK_Execute(CMAKE+" -G \"Visual Studio 16 2019\" -A x64 "+cmake_string+DKPATH+"/DK");
 		if(rtvalue.indexOf("errors occurred!") > -1){ return; }
@@ -544,7 +544,7 @@ function DKBuild_DoResults()
 		if(LEVEL === "Rebuild" || LEVEL === "RebuildAll"){
 			CPP_DKFile_Delete(DKPATH+"/"+appdir+"/"+APP+"/mac32");
 		}
-		CPP_dk.file.makeDir(DKPATH+"/"+appdir+"/"+APP+"/mac32");
+		CPP_DKFile_MkDir(DKPATH+"/"+appdir+"/"+APP+"/mac32");
 		CPP_DKFile_ChDir(DKPATH+"/"+appdir+"/"+APP+"/mac32");
 		var rtvalue = CPP_DK_Execute(CMAKE+" -G \"Xcode\" -DCMAKE_OSX_ARCHITECTURES=i386 "+cmake_string+DKPATH+"/DK");
 		if(rtvalue.indexOf("errors occurred!") > -1){ return; }
@@ -575,7 +575,7 @@ function DKBuild_DoResults()
 		if(LEVEL === "Rebuild" || LEVEL === "RebuildAll"){
 			CPP_DKFile_Delete(DKPATH+"/"+appdir+"/"+APP+"/mac64");
 		}
-		CPP_dk.file.makeDir(DKPATH+"/"+appdir+"/"+APP+"/mac64");
+		CPP_DKFile_MkDir(DKPATH+"/"+appdir+"/"+APP+"/mac64");
 		CPP_DKFile_ChDir(DKPATH+"/"+appdir+"/"+APP+"/mac64");
 		var rtvalue = CPP_DK_Execute(CMAKE+" -G \"Xcode\" -DCMAKE_OSX_ARCHITECTURES=x86_64 "+cmake_string+DKPATH+"/DK");
 		if(rtvalue.indexOf("errors occurred!") > -1){ return; }
@@ -645,7 +645,7 @@ function DKBuild_DoResults()
 		if(LEVEL === "Rebuild" || LEVEL === "RebuildAll"){
 			CPP_DKFile_Delete(DKPATH+"/"+appdir+"/"+APP+"/ios32");
 		}
-		CPP_dk.file.makeDir(DKPATH+"/"+appdir+"/"+APP+"/ios32");
+		CPP_DKFile_MkDir(DKPATH+"/"+appdir+"/"+APP+"/ios32");
 		CPP_DKFile_ChDir(DKPATH+"/"+appdir+"/"+APP+"/ios32");
 		var rtvalue = CPP_DK_Execute(CMAKE+" -G \"Xcode\" "+cmake_string+"-DCMAKE_TOOLCHAIN_FILE="+DKPATH+"/DKCMake/iOS.cmake -DIOS_PLATFORM=OS "+DKPATH+"/DK");
 		if(rtvalue.indexOf("errors occurred!") > -1){ return; }
@@ -663,7 +663,7 @@ function DKBuild_DoResults()
 		if(LEVEL === "Rebuild" || LEVEL === "RebuildAll"){
 			CPP_DKFile_Delete(DKPATH+"/"+appdir+"/"+APP+"/ios64");
 		}
-		CPP_dk.file.makeDir(DKPATH+"/"+appdir+"/"+APP+"/ios64");
+		CPP_DKFile_MkDir(DKPATH+"/"+appdir+"/"+APP+"/ios64");
 		CPP_DKFile_ChDir(DKPATH+"/"+appdir+"/"+APP+"/ios64");
 		var rtvalue = CPP_DK_Execute(CMAKE+" -G \"Xcode\" "+cmake_string+"-DCMAKE_TOOLCHAIN_FILE="+DKPATH+"/DKCMake/iOS.cmake -DIOS_PLATFORM=OS "+DKPATH+"/DK");
 		if(rtvalue.indexOf("errors occurred!") > -1){ return; }
@@ -681,7 +681,7 @@ function DKBuild_DoResults()
 		if(LEVEL === "Rebuild" || LEVEL === "RebuildAll"){
 			CPP_DKFile_Delete(DKPATH+"/"+appdir+"/"+APP+"/iossim32");
 		}
-		CPP_dk.file.makeDir(DKPATH+"/"+appdir+"/"+APP+"/iossim32");
+		CPP_DKFile_MkDir(DKPATH+"/"+appdir+"/"+APP+"/iossim32");
 		CPP_DKFile_ChDir(DKPATH+"/"+appdir+"/"+APP+"/iossim32");
 		var rtvalue = CPP_DK_Execute(CMAKE+" -G \"Xcode\" "+cmake_string+"-DCMAKE_TOOLCHAIN_FILE="+DKPATH+"/DKCMake/iOS.cmake -DIOS_PLATFORM=SIMULATOR "+DKPATH+"/DK");
 		if(rtvalue.indexOf("errors occurred!") > -1){ return; }
@@ -699,7 +699,7 @@ function DKBuild_DoResults()
 		if(LEVEL === "Rebuild" || LEVEL === "RebuildAll"){
 			CPP_DKFile_Delete(DKPATH+"/"+appdir+"/"+APP+"/iossim64");
 		}
-		CPP_dk.file.makeDir(DKPATH+"/"+appdir+"/"+APP+"/iossim64");
+		CPP_DKFile_MkDir(DKPATH+"/"+appdir+"/"+APP+"/iossim64");
 		CPP_DKFile_ChDir(DKPATH+"/"+appdir+"/"+APP+"/iossim64");
 		var rtvalue = CPP_DK_Execute(CMAKE+" -G \"Xcode\" "+cmake_string+"-DCMAKE_TOOLCHAIN_FILE="+DKPATH+"/DKCMake/iOS.cmake -DIOS_PLATFORM=SIMULATOR64 "+DKPATH+"/DK");
 		if(rtvalue.indexOf("errors occurred!") > -1){ return; }
@@ -714,12 +714,12 @@ function DKBuild_DoResults()
 	
 	//// LINUX32 ///////
 	if(OS === "linux32"){
-		CPP_dk.file.makeDir(DKPATH+"/"+appdir+"/"+APP+"/linux32");
+		CPP_DKFile_MkDir(DKPATH+"/"+appdir+"/"+APP+"/linux32");
 		if(TYPE === "Debug" || TYPE === "ALL"){
 			if(LEVEL === "Rebuild" || LEVEL === "RebuildAll"){
 				CPP_DKFile_Delete(DKPATH+"/"+appdir+"/"+APP+"/linux32/Debug");
 			}
-			CPP_dk.file.makeDir(DKPATH+"/"+appdir+"/"+APP+"/linux32/Debug");
+			CPP_DKFile_MkDir(DKPATH+"/"+appdir+"/"+APP+"/linux32/Debug");
 			CPP_DKFile_ChDir(DKPATH+"/"+appdir+"/"+APP+"/linux32/Debug");
 			var rtvalue = CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DKPATH+"/DK");
 			if(rtvalue.indexOf("errors occurred!") > -1){ return; }
@@ -741,7 +741,7 @@ function DKBuild_DoResults()
 			if(LEVEL === "Rebuild" || LEVEL === "RebuildAll"){
 				CPP_DKFile_Delete(DKPATH+"/"+appdir+"/"+APP+"/linux32/Release");
 			}
-			CPP_dk.file.makeDir(DKPATH+"/"+appdir+"/"+APP+"/linux32/Release");
+			CPP_DKFile_MkDir(DKPATH+"/"+appdir+"/"+APP+"/linux32/Release");
 			CPP_DKFile_ChDir(DKPATH+"/"+appdir+"/"+APP+"/linux32/Release");
 			var rtvalue = CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DKPATH+"/DK");
 			if(rtvalue.indexOf("errors occurred!") > -1){ return; }
@@ -763,12 +763,12 @@ function DKBuild_DoResults()
 	
 	//// LINUX64 ///////
 	if(OS === "linux64"){
-		CPP_dk.file.makeDir(DKPATH+"/"+appdir+"/"+APP+"/linux64");
+		CPP_DKFile_MkDir(DKPATH+"/"+appdir+"/"+APP+"/linux64");
 		if(TYPE === "Debug" || TYPE === "ALL"){
 			if(LEVEL === "Rebuild" || LEVEL === "RebuildAll"){
 				CPP_DKFile_Delete(DKPATH+"/"+appdir+"/"+APP+"/linux64/Debug");
 			}
-			CPP_dk.file.makeDir(DKPATH+"/"+appdir+"/"+APP+"/linux64/Debug");
+			CPP_DKFile_MkDir(DKPATH+"/"+appdir+"/"+APP+"/linux64/Debug");
 			CPP_DKFile_ChDir(DKPATH+"/"+appdir+"/"+APP+"/linux64/Debug");
 			var rtvalue = CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DKPATH+"/DK");
 			if(rtvalue.indexOf("errors occurred!") > -1){ return; }
@@ -790,7 +790,7 @@ function DKBuild_DoResults()
 			if(LEVEL === "Rebuild" || LEVEL === "RebuildAll"){
 				CPP_DKFile_Delete(DKPATH+"/"+appdir+"/"+APP+"/linux64/Release");
 			}
-			CPP_dk.file.makeDir(DKPATH+"/"+appdir+"/"+APP+"/linux64/Release");
+			CPP_DKFile_MkDir(DKPATH+"/"+appdir+"/"+APP+"/linux64/Release");
 			CPP_DKFile_ChDir(DKPATH+"/"+appdir+"/"+APP+"/linux64/Release");
 			var rtvalue = CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DKPATH+"/DK");
 			if(rtvalue.indexOf("errors occurred!") > -1){ return; }
@@ -812,12 +812,12 @@ function DKBuild_DoResults()
 	
 	////// ANDROID32 /////
 	if(OS === "android32"){
-		CPP_dk.file.makeDir(DKPATH+"/"+appdir+"/"+APP+"/android32");
+		CPP_DKFile_MkDir(DKPATH+"/"+appdir+"/"+APP+"/android32");
 		if(TYPE === "Debug" || TYPE === "ALL"){
 			if(LEVEL === "Rebuild" || LEVEL === "RebuildAll"){
 				CPP_DKFile_Delete(DKPATH+"/"+appdir+"/"+APP+"/android32/Debug/CMakeCache.txt");
 			}
-			CPP_dk.file.makeDir(DKPATH+"/"+appdir+"/"+APP+"/android32/Debug");
+			CPP_DKFile_MkDir(DKPATH+"/"+appdir+"/"+APP+"/android32/Debug");
 			CPP_DKFile_ChDir(DKPATH+"/"+appdir+"/"+APP+"/android32/Debug");
 
 			if(CPP_DK_GetOS() === "Win32 " || CPP_DK_GetOS() === "Win64"){
@@ -834,7 +834,7 @@ function DKBuild_DoResults()
 			if(LEVEL === "Rebuild" || LEVEL === "RebuildAll"){
 				CPP_DKFile_Delete(DKPATH+"/"+appdir+"/"+APP+"/android32/Release/CMakeCache.txt");
 			}
-			CPP_dk.file.makeDir(DKPATH+"/"+appdir+"/"+APP+"/android32/Release");
+			CPP_DKFile_MkDir(DKPATH+"/"+appdir+"/"+APP+"/android32/Release");
 			CPP_DKFile_ChDir(DKPATH+"/"+appdir+"/"+APP+"/android32/Release");
 
 			if(CPP_DK_GetOS() === "Win32" || CPP_DK_GetOS() === "Win64"){
@@ -851,12 +851,12 @@ function DKBuild_DoResults()
 	
 	////// ANDROID64 /////
 	if(OS === "android64"){
-		CPP_dk.file.makeDir(DKPATH+"/"+appdir+"/"+APP+"/android64");
+		CPP_DKFile_MkDir(DKPATH+"/"+appdir+"/"+APP+"/android64");
 		if(TYPE === "Debug" || TYPE === "ALL"){
 			if(LEVEL === "Rebuild" || LEVEL === "RebuildAll"){
 				CPP_DKFile_Delete(DKPATH+"/"+appdir+"/"+APP+"/android64/Debug/CMakeCache.txt");
 			}
-			CPP_dk.file.makeDir(DKPATH+"/"+appdir+"/"+APP+"/android64/Debug");
+			CPP_DKFile_MkDir(DKPATH+"/"+appdir+"/"+APP+"/android64/Debug");
 			CPP_DKFile_ChDir(DKPATH+"/"+appdir+"/"+APP+"/android64/Debug");
 			
 			if(CPP_DK_GetOS() === "Win32 " || CPP_DK_GetOS() === "Win64"){
@@ -870,7 +870,7 @@ function DKBuild_DoResults()
 			if(LEVEL === "Rebuild" || LEVEL === "RebuildAll"){
 				CPP_DKFile_Delete(DKPATH+"/"+appdir+"/"+APP+"/android64/Release/CMakeCache.txt");
 			}
-			CPP_dk.file.makeDir(DKPATH+"/"+appdir+"/"+APP+"/android64/Release");
+			CPP_DKFile_MkDir(DKPATH+"/"+appdir+"/"+APP+"/android64/Release");
 			CPP_DKFile_ChDir(DKPATH+"/"+appdir+"/"+APP+"/android64/Release");
 
 			if(CPP_DK_GetOS() === "Win32" || CPP_DK_GetOS() === "Win64"){
@@ -888,12 +888,12 @@ function DKBuild_DoResults()
 	
 	//// RASPBERRY32 ///////
 	if(OS === "raspberry32"){
-		CPP_dk.file.makeDir(DKPATH+"/"+appdir+"/"+APP+"/raspberry32");
+		CPP_DKFile_MkDir(DKPATH+"/"+appdir+"/"+APP+"/raspberry32");
 		if(TYPE === "Debug" || TYPE === "ALL"){
 			if(LEVEL === "Rebuild" || LEVEL === "RebuildAll"){
 				CPP_DKFile_Delete(DKPATH+"/"+appdir+"/"+APP+"/raspberry32/Debug");
 			}
-			CPP_dk.file.makeDir(DKPATH+"/"+appdir+"/"+APP+"/raspberry32/Debug");
+			CPP_DKFile_MkDir(DKPATH+"/"+appdir+"/"+APP+"/raspberry32/Debug");
 			CPP_DKFile_ChDir(DKPATH+"/"+appdir+"/"+APP+"/raspberry32/Debug");
 			var rtvalue = CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DKPATH+"/DK");
 			if(rtvalue.indexOf("Error 1") > -1){ return; }
@@ -916,7 +916,7 @@ function DKBuild_DoResults()
 			if(LEVEL === "Rebuild" || LEVEL === "RebuildAll"){
 				CPP_DKFile_Delete(DKPATH+"/"+appdir+"/"+APP+"/raspberry32/Release");
 			}
-			CPP_dk.file.makeDir(DKPATH+"/"+appdir+"/"+APP+"/raspberry32/Release");
+			CPP_DKFile_MkDir(DKPATH+"/"+appdir+"/"+APP+"/raspberry32/Release");
 			CPP_DKFile_ChDir(DKPATH+"/"+appdir+"/"+APP+"/raspberry32/Release");
 			var rtvalue = CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DKPATH+"/DK");
 			if(rtvalue.indexOf("errors occurred!") > -1){ return; } //FIXME: this doesn't catch all build errors
@@ -938,12 +938,12 @@ function DKBuild_DoResults()
 	
 	//// RASPBERRY64 ///////
 	if(OS === "linux64"){
-		CPP_dk.file.makeDir(DKPATH+"/"+appdir+"/"+APP+"/raspberry64");
+		CPP_DKFile_MkDir(DKPATH+"/"+appdir+"/"+APP+"/raspberry64");
 		if(TYPE === "Debug" || TYPE === "ALL"){
 			if(LEVEL === "Rebuild" || LEVEL === "RebuildAll"){
 				CPP_DKFile_Delete(DKPATH+"/"+appdir+"/"+APP+"/raspberry64/Debug");
 			}
-			CPP_dk.file.makeDir(DKPATH+"/"+appdir+"/"+APP+"/raspberry64/Debug");
+			CPP_DKFile_MkDir(DKPATH+"/"+appdir+"/"+APP+"/raspberry64/Debug");
 			CPP_DKFile_ChDir(DKPATH+"/"+appdir+"/"+APP+"/raspberry64/Debug");
 			var rtvalue = CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DKPATH+"/DK");
 			if(rtvalue.indexOf("errors occurred!") > -1){ return; } //FIXME: this doesn't catch all build errors
@@ -965,7 +965,7 @@ function DKBuild_DoResults()
 			if(LEVEL === "Rebuild" || LEVEL === "RebuildAll"){
 				CPP_DKFile_Delete(DKPATH+"/"+appdir+"/"+APP+"/raspberry64/Release");
 			}
-			CPP_dk.file.makeDir(DKPATH+"/"+appdir+"/"+APP+"/raspberry64/Release");
+			CPP_DKFile_MkDir(DKPATH+"/"+appdir+"/"+APP+"/raspberry64/Release");
 			CPP_DKFile_ChDir(DKPATH+"/"+appdir+"/"+APP+"/raspberry64/Release");
 			var rtvalue = CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DKPATH+"/DK");
 			if(rtvalue.indexOf("errors occurred!") > -1){ return; } //FIXME: this doesn't catch all build errors
