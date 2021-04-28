@@ -378,10 +378,7 @@ if (!dk.hasCPP()) {
 }
 
 if (!dk.hasCPP()) {
-    dk.file.getAbsolutePath = function dk_file_getAbsolutePath(url, callback) {
-        if (!url)
-            return error("url invalid");
-        url = "/";
+    dk.file.getAbsolutePath = function dk_file_getAbsolutePath(url = "/", callback) {
         if (url.includes("file:///"))
             url = pathname;
         url = url.replace(location.protocol + "//" + location.hostname + "/", "");
@@ -411,8 +408,11 @@ dk.file.getRelativePath = function dk_file_getRelativePath(apath, datapath) {
 
 if (!dk.hasCPP()) {
     dk.file.isDir = function dk_file_isDir(url, callback) {
-        dk.php.call('POST', "/DKFile/DKFile.php", "isDir", url, function(result) {
-            //result && console.debug(result);
+        url = dk.file.onlineAssets+url;
+        console.debug("testing if "+url+" is a Dir");
+        dk.php.call('GET', "/DKFile/DKFile.php", "isDir", url, function dk_php_call_callback(result) {
+            console.debug("isDir: url: "+url+" result:"+result);
+
             callback && callback(result);
         });
     }

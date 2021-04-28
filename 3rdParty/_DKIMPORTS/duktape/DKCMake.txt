@@ -1,5 +1,7 @@
 DKDEPEND(python)
+IF(WIN)
 DKDEPEND(nodejs)
+ENDIF()
 
 ### VERSION ###
 ##DKSET(DUKTAPE_VERSION duktape-2.6.0)

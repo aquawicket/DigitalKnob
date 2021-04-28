@@ -27,6 +27,7 @@ dk.solutionmenu.init = function dk_solutionmenu_init()
 dk.solutionmenu.end = function dk_solutionmenu_end()
 {
 	document.removeEventListener("mousedown", dk.solutionmenu.onevent);
+	/*
 	byId("DKSolutionMenu_Open").onclick = null;
 	byId("DKSolutionMenu_OpenHere").onclick = null;
 	byId("DKSolutionMenu_NewFile").onclick = null;
@@ -39,6 +40,7 @@ dk.solutionmenu.end = function dk_solutionmenu_end()
 	byId("DKSolutionMenu_Import").onclick = null;
 	byId("DKSolutionMenu_GitAdd").onclick = null;
 	byId("DKSolutionMenu_UpxCompress").onclick = null;
+	*/
 	dk.close("DKFile/DKSolutionMenu.html");
 }
 
@@ -84,7 +86,7 @@ dk.solutionmenu.onevent = function dk_solutionmenu_onevent(event)
 	
 	//FIXME
 	if(event.currentTarget === document){
-		if((byId("DKFile/DKSolutionMenu.html") && byId("DKFile/DKSolutionMenu.html").contains(document.elementFromPoint(window.mouseX, window.mouseY))){
+		if(byId("DKFile/DKSolutionMenu.html") && byId("DKFile/DKSolutionMenu.html").contains(document.elementFromPoint(window.mouseX, window.mouseY))){
 			return;
 		}
 	}
@@ -114,7 +116,7 @@ dk.solutionmenu.openHere = function dk_solutionmenu_openHere()
 	//console.log("absolutepath = "+absolutepath+"\n");
 	//path = path.replace(absolutepath,"");
 	//console.log("path = "+path+"\n");
-	dk.solution.OpenHere(path);
+	dk.solution.openHere(path);
 }
 
 dk.solutionmenu.newFile = function dk_solutionmenu_newFile()

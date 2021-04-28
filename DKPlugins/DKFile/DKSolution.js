@@ -84,18 +84,17 @@ dk.solution.onevent = function dk_solution_onevent(event) {
 dk.solution.select = function dk_solution_select(id) {
     var arry = byId("DKSolutionMenu").childNodes;
     for (var i = 0; i < arry.length - 1; i++) {
-        if (!arry[i]) {
+        if (!arry[i])
             console.error("dk_solution_Select(id): arry[" + i + "] invalid\n");
-        }
-        arry[i].style.backgroundColor = "rgb(255,255,255)";
-        arry[i].style.color = "rgb(0,0,0)";
     }
+    arry[i].style.backgroundColor = "rgb(255,255,255)";
+    arry[i].style.color = "rgb(0,0,0)";
+
     if (id.indexOf("DKSolutionFolder") > -1 || id.indexOf("DKSolutionFile") > -1) {
         byId(id).style.backgroundColor = "rgb(123,157,212)";
         byId(id).style.color = "rgb(255,255,255)";
     }
 }
-
 dk.solution.openFolder = function dk_solution_openFolder(path) {
     if (!dk.solution.updatePath(path))
         return false;
@@ -109,6 +108,8 @@ dk.solution.openFile = function dk_solution_openFile(path) {
             aPath = results;
         });
     }
+    if (!duktape)
+        return;
     if (!CPP_DK_Run(aPath, ""))
         return error("CPP_DK_Run() failed");
     return true;
@@ -158,7 +159,7 @@ dk.solution.updatePath = function dk_solution_updatePath(path) {
     //var rPath = CPP_DKFile_GetRelativePath(aPath, path);
     //console.log("rPath:"+rPath+"\n");
 
-    dk.file.directoryContents(aPath, function(results) {
+    dk.file.directoryContents(aPath, function dk_file_directoryContents_callback(results) {
         if (!results)
             return false;
         var files = results.split(",");
