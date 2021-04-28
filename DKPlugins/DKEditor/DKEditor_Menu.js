@@ -77,14 +77,14 @@ function DKEditor_Menu_OnEvent(event)
 	if(event.currentTarget.id === "DKEditor_Menu_Notes"){
 		dk.create("DKNotepad/DKNotepad.js", function(rval){
 			if(!rval){ return; }
-			DKFrame_Html("DKNotepad/DKNotepad.html");
+			dk.file.create("DKNotepad/DKNotepad.html");
 			DKNotepad_Open(DKAssets_LocalAssets()+"/notes.txt");
 		});
 	}
 	if(event.currentTarget.id === "DKEditor_Menu_Assets"){
 		dk.create("DKFile/DKSolution.js", function(rval){
 			if(!rval){ return; }
-			DKFrame_Html("DKFile/DKSolution.html");
+			dk.file.create("DKFile/DKSolution.html");
 			DKFrame_SetTitle("DKFile/DKSolution.html", "File Explorer");
 			DKSolution_UpdatePath(DKAssets_LocalAssets());
 		});
@@ -121,7 +121,7 @@ function DKEditor_Menu_OnEvent(event)
 	if(event.currentTarget.id === "DKEditor_Menu_NewFrame"){
 		dk.create("DKGui/DKMessageBox.js", function(rval){
 			if(!rval){ return; }
-			DKFrame_Html("DKGui/DKMessageBox.html");
+			dk.file.create("DKGui/DKMessageBox.html");
 			DKMessageBox_GetValue("Enter name", function(rval){
 				//console.log("DKMessageBox_GetValue() rval = "+rval+"\n");
 				if(!rval){ return; }
@@ -132,7 +132,7 @@ function DKEditor_Menu_OnEvent(event)
 	if(event.currentTarget.id === "DKEditor_Menu_Builder"){
 		dk.create("DKBuild/DKBuildGUI.js", function(rval){
 			if(!rval){ return; }
-			DKFrame_Html("DKBuild/DKBuildGUI.html");
+			dk.file.create("DKBuild/DKBuildGUI.html");
 		});
 	}
 	if(event.currentTarget.id === "DKEditor_Menu_Info"){
@@ -161,7 +161,7 @@ function DKEditor_Menu_OnEvent(event)
 	}
 	if(event.currentTarget.id === "DKEditor_Menu_Report"){
 		dk.create("DKDebug/SendBugReport.js", function(){
-			DKFrame_Html("DKDebug/SendBugReport.html");
+			dk.file.create("DKDebug/SendBugReport.html");
 		});
 	}
 	if(event.currentTarget.id === "DKEditor_Menu_Web"){
@@ -179,7 +179,7 @@ function DKEditor_Menu_OnEvent(event)
 		iframe.style.borderWidth = "0px";
 		iframe.style.overflow = "auto";
 		
-		DKFrame_Html(div.id);
+		dk.file.create(div.id);
 	}
 
 	if(event.currentTarget === document){

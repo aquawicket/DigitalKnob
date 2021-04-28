@@ -22,7 +22,7 @@ function scrolltest_end()()
 function scrolltest_OnEvent(event)
 {	
 	dk.create("DKGui/DKMessageBox.js", function(){
-		DKFrame_Html("DKGui/DKMessageBox.html");
+		dk.file.create("DKGui/DKMessageBox.html");
 		DKMessageBox_Message("bottomdiv clicked");
 	});
 }

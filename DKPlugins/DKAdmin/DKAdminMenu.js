@@ -54,19 +54,19 @@ function DKAdminMenu_OnEvent(event)
 	if(event.currentTarget.id === "FileExplorer"){
 		dk.create("DKFile/DKSolution.js", function(rval){
 			if(!rval){ return; }
-			DKFrame_Html("DKFile/DKSolution.html");
+			dk.file.create("DKFile/DKSolution.html");
 			DKFrame_SetTitle("DKFile/DKSolution.html", "File Explorer");
 			DKSolution_UpdatePath(DKAssets_LocalAssets());
 		});
 	}
 	if(event.currentTarget.id === "OpenNotepad"){
 		dk.create("DKNotepad/DKNotepad.js", function(){
-			DKFrame_Html("DKNotepad/DKNotepad.html");
+			dk.file.create("DKNotepad/DKNotepad.html");
 		});
 	}
 	if(event.currentTarget.id === "OpenStats"){
 		dk.create("DKStats/DKStats.js", function(){
-			DKFrame_Html("DKStats/DKStats.html");
+			dk.file.create("DKStats/DKStats.html");
 		});
 	}
 	if(event.currentTarget.id === "TestIframe"){
@@ -89,7 +89,7 @@ function DKAdminMenu_OnEvent(event)
 		var assets = DKAssets_LocalAssets();
 		dk.file.stringToFile(source, assets+"source.html");
 		dk.create("DKNotepad/DKNotepad.js", function(){
-			DKFrame_Html("DKNotepad/DKNotepad.html");
+			dk.file.create("DKNotepad/DKNotepad.html");
 			DKNotepad_Open(assets+"source.html");
 			//console.log(source+"\n");
 		});

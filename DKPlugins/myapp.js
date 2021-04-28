@@ -13,13 +13,13 @@ dk.create("DKDebug/DKDebug.js", function(){
 	//DKRml_DebuggerOn();
 	
 	dk.create("DKNotepad/DKNotepad.js", function(){
-		DKFrame_Html("DKNotepad/DKNotepad.html");
+		dk.file.create("DKNotepad/DKNotepad.html");
 		DKNotepad_Open("DK/todo.txt");
 	});
 	
 	/*
 	dk.create("DKInputTest/DKInput.js", function(){
-		DKFrame_Html("DKInputTest/DKInput.html");
+		dk.file.create("DKInputTest/DKInput.html");
 	});
 	*/
 	

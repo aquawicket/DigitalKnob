@@ -194,7 +194,7 @@ dk.solutionmenu.rename = function dk_solutionmenu_rename()
 dk.solutionmenu.delete = function dk_solutionmenu_delete()
 {
 	dk.create("DKGui/DKMessageBox.js", function(){
-		DKFrame_Html("DKGui/DKMessageBox.html");
+		dk.file.create("DKGui/DKMessageBox.html");
 		DKMessageBox_Confirm("delete this file?", function(rval){
 			if(rval === true){
 				console.debug("dk.solutionmenu.Delete(): dk.solutionmenu.file = "+dk.solutionmenu.file);
