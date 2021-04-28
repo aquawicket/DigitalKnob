@@ -1,4 +1,5 @@
 DKDEPEND(codemirror)
-DKCOPY(${CODEMIRROR}/lib/codemirror.css ${DKPLUGINS}/DKCodeMirror/codemirror.css TRUE)
-DKCOPY(${CODEMIRROR}/lib/codemirror.js ${DKPLUGINS}/DKCodeMirror/codemirror.js TRUE)
+DKCOPY(${CODEMIRROR}/lib/ ${DKPLUGINS}/DKCodeMirror/lib/ TRUE)
+DKCOPY(${CODEMIRROR}/theme/ ${DKPLUGINS}/DKCodeMirror/theme/ TRUE)
+DKCOPY(${CODEMIRROR}/mode/ ${DKPLUGINS}/DKCodeMirror/mode/ TRUE)
 DKASSETS(DKCodeMirror)
