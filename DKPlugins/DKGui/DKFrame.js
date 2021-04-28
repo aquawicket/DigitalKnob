@@ -17,7 +17,7 @@ dk.frame.create = function dk_frame_create(obj) {
             return false;
     } else {
         console.warn("dk.frame.create(): obj is not a instance of DKWidget. It is recommended to derive from a new DKWidget instance")
-        if(typeof obj === Object)
+        if(typeof obj === "object")
             element = obj;
         else
             element = byId(obj)
@@ -366,7 +366,7 @@ dk.frame.createNewWindow = function dk_frame_createNewWindow(title, width, heigh
     //document.body.appendChild(div);
     
     newWin.setElement(div);    
-    dk.frame.create(newWin);
+    dk.frame.create(div);
     return div;
 }
 
