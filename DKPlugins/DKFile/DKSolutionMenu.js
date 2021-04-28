@@ -9,36 +9,36 @@ dk.solutionmenu.init = function dk_solutionmenu_init()
 {
 	dk.create("DKFile/DKSolutionMenu.html", function(){
     	document.addEventListener("mousedown", dk.solutionmenu.onevent);
-    	byId("DKSolutionMenu_Open").addEventListener("click", dk.solutionmenu.onevent);
-    	byId("DKSolutionMenu_OpenHere").addEventListener("click", dk.solutionmenu.onevent);
-    	byId("DKSolutionMenu_NewFile").addEventListener("click", dk.solutionmenu.onevent);
-    	byId("DKSolutionMenu_NewFolder").addEventListener("click", dk.solutionmenu.onevent);
-    	byId("DKSolutionMenu_Rename").addEventListener("click", dk.solutionmenu.onevent);
-    	byId("DKSolutionMenu_Delete").addEventListener("click", dk.solutionmenu.onevent);
-    	byId("DKSolutionMenu_Copy").addEventListener("click", dk.solutionmenu.onevent);
-    	byId("DKSolutionMenu_Cut").addEventListener("click", dk.solutionmenu.onevent);
-    	byId("DKSolutionMenu_Paste").addEventListener("click", dk.solutionmenu.onevent);
-	    byId("DKSolutionMenu_Import").addEventListener("click", dk.solutionmenu.onevent);
-    	byId("DKSolutionMenu_GitAdd").addEventListener("click", dk.solutionmenu.onevent);
-	    byId("DKSolutionMenu_UpxCompress").addEventListener("click", dk.solutionmenu.onevent);
+    	byId("DKSolutionMenu_Open").onclick = dk.solutionmenu.onevent;
+    	byId("DKSolutionMenu_OpenHere").onclick = dk.solutionmenu.onevent;
+    	byId("DKSolutionMenu_NewFile").onclick = dk.solutionmenu.onevent;
+    	byId("DKSolutionMenu_NewFolder").onclick = dk.solutionmenu.onevent;
+    	byId("DKSolutionMenu_Rename").onclick = dk.solutionmenu.onevent;
+    	byId("DKSolutionMenu_Delete").onclick = dk.solutionmenu.onevent;
+    	byId("DKSolutionMenu_Copy").onclick = dk.solutionmenu.onevent;
+    	byId("DKSolutionMenu_Cut").onclick = dk.solutionmenu.onevent;
+    	byId("DKSolutionMenu_Paste").onclick = dk.solutionmenu.onevent;
+	    byId("DKSolutionMenu_Import").onclick = dk.solutionmenu.onevent;
+    	byId("DKSolutionMenu_GitAdd").onclick = dk.solutionmenu.onevent;
+	    byId("DKSolutionMenu_UpxCompress").onclick = dk.solutionmenu.onevent;
     });
 }
 
 dk.solutionmenu.end = function dk_solutionmenu_end()
 {
 	document.removeEventListener("mousedown", dk.solutionmenu.onevent);
-	byId("DKSolutionMenu_Open").removeEventListener("click", dk.solutionmenu.onevent);
-	byId("DKSolutionMenu_OpenHere").removeEventListener("click", dk.solutionmenu.onevent);
-	byId("DKSolutionMenu_NewFile").removeEventListener("click", dk.solutionmenu.onevent);
-	byId("DKSolutionMenu_NewFolder").removeEventListener("click", dk.solutionmenu.onevent);
-	byId("DKSolutionMenu_Rename").removeEventListener("click", dk.solutionmenu.onevent);
-	byId("DKSolutionMenu_Delete").removeEventListener("click", dk.solutionmenu.onevent);
-	byId("DKSolutionMenu_Copy").removeEventListener("click", dk.solutionmenu.onevent);
-	byId("DKSolutionMenu_Cut").removeEventListener("click", dk.solutionmenu.onevent);
-	byId("DKSolutionMenu_Paste").removeEventListener("click", dk.solutionmenu.onevent);
-	byId("DKSolutionMenu_Import").removeEventListener("click", dk.solutionmenu.onevent);
-	byId("DKSolutionMenu_GitAdd").removeEventListener("click", dk.solutionmenu.onevent);
-	byId("DKSolutionMenu_UpxCompress").removeEventListener("click", dk.solutionmenu.onevent);
+	byId("DKSolutionMenu_Open").onclick = null;
+	byId("DKSolutionMenu_OpenHere").onclick = null;
+	byId("DKSolutionMenu_NewFile").onclick = null;
+	byId("DKSolutionMenu_NewFolder").onclick = null;
+	byId("DKSolutionMenu_Rename").onclick = null;
+	byId("DKSolutionMenu_Delete").onclick = null;
+	byId("DKSolutionMenu_Copy").onclick = null;
+	byId("DKSolutionMenu_Cut").onclick = null;
+	byId("DKSolutionMenu_Paste").onclick = null;
+	byId("DKSolutionMenu_Import").onclick = null;
+	byId("DKSolutionMenu_GitAdd").onclick = null;
+	byId("DKSolutionMenu_UpxCompress").onclick = null;
 	dk.close("DKFile/DKSolutionMenu.html");
 }
 
@@ -46,7 +46,7 @@ dk.solutionmenu.onevent = function dk_solutionmenu_onevent(event)
 {
 	console.debug("DKSolutionMenu_OnEvent("+event.currentTarget.id+","+event.type+")\n");
 	if(event.currentTarget.id === "DKSolutionMenu_Open"){
-		dk.solutionmenu.pen();
+		dk.solutionmenu.open();
 	}
 	if(event.currentTarget.id === "dk.solutionmenu.OpenHere"){
 		dk.solutionmenu.openHere();
@@ -103,7 +103,7 @@ dk.solutionmenu.setFile = function dk_solutionmenu_setFile(file)
 
 dk.solutionmenu.open = function dk_solutionmenu_open()
 {
-	DKSolution_OpenFile(dk.solutionmenu.file);
+	dk.solution.openFile(dk.solutionmenu.file);
 }
 
 dk.solutionmenu.openHere = function dk_solutionmenu_openHere()
@@ -114,21 +114,21 @@ dk.solutionmenu.openHere = function dk_solutionmenu_openHere()
 	//console.log("absolutepath = "+absolutepath+"\n");
 	//path = path.replace(absolutepath,"");
 	//console.log("path = "+path+"\n");
-	DKSolution_OpenHere(path);
+	dk.solution.OpenHere(path);
 }
 
 dk.solutionmenu.newFile = function dk_solutionmenu_newFile()
 {
 	if(!dk.solutionmenu.file){
-		console.error("dk.solutionmenu.NewFile(): dk.solutionmenu.file is invalid\n");
+		console.error("dk.solutionmenu.newFile(): dk.solutionmenu.file is invalid\n");
 		return;
 	}
 	//var value = byId("DKSolutionPath").value;
 	var value = byId("DKSolutionPath").value;
 	console.log("dk.solutionmenu.NewFile(): value = "+value);
-	dk.solutionmenu.SetFile(value+"/New.txt");
-	DKFile_StringToFile("", dk.solutionmenu.file);
-	DKSolution_UpdatePath(value);
+	dk.solutionmenu.setFile(value+"/New.txt");
+	dk.file.stringToFile("", dk.solutionmenu.file);
+	dk.solution.updatePath(value);
 	
 	//Find the id
 	var elements = DK_GetElements(byId("DKSolutionMenu"));
@@ -155,20 +155,19 @@ dk.solutionmenu.newFolder = function dk_solutionmenu_newFolder()
 		return;
 	}
 	
-	dk.solutionmenu.SetFile(byId("DKSolutionPath").value+"/New");
+	dk.solutionmenu.setFile(byId("DKSolutionPath").value+"/New");
 	dk.file.makeDir(dk.solutionmenu.file);
-	DKSolution_UpdatePath(byId("DKSolutionPath").value);
+	dk.solution.updatePath(byId("DKSolutionPath").value);
 	
 	//Find the id
-	var elements = DK_GetElements(byId("DKSolutionMenu"));
 	//console.log("elements = "+elements+"\n");
-	var arry = elements.split(",");
+	var arry = byId("DKSolutionMenu").childNodes;
 	for(var i=0; i<arry.length; i++){
 		//console.log("arry["+i+"] ="+arry[i]+"\n");
-		var value = byId(arry[i]).value;
+		var value = arry[i].value;
 		//console.log("arry["+i+"] ="+value+"\n");
 		if(value === dk.solutionmenu.file){
-			dk.solutionmenu.SetId(arry[i]);
+			dk.solutionmenu.setId(arry[i]);
 			//console.log("id = "+arry[i]+"\n");
 			break;
 		}
@@ -200,7 +199,7 @@ dk.solutionmenu.delete = function dk_solutionmenu_delete()
 			if(rval === true){
 				console.debug("dk.solutionmenu.Delete(): dk.solutionmenu.file = "+dk.solutionmenu.file);
 				DKFile_Delete(dk.solutionmenu.file);
-				DKSolution_UpdatePath(byId("DKSolutionPath").value);
+				dk.solution.UpdatePath(byId("DKSolutionPath").value);
 			}
 		});
 	});
