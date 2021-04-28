@@ -180,7 +180,7 @@ bool DKDuktape::CallEnd(const DKString& file)
 	DKString filename;
 	DKFile::GetFileName(file, filename);
 	DKFile::RemoveExtention(filename);
-	DKString func = filename+"_End";
+	DKString func = filename+"_end";
 
 	DKString rval;
 	RunDuktape("(typeof "+func+" === 'function')", rval);
@@ -211,7 +211,7 @@ bool DKDuktape::CallInit(const DKString& file)
 	DKString filename;
 	DKFile::GetFileName(file, filename);
 	DKFile::RemoveExtention(filename);
-	DKString func = filename+"_Init";
+	DKString func = filename+"_init";
 
 	DKString rval;
 	RunDuktape("(typeof "+func+" === 'function')", rval);
