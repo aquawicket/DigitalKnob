@@ -26,7 +26,7 @@ function DKBuild_init()
 	CPP_DK_Create("DKCurl");
 
 	if(CPP_DK_GetOS() === "Win32"){
-		DKPATH = "C:/digitalknob";
+		DKPATH = "C:/Users/aquawicket/digitalknob";
 		CMAKE = "C:/Program Files/CMake/bin/cmake.exe";
 		CMAKE = CPP_DKFile_GetShortName(CMAKE);
 		NDK = DKPATH+"/DK/3rdParty/"+NDK_NAME;

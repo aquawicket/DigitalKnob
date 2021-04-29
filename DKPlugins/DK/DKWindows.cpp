@@ -722,7 +722,7 @@ bool DKWindows::SetClipboard(const DKString& text)
 bool DKWindows::SetClipboardFiles(const DKString& filelist)
 {
 	DKDEBUGFUNC(filelist);
-	//char sFiles[] = "C:/digitalknob/README.md\0";
+	//char sFiles[] = "C:/Users/aquawicket/digitalknob/README.md\0";
 	DKString sFiles = filelist;
 	replace(sFiles, ",", "\0"); //not working
 

@@ -20,7 +20,7 @@ This command will ensure DKZlib is built first and recognied by DKPng.
 
 *** DKINCLUDE() ***
 Source code need's to include header file locations.
-we can eaisly say DKINCLUDE("C:/digitalknob/DKPlugins/3rdParty/vorbis/include")
+we can eaisly say DKINCLUDE("C:/Users/username/digitalknob/DKPlugins/3rdParty/vorbis/include")
 This will allow DKPlugins and the DKApp to see these header files. 
 
 *** DKPLUGIN() ***

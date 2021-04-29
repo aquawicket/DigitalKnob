@@ -37,7 +37,7 @@
 ****************************************************
 
 *** SOURCE DIRECTORY ****
-/digitalknob      ( I.E.  C:/digitalknob for windows.. ,wherever the digitalknob folder resides on your system )
+/digitalknob      ( I.E.  C:/Users/username/digitalknob for windows.. ,wherever the digitalknob folder resides on your system )
 
 *** BINARY DIRECTORY ****
 /digitalknob/DKApps/DKCore/win32   ( By setting the binary directory to be win32, most variables will be casted )
