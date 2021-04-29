@@ -2,6 +2,7 @@
 	Git should be extracted from this to it's own plugin.
 	Also, git credential memory should be added.
 */
+var USERNAME = "aquawicket"; //FIXME: Need to dynamically get username (aquawicket)
 
 var OS = "";   //win32,win64,mac32,mac64,linux32,linux64,ios32,ios64,iossim32,iossim64,android32,android64,raspberry32,raspberry64 
 var APP = "";  //DKAppname
@@ -27,6 +28,7 @@ function DKBuild_init()
 
 	if(CPP_DK_GetOS() === "Win32"){
 		DKPATH = "C:/digitalknob";
+		//DKPATH = "/Users/"+USERNAME+"/digitalknob";
 		CMAKE = "C:/Program Files/CMake/bin/cmake.exe";
 		CMAKE = CPP_DKFile_GetShortName(CMAKE);
 		NDK = DKPATH+"/DK/3rdParty/"+NDK_NAME;
@@ -34,23 +36,24 @@ function DKBuild_init()
 	}
 	if(CPP_DK_GetOS() === "Win64"){
 		DKPATH = "C:/digitalknob";
+		//DKPATH = "C:/Users/"+USERNAME+"/digitalknob";
 		CMAKE = "C:/Program Files (x86)/CMake/bin/cmake.exe";
 		CMAKE = CPP_DKFile_GetShortName(CMAKE);
 		NDK = DKPATH+"/DK/3rdParty/"+NDK_NAME;
 		NDK = CPP_DKFile_GetShortName(NDK);
 	}
 	if(CPP_DK_GetOS() === "Mac"){
-		DKPATH = "/Users/aquawicket/Desktop/digitalknob";
+		DKPATH = "/Users/"+USERNAME+"/digitalknob";
 		CMAKE = "/Applications/CMake.app/Contents/bin/cmake";
 		NDK = DKPATH+"/DK/3rdParty/"+NDK_NAME;
 	}
 	if(CPP_DK_GetOS() === "Linux"){
-		DKPATH = "/home/pi/Desktop/digitalknob"; //FIXME: Need to dynamically get username (pi)
+		DKPATH = "/home/"+USERNAME+"/digitalknob";
 		CMAKE = "/usr/bin/cmake";
 		NDK = DKPATH+"/DK/3rdParty/"+NDK_NAME;
 	}
 	if(CPP_DK_GetOS() === "Raspberry"){
-		DKPATH = "/home/pi/Desktop/digitalknob"; //FIXME: Need to dynamically get username (pi)
+		DKPATH = "/home/"+USERNAME+"/digitalknob";
 		CMAKE = "/usr/bin/cmake";
 		NDK = DKPATH+"/DK/3rdParty/"+NDK_NAME;
 	}
@@ -425,6 +428,8 @@ function DKBuild_DoResults()
 		cmake_string = cmake_string+"-DSTATIC=ON ";
 	}
 	
+	
+	
 	var appdir = "DKApps";
 	
 	var contents = CPP_DKFile_DirectoryContents(DKPATH);
@@ -441,6 +446,12 @@ function DKBuild_DoResults()
 		IconMaker_Create(DKPATH+"/"+appdir+"/"+APP);
 	}
 	
+	//Run cmake to get any needed build tools
+	CPP_DKFile_MkDir(DKPATH+"/"+appdir+"/"+APP+"/"+OS+"/Release");
+	CPP_DKFile_ChDir(DKPATH+"/"+appdir+"/"+APP+"/"+OS+"/Release");
+	var rtvalue = CPP_DK_Execute(CMAKE+" "+cmake_string+" -P "+DKPATH+"/DK/DKCMake/BuildTools.cmake");
+
+			
 	////// WIN32 /////
 	if(OS === "win32"){
 		if(LEVEL === "Rebuild" || LEVEL === "RebuildAll"){
@@ -810,6 +821,7 @@ function DKBuild_DoResults()
 		}
 	}
 	
+	
 	////// ANDROID32 /////
 	if(OS === "android32"){
 		CPP_DKFile_MkDir(DKPATH+"/"+appdir+"/"+APP+"/android32");
@@ -821,6 +833,7 @@ function DKBuild_DoResults()
 			CPP_DKFile_ChDir(DKPATH+"/"+appdir+"/"+APP+"/android32/Debug");
 
 			if(CPP_DK_GetOS() === "Win32 " || CPP_DK_GetOS() === "Win64"){
+		
 				var rtvalue = CPP_DK_Execute(CMAKE+" -G \"Visual Studio 16 2019\" -A ARM -DCMAKE_TOOLCHAIN_FILE="+NDK+"/build/cmake/android.toolchain.cmake -DANDROID_NDK="+NDK+" -DANDROID_ABI=armeabi-v7a -DANDROID_NATIVE_API_LEVEL=29 "+cmake_string+DKPATH+"/DK");
 			}
 			if(CPP_DK_GetOS() === "Linux" || CPP_DK_GetOS() === "Mac"){
@@ -834,10 +847,12 @@ function DKBuild_DoResults()
 			if(LEVEL === "Rebuild" || LEVEL === "RebuildAll"){
 				CPP_DKFile_Delete(DKPATH+"/"+appdir+"/"+APP+"/android32/Release/CMakeCache.txt");
 			}
+				
 			CPP_DKFile_MkDir(DKPATH+"/"+appdir+"/"+APP+"/android32/Release");
 			CPP_DKFile_ChDir(DKPATH+"/"+appdir+"/"+APP+"/android32/Release");
-
+				
 			if(CPP_DK_GetOS() === "Win32" || CPP_DK_GetOS() === "Win64"){
+				
 				var rtvalue = CPP_DK_Execute(CMAKE+" -G \"Visual Studio 16 2019\" -A ARM -DCMAKE_TOOLCHAIN_FILE="+NDK+"/build/cmake/android.toolchain.cmake -DANDROID_NDK="+NDK+" -DANDROID_ABI=armeabi-v7a -DANDROID_NATIVE_API_LEVEL=29 "+cmake_string+DKPATH+"/DK");
 			}
 			if(CPP_DK_GetOS() === "Linux" || CPP_DK_GetOS() === "Mac"){
