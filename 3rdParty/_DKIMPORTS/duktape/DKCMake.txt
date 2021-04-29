@@ -1,6 +1,6 @@
-DKDEPEND(python)
+## DKDEPEND(python)
 IF(WIN)
-DKDEPEND(nodejs)
+## DKDEPEND(nodejs)
 ENDIF()
 
 ### VERSION ###
