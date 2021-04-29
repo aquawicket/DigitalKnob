@@ -16,12 +16,31 @@ window.onunhandledrejection = function(event) {
 }
 
 dk.trace.editFile = function dk_trace_editFile(file) {
+    /*
     dk.create("DKNotepad/DKNotepad.js", function dk_create_callback() {
         dk.frame.create(byId("DKNotepad/DKNotepad.html"));
         dk.notepad.open(file);
     });
-}
+    */
 
+    file = file.replace("file:///", "");
+    file = file.replaceAll("/", "\\");
+    file = file.replace(dk.file.onlineAssets, "");
+
+    const createPopup = function() {
+        dk.codemirror.create();
+        dk.codemirror.open(file);
+        dk.codemirror.setSelection(10);
+    }
+
+    if (!dk.getObjects().includes("DKCodeMirror/DKCodeMirror.js")) {
+        dk.create("DKCodeMirror/DKCodeMirror.js", function() {
+            createPopup();
+        });
+    } else
+        createPopup();
+
+}
 dk.trace.stackToConsoleString = function dk_trace_stackToConsoleString(arg, deleteTo) {
     let jsonStack;
     let headerMsg = false;

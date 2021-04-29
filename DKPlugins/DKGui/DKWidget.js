@@ -49,7 +49,7 @@ const DKWidget = function(identifier) {
         if (index <= -1)
             return error("Unable to find instance in DKWidget");
         DKWidget.instances.splice(index, 1);
-        console.debug("removed DKWidget instance @ index " + index);
+        console.debug("removed DKWidget("+identifier+") @index "+(index));
         return true;
     }
 
@@ -88,17 +88,16 @@ const DKWidget = function(identifier) {
         if (arguments[0] === undefined) {
             let errmsg = "DKWidget was invoked with an argument that evaluated to undefined.\n";
             errmsg += "Please try a different variable to differentiate this object across multiple instances.\n";
-            errmsg += "If you wish to make this object completley singleton, simply pass a 1 or 'singleton' to DKWidget()\n";
+            errmsg += "If you wish to make this object completley singleton, just pass it a unique name\n";
             return error(errmsg);
         }
 
         const identifier = arguments[0];
-        console.debug("DKWidget("+identifier+")");
         if (identifier) {
             this.identifier = identifier;
             for (let n = 0; n < DKWidget.instances.length; n++) {
                 if (DKWidget.instances[n].identifier == this.identifier) {
-                    console.error("A DKWidget instance with the same identifier value already exists");
+                    console.debug("DKWidget("+identifier+") already exists");
                     DKWidget.instances[n].ok = false;
                     return DKWidget.instances[n];
                 }
@@ -108,17 +107,17 @@ const DKWidget = function(identifier) {
     this.instance = this;
     
     //Not sure how this can happen, just to be safe...
-    const index = DKWidget.instances.indexOf(this.instance);
-    if (index > -1) {
-        console.warn("this.instance already exists in DKWidget");
+    if(DKWidget.instances.includes(this.instance)){
+        const index = DKWidget.instances.indexOf(this.instance);
+        console.error("this.instance already exists in DKWidget @inxed "+index);
         DKWidget.instances[index].ok = false;
         return DKWidget.instances[index];
     }
 
-    console.debug("creating new instance of DKWidget");
-    DKWidget.instances.push(this.instance);
-    DKWidget.instances[DKWidget.instances.length - 1].ok = true;
-    return DKWidget.instances[DKWidget.instances.length - 1];
+    const index = DKWidget.instances.push(this.instance)-1;
+    DKWidget.instances[index].ok = true;
+    console.debug("created DKWidget("+identifier+") @index "+index);
+    return DKWidget.instances[index];
 }
 
 DKWidget.instances = new Array;

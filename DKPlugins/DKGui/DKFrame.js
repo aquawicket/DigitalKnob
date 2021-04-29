@@ -351,6 +351,7 @@ dk.frame.createNewWindow = function dk_frame_createNewWindow(title, width, heigh
     div.style.overflow = "auto";
     newWin.setElement(div);    
     dk.frame.create(newWin);
+    div.ok = true;
     return div;
 }
 

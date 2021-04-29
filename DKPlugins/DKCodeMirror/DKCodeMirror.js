@@ -2,24 +2,39 @@
 
 dk.codemirror = new Object;
 
-dk.codemirror.init = function dk_codemirror_init() {
-    dk.create("DKCodeMirror/lib/codemirror.css");
-    dk.create("DKCodeMirror/theme/abcdef.css");
-    dk.create("DKCodeMirror/DKCodeMirror.css");
+dk.codemirror.init = function dk_codemirror_init(callback) {
+
     dk.create("DKCodeMirror/lib/codemirror.js", function() {
-        dk.create("DKCodeMirror/mode/javascript/javascript.js");
+        dk.create("DKCodeMirror/lib/codemirror.css", function() {
+            dk.create("DKCodeMirror/theme/abcdef.css", function() {
+                dk.create("DKCodeMirror/DKCodeMirror.css", function() {
+                    dk.create("DKCodeMirror/mode/javascript/javascript.js", function() {
+                        callback && callback();
+                    });
+                });
+            });
+        });
     });
 }
 dk.codemirror.end = function dk_codemirror_end() {}
 
 dk.codemirror.create = function dk_codemirror_create() {
 
-    
     dk.codemirror.div = dk.frame.createNewWindow("DKCodeMirror", "500rem", "400rem");
-    var myCodeMirror = CodeMirror(dk.codemirror.div, {
+    dk.codemirror.myCodeMirror = CodeMirror(dk.codemirror.div, {
         theme: "abcdef",
         lineNumbers: true,
         value: "function myScript(){return 100;}\n",
         mode: "javascript"
     });
+}
+
+dk.codemirror.open = function dk_codemirror_open(file) {
+    dk.file.fileToString(file, function(str) {
+        dk.codemirror.myCodeMirror.setValue(str);
+    });
+}
+
+dk.codemirror.setSelection = function dk_codemirror_setSelection(line) {
+    dk.codemirror.myCodeMirror.setSelection(CodeMirror.Pos(line, 0), CodeMirror.Pos(line, 10));
 }

@@ -271,9 +271,9 @@ dk.getPlugin = function(url) {
         }
     }
     */
-    if(pluginName.substring(0, 2) === "dk"){
+    if (pluginName.substring(0, 2) === "dk") {
         pluginName = pluginName.slice(2);
-    } else{
+    } else {
         return false;
     }
     let plugin = dk[pluginName];
@@ -285,59 +285,55 @@ dk.getPlugin = function(url) {
 }
 
 dk.create = function dk_create(data, dk_create_callback) {
+    if (!data)
+        return error("data is invalid");
+    if (dk.getBrowser() === "CEF" || dk.getBrowser() === "RML")
+        CPP_DK_Create(data);
+
     var arry = data.split(",");
-    if (arry[0].indexOf(".html") > -1)
-        arry.splice(0, 0, "DKHtml");
-    else if (arry[0].indexOf(".js") > -1)
-        arry.splice(0, 0, "DKJavascript");
-    else if (arry[0].indexOf(".css") > -1)
-        arry.splice(0, 0, "DKCss");
-    else {
-        if (dk.getBrowser() === "CEF" || dk.getBrowser() === "RML") {
-            CPP_DK_Create(data);
-        }
-    }
-    if (arry[0] === "DKJavascript") {
-        if (!dk.loadJs(arry[1], function dk_loadJs_callback(rval) {
-            if (dk_create_callback) {
+
+    if (arry[0].includes(".js")) {
+        if (!dk.loadJs(arry[0], function dk_loadJs_callback(rval) {
+            if (dk_create_callback)
                 dk_create_callback(rval);
-            } else {//console.error("dk.create(" + data + "): does not have a callback");
-            }
-        })) {
+            //else
+            //    console.warn("dk.create(" + data + "): does not have a callback");
+        }))
             return error("DK_LoadJs failed");
-        }
     }
-    if (arry[0] === "DKHtml") {
-        if (!dk.loadHtml(arry[1], arry[2], function dk_loadHtml_callback(element) {
-            if (typeof dk_create_callback === "function") {
+    if (arry[0].includes(".html")) {
+        if (!dk.loadHtml(arry[0], arry[1], function dk_loadHtml_callback(element) {
+            if (typeof dk_create_callback === "function")
                 dk_create_callback(element);
-            } else {
-                console.warn("dk.create(" + data + "): does not have a callback");
-            }
+            //else
+            //    console.warn("dk.create(" + data + "): does not have a callback");
         }))
             return error("DK_LoadHtml failed");
     }
-    if (arry[0] === "DKCss") {
-        if (!dk.loadCss(arry[1])) {
-            return error("DK_LoadCss failed");
-        }
-        if (dk_create_callback) {
+    if (arry[0].includes(".css")) {
+        if (!dk.loadCss(arry[0]))
+            return error("dk.loadCss failed");
+        if (dk_create_callback)
             dk_create_callback();
-        } else {//console.error("dk.create("+data+"): does not have a callback");
-        }
+        //else
+        //    console.warn("dk.create(" + data + "): does not have a callback");
     }
     return true;
 }
 
 dk.close = function dk_close(data) {
-    if (!data) {
+    if (!data)
         return error("data is invalid");
-    }
 
     data = data.split(",");
-    (data[0].includes(".css")) && data.splice(0, 0, "DKCss");
-    (data[0].includes(".html")) && data.splice(0, 0, "DKHtml");
-    (data[0].includes(".js")) && data.splice(0, 0, "DKJavascript");
+    if (data[0].includes(".css"))
+        data.splice(0, 0, "DKCss");
+    else if (data[0].includes(".html"))
+        data.splice(0, 0, "DKHtml");
+    else if (data[0].includes(".js"))
+        data.splice(0, 0, "DKJavascript");
+    else
+        CPP_DK_Close(data);
 
     if (data[0] === "DKJavascript") {
         var plugin = dk.getPlugin(data[1]);
@@ -347,27 +343,24 @@ dk.close = function dk_close(data) {
             plugin.end();
         }
         var script = byId(data[1]);
-        if (!script) {
+        if (!script)
             return warn("script invalid");
-        }
         script.parentNode.removeChild(script);
         return true;
     }
 
     if (data[0] === "DKHtml") {
         var element = byId(data[1]);
-        if (!element) {
+        if (!element)
             return warn("element invalid");
-        }
         element.parentNode.removeChild(element);
         return true;
     }
 
     if (data[0] === "DKCss") {
         var css = byId(data[1]);
-        if (!css) {
+        if (!css)
             return warn("css invalid");
-        }
         css.parentNode.removeChild(css);
         return true;
     }
@@ -379,8 +372,10 @@ dk.loadCss = function dk_loadCss(url) {
     if (!url)
         return error("url invalid");
 
-    if (dk.getObjects().indexOf(url) !== -1)
-        return warn(url + " already loaded");
+    if (dk.getObjects().includes(url)) {
+        console.warn(url + " already loaded. Reloading...");
+        byId(url) && byId(url).parentNode.removeChild(byId(url));
+    }
 
     var head = document.getElementsByTagName('head')[0];
     var link = document.createElement('link');
@@ -395,13 +390,12 @@ dk.loadCss = function dk_loadCss(url) {
 dk.loadJs = function dk_loadJs(url, dk_loadJs_callback) {
     if (!url)
         return error("url invalid");
-    if (dk.getObjects().indexOf(url) !== -1) {
-        dk_loadJs_callback && dk_loadJs_callback(false);
-        return warn(url + " already loaded");
+
+    if (dk.getObjects().includes(url)) {
+        console.warn(url + " already loaded. Reloading...");
+        byId(url) && byId(url).parentNode.removeChild(byId(url));
     }
-    //TEST: already loaded, remove it first
-    if (byId(url))
-        byId(url).parentNode.removeChild(byId(url));
+
     // Adding the script tag to the head as suggested before
     var head = document.getElementsByTagName('head')[0];
     var script = document.createElement('script');
@@ -415,26 +409,28 @@ dk.loadJs = function dk_loadJs(url, dk_loadJs_callback) {
 
     ////// CALLBACKS
     var done = false;
-    script.onload = script.onreadystatechange = function() {
+    script.onload = script.onreadystatechange = function script_onload() {
         //FIXME - DigitalKnob can't trigger onload yet.
         if (!done && (!this.readyState || this.readyState === "loaded" || this.readyState === "complete")) {
-
-            var plugin = dk.getPlugin(url);
-            plugin && console.log("loading dk." + plugin.name + " plugin");
 
             //FIXME: This is the old way to run init on plugins
             var old_plugin = url.substring(url.lastIndexOf("/") + 1);
             old_plugin = old_plugin.substring(0, old_plugin.lastIndexOf("."));
             old_plugin = old_plugin + "_init()";
             old_plugin = window[old_plugin];
+            if (typeof old_plugin === 'function')
+                return error("FIXME: (" + url + ") This plugin uses Init the old way");
+
+            var plugin = dk.getPlugin(url);
+            plugin && console.log("loading dk." + plugin.name + " plugin");
 
             if (plugin && plugin.init) {
                 console.log("running dk." + plugin.name + ".init()");
-                plugin.init();
-            } else if (typeof old_plugin === 'function') {
-                console.warn("FIXME: (" + url + ") This plugin uses Init the old way");
-                old_plugin();
-            } else {
+                plugin.init(function(){
+                    done = true;
+                    dk_loadJs_callback && dk_loadJs_callback(true);
+                });
+            }else{
                 done = true;
                 dk_loadJs_callback && dk_loadJs_callback(true);
             }
@@ -453,12 +449,13 @@ dk.loadJs = function dk_loadJs(url, dk_loadJs_callback) {
             console.log("running dk." + plugin.name + ".init()");
             plugin.init();
         } else if (typeof old_plugin === 'function') {
-            console.warn("FIXME: (" + url + ") This plugin uses Init the old way");
+            return error("FIXME: (" + url + ") This plugin uses Init the old way");
             old_plugin();
-        } else {
-            done = true;
-            dk_loadJs_callback && dk_loadJs_callback(true);
         }
+        //else {
+        done = true;
+        dk_loadJs_callback && dk_loadJs_callback(true);
+        // }
         /*
         var func = init;
         //Plugin_init() 
@@ -477,12 +474,16 @@ dk.loadHtml = function dk_loadHtml(url, parent, dk_loadHtml_callback) {
     //TODO: the id of the root element in the html file should be the file path..   I.E. MyPlugin/MyPlugin.html
     if (!url)
         return error("url is invalid");
+
+    if (dk.getObjects().includes(url)) {
+        console.warn(url + " already loaded. Reloading...");
+        byId(url) && byId(url).parentNode.removeChild(byId(url));
+    }
+
     if (url.indexOf(".html") === -1)
         return error("url is not a valid .html file");
     //if (url === ".html")
     //    url = "New.html";
-    if (dk.getObjects().indexOf(url) !== -1)
-        console.warn(url + " already loaded");
 
     dk.fileToStringAsync(url, function(string) {
         //Create an empty widget
@@ -1237,6 +1238,5 @@ dk.checkForUNICODE = function dk_checkForUNICODE(str) {
 dk.validateStrict = function dk_validateStrict(str) {
     return str;
 }
-
 
 dk.init();
