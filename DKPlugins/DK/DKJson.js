@@ -80,7 +80,12 @@ dk.json.saveJsonToFile = function(json, path, flags, callback){
 
 dk.json.loadJsonFromFile = function(path, callback){
     dk.file.fileToString(path, function(str){
-        const json = JSON.parse(str);
+        let json;
+        try{
+            json = JSON.parse(str);
+        }catch(e){
+            return callback && callback(false);
+        }
         callback && callback(json);
     });   
 }

@@ -297,8 +297,10 @@ if (!dk.hasCPP()) {
 if (!dk.hasCPP()) {
     dk.file.fileToString = function dk_file_fileToString(path, callback) {
         let assets = dk.file.onlineAssets;
-        if (!assets)
-            return error("assets invalid");
+        if (!assets){
+            console.error("assets invalid");
+            return callback && callback(false);
+        }
         path = path.replace(" ", "_");
         path = assets + "/" + path;
         dk.php.call('POST', "/DKFile/DKFile.php", "fileToString", path, function(str) {
@@ -316,8 +318,10 @@ if (!dk.hasCPP()) {
 if (!dk.hasCPP()) {
     dk.file.stringToFile = function dk_file_stringToFile(str, path, flags, callback) {
         let assets = dk.file.onlineAssets;
-        if (!assets)
-            return error("assets invalid");
+        if (!assets){
+            console.error("assets invalid");
+            return callback && callback(false);
+        }
         path = path.replace(" ", "_");
         path = assets + "/" + path;
         dk.php.call('POST', "/DKFile/DKFile.php", "stringToFile", path, str, flags, function(result) {

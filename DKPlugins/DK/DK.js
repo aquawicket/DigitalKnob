@@ -437,7 +437,9 @@ dk.loadJs = function dk_loadJs(url, dk_loadJs_callback) {
         }
     }
     script.onerror = function script_onerror() {
-        return error("onerror: " + url);
+        console.error("onerror: " + url);
+        done = true;
+        dk_loadJs_callback && dk_loadJs_callback(false);
     }
 
     //FIXME - DigitalKnob can't trigger onload yet, so we do this
@@ -763,7 +765,7 @@ dk.fileToString = function dk_fileToString(url) {
 
 dk.fileToStringAsync = function dk_fileToStringAsync(url, dk_fileToStringAsync_callback) {
     dk.sendRequest(url, function dk_sendRequest_callback(success, url, data) {
-        success && dk_fileToStringAsync_callback && dk_fileToStringAsync_callback(data);
+        dk_fileToStringAsync_callback && dk_fileToStringAsync_callback(data);
     });
 }
 
