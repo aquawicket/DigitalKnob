@@ -22,16 +22,16 @@ MESSAGE(STATUS "Running Scratchpad.cmake   Happy debugging :)")
 ##Any options after -- are not parsed by CMake, but they are still included in the set of CMAKE_ARGV<n> variables passed to the script (including the -- itself).
 
 ##command line
-##cmake -P C:\digitalknob\DK\DKCMake\scratchpad.cmake
+##cmake -P C:\Users\aquawicket\digitalknob\DK\DKCMake\scratchpad.cmake
 
 
-INCLUDE(C:/digitalknob/DK/DKCMake/FUNCTIONS.cmake)
+INCLUDE(C:/Users/aquawicket/digitalknob/DK/DKCMake/FUNCTIONS.cmake)
 DKSET(OS "win32")
 DKSET(DKPROJECT "0")
 DKSET(RELEASE "ON")
 DKSET(BUILD "ON")
-INCLUDE(C:/digitalknob/DK/DKCMake/OPTIONS.cmake)
-INCLUDE(C:/digitalknob/DK/DKPlugins/DK/DKCMake.txt)
+INCLUDE(C:/Users/aquawicket/digitalknob/DK/DKCMake/OPTIONS.cmake)
+INCLUDE(C:/Users/aquawicket/digitalknob/DK/DKPlugins/DK/DKCMake.txt)
 MESSAGE(STATUS "${TEST_VAR}")
 
 ## On second thought, this isn't a good idea. If im just trying to pick the latest version of a library instead of calling it explicitly, there are much better and safer methods of doing so.  
