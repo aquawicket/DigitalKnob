@@ -1,4 +1,5 @@
 INCLUDE(DKCMake/FUNCTIONS.cmake)
+DKSET(DKAPP ON)
 INCLUDE(DKCMake/OPTIONS.cmake)
 
 MESSAGE("##########################")
@@ -55,10 +56,6 @@ STRING(REPLACE " " "_" AppName ${AppName})
 SET(CMAKE_CXX_STANDARD 14)
 
 PROJECT(${AppName})
-
-
-#### EXTRA VARIABLES ###############
-DKSET(DKAPP ON)
 
 
 
