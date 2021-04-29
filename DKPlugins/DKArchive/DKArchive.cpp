@@ -178,7 +178,8 @@ int DKArchive::copy_data(struct archive* ar, struct archive* aw)
 	__int64 offset;
 #else 
 	//off_t offset;
-	long long int offset; //Fix for Raspberry Pi
+	//long long int offset; //Fix for Raspberry Pi
+	long int offset; //Lubuntu Linux64
 #endif
 #else
 	int64_t offset;
