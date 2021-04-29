@@ -447,6 +447,7 @@ function DKBuild_DoResults()
 	}
 	
 	//Run cmake to get any needed build tools
+	CPP_DKFile_MkDir(DKPATH+"/"+appdir+"/"+APP+"/"+OS);
 	CPP_DKFile_MkDir(DKPATH+"/"+appdir+"/"+APP+"/"+OS+"/Release");
 	CPP_DKFile_ChDir(DKPATH+"/"+appdir+"/"+APP+"/"+OS+"/Release");
 	var rtvalue = CPP_DK_Execute(CMAKE+" "+cmake_string+" -P "+DKPATH+"/DK/DKCMake/BuildTools.cmake");
