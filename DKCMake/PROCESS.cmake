@@ -1,5 +1,4 @@
 INCLUDE(DKCMake/FUNCTIONS.cmake)
-DKSET(DKAPP ON)
 INCLUDE(DKCMake/OPTIONS.cmake)
 
 MESSAGE("##########################")
@@ -57,6 +56,7 @@ SET(CMAKE_CXX_STANDARD 14)
 
 PROJECT(${AppName})
 
+DKSET(DKAPP ON)
 
 
 ##################################################
