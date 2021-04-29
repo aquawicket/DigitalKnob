@@ -36,14 +36,14 @@ dk.file.init = function dk_file_init() {
     });
 }
 
-dk.file.makeDir = function dk_file_makeDir(pathname, mode="0777", recursive=false, callback) {
-    pathname = dk.file.onlineAssets + "\\" + pathname;
-    dk.file.isDir(pathname, function(result) {
-        if (result){
+dk.file.makeDir = function dk_file_makeDir(path, mode="0777", recursive=false, callback) {
+    console.debug("dk.file.makeDir("+path+")");
+    //pathname = dk.file.onlineAssets + "\\" + pathname;
+    dk.file.isDir(path, function(result) {
+        if (result)
             return callback && callback(false);
-        }
-        console.debug("Creating directory " + pathname);
-        dk.php.call("POST", "/DKFile/DKFile.php", "makeDir", pathname, /*mode, recursive,*/ function dk_php_pushDKAssets_callback(result) {
+        console.debug("Creating directory " + path);
+        dk.php.call("POST", "/DKFile/DKFile.php", "makeDir", path, /*mode, recursive,*/ function dk_php_pushDKAssets_callback(result) {
             return callback && callback(result);
         });
     });
@@ -291,18 +291,6 @@ if (!dk.hasCPP()) {
             return true;
         }
     }
-}
-
-dk.file.fileToString = function dk_file_fileToString(url) {
-    if (typeof absolutepath !== "undefined")
-        url = url.replace(absolutepath, "");
-    //var path = dk.file.VerifyPath(url);
-    if (!url)
-        return error("url invalid");
-    //if(url.indexOf("http") > -1 && url.indexOf("digitalknob.com") === -1){
-    //	return ajaxGetUrl("http://cors.io/?u="+url);
-    //}
-    return ajaxGetUrl(url);
 }
 
 // dk.file.fileToString(path, callback)

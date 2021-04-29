@@ -3,43 +3,51 @@ header('Access-Control-Allow-Origin: *');
 include("../DK/DK.php");
 
 // Base PHP File Functions
+function ValidatePath($path){
+	if(substr_count($path, ":") > 1){
+		echo $path."\n";
+		echo "ERROR: the path contains more than 1 :";
+	}
+	return $path;
+}
 
 // https://www.php.net/manual/en/function.file-exists.php
 function urlExists($path){
-	return file_exists($path);
+	return file_exists(ValidatPath($path));
 }
 
 // https://www.php.net/manual/en/function.unlink.php
-function delete($file){
-	return unlink($file);
+function delete($path){
+	return unlink(ValidatePath($path));
 }
 
 // https://www.php.net/manual/en/function.is-dir
-function isDir($dir){
-	return is_dir($dir);
+function isDir($path){
+	echo "isDir(".$path.")";
+	return is_dir(ValidatePath($path));
 }
 
 // https://www.php.net/manual/en/function.mkdir.php
-function makeDir($pathname, $mode = 0777, $recursive = false){
-    if(!mkdir($pathname, $mode, $recursive))
+function makeDir($path, $mode = 0777, $recursive = false){
+    if(!mkdir(ValidatePath($path), $mode, $recursive))
         return false;
     return true;
 }
 
 // https://www.php.net/manual/en/function.file-get-contents.php
-function fileToString($filename, $use_include_path = false){    
-    $str = file_get_contents($filename, $use_include_path);
+function fileToString($path, $use_include_path = false){    
+    $str = file_get_contents(ValidatePath($path), $use_include_path);
     if($str === false)
     	return error("fileToString() failed");
     return $str;
 }
 
 // https://www.php.net/manual/en/function.file-put-contents.php
-function stringToFile($filename, $data, $flags = 0){
+function stringToFile($path, $data, $flags = 0){
     if($flags === "FILE_APPEND"){ $flags = FILE_APPEND; }
     if($flags === "FILE_USE_INCLUDE_PATH"){ $flags = FILE_USE_INCLUDE_PATH; }
     if($flags === "LOCK_EX"){ $flags = LOCK_EX; }
-    $bytes = file_put_contents($filename, $data, $flags);
+    $bytes = file_put_contents(ValidatePath($path), $data, $flags);
     if($bytes === false)
         return error("stringToFile(): failed\n");
     return $bytes;
@@ -48,12 +56,12 @@ function stringToFile($filename, $data, $flags = 0){
 
 // Extended PHP File Functions 
 
-function getAbsolutePath($dir){
+function getAbsolutePath($path){
 	$root = substr($_SERVER['SCRIPT_FILENAME'], 0, -strlen($_SERVER['SCRIPT_NAME'])+1);
-	if(strpos($dir, $root) !== false)
-		$aPath = $dir;
+	if(strpos(ValidatePath($path), $root) !== false)
+		$aPath = $path;
 	else
-		$aPath = $root.$dir;
+		$aPath = $root.$path;
 	//return pathinfo($aPath,PATHINFO_DIRNAME)."/".pathinfo($aPath,PATHINFO_BASENAME);
 	return $aPath;
 }
@@ -91,10 +99,10 @@ function getDKPluginsPath(){
     return error("cound not find DKPlugins path");
 }
 
-function getRelativePath($dir){
-	$aPath = GetAbsolutePath($dir);
-	$dir = str_replace($aPath,"",$dir);
-	return $dir;
+function getRelativePath($path){
+	$aPath = GetAbsolutePath($path);
+	$path = str_replace($aPath,"",ValidatePath($path));
+	return $path;
 }
 
 function pushDKAssets(){
@@ -151,8 +159,9 @@ function pushDKAssets(){
 	return true;
 }
 
-function directoryContents($dir){
-	echo "directoryContents(".$dir.")\n";
+function directoryContents($path){
+	echo "directoryContents(".$path.")\n";
+	$path = ValidatePath($path);
 	//echo "dir = ".$dir."\n";
 	$root = $_SERVER['DOCUMENT_ROOT']."\\";
 	//echo "root = ".$root."\n";
