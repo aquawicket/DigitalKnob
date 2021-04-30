@@ -177,7 +177,7 @@ int DKArchive::copy_data(struct archive* ar, struct archive* aw)
 #ifdef WIN32
 	__int64 offset;
 #endif 
-#ifdef Raspberry
+#ifdef RASPBERRY
 	long long int offset; //Fix for Raspberry Pi
 #elif defined(LINUX)
 	long int offset; //Lubuntu Linux64
