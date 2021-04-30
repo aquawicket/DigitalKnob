@@ -31,7 +31,7 @@ dk.messagebox.closeAll = function dk_messagebox_closeAll() {
 dk.messagebox.create = function dk_messagebox_create(callback) {
     dk.create("DKGui/DKMessageBox.html", function(box) {
         if (!box)
-            return error("invalid box");
+            return error("invalid box", callback);
 
         dk.messagebox.boxes.push(box);
         box.close = dk.messagebox.close;
@@ -40,7 +40,7 @@ dk.messagebox.create = function dk_messagebox_create(callback) {
         box.cancel = box.querySelector("[dk_messagebox='cancel']");
         box.ok = box.querySelector("[dk_messagebox='ok']");
         dk.frame.create(box);
-        callback && callback(box);
+        return callback && callback(box);
     });
 }
 
@@ -88,6 +88,8 @@ dk.messagebox.message = function dk_messagebox_message(message) {/*
 
 dk.messagebox.confirm = function dk_messagebox_confirm(message, callback) {
     this.create(function(box) {
+        if(!box.message)
+            return error("box.message invalid", callback);
         box.message.innerHTML = message;
         box.input.style.display = "none";
         box.message.style.display = "block";
@@ -97,12 +99,12 @@ dk.messagebox.confirm = function dk_messagebox_confirm(message, callback) {
         box.style.display = "block";
         box.style.visibility = "visible";
         box.ok.onclick = function() {
-            callback && callback(true);
             dk.messagebox.close(event.currentTarget);
+            return callback && callback(true);
         }
         box.cancel.onclick = function() {
-            callback && callback(false);
             dk.messagebox.close(event.currentTarget);
+            return callback && callback(false);
         }
     });
 }

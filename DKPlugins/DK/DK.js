@@ -11,6 +11,10 @@ dk.init = function dk_init() {
     console.debug("Browser = " + dk.getBrowser());
     console.debug("JSEngine = " + dk.getJSEngine());
 
+    dk.localIP = "127.0.0.1";
+    dk.networkIP = "192.168.1.210";
+    dk.publicIP = "47.148.252.2";
+    dk.port = "2393";
     /*
     var LOG_DEBUG = false;
     var LOG_INFO = true;
@@ -36,18 +40,16 @@ var byId = function(id) {
     return document.getElementById(id);
 }
 
-function error(str, rtn) {
+function error(str, callback, rtnval=false) {
     console.error(str);
-    if (!rtn)
-        return false;
-    return rtn;
+    callback && callback(rtnval);
+    return rtnval;
 }
 
-function warn(str, rtn) {
+function warn(str, callback, rtnval=true) {
     console.warn(str);
-    if (!rtn)
-        return true;
-    return rtn;
+    callback && callback(rtnval);
+    return rtnval;
 }
 
 //These are use for rem units and zoom level. They are already in DK.css
@@ -286,7 +288,7 @@ dk.getPlugin = function(url) {
 
 dk.create = function dk_create(data, dk_create_callback) {
     if (!data)
-        return error("data is invalid");
+        return error("data is invalid", dk_create_callback(false));
     if (dk.getBrowser() === "CEF" || dk.getBrowser() === "RML")
         CPP_DK_Create(data);
 
@@ -295,26 +297,26 @@ dk.create = function dk_create(data, dk_create_callback) {
     if (arry[0].includes(".js")) {
         if (!dk.loadJs(arry[0], function dk_loadJs_callback(rval) {
             if (dk_create_callback)
-                dk_create_callback(rval);
+                return dk_create_callback(rval);
             //else
             //    console.warn("dk.create(" + data + "): does not have a callback");
         }))
-            return error("DK_LoadJs failed");
+            return dk_create_callback && dk_create_callback(false);
     }
     if (arry[0].includes(".html")) {
         if (!dk.loadHtml(arry[0], arry[1], function dk_loadHtml_callback(element) {
             if (typeof dk_create_callback === "function")
-                dk_create_callback(element);
+                return dk_create_callback(element);
             //else
             //    console.warn("dk.create(" + data + "): does not have a callback");
         }))
-            return error("DK_LoadHtml failed");
+            return error("DK_LoadHtml failed", dk_create_callback(false));
     }
     if (arry[0].includes(".css")) {
         if (!dk.loadCss(arry[0]))
-            return error("dk.loadCss failed");
+            return error("dk.loadCss failed", dk_create_callback(false));
         if (dk_create_callback)
-            dk_create_callback();
+            return dk_create_callback();
         //else
         //    console.warn("dk.create(" + data + "): does not have a callback");
     }
@@ -389,7 +391,7 @@ dk.loadCss = function dk_loadCss(url) {
 
 dk.loadJs = function dk_loadJs(url, dk_loadJs_callback) {
     if (!url)
-        return error("url invalid");
+        return error("url invalid", dk_loadJs_callback(false));
 
     if (dk.getObjects().includes(url)) {
         console.warn(url + " already loaded. Reloading...");
@@ -419,27 +421,26 @@ dk.loadJs = function dk_loadJs(url, dk_loadJs_callback) {
             old_plugin = old_plugin + "_init()";
             old_plugin = window[old_plugin];
             if (typeof old_plugin === 'function')
-                return error("FIXME: (" + url + ") This plugin uses Init the old way");
+                return error("FIXME: (" + url + ") This plugin uses Init the old way", dk_loadJs_callback(false));
 
             var plugin = dk.getPlugin(url);
             plugin && console.log("loading dk." + plugin.name + " plugin");
 
             if (plugin && plugin.init) {
                 console.log("running dk." + plugin.name + ".init()");
-                plugin.init(function(){
+                plugin.init(function() {
                     done = true;
-                    dk_loadJs_callback && dk_loadJs_callback(true);
+                    return dk_loadJs_callback && dk_loadJs_callback(true);
                 });
-            }else{
+            } else {
                 done = true;
-                dk_loadJs_callback && dk_loadJs_callback(true);
+                return dk_loadJs_callback && dk_loadJs_callback(true);
             }
         }
     }
     script.onerror = function script_onerror() {
-        console.error("onerror: " + url);
         done = true;
-        dk_loadJs_callback && dk_loadJs_callback(false);
+        return error("onerror: "+url, dk_loadJs_callback(false));
     }
 
     //FIXME - DigitalKnob can't trigger onload yet, so we do this
@@ -451,12 +452,12 @@ dk.loadJs = function dk_loadJs(url, dk_loadJs_callback) {
             console.log("running dk." + plugin.name + ".init()");
             plugin.init();
         } else if (typeof old_plugin === 'function') {
-            return error("FIXME: (" + url + ") This plugin uses Init the old way");
+            return error("FIXME: (" + url + ") This plugin uses Init the old way", dk_loadJs_callback(false));
             old_plugin();
         }
         //else {
         done = true;
-        dk_loadJs_callback && dk_loadJs_callback(true);
+        return dk_loadJs_callback && dk_loadJs_callback(true);
         // }
         /*
         var func = init;
@@ -469,13 +470,13 @@ dk.loadJs = function dk_loadJs(url, dk_loadJs_callback) {
         */
         //dk_loadJs_callback && dk_loadJs_callback(true);
     }
-    return true;
+    return dk_loadJs_callback && dk_loadJs_callback(true);
 }
 
 dk.loadHtml = function dk_loadHtml(url, parent, dk_loadHtml_callback) {
     //TODO: the id of the root element in the html file should be the file path..   I.E. MyPlugin/MyPlugin.html
     if (!url)
-        return error("url is invalid");
+        return error("url is invalid", dk_loadHtml_callback(false));
 
     if (dk.getObjects().includes(url)) {
         console.warn(url + " already loaded. Reloading...");
@@ -483,7 +484,7 @@ dk.loadHtml = function dk_loadHtml(url, parent, dk_loadHtml_callback) {
     }
 
     if (url.indexOf(".html") === -1)
-        return error("url is not a valid .html file");
+        return error("url is not a valid .html file", dk_loadHtml_callback(false));
     //if (url === ".html")
     //    url = "New.html";
 
@@ -496,11 +497,13 @@ dk.loadHtml = function dk_loadHtml(url, parent, dk_loadHtml_callback) {
         container.innerHTML = string.trim();
         var nodes = container.childNodes;
         if (!nodes)
-            return error("Could not get nodes from " + url);
+            return error("Could not get nodes from " + url, dk_loadHtml_callback(false));
         if (nodes.length > 1)
             console.warn("Multiple root nodes in " + url + ", wrapping in a new div");
         else
             container = nodes[0];
+        if(!container)
+            return error("container invalid", dk_loadHtml_callback);    
         container.id = dk.getAvailableId(url);
         container.setAttribute("url", url);
         if (parent && byId(parent)) {
@@ -516,10 +519,9 @@ dk.loadHtml = function dk_loadHtml(url, parent, dk_loadHtml_callback) {
         //if(elements[0]){ console.log("elements[0].innerHTML: "+elements[0].innerHTML); }
         //if(elements[0]){ document.removeChild(elements[0]); }
 
-        dk_loadHtml_callback && dk_loadHtml_callback(container);
-        return container;
+        return dk_loadHtml_callback && dk_loadHtml_callback(container);
     });
-    return true;
+    return dk_loadHtml_callback && dk_loadHtml_callback();
 }
 
 dk.checkFileSupport = function dk_checkFileSupport() {
@@ -765,7 +767,7 @@ dk.fileToString = function dk_fileToString(url) {
 
 dk.fileToStringAsync = function dk_fileToStringAsync(url, dk_fileToStringAsync_callback) {
     dk.sendRequest(url, function dk_sendRequest_callback(success, url, data) {
-        dk_fileToStringAsync_callback && dk_fileToStringAsync_callback(data);
+        return dk_fileToStringAsync_callback && dk_fileToStringAsync_callback(data);
     });
 }
 
@@ -1127,9 +1129,9 @@ dk.ajaxGetUrl = function dk_ajaxGetUrl(url) {
 dk.sendRequest = function dk_sendRequest(url, dk_sendRequest_callback, httpMethod) {
     const debugXhr = false;
     if (!url)
-        return error("url invalid");
+        return error("url invalid", dk_sendRequest_callback(false));
     if (dk_sendRequest_callback.length < 3)
-        return error("dk_sendRequest_callback requires 3 arguments (success, url, data)");
+        return error("dk_sendRequest_callback requires 3 arguments (success, url, data)", dk_sendRequest_callback(false));
 
     var xhr;
     try {
@@ -1151,7 +1153,7 @@ dk.sendRequest = function dk_sendRequest(url, dk_sendRequest_callback, httpMetho
         !xhr && (xhr = new ActiveXObject("Microsoft.XMLHTTP"));
     } catch (e) {}
     if (!xhr)
-        return error("Error creating xhr object");
+        return error("Error creating xhr object", dk_sendRequest_callback(false));
 
     if (httpMethod) {
         switch (httpMethod) {
@@ -1166,7 +1168,7 @@ dk.sendRequest = function dk_sendRequest(url, dk_sendRequest_callback, httpMetho
         case "TRACE":
             break;
         default:
-            return error("httpMethod invalid");
+            return error("httpMethod invalid", dk_sendRequest_callback(false));
         }
     } else
         httpMethod = "GET";
@@ -1184,18 +1186,18 @@ dk.sendRequest = function dk_sendRequest(url, dk_sendRequest_callback, httpMetho
     //Possible error codes
     //https://github.com/richardwilkes/cef/blob/master/cef/enums_gen.go
     xhr.onabort = function(event) {
-        dk_sendRequest_callback(false, url, xhr.responseText);
         dk.console.error && dk.console.error("GET <a href=' " + url + " ' target='_blank' style='color:rgb(213,213,213)'>" + url + "</a> onabort");
         debugXhr && console.debug("XMLHttpRequest.onabort(): " + file + " readyState:" + xhr.readyState + " status:" + xhr.status);
+        return dk_sendRequest_callback(false, url, xhr.responseText);
     }
     xhr.onerror = function(event) {
-        dk_sendRequest_callback(false, url, xhr.responseText);
         dk.console.error && dk.console.error("GET <a href=' " + url + " ' target='_blank' style='color:rgb(213,213,213)'>" + url + "</a> onerror");
         debugXhr && console.debug("XMLHttpRequest.onabort(): " + file + " readyState:" + xhr.readyState + " status:" + xhr.status);
+        return dk_sendRequest_callback(false, url, xhr.responseText);
     }
     xhr.onload = function(event) {
         debugXhr && console.debug("XMLHttpRequest.onload(): " + file + " readyState:" + xhr.readyState + " status:" + xhr.status);
-        dk_sendRequest_callback(true, url, xhr.responseText);
+        return dk_sendRequest_callback(true, url, xhr.responseText);
     }
     xhr.onloadend = function(event) {
         debugXhr && console.debug("XMLHttpRequest.onloadend(): " + file + " readyState:" + xhr.readyState + " status:" + xhr.status);
@@ -1218,9 +1220,9 @@ dk.sendRequest = function dk_sendRequest(url, dk_sendRequest_callback, httpMetho
         */
     }
     xhr.ontimeout = function(event) {
-        dk_sendRequest_callback(false, url, xhr.responseText);
         dk.console.error && dk.console.error("GET <a href=' " + url + " ' target='_blank' style='color:rgb(213,213,213)'>" + url + "</a> net::ERR_CONNECTION_TIMED_OUT");
         debugXhr && console.debug("XMLHttpRequest.onabort(): " + file + " readyState:" + xhr.readyState + " status:" + xhr.status);
+        return dk_sendRequest_callback(false, url, xhr.responseText);
     }
 
     xhr.send();

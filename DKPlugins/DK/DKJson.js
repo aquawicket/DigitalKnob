@@ -74,7 +74,7 @@ dk.json.findPartialMatch = function dk_json_findPartialMatch(obj, key, value) {
 dk.json.saveJsonToFile = function(json, path, flags, callback){
     const str = JSON.stringify(json);
     dk.file.stringToFile(str, path, flags, function(rval){
-        callback && callback(rval);
+        return callback && callback(rval);
     });
 }
 
@@ -86,7 +86,7 @@ dk.json.loadJsonFromFile = function(path, callback){
         }catch(e){
             return callback && callback(false);
         }
-        callback && callback(json);
+        return callback && callback(json);
     });   
 }
 

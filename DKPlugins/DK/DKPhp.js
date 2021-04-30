@@ -4,18 +4,21 @@ dk.php = new Object;
 
 //dk.php.call("GET", "/DK/DK.php", "Function", "args", "args", callback);
 dk.php.call = function dk_php_call(httpMethod, phpPath, funcName) {
+    const args = arguments;
+    let callback = null;
+    if (args && typeof (args[args.length - 1]) === "function")
+       callback = args[args.length - 1];
+
     const allowed = ["DK.js", "DKFile.js", "DKDebug.js"];
     const callerFilename = dk.trace.getFilename();
-    if (!allowed.includes(callerFilename)) {
-        console.log("PHP Permission Denied for " + callerFilename);
-        return false;
-    }
+    if (!allowed.includes(callerFilename))
+        return error("PHP Permission Denied for " + callerFilename, callback);
 
     if (!phpPath)
-        return error("phpPath invalid");
+        return error("phpPath invalid", callback);
     !httpMethod && (httpMethod = "GET");
     if (typeof funcName !== "string")
-        return error("funcName invalid");
+        return error("funcName invalid", callback);
 
     const jsonData = {
         func: funcName,
@@ -30,26 +33,20 @@ dk.php.call = function dk_php_call(httpMethod, phpPath, funcName) {
         jsonData.args.push(newArg);
     }
     let path = "";
-    if (location.protocol == "file:") {
-        path = "http://127.0.0.1:8000"
-    }
+    if (location.protocol == "file:") 
+        path = "http://"+dk.localIP+":"+dk.port;
     const str = JSON.stringify(jsonData);
     const data = "x=" + encodeURIComponent(str);
     const url = path + phpPath + "?" + data;
-    const args = arguments;
-
-    const php_error = function(msg) {
-        console.error(msg);
-        if (args && typeof (args[args.length - 1]) === "function")
-            args[args.length - 1](msg);
-        return false;
+    const php_error = function(msg, callback){ 
+        return error(msg, callback);
     }
-
+  
     dk.sendRequest(url, function dk_sendRequest_callback(success, url, rval) {
 
         //rval && console.debug(rval);
         if (!success)
-            return error("dk.php.call request failed, is php server running?");
+            return error("dk.php.call request failed, is php server running?", callback);
         const beforeLastLine = rval.substr(0, rval.lastIndexOf("\n") + 1);
         if (beforeLastLine !== "" && beforeLastLine !== "\n")
             console.log(beforeLastLine);
@@ -59,17 +56,16 @@ dk.php.call = function dk_php_call(httpMethod, phpPath, funcName) {
             rJson = JSON.parse(lastLine);
         } catch (e) {
             !rval && (rval = e.message);
-            return error(rval);
+            return error(rval, callback);
         }
         if (!rJson.status)
-            return warn("We appear to have gotten JSON compatable data with no status key" + rval);
+            return warn("We appear to have gotten JSON compatable data with no status key" + rval, callback);
         if (rJson.status !== "success")
-            return php_error("php: " + rJson.message);
+            return php_error("php: " + rJson.message, callback);
         //if (rJson.status === "success" && beforeLastLine !== "" && beforeLastLine !== "\n")
         //    console.log(beforeLastLine);
 
-        if (args && typeof (args[args.length - 1]) === "function")
-            args[args.length - 1](rJson.message);
+        callback && callback(rJson.message);
     }, httpMethod);
 }
 
@@ -98,7 +94,7 @@ dk.php.callPhpFunc = function dk_php_callPhpFunc(args) {
     let path = "";
     if (location.protocol == "file:") {
         path = "";
-        path = "http://127.0.0.1:8000/"
+        path = "http://"+dk.localIP+":"dk.port"/"
     }
     const str = JSON.stringify(jsonData);
     //console.log("dk.php.callPhpFunc(): str = "+str);
