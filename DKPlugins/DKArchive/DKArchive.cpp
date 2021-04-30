@@ -176,12 +176,16 @@ int DKArchive::copy_data(struct archive* ar, struct archive* aw)
 #ifndef ANDROID
 #ifdef WIN32
 	__int64 offset;
-#else 
-	//off_t offset;
-	//long long int offset; //Fix for Raspberry Pi
+#endif 
+#ifdef Raspberry
+	long long int offset; //Fix for Raspberry Pi
+#elif defined(LINUX)
 	long int offset; //Lubuntu Linux64
 #endif
-#else
+
+#FIXE: These were left where wihouth notes. Mac or iPhone maybe
+#ifdef WHOISTHEOS
+	//off_t offset;
 	int64_t offset;
 #endif
 

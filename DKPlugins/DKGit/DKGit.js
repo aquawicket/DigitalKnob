@@ -88,6 +88,7 @@ function DKGit_GitUpdate()
 	
 	//Multipe user folders
 	var contents = CPP_DKFile_DirectoryContents(DKPATH);
+	if(contents){
 	var files = contents.split(",");
 	for(var i=0; i<files.length; i++){ //console.log("files["+i+"] = "+files[i]+"\n");
 		CPP_DKFile_ChDir(DKPATH);
@@ -101,6 +102,7 @@ function DKGit_GitUpdate()
 			CPP_DK_Execute(GIT +" checkout -- .");
 			CPP_DK_Execute(GIT +" pull origin master");
 		}
+	}
 	}
 	
 	if(CPP_DK_Available("DKAudio")){
