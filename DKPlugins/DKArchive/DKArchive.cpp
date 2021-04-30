@@ -183,10 +183,11 @@ int DKArchive::copy_data(struct archive* ar, struct archive* aw)
 	long int offset; //Lubuntu Linux64
 #endif
 
-#FIXE: These were left where wihouth notes. Mac or iPhone maybe
-#ifdef WHOISTHEOS
+//FIXME: These were left where wihouth notes. Mac or iPhone maybe
+#ifdef WHICH_OS
 	//off_t offset;
 	int64_t offset;
+#endif
 #endif
 
 	for(;;){
