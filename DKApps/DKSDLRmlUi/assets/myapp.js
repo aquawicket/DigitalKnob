@@ -1,4 +1,6 @@
 //loaders
+
+//dk
 dk.create("DK/DKErrorHandler.js");
 //dk.create("DK/DK.css");
 dk.create("DK/DKPhp.js");
@@ -9,8 +11,18 @@ dk.create("DK/sun.js");
 dk.create("DK/DKClock.js");
 //dk.create("DK/DKMqtt.js"); 
 dk.create("DK/DKNotifications.js");
+
+//dk.file
+dk.create("DKFile/DKFile.js");
+//dk.create("DKFile/DKSolution.js");
+
+//dk.audio
+//dk.create("DKAudio/DKAudio.js");
+
+//dk.debug
 dk.create("DKDebug/DKDebug.js");
-//dk.create("DKFile/DKFile.js");
+
+//dk.gui
 dk.create("DKGui/DKGui.js");
 //dk.create("DKGui/DKFrame.css");
 dk.create("DKGui/DKFrame.js");
@@ -24,11 +36,14 @@ dk.create("DKGui/DKClipboard.js");
 dk.create("DKGui/DKTable.js");
 //dk.create("DKGui/DKConsole.css");
 dk.create("DKGui/DKConsole.js");
-//dk.create("DKChart/DKChart.js");
+
 //dk.create("DKDevTools/DKDevTools.js");
+
+
+//dk.create("DKChart/DKChart.js");
 //dk.create("DKCodeMirror/DKCodeMirror.js");
-//dk.create("DKAudio/DKAudio.js");
-//dk.create("DKFile/DKSolution.js");
+
+
 
 
 //creators

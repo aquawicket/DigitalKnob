@@ -1,4 +1,4 @@
-"use strict";
+//"use strict";
 
 dk.php = new Object;
 
@@ -10,7 +10,7 @@ dk.php.call = function dk_php_call(httpMethod, phpPath, funcName) {
        callback = args[args.length - 1];
 
     const allowed = ["DK.js", "DKFile.js", "DKDebug.js"];
-    const callerFilename = dk.trace.getFilename();
+    const callerFilename = dk.trace && dk.trace.getFilename();
     if (!allowed.includes(callerFilename))
         return error("PHP Permission Denied for " + callerFilename, callback);
 
