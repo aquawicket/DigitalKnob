@@ -9,6 +9,7 @@ dk.create("DK/sun.js");
 dk.create("DK/DKClock.js");
 //dk.create("DK/DKMqtt.js"); 
 dk.create("DK/DKNotifications.js");
+dk.create("DKDebug/DKDebug.js");
 //dk.create("DKFile/DKFile.js");
 dk.create("DKGui/DKGui.js");
 //dk.create("DKGui/DKFrame.css");
@@ -33,6 +34,8 @@ dk.create("DKGui/DKConsole.js");
 //creators
 //dk.errorhandler.create();
 
+
+//Inline elements
 let div = document.createElement("div");
 div.style.position = "absolute";
 div.style.top = "100px";
