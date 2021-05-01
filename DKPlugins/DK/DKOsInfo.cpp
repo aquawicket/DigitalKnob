@@ -29,6 +29,9 @@ bool GetOSInfo(DKString& info)
 bool GetSystemOS(DKString& os)
 {
 #if defined(WIN32)
+	//FIXME: GetSystemOS askes strictly for the OS, this should return Windows
+	os = "Windows";
+	/*
 	DKString arch;
 	GetOSArchitecture(arch);
 	if (same(arch, "32-bit")){
@@ -36,7 +39,7 @@ bool GetSystemOS(DKString& os)
 	}
 	else if (same(arch, "64-bit")){
 		os = "Win64";
-	}
+	}*/
 #endif
 #if defined(MAC)
 	os = "Mac";
@@ -44,7 +47,9 @@ bool GetSystemOS(DKString& os)
 #if defined(IOS)
 	os = "iOS";
 #endif
-#if defined(LINUX)
+#if defined(RASPBERRY)
+	os = "Raspberry"
+#elif defined(LINUX)
 	os = "Linux";
 #endif
 #if defined(ANDROID)
@@ -426,7 +431,7 @@ bool GetOSArchitecture(DKString& osarchitecture)
 
 	if((vi.dwMajorVersion == 5 && vi.dwMinorVersion >= 2) || vi.dwMajorVersion >= 6) {
 		if (si.wProcessorArchitecture == PROCESSOR_ARCHITECTURE_AMD64) {
-			os << "64-bit";
+			os << "64";
 		}
 		else {
 			BOOL bIsWow64 = FALSE;
@@ -435,21 +440,21 @@ bool GetOSArchitecture(DKString& osarchitecture)
 			if (NULL != fnIsWow64Process) {
 				if (!fnIsWow64Process(GetCurrentProcess(), &bIsWow64)) {
 					DKERROR("GetOSArchitecture(): failed at: fnIsWow64Process(GetCurrentProcess(), &bIsWow64)");
-					os << "32-bit";
+					os << "32";
 					return false;
 				}
 				if (bIsWow64) {
-					os << "64-bit";
+					os << "64";
 				}
 				else {
-					os << "32-bit";
+					os << "32";
 				}
 			}
 			
 		}
 	}
 	else{
-		os << "32-bit";
+		os << "32";
 	}
 	osarchitecture = toString(os.str());
 	return true;

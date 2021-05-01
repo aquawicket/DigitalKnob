@@ -37,13 +37,16 @@ function DKGit_InstallGit() {
     console.log("Installing Git...\n");
     var assets = CPP_DKAssets_LocalAssets();
 
-    if (CPP_DK_GetOS() === "Win32") {
-        CPP_DKCurl_Download("https://github.com/git-for-windows/git/releases/download/v2.30.1.windows.1/Git-2.30.1-32-bit.exe", assets);
-        CPP_DK_System(assets + "/Git-2.30.1-32-bit.exe");
-    } else if (CPP_DK_GetOS() === "Win64") {
-        CPP_DKCurl_Download("https://github.com/git-for-windows/git/releases/download/v2.30.1.windows.1/Git-2.30.1-64-bit.exe", assets);
-        CPP_DK_System(assets + "/Git-2.30.1-64-bit.exe");
-    } else if (CPP_DK_GetOS() === "Mac") {//TODO
+    if (CPP_DK_GetOS() === "Windows") {
+		if(CPP_DK_GetOSArchitecture() === "32"){
+			CPP_DKCurl_Download("https://github.com/git-for-windows/git/releases/download/v2.30.1.windows.1/Git-2.30.1-32-bit.exe", assets);
+			CPP_DK_System(assets + "/Git-2.30.1-32-bit.exe");
+		}
+		if(CPP_DK_GetOSArchitecture() === "64"){
+			CPP_DKCurl_Download("https://github.com/git-for-windows/git/releases/download/v2.30.1.windows.1/Git-2.30.1-64-bit.exe", assets);
+			CPP_DK_System(assets + "/Git-2.30.1-64-bit.exe");
+		}
+	} else if (CPP_DK_GetOS() === "Mac") {//TODO
     } else if (CPP_DK_GetOS() === "Linux") {
         CPP_DK_Execute("sudo apt-get install git");
     } else {

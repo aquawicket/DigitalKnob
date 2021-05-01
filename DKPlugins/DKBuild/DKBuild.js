@@ -25,19 +25,21 @@ function DKBuild_init()
 {
 	CPP_DK_Create("DKCurl");
 
-	if(CPP_DK_GetOS() === "Win32"){
-		DKPATH = "C:/Users/aquawicket/digitalknob";
-		CMAKE = "C:/Program Files/CMake/bin/cmake.exe";
-		CMAKE = CPP_DKFile_GetShortName(CMAKE);
-		NDK = DKPATH+"/DK/3rdParty/"+NDK_NAME;
-		NDK = CPP_DKFile_GetShortName(NDK);
-	}
-	if(CPP_DK_GetOS() === "Win64"){
-		DKPATH = "C:/Users/"+USERNAME+"/digitalknob";
-		CMAKE = "C:/Program Files (x86)/CMake/bin/cmake.exe";
-		CMAKE = CPP_DKFile_GetShortName(CMAKE);
-		NDK = DKPATH+"/DK/3rdParty/"+NDK_NAME;
-		NDK = CPP_DKFile_GetShortName(NDK);
+if(CPP_DK_GetOS() === "Windows"){
+		if(CPP_DK_GetOSArchitecture() === "32"){
+			DKPATH = "C:/Users/aquawicket/digitalknob";
+			CMAKE = "C:/Program Files/CMake/bin/cmake.exe";
+			CMAKE = CPP_DKFile_GetShortName(CMAKE);
+			NDK = DKPATH+"/DK/3rdParty/"+NDK_NAME;
+			NDK = CPP_DKFile_GetShortName(NDK);
+		}
+		if(CPP_DK_GetOSArchitecture() === "64"){
+			DKPATH = "C:/Users/"+USERNAME+"/digitalknob";
+			CMAKE = "C:/Program Files (x86)/CMake/bin/cmake.exe";
+			CMAKE = CPP_DKFile_GetShortName(CMAKE);
+			NDK = DKPATH+"/DK/3rdParty/"+NDK_NAME;
+			NDK = CPP_DKFile_GetShortName(NDK);
+		}
 	}
 	if(CPP_DK_GetOS() === "Mac"){
 		DKPATH = "/Users/"+USERNAME+"/digitalknob";

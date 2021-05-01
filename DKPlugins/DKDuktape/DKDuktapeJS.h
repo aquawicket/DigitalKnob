@@ -55,6 +55,7 @@ public:
 	static int GetMouseX(duk_context* ctx);
 	static int GetMouseY(duk_context* ctx);
 	static int GetOS(duk_context* ctx);
+	static int GetArchitecture(duk_context* ctx);
 	static int GetObjects(duk_context* ctx);
 	static int GetPixelUnderMouse(duk_context* ctx);
 	static int GetProcessList(duk_context* ctx);

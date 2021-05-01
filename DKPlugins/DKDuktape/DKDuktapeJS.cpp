@@ -82,6 +82,7 @@ bool DKDuktapeJS::Init()
 	DKDuktape::AttachFunction("CPP_DK_GetMouseX", DKDuktapeJS::GetMouseX); 
 	DKDuktape::AttachFunction("CPP_DK_GetMouseY", DKDuktapeJS::GetMouseY);
 	DKDuktape::AttachFunction("CPP_DK_GetOS", DKDuktapeJS::GetOS);
+	DKDuktape::AttachFunction("CPP_DK_GetOSArchitecture", DKDuktapeJS::GetArchitecture);
 	DKDuktape::AttachFunction("CPP_DK_GetObjects", DKDuktapeJS::GetObjects);
 	DKDuktape::AttachFunction("CPP_DK_GetPixelUnderMouse", DKDuktapeJS::GetPixelUnderMouse);
 	DKDuktape::AttachFunction("CPP_DK_GetProcessList", DKDuktapeJS::GetProcessList);
@@ -648,10 +649,19 @@ int DKDuktapeJS::GetMouseY(duk_context* ctx)
 int DKDuktapeJS::GetOS(duk_context* ctx)
 {
 	DKString os;
-	if(!GetSystemOS(os)){
+	if(!GetSystemOS(os))
 		return 0; 
-	}
 	duk_push_string(ctx, os.c_str());
+	return 1;
+}
+
+//////////////////////////////////////////////////
+int DKDuktapeJS::GetArchitecture(duk_context* ctx)
+{
+	DKString cpuArch;
+	if(!GetOSArchitecture(cpuArch))
+		return 0;
+	duk_push_string(ctx, cpuArch.c_str());
 	return 1;
 }
 
