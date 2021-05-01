@@ -6,7 +6,7 @@ ENDIF()
 DKDEPEND(gs922w64)
 
 ### VERSION ###
-DKSET(IMAGEMAGICK_VERSION ImageMagick-7.0.11-9-portable-Q16-x86)
+DKSET(IMAGEMAGICK_VERSION ImageMagick-7.0.11-10-portable-Q16-x86)
 
 ### INSTALL ###
 DKINSTALL(http://ftp.icm.edu.pl/packages/ImageMagick/binaries/${IMAGEMAGICK_VERSION}.zip ImageMagick-portable-Q16-x86 ${IMAGEMAGICK_VERSION})
