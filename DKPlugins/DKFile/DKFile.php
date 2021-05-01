@@ -155,6 +155,9 @@ function pushDKAssets(){
 }
 
 function pullDKAssets(){
+	$ignoreFolders = array(".","..");
+    $ignoreFiles = array("*.h","*.cpp","USER");
+
     //Fist get all of the paths
 	$assetsPath = getAssetsPath();
     $dkPluginsPath = getDKPluginsPath();
@@ -167,9 +170,8 @@ function pullDKAssets(){
         $dkPluginsList = array_merge($dkPluginsList, $dkPluginsList2);
     }
 
-    //remove all ITEMS ON THE IGNORE LIST
-    $ignoreList = array(".",".."/*,"FILE.EXT"*/);
-    $dkPluginsList = array_values(array_diff($dkPluginsList, $ignoreList));
+    //remove all Folders on the ignore list    
+    $dkPluginsList = array_values(array_diff($dkPluginsList, $ignoreFolders));
 
     for($n = 0; $n < count($dkPluginsList); $n++){
 		if(is_dir($dkPluginsPath."\\".$dkPluginsList[$n])){
@@ -179,20 +181,35 @@ function pullDKAssets(){
 		} else{
 			continue;
 		}
-		
+		 
         $dkPluginsFiles = scandir($dkPluginsFolder);
+           
         for($nn = 0; $nn < count($dkPluginsFiles); $nn++){
+
             if(is_dir($dkPluginsFolder."\\".$dkPluginsFiles[$nn])) 
                 continue; 
             $src = $dkPluginsFolder."\\".$dkPluginsFiles[$nn];
+            
+            //remove all Files on the ignore list
+            $ignore = false;
+            foreach ($ignoreFiles as $item) {
+			    if(fnmatch($item, $src)){ 
+                   $ignore = true;
+                   echo "IGNORING: ".$src."\n";
+                   break;
+			    }
+            }
+            if($ignore)
+                continue;
+
             if(is_dir($assetsPath."\\".$dkPluginsList[$n])){
-            	$dest = $assetsPath."\\".$dkPluginsList[$n]."\\".$dkPluginsFiles[$nn];
+                $dest = $assetsPath."\\".$dkPluginsList[$n]."\\".$dkPluginsFiles[$nn];
 			    //echo $src."->".$dest."\n";
     	        if (!copy($src, $dest))
                     echo "FAILED to copy: $src\n";
-                //else
-                echo "copied FROM $src -> \n";
-		    }
+                else
+                    echo "copied FROM $src -> \n";
+		     }
         }
     }
     return true;
