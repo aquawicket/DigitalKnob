@@ -156,7 +156,7 @@ function pushDKAssets(){
 
 function pullDKAssets(){
 	$ignoreFolders = array(".","..");
-    $ignoreFiles = array("*.h","*.cpp","USER");
+    $ignoreFiles = array("*.h","*.cpp");
 
     //Fist get all of the paths
 	$assetsPath = getAssetsPath();
@@ -174,32 +174,29 @@ function pullDKAssets(){
     $dkPluginsList = array_values(array_diff($dkPluginsList, $ignoreFolders));
 
     for($n = 0; $n < count($dkPluginsList); $n++){
-		if(is_dir($dkPluginsPath."\\".$dkPluginsList[$n])){
+		if(is_dir($dkPluginsPath."\\".$dkPluginsList[$n]))
 			$dkPluginsFolder = $dkPluginsPath."\\".$dkPluginsList[$n];
-		} else if(is_dir($dkPluginsPath2."\\".$dkPluginsList[$n])){
+		else if(is_dir($dkPluginsPath2."\\".$dkPluginsList[$n]))
 			$dkPluginsFolder = $dkPluginsPath2."\\".$dkPluginsList[$n];
-		} else{
+		else
 			continue;
-		}
-		 
+		
         $dkPluginsFiles = scandir($dkPluginsFolder);
-           
         for($nn = 0; $nn < count($dkPluginsFiles); $nn++){
-
             if(is_dir($dkPluginsFolder."\\".$dkPluginsFiles[$nn])) 
                 continue; 
             $src = $dkPluginsFolder."\\".$dkPluginsFiles[$nn];
             
-            //remove all Files on the ignore list
-            $ignore = false;
+            $skip = false;
             foreach ($ignoreFiles as $item) {
-			    if(fnmatch($item, $src)){ 
-                   $ignore = true;
-                   echo "IGNORING: ".$src."\n";
-                   break;
+			    if(fnmatch($item, $src)){
+					//skip if $src matches the ignore list
+					$skip = true;
+					echo "IGNORING: ".$src."\n";
+					break;
 			    }
             }
-            if($ignore)
+            if($skip)
                 continue;
 
             if(is_dir($assetsPath."\\".$dkPluginsList[$n])){
