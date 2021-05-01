@@ -10,7 +10,7 @@ function DKGit_end() {}
 function DKGit_OnEvent(event) {}
 
 function DKGit_SetGitPath() {
-    if (CPP_DK_GetOS() === "Win32" || CPP_DK_GetOS() === "Win64") {
+    if (CPP_DK_GetOS() === "Win32" || CPP_DK_GetOS() === "Win64" || CPP_DK_GetOS() === "Windows") {
         GIT = "C:/Program Files/Git/bin/git.exe";
         GIT = CPP_DKFile_GetShortName(GIT);
         console.log("GIT: " + GIT);
