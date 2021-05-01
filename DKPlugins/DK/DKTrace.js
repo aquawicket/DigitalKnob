@@ -66,6 +66,11 @@ dk.trace.stackToConsoleString = function dk_trace_stackToConsoleString(arg, dele
         return error("StackToConsoleString(): typeof arg invalid: " + typeof arg);
     }
 
+    //Remove the error function itsef from the list
+    if (jsonStack[1].func)
+        console.debug(jsonStack[1].func);
+    
+
     //Remove calls up to the function specified in deleteTo
     if (deleteTo) {
         for (let n = 1; n < jsonStack.length; n++) {

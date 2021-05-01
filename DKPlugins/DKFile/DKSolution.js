@@ -38,12 +38,18 @@ dk.solution.onevent = function dk_solution_onevent(event) {
     }
 
     if (event.type === "contextmenu") {
+        event.preventDefault();
+        const menu = dk.menu.createInstance();
+        dk.menu.addItem(menu, "Open", function DKMenu_Clear() {
+            dk.console.clear();
+        });
 
+        
         var id = event.currentTarget.id;
         event.stopPropagation();
         event.preventDefault();
         dk.create("DKFile/DKSolutionMenu.js", function dk_create_callback() {
-            dk.menu.validatePosition("DKFile/DKSolutionMenu.html");
+            dk.menu.validatePosition(byId("DKFile/DKSolutionMenu.html"));
             var file = byId(id).value;
             if (!file)
                 file = byId("DKSolutionPath").value + "/";

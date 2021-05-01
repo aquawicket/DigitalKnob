@@ -131,7 +131,7 @@ var MouseEvent = function(pointer)
 		CPP_DKDomMouseEvent_getModifierState(pointer);
 	};
 	MouseEvent.prototype.initMouseEvent = function(){
-		CPP_DKDomMouseEvent_initMouseEvent(pointer);
+		CPP_DKDomMouseEvent_init()MouseEvent(pointer);
 	};
 	
 	return UIEvent.call(this, pointer);

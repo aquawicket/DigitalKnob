@@ -67,7 +67,7 @@ var UIEvent = function(pointer)
 
 	// Methods
 	UIEvent.prototype.initUIEvent = function(){ //Deprecated
-		CPP_DKDomUIEvent_initUIEvent(this.pointer);
+		CPP_DKDomUIEvent_init()UIEvent(this.pointer);
 	};
 	
 	return Event.call(this, pointer);

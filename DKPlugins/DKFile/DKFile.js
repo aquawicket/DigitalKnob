@@ -36,14 +36,12 @@ dk.file.init = function dk_file_init() {
     });
 }
 
-dk.file.makeDir = function dk_file_makeDir(path, mode, recursive, callback) {
-	!mode && (mode="0777");
-	!recursive && (recursive=false);
+dk.file.makeDir = function dk_file_makeDir(path, mode="0777", recursive=false, callback) {
     console.debug("dk.file.makeDir("+path+")");
     //pathname = dk.file.onlineAssets + "\\" + pathname;
     dk.file.isDir(path, function(result) {
         if (result)
-            return error("isDir", callback);
+            return warn("Directory already exists", callback);
         console.debug("Creating directory " + path);
         dk.php.call("POST", "/DKFile/DKFile.php", "makeDir", path, /*mode, recursive,*/ function dk_php_pushDKAssets_callback(result) {
             return callback && callback(result);
@@ -56,6 +54,15 @@ dk.file.pushDKAssets = function dk_file_pushDKAssets(callback) {
     dk.php.call("POST", "/DKFile/DKFile.php", "pushDKAssets", function dk_php_pushDKAssets_callback(result) {
         if(!result)
             return error("pushDKAssets failed", callback);
+        return callback && callback(result);
+    });
+}
+
+dk.file.pullDKAssets = function dk_file_pullDKAssets(callback) {
+    console.log("Pulling assets from local repository");
+    dk.php.call("POST", "/DKFile/DKFile.php", "pullDKAssets", function dk_php_pullDKAssets_callback(result) {
+        if(!result)
+            return error("pullDKAssets failed", callback);
         return callback && callback(result);
     });
 }
@@ -157,6 +164,7 @@ dk.file.getFilename = function dk_file_getFilename(path) {
     return path.substring(n + 1, path.length);
 }
 
+/*
 dk.file.saveFile = function dk_file_saveFile(path, data) {//var send = phpurl;
 //if(realpath){
 //var filename = dk.file.GetFilename(path);
@@ -167,7 +175,7 @@ dk.file.saveFile = function dk_file_saveFile(path, data) {//var send = phpurl;
 //path = realpath+path;
 
 //console.log("dk.file.SaveFile: "+path);
-/*
+
     let send = dk.file.onlineAssets + "\\DKFile\\DKFile.php?SaveFile=";
     send += path;
     send += "&data="
@@ -176,7 +184,7 @@ dk.file.saveFile = function dk_file_saveFile(path, data) {//var send = phpurl;
     dk.php.stringToFile(path, data, "OVERWRITE", function(result) {
         console.log("characters written: " + result);
     });
-    */
+    
 
 /*
     dk.sendRequest(send, function dk_sendRequest_callback(success, url, data){
@@ -184,7 +192,7 @@ dk.file.saveFile = function dk_file_saveFile(path, data) {//var send = phpurl;
         //console.log("dk_sendRequest_callback(): url = "+url);
         console.log("dk_sendRequest_callback(): data = "+data);
     });
-    */
+    
 
 //var response = ajaxGetUrl(send);
 //console.log(response);
@@ -196,6 +204,7 @@ dk.file.saveFile = function dk_file_saveFile(path, data) {//var send = phpurl;
 //console.log("Saved file: " + path);
 //return true;
 }
+*/
 
 if (!dk.hasCPP()) {
     dk.file.getSetting = function dk_file_getSetting(file, param) {

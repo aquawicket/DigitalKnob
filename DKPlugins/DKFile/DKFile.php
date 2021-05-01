@@ -87,16 +87,24 @@ function getDKPath(){
 }
 
 function getDKPluginsPath(){
-    $dkPluginsPath = dirname(__DIR__);
+    $dkPath = getDKPath();
+	$dkPluginsPath = $dkPath."\DK\DKPlugins";
+    if(!$dkPluginsPath)
+        return error("dkPluginsPath invalid");
+    return $dkPluginsPath;
+}
+
+function getRelativeDKPluginsPath(){
+    $relativeDKPluginsPath = dirname(__DIR__);
     $n = 1;
-    while(is_dir($dkPluginsPath) && $n < 10){
-        $dkPluginsPath = dirname(__DIR__, $n++);
-        if(is_dir($dkPluginsPath."\DKPlugins")){
-        	$dkPluginsPath = $dkPluginsPath."\DKPlugins";
-        	return $dkPluginsPath;
+    while(is_dir($relativeDKPluginsPath) && $n < 10){
+        $relativeDKPluginsPath = dirname(__DIR__, $n++);
+        if(is_dir($relativeDKPluginsPath."\DKPlugins")){
+        	$relativeDKPluginsPath = $relativeDKPluginsPath."\DKPlugins";
+        	return $relativeDKPluginsPath;
         }
     }
-    return error("cound not find DKPlugins path");
+    return error("cound not find realative DKPlugins path");
 }
 
 function getRelativePath($path){
@@ -106,27 +114,13 @@ function getRelativePath($path){
 }
 
 function pushDKAssets(){
-	//Fist get all of the paths
-	$assetsPath = GetAssetsPath();
-	if(!$assetsPath)
-		return error("assetsPath is invalid");
-    $dkPath = GetDKPath();
-    if(!$dkPath)
-		return error("dkPath is invalid");
-    echo "dkPath = ".$dkPath."\n";
-    $dkPluginsPath = $dkPath."\DK\DKPlugins";
-    if(!is_dir($dkPluginsPath))
-    	return error("dkPluginsPath is invalid");
-    echo "dkPluginsPath = ".$dkPluginsPath."\n";
-
+    //Fist get all of the paths
+	$assetsPath = getAssetsPath();
+    $dkPluginsPath = getDKPluginsPath();
     //we may or may not have a second plugins path
-    $dkPluginsPath2 = GetDKPluginsPath();
-    if($dkPluginsPath2 == $dkPluginsPath)
-		$dkPluginsPath2 = 0;
-	else
-		echo "dkPluginsPath2 = ".$dkPluginsPath2."\n";
+    $dkPluginsPath2 = getRelativeDKPluginsPath();
 
-    //Now copy matching matching folders to the DKPlugins path(s)
+    //Now copy matching folders to the DKPlugins path(s)
 	$assetsList = scandir($assetsPath);
 	for($n = 2; $n < count($assetsList); $n++){
 		if(!is_dir($assetsPath."\\".$assetsList[$n])) 
@@ -138,6 +132,7 @@ function pushDKAssets(){
                 continue; 
             $src = $assetFolder."\\".$assetFiles[$nn];
             //echo $src." -> ";
+
             if(is_dir($dkPluginsPath."\\".$assetsList[$n])){
             	$dest = $dkPluginsPath."\\".$assetsList[$n]."\\".$assetFiles[$nn];
 			    //echo $dest."\n";
@@ -157,6 +152,50 @@ function pushDKAssets(){
         }
 	}
 	return true;
+}
+
+function pullDKAssets(){
+    //Fist get all of the paths
+	$assetsPath = getAssetsPath();
+    $dkPluginsPath = getDKPluginsPath();
+    //we may or may not have a second plugins path
+    $dkPluginsPath2 = getRelativeDKPluginsPath();
+    
+    $dkPluginsList = scandir($dkPluginsPath);
+    if($dkPluginsPath2){
+        $dkPluginsList2 = scandir($dkPluginsPath2);
+        $dkPluginsList = array_merge($dkPluginsList, $dkPluginsList2);
+    }
+
+    //remove all ITEMS ON THE IGNORE LIST
+    $ignoreList = array(".",".."/*,"FILE.EXT"*/);
+    $dkPluginsList = array_values(array_diff($dkPluginsList, $ignoreList));
+
+    for($n = 0; $n < count($dkPluginsList); $n++){
+		if(is_dir($dkPluginsPath."\\".$dkPluginsList[$n])){
+			$dkPluginsFolder = $dkPluginsPath."\\".$dkPluginsList[$n];
+		} else if(is_dir($dkPluginsPath2."\\".$dkPluginsList[$n])){
+			$dkPluginsFolder = $dkPluginsPath2."\\".$dkPluginsList[$n];
+		} else{
+			continue;
+		}
+		
+        $dkPluginsFiles = scandir($dkPluginsFolder);
+        for($nn = 0; $nn < count($dkPluginsFiles); $nn++){
+            if(is_dir($dkPluginsFolder."\\".$dkPluginsFiles[$nn])) 
+                continue; 
+            $src = $dkPluginsFolder."\\".$dkPluginsFiles[$nn];
+            if(is_dir($assetsPath."\\".$dkPluginsList[$n])){
+            	$dest = $assetsPath."\\".$dkPluginsList[$n]."\\".$dkPluginsFiles[$nn];
+			    //echo $src."->".$dest."\n";
+    	        if (!copy($src, $dest))
+                    echo "FAILED to copy: $src\n";
+                //else
+                echo "copied FROM $src -> \n";
+		    }
+        }
+    }
+    return true;
 }
 
 function directoryContents($path){

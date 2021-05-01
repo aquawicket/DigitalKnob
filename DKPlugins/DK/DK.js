@@ -40,15 +40,13 @@ var byId = function(id) {
     return document.getElementById(id);
 }
 
-function error(str, callback, rtnval) {
-	!rtnval && (rtnval = false);
+function error(str, callback, rtnval=false) {
     console.error(str);
     callback && callback(rtnval);
     return rtnval;
 }
 
-function warn(str, callback, rtnval) {
-	!rtnval && (rtnval = false);
+function warn(str, callback, rtnval=true) {
     console.warn(str);
     callback && callback(rtnval);
     return rtnval;

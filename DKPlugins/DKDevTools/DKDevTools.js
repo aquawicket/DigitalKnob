@@ -48,4 +48,9 @@ dk.devtools.addTools = function dk_devtools_addTools() {
             console.log("done copying assets. result = " + result);
         });
     });
+    dk.gui.createButton(dk.devtools.div, "Pull Assets", "45rem", "", "5rem", "", "90rem", "20rem", function() {
+        dk.file.pullDKAssets(function(result) {
+            console.log("done pulling assets. result = " + result);
+        });
+    });
 }
