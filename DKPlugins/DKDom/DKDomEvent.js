@@ -84,7 +84,7 @@ var Event = function(pointer) //https://developer.mozilla.org/en-US/docs/Web/API
 		CPP_DKDomEvent_composedPath(pointer);
 	};
 	Event.prototype.initEvent = function(){ //Deprecated
-		CPP_DKDomEvent_init()Event(pointer);
+		CPP_DKDomEvent_initEvent(pointer);
 	};
 	Event.prototype.preventDefault = function(){
 		CPP_DKDomEvent_preventDefault(pointer);
