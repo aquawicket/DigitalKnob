@@ -20,6 +20,7 @@ function IconMaker_end()
 //////////////////////////////////
 function IconMaker_Create(AppPath)
 {
+	Console.log("Creating icons . . .");
 	CPP_DK_Create("DKArchiveJS");
 	IconMaker_ValidateImageMagick();
 	
