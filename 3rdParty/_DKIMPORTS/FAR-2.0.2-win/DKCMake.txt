@@ -7,5 +7,4 @@ DKSET(FAR_VERSION FAR-2.0.2-win)
 
 ### INSTALL ###
 DKINSTALL(https://sourceforge.net/projects/findandreplace/files/findandreplace/2.0.2/${FAR_VERSION}.zip ${FAR_VERSION} ${FAR_VERSION})
-## DKINSTALL(${DKWEB}/Download/${FAR_VERSION}.zip far)
 DKSET(FAR ${3RDPARTY}/far)
