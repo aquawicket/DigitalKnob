@@ -29,7 +29,7 @@ dk.messagebox.closeAll = function dk_messagebox_closeAll() {
 }
 
 dk.messagebox.create = function dk_messagebox_create(callback) {
-    dk.create("DKGui/DKMessageBox.html", function(box) {
+    dk.create("DKGui/DKMessageBox.html", function dk_create_callback(box) {
         if (!box)
             return error("invalid box", callback);
 
@@ -87,7 +87,7 @@ dk.messagebox.message = function dk_messagebox_message(message) {/*
 }
 
 dk.messagebox.confirm = function dk_messagebox_confirm(message, callback) {
-    this.create(function(box) {
+    this.create(function this_create(box) {
         if(!box.message)
             return error("box.message invalid", callback);
         box.message.innerHTML = message;

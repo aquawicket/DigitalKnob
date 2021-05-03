@@ -38,7 +38,7 @@ dk.file.init = function dk_file_init() {
 
 dk.file.makeDir = function dk_file_makeDir(path, mode, recursive, callback) {
 	!mode && (mode="0777");
-	!recursive && (!recursive=false);
+	!recursive && (recursive=false);
 	
     console.debug("dk.file.makeDir("+path+")");
     //pathname = dk.file.onlineAssets + "\\" + pathname;
