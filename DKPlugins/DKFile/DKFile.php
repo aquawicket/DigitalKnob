@@ -23,7 +23,7 @@ function delete($path){
 
 // https://www.php.net/manual/en/function.is-dir
 function isDir($path){
-	echo "isDir(".$path.")";
+	//echo "isDir(".$path.")";
 	return is_dir(ValidatePath($path));
 }
 
