@@ -48,7 +48,7 @@ bool GetSystemOS(DKString& os)
 	os = "iOS";
 #endif
 #if defined(RASPBERRY)
-	os = "Raspberry"
+	os = "Raspberry";
 #elif defined(LINUX)
 	os = "Linux";
 #endif
