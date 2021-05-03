@@ -173,22 +173,22 @@ int DKArchive::copy_data(struct archive* ar, struct archive* aw)
 	int r;
 	const void *buff;
 	size_t size;
-#ifndef ANDROID
-#ifdef WIN32
-	__int64 offset;
-#endif 
-#ifdef RASPBERRY
-	long long int offset; //Fix for Raspberry Pi
-#elif defined(LINUX)
-	long int offset; //Lubuntu Linux64
-#endif
+//#ifndef ANDROID
+//#ifdef WIN32
+//	__int64 offset;
+//#endif 
+//#ifdef RASPBERRY
+//	long long int offset; //Fix for Raspberry Pi
+//#elif defined(LINUX)
+//	long int offset; //Lubuntu Linux64
+//#endif
 
-//FIXME: These were left where wihouth notes. Mac or iPhone maybe
-#ifdef WHICH_OS
+//FIXME: These were left where without notes. Mac or iPhone maybe
+//#ifdef WHICH_OS
 	//off_t offset;
 	int64_t offset;
-#endif
-#endif
+//#endif
+//#endif
 
 	for(;;){
 		r = archive_read_data_block(ar, &buff, &size, &offset);
