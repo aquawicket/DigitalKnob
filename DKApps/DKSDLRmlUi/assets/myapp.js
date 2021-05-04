@@ -3,7 +3,7 @@
 //dk
 dk.create("DK/DKErrorHandler.js");
 //dk.create("DK/DK.css");
-dk.create("DK/DKPhp.js");
+//dk.create("DK/DKPhp.js");
 //dk.create("DK/DKTrace.js");
 //dk.create("DK/DKJson.js");
 dk.create("DK/DKValidate.js");
@@ -13,7 +13,7 @@ dk.create("DK/DKClock.js");
 dk.create("DK/DKNotifications.js");
 
 //dk.file
-dk.create("DKFile/DKFile.js");
+//dk.create("DKFile/DKFile.js");
 //dk.create("DKFile/DKSolution.js");
 
 //dk.audio
