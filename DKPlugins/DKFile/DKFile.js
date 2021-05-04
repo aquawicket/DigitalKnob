@@ -40,7 +40,7 @@ dk.file.makeDir = function dk_file_makeDir(path, mode, recursive, callback) {
 	!mode && (mode="0777");
 	!recursive && (recursive=false);
 	
-    console.debug("dk.file.makeDir("+path+")");
+    //console.debug("dk.file.makeDir("+path+")");
     //pathname = dk.file.onlineAssets + "\\" + pathname;
     dk.file.isDir(path, function(result) {
         if (result)
