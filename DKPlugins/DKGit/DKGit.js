@@ -10,7 +10,7 @@ function DKGit_end() {}
 function DKGit_OnEvent(event) {}
 
 function DKGit_SetGitPath() {
-    if (CPP_DK_GetOS() === "Win32" || CPP_DK_GetOS() === "Win64" || CPP_DK_GetOS() === "Windows") {
+    if (CPP_DK_GetOS() === "Windows") {
         GIT = "C:/Program Files/Git/bin/git.exe";
         GIT = CPP_DKFile_GetShortName(GIT);
         console.log("GIT: " + GIT);
@@ -19,6 +19,9 @@ function DKGit_SetGitPath() {
         GIT = "git";
     }
     if (CPP_DK_GetOS() === "Linux") {
+        GIT = "/usr/bin/git";
+    }
+    if (CPP_DK_GetOS() === "Raspberry") {
         GIT = "/usr/bin/git";
     }
 }
@@ -48,6 +51,8 @@ function DKGit_InstallGit() {
 		}
 	} else if (CPP_DK_GetOS() === "Mac") {//TODO
     } else if (CPP_DK_GetOS() === "Linux") {
+        CPP_DK_Execute("sudo apt-get install git");
+    } else if (CPP_DK_GetOS() === "Raspberry") {
         CPP_DK_Execute("sudo apt-get install git");
     } else {
         console.log("ERROR: unrecognied HOST OS: " + CPP_DK_GetOS() + "\n");
