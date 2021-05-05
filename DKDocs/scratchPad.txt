@@ -7,12 +7,16 @@
 */
 
 /// EXAMPLE ///
-console.log()                = javascript  (.js   )  "log is a child of console", "log is a member function of the 'console' object"
-console::log()               = C++         (.cpp  )  "log is a child of console", "log is a member function of the 'console' class
-console_log                = "string"    (*     )  "log is a substring of the console_log string."
-<console><log/></console>  = html        (.html )  "log is a child node of console"
-                           = Java        (.java )   TODO
-                           = CMake       (.cmake)   TODO
+console_log                = string      ("string")  "log is a substring of the console_log string."
+console/log                = path        (./)        
+                           = CMake       (.cmake)    
+console::log()             = C++         (.cpp  )    "log is a child of console", "log is a member function of the 'console' class
+console.log()              = javascript  (.js   )    "log is a child of console", "log is a member function of the 'console' object"
+<console><log/></console>  = html        (.html )    "log is a child node of console"
+                           = Java        (.java )    
+                           
+    
+						   
 						   
 /// EXTRA EXAMPLE ///
 dk.console.log    = .js
@@ -23,6 +27,7 @@ dk_console_log    = string  Note: log is not a processing function as a string
 		<log/>              Note: log is only an alias for the function name inside console
 	</console>
 </dk>
+dk/console/log     = path
 
 
 
@@ -39,3 +44,4 @@ dk_gui_frame_getWidth       = string   Note: getWidth is only an alias for the f
 		</frame>
 	</gui>
 </dk>
+dk/gui/frame/getWidth       = path  
