@@ -1,7 +1,7 @@
 //  Object heirarchy syntax across different languages
 
 
-//  Our program is a heirarchy structrue that is of cascading inheritence.  
+//  Our program is a heirarchy structrue that is of cascading inheritence. 
 //  Our target language is javascript. 
 //  All languages linked to equivelent functions can be named in acordance.
 //  lets start by looking a console.log found in browsers. 
@@ -12,7 +12,7 @@
 console.log()                    = javascript  (.js   )    log is a child of console. log is a member function of the 'console' object
 
 
-    //// EXAMPLE ////
+//// EXAMPLE ////
 console_log                      = string      ("string")  log is a substring of the console_log string.
 console/log                      = path        (./)        
 TODO                             = cmake       (.cmake)    
@@ -22,15 +22,16 @@ TODO                             = css         (.css )
 <console><log/></console>        = html        (.html )    log is a child node of console
 console.log()                    = javascript  (.js   )    log is a child of console. log is a member function of the 'console' object
 
+
  
-    //// DK ROOT NODE EXAMPLE ////
-dk_console_log                   = string      ("string")
-dk/console/log                   = path        (./)        
-TODO                             = cmake       (.cmake)    
+//// DK ROOT NODE EXAMPLE ////
+dk_console_log                   = string      ("string")    
+dk/console/log                   = path        (./)         https://kohana.top/3.2/guide/kohana/files
+TODO                             = cmake       (.cmake)     https://kubasejdak.com/modern-cmake-is-like-inheritance
 dk::console::log()               = c++         (.cpp  )     https://www.w3schools.com/cpp/cpp_inheritance.asp
 TODO                             = java        (.java )     https://www.w3schools.com/java/java_inheritance.asp
-TODO                             = css         (.css )      https://www.w3.org/TR/css-cascade-3/
-<dk>                             = html        (.html )     
+TODO                             = css         (.css )      https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Cascade_and_inheritance
+<dk>                             = html        (.html )     https://webplatform.github.io/docs/tutorials/inheritance_and_cascade/#:~:text=Inheritance%20is%20associated%20with%20how,do%20not%20override%20each%20other.
 	<console>
 		<log/>
 	</console>
@@ -38,7 +39,8 @@ TODO                             = css         (.css )      https://www.w3.org/T
 dk.console.log()                 = javascript  (.js   )
 
 
-    //// EXPANDED EXAMPLE ////
+
+//// EXPANDED EXAMPLE ////
 dk_gui_frame_titlebar_text       = string      ("string")
 dk/gui/frame/titlebar/text       = path        (./)
 TODO                             = cmake       (.cmake)
@@ -59,10 +61,7 @@ dk.gui.frame.titlebar.text       = javascript  (.js   )
 
 
 
-
 //	Let's look at languages in a heirarchial view
-
-
 0101
 0101_assembaly
 0101_assembaly_c
@@ -74,3 +73,14 @@ dk.gui.frame.titlebar.text       = javascript  (.js   )
 0101_assembaly_c_c++_css
 0101_assembaly_c_c++_html
 0101_assembaly_c_c++_javascript
+
+
+
+
+//// REFERENCE
+https://kohana.top/3.2/guide/kohana/files
+https://kubasejdak.com/modern-cmake-is-like-inheritance
+https://www.w3schools.com/cpp/cpp_inheritance.asp
+https://www.w3schools.com/java/java_inheritance.asp
+https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Cascade_and_inheritance
+https://webplatform.github.io/docs/tutorials/inheritance_and_cascade/#:~:text=Inheritance%20is%20associated%20with%20how,do%20not%20override%20each%20other.
