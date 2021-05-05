@@ -1,0 +1,21 @@
+/*** Object heirarchy syntax across different languages ***/
+
+/* 
+	Our target language is javascript. 
+	All languages linked to equivelent functions can be named in acordance.
+	
+*/
+
+console.log                = javascript  (.js   )  "log is a child of console", "log is a member function of the 'console' object"
+console::log               = C++         (.cpp  )  "log is a child of console", "log is a member function of the 'console' class
+console_log                = "string"    (*     )  "log is a substring of the console_log string."
+<console><log/></console>  = html        (.html )  "log is a child node of console"
+                           = Java        (.java )   TODO
+				           = CMake       (.cmake)   TODO
+
+// 3 Layer EXAMPLE
+
+dk.console.log
+dk::console::log
+dk_console_log
+<dk><console><log/></console></dk>
