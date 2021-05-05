@@ -176,6 +176,17 @@ LINUX64_COMMAND(sudo ./b2 toolset=gcc address-model=64 variant=debug link=static
 LINUX64_COMMAND(sudo ./b2 toolset=gcc address-model=64 variant=release link=static threading=multi runtime-debugging=off runtime-link=static --build-dir=${BOOST}/${OS}/Release --stagedir=${BOOST}/${OS}/Release)
 
 DKSETPATH(${BOOST})
+RASPBERRY32_COMMAND(sudo ./bootstrap.sh)
+RASPBERRY32_COMMAND(sudo ./b2 toolset=gcc address-model=32 variant=debug link=static threading=multi runtime-debugging=on runtime-link=static --build-dir=${BOOST}/${OS}/Debug --stagedir=${BOOST}/${OS}/Debug)
+RASPBERRY32_COMMAND(sudo ./b2 toolset=gcc address-model=32 variant=release link=static threading=multi runtime-debugging=off runtime-link=static --build-dir=${BOOST}/${OS}/Release --stagedir=${BOOST}/${OS}/Release)
+
+DKSETPATH(${BOOST})
+RASPBERRY64_COMMAND(sudo ./bootstrap.sh)
+RASPBERRY64_COMMAND(sudo ./b2 toolset=gcc address-model=64 variant=debug link=static threading=multi runtime-debugging=on runtime-link=static --build-dir=${BOOST}/${OS}/Debug --stagedir=${BOOST}/${OS}/Debug)
+RASPBERRY64_COMMAND(sudo ./b2 toolset=gcc address-model=64 variant=release link=static threading=multi runtime-debugging=off runtime-link=static --build-dir=${BOOST}/${OS}/Release --stagedir=${BOOST}/${OS}/Release)
+
+
+DKSETPATH(${BOOST})
 ANDROID_BASH("#!/bin/bash\;
 cd ${BOOST}\;
 export PATH=/${MINGW32}/bin:$PATH\;
