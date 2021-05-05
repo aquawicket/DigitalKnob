@@ -3,7 +3,7 @@
 
 //  Everything is a node, and every node falls into a heirarchial structure. 
 //  Our program is a heirarchy structrue that is of cascading inheritence. 
-//  Our most abstract (top most) target language for DK is javascript. 
+//  Our most abstract (top most) target language for DK is javascript and json. 
 //  All objects or nodes can be orginized and linked agourding to matching sytax guidlines. 
 
 //  Lets start by looking a console.log found in most browsers. 
@@ -23,6 +23,7 @@ console.log()                    = java        (.java )    log is a child of con
 console log                      = css         (.css )     log is a child of console. log is a child node of console of of the console node
 <console><log/></console>        = html        (.html )    log is a child of console. log is a child node of console of of the console node
 console.log()                    = javascript  (.js   )    log is a child of console. log is a member function of the console object
+console{ log() }                 = json        (.json )    log is a child of console. FIXME
 
 
  
@@ -39,6 +40,7 @@ dk console log                   = css         (.css )      https://developer.mo
 	</console>
 </dk>
 dk.console.log()                 = javascript  (.js   )
+TODO                             = json        (.json )
 
 
 
@@ -59,6 +61,7 @@ dk gui frame titlebar text       = css         (.css )
 	</gui>
 </dk>
 dk.gui.frame.titlebar.text       = javascript  (.js   )
+TODO                             = json        (.json )
 
 
 
