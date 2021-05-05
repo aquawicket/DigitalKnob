@@ -26,24 +26,39 @@ dk.trace.editFile = function dk_trace_editFile(file, line, ch) {
     file = file.replace("file:///", "");
     file = file.replaceAll("/", "\\");
     file = file.replace(dk.file.onlineAssets, "");
-    line = 50;
-    ch = 5;
+    !line && (line = 1);
+    !ch && (ch = 0);
 
     const createPopup = function() {
         dk.codemirror.create();
-        dk.codemirror.open(file, function(){
+        dk.codemirror.open(file, function() {
             dk.codemirror.myCodeMirror.focus();
-            dk.codemirror.myCodeMirror.setCursor({line: line, ch: ch});
-            dk.codemirror.myCodeMirror.scrollIntoView({line: line, char: ch}, 200);
+            dk.codemirror.myCodeMirror.setCursor({
+                line: line - 1,
+                ch: ch
+            });
+            dk.codemirror.myCodeMirror.scrollIntoView({
+                line: line - 1,
+                char: ch
+            }, 200);
+            dk.codemirror.myCodeMirror.getDoc().markText({
+                line: line - 1,
+                ch: ch
+            }, {
+                line: line,
+                ch: 0
+            }, {
+                css: "background-color: red"
+            });
         });
-    }
+        dk.frame.setTitle(dk.codemirror.div, file);
+    };
 
-    if (!dk.getObjects().includes("DKCodeMirror/DKCodeMirror.js")) {
-        dk.create("DKCodeMirror/DKCodeMirror.js", function() {
-            createPopup();
-        });
-    } else
+    if (dk.codemirror)
+        dk.frame.close(dk.codemirror.div);
+    dk.create("DKCodeMirror/DKCodeMirror.js", function() {
         createPopup();
+    });
 
 }
 dk.trace.stackToConsoleString = function dk_trace_stackToConsoleString(arg, deleteTo) {
@@ -88,7 +103,7 @@ dk.trace.stackToConsoleString = function dk_trace_stackToConsoleString(arg, dele
     headerMsg ? str = jssonStack[0] : str = "";
     for (let n = 1; n < jsonStack.length; n++) {
         str += "  at " + jsonStack[n].func + " ";
-        str += "(<a href='#' onClick='dk.trace.editFile(\"" + jsonStack[n].filePath + "\")' style='color:rgb(213,213,213)'>" + jsonStack[n].file + ":" + jsonStack[n].lineNum + "</a>)<br>";
+        str += "(<a href='#' onClick='dk.trace.editFile(\"" + jsonStack[n].filePath + "\",\"" + jsonStack[n].lineNum + "\")' style='color:rgb(213,213,213)'>" + jsonStack[n].file + ":" + jsonStack[n].lineNum + "</a>)<br>";
     }
 
     return str;

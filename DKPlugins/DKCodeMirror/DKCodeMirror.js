@@ -25,7 +25,7 @@ dk.codemirror.create = function dk_codemirror_create() {
         theme: "abcdef",
         lineNumbers: true,
         lineWrapping: true,
-        styleActiveLine: true,
+        styleActiveLine: {nonEmpty: true},
         styleActiveSelected: true,
         mode: "text/x-mysql",
         mode: "javascript",
