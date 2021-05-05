@@ -15,7 +15,7 @@ window.onunhandledrejection = function(event) {
     return error(event);
 }
 
-dk.trace.editFile = function dk_trace_editFile(file, line) {
+dk.trace.editFile = function dk_trace_editFile(file, line, ch) {
     /*
     dk.create("DKNotepad/DKNotepad.js", function dk_create_callback() {
         dk.frame.create(byId("DKNotepad/DKNotepad.html"));
@@ -26,13 +26,16 @@ dk.trace.editFile = function dk_trace_editFile(file, line) {
     file = file.replace("file:///", "");
     file = file.replaceAll("/", "\\");
     file = file.replace(dk.file.onlineAssets, "");
+    line = 50;
+    ch = 5;
 
     const createPopup = function() {
         dk.codemirror.create();
-        dk.codemirror.open(file);
-        dk.codemirror.setSelection(10);
-        //dk.codemirror.myCodeMirror.scrollIntoView({line:50, char:5}, 200);
-        dk.codemirror.myCodeMirror.setCursor(50);
+        dk.codemirror.open(file, function(){
+            dk.codemirror.myCodeMirror.focus();
+            dk.codemirror.myCodeMirror.setCursor({line: line, ch: ch});
+            dk.codemirror.myCodeMirror.scrollIntoView({line: line, char: ch}, 200);
+        });
     }
 
     if (!dk.getObjects().includes("DKCodeMirror/DKCodeMirror.js")) {

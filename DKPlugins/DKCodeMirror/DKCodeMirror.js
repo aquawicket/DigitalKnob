@@ -29,9 +29,10 @@ dk.codemirror.create = function dk_codemirror_create() {
     });
 }
 
-dk.codemirror.open = function dk_codemirror_open(file) {
+dk.codemirror.open = function dk_codemirror_open(file, callback) {
     dk.file.fileToString(file, function(str) {
         dk.codemirror.myCodeMirror.setValue(str);
+        callback && callback(true);
     });
 }
 
