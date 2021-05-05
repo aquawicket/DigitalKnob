@@ -6,16 +6,36 @@
 	
 */
 
-console.log                = javascript  (.js   )  "log is a child of console", "log is a member function of the 'console' object"
-console::log               = C++         (.cpp  )  "log is a child of console", "log is a member function of the 'console' class
+/// EXAMPLE ///
+console.log()                = javascript  (.js   )  "log is a child of console", "log is a member function of the 'console' object"
+console::log()               = C++         (.cpp  )  "log is a child of console", "log is a member function of the 'console' class
 console_log                = "string"    (*     )  "log is a substring of the console_log string."
 <console><log/></console>  = html        (.html )  "log is a child node of console"
                            = Java        (.java )   TODO
-				           = CMake       (.cmake)   TODO
+                           = CMake       (.cmake)   TODO
+						   
+/// EXTRA EXAMPLE ///
+dk.console.log    = .js
+dk::console::log  = .cpp    
+dk_console_log    = string  Note: log is not a processing function as a string
+<dk>              = .html
+	<console>
+		<log/>              Note: log is only an alias for the function name inside console
+	</console>
+</dk>
 
-// 3 Layer EXAMPLE
 
-dk.console.log
-dk::console::log
-dk_console_log
-<dk><console><log/></console></dk>
+
+// EXPANDED EXAMPLE
+dk.gui.frame.getWidth()     = .js
+dk::gui::frame::getWidth()  = .cpp
+dk_gui_frame_getWidth       = string   Note: getWidth is only an alias for the function name inside frame
+<dk>                        = .html    Note: getWidth is only an alias for the function name inside frame
+	<gui>
+		<frame>
+			<getWidth>
+				"getWidth inner markup language text"
+			</getWidth>
+		</frame>
+	</gui>
+</dk>
