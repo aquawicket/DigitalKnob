@@ -406,6 +406,8 @@ dk.loadJs = function dk_loadJs(url, dk_loadJs_callback) {
 
     if (dk.getObjects().includes(url)) {
         console.warn(url + " already loaded. Reloading...");
+        dk.close(url);
+        /*
         var plugin = dk.getPlugin(url);
         plugin && console.log("closing dk." + plugin.name + " plugin");
         if (plugin && plugin.end) {
@@ -413,6 +415,7 @@ dk.loadJs = function dk_loadJs(url, dk_loadJs_callback) {
             plugin.end();
         }
         byId(url) && byId(url).parentNode.removeChild(byId(url));
+        */
     }
 
     // Adding the script tag to the head node 

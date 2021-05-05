@@ -16,7 +16,20 @@ dk.codemirror.init = function dk_codemirror_init(callback) {
         });
     });
 }
-dk.codemirror.end = function dk_codemirror_end() {}
+dk.codemirror.end = function dk_codemirror_end() {
+    dk.close("DKCodeMirror/mode/javascript/javascript.js");
+    dk.close("DKCodeMirror/lib/codemirror.js");//, function() {
+        dk.close("DKCodeMirror/lib/codemirror.css");//, function() {
+            dk.close("DKCodeMirror/theme/abcdef.css");//, function() {
+                dk.close("DKCodeMirror/DKCodeMirror.css");//, function() {
+                    //dk.close("DKCodeMirror/mode/javascript/javascript.js");//, function() {
+                        //callback && callback();
+                    //});
+                //});
+            //});
+        //});
+    //});
+}
 
 dk.codemirror.create = function dk_codemirror_create() {
 
@@ -25,11 +38,8 @@ dk.codemirror.create = function dk_codemirror_create() {
         theme: "abcdef",
         lineNumbers: true,
         lineWrapping: true,
-        styleActiveLine: {nonEmpty: true},
-        styleActiveSelected: true,
-        mode: "text/x-mysql",
-        mode: "javascript",
-        value: "function myScript(){return 100;}\n"
+        mode: "javascript"
+        /*value: "function myScript(){return 100;}\n"*/
     });
 }
 

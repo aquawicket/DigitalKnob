@@ -91,6 +91,7 @@ dk.trace.stackToConsoleString = function dk_trace_stackToConsoleString(arg, dele
     //console.debug(jsonStack[1].func);
 
     //Remove calls up to the function specified in deleteTo
+    deleteTo = null;
     if (deleteTo) {
         for (let n = 1; n < jsonStack.length; n++) {
             if (jsonStack[n].func === deleteTo) {
