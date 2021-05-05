@@ -128,7 +128,7 @@ ENDIF()
 
 IF(CMAKE_HOST_UNIX)
 	DKSETPATH(${BOOST})
-	SET(arg ./build-android.sh ${ANDROID_NDK})
+	SET(arg ./build-android.sh ${NDK})
 	SET(arg2 ${arg} ${ARGN}) # Merge them together
 	MESSAGE("COMMAND-> ${arg2}")
 	EXECUTE_PROCESS(COMMAND ${arg2} WORKING_DIRECTORY ${BOOST})

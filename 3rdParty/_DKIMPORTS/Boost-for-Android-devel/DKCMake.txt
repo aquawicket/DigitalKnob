@@ -1,7 +1,7 @@
 #FIXME: Deprecated. Compile directly from boost library instead. 
 
 ### DEPENDS ###
-DKDEPEND(android-ndk-r20b)
+DKDEPEND(android-ndk)
 IF(CMAKE_HOST_WIN32)
 	DKDEPEND(mingw32)
 	DKDEPEND(msys)
@@ -57,12 +57,12 @@ ANDROID_BASH("#!/bin/bash
 cd ${BOOST_DEV}
 export PATH=/${MINGW32}/bin:$PATH\;
 export PATH=/${MSYS}/bin:$PATH\;
-./build-android.sh --with-libraries=chrono,date_time,filesystem,system,thread ${ANDROID_NDK}")
+./build-android.sh --with-libraries=chrono,date_time,filesystem,system,thread ${NDK}")
 ENDIF()
 
 IF(CMAKE_HOST_UNIX)
 DKSETPATH(${BOOST_DEV})
-SET(arg ./build-android.sh ${ANDROID_NDK})
+SET(arg ./build-android.sh ${NDK})
 SET(arg2 ${arg} ${ARGN}) # Merge them together
 MESSAGE("COMMAND-> ${arg2}")
 EXECUTE_PROCESS(COMMAND ${arg2} WORKING_DIRECTORY ${BOOST_DEV})
