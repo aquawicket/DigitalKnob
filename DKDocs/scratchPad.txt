@@ -12,37 +12,39 @@
 //// EXAMPLE ////
 console_log                = string      ("string")  "log is a substring of the console_log string."
 console/log                = path        (./)        
-TODO (cmake)               = CMake       (.cmake)    
-console::log()             = C++         (.cpp  )    "log is a child of console", "log is a member function of the 'console' class
-console.log()              = javascript  (.js   )    "log is a child of console", "log is a member function of the 'console' object"
+TODO                       = cmake       (.cmake)    
+console::log()             = c++         (.cpp  )    "log is a child of console", "log is a member function of the 'console' class
+(JAVA) TODO                = java        (.java )
+(CSS) TODO                 = css         (.css )
 <console><log/></console>  = html        (.html )    "log is a child node of console"
-TODO (JAVA)                = Java        (.java )    
+console.log()              = javascript  (.js   )    "log is a child of console", "log is a member function of the 'console' object"   
                            
     
 					   
 						   
 //// DK ROOT NODE EXAMPLE ////
-dk_console_log      = string      ("string")  "log is a substring of the console_log string."
+dk_console_log      = string      ("string")
 dk/console/log      = path        (./)        
-TODO (cmake)        = CMake       (.cmake)    
-dk::console::log()  = C++         (.cpp  )    "log is a child of console", "log is a member function of the 'console' class
-dk.console.log()    = javascript  (.js   )    "log is a child of console", "log is a member function of the 'console' object"
-<dk>                = html        (.html )    "log is a child node of console"
+TODO                = cmake       (.cmake)    
+dk::console::log()  = c++         (.cpp  )
+TODO                = java        (.java )
+TODO                = css         (.css )
+<dk>                = html        (.html )
 	<console>
 		<log/>
 	</console>
 </dk>
-TODO (JAVA)         = Java        (.java )   
+dk.console.log()    = javascript  (.js   )
 
 
 
 //// EXPANDED EXAMPLE ////
-dk_gui_frame_titlebar_text       = string      ("string")  
-dk/gui/frame/titlebar/text       = path        (./)        
-TODO (cmake)                     = CMake       (.cmake)    
-dk::dgui::frame::titlebar::text  = C++         (.cpp  )    
-dk.gui.frame.titlebar.text       = javascript  (.js   )    
-<dk>                             = html        (.html )    
+dk_gui_frame_titlebar_text       = string      ("string")
+dk/gui/frame/titlebar/text       = path        (./)
+TODO                             = cmake       (.cmake)
+dk::dgui::frame::titlebar::text  = c++         (.cpp  )
+TODO                             = java        (.java )
+<dk>                             = html        (.html )
 	<gui>
 		<frame>
 			<titlebar>
@@ -51,4 +53,4 @@ dk.gui.frame.titlebar.text       = javascript  (.js   )
 		</frame>
 	</gui>
 </dk>
-TODO (JAVA)                  = Java        (.java ) 
+dk.gui.frame.titlebar.text       = javascript  (.js   )
