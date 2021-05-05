@@ -17,6 +17,7 @@ console.log()                    = javascript  (.js   )    log is a child of con
 //// EXAMPLE ////
 console_log                      = string      ("string")  log is a child of console. log is a substring of the console_log string.
 console/log                      = path        (./)        log is a child of console. log is a subdirectory or the console folder.
+TODO                             = git         (git)       log is a child of console. TODO
 TODO                             = cmake       (.cmake)    log is a child of console. TODO
 console::log()                   = c++         (.cpp  )    log is a child of console. log is a member function of the console class
 console.log()                    = java        (.java )    log is a child of console. log is a member function of the console class
@@ -25,11 +26,11 @@ console log                      = css         (.css )     log is a child of con
 console.log()                    = javascript  (.js   )    log is a child of console. log is a member function of the console object
 console{ log() }                 = json        (.json )    log is a child of console. FIXME
 
-
  
 //// DK ROOT NODE EXAMPLE ////
 dk_console_log                   = string      ("string")    
 dk/console/log                   = path        (./)         https://kohana.top/3.2/guide/kohana/files
+TODO                             = git         (git)        https://git-scm.com/book/en/v2/Git-Tools-Submodules
 TODO                             = cmake       (.cmake)     https://kubasejdak.com/modern-cmake-is-like-inheritance
 dk::console::log()               = c++         (.cpp  )     https://www.w3schools.com/cpp/cpp_inheritance.asp
 dk.console.log()                 = java        (.java )     https://www.w3schools.com/java/java_inheritance.asp
@@ -47,6 +48,7 @@ TODO                             = json        (.json )
 //// EXPANDED EXAMPLE ////
 dk_gui_frame_titlebar_text       = string      ("string")
 dk/gui/frame/titlebar/text       = path        (./)
+TODO                             = git         (git)
 TODO                             = cmake       (.cmake)
 dk::dgui::frame::titlebar::text  = c++         (.cpp  )
 dk.gui.frame.titlebar.text       = java        (.java )
