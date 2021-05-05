@@ -533,11 +533,13 @@ ENDFUNCTION()
 
 #####################################
 FUNCTION(LINUX64_RELEASE_COMMAND arg)
-	IF(LINUX_64 AND RELEASE AND QUEUE_BUILD)
+	IF(NOT RASPBERRY_64 AND LINUX_64 AND RELEASE AND QUEUE_BUILD)
 		SET(arg2 ${arg} ${ARGN}) # Merge them together
 		LINUX_COMMAND(${arg2})
 	ENDIF()
 ENDFUNCTION()
+
+
 
 
 #############################
