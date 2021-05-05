@@ -1010,8 +1010,8 @@ bool DKFile::VerifyPath(DKString& path)
 	if(DKFile::PathExists(path)){
 		return true;
 	}
-	if(DKFile::PathExists(DKFile::local_assets+"/"+path)){ 
-		path = DKFile::local_assets+"/"+path;
+	if(DKFile::PathExists(DKFile::local_assets+path)){ 
+		path = DKFile::local_assets+path;
 		return true;
 	}
 

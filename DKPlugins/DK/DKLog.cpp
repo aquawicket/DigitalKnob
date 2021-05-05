@@ -85,7 +85,7 @@ void Log(const char* file, int line, const char* func, const DKString& text, con
 	
 	if(log_file && !DKFile::local_assets.empty()){
 		std::ofstream file_log;
-		file_log.open(DKString(DKFile::local_assets+"/log.txt").c_str(), std::ofstream::out | std::ofstream::app);
+		file_log.open(DKString(DKFile::local_assets+"log.txt").c_str(), std::ofstream::out | std::ofstream::app);
 		if(file_log.is_open()){
 			file_log << string.c_str();
 			file_log.close();

@@ -25,7 +25,7 @@ Rocket::Core::FileHandle DKRocketFile::Open(const Rocket::Core::String& path)
 	}
 
 	if(has(_url,"://")){
-		DKFile::MakeDir(DKFile::local_assets+"/Cache");
+		DKFile::MakeDir(DKFile::local_assets+"Cache");
 
 		DKString filename;
 		DKFile::GetFileName(_url, filename);
@@ -36,8 +36,8 @@ Rocket::Core::FileHandle DKRocketFile::Open(const Rocket::Core::String& path)
 			filename = filename.substr(0,found);
 		}
 
-		DKCurl::Get()->Download(_url, DKFile::local_assets+"/Cache/"+filename);
-		_url = DKFile::local_assets+"/Cache/"+filename;
+		DKCurl::Get()->Download(_url, DKFile::local_assets+"Cache/"+filename);
+		_url = DKFile::local_assets+"Cache/"+filename;
 	}
 
 	FILE* fp = fopen(_url.c_str(), "rb");

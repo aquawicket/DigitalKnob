@@ -158,14 +158,14 @@ bool DKRml::LoadFonts()
 {
 	DKDEBUGFUNC();
 	DKStringArray dkfiles;
-	DKFile::GetDirectoryContents(DKFile::local_assets+"/DKRml", dkfiles);
+	DKFile::GetDirectoryContents(DKFile::local_assets+"DKRml", dkfiles);
 	for(unsigned int i=0; i<dkfiles.size(); ++i){
 		DKString extension;
 		DKFile::GetExtention(dkfiles[i],extension);
 		if(same(extension,".otf") || same(extension,".ttf")){
 			DKString file;
 			DKFile::GetFileName(dkfiles[i],file);
-			LoadFont(DKFile::local_assets+"/DKRml/"+file);
+			LoadFont(DKFile::local_assets+"DKRml/"+file);
 		}
 	}
 

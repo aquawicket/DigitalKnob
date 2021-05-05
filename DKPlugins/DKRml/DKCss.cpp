@@ -26,7 +26,7 @@ bool DKCss::Init()
 	}
 	
 	replace(data[1], DKFile::local_assets, "");
-    DKString file = DKFile::local_assets+"/"+data[1];
+    DKString file = DKFile::local_assets+data[1];
 
 	//https://stackoverflow.com/a/3141107/688352
 	/*

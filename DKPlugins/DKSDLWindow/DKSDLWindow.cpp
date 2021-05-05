@@ -44,7 +44,7 @@ bool DKSDLWindow::Init()
 
 	//Get values from settings.txt file
 	DKString sdl_renderer;
-	DKFile::GetSetting(DKFile::local_assets+"/settings.txt", "[SDL_RENDERER]", sdl_renderer);
+	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[SDL_RENDERER]", sdl_renderer);
 	DKINFO("settings.txt: [SDL_RENDERER] = "+sdl_renderer+"\n");
 	
 	SDL_SetMainReady(); //Bypass SDLmain  //https://wiki.libsdl.org/SDL_SetMainReady
@@ -66,13 +66,13 @@ bool DKSDLWindow::Init()
 	last_mouseY = 0;
 
 	DKString textX;
-	DKFile::GetSetting(DKFile::local_assets+"/settings.txt", "[WINX]", textX);
+	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[WINX]", textX);
 	DKString textY;
-	DKFile::GetSetting(DKFile::local_assets+"/settings.txt", "[WINY]", textY);
+	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[WINY]", textY);
 	DKString textWidth;
-	DKFile::GetSetting(DKFile::local_assets+"/settings.txt", "[WIDTH]", textWidth);
+	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[WIDTH]", textWidth);
 	DKString textHeight;
-	DKFile::GetSetting(DKFile::local_assets+"/settings.txt", "[HEIGHT]", textHeight);
+	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[HEIGHT]", textHeight);
 	if(!textX.empty()){ winX = toInt(textX); }
 	if(!textY.empty()){ winY = toInt(textY); }
 	if(!textWidth.empty()){ width = toInt(textWidth); }
@@ -180,7 +180,7 @@ bool DKSDLWindow::Init()
 	DKFile::GetModifiedTime(file, mTime);
 	title2 += mTime;
 	
-	DKString icon = DKFile::local_assets+"/icon.ico";
+	DKString icon = DKFile::local_assets+"icon.ico";
 	SetIcon(&icon, NULL);
 
 	//DKINFO(title+"\n");

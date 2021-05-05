@@ -12,10 +12,10 @@ bool DKMidi::Init()
 	midiin = new RtMidiIn();
 	midiout = new RtMidiOut();
 	DKString inputs;
-	DKFile::GetSetting(DKFile::local_assets+"/USER/midi.txt", "[MIDIIN]", inputs);
+	DKFile::GetSetting(DKFile::local_assets+"USER/midi.txt", "[MIDIIN]", inputs);
 	ToggleInput(inputs);
 	DKString outputs;
-	DKFile::GetSetting(DKFile::local_assets+"/USER/midi.txt", "[MIDIOUT]", outputs);
+	DKFile::GetSetting(DKFile::local_assets+"USER/midi.txt", "[MIDIOUT]", outputs);
 	ToggleOutput(outputs);
 
 	midiin->setCallback(&DKMidi::midiCallback,(void *)this);
@@ -108,7 +108,7 @@ bool DKMidi::ToggleInput(const DKString& name)
 	for(unsigned int i=0; i<midiin->getPortCount(); ++i){
 		if(same(name,midiin->getPortName(i))){
 			midiin->openPort(i);
-			DKFile::SetSetting(DKFile::local_assets+"/USER/midi.txt", "[MIDIIN]", name);
+			DKFile::SetSetting(DKFile::local_assets+"USER/midi.txt", "[MIDIIN]", name);
 			return true;
 		}
 	}
@@ -122,7 +122,7 @@ bool DKMidi::ToggleOutput(const DKString& name)
 	for(unsigned int i=0; i<midiout->getPortCount(); ++i){
 		if(same(name,midiout->getPortName(i))){
 			midiout->openPort(i);
-			DKFile::SetSetting(DKFile::local_assets+"/USER/midi.txt", "[MIDIOUT]", name);
+			DKFile::SetSetting(DKFile::local_assets+"USER/midi.txt", "[MIDIOUT]", name);
 			return true;
 		}
 	}

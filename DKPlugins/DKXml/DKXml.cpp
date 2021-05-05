@@ -35,7 +35,7 @@ bool DKXml::LoadDocument(const DKString& file)
 		DKString description = result.description();
 		DKString offset = toString((int)result.offset);
 		DKERROR("DKXml::LoadDocument("+file+"): "+description+" @ character: "+offset+"\n");
-		DKFile::StringToFile(filedata, DKFile::local_assets+"/XMLlog.txt");
+		DKFile::StringToFile(filedata, DKFile::local_assets+"XMLlog.txt");
 		DKINFO("Saved string to XMLlog.txt\n");
 		return false;
 	}
@@ -58,7 +58,7 @@ bool DKXml::LoadDocumentFromString(const DKString& string)
 		std::cout << "XML parsed with errors, attr value: [" << doc.child("node").attribute("attr").value() << "]\n";
 		std::cout << "Error description: " << result.description() << "\n";
 		std::cout << "Error offset: " << result.offset << " (error at [..." << (temp.c_str() + result.offset) << "]\n\n";
-		DKFile::StringToFile(temp, DKFile::local_assets+"/XMLlog.txt");
+		DKFile::StringToFile(temp, DKFile::local_assets+"XMLlog.txt");
 		DKINFO("Saved string to XMLlog.txt\n");
 		return false;
 	}
@@ -459,7 +459,7 @@ bool DKXml::test_libxml()
 
 	/* Macro to check API for match with the DLL we are using */
 	//LIBXML_TEST_VERSION    
-	DKString file = DKFile::local_assets+"/test.html";
+	DKString file = DKFile::local_assets+"test.html";
 	
 	doc = htmlReadDoc((xmlChar*)file.c_str(), NULL, NULL, HTML_PARSE_RECOVER | HTML_PARSE_NONET);
 	//doc = htmlReadFile(file.c_str(), NULL, HTML_PARSE_RECOVER | HTML_PARSE_NONET);

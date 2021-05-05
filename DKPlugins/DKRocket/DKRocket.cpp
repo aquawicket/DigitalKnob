@@ -120,14 +120,14 @@ bool DKRocket::LoadFonts()
 {
 	DKDEBUGFUNC();
 	DKStringArray dkfiles;
-	DKFile::GetDirectoryContents(DKFile::local_assets+"/DKRocket/", dkfiles);
+	DKFile::GetDirectoryContents(DKFile::local_assets+"DKRocket/", dkfiles);
 	for(unsigned int i=0; i<dkfiles.size(); ++i){
 		DKString extension;
 		DKFile::GetExtention(dkfiles[i],extension);
 		if(same(extension,".otf") || same(extension,".ttf")){
 			DKString file;
 			DKFile::GetFileName(dkfiles[i],file);
-			LoadFont(DKFile::local_assets+"/DKRocket/"+file);
+			LoadFont(DKFile::local_assets+"DKRocket/"+file);
 		}
 	}
 

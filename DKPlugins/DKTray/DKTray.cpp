@@ -22,7 +22,7 @@ bool DKTray::Init()
 		//return;
 	//}
 
-	icon = DKFile::local_assets+"/icon.ico";
+	icon = DKFile::local_assets+"icon.ico";
 	HICON hIcon = (HICON)LoadImage(NULL, icon.c_str(), IMAGE_ICON, 32, 32, LR_LOADFROMFILE);
 
 	DKWindows::hInstance = GetModuleHandle(0);
@@ -35,7 +35,7 @@ bool DKTray::Init()
 	//TrayIcon.SetTargetWnd(DKOSGWindow::Instance("DKOSGWindow")->hwnd); //This actually breaks it
 
 	DKString trayed;
-	DKFile::GetSetting(DKFile::local_assets+"/settings.txt", "[TRAYED]", trayed);
+	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[TRAYED]", trayed);
 	if(same(trayed,"ON")){
 		//CSystemTray::MinimiseToTray(hwnd);
 		if(DKClass::HasFunc("DKSDLWindow::Hide")){

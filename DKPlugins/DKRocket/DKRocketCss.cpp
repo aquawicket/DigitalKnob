@@ -26,7 +26,7 @@ bool DKRocketCss::Init()
 	}
 	
 	replace(data[1], DKFile::local_assets, "");
-    DKString file = DKFile::local_assets+"/"+data[1];
+    DKString file = DKFile::local_assets+data[1];
 
 	Rocket::Core::StyleSheet* current_sheet = dkRocket->document->GetStyleSheet();
 	Rocket::Core::StyleSheet* new_sheet = Rocket::Core::Factory::InstanceStyleSheetFile(file.c_str());

@@ -35,55 +35,55 @@ DKString DKV8::sandbox;
 void DKV8::SetFlags()
 {
 	DKDEBUGFUNC();
-	DKFile::GetSetting(DKFile::local_assets+"/settings.txt", "[CEF_HOMEPAGE]", homepage);
+	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[CEF_HOMEPAGE]", homepage);
 	DKINFO("DKV8::homepage = "+homepage+"\n");
 
-	DKFile::GetSetting(DKFile::local_assets+"/settings.txt", "[CEF_MULTIPROCESS]", multi_process);
+	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[CEF_MULTIPROCESS]", multi_process);
 	DKINFO("DKV8::multi_process = "+multi_process+"\n");
 
-	DKFile::GetSetting(DKFile::local_assets+"/settings.txt", "[CEF_SANDBOX]", sandbox);
+	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[CEF_SANDBOX]", sandbox);
 	DKINFO("DKV8::sandbox = "+sandbox+"\n");
 
-	DKFile::GetSetting(DKFile::local_assets+"/settings.txt", "[CEF_LOGSEVERITY]", log_severity);
+	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[CEF_LOGSEVERITY]", log_severity);
 	DKINFO("DKV8::log_severity = "+log_severity+"\n");
 
-	DKFile::GetSetting(DKFile::local_assets+"/settings.txt", "[CEF_MULTI_THREADED_MESSAGE_LOOP]", multi_threaded_message_loop);
+	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[CEF_MULTI_THREADED_MESSAGE_LOOP]", multi_threaded_message_loop);
 	DKINFO("DKV8::multithreadedmessageloops = "+multi_threaded_message_loop+"\n");
 
-	DKFile::GetSetting(DKFile::local_assets+"/settings.txt", "[CEF_DISABLE_GPU]", disable_gpu);
+	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[CEF_DISABLE_GPU]", disable_gpu);
 	DKINFO("DKV8::disablegpu = "+disable_gpu+"\n");
 
-	DKFile::GetSetting(DKFile::local_assets+"/settings.txt", "[CEF_DISABLE_GPU_COMPOSITING]", disable_gpu_compositing);
+	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[CEF_DISABLE_GPU_COMPOSITING]", disable_gpu_compositing);
 	DKINFO("DKV8::disable_gpu_compositing = "+disable_gpu_compositing+"\n");
 
-	DKFile::GetSetting(DKFile::local_assets+"/settings.txt", "[CEF_IGNORE_GPU_BLACKLIST]", ignore_gpu_blacklist);
+	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[CEF_IGNORE_GPU_BLACKLIST]", ignore_gpu_blacklist);
 	DKINFO("DKV8::ignore_gpu_blacklist = "+ignore_gpu_blacklist+"\n");
 
-	DKFile::GetSetting(DKFile::local_assets+"/settings.txt", "[CEF_ENABLE_SYSTEM_FLASH]", enable_system_flash);
+	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[CEF_ENABLE_SYSTEM_FLASH]", enable_system_flash);
 	DKINFO("DKV8::enable_system_flash = "+enable_system_flash+"\n");
 
-	DKFile::GetSetting(DKFile::local_assets+"/settings.txt", "[CEF_ENABLE_BEGIN_FRAME_SCHEDULING]", enable_begin_frame_scheduling);
+	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[CEF_ENABLE_BEGIN_FRAME_SCHEDULING]", enable_begin_frame_scheduling);
 	DKINFO("DKV8::enable_begin_frame_scheduling = "+enable_begin_frame_scheduling+"\n");
 
-	DKFile::GetSetting(DKFile::local_assets+"/settings.txt", "[CEF_ENABLE_WEBGL]", enable_webgl);
+	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[CEF_ENABLE_WEBGL]", enable_webgl);
 	DKINFO("DKV8::enable_webgl = "+enable_webgl+"\n");
 
-	DKFile::GetSetting(DKFile::local_assets+"/settings.txt", "[CEF_RENDERER_PROCESS_LIMIT]", renderer_process_limit);
+	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[CEF_RENDERER_PROCESS_LIMIT]", renderer_process_limit);
 	DKINFO("DKV8::renderer_process_limit = "+renderer_process_limit+"\n");
 
-	DKFile::GetSetting(DKFile::local_assets+"/settings.txt", "[CEF_ENABLE_GPU]", enable_gpu);
+	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[CEF_ENABLE_GPU]", enable_gpu);
 	DKINFO("DKV8::enable_gpu = "+enable_gpu+"\n");
 
-	DKFile::GetSetting(DKFile::local_assets+"/settings.txt", "[CEF_DISABLE_WEB_SECURITY]", disable_web_security);
+	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[CEF_DISABLE_WEB_SECURITY]", disable_web_security);
 	DKINFO("DKV8::disable_web_security = "+disable_web_security+"\n");
 
-	DKFile::GetSetting(DKFile::local_assets+"/settings.txt", "[CEF_NO_PROXY_SERVER]", no_proxy_server);
+	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[CEF_NO_PROXY_SERVER]", no_proxy_server);
 	DKINFO("DKV8::no_proxy_server = "+no_proxy_server+"\n");
 
-	DKFile::GetSetting(DKFile::local_assets+"/settings.txt", "[CEF_REMOTE_DEBUGGING_PORT]", remote_debugging_port);
+	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[CEF_REMOTE_DEBUGGING_PORT]", remote_debugging_port);
 	DKINFO("DKV8::remote_debugging_port = "+remote_debugging_port+"\n");
 
-	//DKFile::GetSetting(DKFile::local_assets+"/settings.txt", "[CEF_OFF_SCREEN_RENDERING_ENABLED]", off_screen_rendering_enabled);
+	//DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[CEF_OFF_SCREEN_RENDERING_ENABLED]", off_screen_rendering_enabled);
 	//DKINFO("DKV8::off_screen_rendering_enabled = "+off_screen_rendering_enabled+"\n");
 }
 

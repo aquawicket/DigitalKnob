@@ -14,7 +14,7 @@ bool DKOcr::Init()
 	DKClass::DKCreate("DKOcrV8");
 	
 	api = new tesseract::TessBaseAPI();
-	DKString datapath = DKFile::local_assets+"/DKOcr";
+	DKString datapath = DKFile::local_assets+"DKOcr";
 	if (api->Init(datapath.c_str(), "eng")){ // Initialize tesseract-ocr with English
 		DKERROR("Could not initialize tesseract\n");
 		return false;
@@ -149,7 +149,7 @@ bool DKOcr::ImageToText(DKString& file, DKString& text)
 	DKString _file = file;
 	if(has(file,".pdf")){
 		if(!PdfToText(file, text)){ return false; }
-		_file = DKFile::local_assets+"/temp.png";
+		_file = DKFile::local_assets+"temp.png";
 	}
 	if(!DKFile::PathExists(_file)){ return false; }
 	char* outText;
