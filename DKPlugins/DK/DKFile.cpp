@@ -260,6 +260,8 @@ bool DKFile::GetAbsolutePath(const DKString& in, DKString& out)
 	char *actualpath;
 	actualpath = realpath(in.c_str(), NULL);
 	out = actualpath;
+	if(in.back() == '/' && out.back() != '/')
+		out += '/'; //Keep the trailing / for folder paths
 	DKINFO("DKFile::GetAbsolutePath():  realpath_in: "+in+"realpath_out:"+out+"\n");
 #endif
 	DebugPath(out);
