@@ -104,14 +104,14 @@ bool DKDuktape::Init()
 		//DKClass::DKCreate("DKDomNavigator");
 		DKClass::DKCreate("DKEventTarget");
 		//DKClass::DKCreate("DKDomEventTarget");
-		DKClass::DKCreate("/DKDuktape/DKGlobalEventHandlers.js");
-		//DKClass::DKCreate("/DKDom/DKDomGlobalEventHandlers.js");
+		DKClass::DKCreate("DKDuktape/DKGlobalEventHandlers.js");
+		//DKClass::DKCreate("DKDom/DKDomGlobalEventHandlers.js");
 		DKClass::DKCreate("DKXMLHttpRequest");
 		//DKClass::DKCreate("DKDomXMLHttpRequest");
 		DKClass::DKCreate("DKScreen");
 		//DKClass::DKCreate("DKDomScreen");
-		DKClass::DKCreate("/DKDuktape/DKWindow.js");
-		//DKClass::DKCreate("/DKDom/DKDomWindow");
+		DKClass::DKCreate("DKDuktape/DKWindow.js");
+		//DKClass::DKCreate("DKDom/DKDomWindow");
 
 
 		//////////////////////////////////////////////////////////////////////////////////
@@ -120,7 +120,7 @@ bool DKDuktape::Init()
 
 		if(c_evloop){ //c_eventloop.js
 			eventloop_register(ctx);
-			DKString file = DKFile::local_assets+"/DKDuktape/c_eventloop.js";
+			DKString file = DKFile::local_assets+"DKDuktape/c_eventloop.js";
 			if(!LoadFile(file)){ return false; }
 			if(handle_file(ctx, file.c_str()) != 0) {
 				DKERROR("DKDuktape::Init(): Error in handle_file\n");
@@ -128,7 +128,7 @@ bool DKDuktape::Init()
 			}
 		}
 		else{ //ecma_eventloop.js
-			DKString file = DKFile::local_assets+"/DKDuktape/ecma_eventloop.js";
+			DKString file = DKFile::local_assets+"DKDuktape/ecma_eventloop.js";
 			if(!LoadFile(file)){ return false; }
 			if(handle_file(ctx, file.c_str()) != 0) {
 				DKERROR("DKDuktape::Init(): Error in handle_file\n");
@@ -137,7 +137,7 @@ bool DKDuktape::Init()
 		}
 		//////////////////////////////////////////////////////////////////////////////////
 
-        DKString app = DKFile::local_assets+"/app.js";
+        DKString app = DKFile::local_assets+"app.js";
 		LoadFile(app);
 	}
 
@@ -316,11 +316,6 @@ bool DKDuktape::LoadFile(const DKString& path)
 	DKString js;
 	DKFile::FileToString(path, js);
 	
-	//if(has(js,"//BROWSER")){
-	//	DKWARN("Ignoring: "+path+" is a browser only file. \n");
-	//	return true;
-	//}
-
 	if(duk_peval_file(ctx, path.c_str()) != 0){
 		DKDuktape::DumpError(js);
 	}
@@ -339,13 +334,6 @@ bool DKDuktape::LoadJSString(const DKString& url, const DKString& string)
 	if(url.empty()){ return false; }
 	if(string.empty()){ return false; }
 	//if(FileLoaded(url)){ return false; } //prevent url from loading twice
-
-	/*
-	if(has(string,"//BROWSER")){
-		DKINFO("Ignoring: "+url+" is a browser only file. \n");
-		return false;
-	}
-	*/
 
 	if(duk_peval_string(ctx, string.c_str()) != 0){
 		DKDuktape::DumpError(string);
@@ -427,7 +415,7 @@ bool DKDuktape::Reload()
 	//list.clear();
 	//DKClass::GetObjects(list);
 
-    DKString app = DKFile::local_assets+"/app.js";
+    DKString app = DKFile::local_assets+"app.js";
 	LoadFile(app);
 	return true;
 }

@@ -17,17 +17,17 @@ bool DKAssets::Init()
 		}
 	}
 
-	DKFile::MakeDir(DKFile::local_assets + "/USER");
+	DKFile::MakeDir(DKFile::local_assets+"USER");
 	DKINFO("DKFile::local_assets = "+DKFile::local_assets+"\n");
 
 	DKString file;
-	DKFile::GetSetting(DKFile::local_assets + "/settings.txt", "[LOG_FILE]", file);
+	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[LOG_FILE]", file);
 	if(same(file, "OFF")) { log_file = false; }
 	else{
 #ifndef ANDROID
 	//clear the log file
 	std::ofstream file_log;
-    DKString path = DKFile::local_assets+"/log.txt";
+    DKString path = DKFile::local_assets+"log.txt";
 	file_log.open(path.c_str(), std::ofstream::out | std::ofstream::trunc);
 	file_log.close();
 #endif		
@@ -35,7 +35,7 @@ bool DKAssets::Init()
 
 #ifdef WIN32
 	DKString console;
-	if (DKFile::GetSetting(DKFile::local_assets + "/settings.txt", "[CONSOLE]", console)) {
+	if (DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[CONSOLE]", console)) {
 		if(!same(console, "ON")){
 			ShowWindow(GetConsoleWindow(), SW_HIDE);
 		}
@@ -43,37 +43,37 @@ bool DKAssets::Init()
 #endif
 
 	DKString debug;
-	DKFile::GetSetting(DKFile::local_assets+"/settings.txt", "[LOG_DEBUG]", debug);
+	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[LOG_DEBUG]", debug);
 	if(same(debug, "ON")) { log_debug = true; }
 
 	DKString info;
-	DKFile::GetSetting(DKFile::local_assets+"/settings.txt", "[LOG_INFO]", info);
+	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[LOG_INFO]", info);
 	if(same(info, "OFF")) { log_info = false; }
 
 	DKString warnings;
-	DKFile::GetSetting(DKFile::local_assets+"/settings.txt", "[LOG_WARNINGS]", warnings);
+	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[LOG_WARNINGS]", warnings);
 	if(same(warnings, "OFF")) { log_warnings = false; }
 
 	DKString errors;
-	DKFile::GetSetting(DKFile::local_assets+"/settings.txt", "[LOG_ERRORS]", errors);
+	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[LOG_ERRORS]", errors);
 	if(same(errors, "OFF")) { log_errors = false; }
 
-	DKFile::GetSetting(DKFile::local_assets+"/settings.txt", "[LOG_SHOW]", log_show);
-	DKFile::GetSetting(DKFile::local_assets+"/settings.txt", "[LOG_HIDE]", log_hide);
+	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[LOG_SHOW]", log_show);
+	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[LOG_HIDE]", log_hide);
 
 	DKString threads;
-	DKFile::GetSetting(DKFile::local_assets + "/settings.txt", "[LOG_THREAD]", threads);
+	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[LOG_THREAD]", threads);
 	if (same(threads, "ON")) { log_thread = true; }
 	
 	DKString lines;
-	DKFile::GetSetting(DKFile::local_assets+"/settings.txt", "[LOG_LINES]", lines);
+	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[LOG_LINES]", lines);
 	if(same(lines, "ON")) { log_lines = true; }
 
 	DKString funcs;
-	DKFile::GetSetting(DKFile::local_assets+"/settings.txt", "[LOG_FUNCS]", funcs);
+	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[LOG_FUNCS]", funcs);
 	if(same(funcs, "ON")) { log_funcs = true; }
 	
-	DKFile::GetSetting(DKFile::local_assets + "/settings.txt", "[ONLINE_ASSETS]", DKFile::online_assets);
+	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[ONLINE_ASSETS]", DKFile::online_assets);
 	if(DKFile::online_assets.empty()){
 		//DKString app_name;
 		//DKFile::GetExeName(app_name);
@@ -93,16 +93,16 @@ bool DKAssets::GetAssetsPath(DKString& path)
 	//and we will point to that location for assets
 	
 #ifdef WIN32
-	if (DKFile::PathExists(DKFile::app_path + "/../assets") && 
+	if (DKFile::PathExists(DKFile::app_path + "/../assets/") && 
 	    DKFile::PathExists(DKFile::app_path + "/../DKCMake.txt")) {
-		if (DKFile::GetAbsolutePath(DKFile::app_path + "/../assets", path)) {
+		if (DKFile::GetAbsolutePath(DKFile::app_path + "/../assets/", path)) {
 			//SetDllDirectory(path.c_str()); //FIXME: get rid of this?
 			return true;
 		}
 	}
-	if (DKFile::PathExists(DKFile::app_path + "/../../assets") &&
+	if (DKFile::PathExists(DKFile::app_path + "/../../assets/") &&
 		DKFile::PathExists(DKFile::app_path + "/../../DKCMake.txt")) {
-		if (DKFile::GetAbsolutePath(DKFile::app_path + "/../../assets", path)) {
+		if (DKFile::GetAbsolutePath(DKFile::app_path + "/../../assets/", path)) {
 			//SetDllDirectory(path.c_str()); //FIXME: get rid of this?
 			return true;
 		}
@@ -110,9 +110,9 @@ bool DKAssets::GetAssetsPath(DKString& path)
 	return false;
 #endif
 #ifdef MAC
-	if (DKFile::PathExists(DKFile::app_path + "/../../../../../assets") && 
+	if (DKFile::PathExists(DKFile::app_path + "/../../../../../assets/") && 
 		DKFile::PathExists(DKFile::app_path + "/../../../../../DKCMake.txt")) {
-		if (DKFile::GetAbsolutePath(DKFile::app_path + "/../../../../../assets", path)) {
+		if (DKFile::GetAbsolutePath(DKFile::app_path + "/../../../../../assets/", path)) {
 			return true;
 		}
 	}
@@ -123,22 +123,22 @@ bool DKAssets::GetAssetsPath(DKString& path)
 	// /Users/aquawicket/Desktop/digitalknob/USER/DKApps/GuiTest/iossim32/Release-iphonesimulator/Appname.app/Appname
 	std::size_t pos = DKFile::app_path.find("/Library");
 	DKString userpath = DKFile::app_path.substr(0, pos);
-	if(DKFile::PathExists(userpath + "/Desktop/digitalknob/DKApps/" + DKFile::app_name + "/assets") && 
+	if(DKFile::PathExists(userpath + "/Desktop/digitalknob/DKApps/" + DKFile::app_name + "/assets/") && 
 	   DKFile::PathExists(userpath + "/Desktop/digitalknob/DKApps/" + DKFile::app_name + "/DKCMake.txt")){
-		path = userpath + "/Desktop/digitalknob/DKApps/" + DKFile::app_name + "/assets";
+		path = userpath + "/Desktop/digitalknob/DKApps/" + DKFile::app_name + "/assets/";
 		return true;
 	}
-	if(DKFile::PathExists(userpath + "/Desktop/digitalknob/USER/DKApps/" + DKFile::app_name + "/assets") && 
+	if(DKFile::PathExists(userpath + "/Desktop/digitalknob/USER/DKApps/" + DKFile::app_name + "/assets/") && 
 	   DKFile::PathExists(userpath + "/Desktop/digitalknob/USER/DKApps/" + DKFile::app_name + "/DKCMake.txt")){
-		path = userpath + "/Desktop/digitalknob/USER/DKApps/" + DKFile::app_name + "/assets";
+		path = userpath + "/Desktop/digitalknob/USER/DKApps/" + DKFile::app_name + "/assets/";
 		return true;
 	}
 	return false;
 #endif
 #ifdef LINUX
-	if (DKFile::PathExists(DKFile::app_path + "../../assets") &&
+	if (DKFile::PathExists(DKFile::app_path + "../../assets/") &&
 		DKFile::PathExists(DKFile::app_path + "../../DKCMake.txt")) {
-		if (DKFile::GetAbsolutePath(DKFile::app_path + "../../assets", path)) {
+		if (DKFile::GetAbsolutePath(DKFile::app_path + "../../assets/", path)) {
 			return true;
 		}
 	}
@@ -247,18 +247,18 @@ bool DKAssets::DeployAssets()
 	
 	//Save User data
 	DKINFO("Backing up USER data . . .\n");
-	if(DKFile::PathExists(DKFile::local_assets + "/USER")){
-		DKFile::CopyFolder(DKFile::local_assets + "/USER", DKFile::local_assets + "/../USER", true, true);
+	if(DKFile::PathExists(DKFile::local_assets + "USER")){
+		DKFile::CopyFolder(DKFile::local_assets + "USER", DKFile::local_assets + "../USER", true, true);
 	}
 	DKFile::Delete(DKFile::local_assets); //remove assets folder completely 
 
 #if !defined(ANDROID) && !defined(WIN32)
 	DKINFO("Extracting assets from binary executable . . .\n");	
 	DKFile::MakeDir(DKFile::local_assets);
-	DKString fileOut = DKFile::local_assets+"/assets.zip";
+	DKString fileOut = DKFile::local_assets+"assets.zip";
 	DKUtil::C2Bin(ASSETS_H, ASSETS_H_SIZE, fileOut.c_str());
-	DKArchive::Extract(DKFile::local_assets+"/assets.zip", DKFile::local_assets);
-	DKFile::Delete(DKFile::local_assets+"/assets.zip"); //delete lingering zip file;
+	DKArchive::Extract(DKFile::local_assets+"assets.zip", DKFile::local_assets);
+	DKFile::Delete(DKFile::local_assets+"assets.zip"); //delete lingering zip file;
 #endif
 
 //Windows will use the resources interface
@@ -270,7 +270,7 @@ bool DKAssets::DeployAssets()
 	DWORD dwSizeRes;
 
 	DKFile::MakeDir(DKFile::local_assets);
-	DKString strOutputLocation = DKFile::local_assets + "/assets.zip";
+	DKString strOutputLocation = DKFile::local_assets+"assets.zip";
 	hRes = FindResource(NULL, MAKEINTRESOURCE(321), RT_RCDATA); // find location of the resource and get handle to it
 	hResourceLoaded = LoadResource(NULL, hRes); // loads the specified resource into global memory. 
 	lpResLock = (char*)LockResource(hResourceLoaded); // get a pointer to the loaded resource!
@@ -278,13 +278,13 @@ bool DKAssets::DeployAssets()
 	std::ofstream outputFile(strOutputLocation.c_str(), std::ios::binary);
 	outputFile.write((const char*)lpResLock, dwSizeRes);
 	outputFile.close();
-	DKArchive::Extract(DKFile::local_assets+"/assets.zip", DKFile::local_assets);
-	DKFile::Delete(DKFile::local_assets+"/assets.zip"); //delete lingering zip file;
+	DKArchive::Extract(DKFile::local_assets+"assets.zip", DKFile::local_assets);
+	DKFile::Delete(DKFile::local_assets+"assets.zip"); //delete lingering zip file;
 
 	//if the data path contains an assets folder, move it's contents to the root.
-	//if(DKFile::PathExists(DKFile::local_assets+"/assets")){
-	//	DKFile::Copy(DKFile::local_assets+"/assets/", DKFile::local_assets, true, true); //FIXME: This is not copying .dll files
-	//	DKFile::Delete(DKFile::local_assets+"/assets");
+	//if(DKFile::PathExists(DKFile::local_assets+"assets")){
+	//	DKFile::Copy(DKFile::local_assets+"assets/", DKFile::local_assets, true, true); //FIXME: This is not copying .dll files
+	//	DKFile::Delete(DKFile::local_assets+"assets");
 	//}
 #endif
 
@@ -293,11 +293,11 @@ bool DKAssets::DeployAssets()
 #endif
 
 	//Restore User data
-	DKFile::MakeDir(DKFile::local_assets+"/USER");
-	if (DKFile::PathExists(DKFile::local_assets + "../USER")){
+	DKFile::MakeDir(DKFile::local_assets+"USER");
+	if (DKFile::PathExists(DKFile::local_assets+"../USER")){
 		DKINFO("Restoring USER data . . .\n");	
-		DKFile::CopyFolder(DKFile::local_assets + "/../USER", DKFile::local_assets + "/USER", true, true);
-		DKFile::Delete(DKFile::local_assets + "/../USER");
+		DKFile::CopyFolder(DKFile::local_assets+"../USER", DKFile::local_assets+"USER", true, true);
+		DKFile::Delete(DKFile::local_assets+"../USER");
 	}
 	return true;
 }
