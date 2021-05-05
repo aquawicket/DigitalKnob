@@ -297,13 +297,15 @@ dk.create = function dk_create(data, dk_create_callback) {
     var arry = data.split(",");
 
     if (arry[0].includes(".js")) {
-        if (!dk.loadJs(arry[0], function dk_loadJs_callback(rval) {
+        if (!dk.loadJs(arry[0], function dk_loadJs_callback(data) {
             if (dk_create_callback)
-                return dk_create_callback(rval);
+                return dk_create_callback(data);
             //else
             //    console.warn("dk.create(" + data + "): does not have a callback");
-        }))
-            return dk_create_callback && dk_create_callback(false);
+        })) {
+            console.error("dk.loadJs failed");
+            //return dk_create_callback && dk_create_callback(false);
+        }
     }
     if (arry[0].includes(".html")) {
         if (!dk.loadHtml(arry[0], arry[1], function dk_loadHtml_callback(element) {
@@ -311,16 +313,22 @@ dk.create = function dk_create(data, dk_create_callback) {
                 return dk_create_callback(element);
             //else
             //    console.warn("dk.create(" + data + "): does not have a callback");
-        }))
-            return error("DK_LoadHtml failed", dk_create_callback(false));
+        })) {
+            console.error("dk.loadHtml failed");
+            //return dk_create_callback && dk_create_callback(false);
+        }
     }
     if (arry[0].includes(".css")) {
-        if (!dk.loadCss(arry[0]))
-            return error("dk.loadCss failed", dk_create_callback(false));
-        if (dk_create_callback)
-            return dk_create_callback();
-        //else
-        //    console.warn("dk.create(" + data + "): does not have a callback");
+        if (!dk.loadCss(arry[0], function dk_loadCss_callback(data) {
+            if (dk_create_callback)
+                return dk_create_callback(data);
+            //else
+            //    console.warn("dk.create(" + data + "): does not have a callback");
+        })) {
+            console.error("dk.loadCss failed");
+            //return dk_create_callback && dk_create_callback(false);
+        }
+
     }
     return true;
 }
@@ -372,7 +380,7 @@ dk.close = function dk_close(data) {
     return error("data[1] invalid");
 }
 
-dk.loadCss = function dk_loadCss(url) {
+dk.loadCss = function dk_loadCss(url, dk_loadCss_callback) {
     if (!url)
         return error("url invalid");
 
@@ -388,6 +396,7 @@ dk.loadCss = function dk_loadCss(url) {
     link.setAttribute('rel', 'stylesheet');
     link.setAttribute('type', 'text/css');
     head.appendChild(link);
+    dk_loadCss_callback && dk_loadCss_callback(link);
     return true;
 }
 
@@ -406,13 +415,11 @@ dk.loadJs = function dk_loadJs(url, dk_loadJs_callback) {
         byId(url) && byId(url).parentNode.removeChild(byId(url));
     }
 
-    // Adding the script tag to the head as suggested before
+    // Adding the script tag to the head node 
     var head = document.getElementsByTagName('head')[0];
     var script = document.createElement('script');
-    //script.type = 'text/javascript';
-    script.setAttribute('type', 'text/javascript');
     script.id = url;
-    //script.async = true; // optionally
+    script.setAttribute('type', 'text/javascript');
     script.setAttribute('async', true);
     script.setAttribute('src', url);
     head.appendChild(script);
@@ -463,22 +470,10 @@ dk.loadJs = function dk_loadJs(url, dk_loadJs_callback) {
             return error("FIXME: (" + url + ") This plugin uses Init the old way", dk_loadJs_callback(false));
             old_plugin();
         }
-        //else {
         done = true;
         return dk_loadJs_callback && dk_loadJs_callback(true);
-        // }
-        /*
-        var func = init;
-        //Plugin_init() 
-        if (eval("typeof " + func) === "function") {
-            eval(func)();
-        } else {
-            console.warn(init + " is not defined");
-        }
-        */
-        //dk_loadJs_callback && dk_loadJs_callback(true);
     }
-    return dk_loadJs_callback && dk_loadJs_callback(true);
+    return true;
 }
 
 dk.loadHtml = function dk_loadHtml(url, parent, dk_loadHtml_callback) {
@@ -529,7 +524,7 @@ dk.loadHtml = function dk_loadHtml(url, parent, dk_loadHtml_callback) {
 
         return dk_loadHtml_callback && dk_loadHtml_callback(container);
     });
-    return dk_loadHtml_callback && dk_loadHtml_callback();
+    return true;
 }
 
 dk.checkFileSupport = function dk_checkFileSupport() {

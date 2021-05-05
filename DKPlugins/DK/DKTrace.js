@@ -68,8 +68,7 @@ dk.trace.stackToConsoleString = function dk_trace_stackToConsoleString(arg, dele
 
     //Remove the error function itsef from the list
     //if (jsonStack[1].func)
-        //console.debug(jsonStack[1].func);
-    
+    //console.debug(jsonStack[1].func);
 
     //Remove calls up to the function specified in deleteTo
     if (deleteTo) {
