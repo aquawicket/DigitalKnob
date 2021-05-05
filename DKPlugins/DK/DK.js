@@ -15,25 +15,6 @@ dk.init = function dk_init() {
     dk.networkIP = "192.168.1.210";
     dk.publicIP = "47.148.252.2";
     dk.port = "2393";
-    /*
-    var LOG_DEBUG = false;
-    var LOG_INFO = true;
-    var LOG_WARNINGS = true;
-    var LOG_ERRORS = true;
-    var LOG_FILE = true;
-    var LOG_SHOW = "";
-    //comma seperated
-    var LOG_HIDE = "";
-    //comma seperated
-    var LOG_LINES = false;
-    var DK_ERROR = 1;
-    var DK_WARN = 2;
-    var DK_INFO = 3;
-    var DK_DEBUG = 4;
-    var DK_SHOW = 5;
-    var DK_HIDE = 6;
-    //var events = [];
-    */
 }
 
 var byId = function(id) {
@@ -68,31 +49,6 @@ document.onselectstart = function() {
 //function EventLoop(){ /*console.warn("DK_ClearEvents(): not available for "+dk.getBrowser());*/ }
 //EventLoop.run = function(){};
 
-//https://stackoverflow.com/a/11035042/688352
-/*
-if(dk.getBrowser() !== "CEF" && dk.getBrowser() !== "RML"){
-	var DK_ClearEvents = function(){ console.warn("DK_ClearEvents(): not available for "+dk.getBrowser()); }
-	var DKRocket_Reload = function(){ console.warn("DKRocket_Reload(): not available for "+dk.getBrowser()); }
-	var DK_CallFunc = function(var1, var2, var3){ console.warn("DK_CallFunc(): not available for "+dk.getBrowser()); return ""; }
-	var DK_Queue = function(var1, var2, var3){ console.warn("DK_Queue(): not available for "+dk.getBrowser()); }
-	var DK_LeftClick = function(){ console.warn("DK_LeftClick(): not available for "+dk.getBrowser()); }
-	var DK_RightClick = function(){ console.warn("DK_RightClick(): not available for "+dk.getBrowser()); }
-	var DK_SetCursorPos = function(){ console.warn("DK_SetCursorPos(): not available for "+dk.getBrowser()); }
-	var DKHook_GetWindows = function(){ console.warn("DKHook_GetWindows(): not available for "+dk.getBrowser()); }
-	var DK_Crash = function(){ console.warn("DK_Crash(): not available for "+dk.getBrowser()); }
-	var DK_LogGuiConsole = function(){ console.warn("DK_LogGuiConsole(): not available for "+dk.getBrowser()); }
-	var DK_GetFunctions = function(){ console.warn("DK_GetFunctions(): not available for "+dk.getBrowser()); }
-	var DK_PrintFunctions = function(){ console.warn("DK_PrintFunctions(): not available for "+dk.getBrowser()); }
-	var DK_GetPixelUnderMouse = function(){ console.warn("DK_GetPixelUnderMouse(): not available for "+dk.getBrowser()); return ""; }
-	var DK_ShowConsole = function(){ console.warn("DK_ShowConsole(): not available for "+dk.getBrowser()); return ""; }
-	var DK_HideConsole = function(){ console.warn("DK_HideConsole(): not available for "+dk.getBrowser()); return ""; }
-	var DK_CpuUsed = function(){console.warn("DK_CpuUsed(): not available for "+dk.getBrowser()); return ""; }
-	var DK_CpuUsedByApp = function(){ console.warn("DK_CpuUsedByApp(): not available for "+dk.getBrowser()); return ""; }
-	var DK_PhysicalMemory = function(){ console.warn("DK_PhysicalMemory(): not available for "+dk.getBrowser()); return ""; }
-	var DK_PhysicalMemoryUsedByApp = function(){ console.warn("DK_PhysicalMemoryUsedByApp(): not available for "+dk.getBrowser()); return ""; }
-}
-*/
-
 /*
 var myVar = setInterval(myTimer, 1000);
 function myTimer() {
@@ -100,7 +56,6 @@ function myTimer() {
 }
 */
 
-///////////////////////////////////////////////////
 document.addEventListener("mousemove", function(e) {
     if (dk.iE()) {
         // grab the x-y pos.s if browser is IE
@@ -240,6 +195,7 @@ function Log(string, lvl) {
     //DKSendEvent("DKConsole.html", "DKNotify", string);
 }
 */
+
 dk.hasCPP = function dk_hasCPP() {
     if (dk.getBrowser() === "CEF")
         return true;
@@ -446,7 +402,6 @@ dk.loadJs = function dk_loadJs(url, dk_loadJs_callback) {
     }
 
     //FIXME - DigitalKnob can't trigger onload yet, so we do this
-
     if (dk.getJSEngine() === "Duktape") {
         var plugin = dk.getPlugin(url);
         plugin && console.log("loading dk." + plugin.name + " plugin");
@@ -575,6 +530,11 @@ dk.getCookie = function dk_getCookie(cname) {
 }
 
 dk.makeStruct = function dk_makeStruct(names) {
+	//Usage:
+    //var Item = makeStruct("id speaker country");
+    //var row = new Item(1, 'john', 'au');
+    //alert(row.speaker); // displays: john
+	
     var names = names.split(' ');
     var count = names.length;
     function constructor() {
@@ -583,11 +543,6 @@ dk.makeStruct = function dk_makeStruct(names) {
         }
     }
     return constructor;
-
-    //Usage:
-    //var Item = makeStruct("id speaker country");
-    //var row = new Item(1, 'john', 'au');
-    //alert(row.speaker); // displays: john
 }
 
 dk.replace = function dk_replace(str, old, newstr) {
@@ -601,25 +556,6 @@ if (typeof String.prototype.trim !== 'function') {
         return this.replace(/^\s+|\s+$/g, '');
     }
 }
-
-/*
-This is a misleading function.
-dk.isLocal = function dk_isLocal() {
-    switch (window.location.protocol) {
-    case 'http:':
-    case 'https:':
-        //remote file over http or https
-        return false;
-        break;
-    case 'file:':
-        //local file
-        return true;
-        break;
-    default:
-        //some other protocol
-    }
-}
-*/
 
 dk.available = function dk_available(name) {
     //FIXME: This function needs to be investigated
@@ -761,12 +697,7 @@ dk.iE = function dk_iE() {
     return rv;
 }
 
-/*
-dk.fileToString = function dk_fileToString(url) {
-    return ajaxGetUrl(url);
-}
-*/
-
+// deprecated
 dk.fileToStringAsync = function dk_fileToStringAsync(url, dk_fileToStringAsync_callback) {
     dk.sendRequest(url, function dk_sendRequest_callback(success, url, data) {
         return dk_fileToStringAsync_callback && dk_fileToStringAsync_callback(data);
@@ -853,7 +784,8 @@ dk.setInnerHtmlString = function dk_setInnerHtmlString(id, string) {
 }
 
 // *** EVENTS & VALUES *** //
-
+//deprecated
+/*
 dk.getValue = function dk_getValue(variable) {
     //FIXME: phase this function out. This function will become obsolete.
     console.error("dk.getValue(): this function is deprecated and will be obsolete");
@@ -988,6 +920,7 @@ dk.getValue = function dk_getValue(variable) {
 
     return error("ERROR: dk.getValue(): unknown type\n");
 }
+*/
 
 dk.preloadFile = function dk_preloadFile(url) {
     var file = new Object();
@@ -1042,85 +975,6 @@ Number.prototype.clamp = function(min, max) {
     return Math.min(Math.max(this, min), max);
 }
 
-/*
-dk.ajaxGet = function dk_ajaxGet(url, output) {
-    var request = "";
-    try {
-        request = new XMLHttpRequest();
-    } catch (e) {}
-    try {
-        request = new ActiveXObject("Msxml3.XMLHTTP");
-    } catch (e) {}
-    try {
-        request = new ActiveXObject("Msxml2.XMLHTTP.6.0");
-    } catch (e) {}
-    try {
-        request = new ActiveXObject("Msxml2.XMLHTTP.3.0");
-    } catch (e) {}
-    try {
-        request = new ActiveXObject("Msxml2.XMLHTTP");
-    } catch (e) {}
-    try {
-        request = new ActiveXObject("Microsoft.XMLHTTP");
-    } catch (e) {}
-
-    if (!request) {
-        return error("AJAX ERROR: Error creating request object");
-    }
-
-    request.onreadystatechange = function() {
-        if (request.readyState === 4) {
-            if (request.status === 200 || request.status === 0) {
-                output.value = request.responseText;
-                //console.log("AJAX RETURN: "+output.value);
-                return true;
-            } else {
-                console.warn("status: " + request.status);
-                return error("AJAX ERROR: " + url + " " + request.statusText);
-            }
-        }
-    }
-
-    //try{ 
-    request.open("GET", url, false);
-    //FIXME
-    request.send();
-    //}
-    //catch(err){
-    //	output.value = "";
-    //	return false;
-    //}
-    return true;
-}
-*/
-
-/*
-dk.ajaxGetUrl = function dk_ajaxGetUrl(url) {
-    var response = new Object();
-    AjaxGet(url, response);
-
-    if (!response.value) {
-        return "ERROR";
-    }
-
-    /*
-    //php has a console.log() function that injects return messages with {"strings"}
-    //The response may contain {"log data"}, let's extract and print it.
-    //Also remove them and pass the remaining data on
-    //TODO - upgrade this to JSON date transfers
-    var place = 0;
-    var n = response.value.indexOf("{", place);
-    while (n !== -1) {
-        place = response.value.indexOf("}");
-        var res = response.value.substring(n + 1, place);
-        response.value = response.value.replace("{" + res + "}", "");
-        //console.log("PHPLog: "+res);
-        n = response.value.indexOf("{");
-    }
-    */
-
-//return response.value;
-//}
 
 //https://developer.mozilla.org/en-US/docs/Web/HTTP
 //https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers
@@ -1245,4 +1099,7 @@ dk.validateStrict = function dk_validateStrict(str) {
     return str;
 }
 
+///////////////////////
+// Program starts here
+///////////////////////
 dk.init();
