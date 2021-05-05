@@ -24,8 +24,12 @@ dk.codemirror.create = function dk_codemirror_create() {
     dk.codemirror.myCodeMirror = CodeMirror(dk.codemirror.div, {
         theme: "abcdef",
         lineNumbers: true,
-        value: "function myScript(){return 100;}\n",
+        lineWrapping: true,
+        styleActiveLine: true,
+        styleActiveSelected: true,
+        mode: "text/x-mysql",
         mode: "javascript",
+        value: "function myScript(){return 100;}\n"
     });
 }
 
