@@ -395,61 +395,61 @@ dk.debug.logKey = function dk_debug_logKey(code) {
 }
 
 dk.debug.checkKeys = function dk_debug_checkKeys() {
-    var string = "";
-    for (var n = 0; n < dk.debug.keyHistory.length; n++) {
+    let string = "";
+    for (let n = 0; n < dk.debug.keyHistory.length; n++) {
         string += dk.debug.keyToChar(dk.debug.keyHistory[n]);
     }
 
     //check for commands
     if (string.includes("dkreload")) {
         console.log("*** dk.debug.reload() ***");
+        dk.debug.keyHistory.length = 0;
         dk.debug.refresh();
-        dk.debug.keyHistory = [];
     }
     if (string.includes("dkpush")) {
         console.log("*** dk.debug.pushDKFiles() ***");
+        dk.debug.keyHistory.length = 0;
         dk.debug.pushDKFiles();
-        dk.debug.keyHistory = [];
     }
     if (string.includes("dkclear")) {
         console.log("*** dk.debug.clearConsole() ***");
+        dk.debug.keyHistory.length = 0;
         dk.debug.clearConsole();
-        dk.debug.keyHistory = [];
     }
     if (string.includes("dkinfo")) {
         console.log("*** dk.debug.printInfo() ***");
+        dk.debug.keyHistory.length = 0;
         dk.debug.printInfo();
-        dk.debug.keyHistory = [];
     }
     if (string.includes("dkconsole")) {
         console.log("*** dk.debug.showConsole() ***");
+        dk.debug.keyHistory.length = 0;
         dk.debug.showConsole();
-        dk.debug.keyHistory = [];
     }
     if (string.includes("dksource")) {
         console.log("*** dk.debug.getSource() ***");
+        dk.debug.keyHistory.length = 0;
         dk.debug.getSource();
-        dk.debug.keyHistory = [];
     }
     if (string.includes("dkcrashcpp")) {
         console.log("*** dk.debug.crashCPP() ***");
+        dk.debug.keyHistory.length = 0;
         dk.debug.crashCPP();
-        dk.debug.keyHistory = [];
     }
     if (string.includes("dkcrashjs")) {
         console.log("*** dk.debug.crashJS() ***");
+        dk.debug.keyHistory.length = 0;
         dk.debug.crashJS();
-        dk.debug.keyHistory = [];
     }
     if (string.includes("dkeditor")) {
         console.log("*** dk.debug.editor() ***");
+        dk.debug.keyHistory.length = 0;
         dk.debug.editor();
-        dk.debug.keyHistory = [];
     }
     if (string.includes("dkdebug")) {
         console.log("*** dk.debug.debugger() ***");
+        dk.debug.keyHistory.length = 0;
         dk.debug.debugger();
-        dk.debug.keyHistory = [];
     }
 }
 

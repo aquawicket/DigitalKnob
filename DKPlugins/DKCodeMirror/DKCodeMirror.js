@@ -25,7 +25,7 @@ dk.codemirror.create = function dk_codemirror_create() {
         theme: "abcdef",
         lineNumbers: true,
         value: "function myScript(){return 100;}\n",
-        mode: "javascript"
+        mode: "javascript",
     });
 }
 

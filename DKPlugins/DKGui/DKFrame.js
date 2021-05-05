@@ -6,24 +6,23 @@ dk.frame.frames = new Array;
 dk.frame.init = function dk_frame_init() {}
 dk.frame.end = function dk_frame_end() {}
 
-
 dk.frame.create = function dk_frame_create(obj) {
     if (!obj)
         return error("obj invalid");
     let element;
     if (obj instanceof DKWidget) {
         element = obj.getElement();
-        if(!element)
+        if (!element)
             return false;
     } else {
         console.warn("dk.frame.create(): obj is not a instance of DKWidget. It is recommended to derive from a new DKWidget instance")
-        if(typeof obj === "object")
+        if (typeof obj === "object")
             element = obj;
         else
             element = byId(obj)
     }
 
-    if(element.id){
+    if (element.id) {
         var title = dk.file.getFilename(element.id);
         title && (title = title.replace(".html", ""));
     }
@@ -38,15 +37,18 @@ dk.frame.create = function dk_frame_create(obj) {
         frame.contentInstance = obj;
     frame.content = element;
     frame.content.setAttribute("dk_frame", "content");
-    frame.content.style.position = "absolute";
-    frame.content.style.top = "21rem";
-    frame.content.style.bottom = "0rem";
-    frame.content.style.left = "0rem";
-    frame.content.style.right = "0rem";
-    frame.content.style.removeProperty("height");
-    frame.content.style.removeProperty("width");
+    frame.content.style = {
+        position: "absolute",
+        top: "21rem",
+        bottom: "0rem",
+        left: "0rem",
+        right: "0rem",
+        width:"unset",
+        height: "unset"
+    }
+    //frame.content.style.removeProperty("height");
+    //frame.content.style.removeProperty("width");
     frame.appendChild(frame.content);
-
     frame.resize = dk.resize.create(frame);
     return this;
 }
@@ -100,7 +102,7 @@ dk.frame.getFrame = function dk_frame_getFrame(obj) {
     let element;
     if (obj instanceof DKWidget) {
         element = obj.getElement();
-    }else{
+    } else {
         element = obj;
     }
     while (element && element !== document) {
@@ -286,7 +288,7 @@ dk.frame.reload = function dk_frame_reload(obj) {
     var frame = dk.frame.getFrame(obj);
     if (!frame)
         return "frame invalid";
-    
+
     console.debug("FIXME: more work to be down to complete dk.frame.reload()");
     return false;
 
@@ -342,14 +344,14 @@ dk.frame.restoreSize = function dk_frame_restoreSize(frame) {
 
 dk.frame.createNewWindow = function dk_frame_createNewWindow(title, width, height) {
     const newWin = new DKWidget(title);
-    if(!newWin.ok)
+    if (!newWin.ok)
         return false;
     const div = document.createElement("div");
     div.id = title;
     div.style.width = width;
     div.style.height = height;
     div.style.overflow = "auto";
-    newWin.setElement(div);    
+    newWin.setElement(div);
     dk.frame.create(newWin);
     div.ok = true;
     return div;
