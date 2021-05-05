@@ -7,12 +7,12 @@
 #include <iostream>
 #include <sys/stat.h>
 
-DKString DKFile::exe_path;
-DKString DKFile::exe_name;
-DKString DKFile::app_path;
-DKString DKFile::app_name;
-DKString DKFile::local_assets;
-DKString DKFile::online_assets;
+DKString DKFile::exe_path;      //EXAMPLE:  C:/Users/aquawicket/digitalknob/DK/DKApps/DKBuilder/win32/Release/DKBuilder.exe
+DKString DKFile::exe_name;      //EXAMPLE:  DKBuilder.exe
+DKString DKFile::app_path;      //EXAMPLE:  C:/Users/aquawicket/digitalknob/DK/DKApps/DKBuilder/win32/Release/
+DKString DKFile::app_name;      //EXAMPLE:  DKBuilder
+DKString DKFile::local_assets;  //EXAMPLE:  C:/Users/aquawicket/digitalknob/DK/DKApps/DKBuilder/assets/
+DKString DKFile::online_assets; //EXAMPLE:  http://aquawicket.github.io/DigitalKnob/DKPlugins/
 
 ////////////////////////////////////////////
 bool DKFile::DebugPath(const DKString& path)
@@ -283,15 +283,14 @@ bool DKFile::GetAppName(DKString& appname)
 bool DKFile::GetAppPath(DKString& apppath)
 {
 	DKDEBUGFUNC(apppath);
-	if (!DKFile::PathExists(DKFile::exe_path)) {
+	if (!DKFile::PathExists(DKFile::exe_path))
 		DKFile::GetExePath(DKFile::exe_path);
-	}
 
 	unsigned found = 0;
 #ifdef WIN32
 	apppath = DKFile::exe_path;
 	found = apppath.find_last_of("/");
-	apppath.erase (apppath.begin()+found, apppath.end()); 
+	apppath.erase (apppath.begin()+found+1, apppath.end()); 
 	DebugPath(apppath);
 	return true;
 #elif defined(ANDROID)

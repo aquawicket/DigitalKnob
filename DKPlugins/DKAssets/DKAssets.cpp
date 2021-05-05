@@ -93,16 +93,16 @@ bool DKAssets::GetAssetsPath(DKString& path)
 	//and we will point to that location for assets
 	
 #ifdef WIN32
-	if (DKFile::PathExists(DKFile::app_path + "/../assets/") && 
-	    DKFile::PathExists(DKFile::app_path + "/../DKCMake.txt")) {
-		if (DKFile::GetAbsolutePath(DKFile::app_path + "/../assets/", path)) {
+	if (DKFile::PathExists(DKFile::app_path + "../assets/") && 
+	    DKFile::PathExists(DKFile::app_path + "../DKCMake.txt")) {
+		if (DKFile::GetAbsolutePath(DKFile::app_path + "../assets/", path)) {
 			//SetDllDirectory(path.c_str()); //FIXME: get rid of this?
 			return true;
 		}
 	}
-	if (DKFile::PathExists(DKFile::app_path + "/../../assets/") &&
-		DKFile::PathExists(DKFile::app_path + "/../../DKCMake.txt")) {
-		if (DKFile::GetAbsolutePath(DKFile::app_path + "/../../assets/", path)) {
+	if (DKFile::PathExists(DKFile::app_path + "../../assets/") &&
+		DKFile::PathExists(DKFile::app_path + "../../DKCMake.txt")) {
+		if (DKFile::GetAbsolutePath(DKFile::app_path + "../../assets/", path)) {
 			//SetDllDirectory(path.c_str()); //FIXME: get rid of this?
 			return true;
 		}
@@ -110,9 +110,9 @@ bool DKAssets::GetAssetsPath(DKString& path)
 	return false;
 #endif
 #ifdef MAC
-	if (DKFile::PathExists(DKFile::app_path + "/../../../../../assets/") && 
-		DKFile::PathExists(DKFile::app_path + "/../../../../../DKCMake.txt")) {
-		if (DKFile::GetAbsolutePath(DKFile::app_path + "/../../../../../assets/", path)) {
+	if (DKFile::PathExists(DKFile::app_path + "../../../../../assets/") && 
+		DKFile::PathExists(DKFile::app_path + "../../../../../DKCMake.txt")) {
+		if (DKFile::GetAbsolutePath(DKFile::app_path + "../../../../../assets/", path)) {
 			return true;
 		}
 	}
