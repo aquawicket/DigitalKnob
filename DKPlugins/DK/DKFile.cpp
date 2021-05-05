@@ -260,6 +260,7 @@ bool DKFile::GetAbsolutePath(const DKString& in, DKString& out)
 	char *actualpath;
 	actualpath = realpath(in.c_str(), NULL);
 	out = actualpath;
+	DKINFO("DKFile::GetAbsolutePath():  realpath_in: "+in+"realpath_out:"+out+"\n");
 #endif
 	DebugPath(out);
 	return true;
