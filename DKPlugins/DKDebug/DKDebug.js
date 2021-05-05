@@ -369,6 +369,7 @@ dk.debug.end = function dk_debug_end() {
 }
 
 dk.debug.onevent = function dk_debug_onevent(event) {
+    console.debug("dk.debug.onevent("+event.code+" "+JSON.stringify(event)+")");
     if (event.type === "keydown") {
         dk.debug.logKey(event.code);
         dk.debug.checkKeys();

@@ -41,14 +41,14 @@ var byId = function(id) {
 }
 
 function error(str, callback, rtnval) {
-	!rtnval && (rtnval = false);
+    !rtnval && (rtnval = false);
     console.error(str);
     callback && callback(rtnval);
     return rtnval;
 }
 
 function warn(str, callback, rtnval) {
-	!rtnval && (rtnval = false);
+    !rtnval && (rtnval = false);
     console.warn(str);
     callback && callback(rtnval);
     return rtnval;
@@ -397,6 +397,12 @@ dk.loadJs = function dk_loadJs(url, dk_loadJs_callback) {
 
     if (dk.getObjects().includes(url)) {
         console.warn(url + " already loaded. Reloading...");
+        var plugin = dk.getPlugin(url);
+        plugin && console.log("closing dk." + plugin.name + " plugin");
+        if (plugin && plugin.end) {
+            console.log("running dk." + plugin.name + ".end()");
+            plugin.end();
+        }
         byId(url) && byId(url).parentNode.removeChild(byId(url));
     }
 
@@ -442,7 +448,7 @@ dk.loadJs = function dk_loadJs(url, dk_loadJs_callback) {
     }
     script.onerror = function script_onerror() {
         done = true;
-        return error("onerror: "+url, dk_loadJs_callback(false));
+        return error("onerror: " + url, dk_loadJs_callback(false));
     }
 
     //FIXME - DigitalKnob can't trigger onload yet, so we do this
@@ -504,8 +510,8 @@ dk.loadHtml = function dk_loadHtml(url, parent, dk_loadHtml_callback) {
             console.warn("Multiple root nodes in " + url + ", wrapping in a new div");
         else
             container = nodes[0];
-        if(!container)
-            return error("container invalid", dk_loadHtml_callback);    
+        if (!container)
+            return error("container invalid", dk_loadHtml_callback);
         container.id = dk.getAvailableId(url);
         container.setAttribute("url", url);
         if (parent && byId(parent)) {
