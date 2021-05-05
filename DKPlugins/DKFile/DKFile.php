@@ -68,8 +68,8 @@ function getAbsolutePath($path){
 
 function getAssetsPath(){
     $assetsPath = dirname(__DIR__);
-    if(basename($assetsPath) != "assets")
-        return error("assetsPath does not contain an assets folder \n");
+    //if(basename($assetsPath) != "assets")
+        //return error("assetsPath does not contain an assets folder \n");
     if(!is_dir($assetsPath))
     	return error("assetsPath is an invalid directory \n");
     return $assetsPath;
@@ -82,6 +82,11 @@ function getDKPath(){
         $dkPath = dirname(__DIR__, $n++);
         if(basename($dkPath) == "digitalknob")
         	return $dkPath;
+    }
+    //Try defaults
+    if(file_exists("C:\Users\aquawicket\digitalknob")){
+    	$dkPath = "C:\Users\aquawicket\digitalknob";
+    	return $dkPath;
     }
     return error("could not find digitalknob path \n");
 }
@@ -104,6 +109,10 @@ function getRelativeDKPluginsPath(){
         	return $relativeDKPluginsPath;
         }
     }
+    if(file_exists("C:\Users\aquawicket\digitalknob\DKTasmota\DKPlugins")){
+    	$relativeDKPluginsPath = "C:\Users\aquawicket\digitalknob\DKTasmota\DKPlugins";
+    	return $relativeDKPluginsPath;
+    }
     return error("cound not find realative DKPlugins path");
 }
 
@@ -119,6 +128,11 @@ function pushDKAssets(){
     $dkPluginsPath = getDKPluginsPath();
     //we may or may not have a second plugins path
     $dkPluginsPath2 = getRelativeDKPluginsPath();
+
+    echo $assetsPath."\n";
+    echo $dkPluginsPath."\n";
+    //we may or may not have a second plugins path
+    echo $dkPluginsPath2."\n";
 
     //Now copy matching folders to the DKPlugins path(s)
 	$assetsList = scandir($assetsPath);

@@ -18,7 +18,7 @@ function DKBuildConsole_init()
 /////////////////////////////
 function DKBuildConsole_end()
 {
-	CPP_DK_CLOSE("DKBuild/DKBuild.js");
+	CPP_dk.close("DKBuild/DKBuild.js");
 }
 
 //////////////////////////////////////

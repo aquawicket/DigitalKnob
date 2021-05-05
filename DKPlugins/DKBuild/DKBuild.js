@@ -3,9 +3,6 @@
 //* Also, git credential memory should be added.
 
 var USERNAME = "aquawicket"; //FIXME: Need to dynamically get username (aquawicket)
-if(CPP_DK_GetOS() === "Raspberry")
-	USERNAME = "pi";
-
 var OS = "";   //win32,win64,mac32,mac64,linux32,linux64,ios32,ios64,iossim32,iossim64,android32,android64,raspberry32,raspberry64 
 var APP = "";  //DKAppname
 var TYPE = "";  //Debug, Release, ALL
@@ -30,7 +27,7 @@ function DKBuild_init()
 
 if(CPP_DK_GetOS() === "Windows"){
 		if(CPP_DK_GetOSArchitecture() === "32"){
-			DKPATH = "C:/Users/"+USERNAME+"/digitalknob";
+			DKPATH = "C:/Users/aquawicket/digitalknob";
 			CMAKE = "C:/Program Files/CMake/bin/cmake.exe";
 			CMAKE = CPP_DKFile_GetShortName(CMAKE);
 			NDK = DKPATH+"/DK/3rdParty/"+NDK_NAME;
@@ -71,7 +68,7 @@ function DKBuild_end()
 ////////////////////////////////////////
 function DKBuild_GetShortPath(fullPath){
 	var local_assets = CPP_DKAssets_LocalAssets();
-	var getShortPath = local_assets+"DKFile/getShortPath.cmd";
+	var getShortPath = local_assets+"/DKFile/getShortPath.cmd";
 	var shortPath = CPP_DK_Execute(getShortPath+' "'+fullPath+'"');
 	shortPath = shortPath.slice(0, -1)
 	while(shortPath.includes("\\")){
@@ -99,19 +96,20 @@ function DKBuild_ValidateCmake()
 function DKBuild_InstallCmake()
 {
 	console.log("Installing CMake");
-	var localAssets = CPP_DKAssets_LocalAssets();
+	//var datapath = DKAssets_LocalAssets(); //FIXME: why did this stop working?
+	var datapath = CPP_DKAssets_LocalAssets();
 	
 	if(CPP_DK_GetOS() === "Win32"){
-		if(!CPP_DKFile_Exists(localAssets+"cmake-3.19.4-win32-x86.msi")){
-			CPP_DKCurl_Download("https://cmake.org/files/v3.19/cmake-3.19.4-win32-x86.msi", localAssets);
+		if(!CPP_DKFile_Exists(datapath+"/cmake-3.19.4-win32-x86.msi")){
+			CPP_DKCurl_Download("https://cmake.org/files/v3.19/cmake-3.19.4-win32-x86.msi", datapath);
 		}
-		CPP_DK_System(localAssets+"/cmake-3.19.4-win32-x86.msi");
+		CPP_DK_System(datapath+"/cmake-3.19.4-win32-x86.msi");
 	}
 	else if(CPP_DK_GetOS() === "Win64"){
-		if(!CPP_DKFile_Exists(localAssets+"/cmake-3.19.4-win32-x86.msi")){
-			CPP_DKCurl_Download("https://cmake.org/files/v3.19/cmake-3.19.4-win32-x86.msi", localAssets);
+		if(!CPP_DKFile_Exists(datapath+"/cmake-3.19.4-win32-x86.msi")){
+			CPP_DKCurl_Download("https://cmake.org/files/v3.19/cmake-3.19.4-win32-x86.msi", datapath);
 		}
-		CPP_DK_System(localAssets+"/cmake-3.19.4-win32-x86.msi");
+		CPP_DK_System(datapath+"/cmake-3.19.4-win32-x86.msi");
 	}
 	else if(CPP_DK_GetOS() === "Mac"){
 		//TODO
@@ -145,10 +143,10 @@ function DKBuild_ValidateVC2019()
 function DKBuild_InstallVC2019()
 {
 	console.log("Installing Visual Studio 2019");
-	var localAssets = CPP_DKAssets_LocalAssets();
+	var datapath = CPP_DKAssets_LocalAssets();
 	
-	CPP_DKCurl_Download("https://download.visualstudio.microsoft.com/download/pr/5e397ebe-38b2-4e18-a187-ac313d07332a/169156e6e9a005d49b357c42240184dc1e3ccc28ebc777e70d49257c074f77e8/vs_Community.exe", localAssets);
-	CPP_DK_System(localAssets+"/vs_Community.exe");
+	CPP_DKCurl_Download("https://download.visualstudio.microsoft.com/download/pr/5e397ebe-38b2-4e18-a187-ac313d07332a/169156e6e9a005d49b357c42240184dc1e3ccc28ebc777e70d49257c074f77e8/vs_Community.exe", datapath);
+	CPP_DK_System(datapath+"/vs_Community.exe");
 }
 
 //////////////////////////////
@@ -187,8 +185,8 @@ function DKBuild_ValidateXcode()
 function DKBuild_InstallXcode()
 {
 	console.log("Installing Xcode");
-	var localAssets = CPP_DKAssets_LocalAssets();
-	CPP_DKCurl_Download("http://DigitalKnob.com/Download/Tools/xcode4630916281a.dmg", localAssets);
+	var datapath = DKAssets_LocalAssets();
+	CPP_DKCurl_Download("http://DigitalKnob.com/Download/Tools/xcode4630916281a.dmg", datapath);
 }
 
 //////////////////////////
