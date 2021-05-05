@@ -158,7 +158,7 @@ bool DKAssets::GetDataPath(DKString& path)
 	DKFile::GetAppPath(apppath);
 	DKString appname;
 	DKFile::GetAppName(appname);
-	path = apppath +"/"+appname+"_Data";
+	path = apppath+appname+"_Data";
 	if (DKFile::PathExists(path)) {
 		return true;
 	}
@@ -190,7 +190,7 @@ bool DKAssets::GetDataPath(DKString& path)
 	DKFile::GetAppPath(apppath);
 	DKString appname;
 	DKFile::GetAppName(appname);
-	path = apppath + "/" + appname + "_Data";
+	path = apppath + appname + "_Data";
 	if (DKFile::PathExists(path)) {
 		return true;
 	}

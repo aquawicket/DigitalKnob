@@ -83,10 +83,10 @@ function GitMenu_InstallGit() {
 
     if (DK_GetOS() === "Win32") {
         DKCurl_Download("http://DigitalKnob.com/Download/Tools/Git-2.11.0-32-bit.exe", assets);
-        DK_System(assets + "/Git-2.11.0-32-bit.exe");
+        DK_System(assets + "Git-2.11.0-32-bit.exe");
     } else if (DK_GetOS() === "Win64") {
         DKCurl_Download("http://DigitalKnob.com/Download/Tools/Git-2.11.0-64-bit.exe", assets);
-        DK_System(assets + "/Git-2.11.0-64-bit.exe");
+        DK_System(assets + "Git-2.11.0-64-bit.exe");
     } else if (DK_GetOS() === "Mac") {//TODO
     } else if (DK_GetOS() === "Linux") {
         DK_Execute("sudo apt-get install git");
