@@ -109,11 +109,22 @@ function getRelativeDKPluginsPath(){
         	return $relativeDKPluginsPath;
         }
     }
+    //FIXME: Some user defaults
     if(file_exists("C:\Users\aquawicket\digitalknob\DKTasmota\DKPlugins")){
     	$relativeDKPluginsPath = "C:\Users\aquawicket\digitalknob\DKTasmota\DKPlugins";
     	return $relativeDKPluginsPath;
     }
     return error("cound not find realative DKPlugins path");
+}
+
+function getDKAppPath(){
+	$dkAppAssetsPath;
+    //FIXME: Some user defaults
+    if(file_exists("C:\Users\aquawicket\digitalknob\DKTasmota\DKApps\DKTasmota\assets")){
+    	$dkAppAssetsPath = "C:\Users\aquawicket\digitalknob\DKTasmota\DKApps\DKTasmota\assets";
+    	return $dkAppAssetsPath;
+    }
+	return error("cound not find DKApp path");
 }
 
 function getRelativePath($path){
