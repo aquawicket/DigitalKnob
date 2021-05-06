@@ -117,8 +117,8 @@ function getRelativeDKPluginsPath(){
     return error("cound not find realative DKPlugins path");
 }
 
-function getDKAppPath(){
-	$dkAppAssetsPath;
+function getDKAppAssetsPath(){
+	$dkAppAssetsPath = "";
     //FIXME: Some user defaults
     if(file_exists("C:\Users\aquawicket\digitalknob\DKTasmota\DKApps\DKTasmota\assets")){
     	$dkAppAssetsPath = "C:\Users\aquawicket\digitalknob\DKTasmota\DKApps\DKTasmota\assets";
@@ -139,6 +139,7 @@ function pushDKAssets(){
     $dkPluginsPath = getDKPluginsPath();
     //we may or may not have a second plugins path
     $dkPluginsPath2 = getRelativeDKPluginsPath();
+    $dkAppAssetsPath = getDKAppAssetsPath();
 
     echo $assetsPath."\n";
     echo $dkPluginsPath."\n";
@@ -148,19 +149,25 @@ function pushDKAssets(){
     //Now copy matching folders to the DKPlugins path(s)
 	$assetsList = scandir($assetsPath);
 	for($n = 2; $n < count($assetsList); $n++){
-		if(!is_dir($assetsPath."\\".$assetsList[$n])) 
+		if(!is_dir($assetsPath."\\".$assetsList[$n])){
+			if($assetsPath != $dkAppAssetsPath){
+		        $filesrc = $assetsPath."\\".$assetsList[$n];
+		        $filedest = $dkAppAssetsPath."\\".$assetsList[$n];
+		        if (!copy($filesrc, $filedest))
+                    echo "FAILED to copy $filesrc\n";
+                else
+                	echo "copied to $filedest\n";
+	        }
 		    continue;
+		}
 		$assetFolder = $assetsPath."\\".$assetsList[$n];
 		$assetFiles = scandir($assetFolder);
         for($nn = 2; $nn < count($assetFiles); $nn++){
             if(is_dir($assetFolder."\\".$assetFiles[$nn])) 
                 continue; 
             $src = $assetFolder."\\".$assetFiles[$nn];
-            //echo $src." -> ";
-
             if(is_dir($dkPluginsPath."\\".$assetsList[$n])){
             	$dest = $dkPluginsPath."\\".$assetsList[$n]."\\".$assetFiles[$nn];
-			    //echo $dest."\n";
 			    if (!copy($src, $dest))
                     echo "FAILED to copy $src\n";
                 else
@@ -168,7 +175,6 @@ function pushDKAssets(){
 		    }
 		    if($dkPluginsPath2 && is_dir($dkPluginsPath2."\\".$assetsList[$n])){
 			    $dest = $dkPluginsPath2."\\".$assetsList[$n]."\\".$assetFiles[$nn];
-			    //echo $dest."\n";
 			    if (!copy($src, $dest))
                     echo "failed to copy $src\n";
                 else
