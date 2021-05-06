@@ -2,7 +2,7 @@
 
 "use strict";
 
-dk.mqtt = new Object;
+dk.mqtt = new DKPlugin("dk_mqtt");
 
 dk.mqtt.init = function dk_mqtt_init(){
     dk.create("DKTasmota/mqttws31.min.js");

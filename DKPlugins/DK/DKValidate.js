@@ -1,6 +1,9 @@
 "use strict";
 
-dk.validate = new Object;
+dk.validate = new DKPlugin("dk_validate");
+
+//dk.validate.init = function dk_validate_init(){}
+//dk.validate.end = function dk_validate_end(){}
 
 //https://stackoverflow.com/a/9337047/688352
 dk.validate.isValidVarName = function dk_validate_isValidVarName(var_name) {

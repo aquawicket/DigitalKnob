@@ -34,7 +34,7 @@ const CreateMyWidget = function()
 }
 
 
-const DKWidget = function(identifier) {
+const DKWidget = function DKWidget(identifier) {
     DKWidget.prototype.getInstance = function(instance) {
         //console.debug("DKWidget.getInstance() called");
         const index = DKWidget.instances.indexOf(instance);
@@ -78,7 +78,6 @@ const DKWidget = function(identifier) {
         const index = DKWidget.instances.indexOf(this.instance);
         if (index <= -1)
             return error("Unable to find instance in DKWidget");
-        delete DKWidget.instances[index].singleton;
         DKWidget.instances[index].removeInstance(DKWidget.instances[index]);
         return true;
     }

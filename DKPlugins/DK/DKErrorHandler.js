@@ -1,6 +1,6 @@
 //https://stackoverflow.com/a/36317375/688352
 
-dk.errorhandler = new Object;
+dk.errorhandler = new DKPlugin("dk_errorhandler");
 
 dk.errorhandler.init = function dk_errorhandler_init(){}
 dk.errorhandler.init = function dk_errorhandler_end(){}

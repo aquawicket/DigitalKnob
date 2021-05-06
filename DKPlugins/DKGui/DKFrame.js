@@ -10,8 +10,8 @@ dk.frame.create = function dk_frame_create(obj) {
     if (!obj)
         return error("obj invalid");
     let element;
-    if (obj instanceof DKWidget) {
-        element = obj.getElement();
+    if (obj instanceof DKPlugin) {
+        element = obj.getAccessNode();
         if (!element)
             return false;
     } else {
@@ -33,7 +33,7 @@ dk.frame.create = function dk_frame_create(obj) {
     !height.includes("%") && (height = parseInt(height));
 
     let frame = dk.frame.createFrame(title, width, height);
-    if (obj instanceof DKWidget)
+    if (obj instanceof DKPlugin)
         frame.contentInstance = obj;
     frame.content = element;
     frame.content.setAttribute("dk_frame", "content");
@@ -62,7 +62,7 @@ dk.frame.close = function dk_frame_close(obj) {
     if (!frame)
         return error("frame invalid");
 
-    if (frame && frame.contentInstance && frame.contentInstance instanceof DKWidget) {
+    if (frame && frame.contentInstance && frame.contentInstance instanceof DKPlugin) {
         frame.contentInstance.close();
     } else if (frame.content && frame.content.id && frame.content.id.includes(".html")) {
         console.debug("dk.frame.close(): obj seems to be a plugin sill closing by filename ");
@@ -100,7 +100,7 @@ dk.frame.getFrame = function dk_frame_getFrame(obj) {
     if (!obj)
         return error("obj invalid");
     let element;
-    if (obj instanceof DKWidget) {
+    if (obj instanceof DKPlugin) {
         element = obj.getElement();
     } else {
         element = obj;
@@ -343,7 +343,7 @@ dk.frame.restoreSize = function dk_frame_restoreSize(frame) {
 }
 
 dk.frame.createNewWindow = function dk_frame_createNewWindow(title, width, height) {
-    const newWin = new DKWidget(title);
+    const newWin = new DKPlugin(title);
     if (!newWin.ok)
         return false;
     const div = document.createElement("div");
@@ -351,7 +351,7 @@ dk.frame.createNewWindow = function dk_frame_createNewWindow(title, width, heigh
     div.style.width = width;
     div.style.height = height;
     div.style.overflow = "auto";
-    newWin.setElement(div);
+    newWin.setAccessNode(div);
     dk.frame.create(newWin);
     div.ok = true;
     return div;

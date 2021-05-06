@@ -17,12 +17,11 @@ dk.codemirror.init = function dk_codemirror_init(callback) {
     });
 }
 dk.codemirror.end = function dk_codemirror_end() {
-    dk.close("DKCodeMirror/mode/javascript/javascript.js");
     dk.close("DKCodeMirror/lib/codemirror.js");//, function() {
         dk.close("DKCodeMirror/lib/codemirror.css");//, function() {
             dk.close("DKCodeMirror/theme/abcdef.css");//, function() {
                 dk.close("DKCodeMirror/DKCodeMirror.css");//, function() {
-                    //dk.close("DKCodeMirror/mode/javascript/javascript.js");//, function() {
+                    dk.close("DKCodeMirror/mode/javascript/javascript.js");//, function() {
                         //callback && callback();
                     //});
                 //});

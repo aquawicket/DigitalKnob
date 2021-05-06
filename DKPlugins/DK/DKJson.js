@@ -1,6 +1,6 @@
 "use strict";
 
-dk.json = new Object;
+dk.json = new DKPlugin("dk_json");
 
 dk.json.prettyJson = function dk_json_prettyJson(jsonStr) {
     if (typeof jsonStr !== 'string')

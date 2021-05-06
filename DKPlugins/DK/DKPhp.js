@@ -1,24 +1,24 @@
 //"use strict";
 
-dk.php = new Object;
+dk.php = new DKPlugin("dk_php");
 
-//dk.php.call("GET", "/DK/DK.php", "Function", "args", "args", callback);
+//dk.php.call("GET", "/DK/DK.php", "Function", "args", "args", dk_php_callback);
 dk.php.call = function dk_php_call(httpMethod, phpPath, funcName) {
     const args = arguments;
-    let callback = null;
+    let dk_php_callback = null;
     if (args && typeof (args[args.length - 1]) === "function")
-       callback = args[args.length - 1];
+       dk_php_callback = args[args.length - 1];
 
     const allowed = ["DK.js", "DKFile.js", "DKDebug.js"];
     const callerFilename = dk.trace && dk.trace.getFilename();
     if (!allowed.includes(callerFilename))
-        return error("PHP Permission Denied for " + callerFilename, callback);
+        return error("PHP Permission Denied for " + callerFilename, dk_php_callback);
 
     if (!phpPath)
-        return error("phpPath invalid", callback);
+        return error("phpPath invalid", dk_php_callback);
     !httpMethod && (httpMethod = "GET");
     if (typeof funcName !== "string")
-        return error("funcName invalid", callback);
+        return error("funcName invalid", dk_php_callback);
 
     const jsonData = {
         func: funcName,
@@ -38,15 +38,15 @@ dk.php.call = function dk_php_call(httpMethod, phpPath, funcName) {
     const str = JSON.stringify(jsonData);
     const data = "x=" + encodeURIComponent(str);
     const url = path + phpPath + "?" + data;
-    const php_error = function(msg, callback){ 
-        return error(msg, callback);
+    const php_error = function(msg, dk_php_callback){ 
+        return error(msg, dk_php_callback);
     }
   
     dk.sendRequest(url, function dk_sendRequest_callback(success, url, rval) {
 
         //rval && console.debug(rval);
         if (!success)
-            return error("dk.php.call request failed, is php server running?", callback);
+            return error("dk.php.call request failed, is php server running?", dk_php_callback);
         const beforeLastLine = rval.substr(0, rval.lastIndexOf("\n") + 1);
         if (beforeLastLine !== "" && beforeLastLine !== "\n")
             console.log(beforeLastLine);
@@ -56,16 +56,16 @@ dk.php.call = function dk_php_call(httpMethod, phpPath, funcName) {
             rJson = JSON.parse(lastLine);
         } catch (e) {
             !rval && (rval = e.message);
-            return error(rval, callback);
+            return error(rval, dk_php_callback);
         }
         if (!rJson.status)
-            return warn("We appear to have gotten JSON compatable data with no status key" + rval, callback);
+            return warn("We appear to have gotten JSON compatable data with no status key" + rval, dk_php_callback);
         if (rJson.status !== "success")
-            return php_error("php: " + rJson.message, callback);
+            return php_error("php: " + rJson.message, dk_php_callback);
         //if (rJson.status === "success" && beforeLastLine !== "" && beforeLastLine !== "\n")
         //    console.log(beforeLastLine);
 
-        callback && callback(rJson.message);
+        dk_php_callback && dk_php_callback(rJson.message);
     }, httpMethod);
 }
 

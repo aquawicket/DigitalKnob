@@ -1,5 +1,6 @@
 "use strict";
 
+/*
 dk.devtools = new Object;
 
 dk.devtools.init = function dk_devtools_init() {
@@ -31,6 +32,21 @@ dk.devtools.create = function dk_devtools_create() {
 
 dk.devtools.show = function dk_devtools_show() {
 
+    dk.devtools.div = dk.frame.createNewWindow("DevTools", "200rem", "300rem");
+    if (!dk.devtools.div)
+        return;
+
+    const frame = dk.frame.getFrame(dk.devtools.div);
+    frame.titlebaricon.src = "DKDevTools/developer.png";
+
+    dk.devtools.addTools();
+}
+*/
+
+dk.devtools = new DKPlugin("dk_devtools");
+
+dk.devtools.create = function dk_devtools_create(){
+    console.debug("dk.devtools.create()");
     dk.devtools.div = dk.frame.createNewWindow("DevTools", "200rem", "300rem");
     if (!dk.devtools.div)
         return;
