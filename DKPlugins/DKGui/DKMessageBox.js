@@ -80,7 +80,7 @@ dk.messagebox.message = function dk_messagebox_message(message) {/*
 }
 
 dk.messagebox.confirm = function dk_messagebox_confirm(message, callback) {
-    dk.messagebox.create("dk_messagebox_confirm", function(box) {
+    dk.messagebox.create(message, function(box) {
         box.message.innerHTML = message;
         box.input.style.display = "none";
         box.message.style.display = "block";
