@@ -1,6 +1,6 @@
 "use strict";
 
-dk.notepadfile = new DKWidget("dk.notepadfile");
+dk.notepadfile = new DKPlugin("dk_notepadfile");
 
 dk.notepadfile.init = function dk_notepad_file_init() {
 

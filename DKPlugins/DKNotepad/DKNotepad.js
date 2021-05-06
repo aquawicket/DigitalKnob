@@ -1,6 +1,6 @@
 "use strict";
 
-dk.notepad = new DKWidget();
+dk.notepad = new DKPlugin("dk_notepad");
 
 dk.notepad.init = function dk_notepad_init() {
     dk.create("DKNotepad/DKNotepadShortcuts.js");
@@ -24,11 +24,11 @@ dk.notepad.init = function dk_notepad_init() {
         //byId("DKNotepad_Text").addEventListener("contextmenu", dk.notepad.onevent);
         html.file.onclick = function(event) {
             event.preventDefault();
-            dk.create("DKNotepad/dk.notepad.file.js");
+            dk.create("DKNotepad/DKNotepadFile.js");
         }
         dk.notepad.currentFile = "";
         
-        dk.notepad.setElement(html);
+        dk.notepad.setAccessNode(html);
         dk.frame.create(dk.notepad);
     });
 }

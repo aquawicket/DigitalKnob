@@ -1,6 +1,6 @@
 "use strict";
 
-dk.notepadmenu = new Object;
+dk.notepadmenu = new DKPlugin("dk_notepadmenu");
 
 /////////////////////////////
 dk.notepadmenu.init = function dk_notepadmenu_init() {

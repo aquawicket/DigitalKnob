@@ -494,7 +494,7 @@ dk.loadHtml = function dk_loadHtml(url, parent, dk_loadHtml_callback) {
     //if (url === ".html")
     //    url = "New.html";
 
-    dk.fileToStringAsync(url, function(string) {
+    dk.fileToStringAsync(url, function dk_fileToStringAsync(string) {
         //Create an empty widget
         //if (!string)
         //    string = "<div id=\"" + url + "\" style=\"position:absolute;top:200rem;left:200rem;width:200rem;height:200rem;background-color:rgb(230,230,230);\"></div>";
@@ -1022,13 +1022,6 @@ dk.loadFromLocalStorage = function dk_loadFromLocalStorage(name) {
 
 dk.removeFromLocalStorage = function dk_removeFromLocalStorage(name) {
     localStorage.removeItem(name);
-}
-
-dk.isOnline = function dk_isOnline() {
-    if (navigator.onLine)
-        return true;
-    else
-        return false;
 }
 
 /**

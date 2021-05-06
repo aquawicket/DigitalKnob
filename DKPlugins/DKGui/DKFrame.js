@@ -101,7 +101,7 @@ dk.frame.getFrame = function dk_frame_getFrame(obj) {
         return error("obj invalid");
     let element;
     if (obj instanceof DKPlugin) {
-        element = obj.getElement();
+        element = obj.getAccessNode();
     } else {
         element = obj;
     }

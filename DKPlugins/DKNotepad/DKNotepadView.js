@@ -1,4 +1,5 @@
-/////////////////////////////
+"use strict";
+
 function DKNotepadView_init()
 {
 	dk.create("DKNotepad/DKNotepadView.html,DKNotepad/DKNotepad.html");
@@ -6,7 +7,6 @@ function DKNotepadView_init()
 	byId("DKNotepadView_StatusBar").addEventListener("click", DKNotepadView_onevent);
 }
 
-////////////////////////////
 function DKNotepadView_end()
 {
 	document.removeEventListener("mousedown", DKNotepadView_onevent);
@@ -14,7 +14,6 @@ function DKNotepadView_end()
 	dk.close("DKNotepad/DKNotepadView.html");
 }
 
-/////////////////////////////////////
 function DKNotepadView_OnEvent(event)
 {
 	if(event.currentTarget.id === "DKNotepadView_StatusBar"){

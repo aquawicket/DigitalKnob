@@ -1,6 +1,7 @@
+"use strict";
+
 var currentFile;
 
-///////////////////////
 function DKPaint_init()
 {
 	dk.create("DKPaint/DKPaint.css");
@@ -11,7 +12,6 @@ function DKPaint_init()
 	byId("DKPaint/DKPaint.html").addEventListener("OpenFile", DKPaint_onevent);
 }
 
-//////////////////////
 function DKPaint_end()
 {
 	//byId("DKPaint_Save").removeEventListener("click", DKPaint_onevent);
@@ -22,7 +22,6 @@ function DKPaint_end()
 	dk.close("DKPaint/DKPaint.css");
 }
 
-///////////////////////////////
 function DKPaint_OnEvent(event)
 {
 	if(event.currentTarget.id === "DKPaint_Save"){
@@ -41,13 +40,11 @@ function DKPaint_OnEvent(event)
 	}
 }
 
-///////////////////////
 function DKPaint_Save()
 {
 	var text = byId("DKPaint_Text").value;
 }
 
-///////////////////////////
 function DKPaint_Open(file)
 {
 	file = file.replace(absolutepath, "");
@@ -68,7 +65,6 @@ function DKPaint_Open(file)
 	}
 }
 
-//////////////////////////////////
 function DKPaint_LoadTif(filename)
 {
 	dk.create("http://code.jquery.com/jquery-1.10.1.min.js", function(){

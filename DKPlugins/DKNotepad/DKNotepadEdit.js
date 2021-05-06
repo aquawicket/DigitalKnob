@@ -1,4 +1,5 @@
-/////////////////////////////
+"use strict";
+
 function DKNotepadEdit_init()
 {
 	dk.create("DKNotepad/DKNotepadEdit.html,DKNotepad/DKNotepad.html");
@@ -11,7 +12,6 @@ function DKNotepadEdit_init()
 	byId("DKNotepadEdit_Find").addEventListener("click", DKNotepadEdit_onevent);
 }
 
-////////////////////////////
 function DKNotepadEdit_end()
 {
 	document.removeEventListener("mousedown", DKNotepadEdit_onevent);
@@ -24,7 +24,6 @@ function DKNotepadEdit_end()
 	dk.close("DKNotepad/DKNotepadEdit.html");
 }
 
-/////////////////////////////////////
 function DKNotepadEdit_OnEvent(event)
 {
 	if(event.currentTarget.id === "DKNotepadEdit_Undo"){

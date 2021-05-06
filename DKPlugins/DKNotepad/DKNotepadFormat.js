@@ -1,4 +1,5 @@
-/////////////////////////////
+"use strict";
+
 function DKNotepadFormat_init()
 {
 	dk.create("DKNotepad/DKNotepadFormat.html,DKNotepad/DKNotepad.html");
@@ -7,7 +8,6 @@ function DKNotepadFormat_init()
 	byId("DKNotepadFormat_Font").addEventListener("click", DKNotepadFormat_onevent);
 }
 
-//////////////////////////////
 function DKNotepadFormat_end()
 {
 	document.removeEventListener("mousedown", DKNotepadFormat_onevent);
@@ -16,7 +16,6 @@ function DKNotepadFormat_end()
 	dk.close("DKNotepad/DKNotepadFormat.html");
 }
 
-///////////////////////////////////////
 function DKNotepadFormat_OnEvent(event)
 {
 	if(event.currentTarget.id === "DKNotepadFormat_WordWrap"){
@@ -34,7 +33,6 @@ function DKNotepadFormat_OnEvent(event)
 	dk.close("DKNotepad/DKNotepadFormat.js");
 }
 
-///////////////////////////////////
 function DKNotepadFormat_WordWrap()
 {
 	if(byId("DKNotepad_Text").style.whiteSpace === ""){

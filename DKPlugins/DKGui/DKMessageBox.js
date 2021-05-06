@@ -2,18 +2,11 @@
 
 dk.messagebox = new DKPlugin("dk_messagebox");
 
-dk.messagebox.close = function dk_messagebox_close(node) {/*
-    const box = dk.messagebox.getBox(node);
-    box.close = null;
-    const frame = dk.frame.getFrame(box);
+dk.messagebox.close = function dk_messagebox_close(node) {
+    console.debug("dk.messagebox.close("+node+")");
+    const frame = dk.frame.getFrame(node);
     if (frame)
-        dk.frame.close(box);
-    if(box.parentNode)
-        box.parentNode.removeChild(box);    
-    let index = dk.messagebox.boxes.indexOf(box);
-    if (index > -1)
-        dk.messagebox.boxes.splice(index, 1);
-        */
+        dk.frame.close(node);
 }
 
 dk.messagebox.closeAll = function dk_messagebox_closeAll() {/*
@@ -24,37 +17,23 @@ dk.messagebox.closeAll = function dk_messagebox_closeAll() {/*
     */
 }
 
-dk.messagebox.create = function dk_messagebox_create(identifier, dk_messagebox_callback) {
+dk.messagebox.create = function dk_messagebox_create(identifier, dk_messagebox_create_callback) {
 
-    dk.messagebox = new DKPlugin(identifier);
-    if (!dk.messagebox)
-        return error("box.message invalid", dk_messagebox_callback);
+    dk.messagebox.box = new DKPlugin(identifier);
+    if (!dk.messagebox.box)
+        return error("dk.messagebox.box invalid", dk_messagebox_create_callback);
     dk.create("DKGui/DKMessageBox.html", function dk_create_callback(html) {
         if (!html)
-            return error("invalid html", dk_messagebox_callback);
-        dk.messagebox.message = box.querySelector("[dk_messagebox='message']");
-        dk.messagebox.input = box.querySelector("[dk_messagebox='input']");
-        dk.messagebox.cancel = box.querySelector("[dk_messagebox='cancel']");
-        dk.messagebox.ok = box.querySelector("[dk_messagebox='ok']");
-        dk.frame.create(dk.messagebox);
-        return dk_messagebox_callback && dk_messagebox_callback(dk.messagebox);
+            return error("invalid html", dk_messagebox_create_callback);
+        dk.messagebox.box.html = html;
+        dk.messagebox.box.setAccessNode(html);
+        dk.messagebox.box.message = html.querySelector("[dk_messagebox='message']");
+        dk.messagebox.box.input = html.querySelector("[dk_messagebox='input']");
+        dk.messagebox.box.cancel = html.querySelector("[dk_messagebox='cancel']");
+        dk.messagebox.box.ok = html.querySelector("[dk_messagebox='ok']");
+        dk.frame.create(dk.messagebox.box);
+        return dk_messagebox_create_callback && dk_messagebox_create_callback(dk.messagebox.box);
     });
-
-    /*
-    dk.create("DKGui/DKMessageBox.html", function dk_create_callback(box) {
-        if (!box)
-            return error("invalid box", callback);
-
-        dk.messagebox.boxes.push(box);
-        box.close = dk.messagebox.close;
-        box.message = box.querySelector("[dk_messagebox='message']");
-        box.input = box.querySelector("[dk_messagebox='input']");
-        box.cancel = box.querySelector("[dk_messagebox='cancel']");
-        box.ok = box.querySelector("[dk_messagebox='ok']");
-        dk.frame.create(box);
-        return callback && callback(box);
-    });
-    */
 }
 
 dk.messagebox.getBox = function dk_messagebox_getBox(node) {/*
@@ -101,21 +80,21 @@ dk.messagebox.message = function dk_messagebox_message(message) {/*
 }
 
 dk.messagebox.confirm = function dk_messagebox_confirm(message, callback) {
-    const messagebox = dk.messagebox.create("dk_messagebox_confirm", function() {
-        messagebox.message.innerHTML = message;
-        messagebox.input.style.display = "none";
-        messagebox.message.style.display = "block";
-        messagebox.message.style.visibility = "visible";
-        messagebox.cancel.style.display = "block";
-        messagebox.cancel.style.visibility = "visible";
-        messagebox.style.display = "block";
-        messagebox.style.visibility = "visible";
-        messagebox.ok.onclick = function() {
-            this.close(event.currentTarget);
+    dk.messagebox.create("dk_messagebox_confirm", function(box) {
+        box.message.innerHTML = message;
+        box.input.style.display = "none";
+        box.message.style.display = "block";
+        box.message.style.visibility = "visible";
+        box.cancel.style.display = "block";
+        box.cancel.style.visibility = "visible";
+        //box.style.display = "block";
+        //box.style.visibility = "visible";
+        box.ok.onclick = function() {
+            dk.messagebox.close(box);
             return callback && callback(true);
         }
-        messagebox.cancel.onclick = function() {
-            this.close(event.currentTarget);
+        box.cancel.onclick = function() {
+            dk.messagebox.close(box);
             return callback && callback(false);
         }
     });
