@@ -1,6 +1,6 @@
 "use strict";
 
-dk.solution = new DKWidget("dk.solution");
+dk.solution = new DKPlugin("dk_solution");
 
 dk.solution.init = function dk_solution_init() {
     dk.create("DKFile/DKSolution.css");

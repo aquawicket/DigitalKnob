@@ -1,6 +1,6 @@
 "use strict";
 
-dk.menu = new Object;
+dk.menu = new DKPlugin("dk_menu");
 
 dk.menu.init = function dk_menu_init() {}
 

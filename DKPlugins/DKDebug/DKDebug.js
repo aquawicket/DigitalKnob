@@ -1,6 +1,6 @@
 "use strict";
 
-dk.debug = new Object;
+dk.debug = new DKPlugin("dk_debug");
 
 ////////////////////////////////////
 ///  A Convienient Debug Function

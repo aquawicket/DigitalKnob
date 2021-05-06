@@ -1,6 +1,6 @@
 "use strict";
 
-dk.codemirror = new Object;
+dk.codemirror = new DKPlugin("dk_codemirror");
 
 dk.codemirror.init = function dk_codemirror_init(callback) {
 

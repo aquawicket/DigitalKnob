@@ -30,19 +30,7 @@ dk.devtoolsbutton.create = function dk_devtools_create() {
 }
 
 dk.devtoolsbutton.show = function dk_devtools_show() {
-
     dk.create("DKDevTools/DKDevTools.js", function(){
         dk.devtools.create();
     });
-    
-    /*
-    dk.devtools.div = dk.frame.createNewWindow("DevTools", "200rem", "300rem");
-    if (!dk.devtools.div)
-        return;
-
-    const frame = dk.frame.getFrame(dk.devtools.div);
-    frame.titlebaricon.src = "DKDevTools/developer.png";
-
-    dk.devtools.addTools();
-    */
 }

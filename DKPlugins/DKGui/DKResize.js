@@ -1,6 +1,6 @@
 "use strict";
 
-dk.resize = new Object;
+dk.resize = new DKPlugin("dk_resize");
 
 dk.resize.create = function dk_resize_create(element) {
     if (!element)

@@ -1,5 +1,5 @@
 
-dk.solutionmenu = new DKWidget("dk.solutionmenu");
+dk.solutionmenu = new DKPlugin("dk_solutionmenu");
 
 dk.solutionmenu.id = "";
 dk.solutionmenu.file = "";

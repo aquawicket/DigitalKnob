@@ -1,6 +1,6 @@
 "use strict";
 
-dk.frame = new Object;
+dk.frame = new DKPlugin("dk_frame");
 dk.frame.frames = new Array;
 
 dk.frame.init = function dk_frame_init() {}

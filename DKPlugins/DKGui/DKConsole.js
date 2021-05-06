@@ -3,7 +3,7 @@
 // https://developer.mozilla.org/en-US/docs/Web/API/console
 // https://developer.mozilla.org/en-US/docs/Web/API/Console#outputting_text_to_the_console
 
-dk.console = new Object;
+dk.console = new DKPlugin("dk_console");
 
 //intercept console and reroute it to xconsole and dk.console
 //Example:

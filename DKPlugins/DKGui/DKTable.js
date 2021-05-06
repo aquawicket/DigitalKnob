@@ -1,6 +1,6 @@
 "use strict";
 
-dk.table = new Object;
+dk.table = new DKPlugin("dk_table");
 // https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableElement
 
 //The idea is to create a name for every row and every column.

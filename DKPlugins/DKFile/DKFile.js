@@ -1,6 +1,6 @@
 //"use strict";
 
-dk.file = new Object;
+dk.file = new DKPlugin("dk_file");
 
 if (!dk.hasCPP()) {/*
     dk.file.chDir = function dk_file_chDir() {

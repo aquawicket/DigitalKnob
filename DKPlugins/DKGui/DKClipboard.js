@@ -1,6 +1,6 @@
 "use strict";
 
-dk.clipboard = new Object;
+dk.clipboard = new DKPlugin("dk_clipboard");
 
 
 dk.clipboard.cut = function dk_clipboard_cut(ele) {

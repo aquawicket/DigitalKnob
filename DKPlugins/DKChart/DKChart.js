@@ -1,7 +1,7 @@
 "use strict";
 //https://www.chartjs.org/
 
-dk.chart = new Object;
+dk.chart = new DKPlugin("dk_chart");
 
 dk.chart.init = function dk_chart_init() {
     //dk.create("https://momentjs.com/downloads/moment.min.js");

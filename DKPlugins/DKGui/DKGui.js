@@ -1,6 +1,6 @@
 "use strict";
 
-dk.gui = new Object;
+dk.gui = new DKPlugin("dk_gui");
 
 dk.gui.createElement = function dk_gui_createElement(parent, tag, id) {
     var ele = document.createElement(tag);

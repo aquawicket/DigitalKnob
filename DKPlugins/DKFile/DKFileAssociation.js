@@ -1,6 +1,6 @@
 "use strict";
 
-dk.fileassociation = new DKWidget("dk.fileassociation");
+dk.fileassociation = new DKPlugin("dk_fileassociation");
 
 dk.fileassociation.init = function dk_fileassociation_init() {}
 
