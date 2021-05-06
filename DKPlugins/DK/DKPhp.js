@@ -1,4 +1,4 @@
-//"use strict";
+"use strict";
 
 dk.php = new DKPlugin("dk_php");
 

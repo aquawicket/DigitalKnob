@@ -1,6 +1,6 @@
-//http://www.steves-internet-guide.com/using-javascript-mqtt-client-websockets/
-
 "use strict";
+
+//http://www.steves-internet-guide.com/using-javascript-mqtt-client-websockets/
 
 dk.mqtt = new DKPlugin("dk_mqtt");
 
