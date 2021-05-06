@@ -194,7 +194,22 @@ function pullDKAssets(){
     $dkPluginsPath = getDKPluginsPath();
     //we may or may not have a second plugins path
     $dkPluginsPath2 = getRelativeDKPluginsPath();
+    $dkAppAssetsPath = getDKAppAssetsPath();
     
+    if($assetsPath != $dkAppAssetsPath){
+    	$dkAppAssetsPathList = scandir($dkAppAssetsPath);
+    	for($n = 2; $n < count($dkAppAssetsPathList); $n++){
+			if(!is_dir($dkAppAssetsPath."\\".$dkAppAssetsPathList[$n])){
+				$filesrc = $dkAppAssetsPath."\\".$dkAppAssetsPathList[$n];
+				$filedest = $assetsPath."\\".$dkAppAssetsPathList[$n];
+				if (!copy($filesrc, $filedest))
+					echo "FAILED to copy $filesrc\n";
+				else
+					echo "copied to $filedest\n";
+			}
+		}
+	}
+
     $dkPluginsList = scandir($dkPluginsPath);
     if($dkPluginsPath2){
         $dkPluginsList2 = scandir($dkPluginsPath2);
