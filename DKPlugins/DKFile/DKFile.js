@@ -1,31 +1,6 @@
-//"use strict";
+"use strict";
 
 dk.file = new DKPlugin("dk_file");
-
-if (!dk.hasCPP()) {/*
-    dk.file.chDir = function dk_file_chDir() {
-        return warn("dk.file.chDir(): not available for " + dk.getBrowser());
-    }
-    dk.file.copyFolder = function dk_file_copyFolder(src, dst, overwrite, recursive) {
-        return warn("dk.file.copyDirectory(): not available for " + dk.getBrowser());
-    }
-    dk.file.getExeName = function dk_file_getExeName() {
-        return warn("dk.file.getExeName(): not available for " + dk.getBrowser());
-    }
-    dk.file.getFullExeName = function dk_file_getFullExeName() {
-        return warn("dk.file.getFullExeName(): not available for " + dk.getBrowser());
-    }
-    dk.file.getModifiedTime = function dk_file_getModifiedTime() {
-        return warn("dk.file.getModifiedTime(): not available for " + dk.getBrowser());
-    }
-    dk.file.getShortName = function dk_file_getShortName() {
-        return warn("dk.file.getShortName(): not available for " + dk.getBrowser());
-    }
-    dk.file.getDrives = function dk_file_getDrives() {
-        return warn("dk.file.getDrives(): not available for " + dk.getBrowser());
-    }
-    */
-}
 
 dk.file.init = function dk_file_init() {
     dk.file.appFilename = "";
@@ -37,16 +12,14 @@ dk.file.init = function dk_file_init() {
 }
 
 dk.file.makeDir = function dk_file_makeDir(path, mode, recursive, callback) {
-	!mode && (mode="0777");
-	!recursive && (recursive=false);
-	
-    //console.debug("dk.file.makeDir("+path+")");
-    //pathname = dk.file.onlineAssets + "\\" + pathname;
+    !mode && (mode = "0777");
+    !recursive && (recursive = false);
     dk.file.isDir(path, function(result) {
         if (result)
             return warn("Directory already exists", callback);
         console.debug("Creating directory " + path);
-        dk.php.call("POST", "/DKFile/DKFile.php", "makeDir", path, /*mode, recursive,*/ function dk_php_pushDKAssets_callback(result) {
+        dk.php.call("POST", "/DKFile/DKFile.php", "makeDir", path, /*mode, recursive,*/
+        function dk_php_pushDKAssets_callback(result) {
             return callback && callback(result);
         });
     });
@@ -55,7 +28,7 @@ dk.file.makeDir = function dk_file_makeDir(path, mode, recursive, callback) {
 dk.file.pushDKAssets = function dk_file_pushDKAssets(callback) {
     console.log("Pushing assets to local repository");
     dk.php.call("POST", "/DKFile/DKFile.php", "pushDKAssets", function dk_php_pushDKAssets_callback(result) {
-        if(!result)
+        if (!result)
             return error("pushDKAssets failed", callback);
         return callback && callback(result);
     });
@@ -64,7 +37,7 @@ dk.file.pushDKAssets = function dk_file_pushDKAssets(callback) {
 dk.file.pullDKAssets = function dk_file_pullDKAssets(callback) {
     console.log("Pulling assets from local repository");
     dk.php.call("POST", "/DKFile/DKFile.php", "pullDKAssets", function dk_php_pullDKAssets_callback(result) {
-        if(!result)
+        if (!result)
             return error("pullDKAssets failed", callback);
         return callback && callback(result);
     });
@@ -121,11 +94,11 @@ if (!dk.hasCPP()) {
     dk.file.exists = function dk_file_exists(path, callback) {
         if (!path)
             return error("path invalid", callback);
-        dk.file.getAbsolutePath(path, function(result) {
-            dk.file.isDir(path, function(result) {
+        dk.file.getAbsolutePath(path, function dk_file_getAbsolutePath_callback(result) {
+            dk.file.isDir(path, function dk_file_isDir_callback(result) {
                 if (result)
                     return callback && callback(result);
-                dk.file.urlExists(path, function(result) {
+                dk.file.urlExists(path, function dk_file_urlExists_callback(result) {
                     return callback && callback(result);
                 });
             });
@@ -163,7 +136,6 @@ dk.file.getFilename = function dk_file_getFilename(path) {
         return error("path invalid");
     var n = path.lastIndexOf("/");
     var out = path.substring(n + 1, path.length);
-    //console.log("dk.file.GetFileName("+path+") -> "+out)
     return path.substring(n + 1, path.length);
 }
 
@@ -188,7 +160,6 @@ dk.file.saveFile = function dk_file_saveFile(path, data) {//var send = phpurl;
         console.log("characters written: " + result);
     });
     
-
 /*
     dk.sendRequest(send, function dk_sendRequest_callback(success, url, data){
         console.log("dk_sendRequest_callback(): success = "+success);
@@ -219,11 +190,11 @@ if (!dk.hasCPP()) {
             //then we return everything up to the next [VARIABLE] or to the end of the file.
             var str = dk.fileToString(file);
             if (!str)
-                return "";
+                return error("str invalid");
             if (param.indexOf("[") !== -1 && param.indexOf("]") !== -1) {
                 var begin = str.indexOf(param);
                 if (begin === -1)
-                    return "";
+                    return error("begin invalid");
                 var start = str.indexOf("]", begin);
                 var end = str.indexOf("[", start);
                 if (end === -1)
@@ -240,7 +211,7 @@ if (!dk.hasCPP()) {
             var string = param + " ";
             var begin = str.indexOf(string, 0);
             if (begin === -1)
-                return "";
+                return error("begin invallid");
             var start = str.indexOf(" ", begin);
             var end = str.indexOf("\n", start);
             var out = filestring.substr(start + 1, end - start - 1);
@@ -260,7 +231,6 @@ if (!dk.hasCPP()) {
         } else {
             var path = file;
             //if(!DKAssets::VerifyPath(path)){ return false;}
-
             var filestring = dk.file.FileToString(path);
             if (!filestring)
                 return error("filestring invalid");
@@ -309,11 +279,10 @@ if (!dk.hasCPP()) {
     }
 }
 
-// dk.file.fileToString(path, callback)
 if (!dk.hasCPP()) {
     dk.file.fileToString = function dk_file_fileToString(path, callback) {
         let assets = dk.file.onlineAssets;
-        if (!assets){
+        if (!assets) {
             console.error("assets invalid");
             return callback && callback(false);
         }
@@ -330,11 +299,10 @@ if (!dk.hasCPP()) {
     }
 }
 
-// dk.file.stringToFile(str, path, flags, callback)
 if (!dk.hasCPP()) {
     dk.file.stringToFile = function dk_file_stringToFile(str, path, flags, callback) {
         let assets = dk.file.onlineAssets;
-        if (!assets){
+        if (!assets) {
             console.error("assets invalid");
             return callback && callback(false);
         }
@@ -358,26 +326,15 @@ if (!dk.hasCPP()) {
         //FIXME
         url = url.replace("http://127.0.0.1/", ".");
         //FIXME
-
         console.debug("dk.file.DirectoryContents(" + url + ")");
         if (url.indexOf(":") > -1)
             return error("url has : character", callback);
         if (!dk.file.onlineAssets)
             return error("dk.file.onlineAssets not set", callback);
-        //var assets = DKAssets_LocalAssets();
-        //url = url.replace(assets, dk.file.onlineAssets);
-        //var path = dk.file.verifyPath(url);
-        //if(!path){ return 0; }
-
-        dk.php.call('POST', "/DKFile/DKFile.php", "directoryContents", url, function(results) {
+        dk.php.call('POST', "/DKFile/DKFile.php", "directoryContents", url, function dk_php_call_callback(results) {
             results && console.debug(results);
             return callback && callback(results)
         });
-
-        //send = dk.file.onlineAssets + "DKFile/DKFile.php?DirectoryContents=" + url;
-        //console.log("ajaxGetUrl(" + send + ")");
-        //var result = ajaxGetUrl(send);
-        //return result;
     }
 } else {
     dk.file.directoryContents = function dk_file_directoryContents(url) {
@@ -387,14 +344,12 @@ if (!dk.hasCPP()) {
 
 if (!dk.hasCPP()) {
     dk.file.getAbsolutePath = function dk_file_getAbsolutePath(url, callback) {
-		!url && (url = "/");
+        !url && (url = "/");
         if (url.includes("file:///"))
             url = pathname;
         url = url.replace(location.protocol + "//" + location.hostname + "/", "");
         url = url.replace("//", "/");
-        //console.debug("dk.file.getAbsolutePath("+url+")");
-
-        dk.php.call('POST', "/DKFile/DKFile.php", "getAbsolutePath", url, function(results) {
+        dk.php.call('POST', "/DKFile/DKFile.php", "getAbsolutePath", url, function dk_php_call_callback(results) {
             results && console.debug(results);
             return callback && callback(results)
         });
@@ -417,10 +372,8 @@ dk.file.getRelativePath = function dk_file_getRelativePath(apath, datapath) {
 
 if (!dk.hasCPP()) {
     dk.file.isDir = function dk_file_isDir(url, callback) {
-        url = dk.file.onlineAssets+url;
-        //console.debug("testing if "+url+" is a Dir");
+        url = dk.file.onlineAssets + url;
         dk.php.call('GET', "/DKFile/DKFile.php", "isDir", url, function dk_php_call_callback(result) {
-            //console.debug("isDir: url: "+url+" result:"+result);
             return callback && callback(result);
         });
     }
@@ -432,13 +385,14 @@ if (!dk.hasCPP()) {
 }
 
 dk.file.getExtention = function dk_file_getExtention(url) {
-    if(!url)
+    if (!url)
         return error("url invalid");
     var n = url.lastIndexOf(".");
     var out = url.substring(n + 1, url.length);
     return out;
 }
 
+/*
 if (!dk.hasCPP()) {
     dk.file.delete = function dk_file_delete(url) {
         console.log("Deleting: " + url);
@@ -451,3 +405,4 @@ if (!dk.hasCPP()) {
         return CPP_DKFile_Delete(url);
     }
 }
+*/
