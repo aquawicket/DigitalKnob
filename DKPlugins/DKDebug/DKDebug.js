@@ -15,16 +15,16 @@ dk.firstFunc = function dk_firstFunc(str1, str2) {
 }
 
 dk.secondFunc = function dk_secondFunc(str1, str2, dk_secondFunc_callback) {
-    dk.thirdFunc(str1, str2, function dk_thirdFunc(err, result){
-        if(err){
-            console.log("got an error, passing it along "+err.name+" "+err.message);
+    dk.thirdFunc(str1, str2, function dk_thirdFunc(err, result) {
+        if (err) {
+            console.log("got an error, passing it along " + err.name + " " + err.message);
             return dk_secondFunc_callback(err);
         }
-        return dk_secondFunc_callback(null, result);     
+        return dk_secondFunc_callback(null, result);
     });
 }
 
-dk.thirdFunc = function dk_thirdFunc(str1, str2, dk_thirdFunc_callback){
+dk.thirdFunc = function dk_thirdFunc(str1, str2, dk_thirdFunc_callback) {
     if (str1 !== str2)
         return dk_thirdFunc_callback(new Error("The strings must match"));
     return dk_thirdFunc_callback(null, (str1 + str2));

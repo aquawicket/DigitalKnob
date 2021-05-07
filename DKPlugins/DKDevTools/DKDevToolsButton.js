@@ -20,7 +20,7 @@ dk.devtoolsbutton.create = function dk_devtools_create() {
     dragDiv.style.width = "20rem";
     dragDiv.style.height = "20rem";
     //dragDiv.style.backgroundColor = "rgba(100,100,100,0.5)";
-    elem.onmousemove = function() {
+    elem.onmousemove = function elem_onmousemove() {
         dragDiv.style.bottom = elem.style.bottom;
         dragDiv.style.right = elem.style.right;
     }
@@ -30,7 +30,7 @@ dk.devtoolsbutton.create = function dk_devtools_create() {
 }
 
 dk.devtoolsbutton.show = function dk_devtools_show() {
-    dk.create("DKDevTools/DKDevTools.js", function(){
+    dk.create("DKDevTools/DKDevTools.js", function dk_create_callback(){
         dk.devtools.create();
     });
 }
