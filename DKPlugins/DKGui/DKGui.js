@@ -107,8 +107,6 @@ dk.gui.createButton = function dk_gui_createButton(parent, id, top, bottom, left
 }
 
 dk.gui.createImageButton = function dk_gui_createImageButton(parent, id, src, top, bottom, left, right, width, height, onclick) {
-    //if(!src)
-    //    return error("src invalid");
     const button = document.createElement("img");
     button.setAttribute("dk_gui", "img_button");
     button.src = src;
