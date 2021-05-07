@@ -14,7 +14,7 @@ dk.file.init = function dk_file_init() {
 dk.file.makeDir = function dk_file_makeDir(path, mode, recursive, callback) {
     !mode && (mode = "0777");
     !recursive && (recursive = false);
-    dk.file.isDir(path, function(result) {
+    dk.file.isDir(path, function dk_file_isDir_callback(result) {
         if (result)
             return warn("Directory already exists", callback);
         console.debug("Creating directory " + path);
@@ -156,7 +156,7 @@ dk.file.saveFile = function dk_file_saveFile(path, data) {//var send = phpurl;
     send += "&data="
     send += data;
 
-    dk.php.stringToFile(path, data, "OVERWRITE", function(result) {
+    dk.php.stringToFile(path, data, "OVERWRITE", function dk.php.stringToFile_callback(result) {
         console.log("characters written: " + result);
     });
     
@@ -288,7 +288,7 @@ if (!dk.hasCPP()) {
         }
         path = path.replace(" ", "_");
         path = assets + "/" + path;
-        dk.php.call('POST', "/DKFile/DKFile.php", "fileToString", path, function(str) {
+        dk.php.call('POST', "/DKFile/DKFile.php", "fileToString", path, function dk_php_call_callback(str) {
             return callback && callback(str);
         });
     }
@@ -308,7 +308,7 @@ if (!dk.hasCPP()) {
         }
         path = path.replace(" ", "_");
         path = assets + "/" + path;
-        dk.php.call('POST', "/DKFile/DKFile.php", "stringToFile", path, str, flags, function(result) {
+        dk.php.call('POST', "/DKFile/DKFile.php", "stringToFile", path, str, flags, function dk_php_call_callback(result) {
             return callback && callback(result);
         });
     }
