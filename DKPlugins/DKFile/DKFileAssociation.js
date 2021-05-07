@@ -2,10 +2,6 @@
 
 dk.fileassociation = new DKPlugin("dk_fileassociation");
 
-dk.fileassociation.init = function dk_fileassociation_init() {}
-
-dk.fileassociation.end = function dk_fileassociation_end() {}
-
 dk.fileassociation.onevent = function dk_fileassociation_onevent(event) {
     console.debug("dk.fileassociation.onevent(" + event.currentTarget.id + "," + event.type + "," + event.value + ")");
 }
@@ -104,11 +100,11 @@ dk.fileassociation.openhtml = function dk_fileassociation_openHtml(path) {
     //console.log("DK_AppendDataPath("+the_path+")");
     //AppendDataPath(the_path);
 
-    dk.file.fileToString(path, function(str){
+    dk.file.fileToString(path, function dk_file_fileToString_callback(str){
         filedata = str;
     });
     if (!filedata)
-        return false;
+        return error("filedata invalid");
     //if(!HtmlToRml(filedata)){ return false; }
 
     //Parse the sting into an element
@@ -141,10 +137,9 @@ dk.fileassociation.openjs = function dk_fileassociation_openjs(path) {
     //path = path.replace(absolutepath, "");
 
     var id = path.replace(DKAssets_LocalAssets(), "");
-    dk.create(id, function(rval) {
-        if (!rval) {
-            return;
-        }
+    dk.create(id, function dk_create_callback(rval) {
+        if (!rval)
+            return error("rval invalid");
         id = id.replace(".js", ".html");
         dk.frame.create(id);
     });
@@ -152,35 +147,35 @@ dk.fileassociation.openjs = function dk_fileassociation_openjs(path) {
 
 dk.fileassociation.opencss = function dk_fileAssociation_opencss(path) {
     var id = path.replace(CPP_DKAssets_LocalAssets(), "");
-    dk.create(id, function(rval) {
+    dk.create(id, function dk_create_callback(rval) {
         if (!rval)
-            return;
+            return error("rval invalid");
     });
 }
 
 dk.fileassociation.opentext = function dk_fileassociation_opentext(path) {
     //DK_Toggle("DKNotepad.html");
-    dk.create("DKNotepad/DKNotepad.js", function() {
+    dk.create("DKNotepad/DKNotepad.js", function dk_create_callback() {
         dk.frame.create("DKNotepad/DKNotepad.html");
         dk.notepad.open(path);
     });
 }
 
 dk.fileassociation.openimage = function dk_fileassociation_openimage(path) {
-    dk.create("DKPaint/DKPaint.js", function() {
+    dk.create("DKPaint/DKPaint.js", function dk_create_callback() {
         dk.frame.create(byId("DKPaint/DKPaint.html"));
         dk.paint.open(path);
     });
 }
 
 dk.fileassociation.openmodel = function dk_fileAssociation_openmodel(path) {
-    dk.create("DKOSGManipulator,,DKOSGWindow", function() {});
-    dk.create("DKOSGModel,,DKWindow," + path, function() {});
+    dk.create("DKOSGManipulator,,DKOSGWindow", function dk_create_callback() {});
+    dk.create("DKOSGModel,,DKWindow," + path, function dk_create_callback() {});
 }
 
 dk.fileassociation.openaudio = function dkfileassociation_openaudio(path) {
     //var file = DKFile_GetFilename(path);
-    dk.create("DKAudio", function() {
+    dk.create("DKAudio", function dk_create_callback() {
         dk.audio.playSound(path);
     });
 

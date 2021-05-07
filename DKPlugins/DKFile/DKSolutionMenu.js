@@ -7,7 +7,7 @@ dk.solutionmenu.file = "";
 
 dk.solutionmenu.init = function dk_solutionmenu_init()
 {
-	dk.create("DKFile/DKSolutionMenu.html", function(){
+	dk.create("DKFile/DKSolutionMenu.html", function dk_create_callback(){
     	document.addEventListener("mousedown", dk.solutionmenu.onevent);
     	byId("DKSolutionMenu_Open").onclick = dk.solutionmenu.open;
     	byId("DKSolutionMenu_OpenHere").onclick = dk.solutionmenu.openHere;
@@ -184,7 +184,7 @@ dk.solutionmenu.rename = function dk_solutionmenu_rename()
 	var top2 = byId("DKSolutionMenu").offsetTop;
 	var top = top1 - top2 - 1;
 	
-	dk.create("DKFile/DKSolutionRename.js", function(){
+	dk.create("DKFile/DKSolutionRename.js", function dk_create_callback(){
 		DKSolutionRename_SetId(dk.solutionmenu.id);
 		DKSolutionRename_SetFile(dk.solutionmenu.file);
 		byId("DKFile/DKSolutionRename.html").style.top = top+"rem";
@@ -195,9 +195,9 @@ dk.solutionmenu.rename = function dk_solutionmenu_rename()
 
 dk.solutionmenu.delete = function dk_solutionmenu_delete()
 {
-	dk.create("DKGui/DKMessageBox.js", function(){
+	dk.create("DKGui/DKMessageBox.js", function dk_create_callback(){
 		DKFrame_Html("DKGui/DKMessageBox.html");
-		DKMessageBox_Confirm("delete this file?", function(rval){
+		DKMessageBox_Confirm("delete this file?", function DKMessageBox_Confirm_callback(rval){
 			if(rval === true){
 				console.debug("dk.solutionmenu.Delete(): dk.solutionmenu.file = "+dk.solutionmenu.file);
 				dk.file.delete(dk.solutionmenu.file);
@@ -229,7 +229,7 @@ dk.solutionmenu.import = function dk_solutionmenu_import()
 
 dk.solutionmenu.gitAdd = function dk_solutionmenu_gitAdd()
 {
-	dk.create("DKBuild/DKBuild.js", function(){
+	dk.create("DKBuild/DKBuild.js", function dk_create_callback(){
 		var git = GIT;       //from DKBuild.js
 		var dkpath = DKPATH; //from DKBuild.js
 		//console.log("dk.solutionmenu.GitAdd(): git = "+git+"\n");
@@ -254,7 +254,7 @@ dk.solutionmenu.gitAdd = function dk_solutionmenu_gitAdd()
 
 dk.solutionmenu.upxCompress = function dk_solutionmenuuUpxCompress()
 {
-	dk.create("DKBuild/DKBuild.js", function(){ //for DKPATH
+	dk.create("DKBuild/DKBuild.js", function dk_create_callback(){ //for DKPATH
 	
 		var dkpath = DKPATH; //from DKBuild.js
 		var upx = dkpath+"/DK/3rdParty/upx-3.95-win64/upx.exe";

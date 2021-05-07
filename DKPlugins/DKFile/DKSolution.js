@@ -113,12 +113,12 @@ dk.solution.openFolder = function dk_solution_openFolder(path) {
 dk.solution.openFile = function dk_solution_openFile(path) {
     var aPath = path;
     if (dk.getOS() !== "Android") {
-        dk.file.getAbsolutePath(path, function(results) {
+        dk.file.getAbsolutePath(path, function dk_file_getAbsolutePath_callback(results) {
             aPath = results;
         });
     }
     if (!duktape)
-        return;
+        return error("duktape invalid");
     if (!CPP_DK_Run(aPath, ""))
         return error("CPP_DK_Run() failed");
     return true;
@@ -171,12 +171,12 @@ dk.solution.updatePath = function dk_solution_updatePath(path) {
 
     dk.file.directoryContents(aPath, function dk_file_directoryContents_callback(results) {
         if (!results)
-            return false;
+            return error("results invalid");
         const files = results.split(",");
         byId("DKSolutionMenu").innerHTML = "";
         //Clear it
         for (let d = 0; d < files.length; d++) {
-            dk.file.isDir(aPath + "/" + files[d], function(result) {
+            dk.file.isDir(aPath + "/" + files[d], function dk_file_isDir_callback(result) {
 
                 if (result) {
                     //Folders
@@ -202,7 +202,7 @@ dk.solution.updatePath = function dk_solution_updatePath(path) {
             });
         }
         for (let f = 0; f < files.length; f++) {
-            dk.file.isDir(aPath + "/" + files[f], function(result) {
+            dk.file.isDir(aPath + "/" + files[f], function dk_file_isDir_callback(result) {
 
                 if (!result) {
                     //Files
