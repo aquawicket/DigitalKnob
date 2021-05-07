@@ -5,7 +5,7 @@ dk.chart = new DKPlugin("dk_chart");
 
 dk.chart.init = function dk_chart_init() {
     //dk.create("https://momentjs.com/downloads/moment.min.js");
-    dk.create("DKTasmota/moment.min.js", function(){
+    dk.create("DKTasmota/moment.min.js", function dk_create(){
     //dk.create("https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js");
     dk.create("DKChart/chart.min.js");
     });
@@ -38,7 +38,7 @@ dk.chart.create = function dk_chart_create(parent, id, top, bottom, left, right,
     chartDiv.appendChild(chartCanvas);
 
     //FIXME - do proper refreshing on resize    
-    dk.gui.addResizeHandler(chartCanvas, function() {//console.debug("chartCanvas resized: x:"+chartCanvas.style.width+" y:"+chartCanvas.style.height);
+    dk.gui.addResizeHandler(chartCanvas, function dk_gui_addResizeHandler() {//console.debug("chartCanvas resized: x:"+chartCanvas.style.width+" y:"+chartCanvas.style.height);
         //chartCanvas.width = window.innerWidth;
         //chartCanvas.height = window.innerHeight;
         //chartCanvas.style.height = "100%";

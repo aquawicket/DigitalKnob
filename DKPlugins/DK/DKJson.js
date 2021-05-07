@@ -71,19 +71,19 @@ dk.json.findPartialMatch = function dk_json_findPartialMatch(obj, key, value) {
     return foundObj;
 }
 
-dk.json.saveJsonToFile = function(json, path, flags, callback) {
+dk.json.saveJsonToFile = function dk_json_saveJsonToFile(json, path, flags, callback) {
     const str = JSON.stringify(json);
-    dk.file.stringToFile(str, path, flags, function(rval) {
+    dk.file.stringToFile(str, path, flags, function dk_file_stringToFile_callback(rval) {
         return callback && callback(rval);
     });
 }
 
-dk.json.loadJsonFromFile = function(path, callback) {
+dk.json.loadJsonFromFile = function dk_json_loadJsonFromFile(path, callback) {
     dk.file.fileToString(path, function dk_file_fileToString_callback(str) {
         let json;
         try {
             json = JSON.parse(str);
-        } catch (e) {
+        } catch (err) {
             return callback && callback(false);
         }
         return callback && callback(json);

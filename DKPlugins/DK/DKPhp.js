@@ -38,7 +38,7 @@ dk.php.call = function dk_php_call(httpMethod, phpPath, funcName) {
     const str = JSON.stringify(jsonData);
     const data = "x=" + encodeURIComponent(str);
     const url = path + phpPath + "?" + data;
-    const php_error = function(msg, dk_php_callback){ 
+    const php_error = function php_error(msg, dk_php_callback){ 
         return error(msg, dk_php_callback);
     }
   
@@ -101,7 +101,7 @@ dk.php.callPhpFunc = function dk_php_callPhpFunc(args) {
     const data = "x=" + encodeURIComponent(str);
     //console.log("dk.php.callPhpFunc(): data = "+data);
     const url = path + "DK/DK.php?" + data;
-    dk.sendRequest(url, function(success, url, rVal) {
+    dk.sendRequest(url, function dk_sendRequest_callback(success, url, rVal) {
         if (args && typeof (args[args.length - 1]) === "function") {
             args[args.length - 1](rVal);
         } else {//console.log(rVal);

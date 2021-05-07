@@ -36,18 +36,18 @@ dk.init = function dk_init() {
     */
 }
 
-var byId = function(id) {
+const byId = function byId(id) {
     return document.getElementById(id);
 }
 
-function error(str, callback, rtnval) {
+const error = function error(str, callback, rtnval) {
     !rtnval && (rtnval = false);
     console.error(str);
     callback && callback(rtnval);
     return rtnval;
 }
 
-function warn(str, callback, rtnval) {
+const warn = function warn(str, callback, rtnval) {
     !rtnval && (rtnval = false);
     console.warn(str);
     callback && callback(rtnval);
@@ -59,39 +59,16 @@ function warn(str, callback, rtnval) {
 //document.body.style.fontSize = "13em";
 
 //prevent screen highlighting while dragging
-document.onselectstart = function() {
+document.onselectstart = function document_onselectstart() {
     return false;
 }
 
 // Dummy functions only implemented in c++
 //function DK_DoFrame(){ /*console.warn("DK_ClearEvents(): not available for "+dk.getBrowser());*/ }
 //function EventLoop(){ /*console.warn("DK_ClearEvents(): not available for "+dk.getBrowser());*/ }
-//EventLoop.run = function(){};
+//EventLoop.run = function EventLoop_run(){};
 
 //https://stackoverflow.com/a/11035042/688352
-/*
-if(dk.getBrowser() !== "CEF" && dk.getBrowser() !== "RML"){
-	var DK_ClearEvents = function(){ console.warn("DK_ClearEvents(): not available for "+dk.getBrowser()); }
-	var DKRocket_Reload = function(){ console.warn("DKRocket_Reload(): not available for "+dk.getBrowser()); }
-	var DK_CallFunc = function(var1, var2, var3){ console.warn("DK_CallFunc(): not available for "+dk.getBrowser()); return ""; }
-	var DK_Queue = function(var1, var2, var3){ console.warn("DK_Queue(): not available for "+dk.getBrowser()); }
-	var DK_LeftClick = function(){ console.warn("DK_LeftClick(): not available for "+dk.getBrowser()); }
-	var DK_RightClick = function(){ console.warn("DK_RightClick(): not available for "+dk.getBrowser()); }
-	var DK_SetCursorPos = function(){ console.warn("DK_SetCursorPos(): not available for "+dk.getBrowser()); }
-	var DKHook_GetWindows = function(){ console.warn("DKHook_GetWindows(): not available for "+dk.getBrowser()); }
-	var DK_Crash = function(){ console.warn("DK_Crash(): not available for "+dk.getBrowser()); }
-	var DK_LogGuiConsole = function(){ console.warn("DK_LogGuiConsole(): not available for "+dk.getBrowser()); }
-	var DK_GetFunctions = function(){ console.warn("DK_GetFunctions(): not available for "+dk.getBrowser()); }
-	var DK_PrintFunctions = function(){ console.warn("DK_PrintFunctions(): not available for "+dk.getBrowser()); }
-	var DK_GetPixelUnderMouse = function(){ console.warn("DK_GetPixelUnderMouse(): not available for "+dk.getBrowser()); return ""; }
-	var DK_ShowConsole = function(){ console.warn("DK_ShowConsole(): not available for "+dk.getBrowser()); return ""; }
-	var DK_HideConsole = function(){ console.warn("DK_HideConsole(): not available for "+dk.getBrowser()); return ""; }
-	var DK_CpuUsed = function(){console.warn("DK_CpuUsed(): not available for "+dk.getBrowser()); return ""; }
-	var DK_CpuUsedByApp = function(){ console.warn("DK_CpuUsedByApp(): not available for "+dk.getBrowser()); return ""; }
-	var DK_PhysicalMemory = function(){ console.warn("DK_PhysicalMemory(): not available for "+dk.getBrowser()); return ""; }
-	var DK_PhysicalMemoryUsedByApp = function(){ console.warn("DK_PhysicalMemoryUsedByApp(): not available for "+dk.getBrowser()); return ""; }
-}
-*/
 
 /*
 var myVar = setInterval(myTimer, 1000);
@@ -100,21 +77,20 @@ function myTimer() {
 }
 */
 
-///////////////////////////////////////////////////
-document.addEventListener("mousemove", function(e) {
+document.addEventListener("mousemove", function document_addEventListener(event) {
     if (dk.iE()) {
         // grab the x-y pos.s if browser is IE
-        window.mouseX = e.clientX + document.body.scrollLeft
-        window.mouseY = e.clientY + document.body.scrollTop
+        window.mouseX = event.clientX + document.body.scrollLeft
+        window.mouseY = event.clientY + document.body.scrollTop
     }
     //FIXME
     if (dk.getBrowser() === "RML") {
-        window.mouseX = e.clientX;
-        window.mouseY = e.clientY;
+        window.mouseX = event.clientX;
+        window.mouseY = event.clientY;
     } else {
         // grab the x-y pos.s if browser is NS
-        window.mouseX = e.pageX
-        window.mouseY = e.pageY
+        window.mouseX = event.pageX
+        window.mouseY = event.pageY
     }
     // catch possible negative values in NS4
     if (window.mouseX < 0) {
@@ -251,7 +227,7 @@ dk.hasCPP = function dk_hasCPP() {
     }
 }
 
-dk.getPlugin = function(url) {
+dk.getPlugin = function dk_getPlugin(url) {
     if (!url)
         return error("url invalid");
     var file = url;
@@ -446,7 +422,7 @@ dk.loadJs = function dk_loadJs(url, dk_loadJs_callback) {
 
             if (plugin && plugin.init) {
                 console.log("running dk." + plugin.name + ".init()");
-                plugin.init(function() {
+                plugin.init(function plugin_init_callback() {
                     done = true;
                     return dk_loadJs_callback && dk_loadJs_callback(true);
                 });
@@ -601,7 +577,7 @@ dk.replace = function dk_replace(str, old, newstr) {
 
 // trim for IE8
 if (typeof String.prototype.trim !== 'function') {
-    String.prototype.trim = function() {
+    String.prototype.trim = function String_trim() {
         return this.replace(/^\s+|\s+$/g, '');
     }
 }
@@ -1035,7 +1011,7 @@ dk.removeFromLocalStorage = function dk_removeFromLocalStorage(name) {
  * @returns A number in the range [min, max]
  * @type Number
  */
-Number.prototype.clamp = function(min, max) {
+Number.prototype.clamp = function Number_clamp(min, max) {
     return Math.min(Math.max(this, min), max);
 }
 
@@ -1065,7 +1041,7 @@ dk.ajaxGet = function dk_ajaxGet(url, output) {
         return error("AJAX ERROR: Error creating request object");
     }
 
-    request.onreadystatechange = function() {
+    request.onreadystatechange = function request_onreadystatechange() {
         if (request.readyState === 4) {
             if (request.status === 200 || request.status === 0) {
                 output.value = request.responseText;
@@ -1185,30 +1161,30 @@ dk.sendRequest = function dk_sendRequest(url, dk_sendRequest_callback, httpMetho
 
     //Possible error codes
     //https://github.com/richardwilkes/cef/blob/master/cef/enums_gen.go
-    xhr.onabort = function(event) {
+    xhr.onabort = function xhr_onabort(event) {
         dk.console.error && dk.console.error("GET <a href=' " + url + " ' target='_blank' style='color:rgb(213,213,213)'>" + url + "</a> onabort");
         debugXhr && console.debug("XMLHttpRequest.onabort(): " + file + " readyState:" + xhr.readyState + " status:" + xhr.status);
         return dk_sendRequest_callback(false, url, xhr.responseText);
     }
-    xhr.onerror = function(event) {
+    xhr.onerror = function xhr_onerror(event) {
         dk.console.error && dk.console.error("GET <a href=' " + url + " ' target='_blank' style='color:rgb(213,213,213)'>" + url + "</a> onerror");
         debugXhr && console.debug("XMLHttpRequest.onabort(): " + file + " readyState:" + xhr.readyState + " status:" + xhr.status);
         return dk_sendRequest_callback(false, url, xhr.responseText);
     }
-    xhr.onload = function(event) {
+    xhr.onload = function xhr_onload(event) {
         debugXhr && console.debug("XMLHttpRequest.onload(): " + file + " readyState:" + xhr.readyState + " status:" + xhr.status);
         return dk_sendRequest_callback(true, url, xhr.responseText);
     }
-    xhr.onloadend = function(event) {
+    xhr.onloadend = function xhr_onloadend(event) {
         debugXhr && console.debug("XMLHttpRequest.onloadend(): " + file + " readyState:" + xhr.readyState + " status:" + xhr.status);
     }
-    xhr.onloadstart = function(event) {
+    xhr.onloadstart = function xhr_onloadstart(event) {
         debugXhr && console.debug("XMLHttpRequest.onloadstart(): " + file + " readyState:" + xhr.readyState + " status:" + xhr.status);
     }
-    xhr.onprogress = function(event) {
+    xhr.onprogress = function xhr_onprogress(event) {
         debugXhr && console.debug("XMLHttpRequest.onprogress(): " + file + " readyState:" + xhr.readyState + " status:" + xhr.status);
     }
-    xhr.onreadystatechange = function(event) {
+    xhr.onreadystatechange = function xhr_onreadystatechange(event) {
         debugXhr && console.log("XMLHttpRequest.onreadystatechange(): " + file + " readyState:" + xhr.readyState + " status:" + xhr.status);
         /*
         if (xhr.readyState === 4) {
@@ -1219,7 +1195,7 @@ dk.sendRequest = function dk_sendRequest(url, dk_sendRequest_callback, httpMetho
         }
         */
     }
-    xhr.ontimeout = function(event) {
+    xhr.ontimeout = function xhr_ontimeout(event) {
         dk.console.error && dk.console.error("GET <a href=' " + url + " ' target='_blank' style='color:rgb(213,213,213)'>" + url + "</a> net::ERR_CONNECTION_TIMED_OUT");
         debugXhr && console.debug("XMLHttpRequest.onabort(): " + file + " readyState:" + xhr.readyState + " status:" + xhr.status);
         return dk_sendRequest_callback(false, url, xhr.responseText);

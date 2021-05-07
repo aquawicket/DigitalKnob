@@ -4,7 +4,7 @@ dk.debug = new DKPlugin("dk_debug");
 
 //Error-first callbacks
 dk.firstFunc = function dk_firstFunc(str1, str2) {
-    dk.secondFunc(str1, str2, function(err, result) {
+    dk.secondFunc(str1, str2, function dk_secondFunc_callback(err, result) {
         if (err) {
             console.error(err.name + " " + err.message);
             return err;
@@ -15,7 +15,7 @@ dk.firstFunc = function dk_firstFunc(str1, str2) {
 }
 
 dk.secondFunc = function dk_secondFunc(str1, str2, dk_secondFunc_callback) {
-    dk.thirdFunc(str1, str2, function(err, result){
+    dk.thirdFunc(str1, str2, function dk_thirdFunc(err, result){
         if(err){
             console.log("got an error, passing it along "+err.name+" "+err.message);
             return dk_secondFunc_callback(err);
@@ -38,7 +38,7 @@ dk.debug.debugFunc = function dk_debug_debugFunc() {
 
     dk.firstFunc("Don", "Donie");
 
-    //const rtn = dk.file.makeDir("Test", "","", function(result){ console.debug(result); } );
+    //const rtn = dk.file.makeDir("Test", "","", function dk_file_makeDir_callback(result){ console.debug(result); } );
 
     /*
     //Object by dot path experament
@@ -141,7 +141,7 @@ dk.debug.debugFunc = function dk_debug_debugFunc() {
 
     /*
     let path = ".";
-    dk.php.call('GET','/DKFile/DKFile.php', 'IsDirectory', path, function(rval){
+    dk.php.call('GET','/DKFile/DKFile.php', 'IsDirectory', path, function dk_php_call_callback(rval){
         rval && console.debug("true");
         !rval && console.debug("false");
     });
@@ -159,7 +159,7 @@ dk.debug.debugFunc = function dk_debug_debugFunc() {
 
     /*
     let path = ".";
-    dk.php.call('GET','/DKFile/DKFile.php', 'PathExists', path, function(rval){
+    dk.php.call('GET','/DKFile/DKFile.php', 'PathExists', path, function dk_php_call_callback(rval){
         rval && console.debug("true");
         !rval && console.debug("false");
     });
@@ -207,7 +207,7 @@ dk.debug.debugFunc = function dk_debug_debugFunc() {
     dk.php.call('GET','/DKFile/DKFile.php', 'GetServerInfo', 'ORIG_PATH_INFO', console.log);
     */
 
-    //dk.php.call("/DKFile/DKFile.php", "PathExists", "/", function(rval){
+    //dk.php.call("/DKFile/DKFile.php", "PathExists", "/", function dk_php_call_callback(rval){
     //    rval && console.log(rval);
     //});
 
@@ -221,7 +221,7 @@ dk.debug.debugFunc = function dk_debug_debugFunc() {
     */
 
     /*
-    dk.php.call("GET", "/DK/DK.php", "debugFunc", "one", "two", "three", function(rval) {
+    dk.php.call("GET", "/DK/DK.php", "debugFunc", "one", "two", "three", function dk_php_call_callback(rval) {
         console.log(rval);
     });
     */
@@ -237,19 +237,19 @@ dk.debug.debugFunc = function dk_debug_debugFunc() {
     */
 
     /*
-    dk.php.call("Debug_Func", "one", "two", "three", function(rval){
+    dk.php.call("Debug_Func", "one", "two", "three", function dk_php_call_callback(rval){
         console.log(rval);
     });
     */
 
     /*
-    dk.php.debugFunc("one", "two", "three", function(rval) {
+    dk.php.debugFunc("one", "two", "three", function dk_php_debugFunc_callback(rval) {
         console.log(rval);
     });
     */
 
     /*
-    dk.php.getRemoteAddress(function(rval) {
+    dk.php.getRemoteAddress(function dk_php_getRemoteAddress_callback(rval) {
         console.log(rval);
     });
     */
@@ -270,7 +270,7 @@ dk.debug.debugFunc = function dk_debug_debugFunc() {
     */
 
     /*
-    dk.gui.confirmBox("do this?", function(){
+    dk.gui.confirmBox("do this?", function dk_gui_confirmBox(){
         console.log("confirm callback");
     });
     */
@@ -283,11 +283,11 @@ dk.debug.debugFunc = function dk_debug_debugFunc() {
     resizableDiv.style.overflow = "auto";
     resizableDiv.style.border = "solid 2rem blue";
     document.body.appendChild(resizableDiv);
-    DKDrag_AddResizeHandler(resizableDiv, function(){
+    DKDrag_AddResizeHandler(resizableDiv, function DKDrag_AddResizeHandler_callback(){
         console.info("resized: x:"+resizableDiv.style.width+" y:"+resizableDiv.style.height);
     });
     //only works on window object
-    resizableDiv.onresize = function() {
+    resizableDiv.onresize = function resizableDiv_onresize_callback() {
         console.info("resized: x:" + resizableDiv.style.width + " y:" + resizableDiv.style.height);
     }
     */
@@ -298,12 +298,12 @@ dk.debug.debugFunc = function dk_debug_debugFunc() {
     for (let n = 0; n < devices.length; n++) {
         const cmnd = "timezone -7";
         const url = "http://" + devices[n].ip + "/cm?cmnd=" + encodeURIComponent(cmnd).replace(";", "%3B");
-        DK_SendRequest(url, function(success, url, data) {//console.log("DK_SendRequest("+success+","+url+","+data+")");
+        DK_SendRequest(url, function DK_SendRequest_callback(success, url, data) {//console.log("DK_SendRequest("+success+","+url+","+data+")");
         });
 
         cmnd = "time 4 " + dateInMilliseconds;
         url = "http://" + devices[n].ip + "/cm?cmnd=" + encodeURIComponent(cmnd).replace(";", "%3B");
-        DK_SendRequest(url, function(success, url, data) {
+        DK_SendRequest(url, function DK_SendRequest_callback(success, url, data) {
             console.log("DK_SendRequest(" + success + "," + url + "," + data + ")");
         });
     }
@@ -314,7 +314,7 @@ dk.debug.debugFunc = function dk_debug_debugFunc() {
     for (let n = 0; n < devices.length; n++) {
         const cmnd = "time";
         const url = "http://" + devices[n].ip + "/cm?cmnd=" + encodeURIComponent(cmnd).replace(";", "%3B");
-        DK_SendRequest(url, function(success, url, data) {
+        DK_SendRequest(url, function DK_SendRequest_callback(success, url, data) {
             //console.log("DK_SendRequest("+success+","+url+","+data+")");
             console.log("" + data + "");
         });
@@ -334,10 +334,10 @@ dk.debug.debugFunc = function dk_debug_debugFunc() {
 
     /*
     //Test PHP functions
-    dk.php.stringToFile("test.txt", "Appended string\n", "FILE_APPEND", function(rVal) {
+    dk.php.stringToFile("test.txt", "Appended string\n", "FILE_APPEND", function dk_php_stringToFile_callback(rVal) {
         console.log("characters written: " + rVal);
     });
-    dk.php.getTime(function(rVal) {
+    dk.php.getTime(function dk_php_getTime_callback(rVal) {
         console.log(rVal);
     });
     */
@@ -370,7 +370,7 @@ dk.debug.debugFunc = function dk_debug_debugFunc() {
     };
 
     let myData = [];
-    const onDataReceived = function(input) {
+    const onDataReceived = function onDataReceived(input) {
         if (myData.length) {
             for (let value in input) {
                 let skipUndefineds = (myData.length - 1);
@@ -682,7 +682,7 @@ dk.debug.crashJS = function dk_debug_crashJS() {
 }
 
 dk.debug.editor = function dk_debug_editor() {
-    dk.create("DKEditor/DKEditor.js", function() {});
+    dk.create("DKEditor/DKEditor.js", function dk_create_callback() {});
 }
 
 dk.debug.debugger = function dk_debug_debugger() {

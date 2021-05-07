@@ -57,10 +57,10 @@ dk.audio.openMusic = function dk_audio_openMusic(src) {
     const source = dk.gui.createElement(audio, "source", "source");
     source.type = "audio/ogg";
     source.src = src;
-    audio.ontimeupdate = function() {
+    audio.ontimeupdate = function audio_ontimeupdate() {
         dk.audio.timeUpdate()
     }
-    audio.onended = function() {
+    audio.onended = function audio_onended() {
         dk.audio.ended()
     }
 }

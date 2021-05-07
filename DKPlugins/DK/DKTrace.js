@@ -2,7 +2,7 @@
 
 dk.trace = new Object;
 
-window.onerror = function(msg, url, lineNo, columnNo, err) {
+window.onerror = function window_onerror(msg, url, lineNo, columnNo, err) {
     if (!err && !msg)
         return error("window.onerror failed: err and msg variables invalid");
     err = err ? err : msg;
@@ -11,27 +11,20 @@ window.onerror = function(msg, url, lineNo, columnNo, err) {
 
 //https://stackoverflow.com/a/49560222/688352
 //https://developer.mozilla.org/en-US/docs/Web/API/WindowEventHandlers/onunhandledrejection
-window.onunhandledrejection = function(event) {
+window.onunhandledrejection = function window_onunhandledrejection(event) {
     return error(event);
 }
 
 dk.trace.editFile = function dk_trace_editFile(file, line, ch) {
-    /*
-    dk.create("DKNotepad/DKNotepad.js", function dk_create_callback() {
-        dk.frame.create(byId("DKNotepad/DKNotepad.html"));
-        dk.notepad.open(file);
-    });
-    */
-
     file = file.replace("file:///", "");
     file = file.replaceAll("/", "\\");
     file = file.replace(dk.file.onlineAssets, "");
     !line && (line = 1);
     !ch && (ch = 0);
 
-    const createPopup = function() {
+    const createPopup = function createPopup() {
         dk.codemirror.create();
-        dk.codemirror.open(file, function() {
+        dk.codemirror.open(file, function dk_codemirror_open_callback() {
             dk.codemirror.myCodeMirror.focus();
             dk.codemirror.myCodeMirror.setCursor({
                 line: line - 1,
@@ -56,7 +49,7 @@ dk.trace.editFile = function dk_trace_editFile(file, line, ch) {
 
     if (dk.codemirror)
         dk.frame.close(dk.codemirror.div);
-    dk.create("DKCodeMirror/DKCodeMirror.js", function() {
+    dk.create("DKCodeMirror/DKCodeMirror.js", function dk_create() {
         createPopup();
     });
 
