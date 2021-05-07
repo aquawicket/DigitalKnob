@@ -2,7 +2,7 @@
 
 dk.gui = new DKPlugin("dk_gui");
 
-dk.gui.createElement = function dk_gui_createElement(parent, tag, id) {
+dk.gui.createElement = function dk_gui_createElement(parent, tag, id, top, bottom, left, right, width, height, onclick) {
     var ele = document.createElement(tag);
     ele.id = dk.getAvailableId(id);
     parent.appendChild(ele);
@@ -17,41 +17,41 @@ dk.gui.createElementBefore = function dk_gui_createElementBefore(parent, tag, id
     return ele;
 }
 
+dk.gui.createTag = function dk_gui_createTag(tag, props = {}) {
+    const style = props.style;
+    if (style) { delete props.style }
+    const element = Object.assign(document.createElement, props);
+    if (style) { Object.assign(element.style, style) }
+    return element;
+}
+
 dk.gui.getLeftPx = function dk_gui_getLeftPx(element) {
-    if (!element)
-        return 0;
-    if (!element.style.left)
-        return 0;
+    if (!element || !element.style.left)
+        return error("element.style.left invalid");
     if (element.style.left.indexOf("%") > -1)
         return parseInt(element.style.left) * window.innerWidth / 100;
     return parseInt(element.style.left);
 }
 
 dk.gui.getTopPx = function dk_gui_getTopPx(element) {
-    if (!element)
-        return 0;
-    if (!element.style.top)
-        return 0;
+    if (!element || !element.style.top)
+        return error("element.style.top invalid");
     if (element.style.top.indexOf("%") > -1)
         return parseInt(element.style.top) * window.innerHeight / 100;
     return parseInt(element.style.top);
 }
 
 dk.gui.getWidthPx = function dk_gui_getWidthPx(element) {
-    if (!element)
-        return 0;
-    if (!element.style.width)
-        return 0;
+    if (!element || !element.style.width)
+        return error("element.style.width invalid");
     if (element.style.width.indexOf("%") > -1)
         return parseInt(element.style.width) * window.innerWidth / 100;
     return parseInt(element.style.width);
 }
 
 dk.gui.getHeightPx = function dk_gui_getHeightPx(element) {
-    if (!element)
-        return 0;
-    if (!element.style.height)
-        return 0;
+    if (!element || !element.style.height)
+        return error("element.style.height invalid");
     if (element.style.height.includes("%"))
         return parseInt(element.style.height) * window.innerHeight / 100;
     return parseInt(element.style.height);
@@ -90,8 +90,8 @@ dk.gui.pos = function dk_gui_pos(position) {
 dk.gui.createButton = function dk_gui_createButton(parent, id, top, bottom, left, right, width, height, onclick) {
     const button = document.createElement("button");
     button.setAttribute("dk_gui", "button");
-    button.id = id;
-    button.innerHTML = id;
+    id && (button.id = id);
+    id && (button.innerHTML = id);
     button.style.position = "absolute";
     top && (button.style.top = top);
     bottom && (button.style.bottom = bottom);
@@ -107,22 +107,28 @@ dk.gui.createButton = function dk_gui_createButton(parent, id, top, bottom, left
 }
 
 dk.gui.createImageButton = function dk_gui_createImageButton(parent, id, src, top, bottom, left, right, width, height, onclick) {
+    //if(!src)
+    //    return error("src invalid");
     const button = document.createElement("img");
     button.setAttribute("dk_gui", "img_button");
-    button.id = id;
     button.src = src;
     button.style.position = "absolute";
+    button.style.cursor = "pointer";
+    //button.style.padding = "0rem";
+    id && (button.id = id);
     top && (button.style.top = top);
     bottom && (button.style.bottom = bottom);
     left && (button.style.left = left);
     right && (button.style.right = right);
     width && (button.style.width = width);
     height && (button.style.height = height);
-    //button.style.padding = "0rem";
-    button.style.cursor = "pointer";
     onclick && (button.onclick = onclick);
     parent.appendChild(button);
     return button;
+}
+
+dk.gui.createImage = function dk_gui_createImage(parent, id, src, top, bottom, left, right, width, height) {
+    return dk.gui.createImageButton(parent, id, src, top, bottom, left, right, width, height);
 }
 
 //TODO  //https://github.com/juggle/resize-observer
@@ -137,24 +143,6 @@ dk.gui.addResizeHandler = function dk_gui_addResizeHandler(element, callback) {
         attributes: true
     });
 }
-
-/*
-dk.gui..confirmBox = function dk_gui_confirmBox(msg, callback) {
-    const confirm = DKCreateWindow("DKConfirm", "200rem", "100rem");
-    confirm.style.textAlign = "center";
-    confirm.style.paddingTop = "20rem";
-    const message = document.createElement("span");
-    message.innerHTML = msg;
-    confirm.appendChild(message);
-    const no = DKCreateButton(confirm, "No", "50rem", "75rem", "", "", function() {
-        document.body.removeChild(confirm);
-    });
-    const yes = DKCreateButton(confirm, "Yes", "50rem", "105rem", "", "", function() {
-        callback && callback();
-        document.body.removeChild(confirm);
-    });
-}
-*/
 
 dk.gui.randomRGB = function dk_gui_randomRGB(){
     var o = Math.round, r = Math.random, s = 255;

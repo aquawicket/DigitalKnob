@@ -2,13 +2,44 @@
 
 dk.debug = new DKPlugin("dk_debug");
 
+//Error-first callbacks
+dk.firstFunc = function dk_firstFunc(str1, str2) {
+    dk.secondFunc(str1, str2, function(err, result) {
+        if (err) {
+            console.error(err.name + " " + err.message);
+            return err;
+        }
+        console.log("the result was " + result);
+        return result;
+    });
+}
+
+dk.secondFunc = function dk_secondFunc(str1, str2, dk_secondFunc_callback) {
+    dk.thirdFunc(str1, str2, function(err, result){
+        if(err){
+            console.log("got an error, passing it along "+err.name+" "+err.message);
+            return dk_secondFunc_callback(err);
+        }
+        return dk_secondFunc_callback(null, result);     
+    });
+}
+
+dk.thirdFunc = function dk_thirdFunc(str1, str2, dk_thirdFunc_callback){
+    if (str1 !== str2)
+        return dk_thirdFunc_callback(new Error("The strings must match"));
+    return dk_thirdFunc_callback(null, (str1 + str2));
+}
+
 ////////////////////////////////////
 ///  A Convienient Debug Function
 ///////////////////////////////////
 dk.debug.debugFunc = function dk_debug_debugFunc() {
     //console.log("dk.debug.debugFunc");
 
-    const rtn = dk.file.makeDir("Test", "","", function(result){ console.debug(result); } );
+    dk.firstFunc("Don", "Donie");
+
+    //const rtn = dk.file.makeDir("Test", "","", function(result){ console.debug(result); } );
+
     /*
     //Object by dot path experament
     const OBJ = function OBJ(dotPath) {

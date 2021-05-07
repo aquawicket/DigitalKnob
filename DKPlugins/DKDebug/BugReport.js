@@ -1,4 +1,4 @@
-/////////////////////////
+
 function BugReport_init()
 {
 	dk.create("DKDebug/BugReport.html");
@@ -6,7 +6,6 @@ function BugReport_init()
 	byId("BugReport_Text").addEventListener("click", BugReport_onevent);
 }
 
-////////////////////////
 function BugReport_end()
 {
 	byId("BugReport_Image").removeEventListener("click", BugReport_onevent);
@@ -14,7 +13,6 @@ function BugReport_end()
 	dk.close("DKDebug/BugReport.html");
 }
 
-/////////////////////////////////
 function BugReport_OnEvent(event)
 {
 	console.debug("BugReport_OnEvent("+event.currentTarget.id+","+event.type+","+event.value+")");
@@ -23,7 +21,6 @@ function BugReport_OnEvent(event)
 	}
 }
 
-//////////////////////////////////
 function BugReport_SendBugReport()
 {
 	dk.create("DKDebug/SendBugReport.js", function(){

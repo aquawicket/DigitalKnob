@@ -1,4 +1,4 @@
-////////////////////////////
+
 function SendBugReport_init()
 {
 	dk.create("DKDebug/SendBugReport.css");
@@ -6,7 +6,6 @@ function SendBugReport_init()
 	byId("SendBugReport_Button").addEventListener("click", SendBugReport_onevent);
 }
 
-////////////////////////////
 function SendBugReport_end()
 {
 	byId("SendBugReport_Button").removeEventListener("click", SendBugReport_onevent);
@@ -14,7 +13,6 @@ function SendBugReport_end()
 	dk.close("DKDebug/SendBugReport.css");
 }
 
-/////////////////////////////////////
 function SendBugReport_OnEvent(event)
 {
 	console.log("SendBugReport_OnEvent("+event.currentTarget.id+","+event.type+","+event.value+")");
@@ -23,7 +21,6 @@ function SendBugReport_OnEvent(event)
 	}
 }
 
-/////////////////////////////////////
 function SendBugReport_CreateReport()
 {
 	var str = byId("SendBugReport_Textarea").value;
@@ -43,7 +40,6 @@ function SendBugReport_CreateReport()
 	});
 }
 
-///////////////////////////////////
 function SendBugReport_SendReport()
 {
 	byId("SendBugReport_Image").style.display = "block";
