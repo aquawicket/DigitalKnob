@@ -1178,6 +1178,7 @@ dk.sendRequest = function dk_sendRequest(url, dk_sendRequest_callback, httpMetho
     debugXhr && file.includes("?") && (file = file.substring(0, file.lastIndexOf("?")));
 
     //FIXME: duktape
+    //url = encodeURIComponent(url).replace(";", "%3B");
     xhr.open(httpMethod, url, true);
     xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     xhr.timeout = 20000;
