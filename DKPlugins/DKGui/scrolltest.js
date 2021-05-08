@@ -1,28 +1,24 @@
-//////////////////////////
-function scrolltest_init()
-{
-	dk.create("DKGui/scrolltest.html", function(){
-	dk.create("DKGui/scrolltest1.html", function(){
-	dk.create("DKGui/scrolltest2.html", function(){
-		byId("DKGui/scrolltest.html").appendChild(byId("DKGui/scrolltest1.html"));
-		byId("DKGui/scrolltest.html").appendChild(byId("DKGui/scrolltest2.html"));
-		byId("bottomdiv").addEventListener("mousedown", scrolltest_onevent);
-	});		
-	});
-	});
+dk.scrolltest = new DKPlugin(dk_scrolltest)
+
+dk.scrolltest.init = function dk_scrolltest_init() {
+    dk.create("DKGui/scrolltest.html", function dk_create_callback() {
+        dk.create("DKGui/scrolltest1.html", function dk_create_callback() {
+            dk.create("DKGui/scrolltest2.html", function dk_create_callback() {
+                byId("DKGui/scrolltest.html").appendChild(byId("DKGui/scrolltest1.html"));
+                byId("DKGui/scrolltest.html").appendChild(byId("DKGui/scrolltest2.html"));
+                byId("bottomdiv").onmousedown = dk.scrolltest.onevent;
+            });
+        });
+    });
 }
 
-/////////////////////////
-function scrolltest_end()
-{
-	byId("bottomdiv").removeEventListener("mousedown", scrolltest_onevent);
+dk.scrolltest.end = function dk_scrolltest_end() {
+    byId("bottomdiv").onmousedown = null;
 }
 
-//////////////////////////////////
-function scrolltest_OnEvent(event)
-{	
-	dk.create("DKGui/DKMessageBox.js", function(){
-		DKFrame_Html("DKGui/DKMessageBox.html");
-		DKMessageBox_Message("bottomdiv clicked");
-	});
+dk.scrolltest.onevent = function dk_scrolltest_OnEvent(event) {
+    dk.create("DKGui/DKMessageBox.js", function dk_create_callback() {
+        dk.frame.create("DKGui/DKMessageBox.html");
+        // dk.messagebox.message("bottomdiv clicked");
+    });
 }
