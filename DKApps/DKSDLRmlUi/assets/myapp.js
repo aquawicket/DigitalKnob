@@ -1,5 +1,5 @@
 //loaders
-
+dk.create("DKAssets/DKAssets.js");
 dk.create("DK/DKPlugin.js");
 dk.create("DK/DKErrorHandler.js");
 
@@ -15,7 +15,7 @@ dk.create("DK/DKClock.js");
 dk.create("DK/DKNotifications.js");
 
 //dk.file
-//dk.create("DKFile/DKFile.js");
+dk.create("DKFile/DKFile.js");
 //dk.create("DKFile/DKSolution.js");
 
 //dk.audio

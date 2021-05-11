@@ -217,13 +217,11 @@ dk.trace.getArguments = function dk_trace_getArguments(func, getArgValues) {
     }
     let args = argsString.split(",");
     //FIXME: duktape
-    //for (let val of fn.arguments) {
-	for(let n=0; n<fn.arguments.length; n++){
+    for (let val of fn.arguments) {
         if (count > 0) {
             args[count] = " " + args[count];
         }
-        //args[count] += " = " + val;
-		args[count] += " = " + fn.arguments[n];
+        args[count] += " = " + val;
         count++;
     }
     argsString = args.toString();

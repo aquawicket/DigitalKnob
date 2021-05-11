@@ -60,11 +60,9 @@ dk.json.stringifyJson = function dk_json_stringifyJson(obj) {
 dk.json.findPartialMatch = function dk_json_findPartialMatch(obj, key, value) {
     //console.log(obj.length);
     let foundObj;
-    //FIXME: duktape
-    JSON.stringify(obj, (_,nestedValue)=>{
-        if (nestedValue && nestedValue[key] && (value.includes(nestedValue[key]) || nestedValue[key].includes(value))) {
+    JSON.stringify(obj, function(_,nestedValue){
+        if (nestedValue && nestedValue[key] && (value.includes(nestedValue[key]) || nestedValue[key].includes(value)))
             foundObj = nestedValue;
-        }
         return nestedValue;
     }
     );
