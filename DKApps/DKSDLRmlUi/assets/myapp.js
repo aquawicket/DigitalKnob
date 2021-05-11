@@ -1,7 +1,11 @@
 //loaders
 
 //dk
+dk.create("DK/DKPlugin.js");
+console.log("DKPlugin should be loaded");
 dk.create("DK/DKErrorHandler.js");
+
+/*
 //dk.create("DK/DK.css");
 //dk.create("DK/DKPhp.js");
 //dk.create("DK/DKTrace.js");
@@ -42,7 +46,7 @@ dk.create("DKGui/DKConsole.js");
 
 //dk.create("DKChart/DKChart.js");
 //dk.create("DKCodeMirror/DKCodeMirror.js");
-
+*/
 
 
 

@@ -115,7 +115,7 @@ bool DKRml::Init()
 
 	DKString html;
 	DKString workingPath = DKFile::local_assets;
-	DKFile::FileToString(workingPath +"/DKRml/blank.html", html);
+	DKFile::FileToString(workingPath +"DKRml/blank.html", html);
 	DKFile::ChDir(workingPath);
 	LoadHtml(html);
 	
