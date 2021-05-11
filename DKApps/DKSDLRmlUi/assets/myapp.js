@@ -1,14 +1,12 @@
 //loaders
 
-//dk
 dk.create("DK/DKPlugin.js");
-console.log("DKPlugin should be loaded");
 dk.create("DK/DKErrorHandler.js");
 
-/*
+
 //dk.create("DK/DK.css");
 //dk.create("DK/DKPhp.js");
-//dk.create("DK/DKTrace.js");
+dk.create("DK/DKTrace.js");
 //dk.create("DK/DKJson.js");
 dk.create("DK/DKValidate.js");
 dk.create("DK/sun.js");
@@ -34,7 +32,6 @@ dk.create("DKGui/DKFrame.js");
 dk.create("DKGui/DKMessageBox.js");
 dk.create("DKGui/DKDrag.js");
 dk.create("DKGui/DKResize.js");
-dk.create("DKGui/DKWidget.js");
 dk.create("DKGui/DKClipboard.js");
 //dk.create("DKGui/DKTable.css");
 dk.create("DKGui/DKTable.js");
@@ -46,7 +43,7 @@ dk.create("DKGui/DKConsole.js");
 
 //dk.create("DKChart/DKChart.js");
 //dk.create("DKCodeMirror/DKCodeMirror.js");
-*/
+
 
 
 
