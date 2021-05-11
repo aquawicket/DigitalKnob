@@ -22,6 +22,7 @@ dk.messagebox.create = function dk_messagebox_create(identifier, dk_messagebox_c
     dk.messagebox.box = new DKPlugin(identifier);
     if (!dk.messagebox.box)
         return error("dk.messagebox.box invalid", dk_messagebox_create_callback);
+
     dk.create("DKGui/DKMessageBox.html", function dk_create_callback(html) {
         if (!html)
             return error("invalid html", dk_messagebox_create_callback);

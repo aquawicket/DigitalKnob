@@ -281,16 +281,24 @@ if (!dk.hasCPP()) {
 
 if (!dk.hasCPP()) {
     dk.file.fileToString = function dk_file_fileToString(path, callback) {
-        let assets = dk.file.onlineAssets;
-        if (!assets) {
-            console.error("assets invalid");
-            return callback && callback(false);
+        if (dk.php) {
+            let assets = dk.file.onlineAssets;
+            if (!assets) {
+                console.error("assets invalid");
+                return callback && callback(false);
+            }
+            path = path.replace(" ", "_");
+            if(!path.includes(assets))
+                path = assets + "/" + path;
+            dk.php.call('POST', "/DKFile/DKFile.php", "fileToString", path, function dk_php_call_callback(str) {
+                return callback && callback(str);
+            });
         }
-        path = path.replace(" ", "_");
-        path = assets + "/" + path;
-        dk.php.call('POST', "/DKFile/DKFile.php", "fileToString", path, function dk_php_call_callback(str) {
-            return callback && callback(str);
-        });
+        else{
+            dk.sendRequest(path, function dk_sendRequest_callback(success, url, data) {
+                callback && callback(data);
+            });
+        }
     }
 } else {
     dk.file.fileToString = function dk_file_fileToString(path, callback) {
@@ -298,6 +306,7 @@ if (!dk.hasCPP()) {
         return callback && callback(str);
     }
 }
+dk.fileToString = dk.file.fileToString;
 
 if (!dk.hasCPP()) {
     dk.file.stringToFile = function dk_file_stringToFile(str, path, flags, callback) {

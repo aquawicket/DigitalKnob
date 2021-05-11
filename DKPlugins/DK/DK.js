@@ -470,7 +470,7 @@ dk.loadHtml = function dk_loadHtml(url, parent, dk_loadHtml_callback) {
     //if (url === ".html")
     //    url = "New.html";
 
-    dk.fileToStringAsync(url, function dk_fileToStringAsync(string) {
+    dk.fileToString(url, function dk_fileToString(string) {
         //Create an empty widget
         //if (!string)
         //    string = "<div id=\"" + url + "\" style=\"position:absolute;top:200rem;left:200rem;width:200rem;height:200rem;background-color:rgb(230,230,230);\"></div>";
@@ -741,15 +741,9 @@ dk.iE = function dk_iE() {
     return rv;
 }
 
-/*
-dk.fileToString = function dk_fileToString(url) {
-    return ajaxGetUrl(url);
-}
-*/
-
-dk.fileToStringAsync = function dk_fileToStringAsync(url, dk_fileToStringAsync_callback) {
+dk.fileToString = function dk_fileToString(url, dk_fileToString_callback) {
     dk.sendRequest(url, function dk_sendRequest_callback(success, url, data) {
-        return dk_fileToStringAsync_callback && dk_fileToStringAsync_callback(data);
+        return dk_fileToString_callback && dk_fileToString_callback(data);
     });
 }
 
@@ -833,7 +827,7 @@ dk.setInnerHtmlString = function dk_setInnerHtmlString(id, string) {
 }
 
 // *** EVENTS & VALUES *** //
-
+/*
 dk.getValue = function dk_getValue(variable) {
     //FIXME: phase this function out. This function will become obsolete.
     console.error("dk.getValue(): this function is deprecated and will be obsolete");
@@ -968,6 +962,7 @@ dk.getValue = function dk_getValue(variable) {
 
     return error("ERROR: dk.getValue(): unknown type\n");
 }
+*/
 
 dk.preloadFile = function dk_preloadFile(url) {
     var file = new Object();
@@ -1015,92 +1010,12 @@ Number.prototype.clamp = function Number_clamp(min, max) {
     return Math.min(Math.max(this, min), max);
 }
 
-/*
-dk.ajaxGet = function dk_ajaxGet(url, output) {
-    var request = "";
-    try {
-        request = new XMLHttpRequest();
-    } catch (e) {}
-    try {
-        request = new ActiveXObject("Msxml3.XMLHTTP");
-    } catch (e) {}
-    try {
-        request = new ActiveXObject("Msxml2.XMLHTTP.6.0");
-    } catch (e) {}
-    try {
-        request = new ActiveXObject("Msxml2.XMLHTTP.3.0");
-    } catch (e) {}
-    try {
-        request = new ActiveXObject("Msxml2.XMLHTTP");
-    } catch (e) {}
-    try {
-        request = new ActiveXObject("Microsoft.XMLHTTP");
-    } catch (e) {}
-
-    if (!request) {
-        return error("AJAX ERROR: Error creating request object");
-    }
-
-    request.onreadystatechange = function request_onreadystatechange() {
-        if (request.readyState === 4) {
-            if (request.status === 200 || request.status === 0) {
-                output.value = request.responseText;
-                //console.log("AJAX RETURN: "+output.value);
-                return true;
-            } else {
-                console.warn("status: " + request.status);
-                return error("AJAX ERROR: " + url + " " + request.statusText);
-            }
-        }
-    }
-
-    //try{ 
-    request.open("GET", url, false);
-    //FIXME
-    request.send();
-    //}
-    //catch(err){
-    //	output.value = "";
-    //	return false;
-    //}
-    return true;
-}
-*/
-
-/*
-dk.ajaxGetUrl = function dk_ajaxGetUrl(url) {
-    var response = new Object();
-    AjaxGet(url, response);
-
-    if (!response.value) {
-        return "ERROR";
-    }
-
-    /*
-    //php has a console.log() function that injects return messages with {"strings"}
-    //The response may contain {"log data"}, let's extract and print it.
-    //Also remove them and pass the remaining data on
-    //TODO - upgrade this to JSON date transfers
-    var place = 0;
-    var n = response.value.indexOf("{", place);
-    while (n !== -1) {
-        place = response.value.indexOf("}");
-        var res = response.value.substring(n + 1, place);
-        response.value = response.value.replace("{" + res + "}", "");
-        //console.log("PHPLog: "+res);
-        n = response.value.indexOf("{");
-    }
-    */
-
-//return response.value;
-//}
 
 //https://developer.mozilla.org/en-US/docs/Web/HTTP
 //https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers
 //https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods
 //https://developer.mozilla.org/en-US/docs/Web/HTTP/Status
 //https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy
-
 dk.sendRequest = function dk_sendRequest(url, dk_sendRequest_callback, httpMethod) {
     const debugXhr = false;
     if (!url)
@@ -1156,7 +1071,9 @@ dk.sendRequest = function dk_sendRequest(url, dk_sendRequest_callback, httpMetho
     //FIXME: duktape
     //url = encodeURIComponent(url).replace(";", "%3B");
     xhr.open(httpMethod, url, true);
-    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    //https://en.wikipedia.org/wiki/List_of_HTTP_header_fields
+    if(httpMethod === "POST" || httpMethod === "Put")
+        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     xhr.timeout = 20000;
 
     //Possible error codes
