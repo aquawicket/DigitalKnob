@@ -1206,7 +1206,7 @@ dk.errorCatcher = function dk_errorCatcher(object) {
         for (func in dkPlugin) {
             method = dkPlugin[func];
             if (typeof method === "function") {
-                console.debug("dk." + plugin + "." + func + "()");
+                //console.debug("dk." + plugin + "." + func + "()");
                 dkPlugin[func] = function(func, method) {
                     return function() {
                         try {
