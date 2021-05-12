@@ -36,15 +36,16 @@ dk.thirdFunc = function dk_thirdFunc(str1, str2, dk_thirdFunc_callback) {
     return dk_thirdFunc_callback(null, (str1 + str2));
 }
 
+/*
 function err(str) { 
     try { throw new Error(str); } 
     catch(e) { 
         window.lastError = e;
         throw(e);
      };
-
     //console.log(window.lastError.stack);
 }
+*/
 
 
 
@@ -56,20 +57,17 @@ function err(str) {
 dk.debug.debugFunc = function dk_debug_debugFunc() {
     //console.log("dk.debug.debugFunc");
     
-  
-    err("test error");
+    theTHins = 100 / 0;
+    //err("test error");
     return;
 
-
-   throw new Error('sdasd');
-
- 
-
+    /*
     dk.firstFunc("Don", "Donie", function dk_firstFunc_callback(err, data){
         if(err)
             return error("dk.firstFunc failed");
         console.log("data = "+data);
     });
+    */
 
 
     //const rtn = dk.file.makeDir("Test", "","", function dk_file_makeDir_callback(result){ console.debug(result); } );
@@ -427,6 +425,7 @@ dk.debug.debugFunc = function dk_debug_debugFunc() {
 dk.debug.init = function dk_debug_init() {
     dk.debug.keyHistory = new Array;
     document.addEventListener("keydown", dk.debug.onevent);
+    //dk.errorCatcher(dk.debug);
 }
 
 dk.debug.end = function dk_debug_end() {
@@ -712,6 +711,7 @@ dk.debug.crashCPP = function dk_debug_crashCPP() {
 }
 
 dk.debug.crashJS = function dk_debug_crashJS() {
+    console.log("dk.debug.crashJS()");
     throw new Error('CRASH TEST');
 }
 

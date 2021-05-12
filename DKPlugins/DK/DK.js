@@ -1195,4 +1195,26 @@ Object.prototype.clone = Array.prototype.clone = function()
         return this;
 }
 
+//https://humanwhocodes.com/blog/2009/04/28/javascript-error-handling-anti-pattern/
+dk.errorCatcher = function dk_errorCatcher(object){
+    var name,
+        method;
+
+    for (name in object){
+        method = object[name];
+        if (typeof method == "function"){
+            object[name] = function(name, method){
+                return function(){
+                    try {
+                        return method.apply(this, arguments);
+                    } catch (err) {
+                        console.log(err.stack, "red");
+                    }
+                };
+
+            }(name, method);
+        }
+    }
+}
+
 dk.init();
