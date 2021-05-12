@@ -2,6 +2,7 @@
 
 dk.trace = new Object;
 
+/*
 window.onerror = function window_onerror(msg, url, lineNo, columnNo, err) {
     if (!err && !msg)
         return error("window.onerror failed: err and msg variables invalid");
@@ -14,6 +15,7 @@ window.onerror = function window_onerror(msg, url, lineNo, columnNo, err) {
 window.onunhandledrejection = function window_onunhandledrejection(event) {
     return error(event);
 }
+*/
 
 dk.trace.editFile = function dk_trace_editFile(file, line, ch) {
     file = file.replace("file:///", "");

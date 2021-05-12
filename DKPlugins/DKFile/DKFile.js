@@ -286,7 +286,7 @@ if (!dk.hasCPP()) {
                 return error("dk.file.onlineAssets invalid", callback);
                 
             //path = path.replace(" ", "_");
-            !path.includes(assets) && (path = assets + "/" + path);
+            !path.includes(dk.file.onlineAssets) && (path = dk.file.onlineAssets + "/" + path);
             dk.php.call('POST', "/DKFile/DKFile.php", "fileToString", path, function dk_php_call_callback(str) {
                 return callback(str);
             });

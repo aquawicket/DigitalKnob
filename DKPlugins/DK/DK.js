@@ -1,5 +1,7 @@
 "use strict";
 
+let g_lastManualError;
+
 window.dk = new Object;
 const duktape = window.duktape;
 
@@ -995,22 +997,6 @@ dk.removeFromLocalStorage = function dk_removeFromLocalStorage(name) {
     localStorage.removeItem(name);
 }
 
-/**
- * Returns a number whose value is limited to the given range.
- *
- * Example: limit the output of this computation to between 0 and 255
- * (x * 255).clamp(0, 255)
- *
- * @param {Number} min The lower boundary of the output range
- * @param {Number} max The upper boundary of the output range
- * @returns A number in the range [min, max]
- * @type Number
- */
-Number.prototype.clamp = function Number_clamp(min, max) {
-    return Math.min(Math.max(this, min), max);
-}
-
-
 //https://developer.mozilla.org/en-US/docs/Web/HTTP
 //https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers
 //https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods
@@ -1134,6 +1120,79 @@ dk.checkForUNICODE = function dk_checkForUNICODE(str) {
 
 dk.validateStrict = function dk_validateStrict(str) {
     return str;
+}
+
+//////// Pollyfils
+
+if (!Array.prototype.includes) {
+  Array.prototype.includes = function(searchElement /*, fromIndex*/) {
+    'use strict';
+    if (this == null) {
+      throw new TypeError('Array.prototype.includes called on null or undefined');
+    }
+
+    var O = Object(this);
+    var len = parseInt(O.length, 10) || 0;
+    if (len === 0) {
+      return false;
+    }
+    var n = parseInt(arguments[1], 10) || 0;
+    var k;
+    if (n >= 0) {
+      k = n;
+    } else {
+      k = len + n;
+      if (k < 0) {k = 0;}
+    }
+    var currentElement;
+    while (k < len) {
+      currentElement = O[k];
+      if (searchElement === currentElement ||
+         (searchElement !== searchElement && currentElement !== currentElement)) { // NaN !== NaN
+        return true;
+      }
+      k++;
+    }
+    return false;
+  };
+}
+
+/**
+ * Returns a number whose value is limited to the given range.
+ *
+ * Example: limit the output of this computation to between 0 and 255
+ * (x * 255).clamp(0, 255)
+ *
+ * @param {Number} min The lower boundary of the output range
+ * @param {Number} max The upper boundary of the output range
+ * @returns A number in the range [min, max]
+ * @type Number
+ */
+Number.prototype.clamp = function Number_clamp(min, max) {
+    return Math.min(Math.max(this, min), max);
+}
+
+Object.prototype.clone = Array.prototype.clone = function()
+{
+    if (Object.prototype.toString.call(this) === '[object Array]')
+    {
+        var clone = [];
+        for (var i=0; i<this.length; i++)
+            clone[i] = this[i].clone();
+
+        return clone;
+    } 
+    else if (typeof(this)=="object")
+    {
+        var clone = {};
+        for (var prop in this)
+            if (this.hasOwnProperty(prop))
+                clone[prop] = this[prop].clone();
+
+        return clone;
+    }
+    else
+        return this;
 }
 
 dk.init();

@@ -2,41 +2,75 @@
 
 dk.debug = new DKPlugin("dk_debug");
 
+
 //Error-first callbacks
-dk.firstFunc = function dk_firstFunc(str1, str2) {
-    dk.secondFunc(str1, str2, function dk_secondFunc_callback(err, result) {
+dk.firstFunc = function dk_firstFunc(str1, str2, callback) {
+    console.debug("dk.firstFunc("+str1+","+str2+")");
+    return dk.secondFunc(str1, str2, function dk_secondFunc_callback(err, result) {
+        console.debug("dk.secondFuncCallback("+err+","+result+")");
         if (err) {
             console.error(err.name + " " + err.message);
-            return err;
+            return callback(err);
         }
         console.log("the result was " + result);
-        return result;
+        return callback(null, result);
     });
+    return error("Don't use return without callback");
 }
-
 dk.secondFunc = function dk_secondFunc(str1, str2, dk_secondFunc_callback) {
-    dk.thirdFunc(str1, str2, function dk_thirdFunc(err, result) {
+    console.debug("dk.secondFunc("+str1+","+str2+")");
+    dk.thirdFunc(str1, str2, function dk_thirdFunc_callback(err, result) {
+        console.debug("dk.thirdFuncCallback("+err+","+result+")");
         if (err) {
-            console.log("got an error, passing it along " + err.name + " " + err.message);
+            throw err;
+            console.log("dk.secondFunc(): got an error, passing it along");
             return dk_secondFunc_callback(err);
         }
         return dk_secondFunc_callback(null, result);
     });
 }
-
 dk.thirdFunc = function dk_thirdFunc(str1, str2, dk_thirdFunc_callback) {
+    console.debug("dk.thirdFunc("+str1+","+str2+")");
     if (str1 !== str2)
         return dk_thirdFunc_callback(new Error("The strings must match"));
     return dk_thirdFunc_callback(null, (str1 + str2));
 }
+
+function err(str) { 
+    try { throw new Error(str); } 
+    catch(e) { 
+        window.lastError = e;
+        throw(e);
+     };
+
+    //console.log(window.lastError.stack);
+}
+
+
+
+
 
 ////////////////////////////////////
 ///  A Convienient Debug Function
 ///////////////////////////////////
 dk.debug.debugFunc = function dk_debug_debugFunc() {
     //console.log("dk.debug.debugFunc");
+    
+  
+    err("test error");
+    return;
 
-    dk.firstFunc("Don", "Donie");
+
+   throw new Error('sdasd');
+
+ 
+
+    dk.firstFunc("Don", "Donie", function dk_firstFunc_callback(err, data){
+        if(err)
+            return error("dk.firstFunc failed");
+        console.log("data = "+data);
+    });
+
 
     //const rtn = dk.file.makeDir("Test", "","", function dk_file_makeDir_callback(result){ console.debug(result); } );
 

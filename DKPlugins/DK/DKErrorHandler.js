@@ -3,8 +3,8 @@
 
 dk.errorhandler = new DKPlugin("dk_errorhandler");
 
-dk.errorhandler.init = function dk_errorhandler_init(){}
-dk.errorhandler.init = function dk_errorhandler_end(){}
+dk.errorhandler.init = function dk_errorhandler_init() {}
+dk.errorhandler.init = function dk_errorhandler_end() {}
 
 dk.errorhandler.create = function dk_errorhandler_create() {
 
@@ -40,6 +40,18 @@ dk.errorhandler.create = function dk_errorhandler_create() {
 
         function onerror(msg, url, line, col, error) {
             window.onanyerror.apply(this, arguments);
+            
+            //const args = arguments;
+            if (!error && !msg.error){
+                //args[0] = arguments[0].clone();
+                //args[0].err = lastError;
+                dk.console.log(lastError.stack, "red");
+            }else if(error){
+                dk.console.log(error.stack, "red");
+            }else if(msg.error){
+                dk.console.log(msg.error.stack, "red");
+            }
+
             if (onerrorx)
                 return onerrorx.apply(null, arguments);
         }
