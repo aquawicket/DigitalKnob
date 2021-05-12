@@ -425,7 +425,7 @@ dk.debug.debugFunc = function dk_debug_debugFunc() {
 dk.debug.init = function dk_debug_init() {
     dk.debug.keyHistory = new Array;
     document.addEventListener("keydown", dk.debug.onevent);
-    //dk.errorCatcher(dk.debug);
+    //DKPlugin.prototype.init.call(this);
 }
 
 dk.debug.end = function dk_debug_end() {

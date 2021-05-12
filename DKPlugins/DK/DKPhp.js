@@ -2,6 +2,11 @@
 
 dk.php = new DKPlugin("dk_php");
 
+dk.php.init = function dk_php_init(){
+    console.log("dk.php.init()");
+    //DKPlugin.prototype.init.call(this);
+}
+
 //dk.php.call("GET", "/DK/DK.php", "Function", "args", "args", dk_php_callback);
 dk.php.call = function dk_php_call(httpMethod, phpPath, funcName) {
     const args = arguments;

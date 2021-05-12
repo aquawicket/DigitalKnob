@@ -428,6 +428,7 @@ dk.loadJs = function dk_loadJs(url, dk_loadJs_callback) {
                     done = true;
                     return dk_loadJs_callback && dk_loadJs_callback(true);
                 });
+                DKPlugin.prototype.init.call(plugin.instance);
             } else {
                 done = true;
                 return dk_loadJs_callback && dk_loadJs_callback(true);
@@ -1058,7 +1059,7 @@ dk.sendRequest = function dk_sendRequest(url, dk_sendRequest_callback, httpMetho
     //url = encodeURIComponent(url).replace(";", "%3B");
     xhr.open(httpMethod, url, true);
     //https://en.wikipedia.org/wiki/List_of_HTTP_header_fields
-    if(httpMethod === "POST" || httpMethod === "Put")
+    if (httpMethod === "POST" || httpMethod === "Put")
         xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     xhr.timeout = 20000;
 
@@ -1125,36 +1126,40 @@ dk.validateStrict = function dk_validateStrict(str) {
 //////// Pollyfils
 
 if (!Array.prototype.includes) {
-  Array.prototype.includes = function(searchElement /*, fromIndex*/) {
-    'use strict';
-    if (this == null) {
-      throw new TypeError('Array.prototype.includes called on null or undefined');
-    }
+    Array.prototype.includes = function(searchElement /*, fromIndex*/
+    ) {
+        'use strict';
+        if (this == null) {
+            throw new TypeError('Array.prototype.includes called on null or undefined');
+        }
 
-    var O = Object(this);
-    var len = parseInt(O.length, 10) || 0;
-    if (len === 0) {
-      return false;
+        var O = Object(this);
+        var len = parseInt(O.length, 10) || 0;
+        if (len === 0) {
+            return false;
+        }
+        var n = parseInt(arguments[1], 10) || 0;
+        var k;
+        if (n >= 0) {
+            k = n;
+        } else {
+            k = len + n;
+            if (k < 0) {
+                k = 0;
+            }
+        }
+        var currentElement;
+        while (k < len) {
+            currentElement = O[k];
+            if (searchElement === currentElement || (searchElement !== searchElement && currentElement !== currentElement)) {
+                // NaN !== NaN
+                return true;
+            }
+            k++;
+        }
+        return false;
     }
-    var n = parseInt(arguments[1], 10) || 0;
-    var k;
-    if (n >= 0) {
-      k = n;
-    } else {
-      k = len + n;
-      if (k < 0) {k = 0;}
-    }
-    var currentElement;
-    while (k < len) {
-      currentElement = O[k];
-      if (searchElement === currentElement ||
-         (searchElement !== searchElement && currentElement !== currentElement)) { // NaN !== NaN
-        return true;
-      }
-      k++;
-    }
-    return false;
-  };
+    ;
 }
 
 /**
@@ -1172,47 +1177,46 @@ Number.prototype.clamp = function Number_clamp(min, max) {
     return Math.min(Math.max(this, min), max);
 }
 
-Object.prototype.clone = Array.prototype.clone = function()
-{
-    if (Object.prototype.toString.call(this) === '[object Array]')
-    {
+/*
+Object.prototype.clone = Array.prototype.clone = function() {
+    if (Object.prototype.toString.call(this) === '[object Array]') {
         var clone = [];
-        for (var i=0; i<this.length; i++)
+        for (var i = 0; i < this.length; i++)
             clone[i] = this[i].clone();
-
         return clone;
-    } 
-    else if (typeof(this)=="object")
-    {
+    } else if (typeof (this) == "object") {
         var clone = {};
         for (var prop in this)
             if (this.hasOwnProperty(prop))
                 clone[prop] = this[prop].clone();
-
         return clone;
-    }
-    else
+    } else
         return this;
 }
+*/
 
 //https://humanwhocodes.com/blog/2009/04/28/javascript-error-handling-anti-pattern/
-dk.errorCatcher = function dk_errorCatcher(object){
-    var name,
-        method;
+dk.errorCatcher = function dk_errorCatcher(object) {
+    var plugin, func, method;
 
-    for (name in object){
-        method = object[name];
-        if (typeof method == "function"){
-            object[name] = function(name, method){
-                return function(){
-                    try {
-                        return method.apply(this, arguments);
-                    } catch (err) {
-                        console.log(err.stack, "red");
+    for (plugin in dk) {
+        const dkPlugin = dk[plugin];
+        if (object !== dkPlugin)
+            continue;
+        for (func in dkPlugin) {
+            method = dkPlugin[func];
+            if (typeof method === "function") {
+                console.debug("dk." + plugin + "." + func + "()");
+                dkPlugin[func] = function(func, method) {
+                    return function() {
+                        try {
+                            return method.apply(this, arguments);
+                        } catch (err) {
+                            console.log(err.stack, "red");
+                        }
                     }
-                };
-
-            }(name, method);
+                }(func, method);
+            }
         }
     }
 }
