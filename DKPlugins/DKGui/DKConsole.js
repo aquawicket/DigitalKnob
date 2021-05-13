@@ -218,6 +218,11 @@ dk.console.create = function dk_console_create(parent, id, top, bottom, left, ri
     dk.console.Logger = function dl_console_Logger() {
         const args = dk.console.ColorChromeConsole(arguments);
 
+        if((div.scrollHeight - div.scrollTop) < (div.offsetHeight + 1))
+            div.scroll = true;
+        else
+            div.scroll = false;
+       
         const msgDiv = document.createElement("div");
         msgDiv.setAttribute("dk_console", "msgDiv");
 
@@ -254,7 +259,7 @@ dk.console.create = function dk_console_create(parent, id, top, bottom, left, ri
 
         div.appendChild(msgDiv);
         msgDiv.appendChild(msgSpan);
-        div.scrollTop = div.scrollHeight;
+        div.scroll && (div.scrollTop = div.scrollHeight);
 
         //Limit the number of stored lines
         if (div.childElementCount > dk.console.limit) {
