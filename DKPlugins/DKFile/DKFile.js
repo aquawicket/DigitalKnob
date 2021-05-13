@@ -16,10 +16,10 @@ dk.file.makeDir = function dk_file_makeDir(path, mode, recursive, callback) {
     !recursive && (recursive = false);
     dk.file.isDir(path, function dk_file_isDir_callback(result) {
         if (result)
-            return warn("Directory already exists", callback);
+            return callback;// warn("Directory already exists", callback);
         console.debug("Creating directory " + path);
         dk.php.call("POST", "/DKFile/DKFile.php", "makeDir", path, /*mode, recursive,*/
-        function dk_php_pushDKAssets_callback(result) {
+        function dk_php_call_callback(result) {
             return callback(result);
         });
     });

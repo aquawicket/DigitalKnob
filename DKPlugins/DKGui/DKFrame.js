@@ -3,7 +3,9 @@
 dk.frame = new DKPlugin("dk_frame");
 dk.frame.frames = new Array;
 
-dk.frame.init = function dk_frame_init() {}
+dk.frame.init = function dk_frame_init() {
+    dk.create("DKGui/DKFrame.css");
+}
 dk.frame.end = function dk_frame_end() {}
 
 dk.frame.create = function dk_frame_create(obj) {

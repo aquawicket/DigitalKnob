@@ -17,6 +17,8 @@ dk.init = function dk_init() {
     dk.networkIP = "192.168.1.210";
     dk.publicIP = "47.148.252.2";
     dk.port = "2393";
+
+    dk.create("DK/DK.css");
     /*
     var LOG_DEBUG = false;
     var LOG_INFO = true;
@@ -260,7 +262,10 @@ dk.getPlugin = function dk_getPlugin(url) {
     }
     let plugin = dk[pluginName];
     if (!plugin) {
-        return warn(file + " does not contain a dk." + pluginName + " Object");
+        if (pluginName !== "plugin")
+            return error(file + " does not contain a dk." + pluginName + " Object");
+        else
+            return null;
     }
     plugin.name = pluginName;
     return plugin;
@@ -289,8 +294,8 @@ dk.create = function dk_create(data, dk_create_callback) {
         if (!dk.loadHtml(arry[0], arry[1], function dk_loadHtml_callback(element) {
             if (typeof dk_create_callback === "function")
                 return dk_create_callback(element);
-            //else
-            //    console.warn("dk.create(" + data + "): does not have a callback");
+            else
+                console.warn("dk.create(" + data + "): does not have a callback");
         })) {
             console.error("dk.loadHtml failed");
             //return dk_create_callback && dk_create_callback(false);
@@ -383,10 +388,12 @@ dk.loadJs = function dk_loadJs(url, dk_loadJs_callback) {
         return error("url invalid", dk_loadJs_callback(false));
 
     if (dk.getObjects().includes(url)) {
+        console.warn(url + " already loaded...");
+        return !!dk_loadJs_callback(true);
+        return true;
+
+
         console.warn(url + " already loaded. Reloading...");
-        return dk_loadJs_callback && dk_loadJs_callback(true);
-        
-        console.warn(url + " already loaded. Reloading...");kcrash
         dk.close(url);
         /*
         var plugin = dk.getPlugin(url);
@@ -413,20 +420,11 @@ dk.loadJs = function dk_loadJs(url, dk_loadJs_callback) {
     script.onload = script.onreadystatechange = function script_onload() {
         //FIXME - DigitalKnob can't trigger onload yet.
         if (!done && (!this.readyState || this.readyState === "loaded" || this.readyState === "complete")) {
-
-            //FIXME: This is the old way to run init on plugins
-            var old_plugin = url.substring(url.lastIndexOf("/") + 1);
-            old_plugin = old_plugin.substring(0, old_plugin.lastIndexOf("."));
-            old_plugin = old_plugin + "_init()";
-            old_plugin = window[old_plugin];
-            if (typeof old_plugin === 'function')
-                return error("FIXME: (" + url + ") This plugin uses Init the old way", dk_loadJs_callback(false));
-
             var plugin = dk.getPlugin(url);
             plugin && console.log("loading dk." + plugin.name + " plugin");
 
             if (plugin && plugin.init) {
-                console.log("running dk." + plugin.name + ".init()");
+                //console.debug("running dk." + plugin.name + ".init()");
                 plugin.init(function plugin_init_callback() {
                     done = true;
                     return dk_loadJs_callback && dk_loadJs_callback(true);
@@ -449,7 +447,7 @@ dk.loadJs = function dk_loadJs(url, dk_loadJs_callback) {
         var plugin = dk.getPlugin(url);
         plugin && console.log("loading dk." + plugin.name + " plugin");
         if (plugin && plugin.init) {
-            console.log("running dk." + plugin.name + ".init()");
+            //console.debug("running dk." + plugin.name + ".init()");
             plugin.init();
         } else if (typeof old_plugin === 'function') {
             return error("FIXME: (" + url + ") This plugin uses Init the old way", dk_loadJs_callback(false));
@@ -1007,6 +1005,7 @@ dk.removeFromLocalStorage = function dk_removeFromLocalStorage(name) {
 //https://developer.mozilla.org/en-US/docs/Web/HTTP/Status
 //https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy
 dk.sendRequest = function dk_sendRequest(url, dk_sendRequest_callback, httpMethod) {
+    
     const debugXhr = false;
     if (!url)
         return error("url invalid", dk_sendRequest_callback(false));
@@ -1104,8 +1103,8 @@ dk.sendRequest = function dk_sendRequest(url, dk_sendRequest_callback, httpMetho
     }
     xhr.ontimeout = function xhr_ontimeout(event) {
         dk.console.error && dk.console.error("GET <a href=' " + url + " ' target='_blank' style='color:rgb(213,213,213)'>" + url + "</a> net::ERR_CONNECTION_TIMED_OUT");
-        debugXhr && console.debug("XMLHttpRequest.onabort(): " + file + " readyState:" + xhr.readyState + " status:" + xhr.status);
-        return dk_sendRequest_callback(false, url, xhr.responseText);
+        debugXhr && console.debug("XMLHttpRequest.ontimeout(): " + file + " readyState:" + xhr.readyState + " status:" + xhr.status);
+        return dk_sendRequest_callback(false, url, "ontimeout");
     }
 
     xhr.send();
@@ -1210,12 +1209,13 @@ dk.errorCatcher = function dk_errorCatcher(object) {
             method = dkPlugin[func];
             if (typeof method === "function") {
                 //console.debug("dk." + plugin + "." + func + "()");
-                dkPlugin[func] = function(func, method) {
+                dkPlugin[func] = function errorCatcher(func, method) {
                     return function() {
                         try {
                             return method.apply(this, arguments);
                         } catch (err) {
-                            console.log(err.stack, "red");
+                            const stack = dk.trace.stackToConsoleString(err);
+                            console.log(stack);
                         }
                     }
                 }(func, method);

@@ -81,12 +81,8 @@ dk.trace.stackToConsoleString = function dk_trace_stackToConsoleString(arg, dele
         return error("StackToConsoleString(): typeof arg invalid: " + typeof arg);
     }
 
-    //Remove the error function itsef from the list
-    //if (jsonStack[1].func)
-    //console.debug(jsonStack[1].func);
-
     //Remove calls up to the function specified in deleteTo
-    deleteTo = null;
+    //deleteTo = null;
     if (deleteTo) {
         for (let n = 1; n < jsonStack.length; n++) {
             if (jsonStack[n].func === deleteTo) {
@@ -96,9 +92,9 @@ dk.trace.stackToConsoleString = function dk_trace_stackToConsoleString(arg, dele
     }
 
     let str;
-    headerMsg ? str = jssonStack[0] : str = "";
+    headerMsg ? str = jsonStack[0].msg+"\n" : str = "";
     for (let n = 1; n < jsonStack.length; n++) {
-        str += "  at " + jsonStack[n].func + " ";
+        str += "    at " + jsonStack[n].func + " ";
         str += "(<a href='#' onClick='dk.trace.editFile(\"" + jsonStack[n].filePath + "\",\"" + jsonStack[n].lineNum + "\")' style='color:rgb(213,213,213)'>" + jsonStack[n].file + ":" + jsonStack[n].lineNum + "</a>)<br>";
     }
 
@@ -121,7 +117,7 @@ dk.trace.getStack = function dk_trace_getStack(msg) {
             throw e;
         } catch (e) {
             if (!e.stack) {
-                return 0;
+                return error("e.stack invalid");
                 // browser too old
             }
         }
@@ -143,8 +139,6 @@ dk.trace.stackToJSON = function dk_trace_stackToJSON(stack) {
         msg
     }];
     for (let n = 1; n < lines.length; n++) {
-        //FIXME: the original line should not be altered,
-        //altering the line could mess up the extraction
         let line = lines[n].trim();
         line = line.replace("at ", "");
         line = line.replace("(", "");
@@ -153,19 +147,14 @@ dk.trace.stackToJSON = function dk_trace_stackToJSON(stack) {
         const func = line.split(" ").shift();
         line = line.replace(func + " ", "");
 
-        // some stack lines don't have a valid function name
-        /*
-        if (IsValidVarName(func)) {//func = "<i>anonymous</i>";
-        } else {
-            line = line.replace(func, "");
-        }
-        */
-
         const charNum = line.split(":").pop();
         line = line.replace(":" + charNum, "");
 
         const lineNum = line.split(":").pop();
         line = line.replace(":" + lineNum, "");
+
+        const as = line.split("]").shift()+"]";
+        line = line.replace(as + " ", "");
 
         const file = line.split("/").pop();
 

@@ -30,6 +30,14 @@ dk.table = new DKPlugin("dk_table");
 // The rowName is set to Peter on the <tr> element
 // The columnName is set to address on the <td> element
 
+dk.table.init = function dk_table_init(){
+    dk.create("DKGui/DKTable.css");
+}
+
+dk.table.end = function dk_table_close(){
+    dk.close("DKGui/DKTable.css");
+}
+
 dk.table.create = function dk_table_create(parent, id, top, bottom, left, right, width, height) {
     const table = document.createElement('table');
     table.setAttribute("dk_table", "table");

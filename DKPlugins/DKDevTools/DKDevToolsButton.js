@@ -4,7 +4,6 @@ dk.devtoolsbutton = new DKPlugin("dk_devtoolsbutton");
 
 dk.devtoolsbutton.init = function dk_devtoolsbutton_init() {
     dk.preloadImage("DKDevTools/developer.png");
-    dk.create("DKDebug/DKDebug.js");
 }
 
 dk.devtoolsbutton.create = function dk_devtools_create() {

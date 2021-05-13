@@ -3,9 +3,6 @@
 
 dk.errorhandler = new DKPlugin("dk_errorhandler");
 
-dk.errorhandler.init = function dk_errorhandler_init() {}
-dk.errorhandler.init = function dk_errorhandler_end() {}
-
 dk.errorhandler.create = function dk_errorhandler_create() {
 
     // Capture error data for debugging in web console
@@ -37,15 +34,14 @@ dk.errorhandler.create = function dk_errorhandler_create() {
     function handleGlobal() {
         const onerrorx = window.onerror;
         window.addEventListener('error', onerror);
-        function onerror(msg, url, line, col, error){
-            //const args = arguments;
-            //args[0] = arguments[0].clone();
-            //args[0].err = lastError;
-                
-            if (!error && !msg.error && window.lastError) {      
+        function onerror(msg, url, line, col, error) {
+            window.onanyerror.apply(this, arguments);
+            
+            /*if (!error && !msg.error && window.lastError) {      
                 dk.console.log(lastError.stack, "red");
                 lastError = null;
-            } else if (error) {
+            } else*/
+            if (error) {
                 dk.console.log(error.stack, "red");
             } else if (msg.error) {
                 dk.console.log(msg.error.stack, "red");
@@ -53,7 +49,7 @@ dk.errorhandler.create = function dk_errorhandler_create() {
                 dk.console.error(msg.message);
             }
 
-            window.onanyerror.apply(this, arguments);
+            
             if (onerrorx)
                 return onerrorx.apply(null, arguments);
         }

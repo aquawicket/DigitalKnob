@@ -3,15 +3,16 @@
 dk.devtools = new DKPlugin("dk_devtools");
 
 dk.devtools.create = function dk_devtools_create(){
-    console.debug("dk.devtools.create()");
+    //console.debug("dk.devtools.create()");
     dk.devtools.div = dk.frame.createNewWindow("DevTools", "200rem", "300rem");
     if (!dk.devtools.div)
-        return;
+        return false;
 
     const frame = dk.frame.getFrame(dk.devtools.div);
     frame.titlebaricon.src = "DKDevTools/developer.png";
 
     dk.devtools.addTools();
+    return true;
 }
 
 dk.devtools.addTools = function dk_devtools_addTools() {

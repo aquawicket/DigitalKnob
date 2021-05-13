@@ -12,7 +12,7 @@ dk.console = new DKPlugin("dk_console");
 // If you use xconsole.log, it will only log the browser console.
 // Note: some messages cannot be withheld from the browser console.
 const xconsole = new Object;
-(function xconsole() {
+(function() {
     xconsole.on = true;
     xconsole.assert = console.assert;
     xconsole.clear = console.clear;
@@ -134,12 +134,19 @@ const xconsole = new Object;
     }
 }());
 
-dk.console.create = function dk_console_create(parent, id, top, bottom, left, right, width, height) {
+dk.console.init = function dk_console_init() {
     dk.create("DKGui/DKConsole.css");
+}
+
+dk.console.end = function dk_console_end() {
+    dk.close("DKGui/DKConsole.css");
+}
+
+dk.console.create = function dk_console_create(parent, id, top, bottom, left, right, width, height) {
     dk.console.limit = 100;
     const container = document.createElement("div");
     dk.console.container = container;
-    container.setAttribute("dk_console","container");
+    container.setAttribute("dk_console", "container");
     container.id = id;
     container.style.top = top;
     container.style.bottom = bottom;
@@ -160,7 +167,7 @@ dk.console.create = function dk_console_create(parent, id, top, bottom, left, ri
     parent.appendChild(container);
 
     const div = document.createElement("div");
-    div.setAttribute("dk_console","div");
+    div.setAttribute("dk_console", "div");
     div.style.position = "absolute";
     div.style.padding = "0rem";
     div.style.backgroundColor = "rgb(36,36,36)";
@@ -177,7 +184,7 @@ dk.console.create = function dk_console_create(parent, id, top, bottom, left, ri
     container.appendChild(div);
 
     const command = document.createElement("input");
-    command.setAttribute("dk_console","command");
+    command.setAttribute("dk_console", "command");
     command.type = "text";
     command.style.position = "absolute";
     command.style.left = "0rem";
@@ -208,18 +215,18 @@ dk.console.create = function dk_console_create(parent, id, top, bottom, left, ri
     }
     container.appendChild(command);
 
-    dk.console.Logger = function dl_console_Logger(){
+    dk.console.Logger = function dl_console_Logger() {
         const args = dk.console.ColorChromeConsole(arguments);
 
         const msgDiv = document.createElement("div");
-        msgDiv.setAttribute("dk_console","msgDiv");
+        msgDiv.setAttribute("dk_console", "msgDiv");
 
         const msgSpan = document.createElement("span");
         //msgSpan.className = "dkconsole";
         //TODO: If the message is the same as the last, just have a count next to the original. 
-        msgSpan.innerHTML = arguments[0];
-        msgSpan.setAttribute("dk_console","msgSpan");
-        
+        msgSpan.innerHTML = arguments[0].replace("<anonymous>","&lt;anonymous&gt;");
+        msgSpan.setAttribute("dk_console", "msgSpan");
+
         if (arguments[1] === "red") {
             msgSpan.style.color = "rgb(255,128,128)";
             msgDiv.style.backgroundColor = "rgb(41,0,0)";
@@ -270,7 +277,7 @@ dk.console.create = function dk_console_create(parent, id, top, bottom, left, ri
     dk.console.error = function dk_console_error(str) {
         if (!str)
             return warn("str invalid");
-        const newstr = str+"\n"+dk.trace.stackToConsoleString("", "console.error");
+        const newstr = str + "\n" + dk.trace.stackToConsoleString("", "DKPlugin.dk_console_error");
         dk.console.Logger(newstr, "red");
     }
     dk.console.group = function dk_console_group(str, style) {
@@ -295,13 +302,13 @@ dk.console.create = function dk_console_create(parent, id, top, bottom, left, ri
     dk.console.trace = function dk_console_trace(str, style) {
         if (!str)
             return warn("str invalid");
-        const newstr = str+"\n"+dk.trace.stackToConsoleString("", "console.trace");
+        const newstr = str + "\n" + dk.trace.stackToConsoleString("", "console.trace");
         dk.console.Logger(newstr);
     }
     dk.console.warn = function dk_console_warn(str) {
         if (!str)
             return warn("str invalid");
-        const newstr = str+"\n"+dk.trace.stackToConsoleString("", "console.warn");
+        const newstr = str + "\n" + dk.trace.stackToConsoleString("", "console.warn");
         dk.console.Logger(newstr, "yellow");
     }
 
