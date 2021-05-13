@@ -227,7 +227,7 @@ dk.console.create = function dk_console_create(parent, id, top, bottom, left, ri
         msgDiv.setAttribute("dk_console", "msgDiv");
 
         const msgSpan = document.createElement("span");
-        //msgSpan.className = "dkconsole";
+
         //TODO: If the message is the same as the last, just have a count next to the original.
         if (arguments[0].includes && arguments[0].includes("<anonymous>")) {
             arguments[0] = arguments[0].replace("<anonymous>", "&lt;anonymous&gt;");

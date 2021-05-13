@@ -59,7 +59,7 @@ dk.debug.debugFunc = function dk_debug_debugFunc() {
     
     //theTHins = 100 / 0;
     //err("test error");
-    dk.file.fileToString("/DKGui/DKClipboard.js", function(code){
+    dk.file.fileToString("/DKInputTest/DKInput.js", function(code){
         dk.testSyntax(code);
     })
 

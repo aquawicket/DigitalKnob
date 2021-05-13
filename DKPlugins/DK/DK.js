@@ -46,6 +46,7 @@ const error = function error(str, callback, rtnval) {
     !rtnval && (rtnval = false);
     console.error(str);
     callback && callback(rtnval);
+    //throw new Error(str);
     return rtnval;
 }
 
@@ -56,6 +57,13 @@ const warn = function warn(str, callback, rtnval) {
     return rtnval;
 }
 
+
+const require = function require(){
+    var name = Object.keys(arguments[0])[0];
+    var value = arguments[0][name];
+    if(!value)
+        throw new Error(" VARIABLE: "+name+"("+value+")  is invalid");
+}
 //These are use for rem units and zoom level. They are already in DK.css
 //document.getElementsByTagName("html")[0].style.fontSize = "1.0px";
 //document.body.style.fontSize = "13em";
@@ -1231,11 +1239,7 @@ dk.testSyntax = function dk_testSyntax(code) {
     try {
         new Function([],code)
     } catch (err) {
-        //if (err.name !== 'SyntaxError')
-        //    throw err
-        // Throw the error if it is not a SyntaxError
-        const stack = dk.trace.stackToConsoleString(err);
-        console.log(stack, 'red');
+          throw err
     }
 }
 

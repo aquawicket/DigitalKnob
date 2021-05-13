@@ -288,10 +288,14 @@ if (!dk.hasCPP()) {
             //path = path.replace(" ", "_");
             !path.includes(dk.file.onlineAssets) && (path = dk.file.onlineAssets + "/" + path);
             dk.php.call('POST', "/DKFile/DKFile.php", "fileToString", path, function dk_php_call_callback(str) {
+                if(!str)
+                    return error("str invalid", callback(false));
                 return callback(str);
             });
         } else {
             dk.sendRequest(path, function dk_sendRequest_callback(success, url, data) {
+                if(!data)
+                    return error("data invalid", callback(false));
                 return callback(data);
             });
         }

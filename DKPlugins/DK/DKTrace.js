@@ -26,7 +26,11 @@ dk.trace.editFile = function dk_trace_editFile(file, line, ch) {
 
     const createPopup = function createPopup() {
         dk.codemirror.create();
-        dk.codemirror.open(file, function dk_codemirror_open_callback() {
+        dk.codemirror.open(file, function dk_codemirror_open_callback(result) {
+            
+            require({result});
+           
+
             dk.codemirror.myCodeMirror.focus();
             dk.codemirror.myCodeMirror.setCursor({
                 line: line - 1,

@@ -44,6 +44,8 @@ dk.codemirror.create = function dk_codemirror_create() {
 
 dk.codemirror.open = function dk_codemirror_open(file, callback) {
     dk.file.fileToString(file, function(str) {
+        if(!str)
+            return error("str invalid", callback(false));
         dk.codemirror.myCodeMirror.setValue(str);
         callback && callback(true);
     });

@@ -36,12 +36,13 @@ dk.errorhandler.create = function dk_errorhandler_create() {
         window.addEventListener('error', onerror);
         function onerror(msg, url, line, col, err) {
             window.onanyerror.apply(this, arguments);
+
             if (err)
-                dk.console.log(err.stack, "red");
+                dk.console.log(dk.trace.stackToConsoleString(err, "require"), "red");
             else if (msg.error)
-                dk.console.log(msg.error.stack, "red");
+                dk.console.log(dk.trace.stackToConsoleString(msg.error, "require"), "red");
             else
-                dk.console.error(msg.message);
+                dk.console.log(msg.message, "red");
             if (onerrorx)
                 return onerrorx.apply(null, arguments);
         }
