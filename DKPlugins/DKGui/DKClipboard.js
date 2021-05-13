@@ -4,7 +4,7 @@ dk.clipboard = new DKPlugin("dk_clipboard");
 
 
 dk.clipboard.cut = function dk_clipboard_cut(ele) {
-    var text = "";
+    let text = "";
     if (window.getSelection)
         text = window.getSelection().toString();
     else if (document.selection && document.selection.type !== "Control")

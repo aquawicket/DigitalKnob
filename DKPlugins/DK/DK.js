@@ -1,7 +1,5 @@
 "use strict";
 
-let g_lastManualError;
-
 window.dk = new Object;
 const duktape = window.duktape;
 
@@ -391,7 +389,6 @@ dk.loadJs = function dk_loadJs(url, dk_loadJs_callback) {
         console.warn(url + " already loaded...");
         return !!dk_loadJs_callback(true);
         return true;
-
 
         console.warn(url + " already loaded. Reloading...");
         dk.close(url);
@@ -1005,7 +1002,7 @@ dk.removeFromLocalStorage = function dk_removeFromLocalStorage(name) {
 //https://developer.mozilla.org/en-US/docs/Web/HTTP/Status
 //https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy
 dk.sendRequest = function dk_sendRequest(url, dk_sendRequest_callback, httpMethod) {
-    
+
     const debugXhr = false;
     if (!url)
         return error("url invalid", dk_sendRequest_callback(false));
@@ -1208,19 +1205,37 @@ dk.errorCatcher = function dk_errorCatcher(object) {
         for (func in dkPlugin) {
             method = dkPlugin[func];
             if (typeof method === "function") {
+
+                Object.defineProperty(method, 'name', {
+                    value: func
+                })
                 //console.debug("dk." + plugin + "." + func + "()");
+                const funcName = func;
                 dkPlugin[func] = function errorCatcher(func, method) {
-                    return function() {
+                    return dkPlugin[func + "_try"] = function() {
                         try {
                             return method.apply(this, arguments);
                         } catch (err) {
                             const stack = dk.trace.stackToConsoleString(err);
-                            console.log(stack);
+                            console.log(stack, 'red');
                         }
                     }
                 }(func, method);
             }
         }
+    }
+}
+
+// https://stackoverflow.com/a/63785848/688352
+dk.testSyntax = function dk_testSyntax(code) {
+    try {
+        new Function([],code)
+    } catch (err) {
+        //if (err.name !== 'SyntaxError')
+        //    throw err
+        // Throw the error if it is not a SyntaxError
+        const stack = dk.trace.stackToConsoleString(err);
+        console.log(stack, 'red');
     }
 }
 

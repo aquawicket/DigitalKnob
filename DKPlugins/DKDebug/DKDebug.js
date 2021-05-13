@@ -57,8 +57,13 @@ function err(str) {
 dk.debug.debugFunc = function dk_debug_debugFunc() {
     //console.log("dk.debug.debugFunc");
     
-    theTHins = 100 / 0;
+    //theTHins = 100 / 0;
     //err("test error");
+    dk.file.fileToString("/DKGui/DKClipboard.js", function(code){
+        dk.testSyntax(code);
+    })
+
+    
     return;
 
     /*
@@ -577,13 +582,9 @@ dk.debug.reload = function dk_debug_reload() {
     window.location.reload(true);
 }
 
-dk.debug.refresh = function dk_debug_refresh() {
-    window.location.reload(true);
-}
-
 dk.debug.pushDKFiles = function dk_debug_pushDKFiles() {
     //This is the pure js method
-    dk.php.pushDKAssets(function dk_php_pushDKAssetsCallback(rval) {
+    dk.file.pushDKAssets(function dk_php_pushDKAssetsCallback(rval) {
         console.log(rval);
         console.log("done copying assets");
     });
@@ -707,6 +708,7 @@ dk.debug.getSource = function dk_debug_getSource() {
 }
 
 dk.debug.crashCPP = function dk_debug_crashCPP() {
+    console.log("dk.debug.crashCPP()");
     CPP_DK_Crash();
 }
 

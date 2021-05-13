@@ -34,22 +34,14 @@ dk.errorhandler.create = function dk_errorhandler_create() {
     function handleGlobal() {
         const onerrorx = window.onerror;
         window.addEventListener('error', onerror);
-        function onerror(msg, url, line, col, error) {
+        function onerror(msg, url, line, col, err) {
             window.onanyerror.apply(this, arguments);
-            
-            /*if (!error && !msg.error && window.lastError) {      
-                dk.console.log(lastError.stack, "red");
-                lastError = null;
-            } else*/
-            if (error) {
-                dk.console.log(error.stack, "red");
-            } else if (msg.error) {
+            if (err)
+                dk.console.log(err.stack, "red");
+            else if (msg.error)
                 dk.console.log(msg.error.stack, "red");
-            } else {
+            else
                 dk.console.error(msg.message);
-            }
-
-            
             if (onerrorx)
                 return onerrorx.apply(null, arguments);
         }

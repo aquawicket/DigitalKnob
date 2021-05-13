@@ -30,21 +30,24 @@ dk.trace.editFile = function dk_trace_editFile(file, line, ch) {
             dk.codemirror.myCodeMirror.focus();
             dk.codemirror.myCodeMirror.setCursor({
                 line: line - 1,
-                ch: ch
+                ch: ch - 1
             });
+            
             dk.codemirror.myCodeMirror.scrollIntoView({
                 line: line - 1,
                 char: ch
             }, 200);
+            
             dk.codemirror.myCodeMirror.getDoc().markText({
                 line: line - 1,
-                ch: ch
+                ch: (ch-1)
             }, {
-                line: line,
-                ch: 0
+                line: line - 1,
+                ch: (ch+1)
             }, {
-                css: "background-color: red"
+                css: "background-color: rgb(100,0,0)"
             });
+
         });
         dk.frame.setTitle(dk.codemirror.div, file);
     };
@@ -95,7 +98,7 @@ dk.trace.stackToConsoleString = function dk_trace_stackToConsoleString(arg, dele
     headerMsg ? str = jsonStack[0].msg+"\n" : str = "";
     for (let n = 1; n < jsonStack.length; n++) {
         str += "    at " + jsonStack[n].func + " ";
-        str += "(<a href='#' onClick='dk.trace.editFile(\"" + jsonStack[n].filePath + "\",\"" + jsonStack[n].lineNum + "\")' style='color:rgb(213,213,213)'>" + jsonStack[n].file + ":" + jsonStack[n].lineNum + "</a>)<br>";
+        str += "(<a href='#' onClick='dk.trace.editFile(\"" + jsonStack[n].filePath + "\",\"" + jsonStack[n].lineNum + "\",\"" + jsonStack[n].charNum + "\")' style='color:rgb(213,213,213)'>" + jsonStack[n].file + ":" + jsonStack[n].lineNum + "</a>)<br>";
     }
 
     return str;
