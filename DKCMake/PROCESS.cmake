@@ -719,7 +719,6 @@ ENDIF()
 
 #########
 IF(LINUX)
-IF(NOT RASPBERRY)
 	# Copy the icon to ${DKPROJECT}/assets
 	DKCOPY(${DKPROJECT}/icons/icon.png ${DKPROJECT}/assets/icon.png TRUE)
 
@@ -737,9 +736,14 @@ IF(NOT RASPBERRY)
 	DKREMOVE(${DKPROJECT}/assets/cef.log)
 	DKREMOVE(${DKPROJECT}/assets/log.txt)
 	
-	DKZIP(${DKPROJECT}/assets) #zip the assets
+	MESSAGE("Creating assets.zip . . .")
+	DKZIP(${DKPROJECT}/assets/)
 	
-	DKCOPY(${DKPROJECT}/Backup/ ${DKPROJECT}/assets/ TRUE) #put everything back from backup
+	MESSAGE("Creating assets.h . . .")
+	bin2h(SOURCE_FILE ${DKPROJECT}/assets.zip HEADER_FILE ${DKPROJECT}/assets.h VARIABLE_NAME "ASSETS_H")
+	
+	# Restore the backed up assets
+	DKCOPY(${DKPROJECT}/Backup/ ${DKPROJECT}/assets/ TRUE)
 	DKREMOVE(${DKPROJECT}/Backup)
 	
 	### copy assets
@@ -778,7 +782,6 @@ IF(NOT RASPBERRY)
 	ELSE()
 		TARGET_LINK_LIBRARIES(${AppName} ${RELEASE_LIBS})
 	ENDIF()
-ENDIF()
 ENDIF()
 
 
