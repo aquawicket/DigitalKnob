@@ -218,11 +218,11 @@ dk.console.create = function dk_console_create(parent, id, top, bottom, left, ri
     dk.console.Logger = function dl_console_Logger() {
         const args = dk.console.ColorChromeConsole(arguments);
 
-        if((div.scrollHeight - div.scrollTop) < (div.offsetHeight + 1))
+        if ((div.scrollHeight - div.scrollTop) < (div.offsetHeight + 1))
             div.scroll = true;
         else
             div.scroll = false;
-       
+
         const msgDiv = document.createElement("div");
         msgDiv.setAttribute("dk_console", "msgDiv");
 

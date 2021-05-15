@@ -3,7 +3,6 @@
 dk.codemirror = new DKPlugin("dk_codemirror");
 
 dk.codemirror.init = function dk_codemirror_init(callback) {
-
     dk.create("DKCodeMirror/lib/codemirror.js", function() {
         dk.create("DKCodeMirror/lib/codemirror.css", function() {
             dk.create("DKCodeMirror/theme/abcdef.css", function() {
@@ -16,13 +15,14 @@ dk.codemirror.init = function dk_codemirror_init(callback) {
         });
     });
 }
-dk.codemirror.end = function dk_codemirror_end() {
+
+dk.codemirror.end = function dk_codemirror_end(callback) {
     dk.close("DKCodeMirror/lib/codemirror.js");//, function() {
         dk.close("DKCodeMirror/lib/codemirror.css");//, function() {
             dk.close("DKCodeMirror/theme/abcdef.css");//, function() {
                 dk.close("DKCodeMirror/DKCodeMirror.css");//, function() {
                     dk.close("DKCodeMirror/mode/javascript/javascript.js");//, function() {
-                        //callback && callback();
+                        callback && callback();
                     //});
                 //});
             //});
@@ -31,7 +31,6 @@ dk.codemirror.end = function dk_codemirror_end() {
 }
 
 dk.codemirror.create = function dk_codemirror_create() {
-
     dk.codemirror.div = dk.frame.createNewWindow("DKCodeMirror", "500rem", "400rem");
     dk.codemirror.myCodeMirror = CodeMirror(dk.codemirror.div, {
         theme: "abcdef",

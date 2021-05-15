@@ -57,12 +57,11 @@ const warn = function warn(str, callback, rtnval) {
     return rtnval;
 }
 
-
-const require = function require(){
+const require = function require() {
     var name = Object.keys(arguments[0])[0];
     var value = arguments[0][name];
-    if(!value)
-        throw new Error(" VARIABLE: "+name+"("+value+")  is invalid");
+    if (!value)
+        throw new Error(" VARIABLE: " + name + "(" + value + ")  is invalid");
 }
 //These are use for rem units and zoom level. They are already in DK.css
 //document.getElementsByTagName("html")[0].style.fontSize = "1.0px";
@@ -465,19 +464,11 @@ dk.loadJs = function dk_loadJs(url, dk_loadJs_callback) {
 }
 
 dk.loadHtml = function dk_loadHtml(url, parent, dk_loadHtml_callback) {
-    //TODO: the id of the root element in the html file should be the file path..   I.E. MyPlugin/MyPlugin.html
     if (!url)
         return error("url is invalid", dk_loadHtml_callback(false));
 
-    if (dk.getObjects().includes(url)) {
-        console.warn(url + " already loaded. Reloading...");
-        byId(url) && byId(url).parentNode.removeChild(byId(url));
-    }
-
     if (url.indexOf(".html") === -1)
         return error("url is not a valid .html file", dk_loadHtml_callback(false));
-    //if (url === ".html")
-    //    url = "New.html";
 
     dk.fileToString(url, function dk_fileToString(string) {
         //Create an empty widget
@@ -1239,7 +1230,7 @@ dk.testSyntax = function dk_testSyntax(code) {
     try {
         new Function([],code)
     } catch (err) {
-          throw err
+        throw err
     }
 }
 
