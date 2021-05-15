@@ -47,10 +47,14 @@ function err(str) {
 }
 */
 
+const require2 = function require2(variable){
+    console.log(variable);
+    //if(variable === undefined)
+}
 
 const testFunc = function testFunc(needed){
-    require({needed});
-    console.log(needed);
+    require2(needed);
+    //console.log(needed);
 }
 
 
