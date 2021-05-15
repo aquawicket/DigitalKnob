@@ -48,6 +48,10 @@ function err(str) {
 */
 
 
+const testFunc = function testFunc(needed){
+    require({needed});
+    console.log(needed);
+}
 
 
 
@@ -57,14 +61,22 @@ function err(str) {
 dk.debug.debugFunc = function dk_debug_debugFunc() {
     //console.log("dk.debug.debugFunc");
     
+
+    testFunc("abc");
+    testFunc(123);
+    testFunc(true);
+    testFunc(false);
+    testFunc("This should be seen last");
+    testFunc();
+    testFunc("SHOULD NOT SEE THIS");
+
     //theTHins = 100 / 0;
     //err("test error");
+    /*
     dk.file.fileToString("/DKInputTest/DKInput.js", function(code){
         dk.testSyntax(code);
     })
-
-    
-    return;
+    */
 
     /*
     dk.firstFunc("Don", "Donie", function dk_firstFunc_callback(err, data){

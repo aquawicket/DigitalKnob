@@ -2,11 +2,11 @@
     padding: 0rem;
     margin: 0rem;
     position: absolute;
-    border-color: rgb(58,58,58);
-    border-style: solid;
-    border-width: 1rem;
-    box-sizing: border-box;
-    border-top-width: 5rem;
+    /* border-color: rgb(58,58,58); */
+    /* border-style: solid; */
+    /* border-width: 1rem; */
+    /* box-sizing: border-box; */
+    /* border-top-width: 5rem; */
 }
 
 [dk_console="div"] {

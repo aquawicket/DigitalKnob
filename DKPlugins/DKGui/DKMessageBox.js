@@ -2,6 +2,11 @@
 
 dk.messagebox = new DKPlugin("dk_messagebox");
 
+dk.messagebox.init = function dK_messagebox_init(callback){
+    dk.create("DKGui/DKMessageBox.css");
+    callback(true);
+}
+
 dk.messagebox.close = function dk_messagebox_close(node) {
     console.debug("dk.messagebox.close("+node+")");
     const frame = dk.frame.getFrame(node);

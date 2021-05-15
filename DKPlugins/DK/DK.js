@@ -58,11 +58,18 @@ const warn = function warn(str, callback, rtnval) {
 }
 
 const require = function require() {
-    var name = Object.keys(arguments[0])[0];
-    var value = arguments[0][name];
-    if (!value)
-        throw new Error(" VARIABLE: " + name + "(" + value + ")  is invalid");
+    for(let n=0; n<arguments.length; n++){
+        if(typeof arguments[n] !== "object"){
+            throw new Error(" Must use {} around variables when using require. EXAMPLE: require({var1}, {var2})");
+        }
+        var name = Object.keys(arguments[n])[0];
+        var value = arguments[n][name];
+        if (value === undefined)
+            throw new Error("'"+name + "' is undefined");
+    }
 }
+
+
 //These are use for rem units and zoom level. They are already in DK.css
 //document.getElementsByTagName("html")[0].style.fontSize = "1.0px";
 //document.body.style.fontSize = "13em";
@@ -237,8 +244,7 @@ dk.hasCPP = function dk_hasCPP() {
 }
 
 dk.getPlugin = function dk_getPlugin(url) {
-    if (!url)
-        return error("url invalid");
+    require({url});
     var file = url;
     file = file.substring(file.lastIndexOf("/") + 1);
     if (!file)
@@ -393,8 +399,8 @@ dk.loadJs = function dk_loadJs(url, dk_loadJs_callback) {
         return error("url invalid", dk_loadJs_callback(false));
 
     if (dk.getObjects().includes(url)) {
-        console.warn(url + " already loaded...");
-        return !!dk_loadJs_callback(true);
+        console.log(url + " already loaded...");
+        dk_loadJs_callback(true);
         return true;
 
         console.warn(url + " already loaded. Reloading...");
@@ -1216,7 +1222,8 @@ dk.errorCatcher = function dk_errorCatcher(object) {
                             return method.apply(this, arguments);
                         } catch (err) {
                             const stack = dk.trace.stackToConsoleString(err);
-                            console.log(stack, 'red');
+                            dk.console.log(stack, 'red');
+                            xconsole.error(err);
                         }
                     }
                 }(func, method);
