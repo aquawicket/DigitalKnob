@@ -31,6 +31,8 @@ IOSSIM_RELEASE_LIB(${RMLUI}/${OS}/${RELEASE}/libRmlDebugger.a)
 ##LINUX_RELEASE_LIB(${RMLUI}/${OS}/Release/libRmlDebugger.a) ##FIXME
 ANDROID_DEBUG_LIB(${RMLUI}/${OS}/Debug/obj/local/armeabi-v7a/libRmlDebugger.a)
 ANDROID_RELEASE_LIB(${RMLUI}/${OS}/Release/obj/local/armeabi-v7a/libRmlDebugger.a)
+##RASPBERRY_DEBUG_LIB(${RMLUI}/${OS}/Debug/libRmlDebugger.a) ##FIXME
+##RASPBERRY_RELEASE_LIB(${RMLUI}/${OS}/Release/libRmlDebugger.a) ##FIXME
 
 WIN_DEBUG_LIB(${RMLUI}/${OS}/Debug/RmlCore.lib)
 WIN_RELEASE_LIB(${RMLUI}/${OS}/Release/RmlCore.lib)
@@ -42,6 +44,8 @@ LINUX_DEBUG_LIB(${RMLUI}/${OS}/Debug/libRmlCore.a)
 LINUX_RELEASE_LIB(${RMLUI}/${OS}/Release/libRmlCore.a)
 ANDROID_DEBUG_LIB(${RMLUI}/${OS}/Debug/obj/local/armeabi-v7a/libRmlCore.a)
 ANDROID_RELEASE_LIB(${RMLUI}/${OS}/Release/obj/local/armeabi-v7a/libRmlCore.a)
+RASPBERRY_DEBUG_LIB(${RMLUI}/${OS}/Debug/libRmlCore.a)
+RASPBERRY_RELEASE_LIB(${RMLUI}/${OS}/Release/libRmlCore.a)
 
 ### The RmlUi SDL example needs these libraries
 #${GLEW}\win32\lib\Debug\glew32d.lib
@@ -107,3 +111,13 @@ LINUX_RELEASE_COMMAND(make)
 
 ANDROID_NDK_DEBUG(${RMLUI_VERSION})
 ANDROID_NDK_RELEASE(${RMLUI_VERSION})
+
+
+DKSETPATH(${RMLUI}/${OS}/Debug)
+RASPBERRY_DEBUG_COMMAND(${CMAKE_COMMAND} -G "Unix Makefiles" -DBUILD_SHARED_LIBS=OFF -DCMAKE_BUILD_TYPE=DEBUG -DFREETYPE_INCLUDE_DIR_freetype2=${FREETYPE}/include -DFREETYPE_INCLUDE_DIR_ft2build=${FREETYPE}/include -DFREETYPE_LIBRARY=${FREETYPE}/${OS}/Debug/libfreetype.a ${RMLUI})
+RASPBERRY_DEBUG_COMMAND(make)
+
+DKSETPATH(${RMLUI}/${OS}/Release)
+RASPBERRY_RELEASE_COMMAND(${CMAKE_COMMAND} -G "Unix Makefiles" -DBUILD_SHARED_LIBS=OFF -DCMAKE_BUILD_TYPE=RELEASE -DFREETYPE_INCLUDE_DIR_freetype2=${FREETYPE}/include -DFREETYPE_INCLUDE_DIR_ft2build=${FREETYPE}/include -DFREETYPE_LIBRARY=${FREETYPE}/${OS}/Release/libfreetype.a ${RMLUI})
+RASPBERRY_RELEASE_COMMAND(make)
+

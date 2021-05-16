@@ -16,6 +16,8 @@ LINUX_DEBUG_LIB(${GIF}/${OS}/Debug/lib/.libs/libgif.a)
 LINUX_RELEASE_LIB(${GIF}/${OS}/Release/lib/.libs/libgif.a)
 ANDROID_DEBUG_LIB(${GIF}/${OS}/Debug/obj/local/armeabi-v7a/libgif.a)
 ANDROID_RELEASE_LIB(${GIF}/${OS}/Release/obj/local/armeabi-v7a/libgif.a)
+RASPBERRY_DEBUG_LIB(${GIF}/${OS}/Debug/lib/.libs/libgif.a)
+RASPBERRY_RELEASE_LIB(${GIF}/${OS}/Release/lib/.libs/libgif.a)
 
 
 ### COMPILE ###
@@ -99,3 +101,11 @@ LINUX_RELEASE_COMMAND(make)
 
 ANDROID_NDK_DEBUG(${GIF_VERSION})
 ANDROID_NDK_RELEASE(${GIF_VERSION})
+
+DKSETPATH(${GIF}/${OS}/${DEBUG})
+RASPBERRY_DEBUG_COMMAND(../../configure --disable-shared --enable-static)
+RASPBERRY_DEBUG_COMMAND(make)
+
+DKSETPATH(${GIF}/${OS}/${RELEASE})
+RASPBERRY_RELEASE_COMMAND(../../configure --disable-shared --enable-static)
+RASPBERRY_RELEASE_COMMAND(make)

@@ -18,6 +18,8 @@ LINUX_DEBUG_LIB(${JPEG}/${OS}/Debug/libturbojpeg.a)
 LINUX_RELEASE_LIB(${JPEG}/${OS}/Release/libturbojpeg.a)
 ANDROID_DEBUG_LIB(${JPEG}/${OS}/Debug/obj/local/armeabi-v7a/libturbojpeg.a)
 ANDROID_RELEASE_LIB(${JPEG}/${OS}/Release/obj/local/armeabi-v7a/libturbojpeg.a)
+RASPBERRY_DEBUG_LIB(${JPEG}/${OS}/Debug/libturbojpeg.a)
+RASPBERRY_RELEASE_LIB(${JPEG}/${OS}/Release/libturbojpeg.a)
 
 
 ### COMPILE ###
@@ -57,3 +59,13 @@ LINUX_RELEASE_COMMAND(make turbojpeg-static)
 
 ANDROID_NDK_DEBUG(${JPEG_VERSION})
 ANDROID_NDK_RELEASE(${JPEG_VERSION})
+
+
+DKSETPATH(${JPEG}/${OS}/Debug)
+RASPBERRY_DEBUG_COMMAND(${CMAKE_COMMAND} -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=DEBUG ${JPEG})
+RASPBERRY_DEBUG_COMMAND(make turbojpeg-static)
+
+DKSETPATH(${JPEG}/${OS}/Release)
+RASPBERRY_RELEASE_COMMAND(${CMAKE_COMMAND} -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=RELEASE ${JPEG})
+RASPBERRY_RELEASE_COMMAND(make turbojpeg-static)
+
