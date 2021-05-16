@@ -49,7 +49,6 @@ function delete($path){
 // https://www.php.net/manual/en/function.is-dir
 function isDir($path){
 	$path = ValidatePath($path);
-	//echo "isDir(".$path.")";
 	return is_dir($path);
 }
 
@@ -102,6 +101,7 @@ function getAssetsPath(){
         //return error("assetsPath does not contain an assets folder \n");
     if(!is_dir($assetsPath))
     	return error("assetsPath is an invalid directory \n");
+    $assetsPath = str_replace("\\", "/", $assetsPath);
     $assetsPath = ValidatePath($assetsPath);
     echo "assetsPath = ".$assetsPath."\n";
     return $assetsPath;
@@ -142,15 +142,15 @@ function getRelativeDKPluginsPath(){
     $relativeDKPluginsPath = dirname(__DIR__)."/";
     $n = 1;
     while(is_dir($relativeDKPluginsPath) && $n < 10){
-        $relativeDKPluginsPath = dirname(__DIR__, $n++);
-        if(is_dir($relativeDKPluginsPath."/DKPlugins/")){
-        	$relativeDKPluginsPath = $relativeDKPluginsPath."/DKPlugins/";
+        $relativeDKPluginsPath = dirname(__DIR__, $n++)."/";
+        if(is_dir($relativeDKPluginsPath."DKPlugins/")){
+        	$relativeDKPluginsPath = $relativeDKPluginsPath."DKPlugins/";
         	$relativeDKPluginsPath = ValidatePath($relativeDKPluginsPath);
         	echo "relativeDKPluginsPath = ".relativeDKPluginsPath."\n";
         	return $relativeDKPluginsPath;
         }
     }
-    //FIXME: Some user defaults
+    //FIXME: temporarily using raw user defaults paths
     if(file_exists("C:/Users/aquawicket/digitalknob/DKTasmota/DKPlugins/")){
     	$relativeDKPluginsPath = "C:/Users/aquawicket/digitalknob/DKTasmota/DKPlugins/";
     	$relativeDKPluginsPath = ValidatePath($relativeDKPluginsPath);
@@ -161,9 +161,9 @@ function getRelativeDKPluginsPath(){
 }
 
 function getDKAppAssetsPath(){
-	$dkAppAssetsPath = "";
-    //FIXME: Some user defaults
+    //FIXME: temporarily using raw user defaults paths
     if(file_exists("C:/Users/aquawicket/digitalknob/DKTasmota/DKApps/DKTasmota/assets/")){
+    	$dkAppAssetsPath = "";
     	$dkAppAssetsPath = "C:/Users/aquawicket/digitalknob/DKTasmota/DKApps/DKTasmota/assets/";
     	$dkAppAssetsPath = ValidatePath($dkAppAssetsPath);
     	echo "dkAppsAssetsPath = ".$dkAppAssetsPath."\n";
@@ -322,15 +322,12 @@ function directoryContents($path){
 	//Lets sort in alpha order with folders on top
 	for ($i = 1; $i < count($dirArray); $i++){
 		if($path == "."){
-            //echo "if(filetype($root.$dirArray[$i]) == 'dir'\n";
     		if(filetype($root.$dirArray[$i]) == "dir")
 				$folders[] = $dirArray[$i];
 			else
 				$files[] = $dirArray[$i];
 		}
 		else{
-	        //echo "else {\n";
-            //echo "if(filetype(".$root.$path.$dirArray[$i].") == 'dir')\n";
 			if(filetype($root.$path.$dirArray[$i]) == "dir")
 				$folders[] = $dirArray[$i];
 			else
