@@ -72,6 +72,7 @@ function trySuccess($message){
 
 function error($message){
 	//header_status(500);
+	$message = "PHP ERROR: ".$message;
     die(json_encode(array('status'=>'error', 'message'=>$message)));
 }
 

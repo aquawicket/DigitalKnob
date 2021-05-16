@@ -61,7 +61,7 @@ dk.php.call = function dk_php_call(httpMethod, phpPath, funcName) {
         if (!rJson.status)
             return warn("We appear to have gotten JSON compatable data with no status key" + rval, dk_php_callback);
         if (rJson.status !== "success")
-            return php_error("php: " + rJson.message, dk_php_callback);
+            return php_error(rJson.message, dk_php_callback);
         //if (rJson.status === "success" && beforeLastLine !== "" && beforeLastLine !== "\n")
         //    console.log(beforeLastLine);
 

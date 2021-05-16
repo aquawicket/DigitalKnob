@@ -13,11 +13,29 @@ dk.file.init = function dk_file_init() {
 
 dk.file.validatepath = function dk_file_validatepath(path) {
     //console.log("dk.file.validatepath(" + path + ")");
-    if (path.includes("\\"))
-        return error(path + "  path contains \\");
+    if (path.charAt(0) === '/'){
+        console.error(path + "  path has / as the first character");
+        path = path.replace("/","");
+        console.debug("AFTER: "+path);
+    }
+    if (path.includes("\\")){
+        console.error(path + "  path contains \\");
+        path = path.split("\\").join("/");
+        console.debug("AFTER: "+path);
+    }
     const count = path.split("//").length - 1;
-    if ((!path.includes(":") && (count > 0)) || (path.includes(":") && (count > 1)))
-        return error(path + "  path contains // seperator");
+    if(!path.includes("://") && (count > 0)){
+        console.error(path + "  path contains // seperator");
+        path = path.split("//").join("/");
+        console.debug("AFTER: "+path);
+    }
+    if(path.includes("://") && (count > 1)){
+        console.error(path + "  path contains // seperator");
+        path = path.split("//").join("/");
+        path = path.replace(":/","://");
+        console.debug("AFTER: "+path);
+    }
+    //TODO - Check that directory paths end with a /
     return path;
 }
 
