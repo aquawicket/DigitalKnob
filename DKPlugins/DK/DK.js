@@ -774,7 +774,7 @@ dk.fileToString = function dk_fileToString(url, dk_fileToString_callback) {
     }, {
         dk_fileToString_callback
     });
-    dk.sendRequest(url, function dk_sendRequest_callback(success, url, data) {
+    dk.sendRequest("GET", url, function dk_sendRequest_callback(success, url, data) {
         return dk_fileToString_callback(data);
     });
 }
@@ -1053,14 +1053,31 @@ dk.removeFromLocalStorage = function dk_removeFromLocalStorage(name) {
 //https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods
 //https://developer.mozilla.org/en-US/docs/Web/HTTP/Status
 //https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy
-dk.sendRequest = function dk_sendRequest(url, dk_sendRequest_callback, httpMethod) {
+dk.sendRequest = function dk_sendRequest(httpMethod, url, dk_sendRequest_callback) {
     require({
-        url,
+        httpMethod
+    }, {
+        url
+    }, {
         dk_sendRequest_callback
     });
-    (!httpMethod) && (httpMethod = "GET");
+    if (httpMethod) {
+        switch (httpMethod) {
+        case "GET":
+        case "POST":
+        case "PUT":
+        case "HEAD":
+        case "DELETE":
+        case "PATCH":
+        case "OPTIONS":
+        case "CONNECT":
+        case "TRACE":
+            break;
+        default:
+            return error("httpMethod '" + httpMethod + "' invalid", dk_sendRequest_callback(false));
+        }
+    }
 
-    const debugXhr = false;
     if (dk_sendRequest_callback.length < 3)
         return error("dk_sendRequest_callback requires 3 arguments (success, url, data)", dk_sendRequest_callback(false));
 
@@ -1086,31 +1103,8 @@ dk.sendRequest = function dk_sendRequest(url, dk_sendRequest_callback, httpMetho
     if (!xhr)
         return error("Error creating xhr object", dk_sendRequest_callback(false));
 
-    if (httpMethod) {
-        switch (httpMethod) {
-        case "GET":
-        case "POST":
-        case "PUT":
-        case "HEAD":
-        case "DELETE":
-        case "PATCH":
-        case "OPTIONS":
-        case "CONNECT":
-        case "TRACE":
-            break;
-        default:
-            return error("httpMethod invalid", dk_sendRequest_callback(false));
-        }
-    }
-
-    //DEBUG
-    let file;
-    debugXhr && (file = url.substring(url.lastIndexOf("/") + 1));
-    debugXhr && file.includes("?") && (file = file.substring(0, file.lastIndexOf("?")));
-
     //FIXME: duktape
     //url = encodeURIComponent(url).replace(";", "%3B");
-    //url = encodeURIComponent(url);
     xhr.open(httpMethod, url, true);
     //https://en.wikipedia.org/wiki/List_of_HTTP_header_fields
     if (httpMethod === "POST" || httpMethod === "Put")
@@ -1121,30 +1115,26 @@ dk.sendRequest = function dk_sendRequest(url, dk_sendRequest_callback, httpMetho
     //https://github.com/richardwilkes/cef/blob/master/cef/enums_gen.go
     xhr.onabort = function xhr_onabort(event) {
         dk.console.error && dk.console.error("GET <a href=' " + url + " ' target='_blank' style='color:rgb(213,213,213)'>" + url + "</a> onabort");
-        debugXhr && console.debug("XMLHttpRequest.onabort(): " + file + " readyState:" + xhr.readyState + " status:" + xhr.status);
+        //console.debug("XMLHttpRequest.onabort(): " + file + " readyState:" + xhr.readyState + " status:" + xhr.status);
         return dk_sendRequest_callback(false, url, xhr.responseText);
     }
     xhr.onerror = function xhr_onerror(event) {
         dk.console.error && dk.console.error("GET <a href=' " + url + " ' target='_blank' style='color:rgb(213,213,213)'>" + url + "</a> onerror");
-        debugXhr && console.debug("XMLHttpRequest.onerror(): " + file + " readyState:" + xhr.readyState + " status:" + xhr.status);
+        //console.debug("XMLHttpRequest.onerror(): " + file + " readyState:" + xhr.readyState + " status:" + xhr.status);
         return dk_sendRequest_callback(false, url, xhr.responseText);
     }
     xhr.onload = function xhr_onload(event) {
-        debugXhr && console.debug("XMLHttpRequest.onload(): " + file + " readyState:" + xhr.readyState + " status:" + xhr.status);
+        //console.debug("XMLHttpRequest.onload(): " + file + " readyState:" + xhr.readyState + " status:" + xhr.status);
         return dk_sendRequest_callback(true, url, xhr.responseText);
     }
-    xhr.onloadend = function xhr_onloadend(event) {
-        debugXhr && console.debug("XMLHttpRequest.onloadend(): " + file + " readyState:" + xhr.readyState + " status:" + xhr.status);
+    xhr.onloadend = function xhr_onloadend(event) {//console.debug("XMLHttpRequest.onloadend(): " + file + " readyState:" + xhr.readyState + " status:" + xhr.status);
     }
-    xhr.onloadstart = function xhr_onloadstart(event) {
-        debugXhr && console.debug("XMLHttpRequest.onloadstart(): " + file + " readyState:" + xhr.readyState + " status:" + xhr.status);
+    xhr.onloadstart = function xhr_onloadstart(event) {//console.debug("XMLHttpRequest.onloadstart(): " + file + " readyState:" + xhr.readyState + " status:" + xhr.status);
     }
-    xhr.onprogress = function xhr_onprogress(event) {
-        debugXhr && console.debug("XMLHttpRequest.onprogress(): " + file + " readyState:" + xhr.readyState + " status:" + xhr.status);
+    xhr.onprogress = function xhr_onprogress(event) {//console.debug("XMLHttpRequest.onprogress(): " + file + " readyState:" + xhr.readyState + " status:" + xhr.status);
     }
-    xhr.onreadystatechange = function xhr_onreadystatechange(event) {
-        debugXhr && console.log("XMLHttpRequest.onreadystatechange(): " + file + " readyState:" + xhr.readyState + " status:" + xhr.status);
-        /*
+    xhr.onreadystatechange = function xhr_onreadystatechange(event) {//console.log("XMLHttpRequest.onreadystatechange(): " + file + " readyState:" + xhr.readyState + " status:" + xhr.status);
+    /*
         if (xhr.readyState === 4) {
             if (xhr.status >= 200 && xhr.status < 400 || !xhr.status)
                 dk_sendRequest_callback(true, url, xhr.responseText);
@@ -1155,7 +1145,7 @@ dk.sendRequest = function dk_sendRequest(url, dk_sendRequest_callback, httpMetho
     }
     xhr.ontimeout = function xhr_ontimeout(event) {
         dk.console.error && dk.console.error("GET <a href=' " + url + " ' target='_blank' style='color:rgb(213,213,213)'>" + url + "</a> net::ERR_CONNECTION_TIMED_OUT");
-        debugXhr && console.debug("XMLHttpRequest.ontimeout(): " + file + " readyState:" + xhr.readyState + " status:" + xhr.status);
+        //console.debug("XMLHttpRequest.ontimeout(): " + file + " readyState:" + xhr.readyState + " status:" + xhr.status);
         return dk_sendRequest_callback(false, url, "ontimeout");
     }
 

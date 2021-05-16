@@ -7,7 +7,7 @@ dk.php.call = function dk_php_call(httpMethod, phpPath, funcName) {
     const args = arguments;
     let dk_php_callback = null;
     if (args && typeof (args[args.length - 1]) === "function")
-       dk_php_callback = args[args.length - 1];
+        dk_php_callback = args[args.length - 1];
 
     const allowed = ["DK.js", "DKFile.js", "DKDebug.js"];
     const callerFilename = dk.trace && dk.trace.getFilename();
@@ -33,18 +33,16 @@ dk.php.call = function dk_php_call(httpMethod, phpPath, funcName) {
         jsonData.args.push(newArg);
     }
     let path = "";
-    if (location.protocol == "file:") 
-        path = "http://"+dk.localIP+":"+dk.port+"/";
+    if (location.protocol == "file:")
+        path = "http://" + dk.localIP + ":" + dk.port + "/";
     const str = JSON.stringify(jsonData);
     const data = "x=" + encodeURIComponent(str);
     const url = dk.file.validatepath(path + phpPath) + "?" + data;
-    const php_error = function php_error(msg, dk_php_callback){ 
+    const php_error = function php_error(msg, dk_php_callback) {
         return error(msg, dk_php_callback);
     }
-  
-    dk.sendRequest(url, function dk_sendRequest_callback(success, url, rval) {
 
-        //rval && console.debug(rval);
+    dk.sendRequest(httpMethod, url, function dk_sendRequest_callback(success, url, rval) {
         if (!success)
             return error("dk.php.call request failed, is php server running?", dk_php_callback);
         const beforeLastLine = rval.substr(0, rval.lastIndexOf("\n") + 1);
@@ -64,9 +62,8 @@ dk.php.call = function dk_php_call(httpMethod, phpPath, funcName) {
             return php_error(rJson.message, dk_php_callback);
         //if (rJson.status === "success" && beforeLastLine !== "" && beforeLastLine !== "\n")
         //    console.log(beforeLastLine);
-
         dk_php_callback && dk_php_callback(rJson.message);
-    }, httpMethod);
+    });
 }
 
 //dk.php.noCB = function dk_php_noCB(rVal) {}
@@ -101,11 +98,11 @@ dk.php.callPhpFunc = function dk_php_callPhpFunc(args) {
     const data = "x=" + encodeURIComponent(str);
     //console.log("dk.php.callPhpFunc(): data = "+data);
     const url = path + "DK/DK.php?" + data;
-    dk.sendRequest(url, function dk_sendRequest_callback(success, url, rVal) {
+    dk.sendRequest("POST", url, function dk_sendRequest_callback(success, url, rVal) {
         if (args && typeof (args[args.length - 1]) === "function") {
             args[args.length - 1](rVal);
         } else {//console.log(rVal);
         }
-    }, "POST");
+    });
 }
 */

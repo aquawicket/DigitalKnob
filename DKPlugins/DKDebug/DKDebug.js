@@ -351,12 +351,12 @@ dk.debug.debugFunc = function dk_debug_debugFunc() {
     for (let n = 0; n < devices.length; n++) {
         const cmnd = "timezone -7";
         const url = "http://" + devices[n].ip + "/cm?cmnd=" + encodeURIComponent(cmnd).replace(";", "%3B");
-        DK_SendRequest(url, function DK_SendRequest_callback(success, url, data) {//console.log("DK_SendRequest("+success+","+url+","+data+")");
+        DK_SendRequest("GET", url, function DK_SendRequest_callback(success, url, data) {//console.log("DK_SendRequest("+success+","+url+","+data+")");
         });
 
         cmnd = "time 4 " + dateInMilliseconds;
         url = "http://" + devices[n].ip + "/cm?cmnd=" + encodeURIComponent(cmnd).replace(";", "%3B");
-        DK_SendRequest(url, function DK_SendRequest_callback(success, url, data) {
+        DK_SendRequest("GET", url, function DK_SendRequest_callback(success, url, data) {
             console.log("DK_SendRequest(" + success + "," + url + "," + data + ")");
         });
     }
@@ -367,7 +367,7 @@ dk.debug.debugFunc = function dk_debug_debugFunc() {
     for (let n = 0; n < devices.length; n++) {
         const cmnd = "time";
         const url = "http://" + devices[n].ip + "/cm?cmnd=" + encodeURIComponent(cmnd).replace(";", "%3B");
-        DK_SendRequest(url, function DK_SendRequest_callback(success, url, data) {
+        DK_SendRequest("GET", url, function DK_SendRequest_callback(success, url, data) {
             //console.log("DK_SendRequest("+success+","+url+","+data+")");
             console.log("" + data + "");
         });

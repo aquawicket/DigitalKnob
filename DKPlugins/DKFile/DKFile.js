@@ -87,12 +87,12 @@ dk.file.exists = function dk_file_exists(url, callback, usePhp) {
                 return callback(false);
         });
     } else {
-        dk.sendRequest(url, function dk_sendRequest_callback(success, url, result) {
+        dk.sendRequest("GET", url, function dk_sendRequest_callback(success, url, result) {
             if (success && url && result)
                 return callback(true);
             else
                 return callback(false);
-        }, "GET");
+        });
     }
 }
 
@@ -176,7 +176,7 @@ path = dk.file.validatepath(path);
     });
     
 /*
-    dk.sendRequest(send, function dk_sendRequest_callback(success, url, data){
+    dk.sendRequest("GET", send, function dk_sendRequest_callback(success, url, data){
         console.log("dk_sendRequest_callback(): success = "+success);
         //console.log("dk_sendRequest_callback(): url = "+url);
         console.log("dk_sendRequest_callback(): data = "+data);
@@ -313,7 +313,7 @@ if (!dk.hasCPP()) {
                 return callback(str);
             });
         } else {
-            dk.sendRequest(path, function dk_sendRequest_callback(success, url, data) {
+            dk.sendRequest("GET", path, function dk_sendRequest_callback(success, url, data) {
                 if (!data)
                     return error("data invalid", callback(false));
                 return callback(data);
