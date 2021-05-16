@@ -1,3 +1,5 @@
+// https://kangax.github.io/compat-table/es6/#duktape2_3
+
 #pragma once
 #ifndef DKDuktape_H
 #define DKDuktape_H
