@@ -24,6 +24,8 @@ LINUX_DEBUG_LIB(${TIDY}/${OS}/Debug/libtidys.a)
 LINUX_RELEASE_LIB(${TIDY}/${OS}/Release/libtidys.a)
 ANDROID_DEBUG_LIB(${TIDY}/${OS}/Debug/obj/local/armeabi-v7a/libtidys.a)
 ANDROID_RELEASE_LIB(${TIDY}/${OS}/Release/obj/local/armeabi-v7a/libtidys.a)
+RASPBERRY_DEBUG_LIB(${TIDY}/${OS}/Debug/libtidys.a)
+RASPBERRY_RELEASE_LIB(${TIDY}/${OS}/Release/libtidys.a)
 
 
 ### COMPILE ###
@@ -62,3 +64,12 @@ LINUX_RELEASE_COMMAND(make tidy)
 
 ANDROID_NDK_DEBUG(${TIDY_VERSION}d)
 ANDROID_NDK_RELEASE(${TIDY_VERSION})
+
+
+DKSETPATH(${TIDY}/${OS}/Debug)
+RASPBERRY_DEBUG_COMMAND(${CMAKE_COMMAND} -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=DEBUG ${TIDY})
+RASPBERRY_DEBUG_COMMAND(make tidy)
+
+DKSETPATH(${TIDY}/${OS}/Release)
+RASPBERRY_RELEASE_COMMAND(${CMAKE_COMMAND} -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=RELEASE ${TIDY})
+RASPBERRY_RELEASE_COMMAND(make tidy)
