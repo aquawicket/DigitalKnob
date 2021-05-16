@@ -214,7 +214,10 @@ dk.trace.getArguments = function dk_trace_getArguments(func, getArgValues) {
         return argsString;
     }
     let args = argsString.split(",");
+
     //FIXME: duktape
+	console.error("FIXME");
+	/*
     for (let val of fn.arguments) {
         if (count > 0) {
             args[count] = " " + args[count];
@@ -224,6 +227,7 @@ dk.trace.getArguments = function dk_trace_getArguments(func, getArgValues) {
     }
     argsString = args.toString();
     return argsString;
+	*/
 }
 
 dk.trace.getFunctionName = function dk_trace_getFunctionName() {

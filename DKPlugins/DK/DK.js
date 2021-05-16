@@ -1295,8 +1295,12 @@ dk.errorCatcher = function dk_errorCatcher(object) {
                             return method.apply(this, arguments);
                         } catch (err) {
                             const stack = dk.trace.stackToConsoleString(err);
-                            dk.console.log(stack, 'red');
-                            xconsole.error(err);
+                            if(dk.console){
+								dk.console.log(stack, 'red');
+								xconsole && xconsole.error(err);
+							}
+							else
+								console.error(err);
                         }
                     }
                 }(func, method);
