@@ -21,8 +21,8 @@ var log_errors;// = DKFile_GetSetting(local_assets+"settings.txt", "[LOG_ERRORS]
 var log_file;// = DKFile_GetSetting(local_assets+"settings.txt", "[LOG_FILE]");
 //if(log_file === "ON"){ LOG_FILE = true; }
 
-LOG_SHOW;// = DKFile_GetSetting(local_assets+"settings.txt", "[LOG_SHOW]");
-LOG_HIDE;// = DKFile_GetSetting(local_assets+"settings.txt", "[LOG_HIDE]");
+//LOG_SHOW;// = DKFile_GetSetting(local_assets+"settings.txt", "[LOG_SHOW]");
+//LOG_HIDE;// = DKFile_GetSetting(local_assets+"settings.txt", "[LOG_HIDE]");
 
 var log_lines;// = DKFile_GetSetting(local_assets+"settings.txt", "[LOG_LINES]");
 //if(log_lines === "ON"){ LOG_LINES = true; }
@@ -74,6 +74,7 @@ console.log("local_assets: "+local_assets);
 console.log("online_assets: "+online_assets);
 //console.log("absolutepath: "+absolutepath);
 
+/*
 console.log("LOG_DEBUG: "+LOG_DEBUG);
 console.log("LOG_INFO: "+LOG_INFO);
 console.log("LOG_WARNINGS: "+LOG_WARNINGS);
@@ -81,7 +82,7 @@ console.log("LOG_ERRORS: "+LOG_ERRORS);
 console.log("LOG_FILE: "+LOG_FILE);
 console.log("LOG_SHOW: "+LOG_SHOW);
 console.log("LOG_HIDE: "+LOG_HIDE);
-
+*/
 
 ////////////////////////
 function DKAssets_init()
