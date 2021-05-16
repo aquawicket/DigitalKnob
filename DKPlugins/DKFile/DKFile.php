@@ -35,7 +35,7 @@ function ValidatePath($path){
 }
 
 // https://www.php.net/manual/en/function.file-exists.php
-function urlExists($path){
+function exists($path){
 	$path = ValidatePath($path);
 	return file_exists($path);
 }
