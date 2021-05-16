@@ -4,16 +4,20 @@ include("../DK/DK.php");
 
 // Base PHP File Functions
 function ValidatePath($path){
+	//echo "ValidatePath(".$path.")";
 	if(substr_count($path, ":") > 1){
-		echo $path."\n";
-		echo "ERROR: the path contains more than 1 :";
+		return error("ERROR: ".$path." the path contains more than 1 :");
 	}
+	if(substr_count($path, "//") > 0){
+		return error("ERROR: ".$path." the path contains //");
+	}
+	$path = str_replace("\\", "/", $path);
 	return $path;
 }
 
 // https://www.php.net/manual/en/function.file-exists.php
 function urlExists($path){
-	return file_exists(ValidatPath($path));
+	return file_exists(ValidatePath($path));
 }
 
 // https://www.php.net/manual/en/function.unlink.php
@@ -67,7 +71,7 @@ function getAbsolutePath($path){
 }
 
 function getAssetsPath(){
-    $assetsPath = dirname(__DIR__);
+    $assetsPath = ValidatePath(dirname(__DIR__)."/");
     //if(basename($assetsPath) != "assets")
         //return error("assetsPath does not contain an assets folder \n");
     if(!is_dir($assetsPath))
@@ -261,11 +265,12 @@ function pullDKAssets(){
 function directoryContents($path){
 	echo "directoryContents(".$path.")\n";
 	$path = ValidatePath($path);
-	//echo "dir = ".$dir."\n";
-	$root = $_SERVER['DOCUMENT_ROOT']."\\";
+	//echo "path = ".$path."\n";
+	//$root = $_SERVER['DOCUMENT_ROOT']."\\";
+	$root = "";
 	//echo "root = ".$root."\n";
-	echo "opendir($root.$dir)\n";
-	$myDirectory = opendir($root.$dir);
+	echo "opendir($root.$path)\n";
+	$myDirectory = opendir($root.$path);
 	while($entryName = readdir($myDirectory)){
 		//echo "entryName = ".$entryName."\n";
 		$dirArray[] = $entryName;
@@ -274,8 +279,8 @@ function directoryContents($path){
 	
 	//Lets sort in alpha order with folders on top
 	for ($i = 1; $i < count($dirArray); $i++) {
-		//echo "if(dir == '.')\n";
-		if($dir == "."){
+		//echo "if(path == '.')\n";
+		if($path == "."){
             //echo "if(filetype($root.$dirArray[$i]) == 'dir'\n";
     		if(filetype($root.$dirArray[$i]) == "dir")
 				$folders[] = $dirArray[$i];
@@ -284,8 +289,8 @@ function directoryContents($path){
 		}
 		else{
 	        //echo "else {\n";
-            //echo "if(filetype(".$root.$dir.$dirArray[$i].") == 'dir')\n";
-			if(filetype($root.$dir.$dirArray[$i]) == "dir")
+            //echo "if(filetype(".$root.$path.$dirArray[$i].") == 'dir')\n";
+			if(filetype($root.$path.$dirArray[$i]) == "dir")
 				$folders[] = $dirArray[$i];
 			else
 				$files[] = $dirArray[$i];

@@ -39,12 +39,12 @@ dk.audio.pause = function dk_audio_pause(src) {
 
 //https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/play
 dk.audio.play = async function dk_audio_play(src) {
-    try {
+    //try {
         const audio = byId(src);
         await audio.play();
-    } catch (errMsg) {
-        console.warn(errMsg);
-    }
+    //} catch (errMsg) {
+    //    console.warn(errMsg);
+    //}
 }
 
 dk.audio.stop = function dk_audio_stop(src) {

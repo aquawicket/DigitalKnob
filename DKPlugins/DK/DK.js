@@ -62,8 +62,8 @@ const error = function error(str, callback, rtnval) {
     });
     !rtnval && (rtnval = false);
     //console.error(str);
-    callback && callback(rtnval);
     throw new Error(str);
+    callback && callback(rtnval);
     return rtnval;
 }
 
@@ -1101,8 +1101,7 @@ dk.sendRequest = function dk_sendRequest(url, dk_sendRequest_callback, httpMetho
         default:
             return error("httpMethod invalid", dk_sendRequest_callback(false));
         }
-    } else
-        httpMethod = "GET";
+    }
 
     //DEBUG
     let file;
@@ -1111,6 +1110,7 @@ dk.sendRequest = function dk_sendRequest(url, dk_sendRequest_callback, httpMetho
 
     //FIXME: duktape
     //url = encodeURIComponent(url).replace(";", "%3B");
+    //url = encodeURIComponent(url);
     xhr.open(httpMethod, url, true);
     //https://en.wikipedia.org/wiki/List_of_HTTP_header_fields
     if (httpMethod === "POST" || httpMethod === "Put")
@@ -1295,7 +1295,7 @@ dk.errorCatcher = function dk_errorCatcher(object) {
                             return method.apply(this, arguments);
                         } catch (err) {
                             const stack = dk.trace.stackToConsoleString(err);
-                            if (dk.console) {
+                            if (dk.console && dk.console.log) {
                                 dk.console.log(stack, 'red');
                                 xconsole && xconsole.error(err);
                             } else

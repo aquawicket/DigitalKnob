@@ -15,7 +15,7 @@ dk.solution.init = function dk_solution_init() {
         byId("DKSolutionPath").onkeypress = dk.solution.onevent;
         dk.solution.openFolder(byId("DKSolutionPath").value);
 
-        dk.solution.setElement(html);
+        dk.solution.setAccessNode(html);
         dk.frame.create(dk.solution);
     });
 }
@@ -38,13 +38,15 @@ dk.solution.onevent = function dk_solution_onevent(event) {
     }
 
     if (event.type === "contextmenu") {
+        event.stopPropagation();
         event.preventDefault();
+        const path = event.currentTarget.getAttribute("path");
         const menu = dk.menu.createInstance();
-        dk.menu.addItem(menu, "Open", function DKMenu_Clear() {
-            dk.console.clear();
+        dk.menu.addItem(menu, "Open", function dk_menu_open() {
+             dk.solution.open(path);
         });
-
         
+        /*
         var id = event.currentTarget.id;
         event.stopPropagation();
         event.preventDefault();
@@ -56,6 +58,7 @@ dk.solution.onevent = function dk_solution_onevent(event) {
             dk.solutionMenu.setId(id);
             dk.solutionMenu.setFile(file);
         });
+        */
         return;
     }
 
@@ -70,14 +73,15 @@ dk.solution.onevent = function dk_solution_onevent(event) {
         //console.log(DK_GetValue(DK_GetId(event))+"\n");
         if (event.currentTarget.id.includes("DKSolutionFolder")) {
             //console.log("DKSolutionFolder\n");
-            console.log("dk.solution.openFolder(byId(event.currentTarget.id).value = "+dk.solution.openFolder(byId(event.currentTarget.id).value));
+            console.log("dk.solution.openFolder(byId(event.currentTarget.id).value = " + dk.solution.openFolder(byId(event.currentTarget.id).value));
             const value = byId(event.currentTarget.id).getAttribute('value');
             dk.solution.openFolder(value);
             return;
         }
-        if(!byId(event.currentTarget.id).value)
+        if (!byId(event.currentTarget.id).value)
             return error("value seems to be unsert")
-        dk.solution.openFile(value);//byId(event.currentTarget.id).value);
+        dk.solution.openFile(value);
+        //byId(event.currentTarget.id).value);
         //DK_ClearSelection();
         return;
     }
@@ -104,19 +108,17 @@ dk.solution.select = function dk_solution_select(id) {
         byId(id).style.color = "rgb(255,255,255)";
     }
 }
-dk.solution.openFolder = function dk_solution_openFolder(path) {
-    if (!dk.solution.updatePath(path))
-        return false;
-    return true;
-}
 
-dk.solution.openFile = function dk_solution_openFile(path) {
+dk.solution.open = function dk_solution_openFile(path) {
     var aPath = path;
-    if (dk.getOS() !== "Android") {
-        dk.file.getAbsolutePath(path, function dk_file_getAbsolutePath_callback(results) {
-            aPath = results;
-        });
-    }
+    dk.file.getAbsolutePath(path, function dk_file_getAbsolutePath_callback(results) {
+        aPath = results;
+    });
+    
+
+    //TODO
+    return;
+
     if (!duktape)
         return error("duktape invalid");
     if (!CPP_DK_Run(aPath, ""))
@@ -124,9 +126,15 @@ dk.solution.openFile = function dk_solution_openFile(path) {
     return true;
 }
 
+dk.solution.openFolder = function dk_solution_openFolder(path) {
+    if (!dk.solution.updatePath(path))
+        return false;
+    return true;
+}
+
 dk.solution.openHere = function dk_solution_openHere(path) {
     var aPath = path;
- 
+
     if (dk.getOS !== "Android") {
         aPath = CPP_DKFile_GetAbsolutePath(path);
         if (typeof (absolutepath) === 'string')
@@ -149,14 +157,13 @@ dk.solution.openHere = function dk_solution_openHere(path) {
 }
 
 dk.solution.updatePath = function dk_solution_updatePath(path) {
+    !path && (path = "");
     //reload events
     byId("DKSolutionUp").onclick = dk.solution.onevent;
     byId("DKSolutionMenu").onclick = dk.solution.onevent;
     byId("DKSolutionMenu").oncontextmenu = dk.solution.onevent;
     byId("DKSolutionPath").onkeypress = dk.solution.onevent;
 
-    if (!path)
-        path = "";
     var aPath = path;
     /*
 	var aPath;
@@ -176,14 +183,14 @@ dk.solution.updatePath = function dk_solution_updatePath(path) {
         byId("DKSolutionMenu").innerHTML = "";
         //Clear it
         for (let d = 0; d < files.length; d++) {
-            dk.file.isDir(aPath + "/" + files[d], function dk_file_isDir_callback(result) {
+            dk.file.isDir(aPath + files[d], function dk_file_isDir_callback(result) {
 
                 if (result) {
                     //Folders
                     var element2 = dk.gui.createElement(byId("DKSolutionMenu"), "div", "DKSolutionFolder");
                     element2.setAttribute("class", "option");
-                    var value = aPath + "/" + files[d] + "/";
-                    element2.setAttribute("value", value);
+                    const path = aPath + files[d] + "/";
+                    element2.setAttribute("path", path);
                     element2.style.whiteSpace = "nowrap";
                     element2.addEventListener("click", dk.solution.onevent);
                     element2.style.paddingLeft = "17px";
@@ -202,14 +209,14 @@ dk.solution.updatePath = function dk_solution_updatePath(path) {
             });
         }
         for (let f = 0; f < files.length; f++) {
-            dk.file.isDir(aPath + "/" + files[f], function dk_file_isDir_callback(result) {
+            dk.file.isDir(aPath + files[f], function dk_file_isDir_callback(result) {
 
                 if (!result) {
                     //Files
                     var element3 = dk.gui.createElement(byId("DKSolutionMenu"), "div", "DKSolutionFile");
                     element3.setAttribute("class", "option");
-                    var value = aPath + "/" + files[f];
-                    element3.setAttribute("value", value);
+                    const path = aPath + files[f];
+                    element3.setAttribute("path", path);
                     element3.style.whiteSpace = "nowrap";
                     element3.style.paddingLeft = "17px";
                     element3.style.backgroundRepeat = "no-repeat";

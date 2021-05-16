@@ -34,10 +34,10 @@ dk.php.call = function dk_php_call(httpMethod, phpPath, funcName) {
     }
     let path = "";
     if (location.protocol == "file:") 
-        path = "http://"+dk.localIP+":"+dk.port;
+        path = "http://"+dk.localIP+":"+dk.port+"/";
     const str = JSON.stringify(jsonData);
     const data = "x=" + encodeURIComponent(str);
-    const url = path + phpPath + "?" + data;
+    const url = dk.file.validatepath(path + phpPath) + "?" + data;
     const php_error = function php_error(msg, dk_php_callback){ 
         return error(msg, dk_php_callback);
     }
