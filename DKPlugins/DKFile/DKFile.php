@@ -5,7 +5,6 @@ include("../DK/DK.php");
 // Base PHP File Functions
 function ValidatePath($path){
 	//echo "ValidatePath(".$path.")\n";
-	//return error("test error");
 	if($path[0] === "/"){
 		echo $path."  path has / as the first character \n";
 		$path = str_replace("/", "", $path, 1);
@@ -17,17 +16,21 @@ function ValidatePath($path){
     	//echo "AFTER: ".$path."\n";
     }
 	if(!str_contains($path, "://") && (substr_count($path, "//") > 0)){
-		echo $path." the path contains // seperator\n";
+		echo $path."  path contains // seperator\n";
 		$path = str_replace("//", "/", $path);
 		//echo "AFTER: ".$path."\n";
 	}
 	if(str_contains($path, "://") && (substr_count($path, "//") > 1)){
-		echo $path." the path contains // seperator\n";
+		echo $path."  path contains // seperator\n";
 		$path = str_replace("//", "/", $path);
 		$path = str_replace(":/", "://", $path);
 		//echo "AFTER: ".$path."\n";
 	}
-	//TODO - Check that directory paths end with a /
+	if(is_dir($path) && substr($path, -1) !== "/"){
+		echo $path." path is dirctory without trailing / \n";
+		$path = $path."/";
+		//echo "AFTER: ".$path."\n";
+	}
 	return $path;
 }
 
@@ -100,26 +103,26 @@ function getAssetsPath(){
     if(!is_dir($assetsPath))
     	return error("assetsPath is an invalid directory \n");
     $assetsPath = ValidatePath($assetsPath);
-    //echo "assetsPath = ".$assetsPath."\n";
+    echo "assetsPath = ".$assetsPath."\n";
     return $assetsPath;
 }
 
 function getDKPath(){
-    $dkPath = dirname(__DIR__);
+    $dkPath = dirname(__DIR__)."/";
     $n = 1;
     while(is_dir($dkPath) && $n < 10){
         $dkPath = dirname(__DIR__, $n++);
         if(basename($dkPath) === "digitalknob"){
             $dkPath = ValidatePath($dkPath);
-            //echo "dkPath = ".$dkPath."\n";
+            echo "dkPath = ".$dkPath."\n";
         	return $dkPath;
         }
     }
     //Try defaults
-    if(file_exists("C:\Users\aquawicket\digitalknob")){
-    	$dkPath = "C:\Users\aquawicket\digitalknob";
+    if(file_exists("C:/Users/aquawicket/digitalknob/")){
+    	$dkPath = "C:/Users/aquawicket/digitalknob/";
     	$dkPath = ValidatePath($dkPath);
-    	//echo "dkPath = ".$dkPath."\n";
+    	echo "dkPath = ".$dkPath."\n";
     	return $dkPath;
     }
     return error("could not find digitalknob path \n");
@@ -127,31 +130,31 @@ function getDKPath(){
 
 function getDKPluginsPath(){
     $dkPath = getDKPath();
-	$dkPluginsPath = $dkPath."/DK/DKPlugins";
+	$dkPluginsPath = $dkPath."DK/DKPlugins/";
     if(!$dkPluginsPath)
         return error("dkPluginsPath invalid");
     $dkPluginsPath = ValidatePath($dkPluginsPath);
-    //echo "dkPluginsPath = ".$dkPluginsPath."\n";
+    echo "dkPluginsPath = ".$dkPluginsPath."\n";
     return $dkPluginsPath;
 }
 
 function getRelativeDKPluginsPath(){
-    $relativeDKPluginsPath = dirname(__DIR__);
+    $relativeDKPluginsPath = dirname(__DIR__)."/";
     $n = 1;
     while(is_dir($relativeDKPluginsPath) && $n < 10){
         $relativeDKPluginsPath = dirname(__DIR__, $n++);
-        if(is_dir($relativeDKPluginsPath."/DKPlugins")){
-        	$relativeDKPluginsPath = $relativeDKPluginsPath."/DKPlugins";
+        if(is_dir($relativeDKPluginsPath."/DKPlugins/")){
+        	$relativeDKPluginsPath = $relativeDKPluginsPath."/DKPlugins/";
         	$relativeDKPluginsPath = ValidatePath($relativeDKPluginsPath);
-        	//echo "relativeDKPluginsPath = ".relativeDKPluginsPath."\n";
+        	echo "relativeDKPluginsPath = ".relativeDKPluginsPath."\n";
         	return $relativeDKPluginsPath;
         }
     }
     //FIXME: Some user defaults
-    if(file_exists("C:\Users\aquawicket\digitalknob\DKTasmota\DKPlugins")){
-    	$relativeDKPluginsPath = "C:\Users\aquawicket\digitalknob\DKTasmota\DKPlugins";
+    if(file_exists("C:/Users/aquawicket/digitalknob/DKTasmota/DKPlugins/")){
+    	$relativeDKPluginsPath = "C:/Users/aquawicket/digitalknob/DKTasmota/DKPlugins/";
     	$relativeDKPluginsPath = ValidatePath($relativeDKPluginsPath);
-    	//echo "relativeDKPluginsPath = ".$relativeDKPluginsPath."\n";
+    	echo "relativeDKPluginsPath = ".$relativeDKPluginsPath."\n";
     	return $relativeDKPluginsPath;
     }
     return error("cound not find realative DKPlugins path");
@@ -160,10 +163,10 @@ function getRelativeDKPluginsPath(){
 function getDKAppAssetsPath(){
 	$dkAppAssetsPath = "";
     //FIXME: Some user defaults
-    if(file_exists("C:/Users/aquawicket/digitalknob/DKTasmota/DKApps/DKTasmota/assets")){
-    	$dkAppAssetsPath = "C:/Users/aquawicket/digitalknob/DKTasmota/DKApps/DKTasmota/assets";
+    if(file_exists("C:/Users/aquawicket/digitalknob/DKTasmota/DKApps/DKTasmota/assets/")){
+    	$dkAppAssetsPath = "C:/Users/aquawicket/digitalknob/DKTasmota/DKApps/DKTasmota/assets/";
     	$dkAppAssetsPath = ValidatePath($dkAppAssetsPath);
-    	//echo "dkAppsAssetsPath = ".$dkAppAssetsPath."\n";
+    	echo "dkAppsAssetsPath = ".$dkAppAssetsPath."\n";
     	return $dkAppAssetsPath;
     }
 	return error("cound not find DKApp path");
@@ -188,10 +191,12 @@ function pushDKAssets(){
     //Now copy matching folders to the DKPlugins path(s)
 	$assetsList = scandir($assetsPath);
 	for($n = 2; $n < count($assetsList); $n++){
-		if(!is_dir($assetsPath."/".$assetsList[$n])){
+		if(!is_dir($assetsPath.$assetsList[$n])){
 			if($assetsPath != $dkAppAssetsPath){
-		        $filesrc = $assetsPath."/".$assetsList[$n];
-		        $filedest = $dkAppAssetsPath."/".$assetsList[$n];
+		        $filesrc = $assetsPath.$assetsList[$n];
+		        //echo "filesrc = ".$filesrc."\n";
+		        $filedest = $dkAppAssetsPath.$assetsList[$n];
+		        //echo "filedest = ".$filedest."\n";
 		        if (!copy($filesrc, $filedest))
                     echo "FAILED to copy $filesrc\n";
                 else
@@ -199,21 +204,24 @@ function pushDKAssets(){
 	        }
 		    continue;
 		}
-		$assetFolder = $assetsPath."/".$assetsList[$n];
+		$assetFolder = $assetsPath.$assetsList[$n]."/";
 		$assetFiles = scandir($assetFolder);
         for($nn = 2; $nn < count($assetFiles); $nn++){
-            if(is_dir($assetFolder."/".$assetFiles[$nn])) 
+            if(is_dir($assetFolder.$assetFiles[$nn])) 
                 continue; 
-            $src = $assetFolder."/".$assetFiles[$nn];
-            if(is_dir($dkPluginsPath."/".$assetsList[$n])){
-            	$dest = $dkPluginsPath."/".$assetsList[$n]."/".$assetFiles[$nn];
+            $src = $assetFolder.$assetFiles[$nn];
+            //echo "src = ".$src."\n";
+            if(is_dir($dkPluginsPath.$assetsList[$n])){
+            	$dest = $dkPluginsPath.$assetsList[$n]."/".$assetFiles[$nn];
+            	//echo "dest = ".$dest."\n";
 			    if (!copy($src, $dest))
                     echo "FAILED to copy $src\n";
                 else
                 	echo "copied to $dest\n";
 		    }
-		    if($dkPluginsPath2 && is_dir($dkPluginsPath2."/".$assetsList[$n])){
-			    $dest = $dkPluginsPath2."/".$assetsList[$n]."/".$assetFiles[$nn];
+		    if($dkPluginsPath2 && is_dir($dkPluginsPath2.$assetsList[$n])){
+			    $dest = $dkPluginsPath2.$assetsList[$n]."/".$assetFiles[$nn];
+			    //echo "dest = ".$dest."\n";
 			    if (!copy($src, $dest))
                     echo "failed to copy $src\n";
                 else
@@ -238,9 +246,9 @@ function pullDKAssets(){
     if($assetsPath != $dkAppAssetsPath){
     	$dkAppAssetsPathList = scandir($dkAppAssetsPath);
     	for($n = 2; $n < count($dkAppAssetsPathList); $n++){
-			if(!is_dir($dkAppAssetsPath."/".$dkAppAssetsPathList[$n])){
-				$filesrc = $dkAppAssetsPath."/".$dkAppAssetsPathList[$n];
-				$filedest = $assetsPath."/".$dkAppAssetsPathList[$n];
+			if(!is_dir($dkAppAssetsPath.$dkAppAssetsPathList[$n])){
+				$filesrc = $dkAppAssetsPath.$dkAppAssetsPathList[$n];
+				$filedest = $assetsPath.$dkAppAssetsPathList[$n];
 				if (!copy($filesrc, $filedest))
 					echo "FAILED to copy $filesrc\n";
 				else
@@ -259,18 +267,18 @@ function pullDKAssets(){
     $dkPluginsList = array_values(array_diff($dkPluginsList, $ignoreFolders));
 
     for($n = 0; $n < count($dkPluginsList); $n++){
-		if(is_dir($dkPluginsPath."/".$dkPluginsList[$n]))
-			$dkPluginsFolder = $dkPluginsPath."/".$dkPluginsList[$n];
-		else if(is_dir($dkPluginsPath2."/".$dkPluginsList[$n]))
-			$dkPluginsFolder = $dkPluginsPath2."/".$dkPluginsList[$n];
+		if(is_dir($dkPluginsPath.$dkPluginsList[$n]))
+			$dkPluginsFolder = $dkPluginsPath.$dkPluginsList[$n]."/";
+		else if(is_dir($dkPluginsPath2.$dkPluginsList[$n]))
+			$dkPluginsFolder = $dkPluginsPath2.$dkPluginsList[$n]."/";
 		else
 			continue;
 		
         $dkPluginsFiles = scandir($dkPluginsFolder);
         for($nn = 0; $nn < count($dkPluginsFiles); $nn++){
-            if(is_dir($dkPluginsFolder."/".$dkPluginsFiles[$nn])) 
+            if(is_dir($dkPluginsFolder.$dkPluginsFiles[$nn])) 
                 continue; 
-            $src = $dkPluginsFolder."/".$dkPluginsFiles[$nn];
+            $src = $dkPluginsFolder.$dkPluginsFiles[$nn];
             
             $skip = false;
             foreach ($ignoreFiles as $item) {
@@ -284,13 +292,13 @@ function pullDKAssets(){
             if($skip)
                 continue;
 
-            if(is_dir($assetsPath."/".$dkPluginsList[$n])){
-                $dest = $assetsPath."/".$dkPluginsList[$n]."/".$dkPluginsFiles[$nn];
+            if(is_dir($assetsPath.$dkPluginsList[$n])){
+                $dest = $assetsPath.$dkPluginsList[$n]."/".$dkPluginsFiles[$nn];
 			    //echo $src."->".$dest."\n";
     	        if (!copy($src, $dest))
                     echo "FAILED to copy: $src\n";
                 else
-                    echo "copied FROM $src -> \n";
+                    echo "copied to $dest\n";
 		     }
         }
     }
@@ -298,9 +306,8 @@ function pullDKAssets(){
 }
 
 function directoryContents($path){
-	echo "directoryContents(".$path.")\n";
+	//echo "directoryContents(".$path.")\n";
 	$path = ValidatePath($path);
-	//echo "path = ".$path."\n";
 	//$root = $_SERVER['DOCUMENT_ROOT']."/";
 	$root = "";
 	//echo "root = ".$root."\n";
@@ -313,8 +320,7 @@ function directoryContents($path){
 	closedir($myDirectory);
 	
 	//Lets sort in alpha order with folders on top
-	for ($i = 1; $i < count($dirArray); $i++) {
-		//echo "if(path == '.')\n";
+	for ($i = 1; $i < count($dirArray); $i++){
 		if($path == "."){
             //echo "if(filetype($root.$dirArray[$i]) == 'dir'\n";
     		if(filetype($root.$dirArray[$i]) == "dir")
