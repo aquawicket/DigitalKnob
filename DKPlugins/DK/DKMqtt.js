@@ -4,7 +4,7 @@
 
 dk.mqtt = new DKPlugin("dk_mqtt");
 
-dk.mqtt.init = function dk_mqtt_init(){
+dk.mqtt.init = function dk_mqtt_init() {
     dk.create("DKTasmota/mqttws31.min.js");
     dk.mqtt.mqtt;
     dk.mqtt.reconnectTimeout = 2000;

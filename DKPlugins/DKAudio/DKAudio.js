@@ -9,8 +9,7 @@ dk.audio.init = function dk_audio_init(callback) {
     return callback && callback(true);
 }
 
-dk.audio.end = function dk_audio_end() {
-}
+dk.audio.end = function dk_audio_end() {}
 
 dk.audio.preloadAudio = function dk_preloadAudio(src) {
     const audio = new Audio();
@@ -40,8 +39,8 @@ dk.audio.pause = function dk_audio_pause(src) {
 //https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/play
 dk.audio.play = async function dk_audio_play(src) {
     //try {
-        const audio = byId(src);
-        await audio.play();
+    const audio = byId(src);
+    await audio.play();
     //} catch (errMsg) {
     //    console.warn(errMsg);
     //}
@@ -77,8 +76,8 @@ dk.audio.setVolume = function dk_audio_setVolume(src, volume) {
     audio.volume = volume;
 }
 
-dk.audio.toggleMute = function dk_audio_toggleMute(src){
-    if(dk.audio.muted)
+dk.audio.toggleMute = function dk_audio_toggleMute(src) {
+    if (dk.audio.muted)
         dk.audio.unmute(src);
     else
         dk.audio.mute(src);
@@ -99,12 +98,10 @@ dk.audio.setTime = function dk_audio_setTime(src, seconds) {
     byId(src).currentTime = seconds;
 }
 
-dk.audio.timeUpdate = function dk_audio_timeUpdate() {
-    //DKSendEvent("window", "timeupdate");
+dk.audio.timeUpdate = function dk_audio_timeUpdate() {//DKSendEvent("window", "timeupdate");
 }
 
-dk.audio.ended = function dk_audio_ended() {
-    //DKSendEvent("window", "ended");
+dk.audio.ended = function dk_audio_ended() {//DKSendEvent("window", "ended");
 }
 
 dk.audio.getTime = function dk_audio_getTime(src) {

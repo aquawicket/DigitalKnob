@@ -2,12 +2,11 @@
 
 dk.debug = new DKPlugin("dk_debug");
 
-
 //Error-first callbacks
 dk.firstFunc = function dk_firstFunc(str1, str2, callback) {
-    console.debug("dk.firstFunc("+str1+","+str2+")");
+    console.debug("dk.firstFunc(" + str1 + "," + str2 + ")");
     return dk.secondFunc(str1, str2, function dk_secondFunc_callback(err, result) {
-        console.debug("dk.secondFuncCallback("+err+","+result+")");
+        console.debug("dk.secondFuncCallback(" + err + "," + result + ")");
         if (err) {
             console.error(err.name + " " + err.message);
             return callback(err);
@@ -18,9 +17,9 @@ dk.firstFunc = function dk_firstFunc(str1, str2, callback) {
     return error("Don't use return without callback");
 }
 dk.secondFunc = function dk_secondFunc(str1, str2, dk_secondFunc_callback) {
-    console.debug("dk.secondFunc("+str1+","+str2+")");
+    console.debug("dk.secondFunc(" + str1 + "," + str2 + ")");
     dk.thirdFunc(str1, str2, function dk_thirdFunc_callback(err, result) {
-        console.debug("dk.thirdFuncCallback("+err+","+result+")");
+        console.debug("dk.thirdFuncCallback(" + err + "," + result + ")");
         if (err) {
             throw err;
             console.log("dk.secondFunc(): got an error, passing it along");
@@ -30,7 +29,7 @@ dk.secondFunc = function dk_secondFunc(str1, str2, dk_secondFunc_callback) {
     });
 }
 dk.thirdFunc = function dk_thirdFunc(str1, str2, dk_thirdFunc_callback) {
-    console.debug("dk.thirdFunc("+str1+","+str2+")");
+    console.debug("dk.thirdFunc(" + str1 + "," + str2 + ")");
     if (str1 !== str2)
         return dk_thirdFunc_callback(new Error("The strings must match"));
     return dk_thirdFunc_callback(null, (str1 + str2));
@@ -47,24 +46,21 @@ function err(str) {
 }
 */
 
-const require2 = function require2(variable){
+const require2 = function require2(variable) {
     console.log(variable);
     //if(variable === undefined)
 }
 
-const testFunc = function testFunc(needed){
+const testFunc = function testFunc(needed) {
     require2(needed);
     //console.log(needed);
 }
-
-
 
 ////////////////////////////////////
 ///  A Convienient Debug Function
 ///////////////////////////////////
 dk.debug.debugFunc = function dk_debug_debugFunc() {
     //console.log("dk.debug.debugFunc");
-    
 
     testFunc("abc");
     testFunc(123);
@@ -89,7 +85,6 @@ dk.debug.debugFunc = function dk_debug_debugFunc() {
         console.log("data = "+data);
     });
     */
-
 
     //const rtn = dk.file.makeDir("Test", "","", function dk_file_makeDir_callback(result){ console.debug(result); } );
 

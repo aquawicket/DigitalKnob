@@ -29,7 +29,7 @@ dk.devtoolsbutton.create = function dk_devtools_create() {
 }
 
 dk.devtoolsbutton.show = function dk_devtools_show() {
-    dk.create("DKDevTools/DKDevTools.js", function dk_create_callback(){
+    dk.create("DKDevTools/DKDevTools.js", function dk_create_callback() {
         dk.devtools.create();
     });
 }

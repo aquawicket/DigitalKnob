@@ -2,7 +2,6 @@
 
 dk.clipboard = new DKPlugin("dk_clipboard");
 
-
 dk.clipboard.cut = function dk_clipboard_cut(ele) {
     let text = "";
     if (window.getSelection)

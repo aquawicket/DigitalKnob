@@ -100,7 +100,7 @@ dk.fileassociation.openhtml = function dk_fileassociation_openHtml(path) {
     //console.log("DK_AppendDataPath("+the_path+")");
     //AppendDataPath(the_path);
 
-    dk.file.fileToString(path, function dk_file_fileToString_callback(str){
+    dk.file.fileToString(path, function dk_file_fileToString_callback(str) {
         filedata = str;
     });
     if (!filedata)

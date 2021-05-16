@@ -27,27 +27,28 @@ dk.trace.editFile = function dk_trace_editFile(file, line, ch) {
     const createPopup = function createPopup() {
         dk.codemirror.create();
         dk.codemirror.open(file, function dk_codemirror_open_callback(result) {
-            
-            require({result});
-           
+
+            require({
+                result
+            });
 
             dk.codemirror.myCodeMirror.focus();
             dk.codemirror.myCodeMirror.setCursor({
                 line: line - 1,
                 ch: ch - 1
             });
-            
+
             dk.codemirror.myCodeMirror.scrollIntoView({
                 line: line - 1,
                 char: ch
             }, 200);
-            
+
             dk.codemirror.myCodeMirror.getDoc().markText({
                 line: line - 1,
-                ch: (ch-1)
+                ch: (ch - 1)
             }, {
                 line: line - 1,
-                ch: (ch+1)
+                ch: (ch + 1)
             }, {
                 css: "background-color: rgb(100,0,0)"
             });
@@ -99,7 +100,7 @@ dk.trace.stackToConsoleString = function dk_trace_stackToConsoleString(arg, dele
     }
 
     let str;
-    headerMsg ? str = jsonStack[0].msg+"\n" : str = "";
+    headerMsg ? str = jsonStack[0].msg + "\n" : str = "";
     for (let n = 1; n < jsonStack.length; n++) {
         str += "    at " + jsonStack[n].func + " ";
         str += "(<a href='#' onClick='dk.trace.editFile(\"" + jsonStack[n].filePath + "\",\"" + jsonStack[n].lineNum + "\",\"" + jsonStack[n].charNum + "\")' style='color:rgb(213,213,213)'>" + jsonStack[n].file + ":" + jsonStack[n].lineNum + "</a>)<br>";
@@ -160,7 +161,7 @@ dk.trace.stackToJSON = function dk_trace_stackToJSON(stack) {
         const lineNum = line.split(":").pop();
         line = line.replace(":" + lineNum, "");
 
-        const as = line.split("]").shift()+"]";
+        const as = line.split("]").shift() + "]";
         line = line.replace(as + " ", "");
 
         const file = line.split("/").pop();
@@ -216,8 +217,8 @@ dk.trace.getArguments = function dk_trace_getArguments(func, getArgValues) {
     let args = argsString.split(",");
 
     //FIXME: duktape
-	console.error("FIXME");
-	/*
+    console.error("FIXME");
+    /*
     for (let val of fn.arguments) {
         if (count > 0) {
             args[count] = " " + args[count];
