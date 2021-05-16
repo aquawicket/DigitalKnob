@@ -77,13 +77,22 @@ dk.audio.setVolume = function dk_audio_setVolume(src, volume) {
     audio.volume = volume;
 }
 
+dk.audio.toggleMute = function dk_audio_toggleMute(src){
+    if(dk.audio.muted)
+        dk.audio.unmute(src);
+    else
+        dk.audio.mute(src);
+}
+
 dk.audio.mute = function dk_audio_mute(src) {
     dk.audio.lastVolume = dk.audio.getVolume(src);
     dk.audio.setVolume(src, 0);
+    dk.audio.muted = true;
 }
 
 dk.audio.unmute = function dk_audio_unmute(src) {
     dk.audio.setVolume(src, dk.audio.lastVolume);
+    dk.audio.muted = false;
 }
 
 dk.audio.setTime = function dk_audio_setTime(src, seconds) {
