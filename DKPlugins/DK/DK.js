@@ -62,8 +62,8 @@ const error = function error(str, callback, rtnval) {
     });
     !rtnval && (rtnval = false);
     //console.error(str);
-    throw new Error(str);
     callback && callback(rtnval);
+    throw new Error(str);
     return rtnval;
 }
 
@@ -1295,12 +1295,11 @@ dk.errorCatcher = function dk_errorCatcher(object) {
                             return method.apply(this, arguments);
                         } catch (err) {
                             const stack = dk.trace.stackToConsoleString(err);
-                            if(dk.console){
-								dk.console.log(stack, 'red');
-								xconsole && xconsole.error(err);
-							}
-							else
-								console.error(err);
+                            if (dk.console) {
+                                dk.console.log(stack, 'red');
+                                xconsole && xconsole.error(err);
+                            } else
+                                console.error(err);
                         }
                     }
                 }(func, method);
