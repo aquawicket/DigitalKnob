@@ -3,6 +3,11 @@
 //* Also, git credential memory should be added.
 
 var USERNAME = "aquawicket"; //FIXME: Need to dynamically get username (aquawicket)
+if(CPP_DK_GetOS() === "Raspberry"){
+    USERNAME = "pi";
+}
+
+
 var OS = "";   //win32,win64,mac32,mac64,linux32,linux64,ios32,ios64,iossim32,iossim64,android32,android64,raspberry32,raspberry64 
 var APP = "";  //DKAppname
 var TYPE = "";  //Debug, Release, ALL
@@ -27,7 +32,7 @@ function DKBuild_init()
 
 if(CPP_DK_GetOS() === "Windows"){
 		if(CPP_DK_GetOSArchitecture() === "32"){
-			DKPATH = "C:/Users/aquawicket/digitalknob";
+			DKPATH = "C:/Users/"+USERNAME+"/digitalknob";
 			CMAKE = "C:/Program Files/CMake/bin/cmake.exe";
 			CMAKE = CPP_DKFile_GetShortName(CMAKE);
 			NDK = DKPATH+"/DK/3rdParty/"+NDK_NAME;
