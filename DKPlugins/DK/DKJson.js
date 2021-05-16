@@ -60,12 +60,11 @@ dk.json.stringifyJson = function dk_json_stringifyJson(obj) {
 dk.json.findPartialMatch = function dk_json_findPartialMatch(obj, key, value) {
     //console.log(obj.length);
     let foundObj;
-    JSON.stringify(obj, function(_,nestedValue){
+    JSON.stringify(obj, function(_, nestedValue) {
         if (nestedValue && nestedValue[key] && (value.includes(nestedValue[key]) || nestedValue[key].includes(value)))
             foundObj = nestedValue;
         return nestedValue;
-    }
-    );
+    });
     return foundObj;
 }
 
@@ -77,15 +76,20 @@ dk.json.saveJsonToFile = function dk_json_saveJsonToFile(json, path, flags, call
 }
 
 dk.json.loadJsonFromFile = function dk_json_loadJsonFromFile(path, callback) {
-    dk.file.fileToString(path, function dk_file_fileToString_callback(str) {
-        
-        let json;
-        try {
-            json = JSON.parse(str);
-        } catch (err) {
-            return callback && callback(false);
+    dk.file.exists(path, function(result) {
+        if (result) {
+            dk.file.fileToString(path, function dk_file_fileToString_callback(str) {
+                let json;
+                try {
+                    json = JSON.parse(str);
+                } catch (err) {
+                    return callback(false);
+                }
+                return callback(json);
+            });
+        } else {
+            return callback(false);
         }
-        return callback && callback(json);
     });
 }
 

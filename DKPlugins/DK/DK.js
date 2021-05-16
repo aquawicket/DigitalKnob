@@ -1126,7 +1126,7 @@ dk.sendRequest = function dk_sendRequest(url, dk_sendRequest_callback, httpMetho
     }
     xhr.onerror = function xhr_onerror(event) {
         dk.console.error && dk.console.error("GET <a href=' " + url + " ' target='_blank' style='color:rgb(213,213,213)'>" + url + "</a> onerror");
-        debugXhr && console.debug("XMLHttpRequest.onabort(): " + file + " readyState:" + xhr.readyState + " status:" + xhr.status);
+        debugXhr && console.debug("XMLHttpRequest.onerror(): " + file + " readyState:" + xhr.readyState + " status:" + xhr.status);
         return dk_sendRequest_callback(false, url, xhr.responseText);
     }
     xhr.onload = function xhr_onload(event) {

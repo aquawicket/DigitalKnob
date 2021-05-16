@@ -75,14 +75,16 @@ dk.file.pullDKAssets = function dk_file_pullDKAssets(callback) {
 
 dk.file.urlExists = function dk_file_urlExists(url, callback, usePhp) {
     url = dk.file.validatepath(url);
-    if (!usePhp) {
+    if(!url.includes(dk.file.onlineAssets))
+        url = dk.file.onlineAssets + url;
+    if (!dk.php) {
         dk.sendRequest(url, function dk_sendRequest_callback(success, url, result) {
             if (!callback)
                 return error("callback invalid");
             if (success && url && result && callback)
                 return callback(result);
             else if (!result)
-                return callback(result);
+                return callback(!!result);
             else
                 return error("Unexpected Result: result = " + result, callback);
 
@@ -126,17 +128,19 @@ if (!dk.hasCPP()) {
 if (!dk.hasCPP()) {
     dk.file.exists = function dk_file_exists(path, callback) {
         path = dk.file.validatepath(path);
-        dk.file.getAbsolutePath(path, function dk_file_getAbsolutePath_callback(aPath) {
-            aPath = dk.file.validatepath(aPath);
+        if(!path.includes(dk.file.onlineAssets))
+            path = dk.file.onlineAssets + path;
+        //dk.file.getAbsolutePath(path, function dk_file_getAbsolutePath_callback(aPath) {
+            //aPath = dk.file.validatepath(aPath);
             //TODO: do we need to use aPath here?
-            dk.file.isDir(aPath, function dk_file_isDir_callback(isDir) {
-                if (isDir)
-                    return callback(true);
-                dk.file.urlExists(aPath, function dk_file_urlExists_callback(exists) {
-                    return callback(exists);
+            //dk.file.isDir(path, function dk_file_isDir_callback(isDir) {
+                //if (isDir)
+                //    return callback(true);
+                dk.file.urlExists(path, function dk_file_urlExists_callback(exists) {
+                    return callback(!!exists);
                 });
-            });
-        });
+            //});
+        //});
     }
 }
 
@@ -405,6 +409,7 @@ if (!dk.hasCPP()) {
         if (path.includes("file:///"))
             path = pathname;
         path = path.replace(location.protocol + "//" + location.hostname + "/", "");
+        path = path.replace("\\", "/");
         path = path.replace("//", "/");
         dk.php.call('POST', "DKFile/DKFile.php", "getAbsolutePath", path, function dk_php_call_callback(aPath) {
             aPath && console.debug(aPath);
@@ -432,16 +437,17 @@ dk.file.getRelativePath = function dk_file_getRelativePath(path, datapath) {
 if (!dk.hasCPP()) {
     dk.file.isDir = function dk_file_isDir(path, callback) {
         path = dk.file.validatepath(path);
-        path = dk.file.onlineAssets + path;
+        if(!path.includes(dk.file.onlineAssets))
+            path = dk.file.onlineAssets + path;
         dk.php.call('GET', "DKFile/DKFile.php", "isDir", path, function dk_php_call_callback(result) {
-            return callback(result);
+            return callback(!!result);
         });
     }
 } else {
     dk.file.isDir = function dk_file_isDir(path, callback) {
         path = dk.file.validatepath(path);
         const result = CPP_DKFile_IsDirectory(path);
-        return callback(result);
+        return callback(!!result);
     }
 }
 
