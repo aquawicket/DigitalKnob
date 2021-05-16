@@ -283,7 +283,7 @@ dk.getPlugin = function dk_getPlugin(url) {
     let plugin = dk[pluginName];
     if (!plugin) {
         if (pluginName !== "plugin")
-            return error(file + " does not contain a dk." + pluginName + " Object");
+            return warn(file + " does not contain a dk." + pluginName + " Object");
         else
             return null;
     }
@@ -1196,7 +1196,7 @@ if (!Array.prototype.includes) {
     Array.prototype.includes = function(searchElement /*, fromIndex*/
     ) {
         require({
-            searchElements
+            searchElement
         });
         if (this == null) {
             throw new TypeError('Array.prototype.includes called on null or undefined');
