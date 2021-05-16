@@ -4,7 +4,7 @@ dk.messagebox = new DKPlugin("dk_messagebox");
 
 dk.messagebox.init = function dK_messagebox_init(callback){
     dk.create("DKGui/DKMessageBox.css");
-    callback(true);
+    callback && callback(true);
 }
 
 dk.messagebox.close = function dk_messagebox_close(node) {
