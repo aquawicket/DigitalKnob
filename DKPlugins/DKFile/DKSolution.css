@@ -48,3 +48,11 @@
 	border-top-width:1rem;
 	background-color:rgb(255,255,255);
 }
+
+[dk_solution="folder"] {
+    white-space: nowrap;
+   	padding-left: 17px;
+    background-image: url("folder.png");
+    background-repeat: no-repeat;
+    cursor: default;
+}

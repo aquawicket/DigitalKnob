@@ -23,6 +23,8 @@ dk.gui.createTag = function dk_gui_createTag(tag, parent, props) {
     style && delete props.style;
     const element = Object.assign(document.createElement(tag), props);
     style && Object.assign(element.style, style);
+    //for(let attr in props)
+    //    element.setAttribute("dk", "");
     parent.appendChild(element);
     return element;
 }
