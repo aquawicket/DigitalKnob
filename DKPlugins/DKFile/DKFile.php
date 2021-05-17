@@ -4,46 +4,46 @@ include("../DK/DK.php");
 
 // Base PHP File Functions
 function ValidatePath($path){
-	//echo "ValidatePath(".$path.")\n";
-	if($path[0] === "/"){
-		echo $path."  path has / as the first character \n";
-		$path = str_replace("/", "", $path, 1);
+	//echo "php.ValidatePath(".$path.")\n";
+	//if($path && $path[0] === "/"){
+		//echo $path."  path has / as the first character \n";
+	//	$path = str_replace("/", "", $path, 1);
 		//echo "AFTER: ".$path."\n";
-	}
+	//}
     if(str_contains($path, "\\")){
-        echo $path."  path contains \\ \n";
+        //echo $path."  path contains \\ \n";
     	$path = str_replace("\\", "/", $path);
     	//echo "AFTER: ".$path."\n";
     }
 	if(!str_contains($path, "://") && (substr_count($path, "//") > 0)){
-		echo $path."  path contains // seperator\n";
+		//echo $path."  path contains // seperator\n";
 		$path = str_replace("//", "/", $path);
 		//echo "AFTER: ".$path."\n";
 	}
 	if(str_contains($path, "://") && (substr_count($path, "//") > 1)){
-		echo $path."  path contains // seperator\n";
+		//echo $path."  path contains // seperator\n";
 		$path = str_replace("//", "/", $path);
 		$path = str_replace(":/", "://", $path);
 		//echo "AFTER: ".$path."\n";
 	}
 	if(is_dir($path) && substr($path, -1) !== "/"){
-		echo $path." path is dirctory without trailing / \n";
+		//echo $path." path is dirctory without trailing / \n";
 		$path = $path."/";
 		//echo "AFTER: ".$path."\n";
 	}
 	return $path;
 }
 
-// https://www.php.net/manual/en/function.file-exists.php
-function exists($path){
-	$path = ValidatePath($path);
-	return file_exists($path);
-}
-
 // https://www.php.net/manual/en/function.unlink.php
 function delete($path){
 	$path = ValidatePath($path);
 	return unlink($path);
+}
+
+// https://www.php.net/manual/en/function.file-exists.php
+function exists($path){
+	$path = ValidatePath($path);
+	return file_exists($path);
 }
 
 // https://www.php.net/manual/en/function.is-dir
@@ -82,17 +82,64 @@ function stringToFile($path, $data, $flags = 0){
 }
 
 
-// Extended PHP File Functions 
+// Extended PHP File Functions
+function getPaths($path){
+	$path = getPath($path);
+	$aPath = getAbsolutePath($path);
+	$root = getRootPath();
+	$rPath = getRelativePath($aPath);
+	$realpath = realpath($aPath);
+	$realpath = ValidatePath($realpath);
+	$pathParts = pathinfo($aPath);
+	$dir = $pathParts['dirname'];
+	$dir = ValidatePath($dir);
+    $basename = $pathParts['basename'];
+    $extension = "";
+    if(isset($pathParts['extension'])){
+        $extension = $pathParts['extension'];
+    }
+    $filename = $pathParts['filename'];
+
+    $arr = array(
+        "path" => $path,
+        "aPath" => $aPath,
+        "root" => $root,
+        "rPath" => $rPath,
+        "realpath" => $realpath,
+        "dir" => $dir,
+        "basename" => $basename,
+        "extention" => $extension,
+        "filename" => $filename,    
+    );
+    //return json_encode($arr);
+	return $path.",".$aPath.",".$root.",".$rPath.",".$realpath.",".$dir.",".$basename.",".$extension.",".$filename;
+}
+
+function getPath($path){
+	if(!$path || $path === "/" || $path === ".")
+	    $path = getRootPath();
+	$path = realpath($path);
+    return ValidatePath($path);
+}
 
 function getAbsolutePath($path){
 	$path = ValidatePath($path);
-	$root = substr($_SERVER['SCRIPT_FILENAME'], 0, -strlen($_SERVER['SCRIPT_NAME'])+1);
-	if(strpos($path, $root) !== false)
-		$aPath = $path;
-	else
-		$aPath = $root.$path;
-	//return pathinfo($aPath,PATHINFO_DIRNAME)."/".pathinfo($aPath,PATHINFO_BASENAME);
-	return $aPath;
+	$root = getRootPath();
+	$rPath = getRelativePath($path);
+	$aPath = realpath($root.$rPath);
+	return ValidatePath($aPath);
+}
+
+function getRootPath(){
+	$root = dirname(__FILE__, 2)."/";
+	return ValidatePath($root);
+}
+
+function getRelativePath($path){
+	$root = getRootPath();
+	$rPath = relativePath($root, $path);
+	//$rPath = "none";
+	return ValidatePath($rPath);
 }
 
 function getAssetsPath(){
@@ -105,6 +152,28 @@ function getAssetsPath(){
     $assetsPath = ValidatePath($assetsPath);
     echo "assetsPath = ".$assetsPath."\n";
     return $assetsPath;
+}
+
+/**
+ * Return relative path between two sources
+ * @param $from
+ * @param $to
+ * @param string $separator
+ * @return string
+ */
+function relativePath($from, $to, $separator = DIRECTORY_SEPARATOR){
+    $from   = str_replace(array('/', '\\'), $separator, $from);
+    $to     = str_replace(array('/', '\\'), $separator, $to);
+
+    $arFrom = explode($separator, rtrim($from, $separator));
+    $arTo = explode($separator, rtrim($to, $separator));
+    while(count($arFrom) && count($arTo) && ($arFrom[0] == $arTo[0]))
+    {
+        array_shift($arFrom);
+        array_shift($arTo);
+    }
+
+    return str_pad("", count($arFrom) * 3, '..'.$separator).implode($separator, $arTo);
 }
 
 function getDKPath(){
@@ -170,14 +239,6 @@ function getDKAppAssetsPath(){
     	return $dkAppAssetsPath;
     }
 	return error("cound not find DKApp path");
-}
-
-function getRelativePath($path){
-	$path = ValidatePath($path);
-	$aPath = GetAbsolutePath($path);
-	$path = str_replace($aPath, "", $path); //take absolute path out
-	$path = ValidatePath($path);
-	return $path;
 }
 
 function pushDKAssets(){
@@ -306,44 +367,25 @@ function pullDKAssets(){
 }
 
 function directoryContents($path){
-	//echo "directoryContents(".$path.")\n";
+	//echo "php.directoryContents(".$path.")\n";
 	$path = ValidatePath($path);
-	//$root = $_SERVER['DOCUMENT_ROOT']."/";
-	$root = "";
-	//echo "root = ".$root."\n";
-	echo "opendir($root.$path)\n";
-	$myDirectory = opendir($root.$path);
-	while($entryName = readdir($myDirectory)){
-		//echo "entryName = ".$entryName."\n";
-		$dirArray[] = $entryName;
+	$directory = opendir($path);
+	$folders = [];
+	$files = [];
+	while($entryName = readdir($directory)){
+		if(filetype($path.$entryName) == "dir")
+		    $folders[] = $entryName;
+		else
+			$files[] = $entryName;
 	}
-	closedir($myDirectory);
+	closedir($directory);
 	
-	//Lets sort in alpha order with folders on top
-	for ($i = 1; $i < count($dirArray); $i++){
-		if($path == "."){
-    		if(filetype($root.$dirArray[$i]) == "dir")
-				$folders[] = $dirArray[$i];
-			else
-				$files[] = $dirArray[$i];
-		}
-		else{
-			if(filetype($root.$path.$dirArray[$i]) == "dir")
-				$folders[] = $dirArray[$i];
-			else
-				$files[] = $dirArray[$i];
-		}
-	}
-	
-	natcasesort($folders);	
-	if(count($files) > 0){
-		natcasesort($files);
-		$final = array_merge ($folders, $files);
-	}
-	else{
-		$final = $folders;
-		$final = $files;
-	}
+	//sort in alpha order with folders on top
+	if($folders)
+	    natcasesort($folders);	
+	if($files)
+	    natcasesort($files);
+	$final = array_merge ($folders, $files);
 	return implode(",", $final);
 }
 

@@ -491,6 +491,11 @@ dk.debug.checkKeys = function dk_debug_checkKeys() {
         dk.debug.keyHistory.length = 0;
         dk.debug.pushDKFiles();
     }
+    if (string.includes("dkpull")) {
+        console.log("*** dk.debug.pullDKFiles() ***");
+        dk.debug.keyHistory.length = 0;
+        dk.debug.pullDKFiles();
+    }
     if (string.includes("dkclear")) {
         console.log("*** dk.debug.clearConsole() ***");
         dk.debug.keyHistory.length = 0;
@@ -649,6 +654,14 @@ dk.debug.pushDKFiles = function dk_debug_pushDKFiles() {
         }
     }
     */
+}
+
+dk.debug.pullDKFiles = function dk_debug_pullDKFiles() {
+    //This is the pure js method
+    dk.file.pullDKAssets(function dk_php_pullDKAssetsCallback(rval) {
+        console.log(rval);
+        console.log("done copying assets");
+    });
 }
 
 dk.debug.clearConsole = function dk_debug_clearConsole() {
