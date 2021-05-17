@@ -131,11 +131,13 @@ dk.solution.openFileInOS = function dk_solution_openFolderInOS(path) {
     console.debug("TODO: dk.solution.openFileInOS(" + path + ")");
 }
 dk.solution.newFile = function dk_solution_newFile() {
-    console.debug("TODO: dk.solution.newFile");
+    
     //Todo - advance the file number if NewFile.txt already exists
     const filename = "NewFile.txt";
     const path = dk.solution.path.value + filename;
-    dk.file.stringToFile("", path, function(){});
+    dk.file.stringToFile("", path, 0, function(result) {
+        console.log(result);
+    });
 
     const newFile = dk.gui.createElement(dk.solution.list, "div", "DKSolutionFile");
     newFile.setAttribute("dk_solution", "file");
@@ -149,16 +151,48 @@ dk.solution.newFile = function dk_solution_newFile() {
     newFile.ondblclick = dk.solution.dblclick
     newFile.oncontextmenu = dk.solution.rightclickmenu;
 
-    const event = { currentTarget: newFile }
+    const event = {
+        currentTarget: newFile
+    }
     dk.solution.highlight(event);
-    //dk.solutionmenu.Rename();
+    dk.solution.rename(newFile);
 }
+
 dk.solution.newFolder = function dk_solution_newFolder() {
     console.debug("TODO: dk.solution.newFolder");
 }
-dk.solution.rename = function dk_solution_rename(path) {
-    console.debug("TODO: dk.solution.rename(" + path + ")");
+
+dk.solution.rename = function dk_solution_rename(node) {
+
+    const renamer = dk.gui.createElement(dk.solution.list, "div", "renamer");
+    renamer.style.position = "absolute";
+    renamer.style.top = node.offsetTop;
+    renamer.style.width = "100%";
+    renamer.style.height = "14rem";
+    const renamerInput = dk.gui.createElement(renamer, "input", "renameInput");
+    renamerInput.type = "text";
+    renamerInput.style.position = "absolute";
+    renamerInput.style.width = "100%";
+    renamerInput.style.height = "100%";
+    renamerInput.value = node.innerHTML;
+    renamerInput.focus();
+    renamerInput.onkeydown = function(event) {
+        if (event.code === "Enter") {
+            const oldfilename = node.innerHTML;
+            const oldpath = node.getAttribute("path");
+            const newfilename = renamerInput.value;
+            const newpath = oldpath.replace(oldfilename, newfilename);
+            if (dk.file.rename(oldpath, newpath, true) === false)
+                return false;
+            node.path = newpath;
+            node.innerHTML = newfilename;
+            renamer.remove();
+
+            //TODO: set associated icon
+        }
+    } 
 }
+
 dk.solution.delete = function dk_solution_delete(path) {
     console.debug("TODO: dk.solution.delete(" + path + ")");
 }

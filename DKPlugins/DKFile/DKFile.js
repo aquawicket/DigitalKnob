@@ -109,9 +109,10 @@ if (!dk.hasCPP()) {
 }
 
 if (!dk.hasCPP()) {
-    dk.file.rename = function dk_file_rename(path, newvalue, overwrite) {
-        path = dk.file.validatepath(path);
-        return warn("dk.file.Rename(): not implemented for browser");
+    dk.file.rename = function dk_file_rename(oldpath, newpath, overwrite) {
+        oldpath = dk.file.validatepath(oldpath);
+        newpath = dk.file.validatepath(newpath);
+        console.debug("dk.file.rename("+oldpath+","+newpath+","+overwrite+"): not implemented yet");
     }
 } else {
     dk.file.rename = function dk_file_rename(path, newvalue, overwrite) {
