@@ -615,7 +615,9 @@ void DKSDLWindow::Process()
 	
 	//if(SDL_GetWindowFlags(window) & SDL_WINDOW_SHOWN){ 
 		//SDL_SetRenderTarget(renderer, NULL); 
-		SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255); //white
+		//SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255); //white
+		SDL_SetRenderDrawColor(renderer, 100, 100, 100, 255); //Grey
+		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255); //Black
 		SDL_RenderClear(renderer);
 		//SDL_RenderDrawLine(renderer, 0, height / 2, width, height / 2 );
 	//}
