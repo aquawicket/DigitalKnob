@@ -1,10 +1,10 @@
-#DKFile/DKSolution/.html
+[dk_solution="box"] 
 {
 	position:absolute;
 	overflow:hidden;
 }
 
-#DKSolutionUp
+[dk_solution="up"] 
 {
 	position:absolute;
 	top:1px;
@@ -15,7 +15,7 @@
 	width:19rem;
 }
 
-#DKSolutionPath_Div
+[dk_solution="pathdiv"] 
 {
 	position:absolute;
 	top:1px;
@@ -28,7 +28,7 @@
 	right:3rem;
 }
 
-#DKSolutionPath
+[dk_solution="path"] 
 {
 	position:absolute;
 	width:100%;
@@ -36,7 +36,7 @@
 	overflow:hidden;
 }
 
-#DKSolutionMenu
+[dk_solution="list"] 
 {
 	position:absolute;
 	top:24px;
