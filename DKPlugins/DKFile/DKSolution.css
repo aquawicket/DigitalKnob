@@ -1,11 +1,9 @@
-[dk_solution="box"] 
-{
+[dk_solution="box"] {
 	position:absolute;
 	overflow:hidden;
 }
 
-[dk_solution="up"] 
-{
+[dk_solution="up"] {
 	position:absolute;
 	top:1px;
 	top:1rem;
@@ -15,8 +13,7 @@
 	width:19rem;
 }
 
-[dk_solution="pathdiv"] 
-{
+[dk_solution="pathdiv"] {
 	position:absolute;
 	top:1px;
 	top:1rem;
@@ -28,16 +25,14 @@
 	right:3rem;
 }
 
-[dk_solution="path"] 
-{
+[dk_solution="path"] {
 	position:absolute;
 	width:100%;
 	height:85%
 	overflow:hidden;
 }
 
-[dk_solution="list"] 
-{
+[dk_solution="list"] {
 	position:absolute;
 	top:24px;
 	top:24rem;
