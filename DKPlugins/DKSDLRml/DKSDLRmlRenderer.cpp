@@ -12,7 +12,7 @@ static PFNGLUSEPROGRAMOBJECTARBPROC glUseProgramObjectARB;
 //////////////////////////////////////////////////////////////////////////////////
 RmlSDL2Renderer::RmlSDL2Renderer(SDL_Renderer* renderer, SDL_Window* screen)
 {
-	DKDEBUGFUNC(renderer, screen);
+	//DKDEBUGFUNC(renderer, screen);
     mRenderer = renderer;
     mScreen = screen;
 }
@@ -151,7 +151,7 @@ void RmlSDL2Renderer::SetScissorRegion(int x, int y, int width, int height)
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 bool RmlSDL2Renderer::LoadTexture(Rml::TextureHandle& texture_handle, Rml::Vector2i& texture_dimensions, const Rml::String& source)
 {
-	DKDEBUGFUNC(texture_handle, texture_dimensions, "Rml::String&");
+	//DKDEBUGFUNC(texture_handle, texture_dimensions, "Rml::String&");
 
     /*
 	//CEF Texture
@@ -244,7 +244,7 @@ bool RmlSDL2Renderer::LoadTexture(Rml::TextureHandle& texture_handle, Rml::Vecto
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 bool RmlSDL2Renderer::GenerateTexture(Rml::TextureHandle& texture_handle, const Rml::byte* source, const Rml::Vector2i& source_dimensions)
 {
-	DKDEBUGFUNC(texture_handle, source, source_dimensions);
+	//DKDEBUGFUNC(texture_handle, source, source_dimensions);
     #if SDL_BYTEORDER == SDL_BIG_ENDIAN
         Uint32 rmask = 0xff000000;
         Uint32 gmask = 0x00ff0000;
@@ -269,6 +269,6 @@ bool RmlSDL2Renderer::GenerateTexture(Rml::TextureHandle& texture_handle, const 
 ///////////////////////////////////////////////////////////////////////////////////
 void RmlSDL2Renderer::ReleaseTexture(Rml::TextureHandle texture_handle)
 {
-	DKDEBUGFUNC(texture_handle);
+	//DKDEBUGFUNC(texture_handle);
     SDL_DestroyTexture((SDL_Texture*) texture_handle);
 }
