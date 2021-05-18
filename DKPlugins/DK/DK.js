@@ -1,4 +1,4 @@
-"use strict";
+//"use strict";
 
 window.dk = new Object;
 const duktape = window.duktape;
@@ -8,8 +8,9 @@ dk.x = new Object;
 (function() {
     (dk.x.record = []) && (dk.x.debug = console.debug) && (dk.x.error = console.error) && (dk.x.log = console.log)
     dk.x.logger = function(lvl, args) {
-        dk.x[lvl].apply(this, Array.prototype.slice.call(args));
-        var obj = {};
+        !dk.hasCPP() && dk.x[lvl].apply(this, Array.prototype.slice.call(args));
+		dk.hasCPP && dk && dk.x && dk.x.log.apply(this, Array.prototype.slice.call(args));
+		var obj = {};
         (obj[lvl] = args[0]) && (dk.x && dk.x.record.push(obj))
     }
     console.debug = function() {

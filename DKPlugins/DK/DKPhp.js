@@ -9,7 +9,7 @@ dk.php.call = function dk_php_call(httpMethod, phpPath, funcName) {
     if (args && typeof (args[args.length - 1]) === "function")
         dk_php_callback = args[args.length - 1];
 
-    const allowed = ["DK.js", "DKFile.js", "DKDebug.js"];
+    const allowed = ["C", "DK.js", "DKFile.js", "DKDebug.js"];
     const callerFilename = dk.trace && dk.trace.getFilename();
     if (!allowed.includes(callerFilename))
         return error("PHP Permission Denied for " + callerFilename, dk_php_callback);
