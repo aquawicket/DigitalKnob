@@ -32,9 +32,10 @@ dk.php.call = function dk_php_call(httpMethod, phpPath, funcName) {
         newArg[typeof (arguments[n])] = arguments[n];
         jsonData.args.push(newArg);
     }
+
     let path = "";
     if (location.protocol == "file:")
-        path = "http://" + dk.localIP + ":" + dk.port + "/";
+        path = "http://127.0.0.1:2393/";
     const str = JSON.stringify(jsonData);
     const data = "x=" + encodeURIComponent(str);
     const url = dk.file.validatepath(path + phpPath) + "?" + data;

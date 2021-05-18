@@ -6,11 +6,11 @@ dk.file.init = function dk_file_init() {
     dk.file.appFilename = "";
     dk.file.localAssets = "";
     dk.file.onlineAssets = "";
-    //if (dk.php) {
+    if (dk.php) {
     dk.php.call("GET", "DKFile/DKFile.php", "getAssetsPath", function dk_php_getAssetsPath_callback(result) {
         (dk.file.onlineAssets = result) && console.debug("dk.file.onlineAssets = " + result);
     });
-    //}
+    }
 }
 
 dk.file.validatepath = function dk_file_validatepath(path) {
