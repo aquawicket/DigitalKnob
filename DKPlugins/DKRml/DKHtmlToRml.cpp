@@ -7,7 +7,6 @@
 #include "tidy.h"
 #include "tidybuffio.h"
 
-///////////////////////////////////////////////////////////////
 bool DKHtmlToRml::HtmlToRml(const DKString& html, DKString& rml)
 {
 	DKDEBUGFUNC(html, rml);
@@ -102,7 +101,6 @@ bool DKHtmlToRml::IndexToRml(const DKString& html, DKString& rml)
 	replace(rml, "<head />", "<head></head>");
 	replace(rml, "<head>", "<head><link id=\"DKRml/DKRml.css\" type=\"text/css\" href=\""+rml_css+"\"></link>");
 
-
 	//replace quotes with apostrophes, pugixml will remove quotes inside nodes.
 	//FIXME: code like jSFunc('"+var_in_quotes+"') will NOT work. 
 	//Other Examples: alert("It's \"game\" time."); or alert('It\'s "game" time.');
@@ -149,10 +147,9 @@ bool DKHtmlToRml::PostProcess(Rml::Element* element)
 	}
 
 	//we actually want the parent if it has one
-	if(element->GetParentNode()){
+	if(element->GetParentNode())
 		element = element->GetParentNode();
-	}
-
+	
 	// Create cef contexts for iFrames
 	Rml::ElementList iframes;
 	Rml::ElementUtilities::GetElementsByTagName(iframes, element, "iframe");
@@ -170,9 +167,8 @@ bool DKHtmlToRml::PostProcess(Rml::Element* element)
 			 DKINFO("DKHtmlToRml::PostProcess(): iframe has no source tag\n");
 			 return false;
 		}
-		else{
+		else
 			url = iframes[i]->GetAttribute("src")->Get<Rml::String>();//.CString();
-		}
 		
 		DKClass::DKCreate("DKCef");
 		//DKEvent::AddEvent(id, "resize", &DKHtmlToRml::ResizeIframe, this);
@@ -203,7 +199,6 @@ bool DKHtmlToRml::PostProcess(Rml::Element* element)
 			aElements[i]->SetProperty("color", "rgb(0,0,255)");
 			aElements[i]->SetProperty("text-decoration", "underline");
 			DKString id = aElements[i]->GetId();
-
 			aElements[i]->AddEventListener("click", DKRml::Get(), false);
 			DKString elementAddress = DKRml::elementToAddress(aElements[i]);
 			DKEvents::AddEvent(elementAddress, "click", &DKHtmlToRml::Hyperlink, this);
@@ -247,9 +242,8 @@ bool DKHtmlToRml::PostProcess(Rml::Element* element)
 	Rml::ElementUtilities::GetElementsByTagName(scripts, element, "script");
 	for(unsigned int i=0; i<scripts.size(); i++){
 		DKString src;
-		if(scripts[i]->HasAttribute("src")){
+		if(scripts[i]->HasAttribute("src"))
 			src = scripts[i]->GetAttribute("src")->Get<Rml::String>();
-		}
 		
 		DKString inner = scripts[i]->GetInnerRML();
 		scripts[i]->SetProperty("display", "none");
@@ -275,11 +269,9 @@ bool DKHtmlToRml::PostProcess(Rml::Element* element)
 		}
 		else{
 			if(inner.empty()){ continue; }
-			
 			//replace(inner,"'","\\'");
 			//replace(inner,"\n","");
 			//replace(inner,"\t","");
-
 			DKDuktape::Get()->LoadJSString("inlineScript", inner);
 		}
 	}
@@ -301,11 +293,9 @@ bool DKHtmlToRml::PostProcess(Rml::Element* element)
 	DKINFO(code+"\n");
 	DKINFO("##########################################################\n");
 #endif
-
 	return true;
 }
 
-//////////////////////////////////////////////
 bool DKHtmlToRml::ResizeIframe(DKEvents* event)
 {
 	DKDEBUGFUNC(event);
@@ -322,7 +312,6 @@ bool DKHtmlToRml::ResizeIframe(DKEvents* event)
 	return true;
 }
 
-/////////////////////////////////////////////
 bool DKHtmlToRml::ClickIframe(DKEvents* event)
 {
 	DKDEBUGFUNC(event);
@@ -339,7 +328,6 @@ bool DKHtmlToRml::ClickIframe(DKEvents* event)
 	return true;
 }
 
-/////////////////////////////////////////////////
 bool DKHtmlToRml::MouseOverIframe(DKEvents* event)
 {
 	DKDEBUGFUNC(event);
@@ -356,7 +344,6 @@ bool DKHtmlToRml::MouseOverIframe(DKEvents* event)
 	return true;
 }
 
-//////////////////////////////////////////
 bool DKHtmlToRml::Encode(std::string& data)
 {
 	std::string buffer;
@@ -375,14 +362,11 @@ bool DKHtmlToRml::Encode(std::string& data)
 	return true;
 }
 
-
-////////////////////////////////////////////////////////////
 bool DKHtmlToRml::TidyFile(const DKString& in, DKString& out)
 {
 	DKINFO("####### CODE GOING INTO TIDY ##########\n");
 	DKINFO(in+"\n");
 	DKINFO("#######################################\n");
-
 	const char* input = in.c_str();
 	TidyBuffer output = {0};
 	TidyBuffer errbuf = {0};
@@ -393,24 +377,18 @@ bool DKHtmlToRml::TidyFile(const DKString& in, DKString& out)
 	//printf("Tidying:\t%s\n", input);
 
 	ok = tidyOptSetBool(tdoc, TidyXhtmlOut, yes);  // Convert to XHTML
-	if(ok){
+	if(ok)
 		rc = tidySetErrorBuffer(tdoc, &errbuf);      // Capture diagnostics
-	}
-	if(rc >= 0){
+	if(rc >= 0)
 		rc = tidyParseString(tdoc, input);           // Parse the input
-	}
-	if(rc >= 0){
+	if(rc >= 0)
 		rc = tidyCleanAndRepair(tdoc);               // Tidy it up!
-	}
-	if(rc >= 0){
+	if(rc >= 0)
 		rc = tidyRunDiagnostics(tdoc);               // Kvetch
-	}
-	if(rc > 1){                                    // If error, force output.
+	if(rc > 1) // If error, force output.
 		rc = (tidyOptSetBool(tdoc, TidyForceOutput, yes) ? rc : -1 );
-	}
-	if(rc >= 0){
+	if(rc >= 0)
 		rc = tidySaveBuffer(tdoc, &output);          // Pretty Print
-	}
 
 	if(rc >= 0){
 		if(rc > 0){
@@ -418,10 +396,8 @@ bool DKHtmlToRml::TidyFile(const DKString& in, DKString& out)
 			//printf( "\nAnd here is the result:\n\n%s", output.bp );
 		}
 	}
-	else{
-		DKERROR("Tidy Error\n");
-		//printf( "A severe error (%d) occurred.\n", rc );
-	}
+	else
+		DKERROR("Tidy Error\n"); //printf( "A severe error (%d) occurred.\n", rc );
 
 	out = toString(output.bp);
 	tidyBufFree(&output);
@@ -431,7 +407,6 @@ bool DKHtmlToRml::TidyFile(const DKString& in, DKString& out)
 	return true;
 }
 
-///////////////////////////////////////////////////////////////////////
 bool DKHtmlToRml::GetOuterHtml(Rml::Element* element, DKString& string)
 {
 	DKDEBUGFUNC(element, string);

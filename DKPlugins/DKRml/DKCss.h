@@ -4,7 +4,6 @@
 #include "DK/DK.h"
 #include "DKRml/DKRml.h"
 
-/////////////////////////////////////
 class DKCss : public DKObjectT<DKCss>
 {
 public:
@@ -14,7 +13,5 @@ public:
 	static DKRml* dkRml;
 };
 
-
-REGISTER_OBJECT(DKCss, false);
-
+REGISTER_OBJECT(DKCss, false)
 #endif //DKCss_H

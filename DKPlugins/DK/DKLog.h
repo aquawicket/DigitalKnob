@@ -96,9 +96,8 @@ void DebugVars(const char* file, int line, const char* func, const DKString& nam
 	
 	DKString filename = file;
 	unsigned found = filename.find_last_of("/\\");
-	if(found != std::string::npos && found < filename.length()){
+	if(found != std::string::npos && found < filename.length())
 		filename = filename.substr(found+1);
-	}
 
 	using expander = int[];
 	(void) expander { 0, (
@@ -110,9 +109,8 @@ void DebugVars(const char* file, int line, const char* func, const DKString& nam
 		Log("", 0, "", ss.str(), DK_DEBUG);
 		log_debug = false; 
 	}
-	else{
+	else
 		Log("", 0, "", ss.str(), DK_DEBUG);
-	}
 }
 #endif
 

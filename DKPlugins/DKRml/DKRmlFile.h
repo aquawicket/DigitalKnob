@@ -4,7 +4,6 @@
 #include <RmlUi/Core.h>
 #include "DK/DKFile.h"
 
-/////////////////////////////////////////////////
 class DKRmlFile : public Rml::FileInterface
 {
 	virtual Rml::FileHandle Open(const Rml::String& path);
@@ -15,4 +14,3 @@ class DKRmlFile : public Rml::FileInterface
 };
 
 #endif //DKRmlFile_H
-

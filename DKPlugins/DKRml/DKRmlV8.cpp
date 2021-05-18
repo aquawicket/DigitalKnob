@@ -3,7 +3,6 @@
 #include "DKRml/DKRml.h"
 #include "DKRml/DKRmlV8.h"
 
-////////////////////
 bool DKRmlV8::Init()
 {
 	DKDEBUGFUNC();
@@ -11,14 +10,12 @@ bool DKRmlV8::Init()
 	return true;
 }
 
-///////////////////
 bool DKRmlV8::End()
 {
 	DKDEBUGFUNC();
 	return true;
 }
 
-////////////////////////////////////////////////////////////
 bool DKRmlV8::DebuggerToggle(CefArgs args, CefReturn retval)
 {
 	DKDEBUGFUNC(args, retval);

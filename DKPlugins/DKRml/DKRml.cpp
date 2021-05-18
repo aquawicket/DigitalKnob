@@ -208,7 +208,6 @@ bool DKRml::LoadHtml(const DKString& html)
 		document->Close();
 	}
 
-
 	auto stream = std::make_unique<Rml::StreamMemory>((Rml::byte*)rml.c_str(), rml.size());
 	stream->SetSourceURL("[document from memory]");
 	Rml::PluginRegistry::NotifyDocumentOpen(context, stream->GetSourceURL().GetURL());
@@ -223,7 +222,6 @@ bool DKRml::LoadHtml(const DKString& html)
 	Rml::XMLParser parser(ele);
 	parser.Parse(stream.get());
 
-
 	//Make sure we have <head> and <body> tags
 	Rml::ElementList heads;
 	Rml::ElementList bodys;
@@ -231,36 +229,31 @@ bool DKRml::LoadHtml(const DKString& html)
 	Rml::Element* body = NULL;
 	Rml::ElementDocument* elementDocument = document->GetOwnerDocument();
 	document->GetOwnerDocument()->GetElementsByTagName(heads, "head");
-	if (!heads.empty()) {
+	if (!heads.empty())
 		head = heads[0];
-	}
 	document->GetOwnerDocument()->GetElementsByTagName(bodys, "body");
-	if (!bodys.empty()) {
+	if (!bodys.empty()) 
 		body = bodys[0];
-	}
 	if (!head && !body) {
 		document->GetOwnerDocument()->AppendChild(document->CreateElement("head"), true);
 		document->GetOwnerDocument()->AppendChild(document->CreateElement("body"), true);
 	}
-	else if (head && !body) {
+	else if (head && !body)
 		document->GetOwnerDocument()->AppendChild(document->CreateElement("body"), true);
-	}
-	else if (!head && body) {
+	else if (!head && body)
 		document->GetOwnerDocument()->InsertBefore(document->CreateElement("head"), body);
-	}
 
 	//Load user agent style sheet
-	DKString file = DKFile::local_assets + "/DKRml/DKRml.css";
+	DKString file = DKFile::local_assets + "DKRml/DKRml.css";
 	const Rml::StyleSheetContainer* doc_sheet = document->GetOwnerDocument()->GetStyleSheetContainer();
 	Rml::SharedPtr<Rml::StyleSheetContainer> file_sheet = Rml::Factory::InstanceStyleSheetFile(file.c_str());
-	if(doc_sheet) { //Combine the file_sheet to the current sheet
+	if(doc_sheet) { 
+		//Combine the file_sheet and the doc_sheet into a new_sheet and load it back to the document
 		Rml::SharedPtr<Rml::StyleSheetContainer> new_sheet = doc_sheet->CombineStyleSheetContainer(*file_sheet);
-		//Rml::SharedPtr<Rml::StyleSheetContainer> new_sheet = doc_sheet->CombineStyleSheetContainer((const Rml::StyleSheetContainer&)file_sheet);
 		document->GetOwnerDocument()->SetStyleSheetContainer(std::move(new_sheet));
 	}
-	else { //no current sheet, just load the file sheet
+	else  //no current sheet, just load the file sheet
 		document->GetOwnerDocument()->SetStyleSheetContainer(std::move(file_sheet));
-	}
 
 	//Finish loading the document
 	Rml::ElementUtilities::BindEventAttributes(document);
@@ -304,7 +297,6 @@ bool DKRml::LoadHtml(const DKString& html)
 	DKINFO(code+"\n");
 	DKINFO("#################################################################\n");
 #endif
-
 	return true;
 }
 
@@ -313,18 +305,14 @@ bool DKRml::LoadUrl(const DKString& url)
 {
 	DKDEBUGFUNC(url);
 	DKString _url = url;
-	if(has(_url,":/")){ //could be http:// , https://, file:/// or C:/
+	if(has(_url,":/")) //could be http:// , https://, file:/// or C:/
 		href = _url; //absolute path including protocol
-	}
 	else if(has(_url,"//")){ //could be //www.site.com/style.css or //site.com/style.css
 		DKERROR("DKRml::LoadUrl(): no protocol specified\n"); //absolute path without protocol
 		return false;
 	}
-	else{
+	else
 		_url = workingPath + _url;
-		//DKERROR("DKRml::LoadUrl(): cannot load relative paths\n");
-		//return false;
-	}
 
 	//Get the working path;
 	std::size_t found = _url.find_last_of("/");
@@ -343,7 +331,6 @@ bool DKRml::LoadUrl(const DKString& url)
 	DKWARN("DKRml::LoadUrl(): _path = "+_path+"\n");
 
 	DKString html;
-
 	if(has(_url, "http://") || has(_url, "https://")){
 		DKClass::DKCreate("DKCurl");
 		if(!DKCurl::Get()->HttpFileExists(_url)){
@@ -365,7 +352,6 @@ bool DKRml::LoadUrl(const DKString& url)
 			return false;
 		}
 	}
-
 	LoadHtml(html);
 	return true;
 }
@@ -443,10 +429,9 @@ void DKRml::ProcessEvent(Rml::Event& rmlEvent)
 	}
 #endif
 
-	if (same(type, "mouseup") && rmlEvent.GetParameter<int>("button", 0) == 1) {
+	if (same(type, "mouseup") && rmlEvent.GetParameter<int>("button", 0) == 1) 
 		type = "contextmenu";
-	}
-
+	
 	for(unsigned int i = 0; i < DKEvents::events.size(); ++i){
 		DKEvents* ev = DKEvents::events[i];
 		//certain stored events are altered before comparison 
@@ -482,9 +467,8 @@ void DKRml::ProcessEvent(Rml::Event& rmlEvent)
 #ifdef DRAG_FIX
 			if (!same(type, "mousedown")) {
 #endif
-				if (!same(type, "keydown")) {
+				if (!same(type, "keydown")) 
 					rmlEvent.StopPropagation();
-				}
 #ifdef DRAG_FIX
 			}
 #endif
@@ -526,9 +510,8 @@ bool DKRml::RegisterEvent(const DKString& elementAddress, const DKString& type)
 	// processed for that element and stopped. And it must allow drag to bleed thru.
 
 #ifdef DRAG_FIX
-	if(same(type, "mousedown")){
+	if(same(type, "mousedown"))
 		element->AddEventListener(_type.c_str(), this, true); //bubble up
-	}
 	else{
 #endif
 		element->AddEventListener(_type.c_str(), this, false);
@@ -545,10 +528,9 @@ bool DKRml::SendEvent(const DKString& elementAddress, const DKString& type, cons
 	if(elementAddress.empty()){ return false; }
 	if(type.empty()){ return false; }
 	if(!document){ return false; }
-	//if(same(addressToElement(elementAddress)->GetId(),"window")){
+	//if(same(addressToElement(elementAddress)->GetId(),"window"))
 		//DKWARN("DKRml::SendEvent(): recieved global window event\n");
-	//}
-	
+
 	Rml::Element* element = addressToElement(elementAddress);
 	if(!element){ return false; }
 	
@@ -583,12 +565,10 @@ bool DKRml::DebuggerToggle()
 {
 #ifndef LINUX
 	DKDEBUGFUNC();
-	if(Rml::Debugger::IsVisible()){ //FIXME:  always returns false
+	if(Rml::Debugger::IsVisible()) //FIXME:  always returns false
 		DKRml::DebuggerOff();
-	}
-	else{
+	else
 		DKRml::DebuggerOn();
-	}
 #endif
 	return true;
 }
@@ -616,7 +596,6 @@ bool DKRml::UnregisterEvent(const DKString& elementAddress, const DKString& type
 Rml::Event* DKRml::addressToEvent(const DKString& address)
 {
 	//DKDEBUGFUNC(address);
-
 	Rml::Event* event;
 	if (address.compare(0, 2, "0x") != 0 || address.size() <= 2 || address.find_first_not_of("0123456789abcdefABCDEF", 2) != std::string::npos) {
 		DKERROR("DKRml::addressToEvent(): the address is not a valid hex notation");
@@ -662,12 +641,10 @@ DKString DKRml::eventToAddress(Rml::Event* event)
 Rml::Element* DKRml::addressToElement(const DKString& address)
 {
 	//DKDEBUGFUNC(address);
-
 	Rml::Element* element;
 	/*
-	if(address == "window"){ // || address == "document"){
+	if(address == "window"){ // || address == "document")
 		element = DKRml::Get()->document;
-	}
 	else {
 	*/
 		if (address.compare(0, 2, "0x") != 0 || address.size() <= 2 || address.find_first_not_of("0123456789abcdefABCDEF", 2) != std::string::npos) {

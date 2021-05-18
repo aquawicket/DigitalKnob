@@ -5,7 +5,6 @@
 
 #include "DKDuktape/DKDuktape.h"
 
-/////////////////////////////////////////
 class DKRmlJS : public DKObjectT<DKRmlJS>
 {
 public:
@@ -18,6 +17,5 @@ public:
 };
 
 REGISTER_OBJECT(DKRmlJS, true)
-
 #endif //DKRmlJS_H
 #endif //USE_DKDuktape

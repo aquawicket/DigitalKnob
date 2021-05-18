@@ -26,27 +26,22 @@ bool DKCss::Init()
 	}
 	
 	replace(data[1], DKFile::local_assets, "");
-    DKString file = DKFile::local_assets+data[1];
+	DKString file = DKFile::local_assets+data[1];
 
-	//https://stackoverflow.com/a/3141107/688352
 	//Load user agent style sheet
 	const Rml::StyleSheetContainer* doc_sheet = dkRml->document->GetOwnerDocument()->GetStyleSheetContainer();
 	Rml::SharedPtr<Rml::StyleSheetContainer> file_sheet = Rml::Factory::InstanceStyleSheetFile(file.c_str());
 	if (doc_sheet) { //Combine the file_sheet to the current sheet
 		Rml::SharedPtr<Rml::StyleSheetContainer> new_sheet = doc_sheet->CombineStyleSheetContainer(*file_sheet);
-		//Rml::SharedPtr<Rml::StyleSheetContainer> new_sheet = doc_sheet->CombineStyleSheetContainer((const Rml::StyleSheetContainer&)file_sheet);
 		dkRml->document->GetOwnerDocument()->SetStyleSheetContainer(std::move(new_sheet));
 	}
-	else { //no current sheet, just load the file sheet
+	else //no current sheet, just load the file sheet
 		dkRml->document->GetOwnerDocument()->SetStyleSheetContainer(std::move(file_sheet));
-	}
 
 	return true;
 }
 
-/////////////////
-bool DKCss::End()
-{
+bool DKCss::End(){
 	DKDEBUGFUNC();
 	return true;
 }

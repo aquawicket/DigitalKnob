@@ -49,4 +49,3 @@ public:
 
 REGISTER_OBJECT(DKRml, true)
 #endif //DKRml_H
-

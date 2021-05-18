@@ -2,8 +2,6 @@
 #include "DKRml/DKRml.h"
 #include "DKRml/DKRmlJS.h"
 
-
-////////////////////
 bool DKRmlJS::Init()
 {
 	DKDEBUGFUNC();
@@ -14,8 +12,6 @@ bool DKRmlJS::Init()
 	return true;
 }
 
-
-//////////////////////////////////////////
 int DKRmlJS::DebuggerOff(duk_context* ctx)
 {
 	DKDEBUGFUNC(ctx);
@@ -23,7 +19,6 @@ int DKRmlJS::DebuggerOff(duk_context* ctx)
 	return false;
 }
 
-/////////////////////////////////////////
 int DKRmlJS::DebuggerOn(duk_context* ctx)
 {
 	DKDEBUGFUNC(ctx);
@@ -31,7 +26,6 @@ int DKRmlJS::DebuggerOn(duk_context* ctx)
 	return false;
 }
 
-/////////////////////////////////////////////
 int DKRmlJS::DebuggerToggle(duk_context* ctx)
 {
 	DKDEBUGFUNC(ctx);
@@ -39,7 +33,6 @@ int DKRmlJS::DebuggerToggle(duk_context* ctx)
 	return true;
 }
 
-//////////////////////////////////////
 int DKRmlJS::LoadUrl(duk_context* ctx)
 {
 	DKDEBUGFUNC(ctx);

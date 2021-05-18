@@ -5,7 +5,6 @@
 #include "DK/DK.h"
 #include <RmlUi/Core.h>
 
-///////////////////////////////////
 class DKHtmlToRml  : public DKObject
 {
 public:
