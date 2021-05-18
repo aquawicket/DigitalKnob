@@ -6,8 +6,7 @@ ENDIF()
 DKSET(CEF_VERSION cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_linux32)
 
 ### INSTALL ###
-DKINSTALL(https://cef-builds.spotifycdn.com/cef_binary_81.3.3%2Bg072a5f5%2Bchromium-81.0.4044.138_linux32.tar.bz2 ${CEF_VERSION})
-## DKINSTALL(${DKWEB}/Download/${CEF_VERSION}.tar.bz2 ${CEF_VERSION})
+DKINSTALL(https://cef-builds.spotifycdn.com/${CEF_VERSION}.tar.bz2 cef_binary_linux32 ${CEF_VERSION})
 DKSET(CEF ${3RDPARTY}/${CEF_VERSION})
 
 
