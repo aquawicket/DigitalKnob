@@ -46,7 +46,7 @@ bool DKSDLWindow::Init()
 	DKString sdl_renderer;
 	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[SDL_RENDERER]", sdl_renderer);
 	DKINFO("settings.txt: [SDL_RENDERER] = "+sdl_renderer+"\n");
-	
+
 	SDL_SetMainReady(); //Bypass SDLmain  //https://wiki.libsdl.org/SDL_SetMainReady
 	if(SDL_Init(SDL_INIT_VIDEO|SDL_INIT_AUDIO|SDL_INIT_TIMER) < 0){
 		DKERROR("SDL_Init Error: "+DKString(SDL_GetError())+"\n");
@@ -129,6 +129,10 @@ bool DKSDLWindow::Init()
 	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 	SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
 	SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 16);
+	//SDL_SetHint(SDL_HINT_RENDER_DRIVER, "opengl");
+	SDL_SetHintWithPriority(SDL_HINT_RENDER_DRIVER, "opengl", SDL_HINT_OVERRIDE);
+	//SDL_SetHint(SDL_HINT_RENDER_OPENGL_SHADERS, 0);
+	SDL_SetHintWithPriority(SDL_HINT_RENDER_OPENGL_SHADERS, 0, SDL_HINT_OVERRIDE);
 	window = SDL_CreateWindow(mTitle.c_str(), winX, winY, width, height, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE | SDL_WINDOW_OPENGL);
 	if(!window){
 		DKERROR("SDL_CreateWindow Error: "+DKString(SDL_GetError())+"\n");
@@ -146,6 +150,7 @@ bool DKSDLWindow::Init()
 		result = "SDL_RENDERER_SOFTWARE";
 		renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_SOFTWARE);	
 	}
+
 	if(!renderer){
 		SDL_DestroyWindow(window);
 		DKERROR("SDL_CreateRenderer Error: "+DKString(SDL_GetError())+"\n");
@@ -235,6 +240,11 @@ bool DKSDLWindow::Init()
 	//gl_shading = reinterpret_cast<const char*>(glGetString(GL_SHADING_LANGUAGE_VERSION));
 	gl_extensions = reinterpret_cast<const char*>(glGetString(GL_EXTENSIONS));
 
+	///Verify Render Drivers used
+	SDL_RendererInfo info;
+	SDL_GetRendererInfo(renderer, &info);
+	printf("%s", info.name);
+
 	DKINFO("##############################\n");
 	DKINFO("##### Window Information #####\n");
 	DKINFO("##############################\n");
@@ -246,6 +256,7 @@ bool DKSDLWindow::Init()
 	//DKINFO("GL_SHADING_LANGUAGE_VERSION = "+gl_shading+"\n");
 	//DKINFO("GL_EXTENSIONS = "+gl_extensions+"\n");
 	DKINFO("SDL Renderer = "+result+"\n");
+	DKINFO("Render Driver = "+toString(info.name)+"\n");
 	DKINFO("Resolution = "+toString(width)+"x"+toString(height)+"\n");
 	int depth;
 	SDL_GL_GetAttribute(SDL_GL_DEPTH_SIZE, &depth);
