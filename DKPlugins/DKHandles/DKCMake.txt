@@ -1,4 +1,4 @@
-IF(WIN)
+IF(NOT WIN)
 	RETURN()
 ENDIF()
 
