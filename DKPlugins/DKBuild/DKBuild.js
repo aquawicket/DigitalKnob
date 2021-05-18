@@ -430,6 +430,7 @@ function DKBuild_DoResults()
 	console.log("DKBuild_DoResults(): OS="+OS+" APP="+APP+" TYPE="+TYPE+" LEVEL="+LEVEL);
 	if(!DKBuild_OsCheck()){ return; }
 	
+	DKBuild_ValidateCmake();
 	//Update the apps CmakeLists.txt file
 	//CPP_DKFile_Copy(DKPATH+"/DKPlugins/_DKImport/CMakeLists.txt", DKPATH+"/DKApps/"+APP+"/CMakeLists.txt", true);
 	//CPP_DKFile_Copy(DKPATH+"/DKPlugins/_DKIMPORT/", DKPATH+"/DKApps/"+APP+"/", false); //any missing files
@@ -477,6 +478,7 @@ function DKBuild_DoResults()
 	
 	////// WIN32 /////
 	if(OS === "win32"){
+		DKBuild_ValidateVC2019();
 		if(LEVEL === "Rebuild" || LEVEL === "RebuildAll"){
 			CPP_DKFile_Delete(DKPATH+"/"+appdir+"/"+APP+"/win32/CMakeFiles");
 			CPP_DKFile_Delete(DKPATH+"/"+appdir+"/"+APP+"/win32/"+APP+".dir");
@@ -526,6 +528,7 @@ function DKBuild_DoResults()
 	
 	////// WIN64 /////
 	if(OS === "win64"){
+		DKBuild_ValidateVC2019();
 		if(LEVEL === "Rebuild" || LEVEL === "RebuildAll"){
 			CPP_DKFile_Delete(DKPATH+"/"+appdir+"/"+APP+"/win64/CMakeFiles");
 			CPP_DKFile_Delete(DKPATH+"/"+appdir+"/"+APP+"/win64/"+APP+".dir");
@@ -575,6 +578,7 @@ function DKBuild_DoResults()
 	
 	///// MAC32 ////
 	if(OS === "mac32"){
+		DKBuild_ValidateXcode();
 		if(LEVEL === "Rebuild" || LEVEL === "RebuildAll"){
 			CPP_DKFile_Delete(DKPATH+"/"+appdir+"/"+APP+"/mac32");
 		}
@@ -606,6 +610,7 @@ function DKBuild_DoResults()
 	
 	///// MAC64 ////
 	if(OS === "mac64"){
+		DKBuild_ValidateXcode();
 		if(LEVEL === "Rebuild" || LEVEL === "RebuildAll"){
 			CPP_DKFile_Delete(DKPATH+"/"+appdir+"/"+APP+"/mac64");
 		}
@@ -676,6 +681,7 @@ function DKBuild_DoResults()
 	
 	///// IOS32 ////
 	if(OS === "ios32"){
+		DKBuild_ValidateXcode();
 		if(LEVEL === "Rebuild" || LEVEL === "RebuildAll"){
 			CPP_DKFile_Delete(DKPATH+"/"+appdir+"/"+APP+"/ios32");
 		}
@@ -694,6 +700,7 @@ function DKBuild_DoResults()
 	
 	///// IOS64 ////
 	if(OS === "ios64"){
+		DKBuild_ValidateXcode();
 		if(LEVEL === "Rebuild" || LEVEL === "RebuildAll"){
 			CPP_DKFile_Delete(DKPATH+"/"+appdir+"/"+APP+"/ios64");
 		}
@@ -712,6 +719,7 @@ function DKBuild_DoResults()
 	
 	///// IOSSIM32 //////
 	if(OS === "iossim32"){
+		DKBuild_ValidateXcode();
 		if(LEVEL === "Rebuild" || LEVEL === "RebuildAll"){
 			CPP_DKFile_Delete(DKPATH+"/"+appdir+"/"+APP+"/iossim32");
 		}
@@ -730,6 +738,7 @@ function DKBuild_DoResults()
 	
 	///// IOSSIM64 //////
 	if(OS === "iossim64"){
+		DKBuild_ValidateXcode();
 		if(LEVEL === "Rebuild" || LEVEL === "RebuildAll"){
 			CPP_DKFile_Delete(DKPATH+"/"+appdir+"/"+APP+"/iossim64");
 		}
@@ -748,6 +757,7 @@ function DKBuild_DoResults()
 	
 	//// LINUX32 ///////
 	if(OS === "linux32"){
+		DKBuild_ValidateGcc();
 		CPP_DKFile_MkDir(DKPATH+"/"+appdir+"/"+APP+"/linux32");
 		if(TYPE === "Debug" || TYPE === "ALL"){
 			if(LEVEL === "Rebuild" || LEVEL === "RebuildAll"){
@@ -797,6 +807,7 @@ function DKBuild_DoResults()
 	
 	//// LINUX64 ///////
 	if(OS === "linux64"){
+		DKBuild_ValidateGcc();
 		CPP_DKFile_MkDir(DKPATH+"/"+appdir+"/"+APP+"/linux64");
 		if(TYPE === "Debug" || TYPE === "ALL"){
 			if(LEVEL === "Rebuild" || LEVEL === "RebuildAll"){
@@ -846,6 +857,8 @@ function DKBuild_DoResults()
 	
 	////// ANDROID32 /////
 	if(OS === "android32"){
+		DKBuild_ValidateNDK();
+		DKBuild_ValidateVC2019();
 		CPP_DKFile_MkDir(DKPATH+"/"+appdir+"/"+APP+"/android32");
 		if(TYPE === "Debug" || TYPE === "ALL"){
 			if(LEVEL === "Rebuild" || LEVEL === "RebuildAll"){
@@ -885,6 +898,8 @@ function DKBuild_DoResults()
 	
 	////// ANDROID64 /////
 	if(OS === "android64"){
+		DKBuild_ValidateNDK();
+		DKBuild_ValidateVC2019();
 		CPP_DKFile_MkDir(DKPATH+"/"+appdir+"/"+APP+"/android64");
 		if(TYPE === "Debug" || TYPE === "ALL"){
 			if(LEVEL === "Rebuild" || LEVEL === "RebuildAll"){
@@ -922,6 +937,7 @@ function DKBuild_DoResults()
 	
 	//// RASPBERRY32 ///////
 	if(OS === "raspberry32"){
+		DKBuild_ValidateGcc();
 		CPP_DKFile_MkDir(DKPATH+"/"+appdir+"/"+APP+"/raspberry32");
 		if(TYPE === "Debug" || TYPE === "ALL"){
 			if(LEVEL === "Rebuild" || LEVEL === "RebuildAll"){
@@ -972,6 +988,7 @@ function DKBuild_DoResults()
 	
 	//// RASPBERRY64 ///////
 	if(OS === "linux64"){
+		DKBuild_ValidateGcc();
 		CPP_DKFile_MkDir(DKPATH+"/"+appdir+"/"+APP+"/raspberry64");
 		if(TYPE === "Debug" || TYPE === "ALL"){
 			if(LEVEL === "Rebuild" || LEVEL === "RebuildAll"){
