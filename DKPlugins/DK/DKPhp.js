@@ -34,7 +34,7 @@ dk.php.call = function dk_php_call(httpMethod, phpPath, funcName) {
     }
 
     let path = "";
-    if (location.protocol == "file:")
+    if (location.protocol == "file:" || dk.hasCPP())
         path = "http://127.0.0.1:2393/";
     const str = JSON.stringify(jsonData);
     const data = "x=" + encodeURIComponent(str);
