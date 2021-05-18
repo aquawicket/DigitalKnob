@@ -4,23 +4,16 @@ DKSET(NDK_VERSION android-ndk-r21e)
 ### INSTALL ###
 IF(CMAKE_HOST_WIN32)
 	DKINSTALL(https://dl.google.com/android/repository/${NDK_VERSION}-windows-x86_64.zip android-ndk ${NDK_VERSION})
-	GET_FILENAME_COMPONENT(ANDROID_NDK "${3RDPARTY}/${NDK_VERSION}" ABSOLUTE)  #Get the windows short filepath
 ENDIF()
 
 IF(CMAKE_HOST_APPLE)
-	IF(NOT EXISTS ${3RDPARTY}/${NDK_VERSION})
-		DKSETPATH(${DIGITALKNOB}/Download)
-		## DKDOWNLOAD(www.internet.com/${NDK_VERSION}-darwin-x86_64.zip)
-		DKEXTRACT(${DIGITALKNOB}/Download/${NDK_VERSION}-darwin-x86_64.zip ${3RDPARTY})
-	ENDIF()
-	DKDKSET(NDK "${3RDPARTY}/${NDK_VERSION}")
+	## FIXME
+	DKINSTALL(https://dl.google.com/android/repository/${NDK_VERSION}-mac.zip android-ndk ${NDK_VERSION})
 ENDIF()
 
 IF(CMAKE_HOST_LINUX)
-	IF(NOT EXISTS ${3RDPARTY}/${NDK_VERSION})
-		DKSETPATH(${DIGITALKNOB}/Download)
-		## DKDOWNLOAD(www.internet.com/${NDK_VERSION}-linux-x86_64.zip)
-		DKEXTRACT(${DIGITALKNOB}/Download/${NDK_VERSION}-linux-x86_64.zip ${3RDPARTY})
-	ENDIF()
-	DKDKSET(NDK "${3RDPARTY}/${NDK_VERSION}")
+	## FIXME
+	DKINSTALL(https://dl.google.com/android/repository/${NDK_VERSION}-linux.zip android-ndk ${NDK_VERSION})
 ENDIF()
+
+DKDKSET(NDK "${3RDPARTY}/${NDK_VERSION}")

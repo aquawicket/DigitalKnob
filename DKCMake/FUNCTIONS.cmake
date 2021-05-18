@@ -307,7 +307,11 @@ FUNCTION(DKINSTALL url import_folder 3rdparty_folder)
 	DKCOPY(${DKIMPORTS}/${import_folder}/ ${3RDPARTY}/${3rdparty_folder}/ TRUE)
 ENDFUNCTION()
 
-
+#FIXME - This is not tested
+FUNCTION(DKWINSHORTPATH path)
+	GET_FILENAME_COMPONENT(shortpath ${path} ABSOLUTE)  #Get the windows short filepath
+	MESSAGE("SHORTPATH = ${shortpath}")
+ENDFUNCTION()
 
 
 

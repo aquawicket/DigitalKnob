@@ -1,0 +1,10 @@
+IF(NOT CMAKE_HOST_WIN32)
+	RETURN()
+ENDIF()
+
+### VERSION ####
+DKSET(ANT_VERSION apache-ant-1.9.15)
+
+### INSTALL ###
+DKINSTALL(https://mirror.cogentco.com/pub/apache/ant/binaries/${ANT_VERSION}-bin.zip apache-ant ${ANT_VERSION})
+DKDKSET(ANT ${3RDPARTY}/${ANT_VERSION})
