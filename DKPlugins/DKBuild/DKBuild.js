@@ -443,7 +443,7 @@ function DKBuild_DoResults()
 	}
 	
 	//// Create Icons
-	if(CPP_DK_GetOS() === "Win32" || CPP_DK_GetOS() === "Win64"){
+	if(CPP_DK_GetOS() === "Windows"){
 		CPP_DK_Create("DKBuild/IconMaker.js");
 		IconMaker_Create(DKPATH+"/"+appdir+"/"+APP);
 	}
