@@ -27,4 +27,7 @@ dk.devtools.addTools = function dk_devtools_addTools() {
             console.log("done pulling assets. result = " + result);
         });
     });
+    dk.gui.createImageButton(dk.devtools.div, "DKSolution", "DKFile/folder.png", "2rem", "", "", "2px", "", "", function(){
+        dk.create("DKFile/DKSolution.js");
+    })
 }
