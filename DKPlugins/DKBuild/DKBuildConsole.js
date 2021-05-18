@@ -5,10 +5,10 @@ function DKBuildConsole_init()
 {
 	CPP_DK_Create("DKBuild/DKBuild.js");
 	DKBuild_ValidateCmake();
-	//DKBuild_ValidateVC2015();
 	DKBuild_ValidateVC2019();
 	DKBuild_ValidateGcc();
 	DKBuild_ValidateXcode();
+	DKBuild_ValidateNDK();
 	
 	while(working){
 		DKBuildConsole_Process();

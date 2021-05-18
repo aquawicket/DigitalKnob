@@ -29,6 +29,7 @@ var APP_LIST = [];
 function DKBuild_init()
 {
 	CPP_DK_Create("DKCurl");
+	CPP_DK_Create("DKArchive");
 
 	if(CPP_DK_GetOS() === "Windows"){
 		if(CPP_DK_GetOSArchitecture() === "32"){
@@ -196,6 +197,28 @@ function DKBuild_InstallXcode()
 	console.log("Installing Xcode");
 	var datapath = DKAssets_LocalAssets();
 	CPP_DKCurl_Download("http://DigitalKnob.com/Download/Tools/xcode4630916281a.dmg", datapath);
+}
+
+
+//////////////////////////////
+function DKBuild_ValidateNDK()
+{
+	if(CPP_DK_GetOS() !== "Windows"){ return; }
+	if(CPP_DK_GetBrowser() !== "RML"){ return; }
+	console.log("Looking for Android NDK");
+	if(!CPP_DKFile_Exists(NDK)){
+		console.log("Please install Android NDK");
+		DKBuild_InstallNDK();
+	}
+	console.log("Found NDK");
+}
+/////////////////////////////
+function DKBuild_InstallNDK()
+{
+	console.log("Installing Android NDK");
+	var datapath = CPP_DKAssets_LocalAssets();
+	CPP_DKCurl_Download("https://dl.google.com/android/repository/"+NDK_NAME+"-windows-x86_64.zip", DKPATH+"/DK/Download");
+	CPP_DKArchive_Extract(DKPATH+"/DK/Download/"+NDK_NAME+"-windows-x86_64.zip", DKPATH+"/DK/3rdParty/"+NDK_NAME);
 }
 
 //////////////////////////
