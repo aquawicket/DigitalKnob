@@ -4,11 +4,11 @@ var working = true;
 function DKBuildConsole_init()
 {
 	CPP_DK_Create("DKBuild/DKBuild.js");
-	DKBuild_ValidateCmake();
-	DKBuild_ValidateVC2019();
-	DKBuild_ValidateGcc();
-	DKBuild_ValidateXcode();
-	DKBuild_ValidateNDK();
+	//DKBuild_ValidateCmake();
+	//DKBuild_ValidateVC2019();
+	//DKBuild_ValidateGcc();
+	//DKBuild_ValidateXcode();
+	//DKBuild_ValidateNDK();
 	
 	while(working){
 		DKBuildConsole_Process();
