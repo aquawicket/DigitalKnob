@@ -5,10 +5,9 @@ const duktape = window.duktape;
 
 //This will keep a record of all messages to give to dk.console later
 dk.x = new Object;
-const x=dk.x;
 (function() {
-    (x.record = []) && (x.debug = console.debug) && (x.error = console.error) &&
-    (x.log = console.log)
+    const x = dk.x;
+    (x.record = []) && (x.debug = console.debug) && (x.error = console.error) && (x.log = console.log)
     x.logger = function(lvl, args) {
         x[lvl].apply(this, Array.prototype.slice.call(args));
         var obj = {};
@@ -28,41 +27,6 @@ const x=dk.x;
     }
 }());
 
-dk.init = function dk_init() {
-    eval("var __temp = null");
-    const use_strict = (typeof __temp === "undefined");
-    console.debug("*** DigitalKnob ***");
-    console.debug("use_strict is set to: " + use_strict);
-    console.debug("Browser = " + dk.getBrowser());
-    console.debug("JSEngine = " + dk.getJSEngine());
-
-    dk.localIP = "127.0.0.1";
-    dk.networkIP = "192.168.1.210";
-    dk.publicIP = "47.148.252.2";
-    dk.port = "2393";
-
-    dk.create("DK/DK.css");
-    /*
-    var LOG_DEBUG = false;
-    var LOG_INFO = true;
-    var LOG_WARNINGS = true;
-    var LOG_ERRORS = true;
-    var LOG_FILE = true;
-    var LOG_SHOW = "";
-    //comma seperated
-    var LOG_HIDE = "";
-    //comma seperated
-    var LOG_LINES = false;
-    var DK_ERROR = 1;
-    var DK_WARN = 2;
-    var DK_INFO = 3;
-    var DK_DEBUG = 4;
-    var DK_SHOW = 5;
-    var DK_HIDE = 6;
-    //var events = [];
-    */
-}
-
 const require = function require() {
     for (let n = 0; n < arguments.length; n++) {
         if (typeof arguments[n] !== "object")
@@ -75,16 +39,10 @@ const require = function require() {
 }
 
 const byId = function byId(id) {
-    require({
-        id
-    });
     return document.getElementById(id);
 }
 
 const error = function error(str, callback, rtnval) {
-    require({
-        str
-    });
     !rtnval && (rtnval = false);
     //console.error(str);
     throw new Error(str);
@@ -93,37 +51,16 @@ const error = function error(str, callback, rtnval) {
 }
 
 const warn = function warn(str, callback, rtnval) {
-    require({
-        str
-    });
     !rtnval && (rtnval = false);
     console.warn(str);
     callback && callback(rtnval);
     return rtnval;
 }
 
-//These are use for rem units and zoom level. They are already in DK.css
-//document.getElementsByTagName("html")[0].style.fontSize = "1.0px";
-//document.body.style.fontSize = "13em";
-
 //prevent screen highlighting while dragging
 document.onselectstart = function document_onselectstart() {
     return false;
 }
-
-// Dummy functions only implemented in c++
-//function DK_DoFrame(){ /*console.warn("DK_ClearEvents(): not available for "+dk.getBrowser());*/ }
-//function EventLoop(){ /*console.warn("DK_ClearEvents(): not available for "+dk.getBrowser());*/ }
-//EventLoop.run = function EventLoop_run(){};
-
-//https://stackoverflow.com/a/11035042/688352
-
-/*
-var myVar = setInterval(myTimer, 1000);
-function myTimer() {
-    DKSendEvent("window", "second", "");
-}
-*/
 
 document.addEventListener("mousemove", function document_addEventListener(event) {
     if (dk.iE()) {
@@ -150,120 +87,16 @@ document.addEventListener("mousemove", function document_addEventListener(event)
     return true;
 });
 
-/*
-function DKERROR(string){ Log(string, DK_ERROR); }
-function DKWARN(string){ Log(string, DK_WARN); }
-function DKINFO(string){ Log(string, DK_INFO); }
-function DKDEBUG(string){ Log(string, DK_DEBUG); }
-
-function Log(string, lvl) {
-    if (!lvl)
-        lvl = DK_INFO;
-
-    //check for LOG_HIDE
-    if (LOG_HIDE) {
-        var arry = LOG_HIDE.split(",");
-        for (var i = 0; i < arry.length; i++) {
-            if (arry[i] && string.includes(arry[i])) {
-                return;
-            }
-        }
-    }
-
-    if (window.console) {
-        var flag = false;
-        if (LOG_SHOW) {
-            var arry = LOG_SHOW.split(",");
-            for (var i = 0; i < arry.length; i++) {
-                if (arry[i] && string.includes(arry[i])) {
-                    flag = true;
-                    break;
-                }
-            }
-        }
-        if (!flag) {
-            if (lvl === DK_ERROR && !LOG_ERRORS) {
-                return;
-            }
-            if (lvl === DK_WARN && !LOG_WARNINGS) {
-                return;
-            }
-            if (lvl === DK_INFO && !LOG_INFO) {
-                return;
-            }
-            if (lvl === DK_DEBUG && !LOG_DEBUG) {
-                return;
-            }
-        }
-        var color = "";
-        if (lvl === DK_ERROR) {
-            color = "color:red";
-        }
-        if (lvl === DK_WARN) {
-            color = "color:#B8860B";
-        }
-        if (lvl === DK_INFO) {
-            color = "color:grey";
-        }
-        if (lvl === DK_DEBUG) {
-            color = "color:blue";
-        }
-        if (!color) {
-            color = "color:grey";
-        }
-        string = string.replace("\n", "");
-
-        function getFileLine() {
-            var stack = Error().stack;
-            if (!stack || !LOG_LINES) {
-                return "";
-            }
-            var lines = stack.split("\n");
-            var n = 0;
-            while (lines[n].indexOf("Log") === -1) {
-                n++;
-            }
-            var fileline = lines[n + 1];
-            var start = fileline.lastIndexOf("/");
-            var end = fileline.lastIndexOf(":");
-            fileline = fileline.substring(start + 1, end + 1);
-            return fileline + "  ";
-        }
-
-        if (dk.getBrowser() === "CHROME" || dk.getBrowser() === "CEF") {
-            if (lvl === DK_ERROR) {
-                //alert("ERROR: "+string);
-                //throw "ERROR: "+string;
-                console.error(getFileLine() + string);
-            } else if (lvl === DK_WARN) {
-                console.warn(getFileLine() + string);
-            } else if (lvl === DK_INFO) {
-                console.log(getFileLine() + string);
-            } else if (lvl === DK_DEBUG) {
-                //console.info("%c"+getFileLine()+string, color);
-                console.debug("%c" + getFileLine() + string, color);
-            } else {
-                console.log("%c" + getFileLine() + string, color);
-            }
-        } else {
-            if (lvl === DK_ERROR) {
-                //alert("ERROR: "+string);
-                //throw "ERROR: "+string;
-                console.error(getFileLine() + string);
-            } else if (lvl === DK_WARN) {
-                console.warn(getFileLine() + string);
-            } else if (lvl === DK_INFO) {
-                console.log(getFileLine() + string);
-            } else if (lvl === DK_DEBUG) {
-                console.debug(getFileLine() + string);
-            } else {
-                console.log(getFileLine() + string);
-            }
-        }
-    }
-    //DKSendEvent("DKConsole.html", "DKNotify", string);
+dk.init = function dk_init() {
+    eval("var __temp = null");
+    const use_strict = (typeof __temp === "undefined");
+    console.debug("*** DigitalKnob ***");
+    console.debug("use_strict is set to: " + use_strict);
+    console.debug("Browser = " + dk.getBrowser());
+    console.debug("JSEngine = " + dk.getJSEngine());
+    dk.create("DK/DK.css");
 }
-*/
+
 dk.hasCPP = function dk_hasCPP() {
     if (dk.getBrowser() === "CEF")
         return true;
