@@ -3,6 +3,31 @@
 window.dk = new Object;
 const duktape = window.duktape;
 
+//This will keep a record of all messages to give to dk.console later
+dk.x = new Object;
+const x=dk.x;
+(function() {
+    (x.record = []) && (x.debug = console.debug) && (x.error = console.error) &&
+    (x.log = console.log)
+    x.logger = function(lvl, args) {
+        x[lvl].apply(this, Array.prototype.slice.call(args));
+        var obj = {};
+        (obj[lvl] = args[0]) && (x.record.push(obj))
+    }
+    console.debug = function() {
+        x.logger("debug", arguments);
+    }
+    console.error = function() {
+        x.logger("error", arguments);
+    }
+    console.log = function() {
+        x.logger("log", arguments);
+    }
+    console.warn = function() {
+        x.logger("warn", arguments);
+    }
+}());
+
 dk.init = function dk_init() {
     eval("var __temp = null");
     const use_strict = (typeof __temp === "undefined");

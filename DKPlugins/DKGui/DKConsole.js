@@ -4,7 +4,8 @@
 // https://developer.mozilla.org/en-US/docs/Web/API/Console#outputting_text_to_the_console
 
 dk.console = new DKPlugin("dk_console");
-
+dk.console.record = dk.x.record
+delete dk.x;
 //intercept console and reroute it to xconsole and dk.console
 //Example:
 // If you use console.log, it will now go to the dk.console AND the browser console.
@@ -92,8 +93,8 @@ const xconsole = new Object;
         dk.console.info && dk.console.info.apply(this, Array.prototype.slice.call(arguments));
     }
     console.log = function console_log() {
-        xconsole.on && xconsole.log.apply(this, Array.prototype.slice.call(arguments));
-        dk.console.log && dk.console.log.apply(this, Array.prototype.slice.call(arguments));
+        xconsole.on && xconsole.info.apply(this, Array.prototype.slice.call(arguments));
+        dk.console.log && dk.console.info.apply(this, Array.prototype.slice.call(arguments));
     }
     //console.memory;
     console.profile = function console_profile() {
@@ -319,6 +320,14 @@ dk.console.create = function dk_console_create(parent, id, top, bottom, left, ri
         const newstr = str + "\n" + dk.trace.stackToConsoleString("", "console.warn");
         dk.console.Logger(newstr, "yellow");
     }
+
+    //restore the record of messages from the program beginning
+    for(let n=0; n<dk.console.record.length; n++){
+        const lvl = Object.keys(dk.console.record[n])[0];
+        const msg = dk.console.record[n][lvl];
+        dk.console[lvl](msg);
+    }
+    delete dk.console.record;
 
     return container;
 }
