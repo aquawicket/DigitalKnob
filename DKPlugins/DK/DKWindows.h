@@ -37,6 +37,7 @@ public:
 	static bool GetProcessList(DKString& list);
 	static bool GetScreenWidth(int& w);
 	static bool GetScreenHeight(int& h);
+	static bool GetUsername(DKString& username);
 	static bool GetVolume(int& percent);
 	static bool KeyIsDown(const int& key);
 	static bool LeftClick();

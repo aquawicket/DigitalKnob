@@ -9,6 +9,7 @@
 #include <endpointvolume.h>
 #include <psapi.h>
 #include "shlobj.h"
+#include <Lmcons.h> //DKUtil::GetUsername
 
 //Monitor brightness
 #include "PhysicalMonitorEnumerationAPI.h"
@@ -430,6 +431,15 @@ bool DKWindows::GetScreenHeight(int& h)
 	const HWND hDesktop = GetDesktopWindow();
 	if(!GetWindowRect(hDesktop, &desktop)){ return false; }
 	h = desktop.bottom;
+	return true;
+}
+
+bool DKWindows::GetUsername(DKString& username){
+	TCHAR name[UNLEN + 1];
+	DWORD size = UNLEN + 1;
+	if (!GetUserName((TCHAR*)name, &size))
+		return false;
+	username = toString(name);
 	return true;
 }
 

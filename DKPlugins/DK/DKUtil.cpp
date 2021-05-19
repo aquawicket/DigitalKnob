@@ -6,7 +6,6 @@
 
 #ifdef WIN32
 	#include "DKWindows.h"
-	#include <Lmcons.h> //DKUtil::GetUsername
 #else
 	#include "DKUnix.h"
 #endif
@@ -503,17 +502,8 @@ bool DKUtil::GetTime(DKString& _time)
 bool DKUtil::GetUsername(DKString& username){
 	DKDEBUGFUNC(username);
 #ifdef WIN32
-	TCHAR name[UNLEN + 1];
-	DWORD size = UNLEN + 1;
-	if (!GetUserName((TCHAR*)name, &size))
-		return false;
-	username = toString(name);
-	return true;
-#endif
-#ifdef MAC
-	return DKUnix::GetUsername(username);
-#endif
-#ifdef LINUX
+	return DKWindows::GetUsername(username);
+#else
 	return DKUnix::GetUsername(username);
 #endif
 	DKWARN("DKUtil::GetUsername() not implemented on this OS \n");
