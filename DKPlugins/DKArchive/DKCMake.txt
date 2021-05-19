@@ -1,10 +1,6 @@
 DKDEPEND(DKDuktape)
 
-##IF(NOT MAC)
-##	DKDEPEND(libarchive-master)
-##ELSE()
-	DKDEPEND(libarchive)
-##ENDIF()
+DKDEPEND(libarchive)
 
 LIST(APPEND WIN_LIBS AdvAPI32.lib)
 DKPLUGIN(DKArchive)
