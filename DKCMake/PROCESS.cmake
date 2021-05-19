@@ -527,6 +527,9 @@ IF(WIN_64)
 	MESSAGE("Creating assets.zip . . .")
 	DKZIP(${DKPROJECT}/assets)
 	
+	#dummy assets.h file, or the builder wil complain about assets.h missing
+	DKCOPY(${DKPLUGINS}/_DKIMPORT/assets.h ${DKPROJECT}/assets.h, TRUE)
+	
 	# Restore the backed up files, excluded from assets
 	DKCOPY(${DKPROJECT}/Backup/ ${DKPROJECT}/assets/ TRUE)
 	DKREMOVE(${DKPROJECT}/Backup)
