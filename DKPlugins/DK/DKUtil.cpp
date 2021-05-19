@@ -9,7 +9,6 @@
 	#include <Lmcons.h> //DKUtil::GetUsername
 #else
 	#include "DKUnix.h"
-	#include <unistd.h> //DKUtil::GetUsername
 #endif
 
 #ifdef LINUX
@@ -512,10 +511,10 @@ bool DKUtil::GetUsername(DKString& username){
 	return true;
 #endif
 #ifdef MAC
-	//return DKMac::GetUsername(username);
+	return DKUnix::GetUsername(username);
 #endif
 #ifdef LINUX
-	return DKLinux::GetUsername(username);
+	return DKUnix::GetUsername(username);
 #endif
 	DKWARN("DKUtil::GetUsername() not implemented on this OS \n");
 	return false;
