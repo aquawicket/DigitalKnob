@@ -29,7 +29,7 @@ bool DKUnix::GetUsername(DKString& username){
 		return true;
 	}
 	char* usr_c;
-	if ((userC = getlogin()) != NULL){
+	if ((usrC = getlogin()) != NULL){
 		username = usr_c;
 		return true;
 	}
@@ -41,7 +41,7 @@ bool DKUnix::GetUsername(DKString& username){
 	char* usr_e;
 	struct passwd* pw;
 	if ((pw = getpwnam(usr_e)) != NULL){
-		username = pw->pwuid;
+		username = pw->pw_uid;
 		return true;
 	}
 	DKERROR("ERROR: cannot get username");
