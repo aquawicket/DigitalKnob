@@ -1,13 +1,13 @@
 ### VERSION ###
 IF(ANDROID)
-	DKSET(ZLIB_VERSION 1.2.8)
+	DKSET(ZLIB_VERSION 1.2.8) ## https://www.zlib.net/fossils/zlib-1.2.8.tar.gz
 ELSE()
-	DKSET(ZLIB_VERSION 1.2.11)
+	DKSET(ZLIB_VERSION 1.2.11) ##https://www.zlib.net/fossils/zlib-1.2.11.tar.gz
 ENDIF()
 
 
 ### INSTALL ###
-DKINSTALL(https://www.zlib.net/zlib-${ZLIB_VERSION}.tar.gz zlib zlib-${ZLIB_VERSION})
+DKINSTALL(https://www.zlib.net/fossils/zlib-${ZLIB_VERSION}.tar.gz zlib zlib-${ZLIB_VERSION})
 DKSET(ZLIB ${3RDPARTY}/zlib-${ZLIB_VERSION})
 
 
