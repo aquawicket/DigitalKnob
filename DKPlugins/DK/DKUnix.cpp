@@ -1,8 +1,10 @@
 #include "DK/stdafx.h"
 #ifndef WIN32
 #include "DKUnix.h"
-#include <unistd.h> //GetUsername
-
+#include <cstdlib>     //GetUsername()  std::getenv()
+#include <pwd.h>       //GetUsername()  getpwuid()/getuid()
+#include <unistd.h>    //GetUsername()  getlogin()/getlogin_r()
+#include <sys/types.h> //GetUsername()  getpwnam()
 
 bool DKUnix::GetKey(int& key){
 	DKINFO("Press any key to continue...\n");
@@ -17,18 +19,33 @@ bool DKUnix::Sleep(int milliseconds){
 
 bool DKUnix::GetUsername(DKString& username){
 #ifdef LINUX
-	char szUserName[64] = {0};
-	int nGet = getlogin_r(szUserName, sizeof(szUserName)-1);
-	if(0 != nGet){
-		DKERROR("DKUnix::GetUsername() failed\n");
-		return false;
-    }
-	DKINFO("USERNAME: "+DKString(szUserName)+"\n");
-	char* szHome = getlogin();
-	DKINFO("LOGIN: "+DKString(szHome)+"\n");
-
-	username = szUserName;
-	return true;
+	if (const char* usr_a = std::getenv("USER")){ //'USERNAME' on Windows
+		username = usr_a;
+		return;
+	}
+	struct passwd* usr_b = getpwuid(getuid());
+	if (usr_b) {
+		username = usr_b->pw_name;
+		return;
+	}
+	char* usr_c;
+	if ((userC = getlogin()) != NULL){
+		username = usr_c;
+		return;
+	}
+	char usr_d[64];
+	if (getlogin_r(usr_d, sizeof(usr_d) - 1) != 0) {
+		username = usr_d;
+		return;
+	}
+	char* usr_e;
+	struct passwd* pw;
+	if ((pw = getpwnam(usr_e)) != NULL){
+		username = pw->pwuid;
+		return;
+	}
+	DKERROR("ERROR: cannot get username");
+	return false;
 #endif
 	return false;
 }

@@ -9,7 +9,8 @@
 #include <endpointvolume.h>
 #include <psapi.h>
 #include "shlobj.h"
-#include <Lmcons.h> //DKUtil::GetUsername
+#include <cstdlib>  //DKUtil::GetUsername() std::getenv()
+#include <Lmcons.h> //DKUtil::GetUsername() GetUserName()
 
 //Monitor brightness
 #include "PhysicalMonitorEnumerationAPI.h"
@@ -434,13 +435,20 @@ bool DKWindows::GetScreenHeight(int& h)
 	return true;
 }
 
-bool DKWindows::GetUsername(DKString& username){
+bool DKWindows::GetUsername(DKString& username)
+{
+	if (const char* usr_a = std::getenv("USERname")) {
+		username = usr_a;
+		return true;
+	}
 	TCHAR name[UNLEN + 1];
 	DWORD size = UNLEN + 1;
-	if (!GetUserName((TCHAR*)name, &size))
-		return false;
-	username = toString(name);
-	return true;
+	if (GetUserName((TCHAR*)name, &size)) {
+		username = toString(name);
+		return true;
+	}
+	DKERROR("ERROR: cannot get username");
+	return false;
 }
 
 ///////////////////////////////////////
