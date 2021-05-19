@@ -1,87 +1,71 @@
-// TODO
-//* Git should be extracted from this to it's own plugin.
-//* Also, git credential memory should be added.
-
-var USERNAME = "aquawicket"; //FIXME: Need to dynamically get username (aquawicket)
+let USERNAME = "aquawicket"; //FIXME: Need to dynamically get username (aquawicket)
 if(CPP_DK_GetOS() === "Raspberry"){
     USERNAME = "pi";
 }
 
-
-var OS = "";   //win32,win64,mac32,mac64,linux32,linux64,ios32,ios64,iossim32,iossim64,android32,android64,raspberry32,raspberry64 
-var APP = "";  //DKAppname
-var TYPE = "";  //Debug, Release, ALL
-var LINK = "";  //Static, Dynamic
-var LEVEL = "";  //Build, Rebuild, RebuildAll
-var DKPATH = "";
-var DKDOWNLOAD = "";
-var CMAKE = "";
-var NDK_VERSION = "r21e";
-var NDK = "";
-var VC2019 = "C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/MSBuild/Current/Bin/MSBuild.exe";
-VC2019 = CPP_DKFile_GetShortName(VC2019);
-//VC2019 = DKBuild_GetShortPath(VC2019);
-var GCC = "/usr/bin/g++";
-var XCODE = "/Applications/Xcode.app";
-var APP_LIST = [];
+let OS = "";   //win32,win64,mac32,mac64,linux32,linux64,ios32,ios64,iossim32,iossim64,android32,android64,raspberry32,raspberry64 
+let APP = "";  //DKAppname
+let TYPE = "";  //Debug, Release, ALL
+let LINK = "";  //Static, Dynamic
+let LEVEL = "";  //Build, Rebuild, RebuildAll
+let DKPATH = "";
+let DKDOWNLOAD = "";
+let CMAKE = "";
+let NDK_VERSION = "r21e";
+let NDK = "";
+let VISUALSTUDIO_VERSION = "2019";
+let VISUALSTUDIO = "";
+let MSBUILD = "";
+let GCC = "";
+let XCODE = "";
+let APP_LIST = [];
  
 
-///////////////////////
-function DKBuild_init()
-{
+function DKBuild_init(){
 	CPP_DK_Create("DKCurl");
 	CPP_DK_Create("DKArchive");
 
 	if(CPP_DK_GetOS() === "Windows"){
+		DKPATH = "C:/Users/"+USERNAME+"/digitalknob";
 		if(CPP_DK_GetOSArchitecture() === "32"){
-			DKPATH = "C:/Users/"+USERNAME+"/digitalknob";
-			DKDOWNLOAD = DKPATH+"/Download";
 			CMAKE = "C:/Program Files/CMake/bin/cmake.exe";
-			CMAKE = CPP_DKFile_GetShortName(CMAKE);
-			NDK = DKPATH+"/DK/3rdParty/android-ndk-"+NDK_VERSION+"-windows-x86_64";
-			NDK = CPP_DKFile_GetShortName(NDK);
+			VISUALSTUDIO = "C:/Program Files/Microsoft Visual Studio/"+VISUALSTUDIO_VERSION;
 		}
 		if(CPP_DK_GetOSArchitecture() === "64"){
-			DKPATH = "C:/Users/"+USERNAME+"/digitalknob";
-			DKDOWNLOAD = DKPATH+"/Download";
 			CMAKE = "C:/Program Files (x86)/CMake/bin/cmake.exe";
-			CMAKE = CPP_DKFile_GetShortName(CMAKE);
-			NDK = DKPATH+"/DK/3rdParty/android-ndk-"+NDK_VERSION+"-windows-x86_64";
-			NDK = CPP_DKFile_GetShortName(NDK);
+			VISUALSTUDIO = "C:/Program Files (x86)/Microsoft Visual Studio/"+VISUALSTUDIO_VERSION;
 		}
+		CMAKE = CPP_DKFile_GetShortName(CMAKE);
+		MSBUILD = VISUALSTUDIO+"/Community/MSBuild/Current/Bin/MSBuild.exe";
+		MSBUILD = CPP_DKFile_GetShortName(MSBUILD);
+		NDK = DKPATH+"/DK/3rdParty/android-ndk-"+NDK_VERSION+"-windows-x86_64";
+		NDK = CPP_DKFile_GetShortName(NDK);
 	}
 	if(CPP_DK_GetOS() === "Mac"){
 		DKPATH = "/Users/"+USERNAME+"/digitalknob";
-		DKDOWNLOAD = DKPATH+"/Download";
 		CMAKE = "/Applications/CMake.app/Contents/bin/cmake";
+		XCODE = "/Applications/Xcode.app";
 		NDK = DKPATH+"/DK/3rdParty/android-ndk-"+NDK_VERSION+"-darwin-x86_64";
 	}
 	if(CPP_DK_GetOS() === "Linux"){
 		DKPATH = "/home/"+USERNAME+"/digitalknob";
-		DKDOWNLOAD = DKPATH+"/Download";
 		CMAKE = "/usr/bin/cmake";
+		GCC = "/usr/bin/g++";
 		NDK = DKPATH+"/DK/3rdParty/android-ndk-"+NDK_VERSION+"-linux-x86_64";
 	}
 	if(CPP_DK_GetOS() === "Raspberry"){
 		DKPATH = "/home/"+USERNAME+"/digitalknob";
-		DKDOWNLOAD = DKPATH+"/Download";
 		CMAKE = "/usr/bin/cmake";
+		GCC = "/usr/bin/g++";
 		NDK = DKPATH+"/DK/3rdParty/android-ndk-"+NDK_VERSION+"-linux-x86_64";
 	}
-}
-
-//////////////////////
-function DKBuild_end()
-{
-	
+	DKDOWNLOAD = DKPATH+"/Download";
 }
 
 //This is and alternative way to get windows short paths
-////////////////////////////////////////
 function DKBuild_GetShortPath(fullPath){
-	var local_assets = CPP_DKAssets_LocalAssets();
-	var getShortPath = local_assets+"/DKFile/getShortPath.cmd";
-	var shortPath = CPP_DK_Execute(getShortPath+' "'+fullPath+'"');
+	let getShortPath = DKPATH+"/DK/DKPlugins/DKFile/getShortPath.cmd";
+	let shortPath = CPP_DK_Execute(getShortPath+' "'+fullPath+'"');
 	shortPath = shortPath.slice(0, -1)
 	while(shortPath.includes("\\")){
 		shortPath = shortPath.replace("\\","/");
@@ -89,19 +73,14 @@ function DKBuild_GetShortPath(fullPath){
 	return shortPath;
 }
 
-////////////////////////////////
-function DKBuild_ValidateCmake()
-{
-	if(CPP_DK_GetBrowser() !== "RML"){ return; }
+function DKBuild_ValidateCmake(){
 	console.log("Looking for CMake");
-	if(!CPP_DKFile_Exists(CMAKE)){
-		console.log("Please install CMake");
+	if(!CPP_DKFile_Exists(CMAKE))
 		DKBuild_InstallCmake();
-	}
-	console.log("Found CMake");
-	if(CPP_DK_GetOS() === "Mac"){
+	if(CPP_DKFile_Exists(CMAKE))
+		console.log("Found CMake");
+	if(CPP_DK_GetOS() === "Mac")
 		CMAKE = "cmake";
-	}
 }
 
 function DKBuild_InstallCmake(){
@@ -118,21 +97,20 @@ function DKBuild_InstallCmake(){
 			CPP_DK_System(DKDOWNLOAD+"/cmake-3.19.4-win32-x86.msi");
 		}
 	}
-	else if(CPP_DK_GetOS() === "Mac"){
+	if(CPP_DK_GetOS() === "Mac"){
 		//TODO
 	}
-	else if(CPP_DK_GetOS() === "Linux")
+	if(CPP_DK_GetOS() === "Linux")
 		CPP_DK_Execute("sudo apt-get install cmake");
-	else if(CPP_DK_GetOS() === "Raspberry")
+	if(CPP_DK_GetOS() === "Raspberry")
 		CPP_DK_Execute("sudo apt-get install cmake");
-	else
-		console.log("ERROR: Cannot install Cmake on this platform: "+CPP_DK_GetOS());
 }
 
 function DKBuild_ValidateVC2019(){
 	console.log("Looking for Visual Studio 2019");
-	if(!CPP_DKFile_Exists(VC2019))
+	if(!CPP_DKFile_Exists(VISUALSTUDIO))
 		DKBuild_InstallVC2019();
+	if(CPP_DKFile_Exists(VISUALSTUDIO))
 	console.log("Found Visual Studio 2019");
 }
 
@@ -146,7 +124,8 @@ function DKBuild_ValidateGcc(){
 	console.log("Looking for GCC");
 	if(!CPP_DKFile_Exists(GCC))
 		DKBuild_InstallGcc();
-	console.log("Found Gcc");
+	if(CPP_DKFile_Exists(GCC))
+		console.log("Found Gcc");
 }
 
 function DKBuild_InstallGcc(){
@@ -158,7 +137,8 @@ function DKBuild_ValidateXcode(){
 	console.log("Looking for Xcode");
 	if(!CPP_DKFile_Exists(XCODE))
 		DKBuild_InstallXcode();
-	console.log("Found Xcode");
+	if(CPP_DKFile_Exists(XCODE))
+		console.log("Found Xcode");
 }
 
 function DKBuild_InstallXcode(){
@@ -171,7 +151,8 @@ function DKBuild_ValidateNDK(){
 	console.log("Looking for Android NDK");
 	if(!CPP_DKFile_Exists(NDK))
 		DKBuild_InstallNDK();
-	console.log("Found NDK");
+	if(CPP_DKFile_Exists(NDK))
+		console.log("Found NDK");
 }
 
 function DKBuild_InstallNDK(){
@@ -192,81 +173,135 @@ function DKBuild_InstallNDK(){
 
 function DKBuild_OsCheck(){
 	if(CPP_DK_GetOS() === "Windows"){
-		if(OS === "win64")
-			console.error(OS+" can only be build from a WIN64 machine"); return false;
-		if(OS === "mac")
-			console.error(OS+" can only be build from an OSX machine"); return false;
-		if(OS === "ios")
-			console.error(OS+" can only be build from an OSX machine"); return false;
-		if(OS === "ios-simulator")
-			console.error(OS+" can only be build from an OSX machine"); return false;
-		if(OS === "linux")
-			console.error(OS+" can only be build from a LINUX machine"); return false;
-		if(OS === "raspberry")
-			console.error(OS+" can only be build from a Raspberry machine"); return false;
+		if(OS === "win64"){
+			console.error(OS+" can only be build from a WIN64 machine"); 
+			return false;
+		}
+		if(OS === "mac"){
+			console.error(OS+" can only be build from an OSX machine"); 
+			return false;
+		}
+		if(OS === "ios"){
+			console.error(OS+" can only be build from an OSX machine"); 
+			return false;
+		}
+		if(OS === "ios-simulator"){
+			console.error(OS+" can only be build from an OSX machine"); 
+			return false;
+		}
+		if(OS === "linux"){
+			console.error(OS+" can only be build from a LINUX machine"); 
+			return false;
+		}
+		if(OS === "raspberry"){
+			console.error(OS+" can only be build from a Raspberry machine"); 
+			return false;
+		}
 	}
 	if(CPP_DK_GetOS() === "Win64"){
-		if(OS === "mac")
-			console.error(OS+" can only be build from an OSX machine"); return false;
-		if(OS === "ios")
-			console.error(OS+" can only be build from an OSX machine"); return false;
-		if(OS === "ios-simulator")
-			console.error(OS+" can only be build from an OSX machine"); return false;
-		if(OS === "linux")
-			console.error(OS+" can only be build from a LINUX machine"); return false;
-		if(OS === "raspberry")
-			console.error(OS+" can only be build from a Raspberry machine"); return false;
+		if(OS === "mac"){
+			console.error(OS+" can only be build from an OSX machine"); 
+			return false;
+		}
+		if(OS === "ios"){
+			console.error(OS+" can only be build from an OSX machine"); 
+			return false;
+		}
+		if(OS === "ios-simulator"){
+			console.error(OS+" can only be build from an OSX machine"); 
+			return false;
+		}
+		if(OS === "linux"){
+			console.error(OS+" can only be build from a LINUX machine"); 
+			return false;
+		}
+		if(OS === "raspberry"){
+			console.error(OS+" can only be build from a Raspberry machine"); 
+			return false;
+		}
 	}
 	if(CPP_DK_GetOS() === "Mac"){
-		if(OS === "win32")
-			console.error(OS+" can only be build from a Windows machine"); return false;
-		if(OS === "win64")
-			console.error(OS+" can only be build from an WIN64 machine"); return false;
-		if(OS === "linux")
-			console.error(OS+" can only be build from a linux machine"); return false;
-		if(OS === "linux32")
-			console.error(OS+" can only be build from a linux machine"); return false;
-		if(OS === "linux64")
-			console.error(OS+" can only be build from a linux machine"); return false;
-		//if(OS === "andoroid")
-		//	console.error(OS+" can only be build from a Windows machine"); return false;
-		if(OS === "raspberry")
-			console.error(OS+" can only be build from a Raspberry machine"); return false;
+		if(OS === "win32"){
+			console.error(OS+" can only be build from a Windows machine"); 
+			return false;
+		}
+		if(OS === "win64"){
+			console.error(OS+" can only be build from an Windows x64 machine"); 
+			return false;
+		}
+		if(OS === "linux"){
+			console.error(OS+" can only be build from a linux machine"); 
+			return false;
+		}
+		if(OS === "linux32"){
+			console.error(OS+" can only be build from a linux machine"); 
+			return false;
+		}
+		if(OS === "linux64"){
+			console.error(OS+" can only be build from a linux machine"); 
+			return false;
+		}
+		if(OS === "raspberry"){
+			console.error(OS+" can only be build from a Raspberry machine"); 
+			return false;
+		}
 	}
 	if(CPP_DK_GetOS() === "Linux"){
-		if(OS === "win32")
-			console.error(OS+" can only be build from a Windows machine"); return false;
-		if(OS === "win64")
-			console.error(OS+" can only be build from an WIN64 machine"); return false;
-		if(OS === "mac")
-			console.error(OS+" can only be build from an OSX machine"); return false;
-		if(OS === "ios")
-			console.error(OS+" can only be build from an OSX machine"); return false;
-		if(OS === "ios-simulator")
-			console.error(OS+" can only be build from an OSX machine"); return false;
-		//if(OS === "andoroid")
-		//	console.error(OS+" can only be build from a Windows machine"); return false;
-		if(OS === "raspberry")
-			console.error(OS+" can only be build from a Raspberry machine"); return false;
+		if(OS === "win32"){
+			console.error(OS+" can only be build from a Windows machine"); 
+			return false;
+		}
+		if(OS === "win64"){
+			console.error(OS+" can only be build from an WIN64 machine"); 
+			return false;
+		}
+		if(OS === "mac"){
+			console.error(OS+" can only be build from an OSX machine"); 
+			return false;
+		}
+		if(OS === "ios"){
+			console.error(OS+" can only be build from an OSX machine"); 
+			return false;
+		}
+		if(OS === "ios-simulator"){
+			console.error(OS+" can only be build from an OSX machine"); 
+			return false;
+		}
+		if(OS === "raspberry"){
+			console.error(OS+" can only be build from a Raspberry machine"); 
+			return false;
+		}
 	}
 	if(CPP_DK_GetOS() === "Raspberry"){
-		if(OS === "win32")
-			console.error(OS+" can only be build from a Windows machine"); return false;
-		if(OS === "win64")
-			console.error(OS+" can only be build from an WIN64 machine"); return false;
-		if(OS === "mac")
-			console.error(OS+" can only be build from an OSX machine"); return false;
-		if(OS === "ios")
-			console.error(OS+" can only be build from an OSX machine"); return false;
-		if(OS === "ios-simulator")
-			console.error(OS+" can only be build from an OSX machine"); return false;
-		//if(OS === "andoroid")
-		//	console.error(OS+" can only be build from a Windows machine"); return false;
+		if(OS === "win32"){
+			console.error(OS+" can only be build from a Windows machine"); 
+			return false;
+		}
+		if(OS === "win64"){
+			console.error(OS+" can only be build from an WIN64 machine"); 
+			return false;
+		}
+		if(OS === "mac"){
+			console.error(OS+" can only be build from an OSX machine"); 
+			return false;
+		}
+		if(OS === "ios"){
+			console.error(OS+" can only be build from an OSX machine"); 
+			return false;
+		}
+		if(OS === "ios-simulator"){
+			console.error(OS+" can only be build from an OSX machine"); 
+			return false;
+		}
 	}
-	if(CPP_DK_GetOS() === "Android")
-		console.error("Android is not capable of compiling Apps..  please use a desktop system"); return false;
-	if(CPP_DK_GetOS() === "iOS")
-		console.error("iOS is not capable of compiling Apps..  please use a desktop system"); return false;
+	if(CPP_DK_GetOS() === "Android"){
+		console.error("Android is not capable of compiling Apps..  please use a desktop system"); 
+		return false;
+	}
+	if(CPP_DK_GetOS() === "iOS"){
+		console.error("iOS is not capable of compiling Apps..  please use a desktop system"); 
+		return false;
+	}
 	return true;
 }
 
@@ -274,20 +309,20 @@ function DKBuild_ResetAppsPlugins(){
 	console.log("Deleting Apps and Plugins... ");
 	
 	// Delete everything in DKApps except DKBuild
-	var apps = CPP_DKFile_DirectoryContents(DKPATH+"/DKApps");
-	var list = apps.split(',');
-	for(var i=0; i<list.length; ++i){
+	let apps = CPP_DKFile_DirectoryContents(DKPATH+"/DKApps");
+	let list = apps.split(',');
+	for(let i=0; i<list.length; ++i){
 		if(list[i] === "DKBuilder"){ continue; }
 		CPP_DKFile_Delete(DKPATH+"/DKApps/"+list[i]);
 	}
 	
 	//Multipe user folders
-	var contents = CPP_DKFile_DirectoryContents(DKPATH);
-	var files = contents.split(",");
-	for(var i=0; i<files.length; i++){
-		var url = CPP_DKFile_GetSetting(files[i], "[MYGIT]");
+	let contents = CPP_DKFile_DirectoryContents(DKPATH);
+	let files = contents.split(",");
+	for(let i=0; i<files.length; i++){
+		let url = CPP_DKFile_GetSetting(files[i], "[MYGIT]");
 		if(url){
-			var folder = files[i].replace(".txt","");
+			let folder = files[i].replace(".txt","");
 			CPP_DKFile_Delete(DKPATH+"/"+folder);
 		}
 	}
@@ -305,10 +340,10 @@ function DKBuild_Reset3rdParty(){
 
 function DKBuild_GetAppList(){
 	//DKApps folder
-	var apps = CPP_DKFile_DirectoryContents(DKPATH+"/DK/DKApps");
+	let apps = CPP_DKFile_DirectoryContents(DKPATH+"/DK/DKApps");
 	if(!apps){ return; }
 	APP_LIST = apps.split(",");
-	for(var i=0; i<APP_LIST.length; i++){
+	for(let i=0; i<APP_LIST.length; i++){
 		if(!CPP_DKFile_IsDirectory(DKPATH+"/DK/DKApps/"+APP_LIST[i]) || APP_LIST[i] === ".svn"){
 			APP_LIST.splice(i, 1);
 			i=0;
@@ -316,17 +351,17 @@ function DKBuild_GetAppList(){
 	}
 
 	//User DKApps folders
-	var contents = CPP_DKFile_DirectoryContents(DKPATH);
-	var files = contents.split(",");
-	for(var i=0; i<files.length; i++){ 
+	let contents = CPP_DKFile_DirectoryContents(DKPATH);
+	let files = contents.split(",");
+	for(let i=0; i<files.length; i++){ 
 		if(files[i].indexOf(".txt") <=1){ continue; }
-		var url = CPP_DKFile_GetSetting(DKPATH+"/"+files[i], "[MYGIT]");
+		let url = CPP_DKFile_GetSetting(DKPATH+"/"+files[i], "[MYGIT]");
 		if(url){ 
-			var folder = files[i].replace(".txt",""); 
-			var apps2 = CPP_DKFile_DirectoryContents(DKPATH+"/"+folder+"/DKApps");
+			let folder = files[i].replace(".txt",""); 
+			let apps2 = CPP_DKFile_DirectoryContents(DKPATH+"/"+folder+"/DKApps");
 			if(apps2){
-				var APP_LIST2 = apps2.split(",");
-				for(var b=0; b<APP_LIST2.length; b++){
+				let APP_LIST2 = apps2.split(",");
+				for(let b=0; b<APP_LIST2.length; b++){
 					if(!CPP_DKFile_IsDirectory(DKPATH+"/"+folder+"/DKApps/"+APP_LIST2[b]) || APP_LIST2[b] === ".svn" || APP_LIST2[b] === ".git"){
 						APP_LIST2.splice(b, 1);
 						b=0;
@@ -340,12 +375,14 @@ function DKBuild_GetAppList(){
 
 function DKBuild_DoResults(){
 	console.log("DKBuild_DoResults(): OS="+OS+" APP="+APP+" TYPE="+TYPE+" LEVEL="+LEVEL);
-	if(!DKBuild_OsCheck()){ return; }
-	
+	if(!DKBuild_OsCheck()){ 
+		console.log("DKBuild_OsCheck failed");
+		return; 
+	}
 	DKBuild_ValidateCmake();
 	
 	////// Create the cmake string
-	var cmake_string = "";
+	let cmake_string = "";
 	if(TYPE === "Debug" || TYPE === "ALL")
 		cmake_string = cmake_string+"-DDEBUG=ON ";
 	if(TYPE === "Release" || TYPE === "ALL")
@@ -361,11 +398,11 @@ function DKBuild_DoResults(){
 	else
 		cmake_string = cmake_string+"-DSTATIC=ON ";
 	
-	var appdir = "DKApps";
+	let appdir = "DKApps";
 	
-	var contents = CPP_DKFile_DirectoryContents(DKPATH);
-	var files = contents.split(",");
-	for(var i=0; i<files.length; i++){ 
+	let contents = CPP_DKFile_DirectoryContents(DKPATH);
+	let files = contents.split(",");
+	for(let i=0; i<files.length; i++){ 
 		if(CPP_DKFile_Exists(DKPATH+"/"+files[i]+"/DKApps/"+APP))
 			appdir = files[i]+"/DKApps";
 	}
@@ -388,17 +425,17 @@ function DKBuild_DoResults(){
 		CPP_DKFile_MkDir(DKPATH+"/"+appdir+"/"+APP+"/win32");
 		CPP_DKFile_ChDir(DKPATH+"/"+appdir+"/"+APP+"/win32");
 		
-		var rtvalue = CPP_DK_Execute(CMAKE+" -G \"Visual Studio 16 2019\" -A Win32 "+cmake_string+DKPATH+"/DK");
+		let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Visual Studio 16 2019\" -A Win32 "+cmake_string+DKPATH+"/DK");
 		if(rtvalue.indexOf("errors occurred!") > -1) 
 			return;
 		
 		if(TYPE === "Debug" || TYPE === "ALL"){
 			CPP_DKFile_Rename(DKPATH+"/"+appdir+"/"+APP+"/"+OS+"/Debug/"+APP+".exe", DKPATH+"/"+appdir+"/"+APP+"/"+OS+"/Release/"+APP+"_old.exe", true);	
-			CPP_DK_Execute(VC2019+" "+DKPATH+"/"+appdir+"/"+APP+"/"+OS+"/"+APP+".sln /p:Configuration=Debug");
+			CPP_DK_Execute(VISUALSTUDIO+" "+DKPATH+"/"+appdir+"/"+APP+"/"+OS+"/"+APP+".sln /p:Configuration=Debug");
 		}
 		if(TYPE === "Release" || TYPE === "ALL"){
 			CPP_DKFile_Rename(DKPATH+"/"+appdir+"/"+APP+"/"+OS+"/Release/"+APP+".exe", DKPATH+"/"+appdir+"/"+APP+"/"+OS+"/Release/"+APP+"_old.exe", true);
-			CPP_DK_Execute(VC2019+" "+DKPATH+"/"+appdir+"/"+APP+"/"+OS+"/"+APP+".sln /p:Configuration=Release");
+			CPP_DK_Execute(VISUALSTUDIO+" "+DKPATH+"/"+appdir+"/"+APP+"/"+OS+"/"+APP+".sln /p:Configuration=Release");
 		}
 		
 		//copy .pdb file to assets
@@ -426,17 +463,17 @@ function DKBuild_DoResults(){
 		}
 		CPP_DKFile_MkDir(DKPATH+"/"+appdir+"/"+APP+"/win64");
 		CPP_DKFile_ChDir(DKPATH+"/"+appdir+"/"+APP+"/win64");
-		var rtvalue = CPP_DK_Execute(CMAKE+" -G \"Visual Studio 16 2019\" -A x64 "+cmake_string+DKPATH+"/DK");
+		let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Visual Studio 16 2019\" -A x64 "+cmake_string+DKPATH+"/DK");
 		if(rtvalue.indexOf("errors occurred!") > -1) 
 			return;
 		
 		if(TYPE === "Debug" || TYPE === "ALL"){
 			CPP_DKFile_Rename(DKPATH+"/"+appdir+"/"+APP+"/"+OS+"/Debug/"+APP+"_64.exe", DKPATH+"/"+appdir+"/"+APP+"/"+OS+"/Release/"+APP+"_64_old.exe", true);
-			CPP_DK_Execute(VC2019+" "+DKPATH+"/"+appdir+"/"+APP+"/"+OS+"/"+APP+".sln /p:Configuration=Debug");
+			CPP_DK_Execute(VISUALSTUDIO+" "+DKPATH+"/"+appdir+"/"+APP+"/"+OS+"/"+APP+".sln /p:Configuration=Debug");
 		}
 		if(TYPE === "Release" || TYPE === "ALL"){
 			CPP_DKFile_Rename(DKPATH+"/"+appdir+"/"+APP+"/"+OS+"/Release/"+APP+"_64.exe", DKPATH+"/"+appdir+"/"+APP+"/"+OS+"/Release/"+APP+"_64_old.exe", true);
-			CPP_DK_Execute(VC2019+" "+DKPATH+"/"+appdir+"/"+APP+"/"+OS+"/"+APP+".sln /p:Configuration=Release");
+			CPP_DK_Execute(VISUALSTUDIO+" "+DKPATH+"/"+appdir+"/"+APP+"/"+OS+"/"+APP+".sln /p:Configuration=Release");
 		}
 		
 		//copy .pdb file to assets
@@ -459,20 +496,20 @@ function DKBuild_DoResults(){
 		DKBuild_ValidateXcode();
 		CPP_DKFile_MkDir(DKPATH+"/"+appdir+"/"+APP+"/mac32");
 		CPP_DKFile_ChDir(DKPATH+"/"+appdir+"/"+APP+"/mac32");
-		var rtvalue = CPP_DK_Execute(CMAKE+" -G \"Xcode\" -DCMAKE_OSX_ARCHITECTURES=i386 "+cmake_string+DKPATH+"/DK");
+		let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Xcode\" -DCMAKE_OSX_ARCHITECTURES=i386 "+cmake_string+DKPATH+"/DK");
 		if(rtvalue.indexOf("errors occurred!") > -1){ return; }
 		
 		if(TYPE === "Debug" || TYPE === "ALL"){
 			CPP_DK_Execute("xcodebuild -target "+APP+" -configuration Debug build");
 			//update the info.plist in include the logo icon
-			var info_plist = CPP_DKFile_FileToString(DKPATH+"/"+appdir+"/"+APP+"/mac32/Debug/"+APP+".app/Contents/info.plist");
+			let info_plist = CPP_DKFile_FileToString(DKPATH+"/"+appdir+"/"+APP+"/mac32/Debug/"+APP+".app/Contents/info.plist");
 			info_plist = info_plist.replace("<dict>", "<dict><key>CFBundleIconFile</key><string>logo</string>");
 			CPP_DKFile_StringToFile(info_plist, DKPATH+"/"+appdir+"/"+APP+"/mac32/Debug/"+APP+".app/Contents/info.plist")
 		}
 		if(TYPE === "Release" || TYPE === "ALL"){
 			CPP_DK_Execute("xcodebuild -target "+APP+" -configuration Release build");
 			//update the info.plist in include the logo icon
-			var info_plist = CPP_DKFile_FileToString(DKPATH+"/"+appdir+"/"+APP+"/mac32/Release/"+APP+".app/Contents/info.plist");
+			let info_plist = CPP_DKFile_FileToString(DKPATH+"/"+appdir+"/"+APP+"/mac32/Release/"+APP+".app/Contents/info.plist");
 			info_plist = info_plist.replace("<dict>", "<dict><key>CFBundleIconFile</key><string>logo</string>");
 			CPP_DKFile_StringToFile(info_plist, DKPATH+"/"+appdir+"/"+APP+"/mac32/Release/"+APP+".app/Contents/info.plist")
 			//update install_name_tool if cef present
@@ -485,13 +522,13 @@ function DKBuild_DoResults(){
 		DKBuild_ValidateXcode();
 		CPP_DKFile_MkDir(DKPATH+"/"+appdir+"/"+APP+"/mac64");
 		CPP_DKFile_ChDir(DKPATH+"/"+appdir+"/"+APP+"/mac64");
-		var rtvalue = CPP_DK_Execute(CMAKE+" -G \"Xcode\" -DCMAKE_OSX_ARCHITECTURES=x86_64 "+cmake_string+DKPATH+"/DK");
+		let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Xcode\" -DCMAKE_OSX_ARCHITECTURES=x86_64 "+cmake_string+DKPATH+"/DK");
 		if(rtvalue.indexOf("errors occurred!") > -1){ return; }
 		
 		if(TYPE === "Debug" || TYPE === "ALL"){
 			CPP_DK_Execute("xcodebuild -target "+APP+" -configuration Debug build");
 			//update the info.plist in include the logo icon
-			var info_plist = CPP_DKFile_FileToString(DKPATH+"/"+appdir+"/"+APP+"/mac64/Debug/"+APP+".app/Contents/info.plist");
+			let info_plist = CPP_DKFile_FileToString(DKPATH+"/"+appdir+"/"+APP+"/mac64/Debug/"+APP+".app/Contents/info.plist");
 			info_plist = info_plist.replace("<dict>", "<dict><key>CFBundleIconFile</key><string>logo</string>");
 			CPP_DKFile_StringToFile(info_plist, DKPATH+"/"+appdir+"/"+APP+"/mac64/Debug/"+APP+".app/Contents/info.plist");
 			
@@ -499,7 +536,7 @@ function DKBuild_DoResults(){
 			if(CPP_DKFile_Exists(DKPATH+"/"+appdir+"/"+APP+"/mac64/Debug/"+APP+".app/Contents/Frameworks/Chromium Embedded Framework.framework")){
 				console.log("USING CHROMIUM EMBEDDED FRAMEWORK");
 				
-				var command = "install_name_tool -change \"@executable_path/Chromium Embedded Framework\" \"@executable_path/../../../../Frameworks/Chromium Embedded Framework.framework/Chromium Embedded Framework\" \""+DKPATH+"/"+appdir+"/"+APP+"/mac64/Debug/"+APP+".app/Contents/Frameworks/"+APP+" Helper.app/Contents/MacOS/"+APP+" Helper\"";
+				let command = "install_name_tool -change \"@executable_path/Chromium Embedded Framework\" \"@executable_path/../../../../Frameworks/Chromium Embedded Framework.framework/Chromium Embedded Framework\" \""+DKPATH+"/"+appdir+"/"+APP+"/mac64/Debug/"+APP+".app/Contents/Frameworks/"+APP+" Helper.app/Contents/MacOS/"+APP+" Helper\"";
 				console.log(command);
 				CPP_DK_Execute(command);
 				
@@ -520,7 +557,7 @@ function DKBuild_DoResults(){
 			CPP_DK_Execute("xcodebuild -target "+APP+" -configuration Release build");
 			
 			//update the info.plist in include the logo icon
-			var info_plist = CPP_DKFile_FileToString(DKPATH+"/"+appdir+"/"+APP+"/mac64/Release/"+APP+".app/Contents/info.plist");
+			let info_plist = CPP_DKFile_FileToString(DKPATH+"/"+appdir+"/"+APP+"/mac64/Release/"+APP+".app/Contents/info.plist");
 			info_plist = info_plist.replace("<dict>", "<dict><key>CFBundleIconFile</key><string>logo</string>");
 			CPP_DKFile_StringToFile(info_plist, DKPATH+"/"+appdir+"/"+APP+"/mac64/Release/"+APP+".app/Contents/info.plist");
 			
@@ -528,7 +565,7 @@ function DKBuild_DoResults(){
 			if(CPP_DKFile_Exists(DKPATH+"/"+appdir+"/"+APP+"/mac64/Release/"+APP+".app/Contents/Frameworks/Chromium Embedded Framework.framework")){
 				console.log("USING CHROMIUM EMBEDDED FRAMEWORK");
 				
-				var command = "install_name_tool -change \"@executable_path/Chromium Embedded Framework\" \"@executable_path/../../../../Frameworks/Chromium Embedded Framework.framework/Chromium Embedded Framework\" \""+DKPATH+"/"+appdir+"/"+APP+"/mac64/Release/"+APP+".app/Contents/Frameworks/"+APP+" Helper.app/Contents/MacOS/"+APP+" Helper\"";
+				let command = "install_name_tool -change \"@executable_path/Chromium Embedded Framework\" \"@executable_path/../../../../Frameworks/Chromium Embedded Framework.framework/Chromium Embedded Framework\" \""+DKPATH+"/"+appdir+"/"+APP+"/mac64/Release/"+APP+".app/Contents/Frameworks/"+APP+" Helper.app/Contents/MacOS/"+APP+" Helper\"";
 				console.log(command);
 				CPP_DK_Execute(command);
 				
@@ -552,7 +589,7 @@ function DKBuild_DoResults(){
 		DKBuild_ValidateXcode();
 		CPP_DKFile_MkDir(DKPATH+"/"+appdir+"/"+APP+"/ios32");
 		CPP_DKFile_ChDir(DKPATH+"/"+appdir+"/"+APP+"/ios32");
-		var rtvalue = CPP_DK_Execute(CMAKE+" -G \"Xcode\" "+cmake_string+"-DCMAKE_TOOLCHAIN_FILE="+DKPATH+"/DKCMake/iOS.cmake -DIOS_PLATFORM=OS "+DKPATH+"/DK");
+		let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Xcode\" "+cmake_string+"-DCMAKE_TOOLCHAIN_FILE="+DKPATH+"/DKCMake/iOS.cmake -DIOS_PLATFORM=OS "+DKPATH+"/DK");
 		if(rtvalue.indexOf("errors occurred!") > -1) 
 			return; 
 		if(TYPE === "Debug" || TYPE === "ALL")
@@ -566,14 +603,13 @@ function DKBuild_DoResults(){
 		DKBuild_ValidateXcode();
 		CPP_DKFile_MkDir(DKPATH+"/"+appdir+"/"+APP+"/ios64");
 		CPP_DKFile_ChDir(DKPATH+"/"+appdir+"/"+APP+"/ios64");
-		var rtvalue = CPP_DK_Execute(CMAKE+" -G \"Xcode\" "+cmake_string+"-DCMAKE_TOOLCHAIN_FILE="+DKPATH+"/DKCMake/iOS.cmake -DIOS_PLATFORM=OS "+DKPATH+"/DK");
+		let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Xcode\" "+cmake_string+"-DCMAKE_TOOLCHAIN_FILE="+DKPATH+"/DKCMake/iOS.cmake -DIOS_PLATFORM=OS "+DKPATH+"/DK");
 		if(rtvalue.indexOf("errors occurred!") > -1)
 			return;
 		if(TYPE === "Debug" || TYPE === "ALL")
 			CPP_DK_Execute("xcodebuild -target "+APP+" -configuration Debug build -arch \"armv7 armv7s\"");
 		if(TYPE === "Release" || TYPE === "ALL")
 			CPP_DK_Execute("xcodebuild -target "+APP+" -configuration Release build -arch \"armv7 armv7s\"");
-		
 	}
 	
 	///// IOSSIM32 //////
@@ -581,7 +617,7 @@ function DKBuild_DoResults(){
 		DKBuild_ValidateXcode();
 		CPP_DKFile_MkDir(DKPATH+"/"+appdir+"/"+APP+"/iossim32");
 		CPP_DKFile_ChDir(DKPATH+"/"+appdir+"/"+APP+"/iossim32");
-		var rtvalue = CPP_DK_Execute(CMAKE+" -G \"Xcode\" "+cmake_string+"-DCMAKE_TOOLCHAIN_FILE="+DKPATH+"/DKCMake/iOS.cmake -DIOS_PLATFORM=SIMULATOR "+DKPATH+"/DK");
+		let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Xcode\" "+cmake_string+"-DCMAKE_TOOLCHAIN_FILE="+DKPATH+"/DKCMake/iOS.cmake -DIOS_PLATFORM=SIMULATOR "+DKPATH+"/DK");
 		if(rtvalue.indexOf("errors occurred!") > -1) 
 			return;
 		if(TYPE === "Debug" || TYPE === "ALL")
@@ -595,7 +631,7 @@ function DKBuild_DoResults(){
 		DKBuild_ValidateXcode();
 		CPP_DKFile_MkDir(DKPATH+"/"+appdir+"/"+APP+"/iossim64");
 		CPP_DKFile_ChDir(DKPATH+"/"+appdir+"/"+APP+"/iossim64");
-		var rtvalue = CPP_DK_Execute(CMAKE+" -G \"Xcode\" "+cmake_string+"-DCMAKE_TOOLCHAIN_FILE="+DKPATH+"/DKCMake/iOS.cmake -DIOS_PLATFORM=SIMULATOR64 "+DKPATH+"/DK");
+		let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Xcode\" "+cmake_string+"-DCMAKE_TOOLCHAIN_FILE="+DKPATH+"/DKCMake/iOS.cmake -DIOS_PLATFORM=SIMULATOR64 "+DKPATH+"/DK");
 		if(rtvalue.indexOf("errors occurred!") > -1) 
 			return;
 		if(TYPE === "Debug" || TYPE === "ALL")
@@ -612,13 +648,13 @@ function DKBuild_DoResults(){
 		if(TYPE === "Debug" || TYPE === "ALL"){
 			CPP_DKFile_MkDir(DKPATH+"/"+appdir+"/"+APP+"/linux32/Debug");
 			CPP_DKFile_ChDir(DKPATH+"/"+appdir+"/"+APP+"/linux32/Debug");
-			var rtvalue = CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DKPATH+"/DK");
+			let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DKPATH+"/DK");
 			if(rtvalue.indexOf("errors occurred!") > -1) 
 				return;
 			CPP_DK_Execute("make "+APP);
 			
 			//Create .desktop file
-			var string = "[Desktop Entry]\n";
+			let string = "[Desktop Entry]\n";
 			string += "Encoding=UTF-8\n";
 			string += "Version=1.0\n";
 			string += "Type=Application\n";
@@ -631,13 +667,13 @@ function DKBuild_DoResults(){
 		if(TYPE === "Release" || TYPE === "ALL"){
 			CPP_DKFile_MkDir(DKPATH+"/"+appdir+"/"+APP+"/linux32/Release");
 			CPP_DKFile_ChDir(DKPATH+"/"+appdir+"/"+APP+"/linux32/Release");
-			var rtvalue = CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DKPATH+"/DK");
+			let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DKPATH+"/DK");
 			if(rtvalue.indexOf("errors occurred!") > -1) 
 				return;
 			CPP_DK_Execute("make "+APP);
 			
 			//Create .desktop file
-			var string = "[Desktop Entry]\n";
+			let string = "[Desktop Entry]\n";
 			string += "Encoding=UTF-8\n";
 			string += "Version=1.0\n";
 			string += "Type=Application\n";
@@ -657,13 +693,13 @@ function DKBuild_DoResults(){
 		if(TYPE === "Debug" || TYPE === "ALL"){
 			CPP_DKFile_MkDir(DKPATH+"/"+appdir+"/"+APP+"/linux64/Debug");
 			CPP_DKFile_ChDir(DKPATH+"/"+appdir+"/"+APP+"/linux64/Debug");
-			var rtvalue = CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DKPATH+"/DK");
+			let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DKPATH+"/DK");
 			if(rtvalue.indexOf("errors occurred!") > -1) 
 				return;
 			CPP_DK_Execute("make "+APP);
 
 			//Create .desktop file
-			var string = "[Desktop Entry]\n";
+			let string = "[Desktop Entry]\n";
 			string += "Encoding=UTF-8\n";
 			string += "Version=1.0\n";
 			string += "Type=Application\n";
@@ -676,13 +712,13 @@ function DKBuild_DoResults(){
 		if(TYPE === "Release" || TYPE === "ALL"){
 			CPP_DKFile_MkDir(DKPATH+"/"+appdir+"/"+APP+"/linux64/Release");
 			CPP_DKFile_ChDir(DKPATH+"/"+appdir+"/"+APP+"/linux64/Release");
-			var rtvalue = CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DKPATH+"/DK");
+			let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DKPATH+"/DK");
 			if(rtvalue.indexOf("errors occurred!") > -1)
 				return;
 			CPP_DK_Execute("make "+APP);
 			
 			//Create .desktop file
-			var string = "[Desktop Entry]\n";
+			let string = "[Desktop Entry]\n";
 			string += "Encoding=UTF-8\n";
 			string += "Version=1.0\n";
 			string += "Type=Application\n";
@@ -704,7 +740,7 @@ function DKBuild_DoResults(){
 			CPP_DKFile_MkDir(DKPATH+"/"+appdir+"/"+APP+"/android32/Debug");
 			CPP_DKFile_ChDir(DKPATH+"/"+appdir+"/"+APP+"/android32/Debug");
 			if(CPP_DK_GetOS() === "Windows")
-				var rtvalue = CPP_DK_Execute(CMAKE+" -G \"Visual Studio 16 2019\" -A ARM -DCMAKE_TOOLCHAIN_FILE="+NDK+"/build/cmake/android.toolchain.cmake -DANDROID_NDK="+NDK+" -DANDROID_ABI=armeabi-v7a -DANDROID_NATIVE_API_LEVEL=29 "+cmake_string+DKPATH+"/DK");
+				let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Visual Studio 16 2019\" -A ARM -DCMAKE_TOOLCHAIN_FILE="+NDK+"/build/cmake/android.toolchain.cmake -DANDROID_NDK="+NDK+" -DANDROID_ABI=armeabi-v7a -DANDROID_NATIVE_API_LEVEL=29 "+cmake_string+DKPATH+"/DK");
 			if(CPP_DK_GetOS() === "Linux" || CPP_DK_GetOS() === "Mac")
 				rtvalue = CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DKPATH+"/DK");
 			if(rtvalue.indexOf("errors occurred!") > -1) 
@@ -715,7 +751,7 @@ function DKBuild_DoResults(){
 			CPP_DKFile_MkDir(DKPATH+"/"+appdir+"/"+APP+"/android32/Release");
 			CPP_DKFile_ChDir(DKPATH+"/"+appdir+"/"+APP+"/android32/Release");
 			if(CPP_DK_GetOS() === "Windows")
-				var rtvalue = CPP_DK_Execute(CMAKE+" -G \"Visual Studio 16 2019\" -A ARM -DCMAKE_TOOLCHAIN_FILE="+NDK+"/build/cmake/android.toolchain.cmake -DANDROID_NDK="+NDK+" -DANDROID_ABI=armeabi-v7a -DANDROID_NATIVE_API_LEVEL=29 "+cmake_string+DKPATH+"/DK");
+				let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Visual Studio 16 2019\" -A ARM -DCMAKE_TOOLCHAIN_FILE="+NDK+"/build/cmake/android.toolchain.cmake -DANDROID_NDK="+NDK+" -DANDROID_ABI=armeabi-v7a -DANDROID_NATIVE_API_LEVEL=29 "+cmake_string+DKPATH+"/DK");
 			if(CPP_DK_GetOS() === "Linux" || CPP_DK_GetOS() === "Mac")
 				rtvalue = CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DKPATH+"/DK");
 			if(rtvalue.indexOf("errors occurred!") > -1)
@@ -733,7 +769,7 @@ function DKBuild_DoResults(){
 			CPP_DKFile_MkDir(DKPATH+"/"+appdir+"/"+APP+"/android64/Debug");
 			CPP_DKFile_ChDir(DKPATH+"/"+appdir+"/"+APP+"/android64/Debug");
 			if(CPP_DK_GetOS() === "Windows")
-				var rtvalue = CPP_DK_Execute(CMAKE+" -G \"Visual Studio 16 2019\" -A ARM -DCMAKE_TOOLCHAIN_FILE="+NDK+"/build/cmake/android.toolchain.cmake -DANDROID_NDK="+NDK+" -DANDROID_ABI=arm64-v8a -DANDROID_NATIVE_API_LEVEL=29 "+cmake_string+DKPATH+"/DK");
+				let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Visual Studio 16 2019\" -A ARM -DCMAKE_TOOLCHAIN_FILE="+NDK+"/build/cmake/android.toolchain.cmake -DANDROID_NDK="+NDK+" -DANDROID_ABI=arm64-v8a -DANDROID_NATIVE_API_LEVEL=29 "+cmake_string+DKPATH+"/DK");
 			if(rtvalue.indexOf("errors occurred!") > -1)
 				return; 
 			CPP_DK_Execute(NDK+"/ndk-build.cmd NDK_DEBUG=1 NDKLOG=1");
@@ -742,7 +778,7 @@ function DKBuild_DoResults(){
 			CPP_DKFile_MkDir(DKPATH+"/"+appdir+"/"+APP+"/android64/Release");
 			CPP_DKFile_ChDir(DKPATH+"/"+appdir+"/"+APP+"/android64/Release");
 			if(CPP_DK_GetOS() === "Windows")
-				var rtvalue = CPP_DK_Execute(CMAKE+" -G \"Visual Studio 16 2019\" -A ARM64 -DCMAKE_TOOLCHAIN_FILE="+NDK+"/build/cmake/android.toolchain.cmake -DANDROID_NDK="+NDK+" -DANDROID_ABI=arm64-v8a -DANDROID_NATIVE_API_LEVEL=29 "+cmake_string+DKPATH+"/DK");
+				let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Visual Studio 16 2019\" -A ARM64 -DCMAKE_TOOLCHAIN_FILE="+NDK+"/build/cmake/android.toolchain.cmake -DANDROID_NDK="+NDK+" -DANDROID_ABI=arm64-v8a -DANDROID_NATIVE_API_LEVEL=29 "+cmake_string+DKPATH+"/DK");
 			if(CPP_DK_GetOS() === "Linux" || CPP_DK_GetOS() === "Mac")
 				rtvalue = CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DKPATH+"/DK");
 			if(rtvalue.indexOf("errors occurred!") > -1) 
@@ -759,7 +795,7 @@ function DKBuild_DoResults(){
 		if(TYPE === "Debug" || TYPE === "ALL"){
 			CPP_DKFile_MkDir(DKPATH+"/"+appdir+"/"+APP+"/raspberry32/Debug");
 			CPP_DKFile_ChDir(DKPATH+"/"+appdir+"/"+APP+"/raspberry32/Debug");
-			var rtvalue = CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DKPATH+"/DK");
+			let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DKPATH+"/DK");
 			if(rtvalue.indexOf("Error 1") > -1) 
 				return;
 			if(rtvalue.indexOf("errors occurred!") > -1)
@@ -767,7 +803,7 @@ function DKBuild_DoResults(){
 			CPP_DK_Execute("make "+APP);
 			
 			//Create .desktop file
-			var string = "[Desktop Entry]\n";
+			let string = "[Desktop Entry]\n";
 			string += "Encoding=UTF-8\n";
 			string += "Version=1.0\n";
 			string += "Type=Application\n";
@@ -780,13 +816,13 @@ function DKBuild_DoResults(){
 		if(TYPE === "Release" || TYPE === "ALL"){
 			CPP_DKFile_MkDir(DKPATH+"/"+appdir+"/"+APP+"/raspberry32/Release");
 			CPP_DKFile_ChDir(DKPATH+"/"+appdir+"/"+APP+"/raspberry32/Release");
-			var rtvalue = CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DKPATH+"/DK");
+			let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DKPATH+"/DK");
 			if(rtvalue.indexOf("errors occurred!") > -1)
 				return; //FIXME: this doesn't catch all build errors
 			CPP_DK_Execute("make "+APP);
 			
 			//Create .desktop file
-			var string = "[Desktop Entry]\n";
+			let string = "[Desktop Entry]\n";
 			string += "Encoding=UTF-8\n";
 			string += "Version=1.0\n";
 			string += "Type=Application\n";
@@ -805,13 +841,13 @@ function DKBuild_DoResults(){
 		if(TYPE === "Debug" || TYPE === "ALL"){
 			CPP_DKFile_MkDir(DKPATH+"/"+appdir+"/"+APP+"/raspberry64/Debug");
 			CPP_DKFile_ChDir(DKPATH+"/"+appdir+"/"+APP+"/raspberry64/Debug");
-			var rtvalue = CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DKPATH+"/DK");
+			let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DKPATH+"/DK");
 			if(rtvalue.indexOf("errors occurred!") > -1) 
 				return; //FIXME: this doesn't catch all build errors
 			CPP_DK_Execute("make "+APP);
 
 			//Create .desktop file
-			var string = "[Desktop Entry]\n";
+			let string = "[Desktop Entry]\n";
 			string += "Encoding=UTF-8\n";
 			string += "Version=1.0\n";
 			string += "Type=Application\n";
@@ -824,13 +860,13 @@ function DKBuild_DoResults(){
 		if(TYPE === "Release" || TYPE === "ALL"){
 			CPP_DKFile_MkDir(DKPATH+"/"+appdir+"/"+APP+"/raspberry64/Release");
 			CPP_DKFile_ChDir(DKPATH+"/"+appdir+"/"+APP+"/raspberry64/Release");
-			var rtvalue = CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DKPATH+"/DK");
+			let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DKPATH+"/DK");
 			if(rtvalue.indexOf("errors occurred!") > -1) 
 				return;  //FIXME: this doesn't catch all build errors
 			CPP_DK_Execute("make "+APP);
 			
 			//Create .desktop file
-			var string = "[Desktop Entry]\n";
+			let string = "[Desktop Entry]\n";
 			string += "Encoding=UTF-8\n";
 			string += "Version=1.0\n";
 			string += "Type=Application\n";
