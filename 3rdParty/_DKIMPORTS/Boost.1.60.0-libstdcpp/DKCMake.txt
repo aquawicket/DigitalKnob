@@ -2,18 +2,15 @@ IF(NOT CMAKE_HOST_APPLE)
 	RETURN()
 ENDIF()
 IF(MAC)
-	RETURN()
+	RETURN() #iOS only
 ENDIF()
 
+### VERSION ###
+DKSET(BOOST_VERSION 1.60.0)
 
 ### INSTALL ###
-IF(NOT EXISTS ${3RDPARTY}/Boost.1.60.0-libstdcpp)
-	DKSETPATH(${DIGITALKNOB}/Download)
-	## DKDOWNLOAD(internet/Boost.1.60.0-libstdcpp.zip)
-	## DKDOWNLOAD(${DKWEB}/Download/Boost.1.60.0-libstdcpp.zip)
-	DKEXTRACT(${DIGITALKNOB}/Download/Boost.1.60.0-libstdcpp.zip ${3RDPARTY}/Boost.1.60.0-libstdcpp)
-ENDIF()
-DKSET(BOOST ${3RDPARTY}/Boost.1.60.0-libstdcpp)
+## FIXME - DKINSTALL(http://www.internet.com/Boost.${BOOST_VERSION}-libstdcpp.zip Boost.1.60.0-libstdcpp Boost.${BOOST_VERSION}-libstdcpp)
+DKSET(BOOST ${3RDPARTY}/Boost.${BOOST_VERSION}-libstdcpp)
 
 
 ### LINK ###

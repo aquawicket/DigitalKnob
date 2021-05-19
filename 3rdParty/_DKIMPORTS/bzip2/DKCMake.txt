@@ -1,9 +1,9 @@
 ### VERSION ###
-DKSET(BZIP2_VERSION bzip2-1.0.6)
+DKSET(BZIP2_VERSION 2-1.0.6)
 
 ### INSTALL ###
-DKINSTALL(ftp://sourceware.org/pub/bzip2/${BZIP2_VERSION}.tar.gz bzip2 ${BZIP2_VERSION})
-DKSET(BZIP2 ${3RDPARTY}/${BZIP2_VERSION})
+DKINSTALL(ftp://sourceware.org/pub/bzip2/bzip${BZIP2_VERSION}.tar.gz bzip2 bzip${BZIP2_VERSION})
+DKSET(BZIP2 ${3RDPARTY}/bzip${BZIP2_VERSION})
 IF(NOT EXISTS ${3RDPARTY}/bzip2-temp)
 	DKCOPY(${BZIP2} ${3RDPARTY}/bzip2-temp TRUE)
 ENDIF()
