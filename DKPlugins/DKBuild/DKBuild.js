@@ -1,9 +1,10 @@
 let USERNAME = CPP_DK_GetUsername();
+console.log("username: "+USERNAME);
 if(!USERNAME){
 	console.error("could not get the current username");
-	USERNAME = "aquawicket";
-	if(CPP_DK_GetOS() === "Raspberry")
-		USERNAME = "pi";
+	//USERNAME = "aquawicket";
+	//if(CPP_DK_GetOS() === "Raspberry")
+	//	USERNAME = "pi";
 }
 
 
