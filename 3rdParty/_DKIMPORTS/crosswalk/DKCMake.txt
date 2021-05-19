@@ -5,7 +5,7 @@ ENDIF()
 
 ### DEPENDS ###
 DKDEPEND(jdk)
-DKDEPEND(apache-ant-1.9.7)
+DKDEPEND(apache-ant)
 DKDEPEND(nodeJS)
 
 
