@@ -454,7 +454,10 @@ IF(WIN_32)
 	#Compress the assets, they will be included by resource.rc
 	MESSAGE("Creating assets.zip . . .")
 	DKZIP(${DKPROJECT}/assets)
-
+	
+	#dummy assets.h file, or the builder wil complain about assets.h missing
+	DKCOPY(${DKPLUGINS}/_DKIMPORT/assets.h ${DKPROJECT}/assets.h, TRUE)
+	
 	# Restore the backed up files, excluded from assets
 	DKCOPY(${DKPROJECT}/Backup ${DKPROJECT}/assets TRUE)
 	DKREMOVE(${DKPROJECT}/Backup)
@@ -475,7 +478,7 @@ IF(WIN_32)
 		opengl32.lib
 		DbgHelp.lib
 	)
-
+	
 	ADD_DEFINITIONS(-D_USING_V110_SDK71_)
 	ADD_EXECUTABLE(${AppName} WIN32 ${App_SRC})
 	TARGET_LINK_LIBRARIES(${AppName} ${DEBUG_LIBS} ${RELEASE_LIBS} ${WIN_LIBS})
