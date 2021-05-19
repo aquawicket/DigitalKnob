@@ -318,7 +318,7 @@ FUNCTION(DKEXECUTE_PROCESS fullcmnd)
 	LIST(GET ARGV ${_index} CDIR)
 	MESSAGE("")
 	MESSAGE("*** Commands ***")
-	MESSAGE("> cd ${CDIR}")
+	MESSAGE(">  cd ${CDIR}")
 	SET(cmnd ${fullcmnd} ${ARGN}) # Merge them together
 	string(REPLACE "COMMAND" "" var2 "${cmnd}")
 	string(REPLACE "command" "" var3 "${var2}")
