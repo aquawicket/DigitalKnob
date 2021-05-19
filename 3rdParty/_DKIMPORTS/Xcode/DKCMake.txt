@@ -1,0 +1,9 @@
+##TODO
+IF(NOT CMAKE_HOST_MAC)
+	RETURN()
+ENDIF()
+
+### VERSION ###
+
+
+### INSTALL ###
