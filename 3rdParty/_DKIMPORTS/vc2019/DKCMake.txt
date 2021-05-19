@@ -1,3 +1,6 @@
+#TODO - phase this out in favor of VisualStudio
+MESSAGE(FATAL_ERROR VC2019 is obsolete, Use VisualStudio instead)
+
 IF(NOT CMAKE_HOST_WIN32)
 	RETURN()
 ENDIF()
