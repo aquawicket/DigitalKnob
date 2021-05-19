@@ -410,11 +410,8 @@ MESSAGE("***************************************")
 MESSAGE("********** Creating ${AppName} **********")
 MESSAGE("***************************************\n")
 
-#copy /DKPlugins/_DKIMPORT/CMakeLists.txt to app path.
 MESSAGE("Copying DKPlugins/_DKIMPORT/ to App...")
-
-## copy app default files recursivly without overwrite
-DKCOPY(${DKPLUGINS}/_DKIMPORT ${DKPROJECT} FALSE)
+DKCOPY(${DKPLUGINS}/_DKIMPORT ${DKPROJECT} FALSE) ## copy app default files recursivly without overwrite
 
 ### Include all source files from the app folder
 FILE(GLOB App_SRC 
@@ -424,13 +421,6 @@ FILE(GLOB App_SRC
 	${DKPROJECT}/*.cpp
 	${DKPROJECT}/*.rc
 	${DKPROJECT}/icons/windows/*.rc)
-
-
-#IF(USE_OPENGL2)
-#	DKSET(EXECUTABLE_OUTPUT_PATH ${DKPROJECT}/${OS}-GL2)
-#ELSE()
-#	DKSET(EXECUTABLE_OUTPUT_PATH ${DKPROJECT}/${OS})
-#ENDIF()
 
 ADD_DEFINITIONS(-DDKAPP) #TODO - phase this out
 INCLUDE_DIRECTORIES(${DKPROJECT})
@@ -450,25 +440,23 @@ IF(WIN_32)
 	# Backup files and folders excluded from the package
 	DKCOPY(${DKPROJECT}/assets/USER ${DKPROJECT}/Backup/USER TRUE)
 	DKCOPY(${DKPROJECT}/assets/DKCef/win32Debug ${DKPROJECT}/Backup/DKCef/win32Debug TRUE)
-	#DKCOPY(${DKPROJECT}/assets/cef.log ${DKPROJECT}/Backup/cef.log TRUE)
-	#DKCOPY(${DKPROJECT}/assets/log.txt ${DKPROJECT}/Backup/log.txt TRUE)
+	DKCOPY(${DKPROJECT}/assets/DKCef/win32Release ${DKPROJECT}/Backup/DKCef/win32Release TRUE)
+	DKCOPY(${DKPROJECT}/assets/cef.log ${DKPROJECT}/Backup/cef.log TRUE)
+	DKCOPY(${DKPROJECT}/assets/log.txt ${DKPROJECT}/Backup/log.txt TRUE)
 	
 	# Remove excluded files and folders before packaging
 	DKREMOVE(${DKPROJECT}/assets/USER)
 	DKREMOVE(${DKPROJECT}/assets/DKCef/win32Debug)
+	DKREMOVE(${DKPROJECT}/assets/DKCef/win32Release)
 	DKREMOVE(${DKPROJECT}/assets/cef.log)
 	DKREMOVE(${DKPROJECT}/assets/log.txt)
 	
+	#Compress the assets, they will be included by resource.rc
 	MESSAGE("Creating assets.zip . . .")
-	DKZIP(${DKPROJECT}/assets) #.zip the assets
-	
-	##error C2026: string too big, trailing characters truncated
-	##On windows, the assets.zip will be included with resource.h and resource.rc
-	##MESSAGE("Embedding assets.zip into executable, please wait...")
-	##bin2h(SOURCE_FILE ${DKPROJECT}/assets.zip HEADER_FILE ${DKPROJECT}/assets.h VARIABLE_NAME "ASSETS_H")
+	DKZIP(${DKPROJECT}/assets)
 
-	# Restore the backed up excluded assets
-	DKCOPY(${DKPROJECT}/Backup ${DKPROJECT}/assets TRUE) #put everything back from backup, over
+	# Restore the backed up files, excluded from assets
+	DKCOPY(${DKPROJECT}/Backup ${DKPROJECT}/assets TRUE)
 	DKREMOVE(${DKPROJECT}/Backup)
 	
 	LIST(APPEND WIN_LIBS 
@@ -515,24 +503,29 @@ ENDIF(WIN_32)
 	
 ##########
 IF(WIN_64)
-	# copy the icon to ${DKPROJECT}/assets
+	# copy the icon to assets
 	DKCOPY(${DKPROJECT}/icons/windows/icon.ico ${DKPROJECT}/assets/icon.ico TRUE)
 	
-	# backup files not going in the package
+	# Backup files and folders excluded from the package
 	DKCOPY(${DKPROJECT}/assets/USER ${DKPROJECT}/Backup/USER TRUE)
 	DKCOPY(${DKPROJECT}/assets/DKCef/win64Debug ${DKPROJECT}/Backup/DKCef/win64Debug TRUE)
+	DKCOPY(${DKPROJECT}/assets/DKCef/win64Release ${DKPROJECT}/Backup/DKCef/win64Release TRUE)
 	DKCOPY(${DKPROJECT}/assets/cef.log ${DKPROJECT}/Backup/cef.log TRUE)
 	DKCOPY(${DKPROJECT}/assets/log.txt ${DKPROJECT}/Backup/log.txt TRUE)
 	
-	# remove files before packaging
+	# Remove excluded files and folders before packaging
 	DKREMOVE(${DKPROJECT}/assets/USER)
 	DKREMOVE(${DKPROJECT}/assets/DKCef/win64Debug)
+	DKREMOVE(${DKPROJECT}/assets/DKCef/win64Release)
 	DKREMOVE(${DKPROJECT}/assets/cef.log)
 	DKREMOVE(${DKPROJECT}/assets/log.txt)
 	
-	DKZIP(${DKPROJECT}/assets) #zip the assets
+	#Compress the assets, they will be included by resource.rc
+	MESSAGE("Creating assets.zip . . .")
+	DKZIP(${DKPROJECT}/assets)
 	
-	DKCOPY(${DKPROJECT}/Backup/ ${DKPROJECT}/assets/ TRUE) #put everything back from backup
+	# Restore the backed up files, excluded from assets
+	DKCOPY(${DKPROJECT}/Backup/ ${DKPROJECT}/assets/ TRUE)
 	DKREMOVE(${DKPROJECT}/Backup)
 	
 	LIST(APPEND WIN_LIBS 
@@ -578,19 +571,35 @@ ENDIF(WIN_64)
 
 #######
 IF(MAC)
-	## copy assets
+	# Backup files and folders excluded from the package
+	DKCOPY(${DKPROJECT}/assets/USER ${DKPROJECT}/Backup/USER TRUE)
+	DKCOPY(${DKPROJECT}/assets/DKCef/mac64Debug ${DKPROJECT}/Backup/DKCef/mac64Debug TRUE)
+	DKCOPY(${DKPROJECT}/assets/DKCef/mac64Release ${DKPROJECT}/Backup/DKCef/mac64Release TRUE)
+	DKCOPY(${DKPROJECT}/assets/cef.log ${DKPROJECT}/Backup/cef.log TRUE)
+	DKCOPY(${DKPROJECT}/assets/log.txt ${DKPROJECT}/Backup/log.txt TRUE)
+	
+	# Remove excluded files and folders before packaging
+	DKREMOVE(${DKPROJECT}/assets/USER)
+	DKREMOVE(${DKPROJECT}/assets/DKCef/mac64Debug)
+	DKREMOVE(${DKPROJECT}/assets/DKCef/mac64Release)
+	DKREMOVE(${DKPROJECT}/assets/cef.log)
+	DKREMOVE(${DKPROJECT}/assets/log.txt)
+	
+	## copy the assets into the bundle resources
 	IF(DEBUG)
-		DKREMOVE(${DKPROJECT}/assets/USER)
 		FILE(MAKE_DIRECTORY ${DKPROJECT}/${OS}/Debug/${AppName}.app/Contents/Resources)
 		DKCOPY(${DKPROJECT}/assets/ ${DKPROJECT}/${OS}/Debug/${AppName}.app/Contents/Resources TRUE)
 		DKCOPY(${DKPROJECT}/icons/mac/logo.icns ${DKPROJECT}/${OS}/Debug/${AppName}.app/Contents/Resources/logo.icns TRUE)
 	ENDIF()
 	IF(RELEASE)
-		DKREMOVE(${DKPROJECT}/assets/USER)
 		FILE(MAKE_DIRECTORY ${DKPROJECT}/${OS}/Release/${AppName}.app/Contents/Resources)
 		DKCOPY(${DKPROJECT}/assets/ ${DKPROJECT}/${OS}/Release/${AppName}.app/Contents/Resources TRUE)
 		DKCOPY(${DKPROJECT}/icons/mac/logo.icns ${DKPROJECT}/${OS}/Release/${AppName}.app/Contents/Resources/logo.icns TRUE)
 	ENDIF()
+	
+	# Restore the backed up files, excluded from assets
+	DKCOPY(${DKPROJECT}/Backup/ ${DKPROJECT}/assets/ TRUE)
+	DKREMOVE(${DKPROJECT}/Backup)
 	
 	FIND_LIBRARY(CF CoreFoundation)
 	FIND_LIBRARY(CO Cocoa)
@@ -616,8 +625,21 @@ ENDIF()
 
 #######
 IF(IOS)
-	## copy assets
+	# Backup files and folders excluded from the package
+	DKCOPY(${DKPROJECT}/assets/USER ${DKPROJECT}/Backup/USER TRUE)
+	DKCOPY(${DKPROJECT}/assets/DKCef/ios64Debug ${DKPROJECT}/Backup/DKCef/ios64Debug TRUE)
+	DKCOPY(${DKPROJECT}/assets/DKCef/ios64Release ${DKPROJECT}/Backup/DKCef/ios64Release TRUE)
+	DKCOPY(${DKPROJECT}/assets/cef.log ${DKPROJECT}/Backup/cef.log TRUE)
+	DKCOPY(${DKPROJECT}/assets/log.txt ${DKPROJECT}/Backup/log.txt TRUE)
+	
+	# Remove excluded files and folders before packaging
 	DKREMOVE(${DKPROJECT}/assets/USER)
+	DKREMOVE(${DKPROJECT}/assets/DKCef/ios64Debug)
+	DKREMOVE(${DKPROJECT}/assets/DKCef/ios64Release)
+	DKREMOVE(${DKPROJECT}/assets/cef.log)
+	DKREMOVE(${DKPROJECT}/assets/log.txt)
+
+	## copy the assets into the app
 	IF(DEBUG)
 		FILE(MAKE_DIRECTORY ${DKPROJECT}/${OS}/${DEBUG}/${AppName}.app/assets)
 		DKCOPY(${DKPROJECT}/assets/ ${DKPROJECT}/${OS}/${DEBUG}/${AppName}.app/assets TRUE)
@@ -629,6 +651,10 @@ IF(IOS)
 		DKCOPY(${DKPROJECT}/icons/ios/ ${DKPROJECT}/${OS}/${RELEASE}/${AppName}.app TRUE)
 	ENDIF()
 
+	# Restore the backed up files, excluded from assets
+	DKCOPY(${DKPROJECT}/Backup/ ${DKPROJECT}/assets/ TRUE)
+	DKREMOVE(${DKPROJECT}/Backup)
+	
 	### FrameWorks ###
 	SET(IOS_FRAMEWORKS
 		Foundation
@@ -657,7 +683,6 @@ IF(IOS)
 	#SET(CMAKE_XCODE_ATTRIBUTE_DEBUG_INFORMATION_FORMAT dwarf)
 	#SET(MACOSX_BUNDLE_GUI_IDENTIFIER "com.digitalknob.\${PRODUCT_NAME:identifier}")
 		
-	### App ###
 	#GET_TARGET_PROPERTY(MyExecutable_PATH ${AppName} LOCATION)
 	ADD_EXECUTABLE(${AppName} MACOSX_BUNDLE ${App_SRC})
 	TARGET_LINK_LIBRARIES(${AppName} ${DEBUG_LIBS} ${RELEASE_LIBS})
@@ -667,8 +692,21 @@ ENDIF()
 
 ##########
 IF(IOSSIM)
-	## copy assets
+	# Backup files and folders excluded from the package
+	DKCOPY(${DKPROJECT}/assets/USER ${DKPROJECT}/Backup/USER TRUE)
+	DKCOPY(${DKPROJECT}/assets/DKCef/ios64Debug ${DKPROJECT}/Backup/DKCef/ios64Debug TRUE)
+	DKCOPY(${DKPROJECT}/assets/DKCef/ios64Release ${DKPROJECT}/Backup/DKCef/ios64Release TRUE)
+	DKCOPY(${DKPROJECT}/assets/cef.log ${DKPROJECT}/Backup/cef.log TRUE)
+	DKCOPY(${DKPROJECT}/assets/log.txt ${DKPROJECT}/Backup/log.txt TRUE)
+	
+	# Remove excluded files and folders before packaging
 	DKREMOVE(${DKPROJECT}/assets/USER)
+	DKREMOVE(${DKPROJECT}/assets/DKCef/ios64Debug)
+	DKREMOVE(${DKPROJECT}/assets/DKCef/ios64Release)
+	DKREMOVE(${DKPROJECT}/assets/cef.log)
+	DKREMOVE(${DKPROJECT}/assets/log.txt)
+	
+	## copy the assets into the app
 	IF(DEBUG)
 		FILE(MAKE_DIRECTORY ${DKPROJECT}/${OS}/${DEBUG}/${AppName}.app/assets)
 		DKCOPY(${DKPROJECT}/assets/ ${DKPROJECT}/${OS}/${DEBUG}/${AppName}.app/assets TRUE)
@@ -679,6 +717,10 @@ IF(IOSSIM)
 		DKCOPY(${DKPROJECT}/assets/ ${DKPROJECT}/${OS}/${RELEASE}/${AppName}.app/assets TRUE)
 		DKCOPY(${DKPROJECT}/icons/ios/ ${DKPROJECT}/${OS}/${RELEASE}/${AppName}.app TRUE)
 	ENDIF()
+	
+	# Restore the backed up files, excluded from assets
+	DKCOPY(${DKPROJECT}/Backup/ ${DKPROJECT}/assets/ TRUE)
+	DKREMOVE(${DKPROJECT}/Backup)
 	
 	### FrameWorks ###
 	SET(IOS_FRAMEWORKS
@@ -709,7 +751,6 @@ IF(IOSSIM)
 	##SET(CMAKE_XCODE_ATTRIBUTE_DEBUG_INFORMATION_FORMAT dwarf)
 	##SET(MACOSX_BUNDLE_GUI_IDENTIFIER "com.digitalknob.\${PRODUCT_NAME:identifier}")
 	
-	### App ###
 	#GET_TARGET_PROPERTY(MyExecutable_PATH ${AppName} LOCATION)
 	ADD_EXECUTABLE(${AppName} MACOSX_BUNDLE ${App_SRC})
 	TARGET_LINK_LIBRARIES(${AppName} ${DEBUG_LIBS} ${RELEASE_LIBS})
@@ -719,20 +760,24 @@ ENDIF()
 
 #########
 IF(LINUX)
-	# Copy the icon to ${DKPROJECT}/assets
+	# Copy the icon to assets
 	DKCOPY(${DKPROJECT}/icons/icon.png ${DKPROJECT}/assets/icon.png TRUE)
 
 	# backup files not going in the package
 	DKCOPY(${DKPROJECT}/assets/USER ${DKPROJECT}/Backup/USER TRUE)
 	DKCOPY(${DKPROJECT}/assets/DKCef/linux32Debug ${DKPROJECT}/Backup/DKCef/linux32Debug TRUE)
+	DKCOPY(${DKPROJECT}/assets/DKCef/linux32Release ${DKPROJECT}/Backup/DKCef/linux32Release TRUE)
 	DKCOPY(${DKPROJECT}/assets/DKCef/linux64Debug ${DKPROJECT}/Backup/DKCef/linux64Debug TRUE)
+	DKCOPY(${DKPROJECT}/assets/DKCef/linux64Release ${DKPROJECT}/Backup/DKCef/linux64Release TRUE)
 	DKCOPY(${DKPROJECT}/assets/cef.log ${DKPROJECT}/Backup/cef.log TRUE)
 	DKCOPY(${DKPROJECT}/assets/log.txt ${DKPROJECT}/Backup/log.txt TRUE)
 	
-	# remove files before packaging
+	# Remove excluded files and folders before packaging
 	DKREMOVE(${DKPROJECT}/assets/USER)
 	DKREMOVE(${DKPROJECT}/assets/DKCef/linux32Debug)
+	DKREMOVE(${DKPROJECT}/assets/DKCef/linux32Release)
 	DKREMOVE(${DKPROJECT}/assets/DKCef/linux64Debug)
+	DKREMOVE(${DKPROJECT}/assets/DKCef/linux64Release)
 	DKREMOVE(${DKPROJECT}/assets/cef.log)
 	DKREMOVE(${DKPROJECT}/assets/log.txt)
 	
@@ -745,18 +790,6 @@ IF(LINUX)
 	# Restore the backed up assets
 	DKCOPY(${DKPROJECT}/Backup/ ${DKPROJECT}/assets/ TRUE)
 	DKREMOVE(${DKPROJECT}/Backup)
-	
-	### copy assets
-	#DKREMOVE(${DKPROJECT}/assets/USER)
-	#IF(DEBUG)
-	#	FILE(MAKE_DIRECTORY ${DKPROJECT}/${OS}/Debug/${AppName}-Data)
-	#	DKCOPY(${DKPROJECT}/assets ${DKPROJECT}/${OS}/Debug/${AppName}-Data TRUE)
-	#ENDIF()
-	#IF(RELEASE)
-	#	FILE(MAKE_DIRECTORY ${DKPROJECT}/${OS}/Release/${AppName}-Data)
-	#	DKCOPY(${DKPROJECT}/assets ${DKPROJECT}/${OS}/Release/${AppName}-Data TRUE)
-	#ENDIF()
-		
 
 	FIND_PACKAGE(OpenGL REQUIRED)
 	INCLUDE_DIRECTORIES(${OpenGL_INCLUDE_DIRS})
@@ -793,14 +826,18 @@ IF(RASPBERRY)
 	# Backup files and folders excluded from the package
 	DKCOPY(${DKPROJECT}/assets/USER ${DKPROJECT}/Backup/USER TRUE)
 	DKCOPY(${DKPROJECT}/assets/DKCef/linux32Debug ${DKPROJECT}/Backup/DKCef/linux32Debug TRUE)
+	DKCOPY(${DKPROJECT}/assets/DKCef/linux32Release ${DKPROJECT}/Backup/DKCef/linux32Release TRUE)
 	DKCOPY(${DKPROJECT}/assets/DKCef/linux64Debug ${DKPROJECT}/Backup/DKCef/linux64Debug TRUE)
-	#DKCOPY(${DKPROJECT}/assets/cef.log ${DKPROJECT}/Backup/cef.log TRUE)
-	#DKCOPY(${DKPROJECT}/assets/log.txt ${DKPROJECT}/Backup/log.txt TRUE)
+	DKCOPY(${DKPROJECT}/assets/DKCef/linux64Release ${DKPROJECT}/Backup/DKCef/linux64Release TRUE)
+	DKCOPY(${DKPROJECT}/assets/cef.log ${DKPROJECT}/Backup/cef.log TRUE)
+	DKCOPY(${DKPROJECT}/assets/log.txt ${DKPROJECT}/Backup/log.txt TRUE)
 	
 	# Remove excluded files and folders before packaging
 	DKREMOVE(${DKPROJECT}/assets/USER)
 	DKREMOVE(${DKPROJECT}/assets/DKCef/linux32Debug)
+	DKREMOVE(${DKPROJECT}/assets/DKCef/linux32Release)
 	DKREMOVE(${DKPROJECT}/assets/DKCef/linux64Debug)
+	DKREMOVE(${DKPROJECT}/assets/DKCef/linux64Release)
 	DKREMOVE(${DKPROJECT}/assets/cef.log)
 	DKREMOVE(${DKPROJECT}/assets/log.txt)
 	
@@ -814,18 +851,7 @@ IF(RASPBERRY)
 	DKCOPY(${DKPROJECT}/Backup/ ${DKPROJECT}/assets/ TRUE)
 	DKREMOVE(${DKPROJECT}/Backup)
 
-	### copy ${DKPROJECT}/assets to ${AppName}-Data
-	#DKREMOVE(${DKPROJECT}/assets/USER)
-	#IF(DEBUG)
-	#	FILE(MAKE_DIRECTORY ${DKPROJECT}/${OS}/Debug/${AppName}-Data)
-	#	DKCOPY(${DKPROJECT}/assets ${DKPROJECT}/${OS}/Debug/${AppName}-Data TRUE)
-	#ENDIF()
-	#IF(RELEASE)
-	#	FILE(MAKE_DIRECTORY ${DKPROJECT}/${OS}/Release/${AppName}-Data)
-	#	DKCOPY(${DKPROJECT}/assets ${DKPROJECT}/${OS}/Release/${AppName}-Data TRUE)
-	#ENDIF()
-	
-	FIND_PACKAGE(OpenGL REQUIRED)
+    FIND_PACKAGE(OpenGL REQUIRED)
 	INCLUDE_DIRECTORIES(${OpenGL_INCLUDE_DIRS})
 	LINK_DIRECTORIES(${OpenGL_LIBRARY_DIRS})
 	ADD_DEFINITIONS(${OpenGL_DEFINITIONS})
@@ -862,24 +888,26 @@ IF(ANDROID_32)
 	
 	# backup generated files and folders not going in the package
 	DKCOPY(${DKPROJECT}/assets/USER ${DKPROJECT}/Backup/USER TRUE)
-	DKCOPY(${DKPROJECT}/assets/DKCef/win32Debug ${DKPROJECT}/Backup/DKCef/win32Debug TRUE)
+	DKCOPY(${DKPROJECT}/assets/DKCef/android32Debug ${DKPROJECT}/Backup/DKCef/android32Debug TRUE)
+	DKCOPY(${DKPROJECT}/assets/DKCef/android32Release ${DKPROJECT}/Backup/DKCef/android32Release TRUE)
 	DKCOPY(${DKPROJECT}/assets/cef.log ${DKPROJECT}/Backup/cef.log TRUE)
 	DKCOPY(${DKPROJECT}/assets/log.txt ${DKPROJECT}/Backup/log.txt TRUE)
 	
 	# remove generated files and folders before packaging
 	DKREMOVE(${DKPROJECT}/assets/USER)
-	DKREMOVE(${DKPROJECT}/assets/DKCef/win32Debug)
+	DKREMOVE(${DKPROJECT}/assets/DKCef/android32Debug)
+	DKREMOVE(${DKPROJECT}/assets/DKCef/android32release)
 	DKREMOVE(${DKPROJECT}/assets/cef.log)
 	DKREMOVE(${DKPROJECT}/assets/log.txt)
+	
+	MESSAGE("Creating assets.zip . . .")
 	DKZIP(${DKPROJECT}/assets) #.zip the assets
 	
-	IF(NOT EXISTS ${DKPROJECT}/assets.h)
-		MESSAGE("Embedding assets.zip into executable, please wait...")
-		bin2h(SOURCE_FILE ${DKPROJECT}/assets.zip HEADER_FILE ${DKPROJECT}/assets.h VARIABLE_NAME "ASSETS_H")
-	ENDIF()
+	MESSAGE("Creating assets.h . . .")
+	bin2h(SOURCE_FILE ${DKPROJECT}/assets.zip HEADER_FILE ${DKPROJECT}/assets.h VARIABLE_NAME "ASSETS_H")
 	
-	DKCOPY(${DKPROJECT}/Backup ${DKPROJECT}/assets TRUE) #put everything back from backup, over
-	
+	# Restore the backed up assets
+	DKCOPY(${DKPROJECT}/Backup/ ${DKPROJECT}/assets/ TRUE)
 	DKREMOVE(${DKPROJECT}/Backup)
 	
 	#https://stackoverflow.com/questions/44467516/cmake-does-not-build-an-executable-with-add-executable
