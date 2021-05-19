@@ -76,7 +76,7 @@ FOREACH(plugin ${DKPLUGS})
 ENDFOREACH()
 
 
-SET(ANDROID_NDK ${3RDPARTY}/android-ndk-r21e)
+SET(ANDROID_NDK ${3RDPARTY}/android-ndk-r21e-windows-x86_64)
 ANDROID_DEBUG_LIB(${ANDROID_NDK}/sources/cxx-stl/llvm-libc++/libs/armeabi-v7a/libc++_static.a)
 ANDROID_RELEASE_LIB(${ANDROID_NDK}/sources/cxx-stl/llvm-libc++/libs/armeabi-v7a/libc++_static.a)
 FOREACH(plugin ${DKPLUGS})
