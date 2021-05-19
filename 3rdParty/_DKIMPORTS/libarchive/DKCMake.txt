@@ -13,7 +13,6 @@ DKSET(ARCHIVE ${3RDPARTY}/libarchive-${ARCHIVE_VERSION})
 
 ### LINK ###
 DKINCLUDE(${ARCHIVE}/libarchive)
-DKINCLUDE(${ARCHIVE}/contrib/android/include)
 DKDEFINE(LIBARCHIVE_STATIC)
 WIN_DEBUG_LIB(${ARCHIVE}/${OS}/libarchive/Debug/archive_static.lib)
 WIN_RELEASE_LIB(${ARCHIVE}/${OS}/libarchive/Release/archive_static.lib)
