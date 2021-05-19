@@ -15,6 +15,8 @@ ENDIF()
 IF(RASPBERRY)
 	DKDEPEND(libboost-tools-dev)
 ENDIF()
+
+## TRACKER : error TRK0005: Failed to locate: "clang.exe" - https://stackoverflow.com/a/50924477/688352
 IF(ANDROID)
 	DKDEPEND(android-ndk)
 	IF(CMAKE_HOST_WIN32)
