@@ -21,28 +21,28 @@ bool DKUnix::GetUsername(DKString& username){
 #ifdef LINUX
 	if (const char* usr_a = std::getenv("USER")){ //'USERNAME' on Windows
 		username = usr_a;
-		return;
+		return true;
 	}
 	struct passwd* usr_b = getpwuid(getuid());
 	if (usr_b) {
 		username = usr_b->pw_name;
-		return;
+		return true;
 	}
 	char* usr_c;
 	if ((userC = getlogin()) != NULL){
 		username = usr_c;
-		return;
+		return true;
 	}
 	char usr_d[64];
 	if (getlogin_r(usr_d, sizeof(usr_d) - 1) != 0) {
 		username = usr_d;
-		return;
+		return true;
 	}
 	char* usr_e;
 	struct passwd* pw;
 	if ((pw = getpwnam(usr_e)) != NULL){
 		username = pw->pwuid;
-		return;
+		return true;
 	}
 	DKERROR("ERROR: cannot get username");
 	return false;
