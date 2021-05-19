@@ -17,8 +17,7 @@ extern DKString log_show = ""; //comma seperated
 extern DKString log_hide = ""; //comma seperated 
 
 
-///////////////////////////////////////////////////////////////////////////////////////////
-void Log(const char* file, int line, const char* func, const DKString& text, const int lvl)
+bool Log(const char* file, int line, const char* func, const DKString& text, const int lvl)
 {
 	DKString string;
 	if(log_thread){
@@ -31,9 +30,8 @@ void Log(const char* file, int line, const char* func, const DKString& text, con
 	if(log_lines){
 		DKString filename = file;
 		unsigned found = filename.find_last_of("/\\");
-		if(found != std::string::npos && found < filename.length()){
+		if(found != std::string::npos && found < filename.length())
 			string += filename.substr(found+1);
-		}
 		string += ":";
 		string += toString(line);
 		string += "  ";
@@ -44,20 +42,17 @@ void Log(const char* file, int line, const char* func, const DKString& text, con
 			string += "()  ";
 		}
 	}
-
 	string += text;
 	int i=0;
 	DKString value;
-
 #ifdef WIN32
 	//check for LOG_HIDE
 	if(!log_hide.empty()){
 		DKStringArray hides;
 		toStringArray(hides, log_hide, ",");
 		for(unsigned int i=0; i<hides.size(); ++i){
-			if(has(string,hides[i]) && !hides[i].empty()){
-				return;
-			}
+			if(has(string,hides[i]) && !hides[i].empty())
+				return true;
 		}
 	}
 #endif
@@ -77,10 +72,10 @@ void Log(const char* file, int line, const char* func, const DKString& text, con
 	}
 #endif
 	if(!flag){
-		if(log_debug == false && lvl == DK_DEBUG){ return; }
-		if(log_info == false && lvl == DK_INFO){ return; }
-		if(log_warnings == false && lvl == DK_WARN){ return; }
-		if(log_errors == false && lvl == DK_ERROR){ return; }
+		if(log_debug == false && lvl == DK_DEBUG){ return true; }
+		if(log_info == false && lvl == DK_INFO){ return true; }
+		if(log_warnings == false && lvl == DK_WARN){ return true; }
+		if(log_errors == false && lvl == DK_ERROR){ return false; }
 	}
 	
 	if(log_file && !DKFile::local_assets.empty()){
@@ -112,15 +107,13 @@ void Log(const char* file, int line, const char* func, const DKString& text, con
     GetConsoleScreenBufferInfo(hConsole, &consoleInfo);
     WORD saved_attributes = consoleInfo.wAttributes;  // Save current attributes
 	SetConsoleTextAttribute(hConsole, color);
-	if(log_msvc){
+	if(log_msvc)
 		OutputDebugString(string.c_str()); //Output to Visual Studio
-	}
 #endif
 
 #if defined(MAC) || defined (IOS)
-	if(log_xcode){
+	if(log_xcode)
 		NSLog(@"%s", string.c_str()); //Output to XCode
-	}
 #endif
 
 	printf("%s",string.c_str()); //THIS IS WHERE WE ACTUALLY PRINT TO THE CONSOLE
@@ -130,21 +123,16 @@ void Log(const char* file, int line, const char* func, const DKString& text, con
 #endif
 
 #ifdef ANDROID
-	if(lvl == DK_ERROR){
+	if(lvl == DK_ERROR)
 		__android_log_write(ANDROID_LOG_ERROR, "DKApp", string.c_str());
-	}
-	else if(lvl == DK_WARN){
+	else if(lvl == DK_WARN)
 		__android_log_write(ANDROID_LOG_WARN, "DKApp", string.c_str());
-	}
-	else if(lvl == DK_INFO){
+	else if(lvl == DK_INFO)
 		__android_log_write(ANDROID_LOG_INFO, "DKApp", string.c_str());
-	}
-	else if(lvl == DK_DEBUG){
+	else if(lvl == DK_DEBUG)
 		__android_log_write(ANDROID_LOG_DEBUG, "DKApp", string.c_str());
-	}
-	else{
+	else
 		__android_log_write(ANDROID_LOG_INFO, "DKApp", string.c_str());
-	}
 #endif
 
 	if(log_gui_console && DKUtil::InMainThread() && DKApp::active){
@@ -159,12 +147,12 @@ void Log(const char* file, int line, const char* func, const DKString& text, con
 		//DKString in = string;
 		//DKClass::CallFunc("DKWindow::MessageBox", &in, NULL);
 	}
-
+	if(lvl == DK_ERROR)
+		return false;
+	return true;
 }
 
-////////////////////////////////////////////////
-void SetLog(const int lvl, const DKString& text)
-{
+void SetLog(const int lvl, const DKString& text){
 	DKDEBUGFUNC(lvl, text);
 
 	if(lvl == DK_ERROR){
@@ -173,7 +161,6 @@ void SetLog(const int lvl, const DKString& text)
 			return;
 		}
 		log_errors = true;
-		
 	}
 	if(lvl == DK_WARN){
 		if(same(text,"OFF")){
@@ -196,10 +183,8 @@ void SetLog(const int lvl, const DKString& text)
 		}
 		log_debug = false;
 	}
-	if(lvl == DK_SHOW){
+	if(lvl == DK_SHOW)
 		log_show = text;
-	}
-	if(lvl == DK_HIDE){
+	if(lvl == DK_HIDE)
 		log_hide = text;
-	}
 }

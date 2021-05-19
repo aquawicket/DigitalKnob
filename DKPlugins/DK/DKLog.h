@@ -60,14 +60,15 @@ extern bool log_funcs;
 extern DKString log_show;
 extern DKString log_hide;
 
-void Log(const char* file, int line, const char* func, const DKString& text, const int lvl = DK_INFO);
+bool Log(const char* file, int line, const char* func, const DKString& text, const int lvl = DK_INFO);
 void SetLog(const int lvl, const DKString& text);
 
 #ifndef ANDROID
 template <typename... Args>
 void DebugFunc(const char* file, int line, const char* func, Args&&... args)
 {
-	if(log_show.empty() && !log_debug){ return; }
+	if(log_show.empty() && !log_debug)
+		return;
 	std::ostringstream out;
 	out << func;
 	out << "(";
@@ -90,7 +91,6 @@ void DebugVars(const char* file, int line, const char* func, const DKString& nam
 		}
 		names_ss << c;
 	}
-
 	std::string name;
 	std::ostringstream ss;
 	

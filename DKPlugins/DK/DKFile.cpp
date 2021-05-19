@@ -356,8 +356,7 @@ bool DKFile::GetDrives(DKStringArray& strings)
 
 	for (int i=0; i<26; i++){
 		if((drives & (1 << i ))){
-			TCHAR driveName[] = { TEXT('A') + i, TEXT(':'), TEXT('\0') }; //warning C4838: conversion from 'int' to 'TCHAR' requires a narrowing conversion
-
+			TCHAR driveName[] = { static_cast<TCHAR>(TEXT('A') + i), TEXT(':'), TEXT('\0') };
 			strings.push_back(driveName);
 		}
 	}
