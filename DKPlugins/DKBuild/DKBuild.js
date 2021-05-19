@@ -1,7 +1,10 @@
-let USERNAME = "aquawicket"; //FIXME: Need to dynamically get username (aquawicket)
-if(CPP_DK_GetOS() === "Raspberry"){
-    USERNAME = "pi";
+let USERNAME = CPP_DK_GetUsername();
+if(!USERNAME){
+	USERNAME = "aquawicket";
+	if(CPP_DK_GetOS() === "Raspberry")
+		USERNAME = "pi";
 }
+
 
 let OS = "";   //win32,win64,mac32,mac64,linux32,linux64,ios32,ios64,iossim32,iossim64,android32,android64,raspberry32,raspberry64 
 let APP = "";  //DKAppname
