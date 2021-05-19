@@ -75,6 +75,10 @@ FOREACH(plugin ${DKPLUGS})
 	MESSAGE("${plugin}")	
 ENDFOREACH()
 
+## Clear cache list variables 
+DKSET(DKDEFINES "")
+DKSET(DKINCLUDES "")
+DKSET(DKLIBRARIES "")
 
 SET(ANDROID_NDK ${3RDPARTY}/android-ndk-r21e-windows-x86_64)
 ANDROID_DEBUG_LIB(${ANDROID_NDK}/sources/cxx-stl/llvm-libc++/libs/armeabi-v7a/libc++_static.a)
@@ -105,6 +109,7 @@ FOREACH(plugin ${DKPLUGS})
 		RETURN()
 	ENDIF()
 
+	#This actually executes the 3rdParty library builds
 	INCLUDE(${PATHTOPLUGIN}/DKCMake.txt)
 	
 	####################### DKPlugins #######################
@@ -1055,6 +1060,12 @@ ENDIF()
 #		FILE(WRITE ${DKPROJECT}/${OS}/${RELEASE}/jni/Android.mk ${ANDROID_APPMK})
 #	ENDIF()
 #ENDIF()
+
+
+#clean these cached variables
+DKSET(DKDEFINES "")
+DKSET(DKINCLUDES "")
+DKSET(DKLIBRARIES "")
 
 MESSAGE("\n")
 MESSAGE("***************************************")
