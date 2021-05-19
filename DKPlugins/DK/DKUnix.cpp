@@ -29,7 +29,7 @@ bool DKUnix::GetUsername(DKString& username){
 		return true;
 	}
 	char* usr_c;
-	if ((usrC = getlogin()) != NULL){
+	if ((usr_c = getlogin()) != NULL){
 		username = usr_c;
 		return true;
 	}
