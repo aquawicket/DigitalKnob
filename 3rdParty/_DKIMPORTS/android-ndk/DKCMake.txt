@@ -1,19 +1,19 @@
 ### VERSION ###
-DKSET(NDK_VERSION android-ndk-r21e)
+DKSET(NDK_VERSION r21e)
 
 ### INSTALL ###
 IF(CMAKE_HOST_WIN32)
-	DKINSTALL(https://dl.google.com/android/repository/${NDK_VERSION}-windows-x86_64.zip android-ndk ${NDK_VERSION})
+	DKINSTALL(https://dl.google.com/android/repository/android-ndk-${NDK_VERSION}-windows-x86_64.zip android-ndk android-ndk-${NDK_VERSION}-windows-x86_64)
 ENDIF()
 
 IF(CMAKE_HOST_APPLE)
 	## FIXME
-	DKINSTALL(https://dl.google.com/android/repository/${NDK_VERSION}-mac.zip android-ndk ${NDK_VERSION})
+	DKINSTALL(https://dl.google.com/android/repository/android-ndk-${NDK_VERSION}-mac.zip android-ndk android-ndk-${NDK_VERSION}-mac)
 ENDIF()
 
 IF(CMAKE_HOST_LINUX)
 	## FIXME
-	DKINSTALL(https://dl.google.com/android/repository/${NDK_VERSION}-linux.zip android-ndk ${NDK_VERSION})
+	DKINSTALL(https://dl.google.com/android/repository/android-ndk-${NDK_VERSION}-linux.zip android-ndk android-ndk-${NDK_VERSION}-linux)
 ENDIF()
 
-DKDKSET(NDK "${3RDPARTY}/${NDK_VERSION}")
+DKDKSET(NDK ${3RDPARTY}/android-ndk-${NDK_VERSION})
