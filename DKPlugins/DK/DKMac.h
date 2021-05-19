@@ -13,6 +13,7 @@ public:
 	static bool SetMousePos(const int& x, const int& y);
 	static bool GetScreenWidth(int& w);
 	static bool GetScreenHeight(int& h);
+	static bool GetUsername(DKString& username);
 	static bool LeftPress();
 	static bool LeftRelease();
 	static bool RightPress();

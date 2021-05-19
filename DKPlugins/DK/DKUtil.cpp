@@ -6,8 +6,10 @@
 
 #ifdef WIN32
 	#include "DKWindows.h"
+	#include <Lmcons.h> //DKUtil::GetUsername
 #else
 	#include "DKUnix.h"
+	#include <unistd.h> //DKUtil::GetUsername
 #endif
 
 #ifdef LINUX
@@ -492,14 +494,31 @@ bool DKUtil::GetTime(DKString& _time)
 	Pad(2, '0', minute);
 	_time += minute;
 	//DKINFO("DKUtil::GetTime(): now->tm_hour="+toString(now->tm_hour)+"\n");
-	if(now->tm_hour > 12 || (now->tm_hour % 12) == 0){
+	if(now->tm_hour > 12 || (now->tm_hour % 12) == 0)
 		_time += " PM";
-	}
-	else{
+	else
 		_time += " AM";
-	}
-
 	return true;
+}
+
+bool DKUtil::GetUsername(DKString& username){
+	DKDEBUGFUNC(username);
+#ifdef WIN32
+	TCHAR name[UNLEN + 1];
+	DWORD size = UNLEN + 1;
+	if (!GetUserName((TCHAR*)name, &size))
+		return false;
+	username = toString(name);
+	return true;
+#endif
+#ifdef MAC
+	//return DKMac::GetUsername(username);
+#endif
+#ifdef LINUX
+	return DKLinux::GetUsername(username);
+#endif
+	DKWARN("DKUtil::GetUsername() not implemented on this OS \n");
+	return false;
 }
 
 ////////////////////////////////////

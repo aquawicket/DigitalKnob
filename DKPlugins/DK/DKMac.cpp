@@ -30,16 +30,18 @@ bool DKMac::GetScreenWidth(int& w)
 	return true;
 }
 
-///////////////////////////////////
-bool DKMac::GetScreenHeight(int& h)
-{
+bool DKMac::GetScreenHeight(int& h){
 	CGRect mainMonitor = CGDisplayBounds(CGMainDisplayID());
 	CGFloat monitorHeight = CGRectGetHeight(mainMonitor);
 	h = monitorHeight;
 	return true;
 }
 
-///////////////////////
+bool DKMac::GetUsername(DKString& username){
+    DKWARN("DKMac::GetUsername() not implemented yet");
+    return false;
+}
+
 bool DKMac::LeftPress()
 {
     int x, y;

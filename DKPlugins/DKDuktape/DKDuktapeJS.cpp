@@ -752,13 +752,9 @@ int DKDuktapeJS::GetType(duk_context* ctx)
 //////////////////////////////////////
 int DKDuktapeJS::GetUsername(duk_context* ctx)
 {
-#ifdef LINUX
 	DKString username;
-	DKUnix::GetUsername(username);
+	DKUtil::GetUsername(username);
 	duk_push_string(ctx, username.c_str());
-#else
-	DKERROR("GetUsername: not implemented on this OS \n");
-#endif
 	return 1;
 }
 

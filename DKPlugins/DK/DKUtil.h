@@ -42,6 +42,7 @@ public:
 	static bool GetThreadId(unsigned long int& id);
 	static bool GetTicks(long& ticks);
 	static bool GetTime(DKString& _time);
+	static bool GetUsername(DKString& username);
 	static bool GetVolume(int& percent);
 	static bool InMainThread();
 	static bool InitFps();
