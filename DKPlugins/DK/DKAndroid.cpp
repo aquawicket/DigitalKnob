@@ -265,7 +265,7 @@ void DKAndroid::init()
 		//CallJavaFunction("copyAsset", "app.js");
 		//CallJavaFunction("copyAsset", "DKConsole.html");
 
-		DKApp dkapp;
+		DKApp dkapp(NULL, NULL);
 
 		#ifdef DKAPP
 		DKINFO("DKAPP defined\n");
