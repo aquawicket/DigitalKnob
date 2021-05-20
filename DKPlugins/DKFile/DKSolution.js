@@ -5,7 +5,16 @@ dk.solution = new DKPlugin("dk_solution");
 dk.solution.init = function dk_solution_init() {
     dk.create("DKFile/DKSolution.css");
     dk.create("DKFile/DKFileAssociation.js");
-    dk.create("DKFile/DKSolution.html", function dk_create_callback(html) {
+    dk.solution.create();
+}
+
+dk.solution.end = function dk_solution_end() {
+    dk.close("DKFile/DKSolution.html");
+    dk.close("DKFile/DKSolution.css");
+}
+
+dk.solution.create = function dk_solution_create() {
+     dk.create("DKFile/DKSolution.html", function dk_create_callback(html) {
         if (!html)
             return error("html invalid");
         dk.solution.html = html;
@@ -23,13 +32,6 @@ dk.solution.init = function dk_solution_init() {
     });
 }
 
-dk.solution.end = function dk_solution_end() {
-    dk.close("DKFile/DKSolution.html");
-    dk.close("DKFile/DKSolution.css");
-}
-
-dk.solution.create = function dk_solution_create() {}
-
 dk.solution.upDir = function(event) {
     var up = dk.solution.path.value + "../";
     dk.solution.openFolder(up);
@@ -44,12 +46,12 @@ dk.solution.onPath = function(event) {
 dk.solution.highlight = function dk_solution_select(event) {
     if (event instanceof Event)
         event.stopPropagation();
-    var arry = dk.solution.list.childNodes;
-    for (let n = 0; n < arry.length; n++) {
-        if (!arry[n])
-            console.error("arry[" + n + "] invalid\n");
-        arry[n].style.backgroundColor = "rgb(255,255,255)";
-        arry[n].style.color = "rgb(0,0,0)";
+    var nodes = dk.solution.list.childNodes;
+    for (let n = 0; n < nodes.length; n++) {
+        if (!nodes[n])
+            console.error("nodes[" + n + "] invalid\n");
+        nodes[n].style.backgroundColor = "rgb(255,255,255)";
+        nodes[n].style.color = "rgb(0,0,0)";
     }
     if (event.currentTarget.getAttribute("dk_solution") === "folder" || event.currentTarget.getAttribute("dk_solution") === "file") {
         event.currentTarget.style.backgroundColor = "rgb(123,157,212)";

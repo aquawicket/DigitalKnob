@@ -586,7 +586,6 @@ ENDFUNCTION()
 
 #############################
 FUNCTION(ANDROID_COMMAND arg)
-	MESSAGE("ANDROID_COMMAND -> arg")
 	IF(ANDROID AND QUEUE_BUILD)
 		SET(arg2 ${arg} ${ARGN}) # Merge them together
 		#MESSAGE("COMMAND-> ${arg2}")

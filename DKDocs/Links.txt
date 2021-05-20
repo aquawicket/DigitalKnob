@@ -7,3 +7,5 @@ https://developercommunity.visualstudio.com/content/problem/739697/c2118-error-w
 3 Ways to Fix the CORS Error — and How the Access-Control-Allow-Origin Header Works
 https://medium.com/@dtkatz/3-ways-to-fix-the-cors-error-and-how-access-control-allow-origin-works-d97d55946d9
 
+Git/Repository on a USB stick
+https://en.wikibooks.org/wiki/Git/Repository_on_a_USB_stick

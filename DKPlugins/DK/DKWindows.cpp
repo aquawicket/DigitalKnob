@@ -10,7 +10,7 @@
 #include <psapi.h>
 #include "shlobj.h"
 #include <cstdlib>  //DKUtil::GetUsername() std::getenv()
-#include <Lmcons.h> //DKUtil::GetUsername() GetUserName()
+//#include <Lmcons.h> //DKUtil::GetUsername() GetUserName()
 
 //Monitor brightness
 #include "PhysicalMonitorEnumerationAPI.h"
@@ -441,12 +441,14 @@ bool DKWindows::GetUsername(DKString& username)
 		username = usr_a;
 		return true;
 	}
+	/*
 	TCHAR name[UNLEN + 1];
 	DWORD size = UNLEN + 1;
 	if (GetUserName((TCHAR*)name, &size)) {
 		username = toString(name);
 		return true;
 	}
+	*/
 	DKERROR("ERROR: cannot get username");
 	return false;
 }

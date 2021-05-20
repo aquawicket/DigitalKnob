@@ -1,9 +1,9 @@
 "use strict";
 
-var currentFile;
+dk.paint = new DKPlugin("dk_paint");
+dk.paint.currentFile = "";
 
-function DKPaint_init()
-{
+dk.paint.init = function dk_paint_init(){
 	dk.create("DKPaint/DKPaint.css");
 	dk.create("DKPaint/DKPaint.html");
 	//byId("DKPaint_Save").addEventListener("click", DKPaint_onevent);

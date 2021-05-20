@@ -2,9 +2,11 @@
 #ifndef WIN32
 #include "DKUnix.h"
 #include <cstdlib>     //GetUsername()  std::getenv()
+/*
 #include <pwd.h>       //GetUsername()  getpwuid()/getuid()
 #include <unistd.h>    //GetUsername()  getlogin()/getlogin_r()
 #include <sys/types.h> //GetUsername()  getpwnam()
+*/
 
 bool DKUnix::GetKey(int& key){
 	DKINFO("Press any key to continue...\n");
@@ -23,6 +25,7 @@ bool DKUnix::GetUsername(DKString& username){
 		username = usr_a;
 		return true;
 	}
+	/*
 	struct passwd* usr_b = getpwuid(getuid());
 	if (usr_b) {
 		username = usr_b->pw_name;
@@ -46,6 +49,7 @@ bool DKUnix::GetUsername(DKString& username){
 	}
 	DKERROR("ERROR: cannot get username");
 	return false;
+	*/
 #endif
 	return false;
 }

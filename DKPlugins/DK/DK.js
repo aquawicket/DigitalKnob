@@ -242,25 +242,6 @@ dk.close = function dk_close(data) {
     return error("data[1] invalid");
 }
 
-dk.loadCss = function dk_loadCss(url, dk_loadCss_callback) {
-    require({
-        url
-    });
-    if (dk.getObjects().includes(url)) {
-        console.warn(url + " already loaded. Reloading...");
-        byId(url) && byId(url).parentNode.removeChild(byId(url));
-    }
-    var head = document.getElementsByTagName('head')[0];
-    var link = document.createElement('link');
-    link.setAttribute('href', url);
-    link.id = url;
-    link.setAttribute('rel', 'stylesheet');
-    link.setAttribute('type', 'text/css');
-    head.appendChild(link);
-    dk_loadCss_callback && dk_loadCss_callback(link);
-    return true;
-}
-
 dk.loadJs = function dk_loadJs(url, dk_loadJs_callback) {
     require({
         url
@@ -376,6 +357,25 @@ dk.loadHtml = function dk_loadHtml(url, parent, dk_loadHtml_callback) {
 
         return dk_loadHtml_callback && dk_loadHtml_callback(container);
     });
+    return true;
+}
+
+dk.loadCss = function dk_loadCss(url, dk_loadCss_callback) {
+    require({
+        url
+    });
+    if (dk.getObjects().includes(url)) {
+        console.warn(url + " already loaded. Reloading...");
+        byId(url) && byId(url).parentNode.removeChild(byId(url));
+    }
+    var head = document.getElementsByTagName('head')[0];
+    var link = document.createElement('link');
+    link.setAttribute('href', url);
+    link.id = url;
+    link.setAttribute('rel', 'stylesheet');
+    link.setAttribute('type', 'text/css');
+    head.appendChild(link);
+    dk_loadCss_callback && dk_loadCss_callback(link);
     return true;
 }
 
