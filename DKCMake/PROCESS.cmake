@@ -609,7 +609,7 @@ IF(MAC)
 	ENDIF()
 	
 	# Restore the backed up files, excluded from assets
-	DKCOPY(${DKPROJECT}/Backup/ ${DKPROJECT}/assets/ TRUE)
+	DKCOPY(${DKPROJECT}/Backup/ ${DKPROJECT}/assets/ FALSE)
 	DKREMOVE(${DKPROJECT}/Backup)
 	
 	FIND_LIBRARY(CF CoreFoundation)
@@ -663,7 +663,7 @@ IF(IOS)
 	ENDIF()
 
 	# Restore the backed up files, excluded from assets
-	DKCOPY(${DKPROJECT}/Backup/ ${DKPROJECT}/assets/ TRUE)
+	DKCOPY(${DKPROJECT}/Backup/ ${DKPROJECT}/assets/ FALSE)
 	DKREMOVE(${DKPROJECT}/Backup)
 	
 	### FrameWorks ###
@@ -730,7 +730,7 @@ IF(IOSSIM)
 	ENDIF()
 	
 	# Restore the backed up files, excluded from assets
-	DKCOPY(${DKPROJECT}/Backup/ ${DKPROJECT}/assets/ TRUE)
+	DKCOPY(${DKPROJECT}/Backup/ ${DKPROJECT}/assets/ FALSE)
 	DKREMOVE(${DKPROJECT}/Backup)
 	
 	### FrameWorks ###
@@ -793,13 +793,13 @@ IF(LINUX)
 	DKREMOVE(${DKPROJECT}/assets/log.txt)
 	
 	MESSAGE("Creating assets.zip . . .")
-	DKZIP(${DKPROJECT}/assets/)
+	DKZIP(${DKPROJECT}/assets)
 	
 	MESSAGE("Creating assets.h . . .")
 	bin2h(SOURCE_FILE ${DKPROJECT}/assets.zip HEADER_FILE ${DKPROJECT}/assets.h VARIABLE_NAME "ASSETS_H")
 	
 	# Restore the backed up assets
-	DKCOPY(${DKPROJECT}/Backup/ ${DKPROJECT}/assets/ TRUE)
+	DKCOPY(${DKPROJECT}/Backup/ ${DKPROJECT}/assets/ FALSE)
 	DKREMOVE(${DKPROJECT}/Backup)
 
 	FIND_PACKAGE(OpenGL REQUIRED)
@@ -836,30 +836,30 @@ IF(RASPBERRY)
 
 	# Backup files and folders excluded from the package
 	DKCOPY(${DKPROJECT}/assets/USER ${DKPROJECT}/Backup/USER TRUE)
-	DKCOPY(${DKPROJECT}/assets/DKCef/linux32Debug ${DKPROJECT}/Backup/DKCef/linux32Debug TRUE)
-	DKCOPY(${DKPROJECT}/assets/DKCef/linux32Release ${DKPROJECT}/Backup/DKCef/linux32Release TRUE)
-	DKCOPY(${DKPROJECT}/assets/DKCef/linux64Debug ${DKPROJECT}/Backup/DKCef/linux64Debug TRUE)
-	DKCOPY(${DKPROJECT}/assets/DKCef/linux64Release ${DKPROJECT}/Backup/DKCef/linux64Release TRUE)
-	DKCOPY(${DKPROJECT}/assets/cef.log ${DKPROJECT}/Backup/cef.log TRUE)
+	#DKCOPY(${DKPROJECT}/assets/DKCef/linux32Debug ${DKPROJECT}/Backup/DKCef/linux32Debug TRUE)
+	#DKCOPY(${DKPROJECT}/assets/DKCef/linux32Release ${DKPROJECT}/Backup/DKCef/linux32Release TRUE)
+	#DKCOPY(${DKPROJECT}/assets/DKCef/linux64Debug ${DKPROJECT}/Backup/DKCef/linux64Debug TRUE)
+	#DKCOPY(${DKPROJECT}/assets/DKCef/linux64Release ${DKPROJECT}/Backup/DKCef/linux64Release TRUE)
+	#DKCOPY(${DKPROJECT}/assets/cef.log ${DKPROJECT}/Backup/cef.log TRUE)
 	DKCOPY(${DKPROJECT}/assets/log.txt ${DKPROJECT}/Backup/log.txt TRUE)
 	
 	# Remove excluded files and folders before packaging
 	DKREMOVE(${DKPROJECT}/assets/USER)
-	DKREMOVE(${DKPROJECT}/assets/DKCef/linux32Debug)
-	DKREMOVE(${DKPROJECT}/assets/DKCef/linux32Release)
-	DKREMOVE(${DKPROJECT}/assets/DKCef/linux64Debug)
-	DKREMOVE(${DKPROJECT}/assets/DKCef/linux64Release)
-	DKREMOVE(${DKPROJECT}/assets/cef.log)
+	#DKREMOVE(${DKPROJECT}/assets/DKCef/linux32Debug)
+	#DKREMOVE(${DKPROJECT}/assets/DKCef/linux32Release)
+	#DKREMOVE(${DKPROJECT}/assets/DKCef/linux64Debug)
+	#DKREMOVE(${DKPROJECT}/assets/DKCef/linux64Release)
+	#DKREMOVE(${DKPROJECT}/assets/cef.log)
 	DKREMOVE(${DKPROJECT}/assets/log.txt)
 	
 	MESSAGE("Creating assets.zip . . .")
-	DKZIP(${DKPROJECT}/assets/)
+	DKZIP(${DKPROJECT}/assets)
 	
 	MESSAGE("Creating assets.h . . .")
 	bin2h(SOURCE_FILE ${DKPROJECT}/assets.zip HEADER_FILE ${DKPROJECT}/assets.h VARIABLE_NAME "ASSETS_H")
 
 	# Restore the backed up assets
-	DKCOPY(${DKPROJECT}/Backup/ ${DKPROJECT}/assets/ TRUE)
+	DKCOPY(${DKPROJECT}/Backup/ ${DKPROJECT}/assets/ FALSE)
 	DKREMOVE(${DKPROJECT}/Backup)
 
     FIND_PACKAGE(OpenGL REQUIRED)
@@ -1063,9 +1063,9 @@ ENDIF()
 
 
 #clean these cached variables
-DKSET(DKDEFINES "")
-DKSET(DKINCLUDES "")
-DKSET(DKLIBRARIES "")
+##DKSET(DKDEFINES "")
+##DKSET(DKINCLUDES "")
+##DKSET(DKLIBRARIES "")
 
 MESSAGE("\n")
 MESSAGE("***************************************")
