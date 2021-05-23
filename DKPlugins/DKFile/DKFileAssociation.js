@@ -102,7 +102,7 @@ dk.fileassociation.openhtml = function dk_fileassociation_openHtml(path) {
 
     dk.file.fileToString(path, function dk_file_fileToString_callback(str) {
         filedata = str;
-    });
+    
     if (!filedata)
         return error("filedata invalid");
     //if(!HtmlToRml(filedata)){ return false; }
@@ -131,6 +131,7 @@ dk.fileassociation.openhtml = function dk_fileassociation_openHtml(path) {
     //Show(id);
     //dk.fileassociation.AddDragHandles(id);
     //dk.fileassociation.SelectElement(id);
+	});
 }
 
 dk.fileassociation.openjs = function dk_fileassociation_openjs(path) {

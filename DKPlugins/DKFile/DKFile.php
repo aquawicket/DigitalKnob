@@ -81,40 +81,6 @@ function stringToFile($path, $data, $flags = 0){
     return $bytes;
 }
 
-
-// Extended PHP File Functions
-function getPaths($path){
-	$path = getPath($path);
-	$aPath = getAbsolutePath($path);
-	$root = getRootPath();
-	$rPath = getRelativePath($aPath);
-	$realpath = realpath($aPath);
-	$realpath = ValidatePath($realpath);
-	$pathParts = pathinfo($aPath);
-	$dir = $pathParts['dirname'];
-	$dir = ValidatePath($dir);
-    $basename = $pathParts['basename'];
-    $extension = "";
-    if(isset($pathParts['extension'])){
-        $extension = $pathParts['extension'];
-    }
-    $filename = $pathParts['filename'];
-
-    $arr = array(
-        "path" => $path,
-        "aPath" => $aPath,
-        "root" => $root,
-        "rPath" => $rPath,
-        "realpath" => $realpath,
-        "dir" => $dir,
-        "basename" => $basename,
-        "extention" => $extension,
-        "filename" => $filename,    
-    );
-    //return json_encode($arr);
-	return $path.",".$aPath.",".$root.",".$rPath.",".$realpath.",".$dir.",".$basename.",".$extension.",".$filename;
-}
-
 function getPath($path){
 	if(!$path || $path === "/" || $path === ".")
 	    $path = getRootPath();
@@ -142,18 +108,6 @@ function getRelativePath($path){
 	return ValidatePath($rPath);
 }
 
-function getAssetsPath(){
-    $assetsPath = dirname(__DIR__)."/";
-    //if(basename($assetsPath) != "assets")
-        //return error("assetsPath does not contain an assets folder \n");
-    if(!is_dir($assetsPath))
-    	return error("assetsPath is an invalid directory \n");
-    $assetsPath = str_replace("\\", "/", $assetsPath);
-    $assetsPath = ValidatePath($assetsPath);
-    echo "assetsPath = ".$assetsPath."\n";
-    return $assetsPath;
-}
-
 /**
  * Return relative path between two sources
  * @param $from
@@ -174,6 +128,107 @@ function relativePath($from, $to, $separator = DIRECTORY_SEPARATOR){
     }
 
     return str_pad("", count($arFrom) * 3, '..'.$separator).implode($separator, $arTo);
+}
+
+function directoryContents($path){
+	//echo "php.directoryContents(".$path.")\n";
+	$path = ValidatePath($path);
+	$directory = opendir($path);
+	$folders = [];
+	$files = [];
+	while($entryName = readdir($directory)){
+		if(filetype($path.$entryName) == "dir")
+		    $folders[] = $entryName;
+		else
+			$files[] = $entryName;
+	}
+	closedir($directory);
+	
+	//sort in alpha order with folders on top
+	if($folders)
+	    natcasesort($folders);	
+	if($files)
+	    natcasesort($files);
+	$final = array_merge ($folders, $files);
+	return implode(",", $final);
+}
+
+// https://stackoverflow.com/a/18850550/688352
+function compareFiles($file_a, $file_b){
+
+	if(filesize($file1) !== filesize($file2)) return false;
+    if(sha1_file($file1) == sha1_file($file2)) return true;
+    return false;
+
+    /*
+	if (filesize($file_a) == filesize($file_b)){
+        $fp_a = fopen($file_a, 'rb');
+        $fp_b = fopen($file_b, 'rb');
+        while (!feof($fp_a) && ($b = fread($fp_a, 4096)) !== false){
+            $b_b = fread($fp_b, 4096);
+            if ($b !== $b_b){
+                fclose($fp_a);
+                fclose($fp_b);
+                return false;
+            }
+        }
+        fclose($fp_a);
+        fclose($fp_b);
+        return true;
+    }
+    return false;
+    */
+}
+
+
+
+
+
+
+
+///////////////////////////////////////////////////
+// digitalknob specific functions
+// Get DK Paths
+function getPaths($path){
+	$path = getPath($path);
+	$aPath = getAbsolutePath($path);
+	$root = getRootPath();
+	$rPath = getRelativePath($aPath);
+	$realpath = realpath($aPath);
+	$realpath = ValidatePath($realpath);
+	$pathParts = pathinfo($aPath);
+	$dir = $pathParts['dirname'];
+	$dir = ValidatePath($dir);
+    $basename = $pathParts['basename'];
+    $extension = "";
+    if(isset($pathParts['extension']))
+        $extension = $pathParts['extension'];
+    $filename = $pathParts['filename'];
+    $arr = array(
+        "path" => $path,
+        "aPath" => $aPath,
+        "root" => $root,
+        "rPath" => $rPath,
+        "realpath" => $realpath,
+        "dir" => $dir,
+        "basename" => $basename,
+        "extention" => $extension,
+        "filename" => $filename,    
+    );
+    //return json_encode($arr);
+	return $path.",".$aPath.",".$root.",".$rPath.",".$realpath.",".$dir.",".$basename.",".$extension.",".$filename;
+}
+
+function getAssetsPath(){
+    $assetsPath = dirname(__DIR__)."/";
+    //if(basename($assetsPath) != "assets")
+        //return error("assetsPath does not contain an assets folder \n");
+    if(!is_dir($assetsPath))
+    	return error("assetsPath is an invalid directory \n");
+    $assetsPath = str_replace("\\", "/", $assetsPath);
+    $assetsPath = ValidatePath($assetsPath);
+    echo "assetsPath = ".$assetsPath."\n";
+    return $assetsPath;
 }
 
 function getDKPath(){
@@ -242,6 +297,9 @@ function getDKAppAssetsPath(){
 }
 
 function pushDKAssets(){
+
+    $filemap = [];
+
     //Fist get all of the paths
 	$assetsPath = getAssetsPath();
     $dkPluginsPath = getDKPluginsPath();
@@ -258,6 +316,7 @@ function pushDKAssets(){
 		        //echo "filesrc = ".$filesrc."\n";
 		        $filedest = $dkAppAssetsPath.$assetsList[$n];
 		        //echo "filedest = ".$filedest."\n";
+		        $files_map[$filesrc]=$filedest;
 		        if (!copy($filesrc, $filedest))
                     echo "FAILED to copy $filesrc\n";
                 else
@@ -275,6 +334,7 @@ function pushDKAssets(){
             if(is_dir($dkPluginsPath.$assetsList[$n])){
             	$dest = $dkPluginsPath.$assetsList[$n]."/".$assetFiles[$nn];
             	//echo "dest = ".$dest."\n";
+            	$filemap[$src]=$dest;
 			    if (!copy($src, $dest))
                     echo "FAILED to copy $src\n";
                 else
@@ -283,6 +343,7 @@ function pushDKAssets(){
 		    if($dkPluginsPath2 && is_dir($dkPluginsPath2.$assetsList[$n])){
 			    $dest = $dkPluginsPath2.$assetsList[$n]."/".$assetFiles[$nn];
 			    //echo "dest = ".$dest."\n";
+			    $filemap[$src]=$dest;
 			    if (!copy($src, $dest))
                     echo "failed to copy $src\n";
                 else
@@ -290,7 +351,10 @@ function pushDKAssets(){
 		    }
         }
 	}
-	return true;
+
+	//echo "\n***** filemap ***\n";
+	//echo json_encode($filemap); 
+	return json_encode($filemap);
 }
 
 function pullDKAssets(){
@@ -366,29 +430,8 @@ function pullDKAssets(){
     return true;
 }
 
-function directoryContents($path){
-	//echo "php.directoryContents(".$path.")\n";
-	$path = ValidatePath($path);
-	$directory = opendir($path);
-	$folders = [];
-	$files = [];
-	while($entryName = readdir($directory)){
-		if(filetype($path.$entryName) == "dir")
-		    $folders[] = $entryName;
-		else
-			$files[] = $entryName;
-	}
-	closedir($directory);
-	
-	//sort in alpha order with folders on top
-	if($folders)
-	    natcasesort($folders);	
-	if($files)
-	    natcasesort($files);
-	$final = array_merge ($folders, $files);
-	return implode(",", $final);
-}
 
+///// Old functions
 
 /*
 function Upload($src, $dest){

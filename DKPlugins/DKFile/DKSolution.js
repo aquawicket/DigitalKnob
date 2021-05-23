@@ -14,7 +14,7 @@ dk.solution.end = function dk_solution_end() {
 }
 
 dk.solution.create = function dk_solution_create() {
-     dk.create("DKFile/DKSolution.html", function dk_create_callback(html) {
+    dk.create("DKFile/DKSolution.html", function dk_create_callback(html) {
         if (!html)
             return error("html invalid");
         dk.solution.html = html;
