@@ -2,51 +2,61 @@
 
 dk.solution = new DKPlugin("dk_solution");
 
-dk.solution.init = function dk_solution_init() {
+dk.solution.init = function dk_solution_init(callback) {
     dk.create("DKFile/DKSolution.css");
     dk.create("DKFile/DKFileAssociation.js");
-    dk.solution.create();
+    callback(true);
 }
 
 dk.solution.end = function dk_solution_end() {
-    dk.close("DKFile/DKSolution.html");
+    //dk.close("DKFile/DKSolution.html");
     dk.close("DKFile/DKSolution.css");
+    dk.create("DKFile/DKFileAssociation.js");
 }
 
-dk.solution.create = function dk_solution_create() {
+dk.solution.create = function dk_solution_create(dk_solution_create_callback) {
+    const instance = new DKPlugin("new");
+    if (!instance)
+        return error("instance invalid", dk_solution_create_callback);
+
     dk.create("DKFile/DKSolution.html", function dk_create_callback(html) {
         if (!html)
             return error("html invalid");
-        dk.solution.html = html;
-        dk.solution.setAccessNode(html);
-        dk.solution.box = html.querySelector("[dk_solution='box']");
-        dk.solution.up = html.querySelector("[dk_solution='up']");
-        dk.solution.path = html.querySelector("[dk_solution='path']");
-        dk.solution.list = html.querySelector("[dk_solution='list']");
-        dk.solution.up.onclick = dk.solution.upDir;
-        dk.solution.list.onclick = dk.solution.highlight;
-        //dk.solution.list.oncontextmenu = dk.solution.menu;
-        dk.solution.path.onkeypress = dk.solution.onPath;
-        dk.solution.openFolder(dk.solution.path.value);
-        dk.frame.create(dk.solution);
+        instance.html = html;
+        instance.setAccessNode(html);
+        instance.box = html.querySelector("[dk_solution='box']");
+        instance.up = html.querySelector("[dk_solution='up']");
+        instance.path = html.querySelector("[dk_solution='path']");
+        instance.list = html.querySelector("[dk_solution='list']");
+        instance.up.onclick = function() {
+            dk.solution.upDir(instance, event);
+        }
+        instance.list.onclick = function() {
+            dk.solution.highlight(instance, event);
+        }
+        instance.path.onkeypress = function() {
+            dk.solution.onPath(instance, event);
+        }
+        dk.solution.openFolder(instance, instance.path.value);
+        dk.frame.create(instance);
+        return dk_solution_create_callback && dk_solution_create_callback(instance);
     });
 }
 
-dk.solution.upDir = function(event) {
-    var up = dk.solution.path.value + "../";
-    dk.solution.openFolder(up);
+dk.solution.upDir = function(instance) {
+    var up = instance.path.value + "../";
+    dk.solution.openFolder(instance, up);
 }
 
-dk.solution.onPath = function(event) {
-    if (event.code === 'Enter') {
-        dk.solution.openFolder(dk.solution.path.value);
-    }
+dk.solution.onPath = function(instance) {
+    if (event.code === 'Enter')
+        dk.solution.openFolder(instance, instance.path.value);
 }
 
-dk.solution.highlight = function dk_solution_select(event) {
+dk.solution.highlight = function dk_solution_highlight(instance, event) {
     if (event instanceof Event)
         event.stopPropagation();
-    var nodes = dk.solution.list.childNodes;
+    var nodes = instance.list.childNodes;
     for (let n = 0; n < nodes.length; n++) {
         if (!nodes[n])
             console.error("nodes[" + n + "] invalid\n");
@@ -59,88 +69,90 @@ dk.solution.highlight = function dk_solution_select(event) {
     }
 }
 
-dk.solution.dblclick = function(event) {
+dk.solution.dblclick = function(instance, event) {
     const folder = event.currentTarget.getAttribute("folder");
     const file = event.currentTarget.getAttribute("file");
     const path = event.currentTarget.getAttribute("path");
     if (event.currentTarget.getAttribute("dk_solution") === "folder")
-        dk.solution.openFolder(path);
+        dk.solution.openFolder(instance, path);
     else if (event.currentTarget.getAttribute("dk_solution") === "file")
-        dk.solution.openFile(path);
+        dk.solution.openFile(instance, path);
 }
 
-dk.solution.rightclickmenu = function(event) {
+dk.solution.rightclickmenu = function(instance, event) {
     event.preventDefault();
-    dk.solution.highlight(event);
+    dk.solution.highlight(instance, event);
     const folder = event.currentTarget.getAttribute("dk_solution") === "folder";
     const file = event.currentTarget.getAttribute("dk_solution") === "file";
     const path = event.currentTarget.getAttribute("path");
     const menu = dk.menu.createInstance();
+    if (file)
+        dk.menu.addItem(menu, "Edit", function dk_menu_edit() {
+            dk.solution.openFile(instance, path);
+        });
     dk.menu.addItem(menu, "Open", function dk_menu_open() {
         if (folder)
-            dk.solution.openFolder(path);
+            dk.solution.openFolder(instance, path);
         if (file)
-            dk.solution.openFile(path);
+            dk.solution.openFile(instance, path);
     });
     dk.menu.addItem(menu, "Open In OS", function dk_menu_openinos() {
         if (folder)
-            dk.solution.openFolderInOS(path);
+            dk.solution.openFolderInOS(instance, path);
         if (file)
-            dk.solution.openFileInOS(path);
+            dk.solution.openFileInOS(instance, path);
     });
     dk.menu.addItem(menu, "New File", function dk_menu_newfile() {
-        dk.solution.newFile();
+        dk.solution.newFile(instance);
     });
     dk.menu.addItem(menu, "New Folder", function dk_menu_newFolder() {
-        dk.solution.newFolder();
+        dk.solution.newFolder(instance);
     });
     dk.menu.addItem(menu, "Rename", function dk_menu_rename() {
-        dk.solution.rename(path);
+        dk.solution.rename(instance, path);
     });
     dk.menu.addItem(menu, "Delete", function dk_menu_delete() {
-        dk.solution.delete(path);
+        dk.solution.delete(instance, path);
     });
     dk.menu.addItem(menu, "Copy", function dk_menu_copy() {
-        dk.solution.copy(path);
+        dk.solution.copy(instance, path);
     });
     dk.menu.addItem(menu, "Cut", function dk_menu_cut() {
-        dk.solution.cut(path);
+        dk.solution.cut(instance, path);
     });
     dk.menu.addItem(menu, "Paste", function dk_menu_paste() {
-        dk.solution.paste();
+        dk.solution.paste(instance);
     });
     dk.menu.addItem(menu, "Import", function dk_menu_import() {
-        dk.solution.import(path);
+        dk.solution.import(instance, path);
     });
     dk.menu.addItem(menu, "Git Add", function dk_menu_gitAdd() {
-        dk.solution.GitAdd(path);
+        dk.solution.GitAdd(instance, path);
     });
     dk.menu.addItem(menu, "upxCompress", function dk_menu_upxCompress() {
-        dk.solution.upxCompress(path);
+        dk.solution.upxCompress(instance, path);
     });
 }
 
-dk.solution.openFolder = function dk_solution_openFolder(path) {
-    return dk.solution.updatePath(path);
+dk.solution.openFolder = function dk_solution_openFolder(instance, path) {
+    return dk.solution.updatePath(instance, path);
 }
-dk.solution.openFile = function dk_solution_openFolder(path) {
-    return dk.fileassociation.open(path);
+dk.solution.openFile = function dk_solution_openFolder(instance, path) {
+    return dk.fileassociation.open(instance, path);
 }
-dk.solution.openFolderInOS = function dk_solution_openFolderInOS(path) {
+dk.solution.openFolderInOS = function dk_solution_openFolderInOS(instance, path) {
     console.debug("TODO: dk.solution.openFolderInOS(" + path + ")");
 }
-dk.solution.openFileInOS = function dk_solution_openFolderInOS(path) {
+dk.solution.openFileInOS = function dk_solution_openFolderInOS(instance, path) {
     console.debug("TODO: dk.solution.openFileInOS(" + path + ")");
 }
-dk.solution.newFile = function dk_solution_newFile() {
-    
+dk.solution.newFile = function dk_solution_newFile(instance) {
     //Todo - advance the file number if NewFile.txt already exists
     const filename = "NewFile.txt";
-    const path = dk.solution.path.value + filename;
+    const path = instance.path.value + filename;
     dk.file.stringToFile("", path, 0, function(result) {
         console.log(result);
     });
-
     const newFile = dk.gui.createElement(dk.solution.list, "div", "DKSolutionFile");
     newFile.setAttribute("dk_solution", "file");
     newFile.setAttribute("path", path);
@@ -152,21 +164,19 @@ dk.solution.newFile = function dk_solution_newFile() {
     newFile.onclick = dk.solution.highlight;
     newFile.ondblclick = dk.solution.dblclick
     newFile.oncontextmenu = dk.solution.rightclickmenu;
-
     const event = {
         currentTarget: newFile
     }
-    dk.solution.highlight(event);
-    dk.solution.rename(newFile);
+    dk.solution.highlight(instance, event);
+    dk.solution.rename(instance, newFile);
 }
 
-dk.solution.newFolder = function dk_solution_newFolder() {
+dk.solution.newFolder = function dk_solution_newFolder(instance) {
     console.debug("TODO: dk.solution.newFolder");
 }
 
-dk.solution.rename = function dk_solution_rename(node) {
-
-    const renamer = dk.gui.createElement(dk.solution.list, "div", "renamer");
+dk.solution.rename = function dk_solution_rename(instance, node) {
+    const renamer = dk.gui.createElement(instance.list, "div", "renamer");
     renamer.style.position = "absolute";
     renamer.style.top = node.offsetTop;
     renamer.style.width = "100%";
@@ -192,37 +202,36 @@ dk.solution.rename = function dk_solution_rename(node) {
 
             //TODO: set associated icon
         }
-    } 
+    }
 }
 
-dk.solution.delete = function dk_solution_delete(path) {
+dk.solution.delete = function dk_solution_delete(instance, path) {
     console.debug("TODO: dk.solution.delete(" + path + ")");
 }
-dk.solution.copy = function dk_solution_copy(path) {
+dk.solution.copy = function dk_solution_copy(instance, path) {
     console.debug("TODO: dk.solution.copy(" + path + ")");
 }
-dk.solution.cut = function dk_solution_cut(path) {
+dk.solution.cut = function dk_solution_cut(instance, path) {
     console.debug("TODO: dk.solution.cut(" + path + ")");
 }
-dk.solution.paste = function dk_solution_paste(path) {
+dk.solution.paste = function dk_solution_paste(instance, path) {
     console.debug("TODO: dk.solution.paste");
 }
-dk.solution.import = function dk_solution_import(path) {
+dk.solution.import = function dk_solution_import(instance, path) {
     console.debug("TODO: dk.solution.import(" + path + ")");
 }
-dk.solution.gitAdd = function dk_solution_gitAdd(path) {
+dk.solution.gitAdd = function dk_solution_gitAdd(instance, path) {
     console.debug("TODO: dk.solution.gitAdd(" + path + ")");
 }
-dk.solution.upxCompress = function dk_solution_upxCompress(path) {
+dk.solution.upxCompress = function dk_solution_upxCompress(instance, path) {
     console.debug("TODO: dk.solution.upxCompress(" + path + ")");
 }
 
-dk.solution.updatePath = function dk_solution_updatePath(_path) {
+dk.solution.updatePath = function dk_solution_updatePath(instance, _path) {
     console.debug("dk.solution.updatPath(" + _path + ")");
     dk.file.getPathObject(_path, function dk_file_getPathObject(path) {
-
-        dk.solution.path.value = path.aPath;
-        dk.solution.list.innerHTML = "";
+        instance.path.value = path.aPath;
+        instance.list.innerHTML = "";
         dk.file.directoryContents(path.aPath, function dk_file_directoryContents_callback(results) {
             if (!results)
                 return error("results invalid");
@@ -232,14 +241,34 @@ dk.solution.updatePath = function dk_solution_updatePath(_path) {
                     if (dir) {
                         //Folders
                         const folderpath = path.aPath + items[d] + "/";
-                        const folder = dk.gui.createTag("div", dk.solution.list, {
+                        const folder = dk.gui.createTag("div", instance.list, {
                             innerHTML: items[d],
-                            onclick: dk.solution.highlight,
-                            ondblclick: dk.solution.dblclick,
-                            oncontextmenu: dk.solution.rightclickmenu
+                            onclick: function onclick() {
+                                dk.solution.highlight(instance, event);
+                            },
+                            ondblclick: function ondblclick() {
+                                dk.solution.dblclick(instance, event);
+                            },
+                            oncontextmenu: function oncontextmenu() {
+                                dk.solution.rightclickmenu(instance, event);
+                            }
                         });
+
+                        //const folder = dk.gui.createElement(instance.list, "div", "DKSolutionFolder");
                         folder.setAttribute("dk_solution", "folder");
                         folder.setAttribute("path", folderpath);
+                        /*
+                        folder.innerHTML = items[d];
+                        folder.onclick = function folder_onclick() {  
+                            dk.solution.highlight(instance, event);
+                        }
+                        folder.ondblclick = function folder_ondblclick() {
+                            dk.solution.dblclick(instance, event);
+                        }
+                        folder.oncontextmenu = function folder_oncontextmenu(instance) {
+                            dk.solution.rightclickmenu(instance, event);
+                        }
+                        */
                     }
                 });
             }
@@ -247,8 +276,8 @@ dk.solution.updatePath = function dk_solution_updatePath(_path) {
                 dk.file.isDir(path.aPath + items[f], function dk_file_isDir_callback(dir) {
                     if (!dir) {
                         //Files
-                        const file = dk.gui.createElement(dk.solution.list, "div", "DKSolutionFile");
                         const filepath = path.aPath + items[f];
+                        const file = dk.gui.createElement(instance.list, "div", "DKSolutionFile");
                         file.setAttribute("dk_solution", "file");
                         file.setAttribute("path", filepath);
                         file.style.whiteSpace = "nowrap";
@@ -256,10 +285,15 @@ dk.solution.updatePath = function dk_solution_updatePath(_path) {
                         file.style.backgroundRepeat = "no-repeat";
                         file.style.cursor = "default";
                         file.innerHTML = items[f];
-                        file.onclick = dk.solution.highlight;
-                        file.ondblclick = dk.solution.dblclick
-                        file.oncontextmenu = dk.solution.rightclickmenu;
-
+                        file.onclick = function() {
+                            dk.solution.highlight(instance, event);
+                        }
+                        file.ondblclick = function() {
+                            dk.solution.dblclick(instance, event);
+                        }
+                        file.oncontextmenu = function() {
+                            dk.solution.rightclickmenu(instance, event);
+                        }
                         var extension = dk.file.getExtention(items[f]);
                         if ((extension === "png") || (extension === "jpeg") || (extension === "jpg") || (extension === "bmp") || (extension === "tiff") || (extension === "tif") || (extension === "gif") || (extension === "tga") || (extension === "ico"))
                             file.style.backgroundImage = "url(\"DKFile/picture.png\")";

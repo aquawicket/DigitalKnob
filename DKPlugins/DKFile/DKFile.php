@@ -297,7 +297,6 @@ function getDKAppAssetsPath(){
 }
 
 function pushDKAssets(){
-
     $filemap = [];
 
     //Fist get all of the paths

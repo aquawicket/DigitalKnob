@@ -32,6 +32,15 @@ const CreateMyPlugin = function CreateMyPlugin() {
     dk.frame.create(myPlugin);
 }
 
+/**
+ * returns a newly created DKPlugin instance 
+ *
+ * Example: const myThing = new DKPlugin(identifier)
+ *
+ * @param {identifier} "new" to create a new instance or a unique identifier
+ * @returns the instance of the created DKPlugin object
+ * @type object
+ */
 const DKPlugin = function DKPlugin(identifier) {
     DKPlugin.prototype.init = function DKPlugin_init(callback) {
         //console.debug("DKPlugin.prototype.init()");
@@ -42,17 +51,17 @@ const DKPlugin = function DKPlugin(identifier) {
         console.debug("DKPlugin.prototype.end");
     }
 
-    DKPlugin.prototype.getInstance = function DKPlugin_getInstance(instance) {
+    DKPlugin.prototype.getInstance = function DKPlugin_getInstance(_instance) {
         //console.debug("DKPlugin.getInstance() called");
-        const index = DKPlugin.instances.indexOf(instance);
+        const index = DKPlugin.instances.indexOf(_instance);
         if (index <= -1)
             return error("Unable to find instance in DKPlugin");
         return DKPlugin.instances[index];
     }
 
-    DKPlugin.prototype.removeInstance = function DKPlugin_removeInstance(instance) {
+    DKPlugin.prototype.removeInstance = function DKPlugin_removeInstance(_instance) {
         //console.debug("DKPlugin.removeInstance() called");
-        const index = DKPlugin.instances.indexOf(instance);
+        const index = DKPlugin.instances.indexOf(_instance);
         if (index <= -1)
             return error("Unable to find instance in DKPlugin");
         DKPlugin.instances.splice(index, 1);
@@ -62,7 +71,7 @@ const DKPlugin = function DKPlugin(identifier) {
 
     DKPlugin.prototype.getInstanceInfo = function DKPlugin_getInstanceInfo(callerName) {
         //console.log("DKPlugin.getInstanceIndex() called");
-        const index = DKPlugin.instances.indexOf(this.instance);
+        const index = DKPlugin.instances.indexOf(this._instance);
         if (index <= -1)
             return error("Unable to find instance in DKPlugin");
         //console.debug("(INSTANCE) name:" + callerName + " index:" + index + " total:" + DKPlugin.instances.length);
@@ -82,7 +91,7 @@ const DKPlugin = function DKPlugin(identifier) {
     }
 
     DKPlugin.prototype.close = function DKPlugin_close() {
-        const index = DKPlugin.instances.indexOf(this.instance);
+        const index = DKPlugin.instances.indexOf(this._instance);
         if (index <= -1)
             return error("Unable to find instance in DKPlugin");
         DKPlugin.instances[index].removeInstance(DKPlugin.instances[index]);
@@ -113,17 +122,17 @@ const DKPlugin = function DKPlugin(identifier) {
             }
         }
     }
-    this.instance = this;
+    this._instance = this;
 
     //Not sure how this can happen, just to be safe...
-    if (DKPlugin.instances.includes(this.instance)) {
-        const index = DKPlugin.instances.indexOf(this.instance);
+    if (DKPlugin.instances.includes(this._instance)) {
+        const index = DKPlugin.instances.indexOf(this._instance);
         console.error("this.instance already exists in DKPlugin @inxed " + index);
         DKPlugin.instances[index].ok = false;
         return DKPlugin.instances[index];
     }
 
-    const index = DKPlugin.instances.push(this.instance) - 1;
+    const index = DKPlugin.instances.push(this._instance) - 1;
     DKPlugin.instances[index].ok = true;
     //console.debug("created DKPlugin("+identifier+") @index "+index);
     return DKPlugin.instances[index];

@@ -247,12 +247,12 @@ dk.loadJs = function dk_loadJs(url, dk_loadJs_callback) {
         url
     });
     if (dk.getObjects().includes(url)) {
-        console.log(url + " already loaded...");
+        console.log(url + " script already loaded...");
         dk_loadJs_callback(true);
         return true;
 
-        console.warn(url + " already loaded. Reloading...");
-        dk.close(url);
+        //console.warn(url + " already loaded. Reloading...");
+        //dk.close(url);
         /*
         var plugin = dk.getPlugin(url);
         plugin && console.log("closing dk." + plugin.name + " plugin");
