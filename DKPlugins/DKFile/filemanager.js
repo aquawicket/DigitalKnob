@@ -60,8 +60,8 @@ dk.filemanager.highlight = function dk_filemanager_highlight(instance, event) {
     for (let n = 0; n < nodes.length; n++) {
         if (!nodes[n])
             console.error("nodes[" + n + "] invalid\n");
-        nodes[n].style.backgroundColor = "rgb(255,255,255)";
-        nodes[n].style.color = "rgb(0,0,0)";
+        nodes[n].style.backgroundColor = instance.list.style.backgroundColor;
+        nodes[n].style.color = instance.list.style.color;
     }
     if (event.currentTarget.getAttribute("dk_filemanager") === "folder" || event.currentTarget.getAttribute("dk_filemanager") === "file") {
         event.currentTarget.style.backgroundColor = "rgb(123,157,212)";
@@ -84,23 +84,19 @@ dk.filemanager.rightclickmenu = function(instance, event) {
     dk.filemanager.highlight(instance, event);
     const folder = event.currentTarget.getAttribute("dk_filemanager") === "folder";
     const file = event.currentTarget.getAttribute("dk_filemanager") === "file";
+    const node = event.currentTarget;
     const path = event.currentTarget.getAttribute("path");
     const menu = dk.menu.createInstance();
-    if (file)
-        dk.menu.addItem(menu, "Edit", function dk_menu_edit() {
+    file && dk.menu.addItem(menu, "Edit", function dk_menu_edit() {
             dk.filemanager.editFile(instance, path);
         });
     dk.menu.addItem(menu, "Open", function dk_menu_open() {
-        if (folder)
-            dk.filemanager.openFolder(instance, path);
-        if (file)
-            dk.filemanager.openFile(instance, path);
+        folder && dk.filemanager.openFolder(instance, path);
+        file && dk.filemanager.openFile(instance, path);
     });
     dk.menu.addItem(menu, "Open In OS", function dk_menu_openinos() {
-        if (folder)
-            dk.filemanager.openFolderInOS(instance, path);
-        if (file)
-            dk.filemanager.openFileInOS(instance, path);
+        folder && dk.filemanager.openFolderInOS(instance, path);
+        file && dk.filemanager.openFileInOS(instance, path);
     });
     dk.menu.addItem(menu, "New File", function dk_menu_newfile() {
         dk.filemanager.newFile(instance);
@@ -109,7 +105,7 @@ dk.filemanager.rightclickmenu = function(instance, event) {
         dk.filemanager.newFolder(instance);
     });
     dk.menu.addItem(menu, "Rename", function dk_menu_rename() {
-        dk.filemanager.rename(instance, path);
+        dk.filemanager.rename(instance, node);
     });
     dk.menu.addItem(menu, "Delete", function dk_menu_delete() {
         dk.filemanager.delete(instance, path);
@@ -269,10 +265,6 @@ dk.filemanager.updatePath = function dk_filemanager_updatePath(instance, _path) 
                         const file = dk.gui.createElement(instance.list, "div", "managerFile");
                         file.setAttribute("dk_filemanager", "file");
                         file.setAttribute("path", filepath);
-                        file.style.whiteSpace = "nowrap";
-                        file.style.paddingLeft = "17px";
-                        file.style.backgroundRepeat = "no-repeat";
-                        file.style.cursor = "default";
                         file.innerHTML = items[n];
                         file.onclick = function() {
                             dk.filemanager.highlight(instance, event);
