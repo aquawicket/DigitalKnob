@@ -2,84 +2,80 @@
 
 dk.fileassociation = new DKPlugin("dk_fileassociation");
 
-dk.fileassociation.onevent = function dk_fileassociation_onevent(event) {
-    console.debug("dk.fileassociation.onevent(" + event.currentTarget.id + "," + event.type + "," + event.value + ")");
-}
-
 dk.fileassociation.edit = function dk_fileAssociation_edit(file) {
     dk.fileassociation.opentext(file);
     return true;
 }
 
 dk.fileassociation.open = function dk_fileAssociation_open(file) {
-    if (file.indexOf(".") === -1) {
+    if (!file.includes(".")) {
         return false;
     }
-    if (file.indexOf(".js") !== -1) {
+    if (file.includes(".js")) {
         dk.fileassociation.openjs(file);
         return true;
     }
-    if (file.indexOf(".html") !== -1) {
+    if (file.includes(".html")) {
         dk.fileassociation.openhtml(file);
         return true;
     }
-    if (file.indexOf(".css") !== -1) {
+    if (file.includes(".css")) {
         dk.fileassociation.opencss(file);
         return true;
     }
-    if (file.indexOf(".png") !== -1) {
+    if (file.includes(".png")) {
         dk.fileassociation.openimage(file);
         return true;
     }
-    if (file.indexOf(".bmp") !== -1) {
+    if (file.includes(".bmp")) {
         dk.fileassociation.openimage(file);
         return true;
     }
-    if (file.indexOf(".gif") !== -1) {
+    if (file.includes(".gif")) {
         dk.fileassociation.openimage(file);
         return true;
     }
-    if (file.indexOf(".jpeg") !== -1) {
+    if (file.includes(".jpeg")) {
         dk.fileassociation.openimage(file);
         return true;
     }
-    if (file.indexOf(".jpg") !== -1) {
+    if (file.includes(".jpg")) {
         dk.fileassociation.openimage(file);
         return true;
     }
-    if (file.indexOf(".tiff") !== -1) {
+    if (file.includes(".tiff")) {
         dk.fileassociation.openimage(file);
         return true;
     }
-    if (file.indexOf(".tif") !== -1) {
+    if (file.includes(".tif")) {
         dk.fileassociation.openimage(file);
         return true;
     }
-    if (file.indexOf(".osgt") !== -1) {
+    if (file.includes(".osgt")) {
         dk.fileassociation.openmodel(file);
         return true;
     }
-    if (file.indexOf(".osg") !== -1) {
+    if (file.includes(".osg")) {
         dk.fileassociation.openmodel(file);
         return true;
     }
-    if (file.indexOf(".wav") !== -1) {
+    if (file.includes(".wav")) {
         dk.fileassociation.openaudio(file);
         return true;
     }
-    if (file.indexOf(".mp3") !== -1) {
+    if (file.includes(".mp3")) {
         dk.fileassociation.openaudio(file);
         return true;
     }
-    if (file.indexOf(".avi") !== -1) {
+    if (file.includes(".avi")) {
         dk.fileassociation.openvideo(file);
         return true;
     }
-    if (file.indexOf(".mkv") !== -1) {
+    if (file.includes(".mkv")) {
         dk.fileassociation.openvideo(file);
         return true;
     }
-    if (file.indexOf(".mp4") !== -1) {
+    if (file.includes(".mp4")) {
         dk.fileassociation.openvideo(file);
         return true;
     }
@@ -160,17 +156,14 @@ dk.fileassociation.opencss = function dk_fileAssociation_opencss(path) {
 }
 
 dk.fileassociation.opentext = function dk_fileassociation_opentext(path) {
-    //DK_Toggle("DKNotepad.html");
     dk.create("DKNotepad/DKNotepad.js", function dk_create_callback() {
-        //dk.frame.create("DKNotepad/DKNotepad.html");
-        dk.notepad.open(path);
+        dk.notepad.createOpen(path);
     });
 }
 
 dk.fileassociation.openimage = function dk_fileassociation_openimage(path) {
     dk.create("DKPaint/DKPaint.js", function dk_create_callback() {
-        dk.frame.create(byId("DKPaint/DKPaint.html"));
-        dk.paint.open(path);
+        dk.paint.createOpen(path);
     });
 }
 

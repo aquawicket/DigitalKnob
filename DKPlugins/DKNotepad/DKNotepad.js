@@ -9,18 +9,6 @@ dk.notepad.init = function dk_notepad_init(callback) {
 }
 
 dk.notepad.end = function dk_notepad_end() {
-    /*
-    byId("DKNotepad/DKNotepad.html").removeEventListener("OpenFile", dk.notepad.onevent);
-    byId("DKNotepad/DKNotepad.html").removeEventListener("SaveFile", dk.notepad.onevent);
-    byId("DKNotepad_Text").removeEventListener("contextmenu", dk.notepad.onevent);
-    byId("DKNotepad_File").removeEventListener("click", dk.notepad.onevent);
-    byId("DKNotepad_Edit").removeEventListener("click", dk.notepad.onevent);
-    byId("DKNotepad_Format").removeEventListener("click", dk.notepad.onevent);
-    byId("DKNotepad_View").removeEventListener("click", dk.notepad.onevent);
-    byId("DKNotepad_Help").removeEventListener("click", dk.notepad.onevent);
-    */
-    //dk.notepad.file.close();
-    //dk.close("DKNotepad/DKNotepad.html");
     dk.close("DKNotepad/DKNotepad.css");
     dk.close("DKNotepad/DKNotepadShortcuts.js");
 }
@@ -63,7 +51,17 @@ dk.notepad.create = function dk_notepad_create(dk_notepad_create_callback) {
         }
         instance.currentFile = "";
         dk.frame.create(instance);
-        return dk_notepad_create_callback && dk_notepad_create_callback(instance);
+        return dk_notepad_create_callback(instance);
+    });
+}
+
+dk.notepad.createOpen = function dk_notepad_createOpen(file) {
+    dk.notepad.create(function(instance) {
+        dk.frame.setTitle(instance, "DKNotepad - "+file);
+        instance.currentfile = file;
+        dk.file.fileToString(file, function(str) {
+            instance.text.value = str;
+        });
     });
 }
 
@@ -76,42 +74,34 @@ dk.notepad.filemenu = function dk_notepad_filemenu(instance, event) {
     });
     dk.menu.addItem(menu, "Open", function dk_menu_open() {
         dk.create("DKFile/filemanager.js", function() {
-            dk.filemanager.getFile(function(file){
-                console.debug("dk.filemanager.getFile: "+file);
+            dk.filemanager.createOpen(function(file) {
+                dk.frame.setTitle(instance, "DKNotepad - "+file);
+                instance.currentfile = file;
+                dk.file.fileToString(file, function(str) {
+                    instance.text.value = str;
+                });
             });
         });
     });
     dk.menu.addItem(menu, "Save", function dk_menu_save() {
         if (!currentFile) {
-            DKNotepadFile_SaveAs();
+            dk.notepad.saveAs();
             return;
         }
-        var text = byId("DKNotepad_Text").value;
-        //var assets = DKAssets_LocalAssets();
-        //console.log("DKNotepadFile_Save(): text = "+text);
-        DKFile_StringToFile(text, currentFile);
-        dk.create("DKGui/DKMessageBox.js", function() {
-            DKFrame_Html("DKGui/DKMessageBox.html");
-            DKMessageBox_Message("File Saved");
+        var str = instance.text.value;
+        dk.file.fieToString(str, currentFile, function(result) {
+            alert("File Saved");
         });
     });
     dk.menu.addItem(menu, "Save As", function dk_menu_saveas() {
-        dk.create("DKFile/DKSaveFile.js", function() {
-        DKFrame_Html("DKFile/DKSaveFile.html");
-
-        var event = new Object("SetFile");
-        //var event = new Event("SetFile"); //FIXME
-        event.currentTarget = byId("DKFile/DKSaveFile.html");
-        event.type = "SetFile";
-        event.value = "DKNotepad/DKNotepad.html,SaveFile,/,absolute";
-        window.addEventListener("SetFile", function() {
-            console.log("Creating events is working!")
-        }, false);
-        window.dispatchEvent(event);
-        byId("DKFile/DKSaveFile.html").dispatchEvent(event);
-
-        //DKSendEvent("DKFile/DKSaveFile.html", "SetFile", "DKNotepad/DKNotepad.html,SaveFile,/,absolute"); // To -> DKFileDialog
-    });
+        dk.create("DKFile/filemanager.js", function() {
+            dk.filemanager.createSaveAs(function(file) {
+                console.debug("dk.filemanager.saveFile: " + file);
+                dk.file.StringToFile(instance.text.value, file, function(result){
+                    alert("File Saved");
+                });
+            });
+        });
     });
     dk.menu.addItem(menu, "Print", function dk_menu_saveas() {//CPP_DKCef_Print(0);
     });
@@ -141,32 +131,4 @@ dk.notepad.rightclickmenu = function dk_notepad_rightclickmeny(instance, event) 
     dk.menu.addItem(menu, "Paste", function dk_menu_paste() {
         dk.clipboard.paste(instance.text);
     });
-}
-
-dk.notepad.onevent = function dk_notepad_onevent(event) {
-    if (event.type === "OpenFile") {
-        DKNotepad_Open(event.value);
-    }
-    if (event.type === "SaveFile") {
-        DKNotepad_Save(event.value);
-    }
-    //if(event.type === "SetFile"){
-    //	DKNotepad_Open(event.value);
-    //}
-}
-
-dk.notepad.open = function dk_notepad_open(file) {
-    //TODO - set the frame title with the filename
-    dk.notepad.create(function(instance) {
-        instance.currentfile = file;
-        dk.file.fileToString(file, function(str){
-            instance.text.value = str;
-        });
-    });
-}
-
-dk.notepad.save = function dk_notepad_save(file) {
-    var text = byId("DKNotepad_Text").value;
-    //console.log(("DKNotepad_Save("+file+"): text = "+text+"\n");
-    DKFile_StringToFile(text, file);
 }

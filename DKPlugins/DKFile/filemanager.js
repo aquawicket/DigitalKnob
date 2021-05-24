@@ -9,7 +9,6 @@ dk.filemanager.init = function dk_filemanager_init(callback) {
 }
 
 dk.filemanager.end = function dk_filemanager_end() {
-    //dk.close("DKFile/manager.html");
     dk.close("DKFile/filemanager.css");
     dk.create("DKFile/DKFileAssociation.js");
 }
@@ -45,11 +44,41 @@ dk.filemanager.create = function dk_filemanager_create(dk_filemanager_create_cal
     });
 }
 
-dk.filemanager.getFile = function dk_filemanager_getfile(callback){
+dk.filemanager.close = function dk_filemanager_close(instance) {
+    dk.frame.close(instance);
+}
+
+dk.filemanager.createOpen = function dk_filemanager_getfile(dk_filemanager_createOpen_callback){
     dk.filemanager.create(function(instance){
-        //TODO - cancel and ok buttons here
+        dk.frame.setTitle(instance, "Open");
         instance.cancel.style.visibility = "visible";
         instance.ok.style.visibility = "visible";
+        instance.cancel.onclick = function(){
+            dk.filemanager.close(instance);
+            return true;
+        }
+        instance.ok.onclick = function(){
+            dk_filemanager_createOpen_callback(instance.currentFile);
+            dk.filemanager.close(instance);
+            return true;
+        }
+    });
+}
+
+dk.filemanager.createSaveAs = function dk_filemanager_savefile(dk_filemanager_createSaveAs_callback){
+    dk.filemanager.create(function(instance){
+        dk.frame.setTitle(instance, "Save As");
+        instance.cancel.style.visibility = "visible";
+        instance.ok.style.visibility = "visible";
+        instance.cancel.onclick = function(){
+            dk.filemanager.close(instance);
+            return true;
+        }
+        instance.ok.onclick = function(){
+            dk_filemanager_createSaveAs_callback(instance.currentFile);
+            dk.filemanager.close(instance);
+            return true;
+        }
     });
 }
 
@@ -77,6 +106,7 @@ dk.filemanager.highlight = function dk_filemanager_highlight(instance, event) {
         event.currentTarget.style.backgroundColor = "rgb(123,157,212)";
         event.currentTarget.style.color = "rgb(255,255,255)";
     }
+    instance.currentFile = event.currentTarget.getAttribute("path");
 }
 
 dk.filemanager.dblclick = function(instance, event) {
@@ -86,7 +116,7 @@ dk.filemanager.dblclick = function(instance, event) {
     if (event.currentTarget.getAttribute("dk_filemanager") === "folder")
         dk.filemanager.openFolder(instance, path);
     else if (event.currentTarget.getAttribute("dk_filemanager") === "file")
-        dk.filemanager.openFile(instance, path);
+        dk.filemanager.openFile(path);
 }
 
 dk.filemanager.rightclickmenu = function(instance, event) {
@@ -146,8 +176,8 @@ dk.filemanager.editFile = function dk_filemanager_editFile(instance, path) {
 dk.filemanager.openFolder = function dk_filemanager_openFolder(instance, path) {
     return dk.filemanager.updatePath(instance, path);
 }
-dk.filemanager.openFile = function dk_filemanager_openFolder(instance, path) {
-    return dk.fileassociation.open(instance, path);
+dk.filemanager.openFile = function dk_filemanager_openFile(path) {
+    return dk.fileassociation.open(path);
 }
 dk.filemanager.openFolderInOS = function dk_filemanager_openFolderInOS(instance, path) {
     console.debug("TODO: dk.filemanager.openFolderInOS(" + path + ")");
