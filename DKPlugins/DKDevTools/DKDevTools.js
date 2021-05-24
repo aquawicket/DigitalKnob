@@ -30,9 +30,9 @@ dk.devtools.addTools = function dk_devtools_addTools() {
     });
     // IF you MUST have access to push, comment this out temporarilty
     //pull.disabled = true;
-    dk.gui.createImageButton(dk.devtools.div, "DKSolution", "DKFile/folder.png", "2rem", "", "", "2px", "", "", function(){
-        dk.create("DKFile/DKSolution.js", function(){
-            dk.solution.create();
+    dk.gui.createImageButton(dk.devtools.div, "File Manager", "DKFile/folder.png", "2rem", "", "", "2px", "", "", function(){
+        dk.create("DKFile/filemanager.js", function(){
+            dk.filemanager.create();
         });
     })
 }

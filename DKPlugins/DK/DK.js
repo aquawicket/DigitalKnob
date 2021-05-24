@@ -133,11 +133,8 @@ dk.getPlugin = function dk_getPlugin(url) {
         }
     }
     */
-    if (pluginName.substring(0, 2) === "dk") {
+    if (pluginName.substring(0, 2) === "dk")
         pluginName = pluginName.slice(2);
-    } else {
-        return false;
-    }
     let plugin = dk[pluginName];
     if (!plugin) {
         if (pluginName !== "plugin")

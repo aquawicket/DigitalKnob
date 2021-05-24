@@ -347,8 +347,11 @@ dk.frame.restoreSize = function dk_frame_restoreSize(frame) {
 
 dk.frame.createNewWindow = function dk_frame_createNewWindow(title, width, height) {
     const newWin = new DKPlugin(title);
-    if (!newWin.ok)
+    if (!newWin.ok){
+        const frame = dk.frame.getFrame(newWin);
+        dk.frame.bringToFront(frame);
         return false;
+    }
     const div = document.createElement("div");
     div.id = title;
     div.style.width = width;

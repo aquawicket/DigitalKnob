@@ -6,6 +6,11 @@ dk.fileassociation.onevent = function dk_fileassociation_onevent(event) {
     console.debug("dk.fileassociation.onevent(" + event.currentTarget.id + "," + event.type + "," + event.value + ")");
 }
 
+dk.fileassociation.edit = function dk_fileAssociation_edit(file) {
+    dk.fileassociation.opentext(file);
+    return true;
+}
+
 dk.fileassociation.open = function dk_fileAssociation_open(file) {
     if (file.indexOf(".") === -1) {
         return false;
@@ -157,7 +162,7 @@ dk.fileassociation.opencss = function dk_fileAssociation_opencss(path) {
 dk.fileassociation.opentext = function dk_fileassociation_opentext(path) {
     //DK_Toggle("DKNotepad.html");
     dk.create("DKNotepad/DKNotepad.js", function dk_create_callback() {
-        dk.frame.create("DKNotepad/DKNotepad.html");
+        //dk.frame.create("DKNotepad/DKNotepad.html");
         dk.notepad.open(path);
     });
 }
