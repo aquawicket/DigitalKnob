@@ -75,10 +75,10 @@ dk.notepad.filemenu = function dk_notepad_filemenu(instance, event) {
         instance.currentFile = "";
     });
     dk.menu.addItem(menu, "Open", function dk_menu_open() {
-        dk.create("DKFile/DKOpenFile.js", function() {
-            dk.openfile.create();
-            dk.openfile.updatePath("/");
-            //DKSendEvent("DKFile/DKOpenFile.html", "GetFile", "DKNotepad/DKNotepad.html,OpenFile,/,absolute"); // To -> DKOpenFile
+        dk.create("DKFile/filemanager.js", function() {
+            dk.filemanager.getFile(function(file){
+                console.debug("dk.filemanager.getFile: "+file);
+            });
         });
     });
     dk.menu.addItem(menu, "Save", function dk_menu_save() {
@@ -157,9 +157,11 @@ dk.notepad.onevent = function dk_notepad_onevent(event) {
 
 dk.notepad.open = function dk_notepad_open(file) {
     //TODO - set the frame title with the filename
-    currentFile = file;
-    dk.file.fileToString(currentFile, function(str) {
-        byId("DKNotepad_Text").value = str;
+    dk.notepad.create(function(instance) {
+        instance.currentfile = file;
+        dk.file.fileToString(file, function(str){
+            instance.text.value = str;
+        });
     });
 }
 

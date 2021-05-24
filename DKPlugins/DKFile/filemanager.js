@@ -28,6 +28,8 @@ dk.filemanager.create = function dk_filemanager_create(dk_filemanager_create_cal
         instance.up = html.querySelector("[dk_filemanager='up']");
         instance.path = html.querySelector("[dk_filemanager='path']");
         instance.list = html.querySelector("[dk_filemanager='list']");
+        instance.cancel = html.querySelector("[dk_filemanager='cancel']");
+        instance.ok = html.querySelector("[dk_filemanager='ok']");
         instance.up.onclick = function() {
             dk.filemanager.upDir(instance, event);
         }
@@ -40,6 +42,14 @@ dk.filemanager.create = function dk_filemanager_create(dk_filemanager_create_cal
         dk.filemanager.openFolder(instance, instance.path.value);
         dk.frame.create(instance);
         return dk_filemanager_create_callback && dk_filemanager_create_callback(instance);
+    });
+}
+
+dk.filemanager.getFile = function dk_filemanager_getfile(callback){
+    dk.filemanager.create(function(instance){
+        //TODO - cancel and ok buttons here
+        instance.cancel.style.visibility = "visible";
+        instance.ok.style.visibility = "visible";
     });
 }
 
