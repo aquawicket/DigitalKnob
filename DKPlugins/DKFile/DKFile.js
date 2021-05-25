@@ -305,8 +305,6 @@ if (!dk.hasCPP()) {
                 return error("dk.php invalid", callback);
             if (!dk.file.onlineAssets)
                 return error("dk.file.onlineAssets invalid", callback);
-
-            //path = path.replace(" ", "_");
             !path.includes(dk.file.onlineAssets) && (path = dk.file.onlineAssets + path);
             dk.php.call('POST', "DKFile/DKFile.php", "fileToString", path, function dk_php_call_callback(str) {
                 if (!str)
@@ -338,9 +336,9 @@ if (!dk.hasCPP()) {
             return error("dk.php invalid", callback);
         if (!dk.file.onlineAssets)
             return error("dk.file.onlineAssets invalid", callback);
-        //path = path.replace(" ", "_");
         if (!path.includes(dk.file.onlineAssets))
             path = dk.file.onlineAssets + path;
+            //str = dk.stringToBinary(str);
         dk.php.call('POST', "DKFile/DKFile.php", "stringToFile", path, str, flags, function dk_php_call_callback(result) {
             return callback(result);
         });

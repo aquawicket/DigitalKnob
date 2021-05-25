@@ -76,8 +76,8 @@ function error($message){
     die(json_encode(array('status'=>'error', 'message'=>$message)));
 }
 
-if($_REQUEST["x"]){
-	$json = urldecode($_REQUEST["x"]);
+if($_REQUEST["dkx"]){
+	$json = urldecode($_REQUEST["dkx"]);
 	$obj = json_decode($json);
     $func = $obj->func;
     $args = $obj->args;
@@ -177,4 +177,26 @@ function sendEmail($address, $subject, $msg){
     // send email
     mail($address,$subject,$msg);
 }
+
+function stringToBinary($string){
+    $characters = str_split($string);
+    $binary = [];
+    foreach ($characters as $character) {
+        $data = unpack('H*', $character);
+        $binary[] = base_convert($data[1], 16, 2);
+    }
+    return implode(' ', $binary);    
+}
+
+function binaryToString($binary){
+    $binaries = explode(' ', $binary);
+    $string = null;
+    foreach ($binaries as $binary) {
+        $string .= pack('H*', dechex(bindec($binary)));
+    }
+    return $string;    
+}
+
+//https://www.php.net/manual/en/function.pack.php#93085
+
 ?>

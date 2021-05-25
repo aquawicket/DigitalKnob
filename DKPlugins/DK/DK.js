@@ -3,14 +3,20 @@
 window.dk = new Object;
 const duktape = window.duktape;
 
-//This will keep a record of all messages to give to dk.console later
+//Keep a object reference to the old console
+const xconsole = new Object;
+//Create a logger for console
 dk.x = new Object;
 (function() {
-    (dk.x.record = []) && (dk.x.debug = console.debug) && (dk.x.error = console.error) && (dk.x.log = console.log)
+    xconsole.debug = console.debug;
+    xconsole.error = console.error;
+    xconsole.log = console.log;
+    xconsole.warn = console.warn;
+    dk.x.record = [];
     dk.x.logger = function(lvl, args) {
-        !dk.hasCPP() && dk.x[lvl] && dk.x[lvl].apply(this, Array.prototype.slice.call(args));
-		dk.hasCPP && dk && dk.x && dk.x.log.apply(this, Array.prototype.slice.call(args));
-		var obj = {};
+        !dk.hasCPP() && xconsole[lvl].apply(this, Array.prototype.slice.call(args));
+        dk.hasCPP() && dk && dk.x && dk.x.log.apply(this, Array.prototype.slice.call(args));
+        var obj = {};
         (obj[lvl] = args[0]) && (dk.x && dk.x.record.push(obj))
     }
     console.debug = function() {
@@ -26,6 +32,7 @@ dk.x = new Object;
         dk.x && dk.x.logger("warn", arguments);
     }
 }());
+
 
 const require = function require() {
     for (let n = 0; n < arguments.length; n++) {
@@ -43,9 +50,12 @@ const byId = function byId(id) {
 }
 
 const error = function error(str, callback, rtnval) {
-    !rtnval && (rtnval = false);
-    //console.error(str);
+    //FIXME: not working
+    xconsole.error(str);
+    
     throw new Error(str);
+    //FIXME: this code is never reached. Set an argument to determine if the error is fatal. 
+    !rtnval && (rtnval = false);
     callback && callback(rtnval);
     return rtnval;
 }
@@ -1028,7 +1038,28 @@ dk.validateStrict = function dk_validateStrict(str) {
     return str;
 }
 
-//////// Pollyfils and Prototypes
+//https://stackoverflow.com/a/54430417/688352
+dk.stringToBinary = function dk_sringToBinary(string) {
+    //for BINARY maxBytes = 255
+    //for VARBINARY maxBytes = 65535
+    const maxBytes = 255;
+    let binaryOutput = '';
+    if (string.length > maxBytes)
+        string = string.substring(0, maxBytes);
+    for (let i = 0; i < string.length; i++)
+        binaryOutput += string[i].charCodeAt(0).toString(2) + ' ';
+    return binaryOutput;
+}
+
+dk.binaryToString = function dk_binaryToString(binary) {
+    const arrayOfBytes = binary.split(' ');
+    let stringOutput = '';
+    for (let i = 0; i < arrayOfBytes.length; i++)
+        stringOutput += String.fromCharCode(parseInt(arrayOfBytes[i], 2));
+    return stringOutput;
+}
+
+///// Pollyfils and Prototypes
 
 // trim for IE8
 if (typeof String.prototype.trim !== 'function') {

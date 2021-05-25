@@ -76,6 +76,10 @@ function stringToFile($path, $data, $flags = 0){
     if($flags === "FILE_USE_INCLUDE_PATH"){ $flags = FILE_USE_INCLUDE_PATH; }
     if($flags === "LOCK_EX"){ $flags = LOCK_EX; }
     $bytes = file_put_contents($path, $data, $flags);
+    //$data = binaryToString($data);
+    //$ptr = fopen($path, 'wb');
+    //$bytes = fwrite($ptr, $data);
+    //fclose($ptr);
     if($bytes === false)
         return error("stringToFile(): failed\n");
     return $bytes;

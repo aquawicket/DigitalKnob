@@ -58,7 +58,7 @@ dk.notepad.create = function dk_notepad_create(dk_notepad_create_callback) {
 dk.notepad.createOpen = function dk_notepad_createOpen(file) {
     dk.notepad.create(function(instance) {
         dk.frame.setTitle(instance, "DKNotepad - "+file);
-        instance.currentfile = file;
+        instance.currentFile = file;
         dk.file.fileToString(file, function(str) {
             instance.text.value = str;
         });
@@ -76,7 +76,7 @@ dk.notepad.filemenu = function dk_notepad_filemenu(instance, event) {
         dk.create("DKFile/filemanager.js", function() {
             dk.filemanager.createOpen(function(file) {
                 dk.frame.setTitle(instance, "DKNotepad - "+file);
-                instance.currentfile = file;
+                instance.currentFile = file;
                 dk.file.fileToString(file, function(str) {
                     instance.text.value = str;
                 });
@@ -84,12 +84,12 @@ dk.notepad.filemenu = function dk_notepad_filemenu(instance, event) {
         });
     });
     dk.menu.addItem(menu, "Save", function dk_menu_save() {
-        if (!currentFile) {
+        if (!instance.currentFile) {
             dk.notepad.saveAs();
             return;
         }
         var str = instance.text.value;
-        dk.file.fieToString(str, currentFile, function(result) {
+        dk.file.stringToFile(str, instance.currentFile, 0, function(result) {
             alert("File Saved");
         });
     });
@@ -97,7 +97,7 @@ dk.notepad.filemenu = function dk_notepad_filemenu(instance, event) {
         dk.create("DKFile/filemanager.js", function() {
             dk.filemanager.createSaveAs(function(file) {
                 console.debug("dk.filemanager.saveFile: " + file);
-                dk.file.StringToFile(instance.text.value, file, function(result){
+                dk.file.StringToFile(instance.text.value, file, 0, function(result){
                     alert("File Saved");
                 });
             });

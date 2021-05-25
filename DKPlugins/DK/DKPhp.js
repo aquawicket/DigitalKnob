@@ -37,7 +37,7 @@ dk.php.call = function dk_php_call(httpMethod, phpPath, funcName) {
     if (location.protocol == "file:" || dk.hasCPP())
         path = "http://127.0.0.1:2393/";
     const str = JSON.stringify(jsonData);
-    const data = "x=" + encodeURIComponent(str);
+    const data = "dkx=" + encodeURIComponent(str);
     const url = dk.file.validatepath(path + phpPath) + "?" + data;
     const php_error = function php_error(msg, dk_php_callback) {
         return error(msg, dk_php_callback);
@@ -63,8 +63,14 @@ dk.php.call = function dk_php_call(httpMethod, phpPath, funcName) {
             return php_error(rJson.message, dk_php_callback);
         //if (rJson.status === "success" && beforeLastLine !== "" && beforeLastLine !== "\n")
         //    console.log(beforeLastLine);
-        dk_php_callback && dk_php_callback(rJson.message);
+        return dk_php_callback && dk_php_callback(rJson.message);
     });
+    return true;
+}
+
+//Todo - listen for broadcast messaged from php 
+dk.php.listen = function dk_php_listen(){
+       
 }
 
 //dk.php.noCB = function dk_php_noCB(rVal) {}
@@ -96,7 +102,7 @@ dk.php.callPhpFunc = function dk_php_callPhpFunc(args) {
     }
     const str = JSON.stringify(jsonData);
     //console.log("dk.php.callPhpFunc(): str = "+str);
-    const data = "x=" + encodeURIComponent(str);
+    const data = "dkx=" + encodeURIComponent(str);
     //console.log("dk.php.callPhpFunc(): data = "+data);
     const url = path + "DK/DK.php?" + data;
     dk.sendRequest("POST", url, function dk_sendRequest_callback(success, url, rVal) {

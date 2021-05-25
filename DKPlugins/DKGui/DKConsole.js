@@ -3,32 +3,32 @@
 // https://developer.mozilla.org/en-US/docs/Web/API/console
 // https://developer.mozilla.org/en-US/docs/Web/API/Console#outputting_text_to_the_console
 
+
 dk.console = new DKPlugin("dk_console");
-dk.console.record = dk.x.record
-delete dk.x;
+
+
 //intercept console and reroute it to xconsole and dk.console
 //Example:
 // If you use console.log, it will now go to the dk.console AND the browser console.
 // If you use dk.console.log, it will only log to the dk.console.
 // If you use xconsole.log, it will only log the browser console.
 // Note: some messages cannot be withheld from the browser console.
-const xconsole = new Object;
-(function() {
-    xconsole.on = true;
+
+dk.console.setXConsole = function dk_console_setXConsole(){
     xconsole.assert = console.assert;
     xconsole.clear = console.clear;
     xconsole.context = console.context;
     xconsole.count = console.count;
     xconsole.countReset = console.countReset;
-    xconsole.debug = console.debug;
+    //xconsole.debug = console.debug;
     xconsole.dir = console.dir;
     xconsole.dirxml = console.dirxml;
-    xconsole.error = console.error;
+    //xconsole.error = console.error;
     xconsole.group = console.group;
     xconsole.groupCollapsed = console.groupCollapsed;
     xconsole.groupEnd = console.groupEnd;
     xconsole.info = console.info;
-    xconsole.log = console.log;
+    //xconsole.log = console.log;
     xconsole.memory = console.memory;
     xconsole.profile = console.profile;
     xconsole.profileEnd = console.profileEnd;
@@ -38,7 +38,8 @@ const xconsole = new Object;
     xconsole.timeLog = console.timeLog;
     xconsole.timeStamp = console.timeStamp;
     xconsole.trace = console.trace;
-    xconsole.warn = console.warn;
+    //xconsole.warn = console.warn;
+    xconsole.on = true;
 
     console.assert = function console_assert() {
         xconsole.on && xconsole.assert.apply(this, Array.prototype.slice.call(arguments));
@@ -133,7 +134,7 @@ const xconsole = new Object;
         xconsole.on && xconsole.warn.apply(this, Array.prototype.slice.call(arguments));
         dk.console.warn && dk.console.warn.apply(this, Array.prototype.slice.call(arguments));
     }
-}());
+};
 
 dk.console.init = function dk_console_init() {
     dk.create("DKGui/DKConsole.css");
@@ -321,6 +322,9 @@ dk.console.create = function dk_console_create(parent, id, top, bottom, left, ri
         dk.console.Logger(newstr, "yellow");
     }
 
+    dk.console.setXConsole();
+    dk.console.record = dk.x.record
+    delete dk.x;
     //restore the record of messages from the program beginning
     for(let n=0; n<dk.console.record.length; n++){
         const lvl = Object.keys(dk.console.record[n])[0];
