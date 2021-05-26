@@ -357,7 +357,8 @@ function pushDKAssets(){
 
 	//echo "\n***** filemap ***\n";
 	//echo json_encode($filemap); 
-	return json_encode($filemap);
+	//return json_encode($filemap);
+	return true;
 }
 
 function pullDKAssets(){

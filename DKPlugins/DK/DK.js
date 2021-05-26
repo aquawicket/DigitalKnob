@@ -50,12 +50,10 @@ const byId = function byId(id) {
 }
 
 const error = function error(str, callback, rtnval) {
-    //FIXME: not working
-    xconsole.error(str);
-    
     throw new Error(str);
-    //FIXME: this code is never reached. Set an argument to determine if the error is fatal. 
+    //FIXME: this code is never reached because of throw. Set an argument to determine if the error is fatal. 
     !rtnval && (rtnval = false);
+    console.error(str);
     callback && callback(rtnval);
     return rtnval;
 }
