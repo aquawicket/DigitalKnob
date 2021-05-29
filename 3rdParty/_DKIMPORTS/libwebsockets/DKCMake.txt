@@ -1,6 +1,5 @@
 ### INSTALL ###
 DKINSTALL(https://github.com/warmcat/libwebsockets/archive/v2.2.0.zip libwebsockets-2.2-stable)
-## DKINSTALL(${DKWEB}/Download/libwebsockets-2.2.0.zip libwebsockets-2.2-stable)
 DKSET(WEBSOCKETS ${3RDPARTY}/libwebsockets-2.2-stable)
 
 

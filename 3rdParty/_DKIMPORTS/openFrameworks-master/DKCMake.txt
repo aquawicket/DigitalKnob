@@ -1,6 +1,5 @@
 ### INSTALL ###
 ## DKINSTALL(www.internet.com/openFrameworks-master.zip openFrameworks-master) ## find an online link
-## DKINSTALL(${DKWEB}/Download/Libs/openFrameworks-master.zip openFrameworks-master)
 DKSET(OPENFRAMEWORKS ${3RDPARTY}/openFrameworks-master)
 
 

@@ -1,19 +1,10 @@
 ### DEPENDS ###
-IF(ANDROID)
-	DKDEPEND(zlib-1.2.8)
-ENDIF()
-IF(NOT ANDROID)
-	DKDEPEND(zlib-1.2.11)
-ENDIF()
-DKDEPEND(xz-5.2.0)
-IF(NOT WIN_64)
-	DKDEPEND(bzip2-1.0.6)
-ENDIF()
-
+DKDEPEND(zlib)
+DKDEPEND(xz)
+DKDEPEND(bzip2)
 
 ### INSTALL ###
 ## DKINSTALL(www.internet.com/libarchive-master.zip libarchive-master) ## find an online link
-## DKINSTALL(${DKWEB}/Download/Libs/libarchive-master.zip libarchive-master)
 DKSET(ARCHIVE ${3RDPARTY}/libarchive-master)
 
 

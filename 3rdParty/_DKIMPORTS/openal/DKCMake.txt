@@ -5,7 +5,6 @@ ENDIF()
 
 ### INSTALL ###
 ## DKINSTALL(www.internet.com/openal-1.15.1.zip openal) ## find an online link
-## DKINSTALL(${DKWEB}/Download/Libs/openal-1.15.1.zip openal)
 
 
 ### LINK ###

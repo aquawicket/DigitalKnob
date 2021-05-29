@@ -5,7 +5,6 @@ ENDIF()
 
 ### INSTALL ###
 ## DKINSTALL(www.internet.com/freealut-master.zip freealut-master) ## find an online link
-## DKINSTALL(${DKWEB}/download/freealut-master.zip freealut-master)
 DKSET(FREEALUT ${3RDPARTY}/freealut-master)
 
 

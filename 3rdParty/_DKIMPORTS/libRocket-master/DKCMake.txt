@@ -1,9 +1,8 @@
-DKDEPEND(freetype-2.5.5)
+DKDEPEND(freetype)
 
 ### INSTALL ###
 DKINSTALL(https://github.com/libRocket/libRocket/archive/master.zip libRocket-master)
 DKRENAME(${DKDOWNLOAD}/master.zip ${DKDOWNLOAD}/libRocket-master.zip)
-##DKINSTALL(${DKWEB}/Download/Libs/libRocket-master.zip libRocket-master)
 
 ##MESSAGE("Pulling libRocket from aquawicket/libRocket git...")
 ##DKSET(GIT C:/Progra~1/Git/bin/git.exe)

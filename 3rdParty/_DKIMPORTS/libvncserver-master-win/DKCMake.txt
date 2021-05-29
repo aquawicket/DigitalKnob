@@ -1,17 +1,16 @@
 ### DEPENDS ###
-DKDEPEND(zlib-1.2.11)
-DKDEPEND(libpng-1.7.0beta34)
+DKDEPEND(zlib)
+DKDEPEND(libpng)
 IF(ANDROID)
-	DKDEPEND(jpeg-6b)
+	DKDEPEND(jpeg)
 ELSE()
-	DKDEPEND(libjpeg-turbo-1.5.3)
+	DKDEPEND(libjpeg-turbo)
 ENDIF()
-DKDEPEND(openssl-1.0.2h-vs2015)
+DKDEPEND(openssl-vs2015)
 
 
 ### INSTALL ###
 ## DKINSTALL(www.internet.com/libvncserver-master-win.zip libvncserver-master-win) ## find an online link
-## DKINSTALL(${DKWEB}/Download/libvncserver-master-win.zip libvncserver-master-win)
 DKSET(VNCSERVER ${3RDPARTY}/libvncserver-master-win)
 
 

@@ -9,7 +9,6 @@ DKSET(TORRENT_VERSION libtorrent-rasterbar-1.1.3)
 
 ### INSTALL ###
 DKINSTALL(https://github.com/arvidn/libtorrent/releases/download/libtorrent-1_1_3/${TORRENT_VERSION}.tar.gz ${TORRENT_VERSION})
-## DKINSTALL(${DKWEB}/Download/${TORRENT_VERSION}.zip ${TORRENT_VERSION})
 DKSET(TORRENT ${3RDPARTY}/${TORRENT_VERSION})
 
 
