@@ -2142,6 +2142,11 @@ FUNCTION(DKDEPEND arg)
 ENDFUNCTION()
 
 
+FUNCTION(DKDEPEND_ALL)
+	MESSAGE("*** DKDEPEND_ALL not implemented yet ***")
+	##TODO SCAN ALL /3rdParty/Import and /DKPlugins for DKCMAke.txt and add them
+ENDFUNCTION()
+
 ## This function would like to remove everthing but,
 ## DKDEPEND() IF() ELSE() and ENDIF() commands from the DKCmake.txt file
 ## This is to help in sorting the plugins by dependency
