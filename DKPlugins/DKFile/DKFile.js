@@ -18,24 +18,24 @@ dk.file.validatepath = function dk_file_validatepath(path) {
     if (path.charAt(0) === '/') {
         console.error(path + "  path has / as the first character");
         path = path.replace("/", "");
-        console.debug("AFTER: " + path);
+        //console.debug("AFTER: " + path);
     }
     if (path.includes("\\")) {
         console.error(path + "  path contains \\");
         path = path.split("\\").join("/");
-        console.debug("AFTER: " + path);
+        //console.debug("AFTER: " + path);
     }
     const count = path.split("//").length - 1;
     if (!path.includes("://") && (count > 0)) {
         console.error(path + "  path contains // seperator");
         path = path.split("//").join("/");
-        console.debug("AFTER: " + path);
+        //console.debug("AFTER: " + path);
     }
     if (path.includes("://") && (count > 1)) {
         console.error(path + "  path contains // seperator");
         path = path.split("//").join("/");
         path = path.replace(":/", "://");
-        console.debug("AFTER: " + path);
+        //console.debug("AFTER: " + path);
     }
     //TODO - Check that directory paths end with a /
     return path;
@@ -410,7 +410,7 @@ if (!dk.hasCPP()) {
 
 dk.file.getPathObject = function dk_file_getPathObject(path, callback) {
     //path = dk.file.validatepath(path);
-    console.debug("original path = \"" + path + "\"");
+    //console.debug("original path = \"" + path + "\"");
     dk.php.call('GET', "DKFile/DKFile.php", "getPaths", path, function dk_php_call_callback(_pObj) {
         const pObj = new Object();
         pObj.path = _pObj.split(",")[0];
@@ -422,6 +422,7 @@ dk.file.getPathObject = function dk_file_getPathObject(path, callback) {
         pObj.basename = _pObj.split(",")[6];
         pObj.extension = _pObj.split(",")[7];
         pObj.filename = _pObj.split(",")[8];
+        /*
         console.debug("path = " + pObj.path);
         console.debug("aPath = " + pObj.aPath);
         console.debug("root = " + pObj.root);
@@ -431,6 +432,7 @@ dk.file.getPathObject = function dk_file_getPathObject(path, callback) {
         console.debug("basename = " + pObj.basename);
         console.debug("extension = " + pObj.extension);
         console.debug("filename = " + pObj.filename);
+        */
         return callback(pObj);
     });
 }

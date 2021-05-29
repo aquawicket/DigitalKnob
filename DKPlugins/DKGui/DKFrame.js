@@ -17,7 +17,7 @@ dk.frame.create = function dk_frame_create(obj) {
         if (!element)
             return false;
     } else {
-        console.warn("dk.frame.create(): obj is not a instance of DKWidget. It is recommended to derive from a new DKWidget instance")
+        console.warn("dk.frame.create(): obj is not a instance of DKPlugin. It is recommended to derive from a new DKPlugin instance")
         if (typeof obj === "object")
             element = obj;
         else
@@ -126,9 +126,9 @@ dk.frame.closeAll = function dk_frame_closeAll() {
 dk.frame.createFrame = function dk_frame_createFrame(title, width, height) {
     if (typeof title !== "string")
         return error("title invalid\n");
-
-    (width === "100%") && (width = window.innerWidth - 100);
-    (height === "100%") && (height = window.innerHeight - 21 - 100);
+    const scale = 200;
+    (width === "100%") && (width = window.innerWidth - scale);
+    (height === "100%") && (height = window.innerHeight - 21 - scale);
     !width && (width = window.innerWidth / 2);
     !height && (height = window.innerHeight / 2);
 

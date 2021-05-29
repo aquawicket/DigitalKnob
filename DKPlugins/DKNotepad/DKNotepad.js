@@ -55,6 +55,10 @@ dk.notepad.create = function dk_notepad_create(dk_notepad_create_callback) {
     });
 }
 
+dk.notepad.close = function dk_notepad_close(instance) {
+    dk.frame.close(instance);
+}
+
 dk.notepad.createOpen = function dk_notepad_createOpen(file) {
     dk.notepad.create(function(instance) {
         dk.frame.setTitle(instance, "DKNotepad - "+file);
@@ -105,7 +109,9 @@ dk.notepad.filemenu = function dk_notepad_filemenu(instance, event) {
     });
     dk.menu.addItem(menu, "Print", function dk_menu_saveas() {//CPP_DKCef_Print(0);
     });
-    dk.menu.addItem(menu, "Exit", function dk_menu_exit() {});
+    dk.menu.addItem(menu, "Exit", function dk_menu_exit() {
+        dk.notepad.close(instance);
+    });
 }
 dk.notepad.editmenu = function dk_notepad_editmenu(instance, event) {
     console.debug("dk.notepad.editmenu");

@@ -267,7 +267,7 @@ dk.filemanager.upxCompress = function dk_filemanager_upxCompress(instance, path)
 }
 
 dk.filemanager.updatePath = function dk_filemanager_updatePath(instance, _path) {
-    console.debug("dk.filemanager.updatPath(" + _path + ")");
+    //console.debug("dk.filemanager.updatPath(" + _path + ")");
     dk.file.getPathObject(_path, function dk_file_getPathObject(path) {
         instance.path.value = path.aPath;
         instance.list.innerHTML = "";

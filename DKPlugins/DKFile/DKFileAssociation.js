@@ -8,9 +8,10 @@ dk.fileassociation.edit = function dk_fileAssociation_edit(file) {
 }
 
 dk.fileassociation.open = function dk_fileAssociation_open(file) {
-    if (!file.includes(".")) {
-        return false;
-    }
+    if (!file)
+        return error("file invalid");
+    if (!file.includes("."))
+        return error("no file extension");
     if (file.includes(".js")) {
         dk.fileassociation.openjs(file);
         return true;
@@ -103,36 +104,36 @@ dk.fileassociation.openhtml = function dk_fileassociation_openHtml(path) {
 
     dk.file.fileToString(path, function dk_file_fileToString_callback(str) {
         filedata = str;
-    
-    if (!filedata)
-        return error("filedata invalid");
-    //if(!HtmlToRml(filedata)){ return false; }
 
-    //Parse the sting into an element
-    var temp = dk.createElement(document.body, "temp", "temporary");
-    temp.innerHTML = filedata;
+        if (!filedata)
+            return error("filedata invalid");
+        //if(!HtmlToRml(filedata)){ return false; }
 
-    //if(DK_GetNumChildren(temp) === 0){
-    //	return error("Error loading path: "+id+": could not create node");
-    //}
+        //Parse the sting into an element
+        var temp = dk.createElement(document.body, "temp", "temporary");
+        temp.innerHTML = filedata;
 
-    //Make sure there is only 1 child
-    //if(DK_GetNumChildren(temp) > 1){
-    //	return error("Error loading path: "+id+" has more than one root node");
-    //}
+        //if(DK_GetNumChildren(temp) === 0){
+        //	return error("Error loading path: "+id+": could not create node");
+        //}
 
-    console.log("temp: " + temp.id);
-    var element = temp.firstChild;
-    //console.log("element = "+element);
-    //DKElement* element = temp->GetFirstChild();
-    //byId(element).id = id;
+        //Make sure there is only 1 child
+        //if(DK_GetNumChildren(temp) > 1){
+        //	return error("Error loading path: "+id+" has more than one root node");
+        //}
 
-    document.body.appendChild(element);
-    temp.parentNode.removeChild(temp);
-    //Show(id);
-    //dk.fileassociation.AddDragHandles(id);
-    //dk.fileassociation.SelectElement(id);
-	});
+        console.log("temp: " + temp.id);
+        var element = temp.firstChild;
+        //console.log("element = "+element);
+        //DKElement* element = temp->GetFirstChild();
+        //byId(element).id = id;
+
+        document.body.appendChild(element);
+        temp.parentNode.removeChild(temp);
+        //Show(id);
+        //dk.fileassociation.AddDragHandles(id);
+        //dk.fileassociation.SelectElement(id);
+    });
 }
 
 dk.fileassociation.openjs = function dk_fileassociation_openjs(path) {
