@@ -7,7 +7,6 @@ ENDIF()
 IF(NOT EXISTS ${3RDPARTY}/ofxiOSBoost-1.60.0-libc-bitcode)
 	DKSETPATH(${DIGITALKNOB}/Download)
 	## DKDOWNLOAD(www.internet.com/ofxiOSBoost-1.60.0-libc-bitcode.zip) ## find an online link
-	## DKDOWNLOAD(${DKWEB}/Download/Libs/ofxiOSBoost-1.60.0-libc-bitcode.zip)
 	DKEXTRACT(${DIGITALKNOB}/Download/ofxiOSBoost-1.60.0-libc-bitcode.zip ${3RDPARTY})
 ENDIF()
 DKSET(BOOST ${3RDPARTY}/ofxiOSBoost-1.60.0-libc-bitcode)
