@@ -3,6 +3,21 @@
 
 dk.errorhandler = new DKPlugin("dk_errorhandler");
 
+/*
+window.onerror = function window_onerror(msg, url, lineNo, columnNo, err) {
+    if (!err && !msg)
+        return error("window.onerror failed: err and msg variables invalid");
+    err = err ? err : msg;
+    return error(err);
+}
+
+//https://stackoverflow.com/a/49560222/688352
+//https://developer.mozilla.org/en-US/docs/Web/API/WindowEventHandlers/onunhandledrejection
+window.onunhandledrejection = function window_onunhandledrejection(event) {
+    return error(event);
+}
+*/
+
 dk.errorhandler.create = function dk_errorhandler_create() {
 
     // Capture error data for debugging in web console

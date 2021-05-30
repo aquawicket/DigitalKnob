@@ -144,12 +144,11 @@ dk.console.end = function dk_console_end() {
     dk.close("DKGui/DKConsole.css");
 }
 
-dk.console.create = function dk_console_create(parent, id, top, bottom, left, right, width, height) {
+dk.console.create = function dk_console_create(parent, top, bottom, left, right, width, height) {
     dk.console.limit = 100;
     const container = document.createElement("div");
     dk.console.container = container;
     container.setAttribute("dk_console", "container");
-    container.id = id;
     container.style.top = top;
     container.style.bottom = bottom;
     container.style.left = left;

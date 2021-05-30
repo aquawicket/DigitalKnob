@@ -16,7 +16,6 @@ DKDEPEND(DKAudio)
 DKDEPEND(DKBuild)
 DKDEPEND(DKCef)
 DKDEPEND(DKCefChild)
-## DKDEPEND(DKClient) ##Obsolete, Use DKWebSockets
 DKDEPEND(DKColorPicker)
 DKDEPEND(DKConsole)
 DKDEPEND(DKCrypto)
@@ -58,7 +57,6 @@ DKDEPEND(DKSDLText)
 ## DKDEPEND(DKSDLVideo) ##FIXME: 3rdParty libraries not compiling
 ## DKDEPEND(DKSDLWav) ##FIXME: 3rdParty libraries not compiling
 DKDEPEND(DKSDLWindow)
-## DKDEPEND(DKServer) ##Obsolete, use DKWebSockets
 ## DKDEPEND(DKSFMLWindow) ##FIXME: 3rdParty libraries not compiling
 DKDEPEND(DKStats)
 DKDEPEND(DKSvn)
