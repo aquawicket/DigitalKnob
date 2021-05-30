@@ -461,7 +461,7 @@ dk.file.getExtention = function dk_file_getExtention(path) {
 
 
 if (!dk.hasCPP()) {
-    dk.file.delete = function dk_file_delete(path) {
+    dk.file.delete = function dk_file_delete(path, callback) {
         path = dk.file.validatepath(path);
         console.log("Deleting: " + path);
         dk.php.call("GET", "DKFile/DKFile.php", "delete", path, function dk_php_call_callback(result){
