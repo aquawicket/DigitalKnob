@@ -116,7 +116,7 @@ dk.filemanager.dblclick = function(instance, event) {
     if (event.currentTarget.getAttribute("dk_filemanager") === "folder")
         dk.filemanager.openFolder(instance, path);
     else if (event.currentTarget.getAttribute("dk_filemanager") === "file")
-        dk.filemanager.openFile(path);
+        dk.filemanager.openFile(instance, path);
 }
 
 dk.filemanager.rightclickmenu = function(instance, event) {
@@ -212,7 +212,7 @@ dk.filemanager.newFile = function dk_filemanager_newFile(instance) {
 dk.filemanager.newFolder = function dk_filemanager_newFolder(instance) {
     const foldername = "NewFolder";
     const path = instance.path.value + foldername;
-    dk.file.makeDir(path, 0, true, function(result){
+    dk.file.makeDir(path, 0, true, function(result) {
         console.log(result);
     });
     const newFolder = dk.gui.createElement(instance.list, "div", "managerFolder");
@@ -245,31 +245,40 @@ dk.filemanager.rename = function dk_filemanager_rename(instance, node) {
     renamerInput.style.width = "100%";
     renamerInput.style.height = "100%";
     renamerInput.value = node.innerHTML;
-    renamerInput.focus();
+    setTimeout(function() {
+        if (renamerInput)
+            renamerInput.focus();
+        document.addEventListener('mousedown', function(event) {
+            doRename();
+        }, {
+            once: true
+        });
+    }, 100);
     renamerInput.onkeydown = function(event) {
-        if (event.code === "Enter") {
-            const oldfilename = node.innerHTML;
-            const oldpath = node.getAttribute("path");
-            const newfilename = renamerInput.value;
-            const newpath = oldpath.replace(oldfilename, newfilename);
-            if (dk.file.rename(oldpath, newpath, true) === false)
-                return false;
-            node.path = newpath;
-            node.innerHTML = newfilename;
-            renamer.remove();
+        if (event.code === "Enter")
+            doRename();
+    }
 
-            //TODO: set associated icon
-        }
+    function doRename() {
+        const oldfilename = node.innerHTML;
+        const oldpath = node.getAttribute("path");
+        const newfilename = renamerInput.value;
+        const newpath = oldpath.replace(oldfilename, newfilename);
+        if (dk.file.rename(oldpath, newpath, true) === false)
+            return false;
+        node.path = newpath;
+        node.innerHTML = newfilename;
+        renamer.remove();
+        //TODO: set associated icon
     }
 }
 
 dk.filemanager.delete = function dk_filemanager_delete(instance, path) {
     dk.create("DKGui/DKMessageBox.js", function() {
         dk.messagebox.createConfirm("Delete this file?", function(result) {
-            dk.file.delete(path, function(result){
+            dk.file.delete(path, function(result) {
                 console.log(path);
-                //find element in instance.list who path attribute === path
-                const element = instance.list.querySelector("[path='"+path+"']");
+                const element = instance.list.querySelector("[path='" + path + "']");
                 element.parentNode.removeChild(element);
             });
         });

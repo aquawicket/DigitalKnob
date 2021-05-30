@@ -331,6 +331,9 @@ dk.console.create = function dk_console_create(parent, top, bottom, left, right,
         dk.console[lvl](msg);
     }
     delete dk.console.record;
+    setTimeout(function() {
+        div.scroll && (div.scrollTop = div.scrollHeight);
+    }, 100);
 
     return container;
 }
