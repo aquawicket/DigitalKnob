@@ -459,14 +459,14 @@ dk.file.getExtention = function dk_file_getExtention(path) {
     return extention;
 }
 
-/*
+
 if (!dk.hasCPP()) {
     dk.file.delete = function dk_file_delete(path) {
         path = dk.file.validatepath(path);
         console.log("Deleting: " + path);
-        request = dk.file.onlineAssets + "DKFile/DKFile.php?Delete=" + path;
-        var result = ajaxGetUrl(request);
-        return result;
+        dk.php.call("GET", "DKFile/DKFile.php", "delete", path, function dk_php_call_callback(result){
+            return callback(!!result);
+        });
     }
 } else {
     dk.file.delete = function dk_file_delete(path) {
@@ -474,4 +474,3 @@ if (!dk.hasCPP()) {
         return CPP_DKFile_Delete(path);
     }
 }
-*/

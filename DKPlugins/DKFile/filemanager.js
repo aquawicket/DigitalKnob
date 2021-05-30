@@ -48,16 +48,16 @@ dk.filemanager.close = function dk_filemanager_close(instance) {
     dk.frame.close(instance);
 }
 
-dk.filemanager.createOpen = function dk_filemanager_getfile(dk_filemanager_createOpen_callback){
-    dk.filemanager.create(function(instance){
+dk.filemanager.createOpen = function dk_filemanager_getfile(dk_filemanager_createOpen_callback) {
+    dk.filemanager.create(function(instance) {
         dk.frame.setTitle(instance, "Open");
         instance.cancel.style.visibility = "visible";
         instance.ok.style.visibility = "visible";
-        instance.cancel.onclick = function(){
+        instance.cancel.onclick = function() {
             dk.filemanager.close(instance);
             return true;
         }
-        instance.ok.onclick = function(){
+        instance.ok.onclick = function() {
             dk_filemanager_createOpen_callback(instance.currentFile);
             dk.filemanager.close(instance);
             return true;
@@ -65,16 +65,16 @@ dk.filemanager.createOpen = function dk_filemanager_getfile(dk_filemanager_creat
     });
 }
 
-dk.filemanager.createSaveAs = function dk_filemanager_savefile(dk_filemanager_createSaveAs_callback){
-    dk.filemanager.create(function(instance){
+dk.filemanager.createSaveAs = function dk_filemanager_savefile(dk_filemanager_createSaveAs_callback) {
+    dk.filemanager.create(function(instance) {
         dk.frame.setTitle(instance, "Save As");
         instance.cancel.style.visibility = "visible";
         instance.ok.style.visibility = "visible";
-        instance.cancel.onclick = function(){
+        instance.cancel.onclick = function() {
             dk.filemanager.close(instance);
             return true;
         }
-        instance.ok.onclick = function(){
+        instance.ok.onclick = function() {
             dk_filemanager_createSaveAs_callback(instance.currentFile);
             dk.filemanager.close(instance);
             return true;
@@ -128,8 +128,8 @@ dk.filemanager.rightclickmenu = function(instance, event) {
     const path = event.currentTarget.getAttribute("path");
     const menu = dk.menu.createInstance();
     file && dk.menu.addItem(menu, "Edit", function dk_menu_edit() {
-            dk.filemanager.editFile(instance, path);
-        });
+        dk.filemanager.editFile(instance, path);
+    });
     dk.menu.addItem(menu, "Open", function dk_menu_open() {
         folder && dk.filemanager.openFolder(instance, path);
         file && dk.filemanager.openFile(instance, path);
@@ -176,8 +176,8 @@ dk.filemanager.editFile = function dk_filemanager_editFile(instance, path) {
 dk.filemanager.openFolder = function dk_filemanager_openFolder(instance, path) {
     return dk.filemanager.updatePath(instance, path);
 }
-dk.filemanager.openFile = function dk_filemanager_openFile(path) {
-    return dk.fileassociation.open(path);
+dk.filemanager.openFile = function dk_filemanager_openFile(instance, path) {
+    return dk.fileassociation.open(instance, path);
 }
 dk.filemanager.openFolderInOS = function dk_filemanager_openFolderInOS(instance, path) {
     console.debug("TODO: dk.filemanager.openFolderInOS(" + path + ")");
@@ -192,7 +192,7 @@ dk.filemanager.newFile = function dk_filemanager_newFile(instance) {
     dk.file.stringToFile("", path, 0, function(result) {
         console.log(result);
     });
-    const newFile = dk.gui.createElement(dk.filemanager.list, "div", "managerFile");
+    const newFile = dk.gui.createElement(instance.list, "div", "managerFile");
     newFile.setAttribute("dk_filemanager", "file");
     newFile.setAttribute("path", path);
     newFile.style.whiteSpace = "nowrap";
@@ -245,7 +245,11 @@ dk.filemanager.rename = function dk_filemanager_rename(instance, node) {
 }
 
 dk.filemanager.delete = function dk_filemanager_delete(instance, path) {
-    console.debug("TODO: dk.filemanager.delete(" + path + ")");
+    dk.create("DKGui/DKMessageBox.js", function() {
+        dk.messagebox.createConfirm("Delete this file?", function(result) {
+            dk.file.delete(path);
+        });
+    });
 }
 dk.filemanager.copy = function dk_filemanager_copy(instance, path) {
     console.debug("TODO: dk.filemanager.copy(" + path + ")");
