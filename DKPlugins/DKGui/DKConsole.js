@@ -3,9 +3,7 @@
 // https://developer.mozilla.org/en-US/docs/Web/API/console
 // https://developer.mozilla.org/en-US/docs/Web/API/Console#outputting_text_to_the_console
 
-
 dk.console = new DKPlugin("dk_console");
-
 
 //intercept console and reroute it to xconsole and dk.console
 //Example:
@@ -14,7 +12,7 @@ dk.console = new DKPlugin("dk_console");
 // If you use xconsole.log, it will only log the browser console.
 // Note: some messages cannot be withheld from the browser console.
 
-dk.console.setXConsole = function dk_console_setXConsole(){
+dk.console.setXConsole = function dk_console_setXConsole() {
     xconsole.assert = console.assert;
     xconsole.clear = console.clear;
     xconsole.context = console.context;
@@ -134,7 +132,8 @@ dk.console.setXConsole = function dk_console_setXConsole(){
         xconsole.on && xconsole.warn.apply(this, Array.prototype.slice.call(arguments));
         dk.console.warn && dk.console.warn.apply(this, Array.prototype.slice.call(arguments));
     }
-};
+}
+;
 
 dk.console.init = function dk_console_init() {
     dk.create("DKGui/DKConsole.css");
@@ -216,8 +215,10 @@ dk.console.create = function dk_console_create(parent, top, bottom, left, right,
     }
     container.appendChild(command);
 
-    dk.console.Logger = function dl_console_Logger() {
-        const args = dk.console.ColorChromeConsole(arguments);
+    // https://console.spec.whatwg.org/#logger
+    // logLevel: log, warn, debug, info, error, 
+    dk.console.Logger = function dl_console_Logger(logLevel, args) {
+        const _args = dk.console.ColorChromeConsole(arguments);
 
         if ((div.scrollHeight - div.scrollTop) < (div.offsetHeight + 1))
             div.scroll = true;
@@ -230,25 +231,28 @@ dk.console.create = function dk_console_create(parent, top, bottom, left, right,
         const msgSpan = document.createElement("span");
 
         //TODO: If the message is the same as the last, just have a count next to the original.
-        if (arguments[0] && arguments[0].includes && arguments[0].includes("<anonymous>")) {
-            arguments[0] = arguments[0].replace("<anonymous>", "&lt;anonymous&gt;");
+        if (arguments[1] && arguments[1].includes && arguments[1].includes("<anonymous>")) {
+            arguments[1] = arguments[1].replace("<anonymous>", "&lt;anonymous&gt;");
         }
-        msgSpan.innerHTML = arguments[0];
+        msgSpan.innerHTML = arguments[1];
         msgSpan.setAttribute("dk_console", "msgSpan");
 
-        if (arguments[1] === "red") {
+        //if (arguments[1] === "red") {
+        if (logLevel === "error") {
             msgSpan.style.color = "rgb(255,128,128)";
             msgDiv.style.backgroundColor = "rgb(41,0,0)";
             msgDiv.style.borderColor = "rgb(92,0,0)";
-        } else if (arguments[1] === "yellow") {
+            //} else if (arguments[1] === "yellow") {
+        } else if (logLevel === "warn") {
             msgSpan.style.color = "rgb(255,221,158)";
             msgDiv.style.backgroundColor = "rgb(51,43,0)";
             msgDiv.style.borderColor = "rgb(102,85,0)";
-        } else if (arguments[1] === "blue") {
+            //} else if (arguments[1] === "blue") {
+        } else if (logLevel === "debug") {
             msgSpan.style.color = "rgb(77,136,255)";
             msgDiv.style.backgroundColor = "rgb(36,36,36)";
             msgDiv.style.borderColor = "rgb(58,58,58)";
-        } else if (arguments[1] === "green") {
+        } else if (logLevel === "green") {
             msgSpan.style.color = "rgb(128,255,128)";
             msgDiv.style.backgroundColor = "rgb(0,41,0)";
             msgDiv.style.borderColor = "rgb(0,92,0)";
@@ -269,63 +273,99 @@ dk.console.create = function dk_console_create(parent, top, bottom, left, right,
 
         return msgDiv.innerHTML;
     }
+    // https://console.spec.whatwg.org/#formatter
+    dk.console.Formatter = function dk_console_Formatter(args) {//TODO
+    }
+    // https://console.spec.whatwg.org/#printer
+    dk.console.Printer = function dk_console_Printer(logLevel, args/*[, options]*/){//TODO
+    }
 
     //Set up dk.console variables
-    dk.console.assert;
+    // https://console.spec.whatwg.org/#assert
+    dk.console.assert = function dk_console_assert(condition, ...data){//TODO
+    }
+    // https://console.spec.whatwg.org/#clear
     dk.console.clear = function dk_console_clear() {
         div.innerHTML = "";
     }
     dk.console.context;
-    dk.console.count;
-    dk.console.countReset;
-    dk.console.debug = function dk_console_debug(str) {
-        dk.console.Logger(str, "blue");
+    // https://console.spec.whatwg.org/#count
+    dk.console.count = function dk_console_count(label) {//TODO
     }
-    dk.console.dir;
-    dk.console.dirxml;
-    dk.console.error = function dk_console_error(str) {
-        if (!str)
-            return warn("str invalid");
-        const newstr = str + "\n" + dk.trace.stackToConsoleString("", "DKPlugin.dk_console_error");
-        dk.console.Logger(newstr, "red");
+    // https://console.spec.whatwg.org/#countReset
+    dk.console.countReset = function dk_console_countReset(label) {//TODO
     }
-    dk.console.group = function dk_console_group(str, style) {
-        dk.console.Logger(str, style);
+    // https://console.spec.whatwg.org/#debug
+    dk.console.debug = function dk_console_debug(...data) {
+        dk.console.Logger("debug", data);
     }
-    dk.console.groupCollapsed;
-    dk.console.groupEnd;
-    dk.console.info = function dk_console_info(str, style) {
-        dk.console.Logger(str, style);
+    // https://console.spec.whatwg.org/#dir
+    dk.console.dir = function dk_console_dir(item, options) {//TODO
     }
-    dk.console.log = function dk_console_log(str, style) {
-        dk.console.Logger(str, style);
+    // https://console.spec.whatwg.org/#dirxml
+    dk.console.dirxml = function dk_console_dirxml(...data) {// TODO
+    }
+    // https://console.spec.whatwg.org/#error
+    dk.console.error = function dk_console_error(...data) {
+        if (!data)
+            return warn("data invalid");
+        data += "\n" + dk.trace.stackToConsoleString("", "DKPlugin.dk_console_error");
+        dk.console.Logger("error", data);
+    }
+    // https://console.spec.whatwg.org/#group
+    dk.console.group = function dk_console_group(...data) {
+        dk.console.Logger("group", data);
+    }
+    // https://console.spec.whatwg.org/#groupcollapsed
+    dk.console.groupCollapsed = function dk_console_groupCollapsed(...data) {//TODO
+    }
+    // https://console.spec.whatwg.org/#groupend
+    dk.console.groupEnd = function dk_console_groupEnd(...data) {//TODO
+    }
+    // https://console.spec.whatwg.org/#info
+    dk.console.info = function dk_console_info(...data) {
+        dk.console.Logger("info", data);
+    }
+    // https://console.spec.whatwg.org/#log
+    dk.console.log = function dk_console_log(...data) {
+        dk.console.Logger("log", data);
     }
     dk.console.memory;
     dk.console.profile;
     dk.console.profileEnd;
-    dk.console.table;
-    dk.console.time;
-    dk.console.timeEnd;
-    dk.console.timeLog;
-    dk.console.timeStamp;
-    dk.console.trace = function dk_console_trace(str, style) {
-        if (!str)
-            return warn("str invalid");
-        const newstr = str + "\n" + dk.trace.stackToConsoleString("", "console.trace");
-        dk.console.Logger(newstr);
+    // https://console.spec.whatwg.org/#table
+    dk.console.table = function dk_console_table(tabularData, properties){//TODO
     }
-    dk.console.warn = function dk_console_warn(str) {
-        if (!str)
-            return warn("str invalid");
-        const newstr = str + "\n" + dk.trace.stackToConsoleString("", "console.warn");
-        dk.console.Logger(newstr, "yellow");
+    // https://console.spec.whatwg.org/#time
+    dk.console.time = function dk_console_time(label) {//TODO
+    }
+    // https://console.spec.whatwg.org/#timeEnd
+    dk.console.timeEnd = function dk_console_timeEnd(label) {//TODO
+    }
+    // https://console.spec.whatwg.org/#timeLog
+    dk.console.timeLog = function dk_console_timeLog(label, ...data) {//TODO
+    }
+    dk.console.timeStamp;
+    // https://console.spec.whatwg.org/#trace
+    dk.console.trace = function dk_console_trace(...data) {
+        if (!data)
+            return warn("data invalid");
+        data += "\n" + dk.trace.stackToConsoleString("", "console.trace");
+        dk.console.Logger("trace", data);
+    }
+    // https://console.spec.whatwg.org/#warn
+    dk.console.warn = function dk_console_warn(...data) {
+        if (!data)
+            return warn("data invalid");
+        data += "\n" + dk.trace.stackToConsoleString("", "console.warn");
+        dk.console.Logger("warn", data);
     }
 
     dk.console.setXConsole();
     dk.console.record = dk.x.record
     delete dk.x;
     //restore the record of messages from the program beginning
-    for(let n=0; n<dk.console.record.length; n++){
+    for (let n = 0; n < dk.console.record.length; n++) {
         const lvl = Object.keys(dk.console.record[n])[0];
         const msg = dk.console.record[n][lvl];
         dk.console[lvl](msg);
