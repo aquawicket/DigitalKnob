@@ -7,9 +7,9 @@ dk.file.init = function dk_file_init() {
     dk.file.localAssets = "";
     dk.file.onlineAssets = "";
     if (dk.php) {
-    dk.php.call("GET", "DKFile/DKFile.php", "getAssetsPath", function dk_php_getAssetsPath_callback(result) {
-        (dk.file.onlineAssets = result) && console.debug("dk.file.onlineAssets = " + result);
-    });
+        dk.php.call("GET", "DKFile/DKFile.php", "getAssetsPath", function dk_php_getAssetsPath_callback(result) {
+            (dk.file.onlineAssets = result) && console.debug("dk.file.onlineAssets = " + result);
+        });
     }
 }
 
@@ -112,7 +112,7 @@ if (!dk.hasCPP()) {
     dk.file.rename = function dk_file_rename(oldpath, newpath, overwrite) {
         oldpath = dk.file.validatepath(oldpath);
         newpath = dk.file.validatepath(newpath);
-        console.debug("dk.file.rename("+oldpath+","+newpath+","+overwrite+"): not implemented yet");
+        console.debug("dk.file.rename(" + oldpath + "," + newpath + "," + overwrite + "): not implemented yet");
     }
 } else {
     dk.file.rename = function dk_file_rename(path, newvalue, overwrite) {
@@ -338,7 +338,7 @@ if (!dk.hasCPP()) {
             return error("dk.file.onlineAssets invalid", callback);
         if (!path.includes(dk.file.onlineAssets))
             path = dk.file.onlineAssets + path;
-            //str = dk.stringToBinary(str);
+        //str = dk.stringToBinary(str);
         dk.php.call('POST', "DKFile/DKFile.php", "stringToFile", path, str, flags, function dk_php_call_callback(result) {
             return callback(result);
         });
@@ -459,17 +459,16 @@ dk.file.getExtention = function dk_file_getExtention(path) {
     return extention;
 }
 
-
 if (!dk.hasCPP()) {
     dk.file.delete = function dk_file_delete(path, callback) {
         path = dk.file.validatepath(path);
         console.log("Deleting: " + path);
-        dk.php.call("GET", "DKFile/DKFile.php", "delete", path, function dk_php_call_callback(result){
+        dk.php.call("GET", "DKFile/DKFile.php", "delete", path, function dk_php_call_callback(result) {
             return callback(!!result);
         });
     }
 } else {
-    dk.file.delete = function dk_file_delete(path) {
+    dk.file.delete = function dk_file_delete(path, callback) {
         path = dk.file.validatepath(path);
         return CPP_DKFile_Delete(path);
     }

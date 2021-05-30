@@ -186,7 +186,6 @@ dk.filemanager.openFileInOS = function dk_filemanager_openFolderInOS(instance, p
     console.debug("TODO: dk.filemanager.openFileInOS(" + path + ")");
 }
 dk.filemanager.newFile = function dk_filemanager_newFile(instance) {
-    //Todo - advance the file number if NewFile.txt already exists
     const filename = "NewFile.txt";
     const path = instance.path.value + filename;
     dk.file.stringToFile("", path, 0, function(result) {
@@ -211,7 +210,27 @@ dk.filemanager.newFile = function dk_filemanager_newFile(instance) {
 }
 
 dk.filemanager.newFolder = function dk_filemanager_newFolder(instance) {
-    console.debug("TODO: dk.filemanager.newFolder");
+    const foldername = "NewFolder";
+    const path = instance.path.value + foldername;
+    dk.file.makeDir(path, 0, true, function(result){
+        console.log(result);
+    });
+    const newFolder = dk.gui.createElement(instance.list, "div", "managerFolder");
+    newFolder.setAttribute("dk_filemanager", "folder");
+    newFolder.setAttribute("path", path);
+    newFolder.style.whiteSpace = "nowrap";
+    newFolder.style.paddingLeft = "17px";
+    newFolder.style.backgroundRepeat = "no-repeat";
+    newFolder.style.cursor = "default";
+    newFolder.innerHTML = foldername;
+    newFolder.onclick = dk.filemanager.highlight;
+    newFolder.ondblclick = dk.filemanager.dblclick
+    newFolder.oncontextmenu = dk.filemanager.rightclickmenu;
+    const event = {
+        currentTarget: newFolder
+    }
+    dk.filemanager.highlight(instance, event);
+    dk.filemanager.rename(instance, newFolder);
 }
 
 dk.filemanager.rename = function dk_filemanager_rename(instance, node) {
@@ -247,7 +266,12 @@ dk.filemanager.rename = function dk_filemanager_rename(instance, node) {
 dk.filemanager.delete = function dk_filemanager_delete(instance, path) {
     dk.create("DKGui/DKMessageBox.js", function() {
         dk.messagebox.createConfirm("Delete this file?", function(result) {
-            dk.file.delete(path);
+            dk.file.delete(path, function(result){
+                console.log(path);
+                //find element in instance.list who path attribute === path
+                const element = instance.list.querySelector("[path='"+path+"']");
+                element.parentNode.removeChild(element);
+            });
         });
     });
 }

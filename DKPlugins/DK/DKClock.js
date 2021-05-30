@@ -89,9 +89,9 @@ dk.clock.update = function dk_clock_update() {
 
     if(dk.clock.longitude && dk.clock.latitude){
         let date = new Date().sunrise(dk.clock.latitude, dk.clock.longitude, dk.clock.zenith);
-        dk.clock.sunrise = dk.clock.date.getHours() + (dk.clock.date.getMinutes() * .01);
+        dk.clock.sunrise = date.getHours() + (date.getMinutes() * .01);
         date = new Date().sunset(dk.clock.latitude, dk.clock.longitude, dk.clock.zenith);
-        dk.clock.sunset = dk.clock.date.getHours() + (dk.clock.date.getMinutes() * .01);
+        dk.clock.sunset = date.getHours() + (date.getMinutes() * .01);
     }
 
     const datetime = dk.clock.dayName + " " + dk.clock.month + "/" + dk.clock.day + "/" + dk.clock.year + "  " + dk.clock.hour + ":" + dk.clock.minute + ":" + dk.clock.second + " "+dk.clock.ampm;
