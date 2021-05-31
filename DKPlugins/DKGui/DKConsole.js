@@ -239,30 +239,80 @@ dk.console.create = function dk_console_create(parent, top, bottom, left, right,
     // https://console.spec.whatwg.org/#formatter
     dk.console.Formatter = function dk_console_Formatter(args) {
         // 1. Let target be the first element of args.
-        const target = args[0];
+        let target = args[0];
+        if (!target.indexOf)
+            return;
         // 2. Let current be the second element of args.
         const current = args[1];
-        const index = 0;
-        target.indexof && (index = target.indexof("%"));
-        if (index > -1) {
-            alert("format specifier");
-        }
         // 3. Find the first possible format specifier specifier, from the left to the right in target.
-        //     1. If specifier is %s, let converted be the result of Call(%String%, undefined, current).
-        //     2. If specifier is %d or %i:
-        //          1. If Type(current) is Symbol, let converted be NaN
-        //          2. Otherwise, let converted be the result of Call(%parseInt%, undefined, current, 10 ).
-        //     3. If specifier is %f:
-        //          1. If Type(current) is Symbol, let converted be NaN
-        //          2. Otherwise, let converted be the result of Call(%parseFloat%, undefined, current).
-        //     4. If specifier is %o, optionally let converted be current with optimally useful formatting applied.
-        //     5. If specifier is %O, optionally let converted be current with generic JavaScript object formatting applied.
-        //     6. TODO: process %c
-        //     7. If any of the previous steps set converted, replace specifier in target with converted.
-        //     8. Let result be a list containing target together with the elements of args starting from the third onward.
+        const index = target.indexOf("%");
+        if (index <= -1)
+            return;
+        const specifier = target.substring(index, index+2);
+        //alert(specifier);
+        let converted = undefined;
+        // 1. If specifier is %s, let converted be the result of Call(%String%, undefined, current).
+        if (specifier === "%s") {
+            //converted = dk.console.Formatter.call(toString, undefined, current);
+            converted = current.toString();
+        }
+        // 2. If specifier is %d or %i:
+        if (specifier === "%d" || specifier === "%i") {
+            alert("d or i");
+            // 1. If Type(current) is Symbol, let converted be NaN
+            console.debug(typeof current);
+            if (typeof current === "symbol"){
+                converted = NaN;
+            } else{
+                // 2. Otherwise, let converted be the result of Call(%parseInt%, undefined, current, 10 ).
+                //converted = dk.console.Formatter.call(parseInt, undefined, current, 10);
+                converted = parseInt(current, 10);
+            }
+        }
+        // 3. If specifier is %f:
+        if (specifier === "%f") {
+            // 1. If Type(current) is Symbol, let converted be NaN
+            if (typeof current === "symbol"){
+                converted = NaN;
+                // 2. Otherwise, let converted be the result of Call(%parseFloat%, undefined, current).
+            } else {
+                //converted = dk.console.Formatter.call(parseFloat, undefined, current);
+                converted = parseFloat(current, 10);
+            }
+        }
+        // 4. If specifier is %o, optionally let converted be current with optimally useful formatting applied.
+        if (specifier === "%o") {// TODO
+        }
+        // 5. If specifier is %O, optionally let converted be current with generic JavaScript object formatting applied.
+        if (specifier === "%O") {// TODO
+        }
+        // 6. TODO: process %c
+        if (specifier === "%c") {
+            if (typeof current === "symbol")
+                converted = NaN;
+            else
+                converted = "<a style='"+current.toString()+"'>";
+        }
+        // 7. If any of the previous steps set converted, replace specifier in target with converted.
+        if (converted)
+            target = target.replace(specifier, converted);
+        // 8. Let result be a list containing target together with the elements of args starting from the third onward.
+        const result = [];
+        result.push(target);
+        let n = 2;
+        while (args[n]) {
+            result.push(args[n]);
+            n++;
+        }
         // 4. If target does not have any format specifiers left, return result.
+        const index2 = target.indexOf("%");
+        if (index2 <= -1)
+            return result;
         // 5. If results size is 1, return result.
+        if (result.length === 1)
+            return result;
         // 6. Return Formatter(result).
+        return Formatter(result);
     }
 
     // https://console.spec.whatwg.org/#printer
