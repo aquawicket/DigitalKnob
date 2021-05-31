@@ -2,6 +2,7 @@
 
 window.dk = new Object;
 const duktape = window.duktape;
+dk.cpp = false;
 
 //Keep a object reference to the old console
 const xconsole = new Object;
@@ -14,8 +15,8 @@ dk.x = new Object;
     xconsole.warn = console.warn;
     dk.x.record = [];
     dk.x.logger = function(lvl, args) {
-        !dk.hasCPP() && xconsole[lvl].apply(this, Array.prototype.slice.call(args));
-        dk.hasCPP() && dk && dk.x && dk.x.log.apply(this, Array.prototype.slice.call(args));
+        !dk.hasCPP() && xconsole[lvl] && xconsole[lvl].apply(this, Array.prototype.slice.call(args));
+        dk.hasCPP() && dk && dk.x && dk.x.log && dk.x.log.apply(this, Array.prototype.slice.call(args));
         var obj = {};
         (obj[lvl] = args[0]) && (dk.x && dk.x.record.push(obj))
     }
@@ -77,7 +78,7 @@ document.addEventListener("mousemove", function document_addEventListener(event)
         window.mouseY = event.clientY + document.body.scrollTop
     }
     //FIXME
-    if (dk.getBrowser() === "RML") {
+    if (dk.getBrowser() === "Rml") {
         window.mouseX = event.clientX;
         window.mouseY = event.clientY;
     } else {
@@ -106,14 +107,27 @@ dk.init = function dk_init() {
 }
 
 dk.hasCPP = function dk_hasCPP() {
-    if (dk.getBrowser() === "CEF")
-        return true;
-    if (dk.getBrowser() === "RML")
-        return true;
+	if (dk.cpp === false){ 
+		return false;
+	}
+	dk.cpp = false;
+    if (dk.getBrowser() === "Cef"){
+		dk.cpp = true;
+		dk.cef = true;
+	}
+    if (dk.getBrowser() === "Rml"){
+		dk.cpp = true;
+		dk.rml = true;
+	}
     if (dk.getJSEngine() === "Duktape") {
+		dk.cpp = true;
         dk.duktape = true;
-        return false;
     }
+	if (dk.getJSEngine() === "V8") {
+		dk.cpp = true;
+        dk.v8 = true;
+    }
+	return dk.cpp;
 }
 
 dk.getPlugin = function dk_getPlugin(url) {
@@ -158,7 +172,7 @@ dk.create = function dk_create(data, dk_create_callback) {
     require({
         data
     });
-    if (dk.getBrowser() === "CEF" || dk.getBrowser() === "RML")
+    if (dk.hasCPP())
         CPP_DK_Create(data);
 
     var arry = data.split(",");
@@ -211,7 +225,7 @@ dk.close = function dk_close(data) {
         data.splice(0, 0, "DKHtml");
     else if (data[0].includes(".js"))
         data.splice(0, 0, "DKJavascript");
-    else
+    else if (dk.hasCPP)
         CPP_DK_Close(data);
 
     if (data[0] === "DKJavascript") {
@@ -306,7 +320,8 @@ dk.loadJs = function dk_loadJs(url, dk_loadJs_callback) {
 
     //FIXME - DigitalKnob can't trigger onload yet, so we do this
 
-    if (dk.getJSEngine() === "Duktape") {
+    //if (dk.getJSEngine() === "Duktape") {
+	if (dk.hasCPP()) {
         var plugin = dk.getPlugin(url);
         plugin && console.log("loading dk." + plugin.name + " plugin");
         if (plugin && plugin.init) {
@@ -577,36 +592,40 @@ dk.getOS = function dk_GetOS() {
 
 dk.getBrowser = function dk_getBrowser() {
     if (navigator.userAgent.indexOf("Rml") !== -1) {
-        return "RML";
+		dk.rml = true;
+        return "Rml";
     } else if ((navigator.userAgent.indexOf("Opera") || navigator.userAgent.indexOf('OPR')) !== -1) {
-        return "OPERA";
+        return "Opera";
     } else if (navigator.userAgent.indexOf("Chrome") !== -1 && navigator.userAgent.indexOf("Cef") === -1) {
-        return "CHROME";
+        return "Chrome";
     } else if (navigator.userAgent.indexOf("Cef") !== -1) {
-        return "CEF";
+        return "Cef";
     } else if (navigator.userAgent.indexOf("Safari") !== -1) {
-        return "SAFARI";
+        return "Safari";
     } else if (navigator.userAgent.indexOf("Firefox") !== -1) {
-        return "FIREFOX";
+        return "Firefox";
     } else if ((navigator.userAgent.indexOf("MSIE") !== -1) || (!!document.documentMode === true)) {
         //IF IE > 10
-        return "IE";
+        return "Ie";
     } else {
         return "UNKNOWN BROWSER";
     }
 }
 
 dk.getJSEngine = function dk_getJSEngine() {
-    if (navigator.product === "Duktape") {
-        return "Duktape"
-    }
+    if (navigator.product === "Duktape"){
+        dk.duktape = true;
+		return "Duktape"
+	}
     var v8string = 'function%20javaEnabled%28%29%20%7B%20%5Bnative%20code%5D%20%7D';
     if ('WebkitAppearance'in document.documentElement.style) {
         //If (probably) WebKit browser
         if (escape(navigator.javaEnabled.toString()) === v8string) {
+			dk.v8 = true;
             return "V8";
         } else {
-            return "JSC";
+			dk.jsc = true;
+            return "Jsc";
         }
     }
     return "UNKNOWN JAVASCRIPT ENGINE"

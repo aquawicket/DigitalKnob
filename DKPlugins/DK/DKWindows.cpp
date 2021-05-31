@@ -3,7 +3,6 @@
 #include "DKWindows.h"
 #include "DKFile.h"
 #include "DKLog.h"
-
 #include "conio.h"
 #include <mmdeviceapi.h>
 #include <endpointvolume.h>
@@ -11,7 +10,6 @@
 #include "shlobj.h"
 #include <cstdlib>  //DKUtil::GetUsername() std::getenv()
 //#include <Lmcons.h> //DKUtil::GetUsername() GetUserName()
-
 //Monitor brightness
 #include "PhysicalMonitorEnumerationAPI.h"
 #include "HighLevelMonitorConfigurationAPI.h"
@@ -21,9 +19,9 @@ HWND DKWindows::consoleWindow;
 
 
 int main(int argc, char **argv);
+
 //////////// WIN32 MAIN //////////////////////////////////////////////////////////////////////////
-int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLine, int nCmdShow) 
-{
+int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLine, int nCmdShow) {
 	DKDEBUGFUNC(hInstance, hPrevInstance, lpCmdLine, nCmdShow);
 	UNREFERENCED_PARAMETER(hPrevInstance);
 	UNREFERENCED_PARAMETER(lpCmdLine);
@@ -31,10 +29,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdL
 	return main(__argc, __argv);
 }
 
-
-/////////////////////////////////////////////////
-bool WINAPI DKWindows::ConsoleHandler(DWORD type)
-{
+bool WINAPI DKWindows::ConsoleHandler(DWORD type){
 	DKDEBUGFUNC(type);
 	//FIXME - this is not the main thread
 	switch(type){
@@ -46,16 +41,13 @@ bool WINAPI DKWindows::ConsoleHandler(DWORD type)
 	return false;
 }
 
-/////////////////////////
-bool DKWindows::CpuInit()
-{
+bool DKWindows::CpuInit(){
 	DKDEBUGFUNC();
 	//Init for DKWindows::CpuUsed()
 	PdhOpenQuery(NULL, NULL, &cpuQuery);
 	// You can also use L"\\Processor(*)\\% Processor Time" and get individual CPU values with PdhGetFormattedCounterArray()
 	PdhAddEnglishCounter(cpuQuery, "\\Processor(_Total)\\% Processor Time", NULL, &cpuTotal);
 	PdhCollectQueryData(cpuQuery);
-
 	//Init for DKWindows::CpuUsedByApp()
 	SYSTEM_INFO sysInfo;
 	FILETIME ftime, fsys, fuser;
@@ -67,15 +59,12 @@ bool DKWindows::CpuInit()
 	GetProcessTimes(self, &ftime, &ftime, &fsys, &fuser);
 	memcpy(&lastSysCPU, &fsys, sizeof(FILETIME));
 	memcpy(&lastUserCPU, &fuser, sizeof(FILETIME));
-
 	cpuInit = true;
 	Sleep(1000);
 	return true;
 }
 
-//////////////////////////////////
-bool DKWindows::CpuUsed(int& cpu)
-{
+bool DKWindows::CpuUsed(int& cpu){
 	DKDEBUGFUNC(cpu);
 	if(!cpuInit){ CpuInit(); }
 	PDH_FMT_COUNTERVALUE counterVal;
@@ -85,9 +74,7 @@ bool DKWindows::CpuUsed(int& cpu)
 	return true;
 }
 
-//////////////////////////////////////
-bool DKWindows::CpuUsedByApp(int& cpu)
-{
+bool DKWindows::CpuUsedByApp(int& cpu){
 	DKDEBUGFUNC(cpu);
 	if(!cpuInit){ CpuInit(); }
 	FILETIME ftime, fsys, fuser;
@@ -108,9 +95,7 @@ bool DKWindows::CpuUsedByApp(int& cpu)
 	return true;
 }
 
-//////////////////////////////////////
-bool DKWindows::CreateConsoleHandler()
-{
+bool DKWindows::CreateConsoleHandler(){
 	DKDEBUGFUNC();
 	if(!SetConsoleCtrlHandler((PHANDLER_ROUTINE)DKWindows::ConsoleHandler, true)){
 		DKWARN("Could not set Console Handler. \n");
@@ -126,9 +111,7 @@ bool DKWindows::CreateConsoleHandler()
 	return true;
 }
 
-//////////////////////////////////////////////////////
-bool DKWindows::DrawTextOnScreen(const DKString& text)
-{
+bool DKWindows::DrawTextOnScreen(const DKString& text){
 	DKDEBUGFUNC(text);
 	HDC screenDC = ::GetDC(GetDesktopWindow());
 	::SetBkColor(screenDC, TRANSPARENT);
@@ -138,14 +121,11 @@ bool DKWindows::DrawTextOnScreen(const DKString& text)
 	return true;
 }
 
-///////////////////////////////////////////////////////////////////////
-bool DKWindows::FindImageOnScreen(const DKString& file, int& x, int& y)
-{
+bool DKWindows::FindImageOnScreen(const DKString& file, int& x, int& y){
 	DKDEBUGFUNC(file, x, y);
 	//// Screen to RGB ////
 	int SCREEN_WIDTH = 1280;
 	int SCREEN_HEIGHT = 1024;
-
 	HDC hdc = GetDC(HWND_DESKTOP);
 	HDC hdcTemp = CreateCompatibleDC(hdc);
 	BITMAPINFO bitmap;
@@ -162,28 +142,23 @@ bool DKWindows::FindImageOnScreen(const DKString& file, int& x, int& y)
 	HBITMAP hBitmap = CreateDIBSection(hdcTemp, &bitmap, DIB_RGB_COLORS, (void**)(&sP), NULL, NULL);
 	SelectObject(hdcTemp, hBitmap);
 	BitBlt(hdcTemp, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, hdc, 0, 0, SRCCOPY);
-
 	// clean up
 	//::SelectObject(hdcTemp, hBitmap);
 	//::ReleaseDC(0, hdc);
 	//::DeleteObject(hBitmap);
 	//::DeleteDC(hdcTemp);
 	//Screen RGB data is now accessible in sP
-
 	//// Image to RGB ////
 	HANDLE hBmp = LoadImage(NULL, file.c_str(), IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 	if(NULL == hBmp){
 		DKERROR("Could not load file\n");
 		return false;
 	}
-
 	HDC hDC = ::GetDC( 0 );
 	HDC memDC1 = ::CreateCompatibleDC(hDC);
 	HDC memDC2 = ::CreateCompatibleDC(hDC);
-
 	BITMAP bm;
 	GetObject(hBmp, sizeof(bm), &bm);
-
 	BITMAPINFO bitmap2;
 	bitmap2.bmiHeader.biSize = sizeof(bitmap2.bmiHeader);
 	bitmap2.bmiHeader.biWidth = bm.bmWidth;
@@ -194,13 +169,11 @@ bool DKWindows::FindImageOnScreen(const DKString& file, int& x, int& y)
 	bitmap2.bmiHeader.biSizeImage = bm.bmWidth * 4 * bm.bmHeight;
 	bitmap2.bmiHeader.biClrUsed = 0;
 	bitmap2.bmiHeader.biClrImportant = 0;
-
 	BYTE* iP;
 	HBITMAP hDIBMemBM  = ::CreateDIBSection( 0, &bitmap2, DIB_RGB_COLORS, (void**)&iP, NULL, NULL );
 	HBITMAP hOldBmp1  = (HBITMAP)::SelectObject(memDC1,hDIBMemBM);  
 	HBITMAP hOldBmp2  = (HBITMAP)::SelectObject(memDC2,hBmp);
 	BitBlt(memDC1, 0, 0, bm.bmWidth, bm.bmHeight, memDC2, 0, 0, SRCCOPY);
-
 	// clean up
 	//::SelectObject(memDC1, hOldBmp1);
 	//::SelectObject(memDC2, hOldBmp2);
@@ -211,23 +184,16 @@ bool DKWindows::FindImageOnScreen(const DKString& file, int& x, int& y)
 	//::DeleteDC(memDC1);
 	//::DeleteDC(memDC2);
 	//Image RGB data is now accessible in iP
-
-
 	//// COMPAIR ////
 	bool match = false;
-
 	for(int s=0; s<(SCREEN_WIDTH * SCREEN_HEIGHT * 4); s+=4){
 		for(int i=0; i<(bm.bmHeight * bm.bmWidth * 4); i+=4){
-
 			int a = (((SCREEN_WIDTH - bm.bmWidth) * 4) * ((i / 4) / bm.bmWidth));		
-
-			if(iP[i] == sP[i+s+a] && iP[i+1] == sP[i+s+a+1] && iP[i+2] == sP[i+s+a+2]){
+			if(iP[i] == sP[i+s+a] && iP[i+1] == sP[i+s+a+1] && iP[i+2] == sP[i+s+a+2])
 				match = true;
-			}
-			else{
+			else
 				match = false;
 				i=(bm.bmHeight * bm.bmWidth * 4);
-			}
 		}
 		if(match == true){
 			DKINFO("image match!\n");
@@ -235,7 +201,6 @@ bool DKWindows::FindImageOnScreen(const DKString& file, int& x, int& y)
 			int cx = (s-(cy*4*SCREEN_WIDTH)) / 4;
 			x = cx + (bm.bmWidth / 2);
 			y = SCREEN_HEIGHT - cy - (bm.bmHeight / 2);
-
 			// clean up
 			::SelectObject(hdcTemp, hBitmap);
 			::ReleaseDC(0, hdc);
@@ -253,7 +218,6 @@ bool DKWindows::FindImageOnScreen(const DKString& file, int& x, int& y)
 			return true;
 		}
 	}
-
 	// clean up
 	::SelectObject(hdcTemp, hBitmap);
 	::ReleaseDC(0, hdc);
@@ -271,9 +235,7 @@ bool DKWindows::FindImageOnScreen(const DKString& file, int& x, int& y)
 	return false;
 }
 
-////////////////////////////////////////////
-bool DKWindows::GetClipboard(DKString& text)
-{
+bool DKWindows::GetClipboard(DKString& text){
 	DKDEBUGFUNC(text);
 	char * buffer;
 	if(OpenClipboard(NULL)){
@@ -287,39 +249,30 @@ bool DKWindows::GetClipboard(DKString& text)
 	return false; 
 }
 
-////////////////////////////////
-bool DKWindows::GetKey(int& key)
-{
+bool DKWindows::GetKey(int& key){
 	DKDEBUGFUNC(key);
 	//DKINFO("Press a key...\n");
 	key = _getch();
 	return true;
 }
 
-/////////////////////////////////////////////
-bool DKWindows::GetLastError(DKString& error)
-{
+bool DKWindows::GetLastError(DKString& error){
 	DKDEBUGFUNC(error);
 	//Get the error message, if any.
 	DWORD errorMessageID = ::GetLastError();
 	if (errorMessageID == 0)
 		return true;//std::string(); //No error message has been recorded
-
 	LPSTR messageBuffer = nullptr;
 	size_t size = FormatMessageA(FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS,
 		NULL, errorMessageID, MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), (LPSTR)&messageBuffer, 0, NULL);
-
 	std::string message(messageBuffer, size);
-
 	//Free the buffer.
 	LocalFree(messageBuffer);
 	error = message;
 	return true;
 }
 
-///////////////////////////////////////////
-bool DKWindows::GetMousePos(int& x, int& y)
-{
+bool DKWindows::GetMousePos(int& x, int& y){
 	DKDEBUGFUNC(x, y);
 	POINT p;
 	if(::GetCursorPos(&p)){
@@ -330,23 +283,19 @@ bool DKWindows::GetMousePos(int& x, int& y)
 	return false;
 }
 
-//////////////////////////////////////////////////////////////////////
-bool DKWindows::GetPixelFromImage(const DKString& image, int x, int y)
-{
+bool DKWindows::GetPixelFromImage(const DKString& image, int x, int y){
 	DKDEBUGFUNC(image, x, y);
 	HANDLE hBmp = LoadImage(NULL, image.c_str(), IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 	if(NULL == hBmp){
 		DKERROR("Could not load file\n");
 		return false;
 	}
-
 	HDC dcmem = CreateCompatibleDC(NULL);
 	if (NULL == SelectObject(dcmem, hBmp)){
 		DeleteDC(dcmem); 
 		DKERROR("Could not select object\n");
 		return false; 
 	}
-
 	BITMAP bm;
 	GetObject(hBmp, sizeof(bm), &bm);
 	bm.bmWidth;
@@ -355,9 +304,7 @@ bool DKWindows::GetPixelFromImage(const DKString& image, int x, int y)
 	return true;
 }
 
-////////////////////////////////////////////////////////////////////////
-bool DKWindows::GetPixelFromScreen(int x, int y, int& r, int& g, int& b)
-{
+bool DKWindows::GetPixelFromScreen(int x, int y, int& r, int& g, int& b){
 	DKDEBUGFUNC(x, y, r, g, b);
 	HDC hdc_ = GetDC(GetDesktopWindow()) ;  //not sure if this is right or what exactly it does.
 	COLORREF color = GetPixel(hdc_, x, y);
@@ -367,55 +314,40 @@ bool DKWindows::GetPixelFromScreen(int x, int y, int& r, int& g, int& b)
 	return true;
 }
 
-//////////////////////////////////////////////
-bool DKWindows::GetProcessList(DKString& list)
-{
+bool DKWindows::GetProcessList(DKString& list){
 	DKDEBUGFUNC(list);
 	//list = "this,is,a,test";
-
 	// Get the list of process identifiers.
 	DWORD aProcesses[1024], cbNeeded, cProcesses;
 	unsigned int i;
 	if(!EnumProcesses( aProcesses, sizeof(aProcesses), &cbNeeded)){ return 0; }
-
-
 	// Calculate how many process identifiers were returned.
 	cProcesses = cbNeeded / sizeof(DWORD);
-
 	// Print the name and process identifier for each process.
-	for(i = 0; i < cProcesses; i++){
-		if(aProcesses[i] != 0){
+	for (i = 0; i < cProcesses; i++) {
+		if (aProcesses[i] != 0) {
 			TCHAR szProcessName[MAX_PATH] = TEXT("<unknown>");
-
 			//Get a handle to the process.
-			HANDLE hProcess = OpenProcess( PROCESS_QUERY_INFORMATION | PROCESS_VM_READ,FALSE, aProcesses[i]);
-
+			HANDLE hProcess = OpenProcess(PROCESS_QUERY_INFORMATION | PROCESS_VM_READ, FALSE, aProcesses[i]);
 			//Get the process name.
-			if(NULL != hProcess){
+			if (NULL != hProcess) {
 				HMODULE hMod;
 				DWORD cbNeeded;
-
-				if(EnumProcessModules(hProcess, &hMod, sizeof(hMod),  &cbNeeded)){
-					GetModuleBaseName( hProcess, hMod, szProcessName, sizeof(szProcessName)/sizeof(TCHAR) );
-				}
+				if (EnumProcessModules(hProcess, &hMod, sizeof(hMod), &cbNeeded))
+					GetModuleBaseName(hProcess, hMod, szProcessName, sizeof(szProcessName) / sizeof(TCHAR));
 			}
-
 			// Print the process name and identifier.
 			//tprintf( TEXT("%s  (PID: %u)\n"), szProcessName, processID );
 			list += toString(szProcessName);
 			list += ",";
-
 			//Release the handle to the process.
 			CloseHandle(hProcess);
 		}
 	}
-
 	return true;
 }
 
-//////////////////////////////////////
-bool DKWindows::GetScreenWidth(int& w)
-{
+bool DKWindows::GetScreenWidth(int& w){
 	DKDEBUGFUNC(w);
 	RECT desktop;
 	const HWND hDesktop = GetDesktopWindow();
@@ -424,9 +356,7 @@ bool DKWindows::GetScreenWidth(int& w)
 	return true;
 }
 
-///////////////////////////////////////
-bool DKWindows::GetScreenHeight(int& h)
-{
+bool DKWindows::GetScreenHeight(int& h){
 	DKDEBUGFUNC(h);
 	RECT desktop;
 	const HWND hDesktop = GetDesktopWindow();
@@ -435,8 +365,7 @@ bool DKWindows::GetScreenHeight(int& h)
 	return true;
 }
 
-bool DKWindows::GetUsername(DKString& username)
-{
+bool DKWindows::GetUsername(DKString& username){
 	if (const char* usr_a = std::getenv("USERname")) {
 		username = usr_a;
 		return true;
@@ -453,29 +382,23 @@ bool DKWindows::GetUsername(DKString& username)
 	return false;
 }
 
-///////////////////////////////////////
-bool DKWindows::GetVolume(int& percent)
-{
+bool DKWindows::GetVolume(int& percent){
 	DKDEBUGFUNC(percent);
 	bool bScalar = true;
 	HRESULT hr=NULL;
 	bool decibels = false;
 	bool scalar = false;
-
 	CoInitialize(NULL);
 	IMMDeviceEnumerator *deviceEnumerator = NULL;
 	hr = CoCreateInstance(__uuidof(MMDeviceEnumerator), NULL, CLSCTX_INPROC_SERVER, __uuidof(IMMDeviceEnumerator), (LPVOID *)&deviceEnumerator);
 	IMMDevice *defaultDevice = NULL;
-
 	hr = deviceEnumerator->GetDefaultAudioEndpoint(eRender, eConsole, &defaultDevice);
 	deviceEnumerator->Release();
 	deviceEnumerator = NULL;
-
 	IAudioEndpointVolume *endpointVolume = NULL;
 	hr = defaultDevice->Activate(__uuidof(IAudioEndpointVolume), CLSCTX_INPROC_SERVER, NULL, (LPVOID *)&endpointVolume);
 	defaultDevice->Release();
 	defaultDevice = NULL;
-
 	float volume;
 	endpointVolume->GetMasterVolumeLevel(&volume);
 	hr = endpointVolume->GetMasterVolumeLevelScalar(&volume);
@@ -483,23 +406,18 @@ bool DKWindows::GetVolume(int& percent)
 	return true;
 }
 
-/////////////////////////////////////////
-bool DKWindows::KeyIsDown(const int& key)
-{
+bool DKWindows::KeyIsDown(const int& key){
 	DKDEBUGFUNC(key);
 	if(GetKeyState(key) & 0x8000){ return true; }
 	return false;
 }
 
-///////////////////////////
-bool DKWindows::LeftClick()
-{
+bool DKWindows::LeftClick(){
 	DKDEBUGFUNC();
 	INPUT Input={0};							// Create our input.
 	Input.type = INPUT_MOUSE;					// Let input know we are using the mouse.
 	Input.mi.dwFlags = MOUSEEVENTF_LEFTDOWN;	// We are setting left mouse button down.
 	SendInput(1, &Input, sizeof(INPUT));		// Send the input.
-
 	ZeroMemory(&Input,sizeof(INPUT));			// Fills a block of memory with zeros.
 	Input.type = INPUT_MOUSE;					// Let input know we are using the mouse.
 	Input.mi.dwFlags = MOUSEEVENTF_LEFTUP;		// We are setting left mouse button up.
@@ -507,9 +425,7 @@ bool DKWindows::LeftClick()
 	return true;
 }
 
-///////////////////////////
-bool DKWindows::LeftPress()
-{
+bool DKWindows::LeftPress(){
 	DKDEBUGFUNC();
 	INPUT Input={0};							// Create our input.
 	Input.type = INPUT_MOUSE;					// Let input know we are using the mouse.
@@ -518,9 +434,7 @@ bool DKWindows::LeftPress()
 	return true;
 }
 
-/////////////////////////////
-bool DKWindows::LeftRelease()
-{
+bool DKWindows::LeftRelease(){
 	DKDEBUGFUNC();
 	INPUT Input={0};							// Create our input.
 	Input.type = INPUT_MOUSE;					// Let input know we are using the mouse.
@@ -529,17 +443,13 @@ bool DKWindows::LeftRelease()
 	return true;
 }
 
-/////////////////////////////////
-bool DKWindows::LowPowerMonitor()
-{
+bool DKWindows::LowPowerMonitor(){
 	DKDEBUGFUNC();
 	SendMessage(HWND_BROADCAST, WM_SYSCOMMAND, SC_MONITORPOWER, (LPARAM) 1);
 	return true;
 }
 
-/////////////////////////////
-bool DKWindows::MiddlePress()
-{
+bool DKWindows::MiddlePress(){
 	DKDEBUGFUNC();
 	INPUT Input={0};							// Create our input.
 	Input.type = INPUT_MOUSE;					// Let input know we are using the mouse.
@@ -548,9 +458,7 @@ bool DKWindows::MiddlePress()
 	return true;
 }
 
-///////////////////////////////
-bool DKWindows::MiddleRelease()
-{
+bool DKWindows::MiddleRelease(){
 	DKDEBUGFUNC();
 	INPUT Input={0};							// Create our input.
 	Input.type = INPUT_MOUSE;					// Let input know we are using the mouse.
@@ -559,9 +467,7 @@ bool DKWindows::MiddleRelease()
 	return true;
 }
 
-//////////////////////////////////////////////////////////////////
-bool DKWindows::PhysicalMemory(unsigned long long& physicalMemory)
-{
+bool DKWindows::PhysicalMemory(unsigned long long& physicalMemory){
 	DKDEBUGFUNC(physicalMemory);
 	MEMORYSTATUSEX memInfo;
 	memInfo.dwLength = sizeof(MEMORYSTATUSEX);
@@ -571,9 +477,7 @@ bool DKWindows::PhysicalMemory(unsigned long long& physicalMemory)
 	return true;
 }
 
-//////////////////////////////////////////////////////////////////////
-bool DKWindows::PhysicalMemoryUsed(unsigned long long& physicalMemory)
-{
+bool DKWindows::PhysicalMemoryUsed(unsigned long long& physicalMemory){
 	DKDEBUGFUNC(physicalMemory);
 	MEMORYSTATUSEX memInfo;
 	memInfo.dwLength = sizeof(MEMORYSTATUSEX);
@@ -583,9 +487,7 @@ bool DKWindows::PhysicalMemoryUsed(unsigned long long& physicalMemory)
 	return true;
 }
 
-/////////////////////////////////////////////////////////////////////
-bool DKWindows::PhysicalMemoryUsedByApp(unsigned int& physicalMemory)
-{
+bool DKWindows::PhysicalMemoryUsedByApp(unsigned int& physicalMemory){
 	DKDEBUGFUNC(physicalMemory);
 	PROCESS_MEMORY_COUNTERS pmc;
 	GetProcessMemoryInfo(GetCurrentProcess(), &pmc, sizeof(pmc));
@@ -594,9 +496,7 @@ bool DKWindows::PhysicalMemoryUsedByApp(unsigned int& physicalMemory)
 	return true;
 }
 
-/////////////////////////////////
-bool DKWindows::PressKey(int key)
-{
+bool DKWindows::PressKey(int key){
 	DKDEBUGFUNC(key);
 	INPUT ip;
 	// Set up a generic keyboard event.
@@ -610,9 +510,7 @@ bool DKWindows::PressKey(int key)
 	return true;
 }
 
-///////////////////////////////////////////
-bool DKWindows::RefreshWindowsEnvironment()
-{
+bool DKWindows::RefreshWindowsEnvironment(){
 	DKDEBUGFUNC();
 #if !defined(WIN64)
 	PDWORD_PTR dwReturnValue = 0;
@@ -622,9 +520,7 @@ bool DKWindows::RefreshWindowsEnvironment()
 	return false;
 }
 
-///////////////////////////////////
-bool DKWindows::ReleaseKey(int key)
-{
+bool DKWindows::ReleaseKey(int key){
 	DKDEBUGFUNC(key);
 	INPUT ip;
 	// Set up a generic keyboard event.
@@ -638,15 +534,12 @@ bool DKWindows::ReleaseKey(int key)
 	return true;
 }
 
-////////////////////////////
-bool DKWindows::RightClick()
-{
+bool DKWindows::RightClick(){
 	DKDEBUGFUNC();
 	INPUT Input={0};							// Create our input.
 	Input.type = INPUT_MOUSE;					// Let input know we are using the mouse.
 	Input.mi.dwFlags = MOUSEEVENTF_RIGHTDOWN;	// We are setting right mouse button down.
 	SendInput(1, &Input, sizeof(INPUT));		// Send the input.
-
 	ZeroMemory(&Input,sizeof(INPUT));			// Fills a block of memory with zeros.
 	Input.type = INPUT_MOUSE;					// Let input know we are using the mouse.
 	Input.mi.dwFlags = MOUSEEVENTF_RIGHTUP;		// We are setting right mouse button up.
@@ -654,9 +547,7 @@ bool DKWindows::RightClick()
 	return true;
 }
 
-////////////////////////////
-bool DKWindows::RightPress()
-{
+bool DKWindows::RightPress(){
 	DKDEBUGFUNC();
 	INPUT Input={0};							// Create our input.
 	Input.type = INPUT_MOUSE;					// Let input know we are using the mouse.
@@ -665,9 +556,7 @@ bool DKWindows::RightPress()
 	return true;
 }
 
-//////////////////////////////
-bool DKWindows::RightRelease()
-{
+bool DKWindows::RightRelease(){
 	DKDEBUGFUNC();
 	INPUT Input={0};							// Create our input.
 	Input.type = INPUT_MOUSE;					// Let input know we are using the mouse.
@@ -676,37 +565,29 @@ bool DKWindows::RightRelease()
 	return true;
 }
 
-////////////////////////////////////////////
-bool DKWindows::Run(const DKString& command)
-{
+bool DKWindows::Run(const DKString& command){
 	DKDEBUGFUNC(command);
 	ShellExecute(NULL,NULL,command.c_str(),NULL,NULL,SW_SHOWNORMAL); //TODO: error control
 	return true;
 }
 
-/////////////////////////////////////////////////
-bool DKWindows::SetBrightness(const int& percent)
-{
+bool DKWindows::SetBrightness(const int& percent){
 	DKDEBUGFUNC(percent);
 	// Prepare variables
 	HMONITOR hMonitor = NULL;
 	HMONITOR hMonitorTest = NULL;
 	DWORD cPhysicalMonitors;
 	LPPHYSICAL_MONITOR pPhysicalMonitors = NULL;
-
 	// Get the screen
 	HWND hWnd = GetDesktopWindow();
 	hMonitor = MonitorFromWindow(hWnd, MONITOR_DEFAULTTOPRIMARY);
-
 	_BOOL success = GetNumberOfPhysicalMonitorsFromHMONITOR(hMonitor, &cPhysicalMonitors);
 	if(success){
 		pPhysicalMonitors = (LPPHYSICAL_MONITOR)malloc(cPhysicalMonitors* sizeof(PHYSICAL_MONITOR));        
 		if(pPhysicalMonitors != NULL){
 			success = GetPhysicalMonitorsFromHMONITOR(hMonitor,cPhysicalMonitors, pPhysicalMonitors);
-			
 			int count = (int)cPhysicalMonitors;
 			DWORD dwNewBrightness = percent;
-
 			for(int i=0; i<count; i++){
 				HANDLE hPhysicalMonitor = pPhysicalMonitors[i].hPhysicalMonitor;
 				success = SetMonitorBrightness(hPhysicalMonitor, dwNewBrightness);
@@ -718,9 +599,7 @@ bool DKWindows::SetBrightness(const int& percent)
 	return true;
 }
 
-//////////////////////////////////////////////////
-bool DKWindows::SetClipboard(const DKString& text)
-{
+bool DKWindows::SetClipboard(const DKString& text){
 	DKDEBUGFUNC(text);
 	if(OpenClipboard(NULL)){
 		HGLOBAL clipbuffer;
@@ -738,14 +617,11 @@ bool DKWindows::SetClipboard(const DKString& text)
 	return false; 
 }
 
-///////////////////////////////////////////////////////////
-bool DKWindows::SetClipboardFiles(const DKString& filelist)
-{
+bool DKWindows::SetClipboardFiles(const DKString& filelist){
 	DKDEBUGFUNC(filelist);
 	//char sFiles[] = "C:/Users/aquawicket/digitalknob/README.md\0";
 	DKString sFiles = filelist;
 	replace(sFiles, ",", "\0"); //not working
-
 	DROPFILES dobj = { 20, { 0, 0 }, 0, 1 };
 	int nLen = sFiles.size(); //sizeof(sFiles);
 	int nGblLen = sizeof(dobj) + nLen*2 + 5; //lots of nulls and multibyte_char
@@ -753,22 +629,18 @@ bool DKWindows::SetClipboardFiles(const DKString& filelist)
 	char* sData = (char*)::GlobalLock(hGbl);
 	memcpy(sData, &dobj, 20);
 	char* sWStr = sData+20;
-	for(int i = 0; i < nLen*2; i += 2){
+	for(int i = 0; i < nLen*2; i += 2)
 		sWStr[i] = sFiles[i/2];
-	}
 	::GlobalUnlock(hGbl);
 	if(OpenClipboard(NULL)){
 		EmptyClipboard();
 		SetClipboardData(CF_HDROP, hGbl);
 		CloseClipboard();
 	}
-
 	return true;
 }
 
-///////////////////////////////////////////////////////
-bool DKWindows::SetClipboardImage(const DKString& file)
-{
+bool DKWindows::SetClipboardImage(const DKString& file){
 	DKDEBUGFUNC(file);
 	//TODO - other formats besides .bmp
 	HBITMAP hBM = (HBITMAP) LoadImage( NULL, file.c_str(), IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
@@ -777,7 +649,6 @@ bool DKWindows::SetClipboardImage(const DKString& file)
 		DKERROR("DKWindows::SetClipboardImage("+file+"): ::OpenClipboard(hWnd) failed\n");
 		return false; 
 	}
-
 	::EmptyClipboard();
 	BITMAP bm;
 	::GetObject(hBM, sizeof(bm), &bm);
@@ -797,25 +668,19 @@ bool DKWindows::SetClipboardImage(const DKString& file)
 		bi.biBitCount = 8;
 	else // if greater than 8-bit, force to 24-bit
 		bi.biBitCount = 24;
-
 	// Get size of color table.
 	SIZE_T dwColTableLen = (bi.biBitCount <= 8) ? (1 << bi.biBitCount) * sizeof(RGBQUAD) : 0;
-	
 	// Create a device context with palette
 	HDC hDC = ::GetDC(NULL);
 	HPALETTE hPal = static_cast<HPALETTE>(::GetStockObject(DEFAULT_PALETTE));
 	HPALETTE hOldPal = ::SelectPalette(hDC, hPal, FALSE);
 	::RealizePalette(hDC);
-
 	// Use GetDIBits to calculate the image size.
 	::GetDIBits(hDC, hBM, 0, static_cast<UINT>(bi.biHeight), NULL, reinterpret_cast<LPBITMAPINFO>(&bi), DIB_RGB_COLORS);
-		
 	// If the driver did not fill in the biSizeImage field, then compute it.
 	// Each scan line of the image is aligned on a DWORD (32bit) boundary.
-	if (0 == bi.biSizeImage){
+	if (0 == bi.biSizeImage)
 		bi.biSizeImage = ((((bi.biWidth * bi.biBitCount) + 31) & ~31) / 8) * bi.biHeight;
-	}
-
 	// Allocate memory
 	HGLOBAL hDIB = ::GlobalAlloc(GMEM_MOVEABLE, sizeof(BITMAPINFOHEADER) + dwColTableLen + bi.biSizeImage);
 	if(hDIB){
@@ -825,7 +690,6 @@ bool DKWindows::SetClipboardImage(const DKString& file)
 			LPBITMAPINFOHEADER pHdr;
 			LPBITMAPINFO       pInfo;
 		} Hdr;
-
 		Hdr.p = ::GlobalLock(hDIB);
 		// Copy the header
 		::CopyMemory(Hdr.p, &bi, sizeof(BITMAPINFOHEADER));
@@ -837,9 +701,8 @@ bool DKWindows::SetClipboardImage(const DKString& file)
 			hDIB = NULL;
 		}
 	}
-	if(hDIB){ 
+	if(hDIB)
 		::SetClipboardData(CF_DIB, hDIB);
-	}
 	::CloseClipboard();
 	::SelectPalette(hDC, hOldPal, FALSE);
 	::ReleaseDC(NULL, hDC);
@@ -847,17 +710,13 @@ bool DKWindows::SetClipboardImage(const DKString& file)
 	return true;
 }
 
-///////////////////////////////////////////////////////
-bool DKWindows::SetMousePos(const int& x, const int& y)
-{
+bool DKWindows::SetMousePos(const int& x, const int& y){
 	DKDEBUGFUNC(x, y);
 	::SetCursorPos(x, y);
 	return true;
 }
 
-//////////////////////////
-void DKWindows::SetTitle()
-{
+void DKWindows::SetTitle(){
 	DKDEBUGFUNC();
 	//TODO - add string variable for title input
 	/////  Set the window title
@@ -877,9 +736,7 @@ void DKWindows::SetTitle()
 	SetConsoleTitle(title.c_str());
 }
 
-///////////////////////////////////////
-bool DKWindows::SetVolume(int& percent)
-{
+bool DKWindows::SetVolume(int& percent){
 	DKDEBUGFUNC(percent);
 	//Windows Vista and up only
 	if(percent > 100){percent = 100;}
@@ -889,70 +746,54 @@ bool DKWindows::SetVolume(int& percent)
     bool decibels = false;
     bool scalar = false;
     double newVolume = (double)percent / 100;
- 
     CoInitialize(NULL);
     IMMDeviceEnumerator *deviceEnumerator = NULL;
     hr = CoCreateInstance(__uuidof(MMDeviceEnumerator), NULL, CLSCTX_INPROC_SERVER, __uuidof(IMMDeviceEnumerator), (LPVOID *)&deviceEnumerator);
     IMMDevice *defaultDevice = NULL;
- 
     hr = deviceEnumerator->GetDefaultAudioEndpoint(eRender, eConsole, &defaultDevice);
     deviceEnumerator->Release();
     deviceEnumerator = NULL;
- 
     IAudioEndpointVolume *endpointVolume = NULL;
     hr = defaultDevice->Activate(__uuidof(IAudioEndpointVolume), CLSCTX_INPROC_SERVER, NULL, (LPVOID *)&endpointVolume);
     defaultDevice->Release();
     defaultDevice = NULL;
- 
     float currentVolume = 0;
     endpointVolume->GetMasterVolumeLevel(&currentVolume);
     //printf("Current volume in dB is: %f\n", currentVolume);
-
     hr = endpointVolume->GetMasterVolumeLevelScalar(&currentVolume);
     //CString strCur=L"";
     //strCur.Format(L"%f",currentVolume);
     //AfxMessageBox(strCur);
-
     // printf("Current volume as a scalar is: %f\n", currentVolume);
-    if (bScalar==false){
+    if (bScalar==false)
         hr = endpointVolume->SetMasterVolumeLevel((float)newVolume, NULL);
-    }
-    else if (bScalar==true){
+    else if (bScalar==true)
         hr = endpointVolume->SetMasterVolumeLevelScalar((float)newVolume, NULL);
-    }
     endpointVolume->Release();
     CoUninitialize();
     return true;
 }
 
-///////////////////////////////////////
-bool DKWindows::Sleep(int milliseconds)
-{
+bool DKWindows::Sleep(int milliseconds){
 	//DKDEBUGFUNC(milliseconds);
 	::Sleep(milliseconds);
 	return true;;
 }
 
-////////////////////////////////
-bool DKWindows::TurnOffMonitor()
-{
+bool DKWindows::TurnOffMonitor(){
 	DKDEBUGFUNC();
 	Sleep(500); // Eliminate user's interaction for 500 ms
 	SendMessage(HWND_BROADCAST, WM_SYSCOMMAND, SC_MONITORPOWER, (LPARAM) 2);
 	return true;
 }
 
-///////////////////////////////
-bool DKWindows::TurnOnMonitor()
-{
+bool DKWindows::TurnOnMonitor(){
 	DKDEBUGFUNC();
 	SendMessage(HWND_BROADCAST, WM_SYSCOMMAND, SC_MONITORPOWER, (LPARAM) -1);
 	return true;
 }
 
-////////////////////////////////////////////////////////////////
-bool DKWindows::VirtualMemory(unsigned long long& virtualMemory)
-{
+bool DKWindows::VirtualMemory(unsigned long long& virtualMemory){
 	DKDEBUGFUNC(virtualMemory);
 	MEMORYSTATUSEX memInfo;
 	memInfo.dwLength = sizeof(MEMORYSTATUSEX);
@@ -962,9 +803,7 @@ bool DKWindows::VirtualMemory(unsigned long long& virtualMemory)
 	return true;
 }
 
-////////////////////////////////////////////////////////////////////
-bool DKWindows::VirtualMemoryUsed(unsigned long long& virtualMemory)
-{
+bool DKWindows::VirtualMemoryUsed(unsigned long long& virtualMemory){
 	DKDEBUGFUNC(virtualMemory);
 	MEMORYSTATUSEX memInfo;
 	memInfo.dwLength = sizeof(MEMORYSTATUSEX);
@@ -974,9 +813,7 @@ bool DKWindows::VirtualMemoryUsed(unsigned long long& virtualMemory)
 	return true;
 }
 
-///////////////////////////////////////////////////////////////////
-bool DKWindows::VirtualMemoryUsedByApp(unsigned int& virtualMemory)
-{
+bool DKWindows::VirtualMemoryUsedByApp(unsigned int& virtualMemory){
 	DKDEBUGFUNC(virtualMemory);
 	PROCESS_MEMORY_COUNTERS pmc;
 	GetProcessMemoryInfo(GetCurrentProcess(), &pmc, sizeof(pmc));
@@ -985,9 +822,7 @@ bool DKWindows::VirtualMemoryUsedByApp(unsigned int& virtualMemory)
 	return true;
 }
 
-///////////////////////////////////////////////////////////////
-bool DKWindows::WaitForImage(const DKString& file, int timeout)
-{
+bool DKWindows::WaitForImage(const DKString& file, int timeout){
 	DKDEBUGFUNC(file, timeout);
 	//FIXME - this is blocking,  thread this out
 	int i = 0;
@@ -1000,45 +835,36 @@ bool DKWindows::WaitForImage(const DKString& file, int timeout)
 	return true;
 }
 
-///////////////////////////
-bool DKWindows::WheelDown()
-{
+bool DKWindows::WheelDown(){
 	DKDEBUGFUNC();
 	mouse_event(MOUSEEVENTF_WHEEL, 0, 0, -WHEEL_DELTA, NULL);
 	return true;
 }
 
-/////////////////////////
-bool DKWindows::WheelUp()
-{
+bool DKWindows::WheelUp(){
 	DKDEBUGFUNC();
 	mouse_event(MOUSEEVENTF_WHEEL, 0, 0, WHEEL_DELTA, NULL);
 	return true;
 }
 
 /*
-////////////////////////////
-bool DKWindows::PrintStack()
-{
+bool DKWindows::PrintStack(){
 	DKDEBUGFUNC();
 	unsigned int   i;
     void         * stack[ 100 ];
     unsigned short frames;
     SYMBOL_INFO  * symbol;
     HANDLE         process;
-
     process = GetCurrentProcess();
     SymInitialize( process, NULL, TRUE );
     frames               = CaptureStackBackTrace( 0, 100, stack, NULL );
     symbol               = ( SYMBOL_INFO * )calloc( sizeof( SYMBOL_INFO ) + 256 * sizeof( char ), 1 );
     symbol->MaxNameLen   = 255;
     symbol->SizeOfStruct = sizeof( SYMBOL_INFO );
-
     for( i = 0; i < frames; i++ ){
          SymFromAddr( process, ( DWORD64 )( stack[ i ] ), 0, symbol );
          printf( "%i: %s - 0x%0X\n", frames - i - 1, symbol->Name, symbol->Address );
 	}
-
     free( symbol );
 }
 */
