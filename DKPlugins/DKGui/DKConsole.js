@@ -145,59 +145,56 @@ dk.console.end = function dk_console_end() {
 
 dk.console.create = function dk_console_create(parent, top, bottom, left, right, width, height) {
     dk.console.limit = 100;
-    const container = document.createElement("div");
-    dk.console.container = container;
-    container.setAttribute("dk_console", "container");
-    container.style.top = top;
-    container.style.bottom = bottom;
-    container.style.left = left;
-    container.style.right = right;
-    container.style.width = width;
-    container.style.height = height;
-    container.oncontextmenu = function container_oncontextmenu(event) {
-        event.preventDefault();
-        const menu = dk.menu.createInstance();
-        dk.menu.addItem(menu, "Clear console", function DKMenu_Clear() {
-            dk.console.clear();
-        });
-    }
-    parent.appendChild(container);
 
-    const div = document.createElement("div");
-    div.setAttribute("dk_console", "div");
-    container.appendChild(div);
-
-    //Set up command div
-    const commandDiv = document.createElement("div");
-    commandDiv.setAttribute("dk_console", "commandDiv");
-    commandDiv.style.backgroundColor = "rgb(36,36,36)";
-    commandDiv.style.borderColor = "rgb(58,58,58)";
-    div.appendChild(commandDiv);
-
-    const command = document.createElement("input");
-    command.setAttribute("dk_console", "command");
-    command.style.removeProperty("width");
-    command.type = "text";
-    command.onkeydown = function command_onkeydown(event) {
-        if (event.code === "Enter") {
-            if (command.value === "clear" || command.value === "cls") {
+    const container = dk.gui.createTag("div", parent, {
+        style: {
+            top: top,
+            bottom: bottom,
+            left: left,
+            right: right,
+            width: width,
+            height: height
+        },
+        oncontextmenu: function container_oncontextmenu(event) {
+            event.preventDefault();
+            const menu = dk.menu.createInstance();
+            dk.menu.addItem(menu, "Clear console", function DKMenu_Clear() {
                 dk.console.clear();
-                command.value = "";
-                return;
-            }
-            console.debug("RUN Javascript -> " + command.value);
-            try {
-                eval(command.value);
-            } catch (x) {
-                console.error("eval failed", x.stack);
-            }
-            command.value = "";
+            });
         }
-    }
-    commandDiv.appendChild(command);
+    });
+    container.setAttribute("dk_console", "container");
+    dk.console.container = container;
 
-    const blueArrow = dk.gui.createImage(commandDiv, "blueArrow", "DKGui/cmndArrow.png", "", "0rem", "0rem", "", "", "8rem");
-    blueArrow.style.position = "relative";
+    const div = dk.gui.createTag("div", container, {});
+    div.setAttribute("dk_console", "div");
+
+    const commandDiv = dk.gui.createTag("div", div, {});
+    commandDiv.setAttribute("dk_console", "commandDiv");
+
+    dk.gui.createTag("input", commandDiv, {
+        type: "text",
+        onkeydown: function command_onkeydown(event) {
+            if (event.code === "Enter") {
+                if (command.value === "clear" || command.value === "cls") {
+                    dk.console.clear();
+                    command.value = "";
+                    return;
+                }
+                console.debug("RUN Javascript -> " + command.value);
+                try {
+                    eval(command.value);
+                } catch (x) {
+                    console.error("eval failed", x.stack);
+                }
+                command.value = "";
+            }
+        }
+    }).setAttribute("dk_console", "command");
+
+    dk.gui.createTag("img", commandDiv, {
+        src: "DKGui/cmndArrow.png",
+    }).setAttribute("dk_console", "cmnd");
 
     // https://console.spec.whatwg.org/#logger
     dk.console.Logger = function dl_console_Logger(logLevel, args) {

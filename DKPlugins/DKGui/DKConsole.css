@@ -46,27 +46,33 @@
 [dk_console="commandDiv"] {
     width: 100%;
     height: 30rem;
-    font-size: 10rem;
-    font-family: Consolas, Lucinda, Console, Courier New, monospace;
     white-space: pre-wrap;
     box-sizing: border-box;
-    padding: 2rem;
-    padding-left: 20rem;
+    padding: 0rem;
+    padding-left: 6rem;
     border-style: solid;
     border-width: 1rem;
     border-top-width: 0rem;
     border-left-width: 0rem;
-    background-color: rgba(0,0,0,1);
 }
 
 [dk_console="command"] {
     position: absolute;
-    left: 30rem;
-    /* bottom: 0rem; */
-    /*right: 0rem;*/
-    /* height: 100%; */
+    left: 17rem;
+    font-family: Consolas, Lucinda, Console, Courier New, monospace;
+    font-size: 10rem;
     width: 95%;
     background-color: rgba(0,0,0,0);
     border-color: rgba(0,0,0,0);
     color: white;
+}
+
+[dk_console="command"]:focus-visible {
+    outline: none;
+}
+
+[dk_console="cmnd"] {
+    position: relative;
+    top: 3rem;
+    height: 7rem;
 }
