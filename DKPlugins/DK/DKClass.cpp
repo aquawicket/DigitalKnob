@@ -138,7 +138,8 @@ void DKClass::CloseAll()
 {
 	DKDEBUGFUNC();
 	std::map<DKString, DKClass*>::reverse_iterator rit;
-	for(rit = (*classes).rbegin(); rit != (*classes).rend(); rit++){
+	//for(rit = (*classes).rbegin(); rit != (*classes).rend(); rit++){
+	for(rit = (*classes).rend(); rit != (*classes).rbegin(); rit--){
 		if((*classes)[rit->first]){
 			//DKLOG("DKClass::CloseAll(): Closing " + rit->first + "\n");
 			(*classes)[rit->first]->Close("");
