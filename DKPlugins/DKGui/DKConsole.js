@@ -195,16 +195,13 @@ dk.console.create = function dk_console_create(parent, top, bottom, left, right,
     command.style.backgroundColor = "rgb(150,150,150)";
     command.style.borderColor = "rgb(40,40,40)";
     command.onkeydown = function command_onkeydown(event) {
-        const key = event.charCode || event.keyCode;
-        if (key === 13) {
-            //enter
+        if (event.code === "Enter") {
             if (command.value === "clear" || command.value === "cls") {
                 dk.console.clear();
                 command.value = "";
                 return;
             }
             console.debug("RUN Javascript -> " + command.value);
-
             try {
                 eval(command.value);
             } catch (x) {
@@ -216,20 +213,22 @@ dk.console.create = function dk_console_create(parent, top, bottom, left, right,
     container.appendChild(command);
 
     // https://console.spec.whatwg.org/#logger
-    // logLevel: log, warn, debug, info, error, 
     dk.console.Logger = function dl_console_Logger(logLevel, args) {
+        // 1. If args is empty, return.
+        // 2. Let first be args[0].
+        // 3. Let rest be all elements following first in args.
+        // 4. If rest is empty, perform Printer(logLevel, « first ») and return.
+        // 5. If first does not contain any format specifiers, perform Printer(logLevel, args).
+        // 6. Otherwise, perform Printer(logLevel, Formatter(args)).
+        // 7. Return undefined.
         const _args = dk.console.ColorChromeConsole(arguments);
-
         if ((div.scrollHeight - div.scrollTop) < (div.offsetHeight + 1))
             div.scroll = true;
         else
             div.scroll = false;
-
         const msgDiv = document.createElement("div");
         msgDiv.setAttribute("dk_console", "msgDiv");
-
         const msgSpan = document.createElement("span");
-
         //TODO: If the message is the same as the last, just have a count next to the original.
         if (arguments[1] && arguments[1].includes && arguments[1].includes("<anonymous>")) {
             arguments[1] = arguments[1].replace("<anonymous>", "&lt;anonymous&gt;");
@@ -237,17 +236,14 @@ dk.console.create = function dk_console_create(parent, top, bottom, left, right,
         msgSpan.innerHTML = arguments[1];
         msgSpan.setAttribute("dk_console", "msgSpan");
 
-        //if (arguments[1] === "red") {
         if (logLevel === "error") {
             msgSpan.style.color = "rgb(255,128,128)";
             msgDiv.style.backgroundColor = "rgb(41,0,0)";
             msgDiv.style.borderColor = "rgb(92,0,0)";
-            //} else if (arguments[1] === "yellow") {
         } else if (logLevel === "warn") {
             msgSpan.style.color = "rgb(255,221,158)";
             msgDiv.style.backgroundColor = "rgb(51,43,0)";
             msgDiv.style.borderColor = "rgb(102,85,0)";
-            //} else if (arguments[1] === "blue") {
         } else if (logLevel === "debug") {
             msgSpan.style.color = "rgb(77,136,255)";
             msgDiv.style.backgroundColor = "rgb(36,36,36)";
@@ -267,43 +263,89 @@ dk.console.create = function dk_console_create(parent, top, bottom, left, right,
         div.scroll && (div.scrollTop = div.scrollHeight);
 
         //Limit the number of stored lines
-        if (div.childElementCount > dk.console.limit) {
+        if (div.childElementCount > dk.console.limit)
             div.removeChild(div.firstChild);
-        }
-
         return msgDiv.innerHTML;
     }
     // https://console.spec.whatwg.org/#formatter
-    dk.console.Formatter = function dk_console_Formatter(args) {//TODO
+    dk.console.Formatter = function dk_console_Formatter(args) {
+        // 1. Let target be the first element of args.
+        // 2. Let current be the second element of args.
+        // 3. Find the first possible format specifier specifier, from the left to the right in target.
+        //     1. If specifier is %s, let converted be the result of Call(%String%, undefined, « current »).
+        //     2. If specifier is %d or %i:
+        //          1. If Type(current) is Symbol, let converted be NaN
+        //          2. Otherwise, let converted be the result of Call(%parseInt%, undefined, « current, 10 »).
+        //     3. If specifier is %f:
+        //          1. If Type(current) is Symbol, let converted be NaN
+        //          2. Otherwise, let converted be the result of Call(%parseFloat%, undefined, « current »).
+        //     4. If specifier is %o, optionally let converted be current with optimally useful formatting applied.
+        //     5. If specifier is %O, optionally let converted be current with generic JavaScript object formatting applied.
+        //     6. TODO: process %c
+        //     7. If any of the previous steps set converted, replace specifier in target with converted.
+        //     8. Let result be a list containing target together with the elements of args starting from the third onward.
+        // 4. If target does not have any format specifiers left, return result.
+        // 5. If result’s size is 1, return result.
+        // 6. Return Formatter(result).
     }
     // https://console.spec.whatwg.org/#printer
     dk.console.Printer = function dk_console_Printer(logLevel, args/*[, options]*/){//TODO
     }
-
-    //Set up dk.console variables
     // https://console.spec.whatwg.org/#assert
-    dk.console.assert = function dk_console_assert(condition, ...data){//TODO
+    dk.console.assert = function dk_console_assert(condition, ...data){
+        !condition && (condition = false);   
+        // 1. If condition is true, return.
+        // 2. Let message be a string without any formatting specifiers indicating generically an assertion failure (such as "Assertion failed").
+        // 3. If data is empty, append message to data.
+        // 4. Otherwise: 
+        //     1. Let first be data[0].
+        //     2. If Type(first) is not String, then prepend message to data.
+        //     3. Otherwise:
+        //        1. Let concat be the concatenation of message, U+003A (:), U+0020 SPACE, and first.
+        //        2. Set data[0] to concat.
+        //     5. Perform Logger("assert", data).
     }
     // https://console.spec.whatwg.org/#clear
     dk.console.clear = function dk_console_clear() {
+        // 1. Empty the appropriate group stack.
+        // 2. If possible for the environment, clear the console. (Otherwise, do nothing.)
         div.innerHTML = "";
     }
     dk.console.context;
     // https://console.spec.whatwg.org/#count
-    dk.console.count = function dk_console_count(label) {//TODO
+    dk.console.count = function dk_console_count(label) {
+        !label && (label = "default");
+        // 1. Let map be the associated count map.
+        // 2. If map[label] exists, set map[label] to map[label] + 1.
+        // 3. Otherwise, set map[label] to 1.
+        // 4. Let concat be the concatenation of label, U+003A (:), U+0020 SPACE, and ToString(map[label]).
+        // 5. Perform Logger("count", « concat »).
     }
     // https://console.spec.whatwg.org/#countReset
-    dk.console.countReset = function dk_console_countReset(label) {//TODO
+    dk.console.countReset = function dk_console_countReset(label) {
+        !label && (label = "default");
+        // 1. Let map be the associated count map.
+        // 2. If map[label] exists, set map[label] to 0.
+        // 3. Otherwise:
+            // 1. Let message be a string without any formatting specifiers indicating generically that the given label does not have an associated count.
+            // 2. Perform Logger("countReset", « message »); 
     }
     // https://console.spec.whatwg.org/#debug
     dk.console.debug = function dk_console_debug(...data) {
         dk.console.Logger("debug", data);
     }
     // https://console.spec.whatwg.org/#dir
-    dk.console.dir = function dk_console_dir(item, options) {//TODO
+    dk.console.dir = function dk_console_dir(item, options) {
+        // 1. Let object be item with generic JavaScript object formatting applied.
+        // 2. Perform Printer("dir", « object », options).
     }
     // https://console.spec.whatwg.org/#dirxml
-    dk.console.dirxml = function dk_console_dirxml(...data) {// TODO
+    dk.console.dirxml = function dk_console_dirxml(...data) {
+        // 1. Let finalList be a new list, initially empty.
+        // 2. For each item of data:
+        //     1. Let converted be a DOM tree representation of item if possible; otherwise let converted be item with optimally useful formatting applied.
+        //     2. Append converted to finalList.
+        // 3. Perform Logger("dirxml", finalList).
     }
     // https://console.spec.whatwg.org/#error
     dk.console.error = function dk_console_error(...data) {
@@ -314,13 +356,26 @@ dk.console.create = function dk_console_create(parent, top, bottom, left, right,
     }
     // https://console.spec.whatwg.org/#group
     dk.console.group = function dk_console_group(...data) {
+        // 1. Let group be a new group.
+        // 2. If data is not empty, let groupLabel be the result of Formatter(data). Otherwise, let groupLabel be an implementation-chosen label representing a group.
+        // 3. Incorporate groupLabel as a label for group.
+        // 4. Optionally, if the environment supports interactive groups, group should be expanded by default.
+        // 5. Perform Printer("group", « group »).
+        // 6. Push group onto the appropriate group stack.
         dk.console.Logger("group", data);
     }
     // https://console.spec.whatwg.org/#groupcollapsed
-    dk.console.groupCollapsed = function dk_console_groupCollapsed(...data) {//TODO
+    dk.console.groupCollapsed = function dk_console_groupCollapsed(...data) {
+        // 1. Let group be a new group.
+        // 2. If data is not empty, let groupLabel be the result of Formatter(data). Otherwise, let groupLabel be an implementation-chosen label representing a group.
+        // 3. Incorporate groupLabel as a label for group.
+        // 4. Optionally, if the environment supports interactive groups, group should be collapsed by default.
+        // 5. Perform Printer("groupCollapsed", « group »).
+        // 6. Push group onto the appropriate group stack.
     }
     // https://console.spec.whatwg.org/#groupend
-    dk.console.groupEnd = function dk_console_groupEnd(...data) {//TODO
+    dk.console.groupEnd = function dk_console_groupEnd(...data) {
+        // Pop the last group from the group stack.
     }
     // https://console.spec.whatwg.org/#info
     dk.console.info = function dk_console_info(...data) {
@@ -334,20 +389,42 @@ dk.console.create = function dk_console_create(parent, top, bottom, left, right,
     dk.console.profile;
     dk.console.profileEnd;
     // https://console.spec.whatwg.org/#table
-    dk.console.table = function dk_console_table(tabularData, properties){//TODO
+    dk.console.table = function dk_console_table(tabularData, properties){
+        // Try to construct a table with the columns of the properties of tabularData (or use properties) and rows of tabularData 
+        // and log it with a logLevel of "log". Fall back to just logging the argument if it can’t be parsed as tabular.
     }
     // https://console.spec.whatwg.org/#time
-    dk.console.time = function dk_console_time(label) {//TODO
+    dk.console.time = function dk_console_time(label) {
+        !label && (label = "default");
+        // 1. If the associated timer table contains an entry with key label, return, optionally reporting a warning to the console indicating that a timer with label label has already been started.
+        // 2. Otherwise, set the value of the entry with key label in the associated timer table to the current time.
     }
     // https://console.spec.whatwg.org/#timeEnd
-    dk.console.timeEnd = function dk_console_timeEnd(label) {//TODO
+    dk.console.timeEnd = function dk_console_timeEnd(label) {
+        !label && (label = "default");
+        // 1. Let timerTable be the associated timer table.
+        // 2. Let startTime be timerTable[label].
+        // 3. Remove timerTable[label].
+        // 4. Let duration be a string representing the difference between the current time and startTime, in an implementation-defined format.
+        // 5. Let concat be the concatenation of label, U+003A (:), U+0020 SPACE, and duration.
+        // 6. Perform Printer("timeEnd", « concat »).
     }
     // https://console.spec.whatwg.org/#timeLog
-    dk.console.timeLog = function dk_console_timeLog(label, ...data) {//TODO
+    dk.console.timeLog = function dk_console_timeLog(label, ...data) {
+        !label && (label = "default");
+        // 1. Let timerTable be the associated timer table.
+        // 2. Let startTime be timerTable[label].
+        // 3. Let duration be a string representing the difference between the current time and startTime, in an implementation-defined format.
+        // 4. Let concat be the concatenation of label, U+003A (:), U+0020 SPACE, and duration.
+        // 5. Prepend concat to data.
+        // 6. Perform Printer("timeLog", data).
     }
     dk.console.timeStamp;
     // https://console.spec.whatwg.org/#trace
     dk.console.trace = function dk_console_trace(...data) {
+        // 1. Let trace be some implementation-specific, potentially-interactive representation of the callstack from where this function was called.
+        // 2. Optionally, let formattedData be the result of Formatter(data), and incorporate formattedData as a label for trace.
+        // 3. Perform Printer("trace", « trace »).
         if (!data)
             return warn("data invalid");
         data += "\n" + dk.trace.stackToConsoleString("", "console.trace");
@@ -384,18 +461,16 @@ dk.console.SpanFilter = function dk_console_SpanFilter(args) {
         const startTagRe = /<span\s+style=(['"])([^'"]*)\1\s*>/gi;
         const endTagRe = /<\/span>/gi;
         let reResultArray;
-        if (typeof args[0].replace !== "function") {
+        if (typeof args[0].replace !== "function")
             return args;
-        }
         argArray.push(args[0].replace(startTagRe, '%c').replace(endTagRe, '%c'));
         while (reResultArray = startTagRe.exec(args[0])) {
             argArray.push(reResultArray[2]);
             argArray.push('');
         }
         // pass through subsequent args since chrome dev tools does not (yet) support console.log styling of the following form: console.log('%cBlue!', 'color: blue;', '%cRed!', 'color: red;');
-        for (let n = 1; n < args.length; n++) {
+        for (let n = 1; n < args.length; n++)
             argArray.push(args[n]);
-        }
     }
     return argArray;
 }
@@ -403,17 +478,13 @@ dk.console.SpanFilter = function dk_console_SpanFilter(args) {
 dk.console.ColorChromeConsole = function dk_console_ColorChromeConsole(args) {
     let argArray = [];
     argArray.push("%c " + args[0]);
-    if (args[1] === "red") {
+    if (args[1] === "red")
         argArray.push(["padding: 2px 10px 2px 0px", "background-color: rgb(41,0,0)", "color: rgb(255,128,128)"].join(";"));
-    }
-    if (args[1] === "yellow") {
+    if (args[1] === "yellow")
         argArray.push(["padding: 2px 10px 2px 0px", "background-color: rgb(51,43,0)", "color: rgb(255,221,158)"].join(";"));
-    }
-    if (args[1] === "blue") {
+    if (args[1] === "blue") 
         argArray.push(["padding: 2px 10px 2px 0px", "background-color: rgb(36,36,36)", "color: rgb(77,136,255)"].join(";"));
-    }
-    if (args[1] === "green") {
+    if (args[1] === "green")
         argArray.push(["padding: 2px 10px 2px 0px", "background-color: rgb(0,41,0)", "color: rgb(128,255,128)"].join(";"));
-    }
     return argArray;
 }
