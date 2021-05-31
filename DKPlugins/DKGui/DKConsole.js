@@ -160,40 +160,24 @@ dk.console.create = function dk_console_create(parent, top, bottom, left, right,
         dk.menu.addItem(menu, "Clear console", function DKMenu_Clear() {
             dk.console.clear();
         });
-        //dk.menu.addItem(menu, "Cancel", function DKMenu_Cancel() {
-        //    console.log("cancel");
-        //});
     }
     parent.appendChild(container);
 
     const div = document.createElement("div");
     div.setAttribute("dk_console", "div");
-    div.style.position = "absolute";
-    div.style.padding = "0rem";
-    div.style.backgroundColor = "rgb(36,36,36)";
-    div.style.color = "white";
-    div.style.fontColor = "white";
-    div.style.top = "0rem";
-    div.style.bottom = "20rem";
-    div.style.left = "0rem";
-    div.style.right = "0rem";
-    //div.style.width = "";
-    //div.style.height = "";
-    div.style.visibility = "visible";
-    div.style.overflow = "auto";
     container.appendChild(div);
+
+    //Set up command div
+    const commandDiv = document.createElement("div");
+    commandDiv.setAttribute("dk_console", "commandDiv");
+    commandDiv.style.backgroundColor = "rgb(36,36,36)";
+    commandDiv.style.borderColor = "rgb(58,58,58)";
+    div.appendChild(commandDiv);
 
     const command = document.createElement("input");
     command.setAttribute("dk_console", "command");
+    command.style.removeProperty("width");
     command.type = "text";
-    command.style.position = "absolute";
-    command.style.left = "0rem";
-    command.style.bottom = "0rem";
-    command.style.right = "0rem";
-    command.style.height = "20rem";
-    command.style.width = "100%";
-    command.style.backgroundColor = "rgb(150,150,150)";
-    command.style.borderColor = "rgb(40,40,40)";
     command.onkeydown = function command_onkeydown(event) {
         if (event.code === "Enter") {
             if (command.value === "clear" || command.value === "cls") {
@@ -210,75 +194,51 @@ dk.console.create = function dk_console_create(parent, top, bottom, left, right,
             command.value = "";
         }
     }
-    container.appendChild(command);
+    commandDiv.appendChild(command);
+
+    const blueArrow = dk.gui.createImage(commandDiv, "blueArrow", "DKGui/cmndArrow.png", "", "0rem", "0rem", "", "", "8rem");
+    blueArrow.style.position = "relative";
 
     // https://console.spec.whatwg.org/#logger
     dk.console.Logger = function dl_console_Logger(logLevel, args) {
-        // 1. If args is empty, return.
         if (!args)
             return;
-        // 2. Let first be args[0].
-        // 3. Let rest be all elements following first in args.
         const [first,...rest] = args;
-        // 4. If rest is empty, perform Printer(logLevel, first) and return.
         if (!rest) {
             dk.console.Printer(legLevel, first);
             return;
         }
-        if (first.includes && !first.includes("%")) {
-            // 5. If first does not contain any format specifiers, perform Printer(logLevel, args).
+        if (first.includes && !first.includes("%"))
             dk.console.Printer(logLevel, args);
-        } else {
-            // 6. Otherwise, perform Printer(logLevel, Formatter(args)).
+        else
             dk.console.Printer(logLevel, dk.console.Formatter(args));
-        }
-        // 7. Return undefined.
         return;
     }
 
     // https://console.spec.whatwg.org/#formatter
     dk.console.Formatter = function dk_console_Formatter(args) {
-        // 1. Let target be the first element of args.
         let target = args[0];
         if (!target.indexOf)
             return;
-        // 2. Let current be the second element of args.
         const current = args[1];
-        // 3. Find the first possible format specifier specifier, from the left to the right in target.
         const index = target.indexOf("%");
         if (index <= -1)
             return;
-        const specifier = target.substring(index, index+2);
-        //alert(specifier);
+        const specifier = target.substring(index, index + 2);
         let converted = undefined;
-        // 1. If specifier is %s, let converted be the result of Call(%String%, undefined, current).
-        if (specifier === "%s") {
-            //converted = dk.console.Formatter.call(toString, undefined, current);
+        if (specifier === "%s")
             converted = current.toString();
-        }
-        // 2. If specifier is %d or %i:
         if (specifier === "%d" || specifier === "%i") {
-            alert("d or i");
-            // 1. If Type(current) is Symbol, let converted be NaN
-            console.debug(typeof current);
-            if (typeof current === "symbol"){
+            if (typeof current === "symbol")
                 converted = NaN;
-            } else{
-                // 2. Otherwise, let converted be the result of Call(%parseInt%, undefined, current, 10 ).
-                //converted = dk.console.Formatter.call(parseInt, undefined, current, 10);
+            else
                 converted = parseInt(current, 10);
-            }
         }
-        // 3. If specifier is %f:
         if (specifier === "%f") {
-            // 1. If Type(current) is Symbol, let converted be NaN
-            if (typeof current === "symbol"){
+            if (typeof current === "symbol")
                 converted = NaN;
-                // 2. Otherwise, let converted be the result of Call(%parseFloat%, undefined, current).
-            } else {
-                //converted = dk.console.Formatter.call(parseFloat, undefined, current);
+            else
                 converted = parseFloat(current, 10);
-            }
         }
         // 4. If specifier is %o, optionally let converted be current with optimally useful formatting applied.
         if (specifier === "%o") {// TODO
@@ -291,12 +251,10 @@ dk.console.create = function dk_console_create(parent, top, bottom, left, right,
             if (typeof current === "symbol")
                 converted = NaN;
             else
-                converted = "<a style='"+current.toString()+"'>";
+                converted = "<a style='" + current.toString() + "'>";
         }
-        // 7. If any of the previous steps set converted, replace specifier in target with converted.
         if (converted)
             target = target.replace(specifier, converted);
-        // 8. Let result be a list containing target together with the elements of args starting from the third onward.
         const result = [];
         result.push(target);
         let n = 2;
@@ -304,21 +262,18 @@ dk.console.create = function dk_console_create(parent, top, bottom, left, right,
             result.push(args[n]);
             n++;
         }
-        // 4. If target does not have any format specifiers left, return result.
         const index2 = target.indexOf("%");
         if (index2 <= -1)
             return result;
-        // 5. If results size is 1, return result.
         if (result.length === 1)
             return result;
-        // 6. Return Formatter(result).
         return Formatter(result);
     }
 
     // https://console.spec.whatwg.org/#printer
     dk.console.Printer = function dk_console_Printer(logLevel, args /*[, options]*/
     ) {
-        const _args = dk.console.ColorChromeConsole(arguments);
+        //const _args = dk.console.ColorChromeConsole(arguments);
         if ((div.scrollHeight - div.scrollTop) < (div.offsetHeight + 1))
             div.scroll = true;
         else
@@ -356,19 +311,23 @@ dk.console.create = function dk_console_create(parent, top, bottom, left, right,
         }
 
         div.appendChild(msgDiv);
+        div.appendChild(commandDiv);
         msgDiv.appendChild(msgSpan);
-        div.scroll && (div.scrollTop = div.scrollHeight);
 
         //Limit the number of stored lines
         if (div.childElementCount > dk.console.limit)
             div.removeChild(div.firstChild);
+
+        setTimeout(function() {
+            div.scrollTop = (div.scrollHeight - div.style.height);
+        }, 0);
+
         return msgDiv.innerHTML;
     }
 
     // https://console.spec.whatwg.org/#assert
     dk.console.assert = function dk_console_assert(condition, ...data) {
         !condition && (condition = false);
-        // 1. If condition is true, return.
         if (condition)
             return;
         // 2. Let message be a string without any formatting specifiers indicating generically an assertion failure (such as "Assertion failed").
@@ -563,10 +522,6 @@ dk.console.create = function dk_console_create(parent, top, bottom, left, right,
         dk.console[lvl](msg);
     }
     delete dk.console.record;
-    setTimeout(function() {
-        div.scroll && (div.scrollTop = div.scrollHeight);
-    }, 100);
-
     return container;
 }
 
@@ -590,6 +545,7 @@ dk.console.SpanFilter = function dk_console_SpanFilter(args) {
     return argArray;
 }
 
+/*
 dk.console.ColorChromeConsole = function dk_console_ColorChromeConsole(args) {
     let argArray = [];
     argArray.push("%c " + args[0]);
@@ -603,3 +559,4 @@ dk.console.ColorChromeConsole = function dk_console_ColorChromeConsole(args) {
         argArray.push(["padding: 2px 10px 2px 0px", "background-color: rgb(0,41,0)", "color: rgb(128,255,128)"].join(";"));
     return argArray;
 }
+*/
