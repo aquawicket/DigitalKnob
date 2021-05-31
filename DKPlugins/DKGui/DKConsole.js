@@ -221,42 +221,50 @@ dk.console.create = function dk_console_create(parent, top, bottom, left, right,
         // 3. Let rest be all elements following first in args.
         const [first,...rest] = args;
         // 4. If rest is empty, perform Printer(logLevel, first) and return.
-        if (!rest)
-            dk.console.Printer(legLevel, args);
-        // 5. If first does not contain any format specifiers, perform Printer(logLevel, args).
-        if(!first.includes("%"))
+        if (!rest) {
+            dk.console.Printer(legLevel, first);
+            return;
+        }
+        if (first.includes && !first.includes("%")) {
+            // 5. If first does not contain any format specifiers, perform Printer(logLevel, args).
             dk.console.Printer(logLevel, args);
+        } else {
             // 6. Otherwise, perform Printer(logLevel, Formatter(args)).
-        else
-            dk.console.Printer(logLevel, Formatter(args));
+            dk.console.Printer(logLevel, dk.console.Formatter(args));
+        }
         // 7. Return undefined.
         return;
     }
+
     // https://console.spec.whatwg.org/#formatter
     dk.console.Formatter = function dk_console_Formatter(args) {
-    // 1. Let target be the first element of args.
-    const target = args[0];
-    // 2. Let current be the second element of args.
-    const current = args[1];
-    const index = target.indexof("%");
-    //if(index > -1 && first.substring(""))
-    // 3. Find the first possible format specifier specifier, from the left to the right in target.
-    //     1. If specifier is %s, let converted be the result of Call(%String%, undefined, current).
-    //     2. If specifier is %d or %i:
-    //          1. If Type(current) is Symbol, let converted be NaN
-    //          2. Otherwise, let converted be the result of Call(%parseInt%, undefined, current, 10 ).
-    //     3. If specifier is %f:
-    //          1. If Type(current) is Symbol, let converted be NaN
-    //          2. Otherwise, let converted be the result of Call(%parseFloat%, undefined, current).
-    //     4. If specifier is %o, optionally let converted be current with optimally useful formatting applied.
-    //     5. If specifier is %O, optionally let converted be current with generic JavaScript object formatting applied.
-    //     6. TODO: process %c
-    //     7. If any of the previous steps set converted, replace specifier in target with converted.
-    //     8. Let result be a list containing target together with the elements of args starting from the third onward.
-    // 4. If target does not have any format specifiers left, return result.
-    // 5. If results size is 1, return result.
-    // 6. Return Formatter(result).
+        // 1. Let target be the first element of args.
+        const target = args[0];
+        // 2. Let current be the second element of args.
+        const current = args[1];
+        const index = 0;
+        target.indexof && (index = target.indexof("%"));
+        if (index > -1) {
+            alert("format specifier");
+        }
+        // 3. Find the first possible format specifier specifier, from the left to the right in target.
+        //     1. If specifier is %s, let converted be the result of Call(%String%, undefined, current).
+        //     2. If specifier is %d or %i:
+        //          1. If Type(current) is Symbol, let converted be NaN
+        //          2. Otherwise, let converted be the result of Call(%parseInt%, undefined, current, 10 ).
+        //     3. If specifier is %f:
+        //          1. If Type(current) is Symbol, let converted be NaN
+        //          2. Otherwise, let converted be the result of Call(%parseFloat%, undefined, current).
+        //     4. If specifier is %o, optionally let converted be current with optimally useful formatting applied.
+        //     5. If specifier is %O, optionally let converted be current with generic JavaScript object formatting applied.
+        //     6. TODO: process %c
+        //     7. If any of the previous steps set converted, replace specifier in target with converted.
+        //     8. Let result be a list containing target together with the elements of args starting from the third onward.
+        // 4. If target does not have any format specifiers left, return result.
+        // 5. If results size is 1, return result.
+        // 6. Return Formatter(result).
     }
+
     // https://console.spec.whatwg.org/#printer
     dk.console.Printer = function dk_console_Printer(logLevel, args /*[, options]*/
     ) {
@@ -306,53 +314,86 @@ dk.console.create = function dk_console_create(parent, top, bottom, left, right,
             div.removeChild(div.firstChild);
         return msgDiv.innerHTML;
     }
+
     // https://console.spec.whatwg.org/#assert
     dk.console.assert = function dk_console_assert(condition, ...data) {
         !condition && (condition = false);
         // 1. If condition is true, return.
+        if (condition)
+            return;
         // 2. Let message be a string without any formatting specifiers indicating generically an assertion failure (such as "Assertion failed").
+        const message = "Assertion failed";
         // 3. If data is empty, append message to data.
-        // 4. Otherwise: 
-        //     1. Let first be data[0].
-        //     2. If Type(first) is not String, then prepend message to data.
-        //     3. Otherwise:
-        //        1. Let concat be the concatenation of message, U+003A (:), U+0020 SPACE, and first.
-        //        2. Set data[0] to concat.
-        //     5. Perform Logger("assert", data).
+        if (!data) {
+            data = message;
+        } else {
+            // 4. Otherwise: 
+            //     1. Let first be data[0].
+            const first = data[0];
+            //     2. If Type(first) is not String, then prepend message to data.
+            if (typeof first !== "String")
+                data = message + "\n" + data;
+            else {//     3. Otherwise:
+            //        1. Let concat be the concatenation of message, U+003A (:), U+0020 SPACE, and first.
+            //        2. Set data[0] to concat.
+            }
+            //     5. Perform Logger("assert", data).
+            dk.console.Logger("assert", data);
+        }
     }
+
     // https://console.spec.whatwg.org/#clear
     dk.console.clear = function dk_console_clear() {
         // 1. Empty the appropriate group stack.
         // 2. If possible for the environment, clear the console. (Otherwise, do nothing.)
         div.innerHTML = "";
     }
-    dk.console.context;
+
+    //dk.console.context;
+
     // https://console.spec.whatwg.org/#count
     dk.console.count = function dk_console_count(label) {
         !label && (label = "default");
         // 1. Let map be the associated count map.
+        !dk.console.map && (dk.console.map = new Object);
         // 2. If map[label] exists, set map[label] to map[label] + 1.
-        // 3. Otherwise, set map[label] to 1.
+        if (dk.console.map[label])
+            dk.console.map[label] = dk.console.map[label] + 1;
+            // 3. Otherwise, set map[label] to 1.
+        else
+            dk.console.map[label] = 1;
         // 4. Let concat be the concatenation of label, U+003A (:), U+0020 SPACE, and ToString(map[label]).
+        const concat = label + ":" + " " + toString(dk.console.map[label]);
         // 5. Perform Logger("count", concat).
+        dk.console.Logger("count", concat);
     }
+
     // https://console.spec.whatwg.org/#countReset
     dk.console.countReset = function dk_console_countReset(label) {
         !label && (label = "default");
         // 1. Let map be the associated count map.
+        !dk.console.map && (dk.console.map = new Object);
         // 2. If map[label] exists, set map[label] to 0.
-        // 3. Otherwise:
-        // 1. Let message be a string without any formatting specifiers indicating generically that the given label does not have an associated count.
-        // 2. Perform Logger("countReset", message); 
+        if (dk.console.map[label]) {
+            dk.console.map[label] = 0;
+        }// 3. Otherwise:
+        else {
+            // 1. Let message be a string without any formatting specifiers indicating generically that the given label does not have an associated count.
+            // 2. Perform Logger("countReset", message); 
+            dk.console.Logger("countReset", message);
+        }
     }
+
     // https://console.spec.whatwg.org/#debug
     dk.console.debug = function dk_console_debug(...data) {
         dk.console.Logger("debug", data);
     }
+
     // https://console.spec.whatwg.org/#dir
     dk.console.dir = function dk_console_dir(item, options) {// 1. Let object be item with generic JavaScript object formatting applied.
     // 2. Perform Printer("dir", object, options).
     }
+
     // https://console.spec.whatwg.org/#dirxml
     dk.console.dirxml = function dk_console_dirxml(...data) {// 1. Let finalList be a new list, initially empty.
     // 2. For each item of data:
@@ -360,6 +401,7 @@ dk.console.create = function dk_console_create(parent, top, bottom, left, right,
     //     2. Append converted to finalList.
     // 3. Perform Logger("dirxml", finalList).
     }
+
     // https://console.spec.whatwg.org/#error
     dk.console.error = function dk_console_error(...data) {
         if (!data)
@@ -367,6 +409,7 @@ dk.console.create = function dk_console_create(parent, top, bottom, left, right,
         data += "\n" + dk.trace.stackToConsoleString("", "DKPlugin.dk_console_error");
         dk.console.Logger("error", data);
     }
+
     // https://console.spec.whatwg.org/#group
     dk.console.group = function dk_console_group(...data) {
         // 1. Let group be a new group.
@@ -377,6 +420,7 @@ dk.console.create = function dk_console_create(parent, top, bottom, left, right,
         // 6. Push group onto the appropriate group stack.
         dk.console.Logger("group", data);
     }
+
     // https://console.spec.whatwg.org/#groupcollapsed
     dk.console.groupCollapsed = function dk_console_groupCollapsed(...data) {// 1. Let group be a new group.
     // 2. If data is not empty, let groupLabel be the result of Formatter(data). Otherwise, let groupLabel be an implementation-chosen label representing a group.
@@ -385,30 +429,37 @@ dk.console.create = function dk_console_create(parent, top, bottom, left, right,
     // 5. Perform Printer("groupCollapsed", group).
     // 6. Push group onto the appropriate group stack.
     }
+
     // https://console.spec.whatwg.org/#groupend
     dk.console.groupEnd = function dk_console_groupEnd(...data) {// Pop the last group from the group stack.
     }
+
     // https://console.spec.whatwg.org/#info
     dk.console.info = function dk_console_info(...data) {
         dk.console.Logger("info", data);
     }
+
     // https://console.spec.whatwg.org/#log
     dk.console.log = function dk_console_log(...data) {
         dk.console.Logger("log", data);
     }
-    dk.console.memory;
-    dk.console.profile;
-    dk.console.profileEnd;
+
+    //dk.console.memory;
+    //dk.console.profile;
+    //dk.console.profileEnd;
+
     // https://console.spec.whatwg.org/#table
     dk.console.table = function dk_console_table(tabularData, properties) {// Try to construct a table with the columns of the properties of tabularData (or use properties) and rows of tabularData 
     // and log it with a logLevel of "log". Fall back to just logging the argument if it can be parsed as tabular.
     }
+
     // https://console.spec.whatwg.org/#time
     dk.console.time = function dk_console_time(label) {
         !label && (label = "default");
         // 1. If the associated timer table contains an entry with key label, return, optionally reporting a warning to the console indicating that a timer with label label has already been started.
         // 2. Otherwise, set the value of the entry with key label in the associated timer table to the current time.
     }
+
     // https://console.spec.whatwg.org/#timeEnd
     dk.console.timeEnd = function dk_console_timeEnd(label) {
         !label && (label = "default");
@@ -419,6 +470,7 @@ dk.console.create = function dk_console_create(parent, top, bottom, left, right,
         // 5. Let concat be the concatenation of label, U+003A (:), U+0020 SPACE, and duration.
         // 6. Perform Printer("timeEnd", concat).
     }
+
     // https://console.spec.whatwg.org/#timeLog
     dk.console.timeLog = function dk_console_timeLog(label, ...data) {
         !label && (label = "default");
@@ -429,7 +481,9 @@ dk.console.create = function dk_console_create(parent, top, bottom, left, right,
         // 5. Prepend concat to data.
         // 6. Perform Printer("timeLog", data).
     }
-    dk.console.timeStamp;
+
+    //dk.console.timeStamp;
+
     // https://console.spec.whatwg.org/#trace
     dk.console.trace = function dk_console_trace(...data) {
         // 1. Let trace be some implementation-specific, potentially-interactive representation of the callstack from where this function was called.
@@ -440,6 +494,7 @@ dk.console.create = function dk_console_create(parent, top, bottom, left, right,
         data += "\n" + dk.trace.stackToConsoleString("", "console.trace");
         dk.console.Logger("trace", data);
     }
+
     // https://console.spec.whatwg.org/#warn
     dk.console.warn = function dk_console_warn(...data) {
         if (!data)
