@@ -46,14 +46,12 @@
 [dk_console="commandDiv"] {
     width: 100%;
     height: 30rem;
+    /*height: 100%;*/
+    /*bottom: 0rem;*/
     white-space: pre-wrap;
     box-sizing: border-box;
     padding: 0rem;
     padding-left: 6rem;
-    border-style: solid;
-    border-width: 1rem;
-    border-top-width: 0rem;
-    border-left-width: 0rem;
 }
 
 [dk_console="command"] {

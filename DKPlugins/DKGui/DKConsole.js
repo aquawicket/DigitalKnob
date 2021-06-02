@@ -2,6 +2,7 @@
 // @https://console.spec.whatwg.org/
 // https://developer.mozilla.org/en-US/docs/Web/API/console
 // https://developer.mozilla.org/en-US/docs/Web/API/Console#outputting_text_to_the_console
+// https://developer.chrome.com/docs/devtools/console/api/
 
 dk.console = new DKPlugin("dk_console");
 
@@ -133,7 +134,6 @@ dk.console.setXConsole = function dk_console_setXConsole() {
         dk.console.warn && dk.console.warn.apply(this, Array.prototype.slice.call(arguments));
     }
 }
-;
 
 dk.console.init = function dk_console_init() {
     dk.create("DKGui/DKConsole.css");
@@ -172,25 +172,32 @@ dk.console.create = function dk_console_create(parent, top, bottom, left, right,
     const commandDiv = dk.gui.createTag("div", div, {});
     commandDiv.setAttribute("dk_console", "commandDiv");
 
-    dk.gui.createTag("input", commandDiv, {
+    const command = dk.gui.createTag("input", commandDiv, {
         type: "text",
         onkeydown: function command_onkeydown(event) {
             if (event.code === "Enter") {
-                if (command.value === "clear" || command.value === "cls") {
+                if (event.currentTarget.value === "clear" || event.currentTarget.value === "cls") {
                     dk.console.clear();
                     command.value = "";
                     return;
                 }
-                console.debug("RUN Javascript -> " + command.value);
+                //console.debug("RUN Javascript -> " + event.currentTarget.value);
                 try {
-                    eval(command.value);
+                    eval(event.currentTarget.value);
                 } catch (x) {
                     console.error("eval failed", x.stack);
                 }
-                command.value = "";
+                event.currentTarget.value = "";
             }
         }
     }).setAttribute("dk_console", "command");
+
+    //FIXME:
+    /*
+    div.onclick = function(){
+        command && command.focus();
+    }
+    */
 
     dk.gui.createTag("img", commandDiv, {
         src: "DKGui/cmndArrow.png",
@@ -205,6 +212,8 @@ dk.console.create = function dk_console_create(parent, top, bottom, left, right,
             dk.console.Printer(legLevel, first);
             return;
         }
+        if (!first)
+            return error("first invalid");
         if (first.includes && !first.includes("%"))
             dk.console.Printer(logLevel, args);
         else
@@ -214,13 +223,15 @@ dk.console.create = function dk_console_create(parent, top, bottom, left, right,
 
     // https://console.spec.whatwg.org/#formatter
     dk.console.Formatter = function dk_console_Formatter(args) {
+        if (!args.length)
+            return;
         let target = args[0];
         if (!target.indexOf)
-            return;
+            return args;
         const current = args[1];
         const index = target.indexOf("%");
         if (index <= -1)
-            return;
+            return args;
         const specifier = target.substring(index, index + 2);
         let converted = undefined;
         if (specifier === "%s")
@@ -268,8 +279,7 @@ dk.console.create = function dk_console_create(parent, top, bottom, left, right,
     }
 
     // https://console.spec.whatwg.org/#printer
-    dk.console.Printer = function dk_console_Printer(logLevel, args /*[, options]*/
-    ) {
+    dk.console.Printer = function dk_console_Printer(logLevel, args) {
         //const _args = dk.console.ColorChromeConsole(arguments);
         if ((div.scrollHeight - div.scrollTop) < (div.offsetHeight + 1))
             div.scroll = true;
@@ -277,13 +287,45 @@ dk.console.create = function dk_console_create(parent, top, bottom, left, right,
             div.scroll = false;
         const msgDiv = document.createElement("div");
         msgDiv.setAttribute("dk_console", "msgDiv");
+        if (logLevel !== "group" && logLevel !== "groupCollapsed" && dk.console.currentGroup) {
+            msgDiv.setAttribute("group", dk.console.currentGroup.label);
+                msgDiv.style.display = dk.console.currentGroup.display;
+        }
         const msgSpan = document.createElement("span");
+        msgSpan.setAttribute("dk_console", "msgSpan");
         //TODO: If the message is the same as the last, just have a count next to the original.
         if (arguments[1] && arguments[1].includes && arguments[1].includes("<anonymous>")) {
             arguments[1] = arguments[1].replace("<anonymous>", "&lt;anonymous&gt;");
         }
-        msgSpan.innerHTML = arguments[1];
-        msgSpan.setAttribute("dk_console", "msgSpan");
+        if (logLevel === "group" || logLevel === "groupCollapsed") {
+            const group = arguments[1];
+            const groupArrow = dk.gui.createTag("img", msgSpan, {
+                src: "DKGui/groupArrow2.png",
+                style: {
+                    height: "6rem",
+                    paddingRight: "4rem"
+                }
+            });
+            if (group.display === "none") {
+                groupArrow.setAttribute("src", "DKGui/groupArrow1.png");
+            }
+            dk.gui.createTag("a", msgSpan, {}).innerHTML = group.label;
+            msgDiv.onclick = function() {
+                if (group.display === "block") {
+                    groupArrow.setAttribute("src", "DKGui/groupArrow1.png");
+                    group.display = "none";
+                } else {
+                    groupArrow.setAttribute("src", "DKGui/groupArrow2.png");
+                    group.display = "block";
+                }
+                const elements = div.querySelectorAll("[group='" + group.label + "']");
+                for (let n = 0; n < elements.length; n++)
+                    elements[n].style.display = group.display;
+            }
+
+        } else {
+            msgSpan.innerHTML = arguments[1];
+        }
 
         if (logLevel === "error") {
             msgSpan.style.color = "rgb(255,128,128)";
@@ -351,8 +393,11 @@ dk.console.create = function dk_console_create(parent, top, bottom, left, right,
     // https://console.spec.whatwg.org/#clear
     dk.console.clear = function dk_console_clear() {
         // 1. Empty the appropriate group stack.
+        dk.console.groupStack = [];
         // 2. If possible for the environment, clear the console. (Otherwise, do nothing.)
+        const backup = commandDiv;
         div.innerHTML = "";
+        div.appendChild(backup);
     }
 
     //dk.console.context;
@@ -416,28 +461,53 @@ dk.console.create = function dk_console_create(parent, top, bottom, left, right,
         dk.console.Logger("error", data);
     }
 
+    //////  GROUP STACK
+    dk.console.groupStack = [];
+
     // https://console.spec.whatwg.org/#group
     dk.console.group = function dk_console_group(...data) {
         // 1. Let group be a new group.
+        const group = {
+            label: "dk.console.group",
+            display: "block"
+        }
         // 2. If data is not empty, let groupLabel be the result of Formatter(data). Otherwise, let groupLabel be an implementation-chosen label representing a group.
+        if (data)
+            group.label = dk.console.Formatter(data);
         // 3. Incorporate groupLabel as a label for group.
+        dk.console.currentGroup = group;
         // 4. Optionally, if the environment supports interactive groups, group should be expanded by default.
         // 5. Perform Printer("group", group).
+        dk.console.Printer("group", group);
         // 6. Push group onto the appropriate group stack.
-        dk.console.Logger("group", data);
+        dk.console.groupStack.push(group);
     }
 
     // https://console.spec.whatwg.org/#groupcollapsed
-    dk.console.groupCollapsed = function dk_console_groupCollapsed(...data) {// 1. Let group be a new group.
-    // 2. If data is not empty, let groupLabel be the result of Formatter(data). Otherwise, let groupLabel be an implementation-chosen label representing a group.
-    // 3. Incorporate groupLabel as a label for group.
-    // 4. Optionally, if the environment supports interactive groups, group should be collapsed by default.
-    // 5. Perform Printer("groupCollapsed", group).
-    // 6. Push group onto the appropriate group stack.
+    dk.console.groupCollapsed = function dk_console_groupCollapsed(...data) {
+        // 1. Let group be a new group.
+        const group = {
+            label: "dk.console.group",
+            display: "none"
+        }
+        // 2. If data is not empty, let groupLabel be the result of Formatter(data). Otherwise, let groupLabel be an implementation-chosen label representing a group.
+        if (data)
+            group.label = dk.console.Formatter(data);
+        // 3. Incorporate groupLabel as a label for group.
+        dk.console.currentGroup = group;
+        // 4. Optionally, if the environment supports interactive groups, group should be expanded by default.
+        // 5. Perform Printer("group", group).
+        dk.console.Printer("groupCollapsed", group);
+        // 6. Push group onto the appropriate group stack.
+        dk.console.groupStack.push(group);
     }
 
     // https://console.spec.whatwg.org/#groupend
-    dk.console.groupEnd = function dk_console_groupEnd(...data) {// Pop the last group from the group stack.
+    dk.console.groupEnd = function dk_console_groupEnd(...data) {
+        // Pop the last group from the group stack.
+        dk.console.groupStack.pop();
+        if (dk.console.groupStack.length)
+            dk.console.currentGroup = dk.console.groupStack[dk.console.groupStack.length - 1];
     }
 
     // https://console.spec.whatwg.org/#info

@@ -1,5 +1,8 @@
 "use strict";
 
+//https://goessner.net/articles/JsonPath/index.html#e2
+
+
 dk.json = new DKPlugin("dk_json");
 
 dk.json.prettyJson = function dk_json_prettyJson(jsonStr) {
@@ -102,6 +105,13 @@ dk.json.loadFromLocalStorage = function dk_json_loadFromLocalStorage(label) {
     const str = dk.loadFromLocalStorage(label);
     const json = JSON.parse(str);
     return json;
+}
+
+// https://stackoverflow.com/a/8611131/688352
+// https://stackoverflow.com/a/5612849/688352
+dk.json.objectToString = function dk_json_objectToString(obj){
+    const result = JSON.stringify(obj, null, 4);
+    return result;
 }
 
 /*
