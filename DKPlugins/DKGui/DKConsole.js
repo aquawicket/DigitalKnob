@@ -166,10 +166,14 @@ dk.console.create = function dk_console_create(parent, top, bottom, left, right,
     container.setAttribute("dk_console", "container");
     dk.console.container = container;
 
-    const div = dk.gui.createTag("div", container, {});
-    div.setAttribute("dk_console", "div");
+    const toolbar = dk.gui.createTag("div", container, {
+    });
+    toolbar.setAttribute("dk_console", "toolbar");
 
-    const commandDiv = dk.gui.createTag("div", div, {});
+    const log = dk.gui.createTag("div", container, {});
+    log.setAttribute("dk_console", "log");
+
+    const commandDiv = dk.gui.createTag("div", log, {});
     commandDiv.setAttribute("dk_console", "commandDiv");
 
     const command = dk.gui.createTag("input", commandDiv, {
@@ -194,7 +198,7 @@ dk.console.create = function dk_console_create(parent, top, bottom, left, right,
 
     //FIXME:
     /*
-    div.onclick = function(){
+    log.onclick = function(){
         command && command.focus();
     }
     */
@@ -281,10 +285,10 @@ dk.console.create = function dk_console_create(parent, top, bottom, left, right,
     // https://console.spec.whatwg.org/#printer
     dk.console.Printer = function dk_console_Printer(logLevel, args) {
         //const _args = dk.console.ColorChromeConsole(arguments);
-        if ((div.scrollHeight - div.scrollTop) < (div.offsetHeight + 1))
-            div.scroll = true;
+        if ((log.scrollHeight - log.scrollTop) < (log.offsetHeight + 1))
+            log.scroll = true;
         else
-            div.scroll = false;
+            log.scroll = false;
         const msgDiv = document.createElement("div");
         msgDiv.setAttribute("dk_console", "msgDiv");
         if (logLevel !== "group" && logLevel !== "groupCollapsed" && dk.console.currentGroup) {
@@ -320,7 +324,7 @@ dk.console.create = function dk_console_create(parent, top, bottom, left, right,
                     groupArrow.setAttribute("src", "DKGui/groupArrow2.png");
                     group.display = "block";
                 }
-                const elements = div.querySelectorAll("[group='" + group.id + "']");
+                const elements = log.querySelectorAll("[group='" + group.id + "']");
                 for (let n = 0; n < elements.length; n++)
                     elements[n].style.display = group.display;
             }
@@ -330,37 +334,32 @@ dk.console.create = function dk_console_create(parent, top, bottom, left, right,
         }
 
         if (logLevel === "error") {
-            msgSpan.style.color = "rgb(255,128,128)";
-            msgDiv.style.backgroundColor = "rgb(41,0,0)";
-            msgDiv.style.borderColor = "rgb(92,0,0)";
-        } else if (logLevel === "warn") {
-            msgSpan.style.color = "rgb(255,221,158)";
-            msgDiv.style.backgroundColor = "rgb(51,43,0)";
-            msgDiv.style.borderColor = "rgb(102,85,0)";
-        } else if (logLevel === "debug") {
-            msgSpan.style.color = "rgb(77,136,255)";
-            msgDiv.style.backgroundColor = "rgb(36,36,36)";
-            msgDiv.style.borderColor = "rgb(58,58,58)";
-        } else if (logLevel === "green") {
-            msgSpan.style.color = "rgb(128,255,128)";
-            msgDiv.style.backgroundColor = "rgb(0,41,0)";
-            msgDiv.style.borderColor = "rgb(0,92,0)";
-        } else {
-            msgSpan.style.color = "rgb(213,213,213)";
-            msgDiv.style.backgroundColor = "rgb(36,36,36)";
-            msgDiv.style.borderColor = "rgb(58,58,58)";
+            msgDiv.setAttribute("dk_console", "msgDivError");
+            msgSpan.setAttribute("dk_console", "msgSpanError");
+        }
+        if (logLevel === "warn") {
+            msgDiv.setAttribute("dk_console", "msgDivWarn");
+            msgSpan.setAttribute("dk_console", "msgSpanWarn");
+        }
+        if (logLevel === "debug") {
+            msgDiv.setAttribute("dk_console", "msgDivDebug");
+            msgSpan.setAttribute("dk_console", "msgSpanDebug");
+        }
+        if (logLevel === "green") {
+            msgDiv.setAttribute("dk_console", "msgDivGreen");
+            msgSpan.setAttribute("dk_console", "msgSpanGreen");
         }
 
-        div.appendChild(msgDiv);
-        div.appendChild(commandDiv);
+        log.appendChild(msgDiv);
+        log.appendChild(commandDiv);
         msgDiv.appendChild(msgSpan);
 
         //Limit the number of stored lines
-        if (div.childElementCount > dk.console.limit)
-            div.removeChild(div.firstChild);
+        if (log.childElementCount > dk.console.limit)
+            log.removeChild(log.firstChild);
 
         setTimeout(function() {
-            div.scrollTop = (div.scrollHeight - div.style.height);
+            log.scrollTop = (log.scrollHeight - log.style.height);
         }, 0);
 
         return msgDiv.innerHTML;
@@ -398,8 +397,8 @@ dk.console.create = function dk_console_create(parent, top, bottom, left, right,
         dk.console.groupStack = [];
         // 2. If possible for the environment, clear the console. (Otherwise, do nothing.)
         const backup = commandDiv;
-        div.innerHTML = "";
-        div.appendChild(backup);
+        log.innerHTML = "";
+        log.appendChild(backup);
     }
 
     //dk.console.context;
@@ -472,7 +471,7 @@ dk.console.create = function dk_console_create(parent, top, bottom, left, right,
     dk.console.group = function dk_console_group(...data) {
 
         let n=0;
-        while(div.querySelector("[group='" + n + "']"))
+        while(log.querySelector("[group='" + n + "']"))
             n++;
         // 1. Let group be a new group.
         const group = {
@@ -496,7 +495,7 @@ dk.console.create = function dk_console_create(parent, top, bottom, left, right,
     dk.console.groupCollapsed = function dk_console_groupCollapsed(...data) {
 
         let n=0;
-        while(div.querySelector("[group='" + n + "']"))
+        while(log.querySelector("[group='" + n + "']"))
             n++;
         // 1. Let group be a new group.
         const group = {
