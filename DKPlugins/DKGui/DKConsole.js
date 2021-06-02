@@ -288,7 +288,7 @@ dk.console.create = function dk_console_create(parent, top, bottom, left, right,
         const msgDiv = document.createElement("div");
         msgDiv.setAttribute("dk_console", "msgDiv");
         if (logLevel !== "group" && logLevel !== "groupCollapsed" && dk.console.currentGroup) {
-            msgDiv.setAttribute("group", dk.console.currentGroup.label);
+            msgDiv.setAttribute("group", dk.console.currentGroup.id);
                 msgDiv.style.display = dk.console.currentGroup.display;
         }
         const msgSpan = document.createElement("span");
@@ -299,6 +299,8 @@ dk.console.create = function dk_console_create(parent, top, bottom, left, right,
         }
         if (logLevel === "group" || logLevel === "groupCollapsed") {
             const group = arguments[1];
+            if(arguments.length === 3)
+                logLevel = arguments[2][1];
             const groupArrow = dk.gui.createTag("img", msgSpan, {
                 src: "DKGui/groupArrow2.png",
                 style: {
@@ -309,7 +311,7 @@ dk.console.create = function dk_console_create(parent, top, bottom, left, right,
             if (group.display === "none") {
                 groupArrow.setAttribute("src", "DKGui/groupArrow1.png");
             }
-            dk.gui.createTag("a", msgSpan, {}).innerHTML = group.label;
+            dk.gui.createTag("a", msgSpan, {}).innerHTML = group.label[0];
             msgDiv.onclick = function() {
                 if (group.display === "block") {
                     groupArrow.setAttribute("src", "DKGui/groupArrow1.png");
@@ -318,7 +320,7 @@ dk.console.create = function dk_console_create(parent, top, bottom, left, right,
                     groupArrow.setAttribute("src", "DKGui/groupArrow2.png");
                     group.display = "block";
                 }
-                const elements = div.querySelectorAll("[group='" + group.label + "']");
+                const elements = div.querySelectorAll("[group='" + group.id + "']");
                 for (let n = 0; n < elements.length; n++)
                     elements[n].style.display = group.display;
             }
@@ -457,8 +459,10 @@ dk.console.create = function dk_console_create(parent, top, bottom, left, right,
     dk.console.error = function dk_console_error(...data) {
         if (!data)
             return warn("data invalid");
-        data += "\n" + dk.trace.stackToConsoleString("", "DKPlugin.dk_console_error");
-        dk.console.Logger("error", data);
+        dk.console.groupCollapsed(data, "error");
+        const stack = dk.trace.stackToConsoleString("", "console.error");
+        dk.console.Logger("error", stack);
+        dk.console.groupEnd();
     }
 
     //////  GROUP STACK
@@ -466,29 +470,39 @@ dk.console.create = function dk_console_create(parent, top, bottom, left, right,
 
     // https://console.spec.whatwg.org/#group
     dk.console.group = function dk_console_group(...data) {
+
+        let n=0;
+        while(div.querySelector("[group='" + n + "']"))
+            n++;
         // 1. Let group be a new group.
         const group = {
             label: "dk.console.group",
-            display: "block"
+            display: "block",
+            id: n
         }
         // 2. If data is not empty, let groupLabel be the result of Formatter(data). Otherwise, let groupLabel be an implementation-chosen label representing a group.
         if (data)
-            group.label = dk.console.Formatter(data);
+            group.label = dk.console.Formatter(data[0]);
         // 3. Incorporate groupLabel as a label for group.
         dk.console.currentGroup = group;
         // 4. Optionally, if the environment supports interactive groups, group should be expanded by default.
         // 5. Perform Printer("group", group).
-        dk.console.Printer("group", group);
+        dk.console.Printer("group", group, data);
         // 6. Push group onto the appropriate group stack.
         dk.console.groupStack.push(group);
     }
 
     // https://console.spec.whatwg.org/#groupcollapsed
     dk.console.groupCollapsed = function dk_console_groupCollapsed(...data) {
+
+        let n=0;
+        while(div.querySelector("[group='" + n + "']"))
+            n++;
         // 1. Let group be a new group.
         const group = {
             label: "dk.console.group",
-            display: "none"
+            display: "none",
+            id: n
         }
         // 2. If data is not empty, let groupLabel be the result of Formatter(data). Otherwise, let groupLabel be an implementation-chosen label representing a group.
         if (data)
@@ -497,7 +511,7 @@ dk.console.create = function dk_console_create(parent, top, bottom, left, right,
         dk.console.currentGroup = group;
         // 4. Optionally, if the environment supports interactive groups, group should be expanded by default.
         // 5. Perform Printer("group", group).
-        dk.console.Printer("groupCollapsed", group);
+        dk.console.Printer("groupCollapsed", group, data);
         // 6. Push group onto the appropriate group stack.
         dk.console.groupStack.push(group);
     }
@@ -508,6 +522,8 @@ dk.console.create = function dk_console_create(parent, top, bottom, left, right,
         dk.console.groupStack.pop();
         if (dk.console.groupStack.length)
             dk.console.currentGroup = dk.console.groupStack[dk.console.groupStack.length - 1];
+        else
+            dk.console.currentGroup = null;    
     }
 
     // https://console.spec.whatwg.org/#info
@@ -567,16 +583,20 @@ dk.console.create = function dk_console_create(parent, top, bottom, left, right,
         // 3. Perform Printer("trace", trace).
         if (!data)
             return warn("data invalid");
-        data += "\n" + dk.trace.stackToConsoleString("", "console.trace");
-        dk.console.Logger("trace", data);
+        dk.console.group(data);
+        const stack = dk.trace.stackToConsoleString("", "console.trace");
+        dk.console.Logger("info", stack);
+        dk.console.groupEnd();
     }
 
     // https://console.spec.whatwg.org/#warn
     dk.console.warn = function dk_console_warn(...data) {
         if (!data)
             return warn("data invalid");
-        data += "\n" + dk.trace.stackToConsoleString("", "console.warn");
-        dk.console.Logger("warn", data);
+        dk.console.groupCollapsed(data, "warn");
+        const stack = dk.trace.stackToConsoleString("", "console.warn");
+        dk.console.Logger("warn", stack);
+        dk.console.groupEnd();
     }
 
     dk.console.setXConsole();
