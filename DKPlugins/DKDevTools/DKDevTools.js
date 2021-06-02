@@ -3,7 +3,6 @@
 dk.devtools = new DKPlugin("dk_devtools");
 
 dk.devtools.create = function dk_devtools_create() {
-    //console.debug("dk.devtools.create()");
     dk.devtools.div = dk.frame.createNewWindow("DevTools", "200rem", "300rem");
     if (!dk.devtools.div)
         return false;
@@ -28,7 +27,6 @@ dk.devtools.addTools = function dk_devtools_addTools() {
             console.log("done copying assets. result = " + result);
         });
     });
-    // IF you MUST have access to push, comment this out temporarilty
     //pull.disabled = true;
     dk.gui.createImageButton(dk.devtools.div, "File Manager", "DKFile/folder.png", "2rem", "", "", "2px", "", "", function(){
         dk.create("DKFile/filemanager.js", function(){

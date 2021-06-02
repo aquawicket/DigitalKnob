@@ -166,8 +166,7 @@ dk.console.create = function dk_console_create(parent, top, bottom, left, right,
     container.setAttribute("dk_console", "container");
     dk.console.container = container;
 
-    const toolbar = dk.gui.createTag("div", container, {
-    });
+    const toolbar = dk.gui.createTag("div", container, {});
     toolbar.setAttribute("dk_console", "toolbar");
 
     const log = dk.gui.createTag("div", container, {});
@@ -293,17 +292,58 @@ dk.console.create = function dk_console_create(parent, top, bottom, left, right,
         msgDiv.setAttribute("dk_console", "msgDiv");
         if (logLevel !== "group" && logLevel !== "groupCollapsed" && dk.console.currentGroup) {
             msgDiv.setAttribute("group", dk.console.currentGroup.id);
-                msgDiv.style.display = dk.console.currentGroup.display;
+            msgDiv.style.display = dk.console.currentGroup.display;
         }
+        const magIcon = dk.gui.createTag("div", msgDiv, {
+            style: {
+                position: "absolute",
+                left: "6rem",
+                width: "12rem",
+                height: "12rem",
+                //backgroundColor: "blue"
+            }
+        })
+
         const msgSpan = document.createElement("span");
         msgSpan.setAttribute("dk_console", "msgSpan");
-        //TODO: If the message is the same as the last, just have a count next to the original.
+
+        //If the message is the same as the last, just increase a count next to the original.
+        const lastMsgDiv = log.lastChild.previousSibling;
+        if (lastMsgDiv) {
+            const lastMsgSpan = lastMsgDiv.firstChild.nextSibling;
+            if (arguments[1] == lastMsgSpan.innerHTML) {
+                const lastMsgIcon = lastMsgDiv.firstChild;
+                if (!lastMsgIcon.childElementCount) {
+                    dk.gui.createTag("img", lastMsgIcon, {
+                        src: "DKGui/circle.png",
+                        style: {
+                            height: "12rem",
+                            verticalAlign: "middle"
+                        }
+                    });
+                    const count = dk.gui.createTag("div", lastMsgIcon, {
+                        style: {
+                            position: "absolute",
+                            top: "50%",
+                            left: "50%",
+                            transform: "translate(-50%, -50%)"
+                        },
+                        innerHTML: 1
+                    });
+                } else {
+                    const total = (parseInt(lastMsgIcon.firstChild.nextSibling.innerHTML) + 1);
+                    lastMsgIcon.firstChild.nextSibling.innerHTML = total.toString();
+                }
+                return;
+            }
+        }
+
         if (arguments[1] && arguments[1].includes && arguments[1].includes("<anonymous>")) {
             arguments[1] = arguments[1].replace("<anonymous>", "&lt;anonymous&gt;");
         }
         if (logLevel === "group" || logLevel === "groupCollapsed") {
             const group = arguments[1];
-            if(arguments.length === 3)
+            if (arguments.length === 3)
                 logLevel = arguments[2][1];
             const groupArrow = dk.gui.createTag("img", msgSpan, {
                 src: "DKGui/groupArrow2.png",
@@ -470,8 +510,8 @@ dk.console.create = function dk_console_create(parent, top, bottom, left, right,
     // https://console.spec.whatwg.org/#group
     dk.console.group = function dk_console_group(...data) {
 
-        let n=0;
-        while(log.querySelector("[group='" + n + "']"))
+        let n = 0;
+        while (log.querySelector("[group='" + n + "']"))
             n++;
         // 1. Let group be a new group.
         const group = {
@@ -494,8 +534,8 @@ dk.console.create = function dk_console_create(parent, top, bottom, left, right,
     // https://console.spec.whatwg.org/#groupcollapsed
     dk.console.groupCollapsed = function dk_console_groupCollapsed(...data) {
 
-        let n=0;
-        while(log.querySelector("[group='" + n + "']"))
+        let n = 0;
+        while (log.querySelector("[group='" + n + "']"))
             n++;
         // 1. Let group be a new group.
         const group = {
@@ -522,7 +562,7 @@ dk.console.create = function dk_console_create(parent, top, bottom, left, right,
         if (dk.console.groupStack.length)
             dk.console.currentGroup = dk.console.groupStack[dk.console.groupStack.length - 1];
         else
-            dk.console.currentGroup = null;    
+            dk.console.currentGroup = null;
     }
 
     // https://console.spec.whatwg.org/#info
