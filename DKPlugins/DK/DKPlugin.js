@@ -45,7 +45,7 @@ const DKPlugin = function DKPlugin(identifier) {
 
     DKPlugin.prototype.init = function DKPlugin_init(callback) {
         console.log("DKPlugin.prototype.init()");
-        //dk.errorCatcher(this);
+        DKPlugin.errorCatcher(this);
         var scripts = document.getElementsByTagName("script");
         this.url = scripts[scripts.length-1].src;
         callback && callback(this);
@@ -64,8 +64,9 @@ const DKPlugin = function DKPlugin(identifier) {
         }
         return true;
     }
-    DKPlugin.prototype.create = function DKPlugin_create() {
+    DKPlugin.prototype.create = function DKPlugin_create(callback) {
         console.log("DKPlugin.prototype.create()");
+        callback && callback(this);
         return true;
     }
     DKPlugin.prototype.close = function DKPlugin_close() {
@@ -78,48 +79,43 @@ const DKPlugin = function DKPlugin(identifier) {
     }
 
     DKPlugin.prototype.getInstance = function DKPlugin_getInstance(instance) {
-        //console.debug("DKPlugin.getInstance() called");
+        console.log("DKPlugin.prototype.getInstance()");
         const index = DKPlugin.instances.indexOf(instance);
         if (index <= -1)
-            return error("Unable to find instance in DKPlugin");
+            return error("Unable to find instance of DKPlugin");
         return DKPlugin.instances[index];
     }
 
     DKPlugin.prototype.removeInstance = function DKPlugin_removeInstance(instance) {
-        //console.debug("DKPlugin.removeInstance() called");
+        console.log("DKPlugin.prototype.removeInstance()");
         const index = DKPlugin.instances.indexOf(instance);
         if (index <= -1)
             return error("Unable to find instance in DKPlugin");
         DKPlugin.instances.splice(index, 1);
-        //console.debug("removed DKPlugin("+identifier+") @index "+(index));
         return true;
     }
 
-    DKPlugin.prototype.getInstanceInfo = function DKPlugin_getInstanceInfo(callerName) {
-        const index = DKPlugin.instances.indexOf(this);
-        if (index <= -1)
-            return error("Unable to find instance in DKPlugin");
-        //console.debug("(INSTANCE) name:" + callerName + " index:" + index + " total:" + DKPlugin.instances.length);
-        return index;
-    }
-
     DKPlugin.prototype.setUrl = function DKPlugin_setUrl(url) {
+        console.log("DKPlugin.prototype.setUrl()");
         this.url = url;
     }
 
     DKPlugin.prototype.getUrl = function DKPlugin_getUrl() {
+        console.log("DKPlugin.prototype.getUrl()");
        if (!this.url)
-            return error("DKPlugin.getUrl(): url not set, please use yourDKPlugin.setUrl(url)");
+            return error("this.url invalid");
        return this.url;
     }
 
     DKPlugin.prototype.setAccessNode = function DKPlugin_setAccessNode(node) {
+        console.log("DKPlugin.prototype.setAccessNode()");
         if (!node instanceof EventTarget)
             return error("setAccessNode() requires an node thats an instanceof EventTarget");
         this.node = node;
     }
 
     DKPlugin.prototype.getAccessNode = function DKPlugin_getAccessNode() {
+        console.log("DKPlugin.prototype.getAccessNode()");
         if (!this.node)
             return error("DKPlugin.getAccessNode(): node not set, please use yourDKPlugin.setAccessNode(node)");
         return this.node;
@@ -150,7 +146,7 @@ const DKPlugin = function DKPlugin(identifier) {
         }
     }
 
-    //Not sure how this can happen, just to be safe...
+    //Not sure how this can happen, but just to be safe...
     if (DKPlugin.instances.includes(this)) {
         const index = DKPlugin.instances.indexOf(this);
         console.error("An instance of this already exists in DKPlugin @index " + index);
@@ -165,3 +161,48 @@ const DKPlugin = function DKPlugin(identifier) {
 }
 
 DKPlugin.instances = new Array;
+
+
+//https://humanwhocodes.com/blog/2009/04/28/javascript-error-handling-anti-pattern/
+DKPlugin.errorCatcher = function dk_errorCatcher(object) {
+    require({
+        object
+    });
+
+    for (let obj in dk) {
+        const dkObj = dk[obj];
+        if (object !== dkObj)
+            continue;
+        for (let func in dkObj) {
+            if(func.includes("_try"))
+                continue;
+            const method = dkObj[func];
+            if (typeof method === "function") {
+                Object.defineProperty(method, 'name', {
+                    value: func
+                })
+                console.debug("dk." + obj + "." + func + "()");
+                const funcName = func;
+                dkObj[func] = function errorCatcher(func, method) {
+                    return dkObj[func + "_try"] = function() {
+                        try {
+                            return method.apply(this, arguments);
+                        } catch (err) {
+                            //const stack = dk.trace.stackToConsoleString(err);
+                            if (dk.console && dk.console.error) {
+                                dk.console.error(err);
+                                xconsole && xconsole.error(err);
+                            } else
+                                console.error(err);
+                        }
+                    }
+                }(func, method);
+            }
+        }
+    }
+}
+
+
+DKPlugin.dummyfunc = function DKPlugin_dummyfunc(){
+    console.log("test dummy function");
+}

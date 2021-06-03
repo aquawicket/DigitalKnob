@@ -287,7 +287,6 @@ dk.loadJs = function dk_loadJs(url, dk_loadJs_callback) {
         if (!done && (!this.readyState || this.readyState === "loaded" || this.readyState === "complete")) {
             var plugin = dk.getPlugin(url);
             plugin && console.log("loading dk." + plugin.name + " plugin");
-            dk.errorCatcher(plugin);
 
             if (plugin && plugin.init) {
                 //console.debug("running dk." + plugin.name + ".init()");
@@ -1152,6 +1151,7 @@ Object.prototype.clone = Array.prototype.clone = function() {
 }
 */
 
+/*
 //https://humanwhocodes.com/blog/2009/04/28/javascript-error-handling-anti-pattern/
 dk.errorCatcher = function dk_errorCatcher(object) {
     require({
@@ -1172,7 +1172,7 @@ dk.errorCatcher = function dk_errorCatcher(object) {
                 Object.defineProperty(method, 'name', {
                     value: func
                 })
-                console.debug("dk." + plugin + "." + func + "()");
+                //console.debug("dk." + plugin + "." + func + "()");
                 const funcName = func;
                 dkPlugin[func] = function errorCatcher(func, method) {
                     return dkPlugin[func + "_try"] = function() {
@@ -1192,6 +1192,7 @@ dk.errorCatcher = function dk_errorCatcher(object) {
         }
     }
 }
+*/
 
 // https://stackoverflow.com/a/63785848/688352
 dk.testSyntax = function dk_testSyntax(code) {
