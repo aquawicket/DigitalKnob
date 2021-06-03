@@ -34,7 +34,6 @@ dk.x = new Object;
     }
 }());
 
-
 const require = function require() {
     for (let n = 0; n < arguments.length; n++) {
         if (typeof arguments[n] !== "object")
@@ -107,27 +106,27 @@ dk.init = function dk_init() {
 }
 
 dk.hasCPP = function dk_hasCPP() {
-	if (dk.cpp === false){ 
-		return false;
-	}
-	dk.cpp = false;
-    if (dk.getBrowser() === "Cef"){
-		dk.cpp = true;
-		dk.cef = true;
-	}
-    if (dk.getBrowser() === "Rml"){
-		dk.cpp = true;
-		dk.rml = true;
-	}
+    if (dk.cpp === false) {
+        return false;
+    }
+    dk.cpp = false;
+    if (dk.getBrowser() === "Cef") {
+        dk.cpp = true;
+        dk.cef = true;
+    }
+    if (dk.getBrowser() === "Rml") {
+        dk.cpp = true;
+        dk.rml = true;
+    }
     if (dk.getJSEngine() === "Duktape") {
-		dk.cpp = true;
+        dk.cpp = true;
         dk.duktape = true;
     }
-	if (dk.getJSEngine() === "V8") {
-		dk.cpp = true;
+    if (dk.getJSEngine() === "V8") {
+        dk.cpp = true;
         dk.v8 = true;
     }
-	return dk.cpp;
+    return dk.cpp;
 }
 
 dk.getPlugin = function dk_getPlugin(url) {
@@ -310,7 +309,7 @@ dk.loadJs = function dk_loadJs(url, dk_loadJs_callback) {
     //FIXME - DigitalKnob can't trigger onload yet, so we do this
 
     //if (dk.getJSEngine() === "Duktape") {
-	if (dk.hasCPP()) {
+    if (dk.hasCPP()) {
         var plugin = dk.getPlugin(url);
         plugin && console.log("loading dk." + plugin.name + " plugin");
         if (plugin && plugin.init) {
@@ -581,7 +580,7 @@ dk.getOS = function dk_GetOS() {
 
 dk.getBrowser = function dk_getBrowser() {
     if (navigator.userAgent.indexOf("Rml") !== -1) {
-		dk.rml = true;
+        dk.rml = true;
         return "Rml";
     } else if ((navigator.userAgent.indexOf("Opera") || navigator.userAgent.indexOf('OPR')) !== -1) {
         return "Opera";
@@ -602,18 +601,18 @@ dk.getBrowser = function dk_getBrowser() {
 }
 
 dk.getJSEngine = function dk_getJSEngine() {
-    if (navigator.product === "Duktape"){
+    if (navigator.product === "Duktape") {
         dk.duktape = true;
-		return "Duktape"
-	}
+        return "Duktape"
+    }
     var v8string = 'function%20javaEnabled%28%29%20%7B%20%5Bnative%20code%5D%20%7D';
     if ('WebkitAppearance'in document.documentElement.style) {
         //If (probably) WebKit browser
         if (escape(navigator.javaEnabled.toString()) === v8string) {
-			dk.v8 = true;
+            dk.v8 = true;
             return "V8";
         } else {
-			dk.jsc = true;
+            dk.jsc = true;
             return "Jsc";
         }
     }
@@ -1151,48 +1150,41 @@ Object.prototype.clone = Array.prototype.clone = function() {
 }
 */
 
-/*
 //https://humanwhocodes.com/blog/2009/04/28/javascript-error-handling-anti-pattern/
-dk.errorCatcher = function dk_errorCatcher(object) {
+dk.errorCatcher = function dk_errorCatcher(obj, name) {
     require({
-        object
+        obj
     });
-    var plugin, func, method;
-
-    for (plugin in dk) {
-        const dkPlugin = dk[plugin];
-        if (object !== dkPlugin)
+    !name && (name = obj.constructor.name);
+    for (let func in obj) {
+        if (func.includes("_try"))
             continue;
-        for (func in dkPlugin) {
-            if(func.includes("_try"))
-                continue;
-            method = dkPlugin[func];
-            if (typeof method === "function") {
-
-                Object.defineProperty(method, 'name', {
-                    value: func
-                })
-                //console.debug("dk." + plugin + "." + func + "()");
-                const funcName = func;
-                dkPlugin[func] = function errorCatcher(func, method) {
-                    return dkPlugin[func + "_try"] = function() {
-                        try {
-                            return method.apply(this, arguments);
-                        } catch (err) {
-                            //const stack = dk.trace.stackToConsoleString(err);
-                            if (dk.console && dk.console.error) {
-                                dk.console.error(err);
-                                xconsole && xconsole.error(err);
-                            } else
-                                console.error(err);
-                        }
+        if (obj[func + "_try"])
+            continue;
+        const method = obj[func];
+        if (typeof method === "function") {
+            Object.defineProperty(method, 'name', {
+                value: func
+            })
+            console.debug(name + "." + func + "()");
+            const funcName = func;
+            obj[func] = function errorCatcher(func, method) {
+                return obj[func + "_try"] = function() {
+                    try {
+                        return method.apply(this, arguments);
+                    } catch (err) {
+                        //const stack = dk.trace.stackToConsoleString(err);
+                        if (dk.console && dk.console.error) {
+                            dk.console.error(err);
+                            xconsole && xconsole.error(err);
+                        } else
+                            console.error(err);
                     }
-                }(func, method);
-            }
+                }
+            }(func, method);
         }
     }
 }
-*/
 
 // https://stackoverflow.com/a/63785848/688352
 dk.testSyntax = function dk_testSyntax(code) {

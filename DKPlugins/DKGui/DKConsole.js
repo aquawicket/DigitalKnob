@@ -187,7 +187,7 @@ dk.console.create = function dk_console_create(parent, top, bottom, left, right,
                 try {
                     eval(event.currentTarget.value);
                 } catch (x) {
-                    console.error("eval failed", x.stack);
+                    console.error("eval failed");
                 }
                 event.currentTarget.value = "";
             }

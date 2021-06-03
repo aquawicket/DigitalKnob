@@ -2,6 +2,7 @@
 
 dk.devtools = new DKPlugin("dk_devtools");
 
+/*
 dk.devtools.init = function dk_devtools_init(callback) {
     console.log("dk.devtools.init()");
     callback && callback(dk.devtools);
@@ -11,6 +12,7 @@ dk.devtools.end = function dk_devtools_end() {
     console.log("dk.devtools.end()");
     DKPlugin.prototype.end.call(this);
 }
+*/
 
 dk.devtools.create = function dk_devtools_create() {
     console.log("dk.devtools.create()");
@@ -27,7 +29,7 @@ dk.devtools.create = function dk_devtools_create() {
     return true;
 }
 
-dk.devtools.close = function dk_devtools_close(){
+dk.devtools.close = function dk_devtools_close() {
     console.log("dk.devtools.close()");
     DKPlugin.prototype.close.call(this);
     dk.devtools.end();
@@ -46,22 +48,29 @@ dk.devtools.addTools = function dk_devtools_addTools() {
             console.log("done copying assets. result = " + result);
         });
     });
+    const runCode = dk.gui.createButton(dk.devtools.div, "Run Code", "65rem", "", "5rem", "", "90rem", "20rem", function dk_gui_createButton_onclick() {
+        try {
+            eval(codebox.value);
+        } catch (err) {
+            console.error("eval failed");
+        }
+    });
     //pull.disabled = true;
-    dk.gui.createImageButton(dk.devtools.div, "File Manager", "DKFile/folder.png", "2rem", "", "", "2px", "", "", function(){
-        dk.create("DKFile/filemanager.js", function(){
+    dk.gui.createImageButton(dk.devtools.div, "File Manager", "DKFile/folder.png", "2rem", "", "", "2px", "", "", function() {
+        dk.create("DKFile/filemanager.js", function() {
             dk.filemanager.create();
         });
     })
 
     const codebox = dk.gui.createTag("textarea", dk.devtools.div, {
-        style:{
-            position:"absolute",
-            top:"90rem",
-            left:"5rem",
+        style: {
+            position: "absolute",
+            top: "90rem",
+            left: "5rem",
             //right:"5rem",
-            width:"95%",
-            bottom:"5rem",
-            fontSize:"9rem"
+            width: "95%",
+            bottom: "5rem",
+            fontSize: "9rem"
         }
     });
     //codebox.style.removeProperty("width");

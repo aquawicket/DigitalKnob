@@ -6,7 +6,9 @@ dk.frame.frames = new Array;
 dk.frame.init = function dk_frame_init() {
     dk.create("DKGui/DKFrame.css");
 }
-dk.frame.end = function dk_frame_end() {}
+dk.frame.end = function dk_frame_end() {
+    dk.close("DKGui/DKFrame.css");
+}
 
 dk.frame.create = function dk_frame_create(obj) {
     if (!obj)
@@ -28,7 +30,7 @@ dk.frame.create = function dk_frame_create(obj) {
         var title = dk.file.getFilename(element.id);
         title && (title = title.replace(".html", ""));
     }
-    if(!title)
+    if (!title)
         title = "New Window";
 
     var width = element.style.width;
@@ -38,7 +40,7 @@ dk.frame.create = function dk_frame_create(obj) {
 
     let frame = dk.frame.createFrame(title, width, height);
     if (obj instanceof DKPlugin)
-        frame.contentInstance = obj;
+        frame.dkplugin = obj;
     frame.content = element;
     frame.content.setAttribute("dk_frame", "content");
     frame.content.style = {
@@ -47,7 +49,7 @@ dk.frame.create = function dk_frame_create(obj) {
         bottom: "0rem",
         left: "0rem",
         right: "0rem",
-        width:"unset",
+        width: "unset",
         height: "unset"
     }
     //frame.content.style.removeProperty("height");
@@ -66,8 +68,8 @@ dk.frame.close = function dk_frame_close(obj) {
     if (!frame)
         return error("frame invalid");
 
-    if (frame && frame.contentInstance && frame.contentInstance instanceof DKPlugin) {
-        frame.contentInstance.close();
+    if (frame && frame.dkplugin && frame.dkplugin instanceof DKPlugin) {
+        frame.dkplugin.close();
     } else if (frame.content && frame.content.id && frame.content.id.includes(".html")) {
         console.debug("dk.frame.close(): obj seems to be a plugin sill closing by filename ");
         var htmlfile = frame.content.id;
@@ -300,10 +302,10 @@ dk.frame.reload = function dk_frame_reload(obj) {
     let jsfile = "";
     let url = "";
     let plugin = {};
-    if (frame && frame.contentInstance && frame.contentInstance instanceof DKPlugin) {
-        url = frame.contentInstance.getUrl();
+    if (frame && frame.dkplugin && frame.dkplugin instanceof DKPlugin) {
+        url = frame.dkplugin.getUrl();
         plugin = dk.getPlugin(url);
-        frame.contentInstance.close();
+        frame.dkplugin.close();
     } else if (frame.content && frame.content.id && frame.content.id.includes(".html")) {
         console.debug("dk.frame.close(): obj seems to be a plugin sill closing by filename ");
         htmlfile = frame.content.id;
@@ -323,10 +325,9 @@ dk.frame.reload = function dk_frame_reload(obj) {
         dk.frame.frames.splice(index, 1);
 
     //open everything back up
-    dk.create(url, function(){
+    dk.create(url, function() {
         plugin.create();
     });
-
 
     return true;
 }
@@ -343,7 +344,7 @@ dk.frame.setTitle = function dk_frame_setTitle(obj, title) {
     return true;
 }
 
-dk.frame.setIcon = function dk_frame_setIcon(obj, url){
+dk.frame.setIcon = function dk_frame_setIcon(obj, url) {
     if (!obj)
         return error("obj invalid");
     if (!url)
@@ -382,13 +383,14 @@ dk.frame.restoreSize = function dk_frame_restoreSize(frame) {
 }
 
 dk.frame.createNewWindow = function dk_frame_createNewWindow(title, width, height, url) {
+    console.error("createNewWindow is dprecated for now. Objects should make their own elements and call dk.frame.create()")
     const newWin = new DKPlugin(title);
-    if (!newWin.ok){
+    if (!newWin.ok) {
         const frame = dk.frame.getFrame(newWin);
         dk.frame.bringToFront(frame);
         return false;
     }
-    if(url)
+    if (url)
         newWin.setUrl(url);
     const div = document.createElement("div");
     div.id = title;
