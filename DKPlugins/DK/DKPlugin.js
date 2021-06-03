@@ -42,26 +42,52 @@ const CreateMyPlugin = function CreateMyPlugin() {
  * @type object
  */
 const DKPlugin = function DKPlugin(identifier) {
+
     DKPlugin.prototype.init = function DKPlugin_init(callback) {
-        //console.debug("DKPlugin.prototype.init()");
-        dk.errorCatcher(this);
+        console.log("DKPlugin.prototype.init()");
+        //dk.errorCatcher(this);
+        var scripts = document.getElementsByTagName("script");
+        this.url = scripts[scripts.length-1].src;
         callback && callback(this);
+        return this;
     }
     DKPlugin.prototype.end = function DKPlugin_end() {
-        console.debug("DKPlugin.prototype.end");
+        console.log("DKPlugin.prototype.end()");
+        const plugin = dk.getPlugin(this.url);
+        delete dk[plugin.name];
+        var scripts = document.getElementsByTagName("script");
+        for(let n=0; n<scripts.length; n++){
+            if(scripts[n].src === this.url){
+               scripts[n].parentNode.removeChild(scripts[n]);
+               break;
+            }
+        }
+        return true;
+    }
+    DKPlugin.prototype.create = function DKPlugin_create() {
+        console.log("DKPlugin.prototype.create()");
+        return true;
+    }
+    DKPlugin.prototype.close = function DKPlugin_close() {
+        console.log("DKPlugin.prototype.close()");
+        const index = DKPlugin.instances.indexOf(this);
+        if (index <= -1)
+            return error("Unable to find instance in DKPlugin");
+        DKPlugin.instances[index].removeInstance(DKPlugin.instances[index]);
+        return true;
     }
 
-    DKPlugin.prototype.getInstance = function DKPlugin_getInstance(_instance) {
+    DKPlugin.prototype.getInstance = function DKPlugin_getInstance(instance) {
         //console.debug("DKPlugin.getInstance() called");
-        const index = DKPlugin.instances.indexOf(_instance);
+        const index = DKPlugin.instances.indexOf(instance);
         if (index <= -1)
             return error("Unable to find instance in DKPlugin");
         return DKPlugin.instances[index];
     }
 
-    DKPlugin.prototype.removeInstance = function DKPlugin_removeInstance(_instance) {
+    DKPlugin.prototype.removeInstance = function DKPlugin_removeInstance(instance) {
         //console.debug("DKPlugin.removeInstance() called");
-        const index = DKPlugin.instances.indexOf(_instance);
+        const index = DKPlugin.instances.indexOf(instance);
         if (index <= -1)
             return error("Unable to find instance in DKPlugin");
         DKPlugin.instances.splice(index, 1);
@@ -70,12 +96,21 @@ const DKPlugin = function DKPlugin(identifier) {
     }
 
     DKPlugin.prototype.getInstanceInfo = function DKPlugin_getInstanceInfo(callerName) {
-        //console.log("DKPlugin.getInstanceIndex() called");
-        const index = DKPlugin.instances.indexOf(this._instance);
+        const index = DKPlugin.instances.indexOf(this);
         if (index <= -1)
             return error("Unable to find instance in DKPlugin");
         //console.debug("(INSTANCE) name:" + callerName + " index:" + index + " total:" + DKPlugin.instances.length);
         return index;
+    }
+
+    DKPlugin.prototype.setUrl = function DKPlugin_setUrl(url) {
+        this.url = url;
+    }
+
+    DKPlugin.prototype.getUrl = function DKPlugin_getUrl() {
+       if (!this.url)
+            return error("DKPlugin.getUrl(): url not set, please use yourDKPlugin.setUrl(url)");
+       return this.url;
     }
 
     DKPlugin.prototype.setAccessNode = function DKPlugin_setAccessNode(node) {
@@ -88,14 +123,6 @@ const DKPlugin = function DKPlugin(identifier) {
         if (!this.node)
             return error("DKPlugin.getAccessNode(): node not set, please use yourDKPlugin.setAccessNode(node)");
         return this.node;
-    }
-
-    DKPlugin.prototype.close = function DKPlugin_close() {
-        const index = DKPlugin.instances.indexOf(this._instance);
-        if (index <= -1)
-            return error("Unable to find instance in DKPlugin");
-        DKPlugin.instances[index].removeInstance(DKPlugin.instances[index]);
-        return true;
     }
 
     //EXECUTION STARTS HERE
@@ -122,17 +149,16 @@ const DKPlugin = function DKPlugin(identifier) {
             }
         }
     }
-    this._instance = this;
 
     //Not sure how this can happen, just to be safe...
-    if (DKPlugin.instances.includes(this._instance)) {
-        const index = DKPlugin.instances.indexOf(this._instance);
-        console.error("this.instance already exists in DKPlugin @inxed " + index);
+    if (DKPlugin.instances.includes(this)) {
+        const index = DKPlugin.instances.indexOf(this);
+        console.error("An instance of this already exists in DKPlugin @index " + index);
         DKPlugin.instances[index].ok = false;
         return DKPlugin.instances[index];
     }
 
-    const index = DKPlugin.instances.push(this._instance) - 1;
+    const index = DKPlugin.instances.push(this) - 1;
     DKPlugin.instances[index].ok = true;
     //console.debug("created DKPlugin("+identifier+") @index "+index);
     return DKPlugin.instances[index];

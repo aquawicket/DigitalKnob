@@ -143,18 +143,6 @@ dk.getPlugin = function dk_getPlugin(url) {
         return error("pluginName invalid");
     pluginName = pluginName.substring(0, pluginName.lastIndexOf("."));
     pluginName = pluginName.toLowerCase();
-    /*
-    if(pluginName.substring(0,3) === "dk."){
-        //pluginName = pluginName.slice(3);
-        const dk_ = window["dk"];
-        const dk_notepad = dk_["notepad"];
-        if(dk_notepad){
-            const dk_notepad_file = dk_notepad["file"];
-            const dk_npf = window["dk"]["notepad"]["file"];
-            console.log("yup");
-        }
-    }
-    */
     if (pluginName.substring(0, 2) === "dk")
         pluginName = pluginName.slice(2);
     let plugin = dk[pluginName];
@@ -303,11 +291,12 @@ dk.loadJs = function dk_loadJs(url, dk_loadJs_callback) {
 
             if (plugin && plugin.init) {
                 //console.debug("running dk." + plugin.name + ".init()");
+                DKPlugin.prototype.init.call(plugin);
                 plugin.init(function plugin_init_callback() {
                     done = true;
+                    //plugin.setUrl(url);
                     return dk_loadJs_callback && dk_loadJs_callback(true);
                 });
-                DKPlugin.prototype.init.call(plugin.instance);
             } else {
                 done = true;
                 return dk_loadJs_callback && dk_loadJs_callback(true);
@@ -1190,9 +1179,9 @@ dk.errorCatcher = function dk_errorCatcher(object) {
                         try {
                             return method.apply(this, arguments);
                         } catch (err) {
-                            const stack = dk.trace.stackToConsoleString(err);
-                            if (dk.console && dk.console.log) {
-                                dk.console.log(stack, 'red');
+                            //const stack = dk.trace.stackToConsoleString(err);
+                            if (dk.console && dk.console.error) {
+                                dk.console.error(err);
                                 xconsole && xconsole.error(err);
                             } else
                                 console.error(err);

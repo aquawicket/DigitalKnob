@@ -2,16 +2,35 @@
 
 dk.devtools = new DKPlugin("dk_devtools");
 
+dk.devtools.init = function dk_devtools_init(callback) {
+    console.log("dk.devtools.init()");
+    callback && callback(dk.devtools);
+}
+
+dk.devtools.end = function dk_devtools_end() {
+    console.log("dk.devtools.end()");
+    DKPlugin.prototype.end.call(this);
+}
+
 dk.devtools.create = function dk_devtools_create() {
-    dk.devtools.div = dk.frame.createNewWindow("DevTools", "200rem", "300rem");
-    if (!dk.devtools.div)
-        return false;
-
-    const frame = dk.frame.getFrame(dk.devtools.div);
-    frame.titlebaricon.src = "DKDevTools/developer.png";
-
+    console.log("dk.devtools.create()");
+    dk.devtools.div = document.createElement("div");
+    dk.devtools.div.style.width = "200rem";
+    dk.devtools.div.style.height = "300rem";
+    dk.devtools.div.style.overflow = "auto";
+    dk.devtools.setAccessNode(dk.devtools.div);
     dk.devtools.addTools();
+
+    const frame = dk.frame.create(dk.devtools);
+    frame.setTitle(dk.devtools, "DKDevTools");
+    frame.setIcon(dk.devtools, "DKDevTools/developer.png");
     return true;
+}
+
+dk.devtools.close = function dk_devtools_close(){
+    console.log("dk.devtools.close()");
+    DKPlugin.prototype.close.call(this);
+    dk.devtools.end();
 }
 
 dk.devtools.addTools = function dk_devtools_addTools() {
@@ -33,4 +52,17 @@ dk.devtools.addTools = function dk_devtools_addTools() {
             dk.filemanager.create();
         });
     })
+
+    const codebox = dk.gui.createTag("textarea", dk.devtools.div, {
+        style:{
+            position:"absolute",
+            top:"90rem",
+            left:"5rem",
+            //right:"5rem",
+            width:"95%",
+            bottom:"5rem",
+            fontSize:"9rem"
+        }
+    });
+    //codebox.style.removeProperty("width");
 }

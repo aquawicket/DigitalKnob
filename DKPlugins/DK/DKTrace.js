@@ -24,7 +24,7 @@ dk.trace.stackToConsoleString = function dk_trace_stackToConsoleString(arg, dele
         } else if (arg instanceof DOMException) {
             headerMsg = true;
             const str = arg.name + " " + arg.message;
-            jsonStack = stackToJSON(this.getStack(str));
+            jsonStack = this.stackToJSON(this.getStack(str));
         } else {
             return error("arg is an instance of Error, but it doesn't have a stack");
         }

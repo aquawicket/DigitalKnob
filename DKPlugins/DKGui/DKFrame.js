@@ -28,6 +28,8 @@ dk.frame.create = function dk_frame_create(obj) {
         var title = dk.file.getFilename(element.id);
         title && (title = title.replace(".html", ""));
     }
+    if(!title)
+        title = "New Window";
 
     var width = element.style.width;
     var height = element.style.height;
@@ -286,25 +288,47 @@ dk.frame.minimize = function dk_frame_minimize(obj) {
 }
 
 dk.frame.reload = function dk_frame_reload(obj) {
+    //Remove the contents of the frame
     if (!obj)
         return error("obj invalid");
-    var frame = dk.frame.getFrame(obj);
+
+    var frame = this.getFrame(obj);
     if (!frame)
-        return "frame invalid";
+        return error("frame invalid");
 
-    console.debug("FIXME: more work to be down to complete dk.frame.reload()");
-    return false;
+    let htmlfile = "";
+    let jsfile = "";
+    let url = "";
+    let plugin = {};
+    if (frame && frame.contentInstance && frame.contentInstance instanceof DKPlugin) {
+        url = frame.contentInstance.getUrl();
+        plugin = dk.getPlugin(url);
+        frame.contentInstance.close();
+    } else if (frame.content && frame.content.id && frame.content.id.includes(".html")) {
+        console.debug("dk.frame.close(): obj seems to be a plugin sill closing by filename ");
+        htmlfile = frame.content.id;
+        jsfile = htmlfile.replace(".html", ".js");
+        jsfile && dk.close(jsfile);
+        htmlfile && dk.close(htmlfile);
+    } else {
+        console.info("Not a dkplugin, just some javascript html. we can just close the frame.")
+    }
 
-    const jsfile = frame.content.id.replace(".html", ".js");
-    if (!jsfile)
-        return error("jsfile invalid");
-    const htmlfile = frame.content.id.replace(".js", ".html");
-    if (!htmlfile)
-        return error("htmlfile invalid");
-    dk.frame.close(frame.content);
-    dk.create(jsfile, function() {
-        dk.frame.create(byId(htmlfile));
+    //Remove the frame and it's instance
+    if (frame === document.body)
+        return warn("frame === document.body");
+    frame.parentNode && frame.parentNode.removeChild(frame);
+    var index = dk.frame.frames.indexOf(frame);
+    if (index > -1)
+        dk.frame.frames.splice(index, 1);
+
+    //open everything back up
+    dk.create(url, function(){
+        plugin.create();
     });
+
+
+    return true;
 }
 
 dk.frame.setTitle = function dk_frame_setTitle(obj, title) {
@@ -316,6 +340,18 @@ dk.frame.setTitle = function dk_frame_setTitle(obj, title) {
     if (!frame)
         return error("frame invalid");
     frame.titlebartext && (frame.titlebartext.innerHTML = title);
+    return true;
+}
+
+dk.frame.setIcon = function dk_frame_setIcon(obj, url){
+    if (!obj)
+        return error("obj invalid");
+    if (!url)
+        return error("url invalid");
+    var frame = dk.frame.getFrame(obj);
+    if (!frame)
+        return error("frame invalid");
+    frame.titlebaricon && (frame.titlebaricon.src = url);
     return true;
 }
 
@@ -345,13 +381,15 @@ dk.frame.restoreSize = function dk_frame_restoreSize(frame) {
     return true;
 }
 
-dk.frame.createNewWindow = function dk_frame_createNewWindow(title, width, height) {
+dk.frame.createNewWindow = function dk_frame_createNewWindow(title, width, height, url) {
     const newWin = new DKPlugin(title);
     if (!newWin.ok){
         const frame = dk.frame.getFrame(newWin);
         dk.frame.bringToFront(frame);
         return false;
     }
+    if(url)
+        newWin.setUrl(url);
     const div = document.createElement("div");
     div.id = title;
     div.style.width = width;

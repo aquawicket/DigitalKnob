@@ -301,7 +301,6 @@ dk.console.create = function dk_console_create(parent, top, bottom, left, right,
                 left: "6rem",
                 width: "12rem",
                 height: "12rem",
-                //backgroundColor: "blue"
             }
         })
 
@@ -312,7 +311,7 @@ dk.console.create = function dk_console_create(parent, top, bottom, left, right,
         const lastMsgDiv = dk.console.logDiv.lastChild.previousSibling;
         if (lastMsgDiv) {
             const lastMsgSpan = lastMsgDiv.firstChild.nextSibling;
-            if (arguments[1] == lastMsgSpan.innerHTML) {
+            if ((arguments[1] == lastMsgSpan.innerText) || (arguments[1].includes && arguments[1].includes(lastMsgSpan.innerText))) {
                 const lastMsgIcon = lastMsgDiv.firstChild;
                 if (!lastMsgIcon.childElementCount) {
                     dk.gui.createTag("img", lastMsgIcon, {
@@ -327,7 +326,8 @@ dk.console.create = function dk_console_create(parent, top, bottom, left, right,
                             position: "absolute",
                             top: "50%",
                             left: "50%",
-                            transform: "translate(-50%, -50%)"
+                            transform: "translate(-50%, -50%)",
+                            color: "black"
                         },
                         innerHTML: 2
                     });

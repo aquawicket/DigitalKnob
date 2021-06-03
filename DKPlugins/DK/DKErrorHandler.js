@@ -52,11 +52,14 @@ dk.errorhandler.create = function dk_errorhandler_create() {
         function onerror(msg, url, line, col, err) {
             window.onanyerror.apply(this, arguments);
             if (err)
-                dk.console.Logger("error", dk.trace.stackToConsoleString(err, "require"));
+                dk.console.error(err);
+                //dk.console.Logger("error", dk.trace.stackToConsoleString(err, "require"));
             else if (msg.error)
-                dk.console.Logger("error", dk.trace.stackToConsoleString(msg.error, "require"));
+                dk.console.error(msg.err);
+                //dk.console.Logger("error", dk.trace.stackToConsoleString(msg.error, "require"));
             else
-                dk.console.Logger("error", msg.message);
+                dk.console.error(msg.message);
+                //dk.console.Logger("error", msg.message);
             if (onerrorx)
                 return onerrorx.apply(null, arguments);
         }
@@ -66,9 +69,11 @@ dk.errorhandler.create = function dk_errorhandler_create() {
     function handleRejection() {
         const onunhandledrejectionx = window.onunhandledrejection;
         window.addEventListener('unhandledrejection', onunhandledrejection);
-
         function onunhandledrejection(event) {
             window.onanyerror.apply(this, arguments);
+            if (event.reason) {
+                dk.console.error(event.reason);
+            }
             if (onunhandledrejectionx)
                 return onunhandledrejectionx.apply(null, arguments);
         }
@@ -79,6 +84,7 @@ dk.errorhandler.create = function dk_errorhandler_create() {
         const sendx = XMLHttpRequest.prototype.send;
         window.XMLHttpRequest.prototype.send = function window_XMLHttpRequest_prototype_send() {
             handleAsync(this);
+            //dk.console.error("handleXMLHTTP ajax request error. TODO:  DKErrorJandler.js:87");
             return sendx.apply(this, arguments);
         }
     }
@@ -231,8 +237,7 @@ dk.errorhandler.create = function dk_errorhandler_create() {
         setTimeout(fn, 0);
     }
 
-    window.onanyerror = function window_onanyerror(entity) {
-        //console.debug(entity);
+    window.onanyerror = function window_onanyerror(entity) {//console.debug(entity);
     }
 
     LoadErrorHandlers();
