@@ -17,7 +17,7 @@
     background-color: rgb(45,45,45);
 }
 
-[dk_console="log"] {
+[dk_console="logDiv"] {
     position: absolute;
     padding: 0rem;
     font-size: 10rem;

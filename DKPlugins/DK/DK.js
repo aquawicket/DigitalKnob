@@ -299,6 +299,7 @@ dk.loadJs = function dk_loadJs(url, dk_loadJs_callback) {
         if (!done && (!this.readyState || this.readyState === "loaded" || this.readyState === "complete")) {
             var plugin = dk.getPlugin(url);
             plugin && console.log("loading dk." + plugin.name + " plugin");
+            dk.errorCatcher(plugin);
 
             if (plugin && plugin.init) {
                 //console.debug("running dk." + plugin.name + ".init()");
@@ -1174,13 +1175,15 @@ dk.errorCatcher = function dk_errorCatcher(object) {
         if (object !== dkPlugin)
             continue;
         for (func in dkPlugin) {
+            if(func.includes("_try"))
+                continue;
             method = dkPlugin[func];
             if (typeof method === "function") {
 
                 Object.defineProperty(method, 'name', {
                     value: func
                 })
-                //console.debug("dk." + plugin + "." + func + "()");
+                console.debug("dk." + plugin + "." + func + "()");
                 const funcName = func;
                 dkPlugin[func] = function errorCatcher(func, method) {
                     return dkPlugin[func + "_try"] = function() {

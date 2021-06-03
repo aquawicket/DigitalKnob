@@ -17,7 +17,7 @@ dk.gui.createElementBefore = function dk_gui_createElementBefore(parent, tag, id
     return ele;
 }
 
-dk.gui.createTag = function dk_gui_createTag(tag, parent, props) {
+dk.gui.createTag = function dk_gui_createTag(tag, parent, props, callback) {
     !props && (props = {});
     const style = props.style;
     style && delete props.style;
@@ -26,6 +26,7 @@ dk.gui.createTag = function dk_gui_createTag(tag, parent, props) {
     //for(let attr in props)
     //    element.setAttribute("dk", "");
     parent.appendChild(element);
+    callback && callback(element);
     return element;
 }
 

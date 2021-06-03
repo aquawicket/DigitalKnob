@@ -146,7 +146,7 @@ dk.console.end = function dk_console_end() {
 dk.console.create = function dk_console_create(parent, top, bottom, left, right, width, height) {
     dk.console.limit = 100;
 
-    const container = dk.gui.createTag("div", parent, {
+    dk.console.container = dk.gui.createTag("div", parent, {
         style: {
             top: top,
             bottom: bottom,
@@ -163,25 +163,24 @@ dk.console.create = function dk_console_create(parent, top, bottom, left, right,
             });
         }
     });
-    container.setAttribute("dk_console", "container");
-    dk.console.container = container;
+    dk.console.container.setAttribute("dk_console", "container");
 
-    const toolbar = dk.gui.createTag("div", container, {});
-    toolbar.setAttribute("dk_console", "toolbar");
+    dk.console.toolbar = dk.gui.createTag("div", dk.console.container, {});
+    dk.console.toolbar.setAttribute("dk_console", "toolbar");
 
-    const log = dk.gui.createTag("div", container, {});
-    log.setAttribute("dk_console", "log");
+    dk.console.logDiv = dk.gui.createTag("div", dk.console.container, {});
+    dk.console.logDiv.setAttribute("dk_console", "logDiv");
 
-    const commandDiv = dk.gui.createTag("div", log, {});
-    commandDiv.setAttribute("dk_console", "commandDiv");
+    dk.console.commandDiv = dk.gui.createTag("div", dk.console.logDiv, {});
+    dk.console.commandDiv.setAttribute("dk_console", "commandDiv");
 
-    const command = dk.gui.createTag("input", commandDiv, {
+    dk.console.command = dk.gui.createTag("input", dk.console.commandDiv, {
         type: "text",
         onkeydown: function command_onkeydown(event) {
             if (event.code === "Enter") {
                 if (event.currentTarget.value === "clear" || event.currentTarget.value === "cls") {
                     dk.console.clear();
-                    command.value = "";
+                    event.currentTarget.value = "";
                     return;
                 }
                 //console.debug("RUN Javascript -> " + event.currentTarget.value);
@@ -195,14 +194,16 @@ dk.console.create = function dk_console_create(parent, top, bottom, left, right,
         }
     }).setAttribute("dk_console", "command");
 
-    //FIXME:
+    //FIXME: initiating before dk.console.commandDiv
     /*
-    log.onclick = function(){
-        command && command.focus();
+    dk.console.logDiv.onclick = function() {
+        setTimeout(function() {
+            dk.console.command.focus();
+        }, 100);
     }
     */
 
-    dk.gui.createTag("img", commandDiv, {
+    dk.gui.createTag("img", dk.console.commandDiv, {
         src: "DKGui/cmndArrow.png",
     }).setAttribute("dk_console", "cmnd");
 
@@ -284,10 +285,10 @@ dk.console.create = function dk_console_create(parent, top, bottom, left, right,
     // https://console.spec.whatwg.org/#printer
     dk.console.Printer = function dk_console_Printer(logLevel, args) {
         //const _args = dk.console.ColorChromeConsole(arguments);
-        if ((log.scrollHeight - log.scrollTop) < (log.offsetHeight + 1))
-            log.scroll = true;
+        if ((dk.console.logDiv.scrollHeight - dk.console.logDiv.scrollTop) < (dk.console.logDiv.offsetHeight + 1))
+            dk.console.logDiv.scroll = true;
         else
-            log.scroll = false;
+            dk.console.logDiv.scroll = false;
         const msgDiv = document.createElement("div");
         msgDiv.setAttribute("dk_console", "msgDiv");
         if (logLevel !== "group" && logLevel !== "groupCollapsed" && dk.console.currentGroup) {
@@ -308,7 +309,7 @@ dk.console.create = function dk_console_create(parent, top, bottom, left, right,
         msgSpan.setAttribute("dk_console", "msgSpan");
 
         //If the message is the same as the last, just increase a count next to the original.
-        const lastMsgDiv = log.lastChild.previousSibling;
+        const lastMsgDiv = dk.console.logDiv.lastChild.previousSibling;
         if (lastMsgDiv) {
             const lastMsgSpan = lastMsgDiv.firstChild.nextSibling;
             if (arguments[1] == lastMsgSpan.innerHTML) {
@@ -328,7 +329,7 @@ dk.console.create = function dk_console_create(parent, top, bottom, left, right,
                             left: "50%",
                             transform: "translate(-50%, -50%)"
                         },
-                        innerHTML: 1
+                        innerHTML: 2
                     });
                 } else {
                     const total = (parseInt(lastMsgIcon.firstChild.nextSibling.innerHTML) + 1);
@@ -364,7 +365,7 @@ dk.console.create = function dk_console_create(parent, top, bottom, left, right,
                     groupArrow.setAttribute("src", "DKGui/groupArrow2.png");
                     group.display = "block";
                 }
-                const elements = log.querySelectorAll("[group='" + group.id + "']");
+                const elements = dk.console.logDiv.querySelectorAll("[group='" + group.id + "']");
                 for (let n = 0; n < elements.length; n++)
                     elements[n].style.display = group.display;
             }
@@ -390,16 +391,16 @@ dk.console.create = function dk_console_create(parent, top, bottom, left, right,
             msgSpan.setAttribute("dk_console", "msgSpanGreen");
         }
 
-        log.appendChild(msgDiv);
-        log.appendChild(commandDiv);
+        dk.console.logDiv.appendChild(msgDiv);
+        dk.console.logDiv.appendChild(dk.console.commandDiv);
         msgDiv.appendChild(msgSpan);
 
         //Limit the number of stored lines
-        if (log.childElementCount > dk.console.limit)
-            log.removeChild(log.firstChild);
+        if (dk.console.logDiv.childElementCount > dk.console.limit)
+            dk.console.logDiv.removeChild(dk.console.logDiv.firstChild);
 
         setTimeout(function() {
-            log.scrollTop = (log.scrollHeight - log.style.height);
+            dk.console.logDiv.scrollTop = (dk.console.logDiv.scrollHeight - dk.console.logDiv.style.height);
         }, 0);
 
         return msgDiv.innerHTML;
@@ -436,9 +437,9 @@ dk.console.create = function dk_console_create(parent, top, bottom, left, right,
         // 1. Empty the appropriate group stack.
         dk.console.groupStack = [];
         // 2. If possible for the environment, clear the console. (Otherwise, do nothing.)
-        const backup = commandDiv;
-        log.innerHTML = "";
-        log.appendChild(backup);
+        const backup = dk.console.commandDiv;
+        dk.console.logDiv.innerHTML = "";
+        dk.console.logDiv.appendChild(backup);
     }
 
     //dk.console.context;
@@ -511,7 +512,7 @@ dk.console.create = function dk_console_create(parent, top, bottom, left, right,
     dk.console.group = function dk_console_group(...data) {
 
         let n = 0;
-        while (log.querySelector("[group='" + n + "']"))
+        while (dk.console.logDiv.querySelector("[group='" + n + "']"))
             n++;
         // 1. Let group be a new group.
         const group = {
@@ -535,7 +536,7 @@ dk.console.create = function dk_console_create(parent, top, bottom, left, right,
     dk.console.groupCollapsed = function dk_console_groupCollapsed(...data) {
 
         let n = 0;
-        while (log.querySelector("[group='" + n + "']"))
+        while (dk.console.logDiv.querySelector("[group='" + n + "']"))
             n++;
         // 1. Let group be a new group.
         const group = {
@@ -648,7 +649,7 @@ dk.console.create = function dk_console_create(parent, top, bottom, left, right,
         dk.console[lvl](msg);
     }
     delete dk.console.record;
-    return container;
+    return dk.console.container;
 }
 
 dk.console.SpanFilter = function dk_console_SpanFilter(args) {
