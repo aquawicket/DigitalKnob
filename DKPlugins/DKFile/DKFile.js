@@ -1,6 +1,10 @@
 "use strict";
 
-dk.file = new DKPlugin("dk_file");
+DKFile.prototype = Object.create(DKPlugin.prototype);
+function DKFile(identifier) {
+    return DKPlugin.call(this, identifier);
+}
+dk.file = new DKFile("DKFile");
 
 dk.file.init = function dk_file_init() {
     dk.file.appFilename = "";

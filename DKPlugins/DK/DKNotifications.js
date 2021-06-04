@@ -1,7 +1,10 @@
 "use strict";
 // https://developer.mozilla.org/en-US/docs/Web/API/Notifications_API
-
-dk.notifications = new DKPlugin("dk.notifications");
+DKNotifications.prototype = Object.create(DKPlugin.prototype);
+function DKNotifications(identifier) {
+    return DKPlugin.call(this, identifier);
+}
+dk.notifications = new DKNotifications("DKNotifications");
 
 dk.notifications.notifyMe = function dk_notifications_notifyMe() {
     if (Notification.permission == 'granted') {

@@ -256,18 +256,6 @@ dk.loadJs = function dk_loadJs(url, dk_loadJs_callback) {
         console.log(url + " script already loaded...");
         dk_loadJs_callback(true);
         return true;
-
-        //console.warn(url + " already loaded. Reloading...");
-        //dk.close(url);
-        /*
-        var plugin = dk.getPlugin(url);
-        plugin && console.log("closing dk." + plugin.name + " plugin");
-        if (plugin && plugin.end) {
-            console.log("running dk." + plugin.name + ".end()");
-            plugin.end();
-        }
-        byId(url) && byId(url).parentNode.removeChild(byId(url));
-        */
     }
 
     // Adding the script tag to the head node 
@@ -284,20 +272,18 @@ dk.loadJs = function dk_loadJs(url, dk_loadJs_callback) {
     script.onload = script.onreadystatechange = function script_onload() {
         //FIXME - DigitalKnob can't trigger onload yet.
         if (!done && (!this.readyState || this.readyState === "loaded" || this.readyState === "complete")) {
+            console.log("Loaded "+url);
             var plugin = dk.getPlugin(url);
-            plugin && console.log("loading dk." + plugin.name + " plugin");
-
-            if (plugin && plugin.init) {
-                //console.debug("running dk." + plugin.name + ".init()");
-                DKPlugin.prototype.init.call(plugin);
-                plugin.init(function plugin_init_callback() {
+            if (plugin) {
+                DKPlugin.prototype.init.call(plugin, function callback(instance) {
                     done = true;
-                    //plugin.setUrl(url);
-                    return dk_loadJs_callback && dk_loadJs_callback(true);
+                    dk_loadJs_callback && dk_loadJs_callback(true);
+                    return true;
                 });
             } else {
                 done = true;
-                return dk_loadJs_callback && dk_loadJs_callback(true);
+                dk_loadJs_callback && dk_loadJs_callback(true);
+                return true;
             }
         }
     }
@@ -1161,12 +1147,14 @@ dk.errorCatcher = function dk_errorCatcher(obj, name) {
             continue;
         if (obj[func + "_try"])
             continue;
+        if(obj[func] == DKPlugin.prototype[func])
+            continue;    
         const method = obj[func];
         if (typeof method === "function") {
             Object.defineProperty(method, 'name', {
                 value: func
             })
-            console.debug(name + "." + func + "()");
+            //console.debug(name + "." + func + "()");
             const funcName = func;
             obj[func] = function errorCatcher(func, method) {
                 return obj[func + "_try"] = function() {

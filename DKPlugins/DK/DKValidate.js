@@ -1,6 +1,11 @@
 "use strict";
 
-dk.validate = new DKPlugin("dk_validate");
+DKValidate.prototype = Object.create(DKPlugin.prototype);
+function DKValidate(identifier) {
+    return DKPlugin.call(this, identifier);
+}
+dk.validate = new DKValidate("DKValidate");
+
 
 //dk.validate.init = function dk_validate_init(){}
 //dk.validate.end = function dk_validate_end(){}

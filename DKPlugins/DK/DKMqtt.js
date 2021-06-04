@@ -1,8 +1,11 @@
 "use strict";
 
 //http://www.steves-internet-guide.com/using-javascript-mqtt-client-websockets/
-
-dk.mqtt = new DKPlugin("dk_mqtt");
+DKMqtt.prototype = Object.create(DKPlugin.prototype);
+function DKMqtt(identifier) {
+    return DKPlugin.call(this, identifier);
+}
+dk.mqtt = new DKMqtt("DKMqtt");
 
 dk.mqtt.init = function dk_mqtt_init() {
     dk.create("DKTasmota/mqttws31.min.js");

@@ -1,8 +1,12 @@
 "use strict";
 
-dk.devtools = new DKPlugin("dk_devtools");
+DKDevTools.prototype = Object.create(DKPlugin.prototype);
+function DKDevTools(identifier) {
+    return DKPlugin.call(this, identifier);
+}
+dk.devtools = new DKDevTools("DKDevTools");
 
-/*
+
 dk.devtools.init = function dk_devtools_init(callback) {
     console.log("dk.devtools.init()");
     callback && callback(dk.devtools);
@@ -10,9 +14,8 @@ dk.devtools.init = function dk_devtools_init(callback) {
 
 dk.devtools.end = function dk_devtools_end() {
     console.log("dk.devtools.end()");
-    DKPlugin.prototype.end.call(this);
 }
-*/
+
 
 dk.devtools.create = function dk_devtools_create() {
     console.log("dk.devtools.create()");
@@ -23,16 +26,15 @@ dk.devtools.create = function dk_devtools_create() {
     dk.devtools.setAccessNode(dk.devtools.div);
     dk.devtools.addTools();
 
-    const frame = dk.frame.create(dk.devtools);
-    frame.setTitle(dk.devtools, "DKDevTools");
-    frame.setIcon(dk.devtools, "DKDevTools/developer.png");
+    const dkframe = dk.frame.create(dk.devtools);
+    dkframe.setTitle("DKDevTools");
+    dkframe.setIcon("DKDevTools/developer.png");
     return true;
 }
 
 dk.devtools.close = function dk_devtools_close() {
     console.log("dk.devtools.close()");
-    DKPlugin.prototype.close.call(this);
-    dk.devtools.end();
+    this.end();
 }
 
 dk.devtools.addTools = function dk_devtools_addTools() {

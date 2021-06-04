@@ -1,6 +1,10 @@
 "use strict";
 
-dk.resize = new DKPlugin("dk_resize");
+DKResize.prototype = Object.create(DKPlugin.prototype);
+function DKResize(identifier) {
+    return DKPlugin.call(this, identifier);
+}
+dk.resize = new DKResize("DKResize");
 
 dk.resize.create = function dk_resize_create(element) {
     if (!element)

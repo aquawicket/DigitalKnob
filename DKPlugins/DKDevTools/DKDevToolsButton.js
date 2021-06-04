@@ -1,6 +1,10 @@
 "use strict";
 
-dk.devtoolsbutton = new DKPlugin("dk_devtoolsbutton");
+DKDevToolsButton.prototype = Object.create(DKPlugin.prototype);
+function DKDevToolsButton(identifier) {
+    return DKPlugin.call(this, identifier);
+}
+dk.devtoolsbutton = new DKDevToolsButton("DKDevToolsButton");
 
 dk.devtoolsbutton.init = function dk_devtoolsbutton_init() {
     dk.preloadImage("DKDevTools/developer.png");

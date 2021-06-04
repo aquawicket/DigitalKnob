@@ -1,6 +1,10 @@
 "use strict";
 
-dk.table = new DKPlugin("dk_table");
+DKTable.prototype = Object.create(DKPlugin.prototype);
+function DKTable(identifier) {
+    return DKPlugin.call(this, identifier);
+}
+dk.table = new DKTable("DKTable");
 // https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableElement
 
 //The idea is to create a name for every row and every column.
@@ -30,11 +34,11 @@ dk.table = new DKPlugin("dk_table");
 // The rowName is set to Peter on the <tr> element
 // The columnName is set to address on the <td> element
 
-dk.table.init = function dk_table_init(){
+dk.table.init = function dk_table_init() {
     dk.create("DKGui/DKTable.css");
 }
 
-dk.table.end = function dk_table_close(){
+dk.table.end = function dk_table_close() {
     dk.close("DKGui/DKTable.css");
 }
 
@@ -83,7 +87,7 @@ dk.table.addRow = function dk_table_addRow(table, rowName, cellName) {
 
     for (let n = 0; n < cell_count; n++) {
         //Grab the name of the cell from the root column cell if it exists
-        
+
         //if(!table.rows[0])
         //	return error("dk.table.addRow(): table.rows[0] is invalid");
         !cellName && (cellName = table.rows[0].cells[n].getAttribute("name"));

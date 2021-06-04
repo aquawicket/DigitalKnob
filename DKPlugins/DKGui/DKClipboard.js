@@ -1,6 +1,10 @@
 "use strict";
 
-dk.clipboard = new DKPlugin("dk_clipboard");
+DKClipboard.prototype = Object.create(DKPlugin.prototype);
+function DKClipboard(identifier) {
+    return DKPlugin.call(this, identifier);
+}
+dk.clipboard = new DKClipboard("DKClipboard");
 
 dk.clipboard.cut = function dk_clipboard_cut(ele) {
     let text = "";

@@ -1,5 +1,7 @@
 //"use strict"; //FIXME: this breaks duktape
 
+//https://www.phpied.com/3-ways-to-define-a-javascript-class/
+
 //Multiple instances of DKPlugin derived objects are allowed by default.
 //To make it singleton, simpily pass a unique name to your new DKPlugin() call. I.E.  const colorSettingsWindow = new DKPlugin("ColorSettingWindow");
 //You can also make semi-singleton objects that use an identifier to differentiate between mucitiple objects 
@@ -42,18 +44,47 @@ const CreateMyPlugin = function CreateMyPlugin() {
  * @type object
  */
 const DKPlugin = function DKPlugin(identifier) {
+    
+    DKPlugin.prototype.injectFuncs = function DKPlugin_injectFuncs() {
+        console.log("DKPlugin.prototype.injectFuncs(): " + this.name);
+        if (this.init !== DKPlugin.prototype.init) {
+            this.plugin_init = this.init;
+            this.init = DKPlugin.prototype.init;
+        }
+        if (this.end !== DKPlugin.prototype.end) {
+            this.plugin_end = this.end;
+            this.end = DKPlugin.prototype.end;
+        }
+        if (this.create !== DKPlugin.prototype.create) {
+            this.plugin_create = this.create;
+            this.create = DKPlugin.prototype.create;
+        }
+        if (this.close !== DKPlugin.prototype.close) {
+            this.plugin_close = this.close;
+            this.close = DKPlugin.prototype.close;
+        }
+        this.injected = true;
+    }
 
     DKPlugin.prototype.init = function DKPlugin_init(callback) {
+        !this.name && (this.name = this.identifier);
         console.log("DKPlugin.prototype.init(): " + this.name);
+        !this.injected && this.injectFuncs();
         dk.errorCatcher(this, "dk." + this.name);
         var scripts = document.getElementsByTagName("script");
         this.url = scripts[scripts.length - 1].src;
-        //this.init();
-        callback && callback(this);
+
+        if (this.plugin_init) {
+            this.plugin_init(function plugin_init_callback() {
+                callback && callback(this);
+            });
+        }
         return this;
     }
-    DKPlugin.prototype.end = function DKPlugin_end() {
+
+    DKPlugin.prototype.end = function DKPlugin_end(...args) {
         console.log("DKPlugin.prototype.end(): " + this.name);
+        this.plugin_end && this.plugin_end(...args);
         const plugin = dk.getPlugin(this.url);
         delete dk[plugin.name];
         var scripts = document.getElementsByTagName("script");
@@ -65,22 +96,28 @@ const DKPlugin = function DKPlugin(identifier) {
         }
         return true;
     }
-    DKPlugin.prototype.create = function DKPlugin_create(callback) {
+
+    DKPlugin.prototype.create = function DKPlugin_create(...args) {
         console.log("DKPlugin.prototype.create(): " + this.name);
-        callback && callback(this);
-        return true;
+        !this.injected && this.injectFuncs();
+        if (this.plugin_create)
+            return this.plugin_create(...args);
     }
-    DKPlugin.prototype.close = function DKPlugin_close() {
+
+    DKPlugin.prototype.close = function DKPlugin_close(...args) {
         console.log("DKPlugin.prototype.close(): " + this.name);
         const index = DKPlugin.instances.indexOf(this);
         if (index <= -1)
             return error("Unable to find instance in DKPlugin");
         DKPlugin.instances[index].removeInstance(DKPlugin.instances[index]);
-        return true;
+        if(this.plugin_close)
+            return this.plugin_close(...args);
     }
 
     DKPlugin.prototype.getInstance = function DKPlugin_getInstance(instance) {
+        !this.name && (this.name = this.identifier);
         console.log("DKPlugin.prototype.getInstance(): " + this.name);
+        !instance && (instance = this);
         const index = DKPlugin.instances.indexOf(instance);
         if (index <= -1)
             return error("Unable to find instance of DKPlugin");
@@ -89,6 +126,7 @@ const DKPlugin = function DKPlugin(identifier) {
 
     DKPlugin.prototype.removeInstance = function DKPlugin_removeInstance(instance) {
         console.log("DKPlugin.prototype.removeInstance(): " + this.name);
+        !instance && (instance = this);
         const index = DKPlugin.instances.indexOf(instance);
         if (index <= -1)
             return error("Unable to find instance in DKPlugin");
@@ -137,6 +175,7 @@ const DKPlugin = function DKPlugin(identifier) {
             if (identifier === "new")
                 identifier = identifier + DKPlugin.instances.length;
             this.identifier = identifier;
+            !this.name && (this.name = this.identifier);
             for (let n = 0; n < DKPlugin.instances.length; n++) {
                 if (DKPlugin.instances[n].identifier == this.identifier) {
                     console.debug("DKPlugin(" + identifier + ") already exists");

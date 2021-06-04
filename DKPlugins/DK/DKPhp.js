@@ -1,6 +1,11 @@
 "use strict";
 
-dk.php = new DKPlugin("dk_php");
+DKPhp.prototype = Object.create(DKPlugin.prototype);
+function DKPhp(identifier) {
+    return DKPlugin.call(this, identifier);
+}
+dk.php = new DKPhp("DKPhp");
+
 
 //dk.php.call("GET", "DK/DK.php", "Function", "args", "args", dk_php_callback);
 dk.php.call = function dk_php_call(httpMethod, phpPath, funcName) {

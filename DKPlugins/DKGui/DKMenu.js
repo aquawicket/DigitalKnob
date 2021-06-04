@@ -1,6 +1,10 @@
 "use strict";
 
-dk.menu = new DKPlugin("dk_menu");
+DKMenu.prototype = Object.create(DKPlugin.prototype);
+function DKMenu(identifier) {
+    return DKPlugin.call(this, identifier);
+}
+dk.menu = new DKMenu("DKMenu");
 
 dk.menu.init = function dk_menu_init() {}
 

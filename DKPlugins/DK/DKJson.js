@@ -2,8 +2,12 @@
 
 //https://goessner.net/articles/JsonPath/index.html#e2
 
+DKJson.prototype = Object.create(DKPlugin.prototype);
+function DKJson(identifier) {
+    return DKPlugin.call(this, identifier);
+}
+dk.json = new DKJson("DKJson");
 
-dk.json = new DKPlugin("dk_json");
 
 dk.json.prettyJson = function dk_json_prettyJson(jsonStr) {
     if (typeof jsonStr !== 'string')

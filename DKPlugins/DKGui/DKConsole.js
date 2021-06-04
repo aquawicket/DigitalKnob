@@ -4,7 +4,11 @@
 // https://developer.mozilla.org/en-US/docs/Web/API/Console#outputting_text_to_the_console
 // https://developer.chrome.com/docs/devtools/console/api/
 
-dk.console = new DKPlugin("dk_console");
+DKConsole.prototype = Object.create(DKPlugin.prototype);
+function DKConsole(identifier) {
+    return DKPlugin.call(this, identifier);
+}
+dk.console = new DKConsole("DKConsole");
 
 //intercept console and reroute it to xconsole and dk.console
 //Example:

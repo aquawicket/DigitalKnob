@@ -1,7 +1,11 @@
 "use strict";
 //https://stackoverflow.com/a/36317375/688352
 
-dk.errorhandler = new DKPlugin("dk_errorhandler");
+DKErrorHandler.prototype = Object.create(DKPlugin.prototype);
+function DKErrorHandler(identifier) {
+    return DKPlugin.call(this, identifier);
+}
+dk.errorhandler = new DKErrorHandler("DKErrorHandler");
 
 /*
 window.onerror = function window_onerror(msg, url, lineNo, columnNo, err) {

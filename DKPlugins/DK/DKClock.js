@@ -11,8 +11,12 @@ format: 1975-08-19T23:15:30.000Z
 const utcDate = dateEvent.toUTCString();
 format: Tue, 19 Aug 1975 23:15:30 GMT
 */
+DKClock.prototype = Object.create(DKPlugin.prototype);
+function DKClock(identifier) {
+    return DKPlugin.call(this, identifier);
+}
+dk.clock = new DKClock("DKClock");
 
-dk.clock = new DKPlugin("dk_clock");
 
 dk.clock.create = function dk_clock_create(parent, top, bottom, left, right, width, height) {
     dk.clock.html = document.createElement("a");

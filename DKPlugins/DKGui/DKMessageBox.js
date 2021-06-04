@@ -1,6 +1,10 @@
 "use strict";
 
-dk.messagebox = new DKPlugin("dk_messagebox");
+DKMessageBox.prototype = Object.create(DKPlugin.prototype);
+function DKMessageBox(identifier) {
+    return DKPlugin.call(this, identifier);
+}
+dk.messagebox = new DKMessageBox("DKMessageBox");
 //const messagebox = function(pointer){}
 //messagebox.prototype = DKPlugin.prototype;
 //dk.messagebox = new messagebox();
@@ -16,7 +20,6 @@ dk.messagebox.end = function dk_messagebox_end(callback){
 
 dk.messagebox.create = function dk_messagebox_create(dk_messagebox_create_callback) {
     const instance = new DKPlugin("new");
-    //const instance = new messagebox();
     if (!instance)
         return error("instance invalid", dk_messagebox_create_callback);
 

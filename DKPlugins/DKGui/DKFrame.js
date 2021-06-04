@@ -1,46 +1,33 @@
 "use strict";
 
-dk.frame = new DKPlugin("dk_frame");
-dk.frame.frames = new Array;
+DKFrame.prototype = Object.create(DKPlugin.prototype);
+function DKFrame(identifier) {
+    return DKPlugin.call(this, identifier);
+}
+dk.frame = new DKFrame("DKFrame");
 
-dk.frame.init = function dk_frame_init() {
+DKFrame.prototype.init = function dk_frame_init() {
     dk.create("DKGui/DKFrame.css");
 }
-dk.frame.end = function dk_frame_end() {
+DKFrame.prototype.end = function dk_frame_end() {
     dk.close("DKGui/DKFrame.css");
 }
 
-dk.frame.create = function dk_frame_create(obj) {
-    if (!obj)
-        return error("obj invalid");
-    let element;
-    if (obj instanceof DKPlugin) {
-        element = obj.getAccessNode();
-        if (!element)
-            return false;
-    } else {
-        console.warn("dk.frame.create(): obj is not a instance of DKPlugin. It is recommended to derive from a new DKPlugin instance")
-        if (typeof obj === "object")
-            element = obj;
-        else
-            element = byId(obj)
-    }
-
-    if (element.id) {
-        var title = dk.file.getFilename(element.id);
-        title && (title = title.replace(".html", ""));
-    }
-    if (!title)
-        title = "New Window";
-
+DKFrame.prototype.create = function dk_frame_create(dkplugin) { 
+    if (!(dkplugin instanceof DKPlugin))
+        return error("Framed objects must be a DKPlugin instance");
+    const instance = new DKFrame("new");
+    instance.dkplugin = dkplugin;
+    const element = dkplugin.getAccessNode();
+    if (!element)
+        return error("element invalid");
     var width = element.style.width;
     var height = element.style.height;
     !width.includes("%") && (width = parseInt(width));
     !height.includes("%") && (height = parseInt(height));
 
-    let frame = dk.frame.createFrame(title, width, height);
-    if (obj instanceof DKPlugin)
-        frame.dkplugin = obj;
+    const frame = instance.createFrame("New Window", width, height);
+    instance.frame = frame;
     frame.content = element;
     frame.content.setAttribute("dk_frame", "content");
     frame.content.style = {
@@ -52,18 +39,22 @@ dk.frame.create = function dk_frame_create(obj) {
         width: "unset",
         height: "unset"
     }
-    //frame.content.style.removeProperty("height");
-    //frame.content.style.removeProperty("width");
     frame.appendChild(frame.content);
     frame.resize = dk.resize.create(frame);
-    return this;
+    return instance;
 }
 
-dk.frame.close = function dk_frame_close(obj) {
-    //Remove the contents of the frame
-    if (!obj)
-        return error("obj invalid");
+DKFrame.prototype.close = function dk_frame_close(obj) {
+    console.log("DKFrame.prototype.close()");
+    this.dkplugin.close();
+    this.frame.parentNode.removeChild(this.frame);
+    DKPlugin.prototype.close.call(this);
 
+    //Remove the contents of the frame
+    //if (!obj)
+    //return error("obj invalid");
+
+    /*
     var frame = this.getFrame(obj);
     if (!frame)
         return error("frame invalid");
@@ -71,7 +62,7 @@ dk.frame.close = function dk_frame_close(obj) {
     if (frame && frame.dkplugin && frame.dkplugin instanceof DKPlugin) {
         frame.dkplugin.close();
     } else if (frame.content && frame.content.id && frame.content.id.includes(".html")) {
-        console.debug("dk.frame.close(): obj seems to be a plugin sill closing by filename ");
+        console.debug("DKFrame.prototype.close(): obj seems to be a plugin sill closing by filename ");
         var htmlfile = frame.content.id;
         var jsfile = htmlfile.replace(".html", ".js");
         jsfile && dk.close(jsfile);
@@ -79,6 +70,7 @@ dk.frame.close = function dk_frame_close(obj) {
     } else {
         console.info("Not a dkplugin, just some javascript html. we can just close the frame.")
     }
+    */
 
     /*
     //TODO if the Frame contains an iFrame, we need to call DKCef_CloseBrowser(n) on the associated iFrame
@@ -92,42 +84,30 @@ dk.frame.close = function dk_frame_close(obj) {
     */
 
     //Remove the frame and it's instance
-    //console.debug("closing the frame");
+    /*
     if (frame === document.body)
-        return warn("frame === document.body");
+        return error("frame === document.body");
     frame.parentNode && frame.parentNode.removeChild(frame);
-    var index = dk.frame.frames.indexOf(frame);
-    if (index > -1)
-        dk.frame.frames.splice(index, 1);
+    DKPlugin.prototype.close.call(this);
+    */
     return true;
 }
 
-dk.frame.getFrame = function dk_frame_getFrame(obj) {
-    if (!obj)
-        return error("obj invalid");
-    let element;
-    if (obj instanceof DKPlugin) {
-        element = obj.getAccessNode();
-    } else {
-        element = obj;
-    }
-    while (element && element !== document) {
-        for (let n = 0; n < dk.frame.frames.length; n++) {
-            if (dk.frame.frames[n] === element)
-                return dk.frame.frames[n];
-        }
-        element = element.parentElement;
-    }
-    return error("dk.frame.frames[n] invalid");
+/*
+DKFrame.prototype.getFrame = function dk_frame_getFrame(obj) {
+    return this.frame;
 }
+*/
 
-dk.frame.closeAll = function dk_frame_closeAll() {
-    for (var n = 0; n < dk.frame.frames.length; n++)
-        dk.frame.close(dk.frame.frames[n].content);
+DKFrame.prototype.closeAll = function dk_frame_closeAll() {
+    for (var n = 0; n < this.frames.length; n++)
+        this.close(this.frames[n].content);
     return true;
 }
 
-dk.frame.createFrame = function dk_frame_createFrame(title, width, height) {
+DKFrame.prototype.createFrame = function dk_frame_createFrame(title, width, height) {
+    const instance = this.getInstance();
+
     if (typeof title !== "string")
         return error("title invalid\n");
     const scale = 200;
@@ -140,11 +120,6 @@ dk.frame.createFrame = function dk_frame_createFrame(title, width, height) {
     var newtop = parseFloat((window.innerHeight / 2) - (newheight / 2) - 1);
     var newleft = parseFloat((window.innerWidth / 2) - (width / 2) - 1)
     let frame = dk.gui.createElement(document.body, "div", "dk_frame_box");
-    //add the frame to an array list
-    dk.frame.frames.push(frame);
-    frame = dk.frame.getFrame(frame);
-    if (!frame)
-        return error("frame invalid");
 
     //See DKFrame.css for styling    
     frame.setAttribute("dk_frame", "frame");
@@ -154,7 +129,7 @@ dk.frame.createFrame = function dk_frame_createFrame(title, width, height) {
     frame.style.height = newheight + "rem";
     frame.onmousedown = function dk_frame_frame_onmousedown(event) {
         (document.body.lastChild !== frame) && (frame.mousedown_target = event.target);
-        dk.frame.bringToFront(event.currentTarget);
+        instance.bringToFront(event.currentTarget);
     }
     frame.onmouseup = function dk_frame_frame_onmouseup(event) {
         (frame.mousedown_target == event.target) && event.target.click();
@@ -166,7 +141,7 @@ dk.frame.createFrame = function dk_frame_createFrame(title, width, height) {
     frame.titlebar.setAttribute("dk_frame", "titlebar");
     frame.titlebar.ondblclick = function dk_frame_titlebar_ondblclick(event) {
         event.stopPropagation();
-        dk.frame.maximize(event.currentTarget);
+        instance.maximize(event.currentTarget);
     }
     dk.drag.addHandle(frame.titlebar, frame);
 
@@ -184,7 +159,7 @@ dk.frame.createFrame = function dk_frame_createFrame(title, width, height) {
     frame.reload.setAttribute("src", "DKGui/reload.png");
     frame.reload.onmousedown = function dk_frame_reload_onmousedown(event) {
         event.stopPropagation();
-        dk.frame.reload(event.currentTarget);
+        instance.reload(event.currentTarget);
     }
 
     frame.minimize = dk.gui.createElement(frame.titlebar, "img", "dk_frame_minimize");
@@ -192,7 +167,7 @@ dk.frame.createFrame = function dk_frame_createFrame(title, width, height) {
     frame.minimize.setAttribute("src", "DKGui/minimize.png");
     frame.minimize.onmousedown = function dk_frame_minimize_onmousedown(event) {
         event.stopPropagation();
-        dk.frame.minimize(event.currentTarget);
+        instance.minimize(event.currentTarget);
     }
 
     frame.maximize = dk.gui.createElement(frame.titlebar, "img", "dk_frame_maximize");
@@ -200,7 +175,7 @@ dk.frame.createFrame = function dk_frame_createFrame(title, width, height) {
     frame.maximize.setAttribute("src", "DKGui/maximize.png");
     frame.maximize.onmousedown = function dk_frame_maximize_onmousedown(event) {
         event.stopPropagation();
-        dk.frame.maximize(event.currentTarget);
+        instance.maximize(event.currentTarget);
     }
 
     frame.close = dk.gui.createElement(frame.titlebar, "img", "dk_frame_close");
@@ -208,158 +183,106 @@ dk.frame.createFrame = function dk_frame_createFrame(title, width, height) {
     frame.close.setAttribute("src", "DKGui/close.png");
     frame.close.onmousedown = function dk_frame_close_onmousedown(event) {
         event.stopPropagation();
-        dk.frame.close(event.currentTarget);
+        instance.close(event.currentTarget);
     }
     return frame;
 }
 
-dk.frame.bringToFront = function dk_frame_bringToFront(frame) {
-    frame = dk.frame.getFrame(frame);
-    if (!frame)
-        return false;
+DKFrame.prototype.bringToFront = function dk_frame_bringToFront(frame) {
     (document.body.lastChild !== frame) && document.body.appendChild(frame);
 }
 
-dk.frame.maximize = function dk_frame_maximize(obj) {
+DKFrame.prototype.maximize = function dk_frame_maximize(obj) {
     if (!obj)
         return error("obj invalid");
-    const frame = dk.frame.getFrame(obj);
-    if (!frame)
-        return error("frame invalid");
-    if (frame.maximized) {
-        dk.frame.restoreSize(frame);
-        frame.content.style.width = parseInt(frame.style.width) + "rem";
-        frame.content.style.height = parseInt(frame.style.height) - 21 + "rem";
-        frame.maximized = false;
+    //const frame = this.getFrame(obj);
+    //if (!frame)
+    //    return error("frame invalid");
+    if (this.frame.maximized) {
+        this.restoreSize(this.frame);
+        this.frame.content.style.width = parseInt(this.frame.style.width) + "rem";
+        this.frame.content.style.height = parseInt(this.frame.style.height) - 21 + "rem";
+        this.frame.maximized = false;
     } else {
-        dk.frame.storeSize(frame);
-        frame.style.top = "0rem";
-        frame.style.left = "0rem";
-        frame.style.right = "0rem";
-        frame.style.bottom = "0rem";
-        frame.style.removeProperty("width");
-        frame.style.removeProperty("height");
-        frame.content.style.width = "100%";
-        frame.content.style.height = "100%";
-        frame.maximized = true;
+        this.storeSize(this.frame);
+        this.frame.style.top = "0rem";
+        this.frame.style.left = "0rem";
+        this.frame.style.right = "0rem";
+        this.frame.style.bottom = "0rem";
+        this.frame.style.removeProperty("width");
+        this.frame.style.removeProperty("height");
+        this.frame.content.style.width = "100%";
+        this.frame.content.style.height = "100%";
+        this.frame.maximized = true;
     }
 }
 
-dk.frame.minimize = function dk_frame_minimize(obj) {
-    if (!obj)
-        return error("obj invalid");
-    var frame = dk.frame.getFrame(obj);
-    if (!frame)
-        return error("frame invalid");
-    var top = frame.style.top;
-    var bottom = frame.style.bottom;
-    var left = frame.style.left;
-    var right = frame.style.right;
-    if (!frame.minimized) {
-        dk.frame.storeSize(frame);
-        frame.style.left = "0rem";
-        frame.style.bottom = "0rem";
-        frame.style.width = frame.titlebartext.offsetWidth;
-        frame.style.height = "20rem";
-        frame.style.removeProperty("top");
-        frame.style.removeProperty("right");
-        //frame.content.style.width = "100%";
-        //frame.content.style.height = "100%";
-        frame.reload.style.visibility = "hidden";
-        frame.minimize.style.visibility = "hidden";
-        frame.maximize.style.visibility = "hidden";
-        frame.close.style.visibility = "hidden";
-        frame.resize.image.style.visibility = "hidden";
-        frame.resize.corner.style.visibility = "hidden";
-        frame.titlebar.onclick = function dk_frame_titlebar_onclick(event) {
+DKFrame.prototype.minimize = function dk_frame_minimize() {
+    var top = this.frame.style.top;
+    var bottom = this.frame.style.bottom;
+    var left = this.frame.style.left;
+    var right = this.frame.style.right;
+    if (!this.frame.minimized) {
+        this.storeSize(this.frame);
+        this.frame.style.left = "0rem";
+        this.frame.style.bottom = "0rem";
+        this.frame.style.width = this.frame.titlebartext.offsetWidth;
+        this.frame.style.height = "20rem";
+        this.frame.style.removeProperty("top");
+        this.frame.style.removeProperty("right");
+        //this.frame.content.style.width = "100%";
+        //this.frame.content.style.height = "100%";
+        this.frame.reload.style.visibility = "hidden";
+        this.frame.minimize.style.visibility = "hidden";
+        this.frame.maximize.style.visibility = "hidden";
+        this.frame.close.style.visibility = "hidden";
+        this.frame.resize.image.style.visibility = "hidden";
+        this.frame.resize.corner.style.visibility = "hidden";
+        const instance = this;
+        this.frame.titlebar.onclick = function dk_frame_titlebar_onclick(event) {
             event.stopPropagation();
-            dk.frame.minimize(frame.minimize);
+            instance.minimize(instance.frame.minimize);
         }
-        frame.minimized = true;
+        this.frame.minimized = true;
     } else {
-        dk.frame.restoreSize(frame);
-        frame.reload.style.visibility = "visible";
-        frame.minimize.style.visibility = "visible";
-        frame.maximize.style.visibility = "visible";
-        frame.close.style.visibility = "visible";
-        frame.resize.image.style.visibility = "visible";
-        frame.resize.corner.style.visibility = "visible";
-        frame.titlebar.onclick = null;
-        frame.minimized = false;
+        this.restoreSize(this.frame);
+        this.frame.reload.style.visibility = "visible";
+        this.frame.minimize.style.visibility = "visible";
+        this.frame.maximize.style.visibility = "visible";
+        this.frame.close.style.visibility = "visible";
+        this.frame.resize.image.style.visibility = "visible";
+        this.frame.resize.corner.style.visibility = "visible";
+        this.frame.titlebar.onclick = null;
+        this.frame.minimized = false;
     }
 }
 
-dk.frame.reload = function dk_frame_reload(obj) {
-    //Remove the contents of the frame
-    if (!obj)
-        return error("obj invalid");
-
-    var frame = this.getFrame(obj);
-    if (!frame)
-        return error("frame invalid");
-
-    let htmlfile = "";
-    let jsfile = "";
-    let url = "";
-    let plugin = {};
-    if (frame && frame.dkplugin && frame.dkplugin instanceof DKPlugin) {
-        url = frame.dkplugin.getUrl();
-        plugin = dk.getPlugin(url);
-        frame.dkplugin.close();
-    } else if (frame.content && frame.content.id && frame.content.id.includes(".html")) {
-        console.debug("dk.frame.close(): obj seems to be a plugin sill closing by filename ");
-        htmlfile = frame.content.id;
-        jsfile = htmlfile.replace(".html", ".js");
-        jsfile && dk.close(jsfile);
-        htmlfile && dk.close(htmlfile);
-    } else {
-        console.info("Not a dkplugin, just some javascript html. we can just close the frame.")
-    }
-
-    //Remove the frame and it's instance
-    if (frame === document.body)
-        return warn("frame === document.body");
-    frame.parentNode && frame.parentNode.removeChild(frame);
-    var index = dk.frame.frames.indexOf(frame);
-    if (index > -1)
-        dk.frame.frames.splice(index, 1);
+DKFrame.prototype.reload = function dk_frame_reload() {
+    console.log("DKFrame.prototype.reload()");
+    const url = this.dkplugin.getUrl();
+    this.dkplugin.close();
+    this.frame.parentNode.removeChild(this.frame);
+    DKPlugin.prototype.close.call(this);
 
     //open everything back up
+    const instance = this;
     dk.create(url, function() {
-        plugin.create();
+        instance.dkplugin.create();
     });
-
     return true;
 }
 
-dk.frame.setTitle = function dk_frame_setTitle(obj, title) {
-    if (!obj)
-        return error("obj invalid");
-    if (!title)
-        return error("title invalid");
-    var frame = dk.frame.getFrame(obj);
-    if (!frame)
-        return error("frame invalid");
-    frame.titlebartext && (frame.titlebartext.innerHTML = title);
+DKFrame.prototype.setTitle = function dk_frame_setTitle(title) {
+    this.frame.titlebartext.innerHTML = title;
     return true;
 }
 
-dk.frame.setIcon = function dk_frame_setIcon(obj, url) {
-    if (!obj)
-        return error("obj invalid");
-    if (!url)
-        return error("url invalid");
-    var frame = dk.frame.getFrame(obj);
-    if (!frame)
-        return error("frame invalid");
-    frame.titlebaricon && (frame.titlebaricon.src = url);
+DKFrame.prototype.setIcon = function dk_frame_setIcon(url) {
+    this.frame.titlebaricon.src = url;
     return true;
 }
 
-dk.frame.storeSize = function dk_frame_storeSize(frame) {
-    var frame = dk.frame.getFrame(frame);
-    if (!frame)
-        return false;
+DKFrame.prototype.storeSize = function dk_frame_storeSize(frame) {
     frame.top = frame.style.top;
     frame.bottom = frame.style.bottom;
     frame.left = frame.style.left;
@@ -369,10 +292,7 @@ dk.frame.storeSize = function dk_frame_storeSize(frame) {
     return true;
 }
 
-dk.frame.restoreSize = function dk_frame_restoreSize(frame) {
-    var frame = dk.frame.getFrame(frame);
-    if (!frame)
-        return false;
+DKFrame.prototype.restoreSize = function dk_frame_restoreSize(frame) {
     frame.style.top = frame.top;
     frame.style.bottom = frame.bottom;
     frame.style.left = frame.left;
@@ -382,12 +302,12 @@ dk.frame.restoreSize = function dk_frame_restoreSize(frame) {
     return true;
 }
 
-dk.frame.createNewWindow = function dk_frame_createNewWindow(title, width, height, url) {
-    console.error("createNewWindow is dprecated for now. Objects should make their own elements and call dk.frame.create()")
+DKFrame.prototype.createNewWindow = function dk_frame_createNewWindow(title, width, height, url) {
+    console.error("createNewWindow is dprecated for now. Objects should make their own elements and call DKFrame.prototype.create()")
     const newWin = new DKPlugin(title);
     if (!newWin.ok) {
-        const frame = dk.frame.getFrame(newWin);
-        dk.frame.bringToFront(frame);
+        const frame = this.getFrame(newWin);
+        this.bringToFront(frame);
         return false;
     }
     if (url)
@@ -398,19 +318,19 @@ dk.frame.createNewWindow = function dk_frame_createNewWindow(title, width, heigh
     div.style.height = height;
     div.style.overflow = "auto";
     newWin.setAccessNode(div);
-    dk.frame.create(newWin);
+    this.create(newWin);
     div.ok = true;
     return div;
 }
 
 /*
-dk.frame.iFrame = function dk_frame_Iframe(title, url, width, height) {
+DKFrame.prototype.iFrame = function dk_frame_Iframe(title, url, width, height) {
     if (typeof title !== "string")
         return error("title invalid\n");
     if (typeof url !== "string")
         return error("url invalid\n");
 
-    var frame = dk.frame.createFrame(byId(title), width, height);
+    var frame = this.createFrame(byId(title), width, height);
     var iframe = DKGui_CreateElement(frame, "iframe", title);
     iframe.src = url;
     // This will call DKRocketToRML::PostProcess() again
@@ -424,13 +344,13 @@ dk.frame.iFrame = function dk_frame_Iframe(title, url, width, height) {
     iframe.style.bottom = "0rem";
     iframe.style.removeProperty("height");
     iframe.style.removeProperty("right");
-    frame.onmousedown = dk.frame.onevent;
+    frame.onmousedown = this.onevent;
 
-    dk.frame.createResize(frame);
+    this.createResize(frame);
 
     //var currentBrowser = DKCef_GetCurrentBrowser();
     //DKCef_SetUrl(currentBrowser, url);
-    //dk.frame.createResize(frame);
+    //this.createResize(frame);
     //DKCef_SetFocus();
     return iframe;
 }
