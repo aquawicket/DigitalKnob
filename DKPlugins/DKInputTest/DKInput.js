@@ -1,6 +1,6 @@
 //FIXME - make the rml version work like the web version
 var rgba = "0";
-if (DK_GetBrowser() === "RML") {
+if (DK_GetBrowser() === "Rml") {
     rgba = "127";
 } else {
     rgba = "0.5";

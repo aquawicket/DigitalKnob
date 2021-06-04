@@ -3,10 +3,9 @@
 #include "DKDuktape/DKConsole.h"
 
 
-bool DKConsole::Init()
-{
+bool DKConsole::Init(){
 	DKDEBUGFUNC();
-	DKDuktape::AttachFunction("CPP_DKConsole_assert", DKConsole::assert);
+	DKDuktape::AttachFunction("CPP_DKConsole_assert", DKConsole::_assert);
 	DKDuktape::AttachFunction("CPP_DKConsole_clear", DKConsole::clear);
 	DKDuktape::AttachFunction("CPP_DKConsole_debug", DKConsole::debug);
 	DKDuktape::AttachFunction("CPP_DKConsole_error", DKConsole::error);
@@ -23,8 +22,7 @@ bool DKConsole::Init()
 	return true;
 }
 
-int DKConsole::assert(duk_context* ctx)
-{
+int DKConsole::_assert(duk_context* ctx){
 	DKString string;
 	if(duk_is_string(ctx, 0)){
 		string = duk_require_string(ctx, 0);
@@ -153,6 +151,22 @@ int DKConsole::info(duk_context* ctx)
 		string = toString(duk_require_boolean(ctx, 0));
 	}
 	if(duk_is_number(ctx, 0)){
+		string = toString(duk_require_int(ctx, 0));
+	}
+	DKINFO(string);
+	return 1;
+}
+
+int DKConsole::log(duk_context* ctx)
+{
+	DKString string;
+	if (duk_is_string(ctx, 0)) {
+		string = duk_require_string(ctx, 0);
+	}
+	if (duk_is_boolean(ctx, 0)) {
+		string = toString(duk_require_boolean(ctx, 0));
+	}
+	if (duk_is_number(ctx, 0)) {
 		string = toString(duk_require_int(ctx, 0));
 	}
 	DKINFO(string);

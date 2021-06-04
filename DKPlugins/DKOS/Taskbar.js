@@ -6,7 +6,7 @@ function Taskbar_init() {
         //dk.create("DKOS/Taskbar.html", function(){
         dk.create("DKOS/Clock.js", function() {
             dk.create("DKOS/Scale.js", function() {
-                if (DK_GetBrowser() === "RML") {
+                if (DK_GetBrowser() === "Rml") {
                     dk.create("DKDebug/BugReport.js", function() {});
                     byId("DKOS/Taskbar.html").appendChild(byId("DKDebug/BugReport.html"));
                     //reparent

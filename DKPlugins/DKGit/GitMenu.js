@@ -54,7 +54,7 @@ function GitMenu_OnEvent(event) {
 }
 
 function GitMenu_ValidateGit() {
-    if (DK_GetBrowser() !== "RML") {
+    if (DK_GetBrowser() !== "Rml") {
         return;
     }
     console.log("Looking for GIT\n");
@@ -70,7 +70,7 @@ function GitMenu_ValidateGit() {
 }
 
 function GitMenu_InstallGit() {
-    if (DK_GetBrowser() !== "RML") {
+    if (DK_GetBrowser() !== "Rml") {
         return;
     }
     console.log("Installing Git\n");
@@ -93,7 +93,7 @@ function GitMenu_InstallGit() {
 }
 
 function GitMenu_GitUpdate() {
-    if (DK_GetBrowser() !== "CEF" && DK_GetBrowser() !== "RML") {
+    if (DK_GetBrowser() !== "Cef" && DK_GetBrowser() !== "Rml") {
         return;
     }
 
@@ -133,7 +133,7 @@ function GitMenu_GitUpdate() {
 }
 
 function GitMenu_GitCommit() {
-    if (DK_GetBrowser() !== "CEF" && DK_GetBrowser() !== "RML") {
+    if (DK_GetBrowser() !== "Cef" && DK_GetBrowser() !== "Rml") {
         return;
     }
 

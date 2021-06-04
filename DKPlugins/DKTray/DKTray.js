@@ -4,7 +4,7 @@ function DKTray_init()
 	if(DK_GetOS() !== "Win32" && DK_GetOS() !== "Win64"){
 		return;
 	}
-	if(DK_GetBrowser() !== "CEF" && DK_GetBrowser() !== "RML"){
+	if(DK_GetBrowser() !== "Cef" && DK_GetBrowser() !== "Rml"){
 		return;
 	}
 	dk.create("DKTray");

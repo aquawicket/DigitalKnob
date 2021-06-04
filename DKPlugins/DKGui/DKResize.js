@@ -76,7 +76,7 @@ DKResize.prototype.create = function DKResize_create(element) {
 }
 
 DKResize.prototype.addHandle = function DKResize_addHandle(element, resize_element, side) {
-    //!dk.iE() && (dk.getBrowser() !== "RML") && element.style.setProperty("pointer-events", "all");
+    //!dk.iE() && (dk.getBrowser() !== "Rml") && element.style.setProperty("pointer-events", "all");
     element.onmousedown = element.touchstart = function(event) {
         dk.resize.start(event, resize_element, side);
     }
@@ -153,7 +153,7 @@ DKResize.prototype.attachResizes = function DKResize_attachResizes(parent) {
     const elements = parent.getElementsByTagName('*');
     for (let n = 0; n < elements.length; n++) {
         const element = elements[n];
-        if (!dk.iE() && dk.getBrowser() !== "RML")
+        if (!dk.iE() && dk.getBrowser() !== "Rml")
             element.style.setProperty("pointer-events", "all");
          if (element.getAttribute("resize") !== null) {
             var resize_element = element.getAttribute("resize");

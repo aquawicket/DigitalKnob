@@ -161,7 +161,7 @@ function DKAdminMenu_Run(command)
 		return;
 	}
 	
-	if(DK_GetBrowser() === "RML"){
+	if(DK_GetBrowser() === "Rml"){
 		DK_RunDuktape(command);
 	}
 	else{

@@ -39,7 +39,7 @@ function DKSvn_OnEvent(event)
 ////////////////////////////
 function DKSvn_ValidateSvn()
 {
-	if(DK_GetBrowser() !== "RML"){ return; }
+	if(DK_GetBrowser() !== "Rml"){ return; }
 	console.log(("Looking for SVN\n");
 	//console.log((SVN+"\n");
 	if(!dk.file.extist(SVN)){
@@ -55,7 +55,7 @@ function DKSvn_ValidateSvn()
 ///////////////////////////
 function DKSvn_InstallSvn()
 {
-	if(DK_GetBrowser() !== "RML"){ return; }
+	if(DK_GetBrowser() !== "Rml"){ return; }
 	console.log(("Installing Svn\n");
 	var assets = DKAssets_LocalAssets();
 	

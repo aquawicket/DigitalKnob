@@ -7,7 +7,7 @@ function DKDrag(identifier) {
 dk.drag = new DKDrag("DKDrag");
 
 DKDrag.prototype.addHandle = function DKDrag_addHandle(element, drag_element) {
-    //!dk.iE() && dk.getBrowser() !== "RML" && element.style.setProperty("pointer-events", "all");
+    //!dk.iE() && dk.getBrowser() !== "Rml" && element.style.setProperty("pointer-events", "all");
     element.onmousedown = element.ontouchstart = function(event) {
         dk.drag.start(event, drag_element);
     }
@@ -94,7 +94,7 @@ DKDrag.prototype.attachDrags = function DKDrag_attachDrags(parent) {
     const elements = parent.getElementsByTagName('*');
     for (let n = 0; n < elements.length; n++) {
         const element = elements[n];
-        if (!dk.iE() && dk.getBrowser() !== "RML")
+        if (!dk.iE() && dk.getBrowser() !== "Rml")
             element.style.setProperty("pointer-events", "all");
         if (element.getAttribute("drag") !== null) {
             var drag_element = element.getAttribute("drag");

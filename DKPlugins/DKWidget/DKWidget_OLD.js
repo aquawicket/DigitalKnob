@@ -120,7 +120,7 @@ function DKWidget_AttachDrags(id)
 	for (var i=0; i<elements.length; i++) {	
 		var x = elements[i];
 		
-		if(!DK_IE() && DK_GetBrowser() !== "RML"){
+		if(!DK_IE() && DK_GetBrowser() !== "Rml"){
 			x.style.setProperty("pointer-events","all");
 		}
 		
@@ -139,7 +139,7 @@ function DKWidget_AttachDrags(id)
 function DKWidget_AddDragHandle(id, drag)
 {
 	var element = byId(id);
-	if(!DK_IE() && DK_GetBrowser() !== "RML"){
+	if(!DK_IE() && DK_GetBrowser() !== "Rml"){
 		element.style.setProperty("pointer-events","all");
 	}
 	element.onmousedown = function(event){ DragStart(event, drag); }
@@ -151,7 +151,7 @@ function DKWidget_AddDragHandle(id, drag)
 function DKWidget_AddResizeHandle(id, resize)
 {
 	var element = byId(id);
-	if(!DK_IE() && DK_GetBrowser() !== "RML"){
+	if(!DK_IE() && DK_GetBrowser() !== "Rml"){
 		element.style.setProperty("pointer-events","all");
 	}
 	element.onmousedown = function(event){ ResizeStart(event, resize); }

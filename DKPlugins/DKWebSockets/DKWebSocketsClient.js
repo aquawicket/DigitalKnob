@@ -47,7 +47,7 @@ function DKWebSocketsClient_CreateClient()
 	}
 	url = DK_GetValue("DKWebSocketsClient_Address");  //  ws://localhost:3000
 	
-	if(DK_GetBrowser() === "RML"){
+	if(DK_GetBrowser() === "Rml"){
 		console.log("Connecting to WebSocket via C++...\n");
 		DKWebSockets_CreateClient(url);
 		return;
@@ -74,7 +74,7 @@ function DKWebSocketsClient_CreateClient()
 /////////////////////////////////////////
 function DKWebSocketsClient_CloseClient()
 {
-	if(DK_GetBrowser() === "RML"){
+	if(DK_GetBrowser() === "Rml"){
 		DKWebSockets_CloseClient();
 		return;
 	}
@@ -87,7 +87,7 @@ function DKWebSocketsClient_CloseClient()
 function DKWebSocketsClient_MessageToServer()
 {
 	var message = DK_GetValue("DKWebSocketsClient_send");
-	if(DK_GetBrowser() === "RML"){
+	if(DK_GetBrowser() === "Rml"){
 		DKWebSockets_MessageToServer(message);
 		return;
 	}
