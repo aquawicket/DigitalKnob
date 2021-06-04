@@ -274,7 +274,7 @@ function getRelativeDKPluginsPath(){
         if(is_dir($relativeDKPluginsPath."DKPlugins/")){
         	$relativeDKPluginsPath = $relativeDKPluginsPath."DKPlugins/";
         	$relativeDKPluginsPath = ValidatePath($relativeDKPluginsPath);
-        	echo "relativeDKPluginsPath = ".relativeDKPluginsPath."\n";
+        	echo "relativeDKPluginsPath = ".$relativeDKPluginsPath."\n";
         	return $relativeDKPluginsPath;
         }
     }
