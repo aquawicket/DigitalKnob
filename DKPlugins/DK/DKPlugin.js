@@ -44,7 +44,7 @@ const CreateMyPlugin = function CreateMyPlugin() {
  * @type object
  */
 const DKPlugin = function DKPlugin(identifier) {
-    
+
     DKPlugin.prototype.injectFuncs = function DKPlugin_injectFuncs() {
         //console.log("DKPlugin.prototype.injectFuncs(): " + this.name);
         if (this.init !== DKPlugin.prototype.init) {
@@ -82,13 +82,13 @@ const DKPlugin = function DKPlugin(identifier) {
         return this;
     }
 
-    DKPlugin.prototype.end = function DKPlugin_end(...args) {
+    DKPlugin.prototype.end = function DKPlugin_end() {
         //console.log("DKPlugin.prototype.end(): " + this.name);
-        this.plugin_end && this.plugin_end(...args);
-        const plugin = dk.getPlugin(this.url);
+        this.plugin_end && this.plugin_end.apply(this, arguments);
+        var plugin = dk.getPlugin(this.url);
         delete dk[plugin.name];
         var scripts = document.getElementsByTagName("script");
-        for (let n = 0; n < scripts.length; n++) {
+        for (var n = 0; n < scripts.length; n++) {
             if (scripts[n].src === this.url) {
                 scripts[n].parentNode.removeChild(scripts[n]);
                 break;
@@ -97,22 +97,22 @@ const DKPlugin = function DKPlugin(identifier) {
         return true;
     }
 
-    DKPlugin.prototype.create = function DKPlugin_create(...args) {
+    DKPlugin.prototype.create = function DKPlugin_create() {
         //console.log("DKPlugin.prototype.create(): " + this.name);
         !this.injected && this.injectFuncs();
         if (this.plugin_create)
-            return this.plugin_create(...args);
+            return this.plugin_create.apply(this, arguments);
     }
 
-    DKPlugin.prototype.close = function DKPlugin_close(...args) {
+    DKPlugin.prototype.close = function DKPlugin_close() {
         //console.log("DKPlugin.prototype.close(): " + this.name);
-        const instance = this;
-        const index = DKPlugin.instances.indexOf(instance);
+        var instance = this;
+        var index = DKPlugin.instances.indexOf(instance);
         if (index <= -1)
             return error("Unable to find instance in DKPlugin");
         DKPlugin.instances[index].removeInstance(DKPlugin.instances[index]);
-        if(this.plugin_close)
-            return this.plugin_close(...args);
+        if (this.plugin_close)
+            return this.plugin_close.apply(this, arguments);
     }
 
     DKPlugin.prototype.getInstance = function DKPlugin_getInstance(instance) {
