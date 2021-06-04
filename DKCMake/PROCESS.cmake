@@ -444,15 +444,15 @@ IF(WIN_32)
 	
 	# Backup files and folders excluded from the package
 	DKCOPY(${DKPROJECT}/assets/USER ${DKPROJECT}/Backup/USER TRUE)
-	DKCOPY(${DKPROJECT}/assets/DKCef/win32Debug ${DKPROJECT}/Backup/DKCef/win32Debug TRUE)
-	DKCOPY(${DKPROJECT}/assets/DKCef/win32Release ${DKPROJECT}/Backup/DKCef/win32Release TRUE)
+	##DKCOPY(${DKPROJECT}/assets/DKCef/win32Debug ${DKPROJECT}/Backup/DKCef/win32Debug TRUE)
+	##DKCOPY(${DKPROJECT}/assets/DKCef/win32Release ${DKPROJECT}/Backup/DKCef/win32Release TRUE)
 	DKCOPY(${DKPROJECT}/assets/cef.log ${DKPROJECT}/Backup/cef.log TRUE)
 	DKCOPY(${DKPROJECT}/assets/log.txt ${DKPROJECT}/Backup/log.txt TRUE)
 	
 	# Remove excluded files and folders before packaging
 	DKREMOVE(${DKPROJECT}/assets/USER)
-	DKREMOVE(${DKPROJECT}/assets/DKCef/win32Debug)
-	DKREMOVE(${DKPROJECT}/assets/DKCef/win32Release)
+	##DKREMOVE(${DKPROJECT}/assets/DKCef/win32Debug)
+	##DKREMOVE(${DKPROJECT}/assets/DKCef/win32Release)
 	DKREMOVE(${DKPROJECT}/assets/cef.log)
 	DKREMOVE(${DKPROJECT}/assets/log.txt)
 	
