@@ -41,7 +41,7 @@ dk.codemirror.end = function dk_codemirror_end(dk_codemirror_end_callback) {
 }
 
 dk.codemirror.create = function dk_codemirror_create(dk_codemirror_create_callback) {
-    const instance = new DKPlugin("new");
+    const instance = new DKCodeMirror("new");
     if (!instance)
         return error("instance invalid", dk_codemirror_create_callback);
 

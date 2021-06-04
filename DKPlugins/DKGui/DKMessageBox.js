@@ -5,57 +5,73 @@ function DKMessageBox(identifier) {
     return DKPlugin.call(this, identifier);
 }
 dk.messagebox = new DKMessageBox("DKMessageBox");
-//const messagebox = function(pointer){}
-//messagebox.prototype = DKPlugin.prototype;
-//dk.messagebox = new messagebox();
 
-dk.messagebox.init = function dK_messagebox_init(callback){
+
+DKMessageBox.prototype.init = function init(init_callback){
     dk.create("DKGui/DKMessageBox.css");
-    callback(true);
+    init_callback && init_callback(true);
 }
 
-dk.messagebox.end = function dk_messagebox_end(callback){
+DKMessageBox.prototype.end = function end(){
     dk.close("DKGui/DKMessagebox.css");
 }
 
-dk.messagebox.create = function dk_messagebox_create(dk_messagebox_create_callback) {
-    const instance = new DKPlugin("new");
+DKMessageBox.prototype.create = function create(create_callback) {
+    const instance = new DKMessageBox("new");
     if (!instance)
-        return error("instance invalid", dk_messagebox_create_callback);
-
-    dk.create("DKGui/DKMessageBox.html", function dk_create_callback(html) {
+        return error("instance invalid", create_callback);
+    dk.create("DKGui/DKMessageBox.html", function dkcreate_callback(html) {
         if (!html)
-            return error("invalid html", dk_messagebox_create_callback);
+            return error("invalid html", create_callback);
         instance.html = html;
         instance.setAccessNode(html);
-        instance.message = html.querySelector("[dk_messagebox='message']");
-        instance.input = html.querySelector("[dk_messagebox='input']");
-        instance.cancel = html.querySelector("[dk_messagebox='cancel']");
-        instance.ok = html.querySelector("[dk_messagebox='ok']");
-        dk.frame.create(instance);
-        return dk_messagebox_create_callback(instance);
+        instance.message = html.querySelector("[dkmessagebox='message']");
+        instance.input = html.querySelector("[dkmessagebox='input']");
+        instance.cancel = html.querySelector("[dkmessagebox='cancel']");
+        instance.ok = html.querySelector("[dkmessagebox='ok']");
+        instance.frame = dk.frame.create(instance);
+        create_callback && create_callback(instance);
+        return instance;
     });
 }
 
-dk.messagebox.close = function dk_messagebox_close(instance) {
-    dk.frame.close(instance);
+DKMessageBox.prototype.createMessage = function createMessage(message, createMessage_callback) {
+    const title = "Message"    
+    this.create(function create_callback(instance) {
+        instance.frame.setTitle(title);
+        instance.message.innerHTML = message;
+        instance.input.style.display = "none";
+        instance.message.style.display = "block";
+        instance.message.style.visibility = "visible";
+        instance.cancel.style.display = "none";
+        instance.cancel.style.visibility = "hidden";
+        instance.ok.onclick = function ok_onclick() {
+            instance.frame.close();
+            createMessage_callback && createMessage_callback(true);
+            return true;
+        }
+    });
 }
 
-dk.messagebox.createConfirm = function dk_messagebox_createConfirm(message, callback) {
-    dk.messagebox.create(function(instance) {
+DKMessageBox.prototype.createConfirm = function createConfirm(message, createConfirm_callback) {
+    const title = "Confirm?"    
+    this.create(function create_callback(instance) {
+        instance.frame.setTitle(title);
         instance.message.innerHTML = message;
         instance.input.style.display = "none";
         instance.message.style.display = "block";
         instance.message.style.visibility = "visible";
         instance.cancel.style.display = "block";
         instance.cancel.style.visibility = "visible";
-        instance.ok.onclick = function() {
-            dk.messagebox.close(instance);
-            return callback(true);
+        instance.ok.onclick = function ok_onclick() {
+            instance.frame.close();
+            createConfirm_callback && createConfirm_callback(true);
+            return true;
         }
-        instance.cancel.onclick = function() {
-            dk.messagebox.close(instance);
-            return callback(false);
+        instance.cancel.onclick = function cancel_callback() {
+            instance.frame.close();
+            createConfirm_callback && createConfirm_callback(false);
+            return false;
         }
     });
 }

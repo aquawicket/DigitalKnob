@@ -22,7 +22,7 @@ window.onunhandledrejection = function window_onunhandledrejection(event) {
 }
 */
 
-dk.errorhandler.create = function dk_errorhandler_create() {
+DKErrorHandler.prototype.create = function dk_errorhandler_create() {
 
     // Capture error data for debugging in web console
     let captures = [];

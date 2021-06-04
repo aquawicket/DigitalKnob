@@ -6,18 +6,18 @@ function DKNotepad(identifier) {
 }
 dk.notepad = new DKNotepad("DKNotepad");
 
-dk.notepad.init = function dk_notepad_init(callback) {
+DKNotepad.prototype.init = function dk_notepad_init(callback) {
     dk.create("DKNotepad/DKNotepadShortcuts.js");
     dk.create("DKNotepad/DKNotepad.css");
     callback(true);
 }
 
-dk.notepad.end = function dk_notepad_end() {
+DKNotepad.prototype.end = function dk_notepad_end() {
     dk.close("DKNotepad/DKNotepad.css");
     dk.close("DKNotepad/DKNotepadShortcuts.js");
 }
 
-dk.notepad.create = function dk_notepad_create(dk_notepad_create_callback) {
+DKNotepad.prototype.create = function dk_notepad_create(dk_notepad_create_callback) {
     const instance = new DKNotepad("new");
     if (!instance)
         return error("instance invalid", dk_notepad_create_callback);
@@ -36,35 +36,36 @@ dk.notepad.create = function dk_notepad_create(dk_notepad_create_callback) {
         instance.container = html.querySelector("[dk_notepad='container']");
         instance.text = html.querySelector("[dk_notepad='text']");
         instance.file.onclick = function() {
-            dk.notepad.filemenu(instance, event);
+            instance.filemenu(instance, event);
         }
         instance.edit.onclick = function() {
-            dk.notepad.editmenu(instance, event);
+            instance.editmenu(instance, event);
         }
         instance.format.onclick = function() {
-            dk.notepad.formatmenu(instance, event);
+            instance.formatmenu(instance, event);
         }
         instance.view.onclick = function() {
-            dk.notepad.viewmenu(instance, event);
+            instance.viewmenu(instance, event);
         }
         instance.help.onclick = function() {
-            dk.notepad.helpmenu(instance, event);
+            instance.helpmenu(instance, event);
         }
         instance.container.oncontextmenu = function() {
-            dk.notepad.rightclickmenu(instance, event);
+            instance.rightclickmenu(instance, event);
         }
         instance.currentFile = "";
         dk.frame.create(instance);
-        return dk_notepad_create_callback(instance);
+        dk_notepad_create_callback && dk_notepad_create_callback(instance);
+        return instance;
     });
 }
 
-dk.notepad.close = function dk_notepad_close(instance) {
+DKNotepad.prototype.close = function dk_notepad_close(instance) {
     dk.frame.close(instance);
 }
 
-dk.notepad.createOpen = function dk_notepad_createOpen(file) {
-    dk.notepad.create(function(instance) {
+DKNotepad.prototype.createOpen = function dk_notepad_createOpen(file) {
+    this.create(function(instance) {
         dk.frame.setTitle(instance, "DKNotepad - "+file);
         instance.currentFile = file;
         dk.file.fileToString(file, function(str) {
@@ -73,8 +74,9 @@ dk.notepad.createOpen = function dk_notepad_createOpen(file) {
     });
 }
 
-dk.notepad.filemenu = function dk_notepad_filemenu(instance, event) {
-    console.debug("dk.notepad.filemenu");
+DKNotepad.prototype.filemenu = function dk_notepad_filemenu(REMOVEME, event) {
+    console.debug("DKNotepad.prototype.filemenu");
+    const instance = this;
     const menu = dk.menu.createInstance();
     dk.menu.addItem(menu, "New", function dk_menu_new() {
         instance.text.value = "";
@@ -93,7 +95,7 @@ dk.notepad.filemenu = function dk_notepad_filemenu(instance, event) {
     });
     dk.menu.addItem(menu, "Save", function dk_menu_save() {
         if (!instance.currentFile) {
-            dk.notepad.saveAs();
+            instance.saveAs();
             return;
         }
         var str = instance.text.value;
@@ -114,22 +116,22 @@ dk.notepad.filemenu = function dk_notepad_filemenu(instance, event) {
     dk.menu.addItem(menu, "Print", function dk_menu_saveas() {//CPP_DKCef_Print(0);
     });
     dk.menu.addItem(menu, "Exit", function dk_menu_exit() {
-        dk.notepad.close(instance);
+        instance.close(instance);
     });
 }
-dk.notepad.editmenu = function dk_notepad_editmenu(instance, event) {
-    console.debug("dk.notepad.editmenu");
+DKNotepad.prototype.editmenu = function dk_notepad_editmenu(instance, event) {
+    console.debug("DKNotepad.prototype.editmenu");
 }
-dk.notepad.formatmenu = function dk_notepad_formatmenu(instance, event) {
-    console.debug("dk.notepad.formatmenu");
+DKNotepad.prototype.formatmenu = function dk_notepad_formatmenu(instance, event) {
+    console.debug("DKNotepad.prototype.formatmenu");
 }
-dk.notepad.viewmenu = function dk_notepad_viewmenu(instance, event) {
-    console.debug("dk.notepad.viewmenu");
+DKNotepad.prototype.viewmenu = function dk_notepad_viewmenu(instance, event) {
+    console.debug("DKNotepad.prototype.viewmenu");
 }
-dk.notepad.helpmenu = function dk_notepad_helpmenu(instance, event) {
-    console.debug("dk.notepad.helpmenu");
+DKNotepad.prototype.helpmenu = function dk_notepad_helpmenu(instance, event) {
+    console.debug("DKNotepad.prototype.helpmenu");
 }
-dk.notepad.rightclickmenu = function dk_notepad_rightclickmeny(instance, event) {
+DKNotepad.prototype.rightclickmenu = function dk_notepad_rightclickmeny(instance, event) {
     event.preventDefault();
     const menu = dk.menu.createInstance();
     dk.menu.addItem(menu, "Cut", function dk_menu_cut() {

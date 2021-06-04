@@ -46,7 +46,7 @@ const CreateMyPlugin = function CreateMyPlugin() {
 const DKPlugin = function DKPlugin(identifier) {
     
     DKPlugin.prototype.injectFuncs = function DKPlugin_injectFuncs() {
-        console.log("DKPlugin.prototype.injectFuncs(): " + this.name);
+        //console.log("DKPlugin.prototype.injectFuncs(): " + this.name);
         if (this.init !== DKPlugin.prototype.init) {
             this.plugin_init = this.init;
             this.init = DKPlugin.prototype.init;
@@ -68,8 +68,8 @@ const DKPlugin = function DKPlugin(identifier) {
 
     DKPlugin.prototype.init = function DKPlugin_init(callback) {
         !this.name && (this.name = this.identifier);
-        console.log("DKPlugin.prototype.init(): " + this.name);
-        !this.injected && this.injectFuncs();
+        //console.log("DKPlugin.prototype.init(): " + this.name);
+        !this.injected && this.injectFuncs && this.injectFuncs();
         dk.errorCatcher(this, "dk." + this.name);
         var scripts = document.getElementsByTagName("script");
         this.url = scripts[scripts.length - 1].src;
@@ -83,7 +83,7 @@ const DKPlugin = function DKPlugin(identifier) {
     }
 
     DKPlugin.prototype.end = function DKPlugin_end(...args) {
-        console.log("DKPlugin.prototype.end(): " + this.name);
+        //console.log("DKPlugin.prototype.end(): " + this.name);
         this.plugin_end && this.plugin_end(...args);
         const plugin = dk.getPlugin(this.url);
         delete dk[plugin.name];
@@ -98,15 +98,16 @@ const DKPlugin = function DKPlugin(identifier) {
     }
 
     DKPlugin.prototype.create = function DKPlugin_create(...args) {
-        console.log("DKPlugin.prototype.create(): " + this.name);
+        //console.log("DKPlugin.prototype.create(): " + this.name);
         !this.injected && this.injectFuncs();
         if (this.plugin_create)
             return this.plugin_create(...args);
     }
 
     DKPlugin.prototype.close = function DKPlugin_close(...args) {
-        console.log("DKPlugin.prototype.close(): " + this.name);
-        const index = DKPlugin.instances.indexOf(this);
+        //console.log("DKPlugin.prototype.close(): " + this.name);
+        const instance = this;
+        const index = DKPlugin.instances.indexOf(instance);
         if (index <= -1)
             return error("Unable to find instance in DKPlugin");
         DKPlugin.instances[index].removeInstance(DKPlugin.instances[index]);
@@ -116,7 +117,7 @@ const DKPlugin = function DKPlugin(identifier) {
 
     DKPlugin.prototype.getInstance = function DKPlugin_getInstance(instance) {
         !this.name && (this.name = this.identifier);
-        console.log("DKPlugin.prototype.getInstance(): " + this.name);
+        //console.log("DKPlugin.prototype.getInstance(): " + this.name);
         !instance && (instance = this);
         const index = DKPlugin.instances.indexOf(instance);
         if (index <= -1)
@@ -125,7 +126,7 @@ const DKPlugin = function DKPlugin(identifier) {
     }
 
     DKPlugin.prototype.removeInstance = function DKPlugin_removeInstance(instance) {
-        console.log("DKPlugin.prototype.removeInstance(): " + this.name);
+        //console.log("DKPlugin.prototype.removeInstance(): " + this.name);
         !instance && (instance = this);
         const index = DKPlugin.instances.indexOf(instance);
         if (index <= -1)
@@ -135,26 +136,26 @@ const DKPlugin = function DKPlugin(identifier) {
     }
 
     DKPlugin.prototype.setUrl = function DKPlugin_setUrl(url) {
-        console.log("DKPlugin.prototype.setUrl(): " + this.name);
+        //console.log("DKPlugin.prototype.setUrl(): " + this.name);
         this.url = url;
     }
 
     DKPlugin.prototype.getUrl = function DKPlugin_getUrl() {
-        console.log("DKPlugin.prototype.getUrl(): " + this.name);
+        //console.log("DKPlugin.prototype.getUrl(): " + this.name);
         if (!this.url)
             return error("this.url invalid");
         return this.url;
     }
 
     DKPlugin.prototype.setAccessNode = function DKPlugin_setAccessNode(node) {
-        console.log("DKPlugin.prototype.setAccessNode(): " + this.name);
+        //console.log("DKPlugin.prototype.setAccessNode(): " + this.name);
         if (!node instanceof EventTarget)
             return error("setAccessNode() requires an node thats an instanceof EventTarget");
         this.node = node;
     }
 
     DKPlugin.prototype.getAccessNode = function DKPlugin_getAccessNode() {
-        console.log("DKPlugin.prototype.getAccessNode(): " + this.name);
+        //console.log("DKPlugin.prototype.getAccessNode(): " + this.name);
         if (!this.node)
             return error("DKPlugin.getAccessNode(): node not set, please use yourDKPlugin.setAccessNode(node)");
         return this.node;
@@ -201,7 +202,3 @@ const DKPlugin = function DKPlugin(identifier) {
 }
 
 DKPlugin.instances = new Array;
-
-DKPlugin.dummyfunc = function DKPlugin_dummyfunc() {
-    console.log("test dummy function");
-}

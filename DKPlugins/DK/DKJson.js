@@ -9,7 +9,7 @@ function DKJson(identifier) {
 dk.json = new DKJson("DKJson");
 
 
-dk.json.prettyJson = function dk_json_prettyJson(jsonStr) {
+DKJson.prototype.prettyJson = function DKJson_prettyJson(jsonStr) {
     if (typeof jsonStr !== 'string')
         return error("jsonStr invalid");
 
@@ -17,7 +17,7 @@ dk.json.prettyJson = function dk_json_prettyJson(jsonStr) {
     return JSON.stringify(prettyJson, undefined, 4);
 }
 
-dk.json.highlightJson = function dk_json_highlightJson(jsonStr) {
+DKJson.prototype.highlightJson = function DKJson_highlightJson(jsonStr) {
     if (typeof jsonStr !== 'string')
         return error("jsonStr invalid");
 
@@ -44,7 +44,7 @@ dk.json.highlightJson = function dk_json_highlightJson(jsonStr) {
 }
 
 ///Takes care of circular refrences in objects
-dk.json.stringifyJson = function dk_json_stringifyJson(obj) {
+DKJson.prototype.stringifyJson = function DKJson_stringifyJson(obj) {
     if (typeof obj !== 'object')
         return error("obj invalid");
 
@@ -64,7 +64,7 @@ dk.json.stringifyJson = function dk_json_stringifyJson(obj) {
     return JSON.stringify(obj2);
 }
 
-dk.json.findPartialMatch = function dk_json_findPartialMatch(obj, key, value) {
+DKJson.prototype.findPartialMatch = function DKJson_findPartialMatch(obj, key, value) {
     //console.log(obj.length);
     let foundObj;
     JSON.stringify(obj, function(_, nestedValue) {
@@ -75,14 +75,14 @@ dk.json.findPartialMatch = function dk_json_findPartialMatch(obj, key, value) {
     return foundObj;
 }
 
-dk.json.saveJsonToFile = function dk_json_saveJsonToFile(json, path, flags, callback) {
+DKJson.prototype.saveJsonToFile = function DKJson_saveJsonToFile(json, path, flags, callback) {
     const str = JSON.stringify(json);
     dk.file.stringToFile(str, path, flags, function dk_file_stringToFile_callback(rval) {
         return callback && callback(rval);
     });
 }
 
-dk.json.loadJsonFromFile = function dk_json_loadJsonFromFile(path, callback) {
+DKJson.prototype.loadJsonFromFile = function DKJson_loadJsonFromFile(path, callback) {
     dk.file.exists(path, function(result) {
         if (result) {
             dk.file.fileToString(path, function dk_file_fileToString_callback(str) {
@@ -100,12 +100,12 @@ dk.json.loadJsonFromFile = function dk_json_loadJsonFromFile(path, callback) {
     });
 }
 
-dk.json.saveToLocalStorage = function dk_json_saveToLocalStorage(label, json) {
+DKJson.prototype.saveToLocalStorage = function DKJson_saveToLocalStorage(label, json) {
     const str = JSON.stringify(json);
     dk.saveToLocalStorage(label, str);
 }
 
-dk.json.loadFromLocalStorage = function dk_json_loadFromLocalStorage(label) {
+DKJson.prototype.loadFromLocalStorage = function DKJson_loadFromLocalStorage(label) {
     const str = dk.loadFromLocalStorage(label);
     const json = JSON.parse(str);
     return json;
@@ -113,14 +113,14 @@ dk.json.loadFromLocalStorage = function dk_json_loadFromLocalStorage(label) {
 
 // https://stackoverflow.com/a/8611131/688352
 // https://stackoverflow.com/a/5612849/688352
-dk.json.objectToString = function dk_json_objectToString(obj){
+DKJson.prototype.objectToString = function DKJson_objectToString(obj){
     const result = JSON.stringify(obj, null, 4);
     return result;
 }
 
 /*
 //search the object for a keyName's value that matches value
-dk.json.findMatch = function dk_json_findMatch(obj, key, value) {
+DKJson.prototype.findMatch = function DKJson_findMatch(obj, key, value) {
     if (obj.length) {
         //array of objects
         for (let n = 0; n < obj.length; n++) {
@@ -138,7 +138,7 @@ dk.json.findMatch = function dk_json_findMatch(obj, key, value) {
 
 /*
 //search the object for a key value that includes value
-dk.json.findPartialMatch = function dk.json.findPartialMatch(obj, key, value) {
+DKJson.prototype.findPartialMatch = function dkjson_findPartialMatch(obj, key, value) {
     if (obj.length) {
         //array of objects
         for (let n = 0; n < obj.length; n++) {

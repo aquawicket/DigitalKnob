@@ -18,29 +18,30 @@ function DKClock(identifier) {
 dk.clock = new DKClock("DKClock");
 
 
-dk.clock.create = function dk_clock_create(parent, top, bottom, left, right, width, height) {
-    dk.clock.html = document.createElement("a");
-    dk.clock.html.style.position = "absolute";
-    top && (dk.clock.html.style.top = top);
-    bottom && (dk.clock.html.style.bottom = bottom);
-    left && (dk.clock.html.style.left = left);
-    right && (dk.clock.html.style.right = right);
-    width && (dk.clock.html.style.width = width);
-    height && (dk.clock.html.style.height = height);
-    parent.appendChild(dk.clock.html);
+DKClock.prototype.create = function DKClock_create(parent, top, bottom, left, right, width, height) {
+    this.html = document.createElement("a");
+    this.html.style.position = "absolute";
+    top && (this.html.style.top = top);
+    bottom && (this.html.style.bottom = bottom);
+    left && (this.html.style.left = left);
+    right && (this.html.style.right = right);
+    width && (this.html.style.width = width);
+    height && (this.html.style.height = height);
+    parent.appendChild(this.html);
     window.setInterval(this.update, 1000);
-    return dk.clock.html;
+    return this.html;
 }
 
-dk.clock.setLatitudeLongitude = function dk_clock_setLatitude_longitude(latitude, longitude, zenith){
-    latitude && (dk.clock.latitude = latitude);
-    longitude && (dk.clock.longitude = longitude);
+DKClock.prototype.setLatitudeLongitude = function DKClock_setLatitude_longitude(latitude, longitude, zenith){
+    latitude && (this.latitude = latitude);
+    longitude && (this.longitude = longitude);
     !zenith && (zenith = 0);
-    zenith && (dk.clock.longitude = zenith);
+    zenith && (this.longitude = zenith);
 }
 
 //TODO - make this function faster
-dk.clock.update = function dk_clock_update() {
+DKClock.prototype.update = function DKClock_update() {
+    //const instance = this.getInstance();
     dk.clock.date = new Date();
     dk.clock.year = dk.clock.date.getFullYear();
     dk.clock.month = (dk.clock.date.getMonth() + 1);

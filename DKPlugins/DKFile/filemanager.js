@@ -44,7 +44,8 @@ dk.filemanager.create = function dk_filemanager_create(dk_filemanager_create_cal
         }
         dk.filemanager.openFolder(instance, instance.path.value);
         dk.frame.create(instance);
-        return dk_filemanager_create_callback && dk_filemanager_create_callback(instance);
+        dk_filemanager_create_callback && dk_filemanager_create_callback(instance);
+        return instance;
     });
 }
 

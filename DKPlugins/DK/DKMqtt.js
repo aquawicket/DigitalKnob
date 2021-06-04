@@ -7,15 +7,15 @@ function DKMqtt(identifier) {
 }
 dk.mqtt = new DKMqtt("DKMqtt");
 
-dk.mqtt.init = function dk_mqtt_init() {
+DKMqtt.prototype.init = function DKMqtt_init() {
     dk.create("DKTasmota/mqttws31.min.js");
-    dk.mqtt.mqtt;
-    dk.mqtt.reconnectTimeout = 2000;
-    dk.mqtt.host = "127.0.0.1";
-    dk.mqtt.port = 9001;
+    this.mqtt;
+    this.reconnectTimeout = 2000;
+    this.host = "127.0.0.1";
+    this.port = 9001;
 }
 
-dk.mqtt.onMqttConnect = function dk_mqtt_onMqttConnect() {
+DKMqtt.prototype.onMqttConnect = function DKMqtt_onMqttConnect() {
     // Once a connection has been made, make a subscription and send a message.
     console.log("Mqtt Connected");
     //mqtt.subscribe("sensor1");
@@ -24,7 +24,7 @@ dk.mqtt.onMqttConnect = function dk_mqtt_onMqttConnect() {
     mqtt.send(message);
 }
 
-dk.mqtt.connect = function dk_mqtt_connect() {
+DKMqtt.prototype.connect = function DKMqtt_connect() {
     console.log("connecting to " + host + " " + port);
     var x = Math.floor(Math.random() * 10000);
     var cname = "orderform-" + x;
@@ -32,7 +32,7 @@ dk.mqtt.connect = function dk_mqtt_connect() {
     //document.write("connecting to "+ host);
     var options = {
         timeout: 3,
-        onSuccess: dk.mqtt.onMqttConnect,
+        onSuccess: this.onMqttConnect,
     };
 
     mqtt.connect(options);
