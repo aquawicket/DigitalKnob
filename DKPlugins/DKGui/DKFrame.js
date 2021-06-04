@@ -1,4 +1,4 @@
-"use strict";
+//"use strict";
 
 DKFrame.prototype = Object.create(DKPlugin.prototype);
 function DKFrame(identifier) {
@@ -35,9 +35,9 @@ DKFrame.prototype.create = function DKFrame_create(dkplugin) {
         top: "21rem",
         bottom: "0rem",
         left: "0rem",
-        right: "0rem",
-        width: "unset",
-        height: "unset"
+        right: "0rem"
+        //width: "unset",
+        //height: "unset"
     }
     frame.appendChild(frame.content);
     frame.resize = dk.resize.create(frame);

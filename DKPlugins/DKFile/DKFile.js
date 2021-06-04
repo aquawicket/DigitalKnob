@@ -10,6 +10,10 @@ DKFile.prototype.init = function DKFile_init() {
     dk.file.appFilename = "";
     dk.file.localAssets = "";
     dk.file.onlineAssets = "";
+    if (dk.getJSEngine() === "Duktape") {
+        dk.file.onlineAssets = "C:/DKTasmota_Data/";
+        return;
+    }
     if (dk.php) {
         dk.php.call("GET", "DKFile/DKFile.php", "getAssetsPath", function dk_php_getAssetsPath_callback(result) {
             (dk.file.onlineAssets = result) && console.debug("dk.file.onlineAssets = " + result);

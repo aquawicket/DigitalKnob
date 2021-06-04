@@ -171,8 +171,13 @@ dk.create = function dk_create(data, dk_create_callback) {
             //else
             //    console.warn("dk.create(" + data + "): does not have a callback");
         })) {
-            console.error("dk.loadJs failed");
-            //return dk_create_callback && dk_create_callback(false);
+            if (dk.getJSEngine() === "Duktape") {
+                console.log("dk.loadJS("+arry[0]+") failed");
+                dk_create_callback && dk_create_callback(true);
+                return true;
+            }
+            console.error("dk.loadJs failed ");
+            dk_create_callback && dk_create_callback(false);
         }
     }
     if (arry[0].includes(".html")) {
@@ -294,8 +299,8 @@ dk.loadJs = function dk_loadJs(url, dk_loadJs_callback) {
 
     //FIXME - DigitalKnob can't trigger onload yet, so we do this
 
-    //if (dk.getJSEngine() === "Duktape") {
-    if (dk.hasCPP()) {
+    if (dk.getJSEngine() === "Duktape") {
+        console.log("Duktape Loading: "+url);
         var plugin = dk.getPlugin(url);
         plugin && console.log("loading dk." + plugin.name + " plugin");
         if (plugin && plugin.init) {
@@ -306,7 +311,8 @@ dk.loadJs = function dk_loadJs(url, dk_loadJs_callback) {
             old_plugin();
         }
         done = true;
-        return dk_loadJs_callback && dk_loadJs_callback(true);
+        dk_loadJs_callback && dk_loadJs_callback(true);
+        return true;
     }
     return true;
 }
