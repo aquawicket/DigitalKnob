@@ -1,16 +1,22 @@
- var LOG_DEBUG = false;
+var LOG_DEBUG = false;
 var LOG_INFO = true;
 var LOG_WARNINGS = true;
 var LOG_ERRORS = true;
 var LOG_FILE = true;
-var LOG_SHOW = ""; //comma seperated
-var LOG_HIDE = ""; //comma seperated
+var LOG_SHOW = "";
+//comma seperated
+var LOG_HIDE = "";
+//comma seperated
 var LOG_LINES = false;
 
-var DK_ERROR = 1;     //Red
-var DK_WARN = 2;      //Yellow
-var DK_INFO = 3;      //White
-var DK_DEBUG = 4;     //Blue
+var DK_ERROR = 1;
+//Red
+var DK_WARN = 2;
+//Yellow
+var DK_INFO = 3;
+//White
+var DK_DEBUG = 4;
+//Blue
 var DK_SHOW = 5;
 var DK_HIDE = 6;
 
@@ -21,8 +27,11 @@ var objectY;
 var drag_id;
 //var events = [];
 
-var byId = function(id){ return document.getElementById(id); } //shortcut alias
- 
+var byId = function(id) {
+    return document.getElementById(id);
+}
+//shortcut alias
+
 //document.getElementsByTagName("html")[0].style.fontSize = "1.0px";
 //document.body.style.fontSize = "13em";
 //document.body.style.fontSize = "1.0px";
@@ -39,26 +48,72 @@ var byId = function(id){ return document.getElementById(id); } //shortcut alias
 //EventLoop.run = function(){};
 
 //https://stackoverflow.com/a/11035042/688352
-if(DK_GetBrowser() !== "CEF" && DK_GetBrowser() !== "RML"){
-	var DK_ClearEvents = function(){ DKWARN("DK_ClearEvents(): not available for "+DK_GetBrowser()+"\n"); }
-	var DKRocket_Reload = function(){ DKWARN("DKRocket_Reload(): not available for "+DK_GetBrowser()+"\n"); }
-	var DK_CallFunc = function(var1, var2, var3){ DKWARN("DK_CallFunc(): not available for "+DK_GetBrowser()+"\n"); return ""; }
-	var DK_Queue = function(var1, var2, var3){ DKWARN("DK_Queue(): not available for "+DK_GetBrowser()+"\n"); }
-	var DK_LeftClick = function(){ DKWARN("DK_LeftClick(): not available for "+DK_GetBrowser()+"\n"); }
-	var DK_RightClick = function(){ DKWARN("DK_RightClick(): not available for "+DK_GetBrowser()+"\n"); }
-	var DK_SetCursorPos = function(){ DKWARN("DK_SetCursorPos(): not available for "+DK_GetBrowser()+"\n"); }
-	var DKHook_GetWindows = function(){ DKWARN("DKHook_GetWindows(): not available for "+DK_GetBrowser()+"\n"); }
-	var DK_Crash = function(){ DKWARN("DK_Crash(): not available for "+DK_GetBrowser()+"\n"); }
-	var DK_LogGuiConsole = function(){ DKWARN("DK_LogGuiConsole(): not available for "+DK_GetBrowser()+"\n"); }
-	var DK_GetFunctions = function(){ DKWARN("DK_GetFunctions(): not available for "+DK_GetBrowser()+"\n"); }
-	var DK_PrintFunctions = function(){ DKWARN("DK_PrintFunctions(): not available for "+DK_GetBrowser()+"\n"); }
-	var DK_GetPixelUnderMouse = function(){ DKWARN("DK_GetPixelUnderMouse(): not available for "+DK_GetBrowser()+"\n"); return ""; }
-	var DK_ShowConsole = function(){ DKWARN("DK_ShowConsole(): not available for "+DK_GetBrowser()+"\n"); return ""; }
-	var DK_HideConsole = function(){ DKWARN("DK_HideConsole(): not available for "+DK_GetBrowser()+"\n"); return ""; }
-	var DK_CpuUsed = function(){DKWARN("DK_CpuUsed(): not available for "+DK_GetBrowser()+"\n"); return ""; }
-	var DK_CpuUsedByApp = function(){ DKWARN("DK_CpuUsedByApp(): not available for "+DK_GetBrowser()+"\n"); return ""; }
-	var DK_PhysicalMemory = function(){ DKWARN("DK_PhysicalMemory(): not available for "+DK_GetBrowser()+"\n"); return ""; }
-	var DK_PhysicalMemoryUsedByApp = function(){ DKWARN("DK_PhysicalMemoryUsedByApp(): not available for "+DK_GetBrowser()+"\n"); return ""; }
+if (DK_GetBrowser() !== "CEF" && DK_GetBrowser() !== "RML") {
+    var DK_ClearEvents = function() {
+        DKWARN("DK_ClearEvents(): not available for " + DK_GetBrowser() + "\n");
+    }
+    var DKRocket_Reload = function() {
+        DKWARN("DKRocket_Reload(): not available for " + DK_GetBrowser() + "\n");
+    }
+    var DK_CallFunc = function(var1, var2, var3) {
+        DKWARN("DK_CallFunc(): not available for " + DK_GetBrowser() + "\n");
+        return "";
+    }
+    var DK_Queue = function(var1, var2, var3) {
+        DKWARN("DK_Queue(): not available for " + DK_GetBrowser() + "\n");
+    }
+    var DK_LeftClick = function() {
+        DKWARN("DK_LeftClick(): not available for " + DK_GetBrowser() + "\n");
+    }
+    var DK_RightClick = function() {
+        DKWARN("DK_RightClick(): not available for " + DK_GetBrowser() + "\n");
+    }
+    var DK_SetCursorPos = function() {
+        DKWARN("DK_SetCursorPos(): not available for " + DK_GetBrowser() + "\n");
+    }
+    var DKHook_GetWindows = function() {
+        DKWARN("DKHook_GetWindows(): not available for " + DK_GetBrowser() + "\n");
+    }
+    var DK_Crash = function() {
+        DKWARN("DK_Crash(): not available for " + DK_GetBrowser() + "\n");
+    }
+    var DK_LogGuiConsole = function() {
+        DKWARN("DK_LogGuiConsole(): not available for " + DK_GetBrowser() + "\n");
+    }
+    var DK_GetFunctions = function() {
+        DKWARN("DK_GetFunctions(): not available for " + DK_GetBrowser() + "\n");
+    }
+    var DK_PrintFunctions = function() {
+        DKWARN("DK_PrintFunctions(): not available for " + DK_GetBrowser() + "\n");
+    }
+    var DK_GetPixelUnderMouse = function() {
+        DKWARN("DK_GetPixelUnderMouse(): not available for " + DK_GetBrowser() + "\n");
+        return "";
+    }
+    var DK_ShowConsole = function() {
+        DKWARN("DK_ShowConsole(): not available for " + DK_GetBrowser() + "\n");
+        return "";
+    }
+    var DK_HideConsole = function() {
+        DKWARN("DK_HideConsole(): not available for " + DK_GetBrowser() + "\n");
+        return "";
+    }
+    var DK_CpuUsed = function() {
+        DKWARN("DK_CpuUsed(): not available for " + DK_GetBrowser() + "\n");
+        return "";
+    }
+    var DK_CpuUsedByApp = function() {
+        DKWARN("DK_CpuUsedByApp(): not available for " + DK_GetBrowser() + "\n");
+        return "";
+    }
+    var DK_PhysicalMemory = function() {
+        DKWARN("DK_PhysicalMemory(): not available for " + DK_GetBrowser() + "\n");
+        return "";
+    }
+    var DK_PhysicalMemoryUsedByApp = function() {
+        DKWARN("DK_PhysicalMemoryUsedByApp(): not available for " + DK_GetBrowser() + "\n");
+        return "";
+    }
 }
 
 /*
@@ -70,16 +125,11 @@ function myTimer() {
 
 //This function is used to debug googlebot crawling
 /////////////////////////////////////////////
-window.addEventListener('error', function(e){
-    var errorText = [
-        e.message + '\n',
-        'URL: ' + e.filename,
-        'Line: ' + e.lineno + ', Column: ' + e.colno,
-        'Stack: ' + (e.error && e.error.stack || '(no stack trace)')
-    ].join('\n');
-	DKERROR(errorText);
-	
-	/*
+window.addEventListener('error', function(e) {
+    var errorText = [e.message + '\n', 'URL: ' + e.filename, 'Line: ' + e.lineno + ', Column: ' + e.colno, 'Stack: ' + (e.error && e.error.stack || '(no stack trace)')].join('\n');
+    DKERROR(errorText);
+
+    /*
     // Example: log errors as visual output into the host page.
     // Note: you probably don’t want to show such errors to users, or
     //       have the errors get indexed by Googlebot; however, it may
@@ -109,233 +159,240 @@ window.addEventListener('error', function(e){
 	*/
 });
 
-
 // FIXME: not working
 /////////////////////////////////
-window.onmousemove = function(e){
-//window.addEventListener("mousemove", function(e){	
-	if(DK_IE()){ // grab the x-y pos.s if browser is IE
-		window.mouseX = e.clientX + document.body.scrollLeft
-		window.mouseY = e.clientY + document.body.scrollTop
-	}
-	if(DK_GetBrowser() === "RML"){
-		window.mouseX = e.clientX;
-		window.mouseY = e.clientY;
-	}
-	else{  // grab the x-y pos.s if browser is NS
-		window.mouseX = e.pageX
-		window.mouseY = e.pageY
-	}  
-	// catch possible negative values in NS4
-	if (window.mouseX < 0){window.mouseX = 0}
-	if (window.mouseY < 0){window.mouseY = 0}  
-	return true;
-//});
+window.onmousemove = function(e) {
+    //window.addEventListener("mousemove", function(e){	
+    if (DK_IE()) {
+        // grab the x-y pos.s if browser is IE
+        window.mouseX = e.clientX + document.body.scrollLeft
+        window.mouseY = e.clientY + document.body.scrollTop
+    }
+    if (DK_GetBrowser() === "RML") {
+        window.mouseX = e.clientX;
+        window.mouseY = e.clientY;
+    } else {
+        // grab the x-y pos.s if browser is NS
+        window.mouseX = e.pageX
+        window.mouseY = e.pageY
+    }
+    // catch possible negative values in NS4
+    if (window.mouseX < 0) {
+        window.mouseX = 0
+    }
+    if (window.mouseY < 0) {
+        window.mouseY = 0
+    }
+    return true;
+    //});
 }
 
-
-
-function DKERROR(string){ Log(string, DK_ERROR); }
-function DKWARN(string){ Log(string, DK_WARN); }
-function DKINFO(string){ Log(string, DK_INFO); }
-function DKDEBUG(string){ Log(string, DK_DEBUG); }
-
+function DKERROR(string) {
+    Log(string, DK_ERROR);
+}
+function DKWARN(string) {
+    Log(string, DK_WARN);
+}
+function DKINFO(string) {
+    Log(string, DK_INFO);
+}
+function DKDEBUG(string) {
+    Log(string, DK_DEBUG);
+}
 
 /////////////////////////
-function Log(string, lvl)
-{
-	if(!lvl){
-		lvl = DK_INFO;
-	}
-	
-	//check for LOG_HIDE
-	if(LOG_HIDE){
-		var arry = LOG_HIDE.split(",");
-		for(var i=0; i<arry.length; i++){
-			if(arry[i] && string.includes(arry[i])){
-				return;
-			}
-		}
-	}
-	
-	if(window.console){
-		var flag = false;
-		if(LOG_SHOW){
-			var arry = LOG_SHOW.split(",");
-			for(var i=0; i<arry.length; i++){
-				if(arry[i] && string.includes(arry[i])){
-					flag = true;
-					break;
-				}
-			}
-		}
-		if(!flag){ 
-			if(lvl === DK_ERROR && !LOG_ERRORS){ return; }
-			if(lvl === DK_WARN && !LOG_WARNINGS){ return; }
-			if(lvl === DK_INFO && !LOG_INFO){ return; }
-			if(lvl === DK_DEBUG && !LOG_DEBUG){ return; }
-		}
-		var color = "";
-		if(lvl === DK_ERROR){ color = "color:red";}
-		if(lvl === DK_WARN){ color = "color:#B8860B"; }
-		if(lvl === DK_INFO){ color = "color:grey"; }
-		if(lvl === DK_DEBUG){ color = "color:blue"; }
-		if(!color){ color = "color:grey"; }
-		string = string.replace("\n","");
-		
-		function getFileLine(){
-			var stack = Error().stack;
-			if(!stack || !LOG_LINES){ return ""; }
-			var lines = stack.split("\n");
-			var n=0;
-			while(lines[n].indexOf("Log") === -1){ n++; }
-			var fileline = lines[n+1];
-			var start = fileline.lastIndexOf("/");
-			var end = fileline.lastIndexOf(":");
-			fileline = fileline.substring(start+1, end+1);
-			return fileline+"  ";
-		};
-		
-		if(DK_GetBrowser() === "CHROME" || DK_GetBrowser() === "CEF"){
-			if(lvl === DK_ERROR){
-				//alert("ERROR: "+string);
-				//throw "ERROR: "+string;
-				console.error(getFileLine()+string);
-			}
-			else if(lvl === DK_WARN){
-				console.warn(getFileLine()+string);
-			}
-			else if(lvl === DK_INFO){
-				console.log(getFileLine()+string);
-			}
-			else if(lvl === DK_DEBUG){
-				//console.info("%c"+getFileLine()+string, color);
-				console.debug("%c"+getFileLine()+string, color);
-			}
-			else{
-				console.log("%c"+getFileLine()+string, color);
-			}
-		}
-		else{
-			if(lvl === DK_ERROR){
-				//alert("ERROR: "+string);
-				//throw "ERROR: "+string;
-				console.error(getFileLine()+string);
-			}
-			else if(lvl === DK_WARN){
-				console.warn(getFileLine()+string);
-			}
-			else if(lvl === DK_INFO){
-				console.log(getFileLine()+string);
-			}
-			else if(lvl === DK_DEBUG){
-				console.debug(getFileLine()+string);
-			}
-			else{
-				console.log(getFileLine()+string);
-			}
-		}
-	}
-	//DKSendEvent("DKConsole.html", "DKNotify", string);
+function Log(string, lvl) {
+    if (!lvl) {
+        lvl = DK_INFO;
+    }
+
+    //check for LOG_HIDE
+    if (LOG_HIDE) {
+        var arry = LOG_HIDE.split(",");
+        for (var i = 0; i < arry.length; i++) {
+            if (arry[i] && string.includes(arry[i])) {
+                return;
+            }
+        }
+    }
+
+    if (window.console) {
+        var flag = false;
+        if (LOG_SHOW) {
+            var arry = LOG_SHOW.split(",");
+            for (var i = 0; i < arry.length; i++) {
+                if (arry[i] && string.includes(arry[i])) {
+                    flag = true;
+                    break;
+                }
+            }
+        }
+        if (!flag) {
+            if (lvl === DK_ERROR && !LOG_ERRORS) {
+                return;
+            }
+            if (lvl === DK_WARN && !LOG_WARNINGS) {
+                return;
+            }
+            if (lvl === DK_INFO && !LOG_INFO) {
+                return;
+            }
+            if (lvl === DK_DEBUG && !LOG_DEBUG) {
+                return;
+            }
+        }
+        var color = "";
+        if (lvl === DK_ERROR) {
+            color = "color:red";
+        }
+        if (lvl === DK_WARN) {
+            color = "color:#B8860B";
+        }
+        if (lvl === DK_INFO) {
+            color = "color:grey";
+        }
+        if (lvl === DK_DEBUG) {
+            color = "color:blue";
+        }
+        if (!color) {
+            color = "color:grey";
+        }
+        string = string.replace("\n", "");
+
+        function getFileLine() {
+            var stack = Error().stack;
+            if (!stack || !LOG_LINES) {
+                return "";
+            }
+            var lines = stack.split("\n");
+            var n = 0;
+            while (lines[n].indexOf("Log") === -1) {
+                n++;
+            }
+            var fileline = lines[n + 1];
+            var start = fileline.lastIndexOf("/");
+            var end = fileline.lastIndexOf(":");
+            fileline = fileline.substring(start + 1, end + 1);
+            return fileline + "  ";
+        }
+        ;
+        if (DK_GetBrowser() === "CHROME" || DK_GetBrowser() === "CEF") {
+            if (lvl === DK_ERROR) {
+                //alert("ERROR: "+string);
+                //throw "ERROR: "+string;
+                console.error(getFileLine() + string);
+            } else if (lvl === DK_WARN) {
+                console.warn(getFileLine() + string);
+            } else if (lvl === DK_INFO) {
+                console.log(getFileLine() + string);
+            } else if (lvl === DK_DEBUG) {
+                //console.info("%c"+getFileLine()+string, color);
+                console.debug("%c" + getFileLine() + string, color);
+            } else {
+                console.log("%c" + getFileLine() + string, color);
+            }
+        } else {
+            if (lvl === DK_ERROR) {
+                //alert("ERROR: "+string);
+                //throw "ERROR: "+string;
+                console.error(getFileLine() + string);
+            } else if (lvl === DK_WARN) {
+                console.warn(getFileLine() + string);
+            } else if (lvl === DK_INFO) {
+                console.log(getFileLine() + string);
+            } else if (lvl === DK_DEBUG) {
+                console.debug(getFileLine() + string);
+            } else {
+                console.log(getFileLine() + string);
+            }
+        }
+    }
+    //DKSendEvent("DKConsole.html", "DKNotify", string);
 }
 
 DKINFO("*** DigitalKnob ***\n");
-DKINFO("Browser = "+DK_GetBrowser()+"\n");
-DKINFO("JSEngine = "+DK_GetJSEngine()+"\n\n");
-
+DKINFO("Browser = " + DK_GetBrowser() + "\n");
+DKINFO("JSEngine = " + DK_GetJSEngine() + "\n\n");
 
 /////////////////////////////////
-function DKCreate(data, callback)
-{
-	//console.log("DK.js:DKCreate("+data+")\n");	
-	var arry = data.split(",");
-	if(arry[0].indexOf(".html") > -1){
-		arry.splice(0, 0, "DKWidget");
-	}
-	else if(arry[0].indexOf(".js") > -1){
-		arry.splice(0, 0, "DKJavascript");
-	}
-	else if(arry[0].indexOf(".css") > -1){
-		arry.splice(0, 0, "DKCss");
-	}
-	else{
-		//DKINFO("DKCreate("+data+"): requesting c++ plugin\n");
-		if(DK_GetBrowser() === "CEF" || DK_GetBrowser() === "RML"){
-			DKCreate_CPP(data);
-		}
-	}	
-	if(arry[0] === "DKJavascript"){
-		if(!LoadJs(arry[1], function(rval){
-			if(callback){ 
-				callback(rval); 
-			}
-			else{
-				DKERROR("DKCreate("+data+"): does not have a callback\n");
-			}
-		})
-		){
-			return false;
-		}
-	}
-	if(arry[0] === "DKWidget"){
-		//DKINFO("DKCreate(data, callback)\n");
-			if(!DKWidget_NewWidget(arry[1], arry[2])){
-				return false;
-			}
-			if(callback){ 
-				callback(); 
-			}
-			else{
-			//DKERROR("DKCreate("+data+"): does not have a callback\n");
-			}
-	}
-	if(arry[0] === "DKCss"){
-		if(!LoadCss(arry[1])){
-			return false;
-		}
-		if(callback){ 
-			callback(); 
-		}
-		else{
-			//DKERROR("DKCreate("+data+"): does not have a callback\n");
-		}
-	}
-	return true;
+function DKCreate(data, callback) {
+    //console.log("DK.js:DKCreate("+data+")\n");	
+    var arry = data.split(",");
+    if (arry[0].indexOf(".html") > -1) {
+        arry.splice(0, 0, "DKWidget");
+    } else if (arry[0].indexOf(".js") > -1) {
+        arry.splice(0, 0, "DKJavascript");
+    } else if (arry[0].indexOf(".css") > -1) {
+        arry.splice(0, 0, "DKCss");
+    } else {
+        //DKINFO("DKCreate("+data+"): requesting c++ plugin\n");
+        if (DK_GetBrowser() === "CEF" || DK_GetBrowser() === "RML") {
+            DKCreate_CPP(data);
+        }
+    }
+    if (arry[0] === "DKJavascript") {
+        if (!LoadJs(arry[1], function(rval) {
+            if (callback) {
+                callback(rval);
+            } else {
+                DKERROR("DKCreate(" + data + "): does not have a callback\n");
+            }
+        })) {
+            return false;
+        }
+    }
+    if (arry[0] === "DKWidget") {
+        //DKINFO("DKCreate(data, callback)\n");
+        if (!DKWidget_NewWidget(arry[1], arry[2])) {
+            return false;
+        }
+        if (callback) {
+            callback();
+        } else {//DKERROR("DKCreate("+data+"): does not have a callback\n");
+        }
+    }
+    if (arry[0] === "DKCss") {
+        if (!LoadCss(arry[1])) {
+            return false;
+        }
+        if (callback) {
+            callback();
+        } else {//DKERROR("DKCreate("+data+"): does not have a callback\n");
+        }
+    }
+    return true;
 }
 
 //////////////////////
-function DKClose(data)
-{
-	console.log("DKClose("+data+")\n");
-	if(!data){
-		console.error("DKClose("+data+"): data empty\n");
-		return false;
-	}
-	
-	var arry = data.split(",");
-	if(arry[0].indexOf(".html") > -1){
-		arry.splice(0, 0, "DKWidget");
-	}
-	else if(arry[0].indexOf(".js") > -1){
-		arry.splice(0, 0, "DKJavascript");
-	}
-	else if(arry[0].indexOf(".css") > -1){
-		arry.splice(0, 0, "DKCss");
-	}
-	
-	var file = DKFile_GetFilename(arry[1]);
-	if(!file){ 
-		console.error("DKClose("+data+"): file invalid\n");
-		return false; 
-	}
-	
-	if(arry[0] === "DKJavascript"){
-		var end = file.replace(".js", "");
-		end += "_end()";
-		eval(end+"()");
-		
-		//FIXME
-		/*
+function DKClose(data) {
+    console.log("DKClose(" + data + ")\n");
+    if (!data) {
+        console.error("DKClose(" + data + "): data empty\n");
+        return false;
+    }
+
+    var arry = data.split(",");
+    if (arry[0].indexOf(".html") > -1) {
+        arry.splice(0, 0, "DKWidget");
+    } else if (arry[0].indexOf(".js") > -1) {
+        arry.splice(0, 0, "DKJavascript");
+    } else if (arry[0].indexOf(".css") > -1) {
+        arry.splice(0, 0, "DKCss");
+    }
+
+    var file = DKFile_GetFilename(arry[1]);
+    if (!file) {
+        console.error("DKClose(" + data + "): file invalid\n");
+        return false;
+    }
+
+    if (arry[0] === "DKJavascript") {
+        var end = file.replace(".js", "");
+        end += "_end()";
+        eval(end + "()");
+
+        //FIXME
+        /*
 		console.log(end);
 		var func = window[end]; //Plugin_end() //FIXME
 		if(typeof func === 'function'){
@@ -346,286 +403,297 @@ function DKClose(data)
 			console.warn("DKClose(data): "+func+" is not a function\n");
 		}
 		*/
-		
-		var script = byId(arry[1]);
-		if(!script){
-			//DKWARN("DKClose("+data+"): "+arry[1]+" does not exist\n");
-			return false;
-		}
-		script.parentNode.removeChild(script);
-		//DKINFO("Closed "+arry[1]+"\n");
-	}
-	if(arry[0] === "DKWidget"){
-		var element = byId(arry[1]);
-		if(!element){ 
-			//DKWARN("DKClose("+data+"): "+file+" does not exist\n");
-			return false; 
-		}
-		element.parentNode.removeChild(element);
-		//DKINFO("Closed "+arry[1]+"\n");
-	}
-	if(arry[0] === "DKCss"){
-		var css = byId(arry[1]);
-		if(!css){ 
-			//DKERROR("DKClose("+data+"): "+arry[1]+" does not exist\n");
-			return false; 
-		}
-		css.parentNode.removeChild(css);
-		//DKINFO("Closed "+arry[1]+"\n");
-	}
-	
-	return true;
+
+        var script = byId(arry[1]);
+        if (!script) {
+            //DKWARN("DKClose("+data+"): "+arry[1]+" does not exist\n");
+            return false;
+        }
+        script.parentNode.removeChild(script);
+        //DKINFO("Closed "+arry[1]+"\n");
+    }
+    if (arry[0] === "DKWidget") {
+        var element = byId(arry[1]);
+        if (!element) {
+            //DKWARN("DKClose("+data+"): "+file+" does not exist\n");
+            return false;
+        }
+        element.parentNode.removeChild(element);
+        //DKINFO("Closed "+arry[1]+"\n");
+    }
+    if (arry[0] === "DKCss") {
+        var css = byId(arry[1]);
+        if (!css) {
+            //DKERROR("DKClose("+data+"): "+arry[1]+" does not exist\n");
+            return false;
+        }
+        css.parentNode.removeChild(css);
+        //DKINFO("Closed "+arry[1]+"\n");
+    }
+
+    return true;
 }
 
 /////////////////////
-function LoadCss(url)
-{
-	//console.log("DK.js:LoadCss("+url+")");
-	if(!url){ 
-		DKERROR("DK.js: LoadCss("+url+"): url invalid\n");
-		return false; 
-	}
-	
-	if(DK_GetObjects().indexOf(url) !== -1){
-		DKWARN("DK.js: LoadCss("+url+"): url already loaded\n");
-		return false;
-	}
-	
-	var link = document.createElement('link');
-	//console.log("link = "+link.POINTER);
-	link.setAttribute('href', url);
-	link.id = url;
-	link.setAttribute('rel', 'stylesheet');
-	link.setAttribute('type', 'text/css');
-	var elements = document.getElementsByTagName('head');
-	
-	//console.log("LoadCss("+url+"): link = "+link.POINTER);
-	//console.log("LoadCss("+url+"): link = "+link);
-	//console.log("LoadCss("+url+"): elements[0] = "+elements[0]);
-	//console.log("DK.js:LoadCss("+url+") appending link");
-	elements[0].appendChild(link);
-	
-	return true;
+function LoadCss(url) {
+    //console.log("DK.js:LoadCss("+url+")");
+    if (!url) {
+        DKERROR("DK.js: LoadCss(" + url + "): url invalid\n");
+        return false;
+    }
+
+    if (DK_GetObjects().indexOf(url) !== -1) {
+        DKWARN("DK.js: LoadCss(" + url + "): url already loaded\n");
+        return false;
+    }
+
+    var link = document.createElement('link');
+    //console.log("link = "+link.POINTER);
+    link.setAttribute('href', url);
+    link.id = url;
+    link.setAttribute('rel', 'stylesheet');
+    link.setAttribute('type', 'text/css');
+    var elements = document.getElementsByTagName('head');
+
+    //console.log("LoadCss("+url+"): link = "+link.POINTER);
+    //console.log("LoadCss("+url+"): link = "+link);
+    //console.log("LoadCss("+url+"): elements[0] = "+elements[0]);
+    //console.log("DK.js:LoadCss("+url+") appending link");
+    elements[0].appendChild(link);
+
+    return true;
 }
 
 //////////////////////////////
-function LoadJs(url, callback)
-{
-	if(!url){ 
-		DKERROR("DK.js: LoadJs("+url+"): url invalid\n");
-		return false; 
-	}
-	
-	if(DK_GetObjects().indexOf(url) !== -1){
-		DKWARN("DK.js: LoadJs("+url+", callback): url already loaded\n");
-		callback && callback(false);
-		return false;
-	}
-	
-	//TEST: already loaded, remove it first
-	if(byId(url)){
-		byId(url).parentNode.removeChild(byId(url));
-	}
-	
-	var file = url.substring(url.lastIndexOf("/") + 1);
-	
-	// Call the js init function
-	if(!file){ 
-		DKERROR("DK.js: LoadJs("+url+"): file invalid\n");
-		return false; 
-	}
-	
-	// Adding the script tag to the head as suggested before
-	var head = document.getElementsByTagName('head')[0];
-	var script = document.createElement('script');
-	//script.type = 'text/javascript';
-	script.setAttribute('type', 'text/javascript');
-	script.id = url;
-	//script.async = true; // optionally
-	script.setAttribute('async', true);
-	script.setAttribute('src', url);
-	
-	//console.log("script.type = "+script.type);
-	
-	//if(typeof script === "undefined"){ 
-	//	DKERROR("Cannot load "+url+"\n");
-	//	return false; 
-	//}
-	
-	var init = file.replace(".js", "");
-	init += "_init()";
-	
-	head.appendChild(script);
-	
-	////////// CALLBACKS
-	var done = false;
-	script.onload = script.onreadystatechange = function(){ //FIXME - DigitalKnob can't trigger onload yet.
-		if(!done && (!this.readyState || this.readyState === "loaded" || this.readyState === "complete")){
-			//DKINFO("Loaded: "+url+"\n");
-			var func = window[init]; //Plugin_init()    
-			if(typeof func === 'function'){ 
-				//DKINFO("Calling: "+init+"\n");
-				func(); //Init
-			}
-			else{
-				//DKWARN(init+" is not defined\n");
-			}
-			
-			done = true;
-			callback && callback(true);
-		}
-	};
-	script.onerror = function(){
-		DKERROR("DK.js: LoadJs("+url+"): Could not load file\n");
-	}
-	////////////////////////
-	
-	//FIXME - DigitalKnob can't trigger onload yet, so we do this
-	if(DK_GetJSEngine() === "Duktape"){
-		//DKINFO("Loaded: "+url+"\n");
-		var func = init; //Plugin_init() 
-		if(eval("typeof "+func) === "function"){
-			//DKINFO("Calling: "+init+"\n");
-			eval(func)(); //Init
-		}
-		else{
-			DKWARN(init+" is not defined\n");
-		}
-		callback && callback(true);
-	}
-	
-	return true;
+function LoadJs(url, callback) {
+    if (!url) {
+        DKERROR("DK.js: LoadJs(" + url + "): url invalid\n");
+        return false;
+    }
+
+    if (DK_GetObjects().indexOf(url) !== -1) {
+        DKWARN("DK.js: LoadJs(" + url + ", callback): url already loaded\n");
+        callback && callback(false);
+        return false;
+    }
+
+    //TEST: already loaded, remove it first
+    if (byId(url)) {
+        byId(url).parentNode.removeChild(byId(url));
+    }
+
+    var file = url.substring(url.lastIndexOf("/") + 1);
+
+    // Call the js init function
+    if (!file) {
+        DKERROR("DK.js: LoadJs(" + url + "): file invalid\n");
+        return false;
+    }
+
+    // Adding the script tag to the head as suggested before
+    var head = document.getElementsByTagName('head')[0];
+    var script = document.createElement('script');
+    //script.type = 'text/javascript';
+    script.setAttribute('type', 'text/javascript');
+    script.id = url;
+    //script.async = true; // optionally
+    script.setAttribute('async', true);
+    script.setAttribute('src', url);
+
+    //console.log("script.type = "+script.type);
+
+    //if(typeof script === "undefined"){ 
+    //	DKERROR("Cannot load "+url+"\n");
+    //	return false; 
+    //}
+
+    var init = file.replace(".js", "");
+    init += "_init()";
+
+    head.appendChild(script);
+
+    ////////// CALLBACKS
+    var done = false;
+    script.onload = script.onreadystatechange = function() {
+        //FIXME - DigitalKnob can't trigger onload yet.
+        if (!done && (!this.readyState || this.readyState === "loaded" || this.readyState === "complete")) {
+            //DKINFO("Loaded: "+url+"\n");
+            var func = window[init];
+            //Plugin_init()    
+            if (typeof func === 'function') {
+                //DKINFO("Calling: "+init+"\n");
+                func();
+                //Init
+            } else {//DKWARN(init+" is not defined\n");
+            }
+
+            done = true;
+            callback && callback(true);
+        }
+    }
+    ;
+    script.onerror = function() {
+        DKERROR("DK.js: LoadJs(" + url + "): Could not load file\n");
+    }
+    ////////////////////////
+
+    //FIXME - DigitalKnob can't trigger onload yet, so we do this
+    if (DK_GetJSEngine() === "Duktape") {
+        //DKINFO("Loaded: "+url+"\n");
+        var func = init;
+        //Plugin_init() 
+        if (eval("typeof " + func) === "function") {
+            //DKINFO("Calling: "+init+"\n");
+            eval(func)();
+            //Init
+        } else {
+            DKWARN(init + " is not defined\n");
+        }
+        callback && callback(true);
+    }
+
+    return true;
 }
 
 //////////////////////////////
-function LoadHtml(url, parent)
-{
-	//DKWARN("DK.js:LoadHtml("+url+","+parent+")");
-	//TODO: the id of the root element in the html file should be the file path..   I.E. MyPlugin/MyPlugin.html
-	if(!url){ 
-		DKERROR("DK.js: LoadJs("+url+"): url invalid\n");
-		return false; 
-	}
-	
-	if(url.indexOf(".html") === -1){ 
-		DKERROR("DK.js: LoadHtml("+url+", parent): url is not a valid .html file\n");
-		return false;
-	}
-	
-	if(url === ".html"){ url = "New.html"; }
-	
-	if(DK_GetObjects().indexOf(url) !== -1){
-		DKWARN("DK.js: LoadHtml("+url+", parent): url already loaded\n");
-		return false;
-	}
-	
-	var string = DK_FileToString(url);
-	//DKWARN("url = "+url+"\n");
-	//DKWARN("string = "+string+"\n");
-	//Create an empty widget
-	if(!string || string === "ERROR"){ 
-		string  = "<div id=\""+url+"\" style=\"position:absolute;top:200rem;left:200rem;width:200rem;height:200rem;background-color:rgb(230,230,230);\"></div>";
-	}
+function LoadHtml(url, parent) {
+    //DKWARN("DK.js:LoadHtml("+url+","+parent+")");
+    //TODO: the id of the root element in the html file should be the file path..   I.E. MyPlugin/MyPlugin.html
+    if (!url) {
+        DKERROR("DK.js: LoadJs(" + url + "): url invalid\n");
+        return false;
+    }
 
-	var temp = document.createElement("temp");
-	//console.log("temp.id = "+temp.id);
-	temp.innerHTML = string;
-	//console.log("temp.innerHTML = "+temp.innerHTML);
-	//console.log("temp.id = "+temp.id);
-	var nodes = temp.childNodes;
-	if(!nodes){
-		DKERROR("DK.js: LoadHtml("+url+", "+parent+"): Could not get nodes from file url\n");
-		return false;
-	}
-	if(nodes.length > 1){
-		for(var i=0; i < nodes.length; i++){
-			DKWARN("node["+i+"]: "+nodes[i]+"\n");
-		}
-		
-		DKWARN("###############################################\n");
-		DKWARN("DK.js: LoadHtml("+url+", "+parent+"): Too many nodes in file\n");
-		//DKINFO(temp.innerHTML+"\n");
-		DKWARN("You either have too many root nodes in your html file or, you have extra whitespace at the begining or the end of the file\n");
-		DKWARN("###############################################\n");
-		//return false;
-	}
+    if (url.indexOf(".html") === -1) {
+        DKERROR("DK.js: LoadHtml(" + url + ", parent): url is not a valid .html file\n");
+        return false;
+    }
 
-	if(nodes[0].id !== url){
-		DKWARN("DK.js: LoadHtml("+url+",parent): did not match the node id ("+nodes[0].id+")\n");
-		nodes[0].id = url;
-		DKWARN("DK.js: LoadHtml("+url+",parent): please fix the id\n");
-	}
-	if(parent){
-		//console.log("DK.js:LoadHtml(): appending to parent");
-		parent.appendChild(nodes[0]);
-	}
-	else{
-		//console.log("DK.js:LoadHtml(): appending to body");
-		document.body.appendChild(nodes[0]);
-	}
-	
-	//FIXME - CEF seems to do this automatically. DKRml need to act the same.
-	//var elements = document.getElementsByTagName("temp");
-	//if(elements){ console.log("getElementsByTagName(temp).length: "+elements.length); }
-	//if(elements[0]){ console.log("elements[0].innerHTML: "+elements[0].innerHTML); }
-	//if(elements[0]){ document.removeChild(elements[0]); }
-	
-	return true;
+    if (url === ".html") {
+        url = "New.html";
+    }
+
+    if (DK_GetObjects().indexOf(url) !== -1) {
+        DKWARN("DK.js: LoadHtml(" + url + ", parent): url already loaded\n");
+        return false;
+    }
+
+    var string = DK_FileToString(url);
+    //DKWARN("url = "+url+"\n");
+    //DKWARN("string = "+string+"\n");
+    //Create an empty widget
+    if (!string || string === "ERROR") {
+        string = "<div id=\"" + url + "\" style=\"position:absolute;top:200rem;left:200rem;width:200rem;height:200rem;background-color:rgb(230,230,230);\"></div>";
+    }
+
+    var temp = document.createElement("temp");
+    //console.log("temp.id = "+temp.id);
+    temp.innerHTML = string;
+    //console.log("temp.innerHTML = "+temp.innerHTML);
+    //console.log("temp.id = "+temp.id);
+    var nodes = temp.childNodes;
+    if (!nodes) {
+        DKERROR("DK.js: LoadHtml(" + url + ", " + parent + "): Could not get nodes from file url\n");
+        return false;
+    }
+    if (nodes.length > 1) {
+        for (var i = 0; i < nodes.length; i++) {
+            DKWARN("node[" + i + "]: " + nodes[i] + "\n");
+        }
+
+        DKWARN("###############################################\n");
+        DKWARN("DK.js: LoadHtml(" + url + ", " + parent + "): Too many nodes in file\n");
+        //DKINFO(temp.innerHTML+"\n");
+        DKWARN("You either have too many root nodes in your html file or, you have extra whitespace at the begining or the end of the file\n");
+        DKWARN("###############################################\n");
+        //return false;
+    }
+
+    if (nodes[0].id !== url) {
+        DKWARN("DK.js: LoadHtml(" + url + ",parent): did not match the node id (" + nodes[0].id + ")\n");
+        nodes[0].id = url;
+        DKWARN("DK.js: LoadHtml(" + url + ",parent): please fix the id\n");
+    }
+    if (parent) {
+        //console.log("DK.js:LoadHtml(): appending to parent");
+        parent.appendChild(nodes[0]);
+    } else {
+        //console.log("DK.js:LoadHtml(): appending to body");
+        document.body.appendChild(nodes[0]);
+    }
+
+    //FIXME - CEF seems to do this automatically. DKRml need to act the same.
+    //var elements = document.getElementsByTagName("temp");
+    //if(elements){ console.log("getElementsByTagName(temp).length: "+elements.length); }
+    //if(elements[0]){ console.log("elements[0].innerHTML: "+elements[0].innerHTML); }
+    //if(elements[0]){ document.removeChild(elements[0]); }
+
+    return true;
 }
 
 ///////////////////////////
-function CheckFileSupport()
-{
-	if(window.File && window.FileReader && window.FileList && window.Blob){
-		DKINFO("DK.js: File support OK\n");
-	}
-	else {
-		DKERROR("DK.js: The File APIs are not fully supported in this browser\n");
-	}
+function CheckFileSupport() {
+    if (window.File && window.FileReader && window.FileList && window.Blob) {
+        DKINFO("DK.js: File support OK\n");
+    } else {
+        DKERROR("DK.js: The File APIs are not fully supported in this browser\n");
+    }
 }
 
 ///////////////////////////
-function GetLeftPx(element)
-{
-	if(!element){ return 0; }
-	if(!element.style.left){ return 0; }
-	if(element.style.left.indexOf("%") > -1){
-		return parseInt(element.style.left) * WindowWidth() / 100;
-	}
-	return parseInt(element.style.left);
+function GetLeftPx(element) {
+    if (!element) {
+        return 0;
+    }
+    if (!element.style.left) {
+        return 0;
+    }
+    if (element.style.left.indexOf("%") > -1) {
+        return parseInt(element.style.left) * WindowWidth() / 100;
+    }
+    return parseInt(element.style.left);
 }
 
 //////////////////////////
-function GetTopPx(element)
-{
-	if(!element){ return 0; }
-	if(!element.style.top){ return 0; }
-	if(element.style.top.indexOf("%") > -1){
-		return parseInt(element.style.top) * WindowHeight() / 100;
-	}
-	return parseInt(element.style.top);
+function GetTopPx(element) {
+    if (!element) {
+        return 0;
+    }
+    if (!element.style.top) {
+        return 0;
+    }
+    if (element.style.top.indexOf("%") > -1) {
+        return parseInt(element.style.top) * WindowHeight() / 100;
+    }
+    return parseInt(element.style.top);
 }
 
 ////////////////////////////
-function GetWidthPx(element)
-{
-	if(!element){ return 0; }
-	if(!element.style.width){ return 0; }
-	if(element.style.width.indexOf("%") > -1){
-		return parseInt(element.style.width) * WindowWidth() / 100;
-	}
-	return parseInt(element.style.width);
+function GetWidthPx(element) {
+    if (!element) {
+        return 0;
+    }
+    if (!element.style.width) {
+        return 0;
+    }
+    if (element.style.width.indexOf("%") > -1) {
+        return parseInt(element.style.width) * WindowWidth() / 100;
+    }
+    return parseInt(element.style.width);
 }
 
 /////////////////////////////
-function GetHeightPx(element)
-{
-	if(!element){ return 0; }
-	if(!element.style.height){ return 0; }
-	if(element.style.height.indexOf("%") > -1){
-		return parseInt(element.style.height) * WindowHeight() / 100;
-	}
-	return parseInt(element.style.height);
+function GetHeightPx(element) {
+    if (!element) {
+        return 0;
+    }
+    if (!element.style.height) {
+        return 0;
+    }
+    if (element.style.height.indexOf("%") > -1) {
+        return parseInt(element.style.height) * WindowHeight() / 100;
+    }
+    return parseInt(element.style.height);
 }
 
 /*
@@ -831,9 +899,8 @@ function GetKeyNum(event)
 */
 
 //////////////////////////////
-function PreventDefault(event)
-{
-	if(event.stopPropagation) {
+function PreventDefault(event) {
+    if (event.stopPropagation) {
         event.preventDefault();
     } else {
         event.cancelBubble = true;
@@ -841,9 +908,8 @@ function PreventDefault(event)
 }
 
 ///////////////////////////////
-function StopPropagation(event)
-{
-	if(event.stopPropagation) {
+function StopPropagation(event) {
+    if (event.stopPropagation) {
         event.stopPropagation();
     } else {
         event.cancelBubble = true;
@@ -851,82 +917,76 @@ function StopPropagation(event)
 }
 
 /////////////////////////////////////////
-function setCookie(cname, cvalue, exdays)
-{
+function setCookie(cname, cvalue, exdays) {
     var d = new Date();
-    d.setTime(d.getTime() + (exdays*24*60*60*1000));
-    var expires = "expires="+d.toUTCString();
+    d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+    var expires = "expires=" + d.toUTCString();
     document.cookie = cname + "=" + cvalue + "; " + expires;
 }
 
 /////////////////////////
-function getCookie(cname) 
-{
+function getCookie(cname) {
     var name = cname + "=";
     var ca = document.cookie.split(';');
-    for(var i=0; i<ca.length; i++) {
+    for (var i = 0; i < ca.length; i++) {
         var c = ca[i];
-        while (c.charAt(0)==' ') c = c.substring(1);
-        if (c.indexOf(name) === 0) return c.substring(name.length,c.length);
+        while (c.charAt(0) == ' ')
+            c = c.substring(1);
+        if (c.indexOf(name) === 0)
+            return c.substring(name.length, c.length);
     }
     return "";
 }
 
 //////////////////////////
-function makeStruct(names)
-{
-	var names = names.split(' ');
-	var count = names.length;
-	function constructor(){
-		for (var i = 0; i < count; i++) {
-			this[names[i]] = arguments[i];
-		}
-	}
-	return constructor;
-	
-	//Usage:
-	//var Item = makeStruct("id speaker country");
-	//var row = new Item(1, 'john', 'au');
-	//alert(row.speaker); // displays: john
+function makeStruct(names) {
+    var names = names.split(' ');
+    var count = names.length;
+    function constructor() {
+        for (var i = 0; i < count; i++) {
+            this[names[i]] = arguments[i];
+        }
+    }
+    return constructor;
+
+    //Usage:
+    //var Item = makeStruct("id speaker country");
+    //var row = new Item(1, 'john', 'au');
+    //alert(row.speaker); // displays: john
 }
 
-
 //////////////////////////////////
-function replace(str, old, newstr)
-{
-	var re = new RegExp(old, 'g');
-	return str.replace(re, newstr);
+function replace(str, old, newstr) {
+    var re = new RegExp(old,'g');
+    return str.replace(re, newstr);
 }
 
 // trim for IE8
-if(typeof String.prototype.trim !== 'function') {
-  String.prototype.trim = function() {
-    return this.replace(/^\s+|\s+$/g, ''); 
-  }
+if (typeof String.prototype.trim !== 'function') {
+    String.prototype.trim = function() {
+        return this.replace(/^\s+|\s+$/g, '');
+    }
 }
 
 //////////////////
-function IsLocal()
-{
-	switch(window.location.protocol){
-		case 'http:':
-		case 'https:':
-			//remote file over http or https
-			return false;
-			break;
-		case 'file:':
-			//local file
-			return true;
-			break;
-		default: 
-			//some other protocol
-	}
+function IsLocal() {
+    switch (window.location.protocol) {
+    case 'http:':
+    case 'https:':
+        //remote file over http or https
+        return false;
+        break;
+    case 'file:':
+        //local file
+        return true;
+        break;
+    default:
+        //some other protocol
+    }
 }
 
 //////////////////////////
-function DKDEBUGFUNC(vars)
-{
-	/*
+function DKDEBUGFUNC(vars) {/*
 	var string = DKDEBUGFUNC.caller.name+"(";  //func.caller.name not available in Duktape
 	if(vars){
 		for(var i=0; i<arguments.length; i++){
@@ -942,136 +1002,132 @@ function DKDEBUGFUNC(vars)
 }
 
 //////////////////////////
-function DKDEBUGVARS(vars)
-{
-	function getFileLine(){
-		var stack = Error().stack;
-		if(!stack || !LOG_LINES){ return ""; }
-		var lines = stack.split("\n");
-		var n=0;
-		while(lines[n].indexOf("Log") === -1){ n++; }
-		var fileline = lines[n+1];
-		var start = fileline.lastIndexOf("/");
-		var end = fileline.lastIndexOf(":");
-		fileline = fileline.substring(start+1, end+1);
-		return fileline;
-	};
-		
-	var info = getFileLine()+" "+DKDEBUGVARS.caller.name+"()   ";
-	if(vars){
-		for(var i=0; i<arguments.length; i++){
-			var variable = "unknown_name: ";
-			variable += arguments[i];
-			if(!LOG_DEBUG){
-				LOG_DEBUG = true;
-				DKDEBUG(info+variable+"\n");
-				LOG_DEBUG = false
-			}
-			else{
-				DKDEBUG(info+variable+"\n");
-			}
-		}
-	}
+function DKDEBUGVARS(vars) {
+    function getFileLine() {
+        var stack = Error().stack;
+        if (!stack || !LOG_LINES) {
+            return "";
+        }
+        var lines = stack.split("\n");
+        var n = 0;
+        while (lines[n].indexOf("Log") === -1) {
+            n++;
+        }
+        var fileline = lines[n + 1];
+        var start = fileline.lastIndexOf("/");
+        var end = fileline.lastIndexOf(":");
+        fileline = fileline.substring(start + 1, end + 1);
+        return fileline;
+    }
+    ;
+    var info = getFileLine() + " " + DKDEBUGVARS.caller.name + "()   ";
+    if (vars) {
+        for (var i = 0; i < arguments.length; i++) {
+            var variable = "unknown_name: ";
+            variable += arguments[i];
+            if (!LOG_DEBUG) {
+                LOG_DEBUG = true;
+                DKDEBUG(info + variable + "\n");
+                LOG_DEBUG = false
+            } else {
+                DKDEBUG(info + variable + "\n");
+            }
+        }
+    }
 }
 
 /////////////////////
-function DK_GetTime()
-{
-	var d = new Date();
-	var hour = d.getHours();
-	var minute = d.getMinutes();
-	minute = minute > 9 ? minute : '0' + minute; //pad 0
-	var time = hour;
-	time += ":";
-	time += minute;
-	if(hour > 11){
-		time += " PM";
-	}
-	else{
-		time += " AM";
-	}
-	return time;
+function DK_GetTime() {
+    var d = new Date();
+    var hour = d.getHours();
+    var minute = d.getMinutes();
+    minute = minute > 9 ? minute : '0' + minute;
+    //pad 0
+    var time = hour;
+    time += ":";
+    time += minute;
+    if (hour > 11) {
+        time += " PM";
+    } else {
+        time += " AM";
+    }
+    return time;
 }
 
 /////////////////////
-function DK_GetDate()
-{
-	var d = new Date();
-	var date = d.getMonth()+1;
-	date += "/";
-	date += d.getDate();
-	date += "/";
-	date += d.getFullYear();
-	return date;
+function DK_GetDate() {
+    var d = new Date();
+    var date = d.getMonth() + 1;
+    date += "/";
+    date += d.getDate();
+    date += "/";
+    date += d.getFullYear();
+    return date;
 }
-
 
 /////////////////////
-function DK_Refresh()
-{	
-	//window.location.href = href+"index.html";
-	window.location.hash = "";
-	window.location.reload(true);
+function DK_Refresh() {
+    //window.location.href = href+"index.html";
+    window.location.hash = "";
+    window.location.reload(true);
 }
-
 
 //////////////////////////
-function DKAvailable(name)
-{
-	if(name === "DKWidget"){
-		return true; 
-	}
-	if(name === "DKWidgetJS"){  //FIXME: is this needed?
-		DKINFO("DKAvailable("+name+"): name === DKWidgetJS!  check DK.js line 235\n");
-		return true; 
-	}
-	return false;
+function DKAvailable(name) {
+    if (name === "DKWidget") {
+        return true;
+    }
+    if (name === "DKWidgetJS") {
+        //FIXME: is this needed?
+        DKINFO("DKAvailable(" + name + "): name === DKWidgetJS!  check DK.js line 235\n");
+        return true;
+    }
+    return false;
 }
 
 ////////////////////////
-function DK_GetObjects()
-{
-	// Search the Dom for all scripts (.js files)
-	var jsfiles = "";
-	var elements = document.getElementsByTagName("script");
-	for(var i=0; elements && i<elements.length; i++){
-		if(!elements[i].id){
-			//DKWARN(elements[i].src+": script object has no id\n");
-			continue; 
-		}
-		jsfiles += elements[i].id+",";
-	}
-	
-	// Search the Dom for all css (.css files)
-	var cssfiles = "";
-	var elements = document.getElementsByTagName("link");
-	if(elements){
-		for(var i=0; i<elements.length; i++){
-			if(!elements[i].id){
-				//DKWARN(elements[i].href+": css object has no id\n");
-				continue; 
-			}
-			cssfiles += elements[i].id+",";
-		}
-	}
-	
-	// Search the Dom for all widgets (.html id's)
-	var htmlfiles = "";
-	var divs = document.getElementsByTagName("div");
-	if(divs){
-		for(var i = divs.length; i;){
-			var div = divs[--i];
-			if(!div.id){
-				DKWARN(div+": html object has no id\n");
-				continue; 
-			}
-			if(div.id.indexOf(".html") > -1){
-				htmlfiles += div.id+",";
-			}
-		}
-	}
-	
-	return jsfiles+cssfiles+htmlfiles;
+function DK_GetObjects() {
+    // Search the Dom for all scripts (.js files)
+    var jsfiles = "";
+    var elements = document.getElementsByTagName("script");
+    for (var i = 0; elements && i < elements.length; i++) {
+        if (!elements[i].id) {
+            //DKWARN(elements[i].src+": script object has no id\n");
+            continue;
+        }
+        jsfiles += elements[i].id + ",";
+    }
+
+    // Search the Dom for all css (.css files)
+    var cssfiles = "";
+    var elements = document.getElementsByTagName("link");
+    if (elements) {
+        for (var i = 0; i < elements.length; i++) {
+            if (!elements[i].id) {
+                //DKWARN(elements[i].href+": css object has no id\n");
+                continue;
+            }
+            cssfiles += elements[i].id + ",";
+        }
+    }
+
+    // Search the Dom for all widgets (.html id's)
+    var htmlfiles = "";
+    var divs = document.getElementsByTagName("div");
+    if (divs) {
+        for (var i = divs.length; i; ) {
+            var div = divs[--i];
+            if (!div.id) {
+                DKWARN(div + ": html object has no id\n");
+                continue;
+            }
+            if (div.id.indexOf(".html") > -1) {
+                htmlfiles += div.id + ",";
+            }
+        }
+    }
+
+    return jsfiles + cssfiles + htmlfiles;
 }
 
 /*
@@ -1093,96 +1149,87 @@ function DK_GetEvents()
 */
 
 ///////////////////
-function DK_GetOS()
-{
-	var userAgent = navigator.userAgent || navigator.vendor || window.opera;
-     // Windows Phone must come first because its UA also contains "Android"
-    if (/windows phone/i.test(userAgent)){
+function DK_GetOS() {
+    var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+    // Windows Phone must come first because its UA also contains "Android"
+    if (/windows phone/i.test(userAgent)) {
         return "Windows Phone";
     }
-    if (/android/i.test(userAgent)){
+    if (/android/i.test(userAgent)) {
         return "Android";
     }
     // iOS detection from: http://stackoverflow.com/a/9039885/177710
-    if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream){
+    if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
         return "iOS";
     }
-	var os_value = navigator.platform;
-	if (navigator.userAgent.indexOf("WOW64") !== -1 || navigator.userAgent.indexOf("Win64") !== -1 ){
-		os_value = os_value.replace("32", "64");
-	}
-	os_value = os_value.replace("Intel", ""); //Mac
-	os_value = os_value.replace(" x86_64", ""); //Linux
-	return os_value;
+    var os_value = navigator.platform;
+    if (navigator.userAgent.indexOf("WOW64") !== -1 || navigator.userAgent.indexOf("Win64") !== -1) {
+        os_value = os_value.replace("32", "64");
+    }
+    os_value = os_value.replace("Intel", "");
+    //Mac
+    os_value = os_value.replace(" x86_64", "");
+    //Linux
+    return os_value;
 }
 
 ////////////////////////
-function DK_GetBrowser()
-{
-	if(navigator.userAgent.indexOf("Rml") !== -1){
+function DK_GetBrowser() {
+    if (navigator.userAgent.indexOf("Rml") !== -1) {
         return "RML";
-    }
-    else if((navigator.userAgent.indexOf("Opera") || navigator.userAgent.indexOf('OPR')) !== -1 ){
+    } else if ((navigator.userAgent.indexOf("Opera") || navigator.userAgent.indexOf('OPR')) !== -1) {
         return "OPERA";
-    }
-    else if(navigator.userAgent.indexOf("Chrome") !== -1 && navigator.userAgent.indexOf("Cef") === -1){
-		return "CHROME";
-    }
-	else if(navigator.userAgent.indexOf("Cef") !== -1){
+    } else if (navigator.userAgent.indexOf("Chrome") !== -1 && navigator.userAgent.indexOf("Cef") === -1) {
+        return "CHROME";
+    } else if (navigator.userAgent.indexOf("Cef") !== -1) {
         return "CEF";
-    }
-    else if(navigator.userAgent.indexOf("Safari") !== -1){
+    } else if (navigator.userAgent.indexOf("Safari") !== -1) {
         return "SAFARI";
-    }
-    else if(navigator.userAgent.indexOf("Firefox") !== -1){
+    } else if (navigator.userAgent.indexOf("Firefox") !== -1) {
         return "FIREFOX";
-    }
-    else if((navigator.userAgent.indexOf("MSIE") !== -1) || (!!document.documentMode === true )){ //IF IE > 10
-		return "IE";
-    }
-    else {
-       return "UNKNOWN BROWSER";
+    } else if ((navigator.userAgent.indexOf("MSIE") !== -1) || (!!document.documentMode === true)) {
+        //IF IE > 10
+        return "IE";
+    } else {
+        return "UNKNOWN BROWSER";
     }
 }
 
 /////////////////////////
-function DK_GetJSEngine()
-{
-	if(navigator.product === "Duktape"){
-		return "Duktape"
-	}
-	var v8string = 'function%20javaEnabled%28%29%20%7B%20%5Bnative%20code%5D%20%7D';
-	if('WebkitAppearance' in document.documentElement.style){  //If (probably) WebKit browser
-		if (escape(navigator.javaEnabled.toString()) === v8string){
-			return "V8";
-		}
-		else{
-			return "JSC";
-		}
-	}
-	return "UNKNOWN JAVASCRIPT ENGINE"
+function DK_GetJSEngine() {
+    if (navigator.product === "Duktape") {
+        return "Duktape"
+    }
+    var v8string = 'function%20javaEnabled%28%29%20%7B%20%5Bnative%20code%5D%20%7D';
+    if ('WebkitAppearance'in document.documentElement.style) {
+        //If (probably) WebKit browser
+        if (escape(navigator.javaEnabled.toString()) === v8string) {
+            return "V8";
+        } else {
+            return "JSC";
+        }
+    }
+    return "UNKNOWN JAVASCRIPT ENGINE"
 }
 
 ////////////////
-function DK_IE()
-{
-	var rv = 0;
-	if(navigator.appName === 'Microsoft Internet Explorer'){
-		var ua = navigator.userAgent;
-		var re  = new RegExp("MSIE ([0-9]{1,}[\.0-9]{0,})");
-		if(re.exec(ua) !== null)
-		rv = parseFloat( RegExp.$1 );
-	}
-	else if (navigator.appName === 'Netscape'){
-		var ua = navigator.userAgent;
-		var re  = new RegExp("Trident/.*rv:([0-9]{1,}[\.0-9]{0,})");
-		if(re.exec(ua) !== null)
-      rv = parseFloat( RegExp.$1 );
-	}
-	
-	// Returns the version of Internet Explorer or a 0
-	// (indicating the use of another browser).
-	return rv;
+function DK_IE() {
+    var rv = 0;
+    if (navigator.appName === 'Microsoft Internet Explorer') {
+        var ua = navigator.userAgent;
+        var re = new RegExp("MSIE ([0-9]{1,}[\.0-9]{0,})");
+        if (re.exec(ua) !== null)
+            rv = parseFloat(RegExp.$1);
+    } else if (navigator.appName === 'Netscape') {
+        var ua = navigator.userAgent;
+        var re = new RegExp("Trident/.*rv:([0-9]{1,}[\.0-9]{0,})");
+        if (re.exec(ua) !== null)
+            rv = parseFloat(RegExp.$1);
+    }
+
+    // Returns the version of Internet Explorer or a 0
+    // (indicating the use of another browser).
+    return rv;
 }
 
 /*
@@ -1553,34 +1600,29 @@ if(DK_GetBrowser() !== "CEF" && DK_GetBrowser() !== "RML"){
 }
 */
 /////////////////////////////
-function DK_FileToString(url)
-{
-	return ajaxGetUrl(url);
+function DK_FileToString(url) {
+    return ajaxGetUrl(url);
 }
 
 ///////////////////////////////
-function DK_Sleep(milliseconds)
-{
-	var start = new Date().getTime();
-	for (var i = 0; i < 1e7; i++) {
-		if((new Date().getTime() - start) > milliseconds){
-		break;
+function DK_Sleep(milliseconds) {
+    var start = new Date().getTime();
+    for (var i = 0; i < 1e7; i++) {
+        if ((new Date().getTime() - start) > milliseconds) {
+            break;
+        }
     }
-	}
 }
 
 ////////////////////////////
-function DK_ClearSelection()
-{
-	//Clear text selection
-	if(document.selection){
-		document.selection.empty();
-	}
-	else if(window.getSelection){
-		window.getSelection().removeAllRanges();
-	}
+function DK_ClearSelection() {
+    //Clear text selection
+    if (document.selection) {
+        document.selection.empty();
+    } else if (window.getSelection) {
+        window.getSelection().removeAllRanges();
+    }
 }
-
 
 //////////////////////////////////////////////////////////////////
 //  We can take a ajaxGetUrl(url) call and give back php stuff
@@ -1601,79 +1643,79 @@ function DK_ClearSelection()
 /////////////////////////////////////////////////////////////////
 
 /////////////////////////////
-function AjaxGet(url, output)
-{
-	var request = "";
-	try {
+function AjaxGet(url, output) {
+    var request = "";
+    try {
         request = new XMLHttpRequest();
-    }catch(e){}
+    } catch (e) {}
     try {
         request = new ActiveXObject("Msxml3.XMLHTTP");
-    }catch(e){}
+    } catch (e) {}
     try {
         request = new ActiveXObject("Msxml2.XMLHTTP.6.0");
-    }catch(e){}
+    } catch (e) {}
     try {
         request = new ActiveXObject("Msxml2.XMLHTTP.3.0");
-    }catch(e){}
+    } catch (e) {}
     try {
         request = new ActiveXObject("Msxml2.XMLHTTP");
-    }catch(e){}
+    } catch (e) {}
     try {
         request = new ActiveXObject("Microsoft.XMLHTTP");
-    }catch(e){}
+    } catch (e) {}
 
-	if(!request){
-		DKERROR("AJAX ERROR: Error creating request object\n");
-		return false;
-	}
+    if (!request) {
+        DKERROR("AJAX ERROR: Error creating request object\n");
+        return false;
+    }
 
-	request.onreadystatechange=function(){
-		if(request.readyState==4){
-			if(request.status==200 || request.status==0){
-				output.value = request.responseText;
-				//DKINFO("AJAX RETURN: "+output.value+"\n");
-				return true;
-			}
-			else{
-				DKERROR("AJAX ERROR: "+url+" "+request.statusText+"\n"); //report error
-				DKWARN("status: "+request.status+"\n");
-				return false;
-			}
-		}
-	}
-	
-	//try{ 
-		request.open("GET", url, false); 
-		request.send(); 
-	//}
-	//catch(err){
-	//	output.value = "";
-	//	return false;
-	//}
-	return true;
+    request.onreadystatechange = function() {
+        if (request.readyState == 4) {
+            if (request.status == 200 || request.status == 0) {
+                output.value = request.responseText;
+                //DKINFO("AJAX RETURN: "+output.value+"\n");
+                return true;
+            } else {
+                DKERROR("AJAX ERROR: " + url + " " + request.statusText + "\n");
+                //report error
+                DKWARN("status: " + request.status + "\n");
+                return false;
+            }
+        }
+    }
+
+    //try{ 
+    request.open("GET", url, false);
+    request.send();
+    //}
+    //catch(err){
+    //	output.value = "";
+    //	return false;
+    //}
+    return true;
 }
 
 ////////////////////////
-function ajaxGetUrl(url)
-{
-	var response = new Object();
-	AjaxGet(url, response);
-	
-	if(!response.value){ return "ERROR"; }
-	//php has a DKINFO() function that injects return messages with {"strings"}
-	//The response may contain {"log data"}, let's extract and print it.
-	//Also remove them and pass the remaining data on
-	//TODO - upgrade this to JSON date transfers
-	var place = 0;
-	var n = response.value.indexOf("{", place);
-	while(n !== -1){
-		place = response.value.indexOf("}");
-		var res = response.value.substring(n+1, place);
-		response.value = response.value.replace("{"+res+"}", "");
-		//DKINFO("PHPLog: "+res+"\n");
-		n = response.value.indexOf("{");
-	}
+function ajaxGetUrl(url) {
+    var response = new Object();
+    AjaxGet(url, response);
 
-	return response.value;
+    if (!response.value) {
+        return "ERROR";
+    }
+    //php has a DKINFO() function that injects return messages with {"strings"}
+    //The response may contain {"log data"}, let's extract and print it.
+    //Also remove them and pass the remaining data on
+    //TODO - upgrade this to JSON date transfers
+    var place = 0;
+    var n = response.value.indexOf("{", place);
+    while (n !== -1) {
+        place = response.value.indexOf("}");
+        var res = response.value.substring(n + 1, place);
+        response.value = response.value.replace("{" + res + "}", "");
+        //DKINFO("PHPLog: "+res+"\n");
+        n = response.value.indexOf("{");
+    }
+
+    return response.value;
 }

@@ -24,7 +24,7 @@ dk.notepadhelp.onevent = function dk_notepadhelp_onevent(event) {
         console.log("DKNotepadHelp_About");
     if (event.currentTarget === document) {
         if (byId("DKNotepad/DKNotepadHelp.html").contains(document.elementFromPoint(window.mouseX, window.mouseY)))
-            return; 
+            return;
     }
     dk.close("DKNotepad/DKNotepadHelp.js");
 }

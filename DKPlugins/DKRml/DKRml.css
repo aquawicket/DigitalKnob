@@ -1,141 +1,142 @@
 /* libRml user agent stylesheet */
-
 /* http://www.w3schools.com/css/css_syntax.asp */
 /* http://librocket.com/wiki/documentation/RCSS/Selectors */
-
-html{
-	display: block;
-	font-family: "Times New Roman";
-	font-size: 130%;
-	overflow: auto;
-	/* overflow-x: scroll; */
-	/* overflow-y: scroll; */
-	height: 100%;
-	width: 100%;
-	top:0px;
-	left:0px;
-}
-head{
-	display:none;
-}
-body{
-	font-family: "Times New Roman";
-	/*font-size: 13em;*/
-	color: black;
-	margin: 8px;
-	display: block;
-}
-style{
-	display:none;
+html {
+    display: block;
+    font-family: "Times New Roman";
+    font-size: 130%;
+    overflow: auto;
+    /* overflow-x: scroll; */
+    /* overflow-y: scroll; */
+    height: 100%;
+    width: 100%;
+    top: 0px;
+    left: 0px;
 }
 
-title{
-	display:none;
+head {
+    display: none;
 }
-option, div, tr{
-	display:block;
+
+body {
+    font-family: "Times New Roman";
+    /*font-size: 13em;*/
+    color: black;
+    margin: 8px;
+    display: block;
 }
-th{
-	font-weight: bold;
+
+style {
+    display: none;
 }
-strong, b{
-	font-weight: bold;
+
+title {
+    display: none;
 }
-i, cite, em, var, address{
-	font-style: italic;
+
+option, div, tr {
+    display: block;
 }
-p{
-	/* font-family: "Times New Roman"; */
-	display:block;
-	margin-top: 1em;
-	margin-bottom: 1em;
-	/* margin-block-start: 1em; */
+
+th {
+    font-weight: bold;
+}
+
+strong, b {
+    font-weight: bold;
+}
+
+i, cite, em, var, address {
+    font-style: italic;
+}
+
+p {
+    /* font-family: "Times New Roman"; */
+    display: block;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    /* margin-block-start: 1em; */
     /* margin-block-end: 1em; */
     /* margin-inline-start: 0px; */
     /* margin-inline-end: 0px; */
 }
-h1{
-	display:block;
-	font-size: 2em;
-	margin-top: 0.67em;
-	margin-bottom: 0.67em;
-	/* margin-block-start: 0.67em; */
+
+h1 {
+    display: block;
+    font-size: 2em;
+    margin-top: 0.67em;
+    margin-bottom: 0.67em;
+    /* margin-block-start: 0.67em; */
     /* margin-block-end: 0.67em; */
     /* margin-inline-start: 0px; */
     /* margin-inline-end: 0px; */
-	font-weight: bold;
+    font-weight: bold;
 }
-h2{
-	display:block;
-	font-size: 1.5em;
-	margin-top: 0.83em;
-	margin-bottom: 0.83em;
-	/* margin-block-start: 0.83em; */
+
+h2 {
+    display: block;
+    font-size: 1.5em;
+    margin-top: 0.83em;
+    margin-bottom: 0.83em;
+    /* margin-block-start: 0.83em; */
     /* margin-block-end: 0.83em; */
     /* margin-inline-start: 0px; */
     /* margin-inline-end: 0px; */
-	font-weight: bold;
+    font-weight: bold;
 }
-h3{
-	display:block;
-	font-size: 1.17em;
-	margin-top: 1em;
-	margin-bottom: 1em;
-	/* margin-block-start: 1em; */
+
+h3 {
+    display: block;
+    font-size: 1.17em;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    /* margin-block-start: 1em; */
     /* margin-block-end: 1em; */
     /* margin-inline-start: 0px; */
     /* margin-inline-end: 0px; */
-	font-weight: bold;
+    font-weight: bold;
 }
-h4{
-	display:block;
-	margin-top: 1.33em;
-	margin-bottom: 1.33em;
-	/* margin-block-start: 1.33em; */
+
+h4 {
+    display: block;
+    margin-top: 1.33em;
+    margin-bottom: 1.33em;
+    /* margin-block-start: 1.33em; */
     /* margin-block-end: 1.33em; */
     /* margin-inline-start: 0px; */
     /* margin-inline-end: 0px; */
-	font-weight: bold;
+    font-weight: bold;
 }
-h5{
-	display:block;
-	font-size: 0.83em;
-	margin-top: 1.67em;
-	margin-bottom: 1.67em;
-	/* margin-block-start: 1.67em; */
+
+h5 {
+    display: block;
+    font-size: 0.83em;
+    margin-top: 1.67em;
+    margin-bottom: 1.67em;
+    /* margin-block-start: 1.67em; */
     /* margin-block-end: 1.67em; */
     /* margin-inline-start: 0px; */
     /* margin-inline-end: 0px; */
-	font-weight: bold;
+    font-weight: bold;
 }
-h6{
-	display:block;
-	font-size: 0.67em;
-	margin-top: 2.33em;
-	margin-bottom: 2.33em;
-	/* margin-block-start: 2.33em; */
+
+h6 {
+    display: block;
+    font-size: 0.67em;
+    margin-top: 2.33em;
+    margin-bottom: 2.33em;
+    /* margin-block-start: 2.33em; */
     /* margin-block-end: 2.33em; */
     /* margin-inline-start: 0px; */
     /* margin-inline-end: 0px; */
-	font-weight: bold;
+    font-weight: bold;
 }
-ol{
-	display: block;
+
+ol {
+    display: block;
     /* list-style-type: decimal; */
-	margin-top: 1em; 
-	margin-bottom: 1em;    
-	/* margin-block-start: 1em; */
-    /* margin-block-end: 1em; */
-    /* margin-inline-start: 0px; */
-    /* margin-inline-end: 0px; */
-	padding-bottom: 40px;
-    /* padding-inline-start: 40px; */
-}
-ul{
-	display: block;
-    /* list-style-type: disc; */
-	margin-top: 1em;  
-	margin-bottom: 1em;  
+    margin-top: 1em;
+    margin-bottom: 1em;
     /* margin-block-start: 1em; */
     /* margin-block-end: 1em; */
     /* margin-inline-start: 0px; */
@@ -143,365 +144,415 @@ ul{
     padding-bottom: 40px;
     /* padding-inline-start: 40px; */
 }
-li{
-	/* display: list-item; */
-    /* text-align: -webkit-match-parent; */
+
+ul {
+    display: block;
+    /* list-style-type: disc; */
+    margin-top: 1em;
+    margin-bottom: 1em;
+    /* margin-block-start: 1em; */
+    /* margin-block-end: 1em; */
+    /* margin-inline-start: 0px; */
+    /* margin-inline-end: 0px; */
+    padding-bottom: 40px;
+    /* padding-inline-start: 40px; */
 }
 
+li {
+    /* display: list-item; */
+    /* text-align: -webkit-match-parent; */
+}
 
 /**********************************/
 /********  RmlUi elements  ********/
 /**********************************/
-dataselect,
-dataselect selectvalue,
-dataselect selectbox option{
-	background-color:white;
-	color:black;
+dataselect, dataselect selectvalue, dataselect selectbox option {
+    background-color: white;
+    color: black;
 }
-
 
 /* Buttons */
-@spritesheet buttons{
-	src: buttons.png;
-	button-left: 0px 0px 1px 21px;
-	button-center: 1px 0px 19px 21px;
-	button-right: 20px 0px 1px 21px;
-	button-hover-left: 21px 0px 1px 21px;
-	button-hover-center: 22px 0px 19px 21px;
-	button-hover-right: 41px 0px 1px 21px;
-	button-active-left: 42px 0px 1px 21px;
-	button-active-center: 43px 0px 19px 21px;
-	button-active-right: 62px 0px 1px 21px;
-}
-button{
-	border-width: 2px;
-	color: black;
-	display: inline-block;
-	font-family: "Arial";
-	font-size: 13.3333px;
-	/* letter-spacing: normal; */
-	margin: 0em;
-	padding: 1px 6px;
-	text-align: center;
-	/* text-rendering: auto; */
-	width: 50px;
-	/* word-spacing: normal; */
-	decorator: tiled-horizontal(button-left, button-center, button-right);
-}
-button:hover{
-	decorator: tiled-horizontal(button-hover-left, button-hover-center, button-hover-right);
-}
-button:active{
-	decorator: tiled-horizontal(button-active-left, button-active-center, button-active-right);
-}
-input.button{
-	color: black;
-	width: 50px;
-	text-align: center;
-	padding: 1px 6px;
-	border-width: 2px;
-	decorator: tiled-horizontal(button-left, button-center, button-right);
-}
-input.button:hover{
-	decorator: tiled-horizontal(button-hover-left, button-hover-center, button-hover-right);
-}
-input.button:active{
-	decorator: tiled-horizontal(button-active-left, button-active-center, button-active-right);
+@spritesheet buttons {
+    src: buttons.png;
+    button-left: 0px 0px 1px 21px;
+    button-center: 1px 0px 19px 21px;
+    button-right: 20px 0px 1px 21px;
+    button-hover-left: 21px 0px 1px 21px;
+    button-hover-center: 22px 0px 19px 21px;
+    button-hover-right: 41px 0px 1px 21px;
+    button-active-left: 42px 0px 1px 21px;
+    button-active-center: 43px 0px 19px 21px;
+    button-active-right: 62px 0px 1px 21px;
 }
 
+button {
+    border-width: 2px;
+    color: black;
+    display: inline-block;
+    font-family: "Arial";
+    font-size: 13.3333px;
+    /* letter-spacing: normal; */
+    margin: 0em;
+    padding: 1px 6px;
+    text-align: center;
+    /* text-rendering: auto; */
+    width: 50px;
+    /* word-spacing: normal; */
+    decorator: tiled-horizontal(button-left, button-center, button-right);
+}
+
+button:hover {
+    decorator: tiled-horizontal(button-hover-left, button-hover-center, button-hover-right);
+}
+
+button:active {
+    decorator: tiled-horizontal(button-active-left, button-active-center, button-active-right);
+}
+
+input.button {
+    color: black;
+    width: 50px;
+    text-align: center;
+    padding: 1px 6px;
+    border-width: 2px;
+    decorator: tiled-horizontal(button-left, button-center, button-right);
+}
+
+input.button:hover {
+    decorator: tiled-horizontal(button-hover-left, button-hover-center, button-hover-right);
+}
+
+input.button:active {
+    decorator: tiled-horizontal(button-active-left, button-active-center, button-active-right);
+}
 
 /* Checkboxes */
-@spritesheet checkboxs{
-	src: checkboxes.png;
-	checkbox: 0px 0px 12px 12px;
-	checkbox-active: 12px 0px 12px 12px;
-	checkbox-checked: 24px 0px 12px 12px;
-}
-input.checkbox{
-	width:12px;
-	height:12px;
-	decorator: image(checkbox);
-}
-input.checkbox:active{
-	decorator: image(checkbox-active);
-}
-input.checkbox:checked{
-	decorator: image(checkbox-checked);
+@spritesheet checkboxs {
+    src: checkboxes.png;
+    checkbox: 0px 0px 12px 12px;
+    checkbox-active: 12px 0px 12px 12px;
+    checkbox-checked: 24px 0px 12px 12px;
 }
 
+input.checkbox {
+    width: 12px;
+    height: 12px;
+    decorator: image(checkbox);
+}
+
+input.checkbox:active {
+    decorator: image(checkbox-active);
+}
+
+input.checkbox:checked {
+    decorator: image(checkbox-checked);
+}
 
 /* Passwords */
-input.password{
-	width: 100px;
-	height: 22px;
-	background-color:white;
-	color:black;
-	/*border-style: solid;*/
+input.password {
+    width: 100px;
+    height: 22px;
+    background-color: white;
+    color: black;
+    /*border-style: solid;*/
     border-width: 1px;
-	border-color: rgb(167,167,167);
-}
-input.password:focus{
-	border-color: rgb(123,157,212);
+    border-color: rgb(167,167,167);
 }
 
+input.password:focus {
+    border-color: rgb(123,157,212);
+}
 
 /* Radio Buttons */
-@spritesheet radios{
-	src: radios.png;
-	radio: 0px 0px 12px 12px;
-	radio-hover: 12px 0px 12px 12px;
-	radio-checked: 24px 0px 12px 12px;
-}
-input.radio{
-	width:12px;
-	height:12px;
-	decorator: image(radio);
+@spritesheet radios {
+    src: radios.png;
+    radio: 0px 0px 12px 12px;
+    radio-hover: 12px 0px 12px 12px;
+    radio-checked: 24px 0px 12px 12px;
 }
 
-input.radio:hover{
-	decorator: image(radio-hover);
+input.radio {
+    width: 12px;
+    height: 12px;
+    decorator: image(radio);
 }
 
-input.radio:checked{
-	decorator: image(radio-checked);
+input.radio:hover {
+    decorator: image(radio-hover);
 }
 
+input.radio:checked {
+    decorator: image(radio-checked);
+}
 
 /* Ranges */
-@spritesheet rangetrack{
-	src: rangetrack.png;
-	rangetrack: 0px 0px 4px 4px;
-}
-@spritesheet rangebar{
-	src: rangebar.png;
-	rangebar: 0px 0px 11px 21px;
-}
-input.range{
-	width:150px;
-	/*height:150px;*/
-}
-input.range slidertrack{
-	height:4px;
-	width:4px;
-	margin-top:9px;
-	decorator: image(rangetrack);
-}
-input.range sliderbar{
-	width:11px;
-	height:21px;
-	decorator: image(rangebar);
+@spritesheet rangetrack {
+    src: rangetrack.png;
+    rangetrack: 0px 0px 4px 4px;
 }
 
+@spritesheet rangebar {
+    src: rangebar.png;
+    rangebar: 0px 0px 11px 21px;
+}
+
+input.range {
+    width: 150px;
+    /*height:150px;*/
+}
+
+input.range slidertrack {
+    height: 4px;
+    width: 4px;
+    margin-top: 9px;
+    decorator: image(rangetrack);
+}
+
+input.range sliderbar {
+    width: 11px;
+    height: 21px;
+    decorator: image(rangebar);
+}
 
 /* Resets */
-@spritesheet resets{
-	src: buttons.png;
-	reset-left: 0px 0px 1px 21px;
-	reset-center: 1px 0px 19px 21px;
-	reset-right: 20px 0px 1px 21px;
-	reset-hover-left: 21px 0px 1px 21px;
-	reset-hover-center: 22px 0px 19px 21px;
-	reset-hover-right: 41px 0px 1px 21px;
-	reset-active-left: 42px 0px 1px 21px;
-	reset-active-center: 43px 0px 19px 21px;
-	reset-active-right: 62px 0px 1px 21px;
-}
-input.reset{
-	color: black;
-	width: 50px;
-	text-align: center;
-	padding: 1px 6px;
-	border-width: 2px;
-	decorator: tiled-horizontal(reset-left, reset-center, reset-right);
-}
-input.reset:hover{
-	decorator: tiled-horizontal(reset-hover-left, reset-hover-center, reset-hover-right);
-}
-input.reset:active{
-	decorator: tiled-horizontal(reset-active-left, reset-active-center, reset-active-right);
+@spritesheet resets {
+    src: buttons.png;
+    reset-left: 0px 0px 1px 21px;
+    reset-center: 1px 0px 19px 21px;
+    reset-right: 20px 0px 1px 21px;
+    reset-hover-left: 21px 0px 1px 21px;
+    reset-hover-center: 22px 0px 19px 21px;
+    reset-hover-right: 41px 0px 1px 21px;
+    reset-active-left: 42px 0px 1px 21px;
+    reset-active-center: 43px 0px 19px 21px;
+    reset-active-right: 62px 0px 1px 21px;
 }
 
+input.reset {
+    color: black;
+    width: 50px;
+    text-align: center;
+    padding: 1px 6px;
+    border-width: 2px;
+    decorator: tiled-horizontal(reset-left, reset-center, reset-right);
+}
+
+input.reset:hover {
+    decorator: tiled-horizontal(reset-hover-left, reset-hover-center, reset-hover-right);
+}
+
+input.reset:active {
+    decorator: tiled-horizontal(reset-active-left, reset-active-center, reset-active-right);
+}
 
 /* Text Inputs */
-input.text{
-	width: 100px;
-	height: 21px;
-	min-height: 19px;
-	background-color:white;
-	color:black;
+input.text {
+    width: 100px;
+    height: 21px;
+    min-height: 19px;
+    background-color: white;
+    color: black;
     border-width: 1px;
-	border-color: rgb(167,167,167);
-}
-input.text:focus{
-	border-color: rgb(123,157,212);
+    border-color: rgb(167,167,167);
 }
 
+input.text:focus {
+    border-color: rgb(123,157,212);
+}
 
 /* Textareas */
-textarea{
-	width: 180px;
-	height: 50px;
-	background-color:white;
-	color:black;
-	/*border-style: solid;*/
+textarea {
+    width: 180px;
+    height: 50px;
+    background-color: white;
+    color: black;
+    /*border-style: solid;*/
     border-width: 1px;
-	border-color: rgb(167,167,167);
-	/*resize: none;*/
-}
-textarea:focus{
-	border-color: rgb(123,157,212);
+    border-color: rgb(167,167,167);
+    /*resize: none;*/
 }
 
+textarea:focus {
+    border-color: rgb(123,157,212);
+}
 
 /* Selects */
-@spritesheet selects{
-	src: select.png;
-	selectarrow: 0px 0px 6px 6px;
-}
-select{
-	background-color:white;
-	color:black;
-	width:80px;
-	height:20px;
-	/*border-style: solid;*/
-    border-width: 1px;
-	border-color: rgb(167,167,167);
-}
-select:hover{
-	border-color: rgb(120,120,120);
-}
-select:focus{
-	border-color: rgb(123,157,212);
-}
-select selectvalue{
-	padding-left: 3px;
-}
-select selectarrow{
-	width: 6px;
-	height: 6px;
-	margin-top: 6px;
-	margin-right: 6px;
-	decorator: image(selectarrow);
-}
-select selectbox{
-	/*border-style: solid;*/
-    border-left-width: 1px;
-	border-right-width: 1px;
-	border-bottom-width: 1px;
-	border-color: rgb(123,157,212);
-}
-select selectbox option{
-	padding-left: 3px;
-	background-color:white;
-}
-select selectbox option:hover{
-	background-color: rgb(123,157,212);
-	color:white;
+@spritesheet selects {
+    src: select.png;
+    selectarrow: 0px 0px 6px 6px;
 }
 
+select {
+    background-color: white;
+    color: black;
+    width: 80px;
+    height: 20px;
+    /*border-style: solid;*/
+    border-width: 1px;
+    border-color: rgb(167,167,167);
+}
+
+select:hover {
+    border-color: rgb(120,120,120);
+}
+
+select:focus {
+    border-color: rgb(123,157,212);
+}
+
+select selectvalue {
+    padding-left: 3px;
+}
+
+select selectarrow {
+    width: 6px;
+    height: 6px;
+    margin-top: 6px;
+    margin-right: 6px;
+    decorator: image(selectarrow);
+}
+
+select selectbox {
+    /*border-style: solid;*/
+    border-left-width: 1px;
+    border-right-width: 1px;
+    border-bottom-width: 1px;
+    border-color: rgb(123,157,212);
+}
+
+select selectbox option {
+    padding-left: 3px;
+    background-color: white;
+}
+
+select selectbox option:hover {
+    background-color: rgb(123,157,212);
+    color: white;
+}
 
 /* Scrollbars */
-@spritesheet scrollbars{
-	src: scrollbars.png;
-	slidertrack: 51px 52px 17px 17px;
-	sliderbar: 0px 17px 17px 17px;
-	sliderbar-hover: 34px 17px 17px 17px;
-	sliderbar-active: 51px 17px 17px 17px;
-	sliderarrowdec: 17px 0px 17px 17px;
-	sliderarrowdec-hover: 34px 0px 17px 17px;
-	sliderarrowdec-active: 51px 0px 17px 17px;
-	sliderarrowinc: 17px 34px 17px 17px;
-	sliderarrowinc-hover: 34px 34px 17px 17px;
-	sliderarrowinc-active: 51px 34px 17px 17px;
-	
-	slidertrack2: 51px 52px 17px 17px;
-	sliderbar2: 17px 51px 17px 17px;
-	sliderbar-hover2: 17px 85px 17px 17px;
-	sliderbar-active2: 17px 102px 17px 17px;
-	sliderarrowdec2: 0px 68px 17px 17px;
-	sliderarrowdec-hover2: 0px 85px 17px 17px;
-	sliderarrowdec-active2: 0px 102px 17px 17px;
-	sliderarrowinc2: 34px 68px 17px 17px;
-	sliderarrowinc-hover2: 34px 85px 17px 17px;
-	sliderarrowinc-active2: 34px 102px 17px 17px;
-}
-scrollbarvertical{ 
-	width: 17px;
-}
-scrollbarvertical slidertrack{
-	decorator: image(slidertrack);
-}
-scrollbarvertical sliderbar{
-	min-height: 17px;
-	decorator: image(sliderbar);
-}
-scrollbarvertical sliderbar:hover{
-	decorator: image(sliderbar-hover);
-}
-scrollbarvertical sliderbar:active{
-	decorator: image(sliderbar-active);
-}
-scrollbarvertical sliderarrowdec{
-	height: 17px;
-	width: 17px;
-	decorator: image(sliderarrowdec);
-}
-scrollbarvertical sliderarrowdec:hover{
-	decorator: image(sliderarrowdec-hover);
-}
-scrollbarvertical sliderarrowdec:active{
-	decorator: image(sliderarrowdec-active);
-}
-scrollbarvertical sliderarrowinc{
-	height: 17px;
-	width: 17px;
-	decorator: image(sliderarrowinc);
-}
-scrollbarvertical sliderarrowinc:hover{
-	decorator: image(sliderarrowinc-hover);
-}
-scrollbarvertical sliderarrowinc:active{
-	decorator: image(sliderarrowinc-active);
-}
-scrollbarhorizontal{
-	width: 17px;
-}
-scrollbarhorizontal slidertrack{
-	decorator: image(slidertrack2);
-}
-scrollbarhorizontal sliderbar{
-	min-height: 17px;
-	decorator: image(sliderbar2);
-}
-scrollbarhorizontal sliderbar:hover{
-	decorator: image(sliderbar-hover2);
-}
-scrollbarhorizontal sliderbar:active{
-	decorator: image(sliderbar-active2);
-}
-scrollbarhorizontal sliderarrowdec{
-	height: 17px;
-	width: 17px;
-	decorator: image(sliderarrowdec2);
-}
-scrollbarhorizontal sliderarrowdec:hover{
-	decorator: image(sliderarrowdec-hover2);
-}
-scrollbarhorizontal sliderarrowdec:active{
-	decorator: image(sliderarrowdec-active2);
-}
-scrollbarhorizontal sliderarrowinc{
-	height: 17px;
-	width: 17px;
-	decorator: image(sliderarrowinc2);
-}
-scrollbarhorizontal sliderarrowinc:hover{
-	decorator: image(sliderarrowinc-hover2);
-}
-scrollbarhorizontal sliderarrowinc:active{
-	decorator: image(sliderarrowinc-active2);
+@spritesheet scrollbars {
+    src: scrollbars.png;
+    slidertrack: 51px 52px 17px 17px;
+    sliderbar: 0px 17px 17px 17px;
+    sliderbar-hover: 34px 17px 17px 17px;
+    sliderbar-active: 51px 17px 17px 17px;
+    sliderarrowdec: 17px 0px 17px 17px;
+    sliderarrowdec-hover: 34px 0px 17px 17px;
+    sliderarrowdec-active: 51px 0px 17px 17px;
+    sliderarrowinc: 17px 34px 17px 17px;
+    sliderarrowinc-hover: 34px 34px 17px 17px;
+    sliderarrowinc-active: 51px 34px 17px 17px;
+    slidertrack2: 51px 52px 17px 17px;
+    sliderbar2: 17px 51px 17px 17px;
+    sliderbar-hover2: 17px 85px 17px 17px;
+    sliderbar-active2: 17px 102px 17px 17px;
+    sliderarrowdec2: 0px 68px 17px 17px;
+    sliderarrowdec-hover2: 0px 85px 17px 17px;
+    sliderarrowdec-active2: 0px 102px 17px 17px;
+    sliderarrowinc2: 34px 68px 17px 17px;
+    sliderarrowinc-hover2: 34px 85px 17px 17px;
+    sliderarrowinc-active2: 34px 102px 17px 17px;
 }
 
-scrollbarcorner{
-	background-color: rgb(220,220,220);
+scrollbarvertical {
+    width: 17px;
+}
+
+scrollbarvertical slidertrack {
+    decorator: image(slidertrack);
+}
+
+scrollbarvertical sliderbar {
+    min-height: 17px;
+    decorator: image(sliderbar);
+}
+
+scrollbarvertical sliderbar:hover {
+    decorator: image(sliderbar-hover);
+}
+
+scrollbarvertical sliderbar:active {
+    decorator: image(sliderbar-active);
+}
+
+scrollbarvertical sliderarrowdec {
+    height: 17px;
+    width: 17px;
+    decorator: image(sliderarrowdec);
+}
+
+scrollbarvertical sliderarrowdec:hover {
+    decorator: image(sliderarrowdec-hover);
+}
+
+scrollbarvertical sliderarrowdec:active {
+    decorator: image(sliderarrowdec-active);
+}
+
+scrollbarvertical sliderarrowinc {
+    height: 17px;
+    width: 17px;
+    decorator: image(sliderarrowinc);
+}
+
+scrollbarvertical sliderarrowinc:hover {
+    decorator: image(sliderarrowinc-hover);
+}
+
+scrollbarvertical sliderarrowinc:active {
+    decorator: image(sliderarrowinc-active);
+}
+
+scrollbarhorizontal {
+    width: 17px;
+}
+
+scrollbarhorizontal slidertrack {
+    decorator: image(slidertrack2);
+}
+
+scrollbarhorizontal sliderbar {
+    min-height: 17px;
+    decorator: image(sliderbar2);
+}
+
+scrollbarhorizontal sliderbar:hover {
+    decorator: image(sliderbar-hover2);
+}
+
+scrollbarhorizontal sliderbar:active {
+    decorator: image(sliderbar-active2);
+}
+
+scrollbarhorizontal sliderarrowdec {
+    height: 17px;
+    width: 17px;
+    decorator: image(sliderarrowdec2);
+}
+
+scrollbarhorizontal sliderarrowdec:hover {
+    decorator: image(sliderarrowdec-hover2);
+}
+
+scrollbarhorizontal sliderarrowdec:active {
+    decorator: image(sliderarrowdec-active2);
+}
+
+scrollbarhorizontal sliderarrowinc {
+    height: 17px;
+    width: 17px;
+    decorator: image(sliderarrowinc2);
+}
+
+scrollbarhorizontal sliderarrowinc:hover {
+    decorator: image(sliderarrowinc-hover2);
+}
+
+scrollbarhorizontal sliderarrowinc:active {
+    decorator: image(sliderarrowinc-active2);
+}
+
+scrollbarcorner {
+    background-color: rgb(220,220,220);
 }
