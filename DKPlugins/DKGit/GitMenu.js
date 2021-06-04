@@ -1,6 +1,5 @@
 var GIT = "";
 
-///////////////////////
 function GitMenu_init() {
     dk.create("DKBuild/DKBuild.js", function() {});
     dk.create("DKThreadPool");
@@ -31,7 +30,6 @@ function GitMenu_init() {
     });
 }
 
-//////////////////////
 function GitMenu_end() {
     document.removeEventListener("mousedown", GitMenu_onevent);
     byId("Git Update").removeEventListener("click", GitMenu_onevent);
@@ -39,7 +37,6 @@ function GitMenu_end() {
     dk.close("DKGit/GitMenu.html");
 }
 
-///////////////////////////////
 function GitMenu_OnEvent(event) {
     if (event.currentTarget.id === "Git Update") {
         CPP_DKThread_DKQueue("GitUpdate", "GitMenu_GitUpdate();");
@@ -56,7 +53,6 @@ function GitMenu_OnEvent(event) {
     dk.close("DKGit/GitMenu.js");
 }
 
-//////////////////////////////
 function GitMenu_ValidateGit() {
     if (DK_GetBrowser() !== "RML") {
         return;
@@ -73,7 +69,6 @@ function GitMenu_ValidateGit() {
     }
 }
 
-/////////////////////////////
 function GitMenu_InstallGit() {
     if (DK_GetBrowser() !== "RML") {
         return;
@@ -97,7 +92,6 @@ function GitMenu_InstallGit() {
     }
 }
 
-////////////////////////////
 function GitMenu_GitUpdate() {
     if (DK_GetBrowser() !== "CEF" && DK_GetBrowser() !== "RML") {
         return;
@@ -138,7 +132,6 @@ function GitMenu_GitUpdate() {
     }
 }
 
-////////////////////////////
 function GitMenu_GitCommit() {
     if (DK_GetBrowser() !== "CEF" && DK_GetBrowser() !== "RML") {
         return;
