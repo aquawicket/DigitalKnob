@@ -7,11 +7,11 @@ function DKValidate(identifier) {
 dk.validate = new DKValidate("DKValidate");
 
 
-//dk.validate.init = function dk_validate_init(){}
-//dk.validate.end = function dk_validate_end(){}
+//DKValidate.prototype.init = function DKValidate_init(){}
+//DKValidate.prototype.end = function DKValidate_end(){}
 
 //https://stackoverflow.com/a/9337047/688352
-dk.validate.isValidVarName = function dk_validate_isValidVarName(var_name) {
+DKValidate.prototype.isValidVarName = function DKValidate_isValidVarName(var_name) {
     try {
         Function('var ' + var_name);
     } catch (e) {
@@ -20,8 +20,8 @@ dk.validate.isValidVarName = function dk_validate_isValidVarName(var_name) {
     return true;
 }
 
-dk.validate.isValidCallStack = function dk_validate_isValidCallStack(stack) {//TODO
+DKValidate.prototype.isValidCallStack = function DKValidate_isValidCallStack(stack) {//TODO
 }
 
-dk.validate.isValidEmail = function dk_validate_isValidEmail(email) {//TODO
+DKValidate.prototype.isValidEmail = function DKValidate_isValidEmail(email) {//TODO
 }

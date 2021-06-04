@@ -6,7 +6,7 @@ function DKGui(identifier) {
 }
 dk.gui = new DKGui("DKGui");
 
-dk.gui.createElement = function dk_gui_createElement(parent, tag, id, top, bottom, left, right, width, height, onclick) {
+DKGui.prototype.createElement = function DKGui_createElement(parent, tag, id, top, bottom, left, right, width, height, onclick) {
     var ele = document.createElement(tag);
     ele.id = dk.getAvailableId(id);
     parent.appendChild(ele);
@@ -14,14 +14,14 @@ dk.gui.createElement = function dk_gui_createElement(parent, tag, id, top, botto
     return ele;
 }
 
-dk.gui.createElementBefore = function dk_gui_createElementBefore(parent, tag, id) {
+DKGui.prototype.createElementBefore = function DKGui_createElementBefore(parent, tag, id) {
     var ele = document.createElement(tag);
     ele.id = dk.getAvailableId(id);
     parent.parentNode.insertBefore(ele, parent);
     return ele;
 }
 
-dk.gui.createTag = function dk_gui_createTag(tag, parent, props, callback) {
+DKGui.prototype.createTag = function DKGui_createTag(tag, parent, props, callback) {
     !props && (props = {});
     const style = props.style;
     style && delete props.style;
@@ -34,7 +34,7 @@ dk.gui.createTag = function dk_gui_createTag(tag, parent, props, callback) {
     return element;
 }
 
-dk.gui.getLeftPx = function dk_gui_getLeftPx(element) {
+DKGui.prototype.getLeftPx = function DKGui_getLeftPx(element) {
     if (!element || !element.style.left)
         return error("element.style.left invalid");
     if (element.style.left.indexOf("%") > -1)
@@ -42,7 +42,7 @@ dk.gui.getLeftPx = function dk_gui_getLeftPx(element) {
     return parseInt(element.style.left);
 }
 
-dk.gui.getTopPx = function dk_gui_getTopPx(element) {
+DKGui.prototype.getTopPx = function DKGui_getTopPx(element) {
     if (!element || !element.style.top)
         return error("element.style.top invalid");
     if (element.style.top.indexOf("%") > -1)
@@ -50,7 +50,7 @@ dk.gui.getTopPx = function dk_gui_getTopPx(element) {
     return parseInt(element.style.top);
 }
 
-dk.gui.getWidthPx = function dk_gui_getWidthPx(element) {
+DKGui.prototype.getWidthPx = function DKGui_getWidthPx(element) {
     if (!element || !element.style.width)
         return error("element.style.width invalid");
     if (element.style.width.indexOf("%") > -1)
@@ -58,7 +58,7 @@ dk.gui.getWidthPx = function dk_gui_getWidthPx(element) {
     return parseInt(element.style.width);
 }
 
-dk.gui.getHeightPx = function dk_gui_getHeightPx(element) {
+DKGui.prototype.getHeightPx = function DKGui_getHeightPx(element) {
     if (!element || !element.style.height)
         return error("element.style.height invalid");
     if (element.style.height.includes("%"))
@@ -66,7 +66,7 @@ dk.gui.getHeightPx = function dk_gui_getHeightPx(element) {
     return parseInt(element.style.height);
 }
 
-dk.gui.pos = function dk_gui_pos(position) {
+DKGui.prototype.pos = function DKGui_pos(position) {
     if (position === '')
         return position;
     if (typeof position === 'string') {
@@ -96,7 +96,7 @@ dk.gui.pos = function dk_gui_pos(position) {
     return error("Pos() ERROR");
 }
 
-dk.gui.createButton = function dk_gui_createButton(parent, id, top, bottom, left, right, width, height, onclick) {
+DKGui.prototype.createButton = function DKGui_createButton(parent, id, top, bottom, left, right, width, height, onclick) {
     const button = document.createElement("button");
     button.setAttribute("dk_gui", "button");
     id && (button.id = id);
@@ -115,7 +115,7 @@ dk.gui.createButton = function dk_gui_createButton(parent, id, top, bottom, left
     return button;
 }
 
-dk.gui.createImageButton = function dk_gui_createImageButton(parent, id, src, top, bottom, left, right, width, height, onclick) {
+DKGui.prototype.createImageButton = function DKGui_createImageButton(parent, id, src, top, bottom, left, right, width, height, onclick) {
     const button = document.createElement("img");
     button.setAttribute("dk_gui", "img_button");
     button.src = src;
@@ -134,14 +134,14 @@ dk.gui.createImageButton = function dk_gui_createImageButton(parent, id, src, to
     return button;
 }
 
-dk.gui.createImage = function dk_gui_createImage(parent, id, src, top, bottom, left, right, width, height) {
+DKGui.prototype.createImage = function DKGui_createImage(parent, id, src, top, bottom, left, right, width, height) {
     return dk.gui.createImageButton(parent, id, src, top, bottom, left, right, width, height);
 }
 
 //TODO  //https://github.com/juggle/resize-observer
 //TODO:  make this a CustomEvent
 //https://stackoverflow.com/a/48718956/688352
-dk.gui.addResizeHandler = function dk_gui_addResizeHandler(element, callback) {
+DKGui.prototype.addResizeHandler = function DKGui_addResizeHandler(element, callback) {
     var observer = new MutationObserver(function(mutations) {
         callback && callback();
     }
@@ -151,7 +151,7 @@ dk.gui.addResizeHandler = function dk_gui_addResizeHandler(element, callback) {
     });
 }
 
-dk.gui.randomRGB = function dk_gui_randomRGB(){
+DKGui.prototype.randomRGB = function DKGui_randomRGB(){
     var o = Math.round, r = Math.random, s = 255;
     return 'rgb(' + o(r()*s) + ',' + o(r()*s) + ',' + o(r()*s) + ')';
 }

@@ -6,11 +6,11 @@ function DKDevToolsButton(identifier) {
 }
 dk.devtoolsbutton = new DKDevToolsButton("DKDevToolsButton");
 
-dk.devtoolsbutton.init = function dk_devtoolsbutton_init() {
+DKDevToolsButton.prototype.init = function DKDevToolsButton_init() {
     dk.preloadImage("DKDevTools/developer.png");
 }
 
-dk.devtoolsbutton.create = function dk_devtools_create() {
+DKDevToolsButton.prototype.create = function DKDevToolsButton_create() {
     const elem = dk.gui.createImageButton(document.body, "DKDevToolsButton", "DKDevTools/developer.png", "25rem", "", "", "2rem", "20rem", "20rem", dk.devtoolsbutton.show);
     elem.style.zIndex = "99";
     const dragDiv = document.createElement("div");
@@ -32,7 +32,7 @@ dk.devtoolsbutton.create = function dk_devtools_create() {
     dk.drag.addHandle(dragDiv, elem);
 }
 
-dk.devtoolsbutton.show = function dk_devtools_show() {
+DKDevToolsButton.prototype.show = function DKDevToolsButton_show() {
     dk.create("DKDevTools/DKDevTools.js", function dk_create_callback() {
         dk.devtools.create();
     });

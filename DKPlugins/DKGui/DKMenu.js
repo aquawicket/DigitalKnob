@@ -6,15 +6,15 @@ function DKMenu(identifier) {
 }
 dk.menu = new DKMenu("DKMenu");
 
-dk.menu.init = function dk_menu_init() {}
+DKMenu.prototype.init = function DKMenu_init() {}
 
-dk.menu.end = function dk_menu_end() {}
+DKMenu.prototype.end = function DKMenu_end() {}
 
-dk.menu.init = function dk_menu_init(){
+DKMenu.prototype.init = function DKMenu_init(){
     dk.create("DKGui/DKMenu.css");
 }
 
-dk.menu.createInstance = function dk_menu_createInstance(parent) {
+DKMenu.prototype.createInstance = function DKMenu_createInstance(parent) {
 
     let dkmenu = document.createElement("div");
     dkmenu.setAttribute("dk_menu","menu");
@@ -51,7 +51,7 @@ dk.menu.createInstance = function dk_menu_createInstance(parent) {
     return dkmenu;
 }
 
-dk.menu.addItem = function dk_menu_addItem(menu, label, callback) {
+DKMenu.prototype.addItem = function DKMenu_addItem(menu, label, callback) {
     let dkmenuItem = document.createElement("div");
     dkmenuItem.setAttribute("dk_menu","item");
     //These stles are now  done in DKMenu.css
@@ -59,13 +59,13 @@ dk.menu.addItem = function dk_menu_addItem(menu, label, callback) {
     //dkmenuItem.style.color = "rgb(170,170,170)";
     //dkmenuItem.style.borderColor = "rgb(60,60,60)";
     /*
-    dkmenuItem.onmouseover = function dk_menu_item_onmouseover() {
+    dkmenuItem.onmouseover = function DKMenu_item_onmouseover() {
         //dkmenuItem.style.backgroundColor = "rgb(40,40,40)";
         //dkmenuItem.style.color = "rgb(255,255,255)";
     }
     */
     /*
-    dkmenuItem.onmouseout = function dk_menu_item_onmouseout() {
+    dkmenuItem.onmouseout = function DKMenu_item_onmouseout() {
         //dkmenuItem.style.backgroundColor = "rgb(20,20,20)";
         //dkmenuItem.style.color = "rgb(200,200,200)";
     }
@@ -90,7 +90,7 @@ dk.menu.addItem = function dk_menu_addItem(menu, label, callback) {
     dk.menu.validatePosition(menu);
 }
 
-dk.menu.validatePosition = function dk_menu_validatePosition(menu) {
+DKMenu.prototype.validatePosition = function DKMenu_validatePosition(menu) {
     if (!menu)
         return error("menu invalid");
 

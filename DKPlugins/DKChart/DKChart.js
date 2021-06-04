@@ -8,7 +8,7 @@ function DKChart(identifier) {
 dk.chart = new DKChart("DKChart");
 
 
-dk.chart.init = function dk_chart_init() {
+DKChart.prototype.init = function DKChart_init() {
     //dk.create("https://momentjs.com/downloads/moment.min.js");
     dk.create("DKTasmota/moment.min.js", function dk_create() {
         //dk.create("https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js");
@@ -16,7 +16,7 @@ dk.chart.init = function dk_chart_init() {
     });
 }
 
-dk.chart.create = function dk_chart_create(parent, id, top, bottom, left, right, width, height) {
+DKChart.prototype.create = function DKChart_create(parent, id, top, bottom, left, right, width, height) {
     const chartDiv = document.createElement("div");
     chartDiv.id = id;
     chartDiv.style.position = "absolute";

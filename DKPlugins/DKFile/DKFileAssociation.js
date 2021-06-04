@@ -6,12 +6,12 @@ function DKFileAssociation(identifier) {
 }
 dk.fileassociation = new DKFileAssociation("DKFileAssociation");
 
-dk.fileassociation.edit = function dk_fileAssociation_edit(file) {
+DKFileAssociation.prototype.edit = function DKFileAssociation_edit(file) {
     dk.fileassociation.opentext(file);
     return true;
 }
 
-dk.fileassociation.open = function dk_fileAssociation_open(instance, file) {
+DKFileAssociation.prototype.open = function DKFileAssociation_open(instance, file) {
     if (!file)
         return error("file invalid");
     if (!file.includes("."))
@@ -88,7 +88,7 @@ dk.fileassociation.open = function dk_fileAssociation_open(instance, file) {
     return true;
 }
 
-dk.fileassociation.openhtml = function dk_fileassociation_openHtml(path) {
+DKFileAssociation.prototype.openhtml = function DKFileAssociation_openHtml(path) {
     if (!dk.hasCPP())
         path = path.replace(dk.file.onlineAssets, "");
     else
@@ -100,7 +100,7 @@ dk.fileassociation.openhtml = function dk_fileassociation_openHtml(path) {
     });
 }
 
-dk.fileassociation.openjs = function dk_fileassociation_openjs(path) {
+DKFileAssociation.prototype.openjs = function DKFileAssociation_openjs(path) {
     if (!dk.hasCPP())
         path = path.replace(dk.file.onlineAssets, "");
     else
@@ -113,7 +113,7 @@ dk.fileassociation.openjs = function dk_fileassociation_openjs(path) {
     });
 }
 
-dk.fileassociation.opencss = function dk_fileAssociation_opencss(path) {
+DKFileAssociation.prototype.opencss = function DKFileAssociation_opencss(path) {
     if (!dk.hasCPP())
         path = path.replace(dk.file.onlineAssets, "");
     else
@@ -121,24 +121,24 @@ dk.fileassociation.opencss = function dk_fileAssociation_opencss(path) {
     dk.create(path);
 }
 
-dk.fileassociation.opentext = function dk_fileassociation_opentext(path) {
+DKFileAssociation.prototype.opentext = function DKFileAssociation_opentext(path) {
     dk.create("DKNotepad/DKNotepad.js", function dk_create_callback() {
         dk.notepad.createOpen(path);
     });
 }
 
-dk.fileassociation.openimage = function dk_fileassociation_openimage(path) {
+DKFileAssociation.prototype.openimage = function DKFileAssociation_openimage(path) {
     dk.create("DKPaint/DKPaint.js", function dk_create_callback() {
         dk.paint.createOpen(path);
     });
 }
 
-dk.fileassociation.openmodel = function dk_fileAssociation_openmodel(path) {
+DKFileAssociation.prototype.openmodel = function DKFileAssociation_openmodel(path) {
     dk.create("DKOSGManipulator,,DKOSGWindow", function dk_create_callback() {});
     dk.create("DKOSGModel,,DKWindow," + path, function dk_create_callback() {});
 }
 
-dk.fileassociation.openaudio = function dkfileassociation_openaudio(path) {
+DKFileAssociation.prototype.openaudio = function DKFileAssociation_openaudio(path) {
     if (!dk.hasCPP())
         path = path.replace(dk.file.onlineAssets, "");
     else
@@ -154,7 +154,7 @@ dk.fileassociation.openaudio = function dkfileassociation_openaudio(path) {
     //DKSDLAudio_Play("DKSDLAudio,"+file);
 }
 
-dk.fileassociation.openvideo = function dkfileassociation_openvideo(path) {
+DKFileAssociation.prototype.openvideo = function DKFileAssociation_openvideo(path) {
     if (!dk.hasCPP())
         path = path.replace(dk.file.onlineAssets, "");
     else

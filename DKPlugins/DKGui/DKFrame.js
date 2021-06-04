@@ -6,14 +6,14 @@ function DKFrame(identifier) {
 }
 dk.frame = new DKFrame("DKFrame");
 
-DKFrame.prototype.init = function dk_frame_init() {
+DKFrame.prototype.init = function DKFrame_init() {
     dk.create("DKGui/DKFrame.css");
 }
-DKFrame.prototype.end = function dk_frame_end() {
+DKFrame.prototype.end = function DKFrame_end() {
     dk.close("DKGui/DKFrame.css");
 }
 
-DKFrame.prototype.create = function dk_frame_create(dkplugin) { 
+DKFrame.prototype.create = function DKFrame_create(dkplugin) { 
     if (!(dkplugin instanceof DKPlugin))
         return error("Framed objects must be a DKPlugin instance");
     const instance = new DKFrame("new");
@@ -44,7 +44,7 @@ DKFrame.prototype.create = function dk_frame_create(dkplugin) {
     return instance;
 }
 
-DKFrame.prototype.close = function dk_frame_close() {
+DKFrame.prototype.close = function DKFrame_close() {
     console.log("DKFrame.prototype.close()");
     this.dkplugin.close();
     this.frame.parentNode.removeChild(this.frame);
@@ -52,7 +52,7 @@ DKFrame.prototype.close = function dk_frame_close() {
     return true;
 }
 
-DKFrame.prototype.createFrame = function dk_frame_createFrame(title, width, height) {
+DKFrame.prototype.createFrame = function DKFrame_createFrame(title, width, height) {
     const instance = this;
     if (typeof title !== "string")
         return error("title invalid\n");
@@ -74,11 +74,11 @@ DKFrame.prototype.createFrame = function dk_frame_createFrame(title, width, heig
     frame.style.left = newleft + "px";
     frame.style.width = width + "rem";
     frame.style.height = newheight + "rem";
-    frame.onmousedown = function dk_frame_frame_onmousedown(event) {
+    frame.onmousedown = function DKFrame_frame_onmousedown(event) {
         (document.body.lastChild !== frame) && (frame.mousedown_target = event.target);
         instance.bringToFront(event.currentTarget);
     }
-    frame.onmouseup = function dk_frame_frame_onmouseup(event) {
+    frame.onmouseup = function DKFrame_frame_onmouseup(event) {
         (frame.mousedown_target == event.target) && event.target.click();
         frame.mousedown_target = null;
     }
@@ -86,7 +86,7 @@ DKFrame.prototype.createFrame = function dk_frame_createFrame(title, width, heig
     //See DKFrame.css for styling
     frame.titlebar = dk.gui.createElement(frame, "div", "dk_frame_titlebar");
     frame.titlebar.setAttribute("dk_frame", "titlebar");
-    frame.titlebar.ondblclick = function dk_frame_titlebar_ondblclick(event) {
+    frame.titlebar.ondblclick = function DKFrame_titlebar_ondblclick(event) {
         event.stopPropagation();
         instance.maximize();
     }
@@ -104,7 +104,7 @@ DKFrame.prototype.createFrame = function dk_frame_createFrame(title, width, heig
     frame.reload = dk.gui.createElement(frame.titlebar, "img", "dk_frame_reload");
     frame.reload.setAttribute("dk_frame", "reload");
     frame.reload.setAttribute("src", "DKGui/reload.png");
-    frame.reload.onmousedown = function dk_frame_reload_onmousedown(event) {
+    frame.reload.onmousedown = function DKFrame_reload_onmousedown(event) {
         event.stopPropagation();
         instance.reload();
     }
@@ -112,7 +112,7 @@ DKFrame.prototype.createFrame = function dk_frame_createFrame(title, width, heig
     frame.minimize = dk.gui.createElement(frame.titlebar, "img", "dk_frame_minimize");
     frame.minimize.setAttribute("dk_frame", "minimize");
     frame.minimize.setAttribute("src", "DKGui/minimize.png");
-    frame.minimize.onmousedown = function dk_frame_minimize_onmousedown(event) {
+    frame.minimize.onmousedown = function DKFrame_minimize_onmousedown(event) {
         event.stopPropagation();
         instance.minimize();
     }
@@ -120,7 +120,7 @@ DKFrame.prototype.createFrame = function dk_frame_createFrame(title, width, heig
     frame.maximize = dk.gui.createElement(frame.titlebar, "img", "dk_frame_maximize");
     frame.maximize.setAttribute("dk_frame", "maximize");
     frame.maximize.setAttribute("src", "DKGui/maximize.png");
-    frame.maximize.onmousedown = function dk_frame_maximize_onmousedown(event) {
+    frame.maximize.onmousedown = function DKFrame_maximize_onmousedown(event) {
         event.stopPropagation();
         instance.maximize();
     }
@@ -128,18 +128,18 @@ DKFrame.prototype.createFrame = function dk_frame_createFrame(title, width, heig
     frame.close = dk.gui.createElement(frame.titlebar, "img", "dk_frame_close");
     frame.close.setAttribute("dk_frame", "close");
     frame.close.setAttribute("src", "DKGui/close.png");
-    frame.close.onmousedown = function dk_frame_close_onmousedown(event) {
+    frame.close.onmousedown = function DKFrame_close_onmousedown(event) {
         event.stopPropagation();
         instance.close();
     }
     return frame;
 }
 
-DKFrame.prototype.bringToFront = function dk_frame_bringToFront(frame) {
+DKFrame.prototype.bringToFront = function DKFrame_bringToFront(frame) {
     (document.body.lastChild !== frame) && document.body.appendChild(frame);
 }
 
-DKFrame.prototype.maximize = function dk_frame_maximize() {
+DKFrame.prototype.maximize = function DKFrame_maximize() {
     if (this.frame.maximized) {
         this.restoreSize(this.frame);
         this.frame.content.style.width = parseInt(this.frame.style.width) + "rem";
@@ -159,7 +159,7 @@ DKFrame.prototype.maximize = function dk_frame_maximize() {
     }
 }
 
-DKFrame.prototype.minimize = function dk_frame_minimize() {
+DKFrame.prototype.minimize = function DKFrame_minimize() {
     var top = this.frame.style.top;
     var bottom = this.frame.style.bottom;
     var left = this.frame.style.left;
@@ -181,7 +181,7 @@ DKFrame.prototype.minimize = function dk_frame_minimize() {
         this.frame.resize.image.style.visibility = "hidden";
         this.frame.resize.corner.style.visibility = "hidden";
         const instance = this;
-        this.frame.titlebar.onclick = function dk_frame_titlebar_onclick(event) {
+        this.frame.titlebar.onclick = function DKFrame_titlebar_onclick(event) {
             event.stopPropagation();
             instance.minimize(instance.frame.minimize);
         }
@@ -199,7 +199,7 @@ DKFrame.prototype.minimize = function dk_frame_minimize() {
     }
 }
 
-DKFrame.prototype.reload = function dk_frame_reload() {
+DKFrame.prototype.reload = function DKFrame_reload() {
     console.log("DKFrame.prototype.reload()");
     const url = this.dkplugin.getUrl();
     this.dkplugin.close();
@@ -214,17 +214,17 @@ DKFrame.prototype.reload = function dk_frame_reload() {
     return true;
 }
 
-DKFrame.prototype.setTitle = function dk_frame_setTitle(title) {
+DKFrame.prototype.setTitle = function DKFrame_setTitle(title) {
     this.frame.titlebartext.innerHTML = title;
     return true;
 }
 
-DKFrame.prototype.setIcon = function dk_frame_setIcon(url) {
+DKFrame.prototype.setIcon = function DKFrame_setIcon(url) {
     this.frame.titlebaricon.src = url;
     return true;
 }
 
-DKFrame.prototype.storeSize = function dk_frame_storeSize(frame) {
+DKFrame.prototype.storeSize = function DKFrame_storeSize(frame) {
     frame.top = frame.style.top;
     frame.bottom = frame.style.bottom;
     frame.left = frame.style.left;
@@ -234,7 +234,7 @@ DKFrame.prototype.storeSize = function dk_frame_storeSize(frame) {
     return true;
 }
 
-DKFrame.prototype.restoreSize = function dk_frame_restoreSize(frame) {
+DKFrame.prototype.restoreSize = function DKFrame_restoreSize(frame) {
     frame.style.top = frame.top;
     frame.style.bottom = frame.bottom;
     frame.style.left = frame.left;
@@ -244,7 +244,7 @@ DKFrame.prototype.restoreSize = function dk_frame_restoreSize(frame) {
     return true;
 }
 
-DKFrame.prototype.createNewWindow = function dk_frame_createNewWindow(title, width, height, url) {
+DKFrame.prototype.createNewWindow = function DKFrame_createNewWindow(title, width, height, url) {
     console.error("createNewWindow is dprecated for now. Objects should make their own elements and call DKFrame.prototype.create()")
     const newWin = new DKPlugin(title);
     if (!newWin.ok) {
@@ -266,7 +266,7 @@ DKFrame.prototype.createNewWindow = function dk_frame_createNewWindow(title, wid
 }
 
 /*
-DKFrame.prototype.iFrame = function dk_frame_Iframe(title, url, width, height) {
+DKFrame.prototype.iFrame = function DKFrame_Iframe(title, url, width, height) {
     if (typeof title !== "string")
         return error("title invalid\n");
     if (typeof url !== "string")

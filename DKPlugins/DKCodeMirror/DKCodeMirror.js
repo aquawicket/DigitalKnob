@@ -5,15 +5,14 @@ function DKCodeMirror(identifier) {
     return DKPlugin.call(this, identifier);
 }
 dk.codemirror = new DKCodeMirror("DKCodeMirror");
-dk.codemirror = new DKPlugin("dk_codemirror");
 
-dk.codemirror.init = function dk_codemirror_init(dk_codemirror_init_callback) {
+DKCodeMirror.prototype.init = function DKCodeMirror_init(DKCodeMirror_init_callback) {
     dk.create("DKCodeMirror/lib/codemirror.js", function() {
         dk.create("DKCodeMirror/lib/codemirror.css", function() {
             dk.create("DKCodeMirror/theme/abcdef.css", function() {
                 dk.create("DKCodeMirror/DKCodeMirror.css", function() {
                     dk.create("DKCodeMirror/mode/javascript/javascript.js", function() {
-                        dk_codemirror_init_callback && dk_codemirror_init_callback();
+                        DKCodeMirror_init_callback && DKCodeMirror_init_callback();
                     });
                 });
             });
@@ -21,7 +20,7 @@ dk.codemirror.init = function dk_codemirror_init(dk_codemirror_init_callback) {
     });
 }
 
-dk.codemirror.end = function dk_codemirror_end(dk_codemirror_end_callback) {
+DKCodeMirror.prototype.end = function DKCodeMirror_end(DKCodeMirror_end_callback) {
     dk.close("DKCodeMirror/lib/codemirror.js");
     //, function() {
     dk.close("DKCodeMirror/lib/codemirror.css");
@@ -32,7 +31,7 @@ dk.codemirror.end = function dk_codemirror_end(dk_codemirror_end_callback) {
     //, function() {
     dk.close("DKCodeMirror/mode/javascript/javascript.js");
     //, function() {
-    dk_codemirror_end_callback && dk_codemirror_end_callback();
+    DKCodeMirror_end_callback && DKCodeMirror_end_callback();
     //});
     //});
     //});
@@ -40,10 +39,10 @@ dk.codemirror.end = function dk_codemirror_end(dk_codemirror_end_callback) {
     //});
 }
 
-dk.codemirror.create = function dk_codemirror_create(dk_codemirror_create_callback) {
+DKCodeMirror.prototype.create = function DKCodeMirror_create(DKCodeMirror_create_callback) {
     const instance = new DKCodeMirror("new");
     if (!instance)
-        return error("instance invalid", dk_codemirror_create_callback);
+        return error("instance invalid", DKCodeMirror_create_callback);
 
     const div = dk.gui.createElement(document.body, "div", "DKCodeMirror", "", "", "", "", "500rem", "400rem");
     instance.div = div;
@@ -55,25 +54,25 @@ dk.codemirror.create = function dk_codemirror_create(dk_codemirror_create_callba
         mode: "javascript"/*value: "function myScript(){return 100;}\n"*/
     });
     dk.frame.create(instance);
-    return dk_codemirror_create_callback && dk_codemirror_create_callback(instance);
+    return DKCodeMirror_create_callback && DKCodeMirror_create_callback(instance);
 }
 
-dk.codemirror.createOpen = function dk_codemirror_createOpen(file, dk_codemirror_createOpen_callback) {
+DKCodeMirror.prototype.createOpen = function DKCodeMirror_createOpen(file, DKCodeMirror_createOpen_callback) {
     dk.codemirror.create(function(instance) {
         dk.frame.setTitle(instance, "DKCodeMirror - " + file);
         instance.currentfile = file;
         dk.file.fileToString(file, function(str) {
             instance.myCodeMirror.setValue(str);
-            dk_codemirror_createOpen_callback && dk_codemirror_createOpen_callback(instance);
+            DKCodeMirror_createOpen_callback && DKCodeMirror_createOpen_callback(instance);
         });
     });
 }
 
-dk.codemirror.setSelection = function dk_codemirror_setSelection(instance, line) {
+DKCodeMirror.prototype.setSelection = function DKCodeMirror_setSelection(instance, line) {
     instance.myCodeMirror.setSelection(CodeMirror.Pos(line, 0), CodeMirror.Pos(line, 10));
 }
 
-dk.codemirror.highlightError = function dk_codemirror_highlightError(instance, line, ch) {
+DKCodeMirror.prototype.highlightError = function DKCodeMirror_highlightError(instance, line, ch) {
     instance.myCodeMirror.focus();
     instance.myCodeMirror.setCursor({
         line: line - 1,

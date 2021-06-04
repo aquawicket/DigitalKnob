@@ -6,19 +6,19 @@ function DKDrag(identifier) {
 }
 dk.drag = new DKDrag("DKDrag");
 
-dk.drag.addHandle = function dk_drag_addHandle(element, drag_element) {
+DKDrag.prototype.addHandle = function DKDrag_addHandle(element, drag_element) {
     //!dk.iE() && dk.getBrowser() !== "RML" && element.style.setProperty("pointer-events", "all");
     element.onmousedown = element.ontouchstart = function(event) {
         dk.drag.start(event, drag_element);
     }
 }
 
-dk.drag.removeDragHandle = function dk_drag_removeHandle(element) {
+DKDrag.prototype.removeDragHandle = function DKDrag_removeHandle(element) {
     //!dk.iE() && element.style.setProperty("pointer-events","none");
     element.onmousedown = element.ontouchstart = null;
 }
 
-dk.drag.start = function dk_drag_start(event, element) {
+DKDrag.prototype.start = function DKDrag_start(event, element) {
     !event && (event = window.event);
     if (dk.iE()) {
         dk.drag.mouseStartX = event.clientX + document.documentElement.scrollLeft + document.body.scrollLeft;
@@ -43,7 +43,7 @@ dk.drag.start = function dk_drag_start(event, element) {
     }
 }
 
-dk.drag.move = function dk_drag_move(event, element) {
+DKDrag.prototype.move = function DKDrag_move(event, element) {
     if (!event)
         event = window.event;
     let x;
@@ -82,7 +82,7 @@ dk.drag.move = function dk_drag_move(event, element) {
     */
 }
 
-dk.drag.stop = function dk_drag_stop() {
+DKDrag.prototype.stop = function DKDrag_stop() {
     document.body.onmousemove = null;
     document.body.onmouseup = null;
     document.body.ontouchmove = null;
@@ -90,7 +90,7 @@ dk.drag.stop = function dk_drag_stop() {
 }
 
 /*
-dk.drag.attachDrags = function dk_drag_attachDrags(parent) {
+DKDrag.prototype.attachDrags = function DKDrag_attachDrags(parent) {
     const elements = parent.getElementsByTagName('*');
     for (let n = 0; n < elements.length; n++) {
         const element = elements[n];

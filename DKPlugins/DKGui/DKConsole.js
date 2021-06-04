@@ -17,7 +17,7 @@ dk.console = new DKConsole("DKConsole");
 // If you use xconsole.log, it will only log the browser console.
 // Note: some messages cannot be withheld from the browser console.
 
-dk.console.setXConsole = function dk_console_setXConsole() {
+DKConsole.prototype.setXConsole = function DKConsole_setXConsole() {
     xconsole.assert = console.assert;
     xconsole.clear = console.clear;
     xconsole.context = console.context;
@@ -139,15 +139,15 @@ dk.console.setXConsole = function dk_console_setXConsole() {
     }
 }
 
-dk.console.init = function dk_console_init() {
+DKConsole.prototype.init = function DKConsole_init() {
     dk.create("DKGui/DKConsole.css");
 }
 
-dk.console.end = function dk_console_end() {
+DKConsole.prototype.end = function DKConsole_end() {
     dk.close("DKGui/DKConsole.css");
 }
 
-dk.console.create = function dk_console_create(parent, top, bottom, left, right, width, height) {
+DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left, right, width, height) {
     dk.console.limit = 100;
 
     dk.console.container = dk.gui.createTag("div", parent, {
@@ -212,7 +212,7 @@ dk.console.create = function dk_console_create(parent, top, bottom, left, right,
     }).setAttribute("dk_console", "cmnd");
 
     // https://console.spec.whatwg.org/#logger
-    dk.console.Logger = function dl_console_Logger(logLevel, args) {
+    DKConsole.prototype.Logger = function dl_console_Logger(logLevel, args) {
         if (!args)
             return;
         const [first,...rest] = args;
@@ -230,7 +230,7 @@ dk.console.create = function dk_console_create(parent, top, bottom, left, right,
     }
 
     // https://console.spec.whatwg.org/#formatter
-    dk.console.Formatter = function dk_console_Formatter(args) {
+    DKConsole.prototype.Formatter = function DKConsole_Formatter(args) {
         if (!args.length)
             return;
         let target = args[0];
@@ -287,7 +287,7 @@ dk.console.create = function dk_console_create(parent, top, bottom, left, right,
     }
 
     // https://console.spec.whatwg.org/#printer
-    dk.console.Printer = function dk_console_Printer(logLevel, args) {
+    DKConsole.prototype.Printer = function DKConsole_Printer(logLevel, args) {
         //const _args = dk.console.ColorChromeConsole(arguments);
         if ((dk.console.logDiv.scrollHeight - dk.console.logDiv.scrollTop) < (dk.console.logDiv.offsetHeight + 1))
             dk.console.logDiv.scroll = true;
@@ -411,7 +411,7 @@ dk.console.create = function dk_console_create(parent, top, bottom, left, right,
     }
 
     // https://console.spec.whatwg.org/#assert
-    dk.console.assert = function dk_console_assert(condition, ...data) {
+    DKConsole.prototype.assert = function DKConsole_assert(condition, ...data) {
         !condition && (condition = false);
         if (condition)
             return;
@@ -437,7 +437,7 @@ dk.console.create = function dk_console_create(parent, top, bottom, left, right,
     }
 
     // https://console.spec.whatwg.org/#clear
-    dk.console.clear = function dk_console_clear() {
+    DKConsole.prototype.clear = function DKConsole_clear() {
         // 1. Empty the appropriate group stack.
         dk.console.groupStack = [];
         // 2. If possible for the environment, clear the console. (Otherwise, do nothing.)
@@ -449,7 +449,7 @@ dk.console.create = function dk_console_create(parent, top, bottom, left, right,
     //dk.console.context;
 
     // https://console.spec.whatwg.org/#count
-    dk.console.count = function dk_console_count(label) {
+    DKConsole.prototype.count = function DKConsole_count(label) {
         !label && (label = "default");
         // 1. Let map be the associated count map.
         !dk.console.map && (dk.console.map = new Object);
@@ -466,7 +466,7 @@ dk.console.create = function dk_console_create(parent, top, bottom, left, right,
     }
 
     // https://console.spec.whatwg.org/#countReset
-    dk.console.countReset = function dk_console_countReset(label) {
+    DKConsole.prototype.countReset = function DKConsole_countReset(label) {
         !label && (label = "default");
         // 1. Let map be the associated count map.
         !dk.console.map && (dk.console.map = new Object);
@@ -482,17 +482,17 @@ dk.console.create = function dk_console_create(parent, top, bottom, left, right,
     }
 
     // https://console.spec.whatwg.org/#debug
-    dk.console.debug = function dk_console_debug(...data) {
+    DKConsole.prototype.debug = function DKConsole_debug(...data) {
         dk.console.Logger("debug", data);
     }
 
     // https://console.spec.whatwg.org/#dir
-    dk.console.dir = function dk_console_dir(item, options) {// 1. Let object be item with generic JavaScript object formatting applied.
+    DKConsole.prototype.dir = function DKConsole_dir(item, options) {// 1. Let object be item with generic JavaScript object formatting applied.
     // 2. Perform Printer("dir", object, options).
     }
 
     // https://console.spec.whatwg.org/#dirxml
-    dk.console.dirxml = function dk_console_dirxml(...data) {// 1. Let finalList be a new list, initially empty.
+    DKConsole.prototype.dirxml = function DKConsole_dirxml(...data) {// 1. Let finalList be a new list, initially empty.
     // 2. For each item of data:
     //     1. Let converted be a DOM tree representation of item if possible; otherwise let converted be item with optimally useful formatting applied.
     //     2. Append converted to finalList.
@@ -500,7 +500,7 @@ dk.console.create = function dk_console_create(parent, top, bottom, left, right,
     }
 
     // https://console.spec.whatwg.org/#error
-    dk.console.error = function dk_console_error(...data) {
+    DKConsole.prototype.error = function DKConsole_error(...data) {
         if (!data)
             return warn("data invalid");
         dk.console.groupCollapsed(data, "error");
@@ -513,7 +513,7 @@ dk.console.create = function dk_console_create(parent, top, bottom, left, right,
     dk.console.groupStack = [];
 
     // https://console.spec.whatwg.org/#group
-    dk.console.group = function dk_console_group(...data) {
+    DKConsole.prototype.group = function DKConsole_group(...data) {
 
         let n = 0;
         while (dk.console.logDiv.querySelector("[group='" + n + "']"))
@@ -537,7 +537,7 @@ dk.console.create = function dk_console_create(parent, top, bottom, left, right,
     }
 
     // https://console.spec.whatwg.org/#groupcollapsed
-    dk.console.groupCollapsed = function dk_console_groupCollapsed(...data) {
+    DKConsole.prototype.groupCollapsed = function DKConsole_groupCollapsed(...data) {
 
         let n = 0;
         while (dk.console.logDiv.querySelector("[group='" + n + "']"))
@@ -561,7 +561,7 @@ dk.console.create = function dk_console_create(parent, top, bottom, left, right,
     }
 
     // https://console.spec.whatwg.org/#groupend
-    dk.console.groupEnd = function dk_console_groupEnd(...data) {
+    DKConsole.prototype.groupEnd = function DKConsole_groupEnd(...data) {
         // Pop the last group from the group stack.
         dk.console.groupStack.pop();
         if (dk.console.groupStack.length)
@@ -571,12 +571,12 @@ dk.console.create = function dk_console_create(parent, top, bottom, left, right,
     }
 
     // https://console.spec.whatwg.org/#info
-    dk.console.info = function dk_console_info(...data) {
+    DKConsole.prototype.info = function DKConsole_info(...data) {
         dk.console.Logger("info", data);
     }
 
     // https://console.spec.whatwg.org/#log
-    dk.console.log = function dk_console_log(...data) {
+    DKConsole.prototype.log = function DKConsole_log(...data) {
         dk.console.Logger("log", data);
     }
 
@@ -585,19 +585,19 @@ dk.console.create = function dk_console_create(parent, top, bottom, left, right,
     //dk.console.profileEnd;
 
     // https://console.spec.whatwg.org/#table
-    dk.console.table = function dk_console_table(tabularData, properties) {// Try to construct a table with the columns of the properties of tabularData (or use properties) and rows of tabularData 
+    DKConsole.prototype.table = function DKConsole_table(tabularData, properties) {// Try to construct a table with the columns of the properties of tabularData (or use properties) and rows of tabularData 
     // and log it with a logLevel of "log". Fall back to just logging the argument if it can be parsed as tabular.
     }
 
     // https://console.spec.whatwg.org/#time
-    dk.console.time = function dk_console_time(label) {
+    DKConsole.prototype.time = function DKConsole_time(label) {
         !label && (label = "default");
         // 1. If the associated timer table contains an entry with key label, return, optionally reporting a warning to the console indicating that a timer with label label has already been started.
         // 2. Otherwise, set the value of the entry with key label in the associated timer table to the current time.
     }
 
     // https://console.spec.whatwg.org/#timeEnd
-    dk.console.timeEnd = function dk_console_timeEnd(label) {
+    DKConsole.prototype.timeEnd = function DKConsole_timeEnd(label) {
         !label && (label = "default");
         // 1. Let timerTable be the associated timer table.
         // 2. Let startTime be timerTable[label].
@@ -608,7 +608,7 @@ dk.console.create = function dk_console_create(parent, top, bottom, left, right,
     }
 
     // https://console.spec.whatwg.org/#timeLog
-    dk.console.timeLog = function dk_console_timeLog(label, ...data) {
+    DKConsole.prototype.timeLog = function DKConsole_timeLog(label, ...data) {
         !label && (label = "default");
         // 1. Let timerTable be the associated timer table.
         // 2. Let startTime be timerTable[label].
@@ -618,10 +618,10 @@ dk.console.create = function dk_console_create(parent, top, bottom, left, right,
         // 6. Perform Printer("timeLog", data).
     }
 
-    //dk.console.timeStamp;
+    //DKConsole.prototype.timeStamp;
 
     // https://console.spec.whatwg.org/#trace
-    dk.console.trace = function dk_console_trace(...data) {
+    DKConsole.prototype.trace = function DKConsole_trace(...data) {
         // 1. Let trace be some implementation-specific, potentially-interactive representation of the callstack from where this function was called.
         // 2. Optionally, let formattedData be the result of Formatter(data), and incorporate formattedData as a label for trace.
         // 3. Perform Printer("trace", trace).
@@ -634,7 +634,7 @@ dk.console.create = function dk_console_create(parent, top, bottom, left, right,
     }
 
     // https://console.spec.whatwg.org/#warn
-    dk.console.warn = function dk_console_warn(...data) {
+    DKConsole.prototype.warn = function DKConsole_warn(...data) {
         if (!data)
             return warn("data invalid");
         dk.console.groupCollapsed(data, "warn");
@@ -656,7 +656,7 @@ dk.console.create = function dk_console_create(parent, top, bottom, left, right,
     return dk.console.container;
 }
 
-dk.console.SpanFilter = function dk_console_SpanFilter(args) {
+DKConsole.prototype.SpanFilter = function DKConsole_SpanFilter(args) {
     let argArray = [];
     if (args.length) {
         const startTagRe = /<span\s+style=(['"])([^'"]*)\1\s*>/gi;
@@ -677,7 +677,7 @@ dk.console.SpanFilter = function dk_console_SpanFilter(args) {
 }
 
 /*
-dk.console.ColorChromeConsole = function dk_console_ColorChromeConsole(args) {
+DKConsole.prototype.ColorChromeConsole = function DKConsole_ColorChromeConsole(args) {
     let argArray = [];
     argArray.push("%c " + args[0]);
     if (args[1] === "red")

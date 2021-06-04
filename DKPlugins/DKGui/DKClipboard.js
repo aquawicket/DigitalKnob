@@ -6,7 +6,7 @@ function DKClipboard(identifier) {
 }
 dk.clipboard = new DKClipboard("DKClipboard");
 
-dk.clipboard.cut = function dk_clipboard_cut(ele) {
+DKClipboard.prototype.cut = function DKClipboard_cut(ele) {
     let text = "";
     if (window.getSelection)
         text = window.getSelection().toString();
@@ -16,7 +16,7 @@ dk.clipboard.cut = function dk_clipboard_cut(ele) {
     dk.clipboard.removeSelection(id);
 }
 
-dk.clipboard.copy = function dk_clipboard_copy(ele) {
+DKClipboard.prototype.copy = function DKClipboard_copy(ele) {
     var text = "";
     if (window.getSelection)
         text = window.getSelection().toString();
@@ -25,14 +25,14 @@ dk.clipboard.copy = function dk_clipboard_copy(ele) {
     dk.clipboard.copyToClipboard(text);
 }
 
-dk.clipboard.paste = function dk_clipboard_paste(ele) {
+DKClipboard.prototype.paste = function DKClipboard_paste(ele) {
     dk.clipboard.removeSelection(ele);
     ele.focus();
     ele.select();
     document.execCommand('Paste');
 }
 
-dk.clipboard.copyToClipboard = function dk_clipboard_copyToClipboard(text) {
+DKClipboard.prototype.copyToClipboard = function DKClipboard_copyToClipboard(text) {
     if (window.clipboardData && window.clipboardData.setData)
         return clipboardData.setData("Text", text);
     else if (document.queryCommandSupported && document.queryCommandSupported("copy")) {
@@ -53,7 +53,7 @@ dk.clipboard.copyToClipboard = function dk_clipboard_copyToClipboard(text) {
     }
 }
 
-dk.clipboard.removeSelection = function dk_clipboard_removeSelection(ele) {
+DKClipboard.prototype.removeSelection = function DKClipboard_removeSelection(ele) {
     var text = ele.value;
     text = text.slice(0, ele.selectionStart) + text.slice(ele.selectionEnd);
     ele.value = text;

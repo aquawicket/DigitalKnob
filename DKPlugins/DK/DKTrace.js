@@ -8,7 +8,7 @@ function DKTrace(identifier) {
 dk.trace = new DKTrace("DKTrace");
 
 
-dk.trace.editFile = function dk_trace_editFile(file, line, ch) {
+DKTrace.prototype.editFile = function dk_trace_editFile(file, line, ch) {
     file = file.replace("file:///", "");
     !line && (line = 1);
     !ch && (ch = 0);
@@ -20,7 +20,7 @@ dk.trace.editFile = function dk_trace_editFile(file, line, ch) {
     });
 
 }
-dk.trace.stackToConsoleString = function dk_trace_stackToConsoleString(arg, deleteTo) {
+DKTrace.prototype.stackToConsoleString = function dk_trace_stackToConsoleString(arg, deleteTo) {
     let jsonStack;
     let headerMsg = false;
     if (arg instanceof Error) {
@@ -65,7 +65,7 @@ dk.trace.stackToConsoleString = function dk_trace_stackToConsoleString(arg, dele
     return str;
 }
 
-dk.trace.isStrict = function dk_trace_isStrict() {
+DKTrace.prototype.isStrict = function dk_trace_isStrict() {
     if (eval("var __temp = null"),
     (typeof __temp === "undefined")) {
         return true;
@@ -73,7 +73,7 @@ dk.trace.isStrict = function dk_trace_isStrict() {
     return false;
 }
 
-dk.trace.getStack = function dk_trace_getStack(msg) {
+DKTrace.prototype.getStack = function dk_trace_getStack(msg) {
     const e = new Error(msg);
     if (!e.stack) {
         try {
@@ -89,7 +89,7 @@ dk.trace.getStack = function dk_trace_getStack(msg) {
     return e.stack;
 }
 
-dk.trace.stackToJSON = function dk_trace_stackToJSON(stack) {
+DKTrace.prototype.stackToJSON = function dk_trace_stackToJSON(stack) {
     if (!stack || typeof stack !== 'string') {
         return error("StackToJSON(): invalid stack");
     }
@@ -134,7 +134,7 @@ dk.trace.stackToJSON = function dk_trace_stackToJSON(stack) {
     return jsonStack;
 }
 
-dk.trace.lastStackCall = function dk_trace_lastStackCall() {
+DKTrace.prototype.lastStackCall = function dk_trace_lastStackCall() {
     const stack = this.stackToJSON(this.getStack());
     let nn;
     for (let n = 1; n < stack.length; n++) {
@@ -151,7 +151,7 @@ dk.trace.lastStackCall = function dk_trace_lastStackCall() {
     return str;
 }
 
-dk.trace.getArguments = function dk_trace_getArguments(func, getArgValues) {
+DKTrace.prototype.getArguments = function dk_trace_getArguments(func, getArgValues) {
     let argsString = "";
     let count = 0;
     const fn = window[func];
@@ -187,10 +187,10 @@ dk.trace.getArguments = function dk_trace_getArguments(func, getArgValues) {
 	*/
 }
 
-dk.trace.getFunctionName = function dk_trace_getFunctionName() {
+DKTrace.prototype.getFunctionName = function dk_trace_getFunctionName() {
     return dk.trace.stackToJSON(dk.trace.getStack())[4].func;
 }
 
-dk.trace.getFilename = function dk_trace_getFilename() {
+DKTrace.prototype.getFilename = function dk_trace_getFilename() {
     return dk.trace.stackToJSON(dk.trace.getStack())[4].filePath.split("/").pop();
 }

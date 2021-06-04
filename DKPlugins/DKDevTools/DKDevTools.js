@@ -6,17 +6,17 @@ function DKDevTools(identifier) {
 }
 dk.devtools = new DKDevTools("DKDevTools");
 
-dk.devtools.init = function dk_devtools_init(callback) {
-    console.log("dk.devtools.init()");
+DKDevTools.prototype.init = function DKDevTools_init(callback) {
+    console.log("DKDevTools.prototype.init()");
     callback && callback(dk.devtools);
 }
 
-dk.devtools.end = function dk_devtools_end() {
-    console.log("dk.devtools.end()");
+DKDevTools.prototype.end = function DKDevTools_end() {
+    console.log("DKDevTools.prototype.end()");
 }
 
-dk.devtools.create = function dk_devtools_create() {
-    console.log("dk.devtools.create()");
+DKDevTools.prototype.create = function DKDevTools_create() {
+    console.log("DKDevTools.prototype.create()");
     dk.devtools.div = document.createElement("div");
     dk.devtools.div.style.width = "200rem";
     dk.devtools.div.style.height = "300rem";
@@ -30,12 +30,12 @@ dk.devtools.create = function dk_devtools_create() {
     return true;
 }
 
-dk.devtools.close = function dk_devtools_close() {
-    console.log("dk.devtools.close()");
+DKDevTools.prototype.close = function DKDevTools_close() {
+    console.log("DKDevTools.prototype.close()");
     this.end();
 }
 
-dk.devtools.addTools = function dk_devtools_addTools() {
+DKDevTools.prototype.addTools = function DKDevTools_addTools() {
     dk.gui.createButton(dk.devtools.div, "DEBUG", "5rem", "", "5rem", "", "63rem", "20rem", dk.debug.debugFunc);
     dk.gui.createButton(dk.devtools.div, "Pull Assets", "25rem", "", "5rem", "", "90rem", "20rem", function dk_gui_createButton_onclick() {
         dk.file.pullDKAssets(function dk_file_pullDKAssets_callback(result) {

@@ -6,7 +6,7 @@ function DKResize(identifier) {
 }
 dk.resize = new DKResize("DKResize");
 
-dk.resize.create = function dk_resize_create(element) {
+DKResize.prototype.create = function DKResize_create(element) {
     if (!element)
         return error("element invalid");
     dk.resize.image = dk.gui.createElement(element, "img", "dk_resize_image");
@@ -75,19 +75,19 @@ dk.resize.create = function dk_resize_create(element) {
     return this;
 }
 
-dk.resize.addHandle = function dk_resize_addHandle(element, resize_element, side) {
+DKResize.prototype.addHandle = function DKResize_addHandle(element, resize_element, side) {
     //!dk.iE() && (dk.getBrowser() !== "RML") && element.style.setProperty("pointer-events", "all");
     element.onmousedown = element.touchstart = function(event) {
         dk.resize.start(event, resize_element, side);
     }
 }
 
-dk.resize.removeHandle = function dk_resize_removeHandle(element) {
+DKResize.prototype.removeHandle = function DKResize_removeHandle(element) {
     //!dk.iE() && element.style.setProperty("pointer-events", "none");
     element.onmousedown = element.ontouchstart = null;
 }
 
-dk.resize.start = function dk_resize_start(event, element, side) {
+DKResize.prototype.start = function DKResize_start(event, element, side) {
     !event && (event = window.event);
     if (dk.iE()) {
         dk.resize.mouseStartX = event.clientX + document.documentElement.scrollLeft + document.body.scrollLeft;
@@ -108,7 +108,7 @@ dk.resize.start = function dk_resize_start(event, element, side) {
     }
 }
 
-dk.resize.move = function dk_resize_move(event, element, side) {
+DKResize.prototype.move = function DKResize_move(event, element, side) {
     if (!event)
         event = window.event;
     let x;
@@ -141,7 +141,7 @@ dk.resize.move = function dk_resize_move(event, element, side) {
     element.style.height = dk.gui.pos(dk.resize.sizeY + y - dk.resize.mouseStartY);
 }
 
-dk.resize.stop = function dk_resize_stop() {
+DKResize.prototype.stop = function DKResize_stop() {
     document.body.onmousemove = null;
     document.body.onmouseup = null;
     document.body.ontouchmove = null;
@@ -149,7 +149,7 @@ dk.resize.stop = function dk_resize_stop() {
 }
 
 /*
-dk.resize.attachResizes = function dk_resize_attachResizes(parent) {
+DKResize.prototype.attachResizes = function DKResize_attachResizes(parent) {
     const elements = parent.getElementsByTagName('*');
     for (let n = 0; n < elements.length; n++) {
         const element = elements[n];
