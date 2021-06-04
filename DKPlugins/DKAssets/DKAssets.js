@@ -62,7 +62,7 @@ appfilename = pathname.replace("/", "");
 appfilename = appfilename.replace("/", "");
 
 /*
-if(DK_GetBrowser() !== "Rml"){
+if(DK_GetBrowser() !== "RML"){
 	var absolutepath = ajaxGetUrl(online_assets+"/DKFile/DKFile.php?GetAbsolutePath="+pathname);
 	absolutepath = absolutepath.replace("//","/");
 }

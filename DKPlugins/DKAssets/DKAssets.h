@@ -8,9 +8,7 @@
 extern std::string ASSETS_H;
 extern size_t ASSETS_H_SIZE;
 
-///////////////////////////////////////////
-class DKAssets : public DKObjectT<DKAssets>
-{
+class DKAssets : public DKObjectT<DKAssets>{
 public:
 	bool Init();
 	

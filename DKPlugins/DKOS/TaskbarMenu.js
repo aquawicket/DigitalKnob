@@ -118,11 +118,11 @@ function TaskbarMenu_OnEvent(event) {
         });
     }
     if (event.currentTarget.id === "OpenDebug") {
-        if (DK_GetBrowser() === "Rml") {
+        if (DK_GetBrowser() === "RML") {
             DKRml_DebuggerOn();
             //FIXME
         }
-        if (DK_GetBrowser() === "Cef") {
+        if (DK_GetBrowser() === "CEF") {
             DKCef_ShowDevTools(0);
         }
     }

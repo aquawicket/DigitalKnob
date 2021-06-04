@@ -586,7 +586,7 @@ dk.getBrowser = function dk_getBrowser() {
         return "Firefox";
     } else if ((navigator.userAgent.indexOf("MSIE") !== -1) || (!!document.documentMode === true)) {
         //IF IE > 10
-        return "Ie";
+        return "IE";
     } else {
         return "UNKNOWN BROWSER";
     }

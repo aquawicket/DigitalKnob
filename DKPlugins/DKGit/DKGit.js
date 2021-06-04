@@ -27,7 +27,7 @@ function DKGit_SetGitPath() {
 }
 
 function DKGit_ValidateGit() {
-    //if(CPP_DK_GetBrowser() !== "Rml"){ return; }
+    //if(CPP_DK_GetBrowser() !== "RML"){ return; }
     console.log("Looking for GIT\n");
     if (!CPP_DKFile_Exists(GIT)) {
         DKGit_InstallGit();
@@ -36,7 +36,7 @@ function DKGit_ValidateGit() {
 }
 
 function DKGit_InstallGit() {
-    //if(CPP_DK_GetBrowser() !== "Rml"){ return; }
+    //if(CPP_DK_GetBrowser() !== "RML"){ return; }
     console.log("Installing Git...\n");
     var assets = CPP_DKAssets_LocalAssets();
 
@@ -65,7 +65,7 @@ function DKGit_InstallGit() {
 }
 
 function DKGit_GitUpdate() {
-    //if(CPP_DK_GetBrowser() !== "Cef" && CPP_DK_GetBrowser() !== "Rml"){
+    //if(CPP_DK_GetBrowser() !== "CEF" && CPP_DK_GetBrowser() !== "RML"){
     //	console.error("DKGit_GitUpdate(): Incompatable browser");
     //	return;
     //}
@@ -106,7 +106,7 @@ function DKGit_GitUpdate() {
 }
 
 function DKGit_GitCommit() {
-    //if(CPP_DK_GetBrowser() !== "Cef" && CPP_DK_GetBrowser() !== "Rml"){
+    //if(CPP_DK_GetBrowser() !== "CEF" && CPP_DK_GetBrowser() !== "RML"){
     //	console.error("DKGit_GitCommit(): Incompatable browser");
     //	return;
     //}

@@ -24,9 +24,9 @@ int DKXMLHttpRequest::send(duk_context* ctx)
 	bool async = duk_require_boolean(ctx, 2);
 	//DKString user; //TODO
 	//DKString password; //TODO
-	DKWARN("DKRocketJS::send("+method+","+url+","+toString(async)+")\n");
+	DKWARN("DKRmlJS::send("+method+","+url+","+toString(async)+")\n");
 	if(has(url,"http://") || has(url,"https://")){
-		DKERROR("DKRocketJS::send(): http/https not implemented yet\n");
+		DKERROR("DKRmlJS::send(): http/https not implemented yet\n");
 		return true;
 	}
 

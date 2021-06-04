@@ -730,7 +730,7 @@ DKDebug.prototype.getSource = function DKDebug_getSource() {
     var source = document.documentElement.outerHTML;
     var assets = CPP_DKAssets_LocalAssets();
 
-    if (dk.getBrowser() === "Rml") {
+    if (dk.getBrowser() === "RML") {
         CPP_DKFile_StringToFile(source, assets + "RmlUi_Source.html");
     } else {
         CPP_DKFile_StringToFile(source, assets + "Browser_Source.html");
@@ -752,10 +752,10 @@ DKDebug.prototype.editor = function DKDebug_editor() {
 }
 
 DKDebug.prototype.debugger = function DKDebug_debugger() {
-    if (dk.getBrowser() === "Rml" || dk.getJSEngine() === "Duktape") {
+    if (dk.getBrowser() === "RML" || dk.getJSEngine() === "Duktape") {
         dkrml.debuggerToggle();
     }
-    if (dk.getBrowser() === "Cef") {
+    if (dk.getBrowser() === "CEF") {
         dkcef.showDevTools(0);
     }
 }

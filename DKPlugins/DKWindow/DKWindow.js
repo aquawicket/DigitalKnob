@@ -68,7 +68,7 @@ function DKWindow_IsFullscreen() {
     return true;
 }
 
-if (DK_GetBrowser() !== "Cef") {
+if (DK_GetBrowser() !== "CEF") {
     function DKWindow_SetHeight(h) {
         //FIXME - does not work
         window.resizeTo(DKWindow_GetWidth(), h);
@@ -76,7 +76,7 @@ if (DK_GetBrowser() !== "Cef") {
     }
 }
 
-if (DK_GetBrowser() !== "Cef") {
+if (DK_GetBrowser() !== "CEF") {
     function DKWindow_SetWidth(w) {
         //FIXME - does not work
         window.resizeTo(w, DKWindow_GetHeight());
@@ -84,7 +84,7 @@ if (DK_GetBrowser() !== "Cef") {
     }
 }
 
-if (DK_GetBrowser() !== "Cef") {
+if (DK_GetBrowser() !== "CEF") {
     function DKWindow_SetX(x) {
         //FIXME - does not work
         window.moveTo(x, DKWindow_GetY());
@@ -92,7 +92,7 @@ if (DK_GetBrowser() !== "Cef") {
     }
 }
 
-if (DK_GetBrowser() !== "Cef") {
+if (DK_GetBrowser() !== "CEF") {
     function DKWindow_SetY(y) {
         //FIXME - does not work
         window.moveTo(DKWindow_GetX(), y);

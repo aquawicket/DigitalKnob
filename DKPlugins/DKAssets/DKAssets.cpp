@@ -6,7 +6,6 @@
 #include "DKAssets/DKAssets.h"
 #include <algorithm>
 
-/////////////////////
 bool DKAssets::Init()
 {
 	DKDEBUGFUNC();
