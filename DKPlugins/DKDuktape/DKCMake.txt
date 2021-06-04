@@ -1,3 +1,4 @@
+DKDEPEND(babel)
 DKDEPEND(duktape)
 
 DKCOPY(${DUKTAPE}/src/duktape.c ${DKPLUGINS}/DKDuktape/duktape.cpp TRUE)
