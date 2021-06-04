@@ -1,5 +1,9 @@
 
-dk.solutionmenu = new DKPlugin("dk_solutionmenu");
+DKSolutionMenu.prototype = Object.create(DKPlugin.prototype);
+function DKSolutionMenu(identifier) {
+    return DKPlugin.call(this, identifier);
+}
+dk.solutionmenu = new DKSolutionMenu("DKSolutionMenu");
 
 dk.solutionmenu.id = "";
 dk.solutionmenu.file = "";
@@ -196,7 +200,7 @@ dk.solutionmenu.rename = function dk_solutionmenu_rename()
 dk.solutionmenu.delete = function dk_solutionmenu_delete()
 {
 	dk.create("DKGui/DKMessageBox.js", function dk_create_callback(){
-		DKFrame_Html("DKGui/DKMessageBox.html");
+		DKSolutionMenu_Html("DKGui/DKMessageBox.html");
 		DKMessageBox_Confirm("delete this file?", function DKMessageBox_Confirm_callback(rval){
 			if(rval === true){
 				console.debug("dk.solutionmenu.Delete(): dk.solutionmenu.file = "+dk.solutionmenu.file);

@@ -1,6 +1,10 @@
 "use strict";
 
-dk.solution = new DKPlugin("dk_solution");
+DKSolution.prototype = Object.create(DKPlugin.prototype);
+function DKSolution(identifier) {
+    return DKPlugin.call(this, identifier);
+}
+dk.solution = new DKSolution("DKSolution");
 
 dk.solution.init = function dk_solution_init(callback) {
     dk.create("DKFile/DKFileAssociation.js");

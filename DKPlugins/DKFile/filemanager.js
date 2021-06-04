@@ -1,6 +1,10 @@
 "use strict";
 
-dk.filemanager = new DKPlugin("dk_filemanager");
+DKFileManager.prototype = Object.create(DKPlugin.prototype);
+function DKFileManager(identifier) {
+    return DKPlugin.call(this, identifier);
+}
+dk.filemanager = new DKFileManager("DKFileManager");
 
 dk.filemanager.init = function dk_filemanager_init(callback) {
     dk.create("DKFile/DKFileAssociation.js");

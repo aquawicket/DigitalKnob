@@ -6,7 +6,6 @@ function DKDebug(identifier) {
 }
 dk.debug = new DKDebug("DKDebug");
 
-
 //Error-first callbacks
 dk.firstFunc = function dk_firstFunc(str1, str2, callback) {
     console.debug("dk.firstFunc(" + str1 + "," + str2 + ")");

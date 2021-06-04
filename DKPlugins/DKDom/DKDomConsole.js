@@ -1,9 +1,7 @@
 //https://developer.mozilla.org/en-US/docs/Web/API/Console
 
-///////////////////////////////
 /*
-var Console = function(pointer)
-{	
+var Console = function(pointer){	
 	Console.prototype.assert = function(assertion, msg){
 		if(assertion){ return; }
 		//CPP_DKConsole_error(msg+"\n");

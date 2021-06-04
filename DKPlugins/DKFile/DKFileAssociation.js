@@ -1,6 +1,10 @@
 "use strict";
 
-dk.fileassociation = new DKPlugin("dk_fileassociation");
+DKFileAssociation.prototype = Object.create(DKPlugin.prototype);
+function DKFileAssociation(identifier) {
+    return DKPlugin.call(this, identifier);
+}
+dk.fileassociation = new DKFileAssociation("DKFileAssociation");
 
 dk.fileassociation.edit = function dk_fileAssociation_edit(file) {
     dk.fileassociation.opentext(file);

@@ -1,6 +1,10 @@
 "use strict";
 
-dk.audioplayer = new DKPlugin("dk_audioplayer");
+DKAudioPlayer.prototype = Object.create(DKPlugin.prototype);
+function DKAudioPlayer(identifier) {
+    return DKPlugin.call(this, identifier);
+}
+dk.audioplayer = new DKAudioPlayer("DKAudioPlayer");
 dk.audioplayer.file = "";
 
 dk.audioplayer.init = function dk_auudioplayer_init() {

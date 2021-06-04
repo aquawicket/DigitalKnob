@@ -6,7 +6,6 @@ function DKDevTools(identifier) {
 }
 dk.devtools = new DKDevTools("DKDevTools");
 
-
 dk.devtools.init = function dk_devtools_init(callback) {
     console.log("dk.devtools.init()");
     callback && callback(dk.devtools);
@@ -15,7 +14,6 @@ dk.devtools.init = function dk_devtools_init(callback) {
 dk.devtools.end = function dk_devtools_end() {
     console.log("dk.devtools.end()");
 }
-
 
 dk.devtools.create = function dk_devtools_create() {
     console.log("dk.devtools.create()");

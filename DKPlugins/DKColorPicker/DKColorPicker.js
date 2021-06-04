@@ -3,9 +3,8 @@ console.log("Loading DKColorPicker.js");
 var event_type;
 var event_id;
 
-/////////////////////////////
-function DKColorPicker_init()
-{
+
+function DKColorPicker_init(){
 	console.log("DKColorPicker_init()");
 	dk.create("DKColorPicker/DKColorPicker.css");
 	dk.create("DKColorPicker/DKColorPicker.html");
@@ -15,9 +14,7 @@ function DKColorPicker_init()
 	byId("DKColorPickerOK").addEventListener("click", DKColorPicker_onevent);
 }
 
-////////////////////////////
-function DKColorPicker_end()
-{
+function DKColorPicker_end(){
 	byId("DKColorPicker/DKColorPicker.html").removeEventListener("GetColor", DKColorPicker_onevent);
 	byId("DKColorPickerBar").removeEventListener("mousedown", DKColorPicker_onevent);
 	byId("DKColorHover").removeEventListener("mousedown", DKColorPicker_onevent);
@@ -28,9 +25,7 @@ function DKColorPicker_end()
 	//dk.close("DKColorPicker/DKColorPicker.css");
 }
 
-/////////////////////////////////////
-function DKColorPicker_OnEvent(event)
-{
+function DKColorPicker_OnEvent(event){
 	//console.log("DKColorPicker_OnEvent("+event.currentTarget.id+","+event.type+","+event.value+")\n");
 	
 	if(event.currentTarget.id === "GetColor"){
@@ -58,10 +53,7 @@ function DKColorPicker_OnEvent(event)
 	}
 }
 
-
-/////////////////////////////////
-function DKColorPicker_ColorBar()
-{
+function DKColorPicker_ColorBar(){
 	var temp = CPP_DK_GetPixelUnderMouse();
 	var rgb_arry = temp.split(",");
 
@@ -77,9 +69,7 @@ function DKColorPicker_ColorBar()
 	byId("DKColorSelected").style.backgroundColor = rgb;
 }
 
-/////////////////////////////////
-function DKColorPicker_ColorBox()
-{
+function DKColorPicker_ColorBox(){
 	var temp = CPP_DK_GetPixelUnderMouse();
 	var rgb_arry = temp.split(",");
 

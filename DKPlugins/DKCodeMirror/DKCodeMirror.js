@@ -1,5 +1,10 @@
 "use strict";
 
+DKCodeMirror.prototype = Object.create(DKPlugin.prototype);
+function DKCodeMirror(identifier) {
+    return DKPlugin.call(this, identifier);
+}
+dk.codemirror = new DKCodeMirror("DKCodeMirror");
 dk.codemirror = new DKPlugin("dk_codemirror");
 
 dk.codemirror.init = function dk_codemirror_init(dk_codemirror_init_callback) {
