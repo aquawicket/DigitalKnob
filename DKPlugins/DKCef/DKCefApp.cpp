@@ -94,7 +94,7 @@ bool DKV8::AttachFunction(const DKString& name, bool (*func)(CefArgs, CefReturn)
 	//FIXME - this is very unstable, not thread safe
 	//NOTE: this stores the function, it will be attached when OnContextCreated is called.
 
-	functions[name] = boost::bind(func, _1, _2);
+	functions[name] = boost::bind(func, boost::placeholders::_1, boost::placeholders::_2);
 	if(!functions[name]){
 		DKERROR("DKV8::AttachFunctions("+name+"): failed to register function\n");
 		return false;

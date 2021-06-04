@@ -642,16 +642,19 @@ Rml::Element* DKRml::addressToElement(const DKString& address)
 {
 	//DKDEBUGFUNC(address);
 	Rml::Element* element;
-	/*
-	if(address == "window"){ // || address == "document")
-		element = DKRml::Get()->document;
+
+	if (address == "window")
+		element = DKRml::Get()->document->GetContext()->GetRootElement(); //Root element that holds all the documents.
+	else if (address == "document")
+		element = DKRml::Get()->document->GetOwnerDocument();
+	//else if (address == "document") {
+	//	element = DKRml::Get()->document;
+	//}
 	else {
-	*/
 		if (address.compare(0, 2, "0x") != 0 || address.size() <= 2 || address.find_first_not_of("0123456789abcdefABCDEF", 2) != std::string::npos) {
 			//DKERROR("NOTE: DKRml::addressToElement(): the address is not a valid hex notation");
 			return NULL;
 		}
-
 		//Convert a string of an address back into a pointer
 		std::stringstream ss;
 		ss << address.substr(2, address.size() - 2);
@@ -662,34 +665,34 @@ Rml::Element* DKRml::addressToElement(const DKString& address)
 			return NULL;
 		}
 		element = reinterpret_cast<Rml::Element*>(tmp);
-	//}
-	if (element->GetTagName().empty()) {
-		return NULL;
 	}
+	if (element->GetTagName().empty())
+		return NULL;
 	return element;
 }
 
-///////////////////////////////////////////////////////
-DKString DKRml::elementToAddress(Rml::Element* element)
-{
+DKString DKRml::elementToAddress(Rml::Element* element){
 	if (!element) {
 		DKERROR("DKRml::elementToAddress(): invalid element\n");
 		return NULL;
 	}
 	std::stringstream ss;
-	/*
-	if (element == DKRml::Get()->document) {
+	if (element == DKRml::Get()->document->GetContext()->GetRootElement())
 		ss << "window";
-		//ss << "document";
+	else if (element == DKRml::Get()->document->GetOwnerDocument())
+		ss << "document";
+	else if (element == DKRml::Get()->document) {
+		//TEST: Let's just test if we ever hear anything from this one
+		DKWARN("element = DKRml::Get()->document");
+		ss << "document";
 	}
 	else {
-	*/
 		const void* address = static_cast<const void*>(element);
 #ifdef WIN32
 		ss << "0x" << address;
 #else 
 		ss << address;
 #endif
-	//}
+	}
 	return ss.str();
 }

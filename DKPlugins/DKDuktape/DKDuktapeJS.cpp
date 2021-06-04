@@ -128,6 +128,7 @@ bool DKDuktapeJS::Init()
 	DKDuktape::AttachFunction("CPP_DK_System", DKDuktapeJS::System);
 	DKDuktape::AttachFunction("CPP_DK_TurnOffMonitor", DKDuktapeJS::TurnOffMonitor);
 	DKDuktape::AttachFunction("CPP_DK_TurnOnMonitor", DKDuktapeJS::TurnOnMonitor);
+	DKDuktape::AttachFunction("CPP_DK_Trace", DKDuktapeJS::Trace);
 	DKDuktape::AttachFunction("CPP_DK_Value", DKDuktapeJS::Value);
 	DKDuktape::AttachFunction("CPP_DK_VirtualMemory", DKDuktapeJS::VirtualMemory);
 	DKDuktape::AttachFunction("CPP_DK_VirtualMemoryUsed", DKDuktapeJS::VirtualMemoryUsed);
@@ -1073,21 +1074,23 @@ int DKDuktapeJS::System(duk_context* ctx)
 	return 1;
 }
 
-/////////////////////////////////////////////////
 int DKDuktapeJS::TurnOffMonitor(duk_context* ctx)
 {
 	if(!DKUtil::TurnOffMonitor()){ return 0; }
 	return 1;
 }
 
-/////////////////////////////////////////
 int DKDuktapeJS::TurnOnMonitor(duk_context* ctx)
 {
 	if(!DKUtil::TurnOnMonitor()){ return 0; }
 	return 1;
 }
 
-/////////////////////////////////
+int DKDuktapeJS::Trace(duk_context* ctx){
+	if (!DKDuktape::Trace()) { return 0; }
+	return 1;
+}
+
 int DKDuktapeJS::Value(duk_context* ctx)
 {
 	DKString evt = duk_require_string(ctx, 0);

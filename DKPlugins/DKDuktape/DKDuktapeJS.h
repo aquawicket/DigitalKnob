@@ -100,6 +100,7 @@ public:
 	static int System(duk_context* ctx);
 	static int TurnOffMonitor(duk_context* ctx);
 	static int TurnOnMonitor(duk_context* ctx);
+	static int Trace(duk_context* ctx);
 	static int Value(duk_context* ctx);
 	static int VirtualMemory(duk_context* ctx);
 	static int VirtualMemoryUsed(duk_context* ctx);
