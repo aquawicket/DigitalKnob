@@ -1,12 +1,12 @@
 "use strict";
 
-DKPhp.prototype = Object.create(DKPlugin.prototype);
-function DKPhp(identifier) {
-    return DKPlugin.call(this, identifier);
+dk.php = new DKPhp();
+
+function DKPhp() {
+    return DKPlugin.call(this, arguments)
 }
-dk.php = new DKPhp("DKPhp");
 
-
+// EXAMPLE
 //DKPhp.prototype.call("GET", "DK/DK.php", "Function", "args", "args", DKPhp_callback);
 DKPhp.prototype.call = function DKPhp_call(httpMethod, phpPath, funcName) {
     const args = arguments;
@@ -74,8 +74,7 @@ DKPhp.prototype.call = function DKPhp_call(httpMethod, phpPath, funcName) {
 }
 
 //Todo - listen for broadcast messaged from php 
-DKPhp.prototype.listen = function DKPhp_listen(){
-       
+DKPhp.prototype.listen = function DKPhp_listen() {
 }
 
 //DKPhp.prototype.noCB = function DKPhp_noCB(rVal) {}

@@ -1,10 +1,10 @@
 //"use strict";
 
-DKFrame.prototype = Object.create(DKPlugin.prototype);
-function DKFrame(identifier) {
-    return DKPlugin.call(this, identifier);
+dk.frame = new DKFrame();
+
+function DKFrame() {
+    return DKPlugin.call(this, arguments);
 }
-dk.frame = new DKFrame("DKFrame");
 
 DKFrame.prototype.init = function DKFrame_init() {
     dk.create("DKGui/DKFrame.css");
@@ -13,12 +13,12 @@ DKFrame.prototype.end = function DKFrame_end() {
     dk.close("DKGui/DKFrame.css");
 }
 
-DKFrame.prototype.create = function DKFrame_create(dkplugin) { 
-    if (!(dkplugin instanceof DKPlugin))
-        return error("Framed objects must be a DKPlugin instance");
+DKFrame.prototype.create = function DKFrame_create(dkplugin) {
+    //if (!(dkplugin instanceof DKPlugin))
+    //return error("Framed objects must be a DKPlugin instance");
     const instance = new DKFrame("new");
     instance.dkplugin = dkplugin;
-    const element = dkplugin.getAccessNode();
+    const element = dkplugin.plugin.getAccessNode();
     if (!element)
         return error("element invalid");
     var width = element.style.width;
@@ -35,8 +35,7 @@ DKFrame.prototype.create = function DKFrame_create(dkplugin) {
         top: "21rem",
         bottom: "0rem",
         left: "0rem",
-        right: "0rem"
-        //width: "unset",
+        right: "0rem"//width: "unset",
         //height: "unset"
     }
     frame.appendChild(frame.content);
@@ -46,7 +45,7 @@ DKFrame.prototype.create = function DKFrame_create(dkplugin) {
 
 DKFrame.prototype.close = function DKFrame_close() {
     console.log("DKFrame.prototype.close()");
-    this.dkplugin.close();
+    DKPlugin.prototype.close.call(this.dkplugin);
     this.frame.parentNode.removeChild(this.frame);
     DKPlugin.prototype.close.call(this);
     return true;

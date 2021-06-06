@@ -1,10 +1,10 @@
 "use strict";
 
-DKDevToolsButton.prototype = Object.create(DKPlugin.prototype);
-function DKDevToolsButton(identifier) {
-    return DKPlugin.call(this, identifier);
+dk.devtoolsbutton = new DKDevToolsButton();
+
+function DKDevToolsButton() {
+    return DKPlugin.call(this, arguments);
 }
-dk.devtoolsbutton = new DKDevToolsButton("DKDevToolsButton");
 
 DKDevToolsButton.prototype.init = function DKDevToolsButton_init() {
     dk.preloadImage("DKDevTools/developer.png");
@@ -33,7 +33,11 @@ DKDevToolsButton.prototype.create = function DKDevToolsButton_create() {
 }
 
 DKDevToolsButton.prototype.show = function DKDevToolsButton_show() {
+
+    //DKPlugin.create("DKDevTools/DKDevTools.js");
+
     dk.create("DKDevTools/DKDevTools.js", function dk_create_callback() {
         dk.devtools.create();
     });
+
 }

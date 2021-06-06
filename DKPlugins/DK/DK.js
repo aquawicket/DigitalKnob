@@ -34,10 +34,10 @@ dk.x = new Object;
     }
 }());
 
-const require = function require() {
+const required = function required() {
     for (let n = 0; n < arguments.length; n++) {
         if (typeof arguments[n] !== "object")
-            throw new Error(" Must use {} around variables when using require. EXAMPLE: require({var1}, {var2})");
+            throw new Error(" Must use {} around variables when using require. EXAMPLE: required({var1}, {var2})");
         var name = Object.keys(arguments[n])[0];
         var value = arguments[n][name];
         if (value === undefined)
@@ -130,7 +130,7 @@ dk.hasCPP = function dk_hasCPP() {
 }
 
 dk.getPlugin = function dk_getPlugin(url) {
-    require({
+    required({
         url
     });
     var file = url;
@@ -156,9 +156,6 @@ dk.getPlugin = function dk_getPlugin(url) {
 }
 
 dk.create = function dk_create(data, dk_create_callback) {
-    require({
-        data
-    });
     if (dk.hasCPP())
         CPP_DK_Create(data);
 
@@ -172,7 +169,7 @@ dk.create = function dk_create(data, dk_create_callback) {
             //    console.warn("dk.create(" + data + "): does not have a callback");
         })) {
             if (dk.getJSEngine() === "Duktape") {
-                console.log("dk.loadJS("+arry[0]+") failed");
+                console.log("dk.loadJS(" + arry[0] + ") failed");
                 dk_create_callback && dk_create_callback(true);
                 return true;
             }
@@ -207,7 +204,7 @@ dk.create = function dk_create(data, dk_create_callback) {
 }
 
 dk.close = function dk_close(data) {
-    require({
+    required({
         data
     });
     data = data.split(",");
@@ -254,10 +251,10 @@ dk.close = function dk_close(data) {
 }
 
 dk.loadJs = function dk_loadJs(url, dk_loadJs_callback) {
-    require({
+    required({
         url
     });
-    if (dk.getObjects().includes(url)) {
+    if (dk.getObjects().indexOf(url) > -1) {
         console.log(url + " script already loaded...");
         dk_loadJs_callback(true);
         return true;
@@ -277,9 +274,10 @@ dk.loadJs = function dk_loadJs(url, dk_loadJs_callback) {
     script.onload = script.onreadystatechange = function script_onload() {
         //FIXME - DigitalKnob can't trigger onload yet.
         if (!done && (!this.readyState || this.readyState === "loaded" || this.readyState === "complete")) {
-            console.log("Loaded "+url);
+            console.log("Loaded " + url);
             var plugin = dk.getPlugin(url);
             if (plugin) {
+                plugin.url = url;
                 DKPlugin.prototype.init.call(plugin, function callback(instance) {
                     done = true;
                     dk_loadJs_callback && dk_loadJs_callback(true);
@@ -300,7 +298,7 @@ dk.loadJs = function dk_loadJs(url, dk_loadJs_callback) {
     //FIXME - DigitalKnob can't trigger onload yet, so we do this
 
     if (dk.getJSEngine() === "Duktape") {
-        console.log("Duktape Loading: "+url);
+        console.log("Duktape Loading: " + url);
         var plugin = dk.getPlugin(url);
         plugin && console.log("loading dk." + plugin.name + " plugin");
         if (plugin && plugin.init) {
@@ -318,7 +316,7 @@ dk.loadJs = function dk_loadJs(url, dk_loadJs_callback) {
 }
 
 dk.loadHtml = function dk_loadHtml(url, parent, dk_loadHtml_callback) {
-    require({
+    required({
         url
     });
     if (url.indexOf(".html") === -1)
@@ -361,7 +359,7 @@ dk.loadHtml = function dk_loadHtml(url, parent, dk_loadHtml_callback) {
 }
 
 dk.loadCss = function dk_loadCss(url, dk_loadCss_callback) {
-    require({
+    required({
         url
     });
     if (dk.getObjects().includes(url)) {
@@ -389,7 +387,7 @@ dk.checkFileSupport = function dk_checkFileSupport() {
 
 /*
 dk.preventDefault = function dk_preventDefault(event){
-    require({event});
+    required({event});
 	if(event.stopPropagation) {
         event.preventDefault();
     } else {
@@ -398,7 +396,7 @@ dk.preventDefault = function dk_preventDefault(event){
 }
 
 dk.stopPropagation = function dk_stopPropagation(event){
-    require({event});
+    required({event});
 	if(event.stopPropagation) {
         event.stopPropagation();
     } else {
@@ -408,7 +406,7 @@ dk.stopPropagation = function dk_stopPropagation(event){
 */
 
 dk.setCookie = function dk_setCookie(cname, cvalue, exdays) {
-    require({
+    required({
         cname
     }, {
         cvalue
@@ -422,7 +420,7 @@ dk.setCookie = function dk_setCookie(cname, cvalue, exdays) {
 }
 
 dk.getCookie = function dk_getCookie(cname) {
-    require({
+    required({
         cname
     });
     var name = cname + "=";
@@ -438,7 +436,7 @@ dk.getCookie = function dk_getCookie(cname) {
 }
 
 dk.makeStruct = function dk_makeStruct(names) {
-    require({
+    required({
         names
     });
     var names = names.split(' ');
@@ -458,7 +456,7 @@ dk.makeStruct = function dk_makeStruct(names) {
 
 /*
 dk.replace = function dk_replace(str, old, newstr) {
-    require({str},{old},{newstr});
+    required({str},{old},{newstr});
     var re = new RegExp(old,'g');
     return str.replace(re, newstr);
 }
@@ -484,7 +482,7 @@ dk.isLocal = function dk_isLocal() {
 */
 
 dk.available = function dk_available(name) {
-    require({
+    required({
         name
     });
     //FIXME: This function needs to be investigated
@@ -631,7 +629,7 @@ dk.iE = function dk_iE() {
 }
 
 dk.fileToString = function dk_fileToString(url, dk_fileToString_callback) {
-    require({
+    required({
         url
     }, {
         dk_fileToString_callback
@@ -642,7 +640,7 @@ dk.fileToString = function dk_fileToString(url, dk_fileToString_callback) {
 }
 
 dk.sleep = function dk_sleep(milliseconds) {
-    require({
+    required({
         milliseconds
     });
     var start = new Date().getTime();
@@ -663,7 +661,7 @@ dk.clearSelection = function dk_clearSelection() {
 }
 
 dk.getElements = function dk_getElements(element) {
-    require({
+    required({
         element
     });
     var string;
@@ -681,7 +679,7 @@ dk.getElements = function dk_getElements(element) {
 }
 
 dk.getAvailableId = function dk_getAvailableId(id) {
-    require({
+    required({
         id
     });
     var out = id;
@@ -703,7 +701,7 @@ dk.getAvailableId = function dk_getAvailableId(id) {
 // *** UNKNOWN *please test* *** //
 
 dk.getInnerHtmlString = function dk_getInnerHtmlString(id) {
-    require({
+    required({
         id
     });
     var element = byId(id);
@@ -716,7 +714,7 @@ dk.getInnerHtmlString = function dk_getInnerHtmlString(id) {
 }
 
 dk.setInnerHtmlString = function dk_setInnerHtmlString(id, string) {
-    require({
+    required({
         id
     }, {
         string
@@ -870,7 +868,7 @@ dk.getValue = function dk_getValue(variable) {
 */
 
 dk.preloadFile = function dk_preloadFile(url) {
-    require({
+    required({
         url
     });
     var file = new Object();
@@ -879,7 +877,7 @@ dk.preloadFile = function dk_preloadFile(url) {
 }
 
 dk.preloadImage = function dk_preloadImage(url) {
-    require({
+    required({
         url
     });
     var img = new Image();
@@ -888,7 +886,7 @@ dk.preloadImage = function dk_preloadImage(url) {
 }
 
 dk.saveToLocalStorage = function dk_saveToLocalStorage(name, string) {
-    require({
+    required({
         name
     }, {
         string
@@ -897,14 +895,14 @@ dk.saveToLocalStorage = function dk_saveToLocalStorage(name, string) {
 }
 
 dk.loadFromLocalStorage = function dk_loadFromLocalStorage(name) {
-    require({
+    required({
         name
     });
     return localStorage.getItem(name);
 }
 
 dk.removeFromLocalStorage = function dk_removeFromLocalStorage(name) {
-    require({
+    required({
         name
     });
     localStorage.removeItem(name);
@@ -916,7 +914,7 @@ dk.removeFromLocalStorage = function dk_removeFromLocalStorage(name) {
 //https://developer.mozilla.org/en-US/docs/Web/HTTP/Status
 //https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy
 dk.sendRequest = function dk_sendRequest(httpMethod, url, dk_sendRequest_callback) {
-    require({
+    required({
         httpMethod
     }, {
         url
@@ -1015,7 +1013,7 @@ dk.sendRequest = function dk_sendRequest(httpMethod, url, dk_sendRequest_callbac
 }
 
 dk.checkForUNICODE = function dk_checkForUNICODE(str) {
-    require({
+    required({
         str
     });
     for (let i = 0, n = str.length; i < n; i++) {
@@ -1029,7 +1027,7 @@ dk.checkForUNICODE = function dk_checkForUNICODE(str) {
 }
 
 dk.validateStrict = function dk_validateStrict(str) {
-    require({
+    required({
         str
     });
     return str;
@@ -1068,7 +1066,7 @@ if (typeof String.prototype.trim !== 'function') {
 if (!Array.prototype.includes) {
     Array.prototype.includes = function(searchElement /*, fromIndex*/
     ) {
-        require({
+        required({
             searchElement
         });
         if (this == null) {
@@ -1116,7 +1114,7 @@ if (!Array.prototype.includes) {
  * @type Number
  */
 Number.prototype.clamp = function Number_clamp(min, max) {
-    require({
+    required({
         min
     }, {
         max
@@ -1144,17 +1142,17 @@ Object.prototype.clone = Array.prototype.clone = function() {
 
 //https://humanwhocodes.com/blog/2009/04/28/javascript-error-handling-anti-pattern/
 dk.errorCatcher = function dk_errorCatcher(obj, name) {
-    require({
-        obj
-    });
+    //required({
+    ///    obj
+    //});
     !name && (name = obj.constructor.name);
     for (let func in obj) {
         if (func.includes("_try"))
             continue;
         if (obj[func + "_try"])
             continue;
-        if(obj[func] == DKPlugin.prototype[func])
-            continue;    
+        if (obj[func] == DKPlugin.prototype[func])
+            continue;
         const method = obj[func];
         if (typeof method === "function") {
             Object.defineProperty(method, 'name', {
@@ -1182,7 +1180,7 @@ dk.errorCatcher = function dk_errorCatcher(obj, name) {
 
 // https://stackoverflow.com/a/63785848/688352
 dk.testSyntax = function dk_testSyntax(code) {
-    require({
+    required({
         code
     });
     try {

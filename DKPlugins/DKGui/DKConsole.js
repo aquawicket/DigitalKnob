@@ -4,11 +4,11 @@
 // https://developer.mozilla.org/en-US/docs/Web/API/Console#outputting_text_to_the_console
 // https://developer.chrome.com/docs/devtools/console/api/
 
-DKConsole.prototype = Object.create(DKPlugin.prototype);
-function DKConsole(identifier) {
-    return DKPlugin.call(this, identifier);
+dk.console = new DKConsole();
+
+function DKConsole() {
+    return DKPlugin.call(this, arguments);
 }
-dk.console = new DKConsole("DKConsole");
 
 //intercept console and reroute it to xconsole and dk.console
 //Example:
@@ -552,6 +552,9 @@ DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left
 
     // https://console.spec.whatwg.org/#error
     DKConsole.prototype.error = function DKConsole_error() {
+        for (var _len = arguments.length, data = new Array(_len), _key = 0; _key < _len; _key++) {
+            data[_key] = arguments[_key];
+        }
         if (!data)
             return warn("data invalid");
         dk.console.groupCollapsed(data, "error");

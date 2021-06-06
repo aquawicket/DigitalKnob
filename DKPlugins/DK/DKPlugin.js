@@ -2,132 +2,84 @@
 
 //https://www.phpied.com/3-ways-to-define-a-javascript-class/
 
-//Multiple instances of DKPlugin derived objects are allowed by default.
-//To make it singleton, simpily pass a unique name to your new DKPlugin() call. I.E.  const colorSettingsWindow = new DKPlugin("ColorSettingWindow");
-//You can also make semi-singleton objects that use an identifier to differentiate between mucitiple objects 
-//The identifier vabliable can be a label, name, and item number.. just something unique to that object instance. 
-//The DKPlugin constructor will not allwow multiple instances with the same identifier value to be created
-//After creating the DKPlugin object, check it's .ok derived variable before continuing processing.
-//To use other gui compenents with your widget, like dk.frame, the you widgets base element with .setElement(element);
+const DKPlugin = function DKPlugin() {
 
-//A typical DKPlugin might look something like this.
-const CreateMyPlugin = function CreateMyPlugin() {
-    const myPlugin = new DKPlugin("myPlugin");
-    if (!myPlugin.ok)
-        return;
+    // When calls are made to init, end, create and close, DKPlugin will take presidence
+    // and control flow. If an object calls you to close completley, you may be in a frame,
+    // or container that would get stranded. DKPlugin will determine who goes first and what 
+    // cleanup to do. 
+    DKPlugin.prototype.superviseFuncs = function DKPlugin_superviseFuncs(plugin) {
+        console.debug("DKPlugin.prototype.superviseFuncs():" + plugin.id);
 
-    const myDiv = document.createElement("div");
-    myDiv.id = "My_Plugin";
-    myDiv.style.width = "200px";
-    myDiv.style.height = "200px";
-    myDiv.style.backgroundColor = "rgb(50,50,50)";
+        if (plugin.init)
+            plugin.xinit = plugin.init;
+        plugin.init = DKPlugin.prototype.init;
 
-    const text = document.createElement("span");
-    text.innerHTML = "some content"
-    text.style.position = "absolute";
-    text.style.bottom = "60px";
-    text.style.right = "70px";
-    text.style.color = "rgb(0,0,0)";
-    myDiv.appendChild(text);
+        if (plugin.create)
+            plugin.xcreate = plugin.create;
+        plugin.create = DKPlugin.prototype.create;
 
-    myPlugin.setElement(myDiv);
-    dk.frame.create(myPlugin);
-}
+        if (plugin.close)
+            plugin.xclose = plugin.close;
+        plugin.close = DKPlugin.prototype.close;
 
-/**
- * returns a newly created DKPlugin instance 
- *
- * Example: const myThing = new DKPlugin(identifier)
- *
- * @param {identifier} "new" to create a new instance or a unique identifier
- * @returns the instance of the created DKPlugin object
- * @type object
- */
-const DKPlugin = function DKPlugin(identifier) {
+        if (plugin.end)
+            plugin.xend = plugin.end;
+        plugin.end = DKPlugin.prototype.end;
 
-    DKPlugin.prototype.injectFuncs = function DKPlugin_injectFuncs() {
-        //console.log("DKPlugin.prototype.injectFuncs(): " + this.name);
-        if (this.init !== DKPlugin.prototype.init) {
-            this.plugin_init = this.init;
-            this.init = DKPlugin.prototype.init;
-        }
-        if (this.end !== DKPlugin.prototype.end) {
-            this.plugin_end = this.end;
-            this.end = DKPlugin.prototype.end;
-        }
-        if (this.create !== DKPlugin.prototype.create) {
-            this.plugin_create = this.create;
-            this.create = DKPlugin.prototype.create;
-        }
-        if (this.close !== DKPlugin.prototype.close) {
-            this.plugin_close = this.close;
-            this.close = DKPlugin.prototype.close;
-        }
-        this.injected = true;
+        plugin.supervised = true;
     }
 
     DKPlugin.prototype.init = function DKPlugin_init(callback) {
-        !this.name && (this.name = this.identifier);
-        //console.log("DKPlugin.prototype.init(): " + this.name);
-        !this.injected && this.injectFuncs && this.injectFuncs();
-        dk.errorCatcher(this, "dk." + this.name);
-        var scripts = document.getElementsByTagName("script");
-        this.url = scripts[scripts.length - 1].src;
-
-        if (this.plugin_init) {
-            this.plugin_init(function plugin_init_callback() {
-                callback && callback(this);
-            });
-        }
+        console.log("DKPlugin.prototype.init(): " + this.id);
+        //!this.plugin && (this.plugin = DKPlugin.prototype);
+        !this.supervised && DKPlugin.prototype.superviseFuncs(this);
+        this.xinit && this.xinit(function xinit_callback() {
+            callback && callback(this);
+        });
         return this;
     }
 
     DKPlugin.prototype.end = function DKPlugin_end() {
-        //console.log("DKPlugin.prototype.end(): " + this.name);
-        this.plugin_end && this.plugin_end.apply(this, arguments);
+        console.log("DKPlugin.prototype.end(): " + this.id);
+        if (this.xend)
+            this.xend.apply(this, arguments);
+
         var plugin = dk.getPlugin(this.url);
+        delete this;
+        delete DKDevTools.prototype;
         delete dk[plugin.name];
+        
         var scripts = document.getElementsByTagName("script");
         for (var n = 0; n < scripts.length; n++) {
-            if (scripts[n].src === this.url) {
+            if (scripts[n].src.includes(this.url)) {
                 scripts[n].parentNode.removeChild(scripts[n]);
                 break;
             }
         }
-        return true;
     }
 
     DKPlugin.prototype.create = function DKPlugin_create() {
-        //console.log("DKPlugin.prototype.create(): " + this.name);
-        !this.injected && this.injectFuncs();
-        if (this.plugin_create)
-            return this.plugin_create.apply(this, arguments);
+        console.log("DKPlugin.prototype.create(): " + this.id);
+        if (this.singleton) {
+            this.create = function() {
+                console.log("create() is disabled on singletons after first call");
+            }
+        }
+        if (this.xcreate)
+            return this.xcreate.apply(this, arguments);
     }
 
     DKPlugin.prototype.close = function DKPlugin_close() {
-        //console.log("DKPlugin.prototype.close(): " + this.name);
-        var instance = this;
-        var index = DKPlugin.instances.indexOf(instance);
-        if (index <= -1)
-            return error("Unable to find instance in DKPlugin");
-        DKPlugin.instances[index].removeInstance(DKPlugin.instances[index]);
-        if (this.plugin_close)
-            return this.plugin_close.apply(this, arguments);
-    }
+        console.log("DKPlugin.prototype.close(" + this.id + ")");
 
-    DKPlugin.prototype.getInstance = function DKPlugin_getInstance(instance) {
-        !this.name && (this.name = this.identifier);
-        //console.log("DKPlugin.prototype.getInstance(): " + this.name);
-        !instance && (instance = this);
-        const index = DKPlugin.instances.indexOf(instance);
-        if (index <= -1)
-            return error("Unable to find instance of DKPlugin");
-        return DKPlugin.instances[index];
+        DKPlugin.prototype.removeInstance(this);
+        if (this.xclose)
+            return this.xclose.apply(this, arguments);
     }
 
     DKPlugin.prototype.removeInstance = function DKPlugin_removeInstance(instance) {
-        //console.log("DKPlugin.prototype.removeInstance(): " + this.name);
-        !instance && (instance = this);
+        console.log("DKPlugin.prototype.removeInstance(): " + instance.id);
         const index = DKPlugin.instances.indexOf(instance);
         if (index <= -1)
             return error("Unable to find instance in DKPlugin");
@@ -136,69 +88,84 @@ const DKPlugin = function DKPlugin(identifier) {
     }
 
     DKPlugin.prototype.setUrl = function DKPlugin_setUrl(url) {
-        //console.log("DKPlugin.prototype.setUrl(): " + this.name);
+        //console.log("DKPlugin.prototype.setUrl(): " + this.id);
         this.url = url;
     }
 
     DKPlugin.prototype.getUrl = function DKPlugin_getUrl() {
-        //console.log("DKPlugin.prototype.getUrl(): " + this.name);
+        //console.log("DKPlugin.prototype.getUrl(): " + this.id);
         if (!this.url)
             return error("this.url invalid");
         return this.url;
     }
 
     DKPlugin.prototype.setAccessNode = function DKPlugin_setAccessNode(node) {
-        //console.log("DKPlugin.prototype.setAccessNode(): " + this.name);
+        //console.log("DKPlugin.prototype.setAccessNode(): " + this.id);
         if (!node instanceof EventTarget)
             return error("setAccessNode() requires an node thats an instanceof EventTarget");
         this.node = node;
     }
 
     DKPlugin.prototype.getAccessNode = function DKPlugin_getAccessNode() {
-        //console.log("DKPlugin.prototype.getAccessNode(): " + this.name);
+        //console.log("DKPlugin.prototype.getAccessNode(): " + this.id);
         if (!this.node)
             return error("DKPlugin.getAccessNode(): node not set, please use yourDKPlugin.setAccessNode(node)");
         return this.node;
     }
 
-    //EXECUTION STARTS HERE
-    if (arguments.length) {
-        if (arguments[0] === undefined) {
-            let errmsg = "DKPlugin was invoked with an argument that evaluated to undefined.\n";
-            errmsg += "You can use the 'new' keyword to create new instances or,...\n";
-            errmsg += "If you wish to make this object completley singleton, just pass it a unique constructor name like the name of the class\n";
-            return error(errmsg);
-        }
+    //// EXECUTION STARTS HERE
+    const i = DKPlugin.instances.indexOf(this);
+    if (i > -1) {
+        console.warn("Returning already existing instance with id: " + this.id + " @index " + i);
+        DKPlugin.instances[i].ok = false;
+        return DKPlugin.instances[i];
+    }
 
-        let identifier = arguments[0];
-        if (identifier) {
-            //using the "new" keyword when callin DKPlugin() will create a new instance.
-            if (identifier === "new")
-                identifier = identifier + DKPlugin.instances.length;
-            this.identifier = identifier;
-            !this.name && (this.name = this.identifier);
-            for (let n = 0; n < DKPlugin.instances.length; n++) {
-                if (DKPlugin.instances[n].identifier == this.identifier) {
-                    console.debug("DKPlugin(" + identifier + ") already exists");
-                    DKPlugin.instances[n].ok = false;
-                    return DKPlugin.instances[n];
-                }
+    if (arguments[0] && arguments[0][0] && arguments[0][0] === "singleton")
+        this.singleton = true;
+    this.type = this.constructor.name;
+    this.id = this.type;
+
+    let num = 0;
+    for (let n = 0; n < DKPlugin.instances.length; n++) {
+        if (DKPlugin.instances[n].type === this.type) {
+            if (this.singleton || DKPlugin.instances[n].singleton) {
+                console.warn("Returning existing 'singleton' instance of type: " + this.type + " @index " + index);
+                DKPlugin.instances[n].ok = false;
+                return DKPlugin.instances[n];
+            }
+            if ((this.type + num) === DKPlugin.instances[n].id) {
+                n = 0;
+                num++
             }
         }
     }
+    this.id = this.type + num;
 
-    //Not sure how this can happen, but just to be safe...
-    if (DKPlugin.instances.includes(this)) {
-        const index = DKPlugin.instances.indexOf(this);
-        console.error("An instance of this already exists in DKPlugin @index " + index);
-        DKPlugin.instances[index].ok = false;
-        return DKPlugin.instances[index];
-    }
-
-    const index = DKPlugin.instances.push(this) - 1;
-    DKPlugin.instances[index].ok = true;
-    //console.debug("created DKPlugin("+identifier+") @index "+index);
-    return DKPlugin.instances[index];
+    const newIndex = DKPlugin.instances.push(this) - 1;
+    DKPlugin.instances[newIndex].ok = true;
+    dk.errorCatcher(this, this.type);
+    //console.debug("DKPlugin.body: " + this.id);
+    this.plugin = DKPlugin.prototype;
+    return DKPlugin.instances[newIndex];
 }
 
 DKPlugin.instances = new Array;
+
+DKPlugin.create = function DKPlugin_create(url) {
+    console.debug("DKPlugin.create(" + url + ")");
+    var scripts = document.getElementsByTagName("script");
+    for (var n = 0; n < scripts.length; n++) {
+        if (scripts[n].src.includes(url)) {
+            console.info("%c" + url + " is already loaded", "color:orange;");
+            return true;
+        }
+    }
+    var head = document.getElementsByTagName('head')[0];
+    var script = document.createElement('script');
+    script.id = url;
+    script.setAttribute('type', 'text/javascript');
+    script.setAttribute('async', true);
+    script.setAttribute('src', url);
+    head.appendChild(script);
+}

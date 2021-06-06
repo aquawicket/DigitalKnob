@@ -1,10 +1,10 @@
 "use strict";
 
-DKDrag.prototype = Object.create(DKPlugin.prototype);
-function DKDrag(identifier) {
-    return DKPlugin.call(this, identifier);
+dk.drag = new DKDrag();
+
+function DKDrag() {
+    return DKPlugin.call(this, arguments);
 }
-dk.drag = new DKDrag("DKDrag");
 
 DKDrag.prototype.addHandle = function DKDrag_addHandle(element, drag_element) {
     //!dk.iE() && dk.getBrowser() !== "RML" && element.style.setProperty("pointer-events", "all");

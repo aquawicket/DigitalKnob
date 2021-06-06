@@ -1,23 +1,23 @@
 "use strict";
 
-DKMenu.prototype = Object.create(DKPlugin.prototype);
-function DKMenu(identifier) {
-    return DKPlugin.call(this, identifier);
+dk.menu = new DKMenu();
+
+function DKMenu() {
+    return DKPlugin.call(this, arguments);
 }
-dk.menu = new DKMenu("DKMenu");
 
 DKMenu.prototype.init = function DKMenu_init() {}
 
 DKMenu.prototype.end = function DKMenu_end() {}
 
-DKMenu.prototype.init = function DKMenu_init(){
+DKMenu.prototype.init = function DKMenu_init() {
     dk.create("DKGui/DKMenu.css");
 }
 
 DKMenu.prototype.createInstance = function DKMenu_createInstance(parent) {
 
     let dkmenu = document.createElement("div");
-    dkmenu.setAttribute("dk_menu","menu");
+    dkmenu.setAttribute("dk_menu", "menu");
     //These stles can be found in DKMenu.css
     //dkmenu.style.boxSizing = "border-box";
     //dkmenu.style.borderColor = "rgb(60,60,60)";
@@ -37,9 +37,9 @@ DKMenu.prototype.createInstance = function DKMenu_createInstance(parent) {
     dkmenu.style.borderRightWidth = "1rem";
     dkmenu.style.borderBottomWidth = "0rem";
     */
-    if(parent){
+    if (parent) {
         parent.appendChild(dkmenu);
-    }else{
+    } else {
         document.body.appendChild(dkmenu);
     }
     document.addEventListener('mousedown', function(event) {
@@ -53,7 +53,7 @@ DKMenu.prototype.createInstance = function DKMenu_createInstance(parent) {
 
 DKMenu.prototype.addItem = function DKMenu_addItem(menu, label, callback) {
     let dkmenuItem = document.createElement("div");
-    dkmenuItem.setAttribute("dk_menu","item");
+    dkmenuItem.setAttribute("dk_menu", "item");
     //These stles are now  done in DKMenu.css
     //dkmenuItem.style.backgroundColor = "rgb(20,20,20)";
     //dkmenuItem.style.color = "rgb(170,170,170)";
@@ -82,7 +82,7 @@ DKMenu.prototype.addItem = function DKMenu_addItem(menu, label, callback) {
     dkmenuItem.style.borderTopWidth = "0rem";
     dkmenuItem.style.borderLeftWidth = "0rem";
     dkmenuItem.style.borderRightWidth = "0rem";
-    dkmenuItem.onmousedown = function onmousedown_callback(event){
+    dkmenuItem.onmousedown = function onmousedown_callback(event) {
         callback && callback(event);
         //event.stopPropagation();
     }

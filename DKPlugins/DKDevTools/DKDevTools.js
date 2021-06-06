@@ -1,10 +1,9 @@
 "use strict";
 
-DKDevTools.prototype = Object.create(DKPlugin.prototype);
-function DKDevTools(identifier) {
-    return DKPlugin.call(this, identifier);
+dk.devtools = new DKDevTools("singleton");
+function DKDevTools() {
+    return DKPlugin.call(this, arguments);
 }
-dk.devtools = new DKDevTools("DKDevTools");
 
 DKDevTools.prototype.init = function DKDevTools_init(callback) {
     console.log("DKDevTools.prototype.init()");
@@ -21,7 +20,7 @@ DKDevTools.prototype.create = function DKDevTools_create() {
     dk.devtools.div.style.width = "200rem";
     dk.devtools.div.style.height = "300rem";
     dk.devtools.div.style.overflow = "auto";
-    dk.devtools.setAccessNode(dk.devtools.div);
+    dk.devtools.plugin.setAccessNode(dk.devtools.div);
     dk.devtools.addTools();
 
     const dkframe = dk.frame.create(dk.devtools);

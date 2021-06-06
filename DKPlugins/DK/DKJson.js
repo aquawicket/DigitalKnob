@@ -2,12 +2,19 @@
 
 //https://goessner.net/articles/JsonPath/index.html#e2
 
+/*
 DKJson.prototype = Object.create(DKPlugin.prototype);
 function DKJson(identifier) {
     return DKPlugin.call(this, identifier);
 }
 dk.json = new DKJson("DKJson");
+*/
 
+dk.json = new DKJson();
+
+function DKJson() {
+    return DKPlugin.call(this, arguments)
+}
 
 DKJson.prototype.prettyJson = function DKJson_prettyJson(jsonStr) {
     if (typeof jsonStr !== 'string')
@@ -113,7 +120,7 @@ DKJson.prototype.loadFromLocalStorage = function DKJson_loadFromLocalStorage(lab
 
 // https://stackoverflow.com/a/8611131/688352
 // https://stackoverflow.com/a/5612849/688352
-DKJson.prototype.objectToString = function DKJson_objectToString(obj){
+DKJson.prototype.objectToString = function DKJson_objectToString(obj) {
     const result = JSON.stringify(obj, null, 4);
     return result;
 }

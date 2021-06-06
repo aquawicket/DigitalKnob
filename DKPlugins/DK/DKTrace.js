@@ -1,12 +1,10 @@
 "use strict";
 
+dk.trace = new DKTrace();
 
-DKTrace.prototype = Object.create(DKPlugin.prototype);
-function DKTrace(identifier) {
-    return DKPlugin.call(this, identifier);
+function DKTrace() {
+    return DKPlugin.call(this, arguments)
 }
-dk.trace = new DKTrace("DKTrace");
-
 
 DKTrace.prototype.editFile = function dk_trace_editFile(file, line, ch) {
     file = file.replace("file:///", "");
@@ -20,6 +18,7 @@ DKTrace.prototype.editFile = function dk_trace_editFile(file, line, ch) {
     });
 
 }
+
 DKTrace.prototype.stackToConsoleString = function dk_trace_stackToConsoleString(arg, deleteTo) {
     let jsonStack;
     let headerMsg = false;

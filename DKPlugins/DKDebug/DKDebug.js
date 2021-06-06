@@ -1,12 +1,10 @@
 "use strict";
 
-DKDebug.prototype = Object.create(DKPlugin.prototype);
-function DKDebug(identifier) {
-    return DKPlugin.call(this, identifier);
+dk.debug = new DKDebug();
+
+function DKDebug() {
+    return DKPlugin.call(this, arguments);
 }
-dk.debug = new DKDebug("DKDebug");
-
-
 
 //Error-first callbacks
 dk.firstFunc = function dk_firstFunc(str1, str2, callback) {

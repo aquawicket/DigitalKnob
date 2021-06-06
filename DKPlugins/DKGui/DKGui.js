@@ -1,10 +1,10 @@
 "use strict";
 
-DKGui.prototype = Object.create(DKPlugin.prototype);
-function DKGui(identifier) {
-    return DKPlugin.call(this, identifier);
+dk.gui = new DKGui();
+
+function DKGui() {
+    return DKPlugin.call(this, arguments);
 }
-dk.gui = new DKGui("DKGui");
 
 DKGui.prototype.createElement = function DKGui_createElement(parent, tag, id, top, bottom, left, right, width, height, onclick) {
     var ele = document.createElement(tag);
@@ -151,7 +151,9 @@ DKGui.prototype.addResizeHandler = function DKGui_addResizeHandler(element, call
     });
 }
 
-DKGui.prototype.randomRGB = function DKGui_randomRGB(){
-    var o = Math.round, r = Math.random, s = 255;
-    return 'rgb(' + o(r()*s) + ',' + o(r()*s) + ',' + o(r()*s) + ')';
+DKGui.prototype.randomRGB = function DKGui_randomRGB() {
+    var o = Math.round
+      , r = Math.random
+      , s = 255;
+    return 'rgb(' + o(r() * s) + ',' + o(r() * s) + ',' + o(r() * s) + ')';
 }

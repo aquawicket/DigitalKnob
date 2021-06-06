@@ -1,11 +1,9 @@
 "use strict";
 
-DKMessageBox.prototype = Object.create(DKPlugin.prototype);
-function DKMessageBox(identifier) {
-    return DKPlugin.call(this, identifier);
+dk.messagebox = new DKMessageBox();
+function DKMessageBox() {
+    return DKPlugin.call(this, arguments);
 }
-dk.messagebox = new DKMessageBox("DKMessageBox");
-
 
 DKMessageBox.prototype.init = function init(init_callback){
     dk.create("DKGui/DKMessageBox.css");
@@ -24,7 +22,7 @@ DKMessageBox.prototype.create = function create(create_callback) {
         if (!html)
             return error("invalid html", create_callback);
         instance.html = html;
-        instance.setAccessNode(html);
+        instance.plugin.setAccessNode(html);
         instance.message = html.querySelector("[dkmessagebox='message']");
         instance.input = html.querySelector("[dkmessagebox='input']");
         instance.cancel = html.querySelector("[dkmessagebox='cancel']");

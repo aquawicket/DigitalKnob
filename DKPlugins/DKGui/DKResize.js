@@ -1,10 +1,10 @@
 "use strict";
 
-DKResize.prototype = Object.create(DKPlugin.prototype);
-function DKResize(identifier) {
-    return DKPlugin.call(this, identifier);
+dk.resize = new DKResize();
+
+function DKResize() {
+    return DKPlugin.call(this, arguments);
 }
-dk.resize = new DKResize("DKResize");
 
 DKResize.prototype.create = function DKResize_create(element) {
     if (!element)
@@ -60,7 +60,7 @@ DKResize.prototype.create = function DKResize_create(element) {
     dk.resize.right.style.width = "4rem";
     dk.resize.right.style.cursor = "e-resize";
     dk.resize.addHandle(dk.resize.right, element);
-    
+
     dk.resize.bottom = dk.gui.createElement(element, "div", "dk_resize_bottom");
     dk.resize.bottom.style.removeProperty("top");
     dk.resize.bottom.style.removeProperty("width");

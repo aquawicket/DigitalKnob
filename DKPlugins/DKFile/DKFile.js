@@ -1,15 +1,17 @@
 "use strict";
 
-DKFile.prototype = Object.create(DKPlugin.prototype);
-function DKFile(identifier) {
-    return DKPlugin.call(this, identifier);
+dk.file = new DKFile();
+
+function DKFile() {
+    return DKPlugin.call(this, arguments);
 }
-dk.file = new DKFile("DKFile");
 
 DKFile.prototype.init = function DKFile_init() {
     dk.file.appFilename = "";
     dk.file.localAssets = "";
     dk.file.onlineAssets = "";
+
+    // FIXME - temporary
     if (dk.getJSEngine() === "Duktape") {
         dk.file.onlineAssets = "C:/DKTasmota_Data/";
         return;

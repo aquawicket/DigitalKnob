@@ -1,10 +1,9 @@
 "use strict";
 
-DKCodeMirror.prototype = Object.create(DKPlugin.prototype);
-function DKCodeMirror(identifier) {
-    return DKPlugin.call(this, identifier);
+dk.codemirror = new DKCodeMirror();
+function DKCodeMirror() {
+    return DKPlugin.call(this, arguments);
 }
-dk.codemirror = new DKCodeMirror("DKCodeMirror");
 
 DKCodeMirror.prototype.init = function DKCodeMirror_init(DKCodeMirror_init_callback) {
     dk.create("DKCodeMirror/lib/codemirror.js", function() {

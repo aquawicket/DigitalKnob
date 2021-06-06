@@ -2,7 +2,6 @@
 // https://developer.mozilla.org/en-US/docs/Web/API/HTMLTimeElement
 // https://flaviocopes.com/javascript-namespaces/
 
-
 /*
 const dateEvent = new Date();
 format: August 19, 1975 23:15:30 UTC
@@ -11,12 +10,12 @@ format: 1975-08-19T23:15:30.000Z
 const utcDate = dateEvent.toUTCString();
 format: Tue, 19 Aug 1975 23:15:30 GMT
 */
-DKClock.prototype = Object.create(DKPlugin.prototype);
-function DKClock(identifier) {
-    return DKPlugin.call(this, identifier);
-}
-dk.clock = new DKClock("DKClock");
 
+dk.clock = new DKClock();
+
+function DKClock() {
+    return DKPlugin.call(this, arguments);
+}
 
 DKClock.prototype.create = function DKClock_create(parent, top, bottom, left, right, width, height) {
     this.html = document.createElement("a");
@@ -32,7 +31,7 @@ DKClock.prototype.create = function DKClock_create(parent, top, bottom, left, ri
     return this.html;
 }
 
-DKClock.prototype.setLatitudeLongitude = function DKClock_setLatitude_longitude(latitude, longitude, zenith){
+DKClock.prototype.setLatitudeLongitude = function DKClock_setLatitude_longitude(latitude, longitude, zenith) {
     latitude && (this.latitude = latitude);
     longitude && (this.longitude = longitude);
     !zenith && (zenith = 0);
@@ -47,18 +46,17 @@ DKClock.prototype.update = function DKClock_update() {
     dk.clock.month = (dk.clock.date.getMonth() + 1);
     dk.clock.day = dk.clock.date.getDate();
     dk.clock.military = dk.clock.date.getHours();
-    if (dk.clock.military > 11){
+    if (dk.clock.military > 11) {
         dk.clock.ampm = "PM";
-        if(dk.clock.military > 12)
+        if (dk.clock.military > 12)
             dk.clock.hour = dk.clock.military - 12;
         else
-            dk.clock.hour = dk.clock.military; 
-    }
-    else{ 
-        dk.clock.ampm = "AM";            
+            dk.clock.hour = dk.clock.military;
+    } else {
+        dk.clock.ampm = "AM";
         dk.clock.hour = dk.clock.military;
-        if(dk.clock.military < 10)
-            dk.clock.military = "0"+dk.clock.military;
+        if (dk.clock.military < 10)
+            dk.clock.military = "0" + dk.clock.military;
     }
     dk.clock.minute = dk.clock.date.getMinutes();
     dk.clock.minute = dk.clock.minute > 9 ? dk.clock.minute : '0' + dk.clock.minute;
@@ -92,14 +90,14 @@ DKClock.prototype.update = function DKClock_update() {
     }
     dk.clock.time = Number(dk.clock.military) + (dk.clock.minute * .01);
 
-    if(dk.clock.longitude && dk.clock.latitude){
+    if (dk.clock.longitude && dk.clock.latitude) {
         let date = new Date().sunrise(dk.clock.latitude, dk.clock.longitude, dk.clock.zenith);
         dk.clock.sunrise = date.getHours() + (date.getMinutes() * .01);
         date = new Date().sunset(dk.clock.latitude, dk.clock.longitude, dk.clock.zenith);
         dk.clock.sunset = date.getHours() + (date.getMinutes() * .01);
     }
 
-    const datetime = dk.clock.dayName + " " + dk.clock.month + "/" + dk.clock.day + "/" + dk.clock.year + "  " + dk.clock.hour + ":" + dk.clock.minute + ":" + dk.clock.second + " "+dk.clock.ampm;
+    const datetime = dk.clock.dayName + " " + dk.clock.month + "/" + dk.clock.day + "/" + dk.clock.year + "  " + dk.clock.hour + ":" + dk.clock.minute + ":" + dk.clock.second + " " + dk.clock.ampm;
     if (dk.clock.html)
         dk.clock.html.innerHTML = datetime;
 }

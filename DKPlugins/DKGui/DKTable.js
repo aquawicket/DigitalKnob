@@ -1,10 +1,11 @@
 "use strict";
 
-DKTable.prototype = Object.create(DKPlugin.prototype);
-function DKTable(identifier) {
-    return DKPlugin.call(this, identifier);
+dk.table = new DKTable();
+
+function DKTable() {
+    return DKPlugin.call(this, arguments);
 }
-dk.table = new DKTable("DKTable");
+
 // https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableElement
 
 //The idea is to create a name for every row and every column.

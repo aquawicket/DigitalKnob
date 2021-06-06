@@ -1,29 +1,13 @@
 "use strict";
 //https://stackoverflow.com/a/36317375/688352
 
-DKErrorHandler.prototype = Object.create(DKPlugin.prototype);
-function DKErrorHandler(identifier) {
-    return DKPlugin.call(this, identifier);
-}
-dk.errorhandler = new DKErrorHandler("DKErrorHandler");
+dk.errorhandler = new DKErrorHandler();
 
-/*
-window.onerror = function window_onerror(msg, url, lineNo, columnNo, err) {
-    if (!err && !msg)
-        return error("window.onerror failed: err and msg variables invalid");
-    err = err ? err : msg;
-    return error(err);
+function DKErrorHandler() {
+    return DKPlugin.call(this, arguments)
 }
-
-//https://stackoverflow.com/a/49560222/688352
-//https://developer.mozilla.org/en-US/docs/Web/API/WindowEventHandlers/onunhandledrejection
-window.onunhandledrejection = function window_onunhandledrejection(event) {
-    return error(event);
-}
-*/
 
 DKErrorHandler.prototype.create = function dk_errorhandler_create() {
-
     // Capture error data for debugging in web console
     let captures = [];
 
@@ -63,7 +47,7 @@ DKErrorHandler.prototype.create = function dk_errorhandler_create() {
                 //dk.console.Logger("error", dk.trace.stackToConsoleString(msg.error, "require"));
             else
                 dk.console.error(msg.message);
-                //dk.console.Logger("error", msg.message);
+            //dk.console.Logger("error", msg.message);
             if (onerrorx)
                 return onerrorx.apply(null, arguments);
         }
@@ -82,13 +66,11 @@ DKErrorHandler.prototype.create = function dk_errorhandler_create() {
                 return onunhandledrejectionx.apply(null, arguments);
         }
     }
-
     //Handle ajax request errors.
     function handleXMLHttp() {
         const sendx = XMLHttpRequest.prototype.send;
         window.XMLHttpRequest.prototype.send = function window_XMLHttpRequest_prototype_send() {
             handleAsync(this);
-            //dk.console.error("handleXMLHTTP ajax request error. TODO:  DKErrorJandler.js:87");
             return sendx.apply(this, arguments);
         }
     }

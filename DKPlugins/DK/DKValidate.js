@@ -1,11 +1,9 @@
 "use strict";
 
-DKValidate.prototype = Object.create(DKPlugin.prototype);
-function DKValidate(identifier) {
-    return DKPlugin.call(this, identifier);
+dk.validate = new DKValidate();
+function DKValidate() {
+    return DKPlugin.call(this);
 }
-dk.validate = new DKValidate("DKValidate");
-
 
 //DKValidate.prototype.init = function DKValidate_init(){}
 //DKValidate.prototype.end = function DKValidate_end(){}

@@ -15,4 +15,8 @@ var XMLHttpRequest = function() {
         this.responseText = CPP_DKDomXMLHttpRequest_send(this.method, this.url, this.async);
         this.onreadystatechange();
     }
+
+    XMLHttpRequest.prototype.onreadystatechange = function() {
+        console.log("XMLHttpRequest.prototype.onreadystatechange()");
+    }
 }
