@@ -39,7 +39,6 @@ DKFrame.prototype.create = function DKFrame_create(obj) {
     const instance = new DKFrame(id + "_frame");
     obj.plugin && (instance.dkplugin = obj);
 
-    //const element = obj.plugin.getAccessNode();
     var width = element.style.width;
     var height = element.style.height;
     !width.includes("%") && (width = parseInt(width));
@@ -263,7 +262,6 @@ DKFrame.prototype.restoreSize = function DKFrame_restoreSize(frame) {
 }
 
 DKFrame.prototype.createNewWindow = function DKFrame_createNewWindow(title, width, height, url) {
-    //console.error("createNewWindow is dprecated for now. Objects should make their own elements and call DKFrame.prototype.create()")
     const dkplugin = new DKFrame(title);
     if (!dkplugin.ok) {
         //const frame = this.getFrame(dkplugin);
@@ -277,7 +275,6 @@ DKFrame.prototype.createNewWindow = function DKFrame_createNewWindow(title, widt
     dkplugin.div.style.width = width;
     dkplugin.div.style.height = height;
     dkplugin.div.style.overflow = "auto";
-    //newWin.plugin.setAccessNode(div);
     this.create(dkplugin);
     //div.ok = true;
     return dkplugin.div;

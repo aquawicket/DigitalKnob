@@ -20,7 +20,6 @@ DKDevTools.prototype.create = function DKDevTools_create() {
     dk.devtools.div.style.width = "200rem";
     dk.devtools.div.style.height = "300rem";
     dk.devtools.div.style.overflow = "auto";
-    dk.devtools.plugin.setAccessNode(dk.devtools.div);
     dk.devtools.addTools();
 
     const dkframe = dk.frame.create(dk.devtools);

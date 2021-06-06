@@ -3,27 +3,23 @@
 
 const DKPlugin = function DKPlugin() {
     // When calls are made to init, end, create and close, DKPlugin will take presidence
-    // and control flow. If an object calls you to close completley, you may be in a frame,
-    // or container that would get stranded. DKPlugin will determine who goes first and what 
-    // cleanup to do. 
+    // and control the flow. If an object calls a plugin to close completley, you may be in a frame,
+    // or container that would get stranded. For this reason, DKPlugin will determine who goes first and what 
+    // cleanup to do. The idea it to accomplish most of the work here, leaving plugins to not worry about instance management.
     DKPlugin.prototype.superviseFuncs = function DKPlugin_superviseFuncs(plugin) {
         console.debug("DKPlugin.prototype.superviseFuncs():" + plugin.id);
         if (plugin.init)
             plugin.xinit = plugin.init;
         plugin.init = DKPlugin.prototype.init;
-
         if (plugin.create)
             plugin.xcreate = plugin.create;
         plugin.create = DKPlugin.prototype.create;
-
         if (plugin.close)
             plugin.xclose = plugin.close;
         plugin.close = DKPlugin.prototype.close;
-
         if (plugin.end)
             plugin.xend = plugin.end;
         plugin.end = DKPlugin.prototype.end;
-
         plugin.supervised = true;
     }
 
@@ -32,29 +28,24 @@ const DKPlugin = function DKPlugin() {
         if (plugin.xinit)
             plugin.init = plugin.xinit;
         plugin.xinit = DKPlugin.prototype.init;
-
         if (plugin.xcreate)
             plugin.create = plugin.xcreate;
         plugin.xcreate = DKPlugin.prototype.create;
-
         if (plugin.xclose)
             plugin.close = plugin.xclose;
         plugin.xclose = DKPlugin.prototype.close;
-
         if (plugin.xend)
             plugin.end = plugin.xend;
         plugin.xend = DKPlugin.prototype.end;
-
-        plugin.supervised = true;
+        plugin.supervised = false;
     }
 
-    DKPlugin.prototype.init = function DKPlugin_init(callback) {
+    DKPlugin.prototype.init = function DKPlugin_init() {
         console.log("DKPlugin.prototype.init(): " + this.id);
         this.plugin.url = this.url;
         !this.supervised && DKPlugin.prototype.superviseFuncs(this);
-        this.xinit && this.xinit(function xinit_callback() {
-            callback && callback(this);
-        });
+        if (this.xinit)
+            return this.xinit.apply(this, arguments);
         return this;
     }
 
@@ -63,12 +54,12 @@ const DKPlugin = function DKPlugin() {
         if (this.xend)
             this.xend.apply(this, arguments);
         DKPlugin.prototype.unsuperviseFuncs(this);
-        var plugin = dk.getPlugin(this.url);
+        const plugin = dk.getPlugin(this.url);
         this.singleton = false;
         delete this.plugin;
         delete DKDevTools.prototype;
         delete dk[plugin.name];
-        var scripts = document.getElementsByTagName("script");
+        const scripts = document.getElementsByTagName("script");
         for (let n = 0; n < scripts.length; n++) {
             if (scripts[n].src.includes(this.url)) {
                 scripts[n].parentNode.removeChild(scripts[n]);
@@ -80,21 +71,36 @@ const DKPlugin = function DKPlugin() {
 
     DKPlugin.prototype.create = function DKPlugin_create() {
         console.log("DKPlugin.prototype.create(): " + this.id);
-        if (this.singleton) {
+        if (this.singleton)
             this.create = function() {
                 console.log("create() is disabled on singletons after first call");
             }
-        }
-        if (this.xcreate) {
+        if (this.xcreate)
             return this.xcreate.apply(this, arguments);
         return instance;
     }
 
     DKPlugin.prototype.close = function DKPlugin_close() {
         console.log("DKPlugin.prototype.close(" + this.id + ")");
+        //if only one instance exists, go ahead and call end to clean up
+        let count = 0;
+        for (let n = 0; n < DKPlugin.instances.length; n++) {
+            if (DKPlugin.instances[n].type === this.type)
+                count++;
+            if (count > 1)
+                break;
+        }
         DKPlugin.prototype.removeInstance(this);
-        if (this.xclose)
-            return this.xclose.apply(this, arguments);
+        if (this.xclose) {
+            if (count > 1)
+                return this.xclose.apply(this, arguments);
+            else if (count)
+                this.xclose.apply(this, arguments);
+            else
+                return error("Instance called to close, but does not exist in the instance list.")
+        }
+        if (count < 2)
+            this.end();
     }
 
     DKPlugin.prototype.removeInstance = function DKPlugin_removeInstance(instance) {
@@ -116,20 +122,6 @@ const DKPlugin = function DKPlugin() {
         if (!this.url)
             return error("this.url invalid");
         return this.url;
-    }
-
-    DKPlugin.prototype.setAccessNode = function DKPlugin_setAccessNode(node) {
-        //console.log("DKPlugin.prototype.setAccessNode(): " + this.id);
-        if (!node instanceof EventTarget)
-            return error("setAccessNode() requires an node thats an instanceof EventTarget");
-        this.node = node;
-    }
-
-    DKPlugin.prototype.getAccessNode = function DKPlugin_getAccessNode() {
-        //console.log("DKPlugin.prototype.getAccessNode(): " + this.id);
-        if (!this.node)
-            return error("DKPlugin.getAccessNode(): node not set, please use yourDKPlugin.setAccessNode(node)");
-        return this.node;
     }
 
     //// EXECUTION STARTS HERE
@@ -169,22 +161,20 @@ const DKPlugin = function DKPlugin() {
 DKPlugin.instances = new Array;
 
 // TODO
-/*
 DKPlugin.create = function DKPlugin_create(url) {
     console.debug("DKPlugin.create(" + url + ")");
-    var scripts = document.getElementsByTagName("script");
-    for (var n = 0; n < scripts.length; n++) {
+    const scripts = document.getElementsByTagName("script");
+    for (let n = 0; n < scripts.length; n++) {
         if (scripts[n].src.includes(url)) {
             console.info("%c" + url + " is already loaded", "color:orange;");
             return true;
         }
     }
-    var head = document.getElementsByTagName('head')[0];
-    var script = document.createElement('script');
+    const head = document.getElementsByTagName('head')[0];
+    const script = document.createElement('script');
     script.id = url;
     script.setAttribute('type', 'text/javascript');
     script.setAttribute('async', true);
     script.setAttribute('src', url);
     head.appendChild(script);
 }
-*/

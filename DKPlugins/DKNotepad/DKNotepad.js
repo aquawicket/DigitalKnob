@@ -25,7 +25,6 @@ DKNotepad.prototype.create = function dk_notepad_create(dk_notepad_create_callba
         if (!html)
             return error("html invalid");
         instance.html = html;
-        instance.setAccessNode(html);
         instance.menubar = html.querySelector("[dk_notepad='menubar']");
         instance.file = html.querySelector("[dk_notepad='file']");
         instance.edit = html.querySelector("[dk_notepad='edit']");

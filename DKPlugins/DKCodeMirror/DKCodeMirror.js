@@ -45,7 +45,6 @@ DKCodeMirror.prototype.create = function DKCodeMirror_create(DKCodeMirror_create
 
     const div = dk.gui.createElement(document.body, "div", "DKCodeMirror", "", "", "", "", "500rem", "400rem");
     instance.div = div;
-    instance.setAccessNode(div);
     instance.myCodeMirror = CodeMirror(instance.div, {
         theme: "abcdef",
         lineNumbers: true,

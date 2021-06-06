@@ -27,7 +27,6 @@ dk.solution.create = function dk_solution_create(dk_solution_create_callback) {
         if (!html)
             return error("html invalid");
         instance.html = html;
-        instance.setAccessNode(html);
         instance.box = html.querySelector("[dk_solution='box']");
         instance.up = html.querySelector("[dk_solution='up']");
         instance.path = html.querySelector("[dk_solution='path']");

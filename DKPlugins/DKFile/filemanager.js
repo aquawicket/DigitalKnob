@@ -26,7 +26,6 @@ DKFileManager.prototype.create = function DKFileManager_create(DKFileManager_cre
         if (!html)
             return error("html invalid");
         instance.html = html;
-        //instance.setAccessNode(html);
         instance.box = html.querySelector("[dk_filemanager='box']");
         instance.up = html.querySelector("[dk_filemanager='up']");
         instance.path = html.querySelector("[dk_filemanager='path']");

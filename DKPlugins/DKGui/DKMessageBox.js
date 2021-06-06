@@ -22,7 +22,6 @@ DKMessageBox.prototype.create = function create(create_callback) {
         if (!html)
             return error("invalid html", create_callback);
         instance.html = html;
-        //instance.plugin.setAccessNode(html);
         instance.message = html.querySelector("[dkmessagebox='message']");
         instance.input = html.querySelector("[dkmessagebox='input']");
         instance.cancel = html.querySelector("[dkmessagebox='cancel']");
@@ -56,7 +55,7 @@ DKMessageBox.prototype.createConfirm = function createConfirm(message, createCon
     this.create(function create_callback(instance) {
         instance.frame.setTitle(title);
         //instance.html.panel = true;
-        instance.html.setAttribute("panel", "true");
+        //instance.html.setAttribute("panel", "true");
         instance.message.innerHTML = message;
         instance.input.style.display = "none";
         instance.message.style.display = "block";
