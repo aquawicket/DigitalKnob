@@ -15,14 +15,14 @@ DKMessageBox.prototype.end = function end(){
 }
 
 DKMessageBox.prototype.create = function create(create_callback) {
-    const instance = new DKMessageBox("new");
+    const instance = new DKMessageBox();
     if (!instance)
         return error("instance invalid", create_callback);
     dk.create("DKGui/DKMessageBox.html", function dkcreate_callback(html) {
         if (!html)
             return error("invalid html", create_callback);
         instance.html = html;
-        instance.plugin.setAccessNode(html);
+        //instance.plugin.setAccessNode(html);
         instance.message = html.querySelector("[dkmessagebox='message']");
         instance.input = html.querySelector("[dkmessagebox='input']");
         instance.cancel = html.querySelector("[dkmessagebox='cancel']");
@@ -35,15 +35,15 @@ DKMessageBox.prototype.create = function create(create_callback) {
 
 DKMessageBox.prototype.createMessage = function createMessage(message, createMessage_callback) {
     const title = "Message"    
-    this.create(function create_callback(instance) {
+    this.xcreate(function create_callback(instance) {
         instance.frame.setTitle(title);
-        instance.message.innerHTML = message;
-        instance.input.style.display = "none";
-        instance.message.style.display = "block";
-        instance.message.style.visibility = "visible";
-        instance.cancel.style.display = "none";
-        instance.cancel.style.visibility = "hidden";
-        instance.ok.onclick = function ok_onclick() {
+        instance.html.message.innerHTML = message;
+        instance.html.input.style.display = "none";
+        instance.html.message.style.display = "block";
+        instance.html.message.style.visibility = "visible";
+        instance.html.cancel.style.display = "none";
+        instance.html.cancel.style.visibility = "hidden";
+        instance.html.ok.onclick = function ok_onclick() {
             instance.frame.close();
             createMessage_callback && createMessage_callback(true);
             return true;
@@ -55,6 +55,8 @@ DKMessageBox.prototype.createConfirm = function createConfirm(message, createCon
     const title = "Confirm?"    
     this.create(function create_callback(instance) {
         instance.frame.setTitle(title);
+        //instance.html.panel = true;
+        instance.html.setAttribute("panel", "true");
         instance.message.innerHTML = message;
         instance.input.style.display = "none";
         instance.message.style.display = "block";

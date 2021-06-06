@@ -39,7 +39,7 @@ DKCodeMirror.prototype.end = function DKCodeMirror_end(DKCodeMirror_end_callback
 }
 
 DKCodeMirror.prototype.create = function DKCodeMirror_create(DKCodeMirror_create_callback) {
-    const instance = new DKCodeMirror("new");
+    const instance = new DKCodeMirror();
     if (!instance)
         return error("instance invalid", DKCodeMirror_create_callback);
 

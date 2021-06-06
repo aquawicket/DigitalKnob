@@ -66,8 +66,22 @@ const DKPlugin = function DKPlugin() {
                 console.log("create() is disabled on singletons after first call");
             }
         }
-        if (this.xcreate)
-            return this.xcreate.apply(this, arguments);
+        
+        /*
+        function cb(instance) {
+            callback(instance);
+            return instance;
+        }
+
+        const instance = this;
+        */
+        if (this.xcreate) {
+            //if (callback) {
+                //return this.xcreate.apply(this, arguments, cb);
+            //} else
+                return this.xcreate.apply(this, arguments);
+        }
+        return instance;     
     }
 
     DKPlugin.prototype.close = function DKPlugin_close() {

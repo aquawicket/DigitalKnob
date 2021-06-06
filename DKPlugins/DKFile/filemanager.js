@@ -1,10 +1,10 @@
 "use strict";
 
-DKFileManager.prototype = Object.create(DKPlugin.prototype);
-function DKFileManager(identifier) {
-    return DKPlugin.call(this, identifier);
+dk.filemanager = new DKFileManager();
+
+function DKFileManager() {
+    return DKPlugin.call(this, arguments);
 }
-dk.filemanager = new DKFileManager("DKFileManager");
 
 DKFileManager.prototype.init = function DKFileManager_init(callback) {
     dk.create("DKFile/DKFileAssociation.js");
@@ -18,7 +18,7 @@ DKFileManager.prototype.end = function DKFileManager_end() {
 }
 
 DKFileManager.prototype.create = function DKFileManager_create(DKFileManager_create_callback) {
-    const instance = new DKPlugin("new");
+    const instance = new DKFileManager();
     if (!instance)
         return error("instance invalid", DKFileManager_create_callback);
 
@@ -26,7 +26,7 @@ DKFileManager.prototype.create = function DKFileManager_create(DKFileManager_cre
         if (!html)
             return error("html invalid");
         instance.html = html;
-        instance.setAccessNode(html);
+        //instance.setAccessNode(html);
         instance.box = html.querySelector("[dk_filemanager='box']");
         instance.up = html.querySelector("[dk_filemanager='up']");
         instance.path = html.querySelector("[dk_filemanager='path']");
