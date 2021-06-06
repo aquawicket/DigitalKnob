@@ -13,14 +13,30 @@ DKFrame.prototype.end = function DKFrame_end() {
     dk.close("DKGui/DKFrame.css");
 }
 
-DKFrame.prototype.create = function DKFrame_create(dkplugin) {
-    //if (!(dkplugin instanceof DKPlugin))
-    //return error("Framed objects must be a DKPlugin instance");
-    const instance = new DKFrame("new");
-    instance.dkplugin = dkplugin;
-    const element = dkplugin.plugin.getAccessNode();
-    if (!element)
-        return error("element invalid");
+DKFrame.prototype.create = function DKFrame_create(obj) {
+    let id = "NewFrame";
+    let element = null;
+
+    //DKPlugin
+    if (obj && obj.plugin) {
+        for (let key in obj) {
+            if (obj[key]instanceof HTMLElement) {
+                obj.id && (id = obj.id);
+                element = obj[key];
+            }
+        }
+    }
+
+    //HTMLElement
+    if(obj instanceof HTMLElement)
+        element = obj;
+    
+    const instance = new DKFrame(id + "_frame");
+    obj.plugin && (instance.dkplugin = obj);
+
+    //const element = obj.plugin.getAccessNode();
+    //if (!element)
+    //return error("element invalid");
     var width = element.style.width;
     var height = element.style.height;
     !width.includes("%") && (width = parseInt(width));
@@ -244,24 +260,24 @@ DKFrame.prototype.restoreSize = function DKFrame_restoreSize(frame) {
 }
 
 DKFrame.prototype.createNewWindow = function DKFrame_createNewWindow(title, width, height, url) {
-    console.error("createNewWindow is dprecated for now. Objects should make their own elements and call DKFrame.prototype.create()")
-    const newWin = new DKPlugin(title);
-    if (!newWin.ok) {
-        const frame = this.getFrame(newWin);
-        this.bringToFront(frame);
+    //console.error("createNewWindow is dprecated for now. Objects should make their own elements and call DKFrame.prototype.create()")
+    const dkplugin = new DKFrame(title);
+    if (!dkplugin.ok) {
+        //const frame = this.getFrame(dkplugin);
+        dkplugin.frame && DKFrame.prototype.bringToFront(dkplugin.frame);
         return false;
     }
-    if (url)
-        newWin.setUrl(url);
-    const div = document.createElement("div");
-    div.id = title;
-    div.style.width = width;
-    div.style.height = height;
-    div.style.overflow = "auto";
-    newWin.setAccessNode(div);
-    this.create(newWin);
-    div.ok = true;
-    return div;
+ 
+    url && dkplugin.plugin.setUrl(url);
+    dkplugin.div = document.createElement("div");
+    dkplugin.div.id = title;
+    dkplugin.div.style.width = width;
+    dkplugin.div.style.height = height;
+    dkplugin.div.style.overflow = "auto";
+    //newWin.plugin.setAccessNode(div);
+    this.create(dkplugin);
+    //div.ok = true;
+    return dkplugin.div;
 }
 
 /*

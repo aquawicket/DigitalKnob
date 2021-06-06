@@ -49,7 +49,7 @@ const DKPlugin = function DKPlugin() {
         delete this;
         delete DKDevTools.prototype;
         delete dk[plugin.name];
-        
+
         var scripts = document.getElementsByTagName("script");
         for (var n = 0; n < scripts.length; n++) {
             if (scripts[n].src.includes(this.url)) {
@@ -123,8 +123,10 @@ const DKPlugin = function DKPlugin() {
 
     if (arguments[0] && arguments[0][0] && arguments[0][0] === "singleton")
         this.singleton = true;
+    else if (typeof arguments[0][0] === "string")
+        this.id = arguments[0][0];
     this.type = this.constructor.name;
-    this.id = this.type;
+    //!this.id && (this.id = this.type);
 
     let num = 0;
     for (let n = 0; n < DKPlugin.instances.length; n++) {
@@ -140,7 +142,7 @@ const DKPlugin = function DKPlugin() {
             }
         }
     }
-    this.id = this.type + num;
+    !this.id && (this.id = this.type + num);
 
     const newIndex = DKPlugin.instances.push(this) - 1;
     DKPlugin.instances[newIndex].ok = true;
