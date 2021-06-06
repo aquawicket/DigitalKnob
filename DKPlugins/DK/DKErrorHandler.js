@@ -43,7 +43,7 @@ DKErrorHandler.prototype.create = function dk_errorhandler_create() {
                 dk.console.error(err);
                 //dk.console.Logger("error", dk.trace.stackToConsoleString(err, "require"));
             else if (msg.error)
-                dk.console.error(msg.err);
+                dk.console.error(msg.error);
                 //dk.console.Logger("error", dk.trace.stackToConsoleString(msg.error, "require"));
             else
                 dk.console.error(msg.message);

@@ -7,23 +7,23 @@ function DKPhp() {
 }
 
 // EXAMPLE
-//DKPhp.prototype.call("GET", "DK/DK.php", "Function", "args", "args", DKPhp_callback);
+//DKPhp.prototype.call("GET", "DK/DK.php", "Function", "args", "args", dkphp_callback);
 DKPhp.prototype.call = function DKPhp_call(httpMethod, phpPath, funcName) {
     const args = arguments;
-    let DKPhp_callback = null;
+    let dkphp_callback = null;
     if (args && typeof (args[args.length - 1]) === "function")
-        DKPhp_callback = args[args.length - 1];
+        dkphp_callback = args[args.length - 1];
 
     const allowed = ["C", "DK.js", "DKFile.js", "DKDebug.js", "DKTrace.js"];
     const callerFilename = dk.trace && dk.trace.getFilename();
     if (!allowed.includes(callerFilename))
-        return error("PHP Permission Denied for " + callerFilename, DKPhp_callback);
+        return error("PHP Permission Denied for " + callerFilename, dkphp_callback);
 
     if (!phpPath)
-        return error("phpPath invalid", DKPhp_callback);
+        return error("phpPath invalid", dkphp_callback);
     !httpMethod && (httpMethod = "GET");
     if (typeof funcName !== "string")
-        return error("funcName invalid", DKPhp_callback);
+        return error("funcName invalid", dkphp_callback);
 
     const jsonData = {
         func: funcName,
@@ -44,13 +44,13 @@ DKPhp.prototype.call = function DKPhp_call(httpMethod, phpPath, funcName) {
     const str = JSON.stringify(jsonData);
     const data = "dkx=" + encodeURIComponent(str);
     const url = dk.file.validatepath(path + phpPath) + "?" + data;
-    const php_error = function php_error(msg, DKPhp_callback) {
-        return error(msg, DKPhp_callback);
+    const php_error = function php_error(msg, dkphp_callback) {
+        return error(msg, dkphp_callback);
     }
 
     dk.sendRequest(httpMethod, url, function dk_sendRequest_callback(success, url, rval) {
         if (!success)
-            return error("DKPhp.prototype.call request failed, is php server running?", DKPhp_callback);
+            return error("DKPhp.prototype.call request failed, is php server running?", dkphp_callback);
         const beforeLastLine = rval.substr(0, rval.lastIndexOf("\n") + 1);
         if (beforeLastLine !== "" && beforeLastLine !== "\n")
             console.log(beforeLastLine);
@@ -60,15 +60,15 @@ DKPhp.prototype.call = function DKPhp_call(httpMethod, phpPath, funcName) {
             rJson = JSON.parse(lastLine);
         } catch (e) {
             !rval && (rval = e.message);
-            return error(rval, DKPhp_callback);
+            return error(rval, dkphp_callback);
         }
         if (!rJson.status)
-            return warn("We appear to have gotten JSON compatable data with no status key" + rval, DKPhp_callback);
+            return warn("We appear to have gotten JSON compatable data with no status key" + rval, dkphp_callback);
         if (rJson.status !== "success")
-            return php_error(rJson.message, DKPhp_callback);
+            return php_error(rJson.message, dkphp_callback);
         //if (rJson.status === "success" && beforeLastLine !== "" && beforeLastLine !== "\n")
         //    console.log(beforeLastLine);
-        return DKPhp_callback && DKPhp_callback(rJson.message);
+        return dkphp_callback && dkphp_callback(rJson.message);
     });
     return true;
 }

@@ -57,7 +57,6 @@ const DKPlugin = function DKPlugin() {
         const plugin = dk.getPlugin(this.url);
         this.singleton = false;
         delete this.plugin;
-        delete DKDevTools.prototype;
         delete dk[plugin.name];
         const scripts = document.getElementsByTagName("script");
         for (let n = 0; n < scripts.length; n++) {

@@ -51,17 +51,17 @@ DKCodeMirror.prototype.create = function DKCodeMirror_create(DKCodeMirror_create
         lineWrapping: true,
         mode: "javascript"/*value: "function myScript(){return 100;}\n"*/
     });
-    dk.frame.create(instance);
-    return DKCodeMirror_create_callback && DKCodeMirror_create_callback(instance);
+    const frame = dk.frame.create(instance);
+    return DKCodeMirror_create_callback && DKCodeMirror_create_callback(frame);
 }
 
 DKCodeMirror.prototype.createOpen = function DKCodeMirror_createOpen(file, DKCodeMirror_createOpen_callback) {
-    dk.codemirror.create(function(instance) {
-        dk.frame.setTitle(instance, "DKCodeMirror - " + file);
-        instance.currentfile = file;
+    dk.codemirror.create(function(frame) {
+        frame.setTitle("DKCodeMirror - " + file);
+        frame.dkplugin.currentfile = file;
         dk.file.fileToString(file, function(str) {
-            instance.myCodeMirror.setValue(str);
-            DKCodeMirror_createOpen_callback && DKCodeMirror_createOpen_callback(instance);
+            frame.dkplugin.myCodeMirror.setValue(str);
+            DKCodeMirror_createOpen_callback && DKCodeMirror_createOpen_callback(frame.dkplugin);
         });
     });
 }
