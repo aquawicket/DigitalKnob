@@ -813,6 +813,7 @@ dk.getValue = function dk_getValue(variable) {
                 console.debug("dk.getValue(): returning event.target.id\n");
                 return event.target.id;
             }
+            //NOTE:  Found in DKInputTest/DKInputTest.js
             if (variable.type === "wheel") {
                 var o = variable
                 //.originalEvent,
