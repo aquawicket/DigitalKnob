@@ -1,16 +1,13 @@
 //"use strict"; //FIXME: this breaks duktape
-
 //https://www.phpied.com/3-ways-to-define-a-javascript-class/
 
 const DKPlugin = function DKPlugin() {
-
     // When calls are made to init, end, create and close, DKPlugin will take presidence
     // and control flow. If an object calls you to close completley, you may be in a frame,
     // or container that would get stranded. DKPlugin will determine who goes first and what 
     // cleanup to do. 
     DKPlugin.prototype.superviseFuncs = function DKPlugin_superviseFuncs(plugin) {
         console.debug("DKPlugin.prototype.superviseFuncs():" + plugin.id);
-
         if (plugin.init)
             plugin.xinit = plugin.init;
         plugin.init = DKPlugin.prototype.init;
@@ -30,9 +27,30 @@ const DKPlugin = function DKPlugin() {
         plugin.supervised = true;
     }
 
+    DKPlugin.prototype.unsuperviseFuncs = function DKPlugin_unsuperviseFuncs(plugin) {
+        console.debug("DKPlugin.prototype.unsuperviseFuncs():" + plugin.id);
+        if (plugin.xinit)
+            plugin.init = plugin.xinit;
+        plugin.xinit = DKPlugin.prototype.init;
+
+        if (plugin.xcreate)
+            plugin.create = plugin.xcreate;
+        plugin.xcreate = DKPlugin.prototype.create;
+
+        if (plugin.xclose)
+            plugin.close = plugin.xclose;
+        plugin.xclose = DKPlugin.prototype.close;
+
+        if (plugin.xend)
+            plugin.end = plugin.xend;
+        plugin.xend = DKPlugin.prototype.end;
+
+        plugin.supervised = true;
+    }
+
     DKPlugin.prototype.init = function DKPlugin_init(callback) {
         console.log("DKPlugin.prototype.init(): " + this.id);
-        //!this.plugin && (this.plugin = DKPlugin.prototype);
+        this.plugin.url = this.url;
         !this.supervised && DKPlugin.prototype.superviseFuncs(this);
         this.xinit && this.xinit(function xinit_callback() {
             callback && callback(this);
@@ -44,16 +62,17 @@ const DKPlugin = function DKPlugin() {
         console.log("DKPlugin.prototype.end(): " + this.id);
         if (this.xend)
             this.xend.apply(this, arguments);
-
+        DKPlugin.prototype.unsuperviseFuncs(this);
         var plugin = dk.getPlugin(this.url);
-        delete this;
+        this.singleton = false;
+        delete this.plugin;
         delete DKDevTools.prototype;
         delete dk[plugin.name];
-
         var scripts = document.getElementsByTagName("script");
-        for (var n = 0; n < scripts.length; n++) {
+        for (let n = 0; n < scripts.length; n++) {
             if (scripts[n].src.includes(this.url)) {
                 scripts[n].parentNode.removeChild(scripts[n]);
+                console.log("Unloaded " + this.url);
                 break;
             }
         }
@@ -66,27 +85,13 @@ const DKPlugin = function DKPlugin() {
                 console.log("create() is disabled on singletons after first call");
             }
         }
-        
-        /*
-        function cb(instance) {
-            callback(instance);
-            return instance;
-        }
-
-        const instance = this;
-        */
         if (this.xcreate) {
-            //if (callback) {
-                //return this.xcreate.apply(this, arguments, cb);
-            //} else
-                return this.xcreate.apply(this, arguments);
-        }
-        return instance;     
+            return this.xcreate.apply(this, arguments);
+        return instance;
     }
 
     DKPlugin.prototype.close = function DKPlugin_close() {
         console.log("DKPlugin.prototype.close(" + this.id + ")");
-
         DKPlugin.prototype.removeInstance(this);
         if (this.xclose)
             return this.xclose.apply(this, arguments);
@@ -134,14 +139,11 @@ const DKPlugin = function DKPlugin() {
         DKPlugin.instances[i].ok = false;
         return DKPlugin.instances[i];
     }
-
     if (arguments[0] && arguments[0][0] && arguments[0][0] === "singleton")
         this.singleton = true;
     else if (typeof arguments[0][0] === "string")
         this.id = arguments[0][0];
     this.type = this.constructor.name;
-    //!this.id && (this.id = this.type);
-
     let num = 0;
     for (let n = 0; n < DKPlugin.instances.length; n++) {
         if (DKPlugin.instances[n].type === this.type) {
@@ -157,17 +159,17 @@ const DKPlugin = function DKPlugin() {
         }
     }
     !this.id && (this.id = this.type + num);
-
     const newIndex = DKPlugin.instances.push(this) - 1;
     DKPlugin.instances[newIndex].ok = true;
     dk.errorCatcher(this, this.type);
-    //console.debug("DKPlugin.body: " + this.id);
     this.plugin = DKPlugin.prototype;
     return DKPlugin.instances[newIndex];
 }
 
 DKPlugin.instances = new Array;
 
+// TODO
+/*
 DKPlugin.create = function DKPlugin_create(url) {
     console.debug("DKPlugin.create(" + url + ")");
     var scripts = document.getElementsByTagName("script");
@@ -185,3 +187,4 @@ DKPlugin.create = function DKPlugin_create(url) {
     script.setAttribute('src', url);
     head.appendChild(script);
 }
+*/

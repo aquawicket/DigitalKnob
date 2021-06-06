@@ -1,10 +1,9 @@
 "use strict";
 
-DKNotepad.prototype = Object.create(DKPlugin.prototype);
-function DKNotepad(identifier) {
-    return DKPlugin.call(this, identifier);
+dk.notepad = new DKNotepad();
+function DKNotepad() {
+    return DKPlugin.call(this, arguments);
 }
-dk.notepad = new DKNotepad("DKNotepad");
 
 DKNotepad.prototype.init = function dk_notepad_init(callback) {
     dk.create("DKNotepad/DKNotepadShortcuts.js");
@@ -18,7 +17,7 @@ DKNotepad.prototype.end = function dk_notepad_end() {
 }
 
 DKNotepad.prototype.create = function dk_notepad_create(dk_notepad_create_callback) {
-    const instance = new DKNotepad("new");
+    const instance = new DKNotepad();
     if (!instance)
         return error("instance invalid", dk_notepad_create_callback);
 
