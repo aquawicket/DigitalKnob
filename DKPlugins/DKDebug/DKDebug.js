@@ -6,6 +6,7 @@ function DKDebug() {
     return DKPlugin.call(this, arguments);
 }
 
+/*
 //Error-first callbacks
 dk.firstFunc = function dk_firstFunc(str1, str2, callback) {
     console.debug("dk.firstFunc(" + str1 + "," + str2 + ")");
@@ -38,6 +39,7 @@ dk.thirdFunc = function dk_thirdFunc(str1, str2, dk_thirdFunc_callback) {
         return dk_thirdFunc_callback(new Error("The strings must match"));
     return dk_thirdFunc_callback(null, (str1 + str2));
 }
+*/
 
 /*
 function err(str) { 
@@ -50,15 +52,19 @@ function err(str) {
 }
 */
 
+/*
 const require2 = function require2(variable) {
     console.log(variable);
     //if(variable === undefined)
 }
+*/
 
+/*
 const testFunc = function testFunc(needed) {
     require2(needed);
     //console.log(needed);
 }
+*/
 
 ////////////////////////////////////
 ///  A Convienient Debug Function

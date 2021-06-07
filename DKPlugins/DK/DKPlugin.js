@@ -41,7 +41,7 @@ const DKPlugin = function DKPlugin() {
     }
 
     DKPlugin.prototype.init = function DKPlugin_init() {
-        console.log("DKPlugin.prototype.init(): " + this.id);
+        console.debug("DKPlugin.prototype.init(): " + this.id);
         this.plugin.url = this.url;
         !this.supervised && DKPlugin.prototype.superviseFuncs(this);
         if (this.xinit)
@@ -50,9 +50,9 @@ const DKPlugin = function DKPlugin() {
     }
 
     DKPlugin.prototype.end = function DKPlugin_end() {
-        console.log("DKPlugin.prototype.end(): " + this.id);
         if (this.xend)
             this.xend.apply(this, arguments);
+        console.debug("DKPlugin.prototype.end(): " + this.id);
         DKPlugin.prototype.unsuperviseFuncs(this);
         const plugin = dk.getPlugin(this.url);
         this.singleton = false;
@@ -62,17 +62,17 @@ const DKPlugin = function DKPlugin() {
         for (let n = 0; n < scripts.length; n++) {
             if (scripts[n].src.includes(this.url)) {
                 scripts[n].parentNode.removeChild(scripts[n]);
-                console.log("Unloaded " + this.url);
+                console.debug("Unloaded " + this.url);
                 break;
             }
         }
     }
 
     DKPlugin.prototype.create = function DKPlugin_create() {
-        console.log("DKPlugin.prototype.create(): " + this.id);
+        console.debug("DKPlugin.prototype.create(): " + this.id);
         if (this.singleton)
             this.create = function() {
-                console.log("create() is disabled on singletons after first call");
+                console.debug("create() is disabled on singletons after first call");
             }
         if (this.xcreate)
             return this.xcreate.apply(this, arguments);
@@ -80,7 +80,7 @@ const DKPlugin = function DKPlugin() {
     }
 
     DKPlugin.prototype.close = function DKPlugin_close() {
-        console.log("DKPlugin.prototype.close(" + this.id + ")");
+        console.debug("DKPlugin.prototype.close(" + this.id + ")");
         //if only one instance exists, go ahead and call end to clean up
         let count = 0;
         for (let n = 0; n < DKPlugin.instances.length; n++) {
@@ -89,7 +89,6 @@ const DKPlugin = function DKPlugin() {
             if (count > 1)
                 break;
         }
-        DKPlugin.prototype.removeInstance(this);
         if (this.xclose) {
             if (count > 1)
                 return this.xclose.apply(this, arguments);
@@ -98,12 +97,13 @@ const DKPlugin = function DKPlugin() {
             else
                 return error("Instance called to close, but does not exist in the instance list.")
         }
+        DKPlugin.prototype.removeInstance(this);
         if (count < 2)
             this.end();
     }
 
     DKPlugin.prototype.removeInstance = function DKPlugin_removeInstance(instance) {
-        console.log("DKPlugin.prototype.removeInstance(): " + instance.id);
+        console.debug("DKPlugin.prototype.removeInstance(): " + instance.id);
         const index = DKPlugin.instances.indexOf(instance);
         if (index <= -1)
             return error("Unable to find instance in DKPlugin");
@@ -112,12 +112,12 @@ const DKPlugin = function DKPlugin() {
     }
 
     DKPlugin.prototype.setUrl = function DKPlugin_setUrl(url) {
-        //console.log("DKPlugin.prototype.setUrl(): " + this.id);
+        //console.debug("DKPlugin.prototype.setUrl(): " + this.id);
         this.url = url;
     }
 
     DKPlugin.prototype.getUrl = function DKPlugin_getUrl() {
-        //console.log("DKPlugin.prototype.getUrl(): " + this.id);
+        //console.debug("DKPlugin.prototype.getUrl(): " + this.id);
         if (!this.url)
             return error("this.url invalid");
         return this.url;
@@ -152,7 +152,7 @@ const DKPlugin = function DKPlugin() {
     !this.id && (this.id = this.type + num);
     const newIndex = DKPlugin.instances.push(this) - 1;
     DKPlugin.instances[newIndex].ok = true;
-    dk.errorCatcher(this, this.type);
+    //dk.errorCatcher(this, this.type);
     this.plugin = DKPlugin.prototype;
     return DKPlugin.instances[newIndex];
 }

@@ -1143,6 +1143,7 @@ Object.prototype.clone = Array.prototype.clone = function() {
 
 //https://humanwhocodes.com/blog/2009/04/28/javascript-error-handling-anti-pattern/
 dk.errorCatcher = function dk_errorCatcher(obj, name) {
+    return;
     //required({
     ///    obj
     //});
