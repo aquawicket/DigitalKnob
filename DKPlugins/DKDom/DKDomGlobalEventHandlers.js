@@ -13,6 +13,7 @@ var GlobalEventHandlers = {
 };
 */
 
+// https://html.spec.whatwg.org/multipage/webappapis.html#idl-definitions
 var GlobalEventHandlers = function(pointer) {
     this.pointer = pointer;
 
@@ -874,4 +875,6 @@ var GlobalEventHandlers = function(pointer) {
 
     return this;
 }
+
+// 
 GlobalEventHandlers.prototype = EventTarget.prototype;

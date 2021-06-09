@@ -1,5 +1,6 @@
 //https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement
 
+// https://html.spec.whatwg.org/multipage/dom.html#htmlelement
 var HTMLElement = function(pointer) {
     // Properties
     Object.defineProperty(this, "accessKey", {
@@ -223,4 +224,7 @@ var HTMLElement = function(pointer) {
 
     return Element.call(this, pointer);
 }
+
+// interface HTMLElement : Element
 HTMLElement.prototype = Element.prototype;
+

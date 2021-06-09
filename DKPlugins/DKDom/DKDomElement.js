@@ -1,5 +1,6 @@
 //https://developer.mozilla.org/en-US/docs/Web/API/Element
 
+ // https://dom.spec.whatwg.org/#interface-element
 var Element = function(pointer) {
     // Properties
     Object.defineProperty(this, "attributes", {
@@ -303,8 +304,8 @@ var Element = function(pointer) {
     Element.prototype.toggleAttribute = function() {//TODO
     }
 
-    GlobalEventHandlers.call(this, pointer);
     //FIXME: should be a mixin
+    GlobalEventHandlers.call(this, pointer);
     return Node.call(this, pointer);
 
     /*
@@ -346,4 +347,6 @@ var Element = function(pointer) {
 	});
 	*/
 }
+
+// interface Element : Node
 Element.prototype = Node.prototype;

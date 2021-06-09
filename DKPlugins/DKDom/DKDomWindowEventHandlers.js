@@ -1,5 +1,6 @@
-//https://developer.mozilla.org/en-US/docs/Web/API/WindowEventHandlers
-//https://javascript.info/mixins
+// https://developer.mozilla.org/en-US/docs/Web/API/WindowEventHandlers
+// https://html.spec.whatwg.org/multipage/webappapis.html#windoweventhandlers
+// https://javascript.info/mixins
 
 var WindowEventHandlers = function(pointer) {
     this.pointer = pointer;

@@ -1,5 +1,6 @@
 // https://developer.mozilla.org/en-US/docs/Web/API/Document
 
+// https://dom.spec.whatwg.org/#interface-document
 var Document = function(pointer) {
     // Properties
     Object.defineProperty(this, "body", {

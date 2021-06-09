@@ -1,6 +1,8 @@
-//https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest
+// https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest
+// https://xhr.spec.whatwg.org/
 
-var XMLHttpRequest = function() {
+// https://xhr.spec.whatwg.org/#interface-xmlhttprequest
+var XMLHttpRequest = function(pointer) {
     XMLHttpRequest.prototype.open = function(method, url, async, user, password) {
         //console.warn("XMLHttpRequest.open("+method+","+url+","+async+")");
         this.method = method;
@@ -19,4 +21,7 @@ var XMLHttpRequest = function() {
     XMLHttpRequest.prototype.onreadystatechange = function() {
         console.log("TODO: XMLHttpRequest.prototype.onreadystatechange()");
     }
+
+    return XMLHttpRequestEventTarget.call(this, pointer);
 }
+XMLHttpRequest.prototype = XMLHttpRequestEventTarget.prototype;

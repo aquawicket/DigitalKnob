@@ -1,5 +1,6 @@
 //https://developer.mozilla.org/en-US/docs/Web/API/HTMLCollection
 
+// https://dom.spec.whatwg.org/#interface-htmlcollection
 var HTMLCollection = function(pointers) {
     var arry = pointers.split(",");
     for (var i = 0; i < arry.length; i++) {
@@ -23,4 +24,5 @@ var HTMLCollection = function(pointers) {
 
     return this;
 }
+
 HTMLCollection.prototype = [];

@@ -1,5 +1,7 @@
-//https://developer.mozilla.org/en-US/docs/Web/API/Window
+// https://html.spec.whatwg.org/
+// https://developer.mozilla.org/en-US/docs/Web/API/Window
 
+// https://html.spec.whatwg.org/multipage/window-object.html#the-window-object
 var Window = function(pointer) {
     // Properties
     Object.defineProperty(this, "closed", {
@@ -298,15 +300,25 @@ var Window = function(pointer) {
     Window.prototype.sizeToContent = function() {}
     Window.prototype.stop = function() {}
     Window.prototype.updateCommands = function() {}
+    Window.prototype.XMLHttpRequest = function(client) {
+        return new XMLHttpRequest(client.pointer);
+    }
 
-    //GlobalEventHandlers.call(this, pointer); //FIXME: should be a mixin
     return EventTarget.call(this, pointer);
 }
+
+// https://html.spec.whatwg.org/multipage/window-object.html#the-window-object
+// interface Window : EventTarget
 Window.prototype = EventTarget.prototype;
+//Window includes GlobalEventHandlers;
 Object.assign(Window.prototype, GlobalEventHandlers);
-//mixin
-var window = new Window("window");
+//Window includes WindowEventHandlers;
+Object.assign(Window.prototype, WindowEventHandlers);
+
 //Create the global window object
+var window = new Window("window");
+
+//Duktape miscellaneous
 var dk = new Object;
 window.dk = dk;
 dk.duktape = true;

@@ -13,6 +13,7 @@ var EventFromCPP = function(pointer, event)
 }
 */
 
+// https://dom.spec.whatwg.org/#interface-eventtarget
 instances = [];
 var EventTarget = function(pointer) {
     this.pointer = pointer;

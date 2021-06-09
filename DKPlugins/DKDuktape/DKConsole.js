@@ -1,5 +1,7 @@
-//https://developer.mozilla.org/en-US/docs/Web/API/Console
+// https://console.spec.whatwg.org/
+// https://developer.mozilla.org/en-US/docs/Web/API/Console
 
+// https://console.spec.whatwg.org/#console-namespace
 var Console = function(pointer) {
     Console.prototype.assert = function(msg) {
         //if (assertion)
