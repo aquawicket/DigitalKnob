@@ -1,4 +1,5 @@
 // https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequestEventTarget
+// https://docs.w3cub.com/dom/xmlhttprequesteventtarget/onload
 
 var XMLHttpRequestEventTarget = function(pointer) {
  
