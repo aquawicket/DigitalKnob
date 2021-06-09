@@ -1,11 +1,11 @@
 #pragma once
-#ifndef WindowEventHandlers_H
-#define WindowEventHandlers_H
+#ifndef DKDomWindowEventHandlers_H
+#define DKDomWindowEventHandlers_H
 
 #include "DKDuktape/DKDuktape.h"
 
 
-class WindowEventHandlers : public DKObjectT<WindowEventHandlers>
+class DKDomWindowEventHandlers : public DKObjectT<DKDomWindowEventHandlers>
 {
 public:
 	bool Init();
@@ -13,6 +13,6 @@ public:
 };
 
 
-REGISTER_OBJECT(WindowEventHandlers, true)
+REGISTER_OBJECT(DKDomWindowEventHandlers, true)
 
-#endif //WindowEventHandlers_H
+#endif //DKDomWindowEventHandlers_H

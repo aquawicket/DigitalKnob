@@ -97,9 +97,9 @@ bool DKRml::Init(){
 	DKClass::DKCreate("DKDomScreen");
 
 	//* Dom that needs a screen
-	DKClass::DKCreate("DKDomWindow");
 	DKClass::DKCreate("DKDomWindowOrWorkerGlobalScope");
 	DKClass::DKCreate("DKDomWindowEventHandlers");
+	DKClass::DKCreate("DKDomWindow");
 	DKClass::DKCreate("DKDomLocation");
 	DKClass::DKCreate("DKDomNode");
 	DKClass::DKCreate("DKDomElement");

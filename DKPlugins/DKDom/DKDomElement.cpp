@@ -154,7 +154,7 @@ int DKDomElement::getAttribute(duk_context* ctx)
 	}
 	Rml::Variant* variant = element->GetAttribute(attribute.c_str());
 	if(!variant){ 
-		DKERROR("DKRmlJS::getAttribute("+address+","+attribute+"): element does not contain the requested attribute\n");
+		//DKERROR("DKRmlJS::getAttribute("+address+","+attribute+"): element does not contain the requested attribute\n");
 		duk_push_undefined(ctx);
 		return true;
 	}
