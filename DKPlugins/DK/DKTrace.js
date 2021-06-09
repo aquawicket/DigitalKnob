@@ -10,7 +10,7 @@ DKTrace.prototype.editFile = function dk_trace_editFile(file, line, ch) {
     !ch && (ch = 0);
 
     dk.create("DKCodeMirror/DKCodeMirror.js", function dk_create() {
-        dk.codemirror.createOpen(file, function dk_codemirror_createOpen_callback(instance) {
+        DKCodeMirror.prototype.createOpen(file, function dk_codemirror_createOpen_callback(instance) {
             dk.codemirror.highlightError(instance, line, ch);
         });
     });

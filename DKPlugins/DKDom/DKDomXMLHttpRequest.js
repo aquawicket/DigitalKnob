@@ -17,6 +17,6 @@ var XMLHttpRequest = function() {
     }
 
     XMLHttpRequest.prototype.onreadystatechange = function() {
-        console.log("XMLHttpRequest.prototype.onreadystatechange()");
+        console.log("TODO: XMLHttpRequest.prototype.onreadystatechange()");
     }
 }

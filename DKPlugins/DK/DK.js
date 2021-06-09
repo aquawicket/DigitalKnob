@@ -146,9 +146,9 @@ dk.getPlugin = function dk_getPlugin(url) {
         pluginName = pluginName.slice(2);
     let plugin = dk[pluginName];
     if (!plugin) {
-        //if (pluginName !== "plugin")
-        //    return warn(file + " does not contain a dk." + pluginName + " Object");
-        //else
+        if (pluginName !== "plugin")
+            return warn(file + " does not contain a dk." + pluginName + " Object");
+        else
         return null;
     }
     plugin.name = pluginName;

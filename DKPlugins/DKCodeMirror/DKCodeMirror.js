@@ -1,8 +1,5 @@
 "use strict";
 
-dk.codemirror = DKPlugin(DKCodeMirror)
-
-
 DKCodeMirror.prototype.init = function DKCodeMirror_init(DKCodeMirror_init_callback) {
     dk.create("DKCodeMirror/lib/codemirror.js", function() {
         dk.create("DKCodeMirror/lib/codemirror.css", function() {
@@ -49,14 +46,15 @@ DKCodeMirror.prototype.create = function DKCodeMirror_create(DKCodeMirror_create
         lineWrapping: true,
         mode: "javascript"/*value: "function myScript(){return 100;}\n"*/
     });
-    const dkframe = DKFrame.prototype.create(instance);
-    return DKCodeMirror_create_callback && DKCodeMirror_create_callback(frame);
+    instance.dkframe = DKFrame.prototype.create(instance);
+    DKCodeMirror_create_callback && DKCodeMirror_create_callback(instance);
+    return instance;
 }
 
 DKCodeMirror.prototype.createOpen = function DKCodeMirror_createOpen(file, DKCodeMirror_createOpen_callback) {
-    dk.codemirror.create(function(frame) {
-        frame.setTitle("DKCodeMirror - " + file);
-        frame.dkplugin.currentfile = file;
+    this.create(function(instance) {
+        instance.frame.setTitle("DKCodeMirror - " + file);
+        instance.frame.dkplugin.currentfile = file;
         dk.file.fileToString(file, function(str) {
             frame.dkplugin.myCodeMirror.setValue(str);
             DKCodeMirror_createOpen_callback && DKCodeMirror_createOpen_callback(frame.dkplugin);
