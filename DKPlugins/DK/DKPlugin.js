@@ -1,129 +1,57 @@
 //"use strict"; //FIXME: this breaks duktape
 //https://www.phpied.com/3-ways-to-define-a-javascript-class/
 
+const DEBUG = true;
+
 const DKPlugin = function DKPlugin() {
-    // When calls are made to init, end, create and close, DKPlugin will take presidence
-    // and control the flow. If an object calls a plugin to close completley, you may be in a frame,
-    // or container that would get stranded. For this reason, DKPlugin will determine who goes first and what 
-    // cleanup to do. The idea it to accomplish most of the work here, leaving plugins to not worry about instance management.
-    DKPlugin.prototype.superviseFuncs = function DKPlugin_superviseFuncs(plugin) {
-        console.debug("DKPlugin.prototype.superviseFuncs():" + plugin.id);
-        if (plugin.init)
-            plugin.xinit = plugin.init;
-        plugin.init = DKPlugin.prototype.init;
-        if (plugin.create)
-            plugin.xcreate = plugin.create;
-        plugin.create = DKPlugin.prototype.create;
-        if (plugin.close)
-            plugin.xclose = plugin.close;
-        plugin.close = DKPlugin.prototype.close;
-        if (plugin.end)
-            plugin.xend = plugin.end;
-        plugin.end = DKPlugin.prototype.end;
-        plugin.supervised = true;
+    if(!arguments.length){
+        return DKPlugin.start();
     }
-
-    DKPlugin.prototype.unsuperviseFuncs = function DKPlugin_unsuperviseFuncs(plugin) {
-        console.debug("DKPlugin.prototype.unsuperviseFuncs():" + plugin.id);
-        if (plugin.xinit)
-            plugin.init = plugin.xinit;
-        plugin.xinit = DKPlugin.prototype.init;
-        if (plugin.xcreate)
-            plugin.create = plugin.xcreate;
-        plugin.xcreate = DKPlugin.prototype.create;
-        if (plugin.xclose)
-            plugin.close = plugin.xclose;
-        plugin.xclose = DKPlugin.prototype.close;
-        if (plugin.xend)
-            plugin.end = plugin.xend;
-        plugin.xend = DKPlugin.prototype.end;
-        plugin.supervised = false;
+    if(typeof arguments[0] === "function"){
+        const clss = arguments[0];
+        return DKPlugin.fromClass(clss);
     }
+}
 
-    DKPlugin.prototype.init = function DKPlugin_init() {
-        console.debug("DKPlugin.prototype.init(): " + this.id);
-        this.plugin.url = this.url;
-        !this.supervised && DKPlugin.prototype.superviseFuncs(this);
-        if (this.xinit)
-            return this.xinit.apply(this, arguments);
-        return this;
-    }
+DKPlugin.fromClass = function DKPlugin_fromClass(clss) {
+    DEBUG && console.debug(" *** DKPlugin.fromClass(" + clss.name + ") ***");
+    const className = clss.name;
+    //FIXME: This get's the wrongscript file because of async
+    /*
+    const head = document.getElementsByTagName('head')[0];
+    const scripts = head.getElementsByTagName("script");
+    const script = scripts[scripts.length - 1];
+    const url = scripts[scripts.length - 1].src;
+    */
 
-    DKPlugin.prototype.end = function DKPlugin_end() {
-        if (this.xend)
-            this.xend.apply(this, arguments);
-        console.debug("DKPlugin.prototype.end(): " + this.id);
-        DKPlugin.prototype.unsuperviseFuncs(this);
-        const plugin = dk.getPlugin(this.url);
-        this.singleton = false;
-        delete this.plugin;
-        delete dk[plugin.name];
-        const scripts = document.getElementsByTagName("script");
-        for (let n = 0; n < scripts.length; n++) {
-            if (scripts[n].src.includes(this.url)) {
-                scripts[n].parentNode.removeChild(scripts[n]);
-                console.debug("Unloaded " + this.url);
-                break;
+    //https://stackoverflow.com/a/50402530/688352
+    this[className] = {
+        [className]: function() {
+            const instance = new clss;
+            if (instance.__proto__.constructor.name !== className) {
+                console.error("A new " + className + " was defined in the " + instance.__proto__.constructor.name + " scope");
+                console.error("instances of " + className + " must be constucted with the " + className + " class scope");
+                return false;
             }
+            //FIXME: This get's the wrongscript file because of async
+            /*
+            instance.script = script;
+            !instance.url && (instance.url = url);
+            console.debug("   instance.url: " + instance.url);
+            */
+            instance.dkplugin = DKPlugin.prototype;
+            const rval = DKPlugin.start.call(instance, arguments);
+            if (!rval)
+                return false;
+            DKPlugin.prototype.init.call(rval);
+            return rval;
         }
     }
+    return this[className][className]();
+}
 
-    DKPlugin.prototype.create = function DKPlugin_create() {
-        console.debug("DKPlugin.prototype.create(): " + this.id);
-        if (this.singleton)
-            this.create = function() {
-                console.debug("create() is disabled on singletons after first call");
-            }
-        if (this.xcreate)
-            return this.xcreate.apply(this, arguments);
-        return instance;
-    }
-
-    DKPlugin.prototype.close = function DKPlugin_close() {
-        console.debug("DKPlugin.prototype.close(" + this.id + ")");
-        //if only one instance exists, go ahead and call end to clean up
-        let count = 0;
-        for (let n = 0; n < DKPlugin.instances.length; n++) {
-            if (DKPlugin.instances[n].type === this.type)
-                count++;
-            if (count > 1)
-                break;
-        }
-        if (this.xclose) {
-            if (count > 1)
-                return this.xclose.apply(this, arguments);
-            else if (count)
-                this.xclose.apply(this, arguments);
-            else
-                return error("Instance called to close, but does not exist in the instance list.")
-        }
-        DKPlugin.prototype.removeInstance(this);
-        if (count < 2)
-            this.end();
-    }
-
-    DKPlugin.prototype.removeInstance = function DKPlugin_removeInstance(instance) {
-        console.debug("DKPlugin.prototype.removeInstance(): " + instance.id);
-        const index = DKPlugin.instances.indexOf(instance);
-        if (index <= -1)
-            return error("Unable to find instance in DKPlugin");
-        DKPlugin.instances.splice(index, 1);
-        return true;
-    }
-
-    DKPlugin.prototype.setUrl = function DKPlugin_setUrl(url) {
-        //console.debug("DKPlugin.prototype.setUrl(): " + this.id);
-        this.url = url;
-    }
-
-    DKPlugin.prototype.getUrl = function DKPlugin_getUrl() {
-        //console.debug("DKPlugin.prototype.getUrl(): " + this.id);
-        if (!this.url)
-            return error("this.url invalid");
-        return this.url;
-    }
-
-    //// EXECUTION STARTS HERE
+DKPlugin.start = function DKPlugin_start() {
+    this.type = this.constructor.name;
     const i = DKPlugin.instances.indexOf(this);
     if (i > -1) {
         console.warn("Returning already existing instance with id: " + this.id + " @index " + i);
@@ -134,14 +62,13 @@ const DKPlugin = function DKPlugin() {
         this.singleton = true;
     else if (typeof arguments[0][0] === "string")
         this.id = arguments[0][0];
-    this.type = this.constructor.name;
+
     let num = 0;
     for (let n = 0; n < DKPlugin.instances.length; n++) {
         if (DKPlugin.instances[n].type === this.type) {
             if (this.singleton || DKPlugin.instances[n].singleton) {
-                console.warn("Returning existing 'singleton' instance of type: " + this.type + " @index " + index);
-                DKPlugin.instances[n].ok = false;
-                return DKPlugin.instances[n];
+                console.warn(this.type + " already has a 'singleton' instance");
+                return false;
             }
             if ((this.type + num) === DKPlugin.instances[n].id) {
                 n = 0;
@@ -152,14 +79,190 @@ const DKPlugin = function DKPlugin() {
     !this.id && (this.id = this.type + num);
     const newIndex = DKPlugin.instances.push(this) - 1;
     DKPlugin.instances[newIndex].ok = true;
-    //dk.errorCatcher(this, this.type);
-    this.plugin = DKPlugin.prototype;
+    dk.errorCatcher(this, this.type);
+    this.dkplugin = DKPlugin.prototype;
     return DKPlugin.instances[newIndex];
+}
+
+// When calls are made to init, end, create and close, DKPlugin will take presidence
+// and control the flow. If an object calls a dkplugin to close completley, you may be in a frame,
+// or container that would get stranded. For this reason, DKPlugin will determine who goes first and what 
+// cleanup to do. The idea it to accomplish most of the work here, leaving less worries about instance management.
+DKPlugin.prototype.init = function DKPlugin_init() {
+    DEBUG && console.group("DKPlugin.prototype.init(): " + this.id);
+    if (!this) {
+        console.groupEnd();
+        return error("this is invalid");
+    }
+    //this.dkplugin.url = this.url;
+    !this.supervised && DKPlugin.prototype.superviseFuncs(this);
+    if (this.xinit) {
+        DEBUG && console.group(this.type + ".xinit()");
+        const rval = this.xinit.apply(this, arguments);
+        DEBUG && console.groupEnd();
+        DEBUG && console.groupEnd();
+        return rval;
+    }
+    DEBUG && console.groupEnd();
+    return this;
+}
+
+DKPlugin.prototype.end = function DKPlugin_end() {
+    DEBUG && console.group("DKPlugin.prototype.end(): " + this.id);
+    if (!this) {
+        DEBUG && console.groupEnd();
+        return error("this is invalid");
+    }
+    if (this.xend) {
+        DEBUG && console.group(this.type + ".xend()");
+        this.xend.apply(this, arguments);
+        DEBUG && console.groupEnd();
+    }
+    DKPlugin.prototype.unsuperviseFuncs(this);
+    //const dkplugin = dk.getPlugin(this.url);
+    this.singleton = false;
+    //delete this.dkplugin;
+    //delete dk[dkplugin.name];
+    if (this.script && this.script.parentNode) {
+        this.script.parentNode.removeChild(this.script);
+        DEBUG && console.debug("Unloaded " + this.url);
+    }
+
+    delete this;
+    DEBUG && console.groupEnd();
+}
+
+DKPlugin.prototype.create = function DKPlugin_create() {
+    DEBUG && console.group("DKPlugin.prototype.create(): " + this.id);
+    if (!this) {
+        console.groupEnd();
+        return error("this is invalid");
+    }
+    if (this.singleton)
+        this.create = function() {
+            console.debug("create() is disabled on singletons after first call");
+        }
+    if (this.xcreate) {
+        DEBUG && console.group(this.type + ".xcreate()");
+        const rval = this.xcreate.apply(this, arguments);
+        DEBUG && console.groupEnd();
+        DEBUG && console.groupEnd();
+        return rval;
+    }
+    DEBUG && console.groupEnd();
+    return this;
+}
+
+DKPlugin.prototype.close = function DKPlugin_close() {
+    DEBUG && console.group("DKPlugin.prototype.close(): " + this.id);
+    if (!this) {
+        console.groupEnd();
+        return error("this is invalid");
+    }
+
+    //close the innermost child plugins first
+    if (this.dkplugin && this.dkplugin.xclose) {
+        this.dkplugin.close();
+    }
+    if (this.xclose) {
+        DEBUG && console.group(this.type + ".xclose");
+        this.xclose();
+        DEBUG && console.groupEnd();
+    }
+
+    //remove any owned html elements from the DOM
+    for (let key in this) {
+        if (this[key]instanceof HTMLElement) {
+            if (this[key].parentNode)
+                this[key].parentNode.removeChild(this[key]);
+            delete this[key];
+        }
+    }
+
+    DKPlugin.prototype.removeInstance(this);
+
+    //if any more of this type exist, don't end
+    for (let n = 0; n < DKPlugin.instances.length; n++)
+        if (DKPlugin.instances[n].type === this.type) {
+            DEBUG && console.groupEnd();
+            return;
+        }
+    //that was the last, go ahead and end
+    this.end();
+    DEBUG && console.groupEnd();
+}
+
+DKPlugin.prototype.setUrl = function DKPlugin_setUrl(url) {
+    if (!this)
+        return error("this is invalid");
+    DEBUG && console.debug("DKPlugin.prototype.setUrl(): " + this.id);
+    this.url = url;
+}
+
+DKPlugin.prototype.getUrl = function DKPlugin_getUrl() {
+    if (!this)
+        return error("this is invalid");
+    DEBUG && console.debug("DKPlugin.prototype.getUrl(): " + this.id);
+    if (!this.url)
+        return error("this.url invalid");
+    return this.url;
+}
+
+DKPlugin.prototype.removeInstance = function DKPlugin_removeInstance(instance) {
+    DEBUG && console.debug("DKPlugin.prototype.removeInstance(): " + instance.id);
+    const index = DKPlugin.instances.indexOf(instance);
+    if (index <= -1) {
+        console.log("Unable to find instance in DKPlugin");
+        return;
+    }
+    DKPlugin.instances.splice(index, 1);
+    return true;
+}
+
+DKPlugin.prototype.superviseFuncs = function DKPlugin_superviseFuncs(instance) {
+    DEBUG && console.debug("DKPlugin.prototype.superviseFuncs(): " + instance.id);
+    if (instance.supervised)
+        return;
+    if (instance.init)
+        instance.xinit = instance.init;
+    instance.init = DKPlugin.prototype.init;
+    if (instance.create)
+        instance.xcreate = instance.create;
+    instance.create = DKPlugin.prototype.create;
+    if (instance.close)
+        instance.xclose = instance.close;
+    instance.close = DKPlugin.prototype.close;
+    if (instance.end)
+        instance.xend = instance.end;
+    instance.end = DKPlugin.prototype.end;
+    instance.supervised = true;
+}
+
+DKPlugin.prototype.unsuperviseFuncs = function DKPlugin_unsuperviseFuncs(instance) {
+    DEBUG && console.debug("DKPlugin.prototype.unsuperviseFuncs(): " + instance.id);
+    if (!instance.supervised)
+        return;
+    if (instance.xinit)
+        instance.init = instance.xinit;
+    instance.xinit = DKPlugin.prototype.init;
+    if (instance.xcreate)
+        instance.create = instance.xcreate;
+    instance.xcreate = DKPlugin.prototype.create;
+    if (instance.xclose)
+        instance.close = instance.xclose;
+    instance.xclose = DKPlugin.prototype.close;
+    if (instance.xend)
+        instance.end = instance.xend;
+    instance.xend = DKPlugin.prototype.end;
+    instance.supervised = false;
 }
 
 DKPlugin.instances = new Array;
 
+
+
 // TODO
+/*
 DKPlugin.create = function DKPlugin_create(url) {
     console.debug("DKPlugin.create(" + url + ")");
     const scripts = document.getElementsByTagName("script");
@@ -177,3 +280,4 @@ DKPlugin.create = function DKPlugin_create(url) {
     script.setAttribute('src', url);
     head.appendChild(script);
 }
+*/

@@ -1,9 +1,7 @@
 "use strict";
 
-dk.codemirror = new DKCodeMirror();
-function DKCodeMirror() {
-    return DKPlugin.call(this, arguments);
-}
+dk.codemirror = DKPlugin(DKCodeMirror)
+
 
 DKCodeMirror.prototype.init = function DKCodeMirror_init(DKCodeMirror_init_callback) {
     dk.create("DKCodeMirror/lib/codemirror.js", function() {
@@ -39,7 +37,7 @@ DKCodeMirror.prototype.end = function DKCodeMirror_end(DKCodeMirror_end_callback
 }
 
 DKCodeMirror.prototype.create = function DKCodeMirror_create(DKCodeMirror_create_callback) {
-    const instance = new DKCodeMirror();
+    const instance = DKPlugin(DKCodeMirror)
     if (!instance)
         return error("instance invalid", DKCodeMirror_create_callback);
 
@@ -51,7 +49,7 @@ DKCodeMirror.prototype.create = function DKCodeMirror_create(DKCodeMirror_create
         lineWrapping: true,
         mode: "javascript"/*value: "function myScript(){return 100;}\n"*/
     });
-    const frame = dk.frame.create(instance);
+    const dkframe = DKFrame.prototype.create(instance);
     return DKCodeMirror_create_callback && DKCodeMirror_create_callback(frame);
 }
 
@@ -90,3 +88,5 @@ DKCodeMirror.prototype.highlightError = function DKCodeMirror_highlightError(ins
         css: "background-color: rgb(100,0,0)"
     });
 }
+
+function DKCodeMirror() {}

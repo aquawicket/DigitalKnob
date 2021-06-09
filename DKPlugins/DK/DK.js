@@ -1,4 +1,4 @@
-//"use strict";
+"use strict";
 
 window.dk = new Object;
 const duktape = window.duktape;
@@ -146,10 +146,10 @@ dk.getPlugin = function dk_getPlugin(url) {
         pluginName = pluginName.slice(2);
     let plugin = dk[pluginName];
     if (!plugin) {
-        if (pluginName !== "plugin")
-            return warn(file + " does not contain a dk." + pluginName + " Object");
-        else
-            return null;
+        //if (pluginName !== "plugin")
+        //    return warn(file + " does not contain a dk." + pluginName + " Object");
+        //else
+        return null;
     }
     plugin.name = pluginName;
     return plugin;
@@ -216,7 +216,7 @@ dk.close = function dk_close(data) {
         data.splice(0, 0, "DKJavascript");
     else if (dk.hasCPP)
         CPP_DK_Close(data);
-
+    /*
     if (data[0] === "DKJavascript") {
         var plugin = dk.getPlugin(data[1]);
         console.log("closing dk." + plugin.name + " plugin");
@@ -224,12 +224,18 @@ dk.close = function dk_close(data) {
             console.log("running dk." + plugin.name + ".end()");
             plugin.end();
         }
-        var script = byId(data[1]);
-        if (!script)
-            return warn("script invalid");
-        script.parentNode.removeChild(script);
+
+        const scripts = document.getElementsByTagName("script");
+        for (let n = 0; n < scripts.length; n++) {
+            if (scripts[n].href.includes(data[1])) {
+                scripts[n].parentNode.removeChild(scripts[n]);
+                console.debug("Unloaded " + data[1]);
+                return true;
+            }
+        }
         return true;
     }
+    */
 
     if (data[0] === "DKHtml") {
         var element = byId(data[1]);
@@ -240,10 +246,14 @@ dk.close = function dk_close(data) {
     }
 
     if (data[0] === "DKCss") {
-        var css = byId(data[1]);
-        if (!css)
-            return warn("css invalid");
-        css.parentNode.removeChild(css);
+        const links = document.getElementsByTagName("link");
+        for (let n = 0; n < links.length; n++) {
+            if (links[n].href.includes(data[1])) {
+                links[n].parentNode.removeChild(links[n]);
+                console.debug("Unloaded " + data[1]);
+                return true;
+            }
+        }
         return true;
     }
 
@@ -274,7 +284,7 @@ dk.loadJs = function dk_loadJs(url, dk_loadJs_callback) {
     script.onload = script.onreadystatechange = function script_onload() {
         //FIXME - DigitalKnob can't trigger onload yet.
         if (!done && (!this.readyState || this.readyState === "loaded" || this.readyState === "complete")) {
-            console.log("Loaded " + url);
+            console.log("Loading " + url + ". . .");
             var plugin = dk.getPlugin(url);
             if (plugin) {
                 plugin.url = url;
@@ -362,19 +372,22 @@ dk.loadCss = function dk_loadCss(url, dk_loadCss_callback) {
     required({
         url
     });
-    if (dk.getObjects().includes(url)) {
-        console.warn(url + " already loaded. Reloading...");
-        byId(url) && byId(url).parentNode.removeChild(byId(url));
+    const links = document.getElementsByTagName("link");
+    for (let n = 0; n < links.length; n++) {
+        if (links[n].href.includes(url)) {
+            console.log(url + " already loaded.");
+            dk_loadCss_callback && dk_loadCss_callback(links[n]);
+            return links[n];
+        }
     }
     var head = document.getElementsByTagName('head')[0];
     var link = document.createElement('link');
     link.setAttribute('href', url);
-    link.id = url;
     link.setAttribute('rel', 'stylesheet');
     link.setAttribute('type', 'text/css');
     head.appendChild(link);
     dk_loadCss_callback && dk_loadCss_callback(link);
-    return true;
+    return link;
 }
 
 dk.checkFileSupport = function dk_checkFileSupport() {
@@ -1144,9 +1157,9 @@ Object.prototype.clone = Array.prototype.clone = function() {
 //https://humanwhocodes.com/blog/2009/04/28/javascript-error-handling-anti-pattern/
 dk.errorCatcher = function dk_errorCatcher(obj, name) {
     return;
-    //required({
-    ///    obj
-    //});
+    required({
+        obj
+    });
     !name && (name = obj.constructor.name);
     for (let func in obj) {
         if (func.includes("_try"))

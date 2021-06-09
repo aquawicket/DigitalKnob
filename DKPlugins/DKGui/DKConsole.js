@@ -161,8 +161,8 @@ DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left
         },
         oncontextmenu: function container_oncontextmenu(event) {
             event.preventDefault();
-            const menu = dk.menu.createInstance();
-            dk.menu.addItem(menu, "Clear console", function DKMenu_Clear() {
+            const menu = DKMenu.prototype.create();
+            DKMenu.prototype.addItem(menu, "Clear console", function DKMenu_Clear() {
                 dk.console.clear();
             });
         }
@@ -393,13 +393,14 @@ DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left
                 src: "DKGui/groupArrow2.png",
                 style: {
                     height: "6rem",
-                    paddingRight: "4rem"
+                    paddingRight: "4rem"//TODO: This should be multiplied by the number of open groups
+                    // This should effect all other console entries as well
                 }
             });
             if (group.display === "none") {
                 groupArrow.setAttribute("src", "DKGui/groupArrow1.png");
             }
-            dk.gui.createTag("a", msgSpan, {}).innerHTML = group.label[0];
+            dk.gui.createTag("a", msgSpan, {}).innerHTML = group.label;
             msgDiv.onclick = function() {
                 if (group.display === "block") {
                     groupArrow.setAttribute("src", "DKGui/groupArrow1.png");

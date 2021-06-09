@@ -1,24 +1,22 @@
-//"use strict";
+"use strict";
 
-dk.frame = new DKFrame();
-
-function DKFrame() {
-    return DKPlugin.call(this, arguments);
-}
-
+function DKFrame(){}
 DKFrame.prototype.init = function DKFrame_init() {
+    console.log("DKFrame.prototype.init()");
     dk.create("DKGui/DKFrame.css");
 }
 DKFrame.prototype.end = function DKFrame_end() {
+    console.log("DKFrame.prototype.end()");
     dk.close("DKGui/DKFrame.css");
 }
 
 DKFrame.prototype.create = function DKFrame_create(obj) {
+    console.log("DKFrame.prototype.create()");
     let id = "Generic Frame";
     let element = null;
 
     //DKPlugin
-    if (obj && obj.plugin) {
+    //if (obj && obj.dkplugin) {
         for (let key in obj) {
             if (obj[key]instanceof HTMLElement) {
                 obj.id && (id = obj.id);
@@ -30,14 +28,18 @@ DKFrame.prototype.create = function DKFrame_create(obj) {
                     break;
             }
         }
-    }
+    //}
 
     //HTMLElement
     if (obj instanceof HTMLElement)
         element = obj;
 
-    const instance = new DKFrame(id + "_frame");
-    obj.plugin && (instance.dkplugin = obj);
+    let instance = null;
+    if(obj.type === "DKFrame")
+        instance = obj;
+    else
+        instance = DKPlugin(DKFrame) //new DKFrame(id + "_frame");
+    obj.dkplugin && (instance.dkplugin = obj);
 
     var width = element.style.width;
     var height = element.style.height;
@@ -53,8 +55,9 @@ DKFrame.prototype.create = function DKFrame_create(obj) {
         top: "21rem",
         bottom: "0rem",
         left: "0rem",
-        right: "0rem"//width: "unset",
-        //height: "unset"
+        right: "0rem",
+        width: "unset",
+        height: "unset"
     }
     frame.appendChild(frame.content);
     frame.resize = dk.resize.create(frame);
@@ -63,9 +66,9 @@ DKFrame.prototype.create = function DKFrame_create(obj) {
 
 DKFrame.prototype.close = function DKFrame_close() {
     console.log("DKFrame.prototype.close()");
-    DKPlugin.prototype.close.call(this.dkplugin);
-    this.frame.parentNode.removeChild(this.frame);
-    DKPlugin.prototype.close.call(this);
+    //DKPlugin.prototype.close.call(this.dkplugin);
+    //this.frame.parentNode.removeChild(this.frame);
+    //DKPlugin.prototype.close.call(this);
     return true;
 }
 
@@ -218,7 +221,7 @@ DKFrame.prototype.minimize = function DKFrame_minimize() {
 
 DKFrame.prototype.reload = function DKFrame_reload() {
     console.log("DKFrame.prototype.reload()");
-    const url = this.plugin.getUrl();
+    const url = this.dkplugin.getUrl();
     this.dkplugin.close();
     this.frame.parentNode.removeChild(this.frame);
     DKPlugin.prototype.close.call(this);
@@ -262,22 +265,23 @@ DKFrame.prototype.restoreSize = function DKFrame_restoreSize(frame) {
 }
 
 DKFrame.prototype.createNewWindow = function DKFrame_createNewWindow(title, width, height, url) {
-    const dkplugin = new DKFrame(title);
-    if (!dkplugin.ok) {
+    const instance = new DKFrame(title);
+    if (!instance.ok) {
         //const frame = this.getFrame(dkplugin);
-        dkplugin.frame && DKFrame.prototype.bringToFront(dkplugin.frame);
+        instance.frame && DKFrame.prototype.bringToFront(instance.frame);
         return false;
     }
 
-    url && dkplugin.plugin.setUrl(url);
-    dkplugin.div = document.createElement("div");
-    dkplugin.div.id = title;
-    dkplugin.div.style.width = width;
-    dkplugin.div.style.height = height;
-    dkplugin.div.style.overflow = "auto";
-    this.create(dkplugin);
+    url && instance.dkplugin.setUrl(url);
+    instance.div = document.createElement("div");
+    instance.div.id = title+".html";
+    instance.div.style.width = width;
+    instance.div.style.height = height;
+    instance.div.style.overflow = "auto";
+    instance.div.style.backgroundColor = "grey";
+    this.create(instance);
     //div.ok = true;
-    return dkplugin.div;
+    return instance.div;
 }
 
 /*

@@ -122,7 +122,7 @@ DKFileAssociation.prototype.opencss = function DKFileAssociation_opencss(path) {
 }
 
 DKFileAssociation.prototype.opentext = function DKFileAssociation_opentext(path) {
-    dk.create("DKNotepad/DKNotepad.js", function dk_create_callback() {
+    dk.create("DKNotepad/DKNotepad.js", function dk_create_callback(val) {
         dk.notepad.createOpen(path);
     });
 }

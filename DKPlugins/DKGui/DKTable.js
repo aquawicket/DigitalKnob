@@ -1,7 +1,5 @@
 "use strict";
 
-dk.table = new DKTable();
-
 function DKTable() {
     return DKPlugin.call(this, arguments);
 }
@@ -44,7 +42,14 @@ DKTable.prototype.end = function DKTable_close() {
 }
 
 DKTable.prototype.create = function DKTable_create(parent, id, top, bottom, left, right, width, height) {
+    this.init();
+    console.log("DKTable.prototype.create()");
+    const instance = new DKTable();
+    dk.table = instance;
+    if (!instance)
+        return error("instance invalid", create_callback);    
     const table = document.createElement('table');
+    instance.table = table;
     table.setAttribute("dk_table", "table");
     table.id = id;
     table.style.position = "absolute";
@@ -57,7 +62,7 @@ DKTable.prototype.create = function DKTable_create(parent, id, top, bottom, left
     table.style.overflow = "auto";
     //table.setAttribute('border', '1');
     parent.appendChild(table);
-    return table;
+    return instance;
 }
 
 DKTable.prototype.insertRow = function DKTable_insertRow(table, name) {
@@ -79,9 +84,9 @@ DKTable.prototype.insertCell = function DKTable_insertCell(table, row, name) {
 }
 
 DKTable.prototype.addRow = function DKTable_addRow(table, rowName, cellName) {
-    const row = dk.table.insertRow(table, rowName);
+    const row = DKTable.prototype.insertRow(table, rowName);
     row.id = "row" + table.rows.length;
-    //console.debug("dk.table.addRow() -> row.id = "+row.id);
+    //console.debug("DKTable.prototype.addRow() -> row.id = "+row.id);
     const row_count = table.rows.length;
     let cell_count = table.rows[0].cells.length;
     !cell_count && (cell_count = 1);
@@ -90,9 +95,9 @@ DKTable.prototype.addRow = function DKTable_addRow(table, rowName, cellName) {
         //Grab the name of the cell from the root column cell if it exists
 
         //if(!table.rows[0])
-        //	return error("dk.table.addRow(): table.rows[0] is invalid");
+        //	return error("DKTable.prototype.addRow(): table.rows[0] is invalid");
         !cellName && (cellName = table.rows[0].cells[n].getAttribute("name"));
-        const cell = dk.table.insertCell(table, row, cellName);
+        const cell = DKTable.prototype.insertCell(table, row, cellName);
         //FIXME: The function above is NOT setting the cellName properly.
         //This line is a temporary fix for now. 
         cell.setAttribute("name", table.rows[0].cells[n].getAttribute("name"));
@@ -104,13 +109,13 @@ DKTable.prototype.addColumn = function DKTable_addColumn(table, name) {
     let row_count = table.rows.length;
     if (!row_count) {
         //FIXME: no name attribute for the row
-        const row = dk.table.insertRow(table /*, name*/
+        const row = DKTable.prototype.insertRow(table /*, name*/
         );
         row_count = 1;
     }
     const cell_count = table.rows[0].cells.length;
     for (let n = 0; n < row_count; n++) {
-        const cell = dk.table.insertCell(table, table.rows[n], name);
+        const cell = DKTable.prototype.insertCell(table, table.rows[n], name);
     }
     //return the created column number
     return table.rows[0].cells.length;
@@ -119,7 +124,7 @@ DKTable.prototype.addColumn = function DKTable_addColumn(table, name) {
 DKTable.prototype.addRows = function DKTable_addRows(table, count) {
     //The rows added will have no name
     for (let n = 0; n < count; n++) {
-        dk.table.addRow(table);
+        DKTable.prototype.addRow(table);
     }
     return table.rows.length;
 }
@@ -127,14 +132,14 @@ DKTable.prototype.addRows = function DKTable_addRows(table, count) {
 DKTable.prototype.addColumns = function DKTable_addColumns(table, count) {
     //The columns added will have no name
     for (let n = 0; n < count; n++) {
-        dk.table.addColumn(table);
+        DKTable.prototype.addColumn(table);
     }
     return table.rows[0].cells.length;
 }
 
 DKTable.prototype.deleteRow = function DKTable_deleteRow(table, number) {
     table.deleteRow(number);
-    dk.table.updateIds(table);
+    DKTable.prototype.updateIds(table);
 }
 
 DKTable.prototype.deleteColumn = function DKTable_deleteColumn(table, number) {
@@ -143,7 +148,7 @@ DKTable.prototype.deleteColumn = function DKTable_deleteColumn(table, number) {
         if (row.cells[number])
             row.deleteCell(number - 1);
     }
-    dk.table.updateIds(table);
+    DKTable.prototype.updateIds(table);
 }
 
 DKTable.prototype.updateIds = function DKTable_updateIds(table) {
@@ -165,7 +170,7 @@ DKTable.prototype.getCellByIndex = function DKTable_getCellByIndex(table, rowNum
 }
 
 DKTable.prototype.deleteCell = function DKTable_deleteCell(table, rowNum, columnNum) {
-    console.debug("dk.table.deleteCell(table," + rowNum + "," + columnNum + ")")
+    console.debug("DKTable.prototype.deleteCell(table," + rowNum + "," + columnNum + ")")
     //FIXME: This doesn't seem to be working properly.
     //I'm using Brave browser which is a fork of chromium.
     //Bug? or user error? 
@@ -179,7 +184,7 @@ DKTable.prototype.getIndex = function DKTable_getIndex(cell) {
 }
 
 DKTable.prototype.getRowByName = function DKTable_getRowByName(table, rowName) {
-    return dk.table.getCellByName(table, rowName);
+    return DKTable.prototype.getCellByName(table, rowName);
     /*
     for (let n = 0; n < table.rows.length; n++) {
         if (!table.rows[n].getAttribute("name")) {

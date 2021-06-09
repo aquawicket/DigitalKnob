@@ -1,10 +1,8 @@
 "use strict";
 
-dk.trace = new DKTrace();
 
-function DKTrace() {
-    return DKPlugin.call(this, arguments)
-}
+dk.trace = DKPlugin(DKTrace);
+function DKTrace() {}
 
 DKTrace.prototype.editFile = function dk_trace_editFile(file, line, ch) {
     file = file.replace("file:///", "");

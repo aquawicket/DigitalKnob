@@ -62,7 +62,8 @@ DKFile.prototype.makeDir = function DKFile_makeDir(path, mode, recursive, callba
         console.debug("Creating directory " + path);
         dk.php.call("POST", "DKFile/DKFile.php", "makeDir", path, /*mode, recursive,*/
         function dk_php_call_callback(result) {
-            return callback(result);
+            callback && callback(result);
+            return result;
         });
     });
 }
@@ -319,7 +320,8 @@ if (!dk.hasCPP()) {
             dk.php.call('POST', "DKFile/DKFile.php", "fileToString", path, function dk_php_call_callback(str) {
                 if (!str)
                     return error("str invalid", callback(false));
-                return callback(str);
+                callback && callback(str);
+                return str;
             });
         } else {
             dk.sendRequest("GET", path, function dk_sendRequest_callback(success, url, data) {

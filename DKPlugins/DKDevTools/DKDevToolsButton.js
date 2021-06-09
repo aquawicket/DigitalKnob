@@ -11,6 +11,7 @@ DKDevToolsButton.prototype.init = function DKDevToolsButton_init() {
 }
 
 DKDevToolsButton.prototype.create = function DKDevToolsButton_create() {
+    this.init();
     const elem = dk.gui.createImageButton(document.body, "DKDevToolsButton", "DKDevTools/developer.png", "25rem", "", "", "2rem", "20rem", "20rem", dk.devtoolsbutton.show);
     elem.style.zIndex = "99";
     const dragDiv = document.createElement("div");
@@ -37,7 +38,7 @@ DKDevToolsButton.prototype.show = function DKDevToolsButton_show() {
     //DKPlugin.create("DKDevTools/DKDevTools.js");
 
     dk.create("DKDevTools/DKDevTools.js", function dk_create_callback() {
-        dk.devtools.create();
+        DKDevTools.prototype.create();
     });
 
 }

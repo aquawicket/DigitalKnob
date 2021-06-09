@@ -1,28 +1,33 @@
 "use strict";
 
-dk.filemanager = new DKFileManager();
+//dk.filemanager = new DKFileManager();
 
 function DKFileManager() {
     return DKPlugin.call(this, arguments);
 }
 
 DKFileManager.prototype.init = function DKFileManager_init(callback) {
+    console.log("DKFileManager.prototype.init()");
     dk.create("DKFile/DKFileAssociation.js");
     dk.create("DKFile/filemanager.css");
-    callback(true);
+    callback && callback(true);
 }
 
 DKFileManager.prototype.end = function DKFileManager_end() {
-    dk.close("DKFile/filemanager.css");
-    dk.create("DKFile/DKFileAssociation.js");
+    console.log("DKFileManager.prototype.end()");
+    this.close("DKFile/filemanager.css");
+    this.close("DKFile/DKFileAssociation.js");
 }
 
 DKFileManager.prototype.create = function DKFileManager_create(DKFileManager_create_callback) {
+    console.log("DKFileManager.prototype.create()");
     const instance = new DKFileManager();
     if (!instance)
         return error("instance invalid", DKFileManager_create_callback);
 
     dk.create("DKFile/filemanager.html", function dk_create_callback(html) {
+        //dk.create("DKFile/DKFileAssociation.js");
+        //dk.create("DKFile/filemanager.css");
         if (!html)
             return error("html invalid");
         instance.html = html;
@@ -33,54 +38,55 @@ DKFileManager.prototype.create = function DKFileManager_create(DKFileManager_cre
         instance.cancel = html.querySelector("[dk_filemanager='cancel']");
         instance.ok = html.querySelector("[dk_filemanager='ok']");
         instance.up.onclick = function() {
-            dk.filemanager.upDir(instance, event);
+            instance.upDir(instance, event);
         }
         instance.list.onclick = function() {
-            dk.filemanager.highlight(instance, event);
+            instance.highlight(instance, event);
         }
         instance.path.onkeypress = function() {
-            dk.filemanager.onPath(instance, event);
+            instance.onPath(instance, event);
         }
-        dk.filemanager.openFolder(instance, instance.path.value);
-        dk.frame.create(instance);
+        instance.openFolder(instance, instance.path.value);
+        DKFrame.prototype.create(instance);
         DKFileManager_create_callback && DKFileManager_create_callback(instance);
         return instance;
     });
 }
 
 DKFileManager.prototype.close = function DKFileManager_close(instance) {
-    dk.frame.close(instance);
+    console.log("DKFileManager.prototype.close()");
+    this.close();
 }
 
 DKFileManager.prototype.createOpen = function DKFileManager_getfile(DKFileManager_createOpen_callback) {
-    dk.filemanager.create(function(instance) {
-        dk.frame.setTitle(instance, "Open");
+    instance.create(function(instance) {
+        DKFrame.prototype.setTitle(instance, "Open");
         instance.cancel.style.visibility = "visible";
         instance.ok.style.visibility = "visible";
         instance.cancel.onclick = function() {
-            dk.filemanager.close(instance);
+            instance.close(instance);
             return true;
         }
         instance.ok.onclick = function() {
             DKFileManager_createOpen_callback(instance.currentFile);
-            dk.filemanager.close(instance);
+            instance.close(instance);
             return true;
         }
     });
 }
 
 DKFileManager.prototype.createSaveAs = function DKFileManager_savefile(DKFileManager_createSaveAs_callback) {
-    dk.filemanager.create(function(instance) {
-        dk.frame.setTitle(instance, "Save As");
+    instance.create(function(instance) {
+        DKFrame.prototype.setTitle(instance, "Save As");
         instance.cancel.style.visibility = "visible";
         instance.ok.style.visibility = "visible";
         instance.cancel.onclick = function() {
-            dk.filemanager.close(instance);
+            instance.close(instance);
             return true;
         }
         instance.ok.onclick = function() {
             DKFileManager_createSaveAs_callback(instance.currentFile);
-            dk.filemanager.close(instance);
+            instance.close(instance);
             return true;
         }
     });
@@ -88,12 +94,12 @@ DKFileManager.prototype.createSaveAs = function DKFileManager_savefile(DKFileMan
 
 DKFileManager.prototype.upDir = function(instance) {
     var up = instance.path.value + "../";
-    dk.filemanager.openFolder(instance, up);
+    instance.openFolder(instance, up);
 }
 
 DKFileManager.prototype.onPath = function(instance) {
     if (event.code === 'Enter')
-        dk.filemanager.openFolder(instance, instance.path.value);
+        instance.openFolder(instance, instance.path.value);
 }
 
 DKFileManager.prototype.highlight = function DKFileManager_highlight(instance, event) {
@@ -118,59 +124,59 @@ DKFileManager.prototype.dblclick = function(instance, event) {
     const file = event.currentTarget.getAttribute("file");
     const path = event.currentTarget.getAttribute("path");
     if (event.currentTarget.getAttribute("dk_filemanager") === "folder")
-        dk.filemanager.openFolder(instance, path);
+        instance.openFolder(instance, path);
     else if (event.currentTarget.getAttribute("dk_filemanager") === "file")
-        dk.filemanager.openFile(instance, path);
+        instance.openFile(instance, path);
 }
 
 DKFileManager.prototype.rightclickmenu = function(instance, event) {
     event.preventDefault();
-    dk.filemanager.highlight(instance, event);
+    instance.highlight(instance, event);
     const folder = event.currentTarget.getAttribute("dk_filemanager") === "folder";
     const file = event.currentTarget.getAttribute("dk_filemanager") === "file";
     const node = event.currentTarget;
     const path = event.currentTarget.getAttribute("path");
-    const menu = dk.menu.createInstance();
-    file && dk.menu.addItem(menu, "Edit", function dk_menu_edit() {
-        dk.filemanager.editFile(instance, path);
+    const menu = DKMenu.prototype.create();
+    file && DKMenu.prototype.addItem(menu, "Edit", function dk_menu_edit() {
+        instance.editFile(instance, path);
     });
-    dk.menu.addItem(menu, "Open", function dk_menu_open() {
-        folder && dk.filemanager.openFolder(instance, path);
-        file && dk.filemanager.openFile(instance, path);
+    DKMenu.prototype.addItem(menu, "Open", function dk_menu_open() {
+        folder && instance.openFolder(instance, path);
+        file && instance.openFile(instance, path);
     });
-    dk.menu.addItem(menu, "Open In OS", function dk_menu_openinos() {
-        folder && dk.filemanager.openFolderInOS(instance, path);
-        file && dk.filemanager.openFileInOS(instance, path);
+    DKMenu.prototype.addItem(menu, "Open In OS", function dk_menu_openinos() {
+        folder && instance.openFolderInOS(instance, path);
+        file && instance.openFileInOS(instance, path);
     });
-    dk.menu.addItem(menu, "New File", function dk_menu_newfile() {
-        dk.filemanager.newFile(instance);
+    DKMenu.prototype.addItem(menu, "New File", function dk_menu_newfile() {
+        instance.newFile(instance);
     });
-    dk.menu.addItem(menu, "New Folder", function dk_menu_newFolder() {
-        dk.filemanager.newFolder(instance);
+    DKMenu.prototype.addItem(menu, "New Folder", function dk_menu_newFolder() {
+        instance.newFolder(instance);
     });
-    dk.menu.addItem(menu, "Rename", function dk_menu_rename() {
-        dk.filemanager.rename(instance, node);
+    DKMenu.prototype.addItem(menu, "Rename", function dk_menu_rename() {
+        instance.rename(instance, node);
     });
-    dk.menu.addItem(menu, "Delete", function dk_menu_delete() {
-        dk.filemanager.delete(instance, path);
+    DKMenu.prototype.addItem(menu, "Delete", function dk_menu_delete() {
+        instance.delete(instance, path);
     });
-    dk.menu.addItem(menu, "Copy", function dk_menu_copy() {
-        dk.filemanager.copy(instance, path);
+    DKMenu.prototype.addItem(menu, "Copy", function dk_menu_copy() {
+        instance.copy(instance, path);
     });
-    dk.menu.addItem(menu, "Cut", function dk_menu_cut() {
-        dk.filemanager.cut(instance, path);
+    DKMenu.prototype.addItem(menu, "Cut", function dk_menu_cut() {
+        instance.cut(instance, path);
     });
-    dk.menu.addItem(menu, "Paste", function dk_menu_paste() {
-        dk.filemanager.paste(instance);
+    DKMenu.prototype.addItem(menu, "Paste", function dk_menu_paste() {
+        instance.paste(instance);
     });
-    dk.menu.addItem(menu, "Import", function dk_menu_import() {
-        dk.filemanager.import(instance, path);
+    DKMenu.prototype.addItem(menu, "Import", function dk_menu_import() {
+        instance.import(instance, path);
     });
-    dk.menu.addItem(menu, "Git Add", function dk_menu_gitAdd() {
-        dk.filemanager.GitAdd(instance, path);
+    DKMenu.prototype.addItem(menu, "Git Add", function dk_menu_gitAdd() {
+        instance.GitAdd(instance, path);
     });
-    dk.menu.addItem(menu, "upxCompress", function dk_menu_upxCompress() {
-        dk.filemanager.upxCompress(instance, path);
+    DKMenu.prototype.addItem(menu, "upxCompress", function dk_menu_upxCompress() {
+        instance.upxCompress(instance, path);
     });
 }
 
@@ -178,7 +184,7 @@ DKFileManager.prototype.editFile = function DKFileManager_editFile(instance, pat
     return dk.fileassociation.edit(path);
 }
 DKFileManager.prototype.openFolder = function DKFileManager_openFolder(instance, path) {
-    return dk.filemanager.updatePath(instance, path);
+    return instance.updatePath(instance, path);
 }
 DKFileManager.prototype.openFile = function DKFileManager_openFile(instance, path) {
     return dk.fileassociation.open(instance, path);
@@ -203,14 +209,14 @@ DKFileManager.prototype.newFile = function DKFileManager_newFile(instance) {
     newFile.style.backgroundRepeat = "no-repeat";
     newFile.style.cursor = "default";
     newFile.innerHTML = filename;
-    newFile.onclick = dk.filemanager.highlight;
-    newFile.ondblclick = dk.filemanager.dblclick
-    newFile.oncontextmenu = dk.filemanager.rightclickmenu;
+    newFile.onclick = instance.highlight;
+    newFile.ondblclick = instance.dblclick
+    newFile.oncontextmenu = instance.rightclickmenu;
     const event = {
         currentTarget: newFile
     }
-    dk.filemanager.highlight(instance, event);
-    dk.filemanager.rename(instance, newFile);
+    instance.highlight(instance, event);
+    instance.rename(instance, newFile);
 }
 
 DKFileManager.prototype.newFolder = function DKFileManager_newFolder(instance) {
@@ -227,14 +233,14 @@ DKFileManager.prototype.newFolder = function DKFileManager_newFolder(instance) {
     newFolder.style.backgroundRepeat = "no-repeat";
     newFolder.style.cursor = "default";
     newFolder.innerHTML = foldername;
-    newFolder.onclick = dk.filemanager.highlight;
-    newFolder.ondblclick = dk.filemanager.dblclick
-    newFolder.oncontextmenu = dk.filemanager.rightclickmenu;
+    newFolder.onclick = instance.highlight;
+    newFolder.ondblclick = instance.dblclick
+    newFolder.oncontextmenu = instance.rightclickmenu;
     const event = {
         currentTarget: newFolder
     }
-    dk.filemanager.highlight(instance, event);
-    dk.filemanager.rename(instance, newFolder);
+    instance.highlight(instance, event);
+    instance.rename(instance, newFolder);
 }
 
 DKFileManager.prototype.rename = function DKFileManager_rename(instance, node) {
@@ -289,22 +295,22 @@ DKFileManager.prototype.delete = function DKFileManager_delete(instance, path) {
     });
 }
 DKFileManager.prototype.copy = function DKFileManager_copy(instance, path) {
-    console.debug("TODO: dk.filemanager.copy(" + path + ")");
+    console.debug("TODO: instance.copy(" + path + ")");
 }
 DKFileManager.prototype.cut = function DKFileManager_cut(instance, path) {
-    console.debug("TODO: dk.filemanager.cut(" + path + ")");
+    console.debug("TODO: instance.cut(" + path + ")");
 }
 DKFileManager.prototype.paste = function DKFileManager_paste(instance, path) {
-    console.debug("TODO: dk.filemanager.paste");
+    console.debug("TODO: instance.paste");
 }
 DKFileManager.prototype.import = function DKFileManager_import(instance, path) {
-    console.debug("TODO: dk.filemanager.import(" + path + ")");
+    console.debug("TODO: instance.import(" + path + ")");
 }
 DKFileManager.prototype.gitAdd = function DKFileManager_gitAdd(instance, path) {
-    console.debug("TODO: dk.filemanager.gitAdd(" + path + ")");
+    console.debug("TODO: instance.gitAdd(" + path + ")");
 }
 DKFileManager.prototype.upxCompress = function DKFileManager_upxCompress(instance, path) {
-    console.debug("TODO: dk.filemanager.upxCompress(" + path + ")");
+    console.debug("TODO: instance.upxCompress(" + path + ")");
 }
 
 DKFileManager.prototype.updatePath = function DKFileManager_updatePath(instance, _path) {
@@ -324,13 +330,13 @@ DKFileManager.prototype.updatePath = function DKFileManager_updatePath(instance,
                         const folder = dk.gui.createTag("div", instance.list, {
                             innerHTML: items[n],
                             onclick: function onclick() {
-                                dk.filemanager.highlight(instance, event);
+                                instance.highlight(instance, event);
                             },
                             ondblclick: function ondblclick() {
-                                dk.filemanager.dblclick(instance, event);
+                                instance.dblclick(instance, event);
                             },
                             oncontextmenu: function oncontextmenu() {
-                                dk.filemanager.rightclickmenu(instance, event);
+                                instance.rightclickmenu(instance, event);
                             }
                         });
                         folder.setAttribute("dk_filemanager", "folder");
@@ -348,13 +354,13 @@ DKFileManager.prototype.updatePath = function DKFileManager_updatePath(instance,
                         file.setAttribute("path", filepath);
                         file.innerHTML = items[n];
                         file.onclick = function() {
-                            dk.filemanager.highlight(instance, event);
+                            instance.highlight(instance, event);
                         }
                         file.ondblclick = function() {
-                            dk.filemanager.dblclick(instance, event);
+                            instance.dblclick(instance, event);
                         }
                         file.oncontextmenu = function() {
-                            dk.filemanager.rightclickmenu(instance, event);
+                            instance.rightclickmenu(instance, event);
                         }
                         var extension = dk.file.getExtention(items[n]);
                         if ((extension === "png") || (extension === "jpeg") || (extension === "jpg") || (extension === "bmp") || (extension === "tiff") || (extension === "tif") || (extension === "gif") || (extension === "tga") || (extension === "ico"))

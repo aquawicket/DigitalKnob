@@ -7,6 +7,7 @@ function DKResize() {
 }
 
 DKResize.prototype.create = function DKResize_create(element) {
+    console.log("DKResize.prototype.create()");
     if (!element)
         return error("element invalid");
     dk.resize.image = dk.gui.createElement(element, "img", "dk_resize_image");

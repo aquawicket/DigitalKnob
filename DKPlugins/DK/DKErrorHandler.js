@@ -30,7 +30,9 @@ DKErrorHandler.prototype.create = function dk_errorhandler_create() {
         handleXMLHttp();
         handleImage();
         handleScript();
-        handleEvents();
+
+        //FIXME: This breaks removeEventListener for global objects and plugins
+        //handleEvents();
     }
 
     //Handle global window events.
@@ -41,13 +43,10 @@ DKErrorHandler.prototype.create = function dk_errorhandler_create() {
             window.onanyerror.apply(this, arguments);
             if (err)
                 dk.console.error(err);
-                //dk.console.Logger("error", dk.trace.stackToConsoleString(err, "require"));
             else if (msg.error)
                 dk.console.error(msg.error);
-                //dk.console.Logger("error", dk.trace.stackToConsoleString(msg.error, "require"));
             else
                 dk.console.error(msg.message);
-            //dk.console.Logger("error", msg.message);
             if (onerrorx)
                 return onerrorx.apply(null, arguments);
         }

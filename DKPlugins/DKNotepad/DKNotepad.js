@@ -1,26 +1,28 @@
 "use strict";
 
-dk.notepad = new DKNotepad();
 function DKNotepad() {
     return DKPlugin.call(this, arguments);
 }
 
 DKNotepad.prototype.init = function dk_notepad_init(callback) {
+    console.log("DKNotepad.prototype.init()");
     dk.create("DKNotepad/DKNotepadShortcuts.js");
     dk.create("DKNotepad/DKNotepad.css");
     callback(true);
 }
 
 DKNotepad.prototype.end = function dk_notepad_end() {
+    console.log("DKNotepad.prototype.end()");
     dk.close("DKNotepad/DKNotepad.css");
     dk.close("DKNotepad/DKNotepadShortcuts.js");
 }
 
 DKNotepad.prototype.create = function dk_notepad_create(dk_notepad_create_callback) {
+    this.init();
+    console.log("DKNotepad.prototype.create()");
     const instance = new DKNotepad();
     if (!instance)
         return error("instance invalid", dk_notepad_create_callback);
-
     dk.create("DKNotepad/DKNotepad.html", function dk_create_callback(html) {
         if (!html)
             return error("html invalid");
@@ -52,22 +54,23 @@ DKNotepad.prototype.create = function dk_notepad_create(dk_notepad_create_callba
             instance.rightclickmenu(instance, event);
         }
         instance.currentFile = "";
-        dk.frame.create(instance);
-        dk_notepad_create_callback && dk_notepad_create_callback(instance);
-        return instance;
+        const frame = dk.frame.create(instance);
+        dk_notepad_create_callback && dk_notepad_create_callback(frame);
+        return frame;
     });
 }
 
 DKNotepad.prototype.close = function dk_notepad_close(instance) {
+    console.log("DKNotepad.prototype.close()");
     dk.frame.close(instance);
 }
 
 DKNotepad.prototype.createOpen = function dk_notepad_createOpen(file) {
-    this.create(function(instance) {
-        dk.frame.setTitle(instance, "DKNotepad - " + file);
-        instance.currentFile = file;
+    this.create(function(frame) {
+        frame.setTitle("DKNotepad - " + file);
+        frame.dkplugin.currentfile = file;
         dk.file.fileToString(file, function(str) {
-            instance.text.value = str;
+            frame.dkplugin.text.value = str;
         });
     });
 }

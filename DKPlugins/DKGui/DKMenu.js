@@ -1,53 +1,37 @@
 "use strict";
 
-dk.menu = new DKMenu();
-
-function DKMenu() {
-    return DKPlugin.call(this, arguments);
-}
-
-DKMenu.prototype.init = function DKMenu_init() {}
-
-DKMenu.prototype.end = function DKMenu_end() {}
+function DKMenu(){}
 
 DKMenu.prototype.init = function DKMenu_init() {
     dk.create("DKGui/DKMenu.css");
 }
 
-DKMenu.prototype.createInstance = function DKMenu_createInstance(parent) {
+DKMenu.prototype.end = function DKMenu_end() {
+    dk.close("DKGui/DKMenu.css");
+}
 
+DKMenu.prototype.create = function DKMenu_createInstance(parent) {
+
+    const instance = new DKPlugin(DKMenu, "singleton");
+    if(!instance)
+        return false;
     let dkmenu = document.createElement("div");
     dkmenu.setAttribute("dk_menu", "menu");
-    //These stles can be found in DKMenu.css
-    //dkmenu.style.boxSizing = "border-box";
-    //dkmenu.style.borderColor = "rgb(60,60,60)";
     dkmenu.id = "id";
     dkmenu.style.top = window.mouseY + "rem";
     dkmenu.style.left = window.mouseX + "rem";
     dkmenu.style.removeProperty("right");
-    /*
-    dkmenu.style.position = "absolute";
-    dkmenu.style.padding = "0rem";
-    dkmenu.style.width = "150rem";
-    dkmenu.style.minHeight = "18rem";
-    dkmenu.style.borderStyle = "solid";
-    dkmenu.style.borderWidth = "1rem";
-    dkmenu.style.borderTopWidth = "1rem";
-    dkmenu.style.borderLeftWidth = "1rem";
-    dkmenu.style.borderRightWidth = "1rem";
-    dkmenu.style.borderBottomWidth = "0rem";
-    */
-    if (parent) {
+    if (parent)
         parent.appendChild(dkmenu);
-    } else {
+    else
         document.body.appendChild(dkmenu);
-    }
     document.addEventListener('mousedown', function(event) {
         dkmenu.parentElement.removeChild(dkmenu);
+        instance.close();
     }, {
         once: true
     });
-    dk.menu.validatePosition(dkmenu);
+    DKMenu.prototype.validatePosition(dkmenu);
     return dkmenu;
 }
 
@@ -87,7 +71,7 @@ DKMenu.prototype.addItem = function DKMenu_addItem(menu, label, callback) {
         //event.stopPropagation();
     }
     menu.appendChild(dkmenuItem);
-    dk.menu.validatePosition(menu);
+    DKMenu.prototype.validatePosition(menu);
 }
 
 DKMenu.prototype.validatePosition = function DKMenu_validatePosition(menu) {
