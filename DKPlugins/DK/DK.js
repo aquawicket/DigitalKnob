@@ -135,31 +135,6 @@ dk.hasCPP = function dk_hasCPP() {
     return dk.cpp;
 }
 
-dk.getPlugin = function dk_getPlugin(url) {
-    required({
-        url
-    });
-    var file = url;
-    file = file.substring(file.lastIndexOf("/") + 1);
-    if (!file)
-        return error("file invalid");
-    var pluginName = file;
-    if (!pluginName)
-        return error("pluginName invalid");
-    pluginName = pluginName.substring(0, pluginName.lastIndexOf("."));
-    pluginName = pluginName.toLowerCase();
-    if (pluginName.substring(0, 2) === "dk")
-        pluginName = pluginName.slice(2);
-    let plugin = dk[pluginName];
-    if (!plugin) {
-        if (pluginName !== "plugin")
-            console.log(file + " does not contain a dk." + pluginName + " Object");
-        return null;
-    }
-    plugin.name = pluginName;
-    return plugin;
-}
-
 dk.create = function dk_create(data, dk_create_callback) {
     if (dk.hasCPP())
         CPP_DK_Create(data);
@@ -263,6 +238,33 @@ dk.close = function dk_close(data) {
     }
 
     return error("data[1] invalid");
+}
+
+dk.getPlugin = function dk_getPlugin(url) {
+    required({
+        url
+    });
+    var file = url;
+    file = file.substring(file.lastIndexOf("/") + 1);
+    if (!file)
+        return error("file invalid");
+    var pluginName = file;
+    if (!pluginName)
+        return error("pluginName invalid");
+    pluginName = pluginName.substring(0, pluginName.lastIndexOf("."));
+    let instanceName = pluginName.toLowerCase();
+    if (instanceName.substring(0, 2) === "dk")
+        instanceName = instanceName.slice(2);
+    let plugin = {};
+    window[instanceName] && (plugin = window[instanceName]);
+    dk[instanceName] && (plugin = dk[instanceName]);
+    plugin.name = pluginName;
+   
+    console.debug("plugin.name: "+plugin.name)
+
+
+
+    return plugin;
 }
 
 dk.loadJs = function dk_loadJs(url, dk_loadJs_callback) {
