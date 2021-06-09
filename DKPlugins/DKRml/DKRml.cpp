@@ -15,9 +15,7 @@
 #define DRAG_FIX 1
 DKRmlFile* DKRml::dkRmlFile = NULL;
 
-//////////////////
-bool DKRml::Init()
-{
+bool DKRml::Init(){
 	DKDEBUGFUNC();
 	DKClass::DKCreate("DKRmlJS");
 	DKClass::DKCreate("DKRmlV8");
@@ -88,7 +86,6 @@ bool DKRml::Init()
 	Rml::Factory::RegisterElementInstancer("body", new Rml::ElementInstancerElement);
 	Rml::XMLParser::RegisterNodeHandler("body", std::make_shared<Rml::XMLNodeHandlerDefault>());
 
-
 	//* Load the javascript DOM	
 	//* Dom thats doesn't need a screen
 	DKClass::DKCreate("DKDomConsole");
@@ -96,12 +93,12 @@ bool DKRml::Init()
 	DKClass::DKCreate("DKDomEventTarget");
 	DKClass::DKCreate("DKDom/DKDomGlobalEventHandlers.js");
 	DKClass::DKCreate("DKDomXMLHttpRequest");
-	DKClass::DKCreate("DKDom/DKDomXMLHttpRequestEventTarget.js");
+	DKClass::DKCreate("DKDomXMLHttpRequestEventTarget");
 	DKClass::DKCreate("DKDomScreen");
 
 	//* Dom that needs a screen
 	DKClass::DKCreate("DKDomWindow");
-	DKClass::DKCreate("DKDom/DKDomWindowOrWorkerGlobalScope.js");
+	DKClass::DKCreate("DKDomWindowOrWorkerGlobalScope");
 	DKClass::DKCreate("DKDomLocation");
 	DKClass::DKCreate("DKDomNode");
 	DKClass::DKCreate("DKDomElement");
@@ -124,9 +121,7 @@ bool DKRml::Init()
 	return true;
 }
 
-/////////////////
-bool DKRml::End()
-{
+bool DKRml::End(){
 	DKDEBUGFUNC();
 	DKEvents::RemoveRegisterEventFunc(&DKRml::RegisterEvent, this);
 	DKEvents::RemoveUnegisterEventFunc(&DKRml::UnregisterEvent, this);
@@ -142,11 +137,7 @@ bool DKRml::End()
 	return true;
 }
 
-
-
-//////////////////////////////////////////
-bool DKRml::LoadFont(const DKString& file)
-{
+bool DKRml::LoadFont(const DKString& file){
 	DKDEBUGFUNC(file);
 	if(!Rml::LoadFontFace(file.c_str())){
 		DKERROR("DKRml::LoadFont(): Could not load "+file+"\n");
@@ -155,9 +146,7 @@ bool DKRml::LoadFont(const DKString& file)
 	return true;
 }
 
-///////////////////////
-bool DKRml::LoadFonts()
-{
+bool DKRml::LoadFonts(){
 	DKDEBUGFUNC();
 	DKStringArray dkfiles;
 	DKFile::GetDirectoryContents(DKFile::local_assets+"DKRml", dkfiles);
@@ -185,9 +174,7 @@ bool DKRml::LoadFonts()
 	return true;
 }
 
-//////////////////////////////////////////
-bool DKRml::LoadHtml(const DKString& html)
-{
+bool DKRml::LoadHtml(const DKString& html){
 	//// Prepair the html document for rocket
 	DKString rml = html;
 	rml = "<rml id=\"rml\">\n" + rml + "</rml>";
@@ -302,9 +289,7 @@ bool DKRml::LoadHtml(const DKString& html)
 	return true;
 }
 
-////////////////////////////////////////
-bool DKRml::LoadUrl(const DKString& url)
-{
+bool DKRml::LoadUrl(const DKString& url){
 	DKDEBUGFUNC(url);
 	DKString _url = url;
 	if(has(_url,":/")) //could be http:// , https://, file:/// or C:/
@@ -345,10 +330,6 @@ bool DKRml::LoadUrl(const DKString& url)
 		}
 	}
 	else{
-		//if(!DKFile::VerifyPath(href)){
-		//	DKERROR(href+" not found!\n");
-		//	return false;
-		//}
 		if(!DKFile::FileToString(_url, html)){
 			DKERROR("DKFile::FileToString failed on "+_url+"\n");
 			return false;
@@ -358,9 +339,7 @@ bool DKRml::LoadUrl(const DKString& url)
 	return true;
 }
 
-////////////////////////////////////////////////////
-void DKRml::ProcessEvent(Rml::Event& rmlEvent)
-{
+void DKRml::ProcessEvent(Rml::Event& rmlEvent){
 	//TODO - make rmlEvent accessable through javascript
 	//1. Create Javascript Event object that references the rmlEvent
 	DKString rmlEventAddress = eventToAddress(&rmlEvent);
@@ -480,9 +459,7 @@ void DKRml::ProcessEvent(Rml::Event& rmlEvent)
 	}
 }
 
-///////////////////////////////////////////////////////////////////////////////
-bool DKRml::RegisterEvent(const DKString& elementAddress, const DKString& type)
-{
+bool DKRml::RegisterEvent(const DKString& elementAddress, const DKString& type){
 	DKDEBUGFUNC(elementAddress, type);
 	if(elementAddress.empty()){ 
 		DKERROR("DKRml::RegisterEvent(): elementAddress empty\n"); 
@@ -503,6 +480,7 @@ bool DKRml::RegisterEvent(const DKString& elementAddress, const DKString& type)
 	if(same(type, "contextmenu")){ _type = "mouseup"; }
 	if(same(type, "input")){ _type = "change"; 	}
 		
+	//NOTE: This was an old libRocket issue and has not been tested for a long time
 	//FIXME - StopPropagation() on a mousedown event will bock the elements ability to drag
 	// we need to find a way to stop propagation of the event, while allowing drag events.
 	// If we bubble our event upward and allow mousedown events to propagate, it works,
@@ -523,9 +501,7 @@ bool DKRml::RegisterEvent(const DKString& elementAddress, const DKString& type)
 	return true;
 }
 
-//////////////////////////////////////////////////////////////////////////////////////////////////
-bool DKRml::SendEvent(const DKString& elementAddress, const DKString& type, const DKString& value)
-{
+bool DKRml::SendEvent(const DKString& elementAddress, const DKString& type, const DKString& value){
 	//DKDEBUGFUNC(id, type, value);
 	if(elementAddress.empty()){ return false; }
 	if(type.empty()){ return false; }
@@ -542,9 +518,7 @@ bool DKRml::SendEvent(const DKString& elementAddress, const DKString& type, cons
 	return true;
 }
 
-/////////////////////////
-bool DKRml::DebuggerOff()
-{
+bool DKRml::DebuggerOff(){
 #ifndef LINUX
 	Rml::Debugger::SetVisible(false);
 	DKINFO("Rml Debugger OFF\n");
@@ -552,9 +526,7 @@ bool DKRml::DebuggerOff()
 	return true;
 }
 
-////////////////////////
-bool DKRml::DebuggerOn()
-{
+bool DKRml::DebuggerOn(){
 #ifndef LINUX
 	Rml::Debugger::SetVisible(true);
 	DKINFO("Rml Debugger ON\n");
@@ -562,9 +534,7 @@ bool DKRml::DebuggerOn()
 	return true;
 }
 
-////////////////////////////
-bool DKRml::DebuggerToggle()
-{
+bool DKRml::DebuggerToggle(){
 #ifndef LINUX
 	DKDEBUGFUNC();
 	if(Rml::Debugger::IsVisible()) //FIXME:  always returns false
@@ -575,9 +545,7 @@ bool DKRml::DebuggerToggle()
 	return true;
 }
 
-/////////////////////////////////////////////////////////////////////////////////
-bool DKRml::UnregisterEvent(const DKString& elementAddress, const DKString& type)
-{
+bool DKRml::UnregisterEvent(const DKString& elementAddress, const DKString& type){
 	DKDEBUGFUNC(elementAddress, type);
 	if(elementAddress.empty()){ return false; } //no id
 	if(type.empty()){ return false; } //no type
@@ -594,9 +562,7 @@ bool DKRml::UnregisterEvent(const DKString& elementAddress, const DKString& type
 	return true;
 }
 
-//////////////////////////////////////////////////////////
-Rml::Event* DKRml::addressToEvent(const DKString& address)
-{
+Rml::Event* DKRml::addressToEvent(const DKString& address){
 	//DKDEBUGFUNC(address);
 	Rml::Event* event;
 	if (address.compare(0, 2, "0x") != 0 || address.size() <= 2 || address.find_first_not_of("0123456789abcdefABCDEF", 2) != std::string::npos) {
@@ -621,9 +587,7 @@ Rml::Event* DKRml::addressToEvent(const DKString& address)
 	return event;
 }
 
-/////////////////////////////////////////////////
-DKString DKRml::eventToAddress(Rml::Event* event)
-{
+DKString DKRml::eventToAddress(Rml::Event* event){
 	if (!event) {
 		DKERROR("DKRml::eventToAddress(): invalid event\n");
 		return NULL;
@@ -639,9 +603,7 @@ DKString DKRml::eventToAddress(Rml::Event* event)
 	return ss.str();
 }
 
-////////////////////////////////////////////////////////////////////
-Rml::Element* DKRml::addressToElement(const DKString& address)
-{
+Rml::Element* DKRml::addressToElement(const DKString& address){
 	//DKDEBUGFUNC(address);
 	Rml::Element* element;
 
@@ -685,7 +647,7 @@ DKString DKRml::elementToAddress(Rml::Element* element){
 		ss << "document";
 	else if (element == DKRml::Get()->document) {
 		//TEST: Let's just test if we ever hear anything from this one
-		DKWARN("element = DKRml::Get()->document");
+		DKERROR("!!!! element = DKRml::Get()->document  !!!!");
 		ss << "document";
 	}
 	else {
