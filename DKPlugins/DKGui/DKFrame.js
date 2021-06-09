@@ -1,12 +1,10 @@
 "use strict";
 
-function DKFrame(){}
+function DKFrame() {}
 DKFrame.prototype.init = function DKFrame_init() {
-    console.log("DKFrame.prototype.init()");
     dk.create("DKGui/DKFrame.css");
 }
 DKFrame.prototype.end = function DKFrame_end() {
-    console.log("DKFrame.prototype.end()");
     dk.close("DKGui/DKFrame.css");
 }
 
@@ -15,30 +13,28 @@ DKFrame.prototype.create = function DKFrame_create(obj) {
     let id = "Generic Frame";
     let element = null;
 
-    //DKPlugin
-    //if (obj && obj.dkplugin) {
-        for (let key in obj) {
-            if (obj[key]instanceof HTMLElement) {
-                obj.id && (id = obj.id);
-                element = obj[key];
+    for (let key in obj) {
+        if (obj[key]instanceof HTMLElement) {
+            obj.id && (id = obj.id);
+            element = obj[key];
 
-                //if (element.panel)
-                //    break;
-                if (element.id && element.id.includes(".html"))
-                    break;
-            }
+            //if (element.panel)
+            //    break;
+            if (element.id && element.id.includes(".html"))
+                break;
         }
-    //}
+    }
 
     //HTMLElement
     if (obj instanceof HTMLElement)
         element = obj;
 
     let instance = null;
-    if(obj.type === "DKFrame")
+    if (obj.type === "DKFrame")
         instance = obj;
     else
-        instance = DKPlugin(DKFrame) //new DKFrame(id + "_frame");
+        instance = DKPlugin(DKFrame)
+
     obj.dkplugin && (instance.dkplugin = obj);
 
     var width = element.style.width;
@@ -62,14 +58,6 @@ DKFrame.prototype.create = function DKFrame_create(obj) {
     frame.appendChild(frame.content);
     frame.resize = dk.resize.create(frame);
     return instance;
-}
-
-DKFrame.prototype.close = function DKFrame_close() {
-    console.log("DKFrame.prototype.close()");
-    //DKPlugin.prototype.close.call(this.dkplugin);
-    //this.frame.parentNode.removeChild(this.frame);
-    //DKPlugin.prototype.close.call(this);
-    return true;
 }
 
 DKFrame.prototype.createFrame = function DKFrame_createFrame(title, width, height) {
@@ -265,22 +253,19 @@ DKFrame.prototype.restoreSize = function DKFrame_restoreSize(frame) {
 }
 
 DKFrame.prototype.createNewWindow = function DKFrame_createNewWindow(title, width, height, url) {
-    const instance = new DKFrame(title);
+    const instance = DKPlugin(DKFrame, title)
     if (!instance.ok) {
-        //const frame = this.getFrame(dkplugin);
         instance.frame && DKFrame.prototype.bringToFront(instance.frame);
         return false;
     }
-
     url && instance.dkplugin.setUrl(url);
     instance.div = document.createElement("div");
-    instance.div.id = title+".html";
+    instance.div.id = title + ".html";
     instance.div.style.width = width;
     instance.div.style.height = height;
     instance.div.style.overflow = "auto";
     instance.div.style.backgroundColor = "grey";
     this.create(instance);
-    //div.ok = true;
     return instance.div;
 }
 
