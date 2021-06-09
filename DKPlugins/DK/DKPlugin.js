@@ -5,66 +5,104 @@ const DEBUG = true;
 
 const DKPlugin = function DKPlugin() {
     //Determine what type of plugin to make here
-   
+
     // No Args, Could be anything, run the basics
-    if(!arguments.length){
-        return DKPlugin.start();
+    if (!arguments.length) {
+        return DKPlugin.createInstance();
     }
     // Plugin from Class function
-    if(typeof arguments[0] === "function"){
+    if (typeof arguments[0] === "function") {
         const clss = arguments[0];
         return DKPlugin.fromClass(clss);
     }
     // Plugin from file
-    if(typeof arguments[0] === "string"){
-        const file = arguments[0];
-        return DKPlugin.fromFile(file);
+    if (typeof arguments[0] === "string") {
+        const url = arguments[0];
+        return DKPlugin.fromFile(url);
     }
 }
 
 DKPlugin.fromClass = function DKPlugin_fromClass(clss) {
     DEBUG && console.debug(" *** DKPlugin.fromClass(" + clss.name + ") ***");
     const className = clss.name;
-    //FIXME: This get's the wrongscript file because of async
-    /*
+    //FIXME: This get's the wrong script file because of async
     const head = document.getElementsByTagName('head')[0];
     const scripts = head.getElementsByTagName("script");
     const script = scripts[scripts.length - 1];
     const url = scripts[scripts.length - 1].src;
-    */
+    console.info(className + " url: " + url);
 
     //https://stackoverflow.com/a/50402530/688352
+    /*
     this[className] = {
         [className]: function() {
-            const instance = new clss;
-            if (instance.__proto__.constructor.name !== className) {
-                console.error("A new " + className + " was defined in the " + instance.__proto__.constructor.name + " scope");
-                console.error("instances of " + className + " must be constucted with the " + className + " class scope");
-                return false;
-            }
-            //FIXME: This get's the wrong script file because of async
-            /*
+    */
+    const instance = new clss;
+    if (instance.__proto__.constructor.name !== className) {
+        console.error("A new " + className + " was defined in the " + instance.__proto__.constructor.name + " scope");
+        console.error("instances of " + className + " must be constucted with the " + className + " class scope");
+        return false;
+    }
+    //FIXME: This get's the wrong script file because of async
+    /*
             instance.script = script;
             !instance.url && (instance.url = url);
             console.debug("   instance.url: " + instance.url);
             */
-            instance.dkplugin = DKPlugin.prototype;
-            const rval = DKPlugin.start.call(instance, arguments);
-            if (!rval)
-                return false;
-            DKPlugin.prototype.init.call(rval);
-            return rval;
+    instance.dkplugin = DKPlugin.prototype;
+    const result = DKPlugin.createInstance.call(instance, arguments);
+    if (!result)
+        return false;
+    if (instance !== result)
+        return error("instance !== result");
+    DKPlugin.prototype.init.call(result);
+    return result;
+    /*
         }
     }
     return this[className][className]();
+    */
 }
 
-DKPlugin.fromFile = function DKPlugin_fromFile(file) {
+DKPlugin.fromFile = function DKPlugin_fromFile(url, callback) {
+    DEBUG && console.debug(" *** DKPlugin.fromFile(" + url + ") ***");
+    //TODO - attempt to read and find the class inside the javascript file, then create and instance.    
 
+    //javascript files
+    //Is the javascript file already loaded?
+    var scripts = document.getElementsByTagName("script");
+    for (var n = 0; n < scripts.length; n++) {
+        if (scripts[n].src === url) {
+            console.info(url + ": is already loaded");
+            callback && callback(true);
+            return true;
+        }
+    }
+
+    // Adding the script tag to the head of the document
+    var head = document.getElementsByTagName('head')[0];
+    var script = document.createElement('script');
+    script.id = url;
+    script.setAttribute('type', 'text/javascript');
+    script.setAttribute('async', true);
+    script.setAttribute('src', url);
+    head.appendChild(script);
+
+    script.onload = function script_onload() {
+        if (!this.readyState || this.readyState === "loaded" || this.readyState === "complete") {
+            //For javascript files, you need to create the variable at the top of the file.
+            // "const myPlugin = DKPlugin(MyClass)" 
+            console.log("Loaded " + url);
+            callback && callback(true);
+            return true;
+        }
+    }
+    script.onerror = function script_onerror() {
+        return error("onerror: " + url, callback(false));
+    }
 }
 
-
-DKPlugin.start = function DKPlugin_start() {
+DKPlugin.createInstance = function DKPlugin_createInstance() {
     this.type = this.constructor.name;
 
     //Is this instance already running?
@@ -97,10 +135,10 @@ DKPlugin.start = function DKPlugin_start() {
     }
     !this.id && (this.id = this.type + num);
 
-    // Wrap the plugins memebr function will error catching
+    // Wrap the plugins memebr function with error catching
     dk.errorCatcher(this, this.type);
 
-    //Add it to the plugin stack
+    //Add the new instance to the plugin stack
     const newIndex = DKPlugin.instances.push(this) - 1;
     DKPlugin.instances[newIndex].ok = true;
     this.dkplugin = DKPlugin.prototype;
@@ -281,8 +319,6 @@ DKPlugin.prototype.unsuperviseFuncs = function DKPlugin_unsuperviseFuncs(instanc
 }
 
 DKPlugin.instances = new Array;
-
-
 
 // TODO
 /*

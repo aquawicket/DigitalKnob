@@ -56,14 +56,14 @@ DKFile.prototype.makeDir = function DKFile_makeDir(path, mode, recursive, callba
     !mode && (mode = "0777");
     !recursive && (recursive = false);
     dk.file.isDir(path, function DKFile_isDir_callback(result) {
-        if (result)
-            return callback;
-        // warn("Directory already exists", callback);
+        if (result){
+            console.log("Directory already exists");
+            return ok(callback, result);
+        }
         console.debug("Creating directory " + path);
         dk.php.call("POST", "DKFile/DKFile.php", "makeDir", path, /*mode, recursive,*/
         function dk_php_call_callback(result) {
-            callback && callback(result);
-            return result;
+            return ok(callback, result);
         });
     });
 }
@@ -73,7 +73,8 @@ DKFile.prototype.pushDKAssets = function DKFile_pushDKAssets(callback) {
     dk.php.call("POST", "DKFile/DKFile.php", "pushDKAssets", function dk_php_pushDKAssets_callback(result) {
         if (!result)
             return error("pushDKAssets failed", callback);
-        return callback(result);
+        callback && callback(result);
+        return result
     });
 }
 
@@ -82,7 +83,8 @@ DKFile.prototype.pullDKAssets = function DKFile_pullDKAssets(callback) {
     dk.php.call("POST", "DKFile/DKFile.php", "pullDKAssets", function dk_php_pullDKAssets_callback(result) {
         if (!result)
             return error("pullDKAssets failed", callback);
-        return callback(result);
+        callback && callback(result);
+        return result;
     });
 }
 
@@ -92,17 +94,25 @@ DKFile.prototype.exists = function DKFile_exists(url, callback, usePhp) {
         url = dk.file.onlineAssets + url;
     if (dk.php) {
         dk.php.call("GET", "DKFile/DKFile.php", "exists", url, function dk_php_exists_callback(result) {
-            if (result)
-                return callback(true);
-            else
-                return callback(false);
+            if (result){
+                callback && callback(true);
+                return true;
+            }
+            else{
+                callback && callback(false);
+                return false;
+            }
         });
     } else {
         dk.sendRequest("GET", url, function dk_sendRequest_callback(success, url, result) {
-            if (success && url && result)
-                return callback(true);
-            else
-                return callback(false);
+            if (success && url && result){
+                callback && callback(true);
+                return true;
+            }
+            else{
+                callback && callback(false);
+                return false;
+            }
         });
     }
 }
@@ -327,7 +337,8 @@ if (!dk.hasCPP()) {
             dk.sendRequest("GET", path, function dk_sendRequest_callback(success, url, data) {
                 if (!data)
                     return error("data invalid", callback(false));
-                return callback(data);
+                callback && callback(data);
+                return data;
             });
         }
     }
@@ -352,7 +363,7 @@ if (!dk.hasCPP()) {
             path = dk.file.onlineAssets + path;
         //str = dk.stringToBinary(str);
         dk.php.call('POST', "DKFile/DKFile.php", "stringToFile", path, str, flags, function dk_php_call_callback(result) {
-            return callback(result);
+            return ok(callback, result);
         });
     }
 } else {

@@ -49,20 +49,26 @@ const byId = function byId(id) {
     return document.getElementById(id);
 }
 
-const error = function error(str, callback, rtnval) {
+const error = function error(str, callback, result) {
     throw new Error(str);
     //FIXME: this code is never reached because of throw. Set an argument to determine if the error is fatal. 
-    !rtnval && (rtnval = false);
+    !result && (result = false);
     console.error(str);
-    callback && callback(rtnval);
-    return rtnval;
+    callback && callback(result);
+    return result;
 }
 
-const warn = function warn(str, callback, rtnval) {
-    !rtnval && (rtnval = false);
+const warn = function warn(str, callback, result) {
+    !result && (result = false);
     console.warn(str);
-    callback && callback(rtnval);
-    return rtnval;
+    callback && callback(result);
+    return result;
+}
+
+const ok = function ok(callback, result){
+    !result && (result = true);
+    callback && callback(result);
+    return result;
 }
 
 //prevent screen highlighting while dragging
@@ -147,8 +153,7 @@ dk.getPlugin = function dk_getPlugin(url) {
     let plugin = dk[pluginName];
     if (!plugin) {
         if (pluginName !== "plugin")
-            return warn(file + " does not contain a dk." + pluginName + " Object");
-        else
+            console.log(file + " does not contain a dk." + pluginName + " Object");
         return null;
     }
     plugin.name = pluginName;
@@ -284,20 +289,24 @@ dk.loadJs = function dk_loadJs(url, dk_loadJs_callback) {
     script.onload = script.onreadystatechange = function script_onload() {
         //FIXME - DigitalKnob can't trigger onload yet.
         if (!done && (!this.readyState || this.readyState === "loaded" || this.readyState === "complete")) {
-            console.log("Loading " + url + ". . .");
+            console.log("Loaded " + url);
+            ///*
             var plugin = dk.getPlugin(url);
             if (plugin) {
                 plugin.url = url;
                 DKPlugin.prototype.init.call(plugin, function callback(instance) {
                     done = true;
-                    dk_loadJs_callback && dk_loadJs_callback(true);
-                    return true;
-                });
+                   dk_loadJs_callback && dk_loadJs_callback(true);
+                   return true;
+               });
             } else {
+            //*/
                 done = true;
                 dk_loadJs_callback && dk_loadJs_callback(true);
                 return true;
+            ///*
             }
+            //*/
         }
     }
     script.onerror = function script_onerror() {

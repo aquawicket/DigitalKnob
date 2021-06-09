@@ -1,26 +1,20 @@
 "use strict";
 
-function DKNotepad() {
-    return DKPlugin.call(this, arguments);
-}
+function DKNotepad() {}
 
 DKNotepad.prototype.init = function dk_notepad_init(callback) {
-    console.log("DKNotepad.prototype.init()");
     dk.create("DKNotepad/DKNotepadShortcuts.js");
     dk.create("DKNotepad/DKNotepad.css");
     callback && callback(true);
 }
 
 DKNotepad.prototype.end = function dk_notepad_end() {
-    console.log("DKNotepad.prototype.end()");
     dk.close("DKNotepad/DKNotepad.css");
     dk.close("DKNotepad/DKNotepadShortcuts.js");
 }
 
 DKNotepad.prototype.create = function dk_notepad_create(dk_notepad_create_callback) {
-    this.init();
-    console.log("DKNotepad.prototype.create()");
-    const instance = new DKNotepad();
+    const instance = new DKPlugin(DKNotepad)
     if (!instance)
         return error("instance invalid", dk_notepad_create_callback);
     dk.create("DKNotepad/DKNotepad.html", function dk_create_callback(html) {
@@ -71,7 +65,6 @@ DKNotepad.prototype.createOpen = function dk_notepad_createOpen(file) {
 }
 
 DKNotepad.prototype.filemenu = function dk_notepad_filemenu(REMOVEME, event) {
-    console.debug("DKNotepad.prototype.filemenu");
     const instance = this;
     const menu = dk.menu.createInstance();
     dk.menu.addItem(menu, "New", function dk_menu_new() {
