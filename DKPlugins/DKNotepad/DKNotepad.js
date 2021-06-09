@@ -8,7 +8,7 @@ DKNotepad.prototype.init = function dk_notepad_init(callback) {
     console.log("DKNotepad.prototype.init()");
     dk.create("DKNotepad/DKNotepadShortcuts.js");
     dk.create("DKNotepad/DKNotepad.css");
-    callback(true);
+    callback && callback(true);
 }
 
 DKNotepad.prototype.end = function dk_notepad_end() {
@@ -54,21 +54,16 @@ DKNotepad.prototype.create = function dk_notepad_create(dk_notepad_create_callba
             instance.rightclickmenu(instance, event);
         }
         instance.currentFile = "";
-        const frame = dk.frame.create(instance);
-        dk_notepad_create_callback && dk_notepad_create_callback(frame);
-        return frame;
+        instance.dkframe = DKFrame.prototype.create(instance);
+        dk_notepad_create_callback && dk_notepad_create_callback(instance);
+        return instance;
     });
 }
 
-DKNotepad.prototype.close = function dk_notepad_close(instance) {
-    console.log("DKNotepad.prototype.close()");
-    dk.frame.close(instance);
-}
-
 DKNotepad.prototype.createOpen = function dk_notepad_createOpen(file) {
-    this.create(function(frame) {
-        frame.setTitle("DKNotepad - " + file);
-        frame.dkplugin.currentfile = file;
+    this.create(function(instance) {
+        instance.dkframe.setTitle("DKNotepad - " + file);
+        instance.dkframe.dkplugin.currentfile = file;
         dk.file.fileToString(file, function(str) {
             frame.dkplugin.text.value = str;
         });

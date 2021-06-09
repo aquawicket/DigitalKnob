@@ -1,12 +1,7 @@
 "use strict";
 
-dk.validate = new DKValidate();
-function DKValidate() {
-    return DKPlugin.call(this);
-}
-
-//DKValidate.prototype.init = function DKValidate_init(){}
-//DKValidate.prototype.end = function DKValidate_end(){}
+dk.validate = DKPlugin(DKValidate);
+function DKValidate() {}
 
 //https://stackoverflow.com/a/9337047/688352
 DKValidate.prototype.isValidVarName = function DKValidate_isValidVarName(var_name) {

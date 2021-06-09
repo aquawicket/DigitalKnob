@@ -1,33 +1,24 @@
 "use strict";
 
-//dk.filemanager = new DKFileManager();
-
-function DKFileManager() {
-    return DKPlugin.call(this, arguments);
-}
+function DKFileManager() {}
 
 DKFileManager.prototype.init = function DKFileManager_init(callback) {
-    console.log("DKFileManager.prototype.init()");
     dk.create("DKFile/DKFileAssociation.js");
     dk.create("DKFile/filemanager.css");
     callback && callback(true);
 }
 
 DKFileManager.prototype.end = function DKFileManager_end() {
-    console.log("DKFileManager.prototype.end()");
     this.close("DKFile/filemanager.css");
     this.close("DKFile/DKFileAssociation.js");
 }
 
 DKFileManager.prototype.create = function DKFileManager_create(DKFileManager_create_callback) {
-    console.log("DKFileManager.prototype.create()");
-    const instance = new DKFileManager();
+    const instance = new DKPlugin(DKFileManager)
     if (!instance)
         return error("instance invalid", DKFileManager_create_callback);
 
     dk.create("DKFile/filemanager.html", function dk_create_callback(html) {
-        //dk.create("DKFile/DKFileAssociation.js");
-        //dk.create("DKFile/filemanager.css");
         if (!html)
             return error("html invalid");
         instance.html = html;
@@ -47,20 +38,16 @@ DKFileManager.prototype.create = function DKFileManager_create(DKFileManager_cre
             instance.onPath(instance, event);
         }
         instance.openFolder(instance, instance.path.value);
-        DKFrame.prototype.create(instance);
+        instance.dkFrame = DKFrame.prototype.create(instance);
+        instance.dkFrame.setTitle("File Manager");
         DKFileManager_create_callback && DKFileManager_create_callback(instance);
         return instance;
     });
 }
 
-DKFileManager.prototype.close = function DKFileManager_close(instance) {
-    console.log("DKFileManager.prototype.close()");
-    this.close();
-}
-
 DKFileManager.prototype.createOpen = function DKFileManager_getfile(DKFileManager_createOpen_callback) {
     instance.create(function(instance) {
-        DKFrame.prototype.setTitle(instance, "Open");
+        instance.dkFrame.setTitle("Open");
         instance.cancel.style.visibility = "visible";
         instance.ok.style.visibility = "visible";
         instance.cancel.onclick = function() {
@@ -77,7 +64,7 @@ DKFileManager.prototype.createOpen = function DKFileManager_getfile(DKFileManage
 
 DKFileManager.prototype.createSaveAs = function DKFileManager_savefile(DKFileManager_createSaveAs_callback) {
     instance.create(function(instance) {
-        DKFrame.prototype.setTitle(instance, "Save As");
+        instance.dkFrame.setTitle("Save As");
         instance.cancel.style.visibility = "visible";
         instance.ok.style.visibility = "visible";
         instance.cancel.onclick = function() {

@@ -92,13 +92,14 @@ bool DKRml::Init(){
 	DKClass::DKCreate("DKDomNavigator");
 	DKClass::DKCreate("DKDomEventTarget");
 	DKClass::DKCreate("DKDom/DKDomGlobalEventHandlers.js");
-	DKClass::DKCreate("DKDomXMLHttpRequest");
 	DKClass::DKCreate("DKDomXMLHttpRequestEventTarget");
+	DKClass::DKCreate("DKDomXMLHttpRequest");
 	DKClass::DKCreate("DKDomScreen");
 
 	//* Dom that needs a screen
 	DKClass::DKCreate("DKDomWindow");
 	DKClass::DKCreate("DKDomWindowOrWorkerGlobalScope");
+	DKClass::DKCreate("DKDomWindowEventHandlers");
 	DKClass::DKCreate("DKDomLocation");
 	DKClass::DKCreate("DKDomNode");
 	DKClass::DKCreate("DKDomElement");

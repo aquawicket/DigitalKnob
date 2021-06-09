@@ -1,10 +1,7 @@
 "use strict";
 
-dk.php = new DKPhp();
-
-function DKPhp() {
-    return DKPlugin.call(this, arguments)
-}
+dk.php = DKPlugin(DKPhp)
+function DKPhp() {}
 
 // EXAMPLE
 //DKPhp.prototype.call("GET", "DK/DK.php", "Function", "args", "args", dkphp_callback);

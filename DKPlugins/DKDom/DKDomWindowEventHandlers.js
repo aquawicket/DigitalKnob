@@ -2,6 +2,7 @@
 // https://html.spec.whatwg.org/multipage/webappapis.html#windoweventhandlers
 // https://javascript.info/mixins
 
+//https://html.spec.whatwg.org/multipage/webappapis.html#windoweventhandlers
 var WindowEventHandlers = function(pointer) {
     this.pointer = pointer;
 
