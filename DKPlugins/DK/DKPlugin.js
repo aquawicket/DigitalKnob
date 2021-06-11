@@ -56,14 +56,6 @@ DKPlugin.dumpInfo = function DKPlugin_dumpArguments() {
 
 DKPlugin.fromFile = function DKPlugin_fromFile(args, DKPlugin_fromFile_callback) {
     //DEBUG && console.debug(" *** DKPlugin.fromFile(" + url + ") ***");
-    //DKPlugin.dumpInfo.apply(this, arguments);
-    /*
-    const url = arguments[0];
-    if (typeof (arguments[arguments.length - 1]) === "function")
-        DKPlugin_fromFile_callback = arguments[arguments.length - 1];
-    else
-        DKPlugin_fromFile_callback = undefined;
-    */ 
     const url = args[0]
 
     //update the current list of functions
@@ -93,17 +85,27 @@ DKPlugin.fromFile = function DKPlugin_fromFile(args, DKPlugin_fromFile_callback)
     script.onload = function script_onload() {
         if (!this.readyState || this.readyState === "loaded" || this.readyState === "complete") {
             console.log("%cLoaded " + url, "color:green;");
-            const newfuncs = dk.getNewFuncs();
-            const n = newfuncs.length - 1
-            if (!window[newfuncs[n]]) {
+            !DKPlugin.info && (DKPlugin.info = new Array)
+            let className = null;
+            if (DKPlugin.info[url])
+                className = DKPlugin.info[url]
+            else {
+                const newfuncs = dk.getNewFuncs()
+                className = newfuncs[newfuncs.length - 1]
+            }
+            if (!window[className]) {
                 DKPlugin_fromFile_callback && DKPlugin_fromFile_callback(true);
                 return true;
             }
-            const dkClass = window[newfuncs[n]];
-            dkClass.url = url;
-            dkClass.script = script;
-            dkClass.prototype.url = url;
-            //dkClass.prototype.script = script;
+            const dkClass = window[className];
+
+            //TODO: if instance of dkClass is singleton and exists, return the original instance
+            //if(args.includes("singleton"))
+                //dkClass.prototype.singleton = true;
+
+            !DKPlugin.info && (DKPlugin.info = new Array)
+            DKPlugin.info[url] = dkClass.name
+            dkClass.prototype.url = url
             if (typeof dkClass.prototype.init === "function") {
                 dkClass.prototype.init(function() {
                     DKPlugin_fromFile_callback && DKPlugin_fromFile_callback(dkClass);
@@ -131,11 +133,9 @@ DKPlugin.fromClass = function DKPlugin_fromClass(clss) {
         console.error("instances of " + className + " must be constucted with the " + className + " class scope");
         return false;
     }
-    instance.dkplugin = DKPlugin.prototype;
     const result = DKPlugin.createInstance.call(instance, arguments);
     if (result != instance)
         return error("instance !== result");
-    //DKPlugin.prototype.init.call(result);
     !instance.supervised && DKPlugin.prototype.superviseFuncs(instance);
     return result;
 
@@ -209,9 +209,7 @@ DKPlugin.prototype.init = function DKPlugin_init() {
         return error("the instane in DKPlugin.prototype.init() is a constructor of 'Object' and should be the class name");
     }
 
-    //this.dkplugin.url = this.url;
-    //!this.supervised && DKPlugin.prototype.superviseFuncs(this);
-    if (this.xinit) {
+    if (this.xinit && this.xinit !== this.init) {
         DEBUG && console.group(this.constructor.name + ".xinit()");
         const rval = this.xinit.apply(this, arguments);
         DEBUG && console.groupEnd();
@@ -234,19 +232,28 @@ DKPlugin.prototype.end = function DKPlugin_end() {
         DEBUG && console.groupEnd();
     }
     DKPlugin.prototype.unsuperviseFuncs(this);
-    //const dkplugin = dk.getPlugin(this.url);
+
     this.singleton = false;
-    //delete this.dkplugin;
-    //delete dk[dkplugin.name];
-    //FIXME: unload the script by dkClass.prototype.url
-    if (this.script && this.script.parentNode) {
-        this.script.parentNode.removeChild(this.script);
-        DEBUG && console.debug("Unloaded " + this.url);
+
+    var scripts = document.getElementsByTagName("script");
+    for (var n = 0; n < scripts.length; n++) {
+        if (scripts[n].src.includes(this.url)) {
+            if (!scripts[n].parentNode.removeChild(scripts[n]))
+                console.error("Failed to remove " + url);
+            console.debug("Unloaded " + this.url);
+        }
     }
 
+    if (!delete this)
+        console.error("delete this failed")
+    else
+        console.debug("sussesfully deleted this @" + this.type)
+    //if(!delete window[this.type])
+    //    console.error("delete window['"+this.type+"'] failed")
+    //else
+    //    console.debug("successfully deleted window[]'"+this.type+"']")
+    //this = undefined;
     //window[this.type] = undefined;
-    delete this;
-    delete window[this.type]
     DEBUG && console.groupEnd();
 }
 
@@ -281,12 +288,7 @@ DKPlugin.prototype.close = function DKPlugin_close() {
         return error("this is invalid");
     }
 
-    //close the innermost child plugins first
-    if (this.dkplugin && (typeof this.dkplugin === "object") && this.dkplugin.close) {
-        if (this !== this.dkplugin)
-            this.dkplugin.close();
-    }
-    if (this.xclose) {
+    if (this.xclose && this.xclose !== this.close) {
         DEBUG && console.group(this.constructor.name + ".xclose");
         this.xclose();
         DEBUG && console.groupEnd();
@@ -304,11 +306,12 @@ DKPlugin.prototype.close = function DKPlugin_close() {
     DKPlugin.prototype.removeInstance(this);
 
     //if any more of this type exist, don't end
-    for (let n = 0; n < DKPlugin.instances.length; n++)
+    for (let n = 0; n < DKPlugin.instances.length; n++) {
         if (DKPlugin.instances[n].type === this.type) {
             DEBUG && console.groupEnd();
-            return;
+            return
         }
+    }
     //that was the last, go ahead and end
     this.end();
     DEBUG && console.groupEnd();
@@ -380,24 +383,3 @@ DKPlugin.prototype.unsuperviseFuncs = function DKPlugin_unsuperviseFuncs(instanc
 }
 
 DKPlugin.instances = new Array;
-
-// TODO
-/*
-DKPlugin.create = function DKPlugin_create(url) {
-    console.debug("DKPlugin.create(" + url + ")");
-    const scripts = document.getElementsByTagName("script");
-    for (let n = 0; n < scripts.length; n++) {
-        if (scripts[n].src.includes(url)) {
-            console.info("%c" + url + " is already loaded", "color:orange;");
-            return true;
-        }
-    }
-    const head = document.getElementsByTagName('head')[0];
-    const script = document.createElement('script');
-    script.id = url;
-    script.setAttribute('type', 'text/javascript');
-    script.setAttribute('async', true);
-    script.setAttribute('src', url);
-    head.appendChild(script);
-}
-*/

@@ -119,13 +119,13 @@ DKFileAssociation.prototype.opencss = function DKFileAssociation_opencss(path) {
 }
 
 DKFileAssociation.prototype.opentext = function DKFileAssociation_opentext(path) {
-    dk.create("DKNotepad/DKNotepad.js", function dk_create_callback(val) {
+    DKPlugin("DKNotepad/DKNotepad.js", function dk_create_callback(val) {
         dk.notepad.createOpen(path);
     });
 }
 
 DKFileAssociation.prototype.openimage = function DKFileAssociation_openimage(path) {
-    dk.create("DKPaint/DKPaint.js", function dk_create_callback() {
+    DKPlugin("DKPaint/DKPaint.js", function dk_create_callback() {
         dk.paint.createOpen(path);
     });
 }

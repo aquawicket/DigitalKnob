@@ -3,7 +3,7 @@
 function DKFileManager() {}
 
 DKFileManager.prototype.init = function DKFileManager_init(callback) {
-    dk.create("DKFile/DKFileAssociation.js");
+    DKPlugin("DKFile/DKFileAssociation.js");
     dk.create("DKFile/filemanager.css");
     callback && callback(true);
 }
@@ -271,7 +271,7 @@ DKFileManager.prototype.rename = function DKFileManager_rename(instance, node) {
 }
 
 DKFileManager.prototype.delete = function DKFileManager_delete(instance, path) {
-    dk.create("DKGui/DKMessageBox.js", function() {
+    DKPlugin("DKGui/DKMessageBox.js", function() {
         dk.messagebox.createConfirm("Delete this file?", function(result) {
             dk.file.delete(path, function(result) {
                 console.log(path);

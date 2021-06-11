@@ -57,10 +57,10 @@ DKCodeMirror.prototype.create = function DKCodeMirror_create(DKCodeMirror_create
 DKCodeMirror.prototype.createOpen = function DKCodeMirror_createOpen(file, DKCodeMirror_createOpen_callback) {
     this.create(function(instance) {
         instance.frame.setTitle("DKCodeMirror - " + file);
-        instance.frame.dkplugin.currentfile = file;
+        instance.currentfile = file;
         dk.file.fileToString(file, function(str) {
-            frame.dkplugin.myCodeMirror.setValue(str);
-            DKCodeMirror_createOpen_callback && DKCodeMirror_createOpen_callback(frame.dkplugin);
+            instance.myCodeMirror.setValue(str);
+            DKCodeMirror_createOpen_callback && DKCodeMirror_createOpen_callback(instance);
         });
     });
 }

@@ -4,10 +4,10 @@ var animation;
 Taskbar.init = function Taskbar_init() {
     dk.create("DKOS/Taskbar.html,DKOS/DKOS.html", function() {
         //dk.create("DKOS/Taskbar.html", function(){
-        dk.create("DKOS/Clock.js", function() {
-            dk.create("DKOS/Scale.js", function() {
+        DKPlugin("DKOS/Clock.js", function() {
+            DKPlugin("DKOS/Scale.js", function() {
                 if (DK_GetBrowser() === "RML") {
-                    dk.create("DKDebug/BugReport.js", function() {});
+                    DKPlugin("DKDebug/BugReport.js", function() {});
                     byId("DKOS/Taskbar.html").appendChild(byId("DKDebug/BugReport.html"));
                     //reparent
                 }
@@ -29,7 +29,7 @@ Taskbar.end = function Taskbar_end() {
 
 Taskbar.onevent = function Taskbar_onevent(event) {
     if (event.currentTarget.id === "start") {
-        dk.create("DKOS/TaskbarMenu.js", function() {});
+        DKPlugin("DKOS/TaskbarMenu.js", function() {});
     }
     if (event.currentTarget.id === "test_animate") {
         console.log("Taskbar_onevent(): animate");

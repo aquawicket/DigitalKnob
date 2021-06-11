@@ -17,6 +17,10 @@ DKDevTools.prototype.create = function DKDevTools_create() {
     return instance;
 }
 
+DKDevTools.prototype.close = function DKDevTools_close(){
+    this.dkcodemirror.close();
+}
+
 DKDevTools.prototype.addTools = function DKDevTools_addTools(instance) {
     dk.gui.createButton(instance.div, "Pull Assets", "10rem", "", "5rem", "", "90rem", "20rem", function dk_gui_createButton_onclick() {
         dk.file.pullDKAssets(function dk_file_pullDKAssets_callback(result) {
@@ -37,7 +41,7 @@ DKDevTools.prototype.addTools = function DKDevTools_addTools(instance) {
         }
     });
     dk.gui.createImageButton(instance.div, "File Manager", "DKFile/folder.png", "2rem", "", "", "2px", "", "", function() {
-        dk.create("DKFile/filemanager.js", function() {
+        DKPlugin("DKFile/filemanager.js", function() {
             DKFileManager.prototype.init();
             DKFileManager.prototype.create();
         });
@@ -89,7 +93,12 @@ DKDevTools.prototype.addTools = function DKDevTools_addTools(instance) {
     })
     */
 
-    DKPlugin("DKCodeMirror/DKCodeMirror.js", function DKPlugin_callback() {
+    DKPlugin("DKCodeMirror/DKCodeMirror.js", function DKPlugin_callback(dkClass) {
+        
+        instance.dkcodemirror = DKPlugin(DKCodeMirror)
+        if (!instance.dkcodemirror)
+            return error("dkcodemirror invalid")
+
         const dkcodemirrorDiv = dk.gui.createTag("div", instance.div, {
             style: {
                 position: "absolute",
@@ -102,17 +111,12 @@ DKDevTools.prototype.addTools = function DKDevTools_addTools(instance) {
             }
         });
 
-        const dkcodemirror = DKPlugin(DKCodeMirror)
-        if (!dkcodemirror)
-            return error("dkcodemirror invalid")
-
         const codeMirror = CodeMirror(dkcodemirrorDiv, {
             theme: "abcdef",
             lineNumbers: true,
             lineWrapping: true,
             mode: "javascript",
         })
-        instance.codeMirror = codeMirror;
         codeMirror.on('change',function(codeMirror){
             dk.file.stringToFile(codeMirror.getValue(), "USER/devtoolscode.js");
         })

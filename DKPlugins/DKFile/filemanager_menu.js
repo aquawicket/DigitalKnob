@@ -176,7 +176,7 @@ dk.solutionmenu.rename = function dk_solutionmenu_rename() {
     var top2 = byId("DKSolutionMenu").offsetTop;
     var top = top1 - top2 - 1;
 
-    dk.create("DKFile/DKSolutionRename.js", function dk_create_callback() {
+    DKPlugin("DKFile/DKSolutionRename.js", function dk_create_callback() {
         DKSolutionRename_SetId(dk.solutionmenu.id);
         DKSolutionRename_SetFile(dk.solutionmenu.file);
         byId("DKFile/DKSolutionRename.html").style.top = top + "rem";
@@ -186,7 +186,7 @@ dk.solutionmenu.rename = function dk_solutionmenu_rename() {
 }
 
 dk.solutionmenu.delete = function dk_solutionmenu_delete() {
-    dk.create("DKGui/DKMessageBox.js", function dk_create_callback() {
+    DKPlugin("DKGui/DKMessageBox.js", function dk_create_callback() {
         DKSolutionMenu_Html("DKGui/DKMessageBox.html");
         DKMessageBox_Confirm("delete this file?", function DKMessageBox_Confirm_callback(rval) {
             if (rval === true) {
@@ -213,7 +213,7 @@ dk.solutionmenu.import = function dk_solutionmenu_import() {//TODO
 }
 
 dk.solutionmenu.gitAdd = function dk_solutionmenu_gitAdd() {
-    dk.create("DKBuild/DKBuild.js", function dk_create_callback() {
+    DKPlugin("DKBuild/DKBuild.js", function dk_create_callback() {
         var git = GIT;
         //from DKBuild.js
         var dkpath = DKPATH;
@@ -239,7 +239,7 @@ dk.solutionmenu.gitAdd = function dk_solutionmenu_gitAdd() {
 }
 
 dk.solutionmenu.upxCompress = function dk_solutionmenuuUpxCompress() {
-    dk.create("DKBuild/DKBuild.js", function dk_create_callback() {
+    DKPlugin("DKBuild/DKBuild.js", function dk_create_callback() {
         //for DKPATH
 
         var dkpath = DKPATH;

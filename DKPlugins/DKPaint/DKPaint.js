@@ -25,10 +25,10 @@ function DKPaint_onevent(event) {
     if (event.currentTarget.id === "DKPaint_Save") {//DKNotepad_Save();
     }
     if (event.type === "contextmenu") {
-        dk.create("DKPaint/DKPaintMenu.js", function() {});
+        DKPlugin("DKPaint/DKPaintMenu.js", function() {});
     }
     if (event.currentTarget.id === "DKPaint_File") {
-        dk.create("DKPaint/DKPaintFile.js", function() {});
+        DKPlugin("DKPaint/DKPaintFile.js", function() {});
     }
     if (event.type === "OpenFile") {
         var file = DK_GetValue(event);
@@ -59,8 +59,8 @@ function DKPaint_Open(file) {
 }
 
 function DKPaint_LoadTif(filename) {
-    dk.create("http://code.jquery.com/jquery-1.10.1.min.js", function() {
-        dk.create("DKPaint/tiff.min.js", function() {
+    DKPlugin("http://code.jquery.com/jquery-1.10.1.min.js", function() {
+        DKPlugin("DKPaint/tiff.min.js", function() {
             var xhr = new XMLHttpRequest();
             xhr.open('GET', filename);
             xhr.responseType = 'arraybuffer';

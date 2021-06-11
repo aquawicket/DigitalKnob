@@ -28,7 +28,7 @@ function SendBugReport_CreateReport() {
 
     byId("DKDebug/SendBugReport.html").style.display = "none";
     //TODO: say thank you here
-    dk.create("DKGui/DKMessageBox.js", function dk_create_callback() {
+    DKPlugin("DKGui/DKMessageBox.js", function dk_create_callback() {
         DKFrame_Html("DKGui/DKMessageBox.html");
         DKMessageBox_Message("Thank You :)");
         DKFrame_Close("DKDebug/SendBugReport.html");

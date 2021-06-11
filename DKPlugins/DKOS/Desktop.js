@@ -13,8 +13,8 @@ Desktop.onevent = function Desktop_onevent(event) {
     //console.log("Desktop_onevent("+event+")");
     if (event.currentTarget.id === "Background" && event.type === "contextmenu") {
         event.preventDefault();
-        dk.create("DKOS/DesktopMenu.js", function() {
-            dk.create("DKGui/DKMenu.js", function() {
+        DKPlugin("DKOS/DesktopMenu.js", function() {
+            DKPlugin("DKGui/DKMenu.js", function() {
                 DKMenu_ValidatePosition("DKOS/DesktopMenu.html");
             });
         });

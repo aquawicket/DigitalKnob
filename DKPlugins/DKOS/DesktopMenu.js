@@ -19,7 +19,7 @@ DesktopMenu.end = function DesktopMenu_end() {
 
 DesktopMenu.onevent = function DesktopMenu_onevent(event) {
     if (event.currentTarget.id === "OpenBackgtoundMenu") {
-        dk.create("DKOS/BackgroundMenu.js", function() {
+        DKPlugin("DKOS/BackgroundMenu.js", function() {
             DKFrame_Html("DKOS/BackgroundMenu.html");
         });
     }

@@ -1,11 +1,12 @@
 "use strict";
 
+dk.resize = DKPlugin(DKResize)
+
 function DKResize() {}
 
-DKResize.prototype.create = function DKResize_create(element) {
+DKResize.prototype.createBox = function DKResize_create(element) {
     if (!element)
         return error("element invalid");
-    dk.resize = DKPlugin(DKResize);
     dk.resize.image = dk.gui.createElement(element, "img", "dk_resize_image");
     dk.resize.image.setAttribute("src", "DKGui/resize.png");
     dk.resize.image.style.removeProperty("top");

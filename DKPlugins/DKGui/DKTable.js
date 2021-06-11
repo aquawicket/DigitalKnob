@@ -40,8 +40,7 @@ DKTable.prototype.end = function DKTable_close() {
 }
 
 DKTable.prototype.create = function DKTable_create(parent, id, top, bottom, left, right, width, height) {
-    console.log("DKTable.prototype.create()");
-    const instance = new DKPlugin(DKTable)
+    const instance = DKPlugin(DKTable)
     dk.table = instance;
     if (!instance)
         return error("instance invalid", create_callback);    

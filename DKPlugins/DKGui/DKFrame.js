@@ -56,7 +56,7 @@ DKFrame.prototype.create = function DKFrame_create(obj) {
         height: "unset"
     }
     frame.appendChild(frame.content);
-    frame.resize = DKResize.prototype.create(frame);
+    frame.resize = DKResize.prototype.createBox(frame);
     return instance;
 }
 
@@ -138,6 +138,7 @@ DKFrame.prototype.createFrame = function DKFrame_createFrame(title, width, heigh
     frame.close.setAttribute("src", "DKGui/close.png");
     frame.close.onmousedown = function DKFrame_close_onmousedown(event) {
         event.stopPropagation();
+        instance.dkplugin.close();
         instance.close();
     }
     return frame;
@@ -209,7 +210,7 @@ DKFrame.prototype.minimize = function DKFrame_minimize() {
 
 DKFrame.prototype.reload = function DKFrame_reload() {
     console.log("DKFrame.prototype.reload()");
-    const url = this.dkplugin.getUrl();
+    const url = this.dkplugin.prototype.url
     this.dkplugin.close();
     this.frame.parentNode.removeChild(this.frame);
     DKPlugin.prototype.close.call(this);
@@ -258,15 +259,15 @@ DKFrame.prototype.createNewWindow = function DKFrame_createNewWindow(title, widt
     //    instance.frame && DKFrame.prototype.bringToFront(instance.frame);
     //    return false;
     //}
-    url && instance.dkplugin.setUrl(url);
-    instance.div = document.createElement("div");
-    instance.div.id = title + ".html";
-    instance.div.style.width = width;
-    instance.div.style.height = height;
-    instance.div.style.overflow = "auto";
-    instance.div.style.backgroundColor = "grey";
-    this.create(instance);
-    return instance.div;
+    url && instance.dkplugin.prototype.url
+    instance.div = document.createElement("div")
+    instance.div.id = title + ".html"
+    instance.div.style.width = width
+    instance.div.style.height = height
+    instance.div.style.overflow = "auto"
+    instance.div.style.backgroundColor = "grey"
+    this.create(instance)
+    return instance.div
 }
 
 /*

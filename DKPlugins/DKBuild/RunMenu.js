@@ -129,7 +129,7 @@ function RunMenu_onevent(event) {
 
     if (event.currentTarget.id === "Export to Android Studio") {
         console.log("Export to Android Studio\n");
-        dk.create("DKBuild/AndroidImport.js", function() {
+        DKPlugin("DKBuild/AndroidImport.js", function() {
             AndroidImport_Import();
         });
     }

@@ -22,7 +22,7 @@
   z-index: unset;
 }
 .CodeMirror-gutter-elt {
-  z-index: 1;
+  /* z-index: 0; */
 }
 .CodeMirror pre.CodeMirror-line-like {
   z-index: unset;

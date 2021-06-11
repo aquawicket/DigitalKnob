@@ -15,10 +15,10 @@ DKOS.init = function DKOS_init() {
 			*/
         }
 
-        //dk.create("DKGui/DKFrame.js", function(){
-        //dk.create("DKGui/DKMenu.js", function(){
-        dk.create("DKOS/Desktop.js", function() {
-            dk.create("DKOS/Taskbar.js", function() {
+        //DKPlugin("DKGui/DKFrame.js", function(){
+        //DKPlugin("DKGui/DKMenu.js", function(){
+        DKPlugin("DKOS/Desktop.js", function() {
+            DKPlugin("DKOS/Taskbar.js", function() {
                 if (OS === "iOS" || OS === "Android") {//DK_SetScale(2);   FIXME
                 }
             });

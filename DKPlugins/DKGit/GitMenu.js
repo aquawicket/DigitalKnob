@@ -1,7 +1,7 @@
 var GIT = "";
 
 function GitMenu_init() {
-    dk.create("DKBuild/DKBuild.js", function() {});
+    DKPlugin("DKBuild/DKBuild.js", function() {});
     dk.create("DKThreadPool");
 
     //console.log(DK_GetOS()+"\n");
