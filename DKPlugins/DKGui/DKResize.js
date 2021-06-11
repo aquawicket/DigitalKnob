@@ -1,15 +1,11 @@
 "use strict";
 
-dk.resize = new DKResize();
-
-function DKResize() {
-    return DKPlugin.call(this, arguments);
-}
+function DKResize() {}
 
 DKResize.prototype.create = function DKResize_create(element) {
-    console.log("DKResize.prototype.create()");
     if (!element)
         return error("element invalid");
+    dk.resize = DKPlugin(DKResize);
     dk.resize.image = dk.gui.createElement(element, "img", "dk_resize_image");
     dk.resize.image.setAttribute("src", "DKGui/resize.png");
     dk.resize.image.style.removeProperty("top");

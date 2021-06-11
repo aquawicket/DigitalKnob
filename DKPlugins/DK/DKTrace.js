@@ -1,7 +1,7 @@
 "use strict";
 
-
 dk.trace = DKPlugin(DKTrace);
+
 function DKTrace() {}
 
 DKTrace.prototype.editFile = function dk_trace_editFile(file, line, ch) {

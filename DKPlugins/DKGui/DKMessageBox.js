@@ -3,19 +3,16 @@
 function DKMessageBox(){}
    
 DKMessageBox.prototype.init = function init(init_callback){
-    console.log("DKMessageBox.prototype.init()");
     dk.create("DKGui/DKMessageBox.css");
     init_callback && init_callback(this);
 }
 
 DKMessageBox.prototype.end = function end(){
-    console.log("DKMessageBox.prototype.end()");
     dk.close("DKGui/DKMessageBox.css");
 }
 
 DKMessageBox.prototype.create = function create(create_callback) {
-    console.log("DKMessageBox.prototype.create()");
-    const instance = new DKPlugin(DKMessageBox)
+    const instance = DKPlugin(DKMessageBox)
     if (!instance)
         return error("instance invalid", create_callback);
     dk.create("DKGui/DKMessageBox.html", function dkcreate_callback(html) {

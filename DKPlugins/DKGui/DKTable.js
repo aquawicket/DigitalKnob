@@ -1,8 +1,6 @@
 "use strict";
 
-function DKTable() {
-    return DKPlugin.call(this, arguments);
-}
+function DKTable() {}
 
 // https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableElement
 
@@ -42,9 +40,8 @@ DKTable.prototype.end = function DKTable_close() {
 }
 
 DKTable.prototype.create = function DKTable_create(parent, id, top, bottom, left, right, width, height) {
-    this.init();
     console.log("DKTable.prototype.create()");
-    const instance = new DKTable();
+    const instance = new DKPlugin(DKTable)
     dk.table = instance;
     if (!instance)
         return error("instance invalid", create_callback);    

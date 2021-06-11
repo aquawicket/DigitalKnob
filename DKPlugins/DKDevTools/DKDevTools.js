@@ -3,12 +3,11 @@
 function DKDevTools() {}
 
 DKDevTools.prototype.create = function DKDevTools_create() {
-    console.log("DKDevTools.prototype.create()");
     const instance = DKPlugin(DKDevTools, "singleton")
     if (!instance)
         return;
     instance.div = document.createElement("div");
-    instance.div.style.width = "400rem";
+    instance.div.style.width = "600rem";
     instance.div.style.height = "300rem";
     instance.div.style.overflow = "auto";
     const dkframe = DKFrame.prototype.create(instance);
@@ -32,7 +31,7 @@ DKDevTools.prototype.addTools = function DKDevTools_addTools(instance) {
     });
     const runCode = dk.gui.createButton(instance.div, "Run Code", "70rem", "", "5rem", "", "80rem", "20rem", function dk_gui_createButton_onclick() {
         try {
-            eval(codebox.value);
+            eval(instance.codeMirror.getValue());
         } catch (err) {
             console.error(err);
         }
@@ -44,6 +43,7 @@ DKDevTools.prototype.addTools = function DKDevTools_addTools(instance) {
         });
     })
 
+    /*
     const codebox = dk.gui.createTag("textarea", instance.div, {
         style: {
             position: "absolute",
@@ -87,4 +87,51 @@ DKDevTools.prototype.addTools = function DKDevTools_addTools(instance) {
             codebox.value = str;
         })
     })
+    */
+
+    DKPlugin("DKCodeMirror/DKCodeMirror.js", function DKPlugin_callback() {
+        const dkcodemirrorDiv = dk.gui.createTag("div", instance.div, {
+            style: {
+                position: "absolute",
+                top: "90rem",
+                left: "5rem",
+                right: "5rem",
+                //width: "95%",
+                bottom: "5rem",
+                backgroundColor: "black"
+            }
+        });
+
+        const dkcodemirror = DKPlugin(DKCodeMirror)
+        if (!dkcodemirror)
+            return error("dkcodemirror invalid")
+
+        const codeMirror = CodeMirror(dkcodemirrorDiv, {
+            theme: "abcdef",
+            lineNumbers: true,
+            lineWrapping: true,
+            mode: "javascript",
+        })
+        instance.codeMirror = codeMirror;
+        codeMirror.on('change',function(codeMirror){
+            dk.file.stringToFile(codeMirror.getValue(), "USER/devtoolscode.js");
+        })
+
+        dk.file.exists("USER/devtoolscode.js", function(result) {
+            if (!result) {
+                console.log("file does not exist")
+                return
+            }
+
+            dk.file.fileToString("USER/devtoolscode.js", function(str) {
+                if (!str && str != "") {
+                    console.log("str invalid")
+                    return
+                }
+                codeMirror.setValue(str)
+            })
+        })
+
+    })
+
 }

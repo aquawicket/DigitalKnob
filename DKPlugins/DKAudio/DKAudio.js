@@ -1,16 +1,14 @@
 "use strict";
 //https://developer.mozilla.org/en-US/docs/Web/API/HTMLAudioElement
 
-dk.audio = new DKAudio();
+dk.audio = new DKPlugin(DKAudio)
 
-function DKAudio() {
-    return DKPlugin.call(this, arguments);
-}
+function DKAudio() {}
 
 DKAudio.prototype.init = function DKAudio_init(callback) {
     dk.create("DKAudio");
     dk.audio.lastValume = 0.0;
-    return callback && callback(true);
+    callback && callback(true);
 }
 
 DKAudio.prototype.end = function DKAudio_end() {}

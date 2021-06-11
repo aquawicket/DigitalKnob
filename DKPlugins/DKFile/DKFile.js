@@ -1,10 +1,8 @@
 "use strict";
 
-dk.file = new DKFile();
+dk.file = DKPlugin(DKFile)
 
-function DKFile() {
-    return DKPlugin.call(this, arguments);
-}
+function DKFile() {}
 
 DKFile.prototype.init = function DKFile_init() {
     dk.file.appFilename = "";
@@ -361,7 +359,6 @@ if (!dk.hasCPP()) {
             return error("DKFile.prototype.onlineAssets invalid", callback);
         if (!path.includes(dk.file.onlineAssets))
             path = dk.file.onlineAssets + path;
-        //str = dk.stringToBinary(str);
         dk.php.call('POST', "DKFile/DKFile.php", "stringToFile", path, str, flags, function dk_php_call_callback(result) {
             return ok(callback, result);
         });

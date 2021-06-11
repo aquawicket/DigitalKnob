@@ -1,10 +1,8 @@
 "use strict";
 
-dk.debug = new DKDebug();
+dk.debug = new DKPlugin(DKDebug)
 
-function DKDebug() {
-    return DKPlugin.call(this, arguments);
-}
+function DKDebug() {}
 
 /*
 //Error-first callbacks
@@ -453,7 +451,6 @@ DKDebug.prototype.debugFunc = function DKDebug_debugFunc() {
 DKDebug.prototype.init = function DKDebug_init() {
     dk.debug.keyHistory = new Array;
     document.addEventListener("keydown", dk.debug.onevent);
-    //DKPlugin.prototype.init.call(this);
 }
 
 DKDebug.prototype.end = function DKDebug_end() {

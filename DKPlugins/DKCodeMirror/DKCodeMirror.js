@@ -1,5 +1,7 @@
 "use strict";
 
+function DKCodeMirror() {}
+
 DKCodeMirror.prototype.init = function DKCodeMirror_init(DKCodeMirror_init_callback) {
     dk.create("DKCodeMirror/lib/codemirror.js", function() {
         dk.create("DKCodeMirror/lib/codemirror.css", function() {
@@ -86,5 +88,3 @@ DKCodeMirror.prototype.highlightError = function DKCodeMirror_highlightError(ins
         css: "background-color: rgb(100,0,0)"
     });
 }
-
-function DKCodeMirror() {}

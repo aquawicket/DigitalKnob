@@ -11,10 +11,14 @@ const utcDate = dateEvent.toUTCString();
 format: Tue, 19 Aug 1975 23:15:30 GMT
 */
 
-dk.time = new DKTime();
+dk.time = DKPlugin(DKTime)
 
-function DKTime() {
-    return DKPlugin.call(this, arguments);
+function DKTime() {}
+
+DKTime.prototype.init = function DKTime_init(DKTime_init_callback){
+    DKPlugin("DK/sun.js", function(){
+        DKTime_init_callback && DKTime_init_callback()
+    });
 }
 
 DKTime.prototype.create = function DKTime_create(percision) {

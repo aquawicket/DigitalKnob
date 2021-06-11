@@ -1,11 +1,9 @@
 "use strict";
 //https://stackoverflow.com/a/36317375/688352
 
-dk.errorhandler = new DKErrorHandler();
+dk.errorhandler = DKPlugin(DKErrorHandler)
 
-function DKErrorHandler() {
-    return DKPlugin.call(this, arguments)
-}
+function DKErrorHandler() {}
 
 DKErrorHandler.prototype.create = function dk_errorhandler_create() {
     // Capture error data for debugging in web console

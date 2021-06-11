@@ -200,7 +200,7 @@ dk.close = function dk_close(data) {
         data.splice(0, 0, "DKJavascript");
     else if (dk.hasCPP)
         CPP_DK_Close(data);
-    /*
+
     if (data[0] === "DKJavascript") {
         var plugin = dk.getPlugin(data[1]);
         console.log("closing dk." + plugin.name + " plugin");
@@ -211,7 +211,7 @@ dk.close = function dk_close(data) {
 
         const scripts = document.getElementsByTagName("script");
         for (let n = 0; n < scripts.length; n++) {
-            if (scripts[n].href.includes(data[1])) {
+            if (scripts[n].src.includes(data[1])) {
                 scripts[n].parentNode.removeChild(scripts[n]);
                 console.debug("Unloaded " + data[1]);
                 return true;
@@ -219,7 +219,6 @@ dk.close = function dk_close(data) {
         }
         return true;
     }
-    */
 
     if (data[0] === "DKHtml") {
         var element = byId(data[1]);
@@ -287,16 +286,23 @@ dk.loadJs = function dk_loadJs(url, dk_loadJs_callback) {
     required({
         url
     });
-    if (dk.getObjects().indexOf(url) > -1) {
-        console.log(url + " script already loaded...");
-        dk_loadJs_callback(true);
-        return true;
+    //if (dk.getObjects().indexOf(url) > -1) {
+    //    console.log(url + " script already loaded...");
+    //    dk_loadJs_callback(true);
+    //    return true;
+    //}
+    var scripts = document.getElementsByTagName("script");
+    for (var n = 0; n < scripts.length; n++) {
+        if (scripts[n].src.includes(url)) {
+            console.info(url + ": is already loaded");
+            dk_loadJs_callback && dk_loadJs_callback(true);
+            return true;
+        }
     }
 
     // Adding the script tag to the head node 
     var head = document.getElementsByTagName('head')[0];
     var script = document.createElement('script');
-    script.id = url;
     script.setAttribute('type', 'text/javascript');
     script.setAttribute('async', true);
     script.setAttribute('src', url);
@@ -308,7 +314,6 @@ dk.loadJs = function dk_loadJs(url, dk_loadJs_callback) {
         //FIXME - DigitalKnob can't trigger onload yet.
         if (!done && (!this.readyState || this.readyState === "loaded" || this.readyState === "complete")) {
             console.log("Loaded " + url);
-            ///*
             var plugin = dk.getPlugin(url);
             plugin.url = url;
             if (plugin.init) {
@@ -318,13 +323,10 @@ dk.loadJs = function dk_loadJs(url, dk_loadJs_callback) {
                     return true;
                 });
             } else {
-                //*/
                 done = true;
                 dk_loadJs_callback && dk_loadJs_callback(true);
                 return true;
-                ///*
             }
-            //*/
         }
     }
     script.onerror = function script_onerror() {
@@ -412,6 +414,7 @@ dk.loadCss = function dk_loadCss(url, dk_loadCss_callback) {
     link.setAttribute('href', url);
     link.setAttribute('rel', 'stylesheet');
     link.setAttribute('type', 'text/css');
+    link.setAttribute('async', true);
     head.appendChild(link);
     dk_loadCss_callback && dk_loadCss_callback(link);
     return link;
@@ -1231,6 +1234,35 @@ dk.testSyntax = function dk_testSyntax(code) {
     } catch (err) {
         throw err
     }
+}
+
+dk.getNewFuncs = function dk_getNewFuncs() {
+    !dk.windowfuncs && (dk.windowfuncs = new Array)
+    const newfuncs = new Array
+    const removedfuncs = new Array
+    const obj = window
+
+    //remove any function that have been removed from obj
+    for (var i in dk.windowfuncs) {
+        if (!obj[dk.windowfuncs[i]]) {
+            obj[dk.windowfuncs[i]] = undefined
+            //delete obj[dk.windowfuncs[i]]
+            removedfuncs.push(dk.windowfuncs[i])
+            dk.windowfuncs.splice(i, 1);
+        }
+    }
+
+    //update windowfuncs and newfuncs
+    for (var i in obj) {
+        if ((typeof obj[i]).toString() == "function" && obj[i].toString().indexOf("[native code]") == -1) {
+            if (!dk.windowfuncs.includes(obj[i].name) && obj[obj[i].name]) {
+                newfuncs.push(obj[i].name);
+                dk.windowfuncs.push(obj[i].name);
+            }
+        }
+    }
+
+    return newfuncs;
 }
 
 dk.init();

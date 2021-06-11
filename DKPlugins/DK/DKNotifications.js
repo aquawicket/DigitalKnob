@@ -1,10 +1,9 @@
 "use strict";
 
 // https://developer.mozilla.org/en-US/docs/Web/API/Notifications_API
-dk.notifications = new DKNotifications();
-function DKNotifications() {
-    return DKPlugin.call(this);
-}
+dk.notifications = DKPlugin(DKNotifications)
+
+function DKNotifications() {}
 
 
 DKNotifications.prototype.notifyMe = function DKNotifications_notifyMe() {

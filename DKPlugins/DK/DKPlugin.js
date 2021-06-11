@@ -11,7 +11,7 @@
 //
 
 const DKPlugin = function DKPlugin() {
-    DKPlugin.dumpInfo.apply(this, arguments);
+    //DKPlugin.dumpInfo.apply(this, arguments);
 
     let DKPlugin_callback = null;
     if (arguments && typeof (arguments[arguments.length - 1]) === "function")
@@ -42,7 +42,7 @@ DKPlugin.dumpInfo = function DKPlugin_dumpArguments() {
     console.group("%c ***** DUMPINFO *****", "color: rgb(0,200,0);")
     dk.trace && console.log("%c" + dk.trace.getFunctionName(), "color: rgb(0,200,0);")
     console.log("%cthis.constructor.name: " + this.constructor.name, "color: rgb(0, 150, 0);")
-    
+
     if (arguments.length && arguments[0].toString() == "[object Arguments]")
         arguments.length = 0;
     if (arguments.length) {
@@ -55,53 +55,12 @@ DKPlugin.dumpInfo = function DKPlugin_dumpArguments() {
     console.groupEnd()
 }
 
-DKPlugin.fromClass = function DKPlugin_fromClass(clss) {
-    //DEBUG && console.debug(" *** DKPlugin.fromClass(" + clss.name + ") ***");
-    const className = clss.name;
-    //FIXME: This get's the wrong script file because of async
-    const head = document.getElementsByTagName('head')[0];
-    const scripts = head.getElementsByTagName("script");
-    const script = scripts[scripts.length - 1];
-    const url = scripts[scripts.length - 1].src;
-    console.info(className + " url: " + url);
-
-    //https://stackoverflow.com/a/50402530/688352
-    /*
-    this[className] = {
-        [className]: function() {
-    */
-    const instance = new clss;
-    if (instance.__proto__.constructor.name !== className) {
-        console.error("A new " + className + " was defined in the " + instance.__proto__.constructor.name + " scope");
-        console.error("instances of " + className + " must be constucted with the " + className + " class scope");
-        return false;
-    }
-    //FIXME: This get's the wrong script file because of async
-    /*
-            instance.script = script;
-            !instance.url && (instance.url = url);
-            console.debug("   instance.url: " + instance.url);
-            */
-    instance.dkplugin = DKPlugin.prototype;
-    const result = DKPlugin.createInstance.call(instance, arguments);
-    if (!result)
-        return false;
-    if (instance !== result)
-        return error("instance !== result");
-    DKPlugin.prototype.init.call(result);
-    return result;
-    /*
-        }
-    }
-    return this[className][className]();
-    */
-}
-
 DKPlugin.fromFile = function DKPlugin_fromFile(url, DKPlugin_fromFile_callback) {
     //DEBUG && console.debug(" *** DKPlugin.fromFile(" + url + ") ***");
-    //TODO - attempt to read and find the class inside the javascript file, then create and instance.    
 
-    //javascript files
+    //update the current list of functions
+    dk.getNewFuncs();
+
     //Is the javascript file already loaded?
     var scripts = document.getElementsByTagName("script");
     for (var n = 0; n < scripts.length; n++) {
@@ -121,18 +80,61 @@ DKPlugin.fromFile = function DKPlugin_fromFile(url, DKPlugin_fromFile_callback) 
     script.setAttribute('src', url);
     head.appendChild(script);
 
+    script.onerror = function script_onerror(err) {
+        return error("script.onerror", DKPlugin_fromFile_callback(false));
+    }
     script.onload = function script_onload() {
         if (!this.readyState || this.readyState === "loaded" || this.readyState === "complete") {
-            //For javascript files, you need to create the variable at the top of the file.
-            // "const myPlugin = DKPlugin(MyClass)" 
-            console.log("Loaded " + url);
-            DKPlugin_fromFile_callback && DKPlugin_fromFile_callback(true);
+            console.log("%cLoaded " + url, "color:green;");
+            const newfuncs = dk.getNewFuncs();
+            const n = newfuncs.length - 1
+            if (!window[newfuncs[n]]) {
+                DKPlugin_fromFile_callback && DKPlugin_fromFile_callback(true);
+                return true;
+            }
+            const dkClass = window[newfuncs[n]];
+            dkClass.url = url;
+            dkClass.script = script;
+            if (typeof dkClass.prototype.init === "function") {
+                dkClass.prototype.init(function() {
+                    DKPlugin_fromFile_callback && DKPlugin_fromFile_callback(true);
+                })
+            } else
+                DKPlugin_fromFile_callback && DKPlugin_fromFile_callback(true);
             return true;
         }
     }
-    script.onerror = function script_onerror() {
-        return error("onerror: " + url, DKPlugin_fromFile_callback(false));
+}
+
+DKPlugin.fromClass = function DKPlugin_fromClass(clss) {
+    //DEBUG && console.debug(" *** DKPlugin.fromClass(" + clss.name + ") ***");
+    const className = clss.name;
+
+    //https://stackoverflow.com/a/50402530/688352
+    /*
+    this[className] = {
+        [className]: function() {
+    */
+
+    const instance = new clss;
+    if (instance.__proto__.constructor.name !== className) {
+        console.error("A new " + className + " was defined in the " + instance.__proto__.constructor.name + " scope");
+        console.error("instances of " + className + " must be constucted with the " + className + " class scope");
+        return false;
     }
+    instance.dkplugin = DKPlugin.prototype;
+    const result = DKPlugin.createInstance.call(instance, arguments);
+    if (result != instance)
+        return error("instance !== result");
+    //DKPlugin.prototype.init.call(result);
+    !instance.supervised && DKPlugin.prototype.superviseFuncs(instance);
+    return result;
+    
+    /*
+        }
+    }
+    return this[className][className]();
+    */
 }
 
 DKPlugin.createInstance = function DKPlugin_createInstance() {
@@ -173,13 +175,13 @@ DKPlugin.createInstance = function DKPlugin_createInstance() {
     }
     !this.id && (this.id = this.type + num);
 
-    // Wrap the plugins memebr function with error catching
+    // Wrap the plugins memeber functions with error catching
     dk.errorCatcher(this, this.type);
 
     //Add the new instance to the plugin stack
     const newIndex = DKPlugin.instances.push(this) - 1;
-    DKPlugin.instances[newIndex].ok = true;
-    this.dkplugin = DKPlugin.prototype;
+    //DKPlugin.instances[newIndex].ok = true;
+    this.dkplugin = true;
     return DKPlugin.instances[newIndex];
 }
 
@@ -199,7 +201,7 @@ DKPlugin.prototype.init = function DKPlugin_init() {
     }
 
     //this.dkplugin.url = this.url;
-    !this.supervised && DKPlugin.prototype.superviseFuncs(this);
+    //!this.supervised && DKPlugin.prototype.superviseFuncs(this);
     if (this.xinit) {
         DEBUG && console.group(this.constructor.name + ".xinit()");
         const rval = this.xinit.apply(this, arguments);
@@ -265,8 +267,9 @@ DKPlugin.prototype.close = function DKPlugin_close() {
     }
 
     //close the innermost child plugins first
-    if (this.dkplugin && this.dkplugin.xclose) {
-        this.dkplugin.close();
+    if (this.dkplugin && this.dkplugin.close) {
+        if(this !== this.dkplugin)
+            this.dkplugin.close();
     }
     if (this.xclose) {
         DEBUG && console.group(this.constructor.name + ".xclose");

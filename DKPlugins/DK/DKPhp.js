@@ -1,6 +1,7 @@
 "use strict";
 
 dk.php = DKPlugin(DKPhp)
+
 function DKPhp() {}
 
 // EXAMPLE

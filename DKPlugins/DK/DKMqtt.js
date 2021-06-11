@@ -1,18 +1,18 @@
 "use strict";
 
 //http://www.steves-internet-guide.com/using-javascript-mqtt-client-websockets/
-dk.mqtt = new DKMqtt();
-function DKMqtt() {
-    return DKPlugin.call(this);
-}
+dk.mqtt = DKPlugin(DKMqtt)
 
+function DKMqtt() {}
 
-DKMqtt.prototype.init = function DKMqtt_init() {
-    dk.create("DKTasmota/mqttws31.min.js");
-    this.mqtt;
-    this.reconnectTimeout = 2000;
-    this.host = "127.0.0.1";
-    this.port = 9001;
+DKMqtt.prototype.init = function DKMqtt_init(DKMqtt_init_callback) {
+    dk.create("DKTasmota/mqttws31.min.js", function () {
+        this.mqtt;
+        this.reconnectTimeout = 2000;
+        this.host = "127.0.0.1";
+        this.port = 9001;
+        DKMqtt_init_callback && DKMqtt_init_callback();
+    });
 }
 
 DKMqtt.prototype.onMqttConnect = function DKMqtt_onMqttConnect() {

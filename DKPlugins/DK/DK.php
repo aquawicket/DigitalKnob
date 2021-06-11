@@ -86,7 +86,7 @@ function error($message){
 }
 
 if($_REQUEST["dkx"]){
-	$json = urldecode($_REQUEST["dkx"]);
+	$json = $_REQUEST["dkx"];
 	$obj = json_decode($json);
     $func = $obj->func;
     $args = $obj->args;
