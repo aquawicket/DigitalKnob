@@ -41,13 +41,12 @@ DKAudio.prototype.pause = function DKAudio_pause(src) {
 }
 
 //https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/play
-DKAudio.prototype.play = async function DKAudio_play(src) {
-    //try {
-    const audio = byId(src);
-    await audio.play();
-    //} catch (errMsg) {
-    //    console.warn(errMsg);
-    //}
+//FIXME: async/await unavailble to Duktape yet
+if (DUKTAPE !== true) {
+    DKAudio.prototype.play = async function DKAudio_play(src) {
+        const audio = byId(src);
+        await audio.play();
+    }
 }
 
 DKAudio.prototype.stop = function DKAudio_stop(src) {

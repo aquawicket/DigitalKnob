@@ -35,10 +35,7 @@ DKDevToolsButton.prototype.create = function DKDevToolsButton_create() {
 
 DKDevToolsButton.prototype.show = function DKDevToolsButton_show() {
 
-    //DKPlugin.create("DKDevTools/DKDevTools.js");
-
-    dk.create("DKDevTools/DKDevTools.js", function dk_create_callback() {
+    DKPlugin("DKDevTools/DKDevTools.js", function dk_create_callback() {
         DKDevTools.prototype.create();
     });
-
 }

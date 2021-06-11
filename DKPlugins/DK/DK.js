@@ -1,38 +1,39 @@
 "use strict";
 
+const DEBUG = true;
 window.dk = new Object;
-const duktape = window.duktape;
-dk.cpp = false;
+const DUKTAPE = window.DUKTAPE;
+dk.useCPP = false;
 
 //Keep a object reference to the old console
+//if (console) {
 const xconsole = new Object;
 //Create a logger for console
 dk.x = new Object;
-(function() {
-    xconsole.debug = console.debug;
-    xconsole.error = console.error;
-    xconsole.log = console.log;
-    xconsole.warn = console.warn;
-    dk.x.record = [];
-    dk.x.logger = function(lvl, args) {
-        !dk.hasCPP() && xconsole[lvl] && xconsole[lvl].apply(this, Array.prototype.slice.call(args));
-        dk.hasCPP() && dk && dk.x && dk.x.log && dk.x.log.apply(this, Array.prototype.slice.call(args));
-        var obj = {};
-        (obj[lvl] = args[0]) && (dk.x && dk.x.record.push(obj))
-    }
-    console.debug = function() {
-        dk.x && dk.x.logger("debug", arguments);
-    }
-    console.error = function() {
-        dk.x && dk.x.logger("error", arguments);
-    }
-    console.log = function() {
-        dk.x && dk.x.logger("log", arguments);
-    }
-    console.warn = function() {
-        dk.x && dk.x.logger("warn", arguments);
-    }
-}());
+xconsole.debug = console.debug;
+xconsole.error = console.error;
+xconsole.log = console.log;
+xconsole.warn = console.warn;
+dk.x.record = [];
+dk.x.logger = function(lvl, args) {
+    !DUKTAPE && xconsole[lvl] && xconsole[lvl].apply(this, Array.prototype.slice.call(args));
+    DUKTAPE && dk && dk.x && dk.x.log && dk.x.log.apply(this, Array.prototype.slice.call(args));
+    var obj = {};
+    (obj[lvl] = args[0]) && (dk.x && dk.x.record.push(obj))
+}
+console.debug = function() {
+    dk.x && dk.x.logger("debug", arguments);
+}
+console.error = function() {
+    dk.x && dk.x.logger("error", arguments);
+}
+console.log = function() {
+    dk.x && dk.x.logger("log", arguments);
+}
+console.warn = function() {
+    dk.x && dk.x.logger("warn", arguments);
+}
+//}
 
 const required = function required() {
     for (let n = 0; n < arguments.length; n++) {
@@ -50,6 +51,9 @@ const byId = function byId(id) {
 }
 
 const error = function error(str, callback, result) {
+    if (DEBUG) {
+        debugger ;
+    }
     throw new Error(str);
     //FIXME: this code is never reached because of throw. Set an argument to determine if the error is fatal. 
     !result && (result = false);
@@ -65,7 +69,7 @@ const warn = function warn(str, callback, result) {
     return result;
 }
 
-const ok = function ok(callback, result){
+const ok = function ok(callback, result) {
     !result && (result = true);
     callback && callback(result);
     return result;
@@ -112,7 +116,7 @@ dk.init = function dk_init() {
 }
 
 dk.hasCPP = function dk_hasCPP() {
-    if (dk.cpp === false) {
+    if (dk.useCPP === false) {
         return false;
     }
     dk.cpp = false;
@@ -256,14 +260,26 @@ dk.getPlugin = function dk_getPlugin(url) {
     if (instanceName.substring(0, 2) === "dk")
         instanceName = instanceName.slice(2);
     let plugin = {};
-    window[instanceName] && (plugin = window[instanceName]);
-    dk[instanceName] && (plugin = dk[instanceName]);
+    if (window[instanceName]) {
+        plugin = window[instanceName];
+        plugin.instance = instanceName;
+    }
+    if (dk[instanceName]) {
+        plugin = dk[instanceName];
+        plugin.instance = instanceName;
+    }
     plugin.name = pluginName;
-   
-    console.debug("plugin.name: "+plugin.name)
 
+    let nameCSS = "color: red;"
+    let instanceCSS = "color: red;"
+    let initCSS = "color: red;"
+    plugin.name && (nameCSS = "color: green;")
+    plugin.instance && (instanceCSS = "color: green;")
+    plugin.init && (initCSS = "color: green;")
 
-
+    console.debug("plugin.name: %c" + plugin.name, nameCSS);
+    console.debug("plugin.instance: %c" + plugin.instance, instanceCSS);
+    console.debug("plugin.init(): %c" + typeof plugin.init, initCSS);
     return plugin;
 }
 
@@ -294,19 +310,19 @@ dk.loadJs = function dk_loadJs(url, dk_loadJs_callback) {
             console.log("Loaded " + url);
             ///*
             var plugin = dk.getPlugin(url);
-            if (plugin) {
-                plugin.url = url;
+            plugin.url = url;
+            if (plugin.init) {
                 DKPlugin.prototype.init.call(plugin, function callback(instance) {
                     done = true;
-                   dk_loadJs_callback && dk_loadJs_callback(true);
-                   return true;
-               });
+                    dk_loadJs_callback && dk_loadJs_callback(true);
+                    return true;
+                });
             } else {
-            //*/
+                //*/
                 done = true;
                 dk_loadJs_callback && dk_loadJs_callback(true);
                 return true;
-            ///*
+                ///*
             }
             //*/
         }
@@ -385,7 +401,7 @@ dk.loadCss = function dk_loadCss(url, dk_loadCss_callback) {
     });
     const links = document.getElementsByTagName("link");
     for (let n = 0; n < links.length; n++) {
-        if (links[n].href.includes(url)) {
+        if (links[n].href && links[n].href.includes(url)) {
             console.log(url + " already loaded.");
             dk_loadCss_callback && dk_loadCss_callback(links[n]);
             return links[n];
@@ -905,9 +921,11 @@ dk.preloadImage = function dk_preloadImage(url) {
     required({
         url
     });
-    var img = new Image();
-    img.src = url;
-    return img;
+    if (!DUKTAPE) {
+        var img = new Image();
+        img.src = url;
+        return img;
+    }
 }
 
 dk.saveToLocalStorage = function dk_saveToLocalStorage(name, string) {
@@ -1167,7 +1185,6 @@ Object.prototype.clone = Array.prototype.clone = function() {
 
 //https://humanwhocodes.com/blog/2009/04/28/javascript-error-handling-anti-pattern/
 dk.errorCatcher = function dk_errorCatcher(obj, name) {
-    return;
     required({
         obj
     });

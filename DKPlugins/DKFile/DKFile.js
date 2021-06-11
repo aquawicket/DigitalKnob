@@ -328,7 +328,7 @@ if (!dk.hasCPP()) {
                 return error("DKFile.prototype.onlineAssets invalid", callback);
             !path.includes(dk.file.onlineAssets) && (path = dk.file.onlineAssets + path);
             dk.php.call('POST', "DKFile/DKFile.php", "fileToString", path, function dk_php_call_callback(str) {
-                if (!str)
+                if (!str && str !== "")
                     return error("str invalid", callback(false));
                 callback && callback(str);
                 return str;
@@ -349,7 +349,7 @@ if (!dk.hasCPP()) {
         return callback(str);
     }
 }
-//Update DK.js to use this function
+//lets replace DK.js's version of fileToString to this one
 dk.fileToString = dk.file.fileToString;
 
 if (!dk.hasCPP()) {

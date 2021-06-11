@@ -72,6 +72,7 @@ const testFunc = function testFunc(needed) {
 DKDebug.prototype.debugFunc = function DKDebug_debugFunc() {
     //console.log("DKDebug.prototype.debugFunc");
 
+    /*
     testFunc("abc");
     testFunc(123);
     testFunc(true);
@@ -79,6 +80,7 @@ DKDebug.prototype.debugFunc = function DKDebug_debugFunc() {
     testFunc("This should be seen last");
     testFunc();
     testFunc("SHOULD NOT SEE THIS");
+    */
 
     //theTHins = 100 / 0;
     //err("test error");
@@ -126,8 +128,8 @@ DKDebug.prototype.debugFunc = function DKDebug_debugFunc() {
         }
         return objs[objs.length - 1] || true;
     }
-    //OBJ("dk.clock.html.style").color = "rgb(0,0,0)";
-    OBJ("dk.clock.html2.style.color") && (dk.clock.html.style.color = "rgb(200,0,200)");
+    //OBJ("dk.time.html.style").color = "rgb(0,0,0)";
+    OBJ("dk.time.html2.style.color") && (dk.time.html.style.color = "rgb(200,0,200)");
     */
 
     //const clock_face = window['dk']['clock']['html']['innerHTML'];

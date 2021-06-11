@@ -321,5 +321,6 @@ var window = new Window("window");
 //Duktape miscellaneous
 var dk = new Object;
 window.dk = dk;
-dk.duktape = true;
-const duktape = true;
+const DUKTAPE = true;
+window.DUKTAPE = true;
+console.log("DUKTAPE = "+DUKTAPE);

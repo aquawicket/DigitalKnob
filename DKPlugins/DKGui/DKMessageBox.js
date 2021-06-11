@@ -34,19 +34,20 @@ DKMessageBox.prototype.create = function create(create_callback) {
 
 DKMessageBox.prototype.createMessage = function createMessage(message, createMessage_callback) {
     const title = "Message"    
-    this.xcreate(function create_callback(instance) {
+    this.create(function create_callback(instance) {
         instance.frame.setTitle(title);
-        instance.html.message.innerHTML = message;
-        instance.html.input.style.display = "none";
-        instance.html.message.style.display = "block";
-        instance.html.message.style.visibility = "visible";
-        instance.html.cancel.style.display = "none";
-        instance.html.cancel.style.visibility = "hidden";
-        instance.html.ok.onclick = function ok_onclick() {
+        instance.message.innerHTML = message;
+        instance.input.style.display = "none";
+        instance.message.style.display = "block";
+        instance.message.style.visibility = "visible";
+        instance.cancel.style.display = "none";
+        instance.cancel.style.visibility = "hidden";
+        instance.ok.onclick = function ok_onclick() {
             instance.frame.close();
-            createMessage_callback && createMessage_callback(true);
-            return true;
+            createMessage_callback && createMessage_callback(instance, true);
         }
+        createMessage_callback && createMessage_callback(instance);
+        return instance;
     });
 }
 

@@ -1,14 +1,28 @@
 //"use strict"; //FIXME: this breaks duktape
 //https://www.phpied.com/3-ways-to-define-a-javascript-class/
 
-const DEBUG = true;
+// EXAMPLES
+//
+// DKPlugin("api/myJavascript.js")
+//  This will load a javascript file, ready to create an instance
+//
+// DKPlugin(MyClass)
+//   This will creat an instance of the class. MyClass must be available. 
+//
 
 const DKPlugin = function DKPlugin() {
+    DKPlugin.dumpInfo.apply(this, arguments);
+
+    let DKPlugin_callback = null;
+    if (arguments && typeof (arguments[arguments.length - 1]) === "function")
+        DKPlugin_callback = arguments[arguments.length - 1];
+
     //Determine what type of plugin to make here
 
-    // No Args, Could be anything, run the basics
+    //This is experamental
     if (!arguments.length) {
-        return DKPlugin.createInstance();
+        return error("running DKPlugin() with no arguments is experamental")
+        //return DKPlugin.createInstance();
     }
     // Plugin from Class function
     if (typeof arguments[0] === "function") {
@@ -18,12 +32,31 @@ const DKPlugin = function DKPlugin() {
     // Plugin from file
     if (typeof arguments[0] === "string") {
         const url = arguments[0];
-        return DKPlugin.fromFile(url);
+        DKPlugin.fromFile(url, function callback(result) {
+            DKPlugin_callback && DKPlugin_callback(result);
+        });
     }
 }
 
+DKPlugin.dumpInfo = function DKPlugin_dumpArguments() {
+    console.group("%c ***** DUMPINFO *****", "color: rgb(0,200,0);")
+    dk.trace && console.log("%c" + dk.trace.getFunctionName(), "color: rgb(0,200,0);")
+    console.log("%cthis.constructor.name: " + this.constructor.name, "color: rgb(0, 150, 0);")
+    
+    if (arguments.length && arguments[0].toString() == "[object Arguments]")
+        arguments.length = 0;
+    if (arguments.length) {
+        console.group("%c **arguments(" + arguments.length + ")**", "color: rgb(0, 150, 0);")
+        for (let n = 0; n < arguments.length; n++) {
+            console.log("%c [" + n + "]: " + arguments[n], "color: rgb(0, 150, 0);")
+        }
+        console.groupEnd();
+    }
+    console.groupEnd()
+}
+
 DKPlugin.fromClass = function DKPlugin_fromClass(clss) {
-    DEBUG && console.debug(" *** DKPlugin.fromClass(" + clss.name + ") ***");
+    //DEBUG && console.debug(" *** DKPlugin.fromClass(" + clss.name + ") ***");
     const className = clss.name;
     //FIXME: This get's the wrong script file because of async
     const head = document.getElementsByTagName('head')[0];
@@ -64,8 +97,8 @@ DKPlugin.fromClass = function DKPlugin_fromClass(clss) {
     */
 }
 
-DKPlugin.fromFile = function DKPlugin_fromFile(url, callback) {
-    DEBUG && console.debug(" *** DKPlugin.fromFile(" + url + ") ***");
+DKPlugin.fromFile = function DKPlugin_fromFile(url, DKPlugin_fromFile_callback) {
+    //DEBUG && console.debug(" *** DKPlugin.fromFile(" + url + ") ***");
     //TODO - attempt to read and find the class inside the javascript file, then create and instance.    
 
     //javascript files
@@ -74,7 +107,7 @@ DKPlugin.fromFile = function DKPlugin_fromFile(url, callback) {
     for (var n = 0; n < scripts.length; n++) {
         if (scripts[n].src === url) {
             console.info(url + ": is already loaded");
-            callback && callback(true);
+            DKPlugin_fromFile_callback && DKPlugin_fromFile_callback(true);
             return true;
         }
     }
@@ -93,12 +126,12 @@ DKPlugin.fromFile = function DKPlugin_fromFile(url, callback) {
             //For javascript files, you need to create the variable at the top of the file.
             // "const myPlugin = DKPlugin(MyClass)" 
             console.log("Loaded " + url);
-            callback && callback(true);
+            DKPlugin_fromFile_callback && DKPlugin_fromFile_callback(true);
             return true;
         }
     }
     script.onerror = function script_onerror() {
-        return error("onerror: " + url, callback(false));
+        return error("onerror: " + url, DKPlugin_fromFile_callback(false));
     }
 }
 
@@ -114,10 +147,15 @@ DKPlugin.createInstance = function DKPlugin_createInstance() {
     }
 
     //Is this a singleton plugin?
-    if (arguments[0] && arguments[0][0] && arguments[0][0] === "singleton")
+    if (arguments[0] && arguments[0][0] && arguments[0][0] === "singleton") {
         this.singleton = true;
-    else if (typeof arguments[0][0] === "string")
+        console.error("nested arguments are a issue.  if you landed here, investigate them");
+        debugger ;
+    } else if (typeof arguments[0][0] === "string") {
         this.id = arguments[0][0];
+        console.error("nested arguments are a issue.  if you landed here, investigate them");
+        debugger ;
+    }
 
     //Set the ID or kick out existing singletons, while looping
     let num = 0;
@@ -155,6 +193,11 @@ DKPlugin.prototype.init = function DKPlugin_init() {
         console.groupEnd();
         return error("this is invalid");
     }
+    if (this.constructor.name === "Object") {
+        console.groupEnd();
+        return error("the instane in DKPlugin.prototype.init() is a constructor of 'Object' and should be the class name");
+    }
+
     //this.dkplugin.url = this.url;
     !this.supervised && DKPlugin.prototype.superviseFuncs(this);
     if (this.xinit) {

@@ -17,18 +17,10 @@ function DKClock() {
     return DKPlugin.call(this, arguments);
 }
 
-DKClock.prototype.create = function DKClock_create(parent, top, bottom, left, right, width, height) {
-    this.html = document.createElement("a");
-    this.html.style.position = "absolute";
-    top && (this.html.style.top = top);
-    bottom && (this.html.style.bottom = bottom);
-    left && (this.html.style.left = left);
-    right && (this.html.style.right = right);
-    width && (this.html.style.width = width);
-    height && (this.html.style.height = height);
-    parent.appendChild(this.html);
-    window.setInterval(this.update, 1000);
-    return this.html;
+DKClock.prototype.create = function DKClock_create(percision) {
+    !percision && (percision = 1000);
+    window.setInterval(this.update, percision);
+    return this;
 }
 
 DKClock.prototype.setLatitudeLongitude = function DKClock_setLatitude_longitude(latitude, longitude, zenith) {
@@ -40,7 +32,7 @@ DKClock.prototype.setLatitudeLongitude = function DKClock_setLatitude_longitude(
 
 //TODO - make this function faster
 DKClock.prototype.update = function DKClock_update() {
-    //const instance = this.getInstance();
+    const instance = this;
     dk.clock.date = new Date();
     dk.clock.year = dk.clock.date.getFullYear();
     dk.clock.month = (dk.clock.date.getMonth() + 1);
@@ -96,7 +88,38 @@ DKClock.prototype.update = function DKClock_update() {
         date = new Date().sunset(dk.clock.latitude, dk.clock.longitude, dk.clock.zenith);
         dk.clock.sunset = date.getHours() + (date.getMinutes() * .01);
     }
+  
+    for(let n=0; dk.clock.updateFuncs && n < dk.clock.updateFuncs.length; n++){
+        dk.clock.updateFuncs[n]();
+    }   
+}
 
+
+DKClock.prototype.addUpdater = function DKClock_addUpdater(func){
+    if(typeof func !== "function")
+        return error("func invalid");
+    !dk.clock.updateFuncs && (dk.clock.updateFuncs = new Array)
+    dk.clock.updateFuncs.push(func);
+}
+
+
+
+// Html Clock
+DKClock.prototype.createClock = function DKClock_createClock(parent, top, bottom, left, right, width, height){
+    this.html = document.createElement("a");
+    this.html.style.position = "absolute";
+    top && (this.html.style.top = top);
+    bottom && (this.html.style.bottom = bottom);
+    left && (this.html.style.left = left);
+    right && (this.html.style.right = right);
+    width && (this.html.style.width = width);
+    height && (this.html.style.height = height);
+    parent.appendChild(this.html);
+    this.addUpdater(this.updateClock);
+    return this.html;
+}
+
+DKClock.prototype.updateClock = function DKClock_updateClock(){
     const datetime = dk.clock.dayName + " " + dk.clock.month + "/" + dk.clock.day + "/" + dk.clock.year + "  " + dk.clock.hour + ":" + dk.clock.minute + ":" + dk.clock.second + " " + dk.clock.ampm;
     if (dk.clock.html)
         dk.clock.html.innerHTML = datetime;

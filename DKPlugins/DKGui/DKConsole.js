@@ -148,7 +148,7 @@ DKConsole.prototype.end = function DKConsole_end() {
 }
 
 DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left, right, width, height) {
-    dk.console.limit = 100;
+    dk.console.limit = 200;
 
     dk.console.container = dk.gui.createTag("div", parent, {
         style: {
@@ -259,8 +259,9 @@ DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left
             dk.console.Printer(legLevel, first);
             return;
         }
-        if (!first)
-            return error("first invalid");
+        if (first === "undefined")
+            first = "undefined"
+            //return error("first invalid: "+first);
         if (first.includes && !first.includes("%"))
             dk.console.Printer(logLevel, args);
         else
@@ -305,6 +306,8 @@ DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left
         if (specifier === "%c") {
             if (typeof current === "symbol")
                 converted = NaN;
+            if (typeof current === "undefined")
+                converted = "<a style='undefined'>";
             else
                 converted = "<a style='" + current.toString() + "'>";
         }
@@ -322,7 +325,7 @@ DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left
             return result;
         if (result.length === 1)
             return result;
-        return Formatter(result);
+        return dk.console.Formatter(result);
     }
 
     // https://console.spec.whatwg.org/#printer
@@ -584,7 +587,7 @@ DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left
             data[_key] = arguments[_key];
         }
         if (data)
-            group.label = dk.console.Formatter(data[0]);
+            group.label = dk.console.Formatter(data);
         // 3. Incorporate groupLabel as a label for group.
         dk.console.currentGroup = group;
         // 4. Optionally, if the environment supports interactive groups, group should be expanded by default.
