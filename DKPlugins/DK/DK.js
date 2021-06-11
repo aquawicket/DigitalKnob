@@ -109,9 +109,9 @@ dk.init = function dk_init() {
     eval("var __temp = null");
     const use_strict = (typeof __temp === "undefined");
     console.debug("*** DigitalKnob ***");
-    console.debug("use_strict is set to: " + use_strict);
-    console.debug("Browser = " + dk.getBrowser());
-    console.debug("JSEngine = " + dk.getJSEngine());
+    console.debug("use_strict: " + use_strict);
+    console.debug("Browser: " + dk.getBrowser());
+    console.debug("JSEngine: " + dk.getJSEngine());
     dk.create("DK/DK.css");
 }
 
@@ -283,6 +283,8 @@ dk.getPlugin = function dk_getPlugin(url) {
 }
 
 dk.loadJs = function dk_loadJs(url, dk_loadJs_callback) {
+    console.error("Use DKPlugin() instead of dk.create to load .js files now")
+    return;
     required({
         url
     });

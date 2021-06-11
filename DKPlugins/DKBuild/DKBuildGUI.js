@@ -54,8 +54,8 @@ function DKBuildGUI_end() {
     dk.close("DKBuild/DKBuild.js");
 }
 
-function DKBuildGUI_OnEvent(event) {
-    //console.log("DKBuildGUI_OnEvent("+event.currentTarget.id+","+event.type+","+event.value+")\n");
+function DKBuildGUI_onevent(event) {
+    //console.log("DKBuildGUI_onevent("+event.currentTarget.id+","+event.type+","+event.value+")\n");
 
     if (event.currentTarget.id === "AppList") {
         //if(DK_Type(event,"click")){

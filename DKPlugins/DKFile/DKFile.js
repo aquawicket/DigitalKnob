@@ -16,7 +16,7 @@ DKFile.prototype.init = function DKFile_init() {
     }
     if (dk.php) {
         dk.php.call("GET", "DKFile/DKFile.php", "getAssetsPath", function dk_php_getAssetsPath_callback(result) {
-            (dk.file.onlineAssets = result) && console.debug("dk.file.onlineAssets = " + result);
+            (dk.file.onlineAssets = result) //&& console.debug("dk.file.onlineAssets = " + result);
         });
     }
 }

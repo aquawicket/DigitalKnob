@@ -12,7 +12,7 @@ function DKNotepadView_end() {
     dk.close("DKNotepad/DKNotepadView.html");
 }
 
-function DKNotepadView_OnEvent(event) {
+function DKNotepadView_onevent(event) {
     if (event.currentTarget.id === "DKNotepadView_StatusBar") {
         console.log("DKNotepadView_StatusBar\n");
     }

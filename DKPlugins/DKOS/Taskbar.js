@@ -1,7 +1,7 @@
 var pos;
 var animation;
 
-function Taskbar_init() {
+Taskbar.init = function Taskbar_init() {
     dk.create("DKOS/Taskbar.html,DKOS/DKOS.html", function() {
         //dk.create("DKOS/Taskbar.html", function(){
         dk.create("DKOS/Clock.js", function() {
@@ -18,7 +18,7 @@ function Taskbar_init() {
     });
 }
 
-function Taskbar_end() {
+Taskbar.end = function Taskbar_end() {
     byId("start").removeEventListener("click", Taskbar_onevent);
     byId("test_animate").removeEventListener("click", Taskbar_onevent);
     dk.close("DKOS/Taskbar.html");
@@ -27,19 +27,19 @@ function Taskbar_end() {
     dk.close("DKDebug/BugReport.js");
 }
 
-function Taskbar_OnEvent(event) {
+Taskbar.onevent = function Taskbar_onevent(event) {
     if (event.currentTarget.id === "start") {
         dk.create("DKOS/TaskbarMenu.js", function() {});
     }
     if (event.currentTarget.id === "test_animate") {
-        console.log("Taskbar_OnEvent(): animate");
+        console.log("Taskbar_onevent(): animate");
         pos = -45;
-        animation = setInterval(Taskbar_Animate, 15);
+        animation = setInterval(Taskbar.animate, 15);
         //EventLoop.run();
     }
 }
 
-function Taskbar_Animate() {
+Taskbar.nimate = function Taskbar_animate() {
     if (pos === 0) {
         clearInterval(animation);
     } else {

@@ -1,16 +1,16 @@
-function Desktop_init() {
+Desktop.init = function Desktop_init() {
     dk.create("DKOS/Desktop.html,DKOS/DKOS.html", function() {
-        byId("Background").addEventListener("contextmenu", Desktop_onevent);
+        byId("Background").addEventListener("contextmenu", Desktop.onevent);
     });
 }
 
-function Desktop_end() {
-    byId("Background").removeEventListener("contextmenu", Desktop_onevent);
+Desktop.end = function Desktop_end() {
+    byId("Background").removeEventListener("contextmenu", Desktop.onevent);
     dk.close("DKOS/Desktop.html");
 }
 
-function Desktop_OnEvent(event) {
-    //console.log("Desktop_OnEvent("+event+")");
+Desktop.onevent = function Desktop_onevent(event) {
+    //console.log("Desktop_onevent("+event+")");
     if (event.currentTarget.id === "Background" && event.type === "contextmenu") {
         event.preventDefault();
         dk.create("DKOS/DesktopMenu.js", function() {

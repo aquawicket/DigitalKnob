@@ -22,7 +22,7 @@ function DKNotepadEdit_end() {
     dk.close("DKNotepad/DKNotepadEdit.html");
 }
 
-function DKNotepadEdit_OnEvent(event) {
+function DKNotepadEdit_onevent(event) {
     if (event.currentTarget.id === "DKNotepadEdit_Undo") {
         console.log("DKNotepadEdit_Undo\n");
     }

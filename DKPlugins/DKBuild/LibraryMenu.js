@@ -10,8 +10,8 @@ function LibraryMenu_end() {
     dk.close("DKBuild/LibraryMenu.html");
 }
 
-function LibraryMenu_OnEvent(event) {
-    console.debug("LibraryMenu_OnEvent(" + event.currentTarget.id + "," + event.type + "," + event.value + ")\n");
+function LibraryMenu_onevent(event) {
+    console.debug("LibraryMenu_onevent(" + event.currentTarget.id + "," + event.type + "," + event.value + ")\n");
 
     if (event.currentTarget.id === "Build Libraries") {
         console.log("Clicked Build Librariesn");

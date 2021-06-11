@@ -10,8 +10,8 @@ function BugReport_end() {
     dk.close("DKDebug/BugReport.html");
 }
 
-function BugReport_OnEvent(event) {
-    console.debug("BugReport_OnEvent(" + event.currentTarget.id + "," + event.type + "," + event.value + ")");
+function BugReport_onevent(event) {
+    console.debug("BugReport_onevent(" + event.currentTarget.id + "," + event.type + "," + event.value + ")");
     if (event.type === "click") {
         BugReport_SendBugReport();
     }

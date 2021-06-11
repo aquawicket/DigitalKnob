@@ -10,8 +10,8 @@ function SendBugReport_end() {
     dk.close("DKDebug/SendBugReport.css");
 }
 
-function SendBugReport_OnEvent(event) {
-    console.log("SendBugReport_OnEvent(" + event.currentTarget.id + "," + event.type + "," + event.value + ")");
+function SendBugReport_onevent(event) {
+    console.log("SendBugReport_onevent(" + event.currentTarget.id + "," + event.type + "," + event.value + ")");
     if (event.currentTarget.id === "SendBugReport_Button") {
         SendBugReport_CreateReport();
     }

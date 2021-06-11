@@ -1,9 +1,12 @@
-console.log("Loading DKColorPicker.js");
+"use_strict";
 
-var event_type;
-var event_id;
+dk.colorpicker = DKPlugin(DKColorPicker)
 
-function DKColorPicker_init() {
+function DKColorPicker() {}
+
+//var event_type;
+//var event_id;
+DKColorPicker.prototype.init = function DKColorPicker_init() {
     console.log("DKColorPicker_init()");
     dk.create("DKColorPicker/DKColorPicker.css");
     dk.create("DKColorPicker/DKColorPicker.html");
@@ -13,7 +16,7 @@ function DKColorPicker_init() {
     byId("DKColorPickerOK").addEventListener("click", DKColorPicker_onevent);
 }
 
-function DKColorPicker_end() {
+DKColorPicker.prototype.end = function DKColorPicker_end() {
     byId("DKColorPicker/DKColorPicker.html").removeEventListener("GetColor", DKColorPicker_onevent);
     byId("DKColorPickerBar").removeEventListener("mousedown", DKColorPicker_onevent);
     byId("DKColorHover").removeEventListener("mousedown", DKColorPicker_onevent);
@@ -24,8 +27,8 @@ function DKColorPicker_end() {
     //dk.close("DKColorPicker/DKColorPicker.css");
 }
 
-function DKColorPicker_OnEvent(event) {
-    //console.log("DKColorPicker_OnEvent("+event.currentTarget.id+","+event.type+","+event.value+")\n");
+DKColorPicker.prototype.onevent = function DKColorPicker_onevent(event) {
+    //console.log("DKColorPicker_onevent("+event.currentTarget.id+","+event.type+","+event.value+")\n");
 
     if (event.currentTarget.id === "GetColor") {
         var params = DK_GetValue(event).split(",");
@@ -53,7 +56,7 @@ function DKColorPicker_OnEvent(event) {
     }
 }
 
-function DKColorPicker_ColorBar() {
+DKColorPicker.prototype.colorbar = function DKColorPicker_colorbar() {
     var temp = CPP_DK_GetPixelUnderMouse();
     var rgb_arry = temp.split(",");
 
@@ -69,7 +72,7 @@ function DKColorPicker_ColorBar() {
     byId("DKColorSelected").style.backgroundColor = rgb;
 }
 
-function DKColorPicker_ColorBox() {
+DKColorPicker.prototype.colorbox = function DKColorPicker_colorbox() {
     var temp = CPP_DK_GetPixelUnderMouse();
     var rgb_arry = temp.split(",");
 

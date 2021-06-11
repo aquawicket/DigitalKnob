@@ -9,8 +9,8 @@ DKFileManager.prototype.init = function DKFileManager_init(callback) {
 }
 
 DKFileManager.prototype.end = function DKFileManager_end() {
-    this.close("DKFile/filemanager.css");
-    this.close("DKFile/DKFileAssociation.js");
+    dk.close("DKFile/filemanager.css");
+    dk.close("DKFile/DKFileAssociation.js");
 }
 
 DKFileManager.prototype.create = function DKFileManager_create(DKFileManager_create_callback) {

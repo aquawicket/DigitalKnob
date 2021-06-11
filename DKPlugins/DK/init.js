@@ -14,8 +14,8 @@ function init_init() {}
 function init_end() {}
 
 //Duktape
-function init_OnEvent(event) {
-    console.log("Init_OnEvent(" + event.currentTarget.id + "," + event.type + "," + event.value + ")\n");
+function init_onevent(event) {
+    console.log("Init_onevent(" + event.currentTarget.id + "," + event.type + "," + event.value + ")\n");
 
     if (event.type === "resize") {
         //NOTE: this is for SDL, OSG, ROCKET or any other created windows.

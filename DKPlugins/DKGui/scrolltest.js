@@ -16,7 +16,7 @@ dk.scrolltest.end = function dk_scrolltest_end() {
     byId("bottomdiv").onmousedown = null;
 }
 
-dk.scrolltest.onevent = function dk_scrolltest_OnEvent(event) {
+dk.scrolltest.onevent = function dk_scrolltest_onevent(event) {
     dk.create("DKGui/DKMessageBox.js", function dk_create_callback() {
         dk.frame.create("DKGui/DKMessageBox.html");
         // dk.messagebox.message("bottomdiv clicked");

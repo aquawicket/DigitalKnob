@@ -23,8 +23,8 @@ function RunMenu_end() {
     dk.close("DKBuild/RunMenu.html");
 }
 
-function RunMenu_OnEvent(event) {
-    console.log("RunMenu_OnEvent(" + event.currentTarget.id + "," + event.type + "," + event.value + ")\n");
+function RunMenu_onevent(event) {
+    console.log("RunMenu_onevent(" + event.currentTarget.id + "," + event.type + "," + event.value + ")\n");
     if (event.currentTarget.id === "Build App") {
         OS = byId("OSList").value;
         APP = byId("AppList").value;

@@ -37,7 +37,7 @@ function GitMenu_end() {
     dk.close("DKGit/GitMenu.html");
 }
 
-function GitMenu_OnEvent(event) {
+function GitMenu_onevent(event) {
     if (event.currentTarget.id === "Git Update") {
         CPP_DKThread_DKQueue("GitUpdate", "GitMenu_GitUpdate();");
     }

@@ -14,7 +14,7 @@ function DKNotepadFormat_end() {
     dk.close("DKNotepad/DKNotepadFormat.html");
 }
 
-function DKNotepadFormat_OnEvent(event) {
+function DKNotepadFormat_onevent(event) {
     if (event.currentTarget.id === "DKNotepadFormat_WordWrap") {
         DKNotepadFormat_WordWrap();
     }

@@ -216,7 +216,7 @@ DKFrame.prototype.reload = function DKFrame_reload() {
 
     //open everything back up
     const instance = this;
-    dk.create(url, function() {
+    DKPlugin(url, function() {
         instance.dkplugin.create();
     });
     return true;

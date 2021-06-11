@@ -14,8 +14,8 @@ function DKSolutionRename_end() {
     dk.close("DKFile/DKSolutionRename.html");
 }
 
-function DKSolutionRename_OnEvent(event) {
-    console.debug("DKSolutionRename_OnEvent(" + event.currentTarget.id + "," + event.type + "," + event.value + ")");
+function DKSolutionRename_onevent(event) {
+    console.debug("DKSolutionRename_onevent(" + event.currentTarget.id + "," + event.type + "," + event.value + ")");
     if (event.type === "keydown") {
         if (event.code !== "Enter") {
             return;

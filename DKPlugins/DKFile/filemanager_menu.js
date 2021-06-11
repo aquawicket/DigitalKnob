@@ -45,7 +45,7 @@ dk.solutionmenu.end = function dk_solutionmenu_end() {
 }
 
 dk.solutionmenu.onevent = function dk_solutionmenu_onevent(event) {
-    console.debug("DKSolutionMenu_OnEvent(" + event.currentTarget.id + "," + event.type + ")\n");
+    console.debug("DKSolutionMenu_onevent(" + event.currentTarget.id + "," + event.type + ")\n");
     if (event.currentTarget.id === "DKSolutionMenu_Open") {
         dk.solutionmenu.open();
     }

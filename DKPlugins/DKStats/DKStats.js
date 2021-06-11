@@ -11,7 +11,7 @@ function DKStats_end() {
     dk.close("DKStats/DKStats.html");
 }
 
-function DKStats_OnEvent(event) {
+function DKStats_onevent(event) {
     if (event.type === "second") {
         DKStats_Update();
     }

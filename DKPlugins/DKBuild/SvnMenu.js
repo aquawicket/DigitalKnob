@@ -14,8 +14,8 @@ function SvnMenu_end() {
     dk.close("DKBuild/SvnMenu.html");
 }
 
-function SvnMenu_OnEvent(event) {
-    console.debug("SvnMenu_OnEvent(" + event.currentTarget.id + "," + event.type + "," + event.value + ")\n");
+function SvnMenu_onevent(event) {
+    console.debug("SvnMenu_onevent(" + event.currentTarget.id + "," + event.type + "," + event.value + ")\n");
     if (event.currentTarget.id === "Svn Update") {
         DKThread_DKQueue("SvnUpdate", "DKBuild_SvnUpdate();");
     }

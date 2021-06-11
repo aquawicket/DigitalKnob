@@ -37,13 +37,13 @@ function DKSaveFile_end() {
 }
 
 //////////////////////////////////
-function DKSaveFile_OnEvent(event) {
-    //console.log("DKSaveFile_OnEvent("+event+")"); 
-    //console.log("DKSaveFile_OnEvent("+event.type+","+event.value+")");
+function DKSaveFile_onevent(event) {
+    //console.log("DKSaveFile_onevent("+event+")"); 
+    //console.log("DKSaveFile_onevent("+event.type+","+event.value+")");
     if (!event.currentTarget)
         return error("event.currentTarger invalid");
 
-    console.log("DKSaveFile_OnEvent(" + event.currentTarget.id + "," + event.type + "," + event.value + ")");
+    console.log("DKSaveFile_onevent(" + event.currentTarget.id + "," + event.type + "," + event.value + ")");
     if (event.currentTarget.id.includes("DKSaveFileDrive")) {
         DKSaveFile_OpenFolder(DK_GetValue(event));
     }

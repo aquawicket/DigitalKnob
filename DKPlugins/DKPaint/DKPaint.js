@@ -21,7 +21,7 @@ function DKPaint_end() {
     dk.close("DKPaint/DKPaint.css");
 }
 
-function DKPaint_OnEvent(event) {
+function DKPaint_onevent(event) {
     if (event.currentTarget.id === "DKPaint_Save") {//DKNotepad_Save();
     }
     if (event.type === "contextmenu") {

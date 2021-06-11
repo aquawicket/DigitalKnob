@@ -729,7 +729,7 @@ DKDebug.prototype.function = function DKDebug_showConsole() {
 }
 
 DKDebug.prototype.getSource = function DKDebug_getSource() {
-    dk.create("DKWidgetJS");
+    //dk.create("DKWidgetJS");
     var source = document.documentElement.outerHTML;
     var assets = CPP_DKAssets_LocalAssets();
 
@@ -751,7 +751,7 @@ DKDebug.prototype.crashJS = function DKDebug_crashJS() {
 }
 
 DKDebug.prototype.editor = function DKDebug_editor() {
-    dk.create("DKEditor/DKEditor.js", function dk_create_callback() {});
+    DKPlugin("DKEditor/DKEditor.js", function dk_create_callback() {});
 }
 
 DKDebug.prototype.debugger = function DKDebug_debugger() {

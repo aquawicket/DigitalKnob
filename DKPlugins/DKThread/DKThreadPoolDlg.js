@@ -10,7 +10,7 @@ function DKThreadPoolDlg_end() {
     dk.close("DKThread/DKThreadPoolDlg.html");
 }
 
-function DKThreadPoolDlg_OnEvent(event) {
+function DKThreadPoolDlg_onevent(event) {
     if (DK_Type(event, "Update")) {
         DKThreadPoolDlg_OnUpdate();
     }

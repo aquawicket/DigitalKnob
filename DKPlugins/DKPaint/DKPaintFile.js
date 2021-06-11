@@ -16,7 +16,7 @@ function DKPaintFile_end() {
     dk.close("DKPaint/DKPaintFile.html");
 }
 
-function DKPaintFile_OnEvent(event) {
+function DKPaintFile_onevent(event) {
     if (event.currentTarget.id === "DKPaintFile_Open") {
         DKPaintFile_Open();
     }

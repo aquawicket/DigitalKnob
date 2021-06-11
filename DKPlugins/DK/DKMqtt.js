@@ -6,13 +6,16 @@ dk.mqtt = DKPlugin(DKMqtt)
 function DKMqtt() {}
 
 DKMqtt.prototype.init = function DKMqtt_init(DKMqtt_init_callback) {
-    dk.create("DKTasmota/mqttws31.min.js", function () {
-        this.mqtt;
-        this.reconnectTimeout = 2000;
-        this.host = "127.0.0.1";
-        this.port = 9001;
+    DKPlugin("DK/mqttws31.min.js", function() {
         DKMqtt_init_callback && DKMqtt_init_callback();
     });
+}
+
+DKMqtt.prototype.create = function DKMqtt_onMqttConnect() {
+    this.mqtt;
+    this.reconnectTimeout = 2000;
+    this.host = "127.0.0.1";
+    this.port = 9001;
 }
 
 DKMqtt.prototype.onMqttConnect = function DKMqtt_onMqttConnect() {
@@ -34,6 +37,5 @@ DKMqtt.prototype.connect = function DKMqtt_connect() {
         timeout: 3,
         onSuccess: this.onMqttConnect,
     };
-
     mqtt.connect(options);
 }

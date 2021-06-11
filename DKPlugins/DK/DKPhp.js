@@ -12,11 +12,13 @@ DKPhp.prototype.call = function DKPhp_call(httpMethod, phpPath, funcName) {
     if (args && typeof (args[args.length - 1]) === "function")
         dkphp_callback = args[args.length - 1];
 
-    const allowed = ["C", "DK.js", "DKFile.js", "DKDebug.js", "DKTrace.js"];
+    /*
+    const allowed = ["C", "DK.js", "DKFile.js", "DKJson.js", "DKDebug.js", "DKTrace.js", "DKPlugin.js"];
     const callerFilename = dk.trace && dk.trace.getFilename();
     if (!allowed.includes(callerFilename))
         return error("PHP Permission Denied for " + callerFilename, dkphp_callback);
-
+    */
+    
     if (!phpPath)
         return error("phpPath invalid", dkphp_callback);
     !httpMethod && (httpMethod = "GET");

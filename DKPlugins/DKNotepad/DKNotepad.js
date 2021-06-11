@@ -3,9 +3,10 @@
 function DKNotepad() {}
 
 DKNotepad.prototype.init = function dk_notepad_init(callback) {
-    dk.create("DKNotepad/DKNotepadShortcuts.js");
-    dk.create("DKNotepad/DKNotepad.css");
-    callback && callback(true);
+    DKPlugin("DKNotepad/DKNotepadShortcuts.js", function(){
+        dk.create("DKNotepad/DKNotepad.css");
+        callback && callback(true);
+    });
 }
 
 DKNotepad.prototype.end = function dk_notepad_end() {

@@ -9,7 +9,7 @@ DKTrace.prototype.editFile = function dk_trace_editFile(file, line, ch) {
     !line && (line = 1);
     !ch && (ch = 0);
 
-    dk.create("DKCodeMirror/DKCodeMirror.js", function dk_create() {
+    DKPlugin("DKCodeMirror/DKCodeMirror.js", function dk_create() {
         DKCodeMirror.prototype.createOpen(file, function dk_codemirror_createOpen_callback(instance) {
             dk.codemirror.highlightError(instance, line, ch);
         });

@@ -54,8 +54,8 @@ function DKNotepadFile_end() {/*
 }
 
 /////////////////////////////////////
-function DKNotepadFile_OnEvent(event) {
-	//console.warn("DKNotepadFile_OnEvent("+event.currentTarget.id+","+event.type+","+event.value+")");
+function DKNotepadFile_onevent(event) {
+	//console.warn("DKNotepadFile_onevent("+event.currentTarget.id+","+event.type+","+event.value+")");
 	if(event.currentTarget.id === "DKNotepadFile_New"){
 		DKNotepadFile_New();
 	}

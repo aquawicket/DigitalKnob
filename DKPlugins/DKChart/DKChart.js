@@ -6,10 +6,10 @@ dk.chart = DKPlugin(DKChart);
 function DKChart() {}
 
 DKChart.prototype.init = function DKChart_init() {
-    //dk.create("https://momentjs.com/downloads/moment.min.js");
-    dk.create("DKTasmota/moment.min.js", function dk_create_callback() {
-        //dk.create("https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js");
-        dk.create("DKChart/chart.min.js");
+    //DKPlugin("https://momentjs.com/downloads/moment.min.js");
+    DKPlugin("DKChart/moment.min.js", function dk_create_callback() {
+        //DKPlugin("https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js");
+        DKPlugin("DKChart/chart.min.js");
     });
 }
 

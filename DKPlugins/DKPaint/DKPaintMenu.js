@@ -14,7 +14,7 @@ function DKPaintMenu_end() {
     dk.close("DKPaint/DKPaintMenu.html");
 }
 
-function DKPaintMenu_OnEvent(event) {
+function DKPaintMenu_onevent(event) {
     if (event.currentTarget.id === "DKPaintMenu_Cut") {
         DKPaintMenu_Cut();
     }

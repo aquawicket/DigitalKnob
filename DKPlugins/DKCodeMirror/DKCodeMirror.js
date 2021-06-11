@@ -3,11 +3,11 @@
 function DKCodeMirror() {}
 
 DKCodeMirror.prototype.init = function DKCodeMirror_init(DKCodeMirror_init_callback) {
-    dk.create("DKCodeMirror/lib/codemirror.js", function() {
+    DKPlugin("DKCodeMirror/lib/codemirror.js", function() {
         dk.create("DKCodeMirror/lib/codemirror.css", function() {
             dk.create("DKCodeMirror/theme/abcdef.css", function() {
                 dk.create("DKCodeMirror/DKCodeMirror.css", function() {
-                    dk.create("DKCodeMirror/mode/javascript/javascript.js", function() {
+                    DKPlugin("DKCodeMirror/mode/javascript/javascript.js", function() {
                         DKCodeMirror_init_callback && DKCodeMirror_init_callback();
                     });
                 });
@@ -43,6 +43,7 @@ DKCodeMirror.prototype.create = function DKCodeMirror_create(DKCodeMirror_create
     const div = dk.gui.createElement(document.body, "div", "DKCodeMirror", "", "", "", "", "500rem", "400rem");
     instance.div = div;
     instance.myCodeMirror = CodeMirror(instance.div, {
+        zIndex: 0,
         theme: "abcdef",
         lineNumbers: true,
         lineWrapping: true,

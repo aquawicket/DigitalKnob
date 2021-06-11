@@ -231,7 +231,7 @@ function getAssetsPath(){
     	return error("assetsPath is an invalid directory \n");
     $assetsPath = str_replace("\\", "/", $assetsPath);
     $assetsPath = ValidatePath($assetsPath);
-    echo "assetsPath = ".$assetsPath."\n";
+    //echo "assetsPath = ".$assetsPath."\n";
     return $assetsPath;
 }
 

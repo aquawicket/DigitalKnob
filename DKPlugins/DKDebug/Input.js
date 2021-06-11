@@ -8,8 +8,8 @@ function Input_end() {
     dk.close("DKDebug/Input.html");
 }
 
-function Input_OnEvent(event) {
-    DKDEBUG("Input_OnEvent(" + event.currentTarget.id + "," + event.type + "," + event.value + ")\n");
+function Input_onevent(event) {
+    DKDEBUG("Input_onevent(" + event.currentTarget.id + "," + event.type + "," + event.value + ")\n");
     if (event.currentTarget.id === "Input_Text") {
         if (event.code === "Enter") {
             return;

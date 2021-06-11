@@ -7,7 +7,7 @@ function DKGit_init() {
 
 function DKGit_end() {}
 
-function DKGit_OnEvent(event) {}
+function DKGit_onevent(event) {}
 
 function DKGit_SetGitPath() {
     if (CPP_DK_GetOS() === "Windows") {

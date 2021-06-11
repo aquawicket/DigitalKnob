@@ -1,4 +1,4 @@
-function DKOS_init() {
+DKOS.init = function DKOS_init() {
     //console.debug("DKOS_init()");
     dk.create("DKOS/DKOS.html", function() {
         document.documentElement.style.backgroundColor = "black";

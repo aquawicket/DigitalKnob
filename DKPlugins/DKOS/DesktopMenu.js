@@ -1,4 +1,4 @@
-function DesktopMenu_init() {
+DesktopMenu.init = function DesktopMenu_init() {
     dk.create("DKOS/DesktopMenu.html");
     //byId("DKOS/DesktopMenu.html").style.top = DKWindow_GetMouseY()+"px";
     //byId("DKOS/DesktopMenu.html").style.left = DKWindow_GetMouseX()+"px";
@@ -10,14 +10,14 @@ function DesktopMenu_init() {
     byId("ToggleFullscreen").addEventListener("click", DesktopMenu_onevent);
 }
 
-function DesktopMenu_end() {
+DesktopMenu.end = function DesktopMenu_end() {
     document.removeEventListener("mousedown", DesktopMenu_onevent);
     byId("OpenBackgtoundMenu").removeEventListener("click", DesktopMenu_onevent);
     byId("ToggleFullscreen").removeEventListener("click", DesktopMenu_onevent);
     dk.close("DKOS/DesktopMenu.html");
 }
 
-function DesktopMenu_OnEvent(event) {
+DesktopMenu.onevent = function DesktopMenu_onevent(event) {
     if (event.currentTarget.id === "OpenBackgtoundMenu") {
         dk.create("DKOS/BackgroundMenu.js", function() {
             DKFrame_Html("DKOS/BackgroundMenu.html");
@@ -35,7 +35,7 @@ function DesktopMenu_OnEvent(event) {
     dk.close("DKOS/DesktopMenu.js");
 }
 
-function Desktop_ToggleFullscreen() {
+Desktop.toggleFullscreen = function Desktop_toggleFullscreen() {
     //TODO: move this function into DKWindow.js
     //http://stackoverflow.com/questions/3900701/onclick-go-full-screen
     if (DKWindow_IsFullscreen()) {

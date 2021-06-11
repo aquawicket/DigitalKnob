@@ -31,8 +31,7 @@ const DKPlugin = function DKPlugin() {
     }
     // Plugin from file
     if (typeof arguments[0] === "string") {
-        const url = arguments[0];
-        DKPlugin.fromFile(url, function callback(result) {
+        DKPlugin.fromFile(arguments, function callback(result) {
             DKPlugin_callback && DKPlugin_callback(result);
         });
     }
@@ -55,8 +54,17 @@ DKPlugin.dumpInfo = function DKPlugin_dumpArguments() {
     console.groupEnd()
 }
 
-DKPlugin.fromFile = function DKPlugin_fromFile(url, DKPlugin_fromFile_callback) {
+DKPlugin.fromFile = function DKPlugin_fromFile(args, DKPlugin_fromFile_callback) {
     //DEBUG && console.debug(" *** DKPlugin.fromFile(" + url + ") ***");
+    //DKPlugin.dumpInfo.apply(this, arguments);
+    /*
+    const url = arguments[0];
+    if (typeof (arguments[arguments.length - 1]) === "function")
+        DKPlugin_fromFile_callback = arguments[arguments.length - 1];
+    else
+        DKPlugin_fromFile_callback = undefined;
+    */ 
+    const url = args[0]
 
     //update the current list of functions
     dk.getNewFuncs();
@@ -74,7 +82,6 @@ DKPlugin.fromFile = function DKPlugin_fromFile(url, DKPlugin_fromFile_callback) 
     // Adding the script tag to the head of the document
     var head = document.getElementsByTagName('head')[0];
     var script = document.createElement('script');
-    script.id = url;
     script.setAttribute('type', 'text/javascript');
     script.setAttribute('async', true);
     script.setAttribute('src', url);
@@ -95,13 +102,15 @@ DKPlugin.fromFile = function DKPlugin_fromFile(url, DKPlugin_fromFile_callback) 
             const dkClass = window[newfuncs[n]];
             dkClass.url = url;
             dkClass.script = script;
+            dkClass.prototype.url = url;
+            //dkClass.prototype.script = script;
             if (typeof dkClass.prototype.init === "function") {
                 dkClass.prototype.init(function() {
-                    DKPlugin_fromFile_callback && DKPlugin_fromFile_callback(true);
+                    DKPlugin_fromFile_callback && DKPlugin_fromFile_callback(dkClass);
                 })
             } else
-                DKPlugin_fromFile_callback && DKPlugin_fromFile_callback(true);
-            return true;
+                DKPlugin_fromFile_callback && DKPlugin_fromFile_callback(dkClass);
+            return dkClass;
         }
     }
 }
@@ -129,7 +138,7 @@ DKPlugin.fromClass = function DKPlugin_fromClass(clss) {
     //DKPlugin.prototype.init.call(result);
     !instance.supervised && DKPlugin.prototype.superviseFuncs(instance);
     return result;
-    
+
     /*
         }
     }
@@ -229,16 +238,20 @@ DKPlugin.prototype.end = function DKPlugin_end() {
     this.singleton = false;
     //delete this.dkplugin;
     //delete dk[dkplugin.name];
+    //FIXME: unload the script by dkClass.prototype.url
     if (this.script && this.script.parentNode) {
         this.script.parentNode.removeChild(this.script);
         DEBUG && console.debug("Unloaded " + this.url);
     }
 
+    //window[this.type] = undefined;
     delete this;
+    delete window[this.type]
     DEBUG && console.groupEnd();
 }
 
-DKPlugin.prototype.create = function DKPlugin_create() {
+DKPlugin.prototype.create = function DKPlugin_create(dkClass) {
+    DEBUG && console.group("DKPlugin.prototype.create(" + dkClass + ")");
     DEBUG && console.group("DKPlugin.prototype.create(): " + this.constructor.name);
     if (!this) {
         console.groupEnd();
@@ -248,7 +261,9 @@ DKPlugin.prototype.create = function DKPlugin_create() {
         this.create = function() {
             console.debug("create() is disabled on singletons after first call");
         }
-    if (this.xcreate) {
+    if (typeof dkClass === "function") {
+        dkClass.prototype.create()
+    } else if (this.xcreate) {
         DEBUG && console.group(this.constructor.name + ".xcreate()");
         const rval = this.xcreate.apply(this, arguments);
         DEBUG && console.groupEnd();
@@ -267,8 +282,8 @@ DKPlugin.prototype.close = function DKPlugin_close() {
     }
 
     //close the innermost child plugins first
-    if (this.dkplugin && this.dkplugin.close) {
-        if(this !== this.dkplugin)
+    if (this.dkplugin && (typeof this.dkplugin === "object") && this.dkplugin.close) {
+        if (this !== this.dkplugin)
             this.dkplugin.close();
     }
     if (this.xclose) {
