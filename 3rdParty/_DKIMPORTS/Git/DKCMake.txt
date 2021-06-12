@@ -9,7 +9,7 @@ IF(NOT EXISTS "C:/Program Files/Git")
 	DKDOWNLOAD(https://github.com/git-for-windows/git/releases/download/v2.31.1.windows.1/Git-2.31.1-32-bit.exe)
 	DKSETPATH(C:/)
 	DKSET(QUEUE_BUILD ON)
-	WIN32_COMMAND(${DIGITALKNOB}/Download/Git-2.31.1-32-bit.exe} \\Install Git
+	WIN32_COMMAND(${DIGITALKNOB}/Download/Git-2.31.1-32-bit.exe})
 ENDIF()
 
 DKSET(GIT ${3RDPARTY}/${GIT_VERSION})

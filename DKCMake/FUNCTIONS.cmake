@@ -2145,6 +2145,7 @@ ENDFUNCTION()
 FUNCTION(DKDEPEND_ALL)
 	MESSAGE("*** DKDEPEND_ALL not implemented yet ***")
 	##TODO SCAN ALL /3rdParty/Import and /DKPlugins for DKCMAke.txt and add them
+	
 ENDFUNCTION()
 
 ## This function would like to remove everthing but,
@@ -2266,6 +2267,41 @@ ENDFUNCTION()
 #######################
 FUNCTION (DKDEPEND_ALL)
 	##TODO - get a list of all DKPlugins and call DKPEPEND(DKPlugin) for each of them.
+	MESSAGE("***** DKDEPEND_ALL() *****")
+	DKSET(DEPENDALL_FILE "")
+	
+	IF(IS_DIRECTORY ${DKIMPORTS})
+		FILE(GLOB allfiles RELATIVE "${DKIMPORTS}/" "${DKIMPORTS}/*")
+		FOREACH(each_file ${allfiles})
+			IF(EXISTS ${DKIMPORTS}/${each_file}/DKCMake.txt)
+				DKSET(DEPENDALL_FILE ${DEPENDALL_FILE} "DKDEPEND(${each_file})\n")
+			ENDIF()
+		ENDFOREACH()
+    ENDIF()
+	
+	## Find all DKPlugins Folders from DK root
+	FILE(GLOB children RELATIVE ${DIGITALKNOB}/../ ${DIGITALKNOB}/../*)
+  	FOREACH(child ${children})
+		IF(EXISTS ${DIGITALKNOB}/../${child}/DKPlugins)
+			FILE(GLOB plugins RELATIVE ${DIGITALKNOB}/../${child}/DKPlugins/ ${DIGITALKNOB}/../${child}/DKPlugins/*)
+			FOREACH(plugin ${plugins})
+				IF(EXISTS ${DIGITALKNOB}/../${child}/DKPlugins/${plugin}/DKCMake.txt)
+					IF(NOT ${plugin} STREQUAL "_DKIMPORT")
+						DKSET(DEPENDALL_FILE ${DEPENDALL_FILE} "DKDEPEND(${plugin})\n")
+					ENDIF()
+				ENDIF()
+			ENDFOREACH()
+    	ENDIF()
+  	ENDFOREACH()
+	
+	string (REPLACE ";" "" DEPENDALL_FILE "${DEPENDALL_FILE}")
+	
+	## The file will not be overwritten so you can comment out libraries that don't compile
+	## Just remove or rename the file to have it regenerated. 
+	IF(NOT EXISTS ${DKPROJECT}/DEPEND_ALL.txt)
+		FILE(WRITE ${DKPROJECT}/DEPEND_ALL.txt "${DEPENDALL_FILE}")
+	ENDIF()
+	INCLUDE(${DKPROJECT}/DEPEND_ALL.txt)
 ENDFUNCTION()
 
 ###################################

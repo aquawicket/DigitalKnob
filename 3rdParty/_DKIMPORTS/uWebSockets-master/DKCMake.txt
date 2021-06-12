@@ -1,5 +1,5 @@
 ### DEPENDS ###
-DKDEPEND(libuv-1.x)
+DKDEPEND(libuv)
 
 ### INSTALL ###
 ## DKINSTALL(https://github.com/uNetworking/uWebSockets/archive/master.zip uWebSockets-master)
