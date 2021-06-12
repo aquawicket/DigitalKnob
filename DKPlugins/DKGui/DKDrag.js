@@ -1,6 +1,6 @@
 "use strict";
 
-dk.drag = DKPlugin(DKDrag)
+dk.drag = DKPlugin(DKDrag, "singleton")
 
 function DKDrag() {}
 

@@ -1,7 +1,7 @@
 "use strict";
 //https://developer.mozilla.org/en-US/docs/Web/API/HTMLAudioElement
 
-dk.audio = new DKPlugin(DKAudio)
+dk.audio = new DKPlugin(DKAudio, "singleton")
 
 function DKAudio() {}
 

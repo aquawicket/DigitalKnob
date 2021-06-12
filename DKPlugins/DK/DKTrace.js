@@ -1,6 +1,6 @@
 "use strict";
 
-dk.trace = DKPlugin(DKTrace);
+dk.trace = DKPlugin(DKTrace, "singleton");
 
 function DKTrace() {}
 

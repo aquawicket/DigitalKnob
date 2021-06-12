@@ -9,7 +9,6 @@ DKFrame.prototype.end = function DKFrame_end() {
 }
 
 DKFrame.prototype.create = function DKFrame_create(obj) {
-    console.log("DKFrame.prototype.create()");
     let id = "Generic Frame";
     let element = null;
 
@@ -30,12 +29,13 @@ DKFrame.prototype.create = function DKFrame_create(obj) {
         element = obj;
 
     let instance = null;
-    if (obj.type === "DKFrame")
+    if (obj.klassName === "DKFrame")
         instance = obj;
     else
         instance = DKPlugin(DKFrame)
 
     obj.dkplugin && (instance.dkplugin = obj);
+    obj.dkframe = instance;
 
     var width = element.style.width;
     var height = element.style.height;
@@ -44,6 +44,7 @@ DKFrame.prototype.create = function DKFrame_create(obj) {
 
     const frame = instance.createFrame("New Window", width, height);
     instance.frame = frame;
+
     frame.content = element;
     frame.content.setAttribute("dk_frame", "content");
     frame.content.style = {

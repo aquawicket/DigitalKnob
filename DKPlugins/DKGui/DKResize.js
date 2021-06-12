@@ -1,6 +1,6 @@
 "use strict";
 
-dk.resize = DKPlugin(DKResize)
+dk.resize = DKPlugin(DKResize, "singleton")
 
 function DKResize() {}
 

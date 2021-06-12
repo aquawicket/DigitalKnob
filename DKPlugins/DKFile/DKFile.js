@@ -1,6 +1,6 @@
 "use strict";
 
-dk.file = DKPlugin(DKFile)
+dk.file = DKPlugin(DKFile, "singleton")
 
 function DKFile() {}
 

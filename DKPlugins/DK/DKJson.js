@@ -2,7 +2,7 @@
 
 //https://goessner.net/articles/JsonPath/index.html#e2
 
-dk.json = DKPlugin(DKJson)
+dk.json = DKPlugin(DKJson, "singleton")
 
 function DKJson() {}
 

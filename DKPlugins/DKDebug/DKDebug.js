@@ -1,6 +1,6 @@
 "use strict";
 
-dk.debug = new DKPlugin(DKDebug)
+dk.debug = new DKPlugin(DKDebug, "singleton")
 
 function DKDebug() {}
 

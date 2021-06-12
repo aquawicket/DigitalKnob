@@ -1,6 +1,6 @@
 "use strict";
 
-dk.fileassociation = DKPlugin(DKFile)
+dk.fileassociation = DKPlugin(DKFileAssociation, "singleton")
 function DKFileAssociation() {}
 
 DKFileAssociation.prototype.edit = function DKFileAssociation_edit(file) {

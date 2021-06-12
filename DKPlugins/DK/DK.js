@@ -202,12 +202,13 @@ dk.close = function dk_close(data) {
         CPP_DK_Close(data);
 
     if (data[0] === "DKJavascript") {
-        var plugin = dk.getPlugin(data[1]);
-        console.log("closing dk." + plugin.name + " plugin");
-        if (plugin && plugin.end) {
-            console.log("running dk." + plugin.name + ".end()");
-            plugin.end();
-        }
+        
+        //var plugin = dk.getPlugin(data[1]);
+        //console.log("closing dk." + plugin.name + " plugin");
+        //if (plugin && plugin.end) {
+        //    console.log("running dk." + plugin.name + ".end()");
+        //    plugin.end();
+        //}
 
         const scripts = document.getElementsByTagName("script");
         for (let n = 0; n < scripts.length; n++) {

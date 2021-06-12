@@ -17,7 +17,7 @@ DKDevTools.prototype.create = function DKDevTools_create() {
     return instance;
 }
 
-DKDevTools.prototype.close = function DKDevTools_close(){
+DKDevTools.prototype.close = function DKDevTools_close() {
     this.dkcodemirror.close();
 }
 
@@ -45,6 +45,52 @@ DKDevTools.prototype.addTools = function DKDevTools_addTools(instance) {
             DKFileManager.prototype.init();
             DKFileManager.prototype.create();
         });
+    })
+
+    DKPlugin("DKCodeMirror/DKCodeMirror.js", function DKPlugin_callback(klass) {
+
+        instance.dkcodemirror = DKPlugin(DKCodeMirror)
+        if (!instance.dkcodemirror)
+            return error("dkcodemirror invalid")
+
+        const dkcodemirrorDiv = dk.gui.createTag("div", instance.div, {
+            style: {
+                position: "absolute",
+                top: "90rem",
+                left: "5rem",
+                right: "5rem",
+                //width: "95%",
+                bottom: "5rem",
+                backgroundColor: "black"
+            }
+        });
+
+        const codeMirror = CodeMirror(dkcodemirrorDiv, {
+            theme: "abcdef",
+            lineNumbers: true,
+            lineWrapping: true,
+            mode: "javascript",
+        })
+        instance.codeMirror = codeMirror;
+        codeMirror.on('change', function(codeMirror) {
+            dk.file.stringToFile(codeMirror.getValue(), "USER/devtoolscode.js");
+        })
+
+        dk.file.exists("USER/devtoolscode.js", function(result) {
+            if (!result) {
+                console.log("file does not exist")
+                return
+            }
+
+            dk.file.fileToString("USER/devtoolscode.js", function(str) {
+                if (!str && str != "") {
+                    console.log("str invalid")
+                    return
+                }
+                codeMirror.setValue(str)
+            })
+        })
+
     })
 
     /*
@@ -92,50 +138,4 @@ DKDevTools.prototype.addTools = function DKDevTools_addTools(instance) {
         })
     })
     */
-
-    DKPlugin("DKCodeMirror/DKCodeMirror.js", function DKPlugin_callback(dkClass) {
-        
-        instance.dkcodemirror = DKPlugin(DKCodeMirror)
-        if (!instance.dkcodemirror)
-            return error("dkcodemirror invalid")
-
-        const dkcodemirrorDiv = dk.gui.createTag("div", instance.div, {
-            style: {
-                position: "absolute",
-                top: "90rem",
-                left: "5rem",
-                right: "5rem",
-                //width: "95%",
-                bottom: "5rem",
-                backgroundColor: "black"
-            }
-        });
-
-        const codeMirror = CodeMirror(dkcodemirrorDiv, {
-            theme: "abcdef",
-            lineNumbers: true,
-            lineWrapping: true,
-            mode: "javascript",
-        })
-        codeMirror.on('change',function(codeMirror){
-            dk.file.stringToFile(codeMirror.getValue(), "USER/devtoolscode.js");
-        })
-
-        dk.file.exists("USER/devtoolscode.js", function(result) {
-            if (!result) {
-                console.log("file does not exist")
-                return
-            }
-
-            dk.file.fileToString("USER/devtoolscode.js", function(str) {
-                if (!str && str != "") {
-                    console.log("str invalid")
-                    return
-                }
-                codeMirror.setValue(str)
-            })
-        })
-
-    })
-
 }

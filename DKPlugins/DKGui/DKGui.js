@@ -1,6 +1,6 @@
 "use strict";
 
-dk.gui = DKPlugin(DKGui)
+dk.gui = DKPlugin(DKGui, "singleton")
 function DKGui() {}
 
 DKGui.prototype.createElement = function DKGui_createElement(parent, tag, id, top, bottom, left, right, width, height, onclick) {

@@ -1,6 +1,6 @@
 "use strict";
 
-dk.clipboard = DKPlugin(DKClipboard)
+dk.clipboard = DKPlugin(DKClipboard, "singleton")
 
 function DKClipboard() {}
 

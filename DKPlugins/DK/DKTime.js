@@ -11,7 +11,7 @@ const utcDate = dateEvent.toUTCString();
 format: Tue, 19 Aug 1975 23:15:30 GMT
 */
 
-dk.time = DKPlugin(DKTime)
+dk.time = DKPlugin(DKTime, "singleton")
 
 function DKTime() {}
 

@@ -1,6 +1,6 @@
 "use strict";
 
-dk.php = DKPlugin(DKPhp)
+dk.php = DKPlugin(DKPhp, "singleton")
 
 function DKPhp() {}
 

@@ -1,6 +1,6 @@
 "use strict";
 
-dk.validate = DKPlugin(DKValidate);
+dk.validate = DKPlugin(DKValidate, "singleton");
 function DKValidate() {}
 
 //https://stackoverflow.com/a/9337047/688352

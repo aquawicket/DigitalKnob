@@ -4,7 +4,7 @@
 // https://developer.mozilla.org/en-US/docs/Web/API/Console#outputting_text_to_the_console
 // https://developer.chrome.com/docs/devtools/console/api/
 
-dk.console = DKPlugin(DKConsole)
+dk.console = DKPlugin(DKConsole, "singleton")
 
 function DKConsole() {}
 
