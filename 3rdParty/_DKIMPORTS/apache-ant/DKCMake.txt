@@ -7,4 +7,4 @@ DKSET(ANT_VERSION 1.9.15)
 
 ### INSTALL ###
 DKINSTALL(https://mirror.cogentco.com/pub/apache/ant/binaries/apache-ant-${ANT_VERSION}-bin.zip apache-ant apache-ant-${ANT_VERSION})
-DKDKSET(ANT ${3RDPARTY}/apache-ant-${ANT_VERSION})
+DKSET(ANT ${3RDPARTY}/apache-ant-${ANT_VERSION})

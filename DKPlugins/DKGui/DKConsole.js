@@ -245,7 +245,7 @@ DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left
             return arr;
     }
     // https://console.spec.whatwg.org/#logger
-    DKConsole.prototype.Logger = function dl_console_Logger(logLevel, args) {
+    DKConsole.prototype.Logger = function DKConsole_Logger(logLevel, args) {
         if (!args)
             return;
         //const [first,...rest] = args;

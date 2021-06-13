@@ -202,7 +202,7 @@ dk.close = function dk_close(data) {
         CPP_DK_Close(data);
 
     if (data[0] === "DKJavascript") {
-        
+
         //var plugin = dk.getPlugin(data[1]);
         //console.log("closing dk." + plugin.name + " plugin");
         //if (plugin && plugin.end) {
@@ -1194,6 +1194,9 @@ dk.errorCatcher = function dk_errorCatcher(obj, name) {
     required({
         obj
     });
+
+    dk.errorCatcher.bypass = ["init", "end", "create", "close"]
+
     !name && (name = obj.constructor.name);
     for (let func in obj) {
         if (func.includes("_try"))
@@ -1204,11 +1207,12 @@ dk.errorCatcher = function dk_errorCatcher(obj, name) {
             continue;
         const method = obj[func];
         if (typeof method === "function") {
+            if (dk.errorCatcher.bypass.includes(func))
+                continue;
             Object.defineProperty(method, 'name', {
                 value: func
             })
             //console.debug(name + "." + func + "()");
-            const funcName = func;
             obj[func] = function errorCatcher(func, method) {
                 return obj[func + "_try"] = function() {
                     try {
@@ -1267,5 +1271,24 @@ dk.getNewFuncs = function dk_getNewFuncs() {
 
     return newfuncs;
 }
+
+//Useage: Object.byString(someObj, 'part3[0].name');  
+Object.byString = function(o, s) {
+    // convert indexes to properties
+    s = s.replace(/\[(\w+)\]/g, '.$1');
+    // strip a leading dot
+    s = s.replace(/^\./, '');
+    var a = s.split('.');
+    for (var i = 0, n = a.length; i < n; ++i) {
+        var k = a[i];
+        if (k in o)
+            o = o[k];
+        else
+            return;
+    }
+    return o;
+}
+
+
 
 dk.init();
