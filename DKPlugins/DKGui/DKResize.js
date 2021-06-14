@@ -1,108 +1,128 @@
 "use strict";
 
-dk.resize = DKPlugin(DKResize, "singleton")
-
 function DKResize() {}
 
 DKResize.prototype.createBox = function DKResize_create(element) {
-    if (!element)
-        return error("element invalid");
-    dk.resize.image = dk.gui.createElement(element, "img", "dk_resize_image");
-    dk.resize.image.setAttribute("src", "DKGui/resize.png");
-    dk.resize.image.style.removeProperty("top");
-    dk.resize.image.style.position = "absolute";
-    dk.resize.image.style.right = "0rem";
-    dk.resize.image.style.bottom = "0rem";
-    dk.resize.image.style.width = "18rem";
-    dk.resize.image.style.height = "18rem";
+    const dkresize = DKPlugin(DKResize)
 
-    dk.resize.corner = dk.gui.createElement(element, "div", "dk_resize_corner");
-    dk.resize.corner.style.removeProperty("top");
-    dk.resize.corner.style.position = "absolute";
-    dk.resize.corner.style.right = "0rem";
-    dk.resize.corner.style.bottom = "0rem";
-    dk.resize.corner.style.width = "16rem";
-    dk.resize.corner.style.height = "16rem";
-    dk.resize.corner.style.cursor = "nw-resize";
-    dk.resize.addHandle(dk.resize.corner, element);
+    dkresize.image = dk.gui.createElement(element, "img", "dk_resize_image");
+    dkresize.image.setAttribute("src", "DKGui/resize.png");
+    dkresize.image.style.removeProperty("top");
+    dkresize.image.style.position = "absolute";
+    dkresize.image.style.right = "0rem";
+    dkresize.image.style.bottom = "0rem";
+    dkresize.image.style.width = "18rem";
+    dkresize.image.style.height = "18rem";
 
-    dk.resize.top = dk.gui.createElement(element, "div", "dk_resize_top");
-    dk.resize.top.style.removeProperty("bottom");
-    dk.resize.top.style.removeProperty("width");
-    dk.resize.top.style.position = "absolute";
-    dk.resize.top.style.top = "0rem";
-    dk.resize.top.style.left = "0rem";
-    dk.resize.top.style.right = "0rem";
-    dk.resize.top.style.height = "4rem";
-    dk.resize.top.style.cursor = "n-resize";
-    dk.resize.addHandle(dk.resize.top, element, "top");
+    dkresize.corner = dk.gui.createElement(element, "div", "dk_resize_corner");
+    dkresize.corner.style.removeProperty("top");
+    dkresize.corner.style.position = "absolute";
+    dkresize.corner.style.right = "0rem";
+    dkresize.corner.style.bottom = "0rem";
+    dkresize.corner.style.width = "16rem";
+    dkresize.corner.style.height = "16rem";
+    dkresize.corner.style.cursor = "nw-resize";
+    dkresize.addHandle(dkresize.corner, element);
 
-    dk.resize.left = dk.gui.createElement(element, "div", "dk_resize_left");
-    dk.resize.left.style.removeProperty("right");
-    dk.resize.left.style.removeProperty("height");
-    dk.resize.left.style.position = "absolute";
-    dk.resize.left.style.top = "0rem";
-    dk.resize.left.style.bottom = "0rem";
-    dk.resize.left.style.left = "0rem";
-    dk.resize.left.style.width = "4rem";
-    dk.resize.left.style.cursor = "e-resize";
-    dk.resize.addHandle(dk.resize.left, element, "left");
+    dkresize.top = dk.gui.createElement(element, "div", "dk_resize_top");
+    dkresize.top.style.removeProperty("bottom");
+    dkresize.top.style.removeProperty("width");
+    dkresize.top.style.position = "absolute";
+    dkresize.top.style.top = "0rem";
+    dkresize.top.style.left = "0rem";
+    dkresize.top.style.right = "0rem";
+    dkresize.top.style.height = "4rem";
+    dkresize.top.style.cursor = "n-resize";
+    dkresize.addHandle(dkresize.top, element, "top");
 
-    dk.resize.right = dk.gui.createElement(element, "div", "dk_resize_right");
-    dk.resize.right.style.removeProperty("left");
-    dk.resize.right.style.removeProperty("height");
-    dk.resize.right.style.position = "absolute";
-    dk.resize.right.style.top = "0rem";
-    dk.resize.right.style.bottom = "16rem";
-    dk.resize.right.style.right = "0rem";
-    dk.resize.right.style.width = "4rem";
-    dk.resize.right.style.cursor = "e-resize";
-    dk.resize.addHandle(dk.resize.right, element);
+    dkresize.left = dk.gui.createElement(element, "div", "dk_resize_left");
+    dkresize.left.style.removeProperty("right");
+    dkresize.left.style.removeProperty("height");
+    dkresize.left.style.position = "absolute";
+    dkresize.left.style.top = "0rem";
+    dkresize.left.style.bottom = "0rem";
+    dkresize.left.style.left = "0rem";
+    dkresize.left.style.width = "4rem";
+    dkresize.left.style.cursor = "e-resize";
+    dkresize.addHandle(dkresize.left, element, "left");
 
-    dk.resize.bottom = dk.gui.createElement(element, "div", "dk_resize_bottom");
-    dk.resize.bottom.style.removeProperty("top");
-    dk.resize.bottom.style.removeProperty("width");
-    dk.resize.bottom.style.position = "absolute";
-    dk.resize.bottom.style.bottom = "0rem";
-    dk.resize.bottom.style.left = "0rem";
-    dk.resize.bottom.style.right = "16rem";
-    dk.resize.bottom.style.height = "4rem";
-    dk.resize.bottom.style.cursor = "n-resize";
-    dk.resize.addHandle(dk.resize.bottom, element);
+    dkresize.right = dk.gui.createElement(element, "div", "dk_resize_right");
+    dkresize.right.style.removeProperty("left");
+    dkresize.right.style.removeProperty("height");
+    dkresize.right.style.position = "absolute";
+    dkresize.right.style.top = "0rem";
+    dkresize.right.style.bottom = "16rem";
+    dkresize.right.style.right = "0rem";
+    dkresize.right.style.width = "4rem";
+    dkresize.right.style.cursor = "e-resize";
+    dkresize.addHandle(dkresize.right, element);
 
-    return this;
+    dkresize.bottom = dk.gui.createElement(element, "div", "dk_resize_bottom");
+    dkresize.bottom.style.removeProperty("top");
+    dkresize.bottom.style.removeProperty("width");
+    dkresize.bottom.style.position = "absolute";
+    dkresize.bottom.style.bottom = "0rem";
+    dkresize.bottom.style.left = "0rem";
+    dkresize.bottom.style.right = "16rem";
+    dkresize.bottom.style.height = "4rem";
+    dkresize.bottom.style.cursor = "n-resize";
+    dkresize.addHandle(dkresize.bottom, element);
+
+    return dkresize;
+}
+
+DKResize.prototype.close = function DKResize_close() {
+    /*
+    this.removeHandle(this.corner);
+    this.removeHandle(this.top);
+    this.removeHandle(this.left);
+    this.removeHandle(this.right);
+    this.removeHandle(this.bottom);
+    this.image.parentElement.removeChild(this.image);
+    this.corner.parentElement.removeChild(this.corner);
+    this.top.parentElement.removeChild(this.top);
+    this.left.parentElement.removeChild(this.left);
+    this.right.parentElement.removeChild(this.right);
+    this.bottom.parentElement.removeChild(this.bottom);
+    delete this.image
+    delete this.corner;
+    delete this.top;
+    delete this.left;
+    delete this.right;
+    delete this.bottom;
+    */
 }
 
 DKResize.prototype.addHandle = function DKResize_addHandle(element, resize_element, side) {
-    //!dk.iE() && (dk.getBrowser() !== "RML") && element.style.setProperty("pointer-events", "all");
+    const dkresize = this;
     element.onmousedown = element.touchstart = function(event) {
-        dk.resize.start(event, resize_element, side);
+        dkresize.start(event, resize_element, side);
     }
 }
 
 DKResize.prototype.removeHandle = function DKResize_removeHandle(element) {
-    //!dk.iE() && element.style.setProperty("pointer-events", "none");
     element.onmousedown = element.ontouchstart = null;
 }
 
 DKResize.prototype.start = function DKResize_start(event, element, side) {
+    const instance = this;
     !event && (event = window.event);
     if (dk.iE()) {
-        dk.resize.mouseStartX = event.clientX + document.documentElement.scrollLeft + document.body.scrollLeft;
-        dk.resize.mouseStartY = event.clientY + document.documentElement.scrollTop + document.body.scrollTop;
+        this.mouseStartX = event.clientX + document.documentElement.scrollLeft + document.body.scrollLeft;
+        this.mouseStartY = event.clientY + document.documentElement.scrollTop + document.body.scrollTop;
     } else {
-        dk.resize.mouseStartX = event.clientX + window.scrollX || parseInt(event.changedTouches[0].clientX);
-        dk.resize.mouseStartY = event.clientY + window.scrollY || parseInt(event.changedTouches[0].clientY);
+        this.mouseStartX = event.clientX + window.scrollX || parseInt(event.changedTouches[0].clientX);
+        this.mouseStartY = event.clientY + window.scrollY || parseInt(event.changedTouches[0].clientY);
     }
-    (side === "top") && (dk.resize.positionY = dk.gui.getTopPx(element));
-    (side === "left") && (dk.resize.positionX = dk.gui.getLeftPx(element));
-    dk.resize.sizeX = dk.gui.getWidthPx(element);
-    dk.resize.sizeY = dk.gui.getHeightPx(element);
+    (side === "top") && (this.positionY = dk.gui.getTopPx(element));
+    (side === "left") && (this.positionX = dk.gui.getLeftPx(element));
+    this.sizeX = dk.gui.getWidthPx(element);
+    this.sizeY = dk.gui.getHeightPx(element);
     document.body.onmousemove = document.body.ontouchmove = function(event) {
-        dk.resize.move(event, element, side);
+        instance.move(event, element, side);
     }
     document.body.onmouseup = document.body.ontouchend = function(event) {
-        dk.resize.stop(event);
+        instance.stop(event);
     }
 }
 
@@ -121,22 +141,22 @@ DKResize.prototype.move = function DKResize_move(event, element, side) {
 
     if (side === "top") {
         if (element.style.top)
-            element.style.top = dk.gui.pos(dk.resize.positionY + y - dk.resize.mouseStartY);
+            element.style.top = dk.gui.pos(this.positionY + y - this.mouseStartY);
         else
-            element.style.bottom = dk.gui.pos(dk.resize.positionY + dk.resize.mouseStartY - y);
-        element.style.height = dk.gui.pos(dk.resize.sizeY - (y - dk.resize.mouseStartY));
+            element.style.bottom = dk.gui.pos(this.positionY + this.mouseStartY - y);
+        element.style.height = dk.gui.pos(this.sizeY - (y - this.mouseStartY));
         return;
     }
     if (side === "left") {
         if (element.style.left)
-            element.style.left = dk.gui.pos(dk.resize.positionX + x - dk.resize.mouseStartX);
+            element.style.left = dk.gui.pos(this.positionX + x - this.mouseStartX);
         else
-            element.style.right = dk.gui.pos(dk.resize.positionX + dk.resize.mouseStartX - x);
-        element.style.width = dk.gui.pos(dk.resize.sizeX - (x - dk.resize.mouseStartX));
+            element.style.right = dk.gui.pos(this.positionX + this.mouseStartX - x);
+        element.style.width = dk.gui.pos(this.sizeX - (x - this.mouseStartX));
         return;
     }
-    element.style.width = dk.gui.pos(dk.resize.sizeX + x - dk.resize.mouseStartX);
-    element.style.height = dk.gui.pos(dk.resize.sizeY + y - dk.resize.mouseStartY);
+    element.style.width = dk.gui.pos(this.sizeX + x - this.mouseStartX);
+    element.style.height = dk.gui.pos(this.sizeY + y - this.mouseStartY);
 }
 
 DKResize.prototype.stop = function DKResize_stop() {

@@ -285,7 +285,7 @@ dk.getPlugin = function dk_getPlugin(url) {
 
 dk.loadJs = function dk_loadJs(url, dk_loadJs_callback) {
     console.error("Use DKPlugin() instead of dk.create to load .js files now")
-    return;
+    //return;
     required({
         url
     });
@@ -1289,6 +1289,142 @@ Object.byString = function(o, s) {
     return o;
 }
 
+// https://stackoverflow.com/a/24032179/688352
+dk.renameFunction = function dk_renameFunction(func, name) {
+  	const oldName = func.name;
+  	let funcString = func.toString();
+ 	funcString = funcString.replace("function(","function "+name+"(")
+  	funcString = funcString.replace("function (","function "+name+"(")
+  	funcString = funcString.replace("function "+oldName+"(","function "+name+"(")
+  	funcString += "\nreturn "+name+";"
+    const parent = window;
+  	let scope = parent;
+    let values = [];
+    if (!Array.isArray(scope) || !Array.isArray(values)) {
+        if (typeof scope == "object") {
+            var keys = Object.keys(scope);
+            values = keys.map( function(p) { return scope[p]; } );
+            scope = keys;
+        } else
+            scope = [];
+    }
+ 	parent[name] = Function(scope, funcString).apply(null, values)
+  	return parent[name]
+}
 
+dk.editFunctionBody = function dk_editFunctionBody(func, newBody) {
+  	const name = func.name;
+  	newBody = newBody.replace("function(","function "+name+"(")
+  	newBody = newBody.replace("function (","function "+name+"(")
+  	newBody = newBody.replace("function "+name+"(","function "+name+"(")
+    newBody += "\nreturn "+name+";"
+    const parent = window;
+  	let scope = parent;
+    let values = [];
+    if (!Array.isArray(scope) || !Array.isArray(values)) {
+        if (typeof scope == "object") {
+            var keys = Object.keys(scope);
+            values = keys.map( function(p) { return scope[p]; } );
+            scope = keys;
+        } else
+            scope = [];
+    }
+ 	parent[name] = Function(scope, newBody).apply(null, values)
+  	return parent[name]
+}
+
+dk.StringToFunction = function dk_StringToFunction(name, str) {
+  	str = str.replace("function(","function "+name+"(")
+  	str = str.replace("function (","function "+name+"(")
+  	str = str.replace("function "+name+"(","function "+name+"(")
+    str += "\nreturn "+name+";"
+    const parent = window;
+  	let scope = parent;
+    let values = [];
+    if (!Array.isArray(scope) || !Array.isArray(values)) {
+        if (typeof scope == "object") {
+            var keys = Object.keys(scope);
+            values = keys.map( function(p) { return scope[p]; } );
+            scope = keys;
+        } else
+            scope = [];
+    }
+ 	parent[name] = Function(scope, str).apply(null, values)
+  	return parent[name]
+}
+
+dk.insert = function dk_insert(str, index, value) {
+    return str.substr(0, index) + value + str.substr(index);
+}
+
+dk.dump = function dk_dumpVariable(variable) {
+    const pink = "color:rgb(220,120,220);"
+    const white = "color:rgb(213.213.213);"
+    const blue = "color:rgb(113,113,263); font-style:italic;"
+    const color = "color:rgb(100,100,250);"
+    const lightBlue = "color:rgb(91,171,209);"
+    const grey = "color:rgb(142,142,142);"
+    const orange = "color:rgb(226,131,81);"
+
+    let name;
+    if (typeof variable === "object") {
+        console.group("%c" + variable.constructor.name + " {}", "color:rgb(213,213,213);font-style:italic;")
+
+        //const type = Object.prototype.toString.call(variable).slice(8, -1);
+
+        //console.log("%c valueOf: %c"+ variable.valueOf(), pink, color);
+        //console.log("%c typeof: %c" + typeof variable, pink, color);
+
+        for (let key in variable) {
+            if (variable[key] === variable) {
+                continue;
+                return error("infinate loop")
+            }
+            if (typeof variable[key] === "function")
+                console.log("%c " + key + "%c: %c f %c" + variable[key].name + "()", pink, white, blue, white);
+            else if (typeof variable[key] === "object") {
+                if (variable[key]instanceof HTMLElement)
+                    console.log("%c " + key + "%c: %c" + variable[key].localName, pink, white, lightBlue);
+                else if (variable[key] && variable[key].constructor && variable[key].constructor.name === "Array")
+                    console.log("%c " + key + "%c: %c" + variable[key], pink, white, grey);
+                else
+                    console.log("%c " + key + "%c: %c" + variable[key], pink, white, grey);
+            } else if (typeof variable[key] === "string") {
+                console.log("%c " + key + "%c: %c\"" + variable[key] + "\"", pink, white, orange);
+            } else
+                console.log("%c " + key + "%c: " + variable[key], pink, white);
+        }
+
+        //console.log("%c variable = " + variable, color);
+        console.log("%c variable.constructor = " + variable.constructor, color);
+        console.log("%c variable.constructor.name = " + variable.constructor.name, color);
+        console.log("%c variable.__proto__ = " + variable.__proto__, color);
+        console.log("%c variable.__proto__.constructor = " + variable.__proto__.constructor, color);
+        console.log("%c variable.prototype = " + variable.prototype, color);
+        console.groupEnd();
+
+    }
+
+    if (typeof variable === "function")
+        console.group("%c" + variable, "color:rgb(213,213,213);font-style:italic;")
+    if (typeof variable === "array")
+        console.group("%c" + variable, "color:rgb(213,213,213);font-style:italic;")
+
+    //for(let key in variable)
+    //    console.log("%c variable."+key+" = "+variable[key], color);
+
+    //for(let key in variable.__proto__.constructor)
+    //console.log("%c variable.__proto__."+key+" = "+variable.__proto__[key], color);
+
+    console.log(variable)
+    /*
+    if (typeof variable === "object")
+        console.log(variable)
+    if (typeof variable === "function")
+        console.log(variable.prototype)
+    if (typeof variable === "array")
+        console.log(variable)
+    */
+}
 
 dk.init();

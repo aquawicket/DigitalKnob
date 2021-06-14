@@ -11,7 +11,7 @@
 //
 
 const DKPlugin = function DKPlugin() {
-    console.debug("*** DKPlugin() ***");
+    //console.debug("*** DKPlugin() ***");
     //DKPlugin.dumpInfo.apply(this, arguments);
 
     let DKPlugin_callback = null;
@@ -22,7 +22,7 @@ const DKPlugin = function DKPlugin() {
 
     //This is experamental
     if (!arguments.length) {
-        return error("running DKPlugin() with no arguments is experamental")
+        //return error("running DKPlugin() with no arguments is experamental")
         //return DKPlugin.createInstance();
     }
     // Plugin from Class function
@@ -39,92 +39,6 @@ const DKPlugin = function DKPlugin() {
             DKPlugin_callback && DKPlugin_callback(result);
         });
     }
-}
-
-DKPlugin.dumpInfo = function DKPlugin_dumpArguments() {
-    console.group("%c ***** DUMPINFO *****", "color: rgb(0,200,0);")
-    dk.trace && console.log("%c" + dk.trace.getFunctionName(), "color: rgb(0,200,0);")
-    console.log("%cthis.constructor.name: " + this.constructor.name, "color: rgb(0, 150, 0);")
-
-    if (arguments.length && arguments[0].toString() == "[object Arguments]")
-        arguments.length = 0;
-    if (arguments.length) {
-        console.group("%c **arguments(" + arguments.length + ")**", "color: rgb(0, 150, 0);")
-        for (let n = 0; n < arguments.length; n++) {
-            console.log("%c [" + n + "]: " + arguments[n], "color: rgb(0, 150, 0);")
-        }
-        console.groupEnd();
-    }
-    console.groupEnd()
-}
-
-DKPlugin.dumpVariable = function DKPlugin_dumpVariable(variable) {
-    dk.console.clear()
-    xconsole.clear()
-    const pink = "color:rgb(220,120,220);"
-    const white = "color:rgb(213.213.213);"
-    const blue = "color:rgb(113,113,263); font-style:italic;"
-    const color = "color:rgb(100,100,250);"
-    const lightBlue = "color:rgb(91,171,209);"
-    const grey = "color:rgb(142,142,142);"
-    const orange = "color:rgb(226,131,81);"
-
-    //Get closest name
-    let name;
-    if(typeof variable === "object")
-        name = variable.constructor.name;
-    if(typeof variable === "function")
-        name = variable.name
-    if(typeof variable === "array")
-        name = "Array"
-
-    //const type = Object.prototype.toString.call(variable).slice(8, -1);
-    console.group("%c"+name, white)
-    //console.log("%c valueOf: %c"+ variable.valueOf(), pink, color);
-    //console.log("%c typeof: %c" + typeof variable, pink, color);
-
-
-    for (let key in variable) {
-        if (variable[key] === variable) {
-            return error("infinate loop")
-        }
-        if(typeof variable[key] === "function")
-            console.log("%c " + key + "%c: %c f %c"+variable[key].name+"()", pink, white, blue, white);
-        else if(typeof variable[key] === "object"){
-            if(variable[key] instanceof HTMLElement)
-                console.log("%c " + key + "%c: %c" + variable[key].localName, pink, white, lightBlue);   
-            else if(variable[key].constructor.name === "Array")
-                console.log("%c " + key + "%c: %c" + variable[key], pink, white, grey);
-            else
-                console.log("%c " + key + "%c: %c" + variable[key], pink, white, grey);   
-        }
-        else if(typeof variable[key] === "string"){
-            console.log("%c " + key + "%c: %c\"" + variable[key]+"\"", pink, white, orange);
-        }
-        else
-            console.log("%c " + key + "%c: " + variable[key], pink, white);
-    }
-
-    //console.log("%c variable = " + variable, color);
-    //console.log("%c variable.constructor = " + variable.constructor, color);
-    //console.log("%c variable.constructor.name = " + variable.constructor.name, color);
-    //console.log("%c variable.__proto__ = " + variable.__proto__, color);
-    //console.log("%c variable.__proto__.constructor = " + variable.__proto__.constructor, color);
-    //console.log("%c variable.prototype = " + variable.prototype, color);
-    console.groupEnd();
-
-    //for(let key in variable)
-    //    console.log("%c variable."+key+" = "+variable[key], color);
-
-    //for(let key in variable.__proto__.constructor)
-    //console.log("%c variable.__proto__."+key+" = "+variable.__proto__[key], color);
-
-    if(typeof variable === "object")
-        return variable
-    if(typeof variable === "function")
-        return variable.prototype
-    if(typeof variable === "array")
-        return
 }
 
 DKPlugin.fromFile = function DKPlugin_fromFile(args, DKPlugin_fromFile_callback) {
@@ -172,6 +86,9 @@ DKPlugin.fromFile = function DKPlugin_fromFile(args, DKPlugin_fromFile_callback)
                 return true;
             }
             const klass = window[klassName];
+            Object.setPrototypeOf(klass, DKPlugin.prototype)
+            //klass.prototype = DKPlugin.prototype;// = {};
+            //Object.assign(klass.prototype, DKPlugin)
 
             for (let n = 0; n < args.length; n++) {
                 if (args[n] === "singleton") {
@@ -185,16 +102,17 @@ DKPlugin.fromFile = function DKPlugin_fromFile(args, DKPlugin_fromFile_callback)
             klass.prototype.url = url
 
             //console.log("%c DKPlugin.fromFile(): this = "+this.toString(), color);
-            console.log("%c DKPlugin.fromFile(): this.constructor.name = " + this.constructor.name, color);
-            console.log("%c DKPlugin.fromFile(): this.singleton = " + this.singleton, color);
-            console.log("%c DKPlugin.fromFile(): this.prototype = " + this.prototype, color);
+            //console.log("%c DKPlugin.fromFile(): this.constructor.name = " + this.constructor.name, color);
+            //console.log("%c DKPlugin.fromFile(): this.singleton = " + this.singleton, color);
+            //console.log("%c DKPlugin.fromFile(): this.prototype = " + this.prototype, color);
             //console.log("%c DKPlugin.fromFile(): klass = "+klass, color);
-            console.log("%c DKPlugin.fromFile(): klass.name = " + klass.name, color);
-            console.log("%c DKPlugin.fromFile(): klass.singleton = " + klass.singleton, color);
-            console.log("%c DKPlugin.fromFile(): klass.prototype = " + klass.prototype, color);
+            //console.log("%c DKPlugin.fromFile(): klass.name = " + klass.name, color);
+            //console.log("%c DKPlugin.fromFile(): klass.singleton = " + klass.singleton, color);
+            //console.log("%c DKPlugin.fromFile(): klass.prototype = " + klass.prototype, color);
 
             if (typeof klass.prototype.init === "function") {
                 klass.prototype.init(function() {
+
                     DKPlugin_fromFile_callback && DKPlugin_fromFile_callback(klass);
                 })
             } else
@@ -211,13 +129,13 @@ DKPlugin.fromClass = function DKPlugin_fromClass(args, DKPlugin_fromFile_callbac
     const klassName = klass.name
 
     //console.log("%c DKPlugin.fromClass(): this = "+this, color);
-    console.log("%c DKPlugin.fromClass(): this.constructor.name = " + this.constructor.name, color);
-    console.log("%c DKPlugin.fromClass(): this.singleton = " + this.singleton, color);
-    console.log("%c DKPlugin.fromClass(): this.prototype = " + this.prototype, color);
+    //console.log("%c DKPlugin.fromClass(): this.constructor.name = " + this.constructor.name, color);
+    //console.log("%c DKPlugin.fromClass(): this.singleton = " + this.singleton, color);
+    //console.log("%c DKPlugin.fromClass(): this.prototype = " + this.prototype, color);
     //console.log("%c DKPlugin.fromClass(): klass = "+klass, color);
-    console.log("%c DKPlugin.fromClass(): klass.name = " + klass.name, color);
-    console.log("%c DKPlugin.fromClass(): klass.singleton = " + klass.singleton, color);
-    console.log("%c DKPlugin.fromClass(): klass.prototype = " + klass.prototype, color);
+    //console.log("%c DKPlugin.fromClass(): klass.name = " + klass.name, color);
+    //console.log("%c DKPlugin.fromClass(): klass.singleton = " + klass.singleton, color);
+    //console.log("%c DKPlugin.fromClass(): klass.prototype = " + klass.prototype, color);
 
     for (let n = 0; n < args.length; n++) {
         if (args[n] === "singleton") {
@@ -244,14 +162,20 @@ DKPlugin.fromClass = function DKPlugin_fromClass(args, DKPlugin_fromFile_callbac
     */
 
     const instance = new klass;
-    console.log("%c **** INSTANCE CREATED ****", color)
-    console.log("%c DKPlugin.fromClass(): klass.name = " + klass.name, color)
-    console.log("%c DKPlugin.fromClass(): klass.singleton = " + klass.singleton, color)
-    console.log("%c DKPlugin.fromClass(): klass.prototype.singleton = " + klass.prototype.singleton, color)
+    //dk.dump(instance)
+    const instance2 = Object.create(klass);
+    //dk.dump(instance2)
+    
+
+    console.log("%c new "+instance.constructor.name, color)
+    //console.log("%c DKPlugin.fromClass(): klass.name = " + klass.name, color)
+    //console.log("%c DKPlugin.fromClass(): klass.singleton = " + klass.singleton, color)
+    //console.log("%c DKPlugin.fromClass(): klass.prototype.singleton = " + klass.prototype.singleton, color)
     //console.log("%c DKPlugin.fromClass(): instance = "+instance.toString(), color);
-    console.log("%c DKPlugin.fromClass(): instance.constructor.name = " + instance.constructor.name, color);
-    console.log("%c DKPlugin.fromClass(): instance.singleton = " + instance.singleton, color);
-    console.log("%c DKPlugin.fromClass(): instance.prototype = " + instance.prototype, color);
+    //console.log("%c DKPlugin.fromClass(): instance.constructor.name = " + instance.constructor.name, color);
+    //console.log("%c DKPlugin.fromClass(): instance.singleton = " + instance.singleton, color);
+    //console.log("%c DKPlugin.fromClass(): instance.prototype = " + instance.prototype, color);
+    
 
     if (instance.__proto__.constructor.name !== klassName) {
         console.error("A new " + klassName + " was defined in the " + instance.__proto__.constructor.name + " scope");
@@ -274,13 +198,13 @@ DKPlugin.fromClass = function DKPlugin_fromClass(args, DKPlugin_fromFile_callbac
 DKPlugin.createInstance = function DKPlugin_createInstance() {
     const color = "color:rgb(250,200,200);"
     console.log("%c *** DKPlugin.createInstance() ***", color);
-    console.log("%c DKPlugin.createInstance(): this = " + this.toString(), color);
-    console.log("%c DKPlugin.createInstance(): this.constructor.name = " + this.constructor.name, color);
-    console.log("%c DKPlugin.createInstance(): this.singleton = " + this.singleton, color);
+    //console.log("%c DKPlugin.createInstance(): this = " + this.toString(), color);
+    //console.log("%c DKPlugin.createInstance(): this.constructor.name = " + this.constructor.name, color);
+    //console.log("%c DKPlugin.createInstance(): this.singleton = " + this.singleton, color);
     const klassName = this.constructor.name;
     const klass = window[klassName];
-    console.log("%c DKPlugin.createInstance(): klass.singleton = " + klass.singleton, color)
-    console.log("%c DKPlugin.createInstance(): klass.prototype.singleton = " + klass.prototype.singleton, color)
+    //console.log("%c DKPlugin.createInstance(): klass.singleton = " + klass.singleton, color)
+    //console.log("%c DKPlugin.createInstance(): klass.prototype.singleton = " + klass.prototype.singleton, color)
 
     this.klassName = this.constructor.name;
 
@@ -323,7 +247,9 @@ DKPlugin.createInstance = function DKPlugin_createInstance() {
 // or container that would get stranded. For this reason, DKPlugin will determine who goes first and what 
 // cleanup to do. The idea it to accomplish most of the work here, leaving less worries about instance management.
 DKPlugin.prototype.init = function DKPlugin_init() {
-    console.group("DKPlugin.prototype.init(): " + this.constructor.name);
+    //This function is never called
+    console.group("%c DKPlugin.prototype.init(): " + this.constructor.name, "color:orange;");
+    return;
     if (!this) {
         console.groupEnd();
         return error("this is invalid");
@@ -345,21 +271,22 @@ DKPlugin.prototype.init = function DKPlugin_init() {
 }
 
 DKPlugin.prototype.end = function DKPlugin_end() {
-    color = "rgb(250,150,150)"
+    color = "color:rgb(250,150,150);"
     console.log(" *** DKPlugin.prototype.end() ***", color);
-    console.log("%c DKPlugin.prototype.end(): this = " + this.toString(), color);
-    console.log("%c DKPlugin.prototype.end(): this.constructor.name = " + this.constructor.name, color);
-    console.log("%c DKPlugin.prototype.end(): this.singleton = " + this.singleton, color);
+    //console.log("%c DKPlugin.prototype.end(): this = " + this.toString(), color);
+    //console.log("%c DKPlugin.prototype.end(): this.constructor.name = " + this.constructor.name, color);
+    //console.log("%c DKPlugin.prototype.end(): this.singleton = " + this.singleton, color);
     const klassName = this.constructor.name;
     const klass = window[klassName];
-    console.log("%c DKPlugin.prototype.end(): klass.singleton = " + klass.singleton, color)
-    console.log("%c DKPlugin.prototype.end(): klass.prototype.singleton = " + klass.prototype.singleton, color)
+    //console.log("%c DKPlugin.prototype.end(): klass.singleton = " + klass.singleton, color)
+    //console.log("%c DKPlugin.prototype.end(): klass.prototype.singleton = " + klass.prototype.singleton, color)
 
     if (this.xend) {
         console.group(this.constructor.name + ".xend()");
         this.xend.apply(this, arguments);
         console.groupEnd();
     }
+
     DKPlugin.prototype.unsuperviseFuncs(this);
 
     var scripts = document.getElementsByTagName("script");
@@ -374,7 +301,7 @@ DKPlugin.prototype.end = function DKPlugin_end() {
     if (!delete this)
         console.error("delete this failed")
     else
-        console.log("sussesfully deleted this @" + this.klassName)
+        console.log("sussesfully deleted this." + this.klassName)
     //if(!delete window[this.klassName])
     //    console.error("delete window['"+this.klassName+"'] failed")
     //else
@@ -386,7 +313,7 @@ DKPlugin.prototype.end = function DKPlugin_end() {
 
 DKPlugin.prototype.create = function DKPlugin_create(klass) {
     console.group("DKPlugin.prototype.create(" + klass + ")");
-    console.group("DKPlugin.prototype.create(): " + this.constructor.name);
+    //console.group("DKPlugin.prototype.create(): " + this.constructor.name);
     if (!this) {
         console.groupEnd();
         return error("this is invalid");
@@ -409,28 +336,32 @@ DKPlugin.prototype.create = function DKPlugin_create(klass) {
 }
 
 DKPlugin.prototype.close = function DKPlugin_close() {
-    console.group("DKPlugin.prototype.close(): " + this.constructor.name);
-    if (!this) {
-        console.groupEnd();
-        return error("this is invalid");
-    }
-
-    if (this.xclose && this.xclose !== this.close) {
-        console.group(this.constructor.name + ".xclose");
-        this.xclose();
-        console.groupEnd();
-    }
+    console.group("DKPlugin.prototype.close(): " + this.id);
 
     //remove any owned html elements from the DOM
     for (let key in this) {
-        if (this[key]instanceof HTMLElement) {
-            if (this[key].parentNode)
-                this[key].parentNode.removeChild(this[key]);
-            delete this[key];
+        if (this[key]instanceof Element) {
+            if (!this[key].parentNode) {
+                console.error(this.constructor.name + " parentNode invalid");
+                continue;
+            }
+            this[key].parentNode.removeChild(this[key]);
+            if (!delete this[key])
+                console.error(this.constructor.name + " could not be deleted");
         }
     }
 
+    
+
+    if (this.xclose && this.xclose !== this.close) {
+        console.group(this.constructor.name + ".close");
+        this.xclose();        
+        console.groupEnd();
+    }
+
+    DKPlugin.prototype.unsuperviseFuncs(this);
     DKPlugin.prototype.removeInstance(this);
+    
 
     //if any more of this type exist, don't end
     for (let n = 0; n < DKPlugin.instances.length; n++) {
@@ -439,16 +370,16 @@ DKPlugin.prototype.close = function DKPlugin_close() {
             return
         }
     }
-    //that was the last, go ahead and end
+
     this.end();
     console.groupEnd();
 }
 
 DKPlugin.prototype.removeInstance = function DKPlugin_removeInstance(instance) {
-    //console.log("DKPlugin.prototype.removeInstance(): " + instance.constructor.name);
+    console.log("DKPlugin.prototype.removeInstance(): " + instance.constructor.name);
     const index = DKPlugin.instances.indexOf(instance);
     if (index <= -1) {
-        console.log("Unable to find instance in DKPlugin");
+        console.error("Unable to find instance in DKPlugin");
         return;
     }
     DKPlugin.instances.splice(index, 1);
@@ -480,16 +411,16 @@ DKPlugin.prototype.unsuperviseFuncs = function DKPlugin_unsuperviseFuncs(instanc
         return;
     if (instance.xinit)
         instance.init = instance.xinit;
-    instance.xinit = DKPlugin.prototype.init;
+    //instance.xinit = DKPlugin.prototype.init;
     if (instance.xcreate)
         instance.create = instance.xcreate;
-    instance.xcreate = DKPlugin.prototype.create;
+    //instance.xcreate = DKPlugin.prototype.create;
     if (instance.xclose)
         instance.close = instance.xclose;
-    instance.xclose = DKPlugin.prototype.close;
+    //instance.xclose = DKPlugin.prototype.close;
     if (instance.xend)
         instance.end = instance.xend;
-    instance.xend = DKPlugin.prototype.end;
+    //instance.xend = DKPlugin.prototype.end;
     instance.supervised = false;
 }
 

@@ -4,40 +4,47 @@ dk.drag = DKPlugin(DKDrag, "singleton")
 
 function DKDrag() {}
 
+/*
+DKDrag.prototype.create = function DKDrag_create(){
+    const dkdrag = DKPlugin(DKDrag)
+    return dkdrag;
+}
+*/
+
 DKDrag.prototype.addHandle = function DKDrag_addHandle(element, drag_element) {
-    //!dk.iE() && dk.getBrowser() !== "RML" && element.style.setProperty("pointer-events", "all");
+    const instance = this;
     element.onmousedown = element.ontouchstart = function(event) {
-        dk.drag.start(event, drag_element);
+        instance.start(event, drag_element);
     }
 }
 
 DKDrag.prototype.removeDragHandle = function DKDrag_removeHandle(element) {
-    //!dk.iE() && element.style.setProperty("pointer-events","none");
     element.onmousedown = element.ontouchstart = null;
 }
 
 DKDrag.prototype.start = function DKDrag_start(event, element) {
+    const instance = this;
     !event && (event = window.event);
     if (dk.iE()) {
-        dk.drag.mouseStartX = event.clientX + document.documentElement.scrollLeft + document.body.scrollLeft;
-        dk.drag.mouseStartY = event.clientY + document.documentElement.scrollTop + document.body.scrollTop;
+        this.mouseStartX = event.clientX + document.documentElement.scrollLeft + document.body.scrollLeft;
+        this.mouseStartY = event.clientY + document.documentElement.scrollTop + document.body.scrollTop;
     } else {
-        dk.drag.mouseStartX = event.clientX + window.scrollX || parseInt(event.changedTouches[0].clientX);
-        dk.drag.mouseStartY = event.clientY + window.scrollY || parseInt(event.changedTouches[0].clientY);
+        this.mouseStartX = event.clientX + window.scrollX || parseInt(event.changedTouches[0].clientX);
+        this.mouseStartY = event.clientY + window.scrollY || parseInt(event.changedTouches[0].clientY);
     }
     if (element.style.left)
-        dk.drag.positionX = dk.gui.getLeftPx(element);
+        this.positionX = dk.gui.getLeftPx(element);
     else
-        dk.drag.positionX = parseInt(element.style.right);
+        this.positionX = parseInt(element.style.right);
     if (element.style.top)
-        dk.drag.positionY = dk.gui.getTopPx(element);
+        this.positionY = dk.gui.getTopPx(element);
     else
-        dk.drag.positionY = parseInt(element.style.bottom);
+        this.positionY = parseInt(element.style.bottom);
     document.body.onmousemove = document.body.ontouchmove = function(event) {
-        dk.drag.move(event, element);
+        instance.move(event, element);
     }
     document.body.onmouseup = document.body.ontouchend = function(event) {
-        dk.drag.stop(event);
+        instance.stop(event);
     }
 }
 
@@ -54,14 +61,14 @@ DKDrag.prototype.move = function DKDrag_move(event, element) {
         y = event.clientY + window.scrollY || event.changedTouches && parseInt(event.changedTouches[0].clientY);
     }
     if (element.style.left)
-        element.style.left = dk.gui.pos(dk.drag.positionX + x - dk.drag.mouseStartX);
+        element.style.left = dk.gui.pos(this.positionX + x - this.mouseStartX);
     else
-        element.style.right = dk.gui.pos(dk.drag.positionX + dk.drag.mouseStartX - x);
+        element.style.right = dk.gui.pos(this.positionX + this.mouseStartX - x);
 
     if (element.style.top)
-        element.style.top = dk.gui.pos(dk.drag.positionY + y - dk.drag.mouseStartY);
+        element.style.top = dk.gui.pos(this.positionY + y - this.mouseStartY);
     else
-        element.style.bottom = dk.gui.pos(dk.drag.positionY + dk.drag.mouseStartY - y);
+        element.style.bottom = dk.gui.pos(this.positionY + this.mouseStartY - y);
     /*
     //Create a custom move event
     var moveevent;
@@ -97,7 +104,7 @@ DKDrag.prototype.attachDrags = function DKDrag_attachDrags(parent) {
         if (element.getAttribute("drag") !== null) {
             var drag_element = element.getAttribute("drag");
             element.onmousedown = function(event) {
-                dk.drag.Start(event, drag_element);
+                this.Start(event, drag_element);
             }
         }
     }

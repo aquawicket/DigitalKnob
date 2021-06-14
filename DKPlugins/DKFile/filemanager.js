@@ -123,48 +123,50 @@ DKFileManager.prototype.rightclickmenu = function(instance, event) {
     const file = event.currentTarget.getAttribute("dk_filemanager") === "file";
     const node = event.currentTarget;
     const path = event.currentTarget.getAttribute("path");
-    const menu = DKMenu.prototype.create();
-    file && DKMenu.prototype.addItem(menu, "Edit", function dk_menu_edit() {
-        instance.editFile(instance, path);
-    });
-    DKMenu.prototype.addItem(menu, "Open", function dk_menu_open() {
-        folder && instance.openFolder(instance, path);
-        file && instance.openFile(instance, path);
-    });
-    DKMenu.prototype.addItem(menu, "Open In OS", function dk_menu_openinos() {
-        folder && instance.openFolderInOS(instance, path);
-        file && instance.openFileInOS(instance, path);
-    });
-    DKMenu.prototype.addItem(menu, "New File", function dk_menu_newfile() {
-        instance.newFile(instance);
-    });
-    DKMenu.prototype.addItem(menu, "New Folder", function dk_menu_newFolder() {
-        instance.newFolder(instance);
-    });
-    DKMenu.prototype.addItem(menu, "Rename", function dk_menu_rename() {
-        instance.rename(instance, node);
-    });
-    DKMenu.prototype.addItem(menu, "Delete", function dk_menu_delete() {
-        instance.delete(instance, path);
-    });
-    DKMenu.prototype.addItem(menu, "Copy", function dk_menu_copy() {
-        instance.copy(instance, path);
-    });
-    DKMenu.prototype.addItem(menu, "Cut", function dk_menu_cut() {
-        instance.cut(instance, path);
-    });
-    DKMenu.prototype.addItem(menu, "Paste", function dk_menu_paste() {
-        instance.paste(instance);
-    });
-    DKMenu.prototype.addItem(menu, "Import", function dk_menu_import() {
-        instance.import(instance, path);
-    });
-    DKMenu.prototype.addItem(menu, "Git Add", function dk_menu_gitAdd() {
-        instance.GitAdd(instance, path);
-    });
-    DKMenu.prototype.addItem(menu, "upxCompress", function dk_menu_upxCompress() {
-        instance.upxCompress(instance, path);
-    });
+    DKPlugin("DKGui/DKMenu.js", function(DKClass) {
+        const dkmenu = DKClass.prototype.create();
+        file && dkmenu.addItem("Edit", function dk_menu_edit() {
+            instance.editFile(instance, path);
+        });
+        dkmenu.addItem("Open", function dk_menu_open() {
+            folder && instance.openFolder(instance, path);
+            file && instance.openFile(instance, path);
+        });
+        dkmenu.addItem("Open In OS", function dk_menu_openinos() {
+            folder && instance.openFolderInOS(instance, path);
+            file && instance.openFileInOS(instance, path);
+        });
+        dkmenu.addItem("New File", function dk_menu_newfile() {
+            instance.newFile(instance);
+        });
+        dkmenu.addItem("New Folder", function dk_menu_newFolder() {
+            instance.newFolder(instance);
+        });
+        dkmenu.addItem("Rename", function dk_menu_rename() {
+            instance.rename(instance, node);
+        });
+        dkmenu.addItem("Delete", function dk_menu_delete() {
+            instance.delete(instance, path);
+        });
+        dkmenu.addItem("Copy", function dk_menu_copy() {
+            instance.copy(instance, path);
+        });
+        dkmenu.addItem("Cut", function dk_menu_cut() {
+            instance.cut(instance, path);
+        });
+        dkmenu.addItem("Paste", function dk_menu_paste() {
+            instance.paste(instance);
+        });
+        dkmenu.addItem("Import", function dk_menu_import() {
+            instance.import(instance, path);
+        });
+        dkmenu.addItem("Git Add", function dk_menu_gitAdd() {
+            instance.GitAdd(instance, path);
+        });
+        dkmenu.addItem("upxCompress", function dk_menu_upxCompress() {
+            instance.upxCompress(instance, path);
+        });
+    })
 }
 
 DKFileManager.prototype.editFile = function DKFileManager_editFile(instance, path) {

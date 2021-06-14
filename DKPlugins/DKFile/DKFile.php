@@ -301,6 +301,8 @@ function getDKAppAssetsPath(){
 }
 
 function pushDKAssets(){
+	$ignoreFolders = array("USER");
+    $ignoreFiles = array("*.h","*.cpp","*/DKCMake.txt");
     $filemap = [];
 
     //Fist get all of the paths
@@ -312,14 +314,31 @@ function pushDKAssets(){
 
     //Now copy matching folders to the DKPlugins path(s)
 	$assetsList = scandir($assetsPath);
+	//remove all Folders and Files on the ignore list    
+    $assetsList = array_values(array_diff($assetsList, $ignoreFolders));
+    $assetsList = array_values(array_diff($assetsList, $ignoreFiles));
+
 	for($n = 2; $n < count($assetsList); $n++){
 		if(!is_dir($assetsPath.$assetsList[$n])){
 			if($assetsPath != $dkAppAssetsPath){
 		        $filesrc = $assetsPath.$assetsList[$n];
+                
+		        $skip = false;
+                foreach ($ignoreFiles as $item) {
+			        if(fnmatch($item, $filesrc)){
+					    //skip if $src matches the ignore list
+					    $skip = true;
+					    echo "IGNORING: ".$src."\n";
+					    break;
+			        }
+                }
+                if($skip)
+                    continue;
+
 		        //echo "filesrc = ".$filesrc."\n";
 		        $filedest = $dkAppAssetsPath.$assetsList[$n];
 		        //echo "filedest = ".$filedest."\n";
-		        $files_map[$filesrc]=$filedest;
+		        $files_map[$filesrc]=$filedest; //unused
 		        if (!copy($filesrc, $filedest))
                     echo "FAILED to copy $filesrc\n";
                 else
@@ -329,15 +348,29 @@ function pushDKAssets(){
 		}
 		$assetFolder = $assetsPath.$assetsList[$n]."/";
 		$assetFiles = scandir($assetFolder);
+
         for($nn = 2; $nn < count($assetFiles); $nn++){
             if(is_dir($assetFolder.$assetFiles[$nn])) 
-                continue; 
+                continue;
             $src = $assetFolder.$assetFiles[$nn];
+            
+            $skip = false;
+            foreach ($ignoreFiles as $item) {
+			    if(fnmatch($item, $src)){
+					//skip if $src matches the ignore list
+					$skip = true;
+					echo "IGNORING: ".$src."\n";
+					break;
+			    }
+            }
+            if($skip)
+                continue;
+
             //echo "src = ".$src."\n";
             if(is_dir($dkPluginsPath.$assetsList[$n])){
             	$dest = $dkPluginsPath.$assetsList[$n]."/".$assetFiles[$nn];
             	//echo "dest = ".$dest."\n";
-            	$filemap[$src]=$dest;
+            	$filemap[$src]=$dest; //unused
 			    if (!copy($src, $dest))
                     echo "FAILED to copy $src\n";
                 else
@@ -346,7 +379,7 @@ function pushDKAssets(){
 		    if($dkPluginsPath2 && is_dir($dkPluginsPath2.$assetsList[$n])){
 			    $dest = $dkPluginsPath2.$assetsList[$n]."/".$assetFiles[$nn];
 			    //echo "dest = ".$dest."\n";
-			    $filemap[$src]=$dest;
+			    $filemap[$src]=$dest; //unused
 			    if (!copy($src, $dest))
                     echo "failed to copy $src\n";
                 else
@@ -363,7 +396,7 @@ function pushDKAssets(){
 
 function pullDKAssets(){
 	$ignoreFolders = array(".","..");
-    $ignoreFiles = array("*.h","*.cpp");
+    $ignoreFiles = array("*.h","*.cpp","*/DKCMake.txt");
 
     //Fist get all of the paths
 	$assetsPath = getAssetsPath();

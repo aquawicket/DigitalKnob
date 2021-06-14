@@ -159,9 +159,11 @@ DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left
         },
         oncontextmenu: function container_oncontextmenu(event) {
             event.preventDefault();
-            const menu = DKMenu.prototype.create();
-            DKMenu.prototype.addItem(menu, "Clear console", function DKMenu_Clear() {
-                dk.console.clear();
+            DKPlugin("DKGui/DKMenu.js", function(DKClass) {
+                const dkmenu = DKClass.prototype.create();
+                dkmenu.addItem("Clear console", function DKMenu_Clear() {
+                    dk.console.clear();
+                });
             });
         }
     });
@@ -259,7 +261,7 @@ DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left
         }
         if (first === "undefined")
             first = "undefined"
-            //return error("first invalid: "+first);
+        //return error("first invalid: "+first);
         if (first.includes && !first.includes("%"))
             dk.console.Printer(logLevel, args);
         else
