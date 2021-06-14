@@ -2,68 +2,117 @@
 
 // https://dom.spec.whatwg.org/#interface-document
 var Document = function(pointer) {
+    
+    this.pointer = pointer;
     // Properties
+
+    //TODO
+    Object.defineProperty(this, "activeElement", {
+        get: function() {
+            var address = CPP_DKDomDocument_activeElement();
+            if (!address)
+                return;
+            return new Element(address);
+        },
+    });
+
     Object.defineProperty(this, "body", {
         get: function() {
             var address = CPP_DKDomDocument_body();
-            if (!address) {
+            if (!address)
                 return;
-            }
             return new HTMLElement(address);
         },
         set: function() {
-            if (!address) {
+            if (!address)
                 return;
-            }
             return CPP_DKDomDocument_body(address);
             //TODO
         }
     });
+
+    //TODO
+    Object.defineProperty(this, "characterSet", {
+        get: function() {
+            var address = CPP_DKDomDocument_characterSet();
+            if (!address)
+                return;
+            return new Element(address);
+        },
+    });
+
+    //TODO
+    Object.defineProperty(this, "childElementCount", {
+        get: function() {
+            var address = CPP_DKDomDocument_childElementCount();
+            if (!address)
+                return;
+            return new Element(address);
+        },
+    });
+
+    //TODO
+    Object.defineProperty(this, "children", {
+        get: function() {
+            var address = CPP_DKDomDocument_children();
+            if (!address)
+                return;
+            return new Element(address);
+        },
+    });
+
+    //TODO
+    Object.defineProperty(this, "capatMode", {
+        get: function() {
+            var address = CPP_DKDomDocument_capatMode();
+            if (!address)
+                return;
+            return new Element(address);
+        },
+    });
+
     Object.defineProperty(this, "documentElement", {
         get: function() {
             var address = CPP_DKDomDocument_documentElement();
-            if (!address) {
+            if (!address)
                 return;
-            }
             return new HTMLElement(address);
         }
     });
 
+
     // Methods
     Document.prototype.createElement = function(tag) {
         var address = CPP_DKDomDocument_createElement(tag);
-        if (!address) {
+        if (!address)
             return;
-        }
         return new HTMLElement(address);
     }
     Document.prototype.getElementById = function(id) {
         var address = CPP_DKDomDocument_getElementById(id);
-        if (!address) {
+        if (!address)
             return;
-        }
         return new HTMLElement(address);
     }
 
     Document.prototype.getElementsByTagName = function(tag) {
         var addresses = CPP_DKDomDocument_getElementsByTagName(tag);
-        if (!addresses) {
+        if (!addresses)
             return;
-        }
         return new HTMLCollection(addresses);
     }
 
     //return Node.call(this, pointer);
     return HTMLElement.call(this, pointer);
-    //we have to call HTMKElement instead of Node for .style to work
+    //we have to call HTMLElement instead of Node for .style to work
 }
 
 // https://dom.spec.whatwg.org/#interface-document
 //interface Document : Node
 Document.prototype = Node.prototype;
-
+//mixin
 Object.assign(Document.prototype, DocumentOrShadowRoot);
 //mixin
 Object.assign(Document.prototype, GlobalEventHandlers);
-//mixin
+
 //var document = new Document("0xaddress"); //Created in cpp from DKRml

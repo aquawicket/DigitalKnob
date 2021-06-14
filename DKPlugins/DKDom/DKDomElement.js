@@ -4,6 +4,7 @@
 var Element = function(pointer) {
 
     this.pointer = pointer
+
     // Properties
     Object.defineProperty(this, "attributes", {
         get: function() {
@@ -234,17 +235,13 @@ var Element = function(pointer) {
     Element.prototype.getClientRects = function() {//TODO
     }
     Element.prototype.getElementsByClassName = function(name) {
-        //FIXME: only search within the element
-        //DKDomElements_getElementsByClassName(pointer, name)
-        var addresses = CPP_DKDomElement_getElementsByClassName(/*this.pointer,*/ name)
+        var addresses = CPP_DKDomElement_getElementsByClassName(this.pointer, name)
         if (!addresses)
             return;
         return new HTMLCollection(addresses)
     }
     Element.prototype.getElementsByTagName = function(tag) {
-        //FIXME: only search within the element
-        //DKDomElements_getElementsByTagName(pointer, tag)
-        var addresses = CPP_DKDomElement_getElementsByTagName(/*this.pointer,*/ tag)
+        var addresses = CPP_DKDomElement_getElementsByTagName(this.pointer, tag)
         if (!addresses)
             return;
         return new HTMLCollection(addresses)
@@ -347,4 +344,3 @@ var Element = function(pointer) {
 // https://dom.spec.whatwg.org/#interface-element
 // interface Element : Node
 Element.prototype = Node.prototype;
-

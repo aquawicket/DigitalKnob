@@ -168,9 +168,16 @@ int DKDomElement::getAttribute(duk_context* ctx)
 int DKDomElement::getElementsByClassName(duk_context* ctx)
 {
 	DKDEBUGFUNC(ctx);
-	DKString name = duk_require_string(ctx, 0);
+	DKString address = duk_require_string(ctx, 0);
+	DKString name = duk_require_string(ctx, 1);
+	Rml::Element* element = DKRml::addressToElement(address);
+	if(!element){
+		DKERROR("DKDomElement::getElementsByClassName(): element invalid\n");
+		duk_push_boolean(ctx, false);
+		return true;
+	}
 	Rml::ElementList elements;
-	DKRml::Get()->document->GetElementsByClassName(elements, name.c_str());
+	element->GetElementsByClassName(elements, name.c_str());
 	if(elements.empty()){
 		duk_push_null(ctx);
 		return true;
@@ -189,9 +196,16 @@ int DKDomElement::getElementsByClassName(duk_context* ctx)
 int DKDomElement::getElementsByTagName(duk_context* ctx)
 {
 	DKDEBUGFUNC(ctx);
-	DKString name = duk_require_string(ctx, 0);
+	DKString address = duk_require_string(ctx, 0);
+	DKString name = duk_require_string(ctx, 1);
+	Rml::Element* element = DKRml::addressToElement(address);
+	if(!element){
+		DKERROR("DKDomElement::getElementsByTagName(): element invalid\n");
+		duk_push_boolean(ctx, false);
+		return true;
+	}
 	Rml::ElementList elements;
-	DKRml::Get()->document->GetElementsByTagName(elements, name.c_str());
+	element->GetElementsByTagName(elements, name.c_str());
 	if(same(name, "html")){
 		elements.push_back(DKRml::Get()->document); //html tag
 	}
