@@ -1,3 +1,6 @@
+## DEPRECATED - Using newr versions of SDL2.  Kept for reference
+RETURN()
+
 ### INSTALL ###
 ## DKINSTALL(www.internet.com/SDL2-2.0.4.zip SDL2-2.0.4 SDL2-2.0.4)
 DKSET(SDL ${3RDPARTY}/SDL2-2.0.4)

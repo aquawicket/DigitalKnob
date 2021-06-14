@@ -12,127 +12,127 @@ function DKConsole() {}
 //Example:
 // If you use console.log, it will now go to the dk.console AND the browser console.
 // If you use dk.console.log, it will only log to the dk.console.
-// If you use xconsole.log, it will only log the browser console.
+// If you use dk.xconsolelog, it will only log the browser console.
 // Note: some messages cannot be withheld from the browser console.
 
 DKConsole.prototype.setXConsole = function DKConsole_setXConsole() {
-    xconsole.assert = console.assert;
-    xconsole.clear = console.clear;
-    xconsole.context = console.context;
-    xconsole.count = console.count;
-    xconsole.countReset = console.countReset;
-    //xconsole.debug = console.debug;
-    xconsole.dir = console.dir;
-    xconsole.dirxml = console.dirxml;
-    //xconsole.error = console.error;
-    xconsole.group = console.group;
-    xconsole.groupCollapsed = console.groupCollapsed;
-    xconsole.groupEnd = console.groupEnd;
-    xconsole.info = console.info;
-    //xconsole.log = console.log;
-    xconsole.memory = console.memory;
-    xconsole.profile = console.profile;
-    xconsole.profileEnd = console.profileEnd;
-    xconsole.table = console.table;
-    xconsole.time = console.time;
-    xconsole.timeEnd = console.timeEnd;
-    xconsole.timeLog = console.timeLog;
-    xconsole.timeStamp = console.timeStamp;
-    xconsole.trace = console.trace;
-    //xconsole.warn = console.warn;
-    xconsole.on = true;
+    dk.xconsole.assert = console.assert;
+    dk.xconsole.clear = console.clear;
+    dk.xconsole.context = console.context;
+    dk.xconsole.count = console.count;
+    dk.xconsole.countReset = console.countReset;
+    //dk.xconsole.debug = console.debug;
+    dk.xconsole.dir = console.dir;
+    dk.xconsole.dirxml = console.dirxml;
+    //dk.xconsole.error = console.error;
+    dk.xconsole.group = console.group;
+    dk.xconsole.groupCollapsed = console.groupCollapsed;
+    dk.xconsole.groupEnd = console.groupEnd;
+    dk.xconsole.info = console.info;
+    //dk.xconsole.log = console.log;
+    dk.xconsole.memory = console.memory;
+    dk.xconsole.profile = console.profile;
+    dk.xconsole.profileEnd = console.profileEnd;
+    dk.xconsole.table = console.table;
+    dk.xconsole.time = console.time;
+    dk.xconsole.timeEnd = console.timeEnd;
+    dk.xconsole.timeLog = console.timeLog;
+    dk.xconsole.timeStamp = console.timeStamp;
+    dk.xconsole.trace = console.trace;
+    //dk.xconsole.warn = console.warn;
+    dk.xconsole.on = true;
 
     console.assert = function console_assert() {
-        xconsole.on && xconsole.assert.apply(this, Array.prototype.slice.call(arguments));
+        dk.xconsole.on && dk.xconsole.assert.apply(this, Array.prototype.slice.call(arguments));
         dk.console.assert && dk.console.assert.apply(this, Array.prototype.slice.call(arguments));
     }
     console.clear = function console_clear() {
-        xconsole.on && xconsole.clear.apply(this, Array.prototype.slice.call(arguments));
+        dk.xconsole.on && dk.xconsole.clear.apply(this, Array.prototype.slice.call(arguments));
         dk.console.clear && dk.console.clear.apply(this, Array.prototype.slice.call(arguments));
     }
     console.context = function console_context() {
-        xconsole.on && xconsole.context.apply(this, Array.prototype.slice.call(arguments));
+        dk.xconsole.on && dk.xconsole.context.apply(this, Array.prototype.slice.call(arguments));
         dk.console.context && dk.console.context.apply(this, Array.prototype.slice.call(arguments));
     }
     console.count = function console_count() {
-        xconsole.on && xconsole.count.apply(this, Array.prototype.slice.call(arguments));
+        dk.xconsole.on && dk.xconsole.count.apply(this, Array.prototype.slice.call(arguments));
         dk.console.count && dk.console.count.apply(this, Array.prototype.slice.call(arguments));
     }
     console.countReset = function console_countReset() {
-        xconsole.on && xconsole.countReset.apply(this, Array.prototype.slice.call(arguments));
+        dk.xconsole.on && dk.xconsole.countReset.apply(this, Array.prototype.slice.call(arguments));
         dk.console.countReset && dk.console.countReset.apply(this, Array.prototype.slice.call(arguments));
     }
     console.debug = function console_debug() {
-        xconsole.on && xconsole.debug.apply(this, Array.prototype.slice.call(arguments));
+        dk.xconsole.on && dk.xconsole.debug.apply(this, Array.prototype.slice.call(arguments));
         dk.console.debug && dk.console.debug.apply(this, Array.prototype.slice.call(arguments));
     }
     console.dir = function console_dir() {
-        xconsole.on && xconsole.dir.apply(this, Array.prototype.slice.call(arguments));
+        dk.xconsole.on && dk.xconsole.dir.apply(this, Array.prototype.slice.call(arguments));
         dk.console.dir && dk.console.dir.apply(this, Array.prototype.slice.call(arguments));
     }
     console.dirxml = function console_dirxml() {
-        xconsole.on && xconsole.dirxml.apply(this, Array.prototype.slice.call(arguments));
+        dk.xconsole.on && dk.xconsole.dirxml.apply(this, Array.prototype.slice.call(arguments));
         dk.console.dirxml && dk.console.dirxml.apply(this, Array.prototype.slice.call(arguments));
     }
     console.error = function console_error() {
-        xconsole.on && xconsole.error.apply(this, Array.prototype.slice.call(arguments));
+        dk.xconsole.on && dk.xconsole.error.apply(this, Array.prototype.slice.call(arguments));
         dk.console.error && dk.console.error.apply(this, Array.prototype.slice.call(arguments));
     }
     console.group = function console_group() {
-        xconsole.on && xconsole.group.apply(this, Array.prototype.slice.call(arguments));
+        dk.xconsole.on && dk.xconsole.group.apply(this, Array.prototype.slice.call(arguments));
         dk.console.group && dk.console.group.apply(this, Array.prototype.slice.call(arguments));
     }
     console.groupCollapsed = function console_groupCollapsed() {
-        xconsole.on && xconsole.groupCollapsed.apply(this, Array.prototype.slice.call(arguments));
+        dk.xconsole.on && dk.xconsole.groupCollapsed.apply(this, Array.prototype.slice.call(arguments));
         dk.console.groupCollapsed && dk.console.groupCollapsed.apply(this, Array.prototype.slice.call(arguments));
     }
     console.groupEnd = function console_groupEnd() {
-        xconsole.on && xconsole.groupEnd.apply(this, Array.prototype.slice.call(arguments));
+        dk.xconsole.on && dk.xconsole.groupEnd.apply(this, Array.prototype.slice.call(arguments));
         dk.console.groupEnd && dk.console.groupEnd.apply(this, Array.prototype.slice.call(arguments));
     }
     console.info = function console_info() {
-        xconsole.on && xconsole.info.apply(this, Array.prototype.slice.call(arguments));
+        dk.xconsole.on && dk.xconsole.info.apply(this, Array.prototype.slice.call(arguments));
         dk.console.info && dk.console.info.apply(this, Array.prototype.slice.call(arguments));
     }
     console.log = function console_log() {
-        xconsole.on && xconsole.info.apply(this, Array.prototype.slice.call(arguments));
+        dk.xconsole.on && dk.xconsole.info.apply(this, Array.prototype.slice.call(arguments));
         dk.console.log && dk.console.info.apply(this, Array.prototype.slice.call(arguments));
     }
     //console.memory;
     console.profile = function console_profile() {
-        xconsole.on && xconsole.profile.apply(this, Array.prototype.slice.call(arguments));
+        dk.xconsole.on && dk.xconsole.profile.apply(this, Array.prototype.slice.call(arguments));
         dk.console.profile && dk.console.profile.apply(this, Array.prototype.slice.call(arguments));
     }
     console.profileEnd = function console_profileEnd() {
-        xconsole.on && xconsole.profileEnd.apply(this, Array.prototype.slice.call(arguments));
+        dk.xconsole.on && dk.xconsole.profileEnd.apply(this, Array.prototype.slice.call(arguments));
         dk.console.profileEnd && dk.console.profileEnd.apply(this, Array.prototype.slice.call(arguments));
     }
     console.table = function console_table() {
-        xconsole.on && xconsole.table.apply(this, Array.prototype.slice.call(arguments));
+        dk.xconsole.on && dk.xconsole.table.apply(this, Array.prototype.slice.call(arguments));
         dk.console.table && dk.console.table.apply(this, Array.prototype.slice.call(arguments));
     }
     console.time = function console_time() {
-        xconsole.on && xconsole.time.apply(this, Array.prototype.slice.call(arguments));
+        dk.xconsole.on && dk.xconsole.time.apply(this, Array.prototype.slice.call(arguments));
         dk.console.time && dk.console.time.apply(this, Array.prototype.slice.call(arguments));
     }
     console.timeEnd = function console_timeEnd() {
-        xconsole.on && xconsole.timeEnd.apply(this, Array.prototype.slice.call(arguments));
+        dk.xconsole.on && dk.xconsole.timeEnd.apply(this, Array.prototype.slice.call(arguments));
         dk.console.timeEnd && dk.console.timeEnd.apply(this, Array.prototype.slice.call(arguments));
     }
     console.timeLog = function console_timeLog() {
-        xconsole.on && xconsole.timeLog.apply(this, Array.prototype.slice.call(arguments));
+        dk.xconsole.on && dk.xconsole.timeLog.apply(this, Array.prototype.slice.call(arguments));
         dk.console.timeLog && dk.console.timeLog.apply(this, Array.prototype.slice.call(arguments));
     }
     console.timeStamp = function console_timeStamp() {
-        xconsole.on && xconsole.timeStamp.apply(this, Array.prototype.slice.call(arguments));
+        dk.xconsole.on && dk.xconsole.timeStamp.apply(this, Array.prototype.slice.call(arguments));
         dk.console.timeStamp && dk.console.timeStamp.apply(this, Array.prototype.slice.call(arguments));
     }
     console.trace = function console_trace() {
-        xconsole.on && xconsole.trace.apply(this, Array.prototype.slice.call(arguments));
+        dk.xconsole.on && dk.xconsole.trace.apply(this, Array.prototype.slice.call(arguments));
         dk.console.trace && dk.console.trace.apply(this, Array.prototype.slice.call(arguments));
     }
     console.warn = function console_warn() {
-        xconsole.on && xconsole.warn.apply(this, Array.prototype.slice.call(arguments));
+        dk.xconsole.on && dk.xconsole.warn.apply(this, Array.prototype.slice.call(arguments));
         dk.console.warn && dk.console.warn.apply(this, Array.prototype.slice.call(arguments));
     }
 }

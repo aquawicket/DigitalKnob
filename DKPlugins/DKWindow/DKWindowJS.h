@@ -9,7 +9,7 @@
 class DKWindowJS : public DKObjectT<DKWindowJS>
 {
 public:
-	bool Init();
+	bool DKWindowJS::Init();
 
 	static int TestInt(duk_context* ctx);
 	static int TestString(duk_context* ctx);

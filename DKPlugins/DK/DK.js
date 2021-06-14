@@ -4,25 +4,21 @@ console.log("Loading DK.js")
 
 const DEBUG = true;
 window.dk = new Object;
-let DUKTAPE = false;
-if(window.DUKTAPE)
-    DUKTAPE = true;
-
+let DUKTAPE = window.DUKTAPE
 dk.useCPP = false;
 
 //Keep a object reference to the old console
-//if (console) {
-if (!DUKTAPE) {
-    const xconsole = new Object;
+if(!DUKTAPE) {
+    dk.xconsole = new Object;
     //Create a logger for console
     dk.x = new Object;
-    xconsole.debug = console.debug;
-    xconsole.error = console.error;
-    xconsole.log = console.log;
-    xconsole.warn = console.warn;
+    dk.xconsole.debug = console.debug;
+    dk.xconsole.error = console.error;
+    dk.xconsole.log = console.log;
+    dk.xconsole.warn = console.warn;
     dk.x.record = [];
     dk.x.logger = function(lvl, args) {
-        !DUKTAPE && xconsole[lvl] && xconsole[lvl].apply(this, Array.prototype.slice.call(args));
+        !DUKTAPE && dk.xconsole[lvl] && dk.xconsole[lvl].apply(this, Array.prototype.slice.call(args));
         DUKTAPE && dk && dk.x && dk.x.log && dk.x.log.apply(this, Array.prototype.slice.call(args));
         var obj = {};
         (obj[lvl] = args[0]) && (dk.x && dk.x.record.push(obj))
@@ -39,7 +35,6 @@ if (!DUKTAPE) {
     console.warn = function() {
         dk.x && dk.x.logger("warn", arguments);
     }
-    //}
 }
 
 const required = function required() {
@@ -1229,7 +1224,7 @@ dk.errorCatcher = function dk_errorCatcher(obj, name) {
                         //const stack = dk.trace.stackToConsoleString(err);
                         //if (dk.console && dk.console.error) {
                             //dk.console.error(err);
-                            //xconsole && xconsole.error(err);
+                            //dk.xconsole && dk.dk.xconsole.error(err);
                         //} else
                             console.error(err);
                     }

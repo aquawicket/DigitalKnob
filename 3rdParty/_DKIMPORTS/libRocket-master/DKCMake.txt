@@ -1,3 +1,6 @@
+## Obsolete - replaced by RmlUi
+RETURN()
+
 DKDEPEND(freetype)
 
 ### INSTALL ###
