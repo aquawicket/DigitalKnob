@@ -57,7 +57,11 @@ var Document = function(pointer) {
     return HTMLElement.call(this, pointer);
     //we have to call HTMKElement instead of Node for .style to work
 }
+
+// https://dom.spec.whatwg.org/#interface-document
+//interface Document : Node
 Document.prototype = Node.prototype;
+
 Object.assign(Document.prototype, DocumentOrShadowRoot);
 //mixin
 Object.assign(Document.prototype, GlobalEventHandlers);

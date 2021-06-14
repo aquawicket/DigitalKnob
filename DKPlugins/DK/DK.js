@@ -5,7 +5,6 @@ console.log("Loading DK.js")
 const DEBUG = true;
 window.dk = new Object;
 let DUKTAPE = false;
-
 if(window.DUKTAPE)
     DUKTAPE = true;
 
@@ -13,7 +12,7 @@ dk.useCPP = false;
 
 //Keep a object reference to the old console
 //if (console) {
-//if (!DUKTAPE) {
+if (!DUKTAPE) {
     const xconsole = new Object;
     //Create a logger for console
     dk.x = new Object;
@@ -41,7 +40,7 @@ dk.useCPP = false;
         dk.x && dk.x.logger("warn", arguments);
     }
     //}
-//}
+}
 
 const required = function required() {
     for (let n = 0; n < arguments.length; n++) {
@@ -292,8 +291,7 @@ dk.getPlugin = function dk_getPlugin(url) {
 }
 
 dk.loadJs = function dk_loadJs(url, dk_loadJs_callback) {
-    console.error("Use DKPlugin() instead of dk.create to load .js files now")
-    //return;
+    console.warn("Use DKPlugin() instead of dk.create to load .js files now");
     required({
         url
     });
