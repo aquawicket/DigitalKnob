@@ -25,4 +25,6 @@ var HTMLCollection = function(pointers) {
     return this;
 }
 
+// https://dom.spec.whatwg.org/#interface-htmlcollection
+// interface HTMLCollection
 HTMLCollection.prototype = [];
