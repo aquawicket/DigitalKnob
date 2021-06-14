@@ -1289,6 +1289,10 @@ Object.byString = function(o, s) {
     return o;
 }
 
+dk.insert = function dk_insert(str, index, value) {
+    return str.substr(0, index) + value + str.substr(index);
+}
+
 // https://stackoverflow.com/a/24032179/688352
 dk.renameFunction = function dk_renameFunction(func, name) {
   	const oldName = func.name;
@@ -1312,6 +1316,7 @@ dk.renameFunction = function dk_renameFunction(func, name) {
   	return parent[name]
 }
 
+// https://stackoverflow.com/a/24032179/688352
 dk.editFunctionBody = function dk_editFunctionBody(func, newBody) {
   	const name = func.name;
   	newBody = newBody.replace("function(","function "+name+"(")
@@ -1333,6 +1338,7 @@ dk.editFunctionBody = function dk_editFunctionBody(func, newBody) {
   	return parent[name]
 }
 
+// https://stackoverflow.com/a/24032179/688352
 dk.StringToFunction = function dk_StringToFunction(name, str) {
   	str = str.replace("function(","function "+name+"(")
   	str = str.replace("function (","function "+name+"(")
@@ -1353,8 +1359,16 @@ dk.StringToFunction = function dk_StringToFunction(name, str) {
   	return parent[name]
 }
 
-dk.insert = function dk_insert(str, index, value) {
-    return str.substr(0, index) + value + str.substr(index);
+// https://eli.thegreenplace.net/2013/10/22/classical-inheritance-in-javascript-es5
+dk.classExtends = function dk_classExtends(child_class, parent_class){
+  	const child_prototype = child_class.prototype;
+  	const funcString = "function "+child_class.name+"(){\n\tconsole.log('"+child_class.name+"() constructor')\n\t"+parent_class.name+".call(this, arguments)\n}";
+    let child = dk.StringToFunction(child_class.name, funcString)
+ 	child.prototype = Object.create(parent_class.prototype)
+    child.prototype.constructor = child
+  	Object.assign(child.prototype, child_prototype)
+  	child_class = child
+  	return child_class
 }
 
 dk.dump = function dk_dumpVariable(variable) {
