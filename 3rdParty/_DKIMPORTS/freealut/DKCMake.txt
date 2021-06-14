@@ -8,11 +8,12 @@ DKDEPEND(openal)
 
 
 ### VERSION ###
-DKSET(FREEALUT_VERSION freealut-1.1.0-src)
+DKSET(FREEALUT_VERSION freealut-1.1.0)
 
 
 ### INSTALL ###
-DKINSTALL(www.internet.com/${FREEALUT_VERSION}.zip freealut ${FREEALUT_VERSION}) ##FIXME: find an online link
+## http://distro.ibiblio.org/rootlinux/rootlinux-ports/more/freealut/${FREEALUT_VERSION}.tar.gz
+DKINSTALL(http://distro.ibiblio.org/rootlinux/rootlinux-ports/more/freealut/${FREEALUT_VERSION}.tar.gz freealut ${FREEALUT_VERSION})
 DKSET(FREEALUT ${3RDPARTY}/${FREEALUT_VERSION})
 
 

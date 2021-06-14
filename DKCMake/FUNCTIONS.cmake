@@ -2203,6 +2203,7 @@ FUNCTION(DKRUNDEPENDS arg)
 		IF(${num_extra_args} GREATER 0)
 			DKSET(${arg2} OFF)
 		ENDIF()
+		DKREMOVE(${PATHTOPLUGIN}/DEPENDS.TMP)
 	ENDIF()
 	
 	IF(${num_extra_args} GREATER 0)

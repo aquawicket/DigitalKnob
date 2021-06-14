@@ -1,4 +1,7 @@
-IF(ANDROIIPHONE OR IPHONESIMULATOR)
+## Obsolete, Using newer version of Boost. Keeping this aroud for reference
+RETURN()
+
+IF(ANDROID OR IPHONE OR IPHONESIMULATOR)
 	RETURN()
 ENDIF()
 
