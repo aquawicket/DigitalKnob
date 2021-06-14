@@ -1,6 +1,12 @@
+### VERSION ###
+DKSET(OPENFRAMEWORKS_VERSION 0.10.0)
+DKSET(OPENFRAMEWORKS ${3RDPARTY}/openFrameworks-${OPENFRAMEWORKS_VERSION})
+
+
 ### INSTALL ###
-## DKINSTALL(www.internet.com/openFrameworks-master.zip openFrameworks-master) ## find an online link
-DKSET(OPENFRAMEWORKS ${3RDPARTY}/openFrameworks-master)
+## https://github.com/openframeworks/openFrameworks/archive/refs/tags/${OPENFRAMEWORKS_VERSION}.zip
+## DKINSTALL(https://github.com/openframeworks/openFrameworks/archive/refs/tags/${OPENFRAMEWORKS_VERSION}.zip openFrameworks openFrameworks-${OPENFRAMEWORKS_VERSION}) ## find an online link
+DKSET(OPENFRAMEWORKS ${3RDPARTY}/openFrameworks-${OPENFRAMEWORKS_VERSION})
 
 
 ### LINK ###
@@ -34,5 +40,5 @@ WIN_RELEASE_LIB(${OPENFRAMEWORKS}/${OS}/lib/${RELEASE}/openFrameworks.lib)
 ### COMPILE ###
 DKSETPATH(${OPENFRAMEWORKS}/${OS})
 WIN32_COMMAND(${CMAKE_COMMAND} -G ${GENERATOR} -A Win32 "-DCMAKE_C_FLAGS=/DWIN32 /D_WINDOWS /W3 /nologo" "-DCMAKE_C_FLAGS_DEBUG=/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG" "-DCMAKE_C_FLAGS_RELEASE=/MT /O2 /Ob2 /DNDEBUG" -DOF_PATH=${OPENFRAMEWORKS} ${OPENFRAMEWORKS})
-WIN32_VS_DEBUG(openFrameworks-master openFrameworks.sln openFrameworks)
-WIN32_VS_RELEASE(openFrameworks-master openFrameworks.sln openFrameworks)
+WIN32_VS_DEBUG(openFrameworks-${OPENFRAMEWORKS_VERSION} openFrameworks.sln openFrameworks)
+WIN32_VS_RELEASE(openFrameworks-${OPENFRAMEWORKS_VERSION} openFrameworks.sln openFrameworks)

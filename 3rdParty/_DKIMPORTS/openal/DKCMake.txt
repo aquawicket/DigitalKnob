@@ -3,12 +3,18 @@ IF(ANDROID)
 	RETURN()
 ENDIF()
 
+
+### VERSION ###
+DKSET(OPENAL_VERSION 1.15.1)
+DKSET(OPENAL ${3RDPARTY}/openal)
+
+
 ### INSTALL ###
-## DKINSTALL(www.internet.com/openal-1.15.1.zip openal) ## find an online link
+## https://www.openal-soft.org/openal-releases/openal-soft-${OPENAL_VERSION}.tar.bz2
+## DKINSTALL(https://www.openal-soft.org/openal-releases/openal-soft-${OPENAL_VERSION}.tar.bz2 openal openal-${OPENAL_VERSION})
 
 
 ### LINK ###
-DKSET(OPENAL ${3RDPARTY}/openal)
 IF(WIN)
 	DKDEFINE(__WINDOWS_MM__)
 	LIST(APPEND WIN_LIBS winmm.lib)
