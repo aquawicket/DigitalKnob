@@ -71,6 +71,12 @@ var Document = function(pointer) {
         },
     });
 
+
+    //TODO
+    //contentType 
+    //doctype
+
+
     Object.defineProperty(this, "documentElement", {
         get: function() {
             var address = CPP_DKDomDocument_documentElement();
@@ -79,6 +85,40 @@ var Document = function(pointer) {
             return new HTMLElement(address);
         }
     });
+
+    /*
+    //TODO
+    Document.documentURI
+    Document.embeds
+    Document.firstElementChild
+    Document.fonts
+    Document.forms
+    Document.fullscreenElement
+    Document.head
+    Document.hidden
+    Document.images
+    Document.implementation
+    Document.lastElementChild
+    Document.links
+    Document.mozSyntheticDocument
+    Document.pictureInPictureElement
+    Document.pictureInPictureEnabled
+    Document.plugins
+    Document.pointerLockElement
+    Document.featurePolicy
+    Document.scriptsRead
+    Document.scrollingElement
+    Document.styleSheets
+    Document.timeline
+    Document.visibilityState
+     */  
+
+
+
+
+
+
+
 
 
     // Methods
