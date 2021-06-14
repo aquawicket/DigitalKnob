@@ -9,7 +9,7 @@
 // DKPlugin(MyClass)
 //   This will creat an instance of the class. MyClass must be available. 
 //
-
+console.log("Loading DKPlugins.js")
 const DKPlugin = function DKPlugin() {
     //console.debug("*** DKPlugin() ***");
     //DKPlugin.dumpInfo.apply(this, arguments);

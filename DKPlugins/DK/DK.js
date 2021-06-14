@@ -1,38 +1,46 @@
 "use strict";
+console.log("Loading DK.js")
+
 
 const DEBUG = true;
 window.dk = new Object;
-const DUKTAPE = window.DUKTAPE;
+let DUKTAPE = false;
+
+if(window.DUKTAPE)
+    DUKTAPE = true;
+
 dk.useCPP = false;
 
 //Keep a object reference to the old console
 //if (console) {
-const xconsole = new Object;
-//Create a logger for console
-dk.x = new Object;
-xconsole.debug = console.debug;
-xconsole.error = console.error;
-xconsole.log = console.log;
-xconsole.warn = console.warn;
-dk.x.record = [];
-dk.x.logger = function(lvl, args) {
-    !DUKTAPE && xconsole[lvl] && xconsole[lvl].apply(this, Array.prototype.slice.call(args));
-    DUKTAPE && dk && dk.x && dk.x.log && dk.x.log.apply(this, Array.prototype.slice.call(args));
-    var obj = {};
-    (obj[lvl] = args[0]) && (dk.x && dk.x.record.push(obj))
-}
-console.debug = function() {
-    dk.x && dk.x.logger("debug", arguments);
-}
-console.error = function() {
-    dk.x && dk.x.logger("error", arguments);
-}
-console.log = function() {
-    dk.x && dk.x.logger("log", arguments);
-}
-console.warn = function() {
-    dk.x && dk.x.logger("warn", arguments);
-}
+//if (!DUKTAPE) {
+    const xconsole = new Object;
+    //Create a logger for console
+    dk.x = new Object;
+    xconsole.debug = console.debug;
+    xconsole.error = console.error;
+    xconsole.log = console.log;
+    xconsole.warn = console.warn;
+    dk.x.record = [];
+    dk.x.logger = function(lvl, args) {
+        !DUKTAPE && xconsole[lvl] && xconsole[lvl].apply(this, Array.prototype.slice.call(args));
+        DUKTAPE && dk && dk.x && dk.x.log && dk.x.log.apply(this, Array.prototype.slice.call(args));
+        var obj = {};
+        (obj[lvl] = args[0]) && (dk.x && dk.x.record.push(obj))
+    }
+    console.debug = function() {
+        dk.x && dk.x.logger("debug", arguments);
+    }
+    console.error = function() {
+        dk.x && dk.x.logger("error", arguments);
+    }
+    console.log = function() {
+        dk.x && dk.x.logger("log", arguments);
+    }
+    console.warn = function() {
+        dk.x && dk.x.logger("warn", arguments);
+    }
+    //}
 //}
 
 const required = function required() {
@@ -295,8 +303,8 @@ dk.loadJs = function dk_loadJs(url, dk_loadJs_callback) {
     //    return true;
     //}
     var scripts = document.getElementsByTagName("script");
-    for (var n = 0; n < scripts.length; n++) {
-        if (scripts[n].src.includes(url)) {
+    for (var n = 0; scripts && n < scripts.length; n++) {
+        if (scripts[n].src && scripts[n].src.includes(url)) {
             console.info(url + ": is already loaded");
             dk_loadJs_callback && dk_loadJs_callback(true);
             return true;
@@ -405,6 +413,8 @@ dk.loadCss = function dk_loadCss(url, dk_loadCss_callback) {
         url
     });
     const links = document.getElementsByTagName("link");
+    if (!links)
+        return false;
     for (let n = 0; n < links.length; n++) {
         if (links[n].href && links[n].href.includes(url)) {
             console.log(url + " already loaded.");
@@ -1219,10 +1229,10 @@ dk.errorCatcher = function dk_errorCatcher(obj, name) {
                         return method.apply(this, arguments);
                     } catch (err) {
                         //const stack = dk.trace.stackToConsoleString(err);
-                        if (dk.console && dk.console.error) {
-                            dk.console.error(err);
-                            xconsole && xconsole.error(err);
-                        } else
+                        //if (dk.console && dk.console.error) {
+                            //dk.console.error(err);
+                            //xconsole && xconsole.error(err);
+                        //} else
                             console.error(err);
                     }
                 }
@@ -1295,80 +1305,86 @@ dk.insert = function dk_insert(str, index, value) {
 
 // https://stackoverflow.com/a/24032179/688352
 dk.renameFunction = function dk_renameFunction(func, name) {
-  	const oldName = func.name;
-  	let funcString = func.toString();
- 	funcString = funcString.replace("function(","function "+name+"(")
-  	funcString = funcString.replace("function (","function "+name+"(")
-  	funcString = funcString.replace("function "+oldName+"(","function "+name+"(")
-  	funcString += "\nreturn "+name+";"
+    const oldName = func.name;
+    let funcString = func.toString();
+    funcString = funcString.replace("function(", "function " + name + "(")
+    funcString = funcString.replace("function (", "function " + name + "(")
+    funcString = funcString.replace("function " + oldName + "(", "function " + name + "(")
+    funcString += "\nreturn " + name + ";"
     const parent = window;
-  	let scope = parent;
+    let scope = parent;
     let values = [];
     if (!Array.isArray(scope) || !Array.isArray(values)) {
         if (typeof scope == "object") {
             var keys = Object.keys(scope);
-            values = keys.map( function(p) { return scope[p]; } );
+            values = keys.map(function(p) {
+                return scope[p];
+            });
             scope = keys;
         } else
             scope = [];
     }
- 	parent[name] = Function(scope, funcString).apply(null, values)
-  	return parent[name]
+    parent[name] = Function(scope, funcString).apply(null, values)
+    return parent[name]
 }
 
 // https://stackoverflow.com/a/24032179/688352
 dk.editFunctionBody = function dk_editFunctionBody(func, newBody) {
-  	const name = func.name;
-  	newBody = newBody.replace("function(","function "+name+"(")
-  	newBody = newBody.replace("function (","function "+name+"(")
-  	newBody = newBody.replace("function "+name+"(","function "+name+"(")
-    newBody += "\nreturn "+name+";"
+    const name = func.name;
+    newBody = newBody.replace("function(", "function " + name + "(")
+    newBody = newBody.replace("function (", "function " + name + "(")
+    newBody = newBody.replace("function " + name + "(", "function " + name + "(")
+    newBody += "\nreturn " + name + ";"
     const parent = window;
-  	let scope = parent;
+    let scope = parent;
     let values = [];
     if (!Array.isArray(scope) || !Array.isArray(values)) {
         if (typeof scope == "object") {
             var keys = Object.keys(scope);
-            values = keys.map( function(p) { return scope[p]; } );
+            values = keys.map(function(p) {
+                return scope[p];
+            });
             scope = keys;
         } else
             scope = [];
     }
- 	parent[name] = Function(scope, newBody).apply(null, values)
-  	return parent[name]
+    parent[name] = Function(scope, newBody).apply(null, values)
+    return parent[name]
 }
 
 // https://stackoverflow.com/a/24032179/688352
 dk.StringToFunction = function dk_StringToFunction(name, str) {
-  	str = str.replace("function(","function "+name+"(")
-  	str = str.replace("function (","function "+name+"(")
-  	str = str.replace("function "+name+"(","function "+name+"(")
-    str += "\nreturn "+name+";"
+    str = str.replace("function(", "function " + name + "(")
+    str = str.replace("function (", "function " + name + "(")
+    str = str.replace("function " + name + "(", "function " + name + "(")
+    str += "\nreturn " + name + ";"
     const parent = window;
-  	let scope = parent;
+    let scope = parent;
     let values = [];
     if (!Array.isArray(scope) || !Array.isArray(values)) {
         if (typeof scope == "object") {
             var keys = Object.keys(scope);
-            values = keys.map( function(p) { return scope[p]; } );
+            values = keys.map(function(p) {
+                return scope[p];
+            });
             scope = keys;
         } else
             scope = [];
     }
- 	parent[name] = Function(scope, str).apply(null, values)
-  	return parent[name]
+    parent[name] = Function(scope, str).apply(null, values)
+    return parent[name]
 }
 
 // https://eli.thegreenplace.net/2013/10/22/classical-inheritance-in-javascript-es5
-dk.classExtends = function dk_classExtends(child_class, parent_class){
-  	const child_prototype = child_class.prototype;
-  	const funcString = "function "+child_class.name+"(){\n\tconsole.log('"+child_class.name+"() constructor')\n\t"+parent_class.name+".call(this, arguments)\n}";
+dk.classExtends = function dk_classExtends(child_class, parent_class) {
+    const child_prototype = child_class.prototype;
+    const funcString = "function " + child_class.name + "(){\n\tconsole.log('" + child_class.name + "() constructor')\n\t" + parent_class.name + ".call(this, arguments)\n}";
     let child = dk.StringToFunction(child_class.name, funcString)
- 	child.prototype = Object.create(parent_class.prototype)
+    child.prototype = Object.create(parent_class.prototype)
     child.prototype.constructor = child
-  	Object.assign(child.prototype, child_prototype)
-  	child_class = child
-  	return child_class
+    Object.assign(child.prototype, child_prototype)
+    child_class = child
+    return child_class
 }
 
 dk.dump = function dk_dumpVariable(variable) {
