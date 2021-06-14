@@ -12,10 +12,13 @@ DKFrame.prototype.create = function DKFrame_create(obj) {
 
     let instance;
     let type;
+    let element;
     if (obj instanceof DKFrame)
         type = "DKFrame"
-    else if (obj instanceof HTMLElement)
+    else if (obj instanceof HTMLElement){
         type = "HTMLElement"
+        element = obj;
+    }
     else if (obj instanceof DKPlugin)
         type = "DKPlugin"
     else if (obj.dkplugin)
@@ -30,11 +33,11 @@ DKFrame.prototype.create = function DKFrame_create(obj) {
     console.debug("DKFrame.prototype.create(" + type + ")")
 
     instance = DKPlugin(DKFrame)
-    let element;
+    
 
     if (obj instanceof HTMLElement)
         element = obj;
-    else
+    else{
         for (let key in obj) {
             if (obj[key]instanceof HTMLElement) {
                 //obj.id && (id = obj.id);
@@ -43,6 +46,7 @@ DKFrame.prototype.create = function DKFrame_create(obj) {
                     break;
             }
         }
+    }
 
 
     obj.dkplugin && (instance.dkplugin = obj);
@@ -76,8 +80,8 @@ DKFrame.prototype.create = function DKFrame_create(obj) {
 }
 
 DKFrame.prototype.close = function DKFrame_close() {
-    this.resize.close();
-    this.dkplugin.close();
+    this.resize.close && this.resize.close();
+    this.dkplugin.close && this.dkplugin.close();
 }
 
 DKFrame.prototype.createFrame = function DKFrame_createFrame(title, width, height) {
@@ -272,7 +276,6 @@ DKFrame.prototype.restoreSize = function DKFrame_restoreSize(frame) {
     return true;
 }
 
-/*
 DKFrame.prototype.createNewWindow = function DKFrame_createNewWindow(title, width, height, url) {
     const instance = DKPlugin(DKFrame, title)
     //if (!instance.ok) {
@@ -285,11 +288,10 @@ DKFrame.prototype.createNewWindow = function DKFrame_createNewWindow(title, widt
     instance.div.style.width = width
     instance.div.style.height = height
     instance.div.style.overflow = "auto"
-    instance.div.style.backgroundColor = "grey"
+    //instance.div.style.backgroundColor = "grey"
     this.create(instance)
     return instance.div
 }
-*/
 
 /*
 DKFrame.prototype.iFrame = function DKFrame_Iframe(title, url, width, height) {
