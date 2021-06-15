@@ -1,3 +1,11 @@
+if(WIN_32)
+DKDEPEND(mingw32)
+endif()
+if(WIN_64)
+DKDEPEND(mingw64)
+endif()
+DKDEPEND(msys)
+
 ### VERSION ###
 DKSET(GIF_VERSION giflib-5.1.1)
 
