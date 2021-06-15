@@ -127,13 +127,13 @@ bool DKRml::End(){
 	DKEvents::RemoveRegisterEventFunc(&DKRml::RegisterEvent, this);
 	DKEvents::RemoveUnegisterEventFunc(&DKRml::UnregisterEvent, this);
 	DKEvents::RemoveSendEventFunc(&DKRml::SendEvent, this);
-	//if(document){ 
-	//	Rml::Factory::ClearStyleSheetCache();
-	//	document->Close(); 
-	//}
+
 	if(context){
-		//context->RemoveReference();
+		Rml::ReleaseTextures();
 		Rml::Shutdown();
+		delete Rml::GetRenderInterface();
+		delete Rml::GetSystemInterface();
+		delete Rml::GetFileInterface();
 	}
 	return true;
 }

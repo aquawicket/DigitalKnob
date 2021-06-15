@@ -233,17 +233,25 @@ ENDFUNCTION()
 ######################################################
 FUNCTION(DKINSTALL url import_folder 3rdparty_folder)
 	IF(EXISTS ${3RDPARTY}/${3rdparty_folder})
-		###
-	ELSE()
-		DKSET(CURRENT_DIR ${DIGITALKNOB}/Download)
-		DKDOWNLOAD(${url})
-		GET_FILENAME_COMPONENT(filename ${url} NAME)
+		file(GLOB ${3RDPARTY}/${3rdparty_folder})
+		list(LENGTH RESULT RES_LEN)
+		if(RES_LEN GREATER 0)
+			return()
+		endif()
+	ENDIF()	
+	
+	DKSET(CURRENT_DIR ${DIGITALKNOB}/Download)
+	DKDOWNLOAD(${url})
+	GET_FILENAME_COMPONENT(filename ${url} NAME)
 		
-		#Make sure is it an archive before extracting
-		DKSET(ARCHIVE ON)
-		GET_FILENAME_COMPONENT(extention ${url} LAST_EXT)
-		DKSET(FILETYPE "UNKNOWN")
-		if(${extention})
+	#Make sure is it an archive before extracting
+	DKSET(ARCHIVE ON)
+	GET_FILENAME_COMPONENT(extention ${url} LAST_EXT)
+	SET(FILETYPE "UNKNOWN")
+	MESSAGE("extention = ${extention}")
+	MESSAGE("LAST_EXT = ${LAST_EXT}")
+	##if(${extention})
+	
 		if(${extention} STREQUAL ".exe")
 			DKSET(FILETYPE "Executable")
 		endif()
@@ -253,7 +261,7 @@ FUNCTION(DKINSTALL url import_folder 3rdparty_folder)
 		if(${extention} STREQUAL ".bz")
 			DKSET(FILETYPE "Archive")
 		endif()
-		if(${extention} STREQUAL ".bz2")
+			if(${extention} STREQUAL ".bz2")
 			DKSET(FILETYPE "Archive")
 		endif()
 		if(${extention} STREQUAL ".gz")
@@ -271,37 +279,36 @@ FUNCTION(DKINSTALL url import_folder 3rdparty_folder)
 		if(${extention} STREQUAL ".zip")
 			DKSET(FILETYPE "Archive")
 		endif()
-		endif()
-		##If the file type is unknown, we'll still try to extract it like a compressed file anyway
-		##It's better the have a chance at success then to spend 2 hours dead in the water ;) 
-		MESSAGE("The Downloaded file (${filename}) is a ${FILETYPE} file ${extention}")
+	##endif()
+	##If the file type is unknown, we'll still try to extract it like a compressed file anyway
+	##It's better the have a chance at success then to spend 2 hours dead in the water ;) 
+	MESSAGE("The Downloaded file (${filename}) is a ${FILETYPE} file ${extention}")
+	
+	if(${FILETYPE} STREQUAL "UNKNOWN")
+		DKSET(FILETYPE "Archive")
+		MESSAGE("We will try to extract it in case it's an archive, but it may fail.")
+		MESSAGE("If it's not an archive, you should be good to go")
+	endif()
 		
-		if(${FILETYPE} STREQUAL "UNKNOWN")
-			DKSET(FILETYPE "Archive")
-			MESSAGE("We will try to extract it in case it's an archive, but it may fail.")
-			MESSAGE("If it's not an archive, you should be good to go")
-		endif()
-		
-		if(${FILETYPE} STREQUAL "Archive")
-			DKEXTRACT(${DIGITALKNOB}/Download/${filename} ${3RDPARTY}/UNZIPPED)
-			#We either have a root folder in /UNZIPPED, or multiple files without a root folder
-			FILE(GLOB items RELATIVE "${3RDPARTY}/UNZIPPED/" "${3RDPARTY}/UNZIPPED/*")
-			LIST(LENGTH items count)
-			IF(${count} GREATER 1)
-				#Zip extracted with no root folder, Rename UNZIPPED and move to 3rdParty
-				FILE(RENAME ${3RDPARTY}/UNZIPPED ${3RDPARTY}/${3rdparty_folder})
-			ELSE()
-				IF(EXISTS ${3RDPARTY}/UNZIPPED/${3rdparty_folder}) ##Zip extracted to expected folder. Move the folder to 3rdParty
-					FILE(RENAME ${3RDPARTY}/UNZIPPED/${3rdparty_folder} ${3RDPARTY}/${3rdparty_folder})
-					DKREMOVE(${3RDPARTY}/UNZIPPED)
-				ELSE() #Zip extracted to a root folder, but not named what we expected. Rename and move folder to 3rdParty
-					FILE(RENAME ${3RDPARTY}/UNZIPPED/${items} ${3RDPARTY}/${3rdparty_folder})
-					DKREMOVE(${3RDPARTY}/UNZIPPED)
-				ENDIF() 
-			ENDIF()
-		ELSE() #NOT ARCHIVE, just copy the file into it's 3rdParty folder
-			DKCOPY(${DIGITALKNOB}/Download/${filename} ${3RDPARTY}/${3rdparty_folder}/${filename} TRUE)
+	if(${FILETYPE} STREQUAL "Archive")
+		DKEXTRACT(${DIGITALKNOB}/Download/${filename} ${3RDPARTY}/UNZIPPED)
+		#We either have a root folder in /UNZIPPED, or multiple files without a root folder
+		FILE(GLOB items RELATIVE "${3RDPARTY}/UNZIPPED/" "${3RDPARTY}/UNZIPPED/*")
+		LIST(LENGTH items count)
+		IF(${count} GREATER 1)
+			#Zip extracted with no root folder, Rename UNZIPPED and move to 3rdParty
+			FILE(RENAME ${3RDPARTY}/UNZIPPED ${3RDPARTY}/${3rdparty_folder})
+		ELSE()
+			IF(EXISTS ${3RDPARTY}/UNZIPPED/${3rdparty_folder}) ##Zip extracted to expected folder. Move the folder to 3rdParty
+				FILE(RENAME ${3RDPARTY}/UNZIPPED/${3rdparty_folder} ${3RDPARTY}/${3rdparty_folder})
+				DKREMOVE(${3RDPARTY}/UNZIPPED)
+			ELSE() #Zip extracted to a root folder, but not named what we expected. Rename and move folder to 3rdParty
+				FILE(RENAME ${3RDPARTY}/UNZIPPED/${items} ${3RDPARTY}/${3rdparty_folder})
+				DKREMOVE(${3RDPARTY}/UNZIPPED)
+			ENDIF() 
 		ENDIF()
+	ELSE() #NOT ARCHIVE, just copy the file into it's 3rdParty folder
+		DKCOPY(${DIGITALKNOB}/Download/${filename} ${3RDPARTY}/${3rdparty_folder}/${filename} TRUE)
 	ENDIF()
 
 	DKCOPY(${DKIMPORTS}/${import_folder}/ ${3RDPARTY}/${3rdparty_folder}/ TRUE)
