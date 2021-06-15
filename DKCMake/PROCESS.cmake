@@ -65,6 +65,7 @@ DKSET(DKAPP ON)
 ##### Scan the DKPlugins and build the lists #####
 ##################################################
 # run the DKDEPNDS for the apps DKCMake.txt file
+DKDEPEND(BuildTools)
 INCLUDE(${DKPROJECT}/DKCMake.txt)
 
 MESSAGE("\n")
