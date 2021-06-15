@@ -8,9 +8,6 @@ IF(RASPBERRY)
 	RETURN()
 ENDIF()
 
-DKDEPEND(DKDuktape)
-
-DKSET(QUEUE_BUILD ON)
 
 IF(WIN_32)
 	DKDEPEND(cef_binary_windows32)
@@ -42,6 +39,12 @@ IF(LINUX)
 ENDIF()
 
 
+DKDEPEND(DKDuktape)
+
+
+DKSET(QUEUE_BUILD ON)  ## Possibly for DKCefChild
+
+
 DKPLUGIN(DKCef)
 DKASSETS(DKCef)
 
@@ -54,7 +57,6 @@ IF(WIN_32)
 		FILE(REMOVE ${DKPROJECT}/assets/DKCef/win32Debug/cef_sandbox.lib)
 		FILE(REMOVE ${DKPROJECT}/assets/DKCef/win32Debug/libcef.lib)
 		FILE(REMOVE ${DKPROJECT}/assets/DKCef/win32Debug/wow_helper.exe)
-		
 	ENDIF()
 	IF(RELEASE)
 		##UPX_COMPRESS(${CEF}/Release/libcef.dll)
