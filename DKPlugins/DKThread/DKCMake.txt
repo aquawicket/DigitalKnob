@@ -1,12 +1,5 @@
 DKDEPEND(threadpool)
-
-IF(WIN OR MAC OR LINUX OR RASPBERRY)
-	DKDEPEND(boost Boost_Thread)
-ENDIF()
-IF(ANDROID)
-	##DKDEPEND(Boost-for-Android-devel Boost_Thread)
-	DKDEPEND(Boost-for-Android-master Boost_Thread)
-ENDIF()
+DKDEPEND(boost Boost_Thread)
 IF(USE_DKDuktape)
 	DKDEPEND(DKDuktape)
 ENDIF()
