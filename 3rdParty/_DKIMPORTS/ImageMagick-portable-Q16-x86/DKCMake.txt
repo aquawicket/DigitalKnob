@@ -1,5 +1,4 @@
 ## http://ftp.icm.edu.pl/packages/ImageMagick/binaries/ImageMagick-7.1.0-0-portable-Q16-x86.zip
-
 IF(NOT CMAKE_HOST_WIN32)
 	RETURN()
 ENDIF()
@@ -9,9 +8,10 @@ DKDEPEND(gs922w64)
 
 
 ### VERSION ###
-DKSET(IMAGEMAGICK_VERSION 7.1.0-0)
-DKSET(IMAGEMAGICK ${3RDPARTY}/ImageMagick-${IMAGEMAGICK_VERSION}-portable-Q16-x86)
+DKSET(IMAGEMAGICK_VERSION "7.1.0-0")
+DKSET(IMAGEMAGICK_TITLE ImageMagick-${IMAGEMAGICK_VERSION}-portable-Q16-x86)
+DKSET(IMAGEMAGICK_ROOT ${3RDPARTY}/${MAGEMAGICK_NAME})
 
 
 ### INSTALL ###
-DKINSTALL(http://ftp.icm.edu.pl/packages/ImageMagick/binaries/${IMAGEMAGICK}.zip ImageMagick-portable-Q16-x86 ImageMagick-${IMAGEMAGICK_VERSION}-portable-Q16-x86)
+DKINSTALL(http://ftp.icm.edu.pl/packages/ImageMagick/binaries/${MAGEMAGICK_NAME}.zip ImageMagick-portable-Q16-x86 ${IMAGEMAGICK_NAME})

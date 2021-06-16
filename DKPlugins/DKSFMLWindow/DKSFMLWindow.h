@@ -57,7 +57,7 @@ public:
 	/////////////////////////////////////////////////////////////////////
 	static void AddEventFunc(bool (T::*func)(sf::Event& e), T* _this)
 	{
-		event_funcs.push_back(boost::bind(func, _this, _1));
+		event_funcs.push_back(boost::bind(func, _this, boost::placeholders::_1));
 	}
 
 	template<class T>
