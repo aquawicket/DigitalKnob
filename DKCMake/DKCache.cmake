@@ -95,6 +95,7 @@ if(EXISTS ${SDL2_IMAGE}/win32/lib/Release/SDL_image.lib)
 	set(SDL2_IMAGE_LIBRARY_RELEASE ${SDL2_IMAGE}/win32/lib/Release/SDL_image.lib CACHE FILEPATH "" FORCE)
 endif()
 
+
 set(SFML ${3RDPARTY}/SFML-2.4.2 CACHE PATH "" FORCE)
 if(EXISTS ${SFML}/win32/lib/Release/sfml-main.lib)
 	set(SFML_INCLUDE_DIR ${SFML}/include CACHE FILEPATH "" FORCE)
@@ -110,12 +111,31 @@ if(EXISTS ${SFML}/win32/lib/Release/sfml-main.lib)
 	set(SFML_AUDIO_LIBRARY_RELEASE ${SFML}/win32/lib/Release/sfml-audio-s.lib CACHE FILEPATH "" FORCE)
 endif()
 
-set(GLEW ${3RDPARTY}/glew-2.1.0 CACHE PATH "" FORCE)
+# https://cmake.org/cmake/help/latest/module/FindGLEW.html
+set(GLEW ${3RDPARTY}/glew-2.2.0 CACHE PATH "" FORCE)
 if(EXISTS ${GLEW}/win32/lib/Release/libglew32.lib)
-	set(GLEW_DIR ${GLEW}/build/cmake CACHE PATH "" FORCE)
+	##set(GLEW_DIR ${GLEW}/build/cmake CACHE PATH "" FORCE)
+	set(GLEW_USE_STATIC_LIBS ON CACHE BOOL "" FORCE)
+	set(GLEW_DIR ${GLEW}/win32/CMakeFiles/Export/lib/cmake/glew CACHE PATH "" FORCE)
+	set(GLEW_LIBRARY ${GLEW}/win32/lib/Debug/libglew32.lib CACHE FILEPATH "" FORCE)
 	set(GLEW_INCLUDE_DIR ${GLEW} CACHE PATH "" FORCE)
 	set(GLEW_STATIC_LIBRARY_DEBUG ${GLEW}/win32/lib/Debug/libglew32d.lib CACHE FILEPATH "" FORCE)
 	set(GLEW_STATIC_LIBRARY_RELEASE ${GLEW}/win32/lib/Release/libglew32.lib CACHE FILEPATH "" FORCE)
 	set(GLEW_SHARED_LIBRARY_DEBUG ${GLEW}/win32/lib/Debug/glew32d.lib CACHE FILEPATH "" FORCE)
 	set(GLEW_SHARED_LIBRARY_RELEASE ${GLEW}/win32/lib/Release/glew32.lib CACHE FILEPATH "" FORCE)
+	set(GLEW_LIBRARIES "${GLEW_STATIC_LIBRARY_DEBUG}" CACHE FILEPATH "" FORCE)
+	set(GLEW_LIBRARIES ${GLEW_LIBRARIES} "${GLEW_STATIC_LIBRARY_RELEASE}" CACHE FILEPATH "" FORCE)
 endif()
+
+
+#set(OPENSSL ${3RDPARTY}/openssl-1.0.2h-vs2015 CACHE PATH "" FORCE)
+#if(EXISTS ${OPENSSL}/lib/ssleay32MT.lib)
+#	set(CMAKE_USE_OPENSSL ON CACHE BOOL "" FORCE)
+#	set(OPENSSL_INCLUDE_DIR ${OPENSSL}/include CACHE PATH "" FORCE)
+#	set(LIB_EAY_DEBUG ${OPENSSL}/lib/libeay32MTd.lib CACHE FILEPATH "" FORCE)
+#	set(LIB_EAY_RELEASE ${OPENSSL}/lib/libeay32MT.lib CACHE FILEPATH "" FORCE)
+#	set(SSL_EAY_DEBUG ${OPENSSL}/lib/ssleay32MTd.lib CACHE FILEPATH "" FORCE)
+#	set(SSL_EAY_RELEAS ${OPENSSL}/lib/ssleay32MT.lib CACHE FILEPATH "" FORCE)
+#endif()
+
+
