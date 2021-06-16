@@ -246,7 +246,7 @@ bool DKRml::LoadHtml(const DKString& html){
 		document->GetOwnerDocument()->SetStyleSheetContainer(std::move(file_sheet));
 
 	//Finish loading the document
-	Rml::ElementUtilities::BindEventAttributes(document);
+	//Rml::ElementUtilities::BindEventAttributes(document);
 	Rml::PluginRegistry::NotifyDocumentLoad(document);
 	document->DispatchEvent(Rml::EventId::Load, Rml::Dictionary());
 	document->UpdateDocument();
