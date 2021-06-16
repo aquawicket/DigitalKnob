@@ -14,7 +14,7 @@
 
 static void addSound(Sound* root, Sound* snd);
 static void freeSound(Sound* sound);
-static Sound * createSound(const char* filename, uint8_t loop, int volume);
+static Sound* createSound(const char* filename, uint8_t loop, int volume);
 static inline void audioCallback(void* userdata, uint8_t* stream, int len);
 static PrivateAudioDevice* gDevice;
 
