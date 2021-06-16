@@ -148,10 +148,31 @@ endif()
 
 
 set(OPENAL ${3RDPARTY}/openal-1.15.1 CACHE PATH "" FORCE)
-if(EXISTS ${OPENAL}/${OS}/Release/OpenAL32.lib)
+if(EXISTS ${OPENAL}/win32/Release/OpenAL32.lib)
 # /I${OPENAL}/include/AL
 	set(OPENAL_INCLUDE_DIR ${OPENAL}/include CACHE PATH "" FORCE)
 	set(OPENAL_LIB_DIR ${OPENAL}/win32/Release CACHE PATH "" FORCE)
 	set(OPENAL_INCLUDE_DIRS "${OPENAL_INCLUDE_DIR}" CACHE PATH "" FORCE)
 	set(OPENAL_INCLUDE_DIRS "${OPENAL_INCLUDE_DIR}" "${OPENAL}/include/AL" CACHE PATH "" FORCE)
 endif()
+
+
+set(VORBIS ${3RDPARTY}/libvorbis-1.3.5 CACHE PATH "" FORCE)
+if(EXISTS ${VORBIS}/win32/Release/lib/.libs/libvorbis.lib)
+	set(VORBIS_INCLUDE_DIR ${VORBIS}/include CACHE PATH "" FORCE)
+endif()
+
+
+set(OGG ${3RDPARTY}/libogg-1.3.2 CACHE PATH "" FORCE)
+if(EXISTS ${OGG}/win32/Release/src/.libs/libogg.lib)
+	set(OGG_INCLUDE_DIR ${OGG}/include CACHE PATH "" FORCE)
+endif()
+
+
+set(SMPEG2 ${3RDPARTY}/smpeg2-2.0.0 CACHE PATH "" FORCE)
+if(EXISTS ${SMPEG2}/${OS}/lib/Release/libsmpeg2.lib)
+	set(SMPEG_INCLUDE_DIR=${SMPEG2} CACHE PATH "" FORCE)
+endif()
+
+
+

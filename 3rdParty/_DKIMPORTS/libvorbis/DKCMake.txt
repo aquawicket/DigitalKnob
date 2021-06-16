@@ -1,11 +1,11 @@
-### VERSION ###
-DKSET(VORBIS_VERSION libvorbis-1.3.5)
+## https://ftp.osuosl.org/pub/xiph/releases/vorbis/libvorbis-1.3.5.zip
 
+### VERSION ###
+DKSET(VORBIS_VERSION 1.3.5)
+DKSET(VORBIS ${3RDPARTY}/libvorbis-${VORBIS_VERSION})
 
 ### INSTALL ###
-DKINSTALL(https://ftp.osuosl.org/pub/xiph/releases/vorbis/${VORBIS_VERSION}.zip libvorbis ${VORBIS_VERSION})
-
-DKSET(VORBIS ${3RDPARTY}/${VORBIS_VERSION})
+DKINSTALL(https://ftp.osuosl.org/pub/xiph/releases/vorbis/libvorbis-${VORBIS_VERSION}.zip libvorbis libvorbis-${VORBIS_VERSION})
 
 
 ### LINK ###
@@ -36,68 +36,68 @@ export PATH=/${MSYS}/bin:$PATH\;
 ../../configure --disable-shared --enable-static --with-ogg-libraries=\"${OGG}/win32/Debug/src/.libs\" --with-ogg-includes=\"${OGG}/include\" 
 make 
 exit \n")
-DKRENAME(${VORBIS}/win32/Debug/lib/.libs/libvorbis.a ${VORBIS}/win32/Debug/lib/.libs/libvorbis.lib)
-DKRENAME(${VORBIS}/win32/Debug/lib/.libs/libvorbisfile.a ${VORBIS}/win32/Debug/lib/.libs/libvorbisfile.lib)
+DKRENAME(${VORBIS}/win32/Debug/lib/.libs/libvorbis.a libvorbis-${VORBIS_VERSION}/win32/Debug/lib/.libs/libvorbis.lib)
+DKRENAME(libvorbis-${VORBIS_VERSION}/win32/Debug/lib/.libs/libvorbisfile.a libvorbis-${VORBIS_VERSION}/win32/Debug/lib/.libs/libvorbisfile.lib)
 
 
-DKSETPATH(${VORBIS}/win32/Release)
+DKSETPATH(libvorbis-${VORBIS_VERSION}/win32/Release)
 WIN32_BASH("#!/bin/bash 
-cd ${VORBIS}/win32/Release 
+cd libvorbis-${VORBIS_VERSION}/win32/Release 
 export PATH=/${MINGW32}/bin:$PATH\;
 export PATH=/${MSYS}/bin:$PATH\;
 ../../configure --disable-shared --enable-static --with-ogg-libraries=\"${OGG}/win32/Release/src/.libs\" --with-ogg-includes=\"${OGG}/include\" 
 make 
 exit \n")
-DKRENAME(${VORBIS}/win32/Release/lib/.libs/libvorbis.a ${VORBIS}/win32/Release/lib/.libs/libvorbis.lib)
-DKRENAME(${VORBIS}/win32/Release/lib/.libs/libvorbisfile.a ${VORBIS}/win32/Release/lib/.libs/libvorbisfile.lib)
+DKRENAME(libvorbis-${VORBIS_VERSION}/win32/Release/lib/.libs/libvorbis.a libvorbis-${VORBIS_VERSION}/win32/Release/lib/.libs/libvorbis.lib)
+DKRENAME(libvorbis-${VORBIS_VERSION}/win32/Release/lib/.libs/libvorbisfile.a libvorbis-${VORBIS_VERSION}/win32/Release/lib/.libs/libvorbisfile.lib)
 
 
-DKSETPATH(${VORBIS}/win64)
-DKSETPATH(${VORBIS}/win64/Debug)
+DKSETPATH(libvorbis-${VORBIS_VERSION}/win64)
+DKSETPATH(libvorbis-${VORBIS_VERSION}/win64/Debug)
 WIN64_BASH("#!/bin/bash 
-cd ${VORBIS}/win64/Debug 
+cd libvorbis-${VORBIS_VERSION}/win64/Debug 
 export PATH=/${MINGW64}/bin:$PATH\;
 export PATH=/${MSYS}/bin:$PATH\;
 ../../configure --disable-shared --enable-static --with-ogg-libraries=\"${OGG}/win64/Debug/src/.libs\" --with-ogg-includes=\"${OGG}/include\" make 
 exit \n")
-DKRENAME(${VORBIS}/win64/Debug/lib/.libs/libvorbis.a ${VORBIS}/win64/Debug/lib/.libs/libvorbis.lib)
-DKRENAME(${VORBIS}/win64/Debug/lib/.libs/libvorbisfile.a ${VORBIS}/win64/Debug/lib/.libs/libvorbisfile.lib)
+DKRENAME(libvorbis-${VORBIS_VERSION}/win64/Debug/lib/.libs/libvorbis.a libvorbis-${VORBIS_VERSION}/win64/Debug/lib/.libs/libvorbis.lib)
+DKRENAME(libvorbis-${VORBIS_VERSION}/win64/Debug/lib/.libs/libvorbisfile.a libvorbis-${VORBIS_VERSION}/win64/Debug/lib/.libs/libvorbisfile.lib)
 
 
-DKSETPATH(${VORBIS}/win64/Release)
+DKSETPATH(libvorbis-${VORBIS_VERSION}/win64/Release)
 WIN64_BASH("#!/bin/bash 
-cd ${VORBIS}/win64/Release 
+cd libvorbis-${VORBIS_VERSION}/win64/Release 
 export PATH=/${MINGW64}/bin:$PATH\;
 export PATH=/${MSYS}/bin:$PATH\;
 ../../configure --disable-shared --enable-static --with-ogg-libraries=\"${OGG}/win64/Release/src/.libs\" --with-ogg-includes=\"${OGG}/include\" make 
 exit \n")
-DKRENAME(${VORBIS}/win64/Release/lib/.libs/libvorbis.a ${VORBIS}/win64/Release/lib/.libs/libvorbis.lib)
-DKRENAME(${VORBIS}/win64/Release/lib/.libs/libvorbisfile.a ${VORBIS}/win64/Release/lib/.libs/libvorbisfile.lib)
+DKRENAME(libvorbis-${VORBIS_VERSION}/win64/Release/lib/.libs/libvorbis.a libvorbis-${VORBIS_VERSION}/win64/Release/lib/.libs/libvorbis.lib)
+DKRENAME(libvorbis-${VORBIS_VERSION}/win64/Release/lib/.libs/libvorbisfile.a libvorbis-${VORBIS_VERSION}/win64/Release/lib/.libs/libvorbisfile.lib)
 
 
-DKSETPATH(${VORBIS}/${OS}/Debug)
+DKSETPATH(libvorbis-${VORBIS_VERSION}/${OS}/Debug)
 MAC_DEBUG_COMMAND(../../configure --disable-shared --enable-static --build=x86_64 --with-ogg-libraries=${OGG}/${OS}/Debug/src/.libs --with-ogg-includes=${OGG}/include)
 MAC_DEBUG_COMMAND(make "CXXFLAGS=-arch x86_64" "CFLAGS=-arch x86_64" "LDFLAGS=-arch x86_64")
 
-DKSETPATH(${VORBIS}/${OS}/Release)
+DKSETPATH(libvorbis-${VORBIS_VERSION}/${OS}/Release)
 MAC_RELEASE_COMMAND(../../configure --disable-shared --enable-static --build=x86_64 --with-ogg-libraries=${OGG}/${OS}/Release/src/.libs --with-ogg-includes=${OGG}/include)
 MAC_RELEASE_COMMAND(make "CXXFLAGS=-arch x86_64" "CFLAGS=-arch x86_64" "LDFLAGS=-arch x86_64")
 
 
-DKSETPATH(${VORBIS}/${OS}/Debug)
+DKSETPATH(libvorbis-${VORBIS_VERSION}/${OS}/Debug)
 IOSSIM_DEBUG_COMMAND(../../configure --disable-shared --enable-static --build=x86_64 --with-ogg-libraries=${OGG}/${OS}/Debug/src/.libs --with-ogg-includes=${OGG}/include)
 IOSSIM_DEBUG_COMMAND(make "CXXFLAGS=-arch x86_64" "CFLAGS=-arch x86_64" "LDFLAGS=-arch x86_64")
 
-DKSETPATH(${VORBIS}/${OS}/Release)
+DKSETPATH(libvorbis-${VORBIS_VERSION}/${OS}/Release)
 IOSSIM_RELEASE_COMMAND(../../configure --disable-shared --enable-static --build=x86_64 --with-ogg-libraries=${OGG}/${OS}/Release/src/.libs --with-ogg-includes=${OGG}/include)
 IOSSIM_RELEASE_COMMAND(make "CXXFLAGS=-arch x86_64" "CFLAGS=-arch x86_64" "LDFLAGS=-arch x86_64")
 
 
-DKSETPATH(${VORBIS}/${OS}/Debug)
+DKSETPATH(libvorbis-${VORBIS_VERSION}/${OS}/Debug)
 LINUX_DEBUG_COMMAND(../../configure --disable-shared --enable-static --with-ogg-libraries=${OGG}/${OS}/Debug/src/.libs --with-ogg-includes=${OGG}/include --disable-oggtest)
 LINUX_DEBUG_COMMAND(make)
 
-DKSETPATH(${VORBIS}/${OS}/Release)
+DKSETPATH(libvorbis-${VORBIS_VERSION}/${OS}/Release)
 LINUX_RELEASE_COMMAND(../../configure --disable-shared --enable-static --with-ogg-libraries=${OGG}/${OS}/Release/src/.libs --with-ogg-includes=${OGG}/include --disable-oggtest)
 LINUX_RELEASE_COMMAND(make)
 
