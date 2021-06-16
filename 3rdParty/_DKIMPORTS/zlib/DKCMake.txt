@@ -6,10 +6,13 @@ IF(NOT ANDROID)
 	DKSET(ZLIB_VERSION 1.2.11) ##https://www.zlib.net/fossils/zlib-1.2.11.tar.gz
 ENDIF()
 
+DKSET(ZLIB ${3RDPARTY}/zlib-${ZLIB_VERSION})
+DKSET(ZLIB_INCLUDE_DIR ${ZLIB})
+DKSET(ZLIB_LIBRARY ${ZLIB}/${OS}/Release/zlibstatic.lib)
+
 
 ### INSTALL ###
 DKINSTALL(https://www.zlib.net/fossils/zlib-${ZLIB_VERSION}.tar.gz zlib zlib-${ZLIB_VERSION})
-DKSET(ZLIB ${3RDPARTY}/zlib-${ZLIB_VERSION})
 
 
 ### LINK ###

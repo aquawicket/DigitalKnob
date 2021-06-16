@@ -13,4 +13,4 @@ DKSET(IMAGEMAGICK ${3RDPARTY}/${IMAGEMAGICK_VERSION})
 
 
 ### INSTALL ###
-DKINSTALL(http://ftp.icm.edu.pl/packages/ImageMagick/binaries/ImageMagick-${IMAGEMAGICK_VERSION}-portable-Q16-x86.zip ImageMagick-portable-Q16-x86 ${IMAGEMAGICK_VERSION})
+DKINSTALL(http://ftp.icm.edu.pl/packages/ImageMagick/binaries/ImageMagick-${IMAGEMAGICK_VERSION}-portable-Q16-x86.zip ImageMagick-portable-Q16-x86 ImageMagick-${IMAGEMAGICK_VERSION}-portable-Q16-x86)

@@ -1,4 +1,3 @@
-### DEPENDS ###
 IF(LINUX)
 	DKDEPEND(openal)
 	DKDEPEND(flac)
@@ -7,7 +6,17 @@ ENDIF()
 
 ### VERSION ### 
 DKSET(SFML_VERSION 2.4.2)
+
 DKSET(SFML ${3RDPARTY}/SFML-${SFML_VERSION})
+DKSET(SFML_INCLUDE_DIR=${SFML}/include)
+DKSET(SFML_MAIN_LIBRARY_DEBUG ${SFML}/${OS}/lib/Debug/sfml-main-d.lib)
+DKSET(SFML_MAIN_LIBRARY_RELEASE ${SFML}/${OS}/lib/Release/sfml-main.lib)
+DKSET(SFML_SYSTEM_LIBRARY_DEBUG ${SFML}/${OS}/lib/Debug/sfml-system-s-d.lib)
+DKSET(SFML_SYSTEM_LIBRARY_RELEASE ${SFML}/${OS}/lib/Debug/sfml-system-s.lib)
+DKSET(SFML_WINDOW_LIBRARY_DEBUG ${SFML}/${OS}/lib/Debug/sfml-window-s-d.lib)
+DKSET(SFML_WINDOW_LIBRARY_RELEASE ${SFML}/${OS}/lib/Release/sfml-window-s.lib)
+DKSET(SFML_GRAPHICS_LIBRARY_DEBUG ${SFML}/${OS}/lib/Debug/sfml-graphics-s-d.lib)
+DKSET(SFML_GRAPHICS_LIBRARY_RELEASE ${SFML}/${OS}/lib/Release/sfml-graphics-s.lib)
 
 
 ### INSTALL ###
