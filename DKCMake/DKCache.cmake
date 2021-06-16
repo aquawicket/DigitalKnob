@@ -1,10 +1,18 @@
 ## https://stackoverflow.com/a/31044116/688352
+
+## USAGE:  Place this cmake command into the command line for any DKCMake.txt build scripts using any of these these libraries
+##	-C${DKCMAKE}/DKCache.cmake
+##
+
+
 MESSAGE("################ DKCache.cmake ##################")
 
 #cmake_policy(SET CMP0074 NEW)
 #SET(OS win32)
 #project(HelloWorld C CXX)
 set(3RDPARTY "C:/Users/$ENV{USERNAME}/digitalknob/DK/3rdParty" CACHE PATH "" FORCE)
+
+##${STDINT}
 
 set(ZLIB ${3RDPARTY}/zlib-1.2.11 CACHE PATH "" FORCE)
 if(EXISTS ${ZLIB}/win32/Release/zlibstatic.lib)
@@ -128,14 +136,22 @@ if(EXISTS ${GLEW}/win32/lib/Release/libglew32.lib)
 endif()
 
 
-#set(OPENSSL ${3RDPARTY}/openssl-1.0.2h-vs2015 CACHE PATH "" FORCE)
-#if(EXISTS ${OPENSSL}/lib/ssleay32MT.lib)
-#	set(CMAKE_USE_OPENSSL ON CACHE BOOL "" FORCE)
-#	set(OPENSSL_INCLUDE_DIR ${OPENSSL}/include CACHE PATH "" FORCE)
-#	set(LIB_EAY_DEBUG ${OPENSSL}/lib/libeay32MTd.lib CACHE FILEPATH "" FORCE)
-#	set(LIB_EAY_RELEASE ${OPENSSL}/lib/libeay32MT.lib CACHE FILEPATH "" FORCE)
-#	set(SSL_EAY_DEBUG ${OPENSSL}/lib/ssleay32MTd.lib CACHE FILEPATH "" FORCE)
-#	set(SSL_EAY_RELEAS ${OPENSSL}/lib/ssleay32MT.lib CACHE FILEPATH "" FORCE)
-#endif()
+set(OPENSSL ${3RDPARTY}/openssl-1.0.2h-vs2015 CACHE PATH "" FORCE)
+if(EXISTS ${OPENSSL}/lib/ssleay32MT.lib)
+	set(CMAKE_USE_OPENSSL ON CACHE BOOL "" FORCE)
+	set(OPENSSL_INCLUDE_DIR ${OPENSSL}/include CACHE PATH "" FORCE)
+	set(LIB_EAY_DEBUG ${OPENSSL}/lib/libeay32MTd.lib CACHE FILEPATH "" FORCE)
+	set(LIB_EAY_RELEASE ${OPENSSL}/lib/libeay32MT.lib CACHE FILEPATH "" FORCE)
+	set(SSL_EAY_DEBUG ${OPENSSL}/lib/ssleay32MTd.lib CACHE FILEPATH "" FORCE)
+	set(SSL_EAY_RELEAS ${OPENSSL}/lib/ssleay32MT.lib CACHE FILEPATH "" FORCE)
+endif()
 
 
+set(OPENAL ${3RDPARTY}/openal-1.15.1 CACHE PATH "" FORCE)
+if(EXISTS ${OPENAL}/${OS}/Release/OpenAL32.lib)
+# /I${OPENAL}/include/AL
+	set(OPENAL_INCLUDE_DIR ${OPENAL}/include CACHE PATH "" FORCE)
+	set(OPENAL_LIB_DIR ${OPENAL}/win32/Release CACHE PATH "" FORCE)
+	set(OPENAL_INCLUDE_DIRS "${OPENAL_INCLUDE_DIR}" CACHE PATH "" FORCE)
+	set(OPENAL_INCLUDE_DIRS "${OPENAL_INCLUDE_DIR}" "${OPENAL}/include/AL" CACHE PATH "" FORCE)
+endif()

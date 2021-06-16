@@ -1,0 +1,12 @@
+## https://raw.githubusercontent.com/SummersEpsilon/msinttypes/master/msinttypes-r26.zip
+
+### VERSION ###
+DKSET(MSINTTYPES_VERSION r26)
+DKSET(MSINTTYPES ${3RDPARTY}/msinttypes-${MSINTTYPES})
+
+### INSTALL ###
+IF(NOT EXISTS ${3RDPARTY}/msinttypes-${MSINTTYPES})
+	DKSETPATH(${DIGITALKNOB}/Download)
+	## DKDOWNLOAD(www.internet.com/msinttypes-${MSINTTYPES}.zip) ## find an online link
+	DKEXTRACT(${DIGITALKNOB}/Download/msinttypes-${MSINTTYPES}.zip ${3RDPARTY}/msinttypes-${MSINTTYPES})
+ENDIF()

@@ -1,0 +1,2 @@
+IF(NOT EXISTS ${3RDPARTY}/msinttypes-r26)
+ENDIF()
