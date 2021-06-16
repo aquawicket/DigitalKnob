@@ -272,7 +272,7 @@ DKPlugin.prototype.init = function DKPlugin_init() {
 
 DKPlugin.prototype.end = function DKPlugin_end() {
     color = "color:rgb(250,150,150);"
-    console.log(" *** DKPlugin.prototype.end() ***", color);
+    console.log("%c *** DKPlugin.prototype.end() ***", color);
     //console.log("%c DKPlugin.prototype.end(): this = " + this.toString(), color);
     //console.log("%c DKPlugin.prototype.end(): this.constructor.name = " + this.constructor.name, color);
     //console.log("%c DKPlugin.prototype.end(): this.singleton = " + this.singleton, color);
@@ -371,7 +371,8 @@ DKPlugin.prototype.close = function DKPlugin_close() {
         }
     }
 
-    this.end();
+    //TODO - This can be handles by the user
+    //this.end();
     console.groupEnd();
 }
 

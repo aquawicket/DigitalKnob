@@ -329,7 +329,7 @@ function(DKEXECUTE_PROCESS fullcmnd)
 	message("")
 	message("*** Commands ***")
 	message(">  cd ${CDIR}")
-	set(cmnd ${fullcmnd} ${ARGN}) # Merge arguments together
+	set(cmnd ${fullcmnd} ${ARGN})
 	string(REPLACE "COMMAND" "" var2 "${cmnd}")
 	string(REPLACE "command" "" var3 "${var2}")
 	string(REPLACE "WORKING_DIRECTORY" " " var4 "${var3}")
@@ -347,7 +347,7 @@ endfunction()
 ##############################################################
 function(WIN_COMMAND arg)
 	if(WIN AND QUEUE_BUILD)
-		set(arg2 ${arg} ${ARGN}) # Merge arguments together
+		set(arg2 ${arg} ${ARGN})
 		DKEXECUTE_PROCESS(COMMAND cmd /c ${arg2} WORKING_DIRECTORY ${CURRENT_DIR})
 	endif()	
 endfunction()
@@ -355,7 +355,7 @@ endfunction()
 ###########################
 function(WIN32_COMMAND arg)
 	if(WIN_32 AND QUEUE_BUILD)
-		set(arg2 ${arg} ${ARGN}) # Merge arguments together
+		set(arg2 ${arg} ${ARGN})
 		WIN_COMMAND(${arg2})
 	endif()	
 endfunction()
@@ -363,7 +363,7 @@ endfunction()
 ###########################
 function(WIN64_COMMAND arg)
 	if(WIN_64 AND QUEUE_BUILD)
-		set(arg2 ${arg} ${ARGN}) # Merge arguments together
+		set(arg2 ${arg} ${ARGN})
 		WIN_COMMAND(${arg2})
 	endif()
 endfunction()
@@ -393,7 +393,7 @@ endfunction()
 #########################
 function(MAC_COMMAND arg)
 	if(MAC AND QUEUE_BUILD)
-		set(arg2 ${arg} ${ARGN}) # Merge arguments together
+		set(arg2 ${arg} ${ARGN})
 		DKEXECUTE_PROCESS(COMMAND ${arg2} WORKING_DIRECTORY ${CURRENT_DIR})
 	endif()
 endfunction()
@@ -401,7 +401,7 @@ endfunction()
 ###############################
 function(MAC_DEBUG_COMMAND arg)
 	if(MAC AND DEBUG AND QUEUE_BUILD)
-		set(arg2 ${arg} ${ARGN}) # Merge arguments together
+		set(arg2 ${arg} ${ARGN})
 		MAC_COMMAND(${arg2})
 	endif()
 endfunction()
@@ -409,7 +409,7 @@ endfunction()
 #################################
 function(MAC_RELEASE_COMMAND arg)
 	if(MAC AND RELEASE AND QUEUE_BUILD)
-		set(arg2 ${arg} ${ARGN}) # Merge arguments together
+		set(arg2 ${arg} ${ARGN})
 		MAC_COMMAND(${arg2})
 	endif()
 endfunction()
@@ -417,7 +417,7 @@ endfunction()
 ###########################
 function(MAC32_COMMAND arg)
 	if(MAC_32 AND QUEUE_BUILD)
-		set(arg2 ${arg} ${ARGN}) # Merge arguments together
+		set(arg2 ${arg} ${ARGN})
 		MAC_COMMAND(${arg2})
 	endif()
 endfunction()
@@ -425,7 +425,7 @@ endfunction()
 ###########################
 function(MAC64_COMMAND arg)
 	if(MAC_64 AND QUEUE_BUILD)
-		set(arg2 ${arg} ${ARGN}) # Merge arguments together
+		set(arg2 ${arg} ${ARGN})
 		MAC_COMMAND(${arg2})
 	endif()
 endfunction()
@@ -433,7 +433,7 @@ endfunction()
 #########################
 function(IOS_COMMAND arg)
 	if(IOS AND QUEUE_BUILD)
-		set(arg2 ${arg} ${ARGN}) # Merge arguments together
+		set(arg2 ${arg} ${ARGN})
 		DKEXECUTE_PROCESS(COMMAND ${arg2} WORKING_DIRECTORY ${CURRENT_DIR})
 	endif()
 endfunction()
@@ -441,7 +441,7 @@ endfunction()
 ###############################
 function(IOS_DEBUG_COMMAND arg)
 	if(IOS AND DEBUG AND QUEUE_BUILD)
-		set(arg2 ${arg} ${ARGN}) # Merge arguments together
+		set(arg2 ${arg} ${ARGN})
 		IOS_COMMAND(${arg2})
 	endif()
 endfunction()
@@ -449,7 +449,7 @@ endfunction()
 ###############################
 function(IOS_RELEASE_COMMAND arg)
 	if(IOS AND RELEASE AND QUEUE_BUILD)
-		set(arg2 ${arg} ${ARGN}) # Merge arguments together
+		set(arg2 ${arg} ${ARGN})
 		IOS_COMMAND(${arg2})
 	endif()
 endfunction()
@@ -457,7 +457,7 @@ endfunction()
 ###########################
 function(IOS32_COMMAND arg)
 	if(IOS_32 AND QUEUE_BUILD)
-		set(arg2 ${arg} ${ARGN}) # Merge arguments together
+		set(arg2 ${arg} ${ARGN})
 		IOS_COMMAND(${arg2})
 	endif()
 endfunction()
@@ -465,7 +465,7 @@ endfunction()
 ###########################
 function(IOS64_COMMAND arg)
 	if(IOS_64 AND QUEUE_BUILD)
-		set(arg2 ${arg} ${ARGN}) # Merge arguments together
+		set(arg2 ${arg} ${ARGN})
 		IOS_COMMAND(${arg2})
 	endif()
 endfunction()
@@ -473,7 +473,7 @@ endfunction()
 ############################
 function(IOSSIM_COMMAND arg)
 	if(IOSSIM AND QUEUE_BUILD)
-		set(arg2 ${arg} ${ARGN}) # Merge arguments together
+		set(arg2 ${arg} ${ARGN})
 		DKEXECUTE_PROCESS(COMMAND ${arg2} WORKING_DIRECTORY ${CURRENT_DIR})
 	endif()
 endfunction()
@@ -481,7 +481,7 @@ endfunction()
 ##################################
 function(IOSSIM_DEBUG_COMMAND arg)
 	if(IOSSIM AND DEBUG AND QUEUE_BUILD)
-		set(arg2 ${arg} ${ARGN}) # Merge arguments together
+		set(arg2 ${arg} ${ARGN})
 		IOSSIM_COMMAND(${arg2})
 	endif()
 endfunction()
@@ -489,7 +489,7 @@ endfunction()
 ####################################
 function(IOSSIM_RELEASE_COMMAND arg)
 	if(IOSSIM AND RELEASE AND QUEUE_BUILD)
-		set(arg2 ${arg} ${ARGN}) # Merge arguments together
+		set(arg2 ${arg} ${ARGN})
 		IOSSIM_COMMAND(${arg2})
 	endif()
 endfunction()
@@ -497,7 +497,7 @@ endfunction()
 ##############################
 function(IOSSIM32_COMMAND arg)
 	if(IOSSIM_32 AND QUEUE_BUILD)
-		set(arg2 ${arg} ${ARGN}) # Merge arguments together
+		set(arg2 ${arg} ${ARGN})
 		IOSSIM_COMMAND(${arg2})
 	endif()
 endfunction()
@@ -505,7 +505,7 @@ endfunction()
 ##############################
 function(IOSSIM64_COMMAND arg)
 	if(IOSSIM_64 AND QUEUE_BUILD)
-		set(arg2 ${arg} ${ARGN}) # Merge arguments together
+		set(arg2 ${arg} ${ARGN})
 		IOSSIM_COMMAND(${arg2})
 	endif()
 endfunction()
@@ -516,7 +516,7 @@ endfunction()
 ###########################
 function(LINUX_COMMAND arg)
 	if(LINUX AND QUEUE_BUILD)
-		set(arg2 ${arg} ${ARGN}) # Merge arguments together
+		set(arg2 ${arg} ${ARGN})
 		DKEXECUTE_PROCESS(COMMAND ${arg2} WORKING_DIRECTORY ${CURRENT_DIR})
 	endif()
 endfunction()
@@ -524,7 +524,7 @@ endfunction()
 #################################
 function(LINUX_DEBUG_COMMAND arg)
 	if(LINUX AND DEBUG AND QUEUE_BUILD)
-		set(arg2 ${arg} ${ARGN}) # Merge arguments together
+		set(arg2 ${arg} ${ARGN})
 		LINUX_COMMAND(${arg2})
 	endif()
 endfunction()
@@ -532,7 +532,7 @@ endfunction()
 ###################################
 function(LINUX_RELEASE_COMMAND arg)
 	if(LINUX AND RELEASE AND QUEUE_BUILD)
-		set(arg2 ${arg} ${ARGN}) # Merge arguments together
+		set(arg2 ${arg} ${ARGN})
 		LINUX_COMMAND(${arg2})
 	endif()
 endfunction()
@@ -540,7 +540,7 @@ endfunction()
 #############################
 function(LINUX32_COMMAND arg)
 	if(LINUX_32 AND QUEUE_BUILD)
-		set(arg2 ${arg} ${ARGN}) # Merge arguments together
+		set(arg2 ${arg} ${ARGN})
 		LINUX_COMMAND(${arg2})
 	endif()
 endfunction()
@@ -548,7 +548,7 @@ endfunction()
 ###################################
 function(LINUX32_DEBUG_COMMAND arg)
 	if(LINUX_32 AND DEBUG AND QUEUE_BUILD)
-		set(arg2 ${arg} ${ARGN}) # Merge arguments together
+		set(arg2 ${arg} ${ARGN})
 		LINUX_COMMAND(${arg2})
 	endif()
 endfunction()
@@ -556,7 +556,7 @@ endfunction()
 #####################################
 function(LINUX32_RELEASE_COMMAND arg)
 	if(LINUX_32 AND RELEASE AND QUEUE_BUILD)
-		set(arg2 ${arg} ${ARGN}) # Merge arguments together
+		set(arg2 ${arg} ${ARGN})
 		LINUX_COMMAND(${arg2})
 	endif()
 endfunction()
@@ -564,7 +564,7 @@ endfunction()
 #############################
 function(LINUX64_COMMAND arg)
 	if(LINUX_64 AND QUEUE_BUILD)
-		set(arg2 ${arg} ${ARGN}) # Merge arguments together
+		set(arg2 ${arg} ${ARGN})
 		LINUX_COMMAND(${arg2})
 	endif()
 endfunction()
@@ -572,7 +572,7 @@ endfunction()
 ###################################
 function(LINUX64_DEBUG_COMMAND arg)
 	if(LINUX_64 AND DEBUG AND QUEUE_BUILD)
-		set(arg2 ${arg} ${ARGN}) # Merge arguments together
+		set(arg2 ${arg} ${ARGN})
 		LINUX_COMMAND(${arg2})
 	endif()
 endfunction()
@@ -580,7 +580,7 @@ endfunction()
 #####################################
 function(LINUX64_RELEASE_COMMAND arg)
 	if(LINUX_64 AND RELEASE AND QUEUE_BUILD)
-		set(arg2 ${arg} ${ARGN}) # Merge arguments together
+		set(arg2 ${arg} ${ARGN})
 		LINUX_COMMAND(${arg2})
 	endif()
 endfunction()
@@ -591,7 +591,7 @@ endfunction()
 #############################
 function(ANDROID_COMMAND arg)
 	if(ANDROID AND QUEUE_BUILD)
-		set(arg2 ${arg} ${ARGN}) # Merge arguments together
+		set(arg2 ${arg} ${ARGN})
 		DKEXECUTE_PROCESS(COMMAND cmd /c ${arg2} WORKING_DIRECTORY ${CURRENT_DIR})
 	endif()
 endfunction()
@@ -599,7 +599,7 @@ endfunction()
 ###################################
 function(ANDROID_DEBUG_COMMAND arg)
 	if(ANDROID AND DEBUG AND QUEUE_BUILD)
-		set(arg2 ${arg} ${ARGN}) # Merge arguments together
+		set(arg2 ${arg} ${ARGN})
 		ANDROID_COMMAND(${arg2})
 	endif()
 endfunction()
@@ -607,7 +607,7 @@ endfunction()
 #####################################
 function(ANDROID_RELEASE_COMMAND arg)
 	if(ANDROID AND RELEASE AND QUEUE_BUILD)
-		set(arg2 ${arg} ${ARGN}) # Merge arguments together
+		set(arg2 ${arg} ${ARGN})
 		ANDROID_COMMAND(${arg2})
 	endif()
 endfunction()
@@ -615,7 +615,7 @@ endfunction()
 ###############################
 function(ANDROID32_COMMAND arg)
 	if(ANDROID_32 AND QUEUE_BUILD)
-		set(arg2 ${arg} ${ARGN}) # Merge arguments together
+		set(arg2 ${arg} ${ARGN})
 		ANDROID_COMMAND(${arg2})
 	endif()
 endfunction()
@@ -623,7 +623,7 @@ endfunction()
 ###############################
 function(ANDROID64_COMMAND arg)
 	if(ANDROID_64 AND QUEUE_BUILD)
-		set(arg2 ${arg} ${ARGN}) # Merge arguments together
+		set(arg2 ${arg} ${ARGN})
 		ANDROID_COMMAND(${arg2})
 	endif()
 endfunction()
@@ -639,7 +639,7 @@ endfunction()
 ############################
 function(ANDROID32_BASH arg)
 	if(ANDROID_32 AND QUEUE_BUILD)
-		set(arg2 ${arg} ${ARGN}) # Merge arguments together
+		set(arg2 ${arg} ${ARGN})
 		ANDROID_BASH(${arg2})
 	endif()
 endfunction()
@@ -647,7 +647,7 @@ endfunction()
 ############################
 function(ANDROID64_BASH arg)
 	if(ANDROID_64 AND QUEUE_BUILD)
-		set(arg2 ${arg} ${ARGN}) # Merge arguments together
+		set(arg2 ${arg} ${ARGN})
 		ANDROID_BASH(${arg2})
 	endif()
 endfunction()
@@ -658,7 +658,7 @@ endfunction()
 ###############################
 function(RASPBERRY_COMMAND arg)
 	if(RASPBERRY AND QUEUE_BUILD)
-		set(arg2 ${arg} ${ARGN}) # Merge arguments together
+		set(arg2 ${arg} ${ARGN})
 		DKEXECUTE_PROCESS(COMMAND ${arg2} WORKING_DIRECTORY ${CURRENT_DIR})
 	endif()
 endfunction()
@@ -666,7 +666,7 @@ endfunction()
 #####################################
 function(RASPBERRY_DEBUG_COMMAND arg)
 	if(RASPBERRY AND DEBUG AND QUEUE_BUILD)
-		set(arg2 ${arg} ${ARGN}) # Merge arguments together
+		set(arg2 ${arg} ${ARGN})
 		RASPBERRY_COMMAND(${arg2})
 	endif()
 endfunction()
@@ -674,7 +674,7 @@ endfunction()
 #######################################
 function(RASPBERRY_RELEASE_COMMAND arg)
 	if(RASPBERRY AND RELEASE AND QUEUE_BUILD)
-		set(arg2 ${arg} ${ARGN}) # Merge arguments together
+		set(arg2 ${arg} ${ARGN})
 		RASPBERRY_COMMAND(${arg2})
 	endif()
 endfunction()
@@ -682,7 +682,7 @@ endfunction()
 #################################
 function(RASPBERRY32_COMMAND arg)
 	if(RASPBERRY_32 AND QUEUE_BUILD)
-		set(arg2 ${arg} ${ARGN}) # Merge arguments together
+		set(arg2 ${arg} ${ARGN})
 		RASPBERRY_COMMAND(${arg2})
 	endif()
 endfunction()
@@ -690,7 +690,7 @@ endfunction()
 #######################################
 function(RASPBERRY32_DEBUG_COMMAND arg)
 	if(RASPBERRY_32 AND DEBUG AND QUEUE_BUILD)
-		set(arg2 ${arg} ${ARGN}) # Merge arguments together
+		set(arg2 ${arg} ${ARGN})
 		RASPBERRY_COMMAND(${arg2})
 	endif()
 endfunction()
@@ -698,7 +698,7 @@ endfunction()
 #########################################
 function(RASPBERRY32_RELEASE_COMMAND arg)
 	if(RASPBERRY_32 AND RELEASE AND QUEUE_BUILD)
-		set(arg2 ${arg} ${ARGN}) # Merge arguments together
+		set(arg2 ${arg} ${ARGN})
 		RASPBERRY_COMMAND(${arg2})
 	endif()
 endfunction()
@@ -706,7 +706,7 @@ endfunction()
 #################################
 function(RASPBERRY64_COMMAND arg)
 	if(RASPBERRY_64 AND QUEUE_BUILD)
-		set(arg2 ${arg} ${ARGN}) # Merge arguments together
+		set(arg2 ${arg} ${ARGN})
 		RASPBERRY_COMMAND(${arg2})
 	endif()
 endfunction()
@@ -714,7 +714,7 @@ endfunction()
 #######################################
 function(RASPBERRY64_DEBUG_COMMAND arg)
 	if(RASPBERRY_64 AND DEBUG AND QUEUE_BUILD)
-		set(arg2 ${arg} ${ARGN}) # Merge arguments together
+		set(arg2 ${arg} ${ARGN})
 		RASPBERRY_COMMAND(${arg2})
 	endif()
 endfunction()
@@ -722,7 +722,7 @@ endfunction()
 #########################################
 function(RASPBERRY64_RELEASE_COMMAND arg)
 	if(RASPBERRY_64 AND RELEASE AND QUEUE_BUILD)
-		set(arg2 ${arg} ${ARGN}) # Merge arguments together
+		set(arg2 ${arg} ${ARGN})
 		RASPBERRY_COMMAND(${arg2})
 	endif()
 endfunction()

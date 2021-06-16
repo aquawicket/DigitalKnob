@@ -15,11 +15,10 @@ DKFrame.prototype.create = function DKFrame_create(obj) {
     let element;
     if (obj instanceof DKFrame)
         type = "DKFrame"
-    else if (obj instanceof HTMLElement){
+    else if (obj instanceof HTMLElement) {
         type = "HTMLElement"
         element = obj;
-    }
-    else if (obj instanceof DKPlugin)
+    } else if (obj instanceof DKPlugin)
         type = "DKPlugin"
     else if (obj.dkplugin)
         type = "DKPlugin"
@@ -33,11 +32,10 @@ DKFrame.prototype.create = function DKFrame_create(obj) {
     console.debug("DKFrame.prototype.create(" + type + ")")
 
     instance = DKPlugin(DKFrame)
-    
 
     if (obj instanceof HTMLElement)
         element = obj;
-    else{
+    else {
         for (let key in obj) {
             if (obj[key]instanceof HTMLElement) {
                 //obj.id && (id = obj.id);
@@ -48,7 +46,6 @@ DKFrame.prototype.create = function DKFrame_create(obj) {
         }
     }
 
-
     obj.dkplugin && (instance.dkplugin = obj);
     obj.dkframe = instance;
 
@@ -58,10 +55,8 @@ DKFrame.prototype.create = function DKFrame_create(obj) {
     !height.includes("%") && (height = parseInt(height));
 
     instance.frame = instance.createFrame("New Window", width, height);
-
     instance.frame.content = element;
-    instance.frame.content.setAttribute("dk_frame", "content");
-    instance.frame.content.style = {
+    Object.assign(instance.frame.content, {
         position: "absolute",
         top: "21rem",
         bottom: "0rem",
@@ -69,7 +64,8 @@ DKFrame.prototype.create = function DKFrame_create(obj) {
         right: "0rem",
         width: "unset",
         height: "unset"
-    }
+    })
+    instance.frame.content.setAttribute("dk_frame", "content");
     instance.frame.appendChild(instance.frame.content);
     DKPlugin("DKGui/DKResize.js", function(DKClass) {
         instance.resize = DKClass.prototype.createBox(instance.frame);

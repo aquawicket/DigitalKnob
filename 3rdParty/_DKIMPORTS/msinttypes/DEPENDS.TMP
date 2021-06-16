@@ -1,2 +1,0 @@
-IF(NOT EXISTS ${3RDPARTY}/msinttypes-${MSINTTYPES})
-ENDIF()
