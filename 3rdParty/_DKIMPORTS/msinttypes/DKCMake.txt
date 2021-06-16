@@ -2,11 +2,9 @@
 
 ### VERSION ###
 DKSET(MSINTTYPES_VERSION r26)
-DKSET(MSINTTYPES ${3RDPARTY}/msinttypes-${MSINTTYPES})
+DKSET(MSINTTYPES_NAME msinttypes-${MSINTTYPES_VERSION})
+DKSET(MSINTTYPES ${3RDPARTY}/${MSINTTYPES_NAME})
+
 
 ### INSTALL ###
-IF(NOT EXISTS ${3RDPARTY}/msinttypes-${MSINTTYPES})
-	DKSETPATH(${DIGITALKNOB}/Download)
-	## DKDOWNLOAD(www.internet.com/msinttypes-${MSINTTYPES}.zip) ## find an online link
-	DKEXTRACT(${DIGITALKNOB}/Download/msinttypes-${MSINTTYPES}.zip ${3RDPARTY}/msinttypes-${MSINTTYPES})
-ENDIF()
+DKINSTALL(https://raw.githubusercontent.com/SummersEpsilon/msinttypes/master/${MSINTTYPES_NAME}.zip msinttypes ${MSINTTYPES_NAME})
