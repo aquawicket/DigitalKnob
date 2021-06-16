@@ -3,6 +3,7 @@
 ## USAGE:  Place this cmake command into the command line for any DKCMake.txt build scripts using any of these these libraries
 ##	-C${DKCMAKE}/DKCache.cmake
 ##
+## Also note that cmake DOES accept multiple -C'cacheFile' commands at a time, so we can split these up later.
 
 
 MESSAGE("################ DKCache.cmake ##################")
