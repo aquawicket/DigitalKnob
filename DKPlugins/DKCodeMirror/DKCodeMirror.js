@@ -56,7 +56,7 @@ DKCodeMirror.prototype.create = function DKCodeMirror_create(DKCodeMirror_create
 
 DKCodeMirror.prototype.createOpen = function DKCodeMirror_createOpen(file, DKCodeMirror_createOpen_callback) {
     this.create(function(instance) {
-        instance.frame.setTitle("DKCodeMirror - " + file);
+        instance.dkframe.setTitle("DKCodeMirror - " + file);
         instance.currentfile = file;
         dk.file.fileToString(file, function(str) {
             instance.myCodeMirror.setValue(str);

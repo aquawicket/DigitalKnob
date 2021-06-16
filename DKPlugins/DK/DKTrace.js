@@ -11,7 +11,7 @@ DKTrace.prototype.editFile = function dk_trace_editFile(file, line, ch) {
 
     DKPlugin("DKCodeMirror/DKCodeMirror.js", function dk_create() {
         DKCodeMirror.prototype.createOpen(file, function dk_codemirror_createOpen_callback(instance) {
-            dk.codemirror.highlightError(instance, line, ch);
+            instance.highlightError(instance, line, ch);
         });
     });
 
