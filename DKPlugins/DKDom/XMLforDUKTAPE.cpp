@@ -1,4 +1,8 @@
 #include <duktape.h>
+
+/*
+
+
 #include <tinyxml2.h>
 
 using namespace tinyxml2;
@@ -649,3 +653,6 @@ duk_ret_t dukopen_xml(duk_context *ctx)
 	duk_put_function_list(ctx, -1, xml_module);
 	return 1;
 }
+
+
+*/

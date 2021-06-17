@@ -1,4 +1,7 @@
-## TODO
+if(NOT CMAKE_HOST_WIN32)
+	return()
+endif
+
 
 ## VERSION ###
 DKSET(GIT_VERSION Gitv0.0.0)
