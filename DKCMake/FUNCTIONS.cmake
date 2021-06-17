@@ -251,8 +251,10 @@ function(DKINSTALL url import_folder 3rdparty_folder)
 		
 	#Make sure is it an archive before extracting
 	DKSET(ARCHIVE ON)
-	##get_filename_component(extention ${url} LAST_EXT)
-	cmake_path(GET url EXTENSION LAST_ONLY extention)
+	
+	get_filename_component(extention ${url} EXT)         # linux32 latest cmake version 3.10
+	##get_filename_component(extention ${url} LAST_EXT)  #LAST_EXT cmake 3.14+ 
+	##cmake_path(GET url EXTENSION LAST_ONLY extention)  #cmake 3.19+
 	
 	DKSET(FILETYPE "UNKNOWN")
 	if(NOT ${extention} STREQUAL "")
