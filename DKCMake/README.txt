@@ -37,7 +37,7 @@
 ****************************************************
 
 *** SOURCE DIRECTORY ****
-/digitalknob      ( I.E.  C:/Users/username/digitalknob for windows.. ,wherever the digitalknob folder resides on your system )
+/digitalknob      ( I.E.  C:/Users/username/digitalknob for windows.. ,where the digitalknob folder resides on your system )
 
 *** BINARY DIRECTORY ****
 /digitalknob/DKApps/DKCore/win32   ( By setting the binary directory to be win32, most variables will be casted )
@@ -54,5 +54,5 @@ Q. How do I add an App
 A. For now, copy the DKApps/DKTemplate folder to DKApps/MyApp.  DK should be able to pick up the rest.
 
 Q. I'm still having so many issues..  what else can I do.
-A. Contact me..    aquawicket@hotmail.com
+A. Contact me..    *email hidden*  just message me here ;)
 
