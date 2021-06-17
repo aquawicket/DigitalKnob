@@ -71,7 +71,7 @@ function(DKDOWNLOAD arg)
 		set(filename ${ARGV1})
 	endif()
 	if(NOT EXISTS ${CURRENT_DIR}/${filename})
-		message(STATUS "downloading... ${filename}")
+		message(STATUS "downloading... ${arg}")
 		file(DOWNLOAD ${arg} ${CURRENT_DIR}/${filename} SHOW_PROGRESS 
 			#no TIMEOUT
 			STATUS status 
