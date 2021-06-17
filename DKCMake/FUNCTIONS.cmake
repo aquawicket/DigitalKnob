@@ -2175,6 +2175,16 @@ function(DKRUNDEPENDS arg)
 		DKREMOVE(${PATHTOPLUGIN}/DEPENDS.TMP)
 	endif()
 	
+	list(FIND DKPLUGS "${arg} ${args}" _index)
+	if(${_index} GREATER -1)
+		return()
+	endif()
+		
+	list(FIND DKPLUGS "${arg}" _index)
+	if(${_index} GREATER -1)
+		return() ## If the include is already in the list, return.
+	endif()
+	
 	if(${num_extra_args} GREATER 0)
 		DKSET(DKPLUGS ${DKPLUGS} "${arg} ${arg2}")  #Add to list
 	else()
@@ -2225,6 +2235,16 @@ function(DKBRUTEDEPENDS arg)
 	list(LENGTH extra_args num_extra_args)
 	if(${num_extra_args} GREATER 0)
 		list(GET extra_args 0 arg2)
+	endif()
+	
+	list(FIND DKPLUGS "${arg} ${args}" _index)
+	if(${_index} GREATER -1)
+		return()
+	endif()
+		
+	list(FIND DKPLUGS "${arg}" _index)
+	if(${_index} GREATER -1)
+		return() ## If the include is already in the list, return.
 	endif()
 	
 	if(${num_extra_args} GREATER 0)
