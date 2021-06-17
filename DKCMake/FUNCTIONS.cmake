@@ -247,11 +247,12 @@ function(DKINSTALL url import_folder 3rdparty_folder)
 	
 	DKSET(CURRENT_DIR ${DIGITALKNOB}/Download)
 	DKDOWNLOAD(${url})
-	get_filename_component(filename ${url} NAME)
+	##get_filename_component(filename ${url} NAME)
 		
 	#Make sure is it an archive before extracting
 	DKSET(ARCHIVE ON)
-	get_filename_component(extention ${url} LAST_EXT)
+	##get_filename_component(extention ${url} LAST_EXT)
+	cmake_path(GET url EXTENSION LAST_ONLY extention)
 	
 	DKSET(FILETYPE "UNKNOWN")
 	if(NOT ${extention} STREQUAL "")
