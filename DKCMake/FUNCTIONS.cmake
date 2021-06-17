@@ -247,7 +247,6 @@ function(DKINSTALL url import_folder 3rdparty_folder)
 	
 	DKSET(CURRENT_DIR ${DIGITALKNOB}/Download)
 	DKDOWNLOAD(${url})
-	##get_filename_component(filename ${url} NAME)
 		
 	#Make sure is it an archive before extracting
 	DKSET(ARCHIVE ON)
@@ -286,6 +285,7 @@ function(DKINSTALL url import_folder 3rdparty_folder)
 			DKSET(FILETYPE "Archive")
 		endif()
 	endif()
+	get_filename_component(filename ${url} NAME)
 	##If the file type is unknown, we'll still try to extract it like a compressed file anyway
 	##It's better the have a chance at success then to spend 2 hours dead in the water ;) 
 	message("The Downloaded file (${filename}) is a ${FILETYPE} file ${extention}")
