@@ -1063,6 +1063,7 @@ dk.sendRequest = function dk_sendRequest(httpMethod, url, dk_sendRequest_callbac
         return dk_sendRequest_callback(false, url, "ontimeout");
     }
 
+    console.debug("dk.sendRequest("+httpMethod+","+decodeURIComponent(url)+")")
     xhr.send();
 }
 
