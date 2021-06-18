@@ -2,6 +2,17 @@ var working = true;
 
 function DKBuildConsole_init() {
     CPP_DK_Create("DKBuild/DKBuild.js");
+	
+	let contents = CPP_DKFile_DirectoryContents(DKPATH);
+	let files = contents.split(",");
+	for(let i=0; i<files.length; i++){ 
+		if(CPP_DKFile_Exists(DKPATH+files[i]+"/DKApps")){
+			CPP_DKFile_ChDir(DKPATH+files[i])
+			const diff = CPP_DK_Execute("git diff")
+			if(diff)
+				console.log("*** THERE ARE CHANGES IN THE '"+files[i]+"' CODE BASE ***")
+		}
+	}
     while (working) {
         DKBuildConsole_Process();
     }

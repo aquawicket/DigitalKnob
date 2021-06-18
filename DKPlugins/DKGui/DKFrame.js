@@ -76,7 +76,7 @@ DKFrame.prototype.create = function DKFrame_create(obj) {
 }
 
 DKFrame.prototype.close = function DKFrame_close() {
-    this.resize.close && this.resize.close();
+    this.resize && this.resize.close && this.resize.close();
     this.dkplugin.close && this.dkplugin.close();
 }
 
