@@ -7,7 +7,6 @@ window.dk = new Object;
 let DUKTAPE = window.DUKTAPE
 dk.useCPP = false;
 
-/*
 //Keep a object reference to the old console
 if(!DUKTAPE) {
     dk.xconsole = new Object;
@@ -37,7 +36,6 @@ if(!DUKTAPE) {
         dk.x && dk.x.logger("warn", arguments);
     }
 }
-*/
 
 const required = function required() {
     for (let n = 0; n < arguments.length; n++) {
@@ -281,9 +279,11 @@ dk.getPlugin = function dk_getPlugin(url) {
     plugin.instance && (instanceCSS = "color: green;")
     plugin.init && (initCSS = "color: green;")
 
+    console.group("%cdk.plugin("+url+")" + plugin.name, "color:rgb(100,100,200);");
     console.debug("plugin.name: %c" + plugin.name, nameCSS);
     console.debug("plugin.instance: %c" + plugin.instance, instanceCSS);
     console.debug("plugin.init(): %c" + typeof plugin.init, initCSS);
+    console.groupEnd();
     return plugin;
 }
 

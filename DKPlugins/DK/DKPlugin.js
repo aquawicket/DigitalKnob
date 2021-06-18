@@ -123,7 +123,7 @@ DKPlugin.fromFile = function DKPlugin_fromFile(args, DKPlugin_fromFile_callback)
 }
 
 DKPlugin.fromClass = function DKPlugin_fromClass(args, DKPlugin_fromFile_callback) {
-    const color = "color:rgb(100,190,190);"
+    const color = "color:rgb(100,190,190)"
     console.log("%c *** DKPlugin.fromClass(" + args[0].name + ") ***", color);
     const klass = args[0]
     const klassName = klass.name
@@ -167,7 +167,7 @@ DKPlugin.fromClass = function DKPlugin_fromClass(args, DKPlugin_fromFile_callbac
     //dk.dump(instance2)
     
 
-    console.log("%c new "+instance.constructor.name, color)
+    //console.log("%c new "+instance.constructor.name, color)
     //console.log("%c DKPlugin.fromClass(): klass.name = " + klass.name, color)
     //console.log("%c DKPlugin.fromClass(): klass.singleton = " + klass.singleton, color)
     //console.log("%c DKPlugin.fromClass(): klass.prototype.singleton = " + klass.prototype.singleton, color)
