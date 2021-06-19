@@ -159,22 +159,26 @@ function DKGit_GitCredentials() {//TODO
 //we don't want to have to log in every time we need to commit.
 }
 
+
 // https://stackoverflow.com/questions/3258243/check-if-pull-needed-in-git
 // https://stackoverflow.com/questions/3258243/check-if-pull-needed-in-git#comment20583319_12791408
 // the total number of "different" commits between the current branch and server branch
 function DKGit_CheckForDiff(){
-	var contents = CPP_DKFile_DirectoryContents(DKPATH)
-    if (contents) {
-        var files = contents.split(",");
-        for (var i = 0; i < files.length; i++) {
-            if(CPP_DKFile_IsDirectory(files[i])) {
-				CPP_DKFile_ChDir(DKPATH + "/" + files[i])
-				//const result = CPP_DK_Execute(GIT + " rev-list HEAD...origin/master --count");
+	console.log("DKGit_CheckForDiff()")
+	let contents = CPP_DKFile_DirectoryContents(DKPATH);
+	let files = contents.split(",");
+	for(let i=0; i<files.length; i++){ 
+		if(CPP_DKFile_Exists(DKPATH+files[i]+"/DKApps")){
+				CPP_DKFile_ChDir(DKPATH + files[i])
+				console.log("Checking "+files[i]+" . . . ")
 				
+				//CPP_DK_Execute(GIT + " remote update")
+				CPP_DK_Execute(GIT + " fetch")
 				const upstream = "@{u}"
-				const local = CPP_DK_Execute(GIT + " git rev-parse @")
+				//const upstream = "origin/master"
+				const local = CPP_DK_Execute(GIT + " rev-parse @")
 				const remote = CPP_DK_Execute(GIT + " rev-parse " + upstream)
-				const base = CPP_DK_Execute(GIT + "merge-base @ " + upstream)
+				const base = CPP_DK_Execute(GIT + " merge-base @ " + upstream)
 				if(local === remote)
 					console.log("UP TO DATE")
 				else if(local === base)
@@ -183,20 +187,19 @@ function DKGit_CheckForDiff(){
 					console.log("NEED TO PUSH")
 				else
 					console.log("BRANCHES HAVE DIVERGED");
-			}
 		}
 	}
 }
 
-function DKGit_DifferenceCount(){
-	var contents = CPP_DKFile_DirectoryContents(DKPATH)
-    if (contents) {
-        var files = contents.split(",");
-        for (var i = 0; i < files.length; i++) {
-            if(CPP_DKFile_IsDirectory(files[i])) {
-				CPP_DKFile_ChDir(DKPATH + "/" + files[i])
-				const result = CPP_DK_Execute(GIT + " rev-list HEAD...origin/master --count");
-			}
+function DKGit_DiffCount(){
+	console.log("DKGit_DiffCount()")
+	let contents = CPP_DKFile_DirectoryContents(DKPATH);
+	let files = contents.split(",");
+	for(let i=0; i<files.length; i++){ 
+		if(CPP_DKFile_Exists(DKPATH+files[i]+"/DKApps")){
+			CPP_DKFile_ChDir(DKPATH + "/" + files[i])
+			const result = CPP_DK_Execute(GIT + " rev-list HEAD...origin/master --count");
+			console.log(result);
 		}
 	}
 }
