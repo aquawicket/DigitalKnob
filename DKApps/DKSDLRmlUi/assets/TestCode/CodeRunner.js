@@ -23,17 +23,11 @@ textarea.style.fontSize = "14px"
 textarea.style.color = "rgb(200,200,200)"
 textarea.style.backgroundColor = "rgb(30,30,30)"
 div.appendChild(textarea)
-dk.file.fileToString("USER/code.txt", function(result){
-	textarea.value = result;
+dk.file && dk.file.fileToString("USER/code.txt", function(result) {
+    textarea.value = result;
 })
-textarea.onchange = function(event){
-    console.log(textarea.value)
-    dk.file.stringToFile(textarea.value, "USER/code.txt", function(result){
-		console.log(result)
-	})
-	
-
-    //dk.file.stringToFile(codeMirror.getValue(), "USER/devtoolscode.js")
+textarea.onchange = function(event) {
+    dk.file.stringToFile(textarea.value, "USER/code.txt")
 }
 
 const button = document.createElement("button")
@@ -45,11 +39,44 @@ button.style.height = "20px"
 button.style.color = "rgb(20,20,20)"
 button.style.backgroundColor = "rgb(200,200,200)"
 button.innerHTML = "Run Code"
-button.onclick = function(event){
-	console.log("*** Running Code ***")
-    CPP_DK_RunDuktape(textarea.value)
+button.onclick = function(event) {
+    console.log("*** Running Code ***")
+    try {
+        eval(textarea.value);
+    } catch (err) {
+        console.error(err);
+    }
 }
-
-
 document.body.appendChild(button)
+
+
+const pushAssets = document.createElement("button")
+pushAssets.style.position = "absolute"
+pushAssets.style.top = "0px"
+pushAssets.style.left = "350px"
+pushAssets.style.width = "100px"
+pushAssets.style.height = "20px"
+pushAssets.style.color = "rgb(20,20,20)"
+pushAssets.style.backgroundColor = "rgb(200,200,200)"
+pushAssets.innerHTML = "Push Assets"
+pushAssets.onclick = function(event) {
+	dk.file.pushDKAssets()
+}
+document.body.appendChild(pushAssets)
+
+const pullAssets = document.createElement("button")
+pullAssets.style.position = "absolute"
+pullAssets.style.top = "0px"
+pullAssets.style.left = "200px"
+pullAssets.style.width = "100px"
+pullAssets.style.height = "20px"
+pullAssets.style.color = "rgb(20,20,20)"
+pullAssets.style.backgroundColor = "rgb(200,200,200)"
+pullAssets.innerHTML = "Pull Assets"
+pullAssets.onclick = function(event) {
+	dk.file.pushDKAssets()
+}
+document.body.appendChild(pullAssets)
+
+
 console.log("CodeRunner.js loaded")

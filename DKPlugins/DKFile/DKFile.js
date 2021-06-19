@@ -2,25 +2,30 @@
 //"use strict";
 
 //NOTE: initiator moved to the bottom and "singleton" removed for Duktape to work
-//dk.file = DKPlugin(DKFile, "singleton")
+//dk.file = DKPlugin(DKFile)
 
-DKFile = function DKFile() {
-	console.log("DKFile constructor")
+function DKFile() {
+    console.log("DKFile constructor")
 }
 
 DKFile.prototype.init = function DKFile_init() {
-    dk.file.appFilename = "";
-    dk.file.localAssets = "";
-    dk.file.onlineAssets = "";
+    //lets replace DK.js's version of fileToString to this one
+    if (!DUKTAPE)
+        dk.fileToString = dk.file.fileToString;
+
+    this.appFilename = "";
+    this.localAssets = "";
+    this.onlineAssets = "";
 
     // FIXME - temporary
-    if (dk.getJSEngine() === "Duktape") {
-        dk.file.onlineAssets = "C:/DKTasmota_Data/";
+    if (DUKTAPE) {
+        this.onlineAssets = "C:/DKTasmota_Data/";
         return;
     }
     if (dk.php) {
         dk.php.call("GET", "DKFile/DKFile.php", "getAssetsPath", function dk_php_getAssetsPath_callback(result) {
-            (dk.file.onlineAssets = result) //&& console.debug("dk.file.onlineAssets = " + result);
+            (dk.file.onlineAssets = result)
+            //&& console.debug("dk.file.onlineAssets = " + result);
         });
     }
 }
@@ -58,7 +63,7 @@ DKFile.prototype.makeDir = function DKFile_makeDir(path, mode, recursive, callba
     !mode && (mode = "0777");
     !recursive && (recursive = false);
     dk.file.isDir(path, function DKFile_isDir_callback(result) {
-        if (result){
+        if (result) {
             console.log("Directory already exists");
             return ok(callback, result);
         }
@@ -70,14 +75,66 @@ DKFile.prototype.makeDir = function DKFile_makeDir(path, mode, recursive, callba
     });
 }
 
-DKFile.prototype.pushDKAssets = function DKFile_pushDKAssets(callback) {
-    console.log("Pushing assets to local repository");
-    dk.php.call("POST", "DKFile/DKFile.php", "pushDKAssets", function dk_php_pushDKAssets_callback(result) {
-        if (!result)
-            return error("pushDKAssets failed", callback);
-        callback && callback(result);
-        return result
-    });
+if (!DUKTAPE) {
+    DKFile.prototype.pushDKAssets = function DKFile_pushDKAssets(callback) {
+        console.log("Pushing assets to local repository");
+        dk.php.call("POST", "DKFile/DKFile.php", "pushDKAssets", function dk_php_pushDKAssets_callback(result) {
+            if (!result)
+                return error("pushDKAssets failed", callback);
+            callback && callback(result);
+            return result
+        });
+    }
+} else {
+    DKFile.prototype.pushDKAssets = function DKFile_pushDKAssets(callback) {
+        //This is the js->cpp method
+        var assets = CPP_DKAssets_LocalAssets();
+        if (!assets) {
+            console.error("assets is invalid");
+            return false;
+        }
+        console.log("assets = " + assets);
+        var search = assets;
+        while (!CPP_DKFile_Exists(search + "/DK/DKPlugins")) {
+            var n = search.lastIndexOf("/");
+            if (n === -1) {
+                return error("could not locate a DKPlugins folder");
+            }
+            search = search.substring(0, n);
+            console.log(search + "");
+        }
+        DKPATH = search;
+        if (!CPP_DKFile_Exists(DKPATH)) {
+            return error("Could not find search");
+        }
+        var temp = CPP_DKFile_DirectoryContents(DKPATH);
+        if (!temp) {
+            console.log("dk.debug.PushDKFiles() variable temp is invalid");
+            return false;
+        }
+        var folders = temp.split(",");
+        var plugin_folders = [];
+        plugin_folders.push(DKPATH + "/DK/DKPlugins");
+        for (var n = 0; n < folders.length; n++) {
+            if (CPP_DKFile_Exists(DKPATH + "/" + folders[n] + "/DKPlugins"))
+                plugin_folders.push(DKPATH + "/" + folders[n] + "/DKPlugins");
+        }
+        for (var n = 0; n < plugin_folders.length; n++) {
+            plugin_folders[n] = CPP_DKFile_GetAbsolutePath(plugin_folders[n]);
+        }
+        var temp = CPP_DKFile_DirectoryContents(assets);
+        if (!temp) {
+            return error("temp is invalid");
+        }
+        var folders = temp.split(",");
+        for (var n = 0; n < folders.length; n++) {
+            for (var nn = 0; nn < plugin_folders.length; nn++) {
+                if (CPP_DKFile_Exists(plugin_folders[nn] + "/" + folders[n])) {
+                    CPP_DKFile_CopyFolder(assets + "/" + folders[n], plugin_folders[nn] + "/" + folders[n], true, true);
+                }
+            }
+        }
+    }
 }
 
 DKFile.prototype.pullDKAssets = function DKFile_pullDKAssets(callback) {
@@ -96,22 +153,20 @@ DKFile.prototype.exists = function DKFile_exists(url, callback, usePhp) {
         url = dk.file.onlineAssets + url;
     if (dk.php) {
         dk.php.call("GET", "DKFile/DKFile.php", "exists", url, function dk_php_exists_callback(result) {
-            if (result){
+            if (result) {
                 callback && callback(true);
                 return true;
-            }
-            else{
+            } else {
                 callback && callback(false);
                 return false;
             }
         });
     } else {
         dk.sendRequest("GET", url, function dk_sendRequest_callback(success, url, result) {
-            if (success && url && result){
+            if (success && url && result) {
                 callback && callback(true);
                 return true;
-            }
-            else{
+            } else {
                 callback && callback(false);
                 return false;
             }
@@ -351,9 +406,6 @@ if (!DUKTAPE) {
         return callback(str);
     }
 }
-//lets replace DK.js's version of fileToString to this one
-if(!DUKTAPE) 
-	dk.fileToString = dk.file.fileToString;
 
 if (!DUKTAPE) {
     DKFile.prototype.stringToFile = function DKFile_stringToFile(str, path, flags, callback) {
