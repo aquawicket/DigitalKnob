@@ -169,18 +169,24 @@ socket_close($socket);
 	
 }
 
+function test(){
+	return "test";
+}
+
 function debugFunc($var1, $var2, $var3)
 {
-	if(1){
+	if(1)
 		return error("An Error occured in Debug_Func!");
-	}
 	return $var2;
 }
 
-function GetServerInfo($param){
+function getServerInfo(){
+	return $_SERVER;
+	/*
 	if(isset($_SERVER[$param])){
 	    echo "$"."_SERVER[".$param."] = ".$_SERVER[$param];
 	}
+	*/
 }
 
 function getTime(){
