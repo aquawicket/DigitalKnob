@@ -1,42 +1,30 @@
 var GIT = "";
 
 function DKGit_init() {
-    DKGit_SetGitPath()
+    DKGit_SetGitExePath()
     DKGit_ValidateGit();
 }
 
-function DKGit_end() {}
-
-function DKGit_onevent(event) {}
-
-function DKGit_SetGitPath() {
-    if (CPP_DK_GetOS() === "Windows") {
-        GIT = "C:/Program Files/Git/bin/git.exe";
-        GIT = CPP_DKFile_GetShortName(GIT);
-        console.log("GIT: " + GIT);
-    }
-    if (CPP_DK_GetOS() === "Mac") {
+function DKGit_SetGitExePath() {
+    if (CPP_DK_GetOS() === "Windows")
+        GIT = CPP_DKFile_GetShortName("C:/Program Files/Git/bin/git.exe");
+    if (CPP_DK_GetOS() === "Mac")
         GIT = "git";
-    }
-    if (CPP_DK_GetOS() === "Linux") {
+    if (CPP_DK_GetOS() === "Linux")
         GIT = "/usr/bin/git";
-    }
-    if (CPP_DK_GetOS() === "Raspberry") {
+    if (CPP_DK_GetOS() === "Raspberry")
         GIT = "/usr/bin/git";
-    }
 }
 
 function DKGit_ValidateGit() {
-    //if(CPP_DK_GetBrowser() !== "RML"){ return; }
     console.log("Looking for GIT\n");
     if (!CPP_DKFile_Exists(GIT)) {
         DKGit_InstallGit();
-        DKGit_SetGitPath();
+        DKGit_SetGitExePath();
     }
 }
 
 function DKGit_InstallGit() {
-    //if(CPP_DK_GetBrowser() !== "RML"){ return; }
     console.log("Installing Git...\n");
     var assets = CPP_DKAssets_LocalAssets();
 
@@ -65,11 +53,6 @@ function DKGit_InstallGit() {
 }
 
 function DKGit_GitUpdate() {
-    //if(CPP_DK_GetBrowser() !== "CEF" && CPP_DK_GetBrowser() !== "RML"){
-    //	console.error("DKGit_GitUpdate(): Incompatable browser");
-    //	return;
-    //}
-
     console.log("Git Update DigitalKnob...\n");
 	if(!CPP_DKFile_Exists(DKPATH + "DK/.git")){
 		CPP_DK_Execute(GIT + " clone https://github.com/aquawicket/DigitalKnob.git " + DKPATH + "DK");
@@ -181,10 +164,9 @@ function DKGit_CheckForDiff(){
 				CPP_DKFile_ChDir(DKPATH + files[i])
 				console.log("Checking "+files[i]+" . . . ")
 				
-				//CPP_DK_Execute(GIT + " remote update")
+				CPP_DK_Execute(GIT + " commit -a -m \"commit from git\"")
 				CPP_DK_Execute(GIT + " fetch")
 				const upstream = "@{u}"
-				//const upstream = "origin/master"
 				const local = CPP_DK_Execute(GIT + " rev-parse @")
 				const remote = CPP_DK_Execute(GIT + " rev-parse " + upstream)
 				const base = CPP_DK_Execute(GIT + " merge-base @ " + upstream)
