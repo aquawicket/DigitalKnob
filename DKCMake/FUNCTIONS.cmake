@@ -234,69 +234,89 @@ function(DKLINKDIR arg)
 	link_directories(${arg})
 endfunction()
 
+
+function(assertdef VARNAME RESULT_NAME)
+    if(NOT DEFINED ${VARNAME})
+      message(SEND_ERROR "Error: the variable ${VARNAME} is not defined!")
+    endif()
+    set (${RESULT_NAME} ${VARNAME} PARENT_SCOPE)
+endfunction()
+
+
+function(dk_getExtension FILEPATH RESULT)
+	##message("dk_getExtension(${FILEPATH})")
+	string(FIND ${FILEPATH} "." index REVERSE)
+	string(SUBSTRING ${FILEPATH} ${index} -1 ext) 
+    set(${RESULT} ${ext} PARENT_SCOPE)
+endfunction()
+
+function(dk_dirIsEmpty DIRPATH RESULT)
+	if(NOT EXISTS ${DIRPATH})
+		message(SEND_ERROR "dk_dirIsEmpty(${DIRPATH}): the DIRPATH does not exist")
+	endif()
+	file(GLOB items RELATIVE "${DIRPATH}/" "${DIRPATH}/*")
+	list(LENGTH items count)
+	if(${count} GREATER 0)
+		set(${RESULT} false PARENT_SCOPE)
+		return()
+	endif()
+	set(${RESULT} true PARENT_SCOPE)
+endfunction()
+
 ######################################################
 function(DKINSTALL url import_folder 3rdparty_folder)
-	if(EXISTS ${3RDPARTY}/${3rdparty_folder})
-		file(GLOB items RELATIVE "${3RDPARTY}/${3rdparty_folder}/" "${3RDPARTY}/${3rdparty_folder}/*")
-		list(LENGTH items count)
-		##message("DKINSTALL(${import_folder}):  count = ${count}")
-		if(${count} GREATER 0)
-			return() #The folder exists and it has files in it, skip installation.
-		endif()
-	endif()	
-	
+
+	dk_dirIsEmpty(${3RDPARTY}/${3rdparty_folder} empty)
+	if(NOT ${empty})
+		return()
+	endif()
+
 	DKSET(CURRENT_DIR ${DIGITALKNOB}/Download)
 	DKDOWNLOAD(${url})
 		
-	#Make sure is it an archive before extracting
-	DKSET(ARCHIVE ON)
-	
-	get_filename_component(extention ${url} EXT)         # linux32 latest cmake version 3.10
-	##get_filename_component(extention ${url} LAST_EXT)  #LAST_EXT cmake 3.14+ 
-	##cmake_path(GET url EXTENSION LAST_ONLY extention)  #cmake 3.19+
+	##get_filename_component(extension ${url} EXT)         # linux32 latest cmake version 3.10
+	##get_filename_component(extension ${url} LAST_EXT)  #LAST_EXT cmake 3.14+ 
+	##cmake_path(GET url EXTENSION LAST_ONLY extension)  #cmake 3.19+
+	dk_getExtension(${url} extension)	
 	
 	DKSET(FILETYPE "UNKNOWN")
-	if(NOT ${extention} STREQUAL "")
-		if(${extention} STREQUAL ".exe")
+	if(NOT ${extension} STREQUAL "")
+		if(${extension} STREQUAL ".bz")
+			DKSET(FILETYPE "Archive")
+		endif()
+		if(${extension} STREQUAL ".bz2")
+			DKSET(FILETYPE "Archive")
+		endif()
+		if(${extension} STREQUAL ".exe")
 			DKSET(FILETYPE "Executable")
 		endif()
-		if(${extention} STREQUAL ".js")
+		if(${extension} STREQUAL ".gz")
+			DKSET(FILETYPE "Archive")
+		endif()
+		if(${extension} STREQUAL ".js")
 			DKSET(FILETYPE "Javascript")
 		endif()
-		if(${extention} STREQUAL ".min.js")
-			DKSET(FILETYPE "Javascript")
-		endif()
-		if(${extention} STREQUAL ".bz")
+		if(${extension} STREQUAL ".rar")
 			DKSET(FILETYPE "Archive")
 		endif()
-		if(${extention} STREQUAL ".bz2")
+		if(${extension} STREQUAL ".tar")
 			DKSET(FILETYPE "Archive")
 		endif()
-		if(${extention} STREQUAL ".gz")
+		if(${extension} STREQUAL ".xz")
 			DKSET(FILETYPE "Archive")
 		endif()
-		if(${extention} STREQUAL ".rar")
-			DKSET(FILETYPE "Archive")
-		endif()
-		if(${extention} STREQUAL ".tar")
-			DKSET(FILETYPE "Archive")
-		endif()
-		if(${extention} STREQUAL ".xz")
-			DKSET(FILETYPE "Archive")
-		endif()
-		if(${extention} STREQUAL ".zip")
+		if(${extension} STREQUAL ".zip")
 			DKSET(FILETYPE "Archive")
 		endif()
 	endif()
 	get_filename_component(filename ${url} NAME)
 	##If the file type is unknown, we'll still try to extract it like a compressed file anyway
-	##It's better the have a chance at success then to spend 2 hours dead in the water ;) 
-	message("The Downloaded file (${filename}) is a ${FILETYPE} file ${extention}")
+	##It's better the have a chance at success.
+	message("The Downloaded file (${filename}) is a ${FILETYPE} file ${extension}")
 	
 	if(${FILETYPE} STREQUAL "UNKNOWN")
 		DKSET(FILETYPE "Archive")
 		message("We will try to extract it in case it's an archive, but it may fail.")
-		message("If it's not an archive, you should be good to go")
 	endif()
 		
 	if(${FILETYPE} STREQUAL "Archive")
