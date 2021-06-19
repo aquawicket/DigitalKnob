@@ -180,13 +180,15 @@ function debugFunc($var1, $var2, $var3)
 	return $var2;
 }
 
+function serverIsLocal(){
+	if(isset($_SERVER['REMOTE_ADDR']) && isset($_SERVER['SERVER_NAME']))
+		if($_SERVER['REMOTE_ADDR'] == $_SERVER['SERVER_NAME'])
+		    return true;
+	return false;
+}
+
 function getServerInfo(){
 	return $_SERVER;
-	/*
-	if(isset($_SERVER[$param])){
-	    echo "$"."_SERVER[".$param."] = ".$_SERVER[$param];
-	}
-	*/
 }
 
 function getTime(){
