@@ -71,10 +71,16 @@ function DKGit_GitUpdate() {
     //}
 
     console.log("Git Update DigitalKnob...\n");
-    CPP_DK_Execute(GIT + " clone https://github.com/aquawicket/DigitalKnob.git " + DKPATH + "/DK");
-    CPP_DKFile_ChDir(DKPATH + "/DK");
-    CPP_DK_Execute(GIT + " checkout -- .");
-    CPP_DK_Execute(GIT + " pull origin master");
+	if(!CPP_DKFile_Exists(DKPATH + "DK/.git")){
+		CPP_DK_Execute(GIT + " clone https://github.com/aquawicket/DigitalKnob.git " + DKPATH + "DK");
+		CPP_DKFile_ChDir(DKPATH + "DK");
+		CPP_DK_Execute(GIT + " checkout -- .");
+		CPP_DK_Execute(GIT + " pull origin master");
+	}
+	else{
+		CPP_DKFile_ChDir(DKPATH + "DK");
+		CPP_DK_Execute(GIT + " pull");
+	}
 
     //Multipe user folders
     var contents = CPP_DKFile_DirectoryContents(DKPATH);
@@ -87,14 +93,17 @@ function DKGit_GitUpdate() {
                 continue;
             var url = CPP_DKFile_GetSetting(files[i], "[MYGIT]");
             if (url) {
-                //console.log("url = "+url+"\n");
-                var folder = files[i].replace(".txt", "");
-                //console.log("folder = "+folder+"\n");
-                console.log("Git Update " + folder + "...\n");
-                CPP_DKFile_ChDir(DKPATH + "/" + folder);
-                CPP_DK_Execute(GIT + " clone " + url + " " + DKPATH + "/" + folder);
-                CPP_DK_Execute(GIT + " checkout -- .");
-                CPP_DK_Execute(GIT + " pull origin master");
+				var folder = files[i].replace(".txt", "");
+				if(!CPP_DKFile_Exists(DKPATH + folder + "/.git")){
+					CPP_DK_Execute(GIT + " clone " + url + " " + DKPATH + folder);
+					CPP_DKFile_ChDir(DKPATH + folder);
+					CPP_DK_Execute(GIT + " checkout -- .");
+					CPP_DK_Execute(GIT + " pull origin master");
+				}
+				else{
+					CPP_DKFile_ChDir(DKPATH + folder);
+					CPP_DK_Execute(GIT + " pull");
+				}
             }
         }
     }
@@ -137,7 +146,7 @@ function DKGit_GitCommit() {
                 var folder = files[i].replace(".txt", "");
                 //console.log("folder = "+folder+"\n");
                 console.log("Git Commit " + folder + "... \n");
-                CPP_DKFile_ChDir(DKPATH + "/" + folder);
+                CPP_DKFile_ChDir(DKPATH + folder);
                 CPP_DK_Execute(GIT + " init");
                 CPP_DK_Execute(GIT + " config user.name \"dkuser\"");
                 CPP_DK_Execute(GIT + " config user.email \"dkuser@digitalknob.com\"");
@@ -164,7 +173,7 @@ function DKGit_GitCredentials() {//TODO
 // https://stackoverflow.com/questions/3258243/check-if-pull-needed-in-git#comment20583319_12791408
 // the total number of "different" commits between the current branch and server branch
 function DKGit_CheckForDiff(){
-	console.log("DKGit_CheckForDiff()")
+	//console.log("DKGit_CheckForDiff()")
 	let contents = CPP_DKFile_DirectoryContents(DKPATH);
 	let files = contents.split(",");
 	for(let i=0; i<files.length; i++){ 
