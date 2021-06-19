@@ -18,8 +18,9 @@ function DKBuildConsole_init() {
 	*/
 	
 	//console.log(DKGit_DiffCount())
-	DKGit_CheckForDiff()
-    while (working) {
+	//DKGit_CheckForDiff()
+    
+	while (working) {
         DKBuildConsole_Process();
     }
 }
