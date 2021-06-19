@@ -158,3 +158,45 @@ function DKGit_GitCredentials() {//TODO
 //how do we let git remember our login for repositories
 //we don't want to have to log in every time we need to commit.
 }
+
+// https://stackoverflow.com/questions/3258243/check-if-pull-needed-in-git
+// https://stackoverflow.com/questions/3258243/check-if-pull-needed-in-git#comment20583319_12791408
+// the total number of "different" commits between the current branch and server branch
+function DKGit_CheckForDiff(){
+	var contents = CPP_DKFile_DirectoryContents(DKPATH)
+    if (contents) {
+        var files = contents.split(",");
+        for (var i = 0; i < files.length; i++) {
+            if(CPP_DKFile_IsDirectory(files[i])) {
+				CPP_DKFile_ChDir(DKPATH + "/" + files[i])
+				//const result = CPP_DK_Execute(GIT + " rev-list HEAD...origin/master --count");
+				
+				const upstream = "@{u}"
+				const local = CPP_DK_Execute(GIT + " git rev-parse @")
+				const remote = CPP_DK_Execute(GIT + " rev-parse " + upstream)
+				const base = CPP_DK_Execute(GIT + "merge-base @ " + upstream)
+				if(local === remote)
+					console.log("UP TO DATE")
+				else if(local === base)
+					console.log("NEED TO PULL");
+				else if(remote === base)
+					console.log("NEED TO PUSH")
+				else
+					console.log("BRANCHES HAVE DIVERGED");
+			}
+		}
+	}
+}
+
+function DKGit_DifferenceCount(){
+	var contents = CPP_DKFile_DirectoryContents(DKPATH)
+    if (contents) {
+        var files = contents.split(",");
+        for (var i = 0; i < files.length; i++) {
+            if(CPP_DKFile_IsDirectory(files[i])) {
+				CPP_DKFile_ChDir(DKPATH + "/" + files[i])
+				const result = CPP_DK_Execute(GIT + " rev-list HEAD...origin/master --count");
+			}
+		}
+	}
+}

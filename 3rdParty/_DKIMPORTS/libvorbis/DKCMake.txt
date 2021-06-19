@@ -29,7 +29,7 @@ ANDROID_RELEASE_LIB(${VORBIS_ROOT}/${OS}/Release/obj/local/armeabi-v7a/libvorbis
 
 ### COMPILE ###
 DKSETPATH(${VORBIS_ROOT}/win32)
-DKSETPATH(${VORBIS_TOOR}/win32/Debug)
+DKSETPATH(${VORBIS_ROOT}/win32/Debug)
 WIN32_BASH("#!/bin/bash 
 cd ${VORBIS_ROOT}/win32/Debug 
 export PATH=/${MINGW32}/bin:$PATH\;
@@ -51,7 +51,7 @@ export PATH=/${MSYS}/bin:$PATH\;
 make 
 exit \n")
 DKRENAME(${VORBIS_ROOT}/win32/Release/lib/.libs/libvorbis.a ${VORBIS_ROOT}/win32/Release/lib/.libs/libvorbis.lib)
-DKRENAME(${VORBIS_ROOT}/win32/Release/lib/.libs/libvorbisfile.a libvorbis-${VORBIS_VERSION}/win32/Release/lib/.libs/libvorbisfile.lib)
+DKRENAME(${VORBIS_ROOT}/win32/Release/lib/.libs/libvorbisfile.a ${VORBIS_ROOT}/win32/Release/lib/.libs/libvorbisfile.lib)
 
 
 DKSETPATH(${VORBIS_ROOT}/win64)
