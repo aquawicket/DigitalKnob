@@ -68,7 +68,11 @@ bool DKDuktape::Init(){
 	ctx = NULL;
 	//c_evloop = true;
 	if(!ctx){
-		ctx = duk_create_heap_default();
+
+		void* my_udata = (void*)0xdeadbeef;  /* whatever's most useful, can be NULL */
+		//ctx = duk_create_heap_default();
+		ctx = duk_create_heap(NULL, NULL, NULL, my_udata, my_fatal);
+
 		if(!ctx){
 			DKERROR("Failed to create a Duktape heap.\n");
 		    return false;
@@ -116,6 +120,15 @@ bool DKDuktape::Init(){
 
 	DKApp::AppendLoopFunc(&DKDuktape::EventLoop, this);
 	return true;
+}
+
+void DKDuktape::my_fatal(void* udata, const char* msg) {
+	(void)udata;  /* ignored in this case, silence warning */
+
+	/* Note that 'msg' may be NULL. */
+	fprintf(stderr, "*** FATAL ERROR: %s\n", (msg ? msg : "no message"));
+	fflush(stderr);
+	abort();
 }
 
 bool DKDuktape::End(){

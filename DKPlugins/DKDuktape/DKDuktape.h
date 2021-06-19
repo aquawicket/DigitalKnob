@@ -20,6 +20,7 @@ public:
 	static bool AttachFunction(const DKString& name, duk_c_function func);
 	static bool CallEnd(const DKString& file);
 	static bool CallInit(const DKString& file);
+	static void my_fatal(void* udata, const char* msg);
 	static bool DumpError(const DKString& code);
 	static bool FileLoaded(const DKString& path);
 	static bool LoadFile(const DKString& path);

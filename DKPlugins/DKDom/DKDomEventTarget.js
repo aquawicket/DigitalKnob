@@ -73,5 +73,6 @@ var EventTarget = function(pointer) {
         }
     });
 
+	GlobalEventHandlers.call(this, pointer);
     return this;
 };
