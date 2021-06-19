@@ -318,6 +318,9 @@ function getDKAppAssetsPath(){
 }
 
 function pushDKAssets(){
+	if(!serverIsLocal()){
+		return error("pushDKAssets only available on local php server");
+	}
 	chdir(getRootPath());
 	$ignoreFolders = array("USER");
     $ignoreFiles = array("*.h","*.cpp","*/DKCMake.txt");
@@ -413,6 +416,9 @@ function pushDKAssets(){
 }
 
 function pullDKAssets(){
+	if(!serverIsLocal()){
+		return error("pullDKAssets() only available on local php server");
+	}
 	chdir(getRootPath());
 	$ignoreFolders = array(".","..");
     $ignoreFiles = array("*.h","*.cpp","*/DKCMake.txt");
