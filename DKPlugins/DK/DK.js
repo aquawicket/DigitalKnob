@@ -54,7 +54,7 @@ const byId = function byId(id) {
 
 const error = function error(str, callback, result) {
     if (DEBUG) {
-        debugger ;
+        //debugger ;
     }
     throw new Error(str);
     //FIXME: this code is never reached because of throw. Set an argument to determine if the error is fatal. 

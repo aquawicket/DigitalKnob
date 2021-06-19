@@ -36,24 +36,28 @@ function ValidatePath($path){
 
 // https://www.php.net/manual/en/function.unlink.php
 function delete($path){
+	chdir(getRootPath());
 	$path = ValidatePath($path);
 	return unlink($path);
 }
 
 // https://www.php.net/manual/en/function.file-exists.php
 function exists($path){
+	chdir(getRootPath());
 	$path = ValidatePath($path);
 	return file_exists($path);
 }
 
 // https://www.php.net/manual/en/function.is-dir
 function isDir($path){
+	chdir(getRootPath());
 	$path = ValidatePath($path);
 	return is_dir($path);
 }
 
 // https://www.php.net/manual/en/function.mkdir.php
 function makeDir($path, $mode = 0777, $recursive = false){
+	chdir(getRootPath());
 	$path = ValidatePath($path);
     if(!mkdir($path, $mode, $recursive))
         return false;
@@ -62,6 +66,7 @@ function makeDir($path, $mode = 0777, $recursive = false){
 
 // https://www.php.net/manual/en/function.file-get-contents.php
 function fileToString($path, $use_include_path = false){
+	chdir(getRootPath());
 	$path = ValidatePath($path);    
     $str = file_get_contents($path, $use_include_path);
     if($str === false)
@@ -71,6 +76,7 @@ function fileToString($path, $use_include_path = false){
 
 // https://www.php.net/manual/en/function.file-put-contents.php
 function stringToFile($path, $data, $flags = 0){
+	chdir(getRootPath());
 	$path = ValidatePath($path);
     if($flags === "FILE_APPEND"){ $flags = FILE_APPEND; }
     if($flags === "FILE_USE_INCLUDE_PATH"){ $flags = FILE_USE_INCLUDE_PATH; }
@@ -86,6 +92,7 @@ function stringToFile($path, $data, $flags = 0){
 }
 
 function getPath($path){
+	chdir(getRootPath());
 	if(!$path || $path === "/" || $path === ".")
 	    $path = getRootPath();
 	$path = realpath($path);
@@ -93,6 +100,7 @@ function getPath($path){
 }
 
 function getAbsolutePath($path){
+	chdir(getRootPath());
 	$path = ValidatePath($path);
 	$root = getRootPath();
 	$rPath = getRelativePath($path);
@@ -106,6 +114,7 @@ function getRootPath(){
 }
 
 function getRelativePath($path){
+	chdir(getRootPath());
 	$root = getRootPath();
 	$rPath = relativePath($root, $path);
 	//$rPath = "none";
@@ -120,6 +129,7 @@ function getRelativePath($path){
  * @return string
  */
 function relativePath($from, $to, $separator = DIRECTORY_SEPARATOR){
+	chdir(getRootPath());
     $from   = str_replace(array('/', '\\'), $separator, $from);
     $to     = str_replace(array('/', '\\'), $separator, $to);
 
@@ -135,6 +145,7 @@ function relativePath($from, $to, $separator = DIRECTORY_SEPARATOR){
 }
 
 function directoryContents($path){
+	chdir(getRootPath());
 	//echo "php.directoryContents(".$path.")\n";
 	$path = ValidatePath($path);
 	$directory = opendir($path);
@@ -159,7 +170,7 @@ function directoryContents($path){
 
 // https://stackoverflow.com/a/18850550/688352
 function compareFiles($file_a, $file_b){
-
+	chdir(getRootPath());
 	if(filesize($file1) !== filesize($file2)) return false;
     if(sha1_file($file1) == sha1_file($file2)) return true;
     return false;
@@ -194,6 +205,7 @@ function compareFiles($file_a, $file_b){
 // digitalknob specific functions
 // Get DK Paths
 function getPaths($path){
+	chdir(getRootPath());
 	$path = getPath($path);
 	$aPath = getAbsolutePath($path);
 	$root = getRootPath();
@@ -224,6 +236,7 @@ function getPaths($path){
 }
 
 function getAssetsPath(){
+	chdir(getRootPath());
     $assetsPath = dirname(__DIR__)."/";
     //if(basename($assetsPath) != "assets")
         //return error("assetsPath does not contain an assets folder \n");
@@ -236,6 +249,7 @@ function getAssetsPath(){
 }
 
 function getDKPath(){
+	chdir(getRootPath());
     $dkPath = dirname(__DIR__)."/";
     $n = 1;
     while(is_dir($dkPath) && $n < 10){
@@ -257,6 +271,7 @@ function getDKPath(){
 }
 
 function getDKPluginsPath(){
+	chdir(getRootPath());
     $dkPath = getDKPath();
 	$dkPluginsPath = $dkPath."DK/DKPlugins/";
     if(!$dkPluginsPath)
@@ -267,6 +282,7 @@ function getDKPluginsPath(){
 }
 
 function getRelativeDKPluginsPath(){
+	chdir(getRootPath());
     $relativeDKPluginsPath = dirname(__DIR__)."/";
     $n = 1;
     while(is_dir($relativeDKPluginsPath) && $n < 10){
@@ -289,6 +305,7 @@ function getRelativeDKPluginsPath(){
 }
 
 function getDKAppAssetsPath(){
+	chdir(getRootPath());
     //FIXME: temporarily using raw user defaults paths
     if(file_exists("C:/Users/aquawicket/digitalknob/DKTasmota/DKApps/DKTasmota/assets/")){
     	$dkAppAssetsPath = "";
@@ -301,6 +318,7 @@ function getDKAppAssetsPath(){
 }
 
 function pushDKAssets(){
+	chdir(getRootPath());
 	$ignoreFolders = array("USER");
     $ignoreFiles = array("*.h","*.cpp","*/DKCMake.txt");
     $filemap = [];
@@ -395,6 +413,7 @@ function pushDKAssets(){
 }
 
 function pullDKAssets(){
+	chdir(getRootPath());
 	$ignoreFolders = array(".","..");
     $ignoreFiles = array("*.h","*.cpp","*/DKCMake.txt");
 
