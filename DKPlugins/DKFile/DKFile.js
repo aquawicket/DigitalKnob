@@ -1,8 +1,12 @@
-"use strict";
+//NOTE: use string removed for Duktape to work
+//"use strict";
 
-dk.file = DKPlugin(DKFile, "singleton")
+//NOTE: initiator moved to the bottom and "singleton" removed for Duktape to work
+//dk.file = DKPlugin(DKFile, "singleton")
 
-function DKFile() {}
+DKFile = function DKFile() {
+	console.log("DKFile constructor")
+}
 
 DKFile.prototype.init = function DKFile_init() {
     dk.file.appFilename = "";
@@ -316,7 +320,7 @@ if (!dk.hasCPP()) {
     }
 }
 
-if (!dk.hasCPP()) {
+if (!DUKTAPE) {
     DKFile.prototype.fileToString = function DKFile_fileToString(path, callback) {
         path = dk.file.validatepath(path);
         if (location.protocol === "file:") {
@@ -348,9 +352,10 @@ if (!dk.hasCPP()) {
     }
 }
 //lets replace DK.js's version of fileToString to this one
-dk.fileToString = dk.file.fileToString;
+if(!DUKTAPE) 
+	dk.fileToString = dk.file.fileToString;
 
-if (!dk.hasCPP()) {
+if (!DUKTAPE) {
     DKFile.prototype.stringToFile = function DKFile_stringToFile(str, path, flags, callback) {
         path = dk.file.validatepath(path);
         if (!dk.php)
@@ -366,7 +371,7 @@ if (!dk.hasCPP()) {
 } else {
     DKFile.prototype.stringToFile = function DKFile_stringToFile(str, path, flags, callback) {
         path = dk.file.validatepath(path);
-        const result = CPP_DKFile_StringToFile(data, path);
+        const result = CPP_DKFile_StringToFile(str, path);
         return callback(result);
     }
 }
@@ -493,3 +498,5 @@ if (!dk.hasCPP()) {
         return CPP_DKFile_Delete(path);
     }
 }
+
+dk.file = DKPlugin(DKFile)

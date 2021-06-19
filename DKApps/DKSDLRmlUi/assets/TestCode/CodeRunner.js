@@ -2,7 +2,6 @@ console.log("CodeRunner.js")
 
 DKPlugin("DKFile/DKFile.js")
 
-
 const div = document.createElement("div")
 div.style.position = "absolute"
 div.style.top = "35px"
@@ -24,9 +23,14 @@ textarea.style.fontSize = "14px"
 textarea.style.color = "rgb(200,200,200)"
 textarea.style.backgroundColor = "rgb(30,30,30)"
 div.appendChild(textarea)
+dk.file.fileToString("USER/code.txt", function(result){
+	textarea.value = result;
+})
 textarea.onchange = function(event){
     console.log(textarea.value)
-    //TODO - save to file
+    dk.file.stringToFile(textarea.value, "USER/code.txt", function(result){
+		console.log(result)
+	})
 	
 
     //dk.file.stringToFile(codeMirror.getValue(), "USER/devtoolscode.js")
