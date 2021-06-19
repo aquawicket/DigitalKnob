@@ -7,8 +7,12 @@
 bool DKCurl::Init()
 {
 	DKDEBUGFUNC();
+#ifdef USE_DKDuktape	
 	DKClass::DKCreate("DKCurlJS");
+#endif
+#ifdef USE_DKCef
 	DKClass::DKCreate("DKCurlV8");
+#endif
 	
 	//Curl inits are NOT thread safe. we must init within the given thread
 	/*
