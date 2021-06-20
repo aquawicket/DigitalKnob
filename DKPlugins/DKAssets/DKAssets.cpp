@@ -6,14 +6,14 @@
 #include "DKAssets/DKAssets.h"
 #include <algorithm>
 
-bool DKAssets::Init()
-{
+bool DKAssets::Init(){
 	DKDEBUGFUNC();
-
+	DKClass::DKCreate("DKAssetsJS");
+	DKClass::DKCreate("DKAssetsV8");
+	
 	if(!DKAssets::GetAssetsPath(DKFile::local_assets)){ //Are we in a development environment?
-		if(!DKAssets::GetDataPath(DKFile::local_assets)){ //Then, Does our default data folder exist?
+		if(!DKAssets::GetDataPath(DKFile::local_assets)) //Then, Does our default data folder exist?
 			DKAssets::DeployAssets();
-		}
 	}
 
 	DKFile::MakeDir(DKFile::local_assets+"USER");
@@ -39,7 +39,7 @@ bool DKAssets::Init()
 			ShowWindow(GetConsoleWindow(), SW_HIDE);
 		}
 	}
-#endif
+	#endif
 
 	DKString debug;
 	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[LOG_DEBUG]", debug);
@@ -84,9 +84,14 @@ bool DKAssets::Init()
 	return true;
 }
 
-////////////////////////////////////////////
-bool DKAssets::GetAssetsPath(DKString& path)
-{
+bool DKAssets::End(){
+	DKDEBUGFUNC();
+	DKClass::DKClose("DKAssetsJS");
+	DKClass::DKClose("DKAssetsV8");
+	return true;
+}
+
+bool DKAssets::GetAssetsPath(DKString& path){
 	DKDEBUGFUNC();
 	//If there is an assets directory below the app directory, then we are in a development environment.
 	//and we will point to that location for assets

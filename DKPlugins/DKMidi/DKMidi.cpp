@@ -2,9 +2,7 @@
 #include "DK/DKFile.h"
 #include "DKMidi/DKMidi.h"
 
-///////////////////
-bool DKMidi::Init()
-{
+bool DKMidi::Init(){
 	DKDEBUGFUNC();
 	DKClass::DKCreate("DKMidiJS");
 	DKClass::DKCreate("DKMidiV8");
@@ -22,10 +20,10 @@ bool DKMidi::Init()
 	return true;
 }
 
-//////////////////
-bool DKMidi::End()
-{
+bool DKMidi::End(){
 	DKDEBUGFUNC();
+	DKClass::DKCreate("DKMidiJS");
+	DKClass::DKCreate("DKMidiV8");
 	return true;
 }
 

@@ -8,23 +8,27 @@
 #include "DK/DKFile.h"
 #include "DKArchive/DKArchive.h"
 
-//////////////////////
-bool DKArchive::Init()
-{
+
+bool DKArchive::Init(){
 	DKDEBUGFUNC();
-	return true;	
+	DKClass::DKCreate("DKArchiveJS");
+	DKClass::DKCreate("DKArchiceV8");
+	return true;
 }
 
-///////////////////////////////////////////////////////////////////
-bool DKArchive::Extract(const DKString& file, const DKString& path)
-{
+bool DKArchive::End(){
+	DKDEBUGFUNC();
+	DKClass::DKClose("DKArchiveJS");
+	DKClass::DKClose("DKArchiceV8");
+	return true;
+}
+
+bool DKArchive::Extract(const DKString& file, const DKString& path){
 	DKDEBUGFUNC(file, path);
 	if(!DKFile::PathExists(file)){ return false; }
-
 	DKINFO("Extracting "+file+" . . .\n");
 	DKFile::MakeDir(path);
 	DKFile::ChDir(path);
-
     struct archive *a;
     struct archive *ext;
     struct archive_entry *entry;
@@ -97,9 +101,7 @@ bool DKArchive::Extract(const DKString& file, const DKString& path)
     return true;
 }
 
-////////////////////////////////////////////////////////////////////
-bool DKArchive::Compress(const DKString& path, const DKString& file)
-{
+bool DKArchive::Compress(const DKString& path, const DKString& file){
 	DKDEBUGFUNC(path, file);	
 	if(!DKFile::PathExists(path)){ return false; }
 	DKStringArray files;
@@ -162,13 +164,10 @@ bool DKArchive::Compress(const DKString& path, const DKString& file)
 #if !defined(MAC) && !defined(IOS)
 	archive_write_free(a);
 #endif
-
 	return true;
 }
 
-////////////////////////////////////////////////////////////////
-int DKArchive::copy_data(struct archive* ar, struct archive* aw)
-{
+int DKArchive::copy_data(struct archive* ar, struct archive* aw){
 	//DKDEBUGFUNC(ar, aw);	
 	int r;
 	const void *buff;

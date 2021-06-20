@@ -1,11 +1,11 @@
 #include "DK/stdafx.h"
 #include "DKAudio.h"
 
-////////////////////
-bool DKAudio::Init()
-{
+bool DKAudio::Init(){
 	DKDEBUGFUNC();
 	DKClass::DKCreate("DKAudioJS");
+	DKClass::DKCreate("DKAudioV8");
+	
 	if(DKClass::DKAvailable("DKSDLAudio")){
 		DKClass::DKCreate("DKSDLAudio");
 		return true;
@@ -22,11 +22,11 @@ bool DKAudio::Init()
 	return false;
 }
 
-///////////////////
-bool DKAudio::End()
-{
+bool DKAudio::End(){
 	DKDEBUGFUNC();
 	DKClass::DKClose("DKAudioJS");
+	DKClass::DKClose("DKAudioV8");
+	
 	DKClass::DKClose("DKSDLAudio");
 	DKClass::DKClose("DKSDLWav");
 	DKClass::DKClose("DKOSGAudio");

@@ -6,9 +6,7 @@
 
 tesseract::TessBaseAPI* DKOcr::api;
 
-//////////////////
-bool DKOcr::Init()
-{
+bool DKOcr::Init(){
 	DKDEBUGFUNC();
 	DKClass::DKCreate("DKOcrJS");
 	DKClass::DKCreate("DKOcrV8");
@@ -22,10 +20,11 @@ bool DKOcr::Init()
 	return true;
 }
 
-/////////////////
-bool DKOcr::End()
-{
+bool DKOcr::End(){
 	DKDEBUGFUNC();
+	DKClass::DKCreate("DKOcrJS");
+	DKClass::DKCreate("DKOcrV8");
+	
 	api->End();
 	return true;
 }

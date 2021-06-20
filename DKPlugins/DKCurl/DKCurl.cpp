@@ -3,16 +3,10 @@
 #include "DK/DKFile.h"
 #include "DKCurl/DKCurl.h"
 
-///////////////////
-bool DKCurl::Init()
-{
-	DKDEBUGFUNC();
-#ifdef USE_DKDuktape	
+bool DKCurl::Init(){
+	DKDEBUGFUNC();	
 	DKClass::DKCreate("DKCurlJS");
-#endif
-#ifdef USE_DKCef
 	DKClass::DKCreate("DKCurlV8");
-#endif
 	
 	//Curl inits are NOT thread safe. we must init within the given thread
 	/*
@@ -26,10 +20,11 @@ bool DKCurl::Init()
 	return true;
 }
 
-//////////////////
-bool DKCurl::End()
-{
+bool DKCurl::End(){
 	DKDEBUGFUNC();
+	DKClass::DKClose("DKCurlJS");
+	DKClass::DKClose("DKCurlV8");
+	
 	if(curl){
 		curl_easy_cleanup(curl);
 	}

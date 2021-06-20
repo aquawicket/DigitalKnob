@@ -4,11 +4,11 @@
 #include "DKAssets/DKAssets.h"
 #include "DKMySql/DKMySql.h"
 
-////////////////////
-bool DKMySql::Init()
-{
+bool DKMySql::Init(){
 	DKDEBUGFUNC();
 	DKClass::DKCreate("DKMySqlJS");
+	DKClass::DKCreate("DKMySqlV8");
+	
 	DKClass::DKCreate("DKCurl");
 #ifdef USE_mysql
 	if(mysql_init(&mysql)==NULL){
@@ -19,10 +19,11 @@ bool DKMySql::Init()
 	return true;
 }
 
-///////////////////
-bool DKMySql::End()
-{
+bool DKMySql::End(){
 	DKDEBUGFUNC();
+	DKClass::DKCreate("DKMySqlJS");
+	DKClass::DKCreate("DKMySqlV8");
+	
 #ifdef USE_mysql
 	mysql_close(&mysql);
 #endif

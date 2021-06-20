@@ -122,6 +122,22 @@ bool DKDuktape::Init(){
 	return true;
 }
 
+bool DKDuktape::End(){
+	DKDEBUGFUNC();
+	DKClass::DKClose("DKDuktape/DKWindow.js");
+	DKClass::DKClose("DKScreen");
+	DKClass::DKClose("DKXMLHttpRequest");
+	DKClass::DKClose("DKDuktape/DKGlobalEventHandlers.js");
+	DKClass::DKClose("DKEventTarget");
+	DKClass::DKClose("DKNavigator");
+	DKClass::DKClose("DKConsole");
+	DKClass::DKClose("DKDuktapeJS");
+		
+	duk_destroy_heap(ctx);
+	ctx = NULL;
+	return true;
+}
+
 void DKDuktape::my_fatal(void* udata, const char* msg) {
 	(void)udata;  /* ignored in this case, silence warning */
 
@@ -129,13 +145,6 @@ void DKDuktape::my_fatal(void* udata, const char* msg) {
 	fprintf(stderr, "*** FATAL ERROR: %s\n", (msg ? msg : "no message"));
 	fflush(stderr);
 	abort();
-}
-
-bool DKDuktape::End(){
-	DKDEBUGFUNC();
-	duk_destroy_heap(ctx);
-	ctx = NULL;
-	return true;
 }
 
 bool DKDuktape::AttachFunction(const DKString& name, duk_c_function func){
@@ -171,9 +180,8 @@ bool DKDuktape::CallEnd(const DKString& file){
 	}
 	duk_pop(ctx);  // ignore result?
 	for (unsigned int i = 0; i < DKDuktape::filelist.size(); ++i) {
-		if (has(DKDuktape::filelist[i], filename)) {
+		if (has(DKDuktape::filelist[i], filename))
 			DKDuktape::filelist.erase(DKDuktape::filelist.begin() + i);
-		}
 	}
 	return true;
 }

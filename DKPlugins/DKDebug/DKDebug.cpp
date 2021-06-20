@@ -193,8 +193,7 @@ void handler(int signum)
 #endif 
 
 ////////////////////
-bool DKDebug::Init()
-{
+bool DKDebug::Init(){
 	DKDEBUGFUNC();
 	DKClass::DKCreate("DKDebugJS");
 	DKClass::DKCreate("DKDebugV8");
@@ -225,10 +224,10 @@ bool DKDebug::Init()
 	return true;
 }
 
-///////////////////
-bool DKDebug::End()
-{
+bool DKDebug::End(){
 	DKDEBUGFUNC();
+	DKClass::DKClose("DKDebugJS");
+	DKClass::DKClose("DKDebugV8");
 	return true;
 }
 

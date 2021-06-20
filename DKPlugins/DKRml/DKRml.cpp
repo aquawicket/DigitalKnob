@@ -19,8 +19,8 @@ bool DKRml::Init(){
 	DKDEBUGFUNC();
 	DKClass::DKCreate("DKRmlJS");
 	DKClass::DKCreate("DKRmlV8");
+	
 	document = NULL;
-
 	if(!dkRmlFile){ 
 		dkRmlFile = new DKRmlFile();
 		Rml::SetFileInterface(dkRmlFile);
@@ -124,6 +124,9 @@ bool DKRml::Init(){
 
 bool DKRml::End(){
 	DKDEBUGFUNC();
+	DKClass::DKClose("DKRmlJS");
+	DKClass::DKClose("DKRmlV8");
+	
 	DKEvents::RemoveRegisterEventFunc(&DKRml::RegisterEvent, this);
 	DKEvents::RemoveUnegisterEventFunc(&DKRml::UnregisterEvent, this);
 	DKEvents::RemoveSendEventFunc(&DKRml::SendEvent, this);

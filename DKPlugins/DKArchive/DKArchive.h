@@ -3,11 +3,11 @@
 #define DKArchive_H
 #include "DK/DK.h"
 
-/////////////////////////////////////////////
 class DKArchive : public DKObjectT<DKArchive>
 {
 public:
 	bool Init();
+	bool End();
 	
 	static bool Compress(const DKString& path, const DKString& file);
 	static bool Extract(const DKString& file, const DKString& path);

@@ -11,6 +11,8 @@ extern size_t ASSETS_H_SIZE;
 class DKAssets : public DKObjectT<DKAssets>{
 public:
 	bool Init();
+	bool End();
+
 	
 	//static bool AppendDataPath(const DKString& datapath);
 	static bool DeployAssets();

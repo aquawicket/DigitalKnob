@@ -16,14 +16,12 @@ HWND DKHandles::currentHandle = NULL;
 bool DKHandles::highlight = false;
 std::vector<HWND> DKHandles::winhandles;
 
-//////////////////////
-bool DKHandles::Init()
-{
+bool DKHandles::Init(){
 	DKDEBUGFUNC();
 	DKClass::DKCreate("DKHandlesJS");
 	DKClass::DKCreate("DKHandlesV8");
+	
 	highlight = false;
-
 	rectanglePen = CreatePen(PS_SOLID, 3, RGB(0, 0, 255));
 	if(!rectanglePen){
 		DKERROR("DKHandles::Init(): g_hRectanglePen invalide\n");
@@ -33,10 +31,10 @@ bool DKHandles::Init()
 	return true;
 }
 
-/////////////////////
-bool DKHandles::End()
-{
+bool DKHandles::End(){
 	DKDEBUGFUNC();
+	DKClass::DKClose("DKHandlesJS");
+	DKClass::DKClose("DKHandlesV8");
 	return true;
 }
 

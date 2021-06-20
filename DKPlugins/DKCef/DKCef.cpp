@@ -29,6 +29,9 @@ bool DKCef::initialized = false;
 
 bool DKCef::Init(){
 	DKDEBUGFUNC();
+	DKClass::DKCreate("DKCefJS");
+	DKClass::DKCreate("DKCefV8");
+	
 	//int major_version = cef_version_info(0);
 	//int build_version = cef_version_info(4);
 	//DKString version_string = "Cef/"+toString(major_version)+"."+toString(build_version);
@@ -63,8 +66,7 @@ bool DKCef::Init(){
 		return true;
 	}
 	*/
-	DKClass::DKCreate("DKCefJS");
-	DKClass::DKCreate("DKCefV8");
+	
 	fullscreen = false;
 #if defined(WIN32) && !defined(WIN64)
 	DKString elf_dll;
@@ -263,6 +265,9 @@ bool DKCef::Init(){
 
 bool DKCef::End(){
 	DKDEBUGFUNC();
+	DKClass::DKClose("DKCefJS");
+	DKClass::DKClose("DKCefV8");
+	
 	//FIXME - many crashes at CefShutdown
 	unsigned long threadId;
 	DKUtil::GetThreadId(threadId);
