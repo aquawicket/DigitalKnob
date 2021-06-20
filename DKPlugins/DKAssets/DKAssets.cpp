@@ -8,8 +8,8 @@
 
 bool DKAssets::Init(){
 	DKDEBUGFUNC();
-	DKClass::DKCreate("DKAssetsJS");
-	DKClass::DKCreate("DKAssetsV8");
+	//DKClass::DKCreate("DKAssetsJS");
+	//DKClass::DKCreate("DKAssetsV8");
 	
 	if(!DKAssets::GetAssetsPath(DKFile::local_assets)){ //Are we in a development environment?
 		if(!DKAssets::GetDataPath(DKFile::local_assets)) //Then, Does our default data folder exist?
@@ -86,8 +86,8 @@ bool DKAssets::Init(){
 
 bool DKAssets::End(){
 	DKDEBUGFUNC();
-	DKClass::DKClose("DKAssetsJS");
-	DKClass::DKClose("DKAssetsV8");
+	//DKClass::DKClose("DKAssetsJS");
+	//DKClass::DKClose("DKAssetsV8");
 	return true;
 }
 
