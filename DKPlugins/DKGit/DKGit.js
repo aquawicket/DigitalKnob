@@ -62,6 +62,7 @@ function DKGit_GitUpdate() {
 	}
 	else{
 		CPP_DKFile_ChDir(DKPATH + "DK");
+		CPP_DK_Execute(GIT + " checkout -- .");
 		CPP_DK_Execute(GIT + " pull");
 	}
 
@@ -85,6 +86,7 @@ function DKGit_GitUpdate() {
 				}
 				else{
 					CPP_DKFile_ChDir(DKPATH + folder);
+					CPP_DK_Execute(GIT + " checkout -- .");
 					CPP_DK_Execute(GIT + " pull");
 				}
             }
