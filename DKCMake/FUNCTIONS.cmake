@@ -220,7 +220,7 @@ function(DKINCLUDE arg)
 		return() ## If the include is already in the list, return.
 	endif()
 	DKSET(DKINCLUDES_LIST ${DKINCLUDES_LIST} ${arg})
-	message("DKINCLUDES_LIST = ${DKINCLUDES_LIST}")
+	message("############## DKINCLUDES_LIST = ${DKINCLUDES_LIST}")
 	include_directories(${arg})
 endfunction()
 
