@@ -3,7 +3,7 @@ DKDEPEND(ffmpeg-20150905-git-a87ada5-win32-dev)
 DKDEPEND(ffmpeg-20150905-git-a87ada5-win32-shared)
 DKDEPEND(ffmpeg-20150905-git-a87ada5-win64-dev)
 DKDEPEND(ffmpeg-20150905-git-a87ada5-win64-shared)
-DKDEPEND(SDL2-2.0.4)
+DKDEPEND(SDL2)
 
 
 ### VERSION ###
