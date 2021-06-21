@@ -205,8 +205,8 @@ endfunction()
 
 ######################
 function(DKDEFINE arg)
-	list(FIND DKDEFINES_LIST "${arg}" _index)
-	if(${_index} GREATER -1)
+	list(FIND DKDEFINES_LIST "${arg}" index)
+	if(${index} GREATER -1)
 		return() ## If the define is already in the list, return.
 	endif()
 	DKSET(DKDEFINES_LIST ${DKDEFINES_LIST} ${arg})
@@ -215,18 +215,19 @@ endfunction()
 
 #######################
 function(DKINCLUDE arg)
-	list(FIND DKINCLUDES_LIST "${arg}" _index)
-	if(${_index} GREATER -1)
+	list(FIND DKINCLUDES_LIST "${arg}" index)
+	if(${index} GREATER -1)
 		return() ## If the include is already in the list, return.
 	endif()
 	DKSET(DKINCLUDES_LIST ${DKINCLUDES_LIST} ${arg})
+	message("DKINCLUDES_LIST = ${DKINCLUDES_LIST}")
 	include_directories(${arg})
 endfunction()
 
 #######################
 function(DKLINKDIR arg)
-	list(FIND DKLINKDIRS_LIST "${arg}" _index)
-	if(${_index} GREATER -1)
+	list(FIND DKLINKDIRS_LIST "${arg}" index)
+	if(${index} GREATER -1)
 		return() ## If the include is already in the list, return.
 	endif()
 	DKSET(DKLINKDIRS_LIST ${DKLINKDIRS_LIST} ${arg})
