@@ -7,7 +7,7 @@ DKSET(IMAGEMAGICK_ROOT ${3RDPARTY}/${IMAGEMAGICK_NAME})
 
 
 ### INSTALL ###
-## DKINSTALL(https://github.com/ImageMagick/ImageMagick/archive/refs/tags/${IMAGEMAGICK_VERSION}.zip ImageMagick ${IMAGEMAGICK_NAME})
+DKINSTALL(https://github.com/ImageMagick/ImageMagick/archive/refs/tags/${IMAGEMAGICK_VERSION}.zip ImageMagick ${IMAGEMAGICK_NAME})
 
 
 ### LINK ###

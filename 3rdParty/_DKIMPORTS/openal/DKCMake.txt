@@ -1,17 +1,11 @@
-## FIXME
-IF(ANDROID)
-	RETURN()
-ENDIF()
-
-
 ### VERSION ###
 DKSET(OPENAL_VERSION 1.15.1)
-DKSET(OPENAL ${3RDPARTY}/openal)
+DKSET(OPENAL ${3RDPARTY}/openal-${OPENAL_VERSION})
 
 
 ### INSTALL ###
 ## https://www.openal-soft.org/openal-releases/openal-soft-${OPENAL_VERSION}.tar.bz2
-## DKINSTALL(https://www.openal-soft.org/openal-releases/openal-soft-${OPENAL_VERSION}.tar.bz2 openal openal-${OPENAL_VERSION})
+DKINSTALL(https://www.openal-soft.org/openal-releases/openal-soft-${OPENAL_VERSION}.tar.bz2 openal openal-${OPENAL_VERSION})
 
 
 ### LINK ###
