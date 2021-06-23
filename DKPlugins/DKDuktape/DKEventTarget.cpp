@@ -25,13 +25,13 @@ bool DKEventTarget::OnEvent(DKEvents* event)
 {
 	DKDEBUGFUNC(event);
 	DKString id = event->GetId();
-	if(id.empty()){ return false; } //we need an id
+	if (id.empty()) { return false; } //we need an id
 	DKString type = event->GetType();
-	if(type.empty()){ return false; } //we need a type
+	if (type.empty()) { return false; } //we need a type
 	DKString value = event->GetValue();
 	DKString jsreturn = event->GetJSReturn();
 	//replace(jsreturn, "() { [ecmascript code] }", ""); //remove () { [ecmascript code] }
-	if(jsreturn.empty() || same(jsreturn,"0") || same(jsreturn,"undefined")){
+	if (jsreturn.empty() || same(jsreturn, "0") || same(jsreturn, "undefined")) {
 		DKERROR("DKEventTarget::OnEvent(): jsreturn invalid\n");
 		return false;
 	}
@@ -43,15 +43,61 @@ bool DKEventTarget::OnEvent(DKEvents* event)
 
 	DKString rmlEventAddress = event->data[0];
 	DKString newEvent;
-	if(same(type, "mousedown") || same(type, "mouseup") || same(type, "click") || same(type, "dblclick")){
+	if (same(type, "mousedown") || same(type, "mouseup") || same(type, "click") || same(type, "dblclick")) {
 		newEvent = "new MouseEvent(\"" + rmlEventAddress + "\")";
 	}
-	else{
+	else if (same(type, "keydown") || same(type, "keypress") || same(type, "keyup")) {
+		newEvent = "new KeyboardEvent(\"" + rmlEventAddress + "\")";
+	}
+	else {
 		newEvent = "new Event(\"" + rmlEventAddress + "\")";
 	}
-	DKINFO("DKEventTarget::OnEvent(): "+newEvent+"\n");
-	duk_eval_string(ctx, newEvent.c_str());
-	
+	DKINFO("DKEventTarget::OnEvent(): " + newEvent + "\n");
+	//duk_eval_string(ctx, newEvent.c_str());
+	if (duk_peval_string(ctx, newEvent.c_str()) != 0){
+		//printf("eval failed: %s\n", duk_safe_to_string(ctx, -1));
+
+
+		duk_get_prop_string(ctx, -1, "name");  // push `err.name`
+		DKString name = duk_get_string(ctx, -1);
+		duk_pop(ctx);  // pop `err.name`
+		duk_get_prop_string(ctx, -1, "message");  // push `err.message`
+		DKString message = duk_get_string(ctx, -1);
+		duk_pop(ctx);  // pop `err.message`
+		message = name + ": " + message;
+		duk_get_prop_string(ctx, -1, "fileName");  // push `err.fileName`
+		DKString fileName = duk_get_string(ctx, -1);
+		duk_pop(ctx);  // pop `err.fileName`
+		duk_get_prop_string(ctx, -1, "lineNumber");  // push `err.lineNumber`
+		DKString lineNumber = toString(duk_get_int(ctx, -1));
+		duk_pop(ctx);  // pop `err.lineNumber`
+		duk_get_prop_string(ctx, -1, "stack");  // push `err.stack`
+		DKString stack = duk_get_string(ctx, -1);
+		duk_pop(ctx);  // pop `err.stack`
+		
+		DKERROR(message + "\n");
+		
+		replace(stack, "'", "\\'");
+		replace(stack, "\n", "\\n");
+		replace(message, "'", "\\'");
+		
+		DKString str;
+		str += "var err_error = {stack:'" + stack + "'};";
+		str += "var err_event = {type:'error', message:'" + message + "', filename:'" + fileName + "', lineno:'" + lineNumber + "', colno:'0', error:err_error};";
+		str += "EventFromCPP('window', err_event);";
+		duk_eval_string(ctx, str.c_str());
+		duk_pop(ctx);
+	}
+	else {
+		printf("result is: %s\n", duk_safe_to_string(ctx, -1));
+		duk_pop(ctx);
+	}
+	 
+
+		
+
+
+	/*
 	if(duk_pcall(ctx, 1) != 0){
 		duk_get_prop_string(ctx, -1, "name");  // push `err.name`
 		DKString name = duk_get_string(ctx, -1);
@@ -82,10 +128,11 @@ bool DKEventTarget::OnEvent(DKEvents* event)
 		str += "EventFromCPP('window', err_event);";
 		duk_eval_string(ctx, str.c_str());
 	}
-	else{
+	*/
+	//se{
 		//DKINFO(DKString(duk_safe_to_string(ctx, -1))+"\n"); //return value?
-	}
-	duk_pop(ctx);  // pop result/error
+	//}
+	//duk_pop(ctx);  // pop result/error
 
 	return true;
 }
@@ -96,12 +143,17 @@ int DKEventTarget::addEventListener(duk_context* ctx)
 {
 	DKString id = duk_require_string(ctx, 0);
 	DKString type = duk_require_string(ctx, 1);
-	DKString jsreturn;
+	DKString callback;
+	//duk_require_function(ctx, 0);
+	//duk_dup(ctx, 0);
+	//duk_put_global_string(ctx, "_callbackFunc");
+
+
 	if(duk_to_string(ctx, 2)){
-		jsreturn = duk_to_string(ctx, 2);
-		replace(jsreturn, "function ", "");
+		callback = duk_to_string(ctx, 2);
+		//replace(callback, "function ", "");
 	}
-	if(!DKEvents::AddEvent(id, type, jsreturn, &DKEventTarget::OnEvent, DKEventTarget::Get())){ return false; }
+	if(!DKEvents::AddEvent(id, type, callback, &DKEventTarget::OnEvent, DKEventTarget::Get())){ return false; }
 	return true;
 }
 

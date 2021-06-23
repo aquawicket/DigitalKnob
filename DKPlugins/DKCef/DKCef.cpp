@@ -278,7 +278,7 @@ bool DKCef::End(){
 	DKINFO("DKCef::End(): CefShutdown();\n");
 	CefShutdown(); //call on same thread as CefInitialize
 #ifdef WIN32
-	FreeLibrary(libcef);
+	//FreeLibrary(libcef);
 #endif
 	return true;
 }

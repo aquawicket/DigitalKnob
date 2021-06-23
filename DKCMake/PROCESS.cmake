@@ -425,6 +425,7 @@ file(GLOB App_SRC
 	${DKPROJECT}/*.c
 	${DKPROJECT}/*.hpp
 	${DKPROJECT}/*.cpp
+	${DKPROJECT}/*.manifest
 	${DKPROJECT}/*.rc
 	${DKPROJECT}/icons/windows/*.rc)
 
@@ -490,6 +491,7 @@ if(WIN_32)
 	target_link_libraries(${AppName} ${DEBUG_LIBS} ${RELEASE_LIBS} ${WIN_LIBS})
 	##set_source_files_properties(${DIGITALKNOB}/stdafx.cpp PROPERTIES COMPILE_FLAGS "/Ycstdafx.h")
 	
+	list(APPEND DEBUG_LINK_FLAGS /MANIFEST:NO)
 	list(APPEND DEBUG_LINK_FLAGS /MANIFESTUAC:NO)
 	list(APPEND DEBUG_LINK_FLAGS /level='highestAvailable')
 	list(APPEND DEBUG_LINK_FLAGS /uiAccess='true')
@@ -500,12 +502,22 @@ if(WIN_32)
 	##list(APPEND RELEASE_LINK_FLAGS /FORCE) ## MySQL lib needs /FORCE due to zlib redefinitions
 	list(APPEND RELEASE_LINK_FLAGS /INCREMENTAL:NO)
 	list(APPEND RELEASE_LINK_FLAGS /OPT:NOREF)
+	list(APPEND RELEASE_LINK_FLAGS /MANIFEST:NO)
 	list(APPEND RELEASE_LINK_FLAGS /MANIFESTUAC:NO)
 	list(APPEND RELEASE_LINK_FLAGS /level='highestAvailable')
 	list(APPEND RELEASE_LINK_FLAGS /uiAccess='true')
 	list(APPEND RELEASE_LINK_FLAGS /SUBSYSTEM:CONSOLE,5.01)
 	list(APPEND RELEASE_LINK_FLAGS /SAFESEH:NO)
 	string(REPLACE ";" " " RELEASE_FLAGS "${RELEASE_LINK_FLAGS}")
+	
+	#add_custom_command(
+    #TARGET ${AppName}
+    #POST_BUILD
+    #COMMAND "mt.exe" -nologo
+    #        -manifest \"${DKPROJECT}/compatibility.manifest\"
+    #        -outputresource:"${DKPROJECT}/win32/Debug/${AppName}.exe"\;\#1
+    #COMMENT "Adding manifest..."
+    #)
 	
 	set_target_properties(${AppName} PROPERTIES LINK_FLAGS_DEBUG ${DEBUG_FLAGS} LINK_FLAGS_RELEASE ${RELEASE_FLAGS})
 endif(WIN_32)

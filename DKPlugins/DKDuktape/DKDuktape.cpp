@@ -144,7 +144,7 @@ void DKDuktape::my_fatal(void* udata, const char* msg) {
 	/* Note that 'msg' may be NULL. */
 	fprintf(stderr, "*** FATAL ERROR: %s\n", (msg ? msg : "no message"));
 	fflush(stderr);
-	abort();
+	//abort();
 }
 
 bool DKDuktape::AttachFunction(const DKString& name, duk_c_function func){
