@@ -2,7 +2,7 @@
 #define DKKEYCODES_H
 
 
-	
+// https://code.woboq.org/qt5/qtbase/src/corelib/global/qnamespace.h.html	
 enum DK_KeyModifier {
         NoModifier           = 0x00000000,
         ShiftModifier        = 0x02000000,
@@ -20,6 +20,7 @@ enum DK_KeyModifier {
     // user-defined or third-party macros. More so when the identifiers are not
     // "namespace"-prefixed. This is considered bad practice and is why
     // KeypadModifier was not added to the Modifier enum.
+	// https://code.woboq.org/qt5/qtbase/src/corelib/global/qnamespace.h.html
 enum DK_Modifier {
         META          = MetaModifier,
         SHIFT         = ShiftModifier,
@@ -29,6 +30,7 @@ enum DK_Modifier {
         UNICODE_ACCEL = 0x00000000
 };
 
+// https://code.woboq.org/qt5/qtbase/src/corelib/global/qnamespace.h.html
 enum DK_Key {
         Key_Escape = 0x01000000,                // misc keys
         Key_Tab = 0x01000001,
@@ -529,7 +531,7 @@ enum DK_Key {
         Key_unknown = 0x01ffffff
 };
 
-
+// https://code.woboq.org/qt5/qtbase/src/testlib/qasciikey.cpp.html
 DK_Key asciiToKey(char ascii){
     switch ((unsigned char)ascii) {
     case 0x08: return Key_Backspace;
@@ -710,6 +712,7 @@ DK_Key asciiToKey(char ascii){
     }
 }
 
+// https://code.woboq.org/qt5/qtbase/src/testlib/qasciikey.cpp.html
 char keyToAscii(DK_Key key){
     switch (key) {
     case Key_Backspace: return 0x8; //BS
@@ -965,6 +968,8 @@ char keyToAscii(DK_Key key){
     }
 }
 
+
+// https://code.woboq.org/qt5/qtbase/src/plugins/platforms/windows/qwindowskeymapper.cpp.html
 #ifdef WIN32
 static const unsigned int WinKeyTbl[] = { // Keyboard mapping table
                         // Dec |  Hex | Windows Virtual key
@@ -1228,6 +1233,8 @@ static const unsigned int WinKeyTbl[] = { // Keyboard mapping table
     Key_Clear,      // 254   0xFE   VK_OEM_CLEAR        | Clear key
     0
 };
+
+// https://code.woboq.org/qt5/qtbase/src/plugins/platforms/windows/qwindowskeymapper.cpp.html
 static const unsigned int WinCmdTbl[] = { // Multimedia keys mapping table
                             // Dec |  Hex | AppCommand
     Key_unknown,        //   0   0x00
@@ -1287,6 +1294,7 @@ static const unsigned int WinCmdTbl[] = { // Multimedia keys mapping table
 #endif
 
 // TODO
+// https://dreamswork.github.io/qt4/qkeymapper__mac_8cpp_source.html
 // https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/keyCode 
 
 #endif
