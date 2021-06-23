@@ -47,18 +47,16 @@ bool DKKeyboardEvent::Init()
 int DKKeyboardEvent::altKey(duk_context* ctx)
 {
 	DKDEBUGFUNC(ctx);
-	/*
 	DKString eventAddress = duk_require_string(ctx, 0);
-	Rml::Event* event = DKRml::addressToEvent(eventAddress);
+	DKEvents* event = DKDuktape::addressToEvent(eventAddress);
 	if (!event) {
 		DKERROR("DKKeyboardEvent::altKey(): event invalid\n");
 		duk_push_boolean(ctx, false);
 		return true;
 	}
-
-	bool altKey = event->GetParameter<bool>("alt_key", 0);
+	//TODO
+	bool altKey = false;  
 	duk_push_boolean(ctx, altKey);
-	*/
 	return true;
 }
 
@@ -66,21 +64,18 @@ int DKKeyboardEvent::altKey(duk_context* ctx)
 int DKKeyboardEvent::code(duk_context* ctx)
 {
 	DKDEBUGFUNC(ctx);
-	/*
 	DKString eventAddress = duk_require_string(ctx, 0);
-	Rml::Event* event = DKRml::addressToEvent(eventAddress);
+	DKEvents* event = DKDuktape::addressToEvent(eventAddress);
 	if (!event) {
 		DKERROR("DKKeyboardEvent::code(): event invalid\n");
 		duk_push_boolean(ctx, false);
 		return true;
 	}
 
-	//int key = event->GetParameter<int>("key_identifier", 0);
-	Rml::Input::KeyIdentifier key = (Rml::Input::KeyIdentifier) event->GetParameter<int>("key_identifier", 0);
+	int key = std::stoi(event->data[0]);
 	DKString code;
 	TranslateKey(key, code);
 	duk_push_string(ctx, code.c_str());
-	*/
 	return true;
 }
 
@@ -88,18 +83,16 @@ int DKKeyboardEvent::code(duk_context* ctx)
 int DKKeyboardEvent::ctrlKey(duk_context* ctx)
 {
 	DKDEBUGFUNC(ctx);
-	/*
 	DKString eventAddress = duk_require_string(ctx, 0);
-	Rml::Event* event = DKRml::addressToEvent(eventAddress);
+	DKEvents* event = DKDuktape::addressToEvent(eventAddress);
 	if (!event) {
 		DKERROR("DKKeyboardEvent::ctrlKey(): event invalid\n");
 		duk_push_boolean(ctx, false);
 		return true;
 	}
-
-	bool ctrlKey = event->GetParameter<bool>("ctrl_key", 0);
+	//TODO
+	bool ctrlKey;
 	duk_push_boolean(ctx, ctrlKey);
-	*/
 	return true;
 }
 
@@ -107,9 +100,8 @@ int DKKeyboardEvent::ctrlKey(duk_context* ctx)
 int DKKeyboardEvent::isComposing(duk_context* ctx)
 {
 	DKDEBUGFUNC(ctx);
-	/*
 	DKString eventAddress = duk_require_string(ctx, 0);
-	Rml::Event* event = DKRml::addressToEvent(eventAddress);
+	DKEvents* event = DKDuktape::addressToEvent(eventAddress);
 	if (!event) {
 		DKERROR("DKKeyboardEvent::isComposing(): event invalid\n");
 		duk_push_boolean(ctx, false);
@@ -117,9 +109,8 @@ int DKKeyboardEvent::isComposing(duk_context* ctx)
 	}
 
 	//TODO
-	bool isComposing = event->GetParameter<bool>("isComposing", 0);
+	bool isComposing;
 	duk_push_boolean(ctx, isComposing);
-	*/
 	return false;
 }
 
@@ -127,18 +118,16 @@ int DKKeyboardEvent::isComposing(duk_context* ctx)
 int DKKeyboardEvent::key(duk_context* ctx)
 {
 	DKDEBUGFUNC(ctx);
-	/*
 	DKString eventAddress = duk_require_string(ctx, 0);
-	Rml::Event* event = DKRml::addressToEvent(eventAddress);
+	DKEvents* event = DKDuktape::addressToEvent(eventAddress);
 	if (!event) {
 		DKERROR("DKKeyboardEvent::key(): event invalid\n");
 		duk_push_boolean(ctx, false);
 		return true;
 	}
-
-	int key = event->GetParameter<int>("key_identifier", 0);
+	//TODO
+	int key;
 	duk_push_int(ctx, key);
-	*/
 	return true;
 }
 
@@ -146,19 +135,16 @@ int DKKeyboardEvent::key(duk_context* ctx)
 int DKKeyboardEvent::locale(duk_context* ctx)
 {
 	DKDEBUGFUNC(ctx);
-	/*
 	DKString eventAddress = duk_require_string(ctx, 0);
-	Rml::Event* event = DKRml::addressToEvent(eventAddress);
+	DKEvents* event = DKDuktape::addressToEvent(eventAddress);
 	if (!event) {
 		DKERROR("DKKeyboardEvent::locale(): event invalid\n");
 		duk_push_boolean(ctx, false);
 		return true;
 	}
-
 	//TODO
-	DKString locale = event->GetParameter<DKString>("locale", 0);
+	DKString locale;
 	duk_push_string(ctx, locale.c_str());
-	*/
 	return false;
 }
 
@@ -166,19 +152,16 @@ int DKKeyboardEvent::locale(duk_context* ctx)
 int DKKeyboardEvent::location(duk_context* ctx)
 {
 	DKDEBUGFUNC(ctx);
-	/*
 	DKString eventAddress = duk_require_string(ctx, 0);
-	Rml::Event* event = DKRml::addressToEvent(eventAddress);
+	DKEvents* event = DKDuktape::addressToEvent(eventAddress);
 	if (!event) {
 		DKERROR("DKKeyboardEvent::location(): event invalid\n");
 		duk_push_boolean(ctx, false);
 		return true;
 	}
-
 	//TODO
-	int location = event->GetParameter<int>("location", 0);
+	int location;
 	duk_push_int(ctx, location);
-	*/
 	return false;
 }
 
@@ -186,18 +169,16 @@ int DKKeyboardEvent::location(duk_context* ctx)
 int DKKeyboardEvent::metaKey(duk_context* ctx)
 {
 	DKDEBUGFUNC(ctx);
-	/*
 	DKString eventAddress = duk_require_string(ctx, 0);
-	Rml::Event* event = DKRml::addressToEvent(eventAddress);
+	DKEvents* event = DKDuktape::addressToEvent(eventAddress);
 	if (!event) {
 		DKERROR("DKKeyboardEvent::metaKey(): event invalid\n");
 		duk_push_boolean(ctx, false);
 		return true;
 	}
-
-	bool metaKey = event->GetParameter<bool>("meta_key", 0);
+	//TODO
+	bool metaKey;
 	duk_push_boolean(ctx, metaKey);
-	*/
 	return true;
 }
 
@@ -205,19 +186,16 @@ int DKKeyboardEvent::metaKey(duk_context* ctx)
 int DKKeyboardEvent::repeat(duk_context* ctx)
 {
 	DKDEBUGFUNC(ctx);
-	/*
 	DKString eventAddress = duk_require_string(ctx, 0);
-	Rml::Event* event = DKRml::addressToEvent(eventAddress);
+	DKEvents* event = DKDuktape::addressToEvent(eventAddress);
 	if (!event) {
 		DKERROR("DKKeyboardEvent::repeat(): event invalid\n");
 		duk_push_boolean(ctx, false);
 		return true;
 	}
-
 	//TODO
-	bool repeat = event->GetParameter<bool>("repeat", 0);
+	bool repeat;
 	duk_push_boolean(ctx, repeat);
-	*/
 	return false;
 }
 
@@ -225,18 +203,16 @@ int DKKeyboardEvent::repeat(duk_context* ctx)
 int DKKeyboardEvent::shiftKey(duk_context* ctx)
 {
 	DKDEBUGFUNC(ctx);
-	/*
 	DKString eventAddress = duk_require_string(ctx, 0);
-	Rml::Event* event = DKRml::addressToEvent(eventAddress);
+	DKEvents* event = DKDuktape::addressToEvent(eventAddress);
 	if (!event) {
 		DKERROR("DKKeyboardEvent::shiftKey(): event invalid\n");
 		duk_push_boolean(ctx, false);
 		return true;
 	}
-
-	bool shiftKey = event->GetParameter<bool>("shift_key", 0);
+	//TODO
+	bool shiftKey;
 	duk_push_boolean(ctx, shiftKey);
-	*/
 	return true;
 }
 
@@ -246,17 +222,14 @@ int DKKeyboardEvent::shiftKey(duk_context* ctx)
 int DKKeyboardEvent::getModifierState(duk_context* ctx)
 {
 	DKDEBUGFUNC(ctx);
-	/*
 	DKString eventAddress = duk_require_string(ctx, 0);
-	Rml::Event* event = DKRml::addressToEvent(eventAddress);
+	DKEvents* event = DKDuktape::addressToEvent(eventAddress);
 	if (!event) {
 		DKERROR("DKKeyboardEvent::getModifierState(): event invalid\n");
 		duk_push_boolean(ctx, false);
 		return true;
 	}
-
 	//TODO
-	*/
 	return false;
 }
 
@@ -266,19 +239,16 @@ int DKKeyboardEvent::getModifierState(duk_context* ctx)
 int DKKeyboardEvent::initKeyEvent(duk_context* ctx)
 {
 	DKDEBUGFUNC(ctx);
-	/*
 	DKString eventAddress = duk_require_string(ctx, 0);
-	Rml::Event* event = DKRml::addressToEvent(eventAddress);
+	DKEvents* event = DKDuktape::addressToEvent(eventAddress);
 	if (!event) {
 		DKERROR("DKKeyboardEvent::initKeyEvent(): event invalid\n");
 		duk_push_boolean(ctx, false);
 		return true;
 	}
-
 	//TODO
-	//bool ctrlKey = event->GetParameter<bool>("ctrl_key", 0);
+	//bool ctrlKe;
 	//duk_push_boolean(ctx, ctrlKey);
-	*/
 	return false;
 }
 
@@ -286,19 +256,16 @@ int DKKeyboardEvent::initKeyEvent(duk_context* ctx)
 int DKKeyboardEvent::initKeyboardEvent(duk_context* ctx)
 {
 	DKDEBUGFUNC(ctx);
-	/*
 	DKString eventAddress = duk_require_string(ctx, 0);
-	Rml::Event* event = DKRml::addressToEvent(eventAddress);
+	DKEvents* event = DKDuktape::addressToEvent(eventAddress);
 	if (!event) {
 		DKERROR("DKKeyboardEvent::initKeyboardEvent(): event invalid\n");
 		duk_push_boolean(ctx, false);
 		return true;
 	}
-
 	//TODO
 	//bool ctrlKey = event->GetParameter<bool>("ctrl_key", 0);
 	//duk_push_boolean(ctx, ctrlKey);
-	*/
 	return false;
 }
 
@@ -308,19 +275,16 @@ int DKKeyboardEvent::initKeyboardEvent(duk_context* ctx)
 int DKKeyboardEvent::char1(duk_context* ctx)
 {
 	DKDEBUGFUNC(ctx);
-	/*
 	DKString eventAddress = duk_require_string(ctx, 0);
-	Rml::Event* event = DKRml::addressToEvent(eventAddress);
+	DKEvents* event = DKDuktape::addressToEvent(eventAddress);
 	if (!event) {
 		DKERROR("DKKeyboardEvent::char1(): event invalid\n");
 		duk_push_boolean(ctx, false);
 		return true;
 	}
-
 	//TODO
 	//bool char1 = event->GetParameter<bool>("char", 0);
 	//duk_push_int(ctx, char1);
-	*/
 	return false;
 }
 
@@ -328,19 +292,16 @@ int DKKeyboardEvent::char1(duk_context* ctx)
 int DKKeyboardEvent::charCode(duk_context* ctx)
 {
 	DKDEBUGFUNC(ctx);
-	/*
 	DKString eventAddress = duk_require_string(ctx, 0);
-	Rml::Event* event = DKRml::addressToEvent(eventAddress);
+	DKEvents* event = DKDuktape::addressToEvent(eventAddress);
 	if (!event) {
 		DKERROR("DKKeyboardEvent::charCode(): event invalid\n");
 		duk_push_boolean(ctx, false);
 		return true;
 	}
-
 	//TODO
 	//bool char1 = event->GetParameter<bool>("char", 0);
 	//duk_push_int(ctx, char1);
-	*/
 	return false;
 }
 
@@ -348,19 +309,16 @@ int DKKeyboardEvent::charCode(duk_context* ctx)
 int DKKeyboardEvent::keyCode(duk_context* ctx)
 {
 	DKDEBUGFUNC(ctx);
-	/*
 	DKString eventAddress = duk_require_string(ctx, 0);
-	Rml::Event* event = DKRml::addressToEvent(eventAddress);
+	DKEvents* event = DKDuktape::addressToEvent(eventAddress);
 	if (!event) {
 		DKERROR("DKKeyboardEvent::keyCode(): event invalid\n");
 		duk_push_boolean(ctx, false);
 		return true;
 	}
-
 	//TODO
 	//bool char1 = event->GetParameter<bool>("char", 0);
 	//duk_push_int(ctx, char1);
-	*/
 	return false;
 }
 
@@ -368,19 +326,16 @@ int DKKeyboardEvent::keyCode(duk_context* ctx)
 int DKKeyboardEvent::keyIdentifier(duk_context* ctx)
 {
 	DKDEBUGFUNC(ctx);
-	/*
 	DKString eventAddress = duk_require_string(ctx, 0);
-	Rml::Event* event = DKRml::addressToEvent(eventAddress);
+	DKEvents* event = DKDuktape::addressToEvent(eventAddress);
 	if (!event) {
 		DKERROR("DKKeyboardEvent::keyIdentifier(): event invalid\n");
 		duk_push_boolean(ctx, false);
 		return true;
 	}
-
 	//TODO
 	//bool char1 = event->GetParameter<bool>("char", 0);
 	//duk_push_int(ctx, char1);
-	*/
 	return false;
 }
 
@@ -388,19 +343,16 @@ int DKKeyboardEvent::keyIdentifier(duk_context* ctx)
 int DKKeyboardEvent::keyLocation(duk_context* ctx)
 {
 	DKDEBUGFUNC(ctx);
-	/*
 	DKString eventAddress = duk_require_string(ctx, 0);
-	Rml::Event* event = DKRml::addressToEvent(eventAddress);
+	DKEvents* event = DKDuktape::addressToEvent(eventAddress);
 	if (!event) {
 		DKERROR("DKKeyboardEvent::char1(): event invalid\n");
 		duk_push_boolean(ctx, false);
 		return true;
 	}
-
 	//TODO
 	//bool char1 = event->GetParameter<bool>("char", 0);
 	//duk_push_int(ctx, char1);
-	*/
 	return false;
 }
 
@@ -408,28 +360,27 @@ int DKKeyboardEvent::keyLocation(duk_context* ctx)
 int DKKeyboardEvent::which(duk_context* ctx)
 {
 	DKDEBUGFUNC(ctx);
-	/*
 	DKString eventAddress = duk_require_string(ctx, 0);
-	Rml::Event* event = DKRml::addressToEvent(eventAddress);
+	DKEvents* event = DKDuktape::addressToEvent(eventAddress);
 	if (!event) {
 		DKERROR("DKKeyboardEvent::which(): event invalid\n");
 		duk_push_boolean(ctx, false);
 		return true;
 	}
-
 	//TODO
 	//bool char1 = event->GetParameter<bool>("char", 0);
 	//duk_push_int(ctx, char1);
-	*/
 	return false;
 }
 
 
 //Extra
+// https://css-tricks.com/snippets/javascript/javascript-keycodes/
 bool DKKeyboardEvent::TranslateKey(int key, DKString& value)
 {
-	/*
 	switch (key) {
+		/*
+		
 		case Rml::Input::KI_UNKNOWN:
 			value = "KI_UNKNOWN";
 			break;
@@ -466,84 +417,86 @@ bool DKKeyboardEvent::TranslateKey(int key, DKString& value)
 		case Rml::Input::KI_9:
 			value = "Digit9";
 			break;
-		case Rml::Input::KI_A:
+			*/
+		case 65:
 			value = "KeyA";
 			break;
-		case Rml::Input::KI_B:
+		case 66:
 			value = "KeyB";
 			break;
-		case Rml::Input::KI_C:
+		case 67:
 			value = "KeyC";
 			break;
-		case Rml::Input::KI_D:
+		case 68:
 			value = "KeyD";
 			break;
-		case Rml::Input::KI_E:
+		case 69:
 			value = "KeyE";
 			break;
-		case Rml::Input::KI_F:
+		case 70:
 			value = "KeyF";
 			break;
-		case Rml::Input::KI_G:
+		case 71:
 			value = "KeyG";
 			break;
-		case Rml::Input::KI_H:
+		case 72:
 			value = "KeyH";
 			break;
-		case Rml::Input::KI_I:
+		case 73:
 			value = "KeyI";
 			break;
-		case Rml::Input::KI_J:
+		case 74:
 			value = "KeyJ";
 			break;
-		case Rml::Input::KI_K:
+		case 75:
 			value = "KeyK";
 			break;
-		case Rml::Input::KI_L:
+		case 76:
 			value = "KeyL";
 			break;
-		case Rml::Input::KI_M:
+		case 77:
 			value = "KeyM";
 			break;
-		case Rml::Input::KI_N:
+		case 78:
 			value = "KeyN";
 			break;
-		case Rml::Input::KI_O:
+		case 79:
 			value = "KeyO";
 			break;
-		case Rml::Input::KI_P:
+		case 80:
 			value = "KeyP";
 			break;
-		case Rml::Input::KI_Q:
+		case 81:
 			value = "KeyQ";
 			break;
-		case Rml::Input::KI_R:
+		case 82:
 			value = "KeyR";
 			break;
-		case Rml::Input::KI_S:
+		case 83:
 			value = "KeyS";
 			break;
-		case Rml::Input::KI_T:
+		case 84:
 			value = "KeyT";
 			break;
-		case Rml::Input::KI_U:
+		case 85:
 			value = "KeyU";
 			break;
-		case Rml::Input::KI_V:
+		case 86:
 			value = "KeyV";
 			break;
-		case Rml::Input::KI_W:
+		case 87:
 			value = "KeyW";
 			break;
-		case Rml::Input::KI_X:
+		case 88:
 			value = "KeyX";
 			break;
-		case Rml::Input::KI_Y:
+		case 89:
 			value = "KeyY";
 			break;
-		case Rml::Input::KI_Z:
+		case 90:
 			value = "KeyZ";
 			break;
+			/*
 		case Rml::Input::KI_OEM_1:
 			value = "Semicolon";
 			break;				// US standard keyboard; the ';:' key.
@@ -970,10 +923,12 @@ bool DKKeyboardEvent::TranslateKey(int key, DKString& value)
 		case Rml::Input::KI_RMETA:
 			value = "MetaRight";
 			break;
+			*/
 		default:
-			return "";
+			//return false;
 			break;
 	}
-*/
+	
+	value = toString(key);
 	return true;
 }
