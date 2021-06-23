@@ -379,45 +379,42 @@ int DKKeyboardEvent::which(duk_context* ctx)
 bool DKKeyboardEvent::TranslateKey(int key, DKString& value)
 {
 	switch (key) {
-		/*
-		
-		case Rml::Input::KI_UNKNOWN:
-			value = "KI_UNKNOWN";
-			break;
-		case Rml::Input::KI_SPACE:
+		//case Rml::Input::KI_UNKNOWN:
+		//	value = "KI_UNKNOWN";
+		//	break;
+		case 32:
 			value = "Space";
 			break;
-		case Rml::Input::KI_0:
+		case 48:
 			value = "Digit0";
 			break;
-		case Rml::Input::KI_1:
+		case 49:
 			value = "Digit1";
 			break;
-		case Rml::Input::KI_2:
+		case 50:
 			value = "Digit2";
 			break;
-		case Rml::Input::KI_3:
+		case 51:
 			value = "Digit3";
 			break;
-		case Rml::Input::KI_4:
+		case 52:
 			value = "Digit4";
 			break;
-		case Rml::Input::KI_5:
+		case 53:
 			value = "Digit5";
 			break;
-		case Rml::Input::KI_6:
+		case 54:
 			value = "Digit6";
 			break;
-		case Rml::Input::KI_7:
+		case 55:
 			value = "Digit7";
 			break;
-		case Rml::Input::KI_8:
+		case 56:
 			value = "Digit8";
 			break;
-		case Rml::Input::KI_9:
+		case 57:
 			value = "Digit9";
 			break;
-			*/
 		case 65:
 			value = "KeyA";
 			break;
@@ -496,95 +493,96 @@ bool DKKeyboardEvent::TranslateKey(int key, DKString& value)
 		case 90:
 			value = "KeyZ";
 			break;
-			/*
-		case Rml::Input::KI_OEM_1:
+		case 186:
 			value = "Semicolon";
 			break;				// US standard keyboard; the ';:' key.
-		case Rml::Input::KI_OEM_PLUS:
+		case 187:
 			value = "Equal";
 			break;			// Any region; the '=+' key.
-		case Rml::Input::KI_OEM_COMMA:
+		case 188:
 			value = "Comma";
 			break;			// Any region; the ',<' key.
-		case Rml::Input::KI_OEM_MINUS:
+		case 189:
 			value = "Minus";
 			break; 		// Any region; the '-_' key.
-		case Rml::Input::KI_OEM_PERIOD:
+		case 190:
 			value = "Period";
 			break;			// Any region; the '.>' key.
-		case Rml::Input::KI_OEM_2:
+		case 191:
 			value = "Slash";
 			break;				// Any region; the '/?' key.
-		case Rml::Input::KI_OEM_3:
+		case 192:
 			value = "Backquote";
-			break;				// Any region; the '`~' key.
-		case Rml::Input::KI_OEM_4:
+			break;	             // Any region; the '`~' key.
+		case 219:
 			value = "BracketLeft";
 			break;				// US standard keyboard; the '[{' key.
-		case Rml::Input::KI_OEM_5:
+		case 220:
 			value = "Backslash";
 			break;				// US standard keyboard; the '\|' key.
-		case Rml::Input::KI_OEM_6:
+		case 221:
 			value = "BracketRight";
 			break;				// US standard keyboard; the ']}' key.
-		case Rml::Input::KI_OEM_7:
+		case 222:
 			value = "Quote";
 			break;				// US standard keyboard; the ''"' key.
+			/*
 		case Rml::Input::KI_OEM_8:
 			value = "KI_OEM_8";
 			break;
 		case Rml::Input::KI_OEM_102:
 			value = "KI_OEM_102";
 			break;			// RT 102-key keyboard; the '<>' or '\|' key.
-		case Rml::Input::KI_NUMPAD0:
+			*/
+		case 96:
 			value = "Numpad0";
 			break;
-		case Rml::Input::KI_NUMPAD1:
+		case 97:
 			value = "Numpad1";
 			break;
-		case Rml::Input::KI_NUMPAD2:
+		case 98:
 			value = "Numpad2";
 			break;
-		case Rml::Input::KI_NUMPAD3:
+		case 99:
 			value = "Numpad3";
 			break;
-		case Rml::Input::KI_NUMPAD4:
+		case 100:
 			value = "Numpad4";
 			break;
-		case Rml::Input::KI_NUMPAD5:
+		case 101:
 			value = "Numpad5";
 			break;
-		case Rml::Input::KI_NUMPAD6:
+		case 102:
 			value = "Numpad6";
 			break;
-		case Rml::Input::KI_NUMPAD7:
+		case 103:
 			value = "Numpad7";
 			break;
-		case Rml::Input::KI_NUMPAD8:
+		case 104:
 			value = "Numpad8";
 			break;
-		case Rml::Input::KI_NUMPAD9:
+		case 105:
 			value = "Numpad9";
 			break;
-		case Rml::Input::KI_NUMPADENTER:
+		case 13:
 			value = "NumpadEnter";
 			break;
-		case Rml::Input::KI_MULTIPLY:
+		case 106:
 			value = "NumpadMultiply";
 			break;			// Asterisk on the numeric keypad.
-		case Rml::Input::KI_ADD:
+		case 107:
 			value = "NumpadAdd";
 			break;				// Plus on the numeric keypad.
-		case Rml::Input::KI_SEPARATOR:
+		case 108:
 			value = "NumpadMinus";
 			break;
-		case Rml::Input::KI_SUBTRACT:
+		case 109:
 			value = "NumpadSubtract";
 			break;			// Minus on the numeric keypad.
-		case Rml::Input::KI_DECIMAL:
+		case 110:
 			value = "NumpadDecimal";
 			break;			// Period on the numeric keypad.
-		case Rml::Input::KI_DIVIDE:
+		case 111:
 			value = "NumpadDivide";
 			break;				// Forward Slash on the numeric keypad.
 	
@@ -593,19 +591,19 @@ bool DKKeyboardEvent::TranslateKey(int key, DKString& value)
 		case Rml::Input::KI_OEM_NEC_EQUAL:
 			value = "KI_OEM_NEC_EQUAL";
 			break;		// Equals key on the numeric keypad.
-		case Rml::Input::KI_BACK:
+		case 8:
 			value = "Backspace";
 			break;				// Backspace key.
-		case Rml::Input::KI_TAB:
+		case 9:
 			value = "Tab";
 			break;				// Tab key.
 		case Rml::Input::KI_CLEAR:
 			value = "KI_CLEAR";
 			break;
-		case Rml::Input::KI_RETURN:
+		case 13
 			value = "Enter";
 			break;
-		case Rml::Input::KI_PAUSE:
+		case 19
 			value = "Pause";
 			break;
 		case Rml::Input::KI_CAPITAL:
