@@ -2,6 +2,7 @@
 
 #include "DK/DKApp.h"
 #include "DKDuktape/DKEvent.h"
+#include "DK/DKEvents.h"
 //#include "DKDom/DKElement.h"
 
 
@@ -331,9 +332,8 @@ int DKEvent::timeStamp(duk_context* ctx)
 int DKEvent::type(duk_context* ctx)
 {
 	DKDEBUGFUNC(ctx);
-	/*
 	DKString eventAddress = duk_require_string(ctx, 0);
-	Rml::Event* event = DKRml::addressToEvent(eventAddress);
+	DKEvents* event = DKDuktape::addressToEvent(eventAddress);
 	if (!event) {
 		DKERROR("DKEvent::type(): event invalid\n");
 		duk_push_boolean(ctx, false);
@@ -345,12 +345,11 @@ int DKEvent::type(duk_context* ctx)
 		return true; 
 	}
 
-	if(same(type, "mouseup") && event->GetParameter<int>("button", 0) == 1){
-		type = "contextmenu";
-	}
+	//if(same(type, "mouseup") && event->GetParameter<int>("button", 0) == 1){
+	//	type = "contextmenu";
+	//}
 
 	duk_push_string(ctx, type.c_str());
-	*/
 	return true;
 }
 

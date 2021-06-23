@@ -5,7 +5,7 @@
 #define DKDuktape_H
 #include "DK/DK.h"
 #include "duktape.h"
-//#include "duk_v1_compat.h"
+#include "DK/DKEvents.h"
 
 /* Flags for duk_push_string_file_raw() */
 #define DUK_STRING_PUSH_SAFE              (1 << 0)    /* no error if file does not exist */
@@ -32,6 +32,8 @@ public:
 	static bool Trace();
 	static bool QueueDuktape(const DKString& code);
 	static bool UnloadFile(const DKString& path);
+	static DKString eventToAddress(DKEvents* event);
+	static DKEvents* addressToEvent(const DKString& address);
 
 	//TODO
 	//static void AttachFunction(const DKString& name, const DKString& object, duk_c_function func, int nargs);

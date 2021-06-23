@@ -31,11 +31,14 @@ var Event = function(pointer) //https://developer.mozilla.org/en-US/docs/Web/API
     //Read Only
     Object.defineProperty(this, "currentTarget", {
         get: function() {
+			return window;
+			/*
             var elementPointer = CPP_DKEvent_currentTarget(pointer);
             if (!elementPointer) {
                 return;
             }
             return new HTMLElement(elementPointer);
+			*/
         }
     });
     //Read Only
@@ -173,7 +176,7 @@ var Event = function(pointer) //https://developer.mozilla.org/en-US/docs/Web/API
     //return this;
 };
 
-// Called from C++ RmlUI to send events
+// Called from C++ to send events
 ///////////////////////////////
 function DispatchEvent(pointer) {
     var event = new Event(pointer);

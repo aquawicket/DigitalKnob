@@ -52,7 +52,8 @@ bool DKEventTarget::OnEvent(DKEvents* event)
 	}
 	*/
 
-	DKString rmlEventAddress = event->data[0];
+	//DKString eventAddress = event->data[0];
+	DKString eventAddress = DKDuktape::eventToAddress(event);
 
 	//This is current evaluated javascript side at DKEvent.js: DispatchEvent(pointer)
 	/*
@@ -75,7 +76,7 @@ bool DKEventTarget::OnEvent(DKEvents* event)
 	*/
 
 	//dispatch the event
-	DKString dispatchEvent = "DispatchEvent(\"" + rmlEventAddress + "\")";
+	DKString dispatchEvent = "DispatchEvent(\"" + eventAddress + "\")";
 	if (duk_peval_string(ctx, dispatchEvent.c_str()) != 0) {
 		DKDuktape::DumpError(dispatchEvent);
 	}
