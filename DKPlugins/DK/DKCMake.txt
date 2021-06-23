@@ -24,7 +24,6 @@ ELSEIF(LINUX)
 	DKDEPEND(libasound2-dev) ##TODO: Move to DKAudio
 	DKDEPEND(libxtst-dev)
 	## DKDEPEND(libboost-tools-dev)
-	DKDEPEND(boost)
 	DKDEPEND(boost Boost_System)
 	DKDEPEND(boost Boost_Filesystem)
 ELSEIF(RASPBERRY)
