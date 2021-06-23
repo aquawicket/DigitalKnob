@@ -9,8 +9,8 @@
 class DKWindowV8 : public DKObjectT<DKWindowV8>
 {
 public:
-	bool DKWindowV8::Init();
-	bool DKWindowV8::End();
+	bool Init();
+	bool End();
 
 	static bool TestInt(CefArgs args, CefReturn retval);
 	static bool TestString(CefArgs args, CefReturn retval);
