@@ -220,7 +220,6 @@ function(DKINCLUDE arg)
 		return() ## If the include is already in the list, return.
 	endif()
 	DKSET(DKINCLUDES_LIST ${DKINCLUDES_LIST} ${arg})
-	message("############## DKINCLUDES_LIST = ${DKINCLUDES_LIST}")
 	include_directories(${arg})
 endfunction()
 
@@ -2129,15 +2128,17 @@ function(DKRUNDEPENDS arg)
 			set(ModifiedContents "${ModifiedContents}${line}\n")
 		endif()
 		
-		string(FIND "${line}" "elseif(" _indexa)
-		if(${_indexa} GREATER -1)
-			set(ModifiedContents "${ModifiedContents}${line}\n")
-		endif()
-		
-		string(FIND "${line}" "ELSEIF(" _indexa)
-		if(${_indexa} GREATER -1)
-			set(ModifiedContents "${ModifiedContents}${line}\n")
-		endif()
+		## covered by if(
+		##string(FIND "${line}" "elseif(" _indexa)
+		##if(${_indexa} GREATER -1)
+		##	set(ModifiedContents "${ModifiedContents}${line}\n")
+		##endif()
+
+		## covered by IF(
+		##string(FIND "${line}" "ELSEIF(" _indexa)
+		##if(${_indexa} GREATER -1)
+		##	set(ModifiedContents "${ModifiedContents}${line}\n")
+		##endif()
 		
 		string(FIND "${line}" "else(" _indexa)
 		if(${_indexa} GREATER -1)
@@ -2149,11 +2150,13 @@ function(DKRUNDEPENDS arg)
 			set(ModifiedContents "${ModifiedContents}${line}\n")
 		endif()
 		
+		## covered by if(
 		##string(FIND "${line}" "endif(" _indexa)
 		##if(${_indexa} GREATER -1)
 		##	set(ModifiedContents "${ModifiedContents}${line}\n")
 		##endif()
 		
+		## covered by IF(
 		##string(FIND "${line}" "ENDIF(" _indexa)
 		##if(${_indexa} GREATER -1)
 		##	set(ModifiedContents "${ModifiedContents}${line}\n")
