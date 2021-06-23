@@ -80,19 +80,16 @@ bool DKDuktape::Init(){
 		DKClass::DKCreate("DKDuktapeJS");
 		//Load the Duktape javascript DOM
 		DKClass::DKCreate("DKConsole");
-		//DKClass::DKCreate("DKDomConsole");
 		DKClass::DKCreate("DKNavigator");
-		//DKClass::DKCreate("DKDomNavigator");
 		DKClass::DKCreate("DKEventTarget");
-		//DKClass::DKCreate("DKDomEventTarget");
 		DKClass::DKCreate("DKDuktape/DKGlobalEventHandlers.js");
-		//DKClass::DKCreate("DKDom/DKDomGlobalEventHandlers.js");
 		DKClass::DKCreate("DKXMLHttpRequest");
-		//DKClass::DKCreate("DKDomXMLHttpRequest");
 		DKClass::DKCreate("DKScreen");
-		//DKClass::DKCreate("DKDomScreen");
 		DKClass::DKCreate("DKDuktape/DKWindow.js");
-		//DKClass::DKCreate("DKDom/DKDomWindow");
+		DKClass::DKCreate("DKEvent");
+		DKClass::DKCreate("DKUIEvent");
+		DKClass::DKCreate("DKKeyboardEvent");
+
 
 		//Register javascript Timers: setTimeout, clearTimeout, setInterval, clearInterval
 		poll_register(ctx);

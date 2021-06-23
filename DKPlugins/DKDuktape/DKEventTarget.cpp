@@ -56,8 +56,6 @@ bool DKEventTarget::OnEvent(DKEvents* event)
 	//duk_eval_string(ctx, newEvent.c_str());
 	if (duk_peval_string(ctx, newEvent.c_str()) != 0){
 		//printf("eval failed: %s\n", duk_safe_to_string(ctx, -1));
-
-
 		duk_get_prop_string(ctx, -1, "name");  // push `err.name`
 		DKString name = duk_get_string(ctx, -1);
 		duk_pop(ctx);  // pop `err.name`
