@@ -3,6 +3,7 @@
 #include "DK/DKApp.h"
 #include "DKDuktape/DKEvent.h"
 #include "DKDuktape/DKKeyboardEvent.h"
+#include "DKDuktape/DKKeyCodes.h"
 
 
 ///////////////////////////////
@@ -378,555 +379,557 @@ int DKKeyboardEvent::which(duk_context* ctx)
 // https://css-tricks.com/snippets/javascript/javascript-keycodes/
 bool DKKeyboardEvent::TranslateKey(int key, DKString& value)
 {
+	value = toString(key);
+	return true;
+	
+	/*
 	switch (key) {
-		//case Rml::Input::KI_UNKNOWN:
-		//	value = "KI_UNKNOWN";
-		//	break;
-		case 32:
+		case KI_UNKNOWN:
+			value = "KI_UNKNOWN";
+			break;
+		case KI_SPACE:
 			value = "Space";
 			break;
-		case 48:
+		case KI_0:
 			value = "Digit0";
 			break;
-		case 49:
+		case KI_1:
 			value = "Digit1";
 			break;
-		case 50:
+		case KI_2:
 			value = "Digit2";
 			break;
-		case 51:
+		case KI_3:
 			value = "Digit3";
 			break;
-		case 52:
+		case KI_4:
 			value = "Digit4";
 			break;
-		case 53:
+		case KI_5:
 			value = "Digit5";
 			break;
-		case 54:
+		case KI_6:
 			value = "Digit6";
 			break;
-		case 55:
+		case KI_7:
 			value = "Digit7";
 			break;
-		case 56:
+		case KI_8:
 			value = "Digit8";
 			break;
-		case 57:
+		case KI_9:
 			value = "Digit9";
 			break;
-		case 65:
+		case KI_A:
 			value = "KeyA";
 			break;
-		case 66:
+		case KI_B:
 			value = "KeyB";
 			break;
-		case 67:
+		case KI_C:
 			value = "KeyC";
 			break;
-		case 68:
+		case KI_D:
 			value = "KeyD";
 			break;
-		case 69:
+		case KI_E:
 			value = "KeyE";
 			break;
-		case 70:
+		case KI_F:
 			value = "KeyF";
 			break;
-		case 71:
+		case KI_G:
 			value = "KeyG";
 			break;
-		case 72:
+		case KI_H:
 			value = "KeyH";
 			break;
-		case 73:
+		case KI_I:
 			value = "KeyI";
 			break;
-		case 74:
+		case KI_J:
 			value = "KeyJ";
 			break;
-		case 75:
+		case KI_K:
 			value = "KeyK";
 			break;
-		case 76:
+		case KI_L:
 			value = "KeyL";
 			break;
-		case 77:
+		case KI_M:
 			value = "KeyM";
 			break;
-		case 78:
+		case KI_N:
 			value = "KeyN";
 			break;
-		case 79:
+		case KI_O:
 			value = "KeyO";
 			break;
-		case 80:
+		case KI_P:
 			value = "KeyP";
 			break;
-		case 81:
+		case KI_Q:
 			value = "KeyQ";
 			break;
-		case 82:
+		case KI_R:
 			value = "KeyR";
 			break;
-		case 83:
+		case KI_S:
 			value = "KeyS";
 			break;
-		case 84:
+		case KI_T:
 			value = "KeyT";
 			break;
-		case 85:
+		case KI_U:
 			value = "KeyU";
 			break;
-		case 86:
+		case KI_V:
 			value = "KeyV";
 			break;
-		case 87:
+		case KI_W:
 			value = "KeyW";
 			break;
-		case 88:
+		case KI_X:
 			value = "KeyX";
 			break;
-		case 89:
+		case KI_Y:
 			value = "KeyY";
 			break;
-		case 90:
+		case KI_Z:
 			value = "KeyZ";
 			break;
-		case 186:
+		case KI_OEM_1:
 			value = "Semicolon";
 			break;				// US standard keyboard; the ';:' key.
-		case 187:
+		case KI_OEM_PLUS:
 			value = "Equal";
 			break;			// Any region; the '=+' key.
-		case 188:
+		case KI_OEM_COMMA:
 			value = "Comma";
 			break;			// Any region; the ',<' key.
-		case 189:
+		case KI_OEM_MINUS:
 			value = "Minus";
 			break; 		// Any region; the '-_' key.
-		case 190:
+		case KI_OEM_PERIOD:
 			value = "Period";
 			break;			// Any region; the '.>' key.
-		case 191:
+		case KI_OEM_2:
 			value = "Slash";
 			break;				// Any region; the '/?' key.
-		case 192:
+		case KI_OEM_3:
 			value = "Backquote";
-			break;	             // Any region; the '`~' key.
-		case 219:
+			break;				// Any region; the '`~' key.
+		case KI_OEM_4:
 			value = "BracketLeft";
 			break;				// US standard keyboard; the '[{' key.
-		case 220:
+		case KI_OEM_5:
 			value = "Backslash";
 			break;				// US standard keyboard; the '\|' key.
-		case 221:
+		case KI_OEM_6:
 			value = "BracketRight";
 			break;				// US standard keyboard; the ']}' key.
-		case 222:
+		case KI_OEM_7:
 			value = "Quote";
 			break;				// US standard keyboard; the ''"' key.
-			/*
-		case Rml::Input::KI_OEM_8:
+		case KI_OEM_8:
 			value = "KI_OEM_8";
 			break;
-		case Rml::Input::KI_OEM_102:
+		case KI_OEM_102:
 			value = "KI_OEM_102";
 			break;			// RT 102-key keyboard; the '<>' or '\|' key.
-			*/
-		case 96:
+		case KI_NUMPAD0:
 			value = "Numpad0";
 			break;
-		case 97:
+		case KI_NUMPAD1:
 			value = "Numpad1";
 			break;
-		case 98:
+		case KI_NUMPAD2:
 			value = "Numpad2";
 			break;
-		case 99:
+		case KI_NUMPAD3:
 			value = "Numpad3";
 			break;
-		case 100:
+		case KI_NUMPAD4:
 			value = "Numpad4";
 			break;
-		case 101:
+		case KI_NUMPAD5:
 			value = "Numpad5";
 			break;
-		case 102:
+		case KI_NUMPAD6:
 			value = "Numpad6";
 			break;
-		case 103:
+		case KI_NUMPAD7:
 			value = "Numpad7";
 			break;
-		case 104:
+		case KI_NUMPAD8:
 			value = "Numpad8";
 			break;
-		case 105:
+		case KI_NUMPAD9:
 			value = "Numpad9";
 			break;
-		case 13:
+		case KI_NUMPADENTER:
 			value = "NumpadEnter";
 			break;
-		case 106:
+		case KI_MULTIPLY:
 			value = "NumpadMultiply";
 			break;			// Asterisk on the numeric keypad.
-		case 107:
+		case KI_ADD:
 			value = "NumpadAdd";
 			break;				// Plus on the numeric keypad.
-		case 108:
+		case KI_SEPARATOR:
 			value = "NumpadMinus";
 			break;
-		case 109:
+		case KI_SUBTRACT:
 			value = "NumpadSubtract";
 			break;			// Minus on the numeric keypad.
-		case 110:
+		case KI_DECIMAL:
 			value = "NumpadDecimal";
 			break;			// Period on the numeric keypad.
-		case 111:
+		case KI_DIVIDE:
 			value = "NumpadDivide";
 			break;				// Forward Slash on the numeric keypad.
 	
 	//  NEC PC-9800 kbd definitions
 	 
-		case Rml::Input::KI_OEM_NEC_EQUAL:
+		case KI_OEM_NEC_EQUAL:
 			value = "KI_OEM_NEC_EQUAL";
 			break;		// Equals key on the numeric keypad.
-		case 8:
+		case KI_BACK:
 			value = "Backspace";
 			break;				// Backspace key.
-		case 9:
+		case KI_TAB:
 			value = "Tab";
 			break;				// Tab key.
-		case Rml::Input::KI_CLEAR:
+		case KI_CLEAR:
 			value = "KI_CLEAR";
 			break;
-		case 13
+		case KI_RETURN:
 			value = "Enter";
 			break;
-		case 19
+		case KI_PAUSE:
 			value = "Pause";
 			break;
-		case Rml::Input::KI_CAPITAL:
+		case KI_CAPITAL:
 			value = "CapsLock";
 			break;			// Capslock key.
-		case Rml::Input::KI_KANA:
+		case KI_KANA:
 			value = "KI_KANA";
 			break;				// IME Kana mode.
-		case Rml::Input::KI_HANGUL:
+		case KI_HANGUL:
 			value = "KI_HANGUL";
 			break;				// IME Hangul mode.
-		case Rml::Input::KI_JUNJA:
+		case KI_JUNJA:
 			value = "KI_JUNJA";
 			break;				// IME Junja mode.
-		case Rml::Input::KI_FINAL:
+		case KI_FINAL:
 			value = "KI_FINAL";
 			break;				// IME final mode.
-		case Rml::Input::KI_HANJA:
+		case KI_HANJA:
 			value = "KI_HANJA";
 			break;				// IME Hanja mode.
-		case Rml::Input::KI_KANJI:
+		case KI_KANJI:
 			value = "KI_KANJI";
 			break;				// IME Kanji mode.
-		case Rml::Input::KI_ESCAPE:
+		case KI_ESCAPE:
 			value = "Escape";
 			break;				// Escape key.
-		case Rml::Input::KI_CONVERT:
+		case KI_CONVERT:
 			value = "KI_CONVERT";
 			break;			// IME convert.
-		case Rml::Input::KI_NONCONVERT:
+		case KI_NONCONVERT:
 			value = "KI_NONCONVERT";
 			break;			// IME nonconvert.
-		case Rml::Input::KI_ACCEPT:
+		case KI_ACCEPT:
 			value = "KI_ACCEPT";
 			break;				// IME accept.
-		case Rml::Input::KI_MODECHANGE:
+		case KI_MODECHANGE:
 			value = "KI_MODECHANGE";
 			break;			// IME mode change request.
-		case Rml::Input::KI_PRIOR:
+		case KI_PRIOR:
 			value = "PageUp";
 			break;				// Page Up key.
-		case Rml::Input::KI_NEXT:
+		case KI_NEXT:
 			value = "PageDown";
 			break;				// Page Down key.
-		case Rml::Input::KI_END:
+		case KI_END:
 			value = "End";
 			break;
-		case Rml::Input::KI_HOME:
+		case KI_HOME:
 			value = "Home";
 			break;
-		case Rml::Input::KI_LEFT:
+		case KI_LEFT:
 			value = "ArrowLeft";
 			break;				// Left Arrow key.
-		case Rml::Input::KI_UP:
+		case KI_UP:
 			value = "ArrowUp";
 			break;					// Up Arrow key.
-		case Rml::Input::KI_RIGHT:
+		case KI_RIGHT:
 			value = "ArrowRight";
 			break;				// Right Arrow key.
-		case Rml::Input::KI_DOWN:
+		case KI_DOWN:
 			value = "ArrowDown";
 			break;				// Down Arrow key.
-		case Rml::Input::KI_SELECT:
+		case KI_SELECT:
 			value = "KI_SELECT";
 			break;
-		case Rml::Input::KI_PRINT:
+		case KI_PRINT:
 			value = "KI_PRINT";
 			break;
-		case Rml::Input::KI_EXECUTE:
+		case KI_EXECUTE:
 			value = "KI_EXECUTE";
 			break;
-		case Rml::Input::KI_SNAPSHOT:
+		case KI_SNAPSHOT:
 			value = "PrintScreen";
 			break;			// Print Screen key.
-		case Rml::Input::KI_INSERT:
+		case KI_INSERT:
 			value = "Insert";
 			break;
-		case Rml::Input::KI_DELETE:
+		case KI_DELETE:
 			value = "Delete";
 			break;
-		case Rml::Input::KI_HELP:
+		case KI_HELP:
 			value = "KI_HELP";
 			break;
-		case Rml::Input::KI_LWIN:
+		case KI_LWIN:
 			value = "KI_LWIN";
 			break;				// Left Windows key.
-		case Rml::Input::KI_RWIN:
+		case KI_RWIN:
 			value = "KI_RWIN";
 			break;				// Right Windows key.
-		case Rml::Input::KI_APPS:
+		case KI_APPS:
 			value = "KI_APPS";
 			break;				// Applications key.
-		case Rml::Input::KI_POWER:
+		case KI_POWER:
 			value = "KI_POWER";
 			break;
-		case Rml::Input::KI_SLEEP:
+		case KI_SLEEP:
 			value = "KI_SLEEP";
 			break;
-		case Rml::Input::KI_WAKE:
+		case KI_WAKE:
 			value = "KI_WAKE";
 			break;
-		case Rml::Input::KI_F1:
+		case KI_F1:
 			value = "F1";
 			break;
-		case Rml::Input::KI_F2:
+		case KI_F2:
 			value = "F2";
 			break;
-		case Rml::Input::KI_F3:
+		case KI_F3:
 			value = "F3";
 			break;
-		case Rml::Input::KI_F4:
+		case KI_F4:
 			value = "F4";
 			break;
-		case Rml::Input::KI_F5:
+		case KI_F5:
 			value = "F5";
 			break;
-		case Rml::Input::KI_F6:
+		case KI_F6:
 			value = "F6";
 			break;
-		case Rml::Input::KI_F7:
+		case KI_F7:
 			value = "F7";
 			break;
-		case Rml::Input::KI_F8:
+		case KI_F8:
 			value = "F8";
 			break;
-		case Rml::Input::KI_F9:
+		case KI_F9:
 			value = "F9";
 			break;
-		case Rml::Input::KI_F10:
+		case KI_F10:
 			value = "F10";
 			break;
-		case Rml::Input::KI_F11:
+		case KI_F11:
 			value = "F11";
 			break;
-		case Rml::Input::KI_F12:
+		case KI_F12:
 			value = "F12";
 			break;
-		case Rml::Input::KI_F13:
+		case KI_F13:
 			value = "F13";
 			break;
-		case Rml::Input::KI_F14:
+		case KI_F14:
 			value = "F14";
 			break;
-		case Rml::Input::KI_F15:
+		case KI_F15:
 			value = "F15";
 			break;
-		case Rml::Input::KI_F16:
+		case KI_F16:
 			value = "F16";
 			break;
-		case Rml::Input::KI_F17:
+		case KI_F17:
 			value = "F17";
 			break;
-		case Rml::Input::KI_F18:
+		case KI_F18:
 			value = "F18";
 			break;
-		case Rml::Input::KI_F19:
+		case KI_F19:
 			value = "F19";
 			break;
-		case Rml::Input::KI_F20:
+		case KI_F20:
 			value = "F20";
 			break;
-		case Rml::Input::KI_F21:
+		case KI_F21:
 			value = "F21";
 			break;
-		case Rml::Input::KI_F22:
+		case KI_F22:
 			value = "F22";
 			break;
-		case Rml::Input::KI_F23:
+		case KI_F23:
 			value = "F23";
 			break;
-		case Rml::Input::KI_F24:
+		case KI_F24:
 			value = "F24";
 			break;
-		case Rml::Input::KI_NUMLOCK:
+		case KI_NUMLOCK:
 			value = "NumLock";
 			break;			// Numlock key.
-		case Rml::Input::KI_SCROLL:
+		case KI_SCROLL:
 			value = "ScrollLock";
 			break;			// Scroll Lock key.
 	
 	//  Fujitsu/OASYS kbd definitions
 	 
-		case Rml::Input::KI_OEM_FJ_JISHO:
+		case KI_OEM_FJ_JISHO:
 			value = "KI_OEM_FJ_JISHO";
 			break;		// 'Dictionary' key.
-		case Rml::Input::KI_OEM_FJ_MASSHOU:
+		case KI_OEM_FJ_MASSHOU:
 			value = "KI_OEM_FJ_MASSHOU";
 			break;	// 'Unregister word' key.
-		case Rml::Input::KI_OEM_FJ_TOUROKU:
+		case KI_OEM_FJ_TOUROKU:
 			value = "KI_OEM_FJ_TOUROKU";
 			break;	// 'Register word' key.
-		case Rml::Input::KI_OEM_FJ_LOYA:
+		case KI_OEM_FJ_LOYA:
 			value = "KI_OEM_FJ_LOYA";
 			break;		// 'Left OYAYUBI' key.
-		case Rml::Input::KI_OEM_FJ_ROYA:
+		case KI_OEM_FJ_ROYA:
 			value = "KI_OEM_FJ_ROYA";
 			break;		// 'Right OYAYUBI' key.
-		case Rml::Input::KI_LSHIFT:
+		case KI_LSHIFT:
 			value = "ShiftLeft";
 			break;
-		case Rml::Input::KI_RSHIFT:
+		case KI_RSHIFT:
 			value = "ShiftRight";
 			break;
-		case Rml::Input::KI_LCONTROL:
+		case KI_LCONTROL:
 			value = "ControlLeft";
 			break;
-		case Rml::Input::KI_RCONTROL:
+		case KI_RCONTROL:
 			value = "ControlRight";
 			break;
-		case Rml::Input::KI_LMENU:
+		case KI_LMENU:
 			value = "AltLeft";
 			break;
-		case Rml::Input::KI_RMENU:
+		case KI_RMENU:
 			value = "AltRight";
 			break;
-		case Rml::Input::KI_BROWSER_BACK:
+		case KI_BROWSER_BACK:
 			value = "KI_BROWSER_BACK";
 			break;
-		case Rml::Input::KI_BROWSER_FORWARD:
+		case KI_BROWSER_FORWARD:
 			value = "KI_BROWSER_FORWARD";
 			break;
-		case Rml::Input::KI_BROWSER_REFRESH:
+		case KI_BROWSER_REFRESH:
 			value = "KI_BROWSER_REFRESH";
 			break;
-		case Rml::Input::KI_BROWSER_STOP:
+		case KI_BROWSER_STOP:
 			value = "KI_BROWSER_STOP";
 			break;
-		case Rml::Input::KI_BROWSER_SEARCH:
+		case KI_BROWSER_SEARCH:
 			value = "KI_BROWSER_SEARCH";
 			break;
-		case Rml::Input::KI_BROWSER_FAVORITES:
+		case KI_BROWSER_FAVORITES:
 			value = "KI_BROWSER_FAVORITES";
 			break;
-		case Rml::Input::KI_BROWSER_HOME:
+		case KI_BROWSER_HOME:
 			value = "KI_BROWSER_HOME";
 			break;
-		case Rml::Input::KI_VOLUME_MUTE:
+		case KI_VOLUME_MUTE:
 			value = "KI_VOLUME_MUTE";
 			break;
-		case Rml::Input::KI_VOLUME_DOWN:
+		case KI_VOLUME_DOWN:
 			value = "KI_VOLUME_DOWN";
 			break;
-		case Rml::Input::KI_VOLUME_UP:
+		case KI_VOLUME_UP:
 			value = "KI_VOLUME_UP";
 			break;
-		case Rml::Input::KI_MEDIA_NEXT_TRACK:
+		case KI_MEDIA_NEXT_TRACK:
 			value = "KI_MEDIA_NEXT_TRACK";
 			break;
-		case Rml::Input::KI_MEDIA_PREV_TRACK:
+		case KI_MEDIA_PREV_TRACK:
 			value = "KI_MEDIA_PREV_TRACK";
 			break;
-		case Rml::Input::KI_MEDIA_STOP:
+		case KI_MEDIA_STOP:
 			value = "KI_MEDIA_STOP";
 			break;
-		case Rml::Input::KI_MEDIA_PLAY_PAUSE:
+		case KI_MEDIA_PLAY_PAUSE:
 			value = "KI_MEDIA_PLAY_PAUSE";
 			break;
-		case Rml::Input::KI_LAUNCH_MAIL:
+		case KI_LAUNCH_MAIL:
 			value = "KI_LAUNCH_MAIL";
 			break;
-		case Rml::Input::KI_LAUNCH_MEDIA_SELECT:
+		case KI_LAUNCH_MEDIA_SELECT:
 			value = "KI_LAUNCH_MEDIA_SELECT";
 			break;
-		case Rml::Input::KI_LAUNCH_APP1:
+		case KI_LAUNCH_APP1:
 			value = "KI_LAUNCH_APP1";
 			break;
-		case Rml::Input::KI_LAUNCH_APP2:
+		case KI_LAUNCH_APP2:
 			value = "KI_LAUNCH_APP2";
 			break;
 	
 	 //Various extended or enhanced keyboards
 	 
-		case Rml::Input::KI_OEM_AX:
+		case KI_OEM_AX:
 			value = "KI_OEM_AX";
 			break;
-		case Rml::Input::KI_ICO_HELP:
+		case KI_ICO_HELP:
 			value = "KI_ICO_HELP";
 			break;
-		case Rml::Input::KI_ICO_00:
+		case KI_ICO_00:
 			value = "KI_ICO_00";
 			break;
-		case Rml::Input::KI_PROCESSKEY:
+		case KI_PROCESSKEY:
 			value = "KI_PROCESSKEY";
 			break;		// IME Process key.
-		case Rml::Input::KI_ICO_CLEAR:
+		case KI_ICO_CLEAR:
 			value = "KI_ICO_CLEAR";
 			break;
-		case Rml::Input::KI_ATTN:
+		case KI_ATTN:
 			value = "KI_ATTN";
 			break;
-		case Rml::Input::KI_CRSEL:
+		case KI_CRSEL:
 			value = "KI_CRSEL";
 			break;
-		case Rml::Input::KI_EXSEL:
+		case KI_EXSEL:
 			value = "KI_EXSEL";
 			break;
-		case Rml::Input::KI_EREOF:
+		case KI_EREOF:
 			value = "KI_EREOF";
 			break;
-		case Rml::Input::KI_PLAY:
+		case KI_PLAY:
 			value = "KI_PLAY";
 			break;
-		case Rml::Input::KI_ZOOM:
+		case KI_ZOOM:
 			value = "KI_ZOOM";
 			break;
-		case Rml::Input::KI_PA1:
+		case KI_PA1:
 			value = "KI_PA1";
 			break;
-		case Rml::Input::KI_OEM_CLEAR:
+		case KI_OEM_CLEAR:
 			value = "KI_OEM_CLEAR";
 			break;
-		case Rml::Input::KI_LMETA:
+		case KI_LMETA:
 			value = "MetaLeft";
 			break;
-		case Rml::Input::KI_RMETA:
+		case KI_RMETA:
 			value = "MetaRight";
 			break;
-			*/
 		default:
-			//return false;
+			return false;
 			break;
 	}
 	
-	value = toString(key);
+	//value = toString(key);
 	return true;
+	*/
 }
