@@ -43,6 +43,9 @@ public:
 
 	//Extra
 	static bool TranslateKey(int key, DKString& value);
+
+	DKString _key;
+	int _keyCode;
 };
 
 
