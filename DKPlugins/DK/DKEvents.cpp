@@ -60,9 +60,9 @@ bool DKEvents::AddEvent(const DKString& id, const DKString& type, const DKString
 }
 
 ////////////////////////////////////////////////////////////////////////
-bool DKEvents::SendEvent(const DKString& address, const DKEvent& event){
-	DKDEBUGFUNC(address, event);
-}
+//bool DKEvents::SendEvent(const DKString& address, const DKEvent& event){
+//	DKDEBUGFUNC(address, event);
+//}
 
 /////////////////////////////////////////////////////////////////////////////////////////
 bool DKEvents::SendEvent(const DKString& id, const DKString& type, const DKString& value)
