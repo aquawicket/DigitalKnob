@@ -1,4 +1,6 @@
 // https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent
+// https://unixpapa.com/js/key.html
+// https://w3c.github.io/uievents/#interface-keyboardevent
 
 #include "DK/DKApp.h"
 #include "DKDuktape/DKEvent.h"
@@ -61,7 +63,7 @@ int DKKeyboardEvent::altKey(duk_context* ctx)
 	return true;
 }
 
-//////////////////////////////////////////////
+///////////////////////////////////////////
 int DKKeyboardEvent::code(duk_context* ctx)
 {
 	DKDEBUGFUNC(ctx);
@@ -73,14 +75,15 @@ int DKKeyboardEvent::code(duk_context* ctx)
 		return true;
 	}
 
-	int key = std::stoi(event->data[0]);
-	DKString code;
-	TranslateKey(key, code);
-	duk_push_string(ctx, code.c_str());
+	//int key = event->data[0];
+	unsigned int key = std::stoi(event->data[0]);
+	//unsigned char code = keyToAscii((DK_Key)key);
+	//unsigned int code = WinKeyTbl[key];
+	duk_push_int(ctx, key);
 	return true;
 }
 
-/////////////////////////////////////////////////
+//////////////////////////////////////////////
 int DKKeyboardEvent::ctrlKey(duk_context* ctx)
 {
 	DKDEBUGFUNC(ctx);
@@ -97,7 +100,7 @@ int DKKeyboardEvent::ctrlKey(duk_context* ctx)
 	return true;
 }
 
-/////////////////////////////////////////////////////
+//////////////////////////////////////////////////
 int DKKeyboardEvent::isComposing(duk_context* ctx)
 {
 	DKDEBUGFUNC(ctx);

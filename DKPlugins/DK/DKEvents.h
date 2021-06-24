@@ -38,6 +38,7 @@ private:
 
 public:
 	DKStringArray data;
+	void* data2;
 	boost::function<bool (DKEvents*)> event_func;
 
 	template<class T> 
