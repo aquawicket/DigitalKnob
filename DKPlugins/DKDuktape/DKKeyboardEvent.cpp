@@ -6,7 +6,7 @@
 #include "DKDuktape/DKEvent.h"
 #include "DKDuktape/DKEventTarget.h"
 #include "DKDuktape/DKKeyboardEvent.h"
-//#include "DKDuktape/DKKeyCodes.h"
+#include "DKDuktape/DKKeyCodes.h"
 
 
 
@@ -83,7 +83,7 @@ int DKKeyboardEvent::code(duk_context* ctx)
 		return true;
 	}
 
-	//DKINFO("WinKeyTbl[Key2] = " + toString(WinKeyTbl[91]));
+	DKINFO(GetKeyAttribute(std::stoi(event->data[0]))+"\n");
 	//int key = event->data[0];
 	//unsigned int key = std::stoi(event->data[0]);
 	//unsigned char code = keyToAscii((DK_Key)key);
