@@ -1,13 +1,57 @@
 #pragma once
-#ifndef DKKEYCODES_H
-#define DKKEYCODES_H
+#ifndef DKKeyCodes_H
+#define DKKeyCodes_H
 
-#include "DKDuktape/DKKeyboardEvent.h"
+#include "DKDuktape/DKDuktape.h"
+
+
+struct DKKeyMap {
+    int decimal;
+    DKString hex;
+    DKString key;
+    DKString description;
+    DKString VK_win;
+    DKString VK_mac;
+    DKString VK_linux;
+    DKString VK_android;
+    DKString code;
+};
+std::vector<DKKeyMap> keys;
+
+bool MapKey(int num, DKString key) {
+    keys.push_back({ sizeof keys, key });
+};
+
+class DKKeyCodes 
+{
+public:
+
+    
+
+    
+   bool success = MapKey(0, "test");
+};
+
+
+
+
+
+
+
+
+
+//#include "DKDuktape/DKKeyboardEvent.h"
 
 // https://www.w3.org/TR/uievents-key/
 // https://code.woboq.org/qt5/qtbase/src/corelib/global/qnamespace.h.html
 
 
+
+
+
+
+
+/*
 // https://www.w3.org/TR/uievents-key/
 //  *****  select an appropriate key attribute value  *****
 
@@ -55,7 +99,10 @@ inline bool Input(DKKeyboardEvent event) {
     }
     return true;
 }
+*/
 
+
+/*
 enum DK_KeyModifier {
         NoModifier           = 0x00000000,
         ShiftModifier        = 0x02000000,
@@ -583,8 +630,10 @@ enum DK_Key {
         Key_CameraFocus = 0x01100021,
         Key_unknown = 0x01ffffff
 };
+*/
 
 
+/*
 // Key recorder ------------------------------------------------------------------------[ start ] --
 struct KeyRecord {
     KeyRecord(int c, int a, int s, const DKString &t) : code(c), ascii(a), state(s), text(t) {}
@@ -649,7 +698,11 @@ void KeyRecorder::storeKey(int code, int ascii, int state, const DKString& text)
 void KeyRecorder::clearKeys(){
     nrecs = 0;
 }
+*/
 
+
+
+/*
 // https://code.woboq.org/qt5/qtbase/src/testlib/qasciikey.cpp.html
 inline DK_Key asciiToKey(char ascii){
     switch ((unsigned char)ascii) {
@@ -1086,7 +1139,10 @@ inline unsigned char keyToAscii(DK_Key key){
 			return 0;
     }
 };
+*/
 
+
+/*
 // https://code.woboq.org/qt5/qtbase/src/plugins/platforms/windows/qwindowskeymapper.cpp.html
 // #ifdef WIN32
 
@@ -1413,32 +1469,13 @@ static const unsigned int WinMKeyTbl[] = { // Multimedia keys mapping table
     Key_ChannelUp       //  52   0x34   APPCOMMAND_MEDIA_CHANNEL_UP
 } ;
 //#endif // WIN32
-
+*/
 
 // TODO
 // https://dreamswork.github.io/qt4/qkeymapper__mac_8cpp_source.html
 // https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/keyCode 
 // https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/key/Key_Values
 
-struct DKKeyMap{
-   int decimal;
-   DKString hex;
-   DKString key;
-   DKString description;
-   DKString VK_win;
-   DKString VK_mac;
-   DKString VK_linux;
-   DKString VK_android;
-   DKString code;
-};
-std::vector<DKKeyMap> keys;
 
 
-//bool MapKey(int num, DKString key);
-
-bool MapKey(int num, DKString key) {
-    keys.push_back({ sizeof keys, key });
-    return true;
-}
-
-#endif //DKKEYCODES_H
+#endif //DKKeyCodes_H
