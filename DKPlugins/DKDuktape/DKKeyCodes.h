@@ -1,18 +1,16 @@
 #pragma once
 #ifndef DKKeyCodes_H
 #define DKKeyCodes_H
-
 #include "DKDuktape/DKDuktape.h"
 
 template< typename T >
-std::string int_to_hex(T i){
+std::string int_to_hex(T i) {
     std::stringstream stream;
     stream << "0x"
         << std::setfill('0') << std::setw(sizeof(T) * 2)
         << std::hex << i;
     return stream.str();
-}
-
+};
 struct DKKeyMap {
     int decimal;
     DKString hex;
@@ -24,18 +22,10 @@ struct DKKeyMap {
     DKString VK_android;
     DKString code;
 };
-
 bool MapKey(int decimal, DKString key, DKString description = "", DKString VK_win = "", DKString VK_mac = "", DKString VK_linux = "", DKString VK_android = "");
-/*
-{
-    DKString hex = int_to_hex(decimal);
-    keys.push_back({ decimal, hex, key, });
-    return true;
-}
-*/
-
 bool MapAllKeys();
-DKString GetKeyAttribute(int key);
+DKString GetKeyAttribute(unsigned int key); 
+DKString GetCodeAttribute(unsigned int key);
 
 // https://www.w3.org/TR/uievents-key/
 // https://code.woboq.org/qt5/qtbase/src/corelib/global/qnamespace.h.html

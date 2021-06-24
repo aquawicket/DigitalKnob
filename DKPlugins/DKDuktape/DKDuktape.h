@@ -4,6 +4,12 @@
 #ifndef DKDuktape_H
 #define DKDuktape_H
 #include "DK/DK.h"
+
+#define DUMPVAR(name) dump_var(#name, (name))
+void dump_var(DKString name, DKString value); 
+
+
+
 #include "duktape.h"
 #include "DK/DKEvents.h"
 

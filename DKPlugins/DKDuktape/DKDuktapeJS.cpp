@@ -62,6 +62,7 @@ bool DKDuktapeJS::Init()
 	DKDuktape::AttachFunction("CPP_DK_Crash", DKDuktapeJS::Crash);
 	DKDuktape::AttachFunction("CPP_DK_DoFrame", DKDuktapeJS::DoFrame);
 	DKDuktape::AttachFunction("CPP_DK_DoubleClick", DKDuktapeJS::DoubleClick);
+	DKDuktape::AttachFunction("CPP_DK_Dump", DKDuktapeJS::Dump);
 	DKDuktape::AttachFunction("CPP_DK_DumpError", DKDuktapeJS::DumpError);
 	DKDuktape::AttachFunction("CPP_DK_Execute", DKDuktapeJS::Execute);
 	DKDuktape::AttachFunction("CPP_DK_Exit", DKDuktapeJS::Exit);
@@ -443,24 +444,24 @@ int DKDuktapeJS::Crash(duk_context* ctx)
 	return 1;
 }
 
-///////////////////////////////////
-int DKDuktapeJS::DoFrame(duk_context* ctx)
-{
+int DKDuktapeJS::DoFrame(duk_context* ctx){
 	DKApp::DoFrame();
 	return 1;
 }
 
-//////////////////////////////////////////////
-int DKDuktapeJS::DoubleClick(duk_context* ctx)
-{
+int DKDuktapeJS::DoubleClick(duk_context* ctx){
 	if(!DKUtil::DoubleClick()){ return 0; }
 	return 1;
 }
 
+int DKDuktapeJS::Dump(duk_context* ctx){
+	DKString what = duk_require_string(ctx, 0);
+	//DKString result;
+	DUMPVAR(what);
+	return 1;
+}
 
-////////////////////////////////////////////
-int DKDuktapeJS::DumpError(duk_context* ctx)
-{
+int DKDuktapeJS::DumpError(duk_context* ctx){
 	if(!DKDuktape::DumpError("")){ return 0; }
 	return 1;
 }

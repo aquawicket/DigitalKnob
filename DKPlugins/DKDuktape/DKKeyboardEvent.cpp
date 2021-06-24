@@ -82,13 +82,8 @@ int DKKeyboardEvent::code(duk_context* ctx)
 		duk_push_boolean(ctx, false);
 		return true;
 	}
-
-	DKINFO(GetKeyAttribute(std::stoi(event->data[0]))+"\n");
-	//int key = event->data[0];
-	//unsigned int key = std::stoi(event->data[0]);
-	//unsigned char code = keyToAscii((DK_Key)key);
-	//unsigned int code = WinKeyTbl[key];
-	//duk_push_int(ctx, key);
+	DKString code = GetCodeAttribute(std::stoi(event->data[0]));
+	duk_push_string(ctx, code.c_str());
 	return true;
 }
 
@@ -134,13 +129,12 @@ int DKKeyboardEvent::key(duk_context* ctx)
 	DKString eventAddress = duk_require_string(ctx, 0);
 	DKEvents* event = DKDuktape::addressToEvent(eventAddress);
 	if (!event) {
-		DKERROR("DKKeyboardEvent::key(): event invalid\n");
+		DKERROR("DKKeyboardEvent::code(): event invalid\n");
 		duk_push_boolean(ctx, false);
 		return true;
 	}
-	//TODO
-	//int key;
-	//duk_push_int(ctx, key);
+	DKString key = GetKeyAttribute(std::stoi(event->data[0]));
+	duk_push_string(ctx, key.c_str());
 	return true;
 }
 

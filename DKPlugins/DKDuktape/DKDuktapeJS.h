@@ -35,6 +35,7 @@ public:
 	static int Crash(duk_context* ctx);
 	static int DoFrame(duk_context* ctx);
 	static int DoubleClick(duk_context* ctx);
+    static int Dump(duk_context* ctx);
 	static int DumpError(duk_context* ctx);
 	static int Execute(duk_context* ctx);
 	static int Exit(duk_context* ctx);
