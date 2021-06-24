@@ -306,12 +306,8 @@ public:
 		DKDEBUGFUNC(browser, "const CefKeyEvent&", os_event, is_keyboard_shortcut);
 		CEF_REQUIRE_UI_THREAD();
 		if(event.type == KEYEVENT_RAWKEYDOWN){
-			//DKINFO("OnPreKeyEvent(): RawKeyDown: "+toString(event.character)+"\n");
-			//#ifdef WIN32
+			//DKKeyboardEvent event = new DKEvents();
 			DKEvents::SendEvent("window", "keydown", toString(event.windows_key_code));
-			//#else
-			//			DKEvent::SendEvent("window", "keydown", toString(event.character));
-			//#endif
 		}
 		if(event.type == KEYEVENT_KEYDOWN){
 			DKINFO("OnPreKeyEvent(): KeyDown: "+toString(event.character)+"\n");

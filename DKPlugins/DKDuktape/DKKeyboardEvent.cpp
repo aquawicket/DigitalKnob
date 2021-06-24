@@ -4,8 +4,10 @@
 
 #include "DK/DKApp.h"
 #include "DKDuktape/DKEvent.h"
+#include "DKDuktape/DKEventTarget.h"
 #include "DKDuktape/DKKeyboardEvent.h"
-#include "DKDuktape/DKKeyCodes.h"
+//#include "DKDuktape/DKKeyCodes.h"
+
 
 
 ///////////////////////////////
@@ -41,8 +43,14 @@ bool DKKeyboardEvent::Init()
 	DKDuktape::AttachFunction("CPP_DKKeyboardEvent_which", DKKeyboardEvent::which);
 
 	DKClass::DKCreate("DKDuktape/DKKeyboardEvent.js");
+
+	
+	//MapKey(0, "undefined");
+	
 	return true;
 }
+
+
 
 
 // Properties
@@ -75,11 +83,12 @@ int DKKeyboardEvent::code(duk_context* ctx)
 		return true;
 	}
 
+	//DKINFO("WinKeyTbl[Key2] = " + toString(WinKeyTbl[91]));
 	//int key = event->data[0];
-	unsigned int key = std::stoi(event->data[0]);
+	//unsigned int key = std::stoi(event->data[0]);
 	//unsigned char code = keyToAscii((DK_Key)key);
 	//unsigned int code = WinKeyTbl[key];
-	duk_push_int(ctx, key);
+	//duk_push_int(ctx, key);
 	return true;
 }
 
@@ -95,8 +104,8 @@ int DKKeyboardEvent::ctrlKey(duk_context* ctx)
 		return true;
 	}
 	//TODO
-	bool ctrlKey;
-	duk_push_boolean(ctx, ctrlKey);
+	//bool ctrlKey;
+	//duk_push_boolean(ctx, ctrlKey);
 	return true;
 }
 
@@ -113,8 +122,8 @@ int DKKeyboardEvent::isComposing(duk_context* ctx)
 	}
 
 	//TODO
-	bool isComposing;
-	duk_push_boolean(ctx, isComposing);
+	//bool isComposing;
+	//duk_push_boolean(ctx, isComposing);
 	return false;
 }
 
@@ -130,8 +139,8 @@ int DKKeyboardEvent::key(duk_context* ctx)
 		return true;
 	}
 	//TODO
-	int key;
-	duk_push_int(ctx, key);
+	//int key;
+	//duk_push_int(ctx, key);
 	return true;
 }
 
@@ -147,8 +156,8 @@ int DKKeyboardEvent::locale(duk_context* ctx)
 		return true;
 	}
 	//TODO
-	DKString locale;
-	duk_push_string(ctx, locale.c_str());
+	//DKString locale;
+	//duk_push_string(ctx, locale.c_str());
 	return false;
 }
 
@@ -164,8 +173,8 @@ int DKKeyboardEvent::location(duk_context* ctx)
 		return true;
 	}
 	//TODO
-	int location;
-	duk_push_int(ctx, location);
+	//int location;
+	//duk_push_int(ctx, location);
 	return false;
 }
 
@@ -181,8 +190,8 @@ int DKKeyboardEvent::metaKey(duk_context* ctx)
 		return true;
 	}
 	//TODO
-	bool metaKey;
-	duk_push_boolean(ctx, metaKey);
+	//bool metaKey;
+	//duk_push_boolean(ctx, metaKey);
 	return true;
 }
 
@@ -198,8 +207,8 @@ int DKKeyboardEvent::repeat(duk_context* ctx)
 		return true;
 	}
 	//TODO
-	bool repeat;
-	duk_push_boolean(ctx, repeat);
+	//bool repeat;
+	//duk_push_boolean(ctx, repeat);
 	return false;
 }
 
@@ -215,8 +224,8 @@ int DKKeyboardEvent::shiftKey(duk_context* ctx)
 		return true;
 	}
 	//TODO
-	bool shiftKey;
-	duk_push_boolean(ctx, shiftKey);
+	//bool shiftKey;
+	//duk_push_boolean(ctx, shiftKey);
 	return true;
 }
 

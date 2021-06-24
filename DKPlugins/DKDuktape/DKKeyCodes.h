@@ -2,6 +2,8 @@
 #ifndef DKKEYCODES_H
 #define DKKEYCODES_H
 
+#include "DKDuktape/DKKeyboardEvent.h"
+
 // https://www.w3.org/TR/uievents-key/
 // https://code.woboq.org/qt5/qtbase/src/corelib/global/qnamespace.h.html
 
@@ -9,17 +11,17 @@
 // https://www.w3.org/TR/uievents-key/
 //  *****  select an appropriate key attribute value  *****
 
-bool GetNamedAttribute(DKKeyboardEvent event) {
+inline bool GetNamedAttribute(DKKeyboardEvent event) {
     //Translator here .keycode to .key 
     return false; //TODO
 }
 
-bool GetKeyString(DKKeyboardEvent event) {
+inline bool GetKeyString(DKKeyboardEvent event) {
     //Translator here .keycode to .key
     return false; //TODO
 }
 
-bool GetUnalteredKeyString(DKKeyboardEvent event) {
+inline bool GetUnalteredKeyString(DKKeyboardEvent event) {
     //Translator here .keycode to .key 
     return false; //TODO
 }
@@ -1086,15 +1088,8 @@ inline unsigned char keyToAscii(DK_Key key){
 };
 
 // https://code.woboq.org/qt5/qtbase/src/plugins/platforms/windows/qwindowskeymapper.cpp.html
-#ifdef WIN32
+// #ifdef WIN32
 
-
-enum DK_keyTypes {
-    dec = 0,
-    hex = 1,
-	code = 3,
-	osName = 2
-};
 
 static const unsigned int WinKeyTbl[] = { 
 					// Keyboard mapping table
@@ -1416,12 +1411,34 @@ static const unsigned int WinMKeyTbl[] = { // Multimedia keys mapping table
     Key_AudioRewind,    //  50   0x32   APPCOMMAND_MEDIA_REWIND
     Key_ChannelDown,    //  51   0x33   APPCOMMAND_MEDIA_CHANNEL_DOWN
     Key_ChannelUp       //  52   0x34   APPCOMMAND_MEDIA_CHANNEL_UP
-};
-#endif // WIN32
+} ;
+//#endif // WIN32
 
 
 // TODO
 // https://dreamswork.github.io/qt4/qkeymapper__mac_8cpp_source.html
 // https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/keyCode 
+// https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/key/Key_Values
+
+struct DKKeyMap{
+   int decimal;
+   DKString hex;
+   DKString key;
+   DKString description;
+   DKString VK_win;
+   DKString VK_mac;
+   DKString VK_linux;
+   DKString VK_android;
+   DKString code;
+};
+std::vector<DKKeyMap> keys;
+
+
+//bool MapKey(int num, DKString key);
+
+bool MapKey(int num, DKString key) {
+    keys.push_back({ sizeof keys, key });
+    return true;
+}
 
 #endif //DKKEYCODES_H
