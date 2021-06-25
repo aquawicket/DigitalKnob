@@ -4,12 +4,6 @@
 #ifndef DKDuktape_H
 #define DKDuktape_H
 #include "DK/DK.h"
-
-#define DUMPVAR(name) dump_var(#name, (name))
-void dump_var(DKString name, DKString value); 
-
-
-
 #include "duktape.h"
 #include "DK/DKEvents.h"
 
@@ -33,7 +27,6 @@ public:
 	static bool LoadJSString(const DKString& url, const DKString& string);
 	static bool OnEvent(DKEvents* event);
 	static bool Reload();
-	//static bool RunDuktape(const DKString& code);
 	static bool RunDuktape(const DKString& code, DKString& rval);
 	static bool Trace();
 	static bool QueueDuktape(const DKString& code);

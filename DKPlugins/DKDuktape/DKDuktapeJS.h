@@ -5,13 +5,11 @@
 
 #include "DKDuktape/DKDuktape.h"
 
-/////////////////////////////////////////////////
 class DKDuktapeJS : public DKObjectT<DKDuktapeJS>
 {
 public:
 	bool Init();
 	
-	//FIXME: remove the DK prefix from these functions
 	static int _DKDEBUGFUNC(duk_context* ctx);
 	static int _DKDEBUGVARS(duk_context* ctx);
 	static int _AddEvent(duk_context* ctx);
@@ -35,7 +33,6 @@ public:
 	static int Crash(duk_context* ctx);
 	static int DoFrame(duk_context* ctx);
 	static int DoubleClick(duk_context* ctx);
-    static int Dump(duk_context* ctx);
 	static int DumpError(duk_context* ctx);
 	static int Execute(duk_context* ctx);
 	static int Exit(duk_context* ctx);

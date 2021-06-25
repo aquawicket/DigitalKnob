@@ -5,10 +5,6 @@
 #include <iostream>
 #include <sstream>
 
-void dump_var(DKString name, DKString value) {
-	DKINFO("name: " + name + "value: " + value + "\n");
-}
-
 duk_context* DKDuktape::ctx;
 DKStringArray DKDuktape::filelist;
 DKStringArray DKDuktape::functions;
