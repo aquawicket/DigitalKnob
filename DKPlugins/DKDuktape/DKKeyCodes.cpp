@@ -64,12 +64,8 @@ void DKKeyCodes::mapKeys() {
     mapKey(KEY_APPCOMMAND_COPY, "Copy", "Copy");
     mapKey(KEY_CRSEL, "CrSel", "CrSel");
     mapKey(KEY_APPCOMMAND_CUT, "Cut", "Cut");
-    mapKey(KEY_DELETE, "Delete", "Delete")
-        mapKey(KEY_ERASEEOF, "EraseEof", "EraseEof");
-
-
-
-
+    mapKey(KEY_DELETE, "Delete", "Delete");
+    //mapKey(KEY_ERASEEOF, "EraseEof", "EraseEof");
 
 
 

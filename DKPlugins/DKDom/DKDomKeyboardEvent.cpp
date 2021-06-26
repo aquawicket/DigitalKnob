@@ -438,10 +438,10 @@ void DKDomKeyboardEvent::MapRmlKeys() {
 		{ KI_TAB, KEY_TAB },	         		   // Tab key.
 
 		{ KI_CLEAR, KEY_CLEAR },
-		{ KI_RETURN, KEY_RETURN },
+		{ KI_RETURN, KEY_ENTER },
 
 		{ KI_PAUSE, KEY_PAUSE },
-		{ KI_CAPITAL, KEY_CAPITAL },		       // Capslock key.
+		{ KI_CAPITAL, KEY_CAPSLOCK },		       // Capslock key.
 
 		{ KI_KANA, KEY_KANA },				       // IME Kana mode.
 		//{ KI_HANGUL, KEY_HANGUL },			   // IME Hangul mode.
@@ -455,8 +455,8 @@ void DKDomKeyboardEvent::MapRmlKeys() {
 		{ KI_NONCONVERT, KEY_NONCONVERT },	       // IME nonconvert.
 		{ KI_ACCEPT, KEY_ACCEPT },	               // IME accept.
 		{ KI_MODECHANGE, KEY_MODECHANGE },         // IME mode change request.
-		{ KI_PRIOR, KEY_PRIOR },                   // Page Up key.
-		{ KI_NEXT, KEY_NEXT },				       // Page Down key.
+		{ KI_PRIOR, KEY_PAGEUP },                   // Page Up key.
+		{ KI_NEXT, KEY_PAGEDOWN },				       // Page Down key.
 		{ KI_END, KEY_END },
 		{ KI_HOME, KEY_HOME },
 		{ KI_LEFT, KEY_LEFT },				       // Left Arrow key.
@@ -471,8 +471,8 @@ void DKDomKeyboardEvent::MapRmlKeys() {
 		{ KI_DELETE, KEY_DELETE },
 		{ KI_HELP, KEY_HELP },
 
-		{ KI_LWIN, KEY_LWIN },				      // Left Windows key.
-		{ KI_RWIN, KEY_RWIN },				      // Right Windows key.
+		{ KI_LWIN, KEY_METALEFT },				      // Left Windows key.
+		{ KI_RWIN, KEY_METARIGHT },				      // Right Windows key.
 		{ KI_APPS, KEY_APPS },				      // Applications key.
 		//{ KI_POWER, KEY_POWER },
 		{ KI_SLEEP, KEY_SLEEP },
@@ -504,7 +504,7 @@ void DKDomKeyboardEvent::MapRmlKeys() {
 		{ KI_F24, KEY_F24 },
 
 		{ KI_NUMLOCK, KEY_NUMLOCK },	            // Numlock key.
-		{ KI_SCROLL, KEY_SCROLL },			        // Scroll Lock key.
+		{ KI_SCROLL, KEY_SCROLLLOCK },			        // Scroll Lock key.
 
 		// Fujitsu/OASYS kbd definitions
 		{ KI_OEM_FJ_JISHO, KEY_OEM_FJ_JISHO },		// 'Dictionary' key.
@@ -513,10 +513,10 @@ void DKDomKeyboardEvent::MapRmlKeys() {
 		//{ KI_OEM_FJ_LOYA, KEY_OEM_FJ_LOYA },		// 'Left OYAYUBI' key.
 		{ KI_OEM_FJ_ROYA, KEY_OEM_FJ_ROYA },		// 'Right OYAYUBI' key.
 
-		{ KI_LSHIFT, KEY_LSHIFT },
-		{ KI_RSHIFT, KEY_RSHIFT },
-		{ KI_LCONTROL, KEY_LCONTROL },
-		{ KI_RCONTROL, KEY_RCONTROL },
+		{ KI_LSHIFT, KEY_SHIFTLEFT },
+		{ KI_RSHIFT, KEY_SHIFTRIGHT },
+		{ KI_LCONTROL, KEY_CONTROLLEFT },
+		{ KI_RCONTROL, KEY_CONTROLRIGHT },
 		{ KI_LMENU, KEY_ALTLEFT },
 		{ KI_RMENU, KEY_ALTRIGHT },
 		{ KI_BROWSER_BACK, KEY_BROWSER_BACK },
