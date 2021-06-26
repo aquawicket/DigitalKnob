@@ -40,12 +40,6 @@ public:
 	static int keyIdentifier(duk_context* ctx);
 	static int keyLocation(duk_context* ctx);
 	static int which(duk_context* ctx);
-
-	//Extra
-	static bool TranslateKey(int key, DKString& value);
-
-	DKString _key;
-	int _keyCode;
 };
 
 

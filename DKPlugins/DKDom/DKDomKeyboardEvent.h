@@ -6,6 +6,7 @@
 #define DKDomKeyboardEvent_H
 
 #include "DKDuktape/DKDuktape.h"
+#include "DKDuktape/DKKeyCodes.h"
 
 
 class DKDomKeyboardEvent : public DKObjectT<DKDomKeyboardEvent>
@@ -42,9 +43,7 @@ public:
 
 	//Extra
 	static void MapRmlKeys();
-
-	DKString _key;
-	int _keyCode;
+	static std::map<int, Key> rmlKey;
 };
 
 

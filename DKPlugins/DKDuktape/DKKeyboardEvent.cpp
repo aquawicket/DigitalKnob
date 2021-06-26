@@ -8,6 +8,7 @@
 #include "DKDuktape/DKKeyboardEvent.h"
 #include "DKDuktape/DKKeyCodes.h"
 
+void mapKeys();
 
 bool DKKeyboardEvent::Init()
 {
@@ -42,7 +43,7 @@ bool DKKeyboardEvent::Init()
 
 	DKClass::DKCreate("DKDuktape/DKKeyboardEvent.js");
 
-	mapKeys();
+	DKKeyCodes::mapKeys();
 	return true;
 }
 
@@ -76,7 +77,8 @@ int DKKeyboardEvent::code(duk_context* ctx){
 		duk_push_boolean(ctx, false);
 		return true;
 	}
-	DKString code = keys[(Key)std::stoi(event->data[0])].code;
+	Key keyN = (Key)std::stoi(event->data[0]);
+	DKString code = DKKeyCodes::keys[keyN].code;
 	duk_push_string(ctx, code.c_str());
 	return true;
 }
@@ -120,7 +122,8 @@ int DKKeyboardEvent::key(duk_context* ctx){
 		duk_push_boolean(ctx, false);
 		return true;
 	}
-	DKString key = keys[(Key)std::stoi(event->data[0])].key;
+	Key keyN = (Key)std::stoi(event->data[0]);
+	DKString key = DKKeyCodes::keys[keyN].key;
 	duk_push_string(ctx, key.c_str());
 	return true;
 }
@@ -149,7 +152,8 @@ int DKKeyboardEvent::location(duk_context* ctx){
 		duk_push_boolean(ctx, false);
 		return true;
 	}
-	int location = keys[(Key)std::stoi(event->data[0])].location;
+	Key keyN = (Key)std::stoi(event->data[0]);
+	int location = DKKeyCodes::keys[keyN].location;
 	duk_push_int(ctx, location);
 	return false;
 }

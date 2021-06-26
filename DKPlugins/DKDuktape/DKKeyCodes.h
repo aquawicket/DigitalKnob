@@ -7,14 +7,8 @@
 #include <string>
 #include <iterator>
 
-template< typename T >
-std::string int_to_hex(T i) {
-    std::stringstream stream;
-    stream << "0x" << std::setfill('0') << std::setw(sizeof(T) * 2) << std::hex << i;
-    return stream.str();
-};
-
 // Read
+// https://keycode.info/
 // https://www.w3.org/TR/uievents-code/
 // https://chromium.googlesource.com/chromium/src/+/lkgr/ui/events/keycodes
 
@@ -43,7 +37,7 @@ enum Key{
     //KEY_UNASSIGNED,        //  15   0x0F   -- UNASSIGNED --
     KEY_SHIFT = 16,          //  16   0x10   VK_SHIFT            | Shift key
     KEY_CONTROL,             //  17   0x11   VK_CONTROL          | Ctrl key
-    KEY_MENU,                //  18   0x12   VK_MENU             | Alt key
+    KEY_ALT,                 //  18   0x12   VK_MENU             | Alt key
     KEY_PAUSE,               //  19   0x13   VK_PAUSE            | Pause key
     KEY_CAPITAL,             //  20   0x14   VK_CAPITAL          | Caps-Lock
     KEY_KANA,                //  21   0x15   VK_KANA / VK_HANGUL | IME Kana or Hangul mode
@@ -191,8 +185,8 @@ enum Key{
     KEY_RSHIFT,              // 161   0xA1   VK_RSHIFT              | Right Shift key
     KEY_LCONTROL,            // 162   0xA2   VK_LCONTROL            | Left Ctrl key
     KEY_RCONTROL,            // 163   0xA3   VK_RCONTROL            | Right Ctrl key
-    KEY_LMENU,               // 164   0xA4   VK_LMENU               | Left Menu key
-    KEY_RMENU,               // 165   0xA5   VK_RMENU               | Right Menu key
+    KEY_ALTLEFT,             // 164   0xA4   VK_LMENU               | Left Menu key
+    KEY_ALTRIGHT,            // 165   0xA5   VK_RMENU               | Right Menu key
     KEY_BROWSER_BACK,        // 166   0xA6   VK_BROWSER_BACK        | Browser Back key
     KEY_BROWSER_FORWARD,     // 167   0xA7   VK_BROWSER_FORWARD     | Browser Forward key
     KEY_BROWSER_REFRESH,     // 168   0xA8   VK_BROWSER_REFRESH     | Browser Refresh key
@@ -377,22 +371,33 @@ static const int KeyboardModifiers[] = {
 // https://code.woboq.org/qt5/qtbase/src/corelib/global/qnamespace.h.html
 // https://code.woboq.org/qt5/qtbase/src/plugins/platforms/windows/qwindowskeymapper.cpp.html
 
+class DKKeyCodes
+{
+public:
+    template< typename T >
+    static std::string int_to_hex(T i) {
+        std::stringstream stream;
+        stream << "0x" << std::setfill('0') << std::setw(sizeof(T) * 2) << std::hex << i;
+        return stream.str();
+    };
 
-struct KeyboardEventMap {
-    DKString      code;         // KeyboardEvent.code
-    //DKString    description;  //
-    DKString      vk_keycode;   // Current OS Keycode
-    DKString      key;          // KeyboardEvent.key
-    int           location;     // KeyboardEvent.location
-    //DKString    type;         // KeyboardEvent.type
-    int           which;        // KeyboardEvent.which
-    //DKString    vk_win;       // OS Specific Keycode
-    //DKString    vk_mac;       // OS Specific Keycode
-    //DKString    vk_linux;     // OS Specific Keycode
-    //DKString    vk_android;   // OS Specific Keycode
+    static void mapKeys();
+    static void mapKey(Key name, DKString code, DKString key, int location = 0);
+
+    struct KeyboardEventMap {
+        DKString      code;         // KeyboardEvent.code
+        //DKString    description;  //
+        DKString      vk_keycode;   // Current OS Keycode
+        DKString      key;          // KeyboardEvent.key
+        int           location;     // KeyboardEvent.location
+        //DKString    type;         // KeyboardEvent.type
+        int           which;        // KeyboardEvent.which
+        //DKString    vk_win;       // OS Specific Keycode
+        //DKString    vk_mac;       // OS Specific Keycode
+        //DKString    vk_linux;     // OS Specific Keycode
+        //DKString    vk_android;   // OS Specific Keycode
+    };
+    static std::map<Key, KeyboardEventMap> keys;
 };
-static std::map<Key, KeyboardEventMap> keys;
-void mapKeys();
-void mapKey(Key name, int vk_keycode, DKString code, DKString key, int location = 0);
 
 #endif //DKKeyCodes_H

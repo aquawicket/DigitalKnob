@@ -3,33 +3,26 @@
 // https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/key/Key_Values
 // https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/code/code_values
 
-/*
-struct KeyboardEventMap {
-    DKString      code;         // KeyboardEvent.code
-    //DKString    description;  //
-    DKString      vk_keycode;   // Current OS Keycode
-    DKString      key;          // KeyboardEvent.key
-    int           location;     // KeyboardEvent.location
-    //DKString    type;         // KeyboardEvent.type
-    int           which;        // KeyboardEvent.which
-    //DKString    vk_win;       // OS Specific Keycode
-    //DKString    vk_mac;       // OS Specific Keycode
-    //DKString    vk_linux;     // OS Specific Keycode
-    //DKString    vk_android;   // OS Specific Keycode
-};
-*/
-//static std::map<Key, KeyboardEventMap> keys;
+std::map<Key, DKKeyCodes::KeyboardEventMap> DKKeyCodes::keys;
 
-void mapKey(Key name, DKString code, DKString key, int location = 0) {
+void DKKeyCodes::mapKey(Key name, DKString code, DKString key, int location) {
     DKString vk_keycode = int_to_hex(name);
     int which = name;
     keys[name] = KeyboardEventMap{code, vk_keycode, key, location, which};
 }
 
-void mapKeys() {
+void DKKeyCodes::mapKeys() {
     //mapKey(KEY_Name,    " code",   " key");
+
+    // Special values //
     mapKey(KEY_UNASSIGNED, "Unidentified", "Unidentified");
     mapKey(KEY_RESERVED, "Reserved", "Reserved");
+
+    // Modifier keys //
+    mapKey(KEY_ALT, "Alt", "Alt");
+    mapKey(KEY_ALTLEFT, "Alt", "AltLeft", 1);
+    mapKey(KEY_ALTRIGHT, "Alt", "AltRight", 2);
+
     //mapKey(KEY_LBUTTON, "", "");
     //mapKey(KEY_RBUTTON, "", "");
     mapKey(KEY_CANCEL, "Cancel", "");
@@ -42,7 +35,6 @@ void mapKeys() {
     mapKey(KEY_RETURN, "Enter", "Enter");
     mapKey(KEY_SHIFT, "Shift", "");
     mapKey(KEY_CONTROL, "Control", "");
-    mapKey(KEY_MENU, "Alt", "");
     mapKey(KEY_PAUSE, "Pause", "Pause");
     mapKey(KEY_CAPITAL, "CapsLock", "CapsLock");
     mapKey(KEY_KANA, "KanaMode", "");
@@ -161,8 +153,7 @@ void mapKeys() {
     mapKey(KEY_RSHIFT, "Shift", "ShiftRight");
     mapKey(KEY_LCONTROL, "Control", "ControlLeft");
     mapKey(KEY_RCONTROL, "Control", "ControlRight");
-    mapKey(KEY_LMENU, "Alt", "AltLeft");
-    mapKey(KEY_RMENU, "Alt", "AltRight");
+    
     mapKey(KEY_BROWSER_BACK, "BrowserBack", "");
     mapKey(KEY_BROWSER_FORWARD, "BrowserForward", "");
     mapKey(KEY_BROWSER_REFRESH, "BrowserRefresh", "");

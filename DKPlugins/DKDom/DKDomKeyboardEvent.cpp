@@ -8,8 +8,8 @@
 #include "DKDom/DKDomEventTarget.h"
 #include "DKDom/DKDomKeyboardEvent.h"
 #include "RmlUi/Core/Input.h"
-#include "DKDuktape/DKKeyCodes.h"
 
+std::map<int, Key> DKDomKeyboardEvent::rmlKey;
 
 bool DKDomKeyboardEvent::Init()
 {
@@ -44,7 +44,7 @@ bool DKDomKeyboardEvent::Init()
 
 	DKClass::DKCreate("DKDom/DKDomKeyboardEvent.js");
 
-	mapKeys();
+	MapRmlKeys();
 	return true;
 }
 
@@ -78,8 +78,10 @@ int DKDomKeyboardEvent::code(duk_context* ctx){
 		return true;
 	}
 	Rml::Input::KeyIdentifier key = (Rml::Input::KeyIdentifier)event->GetParameter<int>("key_identifier", 0);
-	DKString code;
-	//TranslateKey(key, code);
+	Key rml_key = rmlKey[key];
+	DKKeyCodes::KeyboardEventMap base_key = DKKeyCodes::keys[rml_key];
+
+	DKString code = base_key.code;
 	duk_push_string(ctx, code.c_str());
 	return true;
 }
@@ -124,7 +126,6 @@ int DKDomKeyboardEvent::key(duk_context* ctx){
 	}
 	int key = event->GetParameter<int>("key_identifier", 0);
 	DKString code;
-	//TranslateKey(key, code);
 	duk_push_string(ctx, code.c_str());
 	return true;
 }
@@ -139,7 +140,7 @@ int DKDomKeyboardEvent::locale(duk_context* ctx){
 		return true;
 	}
 	//TODO
-	DKString locale = event->GetParameter<DKString>("locale", 0);
+	DKString locale = "undefined";
 	duk_push_string(ctx, locale.c_str());
 	return false;
 }
@@ -354,680 +355,124 @@ int DKDomKeyboardEvent::which(duk_context* ctx)
 	return false;
 }
 
-/*
-//Extra
-// https://css-tricks.com/snippets/javascript/javascript-keycodes/
-bool DKDomKeyboardEvent::TranslateKey(int key, DKString& value){
-	switch (key) {
-		case Rml::Input::KI_UNKNOWN:
-			value = "Rml::Input::KI_UNKNOWN";
-			break;
-		case Rml::Input::KI_SPACE:
-			value = "Space";
-			break;
-		case Rml::Input::KI_0:
-			value = "Digit0";
-			break;
-		case Rml::Input::KI_1:
-			value = "Digit1";
-			break;
-		case Rml::Input::KI_2:
-			value = "Digit2";
-			break;
-		case Rml::Input::KI_3:
-			value = "Digit3";
-			break;
-		case Rml::Input::KI_4:
-			value = "Digit4";
-			break;
-		case Rml::Input::KI_5:
-			value = "Digit5";
-			break;
-		case Rml::Input::KI_6:
-			value = "Digit6";
-			break;
-		case Rml::Input::KI_7:
-			value = "Digit7";
-			break;
-		case Rml::Input::KI_8:
-			value = "Digit8";
-			break;
-		case Rml::Input::KI_9:
-			value = "Digit9";
-			break;
-		case Rml::Input::KI_A:
-			value = "KeyA";
-			break;
-		case Rml::Input::KI_B:
-			value = "KeyB";
-			break;
-		case Rml::Input::KI_C:
-			value = "KeyC";
-			break;
-		case Rml::Input::KI_D:
-			value = "KeyD";
-			break;
-		case Rml::Input::KI_E:
-			value = "KeyE";
-			break;
-		case Rml::Input::KI_F:
-			value = "KeyF";
-			break;
-		case Rml::Input::KI_G:
-			value = "KeyG";
-			break;
-		case Rml::Input::KI_H:
-			value = "KeyH";
-			break;
-		case Rml::Input::KI_I:
-			value = "KeyI";
-			break;
-		case Rml::Input::KI_J:
-			value = "KeyJ";
-			break;
-		case Rml::Input::KI_K:
-			value = "KeyK";
-			break;
-		case Rml::Input::KI_L:
-			value = "KeyL";
-			break;
-		case Rml::Input::KI_M:
-			value = "KeyM";
-			break;
-		case Rml::Input::KI_N:
-			value = "KeyN";
-			break;
-		case Rml::Input::KI_O:
-			value = "KeyO";
-			break;
-		case Rml::Input::KI_P:
-			value = "KeyP";
-			break;
-		case Rml::Input::KI_Q:
-			value = "KeyQ";
-			break;
-		case Rml::Input::KI_R:
-			value = "KeyR";
-			break;
-		case Rml::Input::KI_S:
-			value = "KeyS";
-			break;
-		case Rml::Input::KI_T:
-			value = "KeyT";
-			break;
-		case Rml::Input::KI_U:
-			value = "KeyU";
-			break;
-		case Rml::Input::KI_V:
-			value = "KeyV";
-			break;
-		case Rml::Input::KI_W:
-			value = "KeyW";
-			break;
-		case Rml::Input::KI_X:
-			value = "KeyX";
-			break;
-		case Rml::Input::KI_Y:
-			value = "KeyY";
-			break;
-		case Rml::Input::KI_Z:
-			value = "KeyZ";
-			break;
-		case Rml::Input::KI_OEM_1:
-			value = "Semicolon";
-			break;				// US standard keyboard; the ';:' key.
-		case Rml::Input::KI_OEM_PLUS:
-			value = "Equal";
-			break;			// Any region; the '=+' key.
-		case Rml::Input::KI_OEM_COMMA:
-			value = "Comma";
-			break;			// Any region; the ',<' key.
-		case Rml::Input::KI_OEM_MINUS:
-			value = "Minus";
-			break; 		// Any region; the '-_' key.
-		case Rml::Input::KI_OEM_PERIOD:
-			value = "Period";
-			break;			// Any region; the '.>' key.
-		case Rml::Input::KI_OEM_2:
-			value = "Slash";
-			break;				// Any region; the '/?' key.
-		case Rml::Input::KI_OEM_3:
-			value = "Backquote";
-			break;				// Any region; the '`~' key.
-		case Rml::Input::KI_OEM_4:
-			value = "BracketLeft";
-			break;				// US standard keyboard; the '[{' key.
-		case Rml::Input::KI_OEM_5:
-			value = "Backslash";
-			break;				// US standard keyboard; the '\|' key.
-		case Rml::Input::KI_OEM_6:
-			value = "BracketRight";
-			break;				// US standard keyboard; the ']}' key.
-		case Rml::Input::KI_OEM_7:
-			value = "Quote";
-			break;				// US standard keyboard; the ''"' key.
-		case Rml::Input::KI_OEM_8:
-			value = "Rml::Input::KI_OEM_8";
-			break;
-		case Rml::Input::KI_OEM_102:
-			value = "Rml::Input::KI_OEM_102";
-			break;			// RT 102-key keyboard; the '<>' or '\|' key.
-		case Rml::Input::KI_NUMPAD0:
-			value = "Numpad0";
-			break;
-		case Rml::Input::KI_NUMPAD1:
-			value = "Numpad1";
-			break;
-		case Rml::Input::KI_NUMPAD2:
-			value = "Numpad2";
-			break;
-		case Rml::Input::KI_NUMPAD3:
-			value = "Numpad3";
-			break;
-		case Rml::Input::KI_NUMPAD4:
-			value = "Numpad4";
-			break;
-		case Rml::Input::KI_NUMPAD5:
-			value = "Numpad5";
-			break;
-		case Rml::Input::KI_NUMPAD6:
-			value = "Numpad6";
-			break;
-		case Rml::Input::KI_NUMPAD7:
-			value = "Numpad7";
-			break;
-		case Rml::Input::KI_NUMPAD8:
-			value = "Numpad8";
-			break;
-		case Rml::Input::KI_NUMPAD9:
-			value = "Numpad9";
-			break;
-		case Rml::Input::KI_NUMPADENTER:
-			value = "NumpadEnter";
-			break;
-		case Rml::Input::KI_MULTIPLY:
-			value = "NumpadMultiply";
-			break;			// Asterisk on the numeric keypad.
-		case Rml::Input::KI_ADD:
-			value = "NumpadAdd";
-			break;				// Plus on the numeric keypad.
-		case Rml::Input::KI_SEPARATOR:
-			value = "NumpadMinus";
-			break;
-		case Rml::Input::KI_SUBTRACT:
-			value = "NumpadSubtract";
-			break;			// Minus on the numeric keypad.
-		case Rml::Input::KI_DECIMAL:
-			value = "NumpadDecimal";
-			break;			// Period on the numeric keypad.
-		case Rml::Input::KI_DIVIDE:
-			value = "NumpadDivide";
-			break;				// Forward Slash on the numeric keypad.
-	
-	//  NEC PC-9800 kbd definitions
-	 
-		case Rml::Input::KI_OEM_NEC_EQUAL:
-			value = "Rml::Input::KI_OEM_NEC_EQUAL";
-			break;		// Equals key on the numeric keypad.
-		case Rml::Input::KI_BACK:
-			value = "Backspace";
-			break;				// Backspace key.
-		case Rml::Input::KI_TAB:
-			value = "Tab";
-			break;				// Tab key.
-		case Rml::Input::KI_CLEAR:
-			value = "Rml::Input::KI_CLEAR";
-			break;
-		case Rml::Input::KI_RETURN:
-			value = "Enter";
-			break;
-		case Rml::Input::KI_PAUSE:
-			value = "Pause";
-			break;
-		case Rml::Input::KI_CAPITAL:
-			value = "CapsLock";
-			break;			// Capslock key.
-		case Rml::Input::KI_KANA:
-			value = "Rml::Input::KI_KANA";
-			break;				// IME Kana mode.
-		case Rml::Input::KI_HANGUL:
-			value = "Rml::Input::KI_HANGUL";
-			break;				// IME Hangul mode.
-		case Rml::Input::KI_JUNJA:
-			value = "Rml::Input::KI_JUNJA";
-			break;				// IME Junja mode.
-		case Rml::Input::KI_FINAL:
-			value = "Rml::Input::KI_FINAL";
-			break;				// IME final mode.
-		case Rml::Input::KI_HANJA:
-			value = "Rml::Input::KI_HANJA";
-			break;				// IME Hanja mode.
-		case Rml::Input::KI_KANJI:
-			value = "Rml::Input::KI_KANJI";
-			break;				// IME Kanji mode.
-		case Rml::Input::KI_ESCAPE:
-			value = "Escape";
-			break;				// Escape key.
-		case Rml::Input::KI_CONVERT:
-			value = "Rml::Input::KI_CONVERT";
-			break;			// IME convert.
-		case Rml::Input::KI_NONCONVERT:
-			value = "Rml::Input::KI_NONCONVERT";
-			break;			// IME nonconvert.
-		case Rml::Input::KI_ACCEPT:
-			value = "Rml::Input::KI_ACCEPT";
-			break;				// IME accept.
-		case Rml::Input::KI_MODECHANGE:
-			value = "Rml::Input::KI_MODECHANGE";
-			break;			// IME mode change request.
-		case Rml::Input::KI_PRIOR:
-			value = "PageUp";
-			break;				// Page Up key.
-		case Rml::Input::KI_NEXT:
-			value = "PageDown";
-			break;				// Page Down key.
-		case Rml::Input::KI_END:
-			value = "End";
-			break;
-		case Rml::Input::KI_HOME:
-			value = "Home";
-			break;
-		case Rml::Input::KI_LEFT:
-			value = "ArrowLeft";
-			break;				// Left Arrow key.
-		case Rml::Input::KI_UP:
-			value = "ArrowUp";
-			break;					// Up Arrow key.
-		case Rml::Input::KI_RIGHT:
-			value = "ArrowRight";
-			break;				// Right Arrow key.
-		case Rml::Input::KI_DOWN:
-			value = "ArrowDown";
-			break;				// Down Arrow key.
-		case Rml::Input::KI_SELECT:
-			value = "Rml::Input::KI_SELECT";
-			break;
-		case Rml::Input::KI_PRINT:
-			value = "Rml::Input::KI_PRINT";
-			break;
-		case Rml::Input::KI_EXECUTE:
-			value = "Rml::Input::KI_EXECUTE";
-			break;
-		case Rml::Input::KI_SNAPSHOT:
-			value = "PrintScreen";
-			break;			// Print Screen key.
-		case Rml::Input::KI_INSERT:
-			value = "Insert";
-			break;
-		case Rml::Input::KI_DELETE:
-			value = "Delete";
-			break;
-		case Rml::Input::KI_HELP:
-			value = "Rml::Input::KI_HELP";
-			break;
-		case Rml::Input::KI_LWIN:
-			value = "Rml::Input::KI_LWIN";
-			break;				// Left Windows key.
-		case Rml::Input::KI_RWIN:
-			value = "Rml::Input::KI_RWIN";
-			break;				// Right Windows key.
-		case Rml::Input::KI_APPS:
-			value = "Rml::Input::KI_APPS";
-			break;				// Applications key.
-		case Rml::Input::KI_POWER:
-			value = "Rml::Input::KI_POWER";
-			break;
-		case Rml::Input::KI_SLEEP:
-			value = "Rml::Input::KI_SLEEP";
-			break;
-		case Rml::Input::KI_WAKE:
-			value = "Rml::Input::KI_WAKE";
-			break;
-		case Rml::Input::KI_F1:
-			value = "F1";
-			break;
-		case Rml::Input::KI_F2:
-			value = "F2";
-			break;
-		case Rml::Input::KI_F3:
-			value = "F3";
-			break;
-		case Rml::Input::KI_F4:
-			value = "F4";
-			break;
-		case Rml::Input::KI_F5:
-			value = "F5";
-			break;
-		case Rml::Input::KI_F6:
-			value = "F6";
-			break;
-		case Rml::Input::KI_F7:
-			value = "F7";
-			break;
-		case Rml::Input::KI_F8:
-			value = "F8";
-			break;
-		case Rml::Input::KI_F9:
-			value = "F9";
-			break;
-		case Rml::Input::KI_F10:
-			value = "F10";
-			break;
-		case Rml::Input::KI_F11:
-			value = "F11";
-			break;
-		case Rml::Input::KI_F12:
-			value = "F12";
-			break;
-		case Rml::Input::KI_F13:
-			value = "F13";
-			break;
-		case Rml::Input::KI_F14:
-			value = "F14";
-			break;
-		case Rml::Input::KI_F15:
-			value = "F15";
-			break;
-		case Rml::Input::KI_F16:
-			value = "F16";
-			break;
-		case Rml::Input::KI_F17:
-			value = "F17";
-			break;
-		case Rml::Input::KI_F18:
-			value = "F18";
-			break;
-		case Rml::Input::KI_F19:
-			value = "F19";
-			break;
-		case Rml::Input::KI_F20:
-			value = "F20";
-			break;
-		case Rml::Input::KI_F21:
-			value = "F21";
-			break;
-		case Rml::Input::KI_F22:
-			value = "F22";
-			break;
-		case Rml::Input::KI_F23:
-			value = "F23";
-			break;
-		case Rml::Input::KI_F24:
-			value = "F24";
-			break;
-		case Rml::Input::KI_NUMLOCK:
-			value = "NumLock";
-			break;			// Numlock key.
-		case Rml::Input::KI_SCROLL:
-			value = "ScrollLock";
-			break;			// Scroll Lock key.
-	
-	//  Fujitsu/OASYS kbd definitions
-	 
-		case Rml::Input::KI_OEM_FJ_JISHO:
-			value = "Rml::Input::KI_OEM_FJ_JISHO";
-			break;		// 'Dictionary' key.
-		case Rml::Input::KI_OEM_FJ_MASSHOU:
-			value = "Rml::Input::KI_OEM_FJ_MASSHOU";
-			break;	// 'Unregister word' key.
-		case Rml::Input::KI_OEM_FJ_TOUROKU:
-			value = "Rml::Input::KI_OEM_FJ_TOUROKU";
-			break;	// 'Register word' key.
-		case Rml::Input::KI_OEM_FJ_LOYA:
-			value = "Rml::Input::KI_OEM_FJ_LOYA";
-			break;		// 'Left OYAYUBI' key.
-		case Rml::Input::KI_OEM_FJ_ROYA:
-			value = "Rml::Input::KI_OEM_FJ_ROYA";
-			break;		// 'Right OYAYUBI' key.
-		case Rml::Input::KI_LSHIFT:
-			value = "ShiftLeft";
-			break;
-		case Rml::Input::KI_RSHIFT:
-			value = "ShiftRight";
-			break;
-		case Rml::Input::KI_LCONTROL:
-			value = "ControlLeft";
-			break;
-		case Rml::Input::KI_RCONTROL:
-			value = "ControlRight";
-			break;
-		case Rml::Input::KI_LMENU:
-			value = "AltLeft";
-			break;
-		case Rml::Input::KI_RMENU:
-			value = "AltRight";
-			break;
-		case Rml::Input::KI_BROWSER_BACK:
-			value = "Rml::Input::KI_BROWSER_BACK";
-			break;
-		case Rml::Input::KI_BROWSER_FORWARD:
-			value = "Rml::Input::KI_BROWSER_FORWARD";
-			break;
-		case Rml::Input::KI_BROWSER_REFRESH:
-			value = "Rml::Input::KI_BROWSER_REFRESH";
-			break;
-		case Rml::Input::KI_BROWSER_STOP:
-			value = "Rml::Input::KI_BROWSER_STOP";
-			break;
-		case Rml::Input::KI_BROWSER_SEARCH:
-			value = "Rml::Input::KI_BROWSER_SEARCH";
-			break;
-		case Rml::Input::KI_BROWSER_FAVORITES:
-			value = "Rml::Input::KI_BROWSER_FAVORITES";
-			break;
-		case Rml::Input::KI_BROWSER_HOME:
-			value = "Rml::Input::KI_BROWSER_HOME";
-			break;
-		case Rml::Input::KI_VOLUME_MUTE:
-			value = "Rml::Input::KI_VOLUME_MUTE";
-			break;
-		case Rml::Input::KI_VOLUME_DOWN:
-			value = "Rml::Input::KI_VOLUME_DOWN";
-			break;
-		case Rml::Input::KI_VOLUME_UP:
-			value = "Rml::Input::KI_VOLUME_UP";
-			break;
-		case Rml::Input::KI_MEDIA_NEXT_TRACK:
-			value = "Rml::Input::KI_MEDIA_NEXT_TRACK";
-			break;
-		case Rml::Input::KI_MEDIA_PREV_TRACK:
-			value = "Rml::Input::KI_MEDIA_PREV_TRACK";
-			break;
-		case Rml::Input::KI_MEDIA_STOP:
-			value = "Rml::Input::KI_MEDIA_STOP";
-			break;
-		case Rml::Input::KI_MEDIA_PLAY_PAUSE:
-			value = "Rml::Input::KI_MEDIA_PLAY_PAUSE";
-			break;
-		case Rml::Input::KI_LAUNCH_MAIL:
-			value = "Rml::Input::KI_LAUNCH_MAIL";
-			break;
-		case Rml::Input::KI_LAUNCH_MEDIA_SELECT:
-			value = "Rml::Input::KI_LAUNCH_MEDIA_SELECT";
-			break;
-		case Rml::Input::KI_LAUNCH_APP1:
-			value = "Rml::Input::KI_LAUNCH_APP1";
-			break;
-		case Rml::Input::KI_LAUNCH_APP2:
-			value = "Rml::Input::KI_LAUNCH_APP2";
-			break;
-	
-	 //Various extended or enhanced keyboards
-	 
-		case Rml::Input::KI_OEM_AX:
-			value = "Rml::Input::KI_OEM_AX";
-			break;
-		case Rml::Input::KI_ICO_HELP:
-			value = "Rml::Input::KI_ICO_HELP";
-			break;
-		case Rml::Input::KI_ICO_00:
-			value = "Rml::Input::KI_ICO_00";
-			break;
-		case Rml::Input::KI_PROCESSKEY:
-			value = "Rml::Input::KI_PROCESSKEY";
-			break;		// IME Process key.
-		case Rml::Input::KI_ICO_CLEAR:
-			value = "Rml::Input::KI_ICO_CLEAR";
-			break;
-		case Rml::Input::KI_ATTN:
-			value = "Rml::Input::KI_ATTN";
-			break;
-		case Rml::Input::KI_CRSEL:
-			value = "Rml::Input::KI_CRSEL";
-			break;
-		case Rml::Input::KI_EXSEL:
-			value = "Rml::Input::KI_EXSEL";
-			break;
-		case Rml::Input::KI_EREOF:
-			value = "Rml::Input::KI_EREOF";
-			break;
-		case Rml::Input::KI_PLAY:
-			value = "Rml::Input::KI_PLAY";
-			break;
-		case Rml::Input::KI_ZOOM:
-			value = "Rml::Input::KI_ZOOM";
-			break;
-		case Rml::Input::KI_PA1:
-			value = "Rml::Input::KI_PA1";
-			break;
-		case Rml::Input::KI_OEM_CLEAR:
-			value = "Rml::Input::KI_OEM_CLEAR";
-			break;
-		case Rml::Input::KI_LMETA:
-			value = "MetaLeft";
-			break;
-		case Rml::Input::KI_RMETA:
-			value = "MetaRight";
-			break;
-		default:
-			return false;
-			break;
-	}
-	return true;
-}
-*/
-
 // RmlUi to DK Key Map
-//static const unsigned int rmlKey[] = {
-std::map<int, Key> rmlKey;
-
 void DKDomKeyboardEvent::MapRmlKeys() {
 	using namespace Rml::Input;
 	rmlKey = {
-		{KI_UNKNOWN, KEY_UNASSIGNED},
-		{KI_SPACE, KEY_SPACE},
-		{KI_0, KEY_0},
-		{KI_1, KEY_1},
-		{KI_2, KEY_2},
-		{KI_3, KEY_3},
-		{KI_4, KEY_4},
-		{KI_5, KEY_5},
-		{KI_6, KEY_6},
-		{KI_7, KEY_7},
-		{KI_8, KEY_8},
-		{KI_9, KEY_9},
+		{ KI_UNKNOWN, KEY_UNASSIGNED },
+		{ KI_SPACE, KEY_SPACE },
+		{ KI_0, KEY_0 },
+		{ KI_1, KEY_1 },
+		{ KI_2, KEY_2 },
+		{ KI_3, KEY_3 },
+		{ KI_4, KEY_4 },
+		{ KI_5, KEY_5 },
+		{ KI_6, KEY_6 },
+		{ KI_7, KEY_7 },
+		{ KI_8, KEY_8 },
+		{ KI_9, KEY_9 },
 
-		{KI_A, KEY_A},
-		{KI_B, KEY_B},
-		{KI_C, KEY_C},
-		{KI_D, KEY_D},
-		{KI_E, KEY_E},
-		{KI_F, KEY_F},
-		{KI_G, KEY_G},
-		{KI_H, KEY_H},
-		{KI_I, KEY_I},
-		{KI_J, KEY_J},
-		{KI_K, KEY_K},
-		{KI_L, KEY_L},
-		{KI_M, KEY_M},
-		{KI_N, KEY_N},
-		{KI_O, KEY_O},
-		{KI_P, KEY_P},
-		{KI_Q, KEY_Q},
-		{KI_R, KEY_R},
-		{KI_S, KEY_S},
-		{KI_T, KEY_T},
-		{KI_U, KEY_U},
-		{KI_V, KEY_V},
-		{KI_W, KEY_W},
-		{KI_X, KEY_X},
-		{KI_Y, KEY_Y},
-		{KI_Z, KEY_Z},
+		{ KI_A, KEY_A },
+		{ KI_B, KEY_B },
+		{ KI_C, KEY_C },
+		{ KI_D, KEY_D },
+		{ KI_E, KEY_E },
+		{ KI_F, KEY_F },
+		{ KI_G, KEY_G },
+		{ KI_H, KEY_H },
+		{ KI_I, KEY_I },
+		{ KI_J, KEY_J },
+		{ KI_K, KEY_K },
+		{ KI_L, KEY_L },
+		{ KI_M, KEY_M },
+		{ KI_N, KEY_N },
+		{ KI_O, KEY_O },
+		{ KI_P, KEY_P },
+		{ KI_Q, KEY_Q },
+		{ KI_R, KEY_R },
+		{ KI_S, KEY_S },
+		{ KI_T, KEY_T },
+		{ KI_U, KEY_U },
+		{ KI_V, KEY_V },
+		{ KI_W, KEY_W },
+		{ KI_X, KEY_X },
+		{ KI_Y, KEY_Y },
+		{ KI_Z, KEY_Z },
 
-		{KI_OEM_1, KEY_OEM_1},				// US standard keyboard; the ';:' key.
-		{KI_OEM_PLUS, KEY_OEM_PLUS},		// Any region; the '=+' key.
-		{KI_OEM_COMMA, KEY_OEM_COMMA},		// Any region; the ',<' key.
-		{KI_OEM_MINUS, KEY_OEM_MINUS},		// Any region; the '-_' key.
-		{KI_OEM_PERIOD, KEY_OEM_PERIOD},	// Any region; the '.>' key.
-		{KI_OEM_2, KEY_OEM_2},				// Any region; the '/?' key.
-		{KI_OEM_3, KEY_OEM_3},				// Any region; the '`~' key.
-		{KI_OEM_4, KEY_OEM_4},				// US standard keyboard; the '[{' key.
-		{KI_OEM_5, KEY_OEM_5},				// US standard keyboard; the '\|' key.
-		{KI_OEM_6, KEY_OEM_6},				// US standard keyboard; the ']}' key.
-		{KI_OEM_7, KEY_OEM_7},				// US standard keyboard; the ''"' key.
-		{KI_OEM_8, KEY_OEM_8},
-		{KI_OEM_102, KEY_OEM_102},			// RT 102-key keyboard; the '<>' or '\|' key.
+		{ KI_OEM_1, KEY_OEM_1 },				   // US standard keyboard; the ';:' key.
+		{ KI_OEM_PLUS, KEY_OEM_PLUS },		       // Any region; the '=+' key.
+		{ KI_OEM_COMMA, KEY_OEM_COMMA },		   // Any region; the ',<' key.
+		{ KI_OEM_MINUS, KEY_OEM_MINUS },		   // Any region; the '-_' key.
+		{ KI_OEM_PERIOD, KEY_OEM_PERIOD },	       // Any region; the '.>' key.
+		{ KI_OEM_2, KEY_OEM_2 },				   // Any region; the '/?' key.
+		{ KI_OEM_3, KEY_OEM_3 },				   // Any region; the '`~' key.
+		{ KI_OEM_4, KEY_OEM_4 },				   // US standard keyboard; the '[{' key.
+		{ KI_OEM_5, KEY_OEM_5 },				   // US standard keyboard; the '\|' key.
+		{ KI_OEM_6, KEY_OEM_6 },				   // US standard keyboard; the ']}' key.
+		{ KI_OEM_7, KEY_OEM_7 },				   // US standard keyboard; the ''"' key.
+		{ KI_OEM_8, KEY_OEM_8 },
+		{ KI_OEM_102, KEY_OEM_102 },			   // RT 102-key keyboard; the '<>' or '\|' key.
 
-		{KI_NUMPAD0, KEY_NUMPAD0},
-		{KI_NUMPAD1, KEY_NUMPAD1},
-		{KI_NUMPAD2, KEY_NUMPAD2},
-		{KI_NUMPAD3, KEY_NUMPAD3},
-		{KI_NUMPAD4, KEY_NUMPAD4},
-		{KI_NUMPAD5, KEY_NUMPAD5},
-		{KI_NUMPAD6, KEY_NUMPAD6},
-		{KI_NUMPAD7, KEY_NUMPAD7},
-		{KI_NUMPAD8, KEY_NUMPAD8},
-		{KI_NUMPAD9, KEY_NUMPAD9},
-		//{KI_NUMPADENTER, KEY_NUMPADENTER},
-		{KI_MULTIPLY, KEY_MULTIPLY},            // Asterisk on the numeric keypad.
-		{KI_ADD, KEY_ADD},   				    // Plus on the numeric keypad.
-		//{KI_SEPARATOR, KEY_SEPARATOR},
-		{KI_SUBTRACT, KEY_SUBTRACT},    	    // Minus on the numeric keypad.
-		{KI_DECIMAL, KEY_DECIMAL},		        // Period on the numeric keypad.
-		{KI_DIVIDE,	KEY_DIVIDE},			    // Forward Slash on the numeric keypad.
+		{ KI_NUMPAD0, KEY_NUMPAD0 },
+		{ KI_NUMPAD1, KEY_NUMPAD1 },
+		{ KI_NUMPAD2, KEY_NUMPAD2 },
+		{ KI_NUMPAD3, KEY_NUMPAD3 },
+		{ KI_NUMPAD4, KEY_NUMPAD4 },
+		{ KI_NUMPAD5, KEY_NUMPAD5 },
+		{ KI_NUMPAD6, KEY_NUMPAD6 },
+		{ KI_NUMPAD7, KEY_NUMPAD7 },
+		{ KI_NUMPAD8, KEY_NUMPAD8 },
+		{ KI_NUMPAD9, KEY_NUMPAD9 },
+		//{ KI_NUMPADENTER, KEY_NUMPADENTER },
+		{ KI_MULTIPLY, KEY_MULTIPLY },             // Asterisk on the numeric keypad.
+		{ KI_ADD, KEY_ADD },   				       // Plus on the numeric keypad.
+		//{ KI_SEPARATOR, KEY_SEPARATOR },
+		{ KI_SUBTRACT, KEY_SUBTRACT },    	       // Minus on the numeric keypad.
+		{ KI_DECIMAL, KEY_DECIMAL },		       // Period on the numeric keypad.
+		{ KI_DIVIDE, KEY_DIVIDE },			       // Forward Slash on the numeric keypad.
 
 		// NEC PC-9800 kbd definitions
-		//{KI_OEM_NEC_EQUAL, KEY_OEM_NEC_EQUAL}	// Equals key on the numeric keypad.
-		{KI_BACK, KEY_BACK},			    	// Backspace key.
-		{KI_TAB, KEY_TAB},	         			// Tab key.
+		//{ KI_OEM_NEC_EQUAL, KEY_OEM_NEC_EQUAL }  // Equals key on the numeric keypad.
+		{ KI_BACK, KEY_BACK },			    	   // Backspace key.
+		{ KI_TAB, KEY_TAB },	         		   // Tab key.
 
-		{KI_CLEAR, KEY_CLEAR},
-		{KI_RETURN, KEY_RETURN},
+		{ KI_CLEAR, KEY_CLEAR },
+		{ KI_RETURN, KEY_RETURN },
 
-		{KI_PAUSE, KEY_PAUSE},
-		{KI_CAPITAL, KEY_CAPITAL},		       // Capslock key.
+		{ KI_PAUSE, KEY_PAUSE },
+		{ KI_CAPITAL, KEY_CAPITAL },		       // Capslock key.
 
-		{KI_KANA, KEY_KANA},				   // IME Kana mode.
-		//{KI_HANGUL, KEY_HANGUL},			   // IME Hangul mode.
-		{KI_JUNJA, KEY_JUNJA},				   // IME Junja mode.
-		{KI_FINAL, KEY_FINAL},                 // IME final mode.
-		{KI_HANJA, KEY_HANJA},				   // IME Hanja mode.
-		//{KI_KANJI, KEY_KANJI},	           // IME Kanji mode.
+		{ KI_KANA, KEY_KANA },				       // IME Kana mode.
+		//{ KI_HANGUL, KEY_HANGUL },			   // IME Hangul mode.
+		{ KI_JUNJA, KEY_JUNJA },				   // IME Junja mode.
+		{ KI_FINAL, KEY_FINAL },                   // IME final mode.
+		{ KI_HANJA, KEY_HANJA },				   // IME Hanja mode.
+		//{ KI_KANJI, KEY_KANJI },	               // IME Kanji mode.
 
-		{ KI_ESCAPE, KEY_ESCAPE },			   // Escape key.
-		{ KI_CONVERT, KEY_CONVERT },		   // IME convert.
-		{ KI_NONCONVERT, KEY_NONCONVERT },	   // IME nonconvert.
-		{ KI_ACCEPT, KEY_ACCEPT },	           // IME accept.
-		{ KI_MODECHANGE, KEY_MODECHANGE },     // IME mode change request.
-		{ KI_PRIOR, KEY_PRIOR },               // Page Up key.
-		{ KI_NEXT, KEY_NEXT },				   // Page Down key.
+		{ KI_ESCAPE, KEY_ESCAPE },			       // Escape key.
+		{ KI_CONVERT, KEY_CONVERT },		       // IME convert.
+		{ KI_NONCONVERT, KEY_NONCONVERT },	       // IME nonconvert.
+		{ KI_ACCEPT, KEY_ACCEPT },	               // IME accept.
+		{ KI_MODECHANGE, KEY_MODECHANGE },         // IME mode change request.
+		{ KI_PRIOR, KEY_PRIOR },                   // Page Up key.
+		{ KI_NEXT, KEY_NEXT },				       // Page Down key.
 		{ KI_END, KEY_END },
 		{ KI_HOME, KEY_HOME },
-		{ KI_LEFT, KEY_LEFT },				   // Left Arrow key.
-		{ KI_UP, KEY_UP },					   // Up Arrow key.
-		{ KI_RIGHT, KEY_RIGHT },      		   // Right Arrow key.
-		{ KI_DOWN, KEY_RIGHT },				   // Down Arrow key.
+		{ KI_LEFT, KEY_LEFT },				       // Left Arrow key.
+		{ KI_UP, KEY_UP },					       // Up Arrow key.
+		{ KI_RIGHT, KEY_RIGHT },      		       // Right Arrow key.
+		{ KI_DOWN, KEY_RIGHT },				       // Down Arrow key.
 		{ KI_SELECT, KEY_SELECT },
 		{ KI_PRINT, KEY_PRINT },
 		{ KI_EXECUTE, KEY_EXECUTE_ },
-		{ KI_SNAPSHOT, KEY_SNAPSHOT },		   // Print Screen key.
+		{ KI_SNAPSHOT, KEY_SNAPSHOT },		       // Print Screen key.
 		{ KI_INSERT, KEY_INSERT },
 		{ KI_DELETE, KEY_DELETE },
 		{ KI_HELP, KEY_HELP },
 
-		{ KI_LWIN, KEY_LWIN },				// Left Windows key.
-		{ KI_RWIN, KEY_RWIN },				// Right Windows key.
-		{ KI_APPS, KEY_APPS },				// Applications key.
+		{ KI_LWIN, KEY_LWIN },				      // Left Windows key.
+		{ KI_RWIN, KEY_RWIN },				      // Right Windows key.
+		{ KI_APPS, KEY_APPS },				      // Applications key.
 		//{ KI_POWER, KEY_POWER },
 		{ KI_SLEEP, KEY_SLEEP },
 		//{ KI_WAKE, KEY_WAKE },
@@ -1057,8 +502,8 @@ void DKDomKeyboardEvent::MapRmlKeys() {
 		{ KI_F23, KEY_F23 },
 		{ KI_F24, KEY_F24 },
 
-		{ KI_NUMLOCK, KEY_NUMLOCK },	    // Numlock key.
-		{ KI_SCROLL, KEY_SCROLL },			// Scroll Lock key.
+		{ KI_NUMLOCK, KEY_NUMLOCK },	            // Numlock key.
+		{ KI_SCROLL, KEY_SCROLL },			        // Scroll Lock key.
 
 		// Fujitsu/OASYS kbd definitions
 		{ KI_OEM_FJ_JISHO, KEY_OEM_FJ_JISHO },		// 'Dictionary' key.
@@ -1071,8 +516,8 @@ void DKDomKeyboardEvent::MapRmlKeys() {
 		{ KI_RSHIFT, KEY_RSHIFT },
 		{ KI_LCONTROL, KEY_LCONTROL },
 		{ KI_RCONTROL, KEY_RCONTROL },
-		{ KI_LMENU, KEY_LMENU },
-		{ KI_RMENU, KEY_RMENU },
+		{ KI_LMENU, KEY_ALTLEFT },
+		{ KI_RMENU, KEY_ALTLEFT },
 		{ KI_BROWSER_BACK, KEY_BROWSER_BACK },
 		{ KI_BROWSER_FORWARD, KEY_BROWSER_FORWARD },
 		{ KI_BROWSER_REFRESH, KEY_BROWSER_REFRESH },
@@ -1096,7 +541,7 @@ void DKDomKeyboardEvent::MapRmlKeys() {
 		{ KI_OEM_AX, KEY_OEM_AX },
 		{ KI_ICO_HELP, KEY_ICO_HELP },
 		{ KI_ICO_00, KEY_ICO_00 },
-		{ KI_PROCESSKEY, KEY_PROCESSKEY },		// IME Process key.
+		{ KI_PROCESSKEY, KEY_PROCESSKEY },		     // IME Process key.
 		{ KI_ICO_CLEAR, KEY_ICO_CLEAR },
 		{ KI_ATTN, KEY_ATTN },
 		{ KI_CRSEL, KEY_CRSEL },
