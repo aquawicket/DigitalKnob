@@ -176,7 +176,7 @@ enum Key{
                              //              VK_OEM_NEC_EQUAL    | key on numpad on NEC PC-9800 kbd
     KEY_OEM_FJ_MASSHOU,      // 147   0x93   VK_OEM_FJ_MASSHOU   | 'Unregister word' key
     KEY_OEM_FJ_TOUROKU,      // 148   0x94   VK_OEM_FJ_TOUROKU   | 'Register word' key
-    KEy_OEM_FJ_LOYA,         // 149   0x95   VK_OEM_FJ_LOYA      | 'Left OYAYUBI' key
+    KEY_OEM_FJ_LOYA,         // 149   0x95   VK_OEM_FJ_LOYA      | 'Left OYAYUBI' key
     KEY_OEM_FJ_ROYA,         // 150   0x96   VK_OEM_FJ_ROYA      | 'Right OYAYUBI' key
     //KEY_UNASSIGNED,        // 151   0x97   -- UNASSIGNED --
     //KEY_UNASSIGNED,        // 152   0x98   -- UNASSIGNED --
