@@ -79,7 +79,7 @@ int DKDomKeyboardEvent::code(duk_context* ctx){
 	}
 	Rml::Input::KeyIdentifier key = (Rml::Input::KeyIdentifier)event->GetParameter<int>("key_identifier", 0);
 	DKString code;
-	TranslateKey(key, code);
+	//TranslateKey(key, code);
 	duk_push_string(ctx, code.c_str());
 	return true;
 }
@@ -124,7 +124,7 @@ int DKDomKeyboardEvent::key(duk_context* ctx){
 	}
 	int key = event->GetParameter<int>("key_identifier", 0);
 	DKString code;
-	TranslateKey(key, code);
+	//TranslateKey(key, code);
 	duk_push_string(ctx, code.c_str());
 	return true;
 }
@@ -354,7 +354,7 @@ int DKDomKeyboardEvent::which(duk_context* ctx)
 	return false;
 }
 
-
+/*
 //Extra
 // https://css-tricks.com/snippets/javascript/javascript-keycodes/
 bool DKDomKeyboardEvent::TranslateKey(int key, DKString& value){
@@ -905,3 +905,225 @@ bool DKDomKeyboardEvent::TranslateKey(int key, DKString& value){
 	}
 	return true;
 }
+*/
+
+// RmlUi to DK Key Map
+//static const unsigned int rmlKey[] = {
+std::map<int, Key> rmlKey;
+
+void DKDomKeyboardEvent::MapRmlKeys() {
+	using namespace Rml::Input;
+	rmlKey = {
+		{KI_UNKNOWN, KEY_UNASSIGNED},
+		{KI_SPACE, KEY_SPACE},
+		{KI_0, KEY_0},
+		{KI_1, KEY_1},
+		{KI_2, KEY_2},
+		{KI_3, KEY_3},
+		{KI_4, KEY_4},
+		{KI_5, KEY_5},
+		{KI_6, KEY_6},
+		{KI_7, KEY_7},
+		{KI_8, KEY_8},
+		{KI_9, KEY_9},
+
+		{KI_A, KEY_A},
+		{KI_B, KEY_B},
+		{KI_C, KEY_C},
+		{KI_D, KEY_D},
+		{KI_E, KEY_E},
+		{KI_F, KEY_F},
+		{KI_G, KEY_G},
+		{KI_H, KEY_H},
+		{KI_I, KEY_I},
+		{KI_J, KEY_J},
+		{KI_K, KEY_K},
+		{KI_L, KEY_L},
+		{KI_M, KEY_M},
+		{KI_N, KEY_N},
+		{KI_O, KEY_O},
+		{KI_P, KEY_P},
+		{KI_Q, KEY_Q},
+		{KI_R, KEY_R},
+		{KI_S, KEY_S},
+		{KI_T, KEY_T},
+		{KI_U, KEY_U},
+		{KI_V, KEY_V},
+		{KI_W, KEY_W},
+		{KI_X, KEY_X},
+		{KI_Y, KEY_Y},
+		{KI_Z, KEY_Z},
+
+		{KI_OEM_1, KEY_OEM_1},				// US standard keyboard; the ';:' key.
+		{KI_OEM_PLUS, KEY_OEM_PLUS},			// Any region; the '=+' key.
+		{KI_OEM_COMMA, KEY_OEM_COMMA},			// Any region; the ',<' key.
+		{KI_OEM_MINUS, KEY_OEM_MINUS},			// Any region; the '-_' key.
+		{KI_OEM_PERIOD, KEY_OEM_PERIOD},			// Any region; the '.>' key.
+		{KI_OEM_2, KEY_OEM_2},				// Any region; the '/?' key.
+		{KI_OEM_3, KEY_OEM_3},				// Any region; the '`~' key.
+		{KI_OEM_4, KEY_OEM_4},				// US standard keyboard; the '[{' key.
+		{KI_OEM_5, KEY_OEM_5},				// US standard keyboard; the '\|' key.
+		{KI_OEM_6, KEY_OEM_6},				// US standard keyboard; the ']}' key.
+		{KI_OEM_7, KEY_OEM_7},				// US standard keyboard; the ''"' key.
+		{KI_OEM_8, KEY_OEM_8},
+		{KI_OEM_102, KEY_OEM_102},			// RT 102-key keyboard; the '<>' or '\|' key.
+
+		{KI_NUMPAD0, KEY_NUMPAD0},
+		{KI_NUMPAD1, KEY_NUMPAD1},
+		{KI_NUMPAD2, KEY_NUMPAD2},
+		{KI_NUMPAD3, KEY_NUMPAD3},
+		{KI_NUMPAD4, KEY_NUMPAD4},
+		{KI_NUMPAD5, KEY_NUMPAD5},
+		{KI_NUMPAD6, KEY_NUMPAD6},
+		{KI_NUMPAD7, KEY_NUMPAD7},
+		{KI_NUMPAD8, KEY_NUMPAD8},
+		{KI_NUMPAD9, KEY_NUMPAD9},
+		//{KI_NUMPADENTER, KEY_NUMPADENTER},
+		{KI_MULTIPLY, KEY_MULTIPLY}//,        // Asterisk on the numeric keypad.
+		/*
+		KI_ADD,				// Plus on the numeric keypad.
+		KI_SEPARATOR,
+		KI_SUBTRACT,			// Minus on the numeric keypad.
+		KI_DECIMAL,			// Period on the numeric keypad.
+		KI_DIVIDE,				// Forward Slash on the numeric keypad.
+
+		// NEC PC-9800 kbd definitions
+		KI_OEM_NEC_EQUAL,		// Equals key on the numeric keypad.
+		KI_BACK,				// Backspace key.
+		KI_TAB,				// Tab key.
+
+		KI_CLEAR,
+		KI_RETURN,
+
+		KI_PAUSE,
+		KI_CAPITAL,			// Capslock key.
+
+		KI_KANA,				// IME Kana mode.
+		KI_HANGUL,				// IME Hangul mode.
+		KI_JUNJA,				// IME Junja mode.
+		KI_FINAL,				// IME final mode.
+		KI_HANJA,				// IME Hanja mode.
+		KI_KANJI,				// IME Kanji mode.
+
+		KI_ESCAPE,				// Escape key.
+		KI_CONVERT,			// IME convert.
+		KI_NONCONVERT,			// IME nonconvert.
+		KI_ACCEPT,				// IME accept.
+		KI_MODECHANGE,			// IME mode change request.
+		KI_PRIOR,				// Page Up key.
+		KI_NEXT,				// Page Down key.
+		KI_END,
+		KI_HOME,
+		KI_LEFT,				// Left Arrow key.
+		KI_UP,					// Up Arrow key.
+		KI_RIGHT,				// Right Arrow key.
+		KI_DOWN,				// Down Arrow key.
+		KI_SELECT,
+		KI_PRINT,
+		KI_EXECUTE,
+		KI_SNAPSHOT,			// Print Screen key.
+		KI_INSERT,
+		KI_DELETE,
+		KI_HELP,
+
+		KI_LWIN,				// Left Windows key.
+		KI_RWIN,				// Right Windows key.
+		KI_APPS,				// Applications key.
+		KI_POWER,
+		KI_SLEEP,
+		KI_WAKE,
+
+		KI_F1,
+		KI_F2,
+		KI_F3,
+		KI_F4,
+		KI_F5,
+		KI_F6,
+		KI_F7,
+		KI_F8,
+		KI_F9,
+		KI_F10,
+		KI_F11,
+		KI_F12,
+		KI_F13,
+		KI_F14,
+		KI_F15,
+		KI_F16,
+		KI_F17,
+		KI_F18,
+		KI_F19,
+		KI_F20,
+		KI_F21,
+		KI_F22,
+		KI_F23,
+		KI_F24,
+
+		KI_NUMLOCK,			// Numlock key.
+		KI_SCROLL,			// Scroll Lock key.
+
+		// Fujitsu/OASYS kbd definitions
+		KI_OEM_FJ_JISHO,		// 'Dictionary' key.
+		KI_OEM_FJ_MASSHOU,	// 'Unregister word' key.
+		KI_OEM_FJ_TOUROKU,	// 'Register word' key.
+		KI_OEM_FJ_LOYA,		// 'Left OYAYUBI' key.
+		KI_OEM_FJ_ROYA,		// 'Right OYAYUBI' key.
+
+		KI_LSHIFT,
+		KI_RSHIFT,
+		KI_LCONTROL,
+		KI_RCONTROL,
+		KI_LMENU,
+		KI_RMENU,
+		KI_BROWSER_BACK,
+		KI_BROWSER_FORWARD,
+		KI_BROWSER_REFRESH,
+		KI_BROWSER_STOP,
+		KI_BROWSER_SEARCH,
+		KI_BROWSER_FAVORITES,
+		KI_BROWSER_HOME,
+		KI_VOLUME_MUTE,
+		KI_VOLUME_DOWN,
+		KI_VOLUME_UP,
+		KI_MEDIA_NEXT_TRACK,
+		KI_MEDIA_PREV_TRACK,
+		KI_MEDIA_STOP,
+		KI_MEDIA_PLAY_PAUSE,
+		KI_LAUNCH_MAIL,
+		KI_LAUNCH_MEDIA_SELECT,
+		KI_LAUNCH_APP1,
+		KI_LAUNCH_APP2,
+
+		// Various extended or enhanced keyboards
+		KI_OEM_AX,
+		KI_ICO_HELP,
+		KI_ICO_00,
+		KI_PROCESSKEY,		// IME Process key.
+		KI_ICO_CLEAR,
+		KI_ATTN,
+		KI_CRSEL,
+		KI_EXSEL,
+		KI_EREOF,
+		KI_PLAY,
+		KI_ZOOM,
+		KI_PA1,
+		KI_OEM_CLEAR,
+		KI_LMETA,
+		KI_RMETA
+	};
+	*/
+	};
+}
+
+/*
+	enum KeyModifier
+	{
+		KM_CTRL = 1 << 0,		// Set if at least one Ctrl key is depressed.
+		KM_SHIFT = 1 << 1,		// Set if at least one Shift key is depressed.
+		KM_ALT = 1 << 2,		// Set if at least one Alt key is depressed.
+		KM_META = 1 << 3,		// Set if at least one Meta key (the command key) is depressed.
+		KM_CAPSLOCK = 1 << 4,	// Set if caps lock is enabled.
+		KM_NUMLOCK = 1 << 5,	// Set if num lock is enabled.
+		KM_SCROLLLOCK = 1 << 6	// Set if scroll lock is enabled.
+	};
+*/
+	

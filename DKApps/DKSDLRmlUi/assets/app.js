@@ -6,6 +6,11 @@ CPP_DK_Create("DKSDLText");
 
 location.href = CPP_DKAssets_LocalAssets()+"index.html";
 
+window.addEventListener("keydown", function(event){
+	console.log("keydown event.code = "+event.code);
+	console.log("keydown event.key = "+event.key);
+})
+
 
 //// Create Cef window ////
 //var USE_CEF = 1;

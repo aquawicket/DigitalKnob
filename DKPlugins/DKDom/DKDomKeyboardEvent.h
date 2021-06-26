@@ -41,7 +41,7 @@ public:
 	static int which(duk_context* ctx);
 
 	//Extra
-	static bool TranslateKey(int key, DKString& value);
+	static void MapRmlKeys();
 
 	DKString _key;
 	int _keyCode;
