@@ -1,4 +1,5 @@
 // https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent
+// https://w3c.github.io/uievents/#interface-keyboardevent
 
 #pragma once
 #ifndef DKDomKeyboardEvent_H
@@ -7,7 +8,6 @@
 #include "DKDuktape/DKDuktape.h"
 
 
-///////////////////////////////////////////////////////////////
 class DKDomKeyboardEvent : public DKObjectT<DKDomKeyboardEvent>
 {
 public:
@@ -42,6 +42,9 @@ public:
 
 	//Extra
 	static bool TranslateKey(int key, DKString& value);
+
+	DKString _key;
+	int _keyCode;
 };
 
 

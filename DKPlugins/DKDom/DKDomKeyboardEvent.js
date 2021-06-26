@@ -1,4 +1,5 @@
 // https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent
+// https://w3c.github.io/uievents/#interface-keyboardevent
 
 var KeyboardEvent = function(pointer) {
     // Properties
