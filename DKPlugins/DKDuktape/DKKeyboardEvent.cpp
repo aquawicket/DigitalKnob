@@ -63,7 +63,7 @@ int DKKeyboardEvent::altKey(duk_context* ctx){
 		return true;
 	}
 	//TODO
-	//int altKey = keys[(Key)std::stoi(event->data[0])].altKey;
+	//int altKey = "undefined"
 	//duk_push_boolean(ctx, altKey);
 	return true;
 }
@@ -77,8 +77,8 @@ int DKKeyboardEvent::code(duk_context* ctx){
 		duk_push_boolean(ctx, false);
 		return true;
 	}
-	Key keyN = (Key)std::stoi(event->data[0]);
-	DKString code = DKKeyCodes::keys[keyN].code;
+	Key key_identifier = (Key)std::stoi(event->data[0]);
+	DKString code = DKKeyCodes::keys[key_identifier].code;
 	duk_push_string(ctx, code.c_str());
 	return true;
 }
@@ -122,8 +122,8 @@ int DKKeyboardEvent::key(duk_context* ctx){
 		duk_push_boolean(ctx, false);
 		return true;
 	}
-	Key keyN = (Key)std::stoi(event->data[0]);
-	DKString key = DKKeyCodes::keys[keyN].key;
+	Key key_identifier = (Key)std::stoi(event->data[0]);
+	DKString key = DKKeyCodes::keys[key_identifier].key;
 	duk_push_string(ctx, key.c_str());
 	return true;
 }
@@ -152,8 +152,8 @@ int DKKeyboardEvent::location(duk_context* ctx){
 		duk_push_boolean(ctx, false);
 		return true;
 	}
-	Key keyN = (Key)std::stoi(event->data[0]);
-	int location = DKKeyCodes::keys[keyN].location;
+	Key key_identifier = (Key)std::stoi(event->data[0]);
+	int location = DKKeyCodes::keys[key_identifier].location;
 	duk_push_int(ctx, location);
 	return false;
 }
@@ -297,12 +297,12 @@ int DKKeyboardEvent::keyCode(duk_context* ctx){
 		duk_push_boolean(ctx, false);
 		return true;
 	}
-	//TODO
-	//int charCode = keys[(Key)std::stoi(event->data[0])].keyCode;
-	//duk_push_int(ctx, keyCode);
+	Key key_identifier = (Key)std::stoi(event->data[0]);
+	duk_push_int(ctx, key_identifier);
 	return false;
 }
 
+// Deprecated
 int DKKeyboardEvent::keyIdentifier(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString eventAddress = duk_require_string(ctx, 0);
@@ -312,10 +312,10 @@ int DKKeyboardEvent::keyIdentifier(duk_context* ctx){
 		duk_push_boolean(ctx, false);
 		return true;
 	}
-	//TODO
-	//bool char1 = event->GetParameter<bool>("char", 0);
-	//duk_push_int(ctx, char1);
-	return false;
+	Key key_identifier = (Key)std::stoi(event->data[0]);
+	DKString key = DKKeyCodes::keys[key_identifier].key;
+	duk_push_string(ctx, key.c_str());
+	return true;
 }
 
 int DKKeyboardEvent::keyLocation(duk_context* ctx){

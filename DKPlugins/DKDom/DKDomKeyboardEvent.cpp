@@ -77,11 +77,10 @@ int DKDomKeyboardEvent::code(duk_context* ctx){
 		duk_push_boolean(ctx, false);
 		return true;
 	}
-	Rml::Input::KeyIdentifier key = (Rml::Input::KeyIdentifier)event->GetParameter<int>("key_identifier", 0);
-	Key rml_key = rmlKey[key];
-	DKKeyCodes::KeyboardEventMap base_key = DKKeyCodes::keys[rml_key];
-
-	DKString code = base_key.code;
+	Rml::Input::KeyIdentifier key_identifier = (Rml::Input::KeyIdentifier)event->GetParameter<int>("key_identifier", 0);
+	Key rml_key = rmlKey[key_identifier];
+	DKKeyCodes::KeyboardEventMap key = DKKeyCodes::keys[rml_key];
+	DKString code = key.code;
 	duk_push_string(ctx, code.c_str());
 	return true;
 }
@@ -124,9 +123,11 @@ int DKDomKeyboardEvent::key(duk_context* ctx){
 		duk_push_boolean(ctx, false);
 		return true;
 	}
-	int key = event->GetParameter<int>("key_identifier", 0);
-	DKString code;
-	duk_push_string(ctx, code.c_str());
+	Rml::Input::KeyIdentifier key_identifier = (Rml::Input::KeyIdentifier)event->GetParameter<int>("key_identifier", 0);
+	Key rml_key = rmlKey[key_identifier];
+	DKKeyCodes::KeyboardEventMap keyboardEvent = DKKeyCodes::keys[rml_key];
+	DKString key = keyboardEvent.key;
+	duk_push_string(ctx, key.c_str());
 	return true;
 }
 
@@ -157,7 +158,7 @@ int DKDomKeyboardEvent::location(duk_context* ctx){
 	//TODO
 	int location = event->GetParameter<int>("location", 0);
 	duk_push_int(ctx, location);
-	return false;
+ 	return false;
 }
 
 int DKDomKeyboardEvent::metaKey(duk_context* ctx){

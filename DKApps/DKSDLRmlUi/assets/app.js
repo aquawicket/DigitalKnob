@@ -7,14 +7,14 @@ CPP_DK_Create("DKSDLText");
 location.href = CPP_DKAssets_LocalAssets()+"index.html";
 
 window.addEventListener("keydown", function mykeydown(event){
-	console.log("app.js: window.onkeydown() ")
+	console.log(" ");
 	console.log("event.type: "+event.type)
 	console.log("event.altKey: "+event.altKey)
 	console.log("event.char: "+event.char)     //OBSOLETE
 	console.log("event.charCode: "+event.charCode)
 	console.log("event.code: "+event.code)
 	console.log("event.ctrlKey: "+event.ctrlKey)
-	console.log("event.isCOmposition: "+event.isComposision)
+	console.log("event.isComposition: "+event.isComposision)
 	console.log("event.key: "+event.key)
 	console.log("event.keyCode: "+event.keyCode)
 	console.log("event.keyIdentifier: "+event.keyIdentifier)
@@ -24,6 +24,7 @@ window.addEventListener("keydown", function mykeydown(event){
 	console.log("event.repeat: "+event.repeat)
 	console.log("event.shiftKey: "+event.shiftKey)
 	console.log("event.which: "+event.which)
+	console.log(" ");
 })
 
 //// Create Cef window ////

@@ -5,7 +5,7 @@
 
 std::map<Key, DKKeyCodes::KeyboardEventMap> DKKeyCodes::keys;
 
-void DKKeyCodes::mapKey(Key name, DKString code, DKString key, int location) {
+void DKKeyCodes::mapKey(Key name, DKString key, DKString code, int location) {
     DKString vk_keycode = int_to_hex(name);
     int which = name;
     keys[name] = KeyboardEventMap{code, vk_keycode, key, location, which};
