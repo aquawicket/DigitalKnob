@@ -32,14 +32,14 @@ enum Key{
     KEY_RESERVED,            //  10   0x0A   -- RESERVED --
     //KEY_RESERVED,          //  11   0x0B   -- RESERVED --
     KEY_CLEAR = 12,          //  12   0x0C   VK_CLEAR            | Clear key
-    KEY_RETURN,              //  13   0x0D   VK_RETURN           | Enter key
+    KEY_ENTER,               //  13   0x0D   VK_RETURN           | Enter key
     //KEY_UNASSIGNED,        //  14   0x0E   -- UNASSIGNED --
     //KEY_UNASSIGNED,        //  15   0x0F   -- UNASSIGNED --
     KEY_SHIFT = 16,          //  16   0x10   VK_SHIFT            | Shift key
     KEY_CONTROL,             //  17   0x11   VK_CONTROL          | Ctrl key
     KEY_ALT,                 //  18   0x12   VK_MENU             | Alt key
     KEY_PAUSE,               //  19   0x13   VK_PAUSE            | Pause key
-    KEY_CAPITAL,             //  20   0x14   VK_CAPITAL          | Caps-Lock
+    KEY_CAPSLOCK,            //  20   0x14   VK_CAPITAL          | Caps-Lock
     KEY_KANA,                //  21   0x15   VK_KANA / VK_HANGUL | IME Kana or Hangul mode
     //KEY_UNASSIGNED,        //  22   0x16   -- UNASSIGNED --
     KEY_JUNJA = 23,          //  23   0x17   VK_JUNJA            | IME Junja mode
@@ -52,8 +52,8 @@ enum Key{
     KEY_ACCEPT,              //  30   0x1E   VK_ACCEPT           | IME accept
     KEY_MODECHANGE,          //  31   0x1F   VK_MODECHANGE       | IME mode change request
     KEY_SPACE,               //  32   0x20   VK_SPACE            | Spacebar
-    KEY_PRIOR,               //  33   0x21   VK_PRIOR            | Page Up key
-    KEY_NEXT,                //  34   0x22   VK_NEXT             | Page Down key
+    KEY_PAGEUP,              //  33   0x21   VK_PRIOR            | Page Up key
+    KEY_PAGEDOWN,            //  34   0x22   VK_NEXT             | Page Down key
     KEY_END,                 //  35   0x23   VK_END              | End key
     KEY_HOME,                //  36   0x24   VK_HOME             | Home key
     KEY_LEFT,                //  37   0x25   VK_LEFT             | Left arrow key
@@ -110,8 +110,8 @@ enum Key{
     KEY_X,                   //  88   0x58   VK_X                | X key
     KEY_Y,                   //  89   0x59   VK_Y                | Y key
     KEY_Z,                   //  90   0x5A   VK_Z                | Z key
-    KEY_LWIN,                //  91   0x5B   VK_LWIN             | Left Windows  - MS Natural kbd
-    KEY_RWIN,                //  92   0x5C   VK_RWIN             | Right Windows - MS Natural kbd
+    KEY_METALEFT,            //  91   0x5B   VK_LWIN             | Left Windows  - MS Natural kbd
+    KEY_METARIGHT,           //  92   0x5C   VK_RWIN             | Right Windows - MS Natural kbd
     KEY_APPS,                //  93   0x5D   VK_APPS             | Application key-MS Natural kbd
     //KEY_RESERVED,          //  94   0x5E   -- RESERVED --
     KEY_SLEEP = 95,          //  95   0x5F   VK_SLEEP
@@ -164,7 +164,7 @@ enum Key{
     //KEY_UNASSIGNED,        // 142   0x8E   -- UNASSIGNED --
     //KEY_UNASSIGNED,        // 143   0x8F   -- UNASSIGNED --
     KEY_NUMLOCK = 144,       // 144   0x90   VK_NUMLOCK          | Num Lock key
-    KEY_SCROLL,              // 145   0x91   VK_SCROLL           | Scroll Lock key
+    KEY_SCROLLLOCK,          // 145   0x91   VK_SCROLL           | Scroll Lock key
                              // Fujitsu/OASYS kbd --------------------
     KEY_OEM_FJ_JISHO,        // 146   0x92   VK_OEM_FJ_JISHO     | 'Dictionary' key /
                              //              VK_OEM_NEC_EQUAL    | key on numpad on NEC PC-9800 kbd
@@ -179,12 +179,13 @@ enum Key{
     //KEY_UNASSIGNED,        // 155   0x9B   -- UNASSIGNED --
     //KEY_UNASSIGNED,        // 156   0x9C   -- UNASSIGNED --
     //KEY_UNASSIGNED,        // 157   0x9D   -- UNASSIGNED --
+    //KEY_UNASSIGNED,        // 157   0x9D   -- UNASSIGNED --
     //KEY_UNASSIGNED,        // 158   0x9E   -- UNASSIGNED --
     //KEY_UNASSIGNED,        // 159   0x9F   -- UNASSIGNED --
-    KEY_LSHIFT = 160,        // 160   0xA0   VK_LSHIFT              | Left Shift key
-    KEY_RSHIFT,              // 161   0xA1   VK_RSHIFT              | Right Shift key
-    KEY_LCONTROL,            // 162   0xA2   VK_LCONTROL            | Left Ctrl key
-    KEY_RCONTROL,            // 163   0xA3   VK_RCONTROL            | Right Ctrl key
+    KEY_SHIFTLEFT = 160,     // 160   0xA0   VK_LSHIFT              | Left Shift key
+    KEY_SHIFTRIGHT,          // 161   0xA1   VK_RSHIFT              | Right Shift key
+    KEY_CONTROLLEFT,         // 162   0xA2   VK_LCONTROL            | Left Ctrl key
+    KEY_CONTROLRIGHT,        // 163   0xA3   VK_RCONTROL            | Right Ctrl key
     KEY_ALTLEFT,             // 164   0xA4   VK_LMENU               | Left Menu key
     KEY_ALTRIGHT,            // 165   0xA5   VK_RMENU               | Right Menu key
     KEY_BROWSER_BACK,        // 166   0xA6   VK_BROWSER_BACK        | Browser Back key

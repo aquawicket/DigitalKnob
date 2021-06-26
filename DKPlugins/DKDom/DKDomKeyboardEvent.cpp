@@ -143,7 +143,7 @@ int DKDomKeyboardEvent::locale(duk_context* ctx){
 	//TODO
 	DKString locale = "undefined";
 	duk_push_string(ctx, locale.c_str());
-	return false;
+	return true;
 }
 
 int DKDomKeyboardEvent::location(duk_context* ctx){
@@ -158,7 +158,7 @@ int DKDomKeyboardEvent::location(duk_context* ctx){
 	//TODO
 	int location = event->GetParameter<int>("location", 0);
 	duk_push_int(ctx, location);
- 	return false;
+ 	return true;
 }
 
 int DKDomKeyboardEvent::metaKey(duk_context* ctx){
@@ -518,7 +518,7 @@ void DKDomKeyboardEvent::MapRmlKeys() {
 		{ KI_LCONTROL, KEY_LCONTROL },
 		{ KI_RCONTROL, KEY_RCONTROL },
 		{ KI_LMENU, KEY_ALTLEFT },
-		{ KI_RMENU, KEY_ALTLEFT },
+		{ KI_RMENU, KEY_ALTRIGHT },
 		{ KI_BROWSER_BACK, KEY_BROWSER_BACK },
 		{ KI_BROWSER_FORWARD, KEY_BROWSER_FORWARD },
 		{ KI_BROWSER_REFRESH, KEY_BROWSER_REFRESH },

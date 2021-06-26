@@ -12,6 +12,7 @@ void DKKeyCodes::mapKey(Key name, DKString key, DKString code, int location) {
 }
 
 void DKKeyCodes::mapKeys() {
+    //https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/key/Key_Values
     //mapKey(KEY_Name,    " code",   " key");
 
     // Special values //
@@ -22,6 +23,56 @@ void DKKeyCodes::mapKeys() {
     mapKey(KEY_ALT, "Alt", "Alt");
     mapKey(KEY_ALTLEFT, "Alt", "AltLeft", 1);
     mapKey(KEY_ALTRIGHT, "Alt", "AltRight", 2);
+    //mapKey(KEY_ALTGRAPH, "AltGraph", "");
+    mapKey(KEY_CAPSLOCK, "CapsLock", "CapsLock");
+    mapKey(KEY_CONTROL, "Control", "Control");
+    mapKey(KEY_CONTROLLEFT, "Control", "ControlLeft", 1);
+    mapKey(KEY_CONTROLRIGHT, "Control", "ControlRight", 2);
+    //mapKey(KEY_FN, "Fn", "Fn");
+    //mapKey(KEY_FNLOCK, "FnLock", "FnLock");
+    //mapKey(KEY_HYPER, "Hyper", "Hyper");
+    //mapKey(KEY_WIN, "Meta", "Meta");
+    mapKey(KEY_METALEFT, "Meta", "MetaLeft", 1);
+    mapKey(KEY_METARIGHT, "Meta", "MetaRight", 2);
+    mapKey(KEY_NUMLOCK, "NumLock", "NumLock");
+    mapKey(KEY_SCROLLLOCK, "ScrollLock", "ScrollLock");
+    mapKey(KEY_SHIFT, "Shift", "Shift");
+    mapKey(KEY_SHIFTLEFT, "Shift", "ShiftLeft", 1);
+    mapKey(KEY_SHIFTRIGHT, "Shift", "ShiftRight", 2);
+    //mapKey(KEY_SUPER, "Super", "Super");
+    //mapKey(KEY_SYMBOL, "Symbol", "Symbol");
+    //mapKey(KEY_SYMBOLLOCK, "SymbolLock", "SymbolLock");
+
+    //Whitespace keys
+    mapKey(KEY_ENTER, "Enter", "Enter");
+    mapKey(KEY_TAB, "Tab", "Tab");
+    mapKey(KEY_SPACE, " ", "Space");
+
+    // Navagation Keys
+    mapKey(KEY_DOWN, "ArrowDown", "ArrowDown");
+    mapKey(KEY_LEFT, "ArrowLeft", "ArrowLeft");
+    mapKey(KEY_RIGHT, "ArrowRight", "ArrowRight");
+    mapKey(KEY_RIGHT, "ArrowUp", "ArrowUp");
+    mapKey(KEY_END, "End", "End");
+    mapKey(KEY_BROWSER_HOME, "Home", "Home");
+    mapKey(KEY_PAGEDOWN, "PageDown", "PageDown");
+    mapKey(KEY_PAGEUP, "PageUp", "PageUp");
+
+    //Editing keys
+    mapKey(KEY_BACK, "Backspace", "BackSpace");
+    mapKey(KEY_CLEAR, "Clear", "");
+    mapKey(KEY_APPCOMMAND_COPY, "Copy", "Copy");
+    mapKey(KEY_CRSEL, "CrSel", "CrSel");
+    mapKey(KEY_APPCOMMAND_CUT, "Cut", "Cut");
+    mapKey(KEY_DELETE, "Delete", "Delete")
+        mapKey(KEY_ERASEEOF, "EraseEof", "EraseEof");
+
+
+
+
+
+
+
 
     //mapKey(KEY_LBUTTON, "", "");
     //mapKey(KEY_RBUTTON, "", "");
@@ -29,14 +80,10 @@ void DKKeyCodes::mapKeys() {
     //mapKey(KEY_MBUTTON, "", "");
     //mapKey(KEY_XBUTTON1, "", "");
     //mapKey(KEY_XBUTTON2, "", "");
-    mapKey(KEY_BACK, "Backspace", "BackSpace");
+    
     mapKey(KEY_TAB, "Tab", "Tab");
-    mapKey(KEY_CLEAR, "Clear", "");
-    mapKey(KEY_RETURN, "Enter", "Enter");
-    mapKey(KEY_SHIFT, "Shift", "");
-    mapKey(KEY_CONTROL, "Control", "");
+    
     mapKey(KEY_PAUSE, "Pause", "Pause");
-    mapKey(KEY_CAPITAL, "CapsLock", "CapsLock");
     mapKey(KEY_KANA, "KanaMode", "");
     mapKey(KEY_JUNJA, "JunjaMode", "");
     mapKey(KEY_FINAL, "FinalMode", "");
@@ -47,14 +94,9 @@ void DKKeyCodes::mapKeys() {
     mapKey(KEY_ACCEPT, "Accept", "");
     mapKey(KEY_MODECHANGE, "ModeChange", "");
     mapKey(KEY_SPACE, " ", "Space");
-    mapKey(KEY_PRIOR, "PageUp", "PageUp");
-    mapKey(KEY_NEXT, "PageDown", "PageDown");
-    mapKey(KEY_END, "End", "End");
-    mapKey(KEY_HOME, "Home", "Home");
-    mapKey(KEY_LEFT, "ArrowLeft", "ArrowLeft");
-    mapKey(KEY_UP, "ArrowUp", "ArrowUp");
-    mapKey(KEY_RIGHT, "ArrowRight", "ArrorRight");
-    mapKey(KEY_DOWN, "ArrowDown", "ArrowDown");
+    
+
+    
     mapKey(KEY_SELECT, "Select", "");
     //mapKey(KEY_PRINT, "", "");
     mapKey(KEY_EXECUTE_, "Execute", "");
@@ -98,8 +140,6 @@ void DKKeyCodes::mapKeys() {
     mapKey(KEY_X, "x", "KeyX");
     mapKey(KEY_Y, "y", "KeyY");
     mapKey(KEY_Z, "z", "KeyZ");
-    mapKey(KEY_LWIN, "Meta", "MetaLeft");
-    mapKey(KEY_RWIN, "Meta", "MetaRight");
     mapKey(KEY_APPS, "", "");
     mapKey(KEY_SLEEP, "", "");
     mapKey(KEY_NUMPAD0, "0", "Numpad0");
@@ -143,17 +183,13 @@ void DKKeyCodes::mapKeys() {
     mapKey(KEY_F23, "F23", "F23");
     mapKey(KEY_F24, "F24", "F24");
     mapKey(KEY_NUMLOCK, "NumLock", "NumLock");
-    mapKey(KEY_SCROLL, "ScrollLock", "ScrollLock");
+
     mapKey(KEY_OEM_FJ_JISHO, "", "");
     mapKey(KEY_OEM_FJ_MASSHOU, "", "");
     mapKey(KEY_OEM_FJ_TOUROKU, "", "");
     mapKey(KEY_OEM_FJ_LOYA, "", "");
     mapKey(KEY_OEM_FJ_ROYA, "", "");
-    mapKey(KEY_LSHIFT, "Shift", "ShiftLeft");
-    mapKey(KEY_RSHIFT, "Shift", "ShiftRight");
-    mapKey(KEY_LCONTROL, "Control", "ControlLeft");
-    mapKey(KEY_RCONTROL, "Control", "ControlRight");
-    
+
     mapKey(KEY_BROWSER_BACK, "BrowserBack", "");
     mapKey(KEY_BROWSER_FORWARD, "BrowserForward", "");
     mapKey(KEY_BROWSER_REFRESH, "BrowserRefresh", "");
