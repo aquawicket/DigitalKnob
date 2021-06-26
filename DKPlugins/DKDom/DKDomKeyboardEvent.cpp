@@ -955,10 +955,10 @@ void DKDomKeyboardEvent::MapRmlKeys() {
 		{KI_Z, KEY_Z},
 
 		{KI_OEM_1, KEY_OEM_1},				// US standard keyboard; the ';:' key.
-		{KI_OEM_PLUS, KEY_OEM_PLUS},			// Any region; the '=+' key.
-		{KI_OEM_COMMA, KEY_OEM_COMMA},			// Any region; the ',<' key.
-		{KI_OEM_MINUS, KEY_OEM_MINUS},			// Any region; the '-_' key.
-		{KI_OEM_PERIOD, KEY_OEM_PERIOD},			// Any region; the '.>' key.
+		{KI_OEM_PLUS, KEY_OEM_PLUS},		// Any region; the '=+' key.
+		{KI_OEM_COMMA, KEY_OEM_COMMA},		// Any region; the ',<' key.
+		{KI_OEM_MINUS, KEY_OEM_MINUS},		// Any region; the '-_' key.
+		{KI_OEM_PERIOD, KEY_OEM_PERIOD},	// Any region; the '.>' key.
 		{KI_OEM_2, KEY_OEM_2},				// Any region; the '/?' key.
 		{KI_OEM_3, KEY_OEM_3},				// Any region; the '`~' key.
 		{KI_OEM_4, KEY_OEM_4},				// US standard keyboard; the '[{' key.
@@ -979,138 +979,135 @@ void DKDomKeyboardEvent::MapRmlKeys() {
 		{KI_NUMPAD8, KEY_NUMPAD8},
 		{KI_NUMPAD9, KEY_NUMPAD9},
 		//{KI_NUMPADENTER, KEY_NUMPADENTER},
-		{KI_MULTIPLY, KEY_MULTIPLY}//,        // Asterisk on the numeric keypad.
-		/*
-		KI_ADD,				// Plus on the numeric keypad.
-		KI_SEPARATOR,
-		KI_SUBTRACT,			// Minus on the numeric keypad.
-		KI_DECIMAL,			// Period on the numeric keypad.
-		KI_DIVIDE,				// Forward Slash on the numeric keypad.
+		{KI_MULTIPLY, KEY_MULTIPLY},            // Asterisk on the numeric keypad.
+		{KI_ADD, KEY_ADD},   				    // Plus on the numeric keypad.
+		//{KI_SEPARATOR, KEY_SEPARATOR},
+		{KI_SUBTRACT, KEY_SUBTRACT},    	    // Minus on the numeric keypad.
+		{KI_DECIMAL, KEY_DECIMAL},		        // Period on the numeric keypad.
+		{KI_DIVIDE,	KEY_DIVIDE},			    // Forward Slash on the numeric keypad.
 
 		// NEC PC-9800 kbd definitions
-		KI_OEM_NEC_EQUAL,		// Equals key on the numeric keypad.
-		KI_BACK,				// Backspace key.
-		KI_TAB,				// Tab key.
+		//{KI_OEM_NEC_EQUAL, KEY_OEM_NEC_EQUAL}	// Equals key on the numeric keypad.
+		{KI_BACK, KEY_BACK},			    	// Backspace key.
+		{KI_TAB, KEY_TAB},	         			// Tab key.
 
-		KI_CLEAR,
-		KI_RETURN,
+		{KI_CLEAR, KEY_CLEAR},
+		{KI_RETURN, KEY_RETURN},
 
-		KI_PAUSE,
-		KI_CAPITAL,			// Capslock key.
+		{KI_PAUSE, KEY_PAUSE},
+		{KI_CAPITAL, KEY_CAPITAL},		       // Capslock key.
 
-		KI_KANA,				// IME Kana mode.
-		KI_HANGUL,				// IME Hangul mode.
-		KI_JUNJA,				// IME Junja mode.
-		KI_FINAL,				// IME final mode.
-		KI_HANJA,				// IME Hanja mode.
-		KI_KANJI,				// IME Kanji mode.
+		{KI_KANA, KEY_KANA},				   // IME Kana mode.
+		//{KI_HANGUL, KEY_HANGUL},			   // IME Hangul mode.
+		{KI_JUNJA, KEY_JUNJA},				   // IME Junja mode.
+		{KI_FINAL, KEY_FINAL},                 // IME final mode.
+		{KI_HANJA, KEY_HANJA},				   // IME Hanja mode.
+		//{KI_KANJI, KEY_KANJI},	           // IME Kanji mode.
 
-		KI_ESCAPE,				// Escape key.
-		KI_CONVERT,			// IME convert.
-		KI_NONCONVERT,			// IME nonconvert.
-		KI_ACCEPT,				// IME accept.
-		KI_MODECHANGE,			// IME mode change request.
-		KI_PRIOR,				// Page Up key.
-		KI_NEXT,				// Page Down key.
-		KI_END,
-		KI_HOME,
-		KI_LEFT,				// Left Arrow key.
-		KI_UP,					// Up Arrow key.
-		KI_RIGHT,				// Right Arrow key.
-		KI_DOWN,				// Down Arrow key.
-		KI_SELECT,
-		KI_PRINT,
-		KI_EXECUTE,
-		KI_SNAPSHOT,			// Print Screen key.
-		KI_INSERT,
-		KI_DELETE,
-		KI_HELP,
+		{ KI_ESCAPE, KEY_ESCAPE },			   // Escape key.
+		{ KI_CONVERT, KEY_CONVERT },		   // IME convert.
+		{ KI_NONCONVERT, KEY_NONCONVERT },	   // IME nonconvert.
+		{ KI_ACCEPT, KEY_ACCEPT },	           // IME accept.
+		{ KI_MODECHANGE, KEY_MODECHANGE },     // IME mode change request.
+		{ KI_PRIOR, KEY_PRIOR },               // Page Up key.
+		{ KI_NEXT, KEY_NEXT },				   // Page Down key.
+		{ KI_END, KEY_END },
+		{ KI_HOME, KEY_HOME },
+		{ KI_LEFT, KEY_LEFT },				   // Left Arrow key.
+		{ KI_UP, KEY_UP },					   // Up Arrow key.
+		{ KI_RIGHT, KEY_RIGHT },      		   // Right Arrow key.
+		{ KI_DOWN, KEY_RIGHT },				   // Down Arrow key.
+		{ KI_SELECT, KEY_SELECT },
+		{ KI_PRINT, KEY_PRINT },
+		{ KI_EXECUTE, KEY_EXECUTE_ },
+		{ KI_SNAPSHOT, KEY_SNAPSHOT },		   // Print Screen key.
+		{ KI_INSERT, KEY_INSERT },
+		{ KI_DELETE, KEY_DELETE },
+		{ KI_HELP, KEY_HELP },
 
-		KI_LWIN,				// Left Windows key.
-		KI_RWIN,				// Right Windows key.
-		KI_APPS,				// Applications key.
-		KI_POWER,
-		KI_SLEEP,
-		KI_WAKE,
+		{ KI_LWIN, KEY_LWIN },				// Left Windows key.
+		{ KI_RWIN, KEY_RWIN },				// Right Windows key.
+		{ KI_APPS, KEY_APPS },				// Applications key.
+		//{ KI_POWER, KEY_POWER },
+		{ KI_SLEEP, KEY_SLEEP },
+		//{ KI_WAKE, KEY_WAKE },
 
-		KI_F1,
-		KI_F2,
-		KI_F3,
-		KI_F4,
-		KI_F5,
-		KI_F6,
-		KI_F7,
-		KI_F8,
-		KI_F9,
-		KI_F10,
-		KI_F11,
-		KI_F12,
-		KI_F13,
-		KI_F14,
-		KI_F15,
-		KI_F16,
-		KI_F17,
-		KI_F18,
-		KI_F19,
-		KI_F20,
-		KI_F21,
-		KI_F22,
-		KI_F23,
-		KI_F24,
+		{ KI_F1, KEY_F1 },
+		{ KI_F2, KEY_F2 },
+		{ KI_F3, KEY_F3 },
+		{ KI_F4, KEY_F4 },
+	    { KI_F5, KEY_F5 },
+		{ KI_F6, KEY_F6 },
+		{ KI_F7, KEY_F7 },
+		{ KI_F8, KEY_F8 },
+		{ KI_F9, KEY_F9 },
+		{ KI_F10, KEY_F10 },
+		{ KI_F11, KEY_F11 },
+		{ KI_F12, KEY_F12 },
+		{ KI_F13, KEY_F13 },
+		{ KI_F14, KEY_F14 },
+		{ KI_F15, KEY_F15 },
+		{ KI_F16, KEY_F16 },
+		{ KI_F17, KEY_F17 },
+		{ KI_F18, KEY_F18 },
+	    { KI_F19, KEY_F19 },
+		{ KI_F20, KEY_F20 },
+		{ KI_F21, KEY_F21 },
+		{ KI_F22, KEY_F22 },
+		{ KI_F23, KEY_F23 },
+		{ KI_F24, KEY_F24 },
 
-		KI_NUMLOCK,			// Numlock key.
-		KI_SCROLL,			// Scroll Lock key.
+		{ KI_NUMLOCK, KEY_NUMLOCK },	    // Numlock key.
+		{ KI_SCROLL, KEY_SCROLL },			// Scroll Lock key.
 
 		// Fujitsu/OASYS kbd definitions
-		KI_OEM_FJ_JISHO,		// 'Dictionary' key.
-		KI_OEM_FJ_MASSHOU,	// 'Unregister word' key.
-		KI_OEM_FJ_TOUROKU,	// 'Register word' key.
-		KI_OEM_FJ_LOYA,		// 'Left OYAYUBI' key.
-		KI_OEM_FJ_ROYA,		// 'Right OYAYUBI' key.
+		{ KI_OEM_FJ_JISHO, KEY_OEM_FJ_JISHO },		// 'Dictionary' key.
+		{ KI_OEM_FJ_MASSHOU, KEY_OEM_FJ_MASSHOU },	// 'Unregister word' key.
+		{ KI_OEM_FJ_TOUROKU, KEY_OEM_FJ_TOUROKU },	// 'Register word' key.
+		//{ KI_OEM_FJ_LOYA, KEY_OEM_FJ_LOYA },		// 'Left OYAYUBI' key.
+		{ KI_OEM_FJ_ROYA, KEY_OEM_FJ_ROYA },		// 'Right OYAYUBI' key.
 
-		KI_LSHIFT,
-		KI_RSHIFT,
-		KI_LCONTROL,
-		KI_RCONTROL,
-		KI_LMENU,
-		KI_RMENU,
-		KI_BROWSER_BACK,
-		KI_BROWSER_FORWARD,
-		KI_BROWSER_REFRESH,
-		KI_BROWSER_STOP,
-		KI_BROWSER_SEARCH,
-		KI_BROWSER_FAVORITES,
-		KI_BROWSER_HOME,
-		KI_VOLUME_MUTE,
-		KI_VOLUME_DOWN,
-		KI_VOLUME_UP,
-		KI_MEDIA_NEXT_TRACK,
-		KI_MEDIA_PREV_TRACK,
-		KI_MEDIA_STOP,
-		KI_MEDIA_PLAY_PAUSE,
-		KI_LAUNCH_MAIL,
-		KI_LAUNCH_MEDIA_SELECT,
-		KI_LAUNCH_APP1,
-		KI_LAUNCH_APP2,
+		{ KI_LSHIFT, KEY_LSHIFT },
+		{ KI_RSHIFT, KEY_RSHIFT },
+		{ KI_LCONTROL, KEY_LCONTROL },
+		{ KI_RCONTROL, KEY_RCONTROL },
+		{ KI_LMENU, KEY_LMENU },
+		{ KI_RMENU, KEY_RMENU },
+		{ KI_BROWSER_BACK, KEY_BROWSER_BACK },
+		{ KI_BROWSER_FORWARD, KEY_BROWSER_FORWARD },
+		{ KI_BROWSER_REFRESH, KEY_BROWSER_REFRESH },
+		{ KI_BROWSER_STOP, KEY_BROWSER_STOP },
+		{ KI_BROWSER_SEARCH, KEY_BROWSER_SEARCH },
+		{ KI_BROWSER_FAVORITES, KEY_BROWSER_FAVORITES },
+		{ KI_BROWSER_HOME, KEY_BROWSER_HOME },
+		{ KI_VOLUME_MUTE, KEY_VOLUME_MUTE },
+		{ KI_VOLUME_DOWN, KEY_VOLUME_DOWN },
+		{ KI_VOLUME_UP, KEY_VOLUME_UP }, 
+		{ KI_MEDIA_NEXT_TRACK, KEY_MEDIA_NEXT_TRACK },
+		{ KI_MEDIA_PREV_TRACK, KEY_MEDIA_PREV_TRACK },
+		{ KI_MEDIA_STOP, KEY_MEDIA_STOP },
+		{ KI_MEDIA_PLAY_PAUSE, KEY_MEDIA_PLAY_PAUSE },
+		{ KI_LAUNCH_MAIL, KEY_LAUNCH_MAIL }, 
+		{ KI_LAUNCH_MEDIA_SELECT, KEY_LAUNCH_MEDIA_SELECT },
+		{ KI_LAUNCH_APP1, KEY_LAUNCH_APP1 },
+		{ KI_LAUNCH_APP2, KEY_LAUNCH_APP2 },
 
 		// Various extended or enhanced keyboards
-		KI_OEM_AX,
-		KI_ICO_HELP,
-		KI_ICO_00,
-		KI_PROCESSKEY,		// IME Process key.
-		KI_ICO_CLEAR,
-		KI_ATTN,
-		KI_CRSEL,
-		KI_EXSEL,
-		KI_EREOF,
-		KI_PLAY,
-		KI_ZOOM,
-		KI_PA1,
-		KI_OEM_CLEAR,
-		KI_LMETA,
-		KI_RMETA
-	};
-	*/
+		{ KI_OEM_AX, KEY_OEM_AX },
+		{ KI_ICO_HELP, KEY_ICO_HELP },
+		{ KI_ICO_00, KEY_ICO_00 },
+		{ KI_PROCESSKEY, KEY_PROCESSKEY },		// IME Process key.
+		{ KI_ICO_CLEAR, KEY_ICO_CLEAR },
+		{ KI_ATTN, KEY_ATTN },
+		{ KI_CRSEL, KEY_CRSEL },
+		{ KI_EXSEL, KEY_EXSEL },
+		{ KI_EREOF, KEY_EREOF }, 
+		{ KI_PLAY, KEY_PLAY },
+		{ KI_ZOOM, KEY_ZOOM },
+		{ KI_PA1, KEY_PA1 },
+		{ KI_OEM_CLEAR, KEY_OEM_CLEAR }, 
+		//{ KI_LMETA, KEY_LMETA }, 
+		//{ KI_RMETA, KEY_RMETA },
 	};
 }
 
