@@ -9,8 +9,6 @@
 #include "DKDuktape/DKKeyCodes.h"
 
 
-
-///////////////////////////////
 bool DKKeyboardEvent::Init()
 {
 	DKDEBUGFUNC();
@@ -44,19 +42,17 @@ bool DKKeyboardEvent::Init()
 
 	DKClass::DKCreate("DKDuktape/DKKeyboardEvent.js");
 
-	
-	//MapKey(0, "undefined");
-	
+	mapKeys();
 	return true;
 }
 
 
 
-
+////////////////////////
 // Properties
-////////////////////////////////////////////////
-int DKKeyboardEvent::altKey(duk_context* ctx)
-{
+////////////////////////
+
+int DKKeyboardEvent::altKey(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString eventAddress = duk_require_string(ctx, 0);
 	DKEvents* event = DKDuktape::addressToEvent(eventAddress);
@@ -66,8 +62,8 @@ int DKKeyboardEvent::altKey(duk_context* ctx)
 		return true;
 	}
 	//TODO
-	bool altKey = false;  
-	duk_push_boolean(ctx, altKey);
+	//int altKey = keys[(Key)std::stoi(event->data[0])].altKey;
+	//duk_push_boolean(ctx, altKey);
 	return true;
 }
 
@@ -82,7 +78,7 @@ int DKKeyboardEvent::code(duk_context* ctx)
 		duk_push_boolean(ctx, false);
 		return true;
 	}
-	DKString code = GetCodeAttribute(std::stoi(event->data[0]));
+	DKString code = keys[(Key)std::stoi(event->data[0])].code;
 	duk_push_string(ctx, code.c_str());
 	return true;
 }
@@ -99,14 +95,12 @@ int DKKeyboardEvent::ctrlKey(duk_context* ctx)
 		return true;
 	}
 	//TODO
-	//bool ctrlKey;
+	//bool ctrlKey = keys[(Key)std::stoi(event->data[0])].ctrlKey;
 	//duk_push_boolean(ctx, ctrlKey);
 	return true;
 }
 
-//////////////////////////////////////////////////
-int DKKeyboardEvent::isComposing(duk_context* ctx)
-{
+int DKKeyboardEvent::isComposing(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString eventAddress = duk_require_string(ctx, 0);
 	DKEvents* event = DKDuktape::addressToEvent(eventAddress);
@@ -115,16 +109,13 @@ int DKKeyboardEvent::isComposing(duk_context* ctx)
 		duk_push_boolean(ctx, false);
 		return true;
 	}
-
 	//TODO
-	//bool isComposing;
+	//bool isComposing = keys[(Key)std::stoi(event->data[0])].isComposing;
 	//duk_push_boolean(ctx, isComposing);
 	return false;
 }
 
-/////////////////////////////////////////////
-int DKKeyboardEvent::key(duk_context* ctx)
-{
+int DKKeyboardEvent::key(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString eventAddress = duk_require_string(ctx, 0);
 	DKEvents* event = DKDuktape::addressToEvent(eventAddress);
@@ -133,14 +124,12 @@ int DKKeyboardEvent::key(duk_context* ctx)
 		duk_push_boolean(ctx, false);
 		return true;
 	}
-	DKString key = GetKeyAttribute(std::stoi(event->data[0]));
+	DKString key = keys[(Key)std::stoi(event->data[0])].key;
 	duk_push_string(ctx, key.c_str());
 	return true;
 }
 
-////////////////////////////////////////////////
-int DKKeyboardEvent::locale(duk_context* ctx)
-{
+int DKKeyboardEvent::locale(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString eventAddress = duk_require_string(ctx, 0);
 	DKEvents* event = DKDuktape::addressToEvent(eventAddress);
@@ -150,14 +139,12 @@ int DKKeyboardEvent::locale(duk_context* ctx)
 		return true;
 	}
 	//TODO
-	//DKString locale;
+	//DKString locale = keys[(Key)std::stoi(event->data[0])].locale;
 	//duk_push_string(ctx, locale.c_str());
 	return false;
 }
 
-//////////////////////////////////////////////////
-int DKKeyboardEvent::location(duk_context* ctx)
-{
+int DKKeyboardEvent::location(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString eventAddress = duk_require_string(ctx, 0);
 	DKEvents* event = DKDuktape::addressToEvent(eventAddress);
@@ -166,15 +153,12 @@ int DKKeyboardEvent::location(duk_context* ctx)
 		duk_push_boolean(ctx, false);
 		return true;
 	}
-	//TODO
-	//int location;
-	//duk_push_int(ctx, location);
+	int location = keys[(Key)std::stoi(event->data[0])].location;
+	duk_push_int(ctx, location);
 	return false;
 }
 
-/////////////////////////////////////////////////
-int DKKeyboardEvent::metaKey(duk_context* ctx)
-{
+int DKKeyboardEvent::metaKey(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString eventAddress = duk_require_string(ctx, 0);
 	DKEvents* event = DKDuktape::addressToEvent(eventAddress);
@@ -184,14 +168,12 @@ int DKKeyboardEvent::metaKey(duk_context* ctx)
 		return true;
 	}
 	//TODO
-	//bool metaKey;
+	//bool metaKey = keys[(Key)std::stoi(event->data[0])].metaKey;
 	//duk_push_boolean(ctx, metaKey);
 	return true;
 }
 
-////////////////////////////////////////////////
-int DKKeyboardEvent::repeat(duk_context* ctx)
-{
+int DKKeyboardEvent::repeat(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString eventAddress = duk_require_string(ctx, 0);
 	DKEvents* event = DKDuktape::addressToEvent(eventAddress);
@@ -201,14 +183,12 @@ int DKKeyboardEvent::repeat(duk_context* ctx)
 		return true;
 	}
 	//TODO
-	//bool repeat;
+	//bool repeat = keys[(Key)std::stoi(event->data[0])].repeat;
 	//duk_push_boolean(ctx, repeat);
 	return false;
 }
 
-//////////////////////////////////////////////////
-int DKKeyboardEvent::shiftKey(duk_context* ctx)
-{
+int DKKeyboardEvent::shiftKey(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString eventAddress = duk_require_string(ctx, 0);
 	DKEvents* event = DKDuktape::addressToEvent(eventAddress);
@@ -218,7 +198,7 @@ int DKKeyboardEvent::shiftKey(duk_context* ctx)
 		return true;
 	}
 	//TODO
-	//bool shiftKey;
+	//bool shiftKey = keys[(Key)std::stoi(event->data[0])].shiftKey;
 	//duk_push_boolean(ctx, shiftKey);
 	return true;
 }
@@ -226,8 +206,7 @@ int DKKeyboardEvent::shiftKey(duk_context* ctx)
 
 // Methods
 ///////////////////////////////////////////////////////
-int DKKeyboardEvent::getModifierState(duk_context* ctx)
-{
+int DKKeyboardEvent::getModifierState(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString eventAddress = duk_require_string(ctx, 0);
 	DKEvents* event = DKDuktape::addressToEvent(eventAddress);
@@ -295,9 +274,7 @@ int DKKeyboardEvent::char1(duk_context* ctx)
 	return false;
 }
 
-///////////////////////////////////////////////
-int DKKeyboardEvent::charCode(duk_context* ctx)
-{
+int DKKeyboardEvent::charCode(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString eventAddress = duk_require_string(ctx, 0);
 	DKEvents* event = DKDuktape::addressToEvent(eventAddress);
@@ -307,14 +284,12 @@ int DKKeyboardEvent::charCode(duk_context* ctx)
 		return true;
 	}
 	//TODO
-	//bool char1 = event->GetParameter<bool>("char", 0);
-	//duk_push_int(ctx, char1);
+	//int charCode = keys[(Key)std::stoi(event->data[0])].charCode;
+	//duk_push_int(ctx, charCode);
 	return false;
 }
 
-/////////////////////////////////////////////////
-int DKKeyboardEvent::keyCode(duk_context* ctx)
-{
+int DKKeyboardEvent::keyCode(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString eventAddress = duk_require_string(ctx, 0);
 	DKEvents* event = DKDuktape::addressToEvent(eventAddress);
@@ -324,8 +299,8 @@ int DKKeyboardEvent::keyCode(duk_context* ctx)
 		return true;
 	}
 	//TODO
-	//bool char1 = event->GetParameter<bool>("char", 0);
-	//duk_push_int(ctx, char1);
+	//int charCode = keys[(Key)std::stoi(event->data[0])].keyCode;
+	//duk_push_int(ctx, keyCode);
 	return false;
 }
 
