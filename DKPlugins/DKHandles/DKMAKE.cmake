@@ -1,0 +1,13 @@
+IF(NOT WIN)
+	RETURN()
+ENDIF()
+IF(USE_DKDuktape)
+	DKDEPEND(DKDuktape)
+ENDIF()
+IF(USE_DKCef)
+	DKDEPEND(DKCef)
+ENDIF()
+
+
+DKPLUGIN(DKHandles)
+DKASSETS(DKHandles)

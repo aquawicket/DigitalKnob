@@ -1,0 +1,8 @@
+IF(NOT LINUX AND NOT RASPBERRY)
+	RETURN()
+ENDIF()
+
+### INSTALL ###
+DKSET(QUEUE_BUILD ON)
+DKSET(CURRENT_DIR /usr)
+LINUX_COMMAND(sudo apt install mesa-common-dev)

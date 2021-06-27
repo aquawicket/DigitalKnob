@@ -1,0 +1,9 @@
+IF(NOT LINUX AND NOT RASPBERRY)
+	RETURN()
+ENDIF()
+
+
+### INSTALL ###
+DKSET(QUEUE_BUILD ON)
+DKSET(CURRENT_DIR /usr)
+LINUX_COMMAND(sudo apt install libgl1-mesa-dev)

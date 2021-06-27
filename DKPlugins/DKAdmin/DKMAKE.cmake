@@ -1,0 +1,4 @@
+DKDEPEND(DKGit)
+DKDEPEND(DKNotepad)
+
+DKASSETS(DKAdmin)

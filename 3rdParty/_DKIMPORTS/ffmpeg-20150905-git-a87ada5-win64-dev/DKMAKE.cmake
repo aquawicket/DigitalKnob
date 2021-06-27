@@ -1,0 +1,35 @@
+IF(NOT WIN_64)
+	RETURN()
+ENDIF()
+
+
+### INSTALL ###
+## DKINSTALL(www.internet.com/ffmpeg-20150905-git-a87ada5-win64-dev.7z ffmpeg-20150905-git-a87ada5-win64-dev)
+DKRENAME(${FFMPEG}/include/libavutil/time.h ${FFMPEG}/include/libavutil/time.h.EXCLUDE)
+
+
+### LINK ###
+DKDEFINE(__STDC_CONSTANT_MACROS)
+WIN64_INCLUDE(${FFMPEG})
+WIN64_INCLUDE(${FFMPEG}/include)
+WIN64_INCLUDE(${FFMPEG}/include/libavcodec)
+WIN64_INCLUDE(${FFMPEG}/include/libavdevice)
+WIN64_INCLUDE(${FFMPEG}/include/libavfilter)
+WIN64_INCLUDE(${FFMPEG}/include/libavformat)
+WIN64_INCLUDE(${FFMPEG}/include/libavutil)
+WIN64_INCLUDE(${FFMPEG}/include/libswresample)
+WIN64_INCLUDE(${FFMPEG}/include/libswscale)
+WIN64_DEBUG_LIB(${FFMPEG}/lib/avcodec.lib)
+WIN64_RELEASE_LIB(${FFMPEG}/lib/avcodec.lib)
+WIN64_DEBUG_LIB(${FFMPEG}/lib/avdevice.lib)
+WIN64_RELEASE_LIB(${FFMPEG}/lib/avdevice.lib)
+WIN64_DEBUG_LIB(${FFMPEG}/lib/avfilter.lib)
+WIN64_RELEASE_LIB(${FFMPEG}/lib/avfilter.lib)
+WIN64_DEBUG_LIB(${FFMPEG}/lib/avformat.lib)
+WIN64_RELEASE_LIB(${FFMPEG}/lib/avformat.lib)
+WIN64_DEBUG_LIB(${FFMPEG}/lib/avutil.lib)
+WIN64_RELEASE_LIB(${FFMPEG}/lib/avutil.lib)
+WIN64_DEBUG_LIB(${FFMPEG}/lib/swresample.lib)
+WIN64_RELEASE_LIB(${FFMPEG}/lib/swresample.lib)
+WIN64_DEBUG_LIB(${FFMPEG}/lib/swscale.lib)
+WIN64_RELEASE_LIB(${FFMPEG}/lib/swscale.lib)

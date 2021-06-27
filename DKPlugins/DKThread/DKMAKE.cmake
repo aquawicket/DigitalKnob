@@ -1,0 +1,14 @@
+DKDEPEND(threadpool)
+DKDEPEND(boost Boost_Thread)
+IF(USE_DKDuktape)
+	DKDEPEND(DKDuktape)
+ENDIF()
+IF(USE_DKCef)
+	DKDEPEND(DKCef)
+ENDIF()
+
+
+
+DKPLUGIN(DKThread)
+DKASSETS(DKThread)
+DKINCLUDE(${THREADPOOL})

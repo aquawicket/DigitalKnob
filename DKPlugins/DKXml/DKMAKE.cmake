@@ -1,0 +1,14 @@
+DKDEPEND(libxml2)
+DKDEPEND(pugixml)
+IF(USE_DKDuktape)
+	DKDEPEND(DKDuktape)
+ENDIF()
+IF(USE_DKCef)
+	DKDEPEND(DKCef)
+ENDIF()
+
+
+DKCOPY(${PUGIXML}/src/pugixml.cpp ${DKPLUGINS}/DKXml/pugixml.cpp FALSE)
+DKINCLUDE(${PUGIXML}/src)
+DKINCLUDE(${XML2}/include)
+DKPLUGIN(DKXml)

@@ -1,0 +1,6 @@
+### INSTALL ###
+IF(NOT EXISTS "C:/Program Files/gs/gs9.22/bin")
+	DKSETPATH(${DIGITALKNOB}/Download)
+	DKDOWNLOAD(https://github.com/ArtifexSoftware/ghostpdl-downloads/releases/download/gs922/gs922w64.exe)
+	WIN32_COMMAND(${DIGITALKNOB}/Download/gs922w64.exe)
+ENDIF()

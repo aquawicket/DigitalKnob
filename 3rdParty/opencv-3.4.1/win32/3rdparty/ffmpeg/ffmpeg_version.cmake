@@ -1,0 +1,11 @@
+set(FFMPEG_libavcodec_FOUND 1)
+set(FFMPEG_libavformat_FOUND 1)
+set(FFMPEG_libavutil_FOUND 1)
+set(FFMPEG_libswscale_FOUND 1)
+set(FFMPEG_libavresample_FOUND 1)
+
+set(FFMPEG_libavcodec_VERSION 57.107.100)
+set(FFMPEG_libavformat_VERSION 57.83.100)
+set(FFMPEG_libavutil_VERSION 55.78.100)
+set(FFMPEG_libswscale_VERSION 4.8.100)
+set(FFMPEG_libavresample_VERSION 3.7.0)

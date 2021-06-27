@@ -1,0 +1,6 @@
+### VERSION ###
+DKSET(CODEMIRROR_VERSION codemirror-5.60.0)
+
+### INSTALL ###
+DKINSTALL(https://codemirror.net/codemirror.zip codemirror ${CODEMIRROR_VERSION})
+DKSET(CODEMIRROR ${3RDPARTY}/${CODEMIRROR_VERSION})
