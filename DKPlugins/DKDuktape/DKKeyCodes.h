@@ -14,7 +14,7 @@
 
 
 ////////////
-#ifdef WIN32
+//#ifdef WIN32
 // Windows Keyboard mapping table
 // https://docs.microsoft.com/en-us/windows/win32/inputdev/virtual-key-codes
 enum Key{
@@ -351,9 +351,10 @@ static const int KeyboardModifiers[] = {
     NoModifier,                                             // Fall-back to raw Key_*
 };
 */
-#endif  //WIN32
+//#endif  //WIN32
 
 
+/*
 //////////
 #ifdef MAC
 // Mac Keyboard mapping table
@@ -374,7 +375,7 @@ enum Key {
     //TODO
 }
 #endif //LINUX
-
+*/
 
 // Reference
 // https://dreamswork.github.io/qt4/qkeymapper__mac_8cpp_source.html
