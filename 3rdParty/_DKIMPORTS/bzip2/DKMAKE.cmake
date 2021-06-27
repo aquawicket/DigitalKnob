@@ -1,5 +1,5 @@
-MESSAGE("FIXME (BZIP2) need to compile for windows")
-return()
+## MESSAGE("FIXME (BZIP2) need to compile for windows")
+## return()
 
 ### VERSION ###
 DKSET(BZIP2_VERSION 2-1.0.8)
@@ -18,7 +18,7 @@ else()
 endif()
 
 
-### LINK ###
+### DKPLUGINS LINK ###
 DKINCLUDE(${BZIP2})
 WIN_DEBUG_LIB(${BZIP2}/${OS}/libbz2-static.lib)
 WIN_RELEASE_LIB(${BZIP2}/${OS}/libbz2-static.lib)
@@ -33,6 +33,14 @@ LINUX_RELEASE_LIB(${BZIP2}/${OS}/libbz2.a)
 RASPBERRY_DEBUG_LIB(${BZIP2}/${OS}/libbz2.a)
 RASPBERRY_RELEASE_LIB(${BZIP2}/${OS}/libbz2.a)
 
+
+### 3RDPARTY LINK ###
+DKSET(BZIP2_WIN
+	-DUSE_BZIP2_DLL=OFF
+	-DBZIP2_INCLUDE_DIR=${BZIP2}/${OS} 
+	-DBZIP2_LIBRARY_DEBUG=${BZIP2}/${OS}/libbz2-static.lib 
+	-DBZIP2_LIBRARY_RELEASE=${BZIP2}/${OS}/libbz2-static.lib)
+	
 
 ### COMPILE ###
 if(0)
@@ -96,10 +104,3 @@ IF(RASPBERRY)
 	DKSETPATH(${BZIP2}/${OS})
 	RASPBERRY_COMMAND(make)
 ENDIF()
-
-
-### INJECT ###
-DKSET(BZIP2_WIN32 
-	-DBZIP2_INCLUDE_DIR=${BZIP2}/${OS} 
-	-DBZIP2_LIBRARY_DEBUG=${BZIP2}/${OS}/libbz2-static.lib 
-	-DBZIP2_LIBRARY_RELEASE=${BZIP2}/${OS}/libbz2-static.lib)

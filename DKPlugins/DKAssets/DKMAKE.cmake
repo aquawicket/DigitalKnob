@@ -1,5 +1,5 @@
 DKDEPEND(DKArchive)
-DKDEPEND(DKDuktape)
+##DKDEPEND(DKDuktape)
 IF(USE_DKDuktape)
 	DKDEPEND(DKDuktape)
 ENDIF()

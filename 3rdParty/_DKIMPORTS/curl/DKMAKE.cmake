@@ -10,10 +10,11 @@ DKINSTALL(https://curl.haxx.se/download/curl-${CURL_VERSION}.zip curl curl-${CUR
 DKSET(CURL ${3RDPARTY}/curl-${CURL_VERSION})
 
 
-### LINK ###
+### DKPLUGINS LINK ###
+DKDEFINE(CURL_STATICLIB)
 DKINCLUDE(${CURL}/include)
 DKINCLUDE(${CURL}/${OS}/include/curl)
-DKDEFINE(CURL_STATICLIB)	
+	
 WIN_DEBUG_LIB(${CURL}/${OS}/lib/Debug/libcurl.lib)
 WIN_RELEASE_LIB(${CURL}/${OS}/lib/Release/libcurl.lib)
 APPLE_DEBUG_LIB(${CURL}/${OS}/lib/${DEBUG}/libcurl.a)

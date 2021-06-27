@@ -1,5 +1,5 @@
 IF(WIN)
-	DKDEPEND(VisualStudio)
+	##DKDEPEND(VisualStudio)
 	LIST(APPEND WIN_LIBS shell32.lib)
 	LIST(APPEND WIN_LIBS user32.lib)
 	LIST(APPEND WIN_LIBS gdi32.lib)

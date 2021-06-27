@@ -2,28 +2,29 @@
 
 ### DEPENDS ###
 IF(WIN_32)
-	DKDEPEND(mingw32)
+	#DKDEPEND(mingw32)
 ENDIF()
 IF(WIN_64)
-	DKDEPEND(mingw64)
+	#DKDEPEND(mingw64)
 ENDIF()
 IF(WIN)
-	DKDEPEND(msys)
+	#DKDEPEND(msys)
 ENDIF()
 
 ### VERSION ###
 DKSET(XZ_VERSION 5.2.5)
+DKSET(XZ ${3RDPARTY}/xz-${XZ_VERSION})
+
 
 ### INSTALL ###
 ## https://github.com/xz-mirror/xz/archive/refs/tags/v5.2.5.zip
 ## DKINSTALL(https://astuteinternet.dl.sourceforge.net/project/lzmautils/xz-${XZ_VERSION}.tar.gz xz xz-${XZ_VERSION})
 DKINSTALL(https://github.com/xz-mirror/xz/archive/refs/tags/v${XZ_VERSION}.zip xz xz-${XZ_VERSION})
-DKSET(XZ ${3RDPARTY}/xz-${XZ_VERSION})
 
 
-### LINK ###
-DKINCLUDE(${XZ}/src/liblzma/api)
+### DKPLUGINS LINK ###
 DKDEFINE(LZMA_API_STATIC)
+DKINCLUDE(${XZ}/src/liblzma/api)
 WIN_DEBUG_LIB(${XZ}/${OS}/Debug/liblzma.lib)
 WIN_RELEASE_LIB(${XZ}/${OS}/Release/liblzma.lib)
 MAC_DEBUG_LIB(${XZ}/${OS}/${DEBUG}/src/liblzma/.libs/liblzma.a)
@@ -34,6 +35,11 @@ LINUX_RELEASE_LIB(${XZ}/${OS}/Release/src/liblzma/.libs/liblzma.a)
 ## ANDROID_RELEASE_LIB(${XZ}/${OS}/obj/local/armeabi-v7a/liblzma.a)
 RASPBERRY_DEBUG_LIB(${XZ}/${OS}/Debug/src/liblzma/.libs/liblzma.a)
 RASPBERRY_RELEASE_LIB(${XZ}/${OS}/Release/src/liblzma/.libs/liblzma.a)
+
+
+### INJECT ###
+DKSET(XZ_WIN -DCMAKE_C_FLAGS=/DLZMA_API_STATIC -DLIBLZMA_INCLUDE_DIR=${XZ}/src/liblzma/api -DLIBLZMA_LIBRARY_DEBUG=${XZ}/${OS}/Debug/liblzma.lib -DLIBLZMA_LIBRARY_RELEASE=${XZ}/${OS}/Release/liblzma.lib)
+
 
 ### COMPILE ###
 DKSETPATH(${XZ}/${OS})
@@ -125,8 +131,3 @@ RASPBERRY_DEBUG_COMMAND(make)
 DKSETPATH(${XZ}/${OS}/Release)
 RASPBERRY_RELEASE_COMMAND(../../configure --disable-shared --enable-static)
 RASPBERRY_RELEASE_COMMAND(make)
-
-
-
-### INJECT ###
-DKSET(XZ_WIN32 -DCMAKE_C_FLAGS=/DLZMA_API_STATIC -DLIBLZMA_INCLUDE_DIR=${XZ}/src/liblzma/api -DLIBLZMA_LIBRARY_DEBUG=${XZ}/${OS}/Debug/liblzma.lib -DLIBLZMA_LIBRARY_RELEASE=${XZ}/${OS}/Release/liblzma.lib)

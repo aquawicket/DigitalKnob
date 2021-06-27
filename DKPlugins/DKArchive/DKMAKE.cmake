@@ -1,4 +1,4 @@
-DKDEPEND(DKDuktape)
+##DKDEPEND(DKDuktape)
 DKDEPEND(libarchive)
 IF(USE_DKDuktape)
 	DKDEPEND(DKDuktape)

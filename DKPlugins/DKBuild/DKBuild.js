@@ -392,11 +392,14 @@ function DKBuild_DoResults(){
 			appdir = files[i]+"/DKApps";
 	}
 	
+	// NOTE: This was moved into DKCMake buid scripts
+	/*
 	//// Create Icons
 	if(CPP_DK_GetOS() === "Windows"){
 		CPP_DK_Create("DKBuild/IconMaker.js");
 		IconMaker_Create(DKPATH+appdir+"/"+APP);
 	}
+	*/
 	
 	////// WIN32 /////
 	if(OS === "win32"){
