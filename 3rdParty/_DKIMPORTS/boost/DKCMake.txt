@@ -1,6 +1,3 @@
-## https://sourceforge.net/projects/boost/files/boost/1.74.0/boost_1_74_0.zip
-## https://dl.bintray.com/boostorg/release/1.74.0/source/boost_1_74_0.zip
-
 # Debugging: When calling b2 to compile the boost libraries, you can use the -q flag to make it stop at the first error.
 # Notes: abi=aapcs and binary-format=elf were added to android build to supress "No best alternative for libs/context/build/asm_sources"
 
@@ -14,6 +11,8 @@ DKSET(BOOST ${3RDPARTY}/${BOOST_NAME})
 
 
 ### INSTALL ###
+## https://sourceforge.net/projects/boost/files/boost/1.74.0/boost_1_74_0.zip
+## https://dl.bintray.com/boostorg/release/1.74.0/source/boost_1_74_0.zip
 DKINSTALL(https://sourceforge.net/projects/boost/files/boost/${BOOST_VERSION_MAJOR}.${BOOST_VERSION_MINOR}.${BOOST_VERSION_BUILD}/boost_${BOOST_VERSION}.zip boost ${BOOST_NAME})
 
 
@@ -195,7 +194,7 @@ ENDIF()
 
 #WIN32_COMMAND(b2 install toolset=msvc-14.0 --prefix=${BOOSTBUILD})
 #DKSETPATH(${BOOST})
-#WIN32_COMMAND(b2 toolset=msvc-14.0 link=shared variant=debug runtime-debugging=on #runtime-link=shared --threading=multi --build-dir=${BOOST}/${OS}/Debug #--stagedir=${BOOST}/${OS}/Debug)
-#WIN32_COMMAND(b2 toolset=msvc-14.0 link=shared variant=release runtime-debugging=off #runtime-link=shared --threading=multi --build-dir=${BOOST}/${OS}/Release #--stagedir=${BOOST}/${OS}/Release/)
+#WIN32_COMMAND(b2 toolset=msvc-14.0 link=shared variant=debug runtime-debugging=on runtime-link=shared --threading=multi --build-dir=${BOOST}/${OS}/Debug --stagedir=${BOOST}/${OS}/Debug)
+#WIN32_COMMAND(b2 toolset=msvc-14.0 link=shared variant=release runtime-debugging=off runtime-link=shared --threading=multi --build-dir=${BOOST}/${OS}/Release --stagedir=${BOOST}/${OS}/Release/)
 
 ENDIF(SHARED)
