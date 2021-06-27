@@ -475,8 +475,8 @@ void DKDomKeyboardEvent::MapRmlKeys() {
 		{ KI_NONCONVERT, KEY_NONCONVERT },	       // IME nonconvert.
 		{ KI_ACCEPT, KEY_ACCEPT },	               // IME accept.
 		{ KI_MODECHANGE, KEY_MODECHANGE },         // IME mode change request.
-		{ KI_PRIOR, KEY_PAGEUP },                   // Page Up key.
-		{ KI_NEXT, KEY_PAGEDOWN },				       // Page Down key.
+		{ KI_PRIOR, KEY_PAGEUP },                  // Page Up key.
+		{ KI_NEXT, KEY_PAGEDOWN },				   // Page Down key.
 		{ KI_END, KEY_END },
 		{ KI_HOME, KEY_HOME },
 		{ KI_LEFT, KEY_LEFT },				       // Left Arrow key.
@@ -486,16 +486,16 @@ void DKDomKeyboardEvent::MapRmlKeys() {
 		{ KI_SELECT, KEY_SELECT },
 		{ KI_PRINT, KEY_PRINT },
 		{ KI_EXECUTE, KEY_EXECUTE_ },
-		{ KI_SNAPSHOT, KEY_SNAPSHOT },		       // Print Screen key.
+		{ KI_SNAPSHOT, KEY_PRINTSCREEN },		   // Print Screen key.
 		{ KI_INSERT, KEY_INSERT },
 		{ KI_DELETE, KEY_DELETE },
 		{ KI_HELP, KEY_HELP },
 
-		{ KI_LWIN, KEY_METALEFT },				      // Left Windows key.
-		{ KI_RWIN, KEY_METARIGHT },				      // Right Windows key.
-		{ KI_APPS, KEY_APPS },				      // Applications key.
+		{ KI_LWIN, KEY_METALEFT },				   // Left Windows key.
+		{ KI_RWIN, KEY_METARIGHT },				   // Right Windows key.
+		{ KI_APPS, KEY_CONTEXTMENU },			   // Applications key.
 		//{ KI_POWER, KEY_POWER },
-		{ KI_SLEEP, KEY_SLEEP },
+		{ KI_SLEEP, KEY_STANDBY },
 		//{ KI_WAKE, KEY_WAKE },
 
 		{ KI_F1, KEY_F1 },
@@ -524,13 +524,13 @@ void DKDomKeyboardEvent::MapRmlKeys() {
 		{ KI_F24, KEY_F24 },
 
 		{ KI_NUMLOCK, KEY_NUMLOCK },	            // Numlock key.
-		{ KI_SCROLL, KEY_SCROLLLOCK },			        // Scroll Lock key.
+		{ KI_SCROLL, KEY_SCROLLLOCK },			    // Scroll Lock key.
 
 		// Fujitsu/OASYS kbd definitions
 		{ KI_OEM_FJ_JISHO, KEY_OEM_FJ_JISHO },		// 'Dictionary' key.
 		{ KI_OEM_FJ_MASSHOU, KEY_OEM_FJ_MASSHOU },	// 'Unregister word' key.
 		{ KI_OEM_FJ_TOUROKU, KEY_OEM_FJ_TOUROKU },	// 'Register word' key.
-		//{ KI_OEM_FJ_LOYA, KEY_OEM_FJ_LOYA },		// 'Left OYAYUBI' key.
+		{ KI_OEM_FJ_LOYA, KEY_OEM_FJ_LOYA },		// 'Left OYAYUBI' key.
 		{ KI_OEM_FJ_ROYA, KEY_OEM_FJ_ROYA },		// 'Right OYAYUBI' key.
 
 		{ KI_LSHIFT, KEY_SHIFTLEFT },
@@ -562,7 +562,7 @@ void DKDomKeyboardEvent::MapRmlKeys() {
 		{ KI_OEM_AX, KEY_OEM_AX },
 		{ KI_ICO_HELP, KEY_ICO_HELP },
 		{ KI_ICO_00, KEY_ICO_00 },
-		{ KI_PROCESSKEY, KEY_PROCESSKEY },		     // IME Process key.
+		{ KI_PROCESSKEY, KEY_PROCESS },		     // IME Process key.
 		{ KI_ICO_CLEAR, KEY_ICO_CLEAR },
 		{ KI_ATTN, KEY_ATTN },
 		{ KI_CRSEL, KEY_CRSEL },

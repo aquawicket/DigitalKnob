@@ -178,32 +178,12 @@ function DKBuild_InstallNDK(){
 
 function DKBuild_OsCheck(){
 	if(CPP_DK_GetOS() === "Windows"){
-		if(OS === "win64"){
-			console.error(OS+" can only be build from a WIN64 machine"); 
-			return false;
+		if(CPP_DK_GetOSArchitecture() === "32"){
+			if(OS === "win64"){
+				console.error(OS+" can only be build from a WIN64 machine"); 
+				return false;
+			}
 		}
-		if(OS === "mac"){
-			console.error(OS+" can only be build from an OSX machine"); 
-			return false;
-		}
-		if(OS === "ios"){
-			console.error(OS+" can only be build from an OSX machine"); 
-			return false;
-		}
-		if(OS === "ios-simulator"){
-			console.error(OS+" can only be build from an OSX machine"); 
-			return false;
-		}
-		if(OS === "linux"){
-			console.error(OS+" can only be build from a LINUX machine"); 
-			return false;
-		}
-		if(OS === "raspberry"){
-			console.error(OS+" can only be build from a Raspberry machine"); 
-			return false;
-		}
-	}
-	if(CPP_DK_GetOS() === "Win64"){
 		if(OS === "mac"){
 			console.error(OS+" can only be build from an OSX machine"); 
 			return false;

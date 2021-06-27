@@ -40,11 +40,13 @@ enum Key{
     KEY_ALT,                 //  18   0x12   VK_MENU             | Alt key
     KEY_PAUSE,               //  19   0x13   VK_PAUSE            | Pause key
     KEY_CAPSLOCK,            //  20   0x14   VK_CAPITAL          | Caps-Lock
-    KEY_KANA,                //  21   0x15   VK_KANA / VK_HANGUL | IME Kana or Hangul mode
+    KEY_KANA = 21,           //  21   0x15   VK_KANA / VK_HANGUL | IME Kana or Hangul mode
+    KEY_HANGUL = 21,         //  21   0x15   VK_KANA / VK_HANGUL | IME Kana or Hangul mode
     //KEY_UNASSIGNED,        //  22   0x16   -- UNASSIGNED --
     KEY_JUNJA = 23,          //  23   0x17   VK_JUNJA            | IME Junja mode
     KEY_FINAL,               //  24   0x18   VK_FINAL            | IME final mode
-    KEY_HANJA,               //  25   0x19   VK_HANJA / VK_KANJI | IME Hanja or Kanji mode
+    KEY_HANJA = 25,          //  25   0x19   VK_HANJA / VK_KANJI | IME Hanja or Kanji mode
+    KEY_KANJI = 25,          //  25   0x19   VK_HANJA / VK_KANJI | IME Hanja or Kanji mode
     //KEY_UNASSIGNED,        //  26   0x1A   -- UNASSIGNED --
     KEY_ESCAPE = 27,         //  27   0x1B   VK_ESCAPE           | Esc key
     KEY_CONVERT,             //  28   0x1C   VK_CONVERT          | IME convert
@@ -63,7 +65,7 @@ enum Key{
     KEY_SELECT,              //  41   0x29   VK_SELECT           | Select key
     KEY_PRINT,               //  42   0x2A   VK_PRINT            | Print key
     KEY_EXECUTE_,            //  43   0x2B   VK_EXECUTE          | Execute key
-    KEY_SNAPSHOT,            //  44   0x2C   VK_SNAPSHOT         | Print Screen key
+    KEY_PRINTSCREEN,         //  44   0x2C   VK_SNAPSHOT         | Print Screen key
     KEY_INSERT,              //  45   0x2D   VK_INSERT           | Ins key
     KEY_DELETE,              //  46   0x2E   VK_DELETE           | Del key
     KEY_HELP,                //  47   0x2F   VK_HELP             | Help key
@@ -112,9 +114,9 @@ enum Key{
     KEY_Z,                   //  90   0x5A   VK_Z                | Z key
     KEY_METALEFT,            //  91   0x5B   VK_LWIN             | Left Windows  - MS Natural kbd
     KEY_METARIGHT,           //  92   0x5C   VK_RWIN             | Right Windows - MS Natural kbd
-    KEY_APPS,                //  93   0x5D   VK_APPS             | Application key-MS Natural kbd
+    KEY_CONTEXTMENU,         //  93   0x5D   VK_APPS             | Application key-MS Natural kbd
     //KEY_RESERVED,          //  94   0x5E   -- RESERVED --
-    KEY_SLEEP = 95,          //  95   0x5F   VK_SLEEP
+    KEY_STANDBY = 95,        //  95   0x5F   VK_SLEEP
     KEY_NUMPAD0,             //  96   0x60   VK_NUMPAD0          | Numeric keypad 0 key
     KEY_NUMPAD1,             //  97   0x61   VK_NUMPAD1          | Numeric keypad 1 key
     KEY_NUMPAD2,             //  98   0x62   VK_NUMPAD2          | Numeric keypad 2 key
@@ -251,7 +253,7 @@ enum Key{
     KEY_OEM_102,             // 226   0xE2   VK_OEM_102          | "<>" or "\|" on RT 102-key kbd
     KEY_ICO_HELP,            // 227   0xE3   VK_ICO_HELP         | Help key on ICO
     KEY_ICO_00,              // 228   0xE4   VK_ICO_00           | 00 key on ICO
-    KEY_PROCESSKEY,          // 229   0xE5   VK_PROCESSKEY       | IME Process key
+    KEY_PROCESS,             // 229   0xE5   VK_PROCESSKEY       | IME Process key
     KEY_ICO_CLEAR,           // 230   0xE6   VK_ICO_CLEAR        |
     KEY_PACKET,              // 231   0xE7   VK_PACKET           | Unicode char as keystrokes
     //KEY_UNASSIGNED,        // 232   0xE8   -- UNASSIGNED --
