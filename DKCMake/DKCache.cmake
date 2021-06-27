@@ -7,6 +7,8 @@
 return()
 
 MESSAGE("################ DKCache.cmake ##################")
+message("WARNING: DKCache.cmake will be discontinued.")
+return()
 MESSAGE("OS: ${OS}")
 if(NOT OS)
 	message(FATAL_ERROR "The OS variable has not been set for DKCache.cmake")
@@ -19,25 +21,25 @@ set(3RDPARTY "C:/Users/$ENV{USERNAME}/digitalknob/DK/3rdParty" CACHE PATH "" FOR
 
 ##${STDINT}
 
-#set(ZLIB ${3RDPARTY}/zlib-1.2.11 CACHE PATH "" FORCE)
-#if(EXISTS ${ZLIB}/${OS}/Release/zlibstatic.lib)
-#	SET(ZLIB_INCLUDE_DIR ${ZLIB} CACHE PATH "" FORCE)
-#	SET(ZLIB_LIBRARY ${ZLIB}/${OS}/Release/zlibstatic.lib CACHE FILEPATH "" FORCE)
-#	SET(ZLIB_LIBRARY_DEBUG ${ZLIB}/${OS}/Debug/zlibstatic.lib CACHE FILEPATH "" FORCE)
-#	SET(ZLIB_LIBRARY_RELEASE ${ZLIB}/${OS}/Release/zlibstatic.lib CACHE FILEPATH "" FORCE)
-#endif()
+set(ZLIB ${3RDPARTY}/zlib-1.2.11 CACHE PATH "" FORCE)
+if(EXISTS ${ZLIB}/${OS}/Release/zlibstatic.lib)
+	SET(ZLIB_INCLUDE_DIR ${ZLIB} CACHE PATH "" FORCE)
+	SET(ZLIB_LIBRARY ${ZLIB}/${OS}/Release/zlibstatic.lib CACHE FILEPATH "" FORCE)
+	SET(ZLIB_LIBRARY_DEBUG ${ZLIB}/${OS}/Debug/zlibstatic.lib CACHE FILEPATH "" FORCE)
+	SET(ZLIB_LIBRARY_RELEASE ${ZLIB}/${OS}/Release/zlibstatic.lib CACHE FILEPATH "" FORCE)
+endif()
 
 #EXECUTE_PROCESS(COMMAND cmd /c set /p DUMMY=Hit ENTER to continue... WORKING_DIRECTORY C:/)
 
-#set(BZIP2 ${3RDPARTY}/bzip2-1.0.6 CACHE PATH "" FORCE)
-#if(EXISTS ${BZIP2}/${OS}/libbz2.lib)
-#set(BZIP2_ROOT ${BZIP2} CACHE PATH "" FORCE)
-#set(BZIP2_INCLUDE_DIR ${BZIP2} CACHE PATH "" FORCE)
-#set(BZIP2_LIBRARY ${BZIP2}/${OS}/libbz2.lib CACHE FILEPATH "" FORCE)
-#set(BZIP2_LIBRARY_DEBUG ${BZIP2}/${OS}/libbz2.lib CACHE FILEPATH "" FORCE)
-#set(BZIP2_LIBRARY_RELEASE ${BZIP2}/${OS}/libbz2.lib CACHE FILEPATH "" FORCE)
-#set(LIBGCC_LIBRARY ${BZIP2}/${OS}/libgcc.lib CACHE FILEPATH "" FORCE)
-#endif()
+set(BZIP2 ${3RDPARTY}/bzip2-1.0.6 CACHE PATH "" FORCE)
+if(EXISTS ${BZIP2}/${OS}/libbz2.lib)
+set(BZIP2_ROOT ${BZIP2} CACHE PATH "" FORCE)
+set(BZIP2_INCLUDE_DIR ${BZIP2} CACHE PATH "" FORCE)
+set(BZIP2_LIBRARY ${BZIP2}/${OS}/libbz2.lib CACHE FILEPATH "" FORCE)
+set(BZIP2_LIBRARY_DEBUG ${BZIP2}/${OS}/libbz2.lib CACHE FILEPATH "" FORCE)
+set(BZIP2_LIBRARY_RELEASE ${BZIP2}/${OS}/libbz2.lib CACHE FILEPATH "" FORCE)
+set(LIBGCC_LIBRARY ${BZIP2}/${OS}/libgcc.lib CACHE FILEPATH "" FORCE)
+endif()
 
 
 set(TIFF ${3RDPARTY}/tiff-4.0.3 CACHE PATH "" FORCE)
