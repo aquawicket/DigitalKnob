@@ -356,13 +356,23 @@ static const int KeyboardModifiers[] = {
 
 //////////
 #ifdef MAC
-// TODO
+// Mac Keyboard mapping table
+enum Key {
+                           // Dec | Hex |  Mac Virtual key
+    KEY_UNASSIGNED         //   0   0x00   -- UNASSIGNED --
+    //TODO
+}
 #endif //MAC
 
 
 ////////////
 #ifdef LINUX
-// TODO
+// Linux Keyboard mapping table
+enum Key {
+    // Dec | Hex |  Linux Virtual key
+    KEY_UNASSIGNED         //   0   0x00   -- UNASSIGNED --
+    //TODO
+}
 #endif //LINUX
 
 
