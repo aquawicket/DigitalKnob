@@ -5,15 +5,18 @@ IF(MAC)
 	RETURN() #iOS only
 ENDIF()
 
+
 ### VERSION ###
 DKSET(BOOST_VERSION 1.60.0)
-
-### INSTALL ###
-## FIXME - DKINSTALL(http://www.internet.com/Boost.${BOOST_VERSION}-libstdcpp.zip Boost.1.60.0-libstdcpp Boost.${BOOST_VERSION}-libstdcpp)
 DKSET(BOOST ${3RDPARTY}/Boost.${BOOST_VERSION}-libstdcpp)
 
 
-### LINK ###
+### INSTALL ###
+## FIXME
+DKINSTALL(http://www.internet.com/Boost.${BOOST_VERSION}-libstdcpp.zip Boost.1.60.0-libstdcpp Boost.${BOOST_VERSION}-libstdcpp)
+
+
+### DKPLUGINS LINK ###
 DKINCLUDE(${BOOST})
 LINK_DIRECTORIES(${BOOST}/libs/boost/ios)
 DKINCLUDE(${BOOST}/libs/boost/include)

@@ -1,62 +1,73 @@
 include(DKCMake/FUNCTIONS.cmake)
 include(DKCMake/OPTIONS.cmake)
-
-message("##########################")
-message("#####   VARIABLES    #####")
-message("##########################")
-message("ENV(USERNAME): $ENV{USERNAME}")
-##message("ENV(USER): $ENV{USER}")
-message("DKPROJECT: ${DKPROJECT}")
-message("DKPLUGINS: ${DKPLUGINS}")
-message("3RDPARTY: ${3RDPARTY}")
-message("OS: ${OS}")
-message("DEBUG: ${DEBUG}")
-message("RELEASE: ${RELEASE}")
-message("BUILD: ${BUILD}")
-message("REBUILD: ${REBUILD}")
-message("REBUILDALL: ${REBUILDALL}")
-message("LIB_TYPE: ${LIB_TYPE}")
-message("OPENGL2: ${OPENGL2}")
-message("DKCEF: ${DKCEF}")
-message("WIN: ${WIN}")
-message("WIN_32: ${WIN_32}")
-message("WIN_64: ${WIN_64}")
-message("MAC: ${MAC}")
-message("MAC_32: ${MAC_32}")
-message("MAC_64: ${MAC_64}")
-message("IOS: ${IOS}")
-message("IOS_32: ${IOS_32}")
-message("IOS_64: ${IOS_64}")
-message("IOSSIM: ${IOSSIM}")
-message("IOSSIM_32: ${IOSSIM_32}")
-message("IOSSIM_64: ${IOSSIM_64}")
-message("LINUX: ${LINUX}")
-message("LINUX_32: ${LINUX_32}")
-message("LINUX_64: ${LINUX_64}")
-message("ANDROID: ${ANDROID}")
-message("ANDROID_32: ${ANDROID_32}")
-message("ANDROID_64: ${ANDROID_64}")
-message("RASPBERRY: ${RASPBERRY}")
-message("RASPBERRY_32: ${RASPBERRY_32}")
-message("RASPBERRY_64: ${RASPBERRY_64}")
+get_filename_component(APP_NAME ${DKPROJECT} NAME)
+string(REPLACE " " "_" APP_NAME ${APP_NAME})
 
 
+message("\n\n")
+message("##############################################")
+message("###############  DigitalKnob  ################")
+message("##############################################")
 message("\n")
-message("**********************************************")
-message("**************  DigitalKnob  *****************")
-message("**********************************************\n")
+message("###########  HOST SYSTEM VARIABLES  ##########")
+##message("CMAKE_HOST_SYSTEM:             ${CMAKE_HOST_SYSTEM}")
+message("CMAKE_HOST_SYSTEM_NAME:        ${CMAKE_HOST_SYSTEM_NAME}")
+message("CMAKE_HOST_SYSTEM_VERSION:     ${CMAKE_HOST_SYSTEM_VERSION}")
+message("CMAKE_HOST_SYSTEM_PROCESSOR:   ${CMAKE_HOST_SYSTEM_PROCESSOR}")
+message("CMAKE_LIBRARY_ARCHITECTURE:    ${CMAKE_LIBRARY_ARCHITECTURE}")
+message("ENV(USERNAME):                 $ENV{USERNAME}")
+message("DIGITALKNOB PATH:              ${DIGITALKNOB}")
+message("3RDPARTY PATH:                 ${3RDPARTY}")
+message("DKPLUGINS PATH:                ${DKPLUGINS}")
+message("\n")
+message("#############  PROJECT VARIABLES  ############")
+message("DKPROJECT NAME:  ${APP_NAME}")
+message("DKPROJECT PATH:  ${DKPROJECT}")
+message("OUTPUT PATH:     ${CMAKE_BINARY_DIR}")
+message("COMPILER:        ${CMAKE_GENERATOR}")
+message("OS:              ${OS}")
+message("DEBUG:           ${DEBUG}")
+message("RELEASE:         ${RELEASE}")
+message("BUILD:           ${BUILD}")
+message("REBUILD:         ${REBUILD}")
+message("REBUILDALL:      ${REBUILDALL}")
+message("LIB_TYPE:        ${LIB_TYPE}")
+message("OPENGL2:         ${OPENGL2}")
+message("USE_SHADERS:     ${USE_SHADERS}")
+message("DKCEF:           ${DKCEF}")
+message("WIN:             ${WIN}")
+message("WIN_32:          ${WIN_32}")
+message("WIN_64:          ${WIN_64}")
+message("MAC:             ${MAC}")
+message("MAC_32:          ${MAC_32}")
+message("MAC_64:          ${MAC_64}")
+message("IOS:             ${IOS}")
+message("IOS_32:          ${IOS_32}")
+message("IOS_64:          ${IOS_64}")
+message("IOSSIM:          ${IOSSIM}")
+message("IOSSIM_32:       ${IOSSIM_32}")
+message("IOSSIM_64:       ${IOSSIM_64}")
+message("LINUX:           ${LINUX}")
+message("LINUX_32:        ${LINUX_32}")
+message("LINUX_64:        ${LINUX_64}")
+message("ANDROID:         ${ANDROID}")
+message("ANDROID_32:      ${ANDROID_32}")
+message("ANDROID_64:      ${ANDROID_64}")
+message("RASPBERRY:       ${RASPBERRY}")
+message("RASPBERRY_32:    ${RASPBERRY_32}")
+message("RASPBERRY_64:    ${RASPBERRY_64}")
+message("\n\n")
+
+
 
 
 ############################################################################################
 ############################   ADD EXECUTABLE  #############################################
 ############################################################################################
 ### Set the project name to the App folder name
-get_filename_component(AppName ${DKPROJECT} NAME)
-string(REPLACE " " "_" AppName ${AppName})
-
 set(CMAKE_CXX_STANDARD 14)
 
-PROJECT(${AppName})
+PROJECT(${APP_NAME})
 
 DKSET(DKAPP ON)
 
@@ -64,9 +75,9 @@ DKSET(DKAPP ON)
 ##################################################
 ##### Scan the DKPlugins and build the lists #####
 ##################################################
-# run the DKDEPNDS for the apps DKCMake.txt file
+# run the DKDEPNDS for the apps DKMAKE.cmake file
 DKDEPEND(BuildTools)
-include(${DKPROJECT}/DKCMake.txt)
+include(${DKPROJECT}/DKMAKE.cmake)
 
 message("\n")
 message("**********************************")
@@ -111,7 +122,7 @@ foreach(plugin ${DKPLUGS})
 	endif()
 
 	#This actually executes the 3rdParty library builds
-	include(${PATHTOPLUGIN}/DKCMake.txt)
+	include(${PATHTOPLUGIN}/DKMAKE.cmake)
 	
 	####################### DKPlugins #######################
 	string(FIND "${DKCPPPLUGS}" "${plugin}" _index)
@@ -322,7 +333,7 @@ foreach(plugin ${DKPLUGS})
 			endif()
 		endif()
 		
-		include(${PATHTOPLUGIN}/DKCMake.txt) ##run it again to copy any .exe and .dll files. 
+		include(${PATHTOPLUGIN}/DKMAKE.cmake) ##run it again to copy any .exe and .dll files. 
 	endif()
 	
 	##NOTE - can this work inside the if()/END() group above?..  please test
@@ -413,7 +424,7 @@ endif()
 
 message("\n")
 message("***************************************")
-message("********** Creating ${AppName} **********")
+message("********** Creating ${APP_NAME} **********")
 message("***************************************\n")
 
 message("Copying DKPlugins/_DKIMPORT/ to App...")
@@ -487,8 +498,8 @@ if(WIN_32)
 	)
 	
 	add_definitions(-D_USING_V110_SDK71_)
-	add_executable(${AppName} WIN32 ${App_SRC})
-	target_link_libraries(${AppName} ${DEBUG_LIBS} ${RELEASE_LIBS} ${WIN_LIBS})
+	add_executable(${APP_NAME} WIN32 ${App_SRC})
+	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${WIN_LIBS})
 	##set_source_files_properties(${DIGITALKNOB}/stdafx.cpp PROPERTIES COMPILE_FLAGS "/Ycstdafx.h")
 	
 	list(APPEND DEBUG_LINK_FLAGS /MANIFEST:NO)
@@ -511,15 +522,15 @@ if(WIN_32)
 	string(REPLACE ";" " " RELEASE_FLAGS "${RELEASE_LINK_FLAGS}")
 	
 	#add_custom_command(
-    #TARGET ${AppName}
+    #TARGET ${APP_NAME}
     #POST_BUILD
     #COMMAND "mt.exe" -nologo
     #        -manifest \"${DKPROJECT}/compatibility.manifest\"
-    #        -outputresource:"${DKPROJECT}/win32/Debug/${AppName}.exe"\;\#1
+    #        -outputresource:"${DKPROJECT}/win32/Debug/${APP_NAME}.exe"\;\#1
     #COMMENT "Adding manifest..."
     #)
 	
-	set_target_properties(${AppName} PROPERTIES LINK_FLAGS_DEBUG ${DEBUG_FLAGS} LINK_FLAGS_RELEASE ${RELEASE_FLAGS})
+	set_target_properties(${APP_NAME} PROPERTIES LINK_FLAGS_DEBUG ${DEBUG_FLAGS} LINK_FLAGS_RELEASE ${RELEASE_FLAGS})
 endif(WIN_32)
 	
 ##########
@@ -569,8 +580,8 @@ if(WIN_64)
 		DbgHelp.lib
 	)
 	
-	add_executable(${AppName}_64 WIN32 ${App_SRC})
-	target_link_libraries(${AppName}_64 ${DEBUG_LIBS} ${RELEASE_LIBS} ${WIN_LIBS})
+	add_executable(${APP_NAME}_64 WIN32 ${App_SRC})
+	target_link_libraries(${APP_NAME}_64 ${DEBUG_LIBS} ${RELEASE_LIBS} ${WIN_LIBS})
 	##set_source_files_properties(${DIGITALKNOB}/stdafx.cpp PROPERTIES COMPILE_FLAGS "/Ycstdafx.h")
 	
 	list(APPEND DEBUG_LINK_FLAGS /MANIFESTUAC:NO)
@@ -590,7 +601,7 @@ if(WIN_64)
 	list(APPEND RELEASE_LINK_FLAGS /SAFESEH:NO)
 	string(REPLACE ";" " " RELEASE_FLAGS "${RELEASE_LINK_FLAGS}")
 	
-	set_target_properties(${AppName}_64 PROPERTIES LINK_FLAGS_DEBUG ${DEBUG_FLAGS} LINK_FLAGS_RELEASE ${RELEASE_FLAGS})
+	set_target_properties(${APP_NAME}_64 PROPERTIES LINK_FLAGS_DEBUG ${DEBUG_FLAGS} LINK_FLAGS_RELEASE ${RELEASE_FLAGS})
 endif(WIN_64)
 
 #######
@@ -611,14 +622,14 @@ if(MAC)
 	
 	## copy the assets into the bundle resources
 	if(DEBUG)
-		file(MAKE_DIRECTORY ${DKPROJECT}/${OS}/Debug/${AppName}.app/Contents/Resources)
-		DKCOPY(${DKPROJECT}/assets/ ${DKPROJECT}/${OS}/Debug/${AppName}.app/Contents/Resources TRUE)
-		DKCOPY(${DKPROJECT}/icons/mac/logo.icns ${DKPROJECT}/${OS}/Debug/${AppName}.app/Contents/Resources/logo.icns TRUE)
+		file(MAKE_DIRECTORY ${DKPROJECT}/${OS}/Debug/${APP_NAME}.app/Contents/Resources)
+		DKCOPY(${DKPROJECT}/assets/ ${DKPROJECT}/${OS}/Debug/${APP_NAME}.app/Contents/Resources TRUE)
+		DKCOPY(${DKPROJECT}/icons/mac/logo.icns ${DKPROJECT}/${OS}/Debug/${APP_NAME}.app/Contents/Resources/logo.icns TRUE)
 	endif()
 	if(RELEASE)
-		file(MAKE_DIRECTORY ${DKPROJECT}/${OS}/Release/${AppName}.app/Contents/Resources)
-		DKCOPY(${DKPROJECT}/assets/ ${DKPROJECT}/${OS}/Release/${AppName}.app/Contents/Resources TRUE)
-		DKCOPY(${DKPROJECT}/icons/mac/logo.icns ${DKPROJECT}/${OS}/Release/${AppName}.app/Contents/Resources/logo.icns TRUE)
+		file(MAKE_DIRECTORY ${DKPROJECT}/${OS}/Release/${APP_NAME}.app/Contents/Resources)
+		DKCOPY(${DKPROJECT}/assets/ ${DKPROJECT}/${OS}/Release/${APP_NAME}.app/Contents/Resources TRUE)
+		DKCOPY(${DKPROJECT}/icons/mac/logo.icns ${DKPROJECT}/${OS}/Release/${APP_NAME}.app/Contents/Resources/logo.icns TRUE)
 	endif()
 	
 	# Restore the backed up files, excluded from assets
@@ -641,10 +652,10 @@ if(MAC)
 	list(APPEND RELEASE_LIBS ${CF} ${CO} ${CB} ${AT} ${AU} ${CV} ${CA} ${IO} ${GL} ${FF} ${AK})
 	
 	SET(CMAKE_OSX_ARCHITECTURES "x86_64")
-	add_executable(${AppName} MACOSX_BUNDLE ${App_SRC})
-	target_link_libraries(${AppName} ${DEBUG_LIBS} ${RELEASE_LIBS})
+	add_executable(${APP_NAME} MACOSX_BUNDLE ${App_SRC})
+	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS})
 	
-	DKUPDATE_INFO_Plist(${AppName}) #this may need to be run at post build
+	DKUPDATE_INFO_Plist(${APP_NAME}) #this may need to be run at post build
 endif()
 
 #######
@@ -665,14 +676,14 @@ if(IOS)
 
 	## copy the assets into the app
 	if(DEBUG)
-		file(MAKE_DIRECTORY ${DKPROJECT}/${OS}/${DEBUG}/${AppName}.app/assets)
-		DKCOPY(${DKPROJECT}/assets/ ${DKPROJECT}/${OS}/${DEBUG}/${AppName}.app/assets TRUE)
-		DKCOPY(${DKPROJECT}/icons/ios/ ${DKPROJECT}/${OS}/${DEBUG}/${AppName}.app TRUE)
+		file(MAKE_DIRECTORY ${DKPROJECT}/${OS}/${DEBUG}/${APP_NAME}.app/assets)
+		DKCOPY(${DKPROJECT}/assets/ ${DKPROJECT}/${OS}/${DEBUG}/${APP_NAME}.app/assets TRUE)
+		DKCOPY(${DKPROJECT}/icons/ios/ ${DKPROJECT}/${OS}/${DEBUG}/${APP_NAME}.app TRUE)
 	endif()
 	if(RELEASE)
-		file(MAKE_DIRECTORY ${DKPROJECT}/${OS}/${RELEASE}/${AppName}.app/assets)
-		DKCOPY(${DKPROJECT}/assets/ ${DKPROJECT}/${OS}/${RELEASE}/${AppName}.app/assets TRUE)
-		DKCOPY(${DKPROJECT}/icons/ios/ ${DKPROJECT}/${OS}/${RELEASE}/${AppName}.app TRUE)
+		file(MAKE_DIRECTORY ${DKPROJECT}/${OS}/${RELEASE}/${APP_NAME}.app/assets)
+		DKCOPY(${DKPROJECT}/assets/ ${DKPROJECT}/${OS}/${RELEASE}/${APP_NAME}.app/assets TRUE)
+		DKCOPY(${DKPROJECT}/icons/ios/ ${DKPROJECT}/${OS}/${RELEASE}/${APP_NAME}.app TRUE)
 	endif()
 
 	# Restore the backed up files, excluded from assets
@@ -707,11 +718,11 @@ if(IOS)
 	#set(CMAKE_XCODE_ATTRIBUTE_DEBUG_INFORMATION_FORMAT dwarf)
 	#set(MACOSX_BUNDLE_GUI_IDENTIFIER "com.digitalknob.\${PRODUCT_NAME:identifier}")
 		
-	#GET_TARGET_PROPERTY(MyExecutable_PATH ${AppName} LOCATION)
-	add_executable(${AppName} MACOSX_BUNDLE ${App_SRC})
-	target_link_libraries(${AppName} ${DEBUG_LIBS} ${RELEASE_LIBS})
+	#GET_TARGET_PROPERTY(MyExecutable_PATH ${APP_NAME} LOCATION)
+	add_executable(${APP_NAME} MACOSX_BUNDLE ${App_SRC})
+	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS})
 	
-	DKUPDATE_INFO_Plist(${AppName}) #this may need to be run at post build
+	DKUPDATE_INFO_Plist(${APP_NAME}) #this may need to be run at post build
 endif()
 
 ##########
@@ -732,14 +743,14 @@ if(IOSSIM)
 	
 	## copy the assets into the app
 	if(DEBUG)
-		file(MAKE_DIRECTORY ${DKPROJECT}/${OS}/${DEBUG}/${AppName}.app/assets)
-		DKCOPY(${DKPROJECT}/assets/ ${DKPROJECT}/${OS}/${DEBUG}/${AppName}.app/assets TRUE)
-		DKCOPY(${DKPROJECT}/icons/ios/ ${DKPROJECT}/${OS}/${DEBUG}/${AppName}.app TRUE)
+		file(MAKE_DIRECTORY ${DKPROJECT}/${OS}/${DEBUG}/${APP_NAME}.app/assets)
+		DKCOPY(${DKPROJECT}/assets/ ${DKPROJECT}/${OS}/${DEBUG}/${APP_NAME}.app/assets TRUE)
+		DKCOPY(${DKPROJECT}/icons/ios/ ${DKPROJECT}/${OS}/${DEBUG}/${APP_NAME}.app TRUE)
 	endif()
 	if(RELEASE)
-		file(MAKE_DIRECTORY ${DKPROJECT}/${OS}/${RELEASE}/${AppName}.app/assets)
-		DKCOPY(${DKPROJECT}/assets/ ${DKPROJECT}/${OS}/${RELEASE}/${AppName}.app/assets TRUE)
-		DKCOPY(${DKPROJECT}/icons/ios/ ${DKPROJECT}/${OS}/${RELEASE}/${AppName}.app TRUE)
+		file(MAKE_DIRECTORY ${DKPROJECT}/${OS}/${RELEASE}/${APP_NAME}.app/assets)
+		DKCOPY(${DKPROJECT}/assets/ ${DKPROJECT}/${OS}/${RELEASE}/${APP_NAME}.app/assets TRUE)
+		DKCOPY(${DKPROJECT}/icons/ios/ ${DKPROJECT}/${OS}/${RELEASE}/${APP_NAME}.app TRUE)
 	endif()
 	
 	# Restore the backed up files, excluded from assets
@@ -775,11 +786,11 @@ if(IOSSIM)
 	##set(CMAKE_XCODE_ATTRIBUTE_DEBUG_INFORMATION_FORMAT dwarf)
 	##set(MACOSX_BUNDLE_GUI_IDENTIFIER "com.digitalknob.\${PRODUCT_NAME:identifier}")
 	
-	#GET_TARGET_PROPERTY(MyExecutable_PATH ${AppName} LOCATION)
-	add_executable(${AppName} MACOSX_BUNDLE ${App_SRC})
-	target_link_libraries(${AppName} ${DEBUG_LIBS} ${RELEASE_LIBS})
+	#GET_TARGET_PROPERTY(MyExecutable_PATH ${APP_NAME} LOCATION)
+	add_executable(${APP_NAME} MACOSX_BUNDLE ${App_SRC})
+	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS})
 	
-	DKUPDATE_INFO_Plist(${AppName}) #this may need to be run at post build
+	DKUPDATE_INFO_Plist(${APP_NAME}) #this may need to be run at post build
 endif()
 
 #########
@@ -831,13 +842,13 @@ if(LINUX)
 	list(APPEND RELEASE_LIBS dl)
 	
 	set(CMAKE_CXX_FLAGS "-g -std=c++14 -no-pie")
-	add_executable(${AppName} ${App_SRC})
+	add_executable(${APP_NAME} ${App_SRC})
 	
 	if(DEBUG)
 		add_definitions(-DDEBUG)
-		target_link_libraries(${AppName} ${DEBUG_LIBS})
+		target_link_libraries(${APP_NAME} ${DEBUG_LIBS})
 	else()
-		target_link_libraries(${AppName} ${RELEASE_LIBS})
+		target_link_libraries(${APP_NAME} ${RELEASE_LIBS})
 	endif()
 endif()
 
@@ -895,13 +906,13 @@ if(RASPBERRY)
 	list(APPEND RELEASE_LIBS bcm_host)
 	
 	set(CMAKE_CXX_FLAGS "-g -std=c++14 -no-pie")
-	add_executable(${AppName} ${App_SRC})
+	add_executable(${APP_NAME} ${App_SRC})
 	
 	if(DEBUG)
 		add_definitions(-DDEBUG)
-		target_link_libraries(${AppName} ${DEBUG_LIBS})
+		target_link_libraries(${APP_NAME} ${DEBUG_LIBS})
 	else()
-		target_link_libraries(${AppName} ${RELEASE_LIBS})
+		target_link_libraries(${APP_NAME} ${RELEASE_LIBS})
 	endif()
 endif()
 
@@ -935,8 +946,8 @@ if(ANDROID_32)
 	DKREMOVE(${DKPROJECT}/Backup)
 	
 	#https://stackoverflow.com/questions/44467516/cmake-does-not-build-an-executable-with-add-executable
-	add_executable(${AppName} ${App_SRC})
-	target_link_libraries(${AppName} ${DEBUG_LIBS} ${RELEASE_LIBS})
+	add_executable(${APP_NAME} ${App_SRC})
+	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS})
 
 	list(APPEND DEBUG_LINK_FLAGS /MANIFESTUAC:NO)
 	list(APPEND DEBUG_LINK_FLAGS /level='highestAvailable')
@@ -955,7 +966,7 @@ if(ANDROID_32)
 	list(APPEND RELEASE_LINK_FLAGS /SAFESEH:NO)
 	string(REPLACE ";" " " RELEASE_FLAGS "${RELEASE_LINK_FLAGS}")
 	
-	set_target_properties(${AppName} PROPERTIES LINK_FLAGS_DEBUG ${DEBUG_FLAGS} LINK_FLAGS_RELEASE ${RELEASE_FLAGS})
+	set_target_properties(${APP_NAME} PROPERTIES LINK_FLAGS_DEBUG ${DEBUG_FLAGS} LINK_FLAGS_RELEASE ${RELEASE_FLAGS})
 endif()
 
 
@@ -986,9 +997,9 @@ endif()
 #	##TODO - split Debug and Release 
 #	
 #	#update app name
-#	DKUPDATE_ANDROID_NAME(${AppName})
+#	DKUPDATE_ANDROID_NAME(${APP_NAME})
 #	
-#	message("Creating Android.mk file for ${AppName}....")
+#	message("Creating Android.mk file for ${APP_NAME}....")
 #	DKSET(ANDROID_APPMK ${ANDROID_APPMK} "LOCAL_PATH := $(call my-dir)\n")
 #	if(SDL)
 #		message("USING SDL FOR ANDROID")
@@ -1082,5 +1093,5 @@ endif()
 
 message("\n")
 message("***************************************")
-message("********** Finnished ${AppName} **********")
+message("********** Finnished ${APP_NAME} **********")
 message("***************************************\n")

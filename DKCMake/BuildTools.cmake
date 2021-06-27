@@ -15,7 +15,7 @@ DKSET(DKWEB http://127.0.0.1)
 
 
 # run the DKDEPNDS for BuildTools
-INCLUDE(${DIGITALKNOB}/DKPlugins/BuildTools/DKCMake.txt)
+INCLUDE(${DIGITALKNOB}/DKPlugins/BuildTools/DKMAKE.cmake)
 
 MESSAGE("\n")
 MESSAGE("**********************************")
@@ -52,5 +52,5 @@ FOREACH(plugin ${DKPLUGS})
 		RETURN()
 	ENDIF()
 
-	INCLUDE(${PATHTOPLUGIN}/DKCMake.txt)
+	INCLUDE(${PATHTOPLUGIN}/DKMAKE.cmake)
 ENDFOREACH()

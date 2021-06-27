@@ -122,7 +122,7 @@ function(DKCOPY arg arg2 overwrite)
 		if(IS_DIRECTORY ${arg})
 			file(GLOB_RECURSE allfiles RELATIVE "${arg}/" "${arg}/*")
 			foreach(each_file ${allfiles})
-				if(${each_file} STREQUAL "DKCMake.txt")
+				if(${each_file} STREQUAL "DKMAKE.cmake")
 					continue()
 				endif()
 				set(sourcefile "${arg}/${each_file}")
@@ -210,7 +210,7 @@ function(DKDEFINE arg)
 		return() ## If the define is already in the list, return.
 	endif()
 	DKSET(DKDEFINES_LIST ${DKDEFINES_LIST} ${arg})
-	ADD_DEFINITIONS(-D${arg})
+	add_definitions(-D${arg})
 endfunction()
 
 #######################
@@ -1999,7 +1999,7 @@ SET(ASSETS
 	PATTERN *.TMP EXCLUDE
 	PATTERN *.temp EXCLUDE
 	PATTERN *.TEMP EXCLUDE
-	PATTERN DKCMake.txt EXCLUDE
+	PATTERN DKMAKE.cmake EXCLUDE
 	PATTERN CMakeLists.txt EXCLUDE
 	PATTERN DEPENDS.TMP EXCLUDE
 	PATTERN temp.txt EXCLUDE
@@ -2034,11 +2034,11 @@ endfunction()
 ## I.E.  MyApps/3rdParty/_DKIMPORT/libSomething_1.2b
 function(DKSETPATHTOPLUGIN arg)
 	DKSET(PATHTOPLUGIN "")
-	if(EXISTS ${DKPLUGINS}/${arg}/DKCMake.txt)
+	if(EXISTS ${DKPLUGINS}/${arg}/DKMAKE.cmake)
 		DKSET(PATHTOPLUGIN "${DKPLUGINS}/${arg}")
 		message("FOUND ${arg} DKPlugin at ${PATHTOPLUGIN}")
 		return()
-	elseif(EXISTS ${DKIMPORTS}/${arg}/DKCMake.txt)
+	elseif(EXISTS ${DKIMPORTS}/${arg}/DKMAKE.cmake)
 		DKSET(PATHTOPLUGIN "${DKIMPORTS}/${arg}")
 		message("FOUND ${arg} DKImport at ${PATHTOPLUGIN}")
 		return()
@@ -2046,7 +2046,7 @@ function(DKSETPATHTOPLUGIN arg)
 	
 	file(GLOB children RELATIVE ${DIGITALKNOB}/../ ${DIGITALKNOB}/../*)
   	foreach(child ${children})
-		if(EXISTS ${DIGITALKNOB}/../${child}/DKPlugins/${arg}/DKCMake.txt)
+		if(EXISTS ${DIGITALKNOB}/../${child}/DKPlugins/${arg}/DKMAKE.cmake)
 			DKSET(PATHTOPLUGIN "${DIGITALKNOB}/../${child}/DKPlugins/${arg}")
 			message("FOUND ${arg} Plugin at ${PATHTOPLUGIN}")
 			return()
@@ -2057,8 +2057,8 @@ endfunction()
 
 
 ### This is the current way to build the dependency list 
-### After the list is orginized, the DKCMake.txt files will be run in order.
-### This first method, finds the DKCMake.txt file and searches for DKDEPEND() comands.
+### After the list is orginized, the DKMAKE.cmake files will be run in order.
+### This first method, finds the DKMAKE.cmake file and searches for DKDEPEND() comands.
 ### This loop will orginize them from top to bottom, then they will be run.
 ### This is more of a brute-force method, but it also ensures too many libraries will be included
 ### (LARGER EXECUTABLE FILE)
@@ -2072,7 +2072,7 @@ endfunction()
 ### (smaller executable file)
 ###
 ### This also means that any library with more than one sub library must be given wrapping if() commands
-### It's up to the DKCmake.txt file to decide how to handle this. 
+### It's up to the DKMAKE.cmake file to decide how to handle this. 
 ### Say for instance you only want OSG's gif plugin..  
 ###    DKDEPEND(OpenScenGraph osgdb_gif)  "The osgdb_gif library should be wrapped in an if(osgdb_gif)
 ### And also I.E, a DKDEPEND(giflib-5.1.1) command should be contained in that if(osgdb_gif) command.
@@ -2107,7 +2107,7 @@ endfunction()
 
 
 ## This function would like to remove everthing but,
-## DKDEPEND() if() else() and endif() commands from the DKCmake.txt file
+## DKDEPEND() if() else() and endif() commands from the DKMAKE.cmake file
 ## This is to help in sorting the plugins by dependency
 ##########################
 function(DKRUNDEPENDS arg)
@@ -2116,7 +2116,7 @@ function(DKRUNDEPENDS arg)
 		return()
 	endif()
 	
-	file(STRINGS ${PATHTOPLUGIN}/DKCMake.txt lines)
+	file(STRINGS ${PATHTOPLUGIN}/DKMAKE.cmake lines)
 	unset(ModifiedContents)
 	unset(_indexa)
 	foreach(line ${lines})
@@ -2229,7 +2229,7 @@ function(DKBRUTEDEPENDS arg)
 		return()
 	endif()
 	
-	file(READ ${PATHTOPLUGIN}/DKCMake.txt data) ## read the file into a variable
+	file(READ ${PATHTOPLUGIN}/DKMAKE.cmake data) ## read the file into a variable
 	set(_index 0)
 	string(FIND "${data}" "DKDEPEND(" _index) ## look for the first DKDEPEND( command
 	while(${_index} GREATER -1)
@@ -2291,7 +2291,7 @@ FUNCTION (DKDEPEND_ALL)
 	if(IS_DIRECTORY ${DKIMPORTS})
 		file(GLOB allfiles RELATIVE "${DKIMPORTS}/" "${DKIMPORTS}/*")
 		foreach(each_file ${allfiles})
-			if(EXISTS ${DKIMPORTS}/${each_file}/DKCMake.txt)
+			if(EXISTS ${DKIMPORTS}/${each_file}/DKMAKE.cmake)
 				DKSET(DEPENDALL_FILE ${DEPENDALL_FILE} "DKDEPEND(${each_file})\n")
 			endif()
 		endforeach()
@@ -2303,7 +2303,7 @@ FUNCTION (DKDEPEND_ALL)
 		if(EXISTS ${DIGITALKNOB}/../${child}/DKPlugins)
 			file(GLOB plugins RELATIVE ${DIGITALKNOB}/../${child}/DKPlugins/ ${DIGITALKNOB}/../${child}/DKPlugins/*)
 			foreach(plugin ${plugins})
-				if(EXISTS ${DIGITALKNOB}/../${child}/DKPlugins/${plugin}/DKCMake.txt)
+				if(EXISTS ${DIGITALKNOB}/../${child}/DKPlugins/${plugin}/DKMAKE.cmake)
 					if(NOT ${plugin} STREQUAL "_DKIMPORT")
 						DKSET(DEPENDALL_FILE ${DEPENDALL_FILE} "DKDEPEND(${plugin})\n")
 					endif()

@@ -17,7 +17,7 @@ DKINSTALL(https://sourceforge.net/projects/boost/files/boost/${BOOST_VERSION_MAJ
 
 
 
-### LINK ###
+### DKPLUGINS LINK ###
 DKINCLUDE(${BOOST})
 DKLINKDIR(${BOOST}/${OS}/Debug/lib)
 DKLINKDIR(${BOOST}/${OS}/Release/lib)
@@ -131,7 +131,7 @@ WIN32_COMMAND(bootstrap.bat)
 WIN32_COMMAND(b2 toolset=msvc-14.2 address-model=32 variant=debug link=static threading=multi runtime-debugging=on runtime-link=static --build-dir=${BOOST}/${OS}/Debug --stagedir=${BOOST}/${OS}/Debug)
 WIN32_COMMAND(b2 toolset=msvc-14.2 address-model=32 variant=release link=static threading=multi runtime-debugging=off runtime-link=static --build-dir=${BOOST}/${OS}/Release --stagedir=${BOOST}/${OS}/Release)
 
-#WIN64_COMMAND(call C:/Windows/System32/cmd.exe /E:ON /V:ON /T:0E /K "${WINDOWS_SDK_EXE}")
+## WIN64_COMMAND(call C:/Windows/System32/cmd.exe /E:ON /V:ON /T:0E /K "${WINDOWS_SDK_EXE}")
 DKSETPATH(${BOOST})
 WIN64_COMMAND(bootstrap.bat)
 WIN64_COMMAND(b2 toolset=msvc-14.2 address-model=64 variant=debug link=static threading=multi runtime-debugging=on runtime-link=static --build-dir=${BOOST}/${OS}/Debug --stagedir=${BOOST}/${OS}/Debug)
@@ -166,7 +166,6 @@ DKSETPATH(${BOOST})
 RASPBERRY64_COMMAND(./bootstrap.sh)
 RASPBERRY64_COMMAND(./b2 toolset=gcc address-model=64 variant=debug link=static threading=multi runtime-debugging=on runtime-link=static --build-dir=${BOOST}/${OS}/Debug --stagedir=${BOOST}/${OS}/Debug)
 RASPBERRY64_COMMAND(./b2 toolset=gcc address-model=64 variant=release link=static threading=multi runtime-debugging=off runtime-link=static --build-dir=${BOOST}/${OS}/Release --stagedir=${BOOST}/${OS}/Release)
-
 
 DKSETPATH(${BOOST})
 ANDROID_BASH("#!/bin/bash\;

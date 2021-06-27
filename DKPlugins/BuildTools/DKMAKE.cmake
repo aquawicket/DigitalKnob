@@ -1,0 +1,42 @@
+### DEPENDS ###
+if(CMAKE_HOST_WIN32 AND WIN)
+	DKDEPEND(Git)
+	DKDEPEND(VisualStudio)
+	
+	## NOTE: These Defines are done in OPTIONS.cmake
+	## DKDEFINE(WIN32)
+	## DKDEFINE(WINDOWS)
+	if(WIN_64)
+	##	DKDEFINE(WIN64)
+	endif()
+	
+	# NOTE: These Defines should be done per as needed in DKMAKE.cmake files
+	## add_definitions(-D__WINDOWS_MM__)
+	## add_definitions(-D__STDC_CONSTANT_MACROS)
+	## add_definitions(-D_SCL_SECURE_NO_WARNINGS)
+	## add_definitions(-D_CRT_SECURE_NO_DEPRECATE)
+endif()
+
+
+if(CMAKE_HOST_APPLE AND MAC)
+	DKDEPEND(Xcode)
+endif()
+
+
+if(CMAKE_HOST_LINUX AND LINUX)
+
+endif()
+
+
+if(CMAKE_HOST_LINUX AND RASPBERRY)
+	
+endif()
+
+
+## TRACKER: error TRK0005: Failed to locate: "clang.exe" - https://stackoverflow.com/a/50924477/688352
+if(CMAKE_HOST_WIN32 AND ANDROID)
+	DKDEPEND(android-ndk)
+	DKDEPEND(VisualStudio)
+	DKDEPEND(mingw32)
+	DKDEPEND(msys)
+endif()

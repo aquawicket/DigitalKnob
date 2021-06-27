@@ -1,35 +1,37 @@
 ### VERSION ###
 IF(ANDROID)
 	DKSET(ZLIB_VERSION 1.2.8) ## https://www.zlib.net/fossils/zlib-1.2.8.tar.gz
-ENDIF()
-IF(NOT ANDROID)
+ELSE()
 	DKSET(ZLIB_VERSION 1.2.11) ##https://www.zlib.net/fossils/zlib-1.2.11.tar.gz
 ENDIF()
-
 DKSET(ZLIB ${3RDPARTY}/zlib-${ZLIB_VERSION})
-DKSET(ZLIB_INCLUDE_DIR ${ZLIB})
-DKSET(ZLIB_LIBRARY ${ZLIB}/${OS}/Release/zlibstatic.lib)
 
 
 ### INSTALL ###
 DKINSTALL(https://www.zlib.net/fossils/zlib-${ZLIB_VERSION}.tar.gz zlib zlib-${ZLIB_VERSION})
 
 
-### LINK ###
+### DKPLUGINS LINK ###
 DKINCLUDE(${ZLIB})
 DKINCLUDE(${ZLIB}/${OS})
-WIN32_INCLUDE(${ZLIB}/${OS})
-WIN64_INCLUDE(${ZLIB}/${OS})
 WIN_DEBUG_LIB(${ZLIB}/${OS}/${DEBUG}/zlibstaticd.lib)
 WIN_RELEASE_LIB(${ZLIB}/${OS}/${RELEASE}/zlibstatic.lib)
 APPLE_DEBUG_LIB(${ZLIB}/${OS}/${DEBUG}/libz.a)
 APPLE_RELEASE_LIB(${ZLIB}/${OS}/${RELEASE}/libz.a)
 LINUX_DEBUG_LIB(${ZLIB}/${OS}/${DEBUG}/libz.a)
 LINUX_RELEASE_LIB(${ZLIB}/${OS}/${RELEASE}/libz.a)
-ANDROID_DEBUG_LIB(${ZLIB}/${OS}/${DEBUG}/obj/local/armeabi-v7a/libzlib.a)
-ANDROID_RELEASE_LIB(${ZLIB}/${OS}/${RELEASE}/obj/local/armeabi-v7a/libzlib.a)
 RASPBERRY_DEBUG_LIB(${ZLIB}/${OS}/${DEBUG}/libz.a)
 RASPBERRY_RELEASE_LIB(${ZLIB}/${OS}/${RELEASE}/libz.a)
+ANDROID_DEBUG_LIB(${ZLIB}/${OS}/${DEBUG}/obj/local/armeabi-v7a/libzlib.a)
+ANDROID_RELEASE_LIB(${ZLIB}/${OS}/${RELEASE}/obj/local/armeabi-v7a/libzlib.a)
+
+
+### 3RDPARTY LINK ###
+DKSET(ZLIB_WIN -DCMAKE_C_FLAGS=/I${ZLIB}/${OS} -DZLIB_INCLUDE_DIR=${ZLIB} -DZLIB_LIBRARY_DEBUG=${ZLIB}/${OS}/Debug/zlibstatic.lib -DZLIB_LIBRARY_RELEASE=${ZLIB}/${OS}/Release/zlibstatic.lib)
+DKSET(ZLIB_LINUX -DZLIB_INCLUDE_DIR=${ZLIB} -DZLIB_LIBRARY_DEBUG=${ZLIB}/${OS}/${DEBUG}/libz.a -DZLIB_LIBRARY_RELEASE=${ZLIB}/${OS}/${RELEASE}/libz.a)
+DKSET(ZLIB_APPLE -DZLIB_INCLUDE_DIR=${ZLIB} -DZLIB_LIBRARY_DEBUG=${ZLIB}/${OS}/${DEBUG}/libz.a -DZLIB_LIBRARY_RELEASE=${ZLIB}/${OS}/${RELEASE}/libz.a)
+DKSET(ZLIB_RASPBERRY -DZLIB_INCLUDE_DIR=${ZLIB} -DZLIB_LIBRARY_DEBUG=${ZLIB}/${OS}/${DEBUG}/libz.a -DZLIB_LIBRARY_RELEASE=${ZLIB}/${OS}/${RELEASE}/libz.a)
+DKSET(ZLIB_ANDROID -DZLIB_INCLUDE_DIR=${ZLIB} -DZLIB_LIBRARY_DEBUG=${ZLIB}/${OS}/${DEBUG}/obj/local/armeabi-v7a/libzlib.a -DZLIB_LIBRARY_RELEASE=${ZLIB}/${OS}/${RELEASE}/obj/local/armeabi-v7a/libzlib.a)
 
 
 ### COMPILE ###
@@ -92,8 +94,3 @@ RASPBERRY64_DEBUG_COMMAND(make zlibstatic)
 DKSETPATH(${ZLIB}/${OS}/${RELEASE})
 RASPBERRY64_RELEASE_COMMAND(${CMAKE_COMMAND} -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=RELEASE -DCMAKE_C_FLAGS=-fPIC ${ZLIB})
 RASPBERRY64_RELEASE_COMMAND(make zlibstatic)
-
-
-### INJECT ###
-DKSET(ZLIB_WIN32 -DCMAKE_C_FLAGS=/I${ZLIB}/${OS} -DZLIB_INCLUDE_DIR=${ZLIB} -DZLIB_LIBRARY=${ZLIB}/${OS}/Release/zlibstatic.lib -DZLIB_LIBRARY_DEBUG=${ZLIB}/${OS}/Debug/zlibstatic.lib -DZLIB_LIBRARY_RELEASE=${ZLIB}/${OS}/Release/zlibstatic.lib)
-

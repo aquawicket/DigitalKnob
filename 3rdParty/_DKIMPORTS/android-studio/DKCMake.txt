@@ -1,7 +1,6 @@
-## FIXME
-
 ### VERSION ###
 DKSET(ANDROIDSDK_VERSION 173.4670197)
+
 
 ### INSTALL ###
 IF(CMAKE_HOST_WIN32)
@@ -14,7 +13,6 @@ IF(NOT EXISTS "C:/Program Files/Android/Android Studio/bin/studio.exe")
 ENDIF()
 ENDIF()
 
-
 IF(CMAKE_HOST_APPLE)
 IF(NOT EXISTS "/Applications/Android Studio.app")
 	DKSETPATH(${DIGITALKNOB}/Download)
@@ -23,7 +21,6 @@ IF(NOT EXISTS "/Applications/Android Studio.app")
 	## ANDROID_COMMAND(${DIGITALKNOB}/Download/android-studio-ide-${ANDROIDSDK_VERSION}-mac.dmg)
 ENDIF()
 ENDIF()
-
 
 IF(CMAKE_HOST_LINUX)
 IF(NOT EXISTS "${DIGITALKNOB}/3rdParty/android-studio/bin/studio.sh")
