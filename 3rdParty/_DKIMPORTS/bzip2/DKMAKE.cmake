@@ -1,5 +1,5 @@
-## MESSAGE("FIXME (BZIP2) need to compile for windows")
-## return()
+message("FIXME (BZIP2) need to compile for windows")
+return()
 
 ### VERSION ###
 DKSET(BZIP2_VERSION 2-1.0.8)
@@ -36,7 +36,6 @@ RASPBERRY_RELEASE_LIB(${BZIP2}/${OS}/libbz2.a)
 
 ### 3RDPARTY LINK ###
 DKSET(BZIP2_WIN
-	-DUSE_BZIP2_DLL=OFF
 	-DBZIP2_INCLUDE_DIR=${BZIP2}/${OS} 
 	-DBZIP2_LIBRARY_DEBUG=${BZIP2}/${OS}/libbz2-static.lib 
 	-DBZIP2_LIBRARY_RELEASE=${BZIP2}/${OS}/libbz2-static.lib)

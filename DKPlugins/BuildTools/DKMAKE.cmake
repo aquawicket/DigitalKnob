@@ -3,13 +3,6 @@ if(CMAKE_HOST_WIN32 AND WIN)
 	DKDEPEND(Git)
 	DKDEPEND(VisualStudio)
 	
-	## NOTE: These Defines are done in OPTIONS.cmake
-	## DKDEFINE(WIN32)
-	## DKDEFINE(WINDOWS)
-	if(WIN_64)
-	##	DKDEFINE(WIN64)
-	endif()
-	
 	# NOTE: These Defines should be done per as needed in DKMAKE.cmake files
 	## add_definitions(-D__WINDOWS_MM__)
 	## add_definitions(-D__STDC_CONSTANT_MACROS)
@@ -18,7 +11,7 @@ if(CMAKE_HOST_WIN32 AND WIN)
 endif()
 
 
-if(CMAKE_HOST_APPLE AND MAC)
+if(CMAKE_HOST_APPLE AND MAC OR IOS OR IOSSIM)
 	DKDEPEND(Xcode)
 endif()
 
