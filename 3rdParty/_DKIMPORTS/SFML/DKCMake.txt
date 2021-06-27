@@ -80,3 +80,20 @@ LINUX_DEBUG_COMMAND(make)
 DKSETPATH(${SFML}/${OS}/Release)
 LINUX_RELEASE_COMMAND(${CMAKE_COMMAND} -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=RELEASE -DCMAKE_C_FLAGS=-fPIC -DJPEG_LIBRARY=${JPEG}/${OS}/Release/libjpeg-static.a -DJPEG_INCLUDE_DIR=${JPEG} -DOPENAL_LIBRARY=${OPENAL}/${OS}/Release/libopenal.a -DOPENAL_INCLUDE_DIR=${OPENAL}/include -DVORBIS_INCLUDE_DIR=${VORBIS}/include -DVORBIS_LIBRARY=${VORBIS}/${OS}/Release/lib/.libs/libvorbis.a -DVORBISFILE_LIBRARY=${VORBIS}/${OS}/Release/lib/.libs/libvorbisfile.a -DVORBISENC_LIBRARY=${VORBIS}/${OS}/Release/lib/.libs/libvorbisenc.a -DOGG_INCLUDE_DIR=${OGG}/include -DOGG_LIBRARY=${OGG}/${OS}/Release/src/.libs/libogg.a ${SFML})
 LINUX_RELEASE_COMMAND(make)
+
+
+
+
+### INJECT ###
+DKSET(SFML_WIN32 
+	-DSFML_INCLUDE_DIR=${SFML}/include
+	-DSFML_MAIN_LIBRARY_DEBUG=${SFML}/${OS}/lib/Debug/sfml-main-d.lib
+	-DSFML_MAIN_LIBRARY_RELEASE=${SFML}/${OS}/lib/Release/sfml-main.lib
+	-DSFML_SYSTEM_LIBRARY_DEBUG=${SFML}/${OS}/lib/Debug/sfml-system-s-d.lib
+	-DSFML_SYSTEM_LIBRARY_RELEASE=${SFML}/${OS}/lib/Debug/sfml-system-s.lib
+	-DSFML_WINDOW_LIBRARY_DEBUG=${SFML}/${OS}/lib/Debug/sfml-window-s-d.lib
+	-DSFML_WINDOW_LIBRARY_RELEASE=${SFML}/${OS}/lib/Release/sfml-window-s.lib
+	-DSFML_GRAPHICS_LIBRARY_DEBUG=${SFML}/${OS}/lib/Debug/sfml-graphics-s-d.lib
+	-DSFML_GRAPHICS_LIBRARY_RELEASE=${SFML}/${OS}/lib/Release/sfml-graphics-s.lib
+	-DSFML_AUDIO_LIBRARY_DEBUG=${SFML}/${OS}/lib/Debug/sfml-audio-s-d.lib
+	-DSFML_AUDIO_LIBRARY_RELEASE=${SFML}/${OS}/lib/Release/sfml-audio-s.lib)

@@ -172,7 +172,7 @@ endif()
 
 set(SMPEG2 ${3RDPARTY}/smpeg2-2.0.0 CACHE PATH "" FORCE)
 if(EXISTS ${SMPEG2}/${OS}/lib/Release/libsmpeg2.lib)
-	set(SMPEG_INCLUDE_DIR=${SMPEG2} CACHE PATH "" FORCE)
+	set(SMPEG_INCLUDE_DIR ${SMPEG2} CACHE PATH "" FORCE)
 endif()
 
 
