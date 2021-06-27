@@ -55,11 +55,11 @@ WIN64_VS_RELEASE(glew-${GLEW_VERSION} glew.sln ALL_BUILD)
 ### INJECT ###
 DKSET(GLEW_WIN32 
 	-DGLEW_USE_STATIC_LIB=ON
-	-DGLEW_DIR=${GLEW}/${OS}/CMakeFiles/Export/lib/cmake/glew CACHE PATH "" FORCE)
-	-DGLEW_LIBRARY=${GLEW}/${OS}/lib/Debug/libglew32.lib CACHE FILEPATH "" FORCE)
-	-DGLEW_INCLUDE_DIR=${GLEW} CACHE PATH "" FORCE)
-	-DGLEW_STATIC_LIBRARY_DEBUG=${GLEW}/${OS}/lib/Debug/libglew32d.lib CACHE FILEPATH "" FORCE)
-	-DGLEW_STATIC_LIBRARY_RELEASE=${GLEW}/${OS}/lib/Release/libglew32.lib CACHE FILEPATH "" FORCE)
-	-DGLEW_SHARED_LIBRARY_DEBUG=${GLEW}/${OS}/lib/Debug/glew32d.lib CACHE FILEPATH "" FORCE)
-	-DGLEW_SHARED_LIBRARY_RELEASE=${GLEW}/${OS}/lib/Release/glew32.lib CACHE FILEPATH "" FORCE)
+	-DGLEW_DIR=${GLEW}/${OS}/CMakeFiles/Export/lib/cmake/glew
+	-DGLEW_LIBRARY=${GLEW}/${OS}/lib/Debug/libglew32.lib
+	-DGLEW_INCLUDE_DIR=${GLEW}
+	-DGLEW_STATIC_LIBRARY_DEBUG=${GLEW}/${OS}/lib/Debug/libglew32d.lib
+	-DGLEW_STATIC_LIBRARY_RELEASE=${GLEW}/${OS}/lib/Release/libglew32.lib
+	-DGLEW_SHARED_LIBRARY_DEBUG=${GLEW}/${OS}/lib/Debug/glew32d.lib
+	-DGLEW_SHARED_LIBRARY_RELEASE=${GLEW}/${OS}/lib/Release/glew32.lib
 	-DGLEW_LIBRARIES=${GLEW}/${OS}/lib/Debug/libglew32d.lib ${GLEW}/${OS}/lib/Release/libglew32.lib)
