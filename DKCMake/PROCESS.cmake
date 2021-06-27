@@ -531,6 +531,12 @@ if(WIN_32)
     #)
 	
 	set_target_properties(${APP_NAME} PROPERTIES LINK_FLAGS_DEBUG ${DEBUG_FLAGS} LINK_FLAGS_RELEASE ${RELEASE_FLAGS})
+	
+	message("Building icons for ${APP_NAME} . . .")
+	DKSET(IMAGEMAGICK_CONVERT ${IMAGEMAGICK_ROOT}/convert.exe)
+	file(MAKE_DIRECTORY ${DKPROJECT}/icons/windows)
+	DKEXECUTE_PROCESS(COMMAND ${IMAGEMAGICK_CONVERT} ${DKPROJECT}/icons/icon.png -define icon:auto-resize=256,128,64,48,32,16 ${DKPROJECT}/icons/windows/icon.ico)
+	DKEXECUTE_PROCESS(COMMAND ${IMAGEMAGICK_CONVERT} ${DKPROJECT}/icons/icon.png -define icon:auto-resize=16 ${DKPROJECT}/assets/favicon.ico)
 endif(WIN_32)
 	
 ##########
@@ -602,6 +608,12 @@ if(WIN_64)
 	string(REPLACE ";" " " RELEASE_FLAGS "${RELEASE_LINK_FLAGS}")
 	
 	set_target_properties(${APP_NAME}_64 PROPERTIES LINK_FLAGS_DEBUG ${DEBUG_FLAGS} LINK_FLAGS_RELEASE ${RELEASE_FLAGS})
+	
+	message("Building icons for ${APP_NAME} . . .")
+	DKSET(IMAGEMAGICK_CONVERT ${IMAGEMAGICK_ROOT}/convert.exe)
+	file(MAKE_DIRECTORY ${DKPROJECT}/icons/windows)
+	DKEXECUTE_PROCESS(${IMAGEMAGICK_CONVERT} ${DKPROJECT}/icons/icon.png -define icon:auto-resize=256,128,64,48,32,16 ${DKPROJECT}/icons/windows/icon.ico)
+	DKEXECUTE_PROCESS(${IMAGEMAGICK_CONVERT} ${DKPROJECT}/icons/icon.png -define icon:auto-resize=16 ${DKPROJECT}/assets/favicon.ico)
 endif(WIN_64)
 
 #######
@@ -656,6 +668,8 @@ if(MAC)
 	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS})
 	
 	DKUPDATE_INFO_Plist(${APP_NAME}) #this may need to be run at post build
+	
+	
 endif()
 
 #######
