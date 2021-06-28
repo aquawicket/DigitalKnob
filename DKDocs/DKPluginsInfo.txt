@@ -2,19 +2,19 @@
 
 A DKPlugins is a folder, it's contents are compaitble with DigitalKnob.  i.e. DKPlugins/MyPlugin
 A DKPlugin can be anything from c++ files, to html, javascript, or just file assets ,.png,.txt.etc.
-Every Plugin must include a DKCMake.txt file to run.
+Every Plugin must include a DKMAKE.cmake file to run.
 Every Plugin must be located in the digitalknob/DKPlugins folder
 
 
 *** DKASSETS() ***
-/DKPlugins/MyPlugin/DKCmake.txt -> "DKASSETS(MyPlugin)"
+/DKPlugins/MyPlugin/DKMAKE.cmake -> "DKASSETS(MyPlugin)"
 This is the easiest version of a plugin, anything in the "DKPlugins/MyPlugin" folder will be copied to the app's assets
 
 *** DKDEPEND() ***
 When a Plugin depends on another plugin, specify DKDEPEND(DKPluginName)
 
 For example, DKPng requires DKZlib..   
-The DKCmake.txt file in the /DKPlugins/DKPng folder will state...
+The DKMAKE.cmake file in the /DKPlugins/DKPng folder will state...
 DKDEPEND(DKZlib)
 This command will ensure DKZlib is built first and recognied by DKPng.
 

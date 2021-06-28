@@ -98,14 +98,14 @@ bool DKAssets::GetAssetsPath(DKString& path){
 	
 #ifdef WIN32
 	if (DKFile::PathExists(DKFile::app_path + "../assets/") && 
-	    DKFile::PathExists(DKFile::app_path + "../DKCMake.txt")) {
+	    DKFile::PathExists(DKFile::app_path + "../DKMAKE.cmake")) {
 		if (DKFile::GetAbsolutePath(DKFile::app_path + "../assets/", path)) {
 			//SetDllDirectory(path.c_str()); //FIXME: get rid of this?
 			return true;
 		}
 	}
 	if (DKFile::PathExists(DKFile::app_path + "../../assets/") &&
-		DKFile::PathExists(DKFile::app_path + "../../DKCMake.txt")) {
+		DKFile::PathExists(DKFile::app_path + "../../DKMAKE.cmake")) {
 		if (DKFile::GetAbsolutePath(DKFile::app_path + "../../assets/", path)) {
 			//SetDllDirectory(path.c_str()); //FIXME: get rid of this?
 			return true;
@@ -115,7 +115,7 @@ bool DKAssets::GetAssetsPath(DKString& path){
 #endif
 #ifdef MAC
 	if (DKFile::PathExists(DKFile::app_path + "../../../../../assets/") && 
-		DKFile::PathExists(DKFile::app_path + "../../../../../DKCMake.txt")) {
+		DKFile::PathExists(DKFile::app_path + "../../../../../DKMAKE.cmake")) {
 		if (DKFile::GetAbsolutePath(DKFile::app_path + "../../../../../assets/", path)) {
 			return true;
 		}
@@ -128,12 +128,12 @@ bool DKAssets::GetAssetsPath(DKString& path){
 	std::size_t pos = DKFile::app_path.find("/Library");
 	DKString userpath = DKFile::app_path.substr(0, pos);
 	if(DKFile::PathExists(userpath + "/Desktop/digitalknob/DKApps/" + DKFile::app_name + "/assets/") && 
-	   DKFile::PathExists(userpath + "/Desktop/digitalknob/DKApps/" + DKFile::app_name + "/DKCMake.txt")){
+	   DKFile::PathExists(userpath + "/Desktop/digitalknob/DKApps/" + DKFile::app_name + "/DKMAKE.cmake")){
 		path = userpath + "/Desktop/digitalknob/DKApps/" + DKFile::app_name + "/assets/";
 		return true;
 	}
 	if(DKFile::PathExists(userpath + "/Desktop/digitalknob/USER/DKApps/" + DKFile::app_name + "/assets/") && 
-	   DKFile::PathExists(userpath + "/Desktop/digitalknob/USER/DKApps/" + DKFile::app_name + "/DKCMake.txt")){
+	   DKFile::PathExists(userpath + "/Desktop/digitalknob/USER/DKApps/" + DKFile::app_name + "/DKMAKE.cmake")){
 		path = userpath + "/Desktop/digitalknob/USER/DKApps/" + DKFile::app_name + "/assets/";
 		return true;
 	}
@@ -141,7 +141,7 @@ bool DKAssets::GetAssetsPath(DKString& path){
 #endif
 #ifdef LINUX
 	if (DKFile::PathExists(DKFile::app_path + "../../assets/") &&
-		DKFile::PathExists(DKFile::app_path + "../../DKCMake.txt")) {
+		DKFile::PathExists(DKFile::app_path + "../../DKMAKE.cmake")) {
 		if (DKFile::GetAbsolutePath(DKFile::app_path + "../../assets/", path)) {
 			return true;
 		}

@@ -30,7 +30,7 @@ DKObject* DKClass::_Instance(const DKString& data){
 		return (*classes)[arry[0]]->Instance("");
 	}
 	DKWARN("DKClass::_Instance "+arry[0]+" not registered\n");
-	//DKWARN("   Open DKCMake.txt and add DKDEPEND("+arry[0]+"), and rebuild\n");
+	//DKWARN("   Open DKMAKE.cmake and add DKDEPEND("+arry[0]+"), and rebuild\n");
 	return NULL;
 }
 
@@ -44,7 +44,7 @@ DKObject* DKClass::_Get(const DKString& data){
 		return (*classes)[arry[0]]->Get(arry[1]);
 	}
 	DKWARN("DKClass::_Get(): "+arry[0]+" not registered\n");
-	//DKWARN("   Open DKCMake.txt and add DKDEPEND("+arry[0]+"), and rebuild\n");
+	//DKWARN("   Open DKMAKE.cmake and add DKDEPEND("+arry[0]+"), and rebuild\n");
 	return NULL;
 }
 
@@ -58,7 +58,7 @@ bool DKClass::_Valid(const DKString& data){
 		return (*classes)[arry[0]]->Valid(arry[1]);
 	}
 	//DKLOG("DKClass::_Valid(): "+arry[0]+" not registered\n", DKWARN);
-	//DKLOG("   Open DKCMake.txt and add DKDEPEND("+arry[0]+"), and rebuild\n", DKWARN);
+	//DKLOG("   Open DKMAKE.cmake and add DKDEPEND("+arry[0]+"), and rebuild\n", DKWARN);
 	return NULL;
 }
 
@@ -76,7 +76,7 @@ bool DKClass::_Available(const DKString& data){
 		return true;
 	}
 	//DKWARN("DKClass::_Available(): "+arry[0]+" not registered\n");
-	//DKWARN("   Open DKCMake.txt and add DKDEPEND("+arry[0]+"), and rebuild\n");
+	//DKWARN("   Open DKMAKE.cmake and add DKDEPEND("+arry[0]+"), and rebuild\n");
 	return false;
 }
 

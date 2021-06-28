@@ -323,7 +323,7 @@ function pushDKAssets(){
 	}
 	chdir(getRootPath());
 	$ignoreFolders = array("USER");
-    $ignoreFiles = array("*.h","*.cpp","*/DKCMake.txt");
+    $ignoreFiles = array("*.h","*.cpp","*/DKMAKE.cmake");
     $filemap = [];
 
     //Fist get all of the paths
@@ -421,7 +421,7 @@ function pullDKAssets(){
 	}
 	chdir(getRootPath());
 	$ignoreFolders = array(".","..");
-    $ignoreFiles = array("*.h","*.cpp","*/DKCMake.txt");
+    $ignoreFiles = array("*.h","*.cpp","*/DKMAKE.cmake");
 
     //Fist get all of the paths
 	$assetsPath = getAssetsPath();

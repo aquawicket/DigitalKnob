@@ -480,22 +480,22 @@ if(WIN_32)
 	DKCOPY(${DKPROJECT}/Backup ${DKPROJECT}/assets TRUE)
 	DKREMOVE(${DKPROJECT}/Backup)
 	
-	list(APPEND WIN_LIBS 
-		kernel32.lib
-		user32.lib
-		gdi32.lib
-		winspool.lib
-		shell32.lib
-		ole32.lib
-		oleaut32.lib
-		uuid.lib
-		comdlg32.lib
-		advapi32.lib
-		odbc32.lib
-		odbccp32.lib
-		opengl32.lib
-		DbgHelp.lib
-	)
+	#list(APPEND WIN_LIBS 
+	#	kernel32.lib
+	#	user32.lib
+	#	gdi32.lib
+	#	winspool.lib
+	#	shell32.lib
+	#	ole32.lib
+	#	oleaut32.lib
+	#	uuid.lib
+	#	comdlg32.lib
+	#	advapi32.lib
+	#	odbc32.lib
+	#	odbccp32.lib
+	#	opengl32.lib
+	#	DbgHelp.lib
+	#)
 	
 	add_definitions(-D_USING_V110_SDK71_)
 	add_executable(${APP_NAME} WIN32 ${App_SRC})

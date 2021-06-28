@@ -74,7 +74,7 @@ function AndroidImport_Import() {
 		var url = DKFile_GetSetting(files[i], "[MYGIT]");
 		if(url){ //console.log("url = "+url+"\n");
 			var folder = files[i].replace(".txt",""); //console.log("folder = "+folder+"\n");
-			if(dk.file.extist(DKPATH+"/"+folder+"/DKApps/"+APP+"/DKCMake.txt")){
+			if(dk.file.extist(DKPATH+"/"+folder+"/DKApps/"+APP+"/DKMAKE.cmake")){
 				appdir = folder+"/DKApps";
 			}
 		}
