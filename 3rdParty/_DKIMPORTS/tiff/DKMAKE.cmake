@@ -1,28 +1,32 @@
+## https://download.osgeo.org/libtiff/
+
 ### VERSION ###
 DKSET(TIFF_VERSION 4.0.3)
-
 DKSET(TIFF ${3RDPARTY}/tiff-${TIFF_VERSION})
-DKSET(TIFF_INCLUDE_DIR ${TIFF}/libtiff)
-DKSET(TIFF_INCLUDE_DIR2 ${TIFF}/${OS})
 
 
 ### INSTALL ###
+## https://download.osgeo.org/libtiff/old/tiff-4.0.3.zip
 DKINSTALL(https://download.osgeo.org/libtiff/old/tiff-${TIFF_VERSION}.zip tiff tiff-${TIFF_VERSION})
 
 
-### LINK ###
+### DKPLUGINS LINK ###
 DKINCLUDE(${TIFF}/libtiff)
-WIN_DEBUG_LIB(${TIFF}/${OS}/Debug/tiff-static.lib)
-WIN_RELEASE_LIB(${TIFF}/${OS}/Release/tiff-static.lib)
+WIN_DEBUG_LIB(${TIFF}/${OS}/${DEBUG}/tiff-static.lib)
+WIN_RELEASE_LIB(${TIFF}/${OS}/${RELEASE}/tiff-static.lib)
 APPLE_DEBUG_LIB(${TIFF}/${OS}/${DEBUG}/libtiff-static.a)
 APPLE_RELEASE_LIB(${TIFF}/${OS}/${RELEASE}/libtiff-static.a)
-LINUX_DEBUG_LIB(${TIFF}/${OS}/Debug/libtiff-static.a)
-LINUX_RELEASE_LIB(${TIFF}/${OS}/Release/libtiff-static.a)
-ANDROID_DEBUG_LIB(${TIFF}/${OS}/Debug/obj/local/armeabi-v7a/libtiff.a)
-ANDROID_RELEASE_LIB(${TIFF}/${OS}/Release/obj/local/armeabi-v7a/libtiff.a)
-RASPBERRY_DEBUG_LIB(${TIFF}/${OS}/Debug/libtiff-static.a)
-RASPBERRY_RELEASE_LIB(${TIFF}/${OS}/Release/libtiff-static.a)
+LINUX_DEBUG_LIB(${TIFF}/${OS}/${DEBUG}/libtiff-static.a)
+LINUX_RELEASE_LIB(${TIFF}/${OS}/${RELEASE}/libtiff-static.a)
+ANDROID_DEBUG_LIB(${TIFF}/${OS}/${DEBUG}/obj/local/armeabi-v7a/libtiff.a)
+ANDROID_RELEASE_LIB(${TIFF}/${OS}/${RELEASE}/obj/local/armeabi-v7a/libtiff.a)
+RASPBERRY_DEBUG_LIB(${TIFF}/${OS}/${DEBUG}/libtiff-static.a)
+RASPBERRY_RELEASE_LIB(${TIFF}/${OS}/${RELEASE}/libtiff-static.a)
 
+
+### 3RDPARTY LINK ###
+DKSET(TIFF_ALLOS -DTIFF_INCLUDE_DIR=${TIFF}/libtiff -DTIFF_INCLUDE_DIR2=${TIFF}/${OS})
+	
 
 ### COMPILE ###
 DKSETPATH(${TIFF}/${OS})
@@ -50,27 +54,21 @@ IOSSIM_COMMAND(${CMAKE_COMMAND} -G "Xcode" -DCMAKE_TOOLCHAIN_FILE=${DKCMAKE}/iOS
 IOSSIM_XCODE_DEBUG(tiff-${TIFF_VERSION} tiff-static)
 IOSSIM_XCODE_RELEASE(tiff-${TIFF_VERSION} tiff-static)
 
-DKSETPATH(${TIFF}/${OS}/Debug)
-LINUX_DEBUG_COMMAND(${CMAKE_COMMAND} -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=DEBUG "-DCMAKE_C_FLAGS=-I${ZLIB} -I${ZLIB}/${OS}/Debug" ${TIFF})
+DKSETPATH(${TIFF}/${OS}/${DEBUG})
+LINUX_DEBUG_COMMAND(${CMAKE_COMMAND} -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=DEBUG ${TIFF})
 LINUX_DEBUG_COMMAND(make tiff-static)
 
-DKSETPATH(${TIFF}/${OS}/Release)
-LINUX_RELEASE_COMMAND(${CMAKE_COMMAND} -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=RELEASE "-DCMAKE_C_FLAGS=-I${ZLIB} -I${ZLIB}/${OS}/Release" ${TIFF})
+DKSETPATH(${TIFF}/${OS}/${RELEASE})
+LINUX_RELEASE_COMMAND(${CMAKE_COMMAND} -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=RELEASE ${TIFF})
 LINUX_RELEASE_COMMAND(make tiff-static)
 
 ANDROID_NDK_DEBUG(tiff-${TIFF_VERSION})
 ANDROID_NDK_RELEASE(tiff-${TIFF_VERSION})
 
-DKSETPATH(${TIFF}/${OS}/Debug)
-RASPBERRY_DEBUG_COMMAND(${CMAKE_COMMAND} -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=DEBUG "-DCMAKE_C_FLAGS=-I${ZLIB} -I${ZLIB}/${OS}/Debug" ${TIFF})
+DKSETPATH(${TIFF}/${OS}/${DEBUG})
+RASPBERRY_DEBUG_COMMAND(${CMAKE_COMMAND} -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=DEBUG ${TIFF})
 RASPBERRY_DEBUG_COMMAND(make tiff-static)
 
-DKSETPATH(${TIFF}/${OS}/Release)
-RASPBERRY_RELEASE_COMMAND(${CMAKE_COMMAND} -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=RELEASE "-DCMAKE_C_FLAGS=-I${ZLIB} -I${ZLIB}/${OS}/Release" ${TIFF})
+DKSETPATH(${TIFF}/${OS}/${RELEASE})
+RASPBERRY_RELEASE_COMMAND(${CMAKE_COMMAND} -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=RELEASE ${TIFF})
 RASPBERRY_RELEASE_COMMAND(make tiff-static)
-
-
-### INJECT ###
-DKSET(TIFF_WIN32 
-	-DTIFF_INCLUDE_DIR=${TIFF}/libtiff
-	-DTIFF_INCLUDE_DIR2=${TIFF}/${OS})
