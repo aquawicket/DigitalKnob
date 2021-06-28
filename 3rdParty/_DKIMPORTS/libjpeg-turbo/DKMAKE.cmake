@@ -1,10 +1,12 @@
+## https://libjpeg-turbo.org/
+
 ### VERSION ###
 DKSET(JPEG_VERSION 1.5.3)
 DKSET(JPEG ${3RDPARTY}/libjpeg-turbo-${JPEG_VERSION})
 
 
 ### INSTALL ###
-https://sourceforge.net/projects/libjpeg-turbo/files/1.5.3/libjpeg-turbo-1.5.3.tar.gz
+## https://sourceforge.net/projects/libjpeg-turbo/files/1.5.3/libjpeg-turbo-1.5.3.tar.gz
 DKINSTALL(https://sourceforge.net/projects/libjpeg-turbo/files/1.5.3/libjpeg-turbo-${JPEG_VERSION}.tar.gz libjpeg-turbo libjpeg-turbo-${JPEG_VERSION})
 
 
