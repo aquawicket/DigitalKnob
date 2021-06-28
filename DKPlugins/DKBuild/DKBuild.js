@@ -881,4 +881,8 @@ function DKBuild_DoResults(){
 		DKAudio_PlaySound("DKBuild/ding.wav");
 	}
 	*/
+	
+	//Refresh Icons on Windows
+	CPP_DK_Execute("ie4uinit.exe -ClearIconCache");
+	//CPP_DK_Execute("ie4uinit.exe -show"); //Windows 10
 }

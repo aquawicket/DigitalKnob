@@ -188,12 +188,6 @@ function(DKREMOVE arg)
 	endif()
 endfunction()
 
-######################
-function(DKENABLE arg)
-	DKSET(${arg} ON)
-	DKDEFINE(USE_${arg})
-endfunction()
-
 ###########################
 function(UPX_COMPRESS file)
 	if(UPX AND CMAKE_HOST_WIN32)
@@ -201,6 +195,12 @@ function(UPX_COMPRESS file)
 		message("Please wait...")
 		execute_process(COMMAND cmd /c "${3RDPARTY}/upx392w/upx.exe -9 -v ${file}")
 	endif()
+endfunction()
+
+######################
+function(DKENABLE arg)
+	DKSET(${arg} ON)
+	DKDEFINE(USE_${arg})
 endfunction()
 
 ######################
@@ -260,6 +260,13 @@ function(dk_dirIsEmpty DIRPATH RESULT)
 	endif()
 	set(${RESULT} true PARENT_SCOPE)
 endfunction()
+
+#########################
+function(DKREFRESH_ICONS)
+	DKEXECUTE_PROCESS(COMMAND ie4uinit.exe -ClearIconCache)
+	##ie4uinit.exe -show   ##Windows 10
+endfunction()
+
 
 ######################################################
 function(DKINSTALL url import_folder 3rdparty_folder)
