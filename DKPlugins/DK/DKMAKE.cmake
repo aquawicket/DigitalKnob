@@ -40,9 +40,8 @@ ELSEIF(IOS OR IOSSIM)
 	DKDEPEND(Boost.1.60.0-libstdcpp)
 ENDIF()
 
-if(USE_DKDuktape)
-	DKDEPEND(DKDuktape)
-endif()
+
+DKDEPEND(DKDuktape)
 
 DKPLUGIN(DK)
 DKASSETS(DK)
