@@ -2,6 +2,7 @@
 DKDEPEND(DKSDLWindow)
 DKDEPEND(freetype)
 
+
 ### VERSION ###
 DKSET(SDLTTF_VERSION 2.0.14)
 DKSET(SDLTTF_NAME SDL2_ttf-${SDLTTF_VERSION})
@@ -15,15 +16,15 @@ DKINSTALL(https://www.libsdl.org/projects/SDL_ttf/release/${SDLTTF_NAME}.zip SDL
 
 ### LINK ###
 DKINCLUDE(${SDLTTF_ROOT})
-WIN_DEBUG_LIB(${SDLTTF_ROOT}/${OS}/lib/Debug/SDL_ttf.lib)
+WIN_DEBUG_LIB(${SDLTTF_ROOT}/${OS}/lib/${Debug}/SDL_ttf.lib)
 WIN_RELEASE_LIB(${SDLTTF_ROOT}/${OS}/lib/Release/SDL_ttf.lib)
-APPLE_DEBUG_LIB(${SDLTTF_ROOT}/${OS}/lib/Debug/SDL_ttf.a)
+APPLE_DEBUG_LIB(${SDLTTF_ROOT}/${OS}/lib/${Debug}/SDL_ttf.a)
 APPLE_RELEASE_LIB(${SDLTTF_ROOT}/${OS}/lib/Release/SDL_ttf.a)
-LINUX_DEBUG_LIB(${SDLTTF_ROOT}/${OS}/Debug/lib/SDL_ttf.a)
+LINUX_DEBUG_LIB(${SDLTTF_ROOT}/${OS}/${Debug}/lib/SDL_ttf.a)
 LINUX_RELEASE_LIB(${SDLTTF_ROOT}/${OS}/Release/lib/SDL_ttf.a)
 ANDROID_DEBUG_LIB(${SDLTTF_ROOT}/${OS}/${DEBUG}/obj/local/armeabi-v7a/libSDL2_ttf.a)
 ANDROID_RELEASE_LIB(${SDLTTF_ROOT}/${OS}/${RELEASE}/obj/local/armeabi-v7a/libSDL2_ttf.a)
-RASPBERRY_DEBUG_LIB(${SDLTTF_ROOT}/${OS}/Debug/lib/SDL_ttf.a)
+RASPBERRY_DEBUG_LIB(${SDLTTF_ROOT}/${OS}/${Debug}/lib/SDL_ttf.a)
 RASPBERRY_RELEASE_LIB(${SDLTTF_ROOT}/${OS}/Release/lib/SDL_ttf.a)
 
 
