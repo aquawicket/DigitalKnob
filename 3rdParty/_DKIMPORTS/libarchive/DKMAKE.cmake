@@ -6,14 +6,16 @@ DKDEPEND(bzip2)
 
 ### VERSION ###
 DKSET(ARCHIVE_VERSION 3.4.2)
+DKSET(ARCHIVE ${3RDPARTY}/libarchive-${ARCHIVE_VERSION})
+
 
 
 ### INSTALL ###
 DKINSTALL(https://www.libarchive.org/downloads/libarchive-${ARCHIVE_VERSION}.zip libarchive libarchive-${ARCHIVE_VERSION})
-DKSET(ARCHIVE ${3RDPARTY}/libarchive-${ARCHIVE_VERSION})
 
 
-### LINK ###
+
+### DKPLUGINS LINK ###
 DKDEFINE(LIBARCHIVE_STATIC)
 DKINCLUDE(${ARCHIVE}/libarchive)
 WIN_DEBUG_LIB(${ARCHIVE}/${OS}/libarchive/${DEBUG}/archive_static.lib)
@@ -26,6 +28,7 @@ RASPBERRY_DEBUG_LIB(${ARCHIVE}/${OS}/${DEBUG}/libarchive/libarchive.a)
 RASPBERRY_RELEASE_LIB(${ARCHIVE}/${OS}/${RELEASE}/libarchive/libarchive.a)
 ANDROID_DEBUG_LIB(${ARCHIVE}/${OS}/${DEBUG}/obj/local/armeabi-v7a/libarchive.a)
 ANDROID_RELEASE_LIB(${ARCHIVE}/${OS}/${RELEASE}/obj/local/armeabi-v7a/libarchive.a)
+
 
 
 ### COMPILE ###
