@@ -1,3 +1,5 @@
+// https://stackoverflow.com/a/32593825/688352
+
 #pragma once
 #ifndef DKThread_H
 #define DKThread_H
@@ -15,7 +17,6 @@
 #include <boost/thread.hpp>
 
 
-///////////////////////////////////////////////////
 class DKThreadPool : public DKObjectT<DKThreadPool>
 {
 public:
@@ -33,18 +34,16 @@ public:
 };
 
 //Global quick functions
-////////////////////////////////////////////////////////////////////////
-static void DKQueue(const DKString& name, boost::function<void ()> func)
-{
+static void DKQueue(const DKString& name, boost::function<void ()> func){
 	DKThreadPool::Instance("DKThreadPool0");
 	DKThreadPool::Instance("DKThreadPool0")->Queue(name, func);
 }
-//////////////////////////////////////////////////////////////////////////////////////////////
-static void DKQueue(const DKString& name, boost::function<void ()> func, const DKString& data)
-{
+
+static void DKQueue(const DKString& name, boost::function<void ()> func, const DKString& data){
 	DKThreadPool::Instance("DKThreadPool0");
 	DKThreadPool::Instance("DKThreadPool0")->Queue(name, func, data);
 }
+
 
 ///////////////////////////////////////////////////////////////////////
 ///NOTE: This class has nothing to do with the DKThreadPool class above
@@ -57,20 +56,18 @@ public:
     DKThread() : io_service(), work(io_service), thread() {}
     ~DKThread() {}
 
-    void start()
-    {
-        if (thread) return; // running
-
+    void start(){
+        if (thread) 
+			return; // running
 		DKINFO("Starting new thread...\n");
         thread.reset(new boost::thread(
             boost::bind(&boost::asio::io_service::run, &io_service)
         ));
     }
 
-    void stop()
-    {
-        if (!thread) return; // stopped
-
+    void stop(){
+        if (!thread) 
+			return; // stopped
         io_service.stop();
         thread->join();
         io_service.reset();
