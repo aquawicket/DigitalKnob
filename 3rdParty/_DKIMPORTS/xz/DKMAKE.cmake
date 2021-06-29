@@ -1,5 +1,9 @@
 ## https://github.com/xz-mirror/xz
 
+if(LINUX_32)
+	return()
+endif()
+
 ### DEPENDS ###
 IF(WIN_32)
 	#DKDEPEND(mingw32)
