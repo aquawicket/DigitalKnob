@@ -413,7 +413,9 @@ function DKBuild_DoResults(){
 		CPP_DKFile_MkDir(DKPATH+appdir+"/"+APP+"/win32");
 		CPP_DKFile_ChDir(DKPATH+appdir+"/"+APP+"/win32");
 		
-		let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Visual Studio 16 2019\" -A Win32 "+cmake_string+DKPATH+"DK");
+		const command = CMAKE+" -G \"Visual Studio 16 2019\" -A Win32 "+cmake_string+DKPATH+"DK"
+		console.log("COMMAND -->  "+command)
+		let rtvalue = CPP_DK_Execute(command);
 		if(rtvalue.indexOf("errors occurred!") > -1) 
 			return;
 		
