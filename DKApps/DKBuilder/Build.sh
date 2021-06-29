@@ -1,4 +1,5 @@
 # first remove the CMake cache file
+git pull
 rm /home/aquawicket/digitalknob/DK/DKApps/DKBuilder/linux32/Release/CMakeCache.txt
 
 mkdir /home/aquawicket/digitalknob/DK/DKApps/DKBuilder/linux32/Release
