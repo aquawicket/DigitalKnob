@@ -1,0 +1,593 @@
+# depslib dependency file v1.0
+1453312531 source:h:\mes codes\gif_1_lib\rwtypes.c
+	"SDL_gifRwtypes.h"
+
+1440662223 h:\mes codes\gif_1_lib\sdl_gifrwtypes.h
+	<stdio.h>
+	<stdint.h>
+
+1456524708 source:h:\mes codes\gif_1_lib\gif_funcs.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<errno.h>
+	"SDL_gifRwtypes.h"
+	"SDL_gifDecomp.h"
+	"SDL_gifToSurface.h"
+	"SDL_gif.h"
+
+1456334481 h:\mes codes\gif_1_lib\sdl_gifdecomp.h
+
+1456525016 h:\mes codes\gif_1_lib\sdl_giftosurface.h
+	<SDL.h>
+	"SDL_gifDecomp.h"
+
+1326929406 h:\mes codes\c-library\sdl\include\sdl.h
+	"SDL_main.h"
+	"SDL_stdinc.h"
+	"SDL_audio.h"
+	"SDL_cdrom.h"
+	"SDL_cpuinfo.h"
+	"SDL_endian.h"
+	"SDL_error.h"
+	"SDL_events.h"
+	"SDL_loadso.h"
+	"SDL_mutex.h"
+	"SDL_rwops.h"
+	"SDL_thread.h"
+	"SDL_timer.h"
+	"SDL_video.h"
+	"SDL_version.h"
+	"begin_code.h"
+	"close_code.h"
+
+1326929406 h:\mes codes\c-library\sdl\include\sdl_main.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+	"begin_code.h"
+	"close_code.h"
+
+1326929406 h:\mes codes\c-library\sdl\include\sdl_stdinc.h
+	"SDL_config.h"
+	<sys/types.h>
+	<stdio.h>
+	<stdlib.h>
+	<stddef.h>
+	<stdarg.h>
+	<stdlib.h>
+	<malloc.h>
+	<stddef.h>
+	<stdarg.h>
+	<memory.h>
+	<string.h>
+	<strings.h>
+	<inttypes.h>
+	<stdint.h>
+	<ctype.h>
+	<iconv.h>
+	"begin_code.h"
+	<alloca.h>
+	<malloc.h>
+	<malloc.h>
+	<malloc.h>
+	<stdlib.h>
+	"close_code.h"
+
+1326929430 h:\mes codes\c-library\sdl\include\sdl_config.h
+	"SDL_platform.h"
+	"SDL_config_dreamcast.h"
+	"SDL_config_macos.h"
+	"SDL_config_macosx.h"
+	"SDL_config_symbian.h"
+	"SDL_config_win32.h"
+	"SDL_config_os2.h"
+	"SDL_config_minimal.h"
+
+1326929406 h:\mes codes\c-library\sdl\include\sdl_platform.h
+
+1326929406 h:\mes codes\c-library\sdl\include\sdl_config_dreamcast.h
+	"SDL_platform.h"
+
+1326929406 h:\mes codes\c-library\sdl\include\sdl_config_macos.h
+	"SDL_platform.h"
+	<MacTypes.h>
+
+1326929406 h:\mes codes\c-library\sdl\include\sdl_config_macosx.h
+	"SDL_platform.h"
+	<AvailabilityMacros.h>
+
+1326929406 h:\mes codes\c-library\sdl\include\sdl_config_symbian.h
+	"SDL_platform.h"
+	<stdarg.h>
+	<stddef.h>
+
+1326929406 h:\mes codes\c-library\sdl\include\sdl_config_win32.h
+	"SDL_platform.h"
+
+1326929406 h:\mes codes\c-library\sdl\include\sdl_config_os2.h
+	"SDL_platform.h"
+
+1326929406 h:\mes codes\c-library\sdl\include\sdl_config_minimal.h
+	"SDL_platform.h"
+	<stdarg.h>
+
+1326929406 h:\mes codes\c-library\sdl\include\begin_code.h
+
+1326929406 h:\mes codes\c-library\sdl\include\close_code.h
+
+1326929406 h:\mes codes\c-library\sdl\include\sdl_audio.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_endian.h"
+	"SDL_mutex.h"
+	"SDL_thread.h"
+	"SDL_rwops.h"
+	"begin_code.h"
+	"close_code.h"
+
+1326929406 h:\mes codes\c-library\sdl\include\sdl_error.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1326929406 h:\mes codes\c-library\sdl\include\sdl_endian.h
+	"SDL_stdinc.h"
+	<endian.h>
+	"begin_code.h"
+	"close_code.h"
+
+1326929406 h:\mes codes\c-library\sdl\include\sdl_mutex.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1326929406 h:\mes codes\c-library\sdl\include\sdl_thread.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_mutex.h"
+	"begin_code.h"
+	<process.h>
+	"close_code.h"
+
+1326929406 h:\mes codes\c-library\sdl\include\sdl_rwops.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1326929406 h:\mes codes\c-library\sdl\include\sdl_cdrom.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1326929406 h:\mes codes\c-library\sdl\include\sdl_cpuinfo.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1326929406 h:\mes codes\c-library\sdl\include\sdl_events.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_active.h"
+	"SDL_keyboard.h"
+	"SDL_mouse.h"
+	"SDL_joystick.h"
+	"SDL_quit.h"
+	"begin_code.h"
+	"close_code.h"
+
+1326929406 h:\mes codes\c-library\sdl\include\sdl_active.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1326929406 h:\mes codes\c-library\sdl\include\sdl_keyboard.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_keysym.h"
+	"begin_code.h"
+	"close_code.h"
+
+1326929406 h:\mes codes\c-library\sdl\include\sdl_keysym.h
+
+1326929406 h:\mes codes\c-library\sdl\include\sdl_mouse.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1326929406 h:\mes codes\c-library\sdl\include\sdl_video.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_rwops.h"
+	"begin_code.h"
+	"close_code.h"
+
+1326929406 h:\mes codes\c-library\sdl\include\sdl_joystick.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1326929406 h:\mes codes\c-library\sdl\include\sdl_quit.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+
+1326929406 h:\mes codes\c-library\sdl\include\sdl_loadso.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1326929406 h:\mes codes\c-library\sdl\include\sdl_timer.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1326929406 h:\mes codes\c-library\sdl\include\sdl_version.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1456524453 h:\mes codes\gif_1_lib\sdl_gif.h
+	<stdio.h>
+	<stdlib.h>
+	<stdint.h>
+	<string.h>
+	<SDL.h>
+	"SDL_gifRwtypes.h"
+	"SDL_gifDecomp.h"
+	"SDL_gifToSurface.h"
+
+1457803615 source:h:\mes codes\libsdl_gif\sdl2\gif_func_rw2.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<errno.h>
+	"SDL.h"
+	"SDL2_gif.h"
+	"SDL2_gifrwtypes.h"
+	"SDL2_gifDecomp.h"
+	"SDL2_gifToSurface.h"
+
+1451764694 h:\mes codes\c-library\sdl2\include\sdl.h
+	"SDL_main.h"
+	"SDL_stdinc.h"
+	"SDL_assert.h"
+	"SDL_atomic.h"
+	"SDL_audio.h"
+	"SDL_clipboard.h"
+	"SDL_cpuinfo.h"
+	"SDL_endian.h"
+	"SDL_error.h"
+	"SDL_events.h"
+	"SDL_filesystem.h"
+	"SDL_joystick.h"
+	"SDL_gamecontroller.h"
+	"SDL_haptic.h"
+	"SDL_hints.h"
+	"SDL_loadso.h"
+	"SDL_log.h"
+	"SDL_messagebox.h"
+	"SDL_mutex.h"
+	"SDL_power.h"
+	"SDL_render.h"
+	"SDL_rwops.h"
+	"SDL_system.h"
+	"SDL_thread.h"
+	"SDL_timer.h"
+	"SDL_version.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1451764694 h:\mes codes\c-library\sdl2\include\sdl_main.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1451764694 h:\mes codes\c-library\sdl2\include\sdl_stdinc.h
+	"SDL_config.h"
+	<sys/types.h>
+	<stdio.h>
+	<stdlib.h>
+	<stddef.h>
+	<stdarg.h>
+	<stdlib.h>
+	<malloc.h>
+	<stddef.h>
+	<stdarg.h>
+	<memory.h>
+	<string.h>
+	<strings.h>
+	<inttypes.h>
+	<stdint.h>
+	<ctype.h>
+	<math.h>
+	<float.h>
+	<iconv.h>
+	<sal.h>
+	"begin_code.h"
+	<alloca.h>
+	<malloc.h>
+	<malloc.h>
+	<malloc.h>
+	<stdlib.h>
+	"close_code.h"
+
+1451764694 h:\mes codes\c-library\sdl2\include\sdl_config.h
+	"SDL_platform.h"
+
+1451764694 h:\mes codes\c-library\sdl2\include\sdl_platform.h
+	"AvailabilityMacros.h"
+	"TargetConditionals.h"
+	<winapifamily.h>
+	"begin_code.h"
+	"close_code.h"
+
+1451764694 h:\mes codes\c-library\sdl2\include\begin_code.h
+
+1451764694 h:\mes codes\c-library\sdl2\include\close_code.h
+
+1451764694 h:\mes codes\c-library\sdl2\include\sdl_assert.h
+	"SDL_config.h"
+	"begin_code.h"
+	<signal.h>
+	"close_code.h"
+
+1451764694 h:\mes codes\c-library\sdl2\include\sdl_atomic.h
+	"SDL_stdinc.h"
+	"SDL_platform.h"
+	"begin_code.h"
+	<mbarrier.h>
+	"close_code.h"
+
+1451764694 h:\mes codes\c-library\sdl2\include\sdl_audio.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_endian.h"
+	"SDL_mutex.h"
+	"SDL_thread.h"
+	"SDL_rwops.h"
+	"begin_code.h"
+	"close_code.h"
+
+1451764694 h:\mes codes\c-library\sdl2\include\sdl_error.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1451764694 h:\mes codes\c-library\sdl2\include\sdl_endian.h
+	"SDL_stdinc.h"
+	<endian.h>
+	"begin_code.h"
+	"close_code.h"
+
+1451764694 h:\mes codes\c-library\sdl2\include\sdl_mutex.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1451764694 h:\mes codes\c-library\sdl2\include\sdl_thread.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_atomic.h"
+	"SDL_mutex.h"
+	"begin_code.h"
+	<process.h>
+	"close_code.h"
+
+1451764694 h:\mes codes\c-library\sdl2\include\sdl_rwops.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1451764694 h:\mes codes\c-library\sdl2\include\sdl_clipboard.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1451764694 h:\mes codes\c-library\sdl2\include\sdl_cpuinfo.h
+	"SDL_stdinc.h"
+	<intrin.h>
+	<intrin.h>
+	<altivec.h>
+	<mmintrin.h>
+	<mm3dnow.h>
+	<xmmintrin.h>
+	<emmintrin.h>
+	"begin_code.h"
+	"close_code.h"
+
+1451764694 h:\mes codes\c-library\sdl2\include\sdl_events.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_video.h"
+	"SDL_keyboard.h"
+	"SDL_mouse.h"
+	"SDL_joystick.h"
+	"SDL_gamecontroller.h"
+	"SDL_quit.h"
+	"SDL_gesture.h"
+	"SDL_touch.h"
+	"begin_code.h"
+	"close_code.h"
+
+1451764694 h:\mes codes\c-library\sdl2\include\sdl_video.h
+	"SDL_stdinc.h"
+	"SDL_pixels.h"
+	"SDL_rect.h"
+	"SDL_surface.h"
+	"begin_code.h"
+	"close_code.h"
+
+1451764694 h:\mes codes\c-library\sdl2\include\sdl_pixels.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1451764694 h:\mes codes\c-library\sdl2\include\sdl_rect.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_pixels.h"
+	"SDL_rwops.h"
+	"begin_code.h"
+	"close_code.h"
+
+1451764694 h:\mes codes\c-library\sdl2\include\sdl_surface.h
+	"SDL_stdinc.h"
+	"SDL_pixels.h"
+	"SDL_rect.h"
+	"SDL_blendmode.h"
+	"SDL_rwops.h"
+	"begin_code.h"
+	"close_code.h"
+
+1451764694 h:\mes codes\c-library\sdl2\include\sdl_blendmode.h
+	"begin_code.h"
+	"close_code.h"
+
+1451764694 h:\mes codes\c-library\sdl2\include\sdl_keyboard.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_keycode.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1451764694 h:\mes codes\c-library\sdl2\include\sdl_keycode.h
+	"SDL_stdinc.h"
+	"SDL_scancode.h"
+
+1451764694 h:\mes codes\c-library\sdl2\include\sdl_scancode.h
+	"SDL_stdinc.h"
+
+1451764694 h:\mes codes\c-library\sdl2\include\sdl_mouse.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1451764694 h:\mes codes\c-library\sdl2\include\sdl_joystick.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1451764694 h:\mes codes\c-library\sdl2\include\sdl_gamecontroller.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_rwops.h"
+	"SDL_joystick.h"
+	"begin_code.h"
+	"close_code.h"
+
+1451764694 h:\mes codes\c-library\sdl2\include\sdl_quit.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+
+1451764694 h:\mes codes\c-library\sdl2\include\sdl_gesture.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_video.h"
+	"SDL_touch.h"
+	"begin_code.h"
+	"close_code.h"
+
+1451764694 h:\mes codes\c-library\sdl2\include\sdl_touch.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1451764694 h:\mes codes\c-library\sdl2\include\sdl_filesystem.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1451764694 h:\mes codes\c-library\sdl2\include\sdl_haptic.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_joystick.h"
+	"begin_code.h"
+	"close_code.h"
+
+1451764694 h:\mes codes\c-library\sdl2\include\sdl_hints.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1451764694 h:\mes codes\c-library\sdl2\include\sdl_loadso.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1451764694 h:\mes codes\c-library\sdl2\include\sdl_log.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1451764694 h:\mes codes\c-library\sdl2\include\sdl_messagebox.h
+	"SDL_stdinc.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1451764694 h:\mes codes\c-library\sdl2\include\sdl_power.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1451764694 h:\mes codes\c-library\sdl2\include\sdl_render.h
+	"SDL_stdinc.h"
+	"SDL_rect.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1451764694 h:\mes codes\c-library\sdl2\include\sdl_system.h
+	"SDL_stdinc.h"
+	"SDL_keyboard.h"
+	"SDL_render.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1451764694 h:\mes codes\c-library\sdl2\include\sdl_timer.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1451764694 h:\mes codes\c-library\sdl2\include\sdl_version.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1457802765 h:\mes codes\libsdl_gif\sdl2\sdl2_gif.h
+	<SDL/SDL.h>
+	"SDL2_gifToSurface.h"
+
+1457803878 h:\mes codes\libsdl_gif\sdl2\sdl2_giftosurface.h
+	<SDL.h>
+	"SDL2_gifDecomp.h"
+
+1457803689 h:\mes codes\libsdl_gif\sdl2\sdl2_gifdecomp.h
+	<SDL.h>
+
+1457803813 h:\mes codes\libsdl_gif\sdl2\sdl2_gifrwtypes.h
+	<stdio.h>
+	<stdint.h>
+	<SDL/SDL.h>
+
