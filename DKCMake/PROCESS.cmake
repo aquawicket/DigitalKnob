@@ -570,22 +570,31 @@ if(WIN_64)
 	DKCOPY(${DKPROJECT}/Backup/ ${DKPROJECT}/assets/ TRUE)
 	DKREMOVE(${DKPROJECT}/Backup)
 	
-	list(APPEND WIN_LIBS 
-		kernel32.lib
-		user32.lib
-		gdi32.lib
-		winspool.lib
-		shell32.lib
-		ole32.lib
-		oleaut32.lib
-		uuid.lib
-		comdlg32.lib
-		advapi32.lib
-		odbc32.lib
-		odbccp32.lib
-		opengl32.lib
-		DbgHelp.lib
-	)
+	#list(APPEND WIN_LIBS 
+	#	kernel32.lib
+	#	user32.lib
+	#	gdi32.lib
+	#	winspool.lib
+	#	shell32.lib
+	#	ole32.lib
+	#	oleaut32.lib
+	#	uuid.lib
+	#	comdlg32.lib
+	#	advapi32.lib
+	#	odbc32.lib
+	#	odbccp32.lib
+	#	opengl32.lib
+	#	DbgHelp.lib
+	#)
+	
+	## Create Icon files for project
+	if(${IMAGEMAGICK_ROOT})
+		message("Building icons for ${APP_NAME} . . .")
+		DKSET(IMAGEMAGICK_CONVERT ${IMAGEMAGICK_ROOT}/convert.exe)
+		file(MAKE_DIRECTORY ${DKPROJECT}/icons/windows)
+		DKEXECUTE_PROCESS(COMMAND ${IMAGEMAGICK_CONVERT} ${DKPROJECT}/icons/icon.png -define icon:auto-resize=256,128,64,48,32,16 ${DKPROJECT}/icons/windows/icon.ico)
+		DKEXECUTE_PROCESS(COMMAND ${IMAGEMAGICK_CONVERT} ${DKPROJECT}/icons/icon.png -define icon:auto-resize=16 ${DKPROJECT}/assets/favicon.ico)
+	endif()
 	
 	add_executable(${APP_NAME}_64 WIN32 ${App_SRC})
 	target_link_libraries(${APP_NAME}_64 ${DEBUG_LIBS} ${RELEASE_LIBS} ${WIN_LIBS})
@@ -609,12 +618,6 @@ if(WIN_64)
 	string(REPLACE ";" " " RELEASE_FLAGS "${RELEASE_LINK_FLAGS}")
 	
 	set_target_properties(${APP_NAME}_64 PROPERTIES LINK_FLAGS_DEBUG ${DEBUG_FLAGS} LINK_FLAGS_RELEASE ${RELEASE_FLAGS})
-	
-	message("Building icons for ${APP_NAME} . . .")
-	DKSET(IMAGEMAGICK_CONVERT ${IMAGEMAGICK_ROOT}/convert.exe)
-	file(MAKE_DIRECTORY ${DKPROJECT}/icons/windows)
-	DKEXECUTE_PROCESS(${IMAGEMAGICK_CONVERT} ${DKPROJECT}/icons/icon.png -define icon:auto-resize=256,128,64,48,32,16 ${DKPROJECT}/icons/windows/icon.ico)
-	DKEXECUTE_PROCESS(${IMAGEMAGICK_CONVERT} ${DKPROJECT}/icons/icon.png -define icon:auto-resize=16 ${DKPROJECT}/assets/favicon.ico)
 endif(WIN_64)
 
 #######
