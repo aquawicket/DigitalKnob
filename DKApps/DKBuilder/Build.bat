@@ -1,4 +1,4 @@
-:: first remove the CMake casche file
+:: first remove the CMake cache file
 DEL "C:\Users\%USERNAME%\digitalknob\DK\DKApps\DKBuilder\win32\CMakeCache.txt"
 
 C:\PROGRA~2\CMake\bin\cmake.exe -G "Visual Studio 16 2019" -A Win32 -DDEBUG=ON -DRELEASE=ON -DREBUILDALL=ON -DSTATIC=ON -S C:\Users\%USERNAME%\digitalknob\DK -B C:\Users\%USERNAME%\digitalknob\DK\DKApps\DKBuilder\win32
