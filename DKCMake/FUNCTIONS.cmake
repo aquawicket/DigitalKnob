@@ -2077,10 +2077,9 @@ endfunction()
 ## Add a library or plugin to the dependency list
 ######################
 function(DKDEPEND arg)
-	message("dkdepend_disable_list = ${dkdepend_disable_list}")
 	list(FIND dkdepend_disable_list ${arg} _index)
 	if(${_index} GREATER -1)
-		message("${arg} is DISABLED")
+		message("${arg} IS DISABLED")
 		return()
 	endif()
 		
@@ -2112,6 +2111,9 @@ endfunction()
 
 ## Remove a library or plugin from the dependency list
 function(DISABLE_DKDEPEND arg)
+	if(NOT ${CMAKE_CURRENT_LIST_DIR} STREQUAL "C:/Users/aquawicket/digitalknob/DK/DKApps/DKTestAll")
+		message(FATAL_ERROR "\n\n!!!! WARNING !!!!\nDISABLE_DKDEPEND() Can only be used from the project DKMAKE.cmake file. This is to avoid the need to alter cmake files just to disable them.\n\n\n")
+	endif()
 	message("DISABLING ${arg}")
 	DKSET(dkdepend_disable_list ${dkdepend_disable_list} ${arg})
 endfunction()
@@ -2190,7 +2192,7 @@ function(DKRUNDEPENDS arg)
 			set(ModifiedContents "${ModifiedContents}${line}\n")
 		endif()
 		
-		string(FIND "${line}" "DKDEPEND_DISABLE(" _indexa)
+		string(FIND "${line}" "DISABLE_DKDEPEND(" _indexa)
 		if(${_indexa} GREATER -1)
 			set(ModifiedContents "${ModifiedContents}${line}\n")
 		endif()
