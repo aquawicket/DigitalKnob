@@ -998,7 +998,7 @@ bool DKFile::StringToFile(const DKString& string, const DKString& file)
 	std::ofstream t(file.c_str());
 	t << string;
 	t.close();
-	DKINFO("Saved file "+file+"\n");
+	//DKINFO("Saved file "+file+"\n");
 	return true;
 }
 
