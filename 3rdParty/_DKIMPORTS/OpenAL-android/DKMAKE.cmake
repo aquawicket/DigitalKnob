@@ -1,6 +1,7 @@
-IF(NOT ANDROID)
-	RETURN()
-ENDIF()
+if(NOT ANDROID) 
+message("OpenAL-android is only for android devices") 
+return() 
+endif()
 
 
 ### INSTALL ###

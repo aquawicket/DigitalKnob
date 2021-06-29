@@ -1,4 +1,4 @@
-CPP_DK_setConsolePosition(0, 0, (screen.width/2)-200, screen.height-35);
+CPP_DK_setConsolePosition(0, 0, (screen.width/2)-100, screen.height-40);
 
 CPP_DK_Create("DKTray");
 //CPP_DKTray_Init();

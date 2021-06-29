@@ -105,9 +105,9 @@ bool DKWindows::CreateConsoleHandler(){
 	RECT desktop;
 	const HWND hDesktop = GetDesktopWindow();
 	GetWindowRect(hDesktop, &desktop);
-	LONG horizontal = desktop.right;
-	LONG vertical = desktop.bottom - 35;
-	MoveWindow(DKWindows::consoleWindow, 0, 0, horizontal, vertical, TRUE);
+	LONG width = desktop.right / 2 - 100;
+	LONG height = desktop.bottom - 40;
+	MoveWindow(DKWindows::consoleWindow, 0, 0, width, height, TRUE);
 	return true;
 }
 
