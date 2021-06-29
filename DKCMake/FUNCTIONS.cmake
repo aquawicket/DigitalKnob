@@ -203,14 +203,25 @@ function(DKENABLE arg)
 	DKDEFINE(USE_${arg})
 endfunction()
 
+function(DKDISABLE arg)
+	DKUNSET(${arg})
+	DKUNDEFINE(USE_${arg})
+endfunction()
+
+
 ######################
 function(DKDEFINE arg)
 	list(FIND DKDEFINES_LIST "${arg}" index)
 	if(${index} GREATER -1)
-		return() ## If the define is already in the list, return.
+		return() ## already in the list, return.
 	endif()
 	DKSET(DKDEFINES_LIST ${DKDEFINES_LIST} ${arg})
 	add_definitions(-D${arg})
+endfunction()
+
+function(DKUNDEFINE arg)
+	list(REMOVE_ITEM DKDEFINES_LIST ${arg})
+	remove_definitions(-D${arg})
 endfunction()
 
 #######################
@@ -2063,59 +2074,65 @@ function(DKSETPATHTOPLUGIN arg)
 endfunction()
 
 
-### This is the current way to build the dependency list 
-### After the list is orginized, the DKMAKE.cmake files will be run in order.
-### This first method, finds the DKMAKE.cmake file and searches for DKDEPEND() comands.
-### This loop will orginize them from top to bottom, then they will be run.
-### This is more of a brute-force method, but it also ensures too many libraries will be included
-### (LARGER EXECUTABLE FILE)
-
-### The second method.
-### "Strip everything from the file but DKDEPEND() commands."
-### "As well as, if(), else(), endif(), return() and any other needed commands"
-### "When the file is striped down to only those lines, the file can be run normaly without fear of other commands."
-### "This give's us more control over the DKDEPEND()'s inside if() commands"
-### This is the relaxed method and should only add the libraries neccesary
-### (smaller executable file)
-###
-### This also means that any library with more than one sub library must be given wrapping if() commands
-### It's up to the DKMAKE.cmake file to decide how to handle this. 
-### Say for instance you only want OSG's gif plugin..  
-###    DKDEPEND(OpenScenGraph osgdb_gif)  "The osgdb_gif library should be wrapped in an if(osgdb_gif)
-### And also I.E, a DKDEPEND(giflib-5.1.1) command should be contained in that if(osgdb_gif) command.
-### This is so they don't get called unless that variable is set. This is the whole purpose of method 2.
-
+## Add a library or plugin to the dependency list
 ######################
 function(DKDEPEND arg)
-	#message("DKDEPEND(${arg})")
-	## If DKDEPEND had second variable, set that variable to ON
+	message("dkdepend_disable_list = ${dkdepend_disable_list}")
+	list(FIND dkdepend_disable_list ${arg} _index)
+	if(${_index} GREATER -1)
+		message("${arg} is DISABLED")
+		return()
+	endif()
+		
+	## If DKDEPEND had second variable (a sub library), set that variable to ON
 	set(extra_args ${ARGN})
 	list(LENGTH extra_args num_extra_args)
 	if(${num_extra_args} GREATER 0)
 		list(GET extra_args 0 arg2)
-		#DKENABLE(${arg2})
+		
 		## If the library is already in the list, return.
-		list(FIND DKPLUGS "${arg} ${args}" _index)
+		list(FIND dkdepend_list "${arg} ${args}" _index)
 		if(${_index} GREATER -1)
 			return()
 		endif()
-		DKRUNDEPENDS(${arg} ${arg2}) ##strip everything out of the file except if() else() endif() and DKDEPEND() and include it
-		#DKBRUTEDEPENDS(${arg} ${arg2}) ##USE Brute force to search the files for DKDEPENDS() commands  -ignores if(), else().. and all commands
+		
+		DKRUNDEPENDS(${arg} ${arg2})    ##strip everything from the file except if() else() elseif() endif() and DKDEPEND() before sorting.
+		#DKBRUTEDEPENDS(${arg} ${arg2}) ##read ALL DKDEPENDS() commands from the file list.  -ignores if(), else().. and all found depends will be included.
 	else()
 		## If the library is already in the list, return.
-		list(FIND DKPLUGS "${arg}" _index)
+		list(FIND dkdepend_list "${arg}" _index)
 		if(${_index} GREATER -1)
 			return()
 		endif()
-		DKRUNDEPENDS(${arg}) ##strip everything out of the file except if() else() endif() and DKDEPEND() and include it
-		#DKBRUTEDEPENDS(${arg}) ##USE Brute force to search the files for DKDEPENDS() commands  -ignores if(), else().. and all commands
+		
+		DKRUNDEPENDS(${arg})  ##strip everything from the file except if() else() elseif() endif() and DKDEPEND() before sorting.
+		#DKBRUTEDEPENDS(${arg}) ##read ALL DKDEPENDS() commands from the file list.  -ignores if(), else().. and all found depends will be included.
 	endif()
 endfunction()
 
+## Remove a library or plugin from the dependency list
+function(DISABLE_DKDEPEND arg)
+	message("DISABLING ${arg}")
+	DKSET(dkdepend_disable_list ${dkdepend_disable_list} ${arg})
+endfunction()
 
-## This function would like to remove everthing but,
-## DKDEPEND() if() else() and endif() commands from the DKMAKE.cmake file
-## This is to help in sorting the plugins by dependency
+
+### NOTE:
+### There are currently 2 methods of sorting dependencies throughout the DKMAKE.cmake files.
+
+### 
+### This first method, scans through the DKMAKE.cmake files and searches for DKDEPEND() commands.
+### This loop will sort them from top to bottom, then they will be run.
+### This is more of a brute-force method, all if(), else(), elif(), commands will be ignored and 
+### all instances of DKDEPEND('lib') will be added to the list. 
+
+### The second method will strip everything from the file except DKDEPEND('lib') commands AND conditionals.
+### Conditionals such as if(), else(), elseif(), endif(), return() conditionals will be processed during the sort process. 
+### WARNING: BE CAREFULL WRITING NEW VARIABLES TO USE WITH CONDITIONALS, AS THEY WILL BE IGNORED
+### DO NOT CREATE NEW VARIABLES WITHIN THE DKMAKE.cmake FILES TO DETERMINE THE true/false of a conditional.  
+
+
+## Sort dependencies by: Strip everything from the file except if() else() elseif() endif() and DKDEPEND() before sorting.
 ##########################
 function(DKRUNDEPENDS arg)
 	DKSETPATHTOPLUGIN(${arg})
@@ -2137,17 +2154,8 @@ function(DKRUNDEPENDS arg)
 			set(ModifiedContents "${ModifiedContents}${line}\n")
 		endif()
 		
-		## covered by if(
-		##string(FIND "${line}" "elseif(" _indexa)
-		##if(${_indexa} GREATER -1)
-		##	set(ModifiedContents "${ModifiedContents}${line}\n")
-		##endif()
-
-		## covered by IF(
-		##string(FIND "${line}" "ELSEIF(" _indexa)
-		##if(${_indexa} GREATER -1)
-		##	set(ModifiedContents "${ModifiedContents}${line}\n")
-		##endif()
+		## elseif(
+		##NOTE: The 'if(' search commands take care of elseif() and endif() since 'if' is already in those words 
 		
 		string(FIND "${line}" "else(" _indexa)
 		if(${_indexa} GREATER -1)
@@ -2159,17 +2167,8 @@ function(DKRUNDEPENDS arg)
 			set(ModifiedContents "${ModifiedContents}${line}\n")
 		endif()
 		
-		## covered by if(
-		##string(FIND "${line}" "endif(" _indexa)
-		##if(${_indexa} GREATER -1)
-		##	set(ModifiedContents "${ModifiedContents}${line}\n")
-		##endif()
-		
-		## covered by IF(
-		##string(FIND "${line}" "ENDIF(" _indexa)
-		##if(${_indexa} GREATER -1)
-		##	set(ModifiedContents "${ModifiedContents}${line}\n")
-		##endif()
+		## endif(
+		##NOTE: The 'if(' search commands take care of elseif() and endif() since 'if' is already in those words 
 		
 		string(FIND "${line}" "return(" _indexa)
 		if(${_indexa} GREATER -1)
@@ -2187,6 +2186,11 @@ function(DKRUNDEPENDS arg)
 		endif()	
 		
 		string(FIND "${line}" "DKDEPEND(" _indexa)
+		if(${_indexa} GREATER -1)
+			set(ModifiedContents "${ModifiedContents}${line}\n")
+		endif()
+		
+		string(FIND "${line}" "DKDEPEND_DISABLE(" _indexa)
 		if(${_indexa} GREATER -1)
 			set(ModifiedContents "${ModifiedContents}${line}\n")
 		endif()
@@ -2210,20 +2214,20 @@ function(DKRUNDEPENDS arg)
 		DKREMOVE(${PATHTOPLUGIN}/DEPENDS.TMP)
 	endif()
 	
-	list(FIND DKPLUGS "${arg} ${args}" _index)
+	list(FIND dkdepend_list "${arg} ${args}" _index)
 	if(${_index} GREATER -1)
 		return()
 	endif()
 		
-	list(FIND DKPLUGS "${arg}" _index)
+	list(FIND dkdepend_list "${arg}" _index)
 	if(${_index} GREATER -1)
 		return() ## If the include is already in the list, return.
 	endif()
 	
 	if(${num_extra_args} GREATER 0)
-		DKSET(DKPLUGS ${DKPLUGS} "${arg} ${arg2}")  #Add to list
+		DKSET(dkdepend_list ${dkdepend_list} "${arg} ${arg2}")  #Add to list
 	else()
-		DKSET(DKPLUGS ${DKPLUGS} ${arg})  #Add to list
+		DKSET(dkdepend_list ${dkdepend_list} ${arg})  #Add to list
 	endif()	
 endfunction()
 
@@ -2272,20 +2276,20 @@ function(DKBRUTEDEPENDS arg)
 		list(GET extra_args 0 arg2)
 	endif()
 	
-	list(FIND DKPLUGS "${arg} ${args}" _index)
+	list(FIND dkdepend_list "${arg} ${args}" _index)
 	if(${_index} GREATER -1)
 		return()
 	endif()
 		
-	list(FIND DKPLUGS "${arg}" _index)
+	list(FIND dkdepend_list "${arg}" _index)
 	if(${_index} GREATER -1)
 		return() ## If the include is already in the list, return.
 	endif()
 	
 	if(${num_extra_args} GREATER 0)
-		DKSET(DKPLUGS ${DKPLUGS} "${arg} ${arg2}")  #Add to list
+		DKSET(dkdepend_list ${dkdepend_list} "${arg} ${arg2}")  #Add to list
 	else()
-		DKSET(DKPLUGS ${DKPLUGS} ${arg})  #Add to list
+		DKSET(dkdepend_list ${dkdepend_list} ${arg})  #Add to list
 	endif()
 endfunction()
 

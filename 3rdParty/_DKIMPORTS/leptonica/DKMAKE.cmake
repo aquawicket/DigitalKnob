@@ -1,7 +1,4 @@
 ## http://www.leptonica.org
-## FIXME - can't find zlib.h
-return()
-
 
 ### DEPENDS ###
 DKDEPEND(zlib)
