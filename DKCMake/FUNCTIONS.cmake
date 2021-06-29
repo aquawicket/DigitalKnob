@@ -2192,10 +2192,9 @@ function(DKRUNDEPENDS arg)
 			set(ModifiedContents "${ModifiedContents}${line}\n")
 		endif()
 		
-		string(FIND "${line}" "DISABLE_DKDEPEND(" _indexa)
-		if(${_indexa} GREATER -1)
-			set(ModifiedContents "${ModifiedContents}${line}\n")
-		endif()
+		## DISABLE_DKDEPEND(
+		##NOTE: The 'DKDEPEND(' search commands take care of 'DISABLE_DKDEPEND(' since 'DKDEPEND' is already in the word
+		
 	endforeach()
 
 	set(extra_args ${ARGN})
