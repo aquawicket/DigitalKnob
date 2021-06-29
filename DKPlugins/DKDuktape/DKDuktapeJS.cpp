@@ -52,6 +52,10 @@ bool DKDuktapeJS::Init()
 	DKDuktape::AttachFunction("CPP_DK_SendEvent", DKDuktapeJS::_SendEvent);
 	DKDuktape::AttachFunction("CPP_DK_Valid", DKDuktapeJS::_Valid);
 
+	// Desktop console window
+	DKDuktape::AttachFunction("CPP_DK_setConsolePosition", DKDuktapeJS::setConsolePosition);
+
+
 	DKDuktape::AttachFunction("CPP_DK_Beep", DKDuktapeJS::Beep);
 	DKDuktape::AttachFunction("CPP_DK_CallLoops", DKDuktapeJS::CallLoops);
 	DKDuktape::AttachFunction("CPP_DK_CallFunc", DKDuktapeJS::CallFunc);
@@ -1002,6 +1006,25 @@ int DKDuktapeJS::WaitForImage(duk_context* ctx){
 		return 0;
 	duk_push_true(ctx);
 	return 1;
+}
+
+
+//TODO: incorporate this into javascript Window object and Console object
+//Desktop Console
+int DKDuktapeJS::setConsolePosition(duk_context* ctx) {
+#ifdef WIN32
+	int x = duk_require_int(ctx, 0);
+	int y = duk_require_int(ctx, 1);
+	int w = duk_require_int(ctx, 2);
+	int h = duk_require_int(ctx, 3);
+	DKWindows::consoleWindow = GetConsoleWindow();
+	if (!MoveWindow(DKWindows::consoleWindow, x, y, w, h, TRUE)) {
+		DKERROR("setConsolePosition() failed");
+		return false;
+	};
+	return true;
+#endif
+	return false;
 }
 
 #endif //USE_DKDuktape

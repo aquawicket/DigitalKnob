@@ -104,6 +104,7 @@ public:
 	static int VirtualMemoryUsed(duk_context* ctx);
 	static int VirtualMemoryUsedByApp(duk_context* ctx);
 	static int WaitForImage(duk_context* ctx);
+	
 
 	//screen
 	static int availTop(duk_context* ctx);
@@ -119,6 +120,9 @@ public:
 	static int width(duk_context* ctx);
 	static int mozEnabled(duk_context* ctx);
 	static int mozBrightness(duk_context* ctx);
+	
+	//desktop console
+	static int setConsolePosition(duk_context* ctx);
 };
 
 

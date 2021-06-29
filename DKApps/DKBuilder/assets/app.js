@@ -1,3 +1,5 @@
+CPP_DK_setConsolePosition(0,0,500,500);
+
 CPP_DK_Create("DKTray");
 //CPP_DKTray_Init();
 CPP_DK_Create("DKBuild/DKBuildConsole.js");
