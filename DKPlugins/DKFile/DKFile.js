@@ -424,7 +424,8 @@ if (!DUKTAPE) {
     DKFile.prototype.stringToFile = function DKFile_stringToFile(str, path, flags, callback) {
         path = dk.file.validatepath(path);
         const result = CPP_DKFile_StringToFile(str, path);
-        return callback(result);
+        callback && callback(result);
+		return
     }
 }
 
