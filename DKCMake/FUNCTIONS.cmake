@@ -2111,7 +2111,7 @@ endfunction()
 
 ## Remove a library or plugin from the dependency list
 function(DISABLE_DKDEPEND arg)
-	if(NOT ${CMAKE_CURRENT_LIST_DIR} STREQUAL "C:/Users/aquawicket/digitalknob/DK/DKApps/DKTestAll")
+	if(NOT ${CMAKE_CURRENT_LIST_DIR} STREQUAL ${DKPROJECT})
 		message(FATAL_ERROR "\n\n!!!! WARNING !!!!\nDISABLE_DKDEPEND() Can only be used from the project DKMAKE.cmake file. This is to avoid the need to alter cmake files just to disable them.\n\n\n")
 	endif()
 	message("DISABLING ${arg}")
