@@ -2559,7 +2559,7 @@ endfunction()
 ## Add a library or plugin to the dependency list
 ######################
 function(DKDEPEND arg)
-	list(FIND dkdepend_disable_list ${arg} _index)
+	list(FIND dkdepend_disable_list "${arg}" _index)
 	if(${_index} GREATER -1)
 		message("${arg} IS DISABLED")
 		return()
