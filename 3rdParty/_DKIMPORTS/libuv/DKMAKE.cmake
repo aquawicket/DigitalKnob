@@ -15,15 +15,15 @@ LIST(APPEND WIN_LIBS Userenv.lib)
 DKINCLUDE(${UV}/include)
 DKINCLUDE(${UV}/${OS})
 WIN_DEBUG_LIB(${UV}/${OS}/Debug/uv_a.lib)
-WIN_RELEASE_LIB(${UV}/${OS}/Release/uv_a.lib)
+WIN_RELEASE_LIB(${UV}/${OS}/${RELEASE}/uv_a.lib)
 MAC_DEBUG_LIB(${UV}/${OS}/lib/${DEBUG}/uv_a.a)
 MAC_RELEASE_LIB(${UV}/${OS}/lib/${RELEASE}/uv_a.a)
 IOSSIM_DEBUG_LIB(${UV}/${OS}/${DEBUG}/lib/.libs/uv_a.a)
 IOSSIM_RELEASE_LIB(${UV}/${OS}/${RELEASE}/lib/.libs/uv_a.a)
 ## LINUX_DEBUG_LIB(${UV}/${OS}/Debug/uv_a.a)
-## LINUX_RELEASE_LIB(${UV}/${OS}/Release/uv_a.a)
+## LINUX_RELEASE_LIB(${UV}/${OS}/${RELEASE}/uv_a.a)
 ## ANDROID_DEBUG_LIB(${UV}/${OS}/Debug/obj/local/armeabi-v7a/uv_a.a)
-## ANDROID_RELEASE_LIB(${UV}/${OS}/Release/obj/local/armeabi-v7a/uv_a.a)
+## ANDROID_RELEASE_LIB(${UV}/${OS}/${RELEASE}/obj/local/armeabi-v7a/uv_a.a)
 
 
 ### COMPILE ###

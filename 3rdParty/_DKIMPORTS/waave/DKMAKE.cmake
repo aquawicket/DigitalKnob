@@ -17,13 +17,13 @@ DKSET(WAAVE ${3RDPARTY}/${WAAVE_VERSION})
 ### LINK ###
 DKINCLUDE(${WAAVE}/src)
 WIN_DEBUG_LIB(${WAAVE}/${OS}/Debug/waave.lib)
-WIN_RELEASE_LIB(${WAAVE}/${OS}/Release/waave.lib)
+WIN_RELEASE_LIB(${WAAVE}/${OS}/${RELEASE}/waave.lib)
 APPLE_DEBUG_LIB(${WAAVE}/${OS}/${DEBUG}/libwaave.a)
 APPLE_RELEASE_LIB(${WAAVE}/${OS}/${RELEASE}/libwaave.a)
 LINUX_DEBUG_LIB(${WAAVE}/${OS}/Debug/libwaave.a)
-LINUX_RELEASE_LIB(${WAAVE}/${OS}/Release/libwaave.a)
+LINUX_RELEASE_LIB(${WAAVE}/${OS}/${RELEASE}/libwaave.a)
 ANDROID_DEBUG_LIB(${WAAVE}/${OS}/Debug/obj/local/armeabi-v7a/libwaave.a)
-ANDROID_RELEASE_LIB(${WAAVE}/${OS}/Release/obj/local/armeabi-v7a/libwaave.a)
+ANDROID_RELEASE_LIB(${WAAVE}/${OS}/${RELEASE}/obj/local/armeabi-v7a/libwaave.a)
 
 
 ### COMPILE ###
@@ -56,7 +56,7 @@ DKSETPATH(${WAAVE}/${OS}/Debug)
 LINUX_DEBUG_COMMAND(${CMAKE_COMMAND} -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=DEBUG ${WAAVE})
 LINUX_DEBUG_COMMAND(make waave)
 
-DKSETPATH(${WAAVE}/${OS}/Release)
+DKSETPATH(${WAAVE}/${OS}/${RELEASE})
 LINUX_RELEASE_COMMAND(${CMAKE_COMMAND} -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=RELEASE ${WAAVE})
 LINUX_RELEASE_COMMAND(make waave)
 

@@ -20,11 +20,11 @@ DKDEFINE(CEF_ATL)
 
 LINUX_INCLUDE(${CEF})
 LINUX_DEBUG_LIB(${CEF}/Debug/libcef.so)
-LINUX_RELEASE_LIB(${CEF}/Release/libcef.so)
+LINUX_RELEASE_LIB(${CEF}/${RELEASE}/libcef.so)
 LINUX_DEBUG_LIB(${CEF}/${OS}/Debug/libcef_dll_wrapper/libcef_dll_wrapper.a)
-LINUX_RELEASE_LIB(${CEF}/${OS}/Release/libcef_dll_wrapper/libcef_dll_wrapper.a)
+LINUX_RELEASE_LIB(${CEF}/${OS}/${RELEASE}/libcef_dll_wrapper/libcef_dll_wrapper.a)
 ## LINUX_DEBUG_LIB(${CEF}/Debug/cef_sandbox.a)
-## LINUX_RELEASE_LIB(${CEF}/Release/cef_sandbox.a)
+## LINUX_RELEASE_LIB(${CEF}/${RELEASE}/cef_sandbox.a)
 
 
 ### COMPILE ###
@@ -32,6 +32,6 @@ DKSETPATH(${CEF}/${OS}/Debug)
 LINUX_DEBUG_COMMAND(${CMAKE_COMMAND} -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Debug -DCMAKE_C_FLAGS=-fPIC ${CEF})
 LINUX_DEBUG_COMMAND(make libcef_dll_wrapper)
 
-DKSETPATH(${CEF}/${OS}/Release)
+DKSETPATH(${CEF}/${OS}/${RELEASE})
 LINUX_RELEASE_COMMAND(${CMAKE_COMMAND} -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_FLAGS=-fPIC ${CEF})
 LINUX_RELEASE_COMMAND(make libcef_dll_wrapper)

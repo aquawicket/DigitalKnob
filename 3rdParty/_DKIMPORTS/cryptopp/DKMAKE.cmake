@@ -10,7 +10,7 @@ DKSET(CRYPTO ${3RDPARTY}/cryptopp${CRYTO_VERSION})
 
 ### LINK ###
 WIN_DEBUG_LIB(${CRYPTO}/${OS}/Debug/cryptopp-static.lib)
-WIN_RELEASE_LIB(${CRYPTO}/${OS}/Release/cryptopp-static.lib)
+WIN_RELEASE_LIB(${CRYPTO}/${OS}/${RELEASE}/cryptopp-static.lib)
 
 
 

@@ -16,15 +16,15 @@ DKINSTALL(https://github.com/arvidn/libtorrent/releases/download/libtorrent-1_1_
 ### LINK ###
 DKINCLUDE(${TORRENT}/include)
 WIN_DEBUG_LIB(${TORRENT}/${OS}/Debug/torrent-rasterbar.lib)
-WIN_RELEASE_LIB(${TORRENT}/${OS}/Release/torrent-rasterbar.lib)
+WIN_RELEASE_LIB(${TORRENT}/${OS}/${RELEASE}/torrent-rasterbar.lib)
 MAC_DEBUG_LIB(${TORRENT}/${OS}/lib/${DEBUG}/libtorrent-rasterbar.a)
 MAC_RELEASE_LIB(${TORRENT}/${OS}/lib/${RELEASE}/libtorrent-rasterbar.a)
 IOSSIM_DEBUG_LIB(${TORRENT}/${OS}/${DEBUG}/lib/.libs/libtorrent-rasterbar.a)
 IOSSIM_RELEASE_LIB(${TORRENT}/${OS}/${RELEASE}/lib/.libs/libtorrent-rasterbar.a)
 LINUX_DEBUG_LIB(${TORRENT}/${OS}/Debug/libtorrent-rasterbar.a)
-LINUX_RELEASE_LIB(${TORRENT}/${OS}/Release/libtorrent-rasterbar.a)
+LINUX_RELEASE_LIB(${TORRENT}/${OS}/${RELEASE}/libtorrent-rasterbar.a)
 ANDROID_DEBUG_LIB(${TORRENT}/${OS}/Debug/obj/local/armeabi-v7a/libtorrent-rasterbar.a)
-ANDROID_RELEASE_LIB(${TORRENT}/${OS}/Release/obj/local/armeabi-v7a/libtorrent-rasterbar.a)
+ANDROID_RELEASE_LIB(${TORRENT}/${OS}/${RELEASE}/obj/local/armeabi-v7a/libtorrent-rasterbar.a)
 
 
 ### COMPILE ###

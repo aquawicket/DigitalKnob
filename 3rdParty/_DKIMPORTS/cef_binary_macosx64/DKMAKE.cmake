@@ -17,11 +17,11 @@ DKDEFINE(CEF_ATL)
 
 MAC_INCLUDE(${CEF})
 MAC_DEBUG_LIB("${CEF}/Debug/Chromium Embedded Framework.framework")
-MAC_RELEASE_LIB("${CEF}/Release/Chromium Embedded Framework.framework")
+MAC_RELEASE_LIB("${CEF}/${RELEASE}/Chromium Embedded Framework.framework")
 MAC_DEBUG_LIB(${CEF}/${OS}/libcef_dll_wrapper/${DEBUG}/libcef_dll_wrapper.a)
 MAC_RELEASE_LIB(${CEF}/${OS}/libcef_dll_wrapper/${RELEASE}/libcef_dll_wrapper.a)
 ## MAC_DEBUG_LIB(${CEF}/Debug/cef_sandbox.a)
-## MAC_RELEASE_LIB(${CEF}/Release/cef_sandbox.a)
+## MAC_RELEASE_LIB(${CEF}/${RELEASE}/cef_sandbox.a)
 
 
 ### COMPILE ###
