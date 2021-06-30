@@ -112,11 +112,11 @@ foreach(plugin ${dkdepend_list})
 	message("***************************************\n")
 	
 	## Skip and disabled plugins
-	list(FIND ${dkdepend_disable_list} ${plugin} _indexd)
-	#if(${_indexd} GREATER -1)
+	list(FIND ${dkdepend_disable_list} ${plugin} _it)
+	if(${_it} GREATER -1)
 	#	message("${plugin} IS DISABLED")
 	#	return()
-	#endif()
+	endif()
 	
 	#################### 3rdParty libs #####################
 	##Strip any sublibrary named in the plugin
