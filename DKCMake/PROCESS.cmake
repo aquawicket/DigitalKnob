@@ -109,8 +109,15 @@ foreach(plugin ${dkdepend_list})
 	DKSET(ANDROID_LIBMK "")
 	message("\n")
 	message("***************************************")
-	message("**** Processing ${plugin}...")
+	message("**** Processing   ${plugin}")
 	message("***************************************\n")
+	
+	## Skip and disabled plugins
+	list(FIND dkdepend_disable_list ${arg} _index)
+	if(${_index} GREATER -1)
+		message("${arg} IS DISABLED")
+		return()
+	endif()
 	
 	#################### 3rdParty libs #####################
 	##Strip any sublibrary named in the plugin
