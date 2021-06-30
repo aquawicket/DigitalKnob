@@ -2593,14 +2593,20 @@ endfunction()
 
 ## Remove a library or plugin from the dependency list
 function(DISABLE_DKDEPEND arg)
+	list(FIND dkdepend_disable_list "${arg}" _index)
+	if(${_index} GREATER -1)
+		return()  ##already in the list
+	endif()
+		
+	## only allow disables from the project make file or the BuildTools make file.
 	if(NOT ${CMAKE_CURRENT_LIST_DIR} STREQUAL ${DKPROJECT})
 		if(NOT ${CMAKE_CURRENT_LIST_DIR} STREQUAL ${DKPLUGINS}/BuildTools)
 			message(FATAL_ERROR "\n\n!!!! WARNING !!!!\nDISABLE_DKDEPEND() Can only be used from the project DKMAKE.cmake file. This is to avoid the need to alter cmake files just to disable them.\n\n\n")
 		endif()
 	endif()
 	message("DISABLING ${arg}")
+	list(FIND dkdepend_list "${arg}" _index)
 	DKSET(dkdepend_disable_list ${dkdepend_disable_list} ${arg})
-	list(REMOVE_DUPLICATES dkdepend_disable_list)
 endfunction()
 
 

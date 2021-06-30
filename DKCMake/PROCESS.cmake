@@ -86,12 +86,6 @@ message("**********************************\n")
 foreach(plugin ${dkdepend_list})
 	message("${plugin}")	
 endforeach()
-
-message("\n\n\n***** DISABLED DKPLUGINS *****\n")
-
-foreach(disabled_plugin ${dkdepend_disable_list})
-	message("${disabled_plugin}")	
-endforeach()
 message("\n\n")
 ## Clear cache list variables 
 DKSET(DKDEFINES "")
@@ -110,13 +104,6 @@ foreach(plugin ${dkdepend_list})
 	message("***************************************")
 	message("**** Processing   ${plugin}")
 	message("***************************************\n")
-	
-	## Skip and disabled plugins
-	string(FIND "${dkdepend_disable_list}" "${plugin}" _it)
-	if(${_it} GREATER -1)
-		message("${plugin} IS DISABLED")
-		return()
-	endif()
 	
 	#################### 3rdParty libs #####################
 	##Strip any sublibrary named in the plugin
