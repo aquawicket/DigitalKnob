@@ -294,7 +294,7 @@ int DKDuktapeJS::_Create(duk_context* ctx)
 int DKDuktapeJS::_LoadPlugin(duk_context* ctx)
 {
 	DKString file = duk_require_string(ctx, 0);
-	DKPlugins::LoadPlugin(file);
+	//DKPlugins::LoadPlugin(file);  // FIXME: unresolved external on Linux
 	return 1;
 }
 
