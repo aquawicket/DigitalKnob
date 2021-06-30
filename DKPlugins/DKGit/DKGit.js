@@ -72,7 +72,10 @@ function DKGit_GitUpdate() {
         var files = contents.split(",");
         for (var i = 0; i < files.length; i++) {
             //console.log("files["+i+"] = "+files[i]+"\n");
-            CPP_DKFile_ChDir(DKPATH);
+            
+			//Look for text files that contain [MYGIT] in them
+			//The rest of the line is the repository address
+			CPP_DKFile_ChDir(DKPATH);
             if (CPP_DKFile_IsDirectory(files[i]))
                 continue;
             var url = CPP_DKFile_GetSetting(files[i], "[MYGIT]");
@@ -100,11 +103,6 @@ function DKGit_GitUpdate() {
 }
 
 function DKGit_GitCommit() {
-    //if(CPP_DK_GetBrowser() !== "CEF" && CPP_DK_GetBrowser() !== "RML"){
-    //	console.error("DKGit_GitCommit(): Incompatable browser");
-    //	return;
-    //}
-
     console.log("Git Commit DigitalKnob...\n");
     CPP_DKFile_ChDir(DKPATH + "/DK");
     CPP_DK_Execute(GIT + " init");
@@ -120,25 +118,16 @@ function DKGit_GitCommit() {
     if (contents) {
         var files = contents.split(",");
         for (var i = 0; i < files.length; i++) {
-            //console.log("files["+i+"] = "+files[i]+"\n");
-            //CPP_DKFile_ChDir(DKPATH);
-            //if (CPP_DKFile_IsDirectory(files[i])) {
-            //    continue;
-            //}
-            //var url = CPP_DKFile_GetSetting(files[i], "[MYGIT]");
-            //if (url) {
 			if(CPP_DKFile_Exists(DKPATH + files[i] + "/.git")){
-                //console.log("url = "+url+"\n");
-                //var folder = files[i].replace(".txt", "");
-                //console.log("folder = "+folder+"\n");
-                console.log("Git Commit " + files[i] + "... \n");
+				console.log("\n\n")
+                console.log("### Git Commit " + files[i] + "... \n");
                 CPP_DKFile_ChDir(DKPATH + files[i]);
                 CPP_DK_Execute(GIT + " init");
+				//store credentials 
                 CPP_DK_Execute(GIT + " config user.name \"aquawicket\"");
                 CPP_DK_Execute(GIT + " config user.email \"aquawicket@digitalknob.com\"");
                 CPP_DK_Execute(GIT + " commit -a -m \"commit from git\"");
                 CPP_DK_Execute(GIT + " config credential.helper store");
-                //store credentials 
                 CPP_DK_Execute(GIT + " push");
             }
         }

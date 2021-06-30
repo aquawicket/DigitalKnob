@@ -126,46 +126,46 @@ ENDIF()
 
 
 ### COMPILE ###
-DKSETPATH(${BOOST})
+WIN32_PATH(${BOOST})
 WIN32_COMMAND(bootstrap.bat)
-WIN32_COMMAND(b2 toolset=msvc-14.2 address-model=32 variant=debug link=static threading=multi runtime-debugging=on runtime-link=static --build-dir=${BOOST}/${OS}/${DEBUG} --stagedir=${BOOST}/${OS}/${DEBUG})
-WIN32_COMMAND(b2 toolset=msvc-14.2 address-model=32 variant=release link=static threading=multi runtime-debugging=off runtime-link=static --build-dir=${BOOST}/${OS}/${RELEASE} --stagedir=${BOOST}/${OS}/${RELEASE})
+WIN32_DEBUG_COMMAND(b2 toolset=msvc-14.2 address-model=32 variant=debug link=static threading=multi runtime-debugging=on runtime-link=static --build-dir=${BOOST}/${OS}/${DEBUG} --stagedir=${BOOST}/${OS}/${DEBUG})
+WIN32_RELEASE_COMMAND(b2 toolset=msvc-14.2 address-model=32 variant=release link=static threading=multi runtime-debugging=off runtime-link=static --build-dir=${BOOST}/${OS}/${RELEASE} --stagedir=${BOOST}/${OS}/${RELEASE})
 
 ## WIN64_COMMAND(call C:/Windows/System32/cmd.exe /E:ON /V:ON /T:0E /K "${WINDOWS_SDK_EXE}")
-DKSETPATH(${BOOST})
+WIN64_PATH(${BOOST})
 WIN64_COMMAND(bootstrap.bat)
-WIN64_COMMAND(b2 toolset=msvc-14.2 address-model=64 variant=debug link=static threading=multi runtime-debugging=on runtime-link=static --build-dir=${BOOST}/${OS}/${DEBUG} --stagedir=${BOOST}/${OS}/${DEBUG})
-WIN64_COMMAND(b2 toolset=msvc-14.2 address-model=64 variant=release link=static threading=multi runtime-debugging=off runtime-link=static --build-dir=${BOOST}/${OS}/${RELEASE} --stagedir=${BOOST}/${OS}/${RELEASE})
+WIN64_DEBUG_COMMAND(b2 toolset=msvc-14.2 address-model=64 variant=debug link=static threading=multi runtime-debugging=on runtime-link=static --build-dir=${BOOST}/${OS}/${DEBUG} --stagedir=${BOOST}/${OS}/${DEBUG})
+WIN64_RELEASE_COMMAND(b2 toolset=msvc-14.2 address-model=64 variant=release link=static threading=multi runtime-debugging=off runtime-link=static --build-dir=${BOOST}/${OS}/${RELEASE} --stagedir=${BOOST}/${OS}/${RELEASE})
 
-DKSETPATH(${BOOST})
+MAC32_PATH(${BOOST})
 MAC32_COMMAND(./bootstrap.sh)
-MAC32_COMMAND(./b2 toolset=darwin address-model=32 variant=debug link=static threading=multi runtime-debugging=on runtime-link=static --build-dir=${BOOST}/${OS}/${DEBUG} --stagedir=${BOOST}/${OS}/${DEBUG})
-MAC32_COMMAND(./b2 toolset=darwin address-model=32 variant=release link=static threading=multi runtime-debugging=off runtime-link=static --build-dir=${BOOST}/${OS}/${RELEASE} --stagedir=${BOOST}/${OS}/${RELEASE})
+MAC32_DEBUG_COMMAND(./b2 toolset=darwin address-model=32 variant=debug link=static threading=multi runtime-debugging=on runtime-link=static --build-dir=${BOOST}/${OS}/${DEBUG} --stagedir=${BOOST}/${OS}/${DEBUG})
+MAC32_RELEASE_COMMAND(./b2 toolset=darwin address-model=32 variant=release link=static threading=multi runtime-debugging=off runtime-link=static --build-dir=${BOOST}/${OS}/${RELEASE} --stagedir=${BOOST}/${OS}/${RELEASE})
 
-DKSETPATH(${BOOST})
+MAC64_PATH(${BOOST})
 MAC64_COMMAND(./bootstrap.sh)
-MAC64_COMMAND(./b2 toolset=darwin address-model=64 variant=debug link=static threading=multi runtime-debugging=on runtime-link=static --build-dir=${BOOST}/${OS}/${DEBUG} --stagedir=${BOOST}/${OS}/${DEBUG})
-MAC64_COMMAND(./b2 toolset=darwin address-model=64 variant=release link=static threading=multi runtime-debugging=off runtime-link=static --build-dir=${BOOST}/${OS}/${RELEASE} --stagedir=${BOOST}/${OS}/${RELEASE})
+MAC64_DEBUG_COMMAND(./b2 toolset=darwin address-model=64 variant=debug link=static threading=multi runtime-debugging=on runtime-link=static --build-dir=${BOOST}/${OS}/${DEBUG} --stagedir=${BOOST}/${OS}/${DEBUG})
+MAC64_RELEASE_COMMAND(./b2 toolset=darwin address-model=64 variant=release link=static threading=multi runtime-debugging=off runtime-link=static --build-dir=${BOOST}/${OS}/${RELEASE} --stagedir=${BOOST}/${OS}/${RELEASE})
 
-DKSETPATH(${BOOST})
+LINUX32_PATH(${BOOST})
 LINUX32_COMMAND(./bootstrap.sh)
-LINUX32_COMMAND(./b2 toolset=gcc address-model=32 variant=debug link=static threading=multi runtime-debugging=on runtime-link=static --build-dir=${BOOST}/${OS}/${DEBUG} --stagedir=${BOOST}/${OS}/${DEBUG})
-LINUX32_COMMAND(./b2 toolset=gcc address-model=32 variant=release link=static threading=multi runtime-debugging=off runtime-link=static --build-dir=${BOOST}/${OS}/${RELEASE} --stagedir=${BOOST}/${OS}/${RELEASE})
+LINUX32_DEBUG_COMMAND(./b2 toolset=gcc address-model=32 variant=debug link=static threading=multi runtime-debugging=on runtime-link=static --build-dir=${BOOST}/${OS}/${DEBUG} --stagedir=${BOOST}/${OS}/${DEBUG})
+LINUX32_RELEASE_COMMAND(./b2 toolset=gcc address-model=32 variant=release link=static threading=multi runtime-debugging=off runtime-link=static --build-dir=${BOOST}/${OS}/${RELEASE} --stagedir=${BOOST}/${OS}/${RELEASE})
 
-DKSETPATH(${BOOST})
+LINUX64_PATH(${BOOST})
 LINUX64_COMMAND(./bootstrap.sh)
-LINUX64_COMMAND(./b2 toolset=gcc address-model=64 variant=debug link=static threading=multi runtime-debugging=on runtime-link=static --build-dir=${BOOST}/${OS}/${DEBUG} --stagedir=${BOOST}/${OS}/${DEBUG})
-LINUX64_COMMAND(./b2 toolset=gcc address-model=64 variant=release link=static threading=multi runtime-debugging=off runtime-link=static --build-dir=${BOOST}/${OS}/${RELEASE} --stagedir=${BOOST}/${OS}/${RELEASE})
+LINUX64_DEBUG_COMMAND(./b2 toolset=gcc address-model=64 variant=debug link=static threading=multi runtime-debugging=on runtime-link=static --build-dir=${BOOST}/${OS}/${DEBUG} --stagedir=${BOOST}/${OS}/${DEBUG})
+LINUX64_RELEASE_COMMAND(./b2 toolset=gcc address-model=64 variant=release link=static threading=multi runtime-debugging=off runtime-link=static --build-dir=${BOOST}/${OS}/${RELEASE} --stagedir=${BOOST}/${OS}/${RELEASE})
 
-DKSETPATH(${BOOST})
+RASPBERRY32_PATH(${BOOST})
 RASPBERRY32_COMMAND(./bootstrap.sh)
-RASPBERRY32_COMMAND(./b2 toolset=gcc address-model=32 variant=debug link=static threading=multi runtime-debugging=on runtime-link=static --build-dir=${BOOST}/${OS}/${DEBUG} --stagedir=${BOOST}/${OS}/${DEBUG})
-RASPBERRY32_COMMAND(./b2 toolset=gcc address-model=32 variant=release link=static threading=multi runtime-debugging=off runtime-link=static --build-dir=${BOOST}/${OS}/${RELEASE} --stagedir=${BOOST}/${OS}/${RELEASE})
+RASPBERRY32_DEBUG_COMMAND(./b2 toolset=gcc address-model=32 variant=debug link=static threading=multi runtime-debugging=on runtime-link=static --build-dir=${BOOST}/${OS}/${DEBUG} --stagedir=${BOOST}/${OS}/${DEBUG})
+RASPBERRY32_RELEASE_COMMAND(./b2 toolset=gcc address-model=32 variant=release link=static threading=multi runtime-debugging=off runtime-link=static --build-dir=${BOOST}/${OS}/${RELEASE} --stagedir=${BOOST}/${OS}/${RELEASE})
 
-DKSETPATH(${BOOST})
+RASPBERRY64_PATH(${BOOST})
 RASPBERRY64_COMMAND(./bootstrap.sh)
-RASPBERRY64_COMMAND(./b2 toolset=gcc address-model=64 variant=debug link=static threading=multi runtime-debugging=on runtime-link=static --build-dir=${BOOST}/${OS}/${DEBUG} --stagedir=${BOOST}/${OS}/${DEBUG})
-RASPBERRY64_COMMAND(./b2 toolset=gcc address-model=64 variant=release link=static threading=multi runtime-debugging=off runtime-link=static --build-dir=${BOOST}/${OS}/${RELEASE} --stagedir=${BOOST}/${OS}/${RELEASE})
+RASPBERRY64_DEBUG_COMMAND(./b2 toolset=gcc address-model=64 variant=debug link=static threading=multi runtime-debugging=on runtime-link=static --build-dir=${BOOST}/${OS}/${DEBUG} --stagedir=${BOOST}/${OS}/${DEBUG})
+RASPBERRY64_RELEASE_COMMAND(./b2 toolset=gcc address-model=64 variant=release link=static threading=multi runtime-debugging=off runtime-link=static --build-dir=${BOOST}/${OS}/${RELEASE} --stagedir=${BOOST}/${OS}/${RELEASE})
 
 DKSETPATH(${BOOST})
 ANDROID_BASH("#!/bin/bash\;
@@ -179,7 +179,7 @@ ANDROID_RELEASE_COMMAND(set ANDROIDNDKROOT=${NDK} && set NDKVER=r21e && set CLAN
 ENDIF(STATIC)
 
 
-
+### TODO
 IF(SHARED)
 
 IF(Boost_Filesystem)
