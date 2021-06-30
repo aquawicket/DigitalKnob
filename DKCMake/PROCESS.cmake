@@ -89,6 +89,7 @@ foreach(plugin ${dkdepend_list})
 endforeach()
 
 message("\n\n\n***** DISABLED DKPLUGINS *****\n")
+list(REMOVE_DUPLICATES dkdepend_disable_list)
 foreach(disabled_plugin ${dkdepend_disable_list})
 	message("${disabled_plugin}")	
 endforeach()
