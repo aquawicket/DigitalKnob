@@ -1,10 +1,14 @@
-# first remove the CMake cache file
-git pull
-rm /home/aquawicket/digitalknob/DK/DKApps/DKBuilder/linux32/Release/CMakeCache.txt
+#!/bin/bash
 
-mkdir /home/aquawicket/digitalknob/DK/DKApps/DKBuilder/linux32/Release
-cd /home/aquawicket/digitalknob/DK/DKApps/DKBuilder/linux32/Release
-cmake -G "Unix Makefiles" -m32 -DRELEASE=ON -DREBUILDALL=ON -DSTATIC=ON /home/aquawicket/digitalknob/DK
+git clone https://github.com/aquawicket/DigitalKnob.git /home/"$USER"/digitalknob/DK
+cd /home/"$USER"/digitalknob/DK
+git checkout -- .
+git pull origin master
 
-cd /home/aquawicket/digitalknob/DK/DKApps/DKBuilder/linux32/Release
+mkdir /home/"$USER"/digitalknob/DK/DKApps/DKBuilder/linux32/Release
+cd /home/"$USER"/digitalknob/DK/DKApps/DKBuilder/linux32/Release
+rm /home/"$USER"/digitalknob/DK/DKApps/DKBuilder/linux32/Release/CMakeCache.txt
+cmake -G "Unix Makefiles" -m32 -DRELEASE=ON -DREBUILDALL=ON -DSTATIC=ON /home/"$USER"/digitalknob/DK
+
+cd /home/"$USER"/digitalknob/DK/DKApps/DKBuilder/linux32/Release
 make DKBuilder
