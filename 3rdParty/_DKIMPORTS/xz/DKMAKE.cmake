@@ -21,8 +21,12 @@ DKSET(XZ ${3RDPARTY}/xz-${XZ_VERSION})
 ### INSTALL ###
 ## https://github.com/xz-mirror/xz/archive/refs/tags/v5.2.5.zip
 ## DKINSTALL(https://astuteinternet.dl.sourceforge.net/project/lzmautils/xz-${XZ_VERSION}.tar.gz xz xz-${XZ_VERSION})
-DKINSTALL(https://github.com/xz-mirror/xz/archive/refs/tags/v${XZ_VERSION}.zip xz xz-${XZ_VERSION})
 
+if(WIN)
+	DKINSTALL(https://github.com/xz-mirror/xz/archive/refs/tags/v${XZ_VERSION}.zip xz xz-${XZ_VERSION})
+else()
+	DKINSTALL(https://tukaani.org/xz/xz-${XZ_VERSION}.tar.gz xz xz-${XZ_VERSION})
+endif()
 
 
 ### DKPLUGINS LINK ###
