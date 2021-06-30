@@ -79,6 +79,9 @@ DKSET(DKAPP ON)
 DKDEPEND(BuildTools)
 include(${DKPROJECT}/DKMAKE.cmake)
 
+list(REMOVE_DUPLICATES dkdepend_list)
+list(REMOVE_DUPLICATES dkdepend_disable_list)
+
 message("\n")
 message("**********************************")
 message("*** ENABLED DKPLUGINS (sorted) ***")

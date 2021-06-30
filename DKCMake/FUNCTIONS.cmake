@@ -2609,7 +2609,7 @@ function(DISABLE_DKDEPEND arg)
 	message("DISABLING ${arg}")
 	
 	
-	list(REMOVE_DUPLICATES dkdepend_list)
+	
 	DKSET(dkdepend_disable_list ${dkdepend_disable_list} ${arg})
 endfunction()
 
