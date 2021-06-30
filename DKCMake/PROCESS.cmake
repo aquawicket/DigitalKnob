@@ -83,13 +83,12 @@ message("\n")
 message("**********************************")
 message("*** ENABLED DKPLUGINS (sorted) ***")
 message("**********************************\n")
-list(REMOVE_DUPLICATES dkdepend_list)
 foreach(plugin ${dkdepend_list})
 	message("${plugin}")	
 endforeach()
 
 message("\n\n\n***** DISABLED DKPLUGINS *****\n")
-list(REMOVE_DUPLICATES dkdepend_disable_list)
+
 foreach(disabled_plugin ${dkdepend_disable_list})
 	message("${disabled_plugin}")	
 endforeach()
@@ -113,7 +112,7 @@ foreach(plugin ${dkdepend_list})
 	message("***************************************\n")
 	
 	## Skip and disabled plugins
-	list(FIND dkdepend_disable_list ${arg} _index)
+	list(FIND ${dkdepend_disable_list} ${arg} _index)
 	if(${_index} GREATER -1)
 		message("${arg} IS DISABLED")
 		return()

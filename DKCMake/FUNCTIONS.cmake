@@ -2598,6 +2598,7 @@ function(DISABLE_DKDEPEND arg)
 	endif()
 	message("DISABLING ${arg}")
 	DKSET(dkdepend_disable_list ${dkdepend_disable_list} ${arg})
+	list(REMOVE_DUPLICATES dkdepend_disable_list)
 endfunction()
 
 
@@ -2712,6 +2713,7 @@ function(DKRUNDEPENDS arg)
 	else()
 		DKSET(dkdepend_list ${dkdepend_list} ${arg})  #Add to list
 	endif()	
+	list(REMOVE_DUPLICATES dkdepend_list)
 endfunction()
 
 ############################
