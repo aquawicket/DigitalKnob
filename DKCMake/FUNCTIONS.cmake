@@ -2606,7 +2606,7 @@ function(DISABLE_DKDEPEND arg)
 	endif()
 	message("DISABLING ${arg}")
 	
-	list(REMOVE_ITEM dkdepend_list ${arg})
+	list(REMOVE_ITEM dkdepend_list "${arg}")
 	DKSET(dkdepend_disable_list ${dkdepend_disable_list} ${arg})
 endfunction()
 
