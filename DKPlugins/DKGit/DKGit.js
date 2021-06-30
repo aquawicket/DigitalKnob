@@ -108,8 +108,8 @@ function DKGit_GitCommit() {
     console.log("Git Commit DigitalKnob...\n");
     CPP_DKFile_ChDir(DKPATH + "/DK");
     CPP_DK_Execute(GIT + " init");
-    CPP_DK_Execute(GIT + " config user.name \"dkuser\"");
-    CPP_DK_Execute(GIT + " config user.email \"dkuser@digitalknob.com\"");
+    CPP_DK_Execute(GIT + " config user.name \"aquawicket\"");
+    CPP_DK_Execute(GIT + " config user.email \"aquawicket@digitalknob.com\"");
     CPP_DK_Execute(GIT + " commit -a -m \"commit from git\"");
     CPP_DK_Execute(GIT + " config credential.helper store");
     //store credentials 
@@ -121,20 +121,21 @@ function DKGit_GitCommit() {
         var files = contents.split(",");
         for (var i = 0; i < files.length; i++) {
             //console.log("files["+i+"] = "+files[i]+"\n");
-            CPP_DKFile_ChDir(DKPATH);
-            if (CPP_DKFile_IsDirectory(files[i])) {
-                continue;
-            }
-            var url = CPP_DKFile_GetSetting(files[i], "[MYGIT]");
-            if (url) {
+            //CPP_DKFile_ChDir(DKPATH);
+            //if (CPP_DKFile_IsDirectory(files[i])) {
+            //    continue;
+            //}
+            //var url = CPP_DKFile_GetSetting(files[i], "[MYGIT]");
+            //if (url) {
+			if(CPP_DKFile_Exists(DKPATH + files[i] + "/.git")){
                 //console.log("url = "+url+"\n");
-                var folder = files[i].replace(".txt", "");
+                //var folder = files[i].replace(".txt", "");
                 //console.log("folder = "+folder+"\n");
-                console.log("Git Commit " + folder + "... \n");
-                CPP_DKFile_ChDir(DKPATH + folder);
+                console.log("Git Commit " + files[i] + "... \n");
+                CPP_DKFile_ChDir(DKPATH + files[i]);
                 CPP_DK_Execute(GIT + " init");
-                CPP_DK_Execute(GIT + " config user.name \"dkuser\"");
-                CPP_DK_Execute(GIT + " config user.email \"dkuser@digitalknob.com\"");
+                CPP_DK_Execute(GIT + " config user.name \"aquawicket\"");
+                CPP_DK_Execute(GIT + " config user.email \"aquawicket@digitalknob.com\"");
                 CPP_DK_Execute(GIT + " commit -a -m \"commit from git\"");
                 CPP_DK_Execute(GIT + " config credential.helper store");
                 //store credentials 
