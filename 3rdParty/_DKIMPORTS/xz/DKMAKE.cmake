@@ -136,17 +136,20 @@ IOSSIM_XCODE_RELEASE(xz-${XZ_VERSION} liblzma)
 
 
 LINUX_DEBUG_PATH(${XZ}/${OS}/${DEBUG})
-LINUX_DEBUG_COMMAND(${CMAKE_COMMAND} -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=DEBUG ${XZ})
-LINUX_DEBUG_COMMAND(make liblzma)
-LINUX_RELEASE_PATH(${XZ}/${OS}/${RELEASE})
-LINUX_RELEASE_COMMAND(${CMAKE_COMMAND} -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=RELEASE ${XZ})
-LINUX_RELEASE_COMMAND(make liblzma)
-#DKSETPATH(${XZ}/${OS}/${DEBUG})
-#LINUX_DEBUG_COMMAND(../../configure --disable-shared --enable-static)
+#LINUX_DEBUG_COMMAND(${CMAKE_COMMAND} -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=DEBUG ${XZ})
+LINUX_DEBUG_COMMAND(../../configure --disable-shared --enable-static)
 #LINUX_DEBUG_COMMAND(make)
-#DKSETPATH(${XZ}/${OS}/${RELEASE})
-#LINUX_RELEASE_COMMAND(../../configure --disable-shared --enable-static)
+LINUX_DEBUG_COMMAND(make liblzma)
+
+LINUX_RELEASE_PATH(${XZ}/${OS}/${RELEASE})
+#LINUX_RELEASE_COMMAND(${CMAKE_COMMAND} -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=RELEASE ${XZ})
+LINUX_RELEASE_COMMAND(../../configure --disable-shared --enable-static)
 #LINUX_RELEASE_COMMAND(make)
+LINUX_RELEASE_COMMAND(make liblzma)
+
+
+
+
 
 
 RASPBERRY_DEBUG_PATH(${XZ}/${OS}/${DEBUG})
