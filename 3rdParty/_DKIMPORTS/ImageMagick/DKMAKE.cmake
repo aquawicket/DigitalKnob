@@ -24,9 +24,9 @@ ANDROID_RELEASE_LIB(${IMAGEMAGICK_ROOT}/${OS}/${RELEASE}/obj/local/armeabi-v7a/l
 
 
 ### COMPILE ###
-WIN32_PATH(${IMAGEMAGICK_ROOT}/win32/Debug)
+WIN32_PATH(${IMAGEMAGICK_ROOT}/${OS}/${DEBUG})
 WIN32_BASH("#!/bin/bash\;
-cd ${IMAGEMAGICK_ROOT}/win32/Debug\;
+cd ${IMAGEMAGICK_ROOT}/${OS}/${DEBUG}\;
 export PATH=/${MINGW32}/bin:$PATH\;
 export PATH=/${MSYS}/bin:$PATH\;
 ../../configure --disable-shared --enable-static\;

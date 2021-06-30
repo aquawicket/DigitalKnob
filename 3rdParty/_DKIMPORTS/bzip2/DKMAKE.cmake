@@ -44,39 +44,39 @@ DKSET(BZIP2_WIN
 ### COMPILE ###
 if(0)
 if(WIN_32)
-	if(NOT EXISTS ${BZIP2}/win32/bzip2.c)
-		DKCOPY(${3RDPARTY}/bzip2-temp ${BZIP2}/win32 TRUE)
+	if(NOT EXISTS ${BZIP2}/${OS}/bzip2.c)
+		DKCOPY(${3RDPARTY}/bzip2-temp ${BZIP2}/${OS} TRUE)
 	endif()
 
 WIN32_BASH("#!/bin/bash\;
-cd ${BZIP2}/win32\;
+cd ${BZIP2}/${OS}\;
 export PATH=/${MINGW32}/bin:$PATH\;
 export PATH=/${MSYS}/bin:$PATH\;
 make CFLAGS='-static-libgcc'\;
 exit\;")
 
-	DKRENAME(${BZIP2}/win32/libbz2.a ${BZIP2}/win32/libbz2.lib)
-	DKCOPY(${3RDPARTY}/mingw/mingw32/lib/gcc/i686-w64-mingw32/4.9.2/libgcc.a ${BZIP2}/win32 TRUE)
-	DKRENAME(${BZIP2}/win32/libgcc.a ${BZIP2}/win32/libgcc.lib)
+	DKRENAME(${BZIP2}/${OS}/libbz2.a ${BZIP2}/${OS}/libbz2.lib)
+	DKCOPY(${3RDPARTY}/mingw/mingw32/lib/gcc/i686-w64-mingw32/4.9.2/libgcc.a ${BZIP2}/${OS} TRUE)
+	DKRENAME(${BZIP2}/${OS}/libgcc.a ${BZIP2}/${OS}/libgcc.lib)
 endif()
 endif()
 
 
 IF(WIN_64)
-	IF(NOT EXISTS ${BZIP2}/win64/bzip2.c)
-		DKCOPY(${3RDPARTY}/bzip2-temp ${BZIP2}/win64 TRUE)
+	IF(NOT EXISTS ${BZIP2}/${OS}/bzip2.c)
+		DKCOPY(${3RDPARTY}/bzip2-temp ${BZIP2}/${OS} TRUE)
 	ENDIF()
 
 WIN64_BASH("#!/bin/bash\;
-cd ${BZIP2}/win64\;
+cd ${BZIP2}/${OS}\;
 export PATH=/${MINGW64}/bin:$PATH\;
 export PATH=/${MSYS}/bin:$PATH\;
 make CFLAGS='-static-libgcc'\;
 exit\;")
 
-	DKRENAME(${BZIP2}/win64/libbz2.a ${BZIP2}/win64/libbz2.lib)
-	DKCOPY(${3RDPARTY}/mingw/mingw64/lib/gcc/x86_64-w64-mingw32/4.9.2/libgcc.a ${BZIP2}/win64 TRUE)
-	DKRENAME(${BZIP2}/win64/libgcc.a ${BZIP2}/win64/libgcc.lib)
+	DKRENAME(${BZIP2}/${OS}/libbz2.a ${BZIP2}/${OS}/libbz2.lib)
+	DKCOPY(${3RDPARTY}/mingw/mingw64/lib/gcc/x86_64-w64-mingw32/4.9.2/libgcc.a ${BZIP2}/${OS} TRUE)
+	DKRENAME(${BZIP2}/${OS}/libgcc.a ${BZIP2}/${OS}/libgcc.lib)
 ENDIF()
 
 IF(MAC_64)

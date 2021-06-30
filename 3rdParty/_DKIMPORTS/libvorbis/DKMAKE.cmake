@@ -28,55 +28,55 @@ ANDROID_RELEASE_LIB(${VORBIS_ROOT}/${OS}/Release/obj/local/armeabi-v7a/libvorbis
 
 
 ### COMPILE ###
-DKSETPATH(${VORBIS_ROOT}/win32)
-DKSETPATH(${VORBIS_ROOT}/win32/Debug)
+DKSETPATH(${VORBIS_ROOT}/${OS})
+DKSETPATH(${VORBIS_ROOT}/${OS}/Debug)
 WIN32_BASH("#!/bin/bash 
-cd ${VORBIS_ROOT}/win32/Debug 
+cd ${VORBIS_ROOT}/${OS}/Debug 
 export PATH=/${MINGW32}/bin:$PATH\;
 export PATH=/${MSYS}/bin:$PATH\;
-../../configure --disable-shared --enable-static --with-ogg-libraries=\"${OGG}/win32/Debug/src/.libs\" --with-ogg-includes=\"${OGG}/include\" 
+../../configure --disable-shared --enable-static --with-ogg-libraries=\"${OGG}/${OS}/Debug/src/.libs\" --with-ogg-includes=\"${OGG}/include\" 
 make 
 exit \n")
-DKRENAME(${VORBIS_ROOT}/win32/Debug/lib/.libs/libvorbis.a ${VORBIS_ROOT}/win32/Debug/lib/.libs/libvorbis.lib)
-DKRENAME(${VORBIS_ROOT}/win32/Debug/lib/.libs/libvorbisfile.a ${VORBIS_ROOT}/win32/Debug/lib/.libs/libvorbisfile.lib)
+DKRENAME(${VORBIS_ROOT}/${OS}/Debug/lib/.libs/libvorbis.a ${VORBIS_ROOT}/${OS}/Debug/lib/.libs/libvorbis.lib)
+DKRENAME(${VORBIS_ROOT}/${OS}/Debug/lib/.libs/libvorbisfile.a ${VORBIS_ROOT}/${OS}/Debug/lib/.libs/libvorbisfile.lib)
 
 
-DKSETPATH(${VORBIS_ROOT}/win32)
-DKSETPATH(${VORBIS_ROOT}/win32/Release)
+DKSETPATH(${VORBIS_ROOT}/${OS})
+DKSETPATH(${VORBIS_ROOT}/${OS}/Release)
 WIN32_BASH("#!/bin/bash 
-cd ${VORBIS_ROOT}/win32/Release 
+cd ${VORBIS_ROOT}/${OS}/Release 
 export PATH=/${MINGW32}/bin:$PATH\;
 export PATH=/${MSYS}/bin:$PATH\;
-../../configure --disable-shared --enable-static --with-ogg-libraries=\"${OGG}/win32/Release/src/.libs\" --with-ogg-includes=\"${OGG}/include\" 
+../../configure --disable-shared --enable-static --with-ogg-libraries=\"${OGG}/${OS}/Release/src/.libs\" --with-ogg-includes=\"${OGG}/include\" 
 make 
 exit \n")
-DKRENAME(${VORBIS_ROOT}/win32/Release/lib/.libs/libvorbis.a ${VORBIS_ROOT}/win32/Release/lib/.libs/libvorbis.lib)
-DKRENAME(${VORBIS_ROOT}/win32/Release/lib/.libs/libvorbisfile.a ${VORBIS_ROOT}/win32/Release/lib/.libs/libvorbisfile.lib)
+DKRENAME(${VORBIS_ROOT}/${OS}/Release/lib/.libs/libvorbis.a ${VORBIS_ROOT}/${OS}/Release/lib/.libs/libvorbis.lib)
+DKRENAME(${VORBIS_ROOT}/${OS}/Release/lib/.libs/libvorbisfile.a ${VORBIS_ROOT}/${OS}/Release/lib/.libs/libvorbisfile.lib)
 
 
-DKSETPATH(${VORBIS_ROOT}/win64)
-DKSETPATH(${VORBIS_ROOT}/win64/Debug)
+DKSETPATH(${VORBIS_ROOT}/${OS})
+DKSETPATH(${VORBIS_ROOT}/${OS}/Debug)
 WIN64_BASH("#!/bin/bash 
-cd ${VORBIS_ROOT}/win64/Debug 
+cd ${VORBIS_ROOT}/${OS}/Debug 
 export PATH=/${MINGW64}/bin:$PATH\;
 export PATH=/${MSYS}/bin:$PATH\;
-../../configure --disable-shared --enable-static --with-ogg-libraries=\"${OGG}/win64/Debug/src/.libs\" --with-ogg-includes=\"${OGG}/include\" 
+../../configure --disable-shared --enable-static --with-ogg-libraries=\"${OGG}/${OS}/Debug/src/.libs\" --with-ogg-includes=\"${OGG}/include\" 
 make 
 exit \n")
-DKRENAME(${VORBIS_ROOT}/win64/Debug/lib/.libs/libvorbis.a ${VORBIS_ROOT}/win64/Debug/lib/.libs/libvorbis.lib)
-DKRENAME(${VORBIS_ROOT}/win64/Debug/lib/.libs/libvorbisfile.a ${VORBIS_ROOT}/win64/Debug/lib/.libs/libvorbisfile.lib)
+DKRENAME(${VORBIS_ROOT}/${OS}/Debug/lib/.libs/libvorbis.a ${VORBIS_ROOT}/${OS}/Debug/lib/.libs/libvorbis.lib)
+DKRENAME(${VORBIS_ROOT}/${OS}/Debug/lib/.libs/libvorbisfile.a ${VORBIS_ROOT}/${OS}/Debug/lib/.libs/libvorbisfile.lib)
 
 
-DKSETPATH(${VORBIS_ROOT}/win64/Release)
+DKSETPATH(${VORBIS_ROOT}/${OS}/Release)
 WIN64_BASH("#!/bin/bash 
-cd ${VORBIS_ROOT}/win64/Release 
+cd ${VORBIS_ROOT}/${OS}/Release 
 export PATH=/${MINGW64}/bin:$PATH\;
 export PATH=/${MSYS}/bin:$PATH\;
-../../configure --disable-shared --enable-static --with-ogg-libraries=\"${OGG}/win64/Release/src/.libs\" --with-ogg-includes=\"${OGG}/include\" 
+../../configure --disable-shared --enable-static --with-ogg-libraries=\"${OGG}/${OS}/Release/src/.libs\" --with-ogg-includes=\"${OGG}/include\" 
 make 
 exit \n")
-DKRENAME(${VORBIS_ROOT}/win64/Release/lib/.libs/libvorbis.a ${VORBIS_ROOT}/win64/Release/lib/.libs/libvorbis.lib)
-DKRENAME(${VORBIS_ROOT}/win64/Release/lib/.libs/libvorbisfile.a ${VORBIS_ROOT}/win64/Release/lib/.libs/libvorbisfile.lib)
+DKRENAME(${VORBIS_ROOT}/${OS}/Release/lib/.libs/libvorbis.a ${VORBIS_ROOT}/${OS}/Release/lib/.libs/libvorbis.lib)
+DKRENAME(${VORBIS_ROOT}/${OS}/Release/lib/.libs/libvorbisfile.a ${VORBIS_ROOT}/${OS}/Release/lib/.libs/libvorbisfile.lib)
 
 
 DKSETPATH(${VORBIS_ROOT}/${OS}/Debug)

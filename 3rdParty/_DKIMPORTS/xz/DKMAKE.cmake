@@ -65,44 +65,44 @@ WIN32_COMMAND(${CMAKE_COMMAND} -G ${GENERATOR} -A Win32 "-DCMAKE_C_FLAGS=/DWIN32
 WIN64_COMMAND(${CMAKE_COMMAND} -G ${GENERATOR} -A x64 "-DCMAKE_C_FLAGS=/DWIN32 /D_WINDOWS /W3 /nologo" "-DCMAKE_C_FLAGS_DEBUG=/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG" "-DCMAKE_C_FLAGS_RELEASE=/MT /O2 /Ob2 /DNDEBUG" ${XZ})
 WIN_VS(xz-${XZ_VERSION} xz.sln liblzma)
 
-#DKSETPATH(${XZ}/win32/${DEBUG})
+#DKSETPATH(${XZ}/${OS}/${DEBUG})
 #WIN32_BASH("#!/bin/bash\;
-#cd ${XZ}/win32/${DEBUG}\;
+#cd ${XZ}/${OS}/${DEBUG}\;
 #export PATH=/${MINGW32}/bin:$PATH\;
 #export PATH=/${MSYS}/bin:$PATH\;
 #../../configure --disable-shared --enable-static\;
 #make\;
 #exit\;")
-#DKRENAME(${XZ}/win32/${DEBUG}/src/liblzma/.libs/liblzma.a ${XZ}/win32/${DEBUG}/src/liblzma/.libs/liblzma.lib)
-#DKSETPATH(${XZ}/win32/${RELEASE})
+#DKRENAME(${XZ}/${OS}/${DEBUG}/src/liblzma/.libs/liblzma.a ${XZ}/${OS}/${DEBUG}/src/liblzma/.libs/liblzma.lib)
+#DKSETPATH(${XZ}/${OS}/${RELEASE})
 #WIN32_BASH("#!/bin/bash\;
-#cd ${XZ}/win32/${RELEASE}\;
+#cd ${XZ}/${OS}/${RELEASE}\;
 #export PATH=/${MINGW32}/bin:$PATH\;
 #export PATH=/${MSYS}/bin:$PATH\;
 #../../configure --disable-shared --enable-static\;
 #make\;
 #exit\;")
-#DKRENAME(${XZ}/win32/${RELEASE}/src/liblzma/.libs/liblzma.a ${XZ}/win32/${RELEASE}/src/liblzma/.libs/liblzma.lib)
+#DKRENAME(${XZ}/${OS}/${RELEASE}/src/liblzma/.libs/liblzma.a ${XZ}/${OS}/${RELEASE}/src/liblzma/.libs/liblzma.lib)
 
 
-#DKSETPATH(${XZ}/win64/${DEBUG})
+#DKSETPATH(${XZ}/${OS}/${DEBUG})
 #WIN64_BASH("#!/bin/bash\;
-#cd ${XZ}/win64/${DEBUG}\;
+#cd ${XZ}/${OS}/${DEBUG}\;
 #export PATH=/${MINGW64}/bin:$PATH\;
 #export PATH=/${MSYS}/bin:$PATH\;
 #../../configure --disable-shared --enable-static --build=x86_64-w64-mingw32\;
 #make\;
 #exit\;")
-#DKRENAME(${XZ}/win64/${DEBUG}/src/liblzma/.libs/liblzma.a ${XZ}/win64/${DEBUG}/src/liblzma/.libs/liblzma.lib)
-#DKSETPATH(${XZ}/win64/${RELEASE})
+#DKRENAME(${XZ}/${OS}/${DEBUG}/src/liblzma/.libs/liblzma.a ${XZ}/${OS}/${DEBUG}/src/liblzma/.libs/liblzma.lib)
+#DKSETPATH(${XZ}/${OS}/${RELEASE})
 #WIN64_BASH("#!/bin/bash\;
-#cd ${XZ}/win64/${RELEASE}\;
+#cd ${XZ}/${OS}/${RELEASE}\;
 #export PATH=/${MINGW64}/bin:$PATH\;
 #export PATH=/${MSYS}/bin:$PATH\;
 #../../configure --disable-shared --enable-static --build=x86_64-w64-mingw32\;
 #make\;
 #exit\;")
-#DKRENAME(${XZ}/win64/${RELEASE}/src/liblzma/.libs/liblzma.a ${XZ}/win64/${RELEASE}/src/liblzma/.libs/liblzma.lib)
+#DKRENAME(${XZ}/${OS}/${RELEASE}/src/liblzma/.libs/liblzma.a ${XZ}/${OS}/${RELEASE}/src/liblzma/.libs/liblzma.lib)
 
 
 MAC_PATH(${XZ}/${OS})
