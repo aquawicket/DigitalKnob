@@ -81,6 +81,9 @@ include(${DKPROJECT}/DKMAKE.cmake)
 
 list(REMOVE_DUPLICATES dkdepend_list)
 list(REMOVE_DUPLICATES dkdepend_disable_list)
+foreach(offplugin ${dkdepend_disable_list})
+	list(REMOVE_ITEM dkdepend_list ${offplugin})
+endforeach()
 
 message("\n")
 message("**********************************")
