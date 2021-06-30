@@ -51,7 +51,7 @@ export PATH=/${MSYS}/bin:$PATH\;
 ../../configure --disable-shared --enable-static 
 make 
 exit \n")
-if(DEBUG)
+if(WIN_32 AND DEBUG)
 	DKRENAME(${GIF}/${OS}/${DEBUG}/lib/.libs/libgif.a ${GIF}/${OS}/${DEBUG}/lib/.libs/libgif.lib)
 endif()
 
@@ -63,7 +63,7 @@ export PATH=/${MSYS}/bin:$PATH\;
 ../../configure --disable-shared --enable-static 
 make 
 exit\n ")
-if(RELEASE)
+if(WIN_32 AND RELEASE)
 	DKRENAME(${GIF}/${OS}/${RELEASE}/lib/.libs/libgif.a ${GIF}/${OS}/${RELEASE}/lib/.libs/libgif.lib)
 endif()
 
@@ -77,7 +77,9 @@ export PATH=/${MSYS}/bin:$PATH\;
 ../../configure --disable-shared --enable-static 
 make 
 exit \n")
+if(WIN_64 AND DEBUG)
 DKRENAME(${GIF}/${OS}/${DEBUG}/lib/.libs/libgif.a ${GIF}/${OS}/${DEBUG}/lib/.libs/libgif.lib)
+endif()
 
 WIN64_RELEASE_PATH(${GIF}/${OS}/${RELEASE})
 WIN64_RELEASE_BASH("#!/bin/bash 
@@ -87,8 +89,9 @@ export PATH=/${MSYS}/bin:$PATH\;
 ../../configure --disable-shared --enable-static 
 make 
 exit\n ")
-DKRENAME(${GIF}/${OS}/${RELEASE}/lib/.libs/libgif.a ${GIF}/${OS}/${RELEASE}/lib/.libs/libgif.lib)
-
+if(WIN_64 AND RELEASE)
+	DKRENAME(${GIF}/${OS}/${RELEASE}/lib/.libs/libgif.a ${GIF}/${OS}/${RELEASE}/lib/.libs/libgif.lib)
+endif()
 
 
 MAC_DEBUG_PATH(${GIF}/${OS}/${DEBUG})
