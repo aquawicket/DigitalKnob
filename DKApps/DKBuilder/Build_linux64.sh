@@ -5,6 +5,7 @@ cd /home/"$USER"/digitalknob/DK
 git checkout -- .
 git pull origin master
 
+mkdir /home/"$USER"/digitalknob/DK/DKApps/DKBuilder/linux64
 mkdir /home/"$USER"/digitalknob/DK/DKApps/DKBuilder/linux64/Release
 cd /home/"$USER"/digitalknob/DK/DKApps/DKBuilder/linux64/Release
 rm /home/"$USER"/digitalknob/DK/DKApps/DKBuilder/linux64/Release/CMakeCache.txt
