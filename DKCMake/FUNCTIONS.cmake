@@ -2594,6 +2594,7 @@ endfunction()
 ## Remove a library or plugin from the dependency list
 function(DISABLE_DKDEPEND arg)
 	list(REMOVE_ITEM dkdepend_list "${arg}")
+	DKSET(dkdepend_disable_list ${dkdepend_disable_list})
 	list(FIND dkdepend_disable_list "${arg}" _index)
 	if(${_index} GREATER -1)
 		return()  ##already in the list
