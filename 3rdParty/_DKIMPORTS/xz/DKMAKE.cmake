@@ -34,18 +34,18 @@ DKDEFINE(LZMA_API_STATIC)
 DKINCLUDE(${XZ}/src/liblzma/api)
 WIN_DEBUG_LIB(${XZ}/${OS}/${DEBUG}/liblzma.lib)
 WIN_RELEASE_LIB(${XZ}/${OS}/${RELEASE}/liblzma.lib)
-MAC_DEBUG_LIB(${XZ}/${OS}/${DEBUG}/liblzma.a)
-MAC_RELEASE_LIB(${XZ}/${OS}/${RELEASE}/liblzma.a)
-#MAC_DEBUG_LIB(${XZ}/${OS}/${DEBUG}/src/liblzma/.libs/liblzma.a)
-#MAC_RELEASE_LIB(${XZ}/${OS}/${RELEASE}/src/liblzma/.libs/liblzma.a)
-LINUX_DEBUG_LIB(${XZ}/${OS}/${DEBUG}/liblzma.a)
-LINUX_RELEASE_LIB(${XZ}/${OS}/${RELEASE}/liblzma.a)
-#LINUX_DEBUG_LIB(${XZ}/${OS}/${DEBUG}/src/liblzma/.libs/liblzma.a)
-#LINUX_RELEASE_LIB(${XZ}/${OS}/${RELEASE}/src/liblzma/.libs/liblzma.a)
-RASPBERRY_DEBUG_LIB(${XZ}/${OS}/${DEBUG}/liblzma.a)
-RASPBERRY_RELEASE_LIB(${XZ}/${OS}/${RELEASE}/liblzma.a)
-#RASPBERRY_DEBUG_LIB(${XZ}/${OS}/${DEBUG}/src/liblzma/.libs/liblzma.a)
-#RASPBERRY_RELEASE_LIB(${XZ}/${OS}/${RELEASE}/src/liblzma/.libs/liblzma.a)
+#MAC_DEBUG_LIB(${XZ}/${OS}/${DEBUG}/liblzma.a)
+#MAC_RELEASE_LIB(${XZ}/${OS}/${RELEASE}/liblzma.a)
+MAC_DEBUG_LIB(${XZ}/${OS}/${DEBUG}/src/liblzma/.libs/liblzma.a)
+MAC_RELEASE_LIB(${XZ}/${OS}/${RELEASE}/src/liblzma/.libs/liblzma.a)
+#LINUX_DEBUG_LIB(${XZ}/${OS}/${DEBUG}/liblzma.a)
+#LINUX_RELEASE_LIB(${XZ}/${OS}/${RELEASE}/liblzma.a)
+LINUX_DEBUG_LIB(${XZ}/${OS}/${DEBUG}/src/liblzma/.libs/liblzma.a)
+LINUX_RELEASE_LIB(${XZ}/${OS}/${RELEASE}/src/liblzma/.libs/liblzma.a)
+#RASPBERRY_DEBUG_LIB(${XZ}/${OS}/${DEBUG}/liblzma.a)
+#RASPBERRY_RELEASE_LIB(${XZ}/${OS}/${RELEASE}/liblzma.a)
+RASPBERRY_DEBUG_LIB(${XZ}/${OS}/${DEBUG}/src/liblzma/.libs/liblzma.a)
+RASPBERRY_RELEASE_LIB(${XZ}/${OS}/${RELEASE}/src/liblzma/.libs/liblzma.a)
 ANDROID_DEBUG_LIB(${XZ}/${OS}/obj/local/armeabi-v7a/liblzma.a)
 ANDROID_RELEASE_LIB(${XZ}/${OS}/obj/local/armeabi-v7a/liblzma.a)
 
@@ -64,45 +64,6 @@ WIN_PATH(${XZ}/${OS})
 WIN32_COMMAND(${CMAKE_COMMAND} -G ${GENERATOR} -A Win32 "-DCMAKE_C_FLAGS=/DWIN32 /D_WINDOWS /W3 /nologo" "-DCMAKE_C_FLAGS_DEBUG=/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG" "-DCMAKE_C_FLAGS_RELEASE=/MT /O2 /Ob2 /DNDEBUG" ${XZ})
 WIN64_COMMAND(${CMAKE_COMMAND} -G ${GENERATOR} -A x64 "-DCMAKE_C_FLAGS=/DWIN32 /D_WINDOWS /W3 /nologo" "-DCMAKE_C_FLAGS_DEBUG=/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG" "-DCMAKE_C_FLAGS_RELEASE=/MT /O2 /Ob2 /DNDEBUG" ${XZ})
 WIN_VS(xz-${XZ_VERSION} xz.sln liblzma)
-
-#DKSETPATH(${XZ}/${OS}/${DEBUG})
-#WIN32_BASH("#!/bin/bash\;
-#cd ${XZ}/${OS}/${DEBUG}\;
-#export PATH=/${MINGW32}/bin:$PATH\;
-#export PATH=/${MSYS}/bin:$PATH\;
-#../../configure --disable-shared --enable-static\;
-#make\;
-#exit\;")
-#DKRENAME(${XZ}/${OS}/${DEBUG}/src/liblzma/.libs/liblzma.a ${XZ}/${OS}/${DEBUG}/src/liblzma/.libs/liblzma.lib)
-#DKSETPATH(${XZ}/${OS}/${RELEASE})
-#WIN32_BASH("#!/bin/bash\;
-#cd ${XZ}/${OS}/${RELEASE}\;
-#export PATH=/${MINGW32}/bin:$PATH\;
-#export PATH=/${MSYS}/bin:$PATH\;
-#../../configure --disable-shared --enable-static\;
-#make\;
-#exit\;")
-#DKRENAME(${XZ}/${OS}/${RELEASE}/src/liblzma/.libs/liblzma.a ${XZ}/${OS}/${RELEASE}/src/liblzma/.libs/liblzma.lib)
-
-
-#DKSETPATH(${XZ}/${OS}/${DEBUG})
-#WIN64_BASH("#!/bin/bash\;
-#cd ${XZ}/${OS}/${DEBUG}\;
-#export PATH=/${MINGW64}/bin:$PATH\;
-#export PATH=/${MSYS}/bin:$PATH\;
-#../../configure --disable-shared --enable-static --build=x86_64-w64-mingw32\;
-#make\;
-#exit\;")
-#DKRENAME(${XZ}/${OS}/${DEBUG}/src/liblzma/.libs/liblzma.a ${XZ}/${OS}/${DEBUG}/src/liblzma/.libs/liblzma.lib)
-#DKSETPATH(${XZ}/${OS}/${RELEASE})
-#WIN64_BASH("#!/bin/bash\;
-#cd ${XZ}/${OS}/${RELEASE}\;
-#export PATH=/${MINGW64}/bin:$PATH\;
-#export PATH=/${MSYS}/bin:$PATH\;
-#../../configure --disable-shared --enable-static --build=x86_64-w64-mingw32\;
-#make\;
-#exit\;")
-#DKRENAME(${XZ}/${OS}/${RELEASE}/src/liblzma/.libs/liblzma.a ${XZ}/${OS}/${RELEASE}/src/liblzma/.libs/liblzma.lib)
 
 
 MAC_PATH(${XZ}/${OS})
@@ -137,33 +98,29 @@ IOSSIM_XCODE_RELEASE(xz-${XZ_VERSION} liblzma)
 
 LINUX_DEBUG_PATH(${XZ}/${OS}/${DEBUG})
 #LINUX_DEBUG_COMMAND(${CMAKE_COMMAND} -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=DEBUG ${XZ})
+#LINUX_DEBUG_COMMAND(make liblzma)
 LINUX_DEBUG_COMMAND(../../configure --disable-shared --enable-static)
-#LINUX_DEBUG_COMMAND(make)
-LINUX_DEBUG_COMMAND(make liblzma)
+LINUX_DEBUG_COMMAND(make)
+
 
 LINUX_RELEASE_PATH(${XZ}/${OS}/${RELEASE})
 #LINUX_RELEASE_COMMAND(${CMAKE_COMMAND} -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=RELEASE ${XZ})
+#LINUX_RELEASE_COMMAND(make liblzma)
 LINUX_RELEASE_COMMAND(../../configure --disable-shared --enable-static)
-#LINUX_RELEASE_COMMAND(make)
-LINUX_RELEASE_COMMAND(make liblzma)
-
-
-
-
+LINUX_RELEASE_COMMAND(make)
 
 
 RASPBERRY_DEBUG_PATH(${XZ}/${OS}/${DEBUG})
-RASPBERRY_DEBUG_COMMAND(${CMAKE_COMMAND} -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=DEBUG ${XZ})
-RASPBERRY_DEBUG_COMMAND(make liblzma)
+#RASPBERRY_DEBUG_COMMAND(${CMAKE_COMMAND} -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=DEBUG ${XZ})
+#RASPBERRY_DEBUG_COMMAND(make liblzma)
+RASPBERRY_DEBUG_COMMAND(../../configure --disable-shared --enable-static)
+RASPBERRY_DEBUG_COMMAND(make)
+
 RASPBERRY_RELEASE_PATH(${XZ}/${OS}/${RELEASE})
-RASPBERRY_RELEASE_COMMAND(${CMAKE_COMMAND} -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=RELEASE ${XZ})
-RASPBERRY_RELEASE_COMMAND(make liblzma)
-#DKSETPATH(${XZ}/${OS}/${DEBUG})
-#RASPBERRY_DEBUG_COMMAND(../../configure --disable-shared --enable-static)
-#RASPBERRY_DEBUG_COMMAND(make)
-#DKSETPATH(${XZ}/${OS}/${RELEASE})
-#RASPBERRY_RELEASE_COMMAND(../../configure --disable-shared --enable-static)
-#RASPBERRY_RELEASE_COMMAND(make)
+#RASPBERRY_RELEASE_COMMAND(${CMAKE_COMMAND} -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=RELEASE ${XZ})
+#RASPBERRY_RELEASE_COMMAND(make liblzma)
+RASPBERRY_RELEASE_COMMAND(../../configure --disable-shared --enable-static)
+RASPBERRY_RELEASE_COMMAND(make)
 
 
 ANDROID_NDK_DEBUG(xz-${XZ_VERSION})
