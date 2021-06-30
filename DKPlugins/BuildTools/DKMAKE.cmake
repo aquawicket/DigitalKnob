@@ -1,6 +1,6 @@
 ##### DISABLED #####
 if(LINUX)
-	DISABLE_DEPEND(flac)
+	DISABLE_DKDEPEND(flac)
 endif()
 
 
