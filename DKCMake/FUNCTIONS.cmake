@@ -2776,6 +2776,7 @@ function(DKBRUTEDEPENDS arg)
 	else()
 		DKSET(dkdepend_list ${dkdepend_list} ${arg})  #Add to list
 	endif()
+	list(REMOVE_DUPLICATES dkdepend_list)
 endfunction()
 
 #######################
