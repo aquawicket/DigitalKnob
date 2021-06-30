@@ -112,7 +112,7 @@ foreach(plugin ${dkdepend_list})
 	message("***************************************\n")
 	
 	## Skip and disabled plugins
-	list(FIND ${dkdepend_disable_list} "${plugin}" _it)
+	string(FIND "${dkdepend_disable_list}" "${plugin}" _it)
 	if(${_it} GREATER -1)
 		message("${plugin} IS DISABLED")
 		return()
