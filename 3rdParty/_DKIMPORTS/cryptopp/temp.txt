@@ -1,2 +1,0 @@
-IF(NOT EXISTS "${3RDPARTY}/cryptopp600")
-ENDIF()
