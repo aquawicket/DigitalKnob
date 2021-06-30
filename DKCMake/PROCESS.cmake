@@ -88,6 +88,11 @@ foreach(plugin ${dkdepend_list})
 	message("${plugin}")	
 endforeach()
 
+message("\n\n\n***** DISABLED DKPLUGINS *****\n")
+foreach(disabled_plugin ${dkdepend_disable_list})
+	message("${disabled_plugin}")	
+endforeach()
+message("\n\n")
 ## Clear cache list variables 
 DKSET(DKDEFINES "")
 DKSET(DKINCLUDES "")
