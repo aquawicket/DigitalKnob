@@ -1,3 +1,10 @@
+##### DISABLED #####
+if(LINUX)
+	DISABLE_DEPEND(flac)
+endif()
+
+
+
 ### DEPENDS ###
 if(CMAKE_HOST_WIN32 AND WIN)
 	DKDEPEND(Git)
