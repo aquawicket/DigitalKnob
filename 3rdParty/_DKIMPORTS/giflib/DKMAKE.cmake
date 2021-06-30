@@ -51,7 +51,9 @@ export PATH=/${MSYS}/bin:$PATH\;
 ../../configure --disable-shared --enable-static 
 make 
 exit \n")
-DKRENAME(${GIF}/${OS}/${DEBUG}/lib/.libs/libgif.a ${GIF}/${OS}/${DEBUG}/lib/.libs/libgif.lib)
+if(DEBUG)
+	DKRENAME(${GIF}/${OS}/${DEBUG}/lib/.libs/libgif.a ${GIF}/${OS}/${DEBUG}/lib/.libs/libgif.lib)
+endif()
 
 WIN32_RELEASE_PATH(${GIF}/${OS}/${RELEASE})
 WIN32_RELEASE_BASH("#!/bin/bash 
@@ -61,7 +63,9 @@ export PATH=/${MSYS}/bin:$PATH\;
 ../../configure --disable-shared --enable-static 
 make 
 exit\n ")
-DKRENAME(${GIF}/${OS}/${RELEASE}/lib/.libs/libgif.a ${GIF}/${OS}/${RELEASE}/lib/.libs/libgif.lib)
+if(RELEASE)
+	DKRENAME(${GIF}/${OS}/${RELEASE}/lib/.libs/libgif.a ${GIF}/${OS}/${RELEASE}/lib/.libs/libgif.lib)
+endif()
 
 
 
