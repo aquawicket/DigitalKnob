@@ -767,7 +767,7 @@ endfunction()
 
 
 
-##############################################################
+#########################
 function(WIN_COMMAND arg)
 	if(WIN AND QUEUE_BUILD)
 		set(arg2 ${arg} ${ARGN})
@@ -775,7 +775,6 @@ function(WIN_COMMAND arg)
 	endif()	
 endfunction()
 
-###########################
 function(WIN32_COMMAND arg)
 	if(WIN_32 AND QUEUE_BUILD)
 		set(arg2 ${arg} ${ARGN})
@@ -783,7 +782,20 @@ function(WIN32_COMMAND arg)
 	endif()	
 endfunction()
 
-###########################
+function(WIN32_DEBUG_COMMAND arg)
+	if(WIN_32 AND DEBUG AND QUEUE_BUILD)
+		set(arg2 ${arg} ${ARGN})
+		WIN_COMMAND(${arg2})
+	endif()	
+endfunction()
+
+function(WIN32_RELEASE_COMMAND arg)
+	if(WIN_32 AND RELEASE AND QUEUE_BUILD)
+		set(arg2 ${arg} ${ARGN})
+		WIN_COMMAND(${arg2})
+	endif()	
+endfunction()
+
 function(WIN64_COMMAND arg)
 	if(WIN_64 AND QUEUE_BUILD)
 		set(arg2 ${arg} ${ARGN})
@@ -791,7 +803,22 @@ function(WIN64_COMMAND arg)
 	endif()
 endfunction()
 
-########################
+function(WIN64_DEBUG_COMMAND arg)
+	if(WIN_64 AND DEBUG AND QUEUE_BUILD)
+		set(arg2 ${arg} ${ARGN})
+		WIN_COMMAND(${arg2})
+	endif()	
+endfunction()
+
+function(WIN64_RELEASE_COMMAND arg)
+	if(WIN_64 AND RELEASE AND QUEUE_BUILD)
+		set(arg2 ${arg} ${ARGN})
+		WIN_COMMAND(${arg2})
+	endif()	
+endfunction()
+
+
+######################
 function(WIN_BASH arg)
 	if(WIN AND QUEUE_BUILD)
 		file(WRITE ${3RDPARTY}/mingw/msys/temp ${arg})
@@ -799,19 +826,55 @@ function(WIN_BASH arg)
 	endif()
 endfunction()
 
-########################
+function(WIN_DEBUG_BASH arg)
+	if(WIN AND DEBUG AND QUEUE_BUILD)
+		WIN_BASH(${arg})
+	endif()
+endfunction()
+
+function(WIN_RELEASE_BASH arg)
+	if(WIN AND RELEASE AND QUEUE_BUILD)
+		WIN_BASH(${arg})
+	endif()
+endfunction()
+
 function(WIN32_BASH arg)
 	if(WIN_32 AND QUEUE_BUILD)
 		WIN_BASH(${arg})
 	endif()
 endfunction()
 
-########################
+function(WIN32_DEBUG_BASH arg)
+	if(WIN_32 AND DEBUG AND QUEUE_BUILD)
+		WIN_BASH(${arg})
+	endif()
+endfunction()
+
+function(WIN32_RELEASE_BASH arg)
+	if(WIN_32 AND RELEASE AND QUEUE_BUILD)
+		WIN_BASH(${arg})
+	endif()
+endfunction()
+
 function(WIN64_BASH arg)
 	if(WIN_64 AND QUEUE_BUILD)
 		WIN_BASH(${arg})
 	endif()
 endfunction()
+
+function(WIN64_DEBUG_BASH arg)
+	if(WIN_64 AND DEBUG AND QUEUE_BUILD)
+		WIN_BASH(${arg})
+	endif()
+endfunction()
+
+function(WIN64_RELEASE_BASH arg)
+	if(WIN_64 AND RELEASE AND QUEUE_BUILD)
+		WIN_BASH(${arg})
+	endif()
+endfunction()
+
+
 
 #########################
 function(MAC_COMMAND arg)
@@ -821,7 +884,6 @@ function(MAC_COMMAND arg)
 	endif()
 endfunction()
 
-###############################
 function(MAC_DEBUG_COMMAND arg)
 	if(MAC AND DEBUG AND QUEUE_BUILD)
 		set(arg2 ${arg} ${ARGN})
@@ -829,7 +891,6 @@ function(MAC_DEBUG_COMMAND arg)
 	endif()
 endfunction()
 
-#################################
 function(MAC_RELEASE_COMMAND arg)
 	if(MAC AND RELEASE AND QUEUE_BUILD)
 		set(arg2 ${arg} ${ARGN})
@@ -837,7 +898,6 @@ function(MAC_RELEASE_COMMAND arg)
 	endif()
 endfunction()
 
-###########################
 function(MAC32_COMMAND arg)
 	if(MAC_32 AND QUEUE_BUILD)
 		set(arg2 ${arg} ${ARGN})
@@ -845,13 +905,13 @@ function(MAC32_COMMAND arg)
 	endif()
 endfunction()
 
-###########################
 function(MAC64_COMMAND arg)
 	if(MAC_64 AND QUEUE_BUILD)
 		set(arg2 ${arg} ${ARGN})
 		MAC_COMMAND(${arg2})
 	endif()
 endfunction()
+
 
 #########################
 function(IOS_COMMAND arg)

@@ -43,8 +43,8 @@ DKSET(GIF_RASPBERRY -DGIF_INCLUDE_DIR=${GIF} -DGIF_INCLUDE_DIR2=${GIF}/${OS} -DG
 
 
 ### COMPILE ###
-DKSETPATH(${GIF}/${OS}/${DEBUG})
-WIN32_BASH("#!/bin/bash 
+WIN32_DEBUG_PATH(${GIF}/${OS}/${DEBUG})
+WIN32_DEBUG_BASH("#!/bin/bash 
 cd ${GIF}/${OS}/${DEBUG} 
 export PATH=/${MINGW32}/bin:$PATH\;
 export PATH=/${MSYS}/bin:$PATH\;
@@ -52,8 +52,9 @@ export PATH=/${MSYS}/bin:$PATH\;
 make 
 exit \n")
 DKRENAME(${GIF}/${OS}/${DEBUG}/lib/.libs/libgif.a ${GIF}/${OS}/${DEBUG}/lib/.libs/libgif.lib)
-DKSETPATH(${GIF}/${OS}/${RELEASE})
-WIN32_BASH("#!/bin/bash 
+
+WIN32_RELEASE_PATH(${GIF}/${OS}/${RELEASE})
+WIN32_RELEASE_BASH("#!/bin/bash 
 cd ${GIF}/${OS}/${RELEASE} 
 export PATH=/${MINGW32}/bin:$PATH\;
 export PATH=/${MSYS}/bin:$PATH\;
@@ -64,8 +65,8 @@ DKRENAME(${GIF}/${OS}/${RELEASE}/lib/.libs/libgif.a ${GIF}/${OS}/${RELEASE}/lib/
 
 
 
-DKSETPATH(${GIF}/${OS}/${DEBUG})
-WIN64_BASH("#!/bin/bash 
+WIN64_DEBUG_PATH(${GIF}/${OS}/${DEBUG})
+WIN64_DEBUG_BASH("#!/bin/bash 
 cd ${GIF}/${OS}/${DEBUG} 
 export PATH=/${MINGW64}/bin:$PATH\;
 export PATH=/${MSYS}/bin:$PATH\;
@@ -73,8 +74,9 @@ export PATH=/${MSYS}/bin:$PATH\;
 make 
 exit \n")
 DKRENAME(${GIF}/${OS}/${DEBUG}/lib/.libs/libgif.a ${GIF}/${OS}/${DEBUG}/lib/.libs/libgif.lib)
-DKSETPATH(${GIF}/${OS}/${RELEASE})
-WIN64_BASH("#!/bin/bash 
+
+WIN64_RELEASE_PATH(${GIF}/${OS}/${RELEASE})
+WIN64_RELEASE_BASH("#!/bin/bash 
 cd ${GIF}/${OS}/${RELEASE} 
 export PATH=/${MINGW64}/bin:$PATH\;
 export PATH=/${MSYS}/bin:$PATH\;
@@ -85,46 +87,51 @@ DKRENAME(${GIF}/${OS}/${RELEASE}/lib/.libs/libgif.a ${GIF}/${OS}/${RELEASE}/lib/
 
 
 
-DKSETPATH(${GIF}/${OS}/${DEBUG})
-MAC_COMMAND(../../configure --disable-shared --enable-static)
-MAC_COMMAND(make "CXXFLAGS=-arch x86_64" "CFLAGS=-arch x86_64" "LDFLAGS=-arch x86_64")
-DKSETPATH(${GIF}/${OS}/${RELEASE})
-MAC_COMMAND(../../configure --disable-shared --enable-static)
-MAC_COMMAND(make "CXXFLAGS=-arch x86_64" "CFLAGS=-arch x86_64" "LDFLAGS=-arch x86_64")
+MAC_DEBUG_PATH(${GIF}/${OS}/${DEBUG})
+MAC_DEBUG_COMMAND(../../configure --disable-shared --enable-static)
+MAC_DEBUG_COMMAND(make "CXXFLAGS=-arch x86_64" "CFLAGS=-arch x86_64" "LDFLAGS=-arch x86_64")
+
+MAC_RELEASE_PATH(${GIF}/${OS}/${RELEASE})
+MAC_RELEASE_COMMAND(../../configure --disable-shared --enable-static)
+MAC_RELEASE_COMMAND(make "CXXFLAGS=-arch x86_64" "CFLAGS=-arch x86_64" "LDFLAGS=-arch x86_64")
 
 
 
-DKSETPATH(${GIF}/${OS}/${DEBUG})
+IOS_DEBUG_PATH(${GIF}/${OS}/${DEBUG})
 IOS_DEBUG_COMMAND(../../configure --disable-shared --enable-static --arch-"armv7 armv7s")
 IOS_DEBUG_COMMAND(make)
-DKSETPATH(${GIF}/${OS}/${RELEASE})
+
+IOS_RELEASE_PATH(${GIF}/${OS}/${RELEASE})
 IOS_RELEASE_COMMAND(../../configure --disable-shared --enable-static --arch-"armv7 armv7s")
 IOS_RELEASE_COMMAND(make)
 
 
 
-DKSETPATH(${GIF}/${OS}/${DEBUG})
+IOSSIM_DEBUG_PATH(${GIF}/${OS}/${DEBUG})
 IOSSIM_DEBUG_COMMAND(../../configure --disable-shared --enable-static)
 IOSSIM_DEBUG_COMMAND(make "CXXFLAGS=-arch i386" "CFLAGS=-arch i386" "LDFLAGS=-arch i386")
-DKSETPATH(${GIF}/${OS}/${RELEASE})
+
+IOSSIM_RELEASE_PATH(${GIF}/${OS}/${RELEASE})
 IOSSIM_RELEASE_COMMAND(../../configure --disable-shared --enable-static)
 IOSSIM_RELEASE_COMMAND(make "CXXFLAGS=-arch i386" "CFLAGS=-arch i386" "LDFLAGS=-arch i386")
 
 
 
-DKSETPATH(${GIF}/${OS}/${DEBUG})
+LINUX_DEBUG_PATH(${GIF}/${OS}/${DEBUG})
 LINUX_DEBUG_COMMAND(../../configure --disable-shared --enable-static)
 LINUX_DEBUG_COMMAND(make)
-DKSETPATH(${GIF}/${OS}/${RELEASE})
+
+LINUX_RELEASE_PATH(${GIF}/${OS}/${RELEASE})
 LINUX_RELEASE_COMMAND(../../configure --disable-shared --enable-static)
 LINUX_RELEASE_COMMAND(make)
 
 
 
-DKSETPATH(${GIF}/${OS}/${DEBUG})
+RASPBERRY_DEBUG_PATH(${GIF}/${OS}/${DEBUG})
 RASPBERRY_DEBUG_COMMAND(../../configure --disable-shared --enable-static)
 RASPBERRY_DEBUG_COMMAND(make)
-DKSETPATH(${GIF}/${OS}/${RELEASE})
+
+RASPBERRY_RELEASE_PATH(${GIF}/${OS}/${RELEASE})
 RASPBERRY_RELEASE_COMMAND(../../configure --disable-shared --enable-static)
 RASPBERRY_RELEASE_COMMAND(make)
 

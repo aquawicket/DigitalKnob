@@ -1,9 +1,10 @@
 ## https://github.com/vancegroup/freealut
 
+DKSET(FREEALUT ${3RDPARTY}/freealut-master)
+
 
 ### INSTALL ###
 ## DKINSTALL(www.internet.com/freealut-master.zip freealut-master) ## find an online link
-DKSET(FREEALUT ${3RDPARTY}/freealut-master)
 
 
 ### LINK ###
