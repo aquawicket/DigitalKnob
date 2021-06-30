@@ -1,6 +1,7 @@
 ##### DISABLED #####
 if(LINUX)
 	DISABLE_DKDEPEND(flac)
+	DISABLE_DKDEPEND(SFML)
 endif()
 
 
