@@ -1,6 +1,6 @@
 #!/bin/bash
-APP = "DKBuilder"
-OS = "linux64"
+APP="DKBuilder"
+OS="linux64"
 
 PS3='Please select an app to build: '
 options=("DKBuilder" "DKSDLRmlUi" "DKTestAll" "Exit")
@@ -9,15 +9,15 @@ do
     case $opt in
         "DKBuilder")
             echo "you chose DKBuilder"
-			APP = "DKBuilder"
+			APP="DKBuilder"
             ;;
         "DKSDLRmlUi")
             echo "you chose DKSDLRmlUi"
-			APP = "DKSDLRmlUi"
+			APP="DKSDLRmlUi"
             ;;
         "DKTestAll")
             echo "you chose choice $REPLY which is $opt"
-			APP = "DKTestAll"
+			APP="DKTestAll"
             ;;
         "Exit")
             break
