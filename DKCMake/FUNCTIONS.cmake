@@ -3,7 +3,7 @@
 #####################################################################
 ###################         DKFUNCTIONS()         ###################
 #####################################################################
-set(dkdepend_disable_list "" CACHE INTERNAL ""))
+set(dkdepend_disable_list "" CACHE INTERNAL "")
 
 
 function(DKSET arg arg2)
