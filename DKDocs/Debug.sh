@@ -2,8 +2,6 @@
 APP="DKBuilder"
 OS="linux64"
 
-
-
 git clone https://github.com/aquawicket/DigitalKnob.git /home/"$USER"/digitalknob/DK
 cd /home/"$USER"/digitalknob/DK
 git checkout -- .
