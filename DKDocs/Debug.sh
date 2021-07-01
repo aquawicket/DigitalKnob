@@ -10,7 +10,7 @@ git pull origin master
 mkdir /home/"$USER"/digitalknob/DK/DKApps/$APP/$OS/Release
 cd /home/"$USER"/digitalknob/DK/DKApps/$APP/$OS/Release
 rm /home/"$USER"/digitalknob/DK/DKApps/$APP/$OS/Release/CMakeCache.txt
-cmake -G "Unix Makefiles" -m32 -DRELEASE=ON -DREBUILDALL=ON -DSTATIC=ON /home/"$USER"/digitalknob/DK
+cmake -G "Unix Makefiles" -DRELEASE=ON -DREBUILDALL=ON -DSTATIC=ON /home/"$USER"/digitalknob/DK
 
 cd /home/"$USER"/digitalknob/DK/DKApps/$APP/$OS/Release
 make $APP
