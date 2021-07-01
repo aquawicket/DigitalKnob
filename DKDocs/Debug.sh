@@ -2,34 +2,6 @@
 APP="DKBuilder"
 OS="linux64"
 
-PS3='Please select an app to build: '
-options=("DKBuilder" "DKSDLRmlUi" "DKTestAll" "Exit")
-select opt in "${options[@]}"
-do
-    case $opt in
-        "DKBuilder")
-            echo "you chose DKBuilder"
-			APP="DKBuilder"
-			break
-            ;;
-        "DKSDLRmlUi")
-            echo "you chose DKSDLRmlUi"
-			APP="DKSDLRmlUi"
-            break
-			;;
-        "DKTestAll")
-            echo "you chose choice $REPLY which is $opt"
-			APP="DKTestAll"
-            break
-			;;
-        "Exit")
-            break
-            ;;
-        *) echo "invalid option $REPLY";;
-    esac
-done
-
-
 
 
 git clone https://github.com/aquawicket/DigitalKnob.git /home/"$USER"/digitalknob/DK
