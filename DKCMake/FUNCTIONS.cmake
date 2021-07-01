@@ -3,8 +3,8 @@
 #####################################################################
 ###################         DKFUNCTIONS()         ###################
 #####################################################################
-message("CMAKE_BINARY_DIR = ${CMAKE_BINARY_DIR}")
 
+DKSET(dkdepend_disable_list OFF)
 
 set(UPX ON)
 if(CMAKE_HOST_UNIX AND NOT CMAKE_HOST_APPLE)
