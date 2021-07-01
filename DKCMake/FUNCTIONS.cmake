@@ -3,8 +3,9 @@
 #####################################################################
 ###################         DKFUNCTIONS()         ###################
 #####################################################################
+set(dkdepend_disable_list "" CACHE INTERNAL ""))
 
-########################
+
 function(DKSET arg arg2)
 	set(extra_args ${ARGN})
 	list(LENGTH extra_args num_extra_args)
@@ -16,9 +17,12 @@ function(DKSET arg arg2)
 	endif()
 endfunction()
 
-DKSET(dkdepend_disable_list OFF)
-
-
+function(DKUNSET arg)
+	unset(${arg})  #TODO
+	#Unset a variable, cache variable, or environment variable.
+	#Removes the specified variable causing it to become undefined. If CACHE is present then the variable is removed from the cache instead of the current scope.
+	#If PARENT_SCOPE is present then the variable is removed from the scope above the current scope. See the same option in the set() command for further details.
+endfunction()
 
 set(UPX ON)
 if(CMAKE_HOST_UNIX AND NOT CMAKE_HOST_APPLE)
@@ -42,16 +46,7 @@ function(WaitForEnter)
 	endif()
 		message("WaitForHost() Not implemented for this platform")
 endfunction()
-	
 
-
-#####################
-function(DKUNSET arg)
-	unset(${arg})  #TODO
-	#Unset a variable, cache variable, or environment variable.
-	#Removes the specified variable causing it to become undefined. If CACHE is present then the variable is removed from the cache instead of the current scope.
-	#If PARENT_SCOPE is present then the variable is removed from the scope above the current scope. See the same option in the set() command for further details.
-endfunction()
 
 ##########################
 function(DKPATHEXISTS arg)
