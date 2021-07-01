@@ -4,7 +4,21 @@
 ###################         DKFUNCTIONS()         ###################
 #####################################################################
 
+########################
+function(DKSET arg arg2)
+	set(extra_args ${ARGN})
+	list(LENGTH extra_args num_extra_args)
+	if(${num_extra_args} GREATER 0)
+		list(GET extra_args 0 arg3)
+		set(${arg} ${arg2} ${extra_args} CACHE INTERNAL "")
+	else()
+		set(${arg} ${arg2} CACHE INTERNAL "")
+	endif()
+endfunction()
+
 DKSET(dkdepend_disable_list OFF)
+
+
 
 set(UPX ON)
 if(CMAKE_HOST_UNIX AND NOT CMAKE_HOST_APPLE)
@@ -29,17 +43,7 @@ function(WaitForEnter)
 		message("WaitForHost() Not implemented for this platform")
 endfunction()
 	
-########################
-function(DKSET arg arg2)
-	set(extra_args ${ARGN})
-	list(LENGTH extra_args num_extra_args)
-	if(${num_extra_args} GREATER 0)
-		list(GET extra_args 0 arg3)
-		set(${arg} ${arg2} ${extra_args} CACHE INTERNAL "")
-	else()
-		set(${arg} ${arg2} CACHE INTERNAL "")
-	endif()
-endfunction()
+
 
 #####################
 function(DKUNSET arg)
