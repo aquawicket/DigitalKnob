@@ -2572,11 +2572,11 @@ function(DKDEPEND arg)
 			return()
 		endif()
 		
-		list(FIND dkdepend_disable_list "${arg} ${args}" _index)
-		if(${_index} GREATER -1)
-			message("${arg} IS DISABLED")
-			return()
-		endif()
+		#list(FIND dkdepend_disable_list "${arg} ${args}" _index)
+		#if(${_index} GREATER -1)
+		#	message("${arg} IS DISABLED")
+		#	return()
+		#endif()
 		
 		DKRUNDEPENDS(${arg} ${arg2})    ##strip everything from the file except if() else() elseif() endif() and DKDEPEND() before sorting.
 		#DKBRUTEDEPENDS(${arg} ${arg2}) ##read ALL DKDEPENDS() commands from the file list.  -ignores if(), else().. and all found depends will be included.
@@ -2587,11 +2587,11 @@ function(DKDEPEND arg)
 			return()
 		endif()
 		
-		list(FIND dkdepend_disable_list "${arg}" _index)
-		if(${_index} GREATER -1)
-			message("${arg} IS DISABLED")
-			return()
-		endif()
+		#list(FIND dkdepend_disable_list "${arg}" _index)
+		#if(${_index} GREATER -1)
+		#	message("${arg} IS DISABLED")
+		#	return()
+		#endif()
 		
 		DKRUNDEPENDS(${arg})  ##strip everything from the file except if() else() elseif() endif() and DKDEPEND() before sorting.
 		#DKBRUTEDEPENDS(${arg}) ##read ALL DKDEPENDS() commands from the file list.  -ignores if(), else().. and all found depends will be included.
