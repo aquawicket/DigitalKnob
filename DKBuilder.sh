@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 APP="DKBuilder"
 OS="linux64"
 
