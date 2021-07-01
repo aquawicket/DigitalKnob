@@ -80,10 +80,10 @@ DKDEPEND(BuildTools)
 include(${DKPROJECT}/DKMAKE.cmake)
 
 list(REMOVE_DUPLICATES dkdepend_list)
-list(REMOVE_DUPLICATES dkdepend_disable_list)
-foreach(offplugin ${dkdepend_disable_list})
-	list(REMOVE_ITEM dkdepend_list ${offplugin})
-endforeach()
+#list(REMOVE_DUPLICATES dkdepend_disable_list)
+#foreach(offplugin ${dkdepend_disable_list})
+#	list(REMOVE_ITEM dkdepend_list ${offplugin})
+#endforeach()
 
 message("\n")
 message("**********************************")
@@ -95,20 +95,18 @@ endforeach()
 message("\n\n")
 
 
-message("*** DISABLED DKPLUGINS  *****")
-foreach(offplugin ${dkdepend_disable_list})
-	message("${offplugin}")	
-endforeach()
-message("\n\n")
+#message("*** DISABLED DKPLUGINS  *****")
+#foreach(offplugin ${dkdepend_disable_list})
+#	message("${offplugin}")	
+#endforeach()
+#message("\n\n")
 
 ## Clear cache list variables 
 DKSET(DKDEFINES "")
 DKSET(DKINCLUDES "")
 DKSET(DKLIBRARIES "")
 
-set(ANDROID_NDK ${3RDPARTY}/android-ndk-r21e-windows-x86_64)
-ANDROID_DEBUG_LIB(${ANDROID_NDK}/sources/cxx-stl/llvm-libc++/libs/armeabi-v7a/libc++_static.a)
-ANDROID_RELEASE_LIB(${ANDROID_NDK}/sources/cxx-stl/llvm-libc++/libs/armeabi-v7a/libc++_static.a)
+
 foreach(plugin ${dkdepend_list})
 	DKSET(QUEUE_BUILD OFF)
 	DKSET(LIBLIST "") ## used for double checking
