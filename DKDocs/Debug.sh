@@ -11,6 +11,7 @@ mkdir /home/"$USER"/digitalknob/DK/DKApps/$APP/$OS/Release
 cd /home/"$USER"/digitalknob/DK/DKApps/$APP/$OS/Release
 rm /home/"$USER"/digitalknob/DK/DKApps/$APP/$OS/Release/CMakeCache.txt
 cd /home/"$USER"/digitalknob/DK/DKApps/$APP/$OS/Release
-cmake -G "Unix Makefiles" -DRELEASE=ON -DREBUILDALL=ON -DSTATIC=ON -B/home/"$USER"/digitalknob/DK/DKApps/$APP/$OS/Release /home/"$USER"/digitalknob/DK
+cd /home/aquaubuntu64/digitalknob/DK/DKApps/DKBuilder/linux64/Release
+cmake -G "Unix Makefiles" -DRELEASE=ON -DREBUILDALL=ON -DSTATIC=ON /home/"$USER"/digitalknob/DK
 cd /home/"$USER"/digitalknob/DK/DKApps/$APP/$OS/Release
 make $APP
