@@ -3,11 +3,18 @@ APP="DKBuilder"
 OS="linux64"
 
 PS3='Please select an app to build: '
-options=("DKBuilder" "DKSDLRmlUi" "DKTestAll" "Exit")
+options=("UPDATE" "DKBuilder" "DKSDLRmlUi" "DKTestAll" "Exit")
 select opt in "${options[@]}"
 do
     case $opt in
-        "DKBuilder")
+        "UPDATE")
+            echo "you chose UPDATE"
+			git clone https://github.com/aquawicket/DigitalKnob.git /home/"$USER"/digitalknob/DK
+			cd /home/"$USER"/digitalknob/DK
+			git checkout -- .
+			git pull origin master
+            ;;
+		"DKBuilder")
             echo "you chose DKBuilder"
 			APP="DKBuilder"
 			break
@@ -62,10 +69,6 @@ do
     esac
 done
 
-git clone https://github.com/aquawicket/DigitalKnob.git /home/"$USER"/digitalknob/DK
-cd /home/"$USER"/digitalknob/DK
-git checkout -- .
-git pull origin master
 
 mkdir /home/"$USER"/digitalknob/DK/DKApps/$APP/$OS
 mkdir /home/"$USER"/digitalknob/DK/DKApps/$APP/$OS/Release
