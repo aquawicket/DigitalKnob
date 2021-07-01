@@ -2560,12 +2560,6 @@ endfunction()
 ## Add a library or plugin to the dependency list
 ######################
 function(DKDEPEND arg)
-	list(FIND dkdepend_disable_list "${arg}" _index)
-	if(${_index} GREATER -1)
-		message("${arg} IS DISABLED")
-		return()
-	endif()
-		
 	## If DKDEPEND had second variable (a sub library), set that variable to ON
 	set(extra_args ${ARGN})
 	list(LENGTH extra_args num_extra_args)
@@ -2578,12 +2572,24 @@ function(DKDEPEND arg)
 			return()
 		endif()
 		
+		list(FIND dkdepend_disable_list "${arg} ${args}" _index)
+		if(${_index} GREATER -1)
+			message("${arg} IS DISABLED")
+			return()
+		endif()
+		
 		DKRUNDEPENDS(${arg} ${arg2})    ##strip everything from the file except if() else() elseif() endif() and DKDEPEND() before sorting.
 		#DKBRUTEDEPENDS(${arg} ${arg2}) ##read ALL DKDEPENDS() commands from the file list.  -ignores if(), else().. and all found depends will be included.
 	else()
 		## If the library is already in the list, return.
 		list(FIND dkdepend_list "${arg}" _index)
 		if(${_index} GREATER -1)
+			return()
+		endif()
+		
+		list(FIND dkdepend_disable_list "${arg}" _index)
+		if(${_index} GREATER -1)
+			message("${arg} IS DISABLED")
 			return()
 		endif()
 		

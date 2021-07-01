@@ -2,6 +2,7 @@
 APP="DKBuilder"
 OS="linux64"
 
+echo " "
 PS3='Please select an app to build: '
 options=("UPDATE" "DKBuilder" "DKSDLRmlUi" "DKTestAll" "Exit")
 select opt in "${options[@]}"
@@ -36,7 +37,7 @@ do
     esac
 done
 
-
+echo " "
 PS3='Please select an OS to build for: '
 options=("linux32" "linux64" "mac64" "raspberry32" "Exit")
 select opt in "${options[@]}"

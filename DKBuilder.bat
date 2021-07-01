@@ -1,5 +1,4 @@
 @ECHO off
-cls
 
 set "APP="
 set "OS="
