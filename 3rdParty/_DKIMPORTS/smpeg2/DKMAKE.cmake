@@ -1,7 +1,7 @@
 ## https://www.libsdl.org/projects/smpeg/release/smpeg2-2.0.0.tar.gz
 
 ### DEPENDS ###
-DKDEPEND(DKSDLWindow)
+DKDEPEND(SDL2)
 
 ### VERSION ###
 DKSET(SMPEG2_VERSION 2.0.0)
