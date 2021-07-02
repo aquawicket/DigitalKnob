@@ -3,7 +3,7 @@ if(NOT WIN)
 endif()
 
 ### VERSION ###
-DKSET(PHP_VERSION php-8.0.3-Win32-vs16-x64)
+DKSET(PHP_VERSION 8.0.3-Win32-vs16-x64)
 DKSET(PHP ${3RDPARTY}/php-${PHP_VERSION})
 
 
