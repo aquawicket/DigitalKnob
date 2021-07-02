@@ -1,8 +1,8 @@
 IF(NOT CMAKE_HOST_APPLE)
-	RETURN()
+	return()
 ENDIF()
-IF(MAC)
-	RETURN() #iOS only
+IF(NOT IOS)
+	return() #iOS only
 ENDIF()
 
 

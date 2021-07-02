@@ -1,9 +1,7 @@
-message("FIXME (BZIP2) need to compile for windows")
-return()
-
 ### VERSION ###
 DKSET(BZIP2_VERSION 2-1.0.8)
 DKSET(BZIP2 ${3RDPARTY}/bzip${BZIP2_VERSION})
+
 
 ### INSTALL ###
 if(WIN)
@@ -42,7 +40,6 @@ DKSET(BZIP2_WIN
 	
 
 ### COMPILE ###
-if(0)
 if(WIN_32)
 	if(NOT EXISTS ${BZIP2}/${OS}/bzip2.c)
 		DKCOPY(${3RDPARTY}/bzip2-temp ${BZIP2}/${OS} TRUE)
@@ -58,7 +55,6 @@ exit\;")
 	DKRENAME(${BZIP2}/${OS}/libbz2.a ${BZIP2}/${OS}/libbz2.lib)
 	DKCOPY(${3RDPARTY}/mingw/mingw32/lib/gcc/i686-w64-mingw32/4.9.2/libgcc.a ${BZIP2}/${OS} TRUE)
 	DKRENAME(${BZIP2}/${OS}/libgcc.a ${BZIP2}/${OS}/libgcc.lib)
-endif()
 endif()
 
 
