@@ -1,11 +1,11 @@
-IF(NOT WIN)
-	RETURN()
-ENDIF()
+if(NOT WIN)
+	return()
+endif()
 
 ### VERSION ###
 DKSET(PHP_VERSION php-8.0.3-Win32-vs16-x64)
+DKSET(PHP ${3RDPARTY}/php-${PHP_VERSION})
 
 
 ### INSTALL ###
-DKINSTALL(https://phpdev.toolsforresearch.com/${PHP_VERSION}.zip php-Win32-vs16-x64 ${PHP_VERSION})
-DKSET(PHP ${3RDPARTY}/${PHP_VERSION})
+DKINSTALL(https://phpdev.toolsforresearch.com/php-${PHP_VERSION}.zip php-Win32-vs16-x64 php-${PHP_VERSION})

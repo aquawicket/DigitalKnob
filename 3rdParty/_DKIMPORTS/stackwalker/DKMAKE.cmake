@@ -1,8 +1,8 @@
 # FIXME: Let's replace this with boost::stacktrace for cross platform support.
 # https://www.boost.org/doc/libs/1_75_0/doc/html/stacktrace.html
-IF(NOT CMAKE_HOST_WIN32)
-	RETURN()
-ENDIF()
+if(NOT CMAKE_HOST_WIN32)
+	return()
+endif()
 
 ### VERSION ###
 DKSET(STACKWALKER_VERSION 2014-12-28)

@@ -1,6 +1,6 @@
-IF(NOT WIN_32)
-	RETURN()
-ENDIF()
+if(NOT WIN_32)
+	return()
+endif()
 
 ### VERSION ###
 DKSET(FFMPEG_VERSION ffmpeg-20150905-git-a87ada5-win32-dev)

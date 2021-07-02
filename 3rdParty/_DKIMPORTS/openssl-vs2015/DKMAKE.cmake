@@ -1,15 +1,16 @@
-IF(NOT CMAKE_HOST_WIN32)
-	RETURN()
-ENDIF()
+if(NOT CMAKE_HOST_WIN32)
+	return()
+endif()
 
 
 ### VERSION ###
 DKSET(OPENSSL_VERSION 1.0.2h-vs2015)
+DKSET(OPENSSL ${3RDPARTY}/open
 
 
 ### INSTALL ###
 DKINSTALL(https://www.npcglib.org/~stathis/downloads/openssl-${OPENSSL_VERSION}.7z openssl-vs2015 openssl-${OPENSSL_VERSION})
-DKSET(OPENSSL ${3RDPARTY}/openssl-${OPENSSL_VERSION})
+ssl-${OPENSSL_VERSION})
 
 
 ### DKPLUGINS LINK ###

@@ -1,6 +1,6 @@
-IF(NOT WIN_32)
-	RETURN()
-ENDIF()
+if(NOT WIN_32)
+	return()
+endif()
 
 
 ### INSTALL ###

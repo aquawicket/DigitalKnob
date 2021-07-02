@@ -1,5 +1,5 @@
 ## Obsolete - replaced by RmlUi
-RETURN()
+return()
 DKDEPEND(freetype)
 
 

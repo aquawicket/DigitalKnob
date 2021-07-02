@@ -1,6 +1,6 @@
-IF(NOT CMAKE_HOST_APPLE OR MAC)
-	RETURN()
-ENDIF()
+if(NOT CMAKE_HOST_APPLE OR MAC)
+	return()
+endif()
 
 
 ### INSTALL ###
