@@ -36,7 +36,8 @@ do
             break
             ;;
         *) echo "invalid option $REPLY";;
-    esac REPLY=
+    esac 
+	REPLY=
 done
 
 echo " "
@@ -70,7 +71,8 @@ do
             break
             ;;
         *) echo "invalid option $REPLY";;
-    esac REPLY=
+    esac 
+	REPLY=
 done
 
 
