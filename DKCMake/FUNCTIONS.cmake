@@ -163,37 +163,37 @@ function(DKRENAME from to)
 	endif()
 endfunction()
 
-######################
-function(DKREMOVE arg)
-	if(EXISTS ${arg})
-		if(IS_DIRECTORY ${arg})
-			execute_process(COMMAND ${CMAKE_COMMAND} -E remove_directory ${arg})
+
+function(DKREMOVE path)
+	if(EXISTS ${path})
+		if(IS_DIRECTORY ${path})
+			execute_process(COMMAND ${CMAKE_COMMAND} -E remove_directory ${path})
 		else()
-			execute_process(COMMAND ${CMAKE_COMMAND} -E remove ${arg})
+			execute_process(COMMAND ${CMAKE_COMMAND} -E remove ${path})
 		endif()
 	endif()
 endfunction()
 
-###########################
-function(UPX_COMPRESS file)
+
+function(UPX_COMPRESS path)
 	if(UPX AND CMAKE_HOST_WIN32)
-		message("UPX compressing ${file}...")
+		message("UPX compressing ${path}...")
 		message("Please wait...")
-		execute_process(COMMAND cmd /c "${3RDPARTY}/upx392w/upx.exe -9 -v ${file}")
+		execute_process(COMMAND cmd /c "${3RDPARTY}/upx392w/upx.exe -9 -v ${path}")
 	endif()
 endfunction()
 
-######################
-function(DKENABLE arg)
-	DKSET(${arg} ON)
-	DKDEFINE(USE_${arg})
+
+function(DKENABLE plugin)
+	DKSET(${plugin} ON)
+	DKDEFINE(USE_${plugin})
 endfunction()
 
-function(DKDISABLE arg)
-	DKUNSET(${arg})
-	DKUNDEFINE(USE_${arg})
-endfunction()
 
+function(DKDISABLE plugin)
+	DKUNSET(${plugin})
+	DKUNDEFINE(USE_${plugin})
+endfunction()
 
 ######################
 function(DKDEFINE arg)
