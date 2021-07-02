@@ -1,78 +1,63 @@
 ## TODO:    https://foonathan.net/2016/03/cmake-install/ 
 
+if(CMAKE_HOST_UNIX AND NOT CMAKE_HOST_APPLE)
+	set(CMAKE_HOST_LINUX TRUE)
+endif()
 #####################################################################
 ###################         DKFUNCTIONS()         ###################
 #####################################################################
 set(dkdepend_disable_list "" CACHE INTERNAL "")
+set(UPX ON)
 
 
-function(DKSET arg arg2)
+function(DKSET variable value)
 	set(extra_args ${ARGN})
 	list(LENGTH extra_args num_extra_args)
 	if(${num_extra_args} GREATER 0)
 		list(GET extra_args 0 arg3)
-		set(${arg} ${arg2} ${extra_args} CACHE INTERNAL "")
+		set(${variable} ${value} ${extra_args} CACHE INTERNAL "")
 	else()
-		set(${arg} ${arg2} CACHE INTERNAL "")
+		set(${variable} ${value} CACHE INTERNAL "")
 	endif()
 endfunction()
 
-function(DKUNSET arg)
-	unset(${arg})  #TODO
+
+function(DKUNSET variable)
+	unset(${variable})  #TODO
 	#Unset a variable, cache variable, or environment variable.
 	#Removes the specified variable causing it to become undefined. If CACHE is present then the variable is removed from the cache instead of the current scope.
 	#If PARENT_SCOPE is present then the variable is removed from the scope above the current scope. See the same option in the set() command for further details.
 endfunction()
 
-set(UPX ON)
-if(CMAKE_HOST_UNIX AND NOT CMAKE_HOST_APPLE)
-	set(CMAKE_HOST_LINUX TRUE)
-endif()
 
-########################
-#function(DKLOG text lvl)
-#	if(${lvl} STREQUAL "DKINFO")
-#		message(STATUS ${text})
-#	elseif(${lvl} STREQUAL "DKERROR")
-#		message(FATAL_ERROR ${text})
-#	endif()
-#endfunction()
-
-######################
 function(WaitForEnter)
 	if(CMAKE_HOST_WIN32)	
 		execute_process(COMMAND cmd /c set /p DUMMY=Hit ENTER to continue... WORKING_DIRECTORY C:/)
 		return()
 	endif()
-		message("WaitForHost() Not implemented for this platform")
+		message("WaitForEnter() Not implemented for this platform")
 endfunction()
 
 
-##########################
-function(DKPATHEXISTS arg)
-	##TODO
-endfunction()
-
-#######################
-function(DKSETPATH arg)
-	DKSET(CURRENT_DIR ${arg})
+function(DKSETPATH path)
+	DKSET(CURRENT_DIR ${path})
 	if(NOT EXISTS ${CURRENT_DIR})
 		file(MAKE_DIRECTORY ${CURRENT_DIR})
 	endif()
 endfunction()
 
-########################
-function(DKDOWNLOAD arg)
+
+function(DKDOWNLOAD url)
 	##https://cmake.org/pipermail/cmake/2012-September/052205.html/
 	if(${ARGC} EQUAL 1)
-		get_filename_component(filename ${arg} NAME)
+		get_filename_component(filename ${url} NAME)
 	endif()
 	if(${ARGC} EQUAL 2)
 		set(filename ${ARGV1})
 	endif()
 	if(NOT EXISTS ${CURRENT_DIR}/${filename})
-		message(STATUS "downloading... ${arg}")
-		file(DOWNLOAD ${arg} ${CURRENT_DIR}/${filename} SHOW_PROGRESS 
+		message(STATUS "downloading... ${url}")
+		file(DOWNLOAD ${url} ${CURRENT_DIR}/${filename} SHOW_PROGRESS 
 			#no TIMEOUT
 			STATUS status 
 			#no LOG
@@ -87,7 +72,7 @@ function(DKDOWNLOAD arg)
 			message("*********************************************")
 			message("CMAKE SOMETIMES FAILS TO DOWNLOAD LARGE FILES")
 			message("PLEASE DOWNLOAD THE FILE TO THE digitalknob/Download direcotry")
-			message("THE URL IS: ${arg}") 
+			message("THE URL IS: ${url}") 
 			message("*********************************************")
 			message(" ")
 			## TODO - copy the url to the clipboard and notify the user
@@ -96,25 +81,25 @@ function(DKDOWNLOAD arg)
 			##Download with DKCurl
 			##message("Attempting to download with DKCurl...")
 			##DKSET(QUEUE_BUILD ON)
-			##WIN_COMMAND("${DIGITALKNOB}/DKCMake/DKCurl.exe ${arg} ${CURRENT_DIR}/${filename}")
+			##WIN_COMMAND("${DIGITALKNOB}/DKCMake/DKCurl.exe ${url} ${CURRENT_DIR}/${filename}")
 		else()
 			message(STATUS "downloading... done")
 		endif() 
 	endif()
 endfunction()
 
-############################
-function(DKEXTRACT arg path)
-	if(NOT EXISTS ${path})
-		file(MAKE_DIRECTORY ${path})
+
+function(DKEXTRACT src dest)
+	if(NOT EXISTS ${dest})
+		file(MAKE_DIRECTORY ${dest})
 	endif()
-	execute_process(COMMAND ${CMAKE_COMMAND} -E tar xvf ${arg} WORKING_DIRECTORY ${path})
+	execute_process(COMMAND ${CMAKE_COMMAND} -E tar xvf ${src} WORKING_DIRECTORY ${dest})
 endfunction()
 
-###################
-function(DKZIP arg)
-	message("Zipping: ${arg}")
-	execute_process(COMMAND ${CMAKE_COMMAND} -E tar "cfv" "${DKPROJECT}/assets.zip" --format=zip "." WORKING_DIRECTORY ${arg}/)
+
+function(DKZIP path)
+	message("Zipping: ${path}")
+	execute_process(COMMAND ${CMAKE_COMMAND} -E tar "cfv" "${DKPROJECT}/assets.zip" --format=zip "." WORKING_DIRECTORY ${path}/)
 endfunction()
 
 ###################################
