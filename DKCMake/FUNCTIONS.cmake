@@ -2501,17 +2501,19 @@ function(DKRUNDEPENDS arg)
 	endif()
 	
 	file(STRINGS ${PATHTOPLUGIN}/DKMAKE.cmake lines)
-	unset(ModifiedContents)
+	unset(disable_script)
+	unset(depends_script)
 	unset(_indexa)
+	
 	foreach(line ${lines})
 		string(FIND "${line}" "if(" _indexa)
 		if(${_indexa} GREATER -1)
-			set(ModifiedContents "${ModifiedContents}${line}\n")
+			set(disable_script "${disable_script}${line}\n")
 		endif()
 		
 		string(FIND "${line}" "IF(" _indexa)
 		if(${_indexa} GREATER -1)
-			set(ModifiedContents "${ModifiedContents}${line}\n")
+			set(disable_script "${disable_script}${line}\n")
 		endif()
 		
 		## elseif(
@@ -2519,12 +2521,12 @@ function(DKRUNDEPENDS arg)
 		
 		string(FIND "${line}" "else(" _indexa)
 		if(${_indexa} GREATER -1)
-			set(ModifiedContents "${ModifiedContents}${line}\n")
+			set(disable_script "${disable_script}${line}\n")
 		endif()
 		
 		string(FIND "${line}" "ELSE(" _indexa)
 		if(${_indexa} GREATER -1)
-			set(ModifiedContents "${ModifiedContents}${line}\n")
+			set(disable_script "${disable_script}${line}\n")
 		endif()
 		
 		## endif(
@@ -2532,22 +2534,69 @@ function(DKRUNDEPENDS arg)
 		
 		string(FIND "${line}" "return(" _indexa)
 		if(${_indexa} GREATER -1)
-			set(ModifiedContents "${ModifiedContents}${line}\n")
+			set(disable_script "${disable_script}${line}\n")
 		endif()
 		
 		string(FIND "${line}" "RETURN(" _indexa)
 		if(${_indexa} GREATER -1)
-			set(ModifiedContents "${ModifiedContents}${line}\n")
+			set(disable_script "${disable_script}${line}\n")
+		endif()
+		
+		string(FIND "${line}" "DISABLE_DKDEPEND(" _indexa)
+		if(${_indexa} GREATER -1)
+			set(disable_script "${disable_script}${line}\n")
+		endif()
+		
+		## DISABLE_DKDEPEND(
+		##NOTE: The 'DKDEPEND(' search commands take care of 'DISABLE_DKDEPEND(' since 'DKDEPEND' is already in the word
+		
+	endforeach()
+	
+	foreach(line ${lines})
+		string(FIND "${line}" "if(" _indexa)
+		if(${_indexa} GREATER -1)
+			set(depends_script "${depends_script}${line}\n")
+		endif()
+		
+		string(FIND "${line}" "IF(" _indexa)
+		if(${_indexa} GREATER -1)
+			set(depends_script "${depends_script}${line}\n")
+		endif()
+		
+		## elseif(
+		##NOTE: The 'if(' search commands take care of elseif() and endif() since 'if' is already in those words 
+		
+		string(FIND "${line}" "else(" _indexa)
+		if(${_indexa} GREATER -1)
+			set(depends_script "${depends_script}${line}\n")
+		endif()
+		
+		string(FIND "${line}" "ELSE(" _indexa)
+		if(${_indexa} GREATER -1)
+			set(depends_script "${depends_script}${line}\n")
+		endif()
+		
+		## endif(
+		##NOTE: The 'if(' search commands take care of elseif() and endif() since 'if' is already in those words 
+		
+		string(FIND "${line}" "return(" _indexa)
+		if(${_indexa} GREATER -1)
+			set(depends_script "${depends_script}${line}\n")
+		endif()
+		
+		string(FIND "${line}" "RETURN(" _indexa)
+		if(${_indexa} GREATER -1)
+			set(depends_script "${depends_script}${line}\n")
 		endif()
 		
 		string(FIND "${line}" "DKENABLE(" _indexa)
 		if(${_indexa} GREATER -1)
-			set(ModifiedContents "${ModifiedContents}${line}\n")
+			set(depends_script "${depends_script}${line}\n")
 		endif()	
 		
 		string(FIND "${line}" "DKDEPEND(" _indexa)
 		if(${_indexa} GREATER -1)
-			set(ModifiedContents "${ModifiedContents}${line}\n")
+			set(depends_script "${depends_script}${line}\n")
 		endif()
 		
 		## DISABLE_DKDEPEND(
@@ -2561,8 +2610,14 @@ function(DKRUNDEPENDS arg)
 		list(GET extra_args 0 arg2)
 	endif()
 	
-	if(ModifiedContents)
-		file(WRITE ${PATHTOPLUGIN}/DEPENDS.TMP "${ModifiedContents}")
+	if(disable_script)
+		file(WRITE ${PATHTOPLUGIN}/DISABLES.TMP "${disable_script}")
+		INCLUDE(${PATHTOPLUGIN}/DISABLES.TMP)
+		DKREMOVE(${PATHTOPLUGIN}/DISABLES.TMP)
+	endif()
+	
+	if(depends_script)
+		file(WRITE ${PATHTOPLUGIN}/DEPENDS.TMP "${depends_script}")
 		if(${num_extra_args} GREATER 0)
 			DKENABLE(${arg2})
 		endif()
