@@ -20,7 +20,7 @@ LINUX_RELEASE_LIB(${OGG}/${OS}/${RELEASE}/src/.libs/libogg.a)
 ANDROID_DEBUG_LIB(${OGG}/${OS}/${DEBUG}/obj/local/armeabi-v7a/libogg.a)
 ANDROID_RELEASE_LIB(${OGG}/${OS}/${RELEASE}/obj/local/armeabi-v7a/libogg.a)
 
-##-DOGG_INCLUDE_DIR=${OGG}/include 
+
 ### 3RDPARTY LINK ###
 DKSET(OGG_INCLUDE -DOGG_INCLUDE_DIR=${OGG}/include)
 DKSET(OGG_WIN_DEBUG "--with-ogg-includes=\"${OGG}/include\" --with-ogg-libraries=\"${OGG}/${OS}/${DEBUG}/src/.libs\"")
@@ -42,7 +42,6 @@ export PATH=/${MSYS}/bin:$PATH\;
 ../../configure --disable-shared --enable-static 
 make 
 exit \n")
-##DKCOPY(${OGG}/${OS}/${DEBUG}/src/.libs/libogg.a ${OGG}/${OS}/${DEBUG}/src/.libs/libogg.lib TRUE)
 
 WIN32_PATH(${OGG}/${OS}/${RELEASE})
 WIN32_BASH("#!/bin/bash 
@@ -52,7 +51,6 @@ export PATH=/${MSYS}/bin:$PATH\;
 ../../configure --disable-shared --enable-static 
 make 
 exit \n")
-##DKCOPY(${OGG}/${OS}/${RELEASE}/src/.libs/libogg.a ${OGG}/${OS}/${RELEASE}/src/.libs/libogg.lib TRUE)
 
 
 WIN64_PATH(${OGG}/${OS}/${DEBUG})
@@ -63,7 +61,6 @@ export PATH=/${MSYS}/bin:$PATH\;
 ../../configure --disable-shared --enable-static 
 make 
 exit \n")
-##DKCOPY(${OGG}/${OS}/${DEBUG}/src/.libs/libogg.a ${OGG}/${OS}/${DEBUG}/src/.libs/libogg.lib TRUE)
 
 WIN64_PATH(${OGG}/${OS}/${RELEASE})
 WIN64_BASH("#!/bin/bash 
@@ -73,7 +70,6 @@ export PATH=/${MSYS}/bin:$PATH\;
 ../../configure --disable-shared --enable-static 
 make 
 exit \n")
-##DKCOPY(${OGG}/${OS}/${RELEASE}/src/.libs/libogg.a ${OGG}/${OS}/${RELEASE}/src/.libs/libogg.lib TRUE)
 
 
 MAC_PATH(${OGG}/${OS}/${DEBUG})
