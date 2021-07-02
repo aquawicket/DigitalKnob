@@ -80,3 +80,4 @@ chmod +x /home/"$USER"/digitalknob/DK/DKBuilder.sh
 
 cd /home/"$USER"/digitalknob/DK/DKApps/$APP/$OS/Release
 make $APP
+chmod +x /home/"$USER"/digitalknob/DK/DKApps/$APP/$OS/Release/$APP
