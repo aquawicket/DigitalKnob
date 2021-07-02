@@ -1,4 +1,4 @@
-if(NOT MAC)
+if(NOT MAC_64)
 	return()
 endif()
 

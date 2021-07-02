@@ -380,6 +380,9 @@ endfunction()
 
 ###################### DK_PATH ####################
 function(DKSETPATH path)
+	if(path STREQUAL "OFF")
+		return() 
+	endif()	
 	DKSET(CURRENT_DIR ${path})
 	if(NOT EXISTS ${CURRENT_DIR})
 		file(MAKE_DIRECTORY ${CURRENT_DIR})

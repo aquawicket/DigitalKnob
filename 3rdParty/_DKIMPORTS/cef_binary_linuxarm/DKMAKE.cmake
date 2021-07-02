@@ -1,4 +1,4 @@
-if(NOT LINUX)
+if(NOT LINUX_ARM32)
 	return()
 endif()
 
