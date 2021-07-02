@@ -31,6 +31,9 @@ ANDROID_RELEASE_LIB(${VORBIS}/${OS}/${RELEASE}/obj/local/armeabi-v7a/libvorbis.a
 
 ### 3RDPARTY LINK ###
 DKSET(VORBIS_WIN -DVORBIS_INCLUDE_DIR=${VORBIS}/include)
+DKSET(VORBIS_APPLE -DVORBIS_INCLUDE_DIR=${VORBIS}/include)
+DKSET(VORBIS_LINUX -DVORBIS_INCLUDE_DIR=${VORBIS}/include)
+DKSET(VORBIS_RASPBERRY -DVORBIS_INCLUDE_DIR=${VORBIS}/include)
 	
 	
 ### COMPILE ###
@@ -39,13 +42,9 @@ WIN32_BASH("#!/bin/bash
 cd ${VORBIS}/${OS}/${DEBUG} 
 export PATH=/${MINGW32}/bin:$PATH\;
 export PATH=/${MSYS}/bin:$PATH\;
-../../configure --disable-shared --enable-static --with-ogg-libraries=\"${OGG}/${OS}/${DEBUG}/src/.libs\" --with-ogg-includes=\"${OGG}/include\" 
+../../configure --disable-shared ${OGG} 
 make 
 exit \n")
-if(WIN_32)
-	##DKRENAME(${VORBIS}/${OS}/${DEBUG}/lib/.libs/libvorbis.a ${VORBIS}/${OS}/${DEBUG}/lib/.libs/libvorbis.lib)
-	##DKRENAME(${VORBIS}/${OS}/${DEBUG}/lib/.libs/libvorbisfile.a ${VORBIS}/${OS}/${DEBUG}/lib/.libs/libvorbisfile.lib)
-endif()
 
 
 WIN32_PATH(${VORBIS}/${OS}/${RELEASE})
@@ -53,13 +52,9 @@ WIN32_BASH("#!/bin/bash
 cd ${VORBIS}/${OS}/${RELEASE} 
 export PATH=/${MINGW32}/bin:$PATH\;
 export PATH=/${MSYS}/bin:$PATH\;
-../../configure --disable-shared --enable-static --with-ogg-libraries=\"${OGG}/${OS}/${RELEASE}/src/.libs\" --with-ogg-includes=\"${OGG}/include\" 
+../../configure --disable-shared ${OGG}
 make 
 exit \n")
-if(WIN_32)
-	##DKRENAME(${VORBIS}/${OS}/${RELEASE}/lib/.libs/libvorbis.a ${VORBIS}/${OS}/${RELEASE}/lib/.libs/libvorbis.lib)
-	##DKRENAME(${VORBIS}/${OS}/${RELEASE}/lib/.libs/libvorbisfile.a ${VORBIS}/${OS}/${RELEASE}/lib/.libs/libvorbisfile.lib)
-endif()
 
 
 WIN64_PATH(${VORBIS}/${OS}/${DEBUG})
@@ -70,10 +65,6 @@ export PATH=/${MSYS}/bin:$PATH\;
 ../../configure --disable-shared --enable-static --with-ogg-libraries=\"${OGG}/${OS}/${DEBUG}/src/.libs\" --with-ogg-includes=\"${OGG}/include\" 
 make 
 exit \n")
-if(WIN_64)
-	##DKRENAME(${VORBIS}/${OS}/${DEBUG}/lib/.libs/libvorbis.a ${VORBIS}/${OS}/${DEBUG}/lib/.libs/libvorbis.lib)
-	##DKRENAME(${VORBIS}/${OS}/${DEBUG}/lib/.libs/libvorbisfile.a ${VORBIS}/${OS}/${DEBUG}/lib/.libs/libvorbisfile.lib)
-endif()
 
 
 WIN64_PATH(${VORBIS}/${OS}/${RELEASE})
@@ -84,10 +75,6 @@ export PATH=/${MSYS}/bin:$PATH\;
 ../../configure --disable-shared --enable-static --with-ogg-libraries=\"${OGG}/${OS}/${RELEASE}/src/.libs\" --with-ogg-includes=\"${OGG}/include\" 
 make 
 exit \n")
-if(WIN_64)
-	##DKRENAME(${VORBIS}/${OS}/${RELEASE}/lib/.libs/libvorbis.a ${VORBIS}/${OS}/${RELEASE}/lib/.libs/libvorbis.lib)
-	##DKRENAME(${VORBIS}/${OS}/${RELEASE}/lib/.libs/libvorbisfile.a ${VORBIS}/${OS}/${RELEASE}/lib/.libs/libvorbisfile.lib)
-endif()
 
 
 MAC_DEBUG_PATH(${VORBIS}/${OS}/${DEBUG})
@@ -109,11 +96,11 @@ IOSSIM_RELEASE_COMMAND(make "CXXFLAGS=-arch x86_64" "CFLAGS=-arch x86_64" "LDFLA
 
 
 LINUX_DEBUG_PATH(${VORBIS}/${OS}/${DEBUG})
-LINUX_DEBUG_COMMAND(../../configure --disable-shared --enable-static --with-ogg-libraries=${OGG}/${OS}/${DEBUG}/src/.libs --with-ogg-includes=${OGG}/include --disable-oggtest)
+LINUX_DEBUG_COMMAND(../../configure --disable-shared --enable-static --disable-oggtest --with-ogg-libraries=${OGG}/${OS}/${DEBUG}/src/.libs --with-ogg-includes=${OGG}/include)
 LINUX_DEBUG_COMMAND(make)
 
 LINUX_RELEASE_PATH(${VORBIS}/${OS}/${RELEASE})
-LINUX_RELEASE_COMMAND(../../configure --disable-shared --enable-static --with-ogg-libraries=${OGG}/${OS}/${RELEASE}/src/.libs --with-ogg-includes=${OGG}/include --disable-oggtest)
+LINUX_RELEASE_COMMAND(../../configure --disable-shared --enable-static --disable-oggtest --with-ogg-libraries=${OGG}/${OS}/${RELEASE}/src/.libs --with-ogg-includes=${OGG}/include)
 LINUX_RELEASE_COMMAND(make)
 
 

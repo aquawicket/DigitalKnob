@@ -11,8 +11,8 @@ DKINSTALL(https://ftp.osuosl.org/pub/xiph/releases/ogg/libogg-${OGG_VERSION}.zip
 ### DKPLUGINS LINK ###
 DKINCLUDE(${OGG}/include)
 ANDROID_INCLUDE(${OGG}/${OS})
-WIN_DEBUG_LIB(${OGG}/${OS}/${DEBUG}/src/.libs/libogg.lib)
-WIN_RELEASE_LIB(${OGG}/${OS}/${RELEASE}/src/.libs/libogg.lib)
+WIN_DEBUG_LIB(${OGG}/${OS}/${DEBUG}/src/.libs/libogg.a)
+WIN_RELEASE_LIB(${OGG}/${OS}/${RELEASE}/src/.libs/libogg.a)
 APPLE_DEBUG_LIB(${OGG}/${OS}/${DEBUG}/src/.libs/libogg.a)
 APPLE_RELEASE_LIB(${OGG}/${OS}/${RELEASE}/src/.libs/libogg.a)
 LINUX_DEBUG_LIB(${OGG}/${OS}/${DEBUG}/src/.libs/libogg.a)
@@ -22,7 +22,10 @@ ANDROID_RELEASE_LIB(${OGG}/${OS}/${RELEASE}/obj/local/armeabi-v7a/libogg.a)
 
 
 ### 2RDPARTY LINK ###
-DKSET(OGG_WIN -DOGG_INCLUDE_DIR=${OGG}/include)
+DKSET(OGG_WIN "--with-ogg-libraries=\"${OGG}/${OS}/${DEBUG}/src/.libs\" --with-ogg-includes=\"${OGG}/include\"")
+DKSET(OGG_APPLE -DOGG_INCLUDE_DIR=${OGG}/include)
+DKSET(OGG_LINUX -DOGG_INCLUDE_DIR=${OGG}/include --with-ogg-includes=\"${OGG}/include\" --with-ogg-libraries=\"${OGG}/${OS}/${DEBUG}/src/.libs\")
+DKSET(OGG_RASPBERRY -DOGG_INCLUDE_DIR=${OGG}/include)
 	
 	
 
