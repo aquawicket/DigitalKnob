@@ -3,11 +3,30 @@
 if(CMAKE_HOST_UNIX AND NOT CMAKE_HOST_APPLE)
 	set(CMAKE_HOST_LINUX TRUE)
 endif()
+
 #####################################################################
-###################         DKFUNCTIONS()         ###################
+###################         DKFUNCTIONS           ###################
 #####################################################################
 set(dkdepend_disable_list "" CACHE INTERNAL "")
 set(UPX ON)
+
+
+## Example creating CMake functions that return values
+##
+##		VAR_EXISTS("myVarName", result)
+##		if(NOT result)
+##			message(WARN "The variable does not exist")
+##			return()
+##		endif()
+##		message("The name of the variable is ${result}")
+##
+function(VAR_EXISTS varname result)
+    if(NOT DEFINED ${varname})
+      message(SEND_ERROR "Error: the variable ${varname} is not defined!")
+	  return()
+    endif()
+    set (${result} ${varname} PARENT_SCOPE)
+endfunction()
 
 
 function(DKSET variable value)
@@ -36,14 +55,6 @@ function(WaitForEnter)
 		return()
 	endif()
 		message("WaitForEnter() Not implemented for this platform")
-endfunction()
-
-
-function(DKSETPATH path)
-	DKSET(CURRENT_DIR ${path})
-	if(NOT EXISTS ${CURRENT_DIR})
-		file(MAKE_DIRECTORY ${CURRENT_DIR})
-	endif()
 endfunction()
 
 
@@ -195,79 +206,71 @@ function(DKDISABLE plugin)
 	DKUNDEFINE(USE_${plugin})
 endfunction()
 
-######################
-function(DKDEFINE arg)
-	list(FIND DKDEFINES_LIST "${arg}" index)
+
+function(DKDEFINE str)
+	list(FIND DKDEFINES_LIST "${str}" index)
 	if(${index} GREATER -1)
 		return() ## already in the list, return.
 	endif()
-	DKSET(DKDEFINES_LIST ${DKDEFINES_LIST} ${arg})
-	add_definitions(-D${arg})
+	DKSET(DKDEFINES_LIST ${DKDEFINES_LIST} ${str})
+	add_definitions(-D${str})
 endfunction()
 
-function(DKUNDEFINE arg)
-	list(REMOVE_ITEM DKDEFINES_LIST ${arg})
-	remove_definitions(-D${arg})
+
+function(DKUNDEFINE str)
+	list(REMOVE_ITEM DKDEFINES_LIST ${str})
+	remove_definitions(-D${str})
 endfunction()
 
-#######################
-function(DKINCLUDE arg)
-	list(FIND DKINCLUDES_LIST "${arg}" index)
+
+function(DKINCLUDE path)
+	list(FIND DKINCLUDES_LIST "${path}" index)
 	if(${index} GREATER -1)
 		return() ## If the include is already in the list, return.
 	endif()
-	DKSET(DKINCLUDES_LIST ${DKINCLUDES_LIST} ${arg})
-	include_directories(${arg})
+	DKSET(DKINCLUDES_LIST ${DKINCLUDES_LIST} ${path})
+	include_directories(${path})
 endfunction()
 
-#######################
-function(DKLINKDIR arg)
-	list(FIND DKLINKDIRS_LIST "${arg}" index)
+
+function(DKLINKDIR path)
+	list(FIND DKLINKDIRS_LIST "${path}" index)
 	if(${index} GREATER -1)
 		return() ## If the include is already in the list, return.
 	endif()
-	DKSET(DKLINKDIRS_LIST ${DKLINKDIRS_LIST} ${arg})
-	link_directories(${arg})
+	DKSET(DKLINKDIRS_LIST ${DKLINKDIRS_LIST} ${path})
+	link_directories(${path})
 endfunction()
 
 
-function(assertdef VARNAME RESULT_NAME)
-    if(NOT DEFINED ${VARNAME})
-      message(SEND_ERROR "Error: the variable ${VARNAME} is not defined!")
-    endif()
-    set (${RESULT_NAME} ${VARNAME} PARENT_SCOPE)
+function(dk_getExtension path result)
+	##message("dk_getExtension(${path})")
+	string(FIND ${path} "." index REVERSE)
+	string(SUBSTRING ${path} ${index} -1 ext) 
+    set(${result} ${ext} PARENT_SCOPE)
 endfunction()
 
 
-function(dk_getExtension FILEPATH RESULT)
-	##message("dk_getExtension(${FILEPATH})")
-	string(FIND ${FILEPATH} "." index REVERSE)
-	string(SUBSTRING ${FILEPATH} ${index} -1 ext) 
-    set(${RESULT} ${ext} PARENT_SCOPE)
-endfunction()
-
-function(dk_dirIsEmpty DIRPATH RESULT)
-	if(EXISTS ${DIRPATH})
-		file(GLOB items RELATIVE "${DIRPATH}/" "${DIRPATH}/*")
+function(dk_dirIsEmpty path result)
+	if(EXISTS ${path})
+		file(GLOB items RELATIVE "${path}/" "${path}/*")
 		list(LENGTH items count)
 		if(${count} GREATER 0)
-			set(${RESULT} false PARENT_SCOPE)
+			set(${result} false PARENT_SCOPE)
 			return()
 		endif()
 	endif()
-	set(${RESULT} true PARENT_SCOPE)
+	set(${result} true PARENT_SCOPE)
 endfunction()
 
-#########################
+
 function(DKREFRESH_ICONS)
 	DKEXECUTE_PROCESS(COMMAND ie4uinit.exe -ClearIconCache)
 	##ie4uinit.exe -show   ##Windows 10
 endfunction()
 
 
-######################################################
 function(DKINSTALL url import_folder 3rdparty_folder)
-
 	dk_dirIsEmpty(${3RDPARTY}/${3rdparty_folder} empty)
 	if(NOT ${empty})
 		return()
@@ -345,11 +348,12 @@ function(DKINSTALL url import_folder 3rdparty_folder)
 	DKCOPY(${DKIMPORTS}/${import_folder}/ ${3RDPARTY}/${3rdparty_folder}/ TRUE)
 endfunction()
 
-#FIXME - This is not tested
+
 function(DKWINSHORTPATH path)
 	get_filename_component(shortpath ${path} ABSOLUTE)  #Get the windows short filepath
 	message("SHORTPATH = ${shortpath}")
 endfunction()
+
 
 function(DKEXECUTE_PROCESS fullcmnd)
 	math(EXPR _index "${ARGC}-1")
@@ -371,8 +375,18 @@ endfunction()
 
 
 ###############################################################
-#############   Platform specific functions 
+#############   Platform specific functions  ##################
+###############################################################
 
+###################### DK_PATH ####################
+function(DKSETPATH path)
+	DKSET(CURRENT_DIR ${path})
+	if(NOT EXISTS ${CURRENT_DIR})
+		file(MAKE_DIRECTORY ${CURRENT_DIR})
+	endif()
+endfunction()
+
+#######################
 function(WIN_PATH path)
 	if(WIN)
 		DKSETPATH(${path})
@@ -752,8 +766,7 @@ function(RASPBERRY64_RELEASE_PATH path)
 endfunction()
 
 
-
-######################
+###################  BASH  ######################
 function(WIN_BASH arg)
 	if(WIN AND QUEUE_BUILD)
 		file(WRITE ${3RDPARTY}/mingw/msys/temp ${arg})
@@ -810,7 +823,7 @@ function(WIN64_RELEASE_BASH arg)
 endfunction()
 
 
-
+################### COMMAND ########################
 #########################
 function(WIN_COMMAND arg)
 	if(WIN AND QUEUE_BUILD)
@@ -861,7 +874,7 @@ function(WIN64_RELEASE_COMMAND arg)
 	endif()	
 endfunction()
 
-
+#########################
 function(MAC_COMMAND arg)
 	if(MAC AND QUEUE_BUILD)
 		set(arg2 ${arg} ${ARGN})
@@ -934,7 +947,6 @@ function(IOS_COMMAND arg)
 	endif()
 endfunction()
 
-###############################
 function(IOS_DEBUG_COMMAND arg)
 	if(IOS AND DEBUG AND QUEUE_BUILD)
 		set(arg2 ${arg} ${ARGN})
@@ -942,7 +954,6 @@ function(IOS_DEBUG_COMMAND arg)
 	endif()
 endfunction()
 
-###############################
 function(IOS_RELEASE_COMMAND arg)
 	if(IOS AND RELEASE AND QUEUE_BUILD)
 		set(arg2 ${arg} ${ARGN})
@@ -950,7 +961,6 @@ function(IOS_RELEASE_COMMAND arg)
 	endif()
 endfunction()
 
-###########################
 function(IOS32_COMMAND arg)
 	if(IOS_32 AND QUEUE_BUILD)
 		set(arg2 ${arg} ${ARGN})
@@ -958,7 +968,6 @@ function(IOS32_COMMAND arg)
 	endif()
 endfunction()
 
-###########################
 function(IOS64_COMMAND arg)
 	if(IOS_64 AND QUEUE_BUILD)
 		set(arg2 ${arg} ${ARGN})
@@ -974,7 +983,6 @@ function(IOSSIM_COMMAND arg)
 	endif()
 endfunction()
 
-##################################
 function(IOSSIM_DEBUG_COMMAND arg)
 	if(IOSSIM AND DEBUG AND QUEUE_BUILD)
 		set(arg2 ${arg} ${ARGN})
@@ -982,7 +990,6 @@ function(IOSSIM_DEBUG_COMMAND arg)
 	endif()
 endfunction()
 
-####################################
 function(IOSSIM_RELEASE_COMMAND arg)
 	if(IOSSIM AND RELEASE AND QUEUE_BUILD)
 		set(arg2 ${arg} ${ARGN})
@@ -990,7 +997,6 @@ function(IOSSIM_RELEASE_COMMAND arg)
 	endif()
 endfunction()
 
-##############################
 function(IOSSIM32_COMMAND arg)
 	if(IOSSIM_32 AND QUEUE_BUILD)
 		set(arg2 ${arg} ${ARGN})
@@ -998,15 +1004,12 @@ function(IOSSIM32_COMMAND arg)
 	endif()
 endfunction()
 
-##############################
 function(IOSSIM64_COMMAND arg)
 	if(IOSSIM_64 AND QUEUE_BUILD)
 		set(arg2 ${arg} ${ARGN})
 		IOSSIM_COMMAND(${arg2})
 	endif()
 endfunction()
-
-
 
 
 ###########################
@@ -1017,7 +1020,6 @@ function(LINUX_COMMAND arg)
 	endif()
 endfunction()
 
-#################################
 function(LINUX_DEBUG_COMMAND arg)
 	if(LINUX AND DEBUG AND QUEUE_BUILD)
 		set(arg2 ${arg} ${ARGN})
@@ -1025,7 +1027,6 @@ function(LINUX_DEBUG_COMMAND arg)
 	endif()
 endfunction()
 
-###################################
 function(LINUX_RELEASE_COMMAND arg)
 	if(LINUX AND RELEASE AND QUEUE_BUILD)
 		set(arg2 ${arg} ${ARGN})
@@ -1033,7 +1034,6 @@ function(LINUX_RELEASE_COMMAND arg)
 	endif()
 endfunction()
 
-#############################
 function(LINUX32_COMMAND arg)
 	if(LINUX_32 AND QUEUE_BUILD)
 		set(arg2 ${arg} ${ARGN})
@@ -1041,7 +1041,6 @@ function(LINUX32_COMMAND arg)
 	endif()
 endfunction()
 
-###################################
 function(LINUX32_DEBUG_COMMAND arg)
 	if(LINUX_32 AND DEBUG AND QUEUE_BUILD)
 		set(arg2 ${arg} ${ARGN})
@@ -1049,7 +1048,6 @@ function(LINUX32_DEBUG_COMMAND arg)
 	endif()
 endfunction()
 
-#####################################
 function(LINUX32_RELEASE_COMMAND arg)
 	if(LINUX_32 AND RELEASE AND QUEUE_BUILD)
 		set(arg2 ${arg} ${ARGN})
@@ -1057,7 +1055,6 @@ function(LINUX32_RELEASE_COMMAND arg)
 	endif()
 endfunction()
 
-#############################
 function(LINUX64_COMMAND arg)
 	if(LINUX_64 AND QUEUE_BUILD)
 		set(arg2 ${arg} ${ARGN})
@@ -1065,7 +1062,6 @@ function(LINUX64_COMMAND arg)
 	endif()
 endfunction()
 
-###################################
 function(LINUX64_DEBUG_COMMAND arg)
 	if(LINUX_64 AND DEBUG AND QUEUE_BUILD)
 		set(arg2 ${arg} ${ARGN})
@@ -1073,7 +1069,6 @@ function(LINUX64_DEBUG_COMMAND arg)
 	endif()
 endfunction()
 
-#####################################
 function(LINUX64_RELEASE_COMMAND arg)
 	if(LINUX_64 AND RELEASE AND QUEUE_BUILD)
 		set(arg2 ${arg} ${ARGN})
