@@ -1,5 +1,6 @@
 ## https://ftp.osuosl.org/pub/xiph/releases/vorbis/libvorbis-1.3.5.zip
 DKDEPEND(libgcc)
+DKDEPEND(libogg)
 
 
 ### VERSION ###
@@ -42,7 +43,7 @@ WIN32_BASH("#!/bin/bash
 cd ${VORBIS}/${OS}/${DEBUG} 
 export PATH=/${MINGW32}/bin:$PATH\;
 export PATH=/${MSYS}/bin:$PATH\;
-../../configure --disable-shared ${OGG} 
+../../configure --disable-shared ${OGG_WIN_DEBUG} 
 make 
 exit \n")
 
@@ -52,7 +53,7 @@ WIN32_BASH("#!/bin/bash
 cd ${VORBIS}/${OS}/${RELEASE} 
 export PATH=/${MINGW32}/bin:$PATH\;
 export PATH=/${MSYS}/bin:$PATH\;
-../../configure --disable-shared ${OGG}
+../../configure --disable-shared ${OGG_WIN_RELEASE}
 make 
 exit \n")
 
@@ -62,7 +63,7 @@ WIN64_BASH("#!/bin/bash
 cd ${VORBIS}/${OS}/${DEBUG} 
 export PATH=/${MINGW64}/bin:$PATH\;
 export PATH=/${MSYS}/bin:$PATH\;
-../../configure --disable-shared --enable-static --with-ogg-libraries=\"${OGG}/${OS}/${DEBUG}/src/.libs\" --with-ogg-includes=\"${OGG}/include\" 
+../../configure --disable-shared ${OGG_WIN_DEBUG}
 make 
 exit \n")
 
@@ -72,35 +73,35 @@ WIN64_BASH("#!/bin/bash
 cd ${VORBIS}/${OS}/${RELEASE} 
 export PATH=/${MINGW64}/bin:$PATH\;
 export PATH=/${MSYS}/bin:$PATH\;
-../../configure --disable-shared --enable-static --with-ogg-libraries=\"${OGG}/${OS}/${RELEASE}/src/.libs\" --with-ogg-includes=\"${OGG}/include\" 
+../../configure --disable-shared ${OGG_WIN_RELEASE}
 make 
 exit \n")
 
 
 MAC_DEBUG_PATH(${VORBIS}/${OS}/${DEBUG})
-MAC_DEBUG_COMMAND(../../configure --disable-shared --enable-static --build=x86_64 --with-ogg-libraries=${OGG}/${OS}/${DEBUG}/src/.libs --with-ogg-includes=${OGG}/include)
+MAC_DEBUG_COMMAND(../../configure --disable-shared --enable-static --build=x86_64 ${OGG_APPLE_DEBUG})
 MAC_DEBUG_COMMAND(make "CXXFLAGS=-arch x86_64" "CFLAGS=-arch x86_64" "LDFLAGS=-arch x86_64")
 
 MAC_RELEASE_PATH(${VORBIS}/${OS}/${RELEASE})
-MAC_RELEASE_COMMAND(../../configure --disable-shared --enable-static --build=x86_64 --with-ogg-libraries=${OGG}/${OS}/${RELEASE}/src/.libs --with-ogg-includes=${OGG}/include)
+MAC_RELEASE_COMMAND(../../configure --disable-shared --enable-static --build=x86_64 ${OGG_APPLE_RELEASE})
 MAC_RELEASE_COMMAND(make "CXXFLAGS=-arch x86_64" "CFLAGS=-arch x86_64" "LDFLAGS=-arch x86_64")
 
 
 IOSSIM_DEBUG_PATH(${VORBIS}/${OS}/${DEBUG})
-IOSSIM_DEBUG_COMMAND(../../configure --disable-shared --enable-static --build=x86_64 --with-ogg-libraries=${OGG}/${OS}/${DEBUG}/src/.libs --with-ogg-includes=${OGG}/include)
+IOSSIM_DEBUG_COMMAND(../../configure --disable-shared --enable-static --build=x86_64 ${OGG_APPLE_DEBUG})
 IOSSIM_DEBUG_COMMAND(make "CXXFLAGS=-arch x86_64" "CFLAGS=-arch x86_64" "LDFLAGS=-arch x86_64")
 
 IOSSIM_RELEASE_PATH(${VORBIS}/${OS}/${RELEASE})
-IOSSIM_RELEASE_COMMAND(../../configure --disable-shared --enable-static --build=x86_64 --with-ogg-libraries=${OGG}/${OS}/${RELEASE}/src/.libs --with-ogg-includes=${OGG}/include)
+IOSSIM_RELEASE_COMMAND(../../configure --disable-shared --enable-static --build=x86_64 ${OGG_APPLE_RELEASE})
 IOSSIM_RELEASE_COMMAND(make "CXXFLAGS=-arch x86_64" "CFLAGS=-arch x86_64" "LDFLAGS=-arch x86_64")
 
 
 LINUX_DEBUG_PATH(${VORBIS}/${OS}/${DEBUG})
-LINUX_DEBUG_COMMAND(../../configure --disable-shared --enable-static --disable-oggtest --with-ogg-libraries=${OGG}/${OS}/${DEBUG}/src/.libs --with-ogg-includes=${OGG}/include)
+LINUX_DEBUG_COMMAND(../../configure --disable-shared --enable-static --disable-oggtest ${OGG_LINUX_DEBUG})
 LINUX_DEBUG_COMMAND(make)
 
 LINUX_RELEASE_PATH(${VORBIS}/${OS}/${RELEASE})
-LINUX_RELEASE_COMMAND(../../configure --disable-shared --enable-static --disable-oggtest --with-ogg-libraries=${OGG}/${OS}/${RELEASE}/src/.libs --with-ogg-includes=${OGG}/include)
+LINUX_RELEASE_COMMAND(../../configure --disable-shared --enable-static --disable-oggtest ${OGG_LINUX_RELEASE})
 LINUX_RELEASE_COMMAND(make)
 
 

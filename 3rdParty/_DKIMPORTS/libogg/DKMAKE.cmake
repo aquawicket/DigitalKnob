@@ -20,15 +20,19 @@ LINUX_RELEASE_LIB(${OGG}/${OS}/${RELEASE}/src/.libs/libogg.a)
 ANDROID_DEBUG_LIB(${OGG}/${OS}/${DEBUG}/obj/local/armeabi-v7a/libogg.a)
 ANDROID_RELEASE_LIB(${OGG}/${OS}/${RELEASE}/obj/local/armeabi-v7a/libogg.a)
 
-
-### 2RDPARTY LINK ###
-DKSET(OGG_WIN "--with-ogg-libraries=\"${OGG}/${OS}/${DEBUG}/src/.libs\" --with-ogg-includes=\"${OGG}/include\"")
-DKSET(OGG_APPLE -DOGG_INCLUDE_DIR=${OGG}/include)
-DKSET(OGG_LINUX -DOGG_INCLUDE_DIR=${OGG}/include --with-ogg-includes=\"${OGG}/include\" --with-ogg-libraries=\"${OGG}/${OS}/${DEBUG}/src/.libs\")
-DKSET(OGG_RASPBERRY -DOGG_INCLUDE_DIR=${OGG}/include)
+##-DOGG_INCLUDE_DIR=${OGG}/include 
+### 3RDPARTY LINK ###
+DKSET(OGG_INCLUDE -DOGG_INCLUDE_DIR=${OGG}/include)
+DKSET(OGG_WIN_DEBUG "--with-ogg-includes=\"${OGG}/include\" --with-ogg-libraries=\"${OGG}/${OS}/${DEBUG}/src/.libs\"")
+DKSET(OGG_WIN_RELEASE "--with-ogg-includes=\"${OGG}/include\" --with-ogg-libraries=\"${OGG}/${OS}/${RELEASE}/src/.libs\"")
+DKSET(OGG_APPLE_DEBUG "--with-ogg-includes=\"${OGG}/include\" --with-ogg-libraries=\"${OGG}/${OS}/${DEBUG}/src/.libs\"")
+DKSET(OGG_APPLE_RELEASE "--with-ogg-includes=\"${OGG}/include\" --with-ogg-libraries=\"${OGG}/${OS}/${RELEASE}/src/.libs\"")
+DKSET(OGG_LINUX_DEBUG "--with-ogg-includes=\"${OGG}/include\" --with-ogg-libraries=\"${OGG}/${OS}/${DEBUG}/src/.libs\"")
+DKSET(OGG_LINUX_RELEASE "--with-ogg-includes=\"${OGG}/include\" --with-ogg-libraries=\"${OGG}/${OS}/${RELEASE}/src/.libs\"")
+DKSET(OGG_RASPBERRY_DEBUG "--with-ogg-includes=\"${OGG}/include\" --with-ogg-libraries=\"${OGG}/${OS}/${DEBUG}/src/.libs\"")
+DKSET(OGG_RASPBERRY_RELEASE "--with-ogg-includes=\"${OGG}/include\" --with-ogg-libraries=\"${OGG}/${OS}/${RELEASE}/src/.libs\"")
 	
 	
-
 ### COMPILE ###
 WIN32_PATH(${OGG}/${OS}/${DEBUG})
 WIN32_BASH("#!/bin/bash 
@@ -38,7 +42,7 @@ export PATH=/${MSYS}/bin:$PATH\;
 ../../configure --disable-shared --enable-static 
 make 
 exit \n")
-DKCOPY(${OGG}/${OS}/${DEBUG}/src/.libs/libogg.a ${OGG}/${OS}/${DEBUG}/src/.libs/libogg.lib TRUE)
+##DKCOPY(${OGG}/${OS}/${DEBUG}/src/.libs/libogg.a ${OGG}/${OS}/${DEBUG}/src/.libs/libogg.lib TRUE)
 
 WIN32_PATH(${OGG}/${OS}/${RELEASE})
 WIN32_BASH("#!/bin/bash 
@@ -48,7 +52,7 @@ export PATH=/${MSYS}/bin:$PATH\;
 ../../configure --disable-shared --enable-static 
 make 
 exit \n")
-DKCOPY(${OGG}/${OS}/${RELEASE}/src/.libs/libogg.a ${OGG}/${OS}/${RELEASE}/src/.libs/libogg.lib TRUE)
+##DKCOPY(${OGG}/${OS}/${RELEASE}/src/.libs/libogg.a ${OGG}/${OS}/${RELEASE}/src/.libs/libogg.lib TRUE)
 
 
 WIN64_PATH(${OGG}/${OS}/${DEBUG})
@@ -59,7 +63,7 @@ export PATH=/${MSYS}/bin:$PATH\;
 ../../configure --disable-shared --enable-static 
 make 
 exit \n")
-DKCOPY(${OGG}/${OS}/${DEBUG}/src/.libs/libogg.a ${OGG}/${OS}/${DEBUG}/src/.libs/libogg.lib TRUE)
+##DKCOPY(${OGG}/${OS}/${DEBUG}/src/.libs/libogg.a ${OGG}/${OS}/${DEBUG}/src/.libs/libogg.lib TRUE)
 
 WIN64_PATH(${OGG}/${OS}/${RELEASE})
 WIN64_BASH("#!/bin/bash 
@@ -69,7 +73,7 @@ export PATH=/${MSYS}/bin:$PATH\;
 ../../configure --disable-shared --enable-static 
 make 
 exit \n")
-DKCOPY(${OGG}/${OS}/${RELEASE}/src/.libs/libogg.a ${OGG}/${OS}/${RELEASE}/src/.libs/libogg.lib TRUE)
+##DKCOPY(${OGG}/${OS}/${RELEASE}/src/.libs/libogg.a ${OGG}/${OS}/${RELEASE}/src/.libs/libogg.lib TRUE)
 
 
 MAC_PATH(${OGG}/${OS}/${DEBUG})
