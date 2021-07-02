@@ -13,10 +13,10 @@ DKINSTALL(https://ftp.osuosl.org/pub/xiph/releases/vorbis/libvorbis-${VORBIS_VER
 
 ### dkplugin LINK ###
 DKINCLUDE(${VORBIS}/include)
-WIN_DEBUG_LIB(${VORBIS}/${OS}/${DEBUG}/lib/.libs/libvorbis.lib)
-WIN_RELEASE_LIB(${VORBIS}/${OS}/${RELEASE}/lib/.libs/libvorbis.lib)
-WIN_DEBUG_LIB(${VORBIS}/${OS}/${DEBUG}/lib/.libs/libvorbisfile.lib)
-WIN_RELEASE_LIB(${VORBIS}/${OS}/${RELEASE}/lib/.libs/libvorbisfile.lib)
+WIN_DEBUG_LIB(${VORBIS}/${OS}/${DEBUG}/lib/.libs/libvorbis.a)
+WIN_RELEASE_LIB(${VORBIS}/${OS}/${RELEASE}/lib/.libs/libvorbis.a)
+WIN_DEBUG_LIB(${VORBIS}/${OS}/${DEBUG}/lib/.libs/libvorbisfile.a)
+WIN_RELEASE_LIB(${VORBIS}/${OS}/${RELEASE}/lib/.libs/libvorbisfile.a)
 APPLE_DEBUG_LIB(${VORBIS}/${OS}/${DEBUG}/lib/.libs/libvorbis.a)
 APPLE_RELEASE_LIB(${VORBIS}/${OS}/${RELEASE}/lib/.libs/libvorbis.a)
 APPLE_DEBUG_LIB(${VORBIS}/${OS}/${DEBUG}/lib/.libs/libvorbisfile.a)
@@ -33,7 +33,6 @@ ANDROID_RELEASE_LIB(${VORBIS}/${OS}/${RELEASE}/obj/local/armeabi-v7a/libvorbis.a
 DKSET(VORBIS_WIN -DVORBIS_INCLUDE_DIR=${VORBIS}/include)
 	
 	
-
 ### COMPILE ###
 WIN32_PATH(${VORBIS}/${OS}/${DEBUG})
 WIN32_BASH("#!/bin/bash 
@@ -44,8 +43,8 @@ export PATH=/${MSYS}/bin:$PATH\;
 make 
 exit \n")
 if(WIN_32)
-	DKRENAME(${VORBIS}/${OS}/${DEBUG}/lib/.libs/libvorbis.a ${VORBIS}/${OS}/${DEBUG}/lib/.libs/libvorbis.lib)
-	DKRENAME(${VORBIS}/${OS}/${DEBUG}/lib/.libs/libvorbisfile.a ${VORBIS}/${OS}/${DEBUG}/lib/.libs/libvorbisfile.lib)
+	##DKRENAME(${VORBIS}/${OS}/${DEBUG}/lib/.libs/libvorbis.a ${VORBIS}/${OS}/${DEBUG}/lib/.libs/libvorbis.lib)
+	##DKRENAME(${VORBIS}/${OS}/${DEBUG}/lib/.libs/libvorbisfile.a ${VORBIS}/${OS}/${DEBUG}/lib/.libs/libvorbisfile.lib)
 endif()
 
 
@@ -58,8 +57,8 @@ export PATH=/${MSYS}/bin:$PATH\;
 make 
 exit \n")
 if(WIN_32)
-	DKRENAME(${VORBIS}/${OS}/${RELEASE}/lib/.libs/libvorbis.a ${VORBIS}/${OS}/${RELEASE}/lib/.libs/libvorbis.lib)
-	DKRENAME(${VORBIS}/${OS}/${RELEASE}/lib/.libs/libvorbisfile.a ${VORBIS}/${OS}/${RELEASE}/lib/.libs/libvorbisfile.lib)
+	##DKRENAME(${VORBIS}/${OS}/${RELEASE}/lib/.libs/libvorbis.a ${VORBIS}/${OS}/${RELEASE}/lib/.libs/libvorbis.lib)
+	##DKRENAME(${VORBIS}/${OS}/${RELEASE}/lib/.libs/libvorbisfile.a ${VORBIS}/${OS}/${RELEASE}/lib/.libs/libvorbisfile.lib)
 endif()
 
 
@@ -72,8 +71,8 @@ export PATH=/${MSYS}/bin:$PATH\;
 make 
 exit \n")
 if(WIN_64)
-	DKRENAME(${VORBIS}/${OS}/${DEBUG}/lib/.libs/libvorbis.a ${VORBIS}/${OS}/${DEBUG}/lib/.libs/libvorbis.lib)
-	DKRENAME(${VORBIS}/${OS}/${DEBUG}/lib/.libs/libvorbisfile.a ${VORBIS}/${OS}/${DEBUG}/lib/.libs/libvorbisfile.lib)
+	##DKRENAME(${VORBIS}/${OS}/${DEBUG}/lib/.libs/libvorbis.a ${VORBIS}/${OS}/${DEBUG}/lib/.libs/libvorbis.lib)
+	##DKRENAME(${VORBIS}/${OS}/${DEBUG}/lib/.libs/libvorbisfile.a ${VORBIS}/${OS}/${DEBUG}/lib/.libs/libvorbisfile.lib)
 endif()
 
 
@@ -86,8 +85,8 @@ export PATH=/${MSYS}/bin:$PATH\;
 make 
 exit \n")
 if(WIN_64)
-	DKRENAME(${VORBIS}/${OS}/${RELEASE}/lib/.libs/libvorbis.a ${VORBIS}/${OS}/${RELEASE}/lib/.libs/libvorbis.lib)
-	DKRENAME(${VORBIS}/${OS}/${RELEASE}/lib/.libs/libvorbisfile.a ${VORBIS}/${OS}/${RELEASE}/lib/.libs/libvorbisfile.lib)
+	##DKRENAME(${VORBIS}/${OS}/${RELEASE}/lib/.libs/libvorbis.a ${VORBIS}/${OS}/${RELEASE}/lib/.libs/libvorbis.lib)
+	##DKRENAME(${VORBIS}/${OS}/${RELEASE}/lib/.libs/libvorbisfile.a ${VORBIS}/${OS}/${RELEASE}/lib/.libs/libvorbisfile.lib)
 endif()
 
 
