@@ -34,8 +34,8 @@ DKSET(OGG_RASPBERRY_RELEASE "--with-ogg-includes=\"${OGG}/include\" --with-ogg-l
 	
 	
 ### COMPILE ###
-WIN32_PATH(${OGG}/${OS}/${DEBUG})
-WIN32_BASH("#!/bin/bash 
+WIN32_DEBUG_PATH(${OGG}/${OS}/${DEBUG})
+WIN32_DEBUG_BASH("#!/bin/bash 
 cd ${OGG}/${OS}/${DEBUG} 
 export PATH=/${MINGW32}/bin:$PATH\;
 export PATH=/${MSYS}/bin:$PATH\;
@@ -43,8 +43,8 @@ export PATH=/${MSYS}/bin:$PATH\;
 make 
 exit \n")
 
-WIN32_PATH(${OGG}/${OS}/${RELEASE})
-WIN32_BASH("#!/bin/bash 
+WIN32_RELEASE_PATH(${OGG}/${OS}/${RELEASE})
+WIN32_RELEASE_BASH("#!/bin/bash 
 cd ${OGG}/${OS}/${RELEASE} 
 export PATH=/${MINGW32}/bin:$PATH\;
 export PATH=/${MSYS}/bin:$PATH\;
@@ -53,8 +53,8 @@ make
 exit \n")
 
 
-WIN64_PATH(${OGG}/${OS}/${DEBUG})
-WIN64_BASH("#!/bin/bash 
+WIN64_DEBUG_PATH(${OGG}/${OS}/${DEBUG})
+WIN64_DEBUG_BASH("#!/bin/bash 
 cd ${OGG}/${OS}/${DEBUG} 
 export PATH=/${MINGW64}/bin:$PATH\;
 export PATH=/${MSYS}/bin:$PATH\;
@@ -62,8 +62,8 @@ export PATH=/${MSYS}/bin:$PATH\;
 make 
 exit \n")
 
-WIN64_PATH(${OGG}/${OS}/${RELEASE})
-WIN64_BASH("#!/bin/bash 
+WIN64_RELEASE_PATH(${OGG}/${OS}/${RELEASE})
+WIN64_RELEASE_BASH("#!/bin/bash 
 cd ${OGG}/${OS}/${RELEASE} 
 export PATH=/${MINGW64}/bin:$PATH\;
 export PATH=/${MSYS}/bin:$PATH\;
@@ -72,29 +72,29 @@ make
 exit \n")
 
 
-MAC_PATH(${OGG}/${OS}/${DEBUG})
+MAC_DEBUG_PATH(${OGG}/${OS}/${DEBUG})
 MAC_DEBUG_COMMAND(../../configure --disable-shared --enable-static --build=x86_64)
 MAC_DEBUG_COMMAND(make "CXXFLAGS=-arch x86_64" "CFLAGS=-arch x86_64" "LDFLAGS=-arch x86_64")
 
-MAC_PATH(${OGG}/${OS}/${RELEASE})
+MAC_RELEASE_PATH(${OGG}/${OS}/${RELEASE})
 MAC_RELEASE_COMMAND(../../configure --disable-shared --enable-static --build=x86_64)
 MAC_RELEASE_COMMAND(make "CXXFLAGS=-arch x86_64" "CFLAGS=-arch x86_64" "LDFLAGS=-arch x86_64")
 
 
-IOSSIM_PATH(${OGG}/${OS}/${DEBUG})
+IOSSIM_DEBUG_PATH(${OGG}/${OS}/${DEBUG})
 IOSSIM_DEBUG_COMMAND(../../configure --disable-shared --enable-static --build=x86_64)
 IOSSIM_DEBUG_COMMAND(make "CXXFLAGS=-arch x86_64" "CFLAGS=-arch x86_64" "LDFLAGS=-arch x86_64")
 
-IOSSIM_PATH(${OGG}/${OS}/${RELEASE})
+IOSSIM_RELEASE_PATH(${OGG}/${OS}/${RELEASE})
 IOSSIM_RELEASE_COMMAND(../../configure --disable-shared --enable-static --build=x86_64)
 IOSSIM_RELEASE_COMMAND(make "CXXFLAGS=-arch x86_64" "CFLAGS=-arch x86_64" "LDFLAGS=-arch x86_64")
 
 
-LINUX_PATH(${OGG}/${OS}/${DEBUG})
+LINUX_DEBUG_PATH(${OGG}/${OS}/${DEBUG})
 LINUX_DEBUG_COMMAND(../../configure --disable-shared --enable-static --build=x86_64)
 LINUX_DEBUG_COMMAND(make)
 
-LINUX_PATH(${OGG}/${OS}/${RELEASE})
+LINUX_RELEASE_PATH(${OGG}/${OS}/${RELEASE})
 LINUX_RELEASE_COMMAND(../../configure --disable-shared --enable-static --build=x86_64)
 LINUX_RELEASE_COMMAND(make)
 
