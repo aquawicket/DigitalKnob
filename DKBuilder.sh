@@ -76,6 +76,7 @@ mkdir /home/"$USER"/digitalknob/DK/DKApps/$APP/$OS/Release
 cd /home/"$USER"/digitalknob/DK/DKApps/$APP/$OS/Release
 rm /home/"$USER"/digitalknob/DK/DKApps/$APP/$OS/Release/CMakeCache.txt
 cmake -G "Unix Makefiles" -DRELEASE=ON -DREBUILDALL=ON -DSTATIC=ON /home/"$USER"/digitalknob/DK
+chmod +x /home/"$USER"/digitalknob/DK/DKBuilder.sh
 
 cd /home/"$USER"/digitalknob/DK/DKApps/$APP/$OS/Release
 make $APP
