@@ -9,28 +9,30 @@ select opt in "${options[@]}"
 do
     case $opt in
         "UPDATE")
-            echo "you chose UPDATE"
+			echo "$opt"
 			git clone https://github.com/aquawicket/DigitalKnob.git /home/"$USER"/digitalknob/DK
 			cd /home/"$USER"/digitalknob/DK
 			git checkout -- .
 			git pull origin master
+			echo $options
             ;;
 		"DKBuilder")
-            echo "you chose DKBuilder"
+            echo "$opt"
 			APP="DKBuilder"
 			break
             ;;
         "DKSDLRmlUi")
-            echo "you chose DKSDLRmlUi"
+            echo "$opt"
 			APP="DKSDLRmlUi"
             break
 			;;
         "DKTestAll")
-            echo "you chose choice $REPLY which is $opt"
+            echo "$opt"
 			APP="DKTestAll"
             break
 			;;
         "Exit")
+			echo "$opt"
             break
             ;;
         *) echo "invalid option $REPLY";;
@@ -44,26 +46,27 @@ select opt in "${options[@]}"
 do
     case $opt in
         "linux32")
-            echo "you chose linux32"
+            echo "$opt"
 			OS="linux32"
 			break
             ;;
         "linux64")
-            echo "you chose linux64"
+            echo "$opt"
 			OS="linux64"
             break
 			;;
 		"mac64")
-            echo "you chose mac64"
+            echo "$opt"
 			OS="mac64"
             break
 			;;
         "raspberry32")
-            echo "you chose raspberry32"
+            echo "$opt"
 			OS="raspberry32"
             break
 			;;
         "Exit")
+			echo "$opt"
             break
             ;;
         *) echo "invalid option $REPLY";;
