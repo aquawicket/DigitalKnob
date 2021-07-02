@@ -1,4 +1,6 @@
 ## https://ftp.osuosl.org/pub/xiph/releases/vorbis/libvorbis-1.3.5.zip
+DKDEPEND(libgcc)
+
 
 ### VERSION ###
 DKSET(VORBIS_VERSION 1.3.5)

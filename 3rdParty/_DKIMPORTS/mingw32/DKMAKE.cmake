@@ -4,6 +4,7 @@ endif()
 
 ### VERSION ###
 DKSET(MINGW32 ${3RDPARTY}/mingw/mingw32)
+DKSET(MINGW32_VS ${3RDPARTY}/mingw/mingw32)
 
 ### INSTALL ###
 IF(NOT EXISTS ${3RDPARTY}/mingw/mingw32)

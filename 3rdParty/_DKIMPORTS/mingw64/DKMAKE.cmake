@@ -1,5 +1,6 @@
 ### VERSION ###
 DKSET(MINGW64 ${3RDPARTY}/mingw/mingw64)
+DKSET(MINGW64_VS ${3RDPARTY}/mingw/mingw64)
 
 ### INSTALL ###
 IF(NOT EXISTS ${3RDPARTY}/mingw/mingw64)
