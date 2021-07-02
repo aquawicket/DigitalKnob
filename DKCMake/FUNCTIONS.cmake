@@ -1,8 +1,13 @@
 ## TODO:    https://foonathan.net/2016/03/cmake-install/ 
 
+#####################################################################
+###################         DKFUNCTIONS           ###################
+#####################################################################
+
 if(CMAKE_HOST_UNIX AND NOT CMAKE_HOST_APPLE)
 	set(CMAKE_HOST_LINUX TRUE)
 endif()
+
 
 function(WaitForEnter)
 	if(CMAKE_HOST_WIN32)	
@@ -13,9 +18,7 @@ function(WaitForEnter)
 		message("WaitForEnter() Not implemented for this platform")
 endfunction()
 
-#####################################################################
-###################         DKFUNCTIONS           ###################
-#####################################################################
+
 set(dkdepend_disable_list "" CACHE INTERNAL "")
 set(UPX ON)
 
@@ -56,9 +59,6 @@ function(DKUNSET variable)
 	#Removes the specified variable causing it to become undefined. If CACHE is present then the variable is removed from the cache instead of the current scope.
 	#If PARENT_SCOPE is present then the variable is removed from the scope above the current scope. See the same option in the set() command for further details.
 endfunction()
-
-
-
 
 
 function(DKDOWNLOAD url)
@@ -2395,6 +2395,7 @@ function(DKASSETS arg)
 	file(COPY ${PATHTOPLUGIN} DESTINATION ${DKPROJECT}/assets ${ASSETS})
 endfunction()
 
+
 ## FIXME: This only works on DK/3rdParty/_DKIMPORT, it needs to work on sibling folders as well
 ## I.E.  MyApps/3rdParty/_DKIMPORT/libSomething_1.2b
 function(DKSETPATHTOPLUGIN arg)
@@ -2471,14 +2472,10 @@ function(DISABLE_DKDEPEND arg)
 	#	return()  ##already in the list
 	#endif()
 		
-		
-	message("CMAKE_CD = ${CMAKE_CURRENT_LIST_DIR}")
-	message(" FILE_CD = ${DIGITALKNOB}/DKCMake")
-		
-		
-	## only allow disables from the ${DKCMAKE}/DKMake.cmake
-	if(NOT ${CMAKE_CURRENT_LIST_DIR} STREQUAL ${DIGITALKNOB}/DKCMake)
-	##if(NOT ${CMAKE_CURRENT_LIST_FILE} STREQUAL ${DKCMAKE}/DKMake.cmake)
+	## Only allow DISABLE_DKDEPEND command from these filters
+	
+	if(NOT ${CMAKE_CURRENT_LIST_DIR} STREQUAL ${DKCMAKE})                   ## DKCMake directory only
+	##if(NOT ${CMAKE_CURRENT_LIST_FILE} STREQUAL ${DKCMAKE}/DKMake.cmake)   ## DKCMake/DISABLED.cmake file only
 		message(FATAL_ERROR "\n\n!!!! WARNING !!!!\nDISABLE_DKDEPEND() Can only be used from the DKCMake/DISABLED.cmake file. This is to avoid the need to alter cmake files just to disable them and have disables hideing everywhere.\n\n\n")
 	endif()
 	message("DISABLING ${arg}")
