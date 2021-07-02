@@ -2471,13 +2471,19 @@ function(DISABLE_DKDEPEND arg)
 	#	return()  ##already in the list
 	#endif()
 		
+		
+	message("CMAKE_CD = ${CMAKE_CURRENT_LIST_DIR}")
+	message(" FILE_CD = ${DIGITALKNOB}/DKCMake")
+		
+		
 	## only allow disables from the ${DKCMAKE}/DKMake.cmake
-	if(NOT ${CMAKE_CURRENT_LIST_FILE} STREQUAL ${DKCMAKE}/DKMake.cmake)
+	if(NOT ${CMAKE_CURRENT_LIST_DIR} STREQUAL ${DIGITALKNOB}/DKCMake)
+	##if(NOT ${CMAKE_CURRENT_LIST_FILE} STREQUAL ${DKCMAKE}/DKMake.cmake)
 		message(FATAL_ERROR "\n\n!!!! WARNING !!!!\nDISABLE_DKDEPEND() Can only be used from the DKCMake/DISABLED.cmake file. This is to avoid the need to alter cmake files just to disable them and have disables hideing everywhere.\n\n\n")
 	endif()
 	message("DISABLING ${arg}")
 	
-	DKSET(dkdepend_disable_list ${dkdepend_disable_list} "${arg}")
+	DKSET(dkdepend_disable_list ${dkdepend_disable_list} ${arg})
 endfunction()
 
 

@@ -1,5 +1,6 @@
 include(DKCMake/FUNCTIONS.cmake)
 include(DKCMake/OPTIONS.cmake)
+include(DKCMake/DISABLED.cmake)
 get_filename_component(APP_NAME ${DKPROJECT} NAME)
 string(REPLACE " " "_" APP_NAME ${APP_NAME})
 
