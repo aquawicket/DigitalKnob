@@ -1,6 +1,6 @@
-IF(NOT CMAKE_HOST_WIN32)
-	RETURN()
-ENDIF()
+if(NOT CMAKE_HOST_WIN32)
+	return()
+endif()
 
 ### DEPENDS ####
 DKDEPEND(gs922w64)

@@ -1,6 +1,6 @@
-IF(NOT LINUX)
-	RETURN()
-ENDIF()
+if(NOT LINUX)
+	return()
+endif()
 
 
 ### VERSION ###

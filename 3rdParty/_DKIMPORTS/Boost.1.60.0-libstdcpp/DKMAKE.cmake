@@ -1,9 +1,9 @@
-IF(NOT CMAKE_HOST_APPLE)
+if(NOT CMAKE_HOST_APPLE)
 	return()
-ENDIF()
-IF(NOT IOS)
+endif()
+if(NOT IOS)
 	return() #iOS only
-ENDIF()
+endif()
 
 
 ### VERSION ###

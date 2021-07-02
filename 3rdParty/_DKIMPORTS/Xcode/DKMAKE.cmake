@@ -1,7 +1,7 @@
 ##TODO
-IF(NOT CMAKE_HOST_MAC)
-	RETURN()
-ENDIF()
+if(NOT CMAKE_HOST_MAC)
+	return()
+endif()
 
 ### VERSION ###
 

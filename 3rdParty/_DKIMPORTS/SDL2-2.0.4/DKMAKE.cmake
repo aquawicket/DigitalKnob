@@ -1,5 +1,4 @@
-## DEPRECATED - Using newr versions of SDL2.  Kept for reference
-RETURN()
+## DEPRECATED - Use newer versions of SDL2.  Kept for reference
 
 ### INSTALL ###
 ## DKINSTALL(www.internet.com/SDL2-2.0.4.zip SDL2-2.0.4 SDL2-2.0.4)

@@ -1,6 +1,6 @@
-IF(NOT CMAKE_HOST_WIN32)
-	RETURN()
-ENDIF()
+if(NOT CMAKE_HOST_WIN32)
+	return()
+endif()
 
 ### INSTALL ###
 IF(NOT EXISTS "C:/Program Files (x86)/Microsoft Visual Studio/2019")

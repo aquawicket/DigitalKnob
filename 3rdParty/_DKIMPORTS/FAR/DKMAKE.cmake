@@ -1,8 +1,8 @@
 ## http://findandreplace.sourceforge.net/
 
-IF(NOT CMAKE_HOST_WIN32)
-	RETURN()
-ENDIF()
+if(NOT CMAKE_HOST_WIN32)
+	return()
+endif()
 
 ### VERSION ###
 DKSET(FAR_VERSION 2.0.2)

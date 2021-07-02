@@ -1,6 +1,6 @@
-IF(NOT LINUX)
-	RETURN()
-ENDIF()
+if(NOT LINUX)
+	return()
+endif()
 
 ### VERSION ###
 DKSET(CEF_VERSION 81.3.3+g072a5f5+chromium-81.0.4044.138)
