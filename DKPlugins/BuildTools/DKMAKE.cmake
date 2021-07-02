@@ -1,11 +1,3 @@
-##### DISABLED #####
-if(LINUX)
-	DISABLE_DKDEPEND(flac)
-	DISABLE_DKDEPEND(SFML)
-endif()
-
-
-
 ### DEPENDS ###
 if(CMAKE_HOST_WIN32 AND WIN)
 	DKDEPEND(Git)

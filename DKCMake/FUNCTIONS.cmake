@@ -4,6 +4,15 @@ if(CMAKE_HOST_UNIX AND NOT CMAKE_HOST_APPLE)
 	set(CMAKE_HOST_LINUX TRUE)
 endif()
 
+function(WaitForEnter)
+	if(CMAKE_HOST_WIN32)	
+		message("Press ENTER to continue . . .")
+		execute_process(COMMAND cmd /c set /p DUMMY=. WORKING_DIRECTORY C:/)
+		return()
+	endif()
+		message("WaitForEnter() Not implemented for this platform")
+endfunction()
+
 #####################################################################
 ###################         DKFUNCTIONS           ###################
 #####################################################################
@@ -49,13 +58,7 @@ function(DKUNSET variable)
 endfunction()
 
 
-function(WaitForEnter)
-	if(CMAKE_HOST_WIN32)	
-		execute_process(COMMAND cmd /c set /p DUMMY=Hit ENTER to continue... WORKING_DIRECTORY C:/)
-		return()
-	endif()
-		message("WaitForEnter() Not implemented for this platform")
-endfunction()
+
 
 
 function(DKDOWNLOAD url)
@@ -2468,15 +2471,13 @@ function(DISABLE_DKDEPEND arg)
 	#	return()  ##already in the list
 	#endif()
 		
-	## only allow disables from the project make file or the BuildTools make file.
-	#if(NOT ${CMAKE_CURRENT_LIST_DIR} STREQUAL ${DKPROJECT})
-	#	if(NOT ${CMAKE_CURRENT_LIST_DIR} STREQUAL ${DKPLUGINS}/BuildTools)
-	#		message(FATAL_ERROR "\n\n!!!! WARNING !!!!\nDISABLE_DKDEPEND() Can only be used from the project DKMAKE.cmake file. This is to avoid the need to alter cmake files just to disable them.\n\n\n")
-	#	endif()
-	#endif()
-	#message("DISABLING ${arg}")
+	## only allow disables from the ${DKCMAKE}/DKMake.cmake
+	if(NOT ${CMAKE_CURRENT_LIST_FILE} STREQUAL ${DKCMAKE}/DKMake.cmake)
+		message(FATAL_ERROR "\n\n!!!! WARNING !!!!\nDISABLE_DKDEPEND() Can only be used from the DKCMake/DISABLED.cmake file. This is to avoid the need to alter cmake files just to disable them and have disables hideing everywhere.\n\n\n")
+	endif()
+	message("DISABLING ${arg}")
 	
-	DKSET(dkdepend_disable_list ${dkdepend_disable_list} ${arg})
+	DKSET(dkdepend_disable_list ${dkdepend_disable_list} "${arg}")
 endfunction()
 
 
@@ -2712,8 +2713,10 @@ function(DKBRUTEDEPENDS arg)
 	list(REMOVE_DUPLICATES dkdepend_list)
 endfunction()
 
-#######################
-FUNCTION (DKDEPEND_ALL)
+######################
+FUNCTION(DKDEPEND_ALL)
+	MESSAGE("DKDEPEND_ALL")
+	
 	##TODO - get a list of all DKPlugins and call DKPEPEND(DKPlugin) for each of them.
 	message("***** DKDEPEND_ALL() *****")
 	DKSET(DEPENDALL_FILE "")
