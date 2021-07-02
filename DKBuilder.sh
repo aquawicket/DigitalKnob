@@ -14,7 +14,7 @@ do
 			cd /home/"$USER"/digitalknob/DK
 			git checkout -- .
 			git pull origin master
-			options=("UPDATE" "DKBuilder" "DKSDLRmlUi" "DKTestAll" "Exit")
+			echo "${options[@]}"
             ;;
 		"DKBuilder")
             echo "$opt"

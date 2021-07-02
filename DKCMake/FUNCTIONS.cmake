@@ -1011,7 +1011,6 @@ function(IOSSIM64_COMMAND arg)
 	endif()
 endfunction()
 
-
 ###########################
 function(LINUX_COMMAND arg)
 	if(LINUX AND QUEUE_BUILD)
@@ -1076,8 +1075,69 @@ function(LINUX64_RELEASE_COMMAND arg)
 	endif()
 endfunction()
 
+###############################
+function(RASPBERRY_COMMAND arg)
+	if(RASPBERRY AND QUEUE_BUILD)
+		set(arg2 ${arg} ${ARGN})
+		DKEXECUTE_PROCESS(COMMAND ${arg2} WORKING_DIRECTORY ${CURRENT_DIR})
+	endif()
+endfunction()
 
+function(RASPBERRY_DEBUG_COMMAND arg)
+	if(RASPBERRY AND DEBUG AND QUEUE_BUILD)
+		set(arg2 ${arg} ${ARGN})
+		RASPBERRY_COMMAND(${arg2})
+	endif()
+endfunction()
 
+function(RASPBERRY_RELEASE_COMMAND arg)
+	if(RASPBERRY AND RELEASE AND QUEUE_BUILD)
+		set(arg2 ${arg} ${ARGN})
+		RASPBERRY_COMMAND(${arg2})
+	endif()
+endfunction()
+
+function(RASPBERRY32_COMMAND arg)
+	if(RASPBERRY_32 AND QUEUE_BUILD)
+		set(arg2 ${arg} ${ARGN})
+		RASPBERRY_COMMAND(${arg2})
+	endif()
+endfunction()
+
+function(RASPBERRY32_DEBUG_COMMAND arg)
+	if(RASPBERRY_32 AND DEBUG AND QUEUE_BUILD)
+		set(arg2 ${arg} ${ARGN})
+		RASPBERRY_COMMAND(${arg2})
+	endif()
+endfunction()
+
+function(RASPBERRY32_RELEASE_COMMAND arg)
+	if(RASPBERRY_32 AND RELEASE AND QUEUE_BUILD)
+		set(arg2 ${arg} ${ARGN})
+		RASPBERRY_COMMAND(${arg2})
+	endif()
+endfunction()
+
+function(RASPBERRY64_COMMAND arg)
+	if(RASPBERRY_64 AND QUEUE_BUILD)
+		set(arg2 ${arg} ${ARGN})
+		RASPBERRY_COMMAND(${arg2})
+	endif()
+endfunction()
+
+function(RASPBERRY64_DEBUG_COMMAND arg)
+	if(RASPBERRY_64 AND DEBUG AND QUEUE_BUILD)
+		set(arg2 ${arg} ${ARGN})
+		RASPBERRY_COMMAND(${arg2})
+	endif()
+endfunction()
+
+function(RASPBERRY64_RELEASE_COMMAND arg)
+	if(RASPBERRY_64 AND RELEASE AND QUEUE_BUILD)
+		set(arg2 ${arg} ${ARGN})
+		RASPBERRY_COMMAND(${arg2})
+	endif()
+endfunction()
 
 #############################
 function(ANDROID_COMMAND arg)
@@ -1087,7 +1147,6 @@ function(ANDROID_COMMAND arg)
 	endif()
 endfunction()
 
-###################################
 function(ANDROID_DEBUG_COMMAND arg)
 	if(ANDROID AND DEBUG AND QUEUE_BUILD)
 		set(arg2 ${arg} ${ARGN})
@@ -1095,7 +1154,6 @@ function(ANDROID_DEBUG_COMMAND arg)
 	endif()
 endfunction()
 
-#####################################
 function(ANDROID_RELEASE_COMMAND arg)
 	if(ANDROID AND RELEASE AND QUEUE_BUILD)
 		set(arg2 ${arg} ${ARGN})
@@ -1103,7 +1161,6 @@ function(ANDROID_RELEASE_COMMAND arg)
 	endif()
 endfunction()
 
-###############################
 function(ANDROID32_COMMAND arg)
 	if(ANDROID_32 AND QUEUE_BUILD)
 		set(arg2 ${arg} ${ARGN})
@@ -1111,7 +1168,6 @@ function(ANDROID32_COMMAND arg)
 	endif()
 endfunction()
 
-###############################
 function(ANDROID64_COMMAND arg)
 	if(ANDROID_64 AND QUEUE_BUILD)
 		set(arg2 ${arg} ${ARGN})
@@ -1119,7 +1175,6 @@ function(ANDROID64_COMMAND arg)
 	endif()
 endfunction()
 
-##########################
 function(ANDROID_BASH arg)
 	if(ANDROID AND QUEUE_BUILD)
 		message("BASH-> ${arg}")
@@ -1127,7 +1182,6 @@ function(ANDROID_BASH arg)
 	endif()
 endfunction()
 
-############################
 function(ANDROID32_BASH arg)
 	if(ANDROID_32 AND QUEUE_BUILD)
 		set(arg2 ${arg} ${ARGN})
@@ -1135,7 +1189,6 @@ function(ANDROID32_BASH arg)
 	endif()
 endfunction()
 
-############################
 function(ANDROID64_BASH arg)
 	if(ANDROID_64 AND QUEUE_BUILD)
 		set(arg2 ${arg} ${ARGN})
@@ -1144,84 +1197,7 @@ function(ANDROID64_BASH arg)
 endfunction()
 
 
-
-
-###############################
-function(RASPBERRY_COMMAND arg)
-	if(RASPBERRY AND QUEUE_BUILD)
-		set(arg2 ${arg} ${ARGN})
-		DKEXECUTE_PROCESS(COMMAND ${arg2} WORKING_DIRECTORY ${CURRENT_DIR})
-	endif()
-endfunction()
-
-#####################################
-function(RASPBERRY_DEBUG_COMMAND arg)
-	if(RASPBERRY AND DEBUG AND QUEUE_BUILD)
-		set(arg2 ${arg} ${ARGN})
-		RASPBERRY_COMMAND(${arg2})
-	endif()
-endfunction()
-
-#######################################
-function(RASPBERRY_RELEASE_COMMAND arg)
-	if(RASPBERRY AND RELEASE AND QUEUE_BUILD)
-		set(arg2 ${arg} ${ARGN})
-		RASPBERRY_COMMAND(${arg2})
-	endif()
-endfunction()
-
-#################################
-function(RASPBERRY32_COMMAND arg)
-	if(RASPBERRY_32 AND QUEUE_BUILD)
-		set(arg2 ${arg} ${ARGN})
-		RASPBERRY_COMMAND(${arg2})
-	endif()
-endfunction()
-
-#######################################
-function(RASPBERRY32_DEBUG_COMMAND arg)
-	if(RASPBERRY_32 AND DEBUG AND QUEUE_BUILD)
-		set(arg2 ${arg} ${ARGN})
-		RASPBERRY_COMMAND(${arg2})
-	endif()
-endfunction()
-
-#########################################
-function(RASPBERRY32_RELEASE_COMMAND arg)
-	if(RASPBERRY_32 AND RELEASE AND QUEUE_BUILD)
-		set(arg2 ${arg} ${ARGN})
-		RASPBERRY_COMMAND(${arg2})
-	endif()
-endfunction()
-
-#################################
-function(RASPBERRY64_COMMAND arg)
-	if(RASPBERRY_64 AND QUEUE_BUILD)
-		set(arg2 ${arg} ${ARGN})
-		RASPBERRY_COMMAND(${arg2})
-	endif()
-endfunction()
-
-#######################################
-function(RASPBERRY64_DEBUG_COMMAND arg)
-	if(RASPBERRY_64 AND DEBUG AND QUEUE_BUILD)
-		set(arg2 ${arg} ${ARGN})
-		RASPBERRY_COMMAND(${arg2})
-	endif()
-endfunction()
-
-#########################################
-function(RASPBERRY64_RELEASE_COMMAND arg)
-	if(RASPBERRY_64 AND RELEASE AND QUEUE_BUILD)
-		set(arg2 ${arg} ${ARGN})
-		RASPBERRY_COMMAND(${arg2})
-	endif()
-endfunction()
-
-
-
-
-###############################
+################# Visual Studio Build ################
 function(WIN_VS_DEBUG arg arg2)
 	if(WIN AND DEBUG AND QUEUE_BUILD)
 		if(NOT EXISTS ${3RDPARTY}/${arg}/${OS}/${arg2})
@@ -1302,7 +1278,7 @@ function(WIN64_VS arg arg2)
 endfunction()
 
 
-#############################
+################### Xcode Build ###################
 function(MAC_XCODE_DEBUG arg)
 	if(MAC AND DEBUG AND QUEUE_BUILD)
 		set(extra_args ${ARGN})
@@ -1316,7 +1292,6 @@ function(MAC_XCODE_DEBUG arg)
 	endif()
 endfunction()
 
-###############################
 function(MAC_XCODE_RELEASE arg)
 	if(MAC AND RELEASE AND QUEUE_BUILD)
 		set(extra_args ${ARGN})
@@ -1330,7 +1305,6 @@ function(MAC_XCODE_RELEASE arg)
 	endif()
 endfunction()
 
-###############################
 function(MAC32_XCODE_DEBUG arg)
 	if(MAC_32 AND DEBUG AND QUEUE_BUILD)
 		set(extra_args ${ARGN})
@@ -1344,7 +1318,6 @@ function(MAC32_XCODE_DEBUG arg)
 	endif()
 endfunction()
 
-#################################
 function(MAC32_XCODE_RELEASE arg)
 	if(MAC_32 AND RELEASE AND QUEUE_BUILD)
 		set(extra_args ${ARGN})
@@ -1358,7 +1331,6 @@ function(MAC32_XCODE_RELEASE arg)
 	endif()
 endfunction()
 
-###############################
 function(MAC64_XCODE_DEBUG arg)
 	if(MAC_64 AND DEBUG AND QUEUE_BUILD)
 		set(extra_args ${ARGN})
@@ -1372,7 +1344,6 @@ function(MAC64_XCODE_DEBUG arg)
 	endif()
 endfunction()
 
-#################################
 function(MAC64_XCODE_RELEASE arg)
 	if(MAC_64 AND RELEASE AND QUEUE_BUILD)
 		set(extra_args ${ARGN})
@@ -1386,7 +1357,7 @@ function(MAC64_XCODE_RELEASE arg)
 	endif()
 endfunction()
 
-###############################
+#############################
 function(IOS_XCODE_DEBUG arg)
 	if(IOS AND DEBUG AND QUEUE_BUILD)
 		set(extra_args ${ARGN})
@@ -1400,7 +1371,6 @@ function(IOS_XCODE_DEBUG arg)
 	endif()
 endfunction()
 
-#################################
 function(IOS_XCODE_RELEASE arg)
 	if(IOS AND RELEASE AND QUEUE_BUILD)
 		set(extra_args ${ARGN})
@@ -1414,7 +1384,6 @@ function(IOS_XCODE_RELEASE arg)
 	endif()
 endfunction()
 
-###############################
 function(IOS32_XCODE_DEBUG arg)
 	if(IOS_32 AND DEBUG AND QUEUE_BUILD)
 		set(extra_args ${ARGN})
@@ -1428,7 +1397,6 @@ function(IOS32_XCODE_DEBUG arg)
 	endif()
 endfunction()
 
-#################################
 function(IOS32_XCODE_RELEASE arg)
 	if(IOS_32 AND RELEASE AND QUEUE_BUILD)
 		set(extra_args ${ARGN})
@@ -1442,7 +1410,6 @@ function(IOS32_XCODE_RELEASE arg)
 	endif()
 endfunction()
 
-###############################
 function(IOS64_XCODE_DEBUG arg)
 	if(IOS_64 AND DEBUG AND QUEUE_BUILD)
 		set(extra_args ${ARGN})
@@ -1456,7 +1423,6 @@ function(IOS64_XCODE_DEBUG arg)
 	endif()
 endfunction()
 
-#################################
 function(IOS64_XCODE_RELEASE arg)
 	if(IOS64 AND RELEASE AND QUEUE_BUILD)
 		set(extra_args ${ARGN})
@@ -1470,7 +1436,7 @@ function(IOS64_XCODE_RELEASE arg)
 	endif()
 endfunction()
 
-##################################
+################################
 function(IOSSIM_XCODE_DEBUG arg)
 	if(IOSSIM AND DEBUG AND QUEUE_BUILD)
 		set(extra_args ${ARGN})
@@ -1484,7 +1450,6 @@ function(IOSSIM_XCODE_DEBUG arg)
 	endif()
 endfunction()
 
-####################################
 function(IOSSIM_XCODE_RELEASE arg)
 	if(IOSSIM AND RELEASE AND QUEUE_BUILD)
 		set(extra_args ${ARGN})
@@ -1498,7 +1463,6 @@ function(IOSSIM_XCODE_RELEASE arg)
 	endif()
 endfunction()
 
-##################################
 function(IOSSIM32_XCODE_DEBUG arg)
 	if(IOSSIM_32 AND DEBUG AND QUEUE_BUILD)
 		set(extra_args ${ARGN})
@@ -1512,7 +1476,6 @@ function(IOSSIM32_XCODE_DEBUG arg)
 	endif()
 endfunction()
 
-####################################
 function(IOSSIM32_XCODE_RELEASE arg)
 	if(IOSSIM_32 AND RELEASE AND QUEUE_BUILD)
 		set(extra_args ${ARGN})
@@ -1526,7 +1489,6 @@ function(IOSSIM32_XCODE_RELEASE arg)
 	ndif()
 endfunction()
 
-##################################
 function(IOSSIM64_XCODE_DEBUG arg)
 	if(IOSSIM_64 AND DEBUG AND QUEUE_BUILD)
 		set(extra_args ${ARGN})
@@ -1540,7 +1502,6 @@ function(IOSSIM64_XCODE_DEBUG arg)
 	endif()
 endfunction()
 
-####################################
 function(IOSSIM64_XCODE_RELEASE arg)
 	if(IOSSIM_64 AND RELEASE AND QUEUE_BUILD)
 		set(extra_args ${ARGN})
@@ -1554,7 +1515,8 @@ function(IOSSIM64_XCODE_RELEASE arg)
 	endif()
 endfunction()
 
-###############################
+
+####################### Android NDK Build #################
 function(ANDROID_NDK_DEBUG arg)
 	if(ANDROID AND DEBUG AND QUEUE_BUILD)
 		if(CMAKE_HOST_WIN32)
@@ -1566,7 +1528,6 @@ function(ANDROID_NDK_DEBUG arg)
 	endif()
 endfunction()
 
-#################################
 function(ANDROID_NDK_RELEASE arg)
 	if(ANDROID AND RELEASE AND QUEUE_BUILD)
 		if(CMAKE_HOST_WIN32)
@@ -1578,7 +1539,6 @@ function(ANDROID_NDK_RELEASE arg)
 	endif()
 endfunction()
 
-#################################
 function(ANDROID32_NDK_DEBUG arg)
 	if(ANDROID_32 AND DEBUG AND QUEUE_BUILD)
 		if(CMAKE_HOST_WIN32)
@@ -1590,7 +1550,6 @@ function(ANDROID32_NDK_DEBUG arg)
 	endif()
 endfunction()
 
-###################################
 function(ANDROID32_NDK_RELEASE arg)
 	if(ANDROID_32 AND RELEASE AND QUEUE_BUILD)
 		if(CMAKE_HOST_WIN32)
@@ -1602,7 +1561,6 @@ function(ANDROID32_NDK_RELEASE arg)
 	endif()
 endfunction()
 
-#################################
 function(ANDROID64_NDK_DEBUG arg)
 	if(ANDROID_64 AND DEBUG AND QUEUE_BUILD)
 		if(CMAKE_HOST_WIN32)
@@ -1614,7 +1572,6 @@ function(ANDROID64_NDK_DEBUG arg)
 	endif()
 endfunction()
 
-###################################
 function(ANDROID64_NDK_RELEASE arg)
 	if(ANDROID_64 AND RELEASE AND QUEUE_BUILD)
 		if(CMAKE_HOST_WIN32)
@@ -1628,7 +1585,7 @@ endfunction()
 
 
 
-#########################
+###################### DKPlugin Link Libraries #####################
 function(DKDEBUG_LIB arg)
 	if(DEBUG)
 		DKSET(LIBLIST ${LIBLIST} ${arg}) ## used for double checking
@@ -1661,7 +1618,6 @@ function(DKDEBUG_LIB arg)
 	endif()
 endfunction()
 
-###########################
 function(DKRELEASE_LIB arg)
 	if(RELEASE)
 		DKSET(LIBLIST ${LIBLIST} ${arg}) ## used for double checking
@@ -1700,35 +1656,30 @@ function(WIN_DEBUG_LIB arg)
 	endif()
 endfunction()
 
-#############################
 function(WIN_RELEASE_LIB arg)
 	if(WIN)
 		DKRELEASE_LIB(${arg})
 	endif()
 endfunction()
 
-#############################
 function(WIN32_DEBUG_LIB arg)
 	if(WIN_32)
 		DKDEBUG_LIB(${arg})
 	endif()
 endfunction()
 
-###############################
 function(WIN32_RELEASE_LIB arg)
 	if(WIN_32)
 		DKRELEASE_LIB(${arg})
 	endif()
 endfunction()
 
-#############################
 function(WIN64_DEBUG_LIB arg)
 	if(WIN_64)
 		DKDEBUG_LIB(${arg})
 	endif()
 endfunction()
 
-###############################
 function(WIN64_RELEASE_LIB arg)
 	if(WIN_64)
 		DKRELEASE_LIB(${arg})
@@ -1744,7 +1695,6 @@ function(APPLE_DEBUG_LIB arg)
 	endif()
 endfunction()
 
-###############################
 function(APPLE_RELEASE_LIB arg)
 	if(CMAKE_HOST_APPLE)
 		if(NOT ANDROID)
@@ -1753,42 +1703,36 @@ function(APPLE_RELEASE_LIB arg)
 	endif()
 endfunction()
 
-###########################
 function(MAC_DEBUG_LIB arg)
 	if(MAC)
 		DKDEBUG_LIB(${arg})
 	endif()
 endfunction()
 
-#############################
 function(MAC_RELEASE_LIB arg)
 	if(MAC)
 		DKRELEASE_LIB(${arg})
 	endif()
 endfunction()
 
-#############################
 function(MAC32_DEBUG_LIB arg)
 	if(MAC_32)
 		DKDEBUG_LIB(${arg})
 	endif()
 endfunction()
 
-###############################
 function(MAC32_RELEASE_LIB arg)
 	if(MAC_32)
 		DKRELEASE_LIB(${arg})
 	endif()
 endfunction()
 
-#############################
 function(MAC64_DEBUG_LIB arg)
 	if(MAC_64)
 		DKDEBUG_LIB(${arg})
 	endif()
 endfunction()
 
-###############################
 function(MAC64_RELEASE_LIB arg)
 	if(MAC_64)
 		DKRELEASE_LIB(${arg})
@@ -1802,35 +1746,30 @@ function(IOS_DEBUG_LIB arg)
 	endif()
 endfunction()
 
-#############################
 function(IOS_RELEASE_LIB arg)
 	if(IOS)
 		DKRELEASE_LIB(${arg})
 	endif()
 endfunction()
 
-###########################
 function(IOS32_DEBUG_LIB arg)
 	if(IOS_32)
 		DKDEBUG_LIB(${arg})
 	endif()
 endfunction()
 
-#############################
 function(IOS32_RELEASE_LIB arg)
 	if(IOS_32)
 		DKRELEASE_LIB(${arg})
 	endif()
 endfunction()
 
-###########################
 function(IOS64_DEBUG_LIB arg)
 	if(IOS_64)
 		DKDEBUG_LIB(${arg})
 	endif()
 endfunction()
 
-#############################
 function(IOS64_RELEASE_LIB arg)
 	if(IOS_64)
 		DKRELEASE_LIB(${arg})
@@ -1844,29 +1783,23 @@ function(IOSSIM_DEBUG_LIB arg)
 	endif()
 endfunction()
 
-################################
 function(IOSSIM_RELEASE_LIB arg)
 	if(IOSSIM)
 		DKRELEASE_LIB(${arg})
 	endif()
 endfunction()
 
-##############################
 function(IOSSIM32_DEBUG_LIB arg)
 	if(IOSSIM_32)
 		DKDEBUG_LIB(${arg})
 	endif()
 endfunction()
 
-################################
 function(IOSSIM32_RELEASE_LIB arg)
 	if(IOSSIM_32)
 		DKRELEASE_LIB(${arg})
 	endif()
 endfunction()
-
-
-
 
 #############################
 function(LINUX_DEBUG_LIB arg)
@@ -1875,85 +1808,35 @@ function(LINUX_DEBUG_LIB arg)
 	endif()
 endfunction()
 
-###############################
 function(LINUX_RELEASE_LIB arg)
 	if(LINUX AND RELEASE)
 		DKRELEASE_LIB(${arg})
 	endif()
 endfunction()
 
-###############################
 function(LINUX32_DEBUG_LIB arg)
 	if(LINUX32 AND DEBUG)
 		DKDEBUG_LIB(${arg})
 	endif()
 endfunction()
 
-#################################
 function(LINUX32_RELEASE_LIB arg)
 	if(LINUX32 AND RELEASE)
 		DKRELEASE_LIB(${arg})
 	endif()
 endfunction()
 
-###############################
 function(LINUX64_DEBUG_LIB arg)
 	if(LINUX64 AND DEBUG)
 		DKDEBUG_LIB(${arg})
 	endif()
 endfunction()
 
-#################################
 function(LINUX64_RELEASE_LIB arg)
 	if(LINUX64 AND RELEASE)
 		DKRELEASE_LIB(${arg})
 	endif()
 endfunction()
-
-
-
-###############################
-function(ANDROID_DEBUG_LIB arg)
-	if(ANDROID AND DEBUG)
-		DKDEBUG_LIB(${arg})
-	endif()
-endfunction()
-
-#################################
-function(ANDROID_RELEASE_LIB arg)
-	if(ANDROID AND RELEASE)
-		DKRELEASE_LIB(${arg})
-	endif()
-endfunction()
-
-#################################
-function(ANDROID32_DEBUG_LIB arg)
-	if(ANDROID_32 AND DEBUG)
-		DKDEBUG_LIB(${arg})
-	endif()
-endfunction()
-
-###################################
-function(ANDROID32_RELEASE_LIB arg)
-	if(ANDROID_32 AND RELEASE)
-		DKRELEASE_LIB(${arg})
-	endif()
-endfunction()
-
-#################################
-function(ANDROID64_DEBUG_LIB arg)
-	if(ANDROID_64 AND DEBUG)
-		DKDEBUG_LIB(${arg})
-	endif()
-endfunction()
-
-###################################
-function(ANDROID64_RELEASE_LIB arg)
-	if(ANDROID_64 AND RELEASE)
-		DKRELEASE_LIB(${arg})
-	endif()
-endfunction()
-
 
 #################################
 function(RASPBERRY_DEBUG_LIB arg)
@@ -1962,58 +1845,87 @@ function(RASPBERRY_DEBUG_LIB arg)
 	endif()
 endfunction()
 
-###################################
 function(RASPBERRY_RELEASE_LIB arg)
 	if(RASPBERRY AND RELEASE)
 		DKRELEASE_LIB(${arg})
 	endif()
 endfunction()
 
-###################################
 function(RASPBERRY32_DEBUG_LIB arg)
 	if(RASPBERRY32 AND DEBUG)
 		DKDEBUG_LIB(${arg})
 	endif()
 endfunction()
 
-#####################################
 function(RASPBERRY32_RELEASE_LIB arg)
 	if(RASPBERRY32 AND RELEASE)
 		DKRELEASE_LIB(${arg})
 	endif()
 endfunction()
 
-###################################
 function(RASPBERRY64_DEBUG_LIB arg)
 	if(RASPBERRY64 AND DEBUG)
 		DKDEBUG_LIB(${arg})
 	endif()
 endfunction()
 
-#####################################
 function(RASPBERRY64_RELEASE_LIB arg)
 	if(RASPBERRY64 AND RELEASE)
 		DKRELEASE_LIB(${arg})
 	endif()
 endfunction()
 
+###############################
+function(ANDROID_DEBUG_LIB arg)
+	if(ANDROID AND DEBUG)
+		DKDEBUG_LIB(${arg})
+	endif()
+endfunction()
+
+function(ANDROID_RELEASE_LIB arg)
+	if(ANDROID AND RELEASE)
+		DKRELEASE_LIB(${arg})
+	endif()
+endfunction()
+
+function(ANDROID32_DEBUG_LIB arg)
+	if(ANDROID_32 AND DEBUG)
+		DKDEBUG_LIB(${arg})
+	endif()
+endfunction()
+
+function(ANDROID32_RELEASE_LIB arg)
+	if(ANDROID_32 AND RELEASE)
+		DKRELEASE_LIB(${arg})
+	endif()
+endfunction()
+
+function(ANDROID64_DEBUG_LIB arg)
+	if(ANDROID_64 AND DEBUG)
+		DKDEBUG_LIB(${arg})
+	endif()
+endfunction()
+
+function(ANDROID64_RELEASE_LIB arg)
+	if(ANDROID_64 AND RELEASE)
+		DKRELEASE_LIB(${arg})
+	endif()
+endfunction()
 
 
-#########################
+####################### Include Directories ###################
 function(WIN_INCLUDE arg)
 	if(WIN)
 		DKINCLUDE(${arg})
 	endif()
 endfunction()
 
-###########################
 function(WIN32_INCLUDE arg)
 	if(WIN_32)
 		DKINCLUDE(${arg})
 	endif()
 endfunction()
 
-###########################
 function(WIN64_INCLUDE arg)
 	if(WIN_64)
 		DKINCLUDE(${arg})
@@ -2027,63 +1939,54 @@ function(APPLE_INCLUDE arg)
 	endif()
 endfunction()
 
-#########################
 function(MAC_INCLUDE arg)
 	if(MAC)
 		DKINCLUDE(${arg})
 	endif()
 endfunction()
 
-###########################
 function(MAC32_INCLUDE arg)
 	if(MAC_32)
 		DKINCLUDE(${arg})
 	endif()
 endfunction()
 
-###########################
 function(MAC64_INCLUDE arg)
 	if(MAC_64)
 		DKINCLUDE(${arg})
 	endif()
 endfunction()
 
-#########################
 function(IOS_INCLUDE arg)
 	if(IOS)
 		DKINCLUDE(${arg})
 	endif()
 endfunction()
 
-###########################
 function(IOS32_INCLUDE arg)
 	if(IOS_32)
 		DKINCLUDE(${arg})
 	endif()
 endfunction()
 
-###########################
 function(IOS64_INCLUDE arg)
 	if(IOS_64)
 		DKINCLUDE(${arg})
 	endif()
 endfunction()
 
-############################
 function(IOSSIM_INCLUDE arg)
 	if(IOSSIM)
 		DKINCLUDE(${arg})
 	endif()
 endfunction()
 
-##############################
 function(IOSSIM32_INCLUDE arg)
 	if(IOSSIM_32)
 		DKINCLUDE(${arg})
 	endif()
 endfunction()
 
-##############################
 function(IOSSIM64_INCLUDE arg)
 	if(IOSSIM_64)
 		DKINCLUDE(${arg})
@@ -2097,58 +2000,105 @@ function(LINUX_INCLUDE arg)
 	endif()
 endfunction()
 
-#############################
 function(LINUX32_INCLUDE arg)
 	if(LINUX_32)
 		DKINCLUDE(${arg})
 	endif()
 endfunction()
 
-#############################
 function(LINUX64_INCLUDE arg)
 	if(LINUX_64)
 		DKINCLUDE(${arg})
 	endif()
 endfunction()
 
-#################################
 function(LINUX_DEBUG_INCLUDE arg)
 	if(DEBUG)
 		DKINCLUDE(${arg})
 	endif()
 endfunction()
 
-###################################
 function(LINUX_RELEASE_INCLUDE arg)
 	if(RELEASE)
 		DKINCLUDE(${arg})
 	endif()
 endfunction()
 
-###################################
 function(LINUX32_DEBUG_INCLUDE arg)
 	if(LINUX_32 AND DEBUG)
 		DKINCLUDE(${arg})
 	endif()
 endfunction()
 
-#####################################
 function(LINUX32_RELEASE_INCLUDE arg)
 	if(LINUX_32 AND RELEASE)
 		DKINCLUDE(${arg})
 	endif()
 endfunction()
 
-###################################
 function(LINUX64_DEBUG_INCLUDE arg)
 	if(LINUX_64 AND DEBUG)
 		DKINCLUDE(${arg})
 	endif()
 endfunction()
 
-#####################################
 function(LINUX64_RELEASE_INCLUDE arg)
 	if(LINUX_64 AND RELEASE)
+		DKINCLUDE(${arg})
+	endif()
+endfunction()
+
+###############################
+function(RASPBERRY_INCLUDE arg)
+	if(RASPBERRY)
+		DKINCLUDE(${arg})
+	endif()
+endfunction()
+
+function(RASPBERRY32_INCLUDE arg)
+	if(RASPBERRY_32)
+		DKINCLUDE(${arg})
+	endif()
+endfunction()
+
+function(RASPBERRY64_INCLUDE arg)
+	if(RASPBERRY_64)
+		DKINCLUDE(${arg})
+	endif()
+endfunction()
+
+function(RASPBERRY_DEBUG_INCLUDE arg)
+	if(RASPBERRY AND DEBUG)
+		DKINCLUDE(${arg})
+	endif()
+endfunction()
+
+function(RASPBERRY_RELEASE_INCLUDE arg)
+	if(RASPBERRY AND RELEASE)
+		DKINCLUDE(${arg})
+	endif()
+endfunction()
+
+function(RASPBERRY32_DEBUG_INCLUDE arg)
+	if(RASPBERRY_32 AND DEBUG)
+		DKINCLUDE(${arg})
+	endif()
+endfunction()
+
+function(RASPBERRY32_RELEASE_INCLUDE arg)
+	if(RASPBERRY_32 AND RELEASE)
+		DKINCLUDE(${arg})
+	endif()
+endfunction()
+
+function(RASPBERRY64_DEBUG_INCLUDE arg)
+	if(RASPBERRY_64 AND DEBUG)
+		DKINCLUDE(${arg})
+	endif()
+endfunction()
+
+function(RASPBERRY64_RELEASE_INCLUDE arg)
+	if(RASPBERRY_64 AND RELEASE)
 		DKINCLUDE(${arg})
 	endif()
 endfunction()
@@ -2160,42 +2110,36 @@ function(ANDROID_INCLUDE arg)
 	endif()
 endfunction()
 
-###############################
 function(ANDROID32_INCLUDE arg)
 	if(ANDROID_32)
 		DKINCLUDE(${arg})
 	endif()
 endfunction()
 
-###############################
 function(ANDROID64_INCLUDE arg)
 	if(ANDROID_64)
 		DKINCLUDE(${arg})
 	endif()
 endfunction()
 
-###################################
 function(ANDROID_DEBUG_INCLUDE arg)
 	if(DEBUG)
 		DKINCLUDE(${arg})
 	endif()
 endfunction()
 
-#####################################
 function(ANDROID_RELEASE_INCLUDE arg)
 	if(RELEASE)
 		DKINCLUDE(${arg})
 	endif()
 endfunction()
 
-#####################################
 function(ANDROID32_DEBUG_INCLUDE arg)
 	if(ANDROID_32 AND DEBUG)
 		DKINCLUDE(${arg})
 	endif()
 endfunction()
 
-#######################################
 function(ANDROID32_RELEASE_INCLUDE arg)
 	if(ANDROID_32 AND RELEASE)
 		DKINCLUDE(${arg})
@@ -2204,75 +2148,8 @@ endfunction()
 
 
 
-###############################
-function(RASPBERRY_INCLUDE arg)
-	if(RASPBERRY)
-		DKINCLUDE(${arg})
-	endif()
-endfunction()
 
-#################################
-function(RASPBERRY32_INCLUDE arg)
-	if(RASPBERRY_32)
-		DKINCLUDE(${arg})
-	endif()
-endfunction()
-
-#################################
-function(RASPBERRY64_INCLUDE arg)
-	if(RASPBERRY_64)
-		DKINCLUDE(${arg})
-	endif()
-endfunction()
-
-#####################################
-function(RASPBERRY_DEBUG_INCLUDE arg)
-	if(RASPBERRY AND DEBUG)
-		DKINCLUDE(${arg})
-	endif()
-endfunction()
-
-#######################################
-function(RASPBERRY_RELEASE_INCLUDE arg)
-	if(RASPBERRY AND RELEASE)
-		DKINCLUDE(${arg})
-	endif()
-endfunction()
-
-###################################
-function(RASPBERRY32_DEBUG_INCLUDE arg)
-	if(RASPBERRY_32 AND DEBUG)
-		DKINCLUDE(${arg})
-	endif()
-endfunction()
-
-#####################################
-function(RASPBERRY32_RELEASE_INCLUDE arg)
-	if(RASPBERRY_32 AND RELEASE)
-		DKINCLUDE(${arg})
-	endif()
-endfunction()
-
-###################################
-function(RASPBERRY64_DEBUG_INCLUDE arg)
-	if(RASPBERRY_64 AND DEBUG)
-		DKINCLUDE(${arg})
-	endif()
-endfunction()
-
-#####################################
-function(RASPBERRY64_RELEASE_INCLUDE arg)
-	if(RASPBERRY_64 AND RELEASE)
-		DKINCLUDE(${arg})
-	endif()
-endfunction()
-
-
-
-
-
-
-######################
+###################### DKPLUGINS ####################
 function(DKPLUGIN arg)
 	DKSETPATHTOPLUGIN(${arg})
 	if(NOT PATHTOPLUGIN)
@@ -2447,7 +2324,7 @@ function(DKDLL arg)
 endfunction()
 
 
-############################
+##########################
 function(DKEXECUTABLE arg)
 	##Create CmakeLists.txt file
 	DKSETPATHTOPLUGIN(${arg})
@@ -2893,8 +2770,6 @@ function(DKUPDATE_INFO_PLIST arg)
 endfunction()
 
 
-
-
 # Function to wrap a given string into multiple lines at the given column position.
 # Parameters:
 #   VARIABLE    - The name of the CMake variable holding the string.
@@ -2902,25 +2777,19 @@ endfunction()
 function(WRAP_STRING)
     set(oneValueArgs VARIABLE AT_COLUMN)
     cmake_parse_arguments(WRAP_STRING "${options}" "${oneValueArgs}" "" ${ARGN})
-
     string(LENGTH ${${WRAP_STRING_VARIABLE}} stringLength)
     math(EXPR offset "0")
-
     while(stringLength GREATER 0)
-
         if(stringLength GREATER ${WRAP_STRING_AT_COLUMN})
             math(EXPR length "${WRAP_STRING_AT_COLUMN}")
         else()
             math(EXPR length "${stringLength}")
         endif()
-
         string(SUBSTRING ${${WRAP_STRING_VARIABLE}} ${offset} ${length} line)
         set(lines "${lines}\n${line}")
-
         math(EXPR stringLength "${stringLength} - ${length}")
         math(EXPR offset "${offset} + ${length}")
     endwhile()
-
     set(${WRAP_STRING_VARIABLE} "${lines}" PARENT_SCOPE)
 endfunction()
 
@@ -2945,33 +2814,26 @@ function(BIN2H)
     set(options APPEND NULL_TERMINATE)
     set(oneValueArgs SOURCE_FILE VARIABLE_NAME HEADER_FILE)
     cmake_parse_arguments(BIN2H "${options}" "${oneValueArgs}" "" ${ARGN})
-
     # reads source file contents as hex string
     file(READ ${BIN2H_SOURCE_FILE} hexString HEX)
     string(LENGTH ${hexString} hexStringLength)
-
     # appends null byte if asked
     if(BIN2H_NULL_TERMINATE)
         set(hexString "${hexString}00")
     endif()
-
     # wraps the hex string into multiple lines at column 32(i.e. 16 bytes per line)
     ##wrap_string(VARIABLE hexString AT_COLUMN 32)
     math(EXPR arraySize "${hexStringLength} / 2")
-
     # adds '0x' prefix and comma suffix before and after every byte respectively
     ##string(REGEX REPLACE "([0-9a-f][0-9a-f])" "\\1" arrayValues ${hexString})
     # removes trailing comma
     ##string(REGEX REPLACE ", $" "" arrayValues ${arrayValues})
-
     # converts the variable name into proper C identifier
     string(MAKE_C_IDENTIFIER "${BIN2H_VARIABLE_NAME}" BIN2H_VARIABLE_NAME)
     string(TOUPPER "${BIN2H_VARIABLE_NAME}" BIN2H_VARIABLE_NAME)
-
     # declares byte array and the length variables
     set(arrayDefinition "std::string ${BIN2H_VARIABLE_NAME} = \"${hexString}\";")
     set(arraySizeDefinition "size_t ${BIN2H_VARIABLE_NAME}_SIZE = ${arraySize};")
-
     set(declarations "${arrayDefinition}\n\n${arraySizeDefinition}\n\n")
     if(BIN2H_APPEND)
         file(APPEND ${BIN2H_HEADER_FILE} "${declarations}")
