@@ -1,5 +1,4 @@
 DKDEPEND(threadpool)
-DKDEPEND(boost Boost_Thread)
 IF(USE_DKDuktape)
 	DKDEPEND(DKDuktape)
 ENDIF()
