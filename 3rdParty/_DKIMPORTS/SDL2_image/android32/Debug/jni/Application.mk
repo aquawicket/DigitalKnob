@@ -1,7 +1,7 @@
 APP_MODULES      := SDL2_image
-APP_PLATFORM     := android-15
+APP_PLATFORM     := android-19
 APP_ABI          := armeabi-v7a
-APP_STL          := gnustl_static
+APP_STL          := c++_static
 APP_OPTIM        := debug
 
 APP_CPPFLAGS 	:= -fexceptions -frtti
