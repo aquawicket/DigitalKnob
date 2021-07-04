@@ -1,56 +1,50 @@
-CMAKE_MINIMUM_REQUIRED(VERSION 3.4)
-CMAKE_POLICY(SET CMP0054 NEW)
-SET(CMAKE_SOURCE_DIR C:/Users/$ENV{USERNAME}/digitalknob/DK)
-SET(DIGITALKNOB ${CMAKE_SOURCE_DIR})
-INCLUDE(${DIGITALKNOB}/DKCMake/FUNCTIONS.cmake)
-INCLUDE(${DIGITALKNOB}/DKCMake/OPTIONS.cmake)
-DKSET(DKCMAKE ${DIGITALKNOB}/DKCMake)
-DKSET(DKPLUGINS ${DIGITALKNOB}/DKPlugins)
-DKSET(3RDPARTY ${DIGITALKNOB}/3rdParty)
-DKSET(DKIMPORTS ${3RDPARTY}/_DKIMPORTS)
-DKSET(DKDOWNLOAD ${DIGITALKNOB}/Download)
-DKSET(DKWEB http://127.0.0.1)
-
-
-
-
-# run the DKDEPNDS for BuildTools
-INCLUDE(${DIGITALKNOB}/DKPlugins/BuildTools/DKMAKE.cmake)
-
-MESSAGE("\n")
-MESSAGE("**********************************")
-MESSAGE("*** BUILD TOOLS (sorted) ***")
-MESSAGE("**********************************\n")
-FOREACH(plugin ${DKPLUGS})
-	MESSAGE("${plugin}")	
-ENDFOREACH()
-
-
-SET(ANDROID_NDK ${3RDPARTY}/android-ndk-r21e)
-ANDROID_DEBUG_LIB(${ANDROID_NDK}/sources/cxx-stl/llvm-libc++/libs/armeabi-v7a/libc++_static.a)
-ANDROID_RELEASE_LIB(${ANDROID_NDK}/sources/cxx-stl/llvm-libc++/libs/armeabi-v7a/libc++_static.a)
-FOREACH(plugin ${DKPLUGS})
-	DKSET(QUEUE_BUILD OFF)
-	MESSAGE("\n")
-	MESSAGE("***************************************")
-	MESSAGE("**** Processing ${plugin}...")
-	MESSAGE("***************************************\n")
+### DEPENDS ###
+if(CMAKE_HOST_WIN32 AND WIN)
+	DKDEPEND(Git)
+	DKDEPEND(VisualStudio)
 	
-	#################### 3rdParty libs #####################
-	##Strip any sublibrary named in the plugin
-	STRING(FIND "${plugin}" " " _indexa)
-	IF(${_indexa} GREATER -1)
-		MATH(EXPR _indexa "${_indexa}+1")
-		STRING(SUBSTRING ${plugin} ${_indexa} -1 arg2)
-		MATH(EXPR _indexa "${_indexa}-1")
-		STRING(SUBSTRING ${plugin} 0 ${_indexa} plugin)
-		DKENABLE(${arg2})
-	ENDIF()
+	# NOTE: These Defines should be done per as needed in DKMAKE.cmake files
+	## add_definitions(-D__WINDOWS_MM__)
+	## add_definitions(-D__STDC_CONSTANT_MACROS)
+	## add_definitions(-D_SCL_SECURE_NO_WARNINGS)
+	## add_definitions(-D_CRT_SECURE_NO_DEPRECATE)
 	
-	DKSETPATHTOPLUGIN(${plugin})
-	IF(NOT PATHTOPLUGIN)
-		RETURN()
-	ENDIF()
+	LIST(APPEND WIN_LIBS kernel32.lib)
+	LIST(APPEND WIN_LIBS user32.lib)
+	LIST(APPEND WIN_LIBS gdi32.lib)
+	LIST(APPEND WIN_LIBS winspool.lib)
+	LIST(APPEND WIN_LIBS shell32.lib)
+	LIST(APPEND WIN_LIBS ole32.lib)
+	LIST(APPEND WIN_LIBS oleaut32.lib)
+	LIST(APPEND WIN_LIBS uuid.lib)
+	LIST(APPEND WIN_LIBS comdlg32.lib)
+	LIST(APPEND WIN_LIBS advapi32.lib)
+	LIST(APPEND WIN_LIBS odbc32.lib)
+	LIST(APPEND WIN_LIBS odbccp32.lib)
+	LIST(APPEND WIN_LIBS opengl32.lib)
+	LIST(APPEND WIN_LIBS DbgHelp.lib)
+endif()
 
-	INCLUDE(${PATHTOPLUGIN}/DKMAKE.cmake)
-ENDFOREACH()
+
+if(CMAKE_HOST_APPLE AND MAC OR IOS OR IOSSIM)
+	DKDEPEND(Xcode)
+endif()
+
+
+if(CMAKE_HOST_LINUX AND LINUX)
+
+endif()
+
+
+if(CMAKE_HOST_LINUX AND RASPBERRY)
+	
+endif()
+
+
+## TRACKER: error TRK0005: Failed to locate: "clang.exe" - https://stackoverflow.com/a/50924477/688352
+if(CMAKE_HOST_WIN32 AND ANDROID)
+	DKDEPEND(android-ndk)
+	DKDEPEND(VisualStudio)
+	DKDEPEND(mingw32)
+	DKDEPEND(msys)
+endif()

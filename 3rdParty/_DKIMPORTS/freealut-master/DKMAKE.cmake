@@ -9,8 +9,8 @@ DKSET(FREEALUT ${3RDPARTY}/freealut-master)
 
 ### LINK ###
 DKINCLUDE(${FREEALUT}/include)
-ANDROID_DEBUG_LIB(${FREEALUT}/${OS}/${DEBUG}/obj/local/armeabi-v7a/libalut.a)
-ANDROID_RELEASE_LIB(${FREEALUT}/${OS}/${RELEASE}/obj/local/armeabi-v7a/libalut.a)
+ANDROID_DEBUG_LIB(${FREEALUT}/${OS}/${DEBUG_DIR}/obj/local/armeabi-v7a/libalut.a)
+ANDROID_RELEASE_LIB(${FREEALUT}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/libalut.a)
 
 
 ### COMPILE ###

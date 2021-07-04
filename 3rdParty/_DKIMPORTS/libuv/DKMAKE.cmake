@@ -15,15 +15,15 @@ LIST(APPEND WIN_LIBS Userenv.lib)
 DKINCLUDE(${UV}/include)
 DKINCLUDE(${UV}/${OS})
 WIN_DEBUG_LIB(${UV}/${OS}/Debug/uv_a.lib)
-WIN_RELEASE_LIB(${UV}/${OS}/${RELEASE}/uv_a.lib)
-MAC_DEBUG_LIB(${UV}/${OS}/lib/${DEBUG}/uv_a.a)
-MAC_RELEASE_LIB(${UV}/${OS}/lib/${RELEASE}/uv_a.a)
-IOSSIM_DEBUG_LIB(${UV}/${OS}/${DEBUG}/lib/.libs/uv_a.a)
-IOSSIM_RELEASE_LIB(${UV}/${OS}/${RELEASE}/lib/.libs/uv_a.a)
+WIN_RELEASE_LIB(${UV}/${OS}/${RELEASE_DIR}/uv_a.lib)
+MAC_DEBUG_LIB(${UV}/${OS}/lib/${DEBUG_DIR}/uv_a.a)
+MAC_RELEASE_LIB(${UV}/${OS}/lib/${RELEASE_DIR}/uv_a.a)
+IOSSIM_DEBUG_LIB(${UV}/${OS}/${DEBUG_DIR}/lib/.libs/uv_a.a)
+IOSSIM_RELEASE_LIB(${UV}/${OS}/${RELEASE_DIR}/lib/.libs/uv_a.a)
 ## LINUX_DEBUG_LIB(${UV}/${OS}/Debug/uv_a.a)
-## LINUX_RELEASE_LIB(${UV}/${OS}/${RELEASE}/uv_a.a)
+## LINUX_RELEASE_LIB(${UV}/${OS}/${RELEASE_DIR}/uv_a.a)
 ## ANDROID_DEBUG_LIB(${UV}/${OS}/Debug/obj/local/armeabi-v7a/uv_a.a)
-## ANDROID_RELEASE_LIB(${UV}/${OS}/${RELEASE}/obj/local/armeabi-v7a/uv_a.a)
+## ANDROID_RELEASE_LIB(${UV}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/uv_a.a)
 
 
 ### COMPILE ###
@@ -52,11 +52,11 @@ IOSSIM_COMMAND(${CMAKE_COMMAND} -G "Xcode" -DCMAKE_TOOLCHAIN_FILE=${DKCMAKE}/iOS
 IOSSIM_XCODE_DEBUG(${UV_VERSION} libuv)
 IOSSIM_XCODE_RELEASE(${UV_VERSION} libuv)
 
-## DKSETPATH(${UV}/${OS}/${DEBUG})
+## DKSETPATH(${UV}/${OS}/${DEBUG_DIR})
 ## LINUX_DEBUG_COMMAND(${CMAKE_COMMAND} -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=DEBUG -DCMAKE_C_FLAGS=-fPIC ${UV})
 ## LINUX_DEBUG_COMMAND(make uv)
 
-## DKSETPATH(${UV}/${OS}/${RELEASE})
+## DKSETPATH(${UV}/${OS}/${RELEASE_DIR})
 ## LINUX_RELEASE_COMMAND(${CMAKE_COMMAND} -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=RELEASE -DCMAKE_C_FLAGS=-fPIC ${UV})
 ## LINUX_RELEASE_COMMAND(make uv)
 

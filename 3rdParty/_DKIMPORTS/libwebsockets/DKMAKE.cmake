@@ -14,13 +14,13 @@ DKINSTALL(https://github.com/warmcat/libwebsockets/archive/v${WEBSOCKETS_MAJOR_V
 DKINCLUDE(${WEBSOCKETS}/lib)
 DKINCLUDE(${WEBSOCKETS}/${OS})
 WIN_DEBUG_LIB(${WEBSOCKETS}/${OS}/lib/Debug/websockets_static.lib)
-WIN_RELEASE_LIB(${WEBSOCKETS}/${OS}/lib/${RELEASE}/websockets_static.lib)
+WIN_RELEASE_LIB(${WEBSOCKETS}/${OS}/lib/${RELEASE_DIR}/websockets_static.lib)
 ## APPLE_DEBUG_LIB(${WEBSOCKETS}/${OS}/lib/Debug/libwebsockets.a)
-## APPLE_RELEASE_LIB(${WEBSOCKETS}/${OS}/lib/${RELEASE}/libwebsockets.a)
+## APPLE_RELEASE_LIB(${WEBSOCKETS}/${OS}/lib/${RELEASE_DIR}/libwebsockets.a)
 LINUX_DEBUG_LIB(${WEBSOCKETS}/linux64/Debug/lib/libwebsockets.a)
-LINUX_RELEASE_LIB(${WEBSOCKETS}/linux64/${RELEASE}/lib/libwebsockets.a)
-## ANDROID_DEBUG_LIB(${WEBSOCKETS}/${OS}/${DEBUG}/obj/local/armeabi-v7a/libwebsockets.a)
-## ANDROID_RELEASE_LIB(${WEBSOCKETS}/${OS}/${RELEASE}/obj/local/armeabi-v7a/libwebsockets.a)
+LINUX_RELEASE_LIB(${WEBSOCKETS}/linux64/${RELEASE_DIR}/lib/libwebsockets.a)
+## ANDROID_DEBUG_LIB(${WEBSOCKETS}/${OS}/${DEBUG_DIR}/obj/local/armeabi-v7a/libwebsockets.a)
+## ANDROID_RELEASE_LIB(${WEBSOCKETS}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/libwebsockets.a)
 
 
 ### COMPILE ###
@@ -33,6 +33,6 @@ DKSETPATH(${WEBSOCKETS}/${OS}/Debug)
 LINUX_DEBUG_COMMAND(${CMAKE_COMMAND} -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=DEBUG -DLWS_WITH_SSL=OFF ${WEBSOCKETS})
 LINUX_DEBUG_COMMAND(make)
 
-DKSETPATH(${WEBSOCKETS}/${OS}/${RELEASE})
+DKSETPATH(${WEBSOCKETS}/${OS}/${RELEASE_DIR})
 LINUX_RELEASE_COMMAND(${CMAKE_COMMAND} -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=RELEASE -DLWS_WITH_SSL=OFF ${WEBSOCKETS})
 LINUX_RELEASE_COMMAND(make)

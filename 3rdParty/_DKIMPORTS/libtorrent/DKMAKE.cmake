@@ -16,15 +16,15 @@ DKINSTALL(https://github.com/arvidn/libtorrent/releases/download/libtorrent-1_1_
 ### LINK ###
 DKINCLUDE(${TORRENT}/include)
 WIN_DEBUG_LIB(${TORRENT}/${OS}/Debug/torrent-rasterbar.lib)
-WIN_RELEASE_LIB(${TORRENT}/${OS}/${RELEASE}/torrent-rasterbar.lib)
-MAC_DEBUG_LIB(${TORRENT}/${OS}/lib/${DEBUG}/libtorrent-rasterbar.a)
-MAC_RELEASE_LIB(${TORRENT}/${OS}/lib/${RELEASE}/libtorrent-rasterbar.a)
-IOSSIM_DEBUG_LIB(${TORRENT}/${OS}/${DEBUG}/lib/.libs/libtorrent-rasterbar.a)
-IOSSIM_RELEASE_LIB(${TORRENT}/${OS}/${RELEASE}/lib/.libs/libtorrent-rasterbar.a)
+WIN_RELEASE_LIB(${TORRENT}/${OS}/${RELEASE_DIR}/torrent-rasterbar.lib)
+MAC_DEBUG_LIB(${TORRENT}/${OS}/lib/${DEBUG_DIR}/libtorrent-rasterbar.a)
+MAC_RELEASE_LIB(${TORRENT}/${OS}/lib/${RELEASE_DIR}/libtorrent-rasterbar.a)
+IOSSIM_DEBUG_LIB(${TORRENT}/${OS}/${DEBUG_DIR}/lib/.libs/libtorrent-rasterbar.a)
+IOSSIM_RELEASE_LIB(${TORRENT}/${OS}/${RELEASE_DIR}/lib/.libs/libtorrent-rasterbar.a)
 LINUX_DEBUG_LIB(${TORRENT}/${OS}/Debug/libtorrent-rasterbar.a)
-LINUX_RELEASE_LIB(${TORRENT}/${OS}/${RELEASE}/libtorrent-rasterbar.a)
+LINUX_RELEASE_LIB(${TORRENT}/${OS}/${RELEASE_DIR}/libtorrent-rasterbar.a)
 ANDROID_DEBUG_LIB(${TORRENT}/${OS}/Debug/obj/local/armeabi-v7a/libtorrent-rasterbar.a)
-ANDROID_RELEASE_LIB(${TORRENT}/${OS}/${RELEASE}/obj/local/armeabi-v7a/libtorrent-rasterbar.a)
+ANDROID_RELEASE_LIB(${TORRENT}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/libtorrent-rasterbar.a)
 
 
 ### COMPILE ###
@@ -53,11 +53,11 @@ IOSSIM_COMMAND(${CMAKE_COMMAND} -G "Xcode" -DCMAKE_TOOLCHAIN_FILE=${DKCMAKE}/iOS
 IOSSIM_XCODE_DEBUG(${TORRENT_VERSION} libtorrent-rasterbar)
 IOSSIM_XCODE_RELEASE(${TORRENT_VERSION} libtorrent-rasterbar)
 
-DKSETPATH(${TORRENT}/${OS}/${DEBUG})
+DKSETPATH(${TORRENT}/${OS}/${DEBUG_DIR})
 LINUX_DEBUG_COMMAND(${CMAKE_COMMAND} -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=DEBUG -DCMAKE_C_FLAGS=-fPIC ${TORRENT})
 LINUX_DEBUG_COMMAND(make torrent-rasterbar)
 
-DKSETPATH(${TORRENT}/${OS}/${RELEASE})
+DKSETPATH(${TORRENT}/${OS}/${RELEASE_DIR})
 LINUX_RELEASE_COMMAND(${CMAKE_COMMAND} -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=RELEASE -DCMAKE_C_FLAGS=-fPIC ${TORRENT})
 LINUX_RELEASE_COMMAND(make torrent-rasterbar)
 

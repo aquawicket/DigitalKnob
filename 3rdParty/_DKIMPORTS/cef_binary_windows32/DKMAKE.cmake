@@ -20,12 +20,12 @@ DKDEFINE(NOMINMAX)
 ## DKDEFINE(CEF_SANDBOX)
 DKDEFINE(CEF_ATL)
 WIN32_INCLUDE(${CEF})
-WIN32_DEBUG_LIB(${CEF}/${DEBUG}/libcef.lib)
-WIN32_RELEASE_LIB(${CEF}/${RELEASE}/libcef.lib)
-WIN32_DEBUG_LIB(${CEF}/${OS}/libcef_dll_wrapper/${DEBUG}/libcef_dll_wrapper.lib)
-WIN32_RELEASE_LIB(${CEF}/${OS}/libcef_dll_wrapper/${RELEASE}/libcef_dll_wrapper.lib)
-## WIN32_DEBUG_LIB(${CEF}/${DEBUG}/cef_sandbox.lib)
-## WIN32_RELEASE_LIB(${CEF}/${RELEASE}/cef_sandbox.lib)
+WIN32_DEBUG_LIB(${CEF}/${DEBUG_DIR}/libcef.lib)
+WIN32_RELEASE_LIB(${CEF}/${RELEASE_DIR}/libcef.lib)
+WIN32_DEBUG_LIB(${CEF}/${OS}/libcef_dll_wrapper/${DEBUG_DIR}/libcef_dll_wrapper.lib)
+WIN32_RELEASE_LIB(${CEF}/${OS}/libcef_dll_wrapper/${RELEASE_DIR}/libcef_dll_wrapper.lib)
+## WIN32_DEBUG_LIB(${CEF}/${DEBUG_DIR}/cef_sandbox.lib)
+## WIN32_RELEASE_LIB(${CEF}/${RELEASE_DIR}/cef_sandbox.lib)
 
 
 ### COMPILE ###

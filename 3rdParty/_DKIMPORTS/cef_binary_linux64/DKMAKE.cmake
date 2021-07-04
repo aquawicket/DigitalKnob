@@ -23,20 +23,20 @@ DKDEFINE(NOMINMAX)
 DKDEFINE(CEF_SANDBOX)
 DKDEFINE(CEF_ATL)
 LINUX_INCLUDE(${CEF})
-LINUX_DEBUG_LIB(${CEF}/${DEBUG}/libcef.so)
-LINUX_RELEASE_LIB(${CEF}/${RELEASE}/libcef.so)
-LINUX_DEBUG_LIB(${CEF}/${OS}/${DEBUG}/libcef_dll_wrapper/libcef_dll_wrapper.a)
-LINUX_RELEASE_LIB(${CEF}/${OS}/${RELEASE}/libcef_dll_wrapper/libcef_dll_wrapper.a)
-## LINUX_DEBUG_LIB(${CEF}/${DEBUG}/cef_sandbox.a)
-## LINUX_RELEASE_LIB(${CEF}/${RELEASE}/cef_sandbox.a)
+LINUX_DEBUG_LIB(${CEF}/${DEBUG_DIR}/libcef.so)
+LINUX_RELEASE_LIB(${CEF}/${RELEASE_DIR}/libcef.so)
+LINUX_DEBUG_LIB(${CEF}/${OS}/${DEBUG_DIR}/libcef_dll_wrapper/libcef_dll_wrapper.a)
+LINUX_RELEASE_LIB(${CEF}/${OS}/${RELEASE_DIR}/libcef_dll_wrapper/libcef_dll_wrapper.a)
+## LINUX_DEBUG_LIB(${CEF}/${DEBUG_DIR}/cef_sandbox.a)
+## LINUX_RELEASE_LIB(${CEF}/${RELEASE_DIR}/cef_sandbox.a)
 
 
 
 ### COMPILE ###
-LINUX_DEBUG_PATH(${CEF}/${OS}/${DEBUG})
+LINUX_DEBUG_PATH(${CEF}/${OS}/${DEBUG_DIR})
 LINUX_DEBUG_COMMAND(${CMAKE_COMMAND} -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Debug -DCMAKE_C_FLAGS=-fPIC ${CEF})
 LINUX_DEBUG_COMMAND(make libcef_dll_wrapper)
 
-LINUX_RELEASE_PATH(${CEF}/${OS}/${RELEASE})
+LINUX_RELEASE_PATH(${CEF}/${OS}/${RELEASE_DIR})
 LINUX_RELEASE_COMMAND(${CMAKE_COMMAND} -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_FLAGS=-fPIC ${CEF})
 LINUX_RELEASE_COMMAND(make libcef_dll_wrapper)
