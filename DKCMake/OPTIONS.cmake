@@ -1,7 +1,3 @@
-## FIXME: This file causes libraries to fail compiling for android.
-	
-
-########### Initial setup ####################
 if(COMMAND cmake_policy)
 	CMAKE_POLICY(SET CMP0003 NEW) ##https://cmake.org/cmake/help/latest/policy/CMP0003.html
 endif(COMMAND cmake_policy)
