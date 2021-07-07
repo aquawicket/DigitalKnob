@@ -12,7 +12,8 @@ endif()
 
 if(ANDROID)
 DISABLE_DKDEPEND(OpenAL-android)
-DISABLE_DKDEPEND(feeetype)
+##DISABLE_DKDEPEND(feeetype)
+DISABLE_DKDEPEND(xz)
 endif()
 
 DISABLE_DKDEPEND(bzip2)

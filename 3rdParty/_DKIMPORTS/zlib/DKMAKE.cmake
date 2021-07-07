@@ -22,8 +22,10 @@ LINUX_DEBUG_LIB(${ZLIB}/${OS}/${DEBUG_DIR}/libz.a)
 LINUX_RELEASE_LIB(${ZLIB}/${OS}/${RELEASE_DIR}/libz.a)
 RASPBERRY_DEBUG_LIB(${ZLIB}/${OS}/${DEBUG_DIR}/libz.a)
 RASPBERRY_RELEASE_LIB(${ZLIB}/${OS}/${RELEASE_DIR}/libz.a)
-ANDROID_DEBUG_LIB(${ZLIB}/${OS}/${DEBUG_DIR}/obj/local/armeabi-v7a/libzlib.a)
-ANDROID_RELEASE_LIB(${ZLIB}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/libzlib.a)
+##ANDROID_DEBUG_LIB(${ZLIB}/${OS}/${DEBUG_DIR}/obj/local/armeabi-v7a/libzlib.a)
+##ANDROID_RELEASE_LIB(${ZLIB}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/libzlib.a)
+ANDROID_DEBUG_LIB(${ZLIB}/${OS}/${DEBUG_DIR}/libz.a)
+ANDROID_RELEASE_LIB(${ZLIB}/${OS}/${RELEASE_DIR}/libz.a)
 
 
 ### 3RDPARTY LINK ###
