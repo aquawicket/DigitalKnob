@@ -18,6 +18,7 @@ DKINSTALL(https://www.libarchive.org/downloads/libarchive-${ARCHIVE_VERSION}.zip
 ### DKPLUGINS LINK ###
 DKDEFINE(LIBARCHIVE_STATIC)
 DKINCLUDE(${ARCHIVE}/libarchive)
+ANDROID_INCLUDE(${ARCHIVE}/contrib/android/include)
 WIN_DEBUG_LIB(${ARCHIVE}/${OS}/libarchive/${DEBUG_DIR}/archive_static.lib)
 WIN_RELEASE_LIB(${ARCHIVE}/${OS}/libarchive/${RELEASE_DIR}/archive_static.lib)
 APPLE_DEBUG_LIB(${ARCHIVE}/${OS}/libarchive/${DEBUG_DIR}/libarchive.a)
