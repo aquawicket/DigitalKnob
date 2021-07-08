@@ -26,14 +26,15 @@ MAC_DEBUG_LIB(${BZIP2}/${OS}/libbz2.a)
 MAC_RELEASE_LIB(${BZIP2}/${OS}/libbz2.a)
 LINUX_DEBUG_LIB(${BZIP2}/${OS}/libbz2.a)
 LINUX_RELEASE_LIB(${BZIP2}/${OS}/libbz2.a)
-#ANDROID_DEBUG_LIB(${BZIP2}/${OS}/$(LIBDIR)/libbzip2.a)
-#ANDROID_RELEASE_LIB(${BZIP2}/${OS}/$(LIBDIR)/libbzip2.a)
 RASPBERRY_DEBUG_LIB(${BZIP2}/${OS}/libbz2.a)
 RASPBERRY_RELEASE_LIB(${BZIP2}/${OS}/libbz2.a)
+ANDROID_DEBUG_LIB(${BZIP2}/${OS}/libbz2.a)
+ANDROID_RELEASE_LIB(${BZIP2}/${OS}/libbz2.a)
 
 
 ### 3RDPARTY LINK ###
 DKSET(BZIP2_WIN -DBZIP2_INCLUDE_DIR=${BZIP2}/${OS} -DBZIP2_LIBRARY_DEBUG=${BZIP2}/${OS}/libbz2-static.lib -DBZIP2_LIBRARY_RELEASE=${BZIP2}/${OS}/libbz2-static.lib)
+DKSET(BZIP2_ANDROID -DBZIP2_INCLUDE_DIR=${BZIP2}/${OS} -DBZIP2_LIBRARY_DEBUG=${BZIP2}/${OS}/libbz2.a -DBZIP2_LIBRARY_RELEASE=${BZIP2}/${OS}/libbz2.a)
 	
 
 ### COMPILE ###
@@ -50,6 +51,7 @@ make CFLAGS='-static-libgcc'\;
 exit\;")
 
 	DKRENAME(${BZIP2}/${OS}/libbz2.a ${BZIP2}/${OS}/libbz2.lib)
+	##TODO: look at _DKIMPORTS/libgcc
 	DKCOPY(${3RDPARTY}/mingw/mingw32/lib/gcc/i686-w64-mingw32/4.9.2/libgcc.a ${BZIP2}/${OS} TRUE)
 	DKRENAME(${BZIP2}/${OS}/libgcc.a ${BZIP2}/${OS}/libgcc.lib)
 endif()
@@ -95,4 +97,13 @@ IF(RASPBERRY)
 	ENDIF()
 	DKSETPATH(${BZIP2}/${OS})
 	RASPBERRY_COMMAND(make)
+ENDIF()
+
+
+IF(ANDROID)
+	IF(NOT EXISTS ${BZIP2}/${OS}/bzip2.c)
+		DKCOPY(${3RDPARTY}/bzip2-temp ${BZIP2}/${OS} TRUE)
+	ENDIF()
+	DKSETPATH(${BZIP2}/${OS})
+	ANDROID_COMMAND(make)
 ENDIF()

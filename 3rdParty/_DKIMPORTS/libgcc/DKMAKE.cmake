@@ -2,7 +2,7 @@
 if(WIN_32)
 	DKDEPEND(mingw32)
 elseif(WIN_64)
-	DKDEPEND(mingw32)
+	DKDEPEND(mingw64)
 endif()
 
 
