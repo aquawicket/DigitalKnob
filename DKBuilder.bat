@@ -11,7 +11,7 @@ ECHO 3. DKSDLRmlUi
 ECHO 4. DKTestAll
 ECHO 5. EXIT
 set choice=
-set /p choice=Type the number to print text.
+set /p choice=Please select an app to build: 
 if not '%choice%'=='' set choice=%choice:~0,1%
 if '%choice%'=='1' goto updater
 if '%choice%'=='2' goto dkbuilder
@@ -48,7 +48,7 @@ ECHO 2. win64
 ECHO 3. GoBack
 ECHO 4. EXIT
 set choice=
-set /p choice=Type the number to print text.
+set /p choice=Please select an OS to build for: 
 if not '%choice%'=='' set choice=%choice:~0,1%
 if '%choice%'=='1' goto win32
 if '%choice%'=='2' goto win64
