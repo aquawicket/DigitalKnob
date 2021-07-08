@@ -52,8 +52,19 @@ IOSSIM_DEBUG_LIB(${SFML}/Xcode-iOS/SFML/build/Debug-iphonesimulator/libSFML.a)
 IOSSIM_RELEASE_LIB(${SFML}/Xcode-iOS/SFML/build/${RELEASE_DIR}-iphonesimulator/libSFML.a)
 LINUX_DEBUG_LIB(${SFML}/${OS}/${DEBUG_DIR}/libSFML.a)
 LINUX_RELEASE_LIB(${SFML}/${OS}/${RELEASE_DIR}/libSFML.a)
-ANDROID_DEBUG_LIB(${SFML}/${OS}/${DEBUG_DIR}/obj/local/armeabi-v7a/libSFML.so)
-ANDROID_RELEASE_LIB(${SFML}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/libSFML.so)
+##ANDROID_DEBUG_LIB(${SFML}/${OS}/${DEBUG_DIR}/obj/local/armeabi-v7a/libSFML.so)
+##ANDROID_RELEASE_LIB(${SFML}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/libSFML.so)
+ANDROID_DEBUG_LIB(${SFML}/${OS}/lib/${DEBUG_DIR}/libsfml-audio-s-d.a)
+ANDROID_RELEASE_LIB(${SFML}/${OS}/lib/${RELEASE_DIR}/libsfml-audio-s.a)
+ANDROID_DEBUG_LIB(${SFML}/${OS}/lib/${DEBUG_DIR}/libsfml-graphics-s-d.a)
+ANDROID_RELEASE_LIB(${SFML}/${OS}/lib/${RELEASE_DIR}/libsfml-graphics-s.a)
+ANDROID_DEBUG_LIB(${SFML}/${OS}/lib/${DEBUG_DIR}/libsfml-network-s-d.a)
+ANDROID_RELEASE_LIB(${SFML}/${OS}/lib/${RELEASE_DIR}/libsfml-network-s.a)
+ANDROID_DEBUG_LIB(${SFML}/${OS}/lib/${DEBUG_DIR}/libsfml-system-s-d.a)
+ANDROID_RELEASE_LIB(${SFML}/${OS}/lib/${RELEASE_DIR}/libsfml-system-s.a)
+ANDROID_DEBUG_LIB(${SFML}/${OS}/lib/${DEBUG_DIR}/libsfml-window-s-d.a)
+ANDROID_RELEASE_LIB(${SFML}/${OS}/lib/${RELEASE_DIR}/libsfml-window-s.a)
+
 LIST(APPEND WIN_LIBS winmm.lib)
 
 
@@ -81,6 +92,9 @@ DKSETPATH(${SFML}/${OS}/${RELEASE_DIR})
 LINUX_RELEASE_COMMAND(${CMAKE_COMMAND} -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=RELEASE -DCMAKE_C_FLAGS=-fPIC -DJPEG_LIBRARY=${JPEG}/${OS}/${RELEASE_DIR}/libjpeg-static.a -DJPEG_INCLUDE_DIR=${JPEG} -DOPENAL_LIBRARY=${OPENAL}/${OS}/${RELEASE_DIR}/libopenal.a -DOPENAL_INCLUDE_DIR=${OPENAL}/include -DVORBIS_INCLUDE_DIR=${VORBIS}/include -DVORBIS_LIBRARY=${VORBIS}/${OS}/${RELEASE_DIR}/lib/.libs/libvorbis.a -DVORBISFILE_LIBRARY=${VORBIS}/${OS}/${RELEASE_DIR}/lib/.libs/libvorbisfile.a -DVORBISENC_LIBRARY=${VORBIS}/${OS}/${RELEASE_DIR}/lib/.libs/libvorbisenc.a -DOGG_INCLUDE_DIR=${OGG}/include -DOGG_LIBRARY=${OGG}/${OS}/${RELEASE_DIR}/src/.libs/libogg.a ${SFML})
 LINUX_RELEASE_COMMAND(make)
 
+ANDROID_PATH(${SFML}/${OS})
+ANDROID_COMMAND(${CMAKE_COMMAND} -G ${GENERATOR} -A ARM -DCMAKE_TOOLCHAIN_FILE=${ANDROID_NDK}/build/cmake/android.toolchain.cmake -DCMAKE_ANDROID_NDK=${ANDROID_NDK} -DANDROID_ABI=armeabi-v7a -DANDROID_NATIVE_API_LEVEL=29 "-DANDROID_COMPILER_FLAGS=-DANDROID32 -D_ANDROID" "-DANDROID_COMPILER_FLAGS_DEBUG=-DDEBUG -D_DEBUG" "-DANDROID_COMPILER_FLAGS_RELEASE=-DNDEBUG" ${SFML})
+ANDROID_VS(SFML-${SFML_VERSION} SFML.sln)
 
 
 
