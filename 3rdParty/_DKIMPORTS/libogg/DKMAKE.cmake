@@ -31,6 +31,8 @@ DKSET(OGG_LINUX_DEBUG "--with-ogg-includes=\"${OGG}/include\" --with-ogg-librari
 DKSET(OGG_LINUX_RELEASE "--with-ogg-includes=\"${OGG}/include\" --with-ogg-libraries=\"${OGG}/${OS}/${RELEASE_DIR}/src/.libs\"")
 DKSET(OGG_RASPBERRY_DEBUG "--with-ogg-includes=\"${OGG}/include\" --with-ogg-libraries=\"${OGG}/${OS}/${DEBUG_DIR}/src/.libs\"")
 DKSET(OGG_RASPBERRY_RELEASE "--with-ogg-includes=\"${OGG}/include\" --with-ogg-libraries=\"${OGG}/${OS}/${RELEASE_DIR}/src/.libs\"")
+DKSET(OGG_ANDROID_DEBUG "--with-ogg-includes=\"${OGG}/include\" --with-ogg-libraries=\"${OGG}/${OS}/${DEBUG_DIR}/src/.libs\"")
+DKSET(OGG_ANDROID_RELEASE "--with-ogg-includes=\"${OGG}/include\" --with-ogg-libraries=\"${OGG}/${OS}/${RELEASE_DIR}/src/.libs\"")
 	
 	
 ### COMPILE ###
