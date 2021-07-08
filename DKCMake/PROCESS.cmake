@@ -74,6 +74,9 @@ PROJECT(${APP_NAME})
 
 DKSET(DKAPP ON) ##TODO:  phase this out
 
+message("Deleteing all CMakeCache.txt files....")
+DKSETPATH(${DIGITALKNOB})
+DKEXECUTE_PROCESS(COMMAND cmd /c del /S *CMakeCache.txt)
 
 ##################################################
 ##### Scan the DKPlugins and build the lists #####

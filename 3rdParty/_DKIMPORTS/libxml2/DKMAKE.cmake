@@ -85,7 +85,7 @@ ANDROID_BASH("#!/bin/bash
 cd ${XML2}/${OS} 
 export PATH=/${MINGW32}/bin:$PATH\;
 export PATH=/${MSYS}/bin:$PATH\;
-../../configure --disable-shared --enable-static
+../configure --disable-shared --enable-static
 exit \n")
 
 ANDROID_PATH(${XML2}/${OS})
