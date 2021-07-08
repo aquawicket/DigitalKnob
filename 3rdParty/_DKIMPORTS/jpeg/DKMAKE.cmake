@@ -1,6 +1,6 @@
 if(WIN OR LINUX OR ANDROID)
 	return()
-endif
+endif()
 
 ### VERSION ###
 DKSET(JPEG_VERSION 6b)
