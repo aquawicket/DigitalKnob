@@ -22,11 +22,11 @@ DKSET(XZ ${3RDPARTY}/xz-${XZ_VERSION})
 ## https://github.com/xz-mirror/xz/archive/refs/tags/v5.2.5.zip
 ## DKINSTALL(https://astuteinternet.dl.sourceforge.net/project/lzmautils/xz-${XZ_VERSION}.tar.gz xz xz-${XZ_VERSION})
 
-if(WIN)
+#if(WIN)
 	DKINSTALL(https://github.com/xz-mirror/xz/archive/refs/tags/v${XZ_VERSION}.zip xz xz-${XZ_VERSION})
-else()
-	DKINSTALL(https://tukaani.org/xz/xz-${XZ_VERSION}.tar.gz xz xz-${XZ_VERSION})
-endif()
+#else()
+#	DKINSTALL(https://tukaani.org/xz/xz-${XZ_VERSION}.tar.gz xz xz-${XZ_VERSION})
+#endif()
 
 
 ### DKPLUGINS LINK ###
@@ -56,7 +56,7 @@ DKSET(XZ_WIN -DCMAKE_C_FLAGS=/DLZMA_API_STATIC -DLIBLZMA_INCLUDE_DIR=${XZ}/src/l
 DKSET(XZ_APPLE -DCMAKE_C_FLAGS=/DLZMA_API_STATIC -DLIBLZMA_INCLUDE_DIR=${XZ}/src/liblzma/api -DLIBLZMA_LIBRARY_DEBUG=${XZ}/${OS}/${DEBUG_DIR}/liblzma.lib -DLIBLZMA_LIBRARY_RELEASE=${XZ}/${OS}/${RELEASE_DIR}/liblzma.lib)
 DKSET(XZ_LINUX -DCMAKE_C_FLAGS=/DLZMA_API_STATIC -DLIBLZMA_INCLUDE_DIR=${XZ}/src/liblzma/api -DLIBLZMA_LIBRARY_DEBUG=${XZ}/${OS}/${DEBUG_DIR}/liblzma.lib -DLIBLZMA_LIBRARY_RELEASE=${XZ}/${OS}/${RELEASE_DIR}/liblzma.lib)
 DKSET(XZ_RASPBERRY -DCMAKE_C_FLAGS=/DLZMA_API_STATIC -DLIBLZMA_INCLUDE_DIR=${XZ}/src/liblzma/api -DLIBLZMA_LIBRARY_DEBUG=${XZ}/${OS}/${DEBUG_DIR}/liblzma.lib -DLIBLZMA_LIBRARY_RELEASE=${XZ}/${OS}/${RELEASE_DIR}/liblzma.lib)
-
+DKSET(XZ_ANDROID -DANDROID_COMPILER_FLAGS=-DLZMA_API_STATIC -DLIBLZMA_INCLUDE_DIR=${XZ}/src/liblzma/api -DLIBLZMA_LIBRARY_DEBUG=${XZ}/${OS}/${DEBUG_DIR}/liblzma.a -DLIBLZMA_LIBRARY_RELEASE=${XZ}/${OS}/${RELEASE_DIR}/liblzma.a)
 
 
 ### COMPILE ###
@@ -123,6 +123,14 @@ RASPBERRY_RELEASE_COMMAND(../../configure --disable-shared --enable-static)
 RASPBERRY_RELEASE_COMMAND(make)
 
 
-ANDROID32_COMMAND(${CMAKE_COMMAND} -G ${GENERATOR} -A ARM -DCMAKE_TOOLCHAIN_FILE=${ANDROID_NDK}/build/cmake/android.toolchain.cmake -DCMAKE_ANDROID_NDK=${ANDROID_NDK} -DANDROID_ABI=armeabi-v7a -DANDROID_NATIVE_API_LEVEL=29 ${XZ})
 ##ANDROID_NDK_DEBUG(xz-${XZ_VERSION})
 ##ANDROID_NDK_RELEASE(xz-${XZ_VERSION})
+
+##ANDROID_DEBUG_COMMAND(../../configure --disable-shared --enable-static)
+##ANDROID_DEBUG_COMMAND(make)
+##ANDROID_RELEASE_COMMAND(../../configure --disable-shared --enable-static)
+##ANDROID_RELEASE_COMMAND(make)
+
+ANDROID_PATH(${XZ}/${OS})
+ANDROID_COMMAND(${CMAKE_COMMAND} -G ${GENERATOR} -A ARM -DCMAKE_TOOLCHAIN_FILE=${ANDROID_NDK}/build/cmake/android.toolchain.cmake -DCMAKE_ANDROID_NDK=${ANDROID_NDK} -DANDROID_ABI=armeabi-v7a -DANDROID_NATIVE_API_LEVEL=29 "-DANDROID_COMPILER_FLAGS=-DANDROID32 -D_ANDROID" "-DANDROID_COMPILER_FLAGS_DEBUG=-DDEBUG -D_DEBUG" "-DANDROID_COMPILER_FLAGS_RELEASE=-DNDEBUG" ${XZ})
+ANDROID_VS(xz-${XZ_VERSION} xz.sln liblzma)
