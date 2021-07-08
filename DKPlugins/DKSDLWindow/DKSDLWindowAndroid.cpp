@@ -311,7 +311,7 @@ bool DKSDLWindowAndroid::onKeyDown(const void* input, void* output)
 	DKStringArray arry;
 	toStringArray(arry, _data, ",");
 	if(toInt(arry[1]) == 4){ //ANDROID_BACK
-		DKEvent::SendEvent("window", "keydown", arry[1]);
+		DKEvents::SendEvent("window", "keydown", arry[1]);
 	}
 	else{
 		jint keycode = toInt(arry[1]);
@@ -329,7 +329,7 @@ bool DKSDLWindowAndroid::onKeyUp(const void* input, void* output)
 	DKStringArray arry;
 	toStringArray(arry, _data, ",");
 	if(toInt(arry[1]) == 4){ //ANDROID_BACK
-		DKEvent::SendEvent("window", "keyup", arry[1]);
+		DKEvents::SendEvent("window", "keyup", arry[1]);
 	}
 	else{
 		jint keycode = toInt(arry[1]);
