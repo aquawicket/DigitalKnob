@@ -68,6 +68,7 @@ goto start
 
 :build
 cd C:\Users\%USERNAME%\digitalknob
+echo Deleteing all CMakeCache.txt files....
 del /S *CMakeCache.txt
 echo ****** BUILDING %APP% - %OS% ******
 set APP_PATH=C:\Users\%USERNAME%\digitalknob\DK\DKApps\%APP%
