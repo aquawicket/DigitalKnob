@@ -1,4 +1,4 @@
-if(NOT CMAKE_HOST_APPLE OR MAC)
+if(NOT CMAKE_HOST_APPLE OR IOS oR IOSSIM)
 	return()
 endif()
 

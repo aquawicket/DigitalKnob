@@ -1,3 +1,7 @@
+if(WIN OR LINUX OR ANDROID)
+	return()
+endif
+
 ### VERSION ###
 DKSET(JPEG_VERSION 6b)
 DKSET(JPEG ${3RDPARTY}/jpeg-${JPEG_VERSION})

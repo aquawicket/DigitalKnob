@@ -1,12 +1,10 @@
 ## Obsolete, Using newer version of Boost. Keeping this aroud for reference
+return()
 
 ### DEPENDS ###
 if(WIN)
 	DKDEPEND(python)
 	DKDEPEND(VisualStudio)
-endif()
-if(LINUX)
-	DKDEPEND(libboost1.58-tools-dev)
 endif()
 
 
