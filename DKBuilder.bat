@@ -70,8 +70,8 @@ goto start
 cd C:\Users\%USERNAME%\digitalknob
 echo Deleteing all CMakeCache.txt files....
 del /S *CMakeCache.txt
-echo Deleteing all CMakeFiles folders....
-FOR /D /R %%X IN (CMakeFile*) DO RD /S /Q "%%X"
+::echo Deleteing all CMakeFiles folders....
+::FOR /D /R %%X IN (CMakeFile*) DO RD /S /Q "%%X"
 echo ****** BUILDING %APP% - %OS% ******
 set APP_PATH=C:\Users\%USERNAME%\digitalknob\DK\DKApps\%APP%
 ECHO %APP_PATH%
