@@ -67,6 +67,8 @@ goto start
 
 
 :build
+cd C:\Users\%USERNAME%\digitalknob
+del /S *CMakeCache.txt
 echo ****** BUILDING %APP% - %OS% ******
 set APP_PATH=C:\Users\%USERNAME%\digitalknob\DK\DKApps\%APP%
 ECHO %APP_PATH%
