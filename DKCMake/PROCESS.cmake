@@ -75,7 +75,11 @@ PROJECT(${APP_NAME})
 DKSET(DKAPP ON) ##TODO:  phase this out
 
 message("Deleteing all CMakeCache.txt files....")
-execute_process(COMMAND cmd /c del /f /S *MakeCache.txt WORKING_DIRECTORY ${DIGITALKNOB})
+if(CMAKE_HOST_WIN32)
+	execute_process(COMMAND cmd /c del /f /S *MakeCache.txt WORKING_DIRECTORY ${DIGITALKNOB})
+else()
+	execute_process(COMMAND cmd /c find . -name "*CMakeCache.txt" -fprint "removelist.txt" -delete WORKING_DIRECTORY ${DIGITALKNOB})
+endif()
 
 ##################################################
 ##### Scan the DKPlugins and build the lists #####
