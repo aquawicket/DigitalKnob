@@ -7,6 +7,7 @@ endif()
 DKSET(QUEUE_BUILD ON)
 DKSET(CURRENT_DIR /usr)
 LINUX_COMMAND(sudo apt install libsystemd-dev)
+RASPBERRY_COMMAND(sudo apt install libsystemd-dev)
 
 
 ### LINK ###

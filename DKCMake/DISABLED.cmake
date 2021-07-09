@@ -25,6 +25,7 @@ DISABLE_DKDEPEND(RmlUi)
 DISABLE_DKDEPEND(freealut-master)
 DISABLE_DKDEPEND(libiconv)
 DISABLE_DKDEPEND(opencv)
+DISABLE_DKDEPEND(smpeg2)
 endif()
 
 if(WIN)
