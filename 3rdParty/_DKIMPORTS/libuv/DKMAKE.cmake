@@ -26,10 +26,10 @@ LINUX_DEBUG_LIB(${UV}/${OS}/${DEBUG_DIR}/uv_a.a)
 LINUX_RELEASE_LIB(${UV}/${OS}/${RELEASE_DIR}/uv_a.a)
 RASPBERRY_DEBUG_LIB(${UV}/${OS}/${DEBUG_DIR}/uv_a.a)
 RASPBERRY_RELEASE_LIB(${UV}/${OS}/${RELEASE_DIR}/uv_a.a)
-## ANDROID_DEBUG_LIB(${UV}/${OS}/${DEBUG_DIR}/obj/local/armeabi-v7a/uv_a.a)
-## ANDROID_RELEASE_LIB(${UV}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/uv_a.a)
-ANDROID_DEBUG_LIB(${UV}/${OS}/${DEBUG_DIR}/uv_a.a)
-ANDROID_RELEASE_LIB(${UV}/${OS}/${RELEASE_DIR}/uv_a.a)
+## ANDROID_DEBUG_LIB(${UV}/${OS}/${DEBUG_DIR}/obj/local/armeabi-v7a/libuv_a.a)
+## ANDROID_RELEASE_LIB(${UV}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/libuv_a.a)
+ANDROID_DEBUG_LIB(${UV}/${OS}/${DEBUG_DIR}/libuv_a.a)
+ANDROID_RELEASE_LIB(${UV}/${OS}/${RELEASE_DIR}/libuv_a.a)
 
 
 

@@ -27,6 +27,7 @@ DISABLE_DKDEPEND(libiconv)
 DISABLE_DKDEPEND(opencv)
 DISABLE_DKDEPEND(smpeg2)
 DISABLE_DKDEPEND(tidy-html5)
+DISABLE_DKDEPEND(openssl-vs2015)
 endif()
 
 if(WIN)
