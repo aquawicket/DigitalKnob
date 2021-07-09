@@ -392,7 +392,7 @@ function DKBuild_DoResults(){
 			appdir = files[i]+"/DKApps";
 	}
 	
-	// NOTE: This was moved into DKCMake buid scripts
+	// NOTE: This was moved into DKCMake build scripts
 	/*
 	//// Create Icons
 	if(CPP_DK_GetOS() === "Windows"){
@@ -730,7 +730,7 @@ function DKBuild_DoResults(){
 			CPP_DKFile_MkDir(DKPATH+appdir+"/"+APP+"/android32/Debug");
 			CPP_DKFile_ChDir(DKPATH+appdir+"/"+APP+"/android32/Debug");
 			if(CPP_DK_GetOS() === "Windows")
-				let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Visual Studio 16 2019\" -A ARM -DCMAKE_TOOLCHAIN_FILE="+NDK+"/build/cmake/android.toolchain.cmake -DANDROID_NDK="+NDK+" -DANDROID_ABI=armeabi-v7a -DANDROID_NATIVE_API_LEVEL=29 "+cmake_string+DKPATH+"DK");
+				let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Visual Studio 16 2019\" -A ARM -DCMAKE_TOOLCHAIN_FILE="+NDK+"/build/cmake/android.toolchain.cmake -DANDROID_NDK="+NDK+" -DANDROID_ABI=armeabi-v7a -DANDROID_NATIVE_API_LEVEL=29 –DCMAKE_SYSTEM_NAME=ANDROID "+cmake_string+DKPATH+"DK");
 			if(CPP_DK_GetOS() === "Linux" || CPP_DK_GetOS() === "Mac")
 				rtvalue = CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DKPATH+"DK");
 			if(rtvalue.indexOf("errors occurred!") > -1) 
@@ -741,7 +741,7 @@ function DKBuild_DoResults(){
 			CPP_DKFile_MkDir(DKPATH+appdir+"/"+APP+"/android32/Release");
 			CPP_DKFile_ChDir(DKPATH+appdir+"/"+APP+"/android32/Release");
 			if(CPP_DK_GetOS() === "Windows")
-				let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Visual Studio 16 2019\" -A ARM -DCMAKE_TOOLCHAIN_FILE="+NDK+"/build/cmake/android.toolchain.cmake -DANDROID_NDK="+NDK+" -DANDROID_ABI=armeabi-v7a -DANDROID_NATIVE_API_LEVEL=29 "+cmake_string+DKPATH+"DK");
+				let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Visual Studio 16 2019\" -A ARM -DCMAKE_TOOLCHAIN_FILE="+NDK+"/build/cmake/android.toolchain.cmake -DANDROID_NDK="+NDK+" -DANDROID_ABI=armeabi-v7a -DANDROID_NATIVE_API_LEVEL=29 –DCMAKE_SYSTEM_NAME=ANDROID "+cmake_string+DKPATH+"DK");
 			if(CPP_DK_GetOS() === "Linux" || CPP_DK_GetOS() === "Mac")
 				rtvalue = CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DKPATH+"DK");
 			if(rtvalue.indexOf("errors occurred!") > -1)
@@ -759,7 +759,7 @@ function DKBuild_DoResults(){
 			CPP_DKFile_MkDir(DKPATH+appdir+"/"+APP+"/android64/Debug");
 			CPP_DKFile_ChDir(DKPATH+appdir+"/"+APP+"/android64/Debug");
 			if(CPP_DK_GetOS() === "Windows")
-				let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Visual Studio 16 2019\" -A ARM -DCMAKE_TOOLCHAIN_FILE="+NDK+"/build/cmake/android.toolchain.cmake -DANDROID_NDK="+NDK+" -DANDROID_ABI=arm64-v8a -DANDROID_NATIVE_API_LEVEL=29 "+cmake_string+DKPATH+"DK");
+				let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Visual Studio 16 2019\" -A ARM -DCMAKE_TOOLCHAIN_FILE="+NDK+"/build/cmake/android.toolchain.cmake -DANDROID_NDK="+NDK+" -DANDROID_ABI=arm64-v8a -DANDROID_NATIVE_API_LEVEL=29 –DCMAKE_SYSTEM_NAME=ANDROID "+cmake_string+DKPATH+"DK");
 			if(rtvalue.indexOf("errors occurred!") > -1)
 				return; 
 			CPP_DK_Execute(NDK+"/ndk-build.cmd NDK_DEBUG=1 NDKLOG=1");
@@ -768,7 +768,7 @@ function DKBuild_DoResults(){
 			CPP_DKFile_MkDir(DKPATH+appdir+"/"+APP+"/android64/Release");
 			CPP_DKFile_ChDir(DKPATH+appdir+"/"+APP+"/android64/Release");
 			if(CPP_DK_GetOS() === "Windows")
-				let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Visual Studio 16 2019\" -A ARM64 -DCMAKE_TOOLCHAIN_FILE="+NDK+"/build/cmake/android.toolchain.cmake -DANDROID_NDK="+NDK+" -DANDROID_ABI=arm64-v8a -DANDROID_NATIVE_API_LEVEL=29 "+cmake_string+DKPATH+"DK");
+				let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Visual Studio 16 2019\" -A ARM64 -DCMAKE_TOOLCHAIN_FILE="+NDK+"/build/cmake/android.toolchain.cmake -DANDROID_NDK="+NDK+" -DANDROID_ABI=arm64-v8a -DANDROID_NATIVE_API_LEVEL=29 –DCMAKE_SYSTEM_NAME=ANDROID "+cmake_string+DKPATH+"DK");
 			if(CPP_DK_GetOS() === "Linux" || CPP_DK_GetOS() === "Mac")
 				rtvalue = CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DKPATH+"DK");
 			if(rtvalue.indexOf("errors occurred!") > -1) 
@@ -886,5 +886,5 @@ function DKBuild_DoResults(){
 	
 	//Refresh Icons on Windows
 	//CPP_DK_Execute("ie4uinit.exe -ClearIconCache");
-	CPP_DK_Execute("ie4uinit.exe -show"); //Windows 10
+    //CPP_DK_Execute("ie4uinit.exe -show"); //Windows 10
 }
