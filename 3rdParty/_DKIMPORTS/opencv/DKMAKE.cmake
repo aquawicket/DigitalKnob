@@ -86,9 +86,6 @@ LINUX_RELEASE_LIB(${OPENCV}/${OS}/${RELEASE_DIR}/lib/libopencv_imgcodecs.a)
 LINUX_DEBUG_LIB(${OPENCV}/${OS}/${DEBUG_DIR}/lib/libopencv_videoio.a)
 LINUX_RELEASE_LIB(${OPENCV}/${OS}/${RELEASE_DIR}/lib/libopencv_videoio.a)
 
-ANDROID_DEBUG_LIB(${OPENCV}/${OS}/lib/${DEBUG_DIR}/obj/local/armeabi-v7a/libopencv_core.a)
-ANDROID_RELEASE_LIB(${OPENCV}/${OS}/lib/${RELEASE_DIR}/obj/local/armeabi-v7a/libopencv_core.a)
-
 
 RASPBERRY_DEBUG_LIB(${OPENCV}/${OS}/${DEBUG_DIR}/3rdparty/ippicv/ippicv_lnx/lib/intel64/libippicv.a)
 RASPBERRY_RELEASE_LIB(${OPENCV}/${OS}/${RELEASE_DIR}/3rdparty/ippicv/ippicv_lnx/lib/intel64/libippicv.a)
@@ -110,6 +107,31 @@ RASPBERRY_DEBUG_LIB(${OPENCV}/${OS}/${DEBUG_DIR}/lib/libopencv_imgcodecs.a)
 RASPBERRY_RELEASE_LIB(${OPENCV}/${OS}/${RELEASE_DIR}/lib/libopencv_imgcodecs.a)
 RASPBERRY_DEBUG_LIB(${OPENCV}/${OS}/${DEBUG_DIR}/lib/libopencv_videoio.a)
 RASPBERRY_RELEASE_LIB(${OPENCV}/${OS}/${RELEASE_DIR}/lib/libopencv_videoio.a)
+
+
+##ANDROID_DEBUG_LIB(${OPENCV}/${OS}/lib/${DEBUG_DIR}/obj/local/armeabi-v7a/libopencv_core.a)
+##ANDROID_RELEASE_LIB(${OPENCV}/${OS}/lib/${RELEASE_DIR}/obj/local/armeabi-v7a/libopencv_core.a)
+
+ANDROID_DEBUG_LIB(${OPENCV}/${OS}/3rdparty/ippicv/ippicv_mac/lib/intel64/libippicv.a)
+ANDROID_RELEASE_LIB(${OPENCV}/${OS}/3rdparty/ippicv/ippicv_mac/lib/intel64/libippicv.a)
+ANDROID_DEBUG_LIB(${OPENCV}/${OS}/3rdparty/lib/${DEBUG_DIR}/liblibjasper.a)
+ANDROID_RELEASE_LIB(${OPENCV}/${OS}/3rdparty/lib/${RELEASE_DIR}/liblibjasper.a)
+ANDROID_DEBUG_LIB(${OPENCV}/${OS}/3rdparty/lib/${DEBUG_DIR}/libippiw.a)
+ANDROID_RELEASE_LIB(${OPENCV}/${OS}/3rdparty/lib/${RELEASE_DIR}/libippiw.a)
+ANDROID_DEBUG_LIB(${OPENCV}/${OS}/3rdparty/lib/${DEBUG_DIR}/liblibwebp.a)
+ANDROID_RELEASE_LIB(${OPENCV}/${OS}/3rdparty/lib/${RELEASE_DIR}/liblibwebp.a)
+ANDROID_DEBUG_LIB(${OPENCV}/${OS}/3rdparty/lib/${DEBUG_DIR}/libittnotify.a)
+ANDROID_RELEASE_LIB(${OPENCV}/${OS}/3rdparty/lib/${RELEASE_DIR}/libittnotify.a)
+ANDROID_DEBUG_LIB(${OPENCV}/${OS}/3rdparty/lib/${DEBUG_DIR}/libIlmImf.a)
+ANDROID_RELEASE_LIB(${OPENCV}/${OS}/3rdparty/lib/${RELEASE_DIR}/libIlmImf.a)
+ANDROID_DEBUG_LIB(${OPENCV}/${OS}/lib/${DEBUG_DIR}/libopencv_core.a)
+ANDROID_RELEASE_LIB(${OPENCV}/${OS}/lib/${RELEASE_DIR}/libopencv_core.a)
+ANDROID_DEBUG_LIB(${OPENCV}/${OS}/lib/${DEBUG_DIR}/libopencv_imgproc.a)
+ANDROID_RELEASE_LIB(${OPENCV}/${OS}/lib/${RELEASE_DIR}/libopencv_imgproc.a)
+ANDROID_DEBUG_LIB(${OPENCV}/${OS}/lib/${DEBUG_DIR}/libopencv_imgcodecs.a)
+ANDROID_RELEASE_LIB(${OPENCV}/${OS}/lib/${RELEASE_DIR}/libopencv_imgcodecs.a)
+ANDROID_DEBUG_LIB(${OPENCV}/${OS}/lib/${DEBUG_DIR}/libopencv_videoio.a)
+ANDROID_RELEASE_LIB(${OPENCV}/${OS}/lib/${RELEASE_DIR}/libopencv_videoio.a)
 
 
 ### COMPILE ###
@@ -175,5 +197,9 @@ RASPBERRY_RELEASE_COMMAND(make opencv_imgcodecs)
 RASPBERRY_RELEASE_COMMAND(make opencv_videoio)
 
 
-ANDROID_NDK_DEBUG(${OPENCV_VERSION})
-ANDROID_NDK_RELEASE(${OPENCV_VERSION})
+##ANDROID_NDK_DEBUG(${OPENCV_VERSION})
+##ANDROID_NDK_RELEASE(${OPENCV_VERSION})
+
+ANDROID_PATH(${OPENCV}/${OS})
+ANDROID_COMMAND(${CMAKE_COMMAND} -G ${GENERATOR} -A ARM -DCMAKE_TOOLCHAIN_FILE=${ANDROID_NDK}/build/cmake/android.toolchain.cmake -DCMAKE_ANDROID_NDK=${ANDROID_NDK} -DANDROID_ABI=armeabi-v7a -DANDROID_NATIVE_API_LEVEL=29 "-DANDROID_COMPILER_FLAGS=-DANDROID32 -D_ANDROID" "-DANDROID_COMPILER_FLAGS_DEBUG=-DDEBUG -D_DEBUG" "-DANDROID_COMPILER_FLAGS_RELEASE=-DNDEBUG" -DBUILD_SHARED_LIBS=OFF ${OPENCV})
+ANDROID_VS(${OPENCV_VERSION} OpenCV.sln)
