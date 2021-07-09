@@ -415,6 +415,7 @@ bool DKXml::RemoveInners(const DKString& xpath)
 
 
 //Test libxml2
+#ifdef USE_libxml2
 bool DKXml::traverse_dom_trees(xmlNode* a_node)
 {
 	xmlNode *cur_node = NULL;
@@ -484,3 +485,4 @@ bool DKXml::test_libxml()
 	xmlCleanupParser();    // Free globals
 	return true;
 }
+#endif

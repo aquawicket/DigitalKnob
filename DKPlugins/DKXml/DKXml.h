@@ -2,7 +2,9 @@
 #ifndef DKXml_H
 #define DKXml_H
 #include "DK/DKClass.h"
+#ifdef USE_libxml2
 #include "libxml/HTMLparser.h"
+#endif
 #include "pugixml.hpp"
 
 typedef pugi::xml_node DKXmlNode;
@@ -43,8 +45,10 @@ public:
 
 
 	//Test libmxl2
+#ifdef USE_libxml2
 	bool traverse_dom_trees(xmlNode* a_node);
 	bool test_libxml();
+#endif
 };
 
 
