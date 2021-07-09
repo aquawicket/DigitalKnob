@@ -69,7 +69,7 @@ goto start
 :build
 cd C:\Users\%USERNAME%\digitalknob
 echo Deleteing all CMakeCache.txt files....
-del /S *CMakeCache.txt
+del /f /S *MakeCache.txt
 ::echo Deleteing all CMakeFiles folders....
 ::FOR /D /R %%X IN (CMakeFile*) DO RD /S /Q "%%X"
 echo ****** BUILDING %APP% - %OS% ******
