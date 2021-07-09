@@ -8,6 +8,14 @@ endif(COMMAND cmake_policy)
 ## Set variables for paths
 ###############################################################
 get_filename_component(DIGITALKNOB ${CMAKE_SOURCE_DIR} ABSOLUTE)
+
+message("Deleteing leftover CMakeCache.txt files....")
+if(CMAKE_HOST_WIN32)
+	execute_process(COMMAND cmd /c del /f /S *MakeCache.txt WORKING_DIRECTORY ${DIGITALKNOB})
+else()
+	execute_process(COMMAND cmd /c find . -name "*MakeCache.txt" -delete WORKING_DIRECTORY ${DIGITALKNOB})
+endif()
+
 DKSET(DKCMAKE ${DIGITALKNOB}/DKCMake)
 DKSET(DKPLUGINS ${DIGITALKNOB}/DKPlugins)
 DKSET(3RDPARTY ${DIGITALKNOB}/3rdParty)
