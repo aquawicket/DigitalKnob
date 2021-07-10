@@ -86,7 +86,7 @@ DKSET(DKAPP ON) ##TODO:  phase this out
 ##################################################
 ##### Scan the DKPlugins and build the lists #####
 ##################################################
-include(${DKCMAKE}/BUILDTOOLS.cmake)
+include(${DKCMAKE}/BuildTools.cmake)
 include(${DKPROJECT}/DKMAKE.cmake)
 
 message("\n")
