@@ -73,7 +73,7 @@ WIN64_BASH("#!/bin/bash\;
 cd ${BZIP2}/${OS}\;
 export PATH=/${MINGW64}/bin:$PATH\;
 export PATH=/${MSYS}/bin:$PATH\;
-make CFLAGS='-static-libgcc'\;
+make CFLAGS='-m64 -static-libgcc'\;
 exit\;")
 
 	##DKRENAME(${BZIP2}/${OS}/libbz2.a ${BZIP2}/${OS}/libbz2.lib)

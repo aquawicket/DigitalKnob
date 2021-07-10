@@ -3,6 +3,10 @@ DISABLE_DKDEPEND(ffmpeg-20150905-git-a87ada5-win32-dev)
 DISABLE_DKDEPEND(ffmpeg-20150905-git-a87ada5-win64-dev)
 endif()
 
+if(WIN_64)
+DISABLE_DKDEPEND(bzip2)
+endif()
+
 if(LINUX)
 DISABLE_DKDEPEND(flac)
 DISABLE_DKDEPEND(SFML)
