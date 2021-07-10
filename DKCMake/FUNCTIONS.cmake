@@ -1680,20 +1680,19 @@ endfunction()
 
 ###################### DKPlugin Link Libraries #####################
 function(DKDEBUG_LIB arg)
+if(NOT EXISTS ${arg})
 	if(NOT DEBUG)
 		return()
-	endif()
-	string(FIND "${DEBUG_LIBS}" "${arg}" _indexa)
-	if(NOT ${_indexa} EQUAL -1)
-		return() ## The library is already in the list
-	endif()
-	
+	endif()	
 	DKSET(LIBLIST ${LIBLIST} ${arg}) ## used for double checking
 	if(NOT EXISTS ${arg})
 		message("MISSING: ${arg}")
 		DKSET(QUEUE_BUILD ON) 
 	endif()
-		
+	string(FIND "${DEBUG_LIBS}" "${arg}" _indexa)
+	if(NOT ${_indexa} EQUAL -1)
+		return() ## The library is already in the list
+	endif()
 	if(LINUX OR RASPBERRY OR ANDROID)
 		DKSET(DEBUG_LIBS debug ${arg} ${DEBUG_LIBS})  #Add to beginning of list
 	else()
@@ -1705,17 +1704,15 @@ function(DKRELEASE_LIB arg)
 	if(NOT RELEASE)
 		return()
 	endif()
-	string(FIND "${RELEASE_LIBS}" "${arg}" _indexa)
-	if(NOT ${_indexa} EQUAL -1)
-		return() ## The library is already in the list
-	endif()
-	
 	DKSET(LIBLIST ${LIBLIST} ${arg}) ## used for double checking
 	if(NOT EXISTS ${arg})
 		message("MISSING: ${arg}")
 		DKSET(QUEUE_BUILD ON)
 	endif()
-		
+	string(FIND "${RELEASE_LIBS}" "${arg}" _indexa)
+	if(NOT ${_indexa} EQUAL -1)
+		return() ## The library is already in the list
+	endif()	
 	if(LINUX OR RASPBERRY OR ANDROID)
 		DKSET(RELEASE_LIBS optimized ${arg} ${RELEASE_LIBS})  #Add to beginning of list
 	else()
