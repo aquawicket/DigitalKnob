@@ -22,10 +22,10 @@ endif()
 DKINCLUDE(${BZIP2})
 #WIN_DEBUG_LIB(${BZIP2}/${OS}/libbz2-static.lib)
 #WIN_RELEASE_LIB(${BZIP2}/${OS}/libbz2-static.lib)
-WIN_DEBUG_LIB(${BZIP2}/${OS}/libbz2.lib)
-WIN_RELEASE_LIB(${BZIP2}/${OS}/libbz2.lib)
-##WIN_DEBUG_LIB(${BZIP2}/${OS}/libgcc.lib)
-##WIN_RELEASE_LIB(${BZIP2}/${OS}/libgcc.lib)
+WIN_DEBUG_LIB(${BZIP2}/${OS}/libbz2.a)
+WIN_RELEASE_LIB(${BZIP2}/${OS}/libbz2.a)
+##WIN_DEBUG_LIB(${BZIP2}/${OS}/libgcc.a)
+##WIN_RELEASE_LIB(${BZIP2}/${OS}/libgcc.a)
 MAC_DEBUG_LIB(${BZIP2}/${OS}/libbz2.a)
 MAC_RELEASE_LIB(${BZIP2}/${OS}/libbz2.a)
 LINUX_DEBUG_LIB(${BZIP2}/${OS}/libbz2.a)
@@ -37,7 +37,7 @@ ANDROID_RELEASE_LIB(${BZIP2}/${OS}/libbz2.a)
 
 
 ### 3RDPARTY LINK ###
-DKSET(BZIP2_WIN -DBZIP2_INCLUDE_DIR=${BZIP2}/${OS} -DBZIP2_LIBRARY_DEBUG=${BZIP2}/${OS}/libbz2-static.lib -DBZIP2_LIBRARY_RELEASE=${BZIP2}/${OS}/libbz2-static.lib)
+DKSET(BZIP2_WIN -DBZIP2_INCLUDE_DIR=${BZIP2}/${OS} -DBZIP2_LIBRARY_DEBUG=${BZIP2}/${OS}/libbz2.a -DBZIP2_LIBRARY_RELEASE=${BZIP2}/${OS}/libbz2.a)
 DKSET(BZIP2_APPLE -DBZIP2_INCLUDE_DIR=${BZIP2}/${OS} -DBZIP2_LIBRARY_DEBUG=${BZIP2}/${OS}/libbz2.a -DBZIP2_LIBRARY_RELEASE=${BZIP2}/${OS}/libbz2.a)
 DKSET(BZIP2_LINUX -DBZIP2_INCLUDE_DIR=${BZIP2}/${OS} -DBZIP2_LIBRARY_DEBUG=${BZIP2}/${OS}/libbz2.a -DBZIP2_LIBRARY_RELEASE=${BZIP2}/${OS}/libbz2.a)
 DKSET(BZIP2_RASPBERRY -DBZIP2_INCLUDE_DIR=${BZIP2}/${OS} -DBZIP2_LIBRARY_DEBUG=${BZIP2}/${OS}/libbz2.a -DBZIP2_LIBRARY_RELEASE=${BZIP2}/${OS}/libbz2.a)
@@ -57,10 +57,10 @@ export PATH=/${MSYS}/bin:$PATH\;
 make CFLAGS='-static-libgcc'\;
 exit\;")
 
-	DKRENAME(${BZIP2}/${OS}/libbz2.a ${BZIP2}/${OS}/libbz2.lib)
+	##DKRENAME(${BZIP2}/${OS}/libbz2.a ${BZIP2}/${OS}/libbz2.lib)
 	##TODO: look at _DKIMPORTS/libgcc
 	DKCOPY(${3RDPARTY}/mingw/mingw32/lib/gcc/i686-w64-mingw32/4.9.2/libgcc.a ${BZIP2}/${OS} TRUE)
-	DKRENAME(${BZIP2}/${OS}/libgcc.a ${BZIP2}/${OS}/libgcc.lib)
+	##DKRENAME(${BZIP2}/${OS}/libgcc.a ${BZIP2}/${OS}/libgcc.lib)
 endif()
 
 
@@ -76,9 +76,9 @@ export PATH=/${MSYS}/bin:$PATH\;
 make CFLAGS='-static-libgcc'\;
 exit\;")
 
-	DKRENAME(${BZIP2}/${OS}/libbz2.a ${BZIP2}/${OS}/libbz2.lib)
+	##DKRENAME(${BZIP2}/${OS}/libbz2.a ${BZIP2}/${OS}/libbz2.lib)
 	DKCOPY(${3RDPARTY}/mingw/mingw64/lib/gcc/x86_64-w64-mingw32/4.9.2/libgcc.a ${BZIP2}/${OS} TRUE)
-	DKRENAME(${BZIP2}/${OS}/libgcc.a ${BZIP2}/${OS}/libgcc.lib)
+	##DKRENAME(${BZIP2}/${OS}/libgcc.a ${BZIP2}/${OS}/libgcc.lib)
 ENDIF()
 
 IF(MAC_64)
