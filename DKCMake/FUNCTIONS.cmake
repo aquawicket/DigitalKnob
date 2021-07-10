@@ -40,6 +40,10 @@ function(VAR_EXISTS varname result)
     set (${result} ${varname} PARENT_SCOPE)
 endfunction()
 
+function(DUMP variable)
+	message("variable = ${variable}")
+	WaitForEnter()
+endfunction()
 
 function(DKSET variable value)
 	set(extra_args ${ARGN})
@@ -1675,65 +1679,46 @@ endfunction()
 
 ###################### DKPlugin Link Libraries #####################
 function(DKDEBUG_LIB arg)
-	if(DEBUG)
-		DKSET(LIBLIST ${LIBLIST} ${arg}) ## used for double checking
-		if(NOT EXISTS ${arg})
-			message("MISSING: ${arg}")
-			DKSET(QUEUE_BUILD ON)
-			DKSET(ALL_LIBS ON) ##turn on the ALL_LIBS flag to make sure everything is built in the library 
-		endif()
-		if(ANDROID)
-			string(FIND "${DKLIBRARIES}" "${arg}" _indexa)
-			if(${_indexa} EQUAL -1)
-				DKSET(DKLIBRARIES "LOCAL_LDFLAGS += ${arg}\n" ${DKLIBRARIES})
-			endif()
-		elseif(LINUX)
-			string(FIND "${DEBUG_LIBS}" "${arg}" _indexa)
-			if(${_indexa} EQUAL -1)
-				DKSET(DEBUG_LIBS debug ${arg} ${DEBUG_LIBS})  #Add to list
-			endif()
-		elseif(RASPBERRY)
-			string(FIND "${DEBUG_LIBS}" "${arg}" _indexa)
-			if(${_indexa} EQUAL -1)
-				DKSET(DEBUG_LIBS debug ${arg} ${DEBUG_LIBS})  #Add to list
-			endif()	
-		else()
-			string(FIND "${DEBUG_LIBS}" "${arg}" _indexa)
-			if(${_indexa} EQUAL -1)
-				DKSET(DEBUG_LIBS ${DEBUG_LIBS} debug ${arg})  #Add to list
-			endif()
-		endif()
+	if(NOT DEBUG)
+		return()
+	endif()
+	string(FIND "${DEBUG_LIBS}" "${arg}" _indexa)
+	if(NOT ${_indexa} EQUAL -1)
+		return() ## The library is already in the list
+	endif()
+	
+	DKSET(LIBLIST ${LIBLIST} ${arg}) ## used for double checking
+	if(NOT EXISTS ${arg})
+		message("MISSING: ${arg}")
+		DKSET(QUEUE_BUILD ON) 
+	endif()
+		
+	if(LINUX OR RASPBERRY OR ANDROID)
+		DKSET(DEBUG_LIBS debug ${arg} ${DEBUG_LIBS})  #Add to beginning of list
+	else()
+		DKSET(DEBUG_LIBS ${DEBUG_LIBS} debug ${arg})  #Add to end of list
 	endif()
 endfunction()
 
 function(DKRELEASE_LIB arg)
-	if(RELEASE)
-		DKSET(LIBLIST ${LIBLIST} ${arg}) ## used for double checking
-		if(NOT EXISTS ${arg})
-			message("MISSING: ${arg}")
-			DKSET(QUEUE_BUILD ON)
-		endif()
-		if(ANDROID)
-			string(FIND "${DKLIBRARIES}" "${arg}" _indexa)
-			if(${_indexa} EQUAL -1)
-				DKSET(DKLIBRARIES "LOCAL_LDFLAGS += ${arg}\n" ${DKLIBRARIES})
-			endif()
-		elseif(LINUX)
-			string(FIND "${RELEASE_LIBS}" "${arg}" _indexa)
-			if(${_indexa} EQUAL -1)
-				DKSET(RELEASE_LIBS optimized ${arg} ${RELEASE_LIBS})  #Add to list
-			endif()
-		elseif(RASPBERRY)
-			string(FIND "${RELEASE_LIBS}" "${arg}" _indexa)
-			if(${_indexa} EQUAL -1)
-				DKSET(RELEASE_LIBS optimized ${arg} ${RELEASE_LIBS})  #Add to list
-			endif()	
-		else()
-			string(FIND "${RELEASE_LIBS}" "${arg}" _indexa)
-			if(${_indexa} EQUAL -1)
-				DKSET(RELEASE_LIBS ${RELEASE_LIBS} optimized ${arg})  #Add to list
-			endif()
-		endif()
+	if(NOT RELEASE)
+		return()
+	endif()
+	string(FIND "${RELEASE_LIBS}" "${arg}" _indexa)
+	if(NOT ${_indexa} EQUAL -1)
+		return() ## The library is already in the list
+	endif()
+	
+	DKSET(LIBLIST ${LIBLIST} ${arg}) ## used for double checking
+	if(NOT EXISTS ${arg})
+		message("MISSING: ${arg}")
+		DKSET(QUEUE_BUILD ON)
+	endif()
+		
+	if(LINUX OR RASPBERRY OR ANDROID)
+		DKSET(RELEASE_LIBS optimized ${arg} ${RELEASE_LIBS})  #Add to beginning of list
+	else()
+		DKSET(RELEASE_LIBS ${RELEASE_LIBS} optimized ${arg})  #Add to end of list
 	endif()
 endfunction()
 
