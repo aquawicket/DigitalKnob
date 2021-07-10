@@ -1680,7 +1680,6 @@ endfunction()
 
 ###################### DKPlugin Link Libraries #####################
 function(DKDEBUG_LIB arg)
-if(NOT EXISTS ${arg})
 	if(NOT DEBUG)
 		return()
 	endif()	
