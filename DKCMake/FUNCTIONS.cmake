@@ -285,7 +285,6 @@ function(DKINSTALL url import_folder 3rdparty_folder)
 
 	DKSET(CURRENT_DIR ${DIGITALKNOB}/Download)
 	file(MAKE_DIRECTORY ${CURRENT_DIR})
-	DUMP("${CURRENT_DIR}")
 	DKDOWNLOAD(${url})
 		
 	##get_filename_component(extension ${url} EXT)       #linux32 latest cmake version is 3.10
