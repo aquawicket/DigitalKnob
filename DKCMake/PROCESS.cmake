@@ -515,7 +515,6 @@ if(WIN_32)
 	
 	add_definitions(-D_USING_V110_SDK71_)
 	add_executable(${APP_NAME} WIN32 ${App_SRC})
-	DUMP("${DEBUG_LIBS}")
 	target_link_libraries(${APP_NAME} ${WIN_LIBS} ${DEBUG_LIBS} ${RELEASE_LIBS})
 	##set_source_files_properties(${DIGITALKNOB}/stdafx.cpp PROPERTIES COMPILE_FLAGS "/Ycstdafx.h")
 	
@@ -974,13 +973,10 @@ if(ANDROID_32)
 	DKREMOVE(${DKPROJECT}/Backup)
 	#############################
 	
-	
 	set(CMAKE_CXX_FLAGS "-std=c++14")
 	add_executable(${APP_NAME} ${App_SRC})
-	
 	if(DEBUG)
 		add_definitions(-DDEBUG)
-		#DUMP(${DEBUG_LIBS})
 		target_link_libraries(${APP_NAME} ${DEBUG_LIBS})
 	else()
 		target_link_libraries(${APP_NAME} ${RELEASE_LIBS})

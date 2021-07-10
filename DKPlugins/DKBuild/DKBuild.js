@@ -64,7 +64,8 @@ function DKBuild_init(){
 		GCC = "/usr/bin/g++";
 		NDK = DKPATH+"DK/3rdParty/android-ndk-"+NDK_VERSION+"-linux-x86_64";
 	}
-	DKDOWNLOAD = DKPATH+"Download";
+	DKDOWNLOAD = DKPATH+"DK/Download";
+	CPP_DKFile_MkDir(DKDOWNLOAD);
 }
 
 //This is and alternative way to get windows short paths
@@ -163,16 +164,20 @@ function DKBuild_ValidateNDK(){
 function DKBuild_InstallNDK(){
 	console.log("Installing Android NDK");
 	if(CPP_DK_GetOS() === "Windows"){
+		console.log("Downloading NDK to "+DKDOWNLOAD)
 		CPP_DKCurl_Download("https://dl.google.com/android/repository/android-ndk-"+NDK_VERSION+"-windows-x86_64.zip", DKDOWNLOAD);
-		CPP_DKArchive_Extract(DKDOWNLOAD+"/android-ndk-"+NDK_VERSION+"-windows-x86_64.zip", NDK);
+		CPP_DKArchive_Extract(DKDOWNLOAD+"/android-ndk-"+NDK_VERSION+"-windows-x86_64.zip", DKPATH+"DK/3rdParty");
+		CPP_DKFile_Rename(DKPATH+"DK/3rdParty/android-ndk-"+NDK_VERSION, DKPATH+"DK/3rdParty/android-ndk-"+NDK_VERSION+"-windows-x86_64", false)
 	}
 	if(CPP_DK_GetOS() === "Mac"){
 		CPP_DKCurl_Download("https://dl.google.com/android/repository/android-ndk-"+NDK_VERSION+"-darwin-x86_64.zip", DKDOWNLOAD);
-		CPP_DKArchive_Extract(DKDOWNLOAD+"/android-ndk-"+NDK_VERSION+"-darwin-x86_64.zip", NDK);
+		CPP_DKArchive_Extract(DKDOWNLOAD+"/android-ndk-"+NDK_VERSION+"-darwin-x86_64.zip", DKPATH+"DK/3rdParty");
+		CPP_DKFile_Rename(DKPATH+"DK/3rdParty/android-ndk-"+NDK_VERSION, DKPATH+"DK/3rdParty/android-ndk-"+NDK_VERSION+"-darwin-x86_64", false)
 	}
 	if(CPP_DK_GetOS() === "Linux"){
 		CPP_DKCurl_Download("https://dl.google.com/android/repository/android-ndk-"+NDK_VERSION+"-linux-x86_64.zip", DKDOWNLOAD);
-		CPP_DKArchive_Extract(DKDOWNLOAD+"/android-ndk-"+NDK_VERSION+"-linux-x86_64.zip", NDK);
+		CPP_DKArchive_Extract(DKDOWNLOAD+"/android-ndk-"+NDK_VERSION+"-linux-x86_64.zip", DKPATH+"DK/3rdParty");
+		CPP_DKFile_Rename(DKPATH+"DK/3rdParty/android-ndk-"+NDK_VERSION, DKPATH+"DK/3rdParty/android-ndk-"+NDK_VERSION+"-linux-x86_64", false)
 	}
 }
 
@@ -294,11 +299,11 @@ function DKBuild_ResetAppsPlugins(){
 	console.log("Deleting Apps and Plugins... ");
 	
 	// Delete everything in DKApps except DKBuild
-	let apps = CPP_DKFile_DirectoryContents(DKPATH+"DKApps");
+	let apps = CPP_DKFile_DirectoryContents(DKPATH+"DK/DKApps");
 	let list = apps.split(',');
 	for(let i=0; i<list.length; ++i){
 		if(list[i] === "DKBuilder"){ continue; }
-		CPP_DKFile_Delete(DKPATH+"DKApps/"+list[i]);
+		CPP_DKFile_Delete(DKPATH+"DK/DKApps/"+list[i]);
 	}
 	
 	//Multipe user folders
@@ -313,14 +318,14 @@ function DKBuild_ResetAppsPlugins(){
 	}
 	
 	// Delete DKPlugins
-	CPP_DKFile_Delete(DKPATH+"DKPlugins");
+	CPP_DKFile_Delete(DKPATH+"DK/DKPlugins");
 }
 
 function DKBuild_Reset3rdParty(){
 	//TODO
 	console.log("Deleting 3rdParty... ");
 	console.log("Please wait. ");
-	CPP_DKFile_Delete(DKPATH+"3rdParty");
+	CPP_DKFile_Delete(DKPATH+"DK/3rdParty");
 }
 
 function DKBuild_GetAppList(){
@@ -726,6 +731,8 @@ function DKBuild_DoResults(){
 		DKBuild_ValidateVC2019();
 		CPP_DKFile_MkDir(DKPATH+appdir+"/"+APP+"/android32");
 		CPP_DKFile_ChDir(DKPATH+appdir+"/"+APP+"/android32");
+		let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Visual Studio 16 2019\" -A ARM -DCMAKE_TOOLCHAIN_FILE="+NDK+"/build/cmake/android.toolchain.cmake -DANDROID_NDK="+NDK+" -DANDROID_ABI=armeabi-v7a -DANDROID_NATIVE_API_LEVEL=24 –DCMAKE_SYSTEM_NAME=ANDROID "+cmake_string+DKPATH+"DK");
+		/*
 		if(TYPE === "Debug" || TYPE === "ALL"){
 			CPP_DKFile_MkDir(DKPATH+appdir+"/"+APP+"/android32/Debug");
 			CPP_DKFile_ChDir(DKPATH+appdir+"/"+APP+"/android32/Debug");
@@ -741,13 +748,14 @@ function DKBuild_DoResults(){
 			CPP_DKFile_MkDir(DKPATH+appdir+"/"+APP+"/android32/Release");
 			CPP_DKFile_ChDir(DKPATH+appdir+"/"+APP+"/android32/Release");
 			if(CPP_DK_GetOS() === "Windows")
-				let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Visual Studio 16 2019\" -A ARM -DCMAKE_TOOLCHAIN_FILE="+NDK+"/build/cmake/android.toolchain.cmake -DANDROID_NDK="+NDK+" -DANDROID_ABI=armeabi-v7a -DANDROID_NATIVE_API_LEVEL=29 –DCMAKE_SYSTEM_NAME=ANDROID "+cmake_string+DKPATH+"DK");
+				//let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Visual Studio 16 2019\" -A ARM -DCMAKE_TOOLCHAIN_FILE="+NDK+"/build/cmake/android.toolchain.cmake -DANDROID_NDK="+NDK+" -DANDROID_ABI=armeabi-v7a -DANDROID_NATIVE_API_LEVEL=29 –DCMAKE_SYSTEM_NAME=ANDROID "+cmake_string+DKPATH+"DK");
 			if(CPP_DK_GetOS() === "Linux" || CPP_DK_GetOS() === "Mac")
 				rtvalue = CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DKPATH+"DK");
 			if(rtvalue.indexOf("errors occurred!") > -1)
 				return; 
 			CPP_DK_Execute(NDK+"/ndk-build.cmd NDK_DEBUG=0 NDKLOG=1")
 		}
+		*/
 	}
 	
 	////// ANDROID64 /////
