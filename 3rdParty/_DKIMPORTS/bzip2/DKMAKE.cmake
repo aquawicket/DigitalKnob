@@ -6,7 +6,7 @@ DKSET(BZIP2 ${3RDPARTY}/bzip${BZIP2_VERSION})
 
 
 ### INSTALL ###
-if(WIN)
+if(0)
 	## https://github.com/philr/bzip2-windows
 	DKINSTALL(https://github.com/philr/bzip2-windows/releases/download/v1.0.8.0/bzip2-dev-1.0.8.0-win-x86.zip bzip2 bzip${BZIP2_VERSION})
 	DKCOPY(${BZIP2} ${BZIP2}/${OS} TRUE)
@@ -20,8 +20,10 @@ endif()
 
 ### DKPLUGINS LINK ###
 DKINCLUDE(${BZIP2})
-WIN_DEBUG_LIB(${BZIP2}/${OS}/libbz2-static.lib)
-WIN_RELEASE_LIB(${BZIP2}/${OS}/libbz2-static.lib)
+#WIN_DEBUG_LIB(${BZIP2}/${OS}/libbz2-static.lib)
+#WIN_RELEASE_LIB(${BZIP2}/${OS}/libbz2-static.lib)
+WIN_DEBUG_LIB(${BZIP2}/${OS}/libbz2.lib)
+WIN_RELEASE_LIB(${BZIP2}/${OS}/libbz2.lib)
 ##WIN_DEBUG_LIB(${BZIP2}/${OS}/libgcc.lib)
 ##WIN_RELEASE_LIB(${BZIP2}/${OS}/libgcc.lib)
 MAC_DEBUG_LIB(${BZIP2}/${OS}/libbz2.a)
