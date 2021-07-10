@@ -5,7 +5,8 @@ IF(IOSSIM)
 	RETURN()
 ENDIF()
 
-DKDEPEND(boost)
+DKDEPEND(boost Boost_System)
+DKDEPEND(boost Boost_Filesystem)
 DKDEPEND(DKCef)
 
 DKSET(QUEUE_BUILD ON)
