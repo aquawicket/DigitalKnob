@@ -1,11 +1,11 @@
 ### DEPENDENCIES ###
-##DKDEPEND(DKSDLWindow)
+DKDEPEND(SDL2)
 DKDEPEND(zlib)
 DKDEPEND(giflib)
 DKDEPEND(libpng)
 DKDEPEND(libjpeg-turbo)
 DKDEPEND(tiff)
-DKDEPEND(SDL2)
+
 
 
 ### VERSION ###

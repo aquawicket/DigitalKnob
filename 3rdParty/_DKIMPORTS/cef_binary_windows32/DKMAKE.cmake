@@ -8,6 +8,7 @@ DKSET(CEF ${3RDPARTY}/cef_binary_${CEF_VERSION})
 
 
 ### INSTALL ###
+## https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_windows32.tar.bz2
 DKINSTALL(https://cef-builds.spotifycdn.com/cef_binary_${CEF_VERSION}.tar.bz2 cef_binary_windows32 cef_binary_${CEF_VERSION})
 
 
