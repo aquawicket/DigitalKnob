@@ -93,12 +93,12 @@ function DKBuild_InstallCmake(){
 	console.log("Installing CMake");
 	if(CPP_DK_GetOS() === "Windows"){
 		if(CPP_DK_GetOSArchitecture() === "32"){
-			if(!CPP_DKFile_Exists(datapath+"/cmake-3.19.4-win32-x86.msi"))
+			if(!CPP_DKFile_Exists(DKDOWNLOAD+"/cmake-3.19.4-win32-x86.msi"))
 				CPP_DKCurl_Download("https://cmake.org/files/v3.19/cmake-3.19.4-win32-x86.msi", DKDOWNLOAD);
 			CPP_DK_System(DKDOWNLOAD+"/cmake-3.19.4-win32-x86.msi");
 		}
 		if(CPP_DK_GetOSArchitecture() === "64"){
-			if(!CPP_DKFile_Exists(datapath+"/cmake-3.19.4-win32-x86.msi"))
+			if(!CPP_DKFile_Exists(DKDOWNLOAD+"/cmake-3.19.4-win32-x86.msi"))
 				CPP_DKCurl_Download("https://cmake.org/files/v3.19/cmake-3.19.4-win32-x86.msi", DKDOWNLOAD);
 			CPP_DK_System(DKDOWNLOAD+"/cmake-3.19.4-win32-x86.msi");
 		}
