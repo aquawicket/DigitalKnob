@@ -978,7 +978,7 @@ if(ANDROID_32)
 	DKREMOVE(${DKPROJECT}/assets/log.txt)
 	
 	
-	//Create Android Icons
+	## Create Android Icons
 	message("Building icons for ${APP_NAME} - ${OS} . . .")
     file(MAKE_DIRECTORY ${DKPROJECT}/icons/android)
     file(MAKE_DIRECTORY ${DKPROJECT}/icons/android/drawable-hdpi)
@@ -1010,7 +1010,6 @@ if(ANDROID_32)
 	set(CMAKE_CXX_FLAGS "-std=c++14")
 	set(CMAKE_ANDROID_STL_TYPE c++_static)
 	
-	
 	add_library(${APP_NAME} SHARED ${App_SRC})
 	
 	if(DEBUG)
@@ -1024,10 +1023,8 @@ if(ANDROID_32)
 	## Look at the native c++ android hello world app in Visual Studio
 	## Look in the folder C:\Users\aquawicket\source\repos\AppName\AppName\AppName.Packaging
 	## This is how we will generate our .apk file
-	
-	#project(MyApp C)
-	#add_executable(MyApp ${DKPROJECT}/android32/Release/AndroidManifest.xml)
-	#target_link_libraries(MyApp ${DKPROJECT}/android32/Debug/libDKSDL.so)
+
+
 endif()
 
 
