@@ -325,7 +325,7 @@ foreach(plugin ${dkdepend_list})
 		if(ANDROID_32)
 			DKSET(CURRENT_DIR ${PATHTOPLUGIN}/android32)
 			file(MAKE_DIRECTORY ${CURRENT_DIR})
-			ANDROID32_COMMAND(${CMAKE_COMMAND} -G ${GENERATOR} -A ARM -DCMAKE_TOOLCHAIN_FILE=${ANDROID_NDK}/build/cmake/android.toolchain.cmake -DCMAKE_ANDROID_NDK=${ANDROID_NDK} -DANDROID_ABI=armeabi-v7a -DANDROID_NATIVE_API_LEVEL=24 -DANDROID_32=ON -DREBUILD=ON -DDEBUG=ON -DRELEASE=ON ${PATHTOPLUGIN})
+			ANDROID32_COMMAND(${CMAKE_COMMAND} -G ${GENERATOR} -A ARM -DCMAKE_TOOLCHAIN_FILE=${ANDROID_NDK}/build/cmake/android.toolchain.cmake -DCMAKE_ANDROID_NDK=${ANDROID_NDK} -DANDROID_ABI=armeabi-v7a -DANDROID_NATIVE_API_LEVEL=25 -DANDROID_32=ON -DREBUILD=ON -DDEBUG=ON -DRELEASE=ON ${PATHTOPLUGIN})
 			if(DEBUG)
 				ANDROID32_COMMAND(${VC_EXE} ${CURRENT_DIR}/${plugin}.sln /p:Configuration=Debug)
 			endif()
@@ -973,8 +973,15 @@ if(ANDROID_32)
 	DKREMOVE(${DKPROJECT}/Backup)
 	#############################
 	
+	DKUPDATE_ANDROID_NAME(${APP_NAME})
+	
+	set(CMAKE_ANDROID_GUI TRUE)
 	set(CMAKE_CXX_FLAGS "-std=c++14")
-	add_executable(${APP_NAME} ${App_SRC})
+	set(CMAKE_ANDROID_STL_TYPE c++_static)
+	
+	
+	##add_library(${APP_NAME} SHARED ${App_SRC})
+	add_executable(${APP_NAME} ${App_SRC} ${DKPROJECT}/android32/Release/AndroidManifest.xml)
 	if(DEBUG)
 		add_definitions(-DDEBUG)
 		target_link_libraries(${APP_NAME} ${DEBUG_LIBS})
