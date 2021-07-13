@@ -855,13 +855,13 @@ function DKBuild_DoResults(){
 			return; 
 		
 		if(TYPE === "Debug" || TYPE === "ALL"){
-			CPP_DKFile_MkDir(DKPATH+appdir+"/"+APP+"/android64/androidDebug");
-			CPP_DKFile_ChDir(DKPATH+appdir+"/"+APP+"/android64/androidDebug");
+			CPP_DKFile_MkDir(DKPATH+appdir+"/"+APP+"/android64/Debug");
+			CPP_DKFile_ChDir(DKPATH+appdir+"/"+APP+"/android64/Debug");
 			//CPP_DK_Execute(NDK+"/ndk-build.cmd NDK_DEBUG=1 NDKLOG=1");
 		}
 		if(TYPE === "Release" || TYPE === "ALL"){
-			CPP_DKFile_MkDir(DKPATH+appdir+"/"+APP+"/android64/androidRelease");
-			CPP_DKFile_ChDir(DKPATH+appdir+"/"+APP+"/android64/androidRelease");
+			CPP_DKFile_MkDir(DKPATH+appdir+"/"+APP+"/android64/Release");
+			CPP_DKFile_ChDir(DKPATH+appdir+"/"+APP+"/android64/Release");
 			//CPP_DK_Execute(NDK+"/ndk-build.cmd NDK_DEBUG=0 NDKLOG=1")
 		}
 	}
