@@ -1,3 +1,6 @@
+DKDEPEND(mingw32)
+DKDEPEND(mingw64)
+DKDEPEND(msys)
 DKDEPEND(libgcc)
 
 ### VERSION ###
