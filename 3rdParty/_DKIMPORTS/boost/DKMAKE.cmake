@@ -169,7 +169,7 @@ RASPBERRY64_RELEASE_COMMAND(./b2 toolset=gcc address-model=64 variant=release li
 
 DKSETPATH(${BOOST})
 ANDROID_BASH("#!/bin/bash\;
-cd ${BOOST}\;
+cd /${BOOST}\;
 export PATH=/${MINGW32}/bin:$PATH\;
 export PATH=/${MSYS}/bin:$PATH\;
 ./SetupAndroid.sh\;")

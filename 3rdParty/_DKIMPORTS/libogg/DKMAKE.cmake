@@ -38,7 +38,7 @@ DKSET(OGG_ANDROID_RELEASE "--with-ogg-includes=\"${OGG}/include\" --with-ogg-lib
 ### COMPILE ###
 WIN32_DEBUG_PATH(${OGG}/${OS}/${DEBUG_DIR})
 WIN32_DEBUG_BASH("#!/bin/bash 
-cd ${OGG}/${OS}/${DEBUG_DIR} 
+cd /${OGG}/${OS}/${DEBUG_DIR} 
 export PATH=/${MINGW32}/bin:$PATH\;
 export PATH=/${MSYS}/bin:$PATH\;
 ../../configure --disable-shared --enable-static 
@@ -47,7 +47,7 @@ exit \n")
 
 WIN32_RELEASE_PATH(${OGG}/${OS}/${RELEASE_DIR})
 WIN32_RELEASE_BASH("#!/bin/bash 
-cd ${OGG}/${OS}/${RELEASE_DIR} 
+cd /${OGG}/${OS}/${RELEASE_DIR} 
 export PATH=/${MINGW32}/bin:$PATH\;
 export PATH=/${MSYS}/bin:$PATH\;
 ../../configure --disable-shared --enable-static 
@@ -57,7 +57,7 @@ exit \n")
 
 WIN64_DEBUG_PATH(${OGG}/${OS}/${DEBUG_DIR})
 WIN64_DEBUG_BASH("#!/bin/bash 
-cd ${OGG}/${OS}/${DEBUG_DIR} 
+cd /${OGG}/${OS}/${DEBUG_DIR} 
 export PATH=/${MINGW64}/bin:$PATH\;
 export PATH=/${MSYS}/bin:$PATH\;
 ../../configure --disable-shared --enable-static 
@@ -66,7 +66,7 @@ exit \n")
 
 WIN64_RELEASE_PATH(${OGG}/${OS}/${RELEASE_DIR})
 WIN64_RELEASE_BASH("#!/bin/bash 
-cd ${OGG}/${OS}/${RELEASE_DIR} 
+cd /${OGG}/${OS}/${RELEASE_DIR} 
 export PATH=/${MINGW64}/bin:$PATH\;
 export PATH=/${MSYS}/bin:$PATH\;
 ../../configure --disable-shared --enable-static 

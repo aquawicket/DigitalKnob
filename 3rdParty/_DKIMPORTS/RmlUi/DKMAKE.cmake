@@ -83,7 +83,7 @@ WIN_VS(RmlUi-${RMLUI_VERSION} RmlUi.sln)
 ## Test Building with Msys/Mingw
 ##WIN32_COMMAND(${CMAKE_COMMAND} -G "MSYS Makefiles" -DCMAKE_MAKE_PROGRAM=${MSYS}/bin/make.exe -DENABLE_PRECOMPILED_HEADERS=OFF -DDISABLE_RTTI_AND_EXCEPTIONS=ON -DBUILD_SHARED_LIBS=OFF -DFREETYPE_INCLUDE_DIR_freetype2=${FREETYPE}/include -DFREETYPE_INCLUDE_DIR_ft2build=${FREETYPE}/include -DFREETYPE_LIBRARY_DEBUG=${FREETYPE}/${OS}/${DEBUG_DIR}/freetype.lib -DFREETYPE_LIBRARY_RELEASE=${FREETYPE}/${OS}/${RELEASE_DIR}/freetype.lib ${RMLUI})
 ##WIN32_BASH("#!/bin/bash\;
-##cd ${RMLUI}/${OS}\;
+##cd /${RMLUI}/${OS}\;
 ##export PATH=/c/mingw32/bin:$PATH\;
 ##export PATH=/c/msys/bin:$PATH\;
 ##make\;

@@ -40,7 +40,7 @@ DKSET(VORBIS_RASPBERRY -DVORBIS_INCLUDE_DIR=${VORBIS}/include)
 ### COMPILE ###
 WIN32_PATH(${VORBIS}/${OS}/${DEBUG_DIR})
 WIN32_BASH("#!/bin/bash 
-cd ${VORBIS}/${OS}/${DEBUG_DIR} 
+cd /${VORBIS}/${OS}/${DEBUG_DIR} 
 export PATH=/${MINGW32}/bin:$PATH\;
 export PATH=/${MSYS}/bin:$PATH\;
 ../../configure --disable-shared ${OGG_WIN_DEBUG} 
@@ -50,7 +50,7 @@ exit \n")
 
 WIN32_PATH(${VORBIS}/${OS}/${RELEASE_DIR})
 WIN32_BASH("#!/bin/bash 
-cd ${VORBIS}/${OS}/${RELEASE_DIR} 
+cd /${VORBIS}/${OS}/${RELEASE_DIR} 
 export PATH=/${MINGW32}/bin:$PATH\;
 export PATH=/${MSYS}/bin:$PATH\;
 ../../configure --disable-shared ${OGG_WIN_RELEASE}
@@ -60,7 +60,7 @@ exit \n")
 
 WIN64_PATH(${VORBIS}/${OS}/${DEBUG_DIR})
 WIN64_BASH("#!/bin/bash 
-cd ${VORBIS}/${OS}/${DEBUG_DIR} 
+cd /${VORBIS}/${OS}/${DEBUG_DIR} 
 export PATH=/${MINGW64}/bin:$PATH\;
 export PATH=/${MSYS}/bin:$PATH\;
 ../../configure --disable-shared ${OGG_WIN_DEBUG}
@@ -70,7 +70,7 @@ exit \n")
 
 WIN64_PATH(${VORBIS}/${OS}/${RELEASE_DIR})
 WIN64_BASH("#!/bin/bash 
-cd ${VORBIS}/${OS}/${RELEASE_DIR} 
+cd /${VORBIS}/${OS}/${RELEASE_DIR} 
 export PATH=/${MINGW64}/bin:$PATH\;
 export PATH=/${MSYS}/bin:$PATH\;
 ../../configure --disable-shared ${OGG_WIN_RELEASE}

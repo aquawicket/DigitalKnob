@@ -45,7 +45,7 @@ DKSET(GIF_ANDROID -DGIF_INCLUDE_DIR=${GIF} -DGIF_INCLUDE_DIR2=${GIF}/${OS} -DGIF
 ### COMPILE ###
 WIN32_DEBUG_PATH(${GIF}/${OS}/${DEBUG_DIR})
 WIN32_DEBUG_BASH("#!/bin/bash 
-cd ${GIF}/${OS}/${DEBUG_DIR} 
+cd /${GIF}/${OS}/${DEBUG_DIR} 
 export PATH=/${MINGW32}/bin:$PATH\;
 export PATH=/${MSYS}/bin:$PATH\;
 ../../configure --disable-shared --enable-static 
@@ -57,7 +57,7 @@ endif()
 
 WIN32_RELEASE_PATH(${GIF}/${OS}/${RELEASE_DIR})
 WIN32_RELEASE_BASH("#!/bin/bash 
-cd ${GIF}/${OS}/${RELEASE_DIR} 
+cd /${GIF}/${OS}/${RELEASE_DIR} 
 export PATH=/${MINGW32}/bin:$PATH\;
 export PATH=/${MSYS}/bin:$PATH\;
 ../../configure --disable-shared --enable-static 
@@ -71,7 +71,7 @@ endif()
 
 WIN64_DEBUG_PATH(${GIF}/${OS}/${DEBUG_DIR})
 WIN64_DEBUG_BASH("#!/bin/bash 
-cd ${GIF}/${OS}/${DEBUG_DIR} 
+cd /${GIF}/${OS}/${DEBUG_DIR} 
 export PATH=/${MINGW64}/bin:$PATH\;
 export PATH=/${MSYS}/bin:$PATH\;
 ../../configure --disable-shared --enable-static 
@@ -83,7 +83,7 @@ endif()
 
 WIN64_RELEASE_PATH(${GIF}/${OS}/${RELEASE_DIR})
 WIN64_RELEASE_BASH("#!/bin/bash 
-cd ${GIF}/${OS}/${RELEASE_DIR} 
+cd /${GIF}/${OS}/${RELEASE_DIR} 
 export PATH=/${MINGW64}/bin:$PATH\;
 export PATH=/${MSYS}/bin:$PATH\;
 ../../configure --disable-shared --enable-static 

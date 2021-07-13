@@ -80,10 +80,9 @@ RASPBERRY_RELEASE_COMMAND(make xml2)
 ##ANDROID_NDK_DEBUG(${XML2_VERSION}b)
 ##ANDROID_NDK_RELEASE(${XML2_VERSION})
 
-##DKREMOVE(${3RDPARTY}/mingw/msys/temp)
 ANDROID_PATH(${XML2}/${OS})
 ANDROID_BASH("#!/bin/bash 
-cd ${XML2}/${OS} 
+cd /${XML2}/${OS}
 export PATH=/${MINGW32}/bin:$PATH\;
 export PATH=/${MSYS}/bin:$PATH\;
 ../configure --disable-shared --enable-static
