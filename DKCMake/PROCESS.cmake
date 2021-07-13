@@ -325,7 +325,7 @@ foreach(plugin ${dkdepend_list})
 		if(ANDROID_32)
 			DKSET(CURRENT_DIR ${PATHTOPLUGIN}/android32)
 			file(MAKE_DIRECTORY ${CURRENT_DIR})
-			ANDROID32_COMMAND(${CMAKE_COMMAND} -G ${GENERATOR} -A ARM -DCMAKE_TOOLCHAIN_FILE=${ANDROID_NDK}/build/cmake/android.toolchain.cmake -DCMAKE_ANDROID_NDK=${ANDROID_NDK} -DANDROID_ABI=armeabi-v7a -DANDROID_NATIVE_API_LEVEL=25 -DANDROID_32=ON -DREBUILD=ON -DDEBUG=ON -DRELEASE=ON ${PATHTOPLUGIN})
+			ANDROID32_COMMAND(${CMAKE_COMMAND} -G ${GENERATOR} -A ARM -DCMAKE_TOOLCHAIN_FILE=${ANDROID_NDK}/build/cmake/android.toolchain.cmake -DCMAKE_ANDROID_NDK=${ANDROID_NDK} -DANDROID_ABI=armeabi-v7a -DANDROID_NATIVE_API_LEVEL=25 -DCMAKE_ANDROID_STL_TYPE=c++_static -DANDROID_32=ON -DREBUILD=ON -DDEBUG=ON -DRELEASE=ON ${PATHTOPLUGIN})
 			if(DEBUG)
 				ANDROID32_COMMAND(${VC_EXE} ${CURRENT_DIR}/${plugin}.sln /p:Configuration=Debug)
 			endif()
@@ -507,7 +507,7 @@ if(WIN_32)
 	#)
 	
 	## Create Icon files for project
-	message("Building icons for ${APP_NAME} . . .")
+	message("Building icons for ${APP_NAME} - ${OS} . . .")
 	DKSET(IMAGEMAGICK_CONVERT ${IMAGEMAGICK_ROOT}/convert.exe)
 	file(MAKE_DIRECTORY ${DKPROJECT}/icons/windows)
 	DKEXECUTE_PROCESS(COMMAND ${IMAGEMAGICK_CONVERT} ${DKPROJECT}/icons/icon.png -define icon:auto-resize=256,128,64,48,32,16 ${DKPROJECT}/icons/windows/icon.ico)
@@ -598,7 +598,7 @@ if(WIN_64)
 	
 	## Create Icon files for project
 	if(${IMAGEMAGICK_ROOT})
-		message("Building icons for ${APP_NAME} . . .")
+		message("Building icons for ${APP_NAME} - ${OS} . . .")
 		DKSET(IMAGEMAGICK_CONVERT ${IMAGEMAGICK_ROOT}/convert.exe)
 		file(MAKE_DIRECTORY ${DKPROJECT}/icons/windows)
 		DKEXECUTE_PROCESS(COMMAND ${IMAGEMAGICK_CONVERT} ${DKPROJECT}/icons/icon.png -define icon:auto-resize=256,128,64,48,32,16 ${DKPROJECT}/icons/windows/icon.ico)
@@ -644,6 +644,11 @@ if(MAC)
 	DKREMOVE(${DKPROJECT}/assets/DKCef/mac64Release)
 	DKREMOVE(${DKPROJECT}/assets/cef.log)
 	DKREMOVE(${DKPROJECT}/assets/log.txt)
+	
+	## ICONS 
+	## // TODO
+	## message("Building icons for ${APP_NAME} - ${OS} . . .")
+	
 	
 	## copy the assets into the bundle resources
 	if(DEBUG)
@@ -702,6 +707,7 @@ if(IOS)
 	DKREMOVE(${DKPROJECT}/assets/log.txt)
 
 	## copy the assets into the app
+	message("Building icons for ${APP_NAME} - ${OS} . . .")
 	if(DEBUG)
 		file(MAKE_DIRECTORY ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app/assets)
 		DKCOPY(${DKPROJECT}/assets/ ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app/assets TRUE)
@@ -769,6 +775,7 @@ if(IOSSIM)
 	DKREMOVE(${DKPROJECT}/assets/log.txt)
 	
 	## copy the assets into the app
+	message("Building icons for ${APP_NAME} - ${OS} . . .")
 	if(DEBUG)
 		file(MAKE_DIRECTORY ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app/assets)
 		DKCOPY(${DKPROJECT}/assets/ ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app/assets TRUE)
@@ -843,6 +850,10 @@ if(LINUX)
 	DKREMOVE(${DKPROJECT}/assets/cef.log)
 	DKREMOVE(${DKPROJECT}/assets/log.txt)
 	
+	##ICONS
+	## TODO
+	## message("Building icons for ${APP_NAME} - ${OS} . . .")
+	
 	message("Creating assets.zip . . .")
 	DKZIP(${DKPROJECT}/assets)
 	
@@ -903,6 +914,10 @@ if(RASPBERRY)
 	#DKREMOVE(${DKPROJECT}/assets/cef.log)
 	DKREMOVE(${DKPROJECT}/assets/log.txt)
 	
+	##ICONS
+	## TODO
+	## message("Building icons for ${APP_NAME} - ${OS} . . .")
+	
 	message("Creating assets.zip . . .")
 	DKZIP(${DKPROJECT}/assets)
 	
@@ -961,6 +976,22 @@ if(ANDROID_32)
 	DKREMOVE(${DKPROJECT}/assets/DKCef/android32release)
 	DKREMOVE(${DKPROJECT}/assets/cef.log)
 	DKREMOVE(${DKPROJECT}/assets/log.txt)
+	
+	
+	//Create Android Icons
+	message("Building icons for ${APP_NAME} - ${OS} . . .")
+    file(MAKE_DIRECTORY ${DKPROJECT}/icons/android)
+    file(MAKE_DIRECTORY ${DKPROJECT}/icons/android/drawable-hdpi)
+    DKEXECUTE_PROCESS(COMMAND ${IMAGEMAGICK_CONVERT} ${DKPROJECT}/icons/icon.png -resize 72x72 ${DKPROJECT}/icons/android/drawable-hdpi/icon.png)
+    file(MAKE_DIRECTORY ${DKPROJECT}/icons/android/drawable-ldpi)
+    DKEXECUTE_PROCESS(COMMAND ${IMAGEMAGICK_CONVERT} ${DKPROJECT}/icons/icon.png -resize 36x36 ${DKPROJECT}/icons/android/drawable-ldpi/icon.png)
+    file(MAKE_DIRECTORY ${DKPROJECT}/icons/android/drawable-mdpi)
+    DKEXECUTE_PROCESS(COMMAND ${IMAGEMAGICK_CONVERT} ${DKPROJECT}/icons/icon.png -resize 48x48 ${DKPROJECT}/icons/android/drawable-mdpi/icon.png)
+    file(MAKE_DIRECTORY ${DKPROJECT}/icons/android/drawable-xhdpi)
+    DKEXECUTE_PROCESS(COMMAND ${IMAGEMAGICK_CONVERT} ${DKPROJECT}/icons/icon.png -resize 96x96 ${DKPROJECT}/icons/android/drawable-xhdpi/icon.png)
+    file(MAKE_DIRECTORY ${DKPROJECT}/icons/android/drawable-xxhdpi)
+    DKEXECUTE_PROCESS(COMMAND ${IMAGEMAGICK_CONVERT} ${DKPROJECT}/icons/icon.png -resize 144x144 ${DKPROJECT}/icons/android/drawable-xxhdpi/icon.png)
+
 	
 	message("Creating assets.zip . . .")
 	DKZIP(${DKPROJECT}/assets) #.zip the assets
