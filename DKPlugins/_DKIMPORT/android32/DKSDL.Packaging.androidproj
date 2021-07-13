@@ -35,7 +35,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <RootNamespace>DKSDL</RootNamespace>
+    <RootNamespace>dkapp</RootNamespace>
+    <MinimumVisualStudioVersion>14.0</MinimumVisualStudioVersion>
     <MinimumVisualStudioVersion>14.0</MinimumVisualStudioVersion>
     <ProjectVersion>1.0</ProjectVersion>
     <ProjectGuid>{e74dde58-8d79-4ae5-b3f7-022cf0bf94ba}</ProjectGuid>
@@ -119,17 +120,17 @@
     </AntPackage>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <Content Include="drawable\background_splash.xml" />
-    <Content Include="drawable\splash.png" />
-    <Content Include="layout\ui_layout_gles.xml" />
-    <Content Include="layout\webview.xml" />
+    <Content Include="res\drawable\background_splash.xml" />
+    <Content Include="res\drawable\splash.png" />
+    <Content Include="res\layout\ui_layout_gles.xml" />
+    <Content Include="res\layout\webview.xml" />
     <Content Include="res\values\strings.xml" />
     <AntBuildXml Include="build.xml" />
     <AndroidManifest Include="AndroidManifest.xml" />
     <AntProjectPropertiesFile Include="project.properties" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DKSDL.vcxproj" />
+    <ProjectReference Include="dkapp.vcxproj" />
   </ItemGroup>
   <Import Project="$(AndroidTargetsPath)\Android.targets" />
   <ImportGroup Label="ExtensionTargets" />

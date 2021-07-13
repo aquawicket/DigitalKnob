@@ -725,67 +725,6 @@ function DKBuild_DoResults(){
 		}
 	}
 	
-	////// ANDROID32 /////
-	if(OS === "android32"){
-		DKBuild_ValidateNDK();
-		DKBuild_ValidateVC2019();
-		CPP_DKFile_MkDir(DKPATH+appdir+"/"+APP+"/android32");
-		CPP_DKFile_ChDir(DKPATH+appdir+"/"+APP+"/android32");
-		let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Visual Studio 16 2019\" -A ARM -DCMAKE_TOOLCHAIN_FILE="+NDK+"/build/cmake/android.toolchain.cmake -DANDROID_NDK="+NDK+" -DANDROID_ABI=armeabi-v7a -DANDROID_NATIVE_API_LEVEL=24 –DCMAKE_SYSTEM_NAME=ANDROID "+cmake_string+DKPATH+"DK");
-		/*
-		if(TYPE === "Debug" || TYPE === "ALL"){
-			CPP_DKFile_MkDir(DKPATH+appdir+"/"+APP+"/android32/Debug");
-			CPP_DKFile_ChDir(DKPATH+appdir+"/"+APP+"/android32/Debug");
-			if(CPP_DK_GetOS() === "Windows")
-				let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Visual Studio 16 2019\" -A ARM -DCMAKE_TOOLCHAIN_FILE="+NDK+"/build/cmake/android.toolchain.cmake -DANDROID_NDK="+NDK+" -DANDROID_ABI=armeabi-v7a -DANDROID_NATIVE_API_LEVEL=29 –DCMAKE_SYSTEM_NAME=ANDROID "+cmake_string+DKPATH+"DK");
-			if(CPP_DK_GetOS() === "Linux" || CPP_DK_GetOS() === "Mac")
-				rtvalue = CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DKPATH+"DK");
-			if(rtvalue.indexOf("errors occurred!") > -1) 
-				return; 
-			CPP_DK_Execute(NDK+"/ndk-build.cmd NDK_DEBUG=1 NDKLOG=1");
-		}
-		if(TYPE === "Release" || TYPE === "ALL"){
-			CPP_DKFile_MkDir(DKPATH+appdir+"/"+APP+"/android32/Release");
-			CPP_DKFile_ChDir(DKPATH+appdir+"/"+APP+"/android32/Release");
-			if(CPP_DK_GetOS() === "Windows")
-				//let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Visual Studio 16 2019\" -A ARM -DCMAKE_TOOLCHAIN_FILE="+NDK+"/build/cmake/android.toolchain.cmake -DANDROID_NDK="+NDK+" -DANDROID_ABI=armeabi-v7a -DANDROID_NATIVE_API_LEVEL=29 –DCMAKE_SYSTEM_NAME=ANDROID "+cmake_string+DKPATH+"DK");
-			if(CPP_DK_GetOS() === "Linux" || CPP_DK_GetOS() === "Mac")
-				rtvalue = CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DKPATH+"DK");
-			if(rtvalue.indexOf("errors occurred!") > -1)
-				return; 
-			CPP_DK_Execute(NDK+"/ndk-build.cmd NDK_DEBUG=0 NDKLOG=1")
-		}
-		*/
-	}
-	
-	////// ANDROID64 /////
-	if(OS === "android64"){
-		DKBuild_ValidateNDK();
-		DKBuild_ValidateVC2019();
-		CPP_DKFile_MkDir(DKPATH+appdir+"/"+APP+"/android64");
-		if(TYPE === "Debug" || TYPE === "ALL"){
-			CPP_DKFile_MkDir(DKPATH+appdir+"/"+APP+"/android64/Debug");
-			CPP_DKFile_ChDir(DKPATH+appdir+"/"+APP+"/android64/Debug");
-			if(CPP_DK_GetOS() === "Windows")
-				let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Visual Studio 16 2019\" -A ARM -DCMAKE_TOOLCHAIN_FILE="+NDK+"/build/cmake/android.toolchain.cmake -DANDROID_NDK="+NDK+" -DANDROID_ABI=arm64-v8a -DANDROID_NATIVE_API_LEVEL=29 –DCMAKE_SYSTEM_NAME=ANDROID "+cmake_string+DKPATH+"DK");
-			if(rtvalue.indexOf("errors occurred!") > -1)
-				return; 
-			CPP_DK_Execute(NDK+"/ndk-build.cmd NDK_DEBUG=1 NDKLOG=1");
-		}
-		if(TYPE === "Release" || TYPE === "ALL"){
-			CPP_DKFile_MkDir(DKPATH+appdir+"/"+APP+"/android64/Release");
-			CPP_DKFile_ChDir(DKPATH+appdir+"/"+APP+"/android64/Release");
-			if(CPP_DK_GetOS() === "Windows")
-				let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Visual Studio 16 2019\" -A ARM64 -DCMAKE_TOOLCHAIN_FILE="+NDK+"/build/cmake/android.toolchain.cmake -DANDROID_NDK="+NDK+" -DANDROID_ABI=arm64-v8a -DANDROID_NATIVE_API_LEVEL=29 –DCMAKE_SYSTEM_NAME=ANDROID "+cmake_string+DKPATH+"DK");
-			if(CPP_DK_GetOS() === "Linux" || CPP_DK_GetOS() === "Mac")
-				rtvalue = CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DKPATH+"DK");
-			if(rtvalue.indexOf("errors occurred!") > -1) 
-				return;
-			CPP_DK_Execute(NDK+"/ndk-build.cmd NDK_DEBUG=0 NDKLOG=1")
-		}
-	}
-	
-	
 	//// RASPBERRY32 ///////
 	if(OS === "raspberry32"){
 		DKBuild_ValidateGcc();
@@ -875,6 +814,68 @@ function DKBuild_DoResults(){
 			CPP_DKFile_StringToFile(string, DKPATH+appdir+"/"+APP+"/raspberry64/Release/"+APP+".desktop");
 		}
 	}
+	
+	////// ANDROID32 /////
+	if(OS === "android32"){
+		DKBuild_ValidateNDK();
+		DKBuild_ValidateVC2019();
+		CPP_DKFile_MkDir(DKPATH+appdir+"/"+APP+"/android32");
+		CPP_DKFile_ChDir(DKPATH+appdir+"/"+APP+"/android32");
+		let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Visual Studio 16 2019\" -A ARM -DCMAKE_TOOLCHAIN_FILE="+NDK+"/build/cmake/android.toolchain.cmake -DANDROID_NDK="+NDK+" -DANDROID_ABI=armeabi-v7a -DANDROID_NATIVE_API_LEVEL=24 –DCMAKE_SYSTEM_NAME=ANDROID "+cmake_string+DKPATH+"DK");
+		
+		if(TYPE === "Debug" || TYPE === "ALL"){
+			CPP_DKFile_MkDir(DKPATH+appdir+"/"+APP+"/android32/androidDebug");
+			CPP_DKFile_ChDir(DKPATH+appdir+"/"+APP+"/android32/androidDebug");
+			if(CPP_DK_GetOS() === "Windows")
+				let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Visual Studio 16 2019\" -A ARM -DCMAKE_TOOLCHAIN_FILE="+NDK+"/build/cmake/android.toolchain.cmake -DANDROID_NDK="+NDK+" -DANDROID_ABI=armeabi-v7a -DANDROID_NATIVE_API_LEVEL=25 –DCMAKE_SYSTEM_NAME=ANDROID -DCMAKE_BUILD_TYPE=Debug "+cmake_string+DKPATH+"DK");
+			if(CPP_DK_GetOS() === "Linux" || CPP_DK_GetOS() === "Mac")
+				rtvalue = CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DKPATH+"DK");
+			if(rtvalue.indexOf("errors occurred!") > -1) 
+				return; 
+			//CPP_DK_Execute(NDK+"/ndk-build.cmd NDK_DEBUG=1 NDKLOG=1");
+		}
+		if(TYPE === "Release" || TYPE === "ALL"){
+			CPP_DKFile_MkDir(DKPATH+appdir+"/"+APP+"/android32/androidRelease");
+			CPP_DKFile_ChDir(DKPATH+appdir+"/"+APP+"/android32/androidRelease");
+			if(CPP_DK_GetOS() === "Windows")
+				let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Visual Studio 16 2019\" -A ARM -DCMAKE_TOOLCHAIN_FILE="+NDK+"/build/cmake/android.toolchain.cmake -DANDROID_NDK="+NDK+" -DANDROID_ABI=armeabi-v7a -DANDROID_NATIVE_API_LEVEL=25 –DCMAKE_SYSTEM_NAME=ANDROID -DCMAKE_BUILD_TYPE=Release "+cmake_string+DKPATH+"DK");
+			if(CPP_DK_GetOS() === "Linux" || CPP_DK_GetOS() === "Mac")
+				rtvalue = CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DKPATH+"DK");
+			if(rtvalue.indexOf("errors occurred!") > -1)
+				return; 
+			//CPP_DK_Execute(NDK+"/ndk-build.cmd NDK_DEBUG=0 NDKLOG=1")
+		}
+
+	}
+	
+	////// ANDROID64 /////
+	if(OS === "android64"){
+		DKBuild_ValidateNDK();
+		DKBuild_ValidateVC2019();
+		CPP_DKFile_MkDir(DKPATH+appdir+"/"+APP+"/android64");
+		if(TYPE === "Debug" || TYPE === "ALL"){
+			CPP_DKFile_MkDir(DKPATH+appdir+"/"+APP+"/android64/Debug");
+			CPP_DKFile_ChDir(DKPATH+appdir+"/"+APP+"/android64/Debug");
+			if(CPP_DK_GetOS() === "Windows")
+				let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Visual Studio 16 2019\" -A ARM -DCMAKE_TOOLCHAIN_FILE="+NDK+"/build/cmake/android.toolchain.cmake -DANDROID_NDK="+NDK+" -DANDROID_ABI=arm64-v8a -DANDROID_NATIVE_API_LEVEL=29 –DCMAKE_SYSTEM_NAME=ANDROID "+cmake_string+DKPATH+"DK");
+			if(rtvalue.indexOf("errors occurred!") > -1)
+				return; 
+			CPP_DK_Execute(NDK+"/ndk-build.cmd NDK_DEBUG=1 NDKLOG=1");
+		}
+		if(TYPE === "Release" || TYPE === "ALL"){
+			CPP_DKFile_MkDir(DKPATH+appdir+"/"+APP+"/android64/Release");
+			CPP_DKFile_ChDir(DKPATH+appdir+"/"+APP+"/android64/Release");
+			if(CPP_DK_GetOS() === "Windows")
+				let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Visual Studio 16 2019\" -A ARM64 -DCMAKE_TOOLCHAIN_FILE="+NDK+"/build/cmake/android.toolchain.cmake -DANDROID_NDK="+NDK+" -DANDROID_ABI=arm64-v8a -DANDROID_NATIVE_API_LEVEL=29 –DCMAKE_SYSTEM_NAME=ANDROID "+cmake_string+DKPATH+"DK");
+			if(CPP_DK_GetOS() === "Linux" || CPP_DK_GetOS() === "Mac")
+				rtvalue = CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DKPATH+"DK");
+			if(rtvalue.indexOf("errors occurred!") > -1) 
+				return;
+			CPP_DK_Execute(NDK+"/ndk-build.cmd NDK_DEBUG=0 NDKLOG=1")
+		}
+	}
+	
+	
 	
 	console.log("\n");
 	console.log("********************************************");

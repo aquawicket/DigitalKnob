@@ -1024,7 +1024,7 @@ if(ANDROID_32)
 	## Look in the folder C:\Users\aquawicket\source\repos\AppName\AppName\AppName.Packaging
 	## This is how we will generate our .apk file
 
-
+	
 endif()
 
 
