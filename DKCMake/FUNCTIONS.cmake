@@ -782,7 +782,7 @@ function(WIN_BASH arg)
 	if(WIN AND QUEUE_BUILD)
 		file(WRITE ${3RDPARTY}/mingw/msys/temp.sh ${arg})
 		message("COMMAND -> ${arg}")
-		DKEXECUTE_PROCESS(COMMAND cmd /c ${3RDPARTY}/mingw/msys/bin/bash /${MSYS}/temp.sh)
+		DKEXECUTE_PROCESS(COMMAND cmd /c ${3RDPARTY}/mingw/msys/bin/bash /${MSYS}/temp.sh WORKING_DIRECTORY ${MSYS})
 	endif()
 endfunction()
 
