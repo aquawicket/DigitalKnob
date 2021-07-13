@@ -35,7 +35,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <RootNamespace>dkapp</RootNamespace>
+    <RootNamespace>DKSDL</RootNamespace>
     <MinimumVisualStudioVersion>14.0</MinimumVisualStudioVersion>
     <MinimumVisualStudioVersion>14.0</MinimumVisualStudioVersion>
     <ProjectVersion>1.0</ProjectVersion>
@@ -120,12 +120,12 @@
     </AntPackage>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <JavaCompile Include="src\digitalknob\dkapp\DK.java" />
-	<JavaCompile Include="src\digitalknob\dkapp\DKMain.java" />
-	<JavaCompile Include="src\digitalknob\dkapp\EGLview.java" />
-	<JavaCompile Include="src\digitalknob\dkapp\SDLActivity.java" />
-	<JavaCompile Include="src\digitalknob\dkapp\SplashActivity.java" />
-	<JavaCompile Include="src\digitalknob\dkapp\WebviewActivity.java" />
+    <JavaCompile Include="src\digitalknob\DKSDL\DK.java" />
+	<JavaCompile Include="src\digitalknob\DKSDL\DKMain.java" />
+	<JavaCompile Include="src\digitalknob\DKSDL\EGLview.java" />
+	<JavaCompile Include="src\digitalknob\DKSDL\SDLActivity.java" />
+	<JavaCompile Include="src\digitalknob\DKSDL\SplashActivity.java" />
+	<JavaCompile Include="src\digitalknob\DKSDL\WebviewActivity.java" />
     <Content Include="res\drawable\background_splash.xml" />
     <Content Include="res\drawable\splash.png" />
     <Content Include="res\layout\ui_layout_gles.xml" />
@@ -136,7 +136,7 @@
     <AntProjectPropertiesFile Include="project.properties" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="dkapp.vcxproj" />
+    <ProjectReference Include="DKSDL.vcxproj" />
   </ItemGroup>
   <Import Project="$(AndroidTargetsPath)\Android.targets" />
   <ImportGroup Label="ExtensionTargets" />
