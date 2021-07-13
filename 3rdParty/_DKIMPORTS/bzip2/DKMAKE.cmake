@@ -54,7 +54,7 @@ if(WIN_32)
 	endif()
 
 WIN32_BASH("#!/bin/bash\;
-cd ${BZIP2}/${OS}\;
+cd /${BZIP2}/${OS}\;
 export PATH=/${MINGW32}/bin:$PATH\;
 export PATH=/${MSYS}/bin:$PATH\;
 make CFLAGS='-static-libgcc'\;
@@ -73,7 +73,7 @@ IF(WIN_64)
 	ENDIF()
 
 WIN64_BASH("#!/bin/bash\;
-cd ${BZIP2}/${OS}\;
+cd /${BZIP2}/${OS}\;
 export PATH=/${MINGW64}/bin:$PATH\;
 export PATH=/${MSYS}/bin:$PATH\;
 make CFLAGS='-m64 -static-libgcc'\;

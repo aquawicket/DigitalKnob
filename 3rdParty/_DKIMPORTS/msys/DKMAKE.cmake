@@ -10,4 +10,4 @@ IF(NOT EXISTS ${3RDPARTY}/mingw/msys)
 ENDIF()
 
 DKSET(MSYS ${3RDPARTY}/mingw/msys)
-string(REPLACE ":" "" MSYS ${MSYS})
+##string(REPLACE ":" "" MSYS ${MSYS})

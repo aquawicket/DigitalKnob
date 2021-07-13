@@ -1,6 +1,5 @@
 ### VERSION ###
 DKSET(MINGW64 ${3RDPARTY}/mingw/mingw64)
-DKSET(MINGW64_VS ${3RDPARTY}/mingw/mingw64)
 
 ### INSTALL ###
 IF(NOT EXISTS ${3RDPARTY}/mingw/mingw64)
@@ -8,4 +7,4 @@ IF(NOT EXISTS ${3RDPARTY}/mingw/mingw64)
 	DKDOWNLOAD(https://sourceforge.net/projects/mingw-w64/files/Toolchains%20targetting%20Win64/Personal%20Builds/mingw-builds/4.9.2/threads-posix/seh/x86_64-4.9.2-release-posix-seh-rt_v3-rev1.7z)
 	DKEXTRACT(${DIGITALKNOB}/Download/x86_64-4.9.2-release-posix-seh-rt_v3-rev1.7z ${3RDPARTY}/mingw)
 ENDIF()
-string(REPLACE ":" "" MINGW64 ${MINGW64})
+##string(REPLACE ":" "" MINGW64 ${MINGW64})
