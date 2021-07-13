@@ -120,6 +120,12 @@
     </AntPackage>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <JavaCompile Include="src\digitalknob\dkapp\DK.java" />
+	<JavaCompile Include="src\digitalknob\dkapp\DKMain.java" />
+	<JavaCompile Include="src\digitalknob\dkapp\EGLview.java" />
+	<JavaCompile Include="src\digitalknob\dkapp\SDLActivity.java" />
+	<JavaCompile Include="src\digitalknob\dkapp\SplashActivity.java" />
+	<JavaCompile Include="src\digitalknob\dkapp\WebviewActivity.java" />
     <Content Include="res\drawable\background_splash.xml" />
     <Content Include="res\drawable\splash.png" />
     <Content Include="res\layout\ui_layout_gles.xml" />
