@@ -1026,10 +1026,79 @@ if(ANDROID_32)
 	## Look at the native c++ android hello world app in Visual Studio
 	## Look in the folder C:\Users\aquawicket\source\repos\AppName\AppName\AppName.Packaging
 	## This is how we will generate our .apk file
-
 	
 endif()
 
+##############
+if(ANDROID_64)
+	DKSET(DEBUG_DIR androidDebug)
+	DKSET(RELEASE_DIR androidRelease)
+	
+	# Copy the icon to ${DKPROJECT}/assets
+	DKCOPY(${DKPROJECT}/icons/icon.png ${DKPROJECT}/assets/icon.png TRUE)
+	
+	# backup generated files and folders not going in the package
+	DKCOPY(${DKPROJECT}/assets/USER ${DKPROJECT}/Backup/USER TRUE)
+	DKCOPY(${DKPROJECT}/assets/DKCef/android64Debug ${DKPROJECT}/Backup/DKCef/android64Debug TRUE)
+	DKCOPY(${DKPROJECT}/assets/DKCef/android64Release ${DKPROJECT}/Backup/DKCef/android64Release TRUE)
+	DKCOPY(${DKPROJECT}/assets/cef.log ${DKPROJECT}/Backup/cef.log TRUE)
+	DKCOPY(${DKPROJECT}/assets/log.txt ${DKPROJECT}/Backup/log.txt TRUE)
+	
+	# remove generated files and folders before packaging
+	DKREMOVE(${DKPROJECT}/assets/USER)
+	DKREMOVE(${DKPROJECT}/assets/DKCef/android64Debug)
+	DKREMOVE(${DKPROJECT}/assets/DKCef/android64release)
+	DKREMOVE(${DKPROJECT}/assets/cef.log)
+	DKREMOVE(${DKPROJECT}/assets/log.txt)
+	
+	
+	## Create Android Icons
+	message("Building icons for ${APP_NAME} - ${OS} . . .")
+    file(MAKE_DIRECTORY ${DKPROJECT}/icons/android)
+    file(MAKE_DIRECTORY ${DKPROJECT}/icons/android/drawable-hdpi)
+    DKEXECUTE_PROCESS(COMMAND ${IMAGEMAGICK_CONVERT} ${DKPROJECT}/icons/icon.png -resize 72x72 ${DKPROJECT}/icons/android/drawable-hdpi/icon.png)
+    file(MAKE_DIRECTORY ${DKPROJECT}/icons/android/drawable-ldpi)
+    DKEXECUTE_PROCESS(COMMAND ${IMAGEMAGICK_CONVERT} ${DKPROJECT}/icons/icon.png -resize 36x36 ${DKPROJECT}/icons/android/drawable-ldpi/icon.png)
+    file(MAKE_DIRECTORY ${DKPROJECT}/icons/android/drawable-mdpi)
+    DKEXECUTE_PROCESS(COMMAND ${IMAGEMAGICK_CONVERT} ${DKPROJECT}/icons/icon.png -resize 48x48 ${DKPROJECT}/icons/android/drawable-mdpi/icon.png)
+    file(MAKE_DIRECTORY ${DKPROJECT}/icons/android/drawable-xhdpi)
+    DKEXECUTE_PROCESS(COMMAND ${IMAGEMAGICK_CONVERT} ${DKPROJECT}/icons/icon.png -resize 96x96 ${DKPROJECT}/icons/android/drawable-xhdpi/icon.png)
+    file(MAKE_DIRECTORY ${DKPROJECT}/icons/android/drawable-xxhdpi)
+    DKEXECUTE_PROCESS(COMMAND ${IMAGEMAGICK_CONVERT} ${DKPROJECT}/icons/icon.png -resize 144x144 ${DKPROJECT}/icons/android/drawable-xxhdpi/icon.png)
+
+	
+	message("Creating assets.zip . . .")
+	DKZIP(${DKPROJECT}/assets) #.zip the assets
+	
+	message("Creating assets.h . . .")
+	bin2h(SOURCE_FILE ${DKPROJECT}/assets.zip HEADER_FILE ${DKPROJECT}/assets.h VARIABLE_NAME "ASSETS_H")
+	
+	# Restore the backed up assets
+	DKCOPY(${DKPROJECT}/Backup/ ${DKPROJECT}/assets/ TRUE)
+	DKREMOVE(${DKPROJECT}/Backup)
+	#############################
+	
+	DKUPDATE_ANDROID_NAME(${APP_NAME})
+	
+	set(CMAKE_ANDROID_GUI TRUE)
+	set(CMAKE_CXX_FLAGS "-std=c++14")
+	set(CMAKE_ANDROID_STL_TYPE c++_static)
+	
+	add_library(${APP_NAME} SHARED ${App_SRC})
+	
+	if(DEBUG)
+		add_definitions(-DDEBUG)
+		target_link_libraries(${APP_NAME} ${DEBUG_LIBS})
+	else()
+		target_link_libraries(${APP_NAME} ${RELEASE_LIBS})
+	endif()
+	
+	## NOTE:
+	## Look at the native c++ android hello world app in Visual Studio
+	## Look in the folder C:\Users\aquawicket\source\repos\AppName\AppName\AppName.Packaging
+	## This is how we will generate our .apk file
+	
+endif()
 
 ###########
 #if(ANDROID)
