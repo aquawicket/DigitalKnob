@@ -960,6 +960,9 @@ endif()
 
 ##############
 if(ANDROID_32)
+	DKSET(DEBUG_DIR androidDebug)
+	DKSET(RELEASE_DIR androidRelease)
+	
 	# Copy the icon to ${DKPROJECT}/assets
 	DKCOPY(${DKPROJECT}/icons/icon.png ${DKPROJECT}/assets/icon.png TRUE)
 	
