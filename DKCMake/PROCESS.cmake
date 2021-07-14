@@ -1112,16 +1112,8 @@ endif()
 
 ###########
 #if(ANDROID)
-#	message("\n")
-#	message("#### LIBRARIES #####")
-#	message("${DKLIBRARIES}")
-#	message("\n")
 #
 #	#copy android files from DKPlugins/_DKIMPORT
-#	DKREMOVE(${DKPROJECT}/android32/Debug/CMakeCache.txt)
-#	DKREMOVE(${DKPROJECT}/android32/Release/CMakeCache.txt)
-#	DKREMOVE(${DKPROJECT}/android64/Debug/CMakeCache.txt)
-#	DKREMOVE(${DKPROJECT}/android64/Release/CMakeCache.txt)
 #	
 #	#copy assets
 #	DKREMOVE(${DKPROJECT}/assets/USER)
@@ -1133,8 +1125,6 @@ endif()
 #		DKCOPY(${DKPROJECT}/assets/ ${DKPROJECT}/${OS}/${RELEASE_DIR}/assets TRUE)
 #		DKCOPY(${DKPROJECT}/icons/android/ ${DKPROJECT}/${OS}/${RELEASE_DIR}/res TRUE)
 #	endif()
-#	
-#	##TODO - split Debug and Release 
 #	
 #	#update app name
 #	DKUPDATE_ANDROID_NAME(${APP_NAME})
