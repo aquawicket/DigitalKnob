@@ -1400,6 +1400,14 @@ function(MAC_XCODE_RELEASE arg)
 	endif()
 endfunction()
 
+## UNTESTED
+function(MAC_XCODE arg)
+	if(MAC AND QUEUE_BUILD)
+		MAC_XCODE_DEBUG(${arg})
+		MAC_XCODE_RELEASE(${arg})
+	endif()
+endfunction()
+
 function(MAC32_XCODE_DEBUG arg)
 	if(MAC_32 AND DEBUG AND QUEUE_BUILD)
 		set(extra_args ${ARGN})
@@ -1476,6 +1484,14 @@ function(IOS_XCODE_RELEASE arg)
 		else()
 			DKEXECUTE_PROCESS(COMMAND xcodebuild -configuration Release build WORKING_DIRECTORY ${3RDPARTY}/${arg}/${OS})
 		endif()
+	endif()
+endfunction()
+
+## UNTESTED
+function(IOS_XCODE arg)
+	if(IOS AND QUEUE_BUILD)
+		IOS_XCODE_DEBUG(${arg})
+		IOS_XCODE_RELEASE(${arg})
 	endif()
 endfunction()
 
@@ -1558,6 +1574,14 @@ function(IOSSIM_XCODE_RELEASE arg)
 	endif()
 endfunction()
 
+## UNTESTED
+function(IOSSIM_XCODE arg)
+	if(IOSSIM AND QUEUE_BUILD)
+		IOSSIM_XCODE_DEBUG(${arg})
+		IOSSIM_XCODE_RELEASE(${arg})
+	endif()
+endfunction()
+
 function(IOSSIM32_XCODE_DEBUG arg)
 	if(IOSSIM_32 AND DEBUG AND QUEUE_BUILD)
 		set(extra_args ${ARGN})
@@ -1631,6 +1655,14 @@ function(ANDROID_NDK_RELEASE arg)
 		if(CMAKE_HOST_UNIX)
 			DKEXECUTE_PROCESS(COMMAND ${ANDROID_NDK}/ndk-build WORKING_DIRECTORY ${3RDPARTY}/${arg}/${OS}/Release)
 		endif()
+	endif()
+endfunction()
+
+## UNTESTED
+function(ANDROID_NDK arg)
+	if(ANDROID AND QUEUE_BUILD)
+		ANDROID_NDK_DEBUG(${arg})
+		ANDROID_NDK_RELEASE(${arg})
 	endif()
 endfunction()
 
