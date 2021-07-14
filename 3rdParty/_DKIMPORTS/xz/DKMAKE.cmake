@@ -14,18 +14,19 @@ ENDIF()
 
 ### VERSION ###
 DKSET(XZ_VERSION 5.2.5)
-DKSET(XZ ${3RDPARTY}/xz-${XZ_VERSION})
+DKSET(XZ_NAME xz-${XZ_VERSION})
+DKSET(XZ ${3RDPARTY}/${XZ_NAME})
 
 
 
 ### INSTALL ###
 ## https://github.com/xz-mirror/xz/archive/refs/tags/v5.2.5.zip
-## DKINSTALL(https://astuteinternet.dl.sourceforge.net/project/lzmautils/xz-${XZ_VERSION}.tar.gz xz xz-${XZ_VERSION})
+## DKINSTALL(https://astuteinternet.dl.sourceforge.net/project/lzmautils/${XZ_NAME}.tar.gz xz ${XZ_NAME})
 
 if(NOT LINUX_32)
-	DKINSTALL(https://github.com/xz-mirror/xz/archive/refs/tags/v${XZ_VERSION}.zip xz xz-${XZ_VERSION})
+	DKINSTALL(https://github.com/xz-mirror/xz/archive/refs/tags/v${XZ_VERSION}.zip xz ${XZ_NAME})
 else()
-	DKINSTALL(https://tukaani.org/xz/xz-${XZ_VERSION}.tar.gz xz xz-${XZ_VERSION})
+	DKINSTALL(https://tukaani.org/xz/${XZ_NAME}.tar.gz xz ${XZ_NAME})
 endif()
 
 
@@ -61,35 +62,32 @@ DKSET(XZ_ANDROID -DANDROID_COMPILER_FLAGS=-DLZMA_API_STATIC -DLIBLZMA_INCLUDE_DI
 WIN_PATH(${XZ}/${OS})
 WIN32_COMMAND(${DKCMAKE_WIN32} ${XZ})
 WIN64_COMMAND(${DKCMAKE_WIN64} ${XZ})
-WIN_VS(xz-${XZ_VERSION} xz.sln liblzma)
+WIN_VS(${XZ_NAME} xz.sln liblzma)
 
 
 MAC_PATH(${XZ}/${OS})
-MAC64_COMMAND(${CMAKE_COMMAND} -G "Xcode" -DCMAKE_OSX_ARCHITECTURES=x86_64 ${XZ})
-MAC_XCODE_DEBUG(xz-${XZ_VERSION} liblzma)
-MAC_XCODE_RELEASE(xz-${XZ_VERSION} liblzma)
-#MAC_PATH(${XZ}/${OS}/${DEBUG_DIR})
+MAC64_COMMAND(${DKCMAKE_MAC64} ${XZ})
+MAC_XCODE(${XZ_NAME} liblzma)
+#MAC_DEBUG_PATH(${XZ}/${OS}/${DEBUG_DIR})
 #MAC_DEBUG_COMMAND(../../configure --disable-shared --enable-static)
 #MAC_DEBUG_COMMAND(make "CXXFLAGS=-arch x86_64" "CFLAGS=-arch x86_64" "LDFLAGS=-arch x86_64")
-#MAC_PATH(${XZ}/${OS}/${RELEASE_DIR})
+#MAC_RELEASE_PATH(${XZ}/${OS}/${RELEASE_DIR})
 #MAC_RELEASE_COMMAND(../../configure --disable-shared --enable-static)
 #MAC_RELEASE_COMMAND(make "CXXFLAGS=-arch x86_64" "CFLAGS=-arch x86_64" "LDFLAGS=-arch x86_64")
 
 
 IOS_PATH(${XZ}/${OS})
-IOS_COMMAND(${CMAKE_COMMAND} -G "Xcode" -DCMAKE_TOOLCHAIN_FILE=${DKCMAKE}/iOS.cmake -DIOS_PLATFORM=OS ${XZ})
-IOS_XCODE_DEBUG(xz-${XZ_VERSION} liblzma)
-IOS_XCODE_RELEASE(xz-${XZ_VERSION} liblzma)
+IOS64_COMMAND(${DKCMAKE_IOS64} ${XZ})
+IOS_XCODE(${XZ_NAME} liblzma)
 
 
 IOSSIM_PATH(${XZ}/${OS})
-IOSSIM64_COMMAND(${CMAKE_COMMAND} -G "Xcode" -DCMAKE_TOOLCHAIN_FILE=${DKCMAKE}/iOS.cmake -DIOS_PLATFORM=SIMULATOR64 ${XZ})
-IOSSIM_XCODE_DEBUG(xz-${XZ_VERSION} liblzma)
-IOSSIM_XCODE_RELEASE(xz-${XZ_VERSION} liblzma)
-## IOSSIM_PATH(${XZ}/${OS}/${DEBUG_DIR})
+IOSSIM64_COMMAND(${DKCMAKE_IOSSIM64} ${XZ})
+IOSSIM_XCODE_RELEASE(${XZ_NAME} liblzma)
+## IOSSIM_DEBUG_PATH(${XZ}/${OS}/${DEBUG_DIR})
 ## IOSSIM_DEBUG_COMMAND(../../configure --disable-shared --enable-static)
 ## IOSSIM_DEBUG_COMMAND(make)
-## IOSSIM_PATH(${XZ}/${OS}/${RELEASE_DIR})
+## IOSSIM_RELEASE_PATH(${XZ}/${OS}/${RELEASE_DIR})
 ## IOSSIM_RELEASE_COMMAND(../../configure --disable-shared --enable-static)
 ## IOSSIM_RELEASE_COMMAND(make)
 
@@ -107,18 +105,18 @@ LINUX_RELEASE_COMMAND(make liblzma)
 
 
 RASPBERRY_DEBUG_PATH(${XZ}/${OS}/${DEBUG_DIR})
-#RASPBERRY_DEBUG_COMMAND(../../configure --disable-shared --enable-static)
+RASPBERRY_DEBUG_COMMAND(../../configure --disable-shared --enable-static)
 RASPBERRY_DEBUG_COMMAND(${CMAKE_COMMAND} -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=DEBUG ${XZ})
 RASPBERRY_DEBUG_COMMAND(make liblzma)
 
 RASPBERRY_RELEASE_PATH(${XZ}/${OS}/${RELEASE_DIR})
-#RASPBERRY_RELEASE_COMMAND(../../configure --disable-shared --enable-static)
+RASPBERRY_RELEASE_COMMAND(../../configure --disable-shared --enable-static)
 RASPBERRY_RELEASE_COMMAND(${CMAKE_COMMAND} -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=RELEASE ${XZ})
 RASPBERRY_RELEASE_COMMAND(make liblzma)
 
 
-##ANDROID_NDK_DEBUG(xz-${XZ_VERSION})
-##ANDROID_NDK_RELEASE(xz-${XZ_VERSION})
+##ANDROID_NDK_DEBUG(${XZ_NAME})
+##ANDROID_NDK_RELEASE(${XZ_NAME})
 
 ##ANDROID_DEBUG_COMMAND(../../configure --disable-shared --enable-static)
 ##ANDROID_DEBUG_COMMAND(make)
@@ -128,4 +126,4 @@ RASPBERRY_RELEASE_COMMAND(make liblzma)
 ANDROID_PATH(${XZ}/${OS})
 ANDROID32_COMMAND(${DKCMAKE_ANDROID32} ${XZ})
 ANDROID64_COMMAND(${DKCMAKE_ANDROID64} ${XZ})
-ANDROID_VS(xz-${XZ_VERSION} xz.sln liblzma)
+ANDROID_VS(${XZ_NAME} xz.sln liblzma)
