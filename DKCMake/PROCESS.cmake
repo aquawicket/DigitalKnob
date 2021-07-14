@@ -1093,22 +1093,11 @@ if(ANDROID_64)
 	set(CMAKE_ANDROID_GUI TRUE)
 	set(CMAKE_CXX_FLAGS "-std=c++14")
 	set(CMAKE_ANDROID_STL_TYPE c++_static)
-	
-	##add_library(${APP_NAME} SHARED ${App_SRC})
+
 	add_executable(${APP_NAME} ${App_SRC})
-	
-	#if(DEBUG)
-		add_definitions(-DDEBUG)
-		#target_link_libraries(${APP_NAME} ${DEBUG_LIBS})
-	#else()
-		target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS})
-	#endif()
-	
-	## NOTE:
-	## Look at the native c++ android hello world app in Visual Studio
-	## Look in the folder C:\Users\aquawicket\source\repos\AppName\AppName\AppName.Packaging
-	## This is how we will generate our .apk file
-	
+	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS})
+
+	##DUMP("${DKINCLUDES_LIST}")
 endif()
 
 ###########
