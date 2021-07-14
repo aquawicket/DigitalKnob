@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello">Hello World, DigitalKnob on Android!</string>
+    <string name="app_name">DKSDL</string>
+    <color name="uiControlBar">#BBBBBB</color>
+    <string name="uiButtonLight">Light (ON/OFF)</string>
+    <string name="uiButtonCenter">Center View</string>
+    <string name="uiButtonChangeNavigation">Change Navigation</string>
+    <string name="uiTextEntryText">Write address</string>
+    <string name="uiToastNavPrincipal">Main navigation</string>
+    <string name="uiToastNavSecond">Second Navigation</string>
+    <string name="uiToastLightOn">Light ON</string>
+    <string name="uiToastLightOff">Light OFF</string>
+    <string name="menuLoadObject">Load Object</string>
+    <string name="menuLoadObjectCondensed">L. Object</string>
+    <string name="menuDeleteObject">Delete Object</string>
+    <string name="menuDeleteObjectCondensed">D. Object</string>
+    <string name="menuCleanScene">Clean Scene</string>
+    <string name="menuCleanSceneCondensed">Clean</string>
+    <string name="menuChangeBackground">Change Background</string>
+    <string name="menuChangeBackgroundCondensed">C.Background</string>
+    <string name="menuShowKeyboard">Show Keyboard</string>
+    <string name="menuShowKeyboardCondensed">S.Keyboard</string>
+    <string name="uiDialogTextChoseRemove">Select Object</string>
+    <string name="uiDialogTextAddress">Write file address</string>
+    <string name="uiDialogOk">Accept</string>
+    <string name="uiDialogCancel">Cancel</string>
+	<color name="black">#000000</color>
+	<color name="white">#FFFFFF</color>
+	<color name="darkBlue">#303F9F</color>
+	<style name="SplashTheme" parent="android:Theme.Black.NoTitleBar.Fullscreen">
+        <item name="android:windowBackground">@drawable/background_splash</item>
+    </style>
+	<style name="Theme.Transparent" parent="android:Theme">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:backgroundDimEnabled">false</item>
+    </style>
+</resources>
