@@ -27,5 +27,5 @@ IF(NOT EXISTS "C:/Program Files (x86)/Microsoft Visual Studio/${VISUALSTUDIO_VER
 	## https://download.visualstudio.microsoft.com/download/pr/5e397ebe-38b2-4e18-a187-ac313d07332a/169156e6e9a005d49b357c42240184dc1e3ccc28ebc777e70d49257c074f77e8/vs_Community.exe
 	DKDOWNLOAD(https://download.visualstudio.microsoft.com/download/pr/5e397ebe-38b2-4e18-a187-ac313d07332a/169156e6e9a005d49b357c42240184dc1e3ccc28ebc777e70d49257c074f77e8/vs_Community.exe)
 	DKSET(QUEUE_BUILD ON)
-	WIN32_COMMAND(${DIGITALKNOB}/Download/vs_Community.exe)
+	WIN_COMMAND(${DIGITALKNOB}/Download/vs_Community.exe)
 ENDIF()
