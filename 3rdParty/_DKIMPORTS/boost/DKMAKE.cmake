@@ -22,7 +22,6 @@ DKINCLUDE(${BOOST})
 DKLINKDIR(${BOOST}/${OS}/${DEBUG_DIR}/lib)
 DKLINKDIR(${BOOST}/${OS}/${RELEASE_DIR}/lib)
 
-
 IF(STATIC)
 
 IF(Boost_Atomic)

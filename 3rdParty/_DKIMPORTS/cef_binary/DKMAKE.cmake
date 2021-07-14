@@ -17,16 +17,16 @@ DKDEFINE(NOMINMAX)
 DKDEFINE(CEF_ATL)
 
 WIN32_INCLUDE(${CEF})
-WIN32_DEBUG_LIB(${CEF}/Debug/libcef.lib)
+WIN32_DEBUG_LIB(${CEF}/${DEBUG_DIR}/libcef.lib)
 WIN32_RELEASE_LIB(${CEF}/${RELEASE_DIR}/libcef.lib)
-WIN32_DEBUG_LIB(${CEF}/${OS}/libcef_dll_wrapper/Debug/libcef_dll_wrapper.lib)
+WIN32_DEBUG_LIB(${CEF}/${OS}/libcef_dll_wrapper/${DEBUG_DIR}/libcef_dll_wrapper.lib)
 WIN32_RELEASE_LIB(${CEF}/${OS}/libcef_dll_wrapper/${RELEASE_DIR}/libcef_dll_wrapper.lib)
-## WIN32_DEBUG_LIB(${CEF}/Debug/cef_sandbox.lib)
+## WIN32_DEBUG_LIB(${CEF}/${DEBUG_DIR}/cef_sandbox.lib)
 ## WIN32_RELEASE_LIB(${CEF}/${RELEASE_DIR}/cef_sandbox.lib)
 
 
 ### COMPILE ###
-DKSETPATH(${CEF}/${OS})
+WIN_PATH(${CEF}/${OS})
 WIN32_COMMAND(${CMAKE_COMMAND} -G ${GENERATOR} -A Win32 -DUSE_SANDBOX=Off ${CEF})
-WIN32_VS_DEBUG(${CEF_VERSION} cef.sln libcef_dll_wrapper)
-WIN32_VS_RELEASE(${CEF_VERSION} cef.sln libcef_dll_wrapper)
+WIN64_COMMAND(${CMAKE_COMMAND} -G ${GENERATOR} -A x64 -DUSE_SANDBOX=Off ${CEF})
+WIN_VS(${CEF_VERSION} cef.sln libcef_dll_wrapper)
