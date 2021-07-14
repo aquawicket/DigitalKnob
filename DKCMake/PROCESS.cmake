@@ -1094,14 +1094,15 @@ if(ANDROID_64)
 	set(CMAKE_CXX_FLAGS "-std=c++14")
 	set(CMAKE_ANDROID_STL_TYPE c++_static)
 	
-	add_library(${APP_NAME} SHARED ${App_SRC})
+	##add_library(${APP_NAME} SHARED ${App_SRC})
+	add_executable(${APP_NAME} ${App_SRC})
 	
-	if(DEBUG)
+	#if(DEBUG)
 		add_definitions(-DDEBUG)
-		target_link_libraries(${APP_NAME} ${DEBUG_LIBS})
-	else()
-		target_link_libraries(${APP_NAME} ${RELEASE_LIBS})
-	endif()
+		#target_link_libraries(${APP_NAME} ${DEBUG_LIBS})
+	#else()
+		target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS})
+	#endif()
 	
 	## NOTE:
 	## Look at the native c++ android hello world app in Visual Studio
