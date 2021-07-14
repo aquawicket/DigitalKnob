@@ -7,6 +7,7 @@ DKSET(DOXYGEN_MAJOR_VERSION 1)
 DKSET(DOXYGEN_MINOR_VERSION 8)
 DKSET(DOXYGEN_BUILD_VERSION 13)
 DKSET(DOXYGEN_VERSION ${DOXYGEN_MAJOR_VERSION}.${DOXYGEN_MINOR_VERSION}.${DOXYGEN_BUILD_VERSION})
+DKSET(DOXYGEN C:/Program Files/doxygen/bin/doxygen.exe)
 
 ### INSTALL ###
 IF(NOT EXISTS "C:/Program Files/doxygen/bin/doxygen.exe")
@@ -16,4 +17,3 @@ IF(NOT EXISTS "C:/Program Files/doxygen/bin/doxygen.exe")
 	WIN32_COMMAND(${DIGITALKNOB}/Download/doxygen-${DOXYGEN_VERSION}-setup.exe)
 ENDIF()
 
-DKSET(DOXYGEN C:/Program Files/doxygen/bin/doxygen.exe)

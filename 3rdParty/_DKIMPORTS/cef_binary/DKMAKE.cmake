@@ -1,11 +1,13 @@
 ##TODO - MAKE THIS SCRIPT COMPILE ALL OS VERSIONS OF CEF
 
 ### VERSION ###
-DKSET(CEF_VERSION cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_windows32)
+DKSET(CEF_VERSION 81.3.3+g072a5f5+chromium-81.0.4044.138_windows32)
+DKSET(CEF_NAME cef_binary_${CE_VERSION})
+DKSET(CEF ${3RDPARTY}/${CEF_NAME})
+
 
 ### INSTALL ###
-DKINSTALL(https://cef-builds.spotifycdn.com/${CEF_VERSION}.tar.bz2 cef_binary_windows32 ${CEF_VERSION})
-DKSET(CEF ${3RDPARTY}/${CEF_VERSION})
+DKINSTALL(https://cef-builds.spotifycdn.com/${CEF_NAME}.tar.bz2 cef_binary_windows32 ${CEF_NAME})
 
 
 ### LINK ###
@@ -15,7 +17,6 @@ DKDEFINE(PSAPI_VERSION=1)
 DKDEFINE(NOMINMAX)
 ## DKDEFINE(CEF_SANDBOX)
 DKDEFINE(CEF_ATL)
-
 WIN32_INCLUDE(${CEF})
 WIN32_DEBUG_LIB(${CEF}/${DEBUG_DIR}/libcef.lib)
 WIN32_RELEASE_LIB(${CEF}/${RELEASE_DIR}/libcef.lib)
