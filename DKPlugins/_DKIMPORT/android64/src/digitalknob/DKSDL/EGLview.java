@@ -1,5 +1,5 @@
-// AUTO-GENERATED FILE. "dkapp" is renamed.
-package digitalknob.dkapp;
+// AUTO-GENERATED FILE. "DKSDL" is renamed.
+package digitalknob.DKSDL;
 
 import android.app.Dialog;
 import android.content.Context;
