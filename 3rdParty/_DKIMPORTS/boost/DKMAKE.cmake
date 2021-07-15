@@ -1,4 +1,7 @@
 ## https://www.boost.org/
+## https://www.boost.org/doc/libs/1_76_0/tools/build/doc/html/index.html - B2 User Manual - 1.76.0
+## 
+
 # Debugging: When calling b2 to compile the boost libraries, you can use the -q flag to make it stop at the first error.
 # Notes: abi=aapcs and binary-format=elf were added to android build to supress "No best alternative for libs/context/build/asm_sources"
 
@@ -166,25 +169,61 @@ RASPBERRY64_COMMAND(./bootstrap.sh)
 RASPBERRY64_DEBUG_COMMAND(./b2 toolset=gcc address-model=64 variant=debug link=static threading=multi runtime-debugging=on runtime-link=static --build-dir=${BOOST}/${OS}/${DEBUG_DIR} --stagedir=${BOOST}/${OS}/${DEBUG_DIR})
 RASPBERRY64_RELEASE_COMMAND(./b2 toolset=gcc address-model=64 variant=release link=static threading=multi runtime-debugging=off runtime-link=static --build-dir=${BOOST}/${OS}/${RELEASE_DIR} --stagedir=${BOOST}/${OS}/${RELEASE_DIR})
 
-ANDROID32_PATH(${BOOST})
-ANDROID32_BASH("#!/bin/bash\;
-cd /${BOOST}\;
-export PATH=/${MINGW32}/bin:$PATH\;
-export PATH=/${MSYS}/bin:$PATH\;
-./SetupAndroid.sh\;")
-ANDROID32_DEBUG_COMMAND(set ANDROIDNDKROOT=${NDK} && set NDKVER=r21e && set CLANGPATH=%ANDROIDNDKROOT%/toolchains/llvm/prebuilt/windows-x86_64/bin && b2 toolset=clang-armeabiv7a architecture=arm variant=debug link=static threading=multi target-os=android -j4 --layout=versioned --ignore-site-config --user-config=${BOOST}/android-config.jam --build-dir=${BOOST}/${OS}/${DEBUG_DIR} --stagedir=${BOOST}/${OS}/${DEBUG_DIR} --without-python abi=aapcs binary-format=elf)
-ANDROID32_RELEASE_COMMAND(set ANDROIDNDKROOT=${NDK} && set NDKVER=r21e && set CLANGPATH=%ANDROIDNDKROOT%/toolchains/llvm/prebuilt/windows-x86_64/bin && b2 toolset=clang-armeabiv7a architecture=arm variant=release link=static threading=multi target-os=android -j4 --layout=versioned --ignore-site-config --user-config=${BOOST}/android-config.jam --build-dir=${BOOST}/${OS}/${RELEASE_DIR} --stagedir=${BOOST}/${OS}/${RELEASE_DIR} --without-python abi=aapcs binary-format=elf)
+ANDROID_PATH(${BOOST})
+ANDROID_BASH(
+	"#!/bin/bash\;"
+	cd /${BOOST}\;
+	export PATH=/${MINGW32}/bin:$PATH\;
+	export PATH=/${MSYS}/bin:$PATH\;
+	./SetupAndroid.sh\;)
 
+ANDROID32_DEBUG_COMMAND( 
+	set ANDROIDNDKROOT=${NDK} && 
+	set NDKVER=${NDK_VERSION} && 
+	set CLANGPATH=${NDK}/toolchains/llvm/prebuilt/windows-x86_64/bin && 
+	b2 
+	toolset=clang-armeabiv7a 
+	architecture=arm 
+	variant=debug 
+	link=static 
+	threading=multi 
+	target-os=android 
+	-j4 
+	--layout=versioned 
+	--ignore-site-config 
+	--user-config=${BOOST}/android-config.jam 
+	--build-dir=${BOOST}/${OS}/${DEBUG_DIR} 
+	--stagedir=${BOOST}/${OS}/${DEBUG_DIR} 
+	--without-python 
+	abi=aapcs 
+	binary-format=elf )
 
-## FIXME
-ANDROID64_PATH(${BOOST})
-ANDROID64_BASH("#!/bin/bash\;
-cd /${BOOST}\;
-export PATH=/${MINGW32}/bin:$PATH\;
-export PATH=/${MSYS}/bin:$PATH\;
-./SetupAndroid.sh\;")
-ANDROID64_DEBUG_COMMAND(set ANDROIDNDKROOT=${NDK} && set NDKVER=r21e && set CLANGPATH=%ANDROIDNDKROOT%/toolchains/llvm/prebuilt/windows-x86_64/bin && b2 toolset=clang-armeabiv7a architecture=arm variant=debug link=static threading=multi target-os=android -j4 --layout=versioned --ignore-site-config --user-config=${BOOST}/android-config.jam --build-dir=${BOOST}/${OS}/${DEBUG_DIR} --stagedir=${BOOST}/${OS}/${DEBUG_DIR} --without-python abi=aapcs binary-format=elf)
-ANDROID64_RELEASE_COMMAND(set ANDROIDNDKROOT=${NDK} && set NDKVER=r21e && set CLANGPATH=%ANDROIDNDKROOT%/toolchains/llvm/prebuilt/windows-x86_64/bin && b2 toolset=clang-armeabiv7a architecture=arm variant=release link=static threading=multi target-os=android -j4 --layout=versioned --ignore-site-config --user-config=${BOOST}/android-config.jam --build-dir=${BOOST}/${OS}/${RELEASE_DIR} --stagedir=${BOOST}/${OS}/${RELEASE_DIR} --without-python abi=aapcs binary-format=elf)
+ANDROID32_RELEASE_COMMAND(set ANDROIDNDKROOT=${NDK} && set NDKVER=${NDK_VERSION} && set CLANGPATH=${NDK}/toolchains/llvm/prebuilt/windows-x86_64/bin && b2 toolset=clang-armeabiv7a architecture=arm variant=release link=static threading=multi target-os=android -j4 --layout=versioned --ignore-site-config --user-config=${BOOST}/android-config.jam --build-dir=${BOOST}/${OS}/${RELEASE_DIR} --stagedir=${BOOST}/${OS}/${RELEASE_DIR} --without-python abi=aapcs binary-format=elf)
+
+ANDROID64_DEBUG_COMMAND(
+	set ANDROIDNDKROOT=${NDK} &&
+	set NDKVER=${NDK_VERSION} &&
+	set CLANGPATH=${NDK}/toolchains/llvm/prebuilt/windows-x86_64/bin &&
+	echo "\n\nStarting B2 for Android arm64v8a . . .\n " &&
+	b2 
+	toolset=clang-arm64v8a
+	architecture=arm
+	address-model=64
+	variant=debug
+	link=static
+	threading=multi
+	target-os=android
+	-j4
+	--layout=versioned
+	--ignore-site-config
+	--user-config=${BOOST}/android-config.jam
+	--build-dir=${BOOST}/${OS}/${DEBUG_DIR}
+	--stagedir=${BOOST}/${OS}/${DEBUG_DIR}
+	--without-python
+	abi=aapcs
+	binary-format=elf)
+	
+ANDROID64_RELEASE_COMMAND(set ANDROIDNDKROOT=${NDK} && set NDKVER=${NDK_VERSION} && set CLANGPATH=${NDK}/toolchains/llvm/prebuilt/windows-x86_64/bin && b2 toolset=clang-arm64v8a architecture=arm address-model=64 variant=release link=static threading=multi target-os=android -j4 --layout=versioned --ignore-site-config --user-config=${BOOST}/android-config.jam --build-dir=${BOOST}/${OS}/${RELEASE_DIR} --stagedir=${BOOST}/${OS}/${RELEASE_DIR} --without-python abi=aapcs binary-format=elf)
 
 ENDIF(STATIC)
 
