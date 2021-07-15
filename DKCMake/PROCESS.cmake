@@ -980,6 +980,8 @@ if(ANDROID_32)
 	# Copy the icon to ${DKPROJECT}/assets
 	DKCOPY(${DKPROJECT}/icons/icon.png ${DKPROJECT}/assets/icon.png TRUE)
 	
+	DKUPDATE_ANDROID_NAME(${APP_NAME})
+	
 	# backup generated files and folders that will be withheld from the release package
 	#DKCOPY(${DKPROJECT}/assets/USER ${DKPROJECT}/Backup/USER TRUE)
 	#DKCOPY(${DKPROJECT}/assets/DKCef/android32Debug ${DKPROJECT}/Backup/DKCef/android32Debug TRUE)
@@ -1019,7 +1021,7 @@ if(ANDROID_32)
 	#DKREMOVE(${DKPROJECT}/Backup)
 	#############################
 	
-	DKUPDATE_ANDROID_NAME(${APP_NAME})
+	
 	
 	set(CMAKE_ANDROID_GUI TRUE)
 	set(CMAKE_CXX_FLAGS "-std=c++14")
