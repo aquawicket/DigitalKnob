@@ -973,6 +973,10 @@ endif()
 
 ##############
 if(ANDROID_32)
+	# remove files not needed for android
+	list(REMOVE_ITEM App_SRC ${DKPROJECT}/resource.h)
+	list(REMOVE_ITEM App_SRC ${DKPROJECT}/resource.rc)
+	
 	# Copy the icon to ${DKPROJECT}/assets
 	DKCOPY(${DKPROJECT}/icons/icon.png ${DKPROJECT}/assets/icon.png TRUE)
 	
