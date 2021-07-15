@@ -48,7 +48,7 @@ public class DK extends Activity
 				copyAssets();
 				
 				//TODO: maybe we can check if the plugins is available - DKAvailable(data)
-				//if(USE_DKSDLWindow){	
+				//if(USE_dkappWindow){	
 					OpenActivity("SDLActivity");
 				//}
 				//else{
