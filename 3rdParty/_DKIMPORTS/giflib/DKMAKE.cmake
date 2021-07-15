@@ -21,8 +21,8 @@ DKSET(GIF ${3RDPARTY}/giflib-${GIF_VERSION})
 
 ### DKPLUGINS LINK ###
 DKINCLUDE(${GIF}/lib)
-WIN_DEBUG_LIB(${GIF}/${OS}/${DEBUG_DIR}/lib/.libs/libgif.lib)
-WIN_RELEASE_LIB(${GIF}/${OS}/${RELEASE_DIR}/lib/.libs/libgif.lib)
+WIN_DEBUG_LIB(${GIF}/${OS}/${DEBUG_DIR}/lib/.libs/libgif.a)
+WIN_RELEASE_LIB(${GIF}/${OS}/${RELEASE_DIR}/lib/.libs/libgif.a)
 APPLE_DEBUG_LIB(${GIF}/${OS}/${DEBUG_DIR}/lib/.libs/libgif.a)
 APPLE_RELEASE_LIB(${GIF}/${OS}/${RELEASE_DIR}/lib/.libs/libgif.a)
 LINUX_DEBUG_LIB(${GIF}/${OS}/${DEBUG_DIR}/lib/.libs/libgif.a)
@@ -51,9 +51,9 @@ export PATH=/${MSYS}/bin:$PATH\;
 ../../configure --disable-shared --enable-static 
 make 
 exit \n")
-if(WIN_32 AND DEBUG)
-	DKRENAME(${GIF}/${OS}/${DEBUG_DIR}/lib/.libs/libgif.a ${GIF}/${OS}/${DEBUG_DIR}/lib/.libs/libgif.lib)
-endif()
+#if(WIN_32 AND DEBUG)
+	#DKRENAME(${GIF}/${OS}/${DEBUG_DIR}/lib/.libs/libgif.a ${GIF}/${OS}/${DEBUG_DIR}/lib/.libs/libgif.lib)
+#endif()
 
 WIN32_RELEASE_PATH(${GIF}/${OS}/${RELEASE_DIR})
 WIN32_RELEASE_BASH("#!/bin/bash 
@@ -63,9 +63,9 @@ export PATH=/${MSYS}/bin:$PATH\;
 ../../configure --disable-shared --enable-static 
 make 
 exit\n ")
-if(WIN_32 AND RELEASE)
-	DKRENAME(${GIF}/${OS}/${RELEASE_DIR}/lib/.libs/libgif.a ${GIF}/${OS}/${RELEASE_DIR}/lib/.libs/libgif.lib)
-endif()
+#if(WIN_32 AND RELEASE)
+#	DKRENAME(${GIF}/${OS}/${RELEASE_DIR}/lib/.libs/libgif.a ${GIF}/${OS}/${RELEASE_DIR}/lib/.libs/libgif.lib)
+#endif()
 
 
 
@@ -77,9 +77,9 @@ export PATH=/${MSYS}/bin:$PATH\;
 ../../configure --disable-shared --enable-static 
 make 
 exit \n")
-if(WIN_64 AND DEBUG)
-DKRENAME(${GIF}/${OS}/${DEBUG_DIR}/lib/.libs/libgif.a ${GIF}/${OS}/${DEBUG_DIR}/lib/.libs/libgif.lib)
-endif()
+#if(WIN_64 AND DEBUG)
+#DKRENAME(${GIF}/${OS}/${DEBUG_DIR}/lib/.libs/libgif.a ${GIF}/${OS}/${DEBUG_DIR}/lib/.libs/libgif.lib)
+#endif()
 
 WIN64_RELEASE_PATH(${GIF}/${OS}/${RELEASE_DIR})
 WIN64_RELEASE_BASH("#!/bin/bash 
@@ -89,9 +89,9 @@ export PATH=/${MSYS}/bin:$PATH\;
 ../../configure --disable-shared --enable-static 
 make 
 exit\n ")
-if(WIN_64 AND RELEASE)
-	DKRENAME(${GIF}/${OS}/${RELEASE_DIR}/lib/.libs/libgif.a ${GIF}/${OS}/${RELEASE_DIR}/lib/.libs/libgif.lib)
-endif()
+#if(WIN_64 AND RELEASE)
+#	DKRENAME(${GIF}/${OS}/${RELEASE_DIR}/lib/.libs/libgif.a ${GIF}/${OS}/${RELEASE_DIR}/lib/.libs/libgif.lib)
+#endif()
 
 
 MAC_DEBUG_PATH(${GIF}/${OS}/${DEBUG_DIR})
