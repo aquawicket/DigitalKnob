@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="hello">Hello World, DigitalKnob on Android!</string>
-    <string name="app_name">DKSDL</string>
+    <string name="app_name">dkapp</string>
     <color name="uiControlBar">#BBBBBB</color>
     <string name="uiButtonLight">Light (ON/OFF)</string>
     <string name="uiButtonCenter">Center View</string>

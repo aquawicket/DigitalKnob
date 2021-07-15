@@ -973,25 +973,22 @@ endif()
 
 ##############
 if(ANDROID_32)
-	DKSET(DEBUG_DIR androidDebug)
-	DKSET(RELEASE_DIR androidRelease)
-	
 	# Copy the icon to ${DKPROJECT}/assets
 	DKCOPY(${DKPROJECT}/icons/icon.png ${DKPROJECT}/assets/icon.png TRUE)
 	
-	# backup generated files and folders not going in the package
-	DKCOPY(${DKPROJECT}/assets/USER ${DKPROJECT}/Backup/USER TRUE)
-	DKCOPY(${DKPROJECT}/assets/DKCef/android32Debug ${DKPROJECT}/Backup/DKCef/android32Debug TRUE)
-	DKCOPY(${DKPROJECT}/assets/DKCef/android32Release ${DKPROJECT}/Backup/DKCef/android32Release TRUE)
-	DKCOPY(${DKPROJECT}/assets/cef.log ${DKPROJECT}/Backup/cef.log TRUE)
-	DKCOPY(${DKPROJECT}/assets/log.txt ${DKPROJECT}/Backup/log.txt TRUE)
+	# backup generated files and folders that will be withheld from the release package
+	#DKCOPY(${DKPROJECT}/assets/USER ${DKPROJECT}/Backup/USER TRUE)
+	#DKCOPY(${DKPROJECT}/assets/DKCef/android32Debug ${DKPROJECT}/Backup/DKCef/android32Debug TRUE)
+	#DKCOPY(${DKPROJECT}/assets/DKCef/android32Release ${DKPROJECT}/Backup/DKCef/android32Release TRUE)
+	#DKCOPY(${DKPROJECT}/assets/cef.log ${DKPROJECT}/Backup/cef.log TRUE)
+	#DKCOPY(${DKPROJECT}/assets/log.txt ${DKPROJECT}/Backup/log.txt TRUE)
 	
-	# remove generated files and folders before packaging
-	DKREMOVE(${DKPROJECT}/assets/USER)
-	DKREMOVE(${DKPROJECT}/assets/DKCef/android32Debug)
-	DKREMOVE(${DKPROJECT}/assets/DKCef/android32release)
-	DKREMOVE(${DKPROJECT}/assets/cef.log)
-	DKREMOVE(${DKPROJECT}/assets/log.txt)
+	# remove generated files and folders from the release package
+	#DKREMOVE(${DKPROJECT}/assets/USER)
+	#DKREMOVE(${DKPROJECT}/assets/DKCef/android32Debug)
+	#DKREMOVE(${DKPROJECT}/assets/DKCef/android32release)
+	#DKREMOVE(${DKPROJECT}/assets/cef.log)
+	#DKREMOVE(${DKPROJECT}/assets/log.txt)
 	
 	
 	## Create Android Icons
@@ -1009,15 +1006,13 @@ if(ANDROID_32)
     DKEXECUTE_PROCESS(COMMAND ${IMAGEMAGICK_CONVERT} ${DKPROJECT}/icons/icon.png -resize 144x144 ${DKPROJECT}/icons/android/drawable-xxhdpi/icon.png)
 
 	
-	message("Creating assets.zip . . .")
-	DKZIP(${DKPROJECT}/assets) #.zip the assets
-	
-	message("Creating assets.h . . .")
-	bin2h(SOURCE_FILE ${DKPROJECT}/assets.zip HEADER_FILE ${DKPROJECT}/assets.h VARIABLE_NAME "ASSETS_H")
-	
+	#message("Creating assets.zip . . .")
+	#DKZIP(${DKPROJECT}/assets) #.zip the assets
+	#message("Creating assets.h . . .")
+	#bin2h(SOURCE_FILE ${DKPROJECT}/assets.zip HEADER_FILE ${DKPROJECT}/assets.h VARIABLE_NAME "ASSETS_H")
 	# Restore the backed up assets
-	DKCOPY(${DKPROJECT}/Backup/ ${DKPROJECT}/assets/ TRUE)
-	DKREMOVE(${DKPROJECT}/Backup)
+	#DKCOPY(${DKPROJECT}/Backup/ ${DKPROJECT}/assets/ TRUE)
+	#DKREMOVE(${DKPROJECT}/Backup)
 	#############################
 	
 	DKUPDATE_ANDROID_NAME(${APP_NAME})
@@ -1026,20 +1021,8 @@ if(ANDROID_32)
 	set(CMAKE_CXX_FLAGS "-std=c++14")
 	set(CMAKE_ANDROID_STL_TYPE c++_static)
 	
-	add_library(${APP_NAME} SHARED ${App_SRC})
-	
-	if(DEBUG)
-		add_definitions(-DDEBUG)
-		target_link_libraries(${APP_NAME} ${DEBUG_LIBS})
-	else()
-		target_link_libraries(${APP_NAME} ${RELEASE_LIBS})
-	endif()
-	
-	## NOTE:
-	## Look at the native c++ android hello world app in Visual Studio
-	## Look in the folder C:\Users\aquawicket\source\repos\AppName\AppName\AppName.Packaging
-	## This is how we will generate our .apk file
-	
+	add_executable(${APP_NAME} ${App_SRC})
+	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS})	
 endif()
 
 ##############
@@ -1096,8 +1079,6 @@ if(ANDROID_64)
 
 	add_executable(${APP_NAME} ${App_SRC})
 	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS})
-
-	##DUMP("${DKINCLUDES_LIST}")
 endif()
 
 ###########

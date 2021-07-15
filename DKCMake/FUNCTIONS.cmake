@@ -278,8 +278,7 @@ endfunction()
 
 
 function(DKINSTALL url import_folder 3rdparty_folder)
-	dk_dirIsEmpty(${3RDPARTY}/${3rdparty_folder} empty)
-	if(NOT ${empty})
+	if(EXISTS ${3RDPARTY}/${3rdparty_folder}/installed)
 		return()
 	endif()
 
@@ -354,6 +353,7 @@ function(DKINSTALL url import_folder 3rdparty_folder)
 	endif()
 
 	DKCOPY(${DKIMPORTS}/${import_folder}/ ${3RDPARTY}/${3rdparty_folder}/ TRUE)
+	file(WRITE ${3RDPARTY}/${3rdparty_folder}/installed "${3rdparty_folder}")
 endfunction()
 
 
@@ -782,8 +782,8 @@ function(WIN_BASH arg)
 	if(WIN AND QUEUE_BUILD)
 		string(REPLACE ":/" "/" arg ${arg})
 		file(WRITE ${MSYS}/dkscript.tmp ${arg})
-		DKEXECUTE_PROCESS(COMMAND cmd /c ${3RDPARTY}/mingw/msys/bin/bash ${MSYS}/dkscript.tmp)
 		message("BASH -> ${arg}")
+		DKEXECUTE_PROCESS(COMMAND cmd /c ${3RDPARTY}/mingw/msys/bin/bash ${MSYS}/dkscript.tmp)
 	endif()
 endfunction()
 
@@ -839,8 +839,8 @@ function(ANDROID_BASH arg)
 	if(ANDROID AND QUEUE_BUILD)
 		string(REPLACE ":/" "/" arg ${arg})
 		file(WRITE ${MSYS}/dkscript.tmp ${arg})
-		DKEXECUTE_PROCESS(COMMAND cmd /c ${3RDPARTY}/mingw/msys/bin/bash ${MSYS}/dkscript.tmp)
 		message("BASH-> ${arg}")
+		DKEXECUTE_PROCESS(COMMAND cmd /c ${3RDPARTY}/mingw/msys/bin/bash ${MSYS}/dkscript.tmp)
 	endif()
 endfunction()
 
