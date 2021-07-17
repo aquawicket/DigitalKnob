@@ -21,6 +21,8 @@ DKINSTALL(https://sourceforge.net/projects/boost/files/boost/${BOOST_VERSION_MAJ
 
 
 ### DKPLUGINS LINK ###
+DKDEFINE(BOOST_ALL_NO_LIB=1)
+DKDEFINE(BOOST_REGEX_DYN_LINK=1)
 DKINCLUDE(${BOOST})
 DKLINKDIR(${BOOST}/${OS}/${DEBUG_DIR}/lib)
 DKLINKDIR(${BOOST}/${OS}/${RELEASE_DIR}/lib)
@@ -130,14 +132,14 @@ ENDIF()
 ### COMPILE ###
 WIN32_PATH(${BOOST})
 WIN32_COMMAND(bootstrap.bat)
-WIN32_DEBUG_COMMAND(b2 toolset=msvc-14.2 address-model=32 variant=debug link=static threading=multi runtime-debugging=on runtime-link=static --layout=system --build-dir=${BOOST}/${OS}/${DEBUG_DIR} --stagedir=${BOOST}/${OS}/${DEBUG_DIR})
-WIN32_RELEASE_COMMAND(b2 toolset=msvc-14.2 address-model=32 variant=release link=static threading=multi runtime-debugging=off runtime-link=static --layout=system --build-dir=${BOOST}/${OS}/${RELEASE_DIR} --stagedir=${BOOST}/${OS}/${RELEASE_DIR})
+WIN32_DEBUG_COMMAND(b2 toolset=msvc-14.2 address-model=32 variant=debug link=static threading=multi runtime-debugging=on runtime-link=static define=BOOST_ALL_NO_LIB --layout=system --build-dir=${BOOST}/${OS}/${DEBUG_DIR} --stagedir=${BOOST}/${OS}/${DEBUG_DIR})
+WIN32_RELEASE_COMMAND(b2 toolset=msvc-14.2 address-model=32 variant=release link=static threading=multi runtime-debugging=off runtime-link=static define=BOOST_ALL_NO_LIB --layout=system --build-dir=${BOOST}/${OS}/${RELEASE_DIR} --stagedir=${BOOST}/${OS}/${RELEASE_DIR})
 
 ## WIN64_COMMAND(call C:/Windows/System32/cmd.exe /E:ON /V:ON /T:0E /K "${WINDOWS_SDK_EXE}")
 WIN64_PATH(${BOOST})
 WIN64_COMMAND(bootstrap.bat)
-WIN64_DEBUG_COMMAND(b2 toolset=msvc-14.2 address-model=64 variant=debug link=static threading=multi runtime-debugging=on runtime-link=static --layout=system --build-dir=${BOOST}/${OS}/${DEBUG_DIR} --stagedir=${BOOST}/${OS}/${DEBUG_DIR})
-WIN64_RELEASE_COMMAND(b2 toolset=msvc-14.2 address-model=64 variant=release link=static threading=multi runtime-debugging=off runtime-link=static --layout=system --build-dir=${BOOST}/${OS}/${RELEASE_DIR} --stagedir=${BOOST}/${OS}/${RELEASE_DIR})
+WIN64_DEBUG_COMMAND(b2 toolset=msvc-14.2 address-model=64 variant=debug link=static threading=multi runtime-debugging=on runtime-link=static define=BOOST_ALL_NO_LIB --layout=system --build-dir=${BOOST}/${OS}/${DEBUG_DIR} --stagedir=${BOOST}/${OS}/${DEBUG_DIR})
+WIN64_RELEASE_COMMAND(b2 toolset=msvc-14.2 address-model=64 variant=release link=static threading=multi runtime-debugging=off runtime-link=static define=BOOST_ALL_NO_LIB --layout=system --build-dir=${BOOST}/${OS}/${RELEASE_DIR} --stagedir=${BOOST}/${OS}/${RELEASE_DIR})
 
 MAC32_PATH(${BOOST})
 MAC32_COMMAND(./bootstrap.sh)
@@ -177,48 +179,46 @@ export PATH=/${MINGW64}/bin:$PATH\;
 export PATH=/${MSYS}/bin:$PATH\;
 ./SetupAndroid.sh\;")
 
-ANDROID32_DEBUG_COMMAND( 
-	set ANDROIDNDKROOT=${NDK} && 
-	set NDKVER=${NDK_VERSION} && 
-	set CLANGPATH=${NDK}/toolchains/llvm/prebuilt/windows-x86_64/bin && 
-	b2 
-	toolset=clang-armeabiv7a 
-	architecture=arm 
-	variant=debug 
-	link=static 
-	threading=multi 
-	target-os=android 
-	-j4 
-	--layout=versioned 
+ANDROID32_DEBUG_COMMAND(
+	set ANDROIDNDKROOT=${NDK} &&
+	set NDKVER=${NDK_VERSION} &&
+	set CLANGPATH=${NDK}/toolchains/llvm/prebuilt/windows-x86_64/bin &&
+	b2
+	toolset=clang-armeabiv7a
+	architecture=arm
+	variant=debug
+	link=static
+	threading=multi
+	target-os=android
+	-j4
 	--ignore-site-config
 	--layout=system
 	--user-config=${BOOST}/android-config.jam
-	--build-dir=${BOOST}/${OS}/${DEBUG_DIR} 
-	--stagedir=${BOOST}/${OS}/${DEBUG_DIR} 
-	--without-python 
-	abi=aapcs 
+	--build-dir=${BOOST}/${OS}/${DEBUG_DIR}
+	--stagedir=${BOOST}/${OS}/${DEBUG_DIR}
+	--without-python
+	abi=aapcs
 	binary-format=elf )
 
 ANDROID32_RELEASE_COMMAND(
-	set ANDROIDNDKROOT=${NDK} && 
-	set NDKVER=${NDK_VERSION} && 
-	set CLANGPATH=${NDK}/toolchains/llvm/prebuilt/windows-x86_64/bin && 
-	b2 
-	toolset=clang-armeabiv7a 
-	architecture=arm 
-	variant=release 
-	link=static 
-	threading=multi 
-	target-os=android 
-	-j4 
-	--layout=versioned 
+	set ANDROIDNDKROOT=${NDK} &&
+	set NDKVER=${NDK_VERSION} &&
+	set CLANGPATH=${NDK}/toolchains/llvm/prebuilt/windows-x86_64/bin &&
+	b2
+	toolset=clang-armeabiv7a
+	architecture=arm
+	variant=release
+	link=static
+	threading=multi
+	target-os=android
+	-j4
 	--ignore-site-config
 	--layout=system
-	--user-config=${BOOST}/android-config.jam 
-	--build-dir=${BOOST}/${OS}/${RELEASE_DIR} 
-	--stagedir=${BOOST}/${OS}/${RELEASE_DIR} 
-	--without-python 
-	abi=aapcs 
+	--user-config=${BOOST}/android-config.jam
+	--build-dir=${BOOST}/${OS}/${RELEASE_DIR}
+	--stagedir=${BOOST}/${OS}/${RELEASE_DIR}
+	--without-python
+	abi=aapcs
 	binary-format=elf )
 
 ANDROID64_DEBUG_COMMAND(
@@ -226,7 +226,7 @@ ANDROID64_DEBUG_COMMAND(
 	set NDKVER=${NDK_VERSION} &&
 	set CLANGPATH=${NDK}/toolchains/llvm/prebuilt/windows-x86_64/bin &&
 	echo "\n\nStarting B2 for Android arm64v8a . . .\n " &&
-	b2 
+	b2
 	toolset=clang-arm64v8a
 	architecture=arm
 	address-model=64
@@ -247,25 +247,25 @@ ANDROID64_DEBUG_COMMAND(
 	
 ANDROID64_RELEASE_COMMAND(
 	set ANDROIDNDKROOT=${NDK} &&
-	set NDKVER=${NDK_VERSION} && 
-	set CLANGPATH=${NDK}/toolchains/llvm/prebuilt/windows-x86_64/bin && 
-	b2 
-	toolset=clang-arm64v8a 
-	architecture=arm 
-	address-model=64 
-	variant=release 
-	link=static 
-	threading=multi 
-	target-os=android 
-	-j4 
-	--layout=versioned 
+	set NDKVER=${NDK_VERSION} &&
+	set CLANGPATH=${NDK}/toolchains/llvm/prebuilt/windows-x86_64/bin &&
+	b2
+	toolset=clang-arm64v8a
+	architecture=arm
+	address-model=64
+	variant=release
+	link=static
+	threading=multi
+	target-os=android
+	-j4
+	--layout=versioned
 	--ignore-site-config
 	--layout=system
-	--user-config=${BOOST}/android-config.jam 
-	--build-dir=${BOOST}/${OS}/${RELEASE_DIR} 
-	--stagedir=${BOOST}/${OS}/${RELEASE_DIR} 
-	--without-python 
-	abi=aapcs 
+	--user-config=${BOOST}/android-config.jam
+	--build-dir=${BOOST}/${OS}/${RELEASE_DIR}
+	--stagedir=${BOOST}/${OS}/${RELEASE_DIR}
+	--without-python
+	abi=aapcs
 	binary-format=elf )
 
 ENDIF(STATIC)
