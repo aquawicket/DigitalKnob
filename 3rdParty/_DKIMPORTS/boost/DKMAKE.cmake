@@ -1,6 +1,6 @@
 ## https://www.boost.org/
 ## https://www.boost.org/doc/libs/1_76_0/tools/build/doc/html/index.html - B2 User Manual - 1.76.0
-## 
+## https://github.com/LibCMaker/LibCMaker#readme
 
 # Debugging: When calling b2 to compile the boost libraries, you can use the -q flag to make it stop at the first error.
 # Notes: abi=aapcs and binary-format=elf were added to android build to supress "No best alternative for libs/context/build/asm_sources"
@@ -9,7 +9,7 @@
 DKSET(BOOST_VERSION_MAJOR 1)
 DKSET(BOOST_VERSION_MINOR 74)
 DKSET(BOOST_VERSION_BUILD 0)
-DKSET(BOOST_VERSION ${BOOST_VERSION_MAJOR}.${BOOST_VERSION_MINOR}.${BOOST_VERSION_BUILD})
+DKSET(BOOST_VERSION ${BOOST_VERSION_MAJOR}_${BOOST_VERSION_MINOR}_${BOOST_VERSION_BUILD})
 DKSET(BOOST_NAME boost_${BOOST_VERSION})
 DKSET(BOOST ${3RDPARTY}/${BOOST_NAME})
 
@@ -17,7 +17,7 @@ DKSET(BOOST ${3RDPARTY}/${BOOST_NAME})
 ### INSTALL ###
 ## https://sourceforge.net/projects/boost/files/boost/1.74.0/boost_1_74_0.zip
 ## https://dl.bintray.com/boostorg/release/1.74.0/source/boost_1_74_0.zip
-DKINSTALL(https://sourceforge.net/projects/boost/files/boost/${BOOST_VERSION}/${BOOST_NAME}.zip boost ${BOOST_NAME})
+DKINSTALL(https://sourceforge.net/projects/boost/files/boost/${BOOST_VERSION_MAJOR}.${BOOST_VERSION_MINOR}.${BOOST_VERSION_BUILD}/${BOOST_NAME}.zip boost ${BOOST_NAME})
 
 
 ### DKPLUGINS LINK ###
@@ -274,19 +274,19 @@ ENDIF(STATIC)
 ### TODO
 IF(SHARED)
 
-IF(Boost_Filesystem)
-	WIN32_DEBUG_LIB(${BOOST}/${OS}/lib/boost_filesystem.lib)
-	WIN32_RELEASE_LIB(${BOOST}/${OS}/lib/boost_filesystem.lib)
-ENDIF()
+#IF(Boost_Filesystem)
+#	WIN32_DEBUG_LIB(${BOOST}/${OS}/lib/boost_filesystem.lib)
+#	WIN32_RELEASE_LIB(${BOOST}/${OS}/lib/boost_filesystem.lib)
+#ENDIF()
 
-IF(Boost_System)
-	WIN32_DEBUG_LIB(${BOOST}/${OS}/lib/boost_system.lib)
-	WIN32_RELEASE_LIB(${BOOST}/${OS}/lib/boost_system.lib)
-ENDIF()
+#IF(Boost_System)
+#	WIN32_DEBUG_LIB(${BOOST}/${OS}/lib/boost_system.lib)
+#	WIN32_RELEASE_LIB(${BOOST}/${OS}/lib/boost_system.lib)
+#ENDIF()
 
-WIN32_PATH(${BOOST})
-WIN32_COMMAND(bootstrap.bat)
-WIN32_COMMAND(b2 toolset=msvc-14.0 link=shared variant=debug runtime-debugging=on runtime-link=shared --threading=multi --layout=system --build-dir=${BOOST}/${OS}/${DEBUG_DIR} --stagedir=${BOOST}/${OS}/${DEBUG_DIR})
-WIN32_COMMAND(b2 toolset=msvc-14.0 link=shared variant=release runtime-debugging=off runtime-link=shared --threading=multi --layout=system --build-dir=${BOOST}/${OS}/${RELEASE_DIR} --stagedir=${BOOST}/${OS}/${RELEASE_DIR})
+#WIN32_PATH(${BOOST})
+#WIN32_COMMAND(bootstrap.bat)
+#WIN32_COMMAND(b2 toolset=msvc-14.0 link=shared variant=debug runtime-debugging=on runtime-link=shared --threading=multi --layout=system --build-dir=${BOOST}/${OS}/${DEBUG_DIR} --stagedir=${BOOST}/${OS}/${DEBUG_DIR})
+#WIN32_COMMAND(b2 toolset=msvc-14.0 link=shared variant=release runtime-debugging=off runtime-link=shared --threading=multi --layout=system --build-dir=${BOOST}/${OS}/${RELEASE_DIR} --stagedir=${BOOST}/${OS}/${RELEASE_DIR})
 
 ENDIF(SHARED)
