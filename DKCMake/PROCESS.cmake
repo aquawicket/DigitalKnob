@@ -976,11 +976,11 @@ if(ANDROID_32)
 	# remove files not needed for android
 	list(REMOVE_ITEM App_SRC ${DKPROJECT}/resource.h)
 	list(REMOVE_ITEM App_SRC ${DKPROJECT}/resource.rc)
+	##list(REMOVE_ITEM App_SRC ${DKPROJECT}/assets.h)	
 	
 	# Copy the icon to ${DKPROJECT}/assets
 	DKCOPY(${DKPROJECT}/icons/icon.png ${DKPROJECT}/assets/icon.png TRUE)
-	
-	DKUPDATE_ANDROID_NAME(${APP_NAME})
+	DKCOPY(${DKPROJECT}/icons/icon.png ${DKPROJECT}/${OS}/res/drawable/icon.png TRUE)
 	
 	# backup generated files and folders that will be withheld from the release package
 	#DKCOPY(${DKPROJECT}/assets/USER ${DKPROJECT}/Backup/USER TRUE)
@@ -1014,14 +1014,16 @@ if(ANDROID_32)
 	
 	#message("Creating assets.zip . . .")
 	#DKZIP(${DKPROJECT}/assets) #.zip the assets
+	
 	#message("Creating assets.h . . .")
 	#bin2h(SOURCE_FILE ${DKPROJECT}/assets.zip HEADER_FILE ${DKPROJECT}/assets.h VARIABLE_NAME "ASSETS_H")
+	
 	# Restore the backed up assets
 	#DKCOPY(${DKPROJECT}/Backup/ ${DKPROJECT}/assets/ TRUE)
 	#DKREMOVE(${DKPROJECT}/Backup)
 	#############################
 	
-	
+	DKUPDATE_ANDROID_NAME(${APP_NAME})
 	
 	set(CMAKE_ANDROID_GUI TRUE)
 	set(CMAKE_CXX_FLAGS "-std=c++14")
@@ -1033,23 +1035,28 @@ endif()
 
 ##############
 if(ANDROID_64)
+	# remove files not needed for android
+	list(REMOVE_ITEM App_SRC ${DKPROJECT}/resource.h)
+	list(REMOVE_ITEM App_SRC ${DKPROJECT}/resource.rc)
+	##list(REMOVE_ITEM App_SRC ${DKPROJECT}/assets.h)
+
 	# Copy the icon to ${DKPROJECT}/assets
 	DKCOPY(${DKPROJECT}/icons/icon.png ${DKPROJECT}/assets/icon.png TRUE)
 	DKCOPY(${DKPROJECT}/icons/icon.png ${DKPROJECT}/${OS}/res/drawable/icon.png TRUE)
 	
 	# backup generated files and folders not going in the package
-	DKCOPY(${DKPROJECT}/assets/USER ${DKPROJECT}/Backup/USER TRUE)
-	DKCOPY(${DKPROJECT}/assets/DKCef/android64Debug ${DKPROJECT}/Backup/DKCef/android64Debug TRUE)
-	DKCOPY(${DKPROJECT}/assets/DKCef/android64Release ${DKPROJECT}/Backup/DKCef/android64Release TRUE)
-	DKCOPY(${DKPROJECT}/assets/cef.log ${DKPROJECT}/Backup/cef.log TRUE)
-	DKCOPY(${DKPROJECT}/assets/log.txt ${DKPROJECT}/Backup/log.txt TRUE)
+	#DKCOPY(${DKPROJECT}/assets/USER ${DKPROJECT}/Backup/USER TRUE)
+	#DKCOPY(${DKPROJECT}/assets/DKCef/android64Debug ${DKPROJECT}/Backup/DKCef/android64Debug TRUE)
+	#DKCOPY(${DKPROJECT}/assets/DKCef/android64Release ${DKPROJECT}/Backup/DKCef/android64Release TRUE)
+	#DKCOPY(${DKPROJECT}/assets/cef.log ${DKPROJECT}/Backup/cef.log TRUE)
+	#DKCOPY(${DKPROJECT}/assets/log.txt ${DKPROJECT}/Backup/log.txt TRUE)
 	
 	# remove generated files and folders before packaging
-	DKREMOVE(${DKPROJECT}/assets/USER)
-	DKREMOVE(${DKPROJECT}/assets/DKCef/android64Debug)
-	DKREMOVE(${DKPROJECT}/assets/DKCef/android64release)
-	DKREMOVE(${DKPROJECT}/assets/cef.log)
-	DKREMOVE(${DKPROJECT}/assets/log.txt)
+	#DKREMOVE(${DKPROJECT}/assets/USER)
+	#DKREMOVE(${DKPROJECT}/assets/DKCef/android64Debug)
+	#DKREMOVE(${DKPROJECT}/assets/DKCef/android64release)
+	#DKREMOVE(${DKPROJECT}/assets/cef.log)
+	#DKREMOVE(${DKPROJECT}/assets/log.txt)
 	
 	
 	## Create Android Icons
@@ -1067,15 +1074,15 @@ if(ANDROID_64)
     DKEXECUTE_PROCESS(COMMAND ${IMAGEMAGICK_CONVERT} ${DKPROJECT}/icons/icon.png -resize 144x144 ${DKPROJECT}/icons/android/drawable-xxhdpi/icon.png)
 
 	
-	message("Creating assets.zip . . .")
-	DKZIP(${DKPROJECT}/assets) #.zip the assets
+	#message("Creating assets.zip . . .")
+	#DKZIP(${DKPROJECT}/assets) #.zip the assets
 	
-	message("Creating assets.h . . .")
-	bin2h(SOURCE_FILE ${DKPROJECT}/assets.zip HEADER_FILE ${DKPROJECT}/assets.h VARIABLE_NAME "ASSETS_H")
+	#message("Creating assets.h . . .")
+	#bin2h(SOURCE_FILE ${DKPROJECT}/assets.zip HEADER_FILE ${DKPROJECT}/assets.h VARIABLE_NAME "ASSETS_H")
 	
 	# Restore the backed up assets
-	DKCOPY(${DKPROJECT}/Backup/ ${DKPROJECT}/assets/ TRUE)
-	DKREMOVE(${DKPROJECT}/Backup)
+	#DKCOPY(${DKPROJECT}/Backup/ ${DKPROJECT}/assets/ TRUE)
+	#DKREMOVE(${DKPROJECT}/Backup)
 	#############################
 	
 	DKUPDATE_ANDROID_NAME(${APP_NAME})
