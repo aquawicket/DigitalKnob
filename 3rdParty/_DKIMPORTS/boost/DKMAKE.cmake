@@ -235,7 +235,6 @@ ANDROID64_DEBUG_COMMAND(
 	threading=multi
 	target-os=android
 	-j4
-	--layout=versioned
 	--ignore-site-config
 	--layout=system
 	--user-config=${BOOST}/android-config.jam
@@ -258,7 +257,6 @@ ANDROID64_RELEASE_COMMAND(
 	threading=multi
 	target-os=android
 	-j4
-	--layout=versioned
 	--ignore-site-config
 	--layout=system
 	--user-config=${BOOST}/android-config.jam
