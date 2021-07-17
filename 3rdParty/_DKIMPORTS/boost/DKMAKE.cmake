@@ -9,7 +9,7 @@
 DKSET(BOOST_VERSION_MAJOR 1)
 DKSET(BOOST_VERSION_MINOR 74)
 DKSET(BOOST_VERSION_BUILD 0)
-DKSET(BOOST_VERSION ${BOOST_VERSION_MAJOR}_${BOOST_VERSION_MINOR}_${BOOST_VERSION_BUILD})
+DKSET(BOOST_VERSION ${BOOST_VERSION_MAJOR}.${BOOST_VERSION_MINOR}.${BOOST_VERSION_BUILD})
 DKSET(BOOST_NAME boost_${BOOST_VERSION})
 DKSET(BOOST ${3RDPARTY}/${BOOST_NAME})
 
@@ -17,7 +17,7 @@ DKSET(BOOST ${3RDPARTY}/${BOOST_NAME})
 ### INSTALL ###
 ## https://sourceforge.net/projects/boost/files/boost/1.74.0/boost_1_74_0.zip
 ## https://dl.bintray.com/boostorg/release/1.74.0/source/boost_1_74_0.zip
-DKINSTALL(https://sourceforge.net/projects/boost/files/boost/${BOOST_VERSION_MAJOR}.${BOOST_VERSION_MINOR}.${BOOST_VERSION_BUILD}/boost_${BOOST_VERSION}.zip boost ${BOOST_NAME})
+DKINSTALL(https://sourceforge.net/projects/boost/files/boost/${BOOST_VERSION}/${BOOST_NAME}.zip boost ${BOOST_NAME})
 
 
 ### DKPLUGINS LINK ###
