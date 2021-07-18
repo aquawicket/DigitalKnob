@@ -10,39 +10,29 @@ unsigned int DKAndroid::android_height = 480;
 unsigned int DKAndroid::android_mouseX = 0;
 unsigned int DKAndroid::android_mouseY = 0;
 
-///////////
-extern "C"
-{
+extern "C" {
 
 static JavaVM* thejvm = 0;
 static jobject theobj = 0;
 
-/////////////////////////////////////////////////////
-JNIEXPORT jint JNI_OnLoad(JavaVM* vm, void* reserved)
-{
+JNIEXPORT jint JNI_OnLoad(JavaVM* vm, void* reserved){
 	DKDEBUGFUNC(vm, reserved);
 	thejvm = vm;
     return JNI_VERSION_1_6;
 }
 
-////////////////////////////////////////////
-void initJNIBridge(JNIEnv* env, jobject obj)
-{
+void initJNIBridge(JNIEnv* env, jobject obj){
 	DKDEBUGFUNC(env, obj);
 	theobj = env->NewGlobalRef(obj);
 }
 
-////////////////////////////////////////////
-void exitJNIBridge(JNIEnv* env, jobject obj)
-{
+void exitJNIBridge(JNIEnv* env, jobject obj){
 	DKDEBUGFUNC(env, obj);
 	env->DeleteGlobalRef(theobj);
 }
 
 //FIXME: this needs to fail without crashing
-//////////////////////////////////////////////////////////////////
-void CallJavaFunction(const DKString& name, const DKString& param)
-{
+void CallJavaFunction(const DKString& name, const DKString& param){
 	DKDEBUGFUNC(name, param);
 	JNIEnv* env;
 	bool attached = false;
@@ -50,9 +40,8 @@ void CallJavaFunction(const DKString& name, const DKString& param)
 		case JNI_OK:
 			break;
 		case JNI_EDETACHED:
-			if (thejvm->AttachCurrentThread(&env, NULL)!=0){
+			if (thejvm->AttachCurrentThread(&env, NULL)!=0)
 				DKERROR("failed to attech jvm\n");
-			 }
 			attached = true;
 			break;
 		case JNI_EVERSION:
@@ -72,7 +61,6 @@ void CallJavaFunction(const DKString& name, const DKString& param)
 			DKERROR("Could not get method\n");
 			return;
 		}
-
 		env->CallVoidMethod(theobj, method);
 	    return;
 	}
@@ -83,15 +71,12 @@ void CallJavaFunction(const DKString& name, const DKString& param)
 		DKERROR("Could not get method\n");
         return;
     }
-
 	jstring jstr = env->NewStringUTF(param.c_str());
 	env->CallVoidMethod(theobj, method, jstr);
     return;
 }
 
-////////////////////////////////////////////////////
-void initSDL(JNIEnv* env, jclass cls, jobject array)
-{
+void initSDL(JNIEnv* env, jclass cls, jobject array){
 	DKDEBUGFUNC(env, cls, array);
 	JavaData jdata;
 	jdata.env = env;
@@ -101,9 +86,7 @@ void initSDL(JNIEnv* env, jclass cls, jobject array)
 	DKClass::CallFunc("DKAndroid_onInitSDL", &jdata, NULL);
 }
 
-//////////////////////////////////////////////////////////////
-jstring CallCppFunction(JNIEnv* env, jclass cls, jstring data)
-{
+jstring CallCppFunction(JNIEnv* env, jclass cls, jstring data){
 	DKDEBUGFUNC(env, cls, data);
 	const char* _data = env->GetStringUTFChars(data,JNI_FALSE);
 	DKStringArray arry;
@@ -119,7 +102,6 @@ jstring CallCppFunction(JNIEnv* env, jclass cls, jstring data)
 	}
 	
 	if(!DKApp::active){ return NULL; }
-
 	if(same(arry[0],"DKAndroid_exit")){
 		DKINFO("DKAndroid::exit()\n");
 		DKApp::Exit();
@@ -133,7 +115,6 @@ jstring CallCppFunction(JNIEnv* env, jclass cls, jstring data)
 		DKApp::Loop();
 		return NULL;
 	}
-	
 	JavaData jdata;
 	jdata.env = env;
 	jdata.cls = cls;
@@ -152,98 +133,69 @@ jstring CallCppFunction(JNIEnv* env, jclass cls, jstring data)
 	env->SetByteArrayRegion(bytes, 0, strlen(rval.c_str()), (jbyte*)rval.c_str()); 
 	jstring str = (jstring)env->NewObject(strClass, ctorID, bytes, encoding);
 	return str;
-
 	
 	/*
 	////////   SDL  /////////////////////////////////
-	if(same(arry[0],"DKAndroid_onDropFile")){
+	if(same(arry[0],"DKAndroid_onDropFile"))
 		DKClass::CallFunc("DKAndroid_onDropFile", static_cast<void*>(&jdata));
-	}
-	if(same(arry[0],"DKAndroid_onResize")){
+	if(same(arry[0],"DKAndroid_onResize"))
 		DKClass::CallFunc("DKAndroid_onResize", static_cast<void*>(&jdata));
-	}
-	if(same(arry[0],"DKAndroid_onPadDown")){
+	if(same(arry[0],"DKAndroid_onPadDown"))
 		return static_cast<jstring>(DKClass::CallFunc("DKAndroid_onPadDown", static_cast<void*>(&jdata)));
-	}
-	if(same(arry[0],"DKAndroid_onPadUp")){
+	if(same(arry[0],"DKAndroid_onPadUp"))
 		return static_cast<jstring>(DKClass::CallFunc("DKAndroid_onPadUp", static_cast<void*>(&jdata)));
-	}
-	if(same(arry[0],"DKAndroid_onJoy")){
+	if(same(arry[0],"DKAndroid_onJoy"))
 		DKClass::CallFunc("DKAndroid_onJoy", static_cast<void*>(&jdata));
-	}
-	if(same(arry[0],"DKAndroid_onHat")){
+	if(same(arry[0],"DKAndroid_onHat"))
 		DKClass::CallFunc("DKAndroid_onHat", static_cast<void*>(&jdata));
-	}
-	if(same(arry[0],"DKAndroid_AddJoystick")){
+	if(same(arry[0],"DKAndroid_AddJoystick"))
 		return static_cast<jstring>(DKClass::CallFunc("DKAndroid_AddJoystick", static_cast<void*>(&jdata)));
-	}
-	if(same(arry[0],"DKAndroid_RemoveJoystick")){
+	if(same(arry[0],"DKAndroid_RemoveJoystick"))
 		return static_cast<jstring>(DKClass::CallFunc("DKAndroid_RemoveJoystick", static_cast<void*>(&jdata)));
-	}
-	if(same(arry[0],"onNativeSurfaceChanged")){
+	if(same(arry[0],"onNativeSurfaceChanged"))
 		return static_cast<jstring>(DKClass::CallFunc("DKAndroid_onSurfaceChanged", static_cast<void*>(&jdata)));
-	}
-	if(same(arry[0],"DKAndroid_onSurfaceDestroyed")){
+	if(same(arry[0],"DKAndroid_onSurfaceDestroyed"))
 		DKClass::CallFunc("DKAndroid_onSurfaceDestroyed", static_cast<void*>(&jdata));
-	}
-	if(same(arry[0],"DKAndroid_onKeyDown")){
+	if(same(arry[0],"DKAndroid_onKeyDown"))
 		DKClass::CallFunc("DKAndroid_onKeyDown", static_cast<void*>(&jdata));
-	}
-	if(same(arry[0],"DKAndroid_onKeyUp")){
+	if(same(arry[0],"DKAndroid_onKeyUp"))
 		DKClass::CallFunc("DKAndroid_onKeyUp", static_cast<void*>(&jdata));
-	}
-	if(same(arry[0],"DKAndroid_onKeyboardFocusLost")){
+	if(same(arry[0],"DKAndroid_onKeyboardFocusLost"))
 		DKClass::CallFunc("DKAndroid_onKeyboardFocusLost", static_cast<void*>(&jdata));
-	}
-	if(same(arry[0],"DKAndroid_onTouch")){
+	if(same(arry[0],"DKAndroid_onTouch"))
 		DKClass::CallFunc("DKAndroid_onTouch", static_cast<void*>(&jdata));
-	}
-	if(same(arry[0],"DKAndroid_onMouse")){
+	if(same(arry[0],"DKAndroid_onMouse"))
 		DKClass::CallFunc("DKAndroid_onMouse", static_cast<void*>(&jdata));
-	}
-	if(same(arry[0],"DKAndroid_onAccel")){
+	if(same(arry[0],"DKAndroid_onAccel"))
 		DKClass::CallFunc("DKAndroid_onAccel", static_cast<void*>(&jdata));
-	}
-	if(same(arry[0],"DKAndroid_onLowMemory")){
+	if(same(arry[0],"DKAndroid_onLowMemory"))
 		DKClass::CallFunc("DKAndroid_onLowMemory", static_cast<void*>(&jdata));
-	}
-	if(same(arry[0],"DKAndroid_onQuit")){
+	if(same(arry[0],"DKAndroid_onQuit"))
 		DKClass::CallFunc("DKAndroid_onQuit", static_cast<void*>(&jdata));
-	}
-	if(same(arry[0],"DKAndroid_onPause")){
+	if(same(arry[0],"DKAndroid_onPause"))
 		DKClass::CallFunc("DKAndroid_onPause", static_cast<void*>(&jdata));
-	}
-	if(same(arry[0],"DKAndroid_onResume")){
+	if(same(arry[0],"DKAndroid_onResume"))
 		DKClass::CallFunc("DKAndroid_onResume", static_cast<void*>(&jdata));
-	}
-	if(same(arry[0],"DKAndroid_onCommitText")){
+	if(same(arry[0],"DKAndroid_onCommitText"))
 		DKClass::CallFunc("DKAndroid_onCommitText", static_cast<void*>(&jdata));
-	}
-	if(same(arry[0],"DKAndroid_onComposingText")){
+	if(same(arry[0],"DKAndroid_onComposingText"))
 		DKClass::CallFunc("DKAndroid_onComposingText", static_cast<void*>(&jdata));
-	}
-	if(same(arry[0],"DKAndroid_onGetHint")){
+	if(same(arry[0],"DKAndroid_onGetHint"))
 		return static_cast<jstring>(DKClass::CallFunc("DKAndroid_onGetHint", static_cast<void*>(&jdata)));
-	}
 
 	///////   OpenSceneGraph ////////////////
-	if(same(arry[0],"DKAndroid_onMousePress")){
+	if(same(arry[0],"DKAndroid_onMousePress"))
 		DKClass::CallFunc("DKAndroid_onMousePress", static_cast<void*>(&jdata));
-	}
-	if(same(arry[0],"DKAndroid_onMouseRelease")){
+	if(same(arry[0],"DKAndroid_onMouseRelease"))
 		DKClass::CallFunc("DKAndroid_onMouseRelease", static_cast<void*>(&jdata));
-	}
-	if(same(arry[0],"DKAndroid_onMouseMove")){
+	if(same(arry[0],"DKAndroid_onMouseMove"))
 		DKClass::CallFunc("DKAndroid_onMouseMove", static_cast<void*>(&jdata));
-	}
 	*/
 }
 
 } //extern "C"
 
-//////////////////////
-void DKAndroid::init()
-{
+void DKAndroid::init(){
 	DKDEBUGFUNC();
 	
 	if(!DKApp::active){ //if ! android context resume	
@@ -287,9 +239,7 @@ void DKAndroid::init()
 	}
 }
 
-///////////////////////////////////////////
-bool DKAndroid::GetMousePos(int& x, int& y)
-{
+bool DKAndroid::GetMousePos(int& x, int& y){
 	DKDEBUGFUNC(x, y);
 	x = android_mouseX;
 	y = android_mouseY;
@@ -297,9 +247,7 @@ bool DKAndroid::GetMousePos(int& x, int& y)
 }
 
 /*
-////////////////////////////////////////////////////////
-void DKAndroid::ProcessEvent(Rocket::Core::Event& event)
-{
+void DKAndroid::ProcessEvent(Rocket::Core::Event& event){
 	DKDEBUGFUNC(events);
 	//Toggle Keyboard on text element click
 	if(event.GetType() == "mousedown"){

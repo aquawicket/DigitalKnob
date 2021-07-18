@@ -5,9 +5,7 @@
 
 #define DESKTOP
 
-////////////
-class DKMac
-{
+class DKMac{
 public:
 	static bool GetMousePos(int& x, int& y);
 	static bool SetMousePos(const int& x, const int& y);
@@ -22,7 +20,6 @@ public:
 	static bool MiddleRelease();
 	static bool PressKey(int key);
 	static bool ReleaseKey(int key);
-
 	static bool VirtualMemory(unsigned long long& virtualMemory);
 	static bool VirtualMemoryUsed(unsigned long long& virtualMemory);
 	static bool VirtualMemoryUsedByApp(unsigned int& virtualMemory);
@@ -32,7 +29,6 @@ public:
 	static bool CpuInit();
 	static bool CpuUsed(int& cpu);
 	static bool CpuUsedByApp(int& cpu);
-
 	static bool TurnOffMonitor();
 	static bool TurnOnMonitor();
 	static bool LowPowerMonitor();

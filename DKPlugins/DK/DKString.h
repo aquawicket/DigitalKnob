@@ -15,10 +15,8 @@
 #include <functional> 
 #include <cctype>
 #include <locale>
-
 #include <stdio.h>
 #include <stdlib.h>
-
 
 #ifdef _MSC_VER
 //#define strtoll _strtoi64

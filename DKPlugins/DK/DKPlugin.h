@@ -29,9 +29,7 @@ DLLAPI void* getName();
 }
 #endif 
 
-////////////////
-class DKPlugins
-{
+class DKPlugins{
 public:
 	static bool LoadPlugin(const std::string& file);
 	static void ClosePlugins();

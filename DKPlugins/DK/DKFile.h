@@ -2,14 +2,11 @@
 #ifndef DKFile_H
 #define DKFile_H
 
-//#define BOOST_NO_CXX11_SCOPED_ENUMS
 #include <boost/filesystem.hpp>
 #include "DK/DK.h"
 #include "DK/DKString.h"
 
-////////////
-class DKFile
-{
+class DKFile{
 public:
 	static bool DebugPath(const DKString& path);
 	static bool NormalizePath(DKString& path);
@@ -51,7 +48,6 @@ public:
 	static bool StringToFile(const DKString& string, const DKString& file);
 	static bool VerifyPath(DKString& path);
   
-
 	static DKString exe_path;      //example:  C:/Users/username/digitalknob/DKApps/DKMyApp/win32/Release/DKMyApp.exe
 	static DKString exe_name;      //example:  DKMyApp.exe
 	static DKString app_path;      //example:  C:/Users/username/digitalknob/DKApps/DKMyApp/win32/Release

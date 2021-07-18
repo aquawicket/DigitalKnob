@@ -9,9 +9,7 @@
 #include <X11/extensions/XTest.h>  //requires  libxtst-dev
 #include <alsa/asoundlib.h>
 
-/////////////////////////////////////////
-bool DKLinux::GetMousePos(int& x, int& y)
-{
+bool DKLinux::GetMousePos(int& x, int& y){
 	DKDEBUGFUNC(x, y);
 	//Compile with:
     //cc -Wall -I/usr/X11R6/include -L/usr/X11R6/lib -lXm -o xquerypointer xquerypointer.c
@@ -46,9 +44,7 @@ bool DKLinux::GetMousePos(int& x, int& y)
 	return false;
 }
 
-/////////////////////////////////////////////////////
-bool DKLinux::SetMousePos(const int& x, const int& y)
-{
+bool DKLinux::SetMousePos(const int& x, const int& y){
 	DKDEBUGFUNC(x, y);
 	Display *dpy = XOpenDisplay(0);
 	Window root = XRootWindow(dpy, 0);
@@ -58,9 +54,7 @@ bool DKLinux::SetMousePos(const int& x, const int& y)
 	return true;
 }
 
-/////////////////////////
-bool DKLinux::LeftPress()
-{
+bool DKLinux::LeftPress(){
 	DKDEBUGFUNC();
 	Display *display = XOpenDisplay(NULL);
 	XTestFakeButtonEvent(display, 1, true, 0);
@@ -69,9 +63,7 @@ bool DKLinux::LeftPress()
 	return true;
 }
 
-///////////////////////////
-bool DKLinux::LeftRelease()
-{
+bool DKLinux::LeftRelease(){
 	DKDEBUGFUNC();
 	Display *display = XOpenDisplay(NULL);
 	XTestFakeButtonEvent(display, 1, false, 0);
@@ -80,9 +72,7 @@ bool DKLinux::LeftRelease()
 	return true;
 }
 
-//////////////////////////
-bool DKLinux::RightPress()
-{
+bool DKLinux::RightPress(){
 	DKDEBUGFUNC();
 	Display *display = XOpenDisplay(NULL);
 	XTestFakeButtonEvent(display, 3, true, 0);
@@ -91,9 +81,7 @@ bool DKLinux::RightPress()
 	return true;
 }
 
-////////////////////////////
-bool DKLinux::RightRelease()
-{
+bool DKLinux::RightRelease(){
 	DKDEBUGFUNC();
 	Display *display = XOpenDisplay(NULL);
 	XTestFakeButtonEvent(display, 3, false, 0);
@@ -102,9 +90,7 @@ bool DKLinux::RightRelease()
 	return true;
 }
 
-///////////////////////////
-bool DKLinux::MiddlePress()
-{
+bool DKLinux::MiddlePress(){
 	DKDEBUGFUNC();
 	Display *display = XOpenDisplay(NULL);
 	XTestFakeButtonEvent(display, 2, true, 0);
@@ -113,9 +99,7 @@ bool DKLinux::MiddlePress()
 	return true;
 }
 
-/////////////////////////////
-bool DKLinux::MiddleRelease()
-{
+bool DKLinux::MiddleRelease(){
 	DKDEBUGFUNC();
 	Display *display = XOpenDisplay(NULL);
 	XTestFakeButtonEvent(display, 2, false, 0);
@@ -124,9 +108,7 @@ bool DKLinux::MiddleRelease()
 	return true;
 }
 
-///////////////////////////////
-bool DKLinux::PressKey(int key)
-{
+bool DKLinux::PressKey(int key){
 	DKDEBUGFUNC(key);
 	Display *display = XOpenDisplay(NULL);
 	XTestFakeKeyEvent(display, key, true, 0);
@@ -135,9 +117,7 @@ bool DKLinux::PressKey(int key)
 	return true;
 }
 
-/////////////////////////////////
-bool DKLinux::ReleaseKey(int key)
-{
+bool DKLinux::ReleaseKey(int key){
 	DKDEBUGFUNC(key);
 	Display *display = XOpenDisplay(NULL);
 	XTestFakeKeyEvent(display, key, false, 0);
@@ -146,9 +126,7 @@ bool DKLinux::ReleaseKey(int key)
 	return true;
 }
 
-////////////////////////////////////
-bool DKLinux::GetScreenWidth(int& w)
-{
+bool DKLinux::GetScreenWidth(int& w){
 	DKDEBUGFUNC(w);
 	Display* d = XOpenDisplay(NULL);
 	Screen* s = DefaultScreenOfDisplay(d);
@@ -156,9 +134,7 @@ bool DKLinux::GetScreenWidth(int& w)
 	return true;
 }
 
-/////////////////////////////////////
-bool DKLinux::GetScreenHeight(int& h)
-{
+bool DKLinux::GetScreenHeight(int& h){
 	DKDEBUGFUNC(h);
 	Display* d = XOpenDisplay(NULL);
 	Screen* s = DefaultScreenOfDisplay(d);
@@ -166,9 +142,7 @@ bool DKLinux::GetScreenHeight(int& h)
 	return true;
 }
 
-//////////////////////////////////////////
-bool DKLinux::Run(const DKString& command)
-{
+bool DKLinux::Run(const DKString& command){
 	DKDEBUGFUNC(command);
 	DKString cmd = command;
 	cmd = "xdg-open "+cmd+" &";
@@ -177,46 +151,35 @@ bool DKLinux::Run(const DKString& command)
 	return true;
 }
 
-/////////////////////////////////
-bool DKLinux::KeyIsDown(int& key)
-{
+bool DKLinux::KeyIsDown(int& key){
 	DKDEBUGFUNC(key);
 	XkbStateRec r;
     Display* d = XOpenDisplay(NULL);
     XkbGetState(d, XkbUseCoreKbd, &r);
     //printf("mod: 0x%x\n", r.mods);
-	if((r.mods & 0x01) && key == 16){ //Shift
+	if((r.mods & 0x01) && key == 16) //Shift
 		return true;
-	}
-	if((r.mods & 0x04) && key == 17){ //Ctrl
+	if((r.mods & 0x04) && key == 17) //Ctrl
 		return true;
-	}
-	if((r.mods & 0x08) && key == 18){ //Alt
+	if((r.mods & 0x08) && key == 18) //Alt
 		return true;
-	}
     XCloseDisplay(d);
 	return false;
 }
 
-//////////////////////////////////////////
-bool DKLinux::GetClipboard(DKString& text)
-{
+bool DKLinux::GetClipboard(DKString& text){
 	DKDEBUGFUNC(text);
 	//TODO
 	return DKClass::CallFunc("DKSDLWindow::GetClipboard", NULL, &text);
 }
 
-////////////////////////////////////////////////
-bool DKLinux::SetClipboard(const DKString& text)
-{
+bool DKLinux::SetClipboard(const DKString& text){
 	DKDEBUGFUNC(text);
 	//TODO
 	return DKClass::CallFunc("DKSDLWindow::SetClipboard", &text, NULL);
 }
 
-///////////////////////////////////////
-bool DKLinux::SetVolume(double nVolume)
-{
+bool DKLinux::SetVolume(double nVolume){
 	DKDEBUGFUNC(nVolume);
 	long min, max;
 	snd_mixer_t *handle;
@@ -241,9 +204,7 @@ bool DKLinux::SetVolume(double nVolume)
 	return true;
 }
 
-/////////////////////////////////////
-bool DKLinux::GetVolume(int& percent)
-{
+bool DKLinux::GetVolume(int& percent){
 	DKDEBUGFUNC(percent);
 	long min, max;
 	snd_mixer_t *handle;
@@ -272,10 +233,7 @@ bool DKLinux::GetVolume(int& percent)
 	return true;
 }
 
-
-//////////////////////////////////////////////////////////////
-bool DKLinux::VirtualMemory(unsigned long long& virtualMemory)
-{
+bool DKLinux::VirtualMemory(unsigned long long& virtualMemory){
 	DKDEBUGFUNC(virtualMemory);
 	//TODO
 	/*
@@ -292,9 +250,7 @@ bool DKLinux::VirtualMemory(unsigned long long& virtualMemory)
 	return false;
 }
 
-//////////////////////////////////////////////////////////////////
-bool DKLinux::VirtualMemoryUsed(unsigned long long& virtualMemory)
-{
+bool DKLinux::VirtualMemoryUsed(unsigned long long& virtualMemory){
 	DKDEBUGFUNC(virtualMemory);
 	//TODO
 	/*
@@ -307,9 +263,7 @@ bool DKLinux::VirtualMemoryUsed(unsigned long long& virtualMemory)
 	return false;
 }
 
-/////////////////////////////////////////////////////////////////
-bool DKLinux::VirtualMemoryUsedByApp(unsigned int& virtualMemory)
-{
+bool DKLinux::VirtualMemoryUsedByApp(unsigned int& virtualMemory){
 	DKDEBUGFUNC(virtualMemory);
 	//TODO
 	/*
@@ -345,9 +299,7 @@ bool DKLinux::VirtualMemoryUsedByApp(unsigned int& virtualMemory)
 	return false;
 }
 
-////////////////////////////////////////////////////////////////
-bool DKLinux::PhysicalMemory(unsigned long long& physicalMemory)
-{
+bool DKLinux::PhysicalMemory(unsigned long long& physicalMemory){
 	DKDEBUGFUNC(physicalMemory);
 	//TODO
 	/*
@@ -359,9 +311,7 @@ bool DKLinux::PhysicalMemory(unsigned long long& physicalMemory)
 	return false;
 }
 
-////////////////////////////////////////////////////////////////////
-bool DKLinux::PhysicalMemoryUsed(unsigned long long& physicalMemory)
-{
+bool DKLinux::PhysicalMemoryUsed(unsigned long long& physicalMemory){
 	DKDEBUGFUNC(physicalMemory);
 	//TODO
 	/*
@@ -373,9 +323,7 @@ bool DKLinux::PhysicalMemoryUsed(unsigned long long& physicalMemory)
 	return false;
 }
 
-///////////////////////////////////////////////////////////////////
-bool DKLinux::PhysicalMemoryUsedByApp(unsigned int& physicalMemory)
-{
+bool DKLinux::PhysicalMemoryUsedByApp(unsigned int& physicalMemory){
 	DKDEBUGFUNC(physicalMemory);
 	//TODO
 	/*
@@ -411,17 +359,13 @@ bool DKLinux::PhysicalMemoryUsedByApp(unsigned int& physicalMemory)
 	return false;
 }
 
-///////////////////////
-bool DKLinux::CpuInit()
-{
+bool DKLinux::CpuInit(){
 	DKDEBUGFUNC();
 	//TODO
 	return false;
 }
 
-///////////////////////////////
-bool DKLinux::CpuUsed(int& cpu)
-{
+bool DKLinux::CpuUsed(int& cpu){
 	DKDEBUGFUNC(cpu);
 	//TODO
 	/*
@@ -469,9 +413,7 @@ bool DKLinux::CpuUsed(int& cpu)
 	return false;
 }
 
-////////////////////////////////////
-bool DKLinux::CpuUsedByApp(int& cpu)
-{
+bool DKLinux::CpuUsedByApp(int& cpu){
 	DKDEBUGFUNC(cpu);
 	//TODO
 	/*
@@ -527,24 +469,18 @@ bool DKLinux::CpuUsedByApp(int& cpu)
 	return false;
 }
 
-//////////////////////////////
-bool DKLinux::TurnOffMonitor()
-{
+bool DKLinux::TurnOffMonitor(){
 	DKDEBUGFUNC();
 	DKString rtn;
 	return DKUtil::System("xset dpms force off", rtn);
 }
 
-/////////////////////////////
-bool DKLinux::TurnOnMonitor()
-{
+bool DKLinux::TurnOnMonitor(){
 	DKDEBUGFUNC();
 	return false;
 }
 
-///////////////////////////////
-bool DKLinux::LowPowerMonitor()
-{
+bool DKLinux::LowPowerMonitor(){
 	DKDEBUGFUNC();
 	return false;
 }

@@ -12,9 +12,7 @@
 
 #define FRAME_VALUES 30
 
-////////////
-class DKUtil
-{
+class DKUtil{
 public:
 	static bool Beep();
 	static bool Bin2C(const DKString& input, const DKString& output);
@@ -101,6 +99,5 @@ public:
 	static long framecount; // total frames rendered
 	static float framespersecond;
 };
-
 
 #endif //DKUtil_H

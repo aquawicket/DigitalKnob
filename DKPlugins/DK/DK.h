@@ -24,7 +24,6 @@
 #error NO KNOWN PLATFORM FLAG WAS FOUND (WIN,MAC,LINUX,ANDROID,IOS,RASPBERRY)
 #endif
 
-//* DK
 #include "DK/DKClass.h"
 #include "DK/DKEvents.h"
 #include "DK/DKUtil.h"

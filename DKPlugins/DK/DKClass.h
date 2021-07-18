@@ -1,5 +1,4 @@
 //// http://blog.noctua-software.com/object-factory-c++.html
-//   Note: Only DKObject's can be registered classes
 #pragma once
 #ifndef DKClass_H
 #define DKClass_H

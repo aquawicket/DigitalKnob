@@ -6,11 +6,8 @@
 
 #import <UIKit/UIKit.h>
 
-////////////
-class DKIos
-{
+class DKIos{
 	//TODO
-
 };
 
 #endif //DKIos_H

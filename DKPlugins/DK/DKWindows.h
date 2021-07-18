@@ -17,9 +17,7 @@ static int numProcessors;
 static HANDLE self;
 static bool cpuInit = false;
 
-////////////////
-class DKWindows
-{
+class DKWindows{
 public:
 	static bool WINAPI ConsoleHandler(DWORD type);
 	static bool CpuInit();
@@ -76,7 +74,6 @@ public:
 	static HINSTANCE hInstance;
 	static HWND consoleWindow;
 };
-
 
 #endif //DKWindows_H
 #endif //WIN32

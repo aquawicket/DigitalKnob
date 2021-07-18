@@ -3,9 +3,7 @@
 #ifndef DKUnix_H
 #define DKUnix_H
 
-////////////
-class DKUnix
-{
+class DKUnix{
 public:
 	static bool GetKey(int& key);
 	static bool Sleep(int milliseconds);

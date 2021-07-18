@@ -4,8 +4,7 @@
 
 #include "DK/DK.h"
 
-class DKApp
-{
+class DKApp{
 public:
 	DKApp(int argc, char** argv);
 	static void Init();

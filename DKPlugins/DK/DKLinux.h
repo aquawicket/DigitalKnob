@@ -7,9 +7,7 @@
 
 #include "DKString.h"
 
-/////////////
-class DKLinux
-{
+class DKLinux{
 public:
 	static bool SetVolume(double nVolume);
 	static bool CpuInit();
