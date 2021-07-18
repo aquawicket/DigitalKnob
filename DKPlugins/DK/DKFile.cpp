@@ -97,7 +97,7 @@ bool DKFile::CopyDirectory(boost::filesystem::path const& source, boost::filesys
 		}
 		if(!fs::exists(destination)){ 
 			// Create the destination directory
-			if(!fs::create_directory(destination)){
+			if(!fs::create_directories(destination)){
 				DKERROR("DKFile::CopyDirectory(): Unable to create destination directory "+destination.string()+"\n");
 				return false;
 			}
