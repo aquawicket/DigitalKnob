@@ -65,8 +65,7 @@ void SetLog(const int lvl, const DKString& text);
 
 #ifndef ANDROID
 template <typename... Args>
-void DebugFunc(const char* file, int line, const char* func, Args&&... args)
-{
+void DebugFunc(const char* file, int line, const char* func, Args&&... args){
 	if(log_show.empty() && !log_debug)
 		return;
 	std::ostringstream out;
@@ -81,8 +80,7 @@ void DebugFunc(const char* file, int line, const char* func, Args&&... args)
 }
 
 template <typename... Args>
-void DebugVars(const char* file, int line, const char* func, const DKString& names, Args&&... args)
-{
+void DebugVars(const char* file, int line, const char* func, const DKString& names, Args&&... args){
 	std::stringstream names_ss;
 	for(const char& c : names){
 		if(c == ','){
