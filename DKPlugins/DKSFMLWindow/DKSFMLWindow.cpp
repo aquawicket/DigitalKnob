@@ -2,8 +2,10 @@
 #include "DKSFMLWindow/DKSFMLWindow.h"
 #include <SFML/Graphics.hpp>
 
-std::vector<boost::function<bool(sf::Event& e)> > DKSFMLWindow::event_funcs;
-std::vector<boost::function<void()> > DKSFMLWindow::draw_funcs;
+//std::vector<boost::function<bool(sf::Event& e)> > DKSFMLWindow::event_funcs;
+std::vector<std::function<bool(sf::Event& e)> > DKSFMLWindow::event_funcs;
+//std::vector<boost::function<void()> > DKSFMLWindow::draw_funcs;
+std::vector<std::function<void()> > DKSFMLWindow::draw_funcs;
 
 
 /////////////////////////
