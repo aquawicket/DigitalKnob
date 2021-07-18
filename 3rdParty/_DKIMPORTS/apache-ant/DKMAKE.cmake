@@ -1,6 +1,9 @@
 if(NOT CMAKE_HOST_WIN32)
 	return()
 endif()
+if(NOT ANDROID)
+	return()
+endif()
 
 
 ### VERSION ####
