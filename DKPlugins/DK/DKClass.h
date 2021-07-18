@@ -1,11 +1,10 @@
 //// http://blog.noctua-software.com/object-factory-c++.html
-//
 //   Note: Only DKObject's can be registered classes
-
 #pragma once
 #ifndef DKClass_H
 #define DKClass_H
-#include <boost/function.hpp>
+//#include <boost/function.hpp>
+#include <functional>
 #include <boost/bind/bind.hpp>
 #include "DKObject.h"
 
@@ -81,7 +80,9 @@ public:
 	static void RegisterFunc(const DKString& name, bool (T::*func) (const void*, void*), T* _this)
 	{
 		DKDEBUGFUNC(name, func, _this);
-		functions[name] = boost::bind(func, _this, boost::placeholders::_1, boost::placeholders::_2);
+		//functions[name] = boost::bind(func, _this, boost::placeholders::_1, boost::placeholders::_2);
+		functions[name] = std::bind(func, _this, std::placeholders::_1, std::placeholders::_2);
+		
 		if(!functions[name]){
 			DKERROR("RegisterFunc(" + name + "): failed to register function \n");
 			return;
@@ -103,7 +104,7 @@ public:
 	static bool HasFunc(const DKString& name)
 	{
 		DKDEBUGFUNC(name);
-		return functions[name];
+		return (bool)functions[name];
 	}
 	
 	///////////////////////////////////////////////////////////////////////////
@@ -117,7 +118,8 @@ public:
 		return functions[name](input, output);
 	}
 
-	static std::map<DKString, boost::function<bool (const void*, void*)> > functions;
+	//static std::map<DKString, boost::function<bool (const void*, void*)> > functions;
+	static std::map<DKString, std::function<bool(const void*, void*)> > functions;
 };
 
 

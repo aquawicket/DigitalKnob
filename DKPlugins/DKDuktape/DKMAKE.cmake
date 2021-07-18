@@ -1,4 +1,6 @@
 DKDEPEND(duktape)
+##DKDEPEND(boost)
+DKDEPEND(DK)
 DKDEPEND(babel)
 
 DKCOPY(${DUKTAPE}/src/duktape.c ${DKPLUGINS}/DKDuktape/duktape.cpp FALSE)

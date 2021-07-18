@@ -456,8 +456,8 @@ bool DKFile::GetLocalCreationDate(const DKString& path, DKString& filedate)
 	if(!PathExists(path)){ return false; }
 #if defined(WIN32) || defined(MAC) || defined(LINUX)// || defined(ANDROID)	
 	struct tm* clock;               // create a time structure
-	struct stat attrib;         // create a file attribute structure
-	stat(path.c_str(), &attrib);     // get the attributes of afile.txt
+	struct stat attrib;             // create a file attribute structure
+	stat(path.c_str(), &attrib);    // get the attributes of afile.txt
 	clock = localtime(&(attrib.st_ctime)); 
 
 	DKString month = toString(clock->tm_mon);

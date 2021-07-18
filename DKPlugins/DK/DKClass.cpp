@@ -2,7 +2,8 @@
 #include "DKClass.h"
 
 std::map<DKString, DKClass*>* DKClass::classes = NULL;
-std::map<DKString, boost::function<bool (const void*, void*)> > DKClass::functions;
+//std::map<DKString, boost::function<bool (const void*, void*)> > DKClass::functions;
+std::map<DKString, std::function<bool(const void*, void*)> > DKClass::functions;
 
 void DKClass::Register(const DKString& klass, DKClass* _class, bool singleton){
 	DKDEBUGFUNC(klass, _class, singleton);

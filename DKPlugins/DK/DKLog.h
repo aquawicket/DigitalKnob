@@ -73,7 +73,7 @@ void DebugFunc(const char* file, int line, const char* func, Args&&... args)
 	out << func;
 	out << "(";
 	using expander = int[];
-	(void) expander { 0, (void(out << args << ", "), 0) ...};
+	//(void) expander { 0, (void(out << args << ", "), 0) ...}; //FIXME
 	out << ")\n";
 	std::string text = out.str();
 	replace(text, ", )", ")");

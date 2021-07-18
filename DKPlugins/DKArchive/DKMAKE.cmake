@@ -1,5 +1,5 @@
-##DKDEPEND(DKDuktape)
 DKDEPEND(libarchive)
+DKDEPEND(DKDuktape)
 IF(USE_DKDuktape)
 	DKDEPEND(DKDuktape)
 ENDIF()

@@ -3,19 +3,24 @@
 #include "DKClass.h"
 
 std::vector<DKEvents*> DKEvents::events;
-std::vector<boost::function<bool (const DKString&, const DKString&)> > DKEvents::reg_funcs;
-std::vector<boost::function<bool (const DKString&, const DKString&)> > DKEvents::unreg_funcs;
-std::vector<boost::function<bool (const DKString&, const DKString&, const DKString&)> > DKEvents::send_funcs;
+//std::vector<boost::function<bool (const DKString&, const DKString&)> > DKEvents::reg_funcs;
+std::vector<std::function<bool(const DKString&, const DKString&)> > DKEvents::reg_funcs;
+//std::vector<boost::function<bool (const DKString&, const DKString&)> > DKEvents::unreg_funcs;
+std::vector<std::function<bool(const DKString&, const DKString&)> > DKEvents::unreg_funcs;
+//std::vector<boost::function<bool (const DKString&, const DKString&, const DKString&)> > DKEvents::send_funcs;
+std::vector<std::function<bool(const DKString&, const DKString&, const DKString&)> > DKEvents::send_funcs;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-bool DKEvents::AddEvent(const DKString& id, const DKString& type, boost::function<bool (DKEvents*)> func, DKObject* object)
+//bool DKEvents::AddEvent(const DKString& id, const DKString& type, boost::function<bool (DKEvents*)> func, DKObject* object)
+bool DKEvents::AddEvent(const DKString& id, const DKString& type, std::function<bool(DKEvents*)> func, DKObject* object)
 {
 	DKDEBUGFUNC(id, type, func, object);
 	return DKEvents::AddEvent(id, type, "", func, object);
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-bool DKEvents::AddEvent(const DKString& id, const DKString& type, const DKString& jsreturn, boost::function<bool (DKEvents*)> func, DKObject* object)
+//bool DKEvents::AddEvent(const DKString& id, const DKString& type, const DKString& jsreturn, boost::function<bool (DKEvents*)> func, DKObject* object)
+bool DKEvents::AddEvent(const DKString& id, const DKString& type, const DKString& jsreturn, std::function<bool(DKEvents*)> func, DKObject* object)
 {
 	DKDEBUGFUNC(id, type, jsreturn, func, object);
 	DKString _jsreturn = jsreturn;
