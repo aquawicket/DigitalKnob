@@ -62,7 +62,7 @@ public:
 	static void RemoveRegisterEventFunc(bool (T::*func)(const DKString&, const DKString&), T* _this){
 		for(unsigned int i=0; i<reg_funcs.size(); ++i){
 			//if(reg_funcs[i] == boost::bind(func, _this, boost::placeholders::_1, boost::placeholders::_2)){
-			//if (reg_funcs[i] == std::bind(func, _this, const DKString&, const DKString&)) {
+			//if (reg_funcs[i] == std::bind(func, _this, std::placeholders::_1, std::placeholders::_2)) {
 			//	reg_funcs.erase(reg_funcs.begin() + i);
 			//}
 		}
