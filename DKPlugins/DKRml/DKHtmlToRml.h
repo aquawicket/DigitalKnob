@@ -5,8 +5,7 @@
 #include "DK/DK.h"
 #include <RmlUi/Core.h>
 
-class DKHtmlToRml  : public DKObject
-{
+class DKHtmlToRml  : public DKObject{
 public:
 	DKString processed;
 	bool HtmlToRml(const DKString& html, DKString& rml);

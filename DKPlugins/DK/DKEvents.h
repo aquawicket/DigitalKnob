@@ -62,9 +62,9 @@ public:
 	static void RemoveRegisterEventFunc(bool (T::*func)(const DKString&, const DKString&), T* _this){
 		for(unsigned int i=0; i<reg_funcs.size(); ++i){
 			//if(reg_funcs[i] == boost::bind(func, _this, boost::placeholders::_1, boost::placeholders::_2)){
-			if (reg_funcs[i] == std::bind(func, _this, std::placeholders::_1, std::placeholders::_2)) {
-				reg_funcs.erase(reg_funcs.begin() + i);
-			}
+			//if (reg_funcs[i] == std::bind(func, _this, const DKString&, const DKString&)) {
+			//	reg_funcs.erase(reg_funcs.begin() + i);
+			//}
 		}
 	}
 	
@@ -78,9 +78,9 @@ public:
 	static void RemoveUnegisterEventFunc(bool (T::*func)(const DKString&, const DKString&), T* _this){
 		for(unsigned int i=0; i<unreg_funcs.size(); ++i){
 			//if(unreg_funcs[i] == boost::bind(func, _this, boost::placeholders::_1, boost::placeholders::_2)){
-			if (unreg_funcs[i] == std::bind(func, _this, std::placeholders::_1, std::placeholders::_2)) {
-				unreg_funcs.erase(unreg_funcs.begin() + i);
-			}
+			//if (unreg_funcs[i] == std::bind(func, _this, std::placeholders::_1, std::placeholders::_2)) {
+			//	unreg_funcs.erase(unreg_funcs.begin() + i);
+			//}
 		}
 	}
 	
@@ -94,9 +94,9 @@ public:
 	static void RemoveSendEventFunc(bool (T::*func)(const DKString&, const DKString&, const DKString&), T* _this){
 		for(unsigned int i=0; i<send_funcs.size(); ++i){
 			//if(send_funcs[i] == boost::bind(func, _this, boost::placeholders::_1, boost::placeholders::_2, boost::placeholders::_3)){
-			if (send_funcs[i] == std::bind(func, _this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3)) {
-				send_funcs.erase(send_funcs.begin() + i);
-			}
+			//if (send_funcs[i] == std::bind(func, _this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3)) {
+			//	send_funcs.erase(send_funcs.begin() + i);
+			//}
 		}
 	}
 

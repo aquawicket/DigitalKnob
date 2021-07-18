@@ -73,8 +73,8 @@ bool DKRml::Init(){
 	LoadFonts();
 
 	DKEvents::AddRegisterEventFunc(&DKRml::RegisterEvent, this);
-	DKEvents::AddUnegisterEventFunc(&DKRml::UnregisterEvent, this);
-	DKEvents::AddSendEventFunc(&DKRml::SendEvent, this);
+	//DKEvents::AddUnegisterEventFunc(&DKRml::UnregisterEvent, this);
+	//DKEvents::AddSendEventFunc(&DKRml::SendEvent, this);
 	
 	DKClass::DKCreate("DKRmlJS");
 

@@ -5,8 +5,7 @@
 
 #include "DKDuktape/DKDuktape.h"
 
-class DKRmlJS : public DKObjectT<DKRmlJS>
-{
+class DKRmlJS : public DKObjectT<DKRmlJS>{
 public:
 	bool Init();
 

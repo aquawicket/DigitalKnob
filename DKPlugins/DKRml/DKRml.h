@@ -12,9 +12,7 @@
 #include "DKRml/DKRmlFile.h"
 #include "DKRml/DKHtmlToRml.h"
 
-////////////////////////////////////////////////////////////////
-class DKRml : public Rml::EventListener, public DKObjectT<DKRml>
-{
+class DKRml : public Rml::EventListener, public DKObjectT<DKRml>{
 public:
 	bool Init();
 	bool End();

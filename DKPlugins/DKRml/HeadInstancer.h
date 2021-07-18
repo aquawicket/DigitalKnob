@@ -3,8 +3,7 @@
 
 #include <RmlUi/Core/XMLNodeHandler.h>
 
-class HeadInstancer : public Rml::XMLNodeHandler
-{
+class HeadInstancer : public Rml::XMLNodeHandler{
 public:
 	HeadInstancer();
 	~HeadInstancer();
