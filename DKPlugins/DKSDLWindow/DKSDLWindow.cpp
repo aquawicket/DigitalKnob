@@ -25,9 +25,12 @@
 #endif
 
 
-std::vector<boost::function<bool(SDL_Event *event)> > DKSDLWindow::event_funcs;
-std::vector<boost::function<void()> > DKSDLWindow::render_funcs;
-std::vector<boost::function<void()> > DKSDLWindow::update_funcs;
+//std::vector<boost::function<bool(SDL_Event *event)> > DKSDLWindow::event_funcs;
+std::vector<std::function<bool(SDL_Event* event)> > DKSDLWindow::event_funcs;
+//std::vector<boost::function<void()> > DKSDLWindow::render_funcs;
+std::vector<std::function<void()> > DKSDLWindow::render_funcs;
+//std::vector<boost::function<void()> > DKSDLWindow::update_funcs;
+std::vector<std::function<void()> > DKSDLWindow::update_funcs;
 std::map<int,int> DKSDLWindow::sdlKeyCode;
 std::map<int,int> DKSDLWindow::sdlCharCode;
 std::map<int,int> DKSDLWindow::sdlShiftCharCode;

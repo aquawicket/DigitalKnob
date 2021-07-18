@@ -2,10 +2,7 @@
 #ifdef MAC
 #include "DKMac.h"
 
-
-///////////////////////////////////////
-bool DKMac::GetMousePos(int& x, int& y)
-{
+bool DKMac::GetMousePos(int& x, int& y){
 	CGEventRef ourEvent = CGEventCreate(NULL);
 	CGPoint point = CGEventGetLocation(ourEvent);
 	CFRelease(ourEvent);
@@ -14,16 +11,12 @@ bool DKMac::GetMousePos(int& x, int& y)
 	return true;
 }
 
-///////////////////////////////////////////////////
-bool DKMac::SetMousePos(const int& x, const int& y)
-{
+bool DKMac::SetMousePos(const int& x, const int& y){
 	CGWarpMouseCursorPosition(CGPointMake(x, y));
 	return true;
 }
 
-//////////////////////////////////
-bool DKMac::GetScreenWidth(int& w)
-{
+bool DKMac::GetScreenWidth(int& w){
 	CGRect mainMonitor = CGDisplayBounds(CGMainDisplayID());
 	CGFloat monitorWidth = CGRectGetWidth(mainMonitor);
 	w = monitorWidth;
@@ -42,8 +35,7 @@ bool DKMac::GetUsername(DKString& username){
     return false;
 }
 
-bool DKMac::LeftPress()
-{
+bool DKMac::LeftPress(){
     int x, y;
     GetMousePos(x, y);
     CGPoint point;
@@ -55,9 +47,7 @@ bool DKMac::LeftPress()
 	return true;
 }
 
-/////////////////////////
-bool DKMac::LeftRelease()
-{
+bool DKMac::LeftRelease(){
     int x, y;
     GetMousePos(x, y);
     CGPoint point;
@@ -69,9 +59,7 @@ bool DKMac::LeftRelease()
 	return true;
 }
 
-////////////////////////
-bool DKMac::RightPress()
-{
+bool DKMac::RightPress(){
     int x, y;
     GetMousePos(x, y);
     CGPoint point;
@@ -83,9 +71,7 @@ bool DKMac::RightPress()
 	return true;
 }
 
-//////////////////////////
-bool DKMac::RightRelease()
-{
+bool DKMac::RightRelease(){
     int x, y;
     GetMousePos(x, y);
     CGPoint point;
@@ -97,23 +83,17 @@ bool DKMac::RightRelease()
 	return true;
 }
 
-/////////////////////////
-bool DKMac::MiddlePress()
-{
+bool DKMac::MiddlePress(){
 	//TODO
 	return false;
 }
 
-///////////////////////////
-bool DKMac::MiddleRelease()
-{
+bool DKMac::MiddleRelease(){
 	//TODO
 	return false;
 }
 
-/////////////////////////////
-bool DKMac::PressKey(int key)
-{
+bool DKMac::PressKey(int key){
 	CGKeyCode keyCode = key;
 	CGEventRef eventRef = CGEventCreateKeyboardEvent(NULL, keyCode, true);
 	CGEventPost(kCGSessionEventTap, eventRef);
@@ -121,9 +101,7 @@ bool DKMac::PressKey(int key)
 	return true;
 }
 
-///////////////////////////////
-bool DKMac::ReleaseKey(int key)
-{
+bool DKMac::ReleaseKey(int key){
 	CGKeyCode keyCode = key;
 	CGEventRef eventRef = CGEventCreateKeyboardEvent(NULL, keyCode, false);
 	CGEventPost(kCGSessionEventTap, eventRef);
@@ -131,9 +109,7 @@ bool DKMac::ReleaseKey(int key)
 	return true;
 }
 
-////////////////////////////////////////////////////////////
-bool DKMac::VirtualMemory(unsigned long long& virtualMemory)
-{
+bool DKMac::VirtualMemory(unsigned long long& virtualMemory){
     //TODO
     /*
 	struct statfs stats;
@@ -145,9 +121,7 @@ bool DKMac::VirtualMemory(unsigned long long& virtualMemory)
 	return false;
 }
 
-////////////////////////////////////////////////////////////////
-bool DKMac::VirtualMemoryUsed(unsigned long long& virtualMemory)
-{
+bool DKMac::VirtualMemoryUsed(unsigned long long& virtualMemory){
     //TODO
     /*
     xsw_usage vmusage = {0};
@@ -160,9 +134,7 @@ bool DKMac::VirtualMemoryUsed(unsigned long long& virtualMemory)
 	return false;
 }
 
-///////////////////////////////////////////////////////////////
-bool DKMac::VirtualMemoryUsedByApp(unsigned int& virtualMemory)
-{
+bool DKMac::VirtualMemoryUsedByApp(unsigned int& virtualMemory){
     //TODO
     /*
     #include<mach/mach.h>
@@ -180,9 +152,7 @@ bool DKMac::VirtualMemoryUsedByApp(unsigned int& virtualMemory)
     return false;
 }
 
-//////////////////////////////////////////////////////////////
-bool DKMac::PhysicalMemory(unsigned long long& physicalMemory)
-{
+bool DKMac::PhysicalMemory(unsigned long long& physicalMemory){
     //TODO
     /*
     #include <sys/types.h>
@@ -198,9 +168,7 @@ bool DKMac::PhysicalMemory(unsigned long long& physicalMemory)
     return false;
 }
 
-//////////////////////////////////////////////////////////////////
-bool DKMac::PhysicalMemoryUsed(unsigned long long& physicalMemory)
-{
+bool DKMac::PhysicalMemoryUsed(unsigned long long& physicalMemory){
     //TODO
     /*
     #include <mach/vm_statistics.h>
@@ -234,9 +202,7 @@ bool DKMac::PhysicalMemoryUsed(unsigned long long& physicalMemory)
     return false;
 }
 
-/////////////////////////////////////////////////////////////////
-bool DKMac::PhysicalMemoryUsedByApp(unsigned int& physicalMemory)
-{
+bool DKMac::PhysicalMemoryUsedByApp(unsigned int& physicalMemory){
     //TODO
     /*
      #include<mach/mach.h>
@@ -254,31 +220,22 @@ bool DKMac::PhysicalMemoryUsedByApp(unsigned int& physicalMemory)
      return false;
 }
 
-/////////////////////
-bool DKMac::CpuInit()
-{
+bool DKMac::CpuInit(){
 	//TODO
 	return false;
 }
 
-/////////////////////////////
-bool DKMac::CpuUsed(int& cpu)
-{
+bool DKMac::CpuUsed(int& cpu){
 	//TODO
 	return false;
 }
 
-//////////////////////////////////
-bool DKMac::CpuUsedByApp(int& cpu)
-{
+bool DKMac::CpuUsedByApp(int& cpu){
 	//TODO
 	return false;
 }
 
-
-////////////////////////////
-bool DKMac::TurnOffMonitor()
-{
+bool DKMac::TurnOffMonitor(){
 	io_registry_entry_t r = IORegistryEntryFromPath(kIOMasterPortDefault, "IOService:/IOResources/IODisplayWrangler");
 	if(!r){ return false; }
 	int err = IORegistryEntrySetCFProperty(r, CFSTR("IORequestIdle"), kCFBooleanTrue);
@@ -286,15 +243,11 @@ bool DKMac::TurnOffMonitor()
 	return true;
 }
 
-///////////////////////////
-bool DKMac::TurnOnMonitor()
-{
+bool DKMac::TurnOnMonitor(){
 	return false;
 }
 
-/////////////////////////////
-bool DKMac::LowPowerMonitor()
-{
+bool DKMac::LowPowerMonitor(){
 	return false;
 }
 
