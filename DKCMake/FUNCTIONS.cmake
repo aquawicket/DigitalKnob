@@ -289,7 +289,9 @@ function(DKINSTALL url import_folder 3rdparty_folder)
 	##get_filename_component(extension ${url} EXT)       #linux32 latest cmake version is 3.10
 	##get_filename_component(extension ${url} LAST_EXT)  #LAST_EXT only available with cmake 3.14+ 
 	##cmake_path(GET url EXTENSION LAST_ONLY extension)  #LAST_ONLY only available with cmake 3.19+
-	dk_getExtension(${url} extension)	
+	get_filename_component(filename ${url} NAME)
+	dk_getExtension(${url} extension)
+	
 	
 	DKSET(FILETYPE "UNKNOWN")
 	if(NOT ${extension} STREQUAL "")
@@ -321,7 +323,7 @@ function(DKINSTALL url import_folder 3rdparty_folder)
 			DKSET(FILETYPE "Archive")
 		endif()
 	endif()
-	get_filename_component(filename ${url} NAME)
+	
 	##If the file type is unknown, we'll still try to extract it like a compressed file anyway
 	##It's better the have a chance at success.
 	message("The Downloaded file (${filename}) is a ${FILETYPE} file ${extension}")

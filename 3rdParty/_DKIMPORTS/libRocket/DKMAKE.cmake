@@ -10,7 +10,7 @@ DKSET(ROCKET ${3RDPARTY}/libRocket-${ROCKET_VERSION})
 
 ### INSTALL ###
 DKINSTALL(https://github.com/libRocket/libRocket/archive/${ROCKET_VERSION}.zip libRocket libRocket-${ROCKET_VERSION})
-DKRENAME(${DKDOWNLOAD}/${ROCKET_VERSION}.zip ${DKDOWNLOAD}/libRocket-${ROCKET_VERSION}.zip)
+#DKRENAME(${DKDOWNLOAD}/${ROCKET_VERSION}.zip ${DKDOWNLOAD}/libRocket-${ROCKET_VERSION}.zip)
 
 ##MESSAGE("Pulling libRocket from aquawicket/libRocket git...")
 ##DKSET(GIT C:/Progra~1/Git/bin/git.exe)

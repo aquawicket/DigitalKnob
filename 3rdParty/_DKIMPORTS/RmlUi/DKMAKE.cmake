@@ -15,7 +15,7 @@ DKSET(RMLUI ${3RDPARTY}/RmlUi-${RMLUI_VERSION})
 
 ### INSTALL ###
 DKINSTALL(https://codeload.github.com/mikke89/RmlUi/zip/master RmlUi RmlUi-${RMLUI_VERSION})
-DKRENAME(${DKDOWNLOAD}/master ${DKDOWNLOAD}/RmlUi-${RMLUI_VERSION}.zip) ##FIXME: Only do this after install
+#DKRENAME(${DKDOWNLOAD}/master ${DKDOWNLOAD}/RmlUi-${RMLUI_VERSION}.zip) ##FIXME: Only do this after install
 
 
 
