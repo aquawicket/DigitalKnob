@@ -23,8 +23,10 @@ public:
 	bool Init();
 	bool End();
 
-	void Queue(const DKString& name, boost::function<void ()> func);
-	void Queue(const DKString& name, boost::function<void ()> func, const DKString& data);
+	//void Queue(const DKString& name, boost::function<void ()> func);
+	void Queue(const DKString& name, std::function<void()> func);
+	//void Queue(const DKString& name, boost::function<void ()> func, const DKString& data);
+	void Queue(const DKString& name, std::function<void()> func, const DKString& data);
 	void Process();
 	
 	bool active;
@@ -34,12 +36,14 @@ public:
 };
 
 //Global quick functions
-static void DKQueue(const DKString& name, boost::function<void ()> func){
+//static void DKQueue(const DKString& name, boost::function<void ()> func){
+static void DKQueue(const DKString& name, std::function<void()> func) {
 	DKThreadPool::Instance("DKThreadPool0");
 	DKThreadPool::Instance("DKThreadPool0")->Queue(name, func);
 }
 
-static void DKQueue(const DKString& name, boost::function<void ()> func, const DKString& data){
+//static void DKQueue(const DKString& name, boost::function<void ()> func, const DKString& data){
+static void DKQueue(const DKString& name, std::function<void()> func, const DKString& data) {
 	DKThreadPool::Instance("DKThreadPool0");
 	DKThreadPool::Instance("DKThreadPool0")->Queue(name, func, data);
 }

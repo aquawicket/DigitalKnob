@@ -29,9 +29,8 @@ bool DKThreadPool::End()
 	return true;
 }
 
-/////////////////////////////////////////////////////////////////////////////
-void DKThreadPool::Queue(const DKString& name, boost::function<void ()> func)
-{
+//void DKThreadPool::Queue(const DKString& name, boost::function<void ()> func)
+void DKThreadPool::Queue(const DKString& name, std::function<void()> func){
 	if(active){
 		dkThreadPool->schedule(func);
 		tdata.push_back("");
@@ -42,9 +41,8 @@ void DKThreadPool::Queue(const DKString& name, boost::function<void ()> func)
 	func();
 }
 
-///////////////////////////////////////////////////////////////////////////////////////////////////
-void DKThreadPool::Queue(const DKString& name, boost::function<void ()> func, const DKString& data)
-{
+//void DKThreadPool::Queue(const DKString& name, boost::function<void ()> func, const DKString& data)
+void DKThreadPool::Queue(const DKString& name, std::function<void()> func, const DKString& data){
 	if(active){
 		dkThreadPool->schedule(func);
 		tdata.push_back(data);
@@ -55,9 +53,7 @@ void DKThreadPool::Queue(const DKString& name, boost::function<void ()> func, co
 	func();
 }
 
-////////////////////////////
-void DKThreadPool::Process()
-{
+void DKThreadPool::Process(){
 	if(names.empty()){ return; }
 	//we can update info about the threadpool in the main thread here..
 	if(dkThreadPool->active() + dkThreadPool->pending() != names.size()){
