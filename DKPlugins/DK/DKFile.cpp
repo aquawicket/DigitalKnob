@@ -758,7 +758,7 @@ bool DKFile::MakeDir(const DKString& dir){
 
 	//FIXME: Still can crash!  It crashes because the dir is empty.
 	//Maybe check if the folder is empty first?
-	if(!boost::filesystem::create_directory(path)){
+	if(!boost::filesystem::create_directories(path)){
 		DKERROR("DKFile::MakeDir("+ path +") failed! \n");
 		return false;
 	}
@@ -886,7 +886,7 @@ bool DKFile::StringToFile(const DKString& string, const DKString& file){
 	if(!folder.empty()){
 		boost::filesystem::path path(folder);
 		if(!(boost::filesystem::exists(path))){
-			if(!boost::filesystem::create_directory(path)){
+			if(!boost::filesystem::create_directories(path)){
 				DKERROR("DKFile::StringToFile(): could not create path. \n");
 				return false;
 			}
