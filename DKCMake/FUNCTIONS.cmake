@@ -284,15 +284,16 @@ function(DKINSTALL url import_folder 3rdparty_folder)
 
 	DKSET(CURRENT_DIR ${DIGITALKNOB}/Download)
 	file(MAKE_DIRECTORY ${CURRENT_DIR})
-	DKDOWNLOAD(${url})
-		
+	
 	##get_filename_component(extension ${url} EXT)       #linux32 latest cmake version is 3.10
 	##get_filename_component(extension ${url} LAST_EXT)  #LAST_EXT only available with cmake 3.14+ 
 	##cmake_path(GET url EXTENSION LAST_ONLY extension)  #LAST_ONLY only available with cmake 3.19+
-	get_filename_component(filename ${url} NAME)
+	#get_filename_component(filename ${url} NAME)
+	
 	dk_getExtension(${url} extension)
-	
-	
+	set(filename "${3rdparty_folder}${extension}")
+	DKDOWNLOAD(${url} ${filename})
+			
 	DKSET(FILETYPE "UNKNOWN")
 	if(NOT ${extension} STREQUAL "")
 		if(${extension} STREQUAL ".bz")
