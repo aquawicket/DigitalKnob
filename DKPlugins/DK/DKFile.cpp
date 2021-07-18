@@ -749,15 +749,11 @@ bool DKFile::MakeDir(const DKString& dir){
 	DKString path = dir;
 	DKFile::NormalizePath(path);
 	
-	//FIXME: sometimes we cannot create the directory if the parent directory does not exits.
-	//       EXAMPLE:  if /test does not exist, we cannot create /test/mything 
 	if(path.empty())
 		return false;
 	if(PathExists(path))
 		return true;
 
-	//FIXME: Still can crash!  It crashes because the dir is empty.
-	//Maybe check if the folder is empty first?
 	if(!boost::filesystem::create_directories(path)){
 		DKERROR("DKFile::MakeDir("+ path +") failed! \n");
 		return false;
