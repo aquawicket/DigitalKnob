@@ -65,7 +65,7 @@ function DKBuild_init(){
 		NDK = DKPATH+"DK/3rdParty/android-ndk-"+NDK_VERSION+"-linux-x86_64";
 	}
 	DKDOWNLOAD = DKPATH+"DK/Download";
-	CPP_DKFile_MkDir(DKDOWNLOAD);
+	//CPP_DKFile_MkDir(DKDOWNLOAD);
 }
 
 //This is and alternative way to get windows short paths
