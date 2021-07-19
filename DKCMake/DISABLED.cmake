@@ -5,6 +5,7 @@ endif()
 
 if(WIN_64)
 DISABLE_DKDEPEND(bzip2)
+DISABLE_DKDEPEND(smpeg2)
 endif()
 
 if(LINUX)
