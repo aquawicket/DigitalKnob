@@ -19,5 +19,4 @@ ANDROID_RELEASE_LIB(${OPENAL}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/libopen
 
 
 ### COMPILE ###
-ANDROID_NDK_DEBUG(OpenAL-android)
-ANDROID_NDK_RELEASE(OpenAL-android)
+ANDROID_NDK(OpenAL-android)

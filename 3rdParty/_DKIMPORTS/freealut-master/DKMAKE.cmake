@@ -14,5 +14,4 @@ ANDROID_RELEASE_LIB(${FREEALUT}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/libal
 
 
 ### COMPILE ###
-ANDROID_NDK_DEBUG(freealut-master)
-ANDROID_NDK_RELEASE(freealut-master)
+ANDROID_NDK(freealut-master)

@@ -86,5 +86,5 @@ LINUX_RELEASE_COMMAND(${CMAKE_COMMAND} -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=RE
 LINUX_RELEASE_COMMAND(make vncserver)
 LINUX_RELEASE_COMMAND(make vncclient)
 
-ANDROID_NDK_DEBUG(libvncserver-master)
-ANDROID_NDK_RELEASE(libvncserver-master)
+
+ANDROID_NDK(libvncserver-master)

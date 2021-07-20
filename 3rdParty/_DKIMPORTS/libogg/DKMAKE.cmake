@@ -101,5 +101,4 @@ LINUX_RELEASE_COMMAND(../../configure --disable-shared --enable-static --build=x
 LINUX_RELEASE_COMMAND(make)
 
 
-ANDROID_NDK_DEBUG(libogg-${OGG_VERSION})
-ANDROID_NDK_RELEASE(libogg-${OGG_VERSION})
+ANDROID_NDK(libogg-${OGG_VERSION})
