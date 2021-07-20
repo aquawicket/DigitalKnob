@@ -40,47 +40,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\freetype-2.5.5\src\autofit\autofit.c" />
-    <ClCompile Include="..\..\freetype-2.5.5\src\base\ftbase.c" />
-    <ClCompile Include="..\..\freetype-2.5.5\src\base\ftbbox.c" />
-    <ClCompile Include="..\..\freetype-2.5.5\src\base\ftbdf.c" />
-    <ClCompile Include="..\..\freetype-2.5.5\src\base\ftbitmap.c" />
-    <ClCompile Include="..\..\freetype-2.5.5\src\base\ftcid.c" />
-    <ClCompile Include="..\..\freetype-2.5.5\src\base\ftdebug.c" />
-    <ClCompile Include="..\..\freetype-2.5.5\src\base\ftfstype.c" />
-    <ClCompile Include="..\..\freetype-2.5.5\src\base\ftgasp.c" />
-    <ClCompile Include="..\..\freetype-2.5.5\src\base\ftglyph.c" />
-    <ClCompile Include="..\..\freetype-2.5.5\src\base\ftgxval.c" />
-    <ClCompile Include="..\..\freetype-2.5.5\src\base\ftinit.c" />
-    <ClCompile Include="..\..\freetype-2.5.5\src\base\ftmm.c" />
-    <ClCompile Include="..\..\freetype-2.5.5\src\base\ftotval.c" />
-    <ClCompile Include="..\..\freetype-2.5.5\src\base\ftpatent.c" />
-    <ClCompile Include="..\..\freetype-2.5.5\src\base\ftpfr.c" />
-    <ClCompile Include="..\..\freetype-2.5.5\src\base\ftstroke.c" />
-    <ClCompile Include="..\..\freetype-2.5.5\src\base\ftsynth.c" />
-    <ClCompile Include="..\..\freetype-2.5.5\src\base\ftsystem.c" />
-    <ClCompile Include="..\..\freetype-2.5.5\src\base\fttype1.c" />
-    <ClCompile Include="..\..\freetype-2.5.5\src\base\ftwinfnt.c" />
-    <ClCompile Include="..\..\freetype-2.5.5\src\bdf\bdf.c" />
-    <ClCompile Include="..\..\freetype-2.5.5\src\bzip2\ftbzip2.c" />
-    <ClCompile Include="..\..\freetype-2.5.5\src\cache\ftcache.c" />
-    <ClCompile Include="..\..\freetype-2.5.5\src\cff\cff.c" />
-    <ClCompile Include="..\..\freetype-2.5.5\src\cid\type1cid.c" />
-    <ClCompile Include="..\..\freetype-2.5.5\src\gzip\ftgzip.c" />
-    <ClCompile Include="..\..\freetype-2.5.5\src\lzw\ftlzw.c" />
-    <ClCompile Include="..\..\freetype-2.5.5\src\pcf\pcf.c" />
-    <ClCompile Include="..\..\freetype-2.5.5\src\pfr\pfr.c" />
-    <ClCompile Include="..\..\freetype-2.5.5\src\psaux\psaux.c" />
-    <ClCompile Include="..\..\freetype-2.5.5\src\pshinter\pshinter.c" />
-    <ClCompile Include="..\..\freetype-2.5.5\src\psnames\psmodule.c" />
-    <ClCompile Include="..\..\freetype-2.5.5\src\raster\raster.c" />
-    <ClCompile Include="..\..\freetype-2.5.5\src\sfnt\sfnt.c" />
-    <ClCompile Include="..\..\freetype-2.5.5\src\smooth\smooth.c" />
-    <ClCompile Include="..\..\freetype-2.5.5\src\tools\apinames.c" />
-    <ClCompile Include="..\..\freetype-2.5.5\src\truetype\truetype.c" />
-    <ClCompile Include="..\..\freetype-2.5.5\src\type1\type1.c" />
-    <ClCompile Include="..\..\freetype-2.5.5\src\type42\type42.c" />
-    <ClCompile Include="..\..\freetype-2.5.5\src\winfonts\winfnt.c" />
     <ClCompile Include="..\..\SDL2_ttf-2.0.15\SDL_ttf.c" />
   </ItemGroup>
   <ItemGroup>
