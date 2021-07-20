@@ -35,131 +35,131 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\libjpeg-turbo-1.5.3\jaricom.c" />
-    <ClCompile Include="..\..\libjpeg-turbo-1.5.3\jcapimin.c" />
-    <ClCompile Include="..\..\libjpeg-turbo-1.5.3\jcapistd.c" />
-    <ClCompile Include="..\..\libjpeg-turbo-1.5.3\jcarith.c" />
-    <ClCompile Include="..\..\libjpeg-turbo-1.5.3\jccoefct.c" />
-    <ClCompile Include="..\..\libjpeg-turbo-1.5.3\jccolor.c" />
-    <ClCompile Include="..\..\libjpeg-turbo-1.5.3\jcdctmgr.c" />
-    <ClCompile Include="..\..\libjpeg-turbo-1.5.3\jchuff.c" />
-    <ClCompile Include="..\..\libjpeg-turbo-1.5.3\jcinit.c" />
-    <ClCompile Include="..\..\libjpeg-turbo-1.5.3\jcmainct.c" />
-    <ClCompile Include="..\..\libjpeg-turbo-1.5.3\jcmarker.c" />
-    <ClCompile Include="..\..\libjpeg-turbo-1.5.3\jcmaster.c" />
-    <ClCompile Include="..\..\libjpeg-turbo-1.5.3\jcomapi.c" />
-    <ClCompile Include="..\..\libjpeg-turbo-1.5.3\jcparam.c" />
-    <ClCompile Include="..\..\libjpeg-turbo-1.5.3\jcprepct.c" />
-    <ClCompile Include="..\..\libjpeg-turbo-1.5.3\jcsample.c" />
-    <ClCompile Include="..\..\libjpeg-turbo-1.5.3\jctrans.c" />
-    <ClCompile Include="..\..\libjpeg-turbo-1.5.3\jdapimin.c" />
-    <ClCompile Include="..\..\libjpeg-turbo-1.5.3\jdapistd.c" />
-    <ClCompile Include="..\..\libjpeg-turbo-1.5.3\jdarith.c" />
-    <ClCompile Include="..\..\libjpeg-turbo-1.5.3\jdatadst.c" />
-    <ClCompile Include="..\..\libjpeg-turbo-1.5.3\jdatasrc.c" />
-    <ClCompile Include="..\..\libjpeg-turbo-1.5.3\jdcoefct.c" />
-    <ClCompile Include="..\..\libjpeg-turbo-1.5.3\jdcolor.c" />
-    <ClCompile Include="..\..\libjpeg-turbo-1.5.3\jddctmgr.c" />
-    <ClCompile Include="..\..\libjpeg-turbo-1.5.3\jdhuff.c" />
-    <ClCompile Include="..\..\libjpeg-turbo-1.5.3\jdinput.c" />
-    <ClCompile Include="..\..\libjpeg-turbo-1.5.3\jdmainct.c" />
-    <ClCompile Include="..\..\libjpeg-turbo-1.5.3\jdmarker.c" />
-    <ClCompile Include="..\..\libjpeg-turbo-1.5.3\jdmaster.c" />
-    <ClCompile Include="..\..\libjpeg-turbo-1.5.3\jdmerge.c" />
-    <ClCompile Include="..\..\libjpeg-turbo-1.5.3\jdpostct.c" />
-    <ClCompile Include="..\..\libjpeg-turbo-1.5.3\jdsample.c" />
-    <ClCompile Include="..\..\libjpeg-turbo-1.5.3\jdtrans.c" />
-    <ClCompile Include="..\..\libjpeg-turbo-1.5.3\jerror.c" />
-    <ClCompile Include="..\..\libjpeg-turbo-1.5.3\jfdctflt.c" />
-    <ClCompile Include="..\..\libjpeg-turbo-1.5.3\jfdctfst.c" />
-    <ClCompile Include="..\..\libjpeg-turbo-1.5.3\jfdctint.c" />
-    <ClCompile Include="..\..\libjpeg-turbo-1.5.3\jidctflt.c" />
-    <ClCompile Include="..\..\libjpeg-turbo-1.5.3\jidctfst.c" />
-    <ClCompile Include="..\..\libjpeg-turbo-1.5.3\jidctint.c" />
-    <ClCompile Include="..\..\libjpeg-turbo-1.5.3\jquant1.c" />
-    <ClCompile Include="..\..\libjpeg-turbo-1.5.3\jquant2.c" />
-    <ClCompile Include="..\..\libjpeg-turbo-1.5.3\jutils.c" />
-    <ClCompile Include="..\..\libjpeg-turbo-1.5.3\jmemmgr.c" />
-    <ClCompile Include="..\..\libjpeg-turbo-1.5.3\jmem-android.c" />
-    <ClCompile Include="..\..\libpng-1.6.37\arm\arm_init.c" />
-    <ClCompile Include="..\..\libpng-1.6.37\arm\filter_neon_intrinsics.c" />
-    <ClCompile Include="..\..\libpng-1.6.37\arm\palette_neon_intrinsics.c" />
-    <ClCompile Include="..\..\libpng-1.6.37\png.c" />
-    <ClCompile Include="..\..\libpng-1.6.37\pngerror.c" />
-    <ClCompile Include="..\..\libpng-1.6.37\pngget.c" />
-    <ClCompile Include="..\..\libpng-1.6.37\pngmem.c" />
-    <ClCompile Include="..\..\libpng-1.6.37\pngpread.c" />
-    <ClCompile Include="..\..\libpng-1.6.37\pngread.c" />
-    <ClCompile Include="..\..\libpng-1.6.37\pngrio.c" />
-    <ClCompile Include="..\..\libpng-1.6.37\pngrtran.c" />
-    <ClCompile Include="..\..\libpng-1.6.37\pngrutil.c" />
-    <ClCompile Include="..\..\libpng-1.6.37\pngset.c" />
-    <ClCompile Include="..\..\libpng-1.6.37\pngtrans.c" />
-    <ClCompile Include="..\..\libpng-1.6.37\pngwio.c" />
-    <ClCompile Include="..\..\libpng-1.6.37\pngwrite.c" />
-    <ClCompile Include="..\..\libpng-1.6.37\pngwtran.c" />
-    <ClCompile Include="..\..\libpng-1.6.37\pngwutil.c" />
-    <ClCompile Include="..\..\libwebp-1.0.3\src\dec\alpha_dec.c" />
-    <ClCompile Include="..\..\libwebp-1.0.3\src\dec\buffer_dec.c" />
-    <ClCompile Include="..\..\libwebp-1.0.3\src\dec\frame_dec.c" />
-    <ClCompile Include="..\..\libwebp-1.0.3\src\dec\idec_dec.c" />
-    <ClCompile Include="..\..\libwebp-1.0.3\src\dec\io_dec.c" />
-    <ClCompile Include="..\..\libwebp-1.0.3\src\dec\quant_dec.c" />
-    <ClCompile Include="..\..\libwebp-1.0.3\src\dec\tree_dec.c" />
-    <ClCompile Include="..\..\libwebp-1.0.3\src\dec\vp8l_dec.c" />
-    <ClCompile Include="..\..\libwebp-1.0.3\src\dec\vp8_dec.c" />
-    <ClCompile Include="..\..\libwebp-1.0.3\src\dec\webp_dec.c" />
-    <ClCompile Include="..\..\libwebp-1.0.3\src\dsp\alpha_processing.c" />
-    <ClCompile Include="..\..\libwebp-1.0.3\src\dsp\alpha_processing_mips_dsp_r2.c" />
-    <ClCompile Include="..\..\libwebp-1.0.3\src\dsp\alpha_processing_neon.c" />
-    <ClCompile Include="..\..\libwebp-1.0.3\src\dsp\alpha_processing_sse2.c" />
-    <ClCompile Include="..\..\libwebp-1.0.3\src\dsp\alpha_processing_sse41.c" />
-    <ClCompile Include="..\..\libwebp-1.0.3\src\dsp\cpu.c" />
-    <ClCompile Include="..\..\libwebp-1.0.3\src\dsp\dec.c" />
-    <ClCompile Include="..\..\libwebp-1.0.3\src\dsp\dec_clip_tables.c" />
-    <ClCompile Include="..\..\libwebp-1.0.3\src\dsp\dec_mips32.c" />
-    <ClCompile Include="..\..\libwebp-1.0.3\src\dsp\dec_mips_dsp_r2.c" />
-    <ClCompile Include="..\..\libwebp-1.0.3\src\dsp\dec_msa.c" />
-    <ClCompile Include="..\..\libwebp-1.0.3\src\dsp\dec_neon.c" />
-    <ClCompile Include="..\..\libwebp-1.0.3\src\dsp\dec_sse2.c" />
-    <ClCompile Include="..\..\libwebp-1.0.3\src\dsp\dec_sse41.c" />
-    <ClCompile Include="..\..\libwebp-1.0.3\src\dsp\filters.c" />
-    <ClCompile Include="..\..\libwebp-1.0.3\src\dsp\filters_mips_dsp_r2.c" />
-    <ClCompile Include="..\..\libwebp-1.0.3\src\dsp\filters_msa.c" />
-    <ClCompile Include="..\..\libwebp-1.0.3\src\dsp\filters_neon.c" />
-    <ClCompile Include="..\..\libwebp-1.0.3\src\dsp\filters_sse2.c" />
-    <ClCompile Include="..\..\libwebp-1.0.3\src\dsp\lossless.c" />
-    <ClCompile Include="..\..\libwebp-1.0.3\src\dsp\lossless_mips_dsp_r2.c" />
-    <ClCompile Include="..\..\libwebp-1.0.3\src\dsp\lossless_msa.c" />
-    <ClCompile Include="..\..\libwebp-1.0.3\src\dsp\lossless_neon.c" />
-    <ClCompile Include="..\..\libwebp-1.0.3\src\dsp\lossless_sse2.c" />
-    <ClCompile Include="..\..\libwebp-1.0.3\src\dsp\rescaler.c" />
-    <ClCompile Include="..\..\libwebp-1.0.3\src\dsp\rescaler_mips32.c" />
-    <ClCompile Include="..\..\libwebp-1.0.3\src\dsp\rescaler_mips_dsp_r2.c" />
-    <ClCompile Include="..\..\libwebp-1.0.3\src\dsp\rescaler_msa.c" />
-    <ClCompile Include="..\..\libwebp-1.0.3\src\dsp\rescaler_neon.c" />
-    <ClCompile Include="..\..\libwebp-1.0.3\src\dsp\rescaler_sse2.c" />
-    <ClCompile Include="..\..\libwebp-1.0.3\src\dsp\upsampling.c" />
-    <ClCompile Include="..\..\libwebp-1.0.3\src\dsp\upsampling_mips_dsp_r2.c" />
-    <ClCompile Include="..\..\libwebp-1.0.3\src\dsp\upsampling_msa.c" />
-    <ClCompile Include="..\..\libwebp-1.0.3\src\dsp\upsampling_neon.c" />
-    <ClCompile Include="..\..\libwebp-1.0.3\src\dsp\upsampling_sse2.c" />
-    <ClCompile Include="..\..\libwebp-1.0.3\src\dsp\upsampling_sse41.c" />
-    <ClCompile Include="..\..\libwebp-1.0.3\src\dsp\yuv.c" />
-    <ClCompile Include="..\..\libwebp-1.0.3\src\dsp\yuv_mips32.c" />
-    <ClCompile Include="..\..\libwebp-1.0.3\src\dsp\yuv_mips_dsp_r2.c" />
-    <ClCompile Include="..\..\libwebp-1.0.3\src\dsp\yuv_neon.c" />
-    <ClCompile Include="..\..\libwebp-1.0.3\src\dsp\yuv_sse2.c" />
-    <ClCompile Include="..\..\libwebp-1.0.3\src\dsp\yuv_sse41.c" />
-    <ClCompile Include="..\..\libwebp-1.0.3\src\utils\bit_reader_utils.c" />
-    <ClCompile Include="..\..\libwebp-1.0.3\src\utils\color_cache_utils.c" />
-    <ClCompile Include="..\..\libwebp-1.0.3\src\utils\filters_utils.c" />
-    <ClCompile Include="..\..\libwebp-1.0.3\src\utils\huffman_utils.c" />
-    <ClCompile Include="..\..\libwebp-1.0.3\src\utils\quant_levels_dec_utils.c" />
-    <ClCompile Include="..\..\libwebp-1.0.3\src\utils\random_utils.c" />
-    <ClCompile Include="..\..\libwebp-1.0.3\src\utils\thread_utils.c" />
-    <ClCompile Include="..\..\libwebp-1.0.3\src\utils\utils.c" />
-    <ClCompile Include="..\..\libwebp-1.0.3\src\utils\rescaler_utils.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\jpeg-9d\jaricom.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\jpeg-9d\jcapimin.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\jpeg-9d\jcapistd.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\jpeg-9d\jcarith.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\jpeg-9d\jccoefct.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\jpeg-9d\jccolor.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\jpeg-9d\jcdctmgr.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\jpeg-9d\jchuff.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\jpeg-9d\jcinit.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\jpeg-9d\jcmainct.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\jpeg-9d\jcmarker.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\jpeg-9d\jcmaster.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\jpeg-9d\jcomapi.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\jpeg-9d\jcparam.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\jpeg-9d\jcprepct.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\jpeg-9d\jcsample.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\jpeg-9d\jctrans.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\jpeg-9d\jdapimin.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\jpeg-9d\jdapistd.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\jpeg-9d\jdarith.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\jpeg-9d\jdatadst.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\jpeg-9d\jdatasrc.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\jpeg-9d\jdcoefct.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\jpeg-9d\jdcolor.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\jpeg-9d\jddctmgr.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\jpeg-9d\jdhuff.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\jpeg-9d\jdinput.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\jpeg-9d\jdmainct.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\jpeg-9d\jdmarker.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\jpeg-9d\jdmaster.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\jpeg-9d\jdmerge.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\jpeg-9d\jdpostct.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\jpeg-9d\jdsample.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\jpeg-9d\jdtrans.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\jpeg-9d\jerror.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\jpeg-9d\jfdctflt.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\jpeg-9d\jfdctfst.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\jpeg-9d\jfdctint.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\jpeg-9d\jidctflt.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\jpeg-9d\jidctfst.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\jpeg-9d\jidctint.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\jpeg-9d\jquant1.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\jpeg-9d\jquant2.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\jpeg-9d\jutils.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\jpeg-9d\jmemmgr.c" />
+	<ClCompile Include="..\..\SDL2_image-2.0.5\external\jpeg-9b\jmem-android.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libpng-1.6.37\arm\arm_init.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libpng-1.6.37\arm\filter_neon_intrinsics.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libpng-1.6.37\arm\palette_neon_intrinsics.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libpng-1.6.37\png.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libpng-1.6.37\pngerror.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libpng-1.6.37\pngget.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libpng-1.6.37\pngmem.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libpng-1.6.37\pngpread.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libpng-1.6.37\pngread.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libpng-1.6.37\pngrio.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libpng-1.6.37\pngrtran.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libpng-1.6.37\pngrutil.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libpng-1.6.37\pngset.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libpng-1.6.37\pngtrans.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libpng-1.6.37\pngwio.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libpng-1.6.37\pngwrite.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libpng-1.6.37\pngwtran.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libpng-1.6.37\pngwutil.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libwebp-1.0.3\src\dec\alpha_dec.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libwebp-1.0.3\src\dec\buffer_dec.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libwebp-1.0.3\src\dec\frame_dec.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libwebp-1.0.3\src\dec\idec_dec.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libwebp-1.0.3\src\dec\io_dec.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libwebp-1.0.3\src\dec\quant_dec.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libwebp-1.0.3\src\dec\tree_dec.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libwebp-1.0.3\src\dec\vp8l_dec.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libwebp-1.0.3\src\dec\vp8_dec.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libwebp-1.0.3\src\dec\webp_dec.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libwebp-1.0.3\src\dsp\alpha_processing.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libwebp-1.0.3\src\dsp\alpha_processing_mips_dsp_r2.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libwebp-1.0.3\src\dsp\alpha_processing_neon.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libwebp-1.0.3\src\dsp\alpha_processing_sse2.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libwebp-1.0.3\src\dsp\alpha_processing_sse41.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libwebp-1.0.3\src\dsp\cpu.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libwebp-1.0.3\src\dsp\dec.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libwebp-1.0.3\src\dsp\dec_clip_tables.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libwebp-1.0.3\src\dsp\dec_mips32.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libwebp-1.0.3\src\dsp\dec_mips_dsp_r2.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libwebp-1.0.3\src\dsp\dec_msa.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libwebp-1.0.3\src\dsp\dec_neon.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libwebp-1.0.3\src\dsp\dec_sse2.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libwebp-1.0.3\src\dsp\dec_sse41.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libwebp-1.0.3\src\dsp\filters.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libwebp-1.0.3\src\dsp\filters_mips_dsp_r2.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libwebp-1.0.3\src\dsp\filters_msa.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libwebp-1.0.3\src\dsp\filters_neon.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libwebp-1.0.3\src\dsp\filters_sse2.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libwebp-1.0.3\src\dsp\lossless.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libwebp-1.0.3\src\dsp\lossless_mips_dsp_r2.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libwebp-1.0.3\src\dsp\lossless_msa.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libwebp-1.0.3\src\dsp\lossless_neon.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libwebp-1.0.3\src\dsp\lossless_sse2.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libwebp-1.0.3\src\dsp\rescaler.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libwebp-1.0.3\src\dsp\rescaler_mips32.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libwebp-1.0.3\src\dsp\rescaler_mips_dsp_r2.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libwebp-1.0.3\src\dsp\rescaler_msa.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libwebp-1.0.3\src\dsp\rescaler_neon.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libwebp-1.0.3\src\dsp\rescaler_sse2.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libwebp-1.0.3\src\dsp\upsampling.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libwebp-1.0.3\src\dsp\upsampling_mips_dsp_r2.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libwebp-1.0.3\src\dsp\upsampling_msa.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libwebp-1.0.3\src\dsp\upsampling_neon.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libwebp-1.0.3\src\dsp\upsampling_sse2.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libwebp-1.0.3\src\dsp\upsampling_sse41.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libwebp-1.0.3\src\dsp\yuv.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libwebp-1.0.3\src\dsp\yuv_mips32.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libwebp-1.0.3\src\dsp\yuv_mips_dsp_r2.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libwebp-1.0.3\src\dsp\yuv_neon.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libwebp-1.0.3\src\dsp\yuv_sse2.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libwebp-1.0.3\src\dsp\yuv_sse41.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libwebp-1.0.3\src\utils\bit_reader_utils.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libwebp-1.0.3\src\utils\color_cache_utils.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libwebp-1.0.3\src\utils\filters_utils.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libwebp-1.0.3\src\utils\huffman_utils.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libwebp-1.0.3\src\utils\quant_levels_dec_utils.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libwebp-1.0.3\src\utils\random_utils.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libwebp-1.0.3\src\utils\thread_utils.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libwebp-1.0.3\src\utils\utils.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libwebp-1.0.3\src\utils\rescaler_utils.c" />
     <ClCompile Include="..\..\zlib-1.2.11\adler32.c" />
     <ClCompile Include="..\..\zlib-1.2.11\compress.c" />
     <ClCompile Include="..\..\zlib-1.2.11\crc32.c" />
@@ -281,7 +281,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>$(Sysroot)\usr\include;$(StlIncludeDirectories)%(AdditionalIncludeDirectories);..\..\libjpeg-turbo-1.5.3;..\..\libpng-1.6.37;..\..\libwebp-1.0.3;..\..\SDL2_ttf-2.0.15\include;..\..\SDL2_image-2.0.5\VisualC\external\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(Sysroot)\usr\include;$(StlIncludeDirectories)%(AdditionalIncludeDirectories);..\..\SDL2_image-2.0.5\external\jpeg-9d;..\..\SDL2_image-2.0.5\external\libpng-1.6.37;..\..\SDL2_image-2.0.5\external\libwebp-1.0.3;..\..\SDL2_ttf-2.0.15\include;..\..\SDL2-2.0.14\include;..\..\SDL2_image-2.0.5\VisualC\external\include</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>LOAD_WEBP;LOAD_BMP;LOAD_GIF;LOAD_LBM;LOAD_PCX;LOAD_PNM;LOAD_TGA;LOAD_XCF;LOAD_XPM;LOAD_XV;LOAD_JPG;AVOID_TABLES;LOAD_PNG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <CppLanguageStandard>c++1z</CppLanguageStandard>
     </ClCompile>
@@ -292,7 +292,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>$(Sysroot)\usr\include;$(StlIncludeDirectories)%(AdditionalIncludeDirectories);..\..\libjpeg-turbo-1.5.3;..\..\libpng-1.6.37;..\..\libwebp-1.0.3;..\..\SDL2_ttf-2.0.15\include;..\..\SDL2_image-2.0.5\VisualC\external\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(Sysroot)\usr\include;$(StlIncludeDirectories)%(AdditionalIncludeDirectories);..\..\SDL2_image-2.0.5\external\jpeg-9d;..\..\SDL2_image-2.0.5\external\libpng-1.6.37;..\..\SDL2_image-2.0.5\external\libwebp-1.0.3;..\..\SDL2_ttf-2.0.15\include;..\..\SDL2-2.0.14\include;..\..\SDL2_image-2.0.5\VisualC\external\include</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>LOAD_WEBP;LOAD_BMP;LOAD_GIF;LOAD_LBM;LOAD_PCX;LOAD_PNM;LOAD_TGA;LOAD_XCF;LOAD_XPM;LOAD_XV;LOAD_JPG;AVOID_TABLES;LOAD_PNG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <CppLanguageStandard>c++1z</CppLanguageStandard>
     </ClCompile>
@@ -303,7 +303,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
     <ClCompile>
-      <AdditionalIncludeDirectories>$(Sysroot)\usr\include;$(StlIncludeDirectories)%(AdditionalIncludeDirectories);..\..\libjpeg-turbo-1.5.3;..\..\libpng-1.6.37;..\..\libwebp-1.0.3;..\..\SDL2_ttf-2.0.15\include;..\..\SDL2_image-2.0.5\VisualC\external\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(Sysroot)\usr\include;$(StlIncludeDirectories)%(AdditionalIncludeDirectories);..\..\SDL2_image-2.0.5\external\jpeg-9d;..\..\SDL2_image-2.0.5\external\libpng-1.6.37;..\..\SDL2_image-2.0.5\external\libwebp-1.0.3;..\..\SDL2_ttf-2.0.15\include;..\..\SDL2-2.0.14\include;..\..\SDL2_image-2.0.5\VisualC\external\include</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>LOAD_WEBP;LOAD_BMP;LOAD_GIF;LOAD_LBM;LOAD_PCX;LOAD_PNM;LOAD_TGA;LOAD_XCF;LOAD_XPM;LOAD_XV;LOAD_JPG;AVOID_TABLES;LOAD_PNG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <CppLanguageStandard>c++1z</CppLanguageStandard>
     </ClCompile>
@@ -314,7 +314,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'">
     <ClCompile>
-      <AdditionalIncludeDirectories>$(Sysroot)\usr\include;$(StlIncludeDirectories)%(AdditionalIncludeDirectories);..\..\libjpeg-turbo-1.5.3;..\..\libpng-1.6.37;..\..\libwebp-1.0.3;..\..\SDL2_ttf-2.0.15\include;..\..\SDL2_image-2.0.5\VisualC\external\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(Sysroot)\usr\include;$(StlIncludeDirectories)%(AdditionalIncludeDirectories);..\..\SDL2_image-2.0.5\external\jpeg-9d;..\..\SDL2_image-2.0.5\external\libpng-1.6.37;..\..\SDL2_image-2.0.5\external\libwebp-1.0.3;..\..\SDL2_ttf-2.0.15\include;..\..\SDL2-2.0.14\include;..\..\SDL2_image-2.0.5\VisualC\external\include</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>LOAD_WEBP;LOAD_BMP;LOAD_GIF;LOAD_LBM;LOAD_PCX;LOAD_PNM;LOAD_TGA;LOAD_XCF;LOAD_XPM;LOAD_XV;LOAD_JPG;AVOID_TABLES;LOAD_PNG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <CppLanguageStandard>c++1z</CppLanguageStandard>
     </ClCompile>
@@ -325,7 +325,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>$(Sysroot)\usr\include;$(StlIncludeDirectories)%(AdditionalIncludeDirectories);..\..\libjpeg-turbo-1.5.3;..\..\libpng-1.6.37;..\..\libwebp-1.0.3;..\..\SDL2_ttf-2.0.15\include;..\..\SDL2_image-2.0.5\VisualC\external\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(Sysroot)\usr\include;$(StlIncludeDirectories)%(AdditionalIncludeDirectories);..\..\SDL2_image-2.0.5\external\jpeg-9d;..\..\SDL2_image-2.0.5\external\libpng-1.6.37;..\..\SDL2_image-2.0.5\external\libwebp-1.0.3;..\..\SDL2_ttf-2.0.15\include;..\..\SDL2-2.0.14\include;..\..\SDL2_image-2.0.5\VisualC\external\include</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>LOAD_WEBP;LOAD_BMP;LOAD_GIF;LOAD_LBM;LOAD_PCX;LOAD_PNM;LOAD_TGA;LOAD_XCF;LOAD_XPM;LOAD_XV;LOAD_JPG;AVOID_TABLES;LOAD_PNG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <CppLanguageStandard>c++1z</CppLanguageStandard>
     </ClCompile>
@@ -336,7 +336,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>$(Sysroot)\usr\include;$(StlIncludeDirectories)%(AdditionalIncludeDirectories);..\..\libjpeg-turbo-1.5.3;..\..\libpng-1.6.37;..\..\libwebp-1.0.3;..\..\SDL2_ttf-2.0.15\include;..\..\SDL2_image-2.0.5\VisualC\external\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(Sysroot)\usr\include;$(StlIncludeDirectories)%(AdditionalIncludeDirectories);..\..\SDL2_image-2.0.5\external\jpeg-9d;..\..\SDL2_image-2.0.5\external\libpng-1.6.37;..\..\SDL2_image-2.0.5\external\libwebp-1.0.3;..\..\SDL2_ttf-2.0.15\include;..\..\SDL2-2.0.14\include;..\..\SDL2_image-2.0.5\VisualC\external\include</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>LOAD_WEBP;LOAD_BMP;LOAD_GIF;LOAD_LBM;LOAD_PCX;LOAD_PNM;LOAD_TGA;LOAD_XCF;LOAD_XPM;LOAD_XV;LOAD_JPG;AVOID_TABLES;LOAD_PNG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <CppLanguageStandard>c++1z</CppLanguageStandard>
     </ClCompile>
@@ -347,7 +347,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
     <ClCompile>
-      <AdditionalIncludeDirectories>$(Sysroot)\usr\include;$(StlIncludeDirectories)%(AdditionalIncludeDirectories);..\..\libjpeg-turbo-1.5.3\android32\Release\jni;..\..\libjpeg-turbo-1.5.3;..\..\libpng-1.6.37;..\..\libwebp-1.0.3;..\..\SDL2_ttf-2.0.15\include;..\..\SDL2_image-2.0.5\VisualC\external\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(Sysroot)\usr\include;$(StlIncludeDirectories)%(AdditionalIncludeDirectories);..\..\SDL2_image-2.0.5\external\jpeg-9d\android32\Release\jni;..\..\SDL2_image-2.0.5\external\jpeg-9d;..\..\SDL2_image-2.0.5\external\libpng-1.6.37;..\..\SDL2_image-2.0.5\external\libwebp-1.0.3;..\..\SDL2_ttf-2.0.15\include;..\..\SDL2-2.0.14\include;..\..\SDL2_image-2.0.5\VisualC\external\include</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>LOAD_WEBP;LOAD_BMP;LOAD_GIF;LOAD_LBM;LOAD_PCX;LOAD_PNM;LOAD_TGA;LOAD_XCF;LOAD_XPM;LOAD_XV;LOAD_JPG;AVOID_TABLES;LOAD_PNG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <EnableNeonCodegen>true</EnableNeonCodegen>
       <CppLanguageStandard>c++1z</CppLanguageStandard>
@@ -359,7 +359,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
     <ClCompile>
-      <AdditionalIncludeDirectories>$(Sysroot)\usr\include;$(StlIncludeDirectories)%(AdditionalIncludeDirectories);..\..\libjpeg-turbo-1.5.3;..\..\libpng-1.6.37;..\..\libwebp-1.0.3;..\..\SDL2_ttf-2.0.15\include;..\..\SDL2_image-2.0.5\VisualC\external\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(Sysroot)\usr\include;$(StlIncludeDirectories)%(AdditionalIncludeDirectories);..\..\SDL2_image-2.0.5\external\jpeg-9d;..\..\SDL2_image-2.0.5\external\libpng-1.6.37;..\..\SDL2_image-2.0.5\external\libwebp-1.0.3;..\..\SDL2_ttf-2.0.15\include;..\..\SDL2-2.0.14\include;..\..\SDL2_image-2.0.5\VisualC\external\include</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>LOAD_WEBP;LOAD_BMP;LOAD_GIF;LOAD_LBM;LOAD_PCX;LOAD_PNM;LOAD_TGA;LOAD_XCF;LOAD_XPM;LOAD_XV;LOAD_JPG;AVOID_TABLES;LOAD_PNG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <EnableNeonCodegen>true</EnableNeonCodegen>
       <CppLanguageStandard>c++1z</CppLanguageStandard>
