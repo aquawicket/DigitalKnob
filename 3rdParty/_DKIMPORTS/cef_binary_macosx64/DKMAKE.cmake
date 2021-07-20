@@ -28,7 +28,6 @@ MAC_RELEASE_LIB(${CEF}/${OS}/libcef_dll_wrapper/${RELEASE_DIR}/libcef_dll_wrappe
 
 
 ### COMPILE ###
-DKSETPATH(${CEF}/${OS})
-MAC_COMMAND(${CMAKE_COMMAND} -G "Xcode" -DCMAKE_OSX_ARCHITECTURES=x86_64 ${CEF})
-MAC_XCODE_DEBUG(cef_binary_${CEF_VERSION} libcef_dll_wrapper)
-MAC_XCODE_RELEASE(cef_binary_${CEF_VERSION} libcef_dll_wrapper)
+MAC_PATH(${CEF}/${OS})
+MAC64_COMMAND(${DKCMAKE_MAC64} ${CEF})
+MAC_XCODE(cef_binary_${CEF_VERSION} libcef_dll_wrapper)
