@@ -347,7 +347,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
     <ClCompile>
-      <AdditionalIncludeDirectories>$(Sysroot)\usr\include;$(StlIncludeDirectories)%(AdditionalIncludeDirectories);..\..\libjpeg-turbo-1.5.3;..\..\libpng-1.6.37;..\..\libwebp-1.0.3;..\..\SDL2_ttf-2.0.15\include;..\..\SDL2_image-2.0.5\VisualC\external\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(Sysroot)\usr\include;$(StlIncludeDirectories)%(AdditionalIncludeDirectories);..\..\libjpeg-turbo-1.5.3\android32\Release\jni;..\..\libjpeg-turbo-1.5.3;..\..\libpng-1.6.37;..\..\libwebp-1.0.3;..\..\SDL2_ttf-2.0.15\include;..\..\SDL2_image-2.0.5\VisualC\external\include</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>LOAD_WEBP;LOAD_BMP;LOAD_GIF;LOAD_LBM;LOAD_PCX;LOAD_PNM;LOAD_TGA;LOAD_XCF;LOAD_XPM;LOAD_XV;LOAD_JPG;AVOID_TABLES;LOAD_PNG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <EnableNeonCodegen>true</EnableNeonCodegen>
       <CppLanguageStandard>c++1z</CppLanguageStandard>

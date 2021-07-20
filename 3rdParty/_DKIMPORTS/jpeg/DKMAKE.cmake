@@ -4,12 +4,14 @@ endif()
 
 ### VERSION ###
 DKSET(JPEG_VERSION 6b)
+##DKSET(JPEG_VERSION 9d)
 DKSET(JPEG ${3RDPARTY}/jpeg-${JPEG_VERSION})
 
 
 
 ### INSTALL ###
 ## https://www.sac.sk/download/graph/jpegsr6b.zip
+## https://www.ijg.org/files/jpegsr9d.zip
 DKINSTALL(https://www.sac.sk/download/graph/jpegsr${JPEG_VERSION}.zip jpeg jpeg-${JPEG_VERSION})
 
 
