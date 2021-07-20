@@ -28,9 +28,6 @@
     <Filter Include="src\webp\utils">
       <UniqueIdentifier>{3c5541c7-99e4-4585-a8a9-e6ac46449ce8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\zlib">
-      <UniqueIdentifier>{595bf529-d06c-4211-84ac-208be7464a8e}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\SDL2_image-2.0.5\IMG.c">
@@ -458,51 +455,6 @@
     </ClCompile>
     <ClCompile Include="..\..\SDL2_image-2.0.5\external\libwebp-1.0.3\src\utils\rescaler_utils.c">
       <Filter>src\webp\utils</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\zlib-1.2.11\adler32.c">
-      <Filter>src\zlib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\zlib-1.2.11\compress.c">
-      <Filter>src\zlib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\zlib-1.2.11\crc32.c">
-      <Filter>src\zlib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\zlib-1.2.11\deflate.c">
-      <Filter>src\zlib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\zlib-1.2.11\gzclose.c">
-      <Filter>src\zlib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\zlib-1.2.11\gzlib.c">
-      <Filter>src\zlib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\zlib-1.2.11\gzread.c">
-      <Filter>src\zlib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\zlib-1.2.11\gzwrite.c">
-      <Filter>src\zlib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\zlib-1.2.11\infback.c">
-      <Filter>src\zlib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\zlib-1.2.11\inffast.c">
-      <Filter>src\zlib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\zlib-1.2.11\inflate.c">
-      <Filter>src\zlib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\zlib-1.2.11\inftrees.c">
-      <Filter>src\zlib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\zlib-1.2.11\trees.c">
-      <Filter>src\zlib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\zlib-1.2.11\uncompr.c">
-      <Filter>src\zlib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\zlib-1.2.11\zutil.c">
-      <Filter>src\zlib</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
