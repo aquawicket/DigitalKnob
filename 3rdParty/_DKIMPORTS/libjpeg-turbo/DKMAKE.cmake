@@ -1,8 +1,11 @@
 ## https://libjpeg-turbo.org/
+## https://github.com/libjpeg-turbo/libjpeg-turbo
+## For ANDROID - https://github.com/DeviceFarmer/android-libjpeg-turbo
+
 
 ### VERSION ###
-##DKSET(JPEG_VERSION 1.5.3)
-DKSET(JPEG_VERSION 2.1.0)
+DKSET(JPEG_VERSION 1.5.3)
+##DKSET(JPEG_VERSION 2.1.0)
 DKSET(JPEG ${3RDPARTY}/libjpeg-turbo-${JPEG_VERSION})
 
 
