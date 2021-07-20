@@ -1,9 +1,9 @@
 ### VERSION ###
-IF(ANDROID)
-	DKSET(ZLIB_VERSION 1.2.8) ## https://www.zlib.net/fossils/zlib-1.2.8.tar.gz
-ELSE()
+#IF(ANDROID)
+#	DKSET(ZLIB_VERSION 1.2.8) ## https://www.zlib.net/fossils/zlib-1.2.8.tar.gz
+#ELSE()
 	DKSET(ZLIB_VERSION 1.2.11) ##https://www.zlib.net/fossils/zlib-1.2.11.tar.gz
-ENDIF()
+#ENDIF()
 DKSET(ZLIB_NAME zlib-${ZLIB_VERSION})
 DKSET(ZLIB ${3RDPARTY}/${ZLIB_NAME})
 

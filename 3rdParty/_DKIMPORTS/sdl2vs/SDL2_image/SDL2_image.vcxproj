@@ -286,7 +286,7 @@
       <CppLanguageStandard>c++1z</CppLanguageStandard>
     </ClCompile>
     <Link>
-      <LibraryDependencies>$(StlLibraryName);%(LibraryDependencies);m;dl;GLESv1_CM;GLESv2;log;android;SDL2;z</LibraryDependencies>
+      <LibraryDependencies>$(StlLibraryName);%(LibraryDependencies);m;dl;GLESv1_CM;GLESv2;log;android;SDL2;C:\Users\aquawicket\digitalknob\DK\3rdParty\zlib-1.2.11\android32\Debug\libz.a</LibraryDependencies>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories);$(ToolchainPrebuiltPath)\lib\gcc\$(ToolchainName)\$(ToolchainFullVersionName)\$(PlatformShortName);$(StlLibraryPath);$(SolutionDir)$(Platform)\$(Configuration)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
@@ -297,7 +297,7 @@
       <CppLanguageStandard>c++1z</CppLanguageStandard>
     </ClCompile>
     <Link>
-      <LibraryDependencies>$(StlLibraryName);%(LibraryDependencies);m;dl;GLESv1_CM;GLESv2;log;android;SDL2;z</LibraryDependencies>
+      <LibraryDependencies>$(StlLibraryName);%(LibraryDependencies);m;dl;GLESv1_CM;GLESv2;log;android;SDL2;C:\Users\aquawicket\digitalknob\DK\3rdParty\zlib-1.2.11\android32\Release\libz.a</LibraryDependencies>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories);$(ToolchainPrebuiltPath)\lib\gcc\$(ToolchainName)\$(ToolchainFullVersionName)\$(PlatformShortName);$(StlLibraryPath);$(SolutionDir)$(Platform)\$(Configuration)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
@@ -308,7 +308,7 @@
       <CppLanguageStandard>c++1z</CppLanguageStandard>
     </ClCompile>
     <Link>
-      <LibraryDependencies>$(StlLibraryName);%(LibraryDependencies);m;dl;GLESv1_CM;GLESv2;log;android;SDL2;z</LibraryDependencies>
+      <LibraryDependencies>$(StlLibraryName);%(LibraryDependencies);m;dl;GLESv1_CM;GLESv2;log;android;SDL2;C:\Users\aquawicket\digitalknob\DK\3rdParty\zlib-1.2.11\android32\Debug\libz.a</LibraryDependencies>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories);$(ToolchainPrebuiltPath)\lib\gcc\$(ToolchainName)\$(ToolchainFullVersionName)\$(PlatformShortName);$(StlLibraryPath);$(SolutionDir)$(Platform)\$(Configuration)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
@@ -319,7 +319,7 @@
       <CppLanguageStandard>c++1z</CppLanguageStandard>
     </ClCompile>
     <Link>
-      <LibraryDependencies>$(StlLibraryName);%(LibraryDependencies);m;dl;GLESv1_CM;GLESv2;log;android;SDL2;z</LibraryDependencies>
+      <LibraryDependencies>$(StlLibraryName);%(LibraryDependencies);m;dl;GLESv1_CM;GLESv2;log;android;SDL2;C:\Users\aquawicket\digitalknob\DK\3rdParty\zlib-1.2.11\android32\Release\libz.a</LibraryDependencies>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories);$(ToolchainPrebuiltPath)\lib\gcc\$(ToolchainName)\$(ToolchainFullVersionName)\$(PlatformShortName);$(StlLibraryPath);$(SolutionDir)$(Platform)\$(Configuration)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
@@ -330,7 +330,7 @@
       <CppLanguageStandard>c++1z</CppLanguageStandard>
     </ClCompile>
     <Link>
-      <LibraryDependencies>$(StlLibraryName);%(LibraryDependencies);m;dl;GLESv1_CM;GLESv2;log;android;SDL2;z</LibraryDependencies>
+      <LibraryDependencies>$(StlLibraryName);%(LibraryDependencies);m;dl;GLESv1_CM;GLESv2;log;android;SDL2;C:\Users\aquawicket\digitalknob\DK\3rdParty\zlib-1.2.11\android32\Debug\libz.a</LibraryDependencies>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories);$(ToolchainPrebuiltPath)\lib\gcc\$(ToolchainName)\$(ToolchainFullVersionName)\$(PlatformShortName);$(StlLibraryPath);$(SolutionDir)$(Platform)\$(Configuration)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
@@ -341,7 +341,7 @@
       <CppLanguageStandard>c++1z</CppLanguageStandard>
     </ClCompile>
     <Link>
-      <LibraryDependencies>$(StlLibraryName);%(LibraryDependencies);m;dl;GLESv1_CM;GLESv2;log;android;SDL2;z</LibraryDependencies>
+      <LibraryDependencies>$(StlLibraryName);%(LibraryDependencies);m;dl;GLESv1_CM;GLESv2;log;android;SDL2;C:\Users\aquawicket\digitalknob\DK\3rdParty\zlib-1.2.11\android32\Release\libz.a</LibraryDependencies>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories);$(ToolchainPrebuiltPath)\lib\gcc\$(ToolchainName)\$(ToolchainFullVersionName)\$(PlatformShortName);$(StlLibraryPath);$(SolutionDir)$(Platform)\$(Configuration)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
@@ -354,7 +354,7 @@
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories);$(ToolchainPrebuiltPath)\lib\gcc\$(ToolchainName)\$(ToolchainFullVersionName)\$(PlatformShortName);$(StlLibraryPath);$(SolutionDir)$(Platform)\$(Configuration)</AdditionalLibraryDirectories>
-      <LibraryDependencies>$(StlLibraryName);%(LibraryDependencies);m;dl;GLESv1_CM;GLESv2;log;android;SDL2;z</LibraryDependencies>
+      <LibraryDependencies>$(StlLibraryName);%(LibraryDependencies);m;dl;GLESv1_CM;GLESv2;log;android;SDL2;C:\Users\aquawicket\digitalknob\DK\3rdParty\zlib-1.2.11\android32\Debug\libz.a</LibraryDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
@@ -365,7 +365,7 @@
       <CppLanguageStandard>c++1z</CppLanguageStandard>
     </ClCompile>
     <Link>
-      <LibraryDependencies>$(StlLibraryName);%(LibraryDependencies);m;dl;GLESv1_CM;GLESv2;log;android;SDL2;z</LibraryDependencies>
+      <LibraryDependencies>$(StlLibraryName);%(LibraryDependencies);m;dl;GLESv1_CM;GLESv2;log;android;SDL2;C:\Users\aquawicket\digitalknob\DK\3rdParty\zlib-1.2.11\android32\Release\libz.a</LibraryDependencies>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories);$(ToolchainPrebuiltPath)\lib\gcc\$(ToolchainName)\$(ToolchainFullVersionName)\$(PlatformShortName);$(StlLibraryPath);$(SolutionDir)$(Platform)\$(Configuration)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
