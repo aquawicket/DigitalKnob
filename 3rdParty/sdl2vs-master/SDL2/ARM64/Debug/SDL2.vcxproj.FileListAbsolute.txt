@@ -1,1 +1,0 @@
-C:\Users\aquawicket\digitalknob\DK\3rdParty\sdl2vs-master\SDL2\ARM64\Debug\libSDL2.so
