@@ -3,5 +3,5 @@
   JAVA_HOME=C:\Program Files\Android\jdk\microsoft_dist_openjdk_1.8.0.25
   NDK_ROOT=C:\\Microsoft\AndroidNDK64\android-ndk-r16b
   jaricom.c
-clang.exe : error : no such file or directory: '..\libsdl\SDL_image\external\jpeg-9d\jaricom.c'
+clang.exe : error : no such file or directory: '..\..\SDL2_ttf-2.0.15_image\external\jpeg-9d\jaricom.c'
 clang.exe : error : no input files
