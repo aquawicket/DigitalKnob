@@ -16,7 +16,7 @@ let LEVEL = "";  //Build, Rebuild, RebuildAll
 let DKPATH = "";
 let DKDOWNLOAD = "";
 let CMAKE = "";
-let NDK_VERSION = "r16b";
+let NDK_VERSION = ""; //r16b
 let NDK = "";
 let VISUALSTUDIO_VERSION = "2019";
 let VISUALSTUDIO = "";
@@ -161,8 +161,48 @@ function DKBuild_ValidateNDK(){
 		console.log("Found NDK");
 }
 
+function DKBuild_GetDKMakeVariable(file, variable){
+	//const file = "C:/Users/aquawicket/digitalknob/DK/3rdParty/_DKIMPORTS/android-ndk/DKMake.cmake"
+	//const variable = "NDK_VERSION";
+
+	const str = CPP_DKFile_FileToString(file)
+	str = str.replaceAll("dkset(", "set(");
+	str = str.replaceAll("DKSET(", "set(");
+	str = str.replaceAll("SET(", "set(");
+	let index = str.indexOf("set("+variable+" ");
+	let pos = index;	
+	let marker = 0;
+	while(index > -1 && pos > -1){
+		if(str.charAt(pos) === '\n' || pos === 0){
+			marker = str.indexOf(" ", index)
+			const endIndex = str.indexOf(")", marker)
+			if(endIndex === -1){
+				console.error("set( missing closing bracket")
+				return null;
+			}
+			const value = str.substring(marker+1, endIndex)
+			return value;
+		}
+		if(str.charAt(pos) === '#'){
+			marker = index+1;
+			index = str.indexOf("set("+variable+" ", marker);
+			pos = index;
+		}else{
+			pos--
+		}
+	}
+	return null;
+}
+
+
 function DKBuild_InstallNDK(){
 	console.log("Installing Android NDK");
+	NDK_VERSION = DKBuild_GetDKMakeVariable("C:/Users/aquawicket/digitalknob/DK/3rdParty/_DKIMPORTS/android-ndk/DKMake.cmake", "NDK_VERSION")
+	if(!NDK_VERSION){
+		console.log("Could NOT get variable. NDK_VERSION = "+NDK_VERSION);
+		return;
+	}
+			
 	if(CPP_DK_GetOS() === "Windows"){
 		console.log("Downloading NDK to "+DKDOWNLOAD)
 		CPP_DKCurl_Download("https://dl.google.com/android/repository/android-ndk-"+NDK_VERSION+"-windows-x86_64.zip", DKDOWNLOAD);
