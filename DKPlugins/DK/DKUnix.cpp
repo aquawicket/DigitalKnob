@@ -15,11 +15,11 @@ bool DKUnix::GetKey(int& key){
 }
 
 bool DKUnix::Sleep(int milliseconds){
-#ifdef ANDROID
+//#ifdef ANDROID
 	Sleep(milliseconds * 1000);
-#else
-	usleep(milliseconds * 1000);
-#endif
+//#else
+//	usleep(milliseconds * 1000);
+//#endif
 	return true;
 }
 
