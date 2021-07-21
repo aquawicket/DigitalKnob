@@ -4,12 +4,13 @@ endif()
 
 ### VERSION ###
 DKSET(CEF_VERSION 81.3.3+g072a5f5+chromium-81.0.4044.138_windows64)
-DKSET(CEF ${3RDPARTY}/cef_binary_${CEF_VERSION})
+DKSET(CEF_NAME cef_binary_${CEF_VERSION})
+DKSET(CEF ${3RDPARTY}/${CEF_NAME})
 
 
 ### INSTALL ###
 ## https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_windows64.tar.bz2
-DKINSTALL(https://cef-builds.spotifycdn.com/cef_binary_${CEF_VERSION}.tar.bz2 cef_binary_windows64 cef_binary_${CEF_VERSION})
+DKINSTALL(https://cef-builds.spotifycdn.com/${CEF_NAME}.tar.bz2 cef_binary_windows64 ${CEF_NAME})
 
 
 
@@ -31,6 +32,6 @@ WIN64_RELEASE_LIB(${CEF}/${OS}/libcef_dll_wrapper/${RELEASE_DIR}/libcef_dll_wrap
 
 ### COMPILE ###
 WIN_PATH(${CEF}/${OS})
-WIN64_COMMAND(${CMAKE_COMMAND} -G ${GENERATOR} -A x64 -DUSE_SANDBOX=Off ${CEF})
-WIN_VS(cef_binary_${CEF_VERSION} cef.sln libcef_dll_wrapper)
-WIN_VS(cef_binary_${CEF_VERSION} cef.sln cefclient)
+WIN64_COMMAND(${DKCMAKE_WIN64} -DUSE_SANDBOX=Off ${CEF})
+WIN_VS(${CEF_NAME} cef.sln libcef_dll_wrapper)
+WIN_VS(${CEF_NAME} cef.sln cefclient)

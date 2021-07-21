@@ -31,6 +31,6 @@ WIN32_RELEASE_LIB(${CEF}/${OS}/libcef_dll_wrapper/${RELEASE_DIR}/libcef_dll_wrap
 
 ### COMPILE ###
 WIN_PATH(${CEF}/${OS})
-WIN32_COMMAND(${CMAKE_COMMAND} -G ${GENERATOR} -A Win32 -DUSE_SANDBOX=Off ${CEF})
+WIN32_COMMAND(${DKCMAKE_WIN32} -DUSE_SANDBOX=Off ${CEF})
 WIN_VS(${CEF_NAME} cef.sln libcef_dll_wrapper)
 WIN_VS(${CEF_NAME} cef.sln cefclient)

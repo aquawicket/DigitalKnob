@@ -186,6 +186,7 @@ ANDROID32_DEBUG_COMMAND(
 	set CLANGPATH=${NDK}/toolchains/llvm/prebuilt/windows-x86_64/bin &&
 	b2
 	toolset=clang-armeabiv7a
+	cxxflags="-std=c++11"
 	architecture=arm
 	variant=debug
 	link=static
@@ -207,6 +208,7 @@ ANDROID32_RELEASE_COMMAND(
 	set CLANGPATH=${NDK}/toolchains/llvm/prebuilt/windows-x86_64/bin &&
 	b2
 	toolset=clang-armeabiv7a
+	cxxflags="-std=c++11"
 	architecture=arm
 	variant=release
 	link=static

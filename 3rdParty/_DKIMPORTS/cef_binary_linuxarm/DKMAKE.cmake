@@ -4,11 +4,12 @@ endif()
 
 ### VERSION ###
 DKSET(CEF_VERSION 81.3.3+g072a5f5+chromium-81.0.4044.138_linuxarm)
-DKSET(CEF ${3RDPARTY}/cef_binary_${CEF_VERSION})
+DKSET(CEF_NAME cef_binary_${CEF_VERSION})
+DKSET(CEF ${3RDPARTY}/${CEF_NAME})
 
 
 ### INSTALL ###
-DKINSTALL(http://opensource.spotify.com/cefbuilds/cef_binary_${CEF_VERSION}.tar.bz2 cef_binary_linuxarm cef_binary_${CEF_VERSION})
+DKINSTALL(http://opensource.spotify.com/cefbuilds/${CEF_NAME}.tar.bz2 cef_binary_linuxarm ${CEF_NAME})
 
 
 ### LINK ###
@@ -29,9 +30,9 @@ LINUX_RELEASE_LIB(${CEF}/${OS}/${RELEASE_DIR}/libcef_dll_wrapper/libcef_dll_wrap
 
 ### COMPILE ###
 LINUX_DEBUG_PATH(${CEF}/${OS}/${DEBUG_DIR})
-LINUX_DEBUG_COMMAND(${CMAKE_COMMAND} -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Debug -DCMAKE_C_FLAGS=-fPIC ${CEF})
+LINUX_DEBUG_COMMAND(${DKCMAKE_LINUX_DEBUG} -DCMAKE_C_FLAGS=-fPIC ${CEF})
 LINUX_DEBUG_COMMAND(make libcef_dll_wrapper)
 
 LINUX_RELEASE_PATH(${CEF}/${OS}/${RELEASE_DIR})
-LINUX_RELEASE_COMMAND(${CMAKE_COMMAND} -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_FLAGS=-fPIC ${CEF})
+LINUX_RELEASE_COMMAND(${DKCMAKE_LINUX_RELEASE} -DCMAKE_C_FLAGS=-fPIC ${CEF})
 LINUX_RELEASE_COMMAND(make libcef_dll_wrapper)
