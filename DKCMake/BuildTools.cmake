@@ -32,12 +32,12 @@ endif()
 
 
 if(CMAKE_HOST_LINUX AND LINUX)
-
+	DKDEPEND(libx11-dev)
 endif()
 
 
 if(CMAKE_HOST_LINUX AND RASPBERRY)
-	
+	DKDEPEND(libx11-dev)
 endif()
 
 
