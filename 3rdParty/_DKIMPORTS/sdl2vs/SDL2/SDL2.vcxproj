@@ -355,7 +355,7 @@
     <ClCompile Include="..\..\SDL2-2.0.14\src\video\SDL_vulkan_utils.c" />
     <ClCompile Include="..\..\SDL2-2.0.14\src\video\SDL_yuv.c" />
     <ClCompile Include="..\..\SDL2-2.0.14\src\video\yuv2rgb\yuv_rgb.c" />
-    <ClCompile Include="src\cpufeatures\cpu-features.c" />
+    <ClCompile Include="cpufeatures\cpu-features.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\SDL2-2.0.14\include\begin_code.h" />

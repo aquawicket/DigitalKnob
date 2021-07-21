@@ -137,7 +137,7 @@
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories);$(ToolchainPrebuiltPath)\lib\gcc\$(ToolchainName)\$(ToolchainFullVersionName)\$(PlatformShortName);$(StlLibraryPath);$(SolutionDir)$(Platform)\$(Configuration)</AdditionalLibraryDirectories>
-      <LibraryDependencies>$(StlLibraryName);%(LibraryDependencies);m;dl;GLESv1_CM;GLESv2;log;android;C:\Users\aquawicket\digitalknob\DK\3rdParty\SDL2-2.0.14\android32\Debug\libSDL2.a</LibraryDependencies>
+      <LibraryDependencies>$(StlLibraryName);%(LibraryDependencies);m;dl;GLESv1_CM;GLESv2;log;android;C:\Users\aquawicket\digitalknob\DK\3rdParty\SDL2-2.0.14\android32\Debug\libSDL2.a;C:\Users\aquawicket\digitalknob\DK\3rdParty\SDL2_ttf-2.0.15\android32\lib\Debug\SDL_ttf.a;C:\Users\aquawicket\digitalknob\DK\3rdParty\freetype-2.5.5\android32\Debug\libfreetype.a</LibraryDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
@@ -147,7 +147,7 @@
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories);$(ToolchainPrebuiltPath)\lib\gcc\$(ToolchainName)\$(ToolchainFullVersionName)\$(PlatformShortName);$(StlLibraryPath);$(SolutionDir)$(Platform)\$(Configuration)</AdditionalLibraryDirectories>
-      <LibraryDependencies>$(StlLibraryName);%(LibraryDependencies);m;dl;GLESv1_CM;GLESv2;log;android;C:\Users\aquawicket\digitalknob\DK\3rdParty\SDL2-2.0.14\android32\Release\libSDL2.a</LibraryDependencies>
+      <LibraryDependencies>$(StlLibraryName);%(LibraryDependencies);m;dl;GLESv1_CM;GLESv2;log;android;C:\Users\aquawicket\digitalknob\DK\3rdParty\SDL2-2.0.14\android32\Release\libSDL2.a;C:\Users\aquawicket\digitalknob\DK\3rdParty\SDL2_ttf-2.0.15\android32\lib\Release\SDL_ttf.a;C:\Users\aquawicket\digitalknob\DK\3rdParty\freetype-2.5.5\android32\Release\libfreetype.a</LibraryDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">
@@ -157,7 +157,7 @@
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories);$(ToolchainPrebuiltPath)\lib\gcc\$(ToolchainName)\$(ToolchainFullVersionName)\$(PlatformShortName);$(StlLibraryPath);$(SolutionDir)$(Platform)\$(Configuration)</AdditionalLibraryDirectories>
-      <LibraryDependencies>$(StlLibraryName);%(LibraryDependencies);m;dl;GLESv1_CM;GLESv2;log;android;C:\Users\aquawicket\digitalknob\DK\3rdParty\SDL2-2.0.14\android32\Debug\libSDL2.a</LibraryDependencies>
+      <LibraryDependencies>$(StlLibraryName);%(LibraryDependencies);m;dl;GLESv1_CM;GLESv2;log;android;C:\Users\aquawicket\digitalknob\DK\3rdParty\SDL2-2.0.14\android32\Debug\libSDL2.a;C:\Users\aquawicket\digitalknob\DK\3rdParty\SDL2_ttf-2.0.15\android32\lib\Debug\SDL_ttf.a;C:\Users\aquawicket\digitalknob\DK\3rdParty\freetype-2.5.5\android32\Debug\libfreetype.a</LibraryDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">
@@ -167,7 +167,7 @@
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories);$(ToolchainPrebuiltPath)\lib\gcc\$(ToolchainName)\$(ToolchainFullVersionName)\$(PlatformShortName);$(StlLibraryPath);$(SolutionDir)$(Platform)\$(Configuration)</AdditionalLibraryDirectories>
-      <LibraryDependencies>$(StlLibraryName);%(LibraryDependencies);m;dl;GLESv1_CM;GLESv2;log;android;C:\Users\aquawicket\digitalknob\DK\3rdParty\SDL2-2.0.14\android32\Release\libSDL2.a</LibraryDependencies>
+      <LibraryDependencies>$(StlLibraryName);%(LibraryDependencies);m;dl;GLESv1_CM;GLESv2;log;android;C:\Users\aquawicket\digitalknob\DK\3rdParty\SDL2-2.0.14\android32\Release\libSDL2.a;C:\Users\aquawicket\digitalknob\DK\3rdParty\SDL2_ttf-2.0.15\android32\lib\Release\SDL_ttf.a;C:\Users\aquawicket\digitalknob\DK\3rdParty\freetype-2.5.5\android32\Release\libfreetype.a</LibraryDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
@@ -177,7 +177,7 @@
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories);$(ToolchainPrebuiltPath)\lib\gcc\$(ToolchainName)\$(ToolchainFullVersionName)\$(PlatformShortName);$(StlLibraryPath);$(SolutionDir)$(Platform)\$(Configuration)</AdditionalLibraryDirectories>
-      <LibraryDependencies>$(StlLibraryName);%(LibraryDependencies);m;dl;GLESv1_CM;GLESv2;log;android;C:\Users\aquawicket\digitalknob\DK\3rdParty\SDL2-2.0.14\android32\Debug\libSDL2.a</LibraryDependencies>
+      <LibraryDependencies>$(StlLibraryName);%(LibraryDependencies);m;dl;GLESv1_CM;GLESv2;log;android;C:\Users\aquawicket\digitalknob\DK\3rdParty\SDL2-2.0.14\android32\Debug\libSDL2.a;C:\Users\aquawicket\digitalknob\DK\3rdParty\SDL2_ttf-2.0.15\android32\lib\Debug\SDL_ttf.a;C:\Users\aquawicket\digitalknob\DK\3rdParty\freetype-2.5.5\android32\Debug\libfreetype.a</LibraryDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'">
@@ -187,7 +187,7 @@
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories);$(ToolchainPrebuiltPath)\lib\gcc\$(ToolchainName)\$(ToolchainFullVersionName)\$(PlatformShortName);$(StlLibraryPath);$(SolutionDir)$(Platform)\$(Configuration)</AdditionalLibraryDirectories>
-      <LibraryDependencies>$(StlLibraryName);%(LibraryDependencies);m;dl;GLESv1_CM;GLESv2;log;android;C:\Users\aquawicket\digitalknob\DK\3rdParty\SDL2-2.0.14\android32\Release\libSDL2.a</LibraryDependencies>
+      <LibraryDependencies>$(StlLibraryName);%(LibraryDependencies);m;dl;GLESv1_CM;GLESv2;log;android;C:\Users\aquawicket\digitalknob\DK\3rdParty\SDL2-2.0.14\android32\Release\libSDL2.a;C:\Users\aquawicket\digitalknob\DK\3rdParty\SDL2_ttf-2.0.15\android32\lib\Release\SDL_ttf.a;C:\Users\aquawicket\digitalknob\DK\3rdParty\freetype-2.5.5\android32\Release\libfreetype.a</LibraryDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -197,7 +197,7 @@
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories);$(ToolchainPrebuiltPath)\lib\gcc\$(ToolchainName)\$(ToolchainFullVersionName)\$(PlatformShortName);$(StlLibraryPath);$(SolutionDir)$(Platform)\$(Configuration)</AdditionalLibraryDirectories>
-      <LibraryDependencies>$(StlLibraryName);%(LibraryDependencies);m;dl;GLESv1_CM;GLESv2;log;android;C:\Users\aquawicket\digitalknob\DK\3rdParty\SDL2-2.0.14\android32\Debug\libSDL2.a</LibraryDependencies>
+      <LibraryDependencies>$(StlLibraryName);%(LibraryDependencies);m;dl;GLESv1_CM;GLESv2;log;android;C:\Users\aquawicket\digitalknob\DK\3rdParty\SDL2-2.0.14\android32\Debug\libSDL2.a;C:\Users\aquawicket\digitalknob\DK\3rdParty\SDL2_ttf-2.0.15\android32\lib\Debug\SDL_ttf.a;C:\Users\aquawicket\digitalknob\DK\3rdParty\freetype-2.5.5\android32\Debug\libfreetype.a</LibraryDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -207,7 +207,7 @@
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories);$(ToolchainPrebuiltPath)\lib\gcc\$(ToolchainName)\$(ToolchainFullVersionName)\$(PlatformShortName);$(StlLibraryPath);$(SolutionDir)$(Platform)\$(Configuration)</AdditionalLibraryDirectories>
-      <LibraryDependencies>$(StlLibraryName);%(LibraryDependencies);m;dl;GLESv1_CM;GLESv2;log;android;C:\Users\aquawicket\digitalknob\DK\3rdParty\SDL2-2.0.14\android32\Release\libSDL2.a</LibraryDependencies>
+      <LibraryDependencies>$(StlLibraryName);%(LibraryDependencies);m;dl;GLESv1_CM;GLESv2;log;android;C:\Users\aquawicket\digitalknob\DK\3rdParty\SDL2-2.0.14\android32\Release\libSDL2.a;C:\Users\aquawicket\digitalknob\DK\3rdParty\SDL2_ttf-2.0.15\android32\lib\Release\SDL_ttf.a;C:\Users\aquawicket\digitalknob\DK\3rdParty\freetype-2.5.5\android32\Release\libfreetype.a</LibraryDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -220,9 +220,6 @@
     </ProjectReference>
     <ProjectReference Include="..\SDL2_image\SDL2_image.vcxproj">
       <Project>{03a9401d-ceff-4f5e-a7b4-fc2a0d9f6c95}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\SDL2_ttf\SDL2_ttf.vcxproj">
-      <Project>{8572235c-b335-40dd-ba5f-9954bedc4bfc}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
