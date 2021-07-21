@@ -4,7 +4,7 @@ DKDEPEND(zlib)
 DKDEPEND(giflib)
 DKDEPEND(libpng)
 DKDEPEND(libjpeg-turbo)
-DKDEPEND(libwebp)
+#DKDEPEND(libwebp)
 DKDEPEND(tiff)
 
 
