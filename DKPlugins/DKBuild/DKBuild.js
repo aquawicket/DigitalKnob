@@ -9,6 +9,9 @@ console.log("username was set to: "+USERNAME)
 
 
 function DKBuild_GetDKMakeVariable(file, variable){
+	
+	if(NDK_VERSION)
+		throw new Errow("NDK_VERSION: "+NED_VERSION);
 	const str = CPP_DKFile_FileToString(file)
 	str = str.split("dkset(").join("set(")
 	str = str.split("DKSET(").join("set(")
@@ -54,6 +57,8 @@ let MSBUILD = ""
 let GCC = ""
 let XCODE = ""
 let APP_LIST = []
+
+
  
 
 function DKBuild_init(){
@@ -96,9 +101,12 @@ function DKBuild_init(){
 	}
 	DKDOWNLOAD = DKPATH+"DK/Download"
 	//CPP_DKFile_MkDir(DKDOWNLOAD)
-	if(!NDK_VERSION)
-		NDK_VERSION = DKBuild_GetDKMakeVariable(DKPATH+"DK/3rdParty/_DKIMPORTS/android-ndk/DKMake.cmake", "NDK_VERSION")
+	//if(!NDK_VERSION)
+		//NDK_VERSION = DKBuild_GetDKMakeVariable(DKPATH+"DK/3rdParty/_DKIMPORTS/android-ndk/DKMake.cmake", "NDK_VERSION")
 }
+
+if(!NDK || !NDK_VERSION)
+	DKBuild_init()
 
 //This is and alternative way to get windows short paths
 function DKBuild_GetShortPath(fullPath){
@@ -196,8 +204,8 @@ function DKBuild_ValidateNDK(){
 function DKBuild_InstallNDK(){
 	console.log("Installing Android NDK")
 	
-	if(!NDK_VERSION)
-		NDK_VERSION = DKBuild_GetDKMakeVariable("C:/Users/aquawicket/digitalknob/DK/3rdParty/_DKIMPORTS/android-ndk/DKMake.cmake", "NDK_VERSION")
+	//if(!NDK_VERSION)
+		//NDK_VERSION = DKBuild_GetDKMakeVariable(DKPATH+"DK/3rdParty/_DKIMPORTS/android-ndk/DKMake.cmake", "NDK_VERSION")
 			
 	if(CPP_DK_GetOS() === "Windows"){
 		console.log("Downloading NDK to "+DKDOWNLOAD)
