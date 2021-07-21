@@ -27,7 +27,7 @@ public:
 #ifdef WIN32
 		if(!classname){ classname = _strdup(name.c_str()); }
 #else
-		if(!classname){ classname = strdup(name.c_str()); }
+		if(!classname){ classname = /*strdup(*/name.c_str()/*)*/; }
 #endif
 	}
 	static void Singleton(){
