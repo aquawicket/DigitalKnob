@@ -22,12 +22,12 @@ public:
 template <class T, class R>
 class DKBaseT{	
 public:
-	static void SetName(DKString& name){
+	static void SetName(const char* name){
 		DKDEBUGFUNC(name);
 #ifdef WIN32
-		if(!classname){ classname = _strdup(name.c_str()); }
+		if(!classname){ classname = /*_strdup(*/(char*)name/*.c_str())*/; }
 #else
-		if(!classname){ classname = /*strdup(*/name.c_str()/*)*/; }
+		if(!classname){ classname = /*strdup(*/(char*)name/*.c_str())*/ ; }
 #endif
 	}
 	static void Singleton(){
