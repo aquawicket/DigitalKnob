@@ -161,14 +161,24 @@ function DKBuild_ValidateNDK(){
 		console.log("Found NDK");
 }
 
+/**
+ * String.prototype.replaceAll() polyfill
+ * https://gomakethings.com/how-to-replace-a-section-of-a-string-with-another-one-with-vanilla-js/
+ * @author Chris Ferdinandi
+ * @license MIT
+ */
+function replace_All(str, search, replacement){
+	return str.split(search).join(replacement);
+}
+	
 function DKBuild_GetDKMakeVariable(file, variable){
 	//const file = "C:/Users/aquawicket/digitalknob/DK/3rdParty/_DKIMPORTS/android-ndk/DKMake.cmake"
 	//const variable = "NDK_VERSION";
 
 	const str = CPP_DKFile_FileToString(file)
-	str = str.replaceAll("dkset(", "set(");
-	str = str.replaceAll("DKSET(", "set(");
-	str = str.replaceAll("SET(", "set(");
+	str = str.split("dkset(").join("set(");
+	str = str.split("DKSET(").join("set(");
+	str = str.split("SET(").join("set(");
 	let index = str.indexOf("set("+variable+" ");
 	let pos = index;	
 	let marker = 0;
