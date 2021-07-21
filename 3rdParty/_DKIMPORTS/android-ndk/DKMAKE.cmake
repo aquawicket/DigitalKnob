@@ -3,7 +3,8 @@ if(NOT ANDROID)
 endif()
 
 ### VERSION ###
-DKSET(NDK_VERSION r21e)
+DKSET(NDK_VERSION r16e)
+##DKSET(NDK_VERSION r21e)
 
 
 ### INSTALL ###
