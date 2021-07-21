@@ -2,12 +2,13 @@
 
 ### VERSION ###
 DKSET(GLEW_VERSION 2.2.0)
-DKSET(GLEW ${3RDPARTY}/glew-${GLEW_VERSION})
+DKSET(GLEW_NAME glew-${GLEW_VERSION})
+DKSET(GLEW ${3RDPARTY}/${GLEW_NAME})
 
 
 ### INSTALL ###
 # https://github.com/nigels-com/glew/releases/download/glew-2.2.0/glew-2.2.0.zip
-DKINSTALL(https://versaweb.dl.sourceforge.net/project/glew/glew/${GLEW_VERSION}/glew-${GLEW_VERSION}.zip glew glew-${GLEW_VERSION})
+DKINSTALL(https://versaweb.dl.sourceforge.net/project/glew/glew/${GLEW_VERSION}/${GLEW_NAME}.zip glew ${GLEW_NAME})
 DKCOPY(${GLEW}/build/cmake ${GLEW}/${OS}/CMakeFiles/Export/lib/cmake/glew TRUE)
 
 
@@ -41,12 +42,12 @@ DKSET(GLEW_WIN32
 
 ### COMPILE ###
 WIN_PATH(${GLEW}/${OS})
-WIN32_COMMAND(${CMAKE_COMMAND} -G ${GENERATOR} -A Win32 "-DCMAKE_C_FLAGS=/DWIN32 /D_WINDOWS /W3 /nologo" "-DCMAKE_C_FLAGS_DEBUG=/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG" "-DCMAKE_C_FLAGS_RELEASE=/MT /O2 /Ob2 /DNDEBUG" ${GLEW}/build/cmake)
-WIN64_COMMAND(${CMAKE_COMMAND} -G ${GENERATOR} -A x64 "-DCMAKE_C_FLAGS=/DWIN32 /D_WINDOWS /W3 /nologo" "-DCMAKE_C_FLAGS_DEBUG=/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG" "-DCMAKE_C_FLAGS_RELEASE=/MT /O2 /Ob2 /DNDEBUG" ${GLEW}/build/cmake)
-WIN_VS_DEBUG(glew-${GLEW_VERSION} glew.sln glew)
-WIN_VS_RELEASE(glew-${GLEW_VERSION} glew.sln glew)
-WIN_VS_DEBUG(glew-${GLEW_VERSION} glew.sln glew_s)
-WIN_VS_RELEASE(glew-${GLEW_VERSION} glew.sln glew_s)
+WIN32_COMMAND(${DKCMAKE_WIN32} ${GLEW}/build/cmake)
+WIN64_COMMAND(${DKCMAKE_WIN64} ${GLEW}/build/cmake)
+WIN_VS_DEBUG(${GLEW_NAME} glew.sln glew)
+WIN_VS_RELEASE(${GLEW_NAME} glew.sln glew)
+WIN_VS_DEBUG(${GLEW_NAME} glew.sln glew_s)
+WIN_VS_RELEASE(${GLEW_NAME} glew.sln glew_s)
 DKCOPY(${GLEW}/${OS}/lib/${DEBUG_DIR} ${GLEW}/${OS}/CMakeFiles/Export/lib/ TRUE)
 DKCOPY(${GLEW}/${OS}/lib/${RELEASE_DIR} ${GLEW}/${OS}/CMakeFiles/Export/lib/ TRUE)
 DKCOPY(${GLEW}/${OS}/bin/${DEBUG_DIR} ${GLEW}/${OS}/CMakeFiles/Export/bin/ TRUE)
