@@ -1,7 +1,3 @@
-## NOTES:  Android NDK r16b - Boost FileSystem fails to build
-
-
-
 if(NOT ANDROID)
 	return()
 endif()
@@ -11,8 +7,8 @@ endif()
 #DKSET(NDK_VERSION r17c)
 #DKSET(NDK_VERSION r18b)
 #DKSET(NDK_VERSION r19c)
-DKSET(NDK_VERSION r20b)
-#DKSET(NDK_VERSION r21e)
+#DKSET(NDK_VERSION r20b)
+DKSET(NDK_VERSION r21e)
 #DKSET(NDK_VERSION r22b)
 
 
