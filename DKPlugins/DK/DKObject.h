@@ -22,7 +22,7 @@ public:
 template <class T, class R>
 class DKBaseT{	
 public:
-	static void SetName(const DKString& name){
+	static void SetName(DKString& name){
 		DKDEBUGFUNC(name);
 #ifdef WIN32
 		if(!classname){ classname = _strdup(name.c_str()); }
