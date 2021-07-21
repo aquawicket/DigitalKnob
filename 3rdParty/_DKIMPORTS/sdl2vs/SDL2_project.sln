@@ -13,7 +13,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SDL2_image", "SDL2_image\SD
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SDL2_ttf", "SDL2_ttf\SDL2_ttf.vcxproj", "{8572235C-B335-40DD-BA5F-9954BEDC4BFC}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "hidapi", "SDL2\src\hidapi\android\hidapi.vcxproj", "{654D6F15-267A-423D-8606-351C153C4E3D}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "hidapi", "hidapi\hidapi.vcxproj", "{654D6F15-267A-423D-8606-351C153C4E3D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
