@@ -226,8 +226,6 @@ ANDROID32_RELEASE_COMMAND(
 	--without-python
 	abi=aapcs
 	binary-format=elf )
-	
-	WaitForEnter()
 
 ANDROID64_DEBUG_COMMAND(
 	set ANDROIDNDKROOT=${NDK} &&
