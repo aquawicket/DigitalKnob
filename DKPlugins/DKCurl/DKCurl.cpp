@@ -60,7 +60,8 @@ bool DKCurl::Download(const DKString& url, const DKString& dest)
 		path += "/"+filename;
 	}
 	if(DKFile::PathExists(path)){
-		DKWARN("DKCurl::Download(): local file already exists. OVERWRITING "+filename+"\n");
+		DKWARN("file already exists. "+filename+"\n");
+		return true;
 	}
 
 	if(has(url,"http://") && HttpDownload(url, path)){ return true; }
