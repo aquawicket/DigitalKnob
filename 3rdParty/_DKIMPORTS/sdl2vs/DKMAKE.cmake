@@ -1,6 +1,9 @@
 ## https://github.com/fallahn/sdl2vs
 
 ### DEPENDS ###
+DKDEPEND(SDL2)
+DKDEPEND(SDL2_ttf)
+DKDEPEND(SDL_image)
 
 
 ### VERSION ###
@@ -10,7 +13,7 @@ DKSET(SDL2VS ${3RDPARTY}/sdl2vs-${SDL2VS_VERSION})
 ### INSTALL ###
 DKINSTALL(https://codeload.github.com/fallahn/sdl2vs/zip/${SDL2VS_VERSION} sdl2vs-${SDL2VS_VERSION} sdl2vs-${SDL2VS_VERSION})
 DKCOPY(${3RDPARTY}/_DKIMPORTS/sdl2vs ${SDL2VS} TRUE)
-DKREMOVE(${3RDPARTY}/sdl2vs-${SDL2VS_VERSION}/SDL2_tff)
+DKREMOVE(${3RDPARTY}/sdl2vs-${SDL2VS_VERSION}/SDL2_ttf)
 DKREMOVE(${3RDPARTY}/sdl2vs-${SDL2VS_VERSION}/SDL2/src)
 
 ### LINK ###
