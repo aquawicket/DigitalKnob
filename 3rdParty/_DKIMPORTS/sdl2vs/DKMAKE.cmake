@@ -3,7 +3,7 @@
 ### DEPENDS ###
 DKDEPEND(SDL2)
 DKDEPEND(SDL2_ttf)
-DKDEPEND(SDL_image)
+DKDEPEND(SDL2_image)
 
 
 ### VERSION ###
