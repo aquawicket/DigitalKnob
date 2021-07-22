@@ -181,11 +181,14 @@ export PATH=/${MINGW64}/bin:$PATH\;
 export PATH=/${MSYS}/bin:$PATH\;
 ./SetupAndroid.sh\;")
 
+WaitForEnter()
+
 ANDROID32_DEBUG_COMMAND(
 	set ANDROIDNDKROOT=${NDK} &&
 	set NDKVER=${NDK_VERSION} &&
 	set CLANGPATH=${NDK}/toolchains/llvm/prebuilt/windows-x86_64/bin &&
 	b2
+	-q
 	toolset=clang-armeabiv7a
 	architecture=arm
 	variant=debug
@@ -207,6 +210,7 @@ ANDROID32_RELEASE_COMMAND(
 	set NDKVER=${NDK_VERSION} &&
 	set CLANGPATH=${NDK}/toolchains/llvm/prebuilt/windows-x86_64/bin &&
 	b2
+	-q
 	toolset=clang-armeabiv7a
 	architecture=arm
 	variant=release
@@ -222,6 +226,8 @@ ANDROID32_RELEASE_COMMAND(
 	--without-python
 	abi=aapcs
 	binary-format=elf )
+	
+	WaitForEnter()
 
 ANDROID64_DEBUG_COMMAND(
 	set ANDROIDNDKROOT=${NDK} &&
@@ -284,9 +290,9 @@ IF(SHARED)
 #	WIN32_RELEASE_LIB(${BOOST}/${OS}/lib/boost_system.lib)
 #ENDIF()
 
-#WIN32_PATH(${BOOST})
+#WIN_PATH(${BOOST})
 #WIN32_COMMAND(bootstrap.bat)
-#WIN32_COMMAND(b2 toolset=msvc-14.0 link=shared variant=debug runtime-debugging=on runtime-link=shared --threading=multi --layout=system --build-dir=${BOOST}/${OS}/${DEBUG_DIR} --stagedir=${BOOST}/${OS}/${DEBUG_DIR})
-#WIN32_COMMAND(b2 toolset=msvc-14.0 link=shared variant=release runtime-debugging=off runtime-link=shared --threading=multi --layout=system --build-dir=${BOOST}/${OS}/${RELEASE_DIR} --stagedir=${BOOST}/${OS}/${RELEASE_DIR})
+#WIN_COMMAND(b2 toolset=msvc-14.0 link=shared variant=debug runtime-debugging=on runtime-link=shared --threading=multi --layout=system --build-dir=${BOOST}/${OS}/${DEBUG_DIR} --stagedir=${BOOST}/${OS}/${DEBUG_DIR})
+#WIN_COMMAND(b2 toolset=msvc-14.0 link=shared variant=release runtime-debugging=off runtime-link=shared --threading=multi --layout=system --build-dir=${BOOST}/${OS}/${RELEASE_DIR} --stagedir=${BOOST}/${OS}/${RELEASE_DIR})
 
 ENDIF(SHARED)

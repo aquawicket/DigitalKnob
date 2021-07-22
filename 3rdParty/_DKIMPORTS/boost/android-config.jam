@@ -3,8 +3,8 @@
 # Apply moritz-wundke's patch from here: https://github.com/moritz-wundke/Boost-for-Android/tree/master/patches
 # Run bootstrap.bat
 # Then set some environment variables:
-# set ANDROIDNDKROOT=C:\digitalknob\DK\3rdParty\android-ndk-r16b
-# set NDKVER=r16b
+# set ANDROIDNDKROOT=C:\digitalknob\DK\3rdParty\android-ndk-r21e
+# set NDKVER=r21e
 # set CLANGPATH=%ANDROIDNDKROOT%\toolchains\llvm\prebuilt\windows-x86_64\bin
 # Copy this as user-config.jam file to boost-folder/tools/build/src
 
@@ -20,7 +20,7 @@
 
 import os ;
 ##local AndroidNDKRoot = [ os.environ ANDROIDNDKROOT ] ;
-local AndroidNDKRoot = C:/Users/aquawicket/digitalknob/DK/3rdParty/android-ndk-r16b-windows-x86_64 ;
+local AndroidNDKRoot = C:/Users/aquawicket/digitalknob/DK/3rdParty/android-ndk-r21e-windows-x86_64 ;
 ##local AndroidBinariesPath = [ os.environ CLANGPATH ] ;
 local AndroidBinariesPath = $(AndroidNDKRoot)/toolchains/llvm/prebuilt/windows-x86_64/bin ;
 
