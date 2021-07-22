@@ -181,7 +181,6 @@ export PATH=/${MINGW64}/bin:$PATH\;
 export PATH=/${MSYS}/bin:$PATH\;
 ./SetupAndroid.sh\;")
 
-WaitForEnter()
 
 ANDROID32_DEBUG_COMMAND(
 	set ANDROIDNDKROOT=${NDK} &&
