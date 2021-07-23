@@ -12,7 +12,7 @@ DKINSTALL(https://www.libsdl.org/release/${SDL2_NAME}.zip SDL2 ${SDL2_NAME})
 
 ### PATCH ###
 dkFileReplace(${SDL2}/CMakeLists.txt "add_library(hidapi SHARED" "add_library(hidapi STATIC")
-dkFileReplace(${SDL2}/include/SDL_config_android.h "#define SDL_JOYSTICK_HIDAPI     1" "#define SDL_JOYSTICK_HIDAPI     0"
+dkFileReplace(${SDL2}/include/SDL_config_android.h "#define SDL_JOYSTICK_HIDAPI     1" "#define SDL_JOYSTICK_HIDAPI     0")
 
 
 ### DKPLUGINS LINK ###

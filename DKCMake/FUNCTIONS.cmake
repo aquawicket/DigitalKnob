@@ -2909,7 +2909,12 @@ endfunction()
 ##############################################
 function (dkFileReplace filePath find replace)
 	file(READ ${filePath} fileString)
-	string(REPLACE "${find}" "${replace}" fileString "${fileString}")
+	string(FIND "${find}" "dkapp" indexA)
+	if(${indexA} GREATER -1)
+		string(REPLACE "${find}" "${replace}" fileString "${fileString}")
+	else()
+		message(WARNING "cannot find ${find}  in  (${filepath})")
+	endif()
 	file(WRITE ${filePath} "${fileString}")
 endfunction()
 
