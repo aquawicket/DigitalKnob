@@ -218,9 +218,6 @@
     <ProjectReference Include="..\SDL2\SDL2.vcxproj">
       <Project>{b7be417c-b6c5-4a69-a056-e0cb0c6a344c}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\SDL2_image\SDL2_image.vcxproj">
-      <Project>{03a9401d-ceff-4f5e-a7b4-fc2a0d9f6c95}</Project>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets" />
