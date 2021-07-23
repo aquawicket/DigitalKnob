@@ -163,7 +163,7 @@ public class SDLActivity extends Activity implements View.OnSystemUiVisibilityCh
      */
     protected String[] getLibraries() {
         return new String[] {
-            "hidapi",
+            //"hidapi",
             // "SDL2",
             // "SDL2_image",
             // "SDL2_mixer",
@@ -271,8 +271,10 @@ public class SDLActivity extends Activity implements View.OnSystemUiVisibilityCh
 
         mClipboardHandler = new SDLClipboardHandler();
 
-        mHIDDeviceManager = HIDDeviceManager.acquire(this);
-
+		//NOTE: enable hidapi here
+        //mHIDDeviceManager = HIDDeviceManager.acquire(this);
+		mHIDDeviceManager = null;
+		
         // Set up the surface
         mSurface = new SDLSurface(getApplication());
 

@@ -1,4 +1,4 @@
-set(DELETE_CACHE 0)
+set(DELETE_CACHE 1)
 if(DELETE_CACHE)
 	get_filename_component(DIGITALKNOB ${CMAKE_SOURCE_DIR} ABSOLUTE)
 	message("Deleteing leftover CMakeCache.txt files")
