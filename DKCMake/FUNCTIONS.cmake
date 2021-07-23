@@ -2906,6 +2906,13 @@ FUNCTION(DKDEPEND_ALL)
 	INCLUDE(${DKPROJECT}/DEPEND_ALL.txt)
 endfunction()
 
+###############################################
+function dkFileReplace(filePath, find, replace)
+	file(READ ${filePath} fileString)
+	string(REPLACE "${find}" "${replace}" fileString "${fileString}")
+	file(WRITE ${filePath} "${fileString}")
+endfunction()
+
 ###################################
 function(DKUPDATE_ANDROID_NAME arg)
 	

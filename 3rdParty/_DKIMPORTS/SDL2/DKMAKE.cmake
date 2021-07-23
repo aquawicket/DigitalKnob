@@ -9,9 +9,10 @@ DKSET(SDL2 ${3RDPARTY}/SDL2-${SDL2_VERSION})
 ## https://www.libsdl.org/release/SDL2-2.0.14.zip
 DKINSTALL(https://www.libsdl.org/release/SDL2-${SDL2_VERSION}.zip SDL2 SDL2-${SDL2_VERSION})
 ### PATCH ###
-file(READ ${SDL2}/CMakeLists.txt fileString)
-string(REPLACE "add_library(hidapi SHARED" "add_library(hidapi STATIC" fileString "${fileString}")
-file(WRITE ${SDL2}/CMakeLists.txt "${fileString}")
+#file(READ ${SDL2}/CMakeLists.txt fileString)
+#string(REPLACE "add_library(hidapi SHARED" "add_library(hidapi STATIC" fileString "${fileString}")
+#file(WRITE ${SDL2}/CMakeLists.txt "${fileString}")
+dkFileReplace(${SDL2}/CMakeLists.txt "add_library(hidapi SHARED" "add_library(hidapi STATIC")
 
 
 ### DKPLUGINS LINK ###
