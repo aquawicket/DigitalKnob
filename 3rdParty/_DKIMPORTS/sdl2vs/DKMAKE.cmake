@@ -17,7 +17,7 @@ DKREMOVE(${SDL2VS}/libsdl)
 DKREMOVE(${SDL2VS}/SDL2)
 DKREMOVE(${SDL2VS}/SDL2_ttf)
 DKREMOVE(${SDL2VS}/SDL2_image)
-DKCOPY(${SDL2}/${OS}/${DEBUG_DIR}/libhidapi.so ${SDL2VS}/SDL2_GradleApp/app/src/main/jniLibs/armeabi-v7a/libhidapi.so TRUE)
+#DKCOPY(${SDL2}/${OS}/${DEBUG_DIR}/libhidapi.so ${SDL2VS}/SDL2_GradleApp/app/src/main/jniLibs/armeabi-v7a/libhidapi.so TRUE)
 
 ### LINK ###
 
