@@ -1003,8 +1003,10 @@ if(ANDROID_32)
 	
 	DKUPDATE_ANDROID_NAME(${APP_NAME})
 	
-	set(CMAKE_ANDROID_GUI TRUE)
-	set(CMAKE_CXX_FLAGS "-std=c++14")
+	#include_external_msproject(DKGradle ${DKPROJECT}/${OS}/DKGradle/DKGradle.androidproj)
+	
+	#set(CMAKE_ANDROID_GUI TRUE)
+	#set(CMAKE_CXX_FLAGS "-std=c++14")
 	set(CMAKE_ANDROID_STL c++_static)
 	
 	add_executable(${APP_NAME} ${App_SRC})

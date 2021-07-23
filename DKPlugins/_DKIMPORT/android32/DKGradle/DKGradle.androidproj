@@ -39,7 +39,6 @@
     <RootNamespace>DKGradle</RootNamespace>
     <MinimumVisualStudioVersion>14.0</MinimumVisualStudioVersion>
     <ProjectVersion>1.0</ProjectVersion>
-    <ProjectGuid>{f38408b0-8d17-4d2b-aeb4-5fa30b7f6373}</ProjectGuid>
     <_PackagingProjectWithoutNativeComponent>true</_PackagingProjectWithoutNativeComponent>
     <LaunchActivity Condition="'$(LaunchActivity)' == ''">com.DKGradle.DKGradle</LaunchActivity>
     <JavaSourceRoots>src\main\java</JavaSourceRoots>
