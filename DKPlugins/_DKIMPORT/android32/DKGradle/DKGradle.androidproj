@@ -36,12 +36,12 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <AndroidBuildType>Gradle</AndroidBuildType>
-    <RootNamespace>SDL2_GradleApp</RootNamespace>
+    <RootNamespace>DKGradle</RootNamespace>
     <MinimumVisualStudioVersion>14.0</MinimumVisualStudioVersion>
     <ProjectVersion>1.0</ProjectVersion>
     <ProjectGuid>{f38408b0-8d17-4d2b-aeb4-5fa30b7f6373}</ProjectGuid>
     <_PackagingProjectWithoutNativeComponent>true</_PackagingProjectWithoutNativeComponent>
-    <LaunchActivity Condition="'$(LaunchActivity)' == ''">com.SDL2_GradleApp.SDL2_GradleApp</LaunchActivity>
+    <LaunchActivity Condition="'$(LaunchActivity)' == ''">com.DKGradle.DKGradle</LaunchActivity>
     <JavaSourceRoots>src\main\java</JavaSourceRoots>
   </PropertyGroup>
   <Import Project="$(AndroidTargetsPath)\Android.Default.props" />
@@ -93,7 +93,7 @@
     <GradleTemplate Include="gradle\wrapper\gradle-wrapper.properties.template" />
   </ItemGroup>
   <ItemGroup>
-    <JavaCompile Include="app\src\main\java\com\SDL2_GradleApp\SDL2_GradleApp.java" />
+    <JavaCompile Include="app\src\main\java\com\DKGradle\DKGradle.java" />
     <JavaCompile Include="app\src\main\java\org\libsdl\app\HIDDevice.java" />
     <JavaCompile Include="app\src\main\java\org\libsdl\app\HIDDeviceBLESteamController.java" />
     <JavaCompile Include="app\src\main\java\org\libsdl\app\HIDDeviceManager.java" />
