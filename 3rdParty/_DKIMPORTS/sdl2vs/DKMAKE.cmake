@@ -14,8 +14,9 @@ DKSET(SDL2VS ${3RDPARTY}/sdl2vs-${SDL2VS_VERSION})
 DKINSTALL(https://codeload.github.com/fallahn/sdl2vs/zip/${SDL2VS_VERSION} sdl2vs sdl2vs-${SDL2VS_VERSION})
 DKCOPY(${3RDPARTY}/_DKIMPORTS/sdl2vs ${SDL2VS} TRUE)
 DKREMOVE(${SDL2VS}/libsdl)
+DKREMOVE(${SDL2VS}/SDL2)
 DKREMOVE(${SDL2VS}/SDL2_ttf)
-DKREMOVE(${SDL2VS}/SDL2/src)
+DKREMOVE(${SDL2VS}/SDL2_image)
 DKCOPY(${SDL2}/${OS}/${DEBUG_DIR}/libhidapi.so ${SDL2VS}/SDL2_GradleApp/app/src/main/jniLibs/armeabi-v7a/libhidapi.so TRUE)
 
 ### LINK ###
