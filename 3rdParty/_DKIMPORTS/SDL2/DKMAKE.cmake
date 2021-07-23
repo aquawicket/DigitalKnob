@@ -8,6 +8,10 @@ DKSET(SDL2 ${3RDPARTY}/SDL2-${SDL2_VERSION})
 ### INSTALL ###
 ## https://www.libsdl.org/release/SDL2-2.0.14.zip
 DKINSTALL(https://www.libsdl.org/release/SDL2-${SDL2_VERSION}.zip SDL2 SDL2-${SDL2_VERSION})
+### PATCH ###
+file(READ ${SDL2}/CMakeLists.txt fileString)
+string(REPLACE "add_library(hidapi SHARED" "add_library(hidapi STATIC" fileString "${fileString}")
+file(WRITE ${SDL2}/CMakeLists.txt "${fileString}")
 
 
 ### DKPLUGINS LINK ###
@@ -34,8 +38,8 @@ RASPBERRY_DEBUG_LIB(${SDL2}/${OS}/${DEBUG_DIR}/libSDL2d.a)
 RASPBERRY_RELEASE_LIB(${SDL2}/${OS}/${RELEASE_DIR}/libSDL2.a)
 ##ANDROID_DEBUG_LIB(${SDL2}/${OS}/${DEBUG_DIR}/obj/local/armeabi-v7a/libSDL2.so)
 ##ANDROID_RELEASE_LIB(${SDL2}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/libSDL2.so)
-ANDROID_DEBUG_LIB(${SDL2}/${OS}/${DEBUG_DIR}/libhidapi.so)
-ANDROID_RELEASE_LIB(${SDL2}/${OS}/${RELEASE_DIR}/libhidapi.so)
+ANDROID_DEBUG_LIB(${SDL2}/${OS}/${DEBUG_DIR}/libhidapi.a)
+ANDROID_RELEASE_LIB(${SDL2}/${OS}/${RELEASE_DIR}/libhidapi.a)
 ANDROID_DEBUG_LIB(${SDL2}/${OS}/${DEBUG_DIR}/libSDL2.so)
 ANDROID_RELEASE_LIB(${SDL2}/${OS}/${RELEASE_DIR}/libSDL2.so)
 ANDROID_DEBUG_LIB(${SDL2}/${OS}/${DEBUG_DIR}/libSDL2main.a)
@@ -137,3 +141,5 @@ ANDROID32_COMMAND(${DKCMAKE_ANDROID32} -DSDL_SHARED=ON -DVIDEO_OPENGLES=ON ${SDL
 ANDROID64_COMMAND(${DKCMAKE_ANDROID64} -DSDL_SHARED=ON -DVIDEO_OPENGLES=ON ${SDL2})
 ANDROID_VS(SDL2-${SDL2_VERSION} SDL2.sln SDL2)
 ANDROID_VS(SDL2-${SDL2_VERSION} SDL2.sln SDL2main)
+
+
