@@ -1,3 +1,9 @@
+if(DK_DISABLED_INCLUDED)
+  return()
+endif()
+set(DK_DISABLED_INCLUDED true)
+
+
 if(WIN)
 DISABLE_DKDEPEND(ffmpeg-20150905-git-a87ada5-win32-dev)
 DISABLE_DKDEPEND(ffmpeg-20150905-git-a87ada5-win64-dev)

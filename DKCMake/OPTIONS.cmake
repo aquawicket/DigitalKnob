@@ -1,3 +1,8 @@
+if(DK_OPTIONS_INCLUDED)
+  return()
+endif()
+set(DK_OPTIONS_INCLUDED true)
+
 if(COMMAND cmake_policy)
 	CMAKE_POLICY(SET CMP0003 NEW) ##https://cmake.org/cmake/help/latest/policy/CMP0003.html
 endif(COMMAND cmake_policy)

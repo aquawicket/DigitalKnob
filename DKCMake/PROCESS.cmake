@@ -1,4 +1,9 @@
-set(DELETE_CACHE true)
+if(DK_PROCESS_INCLUDED)
+  return()
+endif()
+set(DK_PROCESS_INCLUDED true)
+
+set(DELETE_CACHE false)
 if(DELETE_CACHE)
 	get_filename_component(DIGITALKNOB ${CMAKE_SOURCE_DIR} ABSOLUTE)
 	message("Deleteing leftover CMakeCache.txt files")
@@ -1005,8 +1010,10 @@ if(ANDROID_32)
 	
 	#include_external_msproject(DKGradle ${DKPROJECT}/${OS}/DKGradle/DKGradle.androidproj)
 	
-	#set(CMAKE_ANDROID_GUI TRUE)
-	#set(CMAKE_CXX_FLAGS "-std=c++14")
+	set(CMAKE_ANDROID_GUI TRUE)
+	set(CMAKE_CXX_FLAGS "-std=c++14 -g2 -gdwarf-2 -O0")
+	set(CMAKE_CXX_FLAGS_DEBUG "-g2 -gdwarf-2 -O0 -DDEBUG -D_DEBUG")
+	set(CMAKE_CXX_FLAGS_RELEASE "-DNDEBUG")
 	set(CMAKE_ANDROID_STL c++_static)
 	
 	add_executable(${APP_NAME} ${App_SRC})

@@ -1,3 +1,10 @@
+if(DK_FUNCTIONS_INCLUDED)
+  return()
+endif()
+set(DK_FUNCTIONS_INCLUDED true)
+
+
+
 ## TODO:    https://foonathan.net/2016/03/cmake-install/ 
 
 #####################################################################
@@ -53,6 +60,12 @@ function(DKSET variable value)
 		set(${variable} ${value} ${extra_args} CACHE INTERNAL "")
 	else()
 		set(${variable} ${value} CACHE INTERNAL "")
+	endif()
+	
+	#show library versions
+	string(FIND "${variable}" "_VERSION" index1)
+	if(${index1} GREATER -1)
+		message("${variable}: ${value}")
 	endif()
 endfunction()
 
@@ -2912,10 +2925,10 @@ function (dkFileReplace filePath find replace)
 	string(FIND "${fileString}" "${find}" index)
 	if(${index} GREATER -1)
 		string(REPLACE "${find}" "${replace}" fileString "${fileString}")
+		file(WRITE ${filePath} "${fileString}")
 	else()
-		message(WARNING "cannot find \"${find}\"  in  (${filePath})")
+		message("WARNING: cannot find \"${find}\"  in  (${filePath})")
 	endif()
-	file(WRITE ${filePath} "${fileString}")
 endfunction()
 
 ###################################
