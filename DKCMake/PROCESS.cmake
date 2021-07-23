@@ -1,9 +1,12 @@
-get_filename_component(DIGITALKNOB ${CMAKE_SOURCE_DIR} ABSOLUTE)
-message("Deleteing leftover CMakeCache.txt files")
-if(CMAKE_HOST_WIN32)
-	execute_process(COMMAND cmd /c del /f /S CMakeCache.* WORKING_DIRECTORY ${DIGITALKNOB})
-else()
-	execute_process(COMMAND cmd /c find . -name "*MakeCache.txt" -delete WORKING_DIRECTORY ${DIGITALKNOB})
+set(DELETE_CACHE 0)
+if(DELETE_CACHE)
+	get_filename_component(DIGITALKNOB ${CMAKE_SOURCE_DIR} ABSOLUTE)
+	message("Deleteing leftover CMakeCache.txt files")
+	if(CMAKE_HOST_WIN32)
+		execute_process(COMMAND cmd /c del /f /S CMakeCache.* WORKING_DIRECTORY ${DIGITALKNOB})
+	else()
+		execute_process(COMMAND cmd /c find . -name "CMakeCache.*" -delete WORKING_DIRECTORY ${DIGITALKNOB})
+	endif()
 endif()
 
 
