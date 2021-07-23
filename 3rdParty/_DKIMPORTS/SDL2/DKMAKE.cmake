@@ -11,6 +11,7 @@ DKSET(SDL2 ${3RDPARTY}/${SDL2_NAME})
 DKINSTALL(https://www.libsdl.org/release/${SDL2_NAME}.zip SDL2 ${SDL2_NAME})
 
 ### PATCH ###
+# https://discourse.libsdl.org/t/android-error-libsdl2-so-failed-to-load/25680/5
 dkFileReplace(${SDL2}/CMakeLists.txt "add_library(hidapi SHARED" "add_library(hidapi STATIC")
 dkFileReplace(${SDL2}/include/SDL_config_android.h "#define SDL_JOYSTICK_HIDAPI     1" "#undef SDL_JOYSTICK_HIDAPI")
 
