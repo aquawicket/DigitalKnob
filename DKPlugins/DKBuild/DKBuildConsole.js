@@ -47,13 +47,13 @@ function DKBuildConsole_ChooseUpdate() {
     console.log("\n")
 	
 	var key = 10
-    while (key === 10) {
-        //unix fix
+    //unix fix
+	while (key === 10)
         key = CPP_DK_GetKey()
-    }
 
-    console.log("Key pressed: "+String(key)+"")
-    //Esc
+    //console.log("Key pressed: "+String(key)+"")
+    
+	//Esc
 	if (key === 27)
         CPP_DK_Exit()
 	//Spacebar
