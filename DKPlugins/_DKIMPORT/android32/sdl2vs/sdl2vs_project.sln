@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.28721.148
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "main", "sdl2vs_main\main.vcxproj", "{B7F3A6F1-0359-4427-925D-4A6D1C979B61}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "main", "main.vcxproj", "{B7F3A6F1-0359-4427-925D-4A6D1C979B61}"
 EndProject
-Project("{39E2626F-3545-4960-A6E8-258AD8476CE5}") = "SDL2_GradleApp", "sdl2vs_GradleApp\SDL2_GradleApp.androidproj", "{F38408B0-8D17-4D2B-AEB4-5FA30B7F6373}"
+Project("{39E2626F-3545-4960-A6E8-258AD8476CE5}") = "SDL2_GradleApp", "SDL2_GradleApp.androidproj", "{F38408B0-8D17-4D2B-AEB4-5FA30B7F6373}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
