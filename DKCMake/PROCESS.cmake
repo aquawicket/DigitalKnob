@@ -3,7 +3,7 @@ if(DK_PROCESS_INCLUDED)
 endif()
 set(DK_PROCESS_INCLUDED true)
 
-set(DELETE_CACHE false)
+set(DELETE_CACHE true)
 if(DELETE_CACHE)
 	get_filename_component(DIGITALKNOB ${CMAKE_SOURCE_DIR} ABSOLUTE)
 	message("Deleteing leftover CMakeCache.txt files")

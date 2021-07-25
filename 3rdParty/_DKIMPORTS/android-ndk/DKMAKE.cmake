@@ -2,6 +2,9 @@ if(NOT ANDROID)
 	return()
 endif()
 
+DKDEPEND(jdk)
+
+
 ### VERSION ###
 #DKSET(NDK_VERSION r16b)
 #DKSET(NDK_VERSION r17c)

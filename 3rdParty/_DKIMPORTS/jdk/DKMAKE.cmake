@@ -9,4 +9,5 @@ DKSET(JDK ${3RDPARTY}/${JDK_NAME})
 
 
 ### INSTALL ###
-DKINSTALL(https://download.oracle.com/otn-pub/java/jdk/16.0.2%2B7/d4a915d82b4c4fbb9bde534da945d746/jdk-16.0.2_windows-x64_bin.zip jdk ${JDK_NAME})
+#https://softpedia-secure-download.com/dl/10e4dea0cb81ec2c67b3916aabe607ab/60fd60da/100082226/software/programming/jdk-16.0.2_windows-x64_bin.exe
+DKINSTALL(https://softpedia-secure-download.com/dl/10e4dea0cb81ec2c67b3916aabe607ab/60fd60da/100082226/software/programming/${JDK_NAME}.exe jdk ${JDK_NAME})
