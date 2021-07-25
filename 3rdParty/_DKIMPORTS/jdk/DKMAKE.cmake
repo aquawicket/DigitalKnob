@@ -7,7 +7,7 @@ DKSET(JDK_VERSION 16.0.2_windows-x64_bin)
 DKSET(JDK_NAME jdk-${JDK_VERSION})
 DKSET(JDK ${3RDPARTY}/${JDK_NAME})
 
-DKINCUDE(${JDK}/)
+DKINCLUDE(${JDK}/)
 ### INSTALL ###
 #https://download.oracle.com/otn-pub/java/jdk/16.0.2+7/d4a915d82b4c4fbb9bde534da945d746/jdk-16.0.2_windows-x64_bin.zip?AuthParam=1627218782_911dc8e4e20f52cfe841b45b81c95b6e
 #https://download.oracle.com/otn-pub/java/jdk/16.0.2+7/d4a915d82b4c4fbb9bde534da945d746/jdk-16.0.2_windows-x64_bin.zip
