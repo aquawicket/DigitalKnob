@@ -7,8 +7,8 @@ model {
 
         defaultConfig.with {
             applicationId = "com.SDL2_GradleApp"
-            minSdkVersion.apiLevel = 26
-            targetSdkVersion.apiLevel = 26
+            minSdkVersion.apiLevel = 16
+            targetSdkVersion.apiLevel = 23
         }
 
         compileOptions.with {
