@@ -167,8 +167,9 @@ public class HIDDeviceManager {
         }
 
         spedit.putInt(identifier, result);
-        spedit.commit();
-        return result;
+        //spedit.commit();
+        spedit.apply();
+		return result;
     }
 
     private void initializeUSB() {
