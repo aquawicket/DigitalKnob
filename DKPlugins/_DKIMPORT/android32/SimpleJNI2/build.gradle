@@ -1,0 +1,53 @@
+////////////////////////////////////////////////////////////////////////
+//
+//  overall configuration
+//
+
+plugins {
+  id 'application'
+  id 'c'
+  id 'edu.wpi.first.GradleJni' version '0.2.1'
+}
+
+mainClassName = 'Main'
+
+apply from: 'test.gradle'	// OK to ignore
+
+
+////////////////////////////////////////////////////////////////////////
+//
+//  software model, including native compilation
+//
+
+model {
+  components {
+    inside(JniNativeLibrarySpec) {
+      javaCompileTasks << compileJava
+    }
+  }
+
+  tasks {
+    run {
+      // help JVM find native shared library
+      def lib = $.binaries.insideSharedLibrary
+      dependsOn lib
+      systemProperty 'java.library.path', lib.sharedLibraryFile.parent
+    }
+
+    startScripts {
+      // include native shared library in all distributions
+      def lib = $.binaries.insideSharedLibrary
+      dependsOn lib
+      distributions.main.contents.from(lib.sharedLibraryFile) {
+	into 'lib'
+      }
+
+      // help JVM find native shared library
+      defaultJvmOpts = ['-Djava.library.path=@APP_HOME@/lib']
+      doLast {
+	unixScript.text = unixScript.text.replace('@APP_HOME@', '$APP_HOME')
+	windowsScript.text = windowsScript.text.replace('@APP_HOME@', '%~dp0..')
+      }
+    }
+  }
+}
