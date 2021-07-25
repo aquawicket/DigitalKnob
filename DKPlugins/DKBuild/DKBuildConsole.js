@@ -1,12 +1,12 @@
-var working = true;
+var working = true
 
 function DKBuildConsole_init() {
-    CPP_DK_Create("DKBuild/DKBuild.js");
-	CPP_DK_Create("DKGit/DKGit.js");
+    CPP_DK_Create("DKBuild/DKBuild.js")
+	CPP_DK_Create("DKGit/DKGit.js")
 	
 	/*
-	let contents = CPP_DKFile_DirectoryContents(DKPATH);
-	let files = contents.split(",");
+	let contents = CPP_DKFile_DirectoryContents(DKPATH)
+	let files = contents.split(",")
 	for(let i=0; i<files.length; i++){ 
 		if(CPP_DKFile_Exists(DKPATH+files[i]+"/DKApps")){
 			CPP_DKFile_ChDir(DKPATH+files[i])
@@ -21,447 +21,460 @@ function DKBuildConsole_init() {
 	//DKGit_CheckForDiff()
     
 	while (working) {
-        DKBuildConsole_Process();
+        DKBuildConsole_Process()
     }
 }
 
 function DKBuildConsole_end() {
-    CPP_DK_Close("DKBuild/DKBuild.js");
+    CPP_DK_Close("DKBuild/DKBuild.js")
 }
 
 function DKBuildConsole_ChooseUpdate() {
-    console.log("\n");
-    console.log("**** Update DigitalKnob ??? ****");
-    console.log("Y. Update");
-    console.log("C. Commit");
-    console.log("R. Reset Apps and Plugins");
-    console.log("X. Reset Everything");
-    console.log("any other key to Skip");
-    console.log("ESC. exit");
-    console.log("\n");
-
-    var key = 10;
+    console.log("\n")
+    console.log("**** Update DigitalKnob ??? ****")
+    console.log("Y. Update")
+    console.log("C. Commit")
+    console.log("R. Reset Apps and Plugins")
+    console.log("X. Reset Everything")
+	const assets = CPP_DKAssets_LocalAssets()
+	if(CPP_DKFile_Exists(assets+"cache.txt")){
+		const cache = CPP_DKFile_FileToString(assets+"cache.txt")
+		const cache_json = JSON.parse(cache);
+		console.log("SPACEBAR: "+cache_json.APP+" -> "+cache_json.OS+" -> "+cache_json.TYPE+" -> "+cache_json.LEVEL)
+	}
+    console.log("any other key to Skip")
+    console.log("ESC. exit")
+    console.log("\n")
+	
+	var key = 10
     while (key === 10) {
         //unix fix
-        key = CPP_DK_GetKey();
+        key = CPP_DK_GetKey()
     }
-
-    //console.log("Key pressed: "+String(key)+"");
-    if (key === 27)
-        //Esc key
-        CPP_DK_Exit();
+	console.log(key)
+    //console.log("Key pressed: "+String(key)+"")
+    //Esc
+	if (key === 27)
+        CPP_DK_Exit()
+	//Spacebar
+	if(key === 32){
+		OS = cache_json.OS
+	    APP = cache_json.APP
+		TYPE = cache_json.TYPE
+		LEVEL = cache_json.LEVEL
+	}
+	//y key
     if (key === 121) {
-        //y key
-        CPP_DK_Create("DKGit/DKGit.js");
-        DKGit_GitUpdate();
+        CPP_DK_Create("DKGit/DKGit.js")
+        DKGit_GitUpdate()
     }
+	//c key
     if (key === 99) {
-        //c key
-        CPP_DK_Create("DKGit/DKGit.js");
-        DKGit_GitCommit();
+        CPP_DK_Create("DKGit/DKGit.js")
+        DKGit_GitCommit()
     }
-    if (key === 114) {
-        //r key
-        DKBuild_ResetAppsPlugins();
-        DKGit_GitUpdate();
+	//r key
+    if (key === 114) { 
+        DKBuild_ResetAppsPlugins()
+        DKGit_GitUpdate()
     }
+	//x key
     if (key === 120) {
-        //x key
-        DKBuild_Reset3rdParty();
-        DKBuild_ResetAppsPlugins();
-        DKGit_GitUpdate();
+        DKBuild_Reset3rdParty()
+        DKBuild_ResetAppsPlugins()
+        DKGit_GitUpdate()
     }
 }
 
 function DKBuildConsole_SelectOs() {
-    console.log("\n");
-    console.log("**** SELECT OS TO BUILD ****");
-    console.log("1. win32");
-    console.log("2. win64");
-    console.log("3. mac32");
-    console.log("4. mac64");
-    console.log("5. linux32");
-    console.log("6. linux64");
-    console.log("7. ios32");
-    console.log("8. ios64");
-    console.log("9. iossim32");
-    console.log("a. iossim64");
-    console.log("b. android32");
-    console.log("c. android64");
-    console.log("d. raspberry32");
-    console.log("e. raspberry64");
-    console.log("ESC. exit");
-    console.log("\n");
+    console.log("\n")
+    console.log("**** SELECT OS TO BUILD ****")
+    console.log("1. win32")
+    console.log("2. win64")
+    console.log("3. mac32")
+    console.log("4. mac64")
+    console.log("5. linux32")
+    console.log("6. linux64")
+    console.log("7. ios32")
+    console.log("8. ios64")
+    console.log("9. iossim32")
+    console.log("a. iossim64")
+    console.log("b. android32")
+    console.log("c. android64")
+    console.log("d. raspberry32")
+    console.log("e. raspberry64")
+    console.log("ESC. exit")
+    console.log("\n")
 
-    var key = 10;
+    var key = 10
     while (key === 10) {
         //unix fix
-        key = CPP_DK_GetKey();
+        key = CPP_DK_GetKey()
     }
-    //console.log("Key pressed: "+String(key)+"");
+    //console.log("Key pressed: "+String(key)+"")
     if (key === 27)
-        CPP_DK_Exit();
+        CPP_DK_Exit()
     if (key === 49)
-        OS = "win32";
+        OS = "win32"
     else if (key === 50)
-        OS = "win64";
+        OS = "win64"
     else if (key === 51)
-        OS = "mac32";
+        OS = "mac32"
     else if (key === 52)
-        OS = "mac64";
+        OS = "mac64"
     else if (key === 53)
-        OS = "linux32";
+        OS = "linux32"
     else if (key === 54)
-        OS = "linux64";
+        OS = "linux64"
     else if (key === 55)
-        OS = "ios32";
+        OS = "ios32"
     else if (key === 56)
-        OS = "ios64";
+        OS = "ios64"
     else if (key === 57)
-        OS = "iossim32";
+        OS = "iossim32"
     else if (key === 97)
-        OS = "iossim64";
+        OS = "iossim64"
     else if (key === 98)
-        OS = "android32";
+        OS = "android32"
     else if (key === 99)
-        OS = "android64";
+        OS = "android64"
     else if (key === 100)
         //FIXME: key not tested
-        OS = "raspberry32";
+        OS = "raspberry32"
     else if (key === 101)
         //FIXME: key not tested
-        OS = "raspberry64";
+        OS = "raspberry64"
     else
-        console.error("INVALID OPTION");
+        console.error("INVALID OPTION")
 }
 
 function DKBuildConsole_SelectApp() {
-    console.log("**** SELECT APP TO BUILD ****");
+    console.log("**** SELECT APP TO BUILD ****")
     for (var i = 0; i < APP_LIST.length; ++i) {
-        console.log(DKBuildConsole_TranslateOption(i) + ":" + APP_LIST[i] + "");
+        console.log(DKBuildConsole_TranslateOption(i) + ":" + APP_LIST[i] + "")
     }
-    console.log("ESC. exit");
-    console.log("\n");
-    var key = 10;
+    console.log("ESC. exit")
+    console.log("\n")
+    var key = 10
     while (key === 10) {
         //unix fix
-        key = CPP_DK_GetKey();
+        key = CPP_DK_GetKey()
     }
     if (key === 27)
-        CPP_DK_Exit();
-    DKBuildConsole_KeyToApp(key);
+        CPP_DK_Exit()
+    DKBuildConsole_KeyToApp(key)
     if (APP === "")
-        console.error("INVALID OPTION");
+        console.error("INVALID OPTION")
 }
 
 function DKBuildConsole_SelectType() {
-    console.log("**** SELECT BUILD TYPE ****");
-    console.log("1. Debug");
-    console.log("2. Release");
-    console.log("3. All");
-    console.log("ESC. exit");
-    console.log("\n");
+    console.log("**** SELECT BUILD TYPE ****")
+    console.log("1. Debug")
+    console.log("2. Release")
+    console.log("3. All")
+    console.log("ESC. exit")
+    console.log("\n")
 
-    var key = 10;
+    var key = 10
     while (key === 10) {
         //unix fix
-        key = CPP_DK_GetKey();
+        key = CPP_DK_GetKey()
     }
-    //console.log("Key pressed: "+String(key)+"");
+    //console.log("Key pressed: "+String(key)+"")
     if (key === 27)
-        CPP_DK_Exit();
+        CPP_DK_Exit()
     if (key === 49)
-        TYPE = "Debug";
+        TYPE = "Debug"
     else if (key === 50)
-        TYPE = "Release";
+        TYPE = "Release"
     else if (key === 51)
-        TYPE = "ALL";
+        TYPE = "ALL"
     else
-        console.error("INVALID OPTION");
+        console.error("INVALID OPTION")
 }
 
 function DKBuildConsole_Process() {
-    OS = "";
-    APP = "";
-    TYPE = "";
-    LEVEL = "RebuildAll";
-    DKBuildConsole_ChooseUpdate();
+    OS = ""
+    APP = ""
+    TYPE = ""
+    LEVEL = "RebuildAll"
+    DKBuildConsole_ChooseUpdate()
     if (!CPP_DKFile_Exists(DKPATH)) {
-        console.error("ERROR: can't find " + DKPATH + " ");
-        CPP_DK_GetKey();
-        CPP_DK_Exit();
+        console.error("ERROR: can't find " + DKPATH + " ")
+        CPP_DK_GetKey()
+        CPP_DK_Exit()
     }
     while (OS === "") {
-        DKBuildConsole_SelectOs();
+        DKBuildConsole_SelectOs()
     }
-    console.log("###########################");
-    console.log(OS + " ->");
-    console.log("###########################");
-    DKBuild_GetAppList();
+    console.log("###########################")
+    console.log(OS + " ->")
+    console.log("###########################")
+    DKBuild_GetAppList()
     while (APP === "") {
-        DKBuildConsole_SelectApp();
+        DKBuildConsole_SelectApp()
     }
-    console.log("###########################");
-    console.log(OS + " -> " + APP + " ->");
-    console.log("###########################");
+    console.log("###########################")
+    console.log(OS + " -> " + APP + " ->")
+    console.log("###########################")
     while (TYPE === "") {
-        DKBuildConsole_SelectType();
+        DKBuildConsole_SelectType()
     }
-    console.log("###########################");
-    console.log(OS + " -> " + APP + " -> " + TYPE + "");
-    console.log("###########################");
-    console.log("Press any key to Build");
-    CPP_DK_GetKey();
-    DKBuild_DoResults();
+    console.log("###########################")
+    console.log(OS + " -> " + APP + " -> " + TYPE + "")
+    console.log("###########################")
+    console.log("Press any key to Build")
+    CPP_DK_GetKey()
+    DKBuild_DoResults()
 }
 
 function DKBuildConsole_TranslateOption(num) {
     if (num === 0) {
-        return "1";
+        return "1"
     }
     if (num === 1) {
-        return "2";
+        return "2"
     }
     if (num === 2) {
-        return "3";
+        return "3"
     }
     if (num === 3) {
-        return "4";
+        return "4"
     }
     if (num === 4) {
-        return "5";
+        return "5"
     }
     if (num === 5) {
-        return "6";
+        return "6"
     }
     if (num === 6) {
-        return "7";
+        return "7"
     }
     if (num === 7) {
-        return "8";
+        return "8"
     }
     if (num === 8) {
-        return "9";
+        return "9"
     }
     if (num === 9) {
-        return "a";
+        return "a"
     }
     if (num === 10) {
-        return "b";
+        return "b"
     }
     if (num === 11) {
-        return "c";
+        return "c"
     }
     if (num === 12) {
-        return "d";
+        return "d"
     }
     if (num === 13) {
-        return "e";
+        return "e"
     }
     if (num === 14) {
-        return "f";
+        return "f"
     }
     if (num === 15) {
-        return "g";
+        return "g"
     }
     if (num === 16) {
-        return "h";
+        return "h"
     }
     if (num === 17) {
-        return "i";
+        return "i"
     }
     if (num === 18) {
-        return "j";
+        return "j"
     }
     if (num === 19) {
-        return "k";
+        return "k"
     }
     if (num === 20) {
-        return "l";
+        return "l"
     }
     if (num === 21) {
-        return "m";
+        return "m"
     }
     if (num === 22) {
-        return "n";
+        return "n"
     }
     if (num === 23) {
-        return "o";
+        return "o"
     }
     if (num === 24) {
-        return "p";
+        return "p"
     }
     if (num === 25) {
-        return "q";
+        return "q"
     }
     if (num === 26) {
-        return "r";
+        return "r"
     }
     if (num === 27) {
-        return "s";
+        return "s"
     }
     if (num === 28) {
-        return "t";
+        return "t"
     }
     if (num === 29) {
-        return "u";
+        return "u"
     }
     if (num === 30) {
-        return "v";
+        return "v"
     }
     if (num === 31) {
-        return "w";
+        return "w"
     }
     if (num === 32) {
-        return "x";
+        return "x"
     }
     if (num === 33) {
-        return "y";
+        return "y"
     }
     if (num === 34) {
-        return "z";
+        return "z"
     }
 }
 
 function DKBuildConsole_KeyToApp(key) {
     if (key === 49) {
-        APP = APP_LIST[0];
+        APP = APP_LIST[0]
     }
     //1
     if (key === 50) {
-        APP = APP_LIST[1];
+        APP = APP_LIST[1]
     }
     //2
     if (key === 51) {
-        APP = APP_LIST[2];
+        APP = APP_LIST[2]
     }
     //3 
     if (key === 52) {
-        APP = APP_LIST[3];
+        APP = APP_LIST[3]
     }
     //4
     if (key === 53) {
-        APP = APP_LIST[4];
+        APP = APP_LIST[4]
     }
     //5
     if (key === 54) {
-        APP = APP_LIST[5];
+        APP = APP_LIST[5]
     }
     //6
     if (key === 55) {
-        APP = APP_LIST[6];
+        APP = APP_LIST[6]
     }
     //7
     if (key === 56) {
-        APP = APP_LIST[7];
+        APP = APP_LIST[7]
     }
     //8
     if (key === 57) {
-        APP = APP_LIST[8];
+        APP = APP_LIST[8]
     }
     //9
     if (key === 97) {
-        APP = APP_LIST[9];
+        APP = APP_LIST[9]
     }
     //a
     if (key === 98) {
-        APP = APP_LIST[10];
+        APP = APP_LIST[10]
     }
     //b
     if (key === 99) {
-        APP = APP_LIST[11];
+        APP = APP_LIST[11]
     }
     //c
     if (key === 100) {
-        APP = APP_LIST[12];
+        APP = APP_LIST[12]
     }
     //d
     if (key === 101) {
-        APP = APP_LIST[13];
+        APP = APP_LIST[13]
     }
     //e
     if (key === 102) {
-        APP = APP_LIST[14];
+        APP = APP_LIST[14]
     }
     //f
     if (key === 103) {
-        APP = APP_LIST[15];
+        APP = APP_LIST[15]
     }
     //g
     if (key === 104) {
-        APP = APP_LIST[16];
+        APP = APP_LIST[16]
     }
     //h
     if (key === 105) {
-        APP = APP_LIST[17];
+        APP = APP_LIST[17]
     }
     //i
     if (key === 106) {
-        APP = APP_LIST[18];
+        APP = APP_LIST[18]
     }
     //j
     if (key === 107) {
-        APP = APP_LIST[19];
+        APP = APP_LIST[19]
     }
     //k
     if (key === 108) {
-        APP = APP_LIST[20];
+        APP = APP_LIST[20]
     }
     //l
     if (key === 109) {
-        APP = APP_LIST[21];
+        APP = APP_LIST[21]
     }
     //m
     if (key === 110) {
-        APP = APP_LIST[22];
+        APP = APP_LIST[22]
     }
     //n
     if (key === 111) {
-        APP = APP_LIST[23];
+        APP = APP_LIST[23]
     }
     //o
     if (key === 112) {
-        APP = APP_LIST[24];
+        APP = APP_LIST[24]
     }
     //p
     if (key === 113) {
-        APP = APP_LIST[25];
+        APP = APP_LIST[25]
     }
     //q
     if (key === 114) {
-        APP = APP_LIST[26];
+        APP = APP_LIST[26]
     }
     //r
     if (key === 115) {
-        APP = APP_LIST[27];
+        APP = APP_LIST[27]
     }
     //s
     if (key === 116) {
-        APP = APP_LIST[28];
+        APP = APP_LIST[28]
     }
     //t
     if (key === 117) {
-        APP = APP_LIST[29];
+        APP = APP_LIST[29]
     }
     //u
     if (key === 118) {
-        APP = APP_LIST[30];
+        APP = APP_LIST[30]
     }
     //v
     if (key === 119) {
-        APP = APP_LIST[31];
+        APP = APP_LIST[31]
     }
     //w
     if (key === 120) {
-        APP = APP_LIST[32];
+        APP = APP_LIST[32]
     }
     //x
     if (key === 121) {
-        APP = APP_LIST[33];
+        APP = APP_LIST[33]
     }
     //y
     if (key === 122) {
-        APP = APP_LIST[34];
+        APP = APP_LIST[34]
     }
     //z
 }

@@ -414,6 +414,13 @@ function DKBuild_GetAppList(){
 
 function DKBuild_DoResults(){
 	console.log("DKBuild_DoResults(): OS="+OS+" APP="+APP+" TYPE="+TYPE+" LEVEL="+LEVEL)
+	
+	//save configuration to cache
+	const cache = {"OS":OS, "APP":APP, "TYPE":TYPE, "LEVEL":LEVEL}
+	const cache_json = JSON.stringify(cache)
+	const assets = CPP_DKAssets_LocalAssets()
+	CPP_DKFile_StringToFile(cache_json, assets+"cache.txt")
+	
 	if(!DKBuild_OsCheck()){ 
 		console.log("DKBuild_OsCheck failed")
 		return 
