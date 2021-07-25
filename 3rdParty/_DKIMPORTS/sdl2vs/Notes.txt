@@ -2,3 +2,7 @@ android-cmake - https://github.com/taka-no-me/android-cmake
 android-background-app - https://stackoverflow.com/a/51730698/688352
 c++ to script helper - http://www.swig.org
 Create a background service - https://developer.android.com/training/run-background-service/create-service
+Guide to background processing - https://developer.android.com/guide/background
+Simple JNI - https://android.googlesource.com/platform/development/+/master/samples/SimpleJNI/jni/native.cpp
+Samples = https://android.googlesource.com/platform/development/+/master/samples
+Android.bp Soong Build System - https://source.android.com/setup/build
