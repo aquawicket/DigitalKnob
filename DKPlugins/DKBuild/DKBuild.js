@@ -817,7 +817,7 @@ function DKBuild_DoResults(){
 	}
 	
 	//// RASPBERRY64 ///////
-	if(OS === "linux64"){
+	if(OS === "raspberry64"){
 		DKBuild_ValidateGcc()
 		CPP_DKFile_MkDir(DKPATH+appdir+"/"+APP+"/raspberry64")
 		if(TYPE === "Debug" || TYPE === "ALL"){
