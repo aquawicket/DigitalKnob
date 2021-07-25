@@ -40,7 +40,7 @@ function DKBuildConsole_ChooseUpdate() {
 	if(CPP_DKFile_Exists(assets+"cache.txt")){
 		const cache = CPP_DKFile_FileToString(assets+"cache.txt")
 		const cache_json = JSON.parse(cache);
-		console.log("SPACEBAR: "+cache_json.APP+" -> "+cache_json.OS+" -> "+cache_json.TYPE+" -> "+cache_json.LEVEL)
+		console.log("ENTER: "+cache_json.APP+" -> "+cache_json.OS+" -> "+cache_json.TYPE+" -> "+cache_json.LEVEL)
 	}
     console.log("any other key to Skip")
     console.log("ESC. exit")
@@ -51,13 +51,13 @@ function DKBuildConsole_ChooseUpdate() {
         //unix fix
         key = CPP_DK_GetKey()
     }
-	console.log(key)
-    //console.log("Key pressed: "+String(key)+"")
+
+    console.log("Key pressed: "+String(key)+"")
     //Esc
 	if (key === 27)
         CPP_DK_Exit()
 	//Spacebar
-	if(key === 32){
+	if(key === 13){
 		OS = cache_json.OS
 	    APP = cache_json.APP
 		TYPE = cache_json.TYPE
