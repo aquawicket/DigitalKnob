@@ -9,10 +9,9 @@ console.log("username was set to: "+USERNAME)
 
 
 function DKBuild_GetDKMakeVariable(file, variable){
-	
-	if(NDK_VERSION)
-		throw new Errow("NDK_VERSION: "+NED_VERSION);
 	const str = CPP_DKFile_FileToString(file)
+	if(!str)
+		return null;
 	str = str.split("dkset(").join("set(")
 	str = str.split("DKSET(").join("set(")
 	str = str.split("SET(").join("set(")
@@ -49,7 +48,9 @@ let LEVEL = ""  //Build, Rebuild, RebuildAll
 let DKPATH = ""
 let DKDOWNLOAD = ""
 let CMAKE = ""
-let NDK_VERSION = "r21e"
+let NDK_VERSION //= "r21e"
+console.log("NDK_VERSION set to "+NDK_VERSION)
+
 let NDK = ""
 let VISUALSTUDIO_VERSION = "2019"
 let VISUALSTUDIO = ""
@@ -67,6 +68,7 @@ function DKBuild_init(){
 
 	if(CPP_DK_GetOS() === "Windows"){
 		DKPATH = "C:/Users/"+USERNAME+"/digitalknob/"
+		NDK_VERSION = DKBuild_GetDKMakeVariable(DKPATH+"DK/3rdParty/_DKIMPORTS/android-ndk/DKMAKE.cmake", "NDK_VERSION")
 		if(CPP_DK_GetOSArchitecture() === "32"){
 			CMAKE = "C:/Program Files/CMake/bin/cmake.exe"
 			VISUALSTUDIO = "C:/Program Files/Microsoft Visual Studio/"+VISUALSTUDIO_VERSION

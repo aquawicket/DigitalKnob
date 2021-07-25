@@ -5,6 +5,13 @@
 # Debugging: When calling b2 to compile the boost libraries, you can use the -q flag to make it stop at the first error.
 # Notes: abi=aapcs and binary-format=elf were added to android build to supress "No best alternative for libs/context/build/asm_sources"
 
+### DEPENDS ###
+if(ANDROID)
+	DKDEPEND(android-ndk) #version 21e or newer required
+	DKDEPEND(mingw64)
+endif()
+
+
 ### VERSION ###
 DKSET(BOOST_MAJOR 1)
 DKSET(BOOST_MINOR 74)
@@ -136,21 +143,24 @@ WIN32_COMMAND(bootstrap.bat)
 WIN32_DEBUG_COMMAND(b2 toolset=msvc-14.2 address-model=32 variant=debug link=static threading=multi runtime-debugging=on runtime-link=static define=BOOST_ALL_NO_LIB --layout=system --build-dir=${BOOST}/${OS}/${DEBUG_DIR} --stagedir=${BOOST}/${OS}/${DEBUG_DIR})
 WIN32_RELEASE_COMMAND(b2 toolset=msvc-14.2 address-model=32 variant=release link=static threading=multi runtime-debugging=off runtime-link=static define=BOOST_ALL_NO_LIB --layout=system --build-dir=${BOOST}/${OS}/${RELEASE_DIR} --stagedir=${BOOST}/${OS}/${RELEASE_DIR})
 
-## WIN64_COMMAND(call C:/Windows/System32/cmd.exe /E:ON /V:ON /T:0E /K "${WINDOWS_SDK_EXE}")
+
 WIN64_PATH(${BOOST})
 WIN64_COMMAND(bootstrap.bat)
 WIN64_DEBUG_COMMAND(b2 toolset=msvc-14.2 address-model=64 variant=debug link=static threading=multi runtime-debugging=on runtime-link=static define=BOOST_ALL_NO_LIB --layout=system --build-dir=${BOOST}/${OS}/${DEBUG_DIR} --stagedir=${BOOST}/${OS}/${DEBUG_DIR})
 WIN64_RELEASE_COMMAND(b2 toolset=msvc-14.2 address-model=64 variant=release link=static threading=multi runtime-debugging=off runtime-link=static define=BOOST_ALL_NO_LIB --layout=system --build-dir=${BOOST}/${OS}/${RELEASE_DIR} --stagedir=${BOOST}/${OS}/${RELEASE_DIR})
+
 
 MAC32_PATH(${BOOST})
 MAC32_COMMAND(./bootstrap.sh)
 MAC32_DEBUG_COMMAND(./b2 toolset=darwin address-model=32 variant=debug link=static threading=multi runtime-debugging=on runtime-link=static --layout=system --build-dir=${BOOST}/${OS}/${DEBUG_DIR} --stagedir=${BOOST}/${OS}/${DEBUG_DIR})
 MAC32_RELEASE_COMMAND(./b2 toolset=darwin address-model=32 variant=release link=static threading=multi runtime-debugging=off runtime-link=static --layout=system --build-dir=${BOOST}/${OS}/${RELEASE_DIR} --stagedir=${BOOST}/${OS}/${RELEASE_DIR})
 
+
 MAC64_PATH(${BOOST})
 MAC64_COMMAND(./bootstrap.sh)
 MAC64_DEBUG_COMMAND(./b2 toolset=darwin address-model=64 variant=debug link=static threading=multi runtime-debugging=on runtime-link=static --layout=system --build-dir=${BOOST}/${OS}/${DEBUG_DIR} --stagedir=${BOOST}/${OS}/${DEBUG_DIR})
 MAC64_RELEASE_COMMAND(./b2 toolset=darwin address-model=64 variant=release link=static threading=multi runtime-debugging=off runtime-link=static --layout=system --build-dir=${BOOST}/${OS}/${RELEASE_DIR} --stagedir=${BOOST}/${OS}/${RELEASE_DIR})
+
 
 LINUX32_PATH(${BOOST})
 LINUX32_COMMAND(./bootstrap.sh)
@@ -162,6 +172,7 @@ LINUX64_COMMAND(./bootstrap.sh)
 LINUX64_DEBUG_COMMAND(./b2 toolset=gcc address-model=64 variant=debug link=static threading=multi runtime-debugging=on runtime-link=static --layout=system --build-dir=${BOOST}/${OS}/${DEBUG_DIR} --stagedir=${BOOST}/${OS}/${DEBUG_DIR})
 LINUX64_RELEASE_COMMAND(./b2 toolset=gcc address-model=64 variant=release link=static threading=multi runtime-debugging=off runtime-link=static --layout=system --build-dir=${BOOST}/${OS}/${RELEASE_DIR} --stagedir=${BOOST}/${OS}/${RELEASE_DIR})
 
+
 RASPBERRY32_PATH(${BOOST})
 RASPBERRY32_COMMAND(./bootstrap.sh)
 RASPBERRY32_DEBUG_COMMAND(./b2 toolset=gcc address-model=32 variant=debug link=static threading=multi runtime-debugging=on runtime-link=static --layout=system --build-dir=${BOOST}/${OS}/${DEBUG_DIR} --stagedir=${BOOST}/${OS}/${DEBUG_DIR})
@@ -172,8 +183,7 @@ RASPBERRY64_COMMAND(./bootstrap.sh)
 RASPBERRY64_DEBUG_COMMAND(./b2 toolset=gcc address-model=64 variant=debug link=static threading=multi runtime-debugging=on runtime-link=static --layout=system --build-dir=${BOOST}/${OS}/${DEBUG_DIR} --stagedir=${BOOST}/${OS}/${DEBUG_DIR})
 RASPBERRY64_RELEASE_COMMAND(./b2 toolset=gcc address-model=64 variant=release link=static threading=multi runtime-debugging=off runtime-link=static --layout=system --build-dir=${BOOST}/${OS}/${RELEASE_DIR} --stagedir=${BOOST}/${OS}/${RELEASE_DIR})
 
-DKDEPEND(android-ndk)
-DKDEPEND(mingw64)
+
 ANDROID_PATH(${BOOST})
 ANDROID_BASH("#!/bin/bash\;
 cd /${BOOST}\;
@@ -232,6 +242,7 @@ ANDROID64_DEBUG_COMMAND(
 	set CLANGPATH=${NDK}/toolchains/llvm/prebuilt/windows-x86_64/bin &&
 	echo "\n\nStarting B2 for Android arm64v8a . . .\n " &&
 	b2
+	-q
 	toolset=clang-arm64v8a
 	architecture=arm
 	address-model=64
@@ -254,6 +265,7 @@ ANDROID64_RELEASE_COMMAND(
 	set NDKVER=${NDK_VERSION} &&
 	set CLANGPATH=${NDK}/toolchains/llvm/prebuilt/windows-x86_64/bin &&
 	b2
+	-q
 	toolset=clang-arm64v8a
 	architecture=arm
 	address-model=64
