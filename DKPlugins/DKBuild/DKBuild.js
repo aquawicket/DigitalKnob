@@ -48,9 +48,7 @@ let LEVEL = ""  //Build, Rebuild, RebuildAll
 let DKPATH = ""
 let DKDOWNLOAD = ""
 let CMAKE = ""
-let NDK_VERSION //= "r21e"
-console.log("NDK_VERSION set to "+NDK_VERSION)
-
+let NDK_VERSION = "r21e"
 let NDK = ""
 let VISUALSTUDIO_VERSION = "2019"
 let VISUALSTUDIO = ""
@@ -68,7 +66,7 @@ function DKBuild_init(){
 
 	if(CPP_DK_GetOS() === "Windows"){
 		DKPATH = "C:/Users/"+USERNAME+"/digitalknob/"
-		NDK_VERSION = DKBuild_GetDKMakeVariable(DKPATH+"DK/3rdParty/_DKIMPORTS/android-ndk/DKMAKE.cmake", "NDK_VERSION")
+		//NDK_VERSION = DKBuild_GetDKMakeVariable(DKPATH+"DK/3rdParty/_DKIMPORTS/android-ndk/DKMAKE.cmake", "NDK_VERSION")
 		if(CPP_DK_GetOSArchitecture() === "32"){
 			CMAKE = "C:/Program Files/CMake/bin/cmake.exe"
 			VISUALSTUDIO = "C:/Program Files/Microsoft Visual Studio/"+VISUALSTUDIO_VERSION
@@ -81,7 +79,7 @@ function DKBuild_init(){
 		MSBUILD = VISUALSTUDIO+"/Community/MSBuild/Current/Bin/MSBuild.exe"
 		MSBUILD = CPP_DKFile_GetShortName(MSBUILD)
 		NDK = DKPATH+"DK/3rdParty/android-ndk-"+NDK_VERSION+"-windows-x86_64"
-		NDK = CPP_DKFile_GetShortName(NDK)
+		//NDK = CPP_DKFile_GetShortName(NDK)
 	}
 	if(CPP_DK_GetOS() === "Mac"){
 		DKPATH = "/Users/"+USERNAME+"/digitalknob/"
@@ -102,13 +100,7 @@ function DKBuild_init(){
 		NDK = DKPATH+"DK/3rdParty/android-ndk-"+NDK_VERSION+"-linux-x86_64"
 	}
 	DKDOWNLOAD = DKPATH+"DK/Download"
-	//CPP_DKFile_MkDir(DKDOWNLOAD)
-	//if(!NDK_VERSION)
-		//NDK_VERSION = DKBuild_GetDKMakeVariable(DKPATH+"DK/3rdParty/_DKIMPORTS/android-ndk/DKMake.cmake", "NDK_VERSION")
 }
-
-if(!NDK || !NDK_VERSION)
-	DKBuild_init()
 
 //This is and alternative way to get windows short paths
 function DKBuild_GetShortPath(fullPath){
@@ -205,9 +197,6 @@ function DKBuild_ValidateNDK(){
 
 function DKBuild_InstallNDK(){
 	console.log("Installing Android NDK")
-	
-	//if(!NDK_VERSION)
-		//NDK_VERSION = DKBuild_GetDKMakeVariable(DKPATH+"DK/3rdParty/_DKIMPORTS/android-ndk/DKMake.cmake", "NDK_VERSION")
 			
 	if(CPP_DK_GetOS() === "Windows"){
 		console.log("Downloading NDK to "+DKDOWNLOAD)
