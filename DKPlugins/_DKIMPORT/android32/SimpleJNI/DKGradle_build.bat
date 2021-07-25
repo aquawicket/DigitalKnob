@@ -1,1 +1,1 @@
-gradle/gradlew build --info
+gradlew build --info

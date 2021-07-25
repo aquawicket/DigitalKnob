@@ -6,7 +6,7 @@ model {
         buildToolsVersion = "26.0.3"
 
         defaultConfig.with {
-            applicationId = "com.example.android.simplejni"
+            applicationId = "com.DKGradle"
             minSdkVersion.apiLevel = 26
             targetSdkVersion.apiLevel = 26
         }

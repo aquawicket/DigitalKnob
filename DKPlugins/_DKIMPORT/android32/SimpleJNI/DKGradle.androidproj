@@ -36,12 +36,12 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <AndroidBuildType>Gradle</AndroidBuildType>
-    <RootNamespace>DKGradle</RootNamespace>
+    <RootNamespace>simplejni</RootNamespace>
     <MinimumVisualStudioVersion>14.0</MinimumVisualStudioVersion>
     <ProjectVersion>1.0</ProjectVersion>
     <ProjectGuid>{f38408b0-8d17-4d2b-aeb4-5fa30b7f6373}</ProjectGuid>
     <_PackagingProjectWithoutNativeComponent>true</_PackagingProjectWithoutNativeComponent>
-    <LaunchActivity Condition="'$(LaunchActivity)' == ''">com.DKGradle.DKGradle</LaunchActivity>
+    <LaunchActivity Condition="'$(LaunchActivity)' == ''">com.example.android.simplejni</LaunchActivity>
     <JavaSourceRoots>src\main\java</JavaSourceRoots>
   </PropertyGroup>
   <Import Project="$(AndroidTargetsPath)\Android.Default.props" />
@@ -93,18 +93,10 @@
     <GradleTemplate Include="gradle\wrapper\gradle-wrapper.properties.template" />
   </ItemGroup>
   <ItemGroup>
-    <JavaCompile Include="app\src\main\java\com\DKGradle\DKGradle.java" />
-    <JavaCompile Include="app\src\main\java\org\libsdl\app\HIDDevice.java" />
-    <JavaCompile Include="app\src\main\java\org\libsdl\app\HIDDeviceBLESteamController.java" />
-    <JavaCompile Include="app\src\main\java\org\libsdl\app\HIDDeviceManager.java" />
-    <JavaCompile Include="app\src\main\java\org\libsdl\app\HIDDeviceUSB.java" />
-    <JavaCompile Include="app\src\main\java\org\libsdl\app\SDL.java" />
-    <JavaCompile Include="app\src\main\java\org\libsdl\app\SDLActivity.java" />
-    <JavaCompile Include="app\src\main\java\org\libsdl\app\SDLAudioManager.java" />
-    <JavaCompile Include="app\src\main\java\org\libsdl\app\SDLControllerManager.java" />
+    <JavaCompile Include="app\src\main\java\com\example\android\simplejni\SimpleJNI.java" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="app\src\main\cpp\main.vcxproj" />
+    <ProjectReference Include="app\src\main\jni\native.vcxproj" />
   </ItemGroup>
   <Import Project="$(AndroidTargetsPath)\Android.targets" />
   <ImportGroup Label="ExtensionTargets" />
