@@ -101,7 +101,7 @@
     <JavaCompile Include="app\src\digitalknob\dksdl\org\libsdl\WebviewActivity.java" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="app\src\digitalknob\jni\main.vcxproj" />
+    <ProjectReference Include="app\src\digitalknob\jni\DKAndroid.vcxproj" />
   </ItemGroup>
   <Import Project="$(AndroidTargetsPath)\Android.targets" />
   <ImportGroup Label="ExtensionTargets" />
