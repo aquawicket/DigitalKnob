@@ -41,8 +41,8 @@
     <ProjectVersion>1.0</ProjectVersion>
     <ProjectGuid>{f38408b0-8d17-4d2b-aeb4-5fa30b7f6373}</ProjectGuid>
     <_PackagingProjectWithoutNativeComponent>true</_PackagingProjectWithoutNativeComponent>
-    <LaunchActivity Condition="'$(LaunchActivity)' == ''">com.DKGradle.DKGradle</LaunchActivity>
-    <JavaSourceRoots>src\main\java</JavaSourceRoots>
+    <LaunchActivity Condition="'$(LaunchActivity)' == ''">digitalknob.dksdl.DK</LaunchActivity>
+    <JavaSourceRoots>src\digitalknob\dksdl</JavaSourceRoots>
   </PropertyGroup>
   <Import Project="$(AndroidTargetsPath)\Android.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'" Label="Configuration">
@@ -87,24 +87,21 @@
   <PropertyGroup Label="UserMacros" />
   <ItemGroup>
     <GradleTemplate Include="app\build.gradle.template" />
-    <GradleTemplate Include="app\src\main\AndroidManifest.xml.template" />
+    <GradleTemplate Include="app\src\digitalknob\AndroidManifest.xml.template" />
     <GradleTemplate Include="build.gradle.template" />
     <GradleTemplate Include="settings.gradle.template" />
     <GradleTemplate Include="gradle\wrapper\gradle-wrapper.properties.template" />
   </ItemGroup>
   <ItemGroup>
-    <JavaCompile Include="app\src\main\java\com\DKGradle\DKGradle.java" />
-    <JavaCompile Include="app\src\main\java\org\libsdl\app\HIDDevice.java" />
-    <JavaCompile Include="app\src\main\java\org\libsdl\app\HIDDeviceBLESteamController.java" />
-    <JavaCompile Include="app\src\main\java\org\libsdl\app\HIDDeviceManager.java" />
-    <JavaCompile Include="app\src\main\java\org\libsdl\app\HIDDeviceUSB.java" />
-    <JavaCompile Include="app\src\main\java\org\libsdl\app\SDL.java" />
-    <JavaCompile Include="app\src\main\java\org\libsdl\app\SDLActivity.java" />
-    <JavaCompile Include="app\src\main\java\org\libsdl\app\SDLAudioManager.java" />
-    <JavaCompile Include="app\src\main\java\org\libsdl\app\SDLControllerManager.java" />
+    <JavaCompile Include="app\src\digitalknob\dksdl\org\libsdl\DK.java" />
+    <JavaCompile Include="app\src\digitalknob\dksdl\org\libsdl\DKMain.java" />
+    <JavaCompile Include="app\src\digitalknob\dksdl\org\libsdl\EGLview.java" />
+	<JavaCompile Include="app\src\digitalknob\dksdl\org\libsdl\SDLActivity.java" />
+    <JavaCompile Include="app\src\digitalknob\dksdl\org\libsdl\SplashActivity.java" />
+    <JavaCompile Include="app\src\digitalknob\dksdl\org\libsdl\WebviewActivity.java" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="app\src\main\cpp\main.vcxproj" />
+    <ProjectReference Include="app\src\digitalknob\jni\main.vcxproj" />
   </ItemGroup>
   <Import Project="$(AndroidTargetsPath)\Android.targets" />
   <ImportGroup Label="ExtensionTargets" />

@@ -9,7 +9,7 @@
   	android:layout_width="fill_parent"
   	android:layout_height="fill_parent"
   	android:layout_weight="1">
-  	<digitalknob.dkapp.EGLview android:id="@+id/surfaceGLES"
+  	<digitalknob.dksdl.EGLview android:id="@+id/surfaceGLES"
   		android:visibility="visible"
   		android:layout_width="fill_parent"
   		android:layout_height="fill_parent"

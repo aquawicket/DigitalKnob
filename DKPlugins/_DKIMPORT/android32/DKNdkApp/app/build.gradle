@@ -1,12 +1,12 @@
-apply plugin: 'com.android.model.application'
+apply plugin: 'com.android.model.$(ConfigurationType)'
 
 model {
     android {
-        compileSdkVersion = 26
-        buildToolsVersion = "26.0.3"
+        compileSdkVersion = $(AndroidAPILevelNumber)
+        buildToolsVersion = "$(AndroidBuildToolsVersion)"
 
         defaultConfig.with {
-            applicationId = "com.DKGradle"
+            $(ApplicationId)
             minSdkVersion.apiLevel = 26
             targetSdkVersion.apiLevel = 26
         }
@@ -51,5 +51,5 @@ repositories {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    
+    $(AarDependencies)
 }

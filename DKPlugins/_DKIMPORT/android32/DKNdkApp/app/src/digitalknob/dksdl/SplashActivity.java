@@ -1,5 +1,5 @@
-// AUTO-GENERATED FILE. "dkapp" is renamed.
-package digitalknob.dkapp;
+// AUTO-GENERATED FILE. "dksdl" is renamed.
+package digitalknob.dksdl;
 
 import android.app.Activity;
 import android.os.Bundle;

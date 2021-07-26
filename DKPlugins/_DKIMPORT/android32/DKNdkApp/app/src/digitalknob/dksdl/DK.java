@@ -1,5 +1,5 @@
-// AUTO-GENERATED FILE. "dkapp" is renamed.
-package digitalknob.dkapp;
+// AUTO-GENERATED FILE. "dksdl" is renamed.
+package digitalknob.dksdl;
 
 import android.app.Activity;
 import android.content.Context;
@@ -48,7 +48,7 @@ public class DK extends Activity
 				copyAssets();
 				
 				//TODO: maybe we can check if the plugins is available - DKAvailable(data)
-				//if(USE_dkappWindow){	
+				//if(USE_dksdlWindow){	
 					OpenActivity("SDLActivity");
 				//}
 				//else{
@@ -93,7 +93,7 @@ public class DK extends Activity
 	{
 		Log.d("DK.java", "OpenActivity("+name+")");
 		Intent intent = new Intent();
-		intent.setClassName("digitalknob.dkapp", "digitalknob.dkapp."+name);
+		intent.setClassName("digitalknob.dksdl", "digitalknob.dksdl."+name);
 		startActivity(intent);
 	}
 
