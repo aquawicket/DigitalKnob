@@ -1,0 +1,1 @@
+https://sites.google.com/a/android.com/tools/tech-docs/new-build-system/gradle-experimental/migrate-to-stable
