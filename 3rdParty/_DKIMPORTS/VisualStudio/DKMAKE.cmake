@@ -3,8 +3,9 @@ if(NOT CMAKE_HOST_WIN32)
 endif()
 
 if(ANDROID)
+	DKDEPEND(jdk)
+	DKDEPEND(apache-ant)
 	DKDEPEND(android-sdk)
-	##DKDEPEND(android-ndk)
 endif()
  
 ### VERSION ###
