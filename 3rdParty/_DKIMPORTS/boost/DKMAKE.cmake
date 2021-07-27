@@ -8,7 +8,7 @@
 ### DEPENDS ###
 if(ANDROID)
 	DKDEPEND(android-ndk) #version 21e or newer required
-	DKDEPEND(mingw64)
+	DKDEPEND(mingw32)
 endif()
 
 
@@ -187,7 +187,7 @@ RASPBERRY64_RELEASE_COMMAND(./b2 toolset=gcc address-model=64 variant=release li
 ANDROID_PATH(${BOOST})
 ANDROID_BASH("#!/bin/bash\;
 cd /${BOOST}\;
-export PATH=/${MINGW64}/bin:$PATH\;
+export PATH=/${MINGW32}/bin:$PATH\;
 export PATH=/${MSYS}/bin:$PATH\;
 ./SetupAndroid.sh\;")
 
@@ -197,7 +197,7 @@ ANDROID32_DEBUG_COMMAND(
 	set NDKVER=${NDK_VERSION} &&
 	set CLANGPATH=${NDK}/toolchains/llvm/prebuilt/windows-x86_64/bin &&
 	b2
-	-q
+	##-q
 	toolset=clang-armeabiv7a
 	architecture=arm
 	variant=debug
@@ -219,7 +219,7 @@ ANDROID32_RELEASE_COMMAND(
 	set NDKVER=${NDK_VERSION} &&
 	set CLANGPATH=${NDK}/toolchains/llvm/prebuilt/windows-x86_64/bin &&
 	b2
-	-q
+	##-q
 	toolset=clang-armeabiv7a
 	architecture=arm
 	variant=release
@@ -242,7 +242,7 @@ ANDROID64_DEBUG_COMMAND(
 	set CLANGPATH=${NDK}/toolchains/llvm/prebuilt/windows-x86_64/bin &&
 	echo "\n\nStarting B2 for Android arm64v8a . . .\n " &&
 	b2
-	-q
+	##-q
 	toolset=clang-arm64v8a
 	architecture=arm
 	address-model=64
@@ -265,7 +265,7 @@ ANDROID64_RELEASE_COMMAND(
 	set NDKVER=${NDK_VERSION} &&
 	set CLANGPATH=${NDK}/toolchains/llvm/prebuilt/windows-x86_64/bin &&
 	b2
-	-q
+	##-q
 	toolset=clang-arm64v8a
 	architecture=arm
 	address-model=64
