@@ -81,8 +81,8 @@
   <ItemDefinitionGroup>
     <GradlePackage>
       <ProjectDirectory>$(ProjectDir)app</ProjectDirectory>
-      <GradlePlugin>gradle:3.3.3</GradlePlugin>
-      <GradleVersion>5.6.4</GradleVersion>
+      <GradlePlugin>gradle:4.1.0</GradlePlugin>
+      <GradleVersion>6.7.1</GradleVersion>
       <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">--warning-mode all</AdditionalOptions>
     </GradlePackage>
   </ItemDefinitionGroup>
