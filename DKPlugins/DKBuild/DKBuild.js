@@ -101,9 +101,9 @@ function DKBuild_init(){
 		//ANDROIDNDK = DKPATH+"DK/3rdParty/android-ndk-"+ANDROIDNDK_VERSION+"-linux-x86_64"
 	}
 	
-	ANDROIDNDK_VERSION = DKBuild_GetDKMakeVariable(DKPATH+"DK/3rdParty/_DKIMPORTS/android-sdk/DKMAKE.cmake", "ANDROIDNDK_VERSION")
-	ANDROIDNDK_BUILD = DKBuild_GetDKMakeVariable(DKPATH+"DK/3rdParty/_DKIMPORTS/android-sdk/DKMAKE.cmake", "ANDROIDNDK_BUILD")
-	ANDROIDNDK = DKBuild_GetDKMakeVariable(DKPATH+"DK/3rdParty/_DKIMPORTS/android-sdk/DKMAKE.cmake", "ANDROIDNDK")
+	//ANDROIDNDK_VERSION = DKBuild_GetDKMakeVariable(DKPATH+"DK/3rdParty/_DKIMPORTS/android-sdk/DKMAKE.cmake", "ANDROIDNDK_VERSION")
+	//ANDROIDNDK_BUILD = DKBuild_GetDKMakeVariable(DKPATH+"DK/3rdParty/_DKIMPORTS/android-sdk/DKMAKE.cmake", "ANDROIDNDK_BUILD")
+	ANDROIDNDK = DKPATH+"DK/3rdParty/android-sdk/ndk/"+ANDROIDNDK_BUILD
 	//ANDROIDNDK = CPP_DKFile_GetShortName(ANDROIDNDK)
 	DKDOWNLOAD = DKPATH+"DK/Download"
 }
