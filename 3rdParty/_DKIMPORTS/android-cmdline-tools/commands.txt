@@ -1,0 +1,2 @@
+sdkmanager --list --sdk_root=C:\Users\aquawicket\digitalknob\DK\3rdParty\android-sdk
+sdkmanager --install build-tools;31.0.0 --sdk_root=C:\Users\aquawicket\digitalknob\DK\3rdParty\android-sdk
