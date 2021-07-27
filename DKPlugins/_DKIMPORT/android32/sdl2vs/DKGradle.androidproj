@@ -81,7 +81,7 @@
   <ItemDefinitionGroup>
     <GradlePackage>
       <ProjectDirectory>$(ProjectDir)app</ProjectDirectory>
-      <GradlePlugin>gradle-experimental:0.9.3</GradlePlugin>
+      <GradlePlugin>gradle:2.3.1</GradlePlugin>
       <GradleVersion>3.3</GradleVersion>
     </GradlePackage>
   </ItemDefinitionGroup>
