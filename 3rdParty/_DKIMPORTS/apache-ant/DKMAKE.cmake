@@ -7,10 +7,11 @@ endif()
 
 
 ### VERSION ####
-DKSET(ANT_VERSION 1.9.15)
-DKSET(ANT ${3RDPARTY}/apache-ant-${ANT_VERSION})
+DKSET(ANT_VERSION 1.9.16)
+DKSET(ANT_NAME apache-ant-${ANT_VERSION})
+DKSET(ANT ${3RDPARTY}/${ANT_NAME})
 
 
 ### INSTALL ###
 ## https://mirror.cogentco.com/pub/apache/ant/binaries/apache-ant-1.9.15-bin.zip
-DKINSTALL(https://mirror.cogentco.com/pub/apache/ant/binaries/apache-ant-${ANT_VERSION}-bin.zip apache-ant apache-ant-${ANT_VERSION})
+DKINSTALL(https://mirror.cogentco.com/pub/apache/ant/binaries/${ANT_NAME}-bin.zip apache-ant ${ANT_NAME})

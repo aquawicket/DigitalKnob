@@ -43,9 +43,9 @@ endif()
 
 ## TRACKER: error TRK0005: Failed to locate: "clang.exe" - https://stackoverflow.com/a/50924477/688352
 if(CMAKE_HOST_WIN32 AND ANDROID)
+	DKDEPEND(apache-ant)
 	DKDEPEND(android-sdk)
 	DKDEPEND(jdk)
-	DKDEPEND(apache-ant)
 	DKDEPEND(VisualStudio)
 	DKDEPEND(mingw32)
 	DKDEPEND(msys)
