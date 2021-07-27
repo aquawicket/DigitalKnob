@@ -1,3 +1,5 @@
+## REPLACED BY android-sdk 3rdParty library
+
 if(NOT ANDROID)
 	return()
 endif()
