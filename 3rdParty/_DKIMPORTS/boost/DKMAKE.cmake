@@ -197,7 +197,6 @@ ANDROID32_DEBUG_COMMAND(
 	set NDKVER=${ANDROIDNDK_VERSION} &&
 	set CLANGPATH=${ANDROIDNDK}/toolchains/llvm/prebuilt/windows-x86_64/bin &&
 	b2
-	##-q
 	toolset=clang-armeabiv7a
 	architecture=arm
 	variant=debug
@@ -219,7 +218,6 @@ ANDROID32_RELEASE_COMMAND(
 	set NDKVER=${ANDROIDNDK_VERSION} &&
 	set CLANGPATH=${ANDROIDNDK}/toolchains/llvm/prebuilt/windows-x86_64/bin &&
 	b2
-	##-q
 	toolset=clang-armeabiv7a
 	architecture=arm
 	variant=release
@@ -242,7 +240,6 @@ ANDROID64_DEBUG_COMMAND(
 	set CLANGPATH=${ANDROIDNDK}/toolchains/llvm/prebuilt/windows-x86_64/bin &&
 	echo "\n\nStarting B2 for Android arm64v8a . . .\n " &&
 	b2
-	##-q
 	toolset=clang-arm64v8a
 	architecture=arm
 	address-model=64
@@ -265,7 +262,6 @@ ANDROID64_RELEASE_COMMAND(
 	set NDKVER=${ANDROIDNDK_VERSION} &&
 	set CLANGPATH=${ANDROIDNDK}/toolchains/llvm/prebuilt/windows-x86_64/bin &&
 	b2
-	##-q
 	toolset=clang-arm64v8a
 	architecture=arm
 	address-model=64
