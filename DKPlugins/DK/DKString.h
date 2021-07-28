@@ -1,3 +1,6 @@
+// https://www.drdobbs.com/cpp/how-non-member-functions-improve-encapsu/184401197
+
+
 #pragma once
 #ifndef DKString_H
 #define DKString_H
@@ -30,7 +33,10 @@ typedef std::vector<DKStringArray> DKStringGrid;
 bool same(const DKString& str, const DKString& str2);
 bool samei(const DKString& str, const DKString& str2); //case insensitive
 bool has(const DKString& str, const DKString& str2);
-bool Trim(DKString& str);
+
+//https://stackoverflow.com/questions/216823/whats-the-best-way-to-trim-stdstring
+bool trim(DKString& str);
+
 DKString toString(const int& num);
 DKString toString(const unsigned int& num);
 DKString toString(const long& num);

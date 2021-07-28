@@ -659,8 +659,10 @@ bool DKUtil::POpen(const DKString& command, const DKString& mode, DKString& resu
 		result += psBuffer;
 	}
 	// Close pipe and return the return value of pPipe
-	if (feof(pPipe))
+	if (feof(pPipe)){
+		trim(result);
 		return !_pclose(pPipe);
+	}
 	DKERROR("DKUtil::POpen() Failed to read the pipe to the end.\n");
 	return false;
 }

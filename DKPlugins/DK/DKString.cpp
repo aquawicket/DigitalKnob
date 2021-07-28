@@ -2,18 +2,15 @@
 #include "DKString.h"
 #include "DKLog.h"
 
-////////////////////////////////////////////////////
-bool same(const DKString& str, const DKString& str2)
-{
+
+bool same(const DKString& str, const DKString& str2){
 	if(str.compare(str2) == 0){
 		return true;
 	}
 	return false;
 }
 
-/////////////////////////////////////////////////////
-bool samei(const DKString& str, const DKString& str2)
-{
+bool samei(const DKString& str, const DKString& str2){
 	DKString temp1 = str;
 	std::transform(temp1.begin(), temp1.end(), temp1.begin(), ::tolower);
 	DKString temp2 = str2;
@@ -24,9 +21,7 @@ bool samei(const DKString& str, const DKString& str2)
 	return false;
 }
 
-///////////////////////////////////////////////////
-bool has(const DKString& str, const DKString& str2)
-{
+bool has(const DKString& str, const DKString& str2){
 	int found = str.find(str2);
 	if(found!=std::string::npos){
 		return true;
@@ -34,9 +29,7 @@ bool has(const DKString& str, const DKString& str2)
 	return false;
 }
 
-/////////////////////////////////
-DKString toString(const int& num)
-{
+DKString toString(const int& num){
 	DKString s;
 	std::stringstream out;
 	out << num;
@@ -44,9 +37,7 @@ DKString toString(const int& num)
 	return s;
 }
 
-//////////////////////////////////////////
-DKString toString(const unsigned int& num)
-{
+DKString toString(const unsigned int& num){
 	DKString s;
 	std::stringstream out;
 	out << num;
@@ -54,9 +45,7 @@ DKString toString(const unsigned int& num)
 	return s;
 }
 
-//////////////////////////////////
-DKString toString(const long& num)
-{
+DKString toString(const long& num){
 	DKString s;
 	std::stringstream out;
 	out << num;
@@ -64,9 +53,7 @@ DKString toString(const long& num)
 	return s;
 }
 
-///////////////////////////////////////////////
-DKString toString(const unsigned long int& num)
-{
+DKString toString(const unsigned long int& num){
 	DKString s;
 	std::stringstream out;
 	out << num;
@@ -74,9 +61,7 @@ DKString toString(const unsigned long int& num)
 	return s;
 }
 
-////////////////////////////////////////////////////
-DKString toString(const unsigned long long int& num)
-{
+DKString toString(const unsigned long long int& num){
 	DKString s;
 	std::stringstream out;
 	out << num;
@@ -84,9 +69,7 @@ DKString toString(const unsigned long long int& num)
 	return s;
 }
 
-///////////////////////////////////
-DKString toString(const float& num)
-{
+DKString toString(const float& num){
 	//if(!num){return "";}
 	DKString s;
 	std::stringstream out;
@@ -95,9 +78,7 @@ DKString toString(const float& num)
 	return s;
 }
 
-////////////////////////////////////
-DKString toString(const double& num)
-{
+DKString toString(const double& num){
 	DKString s;
 	std::stringstream out;
 	out << num;
@@ -105,39 +86,28 @@ DKString toString(const double& num)
 	return s;
 }
 
-//////////////////////////////////
-DKString toString(const char* str)
-{
+DKString toString(const char* str){
 	return str;
 }
 
-/////////////////////////////////////
-DKString toString(unsigned char* str) 
-{
+DKString toString(unsigned char* str) {
 	return reinterpret_cast<char const*>(str);
 }
 
-////////////////////////////
-DKString toString(void* ptr)
-{
+DKString toString(void* ptr){
 	DKString *p = static_cast<DKString*>(ptr);
 	DKString string = *p;
 	return string;
 }
 
-/////////////////////////////
-DKString toString(bool _bool)
-{
-	if(_bool){
+DKString toString(bool _bool){
+	if(_bool)
 		return "true";
-	}
 	return "false";
 }
 
 #ifdef WIN32
-//////////////////////////////////
-DKString toString(const HWND hwnd)
-{
+DKString toString(const HWND hwnd){
 	std::stringstream ss;
 	ss << "0x" << hwnd;
 	return ss.str();
@@ -145,9 +115,7 @@ DKString toString(const HWND hwnd)
 #endif
 
 #ifdef WIN32
-/////////////////////////////////////////
-DKString toString(const std::wstring& ws)
-{
+DKString toString(const std::wstring& ws){
 	int len;
     int slength = (int)ws.length();// + 1;
     len = WideCharToMultiByte(CP_ACP, 0, ws.c_str(), slength, 0, 0, 0, 0); 
@@ -158,9 +126,7 @@ DKString toString(const std::wstring& ws)
 }
 #endif // WIN32 || WIN64
 
-///////////////////////////////////////////////////////////////////
-DKString toString(const DKStringArray& arry, const char* seperator)
-{
+DKString toString(const DKStringArray& arry, const char* seperator){
 	DKString string = "";
 	for(unsigned int i=0; i<arry.size(); ++i){
 		string += arry[i];
@@ -172,9 +138,7 @@ DKString toString(const DKStringArray& arry, const char* seperator)
 }
 
 /*
-///////////////////////////////////////////////////////////////////////////////////
-bool ArrayToString(const DKStringArray& arry, DKString& str, const char* seperator)
-{
+bool ArrayToString(const DKStringArray& arry, DKString& str, const char* seperator){
 	str = "";
 	for(unsigned int i=0; i<arry.size(); ++i){
 		str += arry[i];
@@ -186,9 +150,7 @@ bool ArrayToString(const DKStringArray& arry, DKString& str, const char* seperat
 }
 */
 
-///////////////////////////////////////////////////////////////////////////
-bool replace(DKString& str, const DKString& oldStr, const DKString& newStr)
-{
+bool replace(DKString& str, const DKString& oldStr, const DKString& newStr){
   size_t pos = 0;
   while((pos = str.find(oldStr, pos)) != std::string::npos)
   {
@@ -198,9 +160,7 @@ bool replace(DKString& str, const DKString& oldStr, const DKString& newStr)
   return true;
 }
 
-/////////////////////////////////////////////////////////////////////////////////
-bool replace_first(DKString& str, const DKString& oldStr, const DKString& newStr)
-{
+bool replace_first(DKString& str, const DKString& oldStr, const DKString& newStr){
   size_t pos = 0;
   if((pos = str.find(oldStr, pos)) != std::string::npos)
   {
@@ -210,9 +170,7 @@ bool replace_first(DKString& str, const DKString& oldStr, const DKString& newStr
   return true;
 }
 
-////////////////////////////////
-long toLong(const DKString& str)
-{
+long toLong(const DKString& str){
 #if defined(WIN32) || defined(MAC)
 	return atol(str.c_str());
 #endif 
@@ -220,9 +178,7 @@ long toLong(const DKString& str)
 	return false;
 }
 
-///////////////////////////////////////////////////////
-unsigned long long int toULongLong(const DKString& str)
-{
+unsigned long long int toULongLong(const DKString& str){
 #if defined(WIN32) || defined(MAC)
 	//return atol(str.c_str());
 	return strtoull(str.c_str(), NULL, 0);
@@ -231,46 +187,34 @@ unsigned long long int toULongLong(const DKString& str)
 	return false;
 }
 
-//////////////////////////////
-int toInt(const DKString& str)
-{
+int toInt(const DKString& str){
 	int value = atoi(str.c_str());
 	return value;
 }
 
-////////////////////////////////
-bool toBool(const DKString& str)
-{
+bool toBool(const DKString& str){
     if(str.empty()){ return false; }
 	return str != "0";
 }
 
-////////////////////////////////////////
-unsigned int toUInt(const DKString& str)
-{
+unsigned int toUInt(const DKString& str){
 	int value = atoi(str.c_str());
 	return value;
 }
 
-//////////////////////////////////
-float toFloat(const DKString& str)
-{
+float toFloat(const DKString& str){
 	float value = (float)atof(str.c_str());
 	return value;
 }
 
-//////////////////////////////////
-bool IsNumber(const DKString& str)
-{
+bool IsNumber(const DKString& str){
     std::string::const_iterator it = str.begin();
     while (it != str.end() && std::isdigit(*it)) ++it;
     return !str.empty() && it == str.end();
 }
 
 #ifdef WIN32
-////////////////////////////////
-HWND toHWND(const DKString& str)
-{
+HWND toHWND(const DKString& str){
 	DKString hex = str;
 	hex.erase(0,2);
 	unsigned int x;   
@@ -281,26 +225,20 @@ HWND toHWND(const DKString& str)
 }
 #endif
 
-////////////////////////////////////////////////
-bool Pad(int num, char character, DKString& str)
-{
+bool Pad(int num, char character, DKString& str){
 	std::ostringstream ss;
 	ss << std::setw(num) << std::setfill(character) << str;
 	str = ss.str();
 	return true;
 }
 
-//////////////////////////////////////////
-bool RemoveDuplicates(DKStringArray& arry)
-{
+bool RemoveDuplicates(DKStringArray& arry){
 	sort( arry.begin(), arry.end() );
 	arry.erase( unique( arry.begin(), arry.end() ), arry.end() );
 	return true;
 }
 
-///////////////////////////////////////////////////////////////////////////////////////////////
-bool getSettingFromString(const DKString& filestring, const DKString& setting, DKString& value)
-{
+bool getSettingFromString(const DKString& filestring, const DKString& setting, DKString& value){
 	//If the variable looks like this: [VARIABLE]
 	//then we return everything up to the next [VARIABLE] or to the end of the file.
 	if(has(setting,"[") && has(setting,"]")){
@@ -314,7 +252,7 @@ bool getSettingFromString(const DKString& filestring, const DKString& setting, D
 
 		replace(out,"\r","");
 		replace(out,"\n"," ");
-		Trim(out);
+		trim(out);
 		value = out;
 		return true;
 	}
@@ -331,7 +269,7 @@ bool getSettingFromString(const DKString& filestring, const DKString& setting, D
 	DKString out = filestring.substr(start+1, end-start-1);
 	replace(out,"\r","");
 	replace(out,"\n","");
-	Trim(out);
+	trim(out);
 	value = out;
 	return true;
 }
@@ -365,7 +303,7 @@ DKStringArray getSettingsFromString(const DKString& filestring, const DKString& 
 			DKString string = out.substr(begin, end-begin);
 			replace(string,"\r","");
 			replace(string,"\n"," ");
-			Trim(string);
+			trim(string);
 			if(!same(string,"")){
 				outs.push_back(string);
 			}
@@ -381,18 +319,14 @@ DKStringArray getSettingsFromString(const DKString& filestring, const DKString& 
 }
 */
 
-////////////////////////
-bool Trim(DKString& str)
-{
+bool trim(DKString& str){
 	str.erase(str.begin(), std::find_if(str.begin(), str.end(), std::not1(std::ptr_fun<int, int>(std::isspace))));
 	str.erase(std::find_if(str.rbegin(), str.rend(), std::not1(std::ptr_fun<int, int>(std::isspace))).base(), str.end());
+	//str.erase(str.find_last_not_of(" \n\r\t")+1);
 	return true;
 }
 
-
-/////////////////////////////////////////////////////////////////////////////////////////
-bool toStringArray(DKStringArray& output, const DKString& str, const DKString& seperator)
-{
+bool toStringArray(DKStringArray& output, const DKString& str, const DKString& seperator){
 	//FIXME - while(1) loops are dangerous 
 	DKString text = str + seperator; //add a seperator at the end, or we won't get the last variable
 
@@ -404,7 +338,7 @@ bool toStringArray(DKStringArray& output, const DKString& str, const DKString& s
 		replace(temp,"\r","");
 		replace(temp,"\n"," ");
 		replace(temp,seperator,"");
-		Trim(temp);
+		trim(temp);
 		output.push_back(temp);
 		begin=end+1;
 	}
@@ -414,18 +348,14 @@ bool toStringArray(DKStringArray& output, const DKString& str, const DKString& s
 	}
 }
 
-///////////////////////////////////////
-DKString toLower(const DKString& input)
-{
+DKString toLower(const DKString& input){
     DKString output = input;
     std::transform( output.begin(), output.end(), output.begin(), ::tolower );
     return output;
 }
 
 #ifdef WIN32
-///////////////////////////////////////////
-std::wstring toWString(const DKString& str)
-{
+std::wstring toWString(const DKString& str){
 	int len;
 	int slength = (int)str.length() + 1;
 	len = MultiByteToWideChar(CP_ACP, 0, str.c_str(), slength, 0, 0);

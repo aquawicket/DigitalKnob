@@ -153,7 +153,7 @@ bool DKWidget::CreateWidget(DKString& file)
 	*/
 
 	//Add the elements to the DOM
-	Trim(data[2]);
+	trim(data[2]);
 
 	int numChildren = temp->GetNumChildren();
 	for(int i = 0; i < numChildren; i++){
@@ -163,7 +163,7 @@ bool DKWidget::CreateWidget(DKString& file)
 	}
 
 	//Set the root element of this widget
-	Trim(id);
+	trim(id);
 	root = dkRocket->document->GetElementById(_id.c_str());
 	if(!root){
 		DKERROR("DKWidget::CreateWidget("+path+"): root is NULL\n");
@@ -1197,7 +1197,7 @@ bool DKWidget::GetInnerHtmlString(Rocket::Core::Element* element, DKString& valu
 			DKCString temp;
 			Rocket::Core::WString cstr = ele->GetText().ToUTF8(temp);
 			value = temp.CString();
-			Trim(value);
+			trim(value);
 			return true;
 		}
 	}

@@ -47,7 +47,7 @@ bool DKXml::LoadDocumentFromString(const DKString& string)
 {
 	DKDEBUGFUNC(string);	
 	DKString temp = string;
-	Trim(temp);
+	trim(temp);
 	replace(temp, "\n", "");
 	replace(temp, "\r", "");
 	replace(temp, "(\"", "(");
@@ -211,7 +211,7 @@ bool DKXml::GetFullNode(const DKString& xpath, DKString& string)
 	std::ostringstream oss;
 	node.print(oss);
 	string = oss.str();
-	//Trim(string);
+	//trim(string);
 	//replace(string, "\n", " ");
 	//replace(string, "\r", " ");
 	return true;
@@ -228,7 +228,7 @@ bool DKXml::GetNodeValue(const DKString& xpath, DKString& string)
 	}
 
 	string = node.child_value();
-	Trim(string);
+	trim(string);
 	replace(string, "\n", " ");
 	replace(string, "\r", " ");
 	return true;
@@ -252,7 +252,7 @@ bool DKXml::GetChildNodeValue(const DKString& xpath, int num, DKString& string)
 	}
 
 	string = node.child_value();
-	Trim(string);
+	trim(string);
 	replace(string, "\n", " ");
 	replace(string, "\r", " ");
 	return true;
@@ -276,7 +276,7 @@ bool DKXml::GetChildAttribute(const DKString& xpath, int num, const DKString& at
 	}
 
 	string = node.attribute(attrib.c_str()).value();
-	Trim(string);
+	trim(string);
 	return true;
 }
 
