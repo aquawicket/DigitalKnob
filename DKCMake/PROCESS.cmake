@@ -129,7 +129,7 @@ DKSET(DKLIBRARIES "")
 
 
 foreach(plugin ${dkdepend_list})
-	DKSET(QUEUE_BUILD OFF)
+	##DKSET(QUEUE_BUILD OFF)
 	DKSET(LIBLIST "") ## used for double checking
 	DKSET(CMAKE_FILE "")
 	DKSET(ANDROID_LIBMK "")

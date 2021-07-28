@@ -39,8 +39,10 @@ function DKBuildConsole_ChooseUpdate() {
 	const assets = CPP_DKAssets_LocalAssets()
 	if(CPP_DKFile_Exists(assets+"cache.txt")){
 		const cache = CPP_DKFile_FileToString(assets+"cache.txt")
-		const cache_json = JSON.parse(cache);
-		console.log("ENTER: "+cache_json.APP+" -> "+cache_json.OS+" -> "+cache_json.TYPE+" -> "+cache_json.LEVEL)
+		if(cache){
+			const cache_json = JSON.parse(cache);
+			console.log("ENTER: "+cache_json.APP+" -> "+cache_json.OS+" -> "+cache_json.TYPE+" -> "+cache_json.LEVEL)
+		}
 	}
     console.log("any other key to Skip")
     console.log("ESC. exit")

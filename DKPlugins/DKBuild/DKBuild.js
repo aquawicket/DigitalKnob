@@ -48,9 +48,9 @@ let LEVEL = ""  //Build, Rebuild, RebuildAll
 let DKPATH = ""
 let DKDOWNLOAD = ""
 let CMAKE = ""
-let ANDROIDNDK_VERSION = "r22b"
-let ANDROIDNDK_BUILD = "22.1.7171670"
-let ANDROIDNDK = ""
+//let ANDROIDNDK_VERSION = "r22b"
+//let ANDROIDNDK_BUILD = "22.1.7171670"
+//let ANDROIDNDK = ""
 let VISUALSTUDIO_VERSION = "2019"
 let VISUALSTUDIO = ""
 let MSBUILD = ""
@@ -183,32 +183,20 @@ function DKBuild_InstallXcode(){
 	//TODO - Install Xcode
 }
 
+const ANDROIDNDK = ""
 function DKBuild_ValidateNDK(){
-	console.log("Looking for Android NDK")
-	if(!CPP_DKFile_Exists(ANDROIDNDK+"/installed"))
-		DKBuild_InstallNDK()
-	if(CPP_DKFile_Exists(ANDROIDNDK))
-		console.log("Found NDK")
-}
-
-function DKBuild_InstallNDK(){
-	console.log("Installing Android NDK")
-    
-	//Eventually we'll use the same cmake script to build Tools and indivual libraries
-	//CPP_DKFile_ChDir(DKPATH+"DK/3rdParty/_DKIMPORTS/android-sdk")
-	//CPP_DKFile_Delete(DKPATH+"DK/3rdParty/_DKIMPORTS/android-sdk/CMakeCahche.txt")
-	//CPP_DKFile_Delete(DKPATH+"DK/3rdParty/_DKIMPORTS/android-sdk/CMakeFiles")
-	//CPP_DK_Execute(CMAKE+" -P "+DKPATH+"DK/3rdParty/_DKIMPORTS/android-sdk/DKMAKE.cmake")
-	
-	ANDROIDSDK_DKMAKE = DKPATH+"DK/3rdParty/_DKIMPORTS/android-sdk/DKMAKE.cmake"
-	ANDROIDTOOLS_DL = DKBuild_GetDKMakeVariable(ANDROIDSDK_DKMAKE, "ANDROIDTOOLS_DL")
-	ANDROIDTOOLS_FILE = DKBuild_GetDKMakeVariable(ANDROIDSDK_DKMAKE, "ANDROIDTOOLS_FILE")
-	ANDROIDTOOLS_FILE = DKBuild_GetDKMakeVariable(ANDROIDSDK_DKMAKE, "ANDROIDTOOLS_FILE")
-	ANDROIDPLATFORM_VERSION = DKBuild_GetDKMakeVariable(ANDROIDSDK_DKMAKE, "ANDROIDPLATFORM_VERSION")
-	ANDROIDBUILDTOOLS_VERSION = DKBuild_GetDKMakeVariable(ANDROIDSDK_DKMAKE, "ANDROIDBUILDTOOLS_VERSION")
-	ANDROIDNDK_VERSION = DKBuild_GetDKMakeVariable(ANDROIDSDK_DKMAKE, "ANDROIDNDK_VERSION")
-	ANDROIDNDK_BUILD = DKBuild_GetDKMakeVariable(ANDROIDSDK_DKMAKE, "ANDROIDNDK_BUILD")
-	ANDROIDSDK = DKPATH+"DK/3rdParty/android-sdk"
+    //GOAL: Eventually we'll use the same packages DKMAKE.cmake script to build it
+	const ANDROIDSDK_DKMAKE = DKPATH+"DK/3rdParty/_DKIMPORTS/android-sdk/DKMAKE.cmake"
+	const ANDROIDTOOLS_DL = DKBuild_GetDKMakeVariable(ANDROIDSDK_DKMAKE, "ANDROIDTOOLS_DL")
+	const ANDROIDTOOLS_FILE = DKBuild_GetDKMakeVariable(ANDROIDSDK_DKMAKE, "ANDROIDTOOLS_FILE")
+	const ANDROIDTOOLS_FILE = DKBuild_GetDKMakeVariable(ANDROIDSDK_DKMAKE, "ANDROIDTOOLS_FILE")
+	const ANDROIDPLATFORM_VERSION = DKBuild_GetDKMakeVariable(ANDROIDSDK_DKMAKE, "ANDROIDPLATFORM_VERSION")
+	const ANDROIDBUILDTOOLS_VERSION = DKBuild_GetDKMakeVariable(ANDROIDSDK_DKMAKE, "ANDROIDBUILDTOOLS_VERSION")
+	const ANDROIDNDK_DL = DKBuild_GetDKMakeVariable(DKPATH+"DK/3rdParty/_DKIMPORTS/android-ndk/DKMAKE.cmake", "ANDROIDNDK_DL")
+	const ANDROIDNDK_FILE = DKBuild_GetDKMakeVariable(DKPATH+"DK/3rdParty/_DKIMPORTS/android-ndk/DKMAKE.cmake", "ANDROIDNDK_FILE")
+	const ANDROIDNDK_VERSION = DKBuild_GetDKMakeVariable(ANDROIDSDK_DKMAKE, "ANDROIDNDK_VERSION")
+	const ANDROIDNDK_BUILD = DKBuild_GetDKMakeVariable(ANDROIDSDK_DKMAKE, "ANDROIDNDK_BUILD")
+	const ANDROIDSDK = DKPATH+"DK/3rdParty/android-sdk"
 	ANDROIDNDK = ANDROIDSDK+"/ndk/"+ANDROIDNDK_BUILD
 	//ANDROIDNDK = CPP_DKFile_GetShortName(ANDROIDNDK)
 	
@@ -216,16 +204,38 @@ function DKBuild_InstallNDK(){
 	console.log("ANDROIDNDK_BUILD = "+ANDROIDNDK_BUILD)
 	console.log("ANDROIDSDK = "+ANDROIDSDK)
 	console.log("ANDROIDNDK = "+ANDROIDNDK)
-			
+	
+	//set environment variables
 	if(CPP_DK_GetOS() === "Windows"){
-		console.log("Downloading NDK to "+DKDOWNLOAD)
-		if(!CPP_DKFile_Exists(DKDOWNLOAD+"/"+ANDROIDTOOLS_FILE))
-			CPP_DKCurl_Download(ANDROIDTOOLS_DL, DKDOWNLOAD)
-		CPP_DKArchive_Extract(DKDOWNLOAD+"/"+ANDROIDTOOLS_FILE, DKPATH+"DK/3rdParty")
-		CPP_DKFile_Rename(DKPATH+"DK/3rdParty/cmdline-tools", ANDROIDSDK, true)
-		CPP_DK_Execute(ANDROIDSDK+"/bin/sdkmanager ndk;"+ANDROIDNDK_BUILD+" platforms;"+ANDROIDPLATFORM_VERSION+" build-tools;"+ANDROIDBUILDTOOLS_VERSION+" --sdk_root="+ANDROIDSDK)
-		CPP_DKFile_StringToFile("android-sdk", ANDROIDSDK+"/installed")
+		console.log("environment variables")
+		if(ANDROIDSDK != CPP_DK_Execute("echo %ANDROID_SDK_ROOT%"))
+			console.log()
+			CPP_DK_Execute("setx ANDROID_SDK_ROOT "+ANDROIDSDK)
+		if(ANDROIDNDK != CPP_DK_Execute("echo %NDK_ROOT%"))
+			CPP_DK_Execute("setx NDK_ROOT "+ANDROIDNDK)
 	}
+	
+	// Validate install
+	console.log("Looking for Android NDK")
+	if(!CPP_DKFile_Exists(ANDROIDNDK+"/installed")){
+		console.log("ANDROIDNDK: "+ANDROIDNDK+"    does not exist")
+		console.log("Installing Android NDK")
+		console.log("Downloading NDK to "+DKDOWNLOAD)
+	if(!CPP_DKFile_Exists(DKDOWNLOAD+"/"+ANDROIDTOOLS_FILE))
+		CPP_DKCurl_Download(ANDROIDTOOLS_DL, DKDOWNLOAD)
+		CPP_DKArchive_Extract(DKDOWNLOAD+"/"+ANDROIDTOOLS_FILE, DKPATH+"DK/3rdParty")
+		CPP_DKFile_MkDir(ANDROIDSDK+"/cmdline-tools")
+		CPP_DKFile_Rename(DKPATH+"DK/3rdParty/cmdline-tools", ANDROIDSDK+"/cmdline-tools/latest", false)
+		//CPP_DK_Execute(ANDROIDSDK+"/bin/sdkmanager ndk;"+ANDROIDNDK_BUILD+" platforms;"+ANDROIDPLATFORM_VERSION+" build-tools;"+ANDROIDBUILDTOOLS_VERSION+" --sdk_root="+ANDROIDSDK)
+		//CPP_DK_Execute(ANDROIDSDK+"/cmdline-tools/latest/bin/sdkmanager ndk;"+ANDROIDNDK_BUILD+" --sdk_root="+ANDROIDSDK)
+		CPP_DKCurl_Download(ANDROIDNDK_DL, DKDOWNLOAD)
+		CPP_DKArchive_Extract(DKDOWNLOAD+"/"+ANDROIDNDK_FILE, ANDROIDSDK+"/ndk")
+		CPP_DKFile_StringToFile("android-ndk", ANDROIDNDK+"/installed")
+	}
+	if(CPP_DKFile_Exists(ANDROIDNDK))
+		console.log("Found NDK")
+
+	
 	/*
 	if(CPP_DK_GetOS() === "Mac"){
 		CPP_DKCurl_Download("https://dl.google.com/android/repository/android-ndk-"+ANDROIDNDK_VERSION+"-darwin-x86_64.zip", DKDOWNLOAD)
