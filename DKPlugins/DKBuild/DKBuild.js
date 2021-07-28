@@ -200,18 +200,17 @@ function DKBuild_ValidateNDK(){
 	ANDROIDNDK = ANDROIDSDK+"/ndk/"+ANDROIDNDK_BUILD
 	//ANDROIDNDK = CPP_DKFile_GetShortName(ANDROIDNDK)
 	
+	console.log("ANDROIDSDK = "+ANDROIDSDK)
 	console.log("ANDROIDNDK_VERSION = "+ANDROIDNDK_VERSION)
 	console.log("ANDROIDNDK_BUILD = "+ANDROIDNDK_BUILD)
-	console.log("ANDROIDSDK = "+ANDROIDSDK)
 	console.log("ANDROIDNDK = "+ANDROIDNDK)
 	
 	//set environment variables
 	if(CPP_DK_GetOS() === "Windows"){
-		console.log("setting environment variables")
-		//console.log("ANDROID_SDK_ROOT = "+CPP_DK_System("%ANDROID_SDK_ROOT%"))
-		//if(ANDROIDSDK != CPP_DK_Execute("echo %ANDROID_SDK_ROOT%"))
-			CPP_DK_Execute("setx ANDROID_SDK_ROOT "+ANDROIDSDK)
-		//if(ANDROIDNDK != CPP_DK_Execute("echo %NDK_ROOT%"))
+		console.log("checking environment variables")
+		if(ANDROIDSDK !== CPP_DK_POpen("echo %ANDROID_HOME%"))
+			CPP_DK_Execute("setx ANDROID_HOME "+ANDROIDSDK)
+		if(ANDROIDNDK !== CPP_DK_POpen("echo %NDK_ROOT%"))
 			CPP_DK_Execute("setx NDK_ROOT "+ANDROIDNDK)
 	}
 	
