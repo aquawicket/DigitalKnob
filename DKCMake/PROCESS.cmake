@@ -3,7 +3,7 @@ if(DK_PROCESS_INCLUDED)
 endif()
 set(DK_PROCESS_INCLUDED true)
 
-set(DELETE_CACHE true)
+set(DELETE_CACHE false)
 if(DELETE_CACHE)
 	get_filename_component(DIGITALKNOB ${CMAKE_SOURCE_DIR} ABSOLUTE)
 	message("Deleteing leftover CMakeCache.txt files")
@@ -129,7 +129,7 @@ DKSET(DKLIBRARIES "")
 
 
 foreach(plugin ${dkdepend_list})
-	##DKSET(QUEUE_BUILD OFF)
+	DKSET(QUEUE_BUILD OFF)
 	DKSET(LIBLIST "") ## used for double checking
 	DKSET(CMAKE_FILE "")
 	DKSET(ANDROID_LIBMK "")

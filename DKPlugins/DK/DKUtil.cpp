@@ -660,7 +660,7 @@ bool DKUtil::POpen(const DKString& command, const DKString& mode, DKString& resu
 	}
 	// Close pipe and return the return value of pPipe
 	if (feof(pPipe))
-		return _pclose(pPipe);
+		return !_pclose(pPipe);
 	DKERROR("DKUtil::POpen() Failed to read the pipe to the end.\n");
 	return false;
 }
