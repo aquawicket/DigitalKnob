@@ -1,0 +1,4 @@
+ndk;22.1.7171670
+platforms;android-26
+build-tools;30.0.3
+sources;android-30

@@ -291,9 +291,10 @@ function(DKREFRESH_ICONS)
 	##ie4uinit.exe -show   ##Windows 10
 endfunction()
 
-
-function(DKINSTALL url import_folder 3rdparty_folder)
-	if(EXISTS ${3RDPARTY}/${3rdparty_folder}/installed)
+# For archive files such as libraries and assets, the arguments are:  The download url, the name of its _DKIMPORTS folder, The name given to the installed 3rdParty/folder  
+# For executable files such as software amd IDE's the arguments are:  The download url, the name of the final name of the dl file, The installation path to check for installation.
+function(DKINSTALL url source_path destination_path)
+	if(EXISTS ${3RDPARTY}/${destination_path}/installed)
 		return()
 	endif()
 
@@ -306,7 +307,7 @@ function(DKINSTALL url import_folder 3rdparty_folder)
 	#get_filename_component(filename ${url} NAME)
 	
 	dk_getExtension(${url} extension)
-	set(filename "${3rdparty_folder}${extension}")
+	set(filename "${destination_path}${extension}")
 	DKDOWNLOAD(${url} ${filename})
 			
 	DKSET(FILETYPE "UNKNOWN")
@@ -356,22 +357,26 @@ function(DKINSTALL url import_folder 3rdparty_folder)
 		list(LENGTH items count)
 		if(${count} GREATER 2) ##NOTE: This should be "${count} GREATER 1" but msys has a readme file in it next to the inner msys folder and that messes things up for more than 1
 			#Zip extracted with no root folder, Rename UNZIPPED and move to 3rdParty
-			file(RENAME ${3RDPARTY}/UNZIPPED ${3RDPARTY}/${3rdparty_folder})
+			file(RENAME ${3RDPARTY}/UNZIPPED ${3RDPARTY}/${destination_path})
 		else()
-			if(EXISTS ${3RDPARTY}/UNZIPPED/${3rdparty_folder}) ##Zip extracted to expected folder. Move the folder to 3rdParty
-				file(RENAME ${3RDPARTY}/UNZIPPED/${3rdparty_folder} ${3RDPARTY}/${3rdparty_folder})
+			if(EXISTS ${3RDPARTY}/UNZIPPED/${destination_path}) ##Zip extracted to expected folder. Move the folder to 3rdParty
+				file(RENAME ${3RDPARTY}/UNZIPPED/${destination_path} ${3RDPARTY}/${destination_path})
 				DKREMOVE(${3RDPARTY}/UNZIPPED)
 			else() #Zip extracted to a root folder, but not named what we expected. Rename and move folder to 3rdParty
-				file(RENAME ${3RDPARTY}/UNZIPPED/${items} ${3RDPARTY}/${3rdparty_folder})
+				file(RENAME ${3RDPARTY}/UNZIPPED/${items} ${3RDPARTY}/${destination_path})
 				DKREMOVE(${3RDPARTY}/UNZIPPED)
 			endif() 
 		endif()
+	elseif(${FILETYPE} STREQUAL "Executable")
+		DKSETPATH(${DIGITALKNOB}/Download)
+		DKSET(QUEUE_BUILD ON)
+		DKEXECUTE(${DIGITALKNOB}/Download/source_path)
 	else() #NOT ARCHIVE, just copy the file into it's 3rdParty folder
-		DKCOPY(${DIGITALKNOB}/Download/${filename} ${3RDPARTY}/${3rdparty_folder}/${filename} TRUE)
+		DKCOPY(${DIGITALKNOB}/Download/${filename} ${3RDPARTY}/${destination_path}/${filename} TRUE)
 	endif()
 
-	DKCOPY(${DKIMPORTS}/${import_folder}/ ${3RDPARTY}/${3rdparty_folder}/ TRUE)
-	file(WRITE ${3RDPARTY}/${3rdparty_folder}/installed "${3rdparty_folder}")
+	DKCOPY(${DKIMPORTS}/${source_path}/ ${3RDPARTY}/${destination_path}/ TRUE)
+	file(WRITE ${3RDPARTY}/${destination_path}/installed "${destination_path}")
 endfunction()
 
 

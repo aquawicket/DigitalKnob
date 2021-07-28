@@ -67,7 +67,6 @@ function DKBuild_init(){
 
 	if(CPP_DK_GetOS() === "Windows"){
 		DKPATH = "C:/Users/"+USERNAME+"/digitalknob/"
-		//ANDROIDNDK_VERSION = DKBuild_GetDKMakeVariable(DKPATH+"DK/3rdParty/_DKIMPORTS/android-sdk/DKMAKE.cmake", "ANDROIDNDK_VERSION")
 		if(CPP_DK_GetOSArchitecture() === "32"){
 			CMAKE = "C:/Program Files/CMake/bin/cmake.exe"
 			VISUALSTUDIO = "C:/Program Files/Microsoft Visual Studio/"+VISUALSTUDIO_VERSION
@@ -79,32 +78,23 @@ function DKBuild_init(){
 		CMAKE = CPP_DKFile_GetShortName(CMAKE)
 		MSBUILD = VISUALSTUDIO+"/Community/MSBuild/Current/Bin/MSBuild.exe"
 		MSBUILD = CPP_DKFile_GetShortName(MSBUILD)
-		//ANDROIDNDK = DKPATH+"DK/3rdParty/android-ndk-"+ANDROIDNDK_VERSION+"-windows-x86_64"
-		//ANDROIDNDK = CPP_DKFile_GetShortName(ANDROIDNDK)
 	}
 	if(CPP_DK_GetOS() === "Mac"){
 		DKPATH = "/Users/"+USERNAME+"/digitalknob/"
 		CMAKE = "/Applications/CMake.app/Contents/bin/cmake"
 		XCODE = "/Applications/Xcode.app"
-		//ANDROIDNDK = DKPATH+"DK/3rdParty/android-ndk-"+ANDROIDNDK_VERSION+"-darwin-x86_64"
 	}
 	if(CPP_DK_GetOS() === "Linux"){
 		DKPATH = "/home/"+USERNAME+"/digitalknob/"
 		CMAKE = "/usr/bin/cmake"
 		GCC = "/usr/bin/g++"
-		//ANDROIDNDK = DKPATH+"DK/3rdParty/android-ndk-"+ANDROIDNDK_VERSION+"-linux-x86_64"
 	}
 	if(CPP_DK_GetOS() === "Raspberry"){
 		DKPATH = "/home/"+USERNAME+"/digitalknob/"
 		CMAKE = "/usr/bin/cmake"
 		GCC = "/usr/bin/g++"
-		//ANDROIDNDK = DKPATH+"DK/3rdParty/android-ndk-"+ANDROIDNDK_VERSION+"-linux-x86_64"
 	}
 	
-	//ANDROIDNDK_VERSION = DKBuild_GetDKMakeVariable(DKPATH+"DK/3rdParty/_DKIMPORTS/android-sdk/DKMAKE.cmake", "ANDROIDNDK_VERSION")
-	//ANDROIDNDK_BUILD = DKBuild_GetDKMakeVariable(DKPATH+"DK/3rdParty/_DKIMPORTS/android-sdk/DKMAKE.cmake", "ANDROIDNDK_BUILD")
-	ANDROIDNDK = DKPATH+"DK/3rdParty/android-sdk/ndk/"+ANDROIDNDK_BUILD
-	//ANDROIDNDK = CPP_DKFile_GetShortName(ANDROIDNDK)
 	DKDOWNLOAD = DKPATH+"DK/Download"
 }
 
@@ -203,28 +193,38 @@ function DKBuild_ValidateNDK(){
 
 function DKBuild_InstallNDK(){
 	console.log("Installing Android NDK")
-	console.log("*** TODO ***")
-	//TODO - install android-sdk w/ndk
-	//Perferably it would be easire to just run cmake on it. like so...
-	//CPP_DKFile_ChDir(ANDROIDNDK)
-	//const command = CMAKE+" -G \"Visual Studio 16 2019\" -A ARM "+DKPATH+"DK"
-						//  OR
-	//const command = CMAKE+" -P "+ANDROIDNDK+"/DKMAKE.cmake"
+    
+	//Eventually we'll use the same cmake script to build Tools and indivual libraries
+	//CPP_DKFile_ChDir(DKPATH+"DK/3rdParty/_DKIMPORTS/android-sdk")
+	//CPP_DKFile_Delete(DKPATH+"DK/3rdParty/_DKIMPORTS/android-sdk/CMakeCahche.txt")
+	//CPP_DKFile_Delete(DKPATH+"DK/3rdParty/_DKIMPORTS/android-sdk/CMakeFiles")
+	//CPP_DK_Execute(CMAKE+" -P "+DKPATH+"DK/3rdParty/_DKIMPORTS/android-sdk/DKMAKE.cmake")
 	
-	//console.log("COMMAND -->  "+command)
-	//let rtvalue = CPP_DK_Execute(command)
-		
+	ANDROIDSDK_DKMAKE = DKPATH+"DK/3rdParty/_DKIMPORTS/android-sdk/DKMAKE.cmake"
+	ANDROIDTOOLS_DL = DKBuild_GetDKMakeVariable(ANDROIDSDK_DKMAKE, "ANDROIDTOOLS_DL")
+	ANDROIDTOOLS_FILE = DKBuild_GetDKMakeVariable(ANDROIDSDK_DKMAKE, "ANDROIDTOOLS_FILE")
+	ANDROIDTOOLS_FILE = DKBuild_GetDKMakeVariable(ANDROIDSDK_DKMAKE, "ANDROIDTOOLS_FILE")
+	ANDROIDNDK_VERSION = DKBuild_GetDKMakeVariable(ANDROIDSDK_DKMAKE, "ANDROIDNDK_VERSION")
+	ANDROIDNDK_BUILD = DKBuild_GetDKMakeVariable(ANDROIDSDK_DKMAKE, "ANDROIDNDK_BUILD")
+	ANDROIDSDK = DKPATH+"DK/3rdParty/android-sdk"
+	ANDROIDNDK = ANDROIDSDK+"/ndk/"+ANDROIDNDK_BUILD
+	//ANDROIDNDK = CPP_DKFile_GetShortName(ANDROIDNDK)
 	
-	/*	
+	console.log("ANDROIDNDK_VERSION = "+ANDROIDNDK_VERSION)
+	console.log("ANDROIDNDK_BUILD = "+ANDROIDNDK_BUILD)
+	console.log("ANDROIDSDK = "+ANDROIDSDK)
+	console.log("ANDROIDNDK = "+ANDROIDNDK)
+			
 	if(CPP_DK_GetOS() === "Windows"){
 		console.log("Downloading NDK to "+DKDOWNLOAD)
-		if(!CPP_DKFile_Exists(DKDOWNLOAD+"/android-ndk-"+ANDROIDNDK_VERSION+"-windows-x86_64.zip")){
-			CPP_DKCurl_Download("https://dl.google.com/android/repository/android-ndk-"+ANDROIDNDK_VERSION+"-windows-x86_64.zip", DKDOWNLOAD)
-		}
-		CPP_DKArchive_Extract(DKDOWNLOAD+"/android-ndk-"+ANDROIDNDK_VERSION+"-windows-x86_64.zip", DKPATH+"DK/3rdParty")
-		CPP_DKFile_Rename(DKPATH+"DK/3rdParty/android-ndk-"+ANDROIDNDK_VERSION, DKPATH+"DK/3rdParty/android-ndk-"+ANDROIDNDK_VERSION+"-windows-x86_64", true)
-		CPP_DKFile_StringToFile("android-ndk-"+ANDROIDNDK_VERSION+"-windows-x86_64", DKPATH+"DK/3rdParty/android-ndk-"+ANDROIDNDK_VERSION+"-windows-x86_64/installed");
+		if(!CPP_DKFile_Exists(DKDOWNLOAD+"/"+ANDROIDTOOLS_FILE))
+			CPP_DKCurl_Download(ANDROIDTOOLS_DL, DKDOWNLOAD)
+		CPP_DKArchive_Extract(DKDOWNLOAD+"/"+ANDROIDTOOLS_FILE, DKPATH+"DK/3rdParty")
+		CPP_DKFile_Rename(DKPATH+"DK/3rdParty/cmdline-tools", ANDROIDSDK, true)
+		CPP_DK_Execute(ANDROIDSDK+"/bin/sdkmanager --install ndk;"+ANDROIDNDK_BUILD+" platforms;"+ANDROIDPLATFORM_VERSION+" "+build-tools+" "+ANDROIDBUILDTOOLS_VERSION+" --sdk_root="+ANDROIDSDK)
+		CPP_DKFile_StringToFile("android-sdk", ANDROIDSDK+"/installed")
 	}
+	/*
 	if(CPP_DK_GetOS() === "Mac"){
 		CPP_DKCurl_Download("https://dl.google.com/android/repository/android-ndk-"+ANDROIDNDK_VERSION+"-darwin-x86_64.zip", DKDOWNLOAD)
 		CPP_DKArchive_Extract(DKDOWNLOAD+"/android-ndk-"+ANDROIDNDK_VERSION+"-darwin-x86_64.zip", DKPATH+"DK/3rdParty")

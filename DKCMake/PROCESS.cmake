@@ -16,6 +16,7 @@ endif()
 
 
 include(DKCMake/FUNCTIONS.cmake)
+DKSET(QUEUE_BUILD ON) #Phasing this out
 include(DKCMake/OPTIONS.cmake)
 include(DKCMake/DISABLED.cmake)
 get_filename_component(APP_NAME ${DKPROJECT} NAME)
