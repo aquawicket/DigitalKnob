@@ -13,6 +13,9 @@ endif(COMMAND cmake_policy)
 ## Set variables for paths
 ###############################################################
 get_filename_component(DIGITALKNOB ${CMAKE_SOURCE_DIR} ABSOLUTE)
+if(NOT $ENV{DIGITALKNOB})# MATCHES ${DIGITALKNOB})
+	set(ENV{DIGITALKNOB} ${DIGITALKNOB})
+endif()
 
 #message("Deleteing leftover CMakeCache.txt files....")
 #if(CMAKE_HOST_WIN32)

@@ -39,7 +39,7 @@ if(CMAKE_HOST_WIN32)
 	## https://dl.google.com/android/repository/android-ndk-r21e-windows-x86_64.zip
 	DKINSTALL(https://dl.google.com/android/repository/${ANDROIDNDK_FILE} android-ndk android-sdk/ndk/${ANDROIDNDK_BUILD})
 	DKSET(NDK ${3RDPARTY}/${ANDROIDNDK_NAME})
-	if(NOT $ENV{NDK_ROOT} MATCHES ${ANDROIDNDK})
+	if(NOT $ENV{NDK_ROOT})# MATCHES ${ANDROIDNDK})
 		set(ENV{NDK_ROOT} ${ANDROIDNDK})
 	endif()
 endif()

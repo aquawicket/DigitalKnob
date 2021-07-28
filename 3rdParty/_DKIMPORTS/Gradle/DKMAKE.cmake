@@ -1,3 +1,7 @@
+if(NOT ANDROID)
+	return()
+endif()
+
 ### VERSION ###
 DKSET(GRADLE_VERSION 7.1.1-all)
 DKSET(GRADLE_NAME gradle-${GRADLE_VERSION})

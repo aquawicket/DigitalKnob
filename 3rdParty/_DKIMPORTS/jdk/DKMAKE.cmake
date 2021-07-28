@@ -11,7 +11,7 @@ DKSET(JDK ${3RDPARTY}/${JDK_NAME})
 
 DKINCLUDE(${JDK}/)
 ### INSTALL ###
-if(NOT $ENV{JAVA_HOME} MATCHES ${JDK})
+if(NOT $ENV{JAVA_HOME})# MATCHES ${JDK})
 	set(ENV{JAVA_HOME} ${JDK})
 endif()
 #https://download.java.net/java/GA/jdk9/9.0.4/binaries/openjdk-9.0.4_windows-x64_bin.tar.gz

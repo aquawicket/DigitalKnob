@@ -56,6 +56,7 @@ public:
 	static bool PhysicalMemory(unsigned long long& physicalMemory);
 	static bool PhysicalMemoryUsed(unsigned long long& physicalMemory);
 	static bool PhysicalMemoryUsedByApp(unsigned int& physicalMemory);
+	static bool POpen(const DKString& command, const DKString& mode, DKString& result);
 	static bool PressKey(const int& key);
 	static bool ReleaseKey(const int& key);
 	static bool RightClick();
