@@ -7,7 +7,7 @@
 
 ### DEPENDS ###
 if(ANDROID)
-	DKDEPEND(android-sdk) #version 21e or newer required
+	DKDEPEND(android-ndk) #version 21e or newer required
 	DKDEPEND(mingw32)
 endif()
 
