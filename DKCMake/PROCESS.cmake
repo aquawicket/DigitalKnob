@@ -16,7 +16,7 @@ if(DELETE_CACHE)
         # /S is recursive subfolders (didn't include here, because op didn't ask)
 	else()
 		execute_process(COMMAND find . -name "CMakeCache.*" -delete WORKING_DIRECTORY ${DIGITALKNOB})
-		execute_process(COMMAND find . -name "CMakeFiles" -delete WORKING_DIRECTORY ${DIGITALKNOB})
+		execute_process(COMMAND find . -type d -name "CMakeFiles" -delete; WORKING_DIRECTORY ${DIGITALKNOB})
 	endif()
 endif()
 
