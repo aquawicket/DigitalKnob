@@ -128,11 +128,11 @@ bool DKUtil::C2Bin(const DKString hex, std::streamsize size, const char* fileOut
     	output_file.close();
 	}
 	else
-    	return DKERROR("DKUtil::C2Bin() Error: could not create file");
+    	return DKERROR("DKUtil::C2Bin() Error: could not create file\n");
 	return true;
 
 #endif //!MAC
-	return DKERROR("DKUtil::C2Bin() is not implemented on Mac OSX yet");
+	return DKERROR("DKUtil::C2Bin() is not implemented on Mac OSX yet\n");
 }
 
 bool DKUtil::CallExit(){
@@ -196,7 +196,7 @@ bool DKUtil::DrawTextOnScreen(const DKString& text){
 
 bool DKUtil::Execute(const DKString& command, const DKString& mode, DKString& result){
 	DKDEBUGFUNC(command, mode);
-	DKINFO("DKUtil::Execute("+command+","+mode+")");
+	DKINFO("DKUtil::Execute("+command+","+mode+")\n");
 #ifdef WIN32
 	auto& dk_popen = _popen;
 	auto& dk_pclose = _pclose;
@@ -206,7 +206,7 @@ bool DKUtil::Execute(const DKString& command, const DKString& mode, DKString& re
 #endif
 	FILE* pipe = dk_popen(command.c_str(), mode.c_str());
 	if(pipe == NULL)
-		return DKERROR("DKUtil::Execute(): pipe invalid.");
+		return DKERROR("DKUtil::Execute(): pipe invalid\n");
 	char buffer[128];
 	while(fgets(buffer, 128, pipe)){
 		DKINFO(buffer);
