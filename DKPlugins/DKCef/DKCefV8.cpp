@@ -213,14 +213,20 @@ bool DKCefV8::DrawTextOnScreen(CefArgs args, CefReturn retval)
 	return true;
 }
 
-/////////////////////////////////////////////////////
-bool DKCefV8::Execute(CefArgs args, CefReturn retval)
-{
+bool DKCefV8::Execute(CefArgs args, CefReturn retval){
 	DKDEBUGFUNC(args, retval);
 	DKString command = args->GetString(0);
+	DKString mode = "r"; //default
+	if (args->GetType(1))
+		mode = args->GetString(1);
 	DKString result;
-	if(!DKUtil::Execute(command, result)){ return false; }
-	if(!retval->SetString(0, result)){ return false; }
+	if (!DKUtil::Execute(command, mode, result))
+		return DKERROR("DKUtil::Execute() failed");
+	if (result.empty())
+		!retval->SetNull(0);
+	else
+		if(!retval->SetString(0, result))
+			return false;
 	return true;
 }
 
