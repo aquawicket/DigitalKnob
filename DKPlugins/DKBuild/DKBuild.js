@@ -50,7 +50,7 @@ let DKDOWNLOAD = ""
 let CMAKE = ""
 //let ANDROIDNDK_VERSION = "r22b"
 //let ANDROIDNDK_BUILD = "22.1.7171670"
-//let ANDROIDNDK = ""
+let ANDROIDNDK = ""
 let VISUALSTUDIO_VERSION = "2019"
 let VISUALSTUDIO = ""
 let MSBUILD = ""
@@ -183,70 +183,32 @@ function DKBuild_InstallXcode(){
 	//TODO - Install Xcode
 }
 
-const ANDROIDNDK = ""
 function DKBuild_ValidateNDK(){
     //GOAL: Eventually we'll use the same packages DKMAKE.cmake script to build it
-	const ANDROIDSDK_DKMAKE = DKPATH+"DK/3rdParty/_DKIMPORTS/android-sdk/DKMAKE.cmake"
-	const ANDROIDTOOLS_DL = DKBuild_GetDKMakeVariable(ANDROIDSDK_DKMAKE, "ANDROIDTOOLS_DL")
-	const ANDROIDTOOLS_FILE = DKBuild_GetDKMakeVariable(ANDROIDSDK_DKMAKE, "ANDROIDTOOLS_FILE")
-	const ANDROIDTOOLS_FILE = DKBuild_GetDKMakeVariable(ANDROIDSDK_DKMAKE, "ANDROIDTOOLS_FILE")
-	const ANDROIDPLATFORM_VERSION = DKBuild_GetDKMakeVariable(ANDROIDSDK_DKMAKE, "ANDROIDPLATFORM_VERSION")
-	const ANDROIDBUILDTOOLS_VERSION = DKBuild_GetDKMakeVariable(ANDROIDSDK_DKMAKE, "ANDROIDBUILDTOOLS_VERSION")
+
 	const ANDROIDNDK_DL = DKBuild_GetDKMakeVariable(DKPATH+"DK/3rdParty/_DKIMPORTS/android-ndk/DKMAKE.cmake", "ANDROIDNDK_DL")
 	const ANDROIDNDK_FILE = DKBuild_GetDKMakeVariable(DKPATH+"DK/3rdParty/_DKIMPORTS/android-ndk/DKMAKE.cmake", "ANDROIDNDK_FILE")
-	const ANDROIDNDK_VERSION = DKBuild_GetDKMakeVariable(ANDROIDSDK_DKMAKE, "ANDROIDNDK_VERSION")
-	const ANDROIDNDK_BUILD = DKBuild_GetDKMakeVariable(ANDROIDSDK_DKMAKE, "ANDROIDNDK_BUILD")
+	const ANDROIDNDK_VERSION = DKBuild_GetDKMakeVariable(DKPATH+"DK/3rdParty/_DKIMPORTS/android-ndk/DKMAKE.cmake", "ANDROIDNDK_VERSION")
+	const ANDROIDNDK_BUILD = DKBuild_GetDKMakeVariable(DKPATH+"DK/3rdParty/_DKIMPORTS/android-ndk/DKMAKE.cmake", "ANDROIDNDK_BUILD")
 	const ANDROIDSDK = DKPATH+"DK/3rdParty/android-sdk"
 	ANDROIDNDK = ANDROIDSDK+"/ndk/"+ANDROIDNDK_BUILD
 	//ANDROIDNDK = CPP_DKFile_GetShortName(ANDROIDNDK)
 	
-	console.log("ANDROIDSDK = "+ANDROIDSDK)
-	console.log("ANDROIDNDK_VERSION = "+ANDROIDNDK_VERSION)
-	console.log("ANDROIDNDK_BUILD = "+ANDROIDNDK_BUILD)
-	console.log("ANDROIDNDK = "+ANDROIDNDK)
-	
+	/*
 	//set environment variables
-	if(CPP_DK_GetOS() === "Windows"){
-		console.log("checking environment variables")
-		if(ANDROIDSDK !== CPP_DK_Execute("echo %ANDROID_HOME%"))
-			CPP_DK_Execute("setx ANDROID_HOME "+ANDROIDSDK)
-		if(ANDROIDNDK !== CPP_DK_Execute("echo %NDK_ROOT%"))
-			CPP_DK_Execute("setx NDK_ROOT "+ANDROIDNDK)
-	}
+	if(ANDROIDNDK !== CPP_DK_Execute("echo %NDK_ROOT%"))
+		CPP_DK_Execute("setx NDK_ROOT "+ANDROIDNDK)
+	*/
 	
 	// Validate install
 	console.log("Looking for Android NDK")
 	if(!CPP_DKFile_Exists(ANDROIDNDK+"/installed")){
-		console.log("ANDROIDNDK: "+ANDROIDNDK+"    does not exist")
-		console.log("Installing Android NDK")
-		console.log("Downloading NDK to "+DKDOWNLOAD)
-	if(!CPP_DKFile_Exists(DKDOWNLOAD+"/"+ANDROIDTOOLS_FILE))
-		CPP_DKCurl_Download(ANDROIDTOOLS_DL, DKDOWNLOAD)
-		CPP_DKArchive_Extract(DKDOWNLOAD+"/"+ANDROIDTOOLS_FILE, DKPATH+"DK/3rdParty")
-		CPP_DKFile_MkDir(ANDROIDSDK+"/cmdline-tools")
-		CPP_DKFile_Rename(DKPATH+"DK/3rdParty/cmdline-tools", ANDROIDSDK+"/cmdline-tools/latest", false)
-		//CPP_DK_Execute(ANDROIDSDK+"/bin/sdkmanager ndk;"+ANDROIDNDK_BUILD+" platforms;"+ANDROIDPLATFORM_VERSION+" build-tools;"+ANDROIDBUILDTOOLS_VERSION+" --sdk_root="+ANDROIDSDK)
-		//CPP_DK_Execute(ANDROIDSDK+"/cmdline-tools/latest/bin/sdkmanager ndk;"+ANDROIDNDK_BUILD+" --sdk_root="+ANDROIDSDK)
+		console.log("Android NDK - NOT FOUND - Installing . . .")
 		CPP_DKCurl_Download(ANDROIDNDK_DL, DKDOWNLOAD)
 		CPP_DKArchive_Extract(DKDOWNLOAD+"/"+ANDROIDNDK_FILE, ANDROIDSDK+"/ndk")
-		CPP_DKFile_StringToFile("android-ndk", ANDROIDNDK+"/installed")
+		CPP_DKFile_Rename(ANDROIDSDK+"/ndk/android-ndk-"+ANDROIDNDK_VERSION, ANDROIDNDK, true)
+		CPP_DKFile_StringToFile(ANDROIDNDK_VERSION, ANDROIDNDK+"/installed")
 	}
-	if(CPP_DKFile_Exists(ANDROIDNDK))
-		console.log("Found NDK")
-
-	
-	/*
-	if(CPP_DK_GetOS() === "Mac"){
-		CPP_DKCurl_Download("https://dl.google.com/android/repository/android-ndk-"+ANDROIDNDK_VERSION+"-darwin-x86_64.zip", DKDOWNLOAD)
-		CPP_DKArchive_Extract(DKDOWNLOAD+"/android-ndk-"+ANDROIDNDK_VERSION+"-darwin-x86_64.zip", DKPATH+"DK/3rdParty")
-		CPP_DKFile_Rename(DKPATH+"DK/3rdParty/android-ndk-"+ANDROIDNDK_VERSION, DKPATH+"DK/3rdParty/android-ndk-"+ANDROIDNDK_VERSION+"-darwin-x86_64", true)
-	}
-	if(CPP_DK_GetOS() === "Linux"){
-		CPP_DKCurl_Download("https://dl.google.com/android/repository/android-ndk-"+ANDROIDNDK_VERSION+"-linux-x86_64.zip", DKDOWNLOAD)
-		CPP_DKArchive_Extract(DKDOWNLOAD+"/android-ndk-"+ANDROIDNDK_VERSION+"-linux-x86_64.zip", DKPATH+"DK/3rdParty")
-		CPP_DKFile_Rename(DKPATH+"DK/3rdParty/android-ndk-"+ANDROIDNDK_VERSION, DKPATH+"DK/3rdParty/android-ndk-"+ANDROIDNDK_VERSION+"-linux-x86_64", true)
-	}
-	*/
 }
 
 function DKBuild_OsCheck(){

@@ -1,5 +1,6 @@
-#https://jdk.java.net/archive/
+return()
 
+#https://jdk.java.net/archive/
 if(NOT ANDROID)
 	return()
 endif()
@@ -8,16 +9,15 @@ endif()
 DKSET(JDK_VERSION 9.0.4_windows-x64_bin)
 DKSET(JDK_NAME openjdk-${JDK_VERSION})
 DKSET(JDK ${3RDPARTY}/${JDK_NAME})
+DKSETENV("JAVA_HOME" ${JDK})
 
-DKINCLUDE(${JDK}/)
+
 ### INSTALL ###
-if(NOT $ENV{JAVA_HOME})# MATCHES ${JDK})
-	set(ENV{JAVA_HOME} ${JDK})
-endif()
 #https://download.java.net/java/GA/jdk9/9.0.4/binaries/openjdk-9.0.4_windows-x64_bin.tar.gz
 DKINSTALL(https://download.java.net/java/GA/jdk9/9.0.4/binaries/${JDK_NAME}.tar.gz jdk ${JDK_NAME})
 
-	
+### LINK ###
+DKINCLUDE(${JDK}/)	
 	
 
 #https://download.oracle.com/otn-pub/java/jdk/16.0.2+7/d4a915d82b4c4fbb9bde534da945d746/jdk-16.0.2_windows-x64_bin.zip?AuthParam=1627218782_911dc8e4e20f52cfe841b45b81c95b6e

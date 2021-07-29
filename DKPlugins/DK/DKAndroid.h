@@ -17,7 +17,6 @@
 #include <stdio.h>
 #include "DKString.h"
 
-///////////////
 struct JavaData
 {
 	JNIEnv *env;
@@ -26,7 +25,6 @@ struct JavaData
 	jstring data;
 };
 
-///////////////
 class DKAndroid
 {
 public:
@@ -38,7 +36,6 @@ public:
 	static unsigned int android_mouseY;
 };
 
-//////////
 extern "C" 
 {
 	JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM *vm, void *reserved);
@@ -49,6 +46,5 @@ extern "C"
 	jstring CallCppFunction(JNIEnv *env, jclass cls, jstring data);
 };
 
-
-#endif
-#endif
+#endif //DKAndroid_H
+#endif //ANDROID

@@ -1,5 +1,4 @@
-## REPLACED BY android-sdk 3rdParty library
-##return()
+return()
 
 if(NOT ANDROID)
 	return()
@@ -32,26 +31,22 @@ DKSET(ANDROIDNDK_DL https://dl.google.com/android/repository/android-ndk-r21e-wi
 DKSET(ANDROIDNDK_SHA1 fc44fea8bb3f5a6789821f40f41dce2d2cd5dc30)
 #DKSET(ANDROIDNDK_VERSION r22b)
 #DKSET(ANDROIDNDK_BUILD 22.1.7171670)
+DKSET(ANDROIDNDK ${ANDROIDSDK}/ndk/${ANDROIDNDK_BUILD})
+DKSETENV("NDK_ROOT" ${ANDROIDNDK})
 
 
 ### INSTALL ###
 if(CMAKE_HOST_WIN32)
 	## https://dl.google.com/android/repository/android-ndk-r21e-windows-x86_64.zip
 	DKINSTALL(https://dl.google.com/android/repository/${ANDROIDNDK_FILE} android-ndk android-sdk/ndk/${ANDROIDNDK_BUILD})
-	DKSET(NDK ${3RDPARTY}/${ANDROIDNDK_NAME})
-	if(NOT $ENV{NDK_ROOT})# MATCHES ${ANDROIDNDK})
-		set(ENV{NDK_ROOT} ${ANDROIDNDK})
-	endif()
 endif()
 
 if(CMAKE_HOST_APPLE)
 	## https://dl.google.com/android/repository/android-ndk-r21e-darwin-x86_64.dmg
 	DKINSTALL(https://dl.google.com/android/repository/android-ndk-${ANDROIDNDK_VERSION}-darwin-x86_64.zip android-ndk android-sdk/ndk/${ANDROIDNDK_BUILD})
-	DKSET(NDK ${3RDPARTY}/android-ndk-${ANDROIDNDK_VERSION}-darwin-x86_64)
 endif()
 
 if(CMAKE_HOST_LINUX)
 	## https://dl.google.com/android/repository/android-ndk-r21e-linux-x86_64.zip
 	DKINSTALL(https://dl.google.com/android/repository/android-ndk-${ANDROIDNDK_VERSION}-linux-x86_64.zip android-ndk android-sdk/ndk/${ANDROIDNDK_BUILD})
-	DKSET(NDK ${3RDPARTY}/android-ndk-${ANDROIDNDK_VERSION}-linux-x86_64)
 endif()

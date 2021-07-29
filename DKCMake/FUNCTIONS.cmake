@@ -77,6 +77,13 @@ function(DKUNSET variable)
 	#If PARENT_SCOPE is present then the variable is removed from the scope above the current scope. See the same option in the set() command for further details.
 endfunction()
 
+function(DKSETENV name value)
+	message("DKSETENV(${name} ${value})")
+	if(NOT "$ENV{${name}}" STREQUAL "${value}")
+		message("Setting %${name}% environment variable to ${value}")
+		DKEXECUTE_PROCESS(COMMAND cmd /c setx ${name} ${value})
+	endif()
+endfunction()
 
 function(DKDOWNLOAD url)
 	##https://cmake.org/pipermail/cmake/2012-September/052205.html/
@@ -387,11 +394,11 @@ endfunction()
 
 
 function(DKEXECUTE_PROCESS fullcmnd)
-	math(EXPR _index "${ARGC}-1")
-	list(GET ARGV ${_index} CDIR)
+	#math(EXPR _index "${ARGC}-1")
+	#list(GET ARGV ${_index} CDIR)
 	message("")
 	message("*** Commands ***")
-	message(">  cd ${CDIR}")
+	##message(">  cd ${CDIR}")
 	set(cmnd ${fullcmnd} ${ARGN})
 	#string(REPLACE "COMMAND" "" var2 "${cmnd}")
 	#string(REPLACE "command" "" var3 "${var2}")
