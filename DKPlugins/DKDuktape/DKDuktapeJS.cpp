@@ -465,16 +465,15 @@ int DKDuktapeJS::DumpError(duk_context* ctx){
 int DKDuktapeJS::Execute(duk_context* ctx){
 	DKString command = duk_require_string(ctx, 0);
 	DKString mode = "r"; //default
-	if (duk_to_string(ctx, 1))
+	if (duk_is_string(ctx, 1))
 		mode = duk_to_string(ctx, 1);
 	DKString result;
 	if(!DKUtil::Execute(command, mode, result))
-		return 0;
-	if (result.empty()) {
+		return DKERROR("DKUtil::Execute() failed");
+	if (result.empty())
 		duk_push_undefined(ctx);
-		return 1;
-	}
-	duk_push_string(ctx, result.c_str());
+	else
+		duk_push_string(ctx, result.c_str());
 	return 1;
 }
 
