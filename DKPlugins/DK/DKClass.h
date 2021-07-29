@@ -3,9 +3,9 @@
 #ifndef DKClass_H
 #define DKClass_H
 
-//#include <boost/function.hpp>
+//#include <boost/function.hpp>  //deprecated, using std::function now
+//#include <boost/bind/bind.hpp> //deprecated, using std::bind now
 #include <functional>
-//#include <boost/bind/bind.hpp>
 #include "DKObject.h"
 
 class DKObject;

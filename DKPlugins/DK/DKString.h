@@ -35,8 +35,16 @@ bool samei(const DKString& str, const DKString& str2); //case insensitive
 bool has(const DKString& str, const DKString& str2);
 
 //https://stackoverflow.com/questions/216823/whats-the-best-way-to-trim-stdstring
-bool trim(DKString& str);
+// trim from end of string (right)
+DKString& rtrim(DKString& s, const char* t = " \t\n\r\f\v");
 
+// trim from beginning of string (left)
+DKString& ltrim(DKString& s, const char* t = " \t\n\r\f\v");
+
+// trim from both ends of string (right then left)
+DKString& trim(DKString& s, const char* t = " \t\n\r\f\v");
+
+// https://www.cplusplus.com/reference/string/to_string/
 DKString toString(const int& num);
 DKString toString(const unsigned int& num);
 DKString toString(const long& num);
@@ -79,4 +87,5 @@ bool getSettingFromString(const DKString& filestring, const DKString& setting, D
 //DKStringArray getSettingsFromString(const DKString& filestring, const DKString& setting);
 bool toStringArray(DKStringArray& output, const DKString& str, const DKString& seperator);
 DKString toLower(const DKString& input);
+
 #endif //DKString_H

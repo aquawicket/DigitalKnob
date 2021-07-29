@@ -3,9 +3,7 @@
 #define DKUtil_H
 
 #include "DKString.h"
-#ifdef WIN32
-	#include <shellapi.h> //DKFile::Execute()
-#else
+#ifndef WIN32
 	#include <limits.h>
 	#include <stdlib.h>
 #endif
@@ -14,6 +12,7 @@
 
 class DKUtil{
 public:
+	//PC speaker beep
 	static bool Beep();
 	static bool Bin2C(const DKString& input, const DKString& output);
 	static bool C2Bin(const DKString hex, std::streamsize size, const char* fileOut);
@@ -22,6 +21,8 @@ public:
 	static bool CpuUsedByApp(int& cpu);
 	static bool DoubleClick();
 	static bool DrawTextOnScreen(const DKString& text);
+	
+	//Basically popen. Takes same parameters along with a return reuslt value for pipes. 
 	static bool Execute(const DKString& command, const DKString& mode, DKString& result);
 	static bool FindImageOnScreen(const DKString& file, int& x, int& y);
 	static bool GetClipboard(DKString& text);

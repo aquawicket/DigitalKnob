@@ -16,6 +16,8 @@ public:
 	static bool ChDir(const DKString& dir);
 	static bool Copy(const DKString& src, const DKString& dst, const bool overwrite, const bool recursive);
 	static bool CopyDirectory(boost::filesystem::path const& source, boost::filesystem::path const& destination, const bool overwrite, const bool recursive);
+	//static bool CopyDirectory(std::filesystem::path const& source, boost::filesystem::path const& destination, const bool overwrite, const bool recursive);
+	
 	static bool CopyFolder(const DKString& src, const DKString& dst, const bool overwrite, const bool recursive);
 	static bool CreateFile(const DKString& path);
 	static bool Delete(const DKString& path);

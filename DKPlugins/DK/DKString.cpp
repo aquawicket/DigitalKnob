@@ -319,19 +319,29 @@ DKStringArray getSettingsFromString(const DKString& filestring, const DKString& 
 }
 */
 
-bool trim(DKString& str){
-	str.erase(str.begin(), std::find_if(str.begin(), str.end(), std::not1(std::ptr_fun<int, int>(std::isspace))));
-	str.erase(std::find_if(str.rbegin(), str.rend(), std::not1(std::ptr_fun<int, int>(std::isspace))).base(), str.end());
-	//str.erase(str.find_last_not_of(" \n\r\t")+1);
-	return true;
+DKString& rtrim(DKString& s, const char* t) {
+	s.erase(s.find_last_not_of(t) + 1);
+	return s;
 }
+
+DKString& ltrim(DKString& s, const char* t) {
+	s.erase(0, s.find_first_not_of(t));
+	return s;
+}
+
+DKString& trim(DKString& s, const char* t) {
+	return ltrim(rtrim(s, t), t);
+}
+
 
 bool toStringArray(DKStringArray& output, const DKString& str, const DKString& seperator){
 	//FIXME - while(1) loops are dangerous 
 	DKString text = str + seperator; //add a seperator at the end, or we won't get the last variable
 
 	int begin = 0;
+	//int end;
 	while(1){
+	//while(end != std::string::npos){
 		int end = text.find(seperator, begin);
 		if(end==std::string::npos){return true;}
 		DKString temp = text.substr(begin, end-begin);
@@ -343,9 +353,8 @@ bool toStringArray(DKStringArray& output, const DKString& str, const DKString& s
 		begin=end+1;
 	}
 
-	if(output[output.size()-1].empty()){ //if last one empty
+	if(output[output.size()-1].empty()) //if last one empty
 		output.erase(output.begin()+output.size()-1);
-	}
 }
 
 DKString toLower(const DKString& input){

@@ -6,6 +6,7 @@
 
 #ifdef WIN32
 	#include "DKWindows.h"
+	#include <shellapi.h> //DKFile::Execute()
 #else
 	#include "DKUnix.h"
 #endif
@@ -196,7 +197,6 @@ bool DKUtil::DrawTextOnScreen(const DKString& text){
 
 bool DKUtil::Execute(const DKString& command, const DKString& mode, DKString& result){
 	DKDEBUGFUNC(command, mode);
-	DKINFO("DKUtil::Execute("+command+","+mode+")\n");
 #ifdef WIN32
 	auto& dk_popen = _popen;
 	auto& dk_pclose = _pclose;
@@ -216,8 +216,7 @@ bool DKUtil::Execute(const DKString& command, const DKString& mode, DKString& re
 		DKERROR("DKUtil::Execute(): feof(pipe) failed\n");
 	if(dk_pclose(pipe) == -1)
 		return DKERROR("DKUtil::Execute(): dk_pclose(pipe) failed\n");
-	if (!trim(result))
-		return DKERROR("DKUtil::Execute(): trim(result) failed\n");
+	trim(result);
 	return true;
 }
 

@@ -91,7 +91,7 @@ message("\n\n")
 ############################   ADD EXECUTABLE  #############################################
 ############################################################################################
 ### Set the project name to the App folder name
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 17)
 
 PROJECT(${APP_NAME})
 

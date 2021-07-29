@@ -3,6 +3,7 @@
 #include "DKWindows.h"
 #include "DKFile.h"
 #include "DKLog.h"
+#include <shellapi.h> //DKFile::Execute()
 #include "conio.h"
 #include <mmdeviceapi.h>
 #include <endpointvolume.h>
