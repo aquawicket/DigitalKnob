@@ -3,15 +3,13 @@ if(DK_PROCESS_INCLUDED)
 endif()
 set(DK_PROCESS_INCLUDED true)
 
-set(DELETE_CACHE false)
+set(DELETE_CACHE true)
 if(DELETE_CACHE)
 	get_filename_component(DIGITALKNOB ${CMAKE_SOURCE_DIR} ABSOLUTE)
 	message("Deleteing leftover CMakeCache.txt files")
 	if(CMAKE_HOST_WIN32)
 		execute_process(COMMAND cmd /c del /f /S CMakeCache.* WORKING_DIRECTORY ${DIGITALKNOB})
-		#execute_process(COMMAND cmd /c del /f /S CMakeFiles WORKING_DIRECTORY ${DIGITALKNOB})
 	    execute_process(COMMAND forfiles /P ${DIGITALKNOB} /M CMakeFile* /C "cmd /c if @isdir==TRUE rmdir /s /q @file" WORKING_DIRECTORY ${DIGITALKNOB})
-
         # /P is pathname - where the searching starts
         # /M is search mask, looking for files that start with A
         # /C is the command to execute
