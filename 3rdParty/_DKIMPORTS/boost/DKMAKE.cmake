@@ -193,9 +193,7 @@ export PATH=/${MSYS}/bin:$PATH\;
 
 
 ANDROID32_DEBUG_COMMAND(
-	set ANDROIDNDKROOT=${ANDROIDNDK} &&
-	set NDKVER=${ANDROIDNDK_VERSION} &&
-	set CLANGPATH=${ANDROIDNDK}/toolchains/llvm/prebuilt/windows-x86_64/bin &&
+	setx NDK_ROOT ${ANDROIDNDK} &&
 	b2
 	toolset=clang-armeabiv7a
 	architecture=arm
@@ -214,9 +212,7 @@ ANDROID32_DEBUG_COMMAND(
 	binary-format=elf )
 
 ANDROID32_RELEASE_COMMAND(
-	set ANDROIDNDKROOT=${ANDROIDNDK} &&
-	set NDKVER=${ANDROIDNDK_VERSION} &&
-	set CLANGPATH=${ANDROIDNDK}/toolchains/llvm/prebuilt/windows-x86_64/bin &&
+	setx NDK_ROOT ${ANDROIDNDK} &&
 	b2
 	toolset=clang-armeabiv7a
 	architecture=arm
@@ -235,10 +231,7 @@ ANDROID32_RELEASE_COMMAND(
 	binary-format=elf )
 
 ANDROID64_DEBUG_COMMAND(
-	set ANDROIDNDKROOT=${ANDROIDNDK} &&
-	set NDKVER=${ANDROIDNDK_VERSION} &&
-	set CLANGPATH=${ANDROIDNDK}/toolchains/llvm/prebuilt/windows-x86_64/bin &&
-	echo "\n\nStarting B2 for Android arm64v8a . . .\n " &&
+	setx NDK_ROOT ${ANDROIDNDK} &&
 	b2
 	toolset=clang-arm64v8a
 	architecture=arm
@@ -258,9 +251,7 @@ ANDROID64_DEBUG_COMMAND(
 	binary-format=elf )
 	
 ANDROID64_RELEASE_COMMAND(
-	set ANDROIDNDKROOT=${ANDROIDNDK} &&
-	set NDKVER=${ANDROIDNDK_VERSION} &&
-	set CLANGPATH=${ANDROIDNDK}/toolchains/llvm/prebuilt/windows-x86_64/bin &&
+	setx NDK_ROOT ${ANDROIDNDK} &&
 	b2
 	toolset=clang-arm64v8a
 	architecture=arm
