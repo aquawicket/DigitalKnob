@@ -6,21 +6,18 @@
 # Then make sure the NDK_ROOT environment variable is set
 # setx NDK_ROOT %ANDROID_HOME%/ndk/21.4.7075529
 
-# For armeabiv7-a run: ./b2 -q --without-math --without-context --without-coroutine --without-fiber --without-python architecture=arm --ignore-site-config -j4 target-os=android  toolset=clang-armeabiv7a link=static threading=multi --layout=versioned --build-dir=../build/arm/%ANDROIDNDK_VERSION% --stagedir=../stage_arm_%ANDROIDNDK_VERSION% stage
+# For armeabiv7-a run: ./b2 -q --without-math --without-context --without-coroutine --without-fiber --without-python architecture=arm --ignore-site-config -j4 target-os=android  toolset=clang-armeabiv7a link=static threading=multi --layout=versioned --build-dir=../build/arm --stagedir=../stage_arm stage
 
-# For x86 run: ./b2 -q --without-math --without-context --without-coroutine --without-fiber --without-python architecture=arm --ignore-site-config -j4 target-os=android  toolset=clang-armeabiv7a link=static threading=multi --layout=versioned --build-dir=../build/arm/%ANDROIDNDK_VERSION% --stagedir=../stage_arm_%ANDROIDNDK_VERSION% stage
+# For x86 run: ./b2 -q --without-math --without-context --without-coroutine --without-fiber --without-python architecture=arm --ignore-site-config -j4 target-os=android  toolset=clang-armeabiv7a link=static threading=multi --layout=versioned --build-dir=../build/arm --stagedir=../stage_arm stage
 
-
-
-#local ANDROIDNDK = C:/Users/aquawicket/digitalknob/DK/3rdParty/android-sdk/ndk/21.4.7075529 ;
 
 import os ;
-local ANDROIDNDK = [ os.environ NDK_ROOT ] ;
-
+local NDK_ROOT = [ os.environ NDK_ROOT ] ;
+#local NDK_ROOT = C:/Users/aquawicket/digitalknob/DK/3rdParty/android-sdk/ndk/21.4.7075529 ;
 
 using clang : armeabiv7a
 :
-$(ANDROIDNDK)/toolchains/llvm/prebuilt/windows-x86_64/bin/clang++
+$(NDK_ROOT)/toolchains/llvm/prebuilt/windows-x86_64/bin/clang++
 :
 <compileflags>-fexceptions
 <compileflags>-frtti
@@ -31,9 +28,9 @@ $(ANDROIDNDK)/toolchains/llvm/prebuilt/windows-x86_64/bin/clang++
 <compileflags>-Wno-invalid-command-line-argument
 <compileflags>-Wno-unused-command-line-argument
 <compileflags>-no-canonical-prefixes
-<compileflags>-I$(ANDROIDNDK)/sources/cxx-stl/llvm-libc++/include
-<compileflags>-I$(ANDROIDNDK)/sources/cxx-stl/llvm-libc++abi/include
-<compileflags>-I$(ANDROIDNDK)/sources/android/support/include
+<compileflags>-I$(NDK_ROOT)/sources/cxx-stl/llvm-libc++/include
+<compileflags>-I$(NDK_ROOT)/sources/cxx-stl/llvm-libc++abi/include
+<compileflags>-I$(NDK_ROOT)/sources/android/support/include
 <compileflags>-DANDROID
 <compileflags>-Wa,--noexecstack
 <compileflags>-Wformat
@@ -42,7 +39,7 @@ $(ANDROIDNDK)/toolchains/llvm/prebuilt/windows-x86_64/bin/clang++
 <compileflags>-D_REENTRANT
 <compileflags>-O2
 <compileflags>-gcc-toolchain
-<compileflags>$(ANDROIDNDK)/toolchains/arm-linux-androideabi-4.9/prebuilt/windows-x86_64
+<compileflags>$(NDK_ROOT)/toolchains/arm-linux-androideabi-4.9/prebuilt/windows-x86_64
 <compileflags>-target
 <compileflags>armv7-linux-androideabi
 <compileflags>-march=armv7-a
@@ -53,12 +50,12 @@ $(ANDROIDNDK)/toolchains/llvm/prebuilt/windows-x86_64/bin/clang++
 <compileflags>-DHAVE_CONFIG_H
 <compileflags>-fno-integrated-as
 <compileflags>--sysroot
-<compileflags>$(ANDROIDNDK)/sysroot
+<compileflags>$(NDK_ROOT)/sysroot
 <compileflags>-isystem
-<compileflags>$(ANDROIDNDK)/sysroot/usr/include/arm-linux-androideabi
+<compileflags>$(NDK_ROOT)/sysroot/usr/include/arm-linux-androideabi
 <compileflags>-D__ANDROID_API__=26
-<archiver>$(ANDROIDNDK)/toolchains/arm-linux-androideabi-4.9/prebuilt/windows-x86_64/arm-linux-androideabi/bin/ar
-<ranlib>$(ANDROIDNDK)/toolchains/arm-linux-androideabi-4.9/prebuilt/windows-x86_64/arm-linux-androideabi/bin/ranlib
+<archiver>$(NDK_ROOT)/toolchains/arm-linux-androideabi-4.9/prebuilt/windows-x86_64/arm-linux-androideabi/bin/ar
+<ranlib>$(NDK_ROOT)/toolchains/arm-linux-androideabi-4.9/prebuilt/windows-x86_64/arm-linux-androideabi/bin/ranlib
 
 ;
 
@@ -66,7 +63,7 @@ $(ANDROIDNDK)/toolchains/llvm/prebuilt/windows-x86_64/bin/clang++
 
 using clang : x86
 :
-$(ANDROIDNDK)/toolchains/llvm/prebuilt/windows-x86_64/bin/clang++
+$(NDK_ROOT)/toolchains/llvm/prebuilt/windows-x86_64/bin/clang++
 :
 <compileflags>-fexceptions
 <compileflags>-frtti
@@ -77,9 +74,9 @@ $(ANDROIDNDK)/toolchains/llvm/prebuilt/windows-x86_64/bin/clang++
 <compileflags>-Wno-invalid-command-line-argument
 <compileflags>-Wno-unused-command-line-argument
 <compileflags>-no-canonical-prefixes
-<compileflags>-I$(ANDROIDNDK)/sources/cxx-stl/llvm-libc++/include
-<compileflags>-I$(ANDROIDNDK)/sources/cxx-stl/llvm-libc++abi/include
-<compileflags>-I$(ANDROIDNDK)/sources/android/support/include
+<compileflags>-I$(NDK_ROOT)/sources/cxx-stl/llvm-libc++/include
+<compileflags>-I$(NDK_ROOT)/sources/cxx-stl/llvm-libc++abi/include
+<compileflags>-I$(NDK_ROOT)/sources/android/support/include
 <compileflags>-DANDROID
 <compileflags>-Wa,--noexecstack
 <compileflags>-Wformat
@@ -88,7 +85,7 @@ $(ANDROIDNDK)/toolchains/llvm/prebuilt/windows-x86_64/bin/clang++
 <compileflags>-D_REENTRANT
 <compileflags>-O2
 <compileflags>-gcc-toolchain
-<compileflags>$(ANDROIDNDK)/toolchains/x86-4.9/prebuilt/windows-x86_64
+<compileflags>$(NDK_ROOT)/toolchains/x86-4.9/prebuilt/windows-x86_64
 <compileflags>-target
 <compileflags>i686-linux-android
 <compileflags>-march=i686
@@ -98,10 +95,10 @@ $(ANDROIDNDK)/toolchains/llvm/prebuilt/windows-x86_64/bin/clang++
 <compileflags>-fPIC
 <compileflags>-mstackrealign
 <compileflags>--sysroot
-<compileflags>$(ANDROIDNDK)/sysroot
+<compileflags>$(NDK_ROOT)/sysroot
 <compileflags>-isystem
-<compileflags>$(ANDROIDNDK)/sysroot/usr/include/i686-linux-android
+<compileflags>$(NDK_ROOT)/sysroot/usr/include/i686-linux-android
 <compileflags>-D__ANDROID_API__=26
-<archiver>$(ANDROIDNDK)/toolchains/x86-4.9/prebuilt/windows-x86_64/i686-linux-android/bin/ar
-<ranlib>$(ANDROIDNDK)/toolchains/x86-4.9/prebuilt/windows-x86_64/i686-linux-android/bin/ranlib
+<archiver>$(NDK_ROOT)/toolchains/x86-4.9/prebuilt/windows-x86_64/i686-linux-android/bin/ar
+<ranlib>$(NDK_ROOT)/toolchains/x86-4.9/prebuilt/windows-x86_64/i686-linux-android/bin/ranlib
 ;
