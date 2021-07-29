@@ -206,7 +206,7 @@ bool DKUtil::Execute(const DKString& command, const DKString& mode, DKString& re
 #endif
 	FILE* pipe = dk_popen(command.c_str(), mode.c_str());
 	if(pipe == NULL)
-		return DKERROR("DKUtil::Execute(): pipe invalid\n");
+		return DKERROR("DKUtil::Execute(): pipe invalid: "+toString(strerror(errno))+"\n");
 	char buffer[128];
 	while(fgets(buffer, 128, pipe)){
 		DKINFO(buffer);
