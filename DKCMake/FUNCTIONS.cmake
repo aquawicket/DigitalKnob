@@ -1786,8 +1786,7 @@ function(DKDEBUG_LIB arg)
 	if(NOT ${_indexa} EQUAL -1)
 		return() ## The library is already in the list
 	endif()
-	#if(LINUX OR 
-	if(RASPBERRY OR ANDROID)
+	if(LINUX OR RASPBERRY OR ANDROID)
 		DKSET(DEBUG_LIBS debug ${arg} ${DEBUG_LIBS})  #Add to beginning of list
 	else()
 		DKSET(DEBUG_LIBS ${DEBUG_LIBS} debug ${arg})  #Add to end of list
