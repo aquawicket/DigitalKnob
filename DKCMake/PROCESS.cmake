@@ -885,6 +885,8 @@ if(LINUX)
 	set(CMAKE_CXX_FLAGS "-g -std=c++14 -no-pie")
 	add_executable(${APP_NAME} ${App_SRC})
 	
+	list(REVERSE DEBUG_LIBS)
+	
 	message("Linking Libraries . . .")
 	if(DEBUG)
 		message("${DEBUG_LIBS}")
