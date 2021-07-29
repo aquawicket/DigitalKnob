@@ -46,10 +46,9 @@ bool DKFile::NormalizePath(DKString& path){
 bool DKFile::AppendSystemPath(const DKString& path){
 	DKDEBUGFUNC(path);
 	DebugPath(path);
-	//FIXME: does not work
-	DKString command = "set PATH=%PATH%;"+path;
+	DKString command = "setx PATH %PATH%;"+path;
 	DKString rtn;
-	return DKUtil::Execute(command, rtn);
+	return DKUtil::Execute(command, "rt", rtn);
 }
 #endif
 

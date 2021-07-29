@@ -212,39 +212,30 @@ bool DKUtil::DrawTextOnScreen(const DKString& text){
 	return false;
 }
 
-bool DKUtil::Execute(const DKString& command, DKString& rtn){
-	DKDEBUGFUNC(command, rtn);
+bool DKUtil::Execute(const DKString& command, const DKString& mode, DKString& result){
+	DKDEBUGFUNC(command, mode, result);
 #ifdef WIN32
-	FILE* pipe = _popen(command.c_str(), "r");
-	if(!pipe){
-		DKERROR("DKUtil::Execute(): Error, pipe invalid.");
-		return "ERROR";
-	}
-	char buffer[128];
-	while(!feof(pipe)) {
-		if(fgets(buffer, 128, pipe) != NULL)
-			rtn += buffer;
-		DKINFO(buffer);
-	}
-	_pclose(pipe);
-	return true;
+	auto& dk_popen = _popen;
+	auto& dk_pclose = _pclose;
 #else
-	FILE* pipe = popen(command.c_str(), "r");
-	if(!pipe){
-		DKERROR("DKUtil::Execute(): Error, pipe invalid.");
-		return "ERROR";
-	}
-	char buffer[128];
-	while(!feof(pipe)) {
-		if(fgets(buffer, 128, pipe) != NULL)
-			rtn += buffer;
-		DKINFO(buffer);
-	}
-	pclose(pipe);
-	return true;
+	auto& dk_popen = popen;
+	auto& dk_pclose = pclose;
 #endif
-
-	return "";
+	FILE* pipe = dk_popen(command.c_str(), mode.c_str());
+	if(!pipe)
+		return DKERROR("DKUtil::Execute(): pipe invalid.");
+	char buffer[128];
+	while(fgets(buffer, 128, pipe)){
+		DKINFO(buffer);
+		result += buffer;
+	}
+	if(!feof(pipe))
+		return DKERROR("DKUtil::Execute(): feof(pipe) failed\n");
+	if(!trim(result))
+		return DKERROR("DKUtil::Execute(): trim(result) failed\n");
+	if(dk_pclose(pipe))
+		return DKERROR("DKUtil::Execute(): dk_pclose(pipe) failed\n");
+	return true;
 }
 
 bool DKUtil::FindImageOnScreen(const DKString& file, int& x, int& y){
@@ -641,29 +632,6 @@ bool DKUtil::PhysicalMemoryUsedByApp(unsigned int& physicalMemory){
 	return DKLinux::PhysicalMemoryUsedByApp(physicalMemory);
 #endif
 	DKWARN("DKUtil::PhysicalMemoryUsedByApp() not implemented on this OS \n");
-	return false;
-}
-
-bool DKUtil::POpen(const DKString& command, const DKString& mode, DKString& result) {
-	DKDEBUGFUNC(command, mode);
-
-	char   psBuffer[128];
-	FILE* pPipe;
-	if ((pPipe = _popen(command.c_str(), mode.c_str())) == NULL){
-		DKERROR("DKUtil::POpen(): _popen failed");
-		return false;
-	}
-	/* Read pipe until end of file, or an error occurs. */
-	while (fgets(psBuffer, 128, pPipe)) {
-		puts(psBuffer);
-		result += psBuffer;
-	}
-	// Close pipe and return the return value of pPipe
-	if (feof(pPipe)){
-		trim(result);
-		return !_pclose(pPipe);
-	}
-	DKERROR("DKUtil::POpen() Failed to read the pipe to the end.\n");
 	return false;
 }
 

@@ -110,7 +110,6 @@ bool DKDuktapeJS::Init()
 	DKDuktape::AttachFunction("CPP_DK_PhysicalMemory", DKDuktapeJS::PhysicalMemory);
 	DKDuktape::AttachFunction("CPP_DK_PhysicalMemoryUsed", DKDuktapeJS::PhysicalMemoryUsed);
 	DKDuktape::AttachFunction("CPP_DK_PhysicalMemoryUsedByApp", DKDuktapeJS::PhysicalMemoryUsedByApp);
-	DKDuktape::AttachFunction("CPP_DK_POpen", DKDuktapeJS::POpen);
 	DKDuktape::AttachFunction("CPP_DK_PressKey", DKDuktapeJS::PressKey);
 	DKDuktape::AttachFunction("CPP_DK_QueueDuktape", DKDuktapeJS::QueueDuktape);
 	DKDuktape::AttachFunction("CPP_DK_ReleaseKey", DKDuktapeJS::ReleaseKey);
@@ -465,9 +464,13 @@ int DKDuktapeJS::DumpError(duk_context* ctx){
 
 int DKDuktapeJS::Execute(duk_context* ctx){
 	DKString command = duk_require_string(ctx, 0);
-	DKString rtn;
-	if(!DKUtil::Execute(command, rtn)){ return 0; }
-	duk_push_string(ctx, rtn.c_str());
+	DKString mode = "rt";
+	DKString result;
+	if(!DKUtil::Execute(command, mode, result))
+		return 0;
+	if(result.empty())
+		return 0;
+	duk_push_string(ctx, result.c_str());
 	return 1;
 }
 
@@ -818,17 +821,6 @@ int DKDuktapeJS::PhysicalMemoryUsedByApp(duk_context* ctx){
 	unsigned int physicalMemory;
 	if(!DKUtil::PhysicalMemoryUsedByApp(physicalMemory)){ return 0; }
 	duk_push_number(ctx, physicalMemory);
-	return 1;
-}
-
-int DKDuktapeJS::POpen(duk_context* ctx) {
-	DKString command = duk_require_string(ctx, 0);
-	DKString mode = "rt";
-	DKString result;
-	if (!DKUtil::POpen(command, mode, result)) { return 0; }
-	if (result.empty())
-		return 0;
-	duk_push_string(ctx, result.c_str());
 	return 1;
 }
 

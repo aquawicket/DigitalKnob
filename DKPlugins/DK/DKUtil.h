@@ -22,7 +22,7 @@ public:
 	static bool CpuUsedByApp(int& cpu);
 	static bool DoubleClick();
 	static bool DrawTextOnScreen(const DKString& text);
-	static bool Execute(const DKString& command, DKString& rtn);
+	static bool Execute(const DKString& command, const DKString& mode, DKString& result);
 	static bool FindImageOnScreen(const DKString& file, int& x, int& y);
 	static bool GetClipboard(DKString& text);
 	static bool GetDate(DKString& date);
@@ -56,7 +56,6 @@ public:
 	static bool PhysicalMemory(unsigned long long& physicalMemory);
 	static bool PhysicalMemoryUsed(unsigned long long& physicalMemory);
 	static bool PhysicalMemoryUsedByApp(unsigned int& physicalMemory);
-	static bool POpen(const DKString& command, const DKString& mode, DKString& result);
 	static bool PressKey(const int& key);
 	static bool ReleaseKey(const int& key);
 	static bool RightClick();

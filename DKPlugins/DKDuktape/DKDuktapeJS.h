@@ -77,7 +77,6 @@ public:
 	static int PhysicalMemory(duk_context* ctx);
 	static int PhysicalMemoryUsed(duk_context* ctx);
 	static int PhysicalMemoryUsedByApp(duk_context* ctx);
-	static int POpen(duk_context* ctx);
 	static int PressKey(duk_context* ctx);
 	static int QueueDuktape(duk_context* ctx);
 	static int ReleaseKey(duk_context* ctx);
