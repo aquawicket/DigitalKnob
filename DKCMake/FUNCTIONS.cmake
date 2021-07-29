@@ -273,7 +273,10 @@ endfunction()
 
 
 function(dk_getExtension path result)
-	##message("dk_getExtension(${path})")
+	# WHY A NEW GET EXTENSION FUNCTION ?
+	# get_filename_component(extension ${url} EXT)       #Gets the large part of the extension of everything after the first .
+	# get_filename_component(extension ${url} LAST_EXT)  #LAST_EXT only available with cmake 3.14+ 
+	# cmake_path(GET url EXTENSION LAST_ONLY extension)  #LAST_ONLY only available with cmake 3.19+
 	string(FIND ${path} "." index REVERSE)
 	string(SUBSTRING ${path} ${index} -1 ext) 
     set(${result} ${ext} PARENT_SCOPE)
@@ -308,14 +311,12 @@ function(DKINSTALL url source_path destination_path)
 	DKSET(CURRENT_DIR ${DIGITALKNOB}/Download)
 	file(MAKE_DIRECTORY ${CURRENT_DIR})
 	
-	##get_filename_component(extension ${url} EXT)       #linux32 latest cmake version is 3.10
-	##get_filename_component(extension ${url} LAST_EXT)  #LAST_EXT only available with cmake 3.14+ 
-	##cmake_path(GET url EXTENSION LAST_ONLY extension)  #LAST_ONLY only available with cmake 3.19+
-	#get_filename_component(filename ${url} NAME)
-	
+	get_filename_component(filename ${url} NAME)
 	dk_getExtension(${url} extension)
-	set(filename "${destination_path}${extension}")
-	DKDOWNLOAD(${url} ${filename})
+	DKDOWNLOAD(${url})
+	
+	#set(filename "${destination_path}${extension}")
+	#DKDOWNLOAD(${url} ${filename})
 			
 	DKSET(FILETYPE "UNKNOWN")
 	if(NOT ${extension} STREQUAL "")
