@@ -1665,7 +1665,7 @@ function(IOSSIM32_XCODE_RELEASE arg)
 		else()
 			DKEXECUTE_PROCESS(COMMAND xcodebuild -configuration Release build -sdk iphonesimulator11.2 WORKING_DIRECTORY ${3RDPARTY}/${arg}/${OS})
 		endif()
-	ndif()
+	endif()
 endfunction()
 
 function(IOSSIM64_XCODE_DEBUG arg)
