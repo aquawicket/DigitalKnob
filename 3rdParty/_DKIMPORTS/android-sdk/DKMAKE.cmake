@@ -28,6 +28,7 @@ DKSETENV("ANDROID_HOME" ${ANDROIDSDK})
 ### INSTALL ###
 if(CMAKE_HOST_WIN32)
 	## https://dl.google.com/android/repository/commandlinetools-win-7302050_latest.zip
+	file(MAKE_DIRECTORY ${3RDPARTY}/android-sdk/cmdline-tools)
 	DKINSTALL(${ANDROIDTOOLS_DL} android-sdk android-sdk/cmdline-tools/latest)
 	if(NOT EXISTS ${ANDROIDSDK}/build-tools/${ANDROIDBUILDTOOLS_VERSION})
 		message("Installing Android build-tools: ${ANDROIDBUILDTOOLS_VERSION} . . .")
