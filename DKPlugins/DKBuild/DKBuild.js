@@ -208,9 +208,9 @@ function DKBuild_ValidateNDK(){
 	//set environment variables
 	if(CPP_DK_GetOS() === "Windows"){
 		console.log("checking environment variables")
-		if(ANDROIDSDK !== CPP_DK_POpen("echo %ANDROID_HOME%"))
+		if(ANDROIDSDK !== CPP_DK_Execute("echo %ANDROID_HOME%"))
 			CPP_DK_Execute("setx ANDROID_HOME "+ANDROIDSDK)
-		if(ANDROIDNDK !== CPP_DK_POpen("echo %NDK_ROOT%"))
+		if(ANDROIDNDK !== CPP_DK_Execute("echo %NDK_ROOT%"))
 			CPP_DK_Execute("setx NDK_ROOT "+ANDROIDNDK)
 	}
 	
