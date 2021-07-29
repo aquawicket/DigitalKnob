@@ -204,7 +204,7 @@ bool DKUtil::Execute(const DKString& command, const DKString& mode, DKString& re
 	auto& dk_pclose = pclose;
 #endif
 	FILE* pipe = dk_popen(command.c_str(), mode.c_str());
-	if(!pipe)
+	if(pipe == NULL)
 		return DKERROR("DKUtil::Execute(): pipe invalid.");
 	char buffer[128];
 	while(fgets(buffer, 128, pipe)){
@@ -212,11 +212,11 @@ bool DKUtil::Execute(const DKString& command, const DKString& mode, DKString& re
 		result += buffer;
 	}
 	if(!feof(pipe))
-		return DKERROR("DKUtil::Execute(): feof(pipe) failed\n");
-	if(!trim(result))
-		return DKERROR("DKUtil::Execute(): trim(result) failed\n");
+		DKERROR("DKUtil::Execute(): feof(pipe) failed\n");
 	if(dk_pclose(pipe) == -1)
 		return DKERROR("DKUtil::Execute(): dk_pclose(pipe) failed\n");
+	if (!trim(result))
+		return DKERROR("DKUtil::Execute(): trim(result) failed\n");
 	return true;
 }
 

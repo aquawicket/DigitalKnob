@@ -78,7 +78,7 @@ ECHO %APP_PATH%
 mkdir %APP_PATH%\%OS%
 cd %APP_PATH%\%OS%"
 del %APP_PATH%\%OS%\CMakeCache.txt"
-C:\PROGRA~2\CMake\bin\cmake.exe -G "Visual Studio 16 2019" -A Win32 -DDEBUG=ON -DRELEASE=ON -DREBUILDALL=ON -DSTATIC=ON C:\Users\%USERNAME%\digitalknob\DK
+C:\PROGRA~2\CMake\bin\cmake.exe -G "Visual Studio 16 2019" -A Win32 -DRELEASE=ON -DREBUILDALL=ON -DSTATIC=ON C:\Users\%USERNAME%\digitalknob\DK
 :: %APP_PATH%\%OS%
 "C:\PROGRA~2\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe" %APP%.sln /p:Configuration=Release
 
