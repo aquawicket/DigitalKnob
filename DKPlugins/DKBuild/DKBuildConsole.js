@@ -92,7 +92,7 @@ function DKBuildConsole_ChooseUpdate() {
 		console.log("Clearing CMake cache . . .");
 		CPP_DKFile_ChDir(DKPATH);
 		if(CPP_DK_GetOS() === "Windows"){
-			CPP_DK_Execute("cmd /c for /r ${"+DKPATH+"} %i in (CMakeCache.tx*) do del \"%i\"")
+			CPP_DK_Execute("cmd /c for /r %i in (CMakeCache.*) do del \"%i\"")
 			CPP_DK_Execute("cmd /c for /d /r %i in (*CMakeFiles*) do rmdir /s /Q \"%i\"")
 		}else{
 			CPP_DK_Execute("find . -name \"CMakeCache.*\" -delete") 
