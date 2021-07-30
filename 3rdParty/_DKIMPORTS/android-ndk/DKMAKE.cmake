@@ -1,5 +1,3 @@
-return()
-
 if(NOT ANDROID)
 	return()
 endif()
