@@ -1,8 +1,9 @@
 # https://developer.android.com/studio/archive
 
+DKDEPEND(jdk)
 DKDEPEND(android-sdk)
 DKDEPEND(android-ndk)
-DKDEPEND(jdk)
+
 
 ### VERSION ###
 DKSET(ANDROIDSTUDIO_VERSION 202.7486908-windows)
