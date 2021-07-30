@@ -1,4 +1,4 @@
-https://dl.google.com/android/repository/sources-24_r01.zip
+# https://dl.google.com/android/repository/sources-24_r01.zip
 if(NOT ANDROID)
 	return()
 endif()
