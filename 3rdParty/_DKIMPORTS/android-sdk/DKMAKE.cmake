@@ -5,6 +5,9 @@ if(NOT ANDROID)
 	return()
 endif()
 
+### DEPENDS ###
+DKDEPEND(jdk)
+
 
 ### VERSION ###
 if(CMAKE_HOST_WIN32)
@@ -32,6 +35,7 @@ if(CMAKE_HOST_WIN32)
 	DKINSTALL(${ANDROIDTOOLS_DL} android-sdk android-sdk/cmdline-tools/latest)
 	if(NOT EXISTS ${ANDROIDSDK}/build-tools/${ANDROIDBUILDTOOLS_VERSION})
 		message("Installing Android build-tools: ${ANDROIDBUILDTOOLS_VERSION} . . .")
+		# C:/Users/aquawicket/digitalknob/DK/3rdParty/android-sdk/cmdline-tools/latest/bin/sdkmanager 
 		set(ARGUMNTS "${SDKMANAGER_EXE} --install build-tools\\;${ANDROIDBUILDTOOLS_VERSION} --sdk_root=${ANDROIDSDK}")
 		separate_arguments(ARGUMNTS)
 		execute_process(COMMAND cmd /c ${ARGUMNTS} WORKING_DIRECTORY ${ANDROIDSDK}/bin)

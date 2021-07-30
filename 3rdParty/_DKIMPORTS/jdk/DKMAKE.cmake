@@ -1,5 +1,3 @@
-return()
-
 #https://jdk.java.net/archive/
 if(NOT ANDROID)
 	return()
