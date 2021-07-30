@@ -11,8 +11,9 @@ DKDEPEND(apache-ant)
 DKDEPEND(android-ndk)
 DKDEPEND(android-build-tools)
 DKDEPEND(android-platform-tools)
-DKDEPEND(android-platform)
+DKDEPEND(android-platforms)
 DKDEPEND(android-sources)
+#DKDEPEND(android-system-images)
 
 ### VERSION ###
 #if(CMAKE_HOST_WIN32)
