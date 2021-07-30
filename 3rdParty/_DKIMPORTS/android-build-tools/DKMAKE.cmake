@@ -1,12 +1,11 @@
-## https://dl.google.com/android/repository/build-tools_r30.0.1-windows.zip
-## https://dl.google.com/android/repository/build-tools_r30.0.1-darwin.zip
-## https://dl.google.com/android/repository/build-tools_r30.0.1-linux.zip
-
+# https://developer.android.com/studio/releases/build-tools
+#
+# https://dl.google.com/android/repository/build-tools_r30.0.1-windows.zip
+# https://dl.google.com/android/repository/build-tools_r30.0.1-darwin.zip
+# https://dl.google.com/android/repository/build-tools_r30.0.1-linux.zip
 if(NOT ANDROID)
 	return()
 endif()
-
-DKDEPEND(android-sdk)
 
 
 ### VERSION ###
