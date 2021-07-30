@@ -25,4 +25,4 @@ endif()
 
 
 ### INSTALL ###
-DKINSTALL(ANDROIDSDKTOOLS_DL android-sdk-tools android-sdk/sdk-tools/${ANDROIDSDKTOOLS_VERSION})
+DKINSTALL(${ANDROIDSDKTOOLS_DL} android-sdk-tools android-sdk/sdk-tools/${ANDROIDSDKTOOLS_VERSION})

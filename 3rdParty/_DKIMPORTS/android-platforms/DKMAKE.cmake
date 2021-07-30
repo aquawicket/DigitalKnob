@@ -12,4 +12,4 @@ DKSET(ANDROIDPLATFORMS_DL https://dl.google.com/android/repository/platform-${AN
 
 
 ### INSTALL ###
-DKINSTALL(ANDROIDPLATFORMS_DL android-platforms android-sdk/platforms/${ANDROIDPLATFORMS_VERSION})
+DKINSTALL(${ANDROIDPLATFORMS_DL} android-platforms android-sdk/platforms/${ANDROIDPLATFORMS_VERSION})

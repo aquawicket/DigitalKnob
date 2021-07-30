@@ -22,4 +22,4 @@ endif()
 
 
 ### INSTALL ###
-DKINSTALL(ANDROIDPLATFORMTOOLS_DL android-platform-tools android-sdk/platform-tools/${ANDROIDPLATFORMTOOLS_VERSION})
+DKINSTALL(${ANDROIDPLATFORMTOOLS_DL} android-platform-tools android-sdk/platform-tools/${ANDROIDPLATFORMTOOLS_VERSION})

@@ -286,6 +286,9 @@ function(dk_getExtension path result)
 	# get_filename_component(extension ${url} LAST_EXT)  #LAST_EXT only available with cmake 3.14+ 
 	# cmake_path(GET url EXTENSION LAST_ONLY extension)  #LAST_ONLY only available with cmake 3.19+
 	string(FIND ${path} "." index REVERSE)
+	if(${index} EQUAL -1)
+		return() # no extension found
+	endif()
 	string(SUBSTRING ${path} ${index} -1 ext) 
     set(${result} ${ext} PARENT_SCOPE)
 endfunction()

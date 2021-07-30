@@ -1,3 +1,4 @@
+# https://androidsdkmanager.azurewebsites.net/
 # https://developer.android.com/studio/releases/cmdline-tools
 # https://developer.android.com/studio?hl=fr#command-tools
 # https://androidsdkoffline.blogspot.com/p/android-sdk-cmdline-tools-offline.html
