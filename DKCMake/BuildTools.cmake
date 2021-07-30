@@ -1,14 +1,13 @@
 ### DEPENDS ###
-if(CMAKE_HOST_WIN32 AND WIN)
-	DKDEPEND(Git)
-	DKDEPEND(VisualStudio)
+DKDEPEND(Git)
 	
+if(CMAKE_HOST_WIN32 AND WIN)
+	DKDEPEND(VisualStudio)
 	# NOTE: These Defines should be done per as needed in DKMAKE.cmake files
 	## add_definitions(-D__WINDOWS_MM__)
 	## add_definitions(-D__STDC_CONSTANT_MACROS)
 	## add_definitions(-D_SCL_SECURE_NO_WARNINGS)
 	## add_definitions(-D_CRT_SECURE_NO_DEPRECATE)
-	
 	LIST(APPEND WIN_LIBS kernel32.lib)
 	LIST(APPEND WIN_LIBS user32.lib)
 	LIST(APPEND WIN_LIBS gdi32.lib)
@@ -41,12 +40,14 @@ if(CMAKE_HOST_LINUX AND RASPBERRY)
 endif()
 
 
-## TRACKER: error TRK0005: Failed to locate: "clang.exe" - https://stackoverflow.com/a/50924477/688352
 if(CMAKE_HOST_WIN32 AND ANDROID)
+	DKDEPEND(jdk)
 	DKDEPEND(apache-ant)
 	DKDEPEND(android-sdk)
-	DKDEPEND(jdk)
+	#DKDEPEND(android-studio)
 	DKDEPEND(VisualStudio)
 	DKDEPEND(mingw32)
 	DKDEPEND(msys)
 endif()
+
+DKDEPEND(CMake)

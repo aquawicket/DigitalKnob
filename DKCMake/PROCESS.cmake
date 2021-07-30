@@ -3,29 +3,19 @@ if(DK_PROCESS_INCLUDED)
 endif()
 set(DK_PROCESS_INCLUDED true)
 
-set(DELETE_CACHE true)
-if(DELETE_CACHE)
-	get_filename_component(DIGITALKNOB ${CMAKE_SOURCE_DIR} ABSOLUTE)
-	message("Deleteing leftover CMakeCache.txt files")
-	if(CMAKE_HOST_WIN32)
-		execute_process(COMMAND cmd /c del /f /S CMakeCache.* WORKING_DIRECTORY ${DIGITALKNOB})
-	    execute_process(COMMAND forfiles /P ${DIGITALKNOB} /M CMakeFile* /C "cmd /c if @isdir==TRUE rmdir /s /q @file" WORKING_DIRECTORY ${DIGITALKNOB})
-        # /P is pathname - where the searching starts
-        # /M is search mask, looking for files that start with A
-        # /C is the command to execute
-        # /S is recursive subfolders (didn't include here, because op didn't ask)
-	else()
-		execute_process(COMMAND find . -name "CMakeCache.*" -delete WORKING_DIRECTORY ${DIGITALKNOB})
-		execute_process(COMMAND find . -type d -name "CMakeFiles" -delete; WORKING_DIRECTORY ${DIGITALKNOB})
-	endif()
-endif()
-
-
 include(DKCMake/FUNCTIONS.cmake)
+DELETE_CACHE()
 include(DKCMake/OPTIONS.cmake)
 include(DKCMake/DISABLED.cmake)
 get_filename_component(APP_NAME ${DKPROJECT} NAME)
 string(REPLACE " " "_" APP_NAME ${APP_NAME})
+
+# Generate the apps CMakeLists.txt file
+DKSET(APP_CMAKEFILE "#Generated File: any changes will be overwritten\n")
+DKSET(APP_CMAKEFILE "${APP_CMAKEFILE}CMAKE_MINIMUM_REQUIRED(VERSION 3.4)\n")
+DKSET(APP_CMAKEFILE "${APP_CMAKEFILE}CMAKE_POLICY(SET CMP0054 NEW)\n")
+DKSET(APP_CMAKEFILE "${APP_CMAKEFILE}set(CMAKE_CXX_STANDARD 17)\n")
+DKSET(APP_CMAKEFILE "${APP_CMAKEFILE}PROJECT(${APP_NAME})\n\n")
 
 
 message("\n\n")
@@ -45,7 +35,7 @@ message("3RDPARTY:                      ${3RDPARTY}")
 message("DKPLUGINS:                     ${DKPLUGINS}")
 message("\n")
 message("#############  PROJECT VARIABLES  ############")
-message("APP_NAME:         ${APP_NAME}")
+message("APP_NAME:         ${APP_NAME}")            ### APP_NAME is set to the App folder name
 message("DKPROJECT:        ${DKPROJECT}")
 message("CMAKE_BINARY_DIR: ${CMAKE_BINARY_DIR}")
 message("DEBUG_DIR:        ${DEBUG_DIR}")
@@ -85,12 +75,9 @@ message("RASPBERRY_64:     ${RASPBERRY_64}")
 message("\n\n")
 
 
-
-
 ############################################################################################
 ############################   ADD EXECUTABLE  #############################################
 ############################################################################################
-### Set the project name to the App folder name
 set(CMAKE_CXX_STANDARD 17)
 
 PROJECT(${APP_NAME})
@@ -100,11 +87,10 @@ DKSET(DKAPP ON) ##TODO:  phase this out
 ##################################################
 ##### Scan the DKPlugins and build the lists #####
 ##################################################
-include(${DKCMAKE}/BuildTools.cmake)
+include(${DKCMAKE}/BuildTools.cmake) #FIXME - this doesn't obey ordering, these dependencies shound come first. Possibly because it's not named "DKMAKE.cmake" ?
 include(${DKPROJECT}/DKMAKE.cmake)
 
-message("\n")
-message("**********************************")
+message("\n**********************************")
 message("*** ENABLED DKPLUGINS (sorted) ***")
 message("**********************************\n")
 list(REMOVE_DUPLICATES dkdepend_list)
@@ -119,23 +105,21 @@ message("\n\n")
 #endforeach()
 #message("\n\n")
 
-## Clear cache list variables 
+## Clear cache list variables, just to be sure 
 DKSET(DKDEFINES "")
 DKSET(DKINCLUDES "")
 DKSET(DKLIBRARIES "")
-
 
 foreach(plugin ${dkdepend_list})
 	DKSET(QUEUE_BUILD OFF)
 	DKSET(LIBLIST "") ## used for double checking
 	DKSET(CMAKE_FILE "")
 	DKSET(ANDROID_LIBMK "")
-	message("\n")
-	message("***************************************")
+	
+	message("\n***************************************")
 	message("**** Processing   ${plugin}")
 	message("***************************************\n")
 	
-	#################### 3rdParty libs #####################
 	##Strip any sublibrary named in the plugin
 	string(FIND "${plugin}" " " _indexa)
 	if(${_indexa} GREATER -1)
@@ -146,6 +130,7 @@ foreach(plugin ${dkdepend_list})
 		DKENABLE(${arg2})
 	endif()
 	
+	#################### 3rdParty libs #####################
 	DKSETPATHTOPLUGIN(${plugin})
 	if(NOT PATHTOPLUGIN)
 		RETURN()
@@ -1206,6 +1191,9 @@ endif()
 ##DKSET(DKDEFINES "")
 ##DKSET(DKINCLUDES "")
 ##DKSET(DKLIBRARIES "")
+
+# Generate a CMakelists.txt for the app. This is a work in progress
+file(WRITE ${DKPROJECT}/CMakeLists.txt ${APP_CMAKEFILE})
 
 message("\n")
 message("***************************************")

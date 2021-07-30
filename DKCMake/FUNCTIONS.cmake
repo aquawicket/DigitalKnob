@@ -2,18 +2,30 @@ if(DK_FUNCTIONS_INCLUDED)
   return()
 endif()
 set(DK_FUNCTIONS_INCLUDED true)
+if(CMAKE_HOST_UNIX AND NOT CMAKE_HOST_APPLE)
+	set(CMAKE_HOST_LINUX TRUE CACHE INTERNAL "")
+endif()
+set(dkdepend_disable_list "" CACHE INTERNAL "")
+set(UPX ON)
 
 
-
-## TODO:    https://foonathan.net/2016/03/cmake-install/ 
 
 #####################################################################
 ###################         DKFUNCTIONS           ###################
 #####################################################################
+## TODO:    https://foonathan.net/2016/03/cmake-install/ 
 
-if(CMAKE_HOST_UNIX AND NOT CMAKE_HOST_APPLE)
-	set(CMAKE_HOST_LINUX TRUE)
-endif()
+## Example function that uses a referece returne variable as the result
+# VAR_EXISTS(myVariable, result)
+# message("result = ${result}")
+function(VAR_EXISTS varname result)
+    if(NOT DEFINED ${varname})
+      message(WARNING "Error: the variable ${varname} is not defined!")
+	  set(${result} false PARENT_SCOPE)
+	  return()
+    endif()
+    set (${result} true PARENT_SCOPE)
+endfunction()
 
 
 function(WaitForEnter)
@@ -26,31 +38,11 @@ function(WaitForEnter)
 endfunction()
 
 
-set(dkdepend_disable_list "" CACHE INTERNAL "")
-set(UPX ON)
-
-
-## Example creating CMake functions that return values
-##
-##		VAR_EXISTS("myVarName", result)
-##		if(NOT result)
-##			message(WARN "The variable does not exist")
-##			return()
-##		endif()
-##		message("The name of the variable is ${result}")
-##
-function(VAR_EXISTS varname result)
-    if(NOT DEFINED ${varname})
-      message(SEND_ERROR "Error: the variable ${varname} is not defined!")
-	  return()
-    endif()
-    set (${result} ${varname} PARENT_SCOPE)
-endfunction()
-
 function(DUMP variable)
 	message("variable = ${variable}")
 	WaitForEnter()
 endfunction()
+
 
 function(DKSET variable value)
 	set(extra_args ${ARGN})
@@ -77,6 +69,22 @@ function(DKUNSET variable)
 	#If PARENT_SCOPE is present then the variable is removed from the scope above the current scope. See the same option in the set() command for further details.
 endfunction()
 
+function(DELETE_CACHE)
+	get_filename_component(DIGITALKNOB ${CMAKE_SOURCE_DIR} ABSOLUTE)
+	message("Deleteing leftover CMakeCache.txt files")
+	if(CMAKE_HOST_WIN32)
+		execute_process(COMMAND cmd /c del /f /S CMakeCache.* WORKING_DIRECTORY ${DIGITALKNOB})
+	    execute_process(COMMAND forfiles /P ${DIGITALKNOB} /M CMakeFile* /C "cmd /c if @isdir==TRUE rmdir /s /q @file" WORKING_DIRECTORY ${DIGITALKNOB})
+        # /P is pathname - where the searching starts
+        # /M is search mask, looking for files that start with A
+        # /C is the command to execute
+        # /S is recursive subfolders (didn't include here, because op didn't ask)
+	else()
+		execute_process(COMMAND find . -name "CMakeCache.*" -delete WORKING_DIRECTORY ${DIGITALKNOB})
+		execute_process(COMMAND find . -type d -name "CMakeFiles" -delete; WORKING_DIRECTORY ${DIGITALKNOB})
+	endif()
+endfunction()
+
 function(DKSETENV name value)
 	message("DKSETENV(${name} ${value})")
 	if(NOT "$ENV{${name}}" STREQUAL "${value}")
@@ -84,6 +92,7 @@ function(DKSETENV name value)
 		DKEXECUTE_PROCESS(COMMAND cmd /c setx ${name} ${value})
 	endif()
 endfunction()
+
 
 function(DKDOWNLOAD url)
 	##https://cmake.org/pipermail/cmake/2012-September/052205.html/
@@ -2521,7 +2530,7 @@ endfunction()
 
 ############################
 function(DKAPPEND_CMAKE arg)
-	DKSET(CMAKE_FILE "${CMAKE_FILE} ${arg}")
+	DKSET(CMAKE_FILE "${CMAKE_FILE}${arg}")
 endfunction()
 
 ########################
