@@ -73,16 +73,15 @@ function(DELETE_CACHE)
 	get_filename_component(DIGITALKNOB ${CMAKE_SOURCE_DIR} ABSOLUTE)
 	message("Deleteing leftover CMakeCache.txt files")
 	if(CMAKE_HOST_WIN32)
-		execute_process(COMMAND cmd /c del /f /S CMakeCache.* WORKING_DIRECTORY ${DIGITALKNOB})
-	    execute_process(COMMAND forfiles /P ${DIGITALKNOB} /M CMakeFile* /C "cmd /c if @isdir==TRUE rmdir /s /q @file" WORKING_DIRECTORY ${DIGITALKNOB})
-        # /P is pathname - where the searching starts
-        # /M is search mask, looking for files that start with A
-        # /C is the command to execute
-        # /S is recursive subfolders (didn't include here, because op didn't ask)
+		#execute_process(COMMAND cmd /c for /r ${DIGITALKNOB} %i in (CMakeCache.tx*) do @echo del "%i" WORKING_DIRECTORY ${DIGITALKNOB})
+        #execute_process(COMMAND cmd /c for /d /r %i in (*CMakeFiles*) do @echo rmdir /s "%i" WORKING_DIRECTORY ${DIGITALKNOB})
+		execute_process(COMMAND cmd /c for /r ${DIGITALKNOB} %i in (CMakeCache.tx*) do del "%i" WORKING_DIRECTORY ${DIGITALKNOB})
+        execute_process(COMMAND cmd /c for /d /r %i in (*CMakeFiles*) do rmdir /s /Q "%i" WORKING_DIRECTORY ${DIGITALKNOB})
 	else()
 		execute_process(COMMAND find . -name "CMakeCache.*" -delete WORKING_DIRECTORY ${DIGITALKNOB})
 		execute_process(COMMAND find . -type d -name "CMakeFiles" -delete; WORKING_DIRECTORY ${DIGITALKNOB})
 	endif()
+	WaitForEnter()
 endfunction()
 
 function(DKSETENV name value)

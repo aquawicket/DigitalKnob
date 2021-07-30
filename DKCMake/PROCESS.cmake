@@ -4,7 +4,7 @@ endif()
 set(DK_PROCESS_INCLUDED true)
 
 include(DKCMake/FUNCTIONS.cmake)
-DELETE_CACHE()
+#DELETE_CACHE()
 include(DKCMake/OPTIONS.cmake)
 include(DKCMake/DISABLED.cmake)
 get_filename_component(APP_NAME ${DKPROJECT} NAME)
