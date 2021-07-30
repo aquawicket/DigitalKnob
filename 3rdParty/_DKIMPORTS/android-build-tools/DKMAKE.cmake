@@ -24,4 +24,5 @@ endif()
 
 
 ### INSTALL ###
+file(MAKE_DIRECTORY ${3RDPARTY}/android-sdk/build-tools)
 DKINSTALL(${ANDROIDBUILDTOOLS_DL} android-build-tools android-sdk/build-tools/${ANDROIDBUILDTOOLS_VERSION})

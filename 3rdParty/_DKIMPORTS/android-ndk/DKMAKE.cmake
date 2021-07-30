@@ -23,7 +23,7 @@ DKSET(ANDROIDNDK_SHA1 96ba1a049303cf6bf3ee84cfd64d6bcd43486a50)
 DKSET(ANDROIDNDK ${ANDROIDSDK}/ndk/${ANDROIDNDK_BUILD})
 DKSETENV("NDK_ROOT" ${ANDROIDNDK})
 
-
+file(MAKE_DIRECTORY ${3RDPARTY}/android-sdk/ndk)
 ### INSTALL ###
 if(CMAKE_HOST_WIN32)
 	## https://dl.google.com/android/repository/android-ndk-r21e-windows-x86_64.zip
