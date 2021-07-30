@@ -5,6 +5,9 @@ if(NOT ANDROID)
 	return()
 endif()
 
+### DEPENDS ###
+DKDEPEND(jdk)
+
 
 ### VERSION ###
 if(CMAKE_HOST_WIN32)
@@ -16,10 +19,10 @@ endif()
 if(CMAKE_HOST_LINUX)
 	DKSET(ANDROIDTOOLS_DL https://dl.google.com/android/repository/commandlinetools-linux-7302050_latest.zip)
 endif()
-DKSET(ANDROIDSDK ${3RDPARTY}/android-sdk)
-DKSET(ANDROIDBUILDTOOLS_VERSION 30.0.3)
-DKSET(ANDROIDPLATFORM_VERSION android-26)
-DKSET(ANDROIDSOURCES_VERSION android-30)
+DKSET(ANDROIDSDK ${3RDPARTY}/android-sdk) # https://developer.android.com/studio/releases/cmdline-tools
+DKSET(ANDROIDBUILDTOOLS_VERSION 30.0.3)   # https://developer.android.com/studio/releases/build-tools
+DKSET(ANDROIDPLATFORM_VERSION android-26) # https://developer.android.com/studio/releases/platforms
+DKSET(ANDROIDSOURCES_VERSION android-30)  
 DKSET(ANDROIDIMAGES_VERSION android-25)
 DKSET(SDKMANAGER_EXE ${ANDROIDSDK}/cmdline-tools/latest/bin/sdkmanager)
 DKSETENV("ANDROID_HOME" ${ANDROIDSDK})
@@ -32,6 +35,7 @@ if(CMAKE_HOST_WIN32)
 	DKINSTALL(${ANDROIDTOOLS_DL} android-sdk android-sdk/cmdline-tools/latest)
 	if(NOT EXISTS ${ANDROIDSDK}/build-tools/${ANDROIDBUILDTOOLS_VERSION})
 		message("Installing Android build-tools: ${ANDROIDBUILDTOOLS_VERSION} . . .")
+		# C:/Users/aquawicket/digitalknob/DK/3rdParty/android-sdk/cmdline-tools/latest/bin/sdkmanager 
 		set(ARGUMNTS "${SDKMANAGER_EXE} --install build-tools\\;${ANDROIDBUILDTOOLS_VERSION} --sdk_root=${ANDROIDSDK}")
 		separate_arguments(ARGUMNTS)
 		execute_process(COMMAND cmd /c ${ARGUMNTS} WORKING_DIRECTORY ${ANDROIDSDK}/bin)
