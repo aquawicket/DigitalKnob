@@ -1,11 +1,7 @@
-return()
-
 if(NOT ANDROID)
 	return()
 endif()
 
-DKDEPEND(android-sdk)
-DKDEPEND(jdk)
 
 if(CMAKE_HOST_WIN32)
 	DKSET(ANDROIDNDK_TAG windows-x86_64)
