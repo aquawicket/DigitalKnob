@@ -1,4 +1,4 @@
-return()
+# https://developer.android.com/studio/archive
 
 DKDEPEND(android-sdk)
 DKDEPEND(android-ndk)
