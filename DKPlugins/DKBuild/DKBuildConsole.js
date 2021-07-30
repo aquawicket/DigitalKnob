@@ -36,6 +36,7 @@ function DKBuildConsole_ChooseUpdate() {
     console.log("C. Commit")
     console.log("R. Reset Apps and Plugins")
     console.log("X. Reset Everything")
+	console.log("Z. Clear all CMake cache")
 	const assets = CPP_DKAssets_LocalAssets()
 	if(CPP_DKFile_Exists(assets+"cache.txt")){
 		const cache = CPP_DKFile_FileToString(assets+"cache.txt")
@@ -87,6 +88,18 @@ function DKBuildConsole_ChooseUpdate() {
         DKBuild_ResetAppsPlugins()
         DKGit_GitUpdate()
     }
+	if (key === 122){ //Clear Cmake Cache
+		console.log("Clearing CMake cache . . .");
+		CPP_DKFile_ChDir(DKPATH);
+		if(CPP_DK_GetOS() === "Windows"){
+			CPP_DK_Execute("cmd /c for /r ${"+DKPATH+"} %i in (CMakeCache.tx*) do del \"%i\" echo del \"%i\" @echo del \"%i\"")
+			CPP_DK_Execute("cmd /c for /d /r %i in (*CMakeFiles*) do rmdir /s /Q \"%i\" @echo rmdir /s /Q \"%i\"")
+		}else{
+			CPP_DK_Execute("find . -name \"CMakeCache.*\" -delete") 
+			CPP_DK_Execute("find . -type d -name \"CMakeFiles\" -delete")
+		}
+		
+	}
 }
 
 function DKBuildConsole_SelectOs() {
@@ -106,6 +119,7 @@ function DKBuildConsole_SelectOs() {
     console.log("c. android64")
     console.log("d. raspberry32")
     console.log("e. raspberry64")
+	//console.log("BCKSPC. Back")
     console.log("ESC. exit")
     console.log("\n")
 
@@ -175,6 +189,7 @@ function DKBuildConsole_SelectType() {
     console.log("1. Debug")
     console.log("2. Release")
     console.log("3. All")
+	//console.log("BCKSPC. Back")
     console.log("ESC. exit")
     console.log("\n")
 
