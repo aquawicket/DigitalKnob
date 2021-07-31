@@ -946,9 +946,9 @@ if(ANDROID)
 	list(APPEND ANDROID_LIBS android)
 
 	#add_executable(${APP_NAME} ${App_SRC})
-	add_executable(dkapp ${App_SRC})
+	add_executable(DKAndroid ${App_SRC})
 	#target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${ANDROID_LIBS})
-	target_link_libraries(dkapp ${DEBUG_LIBS} ${RELEASE_LIBS} ${ANDROID_LIBS})
+	target_link_libraries(DKAndroid ${DEBUG_LIBS} ${RELEASE_LIBS} ${ANDROID_LIBS})
 	#add_dependencies(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS})	
 	
 	#include_external_msproject(DKGradle ${DKPROJECT}/${OS}/DKGradle/DKGradle.androidproj)
