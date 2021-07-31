@@ -479,23 +479,6 @@ if(WIN_32)
 	DKCOPY(${DKPROJECT}/Backup ${DKPROJECT}/assets TRUE)
 	DKREMOVE(${DKPROJECT}/Backup)
 	
-	#list(APPEND WIN_LIBS 
-	#	kernel32.lib
-	#	user32.lib
-	#	gdi32.lib
-	#	winspool.lib
-	#	shell32.lib
-	#	ole32.lib
-	#	oleaut32.lib
-	#	uuid.lib
-	#	comdlg32.lib
-	#	advapi32.lib
-	#	odbc32.lib
-	#	odbccp32.lib
-	#	opengl32.lib
-	#	DbgHelp.lib
-	#)
-	
 	## Create Icon files for project
 	message("Building icons for ${APP_NAME} - ${OS} . . .")
 	DKSET(IMAGEMAGICK_CONVERT ${IMAGEMAGICK_ROOT}/convert.exe)
@@ -565,27 +548,11 @@ if(WIN_64)
 	#dummy assets.h file, or the builder wil complain about assets.h missing
 	DKCOPY(${DKPLUGINS}/_DKIMPORT/assets.h ${DKPROJECT}/assets.h TRUE)
 	
-	# Restore the backed up files, excluded from assets
+	# Restore the backed up files
 	DKCOPY(${DKPROJECT}/Backup/ ${DKPROJECT}/assets/ TRUE)
 	DKREMOVE(${DKPROJECT}/Backup)
 	
-	#list(APPEND WIN_LIBS 
-	#	kernel32.lib
-	#	user32.lib
-	#	gdi32.lib
-	#	winspool.lib
-	#	shell32.lib
-	#	ole32.lib
-	#	oleaut32.lib
-	#	uuid.lib
-	#	comdlg32.lib
-	#	advapi32.lib
-	#	odbc32.lib
-	#	odbccp32.lib
-	#	opengl32.lib
-	#	DbgHelp.lib
-	#)
-	
+
 	## Create Icon files for project
 	if(${IMAGEMAGICK_ROOT})
 		message("Building icons for ${APP_NAME} - ${OS} . . .")
@@ -638,8 +605,7 @@ if(MAC)
 	## ICONS 
 	## // TODO
 	## message("Building icons for ${APP_NAME} - ${OS} . . .")
-	
-	
+		
 	## copy the assets into the bundle resources
 	if(DEBUG)
 		file(MAKE_DIRECTORY ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app/Contents/Resources)
@@ -840,10 +806,6 @@ if(LINUX)
 	DKREMOVE(${DKPROJECT}/assets/cef.log)
 	DKREMOVE(${DKPROJECT}/assets/log.txt)
 	
-	##ICONS
-	## TODO
-	## message("Building icons for ${APP_NAME} - ${OS} . . .")
-	
 	message("Creating assets.zip . . .")
 	DKZIP(${DKPROJECT}/assets)
 	
@@ -859,7 +821,7 @@ if(LINUX)
 	link_directories(${OpenGL_LIBRARY_DIRS})
 	add_definitions(${OpenGL_DEFINITIONS})
 	if(NOT OPENGL_FOUND)
-    	message(ERROR " OPENGL not found!")
+    	message(FATAL_ERROR " OPENGL not found!")
 	endif()
 	
 	list(APPEND DEBUG_LIBS ${OPENGL_LIBRARIES})
@@ -869,7 +831,8 @@ if(LINUX)
 	list(APPEND DEBUG_LIBS dl)
 	list(APPEND RELEASE_LIBS dl)
 	
-	set(CMAKE_CXX_FLAGS "-g -std=c++14 -no-pie")
+	#set(CMAKE_CXX_FLAGS "-g -std=c++14 -no-pie")
+	set(CMAKE_CXX_FLAGS "-g -no-pie")
 	add_executable(${APP_NAME}d ${App_SRC})
 	add_executable(${APP_NAME} ${App_SRC})
 	
@@ -943,7 +906,8 @@ if(RASPBERRY)
 	list(APPEND DEBUG_LIBS bcm_host)
 	list(APPEND RELEASE_LIBS bcm_host)
 	
-	set(CMAKE_CXX_FLAGS "-g -std=c++14 -no-pie")
+	#set(CMAKE_CXX_FLAGS "-g -std=c++14 -no-pie")
+	set(CMAKE_CXX_FLAGS "-g -no-pie")
 	add_executable(${APP_NAME} ${App_SRC})
 	
 	if(DEBUG)
@@ -954,8 +918,7 @@ if(RASPBERRY)
 	endif()
 endif()
 
-##############
-if(ANDROID_32)
+if(ANDROID)
 	# remove files not needed for android
 	list(REMOVE_ITEM App_SRC ${DKPROJECT}/resource.h)
 	list(REMOVE_ITEM App_SRC ${DKPROJECT}/resource.rc)
@@ -994,27 +957,31 @@ if(ANDROID_32)
     file(MAKE_DIRECTORY ${DKPROJECT}/icons/android/drawable-xxhdpi)
     DKEXECUTE_PROCESS(COMMAND ${IMAGEMAGICK_CONVERT} ${DKPROJECT}/icons/icon.png -resize 144x144 ${DKPROJECT}/icons/android/drawable-xxhdpi/icon.png)
 
-	
 	#message("Creating assets.zip . . .")
 	#DKZIP(${DKPROJECT}/assets) #.zip the assets
-	
 	#message("Creating assets.h . . .")
 	#bin2h(SOURCE_FILE ${DKPROJECT}/assets.zip HEADER_FILE ${DKPROJECT}/assets.h VARIABLE_NAME "ASSETS_H")
-	
 	# Restore the backed up assets
 	#DKCOPY(${DKPROJECT}/Backup/ ${DKPROJECT}/assets/ TRUE)
 	#DKREMOVE(${DKPROJECT}/Backup)
-	#############################
 	
 	DKUPDATE_ANDROID_NAME(${APP_NAME})
 	
 	#include_external_msproject(DKGradle ${DKPROJECT}/${OS}/DKGradle/DKGradle.androidproj)
-	
+	set(CMAKE_CXX_STANDARD 17)
 	set(CMAKE_ANDROID_GUI TRUE)
-	set(CMAKE_CXX_FLAGS "-std=c++14 -g2 -gdwarf-2 -O0")
-	set(CMAKE_CXX_FLAGS_DEBUG "-g2 -gdwarf-2 -O0 -DDEBUG -D_DEBUG")
-	set(CMAKE_CXX_FLAGS_RELEASE "-DNDEBUG")
-	set(CMAKE_ANDROID_STL c++_static)
+	
+	
+	#set(CMAKE_CXX_FLAGS "-std=c++17")
+	set(CMAKE_CXX_FLAGS)
+	set(CMAKE_CXX_FLAGS_DEBUG "-g2 -gdwarf-2 -O0 -DDEBUG") 
+	#set(CMAKE_CXX_FLAGS_RELEASE "-O3")
+	
+	set(CMAKE_SYSTEM_NAME Android) 
+	set(CMAKE_SYSTEM_VERSION 24)
+	set(CMAKE_ANDROID_ARCH_ABI armeabi-v7a)
+	set(CMAKE_ANDROID_NDK ${ANDROIDNDK})
+	set(CMAKE_ANDROID_STL_TYPE c++_static)
 	
 	#list(APPEND DEBUG_LIBS pthread)
 	#list(APPEND RELEASE_LIBS pthread)
@@ -1030,70 +997,10 @@ if(ANDROID_32)
 	list(APPEND RELEASE_LIBS android)
 	
 	add_executable(${APP_NAME} ${App_SRC})
-	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS})	
-endif()
-
-##############
-if(ANDROID_64)
-	# remove files not needed for android
-	list(REMOVE_ITEM App_SRC ${DKPROJECT}/resource.h)
-	list(REMOVE_ITEM App_SRC ${DKPROJECT}/resource.rc)
-	##list(REMOVE_ITEM App_SRC ${DKPROJECT}/assets.h)
-
-	# Copy the icon to ${DKPROJECT}/assets
-	DKCOPY(${DKPROJECT}/icons/icon.png ${DKPROJECT}/assets/icon.png TRUE)
-	DKCOPY(${DKPROJECT}/icons/icon.png ${DKPROJECT}/${OS}/res/drawable/icon.png TRUE)
-	
-	# backup generated files and folders not going in the package
-	#DKCOPY(${DKPROJECT}/assets/USER ${DKPROJECT}/Backup/USER TRUE)
-	#DKCOPY(${DKPROJECT}/assets/DKCef/android64Debug ${DKPROJECT}/Backup/DKCef/android64Debug TRUE)
-	#DKCOPY(${DKPROJECT}/assets/DKCef/android64Release ${DKPROJECT}/Backup/DKCef/android64Release TRUE)
-	#DKCOPY(${DKPROJECT}/assets/cef.log ${DKPROJECT}/Backup/cef.log TRUE)
-	#DKCOPY(${DKPROJECT}/assets/log.txt ${DKPROJECT}/Backup/log.txt TRUE)
-	
-	# remove generated files and folders before packaging
-	#DKREMOVE(${DKPROJECT}/assets/USER)
-	#DKREMOVE(${DKPROJECT}/assets/DKCef/android64Debug)
-	#DKREMOVE(${DKPROJECT}/assets/DKCef/android64release)
-	#DKREMOVE(${DKPROJECT}/assets/cef.log)
-	#DKREMOVE(${DKPROJECT}/assets/log.txt)
-	
-	
-	## Create Android Icons
-	message("Building icons for ${APP_NAME} - ${OS} . . .")
-    file(MAKE_DIRECTORY ${DKPROJECT}/icons/android)
-    file(MAKE_DIRECTORY ${DKPROJECT}/icons/android/drawable-hdpi)
-    DKEXECUTE_PROCESS(COMMAND ${IMAGEMAGICK_CONVERT} ${DKPROJECT}/icons/icon.png -resize 72x72 ${DKPROJECT}/icons/android/drawable-hdpi/icon.png)
-    file(MAKE_DIRECTORY ${DKPROJECT}/icons/android/drawable-ldpi)
-    DKEXECUTE_PROCESS(COMMAND ${IMAGEMAGICK_CONVERT} ${DKPROJECT}/icons/icon.png -resize 36x36 ${DKPROJECT}/icons/android/drawable-ldpi/icon.png)
-    file(MAKE_DIRECTORY ${DKPROJECT}/icons/android/drawable-mdpi)
-    DKEXECUTE_PROCESS(COMMAND ${IMAGEMAGICK_CONVERT} ${DKPROJECT}/icons/icon.png -resize 48x48 ${DKPROJECT}/icons/android/drawable-mdpi/icon.png)
-    file(MAKE_DIRECTORY ${DKPROJECT}/icons/android/drawable-xhdpi)
-    DKEXECUTE_PROCESS(COMMAND ${IMAGEMAGICK_CONVERT} ${DKPROJECT}/icons/icon.png -resize 96x96 ${DKPROJECT}/icons/android/drawable-xhdpi/icon.png)
-    file(MAKE_DIRECTORY ${DKPROJECT}/icons/android/drawable-xxhdpi)
-    DKEXECUTE_PROCESS(COMMAND ${IMAGEMAGICK_CONVERT} ${DKPROJECT}/icons/icon.png -resize 144x144 ${DKPROJECT}/icons/android/drawable-xxhdpi/icon.png)
-
-	
-	#message("Creating assets.zip . . .")
-	#DKZIP(${DKPROJECT}/assets) #.zip the assets
-	
-	#message("Creating assets.h . . .")
-	#bin2h(SOURCE_FILE ${DKPROJECT}/assets.zip HEADER_FILE ${DKPROJECT}/assets.h VARIABLE_NAME "ASSETS_H")
-	
-	# Restore the backed up assets
-	#DKCOPY(${DKPROJECT}/Backup/ ${DKPROJECT}/assets/ TRUE)
-	#DKREMOVE(${DKPROJECT}/Backup)
-	#############################
-	
-	DKUPDATE_ANDROID_NAME(${APP_NAME})
-	
-	set(CMAKE_ANDROID_GUI TRUE)
-	set(CMAKE_CXX_FLAGS "-std=c++14")
-	set(CMAKE_ANDROID_STL c++_static)
-
-	add_executable(${APP_NAME} ${App_SRC})
 	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS})
+	#add_dependencies(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS})	
 endif()
+
 
 ###########
 #if(ANDROID)
