@@ -2,6 +2,10 @@
 #include <SDL.h>
 #include <SDL_ttf.h>
 
+int main(int argc, char **argv){
+	return DKAndroidTest();
+}
+
 int DKAndroidTest(){
 	SDL_Window *window;                   
 	SDL_Init(SDL_INIT_VIDEO);             
