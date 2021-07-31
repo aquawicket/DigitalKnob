@@ -951,7 +951,7 @@ if(ANDROID)
 	target_link_libraries(DKAndroid ${DEBUG_LIBS} ${RELEASE_LIBS} ${ANDROID_LIBS})
 	#add_dependencies(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS})	
 	
-	#include_external_msproject(DKGradle ${DKPROJECT}/${OS}/DKGradle/DKGradle.androidproj)
+	include_external_msproject(DKGradle ${DKPROJECT}/${OS}/DKGradle.androidproj)
 endif()
 
 
