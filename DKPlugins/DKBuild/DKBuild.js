@@ -676,6 +676,7 @@ function DKBuild_DoResults(){
 		CPP_DKFile_MkDir(DKPATH+appdir+"/"+APP+"/linux32")
 		CPP_DKFile_ChDir(DKPATH+appdir+"/"+APP+"/linux32")
 		if(TYPE === "Debug" || TYPE === "ALL"){
+			cmake_string = cmake_string.replace("-DRELEASE=ON ", "");
 			CPP_DKFile_MkDir(DKPATH+appdir+"/"+APP+"/linux32/Debug")
 			CPP_DKFile_ChDir(DKPATH+appdir+"/"+APP+"/linux32/Debug")
 			let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DKPATH+"DK")
@@ -695,6 +696,7 @@ function DKBuild_DoResults(){
 			CPP_DKFile_StringToFile(string, DKPATH+appdir+"/"+APP+"/linux32/Debug/"+APP+".desktop")
 		}
 		if(TYPE === "Release" || TYPE === "ALL"){
+			cmake_string = cmake_string.replace("-DDEBUG=ON ", "");
 			CPP_DKFile_MkDir(DKPATH+appdir+"/"+APP+"/linux32/Release")
 			CPP_DKFile_ChDir(DKPATH+appdir+"/"+APP+"/linux32/Release")
 			let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DKPATH+"DK")
@@ -703,7 +705,6 @@ function DKBuild_DoResults(){
 			CPP_DK_Execute("make "+APP)
 			
 			//Create .desktop file
-			//https://www.maketecheasier.com/create-desktop-file-linux/
 			let string = "[Desktop Entry]\n"
 			string += "Encoding=UTF-8\n"
 			string += "Version=1.0\n"
@@ -722,6 +723,7 @@ function DKBuild_DoResults(){
 		CPP_DKFile_MkDir(DKPATH+appdir+"/"+APP+"/linux64")
 		CPP_DKFile_ChDir(DKPATH+appdir+"/"+APP+"/linux64")
 		if(TYPE === "Debug" || TYPE === "ALL"){
+			cmake_string = cmake_string.replace("-DRELEASE=ON ", "");
 			CPP_DKFile_MkDir(DKPATH+appdir+"/"+APP+"/linux64/Debug")
 			CPP_DKFile_ChDir(DKPATH+appdir+"/"+APP+"/linux64/Debug")
 			let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DKPATH+"DK")
@@ -741,6 +743,7 @@ function DKBuild_DoResults(){
 			CPP_DKFile_StringToFile(string, DKPATH+appdir+"/"+APP+"/linux64/Debug/"+APP+".desktop")
 		}
 		if(TYPE === "Release" || TYPE === "ALL"){
+			cmake_string = cmake_string.replace("-DDEBUG=ON ", "");
 			CPP_DKFile_MkDir(DKPATH+appdir+"/"+APP+"/linux64/Release")
 			CPP_DKFile_ChDir(DKPATH+appdir+"/"+APP+"/linux64/Release")
 			let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DKPATH+"DK")
@@ -749,7 +752,6 @@ function DKBuild_DoResults(){
 			CPP_DK_Execute("make "+APP)
 			
 			//Create .desktop file
-			//https://www.maketecheasier.com/create-desktop-file-linux/
 			let string = "[Desktop Entry]\n"
 			string += "Encoding=UTF-8\n"
 			string += "Version=1.0\n"
@@ -759,7 +761,6 @@ function DKBuild_DoResults(){
 			string += "Exec="+DKPATH+appdir+"/"+APP+"/linux64/Release/"+APP+"\n"
 			string += "Icon="+DKPATH+appdir+"/"+APP+"/icons/icon.png\n"
 			CPP_DKFile_StringToFile(string, DKPATH+appdir+"/"+APP+"/linux64/Release/"+APP+".desktop")
-			CPP_DKFile_Copy(DKPATH+appdir+"/"+APP+"/linux64/Release/"+APP+".desktop", "~/.local/share/applications/"+APP+".desktop", true)
 		}
 	}
 	
@@ -768,6 +769,7 @@ function DKBuild_DoResults(){
 		DKBuild_ValidateGcc()
 		CPP_DKFile_MkDir(DKPATH+appdir+"/"+APP+"/raspberry32")
 		if(TYPE === "Debug" || TYPE === "ALL"){
+			cmake_string = cmake_string.replace("-DRELEASE=ON ", "");
 			CPP_DKFile_MkDir(DKPATH+appdir+"/"+APP+"/raspberry32/Debug")
 			CPP_DKFile_ChDir(DKPATH+appdir+"/"+APP+"/raspberry32/Debug")
 			let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DKPATH+"DK")
@@ -789,6 +791,7 @@ function DKBuild_DoResults(){
 			CPP_DKFile_StringToFile(string, DKPATH+appdir+"/"+APP+"/linux32/Debug/"+APP+".desktop")
 		}
 		if(TYPE === "Release" || TYPE === "ALL"){
+			cmake_string = cmake_string.replace("-DDEBUG=ON ", "");
 			CPP_DKFile_MkDir(DKPATH+appdir+"/"+APP+"/raspberry32/Release")
 			CPP_DKFile_ChDir(DKPATH+appdir+"/"+APP+"/raspberry32/Release")
 			let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DKPATH+"DK")
@@ -814,6 +817,7 @@ function DKBuild_DoResults(){
 		DKBuild_ValidateGcc()
 		CPP_DKFile_MkDir(DKPATH+appdir+"/"+APP+"/raspberry64")
 		if(TYPE === "Debug" || TYPE === "ALL"){
+			cmake_string = cmake_string.replace("-DRELEASE=ON ", "");
 			CPP_DKFile_MkDir(DKPATH+appdir+"/"+APP+"/raspberry64/Debug")
 			CPP_DKFile_ChDir(DKPATH+appdir+"/"+APP+"/raspberry64/Debug")
 			let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DKPATH+"DK")
@@ -833,6 +837,7 @@ function DKBuild_DoResults(){
 			CPP_DKFile_StringToFile(string, DKPATH+appdir+"/"+APP+"/raspberry64/Debug/"+APP+".desktop")
 		}
 		if(TYPE === "Release" || TYPE === "ALL"){
+			cmake_string = cmake_string.replace("-DDEBUG=ON ", "");
 			CPP_DKFile_MkDir(DKPATH+appdir+"/"+APP+"/raspberry64/Release")
 			CPP_DKFile_ChDir(DKPATH+appdir+"/"+APP+"/raspberry64/Release")
 			let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DKPATH+"DK")
