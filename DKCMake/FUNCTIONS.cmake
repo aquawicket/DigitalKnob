@@ -93,16 +93,17 @@ function(DKSETENV name value)
 endfunction()
 
 
-function(DKDOWNLOAD url)
+function(DKDOWNLOAD url) #arg2 filename
 	##https://cmake.org/pipermail/cmake/2012-September/052205.html/
 	if(${ARGC} EQUAL 1)
 		get_filename_component(filename ${url} NAME)
 	endif()
 	if(${ARGC} EQUAL 2)
-		set(filename ${ARGV1})
+		set(filename ${ARGV1}) #used to rename the file
 	endif()
 	if(NOT EXISTS ${CURRENT_DIR}/${filename})
-		message(STATUS "downloading... ${url}")
+		message(STATUS "Downloading ${url}")
+		message(STATUS "To -> ${CURRENT_DIR}/${filename}")
 		file(DOWNLOAD ${url} ${CURRENT_DIR}/${filename} SHOW_PROGRESS 
 			#no TIMEOUT
 			STATUS status 
@@ -116,7 +117,7 @@ function(DKDOWNLOAD url)
 			DKREMOVE(${CURRENT_DIR}/${filename})
 			message(" ")
 			message("*********************************************")
-			message("CMAKE SOMETIMES FAILS TO DOWNLOAD LARGE FILES")
+			message("CMAKE FAILED TO DOENLOAD THIS FILE")
 			message("PLEASE DOWNLOAD THE FILE TO THE digitalknob/Download direcotry")
 			message("THE URL IS: ${url}") 
 			message("*********************************************")

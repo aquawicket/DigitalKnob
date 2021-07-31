@@ -48,8 +48,6 @@ let LEVEL = ""  //Build, Rebuild, RebuildAll
 let DKPATH = ""
 let DKDOWNLOAD = ""
 let CMAKE = ""
-//let ANDROIDNDK_VERSION = "r22b"
-//let ANDROIDNDK_BUILD = "22.1.7171670"
 let ANDROIDNDK = ""
 let VISUALSTUDIO_VERSION = "2019"
 let VISUALSTUDIO = ""
@@ -194,12 +192,10 @@ function DKBuild_ValidateNDK(){
 	ANDROIDNDK = ANDROIDSDK+"/ndk/"+ANDROIDNDK_BUILD
 	//ANDROIDNDK = CPP_DKFile_GetShortName(ANDROIDNDK)
 	
-	/*
 	//set environment variables
 	if(ANDROIDNDK !== CPP_DK_Execute("echo %NDK_ROOT%"))
 		CPP_DK_Execute("setx NDK_ROOT "+ANDROIDNDK)
-	*/
-	
+		
 	// Validate install
 	console.log("Looking for Android NDK")
 	if(!CPP_DKFile_Exists(ANDROIDNDK+"/installed")){
