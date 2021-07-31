@@ -193,10 +193,10 @@ function DKBuild_ValidateNDK(){
 	//ANDROIDNDK = CPP_DKFile_GetShortName(ANDROIDNDK)
 	
 	//set environment variables
-	if(ANDROIDNDK !== CPP_DK_Execute("echo %NDK_ROOT%", "rt"))
-		CPP_DK_Execute("setx NDK_ROOT "+ANDROIDNDK)
+	//if(ANDROIDNDK !== CPP_DK_Execute("echo %NDK_ROOT%", "rt"))
+	//	CPP_DK_Execute("setx NDK_ROOT "+ANDROIDNDK)
 	if(ANDROIDNDK !== CPP_DK_Execute("echo %VS_NdkRoot%", "rt"))
-		CPP_DK_Execute("setx VS_NdkRoot "+ANDROIDNDK)
+		CPP_DK_Execute("setx VS_NdkRoot "+ANDROIDNDK) //https://stackoverflow.com/a/54350289/688352
 		
 	// Validate install
 	console.log("Looking for Android NDK")
