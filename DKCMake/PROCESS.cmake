@@ -79,8 +79,6 @@ message("\n\n")
 ############################################################################################
 ############################   ADD EXECUTABLE  #############################################
 ############################################################################################
-set(CMAKE_CXX_STANDARD 17)
-
 PROJECT(${APP_NAME})
 
 DKSET(DKAPP ON) ##TODO:  phase this out
@@ -484,6 +482,7 @@ if(WIN_32)
 	DKEXECUTE_PROCESS(COMMAND ${IMAGEMAGICK_CONVERT} ${DKPROJECT}/icons/icon.png -define icon:auto-resize=256,128,64,48,32,16 ${DKPROJECT}/icons/windows/icon.ico)
 	DKEXECUTE_PROCESS(COMMAND ${IMAGEMAGICK_CONVERT} ${DKPROJECT}/icons/icon.png -define icon:auto-resize=16 ${DKPROJECT}/assets/favicon.ico)
 	
+	set(CMAKE_CXX_STANDARD 17)
 	add_definitions(-D_USING_V110_SDK71_)
 	add_executable(${APP_NAME} WIN32 ${App_SRC})
 	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${WIN_LIBS})
@@ -560,6 +559,7 @@ if(WIN_64)
 		DKEXECUTE_PROCESS(COMMAND ${IMAGEMAGICK_CONVERT} ${DKPROJECT}/icons/icon.png -define icon:auto-resize=16 ${DKPROJECT}/assets/favicon.ico)
 	endif()
 	
+	set(CMAKE_CXX_STANDARD 17)
 	add_executable(${APP_NAME}_64 WIN32 ${App_SRC})
 	target_link_libraries(${APP_NAME}_64 ${DEBUG_LIBS} ${RELEASE_LIBS} ${WIN_LIBS})
 	##set_source_files_properties(${DIGITALKNOB}/stdafx.cpp PROPERTIES COMPILE_FLAGS "/Ycstdafx.h")
@@ -620,6 +620,7 @@ if(MAC)
 	DKCOPY(${DKPROJECT}/Backup/ ${DKPROJECT}/assets/ FALSE)
 	DKREMOVE(${DKPROJECT}/Backup)
 	
+	set(CMAKE_CXX_STANDARD 17)
 	FIND_LIBRARY(CF CoreFoundation)
 	FIND_LIBRARY(CO Cocoa)
 	FIND_LIBRARY(CB Carbon)
@@ -677,6 +678,7 @@ if(IOS)
 	DKCOPY(${DKPROJECT}/Backup/ ${DKPROJECT}/assets/ FALSE)
 	DKREMOVE(${DKPROJECT}/Backup)
 	
+	set(CMAKE_CXX_STANDARD 17)
 	### FrameWorks ###
 	set(IOS_FRAMEWORKS
 		Foundation
@@ -745,6 +747,7 @@ if(IOSSIM)
 	DKCOPY(${DKPROJECT}/Backup/ ${DKPROJECT}/assets/ FALSE)
 	DKREMOVE(${DKPROJECT}/Backup)
 	
+	set(CMAKE_CXX_STANDARD 17)
 	### FrameWorks ###
 	set(IOS_FRAMEWORKS
 		Foundation
@@ -814,6 +817,7 @@ if(LINUX)
 	DKCOPY(${DKPROJECT}/Backup/ ${DKPROJECT}/assets/ FALSE)
 	DKREMOVE(${DKPROJECT}/Backup)
 
+	set(CMAKE_CXX_STANDARD 17)
 	find_package(OpenGL REQUIRED)
 	include_directories(${OpenGL_INCLUDE_DIRS})
 	link_directories(${OpenGL_LIBRARY_DIRS})
@@ -863,26 +867,22 @@ if(RASPBERRY)
 	#DKREMOVE(${DKPROJECT}/assets/cef.log)
 	DKREMOVE(${DKPROJECT}/assets/log.txt)
 	
-	##ICONS
-	## TODO
-	## message("Building icons for ${APP_NAME} - ${OS} . . .")
-	
 	message("Creating assets.zip . . .")
 	DKZIP(${DKPROJECT}/assets)
-	
 	message("Creating assets.h . . .")
 	bin2h(SOURCE_FILE ${DKPROJECT}/assets.zip HEADER_FILE ${DKPROJECT}/assets.h VARIABLE_NAME "ASSETS_H")
-
 	# Restore the backed up assets
 	DKCOPY(${DKPROJECT}/Backup/ ${DKPROJECT}/assets/ FALSE)
 	DKREMOVE(${DKPROJECT}/Backup)
 
+
+	set(CMAKE_CXX_STANDARD 17)
     find_package(OpenGL REQUIRED)
 	include_directories(${OpenGL_INCLUDE_DIRS})
 	link_directories(${OpenGL_LIBRARY_DIRS})
 	add_definitions(${OpenGL_DEFINITIONS})
 	if(NOT OPENGL_FOUND)
-    	message(ERROR " OPENGL not found!")
+    	message(FATAL_ERROR "OPENGL not found!")
 	endif()
 	
 	list(APPEND RASPBERRY_LIBS ${OPENGL_LIBRARIES})
@@ -906,26 +906,6 @@ if(ANDROID)
 	# remove files not needed for android
 	list(REMOVE_ITEM App_SRC ${DKPROJECT}/resource.h)
 	list(REMOVE_ITEM App_SRC ${DKPROJECT}/resource.rc)
-	##list(REMOVE_ITEM App_SRC ${DKPROJECT}/assets.h)	
-	
-	# Copy the icon to ${DKPROJECT}/assets
-	DKCOPY(${DKPROJECT}/icons/icon.png ${DKPROJECT}/assets/icon.png TRUE)
-	DKCOPY(${DKPROJECT}/icons/icon.png ${DKPROJECT}/${OS}/res/drawable/icon.png TRUE)
-	
-	# backup generated files and folders that will be withheld from the release package
-	#DKCOPY(${DKPROJECT}/assets/USER ${DKPROJECT}/Backup/USER TRUE)
-	#DKCOPY(${DKPROJECT}/assets/DKCef/android32Debug ${DKPROJECT}/Backup/DKCef/android32Debug TRUE)
-	#DKCOPY(${DKPROJECT}/assets/DKCef/android32Release ${DKPROJECT}/Backup/DKCef/android32Release TRUE)
-	#DKCOPY(${DKPROJECT}/assets/cef.log ${DKPROJECT}/Backup/cef.log TRUE)
-	#DKCOPY(${DKPROJECT}/assets/log.txt ${DKPROJECT}/Backup/log.txt TRUE)
-	
-	# remove generated files and folders from the release package
-	#DKREMOVE(${DKPROJECT}/assets/USER)
-	#DKREMOVE(${DKPROJECT}/assets/DKCef/android32Debug)
-	#DKREMOVE(${DKPROJECT}/assets/DKCef/android32release)
-	#DKREMOVE(${DKPROJECT}/assets/cef.log)
-	#DKREMOVE(${DKPROJECT}/assets/log.txt)
-	
 	
 	## Create Android Icons
 	message("Building icons for ${APP_NAME} - ${OS} . . .")
@@ -940,26 +920,19 @@ if(ANDROID)
     DKEXECUTE_PROCESS(COMMAND ${IMAGEMAGICK_CONVERT} ${DKPROJECT}/icons/icon.png -resize 96x96 ${DKPROJECT}/icons/android/drawable-xhdpi/icon.png)
     file(MAKE_DIRECTORY ${DKPROJECT}/icons/android/drawable-xxhdpi)
     DKEXECUTE_PROCESS(COMMAND ${IMAGEMAGICK_CONVERT} ${DKPROJECT}/icons/icon.png -resize 144x144 ${DKPROJECT}/icons/android/drawable-xxhdpi/icon.png)
-
-	#message("Creating assets.zip . . .")
-	#DKZIP(${DKPROJECT}/assets) #.zip the assets
-	#message("Creating assets.h . . .")
-	#bin2h(SOURCE_FILE ${DKPROJECT}/assets.zip HEADER_FILE ${DKPROJECT}/assets.h VARIABLE_NAME "ASSETS_H")
-	# Restore the backed up assets
-	#DKCOPY(${DKPROJECT}/Backup/ ${DKPROJECT}/assets/ TRUE)
-	#DKREMOVE(${DKPROJECT}/Backup)
 	
+	# Copy the icon to ${DKPROJECT}/assets
+	DKCOPY(${DKPROJECT}/icons/icon.png ${DKPROJECT}/assets/icon.png TRUE)
+	DKCOPY(${DKPROJECT}/icons/icon.png ${DKPROJECT}/${OS}/res/drawable/icon.png TRUE)
+
 	DKUPDATE_ANDROID_NAME(${APP_NAME})
 	
-	#include_external_msproject(DKGradle ${DKPROJECT}/${OS}/DKGradle/DKGradle.androidproj)
-	set(CMAKE_CXX_STANDARD 17)
-	set(CMAKE_ANDROID_GUI TRUE)
-	
-	#set(CMAKE_CXX_FLAGS "-std=c++17")
-	set(CMAKE_CXX_FLAGS)
+	#set(CMAKE_CXX_STANDARD 17)
+	set(CMAKE_CXX_FLAGS "-std=c++17")
 	set(CMAKE_CXX_FLAGS_DEBUG "-g2 -gdwarf-2 -O0 -DDEBUG") 
-	#set(CMAKE_CXX_FLAGS_RELEASE "-O3")
+	set(CMAKE_CXX_FLAGS_RELEASE "-O3")
 	
+	set(CMAKE_ANDROID_GUI TRUE)
 	set(CMAKE_SYSTEM_NAME Android) 
 	set(CMAKE_SYSTEM_VERSION 26)
 	set(CMAKE_ANDROID_ARCH_ABI armeabi-v7a)
@@ -977,14 +950,14 @@ if(ANDROID)
 	#target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${ANDROID_LIBS})
 	target_link_libraries(dkapp ${DEBUG_LIBS} ${RELEASE_LIBS} ${ANDROID_LIBS})
 	#add_dependencies(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS})	
+	
+	#include_external_msproject(DKGradle ${DKPROJECT}/${OS}/DKGradle/DKGradle.androidproj)
 endif()
 
 
 ###########
 #if(ANDROID)
-#
 #	#copy android files from DKPlugins/_DKIMPORT
-#	
 #	#copy assets
 #	DKREMOVE(${DKPROJECT}/assets/USER)
 #	if(DEBUG)
