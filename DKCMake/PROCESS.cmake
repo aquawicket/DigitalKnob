@@ -949,6 +949,7 @@ if(ANDROID)
 	#add_executable(${APP_NAME} ${App_SRC})
 	add_executable(DKAndroid ${App_SRC})
 	#target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${ANDROID_LIBS})
+	target_include_directories(DKAndroid PUBLIC ${INCLUDE_DIRECTORIES}) #of ${DKINCLUDES_LIST}
 	target_link_libraries(DKAndroid ${DEBUG_LIBS} ${RELEASE_LIBS} ${ANDROID_LIBS})
 	#add_dependencies(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS})	
 	
