@@ -1,0 +1,2 @@
+DKDEPEND(zlib)
+DKDEPEND(openssl-vs2015)

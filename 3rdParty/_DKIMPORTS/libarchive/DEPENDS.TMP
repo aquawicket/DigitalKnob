@@ -1,0 +1,3 @@
+DKDEPEND(zlib)
+DKDEPEND(xz)
+DKDEPEND(bzip2)
