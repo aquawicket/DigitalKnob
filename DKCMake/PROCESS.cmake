@@ -925,7 +925,7 @@ if(ANDROID)
 	DKCOPY(${DKPROJECT}/icons/icon.png ${DKPROJECT}/assets/icon.png TRUE)
 	DKCOPY(${DKPROJECT}/icons/icon.png ${DKPROJECT}/${OS}/res/drawable/icon.png TRUE)
 
-	DKUPDATE_ANDROID_NAME(${APP_NAME})
+	#DKUPDATE_ANDROID_NAME(${APP_NAME})
 	
 	#set(CMAKE_CXX_STANDARD 17)
 	set(CMAKE_CXX_FLAGS "-std=c++17")
@@ -951,7 +951,7 @@ if(ANDROID)
 	target_link_libraries(DKAndroid ${DEBUG_LIBS} ${RELEASE_LIBS} ${ANDROID_LIBS})
 	#add_dependencies(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS})	
 	
-	include_external_msproject(DKGradle ${DKPROJECT}/${OS}/DKGradle.androidproj)
+	#include_external_msproject(DKGradle ${DKPROJECT}/${OS}/DKGradle.androidproj)
 endif()
 
 

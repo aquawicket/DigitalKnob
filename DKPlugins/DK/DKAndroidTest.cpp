@@ -1,4 +1,4 @@
-#ifdef ANDROID_TEST
+#ifdef ANDROID
 #include <SDL.h>
 #include <SDL_ttf.h>
 
@@ -16,7 +16,7 @@ int DKAndroidTest(){
 		SDL_WINDOW_OPENGL                  
 	);
 
-	if (window == NULL) {.
+	if (window == NULL) {
 		SDL_Log("Could not create window: %s\n", SDL_GetError());
 		return 1;
 	}
@@ -58,4 +58,4 @@ int DKAndroidTest(){
 	SDL_Quit();
 	return 0;
 }
-#endif// ANDROID_TEST
+#endif// ANDROID

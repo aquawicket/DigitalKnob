@@ -2,6 +2,7 @@
 #include "DK/DKApp.h"
 #include "DK/DKOsInfo.h"
 #include "DK/DKFile.h"
+#include "DK/DKAndroidTest.h" 
 
 int    DKApp::argc;
 char** DKApp::argv;
@@ -13,8 +14,7 @@ std::vector<std::function<void()> > DKApp::loop_funcs;
 /////////// MAIN ////////////////
 
 int main(int argc, char **argv){
-#ifdef ANDROID_TEST
-	#include "DK/DKAndroidTest.h"
+#ifdef ANDROID
 	return DKAndroidTest();
 #endif
 	DKDEBUGFUNC(argc, argv);
