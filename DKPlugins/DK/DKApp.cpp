@@ -11,13 +11,16 @@ bool   DKApp::paused = false;
 std::vector<std::function<void()> > DKApp::loop_funcs;
 
 /////////// MAIN ////////////////
-//#ifndef ANDROID
+
 int main(int argc, char **argv){
+#ifdef ANDROID_TEST
+	#include "DK/DKAndroidTest.h"
+	return DKAndroidTest();
+#endif
 	DKDEBUGFUNC(argc, argv);
 	DKApp dkapp(argc, argv);
 	DKApp::Init();
 	DKApp::Loop();
-	DKApp::Exit();
 }
 //#endif //!ANDROID
 
