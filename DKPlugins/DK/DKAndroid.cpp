@@ -19,7 +19,7 @@ static jobject theobj = 0;
 JNIEXPORT jint JNI_OnLoad2(JavaVM* vm, void* reserved){
 	DKDEBUGFUNC(vm, reserved);
 	thejvm = vm;
-    return JNI_VERSION_1_7;
+    return JNI_VERSION_1_6;
 }
 
 
