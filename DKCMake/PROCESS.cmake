@@ -987,7 +987,7 @@ if(ANDROID)
 	#list(APPEND RELEASE_LIBS android)
 	
 	add_executable(${APP_NAME} ${App_SRC})
-	target_link_libraries(${APP_NAME} ${ANDROID_LIBS} ${DEBUG_LIBS} ${RELEASE_LIBS})
+	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${ANDROID_LIBS} )
 	#add_dependencies(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS})	
 endif()
 
