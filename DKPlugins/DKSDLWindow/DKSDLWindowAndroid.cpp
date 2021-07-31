@@ -11,12 +11,12 @@ extern "C" {
 	extern void SDL_Android_Init(JNIEnv* env, jclass cls);
 	extern void Java_org_libsdl_app_SDLActivity_onNativeDropFile(JNIEnv* env, jclass jcls, jstring filename);
 	extern JNIEXPORT void JNICALL Java_org_libsdl_app_SDLActivity_onNativeResize(JNIEnv* env, jclass jcls, jint width, jint height, jint format, jfloat rate);
-	extern JNIEXPORT jint JNICALL Java_org_libsdl_app_SDLActivity_onNativePadDown(JNIEnv* env, jclass jcls, jint device_id, jint keycode);
-	extern JNIEXPORT jint JNICALL Java_org_libsdl_app_SDLActivity_onNativePadUp(JNIEnv* env, jclass jcls, jint device_id, jint keycode);
-	extern JNIEXPORT void JNICALL Java_org_libsdl_app_SDLActivity_onNativeJoy(JNIEnv* env, jclass jcls, jint device_id, jint axis, jfloat value);
-	extern JNIEXPORT void JNICALL Java_org_libsdl_app_SDLActivity_onNativeHat(JNIEnv* env, jclass jcls, jint device_id, jint hat_id, jint x, jint y);
-	extern JNIEXPORT jint JNICALL Java_org_libsdl_app_SDLActivity_nativeAddJoystick(JNIEnv* env, jclass jcls, jint device_id, jstring device_name, jint is_accelerometer, jint nbuttons, jint naxes, jint nhats, jint nballs);
-	extern JNIEXPORT jint JNICALL Java_org_libsdl_app_SDLActivity_nativeRemoveJoystick(JNIEnv* env, jclass jcls, jint device_id);
+	//extern JNIEXPORT jint JNICALL Java_org_libsdl_app_SDLActivity_onNativePadDown(JNIEnv* env, jclass jcls, jint device_id, jint keycode);
+	//extern JNIEXPORT jint JNICALL Java_org_libsdl_app_SDLActivity_onNativePadUp(JNIEnv* env, jclass jcls, jint device_id, jint keycode);
+	//extern JNIEXPORT void JNICALL Java_org_libsdl_app_SDLActivity_onNativeJoy(JNIEnv* env, jclass jcls, jint device_id, jint axis, jfloat value);
+	//extern JNIEXPORT void JNICALL Java_org_libsdl_app_SDLActivity_onNativeHat(JNIEnv* env, jclass jcls, jint device_id, jint hat_id, jint x, jint y);
+	//extern JNIEXPORT jint JNICALL Java_org_libsdl_app_SDLActivity_nativeAddJoystick(JNIEnv* env, jclass jcls, jint device_id, jstring device_name, jint is_accelerometer, jint nbuttons, jint naxes, jint nhats, jint nballs);
+	//extern JNIEXPORT jint JNICALL Java_org_libsdl_app_SDLActivity_nativeRemoveJoystick(JNIEnv* env, jclass jcls, jint device_id);
 	extern JNIEXPORT void JNICALL Java_org_libsdl_app_SDLActivity_onNativeSurfaceChanged(JNIEnv* env, jclass jcls);
 	extern JNIEXPORT void JNICALL Java_org_libsdl_app_SDLActivity_onNativeSurfaceDestroyed(JNIEnv* env, jclass jcls);
 	extern JNIEXPORT void JNICALL Java_org_libsdl_app_SDLActivity_onNativeKeyDown(JNIEnv* env, jclass jcls, jint keycode);
@@ -39,23 +39,23 @@ bool DKSDLWindowAndroid::Init()
 {
 	DKDEBUGFUNC();
 	DKClass::RegisterFunc("DKAndroid_onAccel", &DKSDLWindowAndroid::onAccel, this);
-	DKClass::RegisterFunc("DKAndroid_onAddJoystick", &DKSDLWindowAndroid::onAddJoystick, this);
+	//DKClass::RegisterFunc("DKAndroid_onAddJoystick", &DKSDLWindowAndroid::onAddJoystick, this);
 	DKClass::RegisterFunc("DKAndroid_onCommitText", &DKSDLWindowAndroid::onCommitText, this);
 	DKClass::RegisterFunc("DKAndroid_onDropFile", &DKSDLWindowAndroid::onDropFile, this);
 	DKClass::RegisterFunc("DKAndroid_onGetHint", &DKSDLWindowAndroid::onGetHint, this);
-	DKClass::RegisterFunc("DKAndroid_onHat", &DKSDLWindowAndroid::onHat, this);
+	//DKClass::RegisterFunc("DKAndroid_onHat", &DKSDLWindowAndroid::onHat, this);
 	DKClass::RegisterFunc("DKAndroid_onInitSDL", &DKSDLWindowAndroid::onInitSDL, this);
-	DKClass::RegisterFunc("DKAndroid_onJoy", &DKSDLWindowAndroid::onJoy, this);
+	//DKClass::RegisterFunc("DKAndroid_onJoy", &DKSDLWindowAndroid::onJoy, this);
 	DKClass::RegisterFunc("DKAndroid_onKeyDown", &DKSDLWindowAndroid::onKeyDown, this);
 	DKClass::RegisterFunc("DKAndroid_onKeyUp", &DKSDLWindowAndroid::onKeyUp, this);
 	DKClass::RegisterFunc("DKAndroid_onKeyboardFocusLost", &DKSDLWindowAndroid::onKeyboardFocusLost, this);
 	DKClass::RegisterFunc("DKAndroid_onLowMemory", &DKSDLWindowAndroid::onLowMemory, this);
 	DKClass::RegisterFunc("DKAndroid_onMouse", &DKSDLWindowAndroid::onMouse, this);
-	DKClass::RegisterFunc("DKAndroid_onPadDown", &DKSDLWindowAndroid::onPadDown, this);
-	DKClass::RegisterFunc("DKAndroid_onPadUp", &DKSDLWindowAndroid::onPadUp, this);
+	//DKClass::RegisterFunc("DKAndroid_onPadDown", &DKSDLWindowAndroid::onPadDown, this);
+	//DKClass::RegisterFunc("DKAndroid_onPadUp", &DKSDLWindowAndroid::onPadUp, this);
 	DKClass::RegisterFunc("DKAndroid_onPause", &DKSDLWindowAndroid::onPause, this);
 	DKClass::RegisterFunc("DKAndroid_onQuit", &DKSDLWindowAndroid::onQuit, this);
-	DKClass::RegisterFunc("DKAndroid_onRemoveJoystick", &DKSDLWindowAndroid::onRemoveJoystick, this);
+	//DKClass::RegisterFunc("DKAndroid_onRemoveJoystick", &DKSDLWindowAndroid::onRemoveJoystick, this);
 	DKClass::RegisterFunc("DKAndroid_onResize", &DKSDLWindowAndroid::onResize, this);
 	DKClass::RegisterFunc("DKAndroid_onResume", &DKSDLWindowAndroid::onResume, this);
 	DKClass::RegisterFunc("DKAndroid_onSetComposingText", &DKSDLWindowAndroid::onSetComposingText, this);
@@ -169,9 +169,8 @@ bool DKSDLWindowAndroid::onResize(const void* input, void* output)
 	return true;
 }
 
-///////////////////////////////////////////////////////////////////
-bool DKSDLWindowAndroid::onPadDown(const void* input, void* output)
-{
+/*
+bool DKSDLWindowAndroid::onPadDown(const void* input, void* output){
 	JavaData jd = *(JavaData*)input;
 	const char* _data = jd.env->GetStringUTFChars(jd.data,JNI_FALSE);
 	DKDEBUG("DKSDLWindowAndroid::onPadDown("+DKString(_data)+")\n");
@@ -189,9 +188,7 @@ bool DKSDLWindowAndroid::onPadDown(const void* input, void* output)
 	return true;
 }
 
-/////////////////////////////////////////////////////////////////
-bool DKSDLWindowAndroid::onPadUp(const void* input, void* output)
-{
+bool DKSDLWindowAndroid::onPadUp(const void* input, void* output){
 	JavaData jd = *(JavaData*)input;
 	const char* _data = jd.env->GetStringUTFChars(jd.data,JNI_FALSE);
 	DKDEBUG("DKSDLWindowAndroid::onPadUp("+DKString(_data)+")\n");
@@ -209,9 +206,7 @@ bool DKSDLWindowAndroid::onPadUp(const void* input, void* output)
 	return true;
 }
 
-///////////////////////////////////////////////////////////////
-bool DKSDLWindowAndroid::onJoy(const void* input, void* output)
-{
+bool DKSDLWindowAndroid::onJoy(const void* input, void* output){
 	JavaData jd = *(JavaData*)input;
 	const char* _data = jd.env->GetStringUTFChars(jd.data,JNI_FALSE);
 	DKDEBUG("DKSDLWindowAndroid::onJoy("+DKString(_data)+")\n");
@@ -224,9 +219,7 @@ bool DKSDLWindowAndroid::onJoy(const void* input, void* output)
 	return true;
 }
 
-///////////////////////////////////////////////////////////////
-bool DKSDLWindowAndroid::onHat(const void* input, void* output)
-{
+bool DKSDLWindowAndroid::onHat(const void* input, void* output){
 	JavaData jd = *(JavaData*)input;
 	const char* _data = jd.env->GetStringUTFChars(jd.data,JNI_FALSE);
 	DKDEBUG("DKSDLWindowAndroid::onHat("+DKString(_data)+")\n");
@@ -240,9 +233,7 @@ bool DKSDLWindowAndroid::onHat(const void* input, void* output)
 	return true;
 }
 
-///////////////////////////////////////////////////////////////////////
-bool DKSDLWindowAndroid::onAddJoystick(const void* input, void* output)
-{
+bool DKSDLWindowAndroid::onAddJoystick(const void* input, void* output){
 	JavaData jd = *(JavaData*)input;
 	const char* _data = jd.env->GetStringUTFChars(jd.data,JNI_FALSE);
 	DKDEBUG("DKSDLWindowAndroid::onAddJoystick("+DKString(_data)+")\n");
@@ -265,9 +256,7 @@ bool DKSDLWindowAndroid::onAddJoystick(const void* input, void* output)
 	return true;
 }
 
-//////////////////////////////////////////////////////////////////////////
-bool DKSDLWindowAndroid::onRemoveJoystick(const void* input, void* output)
-{
+bool DKSDLWindowAndroid::onRemoveJoystick(const void* input, void* output){
 	JavaData jd = *(JavaData*)input;
 	const char* _data = jd.env->GetStringUTFChars(jd.data,JNI_FALSE);
 	DKDEBUG("DKSDLWindowAndroid::onRemoveJoystick("+DKString(_data)+")\n");
@@ -283,6 +272,7 @@ bool DKSDLWindowAndroid::onRemoveJoystick(const void* input, void* output)
 	output = &val;
 	return true;
 }
+*/
 
 //////////////////////////////////////////////////////////////////////////
 bool DKSDLWindowAndroid::onSurfaceChanged(const void* input, void* output)
