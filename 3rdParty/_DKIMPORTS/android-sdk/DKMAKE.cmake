@@ -1,10 +1,17 @@
+if(NOT ANDROID)
+	return()
+endif()
+# Information
 # https://androidsdkmanager.azurewebsites.net/
 # https://developer.android.com/studio/releases/cmdline-tools
 # https://developer.android.com/studio?hl=fr#command-tools
 # https://androidsdkoffline.blogspot.com/p/android-sdk-cmdline-tools-offline.html
-if(NOT ANDROID)
-	return()
-endif()
+
+# Downloads
+# https://dl.google.com/android/repository/commandlinetools-win-7302050_latest.zip
+# https://dl.google.com/android/repository/commandlinetools-mac-7302050_latest.zip
+# https://dl.google.com/android/repository/commandlinetools-linux-7302050_latest.zip
+
 
 ### DEPENDS ###
 DKDEPEND(jdk)
@@ -17,6 +24,10 @@ DKDEPEND(android-sources)
 #DKDEPEND(android-system-images)
 
 ### VERSION ###
+DKSET(ANDROIDSDK ${3RDPARTY}/android-sdk)
+DKSETENV("ANDROID_HOME" ${ANDROIDSDK})
+#DKSET(SDKMANAGER_EXE ${ANDROIDSDK}/cmdline-tools/latest/bin/sdkmanager)
+
 #if(CMAKE_HOST_WIN32)
 #	DKSET(ANDROIDTOOLS_DL https://dl.google.com/android/repository/commandlinetools-win-7302050_latest.zip)
 #endif()
@@ -26,18 +37,12 @@ DKDEPEND(android-sources)
 #if(CMAKE_HOST_LINUX)
 #	DKSET(ANDROIDTOOLS_DL https://dl.google.com/android/repository/commandlinetools-linux-7302050_latest.zip)
 #endif()
-DKSET(ANDROIDSDK ${3RDPARTY}/android-sdk) 
-#DKSET(ANDROIDBUILDTOOLS_VERSION 30.0.3)   
-#DKSET(ANDROIDPLATFORM_VERSION android-26) # https://developer.android.com/studio/releases/platforms
-#DKSET(ANDROIDSOURCES_VERSION android-30)  
-#DKSET(ANDROIDIMAGES_VERSION android-25)
-#DKSET(SDKMANAGER_EXE ${ANDROIDSDK}/cmdline-tools/latest/bin/sdkmanager)
-DKSETENV("ANDROID_HOME" ${ANDROIDSDK})
+
+
 
 
 ### INSTALL ###
 #if(CMAKE_HOST_WIN32)
-#	## https://dl.google.com/android/repository/commandlinetools-win-7302050_latest.zip
 #	file(MAKE_DIRECTORY ${3RDPARTY}/android-sdk/cmdline-tools)
 #	DKINSTALL(${ANDROIDTOOLS_DL} android-sdk android-sdk/cmdline-tools/latest)
 #	if(NOT EXISTS ${ANDROIDSDK}/build-tools/${ANDROIDBUILDTOOLS_VERSION})
@@ -107,7 +112,6 @@ DKSETENV("ANDROID_HOME" ${ANDROIDSDK})
 
 
 #if(CMAKE_HOST_APPLE)
-	## https://dl.google.com/android/repository/commandlinetools-mac-7302050_latest.zip
 #	DKINSTALL(${ANDROIDTOOLS_DL} android-sdk android-sdk/cmdline-tools/latest)
 #	if(NOT EXISTS ${ANDROIDSDK}/build-tools/${ANDROIDBUILDTOOLS_VERSION})
 #		message("Installing Android build-tools: ${ANDROIDBUILDTOOLS_VERSION} . . .")
@@ -126,7 +130,6 @@ DKSETENV("ANDROID_HOME" ${ANDROIDSDK})
 
 
 #if(CMAKE_HOST_LINUX)
-#	## https://dl.google.com/android/repository/commandlinetools-linux-7302050_latest.zip
 #	DKINSTALL(${ANDROIDTOOLS_DL} android-sdk android-sdk/cmdline-tools/latest)
 #	if(NOT EXISTS ${ANDROIDSDK}/build-tools/${ANDROIDBUILDTOOLS_VERSION})
 #		message("Installing Android build-tools: ${ANDROIDBUILDTOOLS_VERSION} . . .")

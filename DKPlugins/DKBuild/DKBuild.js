@@ -866,6 +866,14 @@ function DKBuild_DoResults(){
 			return 
 			
 		if(TYPE === "Debug" || TYPE === "ALL"){
+			CPP_DK_Execute(MSBUILD+" "+DKPATH+appdir+"/"+APP+"/"+OS+"/"+APP+".sln /p:Configuration=Debug")
+		}
+		if(TYPE === "Release" || TYPE === "ALL"){
+			CPP_DK_Execute(MSBUILD+" "+DKPATH+appdir+"/"+APP+"/"+OS+"/"+APP+".sln /p:Configuration=Release")
+		}
+		
+		/*
+		if(TYPE === "Debug" || TYPE === "ALL"){
 			CPP_DKFile_MkDir(DKPATH+appdir+"/"+APP+"/android32/Debug")
 			CPP_DKFile_ChDir(DKPATH+appdir+"/"+APP+"/android32/Debug")
 			//CPP_DK_Execute(ANDROIDNDK+"/ndk-build.cmd NDK_DEBUG=1 NDKLOG=1")
@@ -875,6 +883,7 @@ function DKBuild_DoResults(){
 			CPP_DKFile_ChDir(DKPATH+appdir+"/"+APP+"/android32/Release")
 			//CPP_DK_Execute(ANDROIDNDK+"/ndk-build.cmd NDK_DEBUG=0 NDKLOG=1")
 		}
+		*/
 
 	}
 	
@@ -892,6 +901,14 @@ function DKBuild_DoResults(){
 			return 
 		
 		if(TYPE === "Debug" || TYPE === "ALL"){
+			CPP_DK_Execute(MSBUILD+" "+DKPATH+appdir+"/"+APP+"/"+OS+"/"+APP+".sln /p:Configuration=Debug")
+		}
+		if(TYPE === "Release" || TYPE === "ALL"){
+			CPP_DK_Execute(MSBUILD+" "+DKPATH+appdir+"/"+APP+"/"+OS+"/"+APP+".sln /p:Configuration=Release")
+		}
+		
+		/*
+		if(TYPE === "Debug" || TYPE === "ALL"){
 			CPP_DKFile_MkDir(DKPATH+appdir+"/"+APP+"/android64/Debug")
 			CPP_DKFile_ChDir(DKPATH+appdir+"/"+APP+"/android64/Debug")
 			//CPP_DK_Execute(ANDROIDNDK+"/ndk-build.cmd NDK_DEBUG=1 NDKLOG=1")
@@ -901,8 +918,8 @@ function DKBuild_DoResults(){
 			CPP_DKFile_ChDir(DKPATH+appdir+"/"+APP+"/android64/Release")
 			//CPP_DK_Execute(ANDROIDNDK+"/ndk-build.cmd NDK_DEBUG=0 NDKLOG=1")
 		}
+		*/
 	}
-	
 	
 	
 	console.log("\n")
