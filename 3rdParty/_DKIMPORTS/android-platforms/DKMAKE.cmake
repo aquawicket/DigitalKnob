@@ -1,12 +1,13 @@
 # https://dl.google.com/android/repository/platform-24_r02.zip
+# https://dl.google.com/android/repository/platform-26_r02.zip
 if(NOT ANDROID)
 	return()
 endif()
 
 
 ### VERSION ###
-DKSET(ANDROIDPLATFORMS_FOLDER android-24)
-DKSET(ANDROIDPLATFORMS_VERSION 24_r02)
+DKSET(ANDROIDPLATFORMS_FOLDER android-26)
+DKSET(ANDROIDPLATFORMS_VERSION 26_r02)
 DKSET(ANDROIDPLATFORMS_SHA1 ???)
 DKSET(ANDROIDPLATFORMS ${ANDROIDSDK}/platforms/${ANDROIDPLATFORMS_FOLDER})
 DKSET(ANDROIDPLATFORMS_DL https://dl.google.com/android/repository/platform-${ANDROIDPLATFORMS_VERSION}.zip)
