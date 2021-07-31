@@ -703,6 +703,7 @@ function DKBuild_DoResults(){
 			CPP_DK_Execute("make "+APP)
 			
 			//Create .desktop file
+			//https://www.maketecheasier.com/create-desktop-file-linux/
 			let string = "[Desktop Entry]\n"
 			string += "Encoding=UTF-8\n"
 			string += "Version=1.0\n"
@@ -748,6 +749,7 @@ function DKBuild_DoResults(){
 			CPP_DK_Execute("make "+APP)
 			
 			//Create .desktop file
+			//https://www.maketecheasier.com/create-desktop-file-linux/
 			let string = "[Desktop Entry]\n"
 			string += "Encoding=UTF-8\n"
 			string += "Version=1.0\n"
@@ -757,6 +759,7 @@ function DKBuild_DoResults(){
 			string += "Exec="+DKPATH+appdir+"/"+APP+"/linux64/Release/"+APP+"\n"
 			string += "Icon="+DKPATH+appdir+"/"+APP+"/icons/icon.png\n"
 			CPP_DKFile_StringToFile(string, DKPATH+appdir+"/"+APP+"/linux64/Release/"+APP+".desktop")
+			CPP_DKFile_Copy(DKPATH+appdir+"/"+APP+"/linux64/Release/"+APP+".desktop", "~/.local/share/applications/"+APP+".desktop", true)
 		}
 	}
 	
