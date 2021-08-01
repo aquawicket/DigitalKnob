@@ -1,13 +1,25 @@
-let USERNAME = CPP_DK_GetUsername()
+//CPP_DK_Execute("cmd /c echo press and key to continue && timeout /t 60 > nul") //Wait for key or 1 minute
+let OS = ""   //win32,win64,mac32,mac64,linux32,linux64,ios32,ios64,iossim32,iossim64,android32,android64,raspberry32,raspberry64 
+let APP = ""  //DKAppname
+let TYPE = ""  //Debug, Release, ALL
+let LINK = ""  //Static, Dynamic
+let LEVEL = ""  //Build, Rebuild, RebuildAll
+let DKPATH = ""
+let DKDOWNLOAD = ""
+let CMAKE = ""
+let ANDROIDNDK = ""
+let VISUALSTUDIO_VERSION = "2019"
+let VISUALSTUDIO = ""
+let MSBUILD = ""
+let GCC = ""
+let XCODE = ""
+let APP_LIST = []
+
+const USERNAME = CPP_DK_GetUsername()
 if(!USERNAME){
 	console.error("! could not get the current username !")
-	USERNAME = "aquawicket"
-	if(CPP_DK_GetOS() === "Raspberry")
-		USERNAME = "pi"
 }
 console.log("username was set to: "+USERNAME)
-
-//CPP_DK_Execute("cmd /c echo press and key to continue && timeout /t 60 > nul") //Wait for key or 1 minute
 
 function DKBuild_GetDKMakeVariable(file, variable){
 	const str = CPP_DKFile_FileToString(file)
@@ -40,25 +52,6 @@ function DKBuild_GetDKMakeVariable(file, variable){
 	}
 	return null
 }
-
-let OS = ""   //win32,win64,mac32,mac64,linux32,linux64,ios32,ios64,iossim32,iossim64,android32,android64,raspberry32,raspberry64 
-let APP = ""  //DKAppname
-let TYPE = ""  //Debug, Release, ALL
-let LINK = ""  //Static, Dynamic
-let LEVEL = ""  //Build, Rebuild, RebuildAll
-let DKPATH = ""
-let DKDOWNLOAD = ""
-let CMAKE = ""
-let ANDROIDNDK = ""
-let VISUALSTUDIO_VERSION = "2019"
-let VISUALSTUDIO = ""
-let MSBUILD = ""
-let GCC = ""
-let XCODE = ""
-let APP_LIST = []
-
-
- 
 
 function DKBuild_init(){
 	CPP_DK_Create("DKCurl")
@@ -183,27 +176,22 @@ function DKBuild_InstallXcode(){
 }
 
 function DKBuild_ValidateNDK(){
-    //GOAL: Eventually we'll use the same packages DKMAKE.cmake script to build it
-
-	const THIRDPARTY = DKPATH+"DK/3rdParty"
-	const ANDROIDNDK_DL = DKBuild_GetDKMakeVariable(THIRDPARTY+"/_DKIMPORTS/android-ndk/DKMAKE.cmake", "ANDROIDNDK_DL")
-	const ANDROIDNDK_VERSION = DKBuild_GetDKMakeVariable(THIRDPARTY+"/_DKIMPORTS/android-ndk/DKMAKE.cmake", "ANDROIDNDK_VERSION")
-	const ANDROIDSDK = THIRDPARTY+"/android-sdk"
-	const ANDROIDNDK = THIRDPARTY+"/android-ndk-"+ANDROIDNDK_VERSION
-	//ANDROIDNDK = CPP_DKFile_GetShortName(ANDROIDNDK)
+    //GOAL: Eventually we'll use the DKMAKE.cmake script to install
+	const ANDROIDNDK_DL = DKBuild_GetDKMakeVariable(DKPATH+"DK/3rdParty/_DKIMPORTS/android-ndk/DKMAKE.cmake", "ANDROIDNDK_DL")
+	const ANDROIDNDK_VERSION = DKBuild_GetDKMakeVariable(DKPATH+"DK/3rdParty/_DKIMPORTS/android-ndk/DKMAKE.cmake", "ANDROIDNDK_VERSION")
+	ANDROIDNDK = DKPATH+"3rdParty/android-ndk-"+ANDROIDNDK_VERSION
 	
 	//set environment variables
 	if(ANDROIDNDK !== CPP_DK_Execute("echo %VS_NdkRoot%", "rt"))
 		CPP_DK_Execute("setx VS_NdkRoot "+ANDROIDNDK) //https://stackoverflow.com/a/54350289/688352
 		
 	// Validate install
-	console.log("Looking for Android NDK")
 	if(!CPP_DKFile_Exists(ANDROIDNDK+"/installed")){
-		console.log("Android NDK - NOT INSTALLED - Installing . . .")
+		console.log("Installing Android NDK "+ANDROIDNDK_VERSION+" . . .")
 		CPP_DKCurl_Download(ANDROIDNDK_DL, DKDOWNLOAD)
 		const index = ANDROIDNDK_DL.lastIndexOf("/")
 		const filename = ANDROIDNDK_DL.substring(index+1)
-		CPP_DKArchive_Extract(DKDOWNLOAD+"/"+filename, THIRDPARTY)
+		CPP_DKArchive_Extract(DKDOWNLOAD+"/"+filename, DKPATH+"DK/3rdParty")
 		CPP_DKFile_StringToFile(ANDROIDNDK_VERSION, ANDROIDNDK+"/installed")
 	}
 }
@@ -864,6 +852,7 @@ function DKBuild_DoResults(){
 		CPP_DKFile_MkDir(DKPATH+appdir+"/"+APP+"/android32")
 		CPP_DKFile_ChDir(DKPATH+appdir+"/"+APP+"/android32")
 		if(CPP_DK_GetOS() === "Windows")
+			console.log(CMAKE+" -G \"Visual Studio 16 2019\" -A ARM -DCMAKE_TOOLCHAIN_FILE="+ANDROIDNDK+"/build/cmake/android.toolchain.cmake -DANDROIDNDK="+ANDROIDNDK+" -DANDROID_ABI=armeabi-v7a -DANDROID_NATIVE_API_LEVEL=26 –DCMAKE_SYSTEM_NAME=ANDROID -DCMAKE_ANDROID_STL=c++_static "+cmake_string+DKPATH+"DK")
 			let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Visual Studio 16 2019\" -A ARM -DCMAKE_TOOLCHAIN_FILE="+ANDROIDNDK+"/build/cmake/android.toolchain.cmake -DANDROIDNDK="+ANDROIDNDK+" -DANDROID_ABI=armeabi-v7a -DANDROID_NATIVE_API_LEVEL=26 –DCMAKE_SYSTEM_NAME=ANDROID -DCMAKE_ANDROID_STL=c++_static "+cmake_string+DKPATH+"DK")
 		if(CPP_DK_GetOS() === "Linux" || CPP_DK_GetOS() === "Mac")
 			rtvalue = CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DKPATH+"DK")

@@ -98,7 +98,6 @@ function DKBuildConsole_ChooseUpdate() {
 			CPP_DK_Execute("find . -name \"CMakeCache.*\" -delete") 
 			CPP_DK_Execute("find . -type d -name \"CMakeFiles\" -delete")
 		}
-		
 	}
 }
 
