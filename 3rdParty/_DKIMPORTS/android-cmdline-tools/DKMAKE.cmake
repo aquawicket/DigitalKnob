@@ -31,7 +31,7 @@ endif()
 ### INSTALL ###
 if(CMAKE_HOST_WIN32)
 	file(MAKE_DIRECTORY ${3RDPARTY}/android-sdk/cmdline-tools)
-	DKINSTALL(${ANDROIDTOOLS_DL} android-cmdline-tools ${3RDPARTY}/android-sdk/cmdline-tools/latest)
+	DKINSTALL(${ANDROIDTOOLS_DL} android-cmdline-tools android-sdk/cmdline-tools/latest)
 	#DKSETPATH(${ANDROIDTOOLS}/bin)
 	DKEXECUTE_PROCESS(COMMAND cmd /c sdkmanager WORKING_DIRECTORY ${ANDROIDTOOLS}/bin)
 	WaitForEnter()

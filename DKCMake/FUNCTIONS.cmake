@@ -2750,6 +2750,11 @@ function(DKRUNDEPENDS arg)
 			set(disable_script "${disable_script}${line}\n")
 		endif()
 		
+		string(FIND "${line}" "DKSET(" _indexa)
+		if(${_indexa} GREATER -1)
+			set(disable_script "${disable_script}${line}\n")
+		endif()
+		
 		## DISABLE_DKDEPEND(
 		##NOTE: The 'DKDEPEND(' search commands take care of 'DISABLE_DKDEPEND(' since 'DKDEPEND' is already in the word
 		
@@ -2798,6 +2803,11 @@ function(DKRUNDEPENDS arg)
 		endif()	
 		
 		string(FIND "${line}" "DKDEPEND(" _indexa)
+		if(${_indexa} GREATER -1)
+			set(depends_script "${depends_script}${line}\n")
+		endif()
+		
+		string(FIND "${line}" "DKSET(" _indexa)
 		if(${_indexa} GREATER -1)
 			set(depends_script "${depends_script}${line}\n")
 		endif()
