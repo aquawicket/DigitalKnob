@@ -101,7 +101,7 @@ DKSETENV("ANDROID_HOME" ${ANDROIDSDK})
 #	if(NOT EXISTS ${ANDROIDSDK}/system-images/${ANDROIDIMAGES_VERSION}/google_apis/x86_64)
 #		message(FATAL_ERROR "Failed to install Android Image x86_64")
 #	endif()
-endif()
+#endif()
 
 
 #if(CMAKE_HOST_APPLE)
