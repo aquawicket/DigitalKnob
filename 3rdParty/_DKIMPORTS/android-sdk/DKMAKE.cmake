@@ -20,15 +20,12 @@ DKSETENV("ANDROID_HOME" ${ANDROIDSDK})
 DKDEPEND(jdk)
 DKDEPEND(apache-ant)
 DKDEPEND(android-ndk)
+DKDEPEND(android-cmdline-tools)
 DKDEPEND(android-platforms)
 DKDEPEND(android-sources)
 #DKDEPEND(android-system-images)
 DKDEPEND(android-platform-tools)
-DKDEPEND(android-cmdline-tools)
 DKDEPEND(android-build-tools)
-
-
-
 
 
 ### INSTALL ###
