@@ -13,16 +13,6 @@ endif()
 # https://dl.google.com/android/repository/commandlinetools-linux-7302050_latest.zip
 
 
-### DEPENDS ###
-DKDEPEND(jdk)
-DKDEPEND(apache-ant)
-DKDEPEND(android-ndk)
-DKDEPEND(android-platforms)
-DKDEPEND(android-sources)
-#DKDEPEND(android-system-images)
-DKDEPEND(android-platform-tools)
-DKDEPEND(android-build-tools)
-
 ### VERSION ###
 DKSET(ANDROIDTOOLS ${ANDROIDSDK}/cmdline-tools/latest)
 DKSET(SDKMANAGER_EXE ${ANDROIDTOOLS}/bin/sdkmanager.bat)
@@ -41,7 +31,7 @@ endif()
 ### INSTALL ###
 if(CMAKE_HOST_WIN32)
 	file(MAKE_DIRECTORY ${ANDROIDSDK}/cmdline-tools)
-	DKINSTALL(${ANDROIDTOOLS_DL} android-cmdline-tools ${ANDROIDTOOLS})
+	DKINSTALL(${ANDROIDTOOLS_DL} android-cmdline-tools ${ANDROIDSDK}/cmdline-tools/latest)
 	#DKSETPATH(${ANDROIDTOOLS}/bin)
 	DKEXECUTE_PROCESS(COMMAND cmd /c sdkmanager WORKING_DIRECTORY ${ANDROIDTOOLS}/bin)
 	WaitForEnter()
