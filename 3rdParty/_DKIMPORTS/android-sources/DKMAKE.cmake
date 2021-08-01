@@ -14,5 +14,5 @@ DKSET(ANDROIDSOURCES_DL https://dl.google.com/android/repository/sources-${ANDRO
 
 
 ### INSTALL ###
-file(MAKE_DIRECTORY ${3RDPARTY}/android-sdk/sources)
+file(MAKE_DIRECTORY ${ANDROIDSDK}/sources)
 DKINSTALL(${ANDROIDSOURCES_DL} android-sources android-sdk/sources/${ANDROIDSOURCES_FOLDER})

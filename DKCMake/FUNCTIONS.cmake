@@ -28,19 +28,19 @@ function(VAR_EXISTS varname result)
 endfunction()
 
 
-function(WaitForEnter)
+function(Wait)
 	if(CMAKE_HOST_WIN32)	
-		message("Press ENTER to continue . . .")
-		execute_process(COMMAND cmd /c set /p DUMMY=. WORKING_DIRECTORY C:/)
+		#execute_process(COMMAND cmd /c echo press enter to continue && set /p DUMMY=. WORKING_DIRECTORY C:/)
+		execute_process(COMMAND cmd /c echo press and key to continue && timeout /t 60 > nul WORKING_DIRECTORY C:/)
 		return()
 	endif()
-		message("WaitForEnter() Not implemented for this platform")
+		message("Wait() Not implemented for this platform")
 endfunction()
 
 
 function(DUMP variable)
 	message("variable = ${variable}")
-	WaitForEnter()
+	Wait()
 endfunction()
 
 
@@ -71,17 +71,14 @@ endfunction()
 
 function(DELETE_CACHE)
 	get_filename_component(DIGITALKNOB ${CMAKE_SOURCE_DIR} ABSOLUTE)
-	message("Deleteing leftover CMakeCache.txt files")
+	message("Deleteing CMake cache . . .")
 	if(CMAKE_HOST_WIN32)
-		#execute_process(COMMAND cmd /c for /r ${DIGITALKNOB} %i in (CMakeCache.tx*) do @echo del "%i" WORKING_DIRECTORY ${DIGITALKNOB})
-        #execute_process(COMMAND cmd /c for /d /r %i in (*CMakeFiles*) do @echo rmdir /s "%i" WORKING_DIRECTORY ${DIGITALKNOB})
-		execute_process(COMMAND cmd /c for /r ${DIGITALKNOB} %i in (CMakeCache.tx*) do del "%i" WORKING_DIRECTORY ${DIGITALKNOB})
+		execute_process(COMMAND cmd /c for /r %i in (CMakeCache.*) do del "%i" WORKING_DIRECTORY ${DIGITALKNOB})
         execute_process(COMMAND cmd /c for /d /r %i in (*CMakeFiles*) do rmdir /s /Q "%i" WORKING_DIRECTORY ${DIGITALKNOB})
 	else()
 		execute_process(COMMAND find . -name "CMakeCache.*" -delete WORKING_DIRECTORY ${DIGITALKNOB})
-		execute_process(COMMAND find . -type d -name "CMakeFiles" -delete; WORKING_DIRECTORY ${DIGITALKNOB})
+		execute_process(COMMAND find . -type d -name "CMakeFiles" -delete WORKING_DIRECTORY ${DIGITALKNOB})
 	endif()
-	WaitForEnter()
 endfunction()
 
 function(DKSETENV name value)
@@ -315,8 +312,9 @@ endfunction()
 
 # For archive files such as libraries and assets, the arguments are:  The download url, the name of its _DKIMPORTS folder, The name given to the installed 3rdParty/folder  
 # For executable files such as software amd IDE's the arguments are:  The download url, the name of the final name of the dl file, The installation path to check for installation.
-function(DKINSTALL url source_path destination_path)
-	if(EXISTS ${3RDPARTY}/${destination_path}/installed)
+function(DKINSTALL url import_path destination_path)
+	message("DKINSTALL(${url} ${import_path} ${destination_path})")
+	if(EXISTS ${destination_path}/installed)
 		return()
 	endif()
 
@@ -324,12 +322,23 @@ function(DKINSTALL url source_path destination_path)
 	file(MAKE_DIRECTORY ${CURRENT_DIR})
 	
 	get_filename_component(filename ${url} NAME)
+	message("filename: ${filename}")
 	dk_getExtension(${url} extension)
+	message("extension: ${extension}")
 	DKDOWNLOAD(${url})
+	
+	string(FIND "${destination_path}" "/" index REVERSE)
+	if(index GREATER -1)
+		string(SUBSTRING "${destination_path}" ${index} -1 folder)
+	else()
+		set(folder ${destination_path})
+	endif()
+	message("folder: ${folder}")
+	
 	
 	#set(filename "${destination_path}${extension}")
 	#DKDOWNLOAD(${url} ${filename})
-			
+				
 	DKSET(FILETYPE "UNKNOWN")
 	if(NOT ${extension} STREQUAL "")
 		if(${extension} STREQUAL ".bz")
@@ -371,32 +380,33 @@ function(DKINSTALL url source_path destination_path)
 	endif()
 		
 	if(${FILETYPE} STREQUAL "Archive")
+		DKREMOVE(${3RDPARTY}/UNZIPPED)
 		DKEXTRACT(${DIGITALKNOB}/Download/${filename} ${3RDPARTY}/UNZIPPED)
 		#We either have a root folder in /UNZIPPED, or multiple files without a root folder
 		file(GLOB items RELATIVE "${3RDPARTY}/UNZIPPED/" "${3RDPARTY}/UNZIPPED/*")
 		list(LENGTH items count)
 		if(${count} GREATER 2) ##NOTE: This should be "${count} GREATER 1" but msys has a readme file in it next to the inner msys folder and that messes things up for more than 1
 			#Zip extracted with no root folder, Rename UNZIPPED and move to 3rdParty
-			file(RENAME ${3RDPARTY}/UNZIPPED ${3RDPARTY}/${destination_path})
+			file(RENAME ${3RDPARTY}/UNZIPPED ${3RDPARTY}/${folder})
 		else()
-			if(EXISTS ${3RDPARTY}/UNZIPPED/${destination_path}) ##Zip extracted to expected folder. Move the folder to 3rdParty
-				file(RENAME ${3RDPARTY}/UNZIPPED/${destination_path} ${3RDPARTY}/${destination_path})
-				DKREMOVE(${3RDPARTY}/UNZIPPED)
+			if(EXISTS ${3RDPARTY}/UNZIPPED/${folder}) ##Zip extracted to expected folder. Move the folder to 3rdParty
+				file(RENAME ${3RDPARTY}/UNZIPPED/${folder} ${3RDPARTY}/${folder})
+				#DKREMOVE(${3RDPARTY}/UNZIPPED)
 			else() #Zip extracted to a root folder, but not named what we expected. Rename and move folder to 3rdParty
-				file(RENAME ${3RDPARTY}/UNZIPPED/${items} ${3RDPARTY}/${destination_path})
-				DKREMOVE(${3RDPARTY}/UNZIPPED)
+				file(RENAME ${3RDPARTY}/UNZIPPED/${items} ${3RDPARTY}/${folder})
+				#DKREMOVE(${3RDPARTY}/UNZIPPED)
 			endif() 
 		endif()
 	#elseif(${FILETYPE} STREQUAL "Executable")
 	#	DKSETPATH(${DIGITALKNOB}/Download)
 	#	DKSET(QUEUE_BUILD ON)
-	#	DKEXECUTE(${DIGITALKNOB}/Download/source_path)
+	#	DKEXECUTE(${DIGITALKNOB}/Download/${filename})
 	else() #NOT ARCHIVE, just copy the file into it's 3rdParty folder
-		DKCOPY(${DIGITALKNOB}/Download/${filename} ${3RDPARTY}/${destination_path}/${filename} TRUE)
+		DKCOPY(${DIGITALKNOB}/Download/${filename} ${3RDPARTY}/${folder}/${filename} TRUE)
 	endif()
 
-	DKCOPY(${DKIMPORTS}/${source_path}/ ${3RDPARTY}/${destination_path}/ TRUE)
-	file(WRITE ${3RDPARTY}/${destination_path}/installed "${destination_path}")
+	DKCOPY(${DKIMPORTS}/${import_path}/ ${3RDPARTY}/${folder}/ TRUE)
+	file(WRITE ${3RDPARTY}/${folder}/installed "${folder}")
 endfunction()
 
 

@@ -7,6 +7,7 @@ if(!USERNAME){
 }
 console.log("username was set to: "+USERNAME)
 
+//CPP_DK_Execute("cmd /c echo press and key to continue && timeout /t 60 > nul") //Wait for key or 1 minute
 
 function DKBuild_GetDKMakeVariable(file, variable){
 	const str = CPP_DKFile_FileToString(file)
@@ -184,27 +185,25 @@ function DKBuild_InstallXcode(){
 function DKBuild_ValidateNDK(){
     //GOAL: Eventually we'll use the same packages DKMAKE.cmake script to build it
 
-	const ANDROIDNDK_DL = DKBuild_GetDKMakeVariable(DKPATH+"DK/3rdParty/_DKIMPORTS/android-ndk/DKMAKE.cmake", "ANDROIDNDK_DL")
-	const ANDROIDNDK_FILE = DKBuild_GetDKMakeVariable(DKPATH+"DK/3rdParty/_DKIMPORTS/android-ndk/DKMAKE.cmake", "ANDROIDNDK_FILE")
-	const ANDROIDNDK_VERSION = DKBuild_GetDKMakeVariable(DKPATH+"DK/3rdParty/_DKIMPORTS/android-ndk/DKMAKE.cmake", "ANDROIDNDK_VERSION")
-	const ANDROIDNDK_BUILD = DKBuild_GetDKMakeVariable(DKPATH+"DK/3rdParty/_DKIMPORTS/android-ndk/DKMAKE.cmake", "ANDROIDNDK_BUILD")
-	const ANDROIDSDK = DKPATH+"DK/3rdParty/android-sdk"
-	ANDROIDNDK = ANDROIDSDK+"/ndk/"+ANDROIDNDK_BUILD
+	const THIRDPARTY = DKPATH+"DK/3rdParty"
+	const ANDROIDNDK_DL = DKBuild_GetDKMakeVariable(THIRDPARTY+"/_DKIMPORTS/android-ndk/DKMAKE.cmake", "ANDROIDNDK_DL")
+	const ANDROIDNDK_VERSION = DKBuild_GetDKMakeVariable(THIRDPARTY+"/_DKIMPORTS/android-ndk/DKMAKE.cmake", "ANDROIDNDK_VERSION")
+	const ANDROIDSDK = THIRDPARTY+"/android-sdk"
+	const ANDROIDNDK = THIRDPARTY+"/android-ndk-"+ANDROIDNDK_VERSION
 	//ANDROIDNDK = CPP_DKFile_GetShortName(ANDROIDNDK)
 	
 	//set environment variables
-	//if(ANDROIDNDK !== CPP_DK_Execute("echo %NDK_ROOT%", "rt"))
-	//	CPP_DK_Execute("setx NDK_ROOT "+ANDROIDNDK)
 	if(ANDROIDNDK !== CPP_DK_Execute("echo %VS_NdkRoot%", "rt"))
 		CPP_DK_Execute("setx VS_NdkRoot "+ANDROIDNDK) //https://stackoverflow.com/a/54350289/688352
 		
 	// Validate install
 	console.log("Looking for Android NDK")
 	if(!CPP_DKFile_Exists(ANDROIDNDK+"/installed")){
-		console.log("Android NDK - NOT FOUND - Installing . . .")
+		console.log("Android NDK - NOT INSTALLED - Installing . . .")
 		CPP_DKCurl_Download(ANDROIDNDK_DL, DKDOWNLOAD)
-		CPP_DKArchive_Extract(DKDOWNLOAD+"/"+ANDROIDNDK_FILE, ANDROIDSDK+"/ndk")
-		CPP_DKFile_Rename(ANDROIDSDK+"/ndk/android-ndk-"+ANDROIDNDK_VERSION, ANDROIDNDK, true)
+		const index = ANDROIDNDK_DL.lastIndexOf("/")
+		const filename = ANDROIDNDK_DL.substring(index+1)
+		CPP_DKArchive_Extract(DKDOWNLOAD+"/"+filename, THIRDPARTY)
 		CPP_DKFile_StringToFile(ANDROIDNDK_VERSION, ANDROIDNDK+"/installed")
 	}
 }

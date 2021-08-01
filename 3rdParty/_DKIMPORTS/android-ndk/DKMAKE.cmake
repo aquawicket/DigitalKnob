@@ -4,7 +4,7 @@ endif()
 
 ### VERSION ###
 DKSET(ANDROIDNDK_VERSION r20b)
-DKSET(ANDROIDNDK_NAME android-ndk-r20b-windows-x86_64)
+DKSET(ANDROIDNDK_NAME android-ndk-r20b)
 DKSET(ANDROIDNDK_BUILD 20.1.5948944)
 DKSET(ANDROIDNDK_FILE android-ndk-r20b-windows-x86_64.zip)
 DKSET(ANDROIDNDK_DL https://dl.google.com/android/repository/android-ndk-r20b-windows-x86_64.zip)
@@ -24,22 +24,22 @@ DKSET(ANDROIDNDK_SHA1 ead0846608040b8344ad2bc9bc721b88cf13fb8d)
 #DKSET(ANDROIDNDK_DL https://dl.google.com/android/repository/android-ndk-r22b-windows-x86_64.zip)
 #DKSET(ANDROIDNDK_SHA1 96ba1a049303cf6bf3ee84cfd64d6bcd43486a50)
 
-DKSET(ANDROIDNDK ${ANDROIDSDK}/ndk/${ANDROIDNDK_BUILD})
+DKSET(ANDROIDNDK ${3RDPARTY}/${ANDROIDNDK_NAME})
 DKSETENV("NDK_ROOT" ${ANDROIDNDK})
 
-file(MAKE_DIRECTORY ${3RDPARTY}/android-sdk/ndk)
+#file(MAKE_DIRECTORY ${ANDROIDSDK}/ndk)
 ### INSTALL ###
 if(CMAKE_HOST_WIN32)
 	## https://dl.google.com/android/repository/android-ndk-r21e-windows-x86_64.zip
-	DKINSTALL(https://dl.google.com/android/repository/${ANDROIDNDK_FILE} android-ndk android-sdk/ndk/${ANDROIDNDK_BUILD})
+	DKINSTALL(${ANDROIDNDK_DL} android-ndk ${ANDROIDNDK})
 endif()
 
 if(CMAKE_HOST_APPLE)
 	## https://dl.google.com/android/repository/android-ndk-r21e-darwin-x86_64.dmg
-	DKINSTALL(https://dl.google.com/android/repository/android-ndk-${ANDROIDNDK_VERSION}-darwin-x86_64.zip android-ndk android-sdk/ndk/${ANDROIDNDK_BUILD})
+	DKINSTALL(https://dl.google.com/android/repository/android-ndk-${ANDROIDNDK_VERSION}-darwin-x86_64.zip android-ndk ${ANDROIDNDK})
 endif()
 
 if(CMAKE_HOST_LINUX)
 	## https://dl.google.com/android/repository/android-ndk-r21e-linux-x86_64.zip
-	DKINSTALL(https://dl.google.com/android/repository/android-ndk-${ANDROIDNDK_VERSION}-linux-x86_64.zip android-ndk android-sdk/ndk/${ANDROIDNDK_BUILD})
+	DKINSTALL(https://dl.google.com/android/repository/android-ndk-${ANDROIDNDK_VERSION}-linux-x86_64.zip android-ndk ${ANDROIDNDK})
 endif()

@@ -1,9 +1,6 @@
 if(NOT CMAKE_HOST_WIN32)
 	return()
 endif()
-if(NOT ANDROID)
-	return()
-endif()
 
 
 ### VERSION ####
@@ -15,4 +12,4 @@ DKSETENV("ANT_HOME" ${ANT})
 
 ### INSTALL ###
 ## https://mirror.cogentco.com/pub/apache/ant/binaries/apache-ant-1.9.15-bin.zip
-DKINSTALL(https://mirror.cogentco.com/pub/apache/ant/binaries/${ANT_NAME}-bin.zip apache-ant ${ANT_NAME})
+DKINSTALL(https://mirror.cogentco.com/pub/apache/ant/binaries/${ANT_NAME}-bin.zip apache-ant ${ANT})

@@ -12,7 +12,7 @@ DKSETENV("JAVA_HOME" ${JDK})
 
 ### INSTALL ###
 #https://download.java.net/java/GA/jdk9/9.0.4/binaries/openjdk-9.0.4_windows-x64_bin.tar.gz
-DKINSTALL(https://download.java.net/java/GA/jdk9/9.0.4/binaries/${JDK_NAME}.tar.gz jdk ${JDK_NAME})
+DKINSTALL(https://download.java.net/java/GA/jdk9/9.0.4/binaries/${JDK_NAME}.tar.gz jdk ${JDK})
 
 ### LINK ###
 DKINCLUDE(${JDK}/)	
