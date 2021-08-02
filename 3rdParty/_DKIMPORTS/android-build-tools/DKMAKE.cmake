@@ -2,7 +2,7 @@
 # https://developer.android.com/studio/releases/build-tools
 # https://androidsdkoffline.blogspot.com/p/android-sdk-build-tools.html
 
-# Downloads
+# Source
 # https://dl.google.com/android/repository/build-tools_r30.0.1-windows.zip
 # https://dl.google.com/android/repository/build-tools_r30.0.1-darwin.zip
 # https://dl.google.com/android/repository/build-tools_r30.0.1-linux.zip
@@ -11,7 +11,6 @@
 
 ### VERSION ###
 DKSET(ANDROIDBUILDTOOLS_VERSION 30.0.3)
-DKSET(ANDROIDBUILDTOOLS_SHA1 ???)
 DKSET(ANDROIDBUILDTOOLS ${ANDROIDSDK}/build-tools/${ANDROIDBUILDTOOLS_VERSION})
 if(CMAKE_HOST_WIN32)
 	DKSET(ANDROIDBUILDTOOLS_DL https://dl.google.com/android/repository/91936d4ee3ccc839f0addd53c9ebf087b1e39251.build-tools_r${ANDROIDBUILDTOOLS_VERSION}-windows.zip)
