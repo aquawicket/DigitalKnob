@@ -179,7 +179,7 @@ function DKBuild_ValidateNDK(){
     //GOAL: Eventually we'll use the DKMAKE.cmake script to install
 	const ANDROIDNDK_DL = DKBuild_GetDKMakeVariable(DKPATH+"DK/3rdParty/_DKIMPORTS/android-ndk/DKMAKE.cmake", "ANDROIDNDK_DL")
 	const ANDROIDNDK_VERSION = DKBuild_GetDKMakeVariable(DKPATH+"DK/3rdParty/_DKIMPORTS/android-ndk/DKMAKE.cmake", "ANDROIDNDK_VERSION")
-	ANDROIDNDK = DKPATH+"3rdParty/android-ndk-"+ANDROIDNDK_VERSION
+	ANDROIDNDK = DKPATH+"DK/3rdParty/android-ndk-"+ANDROIDNDK_VERSION
 	
 	//set environment variables
 	if(ANDROIDNDK !== CPP_DK_Execute("echo %VS_NdkRoot%", "rt"))
