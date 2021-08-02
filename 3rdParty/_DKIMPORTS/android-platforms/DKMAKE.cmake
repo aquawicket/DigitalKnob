@@ -1,9 +1,5 @@
 # https://dl.google.com/android/repository/platform-24_r02.zip
 # https://dl.google.com/android/repository/platform-26_r02.zip
-if(NOT ANDROID)
-	return()
-endif()
-
 
 ### VERSION ###
 DKSET(ANDROIDPLATFORMS_FOLDER android-26)
@@ -14,5 +10,5 @@ DKSET(ANDROIDPLATFORMS_DL https://dl.google.com/android/repository/platform-${AN
 
 
 ### INSTALL ###
-file(MAKE_DIRECTORY ${ANDROIDSDK}/platforms)
+#file(MAKE_DIRECTORY ${ANDROIDSDK}/platforms)
 DKINSTALL(${ANDROIDPLATFORMS_DL} android-platforms ${ANDROIDPLATFORMS})

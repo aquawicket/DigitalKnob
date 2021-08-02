@@ -381,20 +381,20 @@ function(DKINSTALL url import_path destination_path)
 	endif()
 		
 	if(${FILETYPE} STREQUAL "Archive")
-		DKREMOVE(${3RDPARTY}/UNZIPPED)
-		DKEXTRACT(${DIGITALKNOB}/Download/${filename} ${3RDPARTY}/UNZIPPED)
+		DKREMOVE(${DIGITALKNOB}/Download/UNZIPPED)
+		DKEXTRACT(${DIGITALKNOB}/Download/${filename} ${DIGITALKNOB}/Download/UNZIPPED)
 		#We either have a root folder in /UNZIPPED, or multiple files without a root folder
-		file(GLOB items RELATIVE "${3RDPARTY}/UNZIPPED/" "${3RDPARTY}/UNZIPPED/*")
+		file(GLOB items RELATIVE "${DIGITALKNOB}/Download/UNZIPPED/" "${DIGITALKNOB}/Download/UNZIPPED/*")
 		list(LENGTH items count)
 		if(${count} GREATER 2) ##NOTE: This should be "${count} GREATER 1" but msys has a readme file in it next to the inner msys folder and that messes things up for more than 1
 			#Zip extracted with no root folder, Rename UNZIPPED and move to 3rdParty
-			file(RENAME ${3RDPARTY}/UNZIPPED ${3RDPARTY}/${folder})
+			file(RENAME ${DIGITALKNOB}/Download/UNZIPPED ${destination_path})
 		else()
-			if(EXISTS ${3RDPARTY}/UNZIPPED/${folder}) ##Zip extracted to expected folder. Move the folder to 3rdParty
-				file(RENAME ${3RDPARTY}/UNZIPPED/${folder} ${3RDPARTY}/${folder})
+			if(EXISTS ${DIGITALKNOB}/Download/UNZIPPED/${folder}) ##Zip extracted to expected folder. Move the folder to 3rdParty
+				file(RENAME ${DIGITALKNOB}/Download/UNZIPPED/${folder} ${destination_path})
 				#DKREMOVE(${3RDPARTY}/UNZIPPED)
 			else() #Zip extracted to a root folder, but not named what we expected. Rename and move folder to 3rdParty
-				file(RENAME ${3RDPARTY}/UNZIPPED/${items} ${3RDPARTY}/${folder})
+				file(RENAME ${DIGITALKNOB}/Download/UNZIPPED/${items} ${destination_path})
 				#DKREMOVE(${3RDPARTY}/UNZIPPED)
 			endif() 
 		endif()
@@ -403,11 +403,11 @@ function(DKINSTALL url import_path destination_path)
 	#	DKSET(QUEUE_BUILD ON)
 	#	DKEXECUTE(${DIGITALKNOB}/Download/${filename})
 	else() #NOT ARCHIVE, just copy the file into it's 3rdParty folder
-		DKCOPY(${DIGITALKNOB}/Download/${filename} ${3RDPARTY}/${folder}/${filename} TRUE)
+		DKCOPY(${DIGITALKNOB}/Download/${filename} ${destination_path}/${filename} TRUE)
 	endif()
 
-	DKCOPY(${DKIMPORTS}/${import_path}/ ${3RDPARTY}/${folder}/ TRUE)
-	file(WRITE ${3RDPARTY}/${folder}/installed "${folder}")
+	DKCOPY(${DKIMPORTS}/${import_path}/ ${destination_path}/ TRUE)
+	file(WRITE ${destination_path}/installed "${folder}")
 endfunction()
 
 

@@ -8,4 +8,4 @@ DKSET(BABEL ${3RDPARTY}/babel)
 
 ### INSTALL ###
 ## https://unpkg.com/@babel/standalone@7.14.4/babel.min.js
-DKINSTALL(https://unpkg.com/@babel/standalone@${BABEL_VERSION}/babel.min.js babel babel)
+DKINSTALL(https://unpkg.com/@babel/standalone@${BABEL_VERSION}/babel.min.js babel ${BABEL})
