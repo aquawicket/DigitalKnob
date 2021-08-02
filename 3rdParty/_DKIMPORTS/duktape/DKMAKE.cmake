@@ -13,7 +13,7 @@ DKSET(DUKTAPE ${3RDPARTY}/${DUKTAPE_NAME})
 ## https://github.com/svaarala/duktape/archive/refs/heads/master.zip
 ## https://codeload.github.com/Squareys/duktape/zip/refs/heads/let-support
 ##DKINSTALL(https://duktape.org/${DUKTAPE_NAME}.tar.xz duktape ${DUKTAPE_NAME})
-DKINSTALL(https://codeload.github.com/Squareys/duktape/zip/refs/heads/${DUKTAPE_VERSION} duktape ${DUKTAPE_NAME})
+DKINSTALL(https://codeload.github.com/Squareys/duktape/zip/refs/heads/${DUKTAPE_VERSION} duktape ${DUKTAPE})
 
 
 IF(NOT EXISTS ${DUKTAPE}/src)

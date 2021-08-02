@@ -15,4 +15,4 @@ DKSET(ANDROIDPLATFORMS_DL https://dl.google.com/android/repository/platform-${AN
 
 ### INSTALL ###
 file(MAKE_DIRECTORY ${ANDROIDSDK}/platforms)
-DKINSTALL(${ANDROIDPLATFORMS_DL} android-platforms android-sdk/platforms/${ANDROIDPLATFORMS_FOLDER})
+DKINSTALL(${ANDROIDPLATFORMS_DL} android-platforms ${ANDROIDPLATFORMS})

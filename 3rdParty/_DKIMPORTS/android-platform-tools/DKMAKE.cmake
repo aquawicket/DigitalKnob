@@ -23,4 +23,4 @@ endif()
 
 ### INSTALL ###
 file(MAKE_DIRECTORY ${ANDROIDSDK}/platform-tools)
-DKINSTALL(${ANDROIDPLATFORMTOOLS_DL} android-platform-tools android-sdk/platform-tools/${ANDROIDPLATFORMTOOLS_VERSION})
+DKINSTALL(${ANDROIDPLATFORMTOOLS_DL} android-platform-tools ${ANDROIDPLATFORMTOOLS})

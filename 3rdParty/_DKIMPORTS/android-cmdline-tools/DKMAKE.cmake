@@ -1,6 +1,3 @@
-if(NOT ANDROID)
-	return()
-endif()
 # Information
 # https://androidsdkmanager.azurewebsites.net/
 # https://developer.android.com/studio/releases/cmdline-tools
@@ -31,9 +28,7 @@ endif()
 ### INSTALL ###
 if(CMAKE_HOST_WIN32)
 	DKINSTALL(${ANDROIDTOOLS_DL} android-cmdline-tools ${ANDROIDTOOLS})
-	Wait()
-	DKEXECUTE_PROCESS(COMMAND cmd /c sdkmanager WORKING_DIRECTORY ${ANDROIDTOOLS}/bin)
-	Wait()
+	DKEXECUTE_PROCESS(COMMAND cmd /c sdkmanager --sdk_root=${ANDROIDSDK} WORKING_DIRECTORY ${ANDROIDTOOLS}/bin)
 #	if(NOT EXISTS ${ANDROIDSDK}/build-tools/${ANDROIDBUILDTOOLS_VERSION})
 #		message("Installing Android build-tools: ${ANDROIDBUILDTOOLS_VERSION} . . .")
 #		set(ARGUMNTS "${SDKMANAGER_EXE} --install build-tools\\;${ANDROIDBUILDTOOLS_VERSION} --sdk_root=${ANDROIDSDK}")
