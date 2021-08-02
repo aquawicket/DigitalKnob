@@ -24,7 +24,7 @@ DKSET(BOOST ${3RDPARTY}/${BOOST_NAME})
 ### INSTALL ###
 ## https://sourceforge.net/projects/boost/files/boost/1.74.0/boost_1_74_0.zip
 ## https://dl.bintray.com/boostorg/release/1.74.0/source/boost_1_74_0.zip
-DKINSTALL(https://sourceforge.net/projects/boost/files/boost/${BOOST_MAJOR}.${BOOST_MINOR}.${BOOST_BUILD}/${BOOST_NAME}.zip boost ${BOOST_NAME})
+DKINSTALL(https://sourceforge.net/projects/boost/files/boost/${BOOST_MAJOR}.${BOOST_MINOR}.${BOOST_BUILD}/${BOOST_NAME}.zip boost ${BOOST})
 
 
 ### DKPLUGINS LINK ###

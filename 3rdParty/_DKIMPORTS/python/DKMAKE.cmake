@@ -1,7 +1,3 @@
-if(NOT CMAKE_HOST_WIN32)
-	return()
-endif()
-
 ### INSTALL ###
 IF(NOT EXISTS ${3RDPARTY}/Python27)
 	DKSETPATH(${DIGITALKNOB}/Download)

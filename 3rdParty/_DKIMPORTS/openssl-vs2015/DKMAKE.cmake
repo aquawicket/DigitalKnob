@@ -9,7 +9,7 @@ DKSET(OPENSSL ${3RDPARTY}/openssl-${OPENSSL_VERSION})
 
 
 ### INSTALL ###
-DKINSTALL(https://www.npcglib.org/~stathis/downloads/openssl-${OPENSSL_VERSION}.7z openssl-vs2015 openssl-${OPENSSL_VERSION})
+DKINSTALL(https://www.npcglib.org/~stathis/downloads/openssl-${OPENSSL_VERSION}.7z openssl-vs2015 ${OPENSSL})
 
 
 ### DKPLUGINS LINK ###

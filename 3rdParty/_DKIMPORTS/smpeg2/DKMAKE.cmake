@@ -10,7 +10,7 @@ DKSET(SMPEG2_NAME smpeg2-${SMPEG2_VERSION})
 
 ### INSTALL ###
 ## https://www.libsdl.org/projects/smpeg/release/smpeg2-2.0.0.tar.gz
-DKINSTALL(https://www.libsdl.org/projects/smpeg/release/${SMPEG2_NAME}.tar.gz smpeg2 ${SMPEG2_NAME})
+DKINSTALL(https://www.libsdl.org/projects/smpeg/release/${SMPEG2_NAME}.tar.gz smpeg2 ${SMPEG2})
 DKSET(SMPEG2 ${3RDPARTY}/${SMPEG2_NAME})
 
 

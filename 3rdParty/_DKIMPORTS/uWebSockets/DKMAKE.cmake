@@ -14,7 +14,7 @@ DKSET(UWEBSOCKETS ${3RDPARTY}/${UWEBSOCKETS_NAME})
 
 ### INSTALL ###
 ## https://github.com/uNetworking/uWebSockets/archive/v0.14.zip
-DKINSTALL(https://github.com/uNetworking/uWebSockets/archive/v${UWEBSOCKETS_VERSION}.zip uWebSockets ${UWEBSOCKETS_NAME})
+DKINSTALL(https://github.com/uNetworking/uWebSockets/archive/v${UWEBSOCKETS_VERSION}.zip uWebSockets ${UWEBSOCKETS})
 
 
 

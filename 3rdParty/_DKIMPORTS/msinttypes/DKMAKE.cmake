@@ -7,4 +7,4 @@ DKSET(MSINTTYPES ${3RDPARTY}/${MSINTTYPES_NAME})
 
 
 ### INSTALL ###
-DKINSTALL(https://raw.githubusercontent.com/SummersEpsilon/msinttypes/master/${MSINTTYPES_NAME}.zip msinttypes ${MSINTTYPES_NAME})
+DKINSTALL(https://raw.githubusercontent.com/SummersEpsilon/msinttypes/master/${MSINTTYPES_NAME}.zip msinttypes ${MSINTTYPES})

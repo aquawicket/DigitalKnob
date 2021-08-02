@@ -5,7 +5,7 @@ DKSET(OGG ${3RDPARTY}/libogg-${OGG_VERSION})
 
 ### INSTALL ###
 ## https://ftp.osuosl.org/pub/xiph/releases/ogg/libogg-1.3.2.zip
-DKINSTALL(https://ftp.osuosl.org/pub/xiph/releases/ogg/libogg-${OGG_VERSION}.zip libogg libogg-${OGG_VERSION})
+DKINSTALL(https://ftp.osuosl.org/pub/xiph/releases/ogg/libogg-${OGG_VERSION}.zip libogg ${OGG})
 
 
 ### DKPLUGINS LINK ###

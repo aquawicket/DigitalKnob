@@ -1,19 +1,10 @@
-if(ANDROID)
-	return()
-endif()
-if(IOS)
-	return()
-endif()
-
 ### VERSION ###
 DKSET(RTMIDI_VERSION 2.1.0)
 DKSET(RTMIDI ${3RDPARTY}/rtmidi-${RTMIDI_VERSION})
 
 
-
 ### INSTALL ###
-DKINSTALL(http://www.music.mcgill.ca/~gary/rtmidi/release/rtmidi-${RTMIDI_VERSION}.tar.gz rtmidi rtmidi-${RTMIDI_VERSION})
-
+DKINSTALL(http://www.music.mcgill.ca/~gary/rtmidi/release/rtmidi-${RTMIDI_VERSION}.tar.gz rtmidi ${RTMIDI})
 
 
 ### LINK ###

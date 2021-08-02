@@ -6,7 +6,7 @@ DKSET(OPENFRAMEWORKS ${3RDPARTY}/${OPENFRAMEWORKS_NAME})
 
 ### INSTALL ###
 ## https://github.com/openframeworks/openFrameworks/archive/refs/tags/0.10.0.zip
-## DKINSTALL(https://github.com/openframeworks/openFrameworks/archive/refs/tags/${OPENFRAMEWORKS_VERSION}.zip openFrameworks ${OPENFRAMEWORKS_NAME})
+DKINSTALL(https://github.com/openframeworks/openFrameworks/archive/refs/tags/${OPENFRAMEWORKS_VERSION}.zip openFrameworks ${OPENFRAMEWORKS})
 
 
 

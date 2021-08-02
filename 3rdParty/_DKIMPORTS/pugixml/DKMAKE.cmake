@@ -4,5 +4,5 @@ DKSET(PUGIXML_MINOR 6)
 DKSET(PUGIXML_VERSION pugixml-${PUGIXML_MAJOR}.${PUGIXML_MINOR})
 
 ### INSTALL ###
-DKINSTALL(https://github.com/zeux/pugixml/releases/download/v${PUGIXML_MAJOR}.${PUGIXML_MINOR}/${PUGIXML_VERSION}.zip pugixml ${PUGIXML_VERSION})
+DKINSTALL(https://github.com/zeux/pugixml/releases/download/v${PUGIXML_MAJOR}.${PUGIXML_MINOR}/${PUGIXML_VERSION}.zip pugixml ${PUGIXML})
 DKSET(PUGIXML ${3RDPARTY}/${PUGIXML_VERSION})

@@ -3,10 +3,13 @@ DKDEPEND(zlib)
 DKDEPEND(freetype)
 DKDEPEND(libpng)
 
-### INSTALL ###
-## DKINSTALL(www.internet.com/podofo-0.9.5.tar.gz podofo-0.9.5)
+### VERSION ###
 DKSET(PODOFO_VERSION 0.9.5)
 DKSET(PODOFO ${3RDPARTY}/podofo-${PODOFO_VERSION})
+
+### INSTALL ###
+## DKINSTALL(www.internet.com/podofo-0.9.5.tar.gz podofo-0.9.5 ${PODOFO})
+
 
 
 ### LINK ###

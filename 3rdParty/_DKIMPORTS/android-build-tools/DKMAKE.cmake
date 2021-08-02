@@ -25,4 +25,4 @@ endif()
 
 ### INSTALL ###
 #file(MAKE_DIRECTORY ${ANDROIDSDK}/build-tools)
-#DKINSTALL(${ANDROIDBUILDTOOLS_DL} android-build-tools android-sdk/build-tools/${ANDROIDBUILDTOOLS_VERSION})
+#DKINSTALL(${ANDROIDBUILDTOOLS_DL} android-build-tools ${ANDROIDBUILDTOOLS})

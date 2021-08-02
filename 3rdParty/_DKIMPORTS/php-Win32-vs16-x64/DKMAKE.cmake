@@ -8,4 +8,4 @@ DKSET(PHP ${3RDPARTY}/php-${PHP_VERSION})
 
 
 ### INSTALL ###
-DKINSTALL(https://phpdev.toolsforresearch.com/php-${PHP_VERSION}.zip php-Win32-vs16-x64 php-${PHP_VERSION})
+DKINSTALL(https://phpdev.toolsforresearch.com/php-${PHP_VERSION}.zip php-Win32-vs16-x64 ${PHP})

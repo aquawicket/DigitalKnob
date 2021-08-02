@@ -10,7 +10,7 @@ DKSET(TESSERACT ${3RDPARTY}/${TESSERACT_NAME})
 
 ### INSTALL ###
 ## https://github.com/tesseract-ocr/tessdoc/archive/refs/heads/master.zip
-DKINSTALL(https://github.com/tesseract-ocr/tessdoc/archive/refs/heads/${TESSERACT_VERSION}.zip tesseract ${TESSERACT_NAME})
+DKINSTALL(https://github.com/tesseract-ocr/tessdoc/archive/refs/heads/${TESSERACT_VERSION}.zip tesseract ${TESSERACT})
 
 
 ### LINK ###

@@ -12,7 +12,7 @@ DKSET(SDL2VS ${3RDPARTY}/sdl2vs-${SDL2VS_VERSION})
 
 ### INSTALL ###
 # https://codeload.github.com/fallahn/sdl2vs/zip/master
-DKINSTALL(https://codeload.github.com/fallahn/sdl2vs/zip/${SDL2VS_VERSION} sdl2vs sdl2vs-${SDL2VS_VERSION})
+DKINSTALL(https://codeload.github.com/fallahn/sdl2vs/zip/${SDL2VS_VERSION} sdl2vs ${SDL2VS})
 DKCOPY(${3RDPARTY}/_DKIMPORTS/sdl2vs ${SDL2VS} TRUE)
 DKREMOVE(${SDL2VS}/libsdl)
 DKREMOVE(${SDL2VS}/SDL2)

@@ -9,7 +9,7 @@ DKSET(TIDY ${3RDPARTY}/${TIDY_NAME})
 
 ### INSTALL ###
 ## https://github.com/htacg/tidy-html5/archive/5.7.28.zip
-DKINSTALL(https://github.com/htacg/tidy-html5/archive/refs/tags/${TIDY_MAJOR}.${TIDY_MINOR}.${TIDY_BUILD}.zip tidy-html5 ${TIDY_NAME})
+DKINSTALL(https://github.com/htacg/tidy-html5/archive/refs/tags/${TIDY_MAJOR}.${TIDY_MINOR}.${TIDY_BUILD}.zip tidy-html5 ${TIDY})
 #DKRENAME(${DKDOWNLOAD}/${TIDY_MAJOR}.${TIDY_MINOR}.${TIDY_BUILD}.zip ${DKDOWNLOAD}/${TIDY_NAME})
 
 

@@ -6,11 +6,10 @@ DKDEPEND(libpng)
 
 ### VERSION ###
 DKSET(OPENCV_VERSION opencv-3.4.1)
-
+DKSET(OPENCV ${3RDPARTY}/${OPENCV_VERSION})
 
 ### INSTALL ###
-DKINSTALL(https://sourceforge.net/projects/opencvlibrary/files/opencv-unix/3.4.1/opencv-3.4.1.zip opencv ${OPENCV_VERSION})
-DKSET(OPENCV ${3RDPARTY}/${OPENCV_VERSION})
+DKINSTALL(https://sourceforge.net/projects/opencvlibrary/files/opencv-unix/3.4.1/opencv-3.4.1.zip opencv ${OPENCV})
 
 
 ### LINK ###

@@ -14,7 +14,7 @@ endif()
 
 
 ### VERSION ###
-DKSET(ANDROIDTOOLS ${ANDROIDSDK}/android-cmdline-tools)
+DKSET(ANDROIDTOOLS ${3RDPARTY}/android-cmdline-tools)
 DKSET(SDKMANAGER_EXE ${ANDROIDTOOLS}/bin/sdkmanager.bat)
 
 if(CMAKE_HOST_WIN32)
@@ -31,9 +31,9 @@ endif()
 ### INSTALL ###
 if(CMAKE_HOST_WIN32)
 	DKINSTALL(${ANDROIDTOOLS_DL} android-cmdline-tools ${ANDROIDTOOLS})
-	WaitForEnter()
+	Wait()
 	DKEXECUTE_PROCESS(COMMAND cmd /c sdkmanager WORKING_DIRECTORY ${ANDROIDTOOLS}/bin)
-	WaitForEnter()
+	Wait()
 #	if(NOT EXISTS ${ANDROIDSDK}/build-tools/${ANDROIDBUILDTOOLS_VERSION})
 #		message("Installing Android build-tools: ${ANDROIDBUILDTOOLS_VERSION} . . .")
 #		set(ARGUMNTS "${SDKMANAGER_EXE} --install build-tools\\;${ANDROIDBUILDTOOLS_VERSION} --sdk_root=${ANDROIDSDK}")
@@ -101,7 +101,7 @@ endif()
 
 
 #if(CMAKE_HOST_APPLE)
-#	DKINSTALL(${ANDROIDTOOLS_DL} android-sdk android-sdk/cmdline-tools/latest)
+#	DKINSTALL(${ANDROIDTOOLS_DL} android-cmdline-tools ${ANDROIDTOOLS})
 #	if(NOT EXISTS ${ANDROIDSDK}/build-tools/${ANDROIDBUILDTOOLS_VERSION})
 #		message("Installing Android build-tools: ${ANDROIDBUILDTOOLS_VERSION} . . .")
 #		set(ARGUMNTS "${ANDROIDSDK}/bin/sdkmanager --install build-tools\\;${ANDROIDBUILDTOOLS_VERSION} --sdk_root=${ANDROIDSDK}")
@@ -119,7 +119,7 @@ endif()
 
 
 #if(CMAKE_HOST_LINUX)
-#	DKINSTALL(${ANDROIDTOOLS_DL} android-sdk android-sdk/cmdline-tools/latest)
+#	DKINSTALL(${ANDROIDTOOLS_DL} android-cmdline-tools ${ANDROIDTOOLS})
 #	if(NOT EXISTS ${ANDROIDSDK}/build-tools/${ANDROIDBUILDTOOLS_VERSION})
 #		message("Installing Android build-tools: ${ANDROIDBUILDTOOLS_VERSION} . . .")
 #		set(ARGUMNTS "${ANDROIDSDK}/bin/sdkmanager --install build-tools\\;${ANDROIDBUILDTOOLS_VERSION} --sdk_root=${ANDROIDSDK}")

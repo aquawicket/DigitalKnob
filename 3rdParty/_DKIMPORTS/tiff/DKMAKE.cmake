@@ -8,7 +8,7 @@ DKSET(TIFF ${3RDPARTY}/${TIFF_NAME})
 
 ### INSTALL ###
 ## https://download.osgeo.org/libtiff/old/tiff-4.0.3.zip
-DKINSTALL(https://download.osgeo.org/libtiff/old/${TIFF_NAME}.zip tiff ${TIFF_NAME})
+DKINSTALL(https://download.osgeo.org/libtiff/old/${TIFF_NAME}.zip tiff ${TIFF})
 
 
 ### DKPLUGINS LINK ###

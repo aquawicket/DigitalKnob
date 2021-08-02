@@ -6,7 +6,7 @@ DKSET(ZLIB ${3RDPARTY}/${ZLIB_NAME})
 
 
 ### INSTALL ###
-DKINSTALL(https://www.zlib.net/fossils/${ZLIB_NAME}.tar.gz zlib ${ZLIB_NAME})
+DKINSTALL(https://www.zlib.net/fossils/${ZLIB_NAME}.tar.gz zlib ${ZLIB})
 
 
 ### DKPLUGINS LINK ###

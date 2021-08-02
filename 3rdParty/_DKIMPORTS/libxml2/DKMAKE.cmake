@@ -7,7 +7,7 @@ DKSET(XML2_VERSION libxml2-2.9.8)
 
 
 ### INSTALL ###
-DKINSTALL(http://xmlsoft.org/sources/${XML2_VERSION}.tar.gz libxml2 ${XML2_VERSION})
+DKINSTALL(http://xmlsoft.org/sources/${XML2_VERSION}.tar.gz libxml2 ${XML2})
 DKSET(XML2 ${3RDPARTY}/${XML2_VERSION})
 
 

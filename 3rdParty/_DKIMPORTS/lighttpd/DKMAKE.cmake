@@ -5,7 +5,7 @@ DKSET(LIGHTTPD ${3RDPARTY}/lighttpd-${LIGHTTPD_VERSION})
 
 
 ### INSTALL ###
-## DKINSTALL(www.internet.com/${LIGHTTPD_VERSION}.zip ${LIGHTTPD_VERSION}) ## find an online link
+## DKINSTALL(www.internet.com/${LIGHTTPD_VERSION}.zip ${LIGHTTPD}) ## find an online link
 
 
 ### LINK ###

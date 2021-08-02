@@ -5,7 +5,7 @@ DKSET(OPENAL ${3RDPARTY}/openal-${OPENAL_VERSION})
 
 ### INSTALL ###
 ## https://www.openal-soft.org/openal-releases/openal-soft-1.15.1.tar.bz2
-DKINSTALL(https://www.openal-soft.org/openal-releases/openal-soft-${OPENAL_VERSION}.tar.bz2 openal openal-${OPENAL_VERSION})
+DKINSTALL(https://www.openal-soft.org/openal-releases/openal-soft-${OPENAL_VERSION}.tar.bz2 openal ${OPENAL})
 
 
 ### LINK ###

@@ -13,7 +13,7 @@ DKSET(WAAVE ${3RDPARTY}/${WAAVE_NAME})
 
 
 ### INSTALL ###
-## DKINSTALL(www.internet.com/${WAAVE_NAME}.tar ${WAAVE_NAME})
+## DKINSTALL(www.internet.com/${WAAVE_NAME}.tar ${WAAVE})
 
 
 ### LINK ###

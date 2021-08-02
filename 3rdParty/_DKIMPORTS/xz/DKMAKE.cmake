@@ -24,7 +24,7 @@ DKSET(XZ ${3RDPARTY}/${XZ_NAME})
 ## DKINSTALL(https://astuteinternet.dl.sourceforge.net/project/lzmautils/${XZ_NAME}.tar.gz xz ${XZ_NAME})
 
 if(NOT LINUX_32)
-	DKINSTALL(https://github.com/xz-mirror/xz/archive/refs/tags/v${XZ_VERSION}.zip xz ${XZ_NAME})
+	DKINSTALL(https://github.com/xz-mirror/xz/archive/refs/tags/v${XZ_VERSION}.zip xz ${XZ})
 else()
 	DKINSTALL(https://tukaani.org/xz/${XZ_NAME}.tar.gz xz ${XZ_NAME})
 endif()

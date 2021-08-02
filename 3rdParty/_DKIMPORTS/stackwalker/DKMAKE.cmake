@@ -10,14 +10,8 @@ DKSET(STACKWALKER ${3RDPARTY}/stackwalker)
 
 
 ### INSTALL ###
-IF(NOT EXISTS ${3RDPARTY}/stackwalker)
-	DKSETPATH(${DIGITALKNOB}/Download)
-	## https://github.com/ConnectedVision/connectedvision/raw/master/build_env/Conan/packages/StackWalker/2014.12.28/2.3.0/stackwalker-2014-12-28.zip
-	DKDOWNLOAD(https://github.com/ConnectedVision/connectedvision/raw/master/build_env/Conan/packages/StackWalker/2014.12.28/2.3.0/stackwalker-${STACKWALKER_VERSION}.zip)
-	DKEXTRACT(${DIGITALKNOB}/Download/stackwalker-${STACKWALKER_VERSION}.zip ${3RDPARTY})
-	DKRENAME(${3RDPARTY}/Main ${3RDPARTY}/stackwalker)
-	DKCOPY(${DKIMPORTS}/stackwalker ${3RDPARTY}/stackwalker TRUE)
-ENDIF()
+## https://github.com/ConnectedVision/connectedvision/raw/master/build_env/Conan/packages/StackWalker/2014.12.28/2.3.0/stackwalker-2014-12-28.zip
+DKINSTALL(https://github.com/ConnectedVision/connectedvision/raw/master/build_env/Conan/packages/StackWalker/2014.12.28/2.3.0/stackwalker-${STACKWALKER_VERSION}.zip stackwalker ${STACKWALKER})
 
 
 ### LINK ###
