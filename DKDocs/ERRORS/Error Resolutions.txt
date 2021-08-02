@@ -3,5 +3,5 @@ https://stackoverflow.com/a/50924477/688352
 
 PKIX path building failed” and “unable to find valid certification path to requested target
 https://stackoverflow.com/a/36427118/688352
-C:\Users\aquawicket\digitalknob\DK\3rdParty\openjdk-9.0.4_windows-x64_bin\bin\keytool -import -alias example -keystore  C:\Users\aquawicket\digitalknob\DK\3rdParty\openjdk-9.0.4_windows-x64_bin\lib\security\cacerts -file C:\Users\aquawicket\digitalknob\DK\3rdParty\openjdk-9.0.4_windows-x64_bin\lib\security\google.cer
+C:\Users\aquawicket\digitalknob\DK\3rdParty\openjdk-9.0.4_windows-x64_bin\bin\keytool -import -alias google -keystore  C:\Users\aquawicket\digitalknob\DK\3rdParty\openjdk-9.0.4_windows-x64_bin\lib\security\cacerts -file C:\Users\aquawicket\digitalknob\DK\3rdParty\openjdk-9.0.4_windows-x64_bin\lib\security\google.cer
 Default Password: "changeit"
