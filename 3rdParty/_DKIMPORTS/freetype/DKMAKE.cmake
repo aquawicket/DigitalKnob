@@ -1,4 +1,8 @@
-## https://www.freetype.org/
+#
+# https://www.freetype.org/
+#
+# https://sourceforge.net/projects/freetype/files/freetype2/2.5.5/freetype-2.5.5.tar.gz
+
 
 ### VERSION ###
 DKSET(FREETYPE_MAJOR 2)
@@ -6,14 +10,12 @@ DKSET(FREETYPE_MINOR 5)
 DKSET(FREETYPE_BUILD 5)
 DKSET(FREETYPE_VERSION ${FREETYPE_MAJOR}.${FREETYPE_MINOR}.${FREETYPE_BUILD})
 DKSET(FREETYPE_NAME freetype-${FREETYPE_VERSION})
+DKSET(FREETYPE_DL https://sourceforge.net/projects/freetype/files/freetype2/${FREETYPE_MAJOR}.${FREETYPE_MINOR}.${FREETYPE_BUILD}/${FREETYPE_NAME}.tar.gz)
 DKSET(FREETYPE ${3RDPARTY}/${FREETYPE_NAME})
 
 
-
 ### INSTALL ###
-## https://sourceforge.net/projects/freetype/files/freetype2/2.5.5/freetype-2.5.5.tar.gz
-DKINSTALL(https://sourceforge.net/projects/freetype/files/freetype2/${FREETYPE_MAJOR}.${FREETYPE_MINOR}.${FREETYPE_BUILD}/${FREETYPE_NAME}.tar.gz freetype ${FREETYPE})
-
+DKINSTALL(${FREETYPE_DL} freetype ${FREETYPE})
 
 
 ### DKPLUGINS LINK ###
@@ -29,8 +31,6 @@ LINUX_DEBUG_LIB(${FREETYPE}/${OS}/${DEBUG_DIR}/libfreetype.a)
 LINUX_RELEASE_LIB(${FREETYPE}/${OS}/${RELEASE_DIR}/libfreetype.a)
 RASPBERRY_DEBUG_LIB(${FREETYPE}/${OS}/${DEBUG_DIR}/libfreetype.a)
 RASPBERRY_RELEASE_LIB(${FREETYPE}/${OS}/${RELEASE_DIR}/libfreetype.a)
-##ANDROID_DEBUG_LIB(${FREETYPE}/${OS}/${DEBUG_DIR}/obj/local/armeabi-v7a/libft2.a)
-##ANDROID_RELEASE_LIB(${FREETYPE}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/libft2.a)
 ANDROID_DEBUG_LIB(${FREETYPE}/${OS}/${DEBUG_DIR}/libfreetype.a)
 ANDROID_RELEASE_LIB(${FREETYPE}/${OS}/${RELEASE_DIR}/libfreetype.a)
 

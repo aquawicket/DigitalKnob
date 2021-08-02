@@ -1,4 +1,6 @@
-## https://github.com/vancegroup/freealut
+# https://github.com/vancegroup/freealut
+#
+# http://distro.ibiblio.org/rootlinux/rootlinux-ports/more/freealut/freealut-1.1.0.tar.gz
 
 ### DEPENDS ###
 DKDEPEND(msinttypes)
@@ -9,13 +11,13 @@ DKDEPEND(openal)
 ### VERSION ###
 DKSET(FREEALUT_VERSION 1.1.0)
 DKSET(FREEALUT_NAME freealut-${FREEALUT_VERSION})
-DKSET(FREEALUT ${3RDPARTY}/${FREEALUT_NAME})   ## FORMERLY {STDINT}
+DKSET(FREEALUT_DL http://distro.ibiblio.org/rootlinux/rootlinux-ports/more/freealut/${FREEALUT_NAME}.tar.gz)
+DKSET(FREEALUT ${3RDPARTY}/${FREEALUT_NAME})
 
 
 
 ### INSTALL ###
-## http://distro.ibiblio.org/rootlinux/rootlinux-ports/more/freealut/freealut-1.1.0.tar.gz
-DKINSTALL(http://distro.ibiblio.org/rootlinux/rootlinux-ports/more/freealut/${FREEALUT_NAME}.tar.gz freealut ${FREEALUT})
+DKINSTALL(${FREEALUT_DL} freealut ${FREEALUT})
 
 
 

@@ -388,7 +388,6 @@ if(CMAKE_GENERATOR STREQUAL "Visual Studio 16 2019 Win64")
 	DKSET(FLAGS "/DWIN64 /W3 /nologo /Zm500 /EHsc /GR /D_WIN32_WINNT=0x0600 /Zc:__cplusplus $<$<CONFIG:Debug>:/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG> $<$<CONFIG:Release>:/MT /O2 /Ob2 /DNDEBUG>")
 endif()
 
-
 ##### Apple Xcode #####
 if(CMAKE_GENERATOR STREQUAL "Xcode")
 	DKSET(CMAKE_CXX_FLAGS "-x objective-c++")
@@ -396,9 +395,8 @@ endif()
 
 ##### Unix Makefiles #####
 if(CMAKE_GENERATOR STREQUAL "Unix Makefiles")
-	##DKSET(CMAKE_CXX_FLAGS "-std=c++0x")
-	#DKSET(CMAKE_CXX_FLAGS "-std=c++14")
 	DKSET(CMAKE_C_FLAGS -fPIC)
+	DKSET(CMAKE_CXX_FLAGS -fPIC)
 endif()
 
 

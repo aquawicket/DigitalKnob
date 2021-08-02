@@ -3,7 +3,7 @@
 #include "DKSDLWindowAndroid.h"
 #include "DK/DKAndroid.h"
 #include "SDL.h"
-#include "SDL_main.h"
+//#include "SDL_main.h"
 
 extern "C" {
 	//extern JavaVM* thejvm;
@@ -80,7 +80,7 @@ bool DKSDLWindowAndroid::onInitSDL(const void* input, void* output)
 
     int i;
     int argc;
-    int status = 0;
+    //int status = 0;
 
 	SDL_SetHint(SDL_HINT_RENDER_DRIVER, "opengles");
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 1); 
