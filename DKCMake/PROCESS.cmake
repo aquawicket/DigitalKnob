@@ -928,7 +928,7 @@ if(ANDROID)
 	#DKUPDATE_ANDROID_NAME(${APP_NAME})
 	
 	#set(CMAKE_CXX_STANDARD 17)
-	set(CMAKE_CXX_FLAGS "-DKAPP -DUSE_DK -std=c++17")
+	set(CMAKE_CXX_FLAGS "-DDKAPP -DUSE_DK -std=c++17")
 	set(CMAKE_CXX_FLAGS_DEBUG "-g2 -gdwarf-2 -O0 -DDEBUG") 
 	set(CMAKE_CXX_FLAGS_RELEASE "-O3")
 	#set(CMAKE_POSITION_INDEPENDENT_CODE TRUE)
@@ -947,9 +947,9 @@ if(ANDROID)
 	list(APPEND ANDROID_LIBS android)
 
 	#add_executable(${APP_NAME} ${App_SRC})
-	add_executable(DKAndroid ${App_SRC})
+	add_library(DKAndroid SHARED ${App_SRC})
 	#target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${ANDROID_LIBS})
-	target_include_directories(DKAndroid PUBLIC ${INCLUDE_DIRECTORIES}) #of ${DKINCLUDES_LIST}
+	#target_include_directories(DKAndroid PUBLIC ${INCLUDE_DIRECTORIES}) #of ${DKINCLUDES_LIST}
 	target_link_libraries(DKAndroid ${DEBUG_LIBS} ${RELEASE_LIBS} ${ANDROID_LIBS})
 	#add_dependencies(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS})	
 	
