@@ -49,6 +49,7 @@ if(CMAKE_HOST_WIN32 AND ANDROID)
 	DKDEPEND(VisualStudio)
 	DKDEPEND(mingw32)
 	DKDEPEND(msys)
+	DKDEPEND(openssl-vs2015)
 endif()
 
 DKDEPEND(CMake)
