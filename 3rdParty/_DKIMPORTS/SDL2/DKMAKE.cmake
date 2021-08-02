@@ -8,7 +8,7 @@ DKSET(SDL2 ${3RDPARTY}/${SDL2_NAME})
 
 ### INSTALL ###
 ## https://www.libsdl.org/release/SDL2-2.0.14.zip
-DKINSTALL(https://www.libsdl.org/release/${SDL2_NAME}.zip SDL2 ${SDL2_NAME})
+DKINSTALL(https://www.libsdl.org/release/${SDL2_NAME}.zip SDL2 ${SDL2})
 
 ### PATCH ###
 # https://discourse.libsdl.org/t/android-error-libsdl2-so-failed-to-load/25680/5

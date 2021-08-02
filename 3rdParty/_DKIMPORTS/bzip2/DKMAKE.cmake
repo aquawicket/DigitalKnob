@@ -11,10 +11,10 @@ DKSET(BZIP2 ${3RDPARTY}/bzip${BZIP2_VERSION})
 ### INSTALL ###
 if(0)
 	## https://github.com/philr/bzip2-windows
-	DKINSTALL(https://github.com/philr/bzip2-windows/releases/download/v1.0.8.0/bzip2-dev-1.0.8.0-win-x86.zip bzip2 bzip${BZIP2_VERSION})
+	DKINSTALL(https://github.com/philr/bzip2-windows/releases/download/v1.0.8.0/bzip2-dev-1.0.8.0-win-x86.zip bzip2 ${BZIP2})
 	DKCOPY(${BZIP2} ${BZIP2}/${OS} TRUE)
 else()
-	DKINSTALL(ftp://sourceware.org/pub/bzip2/bzip${BZIP2_VERSION}.tar.gz bzip2 bzip${BZIP2_VERSION})
+	DKINSTALL(ftp://sourceware.org/pub/bzip2/bzip${BZIP2_VERSION}.tar.gz bzip2 ${BZIP2})
 	if(NOT EXISTS ${3RDPARTY}/bzip2-temp)
 		DKCOPY(${BZIP2} ${3RDPARTY}/bzip2-temp TRUE)
 	endif()

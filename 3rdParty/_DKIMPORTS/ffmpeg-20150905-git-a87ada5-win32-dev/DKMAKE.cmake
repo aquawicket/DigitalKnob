@@ -6,7 +6,7 @@ endif()
 DKSET(FFMPEG_VERSION ffmpeg-20150905-git-a87ada5-win32-dev)
 
 ### INSTALL ###
-## DKINSTALL(www.internet.com/${FFMPEG_VERSION}.7z ${FFMPEG_VERSION} ${FFMPEG_VERSION})
+## DKINSTALL(www.internet.com/${FFMPEG_VERSION}.7z ${FFMPEG_VERSION} ${FFMPEG})
 DKRENAME(${FFMPEG}/include/libavutil/time.h ${FFMPEG}/include/libavutil/time.h.EXCLUDE)
 
 

@@ -8,7 +8,7 @@ DKSET(BULLET ${3RDPARTY}/${BULLET_NAME})
 
 ### INSTALL ###
 ## FIXME
-## DKINSTALL(www.internet.com/bullet-${BULLET_VERSION}.zip bullet bullet-${BULLET_NAME})
+## DKINSTALL(www.internet.com/bullet-${BULLET_VERSION}.zip bullet ${BULLET})
 
 
 ### DKPLUGINS LINK ###

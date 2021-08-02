@@ -6,6 +6,7 @@ endif()
 
 ### VERSION ###
 DKSET(FAR_VERSION 2.0.2)
+DKSET(FAR ${3RDPARTY}/far-${FAR_VERSION})
 
 ### INSTALL ###
 ## https://sourceforge.net/projects/findandreplace/files/latest/download
@@ -13,5 +14,4 @@ DKSET(FAR_VERSION 2.0.2)
 ## https://sourceforge.net/projects/findandreplace/files/findandreplace/2.0.3/FAR-2.0.3-osx.zip/download
 ## https://sourceforge.net/projects/findandreplace/files/findandreplace/2.0.3/FAR-2.0.3-x.tar.gz/download
 ## https://sourceforge.net/projects/findandreplace/files/findandreplace/2.0.3/FAR-2.0.3-sources.tar.gz/download
-DKINSTALL(https://sourceforge.net/projects/findandreplace/files/findandreplace/${FAR_VERSION}/FAR-${FAR_VERSION}-win.zip FAR FAR-${FAR_VERSION}-win)
-DKSET(FAR ${3RDPARTY}/far)
+DKINSTALL(https://sourceforge.net/projects/findandreplace/files/findandreplace/${FAR_VERSION}/FAR-${FAR_VERSION}-win.zip FAR ${FAR})

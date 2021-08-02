@@ -11,7 +11,7 @@ DKSET(TORRENT ${3RDPARTY}/${TORRENT_NAME})
 
 ### INSTALL ###
 ## https://github.com/arvidn/libtorrent/releases/download/libtorrent-1_1_3/libtorrent-rasterbar-1.1.3.tar.gz
-DKINSTALL(https://github.com/arvidn/libtorrent/releases/download/libtorrent-1_1_3/${TORRENT_NAME}.tar.gz libtorrent ${TORRENT_NAME})
+DKINSTALL(https://github.com/arvidn/libtorrent/releases/download/libtorrent-1_1_3/${TORRENT_NAME}.tar.gz libtorrent ${TORRENT})
 
 
 ### LINK ###

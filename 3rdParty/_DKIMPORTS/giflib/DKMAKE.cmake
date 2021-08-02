@@ -15,7 +15,7 @@ DKSET(GIF_VERSION 5.1.1)
 
 ### INSTALL ###
 ## https://sourceforge.net/projects/giflib/files/giflib-5.1.1.tar.gz
-DKINSTALL(https://sourceforge.net/projects/giflib/files/giflib-${GIF_VERSION}.tar.gz giflib giflib-${GIF_VERSION})
+DKINSTALL(https://sourceforge.net/projects/giflib/files/giflib-${GIF_VERSION}.tar.gz giflib ${GIF})
 DKSET(GIF ${3RDPARTY}/giflib-${GIF_VERSION})
 
 

@@ -13,7 +13,7 @@ DKSET(CURL ${3RDPARTY}/${CURL_NAME})
 
 ### INSTALL ###
 ## https://curl.haxx.se/download/curl-7.34.0.zip
-DKINSTALL(https://curl.haxx.se/download/${CURL_NAME}.zip curl ${CURL_NAME})
+DKINSTALL(https://curl.haxx.se/download/${CURL_NAME}.zip curl ${CURL})
 
 
 ### DKPLUGINS LINK ###

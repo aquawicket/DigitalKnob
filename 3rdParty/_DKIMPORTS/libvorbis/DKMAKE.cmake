@@ -9,7 +9,7 @@ DKSET(VORBIS ${3RDPARTY}/libvorbis-${VORBIS_VERSION})
 
 
 ### INSTALL ###
-DKINSTALL(https://ftp.osuosl.org/pub/xiph/releases/vorbis/libvorbis-${VORBIS_VERSION}.zip libvorbis libvorbis-${VORBIS_VERSION})
+DKINSTALL(https://ftp.osuosl.org/pub/xiph/releases/vorbis/libvorbis-${VORBIS_VERSION}.zip libvorbis libvorbis-${VORBIS})
 
 
 ### dkplugin LINK ###

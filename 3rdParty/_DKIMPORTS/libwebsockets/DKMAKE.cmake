@@ -8,7 +8,7 @@ DKSET(WEBSOCKETS ${3RDPARTY}/${WEBSOCKETS_NAME})
 
 
 ### INSTALL ###
-DKINSTALL(https://github.com/warmcat/libwebsockets/archive/v${WEBSOCKETS_MAJOR}.${WEBSOCKETS_MINOR}.${WEBSOCKETS_BUILD}.zip libwebsockets ${WEBSOCKETS_NAME})
+DKINSTALL(https://github.com/warmcat/libwebsockets/archive/v${WEBSOCKETS_MAJOR}.${WEBSOCKETS_MINOR}.${WEBSOCKETS_BUILD}.zip libwebsockets ${WEBSOCKETS})
 
 
 ### LINK ###

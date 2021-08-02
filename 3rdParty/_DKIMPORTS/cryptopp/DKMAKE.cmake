@@ -8,7 +8,7 @@ DKSET(CRYPTO ${3RDPARTY}/${CRYPTO_NAME})
 
 ### INSTALL ###
 ## https://github.com/webstorage119/website-1/raw/master/cryptopp600.zip
-DKINSTALL(https://github.com/webstorage119/website-1/raw/master/cryptopp${CRYPTO_VERSION}.zip cryptopp ${CRYPTO_NAME})	
+DKINSTALL(https://github.com/webstorage119/website-1/raw/master/cryptopp${CRYPTO_VERSION}.zip cryptopp ${CRYPTO})
 
 
 ### LINK ###

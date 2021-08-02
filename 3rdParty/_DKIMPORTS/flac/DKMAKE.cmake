@@ -4,7 +4,7 @@ DKSET(FLAC_VERSION 1.3.2)
 ### INSTALL ###
 ## https://ftp.osuosl.org/pub/xiph/releases/flac/flac-1.3.2-win.zip
 ## https://ftp.osuosl.org/pub/xiph/releases/flac/flac-1.3.2.tar.xz
-DKINSTALL(https://ftp.osuosl.org/pub/xiph/releases/flac/flac-${FLAC_VERSION}-win.zip flac flac-${FLAC_VERSION})
+DKINSTALL(https://ftp.osuosl.org/pub/xiph/releases/flac/flac-${FLAC_VERSION}-win.zip flac ${FLAC})
 DKSET(FLAC ${3RDPARTY}/flac-${FLAC_VERSION})
 
 

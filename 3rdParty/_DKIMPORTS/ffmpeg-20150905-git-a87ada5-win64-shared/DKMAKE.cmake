@@ -2,10 +2,11 @@ if(NOT WIN_64)
 	return()
 endif()
 
+DKSET(FFMPEG_DLL ${3RDPARTY}/ffmpeg-20150905-git-a87ada5-win64-shared)
 
 ### INSTALL ###
-## DKINSTALL(www.internet.com/ffmpeg-20150905-git-a87ada5-win64-shared.7z ffmpeg-20150905-git-a87ada5-win64-shared) ## find an online link
-DKSET(FFMPEG_DLL ${3RDPARTY}/ffmpeg-20150905-git-a87ada5-win64-shared)
+## DKINSTALL(www.internet.com/ffmpeg-20150905-git-a87ada5-win64-shared.7z ffmpeg-20150905-git-a87ada5-win64-shared ${FFMPEG_DLL}) ## find an online link
+
 
 
 ### LINK ###

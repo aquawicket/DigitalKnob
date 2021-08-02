@@ -12,7 +12,7 @@ DKSET(ARCHIVE ${3RDPARTY}/${ARCHIVE_NAME})
 
 
 ### INSTALL ###
-DKINSTALL(https://www.libarchive.org/downloads/${ARCHIVE_NAME}.zip libarchive ${ARCHIVE_NAME})
+DKINSTALL(https://www.libarchive.org/downloads/${ARCHIVE_NAME}.zip libarchive ${ARCHIVE})
 
 
 

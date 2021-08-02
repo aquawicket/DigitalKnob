@@ -7,7 +7,7 @@ DKSET(UV ${3RDPARTY}/libuv-${UV_VERSION})
 
 
 ### INSTALL ###
-DKINSTALL(https://dist.libuv.org/dist/${UV_VERSION}/libuv-${UV_VERSION}.tar.gz libuv libuv-${UV_VERSION})
+DKINSTALL(https://dist.libuv.org/dist/${UV_VERSION}/libuv-${UV_VERSION}.tar.gz libuv ${UV})
 
 
 

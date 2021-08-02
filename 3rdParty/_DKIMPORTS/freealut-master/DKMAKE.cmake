@@ -4,7 +4,7 @@ DKSET(FREEALUT ${3RDPARTY}/freealut-master)
 
 
 ### INSTALL ###
-## DKINSTALL(www.internet.com/freealut-master.zip freealut-master) ## find an online link
+## DKINSTALL(www.internet.com/freealut-master.zip freealut-master ${FREEALUT}) ## find an online link
 
 
 ### LINK ###

@@ -4,7 +4,7 @@ endif()
 
 
 ### INSTALL ###
-## DKINSTALL(www.internet.com/ffmpeg-20150905-git-a87ada5-win64-dev.7z ffmpeg-20150905-git-a87ada5-win64-dev)
+## DKINSTALL(www.internet.com/ffmpeg-20150905-git-a87ada5-win64-dev.7z ffmpeg-20150905-git-a87ada5-win64-dev ${FFMPEG})
 DKRENAME(${FFMPEG}/include/libavutil/time.h ${FFMPEG}/include/libavutil/time.h.EXCLUDE)
 
 

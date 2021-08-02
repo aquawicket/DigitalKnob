@@ -9,7 +9,7 @@ DKSET(CEF ${3RDPARTY}/${CEF_NAME})
 
 
 ### INSTALL ###
-DKINSTALL(http://opensource.spotify.com/cefbuilds/${CEF_NAME}.tar.bz2 cef_binary_linuxarm ${CEF_NAME})
+DKINSTALL(http://opensource.spotify.com/cefbuilds/${CEF_NAME}.tar.bz2 cef_binary_linuxarm ${CEF})
 
 
 ### LINK ###

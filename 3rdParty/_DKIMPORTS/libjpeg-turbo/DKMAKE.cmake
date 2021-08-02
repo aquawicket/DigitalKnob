@@ -12,7 +12,7 @@ DKSET(JPEG ${3RDPARTY}/libjpeg-turbo-${JPEG_VERSION})
 ### INSTALL ###
 ## https://sourceforge.net/projects/libjpeg-turbo/files/1.5.3/libjpeg-turbo-1.5.3.tar.gz
 ## https://sourceforge.net/projects/libjpeg-turbo/files/2.1.0/libjpeg-turbo-2.1.0.tar.gz
-DKINSTALL(https://sourceforge.net/projects/libjpeg-turbo/files/${JPEG_VERSION}/libjpeg-turbo-${JPEG_VERSION}.tar.gz libjpeg-turbo libjpeg-turbo-${JPEG_VERSION})
+DKINSTALL(https://sourceforge.net/projects/libjpeg-turbo/files/${JPEG_VERSION}/libjpeg-turbo-${JPEG_VERSION}.tar.gz libjpeg-turbo ${JPEG})
 
 
 ### DKPLUGINS LINK ###

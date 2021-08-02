@@ -13,7 +13,7 @@ DKSET(SDLTTF ${3RDPARTY}/${SDLTTF_NAME})
 
 ### INSTALL ###
 ## https://www.libsdl.org/projects/SDL_ttf/release/SDL2_ttf-2.0.15.zip
-DKINSTALL(https://www.libsdl.org/projects/SDL_ttf/release/${SDLTTF_NAME}.zip SDL2_ttf ${SDLTTF_NAME})
+DKINSTALL(https://www.libsdl.org/projects/SDL_ttf/release/${SDLTTF_NAME}.zip SDL2_ttf ${SDLTTF})
 
 
 

@@ -12,7 +12,7 @@ DKSET(CEF ${3RDPARTY}/${CEF_NAME})
 
 ### INSTALL ###
 ## https://cef-builds.spotifycdn.com/cef_binary_81.3.3%2Bg072a5f5%2Bchromium-81.0.4044.138_linux64.tar.bz2 
-DKINSTALL(https://cef-builds.spotifycdn.com/cef_binary_81.3.3%2Bg072a5f5%2Bchromium-81.0.4044.138_linux64.tar.bz2 cef_binary_linux64 ${CEF_NAME})
+DKINSTALL(https://cef-builds.spotifycdn.com/cef_binary_81.3.3%2Bg072a5f5%2Bchromium-81.0.4044.138_linux64.tar.bz2 cef_binary_linux64 ${CEF})
 
 
 

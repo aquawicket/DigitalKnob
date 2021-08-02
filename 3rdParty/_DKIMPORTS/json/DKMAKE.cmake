@@ -11,7 +11,7 @@ DKSET(JSON ${3RDPARTY}/${JSON_NAME})
 
 ### INSTALL ###
 ## https://github.com/nlohmann/json/archive/refs/tags/v3.9.1.zip
-DKINSTALL(https://github.com/nlohmann/json/archive/refs/tags/v${JSON_MAJOR}.${JSON_MINOR}.${JSON_BUILD}.zip json ${JSON_NAME})
+DKINSTALL(https://github.com/nlohmann/json/archive/refs/tags/v${JSON_MAJOR}.${JSON_MINOR}.${JSON_BUILD}.zip json ${JSON})
 
 
 ### LINK ###

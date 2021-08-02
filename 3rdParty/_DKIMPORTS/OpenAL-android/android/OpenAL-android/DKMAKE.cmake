@@ -3,13 +3,13 @@ message("OpenAL-android is only for android devices")
 return() 
 endif()
 
+DKSET(OPENAL ${3RDPARTY}/OpenAL-android)
 
 ### INSTALL ###
-## DKINSTALL(www.internet.com/OpenAL-android.zip OpenAL-android OpenAL-android)
+## DKINSTALL(www.internet.com/OpenAL-android.zip OpenAL-android ${OPENAL})
 
 
 ### LINK ###
-DKSET(OPENAL ${3RDPARTY}/OpenAL-android)
 ANDROID_INCLUDE(${OPENAL}/include)
 ANDROID_INCLUDE(${OPENAL}/include/AL)
 ANDROID_INCLUDE(${OPENAL}/${OS}/${RELEASE_DIR}/jni)

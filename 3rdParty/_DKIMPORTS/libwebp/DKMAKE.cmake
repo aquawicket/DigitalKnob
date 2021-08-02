@@ -11,7 +11,7 @@ DKSET(WEBP ${3RDPARTY}/${WEBP_NAME})
 
 ### INSTALL ###
 ## https://github.com/webmproject/libwebp/archive/refs/tags/v1.0.3.zip
-DKINSTALL(https://github.com/webmproject/libwebp/archive/refs/tags/v${WEBP_VERSION}.zip libwebp ${WEBP_NAME})
+DKINSTALL(https://github.com/webmproject/libwebp/archive/refs/tags/v${WEBP_VERSION}.zip libwebp ${WEBP})
 
 
 ### DKPLUGINS LINK ###

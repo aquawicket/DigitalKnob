@@ -2,11 +2,10 @@ if(NOT WIN_32)
 	return()
 endif()
 
-
-### INSTALL ###
-## DKINSTALL(www.internet.com/ffmpeg-20150905-git-a87ada5-win32-shared.7z ffmpeg-20150905-git-a87ada5-win32-shared) ## find an online link
 DKSET(FFMPEG_DLL ${3RDPARTY}/ffmpeg-20150905-git-a87ada5-win32-shared)
 
+### INSTALL ###
+## DKINSTALL(www.internet.com/ffmpeg-20150905-git-a87ada5-win32-shared.7z ffmpeg-20150905-git-a87ada5-win32-shared ${FFMPEG_DLL}) ## find an online link
 
 ### LINK ###
 DKDEFINE(__STDC_CONSTANT_MACROS)

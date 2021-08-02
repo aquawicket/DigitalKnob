@@ -15,7 +15,7 @@ DKSET(FREEALUT ${3RDPARTY}/${FREEALUT_NAME})   ## FORMERLY {STDINT}
 
 ### INSTALL ###
 ## http://distro.ibiblio.org/rootlinux/rootlinux-ports/more/freealut/freealut-1.1.0.tar.gz
-DKINSTALL(http://distro.ibiblio.org/rootlinux/rootlinux-ports/more/freealut/${FREEALUT_NAME}.tar.gz freealut ${FREEALUT_NAME})
+DKINSTALL(http://distro.ibiblio.org/rootlinux/rootlinux-ports/more/freealut/${FREEALUT_NAME}.tar.gz freealut ${FREEALUT})
 
 
 

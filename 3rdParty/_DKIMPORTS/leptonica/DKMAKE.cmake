@@ -23,7 +23,7 @@ DKSET(LEPTONICA ${3RDPARTY}/${LEPTONICA_NAME})
 
 ### INSTALL ###
 ## http://www.leptonica.org/source/leptonica-1.74.4.tar.gz
-DKINSTALL(http://www.leptonica.org/source/leptonica-${LEPTONICA_MAJOR}.${LEPTONICA_MINOR}.${LEPTONICA_BUILD}.tar.gz leptonica ${LEPTONICA_NAME})
+DKINSTALL(http://www.leptonica.org/source/leptonica-${LEPTONICA_MAJOR}.${LEPTONICA_MINOR}.${LEPTONICA_BUILD}.tar.gz leptonica ${LEPTONICA})
 
 
 ### LINK ###

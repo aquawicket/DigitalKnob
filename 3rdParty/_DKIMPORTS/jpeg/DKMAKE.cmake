@@ -13,7 +13,7 @@ DKSET(JPEG ${3RDPARTY}/${JPEG_NAME})
 ### INSTALL ###
 ## https://www.sac.sk/download/graph/jpegsr6b.zip
 ## https://www.ijg.org/files/jpegsr9d.zip
-DKINSTALL(https://www.sac.sk/download/graph/jpegsr${JPEG_VERSION}.zip jpeg ${JPEG_NAME})
+DKINSTALL(https://www.sac.sk/download/graph/jpegsr${JPEG_VERSION}.zip jpeg ${JPEG})
 
 
 

@@ -20,7 +20,7 @@ DKSET(SFML_GRAPHICS_LIBRARY_RELEASE ${SFML}/${OS}/lib/${RELEASE_DIR}/sfml-graphi
 
 
 ### INSTALL ###
-DKINSTALL(https://www.sfml-dev.org/files/SFML-${SFML_VERSION}-sources.zip SFML SFML-${SFML_VERSION})
+DKINSTALL(https://www.sfml-dev.org/files/SFML-${SFML_VERSION}-sources.zip SFML ${SFML})
 
 
 ### LINK ###

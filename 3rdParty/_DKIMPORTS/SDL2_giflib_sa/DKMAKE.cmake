@@ -8,7 +8,7 @@ DKSET(SDLGIF ${3RDPARTY}/SDL2_giflib_sa-${SDLGIF_VERSION})
 
 
 ### INSTALL ###
-DKINSTALL(https://github.com/theMealena/SDL2_giflib_sa/archive/${SDLGIF_VERSION}.zip SDL2_giflib_sa-${SDLGIF_VERSION} SDL2_giflib_sa-${SDLGIF_VERSION})
+DKINSTALL(https://github.com/theMealena/SDL2_giflib_sa/archive/${SDLGIF_VERSION}.zip SDL2_giflib_sa-${SDLGIF_VERSION} ${SDLGIF})
 #DKRENAME(${DKDOWNLOAD}/${SDLGIF_VERSION}.zip ${DKDOWNLOAD}/SDL2_giflib_sa-${SDLGIF_VERSION}.zip)
 
 

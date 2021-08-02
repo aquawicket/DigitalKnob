@@ -18,7 +18,7 @@ DKSET(VNCSERVER ${3RDPARTY}/${VNCSERVER_NAME})
 
 
 ### INSTALL ###
-## DKINSTALL(www.internet.com/${VNCSERVER_NAME}.zip libvncserver ${VNCSERVER_NAME})
+## DKINSTALL(www.internet.com/${VNCSERVER_NAME}.zip libvncserver ${VNCSERVER})
 
 
 

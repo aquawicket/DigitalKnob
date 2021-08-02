@@ -12,7 +12,7 @@ DKSET(FREETYPE ${3RDPARTY}/${FREETYPE_NAME})
 
 ### INSTALL ###
 ## https://sourceforge.net/projects/freetype/files/freetype2/2.5.5/freetype-2.5.5.tar.gz
-DKINSTALL(https://sourceforge.net/projects/freetype/files/freetype2/${FREETYPE_MAJOR}.${FREETYPE_MINOR}.${FREETYPE_BUILD}/${FREETYPE_NAME}.tar.gz freetype ${FREETYPE_NAME})
+DKINSTALL(https://sourceforge.net/projects/freetype/files/freetype2/${FREETYPE_MAJOR}.${FREETYPE_MINOR}.${FREETYPE_BUILD}/${FREETYPE_NAME}.tar.gz freetype ${FREETYPE})
 
 
 

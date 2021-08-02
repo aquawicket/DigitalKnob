@@ -20,7 +20,7 @@ DKSET(SDL2IMAGE ${3RDPARTY}/SDL2_image-${SDL2IMAGE_VERSION})
 ### INSTALL ###
 ## https://www.libsdl.org/projects/SDL_image/release/SDL2_image-2.0.1.zip
 ## https://www.libsdl.org/projects/SDL_image/release/SDL2_image-2.0.5.zip
-DKINSTALL(https://www.libsdl.org/projects/SDL_image/release/SDL2_image-${SDL2IMAGE_VERSION}.zip SDL2_image SDL2_image-${SDL2IMAGE_VERSION})
+DKINSTALL(https://www.libsdl.org/projects/SDL_image/release/SDL2_image-${SDL2IMAGE_VERSION}.zip SDL2_image ${SDL2IMAGE})
 
 
 ### DKPLUGINS LINK ###

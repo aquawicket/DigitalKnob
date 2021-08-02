@@ -5,7 +5,7 @@ DKSET(ICONV ${3RDPARTY}/${ICONV_NAME})
 
 
 ### INSTALL ###
-DKINSTALL(https://ftp.gnu.org/gnu/libiconv/${ICONV_NAME}.tar.gz libiconv ${ICONV_NAME})
+DKINSTALL(https://ftp.gnu.org/gnu/libiconv/${ICONV_NAME}.tar.gz libiconv ${ICONV})
 
 
 

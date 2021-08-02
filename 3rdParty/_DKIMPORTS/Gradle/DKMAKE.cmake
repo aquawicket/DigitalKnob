@@ -11,4 +11,4 @@ DKSET(GRADLE ${3RDPARTY}/${GRADLE_NAME})
 
 ### INSTALL ###
 # https://downloads.gradle-dn.com/distributions/gradle-7.1.1-all.zip
-DKINSTALL(https://downloads.gradle-dn.com/distributions/gradle-7.1.1-all.zip Gradle ${GRADLE_NAME})
+DKINSTALL(https://downloads.gradle-dn.com/distributions/gradle-7.1.1-all.zip Gradle ${GRADLE})
