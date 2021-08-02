@@ -1,14 +1,15 @@
-if(NOT ANDROID)
-	return()
-endif()
+# Info
+# https://github.com/gradle/gradle
+#
+# Source
+# https://downloads.gradle-dn.com/distributions/gradle-7.1.1-all.zip
+
 
 ### VERSION ###
 DKSET(GRADLE_VERSION 7.1.1-all)
-DKSET(GRADLE_NAME gradle-${GRADLE_VERSION})
-DKSET(GRADLE ${3RDPARTY}/${GRADLE_NAME})
-#DKSET(GRADLE_EXE "C:/gradle.exe")
+DKSET(GRADLE ${3RDPARTY}/gradle-${GRADLE_NAME})
+DKSET(GRADLE_DL https://downloads.gradle-dn.com/distributions/gradle-${GRADLE_VERSION}.zip)
 
 
 ### INSTALL ###
-# https://downloads.gradle-dn.com/distributions/gradle-7.1.1-all.zip
-DKINSTALL(https://downloads.gradle-dn.com/distributions/gradle-7.1.1-all.zip Gradle ${GRADLE})
+DKINSTALL(${GRADLE_DL} gradle ${GRADLE})
