@@ -10,7 +10,7 @@ endif()
 #DKSET(ANDROIDNDK_SHA1 ead0846608040b8344ad2bc9bc721b88cf13fb8d)
 
 DKSET(ANDROIDNDK_VERSION r21e)
-DKSET(ANDROIDNDK_NAME android-ndk-r21e-windows-x86_64)
+DKSET(ANDROIDNDK_NAME android-ndk-r21e)
 DKSET(ANDROIDNDK_BUILD 21.4.7075529)
 DKSET(ANDROIDNDK_DL https://dl.google.com/android/repository/android-ndk-r21e-windows-x86_64.zip)
 DKSET(ANDROIDNDK_SHA1 fc44fea8bb3f5a6789821f40f41dce2d2cd5dc30)
