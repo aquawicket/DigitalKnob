@@ -105,9 +105,9 @@ message(STATUS "\n\n")
 #message(STATUS "\n\n")
 
 ## Clear cache list variables, just to be sure 
-DKSET(DKDEFINES "")
-DKSET(DKINCLUDES "")
-DKSET(DKLIBRARIES "")
+#DKSET(DKDEFINES "")
+#DKSET(DKINCLUDES "")
+#DKSET(DKLIBRARIES "")
 
 foreach(plugin ${dkdepend_list})
 	DKSET(QUEUE_BUILD OFF)
