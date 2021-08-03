@@ -51,7 +51,7 @@ endif()
 ## Set variables for paths
 ###############################################################
 get_filename_component(DIGITALKNOB ${CMAKE_SOURCE_DIR} ABSOLUTE)
-DKSETENV("DIGITALKNOB" ${DIGITALKNOB})
+#DKSETENV("DIGITALKNOB" ${DIGITALKNOB})
 DKSET(DKCMAKE ${DIGITALKNOB}/DKCMake)
 DKSET(DKPLUGINS ${DIGITALKNOB}/DKPlugins)
 DKSET(3RDPARTY ${DIGITALKNOB}/3rdParty)
