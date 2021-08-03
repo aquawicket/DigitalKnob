@@ -90,13 +90,18 @@ function(DKSETENV name value)
 endfunction()
 
 
-function(DKDOWNLOAD url) #arg2 filename
+function(DKDOWNLOAD url) #arg2 destination_path
 	##https://cmake.org/pipermail/cmake/2012-September/052205.html/
-	if(${ARGC} EQUAL 1)
-		get_filename_component(filename ${url} NAME)
-	endif()
+	get_filename_component(filename ${url} NAME)
 	if(${ARGC} EQUAL 2)
-		set(filename ${ARGV1}) #used to rename the file
+		set(dest_path ${ARGV1}) #used to rename the file
+		get_filename_component(dest_filename ${dest_filename} NAME)
+		get_filename_component(dest_filename ${dest_dir} DIRECTORY)
+		if(NOT dest_filename EQUAL filename)
+			message("DKDOWNLOAD(${url}): The filenames are different")
+			message("src_filename: ${filename}")
+			message("dest_filename: ${dest_filename}")
+		endif()
 	endif()
 	if(NOT EXISTS ${CURRENT_DIR}/${filename})
 		message(STATUS "Downloading ${url}")
