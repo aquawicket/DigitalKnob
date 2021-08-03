@@ -947,6 +947,8 @@ if(ANDROID)
 	list(APPEND ANDROID_LIBS android)
 
 	#add_executable(DKAndroid ${App_SRC})
+	set(CMAKE_CXX_STANDARD 17)
+
 	add_library(DKAndroid SHARED ${App_SRC})
 	#target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${ANDROID_LIBS})
 	#target_include_directories(DKAndroid PUBLIC ${INCLUDE_DIRECTORIES}) #of ${DKINCLUDES_LIST}
