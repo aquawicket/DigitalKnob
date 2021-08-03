@@ -315,6 +315,8 @@ function DKBuild_ResetAppsPlugins(){
 	
 	// Delete everything in DKApps except DKBuild
 	let apps = CPP_DKFile_DirectoryContents(DKPATH+"DK/DKApps")
+	if(!apps)
+		console.error("DKBuild_ResetAppsPlugins(): apps invalid")
 	let list = apps.split(',')
 	for(let i=0; i<list.length; ++i){
 		if(list[i] === "DKBuilder"){ continue }
@@ -448,11 +450,11 @@ function DKBuild_DoResults(){
 		
 		if(TYPE === "Debug" || TYPE === "ALL"){
 			CPP_DKFile_Rename(DKPATH+appdir+"/"+APP+"/"+OS+"/Debug/"+APP+".exe", DKPATH+appdir+"/"+APP+"/"+OS+"/Release/"+APP+"_old.exe", true)	
-			CPP_DK_Execute(MSBUILD+" "+DKPATH+appdir+"/"+APP+"/"+OS+"/"+APP+".sln /p:Configuration=Debug")
+			CPP_DK_Execute(MSBUILD+" "+DKPATH+appdir+"/"+APP+"/"+OS+"/"+APP+".sln /p:Configuration=Debug /p:PreferredToolArchitecture=x86")
 		}
 		if(TYPE === "Release" || TYPE === "ALL"){
 			CPP_DKFile_Rename(DKPATH+appdir+"/"+APP+"/"+OS+"/Release/"+APP+".exe", DKPATH+appdir+"/"+APP+"/"+OS+"/Release/"+APP+"_old.exe", true)
-			CPP_DK_Execute(MSBUILD+" "+DKPATH+appdir+"/"+APP+"/"+OS+"/"+APP+".sln /p:Configuration=Release")
+			CPP_DK_Execute(MSBUILD+" "+DKPATH+appdir+"/"+APP+"/"+OS+"/"+APP+".sln /p:Configuration=Release /p:PreferredToolArchitecture=x86")
 		}
 		
 		//copy .pdb file to assets
