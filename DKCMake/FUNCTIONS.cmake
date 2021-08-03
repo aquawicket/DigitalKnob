@@ -100,6 +100,7 @@ function(DKDOWNLOAD url) #arg2 destination_path
 			message("DKDOWNLOAD(${url}): The filenames are different")
 			message("src_filename: ${filename}")
 			message("dest_filename: ${dest_filename}")
+			message(FATAL_ERROR "end")
 		endif()
 	endif()
 	if(NOT EXISTS ${CURRENT_DIR}/${filename})
