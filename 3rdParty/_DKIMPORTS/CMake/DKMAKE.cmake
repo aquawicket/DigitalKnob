@@ -67,7 +67,6 @@ DKSET(DKCMAKE_RASPBERRY64_RELEASE ${CMAKE_COMMAND} -G "Unix Makefiles" -DCMAKE_B
 
 # https://cmake.org/cmake/help/latest/manual/cmake-toolchains.7.html#cross-compiling-for-android
 DKSET(DKCMAKE_ANDROID32 ${CMAKE_COMMAND} -G ${VISUALSTUDIO_NAME} -A ARM 
--G "Visual Studio 16 2019" -A ARM 
 -DCMAKE_SYSTEM_NAME=Android 
 -DCMAKE_SYSTEM_VERSION=26 
 -DCMAKE_ANDROID_ARCH_ABI=armeabi-v7a 
