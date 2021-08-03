@@ -89,9 +89,8 @@ function(DKSETENV name value)
 	endif()
 endfunction()
 
-
+##https://cmake.org/pipermail/cmake/2012-September/052205.html/
 function(DKDOWNLOAD url) #arg2 destination_path
-	##https://cmake.org/pipermail/cmake/2012-September/052205.html/
 	get_filename_component(filename ${url} NAME)
 	if(${ARGC} EQUAL 2)
 		set(dest_path ${ARGV1}) #used to rename the file
@@ -111,23 +110,19 @@ function(DKDOWNLOAD url) #arg2 destination_path
 			STATUS status 
 			#no LOG
 		)
-		
 		list(GET status 0 status_code) 
 		list(GET status 1 status_string)
-		
 		if(NOT status_code EQUAL 0)
 			DKREMOVE(${CURRENT_DIR}/${filename})
 			message(STATUS " ")
 			message(STATUS "*********************************************")
-			message(STATUS "CMAKE FAILED TO DOENLOAD THIS FILE")
+			message(STATUS "CMAKE FAILED TO DOwNLOAD THIS FILE")
 			message(STATUS "PLEASE DOWNLOAD THE FILE TO THE digitalknob/Download direcotry")
 			message(STATUS "THE URL IS: ${url}") 
 			message(STATUS "*********************************************")
-			message(STATUS " ")
 			## TODO - copy the url to the clipboard and notify the user
 			message(FATAL_ERROR "error: downloading ${filename} status_code: ${status_code} status_string: ${status_string}")
 			
-			##Download with DKCurl
 			##message(STATUS "Attempting to download with DKCurl...")
 			##DKSET(QUEUE_BUILD ON)
 			##WIN_COMMAND("${DIGITALKNOB}/DKCMake/DKCurl.exe ${url} ${CURRENT_DIR}/${filename}")
