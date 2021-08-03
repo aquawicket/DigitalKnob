@@ -8,6 +8,8 @@ DKDEPEND(android-ndk)
 ### VERSION ###
 DKSET(ANDROIDSTUDIO_VERSION 202.7486908-windows)
 DKSET(ANDROIDSTUDIO_NAME android-studio-ide-${ANDROIDSTUDIO_VERSION})
+DKSET(ANDROIDSTUDIO_DL https://r5---sn-a5meknsy.gvt1.com/edgedl/android/studio/install/4.2.2.0/android-studio-ide-202.7486908-windows.exe?cms_redirect=yes&mh=2R&mip=47.148.227.149&mm=28&mn=sn-a5meknsy&ms=nvh&mt=1627334431&mv=m&mvi=5&pl=16&rmhost=r2---sn-a5meknsy.gvt1.com&shardbypass=yes&smhost=r6---sn-a5mekner.gvt1.com)
+
 DKSETENV("STUDIO_JDK" ${JDK})
 DKSETENV("STUDIO_GRADLE_JDK" ${JDK})
 
@@ -16,7 +18,7 @@ DKSETENV("STUDIO_GRADLE_JDK" ${JDK})
 IF(CMAKE_HOST_WIN32)
 #IF(NOT EXISTS "C:/Program Files/Android/Android Studio/bin/studio.exe")
 	##DKSETPATH(${DIGITALKNOB}/Download)
-	DKINSTALL(https://r5---sn-a5meknsy.gvt1.com/edgedl/android/studio/install/4.2.2.0/android-studio-ide-202.7486908-windows.exe?cms_redirect=yes&mh=2R&mip=47.148.227.149&mm=28&mn=sn-a5meknsy&ms=nvh&mt=1627334431&mv=m&mvi=5&pl=16&rmhost=r2---sn-a5meknsy.gvt1.com&shardbypass=yes&smhost=r6---sn-a5mekner.gvt1.com ${ANDROIDSTUDIO_NAME} C:/Program Files/Android/Android Studio/bin/studio.exe)
+	DKINSTALL(${ANDROIDSTUDIO_DL} android-sdk C:/Program Files/Android/Android Studio/bin/studio.exe)
 	## DKDOWNLOAD(www.internet.com/android-studio-ide-${ANDROIDSDK_VERSION}-windows.exe)
 	## DKSETPATH(C:/)
 	## DKSET(QUEUE_BUILD ON)

@@ -1,6 +1,3 @@
-if(NOT ANDROID)
-	return()
-endif()
 # Information
 # https://androidsdkmanager.azurewebsites.net/
 # https://developer.android.com/studio/releases/cmdline-tools
@@ -14,6 +11,7 @@ endif()
 
 ### VERSION ###
 DKSET(ANDROIDSDK ${3RDPARTY}/android-sdk)
+
 DKSETENV("ANDROID_HOME" ${ANDROIDSDK})
 DKSETENV("VS_AndroidHome" ${ANDROIDSDK})
 

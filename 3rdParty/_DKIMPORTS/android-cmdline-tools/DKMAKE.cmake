@@ -13,7 +13,6 @@
 ### VERSION ###
 DKSET(ANDROIDTOOLS ${3RDPARTY}/android-cmdline-tools)
 DKSET(SDKMANAGER_EXE ${ANDROIDTOOLS}/bin/sdkmanager.bat)
-
 if(CMAKE_HOST_WIN32)
 	DKSET(ANDROIDTOOLS_DL https://dl.google.com/android/repository/commandlinetools-win-7302050_latest.zip)
 endif()

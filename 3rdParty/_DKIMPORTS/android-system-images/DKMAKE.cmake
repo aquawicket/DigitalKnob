@@ -2,9 +2,6 @@
 # https://dl.google.com/android/repository/sys-img/android/arm64-v8a-24_r07.zip
 # https://dl.google.com/android/repository/sys-img/android/x86-24_r08.zip
 # https://dl.google.com/android/repository/sys-img/android/x86_64-24_r08.zip
-if(NOT ANDROID)
-	return()
-endif()
 
 
 ### VERSION ###

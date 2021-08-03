@@ -1,6 +1,3 @@
-if(NOT ANDROID)
-	return()
-endif()
 
 ### VERSION ###
 #DKSET(ANDROIDNDK_VERSION r20b)
