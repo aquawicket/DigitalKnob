@@ -58,11 +58,17 @@ function DKGit_GitUpdate() {
 		CPP_DK_Execute(GIT + " clone https://github.com/aquawicket/DigitalKnob.git " + DKPATH + "DK");
 		CPP_DKFile_ChDir(DKPATH + "DK");
 		CPP_DK_Execute(GIT + " checkout -- .");
+		
+		const current_branch = CPP_DK_Execute("git rev-parse --abbrev-ref HEAD", "rt")
+		console.log("Current Branch: "+current_branch)
 		CPP_DK_Execute(GIT + " pull origin master");
 	}
 	else{
 		CPP_DKFile_ChDir(DKPATH + "DK");
-		CPP_DK_Execute(GIT + " checkout -- .");
+		//CPP_DK_Execute(GIT + " checkout -- .");
+		
+		const current_branch = CPP_DK_Execute("git rev-parse --abbrev-ref HEAD", "rt")
+		console.log("Current Branch: "+current_branch)
 		CPP_DK_Execute(GIT + " pull");
 	}
 
@@ -89,7 +95,10 @@ function DKGit_GitUpdate() {
 				}
 				else{
 					CPP_DKFile_ChDir(DKPATH + folder);
-					CPP_DK_Execute(GIT + " checkout -- .");
+					//CPP_DK_Execute(GIT + " checkout -- .");
+					
+					const current_branch = CPP_DK_Execute("git rev-parse --abbrev-ref HEAD", "rt")
+					console.log("Current Branch: "+current_branch)
 					CPP_DK_Execute(GIT + " pull");
 				}
             }
@@ -105,13 +114,16 @@ function DKGit_GitUpdate() {
 function DKGit_GitCommit() {
     console.log("Git Commit DigitalKnob...\n");
     CPP_DKFile_ChDir(DKPATH + "/DK");
-    CPP_DK_Execute(GIT + " init");
-    CPP_DK_Execute(GIT + " config user.name \"aquawicket\"");
-    CPP_DK_Execute(GIT + " config user.email \"aquawicket@digitalknob.com\"");
-    CPP_DK_Execute(GIT + " commit -a -m \"commit from git\"");
-    CPP_DK_Execute(GIT + " config credential.helper store");
-    //store credentials 
-    CPP_DK_Execute(GIT + " push");
+    //CPP_DK_Execute(GIT + " init");
+    //CPP_DK_Execute(GIT + " config user.name \"aquawicket\"");
+    //CPP_DK_Execute(GIT + " config user.email \"aquawicket@digitalknob.com\"");
+    //CPP_DK_Execute(GIT + " config credential.helper store");
+    //store credentials
+	
+	const current_branch = CPP_DK_Execute("git rev-parse --abbrev-ref HEAD", "rt")
+	console.log("Current Branch: "+current_branch)
+	CPP_DK_Execute(GIT + " commit -a -m \"commit from git\"");
+    CPP_DK_Execute(GIT + " push")
 
     //Multipe user folders
     var contents = CPP_DKFile_DirectoryContents(DKPATH);
@@ -122,12 +134,15 @@ function DKGit_GitCommit() {
 				console.log("\n\n")
                 console.log("### Git Commit " + files[i] + "... \n");
                 CPP_DKFile_ChDir(DKPATH + files[i]);
-                CPP_DK_Execute(GIT + " init");
+                //CPP_DK_Execute(GIT + " init");
 				//store credentials 
-                CPP_DK_Execute(GIT + " config user.name \"aquawicket\"");
-                CPP_DK_Execute(GIT + " config user.email \"aquawicket@digitalknob.com\"");
-                CPP_DK_Execute(GIT + " commit -a -m \"commit from git\"");
-                CPP_DK_Execute(GIT + " config credential.helper store");
+                //CPP_DK_Execute(GIT + " config user.name \"aquawicket\"");
+                //CPP_DK_Execute(GIT + " config user.email \"aquawicket@digitalknob.com\"");
+                //CPP_DK_Execute(GIT + " config credential.helper store");
+				
+				const current_branch = CPP_DK_Execute("git rev-parse --abbrev-ref HEAD", "rt")
+				console.log("Current Branch: "+current_branch)
+				CPP_DK_Execute(GIT + " commit -a -m \"commit from git\"");
                 CPP_DK_Execute(GIT + " push");
             }
         }
