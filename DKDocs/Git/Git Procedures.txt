@@ -1,0 +1,7 @@
+
+On undoing, fixing, or removing commits in git
+https://sethrobertson.github.io/GitFixUm/fixup.html
+
+
+Git Magic
+http://www-cs-students.stanford.edu/~blynn/gitmagic/ch05.html#_8230_and_then_some
