@@ -331,7 +331,7 @@ string(REPLACE "/Release" "" DKPROJECT ${DKPROJECT})
 if(NOT OS)
 	message(STATUS "EXAMPLE: digitalknob/DKApps/MyApp/win32")
 	message(FATAL_ERROR "The binary directory must contain an os folder. Valid folders are win32, win64, mac32, mac64, linux32, linux64, ios32, ios64, iossim32, iossim64, raspberry32, raspberry64, android32, android64")
-	DKREMOVE(${CMAKE_BINARY_DIR})
+	#DKREMOVE(${CMAKE_BINARY_DIR})
 endif()
 
 
@@ -361,9 +361,7 @@ if(CMAKE_GENERATOR STREQUAL "Visual Studio 16 2019")
 			#DKSET(CMAKE_CXX_FLAGS_DEBUG "/MDd /Od /Ob0 /Zi /RTC1 /D_ITERATOR_DEBUG_LEVEL=2")
 			#DKSET(CMAKE_CXX_FLAGS_RELEASE "/MD /O2 /Ob2 /D_ITERATOR_DEBUG_LEVEL=0")	
 		endif()
-		DKSET(FLAGS "/W3 /nologo /Zm500 /EHsc /GR /D_WIN32_WINNT=0x0600 /D_USING_V110_SDK71_ /Zc:__cplusplus 
-		$<$<CONFIG:Debug>:/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG> 
-		$<$<CONFIG:Release>:/MT /O2 /Ob2 /DNDEBUG>")
+		DKSET(FLAGS "/W3 /nologo /Zm500 /EHsc /GR /D_WIN32_WINNT=0x0600 /D_USING_V110_SDK71_ /Zc:__cplusplus $<$<CONFIG:Debug>:/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG> $<$<CONFIG:Release>:/MT /O2 /Ob2 /DNDEBUG>")
 		
 		#DKSET(FLAGS "/DWIN32 /D_WINDOWS /W3 /std:c++17 /nologo /GR /EHsc /Zm500 /D_WIN32_WINNT=0x0600 /D_USING_V110_SDK71_ /Zc:__cplusplus
 		#$<$<CONFIG:Debug>:/MTd /Od /Ob0 /Zi /RTC1 /D_ITERATOR_DEBUG_LEVEL=2 /DDEBUG /D_DEBUG>
