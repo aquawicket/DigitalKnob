@@ -450,11 +450,11 @@ function DKBuild_DoResults(){
 		
 		if(TYPE === "Debug" || TYPE === "ALL"){
 			CPP_DKFile_Rename(DKPATH+appdir+"/"+APP+"/"+OS+"/Debug/"+APP+".exe", DKPATH+appdir+"/"+APP+"/"+OS+"/Release/"+APP+"_old.exe", true)	
-			CPP_DK_Execute(MSBUILD+" "+DKPATH+appdir+"/"+APP+"/"+OS+"/"+APP+".sln /p:Configuration=Debug /p:PreferredToolArchitecture=x86")
+			CPP_DK_Execute(MSBUILD+" "+DKPATH+appdir+"/"+APP+"/"+OS+"/"+APP+".sln /p:Configuration=Debug")
 		}
 		if(TYPE === "Release" || TYPE === "ALL"){
 			CPP_DKFile_Rename(DKPATH+appdir+"/"+APP+"/"+OS+"/Release/"+APP+".exe", DKPATH+appdir+"/"+APP+"/"+OS+"/Release/"+APP+"_old.exe", true)
-			CPP_DK_Execute(MSBUILD+" "+DKPATH+appdir+"/"+APP+"/"+OS+"/"+APP+".sln /p:Configuration=Release /p:PreferredToolArchitecture=x86")
+			CPP_DK_Execute(MSBUILD+" "+DKPATH+appdir+"/"+APP+"/"+OS+"/"+APP+".sln /p:Configuration=Release")
 		}
 		
 		//copy .pdb file to assets
@@ -488,11 +488,11 @@ function DKBuild_DoResults(){
 		
 		if(TYPE === "Debug" || TYPE === "ALL"){
 			CPP_DKFile_Rename(DKPATH+appdir+"/"+APP+"/"+OS+"/Debug/"+APP+"_64.exe", DKPATH+appdir+"/"+APP+"/"+OS+"/Release/"+APP+"_64_old.exe", true)
-			CPP_DK_Execute(MSBUILD+" "+DKPATH+appdir+"/"+APP+"/"+OS+"/"+APP+".sln /p:Configuration=Debug /p:PreferredToolArchitecture=x64")
+			CPP_DK_Execute(MSBUILD+" "+DKPATH+appdir+"/"+APP+"/"+OS+"/"+APP+".sln /p:Configuration=Debug")
 		}
 		if(TYPE === "Release" || TYPE === "ALL"){
 			CPP_DKFile_Rename(DKPATH+appdir+"/"+APP+"/"+OS+"/Release/"+APP+"_64.exe", DKPATH+appdir+"/"+APP+"/"+OS+"/Release/"+APP+"_64_old.exe", true)
-			CPP_DK_Execute(MSBUILD+" "+DKPATH+appdir+"/"+APP+"/"+OS+"/"+APP+".sln /p:Configuration=Release /p:PreferredToolArchitecture=x64")
+			CPP_DK_Execute(MSBUILD+" "+DKPATH+appdir+"/"+APP+"/"+OS+"/"+APP+".sln /p:Configuration=Release")
 		}
 		
 		//copy .pdb file to assets
