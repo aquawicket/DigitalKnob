@@ -160,9 +160,9 @@ function DKGit_CheckForDiff(){
 				CPP_DK_Execute(GIT + " commit -a -m \"commit from git\"")
 				CPP_DK_Execute(GIT + " fetch")
 				const upstream = "@{u}"
-				const local = CPP_DK_Execute(GIT + " rev-parse @")
-				const remote = CPP_DK_Execute(GIT + " rev-parse " + upstream)
-				const base = CPP_DK_Execute(GIT + " merge-base @ " + upstream)
+				const local = CPP_DK_Execute(GIT + " rev-parse @", "rr")
+				const remote = CPP_DK_Execute(GIT + " rev-parse " + upstream, "rt")
+				const base = CPP_DK_Execute(GIT + " merge-base @ " + upstream, "rt")
 				if(local === remote)
 					console.log("UP TO DATE")
 				else if(local === base)
@@ -182,8 +182,89 @@ function DKGit_DiffCount(){
 	for(let i=0; i<files.length; i++){ 
 		if(CPP_DKFile_Exists(DKPATH+files[i]+"/DKApps")){
 			CPP_DKFile_ChDir(DKPATH + "/" + files[i])
-			const result = CPP_DK_Execute(GIT + " rev-list HEAD...origin/master --count")
+			const result = CPP_DK_Execute(GIT + " rev-list HEAD...origin/master --count", "rt")
 			console.log(result)
 		}
 	}
+}
+
+function DKGit_CreateBranch(name){
+	console.log("DKGit_CreateBranch("+name+")")
+	CPP_DK_Execute(GIT + " checkout -b "+name+" master")
+}
+
+function DKGit_ForcePull(){
+	console.log("DKGit_ForcePull()")
+	CPP_DK_Execute(GIT + " stash")
+	CPP_DK_Execute(GIT + " pull")
+}
+
+function DKGit_ShowUntrackedFiles(){
+	console.log("DKGit_AhowUntrackedFiles()")
+	CPP_DK_Execute(GIT + " clean -n -d") //Shows what will be deleted
+}
+
+function DKGit_DeleteUntrackedFiles(){
+	console.log("DKGit_DeleteUntrackedFiles()")
+	CPP_DK_Execute(GIT + " clean -n -d") //Shows what will be deleted
+	var key = 10
+    while (key === 10)
+        key = CPP_DK_GetKey()
+	CPP_DK_Execute(GIT + " clean -f -d") //Actually deletes
+}
+
+function DKGit_UnaddFile(filename){
+	console.log("DKGit_UnaddFile("+filename+")")
+	CPP_DK_Execute(GIT + " rm –cached "+filename)
+}
+
+function DKGit_ResetLocalChanges(){
+	console.log("DKGit_ResetLocalChanges()")
+	CPP_DK_Execute(GIT + " reset")
+}
+
+function DKGit_UndoMerge(id){
+	console.log("DKGit_UndoMerge("+id+")")
+	CPP_DK_Execute(GIT + " log –oneline")
+	CPP_DK_Execute(GIT + " revert -m 1 "+id)
+	CPP_DK_Execute(GIT + " commit -m \"reverted merge "+id+"\"")
+	CPP_DK_Execute(GIT + " push")
+}
+
+function DKGit_RemoveFile(filename){
+	console.log("DKGit_RemoveFile("+filename+")")
+	CPP_DK_Execute(GIT + " rm "+filename)
+	CPP_DK_Execute(GIT + " commit -m \"removed "+filename+"\"")
+	CPP_DK_Execute(GIT + " push")
+}
+
+function DKGit_UndoLastCommit(){
+	console.log("DKGit_UndoLastCommit()")
+	CPP_DK_Execute(GIT +" reset –soft HEAD^")
+	CPP_DK_Execute(GIT +" status")
+}
+
+function DKGit_DeleteLastCommit(){
+	console.log("DKGit_DeleteLastCommit()")
+	CPP_DK_Execute(GIT +" reset –hard HEAD^")
+	CPP_DK_Execute(GIT +" status")
+}
+
+function DKGit_CompairBranches(branchA, branchB){
+	console.log("DKGit_CompairBranches("+branchA+", "+branchB)+")")
+	CPP_DK_Execute(GIT +" diff "+branchA+".."+branchB)
+}
+
+function DKGit_DeleteTag(tagName){
+	console.log("DKGit_DeleteTag("+tagName+")")
+	CPP_DK_Execute(GIT + "push origin :refs/tags/"+tagName) //deletes remote tag
+	CPP_DK_Execute(GIT + "tag -d "+tagName) //deletes local tag
+}
+
+function DKGit_RenameBranch(oldName, newName){
+	console.log("DKGit_RenameBranch("+oldName+", "+newName+")")
+	CPP_DK_Execute(GIT + "checkout "+oldName)
+	CPP_DK_Execute(GIT + "branch -m "+newName)
+	CPP_DK_Execute(GIT + "push origin :"+oldName+" "+newName) //Delete old branch from remote
+	CPP_DK_Execute(GIT + "push origin -u "+newName) //Reset the upstream branch for the new branch name
 }
