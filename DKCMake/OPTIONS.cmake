@@ -1,29 +1,17 @@
-if(DK_OPTIONS_INCLUDED)
-  return()
-endif()
-set(DK_OPTIONS_INCLUDED true)
+#if(DK_OPTIONS_INCLUDED)
+#  return()
+#endif()
+#set(DK_OPTIONS_INCLUDED true)
 
 if(COMMAND cmake_policy)
 	CMAKE_POLICY(SET CMP0003 NEW) ##https://cmake.org/cmake/help/latest/policy/CMP0003.html
 endif(COMMAND cmake_policy)
-##SET(CMAKE_CONFIGURATION_TYPES Debug Release CACHE TYPE INTERNAL FORCE) #TODO: is this needed?
 
 
 #########################################################################
 ## Set variables for paths
 ###############################################################
 get_filename_component(DIGITALKNOB ${CMAKE_SOURCE_DIR} ABSOLUTE)
-if(NOT $ENV{DIGITALKNOB})# MATCHES ${DIGITALKNOB})
-	set(ENV{DIGITALKNOB} ${DIGITALKNOB})
-endif()
-
-#message(STATUS "Deleteing leftover CMakeCache.txt files....")
-#if(CMAKE_HOST_WIN32)
-#	execute_process(COMMAND cmd /c del /f /S *MakeCache.txt WORKING_DIRECTORY ${DIGITALKNOB})
-#else()
-#	execute_process(COMMAND cmd /c find . -name "*MakeCache.txt" -delete WORKING_DIRECTORY ${DIGITALKNOB})
-#endif()
-
 DKSET(DKCMAKE ${DIGITALKNOB}/DKCMake)
 DKSET(DKPLUGINS ${DIGITALKNOB}/DKPlugins)
 DKSET(3RDPARTY ${DIGITALKNOB}/3rdParty)
