@@ -251,7 +251,7 @@ function DKGit_DeleteLastCommit(){
 }
 
 function DKGit_CompairBranches(branchA, branchB){
-	console.log("DKGit_CompairBranches("+branchA+", "+branchB)+")")
+	console.log("DKGit_CompairBranches("+branchA+", "+branchB+")")
 	CPP_DK_Execute(GIT +" diff "+branchA+".."+branchB)
 }
 
