@@ -718,8 +718,8 @@ function DKBuild_DoResults(){
 			let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DKPATH+"DK")
 			if(rtvalue.indexOf("errors occurred!") > -1) 
 				return
-			CPP_DK_Execute("make "+APP+"d")
-			CPP_DK_Execute("chmod +x "+app_path+OS+"/Debug/"+APP+"d")
+			CPP_DK_Execute("make "+APP)
+			CPP_DK_Execute("chmod +x "+app_path+OS+"/Debug/"+APP)
 
 			//Create .desktop file
 			let string = "[Desktop Entry]\n"
