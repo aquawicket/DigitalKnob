@@ -1,0 +1,3554 @@
+<!DOCTYPE html>
+<!-- saved from url=(0080)https://trederia.blogspot.com/2017/03/building-sdl2-for-android-with-visual.html -->
+<html dir="ltr" lang="en-GB"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta content="width=device-width, initial-scale=1" name="viewport">
+<title>Building SDL2 for Android with Visual Studio</title>
+
+<!-- Chrome, Firefox OS and Opera -->
+<meta content="#ffffff" name="theme-color">
+<!-- Windows Phone -->
+<meta content="#ffffff" name="msapplication-navbutton-color">
+<meta content="blogger" name="generator">
+<link href="https://trederia.blogspot.com/favicon.ico" rel="icon" type="image/x-icon">
+<link href="https://trederia.blogspot.com/2017/03/building-sdl2-for-android-with-visual.html" rel="canonical">
+<link rel="alternate" type="application/atom+xml" title="Trederia - Atom" href="https://trederia.blogspot.com/feeds/posts/default">
+<link rel="alternate" type="application/rss+xml" title="Trederia - RSS" href="https://trederia.blogspot.com/feeds/posts/default?alt=rss">
+<link rel="service.post" type="application/atom+xml" title="Trederia - Atom" href="https://www.blogger.com/feeds/6421765335659381070/posts/default">
+
+<link rel="alternate" type="application/atom+xml" title="Trederia - Atom" href="https://trederia.blogspot.com/feeds/5409220101471293686/comments/default">
+<!--Can't find substitution for tag [blog.ieCssRetrofitLinks]-->
+<link href="./Building SDL2 for Android with Visual Studio_files/new_sdl.png" rel="image_src">
+<meta content="Using SDL2 as an Android library for native development in Microsoft Visual Studio" name="description">
+<meta content="https://trederia.blogspot.com/2017/03/building-sdl2-for-android-with-visual.html" property="og:url">
+<meta content="Building SDL2 for Android with Visual Studio" property="og:title">
+<meta content="Using SDL2 as an Android library for native development in Microsoft Visual Studio" property="og:description">
+<meta content="https://1.bp.blogspot.com/-g5e-30OBwxE/WMvGF8_DIwI/AAAAAAAAB00/UcF59iqrIuMy_ByLw0rbSvJIL776exjuQCEw/w1200-h630-p-k-no-nu/new_sdl.png" property="og:image">
+<!--[if IE]> <script> (function() { var html5 = ("abbr,article,aside,audio,canvas,datalist,details," + "figure,footer,header,hgroup,mark,menu,meter,nav,output," + "progress,section,time,video").split(','); for (var i = 0; i < html5.length; i++) { document.createElement(html5[i]); } try { document.execCommand('BackgroundImageCache', false, true); } catch(e) {} })(); </script> <![endif]-->
+<style type="text/css">@font-face{font-family:'EB Garamond';font-style:normal;font-weight:400;src:url(//fonts.gstatic.com/s/ebgaramond/v15/SlGDmQSNjdsmc35JDF1K5E55YMjF_7DPuGi-6_RkBI96.ttf)format('truetype');}@font-face{font-family:'Lora';font-style:normal;font-weight:400;src:url(//fonts.gstatic.com/s/lora/v17/0QI6MX1D_JOuGQbT0gvTJPa787weuxJBkqg.ttf)format('truetype');}@font-face{font-family:'Montserrat';font-style:normal;font-weight:400;src:url(//fonts.gstatic.com/s/montserrat/v15/JTUSjIg1_i6t8kCHKm459Wlhzg.ttf)format('truetype');}@font-face{font-family:'Montserrat';font-style:normal;font-weight:700;src:url(//fonts.gstatic.com/s/montserrat/v15/JTURjIg1_i6t8kCHKm45_dJE3gnD-w.ttf)format('truetype');}</style>
+<style id="page-skin-1" type="text/css"><!--
+/*! normalize.css v3.0.1 | MIT License | git.io/normalize */html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}body{margin:0}article,aside,details,figcaption,figure,footer,header,hgroup,main,nav,section,summary{display:block}audio,canvas,progress,video{display:inline-block;vertical-align:baseline}audio:not([controls]){display:none;height:0}[hidden],template{display:none}a{background:transparent}a:active,a:hover{outline:0}abbr[title]{border-bottom:1px dotted}b,strong{font-weight:bold}dfn{font-style:italic}h1{font-size:2em;margin:.67em 0}mark{background:#ff0;color:#000}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sup{top:-0.5em}sub{bottom:-0.25em}img{border:0}svg:not(:root){overflow:hidden}figure{margin:1em 40px}hr{-moz-box-sizing:content-box;box-sizing:content-box;height:0}pre{overflow:auto}code,kbd,pre,samp{font-family:monospace,monospace;font-size:1em}button,input,optgroup,select,textarea{color:inherit;font:inherit;margin:0}button{overflow:visible}button,select{text-transform:none}button,html input[type="button"],input[type="reset"],input[type="submit"]{-webkit-appearance:button;cursor:pointer}button[disabled],html input[disabled]{cursor:default}button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0}input{line-height:normal}input[type="checkbox"],input[type="radio"]{box-sizing:border-box;padding:0}input[type="number"]::-webkit-inner-spin-button,input[type="number"]::-webkit-outer-spin-button{height:auto}input[type="search"]{-webkit-appearance:textfield;-moz-box-sizing:content-box;-webkit-box-sizing:content-box;box-sizing:content-box}input[type="search"]::-webkit-search-cancel-button,input[type="search"]::-webkit-search-decoration{-webkit-appearance:none}fieldset{border:1px solid #c0c0c0;margin:0 2px;padding:.35em .625em .75em}legend{border:0;padding:0}textarea{overflow:auto}optgroup{font-weight:bold}table{border-collapse:collapse;border-spacing:0}td,th{padding:0}
+/*!************************************************
+* Blogger Template Style
+* Name: Soho
+**************************************************/
+body{
+overflow-wrap:break-word;
+word-break:break-word;
+word-wrap:break-word
+}
+.hidden{
+display:none
+}
+.invisible{
+visibility:hidden
+}
+.container::after,.float-container::after{
+clear:both;
+content:"";
+display:table
+}
+.clearboth{
+clear:both
+}
+#comments .comment .comment-actions,.subscribe-popup .FollowByEmail .follow-by-email-submit{
+background:0 0;
+border:0;
+box-shadow:none;
+color:#bf8b38;
+cursor:pointer;
+font-size:14px;
+font-weight:700;
+outline:0;
+text-decoration:none;
+text-transform:uppercase;
+width:auto
+}
+.dim-overlay{
+background-color:rgba(0,0,0,.54);
+height:100vh;
+left:0;
+position:fixed;
+top:0;
+width:100%
+}
+#sharing-dim-overlay{
+background-color:transparent
+}
+input::-ms-clear{
+display:none
+}
+.blogger-logo,.svg-icon-24.blogger-logo{
+fill:#ff9800;
+opacity:1
+}
+.loading-spinner-large{
+-webkit-animation:mspin-rotate 1.568s infinite linear;
+animation:mspin-rotate 1.568s infinite linear;
+height:48px;
+overflow:hidden;
+position:absolute;
+width:48px;
+z-index:200
+}
+.loading-spinner-large>div{
+-webkit-animation:mspin-revrot 5332ms infinite steps(4);
+animation:mspin-revrot 5332ms infinite steps(4)
+}
+.loading-spinner-large>div>div{
+-webkit-animation:mspin-singlecolor-large-film 1333ms infinite steps(81);
+animation:mspin-singlecolor-large-film 1333ms infinite steps(81);
+background-size:100%;
+height:48px;
+width:3888px
+}
+.mspin-black-large>div>div,.mspin-grey_54-large>div>div{
+background-image:url(https://www.blogblog.com/indie/mspin_black_large.svg)
+}
+.mspin-white-large>div>div{
+background-image:url(https://www.blogblog.com/indie/mspin_white_large.svg)
+}
+.mspin-grey_54-large{
+opacity:.54
+}
+@-webkit-keyframes mspin-singlecolor-large-film{
+from{
+-webkit-transform:translateX(0);
+transform:translateX(0)
+}
+to{
+-webkit-transform:translateX(-3888px);
+transform:translateX(-3888px)
+}
+}
+@keyframes mspin-singlecolor-large-film{
+from{
+-webkit-transform:translateX(0);
+transform:translateX(0)
+}
+to{
+-webkit-transform:translateX(-3888px);
+transform:translateX(-3888px)
+}
+}
+@-webkit-keyframes mspin-rotate{
+from{
+-webkit-transform:rotate(0);
+transform:rotate(0)
+}
+to{
+-webkit-transform:rotate(360deg);
+transform:rotate(360deg)
+}
+}
+@keyframes mspin-rotate{
+from{
+-webkit-transform:rotate(0);
+transform:rotate(0)
+}
+to{
+-webkit-transform:rotate(360deg);
+transform:rotate(360deg)
+}
+}
+@-webkit-keyframes mspin-revrot{
+from{
+-webkit-transform:rotate(0);
+transform:rotate(0)
+}
+to{
+-webkit-transform:rotate(-360deg);
+transform:rotate(-360deg)
+}
+}
+@keyframes mspin-revrot{
+from{
+-webkit-transform:rotate(0);
+transform:rotate(0)
+}
+to{
+-webkit-transform:rotate(-360deg);
+transform:rotate(-360deg)
+}
+}
+.skip-navigation{
+background-color:#fff;
+box-sizing:border-box;
+color:#000;
+display:block;
+height:0;
+left:0;
+line-height:50px;
+overflow:hidden;
+padding-top:0;
+position:fixed;
+text-align:center;
+top:0;
+-webkit-transition:box-shadow .3s,height .3s,padding-top .3s;
+transition:box-shadow .3s,height .3s,padding-top .3s;
+width:100%;
+z-index:900
+}
+.skip-navigation:focus{
+box-shadow:0 4px 5px 0 rgba(0,0,0,.14),0 1px 10px 0 rgba(0,0,0,.12),0 2px 4px -1px rgba(0,0,0,.2);
+height:50px
+}
+#main{
+outline:0
+}
+.main-heading{
+position:absolute;
+clip:rect(1px,1px,1px,1px);
+padding:0;
+border:0;
+height:1px;
+width:1px;
+overflow:hidden
+}
+.Attribution{
+margin-top:1em;
+text-align:center
+}
+.Attribution .blogger img,.Attribution .blogger svg{
+vertical-align:bottom
+}
+.Attribution .blogger img{
+margin-right:.5em
+}
+.Attribution div{
+line-height:24px;
+margin-top:.5em
+}
+.Attribution .copyright,.Attribution .image-attribution{
+font-size:.7em;
+margin-top:1.5em
+}
+.BLOG_mobile_video_class{
+display:none
+}
+.bg-photo{
+background-attachment:scroll!important
+}
+body .CSS_LIGHTBOX{
+z-index:900
+}
+.extendable .show-less,.extendable .show-more{
+border-color:#bf8b38;
+color:#bf8b38;
+margin-top:8px
+}
+.extendable .show-less.hidden,.extendable .show-more.hidden{
+display:none
+}
+.inline-ad{
+display:none;
+max-width:100%;
+overflow:hidden
+}
+.adsbygoogle{
+display:block
+}
+#cookieChoiceInfo{
+bottom:0;
+top:auto
+}
+iframe.b-hbp-video{
+border:0
+}
+.post-body img{
+max-width:100%
+}
+.post-body iframe{
+max-width:100%
+}
+.post-body a[imageanchor="1"]{
+display:inline-block
+}
+.byline{
+margin-right:1em
+}
+.byline:last-child{
+margin-right:0
+}
+.link-copied-dialog{
+max-width:520px;
+outline:0
+}
+.link-copied-dialog .modal-dialog-buttons{
+margin-top:8px
+}
+.link-copied-dialog .goog-buttonset-default{
+background:0 0;
+border:0
+}
+.link-copied-dialog .goog-buttonset-default:focus{
+outline:0
+}
+.paging-control-container{
+margin-bottom:16px
+}
+.paging-control-container .paging-control{
+display:inline-block
+}
+.paging-control-container .comment-range-text::after,.paging-control-container .paging-control{
+color:#bf8b38
+}
+.paging-control-container .comment-range-text,.paging-control-container .paging-control{
+margin-right:8px
+}
+.paging-control-container .comment-range-text::after,.paging-control-container .paging-control::after{
+content:"\b7";
+cursor:default;
+padding-left:8px;
+pointer-events:none
+}
+.paging-control-container .comment-range-text:last-child::after,.paging-control-container .paging-control:last-child::after{
+content:none
+}
+.byline.reactions iframe{
+height:20px
+}
+.b-notification{
+color:#000;
+background-color:#fff;
+border-bottom:solid 1px #000;
+box-sizing:border-box;
+padding:16px 32px;
+text-align:center
+}
+.b-notification.visible{
+-webkit-transition:margin-top .3s cubic-bezier(.4,0,.2,1);
+transition:margin-top .3s cubic-bezier(.4,0,.2,1)
+}
+.b-notification.invisible{
+position:absolute
+}
+.b-notification-close{
+position:absolute;
+right:8px;
+top:8px
+}
+.no-posts-message{
+line-height:40px;
+text-align:center
+}
+@media screen and (max-width:1162px){
+body.item-view .post-body a[imageanchor="1"][style*="float: left;"],body.item-view .post-body a[imageanchor="1"][style*="float: right;"]{
+float:none!important;
+clear:none!important
+}
+body.item-view .post-body a[imageanchor="1"] img{
+display:block;
+height:auto;
+margin:0 auto
+}
+body.item-view .post-body>.separator:first-child>a[imageanchor="1"]:first-child{
+margin-top:20px
+}
+.post-body a[imageanchor]{
+display:block
+}
+body.item-view .post-body a[imageanchor="1"]{
+margin-left:0!important;
+margin-right:0!important
+}
+body.item-view .post-body a[imageanchor="1"]+a[imageanchor="1"]{
+margin-top:16px
+}
+}
+.item-control{
+display:none
+}
+#comments{
+border-top:1px dashed rgba(0,0,0,.54);
+margin-top:20px;
+padding:20px
+}
+#comments .comment-thread ol{
+margin:0;
+padding-left:0;
+padding-left:0
+}
+#comments .comment .comment-replybox-single,#comments .comment-thread .comment-replies{
+margin-left:60px
+}
+#comments .comment-thread .thread-count{
+display:none
+}
+#comments .comment{
+list-style-type:none;
+padding:0 0 30px;
+position:relative
+}
+#comments .comment .comment{
+padding-bottom:8px
+}
+.comment .avatar-image-container{
+position:absolute
+}
+.comment .avatar-image-container img{
+border-radius:50%
+}
+.avatar-image-container svg,.comment .avatar-image-container .avatar-icon{
+border-radius:50%;
+border:solid 1px #000000;
+box-sizing:border-box;
+fill:#000000;
+height:35px;
+margin:0;
+padding:7px;
+width:35px
+}
+.comment .comment-block{
+margin-top:10px;
+margin-left:60px;
+padding-bottom:0
+}
+#comments .comment-author-header-wrapper{
+margin-left:40px
+}
+#comments .comment .thread-expanded .comment-block{
+padding-bottom:20px
+}
+#comments .comment .comment-header .user,#comments .comment .comment-header .user a{
+color:#000000;
+font-style:normal;
+font-weight:700
+}
+#comments .comment .comment-actions{
+bottom:0;
+margin-bottom:15px;
+position:absolute
+}
+#comments .comment .comment-actions>*{
+margin-right:8px
+}
+#comments .comment .comment-header .datetime{
+bottom:0;
+color:rgba(0, 0, 0, 0.54);
+display:inline-block;
+font-size:13px;
+font-style:italic;
+margin-left:8px
+}
+#comments .comment .comment-footer .comment-timestamp a,#comments .comment .comment-header .datetime a{
+color:rgba(0, 0, 0, 0.54)
+}
+#comments .comment .comment-content,.comment .comment-body{
+margin-top:12px;
+word-break:break-word
+}
+.comment-body{
+margin-bottom:12px
+}
+#comments.embed[data-num-comments="0"]{
+border:0;
+margin-top:0;
+padding-top:0
+}
+#comments.embed[data-num-comments="0"] #comment-post-message,#comments.embed[data-num-comments="0"] div.comment-form>p,#comments.embed[data-num-comments="0"] p.comment-footer{
+display:none
+}
+#comment-editor-src{
+display:none
+}
+.comments .comments-content .loadmore.loaded{
+max-height:0;
+opacity:0;
+overflow:hidden
+}
+.extendable .remaining-items{
+height:0;
+overflow:hidden;
+-webkit-transition:height .3s cubic-bezier(.4,0,.2,1);
+transition:height .3s cubic-bezier(.4,0,.2,1)
+}
+.extendable .remaining-items.expanded{
+height:auto
+}
+.svg-icon-24,.svg-icon-24-button{
+cursor:pointer;
+height:24px;
+width:24px;
+min-width:24px
+}
+.touch-icon{
+margin:-12px;
+padding:12px
+}
+.touch-icon:active,.touch-icon:focus{
+background-color:rgba(153,153,153,.4);
+border-radius:50%
+}
+svg:not(:root).touch-icon{
+overflow:visible
+}
+html[dir=rtl] .rtl-reversible-icon{
+-webkit-transform:scaleX(-1);
+-ms-transform:scaleX(-1);
+transform:scaleX(-1)
+}
+.svg-icon-24-button,.touch-icon-button{
+background:0 0;
+border:0;
+margin:0;
+outline:0;
+padding:0
+}
+.touch-icon-button .touch-icon:active,.touch-icon-button .touch-icon:focus{
+background-color:transparent
+}
+.touch-icon-button:active .touch-icon,.touch-icon-button:focus .touch-icon{
+background-color:rgba(153,153,153,.4);
+border-radius:50%
+}
+.Profile .default-avatar-wrapper .avatar-icon{
+border-radius:50%;
+border:solid 1px #000000;
+box-sizing:border-box;
+fill:#000000;
+margin:0
+}
+.Profile .individual .default-avatar-wrapper .avatar-icon{
+padding:25px
+}
+.Profile .individual .avatar-icon,.Profile .individual .profile-img{
+height:120px;
+width:120px
+}
+.Profile .team .default-avatar-wrapper .avatar-icon{
+padding:8px
+}
+.Profile .team .avatar-icon,.Profile .team .default-avatar-wrapper,.Profile .team .profile-img{
+height:40px;
+width:40px
+}
+.snippet-container{
+margin:0;
+position:relative;
+overflow:hidden
+}
+.snippet-fade{
+bottom:0;
+box-sizing:border-box;
+position:absolute;
+width:96px
+}
+.snippet-fade{
+right:0
+}
+.snippet-fade:after{
+content:"\2026"
+}
+.snippet-fade:after{
+float:right
+}
+.centered-top-container.sticky{
+left:0;
+position:fixed;
+right:0;
+top:0;
+width:auto;
+z-index:50;
+-webkit-transition-property:opacity,-webkit-transform;
+transition-property:opacity,-webkit-transform;
+transition-property:transform,opacity;
+transition-property:transform,opacity,-webkit-transform;
+-webkit-transition-duration:.2s;
+transition-duration:.2s;
+-webkit-transition-timing-function:cubic-bezier(.4,0,.2,1);
+transition-timing-function:cubic-bezier(.4,0,.2,1)
+}
+.centered-top-placeholder{
+display:none
+}
+.collapsed-header .centered-top-placeholder{
+display:block
+}
+.centered-top-container .Header .replaced h1,.centered-top-placeholder .Header .replaced h1{
+display:none
+}
+.centered-top-container.sticky .Header .replaced h1{
+display:block
+}
+.centered-top-container.sticky .Header .header-widget{
+background:0 0
+}
+.centered-top-container.sticky .Header .header-image-wrapper{
+display:none
+}
+.centered-top-container img,.centered-top-placeholder img{
+max-width:100%
+}
+.collapsible{
+-webkit-transition:height .3s cubic-bezier(.4,0,.2,1);
+transition:height .3s cubic-bezier(.4,0,.2,1)
+}
+.collapsible,.collapsible>summary{
+display:block;
+overflow:hidden
+}
+.collapsible>:not(summary){
+display:none
+}
+.collapsible[open]>:not(summary){
+display:block
+}
+.collapsible:focus,.collapsible>summary:focus{
+outline:0
+}
+.collapsible>summary{
+cursor:pointer;
+display:block;
+padding:0
+}
+.collapsible:focus>summary,.collapsible>summary:focus{
+background-color:transparent
+}
+.collapsible>summary::-webkit-details-marker{
+display:none
+}
+.collapsible-title{
+-webkit-box-align:center;
+-webkit-align-items:center;
+-ms-flex-align:center;
+align-items:center;
+display:-webkit-box;
+display:-webkit-flex;
+display:-ms-flexbox;
+display:flex
+}
+.collapsible-title .title{
+-webkit-box-flex:1;
+-webkit-flex:1 1 auto;
+-ms-flex:1 1 auto;
+flex:1 1 auto;
+-webkit-box-ordinal-group:1;
+-webkit-order:0;
+-ms-flex-order:0;
+order:0;
+overflow:hidden;
+text-overflow:ellipsis;
+white-space:nowrap
+}
+.collapsible-title .chevron-down,.collapsible[open] .collapsible-title .chevron-up{
+display:block
+}
+.collapsible-title .chevron-up,.collapsible[open] .collapsible-title .chevron-down{
+display:none
+}
+.flat-button{
+cursor:pointer;
+display:inline-block;
+font-weight:700;
+text-transform:uppercase;
+border-radius:2px;
+padding:8px;
+margin:-8px
+}
+.flat-icon-button{
+background:0 0;
+border:0;
+margin:0;
+outline:0;
+padding:0;
+margin:-12px;
+padding:12px;
+cursor:pointer;
+box-sizing:content-box;
+display:inline-block;
+line-height:0
+}
+.flat-icon-button,.flat-icon-button .splash-wrapper{
+border-radius:50%
+}
+.flat-icon-button .splash.animate{
+-webkit-animation-duration:.3s;
+animation-duration:.3s
+}
+.overflowable-container{
+max-height:28px;
+overflow:hidden;
+position:relative
+}
+.overflow-button{
+cursor:pointer
+}
+#overflowable-dim-overlay{
+background:0 0
+}
+.overflow-popup{
+box-shadow:0 2px 2px 0 rgba(0,0,0,.14),0 3px 1px -2px rgba(0,0,0,.2),0 1px 5px 0 rgba(0,0,0,.12);
+background-color:#ffffff;
+left:0;
+max-width:calc(100% - 32px);
+position:absolute;
+top:0;
+visibility:hidden;
+z-index:101
+}
+.overflow-popup ul{
+list-style:none
+}
+.overflow-popup .tabs li,.overflow-popup li{
+display:block;
+height:auto
+}
+.overflow-popup .tabs li{
+padding-left:0;
+padding-right:0
+}
+.overflow-button.hidden,.overflow-popup .tabs li.hidden,.overflow-popup li.hidden{
+display:none
+}
+.search{
+display:-webkit-box;
+display:-webkit-flex;
+display:-ms-flexbox;
+display:flex;
+line-height:24px;
+width:24px
+}
+.search.focused{
+width:100%
+}
+.search.focused .section{
+width:100%
+}
+.search form{
+z-index:101
+}
+.search h3{
+display:none
+}
+.search form{
+display:-webkit-box;
+display:-webkit-flex;
+display:-ms-flexbox;
+display:flex;
+-webkit-box-flex:1;
+-webkit-flex:1 0 0;
+-ms-flex:1 0 0px;
+flex:1 0 0;
+border-bottom:solid 1px transparent;
+padding-bottom:8px
+}
+.search form>*{
+display:none
+}
+.search.focused form>*{
+display:block
+}
+.search .search-input label{
+display:none
+}
+.centered-top-placeholder.cloned .search form{
+z-index:30
+}
+.search.focused form{
+border-color:rgba(0, 0, 0, 0.54);
+position:relative;
+width:auto
+}
+.collapsed-header .centered-top-container .search.focused form{
+border-bottom-color:transparent
+}
+.search-expand{
+-webkit-box-flex:0;
+-webkit-flex:0 0 auto;
+-ms-flex:0 0 auto;
+flex:0 0 auto
+}
+.search-expand-text{
+display:none
+}
+.search-close{
+display:inline;
+vertical-align:middle
+}
+.search-input{
+-webkit-box-flex:1;
+-webkit-flex:1 0 1px;
+-ms-flex:1 0 1px;
+flex:1 0 1px
+}
+.search-input input{
+background:0 0;
+border:0;
+box-sizing:border-box;
+color:rgba(0, 0, 0, 0.54);
+display:inline-block;
+outline:0;
+width:calc(100% - 48px)
+}
+.search-input input.no-cursor{
+color:transparent;
+text-shadow:0 0 0 rgba(0, 0, 0, 0.54)
+}
+.collapsed-header .centered-top-container .search-action,.collapsed-header .centered-top-container .search-input input{
+color:rgba(0, 0, 0, 0.54)
+}
+.collapsed-header .centered-top-container .search-input input.no-cursor{
+color:transparent;
+text-shadow:0 0 0 rgba(0, 0, 0, 0.54)
+}
+.collapsed-header .centered-top-container .search-input input.no-cursor:focus,.search-input input.no-cursor:focus{
+outline:0
+}
+.search-focused>*{
+visibility:hidden
+}
+.search-focused .search,.search-focused .search-icon{
+visibility:visible
+}
+.search.focused .search-action{
+display:block
+}
+.search.focused .search-action:disabled{
+opacity:.3
+}
+.widget.Sharing .sharing-button{
+display:none
+}
+.widget.Sharing .sharing-buttons li{
+padding:0
+}
+.widget.Sharing .sharing-buttons li span{
+display:none
+}
+.post-share-buttons{
+position:relative
+}
+.centered-bottom .share-buttons .svg-icon-24,.share-buttons .svg-icon-24{
+fill:#000000
+}
+.sharing-open.touch-icon-button:active .touch-icon,.sharing-open.touch-icon-button:focus .touch-icon{
+background-color:transparent
+}
+.share-buttons{
+background-color:#ffffff;
+border-radius:2px;
+box-shadow:0 2px 2px 0 rgba(0,0,0,.14),0 3px 1px -2px rgba(0,0,0,.2),0 1px 5px 0 rgba(0,0,0,.12);
+color:#000000;
+list-style:none;
+margin:0;
+padding:8px 0;
+position:absolute;
+top:-11px;
+min-width:200px;
+z-index:101
+}
+.share-buttons.hidden{
+display:none
+}
+.sharing-button{
+background:0 0;
+border:0;
+margin:0;
+outline:0;
+padding:0;
+cursor:pointer
+}
+.share-buttons li{
+margin:0;
+height:48px
+}
+.share-buttons li:last-child{
+margin-bottom:0
+}
+.share-buttons li .sharing-platform-button{
+box-sizing:border-box;
+cursor:pointer;
+display:block;
+height:100%;
+margin-bottom:0;
+padding:0 16px;
+position:relative;
+width:100%
+}
+.share-buttons li .sharing-platform-button:focus,.share-buttons li .sharing-platform-button:hover{
+background-color:rgba(128,128,128,.1);
+outline:0
+}
+.share-buttons li svg[class*=" sharing-"],.share-buttons li svg[class^=sharing-]{
+position:absolute;
+top:10px
+}
+.share-buttons li span.sharing-platform-button{
+position:relative;
+top:0
+}
+.share-buttons li .platform-sharing-text{
+display:block;
+font-size:16px;
+line-height:48px;
+white-space:nowrap
+}
+.share-buttons li .platform-sharing-text{
+margin-left:56px
+}
+.sidebar-container{
+background-color:#f7f7f7;
+max-width:284px;
+overflow-y:auto;
+-webkit-transition-property:-webkit-transform;
+transition-property:-webkit-transform;
+transition-property:transform;
+transition-property:transform,-webkit-transform;
+-webkit-transition-duration:.3s;
+transition-duration:.3s;
+-webkit-transition-timing-function:cubic-bezier(0,0,.2,1);
+transition-timing-function:cubic-bezier(0,0,.2,1);
+width:284px;
+z-index:101;
+-webkit-overflow-scrolling:touch
+}
+.sidebar-container .navigation{
+line-height:0;
+padding:16px
+}
+.sidebar-container .sidebar-back{
+cursor:pointer
+}
+.sidebar-container .widget{
+background:0 0;
+margin:0 16px;
+padding:16px 0
+}
+.sidebar-container .widget .title{
+color:rgba(0, 0, 0, 0.54);
+margin:0
+}
+.sidebar-container .widget ul{
+list-style:none;
+margin:0;
+padding:0
+}
+.sidebar-container .widget ul ul{
+margin-left:1em
+}
+.sidebar-container .widget li{
+font-size:16px;
+line-height:normal
+}
+.sidebar-container .widget+.widget{
+border-top:1px dashed rgba(0, 0, 0, 0.54)
+}
+.BlogArchive li{
+margin:16px 0
+}
+.BlogArchive li:last-child{
+margin-bottom:0
+}
+.Label li a{
+display:inline-block
+}
+.BlogArchive .post-count,.Label .label-count{
+float:right;
+margin-left:.25em
+}
+.BlogArchive .post-count::before,.Label .label-count::before{
+content:"("
+}
+.BlogArchive .post-count::after,.Label .label-count::after{
+content:")"
+}
+.widget.Translate .skiptranslate>div{
+display:block!important
+}
+.widget.Profile .profile-link{
+display:-webkit-box;
+display:-webkit-flex;
+display:-ms-flexbox;
+display:flex
+}
+.widget.Profile .team-member .default-avatar-wrapper,.widget.Profile .team-member .profile-img{
+-webkit-box-flex:0;
+-webkit-flex:0 0 auto;
+-ms-flex:0 0 auto;
+flex:0 0 auto;
+margin-right:1em
+}
+.widget.Profile .individual .profile-link{
+-webkit-box-orient:vertical;
+-webkit-box-direction:normal;
+-webkit-flex-direction:column;
+-ms-flex-direction:column;
+flex-direction:column
+}
+.widget.Profile .team .profile-link .profile-name{
+-webkit-align-self:center;
+-ms-flex-item-align:center;
+align-self:center;
+display:block;
+-webkit-box-flex:1;
+-webkit-flex:1 1 auto;
+-ms-flex:1 1 auto;
+flex:1 1 auto
+}
+.dim-overlay{
+background-color:rgba(0,0,0,.54);
+z-index:100
+}
+body.sidebar-visible{
+overflow-y:hidden
+}
+@media screen and (max-width:1439px){
+.sidebar-container{
+bottom:0;
+position:fixed;
+top:0;
+left:0;
+right:auto
+}
+.sidebar-container.sidebar-invisible{
+-webkit-transition-timing-function:cubic-bezier(.4,0,.6,1);
+transition-timing-function:cubic-bezier(.4,0,.6,1)
+}
+html[dir=ltr] .sidebar-container.sidebar-invisible{
+-webkit-transform:translateX(-284px);
+-ms-transform:translateX(-284px);
+transform:translateX(-284px)
+}
+html[dir=rtl] .sidebar-container.sidebar-invisible{
+-webkit-transform:translateX(284px);
+-ms-transform:translateX(284px);
+transform:translateX(284px)
+}
+}
+@media screen and (min-width:1440px){
+.sidebar-container{
+position:absolute;
+top:0;
+left:0;
+right:auto
+}
+.sidebar-container .navigation{
+display:none
+}
+}
+.dialog{
+box-shadow:0 2px 2px 0 rgba(0,0,0,.14),0 3px 1px -2px rgba(0,0,0,.2),0 1px 5px 0 rgba(0,0,0,.12);
+background:#ffffff;
+box-sizing:border-box;
+color:#000000;
+padding:30px;
+position:fixed;
+text-align:center;
+width:calc(100% - 24px);
+z-index:101
+}
+.dialog input[type=email],.dialog input[type=text]{
+background-color:transparent;
+border:0;
+border-bottom:solid 1px rgba(0,0,0,.12);
+color:#000000;
+display:block;
+font-family:EB Garamond, serif;
+font-size:16px;
+line-height:24px;
+margin:auto;
+padding-bottom:7px;
+outline:0;
+text-align:center;
+width:100%
+}
+.dialog input[type=email]::-webkit-input-placeholder,.dialog input[type=text]::-webkit-input-placeholder{
+color:#000000
+}
+.dialog input[type=email]::-moz-placeholder,.dialog input[type=text]::-moz-placeholder{
+color:#000000
+}
+.dialog input[type=email]:-ms-input-placeholder,.dialog input[type=text]:-ms-input-placeholder{
+color:#000000
+}
+.dialog input[type=email]::-ms-input-placeholder,.dialog input[type=text]::-ms-input-placeholder{
+color:#000000
+}
+.dialog input[type=email]::placeholder,.dialog input[type=text]::placeholder{
+color:#000000
+}
+.dialog input[type=email]:focus,.dialog input[type=text]:focus{
+border-bottom:solid 2px #bf8b38;
+padding-bottom:6px
+}
+.dialog input.no-cursor{
+color:transparent;
+text-shadow:0 0 0 #000000
+}
+.dialog input.no-cursor:focus{
+outline:0
+}
+.dialog input.no-cursor:focus{
+outline:0
+}
+.dialog input[type=submit]{
+font-family:EB Garamond, serif
+}
+.dialog .goog-buttonset-default{
+color:#bf8b38
+}
+.subscribe-popup{
+max-width:364px
+}
+.subscribe-popup h3{
+color:#000000;
+font-size:1.8em;
+margin-top:0
+}
+.subscribe-popup .FollowByEmail h3{
+display:none
+}
+.subscribe-popup .FollowByEmail .follow-by-email-submit{
+color:#bf8b38;
+display:inline-block;
+margin:0 auto;
+margin-top:24px;
+width:auto;
+white-space:normal
+}
+.subscribe-popup .FollowByEmail .follow-by-email-submit:disabled{
+cursor:default;
+opacity:.3
+}
+@media (max-width:800px){
+.blog-name div.widget.Subscribe{
+margin-bottom:16px
+}
+body.item-view .blog-name div.widget.Subscribe{
+margin:8px auto 16px auto;
+width:100%
+}
+}
+body#layout .bg-photo,body#layout .bg-photo-overlay{
+display:none
+}
+body#layout .page_body{
+padding:0;
+position:relative;
+top:0
+}
+body#layout .page{
+display:inline-block;
+left:inherit;
+position:relative;
+vertical-align:top;
+width:540px
+}
+body#layout .centered{
+max-width:954px
+}
+body#layout .navigation{
+display:none
+}
+body#layout .sidebar-container{
+display:inline-block;
+width:40%
+}
+body#layout .hamburger-menu,body#layout .search{
+display:none
+}
+body{
+background-color:#ffffff;
+color:#000000;
+font:normal 400 20px EB Garamond, serif;
+height:100%;
+margin:0;
+min-height:100vh
+}
+h1,h2,h3,h4,h5,h6{
+font-weight:400
+}
+a{
+color:#bf8b38;
+text-decoration:none
+}
+.dim-overlay{
+z-index:100
+}
+body.sidebar-visible .page_body{
+overflow-y:scroll
+}
+.widget .title{
+color:rgba(0, 0, 0, 0.54);
+font:normal 400 12px Montserrat, sans-serif
+}
+.extendable .show-less,.extendable .show-more{
+color:#bf8b38;
+font:normal 400 12px Montserrat, sans-serif;
+margin:12px -8px 0 -8px;
+text-transform:uppercase
+}
+.footer .widget,.main .widget{
+margin:50px 0
+}
+.main .widget .title{
+text-transform:uppercase
+}
+.inline-ad{
+display:block;
+margin-top:50px
+}
+.adsbygoogle{
+text-align:center
+}
+.page_body{
+display:-webkit-box;
+display:-webkit-flex;
+display:-ms-flexbox;
+display:flex;
+-webkit-box-orient:vertical;
+-webkit-box-direction:normal;
+-webkit-flex-direction:column;
+-ms-flex-direction:column;
+flex-direction:column;
+min-height:100vh;
+position:relative;
+z-index:20
+}
+.page_body>*{
+-webkit-box-flex:0;
+-webkit-flex:0 0 auto;
+-ms-flex:0 0 auto;
+flex:0 0 auto
+}
+.page_body>#footer{
+margin-top:auto
+}
+.centered-bottom,.centered-top{
+margin:0 32px;
+max-width:100%
+}
+.centered-top{
+padding-bottom:12px;
+padding-top:12px
+}
+.sticky .centered-top{
+padding-bottom:0;
+padding-top:0
+}
+.centered-top-container,.centered-top-placeholder{
+background:#ffffff
+}
+.centered-top{
+display:-webkit-box;
+display:-webkit-flex;
+display:-ms-flexbox;
+display:flex;
+-webkit-flex-wrap:wrap;
+-ms-flex-wrap:wrap;
+flex-wrap:wrap;
+-webkit-box-pack:justify;
+-webkit-justify-content:space-between;
+-ms-flex-pack:justify;
+justify-content:space-between;
+position:relative
+}
+.sticky .centered-top{
+-webkit-flex-wrap:nowrap;
+-ms-flex-wrap:nowrap;
+flex-wrap:nowrap
+}
+.centered-top-container .svg-icon-24,.centered-top-placeholder .svg-icon-24{
+fill:rgba(0, 0, 0, 0.54)
+}
+.back-button-container,.hamburger-menu-container{
+-webkit-box-flex:0;
+-webkit-flex:0 0 auto;
+-ms-flex:0 0 auto;
+flex:0 0 auto;
+height:48px;
+-webkit-box-ordinal-group:2;
+-webkit-order:1;
+-ms-flex-order:1;
+order:1
+}
+.sticky .back-button-container,.sticky .hamburger-menu-container{
+-webkit-box-ordinal-group:2;
+-webkit-order:1;
+-ms-flex-order:1;
+order:1
+}
+.back-button,.hamburger-menu,.search-expand-icon{
+cursor:pointer;
+margin-top:0
+}
+.search{
+-webkit-box-align:start;
+-webkit-align-items:flex-start;
+-ms-flex-align:start;
+align-items:flex-start;
+-webkit-box-flex:0;
+-webkit-flex:0 0 auto;
+-ms-flex:0 0 auto;
+flex:0 0 auto;
+height:48px;
+margin-left:24px;
+-webkit-box-ordinal-group:4;
+-webkit-order:3;
+-ms-flex-order:3;
+order:3
+}
+.search,.search.focused{
+width:auto
+}
+.search.focused{
+position:static
+}
+.sticky .search{
+display:none;
+-webkit-box-ordinal-group:5;
+-webkit-order:4;
+-ms-flex-order:4;
+order:4
+}
+.search .section{
+right:0;
+margin-top:12px;
+position:absolute;
+top:12px;
+width:0
+}
+.sticky .search .section{
+top:0
+}
+.search-expand{
+background:0 0;
+border:0;
+margin:0;
+outline:0;
+padding:0;
+color:#bf8b38;
+cursor:pointer;
+-webkit-box-flex:0;
+-webkit-flex:0 0 auto;
+-ms-flex:0 0 auto;
+flex:0 0 auto;
+font:normal 400 12px Montserrat, sans-serif;
+text-transform:uppercase;
+word-break:normal
+}
+.search.focused .search-expand{
+visibility:hidden
+}
+.search .dim-overlay{
+background:0 0
+}
+.search.focused .section{
+max-width:400px
+}
+.search.focused form{
+border-color:rgba(0, 0, 0, 0.54);
+height:24px
+}
+.search.focused .search-input{
+display:-webkit-box;
+display:-webkit-flex;
+display:-ms-flexbox;
+display:flex;
+-webkit-box-flex:1;
+-webkit-flex:1 1 auto;
+-ms-flex:1 1 auto;
+flex:1 1 auto
+}
+.search-input input{
+-webkit-box-flex:1;
+-webkit-flex:1 1 auto;
+-ms-flex:1 1 auto;
+flex:1 1 auto;
+font:normal 400 16px Montserrat, sans-serif
+}
+.search input[type=submit]{
+display:none
+}
+.subscribe-section-container{
+-webkit-box-flex:1;
+-webkit-flex:1 0 auto;
+-ms-flex:1 0 auto;
+flex:1 0 auto;
+margin-left:24px;
+-webkit-box-ordinal-group:3;
+-webkit-order:2;
+-ms-flex-order:2;
+order:2;
+text-align:right
+}
+.sticky .subscribe-section-container{
+-webkit-box-flex:0;
+-webkit-flex:0 0 auto;
+-ms-flex:0 0 auto;
+flex:0 0 auto;
+-webkit-box-ordinal-group:4;
+-webkit-order:3;
+-ms-flex-order:3;
+order:3
+}
+.subscribe-button{
+background:0 0;
+border:0;
+margin:0;
+outline:0;
+padding:0;
+color:#bf8b38;
+cursor:pointer;
+display:inline-block;
+font:normal 400 12px Montserrat, sans-serif;
+line-height:48px;
+margin:0;
+text-transform:uppercase;
+word-break:normal
+}
+.subscribe-popup h3{
+color:rgba(0, 0, 0, 0.54);
+font:normal 400 12px Montserrat, sans-serif;
+margin-bottom:24px;
+text-transform:uppercase
+}
+.subscribe-popup div.widget.FollowByEmail .follow-by-email-address{
+color:#000000;
+font:normal 400 12px Montserrat, sans-serif
+}
+.subscribe-popup div.widget.FollowByEmail .follow-by-email-submit{
+color:#bf8b38;
+font:normal 400 12px Montserrat, sans-serif;
+margin-top:24px;
+text-transform:uppercase
+}
+.blog-name{
+-webkit-box-flex:1;
+-webkit-flex:1 1 100%;
+-ms-flex:1 1 100%;
+flex:1 1 100%;
+-webkit-box-ordinal-group:5;
+-webkit-order:4;
+-ms-flex-order:4;
+order:4;
+overflow:hidden
+}
+.sticky .blog-name{
+-webkit-box-flex:1;
+-webkit-flex:1 1 auto;
+-ms-flex:1 1 auto;
+flex:1 1 auto;
+margin:0 12px;
+-webkit-box-ordinal-group:3;
+-webkit-order:2;
+-ms-flex-order:2;
+order:2
+}
+body.search-view .centered-top.search-focused .blog-name{
+display:none
+}
+.widget.Header h1{
+font:normal 400 18px EB Garamond, serif;
+margin:0;
+text-transform:uppercase
+}
+.widget.Header h1,.widget.Header h1 a{
+color:#000000
+}
+.widget.Header p{
+color:rgba(0, 0, 0, 0.54);
+font:normal 400 12px Montserrat, sans-serif;
+line-height:1.7
+}
+.sticky .widget.Header h1{
+font-size:16px;
+line-height:48px;
+overflow:hidden;
+overflow-wrap:normal;
+text-overflow:ellipsis;
+white-space:nowrap;
+word-wrap:normal
+}
+.sticky .widget.Header p{
+display:none
+}
+.sticky{
+box-shadow:0 1px 3px rgba(0, 0, 0, 0.1)
+}
+#page_list_top .widget.PageList{
+font:normal 400 14px Montserrat, sans-serif;
+line-height:28px
+}
+#page_list_top .widget.PageList .title{
+display:none
+}
+#page_list_top .widget.PageList .overflowable-contents{
+overflow:hidden
+}
+#page_list_top .widget.PageList .overflowable-contents ul{
+list-style:none;
+margin:0;
+padding:0
+}
+#page_list_top .widget.PageList .overflow-popup ul{
+list-style:none;
+margin:0;
+padding:0 20px
+}
+#page_list_top .widget.PageList .overflowable-contents li{
+display:inline-block
+}
+#page_list_top .widget.PageList .overflowable-contents li.hidden{
+display:none
+}
+#page_list_top .widget.PageList .overflowable-contents li:not(:first-child):before{
+color:rgba(0, 0, 0, 0.54);
+content:"\b7"
+}
+#page_list_top .widget.PageList .overflow-button a,#page_list_top .widget.PageList .overflow-popup li a,#page_list_top .widget.PageList .overflowable-contents li a{
+color:rgba(0, 0, 0, 0.54);
+font:normal 400 14px Montserrat, sans-serif;
+line-height:28px;
+text-transform:uppercase
+}
+#page_list_top .widget.PageList .overflow-popup li.selected a,#page_list_top .widget.PageList .overflowable-contents li.selected a{
+color:rgba(0, 0, 0, 0.54);
+font:normal 700 14px Montserrat, sans-serif;
+line-height:28px
+}
+#page_list_top .widget.PageList .overflow-button{
+display:inline
+}
+.sticky #page_list_top{
+display:none
+}
+body.homepage-view .hero-image.has-image{
+background:#ffffff url(//4.bp.blogspot.com/-Eq-wZzwzRVc/W4b-YWymprI/AAAAAAAADag/8P1s4rHX8_41M3Au-lxS0VhXcWcBHzbDACK4BGAYYCw/s0/IMG_20180717_142112918_HDR.jpg) repeat scroll top left;
+background-attachment:scroll;
+background-color:#ffffff;
+background-size:cover;
+height:62.5vw;
+max-height:75vh;
+min-height:200px;
+width:100%
+}
+.post-filter-message{
+background-color:#302c24;
+color:rgba(255, 255, 255, 0.54);
+display:-webkit-box;
+display:-webkit-flex;
+display:-ms-flexbox;
+display:flex;
+-webkit-flex-wrap:wrap;
+-ms-flex-wrap:wrap;
+flex-wrap:wrap;
+font:normal 400 12px Montserrat, sans-serif;
+-webkit-box-pack:justify;
+-webkit-justify-content:space-between;
+-ms-flex-pack:justify;
+justify-content:space-between;
+margin-top:50px;
+padding:18px
+}
+.post-filter-message .message-container{
+-webkit-box-flex:1;
+-webkit-flex:1 1 auto;
+-ms-flex:1 1 auto;
+flex:1 1 auto;
+min-width:0
+}
+.post-filter-message .home-link-container{
+-webkit-box-flex:0;
+-webkit-flex:0 0 auto;
+-ms-flex:0 0 auto;
+flex:0 0 auto
+}
+.post-filter-message .search-label,.post-filter-message .search-query{
+color:rgba(255, 255, 255, 0.87);
+font:normal 700 12px Montserrat, sans-serif;
+text-transform:uppercase
+}
+.post-filter-message .home-link,.post-filter-message .home-link a{
+color:#bf8b38;
+font:normal 700 12px Montserrat, sans-serif;
+text-transform:uppercase
+}
+.widget.FeaturedPost .thumb.hero-thumb{
+background-position:center;
+background-size:cover;
+height:360px
+}
+.widget.FeaturedPost .featured-post-snippet:before{
+content:"\2014"
+}
+.snippet-container,.snippet-fade{
+font:normal 400 14px Lora, serif;
+line-height:23.8px
+}
+.snippet-container{
+max-height:166.6px;
+overflow:hidden
+}
+.snippet-fade{
+background:-webkit-linear-gradient(left,#ffffff 0,#ffffff 20%,rgba(255, 255, 255, 0) 100%);
+background:linear-gradient(to left,#ffffff 0,#ffffff 20%,rgba(255, 255, 255, 0) 100%);
+color:#000000
+}
+.post-sidebar{
+display:none
+}
+.widget.Blog .blog-posts .post-outer-container{
+width:100%
+}
+.no-posts{
+text-align:center
+}
+body.feed-view .widget.Blog .blog-posts .post-outer-container,body.item-view .widget.Blog .blog-posts .post-outer{
+margin-bottom:50px
+}
+.widget.Blog .post.no-featured-image,.widget.PopularPosts .post.no-featured-image{
+background-color:#302c24;
+padding:30px
+}
+.widget.Blog .post>.post-share-buttons-top{
+right:0;
+position:absolute;
+top:0
+}
+.widget.Blog .post>.post-share-buttons-bottom{
+bottom:0;
+right:0;
+position:absolute
+}
+.blog-pager{
+text-align:right
+}
+.blog-pager a{
+color:#bf8b38;
+font:normal 400 12px Montserrat, sans-serif;
+text-transform:uppercase
+}
+.blog-pager .blog-pager-newer-link,.blog-pager .home-link{
+display:none
+}
+.post-title{
+font:normal 400 20px EB Garamond, serif;
+margin:0;
+text-transform:uppercase
+}
+.post-title,.post-title a{
+color:#000000
+}
+.post.no-featured-image .post-title,.post.no-featured-image .post-title a{
+color:#ffffff
+}
+body.item-view .post-body-container:before{
+content:"\2014"
+}
+.post-body{
+color:#000000;
+font:normal 400 14px Lora, serif;
+line-height:1.7
+}
+.post-body blockquote{
+color:#000000;
+font:normal 400 16px Montserrat, sans-serif;
+line-height:1.7;
+margin-left:0;
+margin-right:0
+}
+.post-body img{
+height:auto;
+max-width:100%
+}
+.post-body .tr-caption{
+color:#000000;
+font:normal 400 12px Montserrat, sans-serif;
+line-height:1.7
+}
+.snippet-thumbnail{
+position:relative
+}
+.snippet-thumbnail .post-header{
+background:#ffffff;
+bottom:0;
+margin-bottom:0;
+padding-right:15px;
+padding-bottom:5px;
+padding-top:5px;
+position:absolute
+}
+.snippet-thumbnail img{
+width:100%
+}
+.post-footer,.post-header{
+margin:8px 0
+}
+body.item-view .widget.Blog .post-header{
+margin:0 0 16px 0
+}
+body.item-view .widget.Blog .post-footer{
+margin:50px 0 0 0
+}
+.widget.FeaturedPost .post-footer{
+display:-webkit-box;
+display:-webkit-flex;
+display:-ms-flexbox;
+display:flex;
+-webkit-flex-wrap:wrap;
+-ms-flex-wrap:wrap;
+flex-wrap:wrap;
+-webkit-box-pack:justify;
+-webkit-justify-content:space-between;
+-ms-flex-pack:justify;
+justify-content:space-between
+}
+.widget.FeaturedPost .post-footer>*{
+-webkit-box-flex:0;
+-webkit-flex:0 1 auto;
+-ms-flex:0 1 auto;
+flex:0 1 auto
+}
+.widget.FeaturedPost .post-footer,.widget.FeaturedPost .post-footer a,.widget.FeaturedPost .post-footer button{
+line-height:1.7
+}
+.jump-link{
+margin:-8px
+}
+.post-header,.post-header a,.post-header button{
+color:rgba(0, 0, 0, 0.54);
+font:normal 400 12px Montserrat, sans-serif
+}
+.post.no-featured-image .post-header,.post.no-featured-image .post-header a,.post.no-featured-image .post-header button{
+color:rgba(255, 255, 255, 0.54)
+}
+.post-footer,.post-footer a,.post-footer button{
+color:#bf8b38;
+font:normal 400 12px Montserrat, sans-serif
+}
+.post.no-featured-image .post-footer,.post.no-featured-image .post-footer a,.post.no-featured-image .post-footer button{
+color:#bf8b38
+}
+body.item-view .post-footer-line{
+line-height:2.3
+}
+.byline{
+display:inline-block
+}
+.byline .flat-button{
+text-transform:none
+}
+.post-header .byline:not(:last-child):after{
+content:"\b7"
+}
+.post-header .byline:not(:last-child){
+margin-right:0
+}
+.byline.post-labels a{
+display:inline-block;
+word-break:break-all
+}
+.byline.post-labels a:not(:last-child):after{
+content:","
+}
+.byline.reactions .reactions-label{
+line-height:22px;
+vertical-align:top
+}
+.post-share-buttons{
+margin-left:0
+}
+.share-buttons{
+background-color:#fafafa;
+border-radius:0;
+box-shadow:0 1px 1px 1px rgba(0, 0, 0, 0.1);
+color:#000000;
+font:normal 400 16px Montserrat, sans-serif
+}
+.share-buttons .svg-icon-24{
+fill:#bf8b38
+}
+#comment-holder .continue{
+display:none
+}
+#comment-editor{
+margin-bottom:20px;
+margin-top:20px
+}
+.widget.Attribution,.widget.Attribution .copyright,.widget.Attribution .copyright a,.widget.Attribution .image-attribution,.widget.Attribution .image-attribution a,.widget.Attribution a{
+color:rgba(0, 0, 0, 0.54);
+font:normal 400 12px Montserrat, sans-serif
+}
+.widget.Attribution svg{
+fill:rgba(0, 0, 0, 0.54)
+}
+.widget.Attribution .blogger a{
+display:-webkit-box;
+display:-webkit-flex;
+display:-ms-flexbox;
+display:flex;
+-webkit-align-content:center;
+-ms-flex-line-pack:center;
+align-content:center;
+-webkit-box-pack:center;
+-webkit-justify-content:center;
+-ms-flex-pack:center;
+justify-content:center;
+line-height:24px
+}
+.widget.Attribution .blogger svg{
+margin-right:8px
+}
+.widget.Profile ul{
+list-style:none;
+padding:0
+}
+.widget.Profile .individual .default-avatar-wrapper,.widget.Profile .individual .profile-img{
+border-radius:50%;
+display:inline-block;
+height:120px;
+width:120px
+}
+.widget.Profile .individual .profile-data a,.widget.Profile .team .profile-name{
+color:#000000;
+font:normal 400 20px EB Garamond, serif;
+text-transform:none
+}
+.widget.Profile .individual dd{
+color:#000000;
+font:normal 400 20px EB Garamond, serif;
+margin:0 auto
+}
+.widget.Profile .individual .profile-link,.widget.Profile .team .visit-profile{
+color:#bf8b38;
+font:normal 400 12px Montserrat, sans-serif;
+text-transform:uppercase
+}
+.widget.Profile .team .default-avatar-wrapper,.widget.Profile .team .profile-img{
+border-radius:50%;
+float:left;
+height:40px;
+width:40px
+}
+.widget.Profile .team .profile-link .profile-name-wrapper{
+-webkit-box-flex:1;
+-webkit-flex:1 1 auto;
+-ms-flex:1 1 auto;
+flex:1 1 auto
+}
+.widget.Label li,.widget.Label span.label-size{
+color:#bf8b38;
+display:inline-block;
+font:normal 400 12px Montserrat, sans-serif;
+word-break:break-all
+}
+.widget.Label li:not(:last-child):after,.widget.Label span.label-size:not(:last-child):after{
+content:","
+}
+.widget.PopularPosts .post{
+margin-bottom:50px
+}
+#comments{
+border-top:none;
+padding:0
+}
+#comments .comment .comment-footer,#comments .comment .comment-header,#comments .comment .comment-header .datetime,#comments .comment .comment-header .datetime a{
+color:rgba(0, 0, 0, 0.54);
+font:normal 400 12px Montserrat, sans-serif
+}
+#comments .comment .comment-author,#comments .comment .comment-author a,#comments .comment .comment-header .user,#comments .comment .comment-header .user a{
+color:#000000;
+font:normal 400 14px Montserrat, sans-serif
+}
+#comments .comment .comment-body,#comments .comment .comment-content{
+color:#000000;
+font:normal 400 14px Lora, serif
+}
+#comments .comment .comment-actions,#comments .footer,#comments .footer a,#comments .loadmore,#comments .paging-control{
+color:#bf8b38;
+font:normal 400 12px Montserrat, sans-serif;
+text-transform:uppercase
+}
+#commentsHolder{
+border-bottom:none;
+border-top:none
+}
+#comments .comment-form h4{
+position:absolute;
+clip:rect(1px,1px,1px,1px);
+padding:0;
+border:0;
+height:1px;
+width:1px;
+overflow:hidden
+}
+.sidebar-container{
+background-color:#ffffff;
+color:rgba(0, 0, 0, 0.54);
+font:normal 400 14px Montserrat, sans-serif;
+min-height:100%
+}
+html[dir=ltr] .sidebar-container{
+box-shadow:1px 0 3px rgba(0, 0, 0, 0.1)
+}
+html[dir=rtl] .sidebar-container{
+box-shadow:-1px 0 3px rgba(0, 0, 0, 0.1)
+}
+.sidebar-container a{
+color:#bf8b38
+}
+.sidebar-container .svg-icon-24{
+fill:rgba(0, 0, 0, 0.54)
+}
+.sidebar-container .widget{
+margin:0;
+margin-left:40px;
+padding:40px;
+padding-left:0
+}
+.sidebar-container .widget+.widget{
+border-top:1px solid rgba(0, 0, 0, 0.54)
+}
+.sidebar-container .widget .title{
+color:rgba(0, 0, 0, 0.54);
+font:normal 400 16px Montserrat, sans-serif
+}
+.sidebar-container .widget ul li,.sidebar-container .widget.BlogArchive #ArchiveList li{
+font:normal 400 14px Montserrat, sans-serif;
+margin:1em 0 0 0
+}
+.sidebar-container .BlogArchive .post-count,.sidebar-container .Label .label-count{
+float:none
+}
+.sidebar-container .Label li a{
+display:inline
+}
+.sidebar-container .widget.Profile .default-avatar-wrapper .avatar-icon{
+border-color:#000000;
+fill:#000000
+}
+.sidebar-container .widget.Profile .individual{
+text-align:center
+}
+.sidebar-container .widget.Profile .individual dd:before{
+content:"\2014";
+display:block
+}
+.sidebar-container .widget.Profile .individual .profile-data a,.sidebar-container .widget.Profile .team .profile-name{
+color:#000000;
+font:normal 400 24px EB Garamond, serif
+}
+.sidebar-container .widget.Profile .individual dd{
+color:rgba(0, 0, 0, 0.87);
+font:normal 400 12px Montserrat, sans-serif;
+margin:0 30px
+}
+.sidebar-container .widget.Profile .individual .profile-link,.sidebar-container .widget.Profile .team .visit-profile{
+color:#bf8b38;
+font:normal 400 14px Montserrat, sans-serif
+}
+.sidebar-container .snippet-fade{
+background:-webkit-linear-gradient(left,#ffffff 0,#ffffff 20%,rgba(255, 255, 255, 0) 100%);
+background:linear-gradient(to left,#ffffff 0,#ffffff 20%,rgba(255, 255, 255, 0) 100%)
+}
+@media screen and (min-width:640px){
+.centered-bottom,.centered-top{
+margin:0 auto;
+width:576px
+}
+.centered-top{
+-webkit-flex-wrap:nowrap;
+-ms-flex-wrap:nowrap;
+flex-wrap:nowrap;
+padding-bottom:24px;
+padding-top:36px
+}
+.blog-name{
+-webkit-box-flex:1;
+-webkit-flex:1 1 auto;
+-ms-flex:1 1 auto;
+flex:1 1 auto;
+min-width:0;
+-webkit-box-ordinal-group:3;
+-webkit-order:2;
+-ms-flex-order:2;
+order:2
+}
+.sticky .blog-name{
+margin:0
+}
+.back-button-container,.hamburger-menu-container{
+margin-right:36px;
+-webkit-box-ordinal-group:2;
+-webkit-order:1;
+-ms-flex-order:1;
+order:1
+}
+.search{
+margin-left:36px;
+-webkit-box-ordinal-group:5;
+-webkit-order:4;
+-ms-flex-order:4;
+order:4
+}
+.search .section{
+top:36px
+}
+.sticky .search{
+display:block
+}
+.subscribe-section-container{
+-webkit-box-flex:0;
+-webkit-flex:0 0 auto;
+-ms-flex:0 0 auto;
+flex:0 0 auto;
+margin-left:36px;
+-webkit-box-ordinal-group:4;
+-webkit-order:3;
+-ms-flex-order:3;
+order:3
+}
+.subscribe-button{
+font:normal 400 14px Montserrat, sans-serif;
+line-height:48px
+}
+.subscribe-popup h3{
+font:normal 400 14px Montserrat, sans-serif
+}
+.subscribe-popup div.widget.FollowByEmail .follow-by-email-address{
+font:normal 400 14px Montserrat, sans-serif
+}
+.subscribe-popup div.widget.FollowByEmail .follow-by-email-submit{
+font:normal 400 14px Montserrat, sans-serif
+}
+.widget .title{
+font:normal 400 14px Montserrat, sans-serif
+}
+.widget.Blog .post.no-featured-image,.widget.PopularPosts .post.no-featured-image{
+padding:65px
+}
+.post-title{
+font:normal 400 24px EB Garamond, serif
+}
+.blog-pager a{
+font:normal 400 14px Montserrat, sans-serif
+}
+.widget.Header h1{
+font:normal 400 36px EB Garamond, serif
+}
+.sticky .widget.Header h1{
+font-size:24px
+}
+}
+@media screen and (min-width:1162px){
+.centered-bottom,.centered-top{
+width:922px
+}
+.back-button-container,.hamburger-menu-container{
+margin-right:48px
+}
+.search{
+margin-left:48px
+}
+.search-expand{
+font:normal 400 14px Montserrat, sans-serif;
+line-height:48px
+}
+.search-expand-text{
+display:block
+}
+.search-expand-icon{
+display:none
+}
+.subscribe-section-container{
+margin-left:48px
+}
+.post-filter-message{
+font:normal 400 14px Montserrat, sans-serif
+}
+.post-filter-message .search-label,.post-filter-message .search-query{
+font:normal 700 14px Montserrat, sans-serif
+}
+.post-filter-message .home-link{
+font:normal 700 14px Montserrat, sans-serif
+}
+.widget.Blog .blog-posts .post-outer-container{
+width:451px
+}
+body.item-view .widget.Blog .blog-posts .post-outer-container{
+width:100%
+}
+body.item-view .widget.Blog .blog-posts .post-outer{
+display:-webkit-box;
+display:-webkit-flex;
+display:-ms-flexbox;
+display:flex
+}
+#comments,body.item-view .post-outer-container .inline-ad,body.item-view .widget.PopularPosts{
+margin-left:220px;
+width:682px
+}
+.post-sidebar{
+box-sizing:border-box;
+display:block;
+font:normal 400 14px Montserrat, sans-serif;
+padding-right:20px;
+width:220px
+}
+.post-sidebar-item{
+margin-bottom:30px
+}
+.post-sidebar-item ul{
+list-style:none;
+padding:0
+}
+.post-sidebar-item .sharing-button{
+color:#bf8b38;
+cursor:pointer;
+display:inline-block;
+font:normal 400 14px Montserrat, sans-serif;
+line-height:normal;
+word-break:normal
+}
+.post-sidebar-labels li{
+margin-bottom:8px
+}
+body.item-view .widget.Blog .post{
+width:682px
+}
+.widget.Blog .post.no-featured-image,.widget.PopularPosts .post.no-featured-image{
+padding:100px 65px
+}
+.page .widget.FeaturedPost .post-content{
+display:-webkit-box;
+display:-webkit-flex;
+display:-ms-flexbox;
+display:flex;
+-webkit-box-pack:justify;
+-webkit-justify-content:space-between;
+-ms-flex-pack:justify;
+justify-content:space-between
+}
+.page .widget.FeaturedPost .thumb-link{
+display:-webkit-box;
+display:-webkit-flex;
+display:-ms-flexbox;
+display:flex
+}
+.page .widget.FeaturedPost .thumb.hero-thumb{
+height:auto;
+min-height:300px;
+width:451px
+}
+.page .widget.FeaturedPost .post-content.has-featured-image .post-text-container{
+width:425px
+}
+.page .widget.FeaturedPost .post-content.no-featured-image .post-text-container{
+width:100%
+}
+.page .widget.FeaturedPost .post-header{
+margin:0 0 8px 0
+}
+.page .widget.FeaturedPost .post-footer{
+margin:8px 0 0 0
+}
+.post-body{
+font:normal 400 16px Lora, serif;
+line-height:1.7
+}
+.post-body blockquote{
+font:normal 400 24px Montserrat, sans-serif;
+line-height:1.7
+}
+.snippet-container,.snippet-fade{
+font:normal 400 16px Lora, serif;
+line-height:27.2px
+}
+.snippet-container{
+max-height:326.4px
+}
+.widget.Profile .individual .profile-data a,.widget.Profile .team .profile-name{
+font:normal 400 24px EB Garamond, serif
+}
+.widget.Profile .individual .profile-link,.widget.Profile .team .visit-profile{
+font:normal 400 14px Montserrat, sans-serif
+}
+}
+@media screen and (min-width:1440px){
+body{
+position:relative
+}
+.page_body{
+margin-left:284px
+}
+.sticky .centered-top{
+padding-left:284px
+}
+.hamburger-menu-container{
+display:none
+}
+.sidebar-container{
+overflow:visible;
+z-index:32
+}
+}
+
+--></style>
+<style id="template-skin-1" type="text/css"><!--
+body#layout .hidden,
+body#layout .invisible {
+display: inherit;
+}
+body#layout .page {
+width: 60%;
+}
+body#layout.ltr .page {
+float: right;
+}
+body#layout.rtl .page {
+float: left;
+}
+body#layout .sidebar-container {
+width: 40%;
+}
+body#layout.ltr .sidebar-container {
+float: left;
+}
+body#layout.rtl .sidebar-container {
+float: right;
+}
+--></style>
+<script async="async" src="./Building SDL2 for Android with Visual Studio_files/f.txt"></script>
+<script async="async" src="./Building SDL2 for Android with Visual Studio_files/imagesloaded-3.1.8.min.js.download"></script>
+<script async="async" src="./Building SDL2 for Android with Visual Studio_files/masonry.pkgd.min.js.download"></script>
+<script async="async" src="./Building SDL2 for Android with Visual Studio_files/clipboard.min.js.download"></script>
+<style>
+    body.homepage-view .hero-image.has-image {background-image:url(\/\/4.bp.blogspot.com\/-Eq-wZzwzRVc\/W4b-YWymprI\/AAAAAAAADag\/8P1s4rHX8_41M3Au-lxS0VhXcWcBHzbDACK4BGAYYCw\/s0\/IMG_20180717_142112918_HDR.jpg);}
+    
+@media (max-width: 320px) { body.homepage-view .hero-image.has-image {background-image:url(\/\/4.bp.blogspot.com\/-Eq-wZzwzRVc\/W4b-YWymprI\/AAAAAAAADag\/8P1s4rHX8_41M3Au-lxS0VhXcWcBHzbDACK4BGAYYCw\/w320\/IMG_20180717_142112918_HDR.jpg);}}
+@media (max-width: 640px) and (min-width: 321px) { body.homepage-view .hero-image.has-image {background-image:url(\/\/4.bp.blogspot.com\/-Eq-wZzwzRVc\/W4b-YWymprI\/AAAAAAAADag\/8P1s4rHX8_41M3Au-lxS0VhXcWcBHzbDACK4BGAYYCw\/w640\/IMG_20180717_142112918_HDR.jpg);}}
+@media (max-width: 800px) and (min-width: 641px) { body.homepage-view .hero-image.has-image {background-image:url(\/\/4.bp.blogspot.com\/-Eq-wZzwzRVc\/W4b-YWymprI\/AAAAAAAADag\/8P1s4rHX8_41M3Au-lxS0VhXcWcBHzbDACK4BGAYYCw\/w800\/IMG_20180717_142112918_HDR.jpg);}}
+@media (max-width: 1024px) and (min-width: 801px) { body.homepage-view .hero-image.has-image {background-image:url(\/\/4.bp.blogspot.com\/-Eq-wZzwzRVc\/W4b-YWymprI\/AAAAAAAADag\/8P1s4rHX8_41M3Au-lxS0VhXcWcBHzbDACK4BGAYYCw\/w1024\/IMG_20180717_142112918_HDR.jpg);}}
+@media (max-width: 1440px) and (min-width: 1025px) { body.homepage-view .hero-image.has-image {background-image:url(\/\/4.bp.blogspot.com\/-Eq-wZzwzRVc\/W4b-YWymprI\/AAAAAAAADag\/8P1s4rHX8_41M3Au-lxS0VhXcWcBHzbDACK4BGAYYCw\/w1440\/IMG_20180717_142112918_HDR.jpg);}}
+@media (max-width: 1680px) and (min-width: 1441px) { body.homepage-view .hero-image.has-image {background-image:url(\/\/4.bp.blogspot.com\/-Eq-wZzwzRVc\/W4b-YWymprI\/AAAAAAAADag\/8P1s4rHX8_41M3Au-lxS0VhXcWcBHzbDACK4BGAYYCw\/w1680\/IMG_20180717_142112918_HDR.jpg);}}
+@media (max-width: 1920px) and (min-width: 1681px) { body.homepage-view .hero-image.has-image {background-image:url(\/\/4.bp.blogspot.com\/-Eq-wZzwzRVc\/W4b-YWymprI\/AAAAAAAADag\/8P1s4rHX8_41M3Au-lxS0VhXcWcBHzbDACK4BGAYYCw\/w1920\/IMG_20180717_142112918_HDR.jpg);}}
+/* Last tag covers anything over one higher than the previous max-size cap. */
+@media (min-width: 1921px) { body.homepage-view .hero-image.has-image {background-image:url(\/\/4.bp.blogspot.com\/-Eq-wZzwzRVc\/W4b-YWymprI\/AAAAAAAADag\/8P1s4rHX8_41M3Au-lxS0VhXcWcBHzbDACK4BGAYYCw\/w2560\/IMG_20180717_142112918_HDR.jpg);}}
+  </style>
+<link href="./Building SDL2 for Android with Visual Studio_files/authorization.css" media="all" onload="if(media!=&#39;all&#39;)media=&#39;all&#39;" rel="stylesheet"><noscript><link href='https://www.blogger.com/dyn-css/authorization.css?targetBlogID=6421765335659381070&amp;zx=29324541-2b75-4e55-9eaf-d91280a4caa9' rel='stylesheet'/></noscript>
+
+<!-- data-ad-client=ca-pub-5240216573551729 -->
+
+<script data-dapp-detection="">!function(){let e=!1;function n(){if(!e){const n=document.createElement("meta");n.name="dapp-detected",document.head.appendChild(n),e=!0}}if(window.hasOwnProperty("ethereum")){if(window.__disableDappDetectionInsertion=!0,void 0===window.ethereum)return;n()}else{var t=window.ethereum;Object.defineProperty(window,"ethereum",{configurable:!0,enumerable:!1,set:function(e){window.__disableDappDetectionInsertion||n(),t=e},get:function(){if(!window.__disableDappDetectionInsertion){const e=arguments.callee;e&&e.caller&&e.caller.toString&&-1!==e.caller.toString().indexOf("getOwnPropertyNames")||n()}return t}})}}();</script><script charset="utf-8" src="./Building SDL2 for Android with Visual Studio_files/moment_timeline.bcb1cafa923482f4826e32741fe16a98.js.download"></script><script charset="utf-8" src="./Building SDL2 for Android with Visual Studio_files/timeline.28ecda9667eeb8e1b18898b99fee6c31.js.download"></script></head>
+<body class="post-view item-view version-1-3-3 variant-fancy_light collapsed-header" data-js-state="loaded">
+<a class="skip-navigation" href="https://trederia.blogspot.com/2017/03/building-sdl2-for-android-with-visual.html#main" tabindex="0">
+Skip to main content
+</a>
+<div class="page">
+<div class="page_body">
+<div class="main-page-body-content">
+<div class="centered-top-placeholder cloned"><div class="centered-top">
+<div class="back-button-container">
+<a href="https://trederia.blogspot.com/">
+<svg class="svg-icon-24 touch-icon back-button rtl-reversible-icon">
+<use xlink:href="/responsive/sprite_v1_6.css.svg#ic_arrow_back_black_24dp" xmlns:xlink="http://www.w3.org/1999/xlink"></use>
+</svg>
+</a>
+</div>
+<div class="search">
+<button aria-label="Search" class="search-expand touch-icon-button">
+<div class="search-expand-text">Search</div>
+<svg class="svg-icon-24 touch-icon search-expand-icon">
+<use xlink:href="/responsive/sprite_v1_6.css.svg#ic_search_black_24dp" xmlns:xlink="http://www.w3.org/1999/xlink"></use>
+</svg>
+</button>
+<div class="section" id="search_top" name="Search (Top)"><div class="widget BlogSearch" data-version="2" id="BlogSearch1">
+<h3 class="title">
+Search This Blog
+</h3>
+<div class="widget-content" role="search">
+<form action="https://trederia.blogspot.com/search" target="_top">
+<div class="search-input">
+<input aria-label="Search this blog" autocomplete="off" name="q" placeholder="Search this blog" value="">
+</div>
+<label>
+<input type="submit">
+<svg class="svg-icon-24 touch-icon search-icon">
+<use xlink:href="/responsive/sprite_v1_6.css.svg#ic_search_black_24dp" xmlns:xlink="http://www.w3.org/1999/xlink"></use>
+</svg>
+</label>
+</form>
+</div>
+</div></div>
+</div>
+<div class="blog-name">
+<div class="section" id="header" name="Header"><div class="widget Header" data-version="2" id="Header1">
+<div class="header-widget">
+<div>
+<h1>
+<a href="https://trederia.blogspot.com/">
+Trederia
+</a>
+</h1>
+</div>
+<p>
+Reflecting upon my adventures in code
+</p>
+</div>
+</div></div>
+<nav role="navigation">
+<div class="no-items section" id="page_list_top" name="Page list (top)">
+</div>
+</nav>
+</div>
+</div></div>
+
+<div class="hero-image has-image"></div>
+<main class="centered-bottom" id="main" role="main" tabindex="-1">
+<div class="main section" id="page_body" name="Page body">
+<div class="widget Blog" data-version="2" id="Blog1">
+<div class="blog-posts hfeed container">
+<div class="post-outer-container">
+<div class="post-outer">
+<div class="post-sidebar">
+<div class="post-sidebar-item post-share-buttons">
+<div aria-owns="sharing-popup-Blog1-byline-5409220101471293686" class="sharing" data-title="">
+<button aria-controls="sharing-popup-Blog1-byline-5409220101471293686" aria-label="Share" class="sharing-button touch-icon-button" id="sharing-button-Blog1-byline-5409220101471293686" role="button" aria-expanded="false" aria-haspopup="true">
+Share
+</button>
+<div class="share-buttons-container">
+<ul aria-hidden="true" aria-label="Share" class="share-buttons hidden" id="sharing-popup-Blog1-byline-5409220101471293686" role="menu">
+<li>
+<span aria-label="Get link" class="sharing-platform-button sharing-element-link" data-href="https://www.blogger.com/share-post.g?blogID=6421765335659381070&amp;postID=5409220101471293686&amp;target=" data-url="https://trederia.blogspot.com/2017/03/building-sdl2-for-android-with-visual.html" role="menuitem" tabindex="-1" title="Get link">
+<svg class="svg-icon-24 touch-icon sharing-link">
+<use xlink:href="/responsive/sprite_v1_6.css.svg#ic_24_link_dark" xmlns:xlink="http://www.w3.org/1999/xlink"></use>
+</svg>
+<span class="platform-sharing-text">Get link</span>
+</span>
+</li>
+<li>
+<span aria-label="Share to Facebook" class="sharing-platform-button sharing-element-facebook" data-href="https://www.blogger.com/share-post.g?blogID=6421765335659381070&amp;postID=5409220101471293686&amp;target=facebook" data-url="https://trederia.blogspot.com/2017/03/building-sdl2-for-android-with-visual.html" role="menuitem" tabindex="-1" title="Share to Facebook">
+<svg class="svg-icon-24 touch-icon sharing-facebook">
+<use xlink:href="/responsive/sprite_v1_6.css.svg#ic_24_facebook_dark" xmlns:xlink="http://www.w3.org/1999/xlink"></use>
+</svg>
+<span class="platform-sharing-text">Facebook</span>
+</span>
+</li>
+<li>
+<span aria-label="Share to Twitter" class="sharing-platform-button sharing-element-twitter" data-href="https://www.blogger.com/share-post.g?blogID=6421765335659381070&amp;postID=5409220101471293686&amp;target=twitter" data-url="https://trederia.blogspot.com/2017/03/building-sdl2-for-android-with-visual.html" role="menuitem" tabindex="-1" title="Share to Twitter">
+<svg class="svg-icon-24 touch-icon sharing-twitter">
+<use xlink:href="/responsive/sprite_v1_6.css.svg#ic_24_twitter_dark" xmlns:xlink="http://www.w3.org/1999/xlink"></use>
+</svg>
+<span class="platform-sharing-text">Twitter</span>
+</span>
+</li>
+<li>
+<span aria-label="Share to Pinterest" class="sharing-platform-button sharing-element-pinterest" data-href="https://www.blogger.com/share-post.g?blogID=6421765335659381070&amp;postID=5409220101471293686&amp;target=pinterest" data-url="https://trederia.blogspot.com/2017/03/building-sdl2-for-android-with-visual.html" role="menuitem" tabindex="-1" title="Share to Pinterest">
+<svg class="svg-icon-24 touch-icon sharing-pinterest">
+<use xlink:href="/responsive/sprite_v1_6.css.svg#ic_24_pinterest_dark" xmlns:xlink="http://www.w3.org/1999/xlink"></use>
+</svg>
+<span class="platform-sharing-text">Pinterest</span>
+</span>
+</li>
+<li>
+<span aria-label="Email" class="sharing-platform-button sharing-element-email" data-href="https://www.blogger.com/share-post.g?blogID=6421765335659381070&amp;postID=5409220101471293686&amp;target=email" data-url="https://trederia.blogspot.com/2017/03/building-sdl2-for-android-with-visual.html" role="menuitem" tabindex="-1" title="Email">
+<svg class="svg-icon-24 touch-icon sharing-email">
+<use xlink:href="/responsive/sprite_v1_6.css.svg#ic_24_email_dark" xmlns:xlink="http://www.w3.org/1999/xlink"></use>
+</svg>
+<span class="platform-sharing-text">Email</span>
+</span>
+</li>
+<li aria-hidden="true" class="hidden">
+<span aria-label="Share to other apps" class="sharing-platform-button sharing-element-other" data-url="https://trederia.blogspot.com/2017/03/building-sdl2-for-android-with-visual.html" role="menuitem" tabindex="-1" title="Share to other apps">
+<svg class="svg-icon-24 touch-icon sharing-sharingOther">
+<use xlink:href="/responsive/sprite_v1_6.css.svg#ic_more_horiz_black_24dp" xmlns:xlink="http://www.w3.org/1999/xlink"></use>
+</svg>
+<span class="platform-sharing-text">Other Apps</span>
+</span>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="post-sidebar-item post-sidebar-labels">
+<div>Labels</div>
+<ul>
+<li><a href="https://trederia.blogspot.com/search/label/Android" rel="tag">Android</a></li>
+<li><a href="https://trederia.blogspot.com/search/label/C%2B%2B" rel="tag">C++</a></li>
+<li><a href="https://trederia.blogspot.com/search/label/embedded" rel="tag">embedded</a></li>
+<li><a href="https://trederia.blogspot.com/search/label/game%20programming" rel="tag">game programming</a></li>
+<li><a href="https://trederia.blogspot.com/search/label/programming" rel="tag">programming</a></li>
+<li><a href="https://trederia.blogspot.com/search/label/SDL2" rel="tag">SDL2</a></li>
+<li><a href="https://trederia.blogspot.com/search/label/Visual%20Studio" rel="tag">Visual Studio</a></li>
+</ul>
+</div>
+</div>
+<div class="post">
+<script type="application/ld+json">{
+  "@context": "http://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://trederia.blogspot.com/2017/03/building-sdl2-for-android-with-visual.html"
+  },
+  "headline": "Building SDL2 for Android with Visual Studio","description": "For the last year or so Visual Studio 2015 (and now 2017) has had the ability to build Android applications using native code compiled with ...","datePublished": "2017-03-17T17:00:00Z",
+  "dateModified": "2017-03-17T18:21:18Z","image": {
+    "@type": "ImageObject","url": "https://1.bp.blogspot.com/-g5e-30OBwxE/WMvGF8_DIwI/AAAAAAAAB00/UcF59iqrIuMy_ByLw0rbSvJIL776exjuQCEw/w1200-h630-p-k-no-nu/new_sdl.png",
+    "height": 630,
+    "width": 1200},"publisher": {
+    "@type": "Organization",
+    "name": "Blogger",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://lh3.googleusercontent.com/ULB6iBuCeTVvSjjjU1A-O8e9ZpVba6uvyhtiWRti_rBAs9yMYOFBujxriJRZ-A=h60",
+      "width": 206,
+      "height": 60
+    }
+  },"author": {
+    "@type": "Person",
+    "name": "Matt Styles"
+  }
+}</script>
+<div class="post-header">
+<div class="post-header-line-1">
+<span class="byline post-timestamp">
+<meta content="https://trederia.blogspot.com/2017/03/building-sdl2-for-android-with-visual.html">
+<a class="timestamp-link" href="https://trederia.blogspot.com/2017/03/building-sdl2-for-android-with-visual.html" rel="bookmark" title="permanent link">
+<time class="published" datetime="2017-03-17T17:00:00Z" title="2017-03-17T17:00:00Z">
+March 17, 2017
+</time>
+</a>
+</span>
+</div>
+</div>
+<a name="5409220101471293686"></a>
+<h3 class="post-title entry-title">
+Building SDL2 for Android with Visual Studio
+</h3>
+<div class="post-body-container">
+<div class="post-body entry-content float-container" id="post-body-5409220101471293686">
+For the last year or so Visual Studio 2015 (and now 2017) has had the ability to build Android applications using native code compiled with the Android ndk. This really appeals to me as I tend to favour the Visual Studio environment, so I thought it was finally time to see what I could do. Unfortunately the documentation for Visual Studio specific native development seems to have fallen a little by the way, or at least is very dry on the MSDN. I am, in particular, interested in game development so it made sense to me to create an SDL2 based project as SDL supports Android from the go - but setting it up in Visual Studio required a lot of trial and error. This post, then, is my attempt to best document what I did to get the project building and running on my now aging Moto G so that others - and most likely my future self - may possibly be spared the hair pulling I've endured this last week.<br>
+<br>
+<b>Project Overview</b><br>
+SDL2 projects on Android differ slightly to those created for desktop applications on platforms such as linux or Windows. Generally in these scenarios you link to SDL as you would any other library and start coding away. On Android, however, SDL2 does not run as a native activity application, rather it needs to be linked and invoked via a java activity so that hardware events such as input may be correctly handed down to the native code. Fortunately the SDL author provides the java source file needed within an example ndk project - it just needs a little work to include it in Visual Studio. This means that, at the very least, you need to create two Visual Studio projects - plus a third to contain your own code. If you're also writing a library to share code with other platforms the project count jumps to four, or more if you wish to include libraries such as <i>SDL_image</i>... I shall be concentrating on describing what it takes to build SDL2, link it to an Android java project, and have it display something with some custom code, starting with the SDL2 library. Other libraries should follow the same process more or less.<br>
+<br>
+<b>Building SDL2</b><br>
+Assuming that Visual Studio 2015 or 2017 is installed along with the cross-platform development options (make sure to check this when installing VS) the first thing to do is create an empty solution, then add a new project. From the templates menu select <i>Dynamic Shared Library</i>. Call the project SDL2 so that Visual Studio will automatically give the library file the correct name when it gets compiled.<br>
+<br>
+<div class="separator" style="clear: both; text-align: center;">
+<a href="https://1.bp.blogspot.com/-g5e-30OBwxE/WMvGF8_DIwI/AAAAAAAAB00/UcF59iqrIuMy_ByLw0rbSvJIL776exjuQCEw/s1600/new_sdl.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="222" src="./Building SDL2 for Android with Visual Studio_files/new_sdl.png" width="320"></a></div>
+<br>
+<br>
+This will provide the basis for what's needed to build SDL2 as a shared library, although a few settings will need to be changed. It's also worth noting that the project has four configurations, <i>ARM, ARM64, x86</i> and <i>x64</i>. Each of these will need the same modifications applied if you intend to use them, although I'll only cover the <i>ARM</i> configuration here. The <i>x86</i> configuration is useful because these builds can be used with the x86 HAXM accelerated version of the Android emulator which runs much more quickly on a desktop computer than the ARM version.<br>
+&nbsp;&nbsp;&nbsp; The first thing to do is add the SDL2 source code to the project. This can be downloaded as an archive from the <a href="https://www.libsdl.org/download-2.0.php">website</a>, currently at version 2.0.5, although other versions should be similar if not the same. Extract the archive and copy the <span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">src</span> and <span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">include</span> directories to the Visual Studio project directory. In Visual Studio remove the <span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">SDL2.h</span>, <span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">SDL2.cpp</span> and <span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">pch.h</span> files generated by the template. In the SDL2 folder extracted from the archive is an Android.mk file. Open this in a text editor as it contains information needed for the Visual Studio project, including a list of required source files. Using the make file as a guide add each one of the source files to the project in Visual Studio by right clicking it, selecting 'Add Existing' and selecting the corresponding files from the <span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">src</span> directory that was copied earlier (not the source directory in the extracted archive folder).<br>
+<br>
+<div class="separator" style="clear: both; text-align: center;">
+<a href="https://1.bp.blogspot.com/-xW3D1xm9N0g/WMvGFwWVvQI/AAAAAAAAB0w/K5qeUmwdU_Uzr-nYuXQaPjG4F0cLnC2jQCEw/s1600/source_list.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="320" src="./Building SDL2 for Android with Visual Studio_files/source_list.png" width="242"></a></div>
+<br>
+<br>
+I also add filters to represent the directory structure of the source folder, but this isn't strictly necessary.<br>
+&nbsp;&nbsp;&nbsp; The Android.mk file also contains a compiler flag, and a list of libraries SDL2 needs to link to. In the Visual Studio project properties add GL_GLEXT_PROTOTYPES to the C/C++ Preprocessor definitions. This is the equivalent of the LOCAL_CFLAGS parameter in the Android.mk file. Under Linker-&gt;Input in the Visual Studio project properties add the name of all the libraries listed under the LOCAL_LDLIBS property in the Android.mk file. Visual Studio also requires the maths library to be linked for some reason, presumably <span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">ndk-build</span> automatically adds this when using the Android.mk file. This is added by typing <span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">m;</span> at the front of the list of libraries (order is important).<br>
+<br>
+<div class="separator" style="clear: both; text-align: center;">
+<a href="https://1.bp.blogspot.com/-0UI7lY-WRsI/WMvGFf-ydeI/AAAAAAAAB04/oaDrlVCePDMR81-nvqHJzcqQIHe25KhpgCEw/s1600/preproc_libs.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="134" src="./Building SDL2 for Android with Visual Studio_files/preproc_libs.png" width="320"></a></div>
+<br>
+<br>
+Finally add the local SDL2 include directory to Additional Include Directories under C/C++-&gt;General, and then under Precompiled Headers select Not using Precompiled Headers.<br>
+<br>
+<div class="separator" style="clear: both; text-align: center;">
+<a href="https://2.bp.blogspot.com/-FtoSnGDCXDY/WMvGFWPDDtI/AAAAAAAAB04/SNYgWSPst94_VSE05OiiaXy68ChjAc7cwCEw/s1600/include_pch.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="115" src="./Building SDL2 for Android with Visual Studio_files/include_pch.png" width="320"></a></div>
+<br>
+<br>
+And that's it for the SDL library. Right click on the project in the explorer tree and select Build (or press F7) and Visual Studio should compile the source and output a file called <span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">libSDL2.so</span>.<br>
+<br>
+<b>Creating the activity</b><br>
+To run SDL2 on Android a second project needs to be created which provides a java activity that invokes the native code. The code for this is provided in the SDL2 source archive but, again, requires some setup to work with Visual Studio. Add a new project to the solution, this time selecting the template for <i>Basic Application</i>.<br>
+<br>
+<div class="separator" style="clear: both; text-align: center;">
+<a href="https://1.bp.blogspot.com/-EX6q7GIgVmQ/WMvOf-GIiRI/AAAAAAAAB1E/PWmaM3og93sqKc1NIgvgdlUbNHxfJfkIgCLcB/s1600/new_basic_app.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="222" src="./Building SDL2 for Android with Visual Studio_files/new_basic_app.png" width="320"></a></div>
+<br>
+In the solution explorer right click on the project references, and select SDL2. This tells Visual Studio that it should build and package the SDL2 library in this application. In the folder which was extracted from the SDL2 source archive is a directory named <span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">android-project</span>. Inside this is a folder called <span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">src</span>, the contents of which need to be copied to the <span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">src</span> folder found inside the new directory containing the Visual Studio application project. This folder contains the java source file required to invoke SDL2 in the application. Back in Visual Studio click 'Show All Files' in the Solution Explorer so that the <span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">org</span> folder (copied from the archive <span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">src</span> to the project <span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">src</span>) appears in the tree. Right click it and select 'include in project'.<br>
+<br>
+<div class="separator" style="clear: both; text-align: center;">
+<a href="https://2.bp.blogspot.com/-TRXb97xkriw/WMvOgJ02LcI/AAAAAAAAB1M/WkJTcJ-_DBMiagrgtEPuyKqaPBTH2Yq_ACEw/s1600/include_SDLActivity.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="320" src="./Building SDL2 for Android with Visual Studio_files/include_SDLActivity.png" width="226"></a></div>
+<br>
+<br>
+A java file under <span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">org.libsdl.app</span> called <span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">SDLActivity.java</span> should now be included in the project. Import this to the application java file which was created with the project, then remove the 'hello world' example code. Modify the class so that it now extends <span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">SDLActivity</span>.<br>
+<br>
+<div class="separator" style="clear: both; text-align: center;">
+<a href="https://4.bp.blogspot.com/-6ucnjIbHRdQ/WMvOf4lXcyI/AAAAAAAAB1Q/KfbW0uWmUIAV4n0iY8QlNBqkmmHhh0cMACEw/s1600/java_source.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="178" src="./Building SDL2 for Android with Visual Studio_files/java_source.png" width="320"></a></div>
+<br>
+<br>
+Make sure to call <span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">super.onCreate()<span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;">.It's this function which will invoke the SDL native code</span></span>. Building the project should now automatically build and package the SDL2 library and output an apk file. On its own, however, this apk is not much use. The final step is to add and invoke your own code.<br>
+<br>
+<b>Adding your own code</b><br>
+To make the application actually do something a third project is required which contains the code for your game or application. Setting this project up is pretty generic, and once it's done you can continue to write your software in pretty much the same way as you would for any other platform. Add another project to the Visual Studio solution, again selecting <i>Dynamic Shared Library</i>. This can be named anything you like, but as it will contain the entry point to the native code SDL2 expects it to be named '<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">main</span>' by default.<br>
+&nbsp;&nbsp;&nbsp; In the project properties add the SDL2 include directory to the include path (as well as any of your own include directories). Disable using precompiled headers.<br>
+<br>
+<div class="separator" style="clear: both; text-align: center;">
+<a href="https://3.bp.blogspot.com/-emHOdaSrJ40/WMvccjDl6CI/AAAAAAAAB1o/OClhrtuieOwlNEIqiUxuonyC5--RwvyzgCEw/s1600/main_property01.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="112" src="./Building SDL2 for Android with Visual Studio_files/main_property01.png" width="320"></a></div>
+<br>
+<br>
+To link SDL2 to the project go to Linker-&gt;General and add a new path to Addition Library Directories: <span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">$(SolutionDir)$(Platform)\$(Configuration)</span><br>
+This should automatically evaluate to the output directory of the SDL2 project for each of the platform configurations.<br>
+<br>
+<div class="separator" style="clear: both; text-align: center;">
+<a href="https://2.bp.blogspot.com/-KymSBoP66fo/WMvccfhe3CI/AAAAAAAAB1g/E-MqpgFyDRMVJ9s917u2_h13NpGrs_rgQCEw/s1600/additional_lib.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="181" src="./Building SDL2 for Android with Visual Studio_files/additional_lib.png" width="320"></a></div>
+<br>
+<br>
+Under input add the same libraries as the SDL2 project, followed by SDL2 itself.<br>
+<br>
+<div class="separator" style="clear: both; text-align: center;">
+<a href="https://1.bp.blogspot.com/-1-daH1UVh3I/WMvcc0HB7GI/AAAAAAAAB1s/kPISzxKZDc4rzb6mjPG8P__hzil561QTwCEw/s1600/main_property02.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="57" src="./Building SDL2 for Android with Visual Studio_files/main_property02.png" width="320"></a></div>
+<br>
+<br>
+The project template creates three source files containing some boiler plate code. Remove <span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">pch.h</span>, and <span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">main.h</span> but keep replace the contents of <span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">main.cpp</span> with the standard <span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">main()</span> entrypoint code. All of your application's code will be initiated from here, and this file can be shared between multiple SDL2 projects, for instance when building for both desktop and android platforms.<br>
+<br>
+<div class="separator" style="clear: both; text-align: center;">
+<a href="https://2.bp.blogspot.com/-RnhOR8tq9O4/WMvcccZd1jI/AAAAAAAAB1k/LfJW9OvzXskHt9sh00hfD_e8y2y4HGB6ACEw/s1600/main_entry.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="166" src="./Building SDL2 for Android with Visual Studio_files/main_entry.png" width="320"></a></div>
+<br>
+<br>
+Right click on the project and select 'Add Existing' and browse to the SDL2 <span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">src</span> folder belonging to the SDL2 project. Here there is a folder named <span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">main</span>. Inside this is a folder named <span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">android</span> which contains a file named <span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">SDL_android_main.c</span>. Add this to the project. SDL uses this to implement its own entrypoint and is needed here because it is called automatically from the java application during <span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">onCreate()</span>.<br>
+&nbsp;&nbsp;&nbsp; To make sure the code is referenced properly from the java application, right click on the java application project's references node in the solution explorer and select 'Add Reference'. Check the box next to <i>main</i> - SDL2 should already be checked, if not check it too. If your project is named anything other than <span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">main</span> - or you're adding another library such as <i>SDL_image</i> - browse to <span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">src/org/libsdl/app</span> in the solution explorer and open <span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">SDLActivity.java</span>. Around line 72 is an array of library names which will be loaded when the application is run. By default it already contains SDL2 and <span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">main</span>, but this will need to be modified to add any extra libraries, or if <span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">main</span> is named something else. Note that these are the names of the .so files without the preceeding lib and .so extension.<br>
+<br>
+<div class="separator" style="clear: both; text-align: center;">
+<a href="https://3.bp.blogspot.com/-gl4gNRKQ-UU/WMvcccy6V3I/AAAAAAAAB1w/BRQ_8aUeBVIBF9Zr-vwoTXRxCdky7Z-0QCEw/s1600/lib_strings.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="138" src="./Building SDL2 for Android with Visual Studio_files/lib_strings.png" width="320"></a></div>
+<br>
+<br>
+<b>Conclusion</b><br>
+This is the bare essential setup for creating an Android compatible application based on SDL2. Adding further libraries can be achieved the same way as setting up SDL2 itself; by creating a new project, configuring it and adding the sourcecode. Remember to reference these libraries in the java application project, and modify the array of library names to include the new library.<br>
+<br>
+If you wish to use C++ in any project code make sure to set the language version to <span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">C++11</span> or <span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">C++1y</span> under the language setting of the project properties, should you need any particular language features. <br>
+<br>
+&nbsp;For reference I've uploaded the configured solution with an example <span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">main</span> project to github, which can be found <a href="https://github.com/fallahn/sdl2vs">here</a>. It was made with Visual Studio 2017.
+</div>
+</div>
+<div class="post-footer">
+<div class="post-footer-line post-footer-line-1">
+<div class="byline post-share-buttons goog-inline-block">
+<div aria-owns="sharing-popup-Blog1-footer-1-5409220101471293686" class="sharing" data-title="Building SDL2 for Android with Visual Studio">
+<button aria-controls="sharing-popup-Blog1-footer-1-5409220101471293686" aria-label="Share" class="sharing-button touch-icon-button" id="sharing-button-Blog1-footer-1-5409220101471293686" role="button" aria-expanded="false" aria-haspopup="true">
+Share
+</button>
+<div class="share-buttons-container">
+<ul aria-hidden="true" aria-label="Share" class="share-buttons hidden" id="sharing-popup-Blog1-footer-1-5409220101471293686" role="menu">
+<li>
+<span aria-label="Get link" class="sharing-platform-button sharing-element-link" data-href="https://www.blogger.com/share-post.g?blogID=6421765335659381070&amp;postID=5409220101471293686&amp;target=" data-url="https://trederia.blogspot.com/2017/03/building-sdl2-for-android-with-visual.html" role="menuitem" tabindex="-1" title="Get link">
+<svg class="svg-icon-24 touch-icon sharing-link">
+<use xlink:href="/responsive/sprite_v1_6.css.svg#ic_24_link_dark" xmlns:xlink="http://www.w3.org/1999/xlink"></use>
+</svg>
+<span class="platform-sharing-text">Get link</span>
+</span>
+</li>
+<li>
+<span aria-label="Share to Facebook" class="sharing-platform-button sharing-element-facebook" data-href="https://www.blogger.com/share-post.g?blogID=6421765335659381070&amp;postID=5409220101471293686&amp;target=facebook" data-url="https://trederia.blogspot.com/2017/03/building-sdl2-for-android-with-visual.html" role="menuitem" tabindex="-1" title="Share to Facebook">
+<svg class="svg-icon-24 touch-icon sharing-facebook">
+<use xlink:href="/responsive/sprite_v1_6.css.svg#ic_24_facebook_dark" xmlns:xlink="http://www.w3.org/1999/xlink"></use>
+</svg>
+<span class="platform-sharing-text">Facebook</span>
+</span>
+</li>
+<li>
+<span aria-label="Share to Twitter" class="sharing-platform-button sharing-element-twitter" data-href="https://www.blogger.com/share-post.g?blogID=6421765335659381070&amp;postID=5409220101471293686&amp;target=twitter" data-url="https://trederia.blogspot.com/2017/03/building-sdl2-for-android-with-visual.html" role="menuitem" tabindex="-1" title="Share to Twitter">
+<svg class="svg-icon-24 touch-icon sharing-twitter">
+<use xlink:href="/responsive/sprite_v1_6.css.svg#ic_24_twitter_dark" xmlns:xlink="http://www.w3.org/1999/xlink"></use>
+</svg>
+<span class="platform-sharing-text">Twitter</span>
+</span>
+</li>
+<li>
+<span aria-label="Share to Pinterest" class="sharing-platform-button sharing-element-pinterest" data-href="https://www.blogger.com/share-post.g?blogID=6421765335659381070&amp;postID=5409220101471293686&amp;target=pinterest" data-url="https://trederia.blogspot.com/2017/03/building-sdl2-for-android-with-visual.html" role="menuitem" tabindex="-1" title="Share to Pinterest">
+<svg class="svg-icon-24 touch-icon sharing-pinterest">
+<use xlink:href="/responsive/sprite_v1_6.css.svg#ic_24_pinterest_dark" xmlns:xlink="http://www.w3.org/1999/xlink"></use>
+</svg>
+<span class="platform-sharing-text">Pinterest</span>
+</span>
+</li>
+<li>
+<span aria-label="Email" class="sharing-platform-button sharing-element-email" data-href="https://www.blogger.com/share-post.g?blogID=6421765335659381070&amp;postID=5409220101471293686&amp;target=email" data-url="https://trederia.blogspot.com/2017/03/building-sdl2-for-android-with-visual.html" role="menuitem" tabindex="-1" title="Email">
+<svg class="svg-icon-24 touch-icon sharing-email">
+<use xlink:href="/responsive/sprite_v1_6.css.svg#ic_24_email_dark" xmlns:xlink="http://www.w3.org/1999/xlink"></use>
+</svg>
+<span class="platform-sharing-text">Email</span>
+</span>
+</li>
+<li aria-hidden="true" class="hidden">
+<span aria-label="Share to other apps" class="sharing-platform-button sharing-element-other" data-url="https://trederia.blogspot.com/2017/03/building-sdl2-for-android-with-visual.html" role="menuitem" tabindex="-1" title="Share to other apps">
+<svg class="svg-icon-24 touch-icon sharing-sharingOther">
+<use xlink:href="/responsive/sprite_v1_6.css.svg#ic_more_horiz_black_24dp" xmlns:xlink="http://www.w3.org/1999/xlink"></use>
+</svg>
+<span class="platform-sharing-text">Other Apps</span>
+</span>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="post-footer-line post-footer-line-2">
+<span class="byline post-labels">
+<span class="byline-label">Labels:</span>
+<a href="https://trederia.blogspot.com/search/label/Android" rel="tag">Android</a>
+<a href="https://trederia.blogspot.com/search/label/C%2B%2B" rel="tag">C++</a>
+<a href="https://trederia.blogspot.com/search/label/embedded" rel="tag">embedded</a>
+<a href="https://trederia.blogspot.com/search/label/game%20programming" rel="tag">game programming</a>
+<a href="https://trederia.blogspot.com/search/label/programming" rel="tag">programming</a>
+<a href="https://trederia.blogspot.com/search/label/SDL2" rel="tag">SDL2</a>
+<a href="https://trederia.blogspot.com/search/label/Visual%20Studio" rel="tag">Visual Studio</a>
+</span>
+</div>
+<div class="post-footer-line post-footer-line-3">
+</div>
+</div>
+</div>
+</div>
+<section class="comments threaded" data-embed="true" data-num-comments="9" id="comments">
+<a name="comments"></a>
+<h3 class="title">Comments</h3>
+<div class="comments-content">
+<script async="async" src="https://trederia.blogspot.com/2017/03/building-sdl2-for-android-with-visual.html" type="text/javascript"></script>
+<script type="text/javascript">(function(){/*
+
+ Copyright The Closure Library Authors.
+ SPDX-License-Identifier: Apache-2.0
+*/
+var m=this||self,p=function(a,b){function d(){}d.prototype=b.prototype;a.superClass_=b.prototype;a.prototype=new d;a.prototype.constructor=a;a.base=function(f,e,q){for(var r=Array(arguments.length-2),n=2;n<arguments.length;n++)r[n-2]=arguments[n];return b.prototype[e].apply(f,r)}},t=function(a){return a};function w(a){if(Error.captureStackTrace)Error.captureStackTrace(this,w);else{var b=Error().stack;b&&(this.stack=b)}a&&(this.message=String(a))}p(w,Error);w.prototype.name="CustomError";var x=function(a,b){a=a.split("%s");for(var d="",f=a.length-1,e=0;e<f;e++)d+=a[e]+(e<b.length?b[e]:"%s");w.call(this,d+a[f])};p(x,w);x.prototype.name="AssertionError";var y=function(a,b){throw new x("Failure"+(a?": "+a:""),Array.prototype.slice.call(arguments,1));};var C;var E=function(a,b){this.privateDoNotAccessOrElseTrustedResourceUrlWrappedValue_=b===D?a:""};E.prototype.toString=function(){return this.privateDoNotAccessOrElseTrustedResourceUrlWrappedValue_+""};var D={},G=function(a){if(void 0===C){var b=null;var d=m.trustedTypes;if(d&&d.createPolicy)try{b=d.createPolicy("goog#html",{createHTML:t,createScript:t,createScriptURL:t})}catch(f){m.console&&m.console.error(f.message)}C=b}a=(b=C)?b.createScriptURL(a):a;return new E(a,D)};var H=function(a,b){if(b instanceof E&&b.constructor===E)b=b.privateDoNotAccessOrElseTrustedResourceUrlWrappedValue_;else{var d=typeof b;y("expected object of type TrustedResourceUrl, got '"+b+"' of type "+("object"!=d?d:b?Array.isArray(b)?"array":d:"null"));b="type_error:TrustedResourceUrl"}a.src=b;var f;b=(a.ownerDocument&&a.ownerDocument.defaultView||window).document;(f=(b=null===(f=b.querySelector)||void 0===f?void 0:f.call(b,"script[nonce]"))?b.nonce||b.getAttribute("nonce")||"":"")&&a.setAttribute("nonce",
+f)};var M=function(){var a=document;var b="SCRIPT";"application/xhtml+xml"===a.contentType&&(b=b.toLowerCase());return a.createElement(b)};var N=function(a,b,d){var f=null;a&&0<a.length&&(f=parseInt(a[a.length-1].timestamp,10)+1);var e=null,q=null,r=void 0,n=null,z=(window.location.hash||"#").substring(1),I,J;/^comment-form_/.test(z)?I=z.substring(13):/^c[0-9]+$/.test(z)&&(J=z.substring(1));var R={id:d.postId,data:a,loadNext:function(l){if(f){var g=d.feed+"?alt=json&v=2&orderby=published&reverse=false&max-results=50";f&&(g+="&published-min="+(new Date(f)).toISOString());window.bloggercomments=function(A){f=null;var u=[];if(A&&A.feed&&
+A.feed.entry)for(var K=0,c;c=A.feed.entry[K];K++){var k={},h=/blog-(\d+).post-(\d+)/.exec(c.id.$t);k.id=h?h[2]:null;h=k;a:{var v=void 0;var L=c&&(c.content&&c.content.$t||c.summary&&c.summary.$t)||"";if(c&&c.gd$extendedProperty)for(v in c.gd$extendedProperty)if("blogger.contentRemoved"==c.gd$extendedProperty[v].name){v='<span class="deleted-comment">'+L+"</span>";break a}v=L}h.body=v;k.timestamp=Date.parse(c.published.$t)+"";c.author&&c.author.constructor===Array&&(h=c.author[0])&&(k.author={name:h.name?
+h.name.$t:void 0,profileUrl:h.uri?h.uri.$t:void 0,avatarUrl:h.gd$image?h.gd$image.src:void 0});c.link&&(c.link[2]&&(k.link=k.permalink=c.link[2].href),c.link[3]&&(h=/.*comments\/default\/(\d+)\?.*/.exec(c.link[3].href))&&h[1]&&(k.parentId=h[1]));k.deleteclass="item-control blog-admin";if(c.gd$extendedProperty)for(var B in c.gd$extendedProperty)"blogger.itemClass"==c.gd$extendedProperty[B].name?k.deleteclass+=" "+c.gd$extendedProperty[B].value:"blogger.displayTime"==c.gd$extendedProperty[B].name&&
+(k.displayTime=c.gd$extendedProperty[B].value);u.push(k)}f=50>u.length?null:parseInt(u[u.length-1].timestamp,10)+1;l(u);window.bloggercomments=null};var F=M();F.type="text/javascript";H(F,G(g+"&callback=bloggercomments"));document.getElementsByTagName("head")[0].appendChild(F)}},hasMore:function(){return!!f},getMeta:function(l,g){return"iswriter"==l?g.author&&g.author.name==d.authorName&&g.author.profileUrl==d.authorUrl?"true":"":"deletelink"==l?d.baseUri+"/delete-comment.g?blogID="+d.blogId+"&postID="+
+g.id:"deleteclass"==l?g.deleteclass:""},onReply:function(l,g){null==e&&(e=document.getElementById("comment-editor"),null!=e&&(n=e.style.height,e.style.display="block",q=e.src.split("#")));e&&l&&l!==r&&(document.getElementById(g).insertBefore(e,null),g=q[0]+(l?"&parentID="+l:""),q[1]&&(g=g+"#"+q[1]),e.src=g,e.style.height=n||e.style.height,r=l,e.removeAttribute("data-resized"),e.dispatchEvent(new Event("iframeMoved")))},rendered:!0,initComment:J,initReplyThread:I,config:{maxDepth:d.maxThreadDepth},
+messages:b};a=function(){window.goog&&window.goog.comments&&window.goog.comments.render(document.getElementById("comment-holder"),R)};window.goog&&window.goog.comments?a():(window.goog=window.goog||{},window.goog.comments=window.goog.comments||{},window.goog.comments.loadQueue=window.goog.comments.loadQueue||[],window.goog.comments.loadQueue.push(a))},O=["blogger","widgets","blog","initThreadedComments"],P=m;O[0]in P||"undefined"==typeof P.execScript||P.execScript("var "+O[0]);
+for(var Q;O.length&&(Q=O.shift());)O.length||void 0===N?P=P[Q]&&P[Q]!==Object.prototype[Q]?P[Q]:P[Q]={}:P[Q]=N;}).call(this);
+</script>
+<script type="text/javascript">
+    blogger.widgets.blog.initThreadedComments(
+        null,
+        null,
+        {});
+  </script>
+<div id="comment-holder">
+<div class="comment-thread toplevel-thread"><ol id="top-ra"><li class="comment" id="c8576122940784849591"><div class="avatar-image-container"><img src="./Building SDL2 for Android with Visual Studio_files/blogger_logo_round_35.png" alt=""></div><div class="comment-block"><div class="comment-header"><cite class="user"><a href="https://www.blogger.com/profile/07095178812053855667" rel="nofollow">brianJt</a></cite><span class="icon user "></span><span class="datetime secondary-text"><a rel="nofollow" href="https://trederia.blogspot.com/2017/03/building-sdl2-for-android-with-visual.html?showComment=1550534205773#c8576122940784849591">18 February 2019 at 23:56</a></span></div><p class="comment-content">Thanks for your updated GitHub example for 2.0.9.  I suspect you are aware that when built it shows a message showing that it can't find libhidapi?  I have removed the use of that library from SDLActivity.java line 253 and the example runs.  However it runs twice.  From what I've read this may be the result of there being an AndroidManifest.xml also in the SD2 library build.  Removing it from the ARM build made it run only once though not from the x86 build (possibly a manifest was still sticking around due to incremental builds).</p><span class="comment-actions secondary-text"><a class="comment-reply" target="_self" data-comment-id="8576122940784849591" href="javascript:;">Reply</a><span class="item-control blog-admin blog-admin pid-29067417"><a target="_self" href="https://www.blogger.com/delete-comment.g?blogID=6421765335659381070&amp;postID=8576122940784849591">Delete</a></span></span></div><div class="comment-replies"><div id="c8576122940784849591-rt" class="comment-thread inline-thread"><span class="thread-toggle thread-expanded"><span class="thread-arrow"></span><span class="thread-count"><a target="_self" href="javascript:;">Replies</a></span></span><ol id="c8576122940784849591-ra" class="thread-chrome thread-expanded"><div><li class="comment" id="c1888694528813816427"><div class="avatar-image-container"><img src="./Building SDL2 for Android with Visual Studio_files/blogger_logo_round_35.png" alt=""></div><div class="comment-block"><div class="comment-header"><cite class="user"><a href="https://www.blogger.com/profile/10214798883054643328" rel="nofollow">Matt Styles</a></cite><span class="icon user blog-author"></span><span class="datetime secondary-text"><a rel="nofollow" href="https://trederia.blogspot.com/2017/03/building-sdl2-for-android-with-visual.html?showComment=1553174955280#c1888694528813816427">21 March 2019 at 13:29</a></span></div><p class="comment-content">Hi, sorry I've only just seen your comment - I wasn't notified for some reason. I wasn't aware of this problem, thanks for pointing it out. I will fix it ASAP</p><span class="comment-actions secondary-text"><span class="item-control blog-admin blog-admin pid-1258902882"><a target="_self" href="https://www.blogger.com/delete-comment.g?blogID=6421765335659381070&amp;postID=1888694528813816427">Delete</a></span></span></div><div class="comment-replies"><div id="c1888694528813816427-rt" class="comment-thread inline-thread hidden"><span class="thread-toggle thread-expanded"><span class="thread-arrow"></span><span class="thread-count"><a target="_self" href="javascript:;">Replies</a></span></span><ol id="c1888694528813816427-ra" class="thread-chrome thread-expanded"><div></div><div id="c1888694528813816427-continue" class="continue"><a class="comment-reply" target="_self" data-comment-id="1888694528813816427" href="javascript:;">Reply</a></div></ol></div></div><div class="comment-replybox-single" id="c1888694528813816427-ce"></div></li></div><div id="c8576122940784849591-continue" class="continue"><a class="comment-reply" target="_self" data-comment-id="8576122940784849591" href="javascript:;">Reply</a></div></ol></div></div><div class="comment-replybox-single" id="c8576122940784849591-ce"></div></li><li class="comment" id="c2333217856853575755"><div class="avatar-image-container"><img src="./Building SDL2 for Android with Visual Studio_files/blogger_logo_round_35.png" alt=""></div><div class="comment-block"><div class="comment-header"><cite class="user"><a href="https://www.blogger.com/profile/07095178812053855667" rel="nofollow">brianJt</a></cite><span class="icon user "></span><span class="datetime secondary-text"><a rel="nofollow" href="https://trederia.blogspot.com/2017/03/building-sdl2-for-android-with-visual.html?showComment=1553206765977#c2333217856853575755">21 March 2019 at 22:19</a></span></div><p class="comment-content">The problem was caused by the window being set to 640x480 (landscape) and I was testing on a phone (portrait).  So it ran twice when it needed to go from portrait to landscape.  It's sort of an SDL flaw that has been discussed on the forum. </p><span class="comment-actions secondary-text"><a class="comment-reply" target="_self" data-comment-id="2333217856853575755" href="javascript:;">Reply</a><span class="item-control blog-admin blog-admin pid-29067417"><a target="_self" href="https://www.blogger.com/delete-comment.g?blogID=6421765335659381070&amp;postID=2333217856853575755">Delete</a></span></span></div><div class="comment-replies"><div id="c2333217856853575755-rt" class="comment-thread inline-thread hidden"><span class="thread-toggle thread-expanded"><span class="thread-arrow"></span><span class="thread-count"><a target="_self" href="javascript:;">Replies</a></span></span><ol id="c2333217856853575755-ra" class="thread-chrome thread-expanded"><div></div><div id="c2333217856853575755-continue" class="continue"><a class="comment-reply" target="_self" data-comment-id="2333217856853575755" href="javascript:;">Reply</a></div></ol></div></div><div class="comment-replybox-single" id="c2333217856853575755-ce"></div></li><li class="comment" id="c5907372672899887756"><div class="avatar-image-container"><img src="./Building SDL2 for Android with Visual Studio_files/blogger_logo_round_35.png" alt=""></div><div class="comment-block"><div class="comment-header"><cite class="user"><a href="https://www.blogger.com/profile/04996476973262921756" rel="nofollow">Unknown</a></cite><span class="icon user "></span><span class="datetime secondary-text"><a rel="nofollow" href="https://trederia.blogspot.com/2017/03/building-sdl2-for-android-with-visual.html?showComment=1578611103012#c5907372672899887756">9 January 2020 at 23:05</a></span></div><p class="comment-content">You can take updated version for MSVS 2019 here https://github.com/gapkalov/sdl2vs<br></p><span class="comment-actions secondary-text"><a class="comment-reply" target="_self" data-comment-id="5907372672899887756" href="javascript:;">Reply</a><span class="item-control blog-admin blog-admin pid-1178312458"><a target="_self" href="https://www.blogger.com/delete-comment.g?blogID=6421765335659381070&amp;postID=5907372672899887756">Delete</a></span></span></div><div class="comment-replies"><div id="c5907372672899887756-rt" class="comment-thread inline-thread"><span class="thread-toggle thread-expanded"><span class="thread-arrow"></span><span class="thread-count"><a target="_self" href="javascript:;">Replies</a></span></span><ol id="c5907372672899887756-ra" class="thread-chrome thread-expanded"><div><li class="comment" id="c6019510058388251016"><div class="avatar-image-container"><img src="./Building SDL2 for Android with Visual Studio_files/blogger_logo_round_35.png" alt=""></div><div class="comment-block"><div class="comment-header"><cite class="user"><a href="https://www.blogger.com/profile/10214798883054643328" rel="nofollow">Matt Styles</a></cite><span class="icon user blog-author"></span><span class="datetime secondary-text"><a rel="nofollow" href="https://trederia.blogspot.com/2017/03/building-sdl2-for-android-with-visual.html?showComment=1582831291015#c6019510058388251016">27 February 2020 at 19:21</a></span></div><p class="comment-content">Thank you for your efforts! I have merged the changes into the example repository</p><span class="comment-actions secondary-text"><span class="item-control blog-admin blog-admin pid-1258902882"><a target="_self" href="https://www.blogger.com/delete-comment.g?blogID=6421765335659381070&amp;postID=6019510058388251016">Delete</a></span></span></div><div class="comment-replies"><div id="c6019510058388251016-rt" class="comment-thread inline-thread hidden"><span class="thread-toggle thread-expanded"><span class="thread-arrow"></span><span class="thread-count"><a target="_self" href="javascript:;">Replies</a></span></span><ol id="c6019510058388251016-ra" class="thread-chrome thread-expanded"><div></div><div id="c6019510058388251016-continue" class="continue"><a class="comment-reply" target="_self" data-comment-id="6019510058388251016" href="javascript:;">Reply</a></div></ol></div></div><div class="comment-replybox-single" id="c6019510058388251016-ce"></div></li></div><div id="c5907372672899887756-continue" class="continue"><a class="comment-reply" target="_self" data-comment-id="5907372672899887756" href="javascript:;">Reply</a></div></ol></div></div><div class="comment-replybox-single" id="c5907372672899887756-ce"></div></li><li class="comment" id="c590778949387150357"><div class="avatar-image-container"><img src="./Building SDL2 for Android with Visual Studio_files/blogger_logo_round_35.png" alt=""></div><div class="comment-block"><div class="comment-header"><cite class="user"><a href="https://www.blogger.com/profile/11718605097918517241" rel="nofollow">Unknown</a></cite><span class="icon user "></span><span class="datetime secondary-text"><a rel="nofollow" href="https://trederia.blogspot.com/2017/03/building-sdl2-for-android-with-visual.html?showComment=1591141561128#c590778949387150357">3 June 2020 at 00:46</a></span></div><p class="comment-content">Please if it possible add SDL_mixer to the configured solution on github too, Thank you</p><span class="comment-actions secondary-text"><a class="comment-reply" target="_self" data-comment-id="590778949387150357" href="javascript:;">Reply</a><span class="item-control blog-admin blog-admin pid-1404178592"><a target="_self" href="https://www.blogger.com/delete-comment.g?blogID=6421765335659381070&amp;postID=590778949387150357">Delete</a></span></span></div><div class="comment-replies"><div id="c590778949387150357-rt" class="comment-thread inline-thread hidden"><span class="thread-toggle thread-expanded"><span class="thread-arrow"></span><span class="thread-count"><a target="_self" href="javascript:;">Replies</a></span></span><ol id="c590778949387150357-ra" class="thread-chrome thread-expanded"><div></div><div id="c590778949387150357-continue" class="continue"><a class="comment-reply" target="_self" data-comment-id="590778949387150357" href="javascript:;">Reply</a></div></ol></div></div><div class="comment-replybox-single" id="c590778949387150357-ce"></div></li><li class="comment" id="c2088628688414165145"><div class="avatar-image-container"><img src="./Building SDL2 for Android with Visual Studio_files/blogger_logo_round_35.png" alt=""></div><div class="comment-block"><div class="comment-header"><cite class="user"><a href="https://www.blogger.com/profile/15191145945426781599" rel="nofollow">56k</a></cite><span class="icon user "></span><span class="datetime secondary-text"><a rel="nofollow" href="https://trederia.blogspot.com/2017/03/building-sdl2-for-android-with-visual.html?showComment=1617564588119#c2088628688414165145">4 April 2021 at 20:29</a></span></div><p class="comment-content">Need help Error compiling it in msv2019 pro<br>gradlew.bat invalid path?<br> <br>Error MSB3073 The command "gradlew.bat -p  SDL2_GradleApp\app"  assembleARM7Debug" exited with code 1. SDL2_GradleApp E:\MVS2019\MSBuild\Microsoft\MDD\Android\V150\Android.Common.targets 530 <br><br></p><span class="comment-actions secondary-text"><a class="comment-reply" target="_self" data-comment-id="2088628688414165145" href="javascript:;">Reply</a><span class="item-control blog-admin blog-admin pid-1379779484"><a target="_self" href="https://www.blogger.com/delete-comment.g?blogID=6421765335659381070&amp;postID=2088628688414165145">Delete</a></span></span></div><div class="comment-replies"><div id="c2088628688414165145-rt" class="comment-thread inline-thread"><span class="thread-toggle thread-expanded"><span class="thread-arrow"></span><span class="thread-count"><a target="_self" href="javascript:;">Replies</a></span></span><ol id="c2088628688414165145-ra" class="thread-chrome thread-expanded"><div><li class="comment" id="c6074273583023121105"><div class="avatar-image-container"><img src="./Building SDL2 for Android with Visual Studio_files/blogger_logo_round_35.png" alt=""></div><div class="comment-block"><div class="comment-header"><cite class="user"><a href="https://www.blogger.com/profile/15191145945426781599" rel="nofollow">56k</a></cite><span class="icon user "></span><span class="datetime secondary-text"><a rel="nofollow" href="https://trederia.blogspot.com/2017/03/building-sdl2-for-android-with-visual.html?showComment=1617565170058#c6074273583023121105">4 April 2021 at 20:39</a></span></div><p class="comment-content"> Failed to apply plugin [class 'com.android.build.gradle.model.BaseComponentModelPlugin'</p><span class="comment-actions secondary-text"><span class="item-control blog-admin blog-admin pid-1379779484"><a target="_self" href="https://www.blogger.com/delete-comment.g?blogID=6421765335659381070&amp;postID=6074273583023121105">Delete</a></span></span></div><div class="comment-replies"><div id="c6074273583023121105-rt" class="comment-thread inline-thread hidden"><span class="thread-toggle thread-expanded"><span class="thread-arrow"></span><span class="thread-count"><a target="_self" href="javascript:;">Replies</a></span></span><ol id="c6074273583023121105-ra" class="thread-chrome thread-expanded"><div></div><div id="c6074273583023121105-continue" class="continue"><a class="comment-reply" target="_self" data-comment-id="6074273583023121105" href="javascript:;">Reply</a></div></ol></div></div><div class="comment-replybox-single" id="c6074273583023121105-ce"></div></li><li class="comment" id="c6120964067006732832"><div class="avatar-image-container"><img src="./Building SDL2 for Android with Visual Studio_files/blogger_logo_round_35.png" alt=""></div><div class="comment-block"><div class="comment-header"><cite class="user"><a href="https://www.blogger.com/profile/13748343699605375224" rel="nofollow">Unknown</a></cite><span class="icon user "></span><span class="datetime secondary-text"><a rel="nofollow" href="https://trederia.blogspot.com/2017/03/building-sdl2-for-android-with-visual.html?showComment=1623943354061#c6120964067006732832">17 June 2021 at 16:22</a></span></div><p class="comment-content">This comment has been removed by the author.</p><span class="comment-actions secondary-text"><span class="item-control blog-admin blog-admin "><a target="_self" href="https://www.blogger.com/delete-comment.g?blogID=6421765335659381070&amp;postID=6120964067006732832">Delete</a></span></span></div><div class="comment-replies"><div id="c6120964067006732832-rt" class="comment-thread inline-thread hidden"><span class="thread-toggle thread-expanded"><span class="thread-arrow"></span><span class="thread-count"><a target="_self" href="javascript:;">Replies</a></span></span><ol id="c6120964067006732832-ra" class="thread-chrome thread-expanded"><div></div><div id="c6120964067006732832-continue" class="continue"><a class="comment-reply" target="_self" data-comment-id="6120964067006732832" href="javascript:;">Reply</a></div></ol></div></div><div class="comment-replybox-single" id="c6120964067006732832-ce"></div></li></div><div id="c2088628688414165145-continue" class="continue"><a class="comment-reply" target="_self" data-comment-id="2088628688414165145" href="javascript:;">Reply</a></div></ol></div></div><div class="comment-replybox-single" id="c2088628688414165145-ce"></div></li></ol><div id="top-continue" class="continue hidden"><a class="comment-reply" target="_self" href="javascript:;">Add comment</a></div><div class="comment-replybox-thread" id="top-ce"><iframe allowtransparency="allowtransparency" class="blogger-iframe-colorize blogger-comment-from-post" frameborder="0" height="88px" id="comment-editor" name="comment-editor" src="./Building SDL2 for Android with Visual Studio_files/comment-iframe.html" width="100%" style="display: block;" data-resized="true"></iframe></div><div class="loadmore hidden" data-post-id="5409220101471293686"><a target="_self">Load more...</a></div></div>
+</div>
+</div>
+<p class="comment-footer">
+</p><div class="comment-form">
+<a name="comment-form"></a>
+<h4 id="comment-post-message">Post a Comment</h4>
+<a href="https://www.blogger.com/comment-iframe.g?blogID=6421765335659381070&amp;postID=5409220101471293686&amp;skin=soho&amp;blogspotRpcToken=2648181" id="comment-editor-src"></a>
+
+<script src="./Building SDL2 for Android with Visual Studio_files/1639926472-comment_from_post_iframe.js.download" type="text/javascript"></script>
+<script type="text/javascript">
+      BLOG_CMT_createIframe('https://www.blogger.com/rpc_relay.html');
+    </script>
+</div>
+<p></p>
+</section>
+</div>
+</div>
+</div><div class="widget PopularPosts" data-version="2" id="PopularPosts1">
+<h3 class="title">
+Popular Posts
+</h3>
+<div class="widget-content">
+<div role="feed">
+<article class="post" role="article">
+<div class="post no-featured-image">
+<div class="post-header">
+<div class="post-header-line-1">
+<span class="byline post-timestamp">
+<meta content="https://trederia.blogspot.com/2013/05/tiled-map-loader-for-sfml.html">
+<a class="timestamp-link" href="https://trederia.blogspot.com/2013/05/tiled-map-loader-for-sfml.html" rel="bookmark" title="permanent link">
+<time class="published" datetime="2013-05-30T12:02:00+01:00" title="2013-05-30T12:02:00+01:00">
+May 30, 2013
+</time>
+</a>
+</span>
+</div>
+</div>
+<h3 class="post-title"><a href="https://trederia.blogspot.com/2013/05/tiled-map-loader-for-sfml.html">Tiled Map Loader for SFML</a></h3>
+<div class="post-footer">
+<div class="post-footer-line post-footer-line-0">
+<div class="byline post-share-buttons goog-inline-block">
+<div aria-owns="sharing-popup-PopularPosts1-footer-0-3853266761968901272" class="sharing" data-title="Tiled Map Loader for SFML">
+<button aria-controls="sharing-popup-PopularPosts1-footer-0-3853266761968901272" aria-label="Share" class="sharing-button touch-icon-button" id="sharing-button-PopularPosts1-footer-0-3853266761968901272" role="button" aria-expanded="false" aria-haspopup="true">
+Share
+</button>
+<div class="share-buttons-container">
+<ul aria-hidden="true" aria-label="Share" class="share-buttons hidden" id="sharing-popup-PopularPosts1-footer-0-3853266761968901272" role="menu">
+<li>
+<span aria-label="Get link" class="sharing-platform-button sharing-element-link" data-href="https://www.blogger.com/share-post.g?blogID=6421765335659381070&amp;postID=3853266761968901272&amp;target=" data-url="https://trederia.blogspot.com/2013/05/tiled-map-loader-for-sfml.html" role="menuitem" tabindex="-1" title="Get link">
+<svg class="svg-icon-24 touch-icon sharing-link">
+<use xlink:href="/responsive/sprite_v1_6.css.svg#ic_24_link_dark" xmlns:xlink="http://www.w3.org/1999/xlink"></use>
+</svg>
+<span class="platform-sharing-text">Get link</span>
+</span>
+</li>
+<li>
+<span aria-label="Share to Facebook" class="sharing-platform-button sharing-element-facebook" data-href="https://www.blogger.com/share-post.g?blogID=6421765335659381070&amp;postID=3853266761968901272&amp;target=facebook" data-url="https://trederia.blogspot.com/2013/05/tiled-map-loader-for-sfml.html" role="menuitem" tabindex="-1" title="Share to Facebook">
+<svg class="svg-icon-24 touch-icon sharing-facebook">
+<use xlink:href="/responsive/sprite_v1_6.css.svg#ic_24_facebook_dark" xmlns:xlink="http://www.w3.org/1999/xlink"></use>
+</svg>
+<span class="platform-sharing-text">Facebook</span>
+</span>
+</li>
+<li>
+<span aria-label="Share to Twitter" class="sharing-platform-button sharing-element-twitter" data-href="https://www.blogger.com/share-post.g?blogID=6421765335659381070&amp;postID=3853266761968901272&amp;target=twitter" data-url="https://trederia.blogspot.com/2013/05/tiled-map-loader-for-sfml.html" role="menuitem" tabindex="-1" title="Share to Twitter">
+<svg class="svg-icon-24 touch-icon sharing-twitter">
+<use xlink:href="/responsive/sprite_v1_6.css.svg#ic_24_twitter_dark" xmlns:xlink="http://www.w3.org/1999/xlink"></use>
+</svg>
+<span class="platform-sharing-text">Twitter</span>
+</span>
+</li>
+<li>
+<span aria-label="Share to Pinterest" class="sharing-platform-button sharing-element-pinterest" data-href="https://www.blogger.com/share-post.g?blogID=6421765335659381070&amp;postID=3853266761968901272&amp;target=pinterest" data-url="https://trederia.blogspot.com/2013/05/tiled-map-loader-for-sfml.html" role="menuitem" tabindex="-1" title="Share to Pinterest">
+<svg class="svg-icon-24 touch-icon sharing-pinterest">
+<use xlink:href="/responsive/sprite_v1_6.css.svg#ic_24_pinterest_dark" xmlns:xlink="http://www.w3.org/1999/xlink"></use>
+</svg>
+<span class="platform-sharing-text">Pinterest</span>
+</span>
+</li>
+<li>
+<span aria-label="Email" class="sharing-platform-button sharing-element-email" data-href="https://www.blogger.com/share-post.g?blogID=6421765335659381070&amp;postID=3853266761968901272&amp;target=email" data-url="https://trederia.blogspot.com/2013/05/tiled-map-loader-for-sfml.html" role="menuitem" tabindex="-1" title="Email">
+<svg class="svg-icon-24 touch-icon sharing-email">
+<use xlink:href="/responsive/sprite_v1_6.css.svg#ic_24_email_dark" xmlns:xlink="http://www.w3.org/1999/xlink"></use>
+</svg>
+<span class="platform-sharing-text">Email</span>
+</span>
+</li>
+<li aria-hidden="true" class="hidden">
+<span aria-label="Share to other apps" class="sharing-platform-button sharing-element-other" data-url="https://trederia.blogspot.com/2013/05/tiled-map-loader-for-sfml.html" role="menuitem" tabindex="-1" title="Share to other apps">
+<svg class="svg-icon-24 touch-icon sharing-sharingOther">
+<use xlink:href="/responsive/sprite_v1_6.css.svg#ic_more_horiz_black_24dp" xmlns:xlink="http://www.w3.org/1999/xlink"></use>
+</svg>
+<span class="platform-sharing-text">Other Apps</span>
+</span>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<span class="byline post-comment-link container">
+<a class="comment-link" href="https://trederia.blogspot.com/2013/05/tiled-map-loader-for-sfml.html#comments" onclick="">
+Post a Comment
+</a>
+</span>
+</div>
+</div>
+</div>
+</article>
+</div>
+</div>
+</div></div>
+</main>
+</div>
+<footer class="footer section" id="footer" name="Footer"><div class="widget Attribution" data-version="2" id="Attribution1">
+<div class="widget-content">
+<div class="blogger">
+<a href="https://www.blogger.com/" rel="nofollow">
+<svg class="svg-icon-24">
+<use xlink:href="/responsive/sprite_v1_6.css.svg#ic_post_blogger_black_24dp" xmlns:xlink="http://www.w3.org/1999/xlink"></use>
+</svg>
+Powered by Blogger
+</a>
+</div>
+</div>
+</div></footer>
+</div>
+</div>
+<aside class="sidebar-container container sidebar-invisible" role="complementary">
+<div class="navigation">
+<svg class="svg-icon-24 touch-icon sidebar-back rtl-reversible-icon">
+<use xlink:href="/responsive/sprite_v1_6.css.svg#ic_arrow_back_black_24dp" xmlns:xlink="http://www.w3.org/1999/xlink"></use>
+</svg>
+</div>
+<div class="section" id="sidebar" name="Sidebar"><div class="widget AdSense" data-version="2" id="AdSense1">
+<div class="widget-content">
+<script async="" src="./Building SDL2 for Android with Visual Studio_files/f.txt"></script>
+<!-- trederia_sidebar_AdSense1_1x1_as -->
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5240216573551729" data-ad-host="ca-host-pub-1556223355139109" data-ad-host-channel="L0001" data-ad-slot="7208314879" data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div><div class="widget BlogArchive" data-version="2" id="BlogArchive1">
+<details class="collapsible extendable">
+<summary>
+<div class="collapsible-title">
+<h3 class="title">
+Archive
+</h3>
+<svg class="svg-icon-24 chevron-down">
+<use xlink:href="/responsive/sprite_v1_6.css.svg#ic_expand_more_black_24dp" xmlns:xlink="http://www.w3.org/1999/xlink"></use>
+</svg>
+<svg class="svg-icon-24 chevron-up">
+<use xlink:href="/responsive/sprite_v1_6.css.svg#ic_expand_less_black_24dp" xmlns:xlink="http://www.w3.org/1999/xlink"></use>
+</svg>
+</div>
+</summary>
+<div class="widget-content">
+<div id="ArchiveList">
+<div id="BlogArchive1_ArchiveList">
+<div class="first-items">
+<ul class="hierarchy">
+<li class="archivedate">
+<div class="hierarchy-title">
+<a class="post-count-link" href="https://trederia.blogspot.com/2019/">
+2019
+<span class="post-count">6</span>
+</a>
+</div>
+<div class="hierarchy-content">
+<ul class="hierarchy">
+<li class="archivedate">
+<div class="hierarchy-title">
+<a class="post-count-link" href="https://trederia.blogspot.com/2019/10/">
+October
+<span class="post-count">2</span>
+</a>
+</div>
+<div class="hierarchy-content">
+</div>
+</li>
+<li class="archivedate">
+<div class="hierarchy-title">
+<a class="post-count-link" href="https://trederia.blogspot.com/2019/09/">
+September
+<span class="post-count">4</span>
+</a>
+</div>
+<div class="hierarchy-content">
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="remaining-items">
+<ul class="hierarchy">
+<li class="archivedate">
+<div class="hierarchy-title">
+<a class="post-count-link" href="https://trederia.blogspot.com/2018/">
+2018
+<span class="post-count">5</span>
+</a>
+</div>
+<div class="hierarchy-content">
+<ul class="hierarchy">
+<li class="archivedate">
+<div class="hierarchy-title">
+<a class="post-count-link" href="https://trederia.blogspot.com/2018/09/">
+September
+<span class="post-count">2</span>
+</a>
+</div>
+<div class="hierarchy-content">
+</div>
+</li>
+<li class="archivedate">
+<div class="hierarchy-title">
+<a class="post-count-link" href="https://trederia.blogspot.com/2018/08/">
+August
+<span class="post-count">1</span>
+</a>
+</div>
+<div class="hierarchy-content">
+</div>
+</li>
+<li class="archivedate">
+<div class="hierarchy-title">
+<a class="post-count-link" href="https://trederia.blogspot.com/2018/03/">
+March
+<span class="post-count">1</span>
+</a>
+</div>
+<div class="hierarchy-content">
+</div>
+</li>
+<li class="archivedate">
+<div class="hierarchy-title">
+<a class="post-count-link" href="https://trederia.blogspot.com/2018/02/">
+February
+<span class="post-count">1</span>
+</a>
+</div>
+<div class="hierarchy-content">
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li class="archivedate">
+<div class="hierarchy-title">
+<a class="post-count-link" href="https://trederia.blogspot.com/2017/">
+2017
+<span class="post-count">8</span>
+</a>
+</div>
+<div class="hierarchy-content">
+<ul class="hierarchy">
+<li class="archivedate">
+<div class="hierarchy-title">
+<a class="post-count-link" href="https://trederia.blogspot.com/2017/08/">
+August
+<span class="post-count">1</span>
+</a>
+</div>
+<div class="hierarchy-content">
+</div>
+</li>
+<li class="archivedate">
+<div class="hierarchy-title">
+<a class="post-count-link" href="https://trederia.blogspot.com/2017/05/">
+May
+<span class="post-count">1</span>
+</a>
+</div>
+<div class="hierarchy-content">
+</div>
+</li>
+<li class="archivedate">
+<div class="hierarchy-title">
+<a class="post-count-link" href="https://trederia.blogspot.com/2017/04/">
+April
+<span class="post-count">1</span>
+</a>
+</div>
+<div class="hierarchy-content">
+</div>
+</li>
+<li class="archivedate">
+<div class="hierarchy-title">
+<a class="post-count-link" href="https://trederia.blogspot.com/2017/03/">
+March
+<span class="post-count">1</span>
+</a>
+</div>
+<div class="hierarchy-content">
+<ul class="posts hierarchy">
+<li>
+<a href="https://trederia.blogspot.com/2017/03/building-sdl2-for-android-with-visual.html">Building SDL2 for Android with Visual Studio</a>
+</li>
+</ul>
+</div>
+</li>
+<li class="archivedate">
+<div class="hierarchy-title">
+<a class="post-count-link" href="https://trederia.blogspot.com/2017/02/">
+February
+<span class="post-count">3</span>
+</a>
+</div>
+<div class="hierarchy-content">
+</div>
+</li>
+<li class="archivedate">
+<div class="hierarchy-title">
+<a class="post-count-link" href="https://trederia.blogspot.com/2017/01/">
+January
+<span class="post-count">1</span>
+</a>
+</div>
+<div class="hierarchy-content">
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li class="archivedate">
+<div class="hierarchy-title">
+<a class="post-count-link" href="https://trederia.blogspot.com/2016/">
+2016
+<span class="post-count">16</span>
+</a>
+</div>
+<div class="hierarchy-content">
+<ul class="hierarchy">
+<li class="archivedate">
+<div class="hierarchy-title">
+<a class="post-count-link" href="https://trederia.blogspot.com/2016/11/">
+November
+<span class="post-count">5</span>
+</a>
+</div>
+<div class="hierarchy-content">
+</div>
+</li>
+<li class="archivedate">
+<div class="hierarchy-title">
+<a class="post-count-link" href="https://trederia.blogspot.com/2016/09/">
+September
+<span class="post-count">1</span>
+</a>
+</div>
+<div class="hierarchy-content">
+</div>
+</li>
+<li class="archivedate">
+<div class="hierarchy-title">
+<a class="post-count-link" href="https://trederia.blogspot.com/2016/08/">
+August
+<span class="post-count">1</span>
+</a>
+</div>
+<div class="hierarchy-content">
+</div>
+</li>
+<li class="archivedate">
+<div class="hierarchy-title">
+<a class="post-count-link" href="https://trederia.blogspot.com/2016/06/">
+June
+<span class="post-count">1</span>
+</a>
+</div>
+<div class="hierarchy-content">
+</div>
+</li>
+<li class="archivedate">
+<div class="hierarchy-title">
+<a class="post-count-link" href="https://trederia.blogspot.com/2016/05/">
+May
+<span class="post-count">4</span>
+</a>
+</div>
+<div class="hierarchy-content">
+</div>
+</li>
+<li class="archivedate">
+<div class="hierarchy-title">
+<a class="post-count-link" href="https://trederia.blogspot.com/2016/04/">
+April
+<span class="post-count">1</span>
+</a>
+</div>
+<div class="hierarchy-content">
+</div>
+</li>
+<li class="archivedate">
+<div class="hierarchy-title">
+<a class="post-count-link" href="https://trederia.blogspot.com/2016/03/">
+March
+<span class="post-count">1</span>
+</a>
+</div>
+<div class="hierarchy-content">
+</div>
+</li>
+<li class="archivedate">
+<div class="hierarchy-title">
+<a class="post-count-link" href="https://trederia.blogspot.com/2016/02/">
+February
+<span class="post-count">1</span>
+</a>
+</div>
+<div class="hierarchy-content">
+</div>
+</li>
+<li class="archivedate">
+<div class="hierarchy-title">
+<a class="post-count-link" href="https://trederia.blogspot.com/2016/01/">
+January
+<span class="post-count">1</span>
+</a>
+</div>
+<div class="hierarchy-content">
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li class="archivedate">
+<div class="hierarchy-title">
+<a class="post-count-link" href="https://trederia.blogspot.com/2015/">
+2015
+<span class="post-count">7</span>
+</a>
+</div>
+<div class="hierarchy-content">
+<ul class="hierarchy">
+<li class="archivedate">
+<div class="hierarchy-title">
+<a class="post-count-link" href="https://trederia.blogspot.com/2015/08/">
+August
+<span class="post-count">2</span>
+</a>
+</div>
+<div class="hierarchy-content">
+</div>
+</li>
+<li class="archivedate">
+<div class="hierarchy-title">
+<a class="post-count-link" href="https://trederia.blogspot.com/2015/06/">
+June
+<span class="post-count">1</span>
+</a>
+</div>
+<div class="hierarchy-content">
+</div>
+</li>
+<li class="archivedate">
+<div class="hierarchy-title">
+<a class="post-count-link" href="https://trederia.blogspot.com/2015/04/">
+April
+<span class="post-count">1</span>
+</a>
+</div>
+<div class="hierarchy-content">
+</div>
+</li>
+<li class="archivedate">
+<div class="hierarchy-title">
+<a class="post-count-link" href="https://trederia.blogspot.com/2015/02/">
+February
+<span class="post-count">3</span>
+</a>
+</div>
+<div class="hierarchy-content">
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li class="archivedate">
+<div class="hierarchy-title">
+<a class="post-count-link" href="https://trederia.blogspot.com/2014/">
+2014
+<span class="post-count">11</span>
+</a>
+</div>
+<div class="hierarchy-content">
+<ul class="hierarchy">
+<li class="archivedate">
+<div class="hierarchy-title">
+<a class="post-count-link" href="https://trederia.blogspot.com/2014/09/">
+September
+<span class="post-count">4</span>
+</a>
+</div>
+<div class="hierarchy-content">
+</div>
+</li>
+<li class="archivedate">
+<div class="hierarchy-title">
+<a class="post-count-link" href="https://trederia.blogspot.com/2014/08/">
+August
+<span class="post-count">1</span>
+</a>
+</div>
+<div class="hierarchy-content">
+</div>
+</li>
+<li class="archivedate">
+<div class="hierarchy-title">
+<a class="post-count-link" href="https://trederia.blogspot.com/2014/03/">
+March
+<span class="post-count">2</span>
+</a>
+</div>
+<div class="hierarchy-content">
+</div>
+</li>
+<li class="archivedate">
+<div class="hierarchy-title">
+<a class="post-count-link" href="https://trederia.blogspot.com/2014/02/">
+February
+<span class="post-count">4</span>
+</a>
+</div>
+<div class="hierarchy-content">
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li class="archivedate">
+<div class="hierarchy-title">
+<a class="post-count-link" href="https://trederia.blogspot.com/2013/">
+2013
+<span class="post-count">26</span>
+</a>
+</div>
+<div class="hierarchy-content">
+<ul class="hierarchy">
+<li class="archivedate">
+<div class="hierarchy-title">
+<a class="post-count-link" href="https://trederia.blogspot.com/2013/12/">
+December
+<span class="post-count">2</span>
+</a>
+</div>
+<div class="hierarchy-content">
+</div>
+</li>
+<li class="archivedate">
+<div class="hierarchy-title">
+<a class="post-count-link" href="https://trederia.blogspot.com/2013/10/">
+October
+<span class="post-count">3</span>
+</a>
+</div>
+<div class="hierarchy-content">
+</div>
+</li>
+<li class="archivedate">
+<div class="hierarchy-title">
+<a class="post-count-link" href="https://trederia.blogspot.com/2013/08/">
+August
+<span class="post-count">3</span>
+</a>
+</div>
+<div class="hierarchy-content">
+</div>
+</li>
+<li class="archivedate">
+<div class="hierarchy-title">
+<a class="post-count-link" href="https://trederia.blogspot.com/2013/07/">
+July
+<span class="post-count">2</span>
+</a>
+</div>
+<div class="hierarchy-content">
+</div>
+</li>
+<li class="archivedate">
+<div class="hierarchy-title">
+<a class="post-count-link" href="https://trederia.blogspot.com/2013/06/">
+June
+<span class="post-count">1</span>
+</a>
+</div>
+<div class="hierarchy-content">
+</div>
+</li>
+<li class="archivedate">
+<div class="hierarchy-title">
+<a class="post-count-link" href="https://trederia.blogspot.com/2013/05/">
+May
+<span class="post-count">4</span>
+</a>
+</div>
+<div class="hierarchy-content">
+</div>
+</li>
+<li class="archivedate">
+<div class="hierarchy-title">
+<a class="post-count-link" href="https://trederia.blogspot.com/2013/03/">
+March
+<span class="post-count">5</span>
+</a>
+</div>
+<div class="hierarchy-content">
+</div>
+</li>
+<li class="archivedate">
+<div class="hierarchy-title">
+<a class="post-count-link" href="https://trederia.blogspot.com/2013/02/">
+February
+<span class="post-count">3</span>
+</a>
+</div>
+<div class="hierarchy-content">
+</div>
+</li>
+<li class="archivedate">
+<div class="hierarchy-title">
+<a class="post-count-link" href="https://trederia.blogspot.com/2013/01/">
+January
+<span class="post-count">3</span>
+</a>
+</div>
+<div class="hierarchy-content">
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<span class="show-more flat-button">Show more</span>
+<span class="show-less hidden flat-button">Show less</span>
+</div>
+</div>
+</div>
+</details>
+</div><div class="widget LinkList" data-version="2" id="LinkList1">
+<h3 class="title">
+My other stuff
+</h3>
+<div class="widget-content">
+<ul>
+<li><a href="https://github.com/fallahn/xygine">xygine - Open Source 2D Game framework</a></li>
+<li><a href="https://twitter.com/TrederiaGames">Twitter</a></li>
+<li><a href="http://fallahn.itch.io/">My Games on itch.io</a></li>
+<li><a href="https://github.com/fallahn/tmxlite">tmxlite Tiled map parser</a></li>
+<li><a href="https://www.youtube.com/user/muCFSforce47?feature=mhee">My YouTube Channel</a></li>
+</ul>
+</div>
+</div><div class="widget Label" data-version="2" id="Label1">
+<details class="collapsible extendable">
+<summary>
+<div class="collapsible-title">
+<h3 class="title">
+Labels
+</h3>
+<svg class="svg-icon-24 chevron-down">
+<use xlink:href="/responsive/sprite_v1_6.css.svg#ic_expand_more_black_24dp" xmlns:xlink="http://www.w3.org/1999/xlink"></use>
+</svg>
+<svg class="svg-icon-24 chevron-up">
+<use xlink:href="/responsive/sprite_v1_6.css.svg#ic_expand_less_black_24dp" xmlns:xlink="http://www.w3.org/1999/xlink"></use>
+</svg>
+</div>
+</summary>
+<div class="widget-content list-label-widget-content">
+<div class="first-items">
+<ul>
+<li><a class="label-name" href="https://trederia.blogspot.com/search/label/2d">2d<span class="label-count">35</span></a></li>
+<li><a class="label-name" href="https://trederia.blogspot.com/search/label/ambient%20occlusion">ambient occlusion<span class="label-count">1</span></a></li>
+<li><a class="label-name" href="https://trederia.blogspot.com/search/label/Android">Android<span class="label-count">8</span></a></li>
+<li><a class="label-name" href="https://trederia.blogspot.com/search/label/Arduino">Arduino<span class="label-count">3</span></a></li>
+<li><a class="label-name" href="https://trederia.blogspot.com/search/label/AVR">AVR<span class="label-count">6</span></a></li>
+<li><a class="label-name" href="https://trederia.blogspot.com/search/label/box2D">box2D<span class="label-count">3</span></a></li>
+<li><a class="label-name" href="https://trederia.blogspot.com/search/label/C">C<span class="label-count">3</span></a></li>
+<li><a class="label-name" href="https://trederia.blogspot.com/search/label/C%2B%2B">C++<span class="label-count">69</span></a></li>
+<li><a class="label-name" href="https://trederia.blogspot.com/search/label/C%2B%2B11">C++11<span class="label-count">26</span></a></li>
+<li><a class="label-name" href="https://trederia.blogspot.com/search/label/case">case<span class="label-count">3</span></a></li>
+</ul>
+</div>
+<div class="remaining-items">
+<ul>
+<li><a class="label-name" href="https://trederia.blogspot.com/search/label/chat">chat<span class="label-count">5</span></a></li>
+<li><a class="label-name" href="https://trederia.blogspot.com/search/label/CNC">CNC<span class="label-count">3</span></a></li>
+<li><a class="label-name" href="https://trederia.blogspot.com/search/label/code">code<span class="label-count">53</span></a></li>
+<li><a class="label-name" href="https://trederia.blogspot.com/search/label/collision%20detection">collision detection<span class="label-count">5</span></a></li>
+<li><a class="label-name" href="https://trederia.blogspot.com/search/label/COM%20port">COM port<span class="label-count">3</span></a></li>
+<li><a class="label-name" href="https://trederia.blogspot.com/search/label/crogine">crogine<span class="label-count">1</span></a></li>
+<li><a class="label-name" href="https://trederia.blogspot.com/search/label/destructors">destructors<span class="label-count">1</span></a></li>
+<li><a class="label-name" href="https://trederia.blogspot.com/search/label/electronics">electronics<span class="label-count">6</span></a></li>
+<li><a class="label-name" href="https://trederia.blogspot.com/search/label/embedded">embedded<span class="label-count">6</span></a></li>
+<li><a class="label-name" href="https://trederia.blogspot.com/search/label/Emulation">Emulation<span class="label-count">1</span></a></li>
+<li><a class="label-name" href="https://trederia.blogspot.com/search/label/game%20programming">game programming<span class="label-count">46</span></a></li>
+<li><a class="label-name" href="https://trederia.blogspot.com/search/label/gaussian%20blur">gaussian blur<span class="label-count">1</span></a></li>
+<li><a class="label-name" href="https://trederia.blogspot.com/search/label/GCC">GCC<span class="label-count">7</span></a></li>
+<li><a class="label-name" href="https://trederia.blogspot.com/search/label/GLES">GLES<span class="label-count">5</span></a></li>
+<li><a class="label-name" href="https://trederia.blogspot.com/search/label/GLSL">GLSL<span class="label-count">20</span></a></li>
+<li><a class="label-name" href="https://trederia.blogspot.com/search/label/iOS">iOS<span class="label-count">5</span></a></li>
+<li><a class="label-name" href="https://trederia.blogspot.com/search/label/isometric">isometric<span class="label-count">11</span></a></li>
+<li><a class="label-name" href="https://trederia.blogspot.com/search/label/Linux">Linux<span class="label-count">22</span></a></li>
+<li><a class="label-name" href="https://trederia.blogspot.com/search/label/macOS">macOS<span class="label-count">2</span></a></li>
+<li><a class="label-name" href="https://trederia.blogspot.com/search/label/MIDI">MIDI<span class="label-count">3</span></a></li>
+<li><a class="label-name" href="https://trederia.blogspot.com/search/label/network%20programming">network programming<span class="label-count">4</span></a></li>
+<li><a class="label-name" href="https://trederia.blogspot.com/search/label/orthogonal">orthogonal<span class="label-count">15</span></a></li>
+<li><a class="label-name" href="https://trederia.blogspot.com/search/label/physics">physics<span class="label-count">4</span></a></li>
+<li><a class="label-name" href="https://trederia.blogspot.com/search/label/Portal%202">Portal 2<span class="label-count">1</span></a></li>
+<li><a class="label-name" href="https://trederia.blogspot.com/search/label/procedural%20mapping">procedural mapping<span class="label-count">5</span></a></li>
+<li><a class="label-name" href="https://trederia.blogspot.com/search/label/programming">programming<span class="label-count">58</span></a></li>
+<li><a class="label-name" href="https://trederia.blogspot.com/search/label/Raspberry%20Pi">Raspberry Pi<span class="label-count">1</span></a></li>
+<li><a class="label-name" href="https://trederia.blogspot.com/search/label/Raspi">Raspi<span class="label-count">1</span></a></li>
+<li><a class="label-name" href="https://trederia.blogspot.com/search/label/rope%20physics">rope physics<span class="label-count">2</span></a></li>
+<li><a class="label-name" href="https://trederia.blogspot.com/search/label/router">router<span class="label-count">2</span></a></li>
+<li><a class="label-name" href="https://trederia.blogspot.com/search/label/RS232">RS232<span class="label-count">3</span></a></li>
+<li><a class="label-name" href="https://trederia.blogspot.com/search/label/SDL2">SDL2<span class="label-count">3</span></a></li>
+<li><a class="label-name" href="https://trederia.blogspot.com/search/label/serial">serial<span class="label-count">3</span></a></li>
+<li><a class="label-name" href="https://trederia.blogspot.com/search/label/SFML">SFML<span class="label-count">63</span></a></li>
+<li><a class="label-name" href="https://trederia.blogspot.com/search/label/shaders">shaders<span class="label-count">20</span></a></li>
+<li><a class="label-name" href="https://trederia.blogspot.com/search/label/smart%20pointers">smart pointers<span class="label-count">2</span></a></li>
+<li><a class="label-name" href="https://trederia.blogspot.com/search/label/sockets">sockets<span class="label-count">2</span></a></li>
+<li><a class="label-name" href="https://trederia.blogspot.com/search/label/threading">threading<span class="label-count">3</span></a></li>
+<li><a class="label-name" href="https://trederia.blogspot.com/search/label/tilemap">tilemap<span class="label-count">26</span></a></li>
+<li><a class="label-name" href="https://trederia.blogspot.com/search/label/Tileset">Tileset<span class="label-count">25</span></a></li>
+<li><a class="label-name" href="https://trederia.blogspot.com/search/label/transform%20matrix">transform matrix<span class="label-count">1</span></a></li>
+<li><a class="label-name" href="https://trederia.blogspot.com/search/label/Visual%20Studio">Visual Studio<span class="label-count">2</span></a></li>
+<li><a class="label-name" href="https://trederia.blogspot.com/search/label/WinAPI">WinAPI<span class="label-count">2</span></a></li>
+<li><a class="label-name" href="https://trederia.blogspot.com/search/label/Windows">Windows<span class="label-count">21</span></a></li>
+<li><a class="label-name" href="https://trederia.blogspot.com/search/label/wrapper">wrapper<span class="label-count">3</span></a></li>
+<li><a class="label-name" href="https://trederia.blogspot.com/search/label/xygine">xygine<span class="label-count">23</span></a></li>
+</ul>
+</div>
+<span class="show-more flat-button">Show more</span>
+<span class="show-less hidden flat-button">Show less</span>
+</div>
+</details>
+</div><div class="widget Subscribe" data-version="2" id="Subscribe1">
+<div class="widget-content">
+<div class="subscribe-wrapper subscribe-type-POST">
+<div class="subscribe expanded subscribe-type-POST" id="SW_READER_LIST_Subscribe1POST" style="display:none;">
+<div class="top">
+<span class="inner" onclick="return(_SW_toggleReaderList(event, &quot;Subscribe1POST&quot;));">
+<img class="subscribe-dropdown-arrow" src="./Building SDL2 for Android with Visual Studio_files/arrow_dropdown.gif">
+<img align="absmiddle" alt="" border="0" class="feed-icon" src="./Building SDL2 for Android with Visual Studio_files/icon_feed12.png">
+Posts
+</span>
+<div class="feed-reader-links">
+<a class="feed-reader-link" href="https://www.netvibes.com/subscribe.php?url=https%3A%2F%2Ftrederia.blogspot.com%2Ffeeds%2Fposts%2Fdefault" target="_blank">
+<img src="./Building SDL2 for Android with Visual Studio_files/subscribe-netvibes.png">
+</a>
+<a class="feed-reader-link" href="https://add.my.yahoo.com/content?url=https%3A%2F%2Ftrederia.blogspot.com%2Ffeeds%2Fposts%2Fdefault" target="_blank">
+<img src="./Building SDL2 for Android with Visual Studio_files/subscribe-yahoo.png">
+</a>
+<a class="feed-reader-link" href="https://trederia.blogspot.com/feeds/posts/default" target="_blank">
+<img align="absmiddle" class="feed-icon" src="./Building SDL2 for Android with Visual Studio_files/icon_feed12.png">
+              Atom
+            </a>
+</div>
+</div>
+<div class="bottom"></div>
+</div>
+<div class="subscribe" id="SW_READER_LIST_CLOSED_Subscribe1POST" onclick="return(_SW_toggleReaderList(event, &quot;Subscribe1POST&quot;));">
+<div class="top">
+<span class="inner">
+<img class="subscribe-dropdown-arrow" src="./Building SDL2 for Android with Visual Studio_files/arrow_dropdown.gif">
+<span onclick="return(_SW_toggleReaderList(event, &quot;Subscribe1POST&quot;));">
+<img align="absmiddle" alt="" border="0" class="feed-icon" src="./Building SDL2 for Android with Visual Studio_files/icon_feed12.png">
+Posts
+</span>
+</span>
+</div>
+<div class="bottom"></div>
+</div>
+</div>
+<div class="subscribe-wrapper subscribe-type-PER_POST">
+<div class="subscribe expanded subscribe-type-PER_POST" id="SW_READER_LIST_Subscribe1PER_POST" style="display:none;">
+<div class="top">
+<span class="inner" onclick="return(_SW_toggleReaderList(event, &quot;Subscribe1PER_POST&quot;));">
+<img class="subscribe-dropdown-arrow" src="./Building SDL2 for Android with Visual Studio_files/arrow_dropdown.gif">
+<img align="absmiddle" alt="" border="0" class="feed-icon" src="./Building SDL2 for Android with Visual Studio_files/icon_feed12.png">
+Comments
+</span>
+<div class="feed-reader-links">
+<a class="feed-reader-link" href="https://www.netvibes.com/subscribe.php?url=https%3A%2F%2Ftrederia.blogspot.com%2Ffeeds%2F5409220101471293686%2Fcomments%2Fdefault" target="_blank">
+<img src="./Building SDL2 for Android with Visual Studio_files/subscribe-netvibes.png">
+</a>
+<a class="feed-reader-link" href="https://add.my.yahoo.com/content?url=https%3A%2F%2Ftrederia.blogspot.com%2Ffeeds%2F5409220101471293686%2Fcomments%2Fdefault" target="_blank">
+<img src="./Building SDL2 for Android with Visual Studio_files/subscribe-yahoo.png">
+</a>
+<a class="feed-reader-link" href="https://trederia.blogspot.com/feeds/5409220101471293686/comments/default" target="_blank">
+<img align="absmiddle" class="feed-icon" src="./Building SDL2 for Android with Visual Studio_files/icon_feed12.png">
+              Atom
+            </a>
+</div>
+</div>
+<div class="bottom"></div>
+</div>
+<div class="subscribe" id="SW_READER_LIST_CLOSED_Subscribe1PER_POST" onclick="return(_SW_toggleReaderList(event, &quot;Subscribe1PER_POST&quot;));">
+<div class="top">
+<span class="inner">
+<img class="subscribe-dropdown-arrow" src="./Building SDL2 for Android with Visual Studio_files/arrow_dropdown.gif">
+<span onclick="return(_SW_toggleReaderList(event, &quot;Subscribe1PER_POST&quot;));">
+<img align="absmiddle" alt="" border="0" class="feed-icon" src="./Building SDL2 for Android with Visual Studio_files/icon_feed12.png">
+Comments
+</span>
+</span>
+</div>
+<div class="bottom"></div>
+</div>
+</div>
+<div style="clear:both"></div>
+</div>
+</div><div class="widget HTML" data-version="2" id="HTML1">
+<h3 class="title">
+Twitter Feed
+</h3>
+<div class="widget-content">
+<iframe id="twitter-widget-0" scrolling="no" frameborder="0" allowtransparency="true" allowfullscreen="true" class="twitter-timeline twitter-timeline-rendered" style="position: static; visibility: visible; display: inline-block; width: 100%; padding: 0px; border: none; max-width: 100%; min-width: 180px; margin-top: 0px; margin-bottom: 0px; min-height: 200px; height: 7154.47px;" data-widget-id="profile:TrederiaGames" title="Twitter Timeline" src="./Building SDL2 for Android with Visual Studio_files/saved_resource.html"></iframe> <script async="" src="./Building SDL2 for Android with Visual Studio_files/widgets.js.download" charset="utf-8"></script>
+</div>
+</div><div class="widget Profile" data-version="2" id="Profile1">
+<div class="widget-content individual">
+<a href="https://www.blogger.com/profile/10214798883054643328" rel="nofollow">
+<div class="default-avatar-wrapper">
+<svg class="svg-icon-24 avatar-icon">
+<use xlink:href="/responsive/sprite_v1_6.css.svg#ic_person_black_24dp" xmlns:xlink="http://www.w3.org/1999/xlink"></use>
+</svg>
+</div>
+</a>
+<div class="profile-info">
+<dl class="profile-datablock">
+<dt class="profile-data">
+<a class="profile-link g-profile" href="https://www.blogger.com/profile/10214798883054643328" rel="author nofollow">
+Matt Styles
+</a>
+</dt>
+</dl>
+<a class="profile-link" href="https://www.blogger.com/profile/10214798883054643328" rel="author">
+Visit profile
+</a>
+</div>
+</div>
+</div><div class="widget ReportAbuse" data-version="2" id="ReportAbuse1">
+<h3 class="title">
+<a class="report_abuse" href="https://www.blogger.com/go/report-abuse" rel="noopener nofollow" target="_blank">
+Report Abuse
+</a>
+</h3>
+</div></div>
+</aside>
+<script type="text/javascript" src="./Building SDL2 for Android with Visual Studio_files/2200089161-fancy_compiled.js.download" async="true"></script>
+
+<script type="text/javascript" src="./Building SDL2 for Android with Visual Studio_files/4182860900-widgets.js.download"></script>
+<script type="text/javascript">
+window['__wavt'] = 'AOuZoY6OE0l2JlD5DkpE98JonpL8CMB0_g:1626547294412';_WidgetManager._Init('//www.blogger.com/rearrange?blogID\x3d6421765335659381070','//trederia.blogspot.com/2017/03/building-sdl2-for-android-with-visual.html','6421765335659381070');
+_WidgetManager._SetDataContext([{'name': 'blog', 'data': {'blogId': '6421765335659381070', 'title': 'Trederia', 'url': 'https://trederia.blogspot.com/2017/03/building-sdl2-for-android-with-visual.html', 'canonicalUrl': 'https://trederia.blogspot.com/2017/03/building-sdl2-for-android-with-visual.html', 'homepageUrl': 'https://trederia.blogspot.com/', 'searchUrl': 'https://trederia.blogspot.com/search', 'canonicalHomepageUrl': 'https://trederia.blogspot.com/', 'blogspotFaviconUrl': 'https://trederia.blogspot.com/favicon.ico', 'bloggerUrl': 'https://www.blogger.com', 'hasCustomDomain': false, 'httpsEnabled': true, 'enabledCommentProfileImages': true, 'gPlusViewType': 'FILTERED_POSTMOD', 'adultContent': false, 'analyticsAccountNumber': '', 'encoding': 'UTF-8', 'locale': 'en-GB', 'localeUnderscoreDelimited': 'en_gb', 'languageDirection': 'ltr', 'isPrivate': false, 'isMobile': false, 'isMobileRequest': false, 'mobileClass': '', 'isPrivateBlog': false, 'isDynamicViewsAvailable': true, 'feedLinks': '\x3clink rel\x3d\x22alternate\x22 type\x3d\x22application/atom+xml\x22 title\x3d\x22Trederia - Atom\x22 href\x3d\x22https://trederia.blogspot.com/feeds/posts/default\x22 /\x3e\n\x3clink rel\x3d\x22alternate\x22 type\x3d\x22application/rss+xml\x22 title\x3d\x22Trederia - RSS\x22 href\x3d\x22https://trederia.blogspot.com/feeds/posts/default?alt\x3drss\x22 /\x3e\n\x3clink rel\x3d\x22service.post\x22 type\x3d\x22application/atom+xml\x22 title\x3d\x22Trederia - Atom\x22 href\x3d\x22https://www.blogger.com/feeds/6421765335659381070/posts/default\x22 /\x3e\n\n\x3clink rel\x3d\x22alternate\x22 type\x3d\x22application/atom+xml\x22 title\x3d\x22Trederia - Atom\x22 href\x3d\x22https://trederia.blogspot.com/feeds/5409220101471293686/comments/default\x22 /\x3e\n', 'meTag': '', 'adsenseClientId': 'ca-pub-5240216573551729', 'adsenseHostId': 'ca-host-pub-1556223355139109', 'adsenseHasAds': true, 'adsenseAutoAds': false, 'view': '', 'dynamicViewsCommentsSrc': '//www.blogblog.com/dynamicviews/4224c15c4e7c9321/js/comments.js', 'dynamicViewsScriptSrc': '//www.blogblog.com/dynamicviews/638407af81660234', 'plusOneApiSrc': 'https://apis.google.com/js/plusone.js', 'disableGComments': true, 'sharing': {'platforms': [{'name': 'Get link', 'key': 'link', 'shareMessage': 'Get link', 'target': ''}, {'name': 'Facebook', 'key': 'facebook', 'shareMessage': 'Share to Facebook', 'target': 'facebook'}, {'name': 'BlogThis!', 'key': 'blogThis', 'shareMessage': 'BlogThis!', 'target': 'blog'}, {'name': 'Twitter', 'key': 'twitter', 'shareMessage': 'Share to Twitter', 'target': 'twitter'}, {'name': 'Pinterest', 'key': 'pinterest', 'shareMessage': 'Share to Pinterest', 'target': 'pinterest'}, {'name': 'Email', 'key': 'email', 'shareMessage': 'Email', 'target': 'email'}], 'disableGooglePlus': true, 'googlePlusShareButtonWidth': 300, 'googlePlusBootstrap': '\x3cscript type\x3d\x22text/javascript\x22\x3ewindow.___gcfg \x3d {\x27lang\x27: \x27en_GB\x27};\x3c/script\x3e'}, 'hasCustomJumpLinkMessage': false, 'jumpLinkMessage': 'Read more', 'pageType': 'item', 'postId': '5409220101471293686', 'postImageThumbnailUrl': 'https://1.bp.blogspot.com/-g5e-30OBwxE/WMvGF8_DIwI/AAAAAAAAB00/UcF59iqrIuMy_ByLw0rbSvJIL776exjuQCEw/s72-c/new_sdl.png', 'postImageUrl': 'https://1.bp.blogspot.com/-g5e-30OBwxE/WMvGF8_DIwI/AAAAAAAAB00/UcF59iqrIuMy_ByLw0rbSvJIL776exjuQCEw/s320/new_sdl.png', 'pageName': 'Building SDL2 for Android with Visual Studio', 'pageTitle': 'Trederia: Building SDL2 for Android with Visual Studio', 'metaDescription': 'Using SDL2 as an Android library for native development in Microsoft Visual Studio'}}, {'name': 'features', 'data': {'sharing_get_link_dialog': 'true', 'sharing_native': 'false'}}, {'name': 'messages', 'data': {'edit': 'Edit', 'linkCopiedToClipboard': 'Link copied to clipboard', 'ok': 'Ok', 'postLink': 'Post link'}}, {'name': 'template', 'data': {'name': 'Soho', 'localizedName': 'Soho', 'isResponsive': true, 'isAlternateRendering': false, 'isCustom': false, 'variant': 'fancy_light', 'variantId': 'fancy_light'}}, {'name': 'view', 'data': {'classic': {'name': 'classic', 'url': '?view\x3dclassic'}, 'flipcard': {'name': 'flipcard', 'url': '?view\x3dflipcard'}, 'magazine': {'name': 'magazine', 'url': '?view\x3dmagazine'}, 'mosaic': {'name': 'mosaic', 'url': '?view\x3dmosaic'}, 'sidebar': {'name': 'sidebar', 'url': '?view\x3dsidebar'}, 'snapshot': {'name': 'snapshot', 'url': '?view\x3dsnapshot'}, 'timeslide': {'name': 'timeslide', 'url': '?view\x3dtimeslide'}, 'isMobile': false, 'title': 'Building SDL2 for Android with Visual Studio', 'description': 'Using SDL2 as an Android library for native development in Microsoft Visual Studio', 'featuredImage': 'https://1.bp.blogspot.com/-g5e-30OBwxE/WMvGF8_DIwI/AAAAAAAAB00/UcF59iqrIuMy_ByLw0rbSvJIL776exjuQCEw/s320/new_sdl.png', 'url': 'https://trederia.blogspot.com/2017/03/building-sdl2-for-android-with-visual.html', 'type': 'item', 'isSingleItem': true, 'isMultipleItems': false, 'isError': false, 'isPage': false, 'isPost': true, 'isHomepage': false, 'isArchive': false, 'isLabelSearch': false, 'postId': 5409220101471293686}}, {'name': 'widgets', 'data': [{'title': 'Search This Blog', 'type': 'BlogSearch', 'sectionId': 'search_top', 'id': 'BlogSearch1'}, {'title': 'Trederia (Header)', 'type': 'Header', 'sectionId': 'header', 'id': 'Header1'}, {'title': 'Recent Updates', 'type': 'FeaturedPost', 'sectionId': 'page_body', 'id': 'FeaturedPost1', 'postId': '2055472024543792631'}, {'title': 'Blog Posts', 'type': 'Blog', 'sectionId': 'page_body', 'id': 'Blog1', 'posts': [{'id': '5409220101471293686', 'title': 'Building SDL2 for Android with Visual Studio', 'featuredImage': 'https://1.bp.blogspot.com/-g5e-30OBwxE/WMvGF8_DIwI/AAAAAAAAB00/UcF59iqrIuMy_ByLw0rbSvJIL776exjuQCEw/s320/new_sdl.png', 'showInlineAds': false}], 'headerByline': {'regionName': 'header1', 'items': [{'name': 'timestamp', 'label': ''}]}, 'footerBylines': [{'regionName': 'footer1', 'items': [{'name': 'share', 'label': ''}, {'name': 'comments', 'label': 'comments'}, {'name': 'icons', 'label': ''}]}, {'regionName': 'footer2', 'items': [{'name': 'labels', 'label': 'Labels:'}]}, {'regionName': 'footer3', 'items': [{'name': 'location', 'label': 'Location:'}]}], 'allBylineItems': [{'name': 'timestamp', 'label': ''}, {'name': 'share', 'label': ''}, {'name': 'comments', 'label': 'comments'}, {'name': 'icons', 'label': ''}, {'name': 'labels', 'label': 'Labels:'}, {'name': 'location', 'label': 'Location:'}]}, {'title': '', 'type': 'PopularPosts', 'sectionId': 'page_body', 'id': 'PopularPosts1', 'posts': [{'title': 'Building SDL2 for Android with Visual Studio', 'id': 5409220101471293686}, {'title': 'Tiled Map Loader for SFML', 'id': 3853266761968901272}]}, {'type': 'Attribution', 'sectionId': 'footer', 'id': 'Attribution1'}, {'type': 'AdSense', 'sectionId': 'sidebar', 'id': 'AdSense1'}, {'title': '', 'type': 'BlogArchive', 'sectionId': 'sidebar', 'id': 'BlogArchive1'}, {'title': 'My other stuff', 'type': 'LinkList', 'sectionId': 'sidebar', 'id': 'LinkList1'}, {'title': 'Labels', 'type': 'Label', 'sectionId': 'sidebar', 'id': 'Label1'}, {'title': '', 'type': 'Subscribe', 'sectionId': 'sidebar', 'id': 'Subscribe1'}, {'title': 'Twitter Feed', 'type': 'HTML', 'sectionId': 'sidebar', 'id': 'HTML1'}, {'title': 'About Me', 'type': 'Profile', 'sectionId': 'sidebar', 'id': 'Profile1'}, {'title': '', 'type': 'ReportAbuse', 'sectionId': 'sidebar', 'id': 'ReportAbuse1'}]}]);
+_WidgetManager._RegisterWidget('_BlogSearchView', new _WidgetInfo('BlogSearch1', 'search_top', document.getElementById('BlogSearch1'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_HeaderView', new _WidgetInfo('Header1', 'header', document.getElementById('Header1'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_FeaturedPostView', new _WidgetInfo('FeaturedPost1', 'page_body', document.getElementById('FeaturedPost1'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_BlogView', new _WidgetInfo('Blog1', 'page_body', document.getElementById('Blog1'), {'cmtInteractionsEnabled': false, 'lightboxEnabled': true, 'lightboxModuleUrl': 'https://www.blogger.com/static/v1/jsbin/1847788191-lbx__en_gb.js', 'lightboxCssUrl': 'https://www.blogger.com/static/v1/v-css/1050234869-lightbox_bundle.css'}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_PopularPostsView', new _WidgetInfo('PopularPosts1', 'page_body', document.getElementById('PopularPosts1'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_AttributionView', new _WidgetInfo('Attribution1', 'footer', document.getElementById('Attribution1'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_AdSenseView', new _WidgetInfo('AdSense1', 'sidebar', document.getElementById('AdSense1'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_BlogArchiveView', new _WidgetInfo('BlogArchive1', 'sidebar', document.getElementById('BlogArchive1'), {'languageDirection': 'ltr', 'loadingMessage': 'Loading\x26hellip;'}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_LinkListView', new _WidgetInfo('LinkList1', 'sidebar', document.getElementById('LinkList1'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_LabelView', new _WidgetInfo('Label1', 'sidebar', document.getElementById('Label1'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_SubscribeView', new _WidgetInfo('Subscribe1', 'sidebar', document.getElementById('Subscribe1'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_HTMLView', new _WidgetInfo('HTML1', 'sidebar', document.getElementById('HTML1'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_ProfileView', new _WidgetInfo('Profile1', 'sidebar', document.getElementById('Profile1'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_ReportAbuseView', new _WidgetInfo('ReportAbuse1', 'sidebar', document.getElementById('ReportAbuse1'), {}, 'displayModeFull'));
+</script>
+
+<iframe scrolling="no" frameborder="0" allowtransparency="true" src="./Building SDL2 for Android with Visual Studio_files/widget_iframe.06c6ee58c3810956b7509218508c7b56.html" title="Twitter settings iframe" style="display: none;"></iframe><div class="dim-overlay hidden" id="subscribe-dim-overlay"></div><div class="dim-overlay hidden"></div><link type="text/css" rel="stylesheet" href="./Building SDL2 for Android with Visual Studio_files/1050234869-lightbox_bundle.css"><script type="text/javascript" src="./Building SDL2 for Android with Visual Studio_files/1847788191-lbx__en_gb.js.download"></script><iframe id="rufous-sandbox" scrolling="no" frameborder="0" allowtransparency="true" allowfullscreen="true" style="position: absolute; visibility: hidden; display: none; width: 0px; height: 0px; padding: 0px; border: none;" title="Twitter analytics iframe" src="./Building SDL2 for Android with Visual Studio_files/saved_resource(1).html"></iframe><header class="centered-top-container sticky animating" role="banner" style="transform: translate3d(0px, 0px, 0px); opacity: 1;">
+<div class="centered-top">
+<div class="back-button-container">
+<a href="https://trederia.blogspot.com/">
+<svg class="svg-icon-24 touch-icon back-button rtl-reversible-icon">
+<use xlink:href="/responsive/sprite_v1_6.css.svg#ic_arrow_back_black_24dp" xmlns:xlink="http://www.w3.org/1999/xlink"></use>
+</svg>
+</a>
+</div>
+<div class="search">
+<button aria-label="Search" class="search-expand touch-icon-button">
+<div class="search-expand-text">Search</div>
+<svg class="svg-icon-24 touch-icon search-expand-icon">
+<use xlink:href="/responsive/sprite_v1_6.css.svg#ic_search_black_24dp" xmlns:xlink="http://www.w3.org/1999/xlink"></use>
+</svg>
+</button>
+<div class="section" id="search_top" name="Search (Top)"><div class="widget BlogSearch" data-version="2" id="BlogSearch1">
+<h3 class="title">
+Search This Blog
+</h3>
+<div class="widget-content" role="search">
+<form action="https://trederia.blogspot.com/search" target="_top">
+<div class="search-input">
+<input aria-label="Search this blog" autocomplete="off" name="q" placeholder="Search this blog" value="">
+</div>
+<label>
+<input type="submit">
+<svg class="svg-icon-24 touch-icon search-icon">
+<use xlink:href="/responsive/sprite_v1_6.css.svg#ic_search_black_24dp" xmlns:xlink="http://www.w3.org/1999/xlink"></use>
+</svg>
+</label>
+</form>
+</div>
+</div></div>
+<div class="dim-overlay hidden"></div></div>
+<div class="blog-name">
+<div class="section" id="header" name="Header"><div class="widget Header" data-version="2" id="Header1">
+<div class="header-widget">
+<div>
+<h1>
+<a href="https://trederia.blogspot.com/">
+Trederia
+</a>
+</h1>
+</div>
+<p>
+Reflecting upon my adventures in code
+</p>
+</div>
+</div></div>
+<nav role="navigation">
+<div class="no-items section" id="page_list_top" name="Page list (top)">
+</div>
+</nav>
+</div>
+</div>
+</header></body></html>

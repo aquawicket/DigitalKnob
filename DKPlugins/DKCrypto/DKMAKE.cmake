@@ -1,0 +1,3 @@
+DKDEPEND(cryptopp)
+
+DKPLUGIN(DKCrypto)

@@ -1,0 +1,1077 @@
+if(DK_PROCESS_INCLUDED)
+  return()
+endif()
+set(DK_PROCESS_INCLUDED true)
+#file(REMOVE ${ANDROIDNDK}/)
+
+include(DKCMake/FUNCTIONS.cmake)
+#DELETE_CACHE()
+include(DKCMake/OPTIONS.cmake)
+include(DKCMake/DISABLED.cmake)
+get_filename_component(APP_NAME ${DKPROJECT} NAME)
+string(REPLACE " " "_" APP_NAME ${APP_NAME})
+
+# Generate the apps CMakeLists.txt file
+DKSET(APP_CMAKEFILE "#Generated File: any changes will be overwritten")
+DKSET(APP_CMAKEFILE "${APP_CMAKEFILE}CMAKE_MINIMUM_REQUIRED(VERSION 3.4)")
+DKSET(APP_CMAKEFILE "${APP_CMAKEFILE}CMAKE_POLICY(SET CMP0054 NEW)")
+DKSET(APP_CMAKEFILE "${APP_CMAKEFILE}set(CMAKE_CXX_STANDARD 17)")
+DKSET(APP_CMAKEFILE "${APP_CMAKEFILE}PROJECT(${APP_NAME})")
+
+
+message(STATUS "\n\n")
+message(STATUS "##############################################")
+message(STATUS "###############  DigitalKnob  ################")
+message(STATUS "##############################################")
+message(STATUS "\n")
+message(STATUS "###########  HOST SYSTEM VARIABLES  ##########")
+##message(STATUS "CMAKE_HOST_SYSTEM:             ${CMAKE_HOST_SYSTEM}")
+message(STATUS "CMAKE_HOST_SYSTEM_NAME:        ${CMAKE_HOST_SYSTEM_NAME}")
+message(STATUS "CMAKE_HOST_SYSTEM_VERSION:     ${CMAKE_HOST_SYSTEM_VERSION}")
+message(STATUS "CMAKE_HOST_SYSTEM_PROCESSOR:   ${CMAKE_HOST_SYSTEM_PROCESSOR}")
+message(STATUS "CMAKE_LIBRARY_ARCHITECTURE:    ${CMAKE_LIBRARY_ARCHITECTURE}")
+message(STATUS "ENV(USERNAME):                 $ENV{USERNAME}")
+message(STATUS "DIGITALKNOB:                   ${DIGITALKNOB}")
+message(STATUS "3RDPARTY:                      ${3RDPARTY}")
+message(STATUS "DKPLUGINS:                     ${DKPLUGINS}")
+message(STATUS "\n")
+message(STATUS "#############  PROJECT VARIABLES  ############")
+message(STATUS "APP_NAME:         ${APP_NAME}")            ### APP_NAME is set to the App folder name
+message(STATUS "DKPROJECT:        ${DKPROJECT}")
+message(STATUS "CMAKE_BINARY_DIR: ${CMAKE_BINARY_DIR}")
+message(STATUS "DEBUG_DIR:        ${DEBUG_DIR}")
+message(STATUS "RELEASE_DIR:      ${RELEASE_DIR}")
+message(STATUS "CMAKE_GENERATOR:  ${CMAKE_GENERATOR}")
+message(STATUS "OS:               ${OS}")
+message(STATUS "DEBUG:            ${DEBUG}")
+message(STATUS "RELEASE:          ${RELEASE}")
+message(STATUS "BUILD:            ${BUILD}")
+message(STATUS "REBUILD:          ${REBUILD}")
+message(STATUS "REBUILDALL:       ${REBUILDALL}")
+message(STATUS "LIB_TYPE:         ${LIB_TYPE}")
+message(STATUS "OPENGL2:          ${OPENGL2}")
+message(STATUS "USE_SHADERS:      ${USE_SHADERS}")
+message(STATUS "DKCEF:            ${DKCEF}")
+message(STATUS "WIN:              ${WIN}")
+message(STATUS "WIN_32:           ${WIN_32}")
+message(STATUS "WIN_64:           ${WIN_64}")
+message(STATUS "MAC:              ${MAC}")
+message(STATUS "MAC_32:           ${MAC_32}")
+message(STATUS "MAC_64:           ${MAC_64}")
+message(STATUS "IOS:              ${IOS}")
+message(STATUS "IOS_32:           ${IOS_32}")
+message(STATUS "IOS_64:           ${IOS_64}")
+message(STATUS "IOSSIM:           ${IOSSIM}")
+message(STATUS "IOSSIM_32:        ${IOSSIM_32}")
+message(STATUS "IOSSIM_64:        ${IOSSIM_64}")
+message(STATUS "LINUX:            ${LINUX}")
+message(STATUS "LINUX_32:         ${LINUX_32}")
+message(STATUS "LINUX_64:         ${LINUX_64}")
+message(STATUS "ANDROID:          ${ANDROID}")
+message(STATUS "ANDROID_32:       ${ANDROID_32}")
+message(STATUS "ANDROID_64:       ${ANDROID_64}")
+message(STATUS "RASPBERRY:        ${RASPBERRY}")
+message(STATUS "RASPBERRY_32:     ${RASPBERRY_32}")
+message(STATUS "RASPBERRY_64:     ${RASPBERRY_64}")
+message(STATUS "\n\n")
+
+
+############################################################################################
+############################   ADD EXECUTABLE  #############################################
+############################################################################################
+PROJECT(${APP_NAME})
+
+DKSET(DKAPP ON) ##TODO:  phase this out
+
+##################################################
+##### Scan the DKPlugins and build the lists #####
+##################################################
+include(${DKCMAKE}/BuildTools.cmake) #FIXME - this doesn't obey ordering, these dependencies shound come first. Possibly because it's not named "DKMAKE.cmake" ?
+include(${DKPROJECT}/DKMAKE.cmake)
+
+message(STATUS "\n**********************************")
+message(STATUS "*** ENABLED DKPLUGINS (sorted) ***")
+message(STATUS "**********************************\n")
+list(REMOVE_DUPLICATES dkdepend_list)
+foreach(plugin ${dkdepend_list})
+	message(STATUS "${plugin}")	
+endforeach()
+message(STATUS "\n\n")
+
+#message(STATUS "*** DISABLED DKPLUGINS  *****")
+#foreach(offplugin ${dkdepend_disable_list})
+#	message(STATUS "${offplugin}")	
+#endforeach()
+#message(STATUS "\n\n")
+
+## Clear cache list variables, just to be sure 
+#DKSET(DKDEFINES "")
+#DKSET(DKINCLUDES "")
+#DKSET(DKLIBRARIES "")
+
+foreach(plugin ${dkdepend_list})
+	DKSET(QUEUE_BUILD OFF)
+	DKSET(LIBLIST "") ## used for double checking
+	DKSET(CMAKE_FILE "")
+	DKSET(ANDROID_LIBMK "")
+	
+	message(STATUS "\n***************************************")
+	message(STATUS "**** Processing   ${plugin}")
+	message(STATUS "***************************************\n")
+	
+	##Strip any sublibrary named in the plugin
+	string(FIND "${plugin}" " " index)
+	if(${index} GREATER -1)
+		math(EXPR index "${index}+1")
+		string(SUBSTRING ${plugin} ${index} -1 arg2)
+		math(EXPR index "${index}-1")
+		string(SUBSTRING ${plugin} 0 ${index} plugin)
+		DKENABLE(${arg2})
+	endif()
+	
+	#################### 3rdParty libs #####################
+	DKSETPATHTOPLUGIN(${plugin})
+	if(NOT PATHTOPLUGIN)
+		RETURN()
+	endif()
+
+	#This actually executes the 3rdParty library builds
+	include(${PATHTOPLUGIN}/DKMAKE.cmake)
+	
+	####################### DKPlugins #######################
+	string(FIND "${DKCPPPLUGS}" "${plugin}" index)
+	if(${index} GREATER -1)
+		DKENABLE(${plugin})
+		WIN_DEBUG_LIB(${PATHTOPLUGIN}/${OS}/${DEBUG_DIR}/${plugin}.lib)
+		WIN_RELEASE_LIB(${PATHTOPLUGIN}/${OS}/${RELEASE_DIR}/${plugin}.lib)
+		APPLE_DEBUG_LIB(${PATHTOPLUGIN}/${OS}/${DEBUG_DIR}/lib${plugin}.a)
+		APPLE_RELEASE_LIB(${PATHTOPLUGIN}/${OS}/${RELEASE_DIR}/lib${plugin}.a)
+		LINUX_DEBUG_LIB(${PATHTOPLUGIN}/${OS}/${DEBUG_DIR}/lib${plugin}.a)
+		LINUX_RELEASE_LIB(${PATHTOPLUGIN}/${OS}/${RELEASE_DIR}/lib${plugin}.a)
+		RASPBERRY_DEBUG_LIB(${PATHTOPLUGIN}/${OS}/${DEBUG_DIR}/lib${plugin}.a)
+		RASPBERRY_RELEASE_LIB(${PATHTOPLUGIN}/${OS}/${RELEASE_DIR}/lib${plugin}.a)
+		#ANDROID_DEBUG_LIB(${PATHTOPLUGIN}/${OS}/${DEBUG_DIR}/obj/local/armeabi-v7a/lib${plugin}.a)
+		#ANDROID_RELEASE_LIB(${PATHTOPLUGIN}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/lib${plugin}.a)
+		ANDROID_DEBUG_LIB(${PATHTOPLUGIN}/${OS}/${DEBUG_DIR}/lib${plugin}.a)
+		ANDROID_RELEASE_LIB(${PATHTOPLUGIN}/${OS}/${RELEASE_DIR}/lib${plugin}.a)
+		if(REBUILD OR REBUILDALL)
+			DKSET(QUEUE_BUILD ON)
+		endif()
+	endif()
+	
+	if(QUEUE_BUILD AND CMAKE_FILE)
+		if(REBUILDALL)
+			DKREMOVE(${PATHTOPLUGIN}/CMakeLists.txt)
+			foreach(the_lib ${LIBLIST})
+				message(STATUS "Removing ${the_lib}")
+				DKREMOVE(${the_lib})
+			endforeach()
+		endif()
+		if(NOT EXISTS ${PATHTOPLUGIN}/CMakeLists.txt)
+			message(STATUS "Creating CMakeLists.txt file for ${plugin}....")
+			file(WRITE ${PATHTOPLUGIN}/CMakeLists.txt ${CMAKE_FILE})
+		endif()
+		
+		DKSET(CURRENT_DIR ${PATHTOPLUGIN}/${OS})
+		file(MAKE_DIRECTORY ${CURRENT_DIR})
+			
+		if(WIN_32)
+			WIN32_COMMAND(${DKCMAKE_WIN32} -DWIN_32=ON -DDEBUG=ON -DRELEASE=ON -DREBUILD=ON ${PATHTOPLUGIN})
+			if(DEBUG)
+				WIN32_COMMAND(${VC_EXE} ${CURRENT_DIR}/${plugin}.sln /p:Configuration=Debug)
+			endif()
+			if(RELEASE)
+				WIN32_COMMAND(${VC_EXE} ${CURRENT_DIR}/${plugin}.sln /p:Configuration=Release)
+			endif()
+		endif()
+		
+		if(WIN_64)
+			WIN64_COMMAND(${DKCMAKE_WIN64} -DWIN_64=ON -DDEBUG=ON -DRELEASE=ON -DREBUILD=ON ${PATHTOPLUGIN})
+			if(DEBUG)
+				WIN64_COMMAND(${VC_EXE} ${CURRENT_DIR}/${plugin}.sln /p:Configuration=Debug)
+			endif()
+			if(RELEASE)
+				WIN64_COMMAND(${VC_EXE} ${CURRENT_DIR}/${plugin}.sln /p:Configuration=Release)
+			endif()
+		endif()
+		
+		if(MAC_32)
+			MAC32_COMMAND(${DKCMAKE_MAC32} -DMAC_32=ON -DDEBUG=ON -DRELEASE=ON -DREBUILD=ON ${PATHTOPLUGIN})
+			if(DEBUG)
+				MAC32_COMMAND(xcodebuild -configuration Debug build)
+			endif()
+			if(RELEASE)
+				MAC32_COMMAND(xcodebuild -configuration Release build)
+			endif()
+		endif()
+		
+		if(MAC_64)
+			MAC64_COMMAND(${DKCMAKE_MAC64} -DMAC_64=ON -DDEBUG=ON -DRELEASE=ON -DREBUILD=ON ${PATHTOPLUGIN})
+			if(DEBUG)
+				MAC64_COMMAND(xcodebuild -configuration Debug build)
+			endif()
+			if(RELEASE)
+				MAC64_COMMAND(xcodebuild -configuration Release build)
+			endif()
+		endif()
+		
+		if(IOS_32)
+			IOS32_COMMAND(${DKCMAKE_IOS32} -DIOS_32=ON -DDEBUG=ON -DRELEASE=ON -DREBUILD=ON ${PATHTOPLUGIN})
+			if(DEBUG)
+				IOS32_COMMAND(xcodebuild -configuration Debug build -sdk iphoneos11.2)
+			endif()
+			if(RELEASE)
+				IOS32_COMMAND(xcodebuild -configuration Release build -sdk iphoneos11.2)
+			endif()
+		endif()
+		
+		if(IOS_64)
+			IOS64_COMMAND(${DKCMAKE_IOS64} -DIOS_64=ON -DDEBUG=ON -DRELEASE=ON -DREBUILD=ON ${PATHTOPLUGIN})
+			if(DEBUG)
+				IOS64_COMMAND(xcodebuild -configuration Debug build)
+			endif()
+			if(RELEASE)
+				IOS64_COMMAND(xcodebuild -configuration Release build)
+			endif()
+		endif()
+		
+		if(IOSSIM_32)
+			IOSSIM32_COMMAND(${DKCMAKE_IOSSIM32} -DIOSSIM_32=ON -DDEBUG=ON -DRELEASE=ON -DREBUILD=ON ${PATHTOPLUGIN})
+			if(DEBUG)
+				IOSSIM32_COMMAND(xcodebuild -configuration Debug build -sdk iphonesimulator11.2)
+			endif()
+			if(RELEASE)
+				IOSSIM32_COMMAND(xcodebuild -configuration Release build -sdk iphonesimulator11.2)
+			endif()
+		endif()
+		
+		if(IOSSIM_64)
+			IOSSIM64_COMMAND(${DKCMAKE_IOSSIM64} -DIOSSIM_64=ON -DDEBUG=ON -DRELEASE=ON -DREBUILD=ON ${PATHTOPLUGIN})
+			if(DEBUG)
+				IOSSIM64_COMMAND(xcodebuild -configuration Debug build -sdk iphonesimulator11.2)
+			endif()
+			if(RELEASE)
+				IOSSIM64_COMMAND(xcodebuild -configuration Release build -sdk iphonesimulator11.2)
+			endif()
+		endif()
+		
+		if(LINUX_32)
+			if(DEBUG)
+				DKSET(CURRENT_DIR ${PATHTOPLUGIN}/${OS}/${DEBUG_DIR})
+				file(MAKE_DIRECTORY ${CURRENT_DIR})
+				LINUX32_COMMAND(${DKCMAKE_LINUX_DEBUG} -DLINUX_32=ON -DDEBUG=ON -DREBUILD=ON ${PATHTOPLUGIN})
+				LINUX32_COMMAND(make)
+			endif()
+			if(RELEASE)
+				DKSET(CURRENT_DIR ${PATHTOPLUGIN}/${OS}/${RELEASE_DIR})
+				file(MAKE_DIRECTORY ${CURRENT_DIR})
+				LINUX32_COMMAND(${DKCMAKE_LINUX_RELEASE} -DLINUX_32=ON -DREBUILD=ON -DRELEASE=ON ${PATHTOPLUGIN})
+				LINUX32_COMMAND(make)
+			endif()
+		endif()
+		
+		if(LINUX_64)
+			if(DEBUG)
+				DKSET(CURRENT_DIR ${PATHTOPLUGIN}/${OS}/${DEBUG_DIR})
+				file(MAKE_DIRECTORY ${CURRENT_DIR})
+				LINUX64_COMMAND(${DKCMAKE_LINUX_DEBUG} -DLINUX_64=ON -DDEBUG=ON -DREBUILD=ON ${PATHTOPLUGIN})
+				LINUX64_COMMAND(make)
+			endif()
+			if(RELEASE)
+				DKSET(CURRENT_DIR ${PATHTOPLUGIN}/${OS}/${RELEASE_DIR})
+				file(MAKE_DIRECTORY ${CURRENT_DIR})
+				LINUX64_COMMAND(${DKCMAKE_LINUX_RELEASE} -DLINUX_64=ON -DRELEASE=ON -DREBUILD=ON ${PATHTOPLUGIN})
+				LINUX64_COMMAND(make)
+			endif()
+		endif()
+		
+		if(RASPBERRY_32)
+			if(DEBUG)
+				DKSET(CURRENT_DIR ${PATHTOPLUGIN}/${OS}/${DEBUG_DIR})
+				file(MAKE_DIRECTORY ${CURRENT_DIR})
+				RASPBERRY32_COMMAND(${DKCMAKE_RASPBERRY_DEBUG} -DRASPBERRY_32=ON -DDEBUG=ON -DREBUILD=ON ${PATHTOPLUGIN})
+				RASPBERRY32_COMMAND(make)
+			endif()
+			if(RELEASE)
+				DKSET(CURRENT_DIR ${PATHTOPLUGIN}/${OS}/${RELEASE_DIR})
+				file(MAKE_DIRECTORY ${CURRENT_DIR})
+				RASPBERRY32_COMMAND(${DKCMAKE_RASPBERRY_RELEASE} -DRASPBERRY_32=ON -DRELEASE=ON -DREBUILD=ON ${PATHTOPLUGIN})
+				RASPBERRY32_COMMAND(make)
+			endif()
+		endif()
+		
+		if(RASPBERRY_64)
+			if(DEBUG)
+				DKSET(CURRENT_DIR ${PATHTOPLUGIN}/${OS}/${DEBUG_DIR})
+				file(MAKE_DIRECTORY ${CURRENT_DIR})
+				RASPBERRY64_COMMAND(${DKCMAKE_RASPBERRY_DEBUG} -DRASPBERRY_64=ON -DDEBUG=ON -DREBUILD=ON ${PATHTOPLUGIN})
+				RASPBERRY64_COMMAND(make)
+			endif()
+			if(RELEASE)
+				DKSET(CURRENT_DIR ${PATHTOPLUGIN}/${OS}/${RELEASE_DIR})
+				file(MAKE_DIRECTORY ${CURRENT_DIR})
+				RASPBERRY64_COMMAND(${DKCMAKE_RASPBERRY_RELEASE} -DRASPBERRY_64=ON -DRELEASE=ON -DREBUILD=ON ${PATHTOPLUGIN})
+				RASPBERRY64_COMMAND(make)
+			endif()
+		endif()
+		
+		if(ANDROID_32)
+			ANDROID32_COMMAND(${DKCMAKE_ANDROID32} -DANDROID_32=ON -DDEBUG=ON -DRELEASE=ON -DREBUILD=ON ${PATHTOPLUGIN})
+			if(DEBUG)
+				ANDROID32_COMMAND(${VC_EXE} ${CURRENT_DIR}/${plugin}.sln /p:Configuration=Debug)
+			endif()
+			if(RELEASE)
+				ANDROID32_COMMAND(${VC_EXE} ${CURRENT_DIR}/${plugin}.sln /p:Configuration=Release)
+			endif()
+		endif()
+		
+		if(ANDROID_64)
+			ANDROID64_COMMAND(${DKCMAKE_ANDROID64} -DANDROID_64=ON -DDEBUG=ON -DRELEASE=ON -DREBUILD=ON ${PATHTOPLUGIN})
+			if(DEBUG)
+				ANDROID64_COMMAND(${VC_EXE} ${CURRENT_DIR}/${plugin}.sln /p:Configuration=Debug)
+			endif()
+			if(RELEASE)
+				ANDROID64_COMMAND(${VC_EXE} ${CURRENT_DIR}/${plugin}.sln /p:Configuration=Release)
+			endif()
+		endif()
+		
+		include(${PATHTOPLUGIN}/DKMAKE.cmake) ##run it again to copy any .exe and .dll files. 
+	endif()
+	
+	##NOTE - can this work inside the if()/END() group above?..  please test
+#	if(ANDROID_LIBMK)
+#		DKSET(CURRENT_DIR ${PATHTOPLUGIN}/${OS})
+#		file(MAKE_DIRECTORY ${CURRENT_DIR})
+#		if(DEBUG)
+#			message(STATUS "Creating DEBUG Application.mk file for ${plugin}....")
+#			DKSET(CURRENT_DIR ${PATHTOPLUGIN}/${OS}/Debug)
+#			file(MAKE_DIRECTORY ${CURRENT_DIR})
+#			file(MAKE_DIRECTORY ${CURRENT_DIR}/jni)
+#			
+#			DKSET(APPMK_FILE "APP_PLATFORM := android-15 \n")
+#			DKSET(APPMK_FILE ${APPMK_FILE} "APP_ABI      := armeabi-v7a \n")
+#			DKSET(APPMK_FILE ${APPMK_FILE} "APP_STL      := gnustl_static \n")
+#			DKSET(APPMK_FILE ${APPMK_FILE} "APP_OPTIM    := debug \n")
+#			DKSET(APPMK_FILE ${APPMK_FILE} "APP_CPPFLAGS := -fexceptions -frtti\n")
+#			file(WRITE ${CURRENT_DIR}/jni/Application.mk ${APPMK_FILE})
+#			
+#			message(STATUS "Creating DEBUG Android.mk file for ${plugin}....")
+#           foreach(each_define ${DKDEFINES_LIST})
+#		        DKSET(ANDROID_LIBMK "${ANDROID_LIBMK} "LOCAL_LDFLAGS += ${each_define}\n")
+#	        endforeach()
+#			DKSET(ANDROID_LIBMK ${ANDROID_LIBMK} "LOCAL_C_INCLUDES += ${DKPLUGINS}\n")
+#			foreach(each_include ${DKINCLUDES_LIST})
+#				DKSET(ANDROID_LIBMK "${ANDROID_LIBMK} "LOCAL_C_INCLUDES += ${each_include}\n")
+#			endforeach()
+#			DKSET(ANDROID_LIBMK ${ANDROID_LIBMK} "include $(BUILD_STATIC_LIBRARY) \n\n")
+#			file(WRITE ${CURRENT_DIR}/jni/Android.mk ${ANDROID_LIBMK})
+#			if(CMAKE_HOST_WIN32)
+#				EXECUTE_PROCESS(COMMAND ${ANDROIDNDK}/ndk-build.cmd NDK_DEBUG=1 WORKING_DIRECTORY ${CURRENT_DIR})
+#			endif()
+#			if(CMAKE_HOST_UNIX)
+#				EXECUTE_PROCESS(COMMAND ${ANDROIDNDK}/ndk-build NDK_DEBUG=1 WORKING_DIRECTORY ${CURRENT_DIR})
+#			endif()
+#		endif()
+#		if(RELEASE)
+#			message(STATUS "Creating RELEASE Application.mk file for ${plugin}....")
+#			DKSET(CURRENT_DIR ${PATHTOPLUGIN}/${OS}/Release)
+#			file(MAKE_DIRECTORY ${CURRENT_DIR})
+#			file(MAKE_DIRECTORY ${CURRENT_DIR}/jni)
+#			
+#			DKSET(APPMK_FILE "APP_PLATFORM := android-15 \n")
+#			DKSET(APPMK_FILE ${APPMK_FILE} "APP_ABI      := armeabi-v7a \n")
+#			DKSET(APPMK_FILE ${APPMK_FILE} "APP_STL      := gnustl_static \n")
+#			DKSET(APPMK_FILE ${APPMK_FILE} "APP_OPTIM    := release \n")
+#			DKSET(APPMK_FILE ${APPMK_FILE} "APP_CPPFLAGS := -fexceptions -frtti\n")
+#			file(WRITE ${CURRENT_DIR}/jni/Application.mk ${APPMK_FILE})
+#			
+#			message(STATUS "Creating RELEASE Android.mk file for ${plugin}....")
+#           foreach(each_define ${DKDEFINES_LIST})
+#		        DKSET(ANDROID_LIBMK "${ANDROID_LIBMK} "LOCAL_LDFLAGS += ${each_define}\n")
+#	        endforeach()
+#			DKSET(ANDROID_LIBMK ${ANDROID_LIBMK} "LOCAL_C_INCLUDES += ${DKPLUGINS}\n")
+#			foreach(each_include ${DKINCLUDES_LIST})
+#				DKSET(ANDROID_LIBMK "${ANDROID_LIBMK} "LOCAL_C_INCLUDES += ${each_include}\n")
+#			endforeach()
+#			DKSET(ANDROID_LIBMK ${ANDROID_LIBMK} "include $(BUILD_STATIC_LIBRARY) \n\n")
+#			file(WRITE ${CURRENT_DIR}/jni/Android.mk ${ANDROID_LIBMK})
+#			if(CMAKE_HOST_WIN32)
+#				EXECUTE_PROCESS(COMMAND ${ANDROIDNDK}/ndk-build.cmd NDK_DEBUG=0 WORKING_DIRECTORY ${CURRENT_DIR})
+#			endif()
+#			if(CMAKE_HOST_UNIX)
+#				EXECUTE_PROCESS(COMMAND ${ANDROIDNDK}/ndk-build NDK_DEBUG=0 WORKING_DIRECTORY ${CURRENT_DIR})
+#			endif()
+#		endif()
+#	endif(ANDROID_LIBMK)
+	
+	## double check that the missing libs were built
+	foreach(the_lib ${LIBLIST})
+		if(NOT EXISTS ${the_lib})
+			message(FATAL_ERROR "\n\n\n********************************************\nFAILED to find: ${the_lib} \n********************************************")
+			message(FATAL_ERROR " ")
+		endif()
+	endforeach()
+	DKSET(CMAKE_FILE "") ##Linux cache file fix
+endforeach()
+
+## Create the DKPlugins.h header file
+if(PLUGINS_FILE)
+string(REPLACE "#include \"DKWindow.h\"" "" PLUGINS_FILE ${PLUGINS_FILE})
+string(REPLACE "\\n" "\n" PLUGINS_FILE ${PLUGINS_FILE})
+file(WRITE ${DKPROJECT}/DKPlugins.h ${PLUGINS_FILE})
+endif()
+	
+
+
+
+message(STATUS "\n")
+message(STATUS "***************************************")
+message(STATUS "********** Creating ${APP_NAME} **********")
+message(STATUS "***************************************\n")
+
+message(STATUS "Copying DKPlugins/_DKIMPORT/ to App...")
+DKCOPY(${DKPLUGINS}/_DKIMPORT ${DKPROJECT} FALSE) ## copy app default files recursivly without overwrite
+
+### Include all source files from the app folder
+file(GLOB App_SRC 
+	${DKPROJECT}/*.h
+	${DKPROJECT}/*.c
+	${DKPROJECT}/*.hpp
+	${DKPROJECT}/*.cpp
+	${DKPROJECT}/*.manifest
+	${DKPROJECT}/*.rc
+	${DKPROJECT}/icons/windows/*.rc)
+
+add_definitions(-DDKAPP) #TODO - phase this out
+include_directories(${DKPROJECT})
+
+##########
+if(WIN_32)
+	# copy the icon to assets
+	DKCOPY(${DKPROJECT}/icons/windows/icon.ico ${DKPROJECT}/assets/icon.ico TRUE)
+	
+	# Backup files and folders excluded from the package
+	DKCOPY(${DKPROJECT}/assets/USER ${DKPROJECT}/Backup/USER TRUE)
+	##DKCOPY(${DKPROJECT}/assets/DKCef/win32Debug ${DKPROJECT}/Backup/DKCef/win32Debug TRUE)
+	##DKCOPY(${DKPROJECT}/assets/DKCef/win32Release ${DKPROJECT}/Backup/DKCef/win32Release TRUE)
+	DKCOPY(${DKPROJECT}/assets/cef.log ${DKPROJECT}/Backup/cef.log TRUE)
+	DKCOPY(${DKPROJECT}/assets/log.txt ${DKPROJECT}/Backup/log.txt TRUE)
+	
+	# Remove excluded files and folders before packaging
+	DKREMOVE(${DKPROJECT}/assets/USER)
+	##DKREMOVE(${DKPROJECT}/assets/DKCef/win32Debug)
+	##DKREMOVE(${DKPROJECT}/assets/DKCef/win32Release)
+	DKREMOVE(${DKPROJECT}/assets/cef.log)
+	DKREMOVE(${DKPROJECT}/assets/log.txt)
+	
+	#Compress the assets, they will be included by resource.rc
+	message(STATUS "Creating assets.zip . . .")
+	DKZIP(${DKPROJECT}/assets)
+	
+	#dummy assets.h file, or the builder wil complain about assets.h missing
+	DKCOPY(${DKPLUGINS}/_DKIMPORT/assets.h ${DKPROJECT}/assets.h TRUE)
+	
+	# Restore the backed up files, excluded from assets
+	DKCOPY(${DKPROJECT}/Backup ${DKPROJECT}/assets TRUE)
+	DKREMOVE(${DKPROJECT}/Backup)
+	
+	## Create Icon files for project
+	message(STATUS "Building icons for ${APP_NAME} - ${OS} . . .")
+	DKSET(IMAGEMAGICK_CONVERT ${IMAGEMAGICK_ROOT}/convert.exe)
+	file(MAKE_DIRECTORY ${DKPROJECT}/icons/windows)
+	DKEXECUTE_PROCESS(COMMAND ${IMAGEMAGICK_CONVERT} ${DKPROJECT}/icons/icon.png -define icon:auto-resize=256,128,64,48,32,16 ${DKPROJECT}/icons/windows/icon.ico)
+	DKEXECUTE_PROCESS(COMMAND ${IMAGEMAGICK_CONVERT} ${DKPROJECT}/icons/icon.png -define icon:auto-resize=16 ${DKPROJECT}/assets/favicon.ico)
+	
+	#set(CMAKE_CXX_STANDARD 17)
+	add_definitions(-D_USING_V110_SDK71_)
+	add_executable(${APP_NAME} WIN32 ${App_SRC})
+	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${WIN_LIBS})
+	##set_source_files_properties(${DIGITALKNOB}/stdafx.cpp PROPERTIES COMPILE_FLAGS "/Ycstdafx.h")
+	
+	list(APPEND DEBUG_LINK_FLAGS /MANIFEST:NO)
+	list(APPEND DEBUG_LINK_FLAGS /MANIFESTUAC:NO)
+	list(APPEND DEBUG_LINK_FLAGS /level='highestAvailable')
+	list(APPEND DEBUG_LINK_FLAGS /uiAccess='true')
+	list(APPEND DEBUG_LINK_FLAGS /SUBSYSTEM:CONSOLE,5.01)
+	list(APPEND DEBUG_LINK_FLAGS /SAFESEH:NO)
+	string(REPLACE ";" " " DEBUG_FLAGS "${DEBUG_LINK_FLAGS}")
+	
+	##list(APPEND RELEASE_LINK_FLAGS /FORCE) ## MySQL lib needs /FORCE due to zlib redefinitions
+	list(APPEND RELEASE_LINK_FLAGS /INCREMENTAL:NO)
+	list(APPEND RELEASE_LINK_FLAGS /OPT:NOREF)
+	list(APPEND RELEASE_LINK_FLAGS /MANIFEST:NO)
+	list(APPEND RELEASE_LINK_FLAGS /MANIFESTUAC:NO)
+	list(APPEND RELEASE_LINK_FLAGS /level='highestAvailable')
+	list(APPEND RELEASE_LINK_FLAGS /uiAccess='true')
+	list(APPEND RELEASE_LINK_FLAGS /SUBSYSTEM:CONSOLE,5.01)
+	list(APPEND RELEASE_LINK_FLAGS /SAFESEH:NO)
+	string(REPLACE ";" " " RELEASE_FLAGS "${RELEASE_LINK_FLAGS}")
+	
+	#add_custom_command(
+    #TARGET ${APP_NAME}
+    #POST_BUILD
+    #COMMAND "mt.exe" -nologo
+    #        -manifest \"${DKPROJECT}/compatibility.manifest\"
+    #        -outputresource:"${DKPROJECT}/win32/Debug/${APP_NAME}.exe"\;\#1
+    #COMMENT "Adding manifest..."
+    #)
+	
+	set_target_properties(${APP_NAME} PROPERTIES LINK_FLAGS_DEBUG ${DEBUG_FLAGS} LINK_FLAGS_RELEASE ${RELEASE_FLAGS})
+endif(WIN_32)
+	
+##########
+if(WIN_64)
+	# copy the icon to assets
+	DKCOPY(${DKPROJECT}/icons/windows/icon.ico ${DKPROJECT}/assets/icon.ico TRUE)
+	
+	# Backup files and folders excluded from the package
+	DKCOPY(${DKPROJECT}/assets/USER ${DKPROJECT}/Backup/USER TRUE)
+	DKCOPY(${DKPROJECT}/assets/DKCef/win64Debug ${DKPROJECT}/Backup/DKCef/win64Debug TRUE)
+	DKCOPY(${DKPROJECT}/assets/DKCef/win64Release ${DKPROJECT}/Backup/DKCef/win64Release TRUE)
+	DKCOPY(${DKPROJECT}/assets/cef.log ${DKPROJECT}/Backup/cef.log TRUE)
+	DKCOPY(${DKPROJECT}/assets/log.txt ${DKPROJECT}/Backup/log.txt TRUE)
+	
+	# Remove excluded files and folders before packaging
+	DKREMOVE(${DKPROJECT}/assets/USER)
+	DKREMOVE(${DKPROJECT}/assets/DKCef/win64Debug)
+	DKREMOVE(${DKPROJECT}/assets/DKCef/win64Release)
+	DKREMOVE(${DKPROJECT}/assets/cef.log)
+	DKREMOVE(${DKPROJECT}/assets/log.txt)
+	
+	#Compress the assets, they will be included by resource.rc
+	message(STATUS "Creating assets.zip . . .")
+	DKZIP(${DKPROJECT}/assets)
+	
+	#dummy assets.h file, or the builder wil complain about assets.h missing
+	DKCOPY(${DKPLUGINS}/_DKIMPORT/assets.h ${DKPROJECT}/assets.h TRUE)
+	
+	# Restore the backed up files
+	DKCOPY(${DKPROJECT}/Backup/ ${DKPROJECT}/assets/ TRUE)
+	DKREMOVE(${DKPROJECT}/Backup)
+	
+
+	## Create Icon files for project
+	if(${IMAGEMAGICK_ROOT})
+		message(STATUS "Building icons for ${APP_NAME} - ${OS} . . .")
+		DKSET(IMAGEMAGICK_CONVERT ${IMAGEMAGICK_ROOT}/convert.exe)
+		file(MAKE_DIRECTORY ${DKPROJECT}/icons/windows)
+		DKEXECUTE_PROCESS(COMMAND ${IMAGEMAGICK_CONVERT} ${DKPROJECT}/icons/icon.png -define icon:auto-resize=256,128,64,48,32,16 ${DKPROJECT}/icons/windows/icon.ico)
+		DKEXECUTE_PROCESS(COMMAND ${IMAGEMAGICK_CONVERT} ${DKPROJECT}/icons/icon.png -define icon:auto-resize=16 ${DKPROJECT}/assets/favicon.ico)
+	endif()
+	
+	set(CMAKE_CXX_STANDARD 17)
+	add_executable(${APP_NAME}_64 WIN32 ${App_SRC})
+	target_link_libraries(${APP_NAME}_64 ${DEBUG_LIBS} ${RELEASE_LIBS} ${WIN_LIBS})
+	##set_source_files_properties(${DIGITALKNOB}/stdafx.cpp PROPERTIES COMPILE_FLAGS "/Ycstdafx.h")
+	
+	list(APPEND DEBUG_LINK_FLAGS /MANIFESTUAC:NO)
+	list(APPEND DEBUG_LINK_FLAGS /level='highestAvailable')
+	list(APPEND DEBUG_LINK_FLAGS /uiAccess='true')
+	list(APPEND DEBUG_LINK_FLAGS /SUBSYSTEM:CONSOLE,5.01)
+	list(APPEND DEBUG_LINK_FLAGS /SAFESEH:NO)
+	string(REPLACE ";" " " DEBUG_FLAGS "${DEBUG_LINK_FLAGS}")
+	
+	##list(APPEND RELEASE_LINK_FLAGS /FORCE) ## MySQL lib needs /FORCE due to zlib redefinitions
+	list(APPEND RELEASE_LINK_FLAGS /INCREMENTAL:NO)
+	list(APPEND RELEASE_LINK_FLAGS /OPT:NOREF)
+	list(APPEND RELEASE_LINK_FLAGS /MANIFESTUAC:NO)
+	list(APPEND RELEASE_LINK_FLAGS /level='highestAvailable')
+	list(APPEND RELEASE_LINK_FLAGS /uiAccess='true')
+	list(APPEND RELEASE_LINK_FLAGS /SUBSYSTEM:CONSOLE,5.01)
+	list(APPEND RELEASE_LINK_FLAGS /SAFESEH:NO)
+	string(REPLACE ";" " " RELEASE_FLAGS "${RELEASE_LINK_FLAGS}")
+	
+	set_target_properties(${APP_NAME}_64 PROPERTIES LINK_FLAGS_DEBUG ${DEBUG_FLAGS} LINK_FLAGS_RELEASE ${RELEASE_FLAGS})
+endif(WIN_64)
+
+#######
+if(MAC)
+	# Backup files and folders excluded from the package
+	DKCOPY(${DKPROJECT}/assets/USER ${DKPROJECT}/Backup/USER TRUE)
+	DKCOPY(${DKPROJECT}/assets/DKCef/mac64Debug ${DKPROJECT}/Backup/DKCef/mac64Debug TRUE)
+	DKCOPY(${DKPROJECT}/assets/DKCef/mac64Release ${DKPROJECT}/Backup/DKCef/mac64Release TRUE)
+	DKCOPY(${DKPROJECT}/assets/cef.log ${DKPROJECT}/Backup/cef.log TRUE)
+	DKCOPY(${DKPROJECT}/assets/log.txt ${DKPROJECT}/Backup/log.txt TRUE)
+	
+	# Remove excluded files and folders before packaging
+	DKREMOVE(${DKPROJECT}/assets/USER)
+	DKREMOVE(${DKPROJECT}/assets/DKCef/mac64Debug)
+	DKREMOVE(${DKPROJECT}/assets/DKCef/mac64Release)
+	DKREMOVE(${DKPROJECT}/assets/cef.log)
+	DKREMOVE(${DKPROJECT}/assets/log.txt)
+	
+	## ICONS 
+	## // TODO
+	## message(STATUS "Building icons for ${APP_NAME} - ${OS} . . .")
+		
+	## copy the assets into the bundle resources
+	if(DEBUG)
+		file(MAKE_DIRECTORY ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app/Contents/Resources)
+		DKCOPY(${DKPROJECT}/assets/ ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app/Contents/Resources TRUE)
+		DKCOPY(${DKPROJECT}/icons/mac/logo.icns ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app/Contents/Resources/logo.icns TRUE)
+	endif()
+	if(RELEASE)
+		file(MAKE_DIRECTORY ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.app/Contents/Resources)
+		DKCOPY(${DKPROJECT}/assets/ ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.app/Contents/Resources TRUE)
+		DKCOPY(${DKPROJECT}/icons/mac/logo.icns ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.app/Contents/Resources/logo.icns TRUE)
+	endif()
+	
+	# Restore the backed up files, excluded from assets
+	DKCOPY(${DKPROJECT}/Backup/ ${DKPROJECT}/assets/ FALSE)
+	DKREMOVE(${DKPROJECT}/Backup)
+	
+	set(CMAKE_CXX_STANDARD 17)
+	FIND_LIBRARY(CF CoreFoundation)
+	FIND_LIBRARY(CO Cocoa)
+	FIND_LIBRARY(CB Carbon)
+	FIND_LIBRARY(AT AudioToolbox)
+	FIND_LIBRARY(AU AudioUnit)
+	FIND_LIBRARY(CA CoreAudio)
+	FIND_LIBRARY(CV CoreVideo)
+	FIND_LIBRARY(IO IOKit)
+	FIND_LIBRARY(GL OpenGL)
+	FIND_LIBRARY(FF ForceFeedback)
+	FIND_LIBRARY(AK AppKit)
+	
+	list(APPEND DEBUG_LIBS ${CF} ${CO} ${CB} ${AT} ${AU} ${CV} ${CA} ${IO} ${GL} ${FF} ${AK})
+	list(APPEND RELEASE_LIBS ${CF} ${CO} ${CB} ${AT} ${AU} ${CV} ${CA} ${IO} ${GL} ${FF} ${AK})
+	
+	SET(CMAKE_OSX_ARCHITECTURES "x86_64")
+	add_executable(${APP_NAME} MACOSX_BUNDLE ${App_SRC})
+	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS})
+	
+	DKUPDATE_INFO_Plist(${APP_NAME}) #this may need to be run at post build
+	
+	
+endif()
+
+#######
+if(IOS)
+	# Backup files and folders excluded from the package
+	DKCOPY(${DKPROJECT}/assets/USER ${DKPROJECT}/Backup/USER TRUE)
+	DKCOPY(${DKPROJECT}/assets/DKCef/ios64Debug ${DKPROJECT}/Backup/DKCef/ios64Debug TRUE)
+	DKCOPY(${DKPROJECT}/assets/DKCef/ios64Release ${DKPROJECT}/Backup/DKCef/ios64Release TRUE)
+	DKCOPY(${DKPROJECT}/assets/cef.log ${DKPROJECT}/Backup/cef.log TRUE)
+	DKCOPY(${DKPROJECT}/assets/log.txt ${DKPROJECT}/Backup/log.txt TRUE)
+	
+	# Remove excluded files and folders before packaging
+	DKREMOVE(${DKPROJECT}/assets/USER)
+	DKREMOVE(${DKPROJECT}/assets/DKCef/ios64Debug)
+	DKREMOVE(${DKPROJECT}/assets/DKCef/ios64Release)
+	DKREMOVE(${DKPROJECT}/assets/cef.log)
+	DKREMOVE(${DKPROJECT}/assets/log.txt)
+
+	## copy the assets into the app
+	message(STATUS "Building icons for ${APP_NAME} - ${OS} . . .")
+	if(DEBUG)
+		file(MAKE_DIRECTORY ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app/assets)
+		DKCOPY(${DKPROJECT}/assets/ ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app/assets TRUE)
+		DKCOPY(${DKPROJECT}/icons/ios/ ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app TRUE)
+	endif()
+	if(RELEASE)
+		file(MAKE_DIRECTORY ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.app/assets)
+		DKCOPY(${DKPROJECT}/assets/ ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.app/assets TRUE)
+		DKCOPY(${DKPROJECT}/icons/ios/ ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.app TRUE)
+	endif()
+
+	# Restore the backed up files, excluded from assets
+	DKCOPY(${DKPROJECT}/Backup/ ${DKPROJECT}/assets/ FALSE)
+	DKREMOVE(${DKPROJECT}/Backup)
+	
+	set(CMAKE_CXX_STANDARD 17)
+	### FrameWorks ###
+	set(IOS_FRAMEWORKS
+		Foundation
+		AudioToolbox
+		CoreGraphics
+	   	QuartzCore
+		UIKit
+	    OpenGLES
+		ImageIO
+		MobileCoreServices
+	)
+	
+	list(APPEND App_SRC ${DKPLUGINS}/DK/DKiPhone.mm)
+	
+	foreach(FW ${IOS_FRAMEWORKS})
+		set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -framework ${FW}")
+	endforeach()
+	
+	#list(APPEND DEBUG_LIBS ${CF} ${CO} ${CB} ${AT} ${AU} ${CA} ${IO} ${GL} ${FF})
+	#list(APPEND RELEASE_LIBS ${CF} ${CO} ${CB} ${AT} ${AU} ${CA} ${IO} ${GL} ${FF})
+	
+	#set(CMAKE_OSX_SYSROOT iphoneos)
+	#set(XCODE_ATTRIBUTE_SDKROOT iphoneos)
+	#set(CMAKE_OSK_ARCHITECTURES "$(ARCHS_STANDARD_32_BIT)")
+	set(CMAKE_CXX_FLAGS "-x objective-c++")
+	#set(CMAKE_XCODE_ATTRIBUTE_DEBUG_INFORMATION_FORMAT dwarf)
+	#set(MACOSX_BUNDLE_GUI_IDENTIFIER "com.digitalknob.\${PRODUCT_NAME:identifier}")
+		
+	#GET_TARGET_PROPERTY(MyExecutable_PATH ${APP_NAME} LOCATION)
+	add_executable(${APP_NAME} MACOSX_BUNDLE ${App_SRC})
+	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS})
+	
+	DKUPDATE_INFO_Plist(${APP_NAME}) #this may need to be run at post build
+endif()
+
+##########
+if(IOSSIM)
+	# Backup files and folders excluded from the package
+	DKCOPY(${DKPROJECT}/assets/USER ${DKPROJECT}/Backup/USER TRUE)
+	DKCOPY(${DKPROJECT}/assets/DKCef/ios64Debug ${DKPROJECT}/Backup/DKCef/ios64Debug TRUE)
+	DKCOPY(${DKPROJECT}/assets/DKCef/ios64Release ${DKPROJECT}/Backup/DKCef/ios64Release TRUE)
+	DKCOPY(${DKPROJECT}/assets/cef.log ${DKPROJECT}/Backup/cef.log TRUE)
+	DKCOPY(${DKPROJECT}/assets/log.txt ${DKPROJECT}/Backup/log.txt TRUE)
+	
+	# Remove excluded files and folders before packaging
+	DKREMOVE(${DKPROJECT}/assets/USER)
+	DKREMOVE(${DKPROJECT}/assets/DKCef/ios64Debug)
+	DKREMOVE(${DKPROJECT}/assets/DKCef/ios64Release)
+	DKREMOVE(${DKPROJECT}/assets/cef.log)
+	DKREMOVE(${DKPROJECT}/assets/log.txt)
+	
+	## copy the assets into the app
+	message(STATUS "Building icons for ${APP_NAME} - ${OS} . . .")
+	if(DEBUG)
+		file(MAKE_DIRECTORY ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app/assets)
+		DKCOPY(${DKPROJECT}/assets/ ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app/assets TRUE)
+		DKCOPY(${DKPROJECT}/icons/ios/ ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app TRUE)
+	endif()
+	if(RELEASE)
+		file(MAKE_DIRECTORY ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.app/assets)
+		DKCOPY(${DKPROJECT}/assets/ ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.app/assets TRUE)
+		DKCOPY(${DKPROJECT}/icons/ios/ ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.app TRUE)
+	endif()
+	
+	# Restore the backed up files, excluded from assets
+	DKCOPY(${DKPROJECT}/Backup/ ${DKPROJECT}/assets/ FALSE)
+	DKREMOVE(${DKPROJECT}/Backup)
+	
+	set(CMAKE_CXX_STANDARD 17)
+	### FrameWorks ###
+	set(IOS_FRAMEWORKS
+		Foundation
+		AudioToolbox
+		CoreGraphics
+	   	QuartzCore
+		UIKit
+	    OpenGLES
+		ImageIO
+		MobileCoreServices
+	)
+	
+	list(APPEND App_SRC ${DKPLUGINS}/DK/DKiPhone.mm)
+	
+	foreach(FW ${IOS_FRAMEWORKS})
+		set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -framework ${FW}")
+	endforeach()
+	
+	##list(APPEND DEBUG_LIBS ${CF} ${CO} ${CB} ${AT} ${AU} ${CA} ${IO} ${GL} ${FF})
+	##list(APPEND RELEASE_LIBS ${CF} ${CO} ${CB} ${AT} ${AU} ${CA} ${IO} ${GL} ${FF})
+	
+	##set(CMAKE_OSX_SYSROOT iphoneos)
+	##set(XCODE_ATTRIBUTE_SDKROOT iphoneos)
+	##set(CMAKE_OSX_ARCHITECTURES "$(ARCHS_STANDARD_32_BIT)")
+	set(CMAKE_CXX_FLAGS "-x objective-c++")
+    set(CMAKE_XCODE_ATTRIBUTE_CLANG_CXX_LIBRARY "libstdc++")
+	##set(CMAKE_XCODE_ATTRIBUTE_DEBUG_INFORMATION_FORMAT dwarf)
+	##set(MACOSX_BUNDLE_GUI_IDENTIFIER "com.digitalknob.\${PRODUCT_NAME:identifier}")
+	
+	#GET_TARGET_PROPERTY(MyExecutable_PATH ${APP_NAME} LOCATION)
+	add_executable(${APP_NAME} MACOSX_BUNDLE ${App_SRC})
+	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS})
+	
+	DKUPDATE_INFO_Plist(${APP_NAME}) #this may need to be run at post build
+endif()
+
+#########
+if(LINUX)
+	# Copy the icon to assets
+	DKCOPY(${DKPROJECT}/icons/icon.png ${DKPROJECT}/assets/icon.png TRUE)
+
+	# backup files not going in the package
+	DKCOPY(${DKPROJECT}/assets/USER ${DKPROJECT}/Backup/USER TRUE)
+	DKCOPY(${DKPROJECT}/assets/DKCef/linux32Debug ${DKPROJECT}/Backup/DKCef/linux32Debug TRUE)
+	DKCOPY(${DKPROJECT}/assets/DKCef/linux32Release ${DKPROJECT}/Backup/DKCef/linux32Release TRUE)
+	DKCOPY(${DKPROJECT}/assets/DKCef/linux64Debug ${DKPROJECT}/Backup/DKCef/linux64Debug TRUE)
+	DKCOPY(${DKPROJECT}/assets/DKCef/linux64Release ${DKPROJECT}/Backup/DKCef/linux64Release TRUE)
+	DKCOPY(${DKPROJECT}/assets/cef.log ${DKPROJECT}/Backup/cef.log TRUE)
+	DKCOPY(${DKPROJECT}/assets/log.txt ${DKPROJECT}/Backup/log.txt TRUE)
+	
+	# Remove excluded files and folders before packaging
+	DKREMOVE(${DKPROJECT}/assets/USER)
+	DKREMOVE(${DKPROJECT}/assets/DKCef/linux32Debug)
+	DKREMOVE(${DKPROJECT}/assets/DKCef/linux32Release)
+	DKREMOVE(${DKPROJECT}/assets/DKCef/linux64Debug)
+	DKREMOVE(${DKPROJECT}/assets/DKCef/linux64Release)
+	DKREMOVE(${DKPROJECT}/assets/cef.log)
+	DKREMOVE(${DKPROJECT}/assets/log.txt)
+	
+	message(STATUS "Creating assets.zip . . .")
+	DKZIP(${DKPROJECT}/assets)
+	
+	message(STATUS "Creating assets.h . . .")
+	bin2h(SOURCE_FILE ${DKPROJECT}/assets.zip HEADER_FILE ${DKPROJECT}/assets.h VARIABLE_NAME "ASSETS_H")
+	
+	# Restore the backed up assets
+	DKCOPY(${DKPROJECT}/Backup/ ${DKPROJECT}/assets/ FALSE)
+	DKREMOVE(${DKPROJECT}/Backup)
+
+	set(CMAKE_CXX_STANDARD 17)
+	find_package(OpenGL REQUIRED)
+	include_directories(${OpenGL_INCLUDE_DIRS})
+	link_directories(${OpenGL_LIBRARY_DIRS})
+	add_definitions(${OpenGL_DEFINITIONS})
+	if(NOT OPENGL_FOUND)
+    	message(FATAL_ERROR "OPENGL not found!")
+	endif()
+	
+	list(APPEND LINUX_LIBS ${OPENGL_LIBRARIES})
+	list(APPEND LINUX_LIBS pthread)
+	list(APPEND LINUX_LIBS dl)
+	
+	set(CMAKE_CXX_FLAGS "-g -no-pie")
+	add_executable(${APP_NAME} ${App_SRC})
+	
+	if(DEBUG)
+		message(STATUS "${DEBUG_LIBS}")
+		add_definitions(-DDEBUG)
+		target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${LINUX_LIBS})
+	else()
+		message(STATUS "${RELEASE_LIBS}")
+		target_link_libraries(${APP_NAME} ${RELEASE_LIBS} ${LINUX_LIBS})
+	endif()
+endif()
+
+
+#############
+if(RASPBERRY)
+	# Copy the icon to assets
+	DKCOPY(${DKPROJECT}/icons/icon.png ${DKPROJECT}/assets/icon.png TRUE)
+
+	# Backup files and folders excluded from the package
+	DKCOPY(${DKPROJECT}/assets/USER ${DKPROJECT}/Backup/USER TRUE)
+	#DKCOPY(${DKPROJECT}/assets/DKCef/linux32Debug ${DKPROJECT}/Backup/DKCef/linux32Debug TRUE)
+	#DKCOPY(${DKPROJECT}/assets/DKCef/linux32Release ${DKPROJECT}/Backup/DKCef/linux32Release TRUE)
+	#DKCOPY(${DKPROJECT}/assets/DKCef/linux64Debug ${DKPROJECT}/Backup/DKCef/linux64Debug TRUE)
+	#DKCOPY(${DKPROJECT}/assets/DKCef/linux64Release ${DKPROJECT}/Backup/DKCef/linux64Release TRUE)
+	#DKCOPY(${DKPROJECT}/assets/cef.log ${DKPROJECT}/Backup/cef.log TRUE)
+	DKCOPY(${DKPROJECT}/assets/log.txt ${DKPROJECT}/Backup/log.txt TRUE)
+	
+	# Remove excluded files and folders before packaging
+	DKREMOVE(${DKPROJECT}/assets/USER)
+	#DKREMOVE(${DKPROJECT}/assets/DKCef/linux32Debug)
+	#DKREMOVE(${DKPROJECT}/assets/DKCef/linux32Release)
+	#DKREMOVE(${DKPROJECT}/assets/DKCef/linux64Debug)
+	#DKREMOVE(${DKPROJECT}/assets/DKCef/linux64Release)
+	#DKREMOVE(${DKPROJECT}/assets/cef.log)
+	DKREMOVE(${DKPROJECT}/assets/log.txt)
+	
+	message(STATUS "Creating assets.zip . . .")
+	DKZIP(${DKPROJECT}/assets)
+	message(STATUS "Creating assets.h . . .")
+	bin2h(SOURCE_FILE ${DKPROJECT}/assets.zip HEADER_FILE ${DKPROJECT}/assets.h VARIABLE_NAME "ASSETS_H")
+	# Restore the backed up assets
+	DKCOPY(${DKPROJECT}/Backup/ ${DKPROJECT}/assets/ FALSE)
+	DKREMOVE(${DKPROJECT}/Backup)
+
+
+	set(CMAKE_CXX_STANDARD 17)
+    find_package(OpenGL REQUIRED)
+	include_directories(${OpenGL_INCLUDE_DIRS})
+	link_directories(${OpenGL_LIBRARY_DIRS})
+	add_definitions(${OpenGL_DEFINITIONS})
+	if(NOT OPENGL_FOUND)
+    	message(FATAL_ERROR "OPENGL not found!")
+	endif()
+	
+	list(APPEND RASPBERRY_LIBS ${OPENGL_LIBRARIES})
+	list(APPEND RASPBERRY_LIBS pthread)
+	list(APPEND RASPBERRY_LIBS dl)
+	link_directories(/opt/vc/lib)
+	list(APPEND RASPBERRY_LIBS bcm_host)
+	
+	set(CMAKE_CXX_FLAGS "-g -no-pie")
+	add_executable(${APP_NAME} ${App_SRC})
+	
+	if(DEBUG)
+		add_definitions(-DDEBUG)
+		target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RASPBERRY_LIBS})
+	else()
+		target_link_libraries(${APP_NAME} ${RELEASE_LIBS} ${RASPBERRY_LIBS})
+	endif()
+endif()
+
+if(ANDROID)
+	# remove files not needed for android
+	list(REMOVE_ITEM App_SRC ${DKPROJECT}/resource.h)
+	list(REMOVE_ITEM App_SRC ${DKPROJECT}/resource.rc)
+	
+	## Create Android Icons
+	message(STATUS "Building icons for ${APP_NAME} - ${OS} . . .")
+    file(MAKE_DIRECTORY ${DKPROJECT}/icons/android)
+    file(MAKE_DIRECTORY ${DKPROJECT}/icons/android/drawable-hdpi)
+    DKEXECUTE_PROCESS(COMMAND ${IMAGEMAGICK_CONVERT} ${DKPROJECT}/icons/icon.png -resize 72x72 ${DKPROJECT}/icons/android/drawable-hdpi/icon.png)
+    file(MAKE_DIRECTORY ${DKPROJECT}/icons/android/drawable-ldpi)
+    DKEXECUTE_PROCESS(COMMAND ${IMAGEMAGICK_CONVERT} ${DKPROJECT}/icons/icon.png -resize 36x36 ${DKPROJECT}/icons/android/drawable-ldpi/icon.png)
+    file(MAKE_DIRECTORY ${DKPROJECT}/icons/android/drawable-mdpi)
+    DKEXECUTE_PROCESS(COMMAND ${IMAGEMAGICK_CONVERT} ${DKPROJECT}/icons/icon.png -resize 48x48 ${DKPROJECT}/icons/android/drawable-mdpi/icon.png)
+    file(MAKE_DIRECTORY ${DKPROJECT}/icons/android/drawable-xhdpi)
+    DKEXECUTE_PROCESS(COMMAND ${IMAGEMAGICK_CONVERT} ${DKPROJECT}/icons/icon.png -resize 96x96 ${DKPROJECT}/icons/android/drawable-xhdpi/icon.png)
+    file(MAKE_DIRECTORY ${DKPROJECT}/icons/android/drawable-xxhdpi)
+    DKEXECUTE_PROCESS(COMMAND ${IMAGEMAGICK_CONVERT} ${DKPROJECT}/icons/icon.png -resize 144x144 ${DKPROJECT}/icons/android/drawable-xxhdpi/icon.png)
+	
+	# Copy the icon to ${DKPROJECT}/assets
+	DKCOPY(${DKPROJECT}/icons/icon.png ${DKPROJECT}/assets/icon.png TRUE)
+	DKCOPY(${DKPROJECT}/icons/icon.png ${DKPROJECT}/${OS}/res/drawable/icon.png TRUE)
+
+	#DKUPDATE_ANDROID_NAME(${APP_NAME})
+	
+	#set(CMAKE_CXX_STANDARD 17)
+	set(CMAKE_CXX_FLAGS "-DDKAPP -DUSE_DK -std=c++17")
+	set(CMAKE_CXX_FLAGS_DEBUG "-g2 -gdwarf-2 -O0 -DDEBUG") 
+	set(CMAKE_CXX_FLAGS_RELEASE "-O3")
+	#set(CMAKE_POSITION_INDEPENDENT_CODE TRUE)
+	
+	set(CMAKE_ANDROID_GUI 1)
+	#set(CMAKE_SYSTEM_NAME Android) 
+	#set(CMAKE_SYSTEM_VERSION 26)
+	#set(CMAKE_ANDROID_ARCH_ABI armeabi-v7a)
+	#set(CMAKE_ANDROID_NDK ${ANDROIDNDK})
+	#set(CMAKE_ANDROID_STL_TYPE c++_static)
+	
+	list(APPEND ANDROID_LIBS dl)
+	list(APPEND ANDROID_LIBS GLESv1_CM)
+	list(APPEND ANDROID_LIBS GLESv2)
+	list(APPEND ANDROID_LIBS log)
+	list(APPEND ANDROID_LIBS android)
+
+	#add_executable(DKAndroid ${App_SRC})
+	set(CMAKE_CXX_STANDARD 17)
+
+	add_library(DKAndroid SHARED ${App_SRC})
+	#target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${ANDROID_LIBS})
+	#target_include_directories(DKAndroid PUBLIC ${INCLUDE_DIRECTORIES}) #of ${DKINCLUDES_LIST}
+	target_link_libraries(DKAndroid ${DEBUG_LIBS} ${RELEASE_LIBS} ${ANDROID_LIBS})
+	#add_dependencies(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS})	
+	
+	#include_external_msproject(DKGradle ${DKPROJECT}/${OS}/DKGradle.androidproj)
+endif()
+
+
+###########
+#if(ANDROID)
+#	#copy android files from DKPlugins/_DKIMPORT
+#	#copy assets
+#	DKREMOVE(${DKPROJECT}/assets/USER)
+#	if(DEBUG)
+#		DKCOPY(${DKPROJECT}/assets/ ${DKPROJECT}/${OS}/${DEBUG_DIR}/assets TRUE)
+#		DKCOPY(${DKPROJECT}/icons/android/ ${DKPROJECT}/${OS}/${DEBUG_DIR}/res TRUE)
+#	endif()
+#	if(RELEASE)
+#		DKCOPY(${DKPROJECT}/assets/ ${DKPROJECT}/${OS}/${RELEASE_DIR}/assets TRUE)
+#		DKCOPY(${DKPROJECT}/icons/android/ ${DKPROJECT}/${OS}/${RELEASE_DIR}/res TRUE)
+#	endif()
+#	
+#	#update app name
+#	DKUPDATE_ANDROID_NAME(${APP_NAME})
+#	
+#	message(STATUS "Creating Android.mk file for ${APP_NAME}....")
+#	DKSET(ANDROID_APPMK ${ANDROID_APPMK} "LOCAL_PATH := $(call my-dir)\n")
+#	if(SDL)
+#		message(STATUS "USING SDL FOR ANDROID")
+#		DKSET(ANDROID_APPMK ${ANDROID_APPMK} "include $(CLEAR_VARS)\n")
+#		DKSET(ANDROID_APPMK ${ANDROID_APPMK} "LOCAL_MODULE := SDL2\n")
+#	if(DEBUG)
+#		DKSET(ANDROID_APPMK ${ANDROID_APPMK} "LOCAL_SRC_FILES := ${SDL}/${OS}/${DEBUG_DIR}/obj/local/armeabi-v7a/libSDL2.so\n")
+#	endif()
+#	if(RELEASE)
+#		DKSET(ANDROID_APPMK ${ANDROID_APPMK} "LOCAL_SRC_FILES := ${SDL}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/libSDL2.so\n")
+#	endif()
+#		DKSET(ANDROID_APPMK ${ANDROID_APPMK} "include $(PREBUILT_SHARED_LIBRARY)\n")
+#	endif()
+#	
+#	DKSET(ANDROID_APPMK ${ANDROID_APPMK} "include $(CLEAR_VARS)\n")
+#	if(DEBUG)
+#		DKSET(ANDROID_APPMK ${ANDROID_APPMK} "BUILD_TYPE := Debug\n\n")
+#	endif()
+#	if(RELEASE)
+#		DKSET(ANDROID_APPMK ${ANDROID_APPMK} "BUILD_TYPE := Release\n\n")
+#	endif()
+#	DKSET(ANDROID_APPMK ${ANDROID_APPMK} "LOCAL_MODULE := DKAndroid\n")
+#	DKSET(ANDROID_APPMK ${ANDROID_APPMK} "SRC_DIR := $(LOCAL_PATH)/../../..\n")
+#	DKSET(ANDROID_APPMK ${ANDROID_APPMK} "DK_DIR := C:/Users/$ENV{USERNAME}/digitalknob\n")
+#	DKSET(ANDROID_APPMK ${ANDROID_APPMK} "NDKLIBDIR := ${ANDROIDNDK}/sources/cxx-stl/gnu-libstdc++/4.8/libs/armeabi-v7a\n")
+#	DKSET(ANDROID_APPMK ${ANDROID_APPMK} "DKPLUGINS := $(DK_DIR)/DKPlugins\n")
+#	DKSET(ANDROID_APPMK ${ANDROID_APPMK} "3RDPARTY := $(DKPLUGINS)/3rdParty\n\n")
+#
+#	DKSET(ANDROID_APPMK ${ANDROID_APPMK} "LOCAL_C_INCLUDES := $(LOCAL_PATH)\n")
+#	DKSET(ANDROID_APPMK ${ANDROID_APPMK} "LOCAL_C_INCLUDES += $(SRC_DIR)\n")
+#	DKSET(ANDROID_APPMK ${ANDROID_APPMK} "LOCAL_CFLAGS := -fno-short-enums -fpermissive -fuse-ld=bfd\n")
+#	DKSET(ANDROID_APPMK ${ANDROID_APPMK} "LOCAL_LDLIBS := -llog -lGLESv1_CM -lz -landroid\n")
+#	#if(OPENGL2)
+#	#	DKSET(ANDROID_APPMK ${ANDROID_APPMK} "LOCAL_LDLIBS := -llog -lGLESv2 -lz\n")
+#	#else()
+#	#	DKSET(ANDROID_APPMK ${ANDROID_APPMK} "LOCAL_LDLIBS := -llog -lGLESv1_CM -lz\n")
+#	#endif()
+#	DKSET(ANDROID_APPMK ${ANDROID_APPMK} "APP_SRC := $(wildcard $(SRC_DIR)/*.cpp)\n")
+#	DKSET(ANDROID_APPMK ${ANDROID_APPMK} "APP_SRC += $(wildcard $(SRC_DIR)/*.c)\n")
+#	DKSET(ANDROID_APPMK ${ANDROID_APPMK} "LOCAL_SRC_FILES := $(APP_SRC:$(LOCAL_PATH)/%=%)\n\n")
+#
+#	DKSET(ANDROID_APPMK ${ANDROID_APPMK} "LOCAL_CPPFLAGS := -DANDROID\n")
+#	if(ANDROID_32)
+#		DKSET(ANDROID_APPMK ${ANDROID_APPMK} "LOCAL_CPPFLAGS += -DANDROID32\n")
+#	endif()
+#	if(ANDROID_64)
+#		DKSET(ANDROID_APPMK ${ANDROID_APPMK} "LOCAL_CPPFLAGS += -DANDROID64\n")
+#	endif()
+#	#DKSET(ANDROID_APPMK ${ANDROID_APPMK} "LOCAL_CPPFLAGS += -D__ANDROID__\n")
+#	DKSET(ANDROID_APPMK ${ANDROID_APPMK} "LOCAL_CPPFLAGS += -DDKAPP\n")
+#	DKSET(ANDROID_APPMK ${ANDROID_APPMK} "ifeq ($(BUILD_TYPE),Debug)\n")
+#	DKSET(ANDROID_APPMK ${ANDROID_APPMK} "	LOCAL_CPPFLAGS += -DDEBUG\n")
+#	DKSET(ANDROID_APPMK ${ANDROID_APPMK} "else\n")
+#	DKSET(ANDROID_APPMK ${ANDROID_APPMK} "	LOCAL_CPPFLAGS += -DNDEBUG\n")
+#	DKSET(ANDROID_APPMK ${ANDROID_APPMK} "endif\n")
+#
+#	DKSET(ANDROID_APPMK ${ANDROID_APPMK} "LIBDIR := $(BUILD_TYPE)/obj/local/armeabi\n")
+#	DKSET(ANDROID_APPMK ${ANDROID_APPMK} "ifeq ($(TARGET_ARCH_ABI),armeabi-v7a)\n")
+#	DKSET(ANDROID_APPMK ${ANDROID_APPMK} "	LOCAL_ARM_NEON := true\n")
+#	DKSET(ANDROID_APPMK ${ANDROID_APPMK} "	LIBDIR := $(BUILD_TYPE)/obj/local/armeabi-v7a\n")
+#	DKSET(ANDROID_APPMK ${ANDROID_APPMK} "endif\n\n")
+#	DKSET(ANDROID_APPMK ${ANDROID_APPMK} "LOCAL_LDFLAGS :=\n\n")
+#   foreach(each_define ${DKDEFINES_LIST})
+#		DKSET(ANDROID_LIBMK "${ANDROID_LIBMK} "LOCAL_LDFLAGS += ${each_define}\n")
+#	endforeach()
+#	DKSET(ANDROID_APPMK ${ANDROID_APPMK} "LOCAL_C_INCLUDES += ${DKPLUGINS}\n")
+#	foreach(each_include ${DKINCLUDES_LIST})
+#		DKSET(ANDROID_LIBMK "${ANDROID_LIBMK} "LOCAL_C_INCLUDES += ${each_include}\n")
+#	endforeach()
+#	#list(REVERSE DKLIBRARIES)
+#	DKSET(ANDROID_APPMK ${ANDROID_APPMK} ${DKLIBRARIES})
+#			
+#	if(SDL)
+#		DKSET(ANDROID_APPMK ${ANDROID_APPMK} "LOCAL_SHARED_LIBRARIES := SDL2\n")
+#	endif()
+#	DKSET(ANDROID_APPMK ${ANDROID_APPMK} "include $(BUILD_SHARED_LIBRARY)\n\n")
+#	
+#	if(DEBUG)
+#		file(WRITE ${DKPROJECT}/${OS}/${DEBUG_DIR}/jni/Android.mk ${ANDROID_APPMK})
+#	endif()
+#	if(RELEASE)
+#		file(WRITE ${DKPROJECT}/${OS}/${RELEASE_DIR}/jni/Android.mk ${ANDROID_APPMK})
+#	endif()
+#endif()
+
+
+#clean these cached variables
+##DKSET(DKDEFINES "")
+##DKSET(DKINCLUDES "")
+##DKSET(DKLIBRARIES "")
+
+# Generate a CMakelists.txt for the app. This is a work in progress
+file(WRITE ${DKPROJECT}/CMakeLists.txt ${APP_CMAKEFILE})
+
+message(STATUS "\n")
+message(STATUS "***************************************")
+message(STATUS "********** Finnished ${APP_NAME} **********")
+message(STATUS "***************************************\n")

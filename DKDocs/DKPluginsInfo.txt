@@ -1,0 +1,73 @@
+"A DKPlugin"
+
+A DKPlugins is a folder, it's contents are compaitble with DigitalKnob.  i.e. DKPlugins/MyPlugin
+A DKPlugin can be anything from c++ files, to html, javascript, or just file assets ,.png,.txt.etc.
+Every Plugin must include a DKMAKE.cmake file to run.
+Every Plugin must be located in the digitalknob/DKPlugins folder
+
+
+*** DKASSETS() ***
+/DKPlugins/MyPlugin/DKMAKE.cmake -> "DKASSETS(MyPlugin)"
+This is the easiest version of a plugin, anything in the "DKPlugins/MyPlugin" folder will be copied to the app's assets
+
+*** DKDEPEND() ***
+When a Plugin depends on another plugin, specify DKDEPEND(DKPluginName)
+
+For example, DKPng requires DKZlib..   
+The DKMAKE.cmake file in the /DKPlugins/DKPng folder will state...
+DKDEPEND(DKZlib)
+This command will ensure DKZlib is built first and recognied by DKPng.
+
+*** DKINCLUDE() ***
+Source code need's to include header file locations.
+we can eaisly say DKINCLUDE("C:/Users/username/digitalknob/DKPlugins/3rdParty/vorbis/include")
+This will allow DKPlugins and the DKApp to see these header files. 
+
+*** DKPLUGIN() ***
+When we use c++ files to work with DK, we need to compile them.
+I.E. DKPLUGIN(MyPlugin) will compile to a library to be linked to your app.
+
+*** DEBUG_LIB() ***
+This will include a static library into the app.  (please use platfrom spacific commands below)
+
+*** RELEASE_LIB() ***
+This will include a static library into the app.  (please use platfrom spacific commands below)
+
+
+*** OS Specific Commands ***
+WIN_DEBUG_LIB()
+WIN_RELEASE_LIB()
+WIN32_DEBUG_LIB()
+WIN32_RELEASE_LIB()
+WIN64_DEBUG_LIB()
+WIN64_RELEASE_LIB()
+APPLE_DEBUG_LIB()
+APPLE_RELEASE_LIB()
+MAC_DEBUG_LIB()
+MAC_RELEASE_LIB()
+IPHONE_DEBUG_LIB()
+IPHONE_RELEASE_LIB()
+IPHONESIMULATOR_DEBUG_LIB()
+IPHONESIMULATOR_RELEASE_LIB()
+LINUX_DEBUG_LIB()
+LINUX_RELEASE_LIB()
+ANDROID_DEBUG_LIB()
+ANDROID_RELEASE_LIB()
+
+WIN_INCLUDE()
+WIN32_INCLUDE()
+WIN64_INCLUDE()
+APPLE_INCLUDE()
+MAC_INCLUDE()
+IPHONE_INCLUDE()
+IPHONESIMULATOR_INCLUDE()
+LINUX_INCLUDE()
+LINUX_DEBUG_INCLUDE()
+LINUX_RELEASE_INCLUDE()
+ANDROID_INCLUDE()
+ANDROID_DEBUG_INCLUDE()
+ANDROID_RELEASE_INCLUDE()
+
+
+*** Notes ***
+Please look at digitalknob/DKCMake/Functions.cmake to see all of the available functions.

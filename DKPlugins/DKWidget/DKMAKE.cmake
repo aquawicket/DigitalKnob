@@ -1,0 +1,14 @@
+## DKDEPEND(DKRocket)
+## DKDEPEND(DKMySql)
+## DKDEPEND(DKWindow)
+## DKDEPEND(DKGui)
+IF(USE_DKDuktape)
+	DKDEPEND(DKDuktape)
+ENDIF()
+IF(USE_DKCef)
+	DKDEPEND(DKCef)
+ENDIF()
+
+
+## DKPLUGIN(DKWidget)
+DKASSETS(DKWidget)

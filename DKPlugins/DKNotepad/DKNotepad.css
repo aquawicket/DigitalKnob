@@ -1,0 +1,89 @@
+[dk_notepad="notepad"] {
+	position:absolute;
+	overflow:hidden;
+}
+
+[dk_notepad="menubar"] {
+	position:absolute;
+	width:100%;
+	height:20px;
+	height:20rem;
+	background-color:rgb(220,220,220);
+	cursor:default;
+}
+
+[dk_notepad="file"] {
+	position:absolute;
+	top:2px;
+	top:2rem;
+	left:6px;
+	left:6rem;
+	width:35px;
+	width:35rem;
+}
+
+[dk_notepad="edit"] {
+	position:absolute;
+	top:2px;
+	top:2rem;
+	left:46px;
+	left:46rem;
+	width:35px;
+	width:35rem;
+}
+
+[dk_notepad="format"] {
+	position:absolute;
+	top:2px;
+	top:2rem;
+	left:86px;
+	left:86rem;
+	width:50px;
+	width:50rem;
+}
+
+[dk_notepad="view"] {
+	position:absolute;
+	top:2px;
+	top:2rem;
+	left:146px;
+	left:146rem;
+	width:35px;
+	width:35rem;
+}
+
+[dk_notepad="help"] {
+	position:absolute;
+	top:2px;
+	top:2rem;
+	left:190px;
+	left:190rem;
+	width:35px;
+	width:35rem;
+}
+
+[dk_notepad="container"] {
+	position:absolute;
+	top:20px;
+	top:20rem;
+	left:0px;
+	left:0rem;
+	right:0px;
+	right:0rem;
+	bottom:0px;
+	bottom:0rem;
+}
+
+[dk_notepad="text"] {
+	position:absolute;
+	top:0px;
+	top:0rem;
+	left:0px;
+	left:0rem;
+	width:100%;
+	height:100%;
+	border-width:0px;
+	border-width:0rem;
+	overflow-y:auto;
+	white-space: normal;
+}

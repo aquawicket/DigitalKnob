@@ -1,0 +1,8 @@
+DKDEPEND(DKAssets)
+DKDEPEND(DKSDLWindow)
+DKDEPEND(DKRml)
+DKDEPEND(SDL2_image)
+## DKDEPEND(SDL2_gif) ##Deprecated
+## DKDEPEND(SDL2_giflib_sa-master) ##FIXME
+
+DKPLUGIN(DKSDLRml)

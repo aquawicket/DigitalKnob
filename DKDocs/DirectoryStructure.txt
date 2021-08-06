@@ -1,0 +1,21 @@
+DIRECTORY STRUCTURE
+
+digitalknob/DK
+			git             <-clean git
+			/3rdParty
+			/DKApps
+			/DKCMake
+			/DKDocs
+			/DKPlugins
+digitalknob/MyApps
+			git				<-clean git
+			/3rdParty
+			/DKApps
+			/DKDocs
+			/DKPlugins
+digitalknob/Misc
+			git				<-clean git
+			/3rdParty
+			/DKApps
+			/DKDocs
+			/DKPlugins

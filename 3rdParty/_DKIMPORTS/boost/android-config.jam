@@ -1,0 +1,107 @@
+# https://stackoverflow.com/questions/54349285/how-to-compile-boost-1-68-0-for-android-using-ndk-r18b-using-windows
+
+# Here are the steps to compile boost for Android
+# Apply moritz-wundke's patch from here: https://github.com/moritz-wundke/Boost-for-Android/tree/master/patches
+# Run bootstrap
+# Then make sure the NDK_ROOT environment variable is set and the ANDROID_API
+# setx NDK_ROOT %ANDROID_HOME%/ndk/22.1.7171670
+# setx ANDROID_API 24
+
+# For armeabiv7-a run: ./b2 -q --without-math --without-context --without-coroutine --without-fiber --without-python architecture=arm --ignore-site-config -j4 target-os=android  toolset=clang-armeabiv7a link=static threading=multi --layout=versioned --build-dir=../build/arm --stagedir=../stage_arm stage
+
+# For x86 run: ./b2 -q --without-math --without-context --without-coroutine --without-fiber --without-python architecture=arm --ignore-site-config -j4 target-os=android  toolset=clang-armeabiv7a link=static threading=multi --layout=versioned --build-dir=../build/arm --stagedir=../stage_arm stage
+
+
+import os ;
+#local ANDROID_API = [ os.environ ANDROID_API ] ;
+local ANDROID_API = 24 ;
+local NDK_ROOT = [ os.environ NDK_ROOT ] ;
+#local NDK_ROOT = C:/Users/aquawicket/digitalknob/DK/3rdParty/android-sdk/ndk/22.1.7171670 ;
+
+using clang : armeabiv7a
+:
+$(NDK_ROOT)/toolchains/llvm/prebuilt/windows-x86_64/bin/clang++
+:
+<compileflags>-fexceptions
+<compileflags>-frtti
+<compileflags>-mthumb
+<compileflags>-ffunction-sections
+<compileflags>-funwind-tables
+<compileflags>-fstack-protector-strong
+<compileflags>-Wno-invalid-command-line-argument
+<compileflags>-Wno-unused-command-line-argument
+<compileflags>-no-canonical-prefixes
+<compileflags>-I$(NDK_ROOT)/sources/cxx-stl/llvm-libc++/include
+<compileflags>-I$(NDK_ROOT)/sources/cxx-stl/llvm-libc++abi/include
+<compileflags>-I$(NDK_ROOT)/sources/android/support/include
+<compileflags>-DANDROID
+<compileflags>-Wa,--noexecstack
+<compileflags>-Wformat
+<compileflags>-Werror=format-security
+<compileflags>-DNDEBUG
+<compileflags>-D_REENTRANT
+<compileflags>-O2
+<compileflags>-gcc-toolchain
+<compileflags>$(NDK_ROOT)/toolchains/arm-linux-androideabi-4.9/prebuilt/windows-x86_64
+<compileflags>-target
+<compileflags>armv7-linux-androideabi
+<compileflags>-march=armv7-a
+<compileflags>-mfloat-abi=softfp
+<compileflags>-mfpu=vfpv3-d16
+<compileflags>-fno-builtin-memmove
+<compileflags>-fpic
+<compileflags>-DHAVE_CONFIG_H
+<compileflags>-fno-integrated-as
+<compileflags>--sysroot
+<compileflags>$(NDK_ROOT)/sysroot
+<compileflags>-isystem
+<compileflags>$(NDK_ROOT)/sysroot/usr/include/arm-linux-androideabi
+<compileflags>-D__ANDROID_API__=$(ANDROID_API)
+<archiver>$(NDK_ROOT)/toolchains/arm-linux-androideabi-4.9/prebuilt/windows-x86_64/arm-linux-androideabi/bin/ar
+<ranlib>$(NDK_ROOT)/toolchains/arm-linux-androideabi-4.9/prebuilt/windows-x86_64/arm-linux-androideabi/bin/ranlib
+
+;
+
+# --------------------------------------------------------------------
+
+using clang : x86
+:
+$(NDK_ROOT)/toolchains/llvm/prebuilt/windows-x86_64/bin/clang++
+:
+<compileflags>-fexceptions
+<compileflags>-frtti
+<compileflags>-mthumb
+<compileflags>-ffunction-sections
+<compileflags>-funwind-tables
+<compileflags>-fstack-protector-strong
+<compileflags>-Wno-invalid-command-line-argument
+<compileflags>-Wno-unused-command-line-argument
+<compileflags>-no-canonical-prefixes
+<compileflags>-I$(NDK_ROOT)/sources/cxx-stl/llvm-libc++/include
+<compileflags>-I$(NDK_ROOT)/sources/cxx-stl/llvm-libc++abi/include
+<compileflags>-I$(NDK_ROOT)/sources/android/support/include
+<compileflags>-DANDROID
+<compileflags>-Wa,--noexecstack
+<compileflags>-Wformat
+<compileflags>-Werror=format-security
+<compileflags>-DNDEBUG
+<compileflags>-D_REENTRANT
+<compileflags>-O2
+<compileflags>-gcc-toolchain
+<compileflags>$(NDK_ROOT)/toolchains/x86-4.9/prebuilt/windows-x86_64
+<compileflags>-target
+<compileflags>i686-linux-android
+<compileflags>-march=i686
+<compileflags>-mfloat-abi=softfp
+<compileflags>-mfpu=vfpve-d16
+<compileflags>-fno-builtin-memmove
+<compileflags>-fPIC
+<compileflags>-mstackrealign
+<compileflags>--sysroot
+<compileflags>$(NDK_ROOT)/sysroot
+<compileflags>-isystem
+<compileflags>$(NDK_ROOT)/sysroot/usr/include/i686-linux-android
+<compileflags>-D__ANDROID_API__=$(ANDROID_API)
+<archiver>$(NDK_ROOT)/toolchains/x86-4.9/prebuilt/windows-x86_64/i686-linux-android/bin/ar
+<ranlib>$(NDK_ROOT)/toolchains/x86-4.9/prebuilt/windows-x86_64/i686-linux-android/bin/ranlib
+;

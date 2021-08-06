@@ -1,0 +1,49 @@
+# Downloads
+# https://www.npcglib.org/~stathis/downloads/openssl-1.0.2h-vs2015.7z
+
+
+### VERSION ###
+DKSET(OPENSSL_VERSION 1.0.2h-vs2015)
+DKSET(OPENSSL_DL https://www.npcglib.org/~stathis/downloads/openssl-${OPENSSL_VERSION}.7z)
+DKSET(OPENSSL ${3RDPARTY}/openssl-${OPENSSL_VERSION})
+
+
+### INSTALL ###
+DKINSTALL(${OPENSSL_DL} openssl-vs2015 ${OPENSSL})
+
+
+### DKPLUGINS LINK ###
+DKINCLUDE(${OPENSSL}/include)
+WIN32_DEBUG_LIB(${OPENSSL}/lib/libeay32MTd.lib)
+WIN32_RELEASE_LIB(${OPENSSL}/lib/libeay32MT.lib)
+WIN64_DEBUG_LIB(${OPENSSL}/lib64/libeay32MTd.lib)
+WIN64_RELEASE_LIB(${OPENSSL}/lib64/libeay32MT.lib)
+#APPLE_DEBUG_LIB(${3RDPARTY}/openssl-mac/lib/libeay32MT.a)
+#APPLE_RELEASE_LIB(${3RDPARTY}/openssl-mac/lib/libeay32MT.a)
+#LINUX_DEBUG_LIB(${3RDPARTY}/openssl-linux/lib/libeay32MT.a)
+#LINUX_RELEASE_LIB(${3RDPARTY}/openssl-linux/lib/libeay32MT.a)
+#RASPBERRY_DEBUG_LIB(${3RDPARTY}/openssl-linux/lib/libeay32MT.a)
+#RASPBERRY_RELEASE_LIB(${3RDPARTY}/openssl-linux/lib/libeay32MT.a)
+#ANDROID_DEBUG_LIB(${3RDPARTY}/openssl-linux/lib/libeay32MT.a)
+#ANDROID_RELEASE_LIB(${3RDPARTY}/openssl-linux/lib/libeay32MT.a)
+
+WIN32_DEBUG_LIB(${OPENSSL}/lib/ssleay32MTd.lib)
+WIN32_RELEASE_LIB(${OPENSSL}/lib/ssleay32MT.lib)
+WIN64_DEBUG_LIB(${OPENSSL}/lib64/ssleay32MTd.lib)
+WIN64_RELEASE_LIB(${OPENSSL}/lib64/ssleay32MT.lib)
+#APPLE_DEBUG_LIB(${3RDPARTY}/openssl-mac/lib/ssleay32MTd.a)
+#APPLE_RELEASE_LIB(${3RDPARTY}/openssl-mac/lib/ssleay32MT.a)
+#LINUX_DEBUG_LIB(${3RDPARTY}/openssl-linux/lib/ssleay32MTd.a)
+#LINUX_RELEASE_LIB(${3RDPARTY}/openssl-linux/lib/ssleay32MT.a)
+#RASPBERRY_DEBUG_LIB(${3RDPARTY}/openssl-linux/lib/ssleay32MTd.a)
+#RASPBERRY_RELEASE_LIB(${3RDPARTY}/openssl-linux/lib/ssleay32MT.a)
+#ANDROID_DEBUG_LIB(${3RDPARTY}/openssl-linux/lib/ssleay32MTd.a)
+#ANDROID_RELEASE_LIB(${3RDPARTY}/openssl-linux/lib/ssleay32MT.a)
+
+
+### 3RDPARTY LINK ###
+DKSET(OPENSSL_WIN -DCMAKE_USE_OPENSSL=ON -DOPENSSL_INCLUDE_DIR=${OPENSSL}/include -DLIB_EAY_DEBUG=${OPENSSL}/lib/libeay32MTd.lib -DLIB_EAY_RELEASE=${OPENSSL}/lib/libeay32MT.lib -DSSL_EAY_DEBUG=${OPENSSL}/lib/ssleay32MTd.lib -DSSL_EAY_RELEAS=${OPENSSL}/lib/ssleay32MT.lib)
+#DKSET(OPENSSL_APPLE -DCMAKE_USE_OPENSSL=ON -DOPENSSL_INCLUDE_DIR=${OPENSSL}/include -DLIB_EAY_DEBUG=${OPENSSL}/lib/libeay32MTd.a -DLIB_EAY_RELEASE=${OPENSSL}/lib/libeay32MT.a -DSSL_EAY_DEBUG=${OPENSSL}/lib/ssleay32MTd.a -DSSL_EAY_RELEAS=${OPENSSL}/lib/ssleay32MT.a)
+#DKSET(OPENSSL_LINUX -DCMAKE_USE_OPENSSL=ON -DOPENSSL_INCLUDE_DIR=${OPENSSL}/include -DLIB_EAY_DEBUG=${OPENSSL}/lib/libeay32MTd.a -DLIB_EAY_RELEASE=${OPENSSL}/lib/libeay32MT.a -DSSL_EAY_DEBUG=${OPENSSL}/lib/ssleay32MTd.a -DSSL_EAY_RELEAS=${OPENSSL}/lib/ssleay32MT.a)
+#DKSET(OPENSSL_RASPBERRY -DCMAKE_USE_OPENSSL=ON -DOPENSSL_INCLUDE_DIR=${OPENSSL}/include -DLIB_EAY_DEBUG=${OPENSSL}/lib/libeay32MTd.a -DLIB_EAY_RELEASE=${OPENSSL}/lib/libeay32MT.a -DSSL_EAY_DEBUG=${OPENSSL}/lib/ssleay32MTd.a -DSSL_EAY_RELEAS=${OPENSSL}/lib/ssleay32MT.a)
+#DKSET(OPENSSL_ANDROID -DCMAKE_USE_OPENSSL=ON -DOPENSSL_INCLUDE_DIR=${OPENSSL}/include -DLIB_EAY_DEBUG=${OPENSSL}/lib/libeay32MTd.a -DLIB_EAY_RELEASE=${OPENSSL}/lib/libeay32MT.a -DSSL_EAY_DEBUG=${OPENSSL}/lib/ssleay32MTd.a -DSSL_EAY_RELEAS=${OPENSSL}/lib/ssleay32MT.a)

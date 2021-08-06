@@ -1,0 +1,19 @@
+import scanner ;
+import type ;
+
+type ASCIIDOC : adoc asciidoc ;
+
+class asciidoc-scanner : common-scanner
+{
+    rule pattern ( )
+    {
+        return
+            "include::([^[]+)"
+            "image::([^[]+)"
+            "image:([^[]+)"
+        ;
+    }
+}
+
+scanner.register asciidoc-scanner : include ;
+type.set-scanner ASCIIDOC : asciidoc-scanner ;

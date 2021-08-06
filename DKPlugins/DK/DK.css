@@ -1,0 +1,45 @@
+html{
+	font-size: 1.0px;
+}
+
+body{
+	font-size: 13em;
+	margin: 0px;
+	/*
+	padding: 0px;
+	top: 0px;
+	left: 0px;
+	height: 100%;
+	min-height: 100%;
+	width: 100%;
+	overflow-x: hidden;
+	overflow-y: hidden;
+	*/
+}
+
+/*
+textarea{
+	resize: none;
+}
+
+option{
+	background-color: white;
+	color:black;
+	-webkit-touch-callout: none;
+    -webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+option:hover{
+	background-color: rgb(123,157,212);
+	color:white;
+}
+
+div.option:hover{
+	background-color: rgb(123,157,212);
+	color:white;
+}
+*/

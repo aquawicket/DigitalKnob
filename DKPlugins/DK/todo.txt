@@ -1,0 +1,74 @@
+~! THE LIST !~    02/09/21
+
+*******************
+*** DIGITALKNOB ***
+*******************
+Move all github wiki into DK.Readme.md and remove all wiki
+Remove github Wiki and create an example just like /DKPlugins/index.html
+Create a fork of RmlUi with a javascript folder for the document object, then dom
+
+Go over DKFile.js and alphabatize functions
+
+I think we need to get rid of DKINSTALL in all the DKCMake stuff.
+I think it can add confussion and it only uses a few lines to download and install
+ 
+
+Move all gui related js to DKGui.js
+DK.js will have access to a C++ EventTarget
+In fact, all C++ OOP structure will follow W3 javascript naming standards.
+
+make a "raw key" to "w3 standard key translation"..    int 43 = "KeyY"    ;)
+Translate all keycodes to internet w3 standards from raw code
+
+DKSolution needs to get renamesd to DKFileExplorer    
+
+*** DKNotepad ***
+textarea steals key events from documnet
+Get DKNotepad to listen for Ctrl + s
+DKNotepadFile_Exit() breaks DK_Close()
+Get Copy and Paste working
+Remove save comfrimation and make a sparkle, or something
+ 
+ 
+convert DKSDLRocket in DKTestApps to DKSDLRml
+
+*** DKTUTORIAL ***
+DK1:   DKCmake build system
+DK2:   DK C++ w/ nothing
+DK3:   DK C++ w/Javascript (DKDuktape)  =  OM  "Object Model" 
+DK4:   DK C++ w/ javascript (DKDuktape) +  DKRml = DOM "Document Object Model"
+* This is how DKTestApps should be named *
+
+
+If you get DKDom as a seperate RmlUi Library, poeple might chip in.
+
+Remodel DK/Events.cpp after javascript EventTarget by creating DK/EventTarget.h/cpp
+
+
+Rename Github MyApps to DKMyApps
+Get DKTestAll Working on Linux
+Compile Everything for win64
+Hint: Their may be a new SDL2Android thing in 3rdParty. ANDROID
+
+*** Javascript ***
+EventTarget is lower than Window. Use that for javascript without a document context.
+ALL C++ Javascript functions now require a CPP_ prefix
+Proper naming would be CPP_DKPlugin_Function
+DK Javascript functions are just DKPlugin_Function 
+
+*** DK.js ***
+Make sure all function are prefixed with DK_
+i.e.  DK_Function(var)
+
+** Eliminate DKWidget
+Let continue to strip down DKWidget.js because it's all moving to DK.js and DKWidget is gone.
+
+*** ALWAYS ***
+ replace all == with ===
+ replace all != with !==
+
+*** DKDomEvent ***
+* add removeEventListener everywhere neccesary 
+* Make EVERY event go through DKDomEventTarget.js event without a DOM
+* keep track of events in DKDomEventTarget.js
+

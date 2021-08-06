@@ -1,0 +1,89 @@
+[dk_frame="frame"] {
+    position: absolute;
+    overflow: hidden;
+    min-width: 62rem;
+    min-height: 20rem;
+    background-color: #766a6a;
+}
+
+[dk_frame="frame"]::after {
+    content: '';
+    position: absolute;
+    border-style:solid;
+    border-width: 1rem;
+    border-color: black;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    pointer-events: none;
+}
+
+[dk_frame="content"] {
+    position: absolute;
+    top: 21rem;
+    bottom: 0rem;
+    left: 0rem;
+    right: 0rem;
+    height: unset;
+    width: unset;
+}
+
+[dk_frame="titlebar"] {
+    position: absolute;
+    top: 0rem;
+    left: 0rem;
+    right: 0rem;
+    height: 21rem;
+    background-color: #151416;
+}
+
+[dk_frame="titlebaricon"] {
+    position: absolute;
+    padding-top: 2rem;
+    padding-left:2rem;
+    width:16rem;
+}
+
+[dk_frame="titlebartext"] {
+    position: absolute;
+    cursor: default;
+    color: #d9cbe0;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    padding-left: 20rem;
+    padding-right: 4rem;
+    font-size: 15rem;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+[dk_frame="reload"] {
+    position: absolute;
+    top: 1rem;
+    right: 63rem;
+    height: 19rem;
+    background-color: rgb(212 210 212);
+
+}
+
+[dk_frame="minimize"] {
+    position: absolute;
+    top: 0rem;
+    right: 42rem;
+    height: 20rem;
+}
+
+[dk_frame="maximize"] {
+    position: absolute;
+    top: 0rem;
+    right: 21rem;
+    height: 20rem;
+}
+
+[dk_frame="close"] {
+    position: absolute;
+    top: 0rem;
+    right: 0rem;
+    height: 20rem;
+}

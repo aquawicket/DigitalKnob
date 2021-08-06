@@ -1,0 +1,93 @@
+//  Object heirarchy syntax across different languages
+
+
+//  Everything is a node, and every node falls into a heirarchial structure. 
+//  Our program is a heirarchy structrue that is of cascading inheritence. 
+//  Our most abstract (top most) target language for DK is javascript and json. 
+//  All objects or nodes can be orginized and linked agourding to matching sytax guidlines. 
+
+//  Lets start by looking a console.log found in most browsers. 
+//  Console is a root object. In browsers, Window.console only refrences the Console root object.
+//  This is a perfect place to start, with a root instance of an object.  console
+
+
+console.log()                    = javascript  (.js   )    log is a child of console. log is a member function of the console object
+
+
+//// EXAMPLE ////
+console_log                      = string      ("string")  log is a child of console. log is a substring of the console_log string.
+console/log                      = path        (./)        log is a child of console. log is a subdirectory or the console folder.
+TODO                             = git         (git)       log is a child of console. TODO
+TODO                             = cmake       (.cmake)    log is a child of console. TODO
+console::log()                   = c++         (.cpp  )    log is a child of console. log is a member function of the console class
+console.log()                    = java        (.java )    log is a child of console. log is a member function of the console class
+console log                      = css         (.css )     log is a child of console. log is a child node of console of of the console node
+<console><log/></console>        = html        (.html )    log is a child of console. log is a child node of console of of the console node
+console.log()                    = javascript  (.js   )    log is a child of console. log is a member function of the console object
+console{ log() }                 = json        (.json )    log is a child of console. FIXME
+
+ 
+//// DK ROOT NODE EXAMPLE ////
+dk_console_log                   = string      ("string")    
+dk/console/log                   = path        (./)         https://kohana.top/3.2/guide/kohana/files
+TODO                             = git         (git)        https://git-scm.com/book/en/v2/Git-Tools-Submodules
+TODO                             = cmake       (.cmake)     https://kubasejdak.com/modern-cmake-is-like-inheritance
+dk::console::log()               = c++         (.cpp  )     https://www.w3schools.com/cpp/cpp_inheritance.asp
+dk.console.log()                 = java        (.java )     https://www.w3schools.com/java/java_inheritance.asp
+dk console log                   = css         (.css )      https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Cascade_and_inheritance
+<dk>                             = html        (.html )     https://webplatform.github.io/docs/tutorials/inheritance_and_cascade/#:~:text=Inheritance%20is%20associated%20with%20how,do%20not%20override%20each%20other.
+	<console>
+		<log/>
+	</console>
+</dk>
+dk.console.log()                 = javascript  (.js   )
+TODO                             = json        (.json )
+
+
+
+//// EXPANDED EXAMPLE ////
+dk_gui_frame_titlebar_text       = string      ("string")
+dk/gui/frame/titlebar/text       = path        (./)
+TODO                             = git         (git)
+TODO                             = cmake       (.cmake)
+dk::dgui::frame::titlebar::text  = c++         (.cpp  )
+dk.gui.frame.titlebar.text       = java        (.java )
+dk gui frame titlebar text       = css         (.css )
+<dk>                             = html        (.html )
+	<gui>
+		<frame>
+			<titlebar>
+				</text>
+			</titlebar>
+		</frame>
+	</gui>
+</dk>
+dk.gui.frame.titlebar.text       = javascript  (.js   )
+TODO                             = json        (.json )
+
+
+
+
+//	Let's look at languages in a heirarchial view
+0101
+0101_assembaly
+0101_assembaly_c
+0101_assembaly_c_c++_
+0101_assembaly_c_c++_string
+0101_assembaly_c_c++_path
+0101_assembaly_c_c++_cmake
+0101_assembaly_c_c++_java
+0101_assembaly_c_c++_css
+0101_assembaly_c_c++_html
+0101_assembaly_c_c++_javascript
+
+
+
+
+//// REFERENCE
+https://kohana.top/3.2/guide/kohana/files
+https://kubasejdak.com/modern-cmake-is-like-inheritance
+https://www.w3schools.com/cpp/cpp_inheritance.asp
+https://www.w3schools.com/java/java_inheritance.asp
+https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Cascade_and_inheritance
+https://webplatform.github.io/docs/tutorials/inheritance_and_cascade/#:~:text=Inheritance%20is%20associated%20with%20how,do%20not%20override%20each%20other.

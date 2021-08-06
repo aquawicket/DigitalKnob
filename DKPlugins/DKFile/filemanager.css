@@ -1,0 +1,107 @@
+[dk_filemanager="box"] {
+    position: absolute;
+    overflow: hidden;
+    background-color: rgb(30,30,30);
+}
+
+[dk_filemanager="up"] {
+    position: absolute;
+    top: 1px;
+    top: 1rem;
+    left: 1px;
+    left: 1rem;
+    width: 19px;
+    width: 19rem;
+}
+
+[dk_filemanager="pathdiv"] {
+    position: absolute;
+    top: 3px;
+    top: 3rem;
+    height: 18px;
+    height: 18rem;
+    left: 22px;
+    left: 22rem;
+    right: 3px;
+    right: 3rem;
+}
+
+[dk_filemanager="path"] {
+    position: absolute;
+    font-size: 11rem;
+    width: 100%;
+    height: 84%;
+    overflow: hidden;
+    color: rgb(220,220,220);
+    background-color: rgb(50,50,50);
+    border-width: 1px;
+    border-style: inset;
+    border-color: rgb(60,60,60);
+}
+
+[dk_filemanager="drives"] {
+    position: absolute;
+    font-size: 11rem;
+    top: 21rem;
+    left: 4rem;
+    width: 103rem;
+    bottom: 30rem;
+    padding: 5rem;
+    overflow-x: auto;
+    overflow-y: auto;
+    border-top-width: 1rem;
+    color: rgb(220,220,220);
+    background-color: rgb(50,50,50);
+    border-width: 1rem;
+    border-style: inset;
+    border-color: rgb(60,60,60);
+}
+
+[dk_filemanager="list"] {
+    position: absolute;
+    font-size: 10rem;
+    top: 21rem;
+    left: 120rem;
+    right: 3rem;
+    bottom: 30rem;
+    padding: 5rem;
+    overflow-x: auto;
+    overflow-y: auto;
+    border-top-width: 1rem;
+    color: rgb(220,220,220);
+    background-color: rgb(50,50,50);
+    border-width: 1rem;
+    border-style: inset;
+    border-color: rgb(60,60,60);
+}
+
+[dk_filemanager="folder"] {
+    white-space: nowrap;
+    padding-left: 17px;
+    background-image: url("folder.png");
+    background-repeat: no-repeat;
+    cursor: default;
+}
+
+[dk_filemanager="file"] {
+    white-space: nowrap;
+    padding-left: 17px;
+    background-repeat: no-repeat;
+    cursor: default;
+}
+
+[dk_filemanager="cancel"] {
+    visibility: hidden;
+    position: absolute;
+    right:93rem;
+    bottom:5rem;
+    width:60rem;
+}
+
+[dk_filemanager="ok"] {
+    visibility: hidden;
+    position: absolute;
+    right:30rem;
+    bottom:5rem;
+    width:60rem;
+}

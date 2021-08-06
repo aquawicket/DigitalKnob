@@ -1,0 +1,49 @@
+if(NOT WIN_32)
+	return()
+endif()
+
+### VERSION ###
+DKSET(FFMPEG_VERSION ffmpeg-20150905-git-a87ada5-win32-dev)
+
+### INSTALL ###
+## DKINSTALL(www.internet.com/${FFMPEG_VERSION}.7z ${FFMPEG_VERSION} ${FFMPEG})
+DKRENAME(${FFMPEG}/include/libavutil/time.h ${FFMPEG}/include/libavutil/time.h.EXCLUDE)
+
+
+### LINK ###
+DKDEFINE(__STDC_CONSTANT_MACROS)
+WIN32_INCLUDE(${FFMPEG})
+WIN32_INCLUDE(${FFMPEG}/include)
+WIN32_INCLUDE(${FFMPEG}/include/libavcodec)
+WIN32_INCLUDE(${FFMPEG}/include/libavdevice)
+WIN32_INCLUDE(${FFMPEG}/include/libavfilter)
+WIN32_INCLUDE(${FFMPEG}/include/libavformat)
+WIN32_INCLUDE(${FFMPEG}/include/libavutil)
+WIN32_INCLUDE(${FFMPEG}/include/libswresample)
+WIN32_INCLUDE(${FFMPEG}/include/libswscale)
+WIN32_DEBUG_LIB(${FFMPEG}/lib/avcodec.lib)
+WIN32_RELEASE_LIB(${FFMPEG}/lib/avcodec.lib)
+WIN32_DEBUG_LIB(${FFMPEG}/lib/avdevice.lib)
+WIN32_RELEASE_LIB(${FFMPEG}/lib/avdevice.lib)
+WIN32_DEBUG_LIB(${FFMPEG}/lib/avfilter.lib)
+WIN32_RELEASE_LIB(${FFMPEG}/lib/avfilter.lib)
+WIN32_DEBUG_LIB(${FFMPEG}/lib/avformat.lib)
+WIN32_RELEASE_LIB(${FFMPEG}/lib/avformat.lib)
+WIN32_DEBUG_LIB(${FFMPEG}/lib/avutil.lib)
+WIN32_RELEASE_LIB(${FFMPEG}/lib/avutil.lib)
+WIN32_DEBUG_LIB(${FFMPEG}/lib/swresample.lib)
+WIN32_RELEASE_LIB(${FFMPEG}/lib/swresample.lib)
+WIN32_DEBUG_LIB(${FFMPEG}/lib/swscale.lib)
+WIN32_RELEASE_LIB(${FFMPEG}/lib/swscale.lib)
+
+
+### COMPILE ###
+WIN32_COMMAND(call C:/Windows/System32/cmd.exe /K ${VC2013}/VC/vcvarsall.bat amd64)
+WIN32_COMMAND(${VC2013}/VC/bin/amd64_x86/lib.exe /machine:i386 /def:${FFMPEG}/lib/avcodec-56.def /out:${FFMPEG}/lib/avcodec.lib & 
+${VC2013}/VC/bin/amd64_x86/lib.exe /machine:i386 /def:${FFMPEG}/lib/avdevice-56.def /out:${FFMPEG}/lib/avdevice.lib & 
+${VC2013}/VC/bin/amd64_x86/lib.exe /machine:i386 /def:${FFMPEG}/lib/avfilter-5.def /out:${FFMPEG}/lib/avfilter.lib & 
+${VC2013}/VC/bin/amd64_x86/lib.exe /machine:i386 /def:${FFMPEG}/avformat-56.def /out:${FFMPEG}/lib/avformat.lib & 
+${VC2013}/VC/bin/amd64_x86/lib.exe /machine:i386 /def:${FFMPEG}/lib/avutil-54.def /out:${FFMPEG}/lib/avutil.lib & 
+${VC2013}/VC/bin/amd64_x86/lib.exe /machine:i386 /def:${FFMPEG}/lib/postproc-53.def /out:${FFMPEG}/lib/postproc.lib & 
+${VC2013}/VC/bin/amd64_x86/lib.exe /machine:i386 /def:${FFMPEG}/lib/swresample-1.def /out:${FFMPEG}/lib/swresample.lib & 
+${VC2013}/VC/bin/amd64_x86/lib.exe /machine:i386 /def:${FFMPEG}/lib/swscale-3.def /out:${FFMPEG}/lib/swscale.lib & exit)

@@ -1,0 +1,29 @@
+#include "windows.h"
+#include "resource.h"
+
+ASSETS_ZIP                RCDATA                  "assets.zip"
+IDI_ICON                  ICON    DISCARDABLE     "icons\\windows\\icon.ico"
+IDI_TASKBARDEMO           ICON    DISCARDABLE     "icons\\windows\\icon.ico"
+//IDI_ICON4               ICON    DISCARDABLE     "assets\\icon4.ico"
+//IDI_ICON3               ICON    DISCARDABLE     "assets\\icon3.ico"
+//IDI_ICON2               ICON    DISCARDABLE     "assets\\icon2.ico"
+//IDI_ICON1               ICON    DISCARDABLE     "assets\\icon1.ico"
+
+
+IDR_POPUP_MENU MENU DISCARDABLE 
+BEGIN
+    POPUP "POPUP"
+    BEGIN
+		MENUITEM "", 0
+		//MENUITEM "Restore",                         IDM_RESTORE
+        //MENUITEM "Minimize to Tray",                IDM_MINTOTRAY
+        //MENUITEM "Exit",                        	IDM_EXIT
+    END
+END
+
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_APP_TITLE           "TaskbarDemo"
+    IDC_TASKBARDEMO         "TASKBARDEMO"
+END

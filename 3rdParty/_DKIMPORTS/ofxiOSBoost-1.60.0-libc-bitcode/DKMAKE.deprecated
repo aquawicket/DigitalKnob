@@ -1,0 +1,22 @@
+if(NOT CMAKE_HOST_APPLE OR MAC)
+	return()
+endif()
+
+
+### INSTALL ###
+IF(NOT EXISTS ${3RDPARTY}/ofxiOSBoost-1.60.0-libc-bitcode)
+	DKSETPATH(${DIGITALKNOB}/Download)
+	## DKDOWNLOAD(www.internet.com/ofxiOSBoost-1.60.0-libc-bitcode.zip) ## find an online link
+	DKEXTRACT(${DIGITALKNOB}/Download/ofxiOSBoost-1.60.0-libc-bitcode.zip ${3RDPARTY})
+ENDIF()
+DKSET(BOOST ${3RDPARTY}/ofxiOSBoost-1.60.0-libc-bitcode)
+
+
+### LINK ###
+DKINCLUDE(${BOOST})
+LINK_DIRECTORIES(${BOOST}/libs/boost/ios)
+DKINCLUDE(${BOOST}/libs/boost/include)
+IOS_DEBUG_LIB(${BOOST}/libs/boost/ios/libboost.a)
+IOS_RELEASE_LIB(${BOOST}/libs/boost/ios/libboost.a)
+IOSSIM_DEBUG_LIB(${BOOST}/libs/boost/ios/libboost.a)
+IOSSIM_RELEASE_LIB(${BOOST}/libs/boost/ios/libboost.a)

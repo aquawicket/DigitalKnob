@@ -1,0 +1,11 @@
+DKDEPEND(libarchive)
+DKDEPEND(DKDuktape)
+#IF(USE_DKDuktape)
+#	DKDEPEND(DKDuktape)
+#ENDIF()
+IF(USE_DKCef)
+	DKDEPEND(DKCef)
+ENDIF()
+
+LIST(APPEND WIN_LIBS AdvAPI32.lib)
+DKPLUGIN(DKArchive)
