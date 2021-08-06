@@ -1,18 +1,21 @@
-## https://libjpeg-turbo.org/
-## https://github.com/libjpeg-turbo/libjpeg-turbo
-## For ANDROID - https://github.com/DeviceFarmer/android-libjpeg-turbo
+# https://libjpeg-turbo.org/
+# https://github.com/libjpeg-turbo/libjpeg-turbo
+# For ANDROID - https://github.com/DeviceFarmer/android-libjpeg-turbo
+#
+# https://sourceforge.net/projects/libjpeg-turbo/files/1.5.3/libjpeg-turbo-1.5.3.tar.gz
+# https://sourceforge.net/projects/libjpeg-turbo/files/2.1.0/libjpeg-turbo-2.1.0.tar.gz
 
 
 ### VERSION ###
 DKSET(JPEG_VERSION 1.5.3)
 ##DKSET(JPEG_VERSION 2.1.0)
-DKSET(JPEG ${3RDPARTY}/libjpeg-turbo-${JPEG_VERSION})
+DKSET(JPEG_NAME libjpeg-turbo-${JPEG_VERSION})
+DKSET(JPEG_DL https://sourceforge.net/projects/libjpeg-turbo/files/${JPEG_VERSION}/${JPEG_NAME}.tar.gz)
+DKSET(JPEG ${3RDPARTY}/${JPEG_NAME})
 
 
 ### INSTALL ###
-## https://sourceforge.net/projects/libjpeg-turbo/files/1.5.3/libjpeg-turbo-1.5.3.tar.gz
-## https://sourceforge.net/projects/libjpeg-turbo/files/2.1.0/libjpeg-turbo-2.1.0.tar.gz
-DKINSTALL(https://sourceforge.net/projects/libjpeg-turbo/files/${JPEG_VERSION}/libjpeg-turbo-${JPEG_VERSION}.tar.gz libjpeg-turbo ${JPEG})
+DKINSTALL(${JPEG_DL} libjpeg-turbo ${JPEG})
 
 
 ### DKPLUGINS LINK ###
@@ -45,23 +48,23 @@ DKSET(JPEG_ANDROID -DJPEG_INCLUDE_DIR=${JPEG} -DJPEG_INCLUDE_DIR2=${JPEG}/${OS} 
 WIN_PATH(${JPEG}/${OS})
 WIN32_COMMAND(${DKCMAKE_WIN32} -DWITH_SIMD=OFF ${JPEG})
 WIN64_COMMAND(${DKCMAKE_WIN64} -DWITH_SIMD=OFF ${JPEG})
-WIN_VS(libjpeg-turbo-${JPEG_VERSION} libjpeg-turbo.sln turbojpeg-static)
+WIN_VS(${JPEG_NAME} libjpeg-turbo.sln turbojpeg-static)
 
 
 MAC_PATH(${JPEG}/${OS})
 MAC64_COMMAND(${DKCMAKE_MAC64} ${JPEG})
-MAC_XCODE(libjpeg-turbo-${JPEG_VERSION} turbojpeg-static)
+MAC_XCODE(${JPEG_NAME} turbojpeg-static)
 
 
 IOS_PATH(${JPEG}/${OS})
 IOS64_COMMAND(${DKCMAKE_IOS64} ${JPEG})
-IOS_XCODE(libjpeg-turbo-${JPEG_VERSION} turbojpeg-static)
+IOS_XCODE(${JPEG_NAME} turbojpeg-static)
 
 
 IOSSIM_PATH(${JPEG}/${OS})
 IOSSIM32_COMMAND(${DKCMAKE_IOSSIM32} ${JPEG})
 IOSSIM64_COMMAND(${DKCMAKE_IOSSIM64} ${JPEG})
-IOSSIM_XCODE(libjpeg-turbo-${JPEG_VERSION} turbojpeg-static)
+IOSSIM_XCODE(${JPEG_NAME} turbojpeg-static)
 
 
 LINUX_DEBUG_PATH(${JPEG}/${OS}/${DEBUG_DIR})
@@ -82,8 +85,8 @@ RASPBERRY_RELEASE_COMMAND(${DKCMAKE_RASPBERRY_RELEASE} ${JPEG})
 RASPBERRY_RELEASE_COMMAND(make turbojpeg-static)
 
 
-#ANDROID_NDK(libjpeg-turbo-${JPEG_VERSION})
+#ANDROID_NDK(${JPEG_NAME})
 ANDROID_PATH(${JPEG}/${OS})
 ANDROID32_COMMAND(${DKCMAKE_ANDROID32} -DWITH_SIMD=OFF ${JPEG})
 ANDROID64_COMMAND(${DKCMAKE_ANDROID64} -DWITH_SIMD=OFF ${JPEG})
-ANDROID_VS(libjpeg-turbo-${JPEG_VERSION} libjpeg-turbo.sln turbojpeg-static)
+ANDROID_VS(${JPEG_NAME} libjpeg-turbo.sln turbojpeg-static)

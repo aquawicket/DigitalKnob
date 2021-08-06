@@ -1,4 +1,7 @@
-## http://www.libpng.org/pub/png/libpng.html
+# http://www.libpng.org/pub/png/libpng.html
+#
+# https://sourceforge.net/projects/libpng/files/libpng17/1.7.0-oldbetas/libpng-1.7.0beta34.tar.gz
+
 DKDEPEND(zlib)
 
 ### VERSION ###
@@ -7,12 +10,12 @@ DKSET(PNG_MINOR 7)
 DKSET(PNG_BUILD 0beta34)
 DKSET(PNG_VERSION ${PNG_MAJOR}.${PNG_MINOR}.${PNG_BUILD})
 DKSET(PNG_NAME libpng-${PNG_VERSION})
+DKSET(PNG_DL https://sourceforge.net/projects/libpng/files/libpng${PNG_MAJOR}${PNG_MINOR}/${PNG_MAJOR}.${PNG_MINOR}.0-oldbetas/${PNG_NAME}.tar.gz)
 DKSET(PNG ${3RDPARTY}/${PNG_NAME})
 
 
 ### INSTALL ###
-## https://sourceforge.net/projects/libpng/files/libpng17/1.7.0-oldbetas/libpng-1.7.0beta34.tar.gz
-DKINSTALL(https://sourceforge.net/projects/libpng/files/libpng${PNG_MAJOR}${PNG_MINOR}/${PNG_MAJOR}.${PNG_MINOR}.0-oldbetas/${PNG_NAME}.tar.gz libpng ${PNG})
+DKINSTALL(${PNG_DL} libpng ${PNG})
 
 
 ### DKPLUGINS LINK ###

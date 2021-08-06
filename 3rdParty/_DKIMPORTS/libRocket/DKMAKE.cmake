@@ -1,24 +1,25 @@
-## Obsolete - replaced by RmlUi
-return()
+# Obsolete - replaced by RmlUi
+#
+# https://github.com/libRocket/libRocket/archive/master.zip
+
 DKDEPEND(freetype)
 
 
 ### VERSION ###
 DKSET(ROCKET_VERSION master)
 DKSET(ROCKET_NAME libRocket-${ROCKET_VERSION})
+DKSET(ROCKET_DL https://github.com/libRocket/libRocket/archive/${ROCKET_VERSION}.zip)
 DKSET(ROCKET ${3RDPARTY}/${ROCKET_NAME})
 
 
 ### INSTALL ###
-DKINSTALL(https://github.com/libRocket/libRocket/archive/${ROCKET_VERSION}.zip libRocket ${ROCKET})
+DKINSTALL(${ROCLET_DL} libRocket ${ROCKET})
 #DKRENAME(${DKDOWNLOAD}/${ROCKET_VERSION}.zip ${DKDOWNLOAD}/${ROCKET_NAME}.zip)
 
-##MESSAGE("Pulling libRocket from aquawicket/libRocket git...")
-##DKSET(GIT C:/Progra~1/Git/bin/git.exe)
-##SET(STRING "${GIT} clone https://github.com/aquawicket/libRocket.git ${3RDPARTY}/${ROCKET_NAME}")
+##SET(STRING "${GIT_EXE} clone https://github.com/aquawicket/libRocket.git ${3RDPARTY}/${ROCKET_NAME}")
 ##FILE(MAKE_DIRECTORY ${3RDPARTY}/${ROCKET_NAME})
-##EXECUTE_PROCESS(COMMAND cmd /c ${STRING} WORKING_DIRECTORY ${CURRENT_DIR})
-DKSET(ROCKET ${3RDPARTY}/${ROCKET_NAME})
+##DKCOMMAND(${STRING})
+
 
 
 

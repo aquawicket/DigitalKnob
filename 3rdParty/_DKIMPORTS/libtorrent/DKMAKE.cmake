@@ -1,17 +1,22 @@
+# https://github.com/arvidn/libtorrent/releases/download/libtorrent-1_1_3/libtorrent-rasterbar-1.1.3.tar.gz
+
 ### DEPENDS ###
 DKDEPEND(boost Boost_System)
 DKDEPEND(openssl-vs2015)
 
 
 ### VERSION ###
-DKSET(TORRENT_VERSION 1.1.3)
+DKSET(TORRENT_MAJOR 1)
+DKSET(TORRENT_MINOR 1)
+DKSET(TORRENT_BUILD 3)
+DKSET(TORRENT_VERSION ${TORRENT_MAJOR}.${TORRENT_MINOR}.${TORRENT_BUILD})
 DKSET(TORRENT_NAME libtorrent-${TORRENT_VERSION})
+DKSET(TORRENT_DL https://github.com/arvidn/libtorrent/releases/download/libtorrent-${TORRENT_MAJOR}_${TORRENT_MINOR}_${TORRENT_BUILD}/${TORRENT_NAME}.tar.gz)
 DKSET(TORRENT ${3RDPARTY}/${TORRENT_NAME})
 
 
 ### INSTALL ###
-## https://github.com/arvidn/libtorrent/releases/download/libtorrent-1_1_3/libtorrent-rasterbar-1.1.3.tar.gz
-DKINSTALL(https://github.com/arvidn/libtorrent/releases/download/libtorrent-1_1_3/${TORRENT_NAME}.tar.gz libtorrent ${TORRENT})
+DKINSTALL(${TORRENT_DL} libtorrent ${TORRENT})
 
 
 ### LINK ###

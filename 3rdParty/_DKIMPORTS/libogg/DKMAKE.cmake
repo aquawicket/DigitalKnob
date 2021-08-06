@@ -1,11 +1,14 @@
+# https://ftp.osuosl.org/pub/xiph/releases/ogg/libogg-1.3.2.zip
+
 ### VERSION ###
 DKSET(OGG_VERSION 1.3.2)
-DKSET(OGG ${3RDPARTY}/libogg-${OGG_VERSION})
+DKSET(OGG_NAME libogg-${OGG_VERSION})
+DKSET(OGG_DL https://ftp.osuosl.org/pub/xiph/releases/ogg/${OGG_NAME}.zip)
+DKSET(OGG ${3RDPARTY}/${OGG_NAME})
 
 
 ### INSTALL ###
-## https://ftp.osuosl.org/pub/xiph/releases/ogg/libogg-1.3.2.zip
-DKINSTALL(https://ftp.osuosl.org/pub/xiph/releases/ogg/libogg-${OGG_VERSION}.zip libogg ${OGG})
+DKINSTALL(${OGG_DL} libogg ${OGG})
 
 
 ### DKPLUGINS LINK ###
@@ -101,4 +104,4 @@ LINUX_RELEASE_COMMAND(../../configure --disable-shared --enable-static --build=x
 LINUX_RELEASE_COMMAND(make)
 
 
-ANDROID_NDK(libogg-${OGG_VERSION})
+ANDROID_NDK(${OGG_NAME})
