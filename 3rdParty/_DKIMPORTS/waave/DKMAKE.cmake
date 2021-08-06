@@ -1,19 +1,20 @@
 ### DEPENDS ###
-DKDEPEND(ffmpeg-20150905-git-a87ada5-win32-dev)
-DKDEPEND(ffmpeg-20150905-git-a87ada5-win32-shared)
-DKDEPEND(ffmpeg-20150905-git-a87ada5-win64-dev)
-DKDEPEND(ffmpeg-20150905-git-a87ada5-win64-shared)
+DKDEPEND(ffmpeg-win32-dev)
+DKDEPEND(ffmpeg-win32-shared)
+DKDEPEND(ffmpeg-win64-dev)
+DKDEPEND(ffmpeg-win64-shared)
 DKDEPEND(SDL2)
 
 
 ### VERSION ###
 DKSET(WAAVE_VERSION 3.01)
 DKSET(WAAVE_NAME waave-${WAAVE_VERSION})
+#DKSET(WAAVE_DL ???)
 DKSET(WAAVE ${3RDPARTY}/${WAAVE_NAME})
 
 
 ### INSTALL ###
-## DKINSTALL(www.internet.com/${WAAVE_NAME}.tar ${WAAVE})
+DKINSTALL(${WAAVE_DL} waave ${WAAVE})
 
 
 ### LINK ###

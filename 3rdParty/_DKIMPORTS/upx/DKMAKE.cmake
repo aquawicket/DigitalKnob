@@ -13,8 +13,8 @@ DKSET(UPX_VERSION ${UPX_MAJOR}.${UPX_MINOR})
 DKSET(UPX_NAME upx-${UPX_VERSION})
 WIN_DKSET(UPX_DL https://github.com/upx/upx/releases/download/v${UPX_VERSION}/${UPX_NAME}-win32.zip)
 LINUX_DKSET(UPX_DL https://github.com/upx/upx/releases/download/v${UPX_VERSION}/${UPX_NAME}-i386_linux.zip)
-DKSET(UPX ${3RDPARTY}/${UPX_NAME})
+DKSET(UPX_DIR ${3RDPARTY}/${UPX_NAME})
 
 
 ### INSTALL ###
-DKINSTALL(${UPX_DL} upx ${UPX})
+DKINSTALL(${UPX_DL} upx ${UPX_DIR})

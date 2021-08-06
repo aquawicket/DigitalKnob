@@ -1,11 +1,10 @@
-if(NOT CMAKE_HOST_MAC)
-	return()
-endif()
-
-
 ### VERSION ###
-## TOTO
+DKSET(XCODE_VERSION ???)
+DKSET(XCODE_NAME ???)
+DKSET(XCODE_DL ???)
+DKSET(XCODE ???)
+DKSET(XCODE_EXE ???)
 
 
 ### INSTALL ###
-## TODO
+DKINSTALL(${XCODE_DL} Xcode ${XCODE})

@@ -1,4 +1,7 @@
-## https://github.com/xz-mirror/xz
+# https://github.com/xz-mirror/xz
+#
+# https://github.com/xz-mirror/xz/archive/refs/tags/v5.2.5.zip
+
 
 ### DEPENDS ###
 IF(WIN_32)
@@ -12,22 +15,19 @@ IF(WIN)
 ENDIF()
 
 
+
 ### VERSION ###
 DKSET(XZ_VERSION 5.2.5)
 DKSET(XZ_NAME xz-${XZ_VERSION})
+WIN_DKSET(XZ_DL https://tukaani.org/xz/${XZ_NAME}.tar.gz)
+LINUX_DKSET(XZ_DL https://github.com/xz-mirror/xz/archive/refs/tags/v${XZ_VERSION}.zip)
 DKSET(XZ ${3RDPARTY}/${XZ_NAME})
 
 
 
 ### INSTALL ###
-## https://github.com/xz-mirror/xz/archive/refs/tags/v5.2.5.zip
-## DKINSTALL(https://astuteinternet.dl.sourceforge.net/project/lzmautils/${XZ_NAME}.tar.gz xz ${XZ_NAME})
+DKINSTALL(${XZ_DL} xz ${XZ})
 
-if(NOT LINUX_32)
-	DKINSTALL(https://github.com/xz-mirror/xz/archive/refs/tags/v${XZ_VERSION}.zip xz ${XZ})
-else()
-	DKINSTALL(https://tukaani.org/xz/${XZ_NAME}.tar.gz xz ${XZ_NAME})
-endif()
 
 
 ### DKPLUGINS LINK ###
