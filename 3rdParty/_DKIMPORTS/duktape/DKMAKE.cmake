@@ -4,7 +4,7 @@
 
 
 DKDEPEND(python)
-DKDEPEND(nodejs)
+DKDEPEND(nodeJS)
 
 ### VERSION ###
 ##DKSET(DUKTAPE_VERSION 2.6.0)
