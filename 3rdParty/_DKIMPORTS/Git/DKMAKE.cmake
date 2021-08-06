@@ -3,13 +3,15 @@
 ### VERSION ###
 DKSET(GIT_VERSION 2.31.1)
 DKSET(GIT_NAME Git-${GIT_VERSION}-32-bit)
-DKSET(GIT_DL https://github.com/git-for-windows/git/releases/download/v${GIT_VERSION}.windows.1/${GIT_NAME}.exe)
-DKSET(GIT "C:/Program Files/Git")
-DKSET(GIT_EXE ${GIT}/bin/git.exe)
+WIN_DKSET(GIT_DL https://github.com/git-for-windows/git/releases/download/v${GIT_VERSION}.windows.1/${GIT_NAME}.exe)
+WIN_DKSET(GIT "C:/Program Files/Git")
+WIN_DKSET(GIT_EXE ${GIT}/bin/git.exe)
 
 ### INSTALL ###
 if(NOT EXISTS ${GIT_EXE})
-	WIN32_PATH(${DIGITALKNOB}/Download)
+if(CMAKE_HOST_WIN32)	
+	WIN_PATH(${DIGITALKNOB}/Download)
 	DKDOWNLOAD(${GIT_DL})
 	DKCOMMAND(${DIGITALKNOB}/Download/${GIT_NAME}.exe})
+endif()
 endif()
