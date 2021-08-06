@@ -1,13 +1,14 @@
 # https://web.archive.org/web/20200918193140/https://ffmpeg.zeranoe.com/builds/win32/dev/ffmpeg-20200831-4a11a6f-win32-dev.zip
+# https://web.archive.org/web/20200914204045/https://ffmpeg.zeranoe.com/builds/win64/dev/ffmpeg-20200831-4a11a6f-win64-dev.zip
 
 ### VERSION ###
 DKSET(FFMPEG_VERSION 20200831-4a11a6f)
-DKSET(FFMPEG_NAME ffmpeg-${FFMPEG_VERSION}-win32-dev)
-DKSET(FFMPEG_DL https://web.archive.org/web/20200918193140/https://ffmpeg.zeranoe.com/builds/win32/dev/${FFMPEG_NAME}.zip)
+DKSET(FFMPEG_NAME ffmpeg-${FFMPEG_VERSION}-${OS}-dev)
+DKSET(FFMPEG_DL https://web.archive.org/web/20200918193140/https://ffmpeg.zeranoe.com/builds/${OS}/dev/${FFMPEG_NAME}.zip)
 DKSET(FFMPEG ${3RDPARTY}/${FFMPEG_NAME})
 
 ### INSTALL ###
-DKINSTALL(${FFMPEG_DL} ffmpeg-win32-dev ${FFMPEG})
+DKINSTALL(${FFMPEG_DL} ffmpeg-dev ${FFMPEG})
 DKRENAME(${FFMPEG}/include/libavutil/time.h ${FFMPEG}/include/libavutil/time.h.EXCLUDE)
 
 

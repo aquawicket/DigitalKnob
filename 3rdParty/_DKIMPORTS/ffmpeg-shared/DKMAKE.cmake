@@ -1,15 +1,13 @@
-# https://web.archive.org/web/20200916073634if_/https://ffmpeg.zeranoe.com/builds/win64/shared/ffmpeg-20200828-ccc7120-win64-shared.zip
+# https://web.archive.org/web/20200918193207/https://ffmpeg.zeranoe.com/builds/win32/shared/ffmpeg-20200831-4a11a6f-win32-shared.zip
+# https://web.archive.org/web/20200916073634/https://ffmpeg.zeranoe.com/builds/win64/shared/ffmpeg-20200828-ccc7120-win64-shared.zip
 
-DKSET(FFMPEGDLL_VERSION 20200828-ccc7120)
-DKSET(FFMPEGDLL_OS win64)
-DKSET(FFMPEGDLL_NAME ffmpeg-${FFMPEGDLL_VERSION}-${FFMPEGDLL_OS}-shared)
-DKSET(FFMPEGDLL_DL https://web.archive.org/web/20200916073634if_/https://ffmpeg.zeranoe.com/builds/${FFMPEGDLL_OS}/shared/${FFMPEGDLL_NAME}.zip)
+DKSET(FFMPEGDLL_VERSION 20200831-4a11a6f)
+DKSET(FFMPEGDLL_NAME ffmpeg-${FFMPEGDLL_VERSION}-${OS}-shared)
+DKSET(FFMPEGDLL_DL https://web.archive.org/web/20200918193207/https://ffmpeg.zeranoe.com/builds/${OS}/shared/${FFMPEGDLL_NAME}.zip)
 DKSET(FFMPEGDLL ${3RDPARTY}/${FFMPEGDLL_NAME})
 
 ### INSTALL ###
-DKINSTALL(${FFMPEGDLL_DL} ffmpeg-${FFMPEGDLL_OS}-shared ${FFMPEGDLL})
-
-
+DKINSTALL(${FFMPEGDLL_DL} ffmpeg-shared ${FFMPEG_DLL})
 
 ### LINK ###
 DKDEFINE(__STDC_CONSTANT_MACROS)
@@ -23,7 +21,6 @@ IF(DKAPP)
 	DKCOPY(${FFMPEG_DLL}/bin/postproc-53.dll ${DKPROJECT}/assets/DKFfmpeg TRUE)
 	DKCOPY(${FFMPEG_DLL}/bin/swresample-1.dll ${DKPROJECT}/assets/DKFfmpeg TRUE)
 	DKCOPY(${FFMPEG_DLL}/bin/swscale-3.dll ${DKPROJECT}/assets/DKFfmpeg TRUE)
-
 	LIST(APPEND DEBUG_LINK_FLAGS /DELAY:UNLOAD)
 	LIST(APPEND DEBUG_LINK_FLAGS /DELAYLOAD:avcodec-56.dll)
 	LIST(APPEND DEBUG_LINK_FLAGS /DELAYLOAD:avdevice-56.dll)
