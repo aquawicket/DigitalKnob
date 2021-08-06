@@ -940,7 +940,7 @@ function(ANDROID64_BASH arg)
 	endif()
 endfunction()
 
-
+#FIXME using WIN32_COMMAND does not imply CMAKE_HOST_WIN32
 ################### COMMAND ########################
 #########################
 function(WIN_COMMAND arg)
