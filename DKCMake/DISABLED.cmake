@@ -29,6 +29,7 @@ DISABLE_DKDEPEND(DKVncServer)
 DISABLE_DKDEPEND(libRocket)
 
 if(WIN)
+DISABLE_DKDEPEND(Xcode)
 DISABLE_DKDEPEND(cef_binary)
 DISABLE_DKDEPEND(cef_binary_linuxarm)
 DISABLE_DKDEPEND(ffmpeg-20150905-git-a87ada5-win32-dev)

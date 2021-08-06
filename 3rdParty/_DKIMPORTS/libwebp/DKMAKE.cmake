@@ -1,4 +1,7 @@
-## https://github.com/webmproject/libwebp
+# https://github.com/webmproject/libwebp
+#
+# https://github.com/webmproject/libwebp/archive/refs/tags/v1.0.3.zip
+
 
 ### VERSION ###
 DKSET(WEBP_MAJOR 1)
@@ -6,12 +9,12 @@ DKSET(WEBP_MINOR 0)
 DKSET(WEBP_BUILD 3)
 DKSET(WEBP_VERSION ${WEBP_MAJOR}.${WEBP_MINOR}.${WEBP_BUILD})
 DKSET(WEBP_NAME libwebp-${WEBP_VERSION})
+DKSET(WEBP_DL https://github.com/webmproject/libwebp/archive/refs/tags/v${WEBP_VERSION}.zip)
 DKSET(WEBP ${3RDPARTY}/${WEBP_NAME})
 
 
 ### INSTALL ###
-## https://github.com/webmproject/libwebp/archive/refs/tags/v1.0.3.zip
-DKINSTALL(https://github.com/webmproject/libwebp/archive/refs/tags/v${WEBP_VERSION}.zip libwebp ${WEBP})
+DKINSTALL(${WEBP_DL} libwebp ${WEBP})
 
 
 ### DKPLUGINS LINK ###
