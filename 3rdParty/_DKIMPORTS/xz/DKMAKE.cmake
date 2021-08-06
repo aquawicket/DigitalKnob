@@ -20,8 +20,8 @@ ENDIF()
 ### VERSION ###
 DKSET(XZ_VERSION 5.2.5)
 DKSET(XZ_NAME xz-${XZ_VERSION})
-WIN_DKSET(XZ_DL https://tukaani.org/xz/${XZ_NAME}.tar.gz)
-LINUX_DKSET(XZ_DL https://github.com/xz-mirror/xz/archive/refs/tags/v${XZ_VERSION}.zip)
+WIN_DKSET(XZ_DL https://github.com/xz-mirror/xz/archive/refs/tags/v${XZ_VERSION}.zip)
+LINUX_DKSET(XZ_DL https://tukaani.org/xz/${XZ_NAME}.tar.gz)
 DKSET(XZ ${3RDPARTY}/${XZ_NAME})
 
 
