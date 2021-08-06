@@ -1,3 +1,5 @@
+# https://deltaepsilon.ca/posts/compiling-libogg-libvorbis-for-dummies/
+#
 # https://ftp.osuosl.org/pub/xiph/releases/ogg/libogg-1.3.2.zip
 
 ### VERSION ###
@@ -26,16 +28,16 @@ ANDROID_RELEASE_LIB(${OGG}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/libogg.a)
 
 ### 3RDPARTY LINK ###
 DKSET(OGG_INCLUDE -DOGG_INCLUDE_DIR=${OGG}/include)
-DKSET(OGG_WIN_DEBUG "--with-ogg-includes=\"${OGG}/include\" --with-ogg-libraries=\"${OGG}/${OS}/${DEBUG_DIR}/src/.libs\"")
-DKSET(OGG_WIN_RELEASE "--with-ogg-includes=\"${OGG}/include\" --with-ogg-libraries=\"${OGG}/${OS}/${RELEASE_DIR}/src/.libs\"")
-DKSET(OGG_APPLE_DEBUG "--with-ogg-includes=\"${OGG}/include\" --with-ogg-libraries=\"${OGG}/${OS}/${DEBUG_DIR}/src/.libs\"")
-DKSET(OGG_APPLE_RELEASE "--with-ogg-includes=\"${OGG}/include\" --with-ogg-libraries=\"${OGG}/${OS}/${RELEASE_DIR}/src/.libs\"")
-DKSET(OGG_LINUX_DEBUG "--with-ogg-includes=\"${OGG}/include\" --with-ogg-libraries=\"${OGG}/${OS}/${DEBUG_DIR}/src/.libs\"")
-DKSET(OGG_LINUX_RELEASE "--with-ogg-includes=\"${OGG}/include\" --with-ogg-libraries=\"${OGG}/${OS}/${RELEASE_DIR}/src/.libs\"")
-DKSET(OGG_RASPBERRY_DEBUG "--with-ogg-includes=\"${OGG}/include\" --with-ogg-libraries=\"${OGG}/${OS}/${DEBUG_DIR}/src/.libs\"")
-DKSET(OGG_RASPBERRY_RELEASE "--with-ogg-includes=\"${OGG}/include\" --with-ogg-libraries=\"${OGG}/${OS}/${RELEASE_DIR}/src/.libs\"")
-DKSET(OGG_ANDROID_DEBUG "--with-ogg-includes=\"${OGG}/include\" --with-ogg-libraries=\"${OGG}/${OS}/${DEBUG_DIR}/src/.libs\"")
-DKSET(OGG_ANDROID_RELEASE "--with-ogg-includes=\"${OGG}/include\" --with-ogg-libraries=\"${OGG}/${OS}/${RELEASE_DIR}/src/.libs\"")
+DKSET(OGG_WIN_DEBUG "--with-ogg-includes=\"/${OGG}/include\" --with-ogg-libraries=\"/${OGG}/${OS}/${DEBUG_DIR}/src/.libs\"")
+DKSET(OGG_WIN_RELEASE "--with-ogg-includes=\"/${OGG}/include\" --with-ogg-libraries=\"/${OGG}/${OS}/${RELEASE_DIR}/src/.libs\"")
+DKSET(OGG_APPLE_DEBUG "--with-ogg-includes=\"/${OGG}/include\" --with-ogg-libraries=\"/${OGG}/${OS}/${DEBUG_DIR}/src/.libs\"")
+DKSET(OGG_APPLE_RELEASE "--with-ogg-includes=\"/${OGG}/include\" --with-ogg-libraries=\"/${OGG}/${OS}/${RELEASE_DIR}/src/.libs\"")
+DKSET(OGG_LINUX_DEBUG "--with-ogg-includes=\"/${OGG}/include\" --with-ogg-libraries=\"/${OGG}/${OS}/${DEBUG_DIR}/src/.libs\"")
+DKSET(OGG_LINUX_RELEASE "--with-ogg-includes=\"/${OGG}/include\" --with-ogg-libraries=\"/${OGG}/${OS}/${RELEASE_DIR}/src/.libs\"")
+DKSET(OGG_RASPBERRY_DEBUG "--with-ogg-includes=\"/${OGG}/include\" --with-ogg-libraries=\"/${OGG}/${OS}/${DEBUG_DIR}/src/.libs\"")
+DKSET(OGG_RASPBERRY_RELEASE "--with-ogg-includes=\"/${OGG}/include\" --with-ogg-libraries=\"/${OGG}/${OS}/${RELEASE_DIR}/src/.libs\"")
+DKSET(OGG_ANDROID_DEBUG "--with-ogg-includes=\"/${OGG}/include\" --with-ogg-libraries=\"/${OGG}/${OS}/${DEBUG_DIR}/src/.libs\"")
+DKSET(OGG_ANDROID_RELEASE "--with-ogg-includes=\"/${OGG}/include\" --with-ogg-libraries=\"/${OGG}/${OS}/${RELEASE_DIR}/src/.libs\"")
 	
 	
 ### COMPILE ###
@@ -44,7 +46,7 @@ WIN32_DEBUG_BASH("#!/bin/bash
 cd /${OGG}/${OS}/${DEBUG_DIR} 
 export PATH=/${MINGW32}/bin:$PATH\;
 export PATH=/${MSYS}/bin:$PATH\;
-../../configure --disable-shared --enable-static 
+../../configure --disable-shared --enable-static
 make 
 exit \n")
 

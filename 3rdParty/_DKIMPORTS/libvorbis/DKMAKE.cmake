@@ -1,3 +1,5 @@
+# https://deltaepsilon.ca/posts/compiling-libogg-libvorbis-for-dummies/
+#
 # https://ftp.osuosl.org/pub/xiph/releases/vorbis/libvorbis-1.3.5.zip
 
 DKDEPEND(mingw32)
