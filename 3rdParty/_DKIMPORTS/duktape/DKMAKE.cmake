@@ -1,19 +1,22 @@
-## DKDEPEND(python)
-## DKDEPEND(nodejs)
+# https://duktape.org/duktape-2.6.0.tar.xz
+# https://github.com/svaarala/duktape/archive/refs/heads/master.zip
+# https://codeload.github.com/Squareys/duktape/zip/refs/heads/let-support
+
+
+DKDEPEND(python)
+DKDEPEND(nodejs)
 
 ### VERSION ###
 ##DKSET(DUKTAPE_VERSION 2.6.0)
 ##DKSET(DUKTAPE_VERSION master)
 DKSET(DUKTAPE_VERSION let-support)
 DKSET(DUKTAPE_NAME duktape-${DUKTAPE_VERSION})
+#DKSET(DUKTAPE_DL https://duktape.org/${DUKTAPE_NAME}.tar.xz)
+DKSET(DUKTAPE_DL https://codeload.github.com/Squareys/duktape/zip/refs/heads/${DUKTAPE_VERSION})
 DKSET(DUKTAPE ${3RDPARTY}/${DUKTAPE_NAME})
 
 ### INSTALL ###
-## https://duktape.org/duktape-2.6.0.tar.xz
-## https://github.com/svaarala/duktape/archive/refs/heads/master.zip
-## https://codeload.github.com/Squareys/duktape/zip/refs/heads/let-support
-##DKINSTALL(https://duktape.org/${DUKTAPE_NAME}.tar.xz duktape ${DUKTAPE_NAME})
-DKINSTALL(https://codeload.github.com/Squareys/duktape/zip/refs/heads/${DUKTAPE_VERSION} duktape ${DUKTAPE})
+DKINSTALL(${DUKTAPE_DL} duktape ${DUKTAPE_NAME})
 
 
 IF(NOT EXISTS ${DUKTAPE}/src)

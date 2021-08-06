@@ -1,14 +1,16 @@
-## https://www.cryptopp.com/
+# https://www.cryptopp.com/
+#
+# https://github.com/webstorage119/website-1/raw/master/cryptopp600.zip
 
 ### VERSION ###
 DKSET(CRYPTO_VERSION 600)
 DKSET(CRYPTO_NAME cryptopp${CRYTO_VERSION})
+DKSET(CRYPTO_DL https://github.com/webstorage119/website-1/raw/master/${CRYPTO_NAME}.zip)
 DKSET(CRYPTO ${3RDPARTY}/${CRYPTO_NAME})
 
 
 ### INSTALL ###
-## https://github.com/webstorage119/website-1/raw/master/cryptopp600.zip
-DKINSTALL(https://github.com/webstorage119/website-1/raw/master/cryptopp${CRYPTO_VERSION}.zip cryptopp ${CRYPTO})
+DKINSTALL(${CRYPTO_DL} cryptopp ${CRYPTO})
 
 
 ### LINK ###

@@ -1,19 +1,18 @@
-if(NOT CMAKE_HOST_WIN32)
-	return()
-endif()
-
 ### VERSION ###
 DKSET(DOXYGEN_MAJOR 1)
 DKSET(DOXYGEN_MINOR 8)
 DKSET(DOXYGEN_BUILD 13)
 DKSET(DOXYGEN_VERSION ${DOXYGEN_MAJOR}.${DOXYGEN_MINOR}.${DOXYGEN_BUILD})
-DKSET(DOXYGEN C:/Program Files/doxygen/bin/doxygen.exe)
+DKSET(DOXYGEN_NAME doxygen-${DOXYGEN_VERSION})
+DKSET(DOXYGEN_DL https://sourceforge.net/projects/doxygen/files/rel-${DOXYGEN_VERSION}/${DOXYGEN_NAME}-setup.exe)
+DKSET(DOXYGEN "C:/Program Files/doxygen/bin")
+DKSET(DOXYGEN_EXE ${DOXYGEN}/doxygen.exe)
 
 ### INSTALL ###
-IF(NOT EXISTS "C:/Program Files/doxygen/bin/doxygen.exe")
+IF(NOT EXISTS ${DOXYGEN_EXE})
 	DKSETPATH(${DIGITALKNOB}/Download)
-	DKDOWNLOAD(https://sourceforge.net/projects/doxygen/files/rel-${DOXYGEN_VERSION}/doxygen-${DOXYGEN_VERSION}-setup.exe)
+	DKDOWNLOAD(${DOXYGEN_DL})
 	DKSET(QUEUE_BUILD ON)
-	WIN32_COMMAND(${DIGITALKNOB}/Download/doxygen-${DOXYGEN_VERSION}-setup.exe)
+	WIN32_COMMAND(${DIGITALKNOB}/Download/${DOXYGEN_NAME}-setup.exe)
 ENDIF()
 
