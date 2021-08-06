@@ -3,8 +3,8 @@
 
 ### VERSION ###
 DKSET(FLAC_VERSION 1.3.2)
-DKSET(FLAC_NAME flac-${FLAC_VERSION}-win)
-DKSET(FLAC_DL https://ftp.osuosl.org/pub/xiph/releases/flac/${FLAC_NAME}.zip)
+DKSET(FLAC_NAME flac-${FLAC_VERSION})
+DKSET(FLAC_DL https://ftp.osuosl.org/pub/xiph/releases/flac/${FLAC_NAME}.tar.xz)
 DKSET(FLAC ${3RDPARTY}/${FLAC_NAME})
 
 
