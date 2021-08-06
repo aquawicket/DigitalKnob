@@ -6,7 +6,7 @@ DKSET(FFMPEGDLL_DL https://web.archive.org/web/20200918193207/https://ffmpeg.zer
 DKSET(FFMPEGDLL ${3RDPARTY}/${FFMPEGDLL_NAME})
 
 ### INSTALL ###
-DKINSTALL(${FFMPEGDLL_DL} ffmpeg-win64-shared ${FFMPEG_DLL})
+DKINSTALL(${FFMPEGDLL_DL} ffmpeg-win64-shared ${FFMPEGDLL})
 
 
 
