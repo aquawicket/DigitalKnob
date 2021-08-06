@@ -1,10 +1,13 @@
-if(NOT WIN_64)
-	return()
-endif()
+# https://web.archive.org/web/20200918193155/https://ffmpeg.zeranoe.com/builds/win64/dev/ffmpeg-20200831-4a11a6f-win64-dev.zip
 
+### VERSION ###
+DKSET(FFMPEG_VERSION 20200831-4a11a6f)
+DKSET(FFMPEG_NAME ffmpeg-${FFMPEG_VERSION}-win64-dev)
+DKSET(FFMPEG_DL https://web.archive.org/web/20200918193140/https://ffmpeg.zeranoe.com/builds/win64/dev/${FFMPEG_NAME}.zip)
+DKSET(FFMPEG ${3RDPARTY}/${FFMPEG_NAME})
 
 ### INSTALL ###
-## DKINSTALL(www.internet.com/ffmpeg-20150905-git-a87ada5-win64-dev.7z ffmpeg-20150905-git-a87ada5-win64-dev ${FFMPEG})
+DKINSTALL(${FFMPEG_DL} ffmpeg-win64-dev ${FFMPEG})
 DKRENAME(${FFMPEG}/include/libavutil/time.h ${FFMPEG}/include/libavutil/time.h.EXCLUDE)
 
 

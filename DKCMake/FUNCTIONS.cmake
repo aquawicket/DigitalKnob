@@ -2993,9 +2993,9 @@ FUNCTION(DKDEPEND_ALL)
 	
 	## The file will not be overwritten so you can comment out libraries that don't compile
 	## Just remove or rename the file to have it regenerated. 
-	if(NOT EXISTS ${DKPROJECT}/DEPEND_ALL.txt)
+	#if(NOT EXISTS ${DKPROJECT}/DEPEND_ALL.txt)
 		file(WRITE ${DKPROJECT}/DEPEND_ALL.txt "${DEPENDALL_FILE}")
-	endif()
+	#endif()
 	INCLUDE(${DKPROJECT}/DEPEND_ALL.txt)
 endfunction()
 
