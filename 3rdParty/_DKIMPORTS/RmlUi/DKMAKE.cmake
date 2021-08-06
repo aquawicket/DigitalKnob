@@ -1,3 +1,5 @@
+# https://codeload.github.com/mikke89/RmlUi/zip/master 
+
 ### DEPENDS ###
 DKDEPEND(freetype)
 DKDEPEND(glew)
@@ -10,13 +12,13 @@ DKDEPEND(SFML)
 ### VERSION ###
 DKSET(RMLUI_VERSION master)
 DKSET(RMLUI_NAME RmlUi-${RMLUI_VERSION})
+DKSET(RMLUI_DL https://codeload.github.com/mikke89/RmlUi/zip/${RMLUI_VERSION})
 DKSET(RMLUI ${3RDPARTY}/${RMLUI_NAME})
 
 
 
 ### INSTALL ###
-DKINSTALL(https://codeload.github.com/mikke89/RmlUi/zip/master RmlUi ${RMLUI})
-#DKRENAME(${DKDOWNLOAD}/master ${DKDOWNLOAD}/${RMLUI_NAME}.zip) ##FIXME: Only do this after install
+DKINSTALL(${RMLUI_DL} RmlUi ${RMLUI})
 
 
 

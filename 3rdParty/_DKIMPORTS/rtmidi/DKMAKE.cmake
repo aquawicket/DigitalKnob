@@ -1,10 +1,14 @@
+#http://www.music.mcgill.ca/~gary/rtmidi/release/rtmidi-2.1.0.tar.gz
+
 ### VERSION ###
 DKSET(RTMIDI_VERSION 2.1.0)
-DKSET(RTMIDI ${3RDPARTY}/rtmidi-${RTMIDI_VERSION})
+DKSET(RTMIDI_NAME rtmidi-${RTMIDI_VERSION})
+DKSET(RTMIDI_DL http://www.music.mcgill.ca/~gary/rtmidi/release/${RTMIDI_NAME}.tar.gz)
+DKSET(RTMIDI ${3RDPARTY}/${RTMIDI_NAME})
 
 
 ### INSTALL ###
-DKINSTALL(http://www.music.mcgill.ca/~gary/rtmidi/release/rtmidi-${RTMIDI_VERSION}.tar.gz rtmidi ${RTMIDI})
+DKINSTALL(${RTMIDI_DL} rtmidi ${RTMIDI})
 
 
 ### LINK ###
@@ -31,12 +35,12 @@ LINUX_RELEASE_LIB(${RTMIDI}/${OS}/${RELEASE_DIR}/libRtMidi.a)
 WIN_PATH(${RTMIDI}/${OS})
 WIN32_COMMAND(${DKCMAKE_WIN32} ${RTMIDI})
 WIN64_COMMAND(${DKCMAKE_WIN64} ${RTMIDI})
-WIN_VS(rtmidi-${RTMIDI_VERSION} Project.sln RtMidi)
+WIN_VS(${RTMIDI_NAME} Project.sln RtMidi)
 
 
 MAC_PATH(${RTMIDI}/${OS})
 MAC64_COMMAND(${DKCMAKE_MAC64} ${RTMIDI})
-MAC_XCODE(rtmidi-${RTMIDI_VERSION} RtMidi)
+MAC_XCODE(${RTMIDI_NAME} RtMidi)
 
 
 LINUX_DEBUG_PATH(${RTMIDI}/${OS}/${DEBUG_DIR})

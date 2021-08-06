@@ -4,7 +4,7 @@ DKDEPEND(zlib)
 DKDEPEND(giflib)
 DKDEPEND(libpng)
 DKDEPEND(libjpeg-turbo)
-#DKDEPEND(libwebp)
+DKDEPEND(libwebp)
 DKDEPEND(tiff)
 
 
@@ -14,13 +14,14 @@ DKSET(SDL2IMAGE_MAJOR 2)
 DKSET(SDL2IMAGE_MINOR 0)
 DKSET(SDL2IMAGE_BUILD 5)  
 DKSET(SDL2IMAGE_VERSION ${SDL2IMAGE_MAJOR}.${SDL2IMAGE_MINOR}.${SDL2IMAGE_BUILD})
-DKSET(SDL2IMAGE ${3RDPARTY}/SDL2_image-${SDL2IMAGE_VERSION})
+DKSET(SDL2IMAGE_NAME SDL2_image-${SDL2IMAGE_VERSION})
+DKSET(SDL2IMAGE ${3RDPARTY}/${SDL2IMAGE_NAME})
 
 
 ### INSTALL ###
 ## https://www.libsdl.org/projects/SDL_image/release/SDL2_image-2.0.1.zip
 ## https://www.libsdl.org/projects/SDL_image/release/SDL2_image-2.0.5.zip
-DKINSTALL(https://www.libsdl.org/projects/SDL_image/release/SDL2_image-${SDL2IMAGE_VERSION}.zip SDL2_image ${SDL2IMAGE})
+DKINSTALL(https://www.libsdl.org/projects/SDL_image/release/${SDL2IMAGE_NAME}.zip SDL2_image ${SDL2IMAGE})
 
 
 ### DKPLUGINS LINK ###
