@@ -1,3 +1,5 @@
+# https://github.com/philr/bzip2-windows
+
 DKDEPEND(mingw32)
 DKDEPEND(mingw64)
 DKDEPEND(msys)
@@ -5,16 +7,16 @@ DKDEPEND(libgcc)
 
 ### VERSION ###
 DKSET(BZIP2_VERSION 2-1.0.8)
+DKSET(BZIP2_DL ftp://sourceware.org/pub/bzip2/bzip${BZIP2_VERSION}.tar.gz)
 DKSET(BZIP2 ${3RDPARTY}/bzip${BZIP2_VERSION})
 
 
 ### INSTALL ###
 if(0)
-	## https://github.com/philr/bzip2-windows
-	DKINSTALL(https://github.com/philr/bzip2-windows/releases/download/v1.0.8.0/bzip2-dev-1.0.8.0-win-x86.zip bzip2 ${BZIP2})
+	DKINSTALL(${BZIP2_DL} bzip2 ${BZIP2})
 	DKCOPY(${BZIP2} ${BZIP2}/${OS} TRUE)
 else()
-	DKINSTALL(ftp://sourceware.org/pub/bzip2/bzip${BZIP2_VERSION}.tar.gz bzip2 ${BZIP2})
+	DKINSTALL(${BZIP2_DL} bzip2 ${BZIP2})
 	if(NOT EXISTS ${3RDPARTY}/bzip2-temp)
 		DKCOPY(${BZIP2} ${3RDPARTY}/bzip2-temp TRUE)
 	endif()

@@ -1,6 +1,9 @@
-## https://www.boost.org/
-## https://www.boost.org/doc/libs/1_76_0/tools/build/doc/html/index.html - B2 User Manual - 1.76.0
-## https://github.com/LibCMaker/LibCMaker#readme
+# https://www.boost.org/
+# https://www.boost.org/doc/libs/1_76_0/tools/build/doc/html/index.html - B2 User Manual - 1.76.0
+# https://github.com/LibCMaker/LibCMaker#readme
+#
+# https://sourceforge.net/projects/boost/files/boost/1.74.0/boost_1_74_0.zip
+# https://dl.bintray.com/boostorg/release/1.74.0/source/boost_1_74_0.zip
 
 # Debugging: When calling b2 to compile the boost libraries, you can use the -q flag to make it stop at the first error.
 # Notes: abi=aapcs and binary-format=elf were added to android build to supress "No best alternative for libs/context/build/asm_sources"
@@ -18,13 +21,12 @@ DKSET(BOOST_MINOR 74)
 DKSET(BOOST_BUILD 0)
 DKSET(BOOST_VERSION ${BOOST_MAJOR}_${BOOST_MINOR}_${BOOST_BUILD})
 DKSET(BOOST_NAME boost_${BOOST_VERSION})
+DKSET(BOOST_DL https://sourceforge.net/projects/boost/files/boost/${BOOST_MAJOR}.${BOOST_MINOR}.${BOOST_BUILD}/${BOOST_NAME}.zip)
 DKSET(BOOST ${3RDPARTY}/${BOOST_NAME})
 
 
 ### INSTALL ###
-## https://sourceforge.net/projects/boost/files/boost/1.74.0/boost_1_74_0.zip
-## https://dl.bintray.com/boostorg/release/1.74.0/source/boost_1_74_0.zip
-DKINSTALL(https://sourceforge.net/projects/boost/files/boost/${BOOST_MAJOR}.${BOOST_MINOR}.${BOOST_BUILD}/${BOOST_NAME}.zip boost ${BOOST})
+DKINSTALL(${BOOST_DL} boost ${BOOST})
 
 
 ### DKPLUGINS LINK ###

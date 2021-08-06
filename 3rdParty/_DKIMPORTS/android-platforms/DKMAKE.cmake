@@ -1,4 +1,3 @@
-# https://dl.google.com/android/repository/platform-24_r02.zip
 # https://dl.google.com/android/repository/platform-26_r02.zip
 
 ### VERSION ###

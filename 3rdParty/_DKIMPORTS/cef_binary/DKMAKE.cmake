@@ -4,11 +4,12 @@ return()
 ### VERSION ###
 DKSET(CEF_VERSION 81.3.3+g072a5f5+chromium-81.0.4044.138_windows32)
 DKSET(CEF_NAME cef_binary_${CE_VERSION})
+DKSET(CEF_DL https://cef-builds.spotifycdn.com/${CEF_NAME}.tar.bz2)
 DKSET(CEF ${3RDPARTY}/${CEF_NAME})
 
 
 ### INSTALL ###
-DKINSTALL(https://cef-builds.spotifycdn.com/${CEF_NAME}.tar.bz2 cef_binary_windows32 ${CEF})
+DKINSTALL(${CEF_DL} cef_binary ${CEF})
 
 
 ### LINK ###

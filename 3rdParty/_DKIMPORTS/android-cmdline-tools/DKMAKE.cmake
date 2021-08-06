@@ -13,20 +13,15 @@
 ### VERSION ###
 DKSET(ANDROIDTOOLS ${3RDPARTY}/android-cmdline-tools)
 DKSET(SDKMANAGER_EXE ${ANDROIDTOOLS}/bin/sdkmanager.bat)
-if(CMAKE_HOST_WIN32)
-	DKSET(ANDROIDTOOLS_DL https://dl.google.com/android/repository/commandlinetools-win-7302050_latest.zip)
-endif()
-if(CMAKE_HOST_APPLE)
-	DKSET(ANDROIDTOOLS_DL https://dl.google.com/android/repository/commandlinetools-mac-7302050_latest.zip)
-endif()
-if(CMAKE_HOST_LINUX)
-	DKSET(ANDROIDTOOLS_DL https://dl.google.com/android/repository/commandlinetools-linux-7302050_latest.zip)
-endif()
+WIN_DKSET(ANDROIDTOOLS_DL https://dl.google.com/android/repository/commandlinetools-win-7302050_latest.zip)
+MAC_DKSET(ANDROIDTOOLS_DL https://dl.google.com/android/repository/commandlinetools-mac-7302050_latest.zip)
+LINUX_DKSET(ANDROIDTOOLS_DL https://dl.google.com/android/repository/commandlinetools-linux-7302050_latest.zip)
 
 
 ### INSTALL ###
+DKINSTALL(${ANDROIDTOOLS_DL} android-cmdline-tools ${ANDROIDTOOLS})
+
 if(CMAKE_HOST_WIN32)
-	DKINSTALL(${ANDROIDTOOLS_DL} android-cmdline-tools ${ANDROIDTOOLS})
 	DKEXECUTE_PROCESS(COMMAND cmd /c sdkmanager --sdk_root=${ANDROIDSDK} WORKING_DIRECTORY ${ANDROIDTOOLS}/bin)
 #	if(NOT EXISTS ${ANDROIDSDK}/build-tools/${ANDROIDBUILDTOOLS_VERSION})
 #		message("Installing Android build-tools: ${ANDROIDBUILDTOOLS_VERSION} . . .")
@@ -95,7 +90,6 @@ endif()
 
 
 #if(CMAKE_HOST_APPLE)
-#	DKINSTALL(${ANDROIDTOOLS_DL} android-cmdline-tools ${ANDROIDTOOLS})
 #	if(NOT EXISTS ${ANDROIDSDK}/build-tools/${ANDROIDBUILDTOOLS_VERSION})
 #		message("Installing Android build-tools: ${ANDROIDBUILDTOOLS_VERSION} . . .")
 #		set(ARGUMNTS "${ANDROIDSDK}/bin/sdkmanager --install build-tools\\;${ANDROIDBUILDTOOLS_VERSION} --sdk_root=${ANDROIDSDK}")
@@ -113,7 +107,6 @@ endif()
 
 
 #if(CMAKE_HOST_LINUX)
-#	DKINSTALL(${ANDROIDTOOLS_DL} android-cmdline-tools ${ANDROIDTOOLS})
 #	if(NOT EXISTS ${ANDROIDSDK}/build-tools/${ANDROIDBUILDTOOLS_VERSION})
 #		message("Installing Android build-tools: ${ANDROIDBUILDTOOLS_VERSION} . . .")
 #		set(ARGUMNTS "${ANDROIDSDK}/bin/sdkmanager --install build-tools\\;${ANDROIDBUILDTOOLS_VERSION} --sdk_root=${ANDROIDSDK}")

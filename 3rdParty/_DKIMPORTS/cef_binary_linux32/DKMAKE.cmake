@@ -1,16 +1,14 @@
-if(NOT LINUX_32)
-	return()
-endif()
+# https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_linux32.tar.bz2
 
 ### VERSION ###
 DKSET(CEF_VERSION 81.3.3+g072a5f5+chromium-81.0.4044.138)
 DKSET(CEF_NAME cef_binary_${CEF_VERSION}_linux32)
+DKSET(CEF_DL https://cef-builds.spotifycdn.com/cef_binary_${CEF_VERSION}_linux32.tar.bz2)
 DKSET(CEF ${3RDPARTY}/${CEF_NAME})
 
 
 ### INSTALL ###
-DKINSTALL(https://cef-builds.spotifycdn.com/cef_binary_${CEF_VERSION}_linux32.tar.bz2 cef_binary_linux32 ${CEF})
-
+DKINSTALL(${CEF_DL} cef_binary_linux32 ${CEF})
 
 
 ### LINK ###

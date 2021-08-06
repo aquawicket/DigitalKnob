@@ -1,14 +1,16 @@
-## https://github.com/bulletphysics/bullet3
+# https://github.com/bulletphysics/bullet3
+#
+# https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/bullet/bullet-2.82-r2704.zip
 
 ### VERSION ###
 DKSET(BULLET_VERSION 2.82-r2704)
 DKSET(BULLET_NAME bullet-${BULLET_VERSION})
+DKSET(BULLET_DL https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/bullet/${BULLET_NAME}.zip)
 DKSET(BULLET ${3RDPARTY}/${BULLET_NAME})
 
 
 ### INSTALL ###
-## FIXME
-## DKINSTALL(www.internet.com/bullet-${BULLET_VERSION}.zip bullet ${BULLET})
+DKINSTALL(${BULLET_DL} bullet ${BULLET})
 
 
 ### DKPLUGINS LINK ###

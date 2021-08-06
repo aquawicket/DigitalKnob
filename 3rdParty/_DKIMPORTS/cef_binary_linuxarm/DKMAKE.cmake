@@ -1,15 +1,14 @@
-if(NOT LINUX_ARM32)
-	return()
-endif()
+# http://opensource.spotify.com/cefbuilds/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_linuxarm.tar.bz2
 
 ### VERSION ###
-DKSET(CEF_VERSION 81.3.3+g072a5f5+chromium-81.0.4044.138_linuxarm)
-DKSET(CEF_NAME cef_binary_${CEF_VERSION})
+DKSET(CEF_VERSION 81.3.3+g072a5f5+chromium-81.0.4044.138)
+DKSET(CEF_NAME cef_binary_${CEF_VERSION}_linuxarm)
+DKSET(CEF_DL http://opensource.spotify.com/cefbuilds/${CEF_NAME}.tar.bz2)
 DKSET(CEF ${3RDPARTY}/${CEF_NAME})
 
 
 ### INSTALL ###
-DKINSTALL(http://opensource.spotify.com/cefbuilds/${CEF_NAME}.tar.bz2 cef_binary_linuxarm ${CEF})
+DKINSTALL(${CEF_DL} cef_binary_linuxarm ${CEF})
 
 
 ### LINK ###

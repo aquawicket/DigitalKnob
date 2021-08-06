@@ -448,6 +448,26 @@ endfunction()
 #############   Platform specific functions  ##################
 ###############################################################
 
+####################### DKSET ###########
+function(WIN_DKSET variable value)
+	if(CMAKE_HOST_WIN32)
+		DKSET(${variable} ${value})
+	endif()
+endfunction()
+
+function(MAC_DKSET variable value)
+	if(CMAKE_HOST_APPLE)
+		DKSET(${variable} ${value})
+	endif()
+endfunction()
+
+function(LINUX_DKSET variable value)
+	if(CMAKE_HOST_LINUX)
+		DKSET(${variable} ${value})
+	endif()
+endfunction()
+
+
 ###################### DK_PATH ####################
 function(DKSETPATH path)
 	if(path STREQUAL "OFF")
