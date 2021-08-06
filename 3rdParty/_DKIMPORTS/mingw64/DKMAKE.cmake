@@ -1,10 +1,10 @@
-if(NOT CMAKE_HOST_WIN32)
-	return()
-endif()
+# https://sourceforge.net/projects/mingw-w64/files/Toolchains%20targetting%20Win64/Personal%20Builds/mingw-builds/4.9.2/threads-posix/seh/x86_64-4.9.2-release-posix-seh-rt_v3-rev1.7z
 
 ### VERSION ###
-DKSET(MINGW64 ${3RDPARTY}/mingw64)
+DKSET(MINGW64_VERSION 4.9.2)
+DKSET(MINGW64_NAME mingw64)
+DKSET(MINGW64_DL https://sourceforge.net/projects/mingw-w64/files/Toolchains%20targetting%20Win64/Personal%20Builds/mingw-builds/${MINGW64_VERSION}/threads-posix/seh/x86_64-${MINGW64_VERSION}-release-posix-seh-rt_v3-rev1.7z)
+DKSET(MINGW64 ${3RDPARTY}/${MINGW64_NAME})
 
 ### INSTALL ###
-## https://sourceforge.net/projects/mingw-w64/files/Toolchains%20targetting%20Win64/Personal%20Builds/mingw-builds/4.9.2/threads-posix/seh/x86_64-4.9.2-release-posix-seh-rt_v3-rev1.7z
-DKINSTALL(https://sourceforge.net/projects/mingw-w64/files/Toolchains%20targetting%20Win64/Personal%20Builds/mingw-builds/4.9.2/threads-posix/seh/x86_64-4.9.2-release-posix-seh-rt_v3-rev1.7z mingw64 ${MINGW64})
+DKINSTALL(${MINGW64_DL} mingw64 ${MINGW64})
