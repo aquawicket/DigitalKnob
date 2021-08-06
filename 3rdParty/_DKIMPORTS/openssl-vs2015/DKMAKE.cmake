@@ -1,11 +1,11 @@
-# Downloads
 # https://www.npcglib.org/~stathis/downloads/openssl-1.0.2h-vs2015.7z
 
 
 ### VERSION ###
 DKSET(OPENSSL_VERSION 1.0.2h-vs2015)
+DKSET(OPENSSL_NAME openssl-${OPENSSL_VERSION})
 DKSET(OPENSSL_DL https://www.npcglib.org/~stathis/downloads/openssl-${OPENSSL_VERSION}.7z)
-DKSET(OPENSSL ${3RDPARTY}/openssl-${OPENSSL_VERSION})
+DKSET(OPENSSL ${3RDPARTY}/${OPENSSL_NAME})
 
 
 ### INSTALL ###

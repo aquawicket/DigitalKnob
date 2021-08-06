@@ -1,3 +1,5 @@
+# https://sourceforge.net/projects/opencvlibrary/files/opencv-unix/3.4.1/opencv-3.4.1.zip
+
 ### DEPENDS ###
 DKDEPEND(libjpeg-turbo)
 DKDEPEND(tiff)
@@ -5,11 +7,14 @@ DKDEPEND(libpng)
 
 
 ### VERSION ###
-DKSET(OPENCV_VERSION opencv-3.4.1)
-DKSET(OPENCV ${3RDPARTY}/${OPENCV_VERSION})
+DKSET(OPENCV_VERSION 3.4.1)
+DKSET(OPENCV_NAME opencv-${OPENCV_VERSION})
+DKSET(OPENCV_DL https://sourceforge.net/projects/opencvlibrary/files/opencv-unix/${OPENCV_VERSION}/${OPENCV_NAME}.zip)
+DKSET(OPENCV ${3RDPARTY}/${OPENCV_NAME})
+
 
 ### INSTALL ###
-DKINSTALL(https://sourceforge.net/projects/opencvlibrary/files/opencv-unix/3.4.1/opencv-3.4.1.zip opencv ${OPENCV})
+DKINSTALL(${OPENCV_DL} opencv ${OPENCV})
 
 
 ### LINK ###
@@ -137,28 +142,28 @@ ANDROID_RELEASE_LIB(${OPENCV}/${OS}/lib/${RELEASE_DIR}/libopencv_videoio.a)
 WIN_PATH(${OPENCV}/${OS})
 WIN32_COMMAND(${DKCMAKE_WIN32} ${OPENCV})
 WIN64_COMMAND(${DKCMAKE_WIN64} ${OPENCV})
-WIN_VS(${OPENCV_VERSION} OpenCV.sln)
+WIN_VS(${OPENCV_NAME} OpenCV.sln)
 
 
 MAC_PATH(${OPENCV}/${OS})
 MAC64_COMMAND(${DKCMAKE_MAC64} "-DCMAKE_CXX_FLAGS=-stdlib=libc++" ${OPENCV})
-MAC_XCODE(${OPENCV_VERSION} opencv_core)
-MAC_XCODE(${OPENCV_VERSION} opencv_imgcodecs)
-MAC_XCODE(${OPENCV_VERSION} opencv_videoio)
+MAC_XCODE(${OPENCV_NAME} opencv_core)
+MAC_XCODE(${OPENCV_NAME} opencv_imgcodecs)
+MAC_XCODE(${OPENCV_NAME} opencv_videoio)
 
 
 IOS_PATH(${OPENCV}/${OS})
 IOS64_COMMAND(${DKCMAKE_IOS64} ${OPENCV})
-IOS_XCODE(${OPENCV_VERSION} opencv_core)
-IOS_XCODE(${OPENCV_VERSION} opencv_imgcodecs)
-IOS_XCODE(${OPENCV_VERSION} opencv_videoio)
+IOS_XCODE(${OPENCV_NAME} opencv_core)
+IOS_XCODE(${OPENCV_NAME} opencv_imgcodecs)
+IOS_XCODE(${OPENCV_NAME} opencv_videoio)
 
 
 IOSSIM_PATH(${OPENCV}/${OS})
 IOSSIM64_COMMAND(${DKCMAKE_IOSSIM64} ${OPENCV})
-IOSSIM_XCODE(${OPENCV_VERSION} opencv_core)
-IOSSIM_XCODE(${OPENCV_VERSION} opencv_imgcodecs)
-IOSSIM_XCODE(${OPENCV_VERSION} opencv_videoio)
+IOSSIM_XCODE(${OPENCV_NAME} opencv_core)
+IOSSIM_XCODE(${OPENCV_NAME} opencv_imgcodecs)
+IOSSIM_XCODE(${OPENCV_NAME} opencv_videoio)
 
 
 LINUX_DEBUG_PATH(${OPENCV}/${OS}/${DEBUG_DIR})
@@ -187,8 +192,8 @@ RASPBERRY_RELEASE_COMMAND(make opencv_imgcodecs)
 RASPBERRY_RELEASE_COMMAND(make opencv_videoio)
 
 
-##ANDROID_NDK(${OPENCV_VERSION})
+##ANDROID_NDK(${OPENCV_NAME})
 ANDROID_PATH(${OPENCV}/${OS})
 ANDROID32_COMMAND(${DKCMAKE_ANDROID32} ${OPENCV})
 ANDROID64_COMMAND(${DKCMAKE_ANDROID64} ${OPENCV})
-ANDROID_VS(${OPENCV_VERSION} OpenCV.sln)
+ANDROID_VS(${OPENCV_NAME} OpenCV.sln)
