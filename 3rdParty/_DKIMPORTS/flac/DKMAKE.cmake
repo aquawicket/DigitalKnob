@@ -1,11 +1,16 @@
+# https://ftp.osuosl.org/pub/xiph/releases/flac/flac-1.3.2-win.zip
+# https://ftp.osuosl.org/pub/xiph/releases/flac/flac-1.3.2.tar.xz
+
 ### VERSION ###
 DKSET(FLAC_VERSION 1.3.2)
+DKSET(FLAC_NAME flac-${FLAC_VERSION}-win)
+DKSET(FLAC_DL https://ftp.osuosl.org/pub/xiph/releases/flac/${FLAC_NAME}.zip)
+DKSET(FLAC ${3RDPARTY}/${FLAC_NAME})
+
 
 ### INSTALL ###
-## https://ftp.osuosl.org/pub/xiph/releases/flac/flac-1.3.2-win.zip
-## https://ftp.osuosl.org/pub/xiph/releases/flac/flac-1.3.2.tar.xz
-DKINSTALL(https://ftp.osuosl.org/pub/xiph/releases/flac/flac-${FLAC_VERSION}-win.zip flac ${FLAC})
-DKSET(FLAC ${3RDPARTY}/flac-${FLAC_VERSION})
+DKINSTALL(${FLAC_DL} flac ${FLAC})
+
 
 
 ### LINK ###

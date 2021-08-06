@@ -1,14 +1,16 @@
-## http://glew.sourceforge.net/
+# http://glew.sourceforge.net/
+#
+# https://github.com/nigels-com/glew/releases/download/glew-2.2.0/glew-2.2.0.zip
 
 ### VERSION ###
 DKSET(GLEW_VERSION 2.2.0)
 DKSET(GLEW_NAME glew-${GLEW_VERSION})
+DKSET(GLEW_DL https://github.com/nigels-com/glew/releases/download/${GLEW_NAME}/${GLEW_NAME}.zip)
 DKSET(GLEW ${3RDPARTY}/${GLEW_NAME})
 
 
 ### INSTALL ###
-# https://github.com/nigels-com/glew/releases/download/glew-2.2.0/glew-2.2.0.zip
-DKINSTALL(https://versaweb.dl.sourceforge.net/project/glew/glew/${GLEW_VERSION}/${GLEW_NAME}.zip glew ${GLEW})
+DKINSTALL(${GLEW_DL} glew ${GLEW})
 DKCOPY(${GLEW}/build/cmake ${GLEW}/${OS}/CMakeFiles/Export/lib/cmake/glew TRUE)
 
 

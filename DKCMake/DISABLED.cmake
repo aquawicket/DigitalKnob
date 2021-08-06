@@ -33,6 +33,8 @@ DISABLE_DKDEPEND(DKVncClient)
 DISABLE_DKDEPEND(DKVncServer)
 
 if(WIN)
+DISABLE_DKDEPEND(cef_binary)
+DISABLE_DKDEPEND(cef_binary_linuxarm)
 DISABLE_DKDEPEND(ffmpeg-20150905-git-a87ada5-win32-dev)
 DISABLE_DKDEPEND(ffmpeg-20150905-git-a87ada5-win64-dev)
 endif()

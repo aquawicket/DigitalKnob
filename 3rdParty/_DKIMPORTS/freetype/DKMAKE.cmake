@@ -1,4 +1,3 @@
-#
 # https://www.freetype.org/
 #
 # https://sourceforge.net/projects/freetype/files/freetype2/2.5.5/freetype-2.5.5.tar.gz

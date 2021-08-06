@@ -1,6 +1,12 @@
+### VERSION ###
+DKSET(GHOSTSCRIPT_VERSION 922)
+DKSET(GHOSTSCRIPT_NAME gs${GHOSTSCRIPT_VERSION}w64)
+DKSET(GHOSTSCRIPT_DL https://github.com/ArtifexSoftware/ghostpdl-downloads/releases/download/gs${GHOSTSCRIPT_VERSION}/${GHOSTSCRIPT_NAME}.exe)
+DKSET(GHOSTSCRIPT "C:/Program Files/gs/gs9.22/bin")
+
 ### INSTALL ###
-IF(NOT EXISTS "C:/Program Files/gs/gs9.22/bin")
+IF(NOT EXISTS ${GHOSTSCRIPT})
 	DKSETPATH(${DIGITALKNOB}/Download)
-	DKDOWNLOAD(https://github.com/ArtifexSoftware/ghostpdl-downloads/releases/download/gs922/gs922w64.exe)
-	WIN32_COMMAND(${DIGITALKNOB}/Download/gs922w64.exe)
+	DKDOWNLOAD(${GHOSTSCRIPT_DL})
+	DKCOMMAND(${DIGITALKNOB}/Download/${GHOSTSCRIPT_NAME}.exe)
 ENDIF()

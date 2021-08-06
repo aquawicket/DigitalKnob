@@ -1,4 +1,6 @@
-## http://giflib.sourceforge.net/
+# http://giflib.sourceforge.net/
+#
+# https://sourceforge.net/projects/giflib/files/giflib-5.1.1.tar.gz
 
 if(WIN_32)
 	DKDEPEND(mingw32)
@@ -9,14 +11,18 @@ endif()
 DKDEPEND(msys)
 
 
+
 ### VERSION ###
 DKSET(GIF_VERSION 5.1.1)
+DKSET(GIF_NAME giflib-${GIF_VERSION})
+DKSET(GIF_DL https://sourceforge.net/projects/giflib/files/${GIF_NAME}.tar.gz)
+DKSET(GIF ${3RDPARTY}/${GIF_NAME})
+
 
 
 ### INSTALL ###
-## https://sourceforge.net/projects/giflib/files/giflib-5.1.1.tar.gz
-DKINSTALL(https://sourceforge.net/projects/giflib/files/giflib-${GIF_VERSION}.tar.gz giflib ${GIF})
-DKSET(GIF ${3RDPARTY}/giflib-${GIF_VERSION})
+DKINSTALL(${GIF_DL} giflib ${GIF})
+
 
 
 ### DKPLUGINS LINK ###
@@ -144,4 +150,4 @@ RASPBERRY_RELEASE_COMMAND(make)
 
 
 
-ANDROID_NDK(giflib-${GIF_VERSION})
+ANDROID_NDK(${GIF_NAME})

@@ -7,8 +7,9 @@
 
 ### VERSION ###
 DKSET(GRADLE_VERSION 7.1.1-all)
-DKSET(GRADLE ${3RDPARTY}/gradle-${GRADLE_VERSION})
-DKSET(GRADLE_DL https://downloads.gradle-dn.com/distributions/gradle-${GRADLE_VERSION}.zip)
+DKSET(GRADLE_NAME gradle-${GRADLE_VERSION})
+DKSET(GRADLE_DL https://downloads.gradle-dn.com/distributions/${GRADLE_NAME}.zip)
+DKSET(GRADLE ${3RDPARTY}/${GRADLE_NAME})
 
 
 ### INSTALL ###

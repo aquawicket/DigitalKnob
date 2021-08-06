@@ -1,10 +1,13 @@
 ## https://github.com/vancegroup/freealut
 
-DKSET(FREEALUT ${3RDPARTY}/freealut-master)
+DKSET(FREEALUT_VERSION master)
+DKSET(FREEALUT_NAME freealut-${FREEALUT_VERSION})
+#DKSET(FREEALUT_DL ???)
+DKSET(FREEALUT ${3RDPARTY}/${FREEALUT_NAME})
 
 
 ### INSTALL ###
-## DKINSTALL(www.internet.com/freealut-master.zip freealut-master ${FREEALUT}) ## find an online link
+DKINSTALL(${FREEALUT_DL} freealut-master ${FREEALUT})
 
 
 ### LINK ###
@@ -14,4 +17,4 @@ ANDROID_RELEASE_LIB(${FREEALUT}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/libal
 
 
 ### COMPILE ###
-ANDROID_NDK(freealut-master)
+ANDROID_NDK(${FREEALUT_NAME})
