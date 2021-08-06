@@ -1,7 +1,7 @@
-# https://github.com/ImageMagick/ImageMagick/archive/refs/tags/7.1.0-0.zip
+# https://github.com/ImageMagick/ImageMagick/archive/refs/tags/7.1.0-4.zip
 
 ### VERSION ###
-DKSET(IMAGEMAGICK_VERSION 7.1.0-0)
+DKSET(IMAGEMAGICK_VERSION 7.1.0-4)
 DKSET(IMAGEMAGICK_NAME ImageMagick-${IMAGEMAGICK_VERSION})
 DKSET(IMAGEMAGICK_DL https://github.com/ImageMagick/ImageMagick/archive/refs/tags/${IMAGEMAGICK_VERSION}.zip)
 DKSET(IMAGEMAGICK ${3RDPARTY}/${IMAGEMAGICK_NAME})
