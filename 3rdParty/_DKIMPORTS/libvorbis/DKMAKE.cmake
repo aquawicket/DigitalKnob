@@ -1,5 +1,8 @@
 # https://ftp.osuosl.org/pub/xiph/releases/vorbis/libvorbis-1.3.5.zip
 
+DKDEPEND(mingw32)
+DKDEPEND(mingw64)
+DKDEPEND(msys)
 DKDEPEND(libgcc)
 DKDEPEND(libogg)
 
