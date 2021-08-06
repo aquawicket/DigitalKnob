@@ -1,12 +1,16 @@
+# https://www.zlib.net/fossils/zlib-1.2.8.tar.gz
+# https://www.zlib.net/fossils/zlib-1.2.11.tar.gz
+
 ### VERSION ###
-#DKSET(ZLIB_VERSION 1.2.8) ## https://www.zlib.net/fossils/zlib-1.2.8.tar.gz
-DKSET(ZLIB_VERSION 1.2.11) ##https://www.zlib.net/fossils/zlib-1.2.11.tar.gz
+#DKSET(ZLIB_VERSION 1.2.8)
+DKSET(ZLIB_VERSION 1.2.11)
 DKSET(ZLIB_NAME zlib-${ZLIB_VERSION})
+DKSET(ZLIB_DL https://www.zlib.net/fossils/${ZLIB_NAME}.tar.gz)
 DKSET(ZLIB ${3RDPARTY}/${ZLIB_NAME})
 
 
 ### INSTALL ###
-DKINSTALL(https://www.zlib.net/fossils/${ZLIB_NAME}.tar.gz zlib ${ZLIB})
+DKINSTALL(${ZLIB_DL} zlib ${ZLIB})
 
 
 ### DKPLUGINS LINK ###
