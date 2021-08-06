@@ -1,3 +1,5 @@
+# https://github.com/uNetworking/uWebSockets/archive/v0.14.zip
+
 DKDEPEND(zlib)
 DKDEPEND(libuv)
 ##DKDEPEND(openssl)
@@ -8,13 +10,13 @@ DKSET(UWEBSOCKETS_MAJOR 0)
 DKSET(UWEBSOCKETS_MINOR 14)
 DKSET(UWEBSOCKETS_VERSION ${UWEBSOCKETS_MAJOR}.${UWEBSOCKETS_MINOR})
 DKSET(UWEBSOCKETS_NAME uWebSockets-${UWEBSOCKETS_VERSION})
+DKSET(UWEBSOCKETS_DL https://github.com/uNetworking/uWebSockets/archive/v${UWEBSOCKETS_VERSION}.zip)
 DKSET(UWEBSOCKETS ${3RDPARTY}/${UWEBSOCKETS_NAME})
 
 
 
 ### INSTALL ###
-## https://github.com/uNetworking/uWebSockets/archive/v0.14.zip
-DKINSTALL(https://github.com/uNetworking/uWebSockets/archive/v${UWEBSOCKETS_VERSION}.zip uWebSockets ${UWEBSOCKETS})
+DKINSTALL(${UWEBSOCKETS_DL} uWebSockets ${UWEBSOCKETS})
 
 
 
