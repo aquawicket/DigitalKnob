@@ -719,6 +719,7 @@ function DKBuild_DoResults(){
 			if(rtvalue.indexOf("errors occurred!") > -1) 
 				return
 			CPP_DK_Execute("make "+APP+"d")
+			CPP_DK_Execute("chmod +x "+DKPATH+appdir+"/"+APP+"/linux64/Debug/"+APP+"d")
 
 			//Create .desktop file
 			let string = "[Desktop Entry]\n"
@@ -735,10 +736,12 @@ function DKBuild_DoResults(){
 			cmake_string = cmake_string.replace("-DDEBUG=ON ", "");
 			CPP_DKFile_MkDir(DKPATH+appdir+"/"+APP+"/linux64/Release")
 			CPP_DKFile_ChDir(DKPATH+appdir+"/"+APP+"/linux64/Release")
+			console.log(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DKPATH+"DK")
 			let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DKPATH+"DK")
 			if(rtvalue.indexOf("errors occurred!") > -1)
 				return
 			CPP_DK_Execute("make "+APP)
+			CPP_DK_Execute("chmod +x "+DKPATH+appdir+"/"+APP+"/linux64/Release/"+APP)
 			
 			//Create .desktop file
 			let string = "[Desktop Entry]\n"
