@@ -4,18 +4,6 @@
 # https://github.com/xz-mirror/xz/archive/refs/tags/v5.2.5.zip
 
 
-### DEPENDS ###
-IF(WIN_32)
-	#DKDEPEND(mingw32)
-ENDIF()
-IF(WIN_64)
-	#DKDEPEND(mingw64)
-ENDIF()
-IF(WIN)
-	#DKDEPEND(msys)
-ENDIF()
-
-
 
 ### VERSION ###
 DKSET(XZ_VERSION 5.2.5)
