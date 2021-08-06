@@ -32,6 +32,7 @@ if(WIN)
 DISABLE_DKDEPEND(Xcode)
 DISABLE_DKDEPEND(cef_binary)
 DISABLE_DKDEPEND(cef_binary_linuxarm)
+DISABLE_DKDEPEND(flac)
 endif()
 
 if(WIN_32)

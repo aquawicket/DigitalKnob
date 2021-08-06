@@ -9,3 +9,4 @@ DKSET(NASM_EXE ${NASM}/nasm.exe)
 
 ### INSTALL ###
 DKINSTALL(${NASM_DL} nasm ${NASM})
+DKSETENV("PATH" ${NASM_EXE})

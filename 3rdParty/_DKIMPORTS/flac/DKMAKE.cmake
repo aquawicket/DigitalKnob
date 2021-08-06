@@ -1,6 +1,9 @@
 # https://ftp.osuosl.org/pub/xiph/releases/flac/flac-1.3.2-win.zip
 # https://ftp.osuosl.org/pub/xiph/releases/flac/flac-1.3.2.tar.xz
 
+### DEPENDS ###
+DKDEPEND(nasm)
+
 ### VERSION ###
 DKSET(FLAC_VERSION 1.3.2)
 DKSET(FLAC_NAME flac-${FLAC_VERSION})
