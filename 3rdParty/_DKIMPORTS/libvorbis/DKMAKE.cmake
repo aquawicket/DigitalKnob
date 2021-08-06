@@ -1,15 +1,18 @@
-## https://ftp.osuosl.org/pub/xiph/releases/vorbis/libvorbis-1.3.5.zip
+# https://ftp.osuosl.org/pub/xiph/releases/vorbis/libvorbis-1.3.5.zip
+
 DKDEPEND(libgcc)
 DKDEPEND(libogg)
 
 
 ### VERSION ###
 DKSET(VORBIS_VERSION 1.3.5)
-DKSET(VORBIS ${3RDPARTY}/libvorbis-${VORBIS_VERSION})
+DKSET(VORBIS_NAME libvorbis-${VORBIS_VERSION})
+DKSET(VORBIS_DL https://ftp.osuosl.org/pub/xiph/releases/vorbis/${VORBIS_NAME}.zip)
+DKSET(VORBIS ${3RDPARTY}/${VORBIS_NAME})
 
 
 ### INSTALL ###
-DKINSTALL(https://ftp.osuosl.org/pub/xiph/releases/vorbis/libvorbis-${VORBIS_VERSION}.zip libvorbis libvorbis-${VORBIS})
+DKINSTALL(${VORBIS_DL} libvorbis ${VORBIS})
 
 
 ### dkplugin LINK ###

@@ -1,3 +1,5 @@
+# https://github.com/LibVNC/libvncserver/archive/refs/heads/master.zip
+
 ### DEPENDS ###
 DKDEPEND(zlib)
 DKDEPEND(libpng)
@@ -11,14 +13,18 @@ IF(LINUX)
 	DKDEPEND(libsystemd-dev)
 ENDIF()
 
+
+
 ### VERSION ###
 DKSET(VNCSERVER_VERSION master)
 DKSET(VNCSERVER_NAME libvncserver-${VNCSERVER_VERSION})
+DKSET(VNCSERVER_DL https://github.com/LibVNC/libvncserver/archive/refs/heads/${VNCSERVER_VERSION}.zip)
 DKSET(VNCSERVER ${3RDPARTY}/${VNCSERVER_NAME})
 
 
+
 ### INSTALL ###
-## DKINSTALL(www.internet.com/${VNCSERVER_NAME}.zip libvncserver ${VNCSERVER})
+DKINSTALL(${VNCSERVER_DL} libvncserver ${VNCSERVER})
 
 
 

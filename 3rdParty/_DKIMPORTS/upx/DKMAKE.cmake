@@ -1,32 +1,20 @@
+# https://github.com/upx/upx/releases/download/v3.96/upx-3.96-win32.zip
+# https://github.com/upx/upx/releases/download/v3.96/upx-3.96-win64.zip
+# https://github.com/upx/upx/releases/download/v3.96/upx-3.96-i386_linux.tar.xz
+# https://github.com/upx/upx/releases/download/v3.96/upx-3.96-amd64_linux.tar.xz
+# https://github.com/upx/upx/releases/download/v3.96/upx-3.96-arm_linux.tar.xz
+# https://github.com/upx/upx/releases/download/v3.96/upx-3.96-dos.zip
+
+
 ### VERSION ###
 DKSET(UPX_MAJOR 3)
 DKSET(UPX_MINOR 96)
-
-## OTHERS
-## https://github.com/upx/upx/releases/download/v3.96/upx-3.96-arm64_linux.tar.xz
-## https://github.com/upx/upx/releases/download/v3.96/upx-3.96-arm_linux.tar.xz
-## https://github.com/upx/upx/releases/download/v3.96/upx-3.96-dos.zip
-
-IF(LINUX_32)
-	## https://github.com/upx/upx/releases/download/v3.96/upx-3.96-amd64_linux.tar.xz
-	DKSET(UPX_VERSION upx-${UPX_MAJOR}.${UPX_MINOR}-i386_linux)
-ENDIF()
-IF(LINUX_64)
-	## https://github.com/upx/upx/releases/download/v3.96/upx-3.96-amd64_linux.tar.xz
-	DKSET(UPX_VERSION upx-${UPX_MAJOR}.${UPX_MINOR}-amd64_linux)
-ENDIF()
-IF(WIN_32)
-	## https://github.com/upx/upx/releases/download/v3.96/upx-3.96-win32.zip
-	DKSET(UPX_VERSION upx-${UPX_MAJOR}.${UPX_MINOR}-win32)
-ENDIF()
-IF(WIN_64)
-	## https://github.com/upx/upx/releases/download/v3.96/upx-3.96-win64.zip
-	DKSET(UPX_VERSION upx-${UPX_MAJOR}.${UPX_MINOR}-win64)
-ENDIF()
-DKSET(UPX ${3RDPARTY}/UPX_VERSION)
+DKSET(UPX_VERSION ${UPX_MAJOR}.${UPX_MINOR})
+DKSET(UPX_NAME upx-${UPX_VERSION})
+WIN_DKSET(UPX_DL https://github.com/upx/upx/releases/download/v${UPX_VERSION}/${UPX_NAME}-win32.zip)
+LINUX_DKSET(UPX_DL https://github.com/upx/upx/releases/download/v${UPX_VERSION}/${UPX_NAME}-i386_linux.zip)
+DKSET(UPX ${3RDPARTY}/${UPX_NAME})
 
 
 ### INSTALL ###
-IF(NOT EXISTS ${3RDPARTY}/${UPX_VERSION})	
-	DKINSTALL(https://github.com/upx/upx/releases/download/v${UPX_MAJOR}.${UPX_MINOR}/${UPX_VERSION}.zip upx ${UPX})
-ENDIF()
+DKINSTALL(${UPX_DL} upx ${UPX})
