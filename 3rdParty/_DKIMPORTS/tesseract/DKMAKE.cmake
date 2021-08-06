@@ -1,16 +1,18 @@
-## https://github.com/tesseract-ocr/tessdoc
+# https://github.com/tesseract-ocr/tessdoc
+#
+# https://github.com/tesseract-ocr/tessdoc/archive/refs/heads/master.zip
 
 DKDEPEND(leptonica)
 
 ### VERSION ###
-DKSET( master)
+DKSET(TESSERACT_VERSION master)
 DKSET(TESSERACT_NAME tesseract-${TESSERACT_VERSION})
+DKSET(TESSERACT_DL https://github.com/tesseract-ocr/tessdoc/archive/refs/heads/${TESSERACT_VERSION}.zip)
 DKSET(TESSERACT ${3RDPARTY}/${TESSERACT_NAME})
 
 
 ### INSTALL ###
-## https://github.com/tesseract-ocr/tessdoc/archive/refs/heads/master.zip
-DKINSTALL(https://github.com/tesseract-ocr/tessdoc/archive/refs/heads/${TESSERACT_VERSION}.zip tesseract ${TESSERACT})
+DKINSTALL(${TESSERACT_DL} tesseract ${TESSERACT})
 
 
 ### LINK ###

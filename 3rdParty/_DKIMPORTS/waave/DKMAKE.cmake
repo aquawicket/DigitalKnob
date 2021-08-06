@@ -1,15 +1,16 @@
+# https://sourceforge.net/projects/waave/files/waave/waave-3.01.tar.gz
+
 ### DEPENDS ###
-DKDEPEND(ffmpeg-win32-dev)
-DKDEPEND(ffmpeg-win32-shared)
-DKDEPEND(ffmpeg-win64-dev)
-DKDEPEND(ffmpeg-win64-shared)
+DKDEPEND(ffmpeg-dev)
+DKDEPEND(ffmpeg-shared)
+DKDEPEND(ffmpeg-static)
 DKDEPEND(SDL2)
 
 
 ### VERSION ###
 DKSET(WAAVE_VERSION 3.01)
 DKSET(WAAVE_NAME waave-${WAAVE_VERSION})
-#DKSET(WAAVE_DL ???)
+DKSET(WAAVE_DL https://sourceforge.net/projects/waave/files/waave/${WAAVE_NAME}.tar.gz)
 DKSET(WAAVE ${3RDPARTY}/${WAAVE_NAME})
 
 
