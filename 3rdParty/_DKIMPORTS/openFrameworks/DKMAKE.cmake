@@ -1,12 +1,14 @@
+# https://github.com/openframeworks/openFrameworks/archive/refs/tags/0.10.0.zip
+
 ### VERSION ###
 DKSET(OPENFRAMEWORKS_VERSION 0.10.0)
 DKSET(OPENFRAMEWORKS_NAME openFrameworks-${OPENFRAMEWORKS_VERSION})
+DKSET(OPENFRAMEWORKS_DL https://github.com/openframeworks/openFrameworks/archive/refs/tags/${OPENFRAMEWORKS_VERSION}.zip)
 DKSET(OPENFRAMEWORKS ${3RDPARTY}/${OPENFRAMEWORKS_NAME})
 
 
 ### INSTALL ###
-## https://github.com/openframeworks/openFrameworks/archive/refs/tags/0.10.0.zip
-DKINSTALL(https://github.com/openframeworks/openFrameworks/archive/refs/tags/${OPENFRAMEWORKS_VERSION}.zip openFrameworks ${OPENFRAMEWORKS})
+DKINSTALL(${OPENFRAMEWORKS_DL} openFrameworks ${OPENFRAMEWORKS})
 
 
 
