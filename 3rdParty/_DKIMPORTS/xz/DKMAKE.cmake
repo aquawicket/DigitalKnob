@@ -1,5 +1,6 @@
 # https://github.com/xz-mirror/xz
 #
+# https://tukaani.org/xz/xz-5.2.5.tar.gz
 # https://github.com/xz-mirror/xz/archive/refs/tags/v5.2.5.zip
 
 
@@ -35,8 +36,8 @@ DKDEFINE(LZMA_API_STATIC)
 DKINCLUDE(${XZ}/src/liblzma/api)
 WIN_DEBUG_LIB(${XZ}/${OS}/${DEBUG_DIR}/liblzma.lib)
 WIN_RELEASE_LIB(${XZ}/${OS}/${RELEASE_DIR}/liblzma.lib)
-#MAC_DEBUG_LIB(${XZ}/${OS}/${DEBUG_DIR}/liblzma.a)
-#MAC_RELEASE_LIB(${XZ}/${OS}/${RELEASE_DIR}/liblzma.a)
+MAC_DEBUG_LIB(${XZ}/${OS}/${DEBUG_DIR}/liblzma.a)
+MAC_RELEASE_LIB(${XZ}/${OS}/${RELEASE_DIR}/liblzma.a)
 MAC_DEBUG_LIB(${XZ}/${OS}/${DEBUG_DIR}/src/liblzma/.libs/liblzma.a)
 MAC_RELEASE_LIB(${XZ}/${OS}/${RELEASE_DIR}/src/liblzma/.libs/liblzma.a)
 LINUX32_DEBUG_LIB(${XZ}/${OS}/${DEBUG_DIR}/src/liblzma/.libs/liblzma.a)
