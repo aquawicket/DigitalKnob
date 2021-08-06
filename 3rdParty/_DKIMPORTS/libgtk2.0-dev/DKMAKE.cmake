@@ -1,13 +1,6 @@
-if(NOT LINUX AND NOT RASPBERRY)
-	return()
-endif()
-
-
 ### INSTALL ###
-DKSET(QUEUE_BUILD ON)
 DKSET(CURRENT_DIR /usr)
-LINUX_COMMAND(sudo apt install libgtk2.0-dev)
-RASPBERRY_COMMAND(sudo apt install libgtk2.0-dev)
+DKCOMMAND(sudo apt install libgtk2.0-dev)
 
 
 ### LINK ###

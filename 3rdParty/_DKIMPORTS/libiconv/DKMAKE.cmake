@@ -1,11 +1,14 @@
+# https://ftp.gnu.org/gnu/libiconv/libiconv-1.14.tar.gz
+
 ### VERSION ###
 DKSET(ICONV_VERSION 1.14)
 DKSET(ICONV_NAME libiconv-${ICONV_VERSION})
+DKSET(ICONV_DL https://ftp.gnu.org/gnu/libiconv/${ICONV_NAME}.tar.gz)
 DKSET(ICONV ${3RDPARTY}/${ICONV_NAME})
 
 
 ### INSTALL ###
-DKINSTALL(https://ftp.gnu.org/gnu/libiconv/${ICONV_NAME}.tar.gz libiconv ${ICONV})
+DKINSTALL(${ICONV_DL} libiconv ${ICONV})
 
 
 
