@@ -1,3 +1,4 @@
+# https://code.google.com/archive/p/bullet/
 # https://github.com/bulletphysics/bullet3
 #
 # https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/bullet/bullet-2.82-r2704.zip
@@ -42,8 +43,8 @@ IF(BulletMultiThreaded)
 	WIN_RELEASE_LIB(${BULLET}/${OS}/lib/${RELEASE_DIR}/BulletMultiThreaded.lib)
 	APPLE_DEBUG_LIB(${BULLET}/${OS}/src/BulletMultiThreaded/${DEBUG_DIR}/libBulletMultiThreaded.a)
 	APPLE_RELEASE_LIB(${BULLET}/${OS}/src/BulletMultiThreaded/${RELEASE_DIR}/libBulletMultiThreaded.a)
-	#LINUX_DEBUG_LIB(${BULLET}/${OS}/Debug/src/BulletMultiThreaded/libBulletMultiThreaded.a)
-	#LINUX_RELEASE_LIB(${BULLET}/${OS}/${RELEASE_DIR}/src/BulletMultiThreaded/libBulletMultiThreaded.a)
+	LINUX_DEBUG_LIB(${BULLET}/${OS}/Debug/src/BulletMultiThreaded/libBulletMultiThreaded.a)
+	LINUX_RELEASE_LIB(${BULLET}/${OS}/${RELEASE_DIR}/src/BulletMultiThreaded/libBulletMultiThreaded.a)
 	ANDROID_DEBUG_LIB(${BULLET}/${OS}/Debug/obj/local/armeabi-v7a/libBulletMultiThreaded.a)
 	ANDROID_RELEASE_LIB(${BULLET}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/libBulletMultiThreaded.a)
 ENDIF(BulletMultiThreaded)
@@ -75,8 +76,8 @@ IF(MiniCL)
 	WIN_RELEASE_LIB(${BULLET}/${OS}/lib/${RELEASE_DIR}/MiniCL.lib)
 	APPLE_DEBUG_LIB(${BULLET}/${OS}/src/MiniCL/${DEBUG_DIR}/libMiniCL.a)
 	APPLE_RELEASE_LIB(${BULLET}/${OS}/src/MiniCL/${RELEASE_DIR}/libMiniCL.a)
-	#LINUX_DEBUG_LIB(${BULLET}/${OS}/Debug/src/MiniCL/libMiniCL.a)
-	#LINUX_RELEASE_LIB(${BULLET}/${OS}/${RELEASE_DIR}/src/MiniCL/libMiniCL.a)
+	LINUX_DEBUG_LIB(${BULLET}/${OS}/Debug/src/MiniCL/libMiniCL.a)
+	LINUX_RELEASE_LIB(${BULLET}/${OS}/${RELEASE_DIR}/src/MiniCL/libMiniCL.a)
 	ANDROID_DEBUG_LIB(${BULLET}/${OS}/Debug/obj/local/armeabi-v7a/libMiniCL.a)
 	ANDROID_RELEASE_LIB(${BULLET}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/libMiniCL.a)
 ENDIF(MiniCL)
