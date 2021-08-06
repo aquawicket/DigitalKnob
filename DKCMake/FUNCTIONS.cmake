@@ -396,7 +396,7 @@ function(DKINSTALL url import_path destination_path)
 			else() #Zip extracted to a root folder, but not named what we expected. Rename and move folder to 3rdParty
 				foreach(item ${items})
 					if(NOT IS_DIRECTORY ${DIGITALKNOB}/Download/UNZIPPED/${item})
-						list(REMOVE_ITEM items ${item})
+						list(REMOVE_ITEM items ${item}) #remove any readme.txt or other non-directory items
 					endif()
 				endforeach()
 				DKRENAME(${DIGITALKNOB}/Download/UNZIPPED/${items} ${destination_path})
