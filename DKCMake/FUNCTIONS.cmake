@@ -1,12 +1,7 @@
-if(DK_FUNCTIONS_INCLUDED)
-  return()
-endif()
-set(DK_FUNCTIONS_INCLUDED true)
 if(CMAKE_HOST_UNIX AND NOT CMAKE_HOST_APPLE)
 	set(CMAKE_HOST_LINUX TRUE CACHE INTERNAL "")
 endif()
 set(dkdepend_disable_list "" CACHE INTERNAL "")
-set(UPX ON)
 
 
 
@@ -229,11 +224,9 @@ endfunction()
 
 
 function(UPX_COMPRESS path)
-	if(UPX AND CMAKE_HOST_WIN32)
-		message(STATUS "UPX compressing ${path}...")
-		message(STATUS "Please wait...")
-		execute_process(COMMAND cmd /c "${3RDPARTY}/upx392w/upx.exe -9 -v ${path}")
-	endif()
+	message(STATUS "UPX compressing ${path}...")
+	message(STATUS "Please wait...")
+	execute_process(COMMAND cmd /c "${UPX_EXE} -9 -v ${path}")
 endfunction()
 
 

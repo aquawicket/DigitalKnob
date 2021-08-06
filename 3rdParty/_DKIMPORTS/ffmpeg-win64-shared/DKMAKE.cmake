@@ -1,9 +1,9 @@
-# https://web.archive.org/web/20200918193221/https://ffmpeg.zeranoe.com/builds/win64/shared/ffmpeg-20200831-4a11a6f-win64-shared.zip
+# https://web.archive.org/web/20200916073634if_/https://ffmpeg.zeranoe.com/builds/win64/shared/ffmpeg-20200828-ccc7120-win64-shared.zip
 
-DKSET(FFMPEGDLL_VERSION 20200831-4a11a6f)
+DKSET(FFMPEGDLL_VERSION 20200828-ccc7120)
 DKSET(FFMPEGDLL_OS win64)
 DKSET(FFMPEGDLL_NAME ffmpeg-${FFMPEGDLL_VERSION}-${FFMPEGDLL_OS}-shared)
-DKSET(FFMPEGDLL_DL https://web.archive.org/web/20200918193221/https://ffmpeg.zeranoe.com/builds/${FFMPEGDLL_OS}/shared/${FFMPEGDLL_NAME}.zip)
+DKSET(FFMPEGDLL_DL https://web.archive.org/web/20200916073634if_/https://ffmpeg.zeranoe.com/builds/${FFMPEGDLL_OS}/shared/${FFMPEGDLL_NAME}.zip)
 DKSET(FFMPEGDLL ${3RDPARTY}/${FFMPEGDLL_NAME})
 
 ### INSTALL ###
