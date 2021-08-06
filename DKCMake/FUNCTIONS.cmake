@@ -330,7 +330,7 @@ function(DKINSTALL url import_path destination_path)
 	
 	get_filename_component(filename ${url} NAME)
 	message(STATUS "filename: ${filename}")
-	dk_getExtension(${url} extension)
+	dk_getExtension(${filename} extension)
 	message(STATUS "extension: ${extension}")
 	DKDOWNLOAD(${url})
 	

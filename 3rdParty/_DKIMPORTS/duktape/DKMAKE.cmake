@@ -16,7 +16,7 @@ DKSET(DUKTAPE_DL https://codeload.github.com/Squareys/duktape/zip/refs/heads/${D
 DKSET(DUKTAPE ${3RDPARTY}/${DUKTAPE_NAME})
 
 ### INSTALL ###
-DKINSTALL(${DUKTAPE_DL} duktape ${DUKTAPE_NAME})
+DKINSTALL(${DUKTAPE_DL} duktape ${DUKTAPE})
 
 
 IF(NOT EXISTS ${DUKTAPE}/src)
