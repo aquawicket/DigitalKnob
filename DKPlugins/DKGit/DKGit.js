@@ -255,16 +255,43 @@ function DKGit_CompairBranches(branchA, branchB){
 	CPP_DK_Execute(GIT +" diff "+branchA+".."+branchB)
 }
 
+function DKGit_CreateTag(tagName){
+	console.log("DKGit_CreateTag("+tagName+")")
+	CPP_DK_Execute(GIT + " tag "+tagName)
+	CPP_DK_Execute(GIT + " push origin "+tagName)
+}
+
 function DKGit_DeleteTag(tagName){
 	console.log("DKGit_DeleteTag("+tagName+")")
-	CPP_DK_Execute(GIT + "push origin :refs/tags/"+tagName) //deletes remote tag
-	CPP_DK_Execute(GIT + "tag -d "+tagName) //deletes local tag
+	CPP_DK_Execute(GIT + " push origin :refs/tags/"+tagName) //deletes remote tag
+	CPP_DK_Execute(GIT + " tag -d "+tagName) //deletes local tag
 }
 
 function DKGit_RenameBranch(oldName, newName){
 	console.log("DKGit_RenameBranch("+oldName+", "+newName+")")
-	CPP_DK_Execute(GIT + "checkout "+oldName)
-	CPP_DK_Execute(GIT + "branch -m "+newName)
-	CPP_DK_Execute(GIT + "push origin :"+oldName+" "+newName) //Delete old branch from remote
-	CPP_DK_Execute(GIT + "push origin -u "+newName) //Reset the upstream branch for the new branch name
+	CPP_DK_Execute(GIT + " checkout "+oldName)
+	CPP_DK_Execute(GIT + " branch -m "+newName)
+	CPP_DK_Execute(GIT + " push origin :"+oldName+" "+newName) //Delete old branch from remote
+	CPP_DK_Execute(GIT + " push origin -u "+newName) //Reset the upstream branch for the new branch name
+}
+
+//https://gist.github.com/heiswayi/350e2afda8cece810c0f6116dadbe651
+function DKGit_ResetRepository(){
+	//Check out to a temporary branch:
+	CPP_DK_Execute(GIT + " checkout --orphan TEMP_BRANCH")
+
+	//Add all the files:
+	CPP_DK_Execute(GIT + " add -A")
+
+	//Commit the changes:
+	CPP_DK_Execute(GIT + " commit -am \"Initial commit\"")
+
+	//Delete the old branch:
+	CPP_DK_Execute(GIT + " branch -D master")
+
+	//Rename the temporary branch to master:
+	CPP_DK_Execute(GIT + " branch -m master")
+
+	//Finally, force update to our repository:
+	CPP_DK_Execute(GIT + " push -f origin master")
 }
