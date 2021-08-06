@@ -1,4 +1,6 @@
-## http://www.leptonica.org
+# http://www.leptonica.org
+#
+# http://www.leptonica.org/source/leptonica-1.74.4.tar.gz
 
 ### DEPENDS ###
 DKDEPEND(zlib)
@@ -18,12 +20,12 @@ DKSET(LEPTONICA_MINOR 74)
 DKSET(LEPTONICA_BUILD 4)
 DKSET(LEPTONICA_VERSION ${LEPTONICA_MAJOR}.${LEPTONICA_MINOR}.${LEPTONICA_BUILD})
 DKSET(LEPTONICA_NAME leptonica-${LEPTONICA_VERSION})
+DKSET(LEPTONICA_DL http://www.leptonica.org/source/leptonica-${LEPTONICA_MAJOR}.${LEPTONICA_MINOR}.${LEPTONICA_BUILD}.tar.gz)
 DKSET(LEPTONICA ${3RDPARTY}/${LEPTONICA_NAME})
 
 
 ### INSTALL ###
-## http://www.leptonica.org/source/leptonica-1.74.4.tar.gz
-DKINSTALL(http://www.leptonica.org/source/leptonica-${LEPTONICA_MAJOR}.${LEPTONICA_MINOR}.${LEPTONICA_BUILD}.tar.gz leptonica ${LEPTONICA})
+DKINSTALL(${LEPTONICA_DL} leptonica ${LEPTONICA})
 
 
 ### LINK ###

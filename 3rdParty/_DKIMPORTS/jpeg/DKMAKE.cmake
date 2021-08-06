@@ -1,19 +1,17 @@
-if(WIN OR LINUX OR ANDROID)
-	return()
-endif()
+# https://www.sac.sk/download/graph/jpegsr6b.zip
+# https://www.ijg.org/files/jpegsr9d.zip
 
 ### VERSION ###
 DKSET(JPEG_VERSION 6b)
 ##DKSET(JPEG_VERSION 9d)
 DKSET(JPEG_NAME jpeg-${JPEG_VERSION})
+DKSET(JPEG_DL https://www.sac.sk/download/graph/jpegsr${JPEG_VERSION}.zip)
 DKSET(JPEG ${3RDPARTY}/${JPEG_NAME})
 
 
 
 ### INSTALL ###
-## https://www.sac.sk/download/graph/jpegsr6b.zip
-## https://www.ijg.org/files/jpegsr9d.zip
-DKINSTALL(https://www.sac.sk/download/graph/jpegsr${JPEG_VERSION}.zip jpeg ${JPEG})
+DKINSTALL(${JPEG_DL} jpeg ${JPEG})
 
 
 

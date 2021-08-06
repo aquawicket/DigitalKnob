@@ -1,4 +1,6 @@
-## https://github.com/nlohmann/json
+# https://github.com/nlohmann/json
+#
+# https://github.com/nlohmann/json/archive/refs/tags/v3.9.1.zip
 
 ### VERSION ###
 DKSET(JSON_MAJOR 3)
@@ -6,12 +8,12 @@ DKSET(JSON_MINOR 9)
 DKSET(JSON_BUILD 1)
 DKSET(JSON_VERSION ${JSON_MAJOR}.${JSON_MINOR}.${JSON_BUILD})
 DKSET(JSON_NAME json-${JSON_VERSION})
+DKSET(JSON_DL https://github.com/nlohmann/json/archive/refs/tags/v${JSON_MAJOR}.${JSON_MINOR}.${JSON_BUILD}.zip)
 DKSET(JSON ${3RDPARTY}/${JSON_NAME})
 
 
 ### INSTALL ###
-## https://github.com/nlohmann/json/archive/refs/tags/v3.9.1.zip
-DKINSTALL(https://github.com/nlohmann/json/archive/refs/tags/v${JSON_MAJOR}.${JSON_MINOR}.${JSON_BUILD}.zip json ${JSON})
+DKINSTALL(JSON_DL json ${JSON})
 
 
 ### LINK ###
