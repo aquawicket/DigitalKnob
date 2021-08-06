@@ -4,7 +4,7 @@
 
 ### VERSION ###
 DKSET(CRYPTO_VERSION 600)
-DKSET(CRYPTO_NAME cryptopp${CRYTO_VERSION})
+DKSET(CRYPTO_NAME cryptopp${CRYPTO_VERSION})
 DKSET(CRYPTO_DL https://github.com/webstorage119/website-1/raw/master/${CRYPTO_NAME}.zip)
 DKSET(CRYPTO ${3RDPARTY}/${CRYPTO_NAME})
 

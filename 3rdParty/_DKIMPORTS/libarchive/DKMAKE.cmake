@@ -13,11 +13,12 @@ DKDEPEND(bzip2)
 ### VERSION ###
 DKSET(ARCHIVE_VERSION 3.5.1)
 DKSET(ARCHIVE_NAME libarchive-${ARCHIVE_VERSION})
+DKSET(ARCHIVE_DL https://github.com/libarchive/libarchive/archive/refs/tags/v${ARCHIVE_VERSION}.zip)
 DKSET(ARCHIVE ${3RDPARTY}/${ARCHIVE_NAME})
 
 
 ### INSTALL ###
-DKINSTALL(https://github.com/libarchive/libarchive/archive/refs/tags/v${ARCHIVE_VERSION}.zip libarchive ${ARCHIVE})
+DKINSTALL(${ARCHIVE_DL} libarchive ${ARCHIVE})
 
 
 ### DKPLUGINS LINK ###
