@@ -388,13 +388,18 @@ function(DKINSTALL url import_path destination_path)
 		list(LENGTH items count)
 		if(${count} GREATER 2) ##NOTE: This should be "${count} GREATER 1" but msys has a readme file in it next to the inner msys folder and that messes things up for more than 1
 			#Zip extracted with no root folder, Rename UNZIPPED and move to 3rdParty
-			file(RENAME ${DIGITALKNOB}/Download/UNZIPPED ${destination_path})
+			DKRENAME(${DIGITALKNOB}/Download/UNZIPPED ${destination_path})
 		else()
 			if(EXISTS ${DIGITALKNOB}/Download/UNZIPPED/${folder}) ##Zip extracted to expected folder. Move the folder to 3rdParty
-				file(RENAME ${DIGITALKNOB}/Download/UNZIPPED/${folder} ${destination_path})
+				DKRENAME(${DIGITALKNOB}/Download/UNZIPPED/${folder} ${destination_path})
 				DKREMOVE(${DIGITALKNOB}/Download/UNZIPPED)
 			else() #Zip extracted to a root folder, but not named what we expected. Rename and move folder to 3rdParty
-				file(RENAME ${DIGITALKNOB}/Download/UNZIPPED/${items} ${destination_path})
+				foreach(item ${items})
+					if(NOT IS_DIRECTORY ${DIGITALKNOB}/Download/UNZIPPED/${item})
+						list(REMOVE_ITEM items ${item})
+					endif()
+				endforeach()
+				DKRENAME(${DIGITALKNOB}/Download/UNZIPPED/${items} ${destination_path})
 				DKREMOVE(${DIGITALKNOB}/Download/UNZIPPED)
 			endif() 
 		endif()
