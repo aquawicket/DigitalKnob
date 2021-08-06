@@ -1,6 +1,7 @@
 # https://github.com/theMealena/SDL2_giflib_sa/archive/master.zip
 
 ### DEPENDS ###
+DKDEPEND(giflib)
 DKDEPEND(DKSDLWindow)
 
 
