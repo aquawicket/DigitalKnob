@@ -1,10 +1,15 @@
-DKDEPEND(msinttypes-r26)
-DKDEPEND(zlib-1.2.8)
-##DKDEPEND(SDL2-2.0.5)  ##TODO
+DKDEPEND(msinttypes)
+DKDEPEND(zlib)
+##DKDEPEND(SDL2) ##TODO
 
 ### INSTALL ###
-DKINSTALL(${DKONLINE}/Libs/OpenSceneGraph-3.4.0.zip OpenSceneGraph-3.4.0)
+DKSET(OSG_VERSION 3.4.0)
+DKSET(OSG_NAME OpenSceneGraph-${OSG_VERSION})
+DKSET(OSG_DL https://github.com/openscenegraph/OpenSceneGraph/tree/OpenSceneGraph-3.4.0)
 DKSET(OSG ${3RDPARTY}/OpenSceneGraph-3.4.0)
+
+DKINSTALL(${OSG_DL} OpenSceneGraph-3.4.0 ${OSG})
+
 DKSET(OSG_GL2 ${3RDPARTY}/OpenSceneGraph-3.4.0-GL2)
 DKSET(OSG_PLUGINS osgPlugins-3.4.0)
 IF(OpenGL2)
