@@ -2,6 +2,7 @@ DISABLE_DKDEPEND(_TEMPLATE_)
 
 if(WIN)
 DISABLE_DKDEPEND(android-studio)
+DISABLE_DKDEPEND(bzip2-win-build)
 DISABLE_DKDEPEND(cef_binary)
 DISABLE_DKDEPEND(cef_binary_linux32)
 DISABLE_DKDEPEND(cef_binary_linux64)

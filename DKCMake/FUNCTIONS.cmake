@@ -941,7 +941,9 @@ endfunction()
 
 ################### COMMAND ########################
 function(DKCOMMAND arg)
+	DUMP(arg)
 	set(args ${arg} ${ARGN})
+	DUMP(args)
 	if(CMAKE_HOST_WIN32)
 		DKEXECUTE_PROCESS(COMMAND cmd /c ${args} WORKING_DIRECTORY ${CURRENT_DIR})
 	endif()
