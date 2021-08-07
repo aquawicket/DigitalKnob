@@ -313,7 +313,7 @@ endfunction()
 # For archive files such as libraries and assets, the arguments are:  The download url, the name of its _DKIMPORTS folder, The name given to the installed 3rdParty/folder  
 # For executable files such as software amd IDE's the arguments are:  The download url, the name of the final name of the dl file, The installation path to check for installation.
 function(DKINSTALL url import_path destination_path)
-	message(STATUS "DKINSTALL(${url} ${import_path} ${destination_path})")
+	#message(STATUS "DKINSTALL(${url} ${import_path} ${destination_path})")
 	if(EXISTS ${destination_path}/installed)
 		return()
 	endif()
