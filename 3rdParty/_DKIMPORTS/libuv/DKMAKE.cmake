@@ -1,17 +1,21 @@
+# https://github.com/libuv/libuv
+#
 # https://dist.libuv.org/dist/1.37.0/libuv-1.37.0.tar.gz
+# https://github.com/libuv/libuv/archive/refs/tags/v1.42.0.zip
 
 ### VERSION ###
 DKSET(UV_MAJOR 1)
-DKSET(UV_MINOR 37)
+DKSET(UV_MINOR 42)
 DKSET(UV_BUILD 0)
-DKSET(UV_VERSION v${UV_MAJOR}.${UV_MINOR}.${UV_BUILD})
+DKSET(UV_VERSION ${UV_MAJOR}.${UV_MINOR}.${UV_BUILD})
 DKSET(UV_NAME libuv-${UV_VERSION})
-DKSET(UV_DL https://dist.libuv.org/dist/${UV_VERSION}/${UV_NAME}.tar.gz)
+#DKSET(UV_DL https://dist.libuv.org/dist/${UV_VERSION}/${UV_NAME}.tar.gz)
+DKSET(UV_DL https://github.com/libuv/libuv/archive/refs/tags/v${UV_VERSION}.zip)
 DKSET(UV ${3RDPARTY}/${UV_NAME})
 
 
 ### INSTALL ###
-DKINSTALL(${UV_NAME} libuv ${UV})
+DKINSTALL(${UV_DL} libuv ${UV})
 
 
 
@@ -50,25 +54,22 @@ DKSET(LIBUV_ANDROID -DLIBUV_INCLUDE_DIR=${UV} -DLIBUV_LIBRARY=${UV}/${OS}/${RELE
 WIN_PATH(${UV}/${OS})
 WIN32_COMMAND(${DKCMAKE_WIN32} ${UV})
 WIN64_COMMAND(${DKCMAKE_WIN64} ${UV})
-WIN_VS( libuv.sln uv_a)
+WIN_VS(${UV_NAME} libuv.sln uv_a)
 
 
 MAC_PATH(${UV}/${OS})
 MAC64_COMMAND(${DKCMAKE_MAC64} ${UV})
-MAC64_XCODE_DEBUG(${UV_NAME} uv_a)
-MAC64_XCODE_RELEASE(${UV_NAME} uv_a)
+MAC_XCODE(${UV_NAME} uv_a)
 
 
 IOS_PATH(${UV}/${OS})
-IOS_COMMAND(${DKCMAKE_IOS64} ${UV})
-IOS_XCODE_DEBUG(${UV_NAME} uv_a)
-IOS_XCODE_RELEASE(${UV_NAME} uv_a)
+IOS64_COMMAND(${DKCMAKE_IOS64} ${UV})
+IOS_XCODE(${UV_NAME} uv_a)
 
 
 IOSSIM_PATH(${UV}/${OS})
-IOSSIM_COMMAND(${DKCMAKE_IOSSIM64} ${UV})
-IOSSIM_XCODE_DEBUG(${UV_NAME} uv_a)
-IOSSIM_XCODE_RELEASE(${UV_NAME} uv_a)
+IOSSIM64_COMMAND(${DKCMAKE_IOSSIM64} ${UV})
+IOSSIM_XCODE(${UV_NAME} uv_a)
 
 
 LINUX_DEBUG_PATH(${UV}/${OS}/${DEBUG_DIR})
