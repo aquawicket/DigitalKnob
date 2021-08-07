@@ -1,4 +1,5 @@
 # http://xmlsoft.org/sources/libxml2-2.9.8.tar.gz
+# https://github.com/GNOME/libxml2/archive/refs/tags/v2.9.8.zip
 
 ### DEPENDS ###
 DKDEPEND(libiconv)
@@ -7,7 +8,8 @@ DKDEPEND(libiconv)
 ### VERSION ###
 DKSET(XML2_VERSION 2.9.8)
 DKSET(XML2_NAME libxml2-${XML2_VERSION})
-DKSET(XML2_DL http://xmlsoft.org/sources/${XML2_VERSION}.tar.gz)
+#DKSET(XML2_DL http://xmlsoft.org/sources/${XML2_VERSION}.tar.gz)
+DKSET(XML2_DL https://github.com/GNOME/libxml2/archive/refs/tags/v${XML2_VERSION}.zip)
 DKSET(XML2 ${3RDPARTY}/${XML2_NAME})
 
 
