@@ -8,30 +8,18 @@ DKSET(JSON_MINOR 9)
 DKSET(JSON_BUILD 1)
 DKSET(JSON_VERSION ${JSON_MAJOR}.${JSON_MINOR}.${JSON_BUILD})
 DKSET(JSON_NAME json-${JSON_VERSION})
-DKSET(JSON_DL https://github.com/nlohmann/json/archive/refs/tags/v${JSON_MAJOR}.${JSON_MINOR}.${JSON_BUILD}.zip)
+DKSET(JSON_DL https://github.com/nlohmann/json/archive/refs/tags/v${JSON_VERSION}.zip)
 DKSET(JSON ${3RDPARTY}/${JSON_NAME})
 
 
 ### INSTALL ###
-DKINSTALL(JSON_DL json ${JSON})
+DKINSTALL(${JSON_DL} json ${JSON})
+DKINCLUDE(${JSON}/include/nlohmann)
 
 
-### LINK ###
-DKINCLUDE(${JSON})
-DKINCLUDE(${JSON}/${OS})
-DKINCLUDE(${JSON}/${OS}/${RELEASE_DIR})
-WIN_DEBUG_LIB(${JSON}/${OS}/${DEBUG_DIR}/libjson_unitd.lib)
-WIN_RELEASE_LIB(${JSON}/${OS}/${RELEASE_DIR}/libjson_unit.lib)
-APPLE_DEBUG_LIB(${JSON}/${OS}/${DEBUG_DIR}/libJSON${JSON_MAJOR}${JSON_MINOR}d.a)
-APPLE_RELEASE_LIB(${JSON}/${OS}/${RELEASE_DIR}/libJSON${JSON_MAJOR}${JSON_MINOR}.a)
-LINUX_DEBUG_LIB(${JSON}/${OS}/${DEBUG_DIR}/libJSON${JSON_MAJOR}${JSON_MINOR}d.a)
-LINUX_RELEASE_LIB(${JSON}/${OS}/${RELEASE_DIR}/libJSON${JSON_MAJOR}${JSON_MINOR}.a)
-RASPBERRY_DEBUG_LIB(${JSON}/${OS}/${DEBUG_DIR}/libJSON${JSON_MAJOR}${JSON_MINOR}d.a)
-RASPBERRY_RELEASE_LIB(${JSON}/${OS}/${RELEASE_DIR}/libJSON${JSON_MAJOR}${JSON_MINOR}.a)
-ANDROID_DEBUG_LIB(${JSON}/${OS}/${DEBUG_DIR}/obj/local/armeabi-v7a/libJSON.a)
-ANDROID_RELEASE_LIB(${JSON}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/libJSON.a)
-
-
+# This is a header onlu library, he compileable stuff below is unit testing
+# include "json.hpp" to use this library 
+return()
 
 ### COMPILE ###
 WIN_PATH(${JSON}/${OS})

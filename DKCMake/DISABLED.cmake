@@ -12,12 +12,12 @@ DISABLE_DKDEPEND(DKOcr)
 DISABLE_DKDEPEND(DKOFWindow)
 DISABLE_DKDEPEND(DKPlugin1)
 DISABLE_DKDEPEND(DKPlugin2)
-DISABLE_DKDEPEND(DKSDLAudio)
-DISABLE_DKDEPEND(DKSDLWav)
-DISABLE_DKDEPEND(DKTorrent)
-DISABLE_DKDEPEND(DKVncClient)
-DISABLE_DKDEPEND(DKVncServer)
-DISABLE_DKDEPEND(emsdk)
+DISABLE_DKDEPEND(DKSDLAudio)              ###
+DISABLE_DKDEPEND(DKSDLWav)                ###
+DISABLE_DKDEPEND(DKTorrent)  
+DISABLE_DKDEPEND(DKVncClient)             ###
+DISABLE_DKDEPEND(DKVncServer)             ###
+DISABLE_DKDEPEND(emsdk)                   ### 2
 DISABLE_DKDEPEND(emsdk-portable)
 DISABLE_DKDEPEND(ffmpeg-dev)
 DISABLE_DKDEPEND(ffmpeg-shared)
@@ -26,12 +26,12 @@ DISABLE_DKDEPEND(flac)
 DISABLE_DKDEPEND(freealut)
 DISABLE_DKDEPEND(freealut-master)
 DISABLE_DKDEPEND(ImageMagick)
-DISABLE_DKDEPEND(json)
+#DISABLE_DKDEPEND(json)                   ### 1
 DISABLE_DKDEPEND(kdevelop)
 DISABLE_DKDEPEND(leptonica)
-DISABLE_DKDEPEND(libRocket)
-DISABLE_DKDEPEND(libtorrent)
-DISABLE_DKDEPEND(libvncserver-master)
+DISABLE_DKDEPEND(libRocket)               ### 3 To get libRocket for emscripen going
+DISABLE_DKDEPEND(libtorrent)      
+DISABLE_DKDEPEND(libvncserver-master)     ###
 DISABLE_DKDEPEND(libvncserver-master-win)
 DISABLE_DKDEPEND(libwebp)
 DISABLE_DKDEPEND(libwebsockets)
@@ -40,7 +40,7 @@ DISABLE_DKDEPEND(openal)
 DISABLE_DKDEPEND(OpenAL-android)
 DISABLE_DKDEPEND(openFrameworks)
 DISABLE_DKDEPEND(podofo)
-DISABLE_DKDEPEND(SDL2_giflib_sa)
+DISABLE_DKDEPEND(SDL2_giflib_sa)          ###
 DISABLE_DKDEPEND(SDL2_mixer)
 DISABLE_DKDEPEND(tesseract)
 DISABLE_DKDEPEND(waave)
