@@ -1,4 +1,7 @@
 # https://github.com/philr/bzip2-windows
+#
+# ftp://sourceware.org/pub/bzip2/bzip2-1.0.8.tar.gz
+# https://github.com/kiyolee/bzip2-win-build/archive/refs/tags/v1.0.8.zip
 
 DKDEPEND(mingw32)
 DKDEPEND(mingw64)
@@ -6,9 +9,10 @@ DKDEPEND(msys)
 DKDEPEND(libgcc)
 
 ### VERSION ###
-DKSET(BZIP2_VERSION 2-1.0.8)
-DKSET(BZIP2_DL ftp://sourceware.org/pub/bzip2/bzip${BZIP2_VERSION}.tar.gz)
-DKSET(BZIP2 ${3RDPARTY}/bzip${BZIP2_VERSION})
+DKSET(BZIP2_VERSION 1.0.8)
+DKSET(BZIP2_NAME bzip2-${BZIP2_VERSION})
+DKSET(BZIP2_DL ftp://sourceware.org/pub/bzip2/${BZIP2_NAME}.tar.gz)
+DKSET(BZIP2 ${3RDPARTY}/${BZIP2_NAME})
 
 
 ### INSTALL ###
@@ -17,20 +21,18 @@ if(0)
 	DKCOPY(${BZIP2} ${BZIP2}/${OS} TRUE)
 else()
 	DKINSTALL(${BZIP2_DL} bzip2 ${BZIP2})
-	if(NOT EXISTS ${3RDPARTY}/bzip2-temp)
-		DKCOPY(${BZIP2} ${3RDPARTY}/bzip2-temp TRUE)
-	endif()
+	#if(NOT EXISTS ${3RDPARTY}/bzip2-temp)
+	#	DKCOPY(${BZIP2} ${3RDPARTY}/bzip2-temp TRUE)
+	#endif()
 endif()
 
 
 ### DKPLUGINS LINK ###
 DKINCLUDE(${BZIP2})
-##WIN_DEBUG_LIB(${BZIP2}/${OS}/libgcc.a)
-##WIN_RELEASE_LIB(${BZIP2}/${OS}/libgcc.a)
-#WIN_DEBUG_LIB(${BZIP2}/${OS}/libbz2-static.lib)
-#WIN_RELEASE_LIB(${BZIP2}/${OS}/libbz2-static.lib)
 WIN_DEBUG_LIB(${BZIP2}/${OS}/libbz2.a)
 WIN_RELEASE_LIB(${BZIP2}/${OS}/libbz2.a)
+#WIN_DEBUG_LIB(${BZIP2}/${OS}/libzip2.lib)
+#WIN_RELEASE_LIB(${BZIP2}/${OS}/libzip2.lib)
 MAC_DEBUG_LIB(${BZIP2}/${OS}/libbz2.a)
 MAC_RELEASE_LIB(${BZIP2}/${OS}/libbz2.a)
 LINUX_DEBUG_LIB(${BZIP2}/${OS}/libbz2.a)
@@ -62,10 +64,7 @@ export PATH=/${MSYS}/bin:$PATH\;
 make CFLAGS='-static-libgcc'\;
 exit\;")
 
-	##DKRENAME(${BZIP2}/${OS}/libbz2.a ${BZIP2}/${OS}/libbz2.lib)
-	##TODO: look at _DKIMPORTS/libgcc
 	DKCOPY(${3RDPARTY}/mingw/mingw32/lib/gcc/i686-w64-mingw32/4.9.2/libgcc.a ${BZIP2}/${OS} TRUE)
-	##DKRENAME(${BZIP2}/${OS}/libgcc.a ${BZIP2}/${OS}/libgcc.lib)
 endif()
 
 
@@ -81,9 +80,7 @@ export PATH=/${MSYS}/bin:$PATH\;
 make CFLAGS='-m64 -static-libgcc'\;
 exit\;")
 
-	##DKRENAME(${BZIP2}/${OS}/libbz2.a ${BZIP2}/${OS}/libbz2.lib)
 	DKCOPY(${3RDPARTY}/mingw/mingw64/lib/gcc/x86_64-w64-mingw32/4.9.2/libgcc.a ${BZIP2}/${OS} TRUE)
-	##DKRENAME(${BZIP2}/${OS}/libgcc.a ${BZIP2}/${OS}/libgcc.lib)
 ENDIF()
 
 IF(MAC_64)
