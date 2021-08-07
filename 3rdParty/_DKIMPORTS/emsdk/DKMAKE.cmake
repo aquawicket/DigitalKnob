@@ -11,7 +11,7 @@ DKSET(EMSCRIPTEN ${3RDPARTY}/${EMSCRIPTEN_NAME})
 ### INSTALL ###
 DKINSTALL(${EMSCRIPTEN_DL} emsdk ${EMSCRIPTEN})
 
-DKCOMMAND(${EMSCRIPTEN}/emsdk update)
+DKCOMMAND("${EMSCRIPTEN}/emsdk update")
 DKCOMMAND(${EMSCRIPTEN}/emsdk install latest)
 DKCOMMAND(${EMSCRIPTEN}/emsdk install activate latest)
 DKCOMMAND(${EMSCRIPTEN}/emsdk_env.bat)
