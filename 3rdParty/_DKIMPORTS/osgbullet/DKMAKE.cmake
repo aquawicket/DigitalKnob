@@ -1,5 +1,5 @@
-DKDEPEND(bullet-2.82-r2704)
-DKDEPEND(osgworks-master)
+DKDEPEND(bullet)
+DKDEPEND(osgworks)
 
 ### INSTALL ###
 DKINSTALL(http://digitalknob.com/Download/Libs/osgbullet-master.zip osgbullet-master)
