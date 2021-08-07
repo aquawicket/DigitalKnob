@@ -1,3 +1,8 @@
+# https://openal.org/
+# https://openal-soft.org/
+#
+# https://github.com/native-toolkit/openal-android
+# https://openal.org/downloads/OpenAL11CoreSDK.zip
 # https://www.openal-soft.org/openal-releases/openal-soft-1.15.1.tar.bz2
 
 ### VERSION ###
