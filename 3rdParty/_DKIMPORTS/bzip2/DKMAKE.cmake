@@ -64,7 +64,7 @@ export PATH=/${MSYS}/bin:$PATH\;
 make CFLAGS='-static-libgcc'\;
 exit\;")
 
-	DKCOPY(${3RDPARTY}/mingw/mingw32/lib/gcc/i686-w64-mingw32/4.9.2/libgcc.a ${BZIP2}/${OS} TRUE)
+	DKCOPY(${MINGW32}/lib/gcc/i686-w64-mingw32/${MINGW32_VERSION}/libgcc.a ${BZIP2}/${OS} TRUE)
 endif()
 
 
@@ -80,7 +80,7 @@ export PATH=/${MSYS}/bin:$PATH\;
 make CFLAGS='-m64 -static-libgcc'\;
 exit\;")
 
-	DKCOPY(${3RDPARTY}/mingw/mingw64/lib/gcc/x86_64-w64-mingw32/4.9.2/libgcc.a ${BZIP2}/${OS} TRUE)
+	DKCOPY(${MINGW64}/lib/gcc/x86_64-w64-mingw32/${MINGW32_VERSION}/libgcc.a ${BZIP2}/${OS} TRUE)
 ENDIF()
 
 IF(MAC_64)
