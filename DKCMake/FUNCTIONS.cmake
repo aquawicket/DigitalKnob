@@ -22,8 +22,7 @@ function(MyFunc args result)
 	set(${result} ${args} PARENT_SCOPE) #just relay the arguments
 endfunction()
 
-MyFunc("ABC" "123" 5 return_value)
-message(STATUS "return_value = ${return_value}")
+
 
 
 function(Wait)
