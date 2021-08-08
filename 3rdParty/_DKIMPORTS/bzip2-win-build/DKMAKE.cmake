@@ -13,9 +13,12 @@ DKSET(BZIP2 ${3RDPARTY}/${BZIP2_NAME})
 DKINSTALL(${BZIP2_DL} bzip2-win-build ${BZIP2})
 
 
-### LINK ###
-#DKDEFINE(USING_BZIP2)
-#DKINCLUDE(${BZIP2}/include)
-#DKINCLUDE(${BZIP2}/${OS})
+### DKPLUGINS LINK ###
+DKINCLUDE(${BZIP2})
+WIN_DEBUG_LIB(${BZIP2}/${OS}/libbz2.a)
+WIN_RELEASE_LIB(${BZIP2}/${OS}/libbz2.a)
+#WIN_DEBUG_LIB(${BZIP2}/${OS}/libzip2.lib)
+#WIN_RELEASE_LIB(${BZIP2}/${OS}/libzip2.lib)
+
 #WIN_DEBUG_LIB(${BZIP2}/${OS}/${DEBUG_DIR}/libraryd.lib)
 #WIN_RELEASE_LIB(${BZIP2}/${OS}/${RELEASE_DIR}/library.lib)
