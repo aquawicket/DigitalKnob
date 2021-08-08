@@ -3,7 +3,7 @@
 # https://github.com/kiyolee/bzip2-win-build/archive/refs/tags/v1.0.8.zip
 
 ### VERSION ###
-DKSET(BZIP2 1.0.8)
+DKSET(BZIP2_VERSION 1.0.8)
 DKSET(BZIP2_NAME bzip2-${BZIP2_VERSION})
 DKSET(BZIP2_DL https://github.com/kiyolee/bzip2-win-build/archive/refs/tags/v${BZIP2_VERSION}.zip)
 DKSET(BZIP2 ${3RDPARTY}/${BZIP2_NAME})
