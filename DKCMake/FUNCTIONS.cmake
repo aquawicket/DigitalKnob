@@ -11,8 +11,8 @@ set(dkdepend_disable_list "" CACHE INTERNAL "")
 ## TODO:    https://foonathan.net/2016/03/cmake-install/ 
 
 ## Example function that uses a result variable to retrun a value
-# MyFunc("ABC" "123" 5 return_value)
-# message(STATUS "return_value = ${return_value}") # should print->  result = ABC;123;5
+# MyFunc("ABC" "123" 5 myResult)
+# message(STATUS "return value = ${myResult}") # should print->  return value = ABC;123;5
 function(MyFunc args result)
 	set(args ${args} ${result} ${ARGN})
 	list(GET args -1 result)
@@ -948,18 +948,33 @@ function(DKMERGE_FLAGS args result)
 	list(REMOVE_AT args -1)
 	
 	#work with ${args} and set ${result} here
-	
+	set(search "-DCMAKE_C_FLAGS=" "-DCMAKE_C_FLAGS_DEBUG=" "-DCMAKE_C_FLAGS_RELEASE=" "-DCMAKE_CXX_FLAGS=" "-DCMAKE_CXX_FLAGS_DEBUG=" "-DCMAKE_CXX_FLAGS_RELEASE=")
+	foreach(word ${search})
+		set(DK_${word} "${word}")
+		set(index 0)
+		set(placeholder 0)
+		foreach(arg ${args})
+			math(EXPR index "${index}+1")
+			string(FIND ${arg} ${word} hasWord)
+			if(${hasWord} GREATER -1)
+				if(${placeholder} EQUAL 0)
+					set(placeholder ${index})
+				endif()				
+				list(REMOVE_ITEM args ${arg})
+				string(REPLACE ${word} "" arg ${arg})
+				set(DK_${word} "${DK_${word}}${arg}")
+			endif()
+		endforeach()
+		if(${placeholder} GREATER 0)
+			list(INSERT args ${placeholder} "${DK_${word}}")
+		endif()
+	endforeach()
 	set(${result} ${args} PARENT_SCOPE)
 endfunction()
 
 function(DKCOMMAND args)
 	set(args ${args} ${ARGN})
-	
 	DKMERGE_FLAGS(${args} merged_args)
-	if(NOT "${args}" STREQUAL "${merged_args}")
-		message(FATAL_ERROR "arg-s does not match merged arg-s")
-	endif()
-	
 	if(CMAKE_HOST_WIN32)
 		DKEXECUTE_PROCESS(COMMAND cmd /c ${merged_args} WORKING_DIRECTORY ${CURRENT_DIR})
 	endif()
