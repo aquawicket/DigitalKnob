@@ -940,6 +940,12 @@ endfunction()
 
 
 ################### COMMAND ########################
+function (DKMERGECOMMANDS arg result)
+	DUMP(arg)
+	set(args ${arg} ${ARGN})
+	DUMP(args)
+endfunction()
+
 function(DKCOMMAND arg)
 	DUMP(arg)
 	set(args ${arg} ${ARGN})
