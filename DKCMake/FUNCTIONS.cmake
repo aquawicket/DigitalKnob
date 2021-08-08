@@ -10,17 +10,20 @@ set(dkdepend_disable_list "" CACHE INTERNAL "")
 #####################################################################
 ## TODO:    https://foonathan.net/2016/03/cmake-install/ 
 
-## Example function that uses a referece returne variable as the result
-# VAR_EXISTS(myVariable, result)
-# message(STATUS "result = ${result}")
-function(VAR_EXISTS varname result)
-    if(NOT DEFINED ${varname})
-      message(WARNING "Error: the variable ${varname} is not defined!")
-	  set(${result} false PARENT_SCOPE)
-	  return()
-    endif()
-    set (${result} true PARENT_SCOPE)
+## Example function that uses a result variable to retrun a value
+# MyFunc("ABC" "123" 5 return_value)
+# message(STATUS "return_value = ${return_value}") # should print->  result = ABC;123;5
+function(MyFunc args result)
+	set(args ${args} ${result} ${ARGN})
+	list(GET args -1 result)
+	list(REMOVE_AT args -1)
+	
+	#work with ${args} and set ${result} here
+	set(${result} ${args} PARENT_SCOPE) #just relay the arguments
 endfunction()
+
+MyFunc("ABC" "123" 5 return_value)
+message(STATUS "return_value = ${return_value}")
 
 
 function(Wait)
@@ -32,7 +35,7 @@ function(Wait)
 		message(STATUS "Wait() Not implemented for this platform")
 endfunction()
 
-## variable name:  DUMP(${variable})
+## DUMP(<variable_name>)
 function(DUMP dmpvar)
 	message(STATUS "\n\n")
 	message(STATUS "${dmpvar} = ${${dmpvar}}")
@@ -973,7 +976,6 @@ endfunction()
 function(WIN_COMMAND arg)
 	if(WIN AND QUEUE_BUILD)
 		set(args ${arg} ${ARGN})
-		DKCOMMAND("calc.exe")
 		DKCOMMAND(${args})
 	endif()	
 endfunction()
