@@ -8,7 +8,7 @@
 DKDEPEND(zlib)
 DKDEPEND(xz)
 DKDEPEND(bzip2)
-
+DKDEPEND(bzip2-win-build)
 
 ### VERSION ###
 DKSET(ARCHIVE_VERSION 3.5.1)

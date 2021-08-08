@@ -11,14 +11,17 @@ DKSET(BZIP2 ${3RDPARTY}/${BZIP2_NAME})
 
 ### INSTALL ###
 DKINSTALL(${BZIP2_DL} bzip2-win-build ${BZIP2})
+DKCOPY(${BZIP2}/build-VS2019 ${BZIP2}/${OS} FALSE)
+
 
 
 ### DKPLUGINS LINK ###
 DKINCLUDE(${BZIP2})
-WIN_DEBUG_LIB(${BZIP2}/${OS}/libbz2.a)
-WIN_RELEASE_LIB(${BZIP2}/${OS}/libbz2.a)
-#WIN_DEBUG_LIB(${BZIP2}/${OS}/libzip2.lib)
-#WIN_RELEASE_LIB(${BZIP2}/${OS}/libzip2.lib)
+WIN_DEBUG_LIB(${BZIP2}/${OS}/${DEBUG_DIR}/libbz2-static.lib)
+WIN_RELEASE_LIB(${BZIP2}/${OS}/${RELEASE_DIR}/libbz2-static.lib)
 
-#WIN_DEBUG_LIB(${BZIP2}/${OS}/${DEBUG_DIR}/libraryd.lib)
-#WIN_RELEASE_LIB(${BZIP2}/${OS}/${RELEASE_DIR}/library.lib)
+
+
+### COMPILE ###
+WIN_PATH(${BZIP2}/${OS})
+WIN_VS(${BZIP2_NAME} bzip2.sln bzip2-static)
