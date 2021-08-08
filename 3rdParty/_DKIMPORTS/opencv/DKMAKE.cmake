@@ -22,6 +22,7 @@ DKINCLUDE(${OPENCV})
 DKINCLUDE(${OPENCV}/modules/core/include)
 DKINCLUDE(${OPENCV}/modules/videoio/include)
 DKINCLUDE(${OPENCV}/${OS})
+DKINCLUDE(${OPENCV}/${OS}/${DEBUG_DIR})
 DKINCLUDE(${OPENCV}/${OS}/${RELEASE_DIR})
 
 WIN_DEBUG_LIB(${OPENCV}/${OS}/lib/${DEBUG_DIR}/opencv_core341d.lib)
