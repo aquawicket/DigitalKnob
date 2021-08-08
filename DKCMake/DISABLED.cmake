@@ -63,8 +63,6 @@ endif()
 
 if(LINUX)
 DISABLE_DKDEPEND(cef_binary)
-DISABLE_DKDEPEND(cef_binary_linux32)
-#DISABLE_DKDEPEND(cef_binary_linux64)
 DISABLE_DKDEPEND(cef_binary_linuxarm)
 DISABLE_DKDEPEND(cef_binary_linuxarm64)
 DISABLE_DKDEPEND(cef_binary_macosx64)
@@ -86,6 +84,15 @@ DISABLE_DKDEPEND(upx)
 DISABLE_DKDEPEND(uWebSockets)
 DISABLE_DKDEPEND(Xcode)
 endif()
+
+if(LINUX_32)
+	DISABLE_DKDEPEND(cef_binary_linux64)
+endif()
+
+if(LINUX_64)
+	DISABLE_DKDEPEND(cef_binary_linux32)
+endif()
+
 
 if(RASPBERRY)
 DISABLE_DKDEPEND(DKSFMLWindow)
