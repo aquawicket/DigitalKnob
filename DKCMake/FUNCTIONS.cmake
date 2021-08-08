@@ -97,8 +97,8 @@ function(DKDOWNLOAD url) #arg2 destination_path
 	get_filename_component(filename ${url} NAME)
 	if(${ARGC} EQUAL 2)
 		set(dest_path ${ARGV1}) #used to rename the file
-		get_filename_component(dest_filename ${dest_filename} NAME)
-		get_filename_component(dest_filename ${dest_dir} DIRECTORY)
+		get_filename_component(dest_filename ${dest_path} NAME)
+		get_filename_component(dest_dir ${dest_path} DIRECTORY)
 		if(NOT dest_filename STREQUAL filename)
 			message("DKDOWNLOAD(${url}): The filenames are different")
 			message("src_filename: ${filename}")
