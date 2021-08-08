@@ -61,6 +61,7 @@ DISABLE_DKDEPEND(smpeg2)
 endif()
 
 if(LINUX)
+DISABLE_DKDEPEND(android-build-tools)
 DISABLE_DKDEPEND(bzip2-win-build)
 DISABLE_DKDEPEND(cef_binary)
 DISABLE_DKDEPEND(cef_binary_linuxarm)
