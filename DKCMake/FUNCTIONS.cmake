@@ -940,24 +940,32 @@ endfunction()
 
 
 ################### COMMAND ########################
-function (DKMERGECOMMANDS arg result)
-	DUMP(arg)
-	set(args ${arg} ${ARGN})
-	DUMP(args)
+function(DKMERGE_FLAGS args result)
+	set(args ${args} ${result} ${ARGN})
+	list(GET args -1 result)
+	list(REMOVE_AT args -1)
+	
+	#work with ${args} and set ${result} here
+	
+	set(${result} ${args} PARENT_SCOPE)
 endfunction()
 
-function(DKCOMMAND arg)
-	DUMP(arg)
-	set(args ${arg} ${ARGN})
-	DUMP(args)
+function(DKCOMMAND args)
+	set(args ${args} ${ARGN})
+	
+	DKMERGE_FLAGS(${args} merged_args)
+	if(NOT "${args}" STREQUAL "${merged_args}")
+		message(FATAL_ERROR "arg-s does not match merged arg-s")
+	endif()
+	
 	if(CMAKE_HOST_WIN32)
-		DKEXECUTE_PROCESS(COMMAND cmd /c ${args} WORKING_DIRECTORY ${CURRENT_DIR})
+		DKEXECUTE_PROCESS(COMMAND cmd /c ${merged_args} WORKING_DIRECTORY ${CURRENT_DIR})
 	endif()
 	if(CMAKE_HOST_APPLE)
-		DKEXECUTE_PROCESS(COMMAND ${args} WORKING_DIRECTORY ${CURRENT_DIR})
+		DKEXECUTE_PROCESS(COMMAND ${merged_args} WORKING_DIRECTORY ${CURRENT_DIR})
 	endif()
 	if(CMAKE_HOST_LINUX)
-		DKEXECUTE_PROCESS(COMMAND ${args} WORKING_DIRECTORY ${CURRENT_DIR})
+		DKEXECUTE_PROCESS(COMMAND ${merged_args} WORKING_DIRECTORY ${CURRENT_DIR})
 	endif()
 endfunction()
 
@@ -965,6 +973,7 @@ endfunction()
 function(WIN_COMMAND arg)
 	if(WIN AND QUEUE_BUILD)
 		set(args ${arg} ${ARGN})
+		DKCOMMAND("calc.exe")
 		DKCOMMAND(${args})
 	endif()	
 endfunction()
