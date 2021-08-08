@@ -56,7 +56,6 @@ DISABLE_DKDEPEND(cef_binary_windows64)
 endif()
 
 if(WIN_64)
-DISABLE_DKDEPEND(bzip2)
 DISABLE_DKDEPEND(cef_binary_windows32)
 DISABLE_DKDEPEND(smpeg2)
 endif()
