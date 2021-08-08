@@ -105,11 +105,11 @@ IOSSIM_RELEASE_COMMAND(make "CXXFLAGS=-arch x86_64" "CFLAGS=-arch x86_64" "LDFLA
 
 
 LINUX_DEBUG_PATH(${VORBIS}/${OS}/${DEBUG_DIR})
-LINUX_DEBUG_COMMAND(../../configure --disable-shared --enable-static --disable-oggtest ${OGG_LINUX_DEBUG})
+LINUX_DEBUG_COMMAND(../../configure --disable-shared --enable-static ${OGG_LINUX_DEBUG})
 LINUX_DEBUG_COMMAND(make)
 
 LINUX_RELEASE_PATH(${VORBIS}/${OS}/${RELEASE_DIR})
-LINUX_RELEASE_COMMAND(../../configure --disable-shared --enable-static --disable-oggtest ${OGG_LINUX_RELEASE})
+LINUX_RELEASE_COMMAND(../../configure --disable-shared --enable-static ${OGG_LINUX_RELEASE})
 LINUX_RELEASE_COMMAND(make)
 
 
