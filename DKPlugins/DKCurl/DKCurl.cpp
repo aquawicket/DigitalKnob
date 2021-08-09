@@ -1,5 +1,6 @@
 #include "DK/stdafx.h"
 #include <sys/stat.h>
+#include <cstring>
 #include "DK/DKFile.h"
 #include "DKCurl/DKCurl.h"
 
