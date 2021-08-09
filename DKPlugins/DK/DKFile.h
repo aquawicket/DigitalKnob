@@ -2,7 +2,7 @@
 #ifndef DKFile_H
 #define DKFile_H
 
-#include <boost/filesystem.hpp>
+//#include <boost/filesystem.hpp>
 #include "DK/DK.h"
 #include "DK/DKString.h"
 
@@ -15,8 +15,8 @@ public:
 #endif
 	static bool ChDir(const DKString& dir);
 	static bool Copy(const DKString& src, const DKString& dst, const bool overwrite, const bool recursive);
-	static bool CopyDirectory(boost::filesystem::path const& source, boost::filesystem::path const& destination, const bool overwrite, const bool recursive);
-	//static bool CopyDirectory(std::filesystem::path const& source, boost::filesystem::path const& destination, const bool overwrite, const bool recursive);
+	//static bool CopyDirectory(boost::filesystem::path const& source, boost::filesystem::path const& destination, const bool overwrite, const bool recursive);
+	static bool CopyDirectory(std::filesystem::path const& source, std::filesystem::path const& destination, const bool overwrite, const bool recursive);
 	
 	static bool CopyFolder(const DKString& src, const DKString& dst, const bool overwrite, const bool recursive);
 	static bool CreateFile(const DKString& path);

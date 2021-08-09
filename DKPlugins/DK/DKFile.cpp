@@ -6,6 +6,7 @@
 #include <string>
 #include <iostream>
 #include <sys/stat.h>
+#include <filesystem>
 
 DKString DKFile::exe_path;      //EXAMPLE:  C:/Users/aquawicket/digitalknob/DK/DKApps/DKBuilder/win32/Release/DKBuilder.exe
 DKString DKFile::exe_name;      //EXAMPLE:  DKBuilder.exe
@@ -56,7 +57,8 @@ bool DKFile::ChDir(const DKString& dir){
 	DKDEBUGFUNC(dir);
 	DebugPath(dir);
 	if(!PathExists(dir)){ return false; }
-	boost::filesystem::current_path(dir);
+	//boost::filesystem::current_path(dir);
+	std::filesystem::current_path(dir);
 	return true;
 }
 
@@ -68,7 +70,8 @@ bool DKFile::Copy(const DKString& src, const DKString& dst, const bool overwrite
 		DKERROR("DKFile::Copy("+src+","+dst+","+toString(overwrite)+","+toString(recursive)+"): The src path does not exits\n");
 		return false; 
 	}
-	if(boost::filesystem::is_directory(src)){
+	//if(boost::filesystem::is_directory(src)){
+	if(std::filesystem::is_directory(src)) {
 		if(!CopyDirectory(src, dst, overwrite, recursive))
 			return false;
 	}
@@ -77,17 +80,20 @@ bool DKFile::Copy(const DKString& src, const DKString& dst, const bool overwrite
 			DKWARN("DKFile::Copy("+src+","+dst+","+toString(overwrite)+","+toString(recursive)+"): destination already exists. \n");
 			return false;
 		}
-		boost::filesystem::copy_file(src, dst, boost::filesystem::copy_option::overwrite_if_exists);
+		//boost::filesystem::copy_file(src, dst, boost::filesystem::copy_option::overwrite_if_exists);
+	    std::filesystem::copy_file(src, dst, std::filesystem::copy_options::overwrite_existing);
 	}
 	DKINFO("Copied to "+dst+"\n");
 	return true;
 }
 
-bool DKFile::CopyDirectory(boost::filesystem::path const& source, boost::filesystem::path const& destination, const bool overwrite, const bool recursive){
+//bool DKFile::CopyDirectory(boost::filesystem::path const& source, boost::filesystem::path const& destination, const bool overwrite, const bool recursive){
+bool DKFile::CopyDirectory(std::filesystem::path const& source, std::filesystem::path const& destination, const bool overwrite, const bool recursive) {
 	DKDEBUGFUNC(source, destination, overwrite, recursive);
 	DebugPath(source.string());
 	DebugPath(destination.string());
-	namespace fs = boost::filesystem;
+	//namespace fs = boost::filesystem;
+	namespace fs = std::filesystem;
 	try{
 		// Check whether the function call is valid
 		if( !fs::exists(source) || !fs::is_directory(source) ){
@@ -119,7 +125,8 @@ bool DKFile::CopyDirectory(boost::filesystem::path const& source, boost::filesys
 				// Found file: Copy
 				if(overwrite){
 					if(has(current.string(), ".dll")){ continue; }//skip overwriting .dlls in case they are in use
-					fs::copy_file( current, destination / current.filename(), boost::filesystem::copy_option::overwrite_if_exists);
+					//fs::copy_file( current, destination / current.filename(), boost::filesystem::copy_option::overwrite_if_exists);
+					fs::copy_file( current, destination / current.filename(), std::filesystem::copy_options::overwrite_existing);
 				}
 				else{
 					fs::copy_file( current, destination / current.filename() );
@@ -278,8 +285,10 @@ bool DKFile::GetDirectoryContents(const DKString& path, DKStringArray& strings){
 	DKDEBUGFUNC(path);
 	DebugPath(path);
 	if(!PathExists(path)){ return false; }
-	boost::filesystem::directory_iterator end_itr;
-	for (boost::filesystem::directory_iterator itr(path); itr != end_itr; ++itr){
+	//boost::filesystem::directory_iterator end_itr;
+	std::filesystem::directory_iterator end_itr;
+	//for (boost::filesystem::directory_iterator itr(path); itr != end_itr; ++itr){
+	for (std::filesystem::directory_iterator itr(path); itr != end_itr; ++itr) {
 		DKString itrPath = itr->path().string();
 		DKFile::NormalizePath(itrPath);
 		DKString filename;
@@ -753,7 +762,9 @@ bool DKFile::MakeDir(const DKString& dir){
 	if(PathExists(path))
 		return true;
 
-	if(!boost::filesystem::create_directories(path)){
+	//if(!boost::filesystem::create_directories(path)){
+	std::filesystem::directory_iterator end_itr; // default construction yields past-the-end
+	for(std::filesystem::directory_iterator itr(path); itr != end_itr; ++itr) {
 		DKERROR("DKFile::MakeDir("+ path +") failed! \n");
 		return false;
 	}
@@ -763,7 +774,8 @@ bool DKFile::MakeDir(const DKString& dir){
 bool DKFile::PathExists(const DKString& path){
 	DKDEBUGFUNC(path);
 	DebugPath(path);
-	if(boost::filesystem::exists(path)){ return true; }
+	//if(boost::filesystem::exists(path)){ return true; }
+	if(std::filesystem::exists(path)){ return true; }
 	//DKWARN("DKFile::PathExists("+path+"): Path does not exist\n");
 	return false;
 }
@@ -772,8 +784,9 @@ bool DKFile::RemoveDirectory(const DKString& path){
 	DKDEBUGFUNC(path);
 	DebugPath(path);
 	if(!PathExists(path)){ return false; }
-	if(!boost::filesystem::remove_all(path.c_str())){ //FIXME: This will crash if a file is in use. 
-		DKERROR("DKFile::RemoveDirectory(): boost::filesystem::remove_all failed\n");
+	//if(!boost::filesystem::remove_all(path.c_str())){ //FIXME: This will crash if a file is in use. 
+	if (!std::filesystem::remove_all(path.c_str())) { //FIXME: This will crash if a file is in use. 
+		DKERROR("DKFile::RemoveDirectory(): std::filesystem::remove_all failed\n");
 		return false;
 	}
 	return true;
@@ -879,9 +892,12 @@ bool DKFile::StringToFile(const DKString& string, const DKString& file){
 	DKString folder;
 	DKFile::GetFilePath(file,folder);
 	if(!folder.empty()){
-		boost::filesystem::path path(folder);
-		if(!(boost::filesystem::exists(path))){
-			if(!boost::filesystem::create_directories(path)){
+		//boost::filesystem::path path(folder);
+		std::filesystem::path path(folder);
+		//if(!(boost::filesystem::exists(path))){
+		if(!(std::filesystem::exists(path))) {
+			//if(!boost::filesystem::create_directories(path)){
+			if (!std::filesystem::create_directories(path)) {
 				DKERROR("DKFile::StringToFile(): could not create path. \n");
 				return false;
 			}

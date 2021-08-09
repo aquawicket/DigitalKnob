@@ -23,7 +23,7 @@
 	#include "DKMac.h"
 #endif
 	
-#include <boost/asio.hpp>
+//#include <boost/asio.hpp>
 
 #include <iostream>
 #ifndef MAC
@@ -286,12 +286,15 @@ bool DKUtil::GetKey(int& key){
 
 bool DKUtil::GetLocalIP(DKString& ip){
 	DKDEBUGFUNC(ip);
+	/*
 	boost::asio::io_service io_service; 
 	boost::asio::ip::tcp::resolver resolver(io_service); 
 	boost::asio::ip::tcp::resolver::query query(boost::asio::ip::tcp::v4(), boost::asio::ip::host_name(), ""); 
 	boost::asio::ip::tcp::resolver::iterator it = resolver.resolve(query);
 	boost::asio::ip::tcp::endpoint endpoint = *it; 
 	ip = endpoint.address().to_string();
+	*/
+	ip = "boost depricated in the DKCore library";
 	return true;
 }
 
