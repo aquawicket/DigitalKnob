@@ -2,7 +2,21 @@
 #ifndef DKFile_H
 #define DKFile_H
 
-//#include <boost/filesystem.hpp>
+#ifndef __has_include
+static_assert(false, "__has_include not supported");
+#else
+#  if __cplusplus >= 201703L && __has_include(<filesystem>)
+#    include <filesystem>
+namespace fs = std::filesystem;
+#  elif __has_include(<experimental/filesystem>)
+#    include <experimental/filesystem>
+namespace fs = std::experimental::filesystem;
+#  elif __has_include(<boost/filesystem.hpp>)
+#    include <boost/filesystem.hpp>
+namespace fs = boost::filesystem;
+#  endif
+#endif
+
 #include "DK/DK.h"
 #include "DK/DKString.h"
 
@@ -15,8 +29,7 @@ public:
 #endif
 	static bool ChDir(const DKString& dir);
 	static bool Copy(const DKString& src, const DKString& dst, const bool overwrite, const bool recursive);
-	//static bool CopyDirectory(boost::filesystem::path const& source, boost::filesystem::path const& destination, const bool overwrite, const bool recursive);
-	static bool CopyDirectory(std::filesystem::path const& source, std::filesystem::path const& destination, const bool overwrite, const bool recursive);
+	static bool CopyDirectory(fs::path const& source, fs::path const& destination, const bool overwrite, const bool recursive);
 	
 	static bool CopyFolder(const DKString& src, const DKString& dst, const bool overwrite, const bool recursive);
 	static bool CreateFile(const DKString& path);
