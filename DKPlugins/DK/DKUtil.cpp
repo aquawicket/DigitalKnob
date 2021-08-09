@@ -4,6 +4,9 @@
 #include "DKFile.h"
 #include <iostream>
 #include <cstring>
+#ifndef WIN32
+	#include <sys/time.h>
+#endif
 
 #ifdef WIN32
 	#include "DKWindows.h"
