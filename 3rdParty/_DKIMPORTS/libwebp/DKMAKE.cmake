@@ -2,6 +2,13 @@
 #
 # https://github.com/webmproject/libwebp/archive/refs/tags/v1.0.3.zip
 
+### DEPENDS ###
+DKDEPEND(zlib)
+DKDEPEND(libpng)
+DKDEPEND(tiff)
+DKDEPEND(libjpeg-turbo)
+DKDEPEND(giflib)
+DKDEPEND(SDL2)
 
 ### VERSION ###
 DKSET(WEBP_MAJOR 1)
@@ -42,9 +49,9 @@ ANDROID_RELEASE_LIB(${WEBP}/${OS}/${RELEASE_DIR}/libwebp.a)
 
 ### COMPILE ###
 WIN_PATH(${WEBP}/${OS})
-WIN32_COMMAND(${DKCMAKE_WIN32} ${PNG_WIN32} ${JPEG_WIN32} ${TIFF_WIN32} ${GIF_WIN32} ${SDL2_WIN32} ${WEBP})
+WIN32_COMMAND(${DKCMAKE_WIN32} ${ZLIB_WIN} ${PNG_WIN} ${JPEG_WIN} ${TIFF_WIN} ${GIF_WIN} ${SDL2_WIN} ${WEBP})
 WIN64_COMMAND(${DKCMAKE_WIN64} ${PNG_WIN64} ${JPEG_WIN64} ${TIFF_WIN64} ${GIF_WIN64} ${SDL2_WIN64} ${WEBP})
-WIN_VS(${WEBP_NAME} libwebp.sln webp)
+WIN_VS(${WEBP_NAME} WebP.sln webp)
 
 
 MAC_PATH(${WEBP}/${OS})

@@ -1,4 +1,5 @@
 # https://github.com/arvidn/libtorrent/releases/download/libtorrent-1_1_3/libtorrent-rasterbar-1.1.3.tar.gz
+# https://github.com/arvidn/libtorrent/archive/refs/tags/v2.0.4.zip
 
 ### DEPENDS ###
 DKDEPEND(boost Boost_System)
@@ -6,12 +7,12 @@ DKDEPEND(openssl-vs2015)
 
 
 ### VERSION ###
-DKSET(TORRENT_MAJOR 1)
-DKSET(TORRENT_MINOR 1)
-DKSET(TORRENT_BUILD 3)
+DKSET(TORRENT_MAJOR 2)
+DKSET(TORRENT_MINOR 0)
+DKSET(TORRENT_BUILD 4)
 DKSET(TORRENT_VERSION ${TORRENT_MAJOR}.${TORRENT_MINOR}.${TORRENT_BUILD})
 DKSET(TORRENT_NAME libtorrent-${TORRENT_VERSION})
-DKSET(TORRENT_DL https://github.com/arvidn/libtorrent/releases/download/libtorrent-${TORRENT_MAJOR}_${TORRENT_MINOR}_${TORRENT_BUILD}/${TORRENT_NAME}.tar.gz)
+DKSET(TORRENT_DL https://github.com/arvidn/libtorrent/archive/refs/tags/v${TORRENT_VERSION}.zip)
 DKSET(TORRENT ${3RDPARTY}/${TORRENT_NAME})
 
 
@@ -35,8 +36,8 @@ ANDROID_RELEASE_LIB(${TORRENT}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/libtor
 
 ### COMPILE ###
 WIN_PATH(${TORRENT}/${OS})
-WIN32_COMMAND(${DKCMAKE_WIN32} -Dshared=OFF -Dunicode=OFF -Dstatic_runtime=ON ${OPENSSL_WIN} -DBOOST_ROOT=${BOOST} -DBOOST_LIBRARYDIR=${BOOST}/${OS}/lib ${TORRENT})
-WIN64_COMMAND(${DKCMAKE_WIN64} -Dshared=OFF -Dunicode=OFF -Dstatic_runtime=ON ${OPENSSL_WIN} -DBOOST_ROOT=${BOOST} -DBOOST_LIBRARYDIR=${BOOST}/${OS}/lib ${TORRENT})
+WIN32_COMMAND(${DKCMAKE_WIN32} -Dshared=OFF -Dunicode=OFF -Dstatic_runtime=ON ${OPENSSL_WIN32} -DBOOST_ROOT=${BOOST} -DBOOST_LIBRARYDIR=${BOOST}/${OS}/lib ${TORRENT})
+WIN64_COMMAND(${DKCMAKE_WIN64} -Dshared=OFF -Dunicode=OFF -Dstatic_runtime=ON ${OPENSSL_WIN64} -DBOOST_ROOT=${BOOST} -DBOOST_LIBRARYDIR=${BOOST}/${OS}/lib ${TORRENT})
 WIN_VS(${TORRENT_NAME} libtorrent.sln torrent-rasterbar)
 
 
