@@ -16,14 +16,10 @@ DKSET(BZIP2 ${3RDPARTY}/${BZIP2_NAME})
 
 
 ### INSTALL ###
-if(0)
-	DKINSTALL(${BZIP2_DL} bzip2 ${BZIP2})
-	DKCOPY(${BZIP2} ${BZIP2}/${OS} TRUE)
-else()
-	DKINSTALL(${BZIP2_DL} bzip2 ${BZIP2})
-	#if(NOT EXISTS ${3RDPARTY}/bzip2-temp)
-	#	DKCOPY(${BZIP2} ${3RDPARTY}/bzip2-temp TRUE)
-	#endif()
+DKINSTALL(${BZIP2_DL} bzip2 ${BZIP2})
+	if(NOT EXISTS ${3RDPARTY}/bzip2-temp)
+		DKCOPY(${BZIP2} ${3RDPARTY}/bzip2-temp TRUE)
+	endif()
 endif()
 
 
