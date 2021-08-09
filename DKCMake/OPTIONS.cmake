@@ -19,6 +19,63 @@ DKSET(DKIMPORTS ${3RDPARTY}/_DKIMPORTS)
 DKSET(DKDOWNLOAD ${DIGITALKNOB}/Download)
 DKSET(DKWEB http://127.0.0.1)
 
+###########################################################################
+## Get variables for Build Type
+###########################################################################
+option(DEBUG "Build Debug Output" OFF)
+option(RELEASE "Build Release Output" OFF)
+if(NOT DEBUG)
+if(NOT RELEASE)
+	##message(FATAL_ERROR "Please select Debug or Release mode")
+	message(STATUS No Build type selected. Defaulting to DEBUG)
+	DKSET(DEBUG ON)
+endif()
+endif()
+
+###########################################################################
+## Get variables for Build Level
+###########################################################################
+option(BUILD "Simpily build the app or library" OFF)
+option(REBUILD "Rebuild the app" OFF)
+option(REBUILDALL "Rebuild the app and all dependencies" OFF)
+if(NOT BUILD)
+if(NOT REBUILD)
+if(NOT REBUILDALL)
+	#message(FATAL_ERROR "Please select Build, Rebuild, or Rebuild All")
+	message(STATUS No Build level selected, defaulting to REBUILDALL)
+	DKSET(REBUILDALL ON)
+endif()
+endif()
+endif()
+
+
+###########################################################################
+## Get variables for Library Build Type (STATIC or SHARED)
+###########################################################################
+option(STATIC "Build Static Libraries and Plugins" OFF)
+option(SHARED "Build SHARED Libraries and Plugins" OFF)
+if(NOT STATIC)
+if(NOT SHARED)
+	DKSET(STATIC ON)
+	##message(FATAL_ERROR "Please select STATIC or SHARED build.")
+endif()
+endif()	
+
+
+###########################################################################
+## Get variables for OpenGL type
+###########################################################################
+option(OPENGL2 "Set the OpenGL Version" OFF)
+
+
+###########################################################################
+## Get variables for CEF
+###########################################################################
+option(DKCEF "Use Chromium Embeded Framework" OFF)
+
+
+
+
 ########### Determine the OS we are building for ####################
 string(FIND "${CMAKE_BINARY_DIR}" "/win32" index)
 if(${index} GREATER -1)
@@ -115,55 +172,7 @@ endif()
 string(REPLACE "/Debug" "" DKPROJECT ${DKPROJECT})
 string(REPLACE "/Release" "" DKPROJECT ${DKPROJECT})
 
-###########################################################################
-## Get variables for Build Type
-###########################################################################
-option(DEBUG "Build Debug Output" OFF)
-option(RELEASE "Build Release Output" OFF)
-if(NOT DEBUG)
-if(NOT RELEASE)
-	message(FATAL_ERROR "Please select Debug or Release mode")
-endif()
-endif()
 
-###########################################################################
-## Get variables for Build Level
-###########################################################################
-option(BUILD "Simpily build the app or library" OFF)
-option(REBUILD "Rebuild the app" OFF)
-option(REBUILDALL "Rebuild the app and all dependencies" OFF)
-if(NOT BUILD)
-if(NOT REBUILD)
-if(NOT REBUILDALL)
-	message(FATAL_ERROR "Please select Build, Rebuild, or Rebuild All")
-endif()
-endif()
-endif()
-
-
-###########################################################################
-## Get variables for Library Build Type (STATIC or SHARED)
-###########################################################################
-option(STATIC "Build Static Libraries and Plugins" OFF)
-option(SHARED "Build SHARED Libraries and Plugins" OFF)
-if(NOT STATIC)
-if(NOT SHARED)
-	DKSET(STATIC ON)
-	##message(FATAL_ERROR "Please select STATIC or SHARED build.")
-endif()
-endif()	
-
-
-###########################################################################
-## Get variables for OpenGL type
-###########################################################################
-option(OPENGL2 "Set the OpenGL Version" OFF)
-
-
-###########################################################################
-## Get variables for CEF
-###########################################################################
-option(DKCEF "Use Chromium Embeded Framework" OFF)
 
 
 ###########################################################################
