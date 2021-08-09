@@ -23,7 +23,7 @@
 	#include "DKMac.h"
 #endif
 	
-//#include <boost/asio.hpp>
+//#include <boost/asio.hpp> //Boost deprecated in the DKCore library
 
 #include <iostream>
 #ifndef MAC
@@ -286,6 +286,7 @@ bool DKUtil::GetKey(int& key){
 
 bool DKUtil::GetLocalIP(DKString& ip){
 	DKDEBUGFUNC(ip);
+	//https://www.tutorialspoint.com/how-to-get-the-ip-address-of-local-computer-using-c-cplusplus 
 	/*
 	boost::asio::io_service io_service; 
 	boost::asio::ip::tcp::resolver resolver(io_service); 
