@@ -1,6 +1,7 @@
 #include "DK/stdafx.h"
 #include "DKLog.h"
 #include "DKFile.h"
+#include <cstring>
 
 extern bool log_errors = true;
 extern bool log_warnings = true;

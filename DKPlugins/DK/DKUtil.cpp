@@ -3,6 +3,7 @@
 #include "DKLog.h"
 #include "DKFile.h"
 #include <iostream>
+#include <cstring>
 
 #ifdef WIN32
 	#include "DKWindows.h"

@@ -6,6 +6,7 @@
 #include <string>
 #include <iostream>
 #include <sys/stat.h>
+#include <cstring>
 
 DKString DKFile::exe_path;      //EXAMPLE:  C:/Users/aquawicket/digitalknob/DK/DKApps/DKBuilder/win32/Release/DKBuilder.exe
 DKString DKFile::exe_name;      //EXAMPLE:  DKBuilder.exe
