@@ -1,5 +1,6 @@
 ### DEPENDS ###
 DKDEPEND(Git)
+DKDEPEND(CMake)
 	
 if(CMAKE_HOST_WIN32 AND WIN)
 	DKDEPEND(VisualStudio)
