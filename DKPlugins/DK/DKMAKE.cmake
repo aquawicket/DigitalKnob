@@ -1,27 +1,21 @@
 if(WIN)
 	DKDEFINE(_SILENCE_EXPERIMENTAL_FILESYSTEM_DEPRECATION_WARNING)
-	LIST(APPEND WIN_LIBS shell32.lib)
-	LIST(APPEND WIN_LIBS user32.lib)
-	LIST(APPEND WIN_LIBS gdi32.lib)
-	LIST(APPEND WIN_LIBS ole32.lib)
-	LIST(APPEND WIN_LIBS Psapi.lib)
-	LIST(APPEND WIN_LIBS pdh.lib)
-	LIST(APPEND WIN_LIBS Comctl32.lib)
-	LIST(APPEND WIN_LIBS Dxva2.dll)
-	#DKDEPEND(boost Boost_System)
-	#DKDEPEND(boost Boost_Filesystem)
-	#DKDEPEND(boost Boost_Thread)
+	LIST(APPEND WIN_LIBS Psapi.lib) # GetProcessMemoryInfo()
+	LIST(APPEND WIN_LIBS pdh.lib)   # PdhOpenQueryA()
+	LIST(APPEND WIN_LIBS Dxva2.dll) # GetNumberOfPhysicalMonitorsFromHMONITOR()
+	#LIST(APPEND WIN_LIBS shell32.lib)
+	#LIST(APPEND WIN_LIBS user32.lib)
+	#LIST(APPEND WIN_LIBS gdi32.lib)
+	#LIST(APPEND WIN_LIBS ole32.lib)
+	#LIST(APPEND WIN_LIBS Comctl32.lib)
 endif()
 
 if(MAC)
-	#DKDEPEND(boost_1_66_0 Boost_System)
-	#DKDEPEND(boost_1_66_0 Boost_Filesystem)
-	#DKDEPEND(boost Boost_Thread)
+
 endif()
 
 if(IOS OR IOSSIM)
 	LIST(APPEND DK_SRC DK/DKiPhone.mm)
-	#DKDEPEND(Boost.1.60.0-libstdcpp)
 endif()
 
 if(LINUX)
@@ -30,9 +24,6 @@ if(LINUX)
 	DKDEPEND(libxrandr-dev)
 	DKDEPEND(libasound2-dev) ##TODO: Move to DKAudio
 	DKDEPEND(libxtst-dev)
-	#DKDEPEND(boost Boost_System)
-	#DKDEPEND(boost Boost_Filesystem)
-	#DKDEPEND(boost Boost_Thread)
 endif()
 
 if(RASPBERRY)
@@ -41,15 +32,10 @@ if(RASPBERRY)
 	DKDEPEND(libxrandr-dev)
 	DKDEPEND(libasound2-dev) ##TODO: Move to DKAudio
 	DKDEPEND(libxtst-dev)
-	#DKDEPEND(boost Boost_System)
-	#DKDEPEND(boost Boost_Filesystem)
-	#DKDEPEND(boost Boost_Thread)
 endif()
 
 if(ANDROID)
-	#DKDEPEND(boost Boost_System)
-	#DKDEPEND(boost Boost_Filesystem)
-	#DKDEPEND(boost Boost_Thread)
+
 endif()
 
 
