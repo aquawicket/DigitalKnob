@@ -239,6 +239,7 @@ endfunction()
 
 function(DKENABLE plugin)
 	DKSET(${plugin} ON)
+	DKSET(USE_${plugin} ON)
 	DKDEFINE(USE_${plugin})
 endfunction()
 
