@@ -12,14 +12,14 @@
 bool DKArchive::Init(){
 	DKDEBUGFUNC();
 	DKClass::DKCreate("DKArchiveJS");
-	DKClass::DKCreate("DKArchiceV8");
+	DKClass::DKCreate("DKArchiveV8");
 	return true;
 }
 
 bool DKArchive::End(){
 	DKDEBUGFUNC();
 	DKClass::DKClose("DKArchiveJS");
-	DKClass::DKClose("DKArchiceV8");
+	DKClass::DKClose("DKArchiveV8");
 	return true;
 }
 
