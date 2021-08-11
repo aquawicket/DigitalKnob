@@ -1,4 +1,4 @@
-DKDEPEND(ImageMagick-portable-Q16-x86)
+DKDEPEND(ImageMagick)
 
 DKPLUGIN(DKImageMagick)
 DKASSETS(DKImageMagick)
