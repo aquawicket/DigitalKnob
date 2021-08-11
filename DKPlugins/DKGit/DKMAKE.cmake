@@ -1,3 +1,1 @@
-DKDEPEND(DKBuild)
-
 DKASSETS(DKGit)
