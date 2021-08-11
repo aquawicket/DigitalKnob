@@ -1,8 +1,8 @@
 #pragma once
 #ifndef DKCefApp_H
 #define DKCefApp_H
-#include <boost/function.hpp>
-#include <boost/bind/bind.hpp>
+//#include <boost/function.hpp>
+//#include <boost/bind/bind.hpp>
 #include <include/cef_app.h>
 #include <include/wrapper/cef_helpers.h>
 #include "DK/DKFile.h"
@@ -14,9 +14,11 @@ class DKCefApp;
 class DKCefV8Handler;
 
 #ifdef MAC
-typedef std::map<DKString, boost::function2<bool, CefArgs, CefReturn> >::iterator it_type;
+//typedef std::map<DKString, boost::function2<bool, CefArgs, CefReturn> >::iterator it_type;
+typedef std::map<DKString, std::function2<bool, CefArgs, CefReturn> >::iterator it_type;
 #else
-typedef std::map<DKString, boost::function<bool (CefArgs, CefReturn)>>::iterator it_type;
+//typedef std::map<DKString, boost::function<bool (CefArgs, CefReturn)>>::iterator it_type;
+typedef std::map<DKString, std::function<bool(CefArgs, CefReturn)>>::iterator it_type;
 #endif
 
 //////////
@@ -33,9 +35,11 @@ public:
 	static CefRefPtr<CefV8Value> ctx;
 	static bool singleprocess;
 #ifdef MAC
-	static std::map<DKString, boost::function2<bool, CefArgs, CefReturn> > functions;
+	//static std::map<DKString, boost::function2<bool, CefArgs, CefReturn> > functions;
+	static std::map<DKString, std::function2<bool, CefArgs, CefReturn> > functions;
 #else
-	static std::map<DKString, boost::function<bool (CefArgs, CefReturn)>> functions;
+	//static std::map<DKString, boost::function<bool (CefArgs, CefReturn)>> functions;
+	static std::map<DKString, std::function<bool(CefArgs, CefReturn)>> functions;
 #endif
 	static std::vector<std::string> funcs;
 

@@ -223,7 +223,7 @@ bool DKCefV8::Execute(CefArgs args, CefReturn retval){
 	if (!DKUtil::Execute(command, mode, result))
 		return DKERROR("DKUtil::Execute() failed");
 	if (result.empty())
-		!retval->SetNull(0);
+		retval->SetNull(0);
 	else
 		if(!retval->SetString(0, result))
 			return false;
@@ -274,7 +274,8 @@ bool DKCefV8::GetFunctions(CefArgs args, CefReturn retval)
 	DKDEBUGFUNC(args, retval);
 #ifndef MAC
 	DKStringArray list;
-	typedef std::map<DKString, boost::function<bool(CefArgs, CefReturn)>>::iterator it_type;
+	//typedef std::map<DKString, boost::function<bool(CefArgs, CefReturn)>>::iterator it_type;
+	typedef std::map<DKString, std::function<bool(CefArgs, CefReturn)>>::iterator it_type;
 	for(it_type iterator = DKV8::functions.begin(); iterator != DKV8::functions.end(); iterator++){
 		list.push_back(iterator->first);
 	}

@@ -6,9 +6,11 @@ CefRefPtr<CefBrowser> DKV8::_browser = NULL;
 CefRefPtr<DKCefV8Handler> DKV8::v8handler = NULL;
 CefRefPtr<CefV8Value> DKV8::ctx = NULL;
 #ifdef MAC
-std::map<DKString, boost::function2<bool, CefArgs, CefReturn> > DKV8::functions;
+//std::map<DKString, boost::function2<bool, CefArgs, CefReturn> > DKV8::functions;
+std::map<DKString, std::function2<bool, CefArgs, CefReturn> > DKV8::functions;
 #else
-std::map<DKString, boost::function<bool(CefArgs, CefReturn)>> DKV8::functions;
+//std::map<DKString, boost::function<bool(CefArgs, CefReturn)>> DKV8::functions;
+std::map<DKString, std::function<bool(CefArgs, CefReturn)>> DKV8::functions;
 #endif
 std::vector<std::string> DKV8::funcs;
 
@@ -94,7 +96,8 @@ bool DKV8::AttachFunction(const DKString& name, bool (*func)(CefArgs, CefReturn)
 	//FIXME - this is very unstable, not thread safe
 	//NOTE: this stores the function, it will be attached when OnContextCreated is called.
 
-	functions[name] = boost::bind(func, boost::placeholders::_1, boost::placeholders::_2);
+	//functions[name] = boost::bind(func, boost::placeholders::_1, boost::placeholders::_2);
+	functions[name] = std::bind(func, std::placeholders::_1, std::placeholders::_2);
 	if(!functions[name]){
 		DKERROR("DKV8::AttachFunctions("+name+"): failed to register function\n");
 		return false;
