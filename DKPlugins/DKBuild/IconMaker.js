@@ -1,9 +1,9 @@
-var DIGITALKNOB = "C:/Users/aquawicket/digitalknob";
-var DKWEB = "http://127.0.0.1"
-var IMAGEMAGICK_VERSION = "7.1.0-0"
-var IMAGEMAGICK = "ImageMagick-"+IMAGEMAGICK_VERSION+"-portable-Q16-x86";
-var IMAGEMAGICK_DOWNLOAD = "http://ftp.icm.edu.pl/packages/ImageMagick/binaries/" + IMAGEMAGICK + ".zip";
-var IMAGEMAGICK_CONVERT = DIGITALKNOB + "/DK/3rdParty/" + IMAGEMAGICK + "/convert.exe";
+const DKWEB = "http://127.0.0.1"
+const IMAGEMAGICK_VERSION = "7.1.0-4"
+const IMAGEMAGICK_NAME = "ImageMagick-"+IMAGEMAGICK_VERSION
+const IMAGEMAGICK_DL = "http://ftp.icm.edu.pl/packages/ImageMagick/binaries/" + IMAGEMAGICK_NAME + "-portable-Q16-x86.zip";
+const IMAGEMAGICK = DKPATH + "/DK/3rdParty/" + IMAGEMAGICK_NAME
+const IMAGEMAGICK_CONVERT = IMAGEMAGICK + "/convert.exe";
 
 function IconMaker_init() {
     IMAGEMAGICK_CONVERT = CPP_DKFile_GetShortName(IMAGEMAGICK_CONVERT);
@@ -73,9 +73,9 @@ function IconMaker_ValidateImageMagick() {
 }
 
 function IconMaker_InstallImageMagick() {
-    CPP_DKFile_MkDir(DIGITALKNOB + "/DK/Download");
-    var datapath = DIGITALKNOB + "/DK/Download/" + IMAGEMAGICK + ".zip";
+    CPP_DKFile_MkDir(DKPATH + "/DK/Download");
+    var dlpath = DKPATH + "/DK/Download/" + IMAGEMAGICK_NAME + ".zip";
 
-    CPP_DKCurl_Download(IMAGEMAGICK_DOWNLOAD, datapath);
-    CPP_DKArchive_Extract(datapath, DIGITALKNOB + "/DK/3rdParty/" + IMAGEMAGICK);
+    CPP_DKCurl_Download(IMAGEMAGICK_DL, dlpath);
+    CPP_DKArchive_Extract(dlpath, IMAGEMAGICK);
 }
