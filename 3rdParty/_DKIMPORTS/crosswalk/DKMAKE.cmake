@@ -1,7 +1,7 @@
 ### DEPENDS ###
 DKDEPEND(jdk)
 DKDEPEND(apache-ant)
-DKDEPEND(nodeJS)
+DKDEPEND(nodejs)
 
 
 ### INSTALL ###

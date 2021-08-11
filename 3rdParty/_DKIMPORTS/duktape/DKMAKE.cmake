@@ -6,7 +6,7 @@ if(USE_python)
 	DKDEPEND(python)
 endif()
 if(USE_nodeJS)
-	DKDEPEND(nodeJS)
+	DKDEPEND(nodejs)
 endif()
 
 ### VERSION ###
