@@ -5,7 +5,7 @@ DKDEPEND(openscenegraph)
 DKDEPEND(libogg)
 DKDEPEND(libvorbis)
 DKDEPEND(freealut)
-DKDEPEND(OpenAL-android)
+DKDEPEND(openal-android)
 DKDEPEND(freealut)
 DKDEPEND(openal)
 
