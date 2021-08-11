@@ -2,9 +2,11 @@ if(DK_PROCESS_INCLUDED)
   return()
 endif()
 set(DK_PROCESS_INCLUDED true)
-#file(REMOVE ${ANDROIDNDK}/)
 
 include(DKCMake/FUNCTIONS.cmake)
+if(UNIX)
+	DKCOMMAND(sudo echo) #ask for sudo password ahead of time
+endif()
 #DELETE_CACHE()
 include(DKCMake/OPTIONS.cmake)
 include(DKCMake/DISABLED.cmake)
