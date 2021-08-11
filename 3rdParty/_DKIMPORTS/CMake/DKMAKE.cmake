@@ -7,7 +7,7 @@ WIN_DKSET(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v${CMAKE_V
 WIN_DKSET(CMAKE "C:/Program Files (x86)/CMake/bin")
 WIN_DKSET(CMAKE_EXE "C:/Program Files (x86)/CMake/bin/cmake.exe")
 if(CMAKE_HOST_WIN32)
-execute_process(COMMAND cmd /c ${DKCMAKE}/getShortPath.cmd ${CMAKE_EXE} OUTPUT_VARIABLE CMAKE_EXE WORKING_DIRECTORY ${CURRENT_DIR})
+execute_process(COMMAND cmd /c ${DKCMAKE}/getShortPath.cmd ${CMAKE_EXE} OUTPUT_VARIABLE CMAKE_EXE WORKING_DIRECTORY ${DIGITALKNOB})
 string(REPLACE "\\" "/" CMAKE_EXE ${CMAKE_EXE})
 string(REPLACE "\n" "" CMAKE_EXE ${CMAKE_EXE})
 message("CMAKE_EXE = ${CMAKE_EXE}")
