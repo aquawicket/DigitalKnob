@@ -1,8 +1,10 @@
-# https://www.zlib.net/fossils/zlib-1.2.8.tar.gz
+# http://www.zlib.net/
+# https://github.com/madler/zlib
+#
 # https://www.zlib.net/fossils/zlib-1.2.11.tar.gz
 
+
 ### VERSION ###
-#DKSET(ZLIB_VERSION 1.2.8)
 DKSET(ZLIB_VERSION 1.2.11)
 DKSET(ZLIB_NAME zlib-${ZLIB_VERSION})
 DKSET(ZLIB_DL https://www.zlib.net/fossils/${ZLIB_NAME}.tar.gz)
