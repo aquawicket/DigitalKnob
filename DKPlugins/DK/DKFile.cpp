@@ -753,11 +753,12 @@ bool DKFile::MakeDir(const DKString& dir){
 	if(PathExists(path))
 		return true;
 
-	//if(!fs::create_directories(path)){
-	fs::directory_iterator end_itr; // default construction yields past-the-end
-	for(fs::directory_iterator itr(path); itr != end_itr; ++itr) {
-		DKERROR("DKFile::MakeDir("+ path +") failed! \n");
-		return false;
+	if (!fs::create_directories(path)) {
+		fs::directory_iterator end_itr; // default construction yields past-the-end
+		for (fs::directory_iterator itr(path); itr != end_itr; ++itr) {
+			DKERROR("DKFile::MakeDir(" + path + ") failed! \n");
+			return false;
+		}
 	}
 	return true;
 }

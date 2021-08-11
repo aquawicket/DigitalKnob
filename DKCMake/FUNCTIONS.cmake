@@ -2728,7 +2728,6 @@ function(DKDEPEND arg)
 		#endif()
 		
 		DKRUNDEPENDS(${arg} ${arg2})    ##strip everything from the file except if() else() elseif() endif() and DKDEPEND() before sorting.
-		#DKBRUTEDEPENDS(${arg} ${arg2}) ##read ALL DKDEPENDS() commands from the file list.  -ignores if(), else().. and all found depends will be included.
 	else()
 		## If the library is already in the list, return.
 		list(FIND dkdepend_list "${arg}" _index)
@@ -2737,7 +2736,6 @@ function(DKDEPEND arg)
 		endif()
 		
 		DKRUNDEPENDS(${arg})  ##strip everything from the file except if() else() elseif() endif() and DKDEPEND() before sorting.
-		#DKBRUTEDEPENDS(${arg}) ##read ALL DKDEPENDS() commands from the file list.  -ignores if(), else().. and all found depends will be included.
 	endif()
 endfunction()
 
@@ -2760,22 +2758,10 @@ function(DISABLE_DKDEPEND arg)
 	DKSET(dkdepend_disable_list ${dkdepend_disable_list} ${arg})
 endfunction()
 
-
-### NOTE:
-### There are currently 2 methods of sorting dependencies throughout the DKMAKE.cmake files.
-
-### 
-### This first method, scans through the DKMAKE.cmake files and searches for DKDEPEND() commands.
-### This loop will sort them from top to bottom, then they will be run.
-### This is more of a brute-force method, all if(), else(), elif(), commands will be ignored and 
-### all instances of DKDEPEND('lib') will be added to the list. 
-
-### The second method will strip everything from the file except DKDEPEND('lib') commands AND conditionals.
+### DKRUNDEPENDS() will strip everything from the file except DKDEPEND('lib') commands AND conditionals.
 ### Conditionals such as if(), else(), elseif(), endif(), return() conditionals will be processed during the sort process. 
 ### WARNING: BE CAREFULL WRITING NEW VARIABLES TO USE WITH CONDITIONALS, AS THEY WILL BE IGNORED
 ### DO NOT CREATE NEW VARIABLES WITHIN THE DKMAKE.cmake FILES TO DETERMINE THE true/false of a conditional.  
-
-
 ## Sort dependencies by: Strip everything from the file except if() else() elseif() endif() and DKDEPEND() before sorting.
 ##########################
 function(DKRUNDEPENDS arg)
@@ -2943,71 +2929,7 @@ function(DKRUNDEPENDS arg)
 	list(REMOVE_DUPLICATES dkdepend_list)
 endfunction()
 
-############################
-function(DKBRUTEDEPENDS arg)
-	################################################################
-	## USE Brute force to search the file for DKDEPENDS() commands
-	DKSETPATHTOPLUGIN(${arg})
-	if(NOT PATHTOPLUGIN)
-		return()
-	endif()
-	
-	file(READ ${PATHTOPLUGIN}/DKMAKE.cmake data) ## read the file into a variable
-	set(_index 0)
-	string(FIND "${data}" "DKDEPEND(" _index) ## look for the first DKDEPEND( command
-	while(${_index} GREATER -1)
-		string(SUBSTRING ${data} ${_index} -1 data2)
-		#message(STATUS "DKDEPEND(${arg})")
-		string(FIND ${data2} ")" _index)
-		math(EXPR _index "${_index}-9")
-		string(SUBSTRING ${data2} 9 ${_index} data3)
-		
-		#message(STATUS "CHILD ${data3}")
-		#IF ${data3} contains a space, split variable
-		set(_space 0)
-		string(FIND ${data3} " " _space)
-		if(${_space} GREATER -1)
-			string(SUBSTRING ${data3} 0 ${_space} firstvar)
-			#message(${firstvar})
-			math(EXPR _space "${_space}+1")
-			string(SUBSTRING ${data3} ${_space} -1 secondvar)
-			#message(${secondvar})
-			DKDEPEND(${firstvar} ${secondvar})
-		else()
-			DKDEPEND(${data3})
-		endif()
-
-		math(EXPR _index "${_index}+10")
-		string(SUBSTRING ${data2} ${_index} -1 data)
-		string(FIND ${data} "DKDEPEND(" _index)
-	endwhile()
-	
-	set(extra_args ${ARGN})
-	list(LENGTH extra_args num_extra_args)
-	if(${num_extra_args} GREATER 0)
-		list(GET extra_args 0 arg2)
-	endif()
-	
-	list(FIND dkdepend_list "${arg} ${args}" _index)
-	if(${_index} GREATER -1)
-		return()
-	endif()
-		
-	list(FIND dkdepend_list "${arg}" _index)
-	if(${_index} GREATER -1)
-		return() ## If the include is already in the list, return.
-	endif()
-	
-	if(${num_extra_args} GREATER 0)
-		DKSET(dkdepend_list ${dkdepend_list} "${arg} ${arg2}")  #Add to list
-	else()
-		DKSET(dkdepend_list ${dkdepend_list} ${arg})  #Add to list
-	endif()
-	list(REMOVE_DUPLICATES dkdepend_list)
-endfunction()
-
-######################
-FUNCTION(DKDEPEND_ALL)
+function(DKDEPEND_ALL)
 	message(STATUS "DKDEPEND_ALL")
 	
 	##TODO - get a list of all DKPlugins and call DKPEPEND(DKPlugin) for each of them.

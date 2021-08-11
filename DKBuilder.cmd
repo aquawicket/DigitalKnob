@@ -1,32 +1,37 @@
 @ECHO off
 
+set "DIGITALKNOB=C:\Users\%USERNAME%\digitalknob"
+set "DKPATH=%DIGITALKNOB%\DK"
+set "CMAKE=C:\PROGRA~2\CMake\bin\cmake.exe"
+set MSBUILD="C:\PROGRA~2\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe"
 set "APP="
 set "OS="
+set "TYPE="
 
-:start
+:pickapp
 ECHO.
-ECHO 1. *UPDATE*
+ECHO 1. Git Update
 ECHO 2. DKBuilder
 ECHO 3. DKSDLRmlUi
 ECHO 4. DKTestAll
-ECHO 5. EXIT
+ECHO 5. Exit
 set choice=
 set /p choice=Please select an app to build: 
 if not '%choice%'=='' set choice=%choice:~0,1%
-if '%choice%'=='1' goto updater
+if '%choice%'=='1' goto gitupdate
 if '%choice%'=='2' goto dkbuilder
 if '%choice%'=='3' goto dksdlrmlui
 if '%choice%'=='4' goto dktestall
 if '%choice%'=='5' goto end
 ECHO "%choice%" is not valid, try again
-goto start
+goto pickapp
 
-:updater
-git clone https://github.com/aquawicket/DigitalKnob.git C:\Users\%USERNAME%\digitalknob\DK
-cd C:\Users\%USERNAME%\digitalknob\DK
+:gitupdate
+git clone https://github.com/aquawicket/DigitalKnob.git %DKPATH%
+cd %DKPATH%
 git checkout -- .
 git pull origin master
-goto start
+goto pickapp
 :dkbuilder
 set APP=DKBuilder
 goto pickos
@@ -36,24 +41,23 @@ goto pickos
 :dktestall
 set APP=DKTestAll
 goto pickos
-ECHO "ERROR: HOW DID YOU GET HERE?"
 
 
 
 :pickos
-ECHO APP = %APP%
+ECHO %APP%
 ECHO.
-ECHO 1. win32
-ECHO 2. win64
-ECHO 3. GoBack
-ECHO 4. EXIT
+ECHO 1. Windows 32
+ECHO 2. Windows 64
+ECHO 3. Go Back
+ECHO 4. Exit
 set choice=
 set /p choice=Please select an OS to build for: 
 if not '%choice%'=='' set choice=%choice:~0,1%
 if '%choice%'=='1' goto win32
 if '%choice%'=='2' goto win64
-if '%choice%'=='3' goto goback
-if '%choice%'=='4' goto exit
+if '%choice%'=='3' goto pickapp
+if '%choice%'=='4' goto end
 ECHO "%choice%" is not valid, try again
 goto pickos
 :win32
@@ -62,25 +66,56 @@ goto build
 :win64
 set OS="win64"
 goto build
-:goback
-goto start
+
+
+:type
+ECHO %APP% - %OS%
+ECHO.
+ECHO 1. Debug
+ECHO 2. Release
+ECHO 3. All
+ECHO 4. Go Back
+ECHO 5. Exit
+set choice=
+set /p choice=Please select a build type: 
+if not '%choice%'=='' set choice=%choice:~0,1%
+if '%choice%'=='1' goto debug
+if '%choice%'=='2' goto release
+if '%choice%'=='3' goto all
+if '%choice%'=='4' goto pickos
+if '%choice%'=='5' goto end
+ECHO "%choice%" is not valid, try again
+goto type
+:debug
+set TYPE="Debug"
+goto build
+:release
+set TYPE="Release"
+goto build
+:all
+set TYPE="All"
+goto build
 
 
 :build
-cd C:\Users\%USERNAME%\digitalknob
-echo Deleteing all CMakeCache.txt files....
-del /f /S *MakeCache.txt
-::echo Deleteing all CMakeFiles folders....
-::FOR /D /R %%X IN (CMakeFile*) DO RD /S /Q "%%X"
+echo Resetting CMake Cache . . .
+echo Deleting CMakeCache.txt files . . .
+cd %DIGITALKNOB%
+::del /f /s *MakeCache.txt
+for /r %%i in (CMakeCache.*) do del "%%i"
+echo Deleteing CMakeFiles folders . . .
+for /d /r %%X in (*CMakeFiles*) do rd /s /q "%%X"
+::for /d /r %%i in (*CMakeFiles*) do rmdir /s /q "%%i"
 echo ****** BUILDING %APP% - %OS% ******
-set APP_PATH=C:\Users\%USERNAME%\digitalknob\DK\DKApps\%APP%
+set APP_PATH=%DKPATH%\DKApps\%APP%
 ECHO %APP_PATH%
 mkdir %APP_PATH%\%OS%
 cd %APP_PATH%\%OS%"
 del %APP_PATH%\%OS%\CMakeCache.txt"
-C:\PROGRA~2\CMake\bin\cmake.exe -G "Visual Studio 16 2019" -A Win32 -DRELEASE=ON -DREBUILDALL=ON -DSTATIC=ON C:\Users\%USERNAME%\digitalknob\DK
+%CMAKE% -G "Visual Studio 16 2019" -A Win32 -DDEBUG=ON -DRELEASE=ON -DREBUILDALL=ON -DSTATIC=ON %DKPATH%
 :: %APP_PATH%\%OS%
-"C:\PROGRA~2\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe" %APP%.sln /p:Configuration=Release
+%MSBUILD% %APP%.sln /p:Configuration=Debug
+%MSBUILD% %APP%.sln /p:Configuration=Release
 
 :end
 ECHO Exit
