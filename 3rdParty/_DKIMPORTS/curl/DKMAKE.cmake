@@ -5,7 +5,7 @@
 
 ### DEPENDS ###
 DKDEPEND(zlib)
-DKDEPEND(openssl-vs2015)
+DKDEPEND(openssl)
 
 
 ### VERSION ###

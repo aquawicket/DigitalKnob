@@ -1,6 +1,6 @@
 DKDEPEND(curl)
 DKDEPEND(DKFile)
-DKDEPEND(DKThread)
+#DKDEPEND(DKThread)
 IF(USE_DKDuktape)
 	DKDEPEND(DKDuktape)
 ENDIF()

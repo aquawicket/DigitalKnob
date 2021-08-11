@@ -2,14 +2,14 @@
 
 
 ### VERSION ###
-DKSET(OPENSSL_VERSION 1.0.2h-vs2015)
+WIN_DKSET(OPENSSL_VERSION 1.0.2h-vs2015)
 DKSET(OPENSSL_NAME openssl-${OPENSSL_VERSION})
-DKSET(OPENSSL_DL https://www.npcglib.org/~stathis/downloads/openssl-${OPENSSL_VERSION}.7z)
+WIN_DKSET(OPENSSL_DL https://www.npcglib.org/~stathis/downloads/openssl-${OPENSSL_VERSION}.7z)
 DKSET(OPENSSL ${3RDPARTY}/${OPENSSL_NAME})
 
 
 ### INSTALL ###
-DKINSTALL(${OPENSSL_DL} openssl-vs2015 ${OPENSSL})
+DKINSTALL(${OPENSSL_DL} openssl ${OPENSSL})
 
 
 ### DKPLUGINS LINK ###

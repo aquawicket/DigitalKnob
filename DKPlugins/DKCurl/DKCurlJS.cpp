@@ -1,7 +1,9 @@
 #ifdef USE_DKDuktape 
 #include "DKCurl/DKCurl.h"
 #include "DKCurl/DKCurlJS.h"
-#include "DKThread/DKThread.h"
+//#ifdef USE_DKThread
+//	#include "DKThread/DKThread.h"
+//#endif
 
 /////////////////////
 bool DKCurlJS::Init()

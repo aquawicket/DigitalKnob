@@ -456,33 +456,35 @@ include_directories(${DKPROJECT})
 
 ##########
 if(WIN_32)
-	# copy the icon to assets
-	DKCOPY(${DKPROJECT}/icons/windows/icon.ico ${DKPROJECT}/assets/icon.ico TRUE)
+	if(USE_DKAssets)
+		# copy the icon to assets
+		DKCOPY(${DKPROJECT}/icons/windows/icon.ico ${DKPROJECT}/assets/icon.ico TRUE)
 	
-	# Backup files and folders excluded from the package
-	DKCOPY(${DKPROJECT}/assets/USER ${DKPROJECT}/Backup/USER TRUE)
-	##DKCOPY(${DKPROJECT}/assets/DKCef/win32Debug ${DKPROJECT}/Backup/DKCef/win32Debug TRUE)
-	##DKCOPY(${DKPROJECT}/assets/DKCef/win32Release ${DKPROJECT}/Backup/DKCef/win32Release TRUE)
-	DKCOPY(${DKPROJECT}/assets/cef.log ${DKPROJECT}/Backup/cef.log TRUE)
-	DKCOPY(${DKPROJECT}/assets/log.txt ${DKPROJECT}/Backup/log.txt TRUE)
+		# Backup files and folders excluded from the package
+		DKCOPY(${DKPROJECT}/assets/USER ${DKPROJECT}/Backup/USER TRUE)
+		##DKCOPY(${DKPROJECT}/assets/DKCef/win32Debug ${DKPROJECT}/Backup/DKCef/win32Debug TRUE)
+		##DKCOPY(${DKPROJECT}/assets/DKCef/win32Release ${DKPROJECT}/Backup/DKCef/win32Release TRUE)
+		DKCOPY(${DKPROJECT}/assets/cef.log ${DKPROJECT}/Backup/cef.log TRUE)
+		DKCOPY(${DKPROJECT}/assets/log.txt ${DKPROJECT}/Backup/log.txt TRUE)
 	
-	# Remove excluded files and folders before packaging
-	DKREMOVE(${DKPROJECT}/assets/USER)
-	##DKREMOVE(${DKPROJECT}/assets/DKCef/win32Debug)
-	##DKREMOVE(${DKPROJECT}/assets/DKCef/win32Release)
-	DKREMOVE(${DKPROJECT}/assets/cef.log)
-	DKREMOVE(${DKPROJECT}/assets/log.txt)
+		# Remove excluded files and folders before packaging
+		DKREMOVE(${DKPROJECT}/assets/USER)
+		##DKREMOVE(${DKPROJECT}/assets/DKCef/win32Debug)
+		##DKREMOVE(${DKPROJECT}/assets/DKCef/win32Release)
+		DKREMOVE(${DKPROJECT}/assets/cef.log)
+		DKREMOVE(${DKPROJECT}/assets/log.txt)
 	
-	#Compress the assets, they will be included by resource.rc
-	message(STATUS "Creating assets.zip . . .")
-	DKZIP(${DKPROJECT}/assets)
-	
-	#dummy assets.h file, or the builder wil complain about assets.h missing
-	DKCOPY(${DKPLUGINS}/_DKIMPORT/assets.h ${DKPROJECT}/assets.h TRUE)
-	
-	# Restore the backed up files, excluded from assets
-	DKCOPY(${DKPROJECT}/Backup ${DKPROJECT}/assets TRUE)
-	DKREMOVE(${DKPROJECT}/Backup)
+		#Compress the assets, they will be included by resource.rc
+		message(STATUS "Creating assets.zip . . .")
+		DKZIP(${DKPROJECT}/assets)
+		
+		#dummy assets.h file, or the builder wil complain about assets.h missing
+		DKCOPY(${DKPLUGINS}/_DKIMPORT/assets.h ${DKPROJECT}/assets.h TRUE)
+		
+		# Restore the backed up files, excluded from assets
+		DKCOPY(${DKPROJECT}/Backup ${DKPROJECT}/assets TRUE)
+		DKREMOVE(${DKPROJECT}/Backup)
+	endif()
 	
 	## Create Icon files for project
 	message(STATUS "Building icons for ${APP_NAME} - ${OS} . . .")
