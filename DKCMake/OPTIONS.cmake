@@ -349,7 +349,6 @@ endif(RELEASE)
 
 ##### Microsoft Visual Studio 2019 #####
 if(CMAKE_GENERATOR STREQUAL "Visual Studio 16 2019")
-#DKSET(CMAKE_EXE C:/PROGRA~2/CMake/bin/cmake.exe)
 	if(WIN)
 		##DKSET(CMAKE_CXX_FLAGS "/DWIN32 /D_WINDOWS /W3 /nologo /GR /EHsc /Yustdafx.h /Zm500 /D_WIN32_WINNT=0x0600") #precompiled headers
 		DKSET(CMAKE_C_FLAGS "/DWIN32 /D_WINDOWS /W3 /nologo /GR /EHsc /Zm500 /D_WIN32_WINNT=0x0600 /D_USING_V110_SDK71_")
@@ -381,7 +380,6 @@ endif()
 
 ##### Microsoft Visual Studio 2019 Win64 #####
 if(CMAKE_GENERATOR STREQUAL "Visual Studio 16 2019 Win64")
-#DKSET(CMAKE_EXE C:/PROGRA~2/CMake/bin/cmake.exe)
 	##DKSET(CMAKE_CXX_FLAGS "/DWIN32 /D_WINDOWS /W3 /nologo /GR /EHsc /Yustdafx.h /Zm500 /D_WIN32_WINNT=0x0600") #precompiled headers
 	DKSET(CMAKE_CXX_FLAGS "/DWIN32 /DWIN64 /D_WINDOWS /W3 /nologo /GR /EHsc /Zm500 /D_WIN32_WINNT=0x0600")
 	DKSET(CMAKE_CXX_FLAGS_DEBUG "/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG")
