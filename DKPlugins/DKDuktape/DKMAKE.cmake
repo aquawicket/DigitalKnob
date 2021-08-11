@@ -1,7 +1,8 @@
 DKDEPEND(duktape)
-##DKDEPEND(boost)
 DKDEPEND(DK)
-DKDEPEND(babel)
+if(USE_babel)
+	DKDEPEND(babel)
+endif()
 
 DKCOPY(${DUKTAPE}/src/duktape.c ${DKPLUGINS}/DKDuktape/duktape.cpp FALSE)
 DKCOPY(${DUKTAPE}/examples/eventloop/poll.c ${DKPLUGINS}/DKDuktape/poll.cpp FALSE)
@@ -10,7 +11,7 @@ DKCOPY(${DUKTAPE}/examples/eventloop/c_eventloop.c ${DKPLUGINS}/DKDuktape/c_even
 DKCOPY(${DUKTAPE}/examples/eventloop/c_eventloop.js ${DKPLUGINS}/DKDuktape/c_eventloop.js FALSE)
 DKINCLUDE(${DKPLUGINS}/DKDuktape)
 DKINCLUDE(${DUKTAPE}/src)
-DKDEFINE(USE_DKDuktape)
+#DKDEFINE(USE_DKDuktape)
 
 DKPLUGIN(DKDuktape)
 DKASSETS(DKDuktape)

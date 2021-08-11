@@ -4,8 +4,12 @@
 
 
 ### DEPENDS ###
-DKDEPEND(zlib)
-DKDEPEND(openssl)
+if(USE_zlib)
+	DKDEPEND(zlib)
+endif()
+if(USE_openssl)
+	DKDEPEND(openssl)
+endif()
 
 
 ### VERSION ###
