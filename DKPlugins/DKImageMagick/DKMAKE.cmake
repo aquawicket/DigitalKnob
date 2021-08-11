@@ -1,4 +1,4 @@
-DKDEPEND(ImageMagick)
+DKDEPEND(imagemagick)
 
 DKPLUGIN(DKImageMagick)
 DKASSETS(DKImageMagick)

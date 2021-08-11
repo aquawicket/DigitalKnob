@@ -1,5 +1,5 @@
 DKDEPEND(DKCurl)
 DKDEPEND(DKArchive)
-DKDEPEND(ImageMagick)
+DKDEPEND(imagemagick)
 
 DKASSETS(DKBuild)
