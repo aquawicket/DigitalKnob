@@ -1,9 +1,9 @@
 ## https://github.com/fallahn/sdl2vs
 
 ### DEPENDS ###
-DKDEPEND(SDL2)
-DKDEPEND(SDL2_ttf)
-DKDEPEND(SDL2_image)
+DKDEPEND(sdl2)
+DKDEPEND(sdl2_ttf)
+DKDEPEND(sdl2_image)
 
 
 ### VERSION ###

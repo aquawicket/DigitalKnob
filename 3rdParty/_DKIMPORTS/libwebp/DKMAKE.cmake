@@ -8,7 +8,7 @@ DKDEPEND(libpng)
 DKDEPEND(tiff)
 DKDEPEND(libjpeg-turbo)
 DKDEPEND(giflib)
-DKDEPEND(SDL2)
+DKDEPEND(sdl2)
 
 ### VERSION ###
 DKSET(WEBP_MAJOR 1)

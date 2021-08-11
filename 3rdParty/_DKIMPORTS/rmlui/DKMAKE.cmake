@@ -3,9 +3,9 @@
 ### DEPENDS ###
 DKDEPEND(freetype)
 DKDEPEND(glew)
-DKDEPEND(SDL2)
-DKDEPEND(SDL2_image)
-DKDEPEND(SFML)
+DKDEPEND(sdl2)
+DKDEPEND(sdl2_image)
+DKDEPEND(sfml)
 
 
 

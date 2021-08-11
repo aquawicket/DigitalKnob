@@ -1,4 +1,4 @@
-DKDEPEND(OpenSceneGraph)
+DKDEPEND(openscenegraph)
 
 ### VERSION ###
 DKSET(OSGWORKS_VERSION master)

@@ -1,7 +1,7 @@
 ## https://www.libsdl.org/projects/SDL_ttf/
 
 ### DEPENDS ###
-DKDEPEND(SDL2)
+DKDEPEND(sdl2)
 DKDEPEND(freetype)
 
 

@@ -4,7 +4,7 @@
 DKDEPEND(ffmpeg-dev)
 DKDEPEND(ffmpeg-shared)
 DKDEPEND(ffmpeg-static)
-DKDEPEND(SDL2)
+DKDEPEND(sdl2)
 
 
 ### VERSION ###

@@ -1,7 +1,7 @@
 # http://digitalknob.com/Download/Libs/osgaudio-master.zip
 
 ### DEPENDS ###
-DKDEPEND(OpenSceneGraph)
+DKDEPEND(openscenegraph)
 DKDEPEND(libogg)
 DKDEPEND(libvorbis)
 DKDEPEND(freealut)

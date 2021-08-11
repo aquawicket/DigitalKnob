@@ -1,6 +1,6 @@
 DKDEPEND(msinttypes)
 DKDEPEND(zlib)
-##DKDEPEND(SDL2) ##TODO
+##DKDEPEND(sdl2) ##TODO
 
 ### INSTALL ###
 DKSET(OSG_VERSION 3.4.0)
