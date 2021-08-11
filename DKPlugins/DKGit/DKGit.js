@@ -295,3 +295,8 @@ function DKGit_ResetRepository(){
 	//Finally, force update to our repository:
 	CPP_DK_Execute(GIT + " push -f origin master")
 }
+
+function DKGit_Rename(oldName, newName){
+	CPP_DK_Execute(GIT + " mv "+oldName+" tmp"
+	CPP_DK_Execute(GIT + " mv tmp "+newName
+}
