@@ -14,6 +14,7 @@ WIN_DKSET(IMAGEMAGICK_DL http://ftp.icm.edu.pl/packages/ImageMagick/binaries/${I
 LINUX_DKSET(IMAGEMAGICK_DL https://github.com/ImageMagick/ImageMagick/archive/refs/tags/${IMAGEMAGICK_VERSION}.zip)
 MAC_DKSET(IMAGEMAGICK_DL https://github.com/ImageMagick/ImageMagick/archive/refs/tags/${IMAGEMAGICK_VERSION}.zip )
 DKSET(IMAGEMAGICK ${3RDPARTY}/${IMAGEMAGICK_NAME})
+WIN_DKSET(IMAGEMAGICK_CONVERT ${IMAGEMAGICK}/convert.exe)
 
 
 ### INSTALL ###

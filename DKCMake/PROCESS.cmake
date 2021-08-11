@@ -485,12 +485,12 @@ if(WIN_32)
 	endif()
 	
 	## Create Icon files for project
-	message(STATUS "Building icons for ${APP_NAME} - ${OS} . . .")
-	DKSET(IMAGEMAGICK_CONVERT ${IMAGEMAGICK_ROOT}/convert.exe)
-	#dk_makeDirectory(${DKPROJECT}/icons/windows)
-	dk_makeDirectory(${DKPROJECT}/icons/windows)
-	DKEXECUTE_PROCESS(COMMAND ${IMAGEMAGICK_CONVERT} ${DKPROJECT}/icons/icon.png -define icon:auto-resize=256,128,64,48,32,16 ${DKPROJECT}/icons/windows/icon.ico)
-	DKEXECUTE_PROCESS(COMMAND ${IMAGEMAGICK_CONVERT} ${DKPROJECT}/icons/icon.png -define icon:auto-resize=16 ${DKPROJECT}/assets/favicon.ico)
+	if(IMAGEMAGICK_CONVERT)
+		message(STATUS "Building icons for ${APP_NAME} - ${OS} . . .")
+		dk_makeDirectory(${DKPROJECT}/icons/windows)
+		DKEXECUTE_PROCESS(COMMAND ${IMAGEMAGICK_CONVERT} ${DKPROJECT}/icons/icon.png -define icon:auto-resize=256,128,64,48,32,16 ${DKPROJECT}/icons/windows/icon.ico)
+		DKEXECUTE_PROCESS(COMMAND ${IMAGEMAGICK_CONVERT} ${DKPROJECT}/icons/icon.png -define icon:auto-resize=16 ${DKPROJECT}/assets/favicon.ico)
+	endif()
 	
 	set(CMAKE_CXX_STANDARD 17)
 	add_definitions(-D_USING_V110_SDK71_)
@@ -561,10 +561,8 @@ if(WIN_64)
 	
 
 	## Create Icon files for project
-	if(${IMAGEMAGICK_ROOT})
+	if(IMAGEMAGICK_CONVERT)
 		message(STATUS "Building icons for ${APP_NAME} - ${OS} . . .")
-		DKSET(IMAGEMAGICK_CONVERT ${IMAGEMAGICK_ROOT}/convert.exe)
-		#dk_makeDirectory(${DKPROJECT}/icons/windows)
 		dk_makeDirectory(${DKPROJECT}/icons/windows)
 		DKEXECUTE_PROCESS(COMMAND ${IMAGEMAGICK_CONVERT} ${DKPROJECT}/icons/icon.png -define icon:auto-resize=256,128,64,48,32,16 ${DKPROJECT}/icons/windows/icon.ico)
 		DKEXECUTE_PROCESS(COMMAND ${IMAGEMAGICK_CONVERT} ${DKPROJECT}/icons/icon.png -define icon:auto-resize=16 ${DKPROJECT}/assets/favicon.ico)
@@ -654,8 +652,6 @@ if(MAC)
 	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS})
 	
 	DKUPDATE_INFO_Plist(${APP_NAME}) #this may need to be run at post build
-	
-	
 endif()
 
 #######
@@ -923,18 +919,19 @@ if(ANDROID)
 	list(REMOVE_ITEM App_SRC ${DKPROJECT}/resource.rc)
 	
 	## Create Android Icons
+	if(IMAGEMAGICK_CONVERT)
 	message(STATUS "Building icons for ${APP_NAME} - ${OS} . . .")
-    dk_makeDirectory(${DKPROJECT}/icons/android)
-    dk_makeDirectory(${DKPROJECT}/icons/android/drawable-hdpi)
-    DKEXECUTE_PROCESS(COMMAND ${IMAGEMAGICK_CONVERT} ${DKPROJECT}/icons/icon.png -resize 72x72 ${DKPROJECT}/icons/android/drawable-hdpi/icon.png)
-    dk_makeDirectory(${DKPROJECT}/icons/android/drawable-ldpi)
-    DKEXECUTE_PROCESS(COMMAND ${IMAGEMAGICK_CONVERT} ${DKPROJECT}/icons/icon.png -resize 36x36 ${DKPROJECT}/icons/android/drawable-ldpi/icon.png)
-    dk_makeDirectory(${DKPROJECT}/icons/android/drawable-mdpi)
-    DKEXECUTE_PROCESS(COMMAND ${IMAGEMAGICK_CONVERT} ${DKPROJECT}/icons/icon.png -resize 48x48 ${DKPROJECT}/icons/android/drawable-mdpi/icon.png)
-    dk_makeDirectory(${DKPROJECT}/icons/android/drawable-xhdpi)
-    DKEXECUTE_PROCESS(COMMAND ${IMAGEMAGICK_CONVERT} ${DKPROJECT}/icons/icon.png -resize 96x96 ${DKPROJECT}/icons/android/drawable-xhdpi/icon.png)
-    dk_makeDirectory(${DKPROJECT}/icons/android/drawable-xxhdpi)
-    DKEXECUTE_PROCESS(COMMAND ${IMAGEMAGICK_CONVERT} ${DKPROJECT}/icons/icon.png -resize 144x144 ${DKPROJECT}/icons/android/drawable-xxhdpi/icon.png)
+		dk_makeDirectory(${DKPROJECT}/icons/android/drawable-hdpi)
+		DKEXECUTE_PROCESS(COMMAND ${IMAGEMAGICK_CONVERT} ${DKPROJECT}/icons/icon.png -resize 72x72 ${DKPROJECT}/icons/android/drawable-hdpi/icon.png)
+		dk_makeDirectory(${DKPROJECT}/icons/android/drawable-ldpi)
+		DKEXECUTE_PROCESS(COMMAND ${IMAGEMAGICK_CONVERT} ${DKPROJECT}/icons/icon.png -resize 36x36 ${DKPROJECT}/icons/android/drawable-ldpi/icon.png)
+		dk_makeDirectory(${DKPROJECT}/icons/android/drawable-mdpi)
+		DKEXECUTE_PROCESS(COMMAND ${IMAGEMAGICK_CONVERT} ${DKPROJECT}/icons/icon.png -resize 48x48 ${DKPROJECT}/icons/android/drawable-mdpi/icon.png)
+		dk_makeDirectory(${DKPROJECT}/icons/android/drawable-xhdpi)
+		DKEXECUTE_PROCESS(COMMAND ${IMAGEMAGICK_CONVERT} ${DKPROJECT}/icons/icon.png -resize 96x96 ${DKPROJECT}/icons/android/drawable-xhdpi/icon.png)
+		dk_makeDirectory(${DKPROJECT}/icons/android/drawable-xxhdpi)
+		DKEXECUTE_PROCESS(COMMAND ${IMAGEMAGICK_CONVERT} ${DKPROJECT}/icons/icon.png -resize 144x144 ${DKPROJECT}/icons/android/drawable-xxhdpi/icon.png)
+	endif()
 	
 	# Copy the icon to ${DKPROJECT}/assets
 	DKCOPY(${DKPROJECT}/icons/icon.png ${DKPROJECT}/assets/icon.png TRUE)
