@@ -723,7 +723,7 @@ if (BUILD_TESTING)
 	file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/TestData DESTINATION ${PROJECT_BINARY_DIR})
 	file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/TestVectors DESTINATION ${PROJECT_BINARY_DIR})
 
-	add_test(NAME build_cryptest COMMAND "${CMAKE_COMMAND}" --build ${CMAKE_BINARY_DIR} --target cryptest)
+	add_test(NAME build_cryptest COMMAND "${CMAKE_EXE}" --build ${CMAKE_BINARY_DIR} --target cryptest)
 	add_test(NAME cryptest COMMAND $<TARGET_FILE:cryptest> v)
 	set_tests_properties(cryptest PROPERTIES DEPENDS build_cryptest)
 endif ()
@@ -747,8 +747,8 @@ if (BUILD_DOCUMENTATION)
 	if (NOT ${in_source_DOCS_DIR} STREQUAL ${out_source_DOCS_DIR})
 		add_custom_command(
 				TARGET docs POST_BUILD
-				COMMAND ${CMAKE_COMMAND} -E copy_directory "${in_source_DOCS_DIR}" "${out_source_DOCS_DIR}"
-				COMMAND ${CMAKE_COMMAND} -E remove_directory "${in_source_DOCS_DIR}"
+				COMMAND ${CMAKE_EXE} -E copy_directory "${in_source_DOCS_DIR}" "${out_source_DOCS_DIR}"
+				COMMAND ${CMAKE_EXE} -E remove_directory "${in_source_DOCS_DIR}"
 		)
 	endif ()
 endif ()

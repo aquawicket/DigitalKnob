@@ -866,7 +866,7 @@ foreach(libtype ${TEST_LIBTYPES})
 
 endforeach()
 
-add_custom_target(testclean COMMAND ${CMAKE_COMMAND} -P
+add_custom_target(testclean COMMAND ${CMAKE_EXE} -P
   ${CMAKE_SOURCE_DIR}/cmakescripts/testclean.cmake)
 
 
@@ -959,4 +959,4 @@ install(FILES ${CMAKE_BINARY_DIR}/jconfig.h ${CMAKE_SOURCE_DIR}/jerror.h
 configure_file("${CMAKE_SOURCE_DIR}/cmakescripts/cmake_uninstall.cmake.in"
   "cmake_uninstall.cmake" IMMEDIATE @ONLY)
 
-add_custom_target(uninstall COMMAND ${CMAKE_COMMAND} -P cmake_uninstall.cmake)
+add_custom_target(uninstall COMMAND ${CMAKE_EXE} -P cmake_uninstall.cmake)

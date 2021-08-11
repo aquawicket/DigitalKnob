@@ -1307,7 +1307,7 @@ IF(REQUIRES_LIBPATH_MESSAGE)
             CONFIGURE_FILE(${PROJECT_SOURCE_DIR}/packaging/ld.so.conf.d/openscenegraph.conf.in
                 ${PROJECT_BINARY_DIR}/packaging/ld.so.conf.d/openscenegraph.conf
             )
-            ADD_CUSTOM_TARGET(install_ld_conf ${CMAKE_COMMAND} -E copy_if_different
+            ADD_CUSTOM_TARGET(install_ld_conf ${CMAKE_EXE} -E copy_if_different
                 ${PROJECT_BINARY_DIR}/packaging/ld.so.conf.d/openscenegraph.conf
                 /etc/ld.so.conf.d/openscenegraph.conf
                 COMMAND ldconfig
@@ -1345,7 +1345,7 @@ CONFIGURE_FILE(
   "${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake"
   IMMEDIATE @ONLY)
 ADD_CUSTOM_TARGET(uninstall
-  "${CMAKE_COMMAND}" -P "${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake")
+  "${CMAKE_EXE}" -P "${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake")
 
 #
 

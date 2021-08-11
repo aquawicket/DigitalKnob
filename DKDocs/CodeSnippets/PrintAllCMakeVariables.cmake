@@ -29,4 +29,4 @@ endfunction()
 
 ##"To print environment variables, use CMake's command mode:"
 
-execute_process(COMMAND "${CMAKE_COMMAND}" "-E" "environment")
+execute_process(COMMAND "${CMAKE_EXE}" "-E" "environment")
