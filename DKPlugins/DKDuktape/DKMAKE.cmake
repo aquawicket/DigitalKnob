@@ -11,7 +11,7 @@ DKCOPY(${DUKTAPE}/examples/eventloop/c_eventloop.c ${DKPLUGINS}/DKDuktape/c_even
 DKCOPY(${DUKTAPE}/examples/eventloop/c_eventloop.js ${DKPLUGINS}/DKDuktape/c_eventloop.js FALSE)
 DKINCLUDE(${DKPLUGINS}/DKDuktape)
 DKINCLUDE(${DUKTAPE}/src)
-#DKDEFINE(USE_DKDuktape)
+DKDEFINE(USE_DKDuktape)
 
 DKPLUGIN(DKDuktape)
 DKASSETS(DKDuktape)
