@@ -1,5 +1,5 @@
-DKDEPEND(Moment.js)
-DKDEPEND(Chart.js)
+DKDEPEND(moment.js)
+DKDEPEND(chart.js)
 
 DKCOPY(${MOMENTJS}/ ${DKPLUGINS}/DKChart/ FALSE)
 DKCOPY(${CHARTJS}/ ${DKPLUGINS}/DKChart/ FALSE)
