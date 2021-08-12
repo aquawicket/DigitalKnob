@@ -5,7 +5,7 @@ set(DK_PROCESS_INCLUDED true)
 
 include(DKCMake/FUNCTIONS.cmake)
 if(UNIX)
-	DKCOMMAND(sudo echo) #ask for sudo password ahead of time
+	DKCOMMAND(sudo echo WORKING_DIRECTORY ${DIGITALKNOB}) #ask for sudo password ahead of time
 endif()
 #DELETE_CACHE()
 include(DKCMake/OPTIONS.cmake)
