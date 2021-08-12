@@ -2771,7 +2771,7 @@ function(DKDEPEND name)
 		#	return()
 		#endif()
 		
-		DKENABLE(${arg2})
+		#DKENABLE(${arg2})
 		DKRUNDEPENDS(${name} ${arg2})    ##strip everything from the file except if() else() elseif() endif() and DKDEPEND() before sorting.
 	else()
 		## If the library is already in the list, return.
@@ -2780,7 +2780,7 @@ function(DKDEPEND name)
 			return()
 		endif()
 		
-		DKENABLE(${name})
+		#DKENABLE(${name})
 		DKRUNDEPENDS(${name})  ##strip everything from the file except if() else() elseif() endif() and DKDEPEND() before sorting.
 	endif()
 endfunction()
