@@ -2,12 +2,11 @@ if(DK_PROCESS_INCLUDED)
   return()
 endif()
 set(DK_PROCESS_INCLUDED true)
-
+if(CMAKE_HOST_UNIX)
+	execute_process(COMMAND sudo echo WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}) #ask for sudo password ahead of time
+endif()
 include(DKCMake/FUNCTIONS.cmake)
 include(DKCMake/OPTIONS.cmake)
-if(CMAKE_HOST_UNIX)
-	DKEXECUTE_PROCESS(sudo echo WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}) #ask for sudo password ahead of time
-endif()
 include(DKCMake/DISABLED.cmake)
 get_filename_component(APP_NAME ${DKPROJECT} NAME)
 string(REPLACE " " "_" APP_NAME ${APP_NAME})
@@ -633,7 +632,7 @@ if(MAC)
 	FIND_LIBRARY(CA CoreAudio)
 	FIND_LIBRARY(CV CoreVideo)
 	FIND_LIBRARY(IO IOKit)
-	FIND_LIBRARY(GL OpenGL)
+	FIND_LIBRARY(GL OpenGL) #TODO: move to 3rdParty/opengl
 	FIND_LIBRARY(FF ForceFeedback)
 	FIND_LIBRARY(AK AppKit)
 	
@@ -690,7 +689,7 @@ if(IOS)
 		CoreGraphics
 	   	QuartzCore
 		UIKit
-	    OpenGLES
+	    OpenGLES #TODO: move to 3rdParty/opengl
 		ImageIO
 		MobileCoreServices
 	)
@@ -759,7 +758,7 @@ if(IOSSIM)
 		CoreGraphics
 	   	QuartzCore
 		UIKit
-	    OpenGLES
+	    OpenGLES #TODO: move to 3rdParty/opengl
 		ImageIO
 		MobileCoreServices
 	)
@@ -822,19 +821,20 @@ if(LINUX)
 	DKREMOVE(${DKPROJECT}/Backup)
 
 	set(CMAKE_CXX_STANDARD 17)
-	find_package(OpenGL REQUIRED)
-	include_directories(${OpenGL_INCLUDE_DIRS})
-	link_directories(${OpenGL_LIBRARY_DIRS})
-	add_definitions(${OpenGL_DEFINITIONS})
-	if(NOT OPENGL_FOUND)
-    	message(FATAL_ERROR "OPENGL not found!")
-	endif()
+	#find_package(OpenGL REQUIRED)
+	#include_directories(${OpenGL_INCLUDE_DIRS})
+	#link_directories(${OpenGL_LIBRARY_DIRS})
+	#add_definitions(${OpenGL_DEFINITIONS})
+	#if(NOT OPENGL_FOUND)
+    #	message(FATAL_ERROR "OPENGL not found!")
+	#endif()
 	
-	list(APPEND LINUX_LIBS ${OPENGL_LIBRARIES})
+	#list(APPEND LINUX_LIBS ${OPENGL_LIBRARIES})
 	list(APPEND LINUX_LIBS pthread)
 	list(APPEND LINUX_LIBS dl)
+	list(APPEND LINUX_LIBS libstdc++fs.a)
 	
-	set(CMAKE_CXX_FLAGS "-g -no-pie")
+	set(CMAKE_CXX_FLAGS "-g -no-pie -std=c++17")
 	add_executable(${APP_NAME} ${App_SRC})
 	
 	if(DEBUG)
@@ -881,15 +881,15 @@ if(RASPBERRY)
 
 
 	set(CMAKE_CXX_STANDARD 17)
-    find_package(OpenGL REQUIRED)
-	include_directories(${OpenGL_INCLUDE_DIRS})
-	link_directories(${OpenGL_LIBRARY_DIRS})
-	add_definitions(${OpenGL_DEFINITIONS})
-	if(NOT OPENGL_FOUND)
-    	message(FATAL_ERROR "OPENGL not found!")
-	endif()
+    #find_package(OpenGL REQUIRED)
+	#include_directories(${OpenGL_INCLUDE_DIRS})
+	#link_directories(${OpenGL_LIBRARY_DIRS})
+	#add_definitions(${OpenGL_DEFINITIONS})
+	#if(NOT OPENGL_FOUND)
+    #	message(FATAL_ERROR "OPENGL not found!")
+	#endif()
 	
-	list(APPEND RASPBERRY_LIBS ${OPENGL_LIBRARIES})
+	#list(APPEND RASPBERRY_LIBS ${OPENGL_LIBRARIES})
 	list(APPEND RASPBERRY_LIBS pthread)
 	list(APPEND RASPBERRY_LIBS dl)
 	list(APPEND RASPBERRY_LIBS libstdc++fs.a)
@@ -947,8 +947,8 @@ if(ANDROID)
 	#set(CMAKE_ANDROID_STL_TYPE c++_static)
 	
 	list(APPEND ANDROID_LIBS dl)
-	list(APPEND ANDROID_LIBS GLESv1_CM)
-	list(APPEND ANDROID_LIBS GLESv2)
+	#list(APPEND ANDROID_LIBS GLESv1_CM)
+	#list(APPEND ANDROID_LIBS GLESv2)
 	list(APPEND ANDROID_LIBS log)
 	list(APPEND ANDROID_LIBS android)
 
