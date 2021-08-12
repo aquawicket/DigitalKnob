@@ -4,11 +4,10 @@ endif()
 set(DK_PROCESS_INCLUDED true)
 
 include(DKCMake/FUNCTIONS.cmake)
-if(UNIX)
+include(DKCMake/OPTIONS.cmake)
+if(CMAKE_HOST_UNIX)
 	DKCOMMAND(sudo echo WORKING_DIRECTORY ${DIGITALKNOB}) #ask for sudo password ahead of time
 endif()
-#DELETE_CACHE()
-include(DKCMake/OPTIONS.cmake)
 include(DKCMake/DISABLED.cmake)
 get_filename_component(APP_NAME ${DKPROJECT} NAME)
 string(REPLACE " " "_" APP_NAME ${APP_NAME})
