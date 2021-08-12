@@ -33,10 +33,8 @@ function(Wait)
 	if(CMAKE_HOST_LINUX)
 		DKEXECUTE_PROCESS(read -n 1 -s -r -p "Press any key to continue" WORKING_DIRECTORY C:/)
 		return()
-	endif()
-	
-	
-		message(STATUS "Wait() Not implemented for this platform")
+	endif()	
+	message(STATUS "Wait() Not implemented for this platform")
 endfunction()
 
 ## DUMP(<variable_name>)
