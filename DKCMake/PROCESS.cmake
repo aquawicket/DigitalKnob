@@ -6,7 +6,7 @@ set(DK_PROCESS_INCLUDED true)
 include(DKCMake/FUNCTIONS.cmake)
 include(DKCMake/OPTIONS.cmake)
 if(CMAKE_HOST_UNIX)
-	DKCOMMAND(sudo echo WORKING_DIRECTORY ${DKPROJECT}) #ask for sudo password ahead of time
+	DKEXECUTE_PROCESS(sudo echo WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}) #ask for sudo password ahead of time
 endif()
 include(DKCMake/DISABLED.cmake)
 get_filename_component(APP_NAME ${DKPROJECT} NAME)
