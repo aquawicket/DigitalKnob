@@ -7,10 +7,8 @@ WIN_DKSET(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v${CMAKE_V
 WIN_DKSET(CMAKE "C:/Program Files (x86)/CMake/bin")
 WIN_DKSET(CMAKE_EXE "C:/Program Files (x86)/CMake/bin/cmake.exe")
 dk_getShortPath(${CMAKE_EXE} shortpath)          
-DKSET(CMAKE_EXE ${shortpath})                     #FIXME: This does not stick
-DKSET(CMAKE_EXE C:/PROGRA~2/CMake/bin/cmake.exe)  #       This does
-
-
+WIN_DKSET(CMAKE_EXE ${shortpath})                     #FIXME: This does not stick
+WIN_DKSET(CMAKE_EXE C:/PROGRA~2/CMake/bin/cmake.exe)  #       This does
 
 LINUX_DKSET(CMAKE_EXE /usr/bin/cmake)
 
