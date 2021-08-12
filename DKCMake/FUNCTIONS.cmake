@@ -102,7 +102,12 @@ function(DKSETENV name value)
 	message(STATUS "DKSETENV(${name} ${value})")
 	if(NOT "$ENV{${name}}" STREQUAL "${value}")
 		message(STATUS "Setting %${name}% environment variable to ${value}")
-		DKEXECUTE_PROCESS(setx ${name} ${value})
+		if(WIN)
+			DKEXECUTE_PROCESS(setx ${name} ${value})
+		endif()
+		if(LINUX)
+			#TODO
+		endif()
 	endif()
 endfunction()
 
