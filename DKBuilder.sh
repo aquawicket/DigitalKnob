@@ -33,6 +33,7 @@ do
 			;;
         "Exit")
 			echo "$opt"
+			goto eof
             break
             ;;
         *) echo "invalid option $REPLY";;
@@ -68,6 +69,7 @@ do
 			;;
         "Exit")
 			echo "$opt"
+			goto eof
             break
             ;;
         *) echo "invalid option $REPLY";;
@@ -90,3 +92,5 @@ chmod +x /home/"$USER"/digitalknob/DK/DKBuilder.sh
 cd /home/"$USER"/digitalknob/DK/DKApps/$APP/$OS/Release
 make $APP
 chmod +x /home/"$USER"/digitalknob/DK/DKApps/$APP/$OS/Release/$APP
+
+#eof#
