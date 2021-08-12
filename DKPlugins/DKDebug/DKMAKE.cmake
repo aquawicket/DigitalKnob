@@ -8,8 +8,10 @@ IF(USE_DKCef)
 	DKDEPEND(DKCef)
 ENDIF()
 
-DKCOPY(${STACKWALKER}/StackWalker/StackWalker.cpp ${DKPLUGINS}/DKDebug/StackWalker.cpp FALSE)
-WIN_INCLUDE(${3RDPARTY}/stackwalker/StackWalker)
+if(WIN)
+	DKCOPY(${STACKWALKER}/StackWalker/StackWalker.cpp ${DKPLUGINS}/DKDebug/StackWalker.cpp FALSE)
+	WIN_INCLUDE(${3RDPARTY}/stackwalker/StackWalker)
+endif()
 
 DKPLUGIN(DKDebug)
 DKASSETS(DKDebug)
