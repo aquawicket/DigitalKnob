@@ -20,8 +20,8 @@ MAC_DKSET(CMAKE_EXE /Applications/CMake.app/Contents/bin/cmake)
 ### INSTALL ###
 if(CMAKE_HOST_WIN32)
 	if(NOT EXISTS ${CMAKE_EXE})
-		DKDOWNLOAD(${CMAKE_DL} ${DIGITALKNOB}/Download)
-		DKCOMMAND(${DIGITALKNOB}/Download/${CMAKE_NAME}.msi)
+		DKDOWNLOAD(${CMAKE_DL} ${DK}/Download)
+		DKCOMMAND(${DK}/Download/${CMAKE_NAME}.msi)
 	endif()
 endif()
 
