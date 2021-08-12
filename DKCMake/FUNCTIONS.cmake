@@ -311,6 +311,8 @@ function(DKLINKDIR path)
 endfunction()
 
 function(dk_makeDirectory path)
+	get_filename_component(path ${path} ABSOLUTE)
+	DUMP(path)
 	message(STATUS "dk_makeDirectory(${path})")
 	file(MAKE_DIRECTORY ${path})
 	string(REPLACE "/" ";" path_list ${path})
