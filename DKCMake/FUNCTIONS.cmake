@@ -413,6 +413,9 @@ function(DKINSTALL url import_path destination_path)
 		if(${extension} STREQUAL ".zip")
 			DKSET(FILETYPE "Archive")
 		endif()
+		if(${extension} STREQUAL ".AppImage")
+			DKSET(FILETYPE "Executable")
+		endif()
 	endif()
 	
 	##If the file type is unknown, we'll still try to extract it like a compressed file anyway

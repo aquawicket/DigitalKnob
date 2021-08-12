@@ -297,6 +297,6 @@ function DKGit_ResetRepository(){
 }
 
 function DKGit_Rename(oldName, newName){
-	CPP_DK_Execute(GIT + " mv "+oldName+" tmp"
-	CPP_DK_Execute(GIT + " mv tmp "+newName
+	CPP_DK_Execute(GIT + " mv "+oldName+" tmp")
+	CPP_DK_Execute(GIT + " mv tmp "+newName)
 }

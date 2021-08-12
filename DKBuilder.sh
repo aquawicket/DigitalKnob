@@ -77,7 +77,9 @@ done
 
 cd /home/"$USER"/digitalknob
 echo Deleteing all CMakeCache.txt files....
-find . -name "*MakeCache.txt" -delete
+find . -name "CMakeCache.*" -delete
+find . -type d -name "CMakeFiles" -delete
+		
 mkdir /home/"$USER"/digitalknob/DK/DKApps/$APP/$OS
 mkdir /home/"$USER"/digitalknob/DK/DKApps/$APP/$OS/Release
 cd /home/"$USER"/digitalknob/DK/DKApps/$APP/$OS/Release
