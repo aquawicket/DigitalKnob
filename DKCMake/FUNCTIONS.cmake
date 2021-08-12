@@ -30,6 +30,12 @@ function(Wait)
 		DKEXECUTE_PROCESS(echo press and key to continue && timeout /t 60 > nul WORKING_DIRECTORY C:/)
 		return()
 	endif()
+	if(CMAKE_HOST_LINUX)
+		DKEXECUTE_PROCESS(read -n 1 -s -r -p "Press any key to continue" WORKING_DIRECTORY C:/)
+		return()
+	endif()
+	
+	
 		message(STATUS "Wait() Not implemented for this platform")
 endfunction()
 
@@ -362,8 +368,8 @@ function(DKINSTALL url import_path destination_path)
 		return()
 	endif()
 
-	DKSET(CURRENT_DIR ${DIGITALKNOB}/Download)
-	dk_makeDirectory(${DIGITALKNOB}/Download)
+	DKSET(CURRENT_DIR ${DKDOWNLOAD})
+	dk_makeDirectory(${DKDOWNLOAD})
 	
 	get_filename_component(filename ${url} NAME)
 	message(STATUS "filename: ${filename}")
