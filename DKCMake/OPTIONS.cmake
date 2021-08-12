@@ -394,8 +394,8 @@ endif()
 
 ##### Unix Makefiles #####
 if(CMAKE_GENERATOR STREQUAL "Unix Makefiles")
-	DKSET(CMAKE_C_FLAGS -fPIC)
-	DKSET(CMAKE_CXX_FLAGS -fPIC)
+	#DKSET(CMAKE_C_FLAGS "-fPIC")
+	DKSET(CMAKE_CXX_FLAGS "-fPIC -std=c++17 -lstdc++fs")
 endif()
 
 

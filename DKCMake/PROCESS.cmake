@@ -891,10 +891,11 @@ if(RASPBERRY)
 	list(APPEND RASPBERRY_LIBS ${OPENGL_LIBRARIES})
 	list(APPEND RASPBERRY_LIBS pthread)
 	list(APPEND RASPBERRY_LIBS dl)
+	list(APPEND RASPBERRY_LIBS libstdc++fs.a)
 	link_directories(/opt/vc/lib)
 	list(APPEND RASPBERRY_LIBS bcm_host)
 	
-	set(CMAKE_CXX_FLAGS "-g -no-pie")
+	set(CMAKE_CXX_FLAGS "-g -no-pie -std=c++17")
 	add_executable(${APP_NAME} ${App_SRC})
 	
 	if(DEBUG)
