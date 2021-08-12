@@ -13,16 +13,18 @@ string(REPLACE "\n" "" CMAKE_EXE ${CMAKE_EXE})
 message("CMAKE_EXE = ${CMAKE_EXE}")
 DKSET(CMAKE_EXE C:/PROGRA~2/CMake/bin/cmake.exe)
 ENDIF()
-#LINUX_DKSET(CMAKE_EXE cmake)
-#MAC_DKSET(CMAKE_EXE cmake)
+
+LINUX_DKSET(CMAKE_EXE /usr/bin/cmake)
+
+MAC_DKSET(CMAKE_EXE /Applications/CMake.app/Contents/bin/cmake)
 
 
 ### INSTALL ###
 if(CMAKE_HOST_WIN32)
-	#if(NOT EXISTS ${CMAKE_EXE})
-	#	DKDOWNLOAD(${CMAKE_DL} ${DIGITALKNOB}/Download)
-	#	DKCOMMAND(${DIGITALKNOB}/Download/${CMAKE_NAME}.msi)
-	#endif()
+	if(NOT EXISTS ${CMAKE_EXE})
+		DKDOWNLOAD(${CMAKE_DL} ${DIGITALKNOB}/Download)
+		DKCOMMAND(${DIGITALKNOB}/Download/${CMAKE_NAME}.msi)
+	endif()
 endif()
 
 if(CMAKE_HOST_MAC)
