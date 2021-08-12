@@ -493,6 +493,8 @@ function(DKEXECUTE_PROCESS fullcmnd)
 	if(NOT ${result} EQUAL 0)
 		if(CMAKE_HOST_WIN32)
 			execute_process(COMMAND timeout /t 2 /nobreak OUTPUT_QUIET WORKING_DIRECTORY ${DIGITALKNOB}) ##wait 2 seconds for the stdout to flush before printing error
+		else()
+			execute_process(COMMAND sleep 2 WORKING_DIRECTORY ${DIGITALKNOB}) ##wait for unix
 		endif()
 		message(FATAL_ERROR "\n\n *** DKEXECUTE_PROCESS(${fullcmnd}): -> returned ${result} *** \n\n")
 	endif()
