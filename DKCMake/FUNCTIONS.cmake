@@ -466,10 +466,18 @@ function(DKINSTALL url import_path destination_path)
 	file(WRITE ${destination_path}/installed "${folder}")
 endfunction()
 
+function(dk_validatePath path result)
+	get_filename_component(path ${path} ABSOLUTE)
+	set(${result} ${path} PARENT_SCOPE)
+endfunction()
 
-function(DKWINSHORTPATH path)
-	get_filename_component(shortpath ${path} ABSOLUTE)  #Get the windows short filepath
-	message(STATUS "SHORTPATH = ${shortpath}")
+function(dk_getShortPath path result)
+	if(CMAKE_HOST_WIN32)
+		execute_process(COMMAND ${DKCMAKE}/getShortPath.cmd ${path} OUTPUT_VARIABLE path WORKING_DIRECTORY ${DIGITALKNOB})
+		string(REPLACE "\\" "/" path ${path})
+		string(REPLACE "\n" "" path ${path})
+		set(${result} ${path} PARENT_SCOPE)
+	endif()
 endfunction()
 
 
