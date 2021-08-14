@@ -1,6 +1,7 @@
 #!/bin/bash
 APP="DKBuilder"
 OS="linux64"
+TYPE="Release"
 
 echo " "
 PS3='Please select an app to build: '
@@ -85,14 +86,14 @@ find . -name "CMakeCache.*" -delete
 rm -rf `find . -type d -name CMakeFiles`
 		
 mkdir /home/"$USER"/digitalknob/DK/DKApps/$APP/$OS
-mkdir /home/"$USER"/digitalknob/DK/DKApps/$APP/$OS/Release
-cd /home/"$USER"/digitalknob/DK/DKApps/$APP/$OS/Release
-rm /home/"$USER"/digitalknob/DK/DKApps/$APP/$OS/Release/CMakeCache.txt
+mkdir /home/"$USER"/digitalknob/DK/DKApps/$APP/$OS/$TYPE
+cd /home/"$USER"/digitalknob/DK/DKApps/$APP/$OS/$TYPE
+rm /home/"$USER"/digitalknob/DK/DKApps/$APP/$OS/$TYPE/CMakeCache.txt
 cmake -G "Unix Makefiles" -DRELEASE=ON -DREBUILDALL=ON -DSTATIC=ON /home/"$USER"/digitalknob/DK
 chmod +x /home/"$USER"/digitalknob/DK/DKBuilder.sh
 
-cd /home/"$USER"/digitalknob/DK/DKApps/$APP/$OS/Release
+cd /home/"$USER"/digitalknob/DK/DKApps/$APP/$OS/$TYPE
 make $APP
-chmod +x /home/"$USER"/digitalknob/DK/DKApps/$APP/$OS/Release/$APP
+chmod +x /home/"$USER"/digitalknob/DK/DKApps/$APP/$OS/$TYPE/$APP
 
 #eof#
