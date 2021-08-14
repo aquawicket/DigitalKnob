@@ -832,8 +832,9 @@ if(LINUX)
 	list(APPEND LINUX_LIBS ${OPENGL_LIBRARIES})
 	list(APPEND LINUX_LIBS pthread)
 	list(APPEND LINUX_LIBS dl)
+	list(APPEND LINUX_LIBS libstdc++fs.a)
 	
-	set(CMAKE_CXX_FLAGS "-g -no-pie")
+	set(CMAKE_CXX_FLAGS "-g -no-pie -std=c++17")
 	add_executable(${APP_NAME} ${App_SRC})
 	
 	if(DEBUG)
