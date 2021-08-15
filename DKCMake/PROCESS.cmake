@@ -6,6 +6,11 @@ if(CMAKE_HOST_UNIX)
 	execute_process(COMMAND sudo echo WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}) #ask for sudo password ahead of time
 endif()
 include(DKCMake/FUNCTIONS.cmake)
+if(CMAKE_HOST_WIN32)
+	DKSET(CMAKE_EXE C:/PROGRA~2/CMake/bin/cmake.exe)
+else()
+	DKSET(CMAKE_EXE /usr/bin/cmake)
+endif()
 include(DKCMake/OPTIONS.cmake)
 include(DKCMake/DISABLED.cmake)
 get_filename_component(APP_NAME ${DKPROJECT} NAME)
@@ -446,7 +451,7 @@ include_directories(${DKPROJECT})
 
 ##########
 if(WIN_32)
-	if(USE_DKAssets)
+	#if(USE_DKAssets)
 		# copy the icon to assets
 		DKCOPY(${DKPROJECT}/icons/windows/icon.ico ${DKPROJECT}/assets/icon.ico TRUE)
 	
@@ -474,7 +479,7 @@ if(WIN_32)
 		# Restore the backed up files, excluded from assets
 		DKCOPY(${DKPROJECT}/Backup ${DKPROJECT}/assets TRUE)
 		DKREMOVE(${DKPROJECT}/Backup)
-	endif()
+#endif()
 	
 	## Create Icon files for project
 	if(IMAGEMAGICK_CONVERT)
@@ -486,6 +491,7 @@ if(WIN_32)
 	
 	set(CMAKE_CXX_STANDARD 17)
 	add_definitions(-D_USING_V110_SDK71_)
+	DUMP(App_SRC)
 	add_executable(${APP_NAME} WIN32 ${App_SRC})
 	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${WIN_LIBS})
 	##set_source_files_properties(${DK}/stdafx.cpp PROPERTIES COMPILE_FLAGS "/Ycstdafx.h")
