@@ -901,12 +901,15 @@ if(RASPBERRY)
 	list(APPEND RASPBERRY_LIBS bcm_host)
 	
 	set(CMAKE_CXX_FLAGS "-g -no-pie -std=c++17")
-	add_executable(${APP_NAME} ${App_SRC})
+	
 	
 	if(DEBUG)
 		add_definitions(-DDEBUG)
-		target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RASPBERRY_LIBS})
-	else()
+		add_executable(${APP_NAME}_d ${App_SRC})
+		target_link_libraries(${APP_NAME}_d ${DEBUG_LIBS} ${RASPBERRY_LIBS})
+	endif()
+	if(RELEASE)
+		add_executable(${APP_NAME} ${App_SRC})
 		target_link_libraries(${APP_NAME} ${RELEASE_LIBS} ${RASPBERRY_LIBS})
 	endif()
 endif()
