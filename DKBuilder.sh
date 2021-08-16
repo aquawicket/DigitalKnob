@@ -34,7 +34,7 @@ do
 			;;
         "Exit")
 			echo "$opt"
-			goto eof
+			Exit 0
             break
             ;;
         *) echo "invalid option $REPLY";;
@@ -70,7 +70,7 @@ do
 			;;
         "Exit")
 			echo "$opt"
-			goto eof
+			Exit 0
             break
             ;;
         *) echo "invalid option $REPLY";;
