@@ -13,7 +13,7 @@ endif(COMMAND cmake_policy)
 ###############################################################
 get_filename_component(DIGITALKNOB ${CMAKE_SOURCE_DIR} ABSOLUTE)
 DKSET(DKPATH ${DIGITALKNOB}/..)
-
+get_filename_component(DKPATH ${DKPATH} ABSOLUTE)
 DKSET(DKCMAKE ${DIGITALKNOB}/DKCMake)
 DKSET(DKPLUGINS ${DIGITALKNOB}/DKPlugins)
 DKSET(3RDPARTY ${DIGITALKNOB}/3rdParty)

@@ -37,7 +37,7 @@ function(Wait)
 	message(STATUS "Wait() Not implemented for this platform")
 endfunction()
 
-## DUMP(<variable_name>)
+##DUMP(<variable_name>)
 function(DUMP dmpvar)
 	message(STATUS "\n\n")
 	message(STATUS "${dmpvar} = ${${dmpvar}}")
@@ -312,9 +312,14 @@ endfunction()
 
 function(dk_makeDirectory path)
 	message(STATUS "dk_makeDirectory(${path})")
-	file(MAKE_DIRECTORY ${path})
+	
+	##get_filename_component(path ${path} ABSOLUTE)
+	##file(MAKE_DIRECTORY ${path})
+	
 	string(REPLACE "/" ";" path_list ${path})
 	foreach(item ${path_list})
+		string(REPLACE "home" "/home" item ${item})
+		#DUMP(item)
 		if(path2)
 			set(path2 "${path2}/${item}")
 			if(NOT EXISTS ${path2})
@@ -465,6 +470,7 @@ function(DKINSTALL url import_path destination_path)
 	DKCOPY(${DKIMPORTS}/${import_path}/ ${destination_path}/ TRUE)
 	file(WRITE ${destination_path}/installed "${folder}")
 endfunction()
+
 
 function(dk_validatePath path result)
 	get_filename_component(path ${path} ABSOLUTE)
