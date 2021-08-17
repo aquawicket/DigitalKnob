@@ -1,11 +1,14 @@
 if(DK_PROCESS_INCLUDED)
   return()
 endif()
-set(DK_PROCESS_INCLUDED true)
+set(DK_PROCESS_INCLUDED true
+
 if(CMAKE_HOST_UNIX)
 	execute_process(COMMAND sudo echo WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}) #ask for sudo password ahead of time
 endif()
 
+include(DKCMake/FUNCTIONS.cmake)
+include(DKCMake/OPTIONS.cmake)
 WIN_DKSET(CMAKE_EXE C:/PROGRA~2/CMake/bin/cmake.exe) 
 MAC_DKSET(CMAKE_EXE /Applications/CMake.app/Contents/bin/cmake)
 LINUX_DKSET(CMAKE_EXE /usr/bin/cmake)
