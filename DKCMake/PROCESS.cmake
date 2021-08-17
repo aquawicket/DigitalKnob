@@ -5,13 +5,11 @@ set(DK_PROCESS_INCLUDED true)
 if(CMAKE_HOST_UNIX)
 	execute_process(COMMAND sudo echo WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}) #ask for sudo password ahead of time
 endif()
-include(DKCMake/FUNCTIONS.cmake)
-if(CMAKE_HOST_WIN32)
-	DKSET(CMAKE_EXE C:/PROGRA~2/CMake/bin/cmake.exe)
-else()
-	DKSET(CMAKE_EXE /usr/bin/cmake)
-endif()
-include(DKCMake/OPTIONS.cmake)
+
+WIN_DKSET(CMAKE_EXE C:/PROGRA~2/CMake/bin/cmake.exe) 
+MAC_DKSET(CMAKE_EXE /Applications/CMake.app/Contents/bin/cmake)
+LINUX_DKSET(CMAKE_EXE /usr/bin/cmake)
+
 include(DKCMake/DISABLED.cmake)
 get_filename_component(APP_NAME ${DKPROJECT} NAME)
 string(REPLACE " " "_" APP_NAME ${APP_NAME})
@@ -841,14 +839,14 @@ if(LINUX)
 	list(APPEND LINUX_LIBS libstdc++fs.a)
 	
 	set(CMAKE_CXX_FLAGS "-g -no-pie -std=c++17")
-	add_executable(${APP_NAME} ${App_SRC})
-	
+
 	if(DEBUG)
-		message(STATUS "${DEBUG_LIBS}")
 		add_definitions(-DDEBUG)
+		add_executable(${APP_NAME} ${App_SRC})
 		target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${LINUX_LIBS})
-	else()
-		message(STATUS "${RELEASE_LIBS}")
+	endif()
+	if(RELEASE)
+		add_executable(${APP_NAME} ${App_SRC})
 		target_link_libraries(${APP_NAME} ${RELEASE_LIBS} ${LINUX_LIBS})
 	endif()
 endif()
@@ -903,15 +901,20 @@ if(RASPBERRY)
 	list(APPEND RASPBERRY_LIBS bcm_host)
 	
 	set(CMAKE_CXX_FLAGS "-g -no-pie -std=c++17")
-	add_executable(${APP_NAME} ${App_SRC})
+	
 	
 	if(DEBUG)
 		add_definitions(-DDEBUG)
+		add_executable(${APP_NAME} ${App_SRC})
 		target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RASPBERRY_LIBS})
-	else()
+	endif()
+	if(RELEASE)
+		add_executable(${APP_NAME} ${App_SRC})
 		target_link_libraries(${APP_NAME} ${RELEASE_LIBS} ${RASPBERRY_LIBS})
 	endif()
 endif()
+
+
 
 if(ANDROID)
 	# remove files not needed for android

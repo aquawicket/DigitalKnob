@@ -1,14 +1,15 @@
 #!/bin/bash
 APP="DKBuilder"
 OS="linux64"
+TYPE="Release"
 
 echo " "
 PS3='Please select an app to build: '
-options=("UPDATE" "DKBuilder" "DKSDLRmlUi" "DKTestAll" "Exit")
+options=("Git Update" "DKBuilder" "DKSDLRmlUi" "DKTestAll" "Exit")
 select opt in "${options[@]}"
 do
     case $opt in
-        "UPDATE")
+        "Git Update")
 			echo "$opt"
 			git clone https://github.com/aquawicket/DigitalKnob.git /home/"$USER"/digitalknob/DK
 			cd /home/"$USER"/digitalknob/DK
@@ -33,8 +34,7 @@ do
 			;;
         "Exit")
 			echo "$opt"
-			goto eof
-            break
+			exit 0
             ;;
         *) echo "invalid option $REPLY";;
     esac 
@@ -69,8 +69,7 @@ do
 			;;
         "Exit")
 			echo "$opt"
-			goto eof
-            break
+			exit 0
             ;;
         *) echo "invalid option $REPLY";;
     esac 
@@ -80,17 +79,14 @@ done
 cd /home/"$USER"/digitalknob
 echo Deleteing all CMakeCache.txt files....
 find . -name "CMakeCache.*" -delete
-find . -type d -name "CMakeFiles" -delete
+rm -rf `find . -type d -name CMakeFiles`
 		
 mkdir /home/"$USER"/digitalknob/DK/DKApps/$APP/$OS
-mkdir /home/"$USER"/digitalknob/DK/DKApps/$APP/$OS/Release
-cd /home/"$USER"/digitalknob/DK/DKApps/$APP/$OS/Release
-rm /home/"$USER"/digitalknob/DK/DKApps/$APP/$OS/Release/CMakeCache.txt
+mkdir /home/"$USER"/digitalknob/DK/DKApps/$APP/$OS/$TYPE
+cd /home/"$USER"/digitalknob/DK/DKApps/$APP/$OS/$TYPE
 cmake -G "Unix Makefiles" -DRELEASE=ON -DREBUILDALL=ON -DSTATIC=ON /home/"$USER"/digitalknob/DK
 chmod +x /home/"$USER"/digitalknob/DK/DKBuilder.sh
 
-cd /home/"$USER"/digitalknob/DK/DKApps/$APP/$OS/Release
+cd /home/"$USER"/digitalknob/DK/DKApps/$APP/$OS/$TYPE
 make $APP
-chmod +x /home/"$USER"/digitalknob/DK/DKApps/$APP/$OS/Release/$APP
-
-#eof#
+chmod +x /home/"$USER"/digitalknob/DK/DKApps/$APP/$OS/$TYPE/$APP

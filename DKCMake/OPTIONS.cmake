@@ -11,11 +11,12 @@ endif(COMMAND cmake_policy)
 #########################################################################
 ## Set variables for paths
 ###############################################################
-get_filename_component(DK ${CMAKE_SOURCE_DIR} ABSOLUTE)
-get_filename_component(DIGITALKNOB "${DK}/.." ABSOLUTE)
-DKSET(DKCMAKE ${DK}/DKCMake)
-DKSET(DKPLUGINS ${DK}/DKPlugins)
-DKSET(3RDPARTY ${DK}/3rdParty)
+get_filename_component(DIGITALKNOB ${CMAKE_SOURCE_DIR} ABSOLUTE)
+DKSET(DKPATH ${DIGITALKNOB}/..)
+get_filename_component(DKPATH ${DKPATH} ABSOLUTE)
+DKSET(DKCMAKE ${DIGITALKNOB}/DKCMake)
+DKSET(DKPLUGINS ${DIGITALKNOB}/DKPlugins)
+DKSET(3RDPARTY ${DIGITALKNOB}/3rdParty)
 DKSET(DKIMPORTS ${3RDPARTY}/_DKIMPORTS)
 DKSET(DKDOWNLOAD ${DK}/Download)
 DKSET(DKWEB http://127.0.0.1)

@@ -5,14 +5,14 @@ DKSET(CMAKE_VERSION 3.21.1)
 DKSET(CMAKE_NAME cmake-${CMAKE_VERSION}-windows-i386)
 WIN_DKSET(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v${CMAKE_VERSION}/${CMAKE_NAME}.msi)
 WIN_DKSET(CMAKE "C:/Program Files (x86)/CMake/bin")
+
 #WIN_DKSET(CMAKE_EXE "C:/Program Files (x86)/CMake/bin/cmake.exe")
-#dk_getShortPath(${CMAKE_EXE} CMAKE_EXE)#shortpath)          
-#WIN_DKSET(CMAKE_EXE ${shortpath})                     #FIXME: This does not stick
-#WIN_DKSET(CMAKE_EXE C:/PROGRA~2/CMake/bin/cmake.exe)   #       But This does
+#dk_getShortPath(${CMAKE_EXE} shortpath)          
+#DKSET(CMAKE_EXE ${shortpath})                     #FIXME: This does not stick
 
-#LINUX_DKSET(CMAKE_EXE /usr/bin/cmake)
-
-#MAC_DKSET(CMAKE_EXE /Applications/CMake.app/Contents/bin/cmake)
+WIN_DKSET(CMAKE_EXE C:/PROGRA~2/CMake/bin/cmake.exe)  #       This does
+MAC_DKSET(CMAKE_EXE /Applications/CMake.app/Contents/bin/cmake)
+LINUX_DKSET(CMAKE_EXE /usr/bin/cmake)
 
 
 ### INSTALL ###
