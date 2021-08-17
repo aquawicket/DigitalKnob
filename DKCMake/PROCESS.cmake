@@ -2,15 +2,14 @@ if(DK_PROCESS_INCLUDED)
   return()
 endif()
 set(DK_PROCESS_INCLUDED true)
-
-include(DKCMake/FUNCTIONS.cmake)
-include(DKCMake/OPTIONS.cmake)
 if(CMAKE_HOST_UNIX)
-	DKEXECUTE_PROCESS(sudo echo WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}) #ask for sudo password ahead of time
+	execute_process(COMMAND sudo echo WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}) #ask for sudo password ahead of time
 endif()
-WIN_DKSET(CMAKE_EXE C:/PROGRA~2/CMake/bin/cmake.exe)  #       This does
+
+WIN_DKSET(CMAKE_EXE C:/PROGRA~2/CMake/bin/cmake.exe) 
 MAC_DKSET(CMAKE_EXE /Applications/CMake.app/Contents/bin/cmake)
 LINUX_DKSET(CMAKE_EXE /usr/bin/cmake)
+
 include(DKCMake/DISABLED.cmake)
 get_filename_component(APP_NAME ${DKPROJECT} NAME)
 string(REPLACE " " "_" APP_NAME ${APP_NAME})
@@ -36,6 +35,7 @@ message(STATUS "CMAKE_HOST_SYSTEM_PROCESSOR:   ${CMAKE_HOST_SYSTEM_PROCESSOR}")
 message(STATUS "CMAKE_LIBRARY_ARCHITECTURE:    ${CMAKE_LIBRARY_ARCHITECTURE}")
 message(STATUS "ENV(USERNAME):                 $ENV{USERNAME}")
 message(STATUS "DIGITALKNOB:                   ${DIGITALKNOB}")
+message(STATUS "DK:                            ${DK}")
 message(STATUS "3RDPARTY:                      ${3RDPARTY}")
 message(STATUS "DKPLUGINS:                     ${DKPLUGINS}")
 message(STATUS "\n")
@@ -449,7 +449,7 @@ include_directories(${DKPROJECT})
 
 ##########
 if(WIN_32)
-	if(USE_DKAssets)
+	#if(USE_DKAssets)
 		# copy the icon to assets
 		DKCOPY(${DKPROJECT}/icons/windows/icon.ico ${DKPROJECT}/assets/icon.ico TRUE)
 	
@@ -477,7 +477,7 @@ if(WIN_32)
 		# Restore the backed up files, excluded from assets
 		DKCOPY(${DKPROJECT}/Backup ${DKPROJECT}/assets TRUE)
 		DKREMOVE(${DKPROJECT}/Backup)
-	endif()
+#endif()
 	
 	## Create Icon files for project
 	if(IMAGEMAGICK_CONVERT)
@@ -489,9 +489,10 @@ if(WIN_32)
 	
 	set(CMAKE_CXX_STANDARD 17)
 	add_definitions(-D_USING_V110_SDK71_)
+	DUMP(App_SRC)
 	add_executable(${APP_NAME} WIN32 ${App_SRC})
 	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${WIN_LIBS})
-	##set_source_files_properties(${DIGITALKNOB}/stdafx.cpp PROPERTIES COMPILE_FLAGS "/Ycstdafx.h")
+	##set_source_files_properties(${DK}/stdafx.cpp PROPERTIES COMPILE_FLAGS "/Ycstdafx.h")
 	
 	list(APPEND DEBUG_LINK_FLAGS /MANIFEST:NO)
 	list(APPEND DEBUG_LINK_FLAGS /MANIFESTUAC:NO)
@@ -566,7 +567,7 @@ if(WIN_64)
 	set(CMAKE_CXX_STANDARD 17)
 	add_executable(${APP_NAME}_64 WIN32 ${App_SRC})
 	target_link_libraries(${APP_NAME}_64 ${DEBUG_LIBS} ${RELEASE_LIBS} ${WIN_LIBS})
-	##set_source_files_properties(${DIGITALKNOB}/stdafx.cpp PROPERTIES COMPILE_FLAGS "/Ycstdafx.h")
+	##set_source_files_properties(${DK}/stdafx.cpp PROPERTIES COMPILE_FLAGS "/Ycstdafx.h")
 	
 	list(APPEND DEBUG_LINK_FLAGS /MANIFESTUAC:NO)
 	list(APPEND DEBUG_LINK_FLAGS /level='highestAvailable')
@@ -635,7 +636,7 @@ if(MAC)
 	FIND_LIBRARY(CA CoreAudio)
 	FIND_LIBRARY(CV CoreVideo)
 	FIND_LIBRARY(IO IOKit)
-	FIND_LIBRARY(GL OpenGL)
+	FIND_LIBRARY(GL OpenGL) #TODO: move to 3rdParty/opengl
 	FIND_LIBRARY(FF ForceFeedback)
 	FIND_LIBRARY(AK AppKit)
 	
@@ -692,7 +693,7 @@ if(IOS)
 		CoreGraphics
 	   	QuartzCore
 		UIKit
-	    OpenGLES
+	    OpenGLES #TODO: move to 3rdParty/opengl
 		ImageIO
 		MobileCoreServices
 	)
@@ -761,7 +762,7 @@ if(IOSSIM)
 		CoreGraphics
 	   	QuartzCore
 		UIKit
-	    OpenGLES
+	    OpenGLES #TODO: move to 3rdParty/opengl
 		ImageIO
 		MobileCoreServices
 	)
@@ -824,22 +825,21 @@ if(LINUX)
 	DKREMOVE(${DKPROJECT}/Backup)
 
 	set(CMAKE_CXX_STANDARD 17)
-	find_package(OpenGL REQUIRED)
-	include_directories(${OpenGL_INCLUDE_DIRS})
-	link_directories(${OpenGL_LIBRARY_DIRS})
-	add_definitions(${OpenGL_DEFINITIONS})
-	if(NOT OPENGL_FOUND)
-    	message(FATAL_ERROR "OPENGL not found!")
-	endif()
+	#find_package(OpenGL REQUIRED)
+	#include_directories(${OpenGL_INCLUDE_DIRS})
+	#link_directories(${OpenGL_LIBRARY_DIRS})
+	#add_definitions(${OpenGL_DEFINITIONS})
+	#if(NOT OPENGL_FOUND)
+    #	message(FATAL_ERROR "OPENGL not found!")
+	#endif()
 	
-	list(APPEND LINUX_LIBS ${OPENGL_LIBRARIES})
+	#list(APPEND LINUX_LIBS ${OPENGL_LIBRARIES})
 	list(APPEND LINUX_LIBS pthread)
 	list(APPEND LINUX_LIBS dl)
 	list(APPEND LINUX_LIBS libstdc++fs.a)
 	
 	set(CMAKE_CXX_FLAGS "-g -no-pie -std=c++17")
-	
-	
+
 	if(DEBUG)
 		add_definitions(-DDEBUG)
 		add_executable(${APP_NAME} ${App_SRC})
@@ -885,15 +885,15 @@ if(RASPBERRY)
 
 
 	set(CMAKE_CXX_STANDARD 17)
-    find_package(OpenGL REQUIRED)
-	include_directories(${OpenGL_INCLUDE_DIRS})
-	link_directories(${OpenGL_LIBRARY_DIRS})
-	add_definitions(${OpenGL_DEFINITIONS})
-	if(NOT OPENGL_FOUND)
-    	message(FATAL_ERROR "OPENGL not found!")
-	endif()
+    #find_package(OpenGL REQUIRED)
+	#include_directories(${OpenGL_INCLUDE_DIRS})
+	#link_directories(${OpenGL_LIBRARY_DIRS})
+	#add_definitions(${OpenGL_DEFINITIONS})
+	#if(NOT OPENGL_FOUND)
+    #	message(FATAL_ERROR "OPENGL not found!")
+	#endif()
 	
-	list(APPEND RASPBERRY_LIBS ${OPENGL_LIBRARIES})
+	#list(APPEND RASPBERRY_LIBS ${OPENGL_LIBRARIES})
 	list(APPEND RASPBERRY_LIBS pthread)
 	list(APPEND RASPBERRY_LIBS dl)
 	list(APPEND RASPBERRY_LIBS libstdc++fs.a)
@@ -956,8 +956,8 @@ if(ANDROID)
 	#set(CMAKE_ANDROID_STL_TYPE c++_static)
 	
 	list(APPEND ANDROID_LIBS dl)
-	list(APPEND ANDROID_LIBS GLESv1_CM)
-	list(APPEND ANDROID_LIBS GLESv2)
+	#list(APPEND ANDROID_LIBS GLESv1_CM)
+	#list(APPEND ANDROID_LIBS GLESv2)
 	list(APPEND ANDROID_LIBS log)
 	list(APPEND ANDROID_LIBS android)
 
