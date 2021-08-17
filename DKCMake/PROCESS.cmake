@@ -564,6 +564,7 @@ if(WIN_64)
 	endif()
 	
 	set(CMAKE_CXX_STANDARD 17)
+	#set(CMAKE_CXX_FLAGS /MACHINE:X64)
 	add_executable(${APP_NAME}_64 WIN32 ${App_SRC})
 	target_link_libraries(${APP_NAME}_64 ${DEBUG_LIBS} ${RELEASE_LIBS} ${WIN_LIBS})
 	##set_source_files_properties(${DIGITALKNOB}/stdafx.cpp PROPERTIES COMPILE_FLAGS "/Ycstdafx.h")
