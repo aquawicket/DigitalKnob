@@ -9,6 +9,8 @@
 # https://dl.google.com/android/repository/commandlinetools-mac-7302050_latest.zip
 # https://dl.google.com/android/repository/commandlinetools-linux-7302050_latest.zip
 
+### DEPENDS ###
+DKDEPEND(jdk)
 
 ### VERSION ###
 DKSET(ANDROIDTOOLS ${3RDPARTY}/android-cmdline-tools)
