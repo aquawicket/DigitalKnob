@@ -14,7 +14,7 @@ set(dkdepend_disable_list "" CACHE INTERNAL "")
 # MyFunc("ABC" "123" 5 myResult)
 # message(STATUS "return value = ${myResult}") # should print->  return value = ABC;123;5
 function(MyFunc args result)
-	set(args ${args} ${result} ${ARGN})
+	set(args ${ARGV})
 	list(GET args -1 result)
 	list(REMOVE_AT args -1)
 	
