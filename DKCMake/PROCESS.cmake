@@ -4,6 +4,7 @@ endif()
 set(DK_PROCESS_INCLUDED true)
 
 include(DKCMake/FUNCTIONS.cmake)
+
 include(DKCMake/OPTIONS.cmake)
 WIN_DKSET(CMAKE_EXE C:/PROGRA~2/CMake/bin/cmake.exe)  #       This does
 MAC_DKSET(CMAKE_EXE /Applications/CMake.app/Contents/bin/cmake)

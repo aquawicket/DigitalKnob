@@ -159,6 +159,7 @@ endif()
 
 if(RASPBERRY)
 	DISABLE_DKDEPEND(android-build-tools)
+	DISABLE_DKDEPEND(android-studio)
 	DISABLE_DKDEPEND(bzip2-win-build)
 	DISABLE_DKDEPEND(cef_binary)
 	DISABLE_DKDEPEND(cef_binary_linux64)
