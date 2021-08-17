@@ -30,6 +30,7 @@ function DKBuildConsole_end() {
 }
 
 function DKBuildConsole_ChooseUpdate() {
+	UPDATE = "1"
     console.log("\n")
     console.log("**** Update DigitalKnob ??? ****")
     console.log("Y. Update")
@@ -41,7 +42,7 @@ function DKBuildConsole_ChooseUpdate() {
 	if(CPP_DKFile_Exists(assets+"cache.txt")){
 		const cache = CPP_DKFile_FileToString(assets+"cache.txt")
 		if(cache){
-			const cache_json = JSON.parse(cache);
+			const cache_json = JSON.parse(cache)
 			console.log("ENTER: "+cache_json.APP+" -> "+cache_json.OS+" -> "+cache_json.TYPE+" -> "+cache_json.LEVEL)
 		}
 	}
@@ -58,39 +59,46 @@ function DKBuildConsole_ChooseUpdate() {
     //console.log("Key pressed: "+String(key)+"")
     
 	//Esc
-	if (key === 27)
+	if (key === 27){
         CPP_DK_Exit()
+		UPDATE = ""
+	}
 	//Spacebar
 	if(key === 13){
 		OS = cache_json.OS
 	    APP = cache_json.APP
 		TYPE = cache_json.TYPE
 		LEVEL = cache_json.LEVEL
+		UPDATE = ""
 	}
 	//y key
     if (key === 121) {
         CPP_DK_Create("DKGit/DKGit.js")
         DKGit_GitUpdate()
+		UPDATE = ""
     }
 	//c key
     if (key === 99) {
         CPP_DK_Create("DKGit/DKGit.js")
         DKGit_GitCommit()
+		UPDATE = ""
     }
 	//r key
     if (key === 114) { 
         DKBuild_ResetAppsPlugins()
         DKGit_GitUpdate()
+		UPDATE = ""
     }
 	//x key
     if (key === 120) {
         DKBuild_Reset3rdParty()
         DKBuild_ResetAppsPlugins()
         DKGit_GitUpdate()
+		UPDATE = ""
     }
 	if (key === 122){ //Clear Cmake Cache
-		console.log("Clearing CMake cache . . .");
-		CPP_DKFile_ChDir(DKPATH);
+		console.log("Clearing CMake cache . . .")
+		CPP_DKFile_ChDir(DKPATH)
 		if(CPP_DK_GetOS() === "Windows"){
 			CPP_DK_Execute("cmd /c for /r %i in (CMakeCache.*) do del \"%i\"")
 			CPP_DK_Execute("cmd /c for /d /r %i in (*CMakeFiles*) do rmdir /s /Q \"%i\"")
@@ -99,7 +107,9 @@ function DKBuildConsole_ChooseUpdate() {
 			//CPP_DK_Execute("find . -type d -name \"CMakeFiles\" -delete")
 			CPP_DK_Execute("rm -rf `find . -type d -name CMakeFiles`")
 		}
+		UPDATE = ""
 	}
+	
 }
 
 function DKBuildConsole_SelectOs() {
@@ -212,11 +222,14 @@ function DKBuildConsole_SelectType() {
 }
 
 function DKBuildConsole_Process() {
+	UPDATE = ""
     OS = ""
     APP = ""
     TYPE = ""
     LEVEL = "RebuildAll"
-    DKBuildConsole_ChooseUpdate()
+	while (UPDATE === "") {
+        DKBuildConsole_ChooseUpdate()
+    }
     if (!CPP_DKFile_Exists(DKPATH)) {
         console.error("ERROR: can't find " + DKPATH + " ")
         CPP_DK_GetKey()

@@ -1,4 +1,5 @@
 //CPP_DK_Execute("cmd /c echo press and key to continue && timeout /t 60 > nul") //Wait for key or 1 minute
+let UPDATE = "" //allow the first screen to loop
 let OS = ""   //win32,win64,mac32,mac64,linux32,linux64,ios32,ios64,iossim32,iossim64,android32,android64,raspberry32,raspberry64 
 let APP = ""  //DKAppname
 let TYPE = ""  //Debug, Release, ALL
