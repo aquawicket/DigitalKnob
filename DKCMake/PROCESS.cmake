@@ -1,7 +1,7 @@
 if(DK_PROCESS_INCLUDED)
   return()
 endif()
-set(DK_PROCESS_INCLUDED true
+set(DK_PROCESS_INCLUDED true)
 
 if(CMAKE_HOST_UNIX)
 	execute_process(COMMAND sudo echo WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}) #ask for sudo password ahead of time
