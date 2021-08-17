@@ -1,4 +1,5 @@
 # https://sourceforge.net/projects/opencvlibrary/files/opencv-unix/3.4.1/opencv-3.4.1.zip
+# https://github.com/opencv/opencv/archive/refs/tags/4.5.3.zip
 
 ### DEPENDS ###
 DKDEPEND(libjpeg-turbo)
@@ -7,9 +8,14 @@ DKDEPEND(libpng)
 
 
 ### VERSION ###
-DKSET(OPENCV_VERSION 3.4.1)
+DKSET(OPENCV_MAJOR 4)
+DKSET(OPENCV_MINOR 5)
+DKSET(OPENCV_BUILD 3)
+#DKSET(OPENCV_VERSION 3.4.1)
+DKSET(OPENCV_VERSION 4.5.3)
 DKSET(OPENCV_NAME opencv-${OPENCV_VERSION})
-DKSET(OPENCV_DL https://sourceforge.net/projects/opencvlibrary/files/opencv-unix/${OPENCV_VERSION}/${OPENCV_NAME}.zip)
+#DKSET(OPENCV_DL https://sourceforge.net/projects/opencvlibrary/files/opencv-unix/${OPENCV_VERSION}/${OPENCV_NAME}.zip)
+DKSET(OPENCV_DL https://github.com/opencv/opencv/archive/refs/tags/${OPENCV_VERSION}.zip)
 DKSET(OPENCV ${3RDPARTY}/${OPENCV_NAME})
 
 
@@ -25,14 +31,14 @@ DKINCLUDE(${OPENCV}/${OS})
 DKINCLUDE(${OPENCV}/${OS}/${DEBUG_DIR})
 DKINCLUDE(${OPENCV}/${OS}/${RELEASE_DIR})
 
-WIN_DEBUG_LIB(${OPENCV}/${OS}/lib/${DEBUG_DIR}/opencv_core341d.lib)
-WIN_RELEASE_LIB(${OPENCV}/${OS}/lib/${RELEASE_DIR}/opencv_core341.lib)
-WIN_DEBUG_LIB(${OPENCV}/${OS}/lib/${DEBUG_DIR}/opencv_imgcodecs341d.lib)
-WIN_RELEASE_LIB(${OPENCV}/${OS}/lib/${RELEASE_DIR}/opencv_imgcodecs341.lib)
-WIN_DEBUG_LIB(${OPENCV}/${OS}/lib/${DEBUG_DIR}/opencv_imgproc341d.lib)
-WIN_RELEASE_LIB(${OPENCV}/${OS}/lib/${RELEASE_DIR}/opencv_imgproc341.lib)
-WIN_DEBUG_LIB(${OPENCV}/${OS}/lib/${DEBUG_DIR}/opencv_videoio341d.lib)
-WIN_RELEASE_LIB(${OPENCV}/${OS}/lib/${RELEASE_DIR}/opencv_videoio341.lib)
+WIN_DEBUG_LIB(${OPENCV}/${OS}/lib/${DEBUG_DIR}/opencv_core${OPENCV_MAJOR}${OPENCV_MINOR}${OPENCV_BUILD}d.lib)
+WIN_RELEASE_LIB(${OPENCV}/${OS}/lib/${RELEASE_DIR}/opencv_core${OPENCV_MAJOR}${OPENCV_MINOR}${OPENCV_BUILD}.lib)
+WIN_DEBUG_LIB(${OPENCV}/${OS}/lib/${DEBUG_DIR}/opencv_imgcodecs${OPENCV_MAJOR}${OPENCV_MINOR}${OPENCV_BUILD}d.lib)
+WIN_RELEASE_LIB(${OPENCV}/${OS}/lib/${RELEASE_DIR}/opencv_imgcodecs${OPENCV_MAJOR}${OPENCV_MINOR}${OPENCV_BUILD}.lib)
+WIN_DEBUG_LIB(${OPENCV}/${OS}/lib/${DEBUG_DIR}/opencv_imgproc${OPENCV_MAJOR}${OPENCV_MINOR}${OPENCV_BUILD}d.lib)
+WIN_RELEASE_LIB(${OPENCV}/${OS}/lib/${RELEASE_DIR}/opencv_imgproc${OPENCV_MAJOR}${OPENCV_MINOR}${OPENCV_BUILD}.lib)
+WIN_DEBUG_LIB(${OPENCV}/${OS}/lib/${DEBUG_DIR}/opencv_videoio${OPENCV_MAJOR}${OPENCV_MINOR}${OPENCV_BUILD}d.lib)
+WIN_RELEASE_LIB(${OPENCV}/${OS}/lib/${RELEASE_DIR}/opencv_videoio${OPENCV_MAJOR}${OPENCV_MINOR}${OPENCV_BUILD}.lib)
 WIN_DEBUG_LIB(${OPENCV}/${OS}/3rdparty/lib/${DEBUG_DIR}/libjasperd.lib)
 WIN_RELEASE_LIB(${OPENCV}/${OS}/3rdparty/lib/${RELEASE_DIR}/libjasper.lib)
 WIN_DEBUG_LIB(${OPENCV}/${OS}/3rdparty/lib/${DEBUG_DIR}/ippiwd.lib)
@@ -149,7 +155,7 @@ ANDROID_RELEASE_LIB(${OPENCV}/${OS}/lib/${RELEASE_DIR}/libopencv_videoio.a)
 ### COMPILE ###
 WIN_PATH(${OPENCV}/${OS})
 WIN32_COMMAND(${DKCMAKE_WIN32} ${OPENCV})
-WIN64_COMMAND(${DKCMAKE_WIN64} ${OPENCV})
+WIN64_COMMAND(${DKCMAKE_WIN64} -DCV_DISABLE_OPTIMIZATION=ON -DCPU_BASELINE="" -DCPU_DISPATCH="" ${OPENCV})
 WIN_VS(${OPENCV_NAME} OpenCV.sln)
 
 
