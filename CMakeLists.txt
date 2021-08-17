@@ -10,7 +10,7 @@
 ### Build All - (don't erase cmake files, but build the app and it's dependencies)
 ### Rebeuild All - (erase all cmake files, and build the app and it's dependencies)
 if(CMAKE_HOST_UNIX)
-	execute_process(COMAND sudo echo WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}) #ask for sudo password ahead of time
+	execute_process(COMMAND sudo echo WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}) #ask for sudo password ahead of time
 endif()
 
 CMAKE_MINIMUM_REQUIRED(VERSION 3.4)
