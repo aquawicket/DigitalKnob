@@ -1,4 +1,6 @@
-## https://www.libsdl.org/projects/SDL_ttf/
+# https://www.libsdl.org/projects/SDL_ttf/
+#
+# https://www.libsdl.org/projects/SDL_ttf/release/SDL2_ttf-2.0.15.zip
 
 ### DEPENDS ###
 DKDEPEND(sdl2)
@@ -11,8 +13,8 @@ DKSET(SDLTTF_NAME SDL2_ttf-${SDLTTF_VERSION})
 DKSET(SDLTTF ${3RDPARTY}/${SDLTTF_NAME})
 
 
+
 ### INSTALL ###
-## https://www.libsdl.org/projects/SDL_ttf/release/SDL2_ttf-2.0.15.zip
 DKINSTALL(https://www.libsdl.org/projects/SDL_ttf/release/${SDLTTF_NAME}.zip sdl2_ttf ${SDLTTF})
 
 
