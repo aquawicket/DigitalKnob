@@ -842,8 +842,8 @@ if(LINUX)
 	
 	if(DEBUG)
 		add_definitions(-DDEBUG)
-		add_executable(${APP_NAME}_d ${App_SRC})
-		target_link_libraries(${APP_NAME}_d ${DEBUG_LIBS} ${LINUX_LIBS})
+		add_executable(${APP_NAME} ${App_SRC})
+		target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${LINUX_LIBS})
 	endif()
 	if(RELEASE)
 		add_executable(${APP_NAME} ${App_SRC})
@@ -913,6 +913,8 @@ if(RASPBERRY)
 		target_link_libraries(${APP_NAME} ${RELEASE_LIBS} ${RASPBERRY_LIBS})
 	endif()
 endif()
+
+
 
 if(ANDROID)
 	# remove files not needed for android
