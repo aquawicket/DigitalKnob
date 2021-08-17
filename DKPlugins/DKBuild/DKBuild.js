@@ -703,6 +703,8 @@ function DKBuild_DoResults(){
 			string += "Exec="+app_path+OS+"/Release/"+APP+"\n"
 			string += "Icon="+app_path+"icons/icon.png\n"
 			CPP_DKFile_StringToFile(string, app_path+OS+"/Release/"+APP+".desktop")
+			
+			CPP_DK_Execute("desktop-file-install --dir=$HOME/.local/share/applications "+APP+".desktop")
 		}
 	}
 	
@@ -753,6 +755,8 @@ function DKBuild_DoResults(){
 			string += "Exec="+app_path+OS+"/Release/"+APP+"\n"
 			string += "Icon="+app_path+"icons/icon.png\n"
 			CPP_DKFile_StringToFile(string, app_path+OS+"/Release/"+APP+".desktop")
+			
+			CPP_DK_Execute("desktop-file-install --dir=$HOME/.local/share/applications "+APP+".desktop")
 		}
 	}
 	
@@ -801,6 +805,8 @@ function DKBuild_DoResults(){
 			string += "Exec="+app_path+OS+"/Release/"+APP+"\n"
 			string += "Icon="+app_path+"icons/icon.png\n"
 			CPP_DKFile_StringToFile(string, app_path+OS+"/Release/"+APP+".desktop")
+			
+			CPP_DK_Execute("desktop-file-install --dir=$HOME/.local/share/applications "+APP+".desktop")
 		}
 	}
 	
@@ -847,6 +853,8 @@ function DKBuild_DoResults(){
 			string += "Exec="+app_path+OS+"/Release/"+APP+"\n"
 			string += "Icon="+app_path+"icons/icon.png\n"
 			CPP_DKFile_StringToFile(string, app_path+OS+"/Release/"+APP+".desktop")
+			
+			CPP_DK_Execute("desktop-file-install --dir=$HOME/.local/share/applications "+APP+".desktop")
 		}
 	}
 	
