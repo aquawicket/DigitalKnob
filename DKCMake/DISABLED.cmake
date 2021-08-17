@@ -161,6 +161,8 @@ if(RASPBERRY)
 	DISABLE_DKDEPEND(android-build-tools)
 	DISABLE_DKDEPEND(bzip2-win-build)
 	DISABLE_DKDEPEND(cef_binary)
+	DISABLE_DKDEPEND(cef_binary_linux64) #This should work
+	DISABLE_DKDEPEND(cef_binary_linux32) #This should work
 	DISABLE_DKDEPEND(cef_binary_linuxarm)
 	DISABLE_DKDEPEND(cef_binary_linuxarm64)
 	DISABLE_DKDEPEND(cef_binary_macosx64)
