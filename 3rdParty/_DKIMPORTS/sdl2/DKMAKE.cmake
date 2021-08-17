@@ -2,9 +2,6 @@
 #
 # https://www.libsdl.org/release/SDL2-2.0.14.zip
 
-### DEPENDS ###
-DKDEPEND(opengl)
-
 ### VERSION ###
 DKSET(SDL2_VERSION 2.0.14)
 DKSET(SDL2_NAME SDL2-${SDL2_VERSION})
@@ -25,9 +22,9 @@ dkFileReplace(${SDL2}/include/SDL_config_android.h "#define SDL_JOYSTICK_HIDAPI 
 DKINCLUDE(${SDL2}/include)
 ANDROID_INCLUDE(${ANDROIDNDK}/sources/android/cpufeatures)
 ANDROID_INCLUDE(${SDL2}/src)
-#if(ANDROID)
-#	DKDEFINE(GL_GLEXT_PROTOTYPES) #moved to 3rsParty/opengl
-#endif()
+if(ANDROID)
+	DKDEFINE(GL_GLEXT_PROTOTYPES)
+endif()
 RASPBERRY_INCLUDE(/opt/vc/lib) ##For Raspberry Pi
 LINUX_INCLUDE(${SDL2}/${OS}/${RELEASE_DIR}/include)
 WIN_DEBUG_LIB(${SDL2}/${OS}/${DEBUG_DIR}/SDL2d.lib)
@@ -52,7 +49,7 @@ ANDROID_DEBUG_LIB(${SDL2}/${OS}/${DEBUG_DIR}/libSDL2.a)
 ANDROID_RELEASE_LIB(${SDL2}/${OS}/${RELEASE_DIR}/libSDL2.a)
 ANDROID_DEBUG_LIB(${SDL2}/${OS}/${DEBUG_DIR}/libSDL2main.a)
 ANDROID_RELEASE_LIB(${SDL2}/${OS}/${RELEASE_DIR}/libSDL2main.a)
-#LIST(APPEND WIN_LIBS opengl32.lib) #moved to 3rsParty/opengl
+LIST(APPEND WIN_LIBS opengl32.lib)
 LIST(APPEND WIN_LIBS winmm.lib)
 LIST(APPEND WIN_LIBS imm32.lib)
 LIST(APPEND WIN_LIBS version.lib)

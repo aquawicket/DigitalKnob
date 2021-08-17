@@ -9,8 +9,8 @@ WIN_DKSET(PYTHON_EXE ${PYTHON}/python.exe)
 
 ### INSTALL ###
 IF(NOT EXISTS ${PYTHON_EXE})
-	DKDOWNLOAD(${PYTHON_DL} ${DK}/Download)
+	DKDOWNLOAD(${PYTHON_DL} ${DIGITALKNOB}/Download)
 	string(REPLACE "/" "\\" PYTHON_PATH ${PYTHON})
-	DKCOMMAND(${DK}/Download/${PYTHON_NAME}.msi PrependPath=1 TargetDir=${PYTHON_PATH})
+	DKCOMMAND(${DIGITALKNOB}/Download/${PYTHON_NAME}.msi PrependPath=1 TargetDir=${PYTHON_PATH})
 	DKSETENV("PATH" "%PATH%;${PYTHON}")
 ENDIF()
