@@ -1488,8 +1488,8 @@ endfunction()
 
 function(WIN_VS arg arg2)
 	if(WIN AND QUEUE_BUILD)
-		WIN_VS_DEBUG(${arg} ${arg2})
-		WIN_VS_RELEASE(${arg} ${arg2})
+		WIN_VS_DEBUG(${arg} ${arg2} ${ARGN})
+		WIN_VS_RELEASE(${arg} ${arg2} ${ARGN})
 	endif()
 endfunction()
 
