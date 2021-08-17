@@ -5,7 +5,6 @@ if(NOT CMAKE_HOST_WIN32)
 	DISABLE_DKDEPEND(mingw64)
 	DISABLE_DKDEPEND(msys)
 endif()
-
 if(WIN)
 	DISABLE_DKDEPEND(android-studio)
 	DISABLE_DKDEPEND(bzip2)
@@ -75,6 +74,10 @@ if(WIN_64)
 endif()
 
 
+
+if(CMAKE_HOST_LINUX)
+	DISABLE_DKDEPEND(visualstudio)
+endif()
 if(LINUX)
 	DISABLE_DKDEPEND(android-build-tools)
 	DISABLE_DKDEPEND(bzip2-win-build)
@@ -146,6 +149,7 @@ endif()
 if(LINUX_64)
 	DISABLE_DKDEPEND(cef_binary_linux32)
 endif()
+
 
 
 if(RASPBERRY)
@@ -221,6 +225,7 @@ if(RASPBERRY_64)
 endif()
 
 
+
 if(ANDROID)
 	DISABLE_DKDEPEND(bzip2)
 	DISABLE_DKDEPEND(bzip2-win-build)
@@ -290,4 +295,10 @@ if(ANDROID)
 	DISABLE_DKDEPEND(waave)
 	DISABLE_DKDEPEND(xcode)
 	DISABLE_DKDEPEND(xz)
+endif()
+if(ANDROID_32)
+	
+endif()
+if(ANDROID_64)
+	
 endif()
