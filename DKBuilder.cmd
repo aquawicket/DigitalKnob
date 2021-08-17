@@ -105,15 +105,12 @@ cd %DIGITALKNOB%
 for /r %%i in (CMakeCache.*) do del "%%i"
 echo Deleteing CMakeFiles folders . . .
 for /d /r %%X in (*CMakeFiles*) do rd /s /q "%%X"
-::for /d /r %%i in (*CMakeFiles*) do rmdir /s /q "%%i"
 echo ****** BUILDING %APP% - %OS% ******
 set APP_PATH=%DKPATH%\DKApps\%APP%
 ECHO %APP_PATH%
 mkdir %APP_PATH%\%OS%
 cd %APP_PATH%\%OS%"
-del %APP_PATH%\%OS%\CMakeCache.txt"
 %CMAKE% -G "Visual Studio 16 2019" -A Win32 -DDEBUG=ON -DRELEASE=ON -DREBUILDALL=ON -DSTATIC=ON %DKPATH%
-:: %APP_PATH%\%OS%
 %MSBUILD% %APP%.sln /p:Configuration=Debug
 %MSBUILD% %APP%.sln /p:Configuration=Release
 
