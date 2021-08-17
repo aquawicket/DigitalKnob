@@ -311,11 +311,7 @@ function(DKLINKDIR path)
 endfunction()
 
 function(dk_makeDirectory path)
-	message(STATUS "dk_makeDirectory(${path})")
-	
-	##get_filename_component(path ${path} ABSOLUTE)
-	##file(MAKE_DIRECTORY ${path})
-	
+	#message(STATUS "dk_makeDirectory(${path})")
 	string(REPLACE "/" ";" path_list ${path})
 	foreach(item ${path_list})
 		string(REPLACE "home" "/home" item ${item})

@@ -22,7 +22,7 @@ DKSET(DUKTAPE ${3RDPARTY}/${DUKTAPE_NAME})
 DKINSTALL(${DUKTAPE_DL} duktape ${DUKTAPE})
 
 
-IF(NOT EXISTS ${DUKTAPE}/src)
+if(NOT EXISTS ${DUKTAPE}/src)
 DKSETPATH(${DUKTAPE})
 DKSET(QUEUE_BUILD ON)
 
@@ -35,7 +35,20 @@ DKCOPY(${DUKTAPE}/dist/src/ ${DUKTAPE}/src TRUE)
 
 #DKINSTALL(https://codeload.github.com/nodeca/js-yaml/zip/refs/tags/3.14.1 js-yaml-3.14.1 ${DUKTAPE_NAME}/src-tools/lib/extdeps/js-yaml)
 #WIN32_COMMAND(${NODE_EXE} ${DUKTAPE}/src-tools/index.js configure --output-directory ${DUKTAPE}/src --source-directory ${DUKTAPE}/src-input --config-directory ${DUKTAPE}/config)
-ENDIF()
+endif()
+
+
+if(NOT EXISTS ${DUKTAPE}/src/duktape.cpp)
+	DKCOPY(${DUKTAPE}/src/duktape.c ${DUKTAPE}/src/duktape.cpp FALSE)
+endif()
+if(NOT EXISTS ${DUKTAPE}/examples/eventloop/poll.cpp)
+	DKCOPY(${DUKTAPE}/examples/eventloop/poll.c ${DUKTAPE}/examples/eventloop/poll.cpp FALSE)
+endif()
+if(NOT EXISTS ${DUKTAPE}/examples/eventloop/c_eventloop.cpp)
+	DKCOPY(${DUKTAPE}/examples/eventloop/c_eventloop.c ${DUKTAPE}/examples/eventloop/c_eventloop.cpp FALSE)
+endif()
+
+
 
 ### LINK ###
 IF(WIN)
