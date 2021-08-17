@@ -96,7 +96,8 @@ function DKBuildConsole_ChooseUpdate() {
 			CPP_DK_Execute("cmd /c for /d /r %i in (*CMakeFiles*) do rmdir /s /Q \"%i\"")
 		}else{
 			CPP_DK_Execute("find . -name \"CMakeCache.*\" -delete") 
-			CPP_DK_Execute("find . -type d -name \"CMakeFiles\" -delete")
+			//CPP_DK_Execute("find . -type d -name \"CMakeFiles\" -delete")
+			CPP_DK_Execute("rm -rf `find . -type d -name CMakeFiles`")
 		}
 	}
 }
