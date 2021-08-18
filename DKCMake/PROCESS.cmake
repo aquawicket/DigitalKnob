@@ -4,11 +4,13 @@ endif()
 set(DK_PROCESS_INCLUDED true)
 
 include(DKCMake/FUNCTIONS.cmake)
-
 include(DKCMake/OPTIONS.cmake)
-WIN_DKSET(CMAKE_EXE C:/PROGRA~2/CMake/bin/cmake.exe)  #       This does
+
+# cmake location
+WIN_DKSET(CMAKE_EXE C:/PROGRA~2/CMake/bin/cmake.exe)
 MAC_DKSET(CMAKE_EXE /Applications/CMake.app/Contents/bin/cmake)
 LINUX_DKSET(CMAKE_EXE /usr/bin/cmake)
+
 include(DKCMake/DISABLED.cmake)
 get_filename_component(APP_NAME ${DKPROJECT} NAME)
 string(REPLACE " " "_" APP_NAME ${APP_NAME})
