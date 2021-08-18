@@ -1,3 +1,4 @@
+DKDEPEND(boost Boost_System) #Needed?
 DKDEPEND(boost Boost_Thread)
 
 ### VERSION ###

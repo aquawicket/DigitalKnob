@@ -40,13 +40,29 @@ function(Wait)
 		return()
 	endif()
 	if(CMAKE_HOST_LINUX)
-		DKEXECUTE_PROCESS(read -n 1 -s -r -p "Press any key to continue" WORKING_DIRECTORY C:/)
+		execute_process(COMMAND bash -c "read -n 1 -s -r -p \"Press any key to continue\"" OUTPUT_VARIABLE outVar)
+		#DKEXECUTE_PROCESS(read -n 1 -s -r -p "Press any key to continue" WORKING_DIRECTORY C:/)
 		return()
 	endif()	
 	message(STATUS "Wait() Not implemented for this platform")
 endfunction()
 
-##DUMP(<variable_name>)
+
+
+
+# WATCH( <variable_name> )
+function(WATCH var)
+	variable_watch(var varwatch)
+endfunction()
+function(varwatch var access val lst stack)
+    message("Variable watch: var=${var} access=${access} val=${val} 1st=${1st} stack=${stack}")
+	Wait()
+endfunction()
+
+
+
+
+# DUMP( <variable_name> )
 function(DUMP dmpvar)
 	message(STATUS "\n\n")
 	message(STATUS "${dmpvar} = ${${dmpvar}}")
