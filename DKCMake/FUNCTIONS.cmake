@@ -2905,14 +2905,10 @@ function(DKDEPEND_ALL)
     	endif()
   	endforeach()
 	
+	#To exclude libraries, use DISABLE_DKDEPEND(lib) in your app DKMAKE.cmake or in DKCMake/DISABLED.cmake
 	string (REPLACE ";" "" DEPENDALL_FILE "${DEPENDALL_FILE}")
-	
-	string(REGEX REPLACE "\n$" "" DEPENDALL_FILE "${DEPENDALL_FILE}")
-	## The file will not be overwritten so you can comment out libraries that don't compile
-	## Just remove or rename the file to have it regenerated. 
-	#if(NOT EXISTS ${DKPROJECT}/DEPEND_ALL.txt)
-		file(WRITE ${DKPROJECT}/DEPEND_ALL.txt "${DEPENDALL_FILE}")
-	#endif()
+	file(WRITE ${DKPROJECT}/DEPEND_ALL.txt "${DEPENDALL_FILE}")
+	unset(DEPENDALL_FILE)
 	INCLUDE(${DKPROJECT}/DEPEND_ALL.txt)
 endfunction()
 
