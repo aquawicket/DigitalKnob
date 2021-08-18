@@ -550,7 +550,7 @@ if(WIN_64)
 	
 		#Compress the assets, they will be included by resource.rc
 		message(STATUS "Creating assets.zip . . .")
-		DKZIP(${DKPROJECT}/asset
+		DKZIP(${DKPROJECT}/asset)
 		
 		# Restore the backed up files
 		DKCOPY(${DKPROJECT}/Backup/ ${DKPROJECT}/assets/ TRUE)
