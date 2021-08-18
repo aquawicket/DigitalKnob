@@ -2907,6 +2907,7 @@ function(DKDEPEND_ALL)
 	
 	string (REPLACE ";" "" DEPENDALL_FILE "${DEPENDALL_FILE}")
 	
+	string(REGEX REPLACE "\n$" "" DEPENDALL_FILE "${DEPENDALL_FILE}")
 	## The file will not be overwritten so you can comment out libraries that don't compile
 	## Just remove or rename the file to have it regenerated. 
 	#if(NOT EXISTS ${DKPROJECT}/DEPEND_ALL.txt)
