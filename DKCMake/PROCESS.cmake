@@ -6,7 +6,7 @@ set(DK_PROCESS_INCLUDED true)
 include(DKCMake/FUNCTIONS.cmake)
 include(DKCMake/OPTIONS.cmake)
 
-WATCH(CMAKE_EXE)
+WATCH(CMAKE_CXX_FLAGS)
 
 # cmake location
 WIN_DKSET(CMAKE_EXE C:/PROGRA~2/CMake/bin/cmake.exe)
