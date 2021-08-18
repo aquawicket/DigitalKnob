@@ -1,1 +1,0 @@
-git remote set-url origin https://aquawicket:<MY_TOKEN>@github.com/aquawicket/DigitalKnob.git
