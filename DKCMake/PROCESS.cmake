@@ -6,7 +6,7 @@ set(DK_PROCESS_INCLUDED true)
 include(DKCMake/FUNCTIONS.cmake)
 include(DKCMake/OPTIONS.cmake)
 
-WATCH(CMAKE_CXX_FLAGS)
+#WATCH(CMAKE_CXX_FLAGS)
 
 # cmake location
 WIN_DKSET(CMAKE_EXE C:/PROGRA~2/CMake/bin/cmake.exe)
@@ -22,6 +22,7 @@ DKSET(APP_CMAKEFILE "#Generated File: any changes will be overwritten")
 DKSET(APP_CMAKEFILE "${APP_CMAKEFILE}CMAKE_MINIMUM_REQUIRED(VERSION 3.4)")
 DKSET(APP_CMAKEFILE "${APP_CMAKEFILE}CMAKE_POLICY(SET CMP0054 NEW)")
 DKSET(APP_CMAKEFILE "${APP_CMAKEFILE}set(CMAKE_CXX_STANDARD 17)")
+DKSET(APP_CMAKEFILE "${APP_CMAKEFILE}set(CMAKE_CXX_STANDARD_REQUIRED ON)")
 DKSET(APP_CMAKEFILE "${APP_CMAKEFILE}PROJECT(${APP_NAME})")
 
 
@@ -491,7 +492,7 @@ if(WIN_32)
 		DKEXECUTE_PROCESS(COMMAND ${IMAGEMAGICK_CONVERT} ${DKPROJECT}/icons/icon.png -define icon:auto-resize=16 ${DKPROJECT}/assets/favicon.ico)
 	endif()
 	
-	set(CMAKE_CXX_STANDARD 17)
+	#set(CMAKE_CXX_STANDARD 17)
 	add_definitions(-D_USING_V110_SDK71_)
 	add_executable(${APP_NAME} WIN32 ${App_SRC})
 	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${WIN_LIBS})
@@ -568,7 +569,7 @@ if(WIN_64)
 		DKEXECUTE_PROCESS(COMMAND ${IMAGEMAGICK_CONVERT} ${DKPROJECT}/icons/icon.png -define icon:auto-resize=16 ${DKPROJECT}/assets/favicon.ico)
 	endif()
 	
-	set(CMAKE_CXX_STANDARD 17)
+	#set(CMAKE_CXX_STANDARD 17)
 	#set(CMAKE_CXX_FLAGS /MACHINE:X64)
 	add_executable(${APP_NAME}_64 WIN32 ${App_SRC})
 	target_link_libraries(${APP_NAME}_64 ${DEBUG_LIBS} ${RELEASE_LIBS} ${WIN_LIBS})
@@ -637,7 +638,7 @@ if(MAC)
 		DKREMOVE(${DKPROJECT}/Backup)
 	endif()
 	
-	set(CMAKE_CXX_STANDARD 17)
+	#set(CMAKE_CXX_STANDARD 17)
 	FIND_LIBRARY(CF CoreFoundation)
 	FIND_LIBRARY(CO Cocoa)
 	FIND_LIBRARY(CB Carbon)
@@ -697,7 +698,7 @@ if(IOS)
 		DKREMOVE(${DKPROJECT}/Backup)
 	endif()
 	
-	set(CMAKE_CXX_STANDARD 17)
+	#set(CMAKE_CXX_STANDARD 17)
 	### FrameWorks ###
 	set(IOS_FRAMEWORKS
 		Foundation
@@ -768,7 +769,7 @@ if(IOSSIM)
 		DKREMOVE(${DKPROJECT}/Backup)
 	endif()
 	
-	set(CMAKE_CXX_STANDARD 17)
+	#set(CMAKE_CXX_STANDARD 17)
 	### FrameWorks ###
 	set(IOS_FRAMEWORKS
 		Foundation
@@ -840,7 +841,7 @@ if(LINUX)
 		DKREMOVE(${DKPROJECT}/Backup)
 	endif()
 
-	set(CMAKE_CXX_STANDARD 17)
+	#set(CMAKE_CXX_STANDARD 17)
 	find_package(OpenGL REQUIRED)
 	include_directories(${OpenGL_INCLUDE_DIRS})
 	link_directories(${OpenGL_LIBRARY_DIRS})
@@ -902,7 +903,7 @@ if(RASPBERRY)
 		DKREMOVE(${DKPROJECT}/Backup)
 	endif()
 
-	set(CMAKE_CXX_STANDARD 17)
+	#set(CMAKE_CXX_STANDARD 17)
     find_package(OpenGL REQUIRED)
 	include_directories(${OpenGL_INCLUDE_DIRS})
 	link_directories(${OpenGL_LIBRARY_DIRS})
@@ -980,7 +981,6 @@ if(ANDROID)
 	list(APPEND ANDROID_LIBS android)
 
 	#add_executable(DKAndroid ${App_SRC})
-	set(CMAKE_CXX_STANDARD 17)
 
 	add_library(DKAndroid SHARED ${App_SRC})
 	#target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${ANDROID_LIBS})
