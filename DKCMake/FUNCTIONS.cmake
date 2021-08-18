@@ -3,7 +3,6 @@ if(CMAKE_HOST_UNIX AND NOT CMAKE_HOST_APPLE)
 endif()
 set(dkdepend_disable_list "" CACHE INTERNAL "")
 
-Testies()
 
 #####################################################################
 ###################         DKFUNCTIONS           ###################
@@ -22,6 +21,7 @@ function(MyFunc args result)
 	set(${result} ${args} PARENT_SCOPE) #just relay the arguments
 endfunction()
 
+
 ## Attempting to create dynamic functions
 #function(CreateFunction name)
 #	cmake_language(EVAL CODE "
@@ -31,6 +31,8 @@ endfunction()
 #	)
 #endfunction()
 #CreateFunction("Testies")
+#Testies()
+
 
 function(Wait)
 	if(CMAKE_HOST_WIN32)	
