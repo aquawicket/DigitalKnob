@@ -3,8 +3,17 @@ APP="DKBuilder"
 OS="linux64"
 TYPE="Release"
 
+sudo apt-get -y install git
+sudo apt-get -y install cmake
+sudo apt-get -y install gcc
+sudo apt-get -y install g++
+GCC_PATH=$(which gcc)
+GPP_PATH=$(which g++)
+export CC="$GCC_PATH"
+export CXX="$GPP_PATH"
+
 echo " "
-PS3='Please select an app to build: '
+PS3='Please update and select an app to build: '
 options=("Git Update" "DKBuilder" "DKSDLRmlUi" "DKTestAll" "Exit")
 select opt in "${options[@]}"
 do
@@ -84,9 +93,11 @@ rm -rf `find . -type d -name CMakeFiles`
 mkdir /home/"$USER"/digitalknob/DK/DKApps/$APP/$OS
 mkdir /home/"$USER"/digitalknob/DK/DKApps/$APP/$OS/$TYPE
 cd /home/"$USER"/digitalknob/DK/DKApps/$APP/$OS/$TYPE
-cmake -G "Unix Makefiles" -DRELEASE=ON -DREBUILDALL=ON -DSTATIC=ON /home/"$USER"/digitalknob/DK
+cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER="$GCC_PATH" -DCMAKE_CXX_COMPILER="$GPP_PATH" -DRELEASE=ON -DREBUILDALL=ON -DSTATIC=ON /home/"$USER"/digitalknob/DK
 chmod +x /home/"$USER"/digitalknob/DK/DKBuilder.sh
 
 cd /home/"$USER"/digitalknob/DK/DKApps/$APP/$OS/$TYPE
 make $APP
 chmod +x /home/"$USER"/digitalknob/DK/DKApps/$APP/$OS/$TYPE/$APP
+
+exec $SHELL #keep terminal open
