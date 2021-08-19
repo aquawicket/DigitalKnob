@@ -4,9 +4,7 @@
 #include "DK/DKFile.h"
 
 
-/////////////////////////////
-bool DKXMLHttpRequest::Init()
-{
+bool DKXMLHttpRequest::Init(){
 	DKDEBUGFUNC();
 	DKDuktape::AttachFunction("CPP_DKXMLHttpRequest_send", DKXMLHttpRequest::send);
 	
@@ -14,9 +12,7 @@ bool DKXMLHttpRequest::Init()
 	return true;
 }
 
-////////////////////////////////////////////
-int DKXMLHttpRequest::send(duk_context* ctx)
-{
+int DKXMLHttpRequest::send(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	//void* object = duk_require_pointer(ctx, 0);
 	DKString method = duk_require_string(ctx, 0);

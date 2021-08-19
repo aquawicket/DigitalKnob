@@ -2,9 +2,8 @@
 #include "DK/DKApp.h"
 #include "DKDuktape/DKNavigator.h"
 
-////////////////////////
-bool DKNavigator::Init()
-{
+
+bool DKNavigator::Init(){
 	DKDEBUGFUNC();
 	DKDuktape::AttachFunction("CPP_DKNavigator_onLine", DKNavigator::onLine);
 	DKDuktape::AttachFunction("CPP_DKNavigator_platform", DKNavigator::platform);
@@ -14,16 +13,12 @@ bool DKNavigator::Init()
 	return true;
 }
 
-/////////////////////////////////////////
-int DKNavigator::onLine(duk_context* ctx)
-{
+int DKNavigator::onLine(duk_context* ctx){
 	//TODO
 	return false;
 }
 
-///////////////////////////////////////////
-int DKNavigator::platform(duk_context* ctx)
-{
+int DKNavigator::platform(duk_context* ctx){
 	//TODO - complete this for all OS's
 #ifdef WIN64
 	duk_push_string(ctx, "Win32");
@@ -41,9 +36,7 @@ int DKNavigator::platform(duk_context* ctx)
 	return false;
 }
 
-/////////////////////////////////////////////
-int DKNavigator::productSub(duk_context* ctx)
-{
+int DKNavigator::productSub(duk_context* ctx){
 	//TODO
 	return false;
 }

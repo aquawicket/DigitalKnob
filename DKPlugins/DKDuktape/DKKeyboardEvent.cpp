@@ -10,8 +10,7 @@
 
 void mapKeys();
 
-bool DKKeyboardEvent::Init()
-{
+bool DKKeyboardEvent::Init(){
 	DKDEBUGFUNC();
 
 	// Properties
@@ -46,7 +45,6 @@ bool DKKeyboardEvent::Init()
 	DKKeyCodes::mapKeys();
 	return true;
 }
-
 
 
 ////////////////////////

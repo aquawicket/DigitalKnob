@@ -6,9 +6,7 @@
 //#include "DKRml/DKRml.h"
 
 
-/////////////////////////
-bool DKUIEvent::Init()
-{
+bool DKUIEvent::Init(){
 	DKDEBUGFUNC();
 
 	// Properties
@@ -24,9 +22,7 @@ bool DKUIEvent::Init()
 
 // Properties
 /*
-///////////////////////////////////////////////
-int DKUIEvent::cancelBubble(duk_context* ctx)
-{
+int DKUIEvent::cancelBubble(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString eventAddress = duk_require_string(ctx, 0);
 	Rml::Event* event = DKEvent::addressToEvent(eventAddress);
@@ -45,9 +41,7 @@ int DKUIEvent::cancelBubble(duk_context* ctx)
 */
 
 // Methods
-///////////////////////////////////////////////
-int DKUIEvent::initUIEvent(duk_context* ctx)
-{
+int DKUIEvent::initUIEvent(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	/*
 	DKString eventAddress = duk_require_string(ctx, 0);
