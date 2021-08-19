@@ -6,9 +6,7 @@
 //#include "DKDom/DKElement.h"
 
 
-///////////////////////
-bool DKEvent::Init()
-{
+bool DKEvent::Init(){
 	DKDEBUGFUNC();
 
 	// Properties
@@ -54,9 +52,7 @@ bool DKEvent::Init()
 
 
 // Properties
-//////////////////////////////////////
-int DKEvent::bubbles(duk_context* ctx)
-{
+int DKEvent::bubbles(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	/*
 	DKString eventAddress = duk_require_string(ctx, 0);
@@ -76,9 +72,7 @@ int DKEvent::bubbles(duk_context* ctx)
 	return true;
 }
 
-//////////////////////////////////////////////
-int DKEvent::cancelBubble(duk_context* ctx)
-{
+int DKEvent::cancelBubble(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	/*
 	DKString eventAddress = duk_require_string(ctx, 0);
@@ -97,9 +91,7 @@ int DKEvent::cancelBubble(duk_context* ctx)
 	return true;
 }
 
-////////////////////////////////////////////
-int DKEvent::cancelable(duk_context* ctx)
-{
+int DKEvent::cancelable(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	/*
 	DKString eventAddress = duk_require_string(ctx, 0);
@@ -115,9 +107,7 @@ int DKEvent::cancelable(duk_context* ctx)
 	return false;
 }
 
-//////////////////////////////////////////
-int DKEvent::composed(duk_context* ctx)
-{
+int DKEvent::composed(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	/*
 	DKString eventAddress = duk_require_string(ctx, 0);
@@ -133,9 +123,7 @@ int DKEvent::composed(duk_context* ctx)
 	return false;
 }
 
-///////////////////////////////////////////////
-int DKEvent::currentTarget(duk_context* ctx)
-{
+int DKEvent::currentTarget(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	/*
 	DKString eventAddress = duk_require_string(ctx, 0);
@@ -157,9 +145,7 @@ int DKEvent::currentTarget(duk_context* ctx)
 	return true;
 }
 
-//////////////////////////////////////////
-int DKEvent::deepPath(duk_context* ctx)
-{
+int DKEvent::deepPath(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	/*
 	DKString eventAddress = duk_require_string(ctx, 0);
@@ -175,9 +161,7 @@ int DKEvent::deepPath(duk_context* ctx)
 	return false;
 }
 
-//////////////////////////////////////////////////
-int DKEvent::defaultPrevented(duk_context* ctx)
-{
+int DKEvent::defaultPrevented(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	/*
 	DKString eventAddress = duk_require_string(ctx, 0);
@@ -193,9 +177,7 @@ int DKEvent::defaultPrevented(duk_context* ctx)
 	return false;
 }
 
-////////////////////////////////////////////
-int DKEvent::eventPhase(duk_context* ctx)
-{
+int DKEvent::eventPhase(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	/*
 	DKString eventAddress = duk_require_string(ctx, 0);
@@ -211,9 +193,7 @@ int DKEvent::eventPhase(duk_context* ctx)
 	return true;
 }
 
-////////////////////////////////////////////////////////
-int DKEvent::explicitOriginalTarget(duk_context* ctx)
-{
+int DKEvent::explicitOriginalTarget(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	/*
 	DKString eventAddress = duk_require_string(ctx, 0);
@@ -229,9 +209,7 @@ int DKEvent::explicitOriginalTarget(duk_context* ctx)
 	return false;
 }
 
-////////////////////////////////////////////////
-int DKEvent::originalTarget(duk_context* ctx)
-{
+int DKEvent::originalTarget(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	/*
 	DKString eventAddress = duk_require_string(ctx, 0);
@@ -247,9 +225,7 @@ int DKEvent::originalTarget(duk_context* ctx)
 	return false;
 }
 
-/////////////////////////////////////////////
-int DKEvent::returnValue(duk_context* ctx)
-{
+int DKEvent::returnValue(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	/*
 	DKString eventAddress = duk_require_string(ctx, 0);
@@ -265,9 +241,7 @@ int DKEvent::returnValue(duk_context* ctx)
 	return false;
 }
 
-////////////////////////////////////////////
-int DKEvent::srcElement(duk_context* ctx)
-{
+int DKEvent::srcElement(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	/*
 	DKString eventAddress = duk_require_string(ctx, 0);
@@ -288,9 +262,7 @@ int DKEvent::srcElement(duk_context* ctx)
 	return true;
 }
 
-////////////////////////////////////////
-int DKEvent::target(duk_context* ctx)
-{
+int DKEvent::target(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	/*
 	DKString eventAddress = duk_require_string(ctx, 0);
@@ -311,9 +283,7 @@ int DKEvent::target(duk_context* ctx)
 	return true;
 }
 
-///////////////////////////////////////////
-int DKEvent::timeStamp(duk_context* ctx)
-{
+int DKEvent::timeStamp(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	/*
 	DKString eventAddress = duk_require_string(ctx, 0);
@@ -328,9 +298,7 @@ int DKEvent::timeStamp(duk_context* ctx)
 	return false;
 }
 
-//////////////////////////////////////
-int DKEvent::type(duk_context* ctx)
-{
+int DKEvent::type(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString eventAddress = duk_require_string(ctx, 0);
 	DKEvents* event = DKDuktape::addressToEvent(eventAddress);
@@ -353,9 +321,7 @@ int DKEvent::type(duk_context* ctx)
 	return true;
 }
 
-///////////////////////////////////////////
-int DKEvent::isTrusted(duk_context* ctx)
-{
+int DKEvent::isTrusted(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	/*
 	DKString eventAddress = duk_require_string(ctx, 0);
@@ -373,9 +339,7 @@ int DKEvent::isTrusted(duk_context* ctx)
 
 
 // Obsolete properties
-////////////////////////////////////////
-int DKEvent::scoped(duk_context* ctx)
-{
+int DKEvent::scoped(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	/*
 	DKString eventAddress = duk_require_string(ctx, 0);
@@ -393,9 +357,7 @@ int DKEvent::scoped(duk_context* ctx)
 
 
 // Methods
-/////////////////////////////////////////////
-int DKEvent::createEvent(duk_context* ctx) 
-{
+int DKEvent::createEvent(duk_context* ctx) {
 	DKDEBUGFUNC(ctx);
 	/*
 	DKString eventAddress = duk_require_string(ctx, 0);
@@ -411,9 +373,7 @@ int DKEvent::createEvent(duk_context* ctx)
 	return false;
 }
 
-//////////////////////////////////////////////
-int DKEvent::composedPath(duk_context* ctx)
-{
+int DKEvent::composedPath(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	/*
 	DKString eventAddress = duk_require_string(ctx, 0);
@@ -429,9 +389,7 @@ int DKEvent::composedPath(duk_context* ctx)
 	return false;
 }
 
-///////////////////////////////////////////
-int DKEvent::initEvent(duk_context* ctx)
-{
+int DKEvent::initEvent(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	/*
 	DKString eventAddress = duk_require_string(ctx, 0);
@@ -447,9 +405,7 @@ int DKEvent::initEvent(duk_context* ctx)
 	return false;
 }
 
-////////////////////////////////////////////////
-int DKEvent::preventDefault(duk_context* ctx)
-{
+int DKEvent::preventDefault(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	/*
 	DKString eventAddress = duk_require_string(ctx, 0);
@@ -464,9 +420,7 @@ int DKEvent::preventDefault(duk_context* ctx)
 	return false;
 }
 
-//////////////////////////////////////////////////////////
-int DKEvent::stopImmediatePropagation(duk_context* ctx)
-{
+int DKEvent::stopImmediatePropagation(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	/*
 	DKString eventAddress = duk_require_string(ctx, 0);
@@ -481,9 +435,7 @@ int DKEvent::stopImmediatePropagation(duk_context* ctx)
 	return true;
 }
 
-/////////////////////////////////////////////////
-int DKEvent::stopPropagation(duk_context* ctx)
-{
+int DKEvent::stopPropagation(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	/*
 	DKString eventAddress = duk_require_string(ctx, 0);
@@ -500,9 +452,7 @@ int DKEvent::stopPropagation(duk_context* ctx)
 
 
 // Obsolete methods
-///////////////////////////////////////////////////
-int DKEvent::getPreventDefault(duk_context* ctx)
-{
+int DKEvent::getPreventDefault(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	/*
 	DKString eventAddress = duk_require_string(ctx, 0);
@@ -518,9 +468,7 @@ int DKEvent::getPreventDefault(duk_context* ctx)
 	return false;
 }
 
-///////////////////////////////////////////////
-int DKEvent::preventBubble(duk_context* ctx)
-{
+int DKEvent::preventBubble(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	/*
 	DKString eventAddress = duk_require_string(ctx, 0);
@@ -536,9 +484,7 @@ int DKEvent::preventBubble(duk_context* ctx)
 	return false;
 }
 
-////////////////////////////////////////////////
-int DKEvent::preventCapture(duk_context* ctx)
-{
+int DKEvent::preventCapture(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	/*
 	DKString eventAddress = duk_require_string(ctx, 0);
@@ -556,9 +502,7 @@ int DKEvent::preventCapture(duk_context* ctx)
 
 
 // Extra
-///////////////////////////////////////////////
-int DKEvent::getParameters(duk_context* ctx)
-{
+int DKEvent::getParameters(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	/*
 	DKString eventAddress = duk_require_string(ctx, 0);

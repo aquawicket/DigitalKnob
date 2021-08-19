@@ -90,7 +90,6 @@ bool DKDuktape::Init(){
 		DKClass::DKCreate("DKUIEvent");
 		DKClass::DKCreate("DKKeyboardEvent");
 
-
 		//Register javascript Timers: setTimeout, clearTimeout, setInterval, clearInterval
 		poll_register(ctx);
 		if(c_evloop){ //c_eventloop.js
@@ -361,8 +360,7 @@ bool DKDuktape::Reload(){
 }
 
 /*
-bool DKDuktape::RunDuktape(const DKString& code)
-{
+bool DKDuktape::RunDuktape(const DKString& code){
 	//DKDEBUGFUNC(code);
 	if(!DKUtil::InMainThread()){ return false; }
 	if(!DKDuktape::ctx){

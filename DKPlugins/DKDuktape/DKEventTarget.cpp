@@ -4,9 +4,7 @@
 #include "DKDuktape/DKEventTarget.h"
 
 
-//////////////////////////
-bool DKEventTarget::Init()
-{
+bool DKEventTarget::Init(){
 	DKDEBUGFUNC();
 	DKDuktape::AttachFunction("CPP_DKEventTarget_addEventListener", DKEventTarget::addEventListener);
 	DKDuktape::AttachFunction("CPP_DKEventTarget_removeEventListener", DKEventTarget::removeEventListener);
@@ -22,9 +20,7 @@ bool DKEventTarget::Init()
 	return true;
 }
 
-///////////////////////////////////////////////
-bool DKEventTarget::OnEvent(DKEvents* event)
-{
+bool DKEventTarget::OnEvent(DKEvents* event){
 	DKDEBUGFUNC(event);
 	DKString id = event->GetId();
 	if (id.empty()) { return false; } //we need an id
@@ -85,10 +81,7 @@ bool DKEventTarget::OnEvent(DKEvents* event)
 	return true;
 }
 
-
-////////////////////////////////////////////////////////
-int DKEventTarget::addEventListener(duk_context* ctx)
-{
+int DKEventTarget::addEventListener(duk_context* ctx){
 	DKString id = duk_require_string(ctx, 0);
 	DKString type = duk_require_string(ctx, 1);
 	DKString jsreturn;
@@ -100,9 +93,7 @@ int DKEventTarget::addEventListener(duk_context* ctx)
 	return true;
 }
 
-///////////////////////////////////////////////////////////
-int DKEventTarget::removeEventListener(duk_context* ctx)
-{
+int DKEventTarget::removeEventListener(duk_context* ctx){
 	DKString id = duk_require_string(ctx, 0);
 	DKString type = duk_require_string(ctx, 1);
 	DKString jsreturn;
@@ -115,9 +106,7 @@ int DKEventTarget::removeEventListener(duk_context* ctx)
 	return true;
 }
 
-/////////////////////////////////////////////////////
-int DKEventTarget::dispatchEvent(duk_context* ctx)
-{
+int DKEventTarget::dispatchEvent(duk_context* ctx){
 	DKString id = duk_require_string(ctx, 0);
 	DKString type = duk_require_string(ctx, 1);
 	DKString jsreturn;
@@ -131,9 +120,7 @@ int DKEventTarget::dispatchEvent(duk_context* ctx)
 
 
 // non-standard
-//////////////////////////////////////////
-int DKEventTarget::id(duk_context* ctx)
-{
+int DKEventTarget::id(duk_context* ctx){
 	DKString evt = duk_require_string(ctx, 0);
 	DKString id = duk_require_string(ctx, 1);
 
@@ -145,9 +132,7 @@ int DKEventTarget::id(duk_context* ctx)
 	return 1;
 }
 
-//////////////////////////////////////////////
-int DKEventTarget::idLike(duk_context* ctx)
-{
+int DKEventTarget::idLike(duk_context* ctx){
 	DKString evt = duk_require_string(ctx, 0);
 	DKString id = duk_require_string(ctx, 1);
 
@@ -159,9 +144,7 @@ int DKEventTarget::idLike(duk_context* ctx)
 	return 1;
 }
 
-////////////////////////////////////////////
-int DKEventTarget::type(duk_context* ctx)
-{
+int DKEventTarget::type(duk_context* ctx){
 	DKString evt = duk_require_string(ctx, 0);
 	DKString id = duk_require_string(ctx, 1);
 
@@ -173,9 +156,7 @@ int DKEventTarget::type(duk_context* ctx)
 	return 1;
 }
 
-/////////////////////////////////////////////
-int DKEventTarget::value(duk_context* ctx)
-{
+int DKEventTarget::value(duk_context* ctx){
 	DKString evt = duk_require_string(ctx, 0);
 	DKString value = duk_require_string(ctx, 1);
 

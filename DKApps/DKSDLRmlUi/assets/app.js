@@ -10,7 +10,7 @@ window.addEventListener("keydown", function mykeydown(event){
 	console.log(" ");
 	console.log("event.type: "+event.type)
 	console.log("event.altKey: "+event.altKey)
-	console.log("event.char: "+event.char)     //OBSOLETE
+	console.log("event.char: "+event.char)
 	console.log("event.charCode: "+event.charCode)
 	console.log("event.code: "+event.code)
 	console.log("event.ctrlKey: "+event.ctrlKey)

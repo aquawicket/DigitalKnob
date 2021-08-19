@@ -37,16 +37,14 @@ int DKConsole::_assert(duk_context* ctx){
 	return 1;
 }
 
-int DKConsole::clear(duk_context* ctx)
-{
+int DKConsole::clear(duk_context* ctx){
 	//FIXME - make this work on all OS's
 	DKString out;
 	if(!DKUtil::System("cls", out)){ return 0; }
 	return 1;
 }
 
-int DKConsole::debug(duk_context* ctx)
-{
+int DKConsole::debug(duk_context* ctx){
 	DKString string;
 	if(duk_is_string(ctx, 0)){
 		string = duk_require_string(ctx, 0);
@@ -61,8 +59,7 @@ int DKConsole::debug(duk_context* ctx)
 	return 1;
 }
 
-int DKConsole::error(duk_context* ctx)
-{
+int DKConsole::error(duk_context* ctx){
 	DKString string;
 	if(duk_is_string(ctx, 0)){
 		string = duk_require_string(ctx, 0);
@@ -77,8 +74,7 @@ int DKConsole::error(duk_context* ctx)
 	return 1;
 }
 
-int DKConsole::exception(duk_context* ctx)
-{
+int DKConsole::exception(duk_context* ctx){
 	DKString string;
 	if(duk_is_string(ctx, 0)){
 		string = duk_require_string(ctx, 0);
@@ -93,8 +89,7 @@ int DKConsole::exception(duk_context* ctx)
 	return 1;
 }
 
-int DKConsole::group(duk_context* ctx)
-{
+int DKConsole::group(duk_context* ctx){
 	DKString string;
 	if(duk_is_string(ctx, 0)){
 		string = duk_require_string(ctx, 0);
@@ -109,8 +104,7 @@ int DKConsole::group(duk_context* ctx)
 	return 1;
 }
 
-int DKConsole::groupCollapsed(duk_context* ctx)
-{
+int DKConsole::groupCollapsed(duk_context* ctx){
 	DKString string;
 	if(duk_is_string(ctx, 0)){
 		string = duk_require_string(ctx, 0);
@@ -125,8 +119,7 @@ int DKConsole::groupCollapsed(duk_context* ctx)
 	return 1;
 }
 
-int DKConsole::groupEnd(duk_context* ctx)
-{
+int DKConsole::groupEnd(duk_context* ctx){
 	DKString string;
 	if(duk_is_string(ctx, 0)){
 		string = duk_require_string(ctx, 0);
@@ -141,8 +134,7 @@ int DKConsole::groupEnd(duk_context* ctx)
 	return 1;
 }
 
-int DKConsole::info(duk_context* ctx)
-{
+int DKConsole::info(duk_context* ctx){
 	DKString string;
 	if(duk_is_string(ctx, 0)){
 		string = duk_require_string(ctx, 0);
@@ -157,8 +149,7 @@ int DKConsole::info(duk_context* ctx)
 	return 1;
 }
 
-int DKConsole::log(duk_context* ctx)
-{
+int DKConsole::log(duk_context* ctx){
 	DKString string;
 	if (duk_is_string(ctx, 0)) {
 		string = duk_require_string(ctx, 0);
@@ -173,8 +164,7 @@ int DKConsole::log(duk_context* ctx)
 	return 1;
 }
 
-int DKConsole::trace(duk_context* ctx)
-{
+int DKConsole::trace(duk_context* ctx){
 	DKString string;
 	if(duk_is_string(ctx, 0)){
 		string = duk_require_string(ctx, 0);
@@ -189,8 +179,7 @@ int DKConsole::trace(duk_context* ctx)
 	return 1;
 }
 
-int DKConsole::warn(duk_context* ctx)
-{
+int DKConsole::warn(duk_context* ctx){
 	DKString string;
 	if(duk_is_string(ctx, 0)){
 		string = duk_require_string(ctx, 0);
