@@ -111,7 +111,7 @@ if(CMAKE_HOST_WIN32 AND ANDROID)
 	DKDEPEND(visualstudio)
 	DKDEPEND(mingw32)
 	DKDEPEND(msys)
-	DKDEPEND(openssl-vs2015)
+	DKDEPEND(openssl)
 	
 	# https://developer.android.com/ndk/guides/cmake
 	# Andeoid arm32
