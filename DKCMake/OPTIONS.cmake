@@ -344,6 +344,8 @@ if(RELEASE)
 endif(RELEASE)
 
 
+## TODO - MOVE ALL DEFAULT COMPILER FLAGS TO DKCMAKE_ variables inside BuildTools.cmake
+
 ###########################################################################
 ## Set variables for Generator
 ###########################################################################
@@ -351,9 +353,8 @@ endif(RELEASE)
 ##### Microsoft Visual Studio 2019 #####
 if(CMAKE_GENERATOR STREQUAL "Visual Studio 16 2019")
 	if(WIN)
-		##DKSET(CMAKE_CXX_FLAGS "/DWIN32 /D_WINDOWS /W3 /nologo /GR /EHsc /Yustdafx.h /Zm500 /D_WIN32_WINNT=0x0600") #precompiled headers
-		#DKSET(CMAKE_C_FLAGS "/DWIN32 /D_WINDOWS /W3 /nologo /GR /EHsc /Zm500 /D_WIN32_WINNT=0x0600 /D_USING_V110_SDK71_")
 		DKSET(CMAKE_CXX_FLAGS "/DWIN32 /D_WINDOWS /W3 /nologo /GR /EHsc /Zm500 /D_WIN32_WINNT=0x0600 /D_USING_V110_SDK71_")
+		##DKSET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /Yustdafx.h) #precompiled headers
 		if(STATIC)
 			#DKSET(CMAKE_C_FLAGS_DEBUG "/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG")
 			#DKSET(CMAKE_C_FLAGS_RELEASE "/MT /O2 /Ob2 /DNDEBUG")
