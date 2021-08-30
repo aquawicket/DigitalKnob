@@ -20,8 +20,8 @@ do
     case $opt in
         "Git Update")
 			echo "$opt"
-			git clone https://github.com/aquawicket/DigitalKnob.git /home/"$USER"/digitalknob/DK
-			cd /home/"$USER"/digitalknob/DK
+			git clone https://github.com/aquawicket/DigitalKnob.git /home/$USER/digitalknob/DK
+			cd /home/$USER/digitalknob/DK
 			git checkout -- .
 			git pull origin master
 			echo "${options[@]}"
@@ -85,19 +85,19 @@ do
 	REPLY=
 done
 
-cd /home/"$USER"/digitalknob
+cd /home/$USER/digitalknob
 echo Deleteing all CMakeCache.txt files....
 find . -name "CMakeCache.*" -delete
 rm -rf `find . -type d -name CMakeFiles`
 		
-mkdir /home/"$USER"/digitalknob/DK/DKApps/$APP/$OS
-mkdir /home/"$USER"/digitalknob/DK/DKApps/$APP/$OS/$TYPE
-cd /home/"$USER"/digitalknob/DK/DKApps/$APP/$OS/$TYPE
-cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER="$GCC_PATH" -DCMAKE_CXX_COMPILER="$GPP_PATH" -DRELEASE=ON -DREBUILDALL=ON -DSTATIC=ON /home/"$USER"/digitalknob/DK
-chmod +x /home/"$USER"/digitalknob/DK/DKBuilder.sh
+mkdir /home/$USER/digitalknob/DK/DKApps/$APP/$OS
+mkdir /home/$USER/digitalknob/DK/DKApps/$APP/$OS/$TYPE
+cd /home/$USER/digitalknob/DK/DKApps/$APP/$OS/$TYPE
+cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER="$GCC_PATH" -DCMAKE_CXX_COMPILER="$GPP_PATH" -DRELEASE=ON -DREBUILDALL=ON -DSTATIC=ON /home/$USER/digitalknob/DK
+chmod +x /home/$USER/digitalknob/DK/DKBuilder.sh
 
-cd /home/"$USER"/digitalknob/DK/DKApps/$APP/$OS/$TYPE
+cd /home/$USER/digitalknob/DK/DKApps/$APP/$OS/$TYPE
 make $APP
-chmod +x /home/"$USER"/digitalknob/DK/DKApps/$APP/$OS/$TYPE/$APP
+chmod +x /home/$USER/digitalknob/DK/DKApps/$APP/$OS/$TYPE/$APP
 
 exec $SHELL #keep terminal open
