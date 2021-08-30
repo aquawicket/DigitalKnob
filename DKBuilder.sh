@@ -115,12 +115,17 @@ find . -name "CMakeCache.*" -delete
 rm -rf `find . -type d -name CMakeFiles`
 		
 mkdir $DKPATH/DKApps/$APP/$OS
-mkdir $DKPATH/DKApps/$APP/$OS/$TYPE
-cd $DKPATH/DKApps/$APP/$OS/$TYPE
+if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+	mkdir $DKPATH/DKApps/$APP/$OS/$TYPE
+	cd $DKPATH/DKApps/$APP/$OS/$TYPE
+else
+    cd $DKPATH/DKApps/$APP/$OS
+fi
+
 cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER="$GCC_PATH" -DCMAKE_CXX_COMPILER="$GPP_PATH" -DRELEASE=ON -DREBUILDALL=ON -DSTATIC=ON $DKPATH
 chmod +x $DKPATH/DKBuilder.sh
 
-cd $DKPATH/DKApps/$APP/$OS/$TYPE
+#cd $DKPATH/DKApps/$APP/$OS/$TYPE
 make $APP
 chmod +x $DKPATH/DKApps/$APP/$OS/$TYPE/$APP
 
