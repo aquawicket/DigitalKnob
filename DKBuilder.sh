@@ -1,12 +1,36 @@
 #!/bin/bash
+
+if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+	#HOST_OS="linux"
+	OS="linux64"
+	DKPATH="/home/$USER/digitalknob/DK"
+	sudo apt-get -y install git
+	sudo apt-get -y install cmake
+	sudo apt-get -y install gcc
+	sudo apt-get -y install g++
+elif [[ "$OSTYPE" == "darwin"* ]]; then
+	#HOST_OS="mac"
+	DKPATH="/Users/$USER/digitalknob/DK"
+elif [[ "$OSTYPE" == "cygwin" ]]; then
+    #HOST_OS="cygwin"
+	echo "TODO: DKPATH NOT SET"
+elif [[ "$OSTYPE" == "msys" ]]; then
+    #HOST_OS="msys"
+	echo "TODO: DKPATH NOT SET"
+elif [[ "$OSTYPE" == "win32" ]]; then
+    #HOST_OS="win32" #I'n not sure this can happen
+	echo "TODO: DKPATH NOT SET"
+elif [[ "$OSTYPE" == "freebsd"* ]]; then
+    #HOST_OS="freebsd"
+	echo "TODO: DKPATH NOT SET"
+else
+    echo "UNKNOWN OS TYPE ($OSTYPE)"
+fi
+
+
 APP="DKBuilder"
-OS="linux64"
 TYPE="Release"
 
-sudo apt-get -y install git
-sudo apt-get -y install cmake
-sudo apt-get -y install gcc
-sudo apt-get -y install g++
 GCC_PATH=$(which gcc)
 GPP_PATH=$(which g++)
 export CC="$GCC_PATH"
@@ -20,8 +44,8 @@ do
     case $opt in
         "Git Update")
 			echo "$opt"
-			git clone https://github.com/aquawicket/DigitalKnob.git /home/$USER/digitalknob/DK
-			cd /home/$USER/digitalknob/DK
+			git clone https://github.com/aquawicket/DigitalKnob.git $DKPATH
+			cd $DKPATH
 			git checkout -- .
 			git pull origin master
 			echo "${options[@]}"
@@ -85,19 +109,19 @@ do
 	REPLY=
 done
 
-cd /home/$USER/digitalknob
+cd $DKPATH
 echo Deleteing all CMakeCache.txt files....
 find . -name "CMakeCache.*" -delete
 rm -rf `find . -type d -name CMakeFiles`
 		
-mkdir /home/$USER/digitalknob/DK/DKApps/$APP/$OS
-mkdir /home/$USER/digitalknob/DK/DKApps/$APP/$OS/$TYPE
-cd /home/$USER/digitalknob/DK/DKApps/$APP/$OS/$TYPE
-cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER="$GCC_PATH" -DCMAKE_CXX_COMPILER="$GPP_PATH" -DRELEASE=ON -DREBUILDALL=ON -DSTATIC=ON /home/$USER/digitalknob/DK
-chmod +x /home/$USER/digitalknob/DK/DKBuilder.sh
+mkdir $DKPATH/DKApps/$APP/$OS
+mkdir $DKPATH/DKApps/$APP/$OS/$TYPE
+cd $DKPATH/DKApps/$APP/$OS/$TYPE
+cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER="$GCC_PATH" -DCMAKE_CXX_COMPILER="$GPP_PATH" -DRELEASE=ON -DREBUILDALL=ON -DSTATIC=ON $DKPATH
+chmod +x $DKPATH/DKBuilder.sh
 
-cd /home/$USER/digitalknob/DK/DKApps/$APP/$OS/$TYPE
+cd $DKPATH/DKApps/$APP/$OS/$TYPE
 make $APP
-chmod +x /home/$USER/digitalknob/DK/DKApps/$APP/$OS/$TYPE/$APP
+chmod +x $DKPATH/DKApps/$APP/$OS/$TYPE/$APP
 
 exec $SHELL #keep terminal open
