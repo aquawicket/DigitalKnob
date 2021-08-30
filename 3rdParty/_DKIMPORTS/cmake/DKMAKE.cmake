@@ -9,8 +9,8 @@ WIN_DKSET(CMAKE "C:/Program Files (x86)/CMake/bin")
 #dk_getShortPath(${CMAKE_EXE} shortpath)          
 #DKSET(CMAKE_EXE ${shortpath})                     #FIXME: This does not stick
 
-WIN_DKSET(CMAKE_EXE C:/PROGRA~2/CMake/bin/cmake.exe)  #       This does
-MAC_DKSET(CMAKE_EXE /Applications/CMake.app/Contents/bin/cmake)
+WIN_DKSET(CMAKE_EXE C:/PROGRA~2/CMake/bin/cmake.exe)
+MAC_DKSET(CMAKE_EXE /opt/local/bin/cmake)
 LINUX_DKSET(CMAKE_EXE /usr/bin/cmake)
 
 

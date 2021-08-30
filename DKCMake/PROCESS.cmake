@@ -10,7 +10,7 @@ include(DKCMake/OPTIONS.cmake)
 
 # cmake location
 WIN_DKSET(CMAKE_EXE C:/PROGRA~2/CMake/bin/cmake.exe)
-MAC_DKSET(CMAKE_EXE /Applications/CMake.app/Contents/bin/cmake)
+MAC_DKSET(CMAKE_EXE /opt/local/bin/cmake)
 LINUX_DKSET(CMAKE_EXE /usr/bin/cmake)
 
 include(DKCMake/DISABLED.cmake)
