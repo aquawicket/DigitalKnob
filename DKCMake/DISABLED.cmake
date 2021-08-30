@@ -80,6 +80,13 @@ endif()
 
 
 
+if(CMAKE_HOST_APPLE)
+	DISABLE_DKDEPEND(cmake)
+	DISABLE_DKDEPEND(xcode)
+endif()
+
+
+
 if(CMAKE_HOST_LINUX)
 	DISABLE_DKDEPEND(visualstudio)
 endif()
