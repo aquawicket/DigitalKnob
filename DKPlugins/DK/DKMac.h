@@ -3,6 +3,8 @@
 #ifndef DKMac_H
 #define DKMac_H
 
+#include "DK/DKString.h"
+
 #define DESKTOP
 
 class DKMac{
