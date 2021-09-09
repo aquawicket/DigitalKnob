@@ -2,6 +2,7 @@
 # https://github.com/opencv/opencv/archive/refs/tags/4.5.3.zip
 
 ### DEPENDS ###
+DKDEPEND(python)
 DKDEPEND(libjpeg-turbo)
 DKDEPEND(tiff)
 DKDEPEND(libpng)
