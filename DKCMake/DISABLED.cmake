@@ -76,6 +76,7 @@ if(WIN_32)
 endif()
 if(WIN_64)
 	DISABLE_DKDEPEND(cef_binary_windows32)
+	DISABLE_DKDEPEND(opencv)
 	DISABLE_DKDEPEND(smpeg2)
 endif()
 
