@@ -2,14 +2,9 @@
 #
 # https://curl.haxx.se/download/curl-7.34.0.zip
 
-
 ### DEPENDS ###
-if(USE_zlib)
-	DKDEPEND(zlib)
-endif()
-if(USE_openssl)
-	DKDEPEND(openssl)
-endif()
+DKDEPEND(zlib)
+DKDEPEND(openssl)
 
 
 ### VERSION ###
@@ -17,6 +12,7 @@ DKSET(CURL_VERSION 7.34.0)
 DKSET(CURL_NAME curl-${CURL_VERSION})
 DKSET(CURL_DL https://curl.haxx.se/download/${CURL_NAME}.zip)
 DKSET(CURL ${3RDPARTY}/${CURL_NAME})
+
 
 ### INSTALL ###
 DKINSTALL(${CURL_DL} curl ${CURL})

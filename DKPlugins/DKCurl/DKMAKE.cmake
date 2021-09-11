@@ -1,3 +1,4 @@
+#DKDEPEND(openssl)
 DKDEPEND(curl)
 DKDEPEND(DKFile)
 #DKDEPEND(DKThread)
