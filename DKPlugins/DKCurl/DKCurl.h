@@ -37,6 +37,8 @@ public:
 	static size_t WriteToFile(void *ptr, size_t size, size_t nmemb, FILE *stream);
 	static size_t read_callback(void *ptr, size_t size, size_t nmemb, void *stream);
 	static int progress_func(void* ptr, double TotalToDownload, double NowDownloaded, double TotalToUpload, double NowUploaded);
+	static void dump(const char *text, FILE *stream, unsigned char *ptr, size_t size);
+	static int my_trace(CURL *handle, curl_infotype type, char *data, size_t size, void *userp);
 
 	CURL* curl;
 	DKString ftpServer;
