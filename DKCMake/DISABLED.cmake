@@ -78,6 +78,7 @@ if(WIN_64)
 	DISABLE_DKDEPEND(cef_binary_windows32)
 	DISABLE_DKDEPEND(opencv)
 	DISABLE_DKDEPEND(smpeg2)
+	DISABLE_DKDEPEND(uwebsockets)
 endif()
 
 
