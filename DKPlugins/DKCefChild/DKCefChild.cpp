@@ -147,7 +147,7 @@ void DKCefApp::OnBeforeCommandLineProcessing(const CefString& process_type, CefR
 	cefV8Handler = new DKCefV8Handler();
 }
 
-void DKCefApp::OnBrowserCreated(CefRefPtr<CefBrowser> browser{
+void DKCefApp::OnBrowserCreated(CefRefPtr<CefBrowser> browser){
 #ifndef DEBUG
 	CEF_REQUIRE_UI_THREAD();
 #endif
@@ -229,7 +229,7 @@ bool DKCefApp::OnProcessMessageReceived(CefRefPtr<CefBrowser> browser, CefProces
 			text += std::string(args->GetString(0));
 		if(args->GetType(0) == VTYPE_INT)
 			text += "int";
-		if(args->GetType(0) == VTYPE_BOOL)
+		if(args->GetType(0) == VTYPE_BOOL){
 			if(!args->GetBool(0)){
 				text += "false";
 			}
