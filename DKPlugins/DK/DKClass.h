@@ -60,7 +60,7 @@ public:
 	}
 
 	template<class T>
-	static void RegisterFunc(const DKString& name, bool (T::*func) (const void*, void*), T* _this){
+	static bool RegisterFunc(const DKString& name, bool (T::*func) (const void*, void*), T* _this){
 		DKDEBUGFUNC(name, func, _this);
 		//functions[name] = boost::bind(func, _this, boost::placeholders::_1, boost::placeholders::_2);
 		functions[name] = std::bind(func, _this, std::placeholders::_1, std::placeholders::_2);
