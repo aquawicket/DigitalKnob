@@ -208,7 +208,7 @@ bool DKDebug::End(){
 bool DKDebug::SendBugReport(const DKString& filename){
 	DKDEBUGFUNC(filename);
 	if(!DKFile::Copy(DKFile::local_assets+"log.txt", DKFile::local_assets+DKString(filename)+".log", true, false))
-		return false DKERROR("DKFile::Copy() failed")
+		return DKERROR("DKFile::Copy() failed");
 	//DKCurl* dkCurl = DKCurl::Instance("DKCurl0");
 	//if(!dkCurl->FtpConnect("ftp.aquawicket.com","dkupload","DKPassword123!", "21")){ return false; }
 	//if(!dkCurl->FtpUpload(DKFile::local_assets+DKString(filename)+".log", "ftp.aquawicket.com/"+DKString(filename)+".log")){ return false; }
