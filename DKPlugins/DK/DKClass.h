@@ -64,19 +64,16 @@ public:
 		DKDEBUGFUNC(name, func, _this);
 		//functions[name] = boost::bind(func, _this, boost::placeholders::_1, boost::placeholders::_2);
 		functions[name] = std::bind(func, _this, std::placeholders::_1, std::placeholders::_2);
-		if(!functions[name]){
-			DKERROR("RegisterFunc(" + name + "): failed to register function \n");
-			return;
-		}
+		if(!functions[name])
+			return DKERROR("RegisterFunc(" + name + "): failed to register function \n");
 	}
 
-	static void UnregisterFunc(const DKString& name){
+	static bool UnregisterFunc(const DKString& name){
 		DKDEBUGFUNC(name);
 		functions.erase(name);
-		if(functions[name]) {
-			DKERROR("UnegisterFunc("+name+"): failed to unregister function \n");
-			return;
-		}
+		if(functions[name])
+			return DKERROR("UnegisterFunc("+name+"): failed to unregister function \n");
+		return true;
 	}
 
 	static bool HasFunc(const DKString& name){
@@ -86,10 +83,8 @@ public:
 	
 	static bool CallFunc(const DKString& name, const void* input, void* output){
 		//DKDEBUGFUNC(name, input, output); //excessive logging
-		if(!functions[name]){ 
-			DKWARN("CallFunc("+name+") not registered\n");
-			return false;
-		}
+		if(!functions[name])
+			return DKERROR("CallFunc("+name+") not registered\n");
 		return functions[name](input, output);
 	}
 

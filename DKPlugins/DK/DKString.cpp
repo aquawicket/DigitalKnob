@@ -174,8 +174,7 @@ long toLong(const DKString& str){
 #if defined(WIN32) || defined(MAC)
 	return atol(str.c_str());
 #endif 
-    DKERROR("toLong() not implemented for this OS \n");
-	return false;
+    return DKERROR("toLong() not implemented for this OS \n");
 }
 
 unsigned long long int toULongLong(const DKString& str){
@@ -183,8 +182,7 @@ unsigned long long int toULongLong(const DKString& str){
 	//return atol(str.c_str());
 	return strtoull(str.c_str(), NULL, 0);
 #endif 
-    DKERROR("toULongLong() not implemented for this OS \n");
-	return false;
+    return DKERROR("toULongLong() not implemented for this OS \n");
 }
 
 int toInt(const DKString& str){

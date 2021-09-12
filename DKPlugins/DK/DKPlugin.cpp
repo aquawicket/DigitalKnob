@@ -13,10 +13,8 @@ bool DKPlugins::LoadPlugin(const std::string& file)
 #ifdef WIN32
 	// Load the library
     HINSTANCE mod = LoadLibrary(file.c_str());
-	if(!mod){ 
-		DKERROR("DKPlugins::LoadPlugin("+file+"): failed to load plugin.\n");
-		return false; 
-	}
+	if(!mod)
+		return DKERROR("DKPlugins::LoadPlugin("+file+"): failed to load plugin.\n");
 
 	// Define the function types for what we are retrieving
 	typedef void* (__cdecl *ObjProc)();
@@ -26,10 +24,8 @@ bool DKPlugins::LoadPlugin(const std::string& file)
     ObjProc objFunc = (ObjProc) GetProcAddress(mod, "getObj");
     NameProc nameFunc = (NameProc) GetProcAddress(mod, "getName");
 
-	if (!objFunc || !nameFunc){
-		DKERROR("DKPlugins::LoadPlugin("+file+"): failed to connect objFunc or nameFunc.\n");
-		return false;
-	}
+	if(!objFunc || !nameFunc)
+		return DKERROR("DKPlugins::LoadPlugin("+file+"): failed to connect objFunc or nameFunc.\n");
 
 	// push the objects and modules into our vectors
 	dkobjs.push_back(static_cast<DKObject*>(objFunc()));

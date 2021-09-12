@@ -22,14 +22,10 @@ bool DKEvents::AddEvent(const DKString& id, const DKString& type, const DKString
 	DKString _jsreturn = jsreturn;
 	replace(_jsreturn, "() { [ecmascript code] }", ""); //remove  () { [ecmascript code] }
 
-	if(id.empty()){
-		DKERROR("DKEvents::AddEvent("+id+","+type+","+_jsreturn+"): No Id Specified\n");
-		return false;
-	}
-	if(type.empty()){
-		DKERROR("DKEvents::AddEvent("+id+","+type+","+_jsreturn+"): No Type Specified\n");
-		return false;
-	}
+	if(id.empty())
+		return DKERROR("DKEvents::AddEvent("+id+","+type+","+_jsreturn+"): No Id Specified\n");
+	if(type.empty())
+		return DKERROR("DKEvents::AddEvent("+id+","+type+","+_jsreturn+"): No Type Specified\n");
 	
 	DKEvents* event = new DKEvents;
 	event->id = id;
@@ -43,19 +39,16 @@ bool DKEvents::AddEvent(const DKString& id, const DKString& type, const DKString
 			DKWARN("DKEvents::AddEvent(): Event Exists, Reregistering. ("+id+" : "+type+" : "+_jsreturn+")\n.");
 			events[i] = event;
 			//External Reg Functions
-			for(unsigned int i=0; i<reg_funcs.size(); ++i){
+			for(unsigned int i=0; i<reg_funcs.size(); ++i)
 				reg_funcs[i](id, type);
-			}
 			return true;
 		}
 	}
-
 	events.push_back(event);
 
 	//External Reg Functions
-	for(unsigned int i=0; i<reg_funcs.size(); ++i){
+	for(unsigned int i=0; i<reg_funcs.size(); ++i)
 		reg_funcs[i](id, type);
-	}
 
 	return true;
 }
@@ -68,14 +61,10 @@ bool DKEvents::SendEvent(const DKString& id, const DKString& type, const DKStrin
 	if(!same(id,"DKLog") && !same(type,"second") && !same(type,"mousemove")) //prevent looping messages
 		DKDEBUGFUNC(id, type, value);
 
-	if(type.empty()){
-		DKERROR("DKEvents::SendEvent("+id+","+type+","+value+"): No Type Specified \n");
-		return false;
-	}
-	if(id.empty()){
-		DKERROR("DKEvents::SendEvent("+id+","+type+","+value+"): No Id Specified \n");
-		return false;
-	}
+	if(type.empty())
+		return DKERROR("DKEvents::SendEvent("+id+","+type+","+value+"): No Type Specified \n");
+	if(id.empty())
+		return DKERROR("DKEvents::SendEvent("+id+","+type+","+value+"): No Id Specified \n");
 
 	//call the function directly
 	for(unsigned int i = 0; i < events.size(); ++i){
@@ -85,16 +74,15 @@ bool DKEvents::SendEvent(const DKString& id, const DKString& type, const DKStrin
 			events[i]->event_func(events[i]); //call the function linked to the event
 			if(i < events.size())
 				events[i]->data.clear(); //clear data after send
-			if(!same(id,"window")){ return true; }
+			if(!same(id,"window"))
+				return true;
 		}
 	}
-
 	//External Send Functions
-	for(unsigned int i=0; i<send_funcs.size(); ++i){
+	for(unsigned int i=0; i<send_funcs.size(); ++i)
 		send_funcs[i](id, type, value); //returns bool
-	}
 
-	return false;
+	return false; // ????
 }
 
 bool DKEvents::RemoveEvent(const DKString& id, const DKString& type, const DKString& jsreturn){
@@ -109,11 +97,9 @@ bool DKEvents::RemoveEvent(const DKString& id, const DKString& type, const DKStr
 			return true; //This event should not exist twice.
 		}
 	}
-
 	//External Reg Functions
-	for(unsigned int i=0; i<unreg_funcs.size(); ++i){
+	for(unsigned int i=0; i<unreg_funcs.size(); ++i)
 		unreg_funcs[i](id, type); //returns bool
-	}
 	return true;
 }
 

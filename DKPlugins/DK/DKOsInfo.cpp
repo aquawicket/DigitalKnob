@@ -55,10 +55,8 @@ bool GetSystemOS(DKString& os)
 #if defined(ANDROID)
 	os = "Android";
 #endif
-	if(os.empty()){
-		DKERROR("ERROR GetSystemOS() cound not get the OS\n");
-		return false;
-	}
+	if(os.empty())
+		return DKERROR("ERROR GetSystemOS() cound not get the OS\n");
 	return true;
 }
 
@@ -81,8 +79,7 @@ bool GetOSCompany(DKString& oscompany)
 	oscompany = "Linux";
 	return true;
 #endif
-	DKERROR("GetOSCompany() not implemented on this OS \n");
-	return false;
+	return DKERROR("GetOSCompany() not implemented on this OS \n");
 }
 
 ////////////////////////////////
@@ -185,8 +182,7 @@ bool GetOSName(DKString& osname)
 	osname = "";
 	return true;
 #endif
-	DKERROR("GetOSName() not implemented on this OS \n");
-	return false;
+	return DKERROR("GetOSName() not implemented on this OS \n");
 }
 
 //////////////////////////////////////
@@ -350,8 +346,7 @@ bool GetOSVersion(DKString& osversion)
 	osversion = "";
 	return true;
 #endif
-	DKERROR("GetOSVersion() not inplemented on this OS \n");
-	return false;
+	return DKERROR("GetOSVersion() not inplemented on this OS \n");
 }
 
 //////////////////////////////////////////////
@@ -383,8 +378,7 @@ bool GetOSServicePack(DKString& osservicepack)
 	osservicepack = "";
 	return true;
 #endif
-	DKERROR("GetOSServicePack() not inplemented on this OS \n");
-	return false;
+	return DKERROR("GetOSServicePack() not inplemented on this OS \n");
 }
 
 //////////////////////////////////
@@ -413,8 +407,7 @@ bool GetOSBuild(DKString& osbuild)
 	osbuild = "";
 	return true;
 #endif
-	DKERROR("GetOSBuild() not inplemented on this OS \n");
-	return false;
+	return DKERROR("GetOSBuild() not inplemented on this OS \n");
 }
 
 ////////////////////////////////////////////////
@@ -439,9 +432,8 @@ bool GetOSArchitecture(DKString& osarchitecture)
 			fnIsWow64Process = (LPFN_ISWOW64PROCESS)GetProcAddress(GetModuleHandle(TEXT("kernel32")), "IsWow64Process");
 			if (NULL != fnIsWow64Process) {
 				if (!fnIsWow64Process(GetCurrentProcess(), &bIsWow64)) {
-					DKERROR("GetOSArchitecture(): failed at: fnIsWow64Process(GetCurrentProcess(), &bIsWow64)");
 					os << "32";
-					return false;
+					return DKERROR("GetOSArchitecture(): failed at: fnIsWow64Process(GetCurrentProcess(), &bIsWow64)");
 				}
 				if (bIsWow64) {
 					os << "64";
@@ -471,8 +463,7 @@ bool GetOSArchitecture(DKString& osarchitecture)
 	osarchitecture = "";
 	return true;
 #endif
-	DKERROR("GetOSArchitecture() not inplemented on this OS \n");
-	return false;
+	return DKERROR("GetOSArchitecture() not inplemented on this OS \n");
 }
 
 ////////////////////////////////////////////
@@ -485,8 +476,7 @@ bool GetComputerName(DKString& computername)
 	computername = (DKString)computerName;
 	return true;
 #endif
-	DKERROR("GetComputerName() not implemented on this OS \n");
-	return false;
+	return DKERROR("GetComputerName() not implemented on this OS \n");
 }
 
 #ifdef WIN32
@@ -500,10 +490,8 @@ bool GetWinOSVersion(RTL_OSVERSIONINFOEXW& vi)
 			vi = { 0 };
 			vi.dwOSVersionInfoSize = sizeof(vi);
 			if (STATUS_SUCCESS == fxPtr(&vi)){
-				if (VER_PLATFORM_WIN32_NT != vi.dwPlatformId || vi.dwMajorVersion <= 4) {
-					DKERROR("GetRealOSVersion(): Not WinNT and Version < 4");
-					return false;
-				}
+				if (VER_PLATFORM_WIN32_NT != vi.dwPlatformId || vi.dwMajorVersion <= 4)
+					return DKERROR("GetRealOSVersion(): Not WinNT and Version < 4");
 				return true;
 			}
 		}

@@ -25,7 +25,8 @@ bool DKArchive::End(){
 
 bool DKArchive::Extract(const DKString& file, const DKString& path){
 	DKDEBUGFUNC(file, path);
-	if(!DKFile::PathExists(file)){ return false; }
+	if(!DKFile::PathExists(file))
+		return false;
 	DKINFO("Extracting "+file+" . . .\n");
 	DKFile::MakeDir(path);
 	DKFile::ChDir(path);
@@ -52,10 +53,8 @@ bool DKArchive::Extract(const DKString& file, const DKString& path){
     ext = archive_write_disk_new();
     archive_write_disk_set_options(ext, flags);
     archive_write_disk_set_standard_lookup(ext);
-	if ((r = archive_read_open_filename(a, file.c_str(), 10240))){
-		DKERROR("r = archive_read_open_filename(a, file.c_str(), 10240)");    
-		return false;
-	}
+	if ((r = archive_read_open_filename(a, file.c_str(), 10240)))
+		return DKERROR("r = archive_read_open_filename(a, file.c_str(), 10240)");    
      
 	for(;;){
 		r = archive_read_next_header(a, &entry);
@@ -63,10 +62,8 @@ bool DKArchive::Extract(const DKString& file, const DKString& path){
 			break;
         if(r != ARCHIVE_OK)
 			fprintf(stderr, "%s\n", archive_error_string(a));
-		if(r < ARCHIVE_WARN){
-			DKERROR("r < ARCHIVE_WARN\n");  
-			return false;
-		}
+		if(r < ARCHIVE_WARN)
+			return DKERROR("r < ARCHIVE_WARN\n");  
         r = archive_write_header(ext, entry);
         if(r != ARCHIVE_OK)
 			fprintf(stderr, "%s\n", archive_error_string(ext));
@@ -74,18 +71,14 @@ bool DKArchive::Extract(const DKString& file, const DKString& path){
 			copy_data(a, ext);
 			if(r != ARCHIVE_OK)
 				fprintf(stderr, "%s\n", archive_error_string(ext));
-			if(r < ARCHIVE_WARN){
-				DKERROR("r < ARCHIVE_WARN\n");    
-				return false;
-			}
+			if(r < ARCHIVE_WARN)
+				return DKERROR("r < ARCHIVE_WARN\n");    
 		}
 		r = archive_write_finish_entry(ext);
 		if(r != ARCHIVE_OK)
 			fprintf(stderr, "%s\n", archive_error_string(ext));
-		if(r < ARCHIVE_WARN){
-			DKERROR("r < ARCHIVE_WARN\n");    
-			return false;
-		}
+		if(r < ARCHIVE_WARN)
+			return DKERROR("r < ARCHIVE_WARN\n");    
 	}
     
 	archive_read_close(a);
@@ -103,7 +96,8 @@ bool DKArchive::Extract(const DKString& file, const DKString& path){
 
 bool DKArchive::Compress(const DKString& path, const DKString& file){
 	DKDEBUGFUNC(path, file);	
-	if(!DKFile::PathExists(path)){ return false; }
+	if(!DKFile::PathExists(path))
+		return false;
 	DKStringArray files;
 	DKString _path;
 	if(DKFile::IsDirectory(path)){

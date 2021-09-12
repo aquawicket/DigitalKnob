@@ -34,12 +34,12 @@ bool WINAPI DKWindows::ConsoleHandler(DWORD type){
 	DKDEBUGFUNC(type);
 	//NOTE: this is not the main thread
 	switch(type){
-	case CTRL_CLOSE_EVENT:
-		//ExitThread(0);  //This is a hack
-		DKApp::active = false;
-		//DKApp::Exit(); //we need the main thread to call this and wait
-		Sleep(20000);
-		return true;
+		case CTRL_CLOSE_EVENT:
+			//ExitThread(0);  //This is a hack
+			DKApp::active = false;
+			//DKApp::Exit(); //we need the main thread to call this and wait
+			Sleep(20000);
+			return true;
 	}
 	return false;
 }
@@ -100,10 +100,8 @@ bool DKWindows::CpuUsedByApp(int& cpu){
 
 bool DKWindows::CreateConsoleHandler(){
 	DKDEBUGFUNC();
-	if(!SetConsoleCtrlHandler((PHANDLER_ROUTINE)DKWindows::ConsoleHandler, true)){
-		DKWARN("Could not set Console Handler. \n");
-		return false;
-	}
+	if(!SetConsoleCtrlHandler((PHANDLER_ROUTINE)DKWindows::ConsoleHandler, true))
+		return DKERROR("Could not set Console Handler. \n");
 	DKWindows::consoleWindow = GetConsoleWindow();
 	RECT desktop;
 	const HWND hDesktop = GetDesktopWindow();
@@ -153,10 +151,8 @@ bool DKWindows::FindImageOnScreen(const DKString& file, int& x, int& y){
 	//Screen RGB data is now accessible in sP
 	//// Image to RGB ////
 	HANDLE hBmp = LoadImage(NULL, file.c_str(), IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
-	if(NULL == hBmp){
-		DKERROR("Could not load file\n");
-		return false;
-	}
+	if(NULL == hBmp)
+		return DKERROR("Could not load file\n");
 	HDC hDC = ::GetDC( 0 );
 	HDC memDC1 = ::CreateCompatibleDC(hDC);
 	HDC memDC2 = ::CreateCompatibleDC(hDC);
@@ -243,13 +239,13 @@ bool DKWindows::GetClipboard(DKString& text){
 	char * buffer;
 	if(OpenClipboard(NULL)){
 		buffer = (char*)GetClipboardData(CF_TEXT);
-		if (!buffer){ return false; }
+		if(!buffer)
+			return false;
 		text = buffer;
 		CloseClipboard(); 
 		return true;
 	}
-	DKERROR("Clipboard error! \n");
-	return false; 
+	return DKERROR("Clipboard error! \n");
 }
 
 bool DKWindows::GetKey(int& key){
@@ -278,26 +274,22 @@ bool DKWindows::GetLastError(DKString& error){
 bool DKWindows::GetMousePos(int& x, int& y){
 	DKDEBUGFUNC(x, y);
 	POINT p;
-	if(::GetCursorPos(&p)){
-		x = p.x;
-		y = p.y;
-		return true;
-	}
-	return false;
+	if(!::GetCursorPos(&p))
+		return DKERROR("::GetCursorPos() failed");
+	x = p.x;
+	y = p.y;
+	return true;
 }
 
 bool DKWindows::GetPixelFromImage(const DKString& image, int x, int y){
 	DKDEBUGFUNC(image, x, y);
 	HANDLE hBmp = LoadImage(NULL, image.c_str(), IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
-	if(NULL == hBmp){
-		DKERROR("Could not load file\n");
-		return false;
-	}
+	if(NULL == hBmp)
+		return DKERROR("Could not load file\n");
 	HDC dcmem = CreateCompatibleDC(NULL);
 	if (NULL == SelectObject(dcmem, hBmp)){
 		DeleteDC(dcmem); 
-		DKERROR("Could not select object\n");
-		return false; 
+		return DKERROR("Could not select object\n");
 	}
 	BITMAP bm;
 	GetObject(hBmp, sizeof(bm), &bm);
@@ -354,7 +346,8 @@ bool DKWindows::GetScreenWidth(int& w){
 	DKDEBUGFUNC(w);
 	RECT desktop;
 	const HWND hDesktop = GetDesktopWindow();
-	if(!GetWindowRect(hDesktop, &desktop)){ return false; }
+	if(!GetWindowRect(hDesktop, &desktop))
+		return false;
 	w = desktop.right;
 	return true;
 }
@@ -363,13 +356,14 @@ bool DKWindows::GetScreenHeight(int& h){
 	DKDEBUGFUNC(h);
 	RECT desktop;
 	const HWND hDesktop = GetDesktopWindow();
-	if(!GetWindowRect(hDesktop, &desktop)){ return false; }
+	if(!GetWindowRect(hDesktop, &desktop))
+		return DKERROR("GetWindowRect() failed");
 	h = desktop.bottom;
 	return true;
 }
 
 bool DKWindows::GetUsername(DKString& username){
-	if (const char* usr_a = std::getenv("USERname")) {
+	if(const char* usr_a = std::getenv("USERname")){
 		username = usr_a;
 		return true;
 	}
@@ -381,8 +375,7 @@ bool DKWindows::GetUsername(DKString& username){
 		return true;
 	}
 	*/
-	DKERROR("ERROR: cannot get username");
-	return false;
+	return DKERROR("ERROR: cannot get username");
 }
 
 bool DKWindows::GetVolume(int& percent){
@@ -411,7 +404,8 @@ bool DKWindows::GetVolume(int& percent){
 
 bool DKWindows::KeyIsDown(const int& key){
 	DKDEBUGFUNC(key);
-	if(GetKeyState(key) & 0x8000){ return true; }
+	if(GetKeyState(key) & 0x8000)
+		return true;
 	return false;
 }
 
@@ -520,7 +514,7 @@ bool DKWindows::RefreshWindowsEnvironment(){
 	::SendMessageTimeout(HWND_BROADCAST, WM_SETTINGCHANGE, 0, (LPARAM) "Environment", SMTO_ABORTIFHUNG, 5000, dwReturnValue);
 	return true;
 #endif
-	return false;
+	return DKERROR("DKWindows::RefreshWindowsEnvironment() not implemented on the OS\n");
 }
 
 bool DKWindows::ReleaseKey(int key){
@@ -616,8 +610,7 @@ bool DKWindows::SetClipboard(const DKString& text){
 		CloseClipboard();
 		return true;
 	}
-	DKERROR("Clipboard error! \n");
-	return false; 
+	return DKERROR("Clipboard error! \n");
 }
 
 bool DKWindows::SetClipboardFiles(const DKString& filelist){
@@ -648,10 +641,8 @@ bool DKWindows::SetClipboardImage(const DKString& file){
 	//TODO - other formats besides .bmp
 	HBITMAP hBM = (HBITMAP) LoadImage( NULL, file.c_str(), IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 	HWND hWnd = ::GetActiveWindow();
-	if(!::OpenClipboard(hWnd)){ 
-		DKERROR("DKWindows::SetClipboardImage("+file+"): ::OpenClipboard(hWnd) failed\n");
-		return false; 
-	}
+	if(!::OpenClipboard(hWnd))
+		return DKERROR("DKWindows::SetClipboardImage("+file+"): ::OpenClipboard(hWnd) failed\n");
 	::EmptyClipboard();
 	BITMAP bm;
 	::GetObject(hBM, sizeof(bm), &bm);
@@ -709,13 +700,15 @@ bool DKWindows::SetClipboardImage(const DKString& file){
 	::CloseClipboard();
 	::SelectPalette(hDC, hOldPal, FALSE);
 	::ReleaseDC(NULL, hDC);
-	if(!hDIB){ return false; }
+	if(!hDIB)
+		return DKERROR("hDIB invalid");
 	return true;
 }
 
 bool DKWindows::SetMousePos(const int& x, const int& y){
 	DKDEBUGFUNC(x, y);
-	::SetCursorPos(x, y);
+	if(!::SetCursorPos(x, y))
+		return DKERROR("::SetCursorPos() failed");
 	return true;
 }
 
@@ -742,8 +735,10 @@ void DKWindows::SetTitle(){
 bool DKWindows::SetVolume(int& percent){
 	DKDEBUGFUNC(percent);
 	//Windows Vista and up only
-	if(percent > 100){percent = 100;}
-	if(percent < 0){percent = 0;}
+	if(percent > 100)
+		percent = 100;
+	if(percent < 0)
+		percent = 0;
 	bool bScalar = true;
     HRESULT hr=NULL;
     bool decibels = false;
@@ -853,22 +848,23 @@ bool DKWindows::WheelUp(){
 /*
 bool DKWindows::PrintStack(){
 	DKDEBUGFUNC();
-	unsigned int   i;
-    void         * stack[ 100 ];
+	unsigned int i;
+    void* stack[100];
     unsigned short frames;
-    SYMBOL_INFO  * symbol;
-    HANDLE         process;
+    SYMBOL_INFO* symbol;
+    HANDLE process;
     process = GetCurrentProcess();
-    SymInitialize( process, NULL, TRUE );
-    frames               = CaptureStackBackTrace( 0, 100, stack, NULL );
-    symbol               = ( SYMBOL_INFO * )calloc( sizeof( SYMBOL_INFO ) + 256 * sizeof( char ), 1 );
-    symbol->MaxNameLen   = 255;
-    symbol->SizeOfStruct = sizeof( SYMBOL_INFO );
-    for( i = 0; i < frames; i++ ){
-         SymFromAddr( process, ( DWORD64 )( stack[ i ] ), 0, symbol );
-         printf( "%i: %s - 0x%0X\n", frames - i - 1, symbol->Name, symbol->Address );
+    SymInitialize(process, NULL, TRUE);
+    frames = CaptureStackBackTrace( 0, 100, stack, NULL);
+    symbol = (SYMBOL_INFO *)calloc(sizeof(SYMBOL_INFO) + 256 * sizeof(char), 1);
+    symbol->MaxNameLen = 255;
+    symbol->SizeOfStruct = sizeof(SYMBOL_INFO);
+    for(i = 0; i < frames; i++){
+         SymFromAddr(process, (DWORD64)(stack[ i ]), 0, symbol);
+         printf("%i: %s - 0x%0X\n", frames - i - 1, symbol->Name, symbol->Address);
 	}
-    free( symbol );
+    free(symbol);
+	return true;
 }
 */
 

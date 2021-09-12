@@ -51,8 +51,7 @@ bool DKUnix::GetUsername(DKString& username){
 		username = pw->pw_uid;
 		return true;
 	}
-	DKERROR("ERROR: cannot get username");
-	return false;
+	return DKERROR("ERROR: cannot get username");
 	*/
 #endif
 	return false;
