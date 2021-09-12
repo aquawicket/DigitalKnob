@@ -140,23 +140,17 @@ bool DKAssets::GetAssetsPath(DKString& path){
 	return false;
 #endif
 #ifdef LINUX
-	if (DKFile::PathExists(DKFile::app_path + "../../assets/") &&
-		DKFile::PathExists(DKFile::app_path + "../../DKMAKE.cmake")) {
-		if (DKFile::GetAbsolutePath(DKFile::app_path + "../../assets/", path)) {
+	if (DKFile::PathExists(DKFile::app_path + "../../assets/") && DKFile::PathExists(DKFile::app_path + "../../DKMAKE.cmake")) {
+		if (DKFile::GetAbsolutePath(DKFile::app_path + "../../assets/", path))
 			return true;
-		}
 	}
 	return false;
 #endif
-	DKERROR("DKAssets::GetAssetsPath() not implemented on this platform \n");
-	return false;
+	return DKERROR("DKAssets::GetAssetsPath() not implemented on this platform \n");
 }
 
-//////////////////////////////////////////
-bool DKAssets::GetDataPath(DKString& path)
-{
+bool DKAssets::GetDataPath(DKString& path){
 	DKDEBUGFUNC();
-
 #ifdef WIN32
 	DKString apppath;
 	DKFile::GetAppPath(apppath);
@@ -201,24 +195,17 @@ bool DKAssets::GetDataPath(DKString& path)
 	DKFile::MakeDir(path);
 	return false;
 #endif
-	
-	DKERROR("DKAssets::GetDataPath() not implemented on this OS \n");
-	return false;
+	return DKERROR("DKAssets::GetDataPath() not implemented on this OS \n");
 }
 
-////////////////////////////////////////////////////////////////////////
-bool DKAssets::PackageAssets(DKString& dataFolder, DKString& headerFile)
-{
+bool DKAssets::PackageAssets(DKString& dataFolder, DKString& headerFile){
 	DKDEBUGFUNC(dataFolder, headerFile);
 #if !defined(WIN32)
-	if (!DKArchive::Compress(dataFolder, dataFolder + "/../assets.zip")) {
+	if(!DKArchive::Compress(dataFolder, dataFolder + "/../assets.zip"))
 		return false;
-	}
-	if (!DKUtil::Bin2C(dataFolder + "/../assets.zip", headerFile)) {
+	if (!DKUtil::Bin2C(dataFolder + "/../assets.zip", headerFile))
 		return false;
-	}
 	//DKFile::Delete(dataFolder + "/../assets.zip"); //delete lingering zip file;
-
 	//alter assets.h file (the memory intensive way :P)
 	/*
 	DKString assets_string;
@@ -238,22 +225,18 @@ bool DKAssets::PackageAssets(DKString& dataFolder, DKString& headerFile)
 	DKFile::StringToFile(assets_string, headerFile);
 	*/
 	return true;
-	
 #endif
 	return false;
 }
 
-/////////////////////////////
-bool DKAssets::DeployAssets()
-{
+bool DKAssets::DeployAssets(){
 	DKDEBUGFUNC();
 	DKINFO("Deploying assets . . .\n");
 	
 	//Save User data
 	DKINFO("Backing up USER data . . .\n");
-	if(DKFile::PathExists(DKFile::local_assets + "USER")){
+	if(DKFile::PathExists(DKFile::local_assets + "USER"))
 		DKFile::CopyFolder(DKFile::local_assets + "USER", DKFile::local_assets + "../USER", true, true);
-	}
 	DKFile::Delete(DKFile::local_assets); //remove assets folder completely 
 
 #if !defined(ANDROID) && !defined(WIN32)
@@ -298,7 +281,7 @@ bool DKAssets::DeployAssets()
 
 	//Restore User data
 	DKFile::MakeDir(DKFile::local_assets+"USER");
-	if (DKFile::PathExists(DKFile::local_assets+"../USER")){
+	if(DKFile::PathExists(DKFile::local_assets+"../USER")){
 		DKINFO("Restoring USER data . . .\n");	
 		DKFile::CopyFolder(DKFile::local_assets+"../USER", DKFile::local_assets+"USER", true, true);
 		DKFile::Delete(DKFile::local_assets+"../USER");
