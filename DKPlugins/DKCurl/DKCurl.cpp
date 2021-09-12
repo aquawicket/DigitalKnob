@@ -40,6 +40,7 @@ bool DKCurl::CurlInit(){
 }
 
 bool DKCurl::Download(const DKString& url, const DKString& dest){
+	//FIXME: If the destination path doesn't exist, create it
 	DKDEBUGFUNC(url, dest);
 	DKString path = dest;
 	DKString filename;
