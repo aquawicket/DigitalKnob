@@ -39,22 +39,49 @@ bool DKCurl::CurlInit(){
 	return true;
 }
 
-bool DKCurl::Download(const DKString& url, const DKString& dest){
-	//FIXME: If the destination path doesn't exist, create it
+bool DKCurl::Download(const DKString& url, const DKString& dest/*, const bool overwrite*/) {
 	DKDEBUGFUNC(url, dest);
-	DKString path = dest;
-	DKString filename;
-	DKFile::GetFileName(url, filename);
-	if(DKFile::IsDirectory(path))
-		path += "/"+filename;
-	if(DKFile::PathExists(path))
-		return DKWARN("file already exists. "+filename+"\n");
+	
+	// SENARIOS
+	// 1. dest exists and is a file.  urlFilename matches destFilename.               Example:  (http://test.com/fileA , C:/stuff/fileA):  dkPath is C:/stuff/fileA         redownload if overwrite is enabled
+	// 2. dest exists and is a file.  urlFilename does not match destFilename.        Example:  (http://test.com/fileA , C:/stuff/fileB):  dkPath is C:/stuff/fileB         redownload if overwrite is enabled
+	// 3. dest exists and is a directory.  urlFilename matches destFilename.          Example:  (http://test.com/fileA , C:/stuff/fileA):  dlPath is C:/stuff/fileA/fileA   download if overwrite enabled OR dlpath + filename does not exist
+	// 4. dest exists and is a directory.  urlFilename does not match destFilename.   Example:  (http://test.com/fileB , C:/stuff/fileA):  dlPath is C:/stuff/fileA/fileB   download if overwrite enabled OR dlpath + filename does not exist
+	// 5. dest does not exist.  urlFilename matches destFilename.                     Example:  (http://test.com/fileA , C:/stuff/fileA):  dlPath is C:/stuff/fileA         download
+	// 6. dest does not exist.  urlFilename does not match destFilename.              Example:  (http://test.com/fileA , C:/stuff/fileB):  dlPath is C:/stuff/fileB         download
+
+	//FIXME: If the destination path doesn't exist, create it
+	const bool overwrite = false;
+	DKString urlFilename;
+	DKFile::GetFileName(url, urlFilename);
+	DKString dlPath = dest;
+	if(DKFile::IsDirectory(dlPath))
+		dlPath = dest+"/"+urlFilename; //See 3. and 4.
+	if(DKFile::IsDirectory(dlPath)){
+		DKERROR(dlPath + "\n");
+		return DKERROR("Path already exists as a directory. Cannot overwrite a folder with a file\n");
+	}
+	if(DKFile::PathExists(dlPath)){
+		if(!overwrite){
+			return DKWARN("file already exists. "+dlPath+"\n");
+		}
+		else{
+			DKFile::Delete(dlPath);
+		}
+	}
+
+	DKString dlFolder;
+	DKFile::GetFilePath(dlPath, dlFolder);
+	if(!DKFile::IsDirectory(dlFolder))
+		DKFile::MakeDir(dlFolder);
+
+	//FIXME: crate a "startsWith" function to use instead of "has". Use to check of string variable starts with "string" from character 0
 	if(has(url,"http://"))
-		return HttpDownload(url, path);
+		return HttpDownload(url, dlPath);
 	if(has(url,"https://"))
-		return HttpDownload(url, path);
+		return HttpDownload(url, dlPath);
 	if(has(url,"ftp."))
-		return FtpDownload(url, path);
+		return FtpDownload(url, dlPath);
 	return DKERROR("invalid url");
 }
 
@@ -142,7 +169,7 @@ bool DKCurl::FtpConnect(const DKString& server, const DKString& name, const DKSt
 	return true;
 }
 
-bool DKCurl::FtpDownload(const DKString& url, const DKString& dest){
+bool DKCurl::FtpDownload(const DKString& url, const DKString& dest/*, const bool overwrite*/){
 	DKDEBUGFUNC(url, dest);
 	//if(!FtpFileExists(url))
 	//	return DKERROR("url not found\n");
@@ -239,7 +266,7 @@ bool DKCurl::FtpFileSize(const DKString& url, long& size){
 	return false;
 }
 
-bool DKCurl::FtpUpload(const DKString& file, const DKString& url){
+bool DKCurl::FtpUpload(const DKString& file, const DKString& url/*, const bool overwrite*/){
 	DKDEBUGFUNC(file, url);
 	if(DKFile::IsDirectory(file))
 		return DKERROR("DKCurl::FtpUpload() cannot upload recursive folders yet.\n");

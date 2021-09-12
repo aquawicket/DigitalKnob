@@ -15,19 +15,19 @@ public:
 	bool End();
 
 	bool CurlInit();
-	bool Download(const DKString& url, const DKString& dest);
+	bool Download(const DKString& url, const DKString& dest/*, const bool overwrite*/);
 	bool FacebookLogin(const DKString& email, const DKString& password, DKString& output);
 	bool FileDate(const DKString& url, DKString& filedate);
 	bool FileExists(const DKString& url);
 	bool FileSize(const DKString& url, long& size);
 	bool FtpConnect(const DKString& server, const DKString& name, const DKString& pass, const DKString port);
-	bool FtpDownload(const DKString& url, const DKString& dest);
+	bool FtpDownload(const DKString& url, const DKString& dest/*, const bool overwrite*/);
 	bool FtpFileDate(const DKString& url, DKString& filedate);
 	bool FtpFileExists(const DKString& url);
 	bool FtpFileSize(const DKString& url, long& size);
-	bool FtpUpload(const DKString& file, const DKString& url);
+	bool FtpUpload(const DKString& file, const DKString& url/*, const bool overwrite*/);
 	bool GetExternalIP(DKString& ipaddress);
-	bool HttpDownload(const DKString& url, const DKString& dest);
+	bool HttpDownload(const DKString& url, const DKString& dest/*, const bool overwrite*/);
 	bool HttpFileDate(const DKString& url, DKString& filedate);
 	bool HttpFileExists(const DKString& url);
 	bool HttpFileSize(const DKString& url, long& size);
