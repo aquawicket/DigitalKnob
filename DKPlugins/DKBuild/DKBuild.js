@@ -89,6 +89,7 @@ function DKBuild_init(){
 	}
 	
 	DKDOWNLOAD = DKPATH+"DK/Download"
+	CPP_DKFile_MkDir(DKDOWNLOAD)
 }
 
 //This is and alternative way to get windows short paths
