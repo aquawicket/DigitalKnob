@@ -68,7 +68,8 @@ function DKBuild_init(){
 			CMAKE = "C:/Program Files (x86)/CMake/bin/cmake.exe"
 			VISUALSTUDIO = "C:/Program Files (x86)/Microsoft Visual Studio/"+VISUALSTUDIO_VERSION
 		}
-		CMAKE = CPP_DKFile_GetShortName(CMAKE)
+		//CMAKE = CPP_DKFile_GetShortName(CMAKE)
+		CMAKE = DKBuild_GetShortPath(CMAKE)
 		MSBUILD = VISUALSTUDIO+"/Community/MSBuild/Current/Bin/MSBuild.exe"
 		MSBUILD = CPP_DKFile_GetShortName(MSBUILD)
 	}
@@ -89,14 +90,14 @@ function DKBuild_init(){
 	}
 	
 	DKDOWNLOAD = DKPATH+"DK/Download"
-	CPP_DKFile_MkDir(DKDOWNLOAD)
+	CPP_DKFile_MkDir(DKDOWNLOAD) //FIXME: code DKCurl to create directories automatically
 }
 
 //This is and alternative way to get windows short paths
 function DKBuild_GetShortPath(fullPath){
 	let getShortPath = DKPATH+"DK/DKPlugins/DKFile/getShortPath.cmd"
 	let shortPath = CPP_DK_Execute(getShortPath+' "'+fullPath+'"')
-	shortPath = shortPath.slice(0, -1)
+	//shortPath = shortPath.slice(0, -1)
 	while(shortPath.includes("\\")){
 		shortPath = shortPath.replace("\\","/")
 	}
