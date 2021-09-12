@@ -5,12 +5,9 @@
 
 #include "DKDuktape/DKDuktape.h"
 
-/////////////////////////////////////////////
-class DKDebugJS : public DKObjectT<DKDebugJS>
-{
+class DKDebugJS : public DKObjectT<DKDebugJS>{
 public:
 	bool Init();
-	
 	static int SendBugReport(duk_context* ctx);
 	static int ShowStackTrace(duk_context* ctx);
 };

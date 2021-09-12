@@ -4,7 +4,6 @@
 
 #include "DK/DK.h"
 
-///////////////////////////////////////////
 class DKCrypto : public DKObjectT<DKCrypto>
 {
 public:

@@ -22,14 +22,11 @@
 static BOOL s_bUnhandledExeptionFilterSet = FALSE;
 
 #if defined _M_X64 || defined _M_IX86
-////////////////////////////////////////////////
-static BOOL PreventSetUnhandledExceptionFilter()
-{
+static BOOL PreventSetUnhandledExceptionFilter(){
 	HMODULE hKernel32 = LoadLibrary("kernel32.dll");
 	if(hKernel32 == NULL) return FALSE;
 	void *pOrgEntry = GetProcAddress(hKernel32, "SetUnhandledExceptionFilter");
 	if(pOrgEntry == NULL) return FALSE;
- 
 #ifdef _M_IX86
 	// Code for x86:
 	// 33 C0                xor         eax,eax  
@@ -44,10 +41,8 @@ static BOOL PreventSetUnhandledExceptionFilter()
 #endif
 	DWORD dwOldProtect = 0;
 	BOOL bProt = VirtualProtect(pOrgEntry, sizeof(szExecute), PAGE_EXECUTE_READWRITE, &dwOldProtect);
-
 	SIZE_T bytesWritten = 0;
 	BOOL bRet = WriteProcessMemory(GetCurrentProcess(), pOrgEntry, szExecute, sizeof(szExecute), &bytesWritten);
-
 	if((bProt != FALSE) && (dwOldProtect != PAGE_EXECUTE_READWRITE)){
 		DWORD dwBuf;
 		VirtualProtect(pOrgEntry, sizeof(szExecute), dwOldProtect, &dwBuf);
@@ -58,9 +53,8 @@ static BOOL PreventSetUnhandledExceptionFilter()
 #pragma message("This code works only for x86 and x64!")
 #endif
 
-///////////////////////////////////////////////
-class StackWalkerToConsole : public StackWalker
-{
+
+class StackWalkerToConsole : public StackWalker{
 protected:
 	// do not print modules initialization
 	void OnLoadModule(LPCSTR, LPCSTR, DWORD64, DWORD, DWORD, LPCSTR, LPCSTR, ULONGLONG){}
@@ -72,9 +66,7 @@ protected:
 	}
 };
 
-//////////////////////////////////////////////////////////////////////////////
-static LONG __stdcall CrashHandlerExceptionFilter(EXCEPTION_POINTERS* pExPtrs)
-{
+static LONG __stdcall CrashHandlerExceptionFilter(EXCEPTION_POINTERS* pExPtrs){
 #ifdef _M_IX86
 	if(pExPtrs->ExceptionRecord->ExceptionCode == EXCEPTION_STACK_OVERFLOW){
 		static char MyStack[1024*128];  // be sure that we have enought space...
@@ -86,12 +78,10 @@ static LONG __stdcall CrashHandlerExceptionFilter(EXCEPTION_POINTERS* pExPtrs)
 		__asm mov esp,eax;
 	}
 #endif
-
 	DKWARN("########## C++ CALL STACK ##########\n");
 	StackWalkerToConsole sw;  // output to console
 	sw.ShowCallstack(GetCurrentThread(), pExPtrs->ContextRecord);
 	DKINFO("\n");
-  
 	TCHAR lString[500];
 	_stprintf_s(lString,
 		_T("*** Unhandled Exception! See console output for more info\n")
@@ -102,26 +92,19 @@ static LONG __stdcall CrashHandlerExceptionFilter(EXCEPTION_POINTERS* pExPtrs)
 		pExPtrs->ExceptionRecord->ExceptionCode,
 		pExPtrs->ExceptionRecord->ExceptionFlags,
 		(unsigned int)pExPtrs->ExceptionRecord->ExceptionAddress);
-
 	//Upload error file
 	TCHAR filename[500];
 	_stprintf_s(filename,_T("0x%8.8X"), (unsigned int)pExPtrs->ExceptionRecord->ExceptionAddress);
-
-	if(!DKFile::Copy(DKFile::local_assets+"log.txt", DKFile::local_assets+DKString(filename)+".log", true, false)){ 
+	if(!DKFile::Copy(DKFile::local_assets+"log.txt", DKFile::local_assets+DKString(filename)+".log", true, false))
 		return EXCEPTION_CONTINUE_SEARCH; 
-	}
-	
 	//DKCurl* dkCurl = DKCurl::Instance("DKCurl0");
 	//dkCurl->FtpConnect("ftp.aquawicket.com","dkupload","DKPassword123!", "21");
 	//dkCurl->FtpUpload(DKFile::local_assets+DKString(filename)+".log", "ftp.aquawicket.com/"+DKString(filename)+".log");
-
 	FatalAppExit(-1, lString);
 	return EXCEPTION_CONTINUE_SEARCH;
 }
 
-//////////////////////////////////////////
-static void InitUnhandledExceptionFilter()
-{
+static void InitUnhandledExceptionFilter(){
 	if(s_bUnhandledExeptionFilterSet == FALSE){
 		//set global exception handler (for handling all unhandled exceptions)
 		SetUnhandledExceptionFilter(CrashHandlerExceptionFilter);
@@ -140,9 +123,8 @@ static void InitUnhandledExceptionFilter()
 #include <stdlib.h>
 #include <unistd.h>
 
-////////////////////////////////////////////////////////////////////////////////////
-static inline void printStackTrace(FILE *out = stderr, unsigned int max_frames = 63)
-{
+
+static inline void printStackTrace(FILE *out = stderr, unsigned int max_frames = 63){
 	DKString logfile = DKFile::local_assets+"log.txt";
 	FILE* log = fopen(logfile.c_str(),"a");
 	fprintf(out, "stack trace:\n");
@@ -150,27 +132,21 @@ static inline void printStackTrace(FILE *out = stderr, unsigned int max_frames =
  
 	// storage array for stack trace address data
 	void* addrlist[max_frames+1];
- 
 	// retrieve current stack addresses
 	int addrlen = backtrace(addrlist, sizeof(addrlist) / sizeof(void*));
 	if(addrlen == 0){ return; }
- 
 	// create readable strings to each frame.
 	char** symbollist = backtrace_symbols(addrlist, addrlen);
- 
 	// print the stack trace.
 	for(int i = 1; i < addrlen; i++ ){
 		fprintf(out, "%s\n", symbollist[i]);
 		fprintf(log, "%s\n", symbollist[i]);
 	}
-
  	fclose(log);
 	free(symbollist);
 }
 
-////////////////////////
-void handler(int signum) 
-{
+void handler(int signum) {
 	const char* name = NULL;
 	switch(signum){
 		case SIGABRT: name = "SIGABRT";  break;
@@ -192,12 +168,11 @@ void handler(int signum)
 }
 #endif 
 
-////////////////////
+
 bool DKDebug::Init(){
 	DKDEBUGFUNC();
 	DKClass::DKCreate("DKDebugJS");
 	DKClass::DKCreate("DKDebugV8");
-	
 #ifdef WIN32
 	//Copy PDB file if it exists
 	DKString exename;
@@ -205,7 +180,6 @@ bool DKDebug::Init(){
 	DKFile::RemoveExtention(exename);
 	DKString apppath;
 	DKFile::GetAppPath(apppath);
-
 #ifndef DEBUG
 	//TODO: we need to do this in the build script. The exe will be using the .pdb, so the file is locked. 
 	//DKINFO("DKFile::Copy("+DKFile::local_assets+exename+".pdb,"+apppath+exename+".pdb)\n");
@@ -231,20 +205,17 @@ bool DKDebug::End(){
 	return true;
 }
 
-/////////////////////////////////////////////////////
-bool DKDebug::SendBugReport(const DKString& filename)
-{
+bool DKDebug::SendBugReport(const DKString& filename){
 	DKDEBUGFUNC(filename);
-	if(!DKFile::Copy(DKFile::local_assets+"log.txt", DKFile::local_assets+DKString(filename)+".log", true, false)){ return false; }
+	if(!DKFile::Copy(DKFile::local_assets+"log.txt", DKFile::local_assets+DKString(filename)+".log", true, false))
+		return false DKERROR("DKFile::Copy() failed")
 	//DKCurl* dkCurl = DKCurl::Instance("DKCurl0");
 	//if(!dkCurl->FtpConnect("ftp.aquawicket.com","dkupload","DKPassword123!", "21")){ return false; }
 	//if(!dkCurl->FtpUpload(DKFile::local_assets+DKString(filename)+".log", "ftp.aquawicket.com/"+DKString(filename)+".log")){ return false; }
 	return true;
 }
 
-/////////////////////////////////////////////////////////////
-bool DKDebug::ShowStackTrace(const void* input, void* output)
-{
+bool DKDebug::ShowStackTrace(const void* input, void* output){
 	DKDEBUGFUNC();
 	DKWARN("########## C++ CALL STACK ##########\n");
 #ifdef WIN32
@@ -253,7 +224,6 @@ bool DKDebug::ShowStackTrace(const void* input, void* output)
 	DKINFO("\n");
 	return true;
 #else
-	DKERROR("DKDebug::ShowStackTrace(): no implemented on this OS\n");
-	return false;
+	return DKERROR("DKDebug::ShowStackTrace(): no implemented on this OS\n");
 #endif
 }

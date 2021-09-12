@@ -25,11 +25,10 @@ bool DKCurl::CurlInit(){
 	DKDEBUGFUNC();
 	if(curl)
 		curl_easy_cleanup(curl);
-	//NOTE: Curl inits are NOT thread safe. we must init within the given thread
-	CURLcode curlcode = curl_global_init(CURL_GLOBAL_ALL);
+	CURLcode curlcode = curl_global_init(CURL_GLOBAL_ALL); 
 	if(curlcode != CURLE_OK)
 		return DKERROR(DKString(curl_easy_strerror(curlcode))+"\n");
-	curl = curl_easy_init();
+	curl = curl_easy_init(); //NOTE: Curl inits are NOT thread safe. we must init within the given thread
 	if(!curl)
         return DKERROR("curl invalid\n");
 #ifdef DEBUG
@@ -39,9 +38,8 @@ bool DKCurl::CurlInit(){
 	return true;
 }
 
-bool DKCurl::Download(const DKString& url, const DKString& dest/*, const bool overwrite*/) {
+bool DKCurl::Download(const DKString& url, const DKString& dest/*, const bool overwrite*/){
 	DKDEBUGFUNC(url, dest);
-	
 	// SENARIOS
 	// 1. dest exists and is a file.  urlFilename matches destFilename.               Example:  (http://test.com/fileA , C:/stuff/fileA):  dkPath is C:/stuff/fileA         redownload if overwrite is enabled
 	// 2. dest exists and is a file.  urlFilename does not match destFilename.        Example:  (http://test.com/fileA , C:/stuff/fileB):  dkPath is C:/stuff/fileB         redownload if overwrite is enabled
@@ -69,12 +67,10 @@ bool DKCurl::Download(const DKString& url, const DKString& dest/*, const bool ov
 			DKFile::Delete(dlPath);
 		}
 	}
-
 	DKString dlFolder;
 	DKFile::GetFilePath(dlPath, dlFolder);
 	if(!DKFile::IsDirectory(dlFolder))
 		DKFile::MakeDir(dlFolder);
-
 	//FIXME: crate a "startsWith" function to use instead of "has". Use to check of string variable starts with "string" from character 0
 	if(has(url,"http://"))
 		return HttpDownload(url, dlPath);
@@ -183,7 +179,6 @@ bool DKCurl::FtpDownload(const DKString& url, const DKString& dest/*, const bool
 	if(!fp)
 		return DKERROR("DKCurl::FtpDownload() *fp invalid \n");
 	curl_easy_setopt(curl, CURLOPT_WRITEDATA, fp);
-
 	DKINFO("Downloading "+url+"...\n");
 	CURLcode curlcode = curl_easy_perform(curl);
 	//curl_easy_cleanup(curl);

@@ -1,14 +1,10 @@
 #include "DK/stdafx.h"
 #include "DKCrypto/DKCrypto.h"
 
-/////////////////////
-bool DKCrypto::Init()
-{
+bool DKCrypto::Init(){
 	return true;
 }
 
-////////////////////
-bool DKCrypto::End()
-{
+bool DKCrypto::End(){
 	return true;
 }

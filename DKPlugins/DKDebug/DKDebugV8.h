@@ -5,13 +5,11 @@
 
 #include "DKCef/DKCef.h"
 
-/////////////////////////////////////////////
 class DKDebugV8 : public DKObjectT<DKDebugV8>
 {
 public:
 	bool Init();
 	bool End();
-
 	static bool SendBugReport(CefArgs args, CefReturn retval);
 	static bool ShowStackTrace(CefArgs args, CefReturn retval);
 };
