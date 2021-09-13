@@ -7,7 +7,7 @@
 DKSET(ASTYLE_VERSION 3.1)
 DKSET(ASTYLE_NAME AStyle_${ASTYLE_VERSION}_windows)
 DKSET(ASTYLE_DL https://managedway.dl.sourceforge.net/project/astyle/astyle/astyle%20${ASTYLE_VERSION}/${ASTYLE_NAME}.zip)
-DKSET(ASTYLE ${3RDPARTY}/${ASYTLE_NAME})
+DKSET(ASTYLE ${3RDPARTY}/${ASTYLE_NAME})
 
 
 ### INSTALL ###

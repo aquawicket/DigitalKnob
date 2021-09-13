@@ -10,6 +10,4 @@ DKSET(MOMENTJS_DL https://momentjs.com/downloads/moment.min.js)
 DKSET(MOMENTJS ${3RDPARTY}/${MOMENTJS_NAME})
 
 ### INSTALL ###
-DKINSTALL(${MOMENTJS_DL} Moment.js ${MOMENTJS})
-
-
+DKINSTALL(${MOMENTJS_DL} moment.js ${MOMENTJS})
