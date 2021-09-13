@@ -4,9 +4,7 @@
 #include "DKDom/DKDomHTMLElement.h"
 
 
-/////////////////////////////
-bool DKDomHTMLElement::Init()
-{
+bool DKDomHTMLElement::Init(){
 	DKDEBUGFUNC();
 	DKDuktape::AttachFunction("CPP_DKDomHTMLElement_focus", DKDomHTMLElement::focus);
 	DKDuktape::AttachFunction("CPP_DKDomHTMLElement_offsetHeight", DKDomHTMLElement::offsetHeight);
@@ -14,14 +12,11 @@ bool DKDomHTMLElement::Init()
 	DKDuktape::AttachFunction("CPP_DKDomHTMLElement_offsetParent", DKDomHTMLElement::offsetParent);
 	DKDuktape::AttachFunction("CPP_DKDomHTMLElement_offsetTop", DKDomHTMLElement::offsetTop);
 	DKDuktape::AttachFunction("CPP_DKDomHTMLElement_offsetWidth", DKDomHTMLElement::offsetWidth);
-
 	DKClass::DKCreate("DKDom/DKDomHTMLElement.js");
 	return true;
 }
 
-/////////////////////////////////////////////
-int DKDomHTMLElement::focus(duk_context* ctx)
-{
+int DKDomHTMLElement::focus(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
 	Rml::Element* element = DKRml::addressToElement(address);
@@ -39,10 +34,7 @@ int DKDomHTMLElement::focus(duk_context* ctx)
 	return true;
 }
 
-
-////////////////////////////////////////////////////
-int DKDomHTMLElement::offsetHeight(duk_context* ctx)
-{
+int DKDomHTMLElement::offsetHeight(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
 	Rml::Element* element = DKRml::addressToElement(address);
@@ -56,9 +48,7 @@ int DKDomHTMLElement::offsetHeight(duk_context* ctx)
 	return true;
 }
 
-//////////////////////////////////////////////////
-int DKDomHTMLElement::offsetLeft(duk_context* ctx)
-{
+int DKDomHTMLElement::offsetLeft(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
 	Rml::Element* element = DKRml::addressToElement(address);
@@ -72,9 +62,7 @@ int DKDomHTMLElement::offsetLeft(duk_context* ctx)
 	return true;
 }
 
-////////////////////////////////////////////////////
-int DKDomHTMLElement::offsetParent(duk_context* ctx)
-{
+int DKDomHTMLElement::offsetParent(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
 	Rml::Element* element = DKRml::addressToElement(address);
@@ -93,9 +81,7 @@ int DKDomHTMLElement::offsetParent(duk_context* ctx)
 	return true;
 }
 
-/////////////////////////////////////////////////
-int DKDomHTMLElement::offsetTop(duk_context* ctx)
-{
+int DKDomHTMLElement::offsetTop(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
 	Rml::Element* element = DKRml::addressToElement(address);
@@ -109,9 +95,7 @@ int DKDomHTMLElement::offsetTop(duk_context* ctx)
 	return true;
 }
 
-///////////////////////////////////////////////////
-int DKDomHTMLElement::offsetWidth(duk_context* ctx)
-{
+int DKDomHTMLElement::offsetWidth(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
 	Rml::Element* element = DKRml::addressToElement(address);

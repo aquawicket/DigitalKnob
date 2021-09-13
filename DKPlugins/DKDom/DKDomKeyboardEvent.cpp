@@ -11,8 +11,7 @@
 
 std::map<int, Key> DKDomKeyboardEvent::rmlKey;
 
-bool DKDomKeyboardEvent::Init()
-{
+bool DKDomKeyboardEvent::Init(){
 	DKDEBUGFUNC();
 
 	// Properties
@@ -250,7 +249,6 @@ int DKDomKeyboardEvent::getModifierState(duk_context* ctx){
 
 
 // Obsolete Methods
-//////////////////////////////////////////////////////
 
 int DKDomKeyboardEvent::initKeyEvent(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
@@ -280,7 +278,6 @@ int DKDomKeyboardEvent::initKeyboardEvent(duk_context* ctx){
 
 
 // Obsolete properties
-///////////////////////////////////////////////
 
 int DKDomKeyboardEvent::char1(duk_context* ctx){
 	DKDEBUGFUNC(ctx);

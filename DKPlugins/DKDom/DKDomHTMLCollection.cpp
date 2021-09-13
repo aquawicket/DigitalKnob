@@ -4,11 +4,8 @@
 #include "DKDom/DKDomHTMLCollection.h"
 
 
-////////////////////////////////
-bool DKDomHTMLCollection::Init()
-{
+bool DKDomHTMLCollection::Init(){
 	DKDEBUGFUNC();
-	
 	DKClass::DKCreate("DKDom/DKDomHTMLCollection.js");
 	return true;
 }
