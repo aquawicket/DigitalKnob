@@ -6,11 +6,8 @@
 #include "DKRml/DKRml.h"
 
 
-////////////////////////////
-bool DKDomMouseEvent::Init()
-{
+bool DKDomMouseEvent::Init(){
 	DKDEBUGFUNC();
-
 	// Properties
 	DKDuktape::AttachFunction("CPP_DKDomMouseEvent_altKey", DKDomMouseEvent::altKey);
 	DKDuktape::AttachFunction("CPP_DKDomMouseEvent_button", DKDomMouseEvent::button);
@@ -48,9 +45,8 @@ bool DKDomMouseEvent::Init()
 
 
 // Properties
-/////////////////////////////////////////////
-int DKDomMouseEvent::altKey(duk_context* ctx)
-{
+
+int DKDomMouseEvent::altKey(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString eventAddress = duk_require_string(ctx, 0);
 	Rml::Event* event = DKRml::addressToEvent(eventAddress);
@@ -65,9 +61,7 @@ int DKDomMouseEvent::altKey(duk_context* ctx)
 	return true;
 }
 
-/////////////////////////////////////////////
-int DKDomMouseEvent::button(duk_context* ctx)
-{
+int DKDomMouseEvent::button(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString eventAddress = duk_require_string(ctx, 0);
 	Rml::Event* event = DKRml::addressToEvent(eventAddress);
@@ -83,9 +77,7 @@ int DKDomMouseEvent::button(duk_context* ctx)
 	return true;
 }
 
-/////////////////////////////////////////////
-int DKDomMouseEvent::buttons(duk_context* ctx)
-{
+int DKDomMouseEvent::buttons(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString eventAddress = duk_require_string(ctx, 0);
 	Rml::Event* event = DKRml::addressToEvent(eventAddress);
@@ -94,14 +86,11 @@ int DKDomMouseEvent::buttons(duk_context* ctx)
 		duk_push_boolean(ctx, false);
 		return true;
 	}
-
 	//TODO
 	return false;
 }
 
-/////////////////////////////////////////////
-int DKDomMouseEvent::clientX(duk_context* ctx)
-{
+int DKDomMouseEvent::clientX(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString eventAddress = duk_require_string(ctx, 0);
 	Rml::Event* event = DKRml::addressToEvent(eventAddress);
@@ -110,15 +99,12 @@ int DKDomMouseEvent::clientX(duk_context* ctx)
 		duk_push_boolean(ctx, false);
 		return true;
 	}
-
 	int clientX = event->GetParameter<int>("mouse_x", 0);
 	duk_push_int(ctx, clientX);
 	return true;
 }
 
-//////////////////////////////////////////////
-int DKDomMouseEvent::clientY(duk_context* ctx)
-{
+int DKDomMouseEvent::clientY(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString eventAddress = duk_require_string(ctx, 0);
 	Rml::Event* event = DKRml::addressToEvent(eventAddress);
@@ -127,15 +113,12 @@ int DKDomMouseEvent::clientY(duk_context* ctx)
 		duk_push_boolean(ctx, false);
 		return true;
 	}
-
 	int clientY = event->GetParameter<int>("mouse_y", 0);
 	duk_push_int(ctx, clientY);
 	return true;
 }
 
-/////////////////////////////////////////////
-int DKDomMouseEvent::ctrlKey(duk_context* ctx)
-{
+int DKDomMouseEvent::ctrlKey(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString eventAddress = duk_require_string(ctx, 0);
 	Rml::Event* event = DKRml::addressToEvent(eventAddress);
@@ -150,9 +133,7 @@ int DKDomMouseEvent::ctrlKey(duk_context* ctx)
 	return true;
 }
 
-/////////////////////////////////////////////
-int DKDomMouseEvent::metaKey(duk_context* ctx)
-{
+int DKDomMouseEvent::metaKey(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString eventAddress = duk_require_string(ctx, 0);
 	Rml::Event* event = DKRml::addressToEvent(eventAddress);
@@ -161,15 +142,12 @@ int DKDomMouseEvent::metaKey(duk_context* ctx)
 		duk_push_boolean(ctx, false);
 		return true;
 	}
-
 	bool metaKey = event->GetParameter<bool>("meta_key", 0);
 	duk_push_boolean(ctx, metaKey);
 	return true;
 }
 
-////////////////////////////////////////////////
-int DKDomMouseEvent::movementX(duk_context* ctx)
-{
+int DKDomMouseEvent::movementX(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString eventAddress = duk_require_string(ctx, 0);
 	Rml::Event* event = DKRml::addressToEvent(eventAddress);
@@ -178,14 +156,11 @@ int DKDomMouseEvent::movementX(duk_context* ctx)
 		duk_push_boolean(ctx, false);
 		return true;
 	}
-
 	//TODO
 	return false;
 }
 
-////////////////////////////////////////////////
-int DKDomMouseEvent::movementY(duk_context* ctx)
-{
+int DKDomMouseEvent::movementY(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString eventAddress = duk_require_string(ctx, 0);
 	Rml::Event* event = DKRml::addressToEvent(eventAddress);
@@ -194,14 +169,11 @@ int DKDomMouseEvent::movementY(duk_context* ctx)
 		duk_push_boolean(ctx, false);
 		return true;
 	}
-
 	//TODO
 	return false;
 }
 
-//////////////////////////////////////////////
-int DKDomMouseEvent::offsetX(duk_context* ctx)
-{
+int DKDomMouseEvent::offsetX(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString eventAddress = duk_require_string(ctx, 0);
 	Rml::Event* event = DKRml::addressToEvent(eventAddress);
@@ -210,14 +182,11 @@ int DKDomMouseEvent::offsetX(duk_context* ctx)
 		duk_push_boolean(ctx, false);
 		return true;
 	}
-
 	//TODO
 	return false;
 }
 
-//////////////////////////////////////////////
-int DKDomMouseEvent::offsetY(duk_context* ctx)
-{
+int DKDomMouseEvent::offsetY(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString eventAddress = duk_require_string(ctx, 0);
 	Rml::Event* event = DKRml::addressToEvent(eventAddress);
@@ -226,14 +195,11 @@ int DKDomMouseEvent::offsetY(duk_context* ctx)
 		duk_push_boolean(ctx, false);
 		return true;
 	}
-
 	//TODO
 	return false;
 }
 
-////////////////////////////////////////////
-int DKDomMouseEvent::pageX(duk_context* ctx)
-{
+int DKDomMouseEvent::pageX(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString eventAddress = duk_require_string(ctx, 0);
 	Rml::Event* event = DKRml::addressToEvent(eventAddress);
@@ -242,14 +208,11 @@ int DKDomMouseEvent::pageX(duk_context* ctx)
 		duk_push_boolean(ctx, false);
 		return true;
 	}
-
 	//TODO
 	return false;
 }
 
-////////////////////////////////////////////
-int DKDomMouseEvent::pageY(duk_context* ctx)
-{
+int DKDomMouseEvent::pageY(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString eventAddress = duk_require_string(ctx, 0);
 	Rml::Event* event = DKRml::addressToEvent(eventAddress);
@@ -258,14 +221,11 @@ int DKDomMouseEvent::pageY(duk_context* ctx)
 		duk_push_boolean(ctx, false);
 		return true;
 	}
-
 	//TODO
 	return false;
 }
 
-/////////////////////////////////////////////
-int DKDomMouseEvent::region(duk_context* ctx)
-{
+int DKDomMouseEvent::region(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString eventAddress = duk_require_string(ctx, 0);
 	Rml::Event* event = DKRml::addressToEvent(eventAddress);
@@ -274,14 +234,11 @@ int DKDomMouseEvent::region(duk_context* ctx)
 		duk_push_boolean(ctx, false);
 		return true;
 	}
-
 	//TODO
 	return false;
 }
 
-////////////////////////////////////////////////////
-int DKDomMouseEvent::relatedTarget(duk_context* ctx)
-{
+int DKDomMouseEvent::relatedTarget(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString eventAddress = duk_require_string(ctx, 0);
 	Rml::Event* event = DKRml::addressToEvent(eventAddress);
@@ -290,14 +247,11 @@ int DKDomMouseEvent::relatedTarget(duk_context* ctx)
 		duk_push_boolean(ctx, false);
 		return true;
 	}
-
 	//TODO
 	return false;
 }
 
-//////////////////////////////////////////////
-int DKDomMouseEvent::screenX(duk_context* ctx)
-{
+int DKDomMouseEvent::screenX(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString eventAddress = duk_require_string(ctx, 0);
 	Rml::Event* event = DKRml::addressToEvent(eventAddress);
@@ -306,16 +260,13 @@ int DKDomMouseEvent::screenX(duk_context* ctx)
 		duk_push_boolean(ctx, false);
 		return true;
 	}
-
 	int x, y;
 	DKUtil::GetMousePos(x, y);
 	duk_push_int(ctx, x);
 	return true;
 }
 
-//////////////////////////////////////////////
-int DKDomMouseEvent::screenY(duk_context* ctx)
-{
+int DKDomMouseEvent::screenY(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString eventAddress = duk_require_string(ctx, 0);
 	Rml::Event* event = DKRml::addressToEvent(eventAddress);
@@ -324,16 +275,13 @@ int DKDomMouseEvent::screenY(duk_context* ctx)
 		duk_push_boolean(ctx, false);
 		return true;
 	}
-
 	int x, y;
 	DKUtil::GetMousePos(x, y);
 	duk_push_int(ctx, y);
 	return true;
 }
 
-///////////////////////////////////////////////
-int DKDomMouseEvent::shiftKey(duk_context* ctx)
-{
+int DKDomMouseEvent::shiftKey(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString eventAddress = duk_require_string(ctx, 0);
 	Rml::Event* event = DKRml::addressToEvent(eventAddress);
@@ -342,15 +290,12 @@ int DKDomMouseEvent::shiftKey(duk_context* ctx)
 		duk_push_boolean(ctx, false);
 		return true;
 	}
-
 	bool shiftKey = event->GetParameter<bool>("shift_key", 0);
 	duk_push_boolean(ctx, shiftKey);
 	return true;
 }
 
-////////////////////////////////////////////
-int DKDomMouseEvent::which(duk_context* ctx)
-{
+int DKDomMouseEvent::which(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString eventAddress = duk_require_string(ctx, 0);
 	Rml::Event* event = DKRml::addressToEvent(eventAddress);
@@ -359,14 +304,11 @@ int DKDomMouseEvent::which(duk_context* ctx)
 		duk_push_boolean(ctx, false);
 		return true;
 	}
-
 	//TODO
 	return false;
 }
 
-//////////////////////////////////////////////////
-int DKDomMouseEvent::mozPressure(duk_context* ctx)
-{
+int DKDomMouseEvent::mozPressure(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString eventAddress = duk_require_string(ctx, 0);
 	Rml::Event* event = DKRml::addressToEvent(eventAddress);
@@ -375,14 +317,11 @@ int DKDomMouseEvent::mozPressure(duk_context* ctx)
 		duk_push_boolean(ctx, false);
 		return true;
 	}
-
 	//TODO
 	return false;
 }
 
-/////////////////////////////////////////////////////
-int DKDomMouseEvent::mozInputSource(duk_context* ctx)
-{
+int DKDomMouseEvent::mozInputSource(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString eventAddress = duk_require_string(ctx, 0);
 	Rml::Event* event = DKRml::addressToEvent(eventAddress);
@@ -391,14 +330,11 @@ int DKDomMouseEvent::mozInputSource(duk_context* ctx)
 		duk_push_boolean(ctx, false);
 		return true;
 	}
-
 	//TODO
 	return false;
 }
 
-//////////////////////////////////////////////////
-int DKDomMouseEvent::webkitForce(duk_context* ctx)
-{
+int DKDomMouseEvent::webkitForce(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString eventAddress = duk_require_string(ctx, 0);
 	Rml::Event* event = DKRml::addressToEvent(eventAddress);
@@ -407,14 +343,11 @@ int DKDomMouseEvent::webkitForce(duk_context* ctx)
 		duk_push_boolean(ctx, false);
 		return true;
 	}
-
 	//TODO
 	return false;
 }
 
-////////////////////////////////////////
-int DKDomMouseEvent::x(duk_context* ctx)
-{
+int DKDomMouseEvent::x(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString eventAddress = duk_require_string(ctx, 0);
 	Rml::Event* event = DKRml::addressToEvent(eventAddress);
@@ -423,15 +356,12 @@ int DKDomMouseEvent::x(duk_context* ctx)
 		duk_push_boolean(ctx, false);
 		return true;
 	}
-
 	int clientX = event->GetParameter<int>("mouse_x", 0);
 	duk_push_int(ctx, clientX);
 	return true;
 }
 
-////////////////////////////////////////
-int DKDomMouseEvent::y(duk_context* ctx)
-{
+int DKDomMouseEvent::y(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString eventAddress = duk_require_string(ctx, 0);
 	Rml::Event* event = DKRml::addressToEvent(eventAddress);
@@ -440,7 +370,6 @@ int DKDomMouseEvent::y(duk_context* ctx)
 		duk_push_boolean(ctx, false);
 		return true;
 	}
-
 	int clientY = event->GetParameter<int>("mouse_y", 0);
 	duk_push_int(ctx, clientY);
 	return true;
