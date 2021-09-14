@@ -82,30 +82,23 @@ make
 exit \n")
 
 
+# look at xz/windows/build.bash for details
 #WIN64_PATH(${XZ}/${OS}/${DEBUG_DIR})
-#WIN64_BASH("#!/bin/bash 
-#cd /${XZ}/${OS}/${DEBUG_DIR} 
-#export PATH=/${MINGW64}/bin:$PATH\;
-#export PATH=/${MSYS}/bin:$PATH\;
-#../../configure --disable-shared --enable-static
-#make 
-#exit \n")
+WIN64_BASH("#!/bin/bash
+cd /${XZ}/${OS}/${DEBUG_DIR}
+export PATH=/${MINGW64}/bin:$PATH\;
+export PATH=/${MSYS}/bin:$PATH\;
+../../configure --disable-shared --enable-static --prefix= --enable-silent-rules --disable-dependency-tracking --disable-nls --disable-scripts --build=x86_64-w64-mingw32 CFLAGS=-march=x86-64
+make
+exit \n")
 
 #WIN64_PATH(${XZ}/${OS}/${RELEASE_DIR})
-#WIN64_BASH("#!/bin/bash 
-#cd /${XZ}/${OS}/${RELEASE_DIR} 
-#export PATH=/${MINGW64}/bin:$PATH\;
-#export PATH=/${MSYS}/bin:$PATH\;
-#../../configure --disable-shared --enable-static
-#make 
-#exit \n")
-
-WIN64_PATH(${XZ}/${OS}/${RELEASE_DIR})
 WIN64_BASH("#!/bin/bash
 cd /${XZ}/${OS}/${RELEASE_DIR}
 export PATH=/${MINGW64}/bin:$PATH\;
 export PATH=/${MSYS}/bin:$PATH\;
-./configure --prefix= --enable-silent-rules --disable-dependency-tracking --disable-nls --disable-scripts --build=x86_64-w64-mingw32 CFLAGS=-march=x86-64 -mtune=generic -O2
+../../configure --disable-shared --enable-static --prefix= --enable-silent-rules --disable-dependency-tracking --disable-nls --disable-scripts --build=x86_64-w64-mingw32 CFLAGS=-march=x86-64
+make
 exit \n")
 
 
