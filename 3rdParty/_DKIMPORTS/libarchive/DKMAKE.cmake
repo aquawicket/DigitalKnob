@@ -6,15 +6,11 @@
 
 ### DEPENDS ###
 DKDEPEND(zlib)
-if(USE_xz)
-	DKDEPEND(xz)
-endif()
-if(USE_bzip2)
-	if(CMAKE_HOSTS_WIN32)
-		DKDEPEND(bzip2-win-build)
-	else()
-		DKDEPEND(bzip2)
-	endif()
+DKDEPEND(xz)
+if(CMAKE_HOSTS_WIN32)
+	DKDEPEND(bzip2-win-build)
+else()
+	DKDEPEND(bzip2)
 endif()
 
 ### VERSION ###

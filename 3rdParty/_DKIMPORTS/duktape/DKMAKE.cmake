@@ -2,12 +2,8 @@
 # https://github.com/svaarala/duktape/archive/refs/heads/master.zip
 # https://codeload.github.com/Squareys/duktape/zip/refs/heads/let-support
 
-if(USE_python)
-	DKDEPEND(python)
-endif()
-if(USE_nodeJS)
-	DKDEPEND(nodejs)
-endif()
+DKDEPEND(python)
+DKDEPEND(nodejs)
 
 ### VERSION ###
 ##DKSET(DUKTAPE_VERSION 2.6.0)
