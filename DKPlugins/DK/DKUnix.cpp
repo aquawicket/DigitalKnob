@@ -1,7 +1,8 @@
 #include "DK/stdafx.h"
 #ifndef WIN32
 #include "DKUnix.h"
-#include <cstdlib>     //GetUsername()  std::getenv()
+#include <cstdlib>     // GetUsername()  std::getenv()
+#include <unistd.h>    // sleep()  / usleep()
 /*
 #include <pwd.h>       //GetUsername()  getpwuid()/getuid()
 #include <unistd.h>    //GetUsername()  getlogin()/getlogin_r()
@@ -16,9 +17,9 @@ bool DKUnix::GetKey(int& key){
 
 bool DKUnix::Sleep(int milliseconds){
 //#ifdef ANDROID
-	Sleep(milliseconds * 1000);
+	//sleep(milliseconds * 1000);
 //#else
-//	usleep(milliseconds * 1000);
+	usleep(milliseconds * 1000);
 //#endif
 	return true;
 }
