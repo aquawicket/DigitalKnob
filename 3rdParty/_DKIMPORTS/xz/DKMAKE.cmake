@@ -83,7 +83,7 @@ exit \n")
 
 
 # look at xz/windows/build.bash for details
-#WIN64_PATH(${XZ}/${OS}/${DEBUG_DIR})
+WIN64_PATH(${XZ}/${OS}/${DEBUG_DIR})
 WIN64_BASH("#!/bin/bash
 cd /${XZ}/${OS}/${DEBUG_DIR}
 export PATH=/${MINGW64}/bin:$PATH\;
