@@ -13,7 +13,7 @@ if(WIN_32)
 	DKSET(LIBGCC ${MINGW32}/lib/gcc/i686-w64-mingw32/${MINGW32_VERSION})
 endif()
 if(WIN_64)
-	DKSET(LIBGCC ${MINGW64}/lib/gcc/i686-w64-mingw32/${MINGW32_VERSION})
+	DKSET(LIBGCC ${MINGW64}/lib/gcc/x86_64-w64-mingw32/${MINGW32_VERSION})
 endif()
 
 
