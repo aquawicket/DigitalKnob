@@ -4,13 +4,15 @@
 #
 # https://sourceforge.net/projects/libjpeg-turbo/files/1.5.3/libjpeg-turbo-1.5.3.tar.gz
 # https://sourceforge.net/projects/libjpeg-turbo/files/2.1.0/libjpeg-turbo-2.1.0.tar.gz
+# https://downloads.sourceforge.net/libjpeg-turbo/libjpeg-turbo-1.5.3.tar.gz
 
 
 ### VERSION ###
 DKSET(JPEG_VERSION 1.5.3)
 ##DKSET(JPEG_VERSION 2.1.0)
 DKSET(JPEG_NAME libjpeg-turbo-${JPEG_VERSION})
-DKSET(JPEG_DL https://sourceforge.net/projects/libjpeg-turbo/files/${JPEG_VERSION}/${JPEG_NAME}.tar.gz)
+#DKSET(JPEG_DL https://sourceforge.net/projects/libjpeg-turbo/files/${JPEG_VERSION}/${JPEG_NAME}.tar.gz)
+DKSET(JPEG_DL https://downloads.sourceforge.net/libjpeg-turbo/${JPEG_NAME}.tar.gz)
 DKSET(JPEG ${3RDPARTY}/${JPEG_NAME})
 
 

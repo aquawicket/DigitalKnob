@@ -833,8 +833,8 @@ if(LINUX)
 		message(STATUS "Creating assets.zip . . .")
 		DKZIP(${DKPROJECT}/assets)
 	
-		message(STATUS "Creating assets.h . . .")
-		bin2h(SOURCE_FILE ${DKPROJECT}/assets.zip HEADER_FILE ${DKPROJECT}/assets.h VARIABLE_NAME "ASSETS_H")
+		#message(STATUS "Creating assets.h . . .")
+		#bin2h(SOURCE_FILE ${DKPROJECT}/assets.zip HEADER_FILE ${DKPROJECT}/assets.h VARIABLE_NAME "ASSETS_H")
 	
 		# Restore the backed up assets
 		DKCOPY(${DKPROJECT}/Backup/ ${DKPROJECT}/assets/ FALSE)
