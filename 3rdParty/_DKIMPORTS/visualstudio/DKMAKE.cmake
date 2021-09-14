@@ -1,5 +1,8 @@
 # Information
 # https://docs.microsoft.com/en-us/cpp/build/building-on-the-command-line?view=msvc-160
+# https://docs.microsoft.com/en-us/visualstudio/msbuild/msbuild?view=vs-2019
+# https://docs.microsoft.com/en-us/visualstudio/msbuild/msbuild-command-line-reference?view=vs-2019
+# https://docs.microsoft.com/en-us/visualstudio/msbuild/common-msbuild-project-properties?view=vs-2019
 #
 # Downloads
 # https://download.visualstudio.microsoft.com/download/pr/5e397ebe-38b2-4e18-a187-ac313d07332a/169156e6e9a005d49b357c42240184dc1e3ccc28ebc777e70d49257c074f77e8/vs_Community.exe
