@@ -92,7 +92,7 @@ export PATH=/${MSYS}/bin:$PATH\;
 make
 exit \n")
 
-#WIN64_PATH(${XZ}/${OS}/${RELEASE_DIR})
+WIN64_PATH(${XZ}/${OS}/${RELEASE_DIR})
 WIN64_BASH("#!/bin/bash
 cd /${XZ}/${OS}/${RELEASE_DIR}
 export PATH=/${MINGW64}/bin:$PATH\;
