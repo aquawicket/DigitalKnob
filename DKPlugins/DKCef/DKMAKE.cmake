@@ -10,10 +10,12 @@ ENDIF()
 
 
 IF(WIN_32)
-	DKDEPEND(cef_binary_windows32)
+	#DKDEPEND(cef_binary_windows32)
+	DKDEPEND(cef_binary)
 ENDIF()
 IF(WIN_64)
-	DKDEPEND(cef_binary_windows64)
+	#DKDEPEND(cef_binary_windows64)
+	DKDEPEND(cef_binary)
 ENDIF()
 
 IF(MAC_64)
