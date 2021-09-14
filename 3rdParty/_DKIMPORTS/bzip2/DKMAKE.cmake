@@ -58,8 +58,9 @@ DKSET(BZIP2_ANDROID -DBZIP2_INCLUDE_DIR=${BZIP2}/${OS} -DBZIP2_LIBRARY_DEBUG=${B
 ### COMPILE ###
 
 WIN_PATH(${BZIP2}/${OS})
-WIN_VS(${BZIP2_NAME} bzip2.sln libbz2-static)
-WIN_VS(${BZIP2_NAME} bzip2.sln bzip2-static)
+WIN32_VS(${BZIP2_NAME} bzip2.sln libbz2-static)
+WIN64_VS(${BZIP2_NAME} bzip2.sln libbz2-static)
+#WIN_VS(${BZIP2_NAME} bzip2.sln bzip2-static)
 
 #if(WIN_32)
 #	if(NOT EXISTS ${BZIP2}/${OS}/bzip2.c)
