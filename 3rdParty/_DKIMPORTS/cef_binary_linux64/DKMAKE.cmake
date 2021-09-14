@@ -1,3 +1,6 @@
+# Deprecated:  migrated to cef_binary
+return()
+
 # https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_linux64.tar.bz2
 
 ### VERSION ###
@@ -16,7 +19,7 @@ DKDEFINE(__STDC_CONSTANT_MACROS)
 DKDEFINE(__STDC_FORMAT_MACROS)
 DKDEFINE(PSAPI_VERSION=1)
 DKDEFINE(NOMINMAX)
-DKDEFINE(CEF_SANDBOX)
+#DKDEFINE(CEF_SANDBOX)
 DKDEFINE(CEF_ATL)
 LINUX_INCLUDE(${CEF})
 LINUX_DEBUG_LIB(${CEF}/${DEBUG_DIR}/libcef.so)
