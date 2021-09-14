@@ -3,7 +3,7 @@
 ### VERSION ###
 DKSET(CEF_VERSION 81.3.3+g072a5f5+chromium-81.0.4044.138)
 DKSET(CEF_NAME cef_binary_${CEF_VERSION}_linux32)
-DKSET(CEF_DL https://cef-builds.spotifycdn.com/cef_binary_${CEF_VERSION}_linux32.tar.bz2)
+DKSET(CEF_DL https://cef-builds.spotifycdn.com/${CEF_NAME}.tar.bz2)
 DKSET(CEF ${3RDPARTY}/${CEF_NAME})
 
 
@@ -33,7 +33,6 @@ RASPBERRY_RELEASE_LIB(${CEF}/${OS}/${RELEASE_DIR}/libcef_dll_wrapper/libcef_dll_
 ## RASPBERRY_RELEASE_LIB(${CEF}/${RELEASE_DIR}/cef_sandbox.a)
 
 
-
 ### COMPILE ###
 LINUX_DEBUG_PATH(${CEF}/${OS}/Debug)
 LINUX_DEBUG_COMMAND(${DKCMAKE_LINUX_DEBUG} ${CEF})
@@ -42,7 +41,6 @@ LINUX_DEBUG_COMMAND(make libcef_dll_wrapper)
 LINUX_RELEASE_PATH(${CEF}/${OS}/${RELEASE_DIR})
 LINUX_RELEASE_COMMAND(${DKCMAKE_LINUX_RELEASE} ${CEF})
 LINUX_RELEASE_COMMAND(make libcef_dll_wrapper)
-
 
 
 RASPBERRY_DEBUG_PATH(${CEF}/${OS}/Debug)

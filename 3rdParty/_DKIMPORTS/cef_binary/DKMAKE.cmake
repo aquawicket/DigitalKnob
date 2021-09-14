@@ -1,16 +1,37 @@
 # https://cef-builds.spotifycdn.com/index.html
 #
 # https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_windows32.tar.bz2
+# https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_windows64.tar.bz2
+# https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_macosx64.tar.bz2
+# https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_linux32.tar.bz2
+# https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_linux64.tar.bz2
+# https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_linuxarm.tar.bz2
+# https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_linuxarm64.tar.bz2
 
 
 ### VERSION ###
 DKSET(CEF_VERSION 81.3.3+g072a5f5+chromium-81.0.4044.138)
-IF(WIN_32)
+if(WIN_32)
 	DKSET(CEF_NAME cef_binary_${CEF_VERSION}_windows32)
-ENDIF()
-IF(WIN_64)
+endif()
+if(WIN_64)
 	DKSET(CEF_NAME cef_binary_${CEF_VERSION}_windows64)
-ENDIF()
+endif()
+if(MAC_64)
+	DKSET(CEF_NAME cef_binary_${CEF_VERSION}_macosx64)
+endif()
+if(LINUX_32)
+	DKSET(CEF_NAME cef_binary_${CEF_VERSION}_linux32)
+endif()
+if(LINUX_64)
+	DKSET(CEF_NAME cef_binary_${CEF_VERSION}_linux64)
+endif()
+if(RASPBERRY_32)
+	DKSET(CEF_NAME cef_binary_${CEF_VERSION}_linuxarm)
+endif()
+if(RASPBERRY_64)
+	DKSET(CEF_NAME cef_binary_${CEF_VERSION}_linuxarm64)
+endif()
 DKSET(CEF_DL https://cef-builds.spotifycdn.com/${CEF_NAME}.tar.bz2)
 DKSET(CEF ${3RDPARTY}/${CEF_NAME})
 
