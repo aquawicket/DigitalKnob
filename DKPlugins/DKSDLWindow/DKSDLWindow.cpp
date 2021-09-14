@@ -4,26 +4,23 @@
 #include "DK/DKFile.h"
 #include "DKSDLWindow/DKSDLWindow.h"
 
-
 #if defined(WIN32) || defined(LINUX)
-#include <GL/gl.h>
+    #include <GL/gl.h>
 #endif
 #if defined(MAC)
-#include <OpenGL/gl.h>
+    #include <OpenGL/gl.h>
 #endif
 /*
-#if defined(ANDROID)
+    #if defined(ANDROID)
 	#include <GLES/gl.h>
-#endif
-#if defined(IOS)
+    #endif
+    #if defined(IOS)
 	#include <OpenGLES/ES1/gl.h>
-#endif
+    #endif
 */
-
 #ifdef LINUX
-//#include <gdk/gdk.h>
+    //#include <gdk/gdk.h>
 #endif
-
 
 //std::vector<boost::function<bool(SDL_Event *event)> > DKSDLWindow::event_funcs;
 std::vector<std::function<bool(SDL_Event* event)> > DKSDLWindow::event_funcs;
@@ -31,36 +28,29 @@ std::vector<std::function<bool(SDL_Event* event)> > DKSDLWindow::event_funcs;
 std::vector<std::function<void()> > DKSDLWindow::render_funcs;
 //std::vector<boost::function<void()> > DKSDLWindow::update_funcs;
 std::vector<std::function<void()> > DKSDLWindow::update_funcs;
-std::map<int,int> DKSDLWindow::sdlKeyCode;
-std::map<int,int> DKSDLWindow::sdlCharCode;
-std::map<int,int> DKSDLWindow::sdlShiftCharCode;
-std::map<int,int> DKSDLWindow::sdlMacCode;
+std::map<int, int> DKSDLWindow::sdlKeyCode;
+std::map<int, int> DKSDLWindow::sdlCharCode;
+std::map<int, int> DKSDLWindow::sdlShiftCharCode;
+std::map<int, int> DKSDLWindow::sdlMacCode;
 
-////////////////////////
-bool DKSDLWindow::Init()
-{
+bool DKSDLWindow::Init() {
     DKDEBUGFUNC();
 #ifdef ANDROID
     //DKINFO("CallJavaFunction(OpenActivity,SDLActivity)\n");
     //CallJavaFunction("OpenActivity","SDLActivity");
 #endif
-
     //Get values from settings.txt file
     DKString sdl_renderer;
-    DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[SDL_RENDERER]", sdl_renderer);
-    DKINFO("settings.txt: [SDL_RENDERER] = "+sdl_renderer+"\n");
-
+    DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[SDL_RENDERER]", sdl_renderer);
+    DKINFO("settings.txt: [SDL_RENDERER] = " + sdl_renderer + "\n");
     SDL_SetMainReady(); //Bypass SDLmain  //https://wiki.libsdl.org/SDL_SetMainReady
-    if(SDL_Init(SDL_INIT_VIDEO|SDL_INIT_AUDIO|SDL_INIT_TIMER) < 0)
-    {
-        DKERROR("SDL_Init Error: "+DKString(SDL_GetError())+"\n");
+    if(SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_TIMER) < 0) {
+        DKERROR("SDL_Init Error: " + DKString(SDL_GetError()) + "\n");
         return false;
     }
-
     DKString title;
     DKFile::GetExeName(title);
     DKFile::RemoveExtention(title);
-
     mTitle = title;
     winX = 0;
     winY = 0;
@@ -68,53 +58,34 @@ bool DKSDLWindow::Init()
     height = 0;
     last_mouseX = 0;
     last_mouseY = 0;
-
     DKString textX;
-    DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[WINX]", textX);
+    DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[WINX]", textX);
     DKString textY;
-    DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[WINY]", textY);
+    DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[WINY]", textY);
     DKString textWidth;
-    DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[WIDTH]", textWidth);
+    DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[WIDTH]", textWidth);
     DKString textHeight;
-    DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[HEIGHT]", textHeight);
+    DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[HEIGHT]", textHeight);
     if(!textX.empty())
-    {
         winX = toInt(textX);
-    }
     if(!textY.empty())
-    {
         winY = toInt(textY);
-    }
     if(!textWidth.empty())
-    {
         width = toInt(textWidth);
-    }
     if(!textHeight.empty())
-    {
         height = toInt(textHeight);
-    }
-
 #ifdef WIN32 //account window frame
     winY = (winY + 30);
     winX = (winX + 10);
 #endif
     if(winX < 1)
-    {
         winX = 20;
-    }
     if(winY < 1)
-    {
         winY = 40;
-    }
     if(width < 1)
-    {
         width = 800;
-    }
     if(height < 1)
-    {
         height = 600;
-    }
-
 #ifdef IOS
     width = 320;
     height = 480;
@@ -123,14 +94,11 @@ bool DKSDLWindow::Init()
     width = DKAndroid::android_width;
     height = DKAndroid::android_height;
 #endif
-
     SDL_SetHint(SDL_HINT_VIDEO_MINIMIZE_ON_FOCUS_LOSS, "0");
 #if !defined(ANDROID) && !defined(IOS)
     SDL_SetHint(SDL_HINT_MOUSE_FOCUS_CLICKTHROUGH, "1");
 #endif
-
     DKString result;
-
 #if defined(ANDROID) || defined(IOS)
     DKINFO("Creating SDLWindow for mobile device\n");
     SDL_SetHint(SDL_HINT_RENDER_DRIVER, "opengles");
@@ -140,16 +108,13 @@ bool DKSDLWindow::Init()
     SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
     SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
     SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
-
     result = "OpenglES";
-    DKINFO("DKSDLWindow Width: "+toString(width)+" Height: "+toString(height)+"\n");
-    if(SDL_CreateWindowAndRenderer(width, height, SDL_WINDOW_RESIZABLE, &window, &renderer) < 0)
-    {
-        DKERROR("SDL_CreateWindow Error: "+DKString(SDL_GetError())+"\n");
+    DKINFO("DKSDLWindow Width: " + toString(width) + " Height: " + toString(height) + "\n");
+    if(SDL_CreateWindowAndRenderer(width, height, SDL_WINDOW_RESIZABLE, &window, &renderer) < 0) {
+        DKERROR("SDL_CreateWindow Error: " + DKString(SDL_GetError()) + "\n");
         return false;
     }
 #endif
-
 #if !defined(ANDROID) && !defined(IOS)
     DKINFO("Creating SDLWindow for Desktop\n");
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_COMPATIBILITY);
@@ -163,35 +128,28 @@ bool DKSDLWindow::Init()
     //SDL_SetHint(SDL_HINT_RENDER_OPENGL_SHADERS, 0);
     SDL_SetHintWithPriority(SDL_HINT_RENDER_OPENGL_SHADERS, 0, SDL_HINT_OVERRIDE);
     window = SDL_CreateWindow(mTitle.c_str(), winX, winY, width, height, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE | SDL_WINDOW_OPENGL);
-    if(!window)
-    {
-        DKERROR("SDL_CreateWindow Error: "+DKString(SDL_GetError())+"\n");
+    if(!window) {
+        DKERROR("SDL_CreateWindow Error: " + DKString(SDL_GetError()) + "\n");
         SDL_Quit();
         return false;
     }
-
     renderer = NULL;
-    if(!same(sdl_renderer, "SOFTWARE"))
-    {
+    if(!same(sdl_renderer, "SOFTWARE")) {
         //result = "SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC";
         result = "SDL_RENDERER_ACCELERATED";
         renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED /*| SDL_RENDERER_PRESENTVSYNC*/);
     }
-    if(!renderer)
-    {
+    if(!renderer) {
         result = "SDL_RENDERER_SOFTWARE";
         renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_SOFTWARE);
     }
-
-    if(!renderer)
-    {
+    if(!renderer) {
         SDL_DestroyWindow(window);
-        DKERROR("SDL_CreateRenderer Error: "+DKString(SDL_GetError())+"\n");
+        DKERROR("SDL_CreateRenderer Error: " + DKString(SDL_GetError()) + "\n");
         SDL_Quit();
         return false;
     }
 #endif
-
     //Set window Title
     DKString title2;
     DKFile::GetExeName(title2);
@@ -217,18 +175,14 @@ bool DKSDLWindow::Init()
     DKFile::GetExePath(file);
     DKFile::GetModifiedTime(file, mTime);
     title2 += mTime;
-
-    DKString icon = DKFile::local_assets+"icon.ico";
+    DKString icon = DKFile::local_assets + "icon.ico";
     SetIcon(&icon, NULL);
-
     //DKINFO(title+"\n");
     SDL_SetWindowTitle(window, title2.c_str());
-
     DKClass::RegisterFunc("DKSDLWindow::TestInt", &DKSDLWindow::TestInt, this);
     DKClass::RegisterFunc("DKSDLWindow::TestString", &DKSDLWindow::TestString, this);
     DKClass::RegisterFunc("DKSDLWindow::TestReturnInt", &DKSDLWindow::TestReturnInt, this);
     DKClass::RegisterFunc("DKSDLWindow::TestReturnString", &DKSDLWindow::TestReturnString, this);
-
     DKClass::RegisterFunc("DKSDLWindow::Fullscreen", &DKSDLWindow::Fullscreen, this);
     DKClass::RegisterFunc("DKSDLWindow::GetClipboard", &DKSDLWindow::GetClipboard, this);
     DKClass::RegisterFunc("DKSDLWindow::GetHandle", &DKSDLWindow::GetHandle, this);
@@ -256,10 +210,8 @@ bool DKSDLWindow::Init()
     DKClass::RegisterFunc("DKSDLWindow::MessageBox", &DKSDLWindow::MessageBox, this);
     DKApp::AppendLoopFunc(&DKSDLWindow::Process, this);
     DKSDLWindow::AddEventFunc(&DKSDLWindow::handle, this);
-
     MapInputs();
     SDL_SetEventFilter(&DKSDLWindow::EventFilter, this); //DEBUG : bypassing events here for now
-
 #if !defined(ANDROID) && !defined(IOS)
     SDL_GLContext glcontext = SDL_GL_CreateContext(window);
     SDL_GL_MakeCurrent(window, glcontext);
@@ -272,52 +224,48 @@ bool DKSDLWindow::Init()
     gl_renderer = reinterpret_cast<const char*>(glGetString(GL_RENDERER));
     //gl_shading = reinterpret_cast<const char*>(glGetString(GL_SHADING_LANGUAGE_VERSION));
     gl_extensions = reinterpret_cast<const char*>(glGetString(GL_EXTENSIONS));
-
     ///Verify Render Drivers used
     SDL_RendererInfo info;
     SDL_GetRendererInfo(renderer, &info);
     printf("%s", info.name);
-
     DKINFO("##############################\n");
     DKINFO("##### Window Information #####\n");
     DKINFO("##############################\n");
-    DKINFO("GL_MAJOR_VERSION = "+gl_major_version+"\n");
-    DKINFO("GL_MINOR_VERSION = "+gl_minor_version+"\n");
-    DKINFO("GL_VERSION = "+gl_version+"\n");
-    DKINFO("GL_VENDOR = "+gl_vendor+"\n");
-    DKINFO("GL_RENDERER = "+gl_renderer+"\n");
+    DKINFO("GL_MAJOR_VERSION = " + gl_major_version + "\n");
+    DKINFO("GL_MINOR_VERSION = " + gl_minor_version + "\n");
+    DKINFO("GL_VERSION = " + gl_version + "\n");
+    DKINFO("GL_VENDOR = " + gl_vendor + "\n");
+    DKINFO("GL_RENDERER = " + gl_renderer + "\n");
     //DKINFO("GL_SHADING_LANGUAGE_VERSION = "+gl_shading+"\n");
     //DKINFO("GL_EXTENSIONS = "+gl_extensions+"\n");
-    DKINFO("SDL Renderer = "+result+"\n");
-    DKINFO("Render Driver = "+toString(info.name)+"\n");
-    DKINFO("Resolution = "+toString(width)+"x"+toString(height)+"\n");
+    DKINFO("SDL Renderer = " + result + "\n");
+    DKINFO("Render Driver = " + toString(info.name) + "\n");
+    DKINFO("Resolution = " + toString(width) + "x" + toString(height) + "\n");
     int depth;
     SDL_GL_GetAttribute(SDL_GL_DEPTH_SIZE, &depth);
-    DKINFO("Depth = "+toString(depth)+"\n");
+    DKINFO("Depth = " + toString(depth) + "\n");
     int doublebuffer;
     SDL_GL_GetAttribute(SDL_GL_DOUBLEBUFFER, &doublebuffer);
-    DKINFO("Double buffer = "+toString(doublebuffer)+"\n");
+    DKINFO("Double buffer = " + toString(doublebuffer) + "\n");
     int red;
     SDL_GL_GetAttribute(SDL_GL_RED_SIZE, &red);
-    DKINFO("Red Size = "+toString(red)+"\n");
+    DKINFO("Red Size = " + toString(red) + "\n");
     int green;
     SDL_GL_GetAttribute(SDL_GL_GREEN_SIZE, &green);
-    DKINFO("Green Size = "+toString(green)+"\n");
+    DKINFO("Green Size = " + toString(green) + "\n");
     int blue;
     SDL_GL_GetAttribute(SDL_GL_BLUE_SIZE, &blue);
-    DKINFO("Blue Size = "+toString(blue)+"\n");
+    DKINFO("Blue Size = " + toString(blue) + "\n");
     int alpha;
     SDL_GL_GetAttribute(SDL_GL_ALPHA_SIZE, &alpha);
-    DKINFO("Alpha Size = "+toString(alpha)+"\n");
+    DKINFO("Alpha Size = " + toString(alpha) + "\n");
     int buffer;
     SDL_GL_GetAttribute(SDL_GL_BUFFER_SIZE, &buffer);
-    DKINFO("Buffer Size = "+toString(buffer)+"\n");
+    DKINFO("Buffer Size = " + toString(buffer) + "\n");
     int stencil;
     SDL_GL_GetAttribute(SDL_GL_STENCIL_SIZE, &stencil);
-    DKINFO("Stencil Size = "+toString(stencil)+"\n");
-
-    if(has(gl_vendor, "Microsoft"))
-    {
+    DKINFO("Stencil Size = " + toString(stencil) + "\n");
+    if(has(gl_vendor, "Microsoft")) {
         SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_WARNING, "OpenGL Drivers", "Your OpenGL video drivers are out of date. Please upgrade the graphics card drivers for best performance and compatability.", window);
         //DKApp::Exit();
     }
@@ -326,8 +274,7 @@ bool DKSDLWindow::Init()
 }
 
 ///////////////////////
-bool DKSDLWindow::End()
-{
+bool DKSDLWindow::End() {
     DKDEBUGFUNC();
     //SDL_DestroyTexture(tex);
     SDL_DestroyRenderer(renderer);
@@ -338,8 +285,7 @@ bool DKSDLWindow::End()
 
 
 //////////////////////////////////////////////////////////
-bool DKSDLWindow::TestInt(const void* input, void* output)
-{
+bool DKSDLWindow::TestInt(const void* input, void* output) {
     DKDEBUGFUNC(input, output);
     int in = *(int*)input;
     int out = in;
@@ -348,8 +294,7 @@ bool DKSDLWindow::TestInt(const void* input, void* output)
 }
 
 /////////////////////////////////////////////////////////////
-bool DKSDLWindow::TestString(const void* input, void* output)
-{
+bool DKSDLWindow::TestString(const void* input, void* output) {
     DKDEBUGFUNC(input, output);
     std::string in = *(std::string*)input;
     std::string out = in;
@@ -358,8 +303,7 @@ bool DKSDLWindow::TestString(const void* input, void* output)
 }
 
 ////////////////////////////////////////////////////////////////
-bool DKSDLWindow::TestReturnInt(const void* input, void* output)
-{
+bool DKSDLWindow::TestReturnInt(const void* input, void* output) {
     DKDEBUGFUNC(input, output);
     int var = 1234;
     *(int*)output = var;
@@ -367,26 +311,22 @@ bool DKSDLWindow::TestReturnInt(const void* input, void* output)
 }
 
 ///////////////////////////////////////////////////////////////////
-bool DKSDLWindow::TestReturnString(const void* input, void* output)
-{
+bool DKSDLWindow::TestReturnString(const void* input, void* output) {
     DKDEBUGFUNC(input, output);
     std::string var = "Return test";
     *(std::string*)output = var;
     return true;
 }
 
-
 /////////////////////////////////////////////////////////////
-bool DKSDLWindow::Fullscreen(const void* input, void* output)
-{
+bool DKSDLWindow::Fullscreen(const void* input, void* output) {
     DKDEBUGFUNC(input, output);
     SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN_DESKTOP);
     return true;
 }
 
 ///////////////////////////////////////////////////////////////
-bool DKSDLWindow::GetClipboard(const void* input, void* output)
-{
+bool DKSDLWindow::GetClipboard(const void* input, void* output) {
     DKDEBUGFUNC(input, output);
     std::string out = SDL_GetClipboardText();
     *(std::string*)output = out;
@@ -394,13 +334,11 @@ bool DKSDLWindow::GetClipboard(const void* input, void* output)
 }
 
 ////////////////////////////////////////////////////////////
-bool DKSDLWindow::GetHandle(const void* input, void* output)
-{
+bool DKSDLWindow::GetHandle(const void* input, void* output) {
     DKDEBUGFUNC(input, output);
     SDL_SysWMinfo wmInfo;
     SDL_VERSION(&wmInfo.version);
     SDL_GetWindowWMInfo(window, &wmInfo);
-
 #ifdef WIN32
     HWND hwnd = wmInfo.info.win.window;
     *(HWND*)output = hwnd;
@@ -409,10 +347,10 @@ bool DKSDLWindow::GetHandle(const void* input, void* output)
 #ifdef MAC
     //FIXME - we need a header for NSView
     /*
-    NSView* nsview = NULL; //TODO - from SDL
-    if(!nsview){ return false; }
-    *(NSView**)output = nsview;
-    return true;
+        NSView* nsview = NULL; //TODO - from SDL
+        if(!nsview){ return false; }
+        (NSView**)output = nsview;
+        return true;
     */
     return false;
 #endif
@@ -428,23 +366,19 @@ bool DKSDLWindow::GetHandle(const void* input, void* output)
 }
 
 ////////////////////////////////////////////////////////////
-bool DKSDLWindow::GetHeight(const void* input, void* output)
-{
+bool DKSDLWindow::GetHeight(const void* input, void* output) {
     DKDEBUGFUNC(input, output);
     int h;
     SDL_GetWindowSize(window, NULL, &h);
     //DKINFO("DKSDLWindow::GetHeight() = "+toString(h)+"\n");
     if(h == 0)
-    {
         h = height;
-    }
     *(int*)output = h;
     return true;
 }
 
 ////////////////////////////////////////////////////////////
-bool DKSDLWindow::GetMouseX(const void* input, void* output)
-{
+bool DKSDLWindow::GetMouseX(const void* input, void* output) {
     DKDEBUGFUNC(input, output);
     int mouseX;
     SDL_GetMouseState(&mouseX, NULL);
@@ -453,8 +387,7 @@ bool DKSDLWindow::GetMouseX(const void* input, void* output)
 }
 
 ////////////////////////////////////////////////////////////
-bool DKSDLWindow::GetMouseY(const void* input, void* output)
-{
+bool DKSDLWindow::GetMouseY(const void* input, void* output) {
     DKDEBUGFUNC(input, output);
     int mouseY;
     SDL_GetMouseState(NULL, &mouseY);
@@ -463,31 +396,26 @@ bool DKSDLWindow::GetMouseY(const void* input, void* output)
 }
 
 ////////////////////////////////////////////////////////////////
-bool DKSDLWindow::GetPixelRatio(const void* input, void* output)
-{
+bool DKSDLWindow::GetPixelRatio(const void* input, void* output) {
     DKDEBUGFUNC(input, output);
     *(int*)output = 1;
     return true;
 }
 
 ///////////////////////////////////////////////////////////
-bool DKSDLWindow::GetWidth(const void* input, void* output)
-{
+bool DKSDLWindow::GetWidth(const void* input, void* output) {
     DKDEBUGFUNC(input, output);
     int w;
     SDL_GetWindowSize(window, &w, NULL);
     //DKINFO("DKSDLWindow::GetWidth() = "+toString(w)+"\n");
     if(w == 0)
-    {
         w = width;
-    }
     *(int*)output = w;
     return true;
 }
 
 ///////////////////////////////////////////////////////
-bool DKSDLWindow::GetX(const void* input, void* output)
-{
+bool DKSDLWindow::GetX(const void* input, void* output) {
     DKDEBUGFUNC(input, output);
     int x;
     SDL_GetWindowPosition(window, &x, NULL);
@@ -496,8 +424,7 @@ bool DKSDLWindow::GetX(const void* input, void* output)
 }
 
 ///////////////////////////////////////////////////////
-bool DKSDLWindow::GetY(const void* input, void* output)
-{
+bool DKSDLWindow::GetY(const void* input, void* output) {
     DKDEBUGFUNC(input, output);
     int y;
     SDL_GetWindowPosition(window, NULL, &y);
@@ -506,16 +433,14 @@ bool DKSDLWindow::GetY(const void* input, void* output)
 }
 
 ///////////////////////////////////////////////////////
-bool DKSDLWindow::Hide(const void* input, void* output)
-{
+bool DKSDLWindow::Hide(const void* input, void* output) {
     DKDEBUGFUNC(input, output);
     SDL_HideWindow(window);
     return true;
 }
 
 ///////////////////////////////////////////////////////////////
-bool DKSDLWindow::IsFullscreen(const void* input, void* output)
-{
+bool DKSDLWindow::IsFullscreen(const void* input, void* output) {
     DKDEBUGFUNC(input, output);
     long FullscreenFlag = SDL_WINDOW_FULLSCREEN;
     bool isFullscreen = ((SDL_GetWindowFlags(window) & FullscreenFlag) != 0);
@@ -524,8 +449,7 @@ bool DKSDLWindow::IsFullscreen(const void* input, void* output)
 }
 
 ////////////////////////////////////////////////////////////
-bool DKSDLWindow::IsVisible(const void* input, void* output)
-{
+bool DKSDLWindow::IsVisible(const void* input, void* output) {
     DKDEBUGFUNC(input, output);
     long IsVisibleFlag = SDL_WINDOW_SHOWN;
     bool isVisible = ((SDL_GetWindowFlags(window) & IsVisibleFlag) != 0);
@@ -534,8 +458,7 @@ bool DKSDLWindow::IsVisible(const void* input, void* output)
 }
 
 /////////////////////////////////////////////////////////////
-bool DKSDLWindow::MessageBox(const void* input, void* output)
-{
+bool DKSDLWindow::MessageBox(const void* input, void* output) {
     DKDEBUGFUNC(input, output);
     DKString message = *(DKString*)input;
     SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "DKERROR", message.c_str(), window);
@@ -543,40 +466,32 @@ bool DKSDLWindow::MessageBox(const void* input, void* output)
 }
 
 ///////////////////////////////////////////////////////////
-bool DKSDLWindow::Minimize(const void* input, void* output)
-{
+bool DKSDLWindow::Minimize(const void* input, void* output) {
     DKDEBUGFUNC(input, output);
     SDL_MinimizeWindow(window);
     return true;
 }
 
 //////////////////////////////////////////////////////////
-bool DKSDLWindow::Restore(const void* input, void* output)
-{
+bool DKSDLWindow::Restore(const void* input, void* output) {
     DKDEBUGFUNC(input, output);
     SDL_RestoreWindow(window);
     return true;
 }
 
 ///////////////////////////////////////////////////////////////
-bool DKSDLWindow::SetClipboard(const void* input, void* output)
-{
+bool DKSDLWindow::SetClipboard(const void* input, void* output) {
     DKDEBUGFUNC(input, output);
     std::string in = *(std::string*)input;
     if(in.empty())
-    {
         return false;
-    }
     if(SDL_SetClipboardText(in.c_str()) < 0)
-    {
         return false;
-    }
     return true;
 }
 
 ////////////////////////////////////////////////////////////
-bool DKSDLWindow::SetHeight(const void* input, void* output)
-{
+bool DKSDLWindow::SetHeight(const void* input, void* output) {
     DKDEBUGFUNC(input, output);
     int h = *(int*)input;
     int w;
@@ -586,8 +501,7 @@ bool DKSDLWindow::SetHeight(const void* input, void* output)
 }
 
 //////////////////////////////////////////////////////////
-bool DKSDLWindow::SetIcon(const void* input, void* output)
-{
+bool DKSDLWindow::SetIcon(const void* input, void* output) {
     DKDEBUGFUNC(input, output);
 #ifdef WIN32
     DKString file = *(DKString*)input;
@@ -604,8 +518,7 @@ bool DKSDLWindow::SetIcon(const void* input, void* output)
 }
 
 ///////////////////////////////////////////////////////////
-bool DKSDLWindow::SetTitle(const void* input, void* output)
-{
+bool DKSDLWindow::SetTitle(const void* input, void* output) {
     DKDEBUGFUNC(input, output);
     DKString title = *(DKString*)input;
     SDL_SetWindowTitle(window, title.c_str());
@@ -614,8 +527,7 @@ bool DKSDLWindow::SetTitle(const void* input, void* output)
 }
 
 ///////////////////////////////////////////////////////////
-bool DKSDLWindow::SetWidth(const void* input, void* output)
-{
+bool DKSDLWindow::SetWidth(const void* input, void* output) {
     DKDEBUGFUNC(input, output);
     int w = *(int*)input;
     int h;
@@ -625,8 +537,7 @@ bool DKSDLWindow::SetWidth(const void* input, void* output)
 }
 
 ///////////////////////////////////////////////////////
-bool DKSDLWindow::SetX(const void* input, void* output)
-{
+bool DKSDLWindow::SetX(const void* input, void* output) {
     DKDEBUGFUNC(input, output);
     int x = *(int*)input;
     int y;
@@ -636,8 +547,7 @@ bool DKSDLWindow::SetX(const void* input, void* output)
 }
 
 ///////////////////////////////////////////////////////
-bool DKSDLWindow::SetY(const void* input, void* output)
-{
+bool DKSDLWindow::SetY(const void* input, void* output) {
     DKDEBUGFUNC(input, output);
     int y = *(int*)input;
     int x;
@@ -647,30 +557,25 @@ bool DKSDLWindow::SetY(const void* input, void* output)
 }
 
 ///////////////////////////////////////////////////////
-bool DKSDLWindow::Show(const void* input, void* output)
-{
+bool DKSDLWindow::Show(const void* input, void* output) {
     DKDEBUGFUNC(input, output);
     SDL_ShowWindow(window);
     return true;
 }
 
 ///////////////////////////////////////////////////////////
-bool DKSDLWindow::Windowed(const void* input, void* output)
-{
+bool DKSDLWindow::Windowed(const void* input, void* output) {
     DKDEBUGFUNC(input, output);
     SDL_SetWindowFullscreen(window, 0);
     return true;
 }
 
 ///////////////////////////
-void DKSDLWindow::Process()
-{
+void DKSDLWindow::Process() {
     //DKDEBUGFUNC();
-    if(SDL_GetWindowFlags(window) & SDL_WINDOW_HIDDEN)
-    {
+    if(SDL_GetWindowFlags(window) & SDL_WINDOW_HIDDEN) {
         DKUtil::Sleep(1000); //FIXME - look for a better way to save cpu usage here
     }
-
     //if(SDL_GetWindowFlags(window) & SDL_WINDOW_SHOWN){
     //SDL_SetRenderTarget(renderer, NULL);
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255); //white
@@ -679,30 +584,21 @@ void DKSDLWindow::Process()
     SDL_RenderClear(renderer);
     //SDL_RenderDrawLine(renderer, 0, height / 2, width, height / 2 );
     //}
-
     //if (SDL_GetWindowFlags(window) & SDL_WINDOW_SHOWN) {
-    for (unsigned int i = 0; i < render_funcs.size(); ++i)
-    {
+    for(unsigned int i = 0; i < render_funcs.size(); ++i) {
         render_funcs[i](); //Call render functions
     }
     //}
-
-
     SDL_Event e;
-    while (SDL_PollEvent(&e))
-    {
-        for (unsigned int i = 0; i < event_funcs.size(); ++i)
-        {
-            if (event_funcs[i](&e))   //Call event functions
-            {
+    while(SDL_PollEvent(&e)) {
+        for(unsigned int i = 0; i < event_funcs.size(); ++i) {
+            if(event_funcs[i](&e)) {  //Call event functions
                 i = event_funcs.size();	//eat the event
             };
         }
     }
-
     //if (SDL_GetWindowFlags(window) & SDL_WINDOW_SHOWN) {
-    for (unsigned int i = 0; i < update_funcs.size(); ++i)
-    {
+    for(unsigned int i = 0; i < update_funcs.size(); ++i) {
         update_funcs[i](); //Call update functions
     }
     //}
@@ -710,71 +606,59 @@ void DKSDLWindow::Process()
 }
 
 //////////////////////////////////////////////////////////////
-int DKSDLWindow::EventFilter(void* userdata, SDL_Event* event)
-{
+int DKSDLWindow::EventFilter(void* userdata, SDL_Event* event) {
     //DKDEBUGFUNC(userdata, event);
-    if(event->type == SDL_WINDOWEVENT)
-    {
-        switch(event->window.event)
-        {
-        case SDL_WINDOWEVENT_MOVED:
-        {
-            DKSDLWindow* dkwindowdow = static_cast<DKSDLWindow*>(userdata);
-            dkwindowdow->winX = event->window.data1;
-            dkwindowdow->winY = event->window.data2;
-            dkwindowdow->Process();
-            DKEvents::SendEvent("sdlwindow", "move", toString(dkwindowdow->winX)+","+toString(dkwindowdow->winY));
-            return 1;
-        }
-        case SDL_WINDOWEVENT_RESIZED:
-        {
-            DKSDLWindow* dkwindowdow = static_cast<DKSDLWindow*>(userdata);
-            dkwindowdow->width = event->window.data1;
-            dkwindowdow->height = event->window.data2;
-            dkwindowdow->Process();
-            DKEvents::SendEvent("sdlwindow", "resize", toString(dkwindowdow->width)+","+toString(dkwindowdow->height));
-            return 1;
-        }
-        case SDL_WINDOWEVENT_SIZE_CHANGED:
-        {
-            DKSDLWindow* dkwindowdow = static_cast<DKSDLWindow*>(userdata);
-            dkwindowdow->width = event->window.data1;
-            dkwindowdow->height = event->window.data2;
-            dkwindowdow->Process();
-            DKEvents::SendEvent("sdlwindow", "resize", toString(dkwindowdow->width)+","+toString(dkwindowdow->height));
-            return 1;
-        }
-        case SDL_WINDOWEVENT_MINIMIZED:
-        {
-            DKEvents::SendEvent("sdlwindow", "minimize", "");
-            return 1;
-        }
-        case SDL_WINDOWEVENT_MAXIMIZED:
-        {
-            DKEvents::SendEvent("sdlwindow", "maximize", "");
-            return 1;
-        }
-        case SDL_WINDOWEVENT_RESTORED:
-        {
-            DKEvents::SendEvent("sdlwindow", "restore", "");
-            return 1;
-        }
+    if(event->type == SDL_WINDOWEVENT) {
+        switch(event->window.event) {
+            case SDL_WINDOWEVENT_MOVED: {
+                DKSDLWindow* dkwindowdow = static_cast<DKSDLWindow*>(userdata);
+                dkwindowdow->winX = event->window.data1;
+                dkwindowdow->winY = event->window.data2;
+                dkwindowdow->Process();
+                DKEvents::SendEvent("sdlwindow", "move", toString(dkwindowdow->winX) + "," + toString(dkwindowdow->winY));
+                return 1;
+            }
+            case SDL_WINDOWEVENT_RESIZED: {
+                DKSDLWindow* dkwindowdow = static_cast<DKSDLWindow*>(userdata);
+                dkwindowdow->width = event->window.data1;
+                dkwindowdow->height = event->window.data2;
+                dkwindowdow->Process();
+                DKEvents::SendEvent("sdlwindow", "resize", toString(dkwindowdow->width) + "," + toString(dkwindowdow->height));
+                return 1;
+            }
+            case SDL_WINDOWEVENT_SIZE_CHANGED: {
+                DKSDLWindow* dkwindowdow = static_cast<DKSDLWindow*>(userdata);
+                dkwindowdow->width = event->window.data1;
+                dkwindowdow->height = event->window.data2;
+                dkwindowdow->Process();
+                DKEvents::SendEvent("sdlwindow", "resize", toString(dkwindowdow->width) + "," + toString(dkwindowdow->height));
+                return 1;
+            }
+            case SDL_WINDOWEVENT_MINIMIZED: {
+                DKEvents::SendEvent("sdlwindow", "minimize", "");
+                return 1;
+            }
+            case SDL_WINDOWEVENT_MAXIMIZED: {
+                DKEvents::SendEvent("sdlwindow", "maximize", "");
+                return 1;
+            }
+            case SDL_WINDOWEVENT_RESTORED: {
+                DKEvents::SendEvent("sdlwindow", "restore", "");
+                return 1;
+            }
         }
     }
-    if(event->type == SDL_APP_WILLENTERBACKGROUND)
-    {
+    if(event->type == SDL_APP_WILLENTERBACKGROUND) {
         DKINFO("DKSDLWindow::SDL_APP_WILLENTERBACKGROUND\n");
         DKApp::paused = true;
         return 1;
     }
-    if(event->type == SDL_APP_DIDENTERFOREGROUND)
-    {
+    if(event->type == SDL_APP_DIDENTERFOREGROUND) {
         DKINFO("DKSDLWindow::SDL_APP_DIDENTERFOREGROUND\n");
         DKApp::paused = false;
         return 1;
     }
-    if(event->type == SDL_TEXTINPUT)
-    {
+    if(event->type == SDL_TEXTINPUT) {
         //DKINFO("DKSDLWindow::SDL_TEXTINPUT\n");
         return 1;
     }
@@ -782,111 +666,73 @@ int DKSDLWindow::EventFilter(void* userdata, SDL_Event* event)
 }
 
 //////////////////////////////////////////
-bool DKSDLWindow::handle(SDL_Event *event)
-{
+bool DKSDLWindow::handle(SDL_Event *event) {
     //DKDEBUGFUNC(event);
-    switch(event->type)
-    {
-    case SDL_QUIT:
-    {
-        DKApp::Exit();
-        return false; //allow event to continue
-    }
-
-    case SDL_MOUSEMOTION:
-    {
-        if(event->motion.x != last_mouseX || event->motion.y != last_mouseY)
-        {
-            last_mouseX = event->motion.x;
-            last_mouseY = event->motion.y;
-            DKEvents::SendEvent("sdlwindow", "mousemove", toString(last_mouseX)+","+toString(last_mouseY)+","+toString(winX+last_mouseX)+","+toString(winY+last_mouseY));
+    switch(event->type) {
+        case SDL_QUIT: {
+            DKApp::Exit();
+            return false; //allow event to continue
         }
-        return false; //allow event to continue
-    }
-
-    case SDL_MOUSEBUTTONDOWN:
-    {
-        DKEvents::SendEvent("sdlwindow", "mousedown", toString(event->button.button));
-        return false; //allow event to continue
-    }
-
-    case SDL_MOUSEBUTTONUP:
-    {
-        DKEvents::SendEvent("sdlwindow", "mouseup", toString(event->button.button));
-        if(event->button.button == 3)
-        {
-            DKEvents::SendEvent("sdlwindow", "contextmenu", toString(event->button.button));
-        }
-        else
-        {
-            if(event->button.clicks == 2)
-            {
-                DKEvents::SendEvent("sdlwindow", "dblclick", toString(event->button.button));
+        case SDL_MOUSEMOTION: {
+            if(event->motion.x != last_mouseX || event->motion.y != last_mouseY) {
+                last_mouseX = event->motion.x;
+                last_mouseY = event->motion.y;
+                DKEvents::SendEvent("sdlwindow", "mousemove", toString(last_mouseX) + "," + toString(last_mouseY) + "," + toString(winX + last_mouseX) + "," + toString(winY + last_mouseY));
             }
-            else
-            {
-                DKEvents::SendEvent("sdlwindow", "click", toString(event->button.button));
+            return false; //allow event to continue
+        }
+        case SDL_MOUSEBUTTONDOWN: {
+            DKEvents::SendEvent("sdlwindow", "mousedown", toString(event->button.button));
+            return false; //allow event to continue
+        }
+        case SDL_MOUSEBUTTONUP: {
+            DKEvents::SendEvent("sdlwindow", "mouseup", toString(event->button.button));
+            if(event->button.button == 3)
+                DKEvents::SendEvent("sdlwindow", "contextmenu", toString(event->button.button));
+            else {
+                if(event->button.clicks == 2)
+                    DKEvents::SendEvent("sdlwindow", "dblclick", toString(event->button.button));
+                else
+                    DKEvents::SendEvent("sdlwindow", "click", toString(event->button.button));
             }
+            return false; //allow event to continue
         }
-        return false; //allow event to continue
-    }
-
-    case SDL_MOUSEWHEEL:
-    {
-        DKEvents::SendEvent("sdlwindow", "wheel", toString(event->wheel.y));
-        return false; //allow event to continue
-    }
-
-    case SDL_KEYDOWN:
-    {
-        //DKINFO("DKSDLWindow::SDL_KEYDOWN("+toString(event->key.keysym.sym)+")\n");
-        if(event->key.keysym.sym == 0)
-        {
-            return true;
+        case SDL_MOUSEWHEEL: {
+            DKEvents::SendEvent("sdlwindow", "wheel", toString(event->wheel.y));
+            return false; //allow event to continue
         }
-        if(event->key.keysym.sym > 96 && event->key.keysym.sym < 123)  //letter
-        {
-            if(event->key.keysym.mod & KMOD_SHIFT && event->key.keysym.mod & KMOD_CAPS)  //both = lowercase
-            {
-                DKEvents::SendEvent("sdlwindow", "keypress", toString(sdlCharCode[event->key.keysym.sym]));
+        case SDL_KEYDOWN: {
+            //DKINFO("DKSDLWindow::SDL_KEYDOWN("+toString(event->key.keysym.sym)+")\n");
+            if(event->key.keysym.sym == 0)
+                return true;
+            if(event->key.keysym.sym > 96 && event->key.keysym.sym < 123) { //letter
+                if(event->key.keysym.mod & KMOD_SHIFT && event->key.keysym.mod & KMOD_CAPS)   //both = lowercase
+                    DKEvents::SendEvent("sdlwindow", "keypress", toString(sdlCharCode[event->key.keysym.sym]));
+                else if(event->key.keysym.mod & KMOD_SHIFT || event->key.keysym.mod & KMOD_CAPS)   //1 = uppercase
+                    DKEvents::SendEvent("sdlwindow", "keypress", toString(sdlShiftCharCode[event->key.keysym.sym]));
+                else {
+                    DKEvents::SendEvent("sdlwindow", "keypress", toString(sdlCharCode[event->key.keysym.sym])); //lowercase
+                }
+            } else if(event->key.keysym.mod & KMOD_SHIFT) { //other character keys
+                DKEvents::SendEvent("sdlwindow", "keypress", toString(sdlShiftCharCode[event->key.keysym.sym])); //shifted symbol
+            } else {
+                DKEvents::SendEvent("sdlwindow", "keypress", toString(sdlCharCode[event->key.keysym.sym])); //symbol
             }
-            else if(event->key.keysym.mod & KMOD_SHIFT || event->key.keysym.mod & KMOD_CAPS)  //1 = uppercase
-            {
-                DKEvents::SendEvent("sdlwindow", "keypress", toString(sdlShiftCharCode[event->key.keysym.sym]));
-            }
-            else
-            {
-                DKEvents::SendEvent("sdlwindow", "keypress", toString(sdlCharCode[event->key.keysym.sym])); //lowercase
-            }
+            DKEvents::SendEvent("sdlwindow", "keydown", toString(sdlKeyCode[event->key.keysym.sym])); //keycode
+            return false; //allow event to continue
         }
-        else if(event->key.keysym.mod & KMOD_SHIFT)  //other character keys
-        {
-            DKEvents::SendEvent("sdlwindow", "keypress", toString(sdlShiftCharCode[event->key.keysym.sym])); //shifted symbol
+        case SDL_KEYUP: {
+            if(event->key.keysym.sym == 0)
+                return true;
+            DKEvents::SendEvent("sdlwindow", "keyup", toString(sdlKeyCode[event->key.keysym.sym]));
+            return false; //allow event to continue
         }
-        else
-        {
-            DKEvents::SendEvent("sdlwindow", "keypress", toString(sdlCharCode[event->key.keysym.sym])); //symbol
-        }
-        DKEvents::SendEvent("sdlwindow", "keydown", toString(sdlKeyCode[event->key.keysym.sym])); //keycode
-        return false; //allow event to continue
-    }
-
-    case SDL_KEYUP:
-    {
-        if(event->key.keysym.sym == 0)
-        {
-            return true;
-        }
-        DKEvents::SendEvent("sdlwindow", "keyup", toString(sdlKeyCode[event->key.keysym.sym]));
-        return false; //allow event to continue
-    }
     }
     return false; //allow event to continue
 }
 
 /////////////////////////////
-void DKSDLWindow::MapInputs()
-{
+void DKSDLWindow::MapInputs() {
     DKDEBUGFUNC();
     //sdlKeyCode translates (SDL_Event->key.keysym.sym) to keycode
     sdlKeyCode[27] = 27; //esc
@@ -992,7 +838,6 @@ void DKSDLWindow::MapInputs()
     sdlKeyCode[1073741905] = 40; //down
     sdlKeyCode[1073741904] = 37; //left
     sdlKeyCode[1073741903] = 39; //right
-
     //sdlCharCode translates (SDL_Event->key.keysym.sym) to charcode
     sdlCharCode[27] = 0; //esc
     sdlCharCode[1073741882] = 0; //f1
@@ -1097,7 +942,6 @@ void DKSDLWindow::MapInputs()
     sdlCharCode[1073741905] = 0; //down
     sdlCharCode[1073741904] = 0; //left
     sdlCharCode[1073741903] = 0; //right
-
     //sdlShiftCharCode translates (SDL_Event->key.keysym.sym) to shifted charcode
     sdlShiftCharCode[27] = 0; //esc
     sdlShiftCharCode[1073741882] = 0; //f1
@@ -1202,7 +1046,6 @@ void DKSDLWindow::MapInputs()
     sdlShiftCharCode[1073741905] = 0; //down
     sdlShiftCharCode[1073741904] = 0; //left
     sdlShiftCharCode[1073741903] = 0; //right
-
     //sdlMacCode translates (SDL_Event->key.keysym.sym) to native mac keycode
     sdlMacCode[27] = 53; //esc
     sdlMacCode[1073741882] = 122; //f1
