@@ -94,14 +94,6 @@ Internet Explorer (9.0+) <br>
 [Zlib](https://github.com/madler/zlib) <br>
 
 
-### How to compile <br>
-[DigitalKnob - Wiki](https://github.com/aquawicket/DigitalKnob/wiki)
-
-### DKForum <br>
-[Digitalknob Forum](http://digitalknob.freeforums.net)
-
-
-
 
 <br><br><br>
 [Forking, Branching and Pull Requests](https://github.com/Kunena/Kunena-Forum/wiki/Create-a-new-branch-with-git-and-manage-branches)<br>
