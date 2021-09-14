@@ -192,7 +192,7 @@ endfunction()
 
 function(DKZIP path)
 	message(STATUS "Zipping: ${path}")
-	if(NOT EXISTS ${dest})
+	if(NOT EXISTS ${path})
 		message(FATAL_ERROR "ERROR: DKZIP(): the path ${path} does not exist")
 	endif()
 	execute_process(COMMAND ${CMAKE_EXE} -E tar "cfv" "${DKPROJECT}/assets.zip" --format=zip "." WORKING_DIRECTORY ${path}/)
