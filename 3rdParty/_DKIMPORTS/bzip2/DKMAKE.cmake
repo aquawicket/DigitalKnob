@@ -26,10 +26,13 @@ endif()
 
 
 
+
 ### DKPLUGINS LINK ###
 DKINCLUDE(${BZIP2})
-WIN_DEBUG_LIB(${BZIP2}/${OS}/libbz2.a)
-WIN_RELEASE_LIB(${BZIP2}/${OS}/libbz2.a)
+#WIN_DEBUG_LIB(${BZIP2}/${OS}/libbz2.a)
+#WIN_RELEASE_LIB(${BZIP2}/${OS}/libbz2.a)
+WIN_DEBUG_LIB(${BZIP2}/${OS}/${DEBUG_DIR}/libbz2-static.lib)
+WIN_RELEASE_LIB(${BZIP2}/${OS}/${RELEASE_DIR}/libbz2-static.lib)
 MAC_DEBUG_LIB(${BZIP2}/${OS}/libbz2.a)
 MAC_RELEASE_LIB(${BZIP2}/${OS}/libbz2.a)
 LINUX_DEBUG_LIB(${BZIP2}/${OS}/libbz2.a)
@@ -40,45 +43,49 @@ ANDROID_DEBUG_LIB(${BZIP2}/${OS}/libbz2.a)
 ANDROID_RELEASE_LIB(${BZIP2}/${OS}/libbz2.a)
 
 
+
 ### 3RDPARTY LINK ###
-DKSET(BZIP2_WIN -DBZIP2_INCLUDE_DIR=${BZIP2}/${OS} -DBZIP2_LIBRARY_DEBUG=${BZIP2}/${OS}/libbz2.a -DBZIP2_LIBRARY_RELEASE=${BZIP2}/${OS}/libbz2.a)
+#DKSET(BZIP2_WIN -DBZIP2_INCLUDE_DIR=${BZIP2}/${OS} -DBZIP2_LIBRARY_DEBUG=${BZIP2}/${OS}/libbz2.a -DBZIP2_LIBRARY_RELEASE=${BZIP2}/${OS}/libbz2.a)
+DKSET(BZIP2_WIN -DBZIP2_INCLUDE_DIR=${BZIP2} -DBZIP2_LIBRARY_DEBUG=${BZIP2}/${OS}/${DEBUG_DIR}/libbz2-static.lib -DBZIP2_LIBRARY_RELEASE=${BZIP2}/${OS}/${RELEASE_DIR}/libbz2-static.lib)
 DKSET(BZIP2_APPLE -DBZIP2_INCLUDE_DIR=${BZIP2}/${OS} -DBZIP2_LIBRARY_DEBUG=${BZIP2}/${OS}/libbz2.a -DBZIP2_LIBRARY_RELEASE=${BZIP2}/${OS}/libbz2.a)
 DKSET(BZIP2_LINUX -DBZIP2_INCLUDE_DIR=${BZIP2}/${OS} -DBZIP2_LIBRARY_DEBUG=${BZIP2}/${OS}/libbz2.a -DBZIP2_LIBRARY_RELEASE=${BZIP2}/${OS}/libbz2.a)
 DKSET(BZIP2_RASPBERRY -DBZIP2_INCLUDE_DIR=${BZIP2}/${OS} -DBZIP2_LIBRARY_DEBUG=${BZIP2}/${OS}/libbz2.a -DBZIP2_LIBRARY_RELEASE=${BZIP2}/${OS}/libbz2.a)
 DKSET(BZIP2_ANDROID -DBZIP2_INCLUDE_DIR=${BZIP2}/${OS} -DBZIP2_LIBRARY_DEBUG=${BZIP2}/${OS}/libbz2.a -DBZIP2_LIBRARY_RELEASE=${BZIP2}/${OS}/libbz2.a)
 	
 
+
 ### COMPILE ###
-if(WIN_32)
-	if(NOT EXISTS ${BZIP2}/${OS}/bzip2.c)
-		DKCOPY(${BZIP2}/copy ${BZIP2}/${OS} TRUE)
-	endif()
 
-WIN32_BASH("#!/bin/bash\;
-cd /${BZIP2}/${OS}\;
-export PATH=/${MINGW32}/bin:$PATH\;
-export PATH=/${MSYS}/bin:$PATH\;
-make CFLAGS='-static-libgcc'\;
-exit\;")
+WIN_PATH(${BZIP2}/${OS})
+WIN_VS(${BZIP2_NAME} bzip2.sln libbz2-static)
 
-	DKCOPY(${MINGW32}/lib/gcc/i686-w64-mingw32/${MINGW32_VERSION}/libgcc.a ${BZIP2}/${OS} TRUE)
-endif()
+#if(WIN_32)
+#	if(NOT EXISTS ${BZIP2}/${OS}/bzip2.c)
+#		DKCOPY(${BZIP2}/copy ${BZIP2}/${OS} TRUE)
+#	endif()
+#WIN32_BASH("#!/bin/bash\;
+#cd /${BZIP2}/${OS}\;
+#export PATH=/${MINGW32}/bin:$PATH\;
+#export PATH=/${MSYS}/bin:$PATH\;
+#make CFLAGS='-static-libgcc'\;
+#exit\;")
+#	DKCOPY(${MINGW32}/lib/gcc/i686-w64-mingw32/${MINGW32_VERSION}/libgcc.a ${BZIP2}/${OS} TRUE)
+#endif()
+
+#IF(WIN_64)
+#	if(NOT EXISTS ${BZIP2}/${OS}/bzip2.c)
+#		DKCOPY(${BZIP2}/copy ${BZIP2}/${OS} TRUE)
+#	endif()
+#WIN64_BASH("#!/bin/bash\;
+#cd /${BZIP2}/${OS}\;
+#export PATH=/${MINGW64}/bin:$PATH\;
+#export PATH=/${MSYS}/bin:$PATH\;
+#make CFLAGS='-m64 -static-libgcc'\;
+#exit\;")
+#	DKCOPY(${MINGW64}/lib/gcc/x86_64-w64-mingw32/${MINGW32_VERSION}/libgcc.a ${BZIP2}/${OS} TRUE)
+#ENDIF()
 
 
-IF(WIN_64)
-	if(NOT EXISTS ${BZIP2}/${OS}/bzip2.c)
-		DKCOPY(${BZIP2}/copy ${BZIP2}/${OS} TRUE)
-	endif()
-
-WIN64_BASH("#!/bin/bash\;
-cd /${BZIP2}/${OS}\;
-export PATH=/${MINGW64}/bin:$PATH\;
-export PATH=/${MSYS}/bin:$PATH\;
-make CFLAGS='-m64 -static-libgcc'\;
-exit\;")
-
-	DKCOPY(${MINGW64}/lib/gcc/x86_64-w64-mingw32/${MINGW32_VERSION}/libgcc.a ${BZIP2}/${OS} TRUE)
-ENDIF()
 
 IF(MAC_64)
 	if(NOT EXISTS ${BZIP2}/${OS}/bzip2.c)
