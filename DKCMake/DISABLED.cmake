@@ -90,6 +90,7 @@ if(WIN_32)
 	#
 endif()
 if(WIN_64)
+	DISABLE_DKDEPEND(bzip2)
 	DISABLE_DKDEPEND(DKWebSockets)
 	DISABLE_DKDEPEND(opencv)
 	DISABLE_DKDEPEND(smpeg2)
