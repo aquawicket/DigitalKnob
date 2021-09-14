@@ -23,11 +23,5 @@ N  HKEY_CLASSES_ROOT\Folder\shell
 O  HKEY_CLASSES_ROOT\*\shell
 
 
-You can basically put a menu item unere every one of these and you should be able
+You can basically put a menu item under every one of these and you should be able
 to cover most of the windows system.
-
-
-
-
-
-
