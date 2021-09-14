@@ -1,4 +1,4 @@
-## DKDEPEND(DKRocket)
+## DKDEPEND(DKRml)
 ## DKDEPEND(DKMySql)
 ## DKDEPEND(DKWindow)
 ## DKDEPEND(DKGui)
