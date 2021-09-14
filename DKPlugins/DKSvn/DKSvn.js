@@ -60,11 +60,11 @@ function DKSvn_InstallSvn()
 	var assets = DKAssets_LocalAssets();
 	
 	if(DK_GetOS() === "Win32"){
-		DKCurl_Download("http://DigitalKnob.com/Download/Tools/Setup-Subversion-1.8.10.msi", assets);
+		//DKCurl_Download("http://Setup-Subversion-1.8.10.msi", assets);
 		DK_System(assets+"/Setup-Subversion-1.8.10.msi");
 	}
 	else if(DK_GetOS() === "Win64"){
-		DKCurl_Download("http://DigitalKnob.com/Download/Tools/Setup-Subversion-1.8.10.msi", assets);
+		//DKCurl_Download("http://Setup-Subversion-1.8.10.msi", assets);
 		DK_System(assets+"/Setup-Subversion-1.8.10.msi");
 	}
 	else if(DK_GetOS() === "Mac"){

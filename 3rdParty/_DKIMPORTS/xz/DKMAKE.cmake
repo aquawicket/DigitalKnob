@@ -61,6 +61,7 @@ DKSET(XZ_ANDROID -DCMAKE_C_FLAGS=-DLZMA_API_STATIC -DCMAKE_CXX_FLAGS=-DLZMA_API_
 #WIN64_COMMAND(${DKCMAKE_WIN64} ${XZ})
 #WIN_VS(${XZ_NAME} xz.sln liblzma)
 
+
 ### COMPILE with mingw ###
 WIN32_PATH(${XZ}/${OS}/${DEBUG_DIR})
 WIN32_BASH("#!/bin/bash 
@@ -81,25 +82,39 @@ make
 exit \n")
 
 
-WIN64_PATH(${XZ}/${OS}/${DEBUG_DIR})
-WIN64_BASH("#!/bin/bash 
-cd /${XZ}/${OS}/${DEBUG_DIR} 
-export PATH=/${MINGW64}/bin:$PATH\;
-export PATH=/${MSYS}/bin:$PATH\;
-../../configure --disable-shared --enable-static
-make 
-exit \n")
+#WIN64_PATH(${XZ}/${OS}/${DEBUG_DIR})
+#WIN64_BASH("#!/bin/bash 
+#cd /${XZ}/${OS}/${DEBUG_DIR} 
+#export PATH=/${MINGW64}/bin:$PATH\;
+#export PATH=/${MSYS}/bin:$PATH\;
+#../../configure --disable-shared --enable-static
+#make 
+#exit \n")
 
+#WIN64_PATH(${XZ}/${OS}/${RELEASE_DIR})
+#WIN64_BASH("#!/bin/bash 
+#cd /${XZ}/${OS}/${RELEASE_DIR} 
+#export PATH=/${MINGW64}/bin:$PATH\;
+#export PATH=/${MSYS}/bin:$PATH\;
+#../../configure --disable-shared --enable-static
+#make 
+#exit \n")
 
 WIN64_PATH(${XZ}/${OS}/${RELEASE_DIR})
-WIN64_BASH("#!/bin/bash 
-cd /${XZ}/${OS}/${RELEASE_DIR} 
+WIN64_BASH("#!/bin/bash
+cd /${XZ}/${OS}/${RELEASE_DIR}
 export PATH=/${MINGW64}/bin:$PATH\;
 export PATH=/${MSYS}/bin:$PATH\;
-../../configure --disable-shared --enable-static
-make 
+./configure --prefix= --enable-silent-rules --disable-dependency-tracking --disable-nls --disable-scripts --build=x86_64-w64-mingw32 CFLAGS=-march=x86-64 -mtune=generic -O2
 exit \n")
 
+
+#WIN64_BASH("#!/bin/bash 
+#cd /${XZ}
+#export PATH=/${MINGW64}/bin:$PATH\;
+#export PATH=/${MSYS}/bin:$PATH\;
+#windows/build.bash
+#exit \n")
 
 
 #MAC_PATH(${XZ}/${OS})

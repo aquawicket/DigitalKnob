@@ -174,7 +174,7 @@ function DKBuild_ValidateXcode(){
 
 function DKBuild_InstallXcode(){
 	console.log("Installing Xcode")
-	CPP_DKCurl_Download("http://DigitalKnob.com/Download/Tools/xcode4630916281a.dmg", DKDOWNLOAD)
+	//CPP_DKCurl_Download("http://DigitalKnob.com/Download/Tools/xcode4630916281a.dmg", DKDOWNLOAD)
 	//TODO - Install Xcode
 }
 
