@@ -1,6 +1,6 @@
 // executable app startup script
 var USE_CEF     = 0; //Use Cef browser
-var USE_ROCKET  = 1; //Use Rocket browser
+var USE_RML  = 1; //Use Rocket browser
 var USE_SDL     = 0; //Use SDL window
 var USE_WEBVIEW = 0; //TODO: Android, iOS
 

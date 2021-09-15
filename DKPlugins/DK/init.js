@@ -2,7 +2,7 @@
 if (DK_GetOS() === "Android" || DK_GetOS() === "iOS") {
     USE_CEF = 0;
     USE_SDL = 1;
-    USE_ROCKET = 1;
+    USE_RML = 1;
     USE_WEBVIEW = 0;
     //TODO
 } else {
@@ -29,7 +29,7 @@ function init_onevent(event) {
 
 if (DK_GetJSEngine() === "Duktape") {
     //C++: Create a window LoadPage() can support
-    if (USE_ROCKET && USE_CEF) {
+    if (USE_RML && USE_CEF) {
         console.log("Creating SDL -> Rocket -> Cef -> GUI\n");
         CPP_DK_Create("DKWindow");
         DKWindow_Create();
@@ -45,8 +45,8 @@ if (DK_GetJSEngine() === "Duktape") {
         iframe.style.right = "0rem";
         //iframe.style.bottom = "0rem";
         iframe.src = DKApp_url;
-        DKCef_SetFocus(DKCef_GetCurrentBrowser());
-    } else if (USE_ROCKET) {
+        CPP_DKCef_SetFocus(CPP_DKCef_GetCurrentBrowser());
+    } else if (USE_RML) {
         console.log("Creating SDL -> ROCKET -> GUI\n");
         CPP_DK_Create("DKWindow");
         DKWindow_Create();
@@ -59,8 +59,8 @@ if (DK_GetJSEngine() === "Duktape") {
         var width = DKWindow_GetWidth();
         var height = DKWindow_GetHeight();
         CPP_DK_Create("DKCef");
-        DKCef_NewBrowser("SdlWindow", 0, 0, width, height, DKApp_url);
-        DKCef_SetFocus(0);
+        CPP_DKCef_NewBrowser("SdlWindow", 0, 0, width, height, DKApp_url);
+        CPP_DKCef_SetFocus(0);
         window.addEventListener("resize", init_onevent);
         DK_CallFunc("DKSDLCef::OnResize", "SdlWindow,0,0," + String(DKWindow_GetWidth()) + "," + String(DKWindow_GetHeight()));
     } else if (USE_CEF) {
@@ -69,8 +69,8 @@ if (DK_GetJSEngine() === "Duktape") {
         var width = Number(DKFile_GetSetting(assets + "settings.txt", "[WIDTH]"));
         var height = Number(DKFile_GetSetting(assets + "settings.txt", "[HEIGHT]"));
         CPP_DK_Create("DKCef");
-        DKCef_NewBrowser("CefWindow", 0, 0, width, height, DKApp_url);
-        DKCef_SetFocus(DKCef_GetCurrentBrowser());
+        CPP_DKCef_NewBrowser("CefWindow", 0, 0, width, height, DKApp_url);
+        CPP_DKCef_SetFocus(CPP_DKCef_GetCurrentBrowser());
         CPP_DK_Create("DKWindow");
     } else if (USE_WEBVIEW) {
         //TODO

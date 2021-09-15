@@ -96,8 +96,8 @@ function DKEditor_Menu_OnEvent(event)
 		return;
 	}
 	if(event.currentTarget.id === "DKEditor_Menu_DevTools"){
-		if(typeof DKCef_ShowDevTools === 'function'){
-			DKCef_ShowDevTools(0);
+		if(typeof CPP_DKCef_ShowDevTools === 'function'){
+			CPP_DKCef_ShowDevTools(0);
 		}
 		if(typeof DKRocket_ToggleDebugger === 'function'){
 			DKRocket_ToggleDebugger();

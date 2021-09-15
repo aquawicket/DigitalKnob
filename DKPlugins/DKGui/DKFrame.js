@@ -314,10 +314,10 @@ DKFrame.prototype.iFrame = function DKFrame_Iframe(title, url, width, height) {
 
     this.createResize(frame);
 
-    //var currentBrowser = DKCef_GetCurrentBrowser();
-    //DKCef_SetUrl(currentBrowser, url);
+    //var currentBrowser = CPP_DKCef_GetCurrentBrowser();
+    //CPP_DKCef_SetUrl(currentBrowser, url);
     //this.createResize(frame);
-    //DKCef_SetFocus();
+    //CPP_DKCef_SetFocus();
     return iframe;
 }
 */

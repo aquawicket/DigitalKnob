@@ -123,7 +123,7 @@ TaskbarMenu.onevent = function TaskbarMenu_onevent(event) {
             //FIXME
         }
         if (DK_GetBrowser() === "CEF") {
-            DKCef_ShowDevTools(0);
+            CPP_DKCef_ShowDevTools(0);
         }
     }
     if (event.currentTarget.id === "PushDKFiles") {
