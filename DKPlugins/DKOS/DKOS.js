@@ -10,8 +10,8 @@ DKOS.init = function DKOS_init() {
 			var screenheight = screen.height;
 			var newwidth = parseInt(screenwidth)-100;
 			var newheight = parseInt(screenheight)-150;
-			//DKWindow_SetWidth(newwidth);
-			//DKWindow_SetHeight(newheight);
+			//CPP_DKWindow_SetWidth(newwidth);
+			//CPP_DKWindow_SetHeight(newheight);
 			*/
         }
 

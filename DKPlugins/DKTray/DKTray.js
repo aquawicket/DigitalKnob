@@ -43,13 +43,13 @@ function DKTray_OnEvent(event)
 	if(event.type === (event, "1000"){
 		DK_ShowConsole();
 		dk.create("DKWindowJS");
-		DKWindow_Show();
-		DKWindow_Restore();
+		CPP_DKWindow_Show();
+		CPP_DKWindow_Restore();
 	}
 	if(event.type === "1001"){
 		DK_HideConsole();
 		dk.create("DKWindowJS");
-		DKWindow_Hide();
+		CPP_DKWindow_Hide();
 	}
 	if(event.type === "1002"){
 		DK_Exit();
@@ -60,12 +60,12 @@ function DKTray_OnEvent(event)
 function DKTray_ToggleWindow()
 {
 	dk.create("DKWindowJS");
-	if(DKWindow_IsVisible()){
-		DKWindow_Hide();
+	if(CPP_DKWindow_IsVisible()){
+		CPP_DKWindow_Hide();
 		DK_HideConsole();
 	}
 	else{
-		DKWindow_Show();
-		DKWindow_Restore();
+		CPP_DKWindow_Show();
+		CPP_DKWindow_Restore();
 	}
 }

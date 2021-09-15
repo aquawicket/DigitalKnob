@@ -79,7 +79,7 @@ function DKAdminMenu_OnEvent(event)
 	if(event.currentTarget.id === "Git"){
 		dk.create("DKGit/GitMenu.js", function(){
 			DKMenu_ValidatePosition("DKGit/GitMenu.html");
-			byId("DKGit/GitMenu.html").style.top = DKWindow_GetMouseY()-30+"px";
+			byId("DKGit/GitMenu.html").style.top = CPP_DKWindow_GetMouseY()-30+"px";
 		});
 	}
 	if(event.currentTarget.id === "OpenSource"){

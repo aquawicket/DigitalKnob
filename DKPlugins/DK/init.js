@@ -19,7 +19,7 @@ function init_onevent(event) {
 
     if (event.type === "resize") {
         //NOTE: this is for SDL, OSG, ROCKET or any other created windows.
-        DK_CallFunc("DKSDLCef::OnResize", "SdlWindow,0,0," + String(DKWindow_GetWidth()) + "," + String(DKWindow_GetHeight()));
+        DK_CallFunc("DKSDLCef::OnResize", "SdlWindow,0,0," + String(CPP_DKWindow_GetWidth()) + "," + String(CPP_DKWindow_GetHeight()));
     }
     if (event.type === "keydown" && event.code === "Back") {
         //NOTE: this is the back button on Android
@@ -32,7 +32,7 @@ if (DK_GetJSEngine() === "Duktape") {
     if (USE_RML && USE_CEF) {
         console.log("Creating SDL -> Rocket -> Cef -> GUI\n");
         CPP_DK_Create("DKWindow");
-        DKWindow_Create();
+        CPP_DKWindow_Create();
         CPP_DK_Create("DKRocket");
         DKRocket_LoadUrl("DKRocket/blank.html");
         CPP_DK_Create("DKWidget");
@@ -49,20 +49,20 @@ if (DK_GetJSEngine() === "Duktape") {
     } else if (USE_RML) {
         console.log("Creating SDL -> ROCKET -> GUI\n");
         CPP_DK_Create("DKWindow");
-        DKWindow_Create();
+        CPP_DKWindow_Create();
         CPP_DK_Create("DKRml");
         DKRocket_LoadUrl("index.html");
     } else if (USE_SDL && USE_CEF) {
         console.log("Creating SDL -> CEF -> GUI\n");
         CPP_DK_Create("DKWindow");
-        DKWindow_Create();
-        var width = DKWindow_GetWidth();
-        var height = DKWindow_GetHeight();
+        CPP_DKWindow_Create();
+        var width = CPP_DKWindow_GetWidth();
+        var height = CPP_DKWindow_GetHeight();
         CPP_DK_Create("DKCef");
         CPP_DKCef_NewBrowser("SdlWindow", 0, 0, width, height, DKApp_url);
         CPP_DKCef_SetFocus(0);
         window.addEventListener("resize", init_onevent);
-        DK_CallFunc("DKSDLCef::OnResize", "SdlWindow,0,0," + String(DKWindow_GetWidth()) + "," + String(DKWindow_GetHeight()));
+        DK_CallFunc("DKSDLCef::OnResize", "SdlWindow,0,0," + String(CPP_DKWindow_GetWidth()) + "," + String(CPP_DKWindow_GetHeight()));
     } else if (USE_CEF) {
         console.log("Creating CEF -> GUI\n");
         var assets = DKAssets_LocalAssets();
