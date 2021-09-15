@@ -34,7 +34,7 @@ if (DK_GetJSEngine() === "Duktape") {
         CPP_DK_Create("DKWindow");
         CPP_DKWindow_Create();
         CPP_DK_Create("DKRocket");
-        DKRocket_LoadUrl("DKRocket/blank.html");
+        CPP_DKRml_LoadUrl("DKRocket/blank.html");
         CPP_DK_Create("DKWidget");
         var iframe = DK_CreateElement(byId("body"), "iframe", "DKCef_frame");
         iframe.style.position = "absolute";
@@ -51,7 +51,7 @@ if (DK_GetJSEngine() === "Duktape") {
         CPP_DK_Create("DKWindow");
         CPP_DKWindow_Create();
         CPP_DK_Create("DKRml");
-        DKRocket_LoadUrl("index.html");
+        CPP_DKRml_LoadUrl("index.html");
     } else if (USE_SDL && USE_CEF) {
         console.log("Creating SDL -> CEF -> GUI\n");
         CPP_DK_Create("DKWindow");

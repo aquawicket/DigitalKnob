@@ -5,10 +5,10 @@
 bool DKRmlJS::Init()
 {
 	DKDEBUGFUNC();
-	DKDuktape::AttachFunction("DKRml_DebuggerOff", DKRmlJS::DebuggerOff);
-	DKDuktape::AttachFunction("DKRml_DebuggerOn", DKRmlJS::DebuggerOn);
-	DKDuktape::AttachFunction("DKRml_DebuggerToggle", DKRmlJS::DebuggerToggle);
-	DKDuktape::AttachFunction("DKRml_LoadUrl", DKRmlJS::LoadUrl);
+	DKDuktape::AttachFunction("CPP_DKRml_DebuggerOff", DKRmlJS::DebuggerOff);
+	DKDuktape::AttachFunction("CPP_DKRml_DebuggerOn", DKRmlJS::DebuggerOn);
+	DKDuktape::AttachFunction("CPP_DKRml_DebuggerToggle", DKRmlJS::DebuggerToggle);
+	DKDuktape::AttachFunction("CPP_DKRml_LoadUrl", DKRmlJS::LoadUrl);
 	return true;
 }
 

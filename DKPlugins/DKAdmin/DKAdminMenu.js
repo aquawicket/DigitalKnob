@@ -95,7 +95,7 @@ function DKAdminMenu_OnEvent(event)
 		});
 	}
 	if(event.currentTarget.id === "OpenDebug"){
-		//DKRocket_ToggleDebugger();
+		//CPP_DKRml_ToggleDebugger();
 		CPP_DKCef_ShowDevTools(0);
 	}
 	if(event.currentTarget.id === "PushDKFiles"){
