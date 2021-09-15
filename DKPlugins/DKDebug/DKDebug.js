@@ -380,7 +380,7 @@ DKDebug.prototype.debugFunc = function DKDebug_debugFunc() {
     */
 
     /*
-    DKCreateFramedWindow("testWindow", 300, 300);
+    CPP_DK_CreateFramedWindow("testWindow", 300, 300);
     */
 
     /*
