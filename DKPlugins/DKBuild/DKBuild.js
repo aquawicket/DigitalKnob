@@ -452,7 +452,7 @@ function DKBuild_DoResults(){
 			return
 		
 		if(TYPE === "Debug" || TYPE === "ALL"){
-			CPP_DKFile_Rename(app_path+OS+"/Debug/"+APP+"_"+OS+"d.exe", app_path+OS+"/Release/"+APP+"_"+OS+"d_OLD.exe", true)	
+			CPP_DKFile_Rename(app_path+OS+"/Debug/"+APP+"_"+OS+"d.exe", app_path+OS+"/Debug/"+APP+"_"+OS+"d_OLD.exe", true)	
 			CPP_DK_Execute(MSBUILD+" "+app_path+OS+"/"+APP+".sln /p:Configuration=Debug")
 		}
 		if(TYPE === "Release" || TYPE === "ALL"){
@@ -490,7 +490,7 @@ function DKBuild_DoResults(){
 			return
 		
 		if(TYPE === "Debug" || TYPE === "ALL"){
-			CPP_DKFile_Rename(app_path+OS+"/Debug/"+APP+"_"+OS+"d.exe", app_path+OS+"/Release/"+APP+"_"+OS+"d_OLD.exe", true)
+			CPP_DKFile_Rename(app_path+OS+"/Debug/"+APP+"_"+OS+"d.exe", app_path+OS+"/Debug/"+APP+"_"+OS+"d_OLD.exe", true)
 			CPP_DK_Execute(MSBUILD+" "+app_path+OS+"/"+APP+".sln /p:Configuration=Debug")
 		}
 		if(TYPE === "Release" || TYPE === "ALL"){
@@ -522,6 +522,7 @@ function DKBuild_DoResults(){
 		if(rtvalue.indexOf("errors occurred!") > -1){ return }
 		
 		if(TYPE === "Debug" || TYPE === "ALL"){
+			CPP_DKFile_Rename(app_path+OS+"/Debug/"+APP+"_"+OS+"d.app", app_path+OS+"/Debug/"+APP+"_"+OS+"d_OLD.app", true)
 			CPP_DK_Execute("xcodebuild -target "+APP+" -configuration Debug build")
 			//update the info.plist in include the logo icon
 			let info_plist = CPP_DKFile_FileToString(app_path+OS+"/Debug/"+APP+"_"+OS+"d.app/Contents/info.plist")
@@ -529,6 +530,7 @@ function DKBuild_DoResults(){
 			CPP_DKFile_StringToFile(info_plist, app_path+OS+"/Debug/"+APP+"_"+OS+"d.app/Contents/info.plist")
 		}
 		if(TYPE === "Release" || TYPE === "ALL"){
+			CPP_DKFile_Rename(app_path+OS+"/Release/"+APP+"_"+OS+".app", app_path+OS+"/Release/"+APP+"_"+OS+"_OLD.app", true)
 			CPP_DK_Execute("xcodebuild -target "+APP+" -configuration Release build")
 			//update the info.plist in include the logo icon
 			let info_plist = CPP_DKFile_FileToString(app_path+OS+"/Release/"+APP+"_"+OS+".app/Contents/info.plist")
@@ -548,6 +550,7 @@ function DKBuild_DoResults(){
 		if(rtvalue.indexOf("errors occurred!") > -1){ return }
 		
 		if(TYPE === "Debug" || TYPE === "ALL"){
+			CPP_DKFile_Rename(app_path+OS+"/Debug/"+APP+"_"+OS+"d.app", app_path+OS+"/Debug/"+APP+"_"+OS+"d_OLD.app", true)
 			CPP_DK_Execute("xcodebuild -target "+APP+" -configuration Debug build")
 			//update the info.plist in include the logo icon
 			let info_plist = CPP_DKFile_FileToString(app_path+OS+"/Debug/"+APP+"_"+OS+"d.app/Contents/info.plist")
@@ -576,6 +579,7 @@ function DKBuild_DoResults(){
 			}
 		}
 		if(TYPE === "Release" || TYPE === "ALL"){
+			CPP_DKFile_Rename(app_path+OS+"/Release/"+APP+"_"+OS+".app", app_path+OS+"/Release/"+APP+"_"+OS+"_OLD.app", true)
 			CPP_DK_Execute("xcodebuild -target "+APP+" -configuration Release build")
 			
 			//update the info.plist in include the logo icon
@@ -615,8 +619,10 @@ function DKBuild_DoResults(){
 		if(rtvalue.indexOf("errors occurred!") > -1) 
 			return 
 		if(TYPE === "Debug" || TYPE === "ALL")
+			CPP_DKFile_Rename(app_path+OS+"/Debug/"+APP+"_"+OS+"d.app", app_path+OS+"/Debug/"+APP+"_"+OS+"d_OLD.app", true)
 			CPP_DK_Execute("xcodebuild -target "+APP+" -configuration Debug build -arch \"armv7 armv7s\"")
 		if(TYPE === "Release" || TYPE === "ALL")
+			CPP_DKFile_Rename(app_path+OS+"/Release/"+APP+"_"+OS+".app", app_path+OS+"/Release/"+APP+"_"+OS+"_OLD.app", true)
 			CPP_DK_Execute("xcodebuild -target "+APP+" -configuration Release build -arch \"armv7 armv7s\"")
 	}
 	
@@ -629,8 +635,10 @@ function DKBuild_DoResults(){
 		if(rtvalue.indexOf("errors occurred!") > -1)
 			return
 		if(TYPE === "Debug" || TYPE === "ALL")
+			CPP_DKFile_Rename(app_path+OS+"/Debug/"+APP+"_"+OS+"d.app", app_path+OS+"/Debug/"+APP+"_"+OS+"d_OLD.app", true)
 			CPP_DK_Execute("xcodebuild -target "+APP+" -configuration Debug build -arch \"armv7 armv7s\"")
 		if(TYPE === "Release" || TYPE === "ALL")
+			CPP_DKFile_Rename(app_path+OS+"/Release/"+APP+"_"+OS+".app", app_path+OS+"/Release/"+APP+"_"+OS+"_OLD.app", true)
 			CPP_DK_Execute("xcodebuild -target "+APP+" -configuration Release build -arch \"armv7 armv7s\"")
 	}
 	
@@ -643,8 +651,10 @@ function DKBuild_DoResults(){
 		if(rtvalue.indexOf("errors occurred!") > -1) 
 			return
 		if(TYPE === "Debug" || TYPE === "ALL")
+			CPP_DKFile_Rename(app_path+OS+"/Debug/"+APP+"_"+OS+"d.app", app_path+OS+"/Debug/"+APP+"_"+OS+"d_OLD.app", true)
 			CPP_DK_Execute("xcodebuild -target "+APP+" -configuration Debug build -sdk iphonesimulator11.2")
 		if(TYPE === "Release" || TYPE === "ALL")
+			CPP_DKFile_Rename(app_path+OS+"/Release/"+APP+"_"+OS+".app", app_path+OS+"/Release/"+APP+"_"+OS+"_OLD.app", true)
 			CPP_DK_Execute("xcodebuild -target "+APP+" -configuration Release build -sdk iphonesimulator11.2")
 	}
 	
@@ -657,8 +667,10 @@ function DKBuild_DoResults(){
 		if(rtvalue.indexOf("errors occurred!") > -1) 
 			return
 		if(TYPE === "Debug" || TYPE === "ALL")
+			CPP_DKFile_Rename(app_path+OS+"/Debug/"+APP+"_"+OS+"d.app", app_path+OS+"/Debug/"+APP+"_"+OS+"d_OLD.app", true)
 			CPP_DK_Execute("xcodebuild -target "+APP+" -configuration Debug build -sdk iphonesimulator11.2")
 		if(TYPE === "Release" || TYPE === "ALL")
+			CPP_DKFile_Rename(app_path+OS+"/Release/"+APP+"_"+OS+".app", app_path+OS+"/Release/"+APP+"_"+OS+"_OLD.app", true)
 			CPP_DK_Execute("xcodebuild -target "+APP+" -configuration Release build -sdk iphonesimulator11.2")
 	}
 	
@@ -674,6 +686,7 @@ function DKBuild_DoResults(){
 			let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DKPATH+"DK")
 			if(rtvalue.indexOf("errors occurred!") > -1) 
 				return
+			CPP_DKFile_Rename(app_path+OS+"/Debug/"+APP+"d_"+OS, app_path+OS+"/Debug/"+APP+"_"+OS+"d_OLD", true)
 			CPP_DK_Execute("make "+APP)
 			//CPP_DK_Execute("chmod +x "+app_path+OS+"/Debug/"+APP+"_"+OS+"d")
 			
@@ -695,6 +708,7 @@ function DKBuild_DoResults(){
 			let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DKPATH+"DK")
 			if(rtvalue.indexOf("errors occurred!") > -1) 
 				return
+			CPP_DKFile_Rename(app_path+OS+"/Release/"+APP+"_"+OS, app_path+OS+"/Release/"+APP+"_"+OS+"_OLD", true)
 			CPP_DK_Execute("make "+APP)
 			//CPP_DK_Execute("chmod +x "+app_path+OS+"/Debug/"+APP+"_"+OS)
 			
@@ -726,6 +740,7 @@ function DKBuild_DoResults(){
 			let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DKPATH+"DK")
 			if(rtvalue.indexOf("errors occurred!") > -1) 
 				return
+			CPP_DKFile_Rename(app_path+OS+"/Debug/"+APP+"d_"+OS, app_path+OS+"/Debug/"+APP+"_"+OS+"d_OLD", true)
 			CPP_DK_Execute("make "+APP)
 			//CPP_DK_Execute("chmod +x "+app_path+OS+"/Debug/"+APP+"_"+OS+"d")
 
@@ -748,6 +763,7 @@ function DKBuild_DoResults(){
 			let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DKPATH+"DK")
 			if(rtvalue.indexOf("errors occurred!") > -1)
 				return
+			CPP_DKFile_Rename(app_path+OS+"/Release/"+APP+"_"+OS, app_path+OS+"/Release/"+APP+"_"+OS+"_OLD", true)
 			CPP_DK_Execute("make "+APP)
 			//CPP_DK_Execute("chmod +x "+app_path+OS+"/Release/"+APP+"_"+OS)
 			
@@ -779,6 +795,7 @@ function DKBuild_DoResults(){
 				return
 			if(rtvalue.indexOf("errors occurred!") > -1)
 				return //FIXME: this doesn't catch all build errors
+			CPP_DKFile_Rename(app_path+OS+"/Debug/"+APP+"d_"+OS, app_path+OS+"/Debug/"+APP+"_"+OS+"d_OLD", true)
 			CPP_DK_Execute("make "+APP)
 			//CPP_DK_Execute("chmod +x "+app_path+OS+"/Debug/"+APP+"_"+OS+"d")
 			
@@ -800,6 +817,7 @@ function DKBuild_DoResults(){
 			let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DKPATH+"DK")
 			if(rtvalue.indexOf("errors occurred!") > -1)
 				return //FIXME: this doesn't catch all build errors
+			CPP_DKFile_Rename(app_path+OS+"/Release/"+APP+"_"+OS, app_path+OS+"/Release/"+APP+"_"+OS+"_OLD", true)
 			CPP_DK_Execute("make "+APP)
 			//CPP_DK_Execute("chmod +x "+app_path+OS+"/Release/"+APP+"_"+OS)
 			
@@ -829,6 +847,7 @@ function DKBuild_DoResults(){
 			let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DKPATH+"DK")
 			if(rtvalue.indexOf("errors occurred!") > -1) 
 				return //FIXME: this doesn't catch all build errors
+			CPP_DKFile_Rename(app_path+OS+"/Debug/"+APP+"d_"+OS, app_path+OS+"/Debug/"+APP+"_"+OS+"d_OLD", true)
 			CPP_DK_Execute("make "+APP)
 
 			//Create .desktop file
@@ -849,6 +868,7 @@ function DKBuild_DoResults(){
 			let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DKPATH+"DK")
 			if(rtvalue.indexOf("errors occurred!") > -1) 
 				return  //FIXME: this doesn't catch all build errors
+			CPP_DKFile_Rename(app_path+OS+"/Release/"+APP+"_"+OS, app_path+OS+"/Release/"+APP+"_"+OS+"_OLD", true)
 			CPP_DK_Execute("make "+APP)
 			
 			//Create .desktop file
@@ -880,9 +900,11 @@ function DKBuild_DoResults(){
 			return 
 			
 		if(TYPE === "Debug" || TYPE === "ALL"){
+			//CPP_DKFile_Rename(app_path+OS+"/Debug/"+APP+"d_"+OS, app_path+OS+"/Debug/"+APP+"_"+OS+"d_OLD", true)
 			CPP_DK_Execute(MSBUILD+" "+app_path+OS+"/"+APP+".sln /p:Configuration=Debug")
 		}
 		if(TYPE === "Release" || TYPE === "ALL"){
+			//CPP_DKFile_Rename(app_path+OS+"/Release/"+APP+"_"+OS, app_path+OS+"/Release/"+APP+"_"+OS+"_OLD", true)
 			CPP_DK_Execute(MSBUILD+" "+app_path+OS+"/"+APP+".sln /p:Configuration=Release")
 		}
 		
@@ -914,9 +936,11 @@ function DKBuild_DoResults(){
 			return 
 		
 		if(TYPE === "Debug" || TYPE === "ALL"){
+			//CPP_DKFile_Rename(app_path+OS+"/Debug/"+APP+"d_"+OS, app_path+OS+"/Debug/"+APP+"_"+OS+"d_OLD", true)
 			CPP_DK_Execute(MSBUILD+" "+app_path+OS+"/"+APP+".sln /p:Configuration=Debug")
 		}
 		if(TYPE === "Release" || TYPE === "ALL"){
+			//CPP_DKFile_Rename(app_path+OS+"/Release/"+APP+"_"+OS, app_path+OS+"/Release/"+APP+"_"+OS+"_OLD", true)
 			CPP_DK_Execute(MSBUILD+" "+app_path+OS+"/"+APP+".sln /p:Configuration=Release")
 		}
 		
