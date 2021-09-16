@@ -479,7 +479,7 @@ if(WIN_32)
 		DKREMOVE(${DKPROJECT}/Backup)
 	endif()
 	
-	#dummy assets.h file, or the builder will complain about assets.h missing
+	#a dummy assets.h file, or the builder will complain about assets.h missing
 	DKCOPY(${DKPLUGINS}/_DKIMPORT/assets.h ${DKPROJECT}/assets.h TRUE)
 		
 	## Create Icon files for project
@@ -490,10 +490,9 @@ if(WIN_32)
 		DKEXECUTE_PROCESS(COMMAND ${IMAGEMAGICK_CONVERT} ${DKPROJECT}/icons/icon.png -define icon:auto-resize=16 ${DKPROJECT}/assets/favicon.ico)
 	endif()
 	
-	#set(CMAKE_CXX_STANDARD 17)
 	add_definitions(-D_USING_V110_SDK71_)
-	add_executable(${APP_NAME} WIN32 ${App_SRC})
-	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${WIN_LIBS})
+	add_executable(${APP_NAME}_win32 WIN32 ${App_SRC})
+	target_link_libraries(${APP_NAME}_win32 ${DEBUG_LIBS} ${RELEASE_LIBS} ${WIN_LIBS})
 	##set_source_files_properties(${DIGITALKNOB}/stdafx.cpp PROPERTIES COMPILE_FLAGS "/Ycstdafx.h")
 	
 	list(APPEND DEBUG_LINK_FLAGS /MANIFEST:NO)
@@ -524,7 +523,7 @@ if(WIN_32)
     #COMMENT "Adding manifest..."
     #)
 	
-	set_target_properties(${APP_NAME} PROPERTIES LINK_FLAGS_DEBUG ${DEBUG_FLAGS} LINK_FLAGS_RELEASE ${RELEASE_FLAGS})
+	set_target_properties(${APP_NAME}_win32 PROPERTIES LINK_FLAGS_DEBUG ${DEBUG_FLAGS} LINK_FLAGS_RELEASE ${RELEASE_FLAGS})
 endif(WIN_32)
 	
 ##########
@@ -567,10 +566,9 @@ if(WIN_64)
 		DKEXECUTE_PROCESS(COMMAND ${IMAGEMAGICK_CONVERT} ${DKPROJECT}/icons/icon.png -define icon:auto-resize=16 ${DKPROJECT}/assets/favicon.ico)
 	endif()
 	
-	#set(CMAKE_CXX_STANDARD 17)
 	add_definitions(-D_USING_V110_SDK71_)
-	add_executable(${APP_NAME} WIN32 ${App_SRC})
-	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${WIN_LIBS})
+	add_executable(${APP_NAME}_win64 WIN32 ${App_SRC})
+	target_link_libraries(${APP_NAME}_win64 ${DEBUG_LIBS} ${RELEASE_LIBS} ${WIN_LIBS})
 	##set_source_files_properties(${DIGITALKNOB}/stdafx.cpp PROPERTIES COMPILE_FLAGS "/Ycstdafx.h")
 	
 	list(APPEND DEBUG_LINK_FLAGS /MANIFEST:NO)
@@ -592,7 +590,7 @@ if(WIN_64)
 	list(APPEND RELEASE_LINK_FLAGS /SAFESEH:NO)
 	string(REPLACE ";" " " RELEASE_FLAGS "${RELEASE_LINK_FLAGS}")
 	
-	set_target_properties(${APP_NAME}_64 PROPERTIES LINK_FLAGS_DEBUG ${DEBUG_FLAGS} LINK_FLAGS_RELEASE ${RELEASE_FLAGS})
+	set_target_properties(${APP_NAME}_win64 PROPERTIES LINK_FLAGS_DEBUG ${DEBUG_FLAGS} LINK_FLAGS_RELEASE ${RELEASE_FLAGS})
 	
 	#add_custom_command(
     #TARGET ${APP_NAME}
