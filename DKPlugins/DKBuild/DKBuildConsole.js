@@ -252,7 +252,6 @@ function DKBuildConsole_Process() {
     console.log("###########################")
     console.log("Press any key to Build")
     CPP_DK_GetKey()
-	DKBuild_DoResults()
 	if(APP == "ALLAPPS"){
 		for (var i = 0; i < APP_LIST.length; ++i){
 		    APP = APP_LIST[i]
