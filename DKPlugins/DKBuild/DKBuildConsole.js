@@ -185,6 +185,7 @@ function DKBuildConsole_SelectApp() {
     var key = 10
     while (key === 10)
         key = CPP_DK_GetKey() //unix fix
+		console.log("key = "+key)
     if (key === 27)
         CPP_DK_Exit()
     DKBuildConsole_KeyToApp(key)
@@ -379,6 +380,7 @@ function DKBuildConsole_KeyToApp(key) {
 	if (key === 59) {
         APP = "ALLAPPS"
     }
+	//F1
     if (key === 49) {
         APP = APP_LIST[0]
     }
