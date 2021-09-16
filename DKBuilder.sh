@@ -29,7 +29,7 @@ fi
 
 
 APP="DKBuilder"
-TYPE="Release"
+#TYPE="Release"
 
 GCC_PATH=$(which gcc)
 GPP_PATH=$(which g++)
@@ -48,6 +48,7 @@ do
 			cd $DKPATH
 			git checkout -- .
 			git pull origin master
+			chmod +x $DKPATH/DKBuilder.sh
 			echo "${options[@]}"
             ;;
 		"DKBuilder")
@@ -116,17 +117,28 @@ rm -rf `find . -type d -name CMakeFiles`
 		
 mkdir $DKPATH/DKApps/$APP/$OS
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-	mkdir $DKPATH/DKApps/$APP/$OS/$TYPE
-	cd $DKPATH/DKApps/$APP/$OS/$TYPE
+	mkdir $DKPATH/DKApps/$APP/$OS/Debug
+	cd $DKPATH/DKApps/$APP/$OS/Debug
+	cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER="$GCC_PATH" -DCMAKE_CXX_COMPILER="$GPP_PATH" -DDEBUG=ON -DREBUILDALL=ON -DSTATIC=ON $DKPATH
+	make $APP
+	chmod +x $DKPATH/DKApps/$APP/$OS/Debug/$APP
+	
+	mkdir $DKPATH/DKApps/$APP/$OS/Release
+	cd $DKPATH/DKApps/$APP/$OS/Release
+	cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER="$GCC_PATH" -DCMAKE_CXX_COMPILER="$GPP_PATH" -DRELEASE=ON -DREBUILDALL=ON -DSTATIC=ON $DKPATH
+	make $APP
+	chmod +x $DKPATH/DKApps/$APP/$OS/Release/$APP
 else
     cd $DKPATH/DKApps/$APP/$OS
+	cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER="$GCC_PATH" -DCMAKE_CXX_COMPILER="$GPP_PATH" -DDEBUG=ON -DRELEASE=ON -DREBUILDALL=ON -DSTATIC=ON $DKPATH
+	
+	cd $DKPATH/DKApps/$APP/$OS/Debug
+	make $APP
+	chmod +x $DKPATH/DKApps/$APP/$OS/Debug/$APP
+	
+	cd $DKPATH/DKApps/$APP/$OS/Release
+	make $APP
+	chmod +x $DKPATH/DKApps/$APP/$OS/Release/$APP
 fi
-
-cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER="$GCC_PATH" -DCMAKE_CXX_COMPILER="$GPP_PATH" -DRELEASE=ON -DREBUILDALL=ON -DSTATIC=ON $DKPATH
-chmod +x $DKPATH/DKBuilder.sh
-
-#cd $DKPATH/DKApps/$APP/$OS/$TYPE
-make $APP
-chmod +x $DKPATH/DKApps/$APP/$OS/$TYPE/$APP
 
 exec $SHELL #keep terminal open
