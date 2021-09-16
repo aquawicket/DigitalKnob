@@ -123,11 +123,12 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
 	make $APP_$OSd
 	chmod +x $DKPATH/DKApps/$APP/$OS/Debug/$APP_$OSd
 	
+	echo "APP_OS = $APP_$OS"
 	mkdir $DKPATH/DKApps/$APP/$OS/Release
 	cd $DKPATH/DKApps/$APP/$OS/Release
 	cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER="$GCC_PATH" -DCMAKE_CXX_COMPILER="$GPP_PATH" -DRELEASE=ON -DREBUILDALL=ON -DSTATIC=ON $DKPATH
-	make $APP_$OS
-	chmod +x $DKPATH/DKApps/$APP/$OS/Release/$APP_$OS
+	make $APP_$OS 
+	chmod +x $DKPATH/DKApps/$APP/$OS/Release/$APP_$OS 
 else
     cd $DKPATH/DKApps/$APP/$OS
 	cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER="$GCC_PATH" -DCMAKE_CXX_COMPILER="$GPP_PATH" -DDEBUG=ON -DRELEASE=ON -DREBUILDALL=ON -DSTATIC=ON $DKPATH
