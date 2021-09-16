@@ -524,8 +524,8 @@ if(WIN_32)
     #)
 	
 	set_target_properties(${APP_NAME} PROPERTIES LINK_FLAGS_DEBUG ${DEBUG_FLAGS} LINK_FLAGS_RELEASE ${RELEASE_FLAGS})
-	set_target_properties(${APP_NAME} PROPERTIES DEBUG_POSTFIX _${OS}d)
-	set_target_properties(${APP_NAME} PROPERTIES RELEASE_POSTFIX _${OS})
+	set_target_properties(${APP_NAME} PROPERTIES DEBUG_POSTFIX "_${OS}d")
+	set_target_properties(${APP_NAME} PROPERTIES RELEASE_POSTFIX "_${OS}")
 endif(WIN_32)
 	
 ##########
