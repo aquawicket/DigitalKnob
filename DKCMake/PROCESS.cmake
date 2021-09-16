@@ -452,7 +452,6 @@ include_directories(${DKPROJECT})
 
 ##########
 if(WIN_32)
-
 		# copy the icon to assets
 		DKCOPY(${DKPROJECT}/icons/windows/icon.ico ${DKPROJECT}/assets/icon.ico TRUE)
 	
@@ -471,7 +470,6 @@ if(WIN_32)
 		DKREMOVE(${DKPROJECT}/assets/cef.log)
 		DKREMOVE(${DKPROJECT}/assets/log.txt)
 	
-	
 		#Compress the assets, they will be included by resource.rc
 		message(STATUS "Creating assets.zip . . .")
 		DKZIP(${DKPROJECT}/assets)
@@ -481,7 +479,7 @@ if(WIN_32)
 		DKREMOVE(${DKPROJECT}/Backup)
 	endif()
 	
-	#dummy assets.h file, or the builder wil complain about assets.h missing
+	#dummy assets.h file, or the builder will complain about assets.h missing
 	DKCOPY(${DKPLUGINS}/_DKIMPORT/assets.h ${DKPROJECT}/assets.h TRUE)
 		
 	## Create Icon files for project
@@ -537,15 +535,15 @@ if(WIN_64)
 	if(NOT EXCLUDE_ASSETS)
 		# Backup files and folders excluded from the package
 		DKCOPY(${DKPROJECT}/assets/USER ${DKPROJECT}/Backup/USER TRUE)
-		DKCOPY(${DKPROJECT}/assets/DKCef/win64Debug ${DKPROJECT}/Backup/DKCef/win64Debug TRUE)
-		DKCOPY(${DKPROJECT}/assets/DKCef/win64Release ${DKPROJECT}/Backup/DKCef/win64Release TRUE)
+		#DKCOPY(${DKPROJECT}/assets/DKCef/win64Debug ${DKPROJECT}/Backup/DKCef/win64Debug TRUE)
+		#DKCOPY(${DKPROJECT}/assets/DKCef/win64Release ${DKPROJECT}/Backup/DKCef/win64Release TRUE)
 		DKCOPY(${DKPROJECT}/assets/cef.log ${DKPROJECT}/Backup/cef.log TRUE)
 		DKCOPY(${DKPROJECT}/assets/log.txt ${DKPROJECT}/Backup/log.txt TRUE)
 	
 		# Remove excluded files and folders before packaging
 		DKREMOVE(${DKPROJECT}/assets/USER)
-		DKREMOVE(${DKPROJECT}/assets/DKCef/win64Debug)
-		DKREMOVE(${DKPROJECT}/assets/DKCef/win64Release)
+		#DKREMOVE(${DKPROJECT}/assets/DKCef/win64Debug)
+		#DKREMOVE(${DKPROJECT}/assets/DKCef/win64Release)
 		DKREMOVE(${DKPROJECT}/assets/cef.log)
 		DKREMOVE(${DKPROJECT}/assets/log.txt)
 	
@@ -558,8 +556,8 @@ if(WIN_64)
 		DKREMOVE(${DKPROJECT}/Backup)
 	endif()
 
-		#dummy assets.h file, or the builder wil complain about assets.h missing
-		DKCOPY(${DKPLUGINS}/_DKIMPORT/assets.h ${DKPROJECT}/assets.h TRUE)
+	#dummy assets.h file, or the builder wil complain about assets.h missing
+	DKCOPY(${DKPLUGINS}/_DKIMPORT/assets.h ${DKPROJECT}/assets.h TRUE)
 		
 	## Create Icon files for project
 	if(IMAGEMAGICK_CONVERT)
@@ -570,31 +568,40 @@ if(WIN_64)
 	endif()
 	
 	#set(CMAKE_CXX_STANDARD 17)
-	#set(CMAKE_CXX_FLAGS /MACHINE:X64)
-	add_executable(${APP_NAME}_64 WIN32 ${App_SRC})
-	target_link_libraries(${APP_NAME}_64 ${DEBUG_LIBS} ${RELEASE_LIBS} ${WIN_LIBS})
+	add_definitions(-D_USING_V110_SDK71_)
+	add_executable(${APP_NAME} WIN32 ${App_SRC})
+	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${WIN_LIBS})
 	##set_source_files_properties(${DIGITALKNOB}/stdafx.cpp PROPERTIES COMPILE_FLAGS "/Ycstdafx.h")
 	
+	list(APPEND DEBUG_LINK_FLAGS /MANIFEST:NO)
 	list(APPEND DEBUG_LINK_FLAGS /MANIFESTUAC:NO)
 	list(APPEND DEBUG_LINK_FLAGS /level='highestAvailable')
 	list(APPEND DEBUG_LINK_FLAGS /uiAccess='true')
 	list(APPEND DEBUG_LINK_FLAGS /SUBSYSTEM:CONSOLE,5.01)
 	list(APPEND DEBUG_LINK_FLAGS /SAFESEH:NO)
-	list(APPEND DEBUG_LINK_FLAGS /MACHINE:X64)
 	string(REPLACE ";" " " DEBUG_FLAGS "${DEBUG_LINK_FLAGS}")
 	
 	##list(APPEND RELEASE_LINK_FLAGS /FORCE) ## MySQL lib needs /FORCE due to zlib redefinitions
 	list(APPEND RELEASE_LINK_FLAGS /INCREMENTAL:NO)
 	list(APPEND RELEASE_LINK_FLAGS /OPT:NOREF)
+	list(APPEND RELEASE_LINK_FLAGS /MANIFEST:NO)
 	list(APPEND RELEASE_LINK_FLAGS /MANIFESTUAC:NO)
 	list(APPEND RELEASE_LINK_FLAGS /level='highestAvailable')
 	list(APPEND RELEASE_LINK_FLAGS /uiAccess='true')
 	list(APPEND RELEASE_LINK_FLAGS /SUBSYSTEM:CONSOLE,5.01)
 	list(APPEND RELEASE_LINK_FLAGS /SAFESEH:NO)
-	list(APPEND RELEASE_LINK_FLAGS /MACHINE:X64)
 	string(REPLACE ";" " " RELEASE_FLAGS "${RELEASE_LINK_FLAGS}")
 	
 	set_target_properties(${APP_NAME}_64 PROPERTIES LINK_FLAGS_DEBUG ${DEBUG_FLAGS} LINK_FLAGS_RELEASE ${RELEASE_FLAGS})
+	
+	#add_custom_command(
+    #TARGET ${APP_NAME}
+    #POST_BUILD
+    #COMMAND "mt.exe" -nologo
+    #        -manifest \"${DKPROJECT}/compatibility.manifest\"
+    #        -outputresource:"${DKPROJECT}/win32/Debug/${APP_NAME}.exe"\;\#1
+    #COMMENT "Adding manifest..."
+    #)
 endif(WIN_64)
 
 #######
@@ -617,7 +624,6 @@ if(MAC)
 		## ICONS 
 		## // TODO
 		## message(STATUS "Building icons for ${APP_NAME} - ${OS} . . .")
-	
 	
 		## copy the assets into the bundle resources
 		if(DEBUG)
