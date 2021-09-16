@@ -177,16 +177,14 @@ function DKBuildConsole_SelectOs() {
 
 function DKBuildConsole_SelectApp() {
     console.log("**** SELECT APP TO BUILD ****")
-    for (var i = 0; i < APP_LIST.length; ++i) {
+	console.log("F1. ALL APPS")
+    for (var i = 0; i < APP_LIST.length; ++i)
         console.log(DKBuildConsole_TranslateOption(i) + ":" + APP_LIST[i] + "")
-    }
     console.log("ESC. exit")
     console.log("\n")
     var key = 10
-    while (key === 10) {
-        //unix fix
-        key = CPP_DK_GetKey()
-    }
+    while (key === 10)
+        key = CPP_DK_GetKey() //unix fix
     if (key === 27)
         CPP_DK_Exit()
     DKBuildConsole_KeyToApp(key)
@@ -204,10 +202,8 @@ function DKBuildConsole_SelectType() {
     console.log("\n")
 
     var key = 10
-    while (key === 10) {
-        //unix fix
-        key = CPP_DK_GetKey()
-    }
+    while (key === 10)
+        key = CPP_DK_GetKey() //unix fix
     //console.log("Key pressed: "+String(key)+"")
     if (key === 27)
         CPP_DK_Exit()
@@ -256,7 +252,20 @@ function DKBuildConsole_Process() {
     console.log("###########################")
     console.log("Press any key to Build")
     CPP_DK_GetKey()
-    DKBuild_DoResults()
+	DKBuild_DoResults()
+	if(APP == "ALLAPPS"){
+		for (var i = 0; i < APP_LIST.length; ++i){
+		    APP = APP_LIST[i]
+			console.log("###########################")
+			console.log(OS + " -> " + APP + " -> " + TYPE + "")
+			console.log("###########################")
+			DKBuild_DoResults()
+		}
+	}
+	else{
+		DKBuild_DoResults()
+	}
+    
 }
 
 function DKBuildConsole_TranslateOption(num) {
@@ -368,6 +377,9 @@ function DKBuildConsole_TranslateOption(num) {
 }
 
 function DKBuildConsole_KeyToApp(key) {
+	if (key === 59) {
+        APP = "ALLAPPS"
+    }
     if (key === 49) {
         APP = APP_LIST[0]
     }
