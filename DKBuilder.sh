@@ -120,25 +120,25 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
 	mkdir $DKPATH/DKApps/$APP/$OS/Debug
 	cd $DKPATH/DKApps/$APP/$OS/Debug
 	cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER="$GCC_PATH" -DCMAKE_CXX_COMPILER="$GPP_PATH" -DDEBUG=ON -DREBUILDALL=ON -DSTATIC=ON $DKPATH
-	make $APP
-	chmod +x $DKPATH/DKApps/$APP/$OS/Debug/$APP
+	make $APP_$OSd
+	chmod +x $DKPATH/DKApps/$APP/$OS/Debug/$APP_$OSd
 	
 	mkdir $DKPATH/DKApps/$APP/$OS/Release
 	cd $DKPATH/DKApps/$APP/$OS/Release
 	cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER="$GCC_PATH" -DCMAKE_CXX_COMPILER="$GPP_PATH" -DRELEASE=ON -DREBUILDALL=ON -DSTATIC=ON $DKPATH
-	make $APP
-	chmod +x $DKPATH/DKApps/$APP/$OS/Release/$APP
+	make $APP_$OS
+	chmod +x $DKPATH/DKApps/$APP/$OS/Release/$APP_$OS
 else
     cd $DKPATH/DKApps/$APP/$OS
 	cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER="$GCC_PATH" -DCMAKE_CXX_COMPILER="$GPP_PATH" -DDEBUG=ON -DRELEASE=ON -DREBUILDALL=ON -DSTATIC=ON $DKPATH
 	
 	cd $DKPATH/DKApps/$APP/$OS/Debug
-	make $APP
-	chmod +x $DKPATH/DKApps/$APP/$OS/Debug/$APP
+	make $APP_$OSd
+	chmod +x $DKPATH/DKApps/$APP/$OS/Debug/$APP_$OSd
 	
 	cd $DKPATH/DKApps/$APP/$OS/Release
-	make $APP
-	chmod +x $DKPATH/DKApps/$APP/$OS/Release/$APP
+	make $APP_$OS
+	chmod +x $DKPATH/DKApps/$APP/$OS/Release/$APP_$OS
 fi
 
 exec $SHELL #keep terminal open
