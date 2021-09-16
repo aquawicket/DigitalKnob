@@ -720,6 +720,7 @@ function DKBuild_DoResults(){
 			cmake_string = cmake_string.replace("-DRELEASE=ON ", "");
 			CPP_DKFile_MkDir(app_path+OS+"/Debug")
 			CPP_DKFile_ChDir(app_path+OS+"/Debug")
+			console.log(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DKPATH+"DK")
 			let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DKPATH+"DK")
 			if(rtvalue.indexOf("errors occurred!") > -1) 
 				return
