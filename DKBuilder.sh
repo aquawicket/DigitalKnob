@@ -120,8 +120,8 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
 	mkdir $DKPATH/DKApps/$APP/$OS/Debug
 	cd $DKPATH/DKApps/$APP/$OS/Debug
 	cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER="$GCC_PATH" -DCMAKE_CXX_COMPILER="$GPP_PATH" -DDEBUG=ON -DREBUILDALL=ON -DSTATIC=ON $DKPATH
-	make ${APP}_${OS}d
-	chmod +x $DKPATH/DKApps/$APP/$OS/Debug/${APP}_${OS}d
+	make $APP_$OSd
+	chmod +x $DKPATH/DKApps/$APP/$OS/Debug/$APP_$OSd
 	
 	mkdir $DKPATH/DKApps/$APP/$OS/Release
 	cd $DKPATH/DKApps/$APP/$OS/Release
@@ -133,8 +133,8 @@ else
 	cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER="$GCC_PATH" -DCMAKE_CXX_COMPILER="$GPP_PATH" -DDEBUG=ON -DRELEASE=ON -DREBUILDALL=ON -DSTATIC=ON $DKPATH
 	
 	cd $DKPATH/DKApps/$APP/$OS/Debug
-	make ${APP}_${OS}d
-	chmod +x $DKPATH/DKApps/$APP/$OS/Debug/${APP}_${OS}d
+	make $APP_$OSd
+	chmod +x $DKPATH/DKApps/$APP/$OS/Debug/$APP_$OSd
 	
 	cd $DKPATH/DKApps/$APP/$OS/Release
 	make ${APP}_${OS}
