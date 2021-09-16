@@ -491,8 +491,8 @@ if(WIN_32)
 	endif()
 	
 	add_definitions(-D_USING_V110_SDK71_)
-	add_executable(${APP_NAME}_win32 WIN32 ${App_SRC})
-	target_link_libraries(${APP_NAME}_win32 ${DEBUG_LIBS} ${RELEASE_LIBS} ${WIN_LIBS})
+	add_executable(${APP_NAME}_${OS} WIN32 ${App_SRC})
+	target_link_libraries(${APP_NAME}_${OS} ${DEBUG_LIBS} ${RELEASE_LIBS} ${WIN_LIBS})
 	##set_source_files_properties(${DIGITALKNOB}/stdafx.cpp PROPERTIES COMPILE_FLAGS "/Ycstdafx.h")
 	
 	list(APPEND DEBUG_LINK_FLAGS /MANIFEST:NO)
@@ -523,7 +523,8 @@ if(WIN_32)
     #COMMENT "Adding manifest..."
     #)
 	
-	set_target_properties(${APP_NAME}_win32 PROPERTIES LINK_FLAGS_DEBUG ${DEBUG_FLAGS} LINK_FLAGS_RELEASE ${RELEASE_FLAGS})
+	set_target_properties(${APP_NAME}_${OS} PROPERTIES LINK_FLAGS_DEBUG ${DEBUG_FLAGS} LINK_FLAGS_RELEASE ${RELEASE_FLAGS})
+	set_target_properties(${APP_NAME}_${OS} PROPERTIES DEBUG_POSTFIX d)
 endif(WIN_32)
 	
 ##########
@@ -567,8 +568,8 @@ if(WIN_64)
 	endif()
 	
 	add_definitions(-D_USING_V110_SDK71_)
-	add_executable(${APP_NAME}_win64 WIN32 ${App_SRC})
-	target_link_libraries(${APP_NAME}_win64 ${DEBUG_LIBS} ${RELEASE_LIBS} ${WIN_LIBS})
+	add_executable(${APP_NAME}_${OS} WIN32 ${App_SRC})
+	target_link_libraries(${APP_NAME}_${OS} ${DEBUG_LIBS} ${RELEASE_LIBS} ${WIN_LIBS})
 	##set_source_files_properties(${DIGITALKNOB}/stdafx.cpp PROPERTIES COMPILE_FLAGS "/Ycstdafx.h")
 	
 	list(APPEND DEBUG_LINK_FLAGS /MANIFEST:NO)
@@ -590,7 +591,7 @@ if(WIN_64)
 	list(APPEND RELEASE_LINK_FLAGS /SAFESEH:NO)
 	string(REPLACE ";" " " RELEASE_FLAGS "${RELEASE_LINK_FLAGS}")
 	
-	set_target_properties(${APP_NAME}_win64 PROPERTIES LINK_FLAGS_DEBUG ${DEBUG_FLAGS} LINK_FLAGS_RELEASE ${RELEASE_FLAGS})
+	set_target_properties(${APP_NAME}_${OS} PROPERTIES LINK_FLAGS_DEBUG ${DEBUG_FLAGS} LINK_FLAGS_RELEASE ${RELEASE_FLAGS})
 	
 	#add_custom_command(
     #TARGET ${APP_NAME}
@@ -659,10 +660,10 @@ if(MAC)
 	list(APPEND RELEASE_LIBS ${CF} ${CO} ${CB} ${AT} ${AU} ${CV} ${CA} ${IO} ${GL} ${FF} ${AK})
 	
 	SET(CMAKE_OSX_ARCHITECTURES "x86_64")
-	add_executable(${APP_NAME} MACOSX_BUNDLE ${App_SRC})
-	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS})
+	add_executable(${APP_NAME}_${OS} MACOSX_BUNDLE ${App_SRC})
+	target_link_libraries(${APP_NAME}_${OS} ${DEBUG_LIBS} ${RELEASE_LIBS})
 	
-	DKUPDATE_INFO_Plist(${APP_NAME}) #this may need to be run at post build
+	DKUPDATE_INFO_Plist(${APP_NAME})_${OS} #this may need to be run at post build
 endif()
 
 #######
@@ -732,10 +733,10 @@ if(IOS)
 	#set(MACOSX_BUNDLE_GUI_IDENTIFIER "com.digitalknob.\${PRODUCT_NAME:identifier}")
 		
 	#GET_TARGET_PROPERTY(MyExecutable_PATH ${APP_NAME} LOCATION)
-	add_executable(${APP_NAME} MACOSX_BUNDLE ${App_SRC})
-	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS})
+	add_executable(${APP_NAME}_${OS} MACOSX_BUNDLE ${App_SRC})
+	target_link_libraries(${APP_NAME}_${OS} ${DEBUG_LIBS} ${RELEASE_LIBS})
 	
-	DKUPDATE_INFO_Plist(${APP_NAME}) #this may need to be run at post build
+	DKUPDATE_INFO_Plist(${APP_NAME})_${OS} #this may need to be run at post build
 endif()
 
 ##########
@@ -804,10 +805,10 @@ if(IOSSIM)
 	##set(MACOSX_BUNDLE_GUI_IDENTIFIER "com.digitalknob.\${PRODUCT_NAME:identifier}")
 	
 	#GET_TARGET_PROPERTY(MyExecutable_PATH ${APP_NAME} LOCATION)
-	add_executable(${APP_NAME} MACOSX_BUNDLE ${App_SRC})
-	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS})
+	add_executable(${APP_NAME}_${OS} MACOSX_BUNDLE ${App_SRC})
+	target_link_libraries(${APP_NAME}_${OS} ${DEBUG_LIBS} ${RELEASE_LIBS})
 	
-	DKUPDATE_INFO_Plist(${APP_NAME}) #this may need to be run at post build
+	DKUPDATE_INFO_Plist(${APP_NAME})_${OS} #this may need to be run at post build
 endif()
 
 #########
@@ -864,12 +865,12 @@ if(LINUX)
 	
 	if(DEBUG)
 		add_definitions(-DDEBUG)
-		add_executable(${APP_NAME} ${App_SRC})
-		target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${LINUX_LIBS})
+		add_executable(${APP_NAME}_${OS} ${App_SRC})
+		target_link_libraries(${APP_NAME}_${OS} ${DEBUG_LIBS} ${LINUX_LIBS})
 	endif()
 	if(RELEASE)
-		add_executable(${APP_NAME} ${App_SRC})
-		target_link_libraries(${APP_NAME} ${RELEASE_LIBS} ${LINUX_LIBS})
+		add_executable(${APP_NAME}_${OS} ${App_SRC})
+		target_link_libraries(${APP_NAME}_${OS} ${RELEASE_LIBS} ${LINUX_LIBS})
 	endif()
 endif()
 
@@ -907,7 +908,6 @@ if(RASPBERRY)
 		DKREMOVE(${DKPROJECT}/Backup)
 	endif()
 
-	#set(CMAKE_CXX_STANDARD 17)
     find_package(OpenGL REQUIRED)
 	include_directories(${OpenGL_INCLUDE_DIRS})
 	link_directories(${OpenGL_LIBRARY_DIRS})
@@ -928,12 +928,12 @@ if(RASPBERRY)
 	
 	if(DEBUG)
 		add_definitions(-DDEBUG)
-		add_executable(${APP_NAME} ${App_SRC})
-		target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RASPBERRY_LIBS})
+		add_executable(${APP_NAME}_${OS} ${App_SRC})
+		target_link_libraries(${APP_NAME}_${OS} ${DEBUG_LIBS} ${RASPBERRY_LIBS})
 	endif()
 	if(RELEASE)
-		add_executable(${APP_NAME} ${App_SRC})
-		target_link_libraries(${APP_NAME} ${RELEASE_LIBS} ${RASPBERRY_LIBS})
+		add_executable(${APP_NAME}_${OS} ${App_SRC})
+		target_link_libraries(${APP_NAME}_${OS} ${RELEASE_LIBS} ${RASPBERRY_LIBS})
 	endif()
 endif()
 
@@ -986,11 +986,11 @@ if(ANDROID)
 
 	#add_executable(DKAndroid ${App_SRC})
 
-	add_library(DKAndroid SHARED ${App_SRC})
-	#target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${ANDROID_LIBS})
-	#target_include_directories(DKAndroid PUBLIC ${INCLUDE_DIRECTORIES}) #of ${DKINCLUDES_LIST}
-	target_link_libraries(DKAndroid ${DEBUG_LIBS} ${RELEASE_LIBS} ${ANDROID_LIBS})
-	#add_dependencies(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS})	
+	add_library(${APP_NAME}_${OS} SHARED ${App_SRC})
+	#target_link_libraries(${APP_NAME}_${OS} ${DEBUG_LIBS} ${RELEASE_LIBS} ${ANDROID_LIBS})
+	#target_include_directories(${APP_NAME}_${OS} PUBLIC ${INCLUDE_DIRECTORIES}) #of ${DKINCLUDES_LIST}
+	target_link_libraries(${APP_NAME}_${OS} ${DEBUG_LIBS} ${RELEASE_LIBS} ${ANDROID_LIBS})
+	#add_dependencies(${APP_NAME}_${OS} ${DEBUG_LIBS} ${RELEASE_LIBS})	
 	
 	#include_external_msproject(DKGradle ${DKPROJECT}/${OS}/DKGradle.androidproj)
 endif()
