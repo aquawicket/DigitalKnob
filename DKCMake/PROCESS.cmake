@@ -646,7 +646,6 @@ if(MAC)
 		DKREMOVE(${DKPROJECT}/Backup)
 	endif()
 	
-	#set(CMAKE_CXX_STANDARD 17)
 	FIND_LIBRARY(CF CoreFoundation)
 	FIND_LIBRARY(CO Cocoa)
 	FIND_LIBRARY(CB Carbon)
@@ -708,7 +707,6 @@ if(IOS)
 		DKREMOVE(${DKPROJECT}/Backup)
 	endif()
 	
-	#set(CMAKE_CXX_STANDARD 17)
 	### FrameWorks ###
 	set(IOS_FRAMEWORKS
 		Foundation
@@ -781,7 +779,6 @@ if(IOSSIM)
 		DKREMOVE(${DKPROJECT}/Backup)
 	endif()
 	
-	#set(CMAKE_CXX_STANDARD 17)
 	### FrameWorks ###
 	set(IOS_FRAMEWORKS
 		Foundation
@@ -848,14 +845,13 @@ if(LINUX)
 		DKZIP(${DKPROJECT}/assets)
 	
 		#message(STATUS "Creating assets.h . . .")
-		#bin2h(SOURCE_FILE ${DKPROJECT}/assets.zip HEADER_FILE ${DKPROJECT}/assets.h VARIABLE_NAME "ASSETS_H")
+		bin2h(SOURCE_FILE ${DKPROJECT}/assets.zip HEADER_FILE ${DKPROJECT}/assets.h VARIABLE_NAME "ASSETS_H")
 	
 		# Restore the backed up assets
 		DKCOPY(${DKPROJECT}/Backup/ ${DKPROJECT}/assets/ FALSE)
 		DKREMOVE(${DKPROJECT}/Backup)
 	endif()
 
-	#set(CMAKE_CXX_STANDARD 17)
 	find_package(OpenGL REQUIRED)
 	include_directories(${OpenGL_INCLUDE_DIRS})
 	link_directories(${OpenGL_LIBRARY_DIRS})
@@ -870,7 +866,6 @@ if(LINUX)
 	list(APPEND LINUX_LIBS libstdc++fs.a)
 	
 	set(CMAKE_CXX_FLAGS "-g -no-pie -std=c++17")
-	
 	
 	if(DEBUG)
 		add_definitions(-DDEBUG)
@@ -936,7 +931,6 @@ if(RASPBERRY)
 	
 	set(CMAKE_CXX_FLAGS "-g -no-pie -std=c++17")
 	
-	
 	if(DEBUG)
 		add_definitions(-DDEBUG)
 		add_executable(${APP_NAME} ${App_SRC})
@@ -978,7 +972,6 @@ if(ANDROID)
 
 	#DKUPDATE_ANDROID_NAME(${APP_NAME})
 	
-	#set(CMAKE_CXX_STANDARD 17)
 	set(CMAKE_CXX_FLAGS "-DDKAPP -DUSE_DK -std=c++17")
 	set(CMAKE_CXX_FLAGS_DEBUG "-g2 -gdwarf-2 -O0 -DDEBUG") 
 	set(CMAKE_CXX_FLAGS_RELEASE "-O3")
