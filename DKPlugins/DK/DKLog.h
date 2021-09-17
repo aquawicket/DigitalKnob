@@ -63,91 +63,85 @@ bool Log(const char* file, int line, const char* func, const DKString& text, con
 void SetLog(const int lvl, const DKString& text);
 
 
-
 #ifndef ANDROID
 void getTemplateArgs(std::ostringstream& out);
 template <typename A, typename... Args>
-void getTemplateArgs(std::ostringstream& out, A arg1, Args... args) {
-	int arg_count = sizeof...(Args); //number of arguments
-	//out << "<" << typeid(arg1).name() << "->";
-
+void getTemplateArgs(std::ostringstream& out, A arg1, Args&&... args) {
+	int arg_count = sizeof...(Args);
 	std::ostringstream check_str;
 	check_str << arg1;
-	if(!check_str.str().empty()){
+	if(!check_str.str().empty())
 		out << arg1;
-	}
-	else{
-		out << "***";
-	}
+	else
+		out << "undefined";
 	if(arg_count)
-		out << ", ";
+		out << ",";
     getTemplateArgs(out, args...);
 }
 
-
 template <typename... Args>
-void DebugFunc(const char* file, int line, const char* func, Args&&... args) {
+void DebugFunc(const char* file, int line, const char* func, const DKString& names, Args&&... args) {
 	if(log_show.empty() && !log_debug)
 		return;
-	int arg_count = sizeof...(Args); //number of arguments
-	std::ostringstream out;
-	out << func;
-	out << "(";
-	//using expander = int[];
-	//(void) expander { 0, (void(out << args << ", "), 0) ...};
-	getTemplateArgs(out, args...);
-	out << ")\n";
-	std::string text = out.str();
-	//replace(text, ", )", ")");
-	Log(file, line, "", text, DK_DEBUG);
-}
-/*
-template <typename... Args>
-void DebugVars(const char* file, int line, const char* func, const DKString& names, Args&&... args){
-	std::stringstream names_ss;
-	for(const char& c : names){
-		if(c == ','){
-			names_ss << " ";
-			continue;
-		}
-		names_ss << c;
-	}
-	std::string name;
-	std::ostringstream ss;
 	
-	DKString filename = file;
-	unsigned found = filename.find_last_of("/\\");
-	if(found != std::string::npos && found < filename.length())
-		filename = filename.substr(found+1);
+	int arg_count = sizeof...(Args);
+	std::ostringstream out;
+	getTemplateArgs(out, args...);
+	DKStringArray arg_names;
+	toStringArray(arg_names, names, ",");
+	DKStringArray arg_values;
+	toStringArray(arg_values, out.str(), ",");
 
-	using expander = int[];
-	(void) expander { 0, (
-		names_ss >> name, ss << "**DEBUG** " << filename << ":" << line << " " << func << "()   " << name << ": " << args << "\n"
-	,0) ...};
-
-	if(!log_debug){
-		log_debug = true;
-		Log("", 0, "", ss.str(), DK_DEBUG);
-		log_debug = false; 
+	DKString func_string = func;
+	func_string += "( ";
+	for(int i=0; i<arg_count; ++i){
+		func_string += arg_names[i];
+		func_string += ":";
+		func_string += arg_values[i];
+		if(i < (arg_count-1))
+			func_string += ", ";
 	}
-	else
-		Log("", 0, "", ss.str(), DK_DEBUG);
+	func_string += " )\n";
+	Log(file, line, "", func_string, DK_DEBUG);
 }
-*/
+
 #endif
 
+class logy{
+	public:
+		logy(const std::string& context);
+		~logy();
+		static std::ostream* stream;
+		const std::string context;
+		const clock_t start_time;
+};
 
-//#define DKLOG(...) Log(__FILE__, __LINE__, __FUNCTION__, ##__VA_ARGS__)
 #define DKINFO(message) Log(__FILE__, __LINE__, __FUNCTION__, message, DK_INFO);
 #define DKWARN(message) Log(__FILE__, __LINE__, __FUNCTION__, message, DK_WARN);
 #define DKERROR(message) Log(__FILE__, __LINE__, __FUNCTION__, message, DK_ERROR);
 #define DKDEBUG(message) Log(__FILE__, __LINE__, __FUNCTION__, message, DK_DEBUG);
+#define DEBUG_METHOD() logy _logy(__FUNCTION__);
 #ifndef ANDROID
-	#define DKDEBUGFUNC(...) DebugFunc(__FILE__, __LINE__, __FUNCTION__, ##__VA_ARGS__) //can be no args
-	//#define DKDEBUGVARS(...) DebugVars(__FILE__, __LINE__, __FUNCTION__, #__VA_ARGS__, __VA_ARGS__) //must have args
+	#define DKDEBUGFUNC1(__FILE__, __LINE__, __FUNCTION__, ...) DebugFunc(__FILE__, __LINE__, __FUNCTION__, #__VA_ARGS__, __VA_ARGS__)
+	#define DKDEBUGFUNC(...) DEBUG_METHOD() DKDEBUGFUNC1(__FILE__, __LINE__, __FUNCTION__, __VA_ARGS__)
 #else
 	#define DKDEBUGFUNC(...) NULL
-	#define DKDEBUGVARS(...) NULL
 #endif
+
+/*
+template <typename... Args>
+void Test(const char* file, int line, const char* func, const DKString& names, Args&&... args){
+	DKString str = "test";
+	Log(file, line, func, str, DKDEBUG);
+}
+#define TEST1(__FILE__, __LINE__, __FUNCTION__, ...)  Test(__FILE__, __LINE__, __FUNCTION__, #__VA_ARGS__, __VA_ARGS__)
+#define TEST(...) TEST1(__FILE__, __LINE__, __FUNCTION__, __VA_ARGS__)
+void Runit(){
+	TEST(123);
+	TEST("123");
+	TEST();
+}
+*/
+
 
 #endif //DKLog_H

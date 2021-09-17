@@ -190,3 +190,16 @@ void SetLog(const int lvl, const DKString& text){
 	if(lvl == DK_HIDE)
 		log_hide = text;
 }
+
+
+std::ostream* logy::stream = &std::cout;
+logy::logy(const std::string& ctx) : context(ctx), start_time(clock()){
+	*stream << "--> " << context << std::endl;
+	stream->flush();
+}
+logy::~logy(){
+	*stream << "<-- " << context;
+	*stream << " in " << ((double)(clock() - start_time) / CLOCKS_PER_SEC) << "s";
+	*stream << std::endl;
+	stream->flush();
+}
