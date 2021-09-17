@@ -1,8 +1,10 @@
 #!/bin/bash
 
+echo "OSTYPE = $OSTYPE"
+echo "HOSTTYPE = $HOSTTYPE"
+
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
 	#HOST_OS="linux"
-	OS="linux64"
 	DKPATH="/home/$USER/digitalknob/DK"
 	sudo apt-get -y install git
 	sudo apt-get -y install cmake
@@ -12,10 +14,10 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
 	#HOST_OS="mac"
 	DKPATH="/Users/$USER/digitalknob/DK"
 elif [[ "$OSTYPE" == "cygwin" ]]; then
-    #HOST_OS="cygwin"
+    #HOST_OS="windows"
 	echo "TODO: DKPATH NOT SET"
 elif [[ "$OSTYPE" == "msys" ]]; then
-    #HOST_OS="msys"
+    #HOST_OS="windows"
 	echo "TODO: DKPATH NOT SET"
 elif [[ "$OSTYPE" == "win32" ]]; then
     #HOST_OS="win32" #I'n not sure this can happen
