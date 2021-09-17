@@ -29,7 +29,7 @@ bool Log(const char* file, int line, const char* func, const DKString& text, con
 		string += toString((unsigned int)threadId);
 		string += "  ";
 	}
-	if(log_lines) { // || lvl == DK_ERROR) {
+	if(log_lines || lvl == DK_ERROR) {
 		DKString filename = file;
 		unsigned found = filename.find_last_of("/\\");
 		if(found != std::string::npos && found < filename.length())
