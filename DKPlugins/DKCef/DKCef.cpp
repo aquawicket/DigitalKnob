@@ -464,21 +464,25 @@ bool DKCef::NewBrowser(const DKString& id, const int& top, const int& left, cons
 	if(DKClass::DKValid("DKWindow,DKWindow0")){
 		browserSettings.windowless_frame_rate = 60;
 		window_info.SetAsWindowless(NULL);
-		CefRefPtr<CefBrowser> _browser;
-		_browser = CefBrowserHost::CreateBrowserSync(window_info, cefHandler, url, browserSettings, NULL, NULL);
-		if(!_browser)
-			return DKERROR("DKCef::NewBrowser(): _browser invalid\n"); 
+		window_info.y = top;
+		window_info.x = left;
+		window_info.width = _width;
+		window_info.height = _height;
+		current_browser = CefBrowserHost::CreateBrowserSync(window_info, cefHandler, url, browserSettings, NULL, NULL);
+		if(current_browser)
+			return DKERROR("DKCef::NewBrowser(): current_browser invalid\n"); 
+		//if(!CefBrowserHost::CreateBrowser(window_info, cefHandler, url, browserSettings, NULL, NULL))
+		//	return DKERROR("CefBrowserHost::CreateBrowser() failed\n");
 		DKBrowser dkBrowser;
+		dkBrowser.browser = current_browser;
 		dkBrowser.id = id;
 		dkBrowser.top = top;
 		dkBrowser.left = left;
 		dkBrowser.width = _width;
 		dkBrowser.height = _height;
 		dkBrowser.url = url;
-		dkBrowser.browser = _browser;
 		dkBrowsers.push_back(dkBrowser);
 		SetFocus(dkBrowsers.size()-1);
-		current_browser = _browser;
 		//current_browser->GetHost()->SetWindowlessFrameRate(60); //do we need this?
 	}
 	else{

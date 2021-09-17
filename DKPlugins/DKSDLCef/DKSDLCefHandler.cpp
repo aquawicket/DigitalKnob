@@ -153,6 +153,7 @@ void DKSDLCefHandler::OnBeforeClose(CefRefPtr<CefBrowser> browser)
 	}
 }
 
+#include "DKCef/DKCef.h"
 ///////////////////////////////////////////////////////////////////
 void DKSDLCefHandler::OnAfterCreated(CefRefPtr<CefBrowser> browser)
 {
@@ -161,6 +162,8 @@ void DKSDLCefHandler::OnAfterCreated(CefRefPtr<CefBrowser> browser)
 	browser_list_.push_back(browser); //Add to the list of existing browsers.
 	cef_images.push_back(NULL);
 	background_images.push_back(NULL);
+	
+	dkCef->current_browser = browser;
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
