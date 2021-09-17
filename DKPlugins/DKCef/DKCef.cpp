@@ -468,11 +468,8 @@ bool DKCef::NewBrowser(const DKString& id, const int& top, const int& left, cons
 		window_info.x = left;
 		window_info.width = _width;
 		window_info.height = _height;
-		current_browser = CefBrowserHost::CreateBrowserSync(window_info, cefHandler, url, browserSettings, NULL, NULL);
-		if(current_browser)
-			return DKERROR("DKCef::NewBrowser(): current_browser invalid\n"); 
-		//if(!CefBrowserHost::CreateBrowser(window_info, cefHandler, url, browserSettings, NULL, NULL))
-		//	return DKERROR("CefBrowserHost::CreateBrowser() failed\n");
+
+
 		DKBrowser dkBrowser;
 		dkBrowser.browser = current_browser;
 		dkBrowser.id = id;
@@ -482,7 +479,27 @@ bool DKCef::NewBrowser(const DKString& id, const int& top, const int& left, cons
 		dkBrowser.height = _height;
 		dkBrowser.url = url;
 		dkBrowsers.push_back(dkBrowser);
+		
+		current_browser = CefBrowserHost::CreateBrowserSync(window_info, cefHandler, url, browserSettings, NULL, NULL);
+		if(current_browser)
+			return DKERROR("DKCef::NewBrowser(): current_browser invalid\n"); 
+		//if(!CefBrowserHost::CreateBrowser(window_info, cefHandler, url, browserSettings, NULL, NULL))
+		//	return DKERROR("CefBrowserHost::CreateBrowser() failed\n");
+		
+		/*
+		DKBrowser dkBrowser;
+		dkBrowser.browser = current_browser;
+		dkBrowser.id = id;
+		dkBrowser.top = top;
+		dkBrowser.left = left;
+		dkBrowser.width = _width;
+		dkBrowser.height = _height;
+		dkBrowser.url = url;
+		dkBrowsers.push_back(dkBrowser);
+		*/
 		SetFocus(dkBrowsers.size()-1);
+	
+
 		//current_browser->GetHost()->SetWindowlessFrameRate(60); //do we need this?
 	}
 	else{
