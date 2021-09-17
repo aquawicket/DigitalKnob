@@ -65,11 +65,23 @@ void SetLog(const int lvl, const DKString& text);
 
 
 #ifndef ANDROID
-void getTemplateArgs();
-template <typename T, typename... Types>
-void getTemplateArgs(T var1, Types... var2) {
-    std::cout << var1 << std::endl;
-    getTemplateArgs(var2...);
+void getTemplateArgs(std::ostringstream& out);
+template <typename A, typename... Args>
+void getTemplateArgs(std::ostringstream& out, A arg1, Args... args) {
+	int arg_count = sizeof...(Args); //number of arguments
+	//out << "<" << typeid(arg1).name() << "->";
+
+	std::ostringstream check_str;
+	check_str << arg1;
+	if(!check_str.str().empty()){
+		out << arg1;
+	}
+	else{
+		out << "***";
+	}
+	if(arg_count)
+		out << ", ";
+    getTemplateArgs(out, args...);
 }
 
 
@@ -80,16 +92,16 @@ void DebugFunc(const char* file, int line, const char* func, Args&&... args) {
 	int arg_count = sizeof...(Args); //number of arguments
 	std::ostringstream out;
 	out << func;
-	out << "( ";
-	using expander = int[];
-	(void) expander { 0, (void(out << args << ", "), 0) ...};
-	//getTemplateArgs(1, 2, 3.14, "Pass me any ", "number of arguments", "I will print\n");
-	out << " )\n";
+	out << "(";
+	//using expander = int[];
+	//(void) expander { 0, (void(out << args << ", "), 0) ...};
+	getTemplateArgs(out, args...);
+	out << ")\n";
 	std::string text = out.str();
-	replace(text, ", )", ")");
+	//replace(text, ", )", ")");
 	Log(file, line, "", text, DK_DEBUG);
 }
-
+/*
 template <typename... Args>
 void DebugVars(const char* file, int line, const char* func, const DKString& names, Args&&... args){
 	std::stringstream names_ss;
@@ -121,7 +133,9 @@ void DebugVars(const char* file, int line, const char* func, const DKString& nam
 	else
 		Log("", 0, "", ss.str(), DK_DEBUG);
 }
+*/
 #endif
+
 
 //#define DKLOG(...) Log(__FILE__, __LINE__, __FUNCTION__, ##__VA_ARGS__)
 #define DKINFO(message) Log(__FILE__, __LINE__, __FUNCTION__, message, DK_INFO);
@@ -130,7 +144,7 @@ void DebugVars(const char* file, int line, const char* func, const DKString& nam
 #define DKDEBUG(message) Log(__FILE__, __LINE__, __FUNCTION__, message, DK_DEBUG);
 #ifndef ANDROID
 	#define DKDEBUGFUNC(...) DebugFunc(__FILE__, __LINE__, __FUNCTION__, ##__VA_ARGS__) //can be no args
-	#define DKDEBUGVARS(...) DebugVars(__FILE__, __LINE__, __FUNCTION__, #__VA_ARGS__, __VA_ARGS__) //must have args
+	//#define DKDEBUGVARS(...) DebugVars(__FILE__, __LINE__, __FUNCTION__, #__VA_ARGS__, __VA_ARGS__) //must have args
 #else
 	#define DKDEBUGFUNC(...) NULL
 	#define DKDEBUGVARS(...) NULL
