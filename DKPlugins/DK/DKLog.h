@@ -130,12 +130,14 @@ class logy{
 #define DKDEBUG(message) Log(__FILE__, __LINE__, __FUNCTION__, message, DK_DEBUG);
 //#define DEBUG_METHOD() logy _logy(__FUNCTION__);
 #ifndef ANDROID
-#ifdef WIN32
+
 	#define DKDEBUGFUNC1(__FILE__, __LINE__, __FUNCTION__, ...) DebugFunc(__FILE__, __LINE__, __FUNCTION__, #__VA_ARGS__, __VA_ARGS__)
+#ifdef WIN32
+	#define DKDEBUGFUNC(...) DKDEBUGFUNC1(__FILE__, __LINE__, __FUNCTION__, __VA_ARGS__)
 #else
-	#define DKDEBUGFUNC1(__FILE__, __LINE__, __FUNCTION__, ...) DebugFunc(__FILE__, __LINE__, __FUNCTION__, "", ##__VA_ARGS__)
+	#define DKDEBUGFUNC(...) DebugFunc(__FILE__, __LINE__, __FUNCTION__, "", ##__VA_ARGS__)	
 #endif
-	#define DKDEBUGFUNC(...) /*DEBUG_METHOD()*/DKDEBUGFUNC1(__FILE__, __LINE__, __FUNCTION__, __VA_ARGS__)
+
 #else
 	#define DKDEBUGFUNC(...) NULL
 #endif
