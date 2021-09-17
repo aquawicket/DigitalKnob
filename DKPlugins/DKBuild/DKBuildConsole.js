@@ -377,10 +377,18 @@ function DKBuildConsole_TranslateOption(num) {
 }
 
 function DKBuildConsole_KeyToApp(key) {
-	if (key === 59) {
-        APP = "ALLAPPS"
-    }
-	//F1
+	if(CPP_DK_GetOS() === "Linux"){
+		//F1 Linux
+		if (key === 80) {
+			APP = "ALLAPPS"
+		}
+		//F2 = 82... etc.
+	else{
+		//F1
+		if (key === 59) {
+			APP = "ALLAPPS"
+		}
+	}
     if (key === 49) {
         APP = APP_LIST[0]
     }
