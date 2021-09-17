@@ -1,7 +1,9 @@
 #!/bin/bash
 
-echo "OSTYPE = $OSTYPE"
-echo "HOSTTYPE = $HOSTTYPE"
+echo "hostname = $HOSTNAME"
+echo "hosttype = $HOSTTYPE"
+echo "ostype = $OSTTYPE"
+echo "machtype = $MACHTYPE"
 
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
 	#HOST_OS="linux"
