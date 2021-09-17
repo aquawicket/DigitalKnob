@@ -24,6 +24,7 @@ if(NOT CMAKE_HOST_WIN32) # Disabled on Non-Windows host machines
 	DKDISABLE(mingw32)
 	DKDISABLE(mingw64)
 	DKDISABLE(msys)
+	DKDISABLE(python)
 endif()
 if(WIN) # Disabled for Windows targets
 	DKDISABLE(android-studio)
