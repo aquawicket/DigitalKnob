@@ -310,6 +310,9 @@ endfunction()
 
 
 function(DKUNDEFINE str)
+	if(NOT DKDEFINES_LIST)
+		return()
+	endif()
 	list(REMOVE_ITEM DKDEFINES_LIST ${str})
 	remove_definitions(-D${str})
 endfunction()

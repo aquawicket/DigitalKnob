@@ -191,7 +191,7 @@ void SetLog(const int lvl, const DKString& text){
 		log_hide = text;
 }
 
-
+/*
 std::ostream* logy::stream = &std::cout;
 logy::logy(const std::string& ctx) : context(ctx), start_time(clock()){
 	*stream << "--> " << context << std::endl;
@@ -203,3 +203,4 @@ logy::~logy(){
 	*stream << std::endl;
 	stream->flush();
 }
+*/

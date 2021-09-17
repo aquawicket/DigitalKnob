@@ -107,6 +107,7 @@ void DebugFunc(const char* file, int line, const char* func, const DKString& nam
 
 #endif
 
+/*
 class logy{
 	public:
 		logy(const std::string& context);
@@ -115,15 +116,16 @@ class logy{
 		const std::string context;
 		const clock_t start_time;
 };
+*/
 
 #define DKINFO(message) Log(__FILE__, __LINE__, __FUNCTION__, message, DK_INFO);
 #define DKWARN(message) Log(__FILE__, __LINE__, __FUNCTION__, message, DK_WARN);
 #define DKERROR(message) Log(__FILE__, __LINE__, __FUNCTION__, message, DK_ERROR);
 #define DKDEBUG(message) Log(__FILE__, __LINE__, __FUNCTION__, message, DK_DEBUG);
-#define DEBUG_METHOD() logy _logy(__FUNCTION__);
+//#define DEBUG_METHOD() logy _logy(__FUNCTION__);
 #ifndef ANDROID
 	#define DKDEBUGFUNC1(__FILE__, __LINE__, __FUNCTION__, ...) DebugFunc(__FILE__, __LINE__, __FUNCTION__, #__VA_ARGS__, __VA_ARGS__)
-	#define DKDEBUGFUNC(...) DEBUG_METHOD() DKDEBUGFUNC1(__FILE__, __LINE__, __FUNCTION__, __VA_ARGS__)
+	#define DKDEBUGFUNC(...) /*DEBUG_METHOD()*/DKDEBUGFUNC1(__FILE__, __LINE__, __FUNCTION__, __VA_ARGS__)
 #else
 	#define DKDEBUGFUNC(...) NULL
 #endif
