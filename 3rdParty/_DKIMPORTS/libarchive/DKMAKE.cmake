@@ -7,11 +7,8 @@
 ### DEPENDS ###
 DKDEPEND(zlib)
 DKDEPEND(xz)
-#if(CMAKE_HOSTS_WIN32)
-#	DKDEPEND(bzip2-win-build)
-#else()
-	DKDEPEND(bzip2)
-#endif()
+DKDEPEND(bzip2)
+
 
 ### VERSION ###
 DKSET(ARCHIVE_VERSION 3.5.1)

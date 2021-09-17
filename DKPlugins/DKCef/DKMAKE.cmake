@@ -1,46 +1,7 @@
-IF(ANDROID)
-	RETURN()
-ENDIF()
-IF(IOSSIM)
-	RETURN()
-ENDIF()
-IF(RASPBERRY)
-	RETURN()
-ENDIF()
-
-
-IF(WIN_32)
-	#DKDEPEND(cef_binary_windows32)
-	DKDEPEND(cef_binary)
-ENDIF()
-IF(WIN_64)
-	#DKDEPEND(cef_binary_windows64)
-	DKDEPEND(cef_binary)
-ENDIF()
-
-IF(MAC_64)
-	DKDEPEND(cef_binary_macosx64)
-ENDIF()
-
-IF(LINUX_32)
-	DKDEPEND(cef_binary_linux32)
-ENDIF()
-IF(LINUX_64)
-	DKDEPEND(cef_binary_linux64)
-ENDIF()
-
-IF(RASPBERRY_32)
-	## DKDEPEND(cef_binary_linux32)
-ENDIF()
-IF(RASPBERRY_64)
-	## DKDEPEND(cef_binary_linux64)
-ENDIF()
-
+DKDEPEND(cef_binary)
 IF(LINUX)
 	DKDEPEND(libgtk2.0-dev)
 ENDIF()
-
-
 DKDEPEND(DKDuktape)
 
 

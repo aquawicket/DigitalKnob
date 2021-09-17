@@ -1,4 +1,7 @@
-### DEPENDENCIES ###
+## https://www.libsdl.org/projects/SDL_image/release/SDL2_image-2.0.1.zip
+## https://www.libsdl.org/projects/SDL_image/release/SDL2_image-2.0.5.zip
+
+### DEPENDS ###
 DKDEPEND(sdl2)
 DKDEPEND(zlib)
 DKDEPEND(giflib)
@@ -15,13 +18,12 @@ DKSET(SDL2IMAGE_MINOR 0)
 DKSET(SDL2IMAGE_BUILD 5)  
 DKSET(SDL2IMAGE_VERSION ${SDL2IMAGE_MAJOR}.${SDL2IMAGE_MINOR}.${SDL2IMAGE_BUILD})
 DKSET(SDL2IMAGE_NAME SDL2_image-${SDL2IMAGE_VERSION})
+DKSET(SDL2IMAGE_DL https://www.libsdl.org/projects/SDL_image/release/${SDL2IMAGE_NAME}.zip)
 DKSET(SDL2IMAGE ${3RDPARTY}/${SDL2IMAGE_NAME})
 
 
 ### INSTALL ###
-## https://www.libsdl.org/projects/SDL_image/release/SDL2_image-2.0.1.zip
-## https://www.libsdl.org/projects/SDL_image/release/SDL2_image-2.0.5.zip
-DKINSTALL(https://www.libsdl.org/projects/SDL_image/release/${SDL2IMAGE_NAME}.zip sdl2_image ${SDL2IMAGE})
+DKINSTALL(${SDL2IMAGE_DL} sdl2_image ${SDL2IMAGE})
 
 
 ### DKPLUGINS LINK ###
