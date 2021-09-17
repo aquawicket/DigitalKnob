@@ -13,6 +13,7 @@ public:
 	static int DebuggerOff(duk_context* ctx);
 	static int DebuggerOn(duk_context* ctx);
 	static int DebuggerToggle(duk_context* ctx);
+	static int PostProcess(duk_context* ctx);
 };
 
 REGISTER_OBJECT(DKRmlJS, true)

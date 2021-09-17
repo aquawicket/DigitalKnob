@@ -147,8 +147,8 @@ bool DKHtmlToRml::PostProcess(Rml::Element* element)
 	}
 
 	//we actually want the parent if it has one
-	if(element->GetParentNode())
-		element = element->GetParentNode();
+	//if(element->GetParentNode())
+		//element = element->GetParentNode();
 	
 	// Create cef contexts for iFrames
 	Rml::ElementList iframes;
@@ -175,7 +175,14 @@ bool DKHtmlToRml::PostProcess(Rml::Element* element)
 		//DKEvent::AddEvent(id, "mouseover", &DKHtmlToRml::MouseOverIframe, this);
 		//DKEvent::AddEvent(id, "click", &DKHtmlToRml::ClickIframe, this);
 
-		Rml::Element* cef_texture = element->GetOwnerDocument()->CreateElement("img").get();
+		//Rml::Element* cef_texture = element->GetOwnerDocument()->CreateElement("img").get();
+		DKString tag = "img";
+		Rml::Element* doc = DKRml::Get()->document;
+		Rml::Element* cef_texture  = doc->AppendChild(DKRml::Get()->document->CreateElement(tag.c_str()), true);
+		if(!element)
+			return DKERROR("element invalid\n");
+
+
 		DKString cef_id = "iframe_"+id;
 		cef_texture->SetAttribute("id", cef_id.c_str());
 

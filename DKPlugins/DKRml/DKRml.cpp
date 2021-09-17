@@ -260,7 +260,15 @@ bool DKRml::LoadHtml(const DKString& html){
 		return false;
 	}
 
-	dkHtmlToRml.PostProcess(document);
+
+	Rml::ElementList elements;
+	DKRml::Get()->document->GetElementsByTagName(elements, "body");
+	if(!elements[0]){
+		return DKERROR("body element invalid\n");
+	}
+	//dkHtmlToRml.PostProcess(document);
+	dkHtmlToRml.PostProcess(elements[0]);
+
 	document->Show();
 
 #ifdef ANDROID
