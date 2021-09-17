@@ -455,9 +455,10 @@ bool DKCef::NewBrowser(const DKString& id, const int& top, const int& left, cons
 	
 	int _width = width;
 	int _height = height;
-	if(!_width){ _width = 800; }
-	if(!_height){ _height = 600; }
-
+	if(!_width)
+		_width = 800;
+	if(!_height)
+		_height = 600;
 	CefWindowInfo window_info;
 	CefBrowserSettings browserSettings;
 	if(DKClass::DKValid("DKWindow,DKWindow0")){
@@ -465,11 +466,8 @@ bool DKCef::NewBrowser(const DKString& id, const int& top, const int& left, cons
 		window_info.SetAsWindowless(NULL);
 		CefRefPtr<CefBrowser> _browser;
 		_browser = CefBrowserHost::CreateBrowserSync(window_info, cefHandler, url, browserSettings, NULL, NULL);
-		if(!_browser){
-			DKERROR("DKCef::NewBrowser(): _browser invalid\n");
-			return false; 
-		}
-
+		if(!_browser)
+			return DKERROR("DKCef::NewBrowser(): _browser invalid\n"); 
 		DKBrowser dkBrowser;
 		dkBrowser.id = id;
 		dkBrowser.top = top;
