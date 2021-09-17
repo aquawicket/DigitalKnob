@@ -383,6 +383,7 @@ function DKBuildConsole_KeyToApp(key) {
 			APP = "ALLAPPS"
 		}
 		//F2 = 82... etc.
+	}
 	else{
 		//F1
 		if (key === 59) {
