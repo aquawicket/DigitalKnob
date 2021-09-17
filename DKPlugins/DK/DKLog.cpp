@@ -18,6 +18,8 @@ extern DKString log_show = ""; //comma seperated
 extern DKString log_hide = ""; //comma seperated 
 
 
+void getTemplateArgs(){}
+
 bool Log(const char* file, int line, const char* func, const DKString& text, const int lvl){
 	DKString string;
 	if(log_thread){

@@ -10,6 +10,7 @@
 #endif
 #include "DKString.h"
 #include <stdio.h>
+#include <iostream>
 #if !defined(IOS)
     #include <fstream>
 #endif
@@ -61,17 +62,29 @@ extern DKString log_hide;
 bool Log(const char* file, int line, const char* func, const DKString& text, const int lvl = DK_INFO);
 void SetLog(const int lvl, const DKString& text);
 
+
+
 #ifndef ANDROID
+void getTemplateArgs();
+template <typename T, typename... Types>
+void getTemplateArgs(T var1, Types... var2) {
+    std::cout << var1 << std::endl;
+    getTemplateArgs(var2...);
+}
+
+
 template <typename... Args>
-void DebugFunc(const char* file, int line, const char* func, Args&&... args){
+void DebugFunc(const char* file, int line, const char* func, Args&&... args) {
 	if(log_show.empty() && !log_debug)
 		return;
+	int arg_count = sizeof...(Args); //number of arguments
 	std::ostringstream out;
 	out << func;
-	out << "(";
+	out << "( ";
 	using expander = int[];
-	//(void) expander { 0, (void(out << args << ", "), 0) ...}; //FIXME
-	out << ")\n";
+	(void) expander { 0, (void(out << args << ", "), 0) ...};
+	//getTemplateArgs(1, 2, 3.14, "Pass me any ", "number of arguments", "I will print\n");
+	out << " )\n";
 	std::string text = out.str();
 	replace(text, ", )", ")");
 	Log(file, line, "", text, DK_DEBUG);

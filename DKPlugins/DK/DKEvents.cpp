@@ -12,13 +12,13 @@ std::vector<std::function<bool(const DKString&, const DKString&, const DKString&
 
 //bool DKEvents::AddEvent(const DKString& id, const DKString& type, boost::function<bool (DKEvents*)> func, DKObject* object)
 bool DKEvents::AddEvent(const DKString& id, const DKString& type, std::function<bool(DKEvents*)> func, DKObject* object){
-	DKDEBUGFUNC(id, type, func, object);
+	//DKDEBUGFUNC(id, type, func, object);
 	return DKEvents::AddEvent(id, type, "", func, object);
 }
 
 //bool DKEvents::AddEvent(const DKString& id, const DKString& type, const DKString& jsreturn, boost::function<bool (DKEvents*)> func, DKObject* object)
 bool DKEvents::AddEvent(const DKString& id, const DKString& type, const DKString& jsreturn, std::function<bool(DKEvents*)> func, DKObject* object){
-	DKDEBUGFUNC(id, type, jsreturn, func, object);
+	//DKDEBUGFUNC(id, type, jsreturn, func, object);
 	DKString _jsreturn = jsreturn;
 	replace(_jsreturn, "() { [ecmascript code] }", ""); //remove  () { [ecmascript code] }
 
@@ -129,7 +129,7 @@ bool DKEvents::RemoveEvents(const DKString& variable){
 }
 
 bool DKEvents::RemoveEvents(DKObject* obj){
-	DKDEBUGFUNC(obj);
+	//DKDEBUGFUNC(obj);
 	for(unsigned int i = 0; i < events.size(); ++i){
 		if(events[i]->object == obj){
 			events.erase(events.begin()+i);
