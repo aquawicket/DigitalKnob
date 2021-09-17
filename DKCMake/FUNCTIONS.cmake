@@ -84,7 +84,6 @@ endfunction()
 
 function(DKSET variable value)
 	set(${variable} ${value} ${ARGN} CACHE INTERNAL "")
-	
 	#show library versions
 	dk_includes(${variable} "_VERSION" result)
 	if(${result})
@@ -566,10 +565,34 @@ function(WIN_DKSET)
 	endif()
 endfunction()
 
+function(WIN32_DKSET)
+	if(WIN_32)
+		WIN_DKSET(${ARGV})
+	endif()
+endfunction()
+
+function(WIN64_DKSET)
+	if(WIN_64)
+		WIN_DKSET(${ARGV})
+	endif()
+endfunction()
+
 
 function(MAC_DKSET)
 	if(CMAKE_HOST_APPLE)
 		DKSET(${ARGV})
+	endif()
+endfunction()
+
+function(MAC32_DKSET)
+	if(MAC_32)
+		MAC_DKSET(${ARGV})
+	endif()
+endfunction()
+
+function(MAC64_DKSET)
+	if(MAC_64)
+		MAC_DKSET(${ARGV})
 	endif()
 endfunction()
 
@@ -580,6 +603,36 @@ function(LINUX_DKSET)
 	endif()
 endfunction()
 
+function(LINUX32_DKSET)
+	if(LINUX_32)
+		LINUX_DKSET(${ARGV})
+	endif()
+endfunction()
+
+function(LINUX64_DKSET)
+	if(LINUX_64)
+		LINUX_DKSET(${ARGV})
+	endif()
+endfunction()
+
+
+function(RASPBERRY_DKSET)
+	if(CMAKE_HOST_LINUX)
+		DKSET(${ARGV})
+	endif()
+endfunction()
+
+function(RASPBERRY32_DKSET)
+	if(RASPBERRY_32)
+		RASPBERRY_DKSET(${ARGV})
+	endif()
+endfunction()
+
+function(RASPBERRY64_DKSET)
+	if(RASPBERRY_64)
+		RASPBERRY_DKSET(${ARGV})
+	endif()
+endfunction()
 
 ###################### DK_PATH ####################
 function(DKSETPATH path)
