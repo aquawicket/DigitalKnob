@@ -2,7 +2,7 @@
 
 echo "hostname = $HOSTNAME"
 echo "hosttype = $HOSTTYPE"
-echo "ostype = $OSTTYPE"
+echo "ostype = $OSTYPE"
 echo "machtype = $MACHTYPE"
 
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
