@@ -3004,7 +3004,7 @@ function(DKRUNDEPENDS name)
 		message(FATAL_ERROR "DKRUNDEPENDS() ${name} plugin not found")
 		return()
 	endif()
-	message(STATUS "FOUND ${name} DK makefile at ${plugin_path}")
+	#message(STATUS "FOUND ${name} DK makefile at ${plugin_path}")
 	
 	file(STRINGS ${plugin_path}/DKMAKE.cmake lines)
 	unset(disable_script)
