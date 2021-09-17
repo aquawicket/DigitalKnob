@@ -12,6 +12,7 @@
 bool DKUnix::GetKey(int& key){
 	DKINFO("Press any key to continue...\n");
 	key = getchar();
+	DKINFO("DKUnix::GetKey(): key = "+toString(key)+"\n");
 	return true;
 }
 
