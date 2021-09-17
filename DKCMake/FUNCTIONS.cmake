@@ -290,9 +290,13 @@ endfunction()
 
 
 function(DKDISABLE plugin)
+	if(NOT ${CMAKE_CURRENT_LIST_DIR} STREQUAL ${DKCMAKE} AND NOT ${CMAKE_CURRENT_LIST_DIR} STREQUAL ${DKPROJECT}) # /DKCMake or /App directory only
+		message(FATAL_ERROR "\n! WARNING !\n DKDISABLE() Can only be used from the DKCMake/DISABLED.cmake file. This is to avoid having disabled libraries hideing everywhere.\n")
+	endif()
 	DKUNSET(${plugin})
 	DKUNSET(USE_${plugin})
 	DKUNDEFINE(USE_${plugin})
+	DKUNDEPEND(${plugin})
 endfunction()
 
 
@@ -2927,10 +2931,10 @@ endfunction()
 
 
 # Remove a library or plugin from the dependency list
-function(DISABLE_DKDEPEND name)
-	## Only allow DISABLE_DKDEPEND command from these filters	
+function(DKUNDEPEND name)
+	## Only allow DKUNDEPEND command from these filters	
 	if(NOT ${CMAKE_CURRENT_LIST_DIR} STREQUAL ${DKCMAKE} AND NOT ${CMAKE_CURRENT_LIST_DIR} STREQUAL ${DKPROJECT}) # /DKCMake or /App directory only
-		message(FATAL_ERROR "\n! WARNING !\n DISABLE_DKDEPEND() Can only be used from the DKCMake/DISABLED.cmake file. This is to avoid having disabled libraries hideing everywhere.\n")
+		message(FATAL_ERROR "\n! WARNING !\n DKUNDEPEND() Can only be used from the DKCMake/DISABLED.cmake file. This is to avoid having disabled libraries hideing everywhere.\n")
 	endif()
 	message(STATUS "DISABLING ${name}")
 	DKSET(dkdepend_disable_list ${dkdepend_disable_list} ${name})
@@ -2991,7 +2995,7 @@ function(DKRUNDEPENDS name)
 			set(disable_script "${disable_script}${line}\n")
 		endif()
 		
-		string(FIND "${line}" "DISABLE_DKDEPEND(" index)
+		string(FIND "${line}" "DKDISABLE(" index)
 		if(${index} GREATER -1)
 			set(disable_script "${disable_script}${line}\n")
 		endif()
@@ -3001,9 +3005,8 @@ function(DKRUNDEPENDS name)
 		#	set(disable_script "${disable_script}${line}\n")
 		#endif()
 		
-		## DISABLE_DKDEPEND(
+		## DKDISABLE(
 		##NOTE: The 'DKDEPEND(' search commands take care of 'DISABLE_DKDEPEND(' since 'DKDEPEND' is already in the word
-		
 	endforeach()
 	
 	foreach(line ${lines})
@@ -3046,6 +3049,11 @@ function(DKRUNDEPENDS name)
 		string(FIND "${line}" "DKENABLE(" index)
 		if(${index} GREATER -1)
 			set(depends_script "${depends_script}${line}\n")
+		endif()
+		
+		string(FIND "${line}" "DKDISABLE(" index)
+		if(${index} GREATER -1)
+			set(depends_script "${depends_script}${line}\n")
 		endif()	
 		
 		string(FIND "${line}" "DKDEPEND(" index)
@@ -3061,9 +3069,7 @@ function(DKRUNDEPENDS name)
 		endif()
 		endif()
 		
-		# DISABLE_DKDEPEND()
 		# NOTE: The 'DKDEPEND(' search commands take care of 'DISABLE_DKDEPEND(' since 'DKDEPEND' is already a substring
-		
 	endforeach()
 
 	set(extra_args ${ARGN})
@@ -3139,7 +3145,7 @@ function(DKDEPEND_ALL)
     	endif()
   	endforeach()
 	
-	#To exclude libraries, use DISABLE_DKDEPEND(lib) in your app DKMAKE.cmake file or in DKCMake/DISABLED.cmake
+	#To exclude libraries, use DKDISABLE(lib) in your app DKMAKE.cmake file or in DKCMake/DISABLED.cmake
 	string (REPLACE ";" "" DEPENDALL_FILE "${DEPENDALL_FILE}")
 	file(WRITE ${DKPROJECT}/DEPEND_ALL.txt "${DEPENDALL_FILE}")
 	INCLUDE(${DKPROJECT}/DEPEND_ALL.txt)
