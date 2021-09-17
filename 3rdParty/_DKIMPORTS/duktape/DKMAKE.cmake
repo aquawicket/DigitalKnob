@@ -1,6 +1,7 @@
 # https://duktape.org/duktape-2.6.0.tar.xz
 # https://github.com/svaarala/duktape/archive/refs/heads/master.zip
 # https://codeload.github.com/Squareys/duktape/zip/refs/heads/let-support
+# https://wiki.duktape.org/projectsusingduktape
 
 DKDEPEND(python)
 DKDEPEND(nodejs)
