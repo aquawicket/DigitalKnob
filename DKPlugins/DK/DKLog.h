@@ -85,18 +85,24 @@ void DebugFunc(const char* file, int line, const char* func, const DKString& nam
 		return;
 	
 	int arg_count = sizeof...(Args);
+
+	DKStringArray arg_names;
+	if(!names.empty()){
+		toStringArray(arg_names, names, ",");
+	}
+
 	std::ostringstream out;
 	getTemplateArgs(out, args...);
-	DKStringArray arg_names;
-	toStringArray(arg_names, names, ",");
 	DKStringArray arg_values;
 	toStringArray(arg_values, out.str(), ",");
 
 	DKString func_string = func;
 	func_string += "( ";
 	for(int i=0; i<arg_count; ++i){
-		func_string += arg_names[i];
-		func_string += ":";
+		if(!names.empty()){
+			func_string += arg_names[i];
+			func_string += ":";
+		}
 		func_string += arg_values[i];
 		if(i < (arg_count-1))
 			func_string += ", ";
@@ -124,7 +130,11 @@ class logy{
 #define DKDEBUG(message) Log(__FILE__, __LINE__, __FUNCTION__, message, DK_DEBUG);
 //#define DEBUG_METHOD() logy _logy(__FUNCTION__);
 #ifndef ANDROID
+#ifdef WIN32
 	#define DKDEBUGFUNC1(__FILE__, __LINE__, __FUNCTION__, ...) DebugFunc(__FILE__, __LINE__, __FUNCTION__, #__VA_ARGS__, __VA_ARGS__)
+#else
+	#define DKDEBUGFUNC1(__FILE__, __LINE__, __FUNCTION__, ...) DebugFunc(__FILE__, __LINE__, __FUNCTION__, "", ##__VA_ARGS__)
+#endif
 	#define DKDEBUGFUNC(...) /*DEBUG_METHOD()*/DKDEBUGFUNC1(__FILE__, __LINE__, __FUNCTION__, __VA_ARGS__)
 #else
 	#define DKDEBUGFUNC(...) NULL
