@@ -3,7 +3,6 @@
 #include "DKLinux.h"
 #include "DKLog.h"
 #include <stdio.h>
-#include <conio.h>
 #include <stdlib.h>
 #include <X11/Xlib.h>
 #include <X11/XKBlib.h>
@@ -11,7 +10,10 @@
 #include <alsa/asoundlib.h>
 
 bool DKLinux::GetKey(int& key){
-	key = getch();
+	DKDEBUGFUNC(key);
+	system("stty raw"); // Set terminal to raw mode    
+	key = getchar();       
+	system("stty cooked"); // Reset terminal to normal "cooked" mode    
 	return true;
 }
 
@@ -31,10 +33,8 @@ bool DKLinux::GetMousePos(int& x, int& y){
 	int win_x;
 	int win_y;
 	unsigned int mask;
- 
 	dpy = XOpenDisplay(NULL);
 	root = XDefaultRootWindow(dpy);
- 
 	if(XQueryPointer(dpy, root, &ret_root, &ret_child, &root_x, &root_y, &win_x, &win_y, &mask)){
 		// original version
 		//    printf("root loc: %4d,%4d win loc: %3d,%3d mask: 0x%08X\n", root_x, root_y, win_x, win_y, mask);
@@ -44,9 +44,6 @@ bool DKLinux::GetMousePos(int& x, int& y){
 		y = root_y;
 		return true;
 	}
-	
-	x = 0;
-	y = 0;
 	return false;
 }
 
