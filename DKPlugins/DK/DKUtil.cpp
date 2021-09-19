@@ -282,7 +282,10 @@ bool DKUtil::GetKey(int& key){
 #ifdef WIN32
 	return DKWindows::GetKey(key);
 #endif
-#if defined(MAC) || defined(IOS) || defined(LINUX)
+#ifdef LINUX
+	return DKLinux::GetKey(key);
+#endif
+#if defined(MAC) || defined(IOS)
 	return DKUnix::GetKey(key);
 #endif
 	return DKERROR("DKUtil::GetKey(): not implemented on this OS\n");

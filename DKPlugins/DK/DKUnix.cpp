@@ -11,7 +11,6 @@
 
 bool DKUnix::GetKey(int& key){
 	key = getchar();
-	DKINFO("DKUnix::GetKey(): key = "+toString(key)+"\n");
 	return true;
 }
 

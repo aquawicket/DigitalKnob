@@ -9,6 +9,11 @@
 #include <X11/extensions/XTest.h>  //requires  libxtst-dev
 #include <alsa/asoundlib.h>
 
+bool DKLinux::GetKey(int& key){
+	key = getch();
+	return true;
+}
+
 bool DKLinux::GetMousePos(int& x, int& y){
 	DKDEBUGFUNC(x, y);
 	//Compile with:
