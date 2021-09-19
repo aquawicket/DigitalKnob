@@ -20,9 +20,8 @@ function DKBuildConsole_init() {
 	//console.log(DKGit_DiffCount())
 	//DKGit_CheckForDiff()
     
-	while (working) {
+	while (working)
         DKBuildConsole_Process()
-    }
 }
 
 function DKBuildConsole_end() {
@@ -51,12 +50,8 @@ function DKBuildConsole_ChooseUpdate() {
     console.log("\n")
 	
 	var key = 10
-	//fix for linux
-    while (key === 10) {
+    while (key === 10)
         key = CPP_DK_GetKey()
-    }
-
-    //console.log("Key pressed: "+String(key)+"")
     
 	//Esc
 	if (key === 27){
@@ -64,7 +59,7 @@ function DKBuildConsole_ChooseUpdate() {
 		UPDATE = ""
 	}
 	//Spacebar
-	if(key === 13){
+	else if(key === 13){
 		OS = cache_json.OS
 	    APP = cache_json.APP
 		TYPE = cache_json.TYPE
@@ -72,31 +67,31 @@ function DKBuildConsole_ChooseUpdate() {
 		UPDATE = ""
 	}
 	//y key
-    if (key === 121) {
+    else if (key === 121) {
         CPP_DK_Create("DKGit/DKGit.js")
         DKGit_GitUpdate()
 		UPDATE = ""
     }
 	//c key
-    if (key === 99) {
+    else if (key === 99) {
         CPP_DK_Create("DKGit/DKGit.js")
         DKGit_GitCommit()
 		UPDATE = ""
     }
 	//r key
-    if (key === 114) { 
+    else if (key === 114) { 
         DKBuild_ResetAppsPlugins()
         DKGit_GitUpdate()
 		UPDATE = ""
     }
 	//x key
-    if (key === 120) {
+    else if (key === 120) {
         DKBuild_Reset3rdParty()
         DKBuild_ResetAppsPlugins()
         DKGit_GitUpdate()
 		UPDATE = ""
     }
-	if (key === 122){ //Clear Cmake Cache
+	else if (key === 122){ //Clear Cmake Cache
 		console.log("Clearing CMake cache . . .")
 		CPP_DKFile_ChDir(DKPATH)
 		if(CPP_DK_GetOS() === "Windows"){
@@ -134,14 +129,11 @@ function DKBuildConsole_SelectOs() {
     console.log("\n")
 
     var key = 10
-    while (key === 10) {
-        //unix fix
+    while (key === 10)
         key = CPP_DK_GetKey()
-    }
-    //console.log("Key pressed: "+String(key)+"")
     if (key === 27)
         CPP_DK_Exit()
-    if (key === 49)
+    else if (key === 49)
         OS = "win32"
     else if (key === 50)
         OS = "win64"
@@ -166,10 +158,8 @@ function DKBuildConsole_SelectOs() {
     else if (key === 99)
         OS = "android64"
     else if (key === 100)
-        //FIXME: key not tested
         OS = "raspberry32"
     else if (key === 101)
-        //FIXME: key not tested
         OS = "raspberry64"
     else
         console.error("INVALID OPTION")
@@ -182,10 +172,10 @@ function DKBuildConsole_SelectApp() {
         console.log(DKBuildConsole_TranslateOption(i) + ":" + APP_LIST[i] + "")
     console.log("ESC. exit")
     console.log("\n")
+
     var key = 10
     while (key === 10)
-        key = CPP_DK_GetKey() //unix fix
-		console.log("key = "+key)
+        key = CPP_DK_GetKey()
     if (key === 27)
         CPP_DK_Exit()
     DKBuildConsole_KeyToApp(key)
@@ -201,14 +191,12 @@ function DKBuildConsole_SelectType() {
 	//console.log("BCKSPC. Back")
     console.log("ESC. exit")
     console.log("\n")
-
     var key = 10
     while (key === 10)
-        key = CPP_DK_GetKey() //unix fix
-    //console.log("Key pressed: "+String(key)+"")
+        key = CPP_DK_GetKey()
     if (key === 27)
         CPP_DK_Exit()
-    if (key === 49)
+    else if (key === 49)
         TYPE = "Debug"
     else if (key === 50)
         TYPE = "Release"
@@ -224,30 +212,26 @@ function DKBuildConsole_Process() {
     APP = ""
     TYPE = ""
     LEVEL = "RebuildAll"
-	while (UPDATE === "") {
+	while (UPDATE === "")
         DKBuildConsole_ChooseUpdate()
-    }
     if (!CPP_DKFile_Exists(DKPATH)) {
         console.error("ERROR: can't find " + DKPATH + " ")
         CPP_DK_GetKey()
         CPP_DK_Exit()
     }
-    while (OS === "") {
+    while (OS === "")
         DKBuildConsole_SelectOs()
-    }
     console.log("###########################")
     console.log(OS + " ->")
     console.log("###########################")
     DKBuild_GetAppList()
-    while (APP === "") {
+    while (APP === "")
         DKBuildConsole_SelectApp()
-    }
     console.log("###########################")
     console.log(OS + " -> " + APP + " ->")
     console.log("###########################")
-    while (TYPE === "") {
+    while (TYPE === "")
         DKBuildConsole_SelectType()
-    }
     console.log("###########################")
     console.log(OS + " -> " + APP + " -> " + TYPE + "")
     console.log("###########################")
@@ -269,9 +253,8 @@ function DKBuildConsole_Process() {
 }
 
 function DKBuildConsole_TranslateOption(num) {
-    if (num === 0) {
+    if (num === 0)
         return "1"
-    }
     if (num === 1) {
         return "2"
     }
