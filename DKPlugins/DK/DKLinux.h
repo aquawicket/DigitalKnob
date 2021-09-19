@@ -34,6 +34,7 @@ public:
 	static bool PhysicalMemoryUsedByApp(unsigned int& physicalMemory);
 	static bool Run(const DKString& command);
 	static bool SetClipboard(const DKString& text);
+	static bool StrokeKey(const int& key);
 	static bool TurnOffMonitor();
 	static bool TurnOnMonitor();
 	static bool VirtualMemory(unsigned long long& virtualMemory);

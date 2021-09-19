@@ -204,6 +204,12 @@ bool DKLinux::SetVolume(double nVolume){
 	return true;
 }
 
+bool DKLinux::StrokeKey(const int& key){
+	DKDEBUGFUNC(key);
+	PressKey(key);
+	return ReleaseKey(key);
+}
+
 bool DKLinux::GetVolume(int& percent){
 	DKDEBUGFUNC(percent);
 	long min, max;

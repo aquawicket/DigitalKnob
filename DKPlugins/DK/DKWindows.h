@@ -62,6 +62,7 @@ public:
 	static void SetTitle();
 	static bool SetVolume(int& percent);
 	static bool Sleep(int milliseconds);
+	static bool StrokeKey(const int& key);
 	static bool TurnOffMonitor();
 	static bool TurnOnMonitor();
 	static bool VirtualMemory(unsigned long long& virtualMemory);

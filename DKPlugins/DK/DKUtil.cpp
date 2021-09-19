@@ -815,8 +815,10 @@ bool DKUtil::Sleep(const int& milliseconds){
 bool DKUtil::StrokeKey(const int& key){
 	DKDEBUGFUNC(key);
 #ifdef WIN32
-	DKWindows::PressKey(key);
-	return DKWindows::ReleaseKey(key);
+	return DKWindows::StrokeKey(key);
+#endif
+#ifdef LINUX
+	return DKLinux::StrokeKey(key);
 #endif
 	return DKERROR("DKUtil::StrokeKey(): not implemented on this OS\n");
 }

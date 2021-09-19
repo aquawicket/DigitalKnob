@@ -778,6 +778,12 @@ bool DKWindows::Sleep(int milliseconds){
 	return true;;
 }
 
+bool DKWindows::StrokeKey(const int& key){
+	DKDEBUGFUNC(key);
+	PressKey(key);
+	return ReleaseKey(key);
+}
+
 bool DKWindows::TurnOffMonitor(){
 	DKDEBUGFUNC();
 	Sleep(500); // Eliminate user's interaction for 500 ms
