@@ -3,6 +3,7 @@
 #include "DKLinux.h"
 #include "DKLog.h"
 #include <stdio.h>
+#include <conio.h>
 #include <stdlib.h>
 #include <X11/Xlib.h>
 #include <X11/XKBlib.h>
