@@ -184,7 +184,8 @@ bool DKDuktape::CallEnd(const DKString& file){
 
 bool DKDuktape::CallInit(const DKString& file){
 	DKDEBUGFUNC(file);
-	if(!FileLoaded(file)){ return false; }
+	if(!FileLoaded(file)) 
+		return DKERROR("FileLoaded() failed"); 
 	DKString filename;
 	DKFile::GetFileName(file, filename);
 	DKFile::RemoveExtention(filename);
@@ -192,7 +193,7 @@ bool DKDuktape::CallInit(const DKString& file){
 	DKString rval;
 	RunDuktape("(typeof "+func+" === 'function')", rval);
 	if(!toBool(rval)){
-		//DKWARN(func+" undefined\n");
+		DKWARN(func+" undefined\n");
 		return true;
 	}
 	func += "()";
@@ -271,15 +272,17 @@ bool DKDuktape::FileLoaded(const DKString& path){
 	return false;
 }
 
-bool DKDuktape::LoadFile(const DKString& path)
-{
+bool DKDuktape::LoadFile(const DKString& path){
 	DKDEBUGFUNC(path);
-	if(path.empty()){ return false; }
+	if(path.empty()) 
+		return DKERROR("path invalid");
 	//if(FileLoaded(path)){ return false; }
 	DKString js;
 	DKFile::FileToString(path, js);
-	if(duk_peval_file(ctx, path.c_str()) != 0)
+	if(duk_peval_file(ctx, path.c_str()) != 0){
+		DKERROR("JAVASCRIPT ERROR");
 		DKDuktape::DumpError(js);
+	}
 	duk_pop(ctx);  // ignore result?
 	//DKString filename;
 	//DKFile::GetFileName(path, filename);

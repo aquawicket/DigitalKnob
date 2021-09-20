@@ -15,7 +15,8 @@ bool DKJavascript::Init(){
 		DKERROR("DKJavascript::Init("+_data+"): too many parameters. \n");
 	}
 	DKString file = DKFile::local_assets+data[1];
-	if(!DKDuktape::LoadFile(file)){ return false; }
+	if(!DKDuktape::LoadFile(file)) 
+		return DKERROR("DKDuktape::LoadFile() failed");
 	DKDuktape::CallInit(file);
 	return true;
 }

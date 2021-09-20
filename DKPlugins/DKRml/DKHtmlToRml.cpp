@@ -137,18 +137,15 @@ bool DKHtmlToRml::IndexToRml(const DKString& html, DKString& rml)
 	return true;
 }
 
-/////////////////////////////////////////////////////////
-bool DKHtmlToRml::PostProcess(Rml::Element* element)
-{
+bool DKHtmlToRml::PostProcess(Rml::Element* element) {
 	DKDEBUGFUNC(element);
-	if(!element){
-		DKWARN("DKHtmlToRml::PostProcess(): element invalid\n");
-		return false;
-	}
+	if(!element)
+		return DKERROR("DKHtmlToRml::PostProcess(): element invalid\n");
 
 	//we actually want the parent if it has one
-	//if(element->GetParentNode())
-		//element = element->GetParentNode();
+	Rml::Element* doc = DKRml::Get()->document;
+	if(element != doc && element->GetParentNode())
+		element = element->GetParentNode();
 	
 	// Create cef contexts for iFrames
 	Rml::ElementList iframes;
@@ -163,9 +160,8 @@ bool DKHtmlToRml::PostProcess(Rml::Element* element)
 		DKString iHeight = toString(iframes[i]->GetClientHeight());
 
 		DKString url;
-		if(!iframes[i]->GetAttribute("src")){ 
-			 DKINFO("DKHtmlToRml::PostProcess(): iframe has no source tag\n");
-			 return false;
+		if(!iframes[i]->GetAttribute("src")){
+			 return DKERROR("DKHtmlToRml::PostProcess(): iframe has no source tag\n");
 		}
 		else
 			url = iframes[i]->GetAttribute("src")->Get<Rml::String>();//.CString();
@@ -181,11 +177,8 @@ bool DKHtmlToRml::PostProcess(Rml::Element* element)
 		Rml::Element* cef_texture  = doc->AppendChild(DKRml::Get()->document->CreateElement(tag.c_str()), true);
 		if(!element)
 			return DKERROR("element invalid\n");
-
-
 		DKString cef_id = "iframe_"+id;
 		cef_texture->SetAttribute("id", cef_id.c_str());
-
 		//This is what RmlSDL2Renderer::LoadTexture and RmlSDL2Renderer::RenderGeometry
 		//use to detect if the texture is a cef image. If will contain a iframe_ in the src.
 		cef_texture->SetAttribute("src", cef_id.c_str());
