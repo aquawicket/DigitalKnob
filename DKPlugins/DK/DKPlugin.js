@@ -247,9 +247,7 @@ DKPlugin.createInstance = function DKPlugin_createInstance() {
 // or container that would get stranded. For this reason, DKPlugin will determine who goes first and what 
 // cleanup to do. The idea it to accomplish most of the work here, leaving less worries about instance management.
 DKPlugin.prototype.init = function DKPlugin_init() {
-    //This function is never called
     console.group("%c DKPlugin.prototype.init(): " + this.constructor.name, "color:orange;");
-    //return;
     if (!this) {
         console.groupEnd();
         return error("this is invalid");
@@ -258,7 +256,6 @@ DKPlugin.prototype.init = function DKPlugin_init() {
         console.groupEnd();
         return error("the instance in DKPlugin.prototype.init() is a constructor of 'Object' and should be the class name");
     }
-
     if (this.xinit && this.xinit !== this.init) {
         console.group(this.constructor.name + ".xinit()");
         const rval = this.xinit.apply(this, arguments);

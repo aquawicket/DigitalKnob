@@ -4,13 +4,11 @@
 //NOTE: initiator moved to the bottom and "singleton" removed for Duktape to work
 //dk.file = DKPlugin(DKFile)
 
-function DKFile() {
-    console.log("DKFile constructor")
-}
+function DKFile() {}
 
 DKFile.prototype.init = function DKFile_init() {
     //lets replace DK.js's version of fileToString to this one
-    if (!DUKTAPE)
+    //if (!DUKTAPE)
         dk.fileToString = dk.file.fileToString;
 
     this.appFilename = "";
@@ -401,6 +399,7 @@ if (!DUKTAPE) {
     }
 } else {
     DKFile.prototype.fileToString = function DKFile_fileToString(path, callback) {
+		console.log("dk.file.fileToString()")
         path = dk.file.validatepath(path);
         const str = CPP_DKFile_FileToString(path);
         return callback(str);

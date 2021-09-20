@@ -369,6 +369,7 @@ dk.loadHtml = function dk_loadHtml(url, parent, dk_loadHtml_callback) {
         return error("url is not a valid .html file", dk_loadHtml_callback(false));
 
     dk.fileToString(url, function dk_fileToString(string) {
+		//console.log("dk.fileToString() string = "+string)
         //Create an empty widget
         //if (!string)
         //    string = "<div id=\"" + url + "\" style=\"position:absolute;top:200rem;left:200rem;width:200rem;height:200rem;background-color:rgb(230,230,230);\"></div>";
