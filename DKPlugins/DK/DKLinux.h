@@ -9,7 +9,7 @@
 
 class DKLinux{
 public:
-	static bool DKLinux::getch(int& key);
+	static bool getch(int& key);
 	static bool SetVolume(double nVolume);
 	static bool CpuInit();
 	static bool CpuUsed(int& cpu);
