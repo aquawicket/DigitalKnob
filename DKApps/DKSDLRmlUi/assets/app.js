@@ -1,7 +1,7 @@
 //CPP_DK_Create("DKTray");
 CPP_DK_Create("DKWindow");
 CPP_DK_Create("DKRml");
-CPP_DK_Create("DKSDLText");
+//CPP_DK_Create("DKSDLText");
 //CPP_DK_Create("DKSDLCef");
 
 location.href = CPP_DKAssets_LocalAssets()+"index.html";
