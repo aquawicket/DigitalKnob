@@ -48,17 +48,6 @@ var Console = function(pointer) {
     }
     Console.prototype.trace = function(msg) {
 		CPP_DKConsole_trace(msg + "\n");
-		const e = new Error(msg);
-		if (!e.stack) {
-			try {
-				throw e; // old browsers need the Error thrown to fill the stack
-			} 
-			catch (e) {
-				if (!e.stack)
-					return error("e.stack invalid"); // browser too old
-			}
-		}
-		CPP_DKConsole_trace(e.stack+"\n");
     }
     Console.prototype.warn = function(msg) {
         CPP_DKConsole_warn(msg + "\n");
