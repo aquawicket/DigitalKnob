@@ -88,22 +88,19 @@ void DKV8::SetFlags(){
 }
 
 bool DKV8::AttachFunction(const DKString& name, bool (*func)(CefArgs, CefReturn)){
-	//DKDEBUGFUNC(name, func);
+	DKDEBUGFUNC(name/*, func*/);
 	//FIXME - this is very unstable, not thread safe
 	//NOTE: this stores the function, it will be attached when OnContextCreated is called.
-
 	//functions[name] = boost::bind(func, boost::placeholders::_1, boost::placeholders::_2);
 	functions[name] = std::bind(func, std::placeholders::_1, std::placeholders::_2);
 	if(!functions[name])
 		return DKERROR("DKV8::AttachFunctions("+name+"): failed to register function\n");
 	DKV8::funcs.push_back(name);
 	if(!DKV8::ctx)//multi process will fail
-		return DKERROR("DKV8::AttachFunction(): DKV8::ctx is invalid\n");
-
+		return DKERROR("DKV8::AttachFunctions("+name+"): DKV8::ctx is invalid\n");
 	CefRefPtr<CefV8Value> value = CefV8Value::CreateFunction(name.c_str(), DKV8::v8handler);
 	if(!DKV8::ctx->SetValue(name.c_str(), value, V8_PROPERTY_ATTRIBUTE_NONE))
 		return DKERROR("DKV8::ctx->SetValue() failed");
-
 	DKINFO("DKV8::AttachFunction(): registered: "+name+"\n");
 	return true;
 }

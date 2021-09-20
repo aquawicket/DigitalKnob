@@ -68,15 +68,11 @@ bool DKDuktape::Init(){
 	ctx = NULL;
 	//c_evloop = true;
 	if(!ctx){
-
 		void* my_udata = (void*)0xdeadbeef;  /* whatever's most useful, can be NULL */
 		//ctx = duk_create_heap_default();
 		ctx = duk_create_heap(NULL, NULL, NULL, my_udata, my_fatal);
-
-		if(!ctx){
-			DKERROR("Failed to create a Duktape heap.\n");
-		    return false;
-		}
+		if(!ctx)
+			return DKERROR("Failed to create a Duktape heap.\n");
 		DKClass::DKCreate("DKDuktapeJS");
 		//Load the Duktape javascript DOM
 		DKClass::DKCreate("DKConsole");
@@ -89,31 +85,24 @@ bool DKDuktape::Init(){
 		DKClass::DKCreate("DKEvent");
 		DKClass::DKCreate("DKUIEvent");
 		DKClass::DKCreate("DKKeyboardEvent");
-
 		//Register javascript Timers: setTimeout, clearTimeout, setInterval, clearInterval
 		poll_register(ctx);
 		if(c_evloop){ //c_eventloop.js
 			eventloop_register(ctx);
 			DKString file = DKFile::local_assets+"DKDuktape/c_eventloop.js";
 			if(!LoadFile(file)){ return false; }
-			if(handle_file(ctx, file.c_str()) != 0) {
-				DKERROR("DKDuktape::Init(): Error in handle_file\n");
-				return false;
-			}
+			if(handle_file(ctx, file.c_str()) != 0)
+				return DKERROR("DKDuktape::Init(): Error in handle_file\n");
 		}
 		else{ //ecma_eventloop.js
 			DKString file = DKFile::local_assets+"DKDuktape/ecma_eventloop.js";
 			if(!LoadFile(file)){ return false; }
-			if(handle_file(ctx, file.c_str()) != 0) {
-				DKERROR("DKDuktape::Init(): Error in handle_file\n");
-				return false;
-			}
+			if(handle_file(ctx, file.c_str()) != 0)
+				return DKERROR("DKDuktape::Init(): Error in handle_file\n");
 		}
-
         DKString app = DKFile::local_assets+"app.js";
 		LoadFile(app);
 	}
-
 	DKApp::AppendLoopFunc(&DKDuktape::EventLoop, this);
 	return true;
 }
@@ -128,7 +117,6 @@ bool DKDuktape::End(){
 	DKClass::DKClose("DKNavigator");
 	DKClass::DKClose("DKConsole");
 	DKClass::DKClose("DKDuktapeJS");
-		
 	duk_destroy_heap(ctx);
 	ctx = NULL;
 	return true;
@@ -136,7 +124,6 @@ bool DKDuktape::End(){
 
 void DKDuktape::my_fatal(void* udata, const char* msg) {
 	(void)udata;  /* ignored in this case, silence warning */
-
 	/* Note that 'msg' may be NULL. */
 	fprintf(stderr, "*** FATAL ERROR: %s\n", (msg ? msg : "no message"));
 	fflush(stderr);
@@ -145,10 +132,8 @@ void DKDuktape::my_fatal(void* udata, const char* msg) {
 
 bool DKDuktape::AttachFunction(const DKString& name, duk_c_function func){
 	DKDEBUGFUNC(name, func);
-	if(!ctx){
-		DKWARN("DKDuktape::AttachFunction(): ctx invalid\n");
-		return false; 
-	}
+	if(!ctx)
+		return DKERROR("DKDuktape::AttachFunction(): ctx invalid\n");
 	duk_require_stack(ctx, 1);
 	duk_push_global_object(ctx);
 	duk_push_c_function(ctx, func, DUK_VARARGS);
@@ -171,9 +156,8 @@ bool DKDuktape::CallEnd(const DKString& file){
 		return true;
 	}
 	func += "()";
-	if(duk_peval_string(ctx, func.c_str()) != 0){
+	if(duk_peval_string(ctx, func.c_str()) != 0)
 		DKDuktape::DumpError(func);
-	}
 	duk_pop(ctx);  // ignore result?
 	for (unsigned int i = 0; i < DKDuktape::filelist.size(); ++i) {
 		if (has(DKDuktape::filelist[i], filename))
@@ -185,7 +169,7 @@ bool DKDuktape::CallEnd(const DKString& file){
 bool DKDuktape::CallInit(const DKString& file){
 	DKDEBUGFUNC(file);
 	if(!FileLoaded(file)) 
-		return DKERROR("FileLoaded() failed"); 
+		return DKERROR("FileLoaded() failed\n"); 
 	DKString filename;
 	DKFile::GetFileName(file, filename);
 	DKFile::RemoveExtention(filename);
@@ -238,7 +222,6 @@ bool DKDuktape::DumpError(const DKString& code){
 	while(std::getline(f, line)){
 		if(same(lineNumber, toString(currentLine)))
 			lineString = line;
-		//std::cout << line << std::endl;
 		codeWithLineNumbers += toString(currentLine)+"  "+line+"\n";
 		currentLine++;
 	}
@@ -265,7 +248,7 @@ bool DKDuktape::FileLoaded(const DKString& path){
 	DKDEBUGFUNC(path);
 	for(unsigned int i = 0; i < filelist.size(); ++i){
 		if(has(path, filelist[i])){
-			//DKINFO("DKDuktape::FileLoaded(): "+path+" is loaded\n");
+			DKINFO("DKDuktape::FileLoaded(): "+path+" is loaded\n");
 			return true;
 		}
 	}
@@ -275,14 +258,13 @@ bool DKDuktape::FileLoaded(const DKString& path){
 bool DKDuktape::LoadFile(const DKString& path){
 	DKDEBUGFUNC(path);
 	if(path.empty()) 
-		return DKERROR("path invalid");
-	//if(FileLoaded(path)){ return false; }
+		return DKERROR("path invalid\n");
+	//if(FileLoaded(path))
+		//return false;
 	DKString js;
 	DKFile::FileToString(path, js);
-	if(duk_peval_file(ctx, path.c_str()) != 0){
-		DKERROR("JAVASCRIPT ERROR");
+	if(duk_peval_file(ctx, path.c_str()) != 0)
 		DKDuktape::DumpError(js);
-	}
 	duk_pop(ctx);  // ignore result?
 	//DKString filename;
 	//DKFile::GetFileName(path, filename);
@@ -292,9 +274,12 @@ bool DKDuktape::LoadFile(const DKString& path){
 
 bool DKDuktape::LoadJSString(const DKString& url, const DKString& string){
 	DKDEBUGFUNC(url, string);
-	if(url.empty()){ return false; }
-	if(string.empty()){ return false; }
-	//if(FileLoaded(url)){ return false; } //prevent url from loading twice
+	if(url.empty())
+		return DKERROR("url invalid\n");
+	if(string.empty())
+		return DKERROR("string invalid\n");
+	//if(FileLoaded(url))
+		//return false; //prevent url from loading twice
 	if(duk_peval_string(ctx, string.c_str()) != 0)
 		DKDuktape::DumpError(string);
 	//if(url != "inlineScript")
@@ -305,16 +290,16 @@ bool DKDuktape::LoadJSString(const DKString& url, const DKString& string){
 bool DKDuktape::OnEvent(DKEvents* event){
 	DKDEBUGFUNC(event);
 	DKString id = event->GetId();
-	if(id.empty()){ return false; } //we need an id
+	if(id.empty())
+		return DKERROR("id invalid");
 	DKString type = event->GetType();
-	if(type.empty()){ return false; } //we need a type
+	if(type.empty())
+		return DKERROR("type invalid");
 	DKString value = event->GetValue();
 	DKString jsreturn = event->GetJSReturn();
 	//replace(jsreturn, "() { [ecmascript code] }", ""); //remove () { [ecmascript code] }
-	if(jsreturn.empty() || same(jsreturn,"0")){
-		DKERROR("DKDuktape::OnEvent: jsreturn variable invalid\n");
-		return false;
-	}
+	if(jsreturn.empty() || same(jsreturn,"0"))
+		return DKERROR("DKDuktape::OnEvent: jsreturn variable invalid\n");
 	DKString evt = id +","+ type;
 	if(same(type,"keydown"))
 		value = toString(event->GetKeyNum());
@@ -324,8 +309,9 @@ bool DKDuktape::OnEvent(DKEvents* event){
 	duk_push_global_object(ctx);
 	duk_get_prop_string(ctx, -1, jsreturn.c_str());
 	duk_push_string(ctx, evt.c_str()); //add id as string parameter
-    if(duk_pcall(ctx, 1) != 0)
+    if(duk_pcall(ctx, 1) != 0){
 		DKDuktape::DumpError(evt);
+	}
 	else{
 		//DKINFO(DKString(duk_safe_to_string(ctx, -1))+"\n"); //return value?
     }
@@ -379,11 +365,10 @@ bool DKDuktape::RunDuktape(const DKString& code){
 
 bool DKDuktape::RunDuktape(const DKString& code, DKString& rval){
 	//DKDEBUGFUNC(code, rval);
-	if(!DKUtil::InMainThread()){ return false; }
-	if(!DKDuktape::ctx){
-		DKERROR("DKDuktape::RunDuktape("+code+", rval): context is invalid\n");
-		return false;
-	}
+	if(!DKUtil::InMainThread())
+		return DKERROR("not in main thread");
+	if(!DKDuktape::ctx)
+		return DKERROR("DKDuktape::RunDuktape("+code+", rval): context is invalid\n");
 	if(duk_peval_string(ctx, code.c_str()) != 0)
 		DKDuktape::DumpError(code);
 	//get return value
@@ -434,8 +419,10 @@ bool DKDuktape::QueueDuktape(const DKString& code){
 
 bool DKDuktape::UnloadFile(const DKString& path){
 	DKDEBUGFUNC(path);
-	if(path.empty()) { return false; }
-	if(!FileLoaded(path)){ return false; }
+	if(path.empty())
+		return DKERROR("path invalid");
+	if(!FileLoaded(path))
+		return DKERROR("FileLoaded("+path+") failed");
 	DKDEBUGFUNC(path);
 	for(unsigned int i = 0; i < filelist.size(); ++i) {
 		if(has(path, filelist[i])) {
@@ -451,7 +438,7 @@ bool DKDuktape::UnloadFile(const DKString& path){
 ////////////// eventloop stuff  //////////////////////////////////
 //////////////////////////////////////////////////////////////////
 int DKDuktape::handle_file(duk_context *ctx, const char *filename) {
-	//DKDEBUGFUNC(ctx, filename);
+	//DKDEBUGFUNC(/*ctx, filename*/);
 	FILE *f = NULL;
 	int retval;
 	f = fopen(filename, "rb");
@@ -540,7 +527,8 @@ int DKDuktape::wrapped_compile_execute(duk_context *ctx, void *udata){
 
 void DKDuktape::EventLoop(){
 	//DKDEBUGFUNC();
-	if(!DKUtil::InMainThread()){ return; }
+	if(!DKUtil::InMainThread())
+		return;
 	//cycle through queue codeToRun
 	if(codeToRun.size() > 0){
 		DKString rval;
@@ -571,7 +559,6 @@ DKString DKDuktape::eventToAddress(DKEvents* event) {
 		return NULL;
 	}
 	std::stringstream ss;
-
 	const void* address = static_cast<const void*>(event);
 #ifdef WIN32
 	ss << "0x" << address;
@@ -588,7 +575,6 @@ DKEvents* DKDuktape::addressToEvent(const DKString& address) {
 		DKERROR("DKRml::addressToEvent(): the address is not a valid hex notation");
 		return NULL;
 	}
-
 	//Convert a string of an address back into a pointer
 	std::stringstream ss;
 	ss << address.substr(2, address.size() - 2);
