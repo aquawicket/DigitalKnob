@@ -151,20 +151,20 @@ bool DKHtmlToRml::PostProcess(Rml::Element* element) {
 	Rml::ElementList iframes;
 	Rml::ElementUtilities::GetElementsByTagName(iframes, element, "iframe");
 	for(unsigned int i=0; i<iframes.size(); ++i){
-		if(iframes[i]->HasChildNodes()){ continue; }
-		DKString id = iframes[i]->GetId();//.CString();
-		if(has(processed, id)){ continue; }
+		if(iframes[i]->HasChildNodes())
+			continue;
+		DKString id = iframes[i]->GetId();
+		if(has(processed, id))
+			continue;
 		DKString iTop = toString(iframes[i]->GetAbsoluteTop());
 		DKString iLeft = toString(iframes[i]->GetAbsoluteLeft());
 		DKString iWidth = toString(iframes[i]->GetClientWidth());
 		DKString iHeight = toString(iframes[i]->GetClientHeight());
 
 		DKString url;
-		if(!iframes[i]->GetAttribute("src")){
+		if(!iframes[i]->GetAttribute("src"))
 			 return DKERROR("DKHtmlToRml::PostProcess(): iframe has no source tag\n");
-		}
-		else
-			url = iframes[i]->GetAttribute("src")->Get<Rml::String>();//.CString();
+		url = iframes[i]->GetAttribute("src")->Get<Rml::String>();
 		
 		DKClass::DKCreate("DKCef");
 		//DKEvent::AddEvent(id, "resize", &DKHtmlToRml::ResizeIframe, this);
