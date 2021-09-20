@@ -155,12 +155,11 @@ bool DKHtmlToRml::PostProcess(Rml::Element* element) {
 			 return DKERROR("iframe has no source tag\n");
 		url = iframes[i]->GetAttribute("src")->Get<Rml::String>();
 		DKClass::DKCreate("DKCef");
-		DKEvents::AddEvent(id, "resize", &DKHtmlToRml::ResizeIframe, this);
-		DKEvents::AddEvent(id, "mouseover", &DKHtmlToRml::MouseOverIframe, this);
-		DKEvents::AddEvent(id, "click", &DKHtmlToRml::ClickIframe, this);
+		//DKEvents::AddEvent(id, "resize", &DKHtmlToRml::ResizeIframe, this);
+		//DKEvents::AddEvent(id, "mouseover", &DKHtmlToRml::MouseOverIframe, this);
+		//DKEvents::AddEvent(id, "click", &DKHtmlToRml::ClickIframe, this);
 		DKString tag = "img";
 		Rml::Element* doc = DKRml::Get()->document;
-		//Rml::Element* cef_texture  = doc->AppendChild(DKRml::Get()->document->CreateElement(tag.c_str()), true);
 		Rml::Element* cef_texture  = iframes[i]->AppendChild(DKRml::Get()->document->CreateElement(tag.c_str()), true);
 		if(!element)
 			return DKERROR("element invalid\n");
