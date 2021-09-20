@@ -11,6 +11,8 @@
 ////////////////
 
 #ifdef LINUX
+#include <unistd.h> //for getch()
+#include <termios.h> //for getch()
 int getch(){
     char buf = 0;
     struct termios old = {0};
