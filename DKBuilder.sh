@@ -6,26 +6,16 @@ echo "ostype = $OSTYPE"
 echo "machtype = $MACHTYPE"
 
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-	#HOST_OS="linux"
 	DKPATH="/home/$USER/digitalknob/DK"
-	sudo apt-get -y install git
-	sudo apt-get -y install cmake
-	sudo apt-get -y install gcc
-	sudo apt-get -y install g++
 elif [[ "$OSTYPE" == "darwin"* ]]; then
-	#HOST_OS="mac"
 	DKPATH="/Users/$USER/digitalknob/DK"
 elif [[ "$OSTYPE" == "cygwin" ]]; then
-    #HOST_OS="windows"
 	echo "TODO: DKPATH NOT SET"
 elif [[ "$OSTYPE" == "msys" ]]; then
-    #HOST_OS="windows"
 	echo "TODO: DKPATH NOT SET"
 elif [[ "$OSTYPE" == "win32" ]]; then
-    #HOST_OS="win32" #I'n not sure this can happen
-	echo "TODO: DKPATH NOT SET"
+	echo "TODO: DKPATH NOT SET" #I'm not sure this can happen
 elif [[ "$OSTYPE" == "freebsd"* ]]; then
-    #HOST_OS="freebsd"
 	echo "TODO: DKPATH NOT SET"
 else
     echo "UNKNOWN OS TYPE ($OSTYPE)"
@@ -121,6 +111,12 @@ rm -rf `find . -type d -name CMakeFiles`
 		
 mkdir $DKPATH/DKApps/$APP/$OS
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+	DKPATH="/home/$USER/digitalknob/DK"
+	sudo apt-get -y install git
+	sudo apt-get -y install cmake
+	sudo apt-get -y install gcc
+	sudo apt-get -y install g++
+	
 	mkdir $DKPATH/DKApps/$APP/$OS/Debug
 	cd $DKPATH/DKApps/$APP/$OS/Debug
 	cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER="$GCC_PATH" -DCMAKE_CXX_COMPILER="$GPP_PATH" -DDEBUG=ON -DREBUILDALL=ON -DSTATIC=ON $DKPATH
