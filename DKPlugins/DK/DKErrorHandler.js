@@ -1,8 +1,6 @@
 //"use strict";
 //https://stackoverflow.com/a/36317375/688352
 
-dk.errorhandler = DKPlugin(DKErrorHandler, "singleton")
-
 function DKErrorHandler() {}
 
 DKErrorHandler.prototype.create = function dk_errorhandler_create() {
@@ -28,7 +26,6 @@ DKErrorHandler.prototype.create = function dk_errorhandler_create() {
         handleXMLHttp();
         handleImage();
         handleScript();
-
         //FIXME: This breaks removeEventListener for global objects and plugins
         //handleEvents();
     }
@@ -56,9 +53,8 @@ DKErrorHandler.prototype.create = function dk_errorhandler_create() {
         window.addEventListener('unhandledrejection', onunhandledrejection);
         function onunhandledrejection(event) {
             window.onanyerror.apply(this, arguments);
-            if (event.reason) {
+            if (event.reason)
                 dk.console.error(event.reason);
-            }
             if (onunhandledrejectionx)
                 return onunhandledrejectionx.apply(null, arguments);
         }
@@ -76,7 +72,6 @@ DKErrorHandler.prototype.create = function dk_errorhandler_create() {
     function handleImage() {
         const ImageOriginal = window.Image;
         window.Image = ImageOverride;
-
         // New `Image` constructor. Might cause some problems,
         // but not sure yet. This is at least a start, and works on chrome.
         function ImageOverride() {
@@ -125,11 +120,11 @@ DKErrorHandler.prototype.create = function dk_errorhandler_create() {
 
         function wrap(fn) {
             fn._witherror = witherror;
-
             function witherror() {
                 try {
                     fn.apply(this, arguments);
-                } catch (e) {
+                } 
+				catch (e) {
                     window.onanyerror.apply(this, e);
                     throw e;
                 }
@@ -153,14 +148,13 @@ DKErrorHandler.prototype.create = function dk_errorhandler_create() {
             if (onerrorx)
                 return onerrorx.apply(this, arguments);
         }
-
+		
         // Handle `onabort`
         function onabort(error) {
             window.onanyerror.call(this, error);
             if (onabortx)
                 return onabortx.apply(this, arguments);
         }
-
         // Handle `onload`.
         // For images, you can get a 403 response error,
         // but this isn't triggered as a global on error.
@@ -170,9 +164,8 @@ DKErrorHandler.prototype.create = function dk_errorhandler_create() {
         // request made by an img tag in JavaScript."
         // @see http://stackoverflow.com/questions/8108636/how-to-get-http-status-code-of-img-tags/8108646#8108646
         function onload(request) {
-            if (request.status && request.status >= 400) {
+            if (request.status && request.status >= 400)
                 window.onanyerror.call(this, request);
-            }
             if (onloadx)
                 return onloadx.apply(this, arguments);
         }
@@ -183,18 +176,19 @@ DKErrorHandler.prototype.create = function dk_errorhandler_create() {
     // which you could override in your app.
     function onanyerrorx(entity) {
         const display = entity;
-
         // ajax request
         if (entity instanceof XMLHttpRequest) {
             // 400: http://example.com/image.png
             display = entity.status + ' ' + entity.responseURL;
-        } else if (entity instanceof Event) {
+        } 
+		else if (entity instanceof Event) {
             // global window events, or image events
             const target = entity.currentTarget;
             display = target;
-        } else {// not sure if there are others
+        } 
+		else {
+			// not sure if there are others
         }
-
         capture(entity);
         console.log('[onanyerror]', display, entity);
     }
@@ -206,7 +200,6 @@ DKErrorHandler.prototype.create = function dk_errorhandler_create() {
         captures.push(entity);
         if (captures.length > 100)
             captures.unshift();
-
         // keep the last ones around
         const i = captures.length;
         while (--i) {
@@ -214,14 +207,15 @@ DKErrorHandler.prototype.create = function dk_errorhandler_create() {
             window['onanyerror' + i] = x;
         }
     }
-
     // Wait til next code execution cycle as fast as possible.
     function onnext(fn) {
         setTimeout(fn, 0);
     }
 
-    window.onanyerror = function window_onanyerror(entity) {//console.debug(entity);
+    window.onanyerror = function window_onanyerror(entity) {
+		//console.debug(entity);
     }
-
     LoadErrorHandlers();
 }
+
+dk.errorhandler = DKPlugin(DKErrorHandler, "singleton")
