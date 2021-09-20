@@ -49,7 +49,7 @@ function DKBuildConsole_ChooseUpdate() {
     console.log("ESC. exit")
     console.log("\n")
     const key = CPP_DK_GetKey()
-    
+    console.log("key = "+key);
 	//Esc
 	if (key === 27){
         CPP_DK_Exit()
