@@ -1,4 +1,4 @@
-"use strict";
+//"use strict";
 
 dk.trace = DKPlugin(DKTrace, "singleton");
 

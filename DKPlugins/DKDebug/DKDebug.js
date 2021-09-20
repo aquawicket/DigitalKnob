@@ -1,6 +1,4 @@
-"use strict";
-
-dk.debug = new DKPlugin(DKDebug, "singleton")
+//"use strict";
 
 function DKDebug() {}
 
@@ -762,3 +760,5 @@ DKDebug.prototype.debugger = function DKDebug_debugger() {
         dkcef.showDevTools(0);
     }
 }
+
+dk.debug = new DKPlugin(DKDebug, "singleton")

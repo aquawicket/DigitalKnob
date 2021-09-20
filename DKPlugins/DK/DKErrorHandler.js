@@ -1,4 +1,4 @@
-"use strict";
+//"use strict";
 //https://stackoverflow.com/a/36317375/688352
 
 dk.errorhandler = DKPlugin(DKErrorHandler, "singleton")

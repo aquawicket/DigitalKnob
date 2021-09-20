@@ -1,4 +1,4 @@
-"use strict";
+//"use strict";
 
 function DKFrame() {}
 DKFrame.prototype.init = function DKFrame_init() {

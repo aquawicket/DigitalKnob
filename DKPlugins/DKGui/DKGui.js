@@ -1,6 +1,5 @@
-"use strict";
+//"use strict";
 
-dk.gui = DKPlugin(DKGui, "singleton")
 function DKGui() {}
 
 DKGui.prototype.createElement = function DKGui_createElement(parent, tag, id, top, bottom, left, right, width, height, onclick) {
@@ -154,3 +153,5 @@ DKGui.prototype.randomRGB = function DKGui_randomRGB() {
       , s = 255;
     return 'rgb(' + o(r() * s) + ',' + o(r() * s) + ',' + o(r() * s) + ')';
 }
+
+dk.gui = DKPlugin(DKGui, "singleton")
