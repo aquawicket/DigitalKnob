@@ -38,6 +38,7 @@ bool DKLinux::GetKey(int& key){
 	//system("stty raw"); // Set terminal to raw mode    
 	//key = getchar();       
 	//system("stty cooked"); // Reset terminal to normal "cooked" mode
+	char buf[5];
 	fgets (buf, 5, stdin);
 	if (strrchr(buf, '\n') == NULL) {
 		// flush buffer
