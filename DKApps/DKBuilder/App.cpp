@@ -13,7 +13,7 @@
 #ifdef LINUX
 #include <unistd.h> //for getch()
 #include <termios.h> //for getch()
-int getch(){
+int getch_test(){
     char buf[5];
     struct termios old = {0};
     fflush(stdout);
@@ -49,9 +49,9 @@ bool App::Init()
 	
     int i = 5;
     while(i){
-	    int key = getch();
+	    int key = getch_test();
 	    if(key == 0)
-	    	key = getch();
+	    	key = getch_test();
 	    DKINFO("key = "+toString(key)+"\n");
         i--;
     }

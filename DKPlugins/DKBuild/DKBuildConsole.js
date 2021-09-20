@@ -49,7 +49,7 @@ function DKBuildConsole_ChooseUpdate() {
     console.log("ESC. exit")
     console.log("\n")
     const key = CPP_DK_GetKey()
-    console.log("key = "+key);
+    console.log("key = "+key)
 	//Esc
 	if (key === 27){
         CPP_DK_Exit()
@@ -125,6 +125,7 @@ function DKBuildConsole_SelectOs() {
     console.log("ESC. exit")
     console.log("\n")
     const key = CPP_DK_GetKey()
+	console.log("key = "+key)
     if (key === 27)
         CPP_DK_Exit()
     else if (key === 49)
@@ -167,6 +168,7 @@ function DKBuildConsole_SelectApp() {
     console.log("ESC. exit")
     console.log("\n")
     const key = CPP_DK_GetKey()
+	console.log("key = "+key)
     if (key === 27)
         CPP_DK_Exit()
     DKBuildConsole_KeyToApp(key)
@@ -183,6 +185,7 @@ function DKBuildConsole_SelectType() {
     console.log("ESC. exit")
     console.log("\n")
     const key = CPP_DK_GetKey()
+	console.log("key = "+key)
     if (key === 27)
         CPP_DK_Exit()
     else if (key === 49)
@@ -226,6 +229,7 @@ function DKBuildConsole_Process() {
     console.log("###########################")
     console.log("Press any key to Build")
     CPP_DK_GetKey()
+	console.log("key = "+key)
 	if(APP == "ALLAPPS"){
 		for (var i = 0; i < APP_LIST.length; ++i){
 		    APP = APP_LIST[i]
