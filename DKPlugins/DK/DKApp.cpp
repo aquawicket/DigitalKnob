@@ -60,9 +60,10 @@ DKApp::DKApp(int argc, char** argv){
 	DKINFO("DKFile::app_name = " + DKFile::app_name + "\n");
 	
 	DKClass::DKCreate("DKAssets"); //Nothing will be logged to log.txt until here.
-	DKClass::DKCreate("DKDuktape");
+	//DKClass::DKCreate("DKDuktape");
 	DKClass::DKCreate("DKDebug");
 	DKObject* app = DKClass::DKCreate("App"); //App.h/App.cpp (user code)
+	DKClass::DKCreate("DKDuktape");
 }
 
 void DKApp::Init(){
