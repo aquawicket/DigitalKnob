@@ -6,6 +6,7 @@ echo "ostype = $OSTYPE"
 echo "machtype = $MACHTYPE"
 
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+	sudo
 	DKPATH="/home/$USER/digitalknob/DK"
 elif [[ "$OSTYPE" == "darwin"* ]]; then
 	DKPATH="/Users/$USER/digitalknob/DK"

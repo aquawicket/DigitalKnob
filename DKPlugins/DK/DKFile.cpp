@@ -337,7 +337,7 @@ bool DKFile::GetExtention(const DKString& file, DKString& extension){
 	DKDEBUGFUNC(file, extension);
 	DebugPath(file);
 	if(!has(file,"."))
-		return DKERROR("file has no extension\n");
+		return DKERROR("file ("+file+") has no extension\n");
 	unsigned found = file.find_last_of(".");
 	extension = file.substr(found,file.size());
 	return true;

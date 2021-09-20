@@ -578,7 +578,7 @@ Rml::Event* DKRml::addressToEvent(const DKString& address){
 	//DKDEBUGFUNC(address);
 	Rml::Event* event;
 	if (address.compare(0, 2, "0x") != 0 || address.size() <= 2 || address.find_first_not_of("0123456789abcdefABCDEF", 2) != std::string::npos) {
-		DKERROR("DKRml::addressToEvent(): the address is not a valid hex notation");
+		DKERROR("the address ("+address+") is not a valid hex notation");
 		return NULL;
 	}
 

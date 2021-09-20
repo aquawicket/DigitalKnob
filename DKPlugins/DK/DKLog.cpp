@@ -38,7 +38,7 @@ bool Log(const char* file, int line, const char* func, const DKString& text, con
 		string += toString(line);
 		string += "  ";
 	}
-	if(log_funcs){
+	if(log_funcs || lvl == DK_ERROR) {
 		if(strlen(func)){
 			string += func;
 			string += "()  ";
@@ -145,7 +145,6 @@ bool Log(const char* file, int line, const char* func, const DKString& text, con
 	//On errors show the stack trace or open a message box
 	if(log_errors && (lvl == DK_ERROR/* || has(string,"Uncaught ")*/)){
 		//DKClass::CallFunc("DKDebug::ShowStackTrace", NULL, NULL);
-		
 		//DKString in = string;
 		//DKClass::CallFunc("DKWindow::MessageBox", &in, NULL);
 	}
