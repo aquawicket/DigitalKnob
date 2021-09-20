@@ -1111,6 +1111,21 @@ dk.binaryToString = function dk_binaryToString(binary) {
     return stringOutput;
 }
 
+dk.hide = function dk_hide(id){
+	var element = byId(id)
+	if(!element)
+		return error("element invalid")
+	element.style.display = "none"
+}
+
+dk.show = function dk_show(id){
+	var element = byId(id)
+	if(!element)
+		return error("element invalid")
+	element.style.display = "block"
+	element.style.visibility = "visible"
+}
+
 ///// Pollyfils and Prototypes
 
 // trim for IE8
