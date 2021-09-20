@@ -1,6 +1,6 @@
 //"use strict";
 
-function DKDebug() {}
+function DKDebug(){}
 
 /*
 //Error-first callbacks
@@ -461,32 +461,26 @@ DKDebug.prototype.onevent = function DKDebug_onevent(event) {
         dk.debug.logKey(event.code);
         dk.debug.checkKeys();
     }
-
     if (event.type === "keydown" && event.code === "F12") {
         if (dk.hasCPP()) {
-            if (typeof dkcef.showDevTools === 'function') {
+            if (typeof dkcef.showDevTools === 'function')
                 dkcef.showDevTools(0);
-            }
-            if (typeof dkrml.debuggerOn === 'function') {
+            if (typeof dkrml.debuggerOn === 'function')
                 dkrml.debuggerOn();
-            }
         }
     }
 }
 
 DKDebug.prototype.logKey = function DKDebug_logKey(code) {
-    if (dk.debug.keyHistory.length > 20) {
+    if (dk.debug.keyHistory.length > 20)
         dk.debug.keyHistory.shift();
-    }
     dk.debug.keyHistory[dk.debug.keyHistory.length] = code;
 }
 
 DKDebug.prototype.checkKeys = function DKDebug_checkKeys() {
     let string = "";
-    for (let n = 0; n < dk.debug.keyHistory.length; n++) {
+    for (let n = 0; n < dk.debug.keyHistory.length; n++)
         string += dk.debug.keyToChar(dk.debug.keyHistory[n]);
-    }
-
     //check for commands
     if (string.includes("dkreload")) {
         console.log("*** dk.debug.reload() ***");
@@ -693,20 +687,17 @@ DKDebug.prototype.printInfo = function DKDebug_printInfo() {
     var objects = dk.getObjects();
     var arry = objects.split(",");
     for (var n = 0; n < arry.length; n++) {
-        if (!arry[n]) {
+        if (!arry[n])
             continue;
-        }
         console.log(arry[n]);
     }
-    console.log("\n");
-
+    console.log("\n")
     console.log("**** DKEVENTS ****");
     var events = dk.getEvents();
     var arry = events.split(",");
     for (var n = 0; n < arry.length; n++) {
-        if (!arry[n]) {
+        if (!arry[n])
             continue;
-        }
         console.log(arry[n]);
     }
     console.log("\n");
@@ -753,12 +744,10 @@ DKDebug.prototype.editor = function DKDebug_editor() {
 }
 
 DKDebug.prototype.debugger = function DKDebug_debugger() {
-    if (dk.getBrowser() === "RML" || dk.getJSEngine() === "Duktape") {
+    if (dk.getBrowser() === "RML" || dk.getJSEngine() === "Duktape")
         dkrml.debuggerToggle();
-    }
-    if (dk.getBrowser() === "CEF") {
+    if (dk.getBrowser() === "CEF")
         dkcef.showDevTools(0);
-    }
 }
 
 dk.debug = new DKPlugin(DKDebug, "singleton")

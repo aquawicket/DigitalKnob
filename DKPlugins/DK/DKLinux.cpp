@@ -38,7 +38,8 @@ bool DKLinux::getch(int& key){
 		return DKERROR("buf invalid");
     key = buf[i-1];
 	//int c;
-	//while((c = getc(stdin) != EOF && c != '\n')){} //flush stdin 
+	//while((c = getc(stdin) != EOF && c != '\n')){} //flush stdin
+	DKINFO("DKLinux::getch(): key = "+toString(key)+"\n");
 	return true;
 }
  
