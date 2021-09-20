@@ -1,7 +1,4 @@
-"use strict";
-console.log("Loading DK.js")
-
-
+//"use strict";
 const DEBUG = true;
 window.dk = new Object;
 let DUKTAPE = window.DUKTAPE
