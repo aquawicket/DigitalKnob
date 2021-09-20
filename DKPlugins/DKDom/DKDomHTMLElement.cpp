@@ -21,14 +21,12 @@ int DKDomHTMLElement::focus(duk_context* ctx){
 	DKString address = duk_require_string(ctx, 0);
 	Rml::Element* element = DKRml::addressToElement(address);
 	if (!element) {
-		DKERROR("DKDomElement::focus(): element invalid\n");
 		duk_push_boolean(ctx, false);
-		return true;
+		return DKERROR("DKDomElement::focus(): element invalid\n");
 	}
 	if(!element->Focus()){
-		DKERROR("DKDomElement::focus(): focus failed\n");
 		duk_push_boolean(ctx, false);
-		return true;
+		return DKERROR("DKDomElement::focus(): focus failed\n");
 	}
 	duk_push_boolean(ctx, true);
 	return true;
