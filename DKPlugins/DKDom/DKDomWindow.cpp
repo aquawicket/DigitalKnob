@@ -287,7 +287,7 @@ int DKDomWindow::innerHeight(duk_context* ctx)
 	DKDEBUGFUNC(ctx);
 	int y = DKRml::Get()->context->GetDimensions().y;
 	duk_push_int(ctx, y);
-	return 1;
+	return true;
 }
 
 /////////////////////////////////////////////
@@ -296,7 +296,7 @@ int DKDomWindow::innerWidth(duk_context* ctx)
 	DKDEBUGFUNC(ctx);
 	int x = DKRml::Get()->context->GetDimensions().x;
 	duk_push_int(ctx, x);
-	return 1;
+	return true;
 }
 
 //////////////////////////////////////////////////
@@ -348,275 +348,220 @@ int DKDomWindow::messageManager(duk_context* ctx)
 	return false;
 }
 
-//////////////////////////////////////////////////
 int DKDomWindow::mozInnerScreenX(duk_context* ctx)
 {
 	DKERROR("DKDomWindow::mozInnerScreenX not implemented");
 	return false;
 }
 
-//////////////////////////////////////////////////
 int DKDomWindow::mozInnerScreenY(duk_context* ctx)
 {
 	DKERROR("DKDomWindow::mozInnerScreenY not implemented");
 	return false;
 }
 
-///////////////////////////////////////
 int DKDomWindow::name(duk_context* ctx)
 {
 	DKDEBUGFUNC(ctx);
 	DKString name = DKRml::Get()->context->GetName();
 	duk_push_string(ctx, name.c_str());
-	return 1;
+	return true;
 }
 
-int DKDomWindow::navigator(duk_context* ctx)
-{
-	DKERROR("DKDomWindow::navigator not implemented");
-	return false;
+int DKDomWindow::navigator(duk_context* ctx){
+	return DKERROR("DKDomWindow::navigator not implemented");
 }
 
-int DKDomWindow::opener(duk_context* ctx)
-{
-	DKERROR("DKDomWindow::opener not implemented");
-	return false;
+int DKDomWindow::opener(duk_context* ctx){
+	return DKERROR("DKDomWindow::opener not implemented");
 }
 
-int DKDomWindow::outterHeight(duk_context* ctx)
-{
-	DKERROR("DKDomWindow::outterHeight not implemented");
-	return false;
+int DKDomWindow::outterHeight(duk_context* ctx){
+	return DKERROR("DKDomWindow::outterHeight not implemented");
 }
 
-int DKDomWindow::outterWidth(duk_context* ctx)
-{
-	DKERROR("DKDomWindow::outterWidth not implemented");
-	return false;
+int DKDomWindow::outterWidth(duk_context* ctx){
+	return DKERROR("DKDomWindow::outterWidth not implemented");
 }
 
-int DKDomWindow::pageXOffset(duk_context* ctx)
-{
-	DKERROR("DKDomWindow::pageXOffset not implemented");
-	return false;
+int DKDomWindow::pageXOffset(duk_context* ctx){
+	return DKERROR("DKDomWindow::pageXOffset not implemented");
 }
 
-int DKDomWindow::pageYOffset(duk_context* ctx)
-{
-	DKERROR("DKDomWindow::pageYOffset not implemented");
-	return false;
+int DKDomWindow::pageYOffset(duk_context* ctx){
+	return DKERROR("DKDomWindow::pageYOffset not implemented");
 }
 
-int DKDomWindow::parent(duk_context* ctx)
-{
-	DKERROR("DKDomWindow::parent not implemented");
-	return false;
+int DKDomWindow::parent(duk_context* ctx){
+	return DKERROR("DKDomWindow::parent not implemented");
 }
 
-int DKDomWindow::performance(duk_context* ctx)
-{
-	DKERROR("DKDomWindow::performance not implemented");
-	return false;
+int DKDomWindow::performance(duk_context* ctx){
+	return DKERROR("DKDomWindow::performance not implemented");
 }
 
-int DKDomWindow::personalbar(duk_context* ctx)
-{
-	DKERROR("DKDomWindow::personalbar not implemented");
-	return false;
+int DKDomWindow::personalbar(duk_context* ctx){
+	return DKERROR("DKDomWindow::personalbar not implemented");
 }
 
-int DKDomWindow::screen(duk_context* ctx)
-{
-	DKERROR("DKDomWindow::screen not implemented");
-	return false;
+int DKDomWindow::screen(duk_context* ctx){
+	return DKERROR("DKDomWindow::screen not implemented");
 }
 
-int DKDomWindow::screenX(duk_context* ctx)
-{
-	DKERROR("DKDomWindow::screenX not implemented");
-	return false;
+int DKDomWindow::screenX(duk_context* ctx){
+	return DKERROR("DKDomWindow::screenX not implemented");
 }
 
-int DKDomWindow::screenY(duk_context* ctx)
-{
+int DKDomWindow::screenY(duk_context* ctx){
 	DKERROR("DKDomWindow::screenY not implemented");
 	return false;
 }
 
-int DKDomWindow::screenLeft(duk_context* ctx)
-{
+int DKDomWindow::screenLeft(duk_context* ctx){
 	DKERROR("DKDomWindow::screenLeft not implemented");
 	return false;
 }
 
-int DKDomWindow::screenTop(duk_context* ctx)
-{
+int DKDomWindow::screenTop(duk_context* ctx){
 	DKERROR("DKDomWindow::screenTop not implemented");
 	return false;
 }
 
-int DKDomWindow::scrollbars(duk_context* ctx)
-{
+int DKDomWindow::scrollbars(duk_context* ctx){
 	DKERROR("DKDomWindow::scrollbars not implemented");
 	return false;
 }
 
-int DKDomWindow::scrollMaxX(duk_context* ctx)
-{
+int DKDomWindow::scrollMaxX(duk_context* ctx){
 	DKERROR("DKDomWindow::scrollMaxX not implemented");
 	return false;
 }
 
-int DKDomWindow::scrollMaxY(duk_context* ctx)
-{
+int DKDomWindow::scrollMaxY(duk_context* ctx){
 	DKERROR("DKDomWindow::scrollMaxY not implemented");
 	return false;
 }
 
-int DKDomWindow::scrollX(duk_context* ctx)
-{
+int DKDomWindow::scrollX(duk_context* ctx){
 	DKERROR("DKDomWindow::scrollX not implemented");
 	return false;
 }
 
-int DKDomWindow::scrollY(duk_context* ctx)
-{
+int DKDomWindow::scrollY(duk_context* ctx){
 	DKERROR("DKDomWindow::scrollY not implemented");
 	return false;
 }
 
-int DKDomWindow::self(duk_context* ctx)
-{
+int DKDomWindow::self(duk_context* ctx){
 	DKERROR("DKDomWindow::self not implemented");
 	return false;
 }
 
-int DKDomWindow::sessionStroage(duk_context* ctx)
-{
+int DKDomWindow::sessionStroage(duk_context* ctx){
 	DKERROR("DKDomWindow::sessionStroage not implemented");
 	return false;
 }
 
-int DKDomWindow::sidebar(duk_context* ctx)
-{
+int DKDomWindow::sidebar(duk_context* ctx){
 	DKERROR("DKDomWindow::sidebar not implemented");
 	return false;
 }
 
-int DKDomWindow::speechSynthesis(duk_context* ctx)
-{
+int DKDomWindow::speechSynthesis(duk_context* ctx){
 	DKERROR("DKDomWindow::speechSynthesis not implemented");
 	return false;
 }
 
-int DKDomWindow::status(duk_context* ctx)
-{
+int DKDomWindow::status(duk_context* ctx){
 	DKERROR("DKDomWindow::status not implemented");
 	return false;
 }
 
-int DKDomWindow::statusbar(duk_context* ctx)
-{
+int DKDomWindow::statusbar(duk_context* ctx){
 	DKERROR("DKDomWindow::statusbar not implemented");
 	return false;
 }
 
-int DKDomWindow::toolbar(duk_context* ctx)
-{
+int DKDomWindow::toolbar(duk_context* ctx){
 	DKERROR("DKDomWindow::toolbar not implemented");
 	return false;
 }
 
-int DKDomWindow::top(duk_context* ctx)
-{
+int DKDomWindow::top(duk_context* ctx){
 	DKERROR("DKDomWindow::top not implemented");
 	return false;
 }
 
-int DKDomWindow::visualViewport(duk_context* ctx)
-{
+int DKDomWindow::visualViewport(duk_context* ctx){
 	DKERROR("DKDomWindow::visualViewport not implemented");
 	return false;
 }
 
-int DKDomWindow::window(duk_context* ctx)
-{
+int DKDomWindow::window(duk_context* ctx){
 	DKERROR("DKDomWindow::window not implemented");
 	return false;
 }
 
 
 // Deprecated properties
-int DKDomWindow::content(duk_context* ctx)
-{
+int DKDomWindow::content(duk_context* ctx){
 	DKERROR("DKDomWindow::content not implemented");
 	return false;
 }
 
-int DKDomWindow::defaultStatus(duk_context* ctx)
-{
+int DKDomWindow::defaultStatus(duk_context* ctx){
 	DKERROR("DKDomWindow::defaultStatus not implemented");
 	return false;
 }
 
-int DKDomWindow::dialogArguments(duk_context* ctx)
-{
+int DKDomWindow::dialogArguments(duk_context* ctx){
 	DKERROR("DKDomWindow::dialogArguments not implemented");
 	return false;
 }
 
-int DKDomWindow::directories(duk_context* ctx)
-{
+int DKDomWindow::directories(duk_context* ctx){
 	DKERROR("DKDomWindow::directories not implemented");
 	return false;
 }
 
-int DKDomWindow::globalStorage(duk_context* ctx)
-{
+int DKDomWindow::globalStorage(duk_context* ctx){
 	DKERROR("DKDomWindow::globalStorage not implemented");
 	return false;
 }
 
-int DKDomWindow::mozAnimationStartTime(duk_context* ctx)
-{
+int DKDomWindow::mozAnimationStartTime(duk_context* ctx){
 	DKERROR("DKDomWindow::mozAnimationStartTime not implemented");
 	return false;
 }
 
-int DKDomWindow::mozPaintCount(duk_context* ctx)
-{
+int DKDomWindow::mozPaintCount(duk_context* ctx){
 	DKERROR("DKDomWindow::mozPaintCount not implemented");
 	return false;
 }
 
-int DKDomWindow::orientation(duk_context* ctx)
-{
+int DKDomWindow::orientation(duk_context* ctx){
 	DKERROR("DKDomWindow::orientation not implemented");
 	return false;
 }
 
-int DKDomWindow::pkcs11(duk_context* ctx)
-{
+int DKDomWindow::pkcs11(duk_context* ctx){
 	DKERROR("DKDomWindow::pkcs11 not implemented");
 	return false;
 }
 
-int DKDomWindow::returnValue(duk_context* ctx)
-{
+int DKDomWindow::returnValue(duk_context* ctx){
 	DKERROR("DKDomWindow::returnValue not implemented");
 	return false;
 }
 
 
 // Methods
-int DKDomWindow::alert(duk_context* ctx)
-{
+int DKDomWindow::alert(duk_context* ctx){
 	DKERROR("DKDomWindow::alert not implemented");
 	return false;
 }
 
-int DKDomWindow::blur(duk_context* ctx)
-{
+int DKDomWindow::blur(duk_context* ctx){
 	DKERROR("DKDomWindow::blur not implemented");
 	return false;
 }
@@ -663,14 +608,12 @@ int DKDomWindow::find(duk_context* ctx)
 	return false;
 }
 
-int DKDomWindow::focus(duk_context* ctx)
-{
+int DKDomWindow::focus(duk_context* ctx){
 	DKERROR("DKDomWindow::focus not implemented");
 	return false;
 }
 
-int DKDomWindow::getComputedStyle(duk_context* ctx)
-{
+int DKDomWindow::getComputedStyle(duk_context* ctx){
 	DKERROR("DKDomWindow::getComputedStyle not implemented");
 	DKString address = duk_require_string(ctx, 0);
 	Rml::Element* element = DKRml::addressToElement(address);
@@ -683,202 +626,169 @@ int DKDomWindow::getComputedStyle(duk_context* ctx)
 	return false;
 }
 
-int DKDomWindow::getDefaultComputedStyle(duk_context* ctx)
-{
+int DKDomWindow::getDefaultComputedStyle(duk_context* ctx){
 	DKERROR("DKDomWindow::getDefaultComputedStyle not implemented");
 	return false;
 }
 
-int DKDomWindow::getSelection(duk_context* ctx)
-{
+int DKDomWindow::getSelection(duk_context* ctx){
 	DKERROR("DKDomWindow::getSelection not implemented");
 	return false;
 }
 
-int DKDomWindow::matchMedia(duk_context* ctx)
-{
+int DKDomWindow::matchMedia(duk_context* ctx){
 	DKERROR("DKDomWindow::matchMedia not implemented");
 	return false;
 }
 
-int DKDomWindow::maximize(duk_context* ctx)
-{
+int DKDomWindow::maximize(duk_context* ctx){
 	DKERROR("DKDomWindow::maximize not implemented");
 	return false;
 }
 
-int DKDomWindow::minimize(duk_context* ctx)
-{
+int DKDomWindow::minimize(duk_context* ctx){
 	DKERROR("DKDomWindow::minimize not implemented");
 	return false;
 }
 
-int DKDomWindow::moveBy(duk_context* ctx)
-{
+int DKDomWindow::moveBy(duk_context* ctx){
 	DKERROR("DKDomWindow::moveBy not implemented");
 	return false;
 }
 
-int DKDomWindow::moveTo(duk_context* ctx)
-{
+int DKDomWindow::moveTo(duk_context* ctx){
 	DKERROR("DKDomWindow::moveTo not implemented");
 	return false;
 }
 
-int DKDomWindow::open(duk_context* ctx)
-{
+int DKDomWindow::open(duk_context* ctx){
 	DKERROR("DKDomWindow::open not implemented");
 	return false;
 }
 
-int DKDomWindow::postMessage(duk_context* ctx)
-{
+int DKDomWindow::postMessage(duk_context* ctx){
 	DKERROR("DKDomWindow::postMessage not implemented");
 	return false;
 }
 
-int DKDomWindow::print(duk_context* ctx)
-{
+int DKDomWindow::print(duk_context* ctx){
 	DKERROR("DKDomWindow::print not implemented");
 	return false;
 }
 
-int DKDomWindow::prompt(duk_context* ctx)
-{
+int DKDomWindow::prompt(duk_context* ctx){
 	DKERROR("DKDomWindow::prompt not implemented");
 	return false;
 }
 
-int DKDomWindow::requestAnimationFrame(duk_context* ctx)
-{
+int DKDomWindow::requestAnimationFrame(duk_context* ctx){
 	DKERROR("DKDomWindow::requestAnimationFrame not implemented");
 	return false;
 }
 
-int DKDomWindow::requestIdleCallback(duk_context* ctx)
-{
+int DKDomWindow::requestIdleCallback(duk_context* ctx){
 	DKERROR("DKDomWindow::requestIdleCallback not implemented");
 	return false;
 }
 
-int DKDomWindow::resizeBy(duk_context* ctx)
-{
+int DKDomWindow::resizeBy(duk_context* ctx){
 	DKERROR("DKDomWindow::resizeBy not implemented");
 	return false;
 }
 
-int DKDomWindow::resizeTo(duk_context* ctx)
-{
+int DKDomWindow::resizeTo(duk_context* ctx){
 	DKERROR("DKDomWindow::resizeTo not implemented");
 	return false;
 }
 
-int DKDomWindow::scroll(duk_context* ctx)
-{
+int DKDomWindow::scroll(duk_context* ctx){
 	DKERROR("DKDomWindow::scroll not implemented");
 	return false;
 }
 
-int DKDomWindow::scrollBy(duk_context* ctx)
-{
+int DKDomWindow::scrollBy(duk_context* ctx){
 	DKERROR("DKDomWindow::scrollBy not implemented");
 	return false;
 }
 
-int DKDomWindow::scrollByLines(duk_context* ctx)
-{
+int DKDomWindow::scrollByLines(duk_context* ctx){
 	DKERROR("DKDomWindow::scrollByLines not implemented");
 	return false;
 }
 
-int DKDomWindow::scrollByPages(duk_context* ctx)
-{
+int DKDomWindow::scrollByPages(duk_context* ctx){
 	DKERROR("DKDomWindow::scrollByPages not implemented");
 	return false;
 }
 
-int DKDomWindow::scrollTo(duk_context* ctx)
-{
+int DKDomWindow::scrollTo(duk_context* ctx){
 	DKERROR("DKDomWindow::scrollTo not implemented");
 	return false;
 }
 
-int DKDomWindow::setImmediate(duk_context* ctx)
-{
+int DKDomWindow::setImmediate(duk_context* ctx){
 	DKERROR("DKDomWindow::setImmediate not implemented");
 	return false;
 }
 
-int DKDomWindow::setResizeable(duk_context* ctx)
-{
+int DKDomWindow::setResizeable(duk_context* ctx){
 	DKERROR("DKDomWindow::setResizeable not implemented");
 	return false;
 }
 
-int DKDomWindow::sizeToContent(duk_context* ctx)
-{
+int DKDomWindow::sizeToContent(duk_context* ctx){
 	DKERROR("DKDomWindow::sizeToContent not implemented");
 	return false;
 }
 
-int DKDomWindow::stop(duk_context* ctx)
-{
+int DKDomWindow::stop(duk_context* ctx){
 	DKERROR("DKDomWindow::stop not implemented");
 	return false;
 }
 
-int DKDomWindow::updateCommands(duk_context* ctx)
-{
+int DKDomWindow::updateCommands(duk_context* ctx){
 	DKERROR("DKDomWindow::updateCommands not implemented");
 	return false;
 }
 
 
 // Deprecated methods
-int DKDomWindow::back(duk_context* ctx)
-{
+int DKDomWindow::back(duk_context* ctx){
 	DKERROR("DKDomWindow::back not implemented");
 	return false;
 }
 
-int DKDomWindow::captureEvents(duk_context* ctx)
-{
+int DKDomWindow::captureEvents(duk_context* ctx){
 	DKERROR("DKDomWindow::captureEvents not implemented");
 	return false;
 }
 
-int DKDomWindow::forward(duk_context* ctx)
-{
+int DKDomWindow::forward(duk_context* ctx){
 	DKERROR("DKDomWindow::forward not implemented");
 	return false;
 }
 
-int DKDomWindow::getAttention(duk_context* ctx)
-{
+int DKDomWindow::getAttention(duk_context* ctx){
 	DKERROR("DKDomWindow::getAttention not implemented");
 	return false;
 }
 
-int DKDomWindow::home(duk_context* ctx)
-{
+int DKDomWindow::home(duk_context* ctx){
 	DKERROR("DKDomWindow::home not implemented");
 	return false;
 }
 
-int DKDomWindow::openDialog(duk_context* ctx)
-{
+int DKDomWindow::openDialog(duk_context* ctx){
 	DKERROR("DKDomWindow::openDialog not implemented");
 	return false;
 }
 
-int DKDomWindow::releaseEvents(duk_context* ctx)
-{
+int DKDomWindow::releaseEvents(duk_context* ctx){
 	DKERROR("DKDomWindow::releaseEvents not implemented");
 	return false;
 }
 
-int DKDomWindow::showModalDialog(duk_context* ctx)
-{
+int DKDomWindow::showModalDialog(duk_context* ctx){
 	DKERROR("DKDomWindow::showModalDialog not implemented");
 	return false;
 }

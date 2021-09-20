@@ -42,8 +42,8 @@ int DKDomConsole::clear(duk_context* ctx){
 	//FIXME - make this work on all OS's
 	DKString out;
 	if(!DKUtil::System("cls", out))
-		return 0;
-	return 1;
+		return DKERROR("!DKUtil::System(\"cls\", out)\n");
+	return true;
 }
 
 int DKDomConsole::count(duk_context* ctx){
@@ -65,7 +65,7 @@ int DKDomConsole::debug(duk_context* ctx){
 	if(duk_is_number(ctx, 0))
 		string = toString(duk_require_int(ctx, 0));
 	DKDEBUG(string);
-	return 1;
+	return true;
 }
 
 int DKDomConsole::dir(duk_context* ctx){
@@ -86,7 +86,7 @@ int DKDomConsole::error(duk_context* ctx){
 	if(duk_is_number(ctx, 0))
 		string = toString(duk_require_int(ctx, 0));
 	DKERROR(string);
-	return 1;
+	return true;
 }
 
 int DKDomConsole::exception(duk_context* ctx){
@@ -118,7 +118,7 @@ int DKDomConsole::info(duk_context* ctx){
 	if(duk_is_number(ctx, 0))
 		string = toString(duk_require_int(ctx, 0));
 	DKINFO(string);
-	return 1;
+	return true;
 }
 
 int DKDomConsole::log(duk_context* ctx){
@@ -130,7 +130,7 @@ int DKDomConsole::log(duk_context* ctx){
 	if(duk_is_number(ctx, 0))
 		string = toString(duk_require_int(ctx, 0));
 	DKINFO(string);
-	return 1;
+	return true;
 }
 
 int DKDomConsole::profile(duk_context* ctx){
@@ -183,5 +183,5 @@ int DKDomConsole::warn(duk_context* ctx){
 	if(duk_is_number(ctx, 0))
 		string = toString(duk_require_int(ctx, 0));
 	DKWARN(string);
-	return 1;
+	return true;
 }

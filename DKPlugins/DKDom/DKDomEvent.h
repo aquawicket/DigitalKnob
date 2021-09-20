@@ -47,7 +47,7 @@ public:
 
 	// Extra
 	static int getParameters(duk_context* ctx);
-}
+};
 
 REGISTER_OBJECT(DKDomEvent, true)
 

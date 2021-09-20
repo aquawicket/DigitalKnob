@@ -387,8 +387,10 @@ void DKRml::ProcessEvent(Rml::Event& rmlEvent){
 			}
 			*/
 			//FIXME - we run the risk of having event function pointers that point to nowhere
-			if (!ev->event_func(ev))
-				return DKERROR("DKRml::ProcessEvent failed \n");
+			if (!ev->event_func(ev)){
+				DKERROR("DKRml::ProcessEvent failed \n");
+				return;
+			}
 		    //call the function linked to the event
 			//DKINFO("Event: "+ev->type+", "+ev->id+"\n");
 			//FIXME - StopPropagation() on a mousedown even will bock the elements ability to drag
@@ -590,7 +592,7 @@ DKString DKRml::elementToAddress(Rml::Element* element){
 		ss << "document";
 	else if (element == DKRml::Get()->document) {
 		//TEST: Let's just test if we ever hear anything from this one
-		DKERROR("!!!! element = DKRml::Get()->document  !!!!");
+		throw DKERROR("!!!! element = DKRml::Get()->document  !!!!");
 		ss << "document";
 	}
 	else {

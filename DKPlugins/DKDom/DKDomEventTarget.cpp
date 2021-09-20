@@ -22,10 +22,10 @@ bool DKDomEventTarget::OnEvent(DKEvents* event){
 	DKDEBUGFUNC(event);
 	DKString id = event->GetId();
 	if(id.empty())
-		return false;//we need an id
+		return DKERROR("id invalid\n");
 	DKString type = event->GetType();
 	if(type.empty())
-		return false;//we need a type
+		return DKERROR("type invalid");
 	DKString value = event->GetValue();
 	DKString jsreturn = event->GetJSReturn();
 	//replace(jsreturn, "() { [ecmascript code] }", ""); //remove () { [ecmascript code] }
@@ -80,7 +80,7 @@ int DKDomEventTarget::addEventListener(duk_context* ctx){
 		replace(jsreturn, "function ", "");
 	}
 	if(!DKEvents::AddEvent(id, type, jsreturn, &DKDomEventTarget::OnEvent, DKDomEventTarget::Get()))
-		return false;
+		return DKERROR("DKEvents::AddEvent() failed\n");
 	return true;
 }
 
@@ -93,7 +93,7 @@ int DKDomEventTarget::removeEventListener(duk_context* ctx){
 		replace(jsreturn, "function ", "");
 	}
 	if(!DKEvents::RemoveEvent(id, type, jsreturn))
-		return false;
+		return DKERROR("DKEvents::RemoveEvent() failed\n");
 	return true;
 }
 
@@ -106,7 +106,7 @@ int DKDomEventTarget::dispatchEvent(duk_context* ctx){
 		replace(jsreturn, "function ", "");
 	}
 	if (!DKEvents::SendEvent(id, type, jsreturn))
-		return false;
+		return DKERROR("DKEvents::SendEvent() failed\n");
 	return true;
 }
 
@@ -118,10 +118,10 @@ int DKDomEventTarget::id(duk_context* ctx){
 	DKStringArray events;
 	toStringArray(events, evt, ",");
 	if(events.size() < 1)
-		return 0;
+		return DKERROR("events.size() < 1\n");
 	if(!same(events[0],id))
-		return 0;
-	return 1;
+		return DKERROR("!same(events[0],id\n")
+	return true;
 }
 
 int DKDomEventTarget::idLike(duk_context* ctx){
@@ -130,10 +130,10 @@ int DKDomEventTarget::idLike(duk_context* ctx){
 	DKStringArray events;
 	toStringArray(events, evt, ",");
 	if(events.size() < 1)
-		return 0;
+		return DKERROR("events.size() < 1\n");
 	if(!has(events[0],id))
-		return 0;
-	return 1;
+		return DKERROR("!has(events[0],id)");
+	return true;
 }
 
 int DKDomEventTarget::type(duk_context* ctx){
@@ -142,10 +142,10 @@ int DKDomEventTarget::type(duk_context* ctx){
 	DKStringArray events;
 	toStringArray(events, evt, ",");
 	if(events.size() < 2)
-		return 0;
+		return DKERROR("events.size() < 2\n");
 	if(!same(events[1],id))
-		return 0;
-	return 1;
+		return DKERROR("!same(events[1],id\n")
+	return true;
 }
 
 int DKDomEventTarget::value(duk_context* ctx){
@@ -154,8 +154,8 @@ int DKDomEventTarget::value(duk_context* ctx){
 	DKStringArray events;
 	toStringArray(events, evt, ",");
 	if(events.size() < 3)
-		return 0;
+		return DKERROR("events.size() < 3\n");
 	if(!same(events[2],value))
-		return 0;
-	return 1;
+		return DKERROR("!same(events[2],value\n")
+	return true;
 }

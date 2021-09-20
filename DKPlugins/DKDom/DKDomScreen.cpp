@@ -75,7 +75,7 @@ int DKDomScreen::height(duk_context* ctx)
 	int height;
 	if(!DKUtil::GetScreenHeight(height)){ return 0; }
 	duk_push_number(ctx, height);
-	return 1;
+	return true;
 }
 
 ///////////////////////////////////////
@@ -112,7 +112,7 @@ int DKDomScreen::width(duk_context* ctx)
 	int width;
 	if(!DKUtil::GetScreenWidth(width)) { return 0; }
 	duk_push_number(ctx, width);
-	return 1;
+	return true;
 }
 
 /////////////////////////////////////////////
