@@ -249,7 +249,7 @@ DKPlugin.createInstance = function DKPlugin_createInstance() {
 DKPlugin.prototype.init = function DKPlugin_init() {
     //This function is never called
     console.group("%c DKPlugin.prototype.init(): " + this.constructor.name, "color:orange;");
-    return;
+    //return;
     if (!this) {
         console.groupEnd();
         return error("this is invalid");
