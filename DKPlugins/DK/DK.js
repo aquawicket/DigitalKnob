@@ -106,12 +106,14 @@ document.addEventListener("mousemove", function document_addEventListener(event)
 });
 
 dk.init = function dk_init() {
-    eval("var __temp = null");
-    const use_strict = (typeof __temp === "undefined");
-    console.debug("*** DigitalKnob ***");
-    console.debug("use_strict: " + use_strict);
-    console.debug("Browser: " + dk.getBrowser());
-    console.debug("JSEngine: " + dk.getJSEngine());
+	if(!DUKTAPE) {
+		eval("var __temp = null");
+		const use_strict = (typeof __temp === "undefined");
+	}
+    console.log("*** DigitalKnob ***");
+    console.log("use_strict: " + use_strict);
+    console.log("Browser: " + dk.getBrowser());
+    console.log("JSEngine: " + dk.getJSEngine());
     dk.create("DK/DK.css");
 }
 
@@ -1467,4 +1469,3 @@ dk.dump = function dk_dumpVariable(variable) {
     */
 }
 
-dk.init();
