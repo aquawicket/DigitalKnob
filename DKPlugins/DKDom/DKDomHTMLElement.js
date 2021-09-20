@@ -227,4 +227,8 @@ var HTMLElement = function(pointer) {
 
 // interface HTMLElement : Element
 HTMLElement.prototype = Element.prototype;
-
+//Window includes GlobalEventHandlers
+Object.assign(HTMLElement.prototype, GlobalEventHandlers)
+//HTMLElement includes DocumentAndElementEventHandlers;
+//HTMLElement includes ElementContentEditable;
+//HTMLElement includes HTMLOrSVGElement;
