@@ -12,7 +12,7 @@
 #include <termios.h> //for getch()
 
 bool DKLinux::getch(int& key){
-    char buf[4];
+    char buf[5];
     struct termios old = {0};
     fflush(stdout);
     if(tcgetattr(0, &old) < 0)
@@ -32,9 +32,10 @@ bool DKLinux::getch(int& key){
 	if(!buf[0])
 		return DKERROR("buf invalid");
     int i=0;
-    while(i < 4 && buf[i])
+    while(i < sizeof(buf) && buf[i])
         i++;
-    key = buf[i-1];
+    if(!buf[i-1])
+		return DKERROR("buf invalid");
 	return true;
 }
  

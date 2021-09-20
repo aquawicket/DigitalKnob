@@ -14,26 +14,30 @@
 #include <unistd.h> //for getch()
 #include <termios.h> //for getch()
 int getch(){
-    char buf[4];
+    char buf[5];
     struct termios old = {0};
     fflush(stdout);
     if(tcgetattr(0, &old) < 0)
-        perror("tcsetattr()");
+        return DKERROR("tcsetattr() failed");
     old.c_lflag &= ~ICANON;
     old.c_lflag &= ~ECHO;
     old.c_cc[VMIN] = 1;
     old.c_cc[VTIME] = 0;
     if(tcsetattr(0, TCSANOW, &old) < 0)
-        perror("tcsetattr ICANON");
+        return DKERROR("tcsetattr() ICANON failed");
     if(read(0, &buf, sizeof(buf)) < 0)
-        perror("read()");
+        return DKERROR("read() failed");
     old.c_lflag |= ICANON;
     old.c_lflag |= ECHO;
     if(tcsetattr(0, TCSADRAIN, &old) < 0)
-        perror("tcsetattr ~ICANON");
+        return DKERROR("tcsetattr() ~ICANON failed");
+	if(!buf[0])
+		return DKERROR("buf invalid");
     int i=0;
-    while(buf[i])
+    while(i < sizeof(buf) && buf[i])
         i++;
+    if(!buf[i-1])
+		return DKERROR("buf invalid");
     return buf[i-1];
 }
 #endif
