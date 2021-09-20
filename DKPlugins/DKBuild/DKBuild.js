@@ -93,6 +93,10 @@ function DKBuild_init(){
 	CPP_DKFile_MkDir(DKDOWNLOAD) //FIXME: code DKCurl to create directories automatically
 }
 
+function DKBuild_end(){
+	CPP_DKFile_Copy(CPP_DKFile_GetExePath(), DKPATH+CPP_DKFile_GetExeName(), true)
+}
+
 //This is and alternative way to get windows short paths
 function DKBuild_GetShortPath(fullPath){
 	let getShortPath = DKPATH+"DK/DKPlugins/DKFile/getShortPath.cmd"
