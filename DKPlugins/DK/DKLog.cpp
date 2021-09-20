@@ -19,9 +19,6 @@ extern bool log_funcs = false;
 extern DKString log_show = ""; //comma seperated 
 extern DKString log_hide = ""; //comma seperated 
 
-
-
-
 bool Clear(){
 #ifdef WIN32
     system("cls");
@@ -183,7 +180,7 @@ bool Log(const char* file, int line, const char* func, const DKString& text, con
 #endif
 
 	if (text.find('\n') == std::string::npos) //check for new line \n
-		 return ERROR("<------ \nText does not contain a new line character   \\n  \n");
+		 return DKERROR("<------ \nText does not contain a new line character   \\n  \n");
 
 	if(log_gui_console && DKUtil::InMainThread() && DKApp::active){
 		DKEvents::SendEvent("DKLog", "level", toString(lvl));
