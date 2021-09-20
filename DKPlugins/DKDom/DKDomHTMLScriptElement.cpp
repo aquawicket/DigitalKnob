@@ -18,10 +18,10 @@ int DKDomHTMLScriptElement::async(duk_context* ctx){
 		duk_push_undefined(ctx);
 		return DKERROR("element invalid\n");
 	}
-	if(!element->async()){
-		duk_push_undefined(ctx);
-		return DKERROR("focus failed\n");
-	}
+	//if(!element->async()){
+	//	duk_push_undefined(ctx);
+	//	return DKERROR("async failed\n");
+	//}
 	duk_push_boolean(ctx, true);
 	return true;
 }
