@@ -13,7 +13,7 @@
 
 bool DKLinux::getch(int& key){
 	DKDEBUGFUNC("key");
-	char buf[5];
+	char buf[256];
     struct termios old = {0};
     fflush(stdout);
     if(tcgetattr(0, &old) < 0)
@@ -40,8 +40,8 @@ bool DKLinux::getch(int& key){
     key = buf[i-1];
 	//int c;
 	//while((c = getc(stdin) != EOF && c != '\n')){} //flush stdin
-	DKString key_str = toString(key);
-	DKINFO("DKLinux::getch(): key = "+key_str+"\n");
+	//DKString key_str = toString(key);
+	//DKINFO("DKLinux::getch(): key = "+key_str+"\n");
 	return true;
 }
  
