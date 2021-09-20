@@ -48,6 +48,7 @@ bool App::Init()
 {
 	DKINFO("App::Init()\n");
 	
+#ifdef LINUX
     int i = 5;
     while(i){
 	    int key = getch_test();
@@ -56,6 +57,7 @@ bool App::Init()
 	    DKINFO("key = "+toString(key)+"\n");
         i--;
     }
+#endif
 	
 	return true;
 }
