@@ -5,16 +5,11 @@
 
 DKRml* DKCss::dkRml;
 
-//////////////////
-bool DKCss::Init()
-{
+bool DKCss::Init(){
 	DKDEBUGFUNC();
 	dkRml = DKRml::Get();
-	if(!dkRml){
-		DKERROR("DKCss::Init(): INVALID OBJECTS\n");
-		return false;
-	}
-
+	if(!dkRml)
+		return DKERROR("DKCss::Init(): INVALID OBJECTS\n");
 	//data = ("DKCss", file)
 	if(data.size() < 2){
 		DKString _data = toString(data, ",");
@@ -24,10 +19,8 @@ bool DKCss::Init()
 		DKString _data = toString(data, ",");
 		DKERROR("DKCss::Init("+_data+"): too many parameters\n");
 	}
-	
 	replace(data[1], DKFile::local_assets, "");
 	DKString file = DKFile::local_assets+data[1];
-
 	//Load user agent style sheet
 	const Rml::StyleSheetContainer* doc_sheet = dkRml->document->GetOwnerDocument()->GetStyleSheetContainer();
 	Rml::SharedPtr<Rml::StyleSheetContainer> file_sheet = Rml::Factory::InstanceStyleSheetFile(file.c_str());
@@ -37,7 +30,6 @@ bool DKCss::Init()
 	}
 	else //no current sheet, just load the file sheet
 		dkRml->document->GetOwnerDocument()->SetStyleSheetContainer(std::move(file_sheet));
-
 	return true;
 }
 

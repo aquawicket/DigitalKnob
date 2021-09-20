@@ -3,7 +3,6 @@
 
 bool DKDomWindowEventHandlers::Init(){
 	DKDEBUGFUNC();
-	
 	DKClass::DKCreate("DKDom/DKDomWindowEventHandlers.js");
 	return true;
 }

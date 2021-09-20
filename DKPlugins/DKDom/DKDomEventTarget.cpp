@@ -3,7 +3,6 @@
 #include "DK/DKApp.h"
 #include "DKDom/DKDomEventTarget.h"
 
-
 bool DKDomEventTarget::Init(){
 	DKDEBUGFUNC();
 	DKDuktape::AttachFunction("CPP_DKDomEventTarget_addEventListener", DKDomEventTarget::addEventListener);
@@ -60,11 +59,9 @@ bool DKDomEventTarget::OnEvent(DKEvents* event){
 	else{
 		newEvent = "new Event(\"" + rmlEventAddress + "\")";
 	}
-	
 	//create the event
-	if(duk_peval_string(ctx, newEvent.c_str()) != 0){
+	if(duk_peval_string(ctx, newEvent.c_str()) != 0)
 		DKDuktape::DumpError(newEvent);
-	}
 	*/
 	//dispatch the event
 	DKString dispatchEvent = "DispatchEvent(\""+rmlEventAddress+"\")";

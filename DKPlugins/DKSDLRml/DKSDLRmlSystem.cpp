@@ -1,9 +1,7 @@
 #include <RmlUi/Core.h>
 #include "DKSDLRml/DKSDLRmlSystem.h"
 
-//////////////////////////////////////////////////////////////////////////////////
-Rml::Input::KeyIdentifier RmlSDL2SystemInterface::TranslateKey(SDL_Keycode sdlkey)
-{
+Rml::Input::KeyIdentifier RmlSDL2SystemInterface::TranslateKey(SDL_Keycode sdlkey){
 	DKDEBUGFUNC(sdlkey);
     using namespace Rml::Input;
     switch(sdlkey) {
@@ -355,9 +353,7 @@ Rml::Input::KeyIdentifier RmlSDL2SystemInterface::TranslateKey(SDL_Keycode sdlke
     }
 }
 
-//////////////////////////////////////////////////////////////
-int RmlSDL2SystemInterface::TranslateMouseButton(Uint8 button)
-{
+int RmlSDL2SystemInterface::TranslateMouseButton(Uint8 button){
 	DKDEBUGFUNC(button);
     switch(button){
         case SDL_BUTTON_LEFT:
@@ -379,43 +375,31 @@ int RmlSDL2SystemInterface::TranslateMouseButton(Uint8 button)
     }
 }
 
-/////////////////////////////////////////////
-int RmlSDL2SystemInterface::GetKeyModifiers()
-{
+int RmlSDL2SystemInterface::GetKeyModifiers(){
 	DKDEBUGFUNC();
     SDL_Keymod sdlMods = SDL_GetModState();
     int retval = 0;
     if(sdlMods & KMOD_CTRL)
         retval |= Rml::Input::KM_CTRL;
-
     if(sdlMods & KMOD_SHIFT)
         retval |= Rml::Input::KM_SHIFT;
-
     if(sdlMods & KMOD_ALT)
         retval |= Rml::Input::KM_ALT;
-
 	if(sdlMods & KMOD_NUM)
         retval |= Rml::Input::KM_NUMLOCK;
-
     return retval;
 }
 
-///////////////////////////////////////////////
-double RmlSDL2SystemInterface::GetElapsedTime()
-{
+double RmlSDL2SystemInterface::GetElapsedTime(){
 	//DKDEBUGFUNC();
 	return (float)SDL_GetTicks() / 1000;
 }
 
-////////////////////////////////////////////////////////////////////////////////////////
-bool RmlSDL2SystemInterface::LogMessage(Rml::Log::Type type, const Rml::String& message)
-{
+bool RmlSDL2SystemInterface::LogMessage(Rml::Log::Type type, const Rml::String& message){
 	//DKDEBUGFUNC(type, message);
-	if(has(message,"Loaded font face")){
+	if(has(message,"Loaded font face"))
 		type = Rml::Log::LT_DEBUG;
-	}
-	switch(type)
-	{
+	switch(type){
 	case Rml::Log::LT_ALWAYS:
 		DKINFO("[Rml] "+DKString(message)+"\n");
 		break;
@@ -438,6 +422,5 @@ bool RmlSDL2SystemInterface::LogMessage(Rml::Log::Type type, const Rml::String& 
 		DKINFO("[Rml] "+DKString(message)+"\n");
         break;
 	};
-	
 	return true;
 };

@@ -7,12 +7,10 @@
 #include "DKDuktape/DKDuktape.h"
 #include "RmlUi/Core/Event.h"
 
-///////////////////////////////////////////////
 class DKDomEvent : public DKObjectT<DKDomEvent>
 {
 public:
 	bool Init();
-	
 	// Properties
 	static int bubbles(duk_context* ctx); //Read Only
 	static int cancelBubble(duk_context* ctx);
@@ -49,8 +47,7 @@ public:
 
 	// Extra
 	static int getParameters(duk_context* ctx);
-};
-
+}
 
 REGISTER_OBJECT(DKDomEvent, true)
 

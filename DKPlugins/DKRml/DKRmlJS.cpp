@@ -37,7 +37,6 @@ int DKRmlJS::LoadUrl(duk_context* ctx) {
 	return true;
 }
 
-
 int DKRmlJS::PostProcess(duk_context* ctx) {
 	Rml::ElementList elements;
 	DKRml::Get()->document->GetElementsByTagName(elements, "body");

@@ -6,12 +6,10 @@
 
 #include "DKDuktape/DKDuktape.h"
 
-/////////////////////////////////////////////////
 class DKDomWindow : public DKObjectT<DKDomWindow>
 {
 public:
 	bool Init();
-	
 	// Properties
 	static int closed(duk_context* ctx);
 	static int console(duk_context* ctx);

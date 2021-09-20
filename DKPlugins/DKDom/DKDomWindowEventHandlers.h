@@ -4,14 +4,11 @@
 
 #include "DKDuktape/DKDuktape.h"
 
-
 class DKDomWindowEventHandlers : public DKObjectT<DKDomWindowEventHandlers>
 {
 public:
 	bool Init();
-
 };
-
 
 REGISTER_OBJECT(DKDomWindowEventHandlers, true)
 

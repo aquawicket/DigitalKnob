@@ -378,8 +378,7 @@ int DKDomMouseEvent::y(duk_context* ctx){
 
 // Methods
 ///////////////////////////////////////////////////////
-int DKDomMouseEvent::getModifierState(duk_context* ctx)
-{
+int DKDomMouseEvent::getModifierState(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString eventAddress = duk_require_string(ctx, 0);
 	Rml::Event* event = DKRml::addressToEvent(eventAddress);
@@ -388,14 +387,11 @@ int DKDomMouseEvent::getModifierState(duk_context* ctx)
 		duk_push_boolean(ctx, false);
 		return true;
 	}
-
 	//TODO
 	return false;
 }
 
-/////////////////////////////////////////////////////
-int DKDomMouseEvent::initMouseEvent(duk_context* ctx)
-{
+int DKDomMouseEvent::initMouseEvent(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString eventAddress = duk_require_string(ctx, 0);
 	Rml::Event* event = DKRml::addressToEvent(eventAddress);
@@ -404,7 +400,6 @@ int DKDomMouseEvent::initMouseEvent(duk_context* ctx)
 		duk_push_boolean(ctx, false);
 		return true;
 	}
-
 	//TODO
 	return false;
 }

@@ -6,7 +6,6 @@
 
 #include "DKDuktape/DKDuktape.h"
 
-///////////////////////////////////////////////////////////
 class DKDomEventTarget : public DKObjectT<DKDomEventTarget>
 {
 public:

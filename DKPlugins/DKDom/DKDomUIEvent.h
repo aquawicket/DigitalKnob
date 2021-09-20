@@ -6,12 +6,11 @@
 
 #include "DKDuktape/DKDuktape.h"
 
-///////////////////////////////////////////////////
 class DKDomUIEvent : public DKObjectT<DKDomUIEvent>
 {
 public:
 	bool Init();
-	
+
 	// Properties
 	//static int cancelBubble(duk_context* ctx); //Not standardized, Deprecated
 

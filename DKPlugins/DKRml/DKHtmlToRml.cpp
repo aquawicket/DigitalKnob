@@ -32,13 +32,11 @@ bool DKHtmlToRml::HtmlToRml(const DKString& html, DKString& rml){
 		}
 		return DKERROR("Error: in HtmlToRml()\n");
 	}
-
 	/*
 	////////////////////////////////////////////////////////
 	DKXml xml;
 	if(!xml.LoadDocumentFromString(rml))
 		return false;
-	
 	DKXmlNodes nodes;
 	xml.GetNodes("//a", nodes);
 	for(unsigned int i = 0; i<nodes.size(); ++i){
@@ -55,7 +53,6 @@ bool DKHtmlToRml::HtmlToRml(const DKString& html, DKString& rml){
 	xml.SaveDocumentToString(rml);
 	//////////////////////////////////////////////////////
 	*/
-
 	//DKINFO("\n##################### RML ####################\n");
 	//DKINFO(rml+"\n");
 	//DKINFO("\n##############################################\n\n");
@@ -87,23 +84,18 @@ bool DKHtmlToRml::IndexToRml(const DKString& html, DKString& rml){
 	replace(rml,"\"HTML Tidy for HTML5 for Windows version 5.0.0\" />", "");
 	rml = "<rml>\n"+rml+"</rml>";
 	replace(rml, "<!DOCTYPE html>", ""); //Rml doesn't like <!DOCTYPE html> tags
-
 	DKString rml_css = DKFile::local_assets+"DKRml/DKRml.css"; //add DKRml.css to the head tag
 	replace(rml, "<head />", "<head></head>");
 	replace(rml, "<head>", "<head><link id=\"DKRml/DKRml.css\" type=\"text/css\" href=\""+rml_css+"\"></link>");
-
 	//replace quotes with apostrophes, pugixml will remove quotes inside nodes.
 	//FIXME: code like jSFunc('"+var_in_quotes+"') will NOT work. 
 	//Other Examples: alert("It's \"game\" time."); or alert('It\'s "game" time.');
 	//replace(rml,"\"","'");
-	
 	//Rml does not recognize favicons, TODO
 	//replace(rml, "<link rel=\"shortcut icon\" id=\"favicon.ico\" href=\"favicon.ico\"></link>", "");
-
 	//DKXml xml;
 	//if(!xml.LoadDocumentFromString(rml))
 	//	return false;
-
 	/*
 	if (!xml.FindNode("//body")) {
 		DKERROR("No body tag\n");
@@ -111,7 +103,6 @@ bool DKHtmlToRml::IndexToRml(const DKString& html, DKString& rml){
 		//todo, we need to move the rest of the content into the body node.
 	}
 	*/
-
 	/*
 	//Add the base DKRml.css stylesheet
 	xml.PrependNode("//head","link");
@@ -119,12 +110,9 @@ bool DKHtmlToRml::IndexToRml(const DKString& html, DKString& rml){
 	xml.SetAttributes("//head/link[1]","type","text/css");
 	xml.SetAttributes("//head/link[1]","href","DKRml/DKRml.css");
 	*/
-
 	//Rml cannot read nodes outside of the body, so add a html node we can work with.
 	//xml.PrependNode("//body", "html"); 
-
 	//xml.SaveDocumentToString(rml);
-
 	HtmlToRml(rml, rml);
 	return true;
 }
@@ -256,6 +244,8 @@ bool DKHtmlToRml::PostProcess(Rml::Element* element) {
 			//replace(inner,"\t","");
 			DKDuktape::Get()->LoadJSString("inlineScript", inner);
 		}
+		
+		//TODO: dispatch a script.onload event
 	}
 
 //DEBUG - Lets see the code

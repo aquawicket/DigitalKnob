@@ -16,7 +16,6 @@ class DKRml : public Rml::EventListener, public DKObjectT<DKRml>{
 public:
 	bool Init();
 	bool End();
-
 	bool LoadFont(const DKString& file);
 	bool LoadFonts();
 	bool LoadHtml(const DKString& url);
@@ -32,7 +31,6 @@ public:
 	static DKString eventToAddress(Rml::Event* event);
 	static Rml::Element* addressToElement(const DKString& address);
 	static DKString elementToAddress(Rml::Element* element);
-
 	DKString href;
 	DKString protocol;
 	DKString _path;
@@ -41,7 +39,6 @@ public:
 	Rml::ElementDocument* document;
 	static DKRmlFile* dkRmlFile;
 	Rml::Element* hover;
-
 	DKHtmlToRml dkHtmlToRml;
 };
 

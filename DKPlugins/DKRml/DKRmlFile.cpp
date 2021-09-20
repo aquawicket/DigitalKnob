@@ -3,26 +3,21 @@
 #include "DKRml.h"
 #include "DKCurl/DKCurl.h"
 
-Rml::FileHandle DKRmlFile::Open(const Rml::String& path)
-{
+Rml::FileHandle DKRmlFile::Open(const Rml::String& path){
 	DKDEBUGFUNC("Rml::String&");
-
 	DKString _url = path;//.CString();
 	if (has(_url, ":/")) { //could be http:// , https:// or C:/
 		//absolute path
 	}
 	else if(has(_url,"//")){ //could be //www.site.com/style.css or //site.com/style.css
 		//_url = DKRml::Get()->protocol+":"+_url;
-		DKERROR("DKRml::LoadUrl(): no protocol specified\n"); //absolute path without protocol
-		return false;
+		return DKERROR("DKRml::LoadUrl(): no protocol specified\n"); //absolute path without protocol
 	}
 	else{
 		if(_url.find("/home") == std::string::npos) //url already has linux working directory
 			_url = DKRml::Get()->workingPath+_url;
-		//DKERROR("DKRml::LoadUrl(): cannot load relative paths\n");
-		//return false;
+		//return DKERROR("DKRml::LoadUrl(): cannot load relative paths\n");
 	}
-
 	if(has(_url,"://")){
 		DKFile::MakeDir(DKFile::local_assets+"Cache");
 		DKString filename;
@@ -41,8 +36,7 @@ Rml::FileHandle DKRmlFile::Open(const Rml::String& path)
 
 /// Closes a previously opened file.
 /// @param file The file handle previously opened through Open().
-void DKRmlFile::Close(Rml::FileHandle file)
-{
+void DKRmlFile::Close(Rml::FileHandle file){
 	DKDEBUGFUNC(file);
 	fclose((FILE*) file);
 }
@@ -52,8 +46,7 @@ void DKRmlFile::Close(Rml::FileHandle file)
 /// @param size The number of bytes to read into the buffer.
 /// @param file The handle of the file.
 /// @return The total number of bytes read into the buffer.
-size_t DKRmlFile::Read(void* buffer, size_t size, Rml::FileHandle file)
-{
+size_t DKRmlFile::Read(void* buffer, size_t size, Rml::FileHandle file){
 	DKDEBUGFUNC(buffer, size, file);
 	return fread(buffer, 1, size, (FILE*) file);
 }
@@ -63,8 +56,7 @@ size_t DKRmlFile::Read(void* buffer, size_t size, Rml::FileHandle file)
 /// @param offset The number of bytes to seek.
 /// @param origin One of either SEEK_SET (seek from the beginning of the file), SEEK_END (seek from the end of the file) or SEEK_CUR (seek from the current file position).
 /// @return True if the operation completed successfully, false otherwise.
-bool DKRmlFile::Seek(Rml::FileHandle file, long offset, int origin)
-{
+bool DKRmlFile::Seek(Rml::FileHandle file, long offset, int origin){
 	DKDEBUGFUNC(file, offset, origin);
 	return fseek((FILE*) file, offset, origin) == 0;
 }
@@ -72,8 +64,7 @@ bool DKRmlFile::Seek(Rml::FileHandle file, long offset, int origin)
 /// Returns the current position of the file pointer.
 /// @param file The handle of the file to be queried.
 /// @return The number of bytes from the origin of the file.
-size_t DKRmlFile::Tell(Rml::FileHandle file)
-{
+size_t DKRmlFile::Tell(Rml::FileHandle file){
 	DKDEBUGFUNC(file);
 	return ftell((FILE*) file);
 }

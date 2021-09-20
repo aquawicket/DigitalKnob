@@ -19,13 +19,11 @@ bool DKRml::Init(){
 	DKDEBUGFUNC();
 	DKClass::DKCreate("DKRmlJS");
 	DKClass::DKCreate("DKRmlV8");
-	
 	document = NULL;
 	if(!dkRmlFile){ 
 		dkRmlFile = new DKRmlFile();
 		Rml::SetFileInterface(dkRmlFile);
 	}
-
 	//Create DKSDLRml or DKOSGRml
 	if(DKClass::DKAvailable("DKSDLRml")){
 		DKClass::DKCreate("DKSDLRml");
@@ -37,13 +35,9 @@ bool DKRml::Init(){
 		DKERROR("DKRml::Init(): No registered window found\n");
 		return false;
 	}
-	
 	if(DKClass::DKAvailable("DKSDLRml")){
-		if(!Rml::Initialise()){
-			DKERROR("Rml::Initialise(): failed\n");
-			return false;
-		}
-
+		if(!Rml::Initialise())
+			return DKERROR("Rml::Initialise(): failed\n");
 		int w;
 		if(!DKWindow::GetWidth(w)){ return false; }
 		int h;
@@ -51,12 +45,9 @@ bool DKRml::Init(){
 		context = Rml::CreateContext("default", Rml::Vector2i(w, h));
 	}
 #ifndef LINUX
-	if (!Rml::Debugger::Initialise(context)) {
-		DKERROR("Rml::Debugger::Initialise(): failed\n");
-		return false;
-	}
+	if (!Rml::Debugger::Initialise(context))
+		return DKERROR("Rml::Debugger::Initialise(): failed\n");
 #endif
-
 	//Add missing stylesheet properties
 	//TODO - https://developer.mozilla.org/en-US/docs/Web/CSS/background-repeat
 	Rml::PropertyId background_repeat = Rml::StyleSheetSpecification::RegisterProperty("background-repeat", "repeat", false)
@@ -68,24 +59,17 @@ bool DKRml::Init(){
 		.AddParser("keyword", "none, hidden")
 		.AddParser("string")
 		.GetId(); //this supresses border-style warnings temporarily
-
 	context->SetDocumentsBaseTag("html");
 	LoadFonts();
-
 	DKEvents::AddRegisterEventFunc(&DKRml::RegisterEvent, this);
 	//DKEvents::AddUnegisterEventFunc(&DKRml::UnregisterEvent, this);
 	//DKEvents::AddSendEventFunc(&DKRml::SendEvent, this);
-	
 	DKClass::DKCreate("DKRmlJS");
-
 	Rml::Factory::RegisterElementInstancer("html", new Rml::ElementInstancerGeneric<Rml::ElementDocument>);
 	Rml::XMLParser::RegisterNodeHandler("html", std::make_shared<Rml::XMLNodeHandlerBody>());
-	
 	Rml::XMLParser::RegisterNodeHandler("head", std::make_shared<HeadInstancer>());
-	
 	Rml::Factory::RegisterElementInstancer("body", new Rml::ElementInstancerElement);
 	Rml::XMLParser::RegisterNodeHandler("body", std::make_shared<Rml::XMLNodeHandlerDefault>());
-
 	//* Load the javascript DOM	
 	//* Dom thats doesn't need a screen
 	DKClass::DKCreate("DKDomConsole");
@@ -95,7 +79,6 @@ bool DKRml::Init(){
 	DKClass::DKCreate("DKDomXMLHttpRequestEventTarget");
 	DKClass::DKCreate("DKDomXMLHttpRequest");
 	DKClass::DKCreate("DKDomScreen");
-
 	//* Dom that needs a screen
 	DKClass::DKCreate("DKDomWindowOrWorkerGlobalScope");
 	DKClass::DKCreate("DKDomWindowEventHandlers");
@@ -112,13 +95,11 @@ bool DKRml::Init(){
 	DKClass::DKCreate("DKDomUIEvent");
 	DKClass::DKCreate("DKDomKeyboardEvent");
 	DKClass::DKCreate("DKDomMouseEvent");
-
 	DKString html;
 	DKString workingPath = DKFile::local_assets;
 	DKFile::FileToString(workingPath +"DKRml/blank.html", html);
 	DKFile::ChDir(workingPath);
 	LoadHtml(html);
-	
 	return true;
 }
 
@@ -126,11 +107,9 @@ bool DKRml::End(){
 	DKDEBUGFUNC();
 	DKClass::DKClose("DKRmlJS");
 	DKClass::DKClose("DKRmlV8");
-	
 	DKEvents::RemoveRegisterEventFunc(&DKRml::RegisterEvent, this);
 	DKEvents::RemoveUnegisterEventFunc(&DKRml::UnregisterEvent, this);
 	DKEvents::RemoveSendEventFunc(&DKRml::SendEvent, this);
-
 	if(context){
 		Rml::ReleaseTextures();
 		Rml::Shutdown();
@@ -143,10 +122,8 @@ bool DKRml::End(){
 
 bool DKRml::LoadFont(const DKString& file){
 	DKDEBUGFUNC(file);
-	if(!Rml::LoadFontFace(file.c_str())){
-		DKERROR("DKRml::LoadFont(): Could not load "+file+"\n");
-		return false;
-	}
+	if(!Rml::LoadFontFace(file.c_str()))
+		return DKERROR("DKRml::LoadFont(): Could not load "+file+"\n");
 	return true;
 }
 
@@ -163,7 +140,6 @@ bool DKRml::LoadFonts(){
 			LoadFont(DKFile::local_assets+"DKRml/"+file);
 		}
 	}
-
 	DKStringArray files;
 	DKFile::GetDirectoryContents(DKFile::local_assets, files);
 	for(unsigned int i=0; i<files.size(); ++i){
@@ -182,39 +158,32 @@ bool DKRml::LoadHtml(const DKString& html){
 	//// Prepair the html document for rocket
 	DKString rml = html;
 	rml = "<rml id=\"rml\">\n" + rml + "</rml>";
-
 	//dkHtmlToRml.TidyFile(rml,rml);
 	replace(rml, "<!DOCTYPE html>", ""); //Rml doesn't like <!DOCTYPE html> tags
 	replace(rml, "<meta name=\"generator\" content=", "");
 	replace(rml, "\"HTML Tidy for HTML5 for Windows version 5.7.28\" />", "");
-
 	/*
 	DKINFO("\n");
 	DKINFO("####### CODE GOING INTO RML ##########\n");
 	DKINFO(rml + "\n");
 	DKINFO("#########################################\n");
 	*/
-
 	//// Clear any document and load the rml into the document
 	if (document) {
 		Rml::Factory::ClearStyleSheetCache();
 		document->Close();
 	}
-
 	auto stream = std::make_unique<Rml::StreamMemory>((Rml::byte*)rml.c_str(), rml.size());
 	stream->SetSourceURL("[document from memory]");
 	Rml::PluginRegistry::NotifyDocumentOpen(context, stream->GetSourceURL().GetURL());
 	document = context->CreateDocument("html");
-
 	//Create DOM javascript instance of the document using the documents element address
 	DKString rval;
 	DKString document_address = elementToAddress(document);
 	DKDuktape::RunDuktape("var document = new Document(\"" + document_address + "\");", rval);
-
 	Rml::Element* ele = document;
 	Rml::XMLParser parser(ele);
 	parser.Parse(stream.get());
-
 	//Make sure we have <head> and <body> tags
 	Rml::ElementList heads;
 	Rml::ElementList bodys;
@@ -235,7 +204,6 @@ bool DKRml::LoadHtml(const DKString& html){
 		document->GetOwnerDocument()->AppendChild(document->CreateElement("body"), true);
 	else if (!head && body)
 		document->GetOwnerDocument()->InsertBefore(document->CreateElement("head"), body);
-
 	//Load user agent style sheet
 	DKString file = DKFile::local_assets + "DKRml/DKRml.css";
 	const Rml::StyleSheetContainer* doc_sheet = document->GetOwnerDocument()->GetStyleSheetContainer();
@@ -247,43 +215,32 @@ bool DKRml::LoadHtml(const DKString& html){
 	}
 	else  //no current sheet, just load the file sheet
 		document->GetOwnerDocument()->SetStyleSheetContainer(std::move(file_sheet));
-
 	//Finish loading the document
 	//Rml::ElementUtilities::BindEventAttributes(document);
 	Rml::PluginRegistry::NotifyDocumentLoad(document);
 	document->DispatchEvent(Rml::EventId::Load, Rml::Dictionary());
 	document->UpdateDocument();
-
 	if(!document){
 		document = context->LoadDocumentFromMemory("");
-		DKERROR("DKRml::LoadHtml(): document invalid\n");
-		return false;
+		return DKERROR("DKRml::LoadHtml(): document invalid\n");
 	}
-
-
 	Rml::ElementList elements;
 	DKRml::Get()->document->GetElementsByTagName(elements, "body");
-	if(!elements[0]){
+	if(!elements[0])
 		return DKERROR("body element invalid\n");
-	}
 	//dkHtmlToRml.PostProcess(document);
 	dkHtmlToRml.PostProcess(elements[0]);
-
 	document->Show();
-
 #ifdef ANDROID
 	//We have to make sure the fonts are loaded on ANDROID
 	LoadFonts();
 #endif
-
 	DKString code = document->GetContext()->GetRootElement()->GetInnerRML();
-
 #ifdef DEBUG_TEST
 	DKINFO("\n");
 	DKINFO("################ CODE FROM RmlUi ################\n");
 	DKINFO(code+"\n");
 	DKINFO("#################################################\n");
-
 	//find the last <html occurance
 	int n = code.rfind("<html");
 	if(n < 0){
@@ -292,7 +249,6 @@ bool DKRml::LoadHtml(const DKString& html){
 	}
 	code = code.substr(n);
 	replace(code, "<", "\n<");
-	
 	DKINFO("\n");
 	DKINFO("############## last <html> element CODE FROM RmlUi ##############\n");
 	DKINFO(code+"\n");
@@ -307,45 +263,34 @@ bool DKRml::LoadUrl(const DKString& url){
 	if(has(_url,":/")) //could be http:// , https://, file:/// or C:/
 		href = _url; //absolute path including protocol
 	else if(has(_url,"//")){ //could be //www.site.com/style.css or //site.com/style.css
-		DKERROR("DKRml::LoadUrl(): no protocol specified\n"); //absolute path without protocol
-		return false;
+		return DKERROR("DKRml::LoadUrl(): no protocol specified\n"); //absolute path without protocol
 	}
 	else
 		_url = workingPath + _url;
-
 	//Get the working path;
 	std::size_t found = _url.find_last_of("/");
 	workingPath = _url.substr(0, found + 1);
 	DKWARN("DKRml::LoadUrl(): workingPath: " + workingPath + "\n");
 	DKWARN("DKRml::LoadUrl(): href: " + href + "\n");
-
 	//get the protocol
 	int n = _url.find(":");
 	protocol = _url.substr(0,n);
 	DKWARN("DKRml::LoadUrl(): protocol: "+protocol+"\n");
-
 	found = _url.rfind("/");
 	_path = _url.substr(0,found+1);
 	//DKWARN("DKRml::LoadUrl(): last / at "+toString(found)+"\n");
 	DKWARN("DKRml::LoadUrl(): _path = "+_path+"\n");
-
 	DKString html;
 	if(has(_url, "http://") || has(_url, "https://")){
 		DKClass::DKCreate("DKCurl");
-		if(!DKCurl::Get()->HttpFileExists(_url)){
-			DKERROR("Could not locate "+_url+"\n");
-			return false;
-		}
-		if(!DKCurl::Get()->HttpToString(_url, html)){
-			DKERROR("Could not get html from url "+_url+"\n");
-			return false;
-		}
+		if(!DKCurl::Get()->HttpFileExists(_url))
+			return DKERROR("Could not locate "+_url+"\n");
+		if(!DKCurl::Get()->HttpToString(_url, html))
+			return DKERROR("Could not get html from url "+_url+"\n");
 	}
 	else{
-		if(!DKFile::FileToString(_url, html)){
-			DKERROR("DKFile::FileToString failed on "+_url+"\n");
-			return false;
-		}
+		if(!DKFile::FileToString(_url, html))
+			return DKERROR("DKFile::FileToString failed on "+_url+"\n");
 	}
 	LoadHtml(html);
 	return true;
@@ -359,20 +304,17 @@ void DKRml::ProcessEvent(Rml::Event& rmlEvent){
 	//DKString rval;
 	//DKDuktape::Get()->RunDuktape(code, rval);
 	//DKINFO("DKRml::ProcessEvent(): "+code+": rval="+rval+"\n");
-
 	//DKDEBUGFUNC(event);
-	if (!rmlEvent.GetCurrentElement()) { return; } //MUST BE VALID!
-	if (!rmlEvent.GetTargetElement()) { return; } //MUST BE VALID!
-
+	if (!rmlEvent.GetCurrentElement())
+		return;
+	if (!rmlEvent.GetTargetElement())
+		return;
 	Rml::Element* currentElement = rmlEvent.GetCurrentElement();
 	DKString currentElementAddress = elementToAddress(currentElement);
-
 	Rml::Element* targetElement = rmlEvent.GetTargetElement();
 	DKString targetElementAddress = elementToAddress(targetElement);
-
 	DKString type = rmlEvent.GetType();
 	int phase = (int)rmlEvent.GetPhase(); //{ None, Capture = 1, Target = 2, Bubble = 4 };
-
 	/*
 	// Send this event back to duktape to be processed in javascript
 	DKString evnt = "{type:'"+type+"', eventPhase:"+toString(phase)+"}";
@@ -381,16 +323,17 @@ void DKRml::ProcessEvent(Rml::Event& rmlEvent){
 	DKDuktape::Get()->RunDuktape(code, rval);
 	if(!rval.empty()){ DKINFO("DKRml::ProcessEvent(): rval = "+rval+"\n"); }
 	*/
-
 	// If the event bubbles up, ignore elements underneith 
 	Rml::Context* context = document->GetContext();
 	Rml::Element* hoverElement = NULL;
-	if (context) { hoverElement = context->GetHoverElement(); }
+	if (context)
+		hoverElement = context->GetHoverElement();
 	Rml::Element* hoverParent = NULL;
-	if (hoverElement) { hoverParent = hoverElement->GetParentNode(); }
-	if (hoverParent) { hover = hoverParent; }
+	if (hoverElement)
+		hoverParent = hoverElement->GetParentNode();
+	if (hoverParent)
+		hover = hoverParent;
 	//if(rmlEvent.GetPhase() == 1 && currentElement != hover){ return; }
-
 	/*
 	//Event Monitor
 	DKString tag = currentElement->GetTagName();
@@ -401,7 +344,6 @@ void DKRml::ProcessEvent(Rml::Event& rmlEvent){
 	DKString string = "EVENT: " + type + " (current) " + tag + "> " + id + " (target) " + target_tag + "> " + target_id + "(hover)" + hover_id + "\n";
 	DKINFO(string + "\n");
 	*/
-
 #ifdef ANDROID
 	//Toggle Keyboard on text element click
 	if (type == "mousedown") {
@@ -411,7 +353,6 @@ void DKRml::ProcessEvent(Rml::Event& rmlEvent){
 			return;
 		}
 	}
-
 	//Hide Keyboard on input Enter
 	if (type == "keydown" && currentElement->GetTagName() == "input") {
 		int key = rmlEvent.GetParameter<int>("key_identifier", 0);
@@ -421,22 +362,19 @@ void DKRml::ProcessEvent(Rml::Event& rmlEvent){
 		}
 	}
 #endif
-
 	if (same(type, "mouseup") && rmlEvent.GetParameter<int>("button", 0) == 1) 
 		type = "contextmenu";
-	
 	for(unsigned int i = 0; i < DKEvents::events.size(); ++i){
 		DKEvents* ev = DKEvents::events[i];
 		//certain stored events are altered before comparison 
 		DKString _type = ev->GetType();
-		if (same(_type, "input")) { _type = "change"; }
-
+		if (same(_type, "input"))
+			_type = "change";
 		//// PROCESS ELEMENT EVENTS //////
 		if (same(ev->GetId(), currentElementAddress) && same(_type, type)) {
 			ev->data.clear();
 			ev->data.push_back(rmlEventAddress);
 			//ev->rEvent = &rmlEvent;
-
 			/*
 			//pass the value
 			if (same(type, "keydown") || same(type, "keyup")) {
@@ -449,12 +387,10 @@ void DKRml::ProcessEvent(Rml::Event& rmlEvent){
 			}
 			*/
 			//FIXME - we run the risk of having event function pointers that point to nowhere
-			if (!ev->event_func(ev)) {
-				DKERROR("DKRml::ProcessEvent failed \n");
-				return;
-			} //call the function linked to the event
+			if (!ev->event_func(ev))
+				return DKERROR("DKRml::ProcessEvent failed \n");
+		    //call the function linked to the event
 			//DKINFO("Event: "+ev->type+", "+ev->id+"\n");
-
 			//FIXME - StopPropagation() on a mousedown even will bock the elements ability to drag
 			// we need to find a way to stop propagation of the event, while allowing drag events.
 #ifdef DRAG_FIX
@@ -473,25 +409,18 @@ void DKRml::ProcessEvent(Rml::Event& rmlEvent){
 
 bool DKRml::RegisterEvent(const DKString& elementAddress, const DKString& type){
 	DKDEBUGFUNC(elementAddress, type);
-	if(elementAddress.empty()){ 
-		DKERROR("DKRml::RegisterEvent(): elementAddress empty\n"); 
-		return false; 
-	}
-	if(type.empty()){ 
-		DKERROR("DKRml::RegisterEvent("+elementAddress+"): type empty\n");
-		return false; 
-	}
-	
+	if(elementAddress.empty())
+		return DKERROR("DKRml::RegisterEvent(): elementAddress empty\n"); 
+	if(type.empty())
+		return DKERROR("DKRml::RegisterEvent("+elementAddress+"): type empty\n");
 	Rml::Element* element = addressToElement(elementAddress.c_str());
-	if(!element){ 
-		DKERROR("DKRml::RegisterEvent("+elementAddress+","+type+"): element invalid\n");
-		return false; 
-	}
-
+	if(!element)
+		return DKERROR("DKRml::RegisterEvent("+elementAddress+","+type+"): element invalid\n");
 	DKString _type = type;
-	if(same(type, "contextmenu")){ _type = "mouseup"; }
-	if(same(type, "input")){ _type = "change"; 	}
-		
+	if(same(type, "contextmenu"))
+		_type = "mouseup";
+	if(same(type, "input"))
+		_type = "change";
 	//NOTE: This was an old libRocket issue and has not been tested for a long time
 	//FIXME - StopPropagation() on a mousedown event will bock the elements ability to drag
 	// we need to find a way to stop propagation of the event, while allowing drag events.
@@ -500,7 +429,6 @@ bool DKRml::RegisterEvent(const DKString& elementAddress, const DKString& type){
 	// first and then finally process the element clicked, allowing drag.
 	// WE don't want to process mousedown on other events! We want a one-shot mousedown event
 	// processed for that element and stopped. And it must allow drag to bleed thru.
-
 #ifdef DRAG_FIX
 	if(same(type, "mousedown"))
 		element->AddEventListener(_type.c_str(), this, true); //bubble up
@@ -515,15 +443,17 @@ bool DKRml::RegisterEvent(const DKString& elementAddress, const DKString& type){
 
 bool DKRml::SendEvent(const DKString& elementAddress, const DKString& type, const DKString& value){
 	//DKDEBUGFUNC(id, type, value);
-	if(elementAddress.empty()){ return false; }
-	if(type.empty()){ return false; }
-	if(!document){ return false; }
+	if(elementAddress.empty())
+		return DKERROR("elementAddress invalid");
+	if(type.empty())
+		return DKERROR("type invalid");
+	if(!document)
+		return DKERROR("document invalid");
 	//if(same(addressToElement(elementAddress)->GetId(),"window"))
 		//DKWARN("DKRml::SendEvent(): recieved global window event\n");
-
 	Rml::Element* element = addressToElement(elementAddress);
-	if(!element){ return false; }
-	
+	if(!element)
+		return DKERROR("element invalid");
 	Rml::Dictionary parameters;
 	//parameters.Set("msg0", value.c_str());
 	element->DispatchEvent(type.c_str(), parameters, false);
@@ -559,17 +489,21 @@ bool DKRml::DebuggerToggle(){
 
 bool DKRml::UnregisterEvent(const DKString& elementAddress, const DKString& type){
 	DKDEBUGFUNC(elementAddress, type);
-	if(elementAddress.empty()){ return false; } //no id
-	if(type.empty()){ return false; } //no type
-	if (same(addressToElement(elementAddress)->GetId(), "window")) { return false; }
+	if(elementAddress.empty())
+		return DKERROR("elementAddress invalid");
+	if(type.empty())
+		return DKERROR("type invalid");
+	if (same(addressToElement(elementAddress)->GetId(), "window"))
+		return DKERROR("can not Unregister window event");
 	//if(!DKValid("DKRml0")){ return false; }
-
 	Rml::Element* element = addressToElement(elementAddress);
-	if(!element){ return false; } //no element
-
+	if(!element)
+		return DKERROR("element invalid");
 	DKString _type = type;
-	if(same(type, "contextmenu")){ _type = "mouseup"; }
-	if(same(type, "input")){ _type = "change"; 	}
+	if(same(type, "contextmenu"))
+		_type = "mouseup";
+	if(same(type, "input"))
+		_type = "change";
 	element->RemoveEventListener(_type.c_str(), this, false);
 	return true;
 }
@@ -581,7 +515,6 @@ Rml::Event* DKRml::addressToEvent(const DKString& address){
 		DKERROR("the address ("+address+") is not a valid hex notation\n");
 		return NULL;
 	}
-
 	//Convert a string of an address back into a pointer
 	std::stringstream ss;
 	ss << address.substr(2, address.size() - 2);
@@ -605,7 +538,6 @@ DKString DKRml::eventToAddress(Rml::Event* event){
 		return NULL;
 	}
 	std::stringstream ss;
-
 	const void* address = static_cast<const void*>(event);
 #ifdef WIN32
 	ss << "0x" << address;
@@ -618,7 +550,6 @@ DKString DKRml::eventToAddress(Rml::Event* event){
 Rml::Element* DKRml::addressToElement(const DKString& address){
 	//DKDEBUGFUNC(address);
 	Rml::Element* element;
-
 	if (address == "window")
 		element = DKRml::Get()->document->GetContext()->GetRootElement(); //Root element that holds all the documents.
 	else if (address == "document")

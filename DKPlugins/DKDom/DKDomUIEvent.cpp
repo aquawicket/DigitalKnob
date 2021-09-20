@@ -6,11 +6,9 @@
 #include "DKRml/DKRml.h"
 
 
-/////////////////////////
-bool DKDomUIEvent::Init()
-{
+bool DKDomUIEvent::Init(){
 	DKDEBUGFUNC();
-
+	
 	// Properties
 	//DKDuktape::AttachFunction("CPP_DKDomUIEvent_cancelBubble", DKDomUIEvent::cancelBubble);
 
@@ -20,7 +18,6 @@ bool DKDomUIEvent::Init()
 	DKClass::DKCreate("DKDom/DKDomUIEvent.js");
 	return true;
 }
-
 
 // Properties
 /*
@@ -46,8 +43,7 @@ int DKDomUIEvent::cancelBubble(duk_context* ctx)
 
 // Methods
 ///////////////////////////////////////////////
-int DKDomUIEvent::initUIEvent(duk_context* ctx)
-{
+int DKDomUIEvent::initUIEvent(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString eventAddress = duk_require_string(ctx, 0);
 	Rml::Event* event = DKRml::addressToEvent(eventAddress);
@@ -56,7 +52,6 @@ int DKDomUIEvent::initUIEvent(duk_context* ctx)
 		duk_push_boolean(ctx, false);
 		return true;
 	}
-
 	//TODO
 	return false;
 }

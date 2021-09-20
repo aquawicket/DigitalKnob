@@ -9,7 +9,6 @@ class DKCss : public DKObjectT<DKCss>
 public:
 	bool Init();
 	bool End();
-
 	static DKRml* dkRml;
 };
 

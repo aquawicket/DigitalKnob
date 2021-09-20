@@ -265,7 +265,7 @@ bool DKDuktape::LoadFile(const DKString& path){
 	DKFile::FileToString(path, js);
 	if(duk_peval_file(ctx, path.c_str()) != 0)
 		DKDuktape::DumpError(js);
-	duk_pop(ctx);  // ignore result?
+	duk_pop(ctx);  // what does this do?
 	//DKString filename;
 	//DKFile::GetFileName(path, filename);
 	filelist.push_back(path);
