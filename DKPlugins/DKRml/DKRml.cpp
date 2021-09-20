@@ -87,6 +87,7 @@ bool DKRml::Init(){
 	DKClass::DKCreate("DKDomNode");
 	DKClass::DKCreate("DKDomElement");
 	DKClass::DKCreate("DKDomHTMLElement");
+	DKClass::DKCreate("DKDomHTMLScriptElement");
 	DKClass::DKCreate("DKDomHTMLCollection");
 	DKClass::DKCreate("DKDomCSSStyleDeclaration");
 	DKClass::DKCreate("DKDomDocumentOrShadowRoot");
