@@ -640,9 +640,9 @@ bool DKFile::GetSetting(const DKString& file, const DKString& setting, DKString&
 	}
 	DKString filestring;
 	if(!FileToString(path, filestring))
-		return DKERROR("FileToString() failed \n");
+		return DKERROR("FileToString("+path+", "+filestring+") failed \n");
 	if(!getSettingFromString(filestring, setting, value))
-		return DKERROR("getSettingFromString() failed \n");
+		return DKERROR("getSettingFromString("+filestring+", "+setting+", "+value+") failed \n");
 	return true;
 }
 
