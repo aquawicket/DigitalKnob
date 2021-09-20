@@ -8,12 +8,36 @@
 #include <X11/XKBlib.h>
 #include <X11/extensions/XTest.h>  //requires  libxtst-dev
 #include <alsa/asoundlib.h>
+#include <unistd.h> //for getch()
+#include <termios.h> //for getch()
 
+char DKLinux::getch(){
+    char buf = 0;
+    struct termios old = {0};
+    fflush(stdout);
+    if(tcgetattr(0, &old) < 0)
+        perror("tcsetattr()");
+    old.c_lflag &= ~ICANON;
+    old.c_lflag &= ~ECHO;
+    old.c_cc[VMIN] = 1;
+    old.c_cc[VTIME] = 0;
+    if(tcsetattr(0, TCSANOW, &old) < 0)
+        perror("tcsetattr ICANON");
+    if(read(0, &buf, 1) < 0)
+        perror("read()");
+    old.c_lflag |= ICANON;
+    old.c_lflag |= ECHO;
+    if(tcsetattr(0, TCSADRAIN, &old) < 0)
+        perror("tcsetattr ~ICANON");
+    return buf;
+}
+ 
 bool DKLinux::GetKey(int& key){
 	DKDEBUGFUNC(key);
-	system("stty raw"); // Set terminal to raw mode    
-	key = getchar();       
-	system("stty cooked"); // Reset terminal to normal "cooked" mode    
+	//system("stty raw"); // Set terminal to raw mode    
+	//key = getchar();       
+	//system("stty cooked"); // Reset terminal to normal "cooked" mode    
+	key = getch();
 	return true;
 }
 
