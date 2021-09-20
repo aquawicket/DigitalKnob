@@ -15,7 +15,18 @@ var Console = function(pointer) {
         CPP_DKConsole_debug(msg + "\n");
     }
     Console.prototype.error = function(msg) {
-        CPP_DKConsole_error(msg + "\n");
+        //CPP_DKConsole_error(msg + "\n");
+		const e = new Error(msg);
+		if (!e.stack) {
+			try {
+				throw e; // old browsers need the Error thrown to fill the stack
+			} 
+			catch (e) {
+				if (!e.stack)
+					return error("e.stack invalid"); // browser too old
+			}
+		}
+		CPP_DKConsole_error(e.stack+"\n");
     }
     Console.prototype.exception = function(msg) {
         CPP_DKConsole_exception(msg + "\n");
@@ -36,7 +47,7 @@ var Console = function(pointer) {
         CPP_DKConsole_log(msg + "\n");
     }
     Console.prototype.trace = function(msg) {
-        CPP_DKConsole_trace(msg + "\n");
+		CPP_DKConsole_trace(msg + "\n");
     }
     Console.prototype.warn = function(msg) {
         CPP_DKConsole_warn(msg + "\n");
