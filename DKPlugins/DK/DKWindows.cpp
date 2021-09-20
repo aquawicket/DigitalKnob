@@ -250,7 +250,6 @@ bool DKWindows::GetClipboard(DKString& text){
 
 bool DKWindows::GetKey(int& key){
 	DKDEBUGFUNC(key);
-	//DKINFO("Press a key...\n");
 	key = _getch();
 	return true;
 }
