@@ -12,6 +12,7 @@
 #include <termios.h> //for getch()
 
 bool DKLinux::getch(int& key){
+	DKDEBUGFUNC("key");
 	char buf[5];
     struct termios old = {0};
     fflush(stdout);
@@ -39,12 +40,13 @@ bool DKLinux::getch(int& key){
     key = buf[i-1];
 	//int c;
 	//while((c = getc(stdin) != EOF && c != '\n')){} //flush stdin
-	DKINFO("DKLinux::getch(): key = "+toString(key)+"\n");
+	DKString key_str = toString(key);
+	DKINFO("DKLinux::getch(): key = "+key_str+"\n");
 	return true;
 }
  
 bool DKLinux::GetKey(int& key){
-	DKDEBUGFUNC(key);
+	DKDEBUGFUNC("key");
 	//system("stty raw"); // Set terminal to raw mode    
 	//key = getchar();       
 	//system("stty cooked"); // Reset terminal to normal "cooked" mode

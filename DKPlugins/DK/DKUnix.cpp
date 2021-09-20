@@ -10,11 +10,13 @@
 */
 
 bool DKUnix::GetKey(int& key){
+	DKDEBUGFUNC(key);
 	key = getchar();
 	return true;
 }
 
 bool DKUnix::Sleep(int milliseconds){
+	//DKDEBUGFUNC(milliseconds);
 //#ifdef ANDROID
 	//sleep(milliseconds * 1000);
 //#else
@@ -24,6 +26,7 @@ bool DKUnix::Sleep(int milliseconds){
 }
 
 bool DKUnix::GetUsername(DKString& username){
+	DKDEBUGFUNC(username);
 #ifdef LINUX
 	if (const char* usr_a = std::getenv("USER")){ //'USERNAME' on Windows
 		username = usr_a;

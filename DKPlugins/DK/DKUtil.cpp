@@ -278,7 +278,7 @@ bool DKUtil::GetFrames(long& frames){
 }
 
 bool DKUtil::GetKey(int& key){
-	DKDEBUGFUNC(key);
+	DKDEBUGFUNC("key");
 #ifdef WIN32
 	return DKWindows::GetKey(key);
 #endif
