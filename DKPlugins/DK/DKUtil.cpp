@@ -285,6 +285,9 @@ bool DKUtil::GetKey(int& key){
 #ifdef LINUX
 	return DKLinux::GetKey(key);
 #endif
+#ifdef RASPBERRY
+	return DKLinux::GetKey(key);
+#endif
 #if defined(MAC) || defined(IOS)
 	return DKUnix::GetKey(key);
 #endif

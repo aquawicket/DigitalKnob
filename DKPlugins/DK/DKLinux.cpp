@@ -12,6 +12,7 @@
 #include <termios.h> //for getch()
 
 bool DKLinux::getch(int& key){
+	DKDEBUGFUNC(key);
     char buf[5];
     struct termios old = {0};
     fflush(stdout);
