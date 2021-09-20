@@ -38,6 +38,7 @@ int getch_test(){
         i++;
     if(!buf[i-1])
 		return DKERROR("buf invalid");
+	while((c = getc() != EOF && c != '\n')){} //flush stdin 
     return buf[i-1];
 }
 #endif

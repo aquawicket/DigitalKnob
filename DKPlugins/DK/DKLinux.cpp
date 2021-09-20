@@ -37,6 +37,7 @@ bool DKLinux::getch(int& key){
     if(!buf[i-1])
 		return DKERROR("buf invalid");
     key = buf[i-1];
+	while((c = getc() != EOF && c != '\n')){} //flush stdin 
 	return true;
 }
  
