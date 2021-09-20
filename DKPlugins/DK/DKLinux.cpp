@@ -38,8 +38,8 @@ bool DKLinux::GetKey(int& key){
 	//system("stty raw"); // Set terminal to raw mode    
 	//key = getchar();       
 	//system("stty cooked"); // Reset terminal to normal "cooked" mode    
-	key = getch();
-	return true;
+	int key;
+	return getch(key);
 }
 
 bool DKLinux::GetMousePos(int& x, int& y){
