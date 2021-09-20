@@ -11,7 +11,7 @@
 #include <unistd.h> //for getch()
 #include <termios.h> //for getch()
 
-char DKLinux::getch(){
+bool DKLinux::getch(int& key){
     char buf = 0;
     struct termios old = {0};
     fflush(stdout);
@@ -29,7 +29,8 @@ char DKLinux::getch(){
     old.c_lflag |= ECHO;
     if(tcsetattr(0, TCSADRAIN, &old) < 0)
         perror("tcsetattr ~ICANON");
-    return buf;
+    key = buf;
+	return true;
 }
  
 bool DKLinux::GetKey(int& key){
