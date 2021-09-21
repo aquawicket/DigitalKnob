@@ -3,10 +3,12 @@
 #include "DKFile.h"
 #include <cstring>
 
+extern bool log_fatal = true;
 extern bool log_errors = true;
 extern bool log_warnings = true;
 extern bool log_info = true;
 extern bool log_debug = false;
+extern bool log_verbose = false;
 extern bool log_msvc = false;
 extern bool log_xcode = false;
 extern bool log_file = true;
@@ -21,35 +23,32 @@ extern DKString log_hide = ""; //comma seperated
 void getTemplateArgs(std::ostringstream& out){}
 
 bool Log(const char* file, int line, const char* func, const DKString& text, const int lvl){
+	
+	///  /// /// MESSAGE BUILDING /// /// ///
 	DKString string;
 	if(log_thread){
 		unsigned long int threadId;
 		DKUtil::GetThreadId(threadId);
-		string += "TID:";
-		string += toString((unsigned int)threadId);
-		string += "  ";
+		string = string + "TID:" + toString((unsigned int)threadId) + "  ";
 	}
-	if(log_lines || lvl == DK_ERROR) {
+	if(log_lines || lvl == DK_ERROR || lvl == DK_FATAL) {
 		DKString filename = file;
 		unsigned found = filename.find_last_of("/\\");
 		if(found != std::string::npos && found < filename.length())
 			string += filename.substr(found+1);
-		string += ":";
-		string += toString(line);
-		string += "  ";
+		string = string + ":" + toString(line) + "  ";
 	}
-	if(log_funcs || lvl == DK_ERROR) {
-		if(strlen(func)){
-			string += func;
-			string += "()  ";
-		}
+	if(log_funcs || lvl == DK_ERROR || lvl == DK_FATAL) {
+		if(strlen(func))
+			string = string + func + "() ";
 	}
-	string += text;
+	string += text; 
+
+	/// /// /// OUTPUT FILTERS /// /// ///
 	int i=0;
 	DKString value;
-#ifdef WIN32
-	//check for LOG_HIDE
-	if(!log_hide.empty()){
+//#ifdef WIN32
+	if(!log_hide.empty()){ //check for LOG_HIDE
 		DKStringArray hides;
 		toStringArray(hides, log_hide, ",");
 		for(unsigned int i=0; i<hides.size(); ++i){
@@ -57,11 +56,10 @@ bool Log(const char* file, int line, const char* func, const DKString& text, con
 				return true;
 		}
 	}
-#endif
-
+//#endif
 	//check for LOG_SHOW
 	bool flag = false;
-#ifdef WIN32
+//#ifdef WIN32
 	if(!log_show.empty()){
 		DKStringArray shows;
 		toStringArray(shows, log_show, ",");
@@ -72,14 +70,47 @@ bool Log(const char* file, int line, const char* func, const DKString& text, con
 			}
 		}
 	}
-#endif
+//#endif
 	if(!flag){
-		if(log_debug == false && lvl == DK_DEBUG){ return true; }
-		if(log_info == false && lvl == DK_INFO){ return true; }
-		if(log_warnings == false && lvl == DK_WARN){ return true; }
+		if(log_fatal == false && lvl == DK_FATAL){ return false; }
 		if(log_errors == false && lvl == DK_ERROR){ return false; }
+		if(log_warnings == false && lvl == DK_WARN){ return true; }
+		if(log_info == false && lvl == DK_INFO){ return true; }
+		if(log_debug == false && lvl == DK_DEBUG){ return true; }
+		if(log_verbose == false && lvl == DK_VERBOSE){ return true; }
 	}
-	
+
+	/// /// Main Console Color Decorators /// ///
+#ifdef WIN32
+	int color;
+	if(lvl == DK_FATAL){ color = DKFATAL_COLOR; }
+	if(lvl == DK_ERROR){ color = DKERROR_COLOR; }
+	if(lvl == DK_WARN){ color = DKWARN_COLOR; }
+    if(lvl == DK_INFO){ color = DKINFO_COLOR; }
+	if(lvl == DK_DEBUG){ color = DKDEBUG_COLOR; }
+	if(lvl == DK_VERBOSE){ color = DKVERBOSE_COLOR; }
+#elif !defined(LINUX)
+    char color[10];
+	if(lvl == DK_FATAL){ strcpy(color, DKFATAL_COLOR; }
+	if(lvl == DK_ERROR){ strcpy(color, DKERROR_COLOR; }
+	if(lvl == DK_WARN){ strcpy(color, DKWARN_COLOR; }
+    if(lvl == DK_INFO){ strcpy(color, DKINFO_COLOR; }
+	if(lvl == DK_DEBUG){ strcpy(color, DKDEBUG_COLOR; }
+	if(lvl == DK_VERBOSE){ strcpy(color, DKVERBOSE_COLOR; }
+#endif
+#ifdef WIN32
+	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+    CONSOLE_SCREEN_BUFFER_INFO consoleInfo;
+    GetConsoleScreenBufferInfo(hConsole, &consoleInfo);
+    WORD saved_attributes = consoleInfo.wAttributes;  // Save current attributes
+	SetConsoleTextAttribute(hConsole, color);
+#endif
+	/// /// ///  OUTPUTS /// /// ///
+
+	// MAIN CONSOLE Output
+	printf("%s",string.c_str()); //APP CONSOLE OUT
+						
+	// File Output (log.txt)
 	if(log_file && !DKFile::local_assets.empty()){
 		std::ofstream file_log;
 		file_log.open(DKString(DKFile::local_assets+"log.txt").c_str(), std::ofstream::out | std::ofstream::app);
@@ -89,61 +120,46 @@ bool Log(const char* file, int line, const char* func, const DKString& text, con
 		}
 	}
 
-#if defined(WIN32)
-	int color;
-	if(lvl == DK_ERROR){ color = DKRED; }
-	if(lvl == DK_WARN){ color = DKYELLOW; }
-    if(lvl == DK_INFO){ color = DKWHITE; }
-	if(lvl == DK_DEBUG){ color = DKBLUE; }
-#elif !defined(LINUX)
-    char color[10];// = 0;
-	if(lvl == DK_ERROR){ strcpy(color, DKRED); }
-	if(lvl == DK_WARN){ strcpy(color, DKYELLOW); }
-    if(lvl == DK_INFO){ strcpy(color, DKWHITE); }
-	if(lvl == DK_DEBUG){ strcpy(color, DKBLUE); }
-#endif	
-
-#ifdef WIN32
-	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-    CONSOLE_SCREEN_BUFFER_INFO consoleInfo;
-    GetConsoleScreenBufferInfo(hConsole, &consoleInfo);
-    WORD saved_attributes = consoleInfo.wAttributes;  // Save current attributes
-	SetConsoleTextAttribute(hConsole, color);
-	if(log_msvc)
-		OutputDebugString(string.c_str()); //Output to Visual Studio
+	// // // IDE Software Output
+#if(log_msvc)
+	OutputDebugString(string.c_str()); //Output to Visual Studio
 #endif
-
 #if defined(MAC) || defined (IOS)
 	if(log_xcode)
 		NSLog(@"%s", string.c_str()); //Output to XCode
 #endif
+#ifdef ANDROID
+	// https://developer.android.com/ndk/reference/group/logging
+	if(lvl == DK_FATAL) //Android Studio 
+		__android_log_write(ANDROID_LOG_FATAL, "DKAndroid", string.c_str());
+	else if(lvl == DK_ERROR) //Android Studio 
+		__android_log_write(ANDROID_LOG_ERROR, "DKAndroid", string.c_str());
+	else if(lvl == DK_WARN)
+		__android_log_write(ANDROID_LOG_WARN, "DKAndroid", string.c_str());
+	else if(lvl == DK_INFO)
+		__android_log_write(ANDROID_LOG_INFO, "DKAndroid", string.c_str()); //Default
+	else if(lvl == DK_DEBUG)
+		__android_log_write(ANDROID_LOG_DEBUG, "DKAndroid", string.c_str());
+	else if(lvl == DK_VERBOSE)
+		__android_log_write(ANDROID_LOG_VERBOSE, "DKAndroid", string.c_str());
+	else //if(lvl == DK_INFO)
+		__android_log_write(ANDROID_LOG_INFO, "DKAndroid", string.c_str());
+#endif
 
-	printf("%s",string.c_str()); //THIS IS WHERE WE ACTUALLY PRINT TO THE CONSOLE
-
+	// // // Restore Default Color Decorators
 #ifdef WIN32
 	SetConsoleTextAttribute(hConsole, saved_attributes);
 #endif
 
-#ifdef ANDROID
-	if(lvl == DK_ERROR)
-		__android_log_write(ANDROID_LOG_ERROR, "DKApp", string.c_str());
-	else if(lvl == DK_WARN)
-		__android_log_write(ANDROID_LOG_WARN, "DKApp", string.c_str());
-	else if(lvl == DK_INFO)
-		__android_log_write(ANDROID_LOG_INFO, "DKApp", string.c_str());
-	else if(lvl == DK_DEBUG)
-		__android_log_write(ANDROID_LOG_DEBUG, "DKApp", string.c_str());
-	else
-		__android_log_write(ANDROID_LOG_INFO, "DKApp", string.c_str());
-#endif
+	if (text.find('\n') == std::string::npos) //check for new line \n
+		 return ERROR("<------ \nText does not contain a new line character   \\n  \n");
 
 	if(log_gui_console && DKUtil::InMainThread() && DKApp::active){
 		DKEvents::SendEvent("DKLog", "level", toString(lvl));
 		DKEvents::SendEvent("DKLog", "string", string);
 	}
-
 	//On errors show the stack trace or open a message box
-	if(log_errors && (lvl == DK_ERROR/* || has(string,"Uncaught ")*/)){
+	if(log_errors && (lvl == DK_ERROR)){
 		//DKClass::CallFunc("DKDebug::ShowStackTrace", NULL, NULL);
 		//DKString in = string;
 		//DKClass::CallFunc("DKWindow::MessageBox", &in, NULL);
