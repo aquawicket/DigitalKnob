@@ -125,7 +125,7 @@ endfunction()
 
 ##https://cmake.org/pipermail/cmake/2012-September/052205.html/
 function(DKDOWNLOAD url) #arg2 destination_path
-	get_filename_component(filename ${url} NAME)
+	get_filename_component(src_filename ${url} NAME)
 	if(${ARGC} GREATER 1)
 		set(dest_path ${ARGV1})
 		dk_getExtension(${dest_path} dest_ext)
@@ -139,9 +139,9 @@ function(DKDOWNLOAD url) #arg2 destination_path
 		else()
 			get_filename_component(dest_filename ${dest_path} NAME)
 			get_filename_component(dest_dir ${dest_path} DIRECTORY)
-			if(NOT dest_filename STREQUAL filename)
-				message("DKDOWNLOAD(${url}): The filenames are different")
-				message("src_filename: ${filename}")
+			if(NOT dest_filename STREQUAL src_filename)
+				#message("DKDOWNLOAD(${url}): The filenames are different")
+				message("src_filename: ${src_filename}")
 				message("dest_filename: ${dest_filename}")
 				message("dest_dir: ${dest_dir}")
 				#message(FATAL_ERROR "end")
@@ -150,10 +150,10 @@ function(DKDOWNLOAD url) #arg2 destination_path
 	else()
 		DKSET(CURRENT_DIR ${DKDOWNLOAD})
 	endif()
-	if(NOT EXISTS ${CURRENT_DIR}/${filename})
+	if(NOT EXISTS ${CURRENT_DIR}/${dest_filename})
 		message(STATUS "Downloading ${url}")
-		message(STATUS "To -> ${CURRENT_DIR}/${filename}")
-		file(DOWNLOAD ${url} ${CURRENT_DIR}/${filename} SHOW_PROGRESS 
+		message(STATUS "To -> ${CURRENT_DIR}/${dest_filename}")
+		file(DOWNLOAD ${url} ${CURRENT_DIR}/${dest_filename} SHOW_PROGRESS 
 			#no TIMEOUT
 			STATUS status 
 			#no LOG
@@ -161,7 +161,7 @@ function(DKDOWNLOAD url) #arg2 destination_path
 		list(GET status 0 status_code) 
 		list(GET status 1 status_string)
 		if(NOT status_code EQUAL 0)
-			DKREMOVE(${CURRENT_DIR}/${filename})
+			DKREMOVE(${CURRENT_DIR}/${dest_filename})
 			message(STATUS " ")
 			message(STATUS "*********************************************")
 			message(STATUS "CMAKE FAILED TO DOwNLOAD THIS FILE")
@@ -169,11 +169,11 @@ function(DKDOWNLOAD url) #arg2 destination_path
 			message(STATUS "THE URL IS: ${url}") 
 			message(STATUS "*********************************************")
 			## TODO - copy the url to the clipboard and notify the user
-			message(FATAL_ERROR "error: downloading ${filename} status_code: ${status_code} status_string: ${status_string}")
+			message(FATAL_ERROR "error: downloading ${src_filename} status_code: ${status_code} status_string: ${status_string}")
 			
 			##message(STATUS "Attempting to download with DKCurl...")
 			##DKSET(QUEUE_BUILD ON)
-			##WIN_COMMAND("${DIGITALKNOB}/DKCMake/DKCurl.exe ${url} ${CURRENT_DIR}/${filename}")
+			##WIN_COMMAND("${DIGITALKNOB}/DKCMake/DKCurl.exe ${url} ${CURRENT_DIR}/${src_filename}")
 		else()
 			message(STATUS "downloading... done")
 		endif() 
