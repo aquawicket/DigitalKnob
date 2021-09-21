@@ -83,8 +83,11 @@ int DKFileJS::DirectoryContents(duk_context* ctx){
 int DKFileJS::Exists(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString path = duk_require_string(ctx, 0);
-	if (!DKFile::PathExists(path))
-		return DKERROR("DKFile::PathExists() failed \n")
+	if(!DKFile::PathExists(path)){
+		duk_push_boolean(ctx, false);
+		return true;
+	}
+	duk_push_boolean(ctx, true);
 	return true;
 }
 
@@ -228,8 +231,10 @@ int DKFileJS::GetShortName(duk_context* ctx){
 int DKFileJS::IsDirectory(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString path = duk_require_string(ctx, 0);
-	if(!DKFile::IsDirectory(path))
-		return DKERROR("DKFile::IsDirectory() failed \n");
+	if(!DKFile::IsDirectory(path)){
+		duk_push_boolean(ctx, false);
+		return true;
+	}
 	duk_push_boolean(ctx, true);
 	return true;
 }
