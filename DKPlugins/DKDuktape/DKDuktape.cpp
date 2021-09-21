@@ -248,7 +248,7 @@ bool DKDuktape::FileLoaded(const DKString& path){
 	DKDEBUGFUNC(path);
 	for(unsigned int i = 0; i < filelist.size(); ++i){
 		if(has(path, filelist[i])){
-			DKINFO("DKDuktape::FileLoaded(): "+path+" is loaded\n");
+			//DKINFO("DKDuktape::FileLoaded(): "+path+" is loaded\n");
 			return true;
 		}
 	}
