@@ -15,8 +15,8 @@
 bool DKLinux::getch(int& key){
 	DKDEBUGFUNC("key");
 	//char buf[256];
-    char stored = 0
-	char buffer = 0;
+    int stored;
+	int buffer;
 	struct termios old = {0};
     fflush(stdout);
     if(tcgetattr(0, &old) < 0)
