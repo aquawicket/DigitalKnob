@@ -32,6 +32,25 @@ bool Clear(){
 #elif defined (APPLE)
     system("clear");
 #endif
+	return true;
+}
+
+bool ColorMap(){
+#ifdef WIN32
+	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+	CONSOLE_SCREEN_BUFFER_INFO consoleInfo;
+	GetConsoleScreenBufferInfo(hConsole, &consoleInfo);
+	WORD saved_attributes = consoleInfo.wAttributes;  // Save current colors
+	
+	for(int k = 1; k < 255; k++){
+		SetConsoleTextAttribute(hConsole, k);
+		std::cout << k << "   Pick This Color ! :D   " << std::endl;
+		//printf("   Pick This Color ! :D   ");
+	}
+	
+	SetConsoleTextAttribute(hConsole, saved_attributes); // Restore original colors
+#endif
+	return DKERROR("not implemented on this system");
 }
 
 bool Log(const char* file, int line, const char* func, const DKString& text, const int lvl){
@@ -181,43 +200,17 @@ bool Log(const char* file, int line, const char* func, const DKString& text, con
 	return true;
 }
 
-void SetLog(const int lvl, const DKString& text){
+bool SetLog(const int lvl, const DKString& text){
 	DKDEBUGFUNC(lvl, text);
-
-	if(lvl == DK_ERROR){
-		same(text,"OFF") ? log_errors = false :  log_errors = true;
-		return;
-		//if(same(text,"OFF")){
-		//	log_errors = false;
-		//	return;
-		//}
-		//log_errors = true;
-	}
-	if(lvl == DK_WARN){
-		if(same(text,"OFF")){
-			log_warnings = false;
-			return;
-		}
-		log_warnings = true;
-	}
-	if(lvl == DK_INFO){
-		if(same(text,"OFF")){
-			log_info = false;
-			return;
-		}
-		log_info = true;
-	}
-	if(lvl == DK_DEBUG){
-		if(same(text,"ON")){
-			log_debug = true;
-			return;
-		}
-		log_debug = false;
-	}
+	((lvl == DK_ERROR) && same(text,"OFF")) ? log_errors = false :  log_errors = true;
+	((lvl == DK_WARN)  && same(text,"OFF")) ? log_warnings = false : log_warnings = true;
+	((lvl == DK_INFO) && same(text,"OFF")) ? log_info = false : log_info = true;
+	((lvl == DK_DEBUG) && same(text,"ON")) ? log_debug = true : log_debug = false;
 	if(lvl == DK_SHOW)
 		log_show = text;
 	if(lvl == DK_HIDE)
 		log_hide = text;
+	return true;
 }
 
 

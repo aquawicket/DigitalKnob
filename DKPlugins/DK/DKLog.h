@@ -60,7 +60,6 @@
 #define DK_SHOW 7
 #define DK_HIDE 8
 
-
 extern bool log_fatal;
 extern bool log_errors;
 extern bool log_warnings;
@@ -78,8 +77,9 @@ extern DKString log_show;
 extern DKString log_hide;
 
 bool Clear();
+bool ColorMap();
 bool Log(const char* file, int line, const char* func, const DKString& text, const int lvl = DK_INFO);
-void SetLog(const int lvl, const DKString& text);
+bool SetLog(const int lvl, const DKString& text);
 
 #ifndef ANDROID
 void getTemplateArgs(std::ostringstream& out);
