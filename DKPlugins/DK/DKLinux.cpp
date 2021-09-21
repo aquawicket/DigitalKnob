@@ -13,8 +13,10 @@
 
 bool DKLinux::getch(int& key){
 	DKDEBUGFUNC("key");
-	char buf[256];
-    struct termios old = {0};
+	//char buf[256];
+    char stored = 0
+	char buffer = 0;
+	struct termios old = {0};
     fflush(stdout);
     if(tcgetattr(0, &old) < 0)
         return DKERROR("tcsetattr() failed");
@@ -24,12 +26,29 @@ bool DKLinux::getch(int& key){
     old.c_cc[VTIME] = 0;
     if(tcsetattr(0, TCSANOW, &old) < 0)
         return DKERROR("tcsetattr() ICANON failed");
-    if(read(0, &buf, sizeof(buf)) < 0)
-        return DKERROR("read() failed");
+    //if(read(0, &buf, sizeof(buf)) < 0)
+    if(read(0 &buffer, sizeof(buffer)) < 0)
+		return DKERROR("read() failed");
+	// fetch the current flags
+	int flags;
+    if((flags = fcntl(STDIN_FILENO, F_GETFL, 0)) == -1)
+		return DKERROR("ERROR in fcntl(GETFL)");
+	int stored_flags = flags; //store the old flags to recall later
+    // now set the flags to what they are + non-blocking
+    if ((flags = fcntl(STDIN_FILENO, F_SETFL, f | O_NONBLOCK)) == -1)
+        return DKERROR("ERROR in fcntl(SETFL)");
+	// read the buffer until we run out of data
+	while(buffer){
+		stored = buffer;
+		if(read(0 &buffer, sizeof(buffer)) < 0)
+			return DKERROR("read() failed");
+	}
+	fcntl(0, F_SETFL, stored_flags); //set back the original flags
     old.c_lflag |= ICANON;
     old.c_lflag |= ECHO;
     if(tcsetattr(0, TCSADRAIN, &old) < 0)
         return DKERROR("tcsetattr() ~ICANON failed");
+	/*
 	if(!buf[0])
 		return DKERROR("buf invalid");
     int i=0;
@@ -38,6 +57,12 @@ bool DKLinux::getch(int& key){
     if(!buf[i-1])
 		return DKERROR("buf invalid");
     key = buf[i-1];
+	*/
+	if(!stored)
+		return DKERROR("stored has no data, and it should");
+	if(buffer)
+		return DKERROR("buffer has data and it shouldn't");
+	key = stored;
 	//int c;
 	//while((c = getc(stdin) != EOF && c != '\n')){} //flush stdin
 	//DKString key_str = toString(key);
