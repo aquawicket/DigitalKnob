@@ -144,7 +144,7 @@ function(DKDOWNLOAD url) #arg2 destination_path
 				message("src_filename: ${filename}")
 				message("dest_filename: ${dest_filename}")
 				message("dest_dir: ${dest_dir}")
-				message(FATAL_ERROR "end")
+				#message(FATAL_ERROR "end")
 			endif()
 		endif()
 	else()
