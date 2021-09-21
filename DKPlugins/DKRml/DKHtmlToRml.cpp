@@ -246,12 +246,8 @@ bool DKHtmlToRml::PostProcess(Rml::Element* element) {
 		}
 		
 		//TODO: dispatch a script.onload event
-		DKEvents::events;
-		Rml::Element* script = scripts[i];
-		script->DispatchEvent(Rml::EventId::Load, Rml::Dictionary());
-		DKINFO(""+DKRml::elementToAddress(scripts[i])+"\n");
-		DKEvents::SendEvent(DKRml::elementToAddress(scripts[i]), "load", "");
-		DKEvents::events;
+		scripts[i]->DispatchEvent(Rml::EventId::Load, Rml::Dictionary());
+		//DKEvents::SendEvent(DKRml::elementToAddress(scripts[i]), "load", "");
 	}
 
 //DEBUG - Lets see the code

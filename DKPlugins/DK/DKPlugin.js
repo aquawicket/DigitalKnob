@@ -80,7 +80,7 @@ DKPlugin.fromFile = function DKPlugin_fromFile(args, DKPlugin_fromFile_callback)
 			var nn = url.lastIndexOf(".");
 			klassName = url.substring(n, nn);
 			if(!klassName)
-				return error("klassName invalid") //DKPlugin_fromFile_callback && DKPlugin_fromFile_callback(true);
+				/*return error("klassName invalid")*/ DKPlugin_fromFile_callback && DKPlugin_fromFile_callback(true);
 			//Other methods
 			//!DKPlugin.info && (DKPlugin.info = new Array)
             //let klassName = null;
@@ -93,8 +93,10 @@ DKPlugin.fromFile = function DKPlugin_fromFile(args, DKPlugin_fromFile_callback)
 						
 			//Next, get the class constructor
 			const klass = DUKTAPE ? globalThis[klassName] : window[klassName]
-			if (!klass)
-                return error("klass invalid") //DKPlugin_fromFile_callback && DKPlugin_fromFile_callback(true);
+			if (!klass){
+                DKPlugin_fromFile_callback && DKPlugin_fromFile_callback(true);
+				return;// error("klass invalid")
+			}
 
 			//Finish setting up the class object
 			Object.setPrototypeOf(klass, DKPlugin.prototype)
