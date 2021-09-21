@@ -406,15 +406,15 @@ if(WIN_32)
 		
 	## Create Icon files for project
 	if(IMAGEMAGICK_CONVERT)
-		message(STATUS "Building icons for ${APP_NAME}_${OS} . . .")
+		message(STATUS "Building icons for ${APP_NAME} . . .")
 		dk_makeDirectory(${DKPROJECT}/icons/windows)
 		DKEXECUTE_PROCESS(COMMAND ${IMAGEMAGICK_CONVERT} ${DKPROJECT}/icons/icon.png -define icon:auto-resize=256,128,64,48,32,16 ${DKPROJECT}/icons/windows/icon.ico)
 		DKEXECUTE_PROCESS(COMMAND ${IMAGEMAGICK_CONVERT} ${DKPROJECT}/icons/icon.png -define icon:auto-resize=16 ${DKPROJECT}/assets/favicon.ico)
 	endif()
 	
 	add_definitions(-D_USING_V110_SDK71_)
-	add_executable(${APP_NAME}_${OS} WIN32 ${App_SRC})
-	target_link_libraries(${APP_NAME}_${OS} ${DEBUG_LIBS} ${RELEASE_LIBS} ${WIN_LIBS})
+	add_executable(${APP_NAME} WIN32 ${App_SRC})
+	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${WIN_LIBS})
 	##set_source_files_properties(${DIGITALKNOB}/stdafx.cpp PROPERTIES COMPILE_FLAGS "/Ycstdafx.h")
 	
 	list(APPEND DEBUG_LINK_FLAGS /MANIFEST:NO)
@@ -437,16 +437,16 @@ if(WIN_32)
 	string(REPLACE ";" " " RELEASE_FLAGS "${RELEASE_LINK_FLAGS}")
 	
 	#add_custom_command(
-    #TARGET ${APP_NAME}_${OS}
+    #TARGET ${APP_NAME}
     #POST_BUILD
     #COMMAND "mt.exe" -nologo
     #        -manifest \"${DKPROJECT}/compatibility.manifest\"
-    #        -outputresource:"${DKPROJECT}/win32/Debug/${APP_NAME}_${OS}.exe"\;\#1
+    #        -outputresource:"${DKPROJECT}/win32/Debug/${APP_NAME}.exe"\;\#1
     #COMMENT "Adding manifest..."
     #)
 	
-	set_target_properties(${APP_NAME}_${OS} PROPERTIES LINK_FLAGS_DEBUG ${DEBUG_FLAGS} LINK_FLAGS_RELEASE ${RELEASE_FLAGS})
-	set_target_properties(${APP_NAME}_${OS} PROPERTIES DEBUG_POSTFIX d)
+	set_target_properties(${APP_NAME} PROPERTIES LINK_FLAGS_DEBUG ${DEBUG_FLAGS} LINK_FLAGS_RELEASE ${RELEASE_FLAGS})
+	set_target_properties(${APP_NAME} PROPERTIES DEBUG_POSTFIX d)
 endif(WIN_32)
 	
 ##########
@@ -483,15 +483,15 @@ if(WIN_64)
 		
 	## Create Icon files for project
 	if(IMAGEMAGICK_CONVERT)
-		message(STATUS "Building icons for ${APP_NAME}_${OS} . . .")
+		message(STATUS "Building icons for ${APP_NAME} . . .")
 		dk_makeDirectory(${DKPROJECT}/icons/windows)
 		DKEXECUTE_PROCESS(COMMAND ${IMAGEMAGICK_CONVERT} ${DKPROJECT}/icons/icon.png -define icon:auto-resize=256,128,64,48,32,16 ${DKPROJECT}/icons/windows/icon.ico)
 		DKEXECUTE_PROCESS(COMMAND ${IMAGEMAGICK_CONVERT} ${DKPROJECT}/icons/icon.png -define icon:auto-resize=16 ${DKPROJECT}/assets/favicon.ico)
 	endif()
 	
 	add_definitions(-D_USING_V110_SDK71_)
-	add_executable(${APP_NAME}_${OS} WIN32 ${App_SRC})
-	target_link_libraries(${APP_NAME}_${OS} ${DEBUG_LIBS} ${RELEASE_LIBS} ${WIN_LIBS})
+	add_executable(${APP_NAME} WIN32 ${App_SRC})
+	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${WIN_LIBS})
 	##set_source_files_properties(${DIGITALKNOB}/stdafx.cpp PROPERTIES COMPILE_FLAGS "/Ycstdafx.h")
 	
 	list(APPEND DEBUG_LINK_FLAGS /MANIFEST:NO)
@@ -513,15 +513,15 @@ if(WIN_64)
 	list(APPEND RELEASE_LINK_FLAGS /SAFESEH:NO)
 	string(REPLACE ";" " " RELEASE_FLAGS "${RELEASE_LINK_FLAGS}")
 	
-	set_target_properties(${APP_NAME}_${OS} PROPERTIES LINK_FLAGS_DEBUG ${DEBUG_FLAGS} LINK_FLAGS_RELEASE ${RELEASE_FLAGS})
-	set_target_properties(${APP_NAME}_${OS} PROPERTIES DEBUG_POSTFIX d)
+	set_target_properties(${APP_NAME} PROPERTIES LINK_FLAGS_DEBUG ${DEBUG_FLAGS} LINK_FLAGS_RELEASE ${RELEASE_FLAGS})
+	set_target_properties(${APP_NAME} PROPERTIES DEBUG_POSTFIX d)
 	
 	#add_custom_command(
-    #TARGET ${APP_NAME}_${OS}
+    #TARGET ${APP_NAME}
     #POST_BUILD
     #COMMAND "mt.exe" -nologo
     #        -manifest \"${DKPROJECT}/compatibility.manifest\"
-    #        -outputresource:"${DKPROJECT}/win32/Debug/${APP_NAME}_${OS}.exe"\;\#1
+    #        -outputresource:"${DKPROJECT}/win32/Debug/${APP_NAME}.exe"\;\#1
     #COMMENT "Adding manifest..."
     #)
 endif(WIN_64)
@@ -545,7 +545,7 @@ if(MAC)
 	
 		## ICONS 
 		## // TODO
-		## message(STATUS "Building icons for ${APP_NAME}_${OS} . . .")
+		## message(STATUS "Building icons for ${APP_NAME} . . .")
 	
 		## copy the assets into the bundle resources
 		if(DEBUG)
@@ -582,11 +582,11 @@ if(MAC)
 	list(APPEND RELEASE_LIBS ${CF} ${CO} ${CB} ${AT} ${AU} ${CV} ${CA} ${IO} ${GL} ${FF} ${AK})
 	
 	SET(CMAKE_OSX_ARCHITECTURES "x86_64")
-	add_executable(${APP_NAME}_${OS} MACOSX_BUNDLE ${App_SRC})
-	target_link_libraries(${APP_NAME}_${OS} ${DEBUG_LIBS} ${RELEASE_LIBS})
+	add_executable(${APP_NAME} MACOSX_BUNDLE ${App_SRC})
+	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS})
 	
-	DKUPDATE_INFO_Plist(${APP_NAME}_${OS}) #this may need to be run at post build
-	set_target_properties(${APP_NAME}_${OS} PROPERTIES DEBUG_POSTFIX d)
+	DKUPDATE_INFO_Plist(${APP_NAME}) #this may need to be run at post build
+	set_target_properties(${APP_NAME} PROPERTIES DEBUG_POSTFIX d)
 endif()
 
 #######
@@ -607,7 +607,7 @@ if(IOS)
 		DKREMOVE(${DKPROJECT}/assets/log.txt)
 
 		## copy the assets into the app
-		message(STATUS "Building icons for ${APP_NAME}_${OS} . . .")
+		message(STATUS "Building icons for ${APP_NAME} . . .")
 		if(DEBUG)
 			#dk_makeDirectory(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app/assets)
 			dk_makeDirectory(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app/assets)
@@ -654,12 +654,12 @@ if(IOS)
 	#set(CMAKE_XCODE_ATTRIBUTE_DEBUG_INFORMATION_FORMAT dwarf)
 	#set(MACOSX_BUNDLE_GUI_IDENTIFIER "com.digitalknob.\${PRODUCT_NAME:identifier}")
 		
-	#GET_TARGET_PROPERTY(MyExecutable_PATH ${APP_NAME}_${OS} LOCATION)
-	add_executable(${APP_NAME}_${OS} MACOSX_BUNDLE ${App_SRC})
-	target_link_libraries(${APP_NAME}_${OS} ${DEBUG_LIBS} ${RELEASE_LIBS})
+	#GET_TARGET_PROPERTY(MyExecutable_PATH ${APP_NAME} LOCATION)
+	add_executable(${APP_NAME} MACOSX_BUNDLE ${App_SRC})
+	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS})
 	
-	DKUPDATE_INFO_Plist(${APP_NAME}_${OS}) #this may need to be run at post build
-	set_target_properties(${APP_NAME}_${OS} PROPERTIES DEBUG_POSTFIX d)
+	DKUPDATE_INFO_Plist(${APP_NAME}) #this may need to be run at post build
+	set_target_properties(${APP_NAME} PROPERTIES DEBUG_POSTFIX d)
 endif()
 
 ##########
@@ -680,16 +680,16 @@ if(IOSSIM)
 		DKREMOVE(${DKPROJECT}/assets/log.txt)
 	
 		## copy the assets into the app
-		message(STATUS "Building icons for ${APP_NAME}_${OS} . . .")
+		message(STATUS "Building icons for ${APP_NAME} . . .")
 		if(DEBUG)
-			dk_makeDirectoy(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}_${OS}.app/assets)
-			DKCOPY(${DKPROJECT}/assets/ ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}_${OS}.app/assets TRUE)
-			DKCOPY(${DKPROJECT}/icons/ios/ ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}_${OS}.app TRUE)
+			dk_makeDirectoy(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app/assets)
+			DKCOPY(${DKPROJECT}/assets/ ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app/assets TRUE)
+			DKCOPY(${DKPROJECT}/icons/ios/ ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app TRUE)
 		endif()
 		if(RELEASE)
-			dk_makeDirectoy(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}_${OS}.app/assets)
-			DKCOPY(${DKPROJECT}/assets/ ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}_${OS}.app/assets TRUE)
-			DKCOPY(${DKPROJECT}/icons/ios/ ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}_${OS}.app TRUE)
+			dk_makeDirectoy(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.app/assets)
+			DKCOPY(${DKPROJECT}/assets/ ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.app/assets TRUE)
+			DKCOPY(${DKPROJECT}/icons/ios/ ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.app TRUE)
 		endif()
 	
 		# Restore the backed up files, excluded from assets
@@ -726,12 +726,12 @@ if(IOSSIM)
 	##set(CMAKE_XCODE_ATTRIBUTE_DEBUG_INFORMATION_FORMAT dwarf)
 	##set(MACOSX_BUNDLE_GUI_IDENTIFIER "com.digitalknob.\${PRODUCT_NAME:identifier}")
 	
-	#GET_TARGET_PROPERTY(MyExecutable_PATH ${APP_NAME}_${OS} LOCATION)
-	add_executable(${APP_NAME}_${OS} MACOSX_BUNDLE ${App_SRC})
-	target_link_libraries(${APP_NAME}_${OS} ${DEBUG_LIBS} ${RELEASE_LIBS})
+	#GET_TARGET_PROPERTY(MyExecutable_PATH ${APP_NAME} LOCATION)
+	add_executable(${APP_NAME} MACOSX_BUNDLE ${App_SRC})
+	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS})
 	
-	DKUPDATE_INFO_Plist(${APP_NAME}_${OS}) #this may need to be run at post build
-	set_target_properties(${APP_NAME}_${OS} PROPERTIES DEBUG_POSTFIX d)
+	DKUPDATE_INFO_Plist(${APP_NAME}) #this may need to be run at post build
+	set_target_properties(${APP_NAME} PROPERTIES DEBUG_POSTFIX d)
 endif()
 
 #########
@@ -786,13 +786,13 @@ if(LINUX)
 	
 	if(DEBUG)
 		add_definitions(-DDEBUG)
-		add_executable(${APP_NAME}_${OS} ${App_SRC})
-		target_link_libraries(${APP_NAME}_${OS} ${DEBUG_LIBS} ${LINUX_LIBS})
-		set_target_properties(${APP_NAME}_${OS} PROPERTIES DEBUG_POSTFIX d)
+		add_executable(${APP_NAME} ${App_SRC})
+		target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${LINUX_LIBS})
+		set_target_properties(${APP_NAME} PROPERTIES DEBUG_POSTFIX d)
 	endif()
 	if(RELEASE)
-		add_executable(${APP_NAME}_${OS} ${App_SRC})
-		target_link_libraries(${APP_NAME}_${OS} ${RELEASE_LIBS} ${LINUX_LIBS})
+		add_executable(${APP_NAME} ${App_SRC})
+		target_link_libraries(${APP_NAME} ${RELEASE_LIBS} ${LINUX_LIBS})
 	endif()
 endif()
 
@@ -849,13 +849,13 @@ if(RASPBERRY)
 	
 	if(DEBUG)
 		add_definitions(-DDEBUG)
-		add_executable(${APP_NAME}_${OS} ${App_SRC})
-		target_link_libraries(${APP_NAME}_${OS} ${DEBUG_LIBS} ${RASPBERRY_LIBS})
-		set_target_properties(${APP_NAME}_${OS} PROPERTIES DEBUG_POSTFIX d)
+		add_executable(${APP_NAME} ${App_SRC})
+		target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RASPBERRY_LIBS})
+		set_target_properties(${APP_NAME} PROPERTIES DEBUG_POSTFIX d)
 	endif()
 	if(RELEASE)
-		add_executable(${APP_NAME}_${OS} ${App_SRC})
-		target_link_libraries(${APP_NAME}_${OS} ${RELEASE_LIBS} ${RASPBERRY_LIBS})
+		add_executable(${APP_NAME} ${App_SRC})
+		target_link_libraries(${APP_NAME} ${RELEASE_LIBS} ${RASPBERRY_LIBS})
 	endif()
 endif()
 
@@ -868,7 +868,7 @@ if(ANDROID)
 	
 	## Create Android Icons
 	if(IMAGEMAGICK_CONVERT)
-	message(STATUS "Building icons for ${APP_NAME}_${OS} . . .")
+	message(STATUS "Building icons for ${APP_NAME} . . .")
 		dk_makeDirectory(${DKPROJECT}/icons/android/drawable-hdpi)
 		DKEXECUTE_PROCESS(COMMAND ${IMAGEMAGICK_CONVERT} ${DKPROJECT}/icons/icon.png -resize 72x72 ${DKPROJECT}/icons/android/drawable-hdpi/icon.png)
 		dk_makeDirectory(${DKPROJECT}/icons/android/drawable-ldpi)
@@ -885,7 +885,7 @@ if(ANDROID)
 	DKCOPY(${DKPROJECT}/icons/icon.png ${DKPROJECT}/assets/icon.png TRUE)
 	DKCOPY(${DKPROJECT}/icons/icon.png ${DKPROJECT}/${OS}/res/drawable/icon.png TRUE)
 
-	#DKUPDATE_ANDROID_NAME(${APP_NAME}_${OS})
+	#DKUPDATE_ANDROID_NAME(${APP_NAME})
 	
 	set(CMAKE_CXX_FLAGS "-DDKAPP -DUSE_DK -std=c++17")
 	set(CMAKE_CXX_FLAGS_DEBUG "-g2 -gdwarf-2 -O0 -DDEBUG") 
@@ -907,12 +907,12 @@ if(ANDROID)
 
 	#add_executable(DKAndroid ${App_SRC})
 
-	add_library(${APP_NAME}_${OS} SHARED ${App_SRC})
-	#target_link_libraries(${APP_NAME}_${OS} ${DEBUG_LIBS} ${RELEASE_LIBS} ${ANDROID_LIBS})
-	#target_include_directories(${APP_NAME}_${OS} PUBLIC ${INCLUDE_DIRECTORIES}) #of ${DKINCLUDES_LIST}
-	target_link_libraries(${APP_NAME}_${OS} ${DEBUG_LIBS} ${RELEASE_LIBS} ${ANDROID_LIBS})
-	set_target_properties(${APP_NAME}_${OS} PROPERTIES DEBUG_POSTFIX d)
-	#add_dependencies(${APP_NAME}_${OS} ${DEBUG_LIBS} ${RELEASE_LIBS})	
+	add_library(${APP_NAME} SHARED ${App_SRC})
+	#target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${ANDROID_LIBS})
+	#target_include_directories(${APP_NAME} PUBLIC ${INCLUDE_DIRECTORIES}) #of ${DKINCLUDES_LIST}
+	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${ANDROID_LIBS})
+	set_target_properties(${APP_NAME} PROPERTIES DEBUG_POSTFIX d)
+	#add_dependencies(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS})	
 	
 	#include_external_msproject(DKGradle ${DKPROJECT}/${OS}/DKGradle.androidproj)
 endif()
@@ -933,9 +933,9 @@ endif()
 #	endif()
 #	
 #	#update app name
-#	DKUPDATE_ANDROID_NAME(${APP_NAME}_${OS})
+#	DKUPDATE_ANDROID_NAME(${APP_NAME})
 #	
-#	message(STATUS "Creating Android.mk file for ${APP_NAME}_${OS}....")
+#	message(STATUS "Creating Android.mk file for ${APP_NAME}....")
 #	DKSET(ANDROID_APPMK ${ANDROID_APPMK} "LOCAL_PATH := $(call my-dir)\n")
 #	if(SDL)
 #		message(STATUS "USING SDL FOR ANDROID")
@@ -1032,5 +1032,5 @@ file(WRITE ${DKPROJECT}/CMakeLists.txt ${APP_CMAKEFILE})
 
 message(STATUS "\n")
 message(STATUS "***************************************")
-message(STATUS "********** Finnished ${APP_NAME}_${OS} **********")
+message(STATUS "********** Finnished ${APP_NAME} **********")
 message(STATUS "***************************************\n")
