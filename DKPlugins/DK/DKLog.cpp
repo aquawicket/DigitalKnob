@@ -3,12 +3,12 @@
 #include "DKFile.h"
 #include <cstring>
 
-extern bool log_fatal = true;
-extern bool log_errors = true;
-extern bool log_warnings = true;
-extern bool log_info = true;
-extern bool log_debug = false;
-extern bool log_verbose = false;
+extern bool log_fatal = true;      //console.assert()
+extern bool log_errors = true;     //console.error()
+extern bool log_warnings = true;   //console.warn()
+extern bool log_info = true;       //console.info()
+extern bool log_debug = false;     //console.debug()
+extern bool log_verbose = false;   //console.verbose() //extra
 extern bool log_msvc = false;
 extern bool log_xcode = false;
 extern bool log_file = true;
@@ -18,7 +18,6 @@ extern bool log_lines = false;
 extern bool log_funcs = false;
 extern DKString log_show = ""; //comma seperated 
 extern DKString log_hide = ""; //comma seperated 
-
 
 void getTemplateArgs(std::ostringstream& out){}
 
@@ -173,11 +172,13 @@ void SetLog(const int lvl, const DKString& text){
 	DKDEBUGFUNC(lvl, text);
 
 	if(lvl == DK_ERROR){
-		if(same(text,"OFF")){
-			log_errors = false;
-			return;
-		}
-		log_errors = true;
+		same(text,"OFF") ? log_errors = false :  log_errors = true;
+		return;
+		//if(same(text,"OFF")){
+		//	log_errors = false;
+		//	return;
+		//}
+		//log_errors = true;
 	}
 	if(lvl == DK_WARN){
 		if(same(text,"OFF")){

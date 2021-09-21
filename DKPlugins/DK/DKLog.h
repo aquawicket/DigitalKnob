@@ -19,7 +19,7 @@
 	#define DKFATAL_COLOR   FOREGROUND_RED|BACKGROUND_RED|FOREGROUND_INTENSITY|BACKGROUND_INTENSITY
 	#define DKERROR_COLOR   FOREGROUND_RED|FOREGROUND_INTENSITY
 	#define DKWARN_COLOR    FOREGROUND_RED|FOREGROUND_GREEN
-	#define DKINFO_COLOR    BACKGROUND_INTENSITY
+	#define DKINFO_COLOR    0
 	#define DKDEBUG_COLOR   FOREGROUND_BLUE|FOREGROUND_GREEN
 	#define DKVERBOSE_COLOR FOREGROUND_BLUE|FOREGROUND_GREEN|BACKGROUND_BLUE|FOREGROUND_INTENSITY
 #else
@@ -39,6 +39,7 @@
 #define DK_SHOW 7
 #define DK_HIDE 8
 
+
 extern bool log_fatal;
 extern bool log_errors;
 extern bool log_warnings;
@@ -54,6 +55,7 @@ extern bool log_lines;
 extern bool log_funcs;
 extern DKString log_show;
 extern DKString log_hide;
+
 
 bool Log(const char* file, int line, const char* func, const DKString& text, const int lvl = DK_INFO);
 void SetLog(const int lvl, const DKString& text);
