@@ -398,25 +398,21 @@ function(DKINSTALL url import_path destination_path)
 	#message(STATUS "DKINSTALL(${url} ${import_path} ${destination_path})")
 	string(TOLOWER ${import_path} import_path_lower)
 	if(NOT ${import_path} STREQUAL ${import_path_lower})
-		message(FATAL_ERROR "ERROR: the 2nd parameter in DKINSTALL() (${import_path}) must be all lowercase")
+		message(FATAL_ERROR "ERROR: 2nd parameter in DKINSTALL() (${import_path}) must be all lowercase")
 	endif()
 	if(NOT EXISTS ${DKIMPORTS}/${import_path})
-		message(FATAL_ERROR "ERROR: the 2nd parameter in DKINSTALL() (${DKIMPORTS}/${import_path}) does not exist")
+		message(FATAL_ERROR "ERROR: 2nd parameter in DKINSTALL() (${DKIMPORTS}/${import_path}) does not exist")
 	endif()
-	
 	if(EXISTS ${destination_path}/installed)
 		return()
 	endif()
-
 	DKSET(CURRENT_DIR ${DKDOWNLOAD})
 	dk_makeDirectory(${DKDOWNLOAD})
-	
 	get_filename_component(filename ${url} NAME)
 	message(STATUS "filename: ${filename}")
 	dk_getExtension(${filename} extension)
 	message(STATUS "extension: ${extension}")
-	DKDOWNLOAD(${url})
-	
+
 	string(FIND "${destination_path}" "/" index REVERSE)
 	if(index GREATER -1)
 		string(SUBSTRING "${destination_path}" ${index} -1 folder)
@@ -426,10 +422,11 @@ function(DKINSTALL url import_path destination_path)
 	endif()
 	message(STATUS "folder: ${folder}")
 	
-	
-	#set(filename "${destination_path}${extension}")
-	#DKDOWNLOAD(${url} ${filename})
-				
+	#DKDOWNLOAD(${url})
+	#rename the download file to avoid same name conflicts
+	set(filename "${folder}${extension}")
+	DKDOWNLOAD(${url} ${filename})
+		
 	DKSET(FILETYPE "UNKNOWN")
 	if(NOT ${extension} STREQUAL "")
 		if(${extension} STREQUAL ".bz")
