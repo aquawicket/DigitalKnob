@@ -35,7 +35,7 @@ bool DKLinux::getch(int& key){
 		return DKERROR("fcntl(STDIN_FILENO, F_GETFL, 0) failed");
 	int stored_flags = flags; //store the old flags to recall later
     // now set the flags to what they are + non-blocking
-    if ((flags = fcntl(STDIN_FILENO, F_SETFL, f | O_NONBLOCK)) == -1)
+    if ((flags = fcntl(STDIN_FILENO, F_SETFL, flags | O_NONBLOCK)) == -1)
         return DKERROR("fcntl(STDIN_FILENO, F_SETFL, f | O_NONBLOCK) failed");
 	// read the buffer until we run out of data
 	while(buffer){
@@ -43,7 +43,8 @@ bool DKLinux::getch(int& key){
 		if(read(0 &buffer, sizeof(buffer)) < 0)
 			return DKERROR("2nd read(0 &buffer, sizeof(buffer) failed");
 	}
-	fcntl(0, F_SETFL, stored_flags); //set back the original flags
+	if ((flags = fcntl(STDIN_FILENO, F_SETFL, stored_flags)) == -1)
+		DKERROR("fcntl(STDIN_FILENO, F_SETFL, stored_flags)) failed");
     old.c_lflag |= ICANON;
     old.c_lflag |= ECHO;
     if(tcsetattr(0, TCSADRAIN, &old) < 0)
