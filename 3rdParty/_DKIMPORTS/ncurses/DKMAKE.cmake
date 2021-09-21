@@ -7,7 +7,7 @@
 
 
 ### VERSION ###
-DKSET(NCURSES_VERSION 1.0.0)
+DKSET(NCURSES_VERSION 6.2)
 DKSET(NCURSES_NAME ncurses-${NCURSES_VERSION})
 DKSET(NCURSES_DL https://invisible-island.net/datafiles/release/ncurses.tar.gz)
 DKSET(NCURSES ${3RDPARTY}/${NCURSES_NAME})
