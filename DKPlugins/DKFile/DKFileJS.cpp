@@ -74,7 +74,7 @@ int DKFileJS::DirectoryContents(duk_context* ctx){
 	DKString path = duk_require_string(ctx, 0);
 	DKStringArray arry;
 	if(!DKFile::GetDirectoryContents(path, arry))
-		return DKERROR("DKFile::GetDirectoryContents() failed \n");
+		return DKERROR("DKFile::GetDirectoryContents("+path+") failed \n");
 	DKString string = toString(arry, ",");
 	duk_push_string(ctx, string.c_str());
 	return true;
