@@ -8,10 +8,19 @@
 #include <unistd.h>    //GetUsername()  getlogin()/getlogin_r()
 #include <sys/types.h> //GetUsername()  getpwnam()
 */
+#include "getch.h"
+ 
+t_key keys[] = {
+  {"[A", K_UP},
+  {"[B", K_DOWN},
+  {"[D", K_LEFT},
+  {"[C", K_RIGHT},
+  {NULL, K_UNK},
+};
 
 bool DKUnix::GetKey(int& key){
 	DKDEBUGFUNC(key);
-	key = getchar();
+	key = ch_get(keys);
 	return true;
 }
 

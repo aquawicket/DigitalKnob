@@ -281,16 +281,10 @@ bool DKUtil::GetKey(int& key){
 	DKDEBUGFUNC("key");
 #ifdef WIN32
 	return DKWindows::GetKey(key);
-#endif
-#ifdef LINUX
-	return DKLinux::GetKey(key);
-#endif
-#ifdef RASPBERRY
-	return DKLinux::GetKey(key);
-#endif
-#if defined(MAC) || defined(IOS)
+#else
 	return DKUnix::GetKey(key);
 #endif
+        //FIXME: this code is inaccessable
 	return DKERROR("DKUtil::GetKey(): not implemented on this OS\n");
 }
 
