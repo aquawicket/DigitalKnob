@@ -37,18 +37,18 @@ bool Clear(){
 
 bool ColorMap(){
 #ifdef WIN32
+	// Save Current Colors
 	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 	CONSOLE_SCREEN_BUFFER_INFO consoleInfo;
 	GetConsoleScreenBufferInfo(hConsole, &consoleInfo);
-	WORD saved_attributes = consoleInfo.wAttributes;  // Save current colors
-	
+	WORD saved_attributes = consoleInfo.wAttributes;  
 	for(int k = 1; k < 255; k++){
 		SetConsoleTextAttribute(hConsole, k);
 		std::cout << k << "   Pick This Color ! :D   " << std::endl;
 		//printf("   Pick This Color ! :D   ");
 	}
-	
-	SetConsoleTextAttribute(hConsole, saved_attributes); // Restore original colors
+	// Restore Original Colors
+	SetConsoleTextAttribute(hConsole, saved_attributes); 
 #endif
 	return DKERROR("not implemented on this system");
 }
