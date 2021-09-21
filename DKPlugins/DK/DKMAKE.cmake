@@ -28,6 +28,7 @@ if(RASPBERRY)
 	DKDEPEND(libxrandr-dev)
 	DKDEPEND(libasound2-dev) ##TODO: Move to DKAudio
 	DKDEPEND(libxtst-dev)
+	DKDEPEND(simple-getch)
 endif()
 
 if(ANDROID)
