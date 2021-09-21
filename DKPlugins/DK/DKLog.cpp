@@ -19,7 +19,20 @@ extern bool log_funcs = false;
 extern DKString log_show = ""; //comma seperated 
 extern DKString log_hide = ""; //comma seperated 
 
-void getTemplateArgs(std::ostringstream& out){}
+
+
+
+bool Clear(){
+#ifdef WIN32
+    system("cls");
+    //clrscr(); // #include conio.h
+#elif defined (LINUX)
+    system("clear");
+    //std::cout<< u8"\033[2J\033[1;1H"; //Escape Sequences Clear 
+#elif defined (APPLE)
+    system("clear");
+#endif
+}
 
 bool Log(const char* file, int line, const char* func, const DKString& text, const int lvl){
 	
@@ -219,3 +232,5 @@ logy::~logy(){
 	*stream << std::endl;
 	stream->flush();
 }
+
+void getTemplateArgs(std::ostringstream& out){}
