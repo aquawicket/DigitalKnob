@@ -8,10 +8,12 @@
 #include <X11/XKBlib.h>
 #include <X11/extensions/XTest.h>  //requires  libxtst-dev
 #include <alsa/asoundlib.h>
-#include <unistd.h> //for getch()
-#include <termios.h> //for getch()
-
+#include <unistd.h> 
+#include "getch.h"
+/*
 // https://eklitzke.org/blocking-io-nonblocking-io-and-epoll
+// #include <unistd.h>
+// #include <termios.h> 
 bool DKLinux::getch(int& key){
 	DKDEBUGFUNC("key");
 	//char buf[256];
@@ -60,16 +62,19 @@ bool DKLinux::getch(int& key){
 		return DKERROR("buf invalid");
     key = buf[i-1];
 	*/
-	if(!stored)
-		return DKERROR("stored has no data, and it should");
-	if(buffer)
-		return DKERROR("buffer has data and it shouldn't");
-	key = stored;
+	
+	//if(!stored)
+	//	return DKERROR("stored has no data, and it should");
+	//if(buffer)
+	//	return DKERROR("buffer has data and it shouldn't");
+	//key = stored;
+	
 	//int c;
 	//while((c = getc(stdin) != EOF && c != '\n')){} //flush stdin
 	//DKString key_str = toString(key);
 	//DKINFO("DKLinux::getch(): key = "+key_str+"\n");
-	return true;
+	
+	//return true;
 }
  
 bool DKLinux::GetKey(int& key){
