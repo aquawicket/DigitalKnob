@@ -124,7 +124,7 @@ endfunction()
 
 
 ##https://cmake.org/pipermail/cmake/2012-September/052205.html/
-function(DKDOWNLOAD url) #arg2 destination_path
+function(DKDOWNLOAD url) #arg2 dest_path
 	get_filename_component(src_filename ${url} NAME)
 	if(${ARGC} GREATER 1)
 		set(dest_path ${ARGV1})
@@ -359,6 +359,25 @@ function(dk_makeDirectory path)
 endfunction()
 
 
+function(dk_getDirectory path result)
+	string(FIND ${path} "/" index REVERSE)
+	if(${index} EQUAL -1)
+		return() #no path dividers found
+	endif()
+	string(SUBSTRING ${path} 0 ${index} directory) 
+    set(${result} ${directory} PARENT_SCOPE)
+endfunction()
+
+function(dk_getFilename path result)
+	string(FIND ${path} "/" index REVERSE)
+	if(${index} EQUAL -1)
+		return() #no path dividers found
+	endif()
+	MATH(EXPR index "${index}+1")
+	string(SUBSTRING ${path} ${index} -1 filename) 
+    set(${result} ${filename} PARENT_SCOPE)
+endfunction()
+
 function(dk_getExtension path result)
 	# WHY A NEW GET EXTENSION FUNCTION ?
 	# get_filename_component(extension ${url} EXT)       #Gets the large part of the extension of everything after the first .
@@ -392,10 +411,13 @@ function(DKREFRESH_ICONS)
 endfunction()
 
 
-# For archive files such as libraries and assets, the arguments are:  The download url, the name of its _DKIMPORTS folder, The name given to the installed 3rdParty/folder  
-# For executable files such as software amd IDE's the arguments are:  The download url, the name of the final name of the dl file, The installation path to check for installation.
-function(DKINSTALL url import_path destination_path)
-	#message(STATUS "DKINSTALL(${url} ${import_path} ${destination_path})")
+# For archive files such as libraries and assets, the arguments are:  The download src_path, the name of its _DKIMPORTS folder, The name given to the installed 3rdParty/folder  
+# For executable files such as software amd IDE's the arguments are:  The download src_path, the name of the final name of the dl file, The installation path to check for installation.
+function(DKINSTALL src_path import_path dest_path)
+	message(STATUS "\n")
+	message(STATUS "DKINSTALL(${src_path} ${import_path} ${dest_path})")
+	message(STATUS "\n")
+	
 	string(TOLOWER ${import_path} import_path_lower)
 	if(NOT ${import_path} STREQUAL ${import_path_lower})
 		message(FATAL_ERROR "ERROR: 2nd parameter in DKINSTALL() (${import_path}) must be all lowercase")
@@ -403,67 +425,72 @@ function(DKINSTALL url import_path destination_path)
 	if(NOT EXISTS ${DKIMPORTS}/${import_path})
 		message(FATAL_ERROR "ERROR: 2nd parameter in DKINSTALL() (${DKIMPORTS}/${import_path}) does not exist")
 	endif()
-	if(EXISTS ${destination_path}/installed)
+	if(EXISTS ${dest_path}/installed)
+		message(STATUS "${import_path} installed")
 		return()
 	endif()
-	DKSET(CURRENT_DIR ${DKDOWNLOAD})
-	dk_makeDirectory(${DKDOWNLOAD})
-	get_filename_component(filename ${url} NAME)
-	message(STATUS "filename: ${filename}")
-	dk_getExtension(${filename} extension)
-	message(STATUS "extension: ${extension}")
-
-	string(FIND "${destination_path}" "/" index REVERSE)
-	if(index GREATER -1)
-		string(SUBSTRING "${destination_path}" ${index} -1 folder)
-	else()
-		message(FATAL_ERROR "ERROR: the 3rd parameter in DKINSTALL() (destination_path) requires a full path")
-		set(folder ${destination_path})
-	endif()
-	message(STATUS "folder: ${folder}")
 	
-	#DKDOWNLOAD(${url})
-	#rename the download file to avoid same name conflicts
-	set(filename "${folder}${extension}")
-	DKDOWNLOAD(${url} ${filename})
-		
+	message(STATUS "\n")
+	message(STATUS "src_path: ${src_path}")
+	dk_getDirectory(${src_path} src_directory)
+	message(STATUS "src_directory: ${src_directory}")
+	dk_getFilename(${src_path} src_filename)
+	message(STATUS "src_filename: ${src_filename}")
+	dk_getExtension(${src_filename} src_extension)
+	message(STATUS "src_extension: ${src_extension}")
+	message(STATUS "\n")
+	message(STATUS "dest_path: ${dest_path}")
+	dk_getDirectory(${dest_path} dest_directory)
+	message(STATUS "dest_directory: ${dest_directory}")
+	dk_getFilename(${dest_path} dest_filename)
+	message(STATUS "dest_filename: ${dest_filename}")
+	dk_getExtension(${dest_filename} dest_extension)
+	message(STATUS "dest_extension: ${dest_extension}")
+	message(STATUS "\n")
+	
+	dkSet(CURRENT_DIR ${DKDOWNLOAD})
+	dk_makeDirectory(${DKDOWNLOAD})
+	#rename src_filename to dest_filename + src_extension as we download to avoid duiplicate name conflicts
+	dkSet(dl_filename "${dest_filename}${src_extension}")
+	dkDownload(${src_path} ${dl_filename})
+	
 	DKSET(FILETYPE "UNKNOWN")
-	if(NOT ${extension} STREQUAL "")
-		if(${extension} STREQUAL ".bz")
+	if(NOT ${src_extension} STREQUAL "")
+		if(${src_extension} STREQUAL ".bz")
 			DKSET(FILETYPE "Archive")
 		endif()
-		if(${extension} STREQUAL ".bz2")
+		if(${src_extension} STREQUAL ".bz2")
 			DKSET(FILETYPE "Archive")
 		endif()
-		if(${extension} STREQUAL ".exe")
+		if(${src_extension} STREQUAL ".exe")
 			DKSET(FILETYPE "Executable")
 		endif()
-		if(${extension} STREQUAL ".gz")
+		if(${src_extension} STREQUAL ".gz")
 			DKSET(FILETYPE "Archive")
 		endif()
-		if(${extension} STREQUAL ".js")
+		if(${src_extension} STREQUAL ".js")
 			DKSET(FILETYPE "Javascript")
 		endif()
-		if(${extension} STREQUAL ".rar")
+		if(${src_extension} STREQUAL ".rar")
 			DKSET(FILETYPE "Archive")
 		endif()
-		if(${extension} STREQUAL ".tar")
+		if(${src_extension} STREQUAL ".tar")
 			DKSET(FILETYPE "Archive")
 		endif()
-		if(${extension} STREQUAL ".xz")
+		if(${src_extension} STREQUAL ".xz")
 			DKSET(FILETYPE "Archive")
 		endif()
-		if(${extension} STREQUAL ".zip")
+		if(${src_extension} STREQUAL ".zip")
 			DKSET(FILETYPE "Archive")
 		endif()
-		if(${extension} STREQUAL ".AppImage")
+		if(${src_extension} STREQUAL ".AppImage")
 			DKSET(FILETYPE "Executable")
 		endif()
 	endif()
 	
 	##If the file type is unknown, we'll still try to extract it like a compressed file anyway
 	##It's better the have a chance at success.
-	message(STATUS "The Downloaded file (${filename}) is a ${FILETYPE} file ${extension}")
+	message(STATUS "The Downloaded file ${${dl_filename}} is a ${FILETYPE} file ${src_extension}")
 	
 	if(${FILETYPE} STREQUAL "UNKNOWN")
 		DKSET(FILETYPE "Archive")
@@ -472,16 +499,16 @@ function(DKINSTALL url import_path destination_path)
 		
 	if(${FILETYPE} STREQUAL "Archive")
 		DKREMOVE(${DIGITALKNOB}/Download/UNZIPPED)
-		DKEXTRACT(${DIGITALKNOB}/Download/${filename} ${DIGITALKNOB}/Download/UNZIPPED)
+		DKEXTRACT(${DIGITALKNOB}/Download/${dl_filename} ${DIGITALKNOB}/Download/UNZIPPED)
 		#We either have a root folder in /UNZIPPED, or multiple files without a root folder
 		file(GLOB items RELATIVE "${DIGITALKNOB}/Download/UNZIPPED/" "${DIGITALKNOB}/Download/UNZIPPED/*")
 		list(LENGTH items count)
 		if(${count} GREATER 2) ##NOTE: This should be "${count} GREATER 1" but msys has a readme file in it next to the inner msys folder and that messes things up for more than 1
 			#Zip extracted with no root folder, Rename UNZIPPED and move to 3rdParty
-			DKRENAME(${DIGITALKNOB}/Download/UNZIPPED ${destination_path})
+			DKRENAME(${DIGITALKNOB}/Download/UNZIPPED ${dest_path})
 		else()
-			if(EXISTS ${DIGITALKNOB}/Download/UNZIPPED/${folder}) ##Zip extracted to expected folder. Move the folder to 3rdParty
-				DKRENAME(${DIGITALKNOB}/Download/UNZIPPED/${folder} ${destination_path})
+			if(EXISTS ${DIGITALKNOB}/Download/UNZIPPED/${dest_filename}) ##Zip extracted to expected folder. Move the folder to 3rdParty
+				DKRENAME(${DIGITALKNOB}/Download/UNZIPPED/${dest_filename} ${dest_path})
 				DKREMOVE(${DIGITALKNOB}/Download/UNZIPPED)
 			else() #Zip extracted to a root folder, but not named what we expected. Rename and move folder to 3rdParty
 				foreach(item ${items})
@@ -489,20 +516,20 @@ function(DKINSTALL url import_path destination_path)
 						list(REMOVE_ITEM items ${item}) #remove any readme.txt or other non-directory items
 					endif()
 				endforeach()
-				DKRENAME(${DIGITALKNOB}/Download/UNZIPPED/${items} ${destination_path})
+				DKRENAME(${DIGITALKNOB}/Download/UNZIPPED/${items} ${dest_path})
 				DKREMOVE(${DIGITALKNOB}/Download/UNZIPPED)
 			endif() 
 		endif()
 	#elseif(${FILETYPE} STREQUAL "Executable")
 	#	DKSETPATH(${DIGITALKNOB}/Download)
 	#	DKSET(QUEUE_BUILD ON)
-	#	DKEXECUTE(${DIGITALKNOB}/Download/${filename})
+	#	DKEXECUTE(${DIGITALKNOB}/Download/${src_filename})
 	else() #NOT ARCHIVE, just copy the file into it's 3rdParty folder
-		DKCOPY(${DIGITALKNOB}/Download/${filename} ${destination_path}/${filename} TRUE)
+		DKCOPY(${DIGITALKNOB}/Download/${dl_filename} ${dest_path}/${dl_filename} TRUE)
 	endif()
 
-	DKCOPY(${DKIMPORTS}/${import_path}/ ${destination_path}/ TRUE)
-	file(WRITE ${destination_path}/installed "${folder}")
+	DKCOPY(${DKIMPORTS}/${import_path}/ ${dest_path}/ TRUE)
+	file(WRITE ${dest_path}/installed "${dest_filename}")
 endfunction()
 
 
