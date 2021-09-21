@@ -80,7 +80,7 @@ bool DKRml::Init(){
 	DKClass::DKCreate("DKDomXMLHttpRequest");
 	DKClass::DKCreate("DKDomScreen");
 	//* Dom that needs a screen
-	DKClass::DKCreate("DKDomWindowOrWorkerGlobalScope");
+	//DKClass::DKCreate("DKDomWindowOrWorkerGlobalScope");
 	DKClass::DKCreate("DKDomWindowEventHandlers");
 	DKClass::DKCreate("DKDomWindow");
 	DKClass::DKCreate("DKDomLocation");

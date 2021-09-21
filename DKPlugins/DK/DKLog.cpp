@@ -179,8 +179,8 @@ bool Log(const char* file, int line, const char* func, const DKString& text, con
 	SetConsoleTextAttribute(hConsole, saved_attributes);
 #endif
 
-	if (text.find('\n') == std::string::npos) //check for new line \n
-		 return DKERROR("<------ \nText does not contain a new line character   \\n  \n");
+	//if (text.find('\n') == std::string::npos) //check for new line \n
+	//	 return DKERROR("<------ \nText does not contain a new line character   \\n  \n");
 
 	if(log_gui_console && DKUtil::InMainThread() && DKApp::active){
 		DKEvents::SendEvent("DKLog", "level", toString(lvl));

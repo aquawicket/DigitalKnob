@@ -11,6 +11,7 @@
 #include <unistd.h> //for getch()
 #include <termios.h> //for getch()
 
+// https://eklitzke.org/blocking-io-nonblocking-io-and-epoll
 bool DKLinux::getch(int& key){
 	DKDEBUGFUNC("key");
 	//char buf[256];

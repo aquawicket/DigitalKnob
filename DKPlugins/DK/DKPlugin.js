@@ -70,7 +70,11 @@ DKPlugin.fromFile = function DKPlugin_fromFile(args, DKPlugin_fromFile_callback)
     script.onerror = function script_onerror(err) {
         return error("script.onerror", DKPlugin_fromFile_callback(false));
     }
+	script.addEventListener("onload", console.error("WE GOT SOMETHING HERE!"))
     script.onload = function script_onload() {
+		console.error("!!!!!!!!!!!!!!!!!!!!!!!!!!")
+		console.error("script.onload event!!")
+		console.error("!!!!!!!!!!!!!!!!!!!!!!!!!!")
         if (!this.readyState || this.readyState === "loaded" || this.readyState === "complete") {
             console.log("%cLoaded " + url, "color:green;");
             !DKPlugin.info && (DKPlugin.info = new Array)
