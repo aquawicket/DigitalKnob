@@ -70,53 +70,56 @@ DKPlugin.fromFile = function DKPlugin_fromFile(args, DKPlugin_fromFile_callback)
     script.onerror = function script_onerror(err) {
         return error("script.onerror", DKPlugin_fromFile_callback(false));
     }
-	script.addEventListener("onload", console.error("WE GOT SOMETHING HERE!"))
-    script.onload = function script_onload() {
-		console.error("!!!!!!!!!!!!!!!!!!!!!!!!!!")
-		console.error("script.onload event!!")
-		console.error("!!!!!!!!!!!!!!!!!!!!!!!!!!")
-        if (!this.readyState || this.readyState === "loaded" || this.readyState === "complete") {
-            console.log("%cLoaded " + url, "color:green;");
-            !DKPlugin.info && (DKPlugin.info = new Array)
-            let klassName = null;
-            if (DKPlugin.info[url])
-                klassName = DKPlugin.info[url]
-            else {
-                const newfuncs = dk.getNewFuncs()
-                klassName = newfuncs[newfuncs.length - 1]
-            }
-            if (!window[klassName]) {
-                DKPlugin_fromFile_callback && DKPlugin_fromFile_callback(true);
-                return true;
-            }
-            const klass = window[klassName];
-            Object.setPrototypeOf(klass, DKPlugin.prototype)
-            //klass.prototype = DKPlugin.prototype;// = {};
-            //Object.assign(klass.prototype, DKPlugin)
 
-            for (let n = 0; n < args.length; n++) {
+    script.onload = function script_onload() {
+        if (!this.readyState || this.readyState === "loaded" || this.readyState === "complete") {
+            console.log("%cLoading " + url, "color:green;");
+			
+			//First, get the class Name
+			var n = url.lastIndexOf("/");
+			var nn = url.lastIndexOf(".");
+			klassName = url.substring(n, nn);
+			if(!klassName)
+				return error("klassName invalid") //DKPlugin_fromFile_callback && DKPlugin_fromFile_callback(true);
+			//Other methods
+			//!DKPlugin.info && (DKPlugin.info = new Array)
+            //let klassName = null;
+			//if(DKPlugin.info[url])
+			//	klassName = DKPlugin.info[url]; 
+            //if (!klassName && !DUKTAPE){
+            //    const newfuncs = dk.getNewFuncs()
+             //   klassName = newfuncs[newfuncs.length - 1]
+            //}
+						
+			//Next, get the class constructor
+			const klass = DUKTAPE ? globalThis[klassName] : window[klassName]
+			if (!klass)
+                return error("klass invalid") //DKPlugin_fromFile_callback && DKPlugin_fromFile_callback(true);
+
+			//Finish setting up the class object
+			Object.setPrototypeOf(klass, DKPlugin.prototype)
+			//klass.prototype = DKPlugin.prototype;// = {};
+            //Object.assign(klass.prototype, DKPlugin)
+			for (let n = 0; n < args.length; n++) {
                 if (args[n] === "singleton") {
                     klass.singleton = "fromFile(): klass.singleton";
                     klass.prototype.singleton = "fromFile(): klass.prototype.singleton";
                 }
             }
-
-            !DKPlugin.info && (DKPlugin.info = new Array)
+			!DKPlugin.info && (DKPlugin.info = new Array)
             DKPlugin.info[url] = klass.name
             klass.prototype.url = url
-
-            //console.log("%c DKPlugin.fromFile(): this = "+this.toString(), color);
-            //console.log("%c DKPlugin.fromFile(): this.constructor.name = " + this.constructor.name, color);
-            //console.log("%c DKPlugin.fromFile(): this.singleton = " + this.singleton, color);
-            //console.log("%c DKPlugin.fromFile(): this.prototype = " + this.prototype, color);
-            //console.log("%c DKPlugin.fromFile(): klass = "+klass, color);
-            //console.log("%c DKPlugin.fromFile(): klass.name = " + klass.name, color);
-            //console.log("%c DKPlugin.fromFile(): klass.singleton = " + klass.singleton, color);
-            //console.log("%c DKPlugin.fromFile(): klass.prototype = " + klass.prototype, color);
-
-            if (typeof klass.prototype.init === "function") {
+			
+			console.log("%c DKPlugin.fromFile(): this = "+this.toString(), color);
+            console.log("%c DKPlugin.fromFile(): this.constructor.name = " + toString(this.constructor.name), color);
+            console.log("%c DKPlugin.fromFile(): klass = "+klass, color);
+            console.log("%c DKPlugin.fromFile(): klass.name = " + klass.name, color);
+			console.log("%c DKPlugin.fromFile(): klass.init = " + klass.prototype.init.name, color);
+            console.log("%c DKPlugin.fromFile(): klass.singleton = " + !!klass.singleton, color);
+            console.log("%c DKPlugin.fromFile(): klass.prototype = " + klass.prototype, color);
+			
+			if (typeof klass.prototype.init === "function") {
                 klass.prototype.init(function() {
-
                     DKPlugin_fromFile_callback && DKPlugin_fromFile_callback(klass);
                 })
             } else
@@ -124,6 +127,7 @@ DKPlugin.fromFile = function DKPlugin_fromFile(args, DKPlugin_fromFile_callback)
             return klass;
         }
     }
+	DUKTAPE && script.addEventListener("load", script.onload())
 }
 
 DKPlugin.fromClass = function DKPlugin_fromClass(args, DKPlugin_fromFile_callback) {
