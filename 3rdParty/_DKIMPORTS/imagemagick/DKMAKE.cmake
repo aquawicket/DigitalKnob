@@ -1,14 +1,14 @@
 # https://imagemagick.org/index.php
 # https://github.com/ImageMagick/ImageMagick
 #
-# https://github.com/ImageMagick/ImageMagick/archive/refs/tags/7.1.0-4.zip
-# http://ftp.icm.edu.pl/packages/ImageMagick/binaries/ImageMagick-7.1.0-4-portable-Q16-x86.zip
+# https://github.com/ImageMagick/ImageMagick/archive/refs/tags/7.1.0.zip
+# http://ftp.icm.edu.pl/packages/ImageMagick/binaries/ImageMagick-7.1.0-portable-Q16-x86.zip
 
 ### DEPENDS ###
 #DKDEPEND(ghostscript)
 
 ### VERSION ###
-DKSET(IMAGEMAGICK_VERSION 7.1.0-4)
+DKSET(IMAGEMAGICK_VERSION 7.1.0)
 DKSET(IMAGEMAGICK_NAME ImageMagick-${IMAGEMAGICK_VERSION})
 WIN_DKSET(IMAGEMAGICK_DL http://ftp.icm.edu.pl/packages/ImageMagick/binaries/${IMAGEMAGICK_NAME}-portable-Q16-x86.zip)
 LINUX_DKSET(IMAGEMAGICK_DL https://github.com/ImageMagick/ImageMagick/archive/refs/tags/${IMAGEMAGICK_VERSION}.zip)
@@ -18,7 +18,7 @@ WIN_DKSET(IMAGEMAGICK_CONVERT ${IMAGEMAGICK}/convert.exe)
 
 
 ### INSTALL ###
-DKINSTALL(${IMAGEMAGICK_DL} ImageMagick ${IMAGEMAGICK})
+DKINSTALL(${IMAGEMAGICK_DL} imagemagick ${IMAGEMAGICK})
 
 
 ### LINK ###

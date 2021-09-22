@@ -84,5 +84,5 @@ var XMLHttpRequestEventTarget = function(pointer) {
     return EventTarget.call(this, pointer);
 }
 
-//interface XMLHttpRequestEventTarget : EventTarget
+//IDL:: interface XMLHttpRequestEventTarget : EventTarget
 XMLHttpRequestEventTarget.prototype = EventTarget.prototype;

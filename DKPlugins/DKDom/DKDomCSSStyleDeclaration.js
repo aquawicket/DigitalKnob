@@ -1,4 +1,5 @@
 // https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleDeclaration
+// https://drafts.csswg.org/cssom/#the-cssstyledeclaration-interface
 
 var CSSStyleDeclaration = function(pointer) {
     this.pointer = pointer;

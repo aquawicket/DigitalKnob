@@ -2,6 +2,9 @@
 // https://xhr.spec.whatwg.org/
 
 // https://xhr.spec.whatwg.org/#interface-xmlhttprequest
+
+//IDL: [Exposed=(Window,DedicatedWorker,SharedWorker)]
+
 var XMLHttpRequest = function(pointer) {
     XMLHttpRequest.prototype.open = function(method, url, async, user, password) {
         //console.warn("XMLHttpRequest.open("+method+","+url+","+async+")");

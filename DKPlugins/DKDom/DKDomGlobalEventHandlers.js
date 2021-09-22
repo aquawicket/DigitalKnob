@@ -17,6 +17,7 @@ var GlobalEventHandlers = {
 var GlobalEventHandlers = function(pointer) {
     this.pointer = pointer;
 
+	//IDL: attribute EventHandler onabort;
     this.abort_func = null;
     Object.defineProperty(this, "onabort", {
         get: function() {
@@ -876,5 +877,5 @@ var GlobalEventHandlers = function(pointer) {
     return this;
 }
 
-// 
-GlobalEventHandlers.prototype = EventTarget.prototype;
+// https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler
+GlobalEventHandlers.prototype = EventTarget.prototype;  //FIXME
