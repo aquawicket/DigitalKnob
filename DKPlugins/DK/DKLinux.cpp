@@ -59,8 +59,8 @@ bool DKLinux::getch(int& key){
     old.c_cc[VTIME] = 0;
     if(tcsetattr(0, TCSANOW, &old) < 0)
         return DKERROR("tcsetattr(0, TCSANOW, &old) ICANON failed");
-    if(read(0 &buffer, sizeof(buffer)) < 0)
-		return DKERROR("read(0 &buffer, sizeof(buffer)) failed");
+    if(read(0, &buffer, sizeof(buffer)) < 0)
+		return DKERROR("read(0, &buffer, sizeof(buffer)) failed");
 	// fetch the current flags
 	int flags;
     if((flags = fcntl(STDIN_FILENO, F_GETFL, 0)) == -1)
@@ -75,12 +75,12 @@ bool DKLinux::getch(int& key){
 	while(buffer){
 		stored = buffer;
 		int arrayLength = sizeof(buffer)/sizeof(buffer[0]);
-		if(read(0 &buffer, arrayLength) < 0)
+		if(read(0, &buffer, arrayLength) < 0)
 			return DKERROR("2nd read(0 &buffer, sizeof(buffer) failed");
 	}
 	*/
 
-	if(!bufffer[0])
+	if(!buffer[0])
 		return DKERROR("buffer invalid");
     int i=0;
     while(i < (sizeof(buffer)/sizeof(buffer[0])) && buffer[i])
