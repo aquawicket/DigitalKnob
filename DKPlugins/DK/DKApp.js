@@ -4,16 +4,16 @@
 
 const DKApp = function() {};
 const dkapp = new DKApp;
-let urlParams
-let loadScript
-let runScript
+//let urlParams
+//let loadScript
+//let runScript
 
 dkapp.loadFiles = function dkapp_loadFiles(event) {
 	console.log("loadFiles()")
 	const wls = decodeURIComponent(event.currentTarget.ownerDocument.location.search);
 	const queryString = wls;
-	urlParams = new URLSearchParams(queryString)
-	loadScript = urlParams.get('l')
+	const urlParams = new URLSearchParams(queryString)
+	const loadScript = urlParams.get('l')
 	if(loadScript)
 		eval(loadScript)
 }
@@ -22,12 +22,12 @@ dkapp.runApp = function dkapp_runApp(event) {
 	console.log("runApp()")
 	const wls = decodeURIComponent(event.currentTarget.location.search);
 	const queryString = wls;
-	urlParams = new URLSearchParams(queryString)
-	loadScript = urlParams.get('r')
-	if(loadScript)
-		eval(loadScript)
+	const urlParams = new URLSearchParams(queryString)
+	const runScript = urlParams.get('r')
+	if(runScript)
+		eval(runScript)
 	
-	if(!loadScript && !runScript){
+	if(/*!loadScript && */!runScript){
 		const div = document.createElement("div")
 		div.style.position = "absolute"
 		div.style.top = "5rem"
