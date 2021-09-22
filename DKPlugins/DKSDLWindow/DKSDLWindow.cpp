@@ -4,23 +4,23 @@
 #include "DK/DKFile.h"
 #include "DKSDLWindow/DKSDLWindow.h"
 
-#if defined(WIN32) || defined(LINUX)
-    #include <GL/gl.h>
+#ifdef WIN32
+	#include <GL/gl.h>
 #endif
-#if defined(MAC)
-    #include <OpenGL/gl.h>
+#ifdef MAC
+	#include <OpenGL/gl.h>
 #endif
-/*
-    #if defined(ANDROID)
-	#include <GLES/gl.h>
-    #endif
-    #if defined(IOS)
+#ifdef IOS
 	#include <OpenGLES/ES1/gl.h>
-    #endif
-*/
-#ifdef LINUX
-    //#include <gdk/gdk.h>
 #endif
+#ifdef LINUX
+	#include <GL/gl.h>
+	//#include <gdk/gdk.h>
+#endif	
+#ifdef ANDROID
+	#include <GLES/gl.h>
+#endif
+
 
 //std::vector<boost::function<bool(SDL_Event *event)> > DKSDLWindow::event_funcs;
 std::vector<std::function<bool(SDL_Event* event)> > DKSDLWindow::event_funcs;
@@ -44,10 +44,8 @@ bool DKSDLWindow::Init() {
     DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[SDL_RENDERER]", sdl_renderer);
     DKINFO("settings.txt: [SDL_RENDERER] = " + sdl_renderer + "\n");
     SDL_SetMainReady(); //Bypass SDLmain  //https://wiki.libsdl.org/SDL_SetMainReady
-    if(SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_TIMER) < 0) {
-        DKERROR("SDL_Init Error: " + DKString(SDL_GetError()) + "\n");
-        return false;
-    }
+    if(SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_TIMER) < 0)
+        return DKERROR("SDL_Init Error: " + DKString(SDL_GetError()) + "\n");
     DKString title;
     DKFile::GetExeName(title);
     DKFile::RemoveExtention(title);
@@ -110,10 +108,8 @@ bool DKSDLWindow::Init() {
     SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
     result = "OpenglES";
     DKINFO("DKSDLWindow Width: " + toString(width) + " Height: " + toString(height) + "\n");
-    if(SDL_CreateWindowAndRenderer(width, height, SDL_WINDOW_RESIZABLE, &window, &renderer) < 0) {
-        DKERROR("SDL_CreateWindow Error: " + DKString(SDL_GetError()) + "\n");
-        return false;
-    }
+    if(SDL_CreateWindowAndRenderer(width, height, SDL_WINDOW_RESIZABLE, &window, &renderer) < 0)
+        return DKERROR("SDL_CreateWindow Error: " + DKString(SDL_GetError()) + "\n");
 #endif
 #if !defined(ANDROID) && !defined(IOS)
     DKINFO("Creating SDLWindow for Desktop\n");
@@ -129,14 +125,12 @@ bool DKSDLWindow::Init() {
     SDL_SetHintWithPriority(SDL_HINT_RENDER_OPENGL_SHADERS, 0, SDL_HINT_OVERRIDE);
     window = SDL_CreateWindow(mTitle.c_str(), winX, winY, width, height, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE | SDL_WINDOW_OPENGL);
     if(!window) {
-        DKERROR("SDL_CreateWindow Error: " + DKString(SDL_GetError()) + "\n");
         SDL_Quit();
-        return false;
+        return DKERROR("SDL_CreateWindow Error: " + DKString(SDL_GetError()) + "\n");
     }
     renderer = NULL;
     if(!same(sdl_renderer, "SOFTWARE")) {
-        //result = "SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC";
-        result = "SDL_RENDERER_ACCELERATED";
+        result = "SDL_RENDERER_ACCELERATED"; // | SDL_RENDERER_PRESENTVSYNC";
         renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED /*| SDL_RENDERER_PRESENTVSYNC*/);
     }
     if(!renderer) {
@@ -145,9 +139,8 @@ bool DKSDLWindow::Init() {
     }
     if(!renderer) {
         SDL_DestroyWindow(window);
-        DKERROR("SDL_CreateRenderer Error: " + DKString(SDL_GetError()) + "\n");
         SDL_Quit();
-        return false;
+		return DKERROR("SDL_CreateRenderer Error: " + DKString(SDL_GetError()) + "\n");
     }
 #endif
     //Set window Title
@@ -155,8 +148,7 @@ bool DKSDLWindow::Init() {
     DKFile::GetExeName(title2);
 #if defined(WIN32) && !defined(WIN64)
     title2 += " - WIN32";
-#endif
-#ifdef WIN64
+#elif WIN64
     title2 += " - WIN64";
 #endif
 #ifdef MAC
@@ -265,15 +257,12 @@ bool DKSDLWindow::Init() {
     int stencil;
     SDL_GL_GetAttribute(SDL_GL_STENCIL_SIZE, &stencil);
     DKINFO("Stencil Size = " + toString(stencil) + "\n");
-    if(has(gl_vendor, "Microsoft")) {
+    if(has(gl_vendor, "Microsoft"))
         SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_WARNING, "OpenGL Drivers", "Your OpenGL video drivers are out of date. Please upgrade the graphics card drivers for best performance and compatability.", window);
-        //DKApp::Exit();
-    }
 #endif
     return true;
 }
 
-///////////////////////
 bool DKSDLWindow::End() {
     DKDEBUGFUNC();
     //SDL_DestroyTexture(tex);
@@ -283,8 +272,6 @@ bool DKSDLWindow::End() {
     return true;
 }
 
-
-//////////////////////////////////////////////////////////
 bool DKSDLWindow::TestInt(const void* input, void* output) {
     DKDEBUGFUNC(input, output);
     int in = *(int*)input;

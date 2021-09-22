@@ -341,14 +341,6 @@ foreach(plugin ${dkdepend_list})
 	DKSET(CMAKE_FILE "") ##Linux cache file fix
 	endforeach()
 
-## Create the DKPlugins.h header file
-if(PLUGINS_FILE)
-string(REPLACE "#include \"DKWindow.h\"" "" PLUGINS_FILE ${PLUGINS_FILE})
-string(REPLACE "\\n" "\n" PLUGINS_FILE ${PLUGINS_FILE})
-file(WRITE ${DKPROJECT}/DKPlugins.h ${PLUGINS_FILE})
-endif()
-	
-
 
 
 message(STATUS "\n")
@@ -356,10 +348,17 @@ message(STATUS "***************************************")
 message(STATUS "********** Creating ${APP_NAME} **********")
 message(STATUS "***************************************\n")
 
+## Create the DKPlugins.h header file
+if(PLUGINS_FILE)
+	string(REPLACE "#include \"DKWindow.h\"" "" PLUGINS_FILE ${PLUGINS_FILE})
+	string(REPLACE "\\n" "\n" PLUGINS_FILE ${PLUGINS_FILE})
+	file(WRITE ${DKPROJECT}/DKPlugins.h ${PLUGINS_FILE})
+endif()
+
 message(STATUS "Copying DKPlugins/_DKIMPORT/ to App...")
 DKCOPY(${DKPLUGINS}/_DKIMPORT ${DKPROJECT} FALSE) ## copy app default files recursivly without overwrite
 
-### Include all source files from the app folder
+### Include all source files from the app folder for the compilers
 file(GLOB App_SRC 
 	${DKPROJECT}/*.h
 	${DKPROJECT}/*.c
@@ -401,8 +400,7 @@ if(WIN_32)
 		DKREMOVE(${DKPROJECT}/Backup)
 	endif()
 	
-	#a dummy assets.h file, or the builder will complain about assets.h missing
-	DKCOPY(${DKPLUGINS}/_DKIMPORT/assets.h ${DKPROJECT}/assets.h TRUE)
+	DKCOPY(${DKPLUGINS}/_DKIMPORT/assets.h ${DKPROJECT}/assets.h TRUE) //#required
 		
 	## Create Icon files for project
 	if(IMAGEMAGICK_CONVERT)
@@ -425,7 +423,7 @@ if(WIN_32)
 	list(APPEND DEBUG_LINK_FLAGS /SAFESEH:NO)
 	string(REPLACE ";" " " DEBUG_FLAGS "${DEBUG_LINK_FLAGS}")
 	
-	##list(APPEND RELEASE_LINK_FLAGS /FORCE) ## MySQL lib needs /FORCE due to zlib redefinitions
+	##list(APPEND RELEASE_LINK_FLAGS /FORCE) ## This can be used to debug if libraries cause redefinitions
 	list(APPEND RELEASE_LINK_FLAGS /INCREMENTAL:NO)
 	list(APPEND RELEASE_LINK_FLAGS /OPT:NOREF)
 	list(APPEND RELEASE_LINK_FLAGS /MANIFEST:NO)
