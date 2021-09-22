@@ -8,9 +8,13 @@
 #DKDEPEND(ghostscript)
 
 ### VERSION ###
-DKSET(IMAGEMAGICK_VERSION 7.1.0)
+if(WIN)
+	DKSET(IMAGEMAGICK_VERSION 7.1.0-portable-Q16-x86)
+else()
+	DKSET(IMAGEMAGICK_VERSION 7.1.0)
+endif()
 DKSET(IMAGEMAGICK_NAME ImageMagick-${IMAGEMAGICK_VERSION})
-WIN_DKSET(IMAGEMAGICK_DL http://ftp.icm.edu.pl/packages/ImageMagick/binaries/${IMAGEMAGICK_NAME}-portable-Q16-x86.zip)
+WIN_DKSET(IMAGEMAGICK_DL http://ftp.icm.edu.pl/packages/ImageMagick/binaries/${IMAGEMAGICK_NAME}.zip)
 LINUX_DKSET(IMAGEMAGICK_DL https://github.com/ImageMagick/ImageMagick/archive/refs/tags/${IMAGEMAGICK_VERSION}.zip)
 MAC_DKSET(IMAGEMAGICK_DL https://github.com/ImageMagick/ImageMagick/archive/refs/tags/${IMAGEMAGICK_VERSION}.zip )
 DKSET(IMAGEMAGICK ${3RDPARTY}/${IMAGEMAGICK_NAME})
