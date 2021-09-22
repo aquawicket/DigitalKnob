@@ -9,11 +9,12 @@
 
 class DKLinux{
 public:
-	static bool SetVolume(double nVolume);
+	static bool getch(int& key);
 	static bool CpuInit();
 	static bool CpuUsed(int& cpu);
 	static bool CpuUsedByApp(int& cpu);
 	static bool GetClipboard(DKString& text);
+	static bool GetKey(int& key);
 	static bool GetMousePos(int& x, int& y);
 	static bool SetMousePos(const int& x, const int& y);
 	static bool GetScreenWidth(int& w);
@@ -34,6 +35,7 @@ public:
 	static bool PhysicalMemoryUsedByApp(unsigned int& physicalMemory);
 	static bool Run(const DKString& command);
 	static bool SetClipboard(const DKString& text);
+	static bool SetVolume(double nVolume);
 	static bool StrokeKey(const int& key);
 	static bool TurnOffMonitor();
 	static bool TurnOnMonitor();

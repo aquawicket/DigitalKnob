@@ -110,8 +110,6 @@ bool DKLinux::getch(int& key){
 	return true;
 }
 
-
-
 bool DKLinux::GetMousePos(int& x, int& y){
 	DKDEBUGFUNC(x, y);
 	//Compile with:
