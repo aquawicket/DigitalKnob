@@ -54,4 +54,5 @@ var Console = function(pointer) {
     }
 }
 
-var console = new Console("console");
+//var console = new Console("console");
+window.console = new Console("console");
