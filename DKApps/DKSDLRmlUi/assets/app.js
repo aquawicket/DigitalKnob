@@ -4,8 +4,9 @@ CPP_DK_Create("DKRml");
 //CPP_DK_Create("DKSDLText");
 //CPP_DK_Create("DKSDLCef");
 
-location.href = CPP_DKAssets_LocalAssets()+"index.html";
+location.href = CPP_DKAssets_LocalAssets()+"dktasmota.html";
 
+/*
 window.addEventListener("keydown", function mykeydown(event){
 	console.log(" ");
 	console.log("event.type: "+event.type)
@@ -26,6 +27,7 @@ window.addEventListener("keydown", function mykeydown(event){
 	console.log("event.which: "+event.which)
 	console.log(" ");
 })
+*/
 
 //// Create Cef window ////
 //var USE_CEF = 1;
