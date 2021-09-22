@@ -2,14 +2,114 @@
 #ifdef LINUX
 #include "DKLinux.h"
 #include "DKLog.h"
-#include <unistd.h> 
-#include "getch.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <X11/Xlib.h>
 #include <X11/XKBlib.h>
 #include <X11/extensions/XTest.h>  //requires  libxtst-dev
 #include <alsa/asoundlib.h>
+#include <unistd.h>         
+#include <termios.h>  //for system("stty raw") in GetKey()
+
+/*
+#include <unistd.h> 
+#include "getch.h"
+t_key keys[] = {
+  {"[A", K_UP},
+  {"[B", K_DOWN},
+  {"[D", K_LEFT},
+  {"[C", K_RIGHT},
+  {NULL, K_UNK},
+};
+*/
+
+
+bool DKLinux::GetKey(int& key){
+	DKDEBUGFUNC("key");
+
+	//Method 1
+	system("stty raw"); // Set terminal to raw mode, (no wait for enter) 
+	key = getchar();       
+	system("stty cooked"); // Reset terminal to normal "cooked" mode
+
+	/*
+	//Method 2
+	if(!getch(key))
+		return DKERROR("get_ch(key) failed\n");
+	return true;
+	*/
+
+	//Method 3
+	//key = ch_get(keys);
+}
+
+
+// https://eklitzke.org/blocking-io-nonblocking-io-and-epoll
+bool DKLinux::getch(int& key){
+	DKDEBUGFUNC("key");
+    int stored;
+	int buffer[128];
+	struct termios old = {0};
+    fflush(stdout);
+    if(tcgetattr(0, &old) < 0)
+        return DKERROR("tcsetattr(0, &old) failed");
+    old.c_lflag &= ~ICANON;
+    old.c_lflag &= ~ECHO;
+    old.c_cc[VMIN] = 1;
+    old.c_cc[VTIME] = 0;
+    if(tcsetattr(0, TCSANOW, &old) < 0)
+        return DKERROR("tcsetattr(0, TCSANOW, &old) ICANON failed");
+    if(read(0 &buffer, sizeof(buffer)) < 0)
+		return DKERROR("read(0 &buffer, sizeof(buffer)) failed");
+	// fetch the current flags
+	int flags;
+    if((flags = fcntl(STDIN_FILENO, F_GETFL, 0)) == -1)
+		return DKERROR("fcntl(STDIN_FILENO, F_GETFL, 0) failed");
+	int stored_flags = flags; //store the old flags to recall later
+    // now set the flags to what they are + non-blocking
+    if ((flags = fcntl(STDIN_FILENO, F_SETFL, flags | O_NONBLOCK)) == -1)
+        return DKERROR("fcntl(STDIN_FILENO, F_SETFL, f | O_NONBLOCK) failed");
+	
+	// read the buffer until we run out of data
+	/*
+	while(buffer){
+		stored = buffer;
+		int arrayLength = sizeof(buffer)/sizeof(buffer[0]);
+		if(read(0 &buffer, arrayLength) < 0)
+			return DKERROR("2nd read(0 &buffer, sizeof(buffer) failed");
+	}
+	*/
+
+	if(!bufffer[0])
+		return DKERROR("buffer invalid");
+    int i=0;
+    while(i < (sizeof(buffer)/sizeof(buffer[0])) && buffer[i])
+        i++;
+    if(!buffer[i-1])
+		return DKERROR("buffer invalid");
+    key = buffer[i-1];
+
+	if ((flags = fcntl(STDIN_FILENO, F_SETFL, stored_flags)) == -1)
+		DKERROR("fcntl(STDIN_FILENO, F_SETFL, stored_flags)) failed");
+    old.c_lflag |= ICANON;
+    old.c_lflag |= ECHO;
+    if(tcsetattr(0, TCSADRAIN, &old) < 0)
+        return DKERROR("tcsetattr(0, TCSADRAIN, &old) failed");	
+	/*
+	if(!stored)
+		return DKERROR("stored has no data, and it should");
+	if(buffer)
+		return DKERROR("buffer has data and it shouldn't");
+	key = stored;
+	*/
+
+	//int c;
+	//while((c = getc(stdin) != EOF && c != '\n')){} //clear out stdin 
+	
+	//DKINFO("DKLinux::getch(): key = "+key+"\n");
+	return true;
+}
+
 
 
 bool DKLinux::GetMousePos(int& x, int& y){

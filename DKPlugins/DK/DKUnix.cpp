@@ -8,29 +8,23 @@
 #include <unistd.h>    //GetUsername()  getlogin()/getlogin_r()
 #include <sys/types.h> //GetUsername()  getpwnam()
 */
-#include "getch.h"
- 
-t_key keys[] = {
-  {"[A", K_UP},
-  {"[B", K_DOWN},
-  {"[D", K_LEFT},
-  {"[C", K_RIGHT},
-  {NULL, K_UNK},
-};
+//#include <termios.h> //for system("stty raw") in GetKey
 
 bool DKUnix::GetKey(int& key){
 	DKDEBUGFUNC(key);
-	key = ch_get(keys);
+	//system("stty raw"); // Set terminal to raw mode, (no wait for enter)
+	key = getchar();       
+	//system("stty cooked"); // Reset terminal to normal "cooked" mode
 	return true;
 }
 
 bool DKUnix::Sleep(int milliseconds){
 	//DKDEBUGFUNC(milliseconds);
-//#ifdef ANDROID
-	//sleep(milliseconds * 1000);
-//#else
+#ifdef ANDROID
+	sleep(milliseconds * 1000);
+#else
 	usleep(milliseconds * 1000);
-//#endif
+#endif
 	return true;
 }
 

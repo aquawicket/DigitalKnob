@@ -3,7 +3,7 @@
 #ifndef DKLinux_H
 #define DKLinux_H
 
-#define DESKTOP
+#define DESKTOP //FIXME: Linux could potentially be an embedded device
 
 #include "DKString.h"
 

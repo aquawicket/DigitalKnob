@@ -281,10 +281,14 @@ bool DKUtil::GetKey(int& key){
 	DKDEBUGFUNC("key");
 #ifdef WIN32
 	return DKWindows::GetKey(key);
-#else
+#endif
+#ifdef LINUX
+	return DKLinux::GetKey(key);
+#endif
+#ifndef WIN32
 	return DKUnix::GetKey(key);
 #endif
-        //FIXME: this code is inaccessable
+    //FIXME: this code is inaccessable
 	return DKERROR("DKUtil::GetKey(): not implemented on this OS\n");
 }
 
