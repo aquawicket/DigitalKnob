@@ -373,8 +373,15 @@ include_directories(${DKPROJECT})
 
 ##########
 if(WIN_32)
-		# copy the icon to assets
-		DKCOPY(${DKPROJECT}/icons/windows/icon.ico ${DKPROJECT}/assets/icon.ico TRUE)
+	
+	## Create Icon files for project
+	if(IMAGEMAGICK_CONVERT)
+		message(STATUS "Building icons for ${APP_NAME} . . .")
+		dk_makeDirectory(${DKPROJECT}/icons/windows)
+		DKEXECUTE_PROCESS(COMMAND ${IMAGEMAGICK_CONVERT} ${DKPROJECT}/icons/icon.png -define icon:auto-resize=256,128,64,48,32,16 ${DKPROJECT}/icons/windows/icon.ico)
+		DKCOPY(${DKPROJECT}/icons/windows/icon.ico ${DKPROJECT}/assets/icon.ico TRUE) # copy the icon to assets
+		DKEXECUTE_PROCESS(COMMAND ${IMAGEMAGICK_CONVERT} ${DKPROJECT}/icons/icon.png -define icon:auto-resize=16 ${DKPROJECT}/assets/favicon.ico)
+	endif()
 	
 	if(NOT EXCLUDE_ASSETS)
 		# Backup files and folders excluded from the package
@@ -401,14 +408,6 @@ if(WIN_32)
 	endif()
 	
 	DKCOPY(${DKPLUGINS}/_DKIMPORT/assets.h ${DKPROJECT}/assets.h TRUE) #required
-	
-	## Create Icon files for project
-	if(IMAGEMAGICK_CONVERT)
-		message(STATUS "Building icons for ${APP_NAME} . . .")
-		dk_makeDirectory(${DKPROJECT}/icons/windows)
-		DKEXECUTE_PROCESS(COMMAND ${IMAGEMAGICK_CONVERT} ${DKPROJECT}/icons/icon.png -define icon:auto-resize=256,128,64,48,32,16 ${DKPROJECT}/icons/windows/icon.ico)
-		DKEXECUTE_PROCESS(COMMAND ${IMAGEMAGICK_CONVERT} ${DKPROJECT}/icons/icon.png -define icon:auto-resize=16 ${DKPROJECT}/assets/favicon.ico)
-	endif()
 	
 	add_definitions(-D_USING_V110_SDK71_)
 	add_executable(${APP_NAME} WIN32 ${App_SRC})
@@ -449,8 +448,14 @@ endif(WIN_32)
 	
 ##########
 if(WIN_64)
-	# copy the icon to assets
-	DKCOPY(${DKPROJECT}/icons/windows/icon.ico ${DKPROJECT}/assets/icon.ico TRUE)
+	## Create Icon files for project
+	if(IMAGEMAGICK_CONVERT)
+		message(STATUS "Building icons for ${APP_NAME} . . .")
+		dk_makeDirectory(${DKPROJECT}/icons/windows)
+		DKEXECUTE_PROCESS(COMMAND ${IMAGEMAGICK_CONVERT} ${DKPROJECT}/icons/icon.png -define icon:auto-resize=256,128,64,48,32,16 ${DKPROJECT}/icons/windows/icon.ico)
+		DKCOPY(${DKPROJECT}/icons/windows/icon.ico ${DKPROJECT}/assets/icon.ico TRUE)
+		DKEXECUTE_PROCESS(COMMAND ${IMAGEMAGICK_CONVERT} ${DKPROJECT}/icons/icon.png -define icon:auto-resize=16 ${DKPROJECT}/assets/favicon.ico)
+	endif()
 	
 	if(NOT EXCLUDE_ASSETS)
 		# Backup files and folders excluded from the package
@@ -479,14 +484,6 @@ if(WIN_64)
 	#dummy assets.h file, or the builder wil complain about assets.h missing
 	DKCOPY(${DKPLUGINS}/_DKIMPORT/assets.h ${DKPROJECT}/assets.h TRUE)
 		
-	## Create Icon files for project
-	if(IMAGEMAGICK_CONVERT)
-		message(STATUS "Building icons for ${APP_NAME} . . .")
-		dk_makeDirectory(${DKPROJECT}/icons/windows)
-		DKEXECUTE_PROCESS(COMMAND ${IMAGEMAGICK_CONVERT} ${DKPROJECT}/icons/icon.png -define icon:auto-resize=256,128,64,48,32,16 ${DKPROJECT}/icons/windows/icon.ico)
-		DKEXECUTE_PROCESS(COMMAND ${IMAGEMAGICK_CONVERT} ${DKPROJECT}/icons/icon.png -define icon:auto-resize=16 ${DKPROJECT}/assets/favicon.ico)
-	endif()
-	
 	add_definitions(-D_USING_V110_SDK71_)
 	add_executable(${APP_NAME} WIN32 ${App_SRC})
 	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${WIN_LIBS})
@@ -860,13 +857,10 @@ endif()
 
 
 if(ANDROID)
-	# remove files not needed for android
-	list(REMOVE_ITEM App_SRC ${DKPROJECT}/resource.h)
-	list(REMOVE_ITEM App_SRC ${DKPROJECT}/resource.rc)
-	
+		
 	## Create Android Icons
 	if(IMAGEMAGICK_CONVERT)
-	message(STATUS "Building icons for ${APP_NAME} . . .")
+		message(STATUS "Building icons for ${APP_NAME} . . .")
 		dk_makeDirectory(${DKPROJECT}/icons/android/drawable-hdpi)
 		DKEXECUTE_PROCESS(COMMAND ${IMAGEMAGICK_CONVERT} ${DKPROJECT}/icons/icon.png -resize 72x72 ${DKPROJECT}/icons/android/drawable-hdpi/icon.png)
 		dk_makeDirectory(${DKPROJECT}/icons/android/drawable-ldpi)
@@ -878,11 +872,13 @@ if(ANDROID)
 		dk_makeDirectory(${DKPROJECT}/icons/android/drawable-xxhdpi)
 		DKEXECUTE_PROCESS(COMMAND ${IMAGEMAGICK_CONVERT} ${DKPROJECT}/icons/icon.png -resize 144x144 ${DKPROJECT}/icons/android/drawable-xxhdpi/icon.png)
 	endif()
-	
-	# Copy the icon to ${DKPROJECT}/assets
 	DKCOPY(${DKPROJECT}/icons/icon.png ${DKPROJECT}/assets/icon.png TRUE)
 	DKCOPY(${DKPROJECT}/icons/icon.png ${DKPROJECT}/${OS}/res/drawable/icon.png TRUE)
-
+	
+	# remove files not needed for android
+	list(REMOVE_ITEM App_SRC ${DKPROJECT}/resource.h)
+	list(REMOVE_ITEM App_SRC ${DKPROJECT}/resource.rc)
+	
 	#DKUPDATE_ANDROID_NAME(${APP_NAME})
 	
 	set(CMAKE_CXX_FLAGS "-DDKAPP -DUSE_DK -std=c++17")
