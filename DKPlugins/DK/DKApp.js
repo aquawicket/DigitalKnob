@@ -8,30 +8,24 @@ let urlParams
 let loadScript
 let runScript
 
-dkapp.loadFiles = function dkapp_loadFiles() {
-	console.log("dkapp.loadFiles()")
-
+dkapp.loadFiles = function dkapp_loadFiles(event) {
+	console.log("loadFiles()")
+	const wls = decodeURIComponent(event.currentTarget.ownerDocument.location.search);
+	const queryString = wls;
+	urlParams = new URLSearchParams(queryString)
+	loadScript = urlParams.get('l')
+	if(loadScript)
+		eval(loadScript)
 }
 
-dkapp.runApp = function dkapp_runApp() {	
-	console.log("dkapp.runApp()
-	
-	const wls = decodeURIComponent(window.location.search);
-	const queryString = decodeURIComponent(wls);
-	urlParams = new URLSearchParams(decodeURIComponent(queryString))
-	console.log(url)
-	console.log("urlParams = "+urlParams)
-	loadScript = urlParams.get('l')
-	if(loadScript){
-		console.log("eval("+loadScript+")")
+dkapp.runApp = function dkapp_runApp(event) {	
+	console.log("runApp()")
+	const wls = decodeURIComponent(event.currentTarget.location.search);
+	const queryString = wls;
+	urlParams = new URLSearchParams(queryString)
+	loadScript = urlParams.get('r')
+	if(loadScript)
 		eval(loadScript)
-	}
-	
-	runScript = urlParams.get('r')
-	if(runScript){
-		console.log("eval("+runScript+")")
-		eval(runScript)
-	}
 	
 	if(!loadScript && !runScript){
 		const div = document.createElement("div")
@@ -76,7 +70,7 @@ dkapp.runApp = function dkapp_runApp() {
 		testCode.style.height = "25rem"
 		div.appendChild(testCode);
 		testCode.onclick = function(){
-			loadarea.value = "DKPlugin('DKGui/DKConsole.js')" //test code
+			loadarea.value = "DKPlugin('DKGui/DKGui.js')\nDKPlugin('DKGui/DKConsole.js')" //test code
 			runarea.value = "DKConsole.prototype.create(document.body, '', '0rem', '0rem', '0rem', '100%', '25%');" //test code
 		}
 		
