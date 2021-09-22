@@ -111,11 +111,12 @@ endfunction()
 
 
 function(DKSETENV name value)
-	message(STATUS "DKSETENV(${name} ${value})")
+	message(STATUS "DKSETENV(${name}=\"${value}\")")
 	if(NOT "$ENV{${name}}" STREQUAL "${value}")
 		if(CMAKE_HOST_WIN32)
 			message(STATUS "Setting %${name}% environment variable to ${value}")
-			DKEXECUTE_PROCESS(setx ${name} ${value})
+			#DKEXECUTE_PROCESS(setx ${name} ${value}) # https://stackoverflow.com/a/69246810
+			DKEXECUTE_PROCESS(setx "${name}=\"${value}\"")
 		else()
 			message(STATUS "DKSETENV() not implemented on this system")
 		endif()
@@ -125,6 +126,7 @@ endfunction()
 
 ##https://cmake.org/pipermail/cmake/2012-September/052205.html/
 function(DKDOWNLOAD url) #arg2 dest_path
+	DKSET(CURRENT_DIR ${DKDOWNLOAD}) #set the default dl directory
 	get_filename_component(src_filename ${url} NAME)
 	if(${ARGC} GREATER 1)
 		set(dest_path ${ARGV1})
@@ -147,8 +149,6 @@ function(DKDOWNLOAD url) #arg2 dest_path
 				#message(FATAL_ERROR "end")
 			endif()
 		endif()
-	else()
-		DKSET(CURRENT_DIR ${DKDOWNLOAD})
 	endif()
 	if(NOT EXISTS ${CURRENT_DIR}/${dest_filename})
 		message(STATUS "Downloading ${url}")
