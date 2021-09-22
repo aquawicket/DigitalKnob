@@ -91,5 +91,5 @@ var Screen = function(pointer) {
 }
 Screen.prototype = EventTarget.prototype;
 
-//var screen = new Screen("screen");
-window.screen = new Screen("screen");
+var screen = new Screen("screen");
+window.screen = screen;

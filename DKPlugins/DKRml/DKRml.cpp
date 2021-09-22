@@ -70,6 +70,21 @@ bool DKRml::Init(){
 	Rml::XMLParser::RegisterNodeHandler("head", std::make_shared<HeadInstancer>());
 	Rml::Factory::RegisterElementInstancer("body", new Rml::ElementInstancerElement);
 	Rml::XMLParser::RegisterNodeHandler("body", std::make_shared<Rml::XMLNodeHandlerDefault>());
+	
+	
+	//Load the Duktape javascript DOM
+		DKClass::DKCreate("DKDuktape/DKGlobalEventHandlers.js");
+		DKClass::DKCreate("DKEventTarget");
+			DKClass::DKCreate("DKEvent");
+				DKClass::DKCreate("DKUIEvent");
+				DKClass::DKCreate("DKKeyboardEvent");
+			DKClass::DKCreate("DKDuktape/DKWindow.js");
+				DKClass::DKCreate("DKConsole");
+				DKClass::DKCreate("DKNavigator");
+				DKClass::DKCreate("DKScreen");
+				DKClass::DKCreate("DKXMLHttpRequest");
+				
+				
 	//* Load the javascript DOM	
 	//* Dom thats doesn't need a screen
 	DKClass::DKCreate("DKDomConsole");
@@ -96,6 +111,8 @@ bool DKRml::Init(){
 	DKClass::DKCreate("DKDomUIEvent");
 	DKClass::DKCreate("DKDomKeyboardEvent");
 	DKClass::DKCreate("DKDomMouseEvent");
+	
+	
 	DKString html;
 	DKString workingPath = DKFile::local_assets;
 	DKFile::FileToString(workingPath +"DKRml/blank.html", html);

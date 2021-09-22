@@ -6,7 +6,6 @@
 
 #include "DKDuktape/DKDuktape.h"
 
-///////////////////////////////////////////////////////////
 class DKEventTarget : public DKObjectT<DKEventTarget>
 {
 public:
@@ -23,7 +22,6 @@ public:
 	static int type(duk_context* ctx);
 	static int value(duk_context* ctx);
 };
-
 
 REGISTER_OBJECT(DKEventTarget, true)
 
