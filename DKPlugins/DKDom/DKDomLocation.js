@@ -84,3 +84,4 @@ var Location = function(pointer) {
 }
 
 var location = new Location("location");
+window.location = location;

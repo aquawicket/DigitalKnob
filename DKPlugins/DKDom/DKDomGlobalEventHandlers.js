@@ -878,4 +878,4 @@ var GlobalEventHandlers = function(pointer) {
 }
 
 // https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler
-GlobalEventHandlers.prototype = EventTarget.prototype;  //FIXME
+GlobalEventHandlers.prototype = EventTarget.prototype;  //FIXME: this may not be correct

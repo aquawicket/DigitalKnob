@@ -241,3 +241,5 @@ var Navigator = function(pointer) {
 }
 
 var navigator = new Navigator("navigator")
+window.navigator = navigator
+
