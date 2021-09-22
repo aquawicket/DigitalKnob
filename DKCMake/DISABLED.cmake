@@ -50,7 +50,7 @@ if(WIN) # Disabled for Windows targets
 	DKDISABLE(flac)
 	DKDISABLE(freealut)
 	DKDISABLE(freealut-master)
-	DKDISABLE(imagemagick)
+	#DKDISABLE(imagemagick)
 	DKDISABLE(jpeg) 
 	DKDISABLE(kdevelop)
 	DKDISABLE(leptonica)
