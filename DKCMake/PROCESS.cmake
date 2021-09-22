@@ -400,8 +400,8 @@ if(WIN_32)
 		DKREMOVE(${DKPROJECT}/Backup)
 	endif()
 	
-	DKCOPY(${DKPLUGINS}/_DKIMPORT/assets.h ${DKPROJECT}/assets.h TRUE) //#required
-		
+	DKCOPY(${DKPLUGINS}/_DKIMPORT/assets.h ${DKPROJECT}/assets.h TRUE) #required
+	
 	## Create Icon files for project
 	if(IMAGEMAGICK_CONVERT)
 		message(STATUS "Building icons for ${APP_NAME} . . .")
