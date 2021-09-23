@@ -87,5 +87,6 @@ bool getSettingFromString(const DKString& filestring, const DKString& setting, D
 //DKStringArray getSettingsFromString(const DKString& filestring, const DKString& setting);
 bool toStringArray(DKStringArray& output, const DKString& str, const DKString& seperator);
 DKString toLower(const DKString& input);
+//DKString toUpper(const DKString& input); //TODO
 
 #endif //DKString_H

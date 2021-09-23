@@ -361,6 +361,12 @@ DKString toLower(const DKString& input){
     return output;
 }
 
+DKString toUpper(const DKString& input){
+    DKString output = input;
+    std::transform( output.begin(), output.end(), output.begin(), ::toupper );
+    return output;
+}
+
 #ifdef WIN32
 std::wstring toWString(const DKString& str){
 	int len;

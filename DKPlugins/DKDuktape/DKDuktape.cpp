@@ -147,7 +147,8 @@ bool DKDuktape::AttachFunction(const DKString& name, duk_c_function func){
 
 bool DKDuktape::CallEnd(const DKString& file){
 	DKDEBUGFUNC(file);
-	if(!FileLoaded(file)){ return false; }
+	if(!FileLoaded(file))
+		return false;
 	DKString filename;
 	DKFile::GetFileName(file, filename);
 	DKFile::RemoveExtention(filename);
@@ -176,7 +177,8 @@ bool DKDuktape::CallInit(const DKString& file){
 	DKString filename;
 	DKFile::GetFileName(file, filename);
 	DKFile::RemoveExtention(filename);
-	DKString func = filename+"_init";
+	
+	DKString func = filename+".init";
 	DKString rval;
 	RunDuktape("(typeof "+func+" === 'function')", rval);
 	if(!toBool(rval)){
