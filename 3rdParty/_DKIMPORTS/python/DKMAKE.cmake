@@ -10,7 +10,7 @@ WIN_DKSET(PYTHON_EXE ${PYTHON}/python.exe)
 
 ### INSTALL ###
 IF(NOT EXISTS ${PYTHON_EXE})
-	DKDOWNLOAD(${PYTHON_DL} ${DKDOWNLOAD}/${PYTHON_NAME}.msi)
+	DOWNLOAD(${PYTHON_DL} ${DKDOWNLOAD}/${PYTHON_NAME}.msi)
 	string(REPLACE "/" "\\" PYTHON_PATH ${PYTHON})
 	DKCOMMAND(${DKDOWNLOAD}/${PYTHON_NAME}.msi PrependPath=1 TargetDir=${PYTHON_PATH})
 	DKSETENV("PATH" "%PATH%;${PYTHON}") #ERROR: Invalid syntax. Default option is not allowed more than '2' time(s)

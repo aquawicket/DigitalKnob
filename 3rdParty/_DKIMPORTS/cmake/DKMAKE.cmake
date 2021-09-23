@@ -17,7 +17,7 @@ LINUX_DKSET(CMAKE_EXE /usr/bin/cmake)
 ### INSTALL ###
 if(CMAKE_HOST_WIN32)
 	if(NOT EXISTS ${CMAKE_EXE})
-		DKDOWNLOAD(${CMAKE_DL} ${DIGITALKNOB}/Download)
+		DOWNLOAD(${CMAKE_DL} ${DIGITALKNOB}/Download)
 		DKCOMMAND(${DIGITALKNOB}/Download/${CMAKE_NAME}.msi)
 	endif()
 endif()

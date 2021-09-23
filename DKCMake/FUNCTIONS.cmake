@@ -125,7 +125,7 @@ endfunction()
 
 
 ##https://cmake.org/pipermail/cmake/2012-September/052205.html/
-function(DKDOWNLOAD url) #arg2 dest_path
+function(DOWNLOAD url) #arg2 dest_path
 	DKSET(CURRENT_DIR ${DKDOWNLOAD}) #set the default dl directory
 	get_filename_component(src_filename ${url} NAME)
 	if(${ARGC} GREATER 1)
@@ -452,9 +452,9 @@ function(DKINSTALL src_path import_path dest_path)
 	dk_makeDirectory(${DKDOWNLOAD})
 	#rename src_filename to dest_filename + src_extension as we download to avoid duiplicate name conflicts
 	dkSet(dl_filename "${dest_filename}${src_extension}")
-	dkDownload(${src_path} ${dl_filename})
+	download(${src_path} ${dl_filename})
 	
-	DKSET(FILETYPE "UNKNOWN")
+	dkset(FILETYPE "UNKNOWN")
 	if(NOT ${src_extension} STREQUAL "")
 		if(${src_extension} STREQUAL ".bz")
 			DKSET(FILETYPE "Archive")

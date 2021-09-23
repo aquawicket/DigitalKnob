@@ -11,7 +11,7 @@ DKSET(EMSCRIPTEN ${3RDPARTY}/${EMSCRIPTEN_NAME})
 IF(CMAKE_HOST_WIN32)
 	IF(NOT EXISTS ${EMSCRIPTEN})
 		DKSET(CURRENT_DIR ${DIGITALKNOB}/Download)
-		## DKDOWNLOAD(www.internet.com/emsdk-portable-64bit.zip) ## find an online link
+		## DOWNLOAD(www.internet.com/emsdk-portable-64bit.zip) ## find an online link
 		DKEXTRACT(${DIGITALKNOB}/Download/emsdk-portable-64bit.zip ${3RDPARTY}/emsdk-portable-64bit)
 		DKCOPY(${3RDPARTY}/_DKIMPORTS/emsdk-portable-64bit/.emscripten ${3RDPARTY}/emsdk-portable-64bit/.emscripten true)
 		DKSET(CURRENT_DIR ${3RDPARTY}/emsdk-portable-64bit)
@@ -22,7 +22,7 @@ IF(CMAKE_HOST_WIN32)
 	ENDIF()
 else()
 	DKSET(CURRENT_DIR ${DIGITALKNOB}/Download)
-	## DKDOWNLOAD(www.internet.com/emsdk-portable.tar.gz) ## find an online link
+	## DOWNLOAD(www.internet.com/emsdk-portable.tar.gz) ## find an online link
 	DKEXTRACT(${DIGITALKNOB}/Download/emsdk-portable.tar.gz ${3RDPARTY}/emsdk-portable)
 	DKCOPY(${3RDPARTY}/_DKIMPORTS/emsdk-portable/.emscripten ${3RDPARTY}/emsdk-portable/.emscripten true)
 	DKSET(CURRENT_DIR ${3RDPARTY}/emsdk-portable)
