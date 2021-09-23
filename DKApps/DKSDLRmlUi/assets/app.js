@@ -4,7 +4,7 @@ CPP_DK_Create("DKRml");
 //CPP_DK_Create("DKSDLText");
 //CPP_DK_Create("DKSDLCef");
 
-location.href = CPP_DKAssets_LocalAssets()+"dktasmota.html";
+location.href = CPP_DKAssets_LocalAssets()+"index.html";
 
 /*
 window.addEventListener("keydown", function mykeydown(event){

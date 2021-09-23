@@ -1,53 +1,53 @@
-"use strict";
+//"use strict"; FIXME: Duktape doesn't like "use strict" tags 
 
-//**************************************
-// TODO: start xconsole early and keep a backup of all messages to give to dk.console later..
-// TODO: Create an easy TODO list check off/alarm/reminder type Plugin   check calander?
-//**************************************
 
 const MyApp = function() {};
 const myapp = new MyApp;
 
 myapp.loadFiles = function myapp_loadFiles() {
-    //If you initiate any values here, they may fail.
-    //This function should only load files, and make declarations, Not initiate variable values or make assignments.
-    //myapp.loadApp()) will be called after this loads everything. This gives a chance to load assets without using a million callbacks.
-
-    DKPlugin("DK/DKTrace.js")//, "singleton")
-    DKPlugin("DK/DKErrorHandler.js", "singleton")
-    DKPlugin("DK/DKPhp.js", "singleton")
-    DKPlugin("DK/DKJson.js", "singleton")
-    DKPlugin("DKFile/DKFile.js", "singleton")
-    //DKPlugin("DK/DKValidate.js", "singleton")
+    console.debug("myapp.loadFiles")
+	
+    //DKPlugin("DK/DKTrace.js")//, "singleton")                //FIXME: Infinate loop on Duktape
+	//DKPlugin("DK/DKErrorHandler.js")//, "singleton")         //FIXME: Infinate loop on Duktape
+	//DKPlugin("DK/DKPhp.js")//, "singleton")                  //FIXME: Infinate loop on Duktape
+    //DKPlugin("DK/DKJson.js", "singleton")                    //FIXME: SyntaxError: parse error (line 77)
+	
+	DKPlugin("DKFile/DKFile.js", "singleton")
+    DKPlugin("DK/DKValidate.js", "singleton")
     DKPlugin("DK/DKTime.js", "singleton")
-    //DKPlugin("DK/DKMqtt.js")
-    //DKPlugin("DK/DKNotifications.js");
+    DKPlugin("DK/DKMqtt.js")
+    DKPlugin("DK/DKNotifications.js");
     DKPlugin("DKDebug/DKDebug.js", "singleton")
-    DKPlugin("DKAudio/DKAudio.js")
+    
+	//DKPlugin("DKAudio/DKAudio.js")                           //DKAudio compile now working yet
     DKPlugin("DKGui/DKConsole.js", "singleton")
     DKPlugin("DKGui/DKGui.js", "singleton")
     DKPlugin("DKGui/DKFrame.js")
-    //DKPlugin("DKGui/DKMenu.js")
+    DKPlugin("DKGui/DKMenu.js")
     DKPlugin("DKGui/DKMessageBox.js")
     DKPlugin("DKGui/DKDrag.js")
-    //DKPlugin("DKGui/DKResize.js")
+    DKPlugin("DKGui/DKResize.js")
     DKPlugin("DKGui/DKClipboard.js", "singleton")
     DKPlugin("DKGui/DKTable.js")
-    DKPlugin("DKDevTools/DKDevToolsButton.js", "singleton")
-    DKPlugin("DKChart/DKChart.js")
-    //DKPlugin("DKCodeMirror/DKCodeMirror.js")
+    //DKPlugin("DKDevTools/DKDevToolsButton.js", "singleton")   //DKFile::FileToString(C:/Users/IK/digitalknob/DK/DKApps/DKSDLRmlUi/assets/DKDevTools/DKDevToolsButton.js) path does not exist!   This should work
+    //DKPlugin("DKChart/DKChart.js")                            //DKFile::FileToString(C:/Users/IK/digitalknob/DK/DKApps/DKSDLRmlUi/assets/DKChart/DKChart.js) path does not exist!
+    //DKPlugin("DKCodeMirror/DKCodeMirror.js")                  //DKFile::FileToString(C:/Users/IK/digitalknob/DK/DKApps/DKSDLRmlUi/assets/DKCodeMirror/DKCodeMirror.js) path does not exist!
 }
 
 myapp.loadApp = function myapp_loadApp() {
-    dk.errorCatcher(myapp, "myapp")
-    dk.errorhandler.create()
+	console.debug("myapp.loadFiles")
+	
+    //dk.errorCatcher(myapp, "myapp")
+    //dk.errorhandler.create()
     DKTime.prototype.create()
-    //dk.php.call("GET", "DK/DK.php", "createSocket", console.log);
+    //dk.php.call("GET", "DK/DK.php", "createSocket", console.debug);
     dk.audio.createSound("DKTasmota/PowerDown.mp3");
     //dk.create("TestCode/TestPlugin.js", function() {})
 }
 
 myapp.loadGui = function myapp_loadGui() {
+	console.debug("myapp.loadFiles")
+	
     DKConsole.prototype.create(document.body, "", "0rem", "0rem", "0rem", "100%", "25%");
     console.debug("**** Tasmota device manager 0.1b ****");
     dk.time.createClock(document.body, "2rem");
@@ -66,7 +66,7 @@ myapp.loadGui = function myapp_loadGui() {
             DKPlugin("DKGui/DKMessageBox.js", function() {
                 DKMessageBox.prototype.createMessage("CHECK PLANTS!", function(instance, okclicked) {
                     if (instance) {
-                        //console.log("instance: %c" + instance, "color:orange;")
+                        //console.debug("instance: %c" + instance, "color:orange;")
                         instance.html && (instance.html.style.backgroundColor = "red")
                     }
                 });
@@ -76,6 +76,8 @@ myapp.loadGui = function myapp_loadGui() {
 }
 
 myapp.mainAppLoop = function myapp_mainAppLoop() {
+	//console.debug("myapp.loadFiles")
+	
     navigator.onLine ? byId("internet").src = "DKGui/online.png" : byId("internet").src = "DKGui/offline.png"
 }
 
