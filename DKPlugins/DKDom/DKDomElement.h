@@ -8,7 +8,6 @@
 #include "DKDuktape/DKDuktape.h"
 
 
-///////////////////////////////////////////////////
 class DKDomElement : public DKObjectT<DKDomElement>
 {
 public:

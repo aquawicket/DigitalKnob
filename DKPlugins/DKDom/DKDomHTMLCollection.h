@@ -6,7 +6,7 @@
 
 #include "DKDuktape/DKDuktape.h"
 
-/////////////////////////////////////////////////////////////////
+
 class DKDomHTMLCollection : public DKObjectT<DKDomHTMLCollection>
 {
 public:

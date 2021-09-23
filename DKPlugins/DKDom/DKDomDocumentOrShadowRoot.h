@@ -7,7 +7,6 @@
 
 #include "DKDuktape/DKDuktape.h"
 
-/////////////////////////////////////////////////////////////////////////////
 class DKDomDocumentOrShadowRoot : public DKObjectT<DKDomDocumentOrShadowRoot>
 {
 public:
