@@ -120,6 +120,7 @@ DKPlugin.fromFile = function DKPlugin_fromFile(args, DKPlugin_fromFile_callback)
             return klass;
         }
     }
+	DUKTAPE && (script.onload = script.onload()) //FIX script.onload for duktape
 }
 
 DKPlugin.fromClass = function DKPlugin_fromClass(args, DKPlugin_fromFile_callback) {
