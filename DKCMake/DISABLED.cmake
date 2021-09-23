@@ -28,6 +28,7 @@ if(NOT CMAKE_HOST_WIN32) # Disabled on Non-Windows host machines
 	DKDISABLE(mingw64)
 	DKDISABLE(msys)
 	DKDISABLE(python)
+	DKDISABLE(php-win32-vs16-x64)
 endif()
 if(WIN) # Disabled for Windows targets
 	DKDISABLE(android-studio)
