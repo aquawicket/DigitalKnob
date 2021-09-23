@@ -178,7 +178,7 @@ bool DKDuktape::CallInit(const DKString& file){
 	DKFile::GetFileName(file, filename);
 	DKFile::RemoveExtention(filename);
 	
-	DKString func = filename+".init";
+	DKString func = filename+"_Init";
 	DKString rval;
 	RunDuktape("(typeof "+func+" === 'function')", rval);
 	if(!toBool(rval)){
