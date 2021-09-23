@@ -1,11 +1,11 @@
 
-dk.coderunner = DKPlugin(DKCodeRunner)
+//dk.coderunner = DKPlugin(DKCodeRunner)
 function DKCodeRunner() {}
 
 
 dk.coderunner.prototype.init = function DKCodeRunner_init() {
-    dk.create("DKGui/DKConsole.css");
-	DKPlugin("DKFile/DKFile.js")
+    //dk.create("DKGui/DKConsole.css")
+	//DKPlugin("DKFile/DKFile.js")
 }
 
 dk.coderunner.prototype.end = function DKCodeRunner_end() {
@@ -96,3 +96,6 @@ dk.coderunner.prototype.create = function DKCodeRunner_create(parent, top, botto
 dk.coderunner.prototype.close = function DKCodeRunner_close(){
 	//TODO
 }
+
+
+dk.coderunner = DKPlugin(DKCodeRunner)
