@@ -39,7 +39,7 @@ bool DKDom::Init(){
 			
 			DKClass::DKCreate("DKDomWindowOrWorkerGlobalScope");
 			DKClass::DKCreate("DKDomDocumentOrShadowRoot");
-			DKClass::DKCreate("DKDomWindowOrWorkerGlobalScope")
+			DKClass::DKCreate("DKDomWindowOrWorkerGlobalScope");
 			DKClass::DKCreate("DKDomWindow");
 				DKClass::DKCreate("DKDomDocument");
 				DKClass::DKCreate("DKDomConsole");
