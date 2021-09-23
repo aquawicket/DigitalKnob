@@ -71,7 +71,9 @@ bool DKRml::Init(){
 	Rml::Factory::RegisterElementInstancer("body", new Rml::ElementInstancerElement);
 	Rml::XMLParser::RegisterNodeHandler("body", std::make_shared<Rml::XMLNodeHandlerDefault>());
 	
-	
+
+	DKClass::DKCreate("DKDom");
+	/*
 	//Load the Duktape javascript DOM
 		DKClass::DKCreate("DKDuktape/DKGlobalEventHandlers.js");
 		DKClass::DKCreate("DKEventTarget");
@@ -111,7 +113,7 @@ bool DKRml::Init(){
 	DKClass::DKCreate("DKDomUIEvent");
 	DKClass::DKCreate("DKDomKeyboardEvent");
 	DKClass::DKCreate("DKDomMouseEvent");
-	
+	*/
 	
 	DKString html;
 	DKString workingPath = DKFile::local_assets;
