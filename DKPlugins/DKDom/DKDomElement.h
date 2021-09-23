@@ -4,10 +4,8 @@
 #ifndef DKDomElement_H
 #define DKDomElement_H
 
-#include <RmlUi/Core.h>
 #include "DKDom/DKDomElement.h"
 #include "DKDuktape/DKDuktape.h"
-#include "DKRml/DKRml.h"
 
 
 ///////////////////////////////////////////////////

@@ -1,8 +1,8 @@
 // https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleDeclaration
 
 #include "DK/DKApp.h"
+#include "DKDom.h"
 #include "DKDom/DKDomCSSStyleDeclaration.h"
-#include "DKRml/DKRml.h"
 
 
 bool DKDomCSSStyleDeclaration::Init(){

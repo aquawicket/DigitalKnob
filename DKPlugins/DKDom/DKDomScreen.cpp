@@ -4,7 +4,6 @@
 #include "DKDom/DKDomScreen.h"
 
 
-////////////////////////
 bool DKDomScreen::Init()
 {
 	DKDEBUGFUNC();

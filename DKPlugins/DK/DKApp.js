@@ -1,4 +1,4 @@
-"use strict";
+//"use strict";
 // https://www.sitepoint.com/get-url-parameters-with-javascript/ 
 
 

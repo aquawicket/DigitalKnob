@@ -1,6 +1,7 @@
 //https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement
 
 #include "DK/DKApp.h"
+#include "DKDom.h"
 #include "DKDom/DKDomHTMLElement.h"
 
 

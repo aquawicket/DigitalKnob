@@ -6,7 +6,6 @@
 
 #include "DKDuktape/DKDuktape.h"
 
-///////////////////////////////////////////////////////
 class DKDomNavigator : public DKObjectT<DKDomNavigator>
 {
 public:

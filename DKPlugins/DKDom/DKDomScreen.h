@@ -6,7 +6,6 @@
 
 #include "DKDuktape/DKDuktape.h"
 
-/////////////////////////////////////////////////
 class DKDomScreen : public DKObjectT<DKDomScreen>
 {
 public:

@@ -4,9 +4,8 @@
 #ifndef DKDomHTMLElement_H
 #define DKDomHTMLElement_H
 
-#include <RmlUi/Core.h>
 #include "DKDuktape/DKDuktape.h"
-#include "DKRml/DKRml.h"
+
 
 ///////////////////////////////////////////////////////////
 class DKDomHTMLElement : public DKObjectT<DKDomHTMLElement>

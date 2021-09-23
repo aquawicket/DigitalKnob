@@ -6,7 +6,7 @@
 
 #include "DKDuktape/DKDuktape.h"
 
-/////////////////////////////////////////////////////
+
 class DKDomLocation : public DKObjectT<DKDomLocation>
 {
 public:

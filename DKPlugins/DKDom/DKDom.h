@@ -2,9 +2,14 @@
 #ifndef DKDom_H
 #define DKDom_H
 
-#include <RmlUi/Core.h>
+
 #include "DKDuktape/DKDuktape.h"
 #include "DKRml/DKRml.h"
+#include <RmlUi/Core.h>
+
+
+typedef Rml::Element DKDom_Element;
+
 
 class DKDom : public DKObjectT<DKDom>
 {

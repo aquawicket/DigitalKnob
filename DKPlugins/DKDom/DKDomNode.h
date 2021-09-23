@@ -6,7 +6,6 @@
 
 #include "DKDuktape/DKDuktape.h"
 
-/////////////////////////////////////////////
 class DKDomNode : public DKObjectT<DKDomNode>
 {
 public:

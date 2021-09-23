@@ -7,7 +7,6 @@
 #include "DKDuktape/DKDuktape.h"
 
 
-/////////////////////////////////////////////////////////
 class DKDomMouseEvent : public DKObjectT<DKDomMouseEvent>
 {
 public:

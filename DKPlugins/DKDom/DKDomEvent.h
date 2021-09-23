@@ -5,7 +5,6 @@
 #define DKDomEvent_H
 
 #include "DKDuktape/DKDuktape.h"
-#include "RmlUi/Core/Event.h"
 
 class DKDomEvent : public DKObjectT<DKDomEvent>
 {
