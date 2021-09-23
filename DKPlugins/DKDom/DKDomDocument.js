@@ -135,4 +135,4 @@ Object.assign(Document.prototype, DocumentOrShadowRoot)
 Object.assign(Document.prototype, GlobalEventHandlers)
 
 //var document = new Document(CPP_DKDomDocument_documentElement()) //Created in cpp from DKRml
-window.document = document
+//window.document = document
