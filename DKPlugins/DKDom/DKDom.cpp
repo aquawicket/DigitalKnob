@@ -38,9 +38,9 @@ bool DKDom::Init(){
 			DKClass::DKCreate("DKDomCSSStyleDeclaration");
 			
 			DKClass::DKCreate("DKDomWindowOrWorkerGlobalScope");
+			DKClass::DKCreate("DKDomDocumentOrShadowRoot");
 			DKClass::DKCreate("DKDomWindow");
 				DKClass::DKCreate("DKDomDocument");
-				DKClass::DKCreate("DKDomDocumentOrShadowRoot");
 				DKClass::DKCreate("DKDomConsole");
 				DKClass::DKCreate("DKDomLocation");
 				DKClass::DKCreate("DKDomNavigator");
