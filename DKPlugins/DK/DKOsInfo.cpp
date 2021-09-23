@@ -87,9 +87,8 @@ bool GetOSName(DKString& osname)
 {
 #ifdef WIN32
 	RTL_OSVERSIONINFOEXW vi;
-	if(!GetWinOSVersion(vi)){
-		return false;
-	}
+	if(!GetWinOSVersion(vi))
+		return DKERROR("!GetWinOSVersion(vi)\n")
 	SYSTEM_INFO si;
 	GetWinSystemInfo(si);
 	std::wstringstream os;

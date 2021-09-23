@@ -34,12 +34,10 @@ bool DKFile::DebugPath(const DKString& path){
 //TODO: this function is not complete
 bool DKFile::NormalizePath(DKString& path){
 	DKDEBUGFUNC(path);
-	while(has(path, "\\")){
+	while(has(path, "\\"))
 		replace(path, "\\", "/"); //Turn all back slashes into forward slashes
-	}
-	while(has(path, "//")){
+	while(has(path, "//"))
 		replace(path, "//", "/"); //Turn all double forward slashes into single 
-	}
 	return false;
 }
 
@@ -56,7 +54,9 @@ bool DKFile::AppendSystemPath(const DKString& path){
 bool DKFile::ChDir(const DKString& dir){
 	DKDEBUGFUNC(dir);
 	DebugPath(dir);
-	if(!PathExists(dir)){ return false; }
+	if(!PathExists(dir)){ 
+		return false; 
+	}
 	fs::current_path(dir);
 	return true;
 }

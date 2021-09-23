@@ -31,8 +31,7 @@ bool DKMac::GetScreenHeight(int& h){
 }
 
 bool DKMac::GetUsername(DKString& username){
-    DKWARN("DKMac::GetUsername() not implemented yet");
-    return false;
+    return DKERROR("DKMac::GetUsername() not implemented yet");
 }
 
 bool DKMac::LeftPress(){
