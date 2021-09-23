@@ -116,7 +116,7 @@ function(DKSETENV name value)
 		if(CMAKE_HOST_WIN32)
 			message(STATUS "Setting %${name}% environment variable to ${value}")
 			#DKEXECUTE_PROCESS(setx ${name} ${value}) # https://stackoverflow.com/a/69246810
-			DKEXECUTE_PROCESS(setx "${name} \"${value}\")
+			DKEXECUTE_PROCESS(setx ${name} \"${value}\")
 		else()
 			message(STATUS "DKSETENV() not implemented on this system")
 		endif()
