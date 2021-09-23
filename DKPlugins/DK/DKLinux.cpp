@@ -28,9 +28,9 @@ bool DKLinux::GetKey(int& key){
 	DKDEBUGFUNC("key");
 
 	//Method 1
-	system("stty raw"); // Set terminal to raw mode, (no wait for enter) 
+	//system("stty raw"); // Set terminal to raw mode, (no wait for enter) 
 	key = getchar();       
-	system("stty cooked"); // Reset terminal to normal "cooked" mode
+	//system("stty cooked"); // Reset terminal to normal "cooked" mode
 
 	/*
 	//Method 2
@@ -41,6 +41,7 @@ bool DKLinux::GetKey(int& key){
 
 	//Method 3
 	//key = ch_get(keys);
+	return true;
 }
 
 
