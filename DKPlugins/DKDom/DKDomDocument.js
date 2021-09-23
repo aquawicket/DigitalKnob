@@ -134,5 +134,6 @@ Object.assign(Document.prototype, DocumentOrShadowRoot)
 //mixin
 Object.assign(Document.prototype, GlobalEventHandlers)
 
-var document = new Document(CPP_DKDomDocument_documentElement()) //Created in cpp from DKRml
+//var document = new Document(CPP_DKDomDocument_documentElement()) //Created in cpp from DKRml
+globalThis.document = new Document(CPP_DKDomDocument_documentElement())
 window.document = document
