@@ -93,6 +93,6 @@ dk.coderunner.prototype.create = function DKCodeRunner_create(parent, top, botto
 	document.body.appendChild(pullAssets)
 }
 
-dk.coderunner.prototype.close = function DKCodeRunner_close(
-
+dk.coderunner.prototype.close = function DKCodeRunner_close(){
+	//TODO
 }
