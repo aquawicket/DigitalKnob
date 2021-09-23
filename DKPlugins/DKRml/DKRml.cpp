@@ -197,11 +197,15 @@ bool DKRml::LoadHtml(const DKString& html){
 	stream->SetSourceURL("[document from memory]");
 	Rml::PluginRegistry::NotifyDocumentOpen(context, stream->GetSourceURL().GetURL());
 	document = context->CreateDocument("html");
+	
+
 	//Create DOM javascript instance of the document using the documents element address
 	DKString rval;
 	DKString document_address = elementToAddress(document);
 	DKDuktape::RunDuktape("var document = new Document(\"" + document_address + "\");", rval);
 	Rml::Element* ele = document;
+	
+	
 	Rml::XMLParser parser(ele);
 	parser.Parse(stream.get());
 	//Make sure we have <head> and <body> tags
