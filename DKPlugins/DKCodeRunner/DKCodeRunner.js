@@ -3,16 +3,16 @@
 function DKCodeRunner() {}
 
 
-dk.coderunner.prototype.init = function DKCodeRunner_init() {
+DKCodeRunner.prototype.init = function DKCodeRunner_init() {
     //dk.create("DKGui/DKConsole.css")
 	//DKPlugin("DKFile/DKFile.js")
 }
 
-dk.coderunner.prototype.end = function DKCodeRunner_end() {
+DKCodeRunner.prototype.end = function DKCodeRunner_end() {
     dk.close("DKGui/DKConsole.css");
 }
 
-dk.coderunner.prototype.create = function DKCodeRunner_create(parent, top, bottom, left, right, width, height) {
+DKCodeRunner.prototype.create = function DKCodeRunner_create(parent, top, bottom, left, right, width, height) {
 	const div = document.createElement("div")
 	div.style.position = "absolute"
 	div.style.top = "35px"
@@ -93,7 +93,7 @@ dk.coderunner.prototype.create = function DKCodeRunner_create(parent, top, botto
 	document.body.appendChild(pullAssets)
 }
 
-dk.coderunner.prototype.close = function DKCodeRunner_close(){
+DKCodeRunner.prototype.close = function DKCodeRunner_close(){
 	//TODO
 }
 
