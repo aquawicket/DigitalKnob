@@ -30,6 +30,13 @@ bool DKDom::Init(){
 				DKClass::DKCreate("DKDomKeyboardEvent");
 				DKClass::DKCreate("DKDomMouseEvent");
 			
+			DKClass::DKCreate("DKDomNode");
+				DKClass::DKCreate("DKDomElement");
+					DKClass::DKCreate("DKDomHTMLElement");
+					DKClass::DKCreate("DKDomHTMLCollection");
+						DKClass::DKCreate("DKDomHTMLScriptElement");
+			DKClass::DKCreate("DKDomCSSStyleDeclaration");
+			
 			DKClass::DKCreate("DKDomWindowOrWorkerGlobalScope");
 			DKClass::DKCreate("DKDomWindow");
 				DKClass::DKCreate("DKDomDocument");
@@ -39,12 +46,5 @@ bool DKDom::Init(){
 				DKClass::DKCreate("DKDomNavigator");
 				DKClass::DKCreate("DKDomScreen");
 			
-			DKClass::DKCreate("DKDomNode");
-				DKClass::DKCreate("DKDomElement");
-					DKClass::DKCreate("DKDomHTMLElement");
-					DKClass::DKCreate("DKDomHTMLCollection");
-						DKClass::DKCreate("DKDomHTMLScriptElement");
-			DKClass::DKCreate("DKDomCSSStyleDeclaration");
-
 	return true;
 }
