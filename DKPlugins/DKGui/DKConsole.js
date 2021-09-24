@@ -460,6 +460,19 @@ DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left
             dk.console.logDiv.scroll = false;
         const msgDiv = document.createElement("div");
         msgDiv.setAttribute("dk_console", "msgDiv");
+		msgDiv.style.width = "100%"
+		msgDiv.style.fontSize = "10rem"
+		msgDiv.style.fontFamily = "Consolas, Lucinda, Console, Courier New, monospace"
+		msgDiv.style.whiteSpace = "pre-wrap"
+		msgDiv.style.boxSizing = "border-box"
+		msgDiv.style.padding = "2rem"
+		msgDiv.style.paddingLeft = "20rem"
+		msgDiv.style.borderStyle = "solid"
+		msgDiv.style.borderWidth = ".1rem"
+		msgDiv.style.borderTopWidth = "0rem"
+		msgDiv.style.borderLeftWidth = "0rem"
+		msgDiv.style.backgroundColor = "rgb(36,36,36)"
+		msgDiv.style.borderColor = "rgb(58,58,58)"
         if (logLevel !== "group" && logLevel !== "groupCollapsed" && dk.console.currentGroup) {
             msgDiv.setAttribute("group", dk.console.currentGroup.id);
             msgDiv.style.display = dk.console.currentGroup.display;
