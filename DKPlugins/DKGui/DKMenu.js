@@ -46,6 +46,7 @@ DKMenu.prototype.create = function DKMenu_create(parent) {
 }
 
 DKMenu.prototype.close = function DLMenu_close() {
+	//FIXME: events arn't getting removed
     //this.div.parentElement.removeChild(this.div)
     delete this.div
 }
