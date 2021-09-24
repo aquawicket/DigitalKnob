@@ -604,7 +604,10 @@ DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left
         }
         if (logLevel === "warn") {
             msgDiv.setAttribute("dk_console", "msgDivWarn");
+			msgDiv.style.backgroundColor = "rgb(51,43,0)"
+			msgDiv.style.borderColor = "rgb(102,85,0)"
             msgSpan.setAttribute("dk_console", "msgSpanWarn");
+			msgSpan.span.color = "rgb(255,221,158)"
         }
         if (logLevel === "debug") {
             msgDiv.setAttribute("dk_console", "msgDivDebug");
