@@ -12,12 +12,11 @@ const cef_width_offset = +16
 const cef_height_offset = +9
 CPP_DK_Create("DKCef")
 CPP_DKCef_NewBrowser("Cef", cef_y+cef_y_offset, cef_x+cef_x_offset, cef_width+cef_width_offset, cef_height+cef_height_offset, url)
-window.addEventListener("keydown", function mykeydown(event){
-	if(event.key === "F12")
+window.addEventListener("keydown", function window_onkeydown(event){
+	if(event.code === "F12")
 		CPP_DKCef_ShowDevTools(0)	
 })
 
-/*
 //// Create SDLRml window
 const sdl_x = window.screen.width / 2
 const sdl_y = 0
@@ -44,4 +43,3 @@ const console_y_offest = -1
 const console_width_offset = +16
 const console_height_offset = +9
 CPP_DK_setConsolePosition(console_x+console_x_offset, console_y+console_y_offest, console_width+console_width_offset, console_height+console_height_offset)
-*/
