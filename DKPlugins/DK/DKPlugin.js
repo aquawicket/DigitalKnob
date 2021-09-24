@@ -81,11 +81,12 @@ DKPlugin.fromFile = function DKPlugin_fromFile(args, DKPlugin_fromFile_callback)
                 const newfuncs = dk.getNewFuncs()
                 klassName = newfuncs[newfuncs.length - 1]
             }
-            if (!window[klassName]) {
+			DUKTAPE && DKPlugin.instances && (klassName = DKPlugin.instances[DKPlugin.instances.length-1].klassName)
+            if (!globalThis[klassName]) {
                 DKPlugin_fromFile_callback && DKPlugin_fromFile_callback(true);
                 return true;
             }
-            const klass = window[klassName];
+            const klass = globalThis[klassName]
             Object.setPrototypeOf(klass, DKPlugin.prototype)
             //klass.prototype = DKPlugin.prototype;// = {};
             //Object.assign(klass.prototype, DKPlugin)
@@ -120,6 +121,7 @@ DKPlugin.fromFile = function DKPlugin_fromFile(args, DKPlugin_fromFile_callback)
             return klass;
         }
     }
+	DUKTAPE && (script.onload = script.onload()) //FIX script.onload for duktape																		 
 }
 
 DKPlugin.fromClass = function DKPlugin_fromClass(args, DKPlugin_fromFile_callback) {

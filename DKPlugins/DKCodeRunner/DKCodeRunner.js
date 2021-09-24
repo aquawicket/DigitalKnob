@@ -4,9 +4,9 @@ function DKCodeRunner() {}
 
 DKCodeRunner.prototype.init = function DKCodeRunner_init() {
 	console.log("DKCodeRunner.prototype.init()")
+	//dk.create("DKGui/DKConsole.css")
 	
-    //dk.create("DKGui/DKConsole.css")
-	//DKPlugin("DKFile/DKFile.js")
+	DKPlugin("DKFile/DKFile.js")
 	DKPlugin("DKGui/DKMenu.js")
 	this.create()
 }
