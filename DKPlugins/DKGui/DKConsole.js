@@ -329,6 +329,9 @@ DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left
 	const image = document.createElement("img")
 	image.src = "DKGui/cmndArrow.png"
 	image.setAttribute("dk_console", "cmnd")
+	image.style.position = "relative"
+    image.style.top = "3rem"
+    image.style.height = "7rem"
 	dk.console.commandDiv.appendChild(image)
 
 
