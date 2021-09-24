@@ -116,9 +116,33 @@ dk.init = function dk_init() {
     dk.create("DK/DK.css");
 }
 
+dk.hasCPP = function dk_hasCPP() {
+    if (dk.useCPP === false) {
+        return false;
+    }
+    dk.cpp = false;
+    if (dk.getBrowser() === "Cef") {
+        dk.cpp = true;
+        dk.cef = true;
+    }
+    if (dk.getBrowser() === "Rml") {
+        dk.cpp = true;
+        dk.rml = true;
+    }
+    if (dk.getJSEngine() === "Duktape") {
+        dk.cpp = true;
+        dk.duktape = true;
+    }
+    if (dk.getJSEngine() === "V8") {
+        dk.cpp = true;
+        dk.v8 = true;
+    }
+    return dk.cpp;
+}
+
 dk.create = function dk_create(data, dk_create_callback) {
-    //if (DUKTAPE)
-    //    CPP_DK_Create(data);
+    if (dk.hasCPP())
+        CPP_DK_Create(data);
     var arry = data.split(",");
     if (arry[0].includes(".js")) {
         if (!dk.loadJs(arry[0], function dk_loadJs_callback(data) {
