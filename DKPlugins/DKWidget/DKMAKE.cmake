@@ -11,4 +11,4 @@ ENDIF()
 
 
 ## DKPLUGIN(DKWidget)
-DKASSETS(DKWidget)
+## DKASSETS(DKWidget)

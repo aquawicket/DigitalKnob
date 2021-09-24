@@ -54,7 +54,6 @@ const error = function error(str, callback, result) {
     !result && (result = false);
     console.error(str);
     callback && callback(result);
-    
     if (DEBUG) {
         //debugger ;
     }
@@ -91,7 +90,8 @@ document.addEventListener("mousemove", function document_addEventListener(event)
     if (dk.getBrowser() === "Rml") {
         window.mouseX = event.clientX;
         window.mouseY = event.clientY;
-    } else {
+    } 
+	else {
         // grab the x-y pos.s if browser is NS
         window.mouseX = event.pageX
         window.mouseY = event.pageY
@@ -116,36 +116,10 @@ dk.init = function dk_init() {
     dk.create("DK/DK.css");
 }
 
-dk.hasCPP = function dk_hasCPP() {
-    if (dk.useCPP === false) {
-        return false;
-    }
-    dk.cpp = false;
-    if (dk.getBrowser() === "Cef") {
-        dk.cpp = true;
-        dk.cef = true;
-    }
-    if (dk.getBrowser() === "Rml") {
-        dk.cpp = true;
-        dk.rml = true;
-    }
-    if (dk.getJSEngine() === "Duktape") {
-        dk.cpp = true;
-        dk.duktape = true;
-    }
-    if (dk.getJSEngine() === "V8") {
-        dk.cpp = true;
-        dk.v8 = true;
-    }
-    return dk.cpp;
-}
-
 dk.create = function dk_create(data, dk_create_callback) {
-    if (dk.hasCPP())
+    if (DUKTAPE)
         CPP_DK_Create(data);
-
     var arry = data.split(",");
-
     if (arry[0].includes(".js")) {
         if (!dk.loadJs(arry[0], function dk_loadJs_callback(data) {
             if (dk_create_callback)
@@ -183,7 +157,6 @@ dk.create = function dk_create(data, dk_create_callback) {
             console.error("dk.loadCss failed");
             //return dk_create_callback && dk_create_callback(false);
         }
-
     }
     return true;
 }
@@ -201,16 +174,13 @@ dk.close = function dk_close(data) {
         data.splice(0, 0, "DKJavascript");
     else if (dk.hasCPP)
         CPP_DK_Close(data);
-
     if (data[0] === "DKJavascript") {
-
         //var plugin = dk.getPlugin(data[1]);
         //console.log("closing dk." + plugin.name + " plugin");
         //if (plugin && plugin.end) {
         //    console.log("running dk." + plugin.name + ".end()");
         //    plugin.end();
         //}
-
         const scripts = document.getElementsByTagName("script");
         for (let n = 0; n < scripts.length; n++) {
             if (scripts[n].src.includes(data[1])) {
@@ -221,7 +191,6 @@ dk.close = function dk_close(data) {
         }
         return true;
     }
-
     if (data[0] === "DKHtml") {
         var element = byId(data[1]);
         if (!element)
@@ -229,7 +198,6 @@ dk.close = function dk_close(data) {
         element.parentNode.removeChild(element);
         return true;
     }
-
     if (data[0] === "DKCss") {
         const links = document.getElementsByTagName("link");
         for (let n = 0; n < links.length; n++) {
@@ -241,7 +209,6 @@ dk.close = function dk_close(data) {
         }
         return true;
     }
-
     return error("data[1] invalid");
 }
 
@@ -270,14 +237,12 @@ dk.getPlugin = function dk_getPlugin(url) {
         plugin.instance = instanceName;
     }
     plugin.name = pluginName;
-
     let nameCSS = "color: red;"
     let instanceCSS = "color: red;"
     let initCSS = "color: red;"
     plugin.name && (nameCSS = "color: green;")
     plugin.instance && (instanceCSS = "color: green;")
     plugin.init && (initCSS = "color: green;")
-
     console.group("%cdk.plugin("+url+")" + plugin.name, "color:rgb(100,100,200);");
     console.debug("plugin.name: %c" + plugin.name, nameCSS);
     console.debug("plugin.instance: %c" + plugin.instance, instanceCSS);
@@ -304,7 +269,6 @@ dk.loadJs = function dk_loadJs(url, dk_loadJs_callback) {
             return true;
         }
     }
-
     // Adding the script tag to the head node 
     var head = document.getElementsByTagName('head')[0];
     var script = document.createElement('script');
@@ -312,7 +276,6 @@ dk.loadJs = function dk_loadJs(url, dk_loadJs_callback) {
     script.setAttribute('async', true);
     script.setAttribute('src', url);
     head.appendChild(script);
-
     ////// CALLBACKS
     var done = false;
     script.onload = script.onreadystatechange = function script_onload() {
@@ -338,9 +301,7 @@ dk.loadJs = function dk_loadJs(url, dk_loadJs_callback) {
         done = true;
         return error("onerror: " + url, dk_loadJs_callback(false));
     }
-
     //FIXME - DigitalKnob can't trigger onload yet, so we do this
-
     if (dk.getJSEngine() === "Duktape") {
         console.log("Duktape Loading: " + url);
         var plugin = dk.getPlugin(url);
@@ -370,7 +331,6 @@ dk.loadHtml = function dk_loadHtml(url, parent, dk_loadHtml_callback) {
         //Create an empty widget
         //if (!string)
         //    string = "<div id=\"" + url + "\" style=\"position:absolute;top:200rem;left:200rem;width:200rem;height:200rem;background-color:rgb(230,230,230);\"></div>";
-
         var container = document.createElement("div");
         container.innerHTML = string.trim();
         var nodes = container.childNodes;
@@ -390,13 +350,11 @@ dk.loadHtml = function dk_loadHtml(url, parent, dk_loadHtml_callback) {
         } else {
             document.body.appendChild(container);
         }
-
         //FIXME - CEF seems to do this automatically. DKRml need to act the same.
         //var elements = document.getElementsByTagName("temp");
         //if(elements){ console.log("getElementsByTagName(temp).length: "+elements.length); }
         //if(elements[0]){ console.log("elements[0].innerHTML: "+elements[0].innerHTML); }
         //if(elements[0]){ document.removeChild(elements[0]); }
-
         return dk_loadHtml_callback && dk_loadHtml_callback(container);
     });
     return true;
@@ -497,7 +455,6 @@ dk.makeStruct = function dk_makeStruct(names) {
         }
     }
     return constructor;
-
     //Usage:
     //var Item = makeStruct("id speaker country");
     //var row = new Item(1, 'john', 'au');
@@ -590,7 +547,6 @@ dk.getObjects = function dk_getObjects() {
             }
         }
     }
-
     return jsfiles + cssfiles + htmlfiles;
 }
 
@@ -672,7 +628,6 @@ dk.iE = function dk_iE() {
         if (re.exec(ua) !== null)
             rv = parseFloat(RegExp.$1);
     }
-
     // Returns the version of Internet Explorer or a 0
     // (indicating the use of another browser).
     return rv;
@@ -784,7 +739,6 @@ dk.setInnerHtmlString = function dk_setInnerHtmlString(id, string) {
 dk.getValue = function dk_getValue(variable) {
     //FIXME: phase this function out. This function will become obsolete.
     console.error("dk.getValue(): this function is deprecated and will be obsolete");
-
     if (typeof variable === "string") {
         //id
         var ele = byId(variable);
@@ -803,10 +757,8 @@ dk.getValue = function dk_getValue(variable) {
             console.debug("dk.getValue(): returning ele.value\n");
             return ele.value;
         }
-
         return error("return value invalid");
     }
-
     if (typeof variable === "object") {
         if (variable.nodeType === 1) {
             if (variable.tagName === "INPUT") {
@@ -913,7 +865,6 @@ dk.getValue = function dk_getValue(variable) {
             return variable[2];
         }
     }
-
     return error("ERROR: dk.getValue(): unknown type\n");
 }
 */
@@ -990,7 +941,6 @@ dk.sendRequest = function dk_sendRequest(httpMethod, url, dk_sendRequest_callbac
             return error("httpMethod '" + httpMethod + "' invalid", dk_sendRequest_callback(false));
         }
     }
-
     if (dk_sendRequest_callback.length < 3)
         return error("dk_sendRequest_callback requires 3 arguments (success, url, data)", dk_sendRequest_callback(false));
 
@@ -1121,7 +1071,19 @@ dk.show = function dk_show(id){
 		return error("element invalid")
 	element.style.display = "block"
 	element.style.visibility = "visible"
-}			
+}
+
+dk.toggle = function dk_toggle(id){
+	var element = byId(id);
+	if(!element)
+		return error("element invalid")
+	if(element.style.display === "none" || element.style.visibility === "hidden"){
+		dk.show(id);
+	}
+	else{
+		dk.hide(id);
+	}
+}		
 
 			   
 ///// Pollyfils and Prototypes
@@ -1142,7 +1104,6 @@ if (!Array.prototype.includes) {
         if (this == null) {
             throw new TypeError('Array.prototype.includes called on null or undefined');
         }
-
         var O = Object(this);
         var len = parseInt(O.length, 10) || 0;
         if (len === 0) {
@@ -1169,7 +1130,6 @@ if (!Array.prototype.includes) {
         }
         return false;
     }
-    ;
 }
 
 /**
@@ -1215,9 +1175,7 @@ dk.errorCatcher = function dk_errorCatcher(obj, name) {
     required({
         obj
     });
-
     dk.errorCatcher.bypass = ["init", "end", "create", "close"]
-
     !name && (name = obj.constructor.name);
     for (let func in obj) {
         if (func.includes("_try"))
@@ -1269,7 +1227,6 @@ dk.getNewFuncs = function dk_getNewFuncs() {
     const newfuncs = new Array
     const removedfuncs = new Array
     const obj = window
-
     //remove any function that have been removed from obj
     for (var i in dk.windowfuncs) {
         if (!obj[dk.windowfuncs[i]]) {
@@ -1279,7 +1236,6 @@ dk.getNewFuncs = function dk_getNewFuncs() {
             dk.windowfuncs.splice(i, 1);
         }
     }
-
     //update windowfuncs and newfuncs
     for (var i in obj) {
         if ((typeof obj[i]).toString() == "function" && obj[i].toString().indexOf("[native code]") == -1) {
@@ -1289,7 +1245,6 @@ dk.getNewFuncs = function dk_getNewFuncs() {
             }
         }
     }
-
     return newfuncs;
 }
 
@@ -1406,16 +1361,12 @@ dk.dump = function dk_dumpVariable(variable) {
     const lightBlue = "color:rgb(91,171,209);"
     const grey = "color:rgb(142,142,142);"
     const orange = "color:rgb(226,131,81);"
-
     let name;
     if (typeof variable === "object") {
         console.group("%c" + variable.constructor.name + " {}", "color:rgb(213,213,213);font-style:italic;")
-
         //const type = Object.prototype.toString.call(variable).slice(8, -1);
-
         //console.log("%c valueOf: %c"+ variable.valueOf(), pink, color);
         //console.log("%c typeof: %c" + typeof variable, pink, color);
-
         for (let key in variable) {
             if (variable[key] === variable) {
                 continue;
@@ -1435,7 +1386,6 @@ dk.dump = function dk_dumpVariable(variable) {
             } else
                 console.log("%c " + key + "%c: " + variable[key], pink, white);
         }
-
         //console.log("%c variable = " + variable, color);
         console.log("%c variable.constructor = " + variable.constructor, color);
         console.log("%c variable.constructor.name = " + variable.constructor.name, color);
@@ -1443,20 +1393,16 @@ dk.dump = function dk_dumpVariable(variable) {
         console.log("%c variable.__proto__.constructor = " + variable.__proto__.constructor, color);
         console.log("%c variable.prototype = " + variable.prototype, color);
         console.groupEnd();
-
     }
-
     if (typeof variable === "function")
         console.group("%c" + variable, "color:rgb(213,213,213);font-style:italic;")
     if (typeof variable === "array")
         console.group("%c" + variable, "color:rgb(213,213,213);font-style:italic;")
-
     //for(let key in variable)
     //    console.log("%c variable."+key+" = "+variable[key], color);
 
     //for(let key in variable.__proto__.constructor)
     //console.log("%c variable.__proto__."+key+" = "+variable.__proto__[key], color);
-
     console.log(variable)
     /*
     if (typeof variable === "object")
