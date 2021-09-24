@@ -540,14 +540,14 @@ DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left
                         },
                         innerHTML: 2
                     })*/
-					const lastMsgDiv = document.createElement("div")
-					lastMsgDiv.style.position = "absolute"
-					lastMsgDiv.style.top = "50%"
-					lastMsgDiv.style.left = "50%"
-					lastMsgDiv.style.transform = "translate(-50%, -50%)"
-					lastMsgDiv.style.color = "black"
-					lastMsgDiv.innerHTML = 2
-					lastMsgIcon.appendChild(lastMsgDiv)
+					const count = document.createElement("div")
+					count.style.position = "absolute"
+					count.style.top = "50%"
+					count.style.left = "50%"
+					count.style.transform = "translate(-50%, -50%)"
+					count.style.color = "black"
+					count.innerHTML = 2
+					lastMsgIcon.appendChild(count)
 					
 					
 					
@@ -566,6 +566,10 @@ DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left
             const group = arguments[1];
             if (arguments.length === 3)
                 logLevel = arguments[2][1];
+			
+			
+			
+			/*  // ## RECODED ##
             const groupArrow = dk.gui.createTag("img", msgSpan, {
                 src: "DKGui/groupArrow2.png",
                 style: {
@@ -573,7 +577,15 @@ DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left
                     paddingRight: "4rem"//TODO: This should be multiplied by the number of open groups
                     // This should effect all other console entries as well
                 }
-            });
+            })*/
+			const groupArrow = document.createElement("img")
+			msgSpan.src = "DKGui/groupArrow2.png"
+			msgSpan.style.height = "6rem"
+			msgSpan.style.paddingRight = "4rem"
+			msgSpan.appendChild(groupArrow)
+			
+			
+			
             if (group.display === "none") {
                 groupArrow.setAttribute("src", "DKGui/groupArrow1.png");
             }
