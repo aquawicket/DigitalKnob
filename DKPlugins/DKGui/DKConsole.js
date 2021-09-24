@@ -225,6 +225,18 @@ DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left
     //dk.console.logDiv = dk.gui.createTag("div", dk.console.container, {});
 	dk.console.logDiv = document.createElement("div")
     dk.console.logDiv.setAttribute("dk_console", "logDiv")
+	dk.console.logDiv.style.position = "absolute"
+    dk.console.logDiv.style.padding = "0rem"
+    dk.console.logDiv.style.fontSize = "10rem"
+    dk.console.logDiv.style.backgroundColor = "rgb(36,36,36)"
+    dk.console.logDiv.style.color = "white"
+    /*font-color = "white"*/
+    dk.console.logDiv.style.top = "20rem"
+    dk.console.logDiv.style.bottom = "0rem"
+    dk.console.logDiv.style.left = "0rem"
+    dk.console.logDiv.style.right = "0rem"
+    dk.console.logDiv.style.visibility = "visible"
+    dk.console.logDiv.style.overflow = "auto"
 	dk.console.container.appendChild(dk.console.logDiv)
 
 
