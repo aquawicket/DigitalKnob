@@ -1,4 +1,5 @@
 //"use strict";
+
 const DEBUG = true;
 window.dk = new Object;
 let DUKTAPE = window.DUKTAPE
@@ -106,14 +107,12 @@ document.addEventListener("mousemove", function document_addEventListener(event)
 });
 
 dk.init = function dk_init() {
-	if(!DUKTAPE) {
-		eval("var __temp = null");
-		const use_strict = (typeof __temp === "undefined");
-	}
-    console.log("*** DigitalKnob ***");
-    console.log("use_strict: " + use_strict);
-    console.log("Browser: " + dk.getBrowser());
-    console.log("JSEngine: " + dk.getJSEngine());
+	!DUKTAPE && eval("var __temp = null");
+	const use_strict = (typeof __temp === "undefined");
+    console.debug("*** DigitalKnob ***");
+    console.debug("use_strict: " + use_strict);
+    console.debug("Browser: " + dk.getBrowser());
+    console.debug("JSEngine: " + dk.getJSEngine());
     dk.create("DK/DK.css");
 }
 
@@ -368,7 +367,6 @@ dk.loadHtml = function dk_loadHtml(url, parent, dk_loadHtml_callback) {
         return error("url is not a valid .html file", dk_loadHtml_callback(false));
 
     dk.fileToString(url, function dk_fileToString(string) {
-		//console.log("dk.fileToString() string = "+string)
         //Create an empty widget
         //if (!string)
         //    string = "<div id=\"" + url + "\" style=\"position:absolute;top:200rem;left:200rem;width:200rem;height:200rem;background-color:rgb(230,230,230);\"></div>";
@@ -1123,8 +1121,9 @@ dk.show = function dk_show(id){
 		return error("element invalid")
 	element.style.display = "block"
 	element.style.visibility = "visible"
-}
+}			
 
+			   
 ///// Pollyfils and Prototypes
 
 // trim for IE8
@@ -1469,3 +1468,4 @@ dk.dump = function dk_dumpVariable(variable) {
     */
 }
 
+dk.init();
