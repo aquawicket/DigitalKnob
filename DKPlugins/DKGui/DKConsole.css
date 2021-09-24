@@ -1,7 +1,7 @@
 [dk_console="container"] {
+	position: absolute;
     padding: 0rem;
     margin: 0rem;
-    position: absolute;
 }
 
 [dk_console="toolbar"] {

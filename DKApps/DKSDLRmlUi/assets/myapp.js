@@ -12,7 +12,7 @@ myapp.loadFiles = function myapp_loadFiles() {
 }
 
 myapp.loadApp = function myapp_loadApp() {
-	//DKConsole.prototype.create(document.body, "", "0rem", "0rem", "0rem", "100%", "25%")
+	DKConsole.prototype.create(document.body, "", "0rem", "0rem", "0rem", "100%", "25%")
 	console.log("**** DKSDLRmlUi ****")
 }
 
