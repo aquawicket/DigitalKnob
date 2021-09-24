@@ -145,6 +145,7 @@ bool DKDuktape::AttachFunction(const DKString& name, duk_c_function func){
 	return true;
 }
 
+/*
 bool DKDuktape::CallEnd(const DKString& file){
 	DKDEBUGFUNC(file);
 	if(!FileLoaded(file))
@@ -169,7 +170,9 @@ bool DKDuktape::CallEnd(const DKString& file){
 	}
 	return true;
 }
+*/
 
+/*
 bool DKDuktape::CallInit(const DKString& file){
 	DKDEBUGFUNC(file);
 	if(!FileLoaded(file)) 
@@ -191,6 +194,7 @@ bool DKDuktape::CallInit(const DKString& file){
 	duk_pop(ctx);
 	return true;
 }
+*/
 
 bool DKDuktape::DumpError(const DKString& code){
 	DKString name;
