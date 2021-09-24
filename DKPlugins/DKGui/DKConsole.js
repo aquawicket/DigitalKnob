@@ -138,7 +138,7 @@ DKConsole.prototype.setXConsole = function DKConsole_setXConsole() {
 }
 
 DKConsole.prototype.init = function DKConsole_init() {
-	dk.xconsole.log("DKConsole.prototype.init()")
+	console.log("DKConsole.prototype.init")
     dk.create("DKGui/DKConsole.css");
 }
 

@@ -4,7 +4,9 @@
 //NOTE: initiator moved to the bottom and "singleton" removed for Duktape to work
 //dk.file = DKPlugin(DKFile)
 
-function DKFile() {}
+function DKFile(){}
+dk.file = DKPlugin(DKFile)
+
 
 DKFile.prototype.init = function DKFile_init() {
     //lets replace DK.js's version of fileToString to this one
@@ -551,4 +553,4 @@ if (!dk.hasCPP()) {
     }
 }
 
-dk.file = DKPlugin(DKFile)
+
