@@ -46,6 +46,9 @@ DKCodeRunner.prototype.create = function DKCodeRunner_create(parent, top, bottom
 		dkmenu.addItem("Test", function dk_menu_test(){
 			console.log("clicked Test")
 		})
+		dkmenu.addItem("Test 2", function dk_menu_test2(){
+			console.log("clicked Test 2")
+		})
 	}
 	
 	const runCode = document.createElement("button")
