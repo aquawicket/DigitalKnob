@@ -209,19 +209,15 @@ int DKDuktapeJS::_Close(duk_context* ctx){
 
 int DKDuktapeJS::_Create(duk_context* ctx){	
 	DKString data = duk_require_string(ctx, 0);
-	
 	bool callback_found = false;
-	if(duk_is_function(ctx, -1)){
+	if(duk_is_function(ctx, -1))
 		callback_found = true;
-	}
-	
 	DKObject* obj = DKClass::DKCreate(data);
 	if(!obj){
 		duk_push_string(ctx, "");
 		DKWARN("DKDuktapeJS::_DKCreate("+data+"): obj invalid \n");
-		return 1;
+		return true;
 	}
-
 	//Call the callback
 	if(callback_found){
 		if(duk_pcall(ctx, 0) != 0 && duk_pcall(ctx, 1) != 0){ // JsFunc call failed

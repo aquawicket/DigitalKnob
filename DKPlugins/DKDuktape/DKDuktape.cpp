@@ -156,7 +156,8 @@ bool DKDuktape::CallEnd(const DKString& file){
 	DKString rval;
 	RunDuktape("(typeof "+func+" === 'function')", rval);
 	if(toBool(rval)){
-		DKWARN("Auto-calling _end is deprecated. "+func+" will no longer be called from C++, you must call it in Javascript");
+		DKERROR("Auto-calling _end is deprecated. "+func+" will no longer be called from C++, you must call it in Javascript\n");
+		DKERROR("Using DKPlugin("+func+") in javascript should take care of _init and _end \n");
 		for (unsigned int i = 0; i < DKDuktape::filelist.size(); ++i) {
 			if (has(DKDuktape::filelist[i], filename))
 				DKDuktape::filelist.erase(DKDuktape::filelist.begin() + i);
@@ -191,7 +192,9 @@ bool DKDuktape::CallInit(const DKString& file){
 	DKString rval;
 	RunDuktape("(typeof "+func+" === 'function')", rval);
 	if(toBool(rval)){
-		DKWARN("Auto-calling _Init is deprecated. "+func+" will no longer be called from C++, you must call it in Javascript");
+		DKERROR("Auto-calling _Init is deprecated. "+func+" will no longer be called from C++, you must call it in Javascript\n");
+		DKERROR("If you fixed it and it calles from javascript, you can rename it to all lower case to remove this message\n");
+		DKERROR("Rename: "+filename+"_Init to all lowercase -> "+filename+"_Init\n");
 		return true;
 	}
 	/*
