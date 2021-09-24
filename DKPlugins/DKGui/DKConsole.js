@@ -245,6 +245,7 @@ DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left
     //dk.console.commandDiv = dk.gui.createTag("div", dk.console.logDiv, {});
     dk.console.commandDiv = document.createElement("div")
 	dk.console.commandDiv.setAttribute("dk_console", "commandDiv");
+	dk.console.commandDiv.style.position = "absolute"
 	dk.console.commandDiv.style.width = "100%"
     dk.console.commandDiv.style.height = "30rem"
     dk.console.commandDiv.style.whiteSpace = "pre-wrap"
@@ -279,6 +280,14 @@ DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left
 	const element = document.createElement("input")
 	element.type = "text";
 	element.setAttribute("dk_console", "command")
+	element.style.position = "absolute"
+    element.style.left = "17rem"
+    element.style.fontFamily = "Consolas, Lucinda, Console, Courier New, monospace;"
+    element.style.fontSize = "10rem"
+    element.style.width = "95%"
+    element.style.backgroundColor = "rgba(0,0,0,0)"
+    element.style.borderColor = "rgba(0,0,0,0)"
+    element.style.color = "white"
 	element.onkeydown = function command_onkeydown(event) {
         if (event.code === "Enter") {
             if (event.currentTarget.value === "clear" || event.currentTarget.value === "cls") {
