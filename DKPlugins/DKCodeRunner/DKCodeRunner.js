@@ -42,13 +42,20 @@ DKCodeRunner.prototype.create = function DKCodeRunner_create(parent, top, bottom
 	div.appendChild(textarea)
 	textarea.oncontextmenu = function textarea_oncontextmenu(event) {
 		event.preventDefault();
-		DKPlugin("DKGui/DKMenu.js", function(DKClass) {
-			const dkmenu = DKClass.prototype.create();
+		
+		const dkmenu = DKMenu.prototype.create(textarea)
+		dkmenu.addItem("Test", function dk_menu_test() {
+			console.log("clicked Test")
+		})
+		/*
+		DKPlugin("DKGui/DKMenu.js", function(DKMenu) {
+			const dkmenu = DKMenu.prototype.create();
 			dkmenu.addItem("Menu Test", 
 			function DKMenu_Test() {
 				console.log("Clicked Menu Test")
 			});
 		});
+		*/
 	}
 	
 	const runCode = document.createElement("button")
