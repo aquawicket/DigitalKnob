@@ -77,16 +77,21 @@ DKPlugin.fromFile = function DKPlugin_fromFile(args, DKPlugin_fromFile_callback)
             let klassName = null;
             if (DKPlugin.info[url])
                 klassName = DKPlugin.info[url]
+			else if(DKPlugin.instances[DKPlugin.instances.length-1].klassName){
+				klassName = DKPlugin.instances[DKPlugin.instances.length-1].klassName;
+			}
             else {
                 const newfuncs = dk.getNewFuncs()
                 klassName = newfuncs[newfuncs.length - 1]
             }
-            if (!window[klassName]) {
+            //if (!window[klassName]) {
+			if (!globalThis[klassName]) {
                 DKPlugin_fromFile_callback && DKPlugin_fromFile_callback(true);
                 return true;
             }
-            const klass = window[klassName];
-            Object.setPrototypeOf(klass, DKPlugin.prototype)
+            //const klass = window[klassName];
+            const klass = globalThis[klassName]
+			Object.setPrototypeOf(klass, DKPlugin.prototype)
             //klass.prototype = DKPlugin.prototype;// = {};
             //Object.assign(klass.prototype, DKPlugin)
 

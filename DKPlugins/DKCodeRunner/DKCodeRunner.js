@@ -6,6 +6,7 @@ function DKCodeRunner() {}
 DKCodeRunner.prototype.init = function DKCodeRunner_init() {
     //dk.create("DKGui/DKConsole.css")
 	//DKPlugin("DKFile/DKFile.js")
+	this.create()
 }
 
 DKCodeRunner.prototype.end = function DKCodeRunner_end() {
