@@ -17,13 +17,13 @@ bool DKJavascript::Init(){
 	DKString file = DKFile::local_assets+data[1];
 	if(!DKDuktape::LoadFile(file)) 
 		return DKERROR("DKDuktape::LoadFile() failed");
-	//DKDuktape::CallInit(file);
+	DKDuktape::CallInit(file);
 	return true;
 }
 
 bool DKJavascript::End(){
 	DKDEBUGFUNC();
-	//DKString file = DKFile::local_assets + data[1];
-	//DKDuktape::CallEnd(file);
+	DKString file = DKFile::local_assets + data[1];
+	DKDuktape::CallEnd(file);
 	return true;
 }

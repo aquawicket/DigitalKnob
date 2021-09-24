@@ -145,7 +145,6 @@ bool DKDuktape::AttachFunction(const DKString& name, duk_c_function func){
 	return true;
 }
 
-/*
 bool DKDuktape::CallEnd(const DKString& file){
 	DKDEBUGFUNC(file);
 	if(!FileLoaded(file))
@@ -156,6 +155,15 @@ bool DKDuktape::CallEnd(const DKString& file){
 	DKString func = filename+"_end";
 	DKString rval;
 	RunDuktape("(typeof "+func+" === 'function')", rval);
+	if(toBool(rval)){
+		DKWARN("Auto-calling _end is deprecated. "+func+" will no longer be called from C++, you must call it in Javascript");
+		for (unsigned int i = 0; i < DKDuktape::filelist.size(); ++i) {
+			if (has(DKDuktape::filelist[i], filename))
+				DKDuktape::filelist.erase(DKDuktape::filelist.begin() + i);
+		}
+		return true
+	}
+	/*
 	if(!toBool(rval)){
 		DKWARN(func+" undefined\n");
 		return true;
@@ -168,11 +176,10 @@ bool DKDuktape::CallEnd(const DKString& file){
 		if (has(DKDuktape::filelist[i], filename))
 			DKDuktape::filelist.erase(DKDuktape::filelist.begin() + i);
 	}
+	*/
 	return true;
 }
-*/
 
-/*
 bool DKDuktape::CallInit(const DKString& file){
 	DKDEBUGFUNC(file);
 	if(!FileLoaded(file)) 
@@ -180,10 +187,14 @@ bool DKDuktape::CallInit(const DKString& file){
 	DKString filename;
 	DKFile::GetFileName(file, filename);
 	DKFile::RemoveExtention(filename);
-	
 	DKString func = filename+"_Init";
 	DKString rval;
 	RunDuktape("(typeof "+func+" === 'function')", rval);
+	if(toBool(rval)){
+		DKWARN("Auto-calling _Init is deprecated. "+func+" will no longer be called from C++, you must call it in Javascript");
+		return true
+	}
+	/*
 	if(!toBool(rval)){
 		DKWARN(func+" undefined\n");
 		return true;
@@ -192,9 +203,9 @@ bool DKDuktape::CallInit(const DKString& file){
 	if(duk_peval_string(ctx, func.c_str()) != 0)
 		DKDuktape::DumpError(func);
 	duk_pop(ctx);
+	*/
 	return true;
 }
-*/
 
 bool DKDuktape::DumpError(const DKString& code){
 	DKString name;
