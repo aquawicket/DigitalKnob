@@ -1,7 +1,8 @@
-[dk_menu="menu"] {
+[dk_menu="menu"]
+{
+	position: absolute;
     border-color: rgb(22,20,20);
-    background-color: #332f2f;
-    position: absolute;
+    background-color: rgb(51,47,47);
     padding: 0rem;
     right:unset;
     width: 150rem;
@@ -14,13 +15,17 @@
     border-bottom-width: 0rem;
 }
 
-[dk_menu="item"] {
+[dk_menu="item"]
+{
     /*backgroundColor: rgb(109 7 7);*/
+	position: absolute;
     color: rgb(187,170,170);
     border-color: rgb(40,40,40);
 }
 
-[dk_menu="item"]:hover {
+[dk_menu="item"]:hover 
+{
+	position: absolute;
     background-color: rgb(60,60,60);
     color = rgb(255,255,255);
 }

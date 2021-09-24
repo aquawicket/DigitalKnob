@@ -44,17 +44,44 @@ DKCodeRunner.prototype.create = function DKCodeRunner_create(parent, top, bottom
 		event.preventDefault();
 		
 		const dkmenu = DKMenu.prototype.create(textarea)
+		/*
+		dkmenu.div.setAttribute("dk_menu", "menu")
+		dkmenu.div.style.position = "absolute"
+		dkmenu.div.style.top = window.mouseY + "rem"
+		dkmenu.div.style.left = window.mouseX + "rem"
+		dkmenu.div.style.borderColor = "rgb(22,20,20)"
+		dkmenu.div.style.backgroundColor = "rgb(51, 47, 47)"
+		dkmenu.div.style.padding = "0rem"
+		dkmenu.div.style.width = "150rem"
+		dkmenu.div.style.minHeight = "18rem"
+		dkmenu.div.style.borderStyle = "solid"
+		dkmenu.div.style.borderWidth = "1rem"
+		dkmenu.div.style.borderTopWidth = "1rem"
+		dkmenu.div.style.borderLeftWidth = "1rem"
+		dkmenu.div.style.borderRightWidth = "1rem"
+		dkmenu.div.style.borderBottomWidth = "0rem"
+		//dkmenu.div.style.right = "unset"
+		dkmenu.div.style.removeProperty("right")
+		dkmenu.validatePosition()
+		*/
 		dkmenu.addItem("Test", function dk_menu_test() {
 			console.log("clicked Test")
 		})
 		/*
-		DKPlugin("DKGui/DKMenu.js", function(DKMenu) {
-			const dkmenu = DKMenu.prototype.create();
-			dkmenu.addItem("Menu Test", 
-			function DKMenu_Test() {
-				console.log("Clicked Menu Test")
-			});
-		});
+		dkmenu.div.dkmenuItem.setAttribute("dk_menu", "item");
+		dkmenu.div.dkmenuItem.class = "option";
+		dkmenu.div.dkmenuItem.style.position = "absolute";
+		dkmenu.div.dkmenuItem.style.paddingTop = "2rem";
+		dkmenu.div.dkmenuItem.style.paddingLeft = "4rem";
+		dkmenu.div.dkmenuItem.style.cursor = "pointer";
+		dkmenu.div.dkmenuItem.style.whiteSpace = "pre-wrap";
+		dkmenu.div.dkmenuItem.style.boxSizing = "border-box";
+		dkmenu.div.dkmenuItem.style.borderColor = "rgb(22,20,20)"
+		dkmenu.div.dkmenuItem.style.borderStyle = "solid";
+		dkmenu.div.dkmenuItem.style.borderBottomWidth = "1rem";
+		dkmenu.div.dkmenuItem.style.borderTopWidth = "0rem";
+		dkmenu.div.dkmenuItem.style.borderLeftWidth = "0rem";
+		dkmenu.div.dkmenuItem.style.borderRightWidth = "0rem";
 		*/
 	}
 	
