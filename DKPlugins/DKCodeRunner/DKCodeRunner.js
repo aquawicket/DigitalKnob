@@ -1,11 +1,10 @@
-console.log("DKCodeRunner()")
-function DKCodeRunner() {}
 
+function DKCodeRunner() {}
+dk.coderunner = DKPlugin(DKCodeRunner)
 
 DKCodeRunner.prototype.init = function DKCodeRunner_init() {
 	console.log("DKCodeRunner.prototype.init()")
 	//dk.create("DKGui/DKConsole.css")
-	
 	DKPlugin("DKFile/DKFile.js")
 	DKPlugin("DKGui/DKMenu.js")
 	this.create()
@@ -52,24 +51,25 @@ DKCodeRunner.prototype.create = function DKCodeRunner_create(parent, top, bottom
 		});
 	}
 	
-	const button = document.createElement("button")
-	button.style.position = "absolute"
-	button.style.top = "0px"
-	button.style.left = "2px"
-	button.style.width = "100px"
-	button.style.height = "20px"
-	button.style.color = "rgb(20,20,20)"
-	button.style.backgroundColor = "rgb(200,200,200)"
-	button.innerHTML = "Run Code"
-	button.onclick = function(event) {
-    console.log("*** Running Code ***")
+	const runCode = document.createElement("button")
+	runCode.style.position = "absolute"
+	runCode.style.top = "0px"
+	runCode.style.left = "50px"
+	runCode.style.width = "100px"
+	runCode.style.height = "20px"
+	runCode.style.color = "rgb(20,20,20)"
+	runCode.style.backgroundColor = "rgb(200,200,200)"
+	runCode.innerHTML = "Run Code"
+	runCode.onclick = function (event) {
+		console.log("*** Running Code ***")
 		try {
 			eval(textarea.value);
-		} catch (err) {
+		} 
+		catch (err) {
 			console.error(err);
 		}
 	}
-	document.body.appendChild(button)
+	document.body.appendChild(runCode)
 	
 	const pushAssets = document.createElement("button")
 	pushAssets.style.position = "absolute"
@@ -105,5 +105,5 @@ DKCodeRunner.prototype.close = function DKCodeRunner_close(){
 	//TODO
 }
 
-console.log("dk.coderunner = DKPlugin(DKCodeRunner)")
-dk.coderunner = DKPlugin(DKCodeRunner)
+
+

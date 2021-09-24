@@ -1,23 +1,28 @@
-function DKWindow_init() {
-}
 
-function DKWindow_end() {
-}
+function DKWindow(){}
+dk.window = DKPlugin(DKWindow)
 
-function DKWindow_Fullscreen() {
+
+dk.window.fullscreen = function dk_window_fullscreen() {
+	if (DUKTAPE){
+		CPP_DKWindow_Fullscreen()
+	}
     if (document.documentElement.requestFullScreen) {
         document.documentElement.requestFullScreen();
-    } else if (document.documentElement.mozRequestFullScreen) {
+    }
+	else if (document.documentElement.mozRequestFullScreen) {
         document.documentElement.mozRequestFullScreen();
-    } else if (document.documentElement.webkitRequestFullScreen) {
+    } 
+	else if (document.documentElement.webkitRequestFullScreen) {
         document.documentElement.webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT);
-    } else {
+    } 
+	else {
         return false;
     }
     return true;
 }
 
-function DKWindow_GetHeight() {
+dk.window.getHeight = function dk_window_getHeight() {
     var w = window
       , d = document
       , e = d.documentElement
@@ -28,8 +33,12 @@ function DKWindow_GetHeight() {
     return y;
 }
 
-function DKWindow_GetMouseX() {
+dk.window.getMouseX = function dk_window_getMouseX() {
     return mouseX;
+}
+
+/*
+function DKWindow_init(){	
 }
 
 function DKWindow_GetMouseY() {
@@ -112,3 +121,4 @@ function DKWindow_Windowed() {
     }
     return true;
 }
+*/

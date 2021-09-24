@@ -1,6 +1,5 @@
 const url = CPP_DKAssets_LocalAssets()+"index.html"
 
-
 //// Create Cef window
 const cef_x = 0
 const cef_y = 0
@@ -12,10 +11,15 @@ const cef_width_offset = +16
 const cef_height_offset = +9
 CPP_DK_Create("DKCef")
 CPP_DKCef_NewBrowser("Cef", cef_y+cef_y_offset, cef_x+cef_x_offset, cef_width+cef_width_offset, cef_height+cef_height_offset, url)
+/*
 window.addEventListener("keydown", function window_onkeydown(event){
+	if(event.code === "F11")
+		CPP_DKWindow_IsFullscreen() ? CPP_DKWindow_Windowed() : CPP_DKWindow_Fullscreen()
 	if(event.code === "F12")
-		CPP_DKCef_ShowDevTools(0)	
+		CPP_DKCef_ShowDevTools(0)
 })
+*/
+
 
 //// Create SDLRml window
 const sdl_x = window.screen.width / 2
@@ -31,7 +35,14 @@ CPP_DK_Create("DKRml")
 window.resizeTo(sdl_width+sdl_width_offset, sdl_height+sdl_height_offset)
 window.moveTo(sdl_x+sdl_x_offset, sdl_y+sdl_y_offest)
 location.href = url
-
+/*
+window.addEventListener("keydown", function window_onkeydown(event){
+	if(event.code === "F11")
+		CPP_DKWindow_IsFullscreen() ? CPP_DKWindow_Windowed() : CPP_DKWindow_Fullscreen()
+	if(event.code === "F12")
+		CPP_DKRml_ToggleDebugger()
+})
+*/
 
 //// Console window
 const console_x = 0

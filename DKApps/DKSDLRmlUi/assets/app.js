@@ -29,11 +29,12 @@ window.resizeTo(sdl_width+sdl_width_offset, sdl_height+sdl_height_offset)
 window.moveTo(sdl_x+sdl_x_offset, sdl_y+sdl_y_offest)
 location.href = url
 window.addEventListener("keydown", function(event){
+	CPP_DK_Create("DKWindow/DKWindow.js")
 	console.log(event.code)
 	if(event.code === "F12")
 		CPP_DKRml_DebuggerToggle()
 	if(event.code === "F11")
-		CPP_DKWindow_IsFullscreen() ? CPP_DKWindow_Windowed() : CPP_DKWindow_Fullscreen()
+		CPP_DKWindow_IsFullscreen() ? CPP_DKWindow_Windowed() : dk.window.fullscreen()
 	
 })
 
