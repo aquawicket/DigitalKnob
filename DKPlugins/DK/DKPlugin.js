@@ -77,7 +77,7 @@ DKPlugin.fromFile = function DKPlugin_fromFile(args, DKPlugin_fromFile_callback)
             let klassName = null;
             if (DKPlugin.info[url])
                 klassName = DKPlugin.info[url]
-			else if(DKPlugin.instances[DKPlugin.instances.length-1].klassName){
+			else if(DKPlugin.instances){
 				klassName = DKPlugin.instances[DKPlugin.instances.length-1].klassName;
 			}
             else {
