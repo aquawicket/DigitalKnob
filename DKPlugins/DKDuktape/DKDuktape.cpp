@@ -161,7 +161,7 @@ bool DKDuktape::CallEnd(const DKString& file){
 			if (has(DKDuktape::filelist[i], filename))
 				DKDuktape::filelist.erase(DKDuktape::filelist.begin() + i);
 		}
-		return true
+		return true;
 	}
 	/*
 	if(!toBool(rval)){
@@ -192,7 +192,7 @@ bool DKDuktape::CallInit(const DKString& file){
 	RunDuktape("(typeof "+func+" === 'function')", rval);
 	if(toBool(rval)){
 		DKWARN("Auto-calling _Init is deprecated. "+func+" will no longer be called from C++, you must call it in Javascript");
-		return true
+		return true;
 	}
 	/*
 	if(!toBool(rval)){

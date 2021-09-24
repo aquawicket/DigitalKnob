@@ -506,3 +506,5 @@ function DKBuildConsole_KeyToApp(key) {
     }
     //z
 }
+
+DKBuildConsole_init()

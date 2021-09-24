@@ -983,3 +983,5 @@ function DKBuild_DoResults(){
 	//CPP_DK_Execute("ie4uinit.exe -ClearIconCache")
     //CPP_DK_Execute("ie4uinit.exe -show") //Windows 10
 }
+
+DKBuild_init()
