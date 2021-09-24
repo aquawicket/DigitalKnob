@@ -23,7 +23,7 @@
     font-size: 10rem;
     background-color: rgb(36,36,36);
     color: white;
-    font-color: white;
+    /*font-color: white;*/
     top: 20rem;
     bottom: 0rem;
     left: 0rem;
@@ -110,7 +110,7 @@
 }
 
 [dk_console="command"]:focus-visible {
-    outline: none;
+    /*outline: none;*/
 }
 
 [dk_console="cmnd"] {

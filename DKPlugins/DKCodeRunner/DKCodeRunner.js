@@ -36,7 +36,7 @@ DKCodeRunner.prototype.create = function DKCodeRunner_create(parent, top, bottom
 	textarea.style.color = "rgb(200,200,200)"
 	textarea.style.backgroundColor = "rgb(30,30,30)"
 	div.appendChild(textarea)
-	textarea.oncontextmenu = function container_oncontextmenu(event) {
+	textarea.oncontextmenu = function textarea_oncontextmenu(event) {
 		event.preventDefault();
 		DKPlugin("DKGui/DKMenu.js", function(DKClass) {
 			const dkmenu = DKClass.prototype.create();
@@ -46,6 +46,14 @@ DKCodeRunner.prototype.create = function DKCodeRunner_create(parent, top, bottom
 			});
 		});
 	}
+	/*
+	textarea.onkeydown = function textarea_onkeydown(event) {
+		console.log("event.currentElement = "+event.currentElement)
+		console.log("event.type = "+event.code)
+		if(event.code == "F11")
+		CPP_DKRml_DebuggerToggle()
+	}
+	*/
 	
 	const button = document.createElement("button")
 	button.style.position = "absolute"

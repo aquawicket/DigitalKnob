@@ -154,4 +154,4 @@ DKGui.prototype.randomRGB = function DKGui_randomRGB() {
     return 'rgb(' + o(r() * s) + ',' + o(r() * s) + ',' + o(r() * s) + ')';
 }
 
-dk.gui = DKPlugin(DKGui, "singleton")
+dk.gui = DKPlugin(DKGui)//, "singleton")
