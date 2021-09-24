@@ -28,6 +28,10 @@ CPP_DK_Create("DKRml")
 window.resizeTo(sdl_width+sdl_width_offset, sdl_height+sdl_height_offset)
 window.moveTo(sdl_x+sdl_x_offset, sdl_y+sdl_y_offest)
 location.href = url
+window.addEventListener("keydown", function(event){
+	console.log(event.code)
+	CPP_DKRml_DebuggerToggle()
+})
 
 
 //// Console window
