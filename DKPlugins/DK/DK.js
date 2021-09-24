@@ -117,8 +117,8 @@ dk.init = function dk_init() {
 }
 
 dk.create = function dk_create(data, dk_create_callback) {
-    if (DUKTAPE)
-        CPP_DK_Create(data);
+    //if (DUKTAPE)
+    //    CPP_DK_Create(data);
     var arry = data.split(",");
     if (arry[0].includes(".js")) {
         if (!dk.loadJs(arry[0], function dk_loadJs_callback(data) {
