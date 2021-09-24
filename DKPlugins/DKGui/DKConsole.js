@@ -245,6 +245,12 @@ DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left
     //dk.console.commandDiv = dk.gui.createTag("div", dk.console.logDiv, {});
     dk.console.commandDiv = document.createElement("div")
 	dk.console.commandDiv.setAttribute("dk_console", "commandDiv");
+	dk.console.commandDiv.style.width = "100%"
+    dk.console.commandDiv.style.height = "30rem"
+    dk.console.commandDiv.style.whiteSpace = "pre-wrap"
+    dk.console.commandDiv.style.boxSizing = "border-box"
+    dk.console.commandDiv.style.padding = "0rem"
+    dk.console.commandDiv.style.paddingLeft = "6rem"
 	dk.console.logDiv.appendChild(dk.console.commandDiv)
 
 
