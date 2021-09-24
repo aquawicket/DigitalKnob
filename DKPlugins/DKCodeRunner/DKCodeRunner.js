@@ -1,9 +1,10 @@
-
-//dk.coderunner = DKPlugin(DKCodeRunner)
+console.log("DKCodeRunner()")
 function DKCodeRunner() {}
 
 
 DKCodeRunner.prototype.init = function DKCodeRunner_init() {
+	console.log("DKCodeRunner.prototype.init()")
+	
     //dk.create("DKGui/DKConsole.css")
 	//DKPlugin("DKFile/DKFile.js")
 	DKPlugin("DKGui/DKMenu.js")
@@ -11,10 +12,14 @@ DKCodeRunner.prototype.init = function DKCodeRunner_init() {
 }
 
 DKCodeRunner.prototype.end = function DKCodeRunner_end() {
+	console.log("DKCodeRunner.prototype.end()")
+	
     dk.close("DKGui/DKConsole.css");
 }
 
 DKCodeRunner.prototype.create = function DKCodeRunner_create(parent, top, bottom, left, right, width, height) {
+	console.log("DKCodeRunner.prototype.create()")
+	
 	const div = document.createElement("div")
 	div.style.position = "absolute"
 	div.style.top = "35px"
@@ -40,20 +45,12 @@ DKCodeRunner.prototype.create = function DKCodeRunner_create(parent, top, bottom
 		event.preventDefault();
 		DKPlugin("DKGui/DKMenu.js", function(DKClass) {
 			const dkmenu = DKClass.prototype.create();
-			dkmenu.addItem("Clear console", 
-			function DKMenu_Clear() {
-				dk.console.clear();
+			dkmenu.addItem("Menu Test", 
+			function DKMenu_Test() {
+				console.log("Clicked Menu Test")
 			});
 		});
 	}
-	/*
-	textarea.onkeydown = function textarea_onkeydown(event) {
-		console.log("event.currentElement = "+event.currentElement)
-		console.log("event.type = "+event.code)
-		if(event.code == "F11")
-		CPP_DKRml_DebuggerToggle()
-	}
-	*/
 	
 	const button = document.createElement("button")
 	button.style.position = "absolute"
@@ -104,8 +101,9 @@ DKCodeRunner.prototype.create = function DKCodeRunner_create(parent, top, bottom
 }
 
 DKCodeRunner.prototype.close = function DKCodeRunner_close(){
+	console.log("DKCodeRunner.prototype.close()")
 	//TODO
 }
 
-
+console.log("dk.coderunner = DKPlugin(DKCodeRunner)")
 dk.coderunner = DKPlugin(DKCodeRunner)
