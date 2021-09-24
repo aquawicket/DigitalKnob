@@ -1,6 +1,7 @@
 //"use strict";
 
 function DKDebug(){}
+dk.debug = DKPlugin(DKDebug)
 
 /*
 //Error-first callbacks
@@ -750,4 +751,3 @@ DKDebug.prototype.debugger = function DKDebug_debugger() {
         dkcef.showDevTools(0);
 }
 
-dk.debug = new DKPlugin(DKDebug, "singleton")

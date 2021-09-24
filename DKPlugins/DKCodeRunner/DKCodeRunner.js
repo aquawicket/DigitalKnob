@@ -1,5 +1,5 @@
 
-function DKCodeRunner() {}
+function DKCodeRunner(){}
 dk.coderunner = DKPlugin(DKCodeRunner)
 
 DKCodeRunner.prototype.init = function DKCodeRunner_init() {
@@ -104,6 +104,3 @@ DKCodeRunner.prototype.close = function DKCodeRunner_close(){
 	console.log("DKCodeRunner.prototype.close()")
 	//TODO
 }
-
-
-

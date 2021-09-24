@@ -1,6 +1,6 @@
-"use strict";
+//"use strict";
 
-function DKNotepad() {}
+function DKNotepad(){}
 
 DKNotepad.prototype.init = function dk_notepad_init(callback) {
     DKPlugin("DKNotepad/DKNotepadShortcuts.js", function(){

@@ -1,25 +1,20 @@
 var FACEBOOK_ID;
 var FACEBOOK_NAME;
 
-///////////////////////
-function DKLogin_init()
-{
+
+function DKLogin_init(){
 	dk.create("DKLogin/DKLogin.css");
 	dk.create("DKLogin/DKLogin.html");
 	byId("DKLoginFacebook").addEventListener("click", DKLogin_onevent);
 }
 
-//////////////////////
-function DKLogin_end()
-{
+function DKLogin_end(){
 	byId("DKLoginFacebook").addEventListener("click", DKLogin_onevent);
 	dk.close("DKLogin/DKLogin.html");
 	dk.close("DKLogin/DKLogin.css");
 }
 
-///////////////////////////////
-function DKLogin_OnEvent(event)
-{
+function DKLogin_OnEvent(event){
 	if(event.currentTarget.id === "DKLoginFacebook"){
 		console.log("DKLogin_OnEvent(): DKLoginFacebook\n");
 		dk.create("DKLogin/DKFacebook.js", function(){
@@ -28,9 +23,7 @@ function DKLogin_OnEvent(event)
 	}
 }
 
-/////////////////////////////////
-function DKLogin_OnConnect(value)
-{
+function DKLogin_OnConnect(value){
 	if(value.status === 'connected'){
 		DKFacebook_Query('/me', "name", DKLogin_FBresponse);
 		DKFacebook_Query('/me', "id", DKLogin_FBresponse);
@@ -38,9 +31,7 @@ function DKLogin_OnConnect(value)
 	}
 }
 
-////////////////////////////////////////////
-function DKLogin_FBresponse(param, response)
-{
+function DKLogin_FBresponse(param, response){
 	if(param === "name"){
 		FACEBOOK_NAME = response;
 		

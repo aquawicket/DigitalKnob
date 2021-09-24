@@ -1,3 +1,8 @@
+//"use strict";
+
+function Clock(){}
+
+
 var clock_time;
 var clock_date;
 var second_flag = false;

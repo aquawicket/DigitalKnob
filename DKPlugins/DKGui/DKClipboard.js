@@ -1,6 +1,7 @@
 //"use strict";
 
-function DKClipboard() {}
+function DKClipboard(){}
+dk.clipboard = DKPlugin(DKClipboard, "singleton")
 
 DKClipboard.prototype.cut = function DKClipboard_cut(ele) {
     let text = "";
@@ -54,5 +55,3 @@ DKClipboard.prototype.removeSelection = function DKClipboard_removeSelection(ele
     text = text.slice(0, ele.selectionStart) + text.slice(ele.selectionEnd);
     ele.value = text;
 }
-
-dk.clipboard = DKPlugin(DKClipboard, "singleton")

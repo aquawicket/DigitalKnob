@@ -15,7 +15,7 @@ CPP_DKCef_NewBrowser("Cef", cef_y+cef_y_offset, cef_x+cef_x_offset, cef_width+ce
 */
 
 //// Create SDLRml window
-const sdl_x = 0
+const sdl_x = window.screen.width / 2
 const sdl_y = 0
 const sdl_width = window.screen.width / 2
 const sdl_height = window.screen.height
@@ -40,7 +40,7 @@ window.addEventListener("keydown", function(event){
 
 
 //// Console window
-const console_x = window.screen.width / 2
+const console_x = 0
 const console_y = 0
 const console_width = window.screen.width / 2
 const console_height = window.screen.height

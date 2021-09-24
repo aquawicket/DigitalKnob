@@ -552,5 +552,3 @@ if (!dk.hasCPP()) {
         return CPP_DKFile_Delete(path);
     }
 }
-
-

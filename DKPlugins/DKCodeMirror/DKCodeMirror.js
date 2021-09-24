@@ -1,6 +1,7 @@
-"use strict";
+//"use strict";
 
-function DKCodeMirror() {}
+function DKCodeMirror(){}
+
 
 DKCodeMirror.prototype.init = function DKCodeMirror_init(DKCodeMirror_init_callback) {
     DKPlugin("DKCodeMirror/lib/codemirror.js", function() {

@@ -1,9 +1,9 @@
 "use strict";
 //https://developer.mozilla.org/en-US/docs/Web/API/HTMLAudioElement
 
-dk.audio = new DKPlugin(DKAudio, "singleton")
+function DKAudio(){}
+dk.audio = new DKPlugin(DKAudio)//, "singleton")
 
-function DKAudio() {}
 
 DKAudio.prototype.init = function DKAudio_init(callback) {
     dk.create("DKAudio");
@@ -112,3 +112,4 @@ DKAudio.prototype.getTime = function DKAudio_getTime(src) {
 DKAudio.prototype.getDuration = function DKAudio_getDuration(src) {
     return byId(src).duration;
 }
+

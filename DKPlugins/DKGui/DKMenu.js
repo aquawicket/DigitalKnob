@@ -1,6 +1,6 @@
 //"use strict";
 
-function DKMenu() {}
+function DKMenu(){}
 
 DKMenu.prototype.init = function DKMenu_init(callback) {
     dk.create("DKGui/DKMenu.css", function() {

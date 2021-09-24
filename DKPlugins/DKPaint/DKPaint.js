@@ -1,6 +1,7 @@
 "use strict";
 
-dk.paint = new DKPlugin("dk_paint");
+function DKPaint(){}
+dk.paint = DKPlugin(DKPaint);
 dk.paint.currentFile = "";
 
 dk.paint.init = function dk_paint_init() {

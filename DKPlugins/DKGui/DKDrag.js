@@ -1,6 +1,8 @@
 //"use strict";
 
-function DKDrag() {}
+function DKDrag(){}
+dk.drag = DKPlugin(DKDrag, "singleton")
+
 
 /*
 DKDrag.prototype.create = function DKDrag_create(){
@@ -108,6 +110,3 @@ DKDrag.prototype.attachDrags = function DKDrag_attachDrags(parent) {
     }
 }
 */
-
-dk.drag = DKPlugin(DKDrag, "singleton")
-

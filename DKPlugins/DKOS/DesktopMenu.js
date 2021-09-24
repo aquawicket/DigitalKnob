@@ -1,3 +1,8 @@
+//"use strict";
+
+function DesktopMenu(){}
+
+
 DesktopMenu.init = function DesktopMenu_init() {
     dk.create("DKOS/DesktopMenu.html");
     //byId("DKOS/DesktopMenu.html").style.top = CPP_DKWindow_GetMouseY()+"px";

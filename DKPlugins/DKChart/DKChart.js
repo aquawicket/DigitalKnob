@@ -1,9 +1,9 @@
 "use strict";
 //https://www.chartjs.org/
 
+function DKChart(){}
 dk.chart = DKPlugin(DKChart);
 
-function DKChart() {}
 
 DKChart.prototype.init = function DKChart_init() {
     //DKPlugin("https://momentjs.com/downloads/moment.min.js");

@@ -1,3 +1,8 @@
+//"use strict";
+
+function Desktop(){}
+
+
 Desktop.init = function Desktop_init() {
     dk.create("DKOS/Desktop.html,DKOS/DKOS.html", function() {
         byId("Background").addEventListener("contextmenu", Desktop.onevent);

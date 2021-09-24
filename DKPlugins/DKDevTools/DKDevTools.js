@@ -1,6 +1,6 @@
-"use strict";
+//"use strict";
 
-function DKDevTools() {}
+function DKDevTools(){}
 
 DKDevTools.prototype.create = function DKDevTools_create() {
     const instance = DKPlugin(DKDevTools, "singleton")

@@ -4,21 +4,16 @@ dk.window = DKPlugin(DKWindow)
 
 
 dk.window.fullscreen = function dk_window_fullscreen() {
-	if (DUKTAPE){
+	if(DUKTAPE)
 		CPP_DKWindow_Fullscreen()
-	}
-    if (document.documentElement.requestFullScreen) {
+    if (document.documentElement.requestFullScreen)
         document.documentElement.requestFullScreen();
-    }
-	else if (document.documentElement.mozRequestFullScreen) {
+	else if (document.documentElement.mozRequestFullScreen)
         document.documentElement.mozRequestFullScreen();
-    } 
-	else if (document.documentElement.webkitRequestFullScreen) {
+	else if (document.documentElement.webkitRequestFullScreen)
         document.documentElement.webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT);
-    } 
-	else {
+	else
         return false;
-    }
     return true;
 }
 
@@ -29,7 +24,6 @@ dk.window.getHeight = function dk_window_getHeight() {
       , g = d.getElementsByTagName('body')[0]
       , x = w.innerWidth || e.clientWidth || g.clientWidth
       , y = w.innerHeight || e.clientHeight || g.clientHeight;
-    //console.log("DKWindow_GetHeight(): = "+y.toString()+"\n");
     return y;
 }
 
@@ -37,79 +31,71 @@ dk.window.getMouseX = function dk_window_getMouseX() {
     return mouseX;
 }
 
-/*
-function DKWindow_init(){	
-}
-
-function DKWindow_GetMouseY() {
+dk.window.getMouseY = function dk_window_GetMouseY() {
     return mouseY;
 }
 
-function DKWindow_GetPixelRatio() {
+dk.window.getPixelRatio function dk_window_getPixelRatio() {
     return window.devicePixelRatio || 1;
 }
 
-function DKWindow_GetWidth() {
+dk.window.getWidth function = dk.window_getWidth() {
     var w = window
       , d = document
       , e = d.documentElement
       , g = d.getElementsByTagName('body')[0]
       , x = w.innerWidth || e.clientWidth || g.clientWidth
       , y = w.innerHeight || e.clientHeight || g.clientHeight;
-    //console.log("DKWindow_GetWidth(): = "+x.toString()+"\n");
     return x;
 }
 
-function DKWindow_GetX() {
-    //console.log("DKWindow_GetX() = "+window.screenX+"\n");
+dk.window.getX = function dk_window_getX() {
     return window.screenX;
 }
 
-function DKWindow_GetY() {
-    //console.log("DKWindow_GetY() = "+window.screenY+"\n");
+dk.window.getY = function dk_window_getY() {
     return window.screenY;
 }
 
-function DKWindow_IsFullscreen() {
-    if ((document.fullScreenElement && document.fullScreenElement !== null) || (!document.mozFullScreen && !document.webkitIsFullScreen)) {
-        return false;
-    }
+dk.window.isFullscreen = function dk_window_isFullscreen() {
+    if ((document.fullScreenElement && document.fullScreenElement !== null) || (!document.mozFullScreen && !document.webkitIsFullScreen))        
+		return false;
     return true;
 }
 
 if (DK_GetBrowser() !== "CEF") {
-    function DKWindow_SetHeight(h) {
+	dk.window.setHeight = function dk_window_setHeight(h) {
         //FIXME - does not work
-        window.resizeTo(DKWindow_GetWidth(), h);
+        window.resizeTo(dk.window.getWidth(), h);
         return false;
     }
 }
 
 if (DK_GetBrowser() !== "CEF") {
-    function DKWindow_SetWidth(w) {
+	dk.window.setWidth = function dk_window_setWidth(w) {
         //FIXME - does not work
-        window.resizeTo(w, DKWindow_GetHeight());
+        window.resizeTo(w, dk.window.getHeight());
         return false;
     }
 }
 
 if (DK_GetBrowser() !== "CEF") {
-    function DKWindow_SetX(x) {
+	dk.window.setX = function dk_window_setX(x) {
         //FIXME - does not work
-        window.moveTo(x, DKWindow_GetY());
+        window.moveTo(x, dk.window.getY());
         return false;
     }
 }
 
 if (DK_GetBrowser() !== "CEF") {
-    function DKWindow_SetY(y) {
+	dk.window.setY = function dk_window_setY(y) {
         //FIXME - does not work
-        window.moveTo(DKWindow_GetX(), y);
+        window.moveTo(dk.window.getX(), y);
         return false;
     }
 }
 
-function DKWindow_Windowed() {
+dk.window.windowed = function dk_window_windowed() {
     if (document.cancelFullScreen) {
         document.cancelFullScreen();
     } else if (document.mozCancelFullScreen) {
@@ -121,4 +107,4 @@ function DKWindow_Windowed() {
     }
     return true;
 }
-*/
+

@@ -6,7 +6,8 @@
 
 //dk.console = DKPlugin(DKConsole, "singleton")
 
-function DKConsole() {}
+function DKConsole(){}
+dk.console = DKPlugin(DKConsole)//, "singleton")
 
 //intercept console and reroute it to xconsole and dk.console
 //Example:
@@ -770,5 +771,3 @@ DKConsole.prototype.ColorChromeConsole = function DKConsole_ColorChromeConsole(a
     return argArray;
 }
 */
-
-dk.console = DKPlugin(DKConsole)//, "singleton")

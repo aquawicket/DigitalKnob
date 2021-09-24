@@ -1,6 +1,5 @@
-/////////////////////////
-function DKHandles_init()
-{
+
+function DKHandles_init(){
 	dk.create("DKHandles");
 	dk.create("DKHandles/DKHandles.html");
 	document.addEventListener("click", DKHandles_onevent);
@@ -14,13 +13,10 @@ function DKHandles_init()
 	byId("Next").addEventListener("click", DKHandles_onevent);
 	byId("Highlight").addEventListener("click", DKHandles_onevent);
 	DKHandles_UpdateWindowList();
-	
 	byId("search").ondragstart = function() { return false; };
 }
 
-////////////////////////
-function DKHandles_end()
-{
+function DKHandles_end(){
 	document.removeEventListener("click", DKHandles_onevent);
 	document.removeEventListener("DKHandles_WindowChanged", DKHandles_onevent);
 	byId("refresh").removeEventListener("click", DKHandles_onevent);
@@ -34,9 +30,7 @@ function DKHandles_end()
 	dk.close("DKHandles/DKHandles.html");
 }
 
-/////////////////////////////////
-function DKHandles_OnEvent(event)
-{
+function DKHandles_OnEvent(event){
 	if(event.currentTarget === document){
 		var handle = document.documentElement.innerHTML;
 		DKHandles_UpdateProperties(handle);
@@ -87,9 +81,7 @@ function DKHandles_OnEvent(event)
 	}
 }
 
-/////////////////////////////////////
-function DKHandles_UpdateWindowList()
-{
+function DKHandles_UpdateWindowList(){
 	byId("windows").innerHTML = "";
 	var str = CPP_DKHandles_GetWindows();
 	if(!str){ return; }
@@ -107,9 +99,7 @@ function DKHandles_UpdateWindowList()
 	}
 }
 
-///////////////////////////////////////////
-function DKHandles_UpdateProperties(handle)
-{
+function DKHandles_UpdateProperties(handle){
 	byId("currentHandle").innerHTML = "Handle: "+handle;
 	var win = DKHandles_GetWindow(handle);
 	byId("window").innerHTML = win;
@@ -118,12 +108,10 @@ function DKHandles_UpdateProperties(handle)
 	var clas = DKHandles_GetClass(handle);
 	byId("class").value = clas;
 	var par = DKHandles_GetParent(handle);
-	if(!par){
+	if(!par)
 		byId("parent").innerHTML = "";
-	}
-	else{
+	else
 		byId("parent").innerHTML = par;
-	}
 	var index = DKHandles_GetIndex(handle);
 	byId("index").value = index;
 	var windowindex = DKHandles_GetWindowIndex(handle);
