@@ -106,6 +106,7 @@ function DKGit_GitUpdate() {
 }
 
 function DKGit_GitCommit() {
+	/*
     console.log("Git Commit DigitalKnob...\n")
     CPP_DKFile_ChDir(DKPATH + "/DK")
     //CPP_DK_Execute(GIT + " init")
@@ -113,7 +114,8 @@ function DKGit_GitCommit() {
 	//const branch = DKGit_GetCurrentBranch()
 	CPP_DK_Execute(GIT + " commit -a -m \"commit from git\"")
     CPP_DK_Execute(GIT + " push")
-
+	*/
+	
     //Multipe user folders
     var contents = CPP_DKFile_DirectoryContents(DKPATH)
     if (contents) {
