@@ -618,7 +618,10 @@ DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left
         }
         if (logLevel === "green") {
             msgDiv.setAttribute("dk_console", "msgDivGreen");
+			msgDiv.style.backgroundColor = "rgb(0,41,0)"
+			msgDiv.style.borderColor = "rgb(0,92,0)"
             msgSpan.setAttribute("dk_console", "msgSpanGreen");
+			msgSpan.span.color = "rgb(128,255,128)"
         }
 
         dk.console.logDiv.appendChild(msgDiv);
