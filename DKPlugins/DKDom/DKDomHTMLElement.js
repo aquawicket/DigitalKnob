@@ -67,6 +67,14 @@ var HTMLElement = function(pointer) {
             return CPP_DKDomHTMLElement_inert(pointer);
         }
     });
+	Object.defineProperty(this, "innerText", {
+        get: function() {
+            return CPP_DKDomElement_innerText(pointer)
+        },
+        set: function(val) {
+            return CPP_DKDomElement_innerText(pointer, val)
+        }
+    })
     Object.defineProperty(this, "itemScope", {
         get: function() {
             return CPP_DKDomHTMLElement_itemScope(pointer);

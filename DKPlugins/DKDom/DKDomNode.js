@@ -22,9 +22,8 @@ var Node = function(pointer) {
     Object.defineProperty(this, "firstChild", {
         get: function() {
             var address = CPP_DKDomNode_firstChild(this.pointer)
-            if (!address) {
+            if (!address)
                 return;
-            }
             return new HTMLElement(address)
         }
     })
@@ -36,15 +35,17 @@ var Node = function(pointer) {
     Object.defineProperty(this, "lastChild", {
         get: function() {
             var address = CPP_DKDomNode_lastChild(this.pointer)
-            if (!address) {
+            if (!address)
                 return;
-            }
             return new HTMLElement(address)
         }
     })
     Object.defineProperty(this, "nextSibling", {
         get: function() {
-            return CPP_DKDomNode_nextSibling(this.pointer)
+            var address = CPP_DKDomNode_nextSibling(this.pointer)
+			if (!address)
+                return;
+            return new HTMLElement(address)
         }
     })
     Object.defineProperty(this, "nodeName", {
@@ -72,15 +73,17 @@ var Node = function(pointer) {
     })
     Object.defineProperty(this, "ownerDocument", {
         get: function() {
-            return CPP_DKDomNode_ownerDocument(this.pointer)
+            var address = CPP_DKDomNode_ownerDocument(this.pointer)
+			if (!address)
+                return;
+            return new HTMLElement(address)
         }
     })
     Object.defineProperty(this, "parentNode", {
         get: function() {
             var address = CPP_DKDomNode_parentNode(this.pointer)
-            if (!address) {
+            if (!address)
                 return;
-            }
             return new HTMLElement(address)
         }
     })
@@ -91,7 +94,10 @@ var Node = function(pointer) {
     })
     Object.defineProperty(this, "previousSibling", {
         get: function() {
-            return CPP_DKDomNode_previousSibling(this.pointer)
+			var address = CPP_DKDomNode_previousSibling(this.pointer)
+			if (!address)
+                return;
+            return new HTMLElement(address)
         }
     })
     Object.defineProperty(this, "textContent", {
@@ -112,9 +118,8 @@ var Node = function(pointer) {
     // Methods
     Node.prototype.appendChild = function(child) {
         var address = CPP_DKDomNode_appendChild(this.pointer, child.pointer)
-        if (!address) {
+        if (!address)
             return;
-        }
         return new HTMLElement(address)
     }
     Node.prototype.cloneNode = function() {//TODO
@@ -145,9 +150,8 @@ var Node = function(pointer) {
     }
     Node.prototype.removeChild = function(child) {
         var address = CPP_DKDomNode_removeChild(this.pointer, child.pointer)
-        if (!address) {
+        if (!address)
             return null;
-        }
         //var node = Node(pointer)
         //return node;
     }

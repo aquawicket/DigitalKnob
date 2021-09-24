@@ -14,6 +14,7 @@ public:
 
 	static int click(duk_context* ctx);
 	static int focus(duk_context* ctx);
+	static int innerText(duk_context* ctx);
 	static int offsetHeight(duk_context* ctx);
 	static int offsetLeft(duk_context* ctx);
 	static int offsetParent(duk_context* ctx);

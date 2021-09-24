@@ -9,6 +9,7 @@ bool DKDomHTMLElement::Init(){
 	DKDEBUGFUNC();
 	DKDuktape::AttachFunction("CPP_DKDomHTMLElement_click", DKDomHTMLElement::click);
 	DKDuktape::AttachFunction("CPP_DKDomHTMLElement_focus", DKDomHTMLElement::focus);
+	DKDuktape::AttachFunction("CPP_DKDomHTMLElement_innerText", DKDomHTMLElement::innerText);
 	DKDuktape::AttachFunction("CPP_DKDomHTMLElement_offsetHeight", DKDomHTMLElement::offsetHeight);
 	DKDuktape::AttachFunction("CPP_DKDomHTMLElement_offsetLeft", DKDomHTMLElement::offsetLeft);
 	DKDuktape::AttachFunction("CPP_DKDomHTMLElement_offsetParent", DKDomHTMLElement::offsetParent);
@@ -43,6 +44,20 @@ int DKDomHTMLElement::focus(duk_context* ctx){
 		return DKERROR("DKDomElement::focus(): focus failed\n");
 	}
 	duk_push_boolean(ctx, true);
+	return true;
+}
+
+int DKDomHTMLElement::innerText(duk_context* ctx){
+	DKDEBUGFUNC(ctx);
+	DKString address = duk_require_string(ctx, 0);
+	Rml::Element* element = DKRml::addressToElement(address);
+	if (!element) {
+		DKERROR("DKDomElement::offsetParent(): element invalid\n");
+		duk_push_boolean(ctx, false);
+		return true;
+	}
+	Rml::String innerRml = element->GetInnerRML(); //FIXME: this is not exactly what we need, but close
+	duk_push_string(ctx, innerRml.c_str());
 	return true;
 }
 
