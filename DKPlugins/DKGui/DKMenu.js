@@ -56,24 +56,25 @@ DKMenu.prototype.addItem = function DKMenu_addItem(label, callback) {
     this.div.dkmenuItem.class = "option";
 	this.div.dkmenuItem.setAttribute("dk_menu", "item");
 	this.div.dkmenuItem.style.position = "absolute";
+	this.div.dkmenuItem.style.width = "100%%"
+	this.div.dkmenuItem.style.height = "100%";
     this.div.dkmenuItem.style.paddingTop = "2rem";
     this.div.dkmenuItem.style.paddingLeft = "4rem";
     this.div.dkmenuItem.style.cursor = "pointer";
     this.div.dkmenuItem.style.whiteSpace = "pre-wrap";
     this.div.dkmenuItem.style.boxSizing = "border-box";
+	this.div.dkmenuItem.style.backgroundColor = "rgb(74,74,74)"
 	this.div.dkmenuItem.style.borderColor = "rgb(22,20,20)"
     this.div.dkmenuItem.style.borderStyle = "solid";
     this.div.dkmenuItem.style.borderBottomWidth = "1rem";
     this.div.dkmenuItem.style.borderTopWidth = "0rem";
     this.div.dkmenuItem.style.borderLeftWidth = "0rem";
     this.div.dkmenuItem.style.borderRightWidth = "0rem";
-	const instance = this
-	this.div.appendChild(this.div.dkmenuItem);
-    instance.div.dkmenuItem.onmousedown = function onmousedown_callback() {
+    this.div.dkmenuItem.onmousedown = function onmousedown_callback() {
         callback && callback();
         //event.stopPropagation();
     }
-    //this.div.appendChild(this.div.dkmenuItem);
+    this.div.appendChild(this.div.dkmenuItem);
     this.validatePosition(this);
 }
 
