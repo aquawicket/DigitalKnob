@@ -12,6 +12,7 @@ class DKDomHTMLElement : public DKObjectT<DKDomHTMLElement>
 public:
 	bool Init();
 
+	static int click(duk_context* ctx);
 	static int focus(duk_context* ctx);
 	static int offsetHeight(duk_context* ctx);
 	static int offsetLeft(duk_context* ctx);

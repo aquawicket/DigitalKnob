@@ -3,10 +3,8 @@ const MyApp = function() {};
 const myapp = new MyApp;
 
 myapp.loadFiles = function myapp_loadFiles() {
-	dk.create("DK/DK.css");
-	DUKTAPE && CPP_DKRml_PostProcess();
-	!DUKTAPE &&	DKPlugin("DKGui/DKConsole.js")
-	!DUKTAPE && DKPlugin("DKGui/DKGui.js")
+	DKPlugin("DKGui/DKGui.js")
+	DKPlugin("DKGui/DKConsole.js")
 	
 	//DKPlugin("DKCodeRunner/DKCodeRunner.js")
 	//DKPlugin("DKNotepad/DKNotepad.js")

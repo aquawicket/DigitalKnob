@@ -437,6 +437,10 @@ int DKDomWindow::alert(duk_context* ctx){
 
 int DKDomWindow::blur(duk_context* ctx){
 	return DKERROR("DKDomWindow::blur not implemented");
+
+	DKDEBUGFUNC(ctx);
+	DKRml::Get()->document->Blur();
+	return true;
 }
 
 int DKDomWindow::cancelAnimationFrame(duk_context* ctx){

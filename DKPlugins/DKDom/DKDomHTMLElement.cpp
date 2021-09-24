@@ -7,6 +7,7 @@
 
 bool DKDomHTMLElement::Init(){
 	DKDEBUGFUNC();
+	DKDuktape::AttachFunction("CPP_DKDomHTMLElement_click", DKDomHTMLElement::click);
 	DKDuktape::AttachFunction("CPP_DKDomHTMLElement_focus", DKDomHTMLElement::focus);
 	DKDuktape::AttachFunction("CPP_DKDomHTMLElement_offsetHeight", DKDomHTMLElement::offsetHeight);
 	DKDuktape::AttachFunction("CPP_DKDomHTMLElement_offsetLeft", DKDomHTMLElement::offsetLeft);
@@ -17,16 +18,28 @@ bool DKDomHTMLElement::Init(){
 	return true;
 }
 
+int DKDomHTMLElement::click(duk_context* ctx){
+	DKDEBUGFUNC(ctx);
+	DKString address = duk_require_string(ctx, 0);
+	Rml::Element* element = DKRml::addressToElement(address);
+	if (!element) {
+		duk_push_undefined(ctx);
+		return DKERROR("DKDomElement::focus(): element invalid\n");
+	}
+	element->Click();
+	return true;
+}
+
 int DKDomHTMLElement::focus(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
 	Rml::Element* element = DKRml::addressToElement(address);
 	if (!element) {
-		duk_push_boolean(ctx, false);
+		duk_push_undefined(ctx);
 		return DKERROR("DKDomElement::focus(): element invalid\n");
 	}
 	if(!element->Focus()){
-		duk_push_boolean(ctx, false);
+		duk_push_undefined(ctx);
 		return DKERROR("DKDomElement::focus(): focus failed\n");
 	}
 	duk_push_boolean(ctx, true);

@@ -3,8 +3,8 @@ const MyApp = function() {};
 const myapp = new MyApp;
 
 myapp.loadFiles = function myapp_loadFiles() {
-	//!DUKTAPE &&	DKPlugin("DKGui/DKConsole.js")
-	//!DUKTAPE && DKPlugin("DKGui/DKGui.js")
+	DKPlugin("DKGui/DKGui.js")
+	DKPlugin("DKGui/DKConsole.js")
 	
 	DKPlugin("DKCodeRunner/DKCodeRunner.js")
 	
@@ -12,7 +12,7 @@ myapp.loadFiles = function myapp_loadFiles() {
 }
 
 myapp.loadApp = function myapp_loadApp() {
-	//!DUKTAPE && DKConsole.prototype.create(document.body, "", "0rem", "0rem", "0rem", "100%", "25%")
+	DKConsole.prototype.create(document.body, "", "0rem", "0rem", "0rem", "100%", "25%")
 	console.debug("**** DKSDLRmlUi ****")
 }
 
