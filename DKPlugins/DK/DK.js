@@ -6,7 +6,7 @@ let DUKTAPE = window.DUKTAPE
 dk.useCPP = false;
 
 //Keep a object reference to the old console
-if(!DUKTAPE) {
+//if(!DUKTAPE) {
     dk.xconsole = new Object;
     //Create a logger for console
     dk.x = new Object;
@@ -33,7 +33,7 @@ if(!DUKTAPE) {
     console.warn = function() {
         dk.x && dk.x.logger("warn", arguments);
     }
-}
+//}
 
 const required = function required() {
     for (let n = 0; n < arguments.length; n++) {
