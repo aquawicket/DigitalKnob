@@ -16,9 +16,9 @@ window.addEventListener("keydown", function window_onkeydown(event){
 	if(event.code === "F11")
 		CPP_DKWindow_IsFullscreen() ? CPP_DKWindow_Windowed() : CPP_DKWindow_Fullscreen()
 	if(event.code === "F12")
+*/		
 		CPP_DKCef_ShowDevTools(0)
-})
-*/
+//})
 
 
 //// Create SDLRml window

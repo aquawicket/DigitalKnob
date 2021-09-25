@@ -460,6 +460,7 @@ DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left
             dk.console.logDiv.scroll = false;
         const msgDiv = document.createElement("div");
         msgDiv.setAttribute("dk_console", "msgDiv");
+		msgDiv.style.position = "absolute";
 		msgDiv.style.width = "100%"
 		msgDiv.style.fontSize = "10rem"
 		msgDiv.style.fontFamily = "Consolas, Lucinda, Console, Courier New, monospace"
@@ -500,6 +501,7 @@ DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left
 
         const msgSpan = document.createElement("span")
         msgSpan.setAttribute("dk_console", "msgSpan")
+		msgSpan.style.position = "absolute"
 		msgSpan.style.color = "rgb(213,213,213)"
 
         //If the message is the same as the last, just increase a count next to the original.
@@ -522,6 +524,7 @@ DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left
                     })*/
 					const lastMsgImg = document.createElement("img")
 					lastMsgImg.src = "DKGui/circle.png"
+					lastMsgImg.style.position = "absolute"
 					lastMsgImg.style.height = "12rem" 
 					lastMsgImg.style.height = "12rem"
 					lastMsgImg.style.verticalAlign = "middle"
@@ -581,6 +584,7 @@ DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left
             })*/
 			const groupArrow = document.createElement("img")
 			msgSpan.src = "DKGui/groupArrow2.png"
+			msgSpan.style.position = "absolute"
 			msgSpan.style.height = "6rem"
 			msgSpan.style.paddingRight = "4rem"
 			msgSpan.appendChild(groupArrow)
@@ -610,6 +614,7 @@ DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left
 
         if (logLevel === "error") {
 			msgDiv.setAttribute("dk_console", "msgDivError")
+			msgDiv.style.position = "absolute"
 			msgDiv.style.backgroundColor = "rgb(41,0,0)"
 			msgDiv.style.borderColor = "rgb(92,0,0)"
             msgSpan.setAttribute("dk_console", "msgSpanError")
