@@ -1647,6 +1647,7 @@ function(WIN_MINGW_DEBUG arg arg2)
 endfunction()
 
 
+
 ################# Visual Studio Build ################
 function(WIN_VS_DEBUG arg arg2)
 	if(WIN AND DEBUG AND QUEUE_BUILD)

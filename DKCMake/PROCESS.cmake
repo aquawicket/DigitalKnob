@@ -6,7 +6,6 @@ set(DK_PROCESS_INCLUDED true)
 include(DKCMake/FUNCTIONS.cmake)
 include(DKCMake/OPTIONS.cmake)
 
-#WATCH(CMAKE_CXX_FLAGS)
 
 # cmake location
 WIN_DKSET(CMAKE_EXE C:/PROGRA~2/CMake/bin/cmake.exe)
@@ -176,10 +175,9 @@ foreach(plugin ${dkdepend_list})
 			message(STATUS "Creating CMakeLists.txt file for ${plugin}....")
 			file(WRITE ${plugin_path}/CMakeLists.txt ${CMAKE_FILE})
 		endif()
-		
+
 		DKSET(CURRENT_DIR ${plugin_path}/${OS})
-		dk_makeDirectory(${CURRENT_DIR})
-			
+		dk_makeDirectory(${CURRENT_DIR})		
 		if(WIN_32)
 			WIN32_COMMAND(${DKCMAKE_WIN32} -DWIN_32=ON -DDEBUG=ON -DRELEASE=ON -DREBUILD=ON ${plugin_path})
 			if(DEBUG)
