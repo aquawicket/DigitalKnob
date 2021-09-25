@@ -71,7 +71,7 @@ int DKDomKeyboardEvent::code(duk_context* ctx){
 	DKString eventAddress = duk_require_string(ctx, 0);
 	Rml::Event* event = DKRml::addressToEvent(eventAddress);
 	if (!event) {
-		rduk_push_undefined(ctx);
+		duk_push_undefined(ctx);
 		return DKERROR("event invalid\n");
 	}
 	Rml::Input::KeyIdentifier key_identifier = (Rml::Input::KeyIdentifier)event->GetParameter<int>("key_identifier", 0);
