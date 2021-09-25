@@ -277,18 +277,18 @@ DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left
             }
         }
     }).setAttribute("dk_console", "command")*/
-	const element = document.createElement("input")
-	element.type = "text";
-	element.setAttribute("dk_console", "command")
-	element.style.position = "absolute"
-    element.style.left = "17rem"
-    element.style.fontFamily = "Consolas, Lucinda, Console, Courier New, monospace;"
-    element.style.fontSize = "10rem"
-    element.style.width = "95%"
-    element.style.backgroundColor = "rgba(0,0,0,0)"
-    element.style.borderColor = "rgba(0,0,0,0)"
-    element.style.color = "white"
-	element.onkeydown = function command_onkeydown(event) {
+	dk.console.command = document.createElement("input")
+	dk.console.command.type = "text";
+	dk.console.command.setAttribute("dk_console", "command")
+	dk.console.command.style.position = "absolute"
+    dk.console.command.style.left = "17rem"
+    dk.console.command.style.fontFamily = "Consolas, Lucinda, Console, Courier New, monospace;"
+    dk.console.command.style.fontSize = "10rem"
+    dk.console.command.style.width = "95%"
+    dk.console.command.style.backgroundColor = "rgba(0,0,0,0)"
+    dk.console.command.style.borderColor = "rgba(0,0,0,0)"
+    dk.console.command.style.color = "white"
+	dk.console.command.onkeydown = function command_onkeydown(event) {
         if (event.code === "Enter") {
             if (event.currentTarget.value === "clear" || event.currentTarget.value === "cls") {
                 dk.console.clear();
@@ -304,7 +304,7 @@ DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left
             event.currentTarget.value = "";
         }
     }
-    dk.console.commandDiv.appendChild(element);
+    dk.console.commandDiv.appendChild(dk.console.command);
 
 	
 
@@ -326,13 +326,13 @@ DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left
     //dk.gui.createTag("img", dk.console.commandDiv, {
     //    src: "DKGui/cmndArrow.png",
     //}).setAttribute("dk_console", "cmnd");
-	const image = document.createElement("img")
-	image.src = "DKGui/cmndArrow.png"
-	image.setAttribute("dk_console", "cmnd")
-	image.style.position = "relative"
-    image.style.top = "3rem"
-    image.style.height = "7rem"
-	dk.console.commandDiv.appendChild(image)
+	const commandDivImage = document.createElement("img")
+	commandDivImage.src = "DKGui/cmndArrow.png"
+	commandDivImage.setAttribute("dk_console", "cmnd")
+	commandDivImage.style.position = "relative"
+    commandDivImage.style.top = "3rem"
+    commandDivImage.style.height = "7rem"
+	dk.console.commandDiv.appendChild(commandDivImage)
 
 
     function _toArray(arr) {
@@ -498,8 +498,9 @@ DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left
 		msgDiv.appendChild(magIcon)
 
 
-        const msgSpan = document.createElement("span");
-        msgSpan.setAttribute("dk_console", "msgSpan");
+        const msgSpan = document.createElement("span")
+        msgSpan.setAttribute("dk_console", "msgSpan")
+		msgSpan.style.color = "rgb(213,213,213)"
 
         //If the message is the same as the last, just increase a count next to the original.
         const lastMsgDiv = dk.console.logDiv.lastChild.previousSibling;
