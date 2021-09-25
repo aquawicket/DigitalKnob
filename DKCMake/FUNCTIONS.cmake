@@ -528,9 +528,17 @@ function(DKINSTALL src_path import_path dest_path)
 		DKCOPY(${DIGITALKNOB}/Download/${dl_filename} ${dest_path}/${dl_filename} TRUE)
 	endif()
 
-	DKCOPY(${DKIMPORTS}/${import_path}/ ${dest_path}/ TRUE)
+	if(NOT ${ARGN} STREQUAL "NOPATCH")
+		message(STATUS "COPYING PATCH FILES FROM _IMPORTS/${import_path} TO COMPLETE INSTALL.")
+		message(STATUS "To stop patch files from overwrites install files, add a \"NOPATCH\" argument to the end of the DKINSTALL command")
+		DKCOPY(${DKIMPORTS}/${import_path}/ ${dest_path}/ TRUE)
+	else()
+		message(STATUS "\n ** DKINSTALL has requested a NOPATCH to the install files. The install may not work. Please review ** \n")
+	endif()
+	
 	file(WRITE ${dest_path}/installed "${dest_filename}")
 endfunction()
+
 
 
 function(dk_validatePath path result)

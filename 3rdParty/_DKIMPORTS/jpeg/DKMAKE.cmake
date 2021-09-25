@@ -1,11 +1,12 @@
-# https://www.sac.sk/download/graph/jpegsr6b.zip
+# http://www.ijg.org/
+#
 # https://www.ijg.org/files/jpegsr9d.zip
 
+
 ### VERSION ###
-DKSET(JPEG_VERSION 6b)
-##DKSET(JPEG_VERSION 9d)
+DKSET(JPEG_VERSION 9d)
 DKSET(JPEG_NAME jpeg-${JPEG_VERSION})
-DKSET(JPEG_DL https://www.sac.sk/download/graph/jpegsr${JPEG_VERSION}.zip)
+DKSET(JPEG_DL http://www.ijg.org/files/jpegsr${JPEG_VERSION}.zip)
 DKSET(JPEG ${3RDPARTY}/${JPEG_NAME})
 
 
