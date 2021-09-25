@@ -149,162 +149,185 @@ DKConsole.prototype.end = function DKConsole_end() {
 }
 
 DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left, right, width, height) {
+											
     dk.console.limit = 200;
 
 	//NOTE: A lot of these elements were created JSON style and DUKTAPE wasn't working.
 	//Most of the problem was stylesheets not having any effect, so thi is a temporary fix
 	//So I commented out the old format and wore them directly under in a more compatable standard
-	//Everything I recoded will be marked with ## RECODED ##
+	//Everything I recoded will be marked with //## USE_CSS ##    or     //## NO_CSS ##
+	USE_CSS = true;
 
-	/* ## RECODED ##
-    dk.console.container = dk.gui.createTag("div", parent, {
-        style: {
-			position: "absoulte",
-			padding: "0rem",
-			margin: "0rem",
-            top: top,
-            bottom: bottom,
-            left: left,
-            right: right,
-            width: width,
-            height: height
-        },
-        oncontextmenu: function container_oncontextmenu(event) {
-            event.preventDefault();
-            DKPlugin("DKGui/DKMenu.js", function(DKClass) {
-                const dkmenu = DKClass.prototype.create();
-                dkmenu.addItem("Clear console", function DKMenu_Clear() {
-                    dk.console.clear();
-                });
-            });
-        }
-    })*/
-	dk.console.container = document.createElement("div")
-	dk.console.container.setAttribute("dk_console", "container")
-	dk.console.container.style.position = "absolute";
-	dk.console.container.style.padding = "0rem"
-	dk.console.container.style.margin = "0rem"
-	dk.console.container.style.top = top
-	dk.console.container.style.bottom = bottom
-	dk.console.container.style.left = left
-	dk.console.container.style.right = right
-	dk.console.container.style.width = width
-	dk.console.container.style.height = height
-	dk.console.container.oncontextmenu = function container_oncontextmenu(event) {
-        event.preventDefault();
-        DKPlugin("DKGui/DKMenu.js", function(DKClass) {
-            const dkmenu = DKClass.prototype.create();
-            dkmenu.addItem("Clear console", function DKMenu_Clear() {
-                    dk.console.clear();
-            });
-        });
-    }
-	parent.appendChild(dk.console.container)
+	//## USE_CSS ##
+	if(USE_CSS){
+		dk.console.container = dk.gui.createTag("div", parent, {
+			style: {
+				top: top,
+				bottom: bottom,
+				left: left,
+				right: right,
+				width: width,
+				height: height
+			},
+			oncontextmenu: function container_oncontextmenu(event) {
+				event.preventDefault();
+				DKPlugin("DKGui/DKMenu.js", function(DKClass) {
+					// const dkmenu = DKClass.prototype.create();
+					dkmenu.addItem("Clear console", function DKMenu_Clear() {
+						dk.console.clear();
+					});
+				});
+			}
+		});
+		dk.console.container.setAttribute("dk_console", "container")
+	}
+	else{
+		dk.console.container = document.createElement("div")
+		dk.console.container.setAttribute("dk_console", "container")
+		dk.console.container.style.position = "absolute"; //+++ addded
+		dk.console.container.style.padding = "0rem"       //+++ addded
+		dk.console.container.style.margin = "0rem"        //+++ addded
+		dk.console.container.style.top = top
+		dk.console.container.style.bottom = bottom
+		dk.console.container.style.left = left
+		dk.console.container.style.right = right
+		dk.console.container.style.width = width
+		dk.console.container.style.height = height
+		dk.console.container.oncontextmenu = function container_oncontextmenu(event) {
+			event.preventDefault();
+			DKPlugin("DKGui/DKMenu.js", function(DKClass) {
+				const dkmenu = DKClass.prototype.create();
+				dkmenu.addItem("Clear console", function DKMenu_Clear() {
+						dk.console.clear();
+				});
+			});
+		}
+		parent.appendChild(dk.console.container)
+	}
 	
 	
 	
-	// ## RECODED ##
-	//dk.console.toolbar = dk.gui.createTag("div", dk.console.container, {});
-    dk.console.toolbar = document.createElement("div")
-	dk.console.toolbar.setAttribute("dk_console", "toolbar")
-	dk.console.toolbar.style.position = "absolute"
-    dk.console.toolbar.style.width = "100%"
-    dk.console.toolbar.style.height = "20rem"
-    dk.console.toolbar.style.boxSizing = "border-box"
-    dk.console.toolbar.style.borderStyle = "solid"
-    dk.console.toolbar.style.borderWidth = ".1rem"
-    dk.console.toolbar.style.borderLeftWidth = "0rem"
-    dk.console.toolbar.style.borderRightWidth = "0rem"
-    dk.console.toolbar.style.borderColor = "rgba(100,100,100,1)"
-    dk.console.toolbar.style.backgroundColor = "rgb(45,45,45)"
-	dk.console.container.appendChild(dk.console.toolbar)
+	//## USE_CSS ##
+	if(USE_CSS){
+		dk.console.toolbar = dk.gui.createTag("div", dk.console.container, {});
+		dk.console.toolbar.setAttribute("dk_console", "toolbar")
+	}
+	else{
+		dk.console.toolbar = document.createElement("div")
+		dk.console.toolbar.setAttribute("dk_console", "toolbar");
+		dk.console.toolbar.style.position = "absolute"               //+++ addded
+		dk.console.toolbar.style.width = "100%"                      //+++ addded       
+		dk.console.toolbar.style.height = "20rem"                    //+++ addded 
+		dk.console.toolbar.style.boxSizing = "border-box"            //+++ addded
+		dk.console.toolbar.style.borderStyle = "solid"               //+++ addded
+		dk.console.toolbar.style.borderWidth = ".1rem"               //+++ addded
+		dk.console.toolbar.style.borderLeftWidth = "0rem"            //+++ addded
+		dk.console.toolbar.style.borderRightWidth = "0rem"           //+++ addded
+		dk.console.toolbar.style.borderColor = "rgba(100,100,100,1)" //+++ addded
+		dk.console.toolbar.style.backgroundColor = "rgb(45,45,45)"   //+++ addded
+		dk.console.container.appendChild(dk.console.toolbar)
+	}
 	
 	
 	
-	// ## RECODED ##
-    //dk.console.logDiv = dk.gui.createTag("div", dk.console.container, {});
-	dk.console.logDiv = document.createElement("div")
-    dk.console.logDiv.setAttribute("dk_console", "logDiv")
-	dk.console.logDiv.style.position = "absolute"
-    dk.console.logDiv.style.padding = "0rem"
-    dk.console.logDiv.style.fontSize = "10rem"
-    dk.console.logDiv.style.backgroundColor = "rgb(36,36,36)"
-    dk.console.logDiv.style.color = "white"
-    /*font-color = "white"*/
-    dk.console.logDiv.style.top = "20rem"
-    dk.console.logDiv.style.bottom = "0rem"
-    dk.console.logDiv.style.left = "0rem"
-    dk.console.logDiv.style.right = "0rem"
-    dk.console.logDiv.style.visibility = "visible"
-    dk.console.logDiv.style.overflow = "auto"
-	dk.console.container.appendChild(dk.console.logDiv)
+	//## USE_CSS ##
+	if(USE_CSS){
+		dk.console.logDiv = dk.gui.createTag("div", dk.console.container, {});
+		dk.console.logDiv.setAttribute("dk_console", "logDiv");
+	}
+	else{
+		dk.console.logDiv = document.createElement("div")
+		dk.console.logDiv.setAttribute("dk_console", "logDiv")
+		dk.console.logDiv.style.position = "absolute"               //+++ addded
+		dk.console.logDiv.style.padding = "0rem"                    //+++ addded
+		dk.console.logDiv.style.fontSize = "10rem"                  //+++ addded
+		dk.console.logDiv.style.backgroundColor = "rgb(36,36,36)"   //+++ addded
+		dk.console.logDiv.style.color = "white"                     //+++ addded
+		/*font-color = "white"*/                                    //+++ addded
+		dk.console.logDiv.style.top = "20rem"                       //+++ addded
+		dk.console.logDiv.style.bottom = "0rem"                     //+++ addded
+		dk.console.logDiv.style.left = "0rem"                       //+++ addded
+		dk.console.logDiv.style.right = "0rem"                      //+++ addded
+		dk.console.logDiv.style.visibility = "visible"              //+++ addded
+		dk.console.logDiv.style.overflow = "auto"                   //+++ addded
+		dk.console.container.appendChild(dk.console.logDiv)
+	}
 
 
 
-	// ## RECODED ##
-    //dk.console.commandDiv = dk.gui.createTag("div", dk.console.logDiv, {});
-    dk.console.commandDiv = document.createElement("div")
-	dk.console.commandDiv.setAttribute("dk_console", "commandDiv");
-	dk.console.commandDiv.style.position = "absolute"
-	dk.console.commandDiv.style.width = "100%"
-    dk.console.commandDiv.style.height = "30rem"
-    dk.console.commandDiv.style.whiteSpace = "pre-wrap"
-    dk.console.commandDiv.style.boxSizing = "border-box"
-    dk.console.commandDiv.style.padding = "0rem"
-    dk.console.commandDiv.style.paddingLeft = "6rem"
-	dk.console.logDiv.appendChild(dk.console.commandDiv)
+	//## USE_CSS ##
+	if(USE_CSS){
+		dk.console.commandDiv = dk.gui.createTag("div", dk.console.logDiv, {});
+		dk.console.commandDiv.setAttribute("dk_console", "commandDiv");
+	}
+	else{
+		dk.console.commandDiv = document.createElement("div")
+		dk.console.commandDiv.setAttribute("dk_console", "commandDiv");
+		dk.console.commandDiv.style.position = "absolute"          //+++ addded
+		dk.console.commandDiv.style.width = "100%"                 //+++ addded  
+		dk.console.commandDiv.style.height = "30rem"               //+++ addded     
+		dk.console.commandDiv.style.whiteSpace = "pre-wrap"        //+++ addded     
+		dk.console.commandDiv.style.boxSizing = "border-box"       //+++ addded   
+		dk.console.commandDiv.style.padding = "0rem"               //+++ addded      
+		dk.console.commandDiv.style.paddingLeft = "6rem"           //+++ addded      
+		dk.console.logDiv.appendChild(dk.console.commandDiv)            
+	}
 
 
 
 
-	/*  // ## RECODED ##
-	dk.console.command = dk.gui.createTag("input", dk.console.commandDiv, {
-        type: "text",
-        onkeydown: function command_onkeydown(event) {
-            if (event.code === "Enter") {
-                if (event.currentTarget.value === "clear" || event.currentTarget.value === "cls") {
-                    dk.console.clear();
-                    event.currentTarget.value = "";
-                    return;
-                }
-                //console.debug("RUN Javascript -> " + event.currentTarget.value);
-                try {
-                    eval(event.currentTarget.value);
-                } catch (x) {
-                    console.error("eval failed");
-                }
-                event.currentTarget.value = "";
-            }
-        }
-    }).setAttribute("dk_console", "command")*/
-	dk.console.command = document.createElement("input")
-	dk.console.command.type = "text";
-	dk.console.command.setAttribute("dk_console", "command")
-	dk.console.command.style.position = "absolute"
-    dk.console.command.style.left = "17rem"
-    dk.console.command.style.fontFamily = "Consolas, Lucinda, Console, Courier New, monospace;"
-    dk.console.command.style.fontSize = "10rem"
-    dk.console.command.style.width = "95%"
-    dk.console.command.style.backgroundColor = "rgba(0,0,0,0)"
-    dk.console.command.style.borderColor = "rgba(0,0,0,0)"
-    dk.console.command.style.color = "white"
-	dk.console.command.onkeydown = function command_onkeydown(event) {
-        if (event.code === "Enter") {
-            if (event.currentTarget.value === "clear" || event.currentTarget.value === "cls") {
-                dk.console.clear();
-                event.currentTarget.value = "";
-                return;
-            }
-            //console.debug("RUN Javascript -> " + event.currentTarget.value);
-            try {
-                eval(event.currentTarget.value);
-            } catch (x) {
-                console.error("eval failed");
-            }
-            event.currentTarget.value = "";
-        }
-    }
-    dk.console.commandDiv.appendChild(dk.console.command);
+	//## USE_CSS ##
+	if(USE_CSS){
+		dk.console.command = dk.gui.createTag("input", dk.console.commandDiv, {
+			type: "text",
+			onkeydown: function command_onkeydown(event) {
+				if (event.code === "Enter") {
+					if (event.currentTarget.value === "clear" || event.currentTarget.value === "cls") {
+						dk.console.clear();
+						event.currentTarget.value = "";
+						return;
+					}
+					//console.debug("RUN Javascript -> " + event.currentTarget.value);
+					try {
+						eval(event.currentTarget.value);
+					} catch (x) {
+						console.error("eval failed");
+					}
+					event.currentTarget.value = "";
+				}
+			}
+		}).setAttribute("dk_console", "command");
+	}
+	else {
+		dk.console.command = document.createElement("input")
+		dk.console.command.type = "text";
+		dk.console.command.setAttribute("dk_console", "command");
+		dk.console.command.style.position = "absolute"
+		dk.console.command.style.left = "17rem"
+		dk.console.command.style.fontFamily = "Consolas, Lucinda, Console, Courier New, monospace;"
+		dk.console.command.style.fontSize = "10rem"
+		dk.console.command.style.width = "95%"
+		dk.console.command.style.backgroundColor = "rgba(0,0,0,0)"
+		dk.console.command.style.borderColor = "rgba(0,0,0,0)"
+		dk.console.command.style.color = "white"
+		dk.console.command.onkeydown = function command_onkeydown(event) {
+			if (event.code === "Enter") {
+				if (event.currentTarget.value === "clear" || event.currentTarget.value === "cls") {
+					dk.console.clear();
+					event.currentTarget.value = "";
+					return;
+				}
+				//console.debug("RUN Javascript -> " + event.currentTarget.value);
+				try {
+					eval(event.currentTarget.value);
+				} catch (x) {
+					console.error("eval failed");
+				}
+				event.currentTarget.value = "";
+			}
+		}
+		dk.console.commandDiv.appendChild(dk.console.command);
+	}
 
 	
 
@@ -322,17 +345,21 @@ DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left
 
 
 
-    // ## RECODED ##
-    //dk.gui.createTag("img", dk.console.commandDiv, {
-    //    src: "DKGui/cmndArrow.png",
-    //}).setAttribute("dk_console", "cmnd");
-	const commandDivImage = document.createElement("img")
-	commandDivImage.src = "DKGui/cmndArrow.png"
-	commandDivImage.setAttribute("dk_console", "cmnd")
-	commandDivImage.style.position = "relative"
-    commandDivImage.style.top = "3rem"
-    commandDivImage.style.height = "7rem"
-	dk.console.commandDiv.appendChild(commandDivImage)
+    //## USE_CSS ##
+	if(USE_CSS){
+		dk.gui.createTag("img", dk.console.commandDiv, {
+			src: "DKGui/cmndArrow.png",
+		}).setAttribute("dk_console", "cmnd");
+	}
+	else{
+		const commandDivImage = document.createElement("img")
+		commandDivImage.src = "DKGui/cmndArrow.png"          
+		commandDivImage.setAttribute("dk_console", "cmnd")
+		commandDivImage.style.position = "relative"             //+++added
+		commandDivImage.style.top = "3rem"                      //+++added  
+		commandDivImage.style.height = "7rem"                   //+++added 
+		dk.console.commandDiv.appendChild(commandDivImage)
+	}
 
 
     function _toArray(arr) {
@@ -357,8 +384,9 @@ DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left
     function _arrayLikeToArray(arr, len) {
         if (len == null || len > arr.length)
             len = arr.length;
-        for (var i = 0, arr2 = new Array(len); i < len; i++)
+        for (var i = 0, arr2 = new Array(len); i < len; i++){
             arr2[i] = arr[i];
+		}
         return arr2;
     }
     function _iterableToArray(iter) {
@@ -460,20 +488,24 @@ DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left
             dk.console.logDiv.scroll = false;
         const msgDiv = document.createElement("div");
         msgDiv.setAttribute("dk_console", "msgDiv");
-		msgDiv.style.position = "absolute";
-		msgDiv.style.width = "100%"
-		msgDiv.style.fontSize = "10rem"
-		msgDiv.style.fontFamily = "Consolas, Lucinda, Console, Courier New, monospace"
-		msgDiv.style.whiteSpace = "pre-wrap"
-		msgDiv.style.boxSizing = "border-box"
-		msgDiv.style.padding = "2rem"
-		msgDiv.style.paddingLeft = "20rem"
-		msgDiv.style.borderStyle = "solid"
-		msgDiv.style.borderWidth = ".1rem"
-		msgDiv.style.borderTopWidth = "0rem"
-		msgDiv.style.borderLeftWidth = "0rem"
-		msgDiv.style.backgroundColor = "rgb(36,36,36)"
-		msgDiv.style.borderColor = "rgb(58,58,58)"
+		
+		//## NO_CSS ##
+		if(!USE_CSS){
+			msgDiv.style.position = "absolute";           //+++ addded
+			msgDiv.style.width = "100%"                   //+++ addded 
+			msgDiv.style.fontSize = "10rem"               //+++ addded
+			msgDiv.style.fontFamily = "Consolas, Lucinda, Console, Courier New, monospace"   //+++addded
+			msgDiv.style.whiteSpace = "pre-wrap"             //+++addded
+			msgDiv.style.boxSizing = "border-box"            //+++addded
+			msgDiv.style.padding = "2rem"                    //+++addded
+			msgDiv.style.paddingLeft = "20rem"               //+++addded
+			msgDiv.style.borderStyle = "solid"               //+++addded
+			msgDiv.style.borderWidth = ".1rem"               //+++addded
+			msgDiv.style.borderTopWidth = "0rem"             //+++addded
+			msgDiv.style.borderLeftWidth = "0rem"            //+++addded
+			msgDiv.style.backgroundColor = "rgb(36,36,36)"   //+++addded
+			msgDiv.style.borderColor = "rgb(58,58,58)"       //+++addded
+		}
         if (logLevel !== "group" && logLevel !== "groupCollapsed" && dk.console.currentGroup) {
             msgDiv.setAttribute("group", dk.console.currentGroup.id);
             msgDiv.style.display = dk.console.currentGroup.display;
@@ -482,28 +514,36 @@ DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left
 		
 		
 		
-		/*  // ## RECODED ##
-		const magIcon = dk.gui.createTag("div", msgDiv, {
-            style: {
-                position: "absolute",
-                left: "6rem",
-                width: "12rem",
-                height: "12rem",
-            }
-        })*/
-		const magIcon = document.createElement("div")
-		magIcon.style.position = "absolute"
-        magIcon.style.left = "6rem"
-        magIcon.style.width = "12rem"
-        magIcon.style.height = "12rem"
-		msgDiv.appendChild(magIcon)
+		//## USE_CSS ##
+		if(USE_CSS){
+			const magIcon = dk.gui.createTag("div", msgDiv, {
+				style: {
+					position: "absolute",
+					left: "6rem",
+					width: "12rem",
+					height: "12rem",
+				}
+			})
+		} 
+		else{
+			const magIcon = document.createElement("div")
+			magIcon.style.position = "absolute"
+			magIcon.style.left = "6rem"
+			magIcon.style.width = "12rem"
+			magIcon.style.height = "12rem"
+			msgDiv.appendChild(magIcon)
+		}
 
-
-        const msgSpan = document.createElement("span")
-        msgSpan.setAttribute("dk_console", "msgSpan")
-		msgSpan.style.position = "absolute"
-		msgSpan.style.color = "rgb(213,213,213)"
-
+        const msgSpan = document.createElement("span");
+        msgSpan.setAttribute("dk_console", "msgSpan");
+		
+		//## NO_CSS ##
+		if( !USE_CSS ){
+			msgSpan.style.position = "absolute"
+			msgSpan.style.color = "rgb(213,213,213)"
+		}
+		
+		
         //If the message is the same as the last, just increase a count next to the original.
         const lastMsgDiv = dk.console.logDiv.lastChild.previousSibling;
         if (lastMsgDiv) {
@@ -514,44 +554,50 @@ DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left
 					
 					
 					
-					/*  // ## RECODED ##
-					dk.gui.createTag("img", lastMsgIcon, {
-                        src: "DKGui/circle.png",
-                        style: {
-                            height: "12rem",
-                            verticalAlign: "middle"
-                        }
-                    })*/
-					const lastMsgImg = document.createElement("img")
-					lastMsgImg.src = "DKGui/circle.png"
-					lastMsgImg.style.position = "absolute"
-					lastMsgImg.style.height = "12rem" 
-					lastMsgImg.style.height = "12rem"
-					lastMsgImg.style.verticalAlign = "middle"
-					lastMsgIcon.appendChild(lastMsgImg)
+					//## USE_CSS ##
+					if(USE_CSS){
+						dk.gui.createTag("img", lastMsgIcon, {
+							src: "DKGui/circle.png",
+							style: {
+								height: "12rem",
+								verticalAlign: "middle"
+							}
+						});
+					}
+					else{
+						const lastMsgImg = document.createElement("img")
+						lastMsgImg.src = "DKGui/circle.png"
+						lastMsgImg.style.position = "absolute"        //+++ added
+						lastMsgImg.style.height = "12rem"           
+						lastMsgImg.style.verticalAlign = "middle"
+						lastMsgIcon.appendChild(lastMsgImg)
+					}
 					
 					
 					
-					
-					/*  // ## RECODED ##
-                    const count = dk.gui.createTag("div", lastMsgIcon, {
-                        style: {
-                            position: "absolute",
-                            top: "50%",
-                            left: "50%",
-                            transform: "translate(-50%, -50%)",
-                            color: "black"
-                        },
-                        innerHTML: 2
-                    })*/
-					const count = document.createElement("div")
-					count.style.position = "absolute"
-					count.style.top = "50%"
-					count.style.left = "50%"
-					count.style.transform = "translate(-50%, -50%)"
-					count.style.color = "black"
-					count.innerHTML = 2
-					lastMsgIcon.appendChild(count)
+					//## USE_CSS ##
+					if(USE_CSS){
+						const count = dk.gui.createTag("div", lastMsgIcon, {
+							style: {
+								position: "absolute",
+								top: "50%",
+								left: "50%",
+								transform: "translate(-50%, -50%)",
+								color: "black"
+							},
+							innerHTML: 2
+						});
+					}
+					else{
+						const count = document.createElement("div")
+						count.style.position = "absolute"
+						count.style.top = "50%"
+						count.style.left = "50%"
+						count.style.transform = "translate(-50%, -50%)"
+						count.style.color = "black"
+						count.innerHTML = 2
+						lastMsgIcon.appendChild(count)
+					}
 					
 					
 					
@@ -573,22 +619,25 @@ DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left
 			
 			
 			
-			/*  // ## RECODED ##
-            const groupArrow = dk.gui.createTag("img", msgSpan, {
-                src: "DKGui/groupArrow2.png",
-                style: {
-                    height: "6rem",
-                    paddingRight: "4rem"//TODO: This should be multiplied by the number of open groups
-                    // This should effect all other console entries as well
-                }
-            })*/
-			const groupArrow = document.createElement("img")
-			msgSpan.src = "DKGui/groupArrow2.png"
-			msgSpan.style.position = "absolute"
-			msgSpan.style.height = "6rem"
-			msgSpan.style.paddingRight = "4rem"
-			msgSpan.appendChild(groupArrow)
-			
+			//## USE_CSS ##
+			if(USE_CSS){
+				const groupArrow = dk.gui.createTag("img", msgSpan, {
+					src: "DKGui/groupArrow2.png",
+					style: {
+						height: "6rem",
+						paddingRight: "4rem"//TODO: This should be multiplied by the number of open groups
+						// This should effect all other console entries as well
+					}
+				});
+			}
+			else{
+				const groupArrow = document.createElement("img")
+				msgSpan.src = "DKGui/groupArrow2.png"
+				msgSpan.style.position = "absolute"        //+++ added
+				msgSpan.style.height = "6rem"
+				msgSpan.style.paddingRight = "4rem"
+				msgSpan.appendChild(groupArrow)
+			}
 			
 			
             if (group.display === "none") {
@@ -604,8 +653,9 @@ DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left
                     group.display = "block";
                 }
                 const elements = dk.console.logDiv.querySelectorAll("[group='" + group.id + "']");
-                for (let n = 0; n < elements.length; n++)
+                for (let n = 0; n < elements.length; n++){
                     elements[n].style.display = group.display;
+				}
             }
 
         } else {
@@ -613,33 +663,45 @@ DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left
         }
 
         if (logLevel === "error") {
-			msgDiv.setAttribute("dk_console", "msgDivError")
-			msgDiv.style.position = "absolute"
-			msgDiv.style.backgroundColor = "rgb(41,0,0)"
-			msgDiv.style.borderColor = "rgb(92,0,0)"
-            msgSpan.setAttribute("dk_console", "msgSpanError")
-			msgSpan.span.color = "rgb(255,128,128)"
+			msgDiv.setAttribute("dk_console", "msgDivError");
+			msgSpan.setAttribute("dk_console", "msgSpanError");
+			//## NO_CSS ##
+			if(!USE_CSS){
+				msgDiv.style.position = "absolute"
+				msgDiv.style.backgroundColor = "rgb(41,0,0)"
+				msgDiv.style.borderColor = "rgb(92,0,0)"
+				msgSpan.span.color = "rgb(255,128,128)"
+			}
         }
         if (logLevel === "warn") {
             msgDiv.setAttribute("dk_console", "msgDivWarn");
-			msgDiv.style.backgroundColor = "rgb(51,43,0)"
-			msgDiv.style.borderColor = "rgb(102,85,0)"
-            msgSpan.setAttribute("dk_console", "msgSpanWarn");
-			msgSpan.span.color = "rgb(255,221,158)"
+			msgSpan.setAttribute("dk_console", "msgSpanWarn");
+			//## NO_CSS ##
+			if(!USE_CSS){
+				msgDiv.style.backgroundColor = "rgb(51,43,0)"
+				msgDiv.style.borderColor = "rgb(102,85,0)"
+				msgSpan.span.color = "rgb(255,221,158)"
+			}
         }
         if (logLevel === "debug") {
             msgDiv.setAttribute("dk_console", "msgDivDebug");
-			msgDiv.style.backgroundColor = "rgb(36,36,36)"
-			msgDiv.style.borderColor = "rgb(58,58,58)"
-            msgSpan.setAttribute("dk_console", "msgSpanDebug");
-			msgSpan.span.color = "rgb(77,136,255)"
+			msgSpan.setAttribute("dk_console", "msgSpanDebug");
+			//## NO_CSS ##
+			if(!USE_CSS){
+				msgDiv.style.backgroundColor = "rgb(36,36,36)"
+				msgDiv.style.borderColor = "rgb(58,58,58)"
+				msgSpan.span.color = "rgb(77,136,255)"
+			}
         }
         if (logLevel === "green") {
             msgDiv.setAttribute("dk_console", "msgDivGreen");
-			msgDiv.style.backgroundColor = "rgb(0,41,0)"
-			msgDiv.style.borderColor = "rgb(0,92,0)"
-            msgSpan.setAttribute("dk_console", "msgSpanGreen");
-			msgSpan.span.color = "rgb(128,255,128)"
+			msgSpan.setAttribute("dk_console", "msgSpanGreen");
+			//## NO_CSS ##
+			if(!USE_CSS){
+				msgDiv.style.backgroundColor = "rgb(0,41,0)"
+				msgDiv.style.borderColor = "rgb(0,92,0)"
+				msgSpan.span.color = "rgb(128,255,128)"
+			}
         }
 
         dk.console.logDiv.appendChild(msgDiv);
@@ -924,21 +986,16 @@ DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left
     }
 
     dk.console.setXConsole();
-	
-	if(!DUKTAPE){
-		dk.console.record = dk.x.record
-		delete dk.x;
-		//restore the record of messages from the program beginning
-		for (let n = 0; n < dk.console.record.length; n++) {
-			const lvl = Object.keys(dk.console.record[n])[0];
-			const msg = dk.console.record[n][lvl];
-			dk.console[lvl](msg);
-		}
-		delete dk.console.record;
+	dk.console.record = dk.x.record
+	delete dk.x;
+	//restore the record of messages from the program beginning
+	for (let n = 0; n < dk.console.record.length; n++) {
+		const lvl = Object.keys(dk.console.record[n])[0];
+		const msg = dk.console.record[n][lvl];
+		dk.console[lvl](msg);
 	}
-	
-	
-	
+	delete dk.console.record;
+	dk.xconsole.log("DKConsole.prototype.create() -> return")
     return dk.console.container;
 }
 
@@ -956,8 +1013,9 @@ DKConsole.prototype.SpanFilter = function DKConsole_SpanFilter(args) {
             argArray.push('');
         }
         // pass through subsequent args since chrome dev tools does not (yet) support console.log styling of the following form: console.log('%cBlue!', 'color: blue;', '%cRed!', 'color: red;');
-        for (let n = 1; n < args.length; n++)
+        for (let n = 1; n < args.length; n++){
             argArray.push(args[n]);
+		}
     }
     return argArray;
 }

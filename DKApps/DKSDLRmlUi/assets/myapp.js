@@ -8,6 +8,7 @@ myapp.loadFiles = function myapp_loadFiles() {
 	DKPlugin("DKGui/DKGui.js")
 	DKPlugin("DKCodeRunner/DKCodeRunner.js")
 	//dk.notepad = DKPlugin("DKNotepad/DKNotepad.js")
+	DKPlugin("DKGui/DKMessageBox.js")
 	DKPlugin("DKGui/DKConsole.js")
 }
 

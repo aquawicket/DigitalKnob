@@ -11,6 +11,7 @@ const cef_width_offset = +16
 const cef_height_offset = +9
 CPP_DK_Create("DKCef")
 CPP_DKCef_NewBrowser("Cef", cef_y+cef_y_offset, cef_x+cef_x_offset, cef_width+cef_width_offset, cef_height+cef_height_offset, url)
+CPP_DK_SendEvent = function(){} //just consume the message from CEF for now
 /*
 window.addEventListener("keydown", function window_onkeydown(event){
 	if(event.code === "F11")

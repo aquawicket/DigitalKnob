@@ -16,6 +16,6 @@ myapp.loadApp = function myapp_loadApp() {
 	console.log("**** DKSDLRmlUi ****")
 }
 
-
+CPP_DK_SendEvent = function(){} //just consume the message from CEF for now
 DUKTAPE && myapp.loadFiles();
 DUKTAPE && myapp.loadApp();
