@@ -3324,6 +3324,11 @@ function(DKUPDATE_INFO_PLIST name)
 	endif()
 endfunction()
 
+function(DKBUILD_LOG entry)
+	DKSET(DKBUILD_LOG_FILE "${DKBUILD_LOG_FILE}${entry}\n")
+	message(STATUS "buildlog->  ${entry}")
+endfunction()
+
 
 # Function to wrap a given string into multiple lines at the given column position.
 # Parameters:
