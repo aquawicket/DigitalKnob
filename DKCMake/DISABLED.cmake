@@ -32,6 +32,7 @@ if(NOT CMAKE_HOST_WIN32) # Disabled on Non-Windows host machines
 endif()
 if(WIN) # Disabled for Windows targets
 	DKDISABLE(android-studio)
+	DKDISABLE(bzip2)
 	DKDISABLE(DKOcr)
 	DKDISABLE(DKOFWindow)
 	DKDISABLE(DKPlugin1)

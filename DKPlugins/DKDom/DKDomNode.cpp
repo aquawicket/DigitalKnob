@@ -80,7 +80,7 @@ int DKDomNode::childNodes(duk_context* ctx)
 	Rml::Element* element = DKRml::addressToElement(address);
 	if (!element) {
 		DKERROR("DKDomNode::childNodes(): element invalid\n");
-		duk_push_boolean(ctx, false);
+		duk_push_undefined(ctx);
 		return true;
 	}
 
@@ -109,13 +109,13 @@ int DKDomNode::firstChild(duk_context* ctx){
 	Rml::Element* element = DKRml::addressToElement(address);
 	if (!element) {
 		DKERROR("DKDomNode::firstChild(): element invalid\n");
-		duk_push_boolean(ctx, false);
+		duk_push_undefined(ctx);
 		return true;
 	}
 	Rml::Element* firstChild = element->GetFirstChild();
 	if (!firstChild) {
 		DKERROR("DKDomNode::firstChild(): firstChild invalid\n");
-		duk_push_boolean(ctx, false);
+		duk_push_undefined(ctx);
 		return true;
 	}
 	DKString elementAddress = DKRml::elementToAddress(firstChild);
@@ -137,13 +137,13 @@ int DKDomNode::lastChild(duk_context* ctx){
 	Rml::Element* element = DKRml::addressToElement(address);
 	if (!element) {
 		DKERROR("DKDomNode::lastChild(): element invalid\n");
-		duk_push_boolean(ctx, false);
+		duk_push_undefined(ctx);
 		return true;
 	}
 	Rml::Element* lastChild = element->GetLastChild();
 	if (!lastChild) {
 		DKERROR("DKDomNode::lastChild(): lastChild invalid\n");
-		duk_push_boolean(ctx, false);
+		duk_push_undefined(ctx);
 		return true;
 	}
 	DKString elementAddress = DKRml::elementToAddress(lastChild);
@@ -257,88 +257,73 @@ int DKDomNode::previousSibling(duk_context* ctx){
 	Rml::Element* element = DKRml::addressToElement(address);
 	if (!element) {
 		duk_push_undefined(ctx);
-		return DKERROR("DKDomNode::previousSibling(): element invalid\n");
+		return DKERROR("element invalid\n");
 	}
 	Rml::Element* previousSibling = element->GetPreviousSibling();
 	if (!previousSibling) {
 		duk_push_undefined(ctx);
-		return DKERROR("DKDomNode::previousSibling(): previousSibling invalid\n");
+		return DKERROR("previousSibling invalid\n");
 	}
 	DKString elementAddress = DKRml::elementToAddress(previousSibling);
 	duk_push_string(ctx, elementAddress.c_str());
 	return true;
 }
 
-////////////////////////////////////////////
-int DKDomNode::textContent(duk_context* ctx)
-{
+int DKDomNode::textContent(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
-	DKERROR("DKDomNode::textContent not implemented\n");
-	return false;
+	return DKERROR("function not implemented\n");
 }
 
-//////////////////////////////////////////
-int DKDomNode::localName(duk_context* ctx)
-{
+int DKDomNode::localName(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKERROR("DKDomNode::localName not implemented\n");
 	return false;
 }
 
-/////////////////////////////////////////////
-int DKDomNode::namespaceURI(duk_context* ctx)
-{
+int DKDomNode::namespaceURI(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKERROR("DKDomNode::namespaceURI not implemented\n");
 	return false;
 }
 
-//////////////////////////////////////////////
-int DKDomNode::nodePrincipal(duk_context* ctx)
-{
+int DKDomNode::nodePrincipal(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKERROR("DKDomNode::nodePrincipal not implemented\n");
 	return false;
 }
 
-///////////////////////////////////////
-int DKDomNode::prefix(duk_context* ctx)
-{
+int DKDomNode::prefix(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKERROR("DKDomNode::prefix not implemented\n");
 	return false;
 }
 
-/////////////////////////////////////////
-int DKDomNode::rootNode(duk_context* ctx)
-{
+int DKDomNode::rootNode(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKERROR("DKDomNode::rootNode not implemented\n");
 	return false;
 }
 
-////////////////////////////////////////////
-int DKDomNode::appendChild(duk_context* ctx)
-{
+int DKDomNode::appendChild(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
 	Rml::Element* element = DKRml::addressToElement(address);
 	if(!element){
 		DKERROR("DKDomNode::appendChild(): element invalid\n");
-		duk_push_boolean(ctx, false);
+		duk_push_undefined(ctx);
 		return true;
 	}
 	DKString childAddress = duk_require_string(ctx, 1);
 	Rml::Element* child = DKRml::addressToElement(childAddress);
 	if(!child){
 		DKERROR("DKDomNode::appendChild(): child invalid\n");
-		duk_push_boolean(ctx, false);
+		duk_push_undefined(ctx);
 		return true;
 	}
 
 	if(!element->AppendChild(child->GetParentNode()->RemoveChild(child), true)){
 		DKERROR("DKDomNode::appendChild(): AppendChild failed\n");
-		duk_push_boolean(ctx, false);
+		duk_push_undefined(ctx);
 		return true;
 	}
 
@@ -385,14 +370,14 @@ int DKDomNode::contains(duk_context* ctx)
 	Rml::Element* element = DKRml::addressToElement(address);
 	if (!element) {
 		DKERROR("DKDomNode::contains(): element invalid\n");
-		duk_push_boolean(ctx, false);
+		duk_push_undefined(ctx);
 		return true;
 	}
 	DKString nodeAddress = duk_require_string(ctx, 1);
 	Rml::Element* node = DKRml::addressToElement(nodeAddress);
 	if(!node){
 		DKERROR("DKDomNode::contains(): node invalid\n");
-		duk_push_boolean(ctx, false);
+		duk_push_undefined(ctx);
 		return true;
 	}
 
@@ -429,7 +414,7 @@ int DKDomNode::hasChildNodes(duk_context* ctx){
 	Rml::Element* element = DKRml::addressToElement(address);
 	if (!element) {
 		DKERROR("element invalid\n");
-		duk_push_boolean(ctx, false);
+		duk_push_undefined(ctx);
 		return true;
 	}
 	bool hasChildNodes = element->HasChildNodes();
@@ -445,7 +430,7 @@ int DKDomNode::insertBefore(duk_context* ctx)
 	Rml::Element* element = DKRml::addressToElement(address);
 	if (!element) {
 		DKERROR("element invalid\n");
-		duk_push_boolean(ctx, false);
+		duk_push_undefined(ctx);
 		return true;
 	}
 	
@@ -453,7 +438,7 @@ int DKDomNode::insertBefore(duk_context* ctx)
 	Rml::Element* child = DKRml::addressToElement(childAddress);
 	if(!child){
 		DKERROR("child invalid\n");
-		duk_push_boolean(ctx, false);
+		duk_push_undefined(ctx);
 		return true;
 	}
 
@@ -461,13 +446,13 @@ int DKDomNode::insertBefore(duk_context* ctx)
 	Rml::Element* adjacentElement = DKRml::addressToElement(adjacentAddress);
 	if(!adjacentElement){
 		DKERROR("adjacentElement invalid\n");
-		duk_push_boolean(ctx, false);
+		duk_push_undefined(ctx);
 		return true;
 	}
 
 	if(!element->InsertBefore(child->GetParentNode()->RemoveChild(child), adjacentElement)){
 		DKERROR("InsertBefore failed\n");
-		duk_push_boolean(ctx, false);
+		duk_push_undefined(ctx);
 		return true;
 	}
 
@@ -544,20 +529,20 @@ int DKDomNode::removeChild(duk_context* ctx)
 	Rml::Element* element = DKRml::addressToElement(address);
 	if(!element){
 		DKERROR("DKDomNode::removeChild(): element invalid\n");
-		duk_push_boolean(ctx, false);
+		duk_push_undefined(ctx);
 		return true;
 	}
 	DKString childAddress = duk_require_string(ctx, 1);
 	Rml::Element* child = DKRml::addressToElement(childAddress);
 	if(!child){
 		DKERROR("DKDomNode::removeChild(): child invalid\n");
-		duk_push_boolean(ctx, false);
+		duk_push_undefined(ctx);
 		return true;
 	}
 	//DKINFO("element->RemoveChild(child): " + element->GetTagName() + "->(" + child->GetTagName() + ")\n");
 	if(!element->RemoveChild(child)){
 		DKERROR("DKDomNode::removeChild(): element->RemoveChild failed\n");
-		duk_push_boolean(ctx, false);
+		duk_push_undefined(ctx);
 		return true;
 	}
 	duk_push_string(ctx, childAddress.c_str());
@@ -572,7 +557,7 @@ int DKDomNode::replaceChild(duk_context* ctx)
 	Rml::Element* element = DKRml::addressToElement(address);
 	if (!element) {
 		DKERROR("element invalid\n");
-		duk_push_boolean(ctx, false);
+		duk_push_undefined(ctx);
 		return true;
 	}
 	
@@ -580,7 +565,7 @@ int DKDomNode::replaceChild(duk_context* ctx)
 	Rml::Element* newChild = DKRml::addressToElement(newChildAddress);
 	if(!newChild){
 		DKERROR("newChild invalid\n");
-		duk_push_boolean(ctx, false);
+		duk_push_undefined(ctx);
 		return true;
 	}
 
@@ -588,13 +573,13 @@ int DKDomNode::replaceChild(duk_context* ctx)
 	Rml::Element* oldChild = DKRml::addressToElement(oldChildAddress);
 	if(!oldChild){
 		DKERROR("oldChild invalid\n");
-		duk_push_boolean(ctx, false);
+		duk_push_undefined(ctx);
 		return true;
 	}
 
 	if(!element->ReplaceChild(newChild->GetParentNode()->RemoveChild(newChild), oldChild)){
 		DKERROR("replaceChild failed\n");
-		duk_push_boolean(ctx, false);
+		duk_push_undefined(ctx);
 		return true;
 	}
 
