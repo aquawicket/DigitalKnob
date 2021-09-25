@@ -98,6 +98,18 @@ DKCodeRunner.prototype.create = function DKCodeRunner_create(parent, top, bottom
 		dk.file.pushDKAssets()
 	}
 	document.body.appendChild(pullAssets)
+	
+	const debugg = document.createElement("img")
+	debugg.src = "DKCodeRunner/debugger.jpg"
+	debugg.style.position = "absolute"
+	debugg.style.top = "3px"
+	debugg.style.right = "3px"
+	debugg.style.width = "50px"
+	debugg.style.height = "50px"
+	debugg.onclick = function(event) {
+		console.log("debugger");
+	}
+	document.body.appendChild(debugg)
 }
 
 DKCodeRunner.prototype.close = function DKCodeRunner_close(){
