@@ -1,5 +1,25 @@
-## https://www.libsdl.org/projects/SDL_image/release/SDL2_image-2.0.1.zip
-## https://www.libsdl.org/projects/SDL_image/release/SDL2_image-2.0.5.zip
+# https://github.com/libsdl-org/SDL_image
+#
+# https://www.libsdl.org/projects/SDL_image/release/SDL2_image-2.0.1.zip
+# https://www.libsdl.org/projects/SDL_image/release/SDL2_image-2.0.5.zip
+# https://github.com/libsdl-org/SDL_image/archive/refs/heads/main.zip
+#
+# Notes:  VS compiler options
+#
+# DEBUG flags
+# Debug Information Format:         C7 compatible (/Z7)
+# Enable Enhanced Instruction Set:  Streaming SIMD Extensions (/arch:SSE)
+# Inline function expansion:        Default
+# Preprocessor Definitions:         _DEBUG WIN32 _WINDOWS LOAD_BMP LOAD_GIF LOAD_JPG LOAD_LBM LOAD_PCX LOAD_PNG LOAD_PNM LOAD_SVG LOAD_TGA LOAD_TIF LOAD_WEBP LOAD_XPM LOAD_XV 
+#
+# RELEASE flags)
+# Debug information format:         Program Database (/Zi)
+# Diagnostics Format:               OFF
+# Enable C++ Exceptions             Yes (/EHsc)
+# Inline function expansion         Any Suitable (/Ob2)
+# Ommit frame pointers              OFF
+
+
 
 ### DEPENDS ###
 DKDEPEND(sdl2)
@@ -16,9 +36,11 @@ DKDEPEND(tiff)
 DKSET(SDL2IMAGE_MAJOR 2)
 DKSET(SDL2IMAGE_MINOR 0)
 DKSET(SDL2IMAGE_BUILD 5)  
-DKSET(SDL2IMAGE_VERSION ${SDL2IMAGE_MAJOR}.${SDL2IMAGE_MINOR}.${SDL2IMAGE_BUILD})
+#DKSET(SDL2IMAGE_VERSION ${SDL2IMAGE_MAJOR}.${SDL2IMAGE_MINOR}.${SDL2IMAGE_BUILD})
+DKSET(SDL2IMAGE_VERSION main)
 DKSET(SDL2IMAGE_NAME SDL2_image-${SDL2IMAGE_VERSION})
-DKSET(SDL2IMAGE_DL https://www.libsdl.org/projects/SDL_image/release/${SDL2IMAGE_NAME}.zip)
+#DKSET(SDL2IMAGE_DL https://www.libsdl.org/projects/SDL_image/release/${SDL2IMAGE_NAME}.zip)
+DKSET(SDL2IMAGE_DL https://github.com/libsdl-org/SDL_image/archive/refs/heads/${SDL2IMAGE_VERSION}.zip)  #main
 DKSET(SDL2IMAGE ${3RDPARTY}/${SDL2IMAGE_NAME})
 
 
