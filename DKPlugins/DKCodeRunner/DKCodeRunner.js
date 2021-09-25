@@ -108,6 +108,8 @@ DKCodeRunner.prototype.create = function DKCodeRunner_create(parent, top, bottom
 	debugg.style.height = "50px"
 	debugg.onclick = function(event) {
 		console.log("debugger");
+		if(dk.getBrowser() === "Rml")
+			CPP_DKRml_DebuggerToggle()
 	}
 	document.body.appendChild(debugg)
 }
