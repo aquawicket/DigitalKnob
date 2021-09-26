@@ -1,0 +1,4 @@
+// Copy this file to the root DigitalKnob directory to add this repository to DKBuilder
+
+[MYSVN] https://github.com/aquawicket/DKOsg/trunk/
+[MYGIT] https://github.com/aquawicket/DKosg.git

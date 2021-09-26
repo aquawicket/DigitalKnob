@@ -21,14 +21,14 @@ void RmlSDL2Renderer::RenderGeometry(Rml::Vertex* vertices, int num_vertices, in
 #if !defined(IOS) && !defined(ANDROID)
     // DISABLE SDL Shaders
 	DKSDLWindow* dkSdlWindow = DKSDLWindow::Instance("DKSDLWindow0");
-	//if(!has(dkSdlWindow->gl_vendor, "Microsoft")){
-		//glUseProgramObjectARB = (PFNGLUSEPROGRAMOBJECTARBPROC) SDL_GL_GetProcAddress("glUseProgramObjectARB");
+	if(!has(dkSdlWindow->gl_vendor, "Microsoft")){
+		glUseProgramObjectARB = (PFNGLUSEPROGRAMOBJECTARBPROC) SDL_GL_GetProcAddress("glUseProgramObjectARB");
 		glUseProgramObjectARB(0);  //FIXME: this crashes on Microsoft Generic GDI drivers
-	//}
+	}
 #endif 
+
     glPushMatrix();
     glTranslatef(translation.x, translation.y, 0);
- 
  
     std::vector<Rml::Vector2f> Positions(num_vertices);
     std::vector<Rml::Colourb> Colors(num_vertices);
