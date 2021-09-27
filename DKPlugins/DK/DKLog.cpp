@@ -202,11 +202,13 @@ bool Log(const char* file, int line, const char* func, const DKString& text, con
 			if(DKClass::HasFunc("DKDebug::ShowStackTrace"))
 				DKClass::CallFunc("DKDebug::ShowStackTrace", NULL, NULL);
 			string += "\n\n Would you like to exit the application?";
+			#ifdef WIN32
 			boxer::Selection sel = boxer::show(string.c_str(), "EXCEPTION", boxer::Style::Error, boxer::Buttons::YesNo);
 			if(sel == boxer::Selection::Yes){
 				DKApp::Exit();
 				return false;
 			}
+			#endif
 		}
 		return false;
 	}
