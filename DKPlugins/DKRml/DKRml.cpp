@@ -123,7 +123,7 @@ bool DKRml::LoadFonts(){
 	DKStringArray files;
 	DKFile::GetDirectoryContents(DKFile::local_assets, files);
 	for(unsigned int i=0; i<files.size(); ++i){
-		if(DKFile::IsDirectory(dkfiles[i]))
+		if(DKFile::IsDirectory(files[i]))
 			continue;
 		DKString extension;
 		DKFile::GetExtention(files[i],extension);

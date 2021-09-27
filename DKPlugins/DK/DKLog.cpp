@@ -205,9 +205,10 @@ bool Log(const char* file, int line, const char* func, const DKString& text, con
 				DKApp::Exit();
 				return false;
 			}
-			boxer::Selection trace = boxer::show("Would you like to print the stack trace to the console?", "STACK TRACE", boxer::Style::Question, boxer::Buttons::YesNo);
-			if(trace == boxer::Selection::Yes)
-				DKClass::CallFunc("DKDebug::ShowStackTrace", NULL, NULL); 
+			//boxer::Selection trace = boxer::show("Would you like to print the stack trace to the console?", "STACK TRACE", boxer::Style::Question, boxer::Buttons::YesNo);
+			//if(trace == boxer::Selection::Yes)
+			if(DKClass::HasFunc("DKDebug::ShowStackTrace"))
+				DKClass::CallFunc("DKDebug::ShowStackTrace", NULL, NULL);
 		}
 		return false;
 	}
