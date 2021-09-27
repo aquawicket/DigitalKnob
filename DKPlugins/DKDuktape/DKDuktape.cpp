@@ -156,8 +156,8 @@ bool DKDuktape::CallEnd(const DKString& file){
 	DKString rval;
 	RunDuktape("(typeof "+func+" === 'function')", rval);
 	if(toBool(rval)){
-		DKERROR("Auto-calling _end is deprecated. "+func+" will no longer be called from C++, you must call it in Javascript\n");
-		DKERROR("Using DKPlugin("+func+") in javascript should take care of _init and _end \n");
+		DKWARN("Auto-calling _end is deprecated. "+func+" will no longer be called from C++, you must call it in Javascript\n");
+		DKWARN("Using DKPlugin("+func+") in javascript should take care of _init and _end \n");
 		for (unsigned int i = 0; i < DKDuktape::filelist.size(); ++i) {
 			if (has(DKDuktape::filelist[i], filename))
 				DKDuktape::filelist.erase(DKDuktape::filelist.begin() + i);
