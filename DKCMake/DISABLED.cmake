@@ -28,6 +28,7 @@ DKDISABLE(sdl2_ttf)
 
 if(NOT CMAKE_HOST_WIN32) # Disabled on Non-Windows host machines
 	DKDISABLE(boxer)
+	DKDISABLE(glew)
 	DKDISABLE(mingw32)
 	DKDISABLE(mingw64)
 	DKDISABLE(msys)
