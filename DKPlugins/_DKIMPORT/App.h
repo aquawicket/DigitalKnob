@@ -4,7 +4,9 @@
 #define App_H
 
 #include "DK/DKApp.h"
-#include "Android.h"
+#ifdef ANDROID
+	#include "Android.h"
+#endif
 
 /////////////////////////////////
 class App : public DKObjectT<App>
