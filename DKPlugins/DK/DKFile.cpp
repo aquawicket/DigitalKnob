@@ -256,7 +256,7 @@ bool DKFile::GetDirectoryContents(const DKString& path, DKStringArray& strings){
 	DKDEBUGFUNC(path);
 	DebugPath(path);
 	if(!PathExists(path))
-		return false;
+		return DKWARN("path does not exist");
 	fs::directory_iterator end_itr;
 	for (fs::directory_iterator itr(path); itr != end_itr; ++itr) {
 		DKString itrPath = itr->path().string();

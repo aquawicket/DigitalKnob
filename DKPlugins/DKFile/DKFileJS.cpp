@@ -252,7 +252,7 @@ int DKFileJS::Rename(duk_context* ctx){
 	DKString output = duk_require_string(ctx, 1);
 	bool overwrite = (duk_require_boolean(ctx, 2) != 0);
 	if(!DKFile::Rename(input, output, overwrite))
-		return DKERROR("DKFile::Rename() failed \n");
+		return DKWARN("DKFile::Rename() failed \n");
 	return true;
 }
 

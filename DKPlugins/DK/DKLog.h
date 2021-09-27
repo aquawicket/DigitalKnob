@@ -51,15 +51,18 @@
 	#define DKDEBUG_COLOR    "\x1B[34m"
 	#define DKVERBOSE_COLOR  "\x1B[34m"	
 #endif
-#define DK_FATAL 1
-#define DK_ERROR 2
-#define DK_WARN 3
-#define DK_INFO 4
-#define DK_DEBUG 5
-#define DK_VERBOSE 6
-#define DK_SHOW 7
-#define DK_HIDE 8
 
+#define DK_ASSERT 1
+#define DK_FATAL 2
+#define DK_ERROR 3
+#define DK_WARN 4
+#define DK_INFO 5
+#define DK_DEBUG 6
+#define DK_VERBOSE 7
+#define DK_SHOW 8
+#define DK_HIDE 9
+
+extern bool log_assert;
 extern bool log_fatal;
 extern bool log_errors;
 extern bool log_warnings;
@@ -135,6 +138,7 @@ class logy{
 		const clock_t start_time;
 };
 
+#define  DKASSERT(message) Log(__FILE__, __LINE__, __FUNCTION__, message, DK_ASSERT);
 #define   DKFATAL(message) Log(__FILE__, __LINE__, __FUNCTION__, message, DK_FATAL);
 #define   DKERROR(message) Log(__FILE__, __LINE__, __FUNCTION__, message, DK_ERROR);
 #define    DKWARN(message) Log(__FILE__, __LINE__, __FUNCTION__, message, DK_WARN);

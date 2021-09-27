@@ -262,7 +262,7 @@ int DKDomNode::previousSibling(duk_context* ctx){
 	Rml::Element* previousSibling = element->GetPreviousSibling();
 	if (!previousSibling) {
 		duk_push_undefined(ctx);
-		return DKERROR("previousSibling invalid\n");
+		return DKWARN("previousSibling invalid\n");
 	}
 	DKString elementAddress = DKRml::elementToAddress(previousSibling);
 	duk_push_string(ctx, elementAddress.c_str());
