@@ -3,7 +3,7 @@
 #define DKJerryscript_H
 #include "DK/DK.h"
 #include "jerryscript.h"
-#include "DK/DKEvents.h"
+//#include "DK/DKEvents.h"
 
 class DKJerryscript : public DKObjectT<DKJerryscript>{
 public:

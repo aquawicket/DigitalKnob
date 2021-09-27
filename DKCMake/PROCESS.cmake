@@ -354,17 +354,34 @@ if(PLUGINS_FILE)
 endif()
 
 message(STATUS "Copying DKPlugins/_DKIMPORT/ to App...")
-DKCOPY(${DKPLUGINS}/_DKIMPORT ${DKPROJECT} FALSE) ## copy app default files recursivly without overwrite
+DKCOPY(${DKPLUGINS}/_DKIMPORT/icons ${DKPROJECT}/icons FALSE) ## copy app default files recursivly without overwrite
+if(ANDROID)
+	DKCOPY(${DKPLUGINS}/_DKIMPORT/Android.h ${DKPROJECT} FALSE) ## copy app default files recursivly without overwrite
+endif()
+if(ANDROID_32)
+	DKCOPY(${DKPLUGINS}/_DKIMPORT/android32 ${DKPROJECT}/android32 FALSE) ## copy app default files recursivly without overwrite
+endif()
+if(ANDROID_64)
+	DKCOPY(${DKPLUGINS}/_DKIMPORT/android64 ${DKPROJECT}/android64 FALSE) ## copy app default files recursivly without overwrite
+endif()
+if(WIN)
+	DKCOPY(${DKPLUGINS}/_DKIMPORT/resource.h ${DKPROJECT}/resource.h FALSE) ## copy app default files recursivly without overwrite
+	DKCOPY(${DKPLUGINS}/_DKIMPORT/resource.rc ${DKPROJECT}/resource.rc FALSE) ## copy app default files recursivly without overwrite
+endif()
 
 ### Include all source files from the app folder for the compilers
-file(GLOB App_SRC 
-	${DKPROJECT}/*.h
+#file(GLOB App_SRC
+file(GLOB_RECURSE App_SRC 
+	#${DKPROJECT}/*.h
 	${DKPROJECT}/*.c
-	${DKPROJECT}/*.hpp
+	#${DKPROJECT}/*.hpp
 	${DKPROJECT}/*.cpp
 	${DKPROJECT}/*.manifest
 	${DKPROJECT}/*.rc
 	${DKPROJECT}/icons/windows/*.rc)
+list(FILTER App_SRC EXCLUDE REGEX "${DKPROJECT}/assets/*" )
+list(FILTER App_SRC EXCLUDE REGEX "${DKPROJECT}/${OS}/*" )
+	
 
 add_definitions(-DDKAPP) #Can we phase this out?
 include_directories(${DKPROJECT})
