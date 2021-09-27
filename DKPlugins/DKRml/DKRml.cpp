@@ -110,6 +110,8 @@ bool DKRml::LoadFonts(){
 	DKStringArray dkfiles;
 	DKFile::GetDirectoryContents(DKFile::local_assets+"DKRml", dkfiles);
 	for(unsigned int i=0; i<dkfiles.size(); ++i){
+		if(DKFile::IsDirectory(dkfiles[i]))
+			continue;
 		DKString extension;
 		DKFile::GetExtention(dkfiles[i],extension);
 		if(same(extension,".otf") || same(extension,".ttf")){
@@ -121,6 +123,8 @@ bool DKRml::LoadFonts(){
 	DKStringArray files;
 	DKFile::GetDirectoryContents(DKFile::local_assets, files);
 	for(unsigned int i=0; i<files.size(); ++i){
+		if(DKFile::IsDirectory(dkfiles[i]))
+			continue;
 		DKString extension;
 		DKFile::GetExtention(files[i],extension);
 		if(same(extension,".otf") || same(extension,".ttf")){

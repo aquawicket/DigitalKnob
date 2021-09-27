@@ -2,6 +2,7 @@
 #include "DKLog.h"
 #include "DKFile.h"
 #include <cstring>
+#include <boxer/boxer.h>
 
 extern bool log_fatal = true;      //console.assert()
 extern bool log_errors = true;     //console.error()
@@ -198,7 +199,15 @@ bool Log(const char* file, int line, const char* func, const DKString& text, con
 		}
 		catch (const std::string& e){
 			std::cout << "Exception: " << e << '\n';
-			//SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "EXCEPTION", string, NULL);
+			string += "\n\n Would you like to exit the application?";
+			boxer::Selection sel = boxer::show(string.c_str(), "EXCEPTION", boxer::Style::Error, boxer::Buttons::YesNo);
+			if(sel == boxer::Selection::Yes){
+				DKApp::Exit();
+				return false;
+			}
+			boxer::Selection trace = boxer::show("Would you like to print the stack trace to the console?", "STACK TRACE", boxer::Style::Question, boxer::Buttons::YesNo);
+			if(trace == boxer::Selection::Yes)
+				DKClass::CallFunc("DKDebug::ShowStackTrace", NULL, NULL); 
 		}
 		return false;
 	}
