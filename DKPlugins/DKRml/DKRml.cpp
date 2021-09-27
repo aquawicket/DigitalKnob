@@ -71,49 +71,7 @@ bool DKRml::Init(){
 	Rml::Factory::RegisterElementInstancer("body", new Rml::ElementInstancerElement);
 	Rml::XMLParser::RegisterNodeHandler("body", std::make_shared<Rml::XMLNodeHandlerDefault>());
 	
-
 	DKClass::DKCreate("DKDom");
-	/*
-	//Load the Duktape javascript DOM
-		DKClass::DKCreate("DKDuktape/DKGlobalEventHandlers.js");
-		DKClass::DKCreate("DKEventTarget");
-			DKClass::DKCreate("DKEvent");
-				DKClass::DKCreate("DKUIEvent");
-				DKClass::DKCreate("DKKeyboardEvent");
-			DKClass::DKCreate("DKDuktape/DKWindow.js");
-				DKClass::DKCreate("DKConsole");
-				DKClass::DKCreate("DKNavigator");
-				DKClass::DKCreate("DKScreen");
-				DKClass::DKCreate("DKXMLHttpRequest");
-				
-				
-	//* Load the javascript DOM	
-	//* Dom thats doesn't need a screen
-	DKClass::DKCreate("DKDomConsole");
-	DKClass::DKCreate("DKDomNavigator");
-	DKClass::DKCreate("DKDomEventTarget");
-	DKClass::DKCreate("DKDom/DKDomGlobalEventHandlers.js");
-	DKClass::DKCreate("DKDomXMLHttpRequestEventTarget");
-	DKClass::DKCreate("DKDomXMLHttpRequest");
-	DKClass::DKCreate("DKDomScreen");
-	//* Dom that needs a screen
-	//DKClass::DKCreate("DKDomWindowOrWorkerGlobalScope");
-	DKClass::DKCreate("DKDomWindowEventHandlers");
-	DKClass::DKCreate("DKDomWindow");
-	DKClass::DKCreate("DKDomLocation");
-	DKClass::DKCreate("DKDomNode");
-	DKClass::DKCreate("DKDomElement");
-	DKClass::DKCreate("DKDomHTMLElement");
-	DKClass::DKCreate("DKDomHTMLScriptElement");
-	DKClass::DKCreate("DKDomHTMLCollection");
-	DKClass::DKCreate("DKDomCSSStyleDeclaration");
-	DKClass::DKCreate("DKDomDocumentOrShadowRoot");
-	DKClass::DKCreate("DKDomDocument");
-	DKClass::DKCreate("DKDomEvent");
-	DKClass::DKCreate("DKDomUIEvent");
-	DKClass::DKCreate("DKDomKeyboardEvent");
-	DKClass::DKCreate("DKDomMouseEvent");
-	*/
 	
 	DKString html;
 	DKString workingPath = DKFile::local_assets;

@@ -149,9 +149,9 @@ bool RmlSDL2Renderer::LoadTexture(Rml::TextureHandle& texture_handle, Rml::Vecto
 	//CEF Texture
 	//The source variable is the id of the iframe. It will contain iframe_ in it's id.
 	//We will map that id to the texture handle for later use. 
-	if(has(source,"iframe_")){//.CString()
+	if(has(source,"iframe_")){
 		texture_handle = reinterpret_cast<Rml::TextureHandle>(&source);
-		texture_name[texture_handle] = source;//.CString();
+		texture_name[texture_handle] = source;
 		return true;
 	}
 
@@ -169,7 +169,7 @@ bool RmlSDL2Renderer::LoadTexture(Rml::TextureHandle& texture_handle, Rml::Vecto
     file_interface->Close(file_handle);
 
 #ifdef USE_SDL2_gif
-	std::string src = source;//.CString();
+	std::string src = source;
 	if(has(src,".gif")){
 		animations.push_back(SDL_GIFAnimLoad_RW(SDL_RWFromMem(buffer, buffer_size), mRenderer));
 		SDL_Texture *texture = SDL_GIFTexture(animations[animations.size()-1]);
@@ -200,7 +200,7 @@ bool RmlSDL2Renderer::LoadTexture(Rml::TextureHandle& texture_handle, Rml::Vecto
 		else{
 			return false;
 		}
-		texture_name[texture_handle] = source;//.CString();
+		texture_name[texture_handle] = source;
 		return true;
     */
     

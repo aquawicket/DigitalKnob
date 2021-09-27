@@ -9,9 +9,15 @@
 
 class DKObject{
 public:
-	~DKObject(){ /*DKEvent::RemoveEvents(this);*/ }	
-	virtual bool Init(){ return true; }
-	virtual bool End(){ return true; }
+	~DKObject(){ 
+		/*DKEvent::RemoveEvents(this);*/ 
+	}	
+	virtual bool Init(){ 
+		return true; 
+	}
+	virtual bool End(){ 
+		return true; 
+	}
 	DKStringArray data; //(class,id,var1,var2,var3,etc)
 	virtual void SetData(const DKString& data){
 		DKDEBUGFUNC(data);
@@ -24,11 +30,8 @@ class DKBaseT{
 public:
 	static void SetName(const char* name){
 		DKDEBUGFUNC(name);
-#ifdef WIN32
-		if(!classname){ classname = /*_strdup(*/(char*)name/*.c_str())*/; }
-#else
-		if(!classname){ classname = /*strdup(*/(char*)name/*.c_str())*/ ; }
-#endif
+		if(!classname)
+			classname = (char*)name;
 	}
 	static void Singleton(){
 		DKDEBUGFUNC();
@@ -37,9 +40,8 @@ public:
 	}
 	static T* Instance(const DKString& data){
 		//DKDEBUGFUNC(data);
-		//if(has(data, ".js")){
+		//if(has(data, ".js"))
 		//	DKERROR("DKObject::Instance(): this is a .js file. Can't work for Cef\n");
-		//}
 		//data = (id,var1,var2,var3,etc)
 		if(!instances.empty() && singleton){
 			//DKWARN("DKClass singleton already created as "+instances[0]->data[0]+"\n");
@@ -84,16 +86,16 @@ public:
 		//if(id.empty()){ return; }
 		for(unsigned int i = instances.size() - 1; i >= 0 && i < instances.size(); --i) {
 			if(id.empty() || same(id, instances[i]->data[1])){
-				//if(has(id,"/")){
+				//if(has(id,"/"))
 				//	DKERROR("Close(): "+id+" contains a /\n");
-				//}
 				//DKINFO("Closing "+id+"\n");
-				if(instances.size() == 0) { return; }
+				if(instances.size() == 0)
+					return;
 				//DKINFO("Closing "+DKString(classname)+"::"+instances[i]->data[1]+"\n");
-				if(!instances[i]->End()){ //FIXME - this can crash if End() does not exits in the instance. 
+				if(!instances[i]->End())//FIXME - this can crash if End() does not exits in the instance. 
 					DKWARN("DKBaseT::Close("+id+"): failed\n");
-				}
-				if(instances.size() == 0) { return; }
+				if(instances.size() == 0)
+					return;
 				instances[i] = NULL;
 				instances.erase(instances.begin()+i);
 				instance_count = instances.size();
@@ -104,9 +106,8 @@ public:
 		//DKDEBUGFUNC(id);
 		for(unsigned int i=0; i<instances.size(); ++i){
 			if(same(id, instances[i]->data[1])){
-				if(instances[i]){ 
+				if(instances[i])
 					return true;
-				}
 			}
 		}
 		return false;
@@ -125,10 +126,8 @@ public:
 	static void GetInstances(DKStringArray& list){
 		DKDEBUGFUNC();
 		/*
-		if(list.empty()){
-			DKWARN("DKObject::GetInstances(): list is empty\n");
-			return;
-		}
+		if(list.empty())
+			return DKWARN("DKObject::GetInstances(): list is empty\n");
 		*/
 		for(unsigned int i=0; i<instances.size(); ++i){
 			if(instances[i]->data.size() > 2)
