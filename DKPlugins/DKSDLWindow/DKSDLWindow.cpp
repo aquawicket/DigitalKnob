@@ -557,14 +557,31 @@ bool DKSDLWindow::Show(const void* input, void* output) {
     return true;
 }
 
-///////////////////////////////////////////////////////////
 bool DKSDLWindow::Windowed(const void* input, void* output) {
     DKDEBUGFUNC(input, output);
     SDL_SetWindowFullscreen(window, 0);
     return true;
 }
 
-///////////////////////////
+bool DKSDLWindow::drawBackground(SDL_Renderer *renderer, int w, int h){
+    SDL_Color col[2] = {  { 0x66, 0x66, 0x66, 0xff }, { 0x99, 0x99, 0x99, 0xff }, };
+    int i, x, y;
+    SDL_Rect rect;
+    rect.w = 20;
+    rect.h = 20;
+    for (y = 0; y < h; y += rect.h) {
+        for (x = 0; x < w; x += rect.w) {
+            /* use an 20x20 checkerboard pattern */
+            i = (((x ^ y) >> 3) & 1);
+            SDL_SetRenderDrawColor(renderer, col[i].r, col[i].g, col[i].b, col[i].a);
+            rect.x = x;
+            rect.y = y;
+            SDL_RenderFillRect(renderer, &rect);
+        }
+    }
+	return true;
+}
+
 void DKSDLWindow::Process() {
     //DKDEBUGFUNC();
     if(SDL_GetWindowFlags(window) & SDL_WINDOW_HIDDEN) {
@@ -578,6 +595,9 @@ void DKSDLWindow::Process() {
     SDL_RenderClear(renderer);
     //SDL_RenderDrawLine(renderer, 0, height / 2, width, height / 2 );
     //}
+
+	drawBackground(renderer, width, height);
+	
     //if (SDL_GetWindowFlags(window) & SDL_WINDOW_SHOWN) {
     for(unsigned int i = 0; i < render_funcs.size(); ++i) {
         render_funcs[i](); //Call render functions

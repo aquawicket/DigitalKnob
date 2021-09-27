@@ -752,10 +752,10 @@ bool DKFile::Rename(const DKString& input, const DKString& output, const bool ov
 	DebugPath(output);
 	if(same(input, output)){ return true; }
 	if(!PathExists(input))
-		return DKERROR("DKFile::Rename("+input+","+output+","+toString(overwrite)+") failed! Path does not exist \n");
+		return DKWARN("DKFile::Rename("+input+","+output+","+toString(overwrite)+") failed! Path does not exist \n");
 	if(PathExists(output)){
 		if(overwrite == false){
-			return DKERROR("DKFile::Rename("+input+","+output+","+toString(overwrite)+") failed! Path already exists \n");
+			return DKWARN("DKFile::Rename("+input+","+output+","+toString(overwrite)+") failed! Path already exists \n");
 		}
 		else{
 			if(!DKFile::Delete(output))

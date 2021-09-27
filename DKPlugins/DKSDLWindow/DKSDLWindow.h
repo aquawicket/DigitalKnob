@@ -42,6 +42,7 @@ public:
 	bool Windowed(const void* input, void* output);
 	
 	static int EventFilter(void* userdata, SDL_Event* event);
+	static bool drawBackground(SDL_Renderer *renderer, int w, int h);
 	bool handle(SDL_Event* event);
 	void Process();
 	static std::map<int,int> sdlKeyCode;
