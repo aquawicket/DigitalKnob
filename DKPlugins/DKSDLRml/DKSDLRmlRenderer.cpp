@@ -88,8 +88,13 @@ void RmlSDL2Renderer::RenderGeometry(Rml::Vertex* vertices, int num_vertices, in
     glColorPointer(4, GL_UNSIGNED_BYTE, 0, &Colors[0]);
     glTexCoordPointer(2, GL_FLOAT, 0, &TexCoords[0]);
     glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
-    glEnable(GL_BLEND);
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
+    SDL_BlendMode bm = SDL_BLENDMODE_NONE;
+    SDL_GetTextureBlendMode(sdl_texture, &bm);
+    if(bm == SDL_BLENDMODE_BLEND){
+        glEnable(GL_BLEND);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    }
 #if defined(ANDROID) || defined(IOS)
 	glDrawElements(GL_TRIANGLES, num_indices, GL_UNSIGNED_SHORT, newIndicies);
 #else
