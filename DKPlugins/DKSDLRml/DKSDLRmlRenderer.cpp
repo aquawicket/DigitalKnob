@@ -20,11 +20,11 @@ void RmlSDL2Renderer::RenderGeometry(Rml::Vertex* vertices, int num_vertices, in
 	//DKDEBUGFUNC(vertices, num_vertices, indices, num_indices, texture, translation);
 #if !defined(IOS) && !defined(ANDROID)
     // DISABLE SDL Shaders
-	DKSDLWindow* dkSdlWindow = DKSDLWindow::Instance("DKSDLWindow0");
-	if(!has(dkSdlWindow->gl_vendor, "Microsoft")){
+	//DKSDLWindow* dkSdlWindow = DKSDLWindow::Instance("DKSDLWindow0");
+	//if(!has(DKSDLWindow::Instance("DKSDLWindow0")->gl_vendor, "Microsoft")){
 		glUseProgramObjectARB = (PFNGLUSEPROGRAMOBJECTARBPROC) SDL_GL_GetProcAddress("glUseProgramObjectARB");
 		glUseProgramObjectARB(0);  //FIXME: this crashes on Microsoft Generic GDI drivers
-	}
+	//}
 #endif 
     glPushMatrix();
     glTranslatef(translation.x, translation.y, 0);
@@ -89,11 +89,13 @@ void RmlSDL2Renderer::RenderGeometry(Rml::Vertex* vertices, int num_vertices, in
     glTexCoordPointer(2, GL_FLOAT, 0, &TexCoords[0]);
     glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
     glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
-    SDL_BlendMode bm = SDL_BLENDMODE_NONE;
-    SDL_GetTextureBlendMode(sdl_texture, &bm);
-    if(bm == SDL_BLENDMODE_BLEND){
-        glEnable(GL_BLEND);
-        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    if(sdl_texture){
+        SDL_BlendMode bm;
+        SDL_GetTextureBlendMode(sdl_texture, &bm);
+        if(bm == SDL_BLENDMODE_BLEND || has(texture_name[texture],".gif")){
+            glEnable(GL_BLEND);
+            glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        }
     }
 #if defined(ANDROID) || defined(IOS)
 	glDrawElements(GL_TRIANGLES, num_indices, GL_UNSIGNED_SHORT, newIndicies);
@@ -181,8 +183,7 @@ bool RmlSDL2Renderer::LoadTexture(Rml::TextureHandle& texture_handle, Rml::Vecto
 		else{
 			return false;
 		}
-
-		texture_name[texture_handle] = source;//.CString();
+		texture_name[texture_handle] = source;
 		return true;
 	}
 	else{
@@ -220,6 +221,7 @@ bool RmlSDL2Renderer::LoadTexture(Rml::TextureHandle& texture_handle, Rml::Vecto
         else{
             return false;
         }
+        //texture_name[texture_handle] = source;
         return true;
     }
 #ifdef USE_SDL2_gif
