@@ -1,9 +1,7 @@
 #include "DK/stdafx.h"
 #include "DKCef/DKCefWindow.h"
 
-//////////////////////////
-DKCefWindow::DKCefWindow()
-{
+DKCefWindow::DKCefWindow(){
 	DKDEBUGFUNC();
 	DKClass::RegisterFunc("DKCefWindow::TestInt", &DKCefWindow::TestInt, this);
 	DKClass::RegisterFunc("DKCefWindow::TestString", &DKCefWindow::TestString, this);
@@ -35,9 +33,7 @@ DKCefWindow::DKCefWindow()
 	DKClass::RegisterFunc("DKCefWindow::Windowed", &DKCefWindow::Windowed, this);
 }
 
-///////////////////////////
-void DKCefWindow::DoFrame()
-{ 
+void DKCefWindow::DoFrame(){ 
 /*
 #ifdef WIN32
 	//Display FPS

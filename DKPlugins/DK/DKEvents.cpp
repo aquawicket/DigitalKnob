@@ -50,9 +50,9 @@ bool DKEvents::SendEvent(const DKString& id, const DKString& type, const DKStrin
 	if(!same(id,"DKLog") && !same(type,"second") && !same(type,"mousemove")) //prevent looping messages
 		DKDEBUGFUNC(id, type, value);
 	if(type.empty())
-		return DKERROR("DKEvents::SendEvent("+id+","+type+","+value+"): No Type Specified \n");
+		return DKERROR("DKEvents::SendEvent("+id+", ,"+value+"): No Type Specified \n");
 	if(id.empty())
-		return DKERROR("DKEvents::SendEvent("+id+","+type+","+value+"): No Id Specified \n");
+		return DKERROR("DKEvents::SendEvent( ,"+type+","+value+"): No Id Specified \n");
 	//call the function directly
 	for(unsigned int i = 0; i < events.size(); ++i){
 		if((same(events[i]->id, id)) && same(events[i]->type, type)){
@@ -67,7 +67,7 @@ bool DKEvents::SendEvent(const DKString& id, const DKString& type, const DKStrin
 	}
 	for(unsigned int i=0; i<send_funcs.size(); ++i)
 		send_funcs[i](id, type, value); //returns bool
-	return false; // ????
+	return true;
 }
 
 bool DKEvents::RemoveEvent(const DKString& id, const DKString& type, const DKString& jsreturn){
