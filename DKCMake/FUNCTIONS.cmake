@@ -324,7 +324,7 @@ function(DKINCLUDE path)
 		return() ## If the include is already in the list, return.
 	endif()
 	if(NOT EXISTS ${path})
-		message(FATAL_ERROR "Error in call to: DKINCLUDE(): the path ${path} does not exist")
+		message(WARNING "Error in call to: DKINCLUDE(): the path ${path} does not exist")
 	endif()
 	
 	DKSET(DKINCLUDES_LIST ${DKINCLUDES_LIST} ${path})

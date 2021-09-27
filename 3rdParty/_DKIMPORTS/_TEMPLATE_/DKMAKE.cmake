@@ -19,7 +19,6 @@ DKINSTALL(${%LIBRARY_NAME%_DL} %library_name% ${%LIBRARY_NAME%})
 
 ### LINK ###
 DKINCLUDE(${%LIBRARY_NAME%}/include)
-DKINCLUDE(${%LIBRARY_NAME%}/${OS})
 WIN_DEBUG_LIB(${%LIBRARY_NAME%}/${OS}/${DEBUG_DIR}/%library_name%d.lib)
 WIN_RELEASE_LIB(${%LIBRARY_NAME%}/${OS}/${RELEASE_DIR}/%library_name%.lib)
 APPLE_DEBUG_LIB(${%LIBRARY_NAME%}/${OS}/${DEBUG_DIR}/lib%library_name%d.a)
