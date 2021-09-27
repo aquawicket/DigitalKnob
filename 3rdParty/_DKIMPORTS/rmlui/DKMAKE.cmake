@@ -2,10 +2,10 @@
 
 ### DEPENDS ###
 DKDEPEND(freetype)
-DKDEPEND(glew)
-DKDEPEND(sdl2)
-DKDEPEND(sdl2_image)
-DKDEPEND(sfml)
+#DKDEPEND(glew)
+#DKDEPEND(sdl2)
+#DKDEPEND(sdl2_image)
+#DKDEPEND(sfml)
 
 
 
