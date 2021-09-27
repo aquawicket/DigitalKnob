@@ -243,7 +243,7 @@ bool DKLinux::Run(const DKString& command){
 	DKDEBUGFUNC(command);
 	DKString cmd = command;
 	cmd = "xdg-open "+cmd+" &";
-	system(cmd.c_str());
+	int rtn = system(cmd.c_str());
 	//execl(cmd.c_str(), (char*)0);
 	return true;
 }
