@@ -12,7 +12,9 @@ bool DKJerryscript::End(){
 	return true;
 }
 
+/*
 bool DKJerryscript::AttachFunction(const DKString& name, const DKString& vars){
 	DKDEBUGFUNC(name, vars);
 	return true;
 }
+*/

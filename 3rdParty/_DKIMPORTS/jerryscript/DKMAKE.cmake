@@ -19,7 +19,7 @@ DKINSTALL(${JERRYSCRIPT_DL} jerryscript ${JERRYSCRIPT})
 
 
 ### LINK ###
-DKINCLUDE(${JERRYSCRIPT}/include)
+DKINCLUDE(${JERRYSCRIPT}/jerry-core/include)
 DKINCLUDE(${JERRYSCRIPT}/${OS})
 WIN_DEBUG_LIB(${JERRYSCRIPT}/${OS}/lib/${DEBUG_DIR}/jerry-core.lib)
 WIN_RELEASE_LIB(${JERRYSCRIPT}/${OS}/lib/${RELEASE_DIR}/jerry-core.lib)

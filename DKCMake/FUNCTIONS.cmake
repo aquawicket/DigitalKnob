@@ -323,6 +323,10 @@ function(DKINCLUDE path)
 	if(${index} GREATER -1)
 		return() ## If the include is already in the list, return.
 	endif()
+	if(NOT EXISTS ${path})
+		message(FATAL_ERROR "Error in call to: DKINCLUDE(): the path ${path} does not exist")
+	endif()
+	
 	DKSET(DKINCLUDES_LIST ${DKINCLUDES_LIST} ${path})
 	include_directories(${path})
 endfunction()
