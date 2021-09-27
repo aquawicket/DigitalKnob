@@ -192,10 +192,19 @@ bool Log(const char* file, int line, const char* func, const DKString& text, con
 		//DKString in = string;
 		//DKClass::CallFunc("DKWindow::MessageBox", &in, NULL);
 	}
-	if(lvl == DK_ERROR)
+	if(lvl == DK_ERROR){
+		try{
+			throw DKString{ string };    // throw an exception
+		}
+		catch (const std::string& e){
+			std::cout << "Exception: " << e << '\n';
+			//SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "EXCEPTION", string, NULL);
+		}
 		return false;
+	}
 	return true;
 }
+
 
 bool SetLog(const int lvl, const DKString& text){
 	DKDEBUGFUNC(lvl, text);
