@@ -2,6 +2,7 @@
 #include "DK/DKApp.h"
 #include "DK/DKOsInfo.h"
 #include "DK/DKFile.h"
+#include <boxer/boxer.h>
 
 int    DKApp::argc;
 char** DKApp::argv;
@@ -14,9 +15,22 @@ std::vector<std::function<void()> > DKApp::loop_funcs;
 //#ifndef ANDROID
 int main(int argc, char **argv){
 	DKDEBUGFUNC(argc, argv);
-	DKApp dkapp(argc, argv);
-	DKApp::Init();
-	DKApp::Loop();
+	//try{
+		DKApp dkapp(argc, argv);
+		DKApp::Init();
+		DKApp::Loop();
+	//}
+	//catch (...){
+	//	std::cout << "Exception:\n";
+	//	if(DKClass::HasFunc("DKDebug::ShowStackTrace")){
+	//		DKClass::CallFunc("DKDebug::ShowStackTrace", NULL, NULL);
+	//		boxer::Selection sel = boxer::show("An exception in the main thread has occured.\n", "EXCEPTION", boxer::Style::Error, boxer::Buttons::YesNo);
+	//		if(sel == boxer::Selection::Yes){
+	//			DKApp::Exit();
+	//			return false;
+	//		}
+	//	}
+	//}
 }
 //#endif //!ANDROID
 
