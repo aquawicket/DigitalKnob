@@ -2,7 +2,9 @@
 #include "DK/DKApp.h"
 #include "DK/DKOsInfo.h"
 #include "DK/DKFile.h"
-#include <boxer/boxer.h>
+#ifdef WIN32
+	#include <boxer/boxer.h>
+#endif
 
 int    DKApp::argc;
 char** DKApp::argv;
