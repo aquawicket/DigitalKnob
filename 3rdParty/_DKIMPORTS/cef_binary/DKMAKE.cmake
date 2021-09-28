@@ -1,5 +1,6 @@
-# https://cef-builds.spotifycdn.com/index.html
+# https://en.wikipedia.org/wiki/Google_Chrome_version_history
 #
+# https://cef-builds.spotifycdn.com/index.html
 # https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_windows32.tar.bz2
 # https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_windows64.tar.bz2
 # https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_macosx64.tar.bz2
