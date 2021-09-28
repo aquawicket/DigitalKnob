@@ -4,8 +4,8 @@
 #include "DK/DKFile.h"
 #include "DKSDLWindow/DKSDLWindow.h"
 
-#include <GL/glew.h>
 #ifdef WIN32
+    #include <GL/glew.h>
 	#include <GL/gl.h>
 #endif
 #ifdef MAC
@@ -111,9 +111,9 @@ bool DKSDLWindow::Init() {
     DKINFO("DKSDLWindow Width: " + toString(width) + " Height: " + toString(height) + "\n");
     if(SDL_CreateWindowAndRenderer(width, height, SDL_WINDOW_RESIZABLE, &window, &renderer) < 0)
         return DKERROR("SDL_CreateWindow Error: " + DKString(SDL_GetError()) + "\n");
-	GLenum err = glewInit();
-	if (err != GLEW_OK)
-		DKERROR("GLEW ERROR: "+glewGetErrorString(err)+"\n");
+	//GLenum err = glewInit();
+	//if (err != GLEW_OK)
+	//	DKERROR("GLEW ERROR: "+glewGetErrorString(err)+"\n");
 #endif
 #if !defined(ANDROID) && !defined(IOS)
     DKINFO("Creating SDLWindow for Desktop\n");
@@ -146,9 +146,11 @@ bool DKSDLWindow::Init() {
         SDL_Quit();
 		return DKERROR("SDL_CreateRenderer Error: " + DKString(SDL_GetError()) + "\n");
     }
+#ifdef WIN32
 	GLenum err = glewInit();
 	if (err != GLEW_OK)
 		DKERROR("GLEW ERROR:\n"); // "+glewGetErrorString(err)+"\n");
+#endif
 #endif
     //Set window Title
     DKString title2;
