@@ -81,7 +81,7 @@ public:
 		return (bool)functions[name];
 	}
 	
-	static bool CallFunc(const DKString& name, const void* input, void* output){
+	static bool CallFunc(const DKString& name, const void* input = NULL, void* output = NULL){
 		//DKDEBUGFUNC(name, input, output); //excessive logging
 		if(!functions[name])
 			return DKERROR("CallFunc("+name+") not registered\n");

@@ -19,13 +19,13 @@ bool DKFile::DebugPath(const DKString& path){
 	if(has(path, "\\")){
 		DKWARN("DKFile::DebugPath("+path+"): Found obscurities in the path. Please debug to find the out where is starts for this path.\n");
 		//DKClass::DKCreate("DKDebug");
-		//DKClass::CallFunc("DKDebug::ShowStackTrace", 0, 0);
+		//DKClass::CallFunc("DKDebug::ShowStackTrace");
 		return false;
 	}
-	if(has(path, "//")){
+	if(has(path, "//") && !has(path, "://")){
 		DKWARN("DKFile::DebugPath("+path+"): Found obscurities in the path. Please debug to find out where it starts for this path.\n");
 		//DKClass::DKCreate("DKDebug");
-		//DKClass::CallFunc("DKDebug::ShowStackTrace", 0, 0);
+		//DKClass::CallFunc("DKDebug::ShowStackTrace");
 		return false;
 	}
 	return true;
@@ -37,7 +37,8 @@ bool DKFile::NormalizePath(DKString& path){
 	while(has(path, "\\"))
 		replace(path, "\\", "/"); //Turn all back slashes into forward slashes
 	while(has(path, "//"))
-		replace(path, "//", "/"); //Turn all double forward slashes into single 
+		replace(path, "//", "/"); //Turn all double forward slashes into single
+	replace(path, ":/", "://"); //replace the double forward slash back in for url paths
 	return false;
 }
 
@@ -308,7 +309,7 @@ bool DKFile::GetExeName(DKString& exename){
 		DebugPath(exename);
 		return true;
 	}
-	return false;
+	return DKERROR("exename invalid");
 }
 
 bool DKFile::GetExePath(DKString& exepath){
@@ -317,7 +318,7 @@ bool DKFile::GetExePath(DKString& exepath){
 	if (!DKFile::PathExists(DKFile::exe_path)) {
 		DKWARN("GetExePath(): DKFile::exe_path is invalid. It should have been set by argv[0] at app start\n");
 		DKClass::DKCreate("DKDebug");
-		DKClass::CallFunc("DKDebug::ShowStackTrace", 0, 0);
+		DKClass::CallFunc("DKDebug::ShowStackTrace");
 #ifdef WIN32
 		TCHAR fullpath[MAX_PATH];
 		GetModuleFileName(NULL, fullpath, MAX_PATH);
@@ -337,7 +338,7 @@ bool DKFile::GetExtention(const DKString& file, DKString& extension){
 	DKDEBUGFUNC(file, extension);
 	DebugPath(file);
 	if(!has(file,"."))
-		return DKWARN("file ("+file+") has no extension\n");
+		DKWARN("file ("+file+") has no extension\n");
 	unsigned found = file.find_last_of(".");
 	extension = file.substr(found,file.size());
 	return true;
@@ -351,6 +352,7 @@ bool DKFile::GetFileName(const DKString& path, DKString& filename){
 		filename = path.substr(found+1);
 		return true;
 	}
+	DKWARN("/ not found in path");
 	filename = path;
 	return true;
 }

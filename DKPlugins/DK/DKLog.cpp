@@ -137,8 +137,9 @@ bool Log(const char* file, int line, const char* func, const DKString& text, con
 #endif
 	/// /// ///  OUTPUTS /// /// ///
 
-	// MAIN CONSOLE Output
-	printf("%s",string.c_str()); //APP CONSOLE OUT
+	//CONSOLE WINDOW OUTPUT
+	printf("%s",string.c_str()); 
+	//stdout << string;
 						
 	// File Output (log.txt)
 	if(log_file && !DKFile::local_assets.empty()){
@@ -184,24 +185,20 @@ bool Log(const char* file, int line, const char* func, const DKString& text, con
 	//if (text.find('\n') == std::string::npos) //check for new line \n
 	//	 return DKERROR("<------ \nText does not contain a new line character   \\n  \n");
 
-	if(log_gui_console && DKUtil::InMainThread() && DKApp::active){
-		DKEvents::SendEvent("DKLog", "level", toString(lvl));
-		DKEvents::SendEvent("DKLog", "string", string);
-	}
-	//On errors show the stack trace or open a message box
-	if(log_errors && (lvl == DK_ERROR)){
-		//DKClass::CallFunc("DKDebug::ShowStackTrace", NULL, NULL);
-		//DKString in = string;
-		//DKClass::CallFunc("DKWindow::MessageBox", &in, NULL);
-	}
+	//if(log_gui_console && DKUtil::InMainThread() && DKApp::active){
+	//	DKEvents::SendEvent("DKLog", "level", toString(lvl));
+	//	DKEvents::SendEvent("DKLog", "string", string);
+	//}
+	
+	//On errors, show the stack trace or open a message box
 	if(lvl == DK_ERROR){
 		try{
-			throw DKString{ string };    // throw an exception
+			throw string;    // throw an exception
 		}
-		catch (const std::string& e){
-			std::cout << "Exception: " << e << '\n';
+		//catch (const std::string& e){
+		catch(...){
 			if(DKClass::HasFunc("DKDebug::ShowStackTrace"))
-				DKClass::CallFunc("DKDebug::ShowStackTrace", NULL, NULL);
+				DKClass::CallFunc("DKDebug::ShowStackTrace");
 			#ifdef WIN32
 				string += "\n\n Would you like to exit the application?";
 				boxer::Selection sel = boxer::show(string.c_str(), "EXCEPTION", boxer::Style::Error, boxer::Buttons::YesNo);

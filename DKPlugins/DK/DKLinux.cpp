@@ -273,7 +273,7 @@ bool DKLinux::GetClipboard(DKString& text){
 bool DKLinux::SetClipboard(const DKString& text){
 	DKDEBUGFUNC(text);
 	//TODO
-	return DKClass::CallFunc("DKSDLWindow::SetClipboard", &text, NULL);
+	return DKClass::CallFunc("DKSDLWindow::SetClipboard", &text);
 }
 
 bool DKLinux::SetVolume(double nVolume){

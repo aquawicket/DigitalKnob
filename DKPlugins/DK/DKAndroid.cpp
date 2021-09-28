@@ -85,7 +85,7 @@ void initSDL(JNIEnv* env, jclass cls, jobject array){
 	jdata.cls = cls;
 	jdata.array = array;
 	DKClass::DKCreate("DKSDLWindowAndroid");
-	DKClass::CallFunc("DKAndroid_onInitSDL", &jdata, NULL);
+	DKClass::CallFunc("DKAndroid_onInitSDL", &jdata);
 }
 
 jstring CallCppFunction(JNIEnv* env, jclass cls, jstring data){

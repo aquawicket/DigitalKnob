@@ -25,7 +25,7 @@ int main(int argc, char **argv){
 	//catch (...){
 	//	std::cout << "Exception:\n";
 	//	if(DKClass::HasFunc("DKDebug::ShowStackTrace")){
-	//		DKClass::CallFunc("DKDebug::ShowStackTrace", NULL, NULL);
+	//		DKClass::CallFunc("DKDebug::ShowStackTrace");
 	//		boxer::Selection sel = boxer::show("An exception in the main thread has occured.\n", "EXCEPTION", boxer::Style::Error, boxer::Buttons::YesNo);
 	//		if(sel == boxer::Selection::Yes){
 	//			DKApp::Exit();
