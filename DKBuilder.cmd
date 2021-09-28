@@ -98,13 +98,12 @@ goto build
 
 
 :build
-echo Resetting CMake Cache . . .
-echo Deleting CMakeCache.txt files . . .
+echo Deleteing CMake cache . . .
 cd %DIGITALKNOB%
-::del /f /s *MakeCache.txt
-for /r %%i in (CMakeCache.*) do del "%%i"
-echo Deleteing CMakeFiles folders . . .
-for /d /r %%X in (*CMakeFiles*) do rd /s /q "%%X"
+for /r %i in (CMakeCache.*) do del "%i"
+for /d /r %i in (*CMakeFiles*) do rmdir /s /Q "%i"
+
+
 echo ****** BUILDING %APP% - %OS% ******
 set APP_PATH=%DKPATH%\DKApps\%APP%
 ECHO %APP_PATH%

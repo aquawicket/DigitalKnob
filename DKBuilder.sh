@@ -22,7 +22,7 @@ else
     echo "UNKNOWN OS TYPE ($OSTYPE)"
 fi
 
-APP="DKBuilder"
+#APP="DKBuilder"
 #TYPE="Release"
 
 GCC_PATH=$(which gcc)
@@ -108,9 +108,10 @@ while :
 	done
 
 	cd $DKPATH
-	echo Deleteing all CMakeCache.txt files....
+	echo Deleteing CMake cache . . .
 	find . -name "CMakeCache.*" -delete
-	rm -rf `find . -type d -name CMakeFiles`
+	find . -type d -name "CMakeFiles" -delete
+		
 		
 	mkdir $DKPATH/DKApps/$APP/$OS
 	if [[ "$OSTYPE" == "linux-gnu"* ]]; then
