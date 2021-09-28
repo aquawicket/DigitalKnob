@@ -34,11 +34,21 @@ bool DKFile::DebugPath(const DKString& path){
 //TODO: this function is not complete
 bool DKFile::NormalizePath(DKString& path){
 	DKDEBUGFUNC(path);
+
+	//FIXME:  need a better algorythm here 
 	while(has(path, "\\"))
 		replace(path, "\\", "/"); //Turn all back slashes into forward slashes
 	while(has(path, "//"))
 		replace(path, "//", "/"); //Turn all double forward slashes into single
-	replace(path, ":/", "://"); //replace the double forward slash back in for url paths
+	//replace the double forward slash back in for url paths
+	replace(path, "http:/", "http://");
+	replace(path, "https:/", "https://");
+	replace(path, "HTTP:/", "HTTP://");
+	replace(path, "HTTPS:/", "HTTPS://");
+	replace(path, "ftp:/", "ftp://");
+	replace(path, "ftps:/", "ftps://");
+	replace(path, "FTP:/", "FTP://");
+	replace(path, "FTPS:/", "FTPS://");
 	return false;
 }
 

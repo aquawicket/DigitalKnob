@@ -153,8 +153,8 @@ int DKCefJS::NewBrowser(duk_context* ctx){
 	int height = duk_require_int(ctx, 4);
 	DKString url = duk_require_string(ctx, 5);
 	if(!DKCef::Get()->NewBrowser(id, top, left, width, height, url))
-		return 0;
-	return 1;
+		return DKERROR("DKCef::Get()->NewBrowser(id, top, left, width, height, url) failed");
+	return true;
 }
 
 int DKCefJS::Paste(duk_context* ctx){
