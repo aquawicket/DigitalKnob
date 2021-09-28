@@ -460,7 +460,7 @@ if(WIN_32)
     #)
 	
 	set_target_properties(${APP_NAME} PROPERTIES LINK_FLAGS_DEBUG ${DEBUG_FLAGS} LINK_FLAGS_RELEASE ${RELEASE_FLAGS})
-	set_target_properties(${APP_NAME} PROPERTIES DEBUG_POSTFIX d)	
+	#set_target_properties(${APP_NAME} PROPERTIES DEBUG_POSTFIX d)	
 endif(WIN_32)
 	
 ##########
@@ -526,7 +526,7 @@ if(WIN_64)
 	string(REPLACE ";" " " RELEASE_FLAGS "${RELEASE_LINK_FLAGS}")
 	
 	set_target_properties(${APP_NAME} PROPERTIES LINK_FLAGS_DEBUG ${DEBUG_FLAGS} LINK_FLAGS_RELEASE ${RELEASE_FLAGS})
-	set_target_properties(${APP_NAME} PROPERTIES DEBUG_POSTFIX d)
+	#set_target_properties(${APP_NAME} PROPERTIES DEBUG_POSTFIX d)
 	
 	#add_custom_command(
     #TARGET ${APP_NAME}
@@ -598,7 +598,7 @@ if(MAC)
 	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS})
 	
 	DKUPDATE_INFO_Plist(${APP_NAME}) #this may need to be run at post build
-	set_target_properties(${APP_NAME} PROPERTIES DEBUG_POSTFIX d)
+	#set_target_properties(${APP_NAME} PROPERTIES DEBUG_POSTFIX d)
 endif()
 
 #######
@@ -671,7 +671,7 @@ if(IOS)
 	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS})
 	
 	DKUPDATE_INFO_Plist(${APP_NAME}) #this may need to be run at post build
-	set_target_properties(${APP_NAME} PROPERTIES DEBUG_POSTFIX d)
+	#set_target_properties(${APP_NAME} PROPERTIES DEBUG_POSTFIX d)
 endif()
 
 ##########
@@ -743,7 +743,7 @@ if(IOSSIM)
 	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS})
 	
 	DKUPDATE_INFO_Plist(${APP_NAME}) #this may need to be run at post build
-	set_target_properties(${APP_NAME} PROPERTIES DEBUG_POSTFIX d)
+	#set_target_properties(${APP_NAME} PROPERTIES DEBUG_POSTFIX d)
 endif()
 
 #########
@@ -800,7 +800,7 @@ if(LINUX)
 		add_definitions(-DDEBUG)
 		add_executable(${APP_NAME} ${App_SRC})
 		target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${LINUX_LIBS})
-		set_target_properties(${APP_NAME} PROPERTIES DEBUG_POSTFIX d)
+		#set_target_properties(${APP_NAME} PROPERTIES DEBUG_POSTFIX d)
 	endif()
 	if(RELEASE)
 		add_executable(${APP_NAME} ${App_SRC})
@@ -863,7 +863,7 @@ if(RASPBERRY)
 		add_definitions(-DDEBUG)
 		add_executable(${APP_NAME} ${App_SRC})
 		target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RASPBERRY_LIBS})
-		set_target_properties(${APP_NAME} PROPERTIES DEBUG_POSTFIX d)
+		#set_target_properties(${APP_NAME} PROPERTIES DEBUG_POSTFIX d)
 	endif()
 	if(RELEASE)
 		add_executable(${APP_NAME} ${App_SRC})
@@ -922,7 +922,7 @@ if(ANDROID)
 	#target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${ANDROID_LIBS})
 	#target_include_directories(${APP_NAME} PUBLIC ${INCLUDE_DIRECTORIES}) #of ${DKINCLUDES_LIST}
 	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${ANDROID_LIBS})
-	set_target_properties(${APP_NAME} PROPERTIES DEBUG_POSTFIX d)
+	#set_target_properties(${APP_NAME} PROPERTIES DEBUG_POSTFIX d)
 	#add_dependencies(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS})	
 	
 	#include_external_msproject(DKGradle ${DKPROJECT}/${OS}/DKGradle.androidproj)
