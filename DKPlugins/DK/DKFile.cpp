@@ -362,7 +362,7 @@ bool DKFile::GetFileName(const DKString& path, DKString& filename){
 		filename = path.substr(found+1);
 		return true;
 	}
-	DKWARN("/ not found in path");
+	DKWARN("/ not found in path ("+path+")\n");
 	filename = path;
 	return true;
 }
