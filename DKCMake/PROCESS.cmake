@@ -1066,6 +1066,7 @@ DKBUILD_LOG("          DKDEFINES_LIST:  ${DKDEFINES_LIST}")
 DKBUILD_LOG("         DKINCLUDES_LIST:  ${DKINCLUDES_LIST}")
 DKBUILD_LOG("         DKLINKDIRS_LIST:  ${DKLINKDIRS_LIST}")
 file(WRITE ${DKPROJECT}/DKBUILD.log "${DKBUILD_LOG_FILE}")
+DKSET(DKBUILD_LOG_FILE "")
 	
 
 # Generate a CMakelists.txt for the app. This is a work in progress
