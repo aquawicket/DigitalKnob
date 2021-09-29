@@ -1,3 +1,4 @@
+:: Windows Batch file DK builder
 @ECHO off
 
 set "DIGITALKNOB=C:\Users\%USERNAME%\digitalknob"
@@ -100,8 +101,8 @@ goto build
 :build
 echo Deleteing CMake cache . . .
 cd %DIGITALKNOB%
-for /r %i in (CMakeCache.*) do del "%i"
-for /d /r %i in (*CMakeFiles*) do rmdir /s /Q "%i"
+for /r %%i in (CMakeCache.*) do del "%%i"
+for /d /r %%i in (*CMakeFiles*) do rd /s /q "%%i"
 
 
 echo ****** BUILDING %APP% - %OS% ******
