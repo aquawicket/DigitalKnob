@@ -105,13 +105,15 @@ Internet Explorer (9.0+) <br>
 <br>
 <br>
 <br>
+
 # License
+
 DigitalKnob is published under the MIT license. 
 This repository references the use of third-party source code and assets with their own licenses. Upon any use of DigitalKnob and/or any part of its code base, you hereby fully agree to, and acknowledge all licensees of said third-party source code.
 
 MIT License
 
-Copyright (c) 2010-2021 The DigitalKnob Team, and contributors
+Copyright (c) 2010-2021 DigitalKnob, and contributors
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
