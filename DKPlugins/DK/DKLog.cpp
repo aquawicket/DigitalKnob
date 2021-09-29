@@ -197,6 +197,7 @@ bool Log(const char* file, int line, const char* func, const DKString& text, con
 		}
 		//catch (const std::string& e){
 		catch(...){
+			DKClass::DKCreate("DKDebug");
 			if(DKClass::HasFunc("DKDebug::ShowStackTrace"))
 				DKClass::CallFunc("DKDebug::ShowStackTrace");
 			#ifdef WIN32
