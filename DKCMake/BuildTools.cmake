@@ -7,6 +7,7 @@ if(CMAKE_HOST_WIN32 AND WIN)
 	DKDEPEND(imagemagick)
 	
 	##NOTE: When using /fsanitize=address,  /RTC1 is incompatable, so turn it off 
+	## /EHsc   https://stackoverflow.com/a/4574319/688352
 	
 	# Windows 32
 	DKSET(DKCMAKE_WIN32 ${CMAKE_EXE} -G ${VISUALSTUDIO_NAME} -A Win32 

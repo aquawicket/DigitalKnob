@@ -21,7 +21,9 @@ bool DKAssets::Init(){
 
 	DKString file;
 	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[LOG_FILE]", file);
-	if(same(file, "OFF")) { log_file = false; }
+	if(same(file, "OFF")){
+		log_file = false;
+	}
 	else{
 #ifndef ANDROID
 	//clear the log file
@@ -34,51 +36,64 @@ bool DKAssets::Init(){
 
 #ifdef WIN32
 	DKString console;
-	if (DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[CONSOLE]", console)) {
-		if(!same(console, "ON")){
-			ShowWindow(GetConsoleWindow(), SW_HIDE);
-		}
-	}
-	#endif
+	//if (DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[CONSOLE]", console)) {
+	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[CONSOLE]", console);
+	if(!same(console, "ON"))
+		ShowWindow(GetConsoleWindow(), SW_HIDE);
+	//}
+#endif
 
 	DKString debug;
 	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[LOG_DEBUG]", debug);
-	if(same(debug, "ON")) { log_debug = true; }
+	if(same(debug, "ON"))
+		log_debug = true;
 
 	DKString info;
 	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[LOG_INFO]", info);
-	if(same(info, "OFF")) { log_info = false; }
+	if(same(info, "OFF"))
+		log_info = false;
 
 	DKString warnings;
 	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[LOG_WARNINGS]", warnings);
-	if(same(warnings, "OFF")) { log_warnings = false; }
+	if(same(warnings, "OFF"))
+		log_warnings = false;
 
 	DKString errors;
 	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[LOG_ERRORS]", errors);
-	if(same(errors, "OFF")) { log_errors = false; }
+	if(same(errors, "OFF"))
+		log_errors = false;
+	
+	DKString stacktraceonerrors;
+	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[STACKTRACE_ON_ERRORS]", stacktraceonerrors);
+	if(same(stacktraceonerrors, "ON"))
+		stacktrace_on_errors = true;
+
+	DKString exceptiononerrors;
+	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[EXCEPTION_ON_ERRORS]", exceptiononerrors);
+	if(same(exceptiononerrors, "ON"))
+		exception_on_errors = true;
 
 	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[LOG_SHOW]", log_show);
 	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[LOG_HIDE]", log_hide);
 
 	DKString threads;
 	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[LOG_THREAD]", threads);
-	if (same(threads, "ON")) { log_thread = true; }
+	if (same(threads, "ON"))
+		log_thread = true;
 	
 	DKString lines;
 	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[LOG_LINES]", lines);
-	if(same(lines, "ON")) { log_lines = true; }
+	if(same(lines, "ON"))
+		log_lines = true;
 
 	DKString funcs;
 	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[LOG_FUNCS]", funcs);
-	if(same(funcs, "ON")) { log_funcs = true; }
+	if(same(funcs, "ON"))
+		log_funcs = true;
 	
 	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[ONLINE_ASSETS]", DKFile::online_assets);
-	if(DKFile::online_assets.empty()){
-		//DKString app_name;
-		//DKFile::GetExeName(app_name);
-		//replace(app_name, ".exe", "");
+	if(DKFile::online_assets.empty())
 		DKFile::online_assets = "http://aquawicket.github.io/DigitalKnob/DKPlugins/";
-	}
 
 	DKINFO("DKFile::online_assets = "+DKFile::online_assets+"\n");
 	return true;
@@ -157,9 +172,8 @@ bool DKAssets::GetDataPath(DKString& path){
 	DKString appname;
 	DKFile::GetAppName(appname);
 	path = apppath+appname+"_Data/";
-	if (DKFile::PathExists(path)) {
+	if (DKFile::PathExists(path))
 		return true;
-	}
 	DKFile::MakeDir(path);
 	return false;
 #endif
@@ -189,9 +203,8 @@ bool DKAssets::GetDataPath(DKString& path){
 	DKString appname;
 	DKFile::GetAppName(appname);
 	path = apppath + appname + "_Data/";
-	if (DKFile::PathExists(path)) {
+	if (DKFile::PathExists(path))
 		return true;
-	}
 	DKFile::MakeDir(path);
 	return false;
 #endif

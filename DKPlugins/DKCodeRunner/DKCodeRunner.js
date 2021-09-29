@@ -4,7 +4,6 @@ dk.coderunner = DKPlugin(DKCodeRunner)
 
 DKCodeRunner.prototype.init = function DKCodeRunner_init() {
 	console.log("DKCodeRunner.prototype.init()")
-	dk.create("DKGui/DKConsole.css")
 	DKPlugin("DKFile/DKFile.js")
 	DKPlugin("DKGui/DKMenu.js")
 	this.create()
@@ -12,8 +11,6 @@ DKCodeRunner.prototype.init = function DKCodeRunner_init() {
 
 DKCodeRunner.prototype.end = function DKCodeRunner_end() {
 	console.log("DKCodeRunner.prototype.end()")
-	
-    dk.close("DKGui/DKConsole.css");
 }
 
 DKCodeRunner.prototype.create = function DKCodeRunner_create(parent, top, bottom, left, right, width, height) {
@@ -102,10 +99,12 @@ DKCodeRunner.prototype.create = function DKCodeRunner_create(parent, top, bottom
 	const debugg = document.createElement("img")
 	debugg.src = "DKCodeRunner/Debugger.png"
 	debugg.style.position = "absolute"
-	debugg.style.top = "100px"
-	debugg.style.right = "100px"
-	//debugg.style.width = "50px"
-	//debugg.style.height = "50px"
+	debugg.style.top = "0rem"
+	debugg.style.right = "0rem"
+	//debugg.style.left = "0rem"
+	//debugg.style.bottom = ""
+	debugg.style.width = "50px"
+	debugg.style.height = "50px"
 	debugg.onclick = function(event) {
 		console.log("debugger");
 		if(dk.getBrowser() === "Rml")

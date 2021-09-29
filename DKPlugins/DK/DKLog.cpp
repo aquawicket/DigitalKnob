@@ -19,7 +19,9 @@ extern bool log_thread = false;
 extern bool log_lines = false;
 extern bool log_funcs = false;
 extern DKString log_show = ""; //comma seperated 
-extern DKString log_hide = ""; //comma seperated 
+extern DKString log_hide = ""; //comma seperated
+extern bool stacktrace_on_errors = false;
+extern bool exception_on_errors = false;
 
 bool Clear(){
 #ifdef WIN32
@@ -192,14 +194,17 @@ bool Log(const char* file, int line, const char* func, const DKString& text, con
 	
 	//On errors, show the stack trace or open a message box
 	if(lvl == DK_ERROR){
-		try{
-			throw string;    // throw an exception
-		}
-		//catch (const std::string& e){
-		catch(...){
+		if(stacktrace_on_errors){
 			DKClass::DKCreate("DKDebug");
 			if(DKClass::HasFunc("DKDebug::ShowStackTrace"))
 				DKClass::CallFunc("DKDebug::ShowStackTrace");
+		}
+		if(exception_on_errors){	
+			try{
+				throw string; // throw an exception
+			}
+			//catch (const std::string& e){
+			catch(...){
 			#ifdef WIN32
 				string += "\n\n Would you like to exit the application?";
 				boxer::Selection sel = boxer::show(string.c_str(), "EXCEPTION", boxer::Style::Error, boxer::Buttons::YesNo);
@@ -208,6 +213,7 @@ bool Log(const char* file, int line, const char* func, const DKString& text, con
 					return false;
 				}
 			#endif
+			}
 		}
 		return false;
 	}

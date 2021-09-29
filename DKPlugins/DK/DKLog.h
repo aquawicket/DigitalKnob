@@ -78,6 +78,8 @@ extern bool log_lines;
 extern bool log_funcs;
 extern DKString log_show;
 extern DKString log_hide;
+extern bool stacktrace_on_errors;
+extern bool exception_on_errors;
 
 bool Clear();
 bool ColorMap();
