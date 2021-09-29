@@ -347,8 +347,10 @@ bool DKFile::GetExePath(DKString& exepath){
 bool DKFile::GetExtention(const DKString& file, DKString& extension){
 	DKDEBUGFUNC(file, extension);
 	DebugPath(file);
-	if(!has(file,"."))
+	if(!has(file,".")){
 		DKWARN("file ("+file+") has no extension\n");
+		return true;
+	}
 	unsigned found = file.find_last_of(".");
 	extension = file.substr(found,file.size());
 	return true;
@@ -364,6 +366,7 @@ bool DKFile::GetFileName(const DKString& path, DKString& filename){
 	}
 	DKWARN("/ not found in path ("+path+")\n");
 	filename = path;
+	DKWARN("returning this path as the filename("+filename+")\n");
 	return true;
 }
 
