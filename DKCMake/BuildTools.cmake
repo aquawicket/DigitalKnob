@@ -6,16 +6,16 @@ if(CMAKE_HOST_WIN32 AND WIN)
 	DKDEPEND(visualstudio)
 	DKDEPEND(imagemagick)
 	
-	##NOTE: Using /fsanitize=address,  /RTC1 is incompatable and turned off 
+	##NOTE: When using /fsanitize=address,  /RTC1 is incompatable, so turn it off 
 	
 	# Windows 32
 	DKSET(DKCMAKE_WIN32 ${CMAKE_EXE} -G ${VISUALSTUDIO_NAME} -A Win32 
 	-DBUILD_SHARED_LIBS=OFF 
 	"-DCMAKE_C_FLAGS=/DWIN32 /D_WINDOWS /W3 /nologo" 
-	"-DCMAKE_C_FLAGS_DEBUG=/MTd /Od /Ob0 /fsanitize=address /Zi /RTC1 /DDEBUG /D_DEBUG" 
+	"-DCMAKE_C_FLAGS_DEBUG=/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG" 
 	"-DCMAKE_C_FLAGS_RELEASE=/MT /O2 /Ob2 /DNDEBUG" 
 	"-DCMAKE_CXX_FLAGS=/DWIN32 /D_WINDOWS /W3 /nologo" 
-	"-DCMAKE_CXX_FLAGS_DEBUG=/MTd /Od /Ob0 /fsanitize=address /Zi /RTC1 /DDEBUG /D_DEBUG" 
+	"-DCMAKE_CXX_FLAGS_DEBUG=/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG" 
 	"-DCMAKE_CXX_FLAGS_RELEASE=/MT /O2 /Ob2 /DNDEBUG")
 
 	# Windows 64
