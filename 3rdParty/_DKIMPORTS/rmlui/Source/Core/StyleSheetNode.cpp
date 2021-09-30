@@ -250,11 +250,25 @@ inline bool StyleSheetNode::MatchAttributes(const Element* element) const
 	for(auto& attribute : attribute_names) 
 	{
 		String attribute_value = element->GetAttribute<String>(attribute.first, "");
-		if(attribute_value.empty() || (attribute_value != attribute.second.Get<String>()))
-			return false;
+		//if(attribute_value.empty())
+		//	return false;
+
+		String css_value =  attribute.second.Get<String>();
+		String css_attribute_value = css_value.substr(2);
+		switch(css_value[0]){
+			case '=': 
+				if(attribute_value == css_attribute_value)
+					return true;
+					break;
+			case '~': break;
+			case '|': break;
+			case '^': break;
+			case '$': break; 
+			case '*': break; 
+			default: break;
+		}
 	}
-	
-	return true;
+	return false;
 }
 
 // Returns true if this node is applicable to the given element, given its IDs, classes and heritage.

@@ -919,7 +919,8 @@ StyleSheetNode* StyleSheetParser::ImportProperties(StyleSheetNode* node, String 
 				   name[end_index] != '#' &&
 				   name[end_index] != '.' &&
 				   name[end_index] != ':' &&
-				   name[end_index] != '>')
+				   name[end_index] != '>' &&
+				   name[end_index] != '[')
 				end_index++;
 
 			String identifier = name.substr(start_index, end_index - start_index);
@@ -931,21 +932,39 @@ StyleSheetNode* StyleSheetParser::ImportProperties(StyleSheetNode* node, String 
 					case '.':	classes.push_back(identifier.substr(1)); break;
 					case '[':
 					{
-						String attribute_str = identifier.substr(1);
-						const size_t attribute_name_end = attribute_str.find('=');
-						if(attribute_name_end != String::npos){
-							String attribute_name = attribute_str.substr(0, attribute_name_end);
-							String attribute_value = attribute_str.substr(1);
-							const size_t attribute_value_start = attribute_str.find('\"');
-							if(attribute_value_start != String::npos){
-								const size_t attribute_value_end = attribute_str.find('\"', attribute_value_start+1);
-								if(attribute_value_end != String::npos)
-									attribute_value = attribute_str.substr(attribute_value_start+1, attribute_value_end - (attribute_value_start + 1));
-									attributes[attribute_name] =  attribute_value;
-									//tag.clear();
+						const size_t attribute_end = identifier.find(']');
+						if(attribute_end != String::npos){
+						    String attribute_str = identifier.substr(1, attribute_end - 1);
+						    attribute_str = StringUtilities::Replace(attribute_str, "\"", "");
+							
+							if(!attribute_str.empty()) //has attribute selector data
+							{
+								const size_t equals_index = attribute_str.find('=');
+								if(equals_index != String::npos)
+								{
+									const String attribute_name = attribute_str.substr(0, equals_index);
+									String attribute_value = attribute_str.substr(equals_index-1);
+									switch(attribute_value[0])
+									{
+										case '~': break;
+										case '|': break;
+										case '^': break;
+										case '$': break; 
+										case '*': break; 
+										default:
+											attribute_value[0] = '=';
+											break;
+										}
+									attributes[attribute_name] = attribute_value;									
 								}
+								else
+								{
+									attributes[attribute_str] = "";
+								}
+
 							}
 						}
+					}
 					break;
 					case ':':
 						{
