@@ -2999,9 +2999,9 @@ endfunction()
 
 # Add a library or plugin to the dependency list
 function(DKDEPEND name)
-	list(FIND dkdepend_disable_list "${name} ${ARGN}" index)
+	list(FIND dkdepend_disable_list "${name}" index)
 	if(${index} GREATER -1)
-		message(STATUS "${name} ${ARGN} IS DISABLED")
+		message(STATUS "${name} IS DISABLED")
 		return()
 	endif()
 			
@@ -3026,12 +3026,12 @@ function(DKDEPEND name)
 	# list(LENGTH ${ARGN} num_extra_args)
 	# if(${ARGC} GREATER 1)
 		#list(GET ${ARGN} 0 arg2)
-	list(FIND dkdepend_list "${name} ${ARGN}" index)
+	list(FIND dkdepend_list "${name}" index)
 	if(${index} GREATER -1) #library is already in the list
 		return()
 	endif()
 	
-	DKRUNDEPENDS(${name} ${ARGN}) # strip everything from the file except if() else() elseif() endif() and DKDEPEND() before sorting.
+	DKRUNDEPENDS(${ARGV}) # strip everything from the file except if() else() elseif() endif() and DKDEPEND() before sorting.
 	# else()
 	#	list(FIND dkdepend_list "${name}" index)
 	#	if(${index} GREATER -1)
