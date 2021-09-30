@@ -151,12 +151,12 @@ DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left
 
     dk.console.container = dk.gui.createTag("div", parent, {
         style: {
-            top: top,
+            //top: top,
             bottom: bottom,
             left: left,
             right: right,
-            width: width,
-            height: height
+            //width: width,
+            //height: height
         },
         oncontextmenu: function container_oncontextmenu(event) {
             event.preventDefault();
@@ -353,6 +353,7 @@ DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left
 
         const msgSpan = document.createElement("span");
         msgSpan.setAttribute("dk_console", "msgSpan");
+		msgSpan.style.minWidth = "100px"
 
         //If the message is the same as the last, just increase a count next to the original.
         const lastMsgDiv = dk.console.logDiv.lastChild.previousSibling;
