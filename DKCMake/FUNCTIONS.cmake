@@ -127,7 +127,7 @@ endfunction()
 
 
 ##https://cmake.org/pipermail/cmake/2012-September/052205.html/
-function(DOWNLOAD url) #arg2 dest_path
+function(DOWNLOAD url) # ARGV1 = dest_path
 	DKSET(CURRENT_DIR ${DKDOWNLOAD}) #set the default dl directory
 	get_filename_component(src_filename ${url} NAME)
 	if(${ARGC} GREATER 1)
@@ -1655,39 +1655,39 @@ endfunction()
 
 
 ################# Visual Studio Build ################
-function(WIN_VS_DEBUG arg arg2)
+function(WIN_VS_DEBUG folder sln_file)
 	if(WIN AND DEBUG AND QUEUE_BUILD)
-		if(NOT EXISTS ${3RDPARTY}/${arg}/${OS}/${arg2})
-			message(FATAL_ERROR "CANNOT FIND: ${3RDPARTY}/${arg}/${OS}/${arg2}" )
+		if(NOT EXISTS ${3RDPARTY}/${folder}/${OS}/${sln_file})
+			message(FATAL_ERROR "CANNOT FIND: ${3RDPARTY}/${folder}/${OS}/${sln_file}" )
 		endif()
-		#DKEXECUTE_PROCESS("set _CL_=/MTd" WORKING_DIRECTORY ${3RDPARTY}/${arg}/${OS})
-		set(extra_args ${ARGN})
-		list(LENGTH extra_args num_extra_args)
-		if(${num_extra_args} GREATER 0)
-			list(GET extra_args 0 arg3)
-			set(EXECUTE_COMMAND ${MSBUILD} ${3RDPARTY}/${arg}/${OS}/${arg2} /t:${arg3} /p:Configuration=Debug)
+		#DKEXECUTE_PROCESS("set _CL_=/MTd" WORKING_DIRECTORY ${3RDPARTY}/${folder}/${OS})
+
+		
+		if(${ARGC} GREATER 2)
+			
+			set(EXECUTE_COMMAND ${MSBUILD} ${3RDPARTY}/${folder}/${OS}/${sln_file} /t:${ARGV2} /p:Configuration=Debug)
 		else()
-			set(EXECUTE_COMMAND ${MSBUILD} ${3RDPARTY}/${arg}/${OS}/${arg2} /p:Configuration=Debug)
+			set(EXECUTE_COMMAND ${MSBUILD} ${3RDPARTY}/${folder}/${OS}/${sln_file} /p:Configuration=Debug)
 		endif()
-		DKEXECUTE_PROCESS(${EXECUTE_COMMAND} WORKING_DIRECTORY ${3RDPARTY}/${arg}/${OS})
+		DKEXECUTE_PROCESS(${EXECUTE_COMMAND} WORKING_DIRECTORY ${3RDPARTY}/${folder}/${OS})
 	endif()
 endfunction()
 
-function(WIN_VS_RELEASE arg arg2)
+function(WIN_VS_RELEASE folder sln_file)
 	if(WIN AND RELEASE AND QUEUE_BUILD)
-		if(NOT EXISTS ${3RDPARTY}/${arg}/${OS}/${arg2})
-			message(FATAL_ERROR "CANNOT FIND: ${3RDPARTY}/${arg}/${OS}/${arg2}" )
+		if(NOT EXISTS ${3RDPARTY}/${folder}/${OS}/${sln_file})
+			message(FATAL_ERROR "CANNOT FIND: ${3RDPARTY}/${folder}/${OS}/${sln_file}" )
 		endif()
-		#DKEXECUTE_PROCESS("set _CL_=/MT" WORKING_DIRECTORY ${3RDPARTY}/${arg}/${OS})
-		set(extra_args ${ARGN})
-		list(LENGTH extra_args num_extra_args)
-		if(${num_extra_args} GREATER 0)
-			list(GET extra_args 0 arg3)
-			set(EXECUTE_COMMAND ${MSBUILD} ${3RDPARTY}/${arg}/${OS}/${arg2} /t:${arg3} /p:Configuration=Release)
+		#DKEXECUTE_PROCESS("set _CL_=/MT" WORKING_DIRECTORY ${3RDPARTY}/${folder}/${OS})
+
+		
+		if(${ARGC} GREATER 2)
+			
+			set(EXECUTE_COMMAND ${MSBUILD} ${3RDPARTY}/${folder}/${OS}/${sln_file} /t:${ARGV2} /p:Configuration=Release)
 		else()
-			set(EXECUTE_COMMAND ${MSBUILD} ${3RDPARTY}/${arg}/${OS}/${arg2} /p:Configuration=Release)
+			set(EXECUTE_COMMAND ${MSBUILD} ${3RDPARTY}/${folder}/${OS}/${sln_file} /p:Configuration=Release)
 		endif()
-		DKEXECUTE_PROCESS(${EXECUTE_COMMAND} WORKING_DIRECTORY ${3RDPARTY}/${arg}/${OS})
+		DKEXECUTE_PROCESS(${EXECUTE_COMMAND} WORKING_DIRECTORY ${3RDPARTY}/${folder}/${OS})
 	endif()
 endfunction()
 
@@ -1744,38 +1744,38 @@ function(WIN64_VS)
 endfunction()
 
 
-function(ANDROID_VS_DEBUG arg arg2)
+function(ANDROID_VS_DEBUG folder sln_file)
 	if(ANDROID AND DEBUG AND QUEUE_BUILD)
-		if(NOT EXISTS ${3RDPARTY}/${arg}/${OS}/${arg2})
-			message(FATAL_ERROR "CANNOT FIND: ${3RDPARTY}/${arg}/${OS}/${arg2}" )
+		if(NOT EXISTS ${3RDPARTY}/${folder}/${OS}/${sln_file})
+			message(FATAL_ERROR "CANNOT FIND: ${3RDPARTY}/${folder}/${OS}/${sln_file}" )
 		endif()
-		set(extra_args ${ARGN})
-		list(LENGTH extra_args num_extra_args)
-		if(${num_extra_args} GREATER 0)
-			list(GET extra_args 0 arg3)
-			set(EXECUTE_COMMAND ${MSBUILD} ${3RDPARTY}/${arg}/${OS}/${arg2} /t:${arg3} /p:Configuration=Debug)
+
+		
+		if(${ARGC} GREATER 2)
+			
+			set(EXECUTE_COMMAND ${MSBUILD} ${3RDPARTY}/${folder}/${OS}/${sln_file} /t:${ARGV2} /p:Configuration=Debug)
 		else()
-			set(EXECUTE_COMMAND ${MSBUILD} ${3RDPARTY}/${arg}/${OS}/${arg2} /p:Configuration=Debug)
+			set(EXECUTE_COMMAND ${MSBUILD} ${3RDPARTY}/${folder}/${OS}/${sln_file} /p:Configuration=Debug)
 		endif()
-		DKEXECUTE_PROCESS(${EXECUTE_COMMAND} WORKING_DIRECTORY ${3RDPARTY}/${arg}/${OS})
+		DKEXECUTE_PROCESS(${EXECUTE_COMMAND} WORKING_DIRECTORY ${3RDPARTY}/${folder}/${OS})
 	endif()
 endfunction()
 
 
-function(ANDROID_VS_RELEASE arg arg2)
+function(ANDROID_VS_RELEASE folder sln_file)
 	if(ANDROID AND RELEASE AND QUEUE_BUILD)
-		if(NOT EXISTS ${3RDPARTY}/${arg}/${OS}/${arg2})
-			message(FATAL_ERROR "CANNOT FIND: ${3RDPARTY}/${arg}/${OS}/${arg2}" )
+		if(NOT EXISTS ${3RDPARTY}/${folder}/${OS}/${sln_file})
+			message(FATAL_ERROR "CANNOT FIND: ${3RDPARTY}/${folder}/${OS}/${sln_file}" )
 		endif()
-		set(extra_args ${ARGN})
-		list(LENGTH extra_args num_extra_args)
-		if(${num_extra_args} GREATER 0)
-			list(GET extra_args 0 arg3)
-			set(EXECUTE_COMMAND ${MSBUILD} ${3RDPARTY}/${arg}/${OS}/${arg2} /t:${arg3} /p:Configuration=Release)
+
+		
+		if(${ARGC} GREATER 2)
+			
+			set(EXECUTE_COMMAND ${MSBUILD} ${3RDPARTY}/${folder}/${OS}/${sln_file} /t:${ARGV2} /p:Configuration=Release)
 		else()
-			set(EXECUTE_COMMAND ${MSBUILD} ${3RDPARTY}/${arg}/${OS}/${arg2} /p:Configuration=Release)
+			set(EXECUTE_COMMAND ${MSBUILD} ${3RDPARTY}/${folder}/${OS}/${sln_file} /p:Configuration=Release)
 		endif()
-		DKEXECUTE_PROCESS(${EXECUTE_COMMAND} WORKING_DIRECTORY ${3RDPARTY}/${arg}/${OS})
+		DKEXECUTE_PROCESS(${EXECUTE_COMMAND} WORKING_DIRECTORY ${3RDPARTY}/${folder}/${OS})
 	endif()
 endfunction()
 
@@ -1833,29 +1833,25 @@ endfunction()
 
 
 ################### Xcode Build ###################
-function(MAC_XCODE_DEBUG arg)
+function(MAC_XCODE_DEBUG folder)
 	if(MAC AND DEBUG AND QUEUE_BUILD)
-		set(extra_args ${ARGN})
-		list(LENGTH extra_args num_extra_args)
-		if(${num_extra_args} GREATER 0)
-			list(GET extra_args 0 arg2)
-			DKEXECUTE_PROCESS(xcodebuild -target ${arg2} -configuration Debug build WORKING_DIRECTORY ${3RDPARTY}/${arg}/${OS})
+		if(${ARGC} GREATER 1)
+			DKEXECUTE_PROCESS(xcodebuild -target ${ARGV1} -configuration Debug build WORKING_DIRECTORY ${3RDPARTY}/${folder}/${OS})
 		else()
-			DKEXECUTE_PROCESS(xcodebuild -configuration Debug build WORKING_DIRECTORY ${3RDPARTY}/${arg}/${OS})
+			DKEXECUTE_PROCESS(xcodebuild -configuration Debug build WORKING_DIRECTORY ${3RDPARTY}/${folder}/${OS})
 		endif()
 	endif()
 endfunction()
 
 
-function(MAC_XCODE_RELEASE arg)
+function(MAC_XCODE_RELEASE folder)
 	if(MAC AND RELEASE AND QUEUE_BUILD)
-		set(extra_args ${ARGN})
-		list(LENGTH extra_args num_extra_args)
-		if(${num_extra_args} GREATER 0)
-			list(GET extra_args 0 arg2)
-			DKEXECUTE_PROCESS(xcodebuild -target ${arg2} -configuration Release build WORKING_DIRECTORY ${3RDPARTY}/${arg}/${OS})
+		
+		if(${ARGC} GREATER 1)
+			
+			DKEXECUTE_PROCESS(xcodebuild -target ${ARGV1} -configuration Release build WORKING_DIRECTORY ${3RDPARTY}/${folder}/${OS})
 		else()
-			DKEXECUTE_PROCESS(xcodebuild -configuration Release build WORKING_DIRECTORY ${3RDPARTY}/${arg}/${OS})
+			DKEXECUTE_PROCESS(xcodebuild -configuration Release build WORKING_DIRECTORY ${3RDPARTY}/${folder}/${OS})
 		endif()
 	endif()
 endfunction()
@@ -1897,29 +1893,29 @@ function(MAC64)
 endfunction()
 
 
-function(IOS_XCODE_DEBUG arg)
+function(IOS_XCODE_DEBUG folder)
 	if(IOS AND DEBUG AND QUEUE_BUILD)
-		set(extra_args ${ARGN})
-		list(LENGTH extra_args num_extra_args)
-		if(${num_extra_args} GREATER 0)
-			list(GET extra_args 0 arg2)
-			DKEXECUTE_PROCESS(xcodebuild -target ${arg2} -configuration Debug build WORKING_DIRECTORY ${3RDPARTY}/${arg}/${OS})
+
+		
+		if(${ARGC} GREATER 1)
+			
+			DKEXECUTE_PROCESS(xcodebuild -target ${ARGV1} -configuration Debug build WORKING_DIRECTORY ${3RDPARTY}/${folder}/${OS})
 		else()
-			DKEXECUTE_PROCESS(xcodebuild -configuration Debug build WORKING_DIRECTORY ${3RDPARTY}/${arg}/${OS})
+			DKEXECUTE_PROCESS(xcodebuild -configuration Debug build WORKING_DIRECTORY ${3RDPARTY}/${folder}/${OS})
 		endif()
 	endif()
 endfunction()
 
 
-function(IOS_XCODE_RELEASE arg)
+function(IOS_XCODE_RELEASE folder)
 	if(IOS AND RELEASE AND QUEUE_BUILD)
-		set(extra_args ${ARGN})
-		list(LENGTH extra_args num_extra_args)
-		if(${num_extra_args} GREATER 0)
-			list(GET extra_args 0 arg2)
-			DKEXECUTE_PROCESS(xcodebuild -target ${arg2} -configuration Release build WORKING_DIRECTORY ${3RDPARTY}/${arg}/${OS})
+
+		
+		if(${ARGC} GREATER 1)
+			
+			DKEXECUTE_PROCESS(xcodebuild -target ${ARGV1} -configuration Release build WORKING_DIRECTORY ${3RDPARTY}/${folder}/${OS})
 		else()
-			DKEXECUTE_PROCESS(xcodebuild -configuration Release build WORKING_DIRECTORY ${3RDPARTY}/${arg}/${OS})
+			DKEXECUTE_PROCESS(xcodebuild -configuration Release build WORKING_DIRECTORY ${3RDPARTY}/${folder}/${OS})
 		endif()
 	endif()
 endfunction()
@@ -1961,29 +1957,29 @@ function(IOS64_XCODE_RELEASE)
 endfunction()
 
 
-function(IOSSIM_XCODE_DEBUG arg)
+function(IOSSIM_XCODE_DEBUG folder)
 	if(IOSSIM AND DEBUG AND QUEUE_BUILD)
-		set(extra_args ${ARGN})
-		list(LENGTH extra_args num_extra_args)
-		if(${num_extra_args} GREATER 0)
-			list(GET extra_args 0 arg2)
-			DKEXECUTE_PROCESS(xcodebuild -target ${arg2} -configuration Debug build -sdk iphonesimulator11.2 WORKING_DIRECTORY ${3RDPARTY}/${arg}/${OS})
+
+		
+		if(${ARGC} GREATER 1)
+			
+			DKEXECUTE_PROCESS(xcodebuild -target ${ARGV1} -configuration Debug build -sdk iphonesimulator11.2 WORKING_DIRECTORY ${3RDPARTY}/${folder}/${OS})
 		else()
-			DKEXECUTE_PROCESS(xcodebuild -configuration Debug build -sdk iphonesimulator11.2 WORKING_DIRECTORY ${3RDPARTY}/${arg}/${OS})
+			DKEXECUTE_PROCESS(xcodebuild -configuration Debug build -sdk iphonesimulator11.2 WORKING_DIRECTORY ${3RDPARTY}/${folder}/${OS})
 		endif()
 	endif()
 endfunction()
 
 
-function(IOSSIM_XCODE_RELEASE arg)
+function(IOSSIM_XCODE_RELEASE folder)
 	if(IOSSIM AND RELEASE AND QUEUE_BUILD)
-		set(extra_args ${ARGN})
-		list(LENGTH extra_args num_extra_args)
-		if(${num_extra_args} GREATER 0)
-			list(GET extra_args 0 arg2)
-			DKEXECUTE_PROCESS(xcodebuild -target ${arg2} -configuration Release build -sdk iphonesimulator11.2 WORKING_DIRECTORY ${3RDPARTY}/${arg}/${OS})
+
+		
+		if(${ARGC} GREATER 1)
+			
+			DKEXECUTE_PROCESS(xcodebuild -target ${ARGV1} -configuration Release build -sdk iphonesimulator11.2 WORKING_DIRECTORY ${3RDPARTY}/${folder}/${OS})
 		else()
-			DKEXECUTE_PROCESS(xcodebuild -configuration Release build -sdk iphonesimulator11.2 WORKING_DIRECTORY ${3RDPARTY}/${arg}/${OS})
+			DKEXECUTE_PROCESS(xcodebuild -configuration Release build -sdk iphonesimulator11.2 WORKING_DIRECTORY ${3RDPARTY}/${folder}/${OS})
 		endif()
 	endif()
 endfunction()
@@ -2026,25 +2022,25 @@ endfunction()
 
 
 ####################### Android NDK Build #################
-function(ANDROID_NDK_DEBUG arg)
+function(ANDROID_NDK_DEBUG folder)
 	if(ANDROID AND DEBUG AND QUEUE_BUILD)
 		if(CMAKE_HOST_WIN32)
-			DKEXECUTE_PROCESS(${ANDROIDNDK}/ndk-build.cmd WORKING_DIRECTORY ${3RDPARTY}/${arg}/${OS}/Debug)
+			DKEXECUTE_PROCESS(${ANDROIDNDK}/ndk-build.cmd WORKING_DIRECTORY ${3RDPARTY}/${folder}/${OS}/Debug)
 		endif()
 		if(CMAKE_HOST_UNIX)
-			DKEXECUTE_PROCESS(${ANDROIDNDK}/ndk-build WORKING_DIRECTORY ${3RDPARTY}/${arg}/${OS}/Debug)
+			DKEXECUTE_PROCESS(${ANDROIDNDK}/ndk-build WORKING_DIRECTORY ${3RDPARTY}/${folder}/${OS}/Debug)
 		endif()
 	endif()
 endfunction()
 
 
-function(ANDROID_NDK_RELEASE arg)
+function(ANDROID_NDK_RELEASE folder)
 	if(ANDROID AND RELEASE AND QUEUE_BUILD)
 		if(CMAKE_HOST_WIN32)
-			DKEXECUTE_PROCESS(${ANDROIDNDK}/ndk-build.cmd WORKING_DIRECTORY ${3RDPARTY}/${arg}/${OS}/Release)
+			DKEXECUTE_PROCESS(${ANDROIDNDK}/ndk-build.cmd WORKING_DIRECTORY ${3RDPARTY}/${folder}/${OS}/Release)
 		endif()
 		if(CMAKE_HOST_UNIX)
-			DKEXECUTE_PROCESS(${ANDROIDNDK}/ndk-build WORKING_DIRECTORY ${3RDPARTY}/${arg}/${OS}/Release)
+			DKEXECUTE_PROCESS(${ANDROIDNDK}/ndk-build WORKING_DIRECTORY ${3RDPARTY}/${folder}/${OS}/Release)
 		endif()
 	endif()
 endfunction()
@@ -2087,44 +2083,44 @@ endfunction()
 
 
 ###################### DKPlugin Link Libraries #####################
-function(DKDEBUG_LIB arg)
+function(DKDEBUG_LIB lib_path)
 	if(NOT DEBUG)
 		return()
 	endif()	
-	DKSET(LIBLIST ${LIBLIST} ${arg}) ## used for double checking
-	if(NOT EXISTS ${arg})
-		message(STATUS "MISSING: ${arg}")
+	DKSET(LIBLIST ${LIBLIST} ${lib_path}) ## used for double checking
+	if(NOT EXISTS ${lib_path})
+		message(STATUS "MISSING: ${lib_path}")
 		DKSET(QUEUE_BUILD ON) 
 	endif()
-	string(FIND "${DEBUG_LIBS}" "${arg}" index)
+	string(FIND "${DEBUG_LIBS}" "${lib_path}" index)
 	if(NOT ${index} EQUAL -1)
 		return() ## The library is already in the list
 	endif()
 	if(LINUX OR RASPBERRY OR ANDROID)
-		DKSET(DEBUG_LIBS debug ${arg} ${DEBUG_LIBS})  #Add to beginning of list
+		DKSET(DEBUG_LIBS debug ${lib_path} ${DEBUG_LIBS})  #Add to beginning of list
 	else()
-		DKSET(DEBUG_LIBS ${DEBUG_LIBS} debug ${arg})  #Add to end of list
+		DKSET(DEBUG_LIBS ${DEBUG_LIBS} debug ${lib_path})  #Add to end of list
 	endif()
 endfunction()
 
 
-function(DKRELEASE_LIB arg)
+function(DKRELEASE_LIB lib_path)
 	if(NOT RELEASE)
 		return()
 	endif()
-	DKSET(LIBLIST ${LIBLIST} ${arg}) ## used for double checking
-	if(NOT EXISTS ${arg})
-		message(STATUS "MISSING: ${arg}")
+	DKSET(LIBLIST ${LIBLIST} ${lib_path}) ## used for double checking
+	if(NOT EXISTS ${lib_path})
+		message(STATUS "MISSING: ${lib_path}")
 		DKSET(QUEUE_BUILD ON)
 	endif()
-	string(FIND "${RELEASE_LIBS}" "${arg}" index)
+	string(FIND "${RELEASE_LIBS}" "${lib_path}" index)
 	if(NOT ${index} EQUAL -1)
 		return() ## The library is already in the list
 	endif()	
 	if(LINUX OR RASPBERRY OR ANDROID)
-		DKSET(RELEASE_LIBS optimized ${arg} ${RELEASE_LIBS})  #Add to beginning of list
+		DKSET(RELEASE_LIBS optimized ${lib_path} ${RELEASE_LIBS})  #Add to beginning of list
 	else()
-		DKSET(RELEASE_LIBS ${RELEASE_LIBS} optimized ${arg})  #Add to end of list
+		DKSET(RELEASE_LIBS ${RELEASE_LIBS} optimized ${lib_path})  #Add to end of list
 	endif()
 endfunction()
 
@@ -2739,10 +2735,10 @@ function(ANDROID64_RELEASE_INCLUDE)
 endfunction()
 
 
-function(DKPLUGIN arg)
-	dk_getPathToPlugin(${arg} plugin_path)
+function(DKPLUGIN name)
+	dk_getPathToPlugin(${name} plugin_path)
 	if(NOT plugin_path)
-		message(FATAL_ERROR "DKPLUGIN(): ${arg} plugin not found")
+		message(FATAL_ERROR "DKPLUGIN(): ${name} plugin not found")
 		return()
 	endif()
 	
@@ -2750,7 +2746,7 @@ function(DKPLUGIN arg)
 	
 	##Create CmakeLists.txt file
 	DKSET(CMAKE_FILE "### This file is generated by DKCMake. Any Changes here, will be overwritten. ###\n")
-	DKSET(CMAKE_FILE "${CMAKE_FILE}### ${arg} ###\n")
+	DKSET(CMAKE_FILE "${CMAKE_FILE}### ${name} ###\n")
 	DKSET(CMAKE_FILE "${CMAKE_FILE}cmake_minimum_required(VERSION 3.10)\n")
 	DKSET(CMAKE_FILE "${CMAKE_FILE}cmake_policy(SET CMP0054 NEW)\n")
 	DKSET(CMAKE_FILE "${CMAKE_FILE}include(${DKCMAKE}/FUNCTIONS.cmake)\n")
@@ -2781,7 +2777,7 @@ function(DKPLUGIN arg)
 	DKSET(CMAKE_FILE "${CMAKE_FILE}		add_definitions(-DIOS)\n")
 	DKSET(CMAKE_FILE "${CMAKE_FILE}endif()\n")
 	
-	DKSET(CMAKE_FILE "${CMAKE_FILE}project(${arg})\n")
+	DKSET(CMAKE_FILE "${CMAKE_FILE}project(${name})\n")
 	
 	foreach(each_include ${DKINCLUDES_LIST})
 		DKSET(CMAKE_FILE "${CMAKE_FILE}include_directories(${each_include})\n")
@@ -2793,7 +2789,7 @@ function(DKPLUGIN arg)
 		DKSET(CMAKE_FILE "${CMAKE_FILE}link_directories(${each_linkdir})\n")
 	endforeach()
 	
-	DKSET(CMAKE_FILE "${CMAKE_FILE}file(GLOB ${arg}_SRC\n")
+	DKSET(CMAKE_FILE "${CMAKE_FILE}file(GLOB ${name}_SRC\n")
 	DKSET(CMAKE_FILE "${CMAKE_FILE}${plugin_path}/*.h\n")
 	DKSET(CMAKE_FILE "${CMAKE_FILE}${plugin_path}/*.c\n")
 	DKSET(CMAKE_FILE "${CMAKE_FILE}${plugin_path}/*.cpp\n")
@@ -2805,33 +2801,33 @@ function(DKPLUGIN arg)
 	DKSET(CMAKE_FILE "${CMAKE_FILE}    ${plugin_path}/*.rc\n")
 	DKSET(CMAKE_FILE "${CMAKE_FILE}    ${plugin_path}/*.manifest\n")
 	DKSET(CMAKE_FILE "${CMAKE_FILE})\n")
-	DKSET(CMAKE_FILE "${CMAKE_FILE}list(APPEND ${arg}_SRC \${WIN_SRC})\n")
+	DKSET(CMAKE_FILE "${CMAKE_FILE}list(APPEND ${name}_SRC \${WIN_SRC})\n")
 	DKSET(CMAKE_FILE "${CMAKE_FILE}endif()\n")
 	
 	DKSET(CMAKE_FILE "${CMAKE_FILE}if(IOS)\n")
 	DKSET(CMAKE_FILE "${CMAKE_FILE}file(GLOB IOS_SRC\n")
 	DKSET(CMAKE_FILE "${CMAKE_FILE}		${plugin_path}/*.mm\n")
 	DKSET(CMAKE_FILE "${CMAKE_FILE})\n")
-	DKSET(CMAKE_FILE "${CMAKE_FILE}list(APPEND ${arg}_SRC \${IOS_SRC})\n")
+	DKSET(CMAKE_FILE "${CMAKE_FILE}list(APPEND ${name}_SRC \${IOS_SRC})\n")
 	DKSET(CMAKE_FILE "${CMAKE_FILE}endif()\n")
 	
 	DKSET(CMAKE_FILE "${CMAKE_FILE}if(IOSSIM)\n")
 	DKSET(CMAKE_FILE "${CMAKE_FILE}file(GLOB IOS_SRC\n")
 	DKSET(CMAKE_FILE "${CMAKE_FILE}		${plugin_path}/*.mm\n")
 	DKSET(CMAKE_FILE "${CMAKE_FILE})\n")
-	DKSET(CMAKE_FILE "${CMAKE_FILE}list(APPEND ${arg}_SRC \${IOS_SRC})\n")
+	DKSET(CMAKE_FILE "${CMAKE_FILE}list(APPEND ${name}_SRC \${IOS_SRC})\n")
 	DKSET(CMAKE_FILE "${CMAKE_FILE}endif()\n")
 	
-	DKSET(CMAKE_FILE "${CMAKE_FILE}add_library(${arg} STATIC \${${arg}_SRC})\n")
-	DKSET(CMAKE_FILE "${CMAKE_FILE}target_compile_options(${arg} PRIVATE ${FLAGS})\n")
+	DKSET(CMAKE_FILE "${CMAKE_FILE}add_library(${name} STATIC \${${name}_SRC})\n")
+	DKSET(CMAKE_FILE "${CMAKE_FILE}target_compile_options(${name} PRIVATE ${FLAGS})\n")
 	DKSET(CMAKE_FILE "${CMAKE_FILE}if(CMAKE_HOST_WIN32)\n")
-	DKSET(CMAKE_FILE "${CMAKE_FILE}		set_target_properties(${arg} PROPERTIES LINKER_LANGUAGE CPP)\n")
+	DKSET(CMAKE_FILE "${CMAKE_FILE}		set_target_properties(${name} PROPERTIES LINKER_LANGUAGE CPP)\n")
 	DKSET(CMAKE_FILE "${CMAKE_FILE}endif()\n")	
 	
-	DKSET(DKCPPPLUGS ${DKCPPPLUGS} ${arg})  #Add to list
+	DKSET(DKCPPPLUGS ${DKCPPPLUGS} ${name})  #Add to list
 	
 	##add headers to DKPlugins.h
-	if(${arg} STREQUAL DK OR STATIC)
+	if(${name} STREQUAL DK OR STATIC)
 		file(GLOB HEADER_FILES RELATIVE ${DIGITALKNOB}/DKPlugins ${plugin_path}/*.h)
 		foreach(header ${HEADER_FILES})
 			string(FIND "${PLUGINS_FILE}" "${header}" index)
@@ -3006,15 +3002,12 @@ function(DKDEPEND name)
 	endif()
 			
 	# If DKDEPEND had second variable (a sub library), set that variable to ON
-	# set(extra_args ${ARGN})
-	# list(LENGTH extra_args num_extra_args)
-	# if(${num_extra_args} GREATER 0)
-	#	list(GET extra_args 0 arg2)
+	# if(${ARGC} GREATER 1)
 	#	list(FIND dkdepend_list "${name} ${args}" index)
 	#	if(${index} GREATER -1) #library is already in the list
 	#		return()
 	#	endif()
-	#	DKRUNDEPENDS(${name} ${arg2}) # strip everything from the file except if() else() elseif() endif() and DKDEPEND() before sorting.
+	#	DKRUNDEPENDS(${name} ${ARGV1}) # strip everything from the file except if() else() elseif() endif() and DKDEPEND() before sorting.
 	# else()
 	#	list(FIND dkdepend_list "${name}" index)
 	#	if(${index} GREATER -1)
@@ -3022,10 +3015,7 @@ function(DKDEPEND name)
 	#	endif()
 	#	DKRUNDEPENDS(${name}) # strip everything from the file except if() else() elseif() endif() and DKDEPEND() before sorting.
 	# endif()
-	
-	# list(LENGTH ${ARGN} num_extra_args)
-	# if(${ARGC} GREATER 1)
-		#list(GET ${ARGN} 0 arg2)
+		
 	list(FIND dkdepend_list "${name}" index)
 	if(${index} GREATER -1) #library is already in the list
 		return()
@@ -3184,12 +3174,6 @@ function(DKRUNDEPENDS name)
 		
 		# NOTE: The 'DKDEPEND(' search commands take care of 'DISABLE_DKDEPEND(' since 'DKDEPEND' is already a substring
 	endforeach()
-
-	set(extra_args ${ARGN})
-	list(LENGTH extra_args num_extra_args)
-	if(${num_extra_args} GREATER 0)
-		list(GET extra_args 0 arg2)
-	endif()
 	
 	if(disable_script)
 		file(WRITE ${plugin_path}/DISABLES.TMP "${disable_script}")
@@ -3199,19 +3183,19 @@ function(DKRUNDEPENDS name)
 	endif()
 	
 	if(depends_script)
-		if(${num_extra_args} GREATER 0)
-			DKENABLE(${arg2})
+		if(${ARGC} GREATER 1)
+			DKENABLE(${ARGV1})
 		endif()
 		file(WRITE ${plugin_path}/DEPENDS.TMP "${depends_script}")
 		INCLUDE(${plugin_path}/DEPENDS.TMP)
 		#cmake_language(EVAL CODE "${depends_script}")    #cmake 3.18+
 		DKREMOVE(${plugin_path}/DEPENDS.TMP)
-		if(${num_extra_args} GREATER 0)
-			DKSET(${arg2} OFF)
+		if(${ARGC} GREATER 1)
+			DKSET(${ARGV1} OFF)
 		endif()
 	endif()
 	
-	list(FIND dkdepend_list "${name} ${args}" index)
+	list(FIND dkdepend_list "${name} ${ARGV}" index)
 	if(${index} GREATER -1)
 		return()
 	endif()
@@ -3221,8 +3205,8 @@ function(DKRUNDEPENDS name)
 		return() # already on the list
 	endif()
 	
-	if(${num_extra_args} GREATER 0)
-		DKSET(dkdepend_list ${dkdepend_list} "${name} ${arg2}")  #Add sublibrary to list
+	if(${ARGC} GREATER 1)
+		DKSET(dkdepend_list ${dkdepend_list} "${name} ${ARGV1}")  #Add sublibrary to list
 	else()
 		DKSET(dkdepend_list ${dkdepend_list} ${name})  #Add library to list
 	endif()	
