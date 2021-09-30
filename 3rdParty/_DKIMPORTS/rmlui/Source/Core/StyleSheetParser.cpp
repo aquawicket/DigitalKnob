@@ -953,16 +953,14 @@ StyleSheetNode* StyleSheetParser::ImportProperties(StyleSheetNode* node, String 
 										case '*': break; 
 										default:
 											attribute_value[0] = '=';
-											break;
+											//break;
 										}
-									attributes[attribute_name] = attribute_value;									
+									attributes[attribute_name] = attribute_value;
+									break;
 								}
-								else
-								{
-									attributes[attribute_str] = "";
-								}
-
 							}
+							attributes[attribute_str] = "";
+							break;
 						}
 					}
 					break;
