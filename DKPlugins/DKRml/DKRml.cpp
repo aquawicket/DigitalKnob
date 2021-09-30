@@ -2,6 +2,7 @@
 
 #ifdef USE_rmlui_debugger
 #include <RmlUi/Debugger.h>
+#endif
 #include "DKRml/DKRml.h"
 #include "DKWindow/DKWindow.h"
 #include "DKCurl/DKCurl.h"
@@ -46,10 +47,12 @@ bool DKRml::Init(){
 		if(!DKWindow::GetHeight(h)){ return false; }
 		context = Rml::CreateContext("default", Rml::Vector2i(w, h));
 	}
-#ifndef LINUX
+//#ifndef LINUX
+#ifdef USE_rmlui_debugger
 	if (!Rml::Debugger::Initialise(context))
 		return DKERROR("Rml::Debugger::Initialise(): failed\n");
 #endif
+//#endif
 	//Add missing stylesheet properties
 	//TODO - https://developer.mozilla.org/en-US/docs/Web/CSS/background-repeat
 	Rml::PropertyId background_repeat = Rml::StyleSheetSpecification::RegisterProperty("background-repeat", "repeat", false)
@@ -451,29 +454,35 @@ bool DKRml::SendEvent(const DKString& elementAddress, const DKString& type, cons
 }
 
 bool DKRml::DebuggerOff(){
-#ifndef LINUX
+//#ifndef LINUX
+#ifdef USE_rmlui_debugger
 	Rml::Debugger::SetVisible(false);
 	DKINFO("Rml Debugger OFF\n");
 #endif
+//#endif
 	return true;
 }
 
 bool DKRml::DebuggerOn(){
-#ifndef LINUX
+//#ifndef LINUX
+#ifdef USE_rmlui_debugger
 	Rml::Debugger::SetVisible(true);
 	DKINFO("Rml Debugger ON\n");
 #endif
+//#endif
 	return true;
 }
 
 bool DKRml::DebuggerToggle(){
-#ifndef LINUX
 	DKDEBUGFUNC();
+//#ifndef LINUX
+#ifdef USE_rmlui_debugger
 	if(Rml::Debugger::IsVisible()) //FIXME:  always returns false
 		DKRml::DebuggerOff();
 	else
 		DKRml::DebuggerOn();
 #endif
+//#endif
 	return true;
 }
 

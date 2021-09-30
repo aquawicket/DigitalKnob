@@ -3006,22 +3006,39 @@ function(DKDEPEND name)
 	endif()
 			
 	# If DKDEPEND had second variable (a sub library), set that variable to ON
-	set(extra_args ${ARGN})
-	list(LENGTH extra_args num_extra_args)
-	if(${num_extra_args} GREATER 0)
-		list(GET extra_args 0 arg2)
-		list(FIND dkdepend_list "${name} ${args}" index)
+	# set(extra_args ${ARGN})
+	# list(LENGTH extra_args num_extra_args)
+	# if(${num_extra_args} GREATER 0)
+	#	list(GET extra_args 0 arg2)
+	#	list(FIND dkdepend_list "${name} ${args}" index)
+	#	if(${index} GREATER -1) #library is already in the list
+	#		return()
+	#	endif()
+	#	DKRUNDEPENDS(${name} ${arg2}) # strip everything from the file except if() else() elseif() endif() and DKDEPEND() before sorting.
+	# else()
+	#	list(FIND dkdepend_list "${name}" index)
+	#	if(${index} GREATER -1)
+	#		return() #library is already in the list
+	#	endif()
+	#	DKRUNDEPENDS(${name}) # strip everything from the file except if() else() elseif() endif() and DKDEPEND() before sorting.
+	# endif()
+	
+	# list(LENGTH ${ARGN} num_extra_args)
+	# if(${ARGC} GREATER 1)
+		#list(GET ${ARGN} 0 arg2)
+		list(FIND dkdepend_list "${name} ${ARGN}" index)
 		if(${index} GREATER -1) #library is already in the list
 			return()
 		endif()
-		DKRUNDEPENDS(${name} ${arg2}) # strip everything from the file except if() else() elseif() endif() and DKDEPEND() before sorting.
-	else()
-		list(FIND dkdepend_list "${name}" index)
-		if(${index} GREATER -1)
-			return() #library is already in the list
-		endif()
-		DKRUNDEPENDS(${name}) # strip everything from the file except if() else() elseif() endif() and DKDEPEND() before sorting.
-	endif()
+		DKRUNDEPENDS(${name} ${ARGN}) # strip everything from the file except if() else() elseif() endif() and DKDEPEND() before sorting.
+	# else()
+	#	list(FIND dkdepend_list "${name}" index)
+	#	if(${index} GREATER -1)
+	#		return() #library is already in the list
+	#	endif()
+	#	DKRUNDEPENDS(${name}) # strip everything from the file except if() else() elseif() endif() and DKDEPEND() before sorting.
+	# endif()
+	
 endfunction()
 
 
@@ -3416,3 +3433,4 @@ function(BIN2H)
         file(WRITE ${BIN2H_HEADER_FILE} "${declarations}")
     endif()
 endfunction()
+
