@@ -3193,14 +3193,17 @@ function(DKRUNDEPENDS name)
 		endif()
 	endif()
 	
-	list(FIND dkdepend_list "${name} ${ARGV1}" index)
-	if(${index} GREATER -1)
-		return()
-	endif()
-		
-	list(FIND dkdepend_list "${name}" index)
-	if(${index} GREATER -1)
-		return() # already on the list
+	if(${ARGC} GREATER 1)
+		Wait()
+		list(FIND dkdepend_list "${name} ${ARGV1}" index)
+		if(${index} GREATER -1)
+			return()
+		endif()
+	else()
+		list(FIND dkdepend_list "${name}" index)
+		if(${index} GREATER -1)
+			return() # already on the list
+		endif()
 	endif()
 	
 	if(${ARGC} GREATER 1)
