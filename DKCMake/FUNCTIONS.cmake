@@ -3007,13 +3007,11 @@ function(DKDEPEND name)
 	#	if(${index} GREATER -1) #library is already in the list
 	#		return()
 	#	endif()
-	#	DKRUNDEPENDS(${name} ${ARGV1}) # strip everything from the file except if() else() elseif() endif() and DKDEPEND() before sorting.
 	# else()
 	#	list(FIND dkdepend_list "${name}" index)
 	#	if(${index} GREATER -1)
 	#		return() #library is already in the list
 	#	endif()
-	#	DKRUNDEPENDS(${name}) # strip everything from the file except if() else() elseif() endif() and DKDEPEND() before sorting.
 	# endif()
 		
 	list(FIND dkdepend_list "${name}" index)
@@ -3195,7 +3193,7 @@ function(DKRUNDEPENDS name)
 		endif()
 	endif()
 	
-	list(FIND dkdepend_list "${name} ${ARGV}" index)
+	list(FIND dkdepend_list "${name} ${ARGV1}" index)
 	if(${index} GREATER -1)
 		return()
 	endif()
