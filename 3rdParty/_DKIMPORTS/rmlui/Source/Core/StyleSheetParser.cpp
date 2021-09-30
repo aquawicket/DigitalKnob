@@ -942,7 +942,7 @@ StyleSheetNode* StyleSheetParser::ImportProperties(StyleSheetNode* node, String 
 								const size_t equals_index = attribute_str.find('=');
 								if(equals_index != String::npos)
 								{
-									const String attribute_name = attribute_str.substr(0, equals_index);
+									const String attribute_name = attribute_str.substr(0, equals_index -1);
 									String attribute_value = attribute_str.substr(equals_index-1);
 									switch(attribute_value[0])
 									{
@@ -954,7 +954,7 @@ StyleSheetNode* StyleSheetParser::ImportProperties(StyleSheetNode* node, String 
 										default:
 											attribute_value[0] = '=';
 											//break;
-										}
+									}
 									attributes[attribute_name] = attribute_value;
 									break;
 								}

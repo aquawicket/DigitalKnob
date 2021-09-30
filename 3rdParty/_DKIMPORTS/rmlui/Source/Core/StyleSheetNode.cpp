@@ -249,22 +249,40 @@ inline bool StyleSheetNode::MatchAttributes(const Element* element) const
 {
 	for(auto& attribute : attribute_names) 
 	{
-		String attribute_value = element->GetAttribute<String>(attribute.first, "");
-		if(attribute_value.empty())
+		if(!element->HasAttribute(attribute.first))
 			return false;
-
+		String attribute_value = element->GetAttribute<String>(attribute.first, "");
 		const String css_value =  attribute.second.Get<String>();
-		String css_attribute_value = css_value.substr(2);
-		switch(css_value[0]){
-			case '=': 
-				if(attribute_value != css_attribute_value)
-					return false;
-			case '~': break;
-			case '|': break;
-			case '^': break;
-			case '$': break; 
-			case '*': break; 
-			default: break;
+		if(css_value.size() > 2){
+			String css_attribute_value = css_value.substr(2);
+			switch(css_value[0]){
+				case '=': 
+					if(attribute_value != css_attribute_value)
+						return false;
+					break;
+				case '~':
+					if(attribute_value.find(css_attribute_value) == String::npos)
+						return false;
+					break;
+				case '|': 
+					if((attribute_value != css_attribute_value) && (attribute_value.find(css_attribute_value+"-") == String::npos))
+						return false;
+					break;
+				case '^':
+					if(attribute_value.find(css_attribute_value) != 0)
+						return false;
+					break;
+				case '$':
+					if(attribute_value.find(css_attribute_value) != (attribute_value.size() - css_attribute_value.size()))
+						return false;
+					break;
+				case '*':
+					if(attribute_value.find(css_attribute_value) == String::npos)
+						return false;
+					break;
+				default: 
+					break;
+			}
 		}
 	}
 	return true;
