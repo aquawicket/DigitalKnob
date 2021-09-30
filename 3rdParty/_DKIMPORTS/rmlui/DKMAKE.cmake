@@ -101,7 +101,7 @@ WIN64_COMMAND(${DKCMAKE_WIN64} "-DCMAKE_CXX_FLAGS=/DWIN64 /D_WINDOWS /W3 /nologo
 #${SFML_WIN} 
 ${RMLUI})
 WIN_VS(${RMLUI_NAME} RmlUi.sln RmlCore)
-if(rml_core)
+if(rmlui_debugger)
 	WIN_VS(${RMLUI_NAME} RmlUi.sln RmlDebugger)
 endif()
 

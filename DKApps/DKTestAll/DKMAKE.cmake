@@ -5,6 +5,8 @@
 DKENABLE(USE_DKCef) ##FIXME: Find a way to remove this requirement
 
 ## ADD any and all plugins here
+#DKSET(rmlui_debugger ON)
+DKDEPEND(rmlui rmlui_debugger)
 DKDEPEND_ALL()
 
 if(CMAKE_HOST_LINUX)

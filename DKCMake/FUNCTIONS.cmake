@@ -3194,7 +3194,6 @@ function(DKRUNDEPENDS name)
 	endif()
 	
 	if(${ARGC} GREATER 1)
-		Wait()
 		list(FIND dkdepend_list "${name} ${ARGV1}" index)
 		if(${index} GREATER -1)
 			return()

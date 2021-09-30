@@ -4,7 +4,9 @@
 // https://developer.mozilla.org/en-US/docs/Web/API/Console#outputting_text_to_the_console
 // https://developer.chrome.com/docs/devtools/console/api/
 
-function DKConsole(){}
+//dk.console = DKPlugin(DKConsole, "singleton")
+
+function DKConsole() {}
 dk.console = DKPlugin(DKConsole)//, "singleton")
 
 //intercept console and reroute it to xconsole and dk.console
@@ -137,7 +139,6 @@ DKConsole.prototype.setXConsole = function DKConsole_setXConsole() {
 }
 
 DKConsole.prototype.init = function DKConsole_init() {
-	console.log("DKConsole.prototype.init")
     dk.create("DKGui/DKConsole.css");
 }
 
@@ -146,7 +147,6 @@ DKConsole.prototype.end = function DKConsole_end() {
 }
 
 DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left, right, width, height) {
-	dk.xconsole.log("DKConsole.prototype.create()")
     dk.console.limit = 200;
 
     dk.console.container = dk.gui.createTag("div", parent, {
@@ -446,10 +446,10 @@ DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left
         //Limit the number of stored lines
         if (dk.console.logDiv.childElementCount > dk.console.limit)
             dk.console.logDiv.removeChild(dk.console.logDiv.firstChild);
-		
-		setTimeout(function() {
-			dk.console.logDiv.scrollTop = (dk.console.logDiv.scrollHeight - dk.console.logDiv.style.height);
-		}, 0);
+
+        setTimeout(function() {
+            dk.console.logDiv.scrollTop = (dk.console.logDiv.scrollHeight - dk.console.logDiv.style.height);
+        }, 0);
 
         return msgDiv.innerHTML;
     }
@@ -730,7 +730,6 @@ DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left
         dk.console[lvl](msg);
     }
     delete dk.console.record;
-	dk.xconsole.log("DKConsole.prototype.create() -> return")
     return dk.console.container;
 }
 
@@ -769,3 +768,4 @@ DKConsole.prototype.ColorChromeConsole = function DKConsole_ColorChromeConsole(a
     return argArray;
 }
 */
+
