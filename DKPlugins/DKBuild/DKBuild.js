@@ -334,6 +334,7 @@ function DKBuild_ResetAppsPlugins(){
 	let contents = CPP_DKFile_DirectoryContents(DKPATH)
 	let files = contents.split(",")
 	for(let i=0; i<files.length; i++){
+		if(files[i].indexOf(".txt") <=1){ continue }
 		let url = CPP_DKFile_GetSetting(files[i], "[MYGIT]")
 		if(url){
 			let folder = files[i].replace(".txt","")

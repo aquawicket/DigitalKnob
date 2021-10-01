@@ -79,6 +79,8 @@ function DKGit_GitUpdate() {
 			CPP_DKFile_ChDir(DKPATH)
             if (CPP_DKFile_IsDirectory(files[i]))
                 continue
+			if(files[i].indexOf(".txt") <= 1)
+				continue
             var url = CPP_DKFile_GetSetting(files[i], "[MYGIT]")
             if (url) {
 				var folder = files[i].replace(".txt", "")
