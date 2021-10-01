@@ -9,7 +9,10 @@
 
 bool DKHtmlToRml::HtmlToRml(const DKString& html, DKString& rml){
 	DKDEBUGFUNC(html, rml);
+	
 	rml = html;
+	
+	/*
 	// :rgba(r,g,b,a)  <- convert a to 0-255
 	size_t end = 0;
 	while(has(rml,":rgba(")){
@@ -32,6 +35,8 @@ bool DKHtmlToRml::HtmlToRml(const DKString& html, DKString& rml){
 		}
 		return DKERROR("Error: in HtmlToRml()\n");
 	}
+	*/
+	
 	/*
 	////////////////////////////////////////////////////////
 	DKXml xml;
