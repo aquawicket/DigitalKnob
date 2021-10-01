@@ -2,10 +2,6 @@
 	position: absolute;
     padding: 0rem;
     margin: 0rem;
-	left: 0rem;
-	right:0rem;
-	bottom: 0rem;
-	height: 25%;
 }
 
 [dk_console="toolbar"] {
@@ -14,10 +10,10 @@
     height: 20rem;
     box-sizing: border-box;
     border-style: solid;
-    border-width: .1rem;
+    border-width: 1rem;
     border-left-width: 0rem;
     border-right-width: 0rem;
-    border-color: rgba(100,100,100,1);
+    border-color: rgb(100,100,100);
     background-color: rgb(45,45,45);
 }
 
@@ -39,14 +35,14 @@
 [dk_console^="msgDiv"] {
     width: 100%;
 	min-height: 20px;
-    font-size: 10rem;
+    font-size: 12rem;
     font-family: Consolas, Lucinda, Console, Courier New, monospace;
     white-space: pre-wrap;
     box-sizing: border-box;
     padding: 2rem;
     padding-left: 20rem;
     border-style: solid;
-    border-width: .1rem;
+    border-width: 1rem;
     border-top-width: 0rem;
     border-left-width: 0rem;
     background-color: rgb(36,36,36);
@@ -75,8 +71,7 @@
 
 [dk_console^="msgSpan"] {
     color: rgb(213,213,213);
-	width: 100px;
-	min-width: 100px;
+	display: inline;
 }
 
 [dk_console="msgSpanError"] {
@@ -88,7 +83,7 @@
 }
 
 [dk_console="msgSpanDebug"] {
-    color: rgba(77,136,255,1);
+    color: rgb(77,136,255);
 }
 
 [dk_console="msgSpanGreen"] {
@@ -111,8 +106,8 @@
     font-family: Consolas, Lucinda, Console, Courier New, monospace;
     font-size: 10rem;
     width: 95%;
-    background-color: rgba(0,0,0,0);
-    border-color: rgba(0,0,0,0);
+    background-color: rgb(0,0,0);
+    border-color: rgb(0,0,0);
     color: white;
 }
 
@@ -123,5 +118,6 @@
 [dk_console="cmnd"] {
     position: relative;
     top: 3rem;
+	width:5rem;
     height: 7rem;
 }

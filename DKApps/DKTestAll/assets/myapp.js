@@ -6,7 +6,7 @@ const myapp = DKPlugin(MyApp);
 myapp.loadFiles = function myapp_loadFiles() {
 	DKPlugin("DKFile/DKFile.js")
 	DKPlugin("DKGui/DKGui.js")
-	dk.create("DKGui/DKConsole.css")
+
 	DKPlugin("DKCodeRunner/DKCodeRunner.js")
 	//dk.notepad = DKPlugin("DKNotepad/DKNotepad.js")
 	DKPlugin("DKGui/DKConsole.js")
@@ -19,12 +19,10 @@ myapp.loadApp = function myapp_loadApp() {
 	const debugg = document.createElement("img")
 	debugg.src = "DKCodeRunner/Debugger.png"
 	debugg.style.position = "absolute"
-	debugg.style.top = "0rem"
-	debugg.style.right = "0rem"
-	//debugg.style.left = "0rem"
-	//debugg.style.bottom = ""
-	debugg.style.width = "50px"
-	debugg.style.height = "50px"
+	debugg.style.top = "3rem"
+	debugg.style.right = "10rem"
+	debugg.style.width = "35rem"
+	debugg.style.height = "30rem"
 	debugg.onclick = function(event) {
 		console.log("debugger");
 		if(dk.getBrowser() === "Rml")

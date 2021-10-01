@@ -151,12 +151,12 @@ DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left
 
     dk.console.container = dk.gui.createTag("div", parent, {
         style: {
-            //top: top,
+            top: top,
             bottom: bottom,
             left: left,
             right: right,
-            //width: width,
-            //height: height
+            width: width,
+            height: height
         },
         oncontextmenu: function container_oncontextmenu(event) {
             event.preventDefault();

@@ -99,12 +99,10 @@ DKCodeRunner.prototype.create = function DKCodeRunner_create(parent, top, bottom
 	const debugg = document.createElement("img")
 	debugg.src = "DKCodeRunner/Debugger.png"
 	debugg.style.position = "absolute"
-	debugg.style.top = "0rem"
-	debugg.style.right = "0rem"
-	//debugg.style.left = "0rem"
-	//debugg.style.bottom = ""
-	debugg.style.width = "50px"
-	debugg.style.height = "50px"
+	debugg.style.top = "3rem"
+	debugg.style.right = "10rem"
+	debugg.style.width = "35rem"
+	debugg.style.height = "30rem"
 	debugg.onclick = function(event) {
 		console.log("debugger");
 		if(dk.getBrowser() === "Rml")
