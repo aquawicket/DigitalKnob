@@ -35,6 +35,7 @@ bool DKDom::Init(){
 					DKClass::DKCreate("DKDomHTMLElement");
 					DKClass::DKCreate("DKDomHTMLCollection");
 						DKClass::DKCreate("DKDomHTMLScriptElement");
+						DKClass::DKCreate("DKDomHTMLSpanElement");
 			DKClass::DKCreate("DKDomCSSStyleDeclaration");
 			
 			DKClass::DKCreate("DKDomWindowOrWorkerGlobalScope");
