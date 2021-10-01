@@ -351,9 +351,8 @@ DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left
             }
         })
 
-        const msgSpan = document.createElement("span");
-        msgSpan.setAttribute("dk_console", "msgSpan");
-		msgSpan.style.minWidth = "100px"
+        const msgSpan = document.createElement("span")
+        msgSpan.setAttribute("dk_console", "msgSpan")
 
         //If the message is the same as the last, just increase a count next to the original.
         const lastMsgDiv = dk.console.logDiv.lastChild.previousSibling;
@@ -419,7 +418,8 @@ DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left
                     elements[n].style.display = group.display;
             }
 
-        } else {
+        } 
+		else {
             msgSpan.innerHTML = arguments[1];
         }
 

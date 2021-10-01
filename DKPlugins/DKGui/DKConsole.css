@@ -71,7 +71,6 @@
 
 [dk_console^="msgSpan"] {
     color: rgb(213,213,213);
-	display: inline;
 }
 
 [dk_console="msgSpanError"] {
@@ -106,8 +105,8 @@
     font-family: Consolas, Lucinda, Console, Courier New, monospace;
     font-size: 10rem;
     width: 95%;
-    background-color: rgb(0,0,0);
-    border-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0);
+    border-color: rgba(0,0,0,0);
     color: white;
 }
 

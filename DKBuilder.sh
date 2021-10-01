@@ -110,9 +110,9 @@ while :
 	cd $DKPATH
 	echo Deleteing CMake cache . . .
 	find . -name "CMakeCache.*" -delete
-	#find . -type d -name "CMakeFiles" -delete
 	rm -rf `find . -type d -name CMakeFiles`
-		
+	#find . -type d -name "CMakeFiles" -delete
+			
 		
 	mkdir $DKPATH/DKApps/$APP/$OS
 	if [[ "$OSTYPE" == "linux-gnu"* ]]; then
