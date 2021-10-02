@@ -97,7 +97,8 @@ DKCodeRunner.prototype.create = function DKCodeRunner_create(parent, top, bottom
 	document.body.appendChild(pullAssets)
 	
 	const debugg = document.createElement("img")
-	debugg.src = "DKCodeRunner/Debugger.png"
+	//debugg.src = "DKCodeRunner/Debugger.png"
+	debugg.setAttribute("src", "DKCodeRunner/Debugger.png") //https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement
 	debugg.style.position = "absolute"
 	debugg.style.top = "3rem"
 	debugg.style.right = "10rem"
