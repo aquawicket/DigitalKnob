@@ -1,15 +1,15 @@
-# http://diff-match-patch_website.com
+# https://github.com/google/diff-match-patch
 #
-# http://www.diff-match-patch.com/downloads/diff-match-patch-1.0.0.zip
+# https://github.com/google/diff-match-patch/archive/refs/heads/master.zip
 
 ### DEPENDS ###
 #DKDEPEND(libname)
 
 
 ### VERSION ###
-DKSET(DIFF_MATCH_PATCH_VERSION 1.0.0)
+DKSET(DIFF_MATCH_PATCH_VERSION master)
 DKSET(DIFF_MATCH_PATCH_NAME diff-match-patch-${DIFF_MATCH_PATCH_VERSION})
-DKSET(DIFF_MATCH_PATCH_DL http://www.diff-match-patch.com/downloads/${DIFF_MATCH_PATCH_NAME}.zip)
+DKSET(DIFF_MATCH_PATCH_DL https://github.com/google/diff-match-patch/archive/refs/heads/${DIFF_MATCH_PATCH_VERSION}.zip)
 DKSET(DIFF_MATCH_PATCH ${3RDPARTY}/${DIFF_MATCH_PATCH_NAME})
 
 
