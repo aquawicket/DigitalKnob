@@ -90,6 +90,10 @@ Rml::Element* HeadInstancer::ElementStart(Rml::XMLParser* parser, const Rml::Str
 
 	// Determine the parent
 	Rml::Element* parent = parser->GetParseFrame()->element;
+	if(!parent){
+		Rml::Log::Message(Rml::Log::LT_ERROR, "Failed to find parent for element instancer returned nullptr.");
+		return nullptr;
+	}
 
 	// Attempt to instance the element with the instancer
 	Rml::ElementPtr element = Rml::Factory::InstanceElement(parent, name, name, attributes);
