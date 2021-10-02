@@ -96,17 +96,32 @@ DKCodeRunner.prototype.create = function DKCodeRunner_create(parent, top, bottom
 	}
 	document.body.appendChild(pullAssets)
 	
-	const fileManager = document.createElement("img")
-	fileManager.src = "DKCodeRunner/folderIcon.png"
-	fileManager.style.position = "absolute"
-	fileManager.style.top = "3rem"
-	fileManager.style.right = "50rem"
-	fileManager.style.width = "35rem"
-	fileManager.style.height = "30rem"
-	fileManager.onclick = function(event) {
-		console.log("fileManager")
+	/*
+	const folderIcon = document.createElement("img")
+	folderIcon.src = "DKCodeRunner/folderIcon.png"
+	folderIcon.style.position = "absolute"
+	folderIcon.style.top = "3rem"
+	folderIcon.style.right = "50rem"
+	folderIcon.style.width = "35rem"
+	folderIcon.style.height = "30rem"
+	folderIcon.onclick = function(event) {
+		DKPlugin("DKFile/filemanager.js", function fm_onload() {
+			console.log("done")
+            DKFileManager.prototype.init();
+            DKFileManager.prototype.create();
+        });
+		DKFileManager.prototype.init();
+        DKFileManager.prototype.create();
 	}
-	document.body.appendChild(fileManager)
+	document.body.appendChild(folderIcon)
+	*/
+	
+	dk.gui.createImageButton(document.body, "File Manager", "DKCodeRunner/folderIcon.png", "3rem", "", "", "50rem", "35rem", "30rem", function() {
+        DKPlugin("DKFile/filemanager.js", function() {
+            DKFileManager.prototype.init();
+            DKFileManager.prototype.create();
+        });
+    })
 	
 	const debugg = document.createElement("img")
 	debugg.src = "DKCodeRunner/Debugger.png"
