@@ -35,8 +35,8 @@ bool DKEvents::AddEvent(const DKString& id, const DKString& type, const DKString
 		if(event == events[i]){
 			DKWARN("Event already Exists, Re-registering. ("+id+" : "+type+" : "+_jsreturn+")\n.");
 			events[i] = event;
-			for(unsigned int i=0; i<reg_funcs.size(); ++i)
-				reg_funcs[i](id, type); //External Reg Functions
+			for(unsigned int nn=0; nn<reg_funcs.size(); ++nn)
+				reg_funcs[nn](id, type); //External Reg Functions
 			return true;
 		}
 	}
