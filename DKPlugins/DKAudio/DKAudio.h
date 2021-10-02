@@ -4,7 +4,6 @@
 
 #include "DK/DK.h"
 
-/////////////////////////////////////////
 class DKAudio : public DKObjectT<DKAudio>
 {
 public:
@@ -27,4 +26,3 @@ public:
 REGISTER_OBJECT(DKAudio, true);
 
 #endif //DKAudio_H
-

@@ -5,7 +5,6 @@
 
 #include "DKDuktape/DKDuktape.h"
 
-/////////////////////////////////////////////
 class DKAudioJS : public DKObjectT<DKAudioJS>
 {
 public:
