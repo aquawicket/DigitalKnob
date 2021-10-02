@@ -113,7 +113,6 @@ DKPlugin.fromFile = function DKPlugin_fromFile(args, DKPlugin_fromFile_callback)
 
             if (typeof klass.prototype.init === "function") {
                 klass.prototype.init(function() {
-
                     DKPlugin_fromFile_callback && DKPlugin_fromFile_callback(klass);
                 })
             } else
