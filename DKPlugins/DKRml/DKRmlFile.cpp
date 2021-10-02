@@ -3,14 +3,13 @@
 #include "DKRml.h"
 #include "DKCurl/DKCurl.h"
 
-Rml::FileHandle DKRmlFile::Open(const Rml::String& _path){
+Rml::FileHandle DKRmlFile::Open(const Rml::String& path){
 	DKDEBUGFUNC("path");
 
-	DKString path = path;
-	if(!DKFile::VerifyPath(path))
-		return DKERROR("could not locate path ("+path+")");
-
 	DKString _url = path;
+	if(!DKFile::VerifyPath(_url))
+		return DKERROR("could not locate path ("+_url+")");
+
 	if (has(_url, ":/")) { //could be http:// , https:// or C:/
 		//absolute path
 	}
@@ -19,8 +18,8 @@ Rml::FileHandle DKRmlFile::Open(const Rml::String& _path){
 		return DKERROR("DKRml::LoadUrl(): no protocol specified\n"); //absolute path without protocol
 	}
 	else{
-		if(_url.find("/home") == std::string::npos) //url may have unix home directory
-			_url = DKRml::Get()->workingPath+_url;
+		//if(_url.find("/home") == std::string::npos) //url may have unix home directory
+		//	_url = DKRml::Get()->workingPath+_url;
 		//return DKERROR("DKRml::LoadUrl(): cannot load relative paths\n");
 	}
 	if(has(_url,"://")){
