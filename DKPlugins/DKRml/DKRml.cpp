@@ -8,7 +8,7 @@
 #include "DKCurl/DKCurl.h"
 #include "DKDuktape/DKDuktape.h"
 #include "DKXml/DKXml.h"
-#include "DKRml/HeadInstancer.h"
+#include "DKRml/DKRmlHeadInstancer.h"
 
 #include <RmlUi/Core/StreamMemory.h>
 #include "../../3rdParty/RmlUi-master/Source/Core/PluginRegistry.h"

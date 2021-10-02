@@ -1,6 +1,6 @@
 #ifdef USE_DKDuktape
-#include "DKRml/DKRml.h"
-#include "DKRml/DKRmlJS.h"
+#include "DKRml.h"
+#include "DKRmlJS.h"
 
 bool DKRmlJS::Init() {
 	DKDEBUGFUNC();
@@ -42,7 +42,7 @@ int DKRmlJS::PostProcess(duk_context* ctx) {
 	DKRml::Get()->document->GetElementsByTagName(elements, "body");
 	if(!elements[0])
 		return DKERROR("body element invalid\n");
-	DKRml::Get()->dkHtmlToRml.PostProcess(elements[0]);
+	DKRml::Get()->dkRmlConverter.PostProcess(elements[0]);
 	return true;
 }
 

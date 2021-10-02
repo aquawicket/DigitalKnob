@@ -1,4 +1,4 @@
-#include "HeadInstancer.h"
+#include "DKRmlHeadInstancer.h"
 #include <RmlUi/Core/StringUtilities.h>
 #include <RmlUi/Core/XMLParser.h>
 #include <RmlUi/Core/SystemInterface.h>

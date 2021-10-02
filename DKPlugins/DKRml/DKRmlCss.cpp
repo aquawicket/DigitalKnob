@@ -1,7 +1,7 @@
 #include "DK/stdafx.h"
 #include "RmlUi/Core/Factory.h"
 #include "DK/DKFile.h"
-#include "DKRml/DKCss.h"
+#include "DKRml/DKRmlCss.h"
 
 DKRml* DKRmlCss::dkRml;
 
@@ -13,11 +13,11 @@ bool DKRmlCss::Init(){
 	//data = ("DKRmlCss", file)
 	if(data.size() < 2){
 		DKString _data = toString(data, ",");
-		DKERROR("DKRmlCss::Init("+_data+"): missing parameters\n");
+		DKERROR("data is missing parameters: data:("+_data+")\n");
 	}
 	if(data.size() > 2){
 		DKString _data = toString(data, ",");
-		DKERROR("DKRmlCss::Init("+_data+"): too many parameters\n");
+		DKERROR("data has too many parameters: data:("+_data+")\n");
 	}
 	replace(data[1], DKFile::local_assets, "");
 	DKString file = DKFile::local_assets+data[1];
