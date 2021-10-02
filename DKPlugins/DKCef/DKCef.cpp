@@ -34,7 +34,7 @@ bool DKCef::Init(){
 	
 	//int major_version = cef_version_info(0);
 	//int build_version = cef_version_info(4);
-	// DKString version_string = "Cef/"+std::to_string(major_version)+"."+std::to_string(build_version);
+	// DKString version_string = "Cef/"+toString(major_version)+"."+toString(build_version);
 	//DKINFO("Cef version "+version_string+"\n");
 	//CefString(&settings.product_version).FromASCII(version_string.c_str());
 	cefHandler = NULL;
@@ -224,7 +224,7 @@ bool DKCef::Init(){
 #endif
 	int major_version = cef_version_info(0);
 	int build_version = cef_version_info(4);
-	DKString version_string = "Cef/"+std::to_string(major_version)+"."+std::to_string(build_version);
+	DKString version_string = "Cef/"+toString(major_version)+"."+toString(build_version);
 	//CefString(&settings.product_version).FromASCII(version_string.c_str());
 	DKINFO("Cef Version: "+version_string+"\n");
 	DKString userAgent = "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36 "+version_string;
@@ -286,7 +286,7 @@ bool DKCef::End(){
 bool DKCef::CloseBrowser(const int& browser){
 	DKDEBUGFUNC(browser);
 	if((unsigned)browser > dkBrowsers.size()-1){
-		DKERROR("DKCef::CloseBrowser("+std::to_string(browser)+"): ERROR: trying to delete a non-existent browser\n");
+		DKERROR("DKCef::CloseBrowser("+toString(browser)+"): ERROR: trying to delete a non-existent browser\n");
 		return false; 
 	}
 	dkBrowsers[browser].browser->GetHost()->CloseBrowser(true);
@@ -313,7 +313,7 @@ bool DKCef::CopyImage(const DKString& url){
 	NewBrowser();
 	int num;
 	GetBrowsers(num);
-	DKINFO("DKCef::CopyImage("+url+"): num = "+std::to_string(num)+"\n");
+	DKINFO("DKCef::CopyImage("+url+"): num = "+toString(num)+"\n");
 	SetUrl(num-1, url);
 
 	//FIXME - we can't copy until the frame is loaded with the image. 
@@ -404,7 +404,7 @@ bool DKCef::GetCurrentBrowser(int& browser){
 			return true;
 		}
 	}
-	//DKERROR("DKCef::GetCurrentBrowser("+std::to_string(browser)+"): failed\n");
+	//DKERROR("DKCef::GetCurrentBrowser("+toString(browser)+"): failed\n");
 	browser = -1;
 	return false;
 }
@@ -453,7 +453,7 @@ bool DKCef::NewBrowser(const void* input, void* output){
 
 bool DKCef::NewBrowser(const DKString& id, const int& top, const int& left, const int& width, const int& height, const DKString& url){
 	DKDEBUGFUNC(id, top, left, width, height, url);
-	DKINFO("DKCef::NewBrowser("+id+","+std::to_string(top)+","+std::to_string(left)+","+std::to_string(width)+","+std::to_string(height)+","+url+")\n");
+	DKINFO("DKCef::NewBrowser("+id+","+toString(top)+","+toString(left)+","+toString(width)+","+toString(height)+","+url+")\n");
 	
 	int _width = width;
 	int _height = height;

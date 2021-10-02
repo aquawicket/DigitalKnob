@@ -58,11 +58,9 @@ public:
 		if(arry[1].empty()){ //if empty, Create the id (i.e.  DKPlugin0)
 			arry[1] = arry[0];
 			int num = 0;
-			//while(Valid(arry[1]+toString(num)))
-			while(Valid(arry[1]+std::to_string(num)))
+			while(Valid(arry[1]+toString(num)))
 				num++;
-			//arry[1] = arry[1]+toString(num);
-			arry[1] = arry[1]+std::to_string(num);
+			arry[1] = arry[1]+toString(num);
 		}
 		DKString final_data = toString(arry,",");
 		//ArrayToString(arry, final_data, ",");

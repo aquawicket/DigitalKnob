@@ -113,16 +113,14 @@ bool Log(const char* file, int line, const char* func, const DKString& input, co
 	if(log_thread){
 		unsigned long int threadId;
 		DKUtil::GetThreadId(threadId);
-		//output = output + "THREAD: " + toString((unsigned int)threadId) + "  ";
-		output = output + "THREAD: " + std::to_string((unsigned int)threadId) + "  ";
+		output = output + "THREAD: " + toString((unsigned int)threadId) + "  ";
 	}
 	if(log_lines || lvl <= DK_ERROR) {
 		DKString filename = file;
 		unsigned found = filename.find_last_of("/\\");
 		if(found != std::string::npos && found < filename.length())
 			output += filename.substr(found+1);
-		//output = output + ":" + toString(line) + "  ";
-		output = output + ":" + std::to_string(line) + "  ";
+		output = output + ":" + toString(line) + "  ";
 	}
 	if(log_funcs || lvl <= DK_ERROR) {
 		if(strlen(func))
@@ -205,7 +203,7 @@ bool Log(const char* file, int line, const char* func, const DKString& input, co
 #endif
 
 	//if(log_gui_console && DKUtil::InMainThread() && DKApp::active){
-	//	DKEvents::SendEvent("DKLog", "level", std::to_string(lvl));
+	//	DKEvents::SendEvent("DKLog", "level", toString(lvl));
 	//	DKEvents::SendEvent("DKLog", "string", string);
 	//}
 	

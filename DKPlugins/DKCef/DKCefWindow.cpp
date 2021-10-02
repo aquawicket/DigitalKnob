@@ -45,7 +45,7 @@ void DKCefWindow::DoFrame(){
 	rect.top = rect.bottom - 16;
 	unsigned int fps;
 	DKUtil::GetFps(fps);
-	DKString fpsString = std::to_string(fps)+="fps";
+	DKString fpsString = toString(fps)+="fps";
 	DrawTextA(hdc, fpsString.c_str(), strlen(fpsString.c_str()), &rect, DT_LEFT);
 	ReleaseDC(hwnd, hdc);
 #endif
@@ -310,7 +310,7 @@ bool DKCefWindow::GetX(const void* input, void* output)
 	if(!gdk_window){ return false; }
 	gint x, y;
 	gdk_window_get_position(gdk_window, &x, &y);
-	DKINFO("gdk_window_get_position(): x="+std::to_string((int)x)+" y="+std::to_string((int)y)+"\n");
+	DKINFO("gdk_window_get_position(): x="+toString((int)x)+" y="+toString((int)y)+"\n");
 	*(int*)output = (int)x;
 	return true;
 #endif //USE_GDK
@@ -342,7 +342,7 @@ bool DKCefWindow::GetY(const void* input, void* output)
 	if(!gdk_window){ return false; }
 	gint x, y;
 	gdk_window_get_position(gdk_window, &x, &y);
-	DKINFO("gdk_window_get_position(): x="+std::to_string((int)x)+" y="+std::to_string((int)y)+"\n");
+	DKINFO("gdk_window_get_position(): x="+toString((int)x)+" y="+toString((int)y)+"\n");
 	*(int*)output = (int)y;
 	return true;
 #endif //USE_GDK
