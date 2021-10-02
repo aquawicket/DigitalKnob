@@ -4,13 +4,37 @@
 #include <RmlUi/Core/SystemInterface.h>
 
 #include "../../3rdParty/RmlUi-master/Source/Core/DocumentHeader.h"
-//#include "../../3rdParty/RmlUi-f0a0480e9b7c8f19305220ab313a8121a43f6611/Source/Core/DocumentHeader.h"
 //#include "TemplateCache.h"
 #include <RmlUi/Core/Core.h>
 #include <RmlUi/Core/Element.h>
 #include <RmlUi/Core/ElementDocument.h>
 #include <RmlUi/Core/URL.h>
 #include <RmlUi/Core/Factory.h>
+
+static Rml::String Absolutepath(const Rml::String& source, const Rml::String& base)
+{
+	Rml::String joined_path;
+	::Rml::GetSystemInterface()->JoinPath(joined_path, Rml::StringUtilities::Replace(base, '|', ':'), Rml::StringUtilities::Replace(source, '|', ':'));
+	return Rml::StringUtilities::Replace(joined_path, ':', '|');
+}
+
+static Rml::DocumentHeader::Resource MakeInlineResource(Rml::XMLParser* parser, const Rml::String& data)
+{
+	Rml::DocumentHeader::Resource resource;
+	resource.is_inline = true;
+	resource.content = data;
+	resource.path = parser->GetSourceURL().GetURL();
+	resource.line = parser->GetLineNumberOpenTag();
+	return resource;
+}
+
+static Rml::DocumentHeader::Resource MakeExternalResource(Rml::XMLParser* parser, const Rml::String& path)
+{
+	Rml::DocumentHeader::Resource resource;
+	resource.is_inline = false;
+	resource.path = Absolutepath(path, parser->GetSourceURL().GetURL());
+	return resource;
+}
 
 HeadInstancer::HeadInstancer()
 {
@@ -35,19 +59,18 @@ Rml::Element* HeadInstancer::ElementStart(Rml::XMLParser* parser, const Rml::Str
 
 		if (/*!type.empty() && */!href.empty()){
 			// If its RCSS (... or CSS!), add to the RCSS fields.
-			if (type == "text/rcss" || type == "text/css"){
+			if (type == "text/rcss" || type == "text/css")
+				parser->GetDocumentHeader()->rcss.push_back(MakeExternalResource(parser, href));
 				// FIXME
 				//parser->GetDocumentHeader()->rcss_external.push_back(href);
-				parser->GetDocumentHeader()->rcss[0].path = href;
-			}
+				//parser->GetDocumentHeader()->rcss[0].path = href;
 
 			// If its an template, add to the template fields
 			else if(type == "text/template")
 				parser->GetDocumentHeader()->template_resources.push_back(href);
 			/*
-			else{
-				Rml::Log::ParseError(parser->GetSourceURL().GetURL(), parser->GetLineNumber(), "Invalid link type '%s'", type.c_str());
-			}
+			else
+				Log::ParseError(parser->GetSourceURL().GetURL(), parser->GetLineNumber(), "Invalid link type '%s'", type.c_str());
 			*/
 		}
 		else
@@ -58,11 +81,11 @@ Rml::Element* HeadInstancer::ElementStart(Rml::XMLParser* parser, const Rml::Str
 	else if (name == "script"){
 		// Check if its an external string
 		Rml::String src = Rml::Get<Rml::String>(attributes, "src", "");
-		if (src.size() > 0){
+		if (src.size() > 0)
+			parser->GetDocumentHeader()->scripts.push_back(MakeExternalResource(parser, src));
 			// FIXME
 			//parser->GetDocumentHeader()->scripts_external.push_back(src);
 			//parser->GetDocumentHeader()->scripts[0].path = src;
-		}
 	}
 
 	// Determine the parent
@@ -76,7 +99,8 @@ Rml::Element* HeadInstancer::ElementStart(Rml::XMLParser* parser, const Rml::Str
 	}
 
 	// Move and append the element to the parent
-	Rml::Element* result = parent->AppendChild(std::move(element));
+	//Rml::Element* result = parent->AppendChild(std::move(element));
+	// No elements constructed
 	return nullptr;
 }
 
@@ -107,18 +131,22 @@ bool HeadInstancer::ElementData(Rml::XMLParser* parser, const Rml::String& data,
 	}
 
 	// Store an inline script
-	if (tag == "script" && data.size() > 0) {
-		parser->GetDocumentHeader()->scripts[0].path = data;
+	if (tag == "script" && data.size() > 0)
+		parser->GetDocumentHeader()->scripts.push_back(MakeInlineResource(parser, data));
+
+		// FIXME
+		//parser->GetDocumentHeader()->scripts[0].path = data;
 		//parser->GetDocumentHeader()->scripts_inline.push_back(data);
-	}
+
 	// Store an inline style
-	if (tag == "style" && data.size() > 0){
+	if (tag == "style" && data.size() > 0)
+		parser->GetDocumentHeader()->rcss.push_back(MakeInlineResource(parser, data));
+
 		// FIXME
 		//parser->GetDocumentHeader()->rcss_inline.push_back(data);
-		parser->GetDocumentHeader()->rcss[0].path = data;
+		//parser->GetDocumentHeader()->rcss[0].path = data;
 		//parser->GetDocumentHeader()->rcss_inline_line_numbers.push_back(parser->GetLineNumberOpenTag());
-		parser->GetDocumentHeader()->rcss[0].path = parser->GetLineNumberOpenTag();
-	}
+		//parser->GetDocumentHeader()->rcss[0].path = parser->GetLineNumberOpenTag();
 
 	return true;
 }

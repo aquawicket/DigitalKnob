@@ -135,7 +135,7 @@ bool DKRml::LoadFonts(){
 		if(same(extension,".otf") || same(extension,".ttf")){
 			DKString file;
 			DKFile::GetFileName(files[i],file);
-			LoadFont(file);
+			LoadFont(DKFile::local_assets+file);
 		}
 	}
 	return true;
@@ -144,7 +144,9 @@ bool DKRml::LoadFonts(){
 bool DKRml::LoadHtml(const DKString& html){
 	//// Prepair the html document for rocket
 	DKString rml = html;
-	rml = "<rml id=\"rml\">\n" + rml + "</rml>";
+	if(!has(html, "<rml")){
+		rml = "<rml id=\"rml\">\n" + rml + "</rml>";
+	}
 	//dkHtmlToRml.TidyFile(rml,rml);
 	replace(rml, "<!DOCTYPE html>", ""); //Rml doesn't like <!DOCTYPE html> tags
 	replace(rml, "<meta name=\"generator\" content=", "");
