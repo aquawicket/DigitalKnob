@@ -66,6 +66,7 @@ public:
 		functions[name] = std::bind(func, _this, std::placeholders::_1, std::placeholders::_2);
 		if(!functions[name])
 			return DKERROR("RegisterFunc(" + name + "): failed to register function \n");
+		return true;
 	}
 
 	static bool UnregisterFunc(const DKString& name){

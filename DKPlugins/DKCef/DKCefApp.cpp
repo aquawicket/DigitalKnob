@@ -173,7 +173,7 @@ bool DKCefV8Handler::Execute(const CefString& name, CefRefPtr<CefV8Value> object
 			}
 			if(arguments[i]->IsInt()){
 				args->SetInt(i, arguments[i]->GetIntValue());
-				text += toString(args->GetInt(i));
+				text += std::to_string(args->GetInt(i));
 			}
 			if(arguments[i]->IsBool()){
 				args->SetBool(i, arguments[i]->GetBoolValue());
@@ -201,7 +201,7 @@ bool DKCefV8Handler::Execute(const CefString& name, CefRefPtr<CefV8Value> object
 		}
 		else if(rval->GetType(0) == VTYPE_INT){
 			retval = CefV8Value::CreateInt(rval->GetInt(0));
-			//DKINFO("retval = "+toString(retval->GetIntValue())+"\n");
+			//DKINFO("retval = "+std::to_string(retval->GetIntValue())+"\n");
 		}
 		else if(rval->GetType(0) == VTYPE_BOOL){
 			retval = CefV8Value::CreateBool(rval->GetBool(0));
@@ -349,9 +349,9 @@ bool DKCefApp::OnProcessMessageReceived(CefRefPtr<CefBrowser> browser, CefProces
 		if(args->GetType(i) == VTYPE_BOOL)
 			str += toString(args->GetBool(i));
 		if(args->GetType(i) == VTYPE_INT)
-			str += toString(args->GetInt(i));
+			str += std::to_string(args->GetInt(i));
 		if(args->GetType(i) == VTYPE_DOUBLE)
-			str += toString(args->GetDouble(i));
+			str += std::to_string(args->GetDouble(i));
 		if(args->GetType(i) == VTYPE_STRING)
 			str += args->GetString(i).ToString();
 		if(args->GetType(i) == VTYPE_BINARY)

@@ -121,22 +121,22 @@ public:
 		CEF_REQUIRE_UI_THREAD();
 		DKString msg = message.ToString();
 		replace(msg, "%c", "");
-		//DKINFO("DKSDLCefHandler::OnConsoleMessage("+msg+","+source.ToString()+","+toString(line)+")\n");
+		//DKINFO("DKSDLCefHandler::OnConsoleMessage("+msg+","+source.ToString()+","+std::to_string(line)+")\n");
 		DKString string = message.ToString();
 		replace(string,"%c","");
 		int identifier = browser->GetIdentifier();
 		if(level == LOGSEVERITY_VERBOSE)
-			DKDEBUG("[CEF:"+toString(identifier)+"] "+string+"\n"); 
+			DKDEBUG("[CEF:"+std::to_string(identifier)+"] "+string+"\n"); 
 		if(level == LOGSEVERITY_DEBUG)
-			DKDEBUG("[CEF:"+toString(identifier)+"] "+string+"\n");
+			DKDEBUG("[CEF:"+std::to_string(identifier)+"] "+string+"\n");
 		if(level == LOGSEVERITY_DEFAULT)
-			DKINFO("[CEF:"+toString(identifier)+"] "+string+"\n"); 
+			DKINFO("[CEF:"+std::to_string(identifier)+"] "+string+"\n"); 
 		if(level == LOGSEVERITY_INFO)
-			DKINFO("[CEF:"+toString(identifier)+"] "+string+"\n"); 
+			DKINFO("[CEF:"+std::to_string(identifier)+"] "+string+"\n"); 
 		if(level == LOGSEVERITY_WARNING)
-			DKWARN("[CEF:"+toString(identifier)+"] "+string+"\n");
+			DKWARN("[CEF:"+std::to_string(identifier)+"] "+string+"\n");
 		if(level == LOGSEVERITY_ERROR)
-			DKWARN("[CEF:"+toString(identifier)+"] "+string+"\n");  //NOTE: Not DKERROR: We don't need javascript to throw C++ exceptions
+			DKWARN("[CEF:"+std::to_string(identifier)+"] "+string+"\n");  //NOTE: Not DKERROR: We don't need javascript to throw C++ exceptions
 		if(level == LOGSEVERITY_DISABLE)
 			return true; 
 		return true;
@@ -218,7 +218,7 @@ public:
 	void OnLoadEnd(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, int httpStatusCode){
 		DKDEBUGFUNC(browser, frame, httpStatusCode);
 		if(frame->IsMain())
-			DKEvents::SendEvent("window", "DKCef_OnLoadEnd", toString(httpStatusCode));
+			DKEvents::SendEvent("window", "DKCef_OnLoadEnd", std::to_string(httpStatusCode));
 	}
 
 	void OnLoadError(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefLoadHandler::ErrorCode errorCode, const CefString& errorText, const CefString& failedUrl){ 
@@ -229,7 +229,7 @@ public:
 	void OnLoadingStateChange(CefRefPtr<CefBrowser> browser, bool isLoading, bool canGoBack, bool canGoForward){
 		DKDEBUGFUNC(browser, isLoading, canGoBack, canGoForward);
 		CEF_REQUIRE_UI_THREAD();
-		DKEvents::SendEvent("window", "DKCef_OnLoadingStateChange", toString(browser->GetIdentifier()));
+		DKEvents::SendEvent("window", "DKCef_OnLoadingStateChange", std::to_string(browser->GetIdentifier()));
 	}
 
 	void OnPaint(CefRefPtr<CefBrowser> browser, PaintElementType type, const RectList& dirtyRects, const void *buffer, int width, int height){
@@ -251,13 +251,13 @@ public:
 		DKDEBUGFUNC(browser, "const CefKeyEvent&", os_event, is_keyboard_shortcut);
 		CEF_REQUIRE_UI_THREAD();
 		if(event.type == KEYEVENT_RAWKEYDOWN)
-			DKEvents::SendEvent("window", "keydown", toString(event.windows_key_code)); //DKKeyboardEvent event = new DKEvents();
+			DKEvents::SendEvent("window", "keydown", std::to_string(event.windows_key_code)); //DKKeyboardEvent event = new DKEvents();
 		if(event.type == KEYEVENT_KEYDOWN)
-			DKINFO("OnPreKeyEvent(): KeyDown: "+toString(event.character)+"\n");
+			DKINFO("OnPreKeyEvent(): KeyDown: "+std::to_string(event.character)+"\n");
 		if(event.type == KEYEVENT_KEYUP)
-			//DKINFO("OnPreKeyEvent(): KeyUp: "+toString(event.character)+"\n");
+			//DKINFO("OnPreKeyEvent(): KeyUp: "+std::to_string(event.character)+"\n");
 		if(event.type == KEYEVENT_CHAR)
-			DKEvents::SendEvent("window", "keypress", toString(event.character));
+			DKEvents::SendEvent("window", "keypress", std::to_string(event.character));
 		return false;
 	}
 

@@ -94,7 +94,7 @@ DKString toString(const char* _charptr){
 	return _charptr; //FIXME: shouldn't this be DKString(_charptr)
 }
 
-DKString toString(unsigned char* _uchar) {
+DKString toString(const unsigned char* _uchar) {
 	return reinterpret_cast<char const*>(_uchar);
 }
 
@@ -104,7 +104,7 @@ DKString toString(void* _voidptr){
 	return string;
 }
 
-DKString toString(bool _bool){
+DKString toString(const bool _bool){
 	if(_bool)
 		return "true";
 	return "false";

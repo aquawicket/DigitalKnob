@@ -48,8 +48,7 @@ DKString& trim(DKString& str, const char* t = " \t\n\r\f\v");
 DKString toString(const bool _bool);
 DKString toString(const char* _charptr);
 DKString toString(const unsigned char* _uchar);
-DKString toString(const void* _voidptr);
-
+DKString toString(void* _voidptr);
 
 DKString toString(const int& _int);
 DKString toString(const long& _long);
@@ -58,7 +57,6 @@ DKString toString(const double& _double);
 DKString toString(const unsigned int& _uint);
 DKString toString(const unsigned long int& _ulongint);
 DKString toString(const unsigned long long int& _ulonglongint);
-
 
 DKString toString(const std::wstring& _wstring);
 DKString toString(const DKStringArray& arry, const char* seperator);

@@ -111,7 +111,7 @@ bool DKCefV8::TestFunction(CefArgs args, CefReturn retval)
 	int num = args->GetInt(0);
 	bool yn = args->GetBool(1);
 	DKString text = args->GetString(2);
-	DKINFO("DKCefV8::TestFunction("+toString(num)+","+toString(yn)+","+text+")\n");
+	DKINFO("DKCefV8::TestFunction("+std::to_string(num)+","+toString(yn)+","+text+")\n");
 	DKString result = "test string";
 	if(!retval->SetString(0, result)){ return false; }
 	return true;
@@ -329,7 +329,7 @@ bool DKCefV8::GetPixelUnderMouse(CefArgs args, CefReturn retval)
 	int g;
 	int b;
 	if (!DKUtil::GetPixelFromScreen(mouseX, mouseY, r, g, b)) { return false; }
-	DKString rgb = toString(r) + "," + toString(g) + "," + toString(b);
+	DKString rgb = std::to_string(r) + "," + std::to_string(g) + "," + std::to_string(b);
 	if(!retval->SetString(0, rgb)){ return false; }
 	return true;
 }
@@ -370,7 +370,7 @@ bool DKCefV8::GetVolume(CefArgs args, CefReturn retval)
 	DKDEBUGFUNC(args, retval);
 	int percent;
 	if(!DKUtil::GetVolume(percent)){ return false; }
-	DKINFO("DKCefV8::GetVolume(): volume ="+toString(percent)+"\n");
+	DKINFO("DKCefV8::GetVolume(): volume ="+std::to_string(percent)+"\n");
 	if(!retval->SetInt(0, percent)){ return false; }
 	return 1;
 }
@@ -540,7 +540,7 @@ bool DKCefV8::SetVolume(CefArgs args, CefReturn retval)
 {
 	DKDEBUGFUNC(args, retval);
 	int percent = args->GetInt(0);
-	DKINFO("DKCefV8::SetVolume(): volume ="+toString(percent)+"\n");
+	DKINFO("DKCefV8::SetVolume(): volume ="+std::to_string(percent)+"\n");
 	if(!DKUtil::SetVolume(percent)){ return false; }
 	return 1;
 }
