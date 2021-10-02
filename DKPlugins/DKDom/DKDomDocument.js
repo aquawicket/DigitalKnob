@@ -119,7 +119,7 @@ var Document = function(pointer)
         var address = CPP_DKDomDocument_getElementById(id)
         if (!address)
             return undefined;
-        var element = HTMLElement(address)
+        var element = new HTMLElement(address)
 		if(element.tag === "img")
 			return new HTMLImageElement(address)
 		if(element.tag === "script")

@@ -4,6 +4,7 @@
 var HTMLElement = function(pointer) {
     // Properties
     Object.defineProperty(this, "accessKey", {
+		configurable: true,
         get: function() {
             return CPP_DKDomHTMLElement_accessKey(pointer);
         }
