@@ -332,14 +332,14 @@ int DKDomNode::appendChild(duk_context* ctx){
 	//post process if it's a <link>
 	if(same("link", child->GetTagName())){
 		if(child->HasAttribute("href")){
-			DKRml::Get()->dkHtmlToRml.PostProcess(child);
+			DKRml::Get()->dkRmlConverter.PostProcess(child);
 		}	
 	}
 
 	//post process if it's a <script>
 	if (same("script", child->GetTagName())) {
 		if(child->HasAttribute("src")) {
-			DKRml::Get()->dkHtmlToRml.PostProcess(child);
+			DKRml::Get()->dkRmlConverter.PostProcess(child);
 		}
 	}
 
@@ -461,13 +461,13 @@ int DKDomNode::insertBefore(duk_context* ctx)
 	//post process if it's a <link>
 	if(same("link", child->GetTagName())){
 		if(child->HasAttribute("href"))
-			DKRml::Get()->dkHtmlToRml.PostProcess(child);
+			DKRml::Get()->dkRmlConverter.PostProcess(child);
 	}
 
 	//post process if it's a <script>
 	if (same("script", child->GetTagName())) {
 		if(child->HasAttribute("src"))
-			DKRml::Get()->dkHtmlToRml.PostProcess(child);
+			DKRml::Get()->dkRmlConverter.PostProcess(child);
 	}
 
 	return true;
@@ -588,13 +588,13 @@ int DKDomNode::replaceChild(duk_context* ctx)
 	//post process if it's a <link>
 	if(same("link", oldChild->GetTagName())){
 		if(oldChild->HasAttribute("href"))
-			DKRml::Get()->dkHtmlToRml.PostProcess(oldChild);
+			DKRml::Get()->dkRmlConverter.PostProcess(oldChild);
 	}
 
 	//post process if it's a <script>
 	if (same("script", oldChild->GetTagName())) {
 		if(oldChild->HasAttribute("src"))
-			DKRml::Get()->dkHtmlToRml.PostProcess(oldChild);
+			DKRml::Get()->dkRmlConverter.PostProcess(oldChild);
 	}
 
 	return true;
