@@ -106,14 +106,27 @@ var Document = function(pointer)
     Document.prototype.createElement = function(tag) {
         var address = CPP_DKDomDocument_createElement(tag)
         if (!address)
-            return;
+            return undefined;
+		if (tag == "img")
+			return new HTMLImageElement(address)
+		if (tag == "script")
+			return new HTMLScriptElement(address)
+		if (tag == "span")
+			return new HTMLSpanElement(address)
         return new HTMLElement(address)
     }
     Document.prototype.getElementById = function(id) {
         var address = CPP_DKDomDocument_getElementById(id)
         if (!address)
-            return;
-        return new HTMLElement(address)
+            return undefined;
+        var element = HTMLElement(address)
+		if(element.tag === "img")
+			return new HTMLImageElement(address)
+		if(element.tag === "script")
+			return new HTMLScriptElement(address)
+		if(element.tag == "span")
+			return new HTMLSpanElement(address)
+		return new HTMLElement(address)
     }
     Document.prototype.getElementsByTagName = function(tag) {
         var addresses = CPP_DKDomDocument_getElementsByTagName(tag)

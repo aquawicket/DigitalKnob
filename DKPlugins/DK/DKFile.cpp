@@ -17,11 +17,11 @@ DKString DKFile::online_assets; //EXAMPLE:  http://aquawicket.github.io/DigitalK
 
 bool DKFile::DebugPath(const DKString& path){
 	if(has(path, "\\")){
-		DKWARN("DKFile::DebugPath("+path+"): Found obscurities in the path. Please debug to find the out where is starts for this path.\n");
+		DKWARN("DKFile::DebugPath("+path+"): Found obscurities in the path. Please debug to find the out where is starts for this path \n");
 		return false;
 	}
 	if(has(path, "//") && !has(path, "://")){
-		DKWARN("DKFile::DebugPath("+path+"): Found obscurities in the path. Please debug to find out where it starts for this path.\n");
+		DKWARN("DKFile::DebugPath("+path+"): Found obscurities in the path. Please debug to find out where it starts for this path \n");
 		return false;
 	}
 	return true;
@@ -61,7 +61,7 @@ bool DKFile::ChDir(const DKString& dir){
 	DKDEBUGFUNC(dir);
 	DebugPath(dir);
 	if(!PathExists(dir))
-		return DKERROR("dir does not exist");
+		return DKERROR("dir does not exist \n");
 	fs::current_path(dir);
 	return true;
 }
@@ -71,19 +71,19 @@ bool DKFile::Copy(const DKString& src, const DKString& dst, const bool overwrite
 	DebugPath(src);
 	DebugPath(dst);
 	if(!PathExists(src))
-		return DKERROR("("+src+","+dst+","+toString(overwrite)+","+toString(recursive)+"): The src path does not exits\n");
+		return DKERROR("("+src+","+dst+","+toString(overwrite)+","+toString(recursive)+"): The src path does not exits \n");
 	if(fs::is_directory(src)) {
 		if(!CopyDirectory(src, dst, overwrite, recursive))
-			return DKERROR("("+src+","+dst+","+toString(overwrite)+","+toString(recursive)+"): failed\n");
+			return DKERROR("("+src+","+dst+","+toString(overwrite)+","+toString(recursive)+"): failed \n");
 	}
 	else{
 		if(PathExists(dst) && overwrite == false){
-			DKWARN("DKFile::Copy("+src+","+dst+","+toString(overwrite)+","+toString(recursive)+"): destination already exists. \n");
+			DKWARN("DKFile::Copy("+src+","+dst+","+toString(overwrite)+","+toString(recursive)+"): destination already exists \n");
 			return false;
 		}
 	    fs::copy_file(src, dst, fs::copy_options::overwrite_existing);
 	}
-	DKINFO("Copied to "+dst+"\n");
+	DKINFO("Copied to "+dst+" \n");
 	return true;
 }
 
@@ -94,15 +94,15 @@ bool DKFile::CopyDirectory(fs::path const& source, fs::path const& destination, 
 	try{
 		// Check whether the function call is valid
 		if(!fs::exists(source) || !fs::is_directory(source))
-			return DKERROR("Source directory "+source.string()+" does not exist or is not a directory.\n");
+			return DKERROR("Source directory "+source.string()+" does not exist or is not a directory \n");
 		if(!fs::exists(destination)){ 
 			// Create the destination directory
 			if(!fs::create_directories(destination))
-				return DKERROR("Unable to create destination directory "+destination.string()+"\n");
+				return DKERROR("Unable to create destination directory "+destination.string()+" \n");
 		}
 	}
 	catch(fs::filesystem_error const & e){
-		return DKERROR(toString(e.what())+"\n");
+		return DKERROR(toString(e.what())+" \n");
 	}
 	// Iterate through the source directory
 	for(fs::directory_iterator file(source); file != fs::directory_iterator(); ++file){
@@ -111,7 +111,7 @@ bool DKFile::CopyDirectory(fs::path const& source, fs::path const& destination, 
 			if(fs::is_directory(current) && recursive){
 				// Found directory: Recursion
 				if(!CopyDirectory(current, destination / current.filename(), overwrite, recursive))
-					return DKERROR("DKFile::CopyDirectory() failed;");
+					return DKERROR("DKFile::CopyDirectory() failed \n");
 			}
 			else{
 				// Found file: Copy
@@ -136,9 +136,9 @@ bool DKFile::CopyFolder(const DKString& src, const DKString& dst, const bool ove
 	DebugPath(src);
 	DebugPath(dst);
 	if(!PathExists(src))
-		return DKERROR("src is invalid\n");
+		return DKERROR("src is invalid \n");
 	if(!CopyDirectory(src,dst,overwrite,recursive))
-		return DKERROR("DKFile::CopyDirectory() failed\n");
+		return DKERROR("DKFile::CopyDirectory() failed \n");
 	return true;
 }
 
@@ -146,7 +146,7 @@ bool DKFile::CreateFile(const DKString& path){
 	DKDEBUGFUNC(path);
 	DebugPath(path);
 	if(PathExists(path))
-		return DKERROR("path:("+path+") already exists\n");
+		return DKERROR("path:("+path+") already exists \n");
 	std::ofstream outputFile(path.c_str()); //TODO: return value on success/fail
 	return true;
 }
@@ -155,14 +155,14 @@ bool DKFile::Delete(const DKString& path){
 	DKDEBUGFUNC(path);
 	DebugPath(path);
 	if(!PathExists(path))
-		return DKERROR("path:("+path+") does not exist\n");
+		return DKERROR("path:("+path+") does not exist \n");
 	if(DKFile::IsDirectory(path))
 		DKFile::RemoveDirectory(path); //first delete all contents
 	else{
 		if(remove(path.c_str()) != 0)
-			return DKERROR("remove("+path+") failed\n");
+			return DKERROR("remove("+path+") failed \n");
 	}
-	DKWARN("Deleted path "+path+"\n");
+	DKWARN("Deleted path "+path+" \n");
 	return true;
 }
 
@@ -170,9 +170,9 @@ bool DKFile::FileToString(const DKString& file, DKString& string){
 	DKDEBUGFUNC(file, string);
 	DebugPath(file);
 	if(!PathExists(file))
-		return DKERROR("file:("+file+") path does not exist\n");
+		return DKERROR("file:("+file+") path does not exist \n");
 	if(IsDirectory(file))
-		return DKERROR("file:("+file+") path is a directory\n");
+		return DKERROR("file:("+file+") path is a directory \n");
 	//TODO: error control
 	std::ifstream t(file.c_str());
 	std::string str((std::istreambuf_iterator<char>(t)), std::istreambuf_iterator<char>());
@@ -187,21 +187,21 @@ bool DKFile::FindFile(DKString& filename, const DKString& path, const DKString& 
 	if(!PathExists(path)){ return false; }
 	DKStringArray files;
 	if(!GetDirectoryContents(path, files))
-		return DKERROR("GetDirectoryContents("+path+") failed\n");
+		return DKERROR("GetDirectoryContents("+path+") failed \n");
 	for(unsigned int i=0; i<files.size(); ++i){
 		if(has(files[i],extension)){
 			filename = files[i];
 			return true;
 		}
 	}
-	return DKERROR("Could not find "+filename+extension+" file\n");
+	return DKERROR("Could not find "+filename+extension+" file \n");
 }
 
 bool DKFile::GetAbsolutePath(const DKString& in, DKString& out){
 	DKDEBUGFUNC(in, out);
 	//GetAbsolutePath is allowed to recieve obscure paths, it will return normalized paths.
 	if(!PathExists(in))
-		return DKERROR("("+in+"): Path does not exits\n");
+		return DKERROR("("+in+"): Path does not exits \n");
 #ifdef WIN32
 	char *fileExt;
 	char resolved_path[256];
@@ -214,7 +214,7 @@ bool DKFile::GetAbsolutePath(const DKString& in, DKString& out){
 	out = actualpath;
 	if(in.back() == '/' && out.back() != '/')
 		out += '/'; //Keep the trailing / for folder paths
-	DKINFO("DKFile::GetAbsolutePath():  realpath_in: "+in+"realpath_out:"+out+"\n");
+	DKINFO("DKFile::GetAbsolutePath():  realpath_in: "+in+"realpath_out:"+out+" \n");
 #endif
 	DebugPath(out);
 	return true;
@@ -260,7 +260,7 @@ bool DKFile::GetDirectoryContents(const DKString& path, DKStringArray& strings){
 	DKDEBUGFUNC(path);
 	DebugPath(path);
 	if(!PathExists(path))
-		return DKERROR("path does not exist");
+		return DKERROR("path does not exist \n");
 	fs::directory_iterator end_itr;
 	for (fs::directory_iterator itr(path); itr != end_itr; ++itr) {
 		DKString itrPath = itr->path().string();
@@ -288,7 +288,7 @@ bool DKFile::GetDrives(DKStringArray& strings){
 	TCHAR szDrive[] = " A:";
 	DWORD drives = GetLogicalDrives();
 	if(drives == 0)
-		return DKERROR("GetLogicalDrives() failed. \n");
+		return DKERROR("GetLogicalDrives() failed \n");
 	for (int i=0; i<26; i++){
 		if((drives & (1 << i ))){
 			TCHAR driveName[] = { static_cast<TCHAR>(TEXT('A') + i), TEXT(':'), TEXT('\0') };
@@ -297,7 +297,7 @@ bool DKFile::GetDrives(DKStringArray& strings){
 	}
 	return true;
 #endif //(WIN32)
-	return DKERROR("not implemented on this OS. \n");
+	return DKERROR("not implemented on this OS \n");
 }
 
 bool DKFile::GetExeName(DKString& exename){
@@ -310,14 +310,14 @@ bool DKFile::GetExeName(DKString& exename){
 		DebugPath(exename);
 		return true;
 	}
-	return DKERROR("exename invalid");
+	return DKERROR("exename invalid \n");
 }
 
 bool DKFile::GetExePath(DKString& exepath){
 	//DKFile::exe_path should hold the full file path of this executable from argv[0];
 	//If is doesn't, we should fill that now and figure out why it didn't get assigned.
 	if (!DKFile::PathExists(DKFile::exe_path)) {
-		DKWARN("GetExePath(): DKFile::exe_path is invalid. It should have been set by argv[0] at app start\n");
+		DKWARN("GetExePath(): DKFile::exe_path is invalid. It should have been set by argv[0] at app start \n");
 		DKClass::DKCreate("DKDebug");
 		DKClass::CallFunc("DKDebug::ShowStackTrace");
 #ifdef WIN32
@@ -327,7 +327,7 @@ bool DKFile::GetExePath(DKString& exepath){
 		NormalizePath(exe_path); //Windows returns paths with a \\ seperator.
 #else
 		//FIXME: We need this coded in for other platforms
-		return DKERROR("is not implemented on this platform.");
+		return DKERROR("is not implemented on this platform \n");
 #endif
 	}
 	exepath = DKFile::exe_path;
@@ -339,7 +339,7 @@ bool DKFile::GetExtention(const DKString& file, DKString& extension){
 	DKDEBUGFUNC(file, extension);
 	DebugPath(file);
 	if(!has(file,".")){
-		DKWARN("file ("+file+") has no extension\n");
+		DKWARN("file ("+file+") has no extension \n");
 		return true;
 	}
 	unsigned found = file.find_last_of(".");
@@ -355,9 +355,9 @@ bool DKFile::GetFileName(const DKString& path, DKString& filename){
 		filename = path.substr(found+1);
 		return true;
 	}
-	DKWARN("/ not found in path ("+path+")\n");
+	DKWARN("/ not found in path ("+path+") \n");
 	filename = path;
-	DKWARN("returning this path as the filename("+filename+")\n");
+	DKWARN("returning this path as the filename("+filename+") \n");
 	return true;
 }
 
@@ -399,7 +399,7 @@ bool DKFile::GetLocalCreationDate(const DKString& path, DKString& filedate){
 	filedate = year + month + day + hour + minute + second;
 	return true;
 #endif
-	return DKERROR("not implemented for this OS. \n");
+	return DKERROR("not implemented for this OS \n");
 }
 
 bool DKFile::GetLocalModifiedDate(const DKString& path, DKString& filedate){
@@ -428,7 +428,7 @@ bool DKFile::GetLocalModifiedDate(const DKString& path, DKString& filedate){
 	filedate = year + month + day + hour + minute + second;
 	return true;
 #endif
-	return DKERROR("is not implemented for this OS. \n");
+	return DKERROR("is not implemented for this OS \n");
 }
 
 bool DKFile::GetModifiedTime(const DKString& path, DKString& time){
@@ -477,7 +477,7 @@ bool DKFile::GetModifiedTime(const DKString& path, DKString& time){
 		return DKERROR("localFiletime; invalid \n");
 	}
 	else{
-		return DKERROR("file not found");
+		return DKERROR("file not found \n");
 	}
 #else 
 #ifndef ANDROID
@@ -502,7 +502,7 @@ bool DKFile::GetModifiedTime(const DKString& path, DKString& time){
 	return true;
 #endif
 #endif
-	return DKERROR("not implemeneted on this OS.\n");
+	return DKERROR("not implemeneted on this OS \n");
 }
 
 bool DKFile::GetRelativePath(const DKString& file, const DKString& path, DKString& out){
@@ -510,7 +510,7 @@ bool DKFile::GetRelativePath(const DKString& file, const DKString& path, DKStrin
 	DebugPath(file);
 	DebugPath(path);
 	if(!PathExists(file))
-		return DKERROR("("+file+") path does not exist");
+		return DKERROR("("+file+") path does not exist \n");
 	DKString file2 = file;
 #ifdef WIN32
 	//replace(file2, "/", "\\");
@@ -519,7 +519,7 @@ bool DKFile::GetRelativePath(const DKString& file, const DKString& path, DKStrin
 #ifdef WIN32
 	//replace(path2, "/", "\\");
 #endif
-	DKINFO("DKFile::GetRelativePath("+file2+","+path2+",DKString&)\n");
+	DKINFO("DKFile::GetRelativePath("+file2+","+path2+",DKString&) \n");
 	int MAX_FILENAME_LEN = 512;
 //#ifdef WIN32
 //	int ABSOLUTE_NAME_START = 3;
@@ -542,7 +542,7 @@ bool DKFile::GetRelativePath(const DKString& file, const DKString& path, DKStrin
 	if(cdLen > MAX_FILENAME_LEN || cdLen < ABSOLUTE_NAME_START+1 || afLen > MAX_FILENAME_LEN || afLen < ABSOLUTE_NAME_START+1){
 		out.clear();
 		DebugPath(out);
-		return DKERROR("cdLen > MAX_FILENAME_LEN || cdLen < ABSOLUTE_NAME_START+1 || afLen > MAX_FILENAME_LEN || afLen < ABSOLUTE_NAME_START+1");
+		return DKERROR("cdLen > MAX_FILENAME_LEN || cdLen < ABSOLUTE_NAME_START+1 || afLen > MAX_FILENAME_LEN || afLen < ABSOLUTE_NAME_START+1 \n");
 	}
 	// Handle DOS names that are on different drives:
 	if(currentDirectory[0] != absoluteFilename[0]){
@@ -602,7 +602,7 @@ bool DKFile::GetRelativePath(const DKString& file, const DKString& path, DKStrin
 	// check that the result will not be too long
 	if(levels * 3 + afLen - afMarker > MAX_FILENAME_LEN){
 		DebugPath(out);
-		return DKERROR("result > MAX_FILENAME_LEN: result too long");
+		return DKERROR("result > MAX_FILENAME_LEN: result too long \n");
 	}
 	// add the appropriate number of "..\"s.
 	rfMarker = 0;
@@ -627,7 +627,7 @@ bool DKFile::GetSetting(const DKString& file, const DKString& setting, DKString&
 	DKString path = file;
 	replace(path, "file:///", "");
 	if(!PathExists(path)){
-		DKWARN("DKFile::GetSetting("+path+","+setting+",DKString&): path does not exist\n");
+		DKWARN("DKFile::GetSetting("+path+","+setting+",DKString&): path does not exist \n");
 		return false; 
 	}
 	DKString filestring;
@@ -657,17 +657,17 @@ bool DKFile::GetShortName(const DKString& file, DKString& shortname){
 	DKDEBUGFUNC(file, shortname);
 	DebugPath(file);
 	if(!PathExists(file))
-		return DKERROR("("+file+") path does not exist");
+		return DKERROR("("+file+") path does not exist \n");
 #ifdef WIN32
 	long length = 0;
 	TCHAR* buffer = NULL;
 	length = GetShortPathName(file.c_str(), NULL, 0);
 	if(length < 1)
-		return DKERROR("length < 1\n");
+		return DKERROR("length < 1 \n");
 	buffer = new TCHAR[length];
 	length = GetShortPathName(file.c_str(), buffer, length);
 	if(length < 1)
-		return DKERROR("length < 1\n");
+		return DKERROR("length < 1 \n");
 	DKString temp = buffer; 
 	delete [] buffer;
 	shortname = temp;
@@ -682,7 +682,7 @@ bool DKFile::IsDirectory(const DKString& file){
 	DKDEBUGFUNC(file);
 	DebugPath(file);
 	if(!PathExists(file))
-		return DKERROR("("+file+") path does not exist");
+		return DKERROR("("+file+") path does not exist \n");
 	struct stat s;
 	if(stat(file.c_str(),&s) == 0){
 		if( s.st_mode & S_IFDIR )
@@ -701,7 +701,7 @@ bool DKFile::MakeDir(const DKString& dir){
 	DKString path = dir;
 	DKFile::NormalizePath(path);
 	if(path.empty())
-		return DKERROR("path is empty");
+		return DKERROR("path is empty \n");
 	if(PathExists(path))
 		return true;
 	if (!fs::create_directories(path)) {
@@ -717,7 +717,7 @@ bool DKFile::PathExists(const DKString& path){
 	DebugPath(path);
 	if(fs::exists(path)) 
 		return true;
-	//DKWARN("DKFile::PathExists("+path+"): Path does not exist\n");
+	//DKWARN("DKFile::PathExists("+path+"): Path does not exist \n");
 	return false;
 }
 
@@ -726,7 +726,7 @@ bool DKFile::RemoveDirectory(const DKString& path){
 	DebugPath(path);
 	if(!PathExists(path)){ return false; }
 	if (!fs::remove_all(path.c_str())) //FIXME: This can crash if a file is in use. 
-		return DKERROR("fs::remove_all("+path+") failed\n");
+		return DKERROR("fs::remove_all("+path+") failed \n");
 	return true;
 }
 
@@ -744,19 +744,19 @@ bool DKFile::Rename(const DKString& input, const DKString& output, const bool ov
 	DebugPath(output);
 	if(same(input, output)){ return true; }
 	if(!PathExists(input))
-		return DKWARN("Path does not exist\n");
+		return DKWARN("Path does not exist \n");
 	if(PathExists(output)){
 		if(overwrite == false){
-			return DKWARN("DKFile::Rename("+input+","+output+","+toString(overwrite)+") failed! Path already exists\n");
+			return DKWARN("DKFile::Rename("+input+","+output+","+toString(overwrite)+") failed! Path already exists \n");
 		}
 		else{
 			if(!DKFile::Delete(output))
-				return DKERROR("Could not delete "+output+"\n");
+				return DKERROR("Could not delete "+output+" \n");
 		}
 	}
 	if(rename(input.c_str(), output.c_str()) != 0)
-		return DKERROR("failed to rename "+input+"\n");
-	DKINFO("Renamed "+input+" to-> "+output+"\n");
+		return DKERROR("failed to rename "+input+" \n");
+	DKINFO("Renamed "+input+" to-> "+output+" \n");
 	return true;
 }
 
@@ -818,7 +818,7 @@ bool DKFile::StringToFile(const DKString& string, const DKString& file){
 		fs::path path(folder);
 		if(!(fs::exists(path))) {
 			if (!fs::create_directories(path))
-				return DKERROR("could not create path\n");
+				return DKERROR("could not create path \n");
 		}
 	}
 	std::ofstream t(file.c_str());
@@ -838,5 +838,5 @@ bool DKFile::VerifyPath(DKString& path){
 		path = DKFile::local_assets+path;
 		return true;
 	}
-	return DKERROR("Could not find path\n");
+	return DKERROR("Could not find path \n");
 }
