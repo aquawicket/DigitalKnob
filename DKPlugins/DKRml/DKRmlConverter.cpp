@@ -1,17 +1,34 @@
-#include "DKHtmlToRml.h"
+#include "DKRmlConverter.h"
 #include "DK/DKLog.h"
-#include "DKDuktape/DKDuktape.h"
-#include "DKXml/DKXml.h"
 #include "DKCurl/DKCurl.h"
+#include "DKDuktape/DKDuktape.h"
 #include "DKRml/DKRml.h"
+#include "DKXml/DKXml.h"
 #include "tidy.h"
 #include "tidybuffio.h"
 
-bool DKHtmlToRml::HtmlToRml(const DKString& html, DKString& rml){
+
+bool DKRmlConverter::HtmlToRml(const DKString& html, DKString& rml){
 	DKDEBUGFUNC(html, rml);
-	
+	stored_html = html;
+#ifdef DEBUG
+	DKINFO("\n########## .html ---> HtmlToRml ############\n");
+	DKINFO(rml);
+	DKINFO("\n############################################\n");
+#endif
+
 	rml = html;
+	if(!has(html, "<rml")){
+		rml = "<rml id=\"rml\">\n" + rml + "</rml>";
+	}
 	
+	//dkHtmlToRml.TidyFile(rml,rml);
+	//replace(rml, "\"HTML Tidy for HTML5 for Windows version 5.7.28\" />", "");
+
+	replace(rml, "<!DOCTYPE html>", ""); //Rml doesn't like <!DOCTYPE html> tags
+	replace(rml, "<meta name=\"generator\" content=", "");
+	
+
 	/*
 	// :rgba(r,g,b,a)  <- convert a to 0-255
 	size_t end = 0;
@@ -56,15 +73,18 @@ bool DKHtmlToRml::HtmlToRml(const DKString& html, DKString& rml){
 		}
 	}
 	xml.SaveDocumentToString(rml);
-	//////////////////////////////////////////////////////
 	*/
-	//DKINFO("\n##################### RML ####################\n");
-	//DKINFO(rml+"\n");
-	//DKINFO("\n##############################################\n\n");
+
+	stored_rml = rml;
+#ifdef DEBUG
+	DKINFO("\n########## HtmlToRml ---> .rml ############\n");
+	DKINFO(rml);
+	DKINFO("\n###########################################\n");
+#endif
 	return true;
 }
 
-bool DKHtmlToRml::Hyperlink(DKEvents* event){
+bool DKRmlConverter::Hyperlink(DKEvents* event){
 	DKDEBUGFUNC(event);
 	DKString elementAddress = event->GetId();
 	DKRml* dkRml = DKRml::Get("");
@@ -77,21 +97,27 @@ bool DKHtmlToRml::Hyperlink(DKEvents* event){
 	return true;
 }
 
-bool DKHtmlToRml::IndexToRml(const DKString& html, DKString& rml){
+/*
+bool DKRmlConverter::IndexToRml(const DKString& html, DKString& rml){
 	DKDEBUGFUNC(html, rml);
 	rml = html;
 	TidyFile(rml, rml); //Tidy up the file (XHTML)
-	replace(rml, "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\"", "");
-	replace(rml, "    \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">", "");
-	replace(rml, "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\"", "");
-	replace(rml, "    \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">", "");
-	replace(rml,"<meta name=\"generator\" content=", "");
-	replace(rml,"\"HTML Tidy for HTML5 for Windows version 5.0.0\" />", "");
+
+	// moved to TidyFile()
+	//replace(rml, "<!DOCTYPE html>", ""); //Rml doesn't like <!DOCTYPE html> tags
+	//replace(rml, "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\"", "");
+	//replace(rml, "    \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">", "");
+	//replace(rml, "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\"", "");
+	//replace(rml, "    \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">", "");
+	//replace(rml,"<meta name=\"generator\" content=", "");
+	//replace(rml,"\"HTML Tidy for HTML5 for Windows version 5.0.0\" />", "");
+
 	rml = "<rml>\n"+rml+"</rml>";
-	replace(rml, "<!DOCTYPE html>", ""); //Rml doesn't like <!DOCTYPE html> tags
-	DKString rml_css = DKFile::local_assets+"DKRml/DKRml.css"; //add DKRml.css to the head tag
+	
 	replace(rml, "<head />", "<head></head>");
+	DKString rml_css = DKFile::local_assets+"DKRml/DKRml.css"; //add DKRml.css to the head tag
 	replace(rml, "<head>", "<head><link id=\"DKRml/DKRml.css\" type=\"text/css\" href=\""+rml_css+"\"></link>");
+
 	//replace quotes with apostrophes, pugixml will remove quotes inside nodes.
 	//FIXME: code like jSFunc('"+var_in_quotes+"') will NOT work. 
 	//Other Examples: alert("It's \"game\" time."); or alert('It\'s "game" time.');
@@ -101,31 +127,31 @@ bool DKHtmlToRml::IndexToRml(const DKString& html, DKString& rml){
 	//DKXml xml;
 	//if(!xml.LoadDocumentFromString(rml))
 	//	return false;
-	/*
-	if (!xml.FindNode("//body")) {
-		DKERROR("No body tag\n");
-		xml.PrependNode("//html", "body");
-		//todo, we need to move the rest of the content into the body node.
-	}
-	*/
-	/*
+	
+	//if (!xml.FindNode("//body")) {
+	//	DKERROR("No body tag\n");
+	//	xml.PrependNode("//html", "body");
+	//	//todo, we need to move the rest of the content into the body node.
+	//}
+	
 	//Add the base DKRml.css stylesheet
-	xml.PrependNode("//head","link");
-	xml.SetAttributes("//head/link[1]","rel","stylesheet");
-	xml.SetAttributes("//head/link[1]","type","text/css");
-	xml.SetAttributes("//head/link[1]","href","DKRml/DKRml.css");
-	*/
+	//xml.PrependNode("//head","link");
+	//xml.SetAttributes("//head/link[1]","rel","stylesheet");
+	//xml.SetAttributes("//head/link[1]","type","text/css");
+	//xml.SetAttributes("//head/link[1]","href","DKRml/DKRml.css");
+
 	//Rml cannot read nodes outside of the body, so add a html node we can work with.
 	//xml.PrependNode("//body", "html"); 
 	//xml.SaveDocumentToString(rml);
-	HtmlToRml(rml, rml);
+	//HtmlToRml(rml, rml);
 	return true;
 }
+*/
 
-bool DKHtmlToRml::PostProcess(Rml::Element* element) {
+bool DKRmlConverter::PostProcess(Rml::Element* element) {
 	DKDEBUGFUNC(element);
 	if(!element)
-		return DKERROR("DKHtmlToRml::PostProcess(): element invalid\n");
+		return DKERROR("element invalid\n");
 	//we actually want the parent if it has one
 	Rml::Element* doc = DKRml::Get()->document;
 	if(element != doc && element->GetParentNode())
@@ -148,9 +174,9 @@ bool DKHtmlToRml::PostProcess(Rml::Element* element) {
 			 return DKERROR("iframe has no source tag\n");
 		url = iframes[i]->GetAttribute("src")->Get<Rml::String>();
 		DKClass::DKCreate("DKCef");
-		//DKEvents::AddEvent(id, "resize", &DKHtmlToRml::ResizeIframe, this);
-		//DKEvents::AddEvent(id, "mouseover", &DKHtmlToRml::MouseOverIframe, this);
-		//DKEvents::AddEvent(id, "click", &DKHtmlToRml::ClickIframe, this);
+		//DKEvents::AddEvent(id, "resize", &DKRmlConverter::ResizeIframe, this);
+		//DKEvents::AddEvent(id, "mouseover", &DKRmlConverter::MouseOverIframe, this);
+		//DKEvents::AddEvent(id, "click", &DKRmlConverter::ClickIframe, this);
 		DKString tag = "img";
 		Rml::Element* doc = DKRml::Get()->document;
 		Rml::Element* cef_texture  = iframes[i]->AppendChild(DKRml::Get()->document->CreateElement(tag.c_str()), true);
@@ -178,7 +204,7 @@ bool DKHtmlToRml::PostProcess(Rml::Element* element) {
 			DKString id = aElements[i]->GetId();
 			aElements[i]->AddEventListener("click", DKRml::Get(), false);
 			DKString elementAddress = DKRml::elementToAddress(aElements[i]);
-			DKEvents::AddEvent(elementAddress, "click", &DKHtmlToRml::Hyperlink, this);
+			DKEvents::AddEvent(elementAddress, "click", &DKRmlConverter::Hyperlink, this);
 		}
 	}
 	// <audio> tags
@@ -262,19 +288,19 @@ bool DKHtmlToRml::PostProcess(Rml::Element* element) {
 	DKString code = doc->GetContext()->GetRootElement()->GetInnerRML();
 	int n = code.rfind("<html");
 	if(n < 0){
-		DKERROR("DKHtmlToRml::PostProcess(): html tag not found\n");
+		DKERROR("html tag not found\n");
 		return true;
 	}
 	code = code.substr(n);
 	replace(code, "<", "\n<");
-	DKINFO("########## Post DKHtmlToRml::PostProcess CODE ##########\n");
+	DKINFO("########## Post DKRmlConverter::PostProcess CODE ##########\n");
 	DKINFO(code+"\n");
 	DKINFO("##########################################################\n");
 #endif
 	return true;
 }
 
-bool DKHtmlToRml::ResizeIframe(DKEvents* event){
+bool DKRmlConverter::ResizeIframe(DKEvents* event){
 	DKDEBUGFUNC(event);
 	DKString id = event->GetId();
 	DKRml* dkRml = DKRml::Get();
@@ -289,7 +315,7 @@ bool DKHtmlToRml::ResizeIframe(DKEvents* event){
 	return true;
 }
 
-bool DKHtmlToRml::ClickIframe(DKEvents* event){
+bool DKRmlConverter::ClickIframe(DKEvents* event){
 	DKDEBUGFUNC(event);
 	DKString id = event->GetId();
 	DKRml* dkRml = DKRml::Get("");
@@ -304,7 +330,7 @@ bool DKHtmlToRml::ClickIframe(DKEvents* event){
 	return true;
 }
 
-bool DKHtmlToRml::MouseOverIframe(DKEvents* event){
+bool DKRmlConverter::MouseOverIframe(DKEvents* event){
 	DKDEBUGFUNC(event);
 	DKString id = event->GetId();
 	DKRml* dkRml = DKRml::Get("");
@@ -319,7 +345,7 @@ bool DKHtmlToRml::MouseOverIframe(DKEvents* event){
 	return true;
 }
 
-bool DKHtmlToRml::Encode(std::string& data){
+bool DKRmlConverter::Encode(std::string& data){
 	std::string buffer;
 	buffer.reserve(data.size());
 	for(size_t pos = 0; pos != data.size(); ++pos) {
@@ -343,7 +369,7 @@ bool DKHtmlToRml::Encode(std::string& data){
 	return true;
 }
 
-bool DKHtmlToRml::TidyFile(const DKString& in, DKString& out){
+bool DKRmlConverter::TidyFile(const DKString& in, DKString& out){
 	DKINFO("####### CODE GOING INTO TIDY ##########\n");
 	DKINFO(in+"\n");
 	DKINFO("#######################################\n");
@@ -380,11 +406,22 @@ bool DKHtmlToRml::TidyFile(const DKString& in, DKString& out){
 	tidyBufFree(&output);
 	tidyBufFree(&errbuf);
 	tidyRelease(tdoc);
-	return rc;
+
+	/*
+	replace(out, "<!DOCTYPE html>", ""); //Rml doesn't like <!DOCTYPE html> tags
+	replace(out, "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\"", "");
+	replace(out, "    \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">", "");
+	replace(out, "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\"", "");
+	replace(out, "    \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">", "");
+	replace(out,"<meta name=\"generator\" content=", "");
+	replace(out,"\"HTML Tidy for HTML5 for Windows version 5.0.0\" />", "");
+	*/
+
+	//return rc;
 	return true;
 }
 
-bool DKHtmlToRml::GetOuterHtml(Rml::Element* element, DKString& string){
+bool DKRmlConverter::GetOuterHtml(Rml::Element* element, DKString& string){
 	DKDEBUGFUNC(element, string);
 	/*
 	if (!element)

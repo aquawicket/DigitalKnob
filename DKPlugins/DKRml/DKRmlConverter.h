@@ -1,16 +1,15 @@
 #pragma once
-#ifndef DKHtmlToRml_H
-#define DKHtmlToRml_H
+#ifndef DKRmlConverter_H
+#define DKRmlConverter_H
 
 #include "DK/DK.h"
 #include <RmlUi/Core.h>
 
-class DKHtmlToRml  : public DKObject{
+class DKRmlConverter  : public DKObject{
 public:
-	DKString processed;
 	bool HtmlToRml(const DKString& html, DKString& rml);
 	bool Hyperlink(DKEvents* event);
-	bool IndexToRml(const DKString& html, DKString& rml);
+	//bool IndexToRml(const DKString& html, DKString& rml);
 	bool PostProcess(Rml::Element* element);
 	static bool ResizeIframe(DKEvents* event);
 	bool ClickIframe(DKEvents* event);
@@ -18,6 +17,10 @@ public:
 	bool Encode(std::string& data);
 	bool TidyFile(const DKString& in, DKString& out);
 	bool GetOuterHtml(Rml::Element* element, DKString& string);
+
+	DKString stored_html;
+	DKString stored_rml;
+	DKString processed;
 };
 
-#endif //DKHtmlToRml_H
+#endif //DKRmlConverter_H

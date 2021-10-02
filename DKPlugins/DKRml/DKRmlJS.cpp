@@ -43,6 +43,7 @@ int DKRmlJS::PostProcess(duk_context* ctx) {
 	if(!elements[0])
 		return DKERROR("body element invalid\n");
 	DKRml::Get()->dkHtmlToRml.PostProcess(elements[0]);
+	return true;
 }
 
 #endif //USE_DKDuktape

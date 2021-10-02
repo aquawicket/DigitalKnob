@@ -3,21 +3,21 @@
 #include "DK/DKFile.h"
 #include "DKRml/DKCss.h"
 
-DKRml* DKCss::dkRml;
+DKRml* DKRmlCss::dkRml;
 
-bool DKCss::Init(){
+bool DKRmlCss::Init(){
 	DKDEBUGFUNC();
 	dkRml = DKRml::Get();
 	if(!dkRml)
-		return DKERROR("DKCss::Init(): INVALID OBJECTS\n");
-	//data = ("DKCss", file)
+		return DKERROR("dkRml invalid\n");
+	//data = ("DKRmlCss", file)
 	if(data.size() < 2){
 		DKString _data = toString(data, ",");
-		DKERROR("DKCss::Init("+_data+"): missing parameters\n");
+		DKERROR("DKRmlCss::Init("+_data+"): missing parameters\n");
 	}
 	if(data.size() > 2){
 		DKString _data = toString(data, ",");
-		DKERROR("DKCss::Init("+_data+"): too many parameters\n");
+		DKERROR("DKRmlCss::Init("+_data+"): too many parameters\n");
 	}
 	replace(data[1], DKFile::local_assets, "");
 	DKString file = DKFile::local_assets+data[1];
@@ -33,7 +33,7 @@ bool DKCss::Init(){
 	return true;
 }
 
-bool DKCss::End(){
+bool DKRmlCss::End(){
 	DKDEBUGFUNC();
 	return true;
 }

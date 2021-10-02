@@ -5,7 +5,7 @@
 
 Rml::FileHandle DKRmlFile::Open(const Rml::String& path){
 	DKDEBUGFUNC("Rml::String&");
-	DKString _url = path;//.CString();
+	DKString _url = path;
 	if (has(_url, ":/")) { //could be http:// , https:// or C:/
 		//absolute path
 	}
@@ -14,7 +14,7 @@ Rml::FileHandle DKRmlFile::Open(const Rml::String& path){
 		return DKERROR("DKRml::LoadUrl(): no protocol specified\n"); //absolute path without protocol
 	}
 	else{
-		if(_url.find("/home") == std::string::npos) //url already has linux working directory
+		if(_url.find("/home") == std::string::npos) //url may have unix home directory
 			_url = DKRml::Get()->workingPath+_url;
 		//return DKERROR("DKRml::LoadUrl(): cannot load relative paths\n");
 	}

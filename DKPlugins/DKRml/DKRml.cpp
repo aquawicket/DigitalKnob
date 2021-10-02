@@ -22,23 +22,16 @@ bool DKRml::Init(){
 	DKDEBUGFUNC();
 	DKClass::DKCreate("DKRmlJS");
 	DKClass::DKCreate("DKRmlV8");
+
 	document = NULL;
 	if(!dkRmlFile){ 
 		dkRmlFile = new DKRmlFile();
 		Rml::SetFileInterface(dkRmlFile);
 	}
+
 	//Create DKSDLRml or DKOSGRml
 	if(DKClass::DKAvailable("DKSDLRml")){
 		DKClass::DKCreate("DKSDLRml");
-	}
-	else if(DKClass::DKAvailable("DKOSGRml")){
-		DKClass::DKCreate("DKOSGRml");
-	}
-	else{
-		DKERROR("DKRml::Init(): No registered window found\n");
-		return false;
-	}
-	if(DKClass::DKAvailable("DKSDLRml")){
 		if(!Rml::Initialise())
 			return DKERROR("Rml::Initialise(): failed\n");
 		int w;
@@ -47,12 +40,17 @@ bool DKRml::Init(){
 		if(!DKWindow::GetHeight(h)){ return false; }
 		context = Rml::CreateContext("default", Rml::Vector2i(w, h));
 	}
-//#ifndef LINUX
+	else if(DKClass::DKAvailable("DKOSGRml")){
+		DKClass::DKCreate("DKOSGRml");
+	}
+	else{
+		DKERROR("No registered window found\n");
+		return false;
+	}
 #ifdef USE_rmlui_debugger
 	if (!Rml::Debugger::Initialise(context))
 		return DKERROR("Rml::Debugger::Initialise(): failed\n");
 #endif
-//#endif
 	//Add missing stylesheet properties
 	//TODO - https://developer.mozilla.org/en-US/docs/Web/CSS/background-repeat
 	Rml::PropertyId background_repeat = Rml::StyleSheetSpecification::RegisterProperty("background-repeat", "repeat", false)
@@ -64,12 +62,13 @@ bool DKRml::Init(){
 		.AddParser("keyword", "none, hidden")
 		.AddParser("string")
 		.GetId(); //this supresses border-style warnings temporarily
+
 	context->SetDocumentsBaseTag("html");
 	LoadFonts();
 	DKEvents::AddRegisterEventFunc(&DKRml::RegisterEvent, this);
 	//DKEvents::AddUnegisterEventFunc(&DKRml::UnregisterEvent, this);
 	//DKEvents::AddSendEventFunc(&DKRml::SendEvent, this);
-	DKClass::DKCreate("DKRmlJS");
+	//DKClass::DKCreate("DKRmlJS");  //NOTE: already call above.   around line 23
 	Rml::Factory::RegisterElementInstancer("html", new Rml::ElementInstancerGeneric<Rml::ElementDocument>);
 	Rml::XMLParser::RegisterNodeHandler("html", std::make_shared<Rml::XMLNodeHandlerBody>());
 	Rml::XMLParser::RegisterNodeHandler("head", std::make_shared<HeadInstancer>());
@@ -88,11 +87,6 @@ bool DKRml::Init(){
 
 bool DKRml::End(){
 	DKDEBUGFUNC();
-	DKClass::DKClose("DKRmlJS");
-	DKClass::DKClose("DKRmlV8");
-	DKEvents::RemoveRegisterEventFunc(&DKRml::RegisterEvent, this);
-	DKEvents::RemoveUnegisterEventFunc(&DKRml::UnregisterEvent, this);
-	DKEvents::RemoveSendEventFunc(&DKRml::SendEvent, this);
 	if(context){
 		Rml::ReleaseTextures();
 		Rml::Shutdown();
@@ -100,13 +94,18 @@ bool DKRml::End(){
 		delete Rml::GetSystemInterface();
 		delete Rml::GetFileInterface();
 	}
+	DKClass::DKClose("DKRmlJS");
+	DKClass::DKClose("DKRmlV8");
+	DKEvents::RemoveRegisterEventFunc(&DKRml::RegisterEvent, this);
+	DKEvents::RemoveUnegisterEventFunc(&DKRml::UnregisterEvent, this);
+	DKEvents::RemoveSendEventFunc(&DKRml::SendEvent, this);
 	return true;
 }
 
 bool DKRml::LoadFont(const DKString& file){
 	DKDEBUGFUNC(file);
 	if(!Rml::LoadFontFace(file.c_str()))
-		return DKERROR("DKRml::LoadFont(): Could not load "+file+"\n");
+		return DKERROR("Could not load "+file+"\n");
 	return true;
 }
 
@@ -142,21 +141,11 @@ bool DKRml::LoadFonts(){
 }
 
 bool DKRml::LoadHtml(const DKString& html){
-	//// Prepair the html document for rocket
-	DKString rml = html;
-	if(!has(html, "<rml")){
-		rml = "<rml id=\"rml\">\n" + rml + "</rml>";
-	}
-	//dkHtmlToRml.TidyFile(rml,rml);
-	replace(rml, "<!DOCTYPE html>", ""); //Rml doesn't like <!DOCTYPE html> tags
-	replace(rml, "<meta name=\"generator\" content=", "");
-	replace(rml, "\"HTML Tidy for HTML5 for Windows version 5.7.28\" />", "");
-	/*
-	DKINFO("\n");
-	DKINFO("####### CODE GOING INTO RML ##########\n");
-	DKINFO(rml + "\n");
-	DKINFO("#########################################\n");
-	*/
+	//// Prepair the html document for RmlUi
+
+	DKString rml;
+	dkRmlConverter.HtmlToRml(html, rml);
+
 	//// Clear any document and load the rml into the document
 	if (document) {
 		Rml::Factory::ClearStyleSheetCache();
@@ -221,15 +210,15 @@ bool DKRml::LoadHtml(const DKString& html){
 	DKRml::Get()->document->GetElementsByTagName(elements, "body");
 	if(!elements[0])
 		return DKERROR("body element invalid\n");
-	//dkHtmlToRml.PostProcess(document);
-	dkHtmlToRml.PostProcess(elements[0]);
+	//dkRmlConverter.PostProcess(document);
+	dkRmlConverter.PostProcess(elements[0]);
 	document->Show();
 #ifdef ANDROID
 	//We have to make sure the fonts are loaded on ANDROID
 	LoadFonts();
 #endif
 	DKString code = document->GetContext()->GetRootElement()->GetInnerRML();
-#ifdef DEBUG_TEST
+#ifdef DEBUG
 	DKINFO("\n");
 	DKINFO("################ CODE FROM RmlUi ################\n");
 	DKINFO(code+"\n");

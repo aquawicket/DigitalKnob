@@ -99,9 +99,11 @@ Rml::Element* HeadInstancer::ElementStart(Rml::XMLParser* parser, const Rml::Str
 	}
 
 	// Move and append the element to the parent
-	//Rml::Element* result = parent->AppendChild(std::move(element));
+	Rml::Element* result = parent->AppendChild(std::move(element));
+	
+	return result;
 	// No elements constructed
-	return nullptr;
+	//return nullptr;
 }
 
 bool HeadInstancer::ElementEnd(Rml::XMLParser* parser, const Rml::String& name)

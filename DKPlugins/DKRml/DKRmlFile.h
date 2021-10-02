@@ -4,7 +4,7 @@
 #include <RmlUi/Core.h>
 #include "DK/DKFile.h"
 
-class DKRmlFile : public Rml::FileInterface{
+class DKRmlFile : public Rml::FileInterface {
 	virtual Rml::FileHandle Open(const Rml::String& path);
 	virtual void Close(Rml::FileHandle file);
 	virtual size_t Read(void* buffer, size_t size, Rml::FileHandle file);
