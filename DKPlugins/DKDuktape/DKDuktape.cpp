@@ -398,7 +398,8 @@ bool DKDuktape::RunDuktape(const DKString& code, DKString& rval){
 	if(duk_is_string(ctx, -1))
 		rval = duk_get_string(ctx, -1);
 	if(duk_is_boolean(ctx, -1))
-		rval = toString(duk_get_boolean(ctx, -1));
+		//rval = toString(duk_get_boolean(ctx, -1));
+		rval = std::to_string(duk_get_boolean(ctx, -1));
 	duk_pop(ctx);
 	return true;
 }

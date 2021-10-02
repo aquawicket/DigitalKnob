@@ -464,12 +464,17 @@ bool DKFile::GetModifiedTime(const DKString& path, DKString& time){
 			//DWORD nFileSizeHigh;	// the high DWORD of the file size (it is zero unless the file is over four gigabytes)
 			//DWORD nFileSizeLow;	// the low DWORD of the file size
 
-			DKString month = toString((int)st.wMonth);
-			DKString day = toString((int)st.wDay);
-			DKString year = toString((int)st.wYear);
+			//DKString month = toString((int)st.wMonth);
+			DKString month = std::to_string((int)st.wMonth);
+			//DKString day = toString((int)st.wDay);
+			DKString day = std::to_string((int)st.wDay);
+			//DKString year = toString((int)st.wYear);
+			DKString year = std::to_string((int)st.wYear);
 			int standard = st.wHour % 12;
-			DKString hour = toString(standard);
-			DKString minute = toString((int)st.wMinute);
+			//DKString hour = toString(standard);
+			DKString hour = std::to_string(standard);
+			//DKString minute = toString((int)st.wMinute);
+			DKString minute = std::to_string((int)st.wMinute);
 
 			Pad(4, '0', year);
 			Pad(2, '0', month);

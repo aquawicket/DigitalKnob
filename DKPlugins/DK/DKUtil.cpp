@@ -249,13 +249,16 @@ bool DKUtil::GetDate(DKString& date){
 	struct tm * now = localtime(&t);
 
 	//int standard = now->tm_hour % 12;
-	date = toString(now->tm_mon+1);
+	//date = toString(now->tm_mon+1);
+	date = std::to_string(now->tm_mon+1);
 	date += "/";
-	DKString day = toString(now->tm_mday);
+	//DKString day = toString(now->tm_mday);
+	DKString day = std::to_string(now->tm_mday);
 	//Pad(2, '0', day);
 	date += day;
 	date += "/";
-	date += toString(now->tm_year + 1900);
+	//date += toString(now->tm_year + 1900);
+	date += std::to_string(now->tm_year + 1900);
 	return true;
 }
 
@@ -407,9 +410,11 @@ bool DKUtil::GetTime(DKString& _time){
 
 	int standard = now->tm_hour % 12;
 	if(standard == 0){ standard = 12; }
-	_time = toString(standard);
+	//_time = toString(standard);
+	_time = std::to_string(standard);
 	_time += ":";
-	DKString minute = toString(now->tm_min);
+	//DKString minute = toString(now->tm_min);
+	DKString minute = std::to_string(now->tm_min);
 	Pad(2, '0', minute);
 	_time += minute;
 	//DKINFO("DKUtil::GetTime(): now->tm_hour="+toString(now->tm_hour)+"\n");

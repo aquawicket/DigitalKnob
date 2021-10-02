@@ -64,7 +64,8 @@ bool DKRml::Init(){
 		.GetId(); //this supresses border-style warnings temporarily
 
 	context->SetDocumentsBaseTag("html");
-	LoadFonts();
+	LoadFonts(DKFile::local_assets+"DKRml");
+	LoadFonts(DKFile::local_assets);
 	DKEvents::AddRegisterEventFunc(&DKRml::RegisterEvent, this);
 	//DKEvents::AddUnegisterEventFunc(&DKRml::UnregisterEvent, this);
 	//DKEvents::AddSendEventFunc(&DKRml::SendEvent, this);
@@ -102,6 +103,25 @@ bool DKRml::End(){
 	return true;
 }
 
+bool DKRml::GetSourceCode(DKString& source_code) {
+	source_code = document->GetContext()->GetRootElement()->GetInnerRML();
+	DKINFO("######################## CODE FROM RmlUi #########################\n");
+	DKINFO(source_code+"\n");
+	DKINFO("##################################################################\n");
+	
+	// Actually, we only want the  last html node
+	int n = source_code.rfind("<html");
+	if(n < 0)
+		return DKWARN("html tag not found\n");
+
+	source_code = source_code.substr(n);
+	replace(source_code, "<", "\n<"); //put all tags on a new line
+	DKINFO("################## Last <html> node from RmlUi ##################\n");
+	DKINFO(source_code+"\n");
+	DKINFO("#################################################################\n");
+	return true;
+}
+
 bool DKRml::LoadFont(const DKString& file){
 	DKDEBUGFUNC(file);
 	if(!Rml::LoadFontFace(file.c_str()))
@@ -109,32 +129,24 @@ bool DKRml::LoadFont(const DKString& file){
 	return true;
 }
 
-bool DKRml::LoadFonts(){
+bool DKRml::LoadFonts(DKString& directory){
 	DKDEBUGFUNC();
-	DKStringArray dkfiles;
-	DKFile::GetDirectoryContents(DKFile::local_assets+"DKRml", dkfiles);
-	for(unsigned int i=0; i<dkfiles.size(); ++i){
-		if(DKFile::IsDirectory(dkfiles[i]))
-			continue;
-		DKString extension;
-		DKFile::GetExtention(dkfiles[i],extension);
-		if(same(extension,".otf") || same(extension,".ttf")){
-			DKString file;
-			DKFile::GetFileName(dkfiles[i],file);
-			LoadFont(DKFile::local_assets+"DKRml/"+file);
-		}
-	}
+	
+	char ch = directory.back();
+	if(ch != '/')
+		directory += '/'; //make sure directory has a trailing /
+
 	DKStringArray files;
-	DKFile::GetDirectoryContents(DKFile::local_assets, files);
+	DKFile::GetDirectoryContents(directory, files);
 	for(unsigned int i=0; i<files.size(); ++i){
-		if(DKFile::IsDirectory(files[i]))
+		if(DKFile::IsDirectory(directory+files[i]))
 			continue;
 		DKString extension;
 		DKFile::GetExtention(files[i],extension);
 		if(same(extension,".otf") || same(extension,".ttf")){
-			DKString file;
-			DKFile::GetFileName(files[i],file);
-			LoadFont(DKFile::local_assets+file);
+			//DKString file;
+			//DKFile::GetFileName(files[i],file);
+			LoadFont(directory+files[i]);
 		}
 	}
 	return true;
@@ -216,25 +228,6 @@ bool DKRml::LoadHtml(const DKString& html){
 #ifdef ANDROID
 	//We have to make sure the fonts are loaded on ANDROID
 	LoadFonts();
-#endif
-	DKString code = document->GetContext()->GetRootElement()->GetInnerRML();
-#ifdef DEBUG
-	DKINFO("\n");
-	DKINFO("################ CODE FROM RmlUi ################\n");
-	DKINFO(code+"\n");
-	DKINFO("#################################################\n");
-	//find the last <html occurance
-	int n = code.rfind("<html");
-	if(n < 0){
-		DKERROR("DKRml::LoadHtml(): html tag not found\n");
-		return true;
-	}
-	code = code.substr(n);
-	replace(code, "<", "\n<");
-	DKINFO("\n");
-	DKINFO("############## last <html> element CODE FROM RmlUi ##############\n");
-	DKINFO(code+"\n");
-	DKINFO("#################################################################\n");
 #endif
 	return true;
 }

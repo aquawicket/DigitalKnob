@@ -27,7 +27,8 @@
 	#define DKYELLOW FOREGROUND_RED|FOREGROUND_GREEN|FOREGROUND_INTENSITY
 	#define DKBROWN FOREGROUND_RED|FOREGROUND_GREEN
 
-	#define DKFATAL_COLOR   FOREGROUND_RED|BACKGROUND_RED|FOREGROUND_INTENSITY|BACKGROUND_INTENSITY
+	#define DKASSERT_COLOR  FOREGROUND_RED|FOREGROUND_INTENSITY|BACKGROUND_INTENSITY
+	#define DKFATAL_COLOR   FOREGROUND_RED|FOREGROUND_INTENSITY|BACKGROUND_INTENSITY
 	#define DKERROR_COLOR   FOREGROUND_RED|FOREGROUND_INTENSITY
 	#define DKWARN_COLOR    FOREGROUND_RED|FOREGROUND_GREEN|FOREGROUND_INTENSITY
 	#define DKINFO_COLOR    FOREGROUND_RED|FOREGROUND_GREEN|FOREGROUND_BLUE|FOREGROUND_INTENSITY
@@ -44,6 +45,7 @@
 	#define DKCYN     "\x1B[36m"
 	#define DKWHITE   "\x1B[37m"
 
+	#define DKASSERT_COLOR   "\x1B[36m"
 	#define DKFATAL_COLOR    "\x1B[36m"
 	#define DKERROR_COLOR    "\x1B[31m"
 	#define DKWARN_COLOR     "\x1B[33m"
@@ -83,7 +85,7 @@ extern bool exception_on_errors;
 
 bool Clear();
 bool ColorMap();
-bool Log(const char* file, int line, const char* func, const DKString& text, const int lvl = DK_INFO);
+bool Log(const char* file, int line, const char* func, const DKString& input, const int lvl = DK_INFO);
 bool SetLog(const int lvl, const DKString& text);
 
 #ifndef ANDROID
@@ -139,6 +141,15 @@ class logy{
 		const std::string context;
 		const clock_t start_time;
 };
+
+/*
+#include <csignal>
+#include <iostream> 
+namespace {
+	volatile std::sig_atomic_t gSignalStatus;
+}
+void signal_handler(int signal);
+*/
 
 #define  DKASSERT(message) Log(__FILE__, __LINE__, __FUNCTION__, message, DK_ASSERT);
 #define   DKFATAL(message) Log(__FILE__, __LINE__, __FUNCTION__, message, DK_FATAL);

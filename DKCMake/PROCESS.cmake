@@ -326,7 +326,7 @@ foreach(plugin ${dkdepend_list})
 		endif()
 		
 		#FIXME: This needs to be removed and better checks put in place to copy compiled files
-		include(${plugin_path}/DKMAKE.cmake) ##run it again to copy any .exe and .dll files. 
+		#include(${plugin_path}/DKMAKE.cmake) ##run it again to copy any .exe and .dll files. 
 	endif()
 	
 	## double check that the missing libs were built

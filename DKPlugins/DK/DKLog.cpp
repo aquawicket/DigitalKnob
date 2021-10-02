@@ -54,56 +54,51 @@ bool ColorMap(){
 	return DKERROR("not implemented on this system");
 }
 
-bool Log(const char* file, int line, const char* func, const DKString& text, const int lvl){
-	
-	///  /// /// MESSAGE BUILDING /// /// ///
-	DKString string;
-	if(log_thread){
-		unsigned long int threadId;
-		DKUtil::GetThreadId(threadId);
-		string = string + "TID:" + toString((unsigned int)threadId) + "  ";
-	}
-	if(log_lines || lvl == DK_ERROR || lvl == DK_FATAL) {
-		DKString filename = file;
-		unsigned found = filename.find_last_of("/\\");
-		if(found != std::string::npos && found < filename.length())
-			string += filename.substr(found+1);
-		string = string + ":" + toString(line) + "  ";
-	}
-	if(log_funcs || lvl == DK_ERROR || lvl == DK_FATAL) {
-		if(strlen(func))
-			string = string + func + "() ";
-	}
-	string += text; 
+/*
+void signal_handler(int signal) {
+	gSignalStatus = signal;
+}
+*/
 
-	/// /// /// OUTPUT FILTERS /// /// ///
-	int i=0;
-	DKString value;
-//#ifdef WIN32
-	if(!log_hide.empty()){ //check for LOG_HIDE
+bool Log(const char* file, int line, const char* func, const DKString& input, const int lvl){
+	
+	/*
+	if(lvl == DK_ASSERT){
+		// Install a signal handler
+		std::signal(SIGINT, signal_handler);
+		std::cout << "SignalValue: " << gSignalStatus << '\n';
+		std::cout << "Sending signal " << SIGINT << '\n';
+		std::raise(SIGINT);
+		std::cout << "SignalValue: " << gSignalStatus << '\n';
+	}
+	*/
+
+	///////// OUTPUT FILTERS /////////
+	if(input.front() == '\n')
+		//return DKASSERT("log text should never start with \\n")
+
+	//check LOG_HIDE strings
+	if(!log_hide.empty()){
 		DKStringArray hides;
 		toStringArray(hides, log_hide, ",");
 		for(unsigned int i=0; i<hides.size(); ++i){
-			if(has(string,hides[i]) && !hides[i].empty())
+			if(!hides[i].empty() && has(input, hides[i]))
 				return true;
 		}
 	}
-//#endif
-	//check for LOG_SHOW
-	bool flag = false;
-//#ifdef WIN32
+	//check LOG_SHOW strings
+	bool force = false;
 	if(!log_show.empty()){
 		DKStringArray shows;
 		toStringArray(shows, log_show, ",");
 		for(unsigned int i=0; i<shows.size(); ++i){
-			if(has(string,shows[i]) && !shows[i].empty()){
-				flag = true;
+			if(!shows[i].empty() && has(input, shows[i])){
+				force = true;
 				break;
 			}
 		}
 	}
-//#endif
-	if(!flag){
+	if(!force){
 		if(log_fatal == false && lvl == DK_FATAL){ return false; }
 		if(log_errors == false && lvl == DK_ERROR){ return false; }
 		if(log_warnings == false && lvl == DK_WARN){ return true; }
@@ -112,17 +107,48 @@ bool Log(const char* file, int line, const char* func, const DKString& text, con
 		if(log_verbose == false && lvl == DK_VERBOSE){ return true; }
 	}
 
-	/// /// Main Console Color Decorators /// ///
+	DKString output;
+
+	///// ADD extra info if requested
+	if(log_thread){
+		unsigned long int threadId;
+		DKUtil::GetThreadId(threadId);
+		//output = output + "THREAD: " + toString((unsigned int)threadId) + "  ";
+		output = output + "THREAD: " + std::to_string((unsigned int)threadId) + "  ";
+	}
+	if(log_lines || lvl <= DK_ERROR) {
+		DKString filename = file;
+		unsigned found = filename.find_last_of("/\\");
+		if(found != std::string::npos && found < filename.length())
+			output += filename.substr(found+1);
+		//output = output + ":" + toString(line) + "  ";
+		output = output + ":" + std::to_string(line) + "  ";
+	}
+	if(log_funcs || lvl <= DK_ERROR) {
+		if(strlen(func))
+			output = output + func + "() ";
+	}
+	output += input; 
+
+	/////// Main Console Color Decorators ///////
 #ifdef WIN32
-	int color;
+	WORD color;
+	if(lvl == DK_ASSERT){ color = DKASSERT_COLOR; }
 	if(lvl == DK_FATAL){ color = DKFATAL_COLOR; }
 	if(lvl == DK_ERROR){ color = DKERROR_COLOR; }
 	if(lvl == DK_WARN){ color = DKWARN_COLOR; }
     if(lvl == DK_INFO){ color = DKINFO_COLOR; }
 	if(lvl == DK_DEBUG){ color = DKDEBUG_COLOR; }
 	if(lvl == DK_VERBOSE){ color = DKVERBOSE_COLOR; }
+	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+	CONSOLE_SCREEN_BUFFER_INFO consoleInfo;
+	GetConsoleScreenBufferInfo(hConsole, &consoleInfo);
+	WORD saved_attributes = consoleInfo.wAttributes;  // Save current attributes
+	if(color)
+		SetConsoleTextAttribute(hConsole, color);
 #elif !defined(LINUX)
     char color[10];
+	if(lvl == DK_ASSERT){ strcpy(color, DKASSERT_COLOR; }
 	if(lvl == DK_FATAL){ strcpy(color, DKFATAL_COLOR; }
 	if(lvl == DK_ERROR){ strcpy(color, DKERROR_COLOR; }
 	if(lvl == DK_WARN){ strcpy(color, DKWARN_COLOR; }
@@ -130,17 +156,11 @@ bool Log(const char* file, int line, const char* func, const DKString& text, con
 	if(lvl == DK_DEBUG){ strcpy(color, DKDEBUG_COLOR; }
 	if(lvl == DK_VERBOSE){ strcpy(color, DKVERBOSE_COLOR; }
 #endif
-#ifdef WIN32
-	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-    CONSOLE_SCREEN_BUFFER_INFO consoleInfo;
-    GetConsoleScreenBufferInfo(hConsole, &consoleInfo);
-    WORD saved_attributes = consoleInfo.wAttributes;  // Save current attributes
-	SetConsoleTextAttribute(hConsole, color);
-#endif
+
 	/// /// ///  OUTPUTS /// /// ///
 
 	//CONSOLE WINDOW OUTPUT
-	printf("%s",string.c_str()); 
+	printf("%s", output.c_str()); 
 	//stdout << string;
 						
 	// File Output (log.txt)
@@ -148,7 +168,7 @@ bool Log(const char* file, int line, const char* func, const DKString& text, con
 		std::ofstream file_log;
 		file_log.open(DKString(DKFile::local_assets+"log.txt").c_str(), std::ofstream::out | std::ofstream::app);
 		if(file_log.is_open()){
-			file_log << string.c_str();
+			file_log << output.c_str();
 			file_log.close();
 		}
 	}
@@ -184,30 +204,27 @@ bool Log(const char* file, int line, const char* func, const DKString& text, con
 	SetConsoleTextAttribute(hConsole, saved_attributes);
 #endif
 
-	//if (text.find('\n') == std::string::npos) //check for new line \n
-	//	 return DKERROR("<------ \nText does not contain a new line character   \\n  \n");
-
 	//if(log_gui_console && DKUtil::InMainThread() && DKApp::active){
-	//	DKEvents::SendEvent("DKLog", "level", toString(lvl));
+	//	DKEvents::SendEvent("DKLog", "level", std::to_string(lvl));
 	//	DKEvents::SendEvent("DKLog", "string", string);
 	//}
 	
 	//On errors, show the stack trace or open a message box
-	if(lvl == DK_ERROR){
-		if(stacktrace_on_errors){
+	if(lvl <= DK_ERROR){
+		if(stacktrace_on_errors || lvl <= DK_ASSERT){
 			DKClass::DKCreate("DKDebug");
 			if(DKClass::HasFunc("DKDebug::ShowStackTrace"))
 				DKClass::CallFunc("DKDebug::ShowStackTrace");
 		}
-		if(exception_on_errors){	
+		if(exception_on_errors || lvl <= DK_ASSERT){	
 			try{
-				throw string; // throw an exception
+				throw output; // throw an exception
 			}
 			//catch (const std::string& e){
 			catch(...){
 			#ifdef WIN32
-				string += "\n\n Would you like to exit the application?";
-				boxer::Selection sel = boxer::show(string.c_str(), "EXCEPTION", boxer::Style::Error, boxer::Buttons::YesNo);
+				output += "\n\n Would you like to exit the application?";
+				boxer::Selection sel = boxer::show(output.c_str(), "EXCEPTION", boxer::Style::Error, boxer::Buttons::YesNo);
 				if(sel == boxer::Selection::Yes){
 					DKApp::Exit();
 					return false;

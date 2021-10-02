@@ -3343,7 +3343,7 @@ function(DKUPDATE_INFO_PLIST name)
 endfunction()
 
 function(DKBUILD_LOG entry)
-	set(DKBUILD_LOG_FILE "${DKBUILD_LOG_FILE}${entry}\n")
+	DKSET(DKBUILD_LOG_FILE "${DKBUILD_LOG_FILE}${entry}\n")
 	message(STATUS "buildlog->  ${entry}")
 endfunction()
 

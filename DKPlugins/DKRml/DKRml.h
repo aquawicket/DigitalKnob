@@ -15,8 +15,9 @@ class DKRml : public Rml::EventListener, public DKObjectT<DKRml> {
 public:
 	bool Init();
 	bool End();
+	bool GetSourceCode(DKString& source_code);
 	bool LoadFont(const DKString& file);
-	bool LoadFonts();
+	bool LoadFonts(DKString& directory);
 	bool LoadUrl(const DKString& url);
 	bool LoadHtml(const DKString& html);
 	void ProcessEvent(Rml::Event& rmlEvent); //overwritten

@@ -36,57 +36,60 @@ bool has(const DKString& str, const DKString& str2);
 
 //https://stackoverflow.com/questions/216823/whats-the-best-way-to-trim-stdstring
 // trim from end of string (right)
-DKString& rtrim(DKString& s, const char* t = " \t\n\r\f\v");
+DKString& rtrim(DKString& str, const char* t = " \t\n\r\f\v");
 
 // trim from beginning of string (left)
-DKString& ltrim(DKString& s, const char* t = " \t\n\r\f\v");
+DKString& ltrim(DKString& str, const char* t = " \t\n\r\f\v");
 
 // trim from both ends of string (right then left)
-DKString& trim(DKString& s, const char* t = " \t\n\r\f\v");
+DKString& trim(DKString& str, const char* t = " \t\n\r\f\v");
 
 // https://www.cplusplus.com/reference/string/to_string/
-DKString toString(const int& num);
-DKString toString(const unsigned int& num);
-DKString toString(const long& num);
-DKString toString(const unsigned long int& num);
-DKString toString(const unsigned long long int& num);
-DKString toString(const float& num);
-DKString toString(const double& num); 
-DKString toString(const char* str);
-DKString toString(unsigned char* str);
-DKString toString(void* ptr);
-DKString toString(bool _bool);
+DKString toString(const bool _bool);
+DKString toString(const char* _charptr);
+DKString toString(const unsigned char* _uchar);
+DKString toString(const void* _voidptr);
+
+
+DKString toString(const int& _int);
+DKString toString(const long& _long);
+DKString toString(const float& _float);
+DKString toString(const double& _double);
+DKString toString(const unsigned int& _uint);
+DKString toString(const unsigned long int& _ulongint);
+DKString toString(const unsigned long long int& _ulonglongint);
+
+
+DKString toString(const std::wstring& _wstring);
 DKString toString(const DKStringArray& arry, const char* seperator);
 #ifdef WIN32
-	DKString toString(const HWND hwnd);
+DKString toString(const HWND hwnd);
 #endif
 
-long toLong(const DKString& str);
-unsigned long long int toULongLong(const DKString& str);
-int toInt(const DKString& str);
 bool toBool(const DKString& str);
-unsigned int toUInt(const DKString& str);
+int toInt(const DKString& str);
+long toLong(const DKString& str);
 float toFloat(const DKString& str);
+unsigned int toUInt(const DKString& str);
+unsigned long long int toULongLong(const DKString& str);
+std::wstring toWString(const DKString& str);
 #ifdef WIN32
-	HWND toHWND(const DKString& str);
+HWND toHWND(const DKString& str);
 #endif
-bool replace(DKString& str, const DKString& oldStr, const DKString& newStr);
-bool replace_first(DKString& str, const DKString& oldStr, const DKString& newStr);
+
+bool replace(DKString& str, const DKString& find, const DKString& replace);
+bool replace_first(DKString& str, const DKString& find, const DKString& replace);
 bool IsNumber(const DKString& str);
 bool Pad(int num, char character, DKString& str); 
 
-#ifdef WIN32
-DKString toString(const std::wstring& ws);
-std::wstring toWString(const DKString& str);
-#endif
 
 //bool ArrayToString(const DKStringArray& arry, DKString& str, const char* seperator);
 bool RemoveDuplicates(DKStringArray& arry);
-bool getSettingFromString(const DKString& filestring, const DKString& setting, DKString& value);
+bool getSettingFromString(const DKString& str, const DKString& setting, DKString& value);
 //DKStringArray getSettings(const DKString& file, const DKString& setting);
 //DKStringArray getSettingsFromString(const DKString& filestring, const DKString& setting);
-bool toStringArray(DKStringArray& output, const DKString& str, const DKString& seperator);
-DKString toLower(const DKString& input);
-//DKString toUpper(const DKString& input); //TODO
+bool toStringArray(DKStringArray& arry, const DKString& str, const DKString& seperator);
+DKString toLower(const DKString& str);
+//DKString toUpper(const DKString& str); //TODO
 
 #endif //DKString_H
