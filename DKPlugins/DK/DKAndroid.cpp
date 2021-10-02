@@ -22,7 +22,6 @@ JNIEXPORT jint JNI_OnLoad2(JavaVM* vm, void* reserved){
     return JNI_VERSION_1_6;
 }
 
-
 void initJNIBridge(JNIEnv* env, jobject obj){
 	DKDEBUGFUNC(env, obj);
 	theobj = env->NewGlobalRef(obj);
@@ -49,13 +48,11 @@ void CallJavaFunction(const DKString& name, const DKString& param){
 		case JNI_EVERSION:
 			DKERROR("jni version not supported\n");
 	}
-
 	jclass cls = env->GetObjectClass(theobj);
-	if (!cls) {
+	if (!cls){
 		DKERROR("Could not get cls\n");
-        return;
-    }
-
+		return;
+	}
 	//Call void function
 	if(param.empty()){
 		jmethodID method = env->GetMethodID(cls, name.c_str(), "()V");
@@ -66,7 +63,6 @@ void CallJavaFunction(const DKString& name, const DKString& param){
 		env->CallVoidMethod(theobj, method);
 	    return;
 	}
-
 	//Call function with string parameter
 	jmethodID method = env->GetMethodID(cls, name.c_str(), "(Ljava/lang/String;)V");
 	if (!method) {
@@ -93,7 +89,6 @@ jstring CallCppFunction(JNIEnv* env, jclass cls, jstring data){
 	const char* _data = env->GetStringUTFChars(data,JNI_FALSE);
 	DKStringArray arry;
 	toStringArray(arry, _data, ",");
-	
 	if(same(arry[0],"DKAndroid_init")){
 		if(arry.size() > 2){
 			DKAndroid::android_width = toInt(arry[1]);
@@ -102,7 +97,6 @@ jstring CallCppFunction(JNIEnv* env, jclass cls, jstring data){
 		DKAndroid::init();
 		return NULL;
 	}
-	
 	if(!DKApp::active){ return NULL; }
 	if(same(arry[0],"DKAndroid_exit")){
 		DKINFO("DKAndroid::exit()\n");
@@ -121,21 +115,17 @@ jstring CallCppFunction(JNIEnv* env, jclass cls, jstring data){
 	jdata.env = env;
 	jdata.cls = cls;
 	jdata.data = data;
-	
 	DKString rval;
 	DKClass::CallFunc(arry[0], &jdata, &rval);
 	if(rval.empty()){ return NULL; }
 	DKINFO("CallCppFunction() rval = "+rval+"\n");
-	
 	jclass strClass = env->FindClass("java/lang/String"); 
 	jmethodID ctorID = env->GetMethodID(strClass, "<init>", "([BLjava/lang/String;)V"); 
 	jstring encoding = env->NewStringUTF("GBK"); 
-
 	jbyteArray bytes = env->NewByteArray(strlen(rval.c_str())); 
 	env->SetByteArrayRegion(bytes, 0, strlen(rval.c_str()), (jbyte*)rval.c_str()); 
 	jstring str = (jstring)env->NewObject(strClass, ctorID, bytes, encoding);
 	return str;
-	
 	/*
 	////////   SDL  /////////////////////////////////
 	if(same(arry[0],"DKAndroid_onDropFile"))
@@ -184,7 +174,6 @@ jstring CallCppFunction(JNIEnv* env, jclass cls, jstring data){
 		DKClass::CallFunc("DKAndroid_onComposingText", static_cast<void*>(&jdata));
 	if(same(arry[0],"DKAndroid_onGetHint"))
 		return static_cast<jstring>(DKClass::CallFunc("DKAndroid_onGetHint", static_cast<void*>(&jdata)));
-
 	///////   OpenSceneGraph ////////////////
 	if(same(arry[0],"DKAndroid_onMousePress"))
 		DKClass::CallFunc("DKAndroid_onMousePress", static_cast<void*>(&jdata));
@@ -199,12 +188,9 @@ jstring CallCppFunction(JNIEnv* env, jclass cls, jstring data){
 
 void DKAndroid::init(){
 	DKDEBUGFUNC();
-	
 	if(!DKApp::active){ //if ! android context resume	
 		//required for loading screen
-
 		CallJavaFunction("copyAssets", ""); //copy ALL assets on startup
-
 		//Copy assets required for loading screen
 		//CallJavaFunction("copyAsset", "times-Bold.ttf");
 		//CallJavaFunction("copyAsset", "times-BoldItalic.ttf");
@@ -218,23 +204,18 @@ void DKAndroid::init(){
 		//CallJavaFunction("copyAsset", "settings.txt");
 		//CallJavaFunction("copyAsset", "app.js");
 		//CallJavaFunction("copyAsset", "DKConsole.html");
-
 		DKApp dkapp(NULL, NULL);
-
 		#ifdef DKAPP
 		DKINFO("DKAPP defined\n");
 		#endif
-		
 		DKINFO("Registered Classes\n");
 		DKStringArray classes;
 		DKClass::GetClassList(classes);
 		for(int i=0; i<classes.size(); i++){
 			DKINFO(classes[i]+"\n");
 		}
-
 		DKObject* app = DKClass::DKCreate("App"); //App.h/App.cpp (user code)
 		dkapp.Init();
-		
 		//Attempt to preload these
 		DKClass::DKCreate("DKAssets");
 		DKClass::DKCreate("DKDuktape");
@@ -259,7 +240,6 @@ void DKAndroid::ProcessEvent(Rocket::Core::Event& event){
 			return;
 		}
 	}
-
 	//Hide Keyboard on input Enter
 	if(event.GetType() == "keydown" && event.GetCurrentElement()->GetTagName() == "input"){
 		int key = event.GetParameter<int>("key_identifier", 0);

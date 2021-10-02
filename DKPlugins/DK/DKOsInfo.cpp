@@ -3,9 +3,7 @@
 #include "DK/stdafx.h"
 #include "DKOsInfo.h"
 
-//////////////////////////////
-bool GetOSInfo(DKString& info)
-{
+bool GetOSInfo(DKString& info){
 	DKString oscompany;
 	GetOSCompany(oscompany);
 	DKString osname;
@@ -20,14 +18,11 @@ bool GetOSInfo(DKString& info)
 	GetOSArchitecture(osarchitecture);
 	info = (oscompany+" "+osname+" "+osversion+" "+osservicepack+" "+osbuild+" "+osarchitecture);
 	return true;
-
 	//DKString computername;
 	//getComputerName(computername);
 }
 
-//////////////////////////////
-bool GetSystemOS(DKString& os)
-{
+bool GetSystemOS(DKString& os){
 #if defined(WIN32)
 	//FIXME: GetSystemOS askes strictly for the OS, this should return Windows
 	os = "Windows";
@@ -56,13 +51,11 @@ bool GetSystemOS(DKString& os)
 	os = "Android";
 #endif
 	if(os.empty())
-		return DKERROR("ERROR GetSystemOS() cound not get the OS\n");
+		return DKERROR("cound not get the OS\n");
 	return true;
 }
 
-//////////////////////////////////////
-bool GetOSCompany(DKString& oscompany)
-{ 
+bool GetOSCompany(DKString& oscompany){ 
 #ifdef WIN32
 	oscompany = "Microsoft";
 	return true;
@@ -79,12 +72,10 @@ bool GetOSCompany(DKString& oscompany)
 	oscompany = "Linux";
 	return true;
 #endif
-	return DKERROR("GetOSCompany() not implemented on this OS \n");
+	return DKERROR("not implemented on this OS \n");
 }
 
-////////////////////////////////
-bool GetOSName(DKString& osname)
-{
+bool GetOSName(DKString& osname){
 #ifdef WIN32
 	RTL_OSVERSIONINFOEXW vi;
 	if(!GetWinOSVersion(vi))
@@ -92,80 +83,60 @@ bool GetOSName(DKString& osname)
 	SYSTEM_INFO si;
 	GetWinSystemInfo(si);
 	std::wstringstream os;
-	
 	if (vi.dwMajorVersion == 10) {
 		if (vi.dwMinorVersion == 0) {
-			if (vi.wProductType == VER_NT_WORKSTATION) {
+			if (vi.wProductType == VER_NT_WORKSTATION)
 				os << "Windows 10";
-			}
-			else {
+			else
 				os << "Windows Server 2019";
-			}
 		}
 	}
 	if(vi.dwMajorVersion == 6) {
 		if (vi.dwMinorVersion == 3) {
-			if (vi.wProductType == VER_NT_WORKSTATION) {
+			if (vi.wProductType == VER_NT_WORKSTATION)
 				os << "Windows 8.1";
-			}
-			else {
+			else
 				os << "Windows Server 2012 R2";
-			}
 		}
 		if (vi.dwMinorVersion == 2) {
-			if (vi.wProductType == VER_NT_WORKSTATION) {
+			if (vi.wProductType == VER_NT_WORKSTATION)
 				os << "Windows 8";
-			}
-			else {
+			else
 				os << "Windows Server 2012";
-			}
 		}
 		if (vi.dwMinorVersion == 1) {
-			if (vi.wProductType == VER_NT_WORKSTATION) {
+			if (vi.wProductType == VER_NT_WORKSTATION)
 				os << "Windows 7";
-			}
-			else {
+			else
 				os << "Windows Server 2008 R2";
-			}
 		}
 		if (vi.dwMinorVersion == 0) {
-			if (vi.wProductType == VER_NT_WORKSTATION) {
+			if (vi.wProductType == VER_NT_WORKSTATION)
 				os << "Windows Vista";
-			}
-			else {
+			else
 				os << "Windows Server 2008";
-			}
 		}
 	}
 	if (vi.dwMajorVersion == 5 && vi.dwMinorVersion == 2) {
-		if (GetSystemMetrics(SM_SERVERR2)) {
+		if (GetSystemMetrics(SM_SERVERR2))
 			os << "Windows Server 2003 R2";
-		}
-		else if (vi.wSuiteMask & VER_SUITE_STORAGE_SERVER) {
+		else if (vi.wSuiteMask & VER_SUITE_STORAGE_SERVER)
 			os << "Windows Storage Server 2003";
-		}
-		else if (vi.wSuiteMask & VER_SUITE_WH_SERVER) {
+		else if (vi.wSuiteMask & VER_SUITE_WH_SERVER)
 			os << "Windows Home Server";
-		}
-		else if (vi.wProductType == VER_NT_WORKSTATION && si.wProcessorArchitecture == PROCESSOR_ARCHITECTURE_AMD64) {
+		else if (vi.wProductType == VER_NT_WORKSTATION && si.wProcessorArchitecture == PROCESSOR_ARCHITECTURE_AMD64)
 			os << "Windows XP Professional x64 Edition";
-		}
-		else {
+		else
 			os << "Windows Server 2003";  // Test for the server type.
-		}
 	}
-	if (vi.dwMajorVersion == 5 && vi.dwMinorVersion == 1) {
+	if (vi.dwMajorVersion == 5 && vi.dwMinorVersion == 1)
 		os << "Windows XP";
-	}
-	if (vi.dwMajorVersion == 5 && vi.dwMinorVersion == 0) {
+	if (vi.dwMajorVersion == 5 && vi.dwMinorVersion == 0)
 		os << "Windows 2000";
-	}
-	if (vi.dwMajorVersion == 4 && vi.dwMinorVersion == 10) {
+	if (vi.dwMajorVersion == 4 && vi.dwMinorVersion == 10)
 		os << "Windows 98";
-	}
-	if (vi.dwMajorVersion == 4 && vi.dwMinorVersion == 0) {
+	if (vi.dwMajorVersion == 4 && vi.dwMinorVersion == 0)
 		os << "Windows NT 4.0";
-	}
 	osname = toString(os.str());
 	return true;
 #elif defined(MAC)
@@ -181,25 +152,20 @@ bool GetOSName(DKString& osname)
 	osname = "";
 	return true;
 #endif
-	return DKERROR("GetOSName() not implemented on this OS \n");
+	return DKERROR("not implemented on this OS \n");
 }
 
-//////////////////////////////////////
-bool GetOSVersion(DKString& osversion)
-{
+bool GetOSVersion(DKString& osversion){
 #ifdef WIN32
 	RTL_OSVERSIONINFOEXW vi;
-	if (!GetWinOSVersion(vi)) {
-		return false;
-	}
+	if (!GetWinOSVersion(vi))
+		return DKERROR("GetWinOSVersion() failed\n");
 	SYSTEM_INFO si;
 	GetWinSystemInfo(si);
 	DWORD dwType;
-	if (!GetWinProductInfo(vi, dwType)) {
-		return false;
-	}
+	if (!GetWinProductInfo(vi, dwType))
+		return DKERROR("GetWinProductInfo() failed\n");
 	std::wstringstream os;
- 
 #if defined(_MSC_VER)
 	switch(dwType){
 		case PRODUCT_ULTIMATE:
@@ -261,65 +227,50 @@ bool GetOSVersion(DKString& osversion)
 	if (vi.dwMajorVersion == 5 && vi.dwMinorVersion == 2){
 		if (vi.wProductType != VER_NT_WORKSTATION){
 			if(si.wProcessorArchitecture==PROCESSOR_ARCHITECTURE_IA64){
-				if(vi.wSuiteMask & VER_SUITE_DATACENTER){
+				if(vi.wSuiteMask & VER_SUITE_DATACENTER)
 					os <<  "Datacenter Edition for Itanium-based Systems";
-				}
-				else if(vi.wSuiteMask & VER_SUITE_ENTERPRISE){
+				else if(vi.wSuiteMask & VER_SUITE_ENTERPRISE)
 					os <<  "Enterprise Edition for Itanium-based Systems";
-				}
 			}   
 			else if(si.wProcessorArchitecture==PROCESSOR_ARCHITECTURE_AMD64){
-				if(vi.wSuiteMask & VER_SUITE_DATACENTER){
+				if(vi.wSuiteMask & VER_SUITE_DATACENTER)
 					os <<  "Datacenter x64 Edition";
-				}
-				else if(vi.wSuiteMask & VER_SUITE_ENTERPRISE){
+				else if(vi.wSuiteMask & VER_SUITE_ENTERPRISE)
 					os <<  "Enterprise x64 Edition";
-				}
-				else{
+				else
 					os <<  "Standard x64 Edition";
-				}
 			}
 			else{
-				if(vi.wSuiteMask & VER_SUITE_COMPUTE_SERVER){
+				if(vi.wSuiteMask & VER_SUITE_COMPUTE_SERVER)
 					os <<  "Compute Cluster Edition";
-				}
-				else if(vi.wSuiteMask & VER_SUITE_DATACENTER){
+				else if(vi.wSuiteMask & VER_SUITE_DATACENTER)
 					os <<  "Datacenter Edition";
-				}
-				else if(vi.wSuiteMask & VER_SUITE_ENTERPRISE){
+				else if(vi.wSuiteMask & VER_SUITE_ENTERPRISE)
 					os <<  "Enterprise Edition";
-				}
-				else if(vi.wSuiteMask & VER_SUITE_BLADE){
+				else if(vi.wSuiteMask & VER_SUITE_BLADE)
 					os <<  "Web Edition";
-				}
-				else{
+				else
 					os <<  "Standard Edition";
-				}
 			}
 		}
 	} 
 	if(vi.dwMajorVersion == 5 && vi.dwMinorVersion == 1){
-		if(vi.wSuiteMask & VER_SUITE_PERSONAL){
+		if(vi.wSuiteMask & VER_SUITE_PERSONAL)
 			os <<  "Home Edition";
-		}
-		else{
+		else
 			os <<  "Professional";
-		}
 	} 
 	if(vi.dwMajorVersion == 5 && vi.dwMinorVersion == 0){
 		if(vi.wProductType == VER_NT_WORKSTATION){
 			os <<  "Professional";
 		}
 		else{
-			if(vi.wSuiteMask & VER_SUITE_DATACENTER){
+			if(vi.wSuiteMask & VER_SUITE_DATACENTER)
 				os <<  "Datacenter Server";
-			}
-			else if(vi.wSuiteMask & VER_SUITE_ENTERPRISE){
+			else if(vi.wSuiteMask & VER_SUITE_ENTERPRISE)
 				os <<  "Advanced Server";
-			}
-			else{
+			else
 				os <<  "Server";
-			}
 		}
 	} 
 	osversion = toString(os.str());
@@ -345,19 +296,15 @@ bool GetOSVersion(DKString& osversion)
 	osversion = "";
 	return true;
 #endif
-	return DKERROR("GetOSVersion() not inplemented on this OS \n");
+	return DKERROR("not inplemented on this OS \n");
 }
 
-//////////////////////////////////////////////
-bool GetOSServicePack(DKString& osservicepack)
-{
+bool GetOSServicePack(DKString& osservicepack){
 #ifdef WIN32
 	RTL_OSVERSIONINFOEXW vi;
-	if (!GetWinOSVersion(vi)) {
-		return false;
-	}
+	if (!GetWinOSVersion(vi))
+		return DKERROR("GetWinOSVersion() failed\n");
 	std::wstringstream os;
-
 	// Include service pack (if any). 
 	if(wcslen((const wchar_t*)vi.szCSDVersion) > 0){
 		os << vi.szCSDVersion;
@@ -377,19 +324,15 @@ bool GetOSServicePack(DKString& osservicepack)
 	osservicepack = "";
 	return true;
 #endif
-	return DKERROR("GetOSServicePack() not inplemented on this OS \n");
+	return DKERROR("not inplemented on this OS\n");
 }
 
-//////////////////////////////////
-bool GetOSBuild(DKString& osbuild)
-{
+bool GetOSBuild(DKString& osbuild){
 #ifdef WIN32
 	RTL_OSVERSIONINFOEXW vi;
-	if (!GetWinOSVersion(vi)) {
-		return false;
-	}
+	if (!GetWinOSVersion(vi))
+		return DKERROR("GetWinOSVersion() failed\n");
 	std::wstringstream os;
-	
 	os << L"build " << vi.dwMajorVersion << "." << vi.dwMinorVersion << "." << vi.dwBuildNumber;
 	osbuild = toString(os.str());
 	return true;
@@ -406,23 +349,19 @@ bool GetOSBuild(DKString& osbuild)
 	osbuild = "";
 	return true;
 #endif
-	return DKERROR("GetOSBuild() not inplemented on this OS \n");
+	return DKERROR("not inplemented on this OS \n");
 }
 
-////////////////////////////////////////////////
-bool GetOSArchitecture(DKString& osarchitecture)
-{
+bool GetOSArchitecture(DKString& osarchitecture){
 #ifdef WIN32
 	RTL_OSVERSIONINFOEXW vi;
-	if (!GetWinOSVersion(vi)) {
-		return false;
-	}
+	if (!GetWinOSVersion(vi))
+		return DKERROR("GetWinOSVersion() failed\n");
 	SYSTEM_INFO si;
 	GetWinSystemInfo(si);
 	std::wstringstream os;
-
 	if((vi.dwMajorVersion == 5 && vi.dwMinorVersion >= 2) || vi.dwMajorVersion >= 6) {
-		if (si.wProcessorArchitecture == PROCESSOR_ARCHITECTURE_AMD64) {
+		if (si.wProcessorArchitecture == PROCESSOR_ARCHITECTURE_AMD64){
 			os << "64";
 		}
 		else {
@@ -434,12 +373,10 @@ bool GetOSArchitecture(DKString& osarchitecture)
 					os << "32";
 					return DKERROR("GetOSArchitecture(): failed at: fnIsWow64Process(GetCurrentProcess(), &bIsWow64)");
 				}
-				if (bIsWow64) {
+				if (bIsWow64) 
 					os << "64";
-				}
-				else {
+				else
 					os << "32";
-				}
 			}
 			
 		}
@@ -462,12 +399,11 @@ bool GetOSArchitecture(DKString& osarchitecture)
 	osarchitecture = "";
 	return true;
 #endif
-	return DKERROR("GetOSArchitecture() not inplemented on this OS \n");
+	return DKERROR("not inplemented on this OS \n");
 }
 
 ////////////////////////////////////////////
-bool GetComputerName(DKString& computername)
-{
+bool GetComputerName(DKString& computername){
 #ifdef WIN32
 	TCHAR computerName[MAX_COMPUTERNAME_LENGTH + 1];
 	DWORD size = sizeof(computerName) / sizeof(computerName[0]);
@@ -475,12 +411,11 @@ bool GetComputerName(DKString& computername)
 	computername = (DKString)computerName;
 	return true;
 #endif
-	return DKERROR("GetComputerName() not implemented on this OS \n");
+	return DKERROR("not implemented on this OS \n");
 }
 
 #ifdef WIN32
-bool GetWinOSVersion(RTL_OSVERSIONINFOEXW& vi)
-{
+bool GetWinOSVersion(RTL_OSVERSIONINFOEXW& vi){
 	ZeroMemory(&vi, sizeof(RTL_OSVERSIONINFOEXW));
 	HMODULE hMod = ::GetModuleHandleW(L"ntdll.dll");
 	if(hMod){
@@ -490,7 +425,7 @@ bool GetWinOSVersion(RTL_OSVERSIONINFOEXW& vi)
 			vi.dwOSVersionInfoSize = sizeof(vi);
 			if (STATUS_SUCCESS == fxPtr(&vi)){
 				if (VER_PLATFORM_WIN32_NT != vi.dwPlatformId || vi.dwMajorVersion <= 4)
-					return DKERROR("GetRealOSVersion(): Not WinNT and Version < 4");
+					return DKERROR("Not WinNT and Version < 4");
 				return true;
 			}
 		}
@@ -499,8 +434,7 @@ bool GetWinOSVersion(RTL_OSVERSIONINFOEXW& vi)
 	return false;
 }
 
-bool GetWinSystemInfo(SYSTEM_INFO& si) 
-{
+bool GetWinSystemInfo(SYSTEM_INFO& si) {
 	ZeroMemory(&si, sizeof(SYSTEM_INFO));
 	HMODULE hMod = ::GetModuleHandleW(L"kernel32.dll");
 	if (hMod) {
@@ -516,8 +450,7 @@ bool GetWinSystemInfo(SYSTEM_INFO& si)
 	return false;
 }
 
-bool GetWinProductInfo(RTL_OSVERSIONINFOEXW& vi, DWORD& dwType) 
-{
+bool GetWinProductInfo(RTL_OSVERSIONINFOEXW& vi, DWORD& dwType) {
 	HMODULE hMod = ::GetModuleHandleW(L"kernel32.dll");
 	if (hMod) {
 		ProductInfoPtr fxPtr = (ProductInfoPtr)::GetProcAddress(hMod, "GetProductInfo");

@@ -192,7 +192,7 @@ bool DKWindows::FindImageOnScreen(const DKString& file, int& x, int& y){
 				match = true;
 			else
 				match = false;
-				i=(bm.bmHeight * bm.bmWidth * 4);
+				i=(bm.bmHeight * bm.bmWidth * 4); //FIXME: does this go with the else clause above?
 		}
 		if(match == true){
 			DKINFO("image match!\n");
@@ -240,7 +240,7 @@ bool DKWindows::GetClipboard(DKString& text){
 	if(OpenClipboard(NULL)){
 		buffer = (char*)GetClipboardData(CF_TEXT);
 		if(!buffer)
-			return false;
+			return DKERROR("buffer invalid");
 		text = buffer;
 		CloseClipboard(); 
 		return true;
@@ -259,7 +259,7 @@ bool DKWindows::GetLastError(DKString& error){
 	//Get the error message, if any.
 	DWORD errorMessageID = ::GetLastError();
 	if (errorMessageID == 0)
-		return true;//std::string(); //No error message has been recorded
+		return true; //No error message has been recorded
 	LPSTR messageBuffer = nullptr;
 	size_t size = FormatMessageA(FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS,
 		NULL, errorMessageID, MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), (LPSTR)&messageBuffer, 0, NULL);
@@ -346,7 +346,7 @@ bool DKWindows::GetScreenWidth(int& w){
 	RECT desktop;
 	const HWND hDesktop = GetDesktopWindow();
 	if(!GetWindowRect(hDesktop, &desktop))
-		return false;
+		return DKERROR("GetWindowRect() failed");
 	w = desktop.right;
 	return true;
 }
@@ -641,7 +641,7 @@ bool DKWindows::SetClipboardImage(const DKString& file){
 	HBITMAP hBM = (HBITMAP) LoadImage( NULL, file.c_str(), IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 	HWND hWnd = ::GetActiveWindow();
 	if(!::OpenClipboard(hWnd))
-		return DKERROR("DKWindows::SetClipboardImage("+file+"): ::OpenClipboard(hWnd) failed\n");
+		return DKERROR("file:("+file+"): ::OpenClipboard(hWnd) failed\n");
 	::EmptyClipboard();
 	BITMAP bm;
 	::GetObject(hBM, sizeof(bm), &bm);

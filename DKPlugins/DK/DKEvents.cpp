@@ -22,9 +22,9 @@ bool DKEvents::AddEvent(const DKString& id, const DKString& type, const DKString
 	DKString _jsreturn = jsreturn;
 	replace(_jsreturn, "() { [ecmascript code] }", ""); //remove  () { [ecmascript code] }
 	if(id.empty())
-		return DKERROR("DKEvents::AddEvent("+id+","+type+","+_jsreturn+"): No Id Specified\n");
+		return DKERROR("("+id+","+type+","+_jsreturn+"): No Id Specified\n");
 	if(type.empty())
-		return DKERROR("DKEvents::AddEvent("+id+","+type+","+_jsreturn+"): No Type Specified\n");
+		return DKERROR("("+id+","+type+","+_jsreturn+"): No Type Specified\n");
 	DKEvents* event = new DKEvents;
 	event->id = id;
 	event->type = type;
@@ -33,7 +33,7 @@ bool DKEvents::AddEvent(const DKString& id, const DKString& type, const DKString
 	event->event_func = func;
 	for(unsigned int i = 0; i < events.size(); ++i){
 		if(event == events[i]){
-			DKWARN("DKEvents::AddEvent(): Event Exists, Re-registering. ("+id+" : "+type+" : "+_jsreturn+")\n.");
+			DKWARN("Event already Exists, Re-registering. ("+id+" : "+type+" : "+_jsreturn+")\n.");
 			events[i] = event;
 			for(unsigned int i=0; i<reg_funcs.size(); ++i)
 				reg_funcs[i](id, type); //External Reg Functions
@@ -50,9 +50,9 @@ bool DKEvents::SendEvent(const DKString& id, const DKString& type, const DKStrin
 	if(!same(id,"DKLog") && !same(type,"second") && !same(type,"mousemove")) //prevent looping messages
 		DKDEBUGFUNC(id, type, value);
 	if(type.empty())
-		return DKERROR("DKEvents::SendEvent("+id+", ,"+value+"): No Type Specified \n");
+		return DKERROR("("+id+", ,"+value+"): No Type Specified \n");
 	if(id.empty())
-		return DKERROR("DKEvents::SendEvent( ,"+type+","+value+"): No Id Specified \n");
+		return DKERROR("( ,"+type+","+value+"): No Id Specified \n");
 	//call the function directly
 	for(unsigned int i = 0; i < events.size(); ++i){
 		if((same(events[i]->id, id)) && same(events[i]->type, type)){

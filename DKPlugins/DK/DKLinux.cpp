@@ -23,27 +23,22 @@ t_key keys[] = {
 };
 */
 
-
 bool DKLinux::GetKey(int& key){
 	DKDEBUGFUNC("key");
-
 	//Method 1
 	//system("stty raw"); // Set terminal to raw mode, (no wait for enter) 
 	key = getchar();       
 	//system("stty cooked"); // Reset terminal to normal "cooked" mode
-
 	/*
 	//Method 2
 	if(!getch(key))
 		return DKERROR("get_ch(key) failed\n");
 	return true;
 	*/
-
 	//Method 3
 	//key = ch_get(keys);
 	return true;
 }
-
 
 // https://eklitzke.org/blocking-io-nonblocking-io-and-epoll
 bool DKLinux::getch(int& key){
@@ -70,7 +65,6 @@ bool DKLinux::getch(int& key){
     // now set the flags to what they are + non-blocking
     if ((flags = fcntl(STDIN_FILENO, F_SETFL, flags | O_NONBLOCK)) == -1)
         return DKERROR("fcntl(STDIN_FILENO, F_SETFL, f | O_NONBLOCK) failed");
-	
 	// read the buffer until we run out of data
 	/*
 	while(buffer){
@@ -80,7 +74,6 @@ bool DKLinux::getch(int& key){
 			return DKERROR("2nd read(0 &buffer, sizeof(buffer) failed");
 	}
 	*/
-
 	if(!buffer[0])
 		return DKERROR("buffer invalid");
     int i=0;
@@ -89,7 +82,6 @@ bool DKLinux::getch(int& key){
     if(!buffer[i-1])
 		return DKERROR("buffer invalid");
     key = buffer[i-1];
-
 	if ((flags = fcntl(STDIN_FILENO, F_SETFL, stored_flags)) == -1)
 		DKERROR("fcntl(STDIN_FILENO, F_SETFL, stored_flags)) failed");
     old.c_lflag |= ICANON;
@@ -103,10 +95,8 @@ bool DKLinux::getch(int& key){
 		return DKERROR("buffer has data and it shouldn't");
 	key = stored;
 	*/
-
 	//int c;
 	//while((c = getc(stdin) != EOF && c != '\n')){} //clear out stdin 
-	
 	//DKINFO("DKLinux::getch(): key = "+key+"\n");
 	return true;
 }
@@ -117,7 +107,6 @@ bool DKLinux::GetMousePos(int& x, int& y){
     //cc -Wall -I/usr/X11R6/include -L/usr/X11R6/lib -lXm -o xquerypointer xquerypointer.c
 	//or on solaris:
     //cc -I/usr/openwin/include xquerypointer.c -L/usr/openwin/lib -lX11
-	
 	Display *dpy;
 	Window root;
 	Window ret_root;
@@ -283,20 +272,16 @@ bool DKLinux::SetVolume(double nVolume){
 	snd_mixer_selem_id_t *sid;
 	const char *card = "default";
 	const char *selem_name = "Master";
-
 	snd_mixer_open(&handle, 0);
 	snd_mixer_attach(handle, card);
 	snd_mixer_selem_register(handle, NULL, NULL);
 	snd_mixer_load(handle);
-
 	snd_mixer_selem_id_alloca(&sid);
 	snd_mixer_selem_id_set_index(sid, 0);
 	snd_mixer_selem_id_set_name(sid, selem_name);
 	snd_mixer_elem_t* elem = snd_mixer_find_selem(handle, sid);
-
 	snd_mixer_selem_get_playback_volume_range(elem, &min, &max);
 	snd_mixer_selem_set_playback_volume_all(elem, nVolume/* * max / 100*/);
-
 	snd_mixer_close(handle);
 	return true;
 }
@@ -314,23 +299,19 @@ bool DKLinux::GetVolume(int& percent){
 	snd_mixer_selem_id_t *sid;
 	const char *card = "default";
 	const char *selem_name = "Master";
-
 	snd_mixer_open(&handle, 0);
 	snd_mixer_attach(handle, card);
 	snd_mixer_selem_register(handle, NULL, NULL);
 	snd_mixer_load(handle);
-
 	snd_mixer_selem_id_alloca(&sid);
 	snd_mixer_selem_id_set_index(sid, 0);
 	snd_mixer_selem_id_set_name(sid, selem_name);
 	snd_mixer_elem_t* elem = snd_mixer_find_selem(handle, sid);
-
 	snd_mixer_selem_get_playback_volume_range(elem, &min, &max);
 	DKINFO("DKLinux::GetVolume(): min="+toString(min)+" max="+toString(max)+"\n");
 	long int vol;
 	snd_mixer_selem_get_playback_volume(elem, SND_MIXER_SCHN_FRONT_LEFT, &vol);
 	percent = vol * 100;
-
 	DKINFO("DKLinux::GetVolume(): returned "+toString(percent)+"\n");
 	snd_mixer_close(handle);
 	return true;
@@ -350,7 +331,7 @@ bool DKLinux::VirtualMemory(unsigned long long& virtualMemory){
 	totalVirtualMem *= memInfo.mem_unit;
 	virtualMemory = totalVirtualMem;
 	*/
-	return false;
+	return DKERROR("not implemented\n");
 }
 
 bool DKLinux::VirtualMemoryUsed(unsigned long long& virtualMemory){
@@ -363,7 +344,7 @@ bool DKLinux::VirtualMemoryUsed(unsigned long long& virtualMemory){
 	virtualMemUsed *= memInfo.mem_unit;
 	virtualMemory = virtualMemUsed;
 	*/
-	return false;
+	return DKERROR("not implemented\n");
 }
 
 bool DKLinux::VirtualMemoryUsedByApp(unsigned int& virtualMemory){
@@ -373,7 +354,6 @@ bool DKLinux::VirtualMemoryUsedByApp(unsigned int& virtualMemory){
 	#include "stdlib.h"
 	#include "stdio.h"
 	#include "string.h"
-
 	int parseLine(char* line){
 	    // This assumes that a digit will be found and the line ends in " Kb".
 	    int i = strlen(line);
@@ -383,12 +363,10 @@ bool DKLinux::VirtualMemoryUsedByApp(unsigned int& virtualMemory){
 	    i = atoi(p);
 	    return i;
 	}
-
 	int getValue(){ //Note: this value is in KB!
 		FILE* file = fopen("/proc/self/status", "r");
 		int result = -1;
 		char line[128];
-
 		while (fgets(line, 128, file) != NULL){
 		    if (strncmp(line, "VmSize:", 7) == 0){
 		        result = parseLine(line);
@@ -399,7 +377,7 @@ bool DKLinux::VirtualMemoryUsedByApp(unsigned int& virtualMemory){
 		return result;
 	}
 	*/
-	return false;
+	return DKERROR("not implemented\n");
 }
 
 bool DKLinux::PhysicalMemory(unsigned long long& physicalMemory){
@@ -411,7 +389,7 @@ bool DKLinux::PhysicalMemory(unsigned long long& physicalMemory){
 	totalPhysMem *= memInfo.mem_unit;
 	physicalMemory = totalPhysMem;
 	*/
-	return false;
+	return DKERROR("not implemented\n");
 }
 
 bool DKLinux::PhysicalMemoryUsed(unsigned long long& physicalMemory){
@@ -423,7 +401,7 @@ bool DKLinux::PhysicalMemoryUsed(unsigned long long& physicalMemory){
 	physMemUsed *= memInfo.mem_unit;
 	physicalMemory = physMemUsed;
 	*/
-	return false;
+	return DKERROR("not implemented\n");
 }
 
 bool DKLinux::PhysicalMemoryUsedByApp(unsigned int& physicalMemory){
@@ -433,7 +411,6 @@ bool DKLinux::PhysicalMemoryUsedByApp(unsigned int& physicalMemory){
 	#include "stdlib.h"
 	#include "stdio.h"
 	#include "string.h"
-
 	int parseLine(char* line){
 		// This assumes that a digit will be found and the line ends in " Kb".
 		int i = strlen(line);
@@ -443,12 +420,10 @@ bool DKLinux::PhysicalMemoryUsedByApp(unsigned int& physicalMemory){
 		i = atoi(p);
 		return i;
 	}
-
 	int getValue(){ //Note: this value is in KB!
 		FILE* file = fopen("/proc/self/status", "r");
 		int result = -1;
 		char line[128];
-
 		while (fgets(line, 128, file) != NULL){
 			if (strncmp(line, "VmRSS:", 6) == 0){
 				result = parseLine(line);
@@ -459,13 +434,13 @@ bool DKLinux::PhysicalMemoryUsedByApp(unsigned int& physicalMemory){
 		return result;
 	}
 	*/
-	return false;
+	return DKERROR("not implemented\n");
 }
 
 bool DKLinux::CpuInit(){
 	DKDEBUGFUNC();
 	//TODO
-	return false;
+	return DKERROR("not implemented\n");
 }
 
 bool DKLinux::CpuUsed(int& cpu){
@@ -475,24 +450,19 @@ bool DKLinux::CpuUsed(int& cpu){
 	#include "stdlib.h"
 	#include "stdio.h"
 	#include "string.h"
-
 	static unsigned long long lastTotalUser, lastTotalUserLow, lastTotalSys, lastTotalIdle;
-
 	void init(){
 		FILE* file = fopen("/proc/stat", "r");
 		fscanf(file, "cpu %llu %llu %llu %llu", &lastTotalUser, &lastTotalUserLow, &lastTotalSys, &lastTotalIdle);
 		fclose(file);
 	}
-
 	double getCurrentValue(){
 		double percent;
 		FILE* file;
 		unsigned long long totalUser, totalUserLow, totalSys, totalIdle, total;
-
 		file = fopen("/proc/stat", "r");
 		fscanf(file, "cpu %llu %llu %llu %llu", &totalUser, &totalUserLow, &totalSys, &totalIdle);
 		fclose(file);
-
 		if(totalUser < lastTotalUser || totalUserLow < lastTotalUserLow || totalSys < lastTotalSys || totalIdle < lastTotalIdle){
 			//Overflow detection. Just skip this value.
 			percent = -1.0;
@@ -504,16 +474,14 @@ bool DKLinux::CpuUsed(int& cpu){
 			percent /= total;
 			percent *= 100;
 		}
-
 		lastTotalUser = totalUser;
 		lastTotalUserLow = totalUserLow;
 		lastTotalSys = totalSys;
 		lastTotalIdle = totalIdle;
-
 		return percent;
 	}
 	*/
-	return false;
+	return DKERROR("not implemented\n");
 }
 
 bool DKLinux::CpuUsedByApp(int& cpu){
@@ -525,19 +493,15 @@ bool DKLinux::CpuUsedByApp(int& cpu){
 	#include "string.h"
 	#include "sys/times.h"
 	#include "sys/vtimes.h"
-
 	static clock_t lastCPU, lastSysCPU, lastUserCPU;
 	static int numProcessors;
-
 	void init(){
 		FILE* file;
 		struct tms timeSample;
 		char line[128];
-
 		lastCPU = times(&timeSample);
 		lastSysCPU = timeSample.tms_stime;
 		lastUserCPU = timeSample.tms_utime;
-
 		file = fopen("/proc/cpuinfo", "r");
 		numProcessors = 0;
 		while(fgets(line, 128, file) != NULL){
@@ -545,12 +509,10 @@ bool DKLinux::CpuUsedByApp(int& cpu){
 		}
 		fclose(file);
 	}
-
 	double getCurrentValue(){
 		struct tms timeSample;
 		clock_t now;
 		double percent;
-
 		now = times(&timeSample);
 		if(now <= lastCPU || timeSample.tms_stime < lastSysCPU || timeSample.tms_utime < lastUserCPU){
 			//Overflow detection. Just skip this value.
@@ -569,7 +531,7 @@ bool DKLinux::CpuUsedByApp(int& cpu){
 		return percent;
 	}
 	*/
-	return false;
+	return DKERROR("not implemented\n");
 }
 
 bool DKLinux::TurnOffMonitor(){
@@ -580,12 +542,12 @@ bool DKLinux::TurnOffMonitor(){
 
 bool DKLinux::TurnOnMonitor(){
 	DKDEBUGFUNC();
-	return false;
+	return DKERROR("not implemented\n");
 }
 
 bool DKLinux::LowPowerMonitor(){
 	DKDEBUGFUNC();
-	return false;
+	return DKERROR("not implemented\n");
 }
 
 #endif //LINUX
