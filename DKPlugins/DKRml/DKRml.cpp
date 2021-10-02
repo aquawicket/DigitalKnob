@@ -439,35 +439,35 @@ bool DKRml::SendEvent(const DKString& elementAddress, const DKString& type, cons
 }
 
 bool DKRml::DebuggerOff(){
-//#ifndef LINUX
 #ifdef USE_rmlui_debugger
 	Rml::Debugger::SetVisible(false);
 	DKINFO("Rml Debugger OFF\n");
+#else
+	return DKERROR("RML Debugger not available \n");
 #endif
-//#endif
 	return true;
 }
 
 bool DKRml::DebuggerOn(){
-//#ifndef LINUX
 #ifdef USE_rmlui_debugger
 	Rml::Debugger::SetVisible(true);
 	DKINFO("Rml Debugger ON\n");
+#else
+	return DKERROR("RML Debugger not available \n");
 #endif
-//#endif
 	return true;
 }
 
 bool DKRml::DebuggerToggle(){
 	DKDEBUGFUNC();
-//#ifndef LINUX
 #ifdef USE_rmlui_debugger
 	if(Rml::Debugger::IsVisible()) //FIXME:  always returns false
 		DKRml::DebuggerOff();
 	else
 		DKRml::DebuggerOn();
+#else
+	return DKERROR("RML Debugger not available \n");
 #endif
-//#endif
 	return true;
 }
 
