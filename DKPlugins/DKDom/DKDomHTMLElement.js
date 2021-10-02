@@ -114,7 +114,7 @@ var HTMLElement = function(pointer) {
         }
     });
     Object.defineProperty(this, "noModule", {
-        get: function() {
+		get: function() {
             return CPP_DKDomHTMLElement_noModule(pointer);
         }
     });

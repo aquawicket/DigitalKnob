@@ -35,11 +35,13 @@ var HTMLScriptElement = function(pointer) {
         }
     });
 	Object.defineProperty(this, "noModule", {
+		configurable: true,
         get: function() {
             return CPP_DKDomHTMLScriptElement_noModule(pointer);
         }
     });
 	Object.defineProperty(this, "nonce", {
+		configurable: true,
         get: function() {
             return CPP_DKDomHTMLScriptElement_nonce(pointer);
         }
@@ -56,8 +58,11 @@ var HTMLScriptElement = function(pointer) {
     });
 	Object.defineProperty(this, "src", {
         get: function() {
-            return CPP_DKDomHTMLScriptElement_src(pointer);
-        }
+			return CPP_DKDomElement_getAttribute(pointer, "src")
+        },
+		set: function(val) {
+			return CPP_DKDomElement_setAttribute(pointer, "src", val)
+		}
     });
 	Object.defineProperty(this, "text", {
         get: function() {
