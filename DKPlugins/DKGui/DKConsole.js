@@ -355,7 +355,6 @@ DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left
         msgSpan.setAttribute("dk_console", "msgSpan")
 
         //If the message is the same as the last, just increase a count next to the original.
-		if(!DUKTAPE){
         const lastMsgDiv = dk.console.logDiv.lastChild.previousSibling;
         if (lastMsgDiv) {
             const lastMsgSpan = lastMsgDiv.firstChild.nextSibling;
@@ -386,7 +385,7 @@ DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left
                 return;
             }
         }
-		}
+		
 
         if (arguments[1] && arguments[1].includes && arguments[1].includes("<anonymous>")) {
             arguments[1] = arguments[1].replace("<anonymous>", "&lt;anonymous&gt;");
@@ -421,6 +420,7 @@ DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left
             }
 
         } 
+
 		else {
             msgSpan.innerHTML = arguments[1];
         }
@@ -441,7 +441,7 @@ DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left
             msgDiv.setAttribute("dk_console", "msgDivGreen");
             msgSpan.setAttribute("dk_console", "msgSpanGreen");
         }
-
+		
         dk.console.logDiv.appendChild(msgDiv);
         dk.console.logDiv.appendChild(dk.console.commandDiv);
         msgDiv.appendChild(msgSpan);

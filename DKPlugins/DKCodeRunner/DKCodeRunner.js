@@ -33,7 +33,7 @@ DKCodeRunner.prototype.create = function DKCodeRunner_create(parent, top, bottom
 	textarea.style.right = "000px"
 	textarea.style.width = "100%"
 	textarea.style.height = "100%"
-	textarea.style.fontSize = "14px"
+	textarea.style.fontSize = "18rem"
 	textarea.style.color = "rgb(200,200,200)"
 	textarea.style.backgroundColor = "rgb(30,30,30)"
 	div.appendChild(textarea)
@@ -95,6 +95,18 @@ DKCodeRunner.prototype.create = function DKCodeRunner_create(parent, top, bottom
 		dk.file.pushDKAssets()
 	}
 	document.body.appendChild(pullAssets)
+	
+	const fileManager = document.createElement("img")
+	fileManager.src = "DKCodeRunner/folderIcon.png"
+	fileManager.style.position = "absolute"
+	fileManager.style.top = "3rem"
+	fileManager.style.right = "50rem"
+	fileManager.style.width = "35rem"
+	fileManager.style.height = "30rem"
+	fileManager.onclick = function(event) {
+		console.log("fileManager")
+	}
+	document.body.appendChild(fileManager)
 	
 	const debugg = document.createElement("img")
 	debugg.src = "DKCodeRunner/Debugger.png"
