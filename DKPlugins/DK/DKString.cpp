@@ -222,6 +222,7 @@ unsigned long long int toULongLong(const DKString& str){
 	return strtoull(str.c_str(), NULL, 0);
 }
 
+#ifdef WIN32
 std::wstring toWString(const DKString& str){
 	int len;
 	int slength = (int)str.length() + 1;
@@ -232,6 +233,7 @@ std::wstring toWString(const DKString& str){
 	delete[] buf;
 	return r;
 }
+#endif
 
 #ifdef WIN32
 HWND toHWND(const DKString& str){

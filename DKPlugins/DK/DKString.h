@@ -69,8 +69,8 @@ float toFloat(const DKString& str);
 unsigned int toUInt(const DKString& str);
 unsigned long toULong(const DKString& str);
 unsigned long long int toULongLong(const DKString& str);
-std::wstring toWString(const DKString& str);
 #ifdef WIN32
+std::wstring toWString(const DKString& str);
 HWND toHWND(const DKString& str);
 #endif
 
