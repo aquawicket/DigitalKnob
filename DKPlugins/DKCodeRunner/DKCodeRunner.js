@@ -5,6 +5,8 @@ dk.coderunner = DKPlugin(DKCodeRunner)
 DKCodeRunner.prototype.init = function DKCodeRunner_init() {
 	console.log("DKCodeRunner.prototype.init()")
 	DKPlugin("DKFile/DKFile.js")
+	DKPlugin("DKGui/DKGui.js")
+	DKPlugin("DKGui/DKFrame.js")
 	DKPlugin("DKGui/DKMenu.js")
 	this.create()
 }
@@ -116,8 +118,14 @@ DKCodeRunner.prototype.create = function DKCodeRunner_create(parent, top, bottom
 	document.body.appendChild(folderIcon)
 	*/
 	
-	dk.gui.createImageButton(document.body, "MessageBox", "DKCodeRunner/messageboxIcon.png", "3rem", "", "", "90rem", "35rem", "30rem", function() {
-        console.log("messagebox")
+	dk.gui.createImageButton(document.body, "Message Box", "DKCodeRunner/messageboxIcon.png", "3rem", "", "", "90rem", "35rem", "30rem", function() {
+        DKPlugin("DKGui/DKMessageBox.js", function() {
+            DKMessageBox.prototype.createConfirm("Restart Yes or No?", function dk_messagebox_createConfirm_callback(rval) {
+                if (rval) {
+                    console.log("you clicked "+rval);
+                }
+			});
+		});
 	})
 	
 	dk.gui.createImageButton(document.body, "File Manager", "DKCodeRunner/folderIcon.png", "3rem", "", "", "50rem", "35rem", "30rem", function() {
@@ -127,21 +135,10 @@ DKCodeRunner.prototype.create = function DKCodeRunner_create(parent, top, bottom
         });
     })
 	
-	const debugg = document.createElement("img")
-	debugg.src = "DKCodeRunner/Debugger.png"
-	debugg.style.position = "absolute"
-	debugg.style.top = "3rem"
-	debugg.style.right = "10rem"
-	debugg.style.width = "35rem"
-	debugg.style.height = "30rem"
-	debugg.onclick = function(event) {
-		console.log("debugger")
-		if(dk.getBrowser() === "Rml"){
-			console.log("CPP_DKRml_DebuggerToggle()")
+	dk.gui.createImageButton(document.body, "Debugger", "DKCodeRunner/Debugger.png", "3rem", "", "", "10rem", "35rem", "30rem", function() {
+        if(dk.getBrowser() === "Rml")
 			CPP_DKRml_DebuggerToggle()
-		}
-	}
-	document.body.appendChild(debugg)
+	})
 }
 
 DKCodeRunner.prototype.close = function DKCodeRunner_close(){
