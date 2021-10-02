@@ -71,6 +71,6 @@ var HTMLScriptElement = function(pointer) {
     });
     return HTMLElement.call(this, pointer);
 }
+
 https://html.spec.whatwg.org/multipage/scripting.html#the-script-element
-// interface HTMLScriptElement : HTMLElement
 HTMLScriptElement.prototype = HTMLElement.prototype;
