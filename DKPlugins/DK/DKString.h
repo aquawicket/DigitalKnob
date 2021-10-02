@@ -52,8 +52,8 @@ DKString toString(void* _voidptr);
 DKString toString(const DKStringArray& arry, const char* seperator);
 DKString toLower(const DKString& str);
 DKString toUpper(const DKString& str);
-#ifdef WIN32
 DKString toString(const std::wstring& _wstring);
+#ifdef WIN32
 DKString toString(const HWND hwnd);
 #endif
 
@@ -69,8 +69,8 @@ float toFloat(const DKString& str);
 unsigned int toUInt(const DKString& str);
 unsigned long toULong(const DKString& str);
 unsigned long long int toULongLong(const DKString& str);
-#ifdef WIN32
 std::wstring toWString(const DKString& str);
+#ifdef WIN32
 HWND toHWND(const DKString& str);
 #endif
 

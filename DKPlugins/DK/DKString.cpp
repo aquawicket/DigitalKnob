@@ -1,6 +1,7 @@
 #include "DK/stdafx.h"
 #include "DKString.h"
 #include "DKLog.h"
+#include <codecvt> //string <--> wsting conversion
 
 
 bool same(const DKString& str, const DKString& str2){
@@ -131,16 +132,22 @@ DKString toString(void* _voidptr){
 	return string;
 }
 
-#ifdef WIN32
+// https://stackoverflow.com/a/65863170/688352
+// https://riptutorial.com/cplusplus/example/4190/conversion-to-std--wstring
 DKString toString(const std::wstring& _wstring){
+/*
+#ifdef WIN32
 	int len;
     int slength = (int)_wstring.length();
     len = WideCharToMultiByte(CP_ACP, 0, _wstring.c_str(), slength, 0, 0, 0, 0); 
     std::string s(len, '\0');
     WideCharToMultiByte(CP_ACP, 0, _wstring.c_str(), slength, &s[0], len, 0, 0); 
     return s;
+#else
+*/
+	return std::wstring_convert<std::codecvt_utf8<wchar_t>>().to_bytes(_wstring);
+//#endif
 }
-#endif // WIN32
 
 DKString toString(const DKStringArray& arry, const char* seperator){
 	DKString string = "";
@@ -222,8 +229,11 @@ unsigned long long int toULongLong(const DKString& str){
 	return strtoull(str.c_str(), NULL, 0);
 }
 
-#ifdef WIN32
+// https://stackoverflow.com/a/65863170/688352
+// https://riptutorial.com/cplusplus/example/4190/conversion-to-std--wstring
 std::wstring toWString(const DKString& str){
+/*
+#ifdef WIN32
 	int len;
 	int slength = (int)str.length() + 1;
 	len = MultiByteToWideChar(CP_ACP, 0, str.c_str(), slength, 0, 0);
@@ -232,8 +242,11 @@ std::wstring toWString(const DKString& str){
 	std::wstring r(buf);
 	delete[] buf;
 	return r;
+#else
+*/
+	return std::wstring_convert<std::codecvt_utf8<wchar_t>>().from_bytes(str);
+//#endif
 }
-#endif
 
 #ifdef WIN32
 HWND toHWND(const DKString& str){
