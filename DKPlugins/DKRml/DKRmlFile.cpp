@@ -3,8 +3,13 @@
 #include "DKRml.h"
 #include "DKCurl/DKCurl.h"
 
-Rml::FileHandle DKRmlFile::Open(const Rml::String& path){
-	DKDEBUGFUNC("Rml::String&");
+Rml::FileHandle DKRmlFile::Open(const Rml::String& _path){
+	DKDEBUGFUNC("path");
+
+	DKString path = path;
+	if(!DKFile::VerifyPath(path))
+		return DKERROR("could not locate path ("+path+")");
+
 	DKString _url = path;
 	if (has(_url, ":/")) { //could be http:// , https:// or C:/
 		//absolute path

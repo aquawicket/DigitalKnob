@@ -22,7 +22,7 @@ bool DKRmlCss::Init(){
 
 	DKString file = data[1];
 	if(!DKFile::VerifyPath(file))
-		return ERROR("could not find css file\n");	
+		return DKERROR("could not find css file\n");	
 
 	//Load user agent style sheet
 	const Rml::StyleSheetContainer* doc_sheet = dkRml->document->GetOwnerDocument()->GetStyleSheetContainer();
