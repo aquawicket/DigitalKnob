@@ -6,7 +6,6 @@ echo "ostype = $OSTYPE"
 echo "machtype = $MACHTYPE"
 
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-	sudo echo
 	DKPATH="/home/$USER/digitalknob/DK"
 elif [[ "$OSTYPE" == "darwin"* ]]; then
 	DKPATH="/Users/$USER/digitalknob/DK"
@@ -30,6 +29,7 @@ GPP_PATH=$(which g++)
 export CC="$GCC_PATH"
 export CXX="$GPP_PATH"
 
+sudo echo
 
 while :
 	do
@@ -41,6 +41,7 @@ while :
 		case $opt in
 			"Git Update")
 				echo "$opt"
+				sudo apt-get -y install git
 				git clone https://github.com/aquawicket/DigitalKnob.git $DKPATH
 				cd $DKPATH
 				git checkout -- .
@@ -60,7 +61,7 @@ while :
 				;;
 			"DKTestAll")
 				echo "$opt"
-			APP="DKTestAll"
+				APP="DKTestAll"
 				break
 				;;
 			"Exit")
@@ -108,20 +109,15 @@ while :
 	done
 
 	cd $DKPATH
+	sudo apt-get -y install cmake
+	sudo apt-get -y install gcc
+	sudo apt-get -y install g++
 	echo Deleteing CMake cache . . .
 	find . -name "CMakeCache.*" -delete
 	rm -rf `find . -type d -name CMakeFiles`
-	#find . -type d -name "CMakeFiles" -delete
-			
 		
 	mkdir $DKPATH/DKApps/$APP/$OS
 	if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-		DKPATH="/home/$USER/digitalknob/DK"
-		sudo apt-get -y install git
-		sudo apt-get -y install cmake
-		sudo apt-get -y install gcc
-		sudo apt-get -y install g++
-		
 		mkdir $DKPATH/DKApps/$APP/$OS/Debug
 		cd $DKPATH/DKApps/$APP/$OS/Debug
 		cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER="$GCC_PATH" -DCMAKE_CXX_COMPILER="$GPP_PATH" -DDEBUG=ON -DREBUILDALL=ON -DSTATIC=ON $DKPATH
