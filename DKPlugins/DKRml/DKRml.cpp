@@ -64,7 +64,8 @@ bool DKRml::Init(){
 		.GetId(); //this supresses border-style warnings temporarily
 
 	context->SetDocumentsBaseTag("html");
-	LoadFonts(DKString(DKFile::local_assets+"DKRml"));
+	DKString rmlFonts = DKFile::local_assets+"DKRml";
+	LoadFonts(rmlFonts);
 	LoadFonts(DKFile::local_assets);
 	DKEvents::AddRegisterEventFunc(&DKRml::RegisterEvent, this);
 	//DKEvents::AddUnegisterEventFunc(&DKRml::UnregisterEvent, this);
