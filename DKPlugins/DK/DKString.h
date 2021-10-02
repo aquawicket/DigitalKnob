@@ -49,11 +49,11 @@ DKString toString(const bool _bool);
 DKString toString(const char* _charptr);
 DKString toString(const unsigned char* _uchar);
 DKString toString(void* _voidptr);
-DKString toString(const std::wstring& _wstring);
 DKString toString(const DKStringArray& arry, const char* seperator);
 DKString toLower(const DKString& str);
 DKString toUpper(const DKString& str);
 #ifdef WIN32
+DKString toString(const std::wstring& _wstring);
 DKString toString(const HWND hwnd);
 #endif
 

@@ -131,7 +131,7 @@ DKString toString(void* _voidptr){
 	return string;
 }
 
-//#ifdef WIN32
+#ifdef WIN32
 DKString toString(const std::wstring& _wstring){
 	int len;
     int slength = (int)_wstring.length();
@@ -140,7 +140,7 @@ DKString toString(const std::wstring& _wstring){
     WideCharToMultiByte(CP_ACP, 0, _wstring.c_str(), slength, &s[0], len, 0, 0); 
     return s;
 }
-//#endif // WIN32 || WIN64
+#endif // WIN32 || WIN64
 
 DKString toString(const DKStringArray& arry, const char* seperator){
 	DKString string = "";
