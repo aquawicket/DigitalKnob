@@ -5,7 +5,6 @@
 
 #include "DKDuktape/DKDuktape.h"
 
-/////////////////////////////////////////////////
 class DKArchiveJS : public DKObjectT<DKArchiveJS>
 {
 public:

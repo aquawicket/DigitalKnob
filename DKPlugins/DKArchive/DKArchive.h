@@ -14,7 +14,6 @@ public:
 	static int copy_data(struct archive *ar, struct archive *aw);
 };
 
-
 REGISTER_OBJECT(DKArchive, true);
 
 #endif //DKArchive_H
