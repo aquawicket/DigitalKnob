@@ -16,7 +16,6 @@ function(MyFunc args result)
 	set(args ${ARGV})
 	list(GET args -1 result)
 	list(REMOVE_AT args -1)
-	
 	#work with ${args} and set ${result} here
 	set(${result} ${args} PARENT_SCOPE) #just relay the arguments
 endfunction()
@@ -101,14 +100,14 @@ function(DELETE_CACHE)
 	get_filename_component(DIGITALKNOB ${CMAKE_SOURCE_DIR} ABSOLUTE)
 	message(STATUS "Deleteing CMake cache . . .")
 	if(CMAKE_HOST_WIN32)
-		# DKEXECUTE_PROCESS(for /r %i in (CMakeCache.*) do del "%i" WORKING_DIRECTORY ${DIGITALKNOB})
-        # DKEXECUTE_PROCESS(for /d /r %i in (*CMakeFiles*) do rmdir /s /Q "%i" WORKING_DIRECTORY ${DIGITALKNOB})
+		# DKEXECUTE_PROCESS(for /r %i in (CMakeCache.*) do del "%i" WORKING_DIRECTORY ${DIGITALKNOB}) #does not work in batch files
+        # DKEXECUTE_PROCESS(for /d /r %i in (*CMakeFiles*) do rmdir /s /Q "%i" WORKING_DIRECTORY ${DIGITALKNOB}) #does not work in batch files
 		DKEXECUTE_PROCESS(for /r %%i in (CMakeCache.*) do del "%%i" WORKING_DIRECTORY ${DIGITALKNOB})
 		DKEXECUTE_PROCESS(for /d /r %%i in (*CMakeFiles*) do rd /s /q "%%i" WORKING_DIRECTORY ${DIGITALKNOB})
 	else()
 		DKEXECUTE_PROCESS(find . -name "CMakeCache.*" -delete WORKING_DIRECTORY ${DIGITALKNOB})
 		DKEXECUTE_PROCESS(rm -rf `find . -type d -name CMakeFiles` WORKING_DIRECTORY ${DIGITALKNOB})
-		# DKEXECUTE_PROCESS(find . -type d -name "CMakeFiles" -delete WORKING_DIRECTORY ${DIGITALKNOB})
+		# DKEXECUTE_PROCESS(find . -type d -name "CMakeFiles" -delete WORKING_DIRECTORY ${DIGITALKNOB}) #cannot delete non-empty directories
 	endif()
 endfunction()
 
@@ -173,7 +172,6 @@ function(DOWNLOAD url) # ARGV1 = dest_path
 			message(STATUS "*********************************************")
 			## TODO - copy the url to the clipboard and notify the user
 			message(FATAL_ERROR "error: downloading ${src_filename} status_code: ${status_code} status_string: ${status_string}")
-			
 			##message(STATUS "Attempting to download with DKCurl...")
 			##DKSET(QUEUE_BUILD ON)
 			##WIN_COMMAND("${DIGITALKNOB}/DKCMake/DKCurl.exe ${url} ${CURRENT_DIR}/${src_filename}")
@@ -326,10 +324,9 @@ function(DKINCLUDE path)
 	if(${index} GREATER -1)
 		return() ## If the include is already in the list, return.
 	endif()
-	if(NOT EXISTS ${path})
-		message(WARNING "Error in call to: DKINCLUDE(): the path ${path} does not exist")
-	endif()
-	
+	#if(NOT EXISTS ${path})
+	#	message(WARNING "Error in call to: DKINCLUDE(): the path ${path} does not exist") #sometimes the os directory won't exist yet
+	#endif()
 	DKSET(DKINCLUDES_LIST ${DKINCLUDES_LIST} ${path})
 	include_directories(${path})
 endfunction()
@@ -398,7 +395,6 @@ function(dk_getExtension path result)
     set(${result} ${ext} PARENT_SCOPE)
 endfunction()
 
-
 function(dk_dirIsEmpty path result)
 	if(EXISTS ${path})
 		file(GLOB items RELATIVE "${path}/" "${path}/*")
@@ -411,12 +407,10 @@ function(dk_dirIsEmpty path result)
 	set(${result} true PARENT_SCOPE)
 endfunction()
 
-
 function(DKREFRESH_ICONS)
 	DKEXECUTE_PROCESS(ie4uinit.exe -ClearIconCache)
 	##ie4uinit.exe -show   ##Windows 10
 endfunction()
-
 
 # For archive files such as libraries and assets, the arguments are:  The download src_path, the name of its _DKIMPORTS folder, The name given to the installed 3rdParty/folder  
 # For executable files such as software amd IDE's the arguments are:  The download src_path, the name of the final name of the dl file, The installation path to check for installation.
@@ -424,7 +418,6 @@ function(DKINSTALL src_path import_path dest_path)
 	message(STATUS "\n")
 	message(STATUS "DKINSTALL(${src_path} ${import_path} ${dest_path})")
 	message(STATUS "\n")
-	
 	string(TOLOWER ${import_path} import_path_lower)
 	if(NOT ${import_path} STREQUAL ${import_path_lower})
 		message(FATAL_ERROR "ERROR: 2nd parameter in DKINSTALL() (${import_path}) must be all lowercase")
@@ -436,7 +429,6 @@ function(DKINSTALL src_path import_path dest_path)
 		message(STATUS "${import_path} installed")
 		return()
 	endif()
-	
 	message(STATUS "\n")
 	message(STATUS "src_path: ${src_path}")
 	dk_getDirectory(${src_path} src_directory)
@@ -454,13 +446,11 @@ function(DKINSTALL src_path import_path dest_path)
 	dk_getExtension(${dest_filename} dest_extension)
 	message(STATUS "dest_extension: ${dest_extension}")
 	message(STATUS "\n")
-	
 	dkSet(CURRENT_DIR ${DKDOWNLOAD})
 	dk_makeDirectory(${DKDOWNLOAD})
 	#rename src_filename to dest_filename + src_extension as we download to avoid duiplicate name conflicts
 	dkSet(dl_filename "${dest_filename}${src_extension}")
 	download(${src_path} ${dl_filename})
-	
 	dkset(FILETYPE "UNKNOWN")
 	if(NOT ${src_extension} STREQUAL "")
 		if(${src_extension} STREQUAL ".bz")
@@ -494,16 +484,14 @@ function(DKINSTALL src_path import_path dest_path)
 			DKSET(FILETYPE "Executable")
 		endif()
 	endif()
-	
 	##If the file type is unknown, we'll still try to extract it like a compressed file anyway
 	##It's better the have a chance at success.
 	message(STATUS "The Downloaded file ${${dl_filename}} is a ${FILETYPE} file ${src_extension}")
-	
 	if(${FILETYPE} STREQUAL "UNKNOWN")
 		DKSET(FILETYPE "Archive")
 		message(STATUS "We will try to extract it in case it's an archive, but it may fail.")
 	endif()
-		
+
 	if(${FILETYPE} STREQUAL "Archive")
 		DKREMOVE(${DIGITALKNOB}/Download/UNZIPPED)
 		DKEXTRACT(${DIGITALKNOB}/Download/${dl_filename} ${DIGITALKNOB}/Download/UNZIPPED)
@@ -534,7 +522,6 @@ function(DKINSTALL src_path import_path dest_path)
 	else() #NOT ARCHIVE, just copy the file into it's 3rdParty folder
 		DKCOPY(${DIGITALKNOB}/Download/${dl_filename} ${dest_path}/${dl_filename} TRUE)
 	endif()
-
 	if("${ARGN}" STREQUAL "NOPATCH")
 		message(STATUS "\n ** DKINSTALL has requested a NOPATCH to the install files. The install may not work. Please review ** \n")
 	else()
@@ -542,17 +529,13 @@ function(DKINSTALL src_path import_path dest_path)
 		message(STATUS "To stop patch files from overwrites install files, add a \"NOPATCH\" argument to the end of the DKINSTALL command")
 		DKCOPY(${DKIMPORTS}/${import_path}/ ${dest_path}/ TRUE)
 	endif()
-	
 	file(WRITE ${dest_path}/installed "${dest_filename}")
 endfunction()
-
-
 
 function(dk_validatePath path result)
 	get_filename_component(path ${path} ABSOLUTE)
 	set(${result} ${path} PARENT_SCOPE)
 endfunction()
-
 
 function(dk_getShortPath path result)
 	if(CMAKE_HOST_WIN32)
@@ -562,7 +545,6 @@ function(dk_getShortPath path result)
 		set(${result} ${path} PARENT_SCOPE)
 	endif()
 endfunction()
-
 
 function(DKEXECUTE_PROCESS fullcmnd)
 	#math(EXPR index "${ARGC}-1")
@@ -595,7 +577,6 @@ function(DKEXECUTE_PROCESS fullcmnd)
 	endif()
 endfunction()
 
-
 ###############################################################
 #############   Platform specific functions  ##################
 ###############################################################
@@ -619,7 +600,6 @@ function(WIN64_DKSET)
 	endif()
 endfunction()
 
-
 function(MAC_DKSET)
 	if(CMAKE_HOST_APPLE)
 		DKSET(${ARGV})
@@ -638,7 +618,6 @@ function(MAC64_DKSET)
 	endif()
 endfunction()
 
-
 function(LINUX_DKSET)
 	if(CMAKE_HOST_LINUX)
 		DKSET(${ARGV})
@@ -656,7 +635,6 @@ function(LINUX64_DKSET)
 		LINUX_DKSET(${ARGV})
 	endif()
 endfunction()
-
 
 function(RASPBERRY_DKSET)
 	if(CMAKE_HOST_LINUX)
@@ -687,7 +665,6 @@ function(DKSETPATH path)
 	endif()
 endfunction()
 
-
 #######################
 function(WIN_PATH path)
 	if(WIN)
@@ -695,13 +672,11 @@ function(WIN_PATH path)
 	endif()
 endfunction()
 
-
 function(WIN_DEBUG_PATH)
 	if(WIN AND DEBUG)
 		DKSETPATH(${ARGV})
 	endif()
 endfunction()
-
 
 function(WIN_RELEASE_PATH)
 	if(WIN AND RELEASE)
@@ -709,13 +684,11 @@ function(WIN_RELEASE_PATH)
 	endif()
 endfunction()
 
-
 function(WIN32_PATH)
 	if(WIN_32)
 		DKSETPATH(${ARGV})
 	endif()
 endfunction()
-
 
 function(WIN32_DEBUG_PATH)
 	if(WIN_32 AND DEBUG)
@@ -723,13 +696,11 @@ function(WIN32_DEBUG_PATH)
 	endif()
 endfunction()
 
-
 function(WIN32_RELEASE_PATH)
 	if(WIN_32 AND RELEASE)
 		DKSETPATH(${ARGV})
 	endif()
 endfunction()
-
 
 function(WIN64_PATH)
 	if(WIN_64)
@@ -737,13 +708,11 @@ function(WIN64_PATH)
 	endif()
 endfunction()
 
-
 function(WIN64_DEBUG_PATH)
 	if(WIN_64 AND DEBUG)
 		DKSETPATH(${ARGV})
 	endif()
 endfunction()
-
 
 function(WIN64_RELEASE_PATH)
 	if(WIN_64 AND RELEASE)
@@ -751,13 +720,11 @@ function(WIN64_RELEASE_PATH)
 	endif()
 endfunction()
 
-
 function(MAC_PATH)
 	if(MAC)
 		DKSETPATH(${ARGV})
 	endif()
 endfunction()
-
 
 function(MAC_DEBUG_PATH)
 	if(MAC AND DEBUG)
@@ -765,13 +732,11 @@ function(MAC_DEBUG_PATH)
 	endif()
 endfunction()
 
-
 function(MAC_RELEASE_PATH)
 	if(MAC AND RELEASE)
 		DKSETPATH(${ARGV})
 	endif()
 endfunction()
-
 
 function(MAC32_PATH)
 	if(MAC_32)
@@ -779,13 +744,11 @@ function(MAC32_PATH)
 	endif()
 endfunction()
 
-
 function(MAC32_DEBUG_PATH)
 	if(MAC_32 AND DEBUG)
 		DKSETPATH(${ARGV})
 	endif()
 endfunction()
-
 
 function(MAC32_RELEASE_PATH)
 	if(MAC_32 AND RELEASE)
@@ -793,13 +756,11 @@ function(MAC32_RELEASE_PATH)
 	endif()
 endfunction()
 
-
 function(MAC64_PATH)
 	if(MAC_64)
 		DKSETPATH(${ARGV})
 	endif()
 endfunction()
-
 
 function(MAC64_DEBUG_PATH)
 	if(MAC_64 AND DEBUG)
@@ -807,13 +768,11 @@ function(MAC64_DEBUG_PATH)
 	endif()
 endfunction()
 
-
 function(MAC64_RELEASE_PATH)
 	if(MAC_64 AND RELEASE)
 		DKSETPATH(${ARGV})
 	endif()
 endfunction()
-
 
 function(IOS_PATH)
 	if(IOS)
@@ -821,20 +780,17 @@ function(IOS_PATH)
 	endif()
 endfunction()
 
-
 function(IOS_DEBUG_PATH)
 	if(IOS AND DEBUG)
 		DKSETPATH(${ARGV})
 	endif()
 endfunction()
 
-
 function(IOS_RELEASE_PATH)
 	if(IOS AND RELEASE)
 		DKSETPATH(${ARGV})
 	endif()
 endfunction()
-
 
 function(IOS32_PATH)
 	if(IOS_32)
@@ -848,13 +804,11 @@ function(IOS32_DEBUG_PATH)
 	endif()
 endfunction()
 
-
 function(IOS32_RELEASE_PATH)
 	if(IOS_32 AND RELEASE)
 		DKSETPATH(${ARGV})
 	endif()
 endfunction()
-
 
 function(IOS64_PATH)
 	if(IOS_64)
@@ -862,13 +816,11 @@ function(IOS64_PATH)
 	endif()
 endfunction()
 
-
 function(IOS64_DEBUG_PATH)
 	if(IOS_64 AND DEBUG)
 		DKSETPATH(${ARGV})
 	endif()
 endfunction()
-
 
 function(IOS64_RELEASE_PATH)
 	if(IOS_64 AND RELEASE)
@@ -876,13 +828,11 @@ function(IOS64_RELEASE_PATH)
 	endif()
 endfunction()
 
-
 function(IOSSIM_PATH)
 	if(IOSSIM)
 		DKSETPATH(${ARGV})
 	endif()
 endfunction()
-
 
 function(IOSSIM_DEBUG_PATH)
 	if(IOSSIM AND DEBUG)
@@ -890,13 +840,11 @@ function(IOSSIM_DEBUG_PATH)
 	endif()
 endfunction()
 
-
 function(IOSSIM_RELEASE_PATH)
 	if(IOSSIM AND RELEASE)
 		DKSETPATH(${ARGV})
 	endif()
 endfunction()
-
 
 function(IOSSIM32_PATH)
 	if(IOSSIM_32)
@@ -904,13 +852,11 @@ function(IOSSIM32_PATH)
 	endif()
 endfunction()
 
-
 function(IOSSIM32_DEBUG_PATH)
 	if(IOSSIM_32 AND DEBUG)
 		DKSETPATH(${ARGV})
 	endif()
 endfunction()
-
 
 function(IOSSIM32_RELEASE_PATH)
 	if(IOSSIM_32 AND RELEASE)
@@ -918,13 +864,11 @@ function(IOSSIM32_RELEASE_PATH)
 	endif()
 endfunction()
 
-
 function(IOSSIM64_PATH)
 	if(IOSSIM_64)
 		DKSETPATH(${ARGV})
 	endif()
 endfunction()
-
 
 function(IOSSIM64_DEBUG_PATH)
 	if(IOSSIM_64 AND DEBUG)
@@ -932,13 +876,11 @@ function(IOSSIM64_DEBUG_PATH)
 	endif()
 endfunction()
 
-
 function(IOSSIM64_RELEASE_PATH)
 	if(IOSSIM_64 AND RELEASE)
 		DKSETPATH(${ARGV})
 	endif()
 endfunction()
-
 
 function(LINUX_PATH)
 	if(LINUX)
@@ -946,13 +888,11 @@ function(LINUX_PATH)
 	endif()
 endfunction()
 
-
 function(LINUX_DEBUG_PATH)
 	if(LINUX AND DEBUG)
 		DKSETPATH(${ARGV})
 	endif()
 endfunction()
-
 
 function(LINUX_RELEASE_PATH)
 	if(LINUX AND RELEASE)
@@ -960,13 +900,11 @@ function(LINUX_RELEASE_PATH)
 	endif()
 endfunction()
 
-
 function(LINUX32_PATH)
 	if(LINUX_32)
 		DKSETPATH(${ARGV})
 	endif()
 endfunction()
-
 
 function(LINUX32_DEBUG_PATH)
 	if(LINUX_32 AND DEBUG)
@@ -974,13 +912,11 @@ function(LINUX32_DEBUG_PATH)
 	endif()
 endfunction()
 
-
 function(LINUX32_RELEASE_PATH)
 	if(LINUX_32 AND RELEASE)
 		DKSETPATH(${ARGV})
 	endif()
 endfunction()
-
 
 function(LINUX64_PATH)
 	if(LINUX_64)
@@ -988,13 +924,11 @@ function(LINUX64_PATH)
 	endif()
 endfunction()
 
-
 function(LINUX64_DEBUG_PATH)
 	if(LINUX_64 AND DEBUG)
 		DKSETPATH(${ARGV})
 	endif()
 endfunction()
-
 
 function(LINUX64_RELEASE_PATH)
 	if(LINUX_64 AND RELEASE)
@@ -1002,13 +936,11 @@ function(LINUX64_RELEASE_PATH)
 	endif()
 endfunction()
 
-
 function(ANDROID_PATH)
 	if(ANDROID)
 		DKSETPATH(${ARGV})
 	endif()
 endfunction()
-
 
 function(ANDROID_DEBUG_PATH)
 	if(ANDROID AND DEBUG)
@@ -1016,13 +948,11 @@ function(ANDROID_DEBUG_PATH)
 	endif()
 endfunction()
 
-
 function(ANDROID_RELEASE_PATH)
 	if(ANDROID AND RELEASE)
 		DKSETPATH(${ARGV})
 	endif()
 endfunction()
-
 
 function(ANDROID32_PATH)
 	if(ANDROID_32)
@@ -1030,13 +960,11 @@ function(ANDROID32_PATH)
 	endif()
 endfunction()
 
-
 function(ANDROID32_DEBUG_PATH)
 	if(ANDROID_32 AND DEBUG)
 		DKSETPATH(${ARGV})
 	endif()
 endfunction()
-
 
 function(ANDROID32_RELEASE_PATH)
 	if(ANDROID_32 AND RELEASE)
@@ -1044,13 +972,11 @@ function(ANDROID32_RELEASE_PATH)
 	endif()
 endfunction()
 
-
 function(ANDROID64_PATH)
 	if(ANDROID_64)
 		DKSETPATH(${ARGV})
 	endif()
 endfunction()
-
 
 function(ANDROID64_DEBUG_PATH)
 	if(ANDROID_64 AND DEBUG)
@@ -1058,13 +984,11 @@ function(ANDROID64_DEBUG_PATH)
 	endif()
 endfunction()
 
-
 function(ANDROID64_RELEASE_PATH)
 	if(ANDROID_64 AND RELEASE)
 		DKSETPATH(${ARGV})
 	endif()
 endfunction()
-
 
 function(RASPBERRY_PATH)
 	if(RASPBERRY)
@@ -1072,13 +996,11 @@ function(RASPBERRY_PATH)
 	endif()
 endfunction()
 
-
 function(RASPBERRY_DEBUG_PATH)
 	if(RASPBERRY AND DEBUG)
 		DKSETPATH(${ARGV})
 	endif()
 endfunction()
-
 
 function(RASPBERRY_RELEASE_PATH)
 	if(RASPBERRY AND RELEASE)
@@ -1086,13 +1008,11 @@ function(RASPBERRY_RELEASE_PATH)
 	endif()
 endfunction()
 
-
 function(RASPBERRY32_PATH)
 	if(RASPBERRY_32)
 		DKSETPATH(${ARGV})
 	endif()
 endfunction()
-
 
 function(RASPBERRY32_DEBUG_PATH)
 	if(RASPBERRY_32 AND DEBUG)
@@ -1100,13 +1020,11 @@ function(RASPBERRY32_DEBUG_PATH)
 	endif()
 endfunction()
 
-
 function(RASPBERRY32_RELEASE_PATH)
 	if(RASPBERRY_32 AND RELEASE)
 		DKSETPATH(${ARGV})
 	endif()
 endfunction()
-
 
 function(RASPBERRY64_PATH)
 	if(RASPBERRY_64)
@@ -1114,20 +1032,17 @@ function(RASPBERRY64_PATH)
 	endif()
 endfunction()
 
-
 function(RASPBERRY64_DEBUG_PATH)
 	if(RASPBERRY_64 AND DEBUG)
 		DKSETPATH(${ARGV})
 	endif()
 endfunction()
 
-
 function(RASPBERRY64_RELEASE_PATH)
 	if(RASPBERRY_64 AND RELEASE)
 		DKSETPATH(${ARGV})
 	endif()
 endfunction()
-
 
 ###################  BASH  ######################
 function(WIN_BASH str)
@@ -1139,13 +1054,11 @@ function(WIN_BASH str)
 	endif()
 endfunction()
 
-
 function(WIN_DEBUG_BASH str)
 	if(WIN AND DEBUG)
 		WIN_BASH(${str})
 	endif()
 endfunction()
-
 
 function(WIN_RELEASE_BASH str)
 	if(WIN AND RELEASE)
@@ -3240,7 +3153,7 @@ function(DKDEPEND_ALL)
 					endif()
 				endif()
 			endforeach()
-    	endif()
+		endif()
   	endforeach()
 	
 	#To exclude libraries, use DKDISABLE(lib) in your app DKMAKE.cmake file or in DKCMake/DISABLED.cmake
@@ -3353,8 +3266,8 @@ endfunction()
 #   VARIABLE    - The name of the CMake variable holding the string.
 #   AT_COLUMN   - The column position at which string will be wrapped.
 function(WRAP_STRING)
-    set(oneValueArgs VARIABLE AT_COLUMN)
-    cmake_parse_arguments(WRAP_STRING "${options}" "${oneValueArgs}" "" ${ARGN})
+	set(oneValueArgs VARIABLE AT_COLUMN)
+	cmake_parse_arguments(WRAP_STRING "${options}" "${oneValueArgs}" "" ${ARGN})
     string(LENGTH ${${WRAP_STRING_VARIABLE}} stringLength)
     math(EXPR offset "0")
     while(stringLength GREATER 0)
