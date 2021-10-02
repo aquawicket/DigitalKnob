@@ -8,6 +8,15 @@ var Image = function(width, height) {
 }
 
 var HTMLImageElement = function(pointer) {
+	// Properties
+	Object.defineProperty(this, "src", {
+        get: function() {
+			return CPP_DKDomElement_getAttribute(pointer, "src")
+        },
+		set: function(val) {
+			return CPP_DKDomElement_setAttribute(pointer, "src", val)
+		}
+    });
  
     return HTMLElement.call(this, pointer);
 }
