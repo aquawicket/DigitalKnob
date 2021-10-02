@@ -61,7 +61,6 @@ void signal_handler(int signal) {
 */
 
 bool Log(const char* file, int line, const char* func, const DKString& input, const int lvl){
-	
 	/*
 	if(lvl == DK_ASSERT){
 		// Install a signal handler
@@ -74,7 +73,7 @@ bool Log(const char* file, int line, const char* func, const DKString& input, co
 	*/
 
 	///////// OUTPUT FILTERS /////////
-	if(input.front() == '\n')
+	if(!input.empty() && input.front() == '\n')
 		//return DKASSERT("log text should never start with \\n")
 
 	//check LOG_HIDE strings

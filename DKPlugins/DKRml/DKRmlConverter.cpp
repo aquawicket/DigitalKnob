@@ -10,6 +10,8 @@
 
 bool DKRmlConverter::HtmlToRml(const DKString& html, DKString& rml){
 	DKDEBUGFUNC(html, rml);
+	if(html.empty())
+		return false;
 	stored_html = html;
 #ifdef DEBUG
 	DKINFO("\n########## .html ---> HtmlToRml ############\n");

@@ -24,7 +24,7 @@ DKObject* DKClass::_Instance(const DKString& data){
 		arry.insert(arry.begin(),"DKJavascript");
 	else if(has(arry[0],".css"))
 		arry.insert(arry.begin(),"DKCss");
-	if((*classes)[arry[0]]){
+	if(classes && (*classes)[arry[0]]){
 		//data = (class,id,var1,var2,etc)
 		if(arry.size() > 1)
 			return (*classes)[arry[0]]->Instance(data);
@@ -39,7 +39,7 @@ DKObject* DKClass::_Get(const DKString& data){
 	DKDEBUGFUNC(data);
 	DKStringArray arry;
 	toStringArray(arry, data, ",");
-	if((*classes)[arry[0]]){
+	if(classes && (*classes)[arry[0]]){
 		if(arry.size() < 2)
 			DKINFO("DKClass::_Get("+data+"): arry.size() < 2,  we should return the first instance\n");
 		return (*classes)[arry[0]]->Get(arry[1]);
@@ -53,7 +53,7 @@ bool DKClass::_Valid(const DKString& data){
 	//DKDEBUGFUNC(data);
 	DKStringArray arry;
 	toStringArray(arry, data, ",");
-	if((*classes)[arry[0]]){
+	if(classes && (*classes)[arry[0]]){
 		if(arry.size() < 2)
 			DKWARN("DKClass::_Valid("+data+"): arry.size() < 2,  we should return the first instance\n");
 		return (*classes)[arry[0]]->Valid(arry[1]);
@@ -67,7 +67,7 @@ bool DKClass::_Available(const DKString& data){
 	DKDEBUGFUNC(data);
 	DKStringArray arry;
 	toStringArray(arry, data, ",");
-	if((*classes)[arry[0]]){
+	if(classes && (*classes)[arry[0]]){
 		if(arry.size() < 2)
 			DKDEBUG("DKClass::_Available("+data+"): arry.size() < 2, we should see if we can create an instance\n");
 		if(arry.size() > 1 && (*classes)[arry[0]]->Valid(arry[1])){
@@ -93,7 +93,7 @@ void DKClass::_Close(const DKString& data){
 		arry.insert(arry.begin(),"DKCss");
 		return;
 	}
-	if((*classes)[arry[0]]){
+	if(classes && (*classes)[arry[0]]){
 		if(arry.size() > 1){
 			if((*classes)[arry[0]]->Valid(arry[1]))
 				(*classes)[arry[0]]->Close(arry[1]);
@@ -106,6 +106,8 @@ void DKClass::_Close(const DKString& data){
 void DKClass::CloseAll(){
 	DKDEBUGFUNC();
 	std::map<DKString, DKClass*>::reverse_iterator rit;
+	if(!classes)
+		return;
 	for(rit = (*classes).rbegin(); rit != (*classes).rend(); rit++){
 		if((*classes)[rit->first]){
 			DKINFO("DKClass::CloseAll(): Closing " + rit->first + "\n");
@@ -121,6 +123,8 @@ void DKClass::CloseAll(){
 void DKClass::GetClassList(DKStringArray& list){
 	DKDEBUGFUNC();
 	std::map<DKString, DKClass*>::reverse_iterator rit;
+	if(!classes)
+		return;
 	for (rit = (*classes).rbegin(); rit != (*classes).rend(); ++rit){
 		if ((*classes)[rit->first])
 			list.push_back(rit->first);
@@ -131,6 +135,8 @@ void DKClass::GetObjects(DKStringArray& list){
 	DKDEBUGFUNC();
 	list.clear();
 	std::map<DKString, DKClass*>::iterator it;
+	if(!classes)
+		return;
 	for(it = (*classes).begin(); it != (*classes).end(); ++it){
 		if((*classes)[it->first])
 			(*classes)[it->first]->GetInstances(list);
