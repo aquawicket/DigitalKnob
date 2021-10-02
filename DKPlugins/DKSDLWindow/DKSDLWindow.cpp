@@ -108,7 +108,7 @@ bool DKSDLWindow::Init() {
     SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
     SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
     result = "OpenglES";
-    DKINFO("DKSDLWindow Width: " + toString(width) + " Height: " + toString(height) + "\n");
+    DKINFO("DKSDLWindow Width: " + std::to_string(width) + " Height: " + std::to_string(height) + "\n");
     if(SDL_CreateWindowAndRenderer(width, height, SDL_WINDOW_RESIZABLE, &window, &renderer) < 0)
         return DKERROR("SDL_CreateWindow Error: " + DKString(SDL_GetError()) + "\n");
 	//GLenum err = glewInit();
@@ -241,31 +241,31 @@ bool DKSDLWindow::Init() {
     //DKINFO("GL_EXTENSIONS = "+gl_extensions+"\n");
     DKINFO("SDL Renderer = " + result + "\n");
     DKINFO("Render Driver = " + toString(info.name) + "\n");
-    DKINFO("Resolution = " + toString(width) + "x" + toString(height) + "\n");
+    DKINFO("Resolution = " + std::to_string(width) + "x" + std::to_string(height) + "\n");
     int depth;
     SDL_GL_GetAttribute(SDL_GL_DEPTH_SIZE, &depth);
-    DKINFO("Depth = " + toString(depth) + "\n");
+    DKINFO("Depth = " + std::to_string(depth) + "\n");
     int doublebuffer;
     SDL_GL_GetAttribute(SDL_GL_DOUBLEBUFFER, &doublebuffer);
-    DKINFO("Double buffer = " + toString(doublebuffer) + "\n");
+    DKINFO("Double buffer = " + std::to_string(doublebuffer) + "\n");
     int red;
     SDL_GL_GetAttribute(SDL_GL_RED_SIZE, &red);
-    DKINFO("Red Size = " + toString(red) + "\n");
+    DKINFO("Red Size = " + std::to_string(red) + "\n");
     int green;
     SDL_GL_GetAttribute(SDL_GL_GREEN_SIZE, &green);
-    DKINFO("Green Size = " + toString(green) + "\n");
+    DKINFO("Green Size = " + std::to_string(green) + "\n");
     int blue;
     SDL_GL_GetAttribute(SDL_GL_BLUE_SIZE, &blue);
-    DKINFO("Blue Size = " + toString(blue) + "\n");
+    DKINFO("Blue Size = " + std::to_string(blue) + "\n");
     int alpha;
     SDL_GL_GetAttribute(SDL_GL_ALPHA_SIZE, &alpha);
-    DKINFO("Alpha Size = " + toString(alpha) + "\n");
+    DKINFO("Alpha Size = " + std::to_string(alpha) + "\n");
     int buffer;
     SDL_GL_GetAttribute(SDL_GL_BUFFER_SIZE, &buffer);
-    DKINFO("Buffer Size = " + toString(buffer) + "\n");
+    DKINFO("Buffer Size = " + std::to_string(buffer) + "\n");
     int stencil;
     SDL_GL_GetAttribute(SDL_GL_STENCIL_SIZE, &stencil);
-    DKINFO("Stencil Size = " + toString(stencil) + "\n");
+    DKINFO("Stencil Size = " + std::to_string(stencil) + "\n");
     if(has(gl_vendor, "Microsoft"))
         SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_WARNING, "OpenGL Drivers", "Your OpenGL video drivers are out of date. Please upgrade the graphics card drivers for best performance and compatability.", window);
 #endif
@@ -366,7 +366,7 @@ bool DKSDLWindow::GetHeight(const void* input, void* output) {
     DKDEBUGFUNC(input, output);
     int h;
     SDL_GetWindowSize(window, NULL, &h);
-    //DKINFO("DKSDLWindow::GetHeight() = "+toString(h)+"\n");
+    //DKINFO("DKSDLWindow::GetHeight() = "+std::to_string(h)+"\n");
     if(h == 0)
         h = height;
     *(int*)output = h;
@@ -403,7 +403,7 @@ bool DKSDLWindow::GetWidth(const void* input, void* output) {
     DKDEBUGFUNC(input, output);
     int w;
     SDL_GetWindowSize(window, &w, NULL);
-    //DKINFO("DKSDLWindow::GetWidth() = "+toString(w)+"\n");
+    //DKINFO("DKSDLWindow::GetWidth() = "+std::to_string(w)+"\n");
     if(w == 0)
         w = width;
     *(int*)output = w;
@@ -631,7 +631,7 @@ int DKSDLWindow::EventFilter(void* userdata, SDL_Event* event) {
                 dkwindowdow->winX = event->window.data1;
                 dkwindowdow->winY = event->window.data2;
                 dkwindowdow->Process();
-                DKEvents::SendEvent("sdlwindow", "move", toString(dkwindowdow->winX) + "," + toString(dkwindowdow->winY));
+                DKEvents::SendEvent("sdlwindow", "move", std::to_string(dkwindowdow->winX) + "," + std::to_string(dkwindowdow->winY));
                 return 1;
             }
             case SDL_WINDOWEVENT_RESIZED: {
@@ -639,7 +639,7 @@ int DKSDLWindow::EventFilter(void* userdata, SDL_Event* event) {
                 dkwindowdow->width = event->window.data1;
                 dkwindowdow->height = event->window.data2;
                 dkwindowdow->Process();
-                DKEvents::SendEvent("sdlwindow", "resize", toString(dkwindowdow->width) + "," + toString(dkwindowdow->height));
+                DKEvents::SendEvent("sdlwindow", "resize", std::to_string(dkwindowdow->width) + "," + std::to_string(dkwindowdow->height));
                 return 1;
             }
             case SDL_WINDOWEVENT_SIZE_CHANGED: {
@@ -647,7 +647,7 @@ int DKSDLWindow::EventFilter(void* userdata, SDL_Event* event) {
                 dkwindowdow->width = event->window.data1;
                 dkwindowdow->height = event->window.data2;
                 dkwindowdow->Process();
-                DKEvents::SendEvent("sdlwindow", "resize", toString(dkwindowdow->width) + "," + toString(dkwindowdow->height));
+                DKEvents::SendEvent("sdlwindow", "resize", std::to_string(dkwindowdow->width) + "," + std::to_string(dkwindowdow->height));
                 return 1;
             }
             case SDL_WINDOWEVENT_MINIMIZED: {
@@ -693,54 +693,54 @@ bool DKSDLWindow::handle(SDL_Event *event) {
             if(event->motion.x != last_mouseX || event->motion.y != last_mouseY) {
                 last_mouseX = event->motion.x;
                 last_mouseY = event->motion.y;
-                DKEvents::SendEvent("sdlwindow", "mousemove", toString(last_mouseX) + "," + toString(last_mouseY) + "," + toString(winX + last_mouseX) + "," + toString(winY + last_mouseY));
+                DKEvents::SendEvent("sdlwindow", "mousemove", std::to_string(last_mouseX) + "," + std::to_string(last_mouseY) + "," + std::to_string(winX + last_mouseX) + "," + std::to_string(winY + last_mouseY));
             }
             return false; //allow event to continue
         }
         case SDL_MOUSEBUTTONDOWN: {
-            DKEvents::SendEvent("sdlwindow", "mousedown", toString(event->button.button));
+            DKEvents::SendEvent("sdlwindow", "mousedown", std::to_string(event->button.button));
             return false; //allow event to continue
         }
         case SDL_MOUSEBUTTONUP: {
-            DKEvents::SendEvent("sdlwindow", "mouseup", toString(event->button.button));
+            DKEvents::SendEvent("sdlwindow", "mouseup", std::to_string(event->button.button));
             if(event->button.button == 3)
-                DKEvents::SendEvent("sdlwindow", "contextmenu", toString(event->button.button));
+                DKEvents::SendEvent("sdlwindow", "contextmenu", std::to_string(event->button.button));
             else {
                 if(event->button.clicks == 2)
-                    DKEvents::SendEvent("sdlwindow", "dblclick", toString(event->button.button));
+                    DKEvents::SendEvent("sdlwindow", "dblclick", std::to_string(event->button.button));
                 else
-                    DKEvents::SendEvent("sdlwindow", "click", toString(event->button.button));
+                    DKEvents::SendEvent("sdlwindow", "click", std::to_string(event->button.button));
             }
             return false; //allow event to continue
         }
         case SDL_MOUSEWHEEL: {
-            DKEvents::SendEvent("sdlwindow", "wheel", toString(event->wheel.y));
+            DKEvents::SendEvent("sdlwindow", "wheel", std::to_string(event->wheel.y));
             return false; //allow event to continue
         }
         case SDL_KEYDOWN: {
-            //DKINFO("DKSDLWindow::SDL_KEYDOWN("+toString(event->key.keysym.sym)+")\n");
+            //DKINFO("DKSDLWindow::SDL_KEYDOWN("+std::to_string(event->key.keysym.sym)+")\n");
             if(event->key.keysym.sym == 0)
                 return true;
             if(event->key.keysym.sym > 96 && event->key.keysym.sym < 123) { //letter
                 if(event->key.keysym.mod & KMOD_SHIFT && event->key.keysym.mod & KMOD_CAPS)   //both = lowercase
-                    DKEvents::SendEvent("sdlwindow", "keypress", toString(sdlCharCode[event->key.keysym.sym]));
+                    DKEvents::SendEvent("sdlwindow", "keypress", std::to_string(sdlCharCode[event->key.keysym.sym]));
                 else if(event->key.keysym.mod & KMOD_SHIFT || event->key.keysym.mod & KMOD_CAPS)   //1 = uppercase
-                    DKEvents::SendEvent("sdlwindow", "keypress", toString(sdlShiftCharCode[event->key.keysym.sym]));
+                    DKEvents::SendEvent("sdlwindow", "keypress", std::to_string(sdlShiftCharCode[event->key.keysym.sym]));
                 else {
-                    DKEvents::SendEvent("sdlwindow", "keypress", toString(sdlCharCode[event->key.keysym.sym])); //lowercase
+                    DKEvents::SendEvent("sdlwindow", "keypress", std::to_string(sdlCharCode[event->key.keysym.sym])); //lowercase
                 }
             } else if(event->key.keysym.mod & KMOD_SHIFT) { //other character keys
-                DKEvents::SendEvent("sdlwindow", "keypress", toString(sdlShiftCharCode[event->key.keysym.sym])); //shifted symbol
+                DKEvents::SendEvent("sdlwindow", "keypress", std::to_string(sdlShiftCharCode[event->key.keysym.sym])); //shifted symbol
             } else {
-                DKEvents::SendEvent("sdlwindow", "keypress", toString(sdlCharCode[event->key.keysym.sym])); //symbol
+                DKEvents::SendEvent("sdlwindow", "keypress", std::to_string(sdlCharCode[event->key.keysym.sym])); //symbol
             }
-            DKEvents::SendEvent("sdlwindow", "keydown", toString(sdlKeyCode[event->key.keysym.sym])); //keycode
+            DKEvents::SendEvent("sdlwindow", "keydown", std::to_string(sdlKeyCode[event->key.keysym.sym])); //keycode
             return false; //allow event to continue
         }
         case SDL_KEYUP: {
             if(event->key.keysym.sym == 0)
                 return true;
-            DKEvents::SendEvent("sdlwindow", "keyup", toString(sdlKeyCode[event->key.keysym.sym]));
+            DKEvents::SendEvent("sdlwindow", "keyup", std::to_string(sdlKeyCode[event->key.keysym.sym]));
             return false; //allow event to continue
         }
     }

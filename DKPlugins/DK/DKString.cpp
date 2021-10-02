@@ -28,66 +28,87 @@ bool has(const DKString& str, const DKString& str2){
 
 
 DKString toString(const int& _int){
-	DKASSERT("replace this with std::to_string()\n");
+	//DKASSERT("replace this with std::to_string()\n");
+	/*
 	DKString s;
 	std::stringstream out;
 	out << _int;
 	s = out.str();
 	return s;
+	*/
+	return std::to_string(_int);
 }
 
 DKString toString(const unsigned int& _uint){
-	DKASSERT("replace this with std::to_string()\n");
+	//DKASSERT("replace this with std::to_string()\n");
+	/*
 	DKString s;
 	std::stringstream out;
 	out << _uint;
 	s = out.str();
 	return s;
+	*/
+	return std::to_string(_uint);
 }
 
 DKString toString(const long& _long){
-	DKASSERT("replace this with std::to_string()\n");
+	//DKASSERT("replace this with std::to_string()\n");
+	/*
 	DKString s;
 	std::stringstream out;
 	out << _long;
 	s = out.str();
 	return s;
+	*/
+	return std::to_string(_long);
 }
 
 DKString toString(const unsigned long int& _ulongint){
-	DKASSERT("replace this with std::to_string()\n");
+	//DKASSERT("replace this with std::to_string()\n");
+	/*
 	DKString s;
 	std::stringstream out;
 	out << _ulongint;
 	s = out.str();
 	return s;
+	*/
+	return std::to_string(_ulongint);
 }
 
 DKString toString(const unsigned long long int& _ulonglongint){
-	DKASSERT("replace this with std::to_string()\n");
+	//DKASSERT("replace this with std::to_string()\n");
+	/*
 	DKString s;
 	std::stringstream out;
 	out << _ulonglongint;
 	s = out.str();
 	return s;
+	*/
+	return std::to_string(_ulonglongint);
 }
 
 DKString toString(const float& _float){
-	DKASSERT("replace this with std::to_string()\n");
+	//DKASSERT("replace this with std::to_string()\n");
+	/*
 	DKString s;
 	std::stringstream out;
 	out << _float;
 	s = out.str();
 	return s;
+	*/
+	return std::to_string(_float);
 }
 
 DKString toString(const double& _double){
-	DKASSERT("replace this with std::to_string()\n");
+	//DKASSERT("replace this with std::to_string()\n");
+	/*
 	DKString s;
 	std::stringstream out;
 	out << _double;
 	s = out.str();
 	return s;
+	*/
+	return std::to_string(_double);
 }
 
 DKString toString(const char* _charptr){
@@ -108,6 +129,7 @@ DKString toString(const bool _bool){
 	if(_bool)
 		return "true";
 	return "false";
+	//return std::to_string(_bool);
 }
 
 #ifdef WIN32
