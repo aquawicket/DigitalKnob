@@ -92,6 +92,8 @@ DKCodeRunner.prototype.create = function DKCodeRunner_create(parent, top, bottom
 	dk.gui.createImageButton(document.body, "Debugger", "DKCodeRunner/Debugger.png", "3rem", "", "", "10rem", "35rem", "30rem", function() {
         if(dk.getBrowser() === "Rml")
 			CPP_DKRml_DebuggerToggle()
+		if(dk.getBrowser() === "Cef")
+			CPP_DKCef_ShowDevTools()
 	})
 }
 

@@ -19,7 +19,8 @@ DKFile.prototype.init = function DKFile_init() {
 
     // FIXME - temporary
     if (DUKTAPE) {
-        this.onlineAssets = "C:/DKTasmota_Data/";
+        this.onlineAssets = //"C:/DKTasmota_Data/";
+		console.log("look at DKFile.js line 23")
         return;
     }
     if (dk.php) {
