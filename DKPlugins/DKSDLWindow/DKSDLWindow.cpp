@@ -218,8 +218,8 @@ bool DKSDLWindow::Init() {
     gl_version = (char*)glGetString(GL_VERSION);
     // these are only available with OpenGL 3.0+
     // https://www.khronos.org/opengl/wiki/Get_Context_Info
-    // gl_major_version = (char*)glGetString(GL_MAJOR_VERSION);
-    // gl_minor_version = (char*)glGetString(GL_MINOR_VERSION);
+    //gl_major_version = (char*)glGetString(GL_MAJOR_VERSION);
+    //gl_minor_version = (char*)glGetString(GL_MINOR_VERSION);
     gl_vendor = reinterpret_cast<const char*>(glGetString(GL_VENDOR));
     gl_renderer = reinterpret_cast<const char*>(glGetString(GL_RENDERER));
     //gl_shading = reinterpret_cast<const char*>(glGetString(GL_SHADING_LANGUAGE_VERSION));
@@ -227,20 +227,22 @@ bool DKSDLWindow::Init() {
     ///Verify Render Drivers used
     SDL_RendererInfo info;
     SDL_GetRendererInfo(renderer, &info);
-    printf("%s", info.name);
     DKINFO("##############################\n");
     DKINFO("##### Window Information #####\n");
     DKINFO("##############################\n");
-    DKINFO("GL_MAJOR_VERSION = " + gl_major_version + "\n");
-    DKINFO("GL_MINOR_VERSION = " + gl_minor_version + "\n");
+    //DKINFO("GL_MAJOR_VERSION = " + gl_major_version + "\n");
+    //DKINFO("GL_MINOR_VERSION = " + gl_minor_version + "\n");
     DKINFO("GL_VERSION = " + gl_version + "\n");
     DKINFO("GL_VENDOR = " + gl_vendor + "\n");
     DKINFO("GL_RENDERER = " + gl_renderer + "\n");
     //DKINFO("GL_SHADING_LANGUAGE_VERSION = "+gl_shading+"\n");
-    //DKINFO("GL_EXTENSIONS = "+gl_extensions+"\n");
+    DKINFO("GL_EXTENSIONS = "+gl_extensions+"\n");
     DKINFO("SDL Renderer = " + result + "\n");
-    DKINFO("Render Driver = " + toString(info.name) + "\n");
     DKINFO("Resolution = " + toString(width) + "x" + toString(height) + "\n");
+    DKINFO("Render Driver = " + toString(info.name) + "\n");
+    DKINFO("max_texture_height = "+toString(info.max_texture_height)+"\n");
+    DKINFO("max_texture_width = "+toString(info.max_texture_width)+"\n");
+    DKINFO("num_texture_formats = "+toString(info.num_texture_formats)+"\n");
     int depth;
     SDL_GL_GetAttribute(SDL_GL_DEPTH_SIZE, &depth);
     DKINFO("Depth = " + toString(depth) + "\n");

@@ -252,7 +252,7 @@ void DKCefApp::OnBeforeCommandLineProcessing(const CefString& process_type, CefR
 	CEF_REQUIRE_UI_THREAD();
 #endif
 #ifndef DKCefChild
-	if(same(DKV8::multi_process, "OFF"))
+	if(!same(DKV8::multi_process, "ON"))
 		command_line->AppendSwitchWithValue("single-process", "1");
 	if(same(DKV8::enable_system_flash, "ON"))
 		command_line->AppendSwitchWithValue("enable-system-flash", "1");
