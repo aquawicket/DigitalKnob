@@ -130,8 +130,8 @@ while :
 		make ${APP}
 		chmod +x $DKPATH/DKApps/$APP/$OS/Release/${APP}
 	elif [[ "$OSTYPE" == "darwin"* ]]; then
-		sudo ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" 2> /dev/null
-		sudo brew install cmake
+		ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+		brew install cmake
 		mkdir $DKPATH/DKApps/$APP/$OS/Debug
 		cd $DKPATH/DKApps/$APP/$OS/Debug
 		cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER="$GCC_PATH" -DCMAKE_CXX_COMPILER="$GPP_PATH" -DDEBUG=ON -DREBUILDALL=ON -DSTATIC=ON $DKPATH
