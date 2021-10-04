@@ -109,15 +109,29 @@ while :
 	done
 
 	cd $DKPATH
-	sudo apt-get -y install cmake
-	sudo apt-get -y install gcc
-	sudo apt-get -y install g++
 	echo Deleteing CMake cache . . .
 	find . -name "CMakeCache.*" -delete
 	rm -rf `find . -type d -name CMakeFiles`
 		
 	mkdir $DKPATH/DKApps/$APP/$OS
 	if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+		sudo apt-get -y install cmake
+		sudo apt-get -y install gcc
+		sudo apt-get -y install g++
+		mkdir $DKPATH/DKApps/$APP/$OS/Debug
+		cd $DKPATH/DKApps/$APP/$OS/Debug
+		cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER="$GCC_PATH" -DCMAKE_CXX_COMPILER="$GPP_PATH" -DDEBUG=ON -DREBUILDALL=ON -DSTATIC=ON $DKPATH
+		make $APP
+		chmod +x $DKPATH/DKApps/$APP/$OS/Debug/$APP
+		
+		mkdir $DKPATH/DKApps/$APP/$OS/Release
+		cd $DKPATH/DKApps/$APP/$OS/Release
+		cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER="$GCC_PATH" -DCMAKE_CXX_COMPILER="$GPP_PATH" -DRELEASE=ON -DREBUILDALL=ON -DSTATIC=ON $DKPATH
+		make ${APP}
+		chmod +x $DKPATH/DKApps/$APP/$OS/Release/${APP}
+	elif [[ "$OSTYPE" == "darwin"* ]]; then
+		sudo ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" 2> /dev/null
+		sudo brew install cmake
 		mkdir $DKPATH/DKApps/$APP/$OS/Debug
 		cd $DKPATH/DKApps/$APP/$OS/Debug
 		cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER="$GCC_PATH" -DCMAKE_CXX_COMPILER="$GPP_PATH" -DDEBUG=ON -DREBUILDALL=ON -DSTATIC=ON $DKPATH
@@ -130,16 +144,16 @@ while :
 		make ${APP}
 		chmod +x $DKPATH/DKApps/$APP/$OS/Release/${APP}
 	else
-    cd $DKPATH/DKApps/$APP/$OS
-	cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER="$GCC_PATH" -DCMAKE_CXX_COMPILER="$GPP_PATH" -DDEBUG=ON -DRELEASE=ON -DREBUILDALL=ON -DSTATIC=ON $DKPATH
+		cd $DKPATH/DKApps/$APP/$OS
+		cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER="$GCC_PATH" -DCMAKE_CXX_COMPILER="$GPP_PATH" -DDEBUG=ON -DRELEASE=ON -DREBUILDALL=ON -DSTATIC=ON $DKPATH
 	
-	cd $DKPATH/DKApps/$APP/$OS/Debug
-	make $APP
-	chmod +x $DKPATH/DKApps/$APP/$OS/Debug/$APP
+		cd $DKPATH/DKApps/$APP/$OS/Debug
+		make $APP
+		chmod +x $DKPATH/DKApps/$APP/$OS/Debug/$APP
 	
-	cd $DKPATH/DKApps/$APP/$OS/Release
-	make ${APP}
-	chmod +x $DKPATH/DKApps/$APP/$OS/Release/${APP}
+		cd $DKPATH/DKApps/$APP/$OS/Release
+		make ${APP}
+		chmod +x $DKPATH/DKApps/$APP/$OS/Release/${APP}
 	fi
 
     unset APP
