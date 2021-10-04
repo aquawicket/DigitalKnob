@@ -104,8 +104,7 @@ endif()
 
 
 if(CMAKE_HOST_APPLE)  # Disabled on Apple host machines
-	DKDISABLE(cmake)
-	DKDISABLE(xcode)
+
 endif()
 
 
