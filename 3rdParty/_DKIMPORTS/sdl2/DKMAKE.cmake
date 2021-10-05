@@ -39,13 +39,9 @@ LINUX_INCLUDE(${SDL2}/${OS}/${RELEASE_DIR}/include)
 #	if(NOT OPENGL_FOUND)
 #   	message(FATAL_ERROR "OPENGL not found!")
 #	endif()
-	LINUX_LIB(${OPENGL_LIBRARIES})
+#	LINUX_LIB(${OPENGL_LIBRARIES})
 #endif()
-#WIN_LIB(opengl32.lib)
-WIN_LIB(winmm.lib)
-WIN_LIB(imm32.lib)
-WIN_LIB(version.lib)
-WIN_LIB(Setupapi.lib)
+
 WIN_DEBUG_LIB(${SDL2}/${OS}/${DEBUG_DIR}/SDL2d.lib)
 WIN_RELEASE_LIB(${SDL2}/${OS}/${RELEASE_DIR}/SDL2.lib)
 WIN_DEBUG_LIB(${SDL2}/${OS}/${DEBUG_DIR}/SDL2maind.lib)
@@ -68,7 +64,11 @@ ANDROID_DEBUG_LIB(${SDL2}/${OS}/${DEBUG_DIR}/libSDL2.a)
 ANDROID_RELEASE_LIB(${SDL2}/${OS}/${RELEASE_DIR}/libSDL2.a)
 ANDROID_DEBUG_LIB(${SDL2}/${OS}/${DEBUG_DIR}/libSDL2main.a)
 ANDROID_RELEASE_LIB(${SDL2}/${OS}/${RELEASE_DIR}/libSDL2main.a)
-
+#WIN_LIB(opengl32.lib)
+WIN_LIB(winmm.lib)
+WIN_LIB(imm32.lib)
+WIN_LIB(version.lib)
+WIN_LIB(Setupapi.lib)
 
 
 ### 3RDPARTY LINK ###
