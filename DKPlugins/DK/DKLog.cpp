@@ -181,19 +181,19 @@ bool Log(const char* file, int line, const char* func, const DKString& input, co
 #ifdef ANDROID
 	// https://developer.android.com/ndk/reference/group/logging
 	if(lvl == DK_FATAL) //Android Studio 
-		__android_log_write(ANDROID_LOG_FATAL, "DKAndroid", string.c_str());
+		__android_log_write(ANDROID_LOG_FATAL, "DKAndroid", output.c_str());
 	else if(lvl == DK_ERROR) //Android Studio 
-		__android_log_write(ANDROID_LOG_ERROR, "DKAndroid", string.c_str());
+		__android_log_write(ANDROID_LOG_ERROR, "DKAndroid", output.c_str());
 	else if(lvl == DK_WARN)
-		__android_log_write(ANDROID_LOG_WARN, "DKAndroid", string.c_str());
+		__android_log_write(ANDROID_LOG_WARN, "DKAndroid", output.c_str());
 	else if(lvl == DK_INFO)
-		__android_log_write(ANDROID_LOG_INFO, "DKAndroid", string.c_str()); //Default
+		__android_log_write(ANDROID_LOG_INFO, "DKAndroid", output.c_str()); //Default
 	else if(lvl == DK_DEBUG)
-		__android_log_write(ANDROID_LOG_DEBUG, "DKAndroid", string.c_str());
+		__android_log_write(ANDROID_LOG_DEBUG, "DKAndroid", output.c_str());
 	else if(lvl == DK_VERBOSE)
-		__android_log_write(ANDROID_LOG_VERBOSE, "DKAndroid", string.c_str());
+		__android_log_write(ANDROID_LOG_VERBOSE, "DKAndroid", output.c_str());
 	else //if(lvl == DK_INFO)
-		__android_log_write(ANDROID_LOG_INFO, "DKAndroid", string.c_str());
+		__android_log_write(ANDROID_LOG_INFO, "DKAndroid", output.c_str());
 #endif
 
 	// // // Restore Default Color Decorators

@@ -30,11 +30,18 @@ bool DKUnix::Sleep(int milliseconds){
 
 bool DKUnix::GetUsername(DKString& username){
 	DKDEBUGFUNC(username);
+#ifdef MAC
+	if (const char* usr_a = std::getenv("USER")){ //'USERNAME' on Windows
+		username = usr_a;
+		return true;
+	}
+#endif
 #ifdef LINUX
 	if (const char* usr_a = std::getenv("USER")){ //'USERNAME' on Windows
 		username = usr_a;
 		return true;
 	}
+#endif
 	/*
 	struct passwd* usr_b = getpwuid(getuid());
 	if (usr_b) {
@@ -59,7 +66,6 @@ bool DKUnix::GetUsername(DKString& username){
 	}
 	return DKERROR("ERROR: cannot get username");
 	*/
-#endif
 	return false;
 }
 
