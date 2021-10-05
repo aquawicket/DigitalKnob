@@ -1,7 +1,7 @@
 #include "DK/stdafx.h"
 #ifdef MAC
 #include "DKMac.h"
-#import <Foundation/Foundation.h>
+#import "CoreGraphics/CoreGraphics.h"
 
 
 bool DKMac::GetMousePos(int& x, int& y){
