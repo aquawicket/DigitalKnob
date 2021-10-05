@@ -34,11 +34,12 @@ while :
 			"Git Update")
 				echo "$opt"
 				if [[ "$OSTYPE" == "darwin"* ]]; then
+					echo "install Homebrew and git"
 					#ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 					# https://github.com/Homebrew/brew/issues/10368
 					# rm -fr $(brew --repo homebrew/core)
 					# brew tap homebrew/core
-					# brew install git	
+					# brew install git
 				else
 					sudo apt-get -y install git
 				fi
