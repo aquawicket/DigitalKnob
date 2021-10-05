@@ -352,9 +352,7 @@ DKCOPY(${DKPLUGINS}/_DKIMPORT/App.cpp ${DKPROJECT}/App.cpp FALSE) ## copy app de
 ### Include all source files from the app folder for the compilers
 #file(GLOB App_SRC
 file(GLOB_RECURSE App_SRC 
-	#${DKPROJECT}/*.h
 	${DKPROJECT}/*.c
-	#${DKPROJECT}/*.hpp
 	${DKPROJECT}/*.cpp
 	${DKPROJECT}/*.manifest
 	${DKPROJECT}/*.rc
@@ -523,6 +521,10 @@ endif(WIN_64)
 
 #######
 if(MAC)
+	# remove files not needed for android
+	list(REMOVE_ITEM App_SRC ${DKPROJECT}/resource.h)
+	list(REMOVE_ITEM App_SRC ${DKPROJECT}/resource.rc)
+	
 	if(NOT EXCLUDE_ASSETS)
 		# Backup files and folders excluded from the package
 		DKCOPY(${DKPROJECT}/assets/USER ${DKPROJECT}/Backup/USER TRUE)
@@ -584,8 +586,6 @@ if(MAC)
 	FIND_LIBRARY(AK AppKit)
 	MAC_LIB(${AK})
 	
-	#list(APPEND DEBUG_LIBS ${CF} ${CO} ${CB} ${AT} ${AU} ${CV} ${CA} ${IO} ${GL} ${FF} ${AK})
-	#list(APPEND RELEASE_LIBS ${CF} ${CO} ${CB} ${AT} ${AU} ${CV} ${CA} ${IO} ${GL} ${FF} ${AK})
 	
 	SET(CMAKE_OSX_ARCHITECTURES "x86_64")
 	add_executable(${APP_NAME} MACOSX_BUNDLE ${App_SRC})
@@ -597,6 +597,10 @@ endif()
 
 #######
 if(IOS)
+	# remove files not needed for android
+	list(REMOVE_ITEM App_SRC ${DKPROJECT}/resource.h)
+	list(REMOVE_ITEM App_SRC ${DKPROJECT}/resource.rc)
+	
 	if(NOT EXCLUDE_ASSETS)
 		# Backup files and folders excluded from the package
 		DKCOPY(${DKPROJECT}/assets/USER ${DKPROJECT}/Backup/USER TRUE)
@@ -650,9 +654,6 @@ if(IOS)
 		set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -framework ${FW}")
 	endforeach()
 	
-	#list(APPEND DEBUG_LIBS ${CF} ${CO} ${CB} ${AT} ${AU} ${CA} ${IO} ${GL} ${FF})
-	#list(APPEND RELEASE_LIBS ${CF} ${CO} ${CB} ${AT} ${AU} ${CA} ${IO} ${GL} ${FF})
-	
 	#set(CMAKE_OSX_SYSROOT iphoneos)
 	#set(XCODE_ATTRIBUTE_SDKROOT iphoneos)
 	#set(CMAKE_OSK_ARCHITECTURES "$(ARCHS_STANDARD_32_BIT)")
@@ -670,6 +671,10 @@ endif()
 
 ##########
 if(IOSSIM)
+	# remove files not needed for android
+	list(REMOVE_ITEM App_SRC ${DKPROJECT}/resource.h)
+	list(REMOVE_ITEM App_SRC ${DKPROJECT}/resource.rc)
+	
 	if(NOT EXCLUDE_ASSETS)
 		# Backup files and folders excluded from the package
 		DKCOPY(${DKPROJECT}/assets/USER ${DKPROJECT}/Backup/USER TRUE)
@@ -721,9 +726,6 @@ if(IOSSIM)
 		set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -framework ${FW}")
 	endforeach()
 	
-	##list(APPEND DEBUG_LIBS ${CF} ${CO} ${CB} ${AT} ${AU} ${CA} ${IO} ${GL} ${FF})
-	##list(APPEND RELEASE_LIBS ${CF} ${CO} ${CB} ${AT} ${AU} ${CA} ${IO} ${GL} ${FF})
-	
 	##set(CMAKE_OSX_SYSROOT iphoneos)
 	##set(XCODE_ATTRIBUTE_SDKROOT iphoneos)
 	##set(CMAKE_OSX_ARCHITECTURES "$(ARCHS_STANDARD_32_BIT)")
@@ -742,6 +744,10 @@ endif()
 
 #########
 if(LINUX)
+	# remove files not needed for android
+	list(REMOVE_ITEM App_SRC ${DKPROJECT}/resource.h)
+	list(REMOVE_ITEM App_SRC ${DKPROJECT}/resource.rc)
+	
 	# Copy the icon to assets
 	DKCOPY(${DKPROJECT}/icons/icon.png ${DKPROJECT}/assets/icon.png TRUE)
 
@@ -775,14 +781,6 @@ if(LINUX)
 		DKREMOVE(${DKPROJECT}/Backup)
 	endif()
 
-	#find_package(OpenGL REQUIRED)
-	#include_directories(${OpenGL_INCLUDE_DIRS})
-	#link_directories(${OpenGL_LIBRARY_DIRS})
-	#add_definitions(${OpenGL_DEFINITIONS})
-	#if(NOT OPENGL_FOUND)
-    #	message(FATAL_ERROR "OPENGL not found!")
-	#endif()
-
 	LINUX_LIB(pthread)
 	LINUX_LIB(dl)
 	LINUX_LIB(libstdc++fs.a)
@@ -804,6 +802,10 @@ endif()
 
 #############
 if(RASPBERRY)
+	# remove files not needed for android
+	list(REMOVE_ITEM App_SRC ${DKPROJECT}/resource.h)
+	list(REMOVE_ITEM App_SRC ${DKPROJECT}/resource.rc)
+	
 	# Copy the icon to assets
 	DKCOPY(${DKPROJECT}/icons/icon.png ${DKPROJECT}/assets/icon.png TRUE)
 
@@ -835,16 +837,7 @@ if(RASPBERRY)
 		DKREMOVE(${DKPROJECT}/Backup)
 	endif()
 
-    #find_package(OpenGL REQUIRED)
-	#include_directories(${OpenGL_INCLUDE_DIRS})
-	#link_directories(${OpenGL_LIBRARY_DIRS})
-	#add_definitions(${OpenGL_DEFINITIONS})
-	#if(NOT OPENGL_FOUND)
-    #	message(FATAL_ERROR "OPENGL not found!")
-	#endif()
-	#RASPBERRY_LIB(${OPENGL_LIBRARIES})
-	
-	RASPBERRY_LIB(pthread)
+    RASPBERRY_LIB(pthread)
 	RASPBERRY_LIB(dl)
 	RASPBERRY_LIB(libstdc++fs.a)
 	link_directories(/opt/vc/lib)
@@ -874,6 +867,10 @@ if(ANDROID)
 	if(ANDROID_64)
 		DKCOPY(${DKPLUGINS}/_DKIMPORT/android64 ${DKPROJECT}/android64 FALSE) ## copy app default files recursivly without overwrite
 	endif()
+	# remove files not needed for android
+	list(REMOVE_ITEM App_SRC ${DKPROJECT}/resource.h)
+	list(REMOVE_ITEM App_SRC ${DKPROJECT}/resource.rc)
+	
 	## Create Android Icons
 	if(IMAGEMAGICK_CONVERT)
 		message(STATUS "Building icons for ${APP_NAME} . . .")
@@ -890,10 +887,6 @@ if(ANDROID)
 	endif()
 	DKCOPY(${DKPROJECT}/icons/icon.png ${DKPROJECT}/assets/icon.png TRUE)
 	DKCOPY(${DKPROJECT}/icons/icon.png ${DKPROJECT}/${OS}/res/drawable/icon.png TRUE)
-	
-	# remove files not needed for android
-	list(REMOVE_ITEM App_SRC ${DKPROJECT}/resource.h)
-	list(REMOVE_ITEM App_SRC ${DKPROJECT}/resource.rc)
 	
 	#DKUPDATE_ANDROID_NAME(${APP_NAME})
 	
