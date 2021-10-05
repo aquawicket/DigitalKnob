@@ -31,20 +31,14 @@ ECHO "%choice%" is not valid, try again
 goto pickapp
 
 :gitupdate
-if exist "GIT=C:\Program Files (x86)\Git\bin\git.exe". (
-	set "GIT=C:\Program Files (x86)\Git\bin\git.exe"
-)
-if exist "C:\Program Files\Git\bin\git.exe". (
-	set "GIT=C:\Program Files\Git\bin\git.exe"
-) 
-if exist %GIT%. (
-	echo "GIT = %GIT%"
-) else (
-    echo "installing git"
-	echo "%GIT_DL%"
-	mkdir %DIGITALKNOB%
-	%download% %GIT_DL% %DIGITALKNOB%\Git-2.30.1-32-bit.exe
-	%DIGITALKNOB%\Git-2.30.1-32-bit.exe
+if exist "GIT=C:\Program Files (x86)\Git\bin\git.exe" (set "GIT=C:\Program Files (x86)\Git\bin\git.exe")
+if exist "C:\Program Files\Git\bin\git.exe" (set "GIT=C:\Program Files\Git\bin\git.exe") 
+if exist %GIT% (echo "GIT = %GIT%") else (
+echo "installing git"
+echo "%GIT_DL%"
+mkdir %DIGITALKNOB%
+%download% %GIT_DL% %DIGITALKNOB%\Git-2.30.1-32-bit.exe
+%DIGITALKNOB%\Git-2.30.1-32-bit.exe
 )
 git clone https://github.com/aquawicket/DigitalKnob.git %DKPATH%
 cd %DKPATH%
