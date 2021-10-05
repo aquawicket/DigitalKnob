@@ -1045,3 +1045,5 @@ message(STATUS "\n")
 message(STATUS "**************************************************")
 message(STATUS "****** Generated ${APP_NAME} - ${OS}  ************")
 message(STATUS "**************************************************\n")
+
+add_custom_command(TARGET ${APP_NAME} POST_BUILD COMMAND ${CMAKE_COMMAND} -E echo "TEST: is this AFTER project generation?")
