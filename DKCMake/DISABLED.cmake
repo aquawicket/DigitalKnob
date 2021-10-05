@@ -215,6 +215,7 @@ if(RASPBERRY) # Disabled for Raspberry Pi targets
 	DKDISABLE(DKSDLVideo)
 	DKDISABLE(DKSDLWav)
 	DKDISABLE(DKSFMLWindow)
+	DKDISABLE(DKThread)
 	DKDISABLE(DKTorrent)
 	DKDISABLE(DKUpdate)
 	DKDISABLE(DKVncClient)
