@@ -356,21 +356,8 @@ endif()
 message(STATUS "Copying DKPlugins/_DKIMPORT/ to App...")
 DKCOPY(${DKPLUGINS}/_DKIMPORT/icons ${DKPROJECT}/icons FALSE) ## copy app default files recursivly without overwrite
 DKCOPY(${DKPLUGINS}/_DKIMPORT/assets.h ${DKPROJECT}/assets.h FALSE) ## copy app default files recursivly without overwrite
-if(ANDROID)
-	DKCOPY(${DKPLUGINS}/_DKIMPORT/Android.h ${DKPROJECT}/Android.h FALSE) ## copy app default files recursivly without overwrite
-endif()
-if(ANDROID_32)
-	DKCOPY(${DKPLUGINS}/_DKIMPORT/android32 ${DKPROJECT}/android32 FALSE) ## copy app default files recursivly without overwrite
-endif()
-if(ANDROID_64)
-	DKCOPY(${DKPLUGINS}/_DKIMPORT/android64 ${DKPROJECT}/android64 FALSE) ## copy app default files recursivly without overwrite
-endif()
-if(WIN)
-	DKCOPY(${DKPLUGINS}/_DKIMPORT/resource.h ${DKPROJECT}/resource.h FALSE) ## copy app default files recursivly without overwrite
-	DKCOPY(${DKPLUGINS}/_DKIMPORT/resource.rc ${DKPROJECT}/resource.rc FALSE) ## copy app default files recursivly without overwrite
-endif()
-	DKCOPY(${DKPLUGINS}/_DKIMPORT/App.h ${DKPROJECT}/App.h FALSE) ## copy app default files recursivly without overwrite
-	DKCOPY(${DKPLUGINS}/_DKIMPORT/App.cpp ${DKPROJECT}/App.cpp FALSE) ## copy app default files recursivly without overwrite
+DKCOPY(${DKPLUGINS}/_DKIMPORT/App.h ${DKPROJECT}/App.h FALSE) ## copy app default files recursivly without overwrite
+DKCOPY(${DKPLUGINS}/_DKIMPORT/App.cpp ${DKPROJECT}/App.cpp FALSE) ## copy app default files recursivly without overwrite
 	
 ### Include all source files from the app folder for the compilers
 #file(GLOB App_SRC
@@ -391,6 +378,8 @@ include_directories(${DKPROJECT})
 
 ##########
 if(WIN_32)
+	DKCOPY(${DKPLUGINS}/_DKIMPORT/resource.h ${DKPROJECT}/resource.h FALSE) ## copy app default files recursivly without overwrite
+	DKCOPY(${DKPLUGINS}/_DKIMPORT/resource.rc ${DKPROJECT}/resource.rc FALSE) ## copy app default files recursivly without overwrite
 	
 	## Create Icon files for project
 	if(IMAGEMAGICK_CONVERT)
@@ -466,6 +455,9 @@ endif(WIN_32)
 	
 ##########
 if(WIN_64)
+	DKCOPY(${DKPLUGINS}/_DKIMPORT/resource.h ${DKPROJECT}/resource.h FALSE) ## copy app default files recursivly without overwrite
+	DKCOPY(${DKPLUGINS}/_DKIMPORT/resource.rc ${DKPROJECT}/resource.rc FALSE) ## copy app default files recursivly without overwrite
+	
 	## Create Icon files for project
 	if(IMAGEMAGICK_CONVERT)
 		message(STATUS "Building icons for ${APP_NAME} . . .")
@@ -875,7 +867,13 @@ endif()
 
 
 if(ANDROID)
-		
+	DKCOPY(${DKPLUGINS}/_DKIMPORT/Android.h ${DKPROJECT}/Android.h FALSE) ## copy app default files recursivly without overwrite
+	if(ANDROID_32)
+		DKCOPY(${DKPLUGINS}/_DKIMPORT/android32 ${DKPROJECT}/android32 FALSE) ## copy app default files recursivly without overwrite
+	endif()
+	if(ANDROID_64)
+		DKCOPY(${DKPLUGINS}/_DKIMPORT/android64 ${DKPROJECT}/android64 FALSE) ## copy app default files recursivly without overwrite
+	endif()
 	## Create Android Icons
 	if(IMAGEMAGICK_CONVERT)
 		message(STATUS "Building icons for ${APP_NAME} . . .")
