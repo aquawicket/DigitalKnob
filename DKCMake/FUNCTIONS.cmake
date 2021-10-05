@@ -1997,26 +1997,13 @@ endfunction()
 
 
 ###################### DKPlugin Link Libraries #####################
-function(DK_LIB lib)
-	DKSET(LIBS "${LIBS} ${lib}")
-	
-	#DKSET(LIBLIST ${LIBLIST} ${lib_path}) ## used for double checking
-	#string(FIND "${LIBS}" "/" index)
-	#if(NOT ${index} EQUAL -1)
-	#	if(NOT EXISTS ${lib_path})
-	#		message(STATUS "MISSING: ${lib_path}")
-	#		DKSET(QUEUE_BUILD ON)
-	#	endif()
-	#endif()
+function(DK_LIB lib_path)
+	#DKSET(LIBLIST "${LIBLIST} ${lib_path}") ## used for double checking
 	#string(FIND "${LIBS}" "${lib_path}" index)
 	#if(NOT ${index} EQUAL -1)
 	#	return() ## The library is already in the list
 	#endif()
-	#if(LINUX OR RASPBERRY OR ANDROID)
-	#	DKSET(LIBS debug ${lib_path} ${LIBS})  #Add to beginning of list
-	#else()
-	#	DKSET(LIBS ${LIBS} debug ${lib_path})  #Add to end of list
-	#endif()
+	DKSET(LIBS "${LIBS} ${lib_path}")
 endfunction()
 
 function(DKDEBUG_LIB lib_path)
