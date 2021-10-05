@@ -106,6 +106,7 @@ endif()
 
 if(CMAKE_HOST_APPLE)  # Disabled on Apple host machines
     DKDISABLE(android-build-tools)
+	DKDISABLE(android-ndk)
 	DKDISABLE(bzip2)
 	DKDISABLE(DKSDLText)
 	DKDISABLE(DKThread)
