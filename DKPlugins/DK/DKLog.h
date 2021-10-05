@@ -151,7 +151,7 @@ namespace {
 void signal_handler(int signal);
 */
 
-#define  DKBUILDTIME() Log(__FILE__, __LINE__, __FUNCTION__, __DATE__"  "__TIME__"\n", DK_INFO);
+#define  DKBUILDTIME() Log(__FILE__, __LINE__, __FUNCTION__, __DATE__ +"  "+ __TIME__ +"\n", DK_INFO);
 #define  DKASSERT(message) Log(__FILE__, __LINE__, __FUNCTION__, message, DK_ASSERT);
 #define   DKFATAL(message) Log(__FILE__, __LINE__, __FUNCTION__, message, DK_FATAL);
 #define   DKERROR(message) Log(__FILE__, __LINE__, __FUNCTION__, message, DK_ERROR);
