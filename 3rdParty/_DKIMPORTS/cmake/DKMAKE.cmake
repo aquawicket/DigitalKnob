@@ -10,7 +10,7 @@ DKSET(CMAKE_NAME cmake-${CMAKE_VERSION}-windows-i386)
 WIN_DKSET(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v${CMAKE_VERSION}/${CMAKE_NAME}.msi)
 #WIN_DKSET(CMAKE "C:/Program Files (x86)/CMake/bin")
 dk_getShortPath("C:/Program Files (x86)/CMake/bin" CMAKE)
-MAC_DKSET(CMAKE /Applications/CMake.app/Contents/bin)
+MAC_DKSET(CMAKE /usr/local/bin)
 LINUX_DKSET(CMAKE /usr/bin) 
 
 WIN_DKSET(CMAKE_EXE ${CMAKE}/cmake.exe)
@@ -20,23 +20,17 @@ LINUX_DKSET(CMAKE_EXE ${CMAKE}/cmake)
 
 
 ### INSTALL ###
-if(CMAKE_HOST_WIN32)
-	if(NOT EXISTS ${CMAKE_EXE})
+if(NOT EXISTS ${CMAKE_EXE})
+	if(CMAKE_HOST_WIN32)
 		DOWNLOAD(${CMAKE_DL} ${DIGITALKNOB}/Download)
 		DKCOMMAND(${DIGITALKNOB}/Download/${CMAKE_NAME}.msi)
 	endif()
-endif()
-
-if(CMAKE_HOST_MAC)
-	if(NOT EXISTS ${CMAKE_EXE})
-		#message(FATAL_ERROR "${CMAKE} not found")
+	if(CMAKE_HOST_MAC)
 		DKCOMMAND("brew install cmake")
 	endif()
-endif()
-
-if(CMAKE_HOST_LINUX)
-	if(NOT EXISTS ${CMAKE_EXE})
+	if(CMAKE_HOST_LINUX)
 		message(FATAL_ERROR "${CMAKE} not found")
+		# TODO
 	endif()
 endif()
 
