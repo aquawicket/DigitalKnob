@@ -367,6 +367,7 @@ endif()
 
 message(STATUS "Copying DKPlugins/_DKIMPORT/ to App...")
 DKCOPY(${DKPLUGINS}/_DKIMPORT/icons ${DKPROJECT}/icons FALSE) ## copy app default files recursivly without overwrite
+DKCOPY(${DKPLUGINS}/_DKIMPORT/assets.h ${DKPROJECT}/assets.h FALSE) ## copy app default files recursivly without overwrite
 if(ANDROID)
 	DKCOPY(${DKPLUGINS}/_DKIMPORT/Android.h ${DKPROJECT} FALSE) ## copy app default files recursivly without overwrite
 endif()
