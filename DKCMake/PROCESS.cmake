@@ -346,7 +346,7 @@ DKCOPY(${DKPLUGINS}/_DKIMPORT/App.cpp ${DKPROJECT}/App.cpp FALSE) ## copy app de
 #file(GLOB App_SRC
 file(GLOB_RECURSE App_SRC 
 	${DKPROJECT}/*.c
-	${DKPROJECT}/*.cpp
+	${DKPROJECT}/*.cpp)
 list(FILTER App_SRC EXCLUDE REGEX "${DKPROJECT}/assets/*" )
 list(FILTER App_SRC EXCLUDE REGEX "${DKPROJECT}/${OS}/*" )
 	
