@@ -104,10 +104,6 @@ message(STATUS "\n\n")
 #endforeach()
 #message(STATUS "\n\n")
 
-## Clear cache list variables, just to be sure 
-#DKSET(DKDEFINES "")
-#DKSET(DKINCLUDES "")
-#DKSET(DKLIBRARIES "")
 
 foreach(plugin ${dkdepend_list})
 	DKSET(QUEUE_BUILD OFF)
@@ -922,7 +918,6 @@ if(ANDROID)
 	#add_executable(DKAndroid ${App_SRC})
 
 	add_library(${APP_NAME} SHARED ${App_SRC})
-	#target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS})
 	#target_include_directories(${APP_NAME} PUBLIC ${INCLUDE_DIRECTORIES}) #of ${DKINCLUDES_LIST}
 	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${LIBS})
 	#set_target_properties(${APP_NAME} PROPERTIES DEBUG_POSTFIX d)

@@ -1997,8 +1997,9 @@ endfunction()
 
 
 ###################### DKPlugin Link Libraries #####################
-function(DK_LIB lib_path)
-	LIST(APPEND LIBS opengl32.lib)
+function(DK_LIB lib)
+	DKSET(LIBS "${LIBS} ${lib}")
+	
 	#DKSET(LIBLIST ${LIBLIST} ${lib_path}) ## used for double checking
 	#string(FIND "${LIBS}" "/" index)
 	#if(NOT ${index} EQUAL -1)

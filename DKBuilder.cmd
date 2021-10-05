@@ -113,7 +113,7 @@ goto build
 
 :build
 echo Deleteing CMake cache . . .
-cd %DIGITALKNOB%
+cd "%DIGITALKNOB%"
 for /r %%i in (CMakeCache.*) do del "%%i"
 for /d /r %%i in (*CMakeFiles*) do rd /s /q "%%i"
 
@@ -130,20 +130,20 @@ if exist "%CMAKE%" (echo "CMAKE = %CMAKE%") else (
 )
 if exist "C:\Program Files\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe" set "MSBUILD=C:\Program Files\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe"
 if exist "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe" set "MSBUILD=C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe"
-if exist %MSBUILD% (echo "MSBUILD = %MSBUILD%") else (
+if exist "%MSBUILD%" (echo "MSBUILD = %MSBUILD%") else (
     echo "installing Visual Studio"
 	echo "%MSBUILD_DL%"
-	%download% %MSBUILD_DL% %DIGITALKNOB%\vs_Community.exe
-	%DIGITALKNOB%\vs_Community.exe
+	%download% %MSBUILD_DL% "%DIGITALKNOB%\vs_Community.exe"
+	"%DIGITALKNOB%\vs_Community.exe"
 	goto build
 )
 set APP_PATH=%DKPATH%\DKApps\%APP%
 ECHO %APP_PATH%
 mkdir %APP_PATH%\%OS%
 cd %APP_PATH%\%OS%"
-%CMAKE% -G "Visual Studio 16 2019" -A Win32 -DDEBUG=ON -DRELEASE=ON -DREBUILDALL=ON -DSTATIC=ON %DKPATH%
-%MSBUILD% %APP%.sln /p:Configuration=Debug
-%MSBUILD% %APP%.sln /p:Configuration=Release
+"%CMAKE%" -G "Visual Studio 16 2019" -A Win32 -DDEBUG=ON -DRELEASE=ON -DREBUILDALL=ON -DSTATIC=ON %DKPATH%
+"%MSBUILD%" %APP%.sln /p:Configuration=Debug
+"%MSBUILD%" %APP%.sln /p:Configuration=Release
 
 :end
 ECHO Exit
