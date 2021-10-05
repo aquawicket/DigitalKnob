@@ -41,10 +41,10 @@ if exist "%GIT%" (echo "GIT = %GIT%") else (
 	%DIGITALKNOB%\Git-2.30.1-32-bit.exe
 	goto gitupdate
 )
-git clone https://github.com/aquawicket/DigitalKnob.git %DKPATH%
+"%GIT%" clone https://github.com/aquawicket/DigitalKnob.git %DKPATH%
 cd %DKPATH%
-git checkout -- .
-git pull origin master
+"%GIT%" checkout -- .
+"%GIT%" pull origin master
 goto pickapp
 :dkbuilder
 set APP=DKBuilder
