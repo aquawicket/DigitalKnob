@@ -31,15 +31,17 @@ ECHO "%choice%" is not valid, try again
 goto pickapp
 
 :gitupdate
-set "GIT=C:\Program Files (x86)\Git\bin\git.exe"
-if exist %GIT%. (
-	echo "found git"
-) 
-else if exist "C:\Program Files\Git\bin\git.exe". (
-	set "GIT=C:\Program Files\Git\bin\git.exe"
+if exist "GIT=C:\Program Files (x86)\Git\bin\git.exe". (
+	set "GIT=C:\Program Files (x86)\Git\bin\git.exe"
 	echo "found git"
 )
-else (
+if exist "C:\Program Files\Git\bin\git.exe". (
+	set "GIT=C:\Program Files\Git\bin\git.exe"
+	echo "found git"
+) 
+if exist %GIT%. (
+	echo "installing git"
+) else (
     echo "installing git"
 	echo "%GIT_DL%"
 	mkdir %DIGITALKNOB%
