@@ -21,18 +21,6 @@ else
     echo "UNKNOWN OS TYPE ($OSTYPE)"
 fi
 
-#APP="DKBuilder"
-#TYPE="Release"
-
-GCC_PATH=$(which gcc)
-GPP_PATH=$(which g++)
-export CC="$GCC_PATH"
-export CXX="$GPP_PATH"
-echo "GCC_PATH = $GCC_PATH"
-echo "GPP_PATH = $GPP_PATH"
-
-
-
 sudo echo
 
 while :
@@ -45,7 +33,15 @@ while :
 		case $opt in
 			"Git Update")
 				echo "$opt"
-				sudo apt-get -y install git
+				if [[ "$OSTYPE" == "darwin"* ]]; then
+					#ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+					# https://github.com/Homebrew/brew/issues/10368
+					# rm -fr $(brew --repo homebrew/core)
+					# brew tap homebrew/core
+					# brew install git	
+				else
+					sudo apt-get -y install git
+				fi
 				git clone https://github.com/aquawicket/DigitalKnob.git $DKPATH
 				cd $DKPATH
 				git checkout -- .
@@ -117,8 +113,26 @@ while :
 	find . -name "CMakeCache.*" -delete
 	rm -rf `find . -type d -name CMakeFiles`
 		
-	mkdir $DKPATH/DKApps/$APP/$OS
-	if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+	if [[ "$OSTYPE" == "darwin"* ]]; then
+		#CLANG_PATH=$(which clang)
+		#CLANGPP_PATH=$(which clang++)
+		#export CC="$CLANG_PATH"
+		#export CXX="$CLANGPP_PATH"
+		#echo "CLANG_PATH = $CLANG_PATH"
+		#echo "CLANGPP_PATH = $CLANGPP_PATH"
+		#brew install cmake		
+		mkdir $DKPATH/DKApps/$APP/$OS
+		cd $DKPATH/DKApps/$APP/$OS
+		cmake -G "Xcode" -DMAC_64=ON -DDEBUG=ON -DRELEASE=ON -DREBUILD=ON -DSTATIC=ON $DKPATH
+		xcodebuild -configuration Debug build
+		xcodebuild -configuration Release build
+	else #Linux, Raspberry Pi
+		GCC_PATH=$(which gcc)
+		GPP_PATH=$(which g++)
+		export CC="$GCC_PATH"
+		export CXX="$GPP_PATH"
+		echo "GCC_PATH = $GCC_PATH"
+		echo "GPP_PATH = $GPP_PATH"
 		sudo apt-get -y install cmake
 		sudo apt-get -y install gcc
 		sudo apt-get -y install g++
@@ -127,38 +141,9 @@ while :
 		cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER="$GCC_PATH" -DCMAKE_CXX_COMPILER="$GPP_PATH" -DDEBUG=ON -DREBUILDALL=ON -DSTATIC=ON $DKPATH
 		make $APP
 		chmod +x $DKPATH/DKApps/$APP/$OS/Debug/$APP
-		
 		mkdir $DKPATH/DKApps/$APP/$OS/Release
 		cd $DKPATH/DKApps/$APP/$OS/Release
 		cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER="$GCC_PATH" -DCMAKE_CXX_COMPILER="$GPP_PATH" -DRELEASE=ON -DREBUILDALL=ON -DSTATIC=ON $DKPATH
-		make ${APP}
-		chmod +x $DKPATH/DKApps/$APP/$OS/Release/${APP}
-	elif [[ "$OSTYPE" == "darwin"* ]]; then
-		CLANG_PATH=$(which clang)
-		CLANGPP_PATH=$(which clang++)
-		export CC="$CLANG_PATH"
-		export CXX="$CLANGPP_PATH"
-		echo "CLANG_PATH = $CLANG_PATH"
-		echo "CLANGPP_PATH = $CLANGPP_PATH"
-		#ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-			# https://github.com/Homebrew/brew/issues/10368
-			# rm -fr $(brew --repo homebrew/core)
-			# brew tap homebrew/core
-		#brew install cmake		
-		mkdir $DKPATH/DKApps/$APP/$OS
-		cd $DKPATH/DKApps/$APP/$OS
-		cmake -G "Xcode" -DMAC_64=ON -DDEBUG=ON -DRELEASE=ON -DREBUILD=ON -DSTATIC=ON $DKPATH
-		xcodebuild -configuration Debug build
-		xcodebuild -configuration Release build
-	else
-		cd $DKPATH/DKApps/$APP/$OS
-		cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER="$GCC_PATH" -DCMAKE_CXX_COMPILER="$GPP_PATH" -DDEBUG=ON -DRELEASE=ON -DREBUILDALL=ON -DSTATIC=ON $DKPATH
-	
-		cd $DKPATH/DKApps/$APP/$OS/Debug
-		make $APP
-		chmod +x $DKPATH/DKApps/$APP/$OS/Debug/$APP
-	
-		cd $DKPATH/DKApps/$APP/$OS/Release
 		make ${APP}
 		chmod +x $DKPATH/DKApps/$APP/$OS/Release/${APP}
 	fi
