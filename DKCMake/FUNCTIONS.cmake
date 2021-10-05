@@ -1997,7 +1997,7 @@ endfunction()
 
 
 ###################### DKPlugin Link Libraries #####################
-function(DKLIB lib_path)	
+function(DK_LIB lib_path)	
 	DKSET(LIBLIST ${LIBLIST} ${lib_path}) ## used for double checking
 	if(NOT EXISTS ${lib_path})
 		message(STATUS "MISSING: ${lib_path}")
