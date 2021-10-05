@@ -134,6 +134,7 @@ if(LINUX) # Disabled for Linux targets
 	DKDISABLE(DKSDLVideo)
 	DKDISABLE(DKSDLWav)
 	DKDISABLE(DKSFMLWindow)
+	DKDISABLE(DKThread)
 	DKDISABLE(DKTorrent)
 	DKDISABLE(DKUpdate)
 	DKDISABLE(DKVncClient)
