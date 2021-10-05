@@ -118,23 +118,22 @@ for /d /r %%i in (*CMakeFiles*) do rd /s /q "%%i"
 
 
 echo ****** BUILDING %APP% - %OS% ******
-set "CMAKE=C:\PROGRA~2\CMake\bin\cmake.exe"
-if exist %CMAKE%. (
-	echo "found cmake"
-) else (
+if exist "C:\Program Files (x86)\CMake\bin\cmake.exe" set "CMAKE=C:\Program Files (x86)\CMake\bin\cmake.exe"
+if exist "C:\Program Files\CMake\bin\cmake.exe" set "CMAKE=C:\Program Files\CMake\bin\cmake.exe"
+if exist "%CMAKE%" (echo "CMAKE = %CMAKE%") else (
     echo "installing cmake"
 	echo "%CMAKE_DL%"
 	%download% %CMAKE_DL% %DIGITALKNOB%\cmake-3.21.1-windows-i386.msi
 	%DIGITALKNOB%\cmake-3.21.1-windows-i386.msi
+	goto build
 )
 set "MSBUILD=C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe"
-if exist %MSBUILD%. (
-	echo "found msbuild"
-) else (
+if exist %MSBUILD% (echo "MSBUILD = %MSBUILD%") else (
     echo "installing Visual Studio"
 	echo "%MSBUILD_DL%"
 	%download% %MSBUILD_DL% %DIGITALKNOB%\vs_Community.exe
 	%DIGITALKNOB%\vs_Community.exe
+	goto build
 )
 set APP_PATH=%DKPATH%\DKApps\%APP%
 ECHO %APP_PATH%
