@@ -5,9 +5,9 @@
 #include "DKString.h"
 #include <stdio.h>
 #include <iostream>
-#if defined (MAC) || defined(IOS)
-	#import <Foundation/Foundation.h>
-#endif
+//#if defined (MAC) || defined(IOS)
+//	#import <Foundation/Foundation.h>
+//#endif
 #if !defined(IOS)
     #include <fstream>
 #endif
