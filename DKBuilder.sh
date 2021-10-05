@@ -145,7 +145,7 @@ while :
 		
 		mkdir $DKPATH/DKApps/$APP/$OS/Release
 		cd $DKPATH/DKApps/$APP/$OS/Release
-		cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER="$GCC_PATH" -DCMAKE_CXX_COMPILER="$GPP_PATH" -DRELEASE=ON -DREBUILDALL=ON -DSTATIC=ON $DKPATH
+		cmake -G "Unix Makefiles" -DRELEASE=ON -DREBUILDALL=ON -DSTATIC=ON $DKPATH
 		make ${APP}
 		chmod +x $DKPATH/DKApps/$APP/$OS/Release/${APP}
 	else
