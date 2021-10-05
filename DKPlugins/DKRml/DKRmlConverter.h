@@ -15,7 +15,9 @@ public:
 	bool ClickIframe(DKEvents* event);
 	bool MouseOverIframe(DKEvents* event);
 	bool Encode(std::string& data);
+#ifdef USE_tidy-html5
 	bool TidyFile(const DKString& in, DKString& out);
+#endif
 	bool GetOuterHtml(Rml::Element* element, DKString& string);
 
 	DKString stored_html;

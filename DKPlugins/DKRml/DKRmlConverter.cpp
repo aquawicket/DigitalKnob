@@ -4,8 +4,10 @@
 #include "DKDuktape/DKDuktape.h"
 #include "DKRml/DKRml.h"
 #include "DKXml/DKXml.h"
-#include "tidy.h"
-#include "tidybuffio.h"
+#ifdef USE_tidy-html5
+	#include "tidy.h"
+	#include "tidybuffio.h"
+#endif
 
 
 bool DKRmlConverter::HtmlToRml(const DKString& html, DKString& rml){
@@ -371,6 +373,7 @@ bool DKRmlConverter::Encode(std::string& data){
 	return true;
 }
 
+#ifdef USE_tidy-html5
 bool DKRmlConverter::TidyFile(const DKString& in, DKString& out){
 	DKINFO("####### CODE GOING INTO TIDY ##########\n");
 	DKINFO(in+"\n");
@@ -422,6 +425,7 @@ bool DKRmlConverter::TidyFile(const DKString& in, DKString& out){
 	//return rc;
 	return true;
 }
+#endif
 
 bool DKRmlConverter::GetOuterHtml(Rml::Element* element, DKString& string){
 	DKDEBUGFUNC(element, string);
