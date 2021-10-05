@@ -354,9 +354,6 @@ DKCOPY(${DKPLUGINS}/_DKIMPORT/App.cpp ${DKPROJECT}/App.cpp FALSE) ## copy app de
 file(GLOB_RECURSE App_SRC 
 	${DKPROJECT}/*.c
 	${DKPROJECT}/*.cpp
-	${DKPROJECT}/*.manifest
-	${DKPROJECT}/*.rc
-	${DKPROJECT}/icons/windows/*.rc)
 list(FILTER App_SRC EXCLUDE REGEX "${DKPROJECT}/assets/*" )
 list(FILTER App_SRC EXCLUDE REGEX "${DKPROJECT}/${OS}/*" )
 	
@@ -366,6 +363,12 @@ include_directories(${DKPROJECT})
 
 ##########
 if(WIN_32)
+	file(GLOB_RECURSE resources_SRC 
+	${DKPROJECT}/*.manifest
+	${DKPROJECT}/*.rc
+	${DKPROJECT}/icons/windows/*.rc)
+	list (APPEND App_SRC ${resources_SRC})
+	
 	DKCOPY(${DKPLUGINS}/_DKIMPORT/resource.h ${DKPROJECT}/resource.h FALSE) ## copy app default files recursivly without overwrite
 	DKCOPY(${DKPLUGINS}/_DKIMPORT/resource.rc ${DKPROJECT}/resource.rc FALSE) ## copy app default files recursivly without overwrite
 	
