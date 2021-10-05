@@ -34,7 +34,12 @@ goto pickapp
 set "GIT=C:\Program Files (x86)\Git\bin\git.exe"
 if exist %GIT%. (
 	echo "found git"
-) else (
+) 
+else if exist "C:\Program Files\Git\bin\git.exe". (
+	set "GIT=C:\Program Files\Git\bin\git.exe"
+	echo "found git"
+)
+else (
     echo "installing git"
 	echo "%GIT_DL%"
 	mkdir %DIGITALKNOB%
