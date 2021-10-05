@@ -32,7 +32,7 @@ APPLE_DEBUG_LIB(${WEBP}/${OS}/WebP.build/${DEBUG_DIR}/webpdecode.build/libwebpde
 APPLE_RELEASE_LIB(${WEBP}/${OS}/WebP.build/${RELEASE_DIR}/webpdecode.build/libwebpdecode.a)
 APPLE_DEBUG_LIB(${WEBP}/${OS}/WebP.build/${DEBUG_DIR}/webpdsp.build/libwebpdsp.a)
 APPLE_RELEASE_LIB(${WEBP}/${OS}/WebP.build/${RELEASE_DIR}/webpdsp.build/libwebpdsp.a)
-APPLE_DEBUG_LIB(${WEBP}/${OS}/WebP.build/${DEBUG_DIR}/webpemcode.build/libwebpencode.a)
+APPLE_DEBUG_LIB(${WEBP}/${OS}/WebP.build/${DEBUG_DIR}/webpencode.build/libwebpencode.a)
 APPLE_RELEASE_LIB(${WEBP}/${OS}/WebP.build/${RELEASE_DIR}/webpencode.build/libwebpencode.a)
 APPLE_DEBUG_LIB(${WEBP}/${OS}/WebP.build/${DEBUG_DIR}/webputils.build/libwebputils.a)
 APPLE_RELEASE_LIB(${WEBP}/${OS}/WebP.build/${RELEASE_DIR}/webputils.build/libwebputils.a)
