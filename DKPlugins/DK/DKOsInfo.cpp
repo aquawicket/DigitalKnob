@@ -3,6 +3,10 @@
 #include "DK/stdafx.h"
 #include "DKOsInfo.h"
 
+#ifdef MAC
+#import <CoreServices/CoreServices.h>
+#endif
+
 bool GetOSInfo(DKString& info){
 	DKString oscompany;
 	GetOSCompany(oscompany);
