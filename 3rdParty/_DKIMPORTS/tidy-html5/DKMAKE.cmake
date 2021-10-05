@@ -1,3 +1,5 @@
+# https://github.com/htacg/tidy-html5/archive/5.7.28.zip
+
 ### VERSION ###
 DKSET(TIDY_MAJOR 5)
 DKSET(TIDY_MINOR 8)
@@ -8,9 +10,7 @@ DKSET(TIDY ${3RDPARTY}/${TIDY_NAME})
 
 
 ### INSTALL ###
-## https://github.com/htacg/tidy-html5/archive/5.7.28.zip
 DKINSTALL(https://github.com/htacg/tidy-html5/archive/refs/tags/${TIDY_MAJOR}.${TIDY_MINOR}.${TIDY_BUILD}.zip tidy-html5 ${TIDY})
-#DKRENAME(${DKDOWNLOAD}/${TIDY_MAJOR}.${TIDY_MINOR}.${TIDY_BUILD}.zip ${DKDOWNLOAD}/${TIDY_NAME})
 
 
 
@@ -74,7 +74,6 @@ RASPBERRY_RELEASE_COMMAND(make tidy)
 
 
 #ANDROID_NDK(${TIDY_NAME})
-
 ANDROID_PATH(${TIDY}/${OS})
 ANDROID32_COMMAND(${DKCMAKE_WIN32} ${ZLIB_ANDROID} ${TIDY})
 ANDROID64_COMMAND(${DKCMAKE_WIN64} ${ZLIB_ANDROID} ${TIDY})

@@ -582,6 +582,7 @@ endfunction()
 ###############################################################
 
 ####################### DKSET ###########
+# FIXME: These set functions are mixing and matching Host vs Target.   the style should follow WIN64HOST_SET and WIN64_SET patterns 
 function(WIN_DKSET)
 	if(CMAKE_HOST_WIN32)
 		DKSET(${ARGV})
@@ -1575,10 +1576,7 @@ function(WIN_VS_DEBUG folder sln_file)
 			message(FATAL_ERROR "CANNOT FIND: ${3RDPARTY}/${folder}/${OS}/${sln_file}" )
 		endif()
 		#DKEXECUTE_PROCESS("set _CL_=/MTd" WORKING_DIRECTORY ${3RDPARTY}/${folder}/${OS})
-
-		
 		if(${ARGC} GREATER 2)
-			
 			set(EXECUTE_COMMAND ${MSBUILD} ${3RDPARTY}/${folder}/${OS}/${sln_file} /t:${ARGV2} /p:Configuration=Debug)
 		else()
 			set(EXECUTE_COMMAND ${MSBUILD} ${3RDPARTY}/${folder}/${OS}/${sln_file} /p:Configuration=Debug)
@@ -1593,10 +1591,7 @@ function(WIN_VS_RELEASE folder sln_file)
 			message(FATAL_ERROR "CANNOT FIND: ${3RDPARTY}/${folder}/${OS}/${sln_file}" )
 		endif()
 		#DKEXECUTE_PROCESS("set _CL_=/MT" WORKING_DIRECTORY ${3RDPARTY}/${folder}/${OS})
-
-		
 		if(${ARGC} GREATER 2)
-			
 			set(EXECUTE_COMMAND ${MSBUILD} ${3RDPARTY}/${folder}/${OS}/${sln_file} /t:${ARGV2} /p:Configuration=Release)
 		else()
 			set(EXECUTE_COMMAND ${MSBUILD} ${3RDPARTY}/${folder}/${OS}/${sln_file} /p:Configuration=Release)
