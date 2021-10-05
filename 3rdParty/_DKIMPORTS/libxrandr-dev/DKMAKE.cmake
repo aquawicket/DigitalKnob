@@ -1,6 +1,6 @@
 ### INSTALL ###
 DKSET(CURRENT_DIR /usr)
-DKCOMMAND(sudo apt install libxrandr-dev)
+DKCOMMAND(sudo apt -y install libxrandr-dev)
 
 
 ### LINK ###

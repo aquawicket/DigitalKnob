@@ -1,6 +1,6 @@
 ### INSTALL ###
 DKSET(CURRENT_DIR /usr)
-DKCOMMAND(sudo apt install libx11-dev)
+DKCOMMAND(sudo apt -y install libx11-dev)
 
 
 

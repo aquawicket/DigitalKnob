@@ -1,6 +1,6 @@
 ### INSTALL ###
 DKSET(CURRENT_DIR /usr)
-DKCOMMAND(sudo apt install libsystemd-dev)
+DKCOMMAND(sudo apt -y install libsystemd-dev)
 
 
 ### LINK ###

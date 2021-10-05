@@ -27,7 +27,7 @@ while :
 	do
 	echo " "
 	PS3='Please update and select an app to build: '
-	options=("Git Update" "DKBuilder" "DKSDLRmlUi" "DKTestAll" "Exit")
+	options=("Git Update" "Git Commit" "DKBuilder" "DKSDLRmlUi" "DKTestAll" "Exit")
 	select opt in "${options[@]}"
 	do
 		case $opt in
@@ -48,6 +48,23 @@ while :
 				git checkout -- .
 				git pull origin master
 				chmod +x $DKPATH/DKBuilder.sh
+				echo "${options[@]}"
+				;;
+			"Git Commit")
+				echo "$opt"
+				if [[ "$OSTYPE" == "darwin"* ]]; then
+					echo "install Homebrew and git"
+					#ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+					# https://github.com/Homebrew/brew/issues/10368
+					# rm -fr $(brew --repo homebrew/core)
+					# brew tap homebrew/core
+					# brew install git
+				else
+					sudo apt-get -y install git
+				fi
+				cd $DKPATH/DK
+				git commit -a -m "git commit"
+				git push
 				echo "${options[@]}"
 				;;
 			"DKBuilder")

@@ -1,6 +1,6 @@
 ### INSTALL ###
 DKSET(CURRENT_DIR /usr)
-DKCOMMAND(sudo apt install libxtst-dev)
+DKCOMMAND(sudo apt -y install libxtst-dev)
 
 
 ### LINK ###

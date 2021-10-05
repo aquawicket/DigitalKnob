@@ -1,6 +1,6 @@
 ### INSTALL ###
 DKSET(CURRENT_DIR /usr)
-DKCOMMAND(sudo apt install libgtk2.0-dev)
+DKCOMMAND(sudo apt -y install libgtk2.0-dev)
 
 
 ### LINK ###

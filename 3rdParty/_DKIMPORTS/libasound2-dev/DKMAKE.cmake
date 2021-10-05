@@ -1,6 +1,6 @@
 ### INSTALL ###
 DKSET(CURRENT_DIR /usr)
-DKCOMMAND(sudo apt install libasound2-dev)
+DKCOMMAND(sudo apt -y install libasound2-dev)
 
 
 ### LINK ###
