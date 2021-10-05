@@ -139,7 +139,7 @@ while :
 		#brew install cmake
 		mkdir $DKPATH/DKApps/$APP/$OS/Debug
 		cd $DKPATH/DKApps/$APP/$OS/Debug
-		cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER="$GCC_PATH" -DCMAKE_CXX_COMPILER="$GPP_PATH" -DDEBUG=ON -DREBUILDALL=ON -DSTATIC=ON $DKPATH
+		cmake -G "Unix Makefiles" -DDEBUG=ON -DREBUILDALL=ON -DSTATIC=ON $DKPATH
 		make $APP
 		chmod +x $DKPATH/DKApps/$APP/$OS/Debug/$APP
 		

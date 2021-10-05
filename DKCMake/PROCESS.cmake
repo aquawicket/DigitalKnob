@@ -8,9 +8,9 @@ include(DKCMake/OPTIONS.cmake)
 
 
 # cmake location
-WIN_DKSET(CMAKE_EXE C:/PROGRA~2/CMake/bin/cmake.exe)
-MAC_DKSET(CMAKE_EXE /opt/local/bin/cmake)
-LINUX_DKSET(CMAKE_EXE /usr/bin/cmake)
+#WIN_DKSET(CMAKE_EXE C:/PROGRA~2/CMake/bin/cmake.exe)
+#MAC_DKSET(CMAKE_EXE /opt/local/bin/cmake)
+#LINUX_DKSET(CMAKE_EXE /usr/bin/cmake)
 
 include(DKCMake/DISABLED.cmake)
 get_filename_component(APP_NAME ${DKPROJECT} NAME)
