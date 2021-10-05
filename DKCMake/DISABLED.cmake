@@ -129,6 +129,7 @@ if(LINUX) # Disabled for Linux targets
 	DKDISABLE(DKOFWindow)
 	DKDISABLE(DKPlugin1)
 	DKDISABLE(DKPlugin2)
+	DKDISABLE(DKScreenRecorder)
 	DKDISABLE(DKSDLAudio)
 	DKDISABLE(DKSDLText)
 	DKDISABLE(DKSDLVideo)
