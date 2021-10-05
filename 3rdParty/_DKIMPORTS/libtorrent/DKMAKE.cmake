@@ -2,8 +2,8 @@
 # https://github.com/arvidn/libtorrent/archive/refs/tags/v2.0.4.zip
 
 ### DEPENDS ###
-DKDEPEND(boost Boost_System)
-DKDEPEND(openssl-vs2015)
+DKDEPEND(boost boost_system)
+DKDEPEND(openssl)
 
 
 ### VERSION ###

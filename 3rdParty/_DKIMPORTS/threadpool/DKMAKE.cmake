@@ -1,5 +1,5 @@
-DKDEPEND(boost Boost_System) #Needed?
-DKDEPEND(boost Boost_Thread)
+DKDEPEND(boost boost_system)
+DKDEPEND(boost boost_thread)
 
 ### VERSION ###
 DKSET(THREADPOOL_MAJOR 0)
