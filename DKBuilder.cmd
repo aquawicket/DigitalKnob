@@ -57,12 +57,12 @@ if exist "%GIT%" (echo "GIT = %GIT%") else (
 	mkdir %DIGITALKNOB%
 	%download% %GIT_DL% %DIGITALKNOB%\Git-2.30.1-32-bit.exe
 	%DIGITALKNOB%\Git-2.30.1-32-bit.exe
-	goto gitupdate
+	goto gitcommit
 )
 cd %DKPATH%/DK
 "%GIT%" commit -a -m "git commit"
 "%GIT%" push
-goto gitcommit
+goto pickapp
 :dkbuilder
 set APP=DKBuilder
 goto pickos
