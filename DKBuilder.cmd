@@ -15,18 +15,20 @@ set "TYPE="
 :pickapp
 ECHO.
 ECHO 1. Git Update
-ECHO 2. DKBuilder
-ECHO 3. DKSDLRmlUi
-ECHO 4. DKTestAll
-ECHO 5. Exit
+ECHO 2. Git Commit
+ECHO 3. DKBuilder
+ECHO 4. DKSDLRmlUi
+ECHO 5. DKTestAll
+ECHO 6. Exit
 set choice=
 set /p choice=Please select an app to build: 
 if not '%choice%'=='' set choice=%choice:~0,1%
 if '%choice%'=='1' goto gitupdate
-if '%choice%'=='2' goto dkbuilder
-if '%choice%'=='3' goto dksdlrmlui
-if '%choice%'=='4' goto dktestall
-if '%choice%'=='5' goto end
+if '%choice%'=='2' goto gitcommit
+if '%choice%'=='3' goto dkbuilder
+if '%choice%'=='4' goto dksdlrmlui
+if '%choice%'=='5' goto dktestall
+if '%choice%'=='6' goto end
 ECHO "%choice%" is not valid, try again
 goto pickapp
 
@@ -46,6 +48,21 @@ cd %DKPATH%
 "%GIT%" checkout -- .
 "%GIT%" pull origin master
 goto pickapp
+:gitcommit
+if exist "C:\Program Files\Git\bin\git.exe" set "GIT=C:\Program Files\Git\bin\git.exe"
+if exist "C:\Program Files (x86)\Git\bin\git.exe" set "GIT=C:\Program Files (x86)\Git\bin\git.exe"
+if exist "%GIT%" (echo "GIT = %GIT%") else (
+	echo "installing git"
+	echo "%GIT_DL%"
+	mkdir %DIGITALKNOB%
+	%download% %GIT_DL% %DIGITALKNOB%\Git-2.30.1-32-bit.exe
+	%DIGITALKNOB%\Git-2.30.1-32-bit.exe
+	goto gitupdate
+)
+cd %DKPATH%/DK
+"%GIT%" commit -a -m "git commit"
+"%GIT%" push
+goto gitcommit
 :dkbuilder
 set APP=DKBuilder
 goto pickos

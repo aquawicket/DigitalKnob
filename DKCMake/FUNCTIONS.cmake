@@ -2003,7 +2003,7 @@ function(DK_LIB lib_path)
 	#if(NOT ${index} EQUAL -1)
 	#	return() ## The library is already in the list
 	#endif()
-	DKSET(LIBS "${LIBS} ${lib_path}")
+	DKSET(LIBS "${LIBS};${lib_path}")
 endfunction()
 
 function(DKDEBUG_LIB lib_path)
