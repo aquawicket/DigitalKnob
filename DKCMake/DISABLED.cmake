@@ -107,6 +107,7 @@ endif()
 if(CMAKE_HOST_APPLE)  # Disabled on Apple host machines
 	DKDISABLE(bzip2)
 	DKDISABLE(DKSDLText)
+	DKDISABLE(DKThread)
 	DKDISABLE(imagemagick)
 	DKDISABLE(libxml2)
 	DKDISABLE(openssl)

@@ -41,6 +41,7 @@ DKApp::DKApp(int argc, char** argv){
 	DKApp::argc = argc;
 	DKApp::argv = argv;
 	DKUtil::SetMainThreadNow();
+	DKBUILDTIME();
 	if (__cplusplus == 201703L) { DKINFO("C++17 \n"); }
 	else if (__cplusplus == 201402L) { DKINFO("C++14 \n"); }
 	else if (__cplusplus == 201103L) { DKINFO("C++11 \n"); }
