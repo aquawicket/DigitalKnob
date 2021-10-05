@@ -193,6 +193,7 @@ if(RASPBERRY) # Disabled for Raspberry Pi targets
 	DKDISABLE(DKCef)
 	DKDISABLE(DKCefChild)
 	DKDISABLE(DKHook) #NOTE: this has linux functions too
+	DKDISABLE(DKMidi)
 	DKDISABLE(DKOcr)
 	DKDISABLE(DKOFWindow)
 	DKDISABLE(DKPlugin1)
