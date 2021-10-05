@@ -1,6 +1,8 @@
 #include "DK/stdafx.h"
 #ifdef MAC
 #include "DKMac.h"
+#import <Foundation/Foundation.h>
+
 
 bool DKMac::GetMousePos(int& x, int& y){
 	CGEventRef ourEvent = CGEventCreate(NULL);
