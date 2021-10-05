@@ -1999,10 +1999,10 @@ endfunction()
 ###################### DKPlugin Link Libraries #####################
 function(DK_LIB lib_path)
 	#DKSET(LIBLIST "${LIBLIST} ${lib_path}") ## used for double checking
-	#string(FIND "${LIBS}" "${lib_path}" index)
-	#if(NOT ${index} EQUAL -1)
-	#	return() ## The library is already in the list
-	#endif()
+	string(FIND "${LIBS}" "${lib_path}" index)
+	if(NOT ${index} EQUAL -1)
+		return() ## The library is already in the list
+	endif()
 	DKSET(LIBS "${LIBS};${lib_path}")
 endfunction()
 

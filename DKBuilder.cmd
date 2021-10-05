@@ -38,13 +38,13 @@ if exist "C:\Program Files (x86)\Git\bin\git.exe" set "GIT=C:\Program Files (x86
 if exist "%GIT%" (echo "GIT = %GIT%") else (
 	echo "installing git"
 	echo "%GIT_DL%"
-	mkdir %DIGITALKNOB%
-	%download% %GIT_DL% %DIGITALKNOB%\Git-2.30.1-32-bit.exe
-	%DIGITALKNOB%\Git-2.30.1-32-bit.exe
+	mkdir "%DIGITALKNOB%"
+	%download% %GIT_DL% "%DIGITALKNOB%\Git-2.30.1-32-bit.exe"
+	"%DIGITALKNOB%\Git-2.30.1-32-bit.exe"
 	goto gitupdate
 )
-"%GIT%" clone https://github.com/aquawicket/DigitalKnob.git %DKPATH%
-cd %DKPATH%
+"%GIT%" clone https://github.com/aquawicket/DigitalKnob.git "%DKPATH%"
+cd "%DKPATH%"
 "%GIT%" checkout -- .
 "%GIT%" pull origin master
 goto pickapp
@@ -54,9 +54,9 @@ if exist "C:\Program Files (x86)\Git\bin\git.exe" set "GIT=C:\Program Files (x86
 if exist "%GIT%" (echo "GIT = %GIT%") else (
 	echo "installing git"
 	echo "%GIT_DL%"
-	mkdir %DIGITALKNOB%
-	%download% %GIT_DL% %DIGITALKNOB%\Git-2.30.1-32-bit.exe
-	%DIGITALKNOB%\Git-2.30.1-32-bit.exe
+	mkdir "%DIGITALKNOB%"
+	%download% %GIT_DL% "%DIGITALKNOB%\Git-2.30.1-32-bit.exe"
+	"%DIGITALKNOB%\Git-2.30.1-32-bit.exe"
 	goto gitcommit
 )
 cd %DKPATH%/DK
@@ -141,8 +141,8 @@ if exist "C:\Program Files (x86)\CMake\bin\cmake.exe" set "CMAKE=C:\Program File
 if exist "%CMAKE%" (echo "CMAKE = %CMAKE%") else (
     echo "installing cmake"
 	echo "%CMAKE_DL%"
-	%download% %CMAKE_DL% %DIGITALKNOB%\cmake-3.21.1-windows-i386.msi
-	%DIGITALKNOB%\cmake-3.21.1-windows-i386.msi
+	%download% %CMAKE_DL% "%DIGITALKNOB%\cmake-3.21.1-windows-i386.msi"
+	"%DIGITALKNOB%\cmake-3.21.1-windows-i386.msi"
 	goto build
 )
 if exist "C:\Program Files\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe" set "MSBUILD=C:\Program Files\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe"
@@ -154,10 +154,10 @@ if exist "%MSBUILD%" (echo "MSBUILD = %MSBUILD%") else (
 	"%DIGITALKNOB%\vs_Community.exe"
 	goto build
 )
-set APP_PATH=%DKPATH%\DKApps\%APP%
+set "APP_PATH=%DKPATH%\DKApps\%APP%"
 ECHO %APP_PATH%
-mkdir %APP_PATH%\%OS%
-cd %APP_PATH%\%OS%"
+mkdir "%APP_PATH%\%OS%"
+cd "%APP_PATH%\%OS%"
 "%CMAKE%" -G "Visual Studio 16 2019" -A Win32 -DDEBUG=ON -DRELEASE=ON -DREBUILDALL=ON -DSTATIC=ON %DKPATH%
 "%MSBUILD%" %APP%.sln /p:Configuration=Debug
 "%MSBUILD%" %APP%.sln /p:Configuration=Release
