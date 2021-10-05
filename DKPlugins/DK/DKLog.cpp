@@ -145,13 +145,13 @@ bool Log(const char* file, int line, const char* func, const DKString& input, co
 		SetConsoleTextAttribute(hConsole, color);
 #elif !defined(LINUX)
     char color[10];
-	if(lvl == DK_ASSERT){ strcpy(color, DKASSERT_COLOR; }
-	if(lvl == DK_FATAL){ strcpy(color, DKFATAL_COLOR; }
-	if(lvl == DK_ERROR){ strcpy(color, DKERROR_COLOR; }
-	if(lvl == DK_WARN){ strcpy(color, DKWARN_COLOR; }
-    if(lvl == DK_INFO){ strcpy(color, DKINFO_COLOR; }
-	if(lvl == DK_DEBUG){ strcpy(color, DKDEBUG_COLOR; }
-	if(lvl == DK_VERBOSE){ strcpy(color, DKVERBOSE_COLOR; }
+	if(lvl == DK_ASSERT){ strcpy(color, DKASSERT_COLOR); }
+	if(lvl == DK_FATAL){ strcpy(color, DKFATAL_COLOR); }
+	if(lvl == DK_ERROR){ strcpy(color, DKERROR_COLOR); }
+	if(lvl == DK_WARN){ strcpy(color, DKWARN_COLOR); }
+    if(lvl == DK_INFO){ strcpy(color, DKINFO_COLOR); }
+	if(lvl == DK_DEBUG){ strcpy(color, DKDEBUG_COLOR); }
+	if(lvl == DK_VERBOSE){ strcpy(color, DKVERBOSE_COLOR); }
 #endif
 
 	/// /// ///  OUTPUTS /// /// ///
