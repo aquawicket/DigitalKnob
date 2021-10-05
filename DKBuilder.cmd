@@ -31,14 +31,15 @@ ECHO "%choice%" is not valid, try again
 goto pickapp
 
 :gitupdate
-if exist "C:\Program Files (x86)\Git\bin\git.exe" set "GIT=C:\Program Files (x86)\Git\bin\git.exe"
 if exist "C:\Program Files\Git\bin\git.exe" set "GIT=C:\Program Files\Git\bin\git.exe"
+if exist "C:\Program Files (x86)\Git\bin\git.exe" set "GIT=C:\Program Files (x86)\Git\bin\git.exe"
 if exist "%GIT%" (echo "GIT = %GIT%") else (
-echo "installing git"
-echo "%GIT_DL%"
-mkdir %DIGITALKNOB%
-%download% %GIT_DL% %DIGITALKNOB%\Git-2.30.1-32-bit.exe
-%DIGITALKNOB%\Git-2.30.1-32-bit.exe
+	echo "installing git"
+	echo "%GIT_DL%"
+	mkdir %DIGITALKNOB%
+	%download% %GIT_DL% %DIGITALKNOB%\Git-2.30.1-32-bit.exe
+	%DIGITALKNOB%\Git-2.30.1-32-bit.exe
+	goto gitupdate
 )
 git clone https://github.com/aquawicket/DigitalKnob.git %DKPATH%
 cd %DKPATH%
@@ -118,8 +119,8 @@ for /d /r %%i in (*CMakeFiles*) do rd /s /q "%%i"
 
 
 echo ****** BUILDING %APP% - %OS% ******
-if exist "C:\Program Files (x86)\CMake\bin\cmake.exe" set "CMAKE=C:\Program Files (x86)\CMake\bin\cmake.exe"
 if exist "C:\Program Files\CMake\bin\cmake.exe" set "CMAKE=C:\Program Files\CMake\bin\cmake.exe"
+if exist "C:\Program Files (x86)\CMake\bin\cmake.exe" set "CMAKE=C:\Program Files (x86)\CMake\bin\cmake.exe"
 if exist "%CMAKE%" (echo "CMAKE = %CMAKE%") else (
     echo "installing cmake"
 	echo "%CMAKE_DL%"
@@ -127,8 +128,8 @@ if exist "%CMAKE%" (echo "CMAKE = %CMAKE%") else (
 	%DIGITALKNOB%\cmake-3.21.1-windows-i386.msi
 	goto build
 )
-if exist "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe" set "MSBUILD=C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe"
 if exist "C:\Program Files\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe" set "MSBUILD=C:\Program Files\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe"
+if exist "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe" set "MSBUILD=C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe"
 if exist %MSBUILD% (echo "MSBUILD = %MSBUILD%") else (
     echo "installing Visual Studio"
 	echo "%MSBUILD_DL%"
