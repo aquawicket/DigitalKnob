@@ -418,7 +418,7 @@ if(WIN_32)
 	
 	add_definitions(-D_USING_V110_SDK71_)
 	add_executable(${APP_NAME} WIN32 ${App_SRC})
-	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${LIBS} ${WIN_LIBS})
+	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${LIBS})
 	##set_source_files_properties(${DIGITALKNOB}/stdafx.cpp PROPERTIES COMPILE_FLAGS "/Ycstdafx.h")
 	
 	list(APPEND DEBUG_LINK_FLAGS /MANIFEST:NO)
@@ -496,7 +496,7 @@ if(WIN_64)
 		
 	add_definitions(-D_USING_V110_SDK71_)
 	add_executable(${APP_NAME} WIN32 ${App_SRC})
-	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${LIBS} ${WIN_LIBS})
+	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${LIBS})
 	##set_source_files_properties(${DIGITALKNOB}/stdafx.cpp PROPERTIES COMPILE_FLAGS "/Ycstdafx.h")
 	
 	list(APPEND DEBUG_LINK_FLAGS /MANIFEST:NO)
@@ -1061,7 +1061,7 @@ endif()
 ##DKSET(DKINCLUDES "")
 ##DKSET(DKLIBRARIES "")
 
-DKSET(include_libs "${WIN_LIBS} ${LIBS} ${DEBUG_LIBS} ${RELEASE_LIBS}")
+DKSET(include_libs "${LIBS} ${DEBUG_LIBS} ${RELEASE_LIBS}")
 DKBUILD_LOG("\n\n ${APP_NAME} Include Libraries \n")
 foreach(the_lib ${include_libs})
 	DKBUILD_LOG(${the_lib})
