@@ -80,8 +80,7 @@ DKBUILD_LOG("\n\n")
 ############################   ADD EXECUTABLE  #############################################
 ############################################################################################
 PROJECT(${APP_NAME})
-
-DKSET(DKAPP ON) ##TODO:  phase this out
+DKSET(DKAPP ON)
 
 ##################################################
 ##### Scan the DKPlugins and build the lists #####
@@ -98,20 +97,14 @@ foreach(plugin ${dkdepend_list})
 endforeach()
 message(STATUS "\n\n")
 
-#message(STATUS "*** DISABLED DKPLUGINS  *****")
-#foreach(offplugin ${dkdepend_disable_list})
-#	message(STATUS "${offplugin}")	
-#endforeach()
-#message(STATUS "\n\n")
-
-
 foreach(plugin ${dkdepend_list})
 	DKSET(QUEUE_BUILD OFF)
 	DKSET(LIBLIST "") ## used for double checking
 	DKSET(CMAKE_FILE "")
 	DKSET(ANDROID_LIBMK "")
 	
-	message(STATUS "\n***************************************")
+	message(STATUS "\n")
+	message(STATUS "***************************************")
 	message(STATUS "**** Processing   ${plugin}")
 	message(STATUS "***************************************\n")
 	
@@ -363,14 +356,14 @@ include_directories(${DKPROJECT})
 
 ##########
 if(WIN_32)
+	DKCOPY(${DKPLUGINS}/_DKIMPORT/resource.h ${DKPROJECT}/resource.h FALSE) ## copy app default files recursivly without overwrite
+	DKCOPY(${DKPLUGINS}/_DKIMPORT/resource.rc ${DKPROJECT}/resource.rc FALSE) ## copy app default files recursivly without overwrite
+	
 	file(GLOB_RECURSE resources_SRC 
 	${DKPROJECT}/*.manifest
 	${DKPROJECT}/*.rc
 	${DKPROJECT}/icons/windows/*.rc)
-	list (APPEND App_SRC ${resources_SRC})
-	
-	DKCOPY(${DKPLUGINS}/_DKIMPORT/resource.h ${DKPROJECT}/resource.h FALSE) ## copy app default files recursivly without overwrite
-	DKCOPY(${DKPLUGINS}/_DKIMPORT/resource.rc ${DKPROJECT}/resource.rc FALSE) ## copy app default files recursivly without overwrite
+	list(APPEND App_SRC ${resources_SRC})
 	
 	## Create Icon files for project
 	if(IMAGEMAGICK_CONVERT)
@@ -449,6 +442,12 @@ if(WIN_64)
 	DKCOPY(${DKPLUGINS}/_DKIMPORT/resource.h ${DKPROJECT}/resource.h FALSE) ## copy app default files recursivly without overwrite
 	DKCOPY(${DKPLUGINS}/_DKIMPORT/resource.rc ${DKPROJECT}/resource.rc FALSE) ## copy app default files recursivly without overwrite
 	
+	file(GLOB_RECURSE resources_SRC 
+	${DKPROJECT}/*.manifest
+	${DKPROJECT}/*.rc
+	${DKPROJECT}/icons/windows/*.rc)
+	list(APPEND App_SRC ${resources_SRC})
+	
 	## Create Icon files for project
 	if(IMAGEMAGICK_CONVERT)
 		message(STATUS "Building icons for ${APP_NAME} . . .")
@@ -524,10 +523,6 @@ endif(WIN_64)
 
 #######
 if(MAC)
-	# remove files not needed for android
-	list(REMOVE_ITEM App_SRC ${DKPROJECT}/resource.h)
-	list(REMOVE_ITEM App_SRC ${DKPROJECT}/resource.rc)
-	
 	if(NOT EXCLUDE_ASSETS)
 		# Backup files and folders excluded from the package
 		DKCOPY(${DKPROJECT}/assets/USER ${DKPROJECT}/Backup/USER TRUE)
@@ -600,10 +595,6 @@ endif()
 
 #######
 if(IOS)
-	# remove files not needed for android
-	list(REMOVE_ITEM App_SRC ${DKPROJECT}/resource.h)
-	list(REMOVE_ITEM App_SRC ${DKPROJECT}/resource.rc)
-	
 	if(NOT EXCLUDE_ASSETS)
 		# Backup files and folders excluded from the package
 		DKCOPY(${DKPROJECT}/assets/USER ${DKPROJECT}/Backup/USER TRUE)
@@ -674,10 +665,6 @@ endif()
 
 ##########
 if(IOSSIM)
-	# remove files not needed for android
-	list(REMOVE_ITEM App_SRC ${DKPROJECT}/resource.h)
-	list(REMOVE_ITEM App_SRC ${DKPROJECT}/resource.rc)
-	
 	if(NOT EXCLUDE_ASSETS)
 		# Backup files and folders excluded from the package
 		DKCOPY(${DKPROJECT}/assets/USER ${DKPROJECT}/Backup/USER TRUE)
@@ -747,10 +734,6 @@ endif()
 
 #########
 if(LINUX)
-	# remove files not needed for android
-	list(REMOVE_ITEM App_SRC ${DKPROJECT}/resource.h)
-	list(REMOVE_ITEM App_SRC ${DKPROJECT}/resource.rc)
-	
 	# Copy the icon to assets
 	DKCOPY(${DKPROJECT}/icons/icon.png ${DKPROJECT}/assets/icon.png TRUE)
 
@@ -805,10 +788,6 @@ endif()
 
 #############
 if(RASPBERRY)
-	# remove files not needed for android
-	list(REMOVE_ITEM App_SRC ${DKPROJECT}/resource.h)
-	list(REMOVE_ITEM App_SRC ${DKPROJECT}/resource.rc)
-	
 	# Copy the icon to assets
 	DKCOPY(${DKPROJECT}/icons/icon.png ${DKPROJECT}/assets/icon.png TRUE)
 
@@ -870,9 +849,6 @@ if(ANDROID)
 	if(ANDROID_64)
 		DKCOPY(${DKPLUGINS}/_DKIMPORT/android64 ${DKPROJECT}/android64 FALSE) ## copy app default files recursivly without overwrite
 	endif()
-	# remove files not needed for android
-	list(REMOVE_ITEM App_SRC ${DKPROJECT}/resource.h)
-	list(REMOVE_ITEM App_SRC ${DKPROJECT}/resource.rc)
 	
 	## Create Android Icons
 	if(IMAGEMAGICK_CONVERT)
@@ -1049,7 +1025,6 @@ DKBUILD_LOG("   CMAKE_C_FLAGS_RELEASE:  ${CMAKE_C_FLAGS_RELEASE}")
 DKBUILD_LOG("         CMAKE_CXX_FLAGS:  ${CMAKE_CXX_FLAGS}")
 DKBUILD_LOG("   CMAKE_CXX_FLAGS_DEBUG:  ${CMAKE_CXX_FLAGS_DEBUG}")
 DKBUILD_LOG(" CMAKE_CXX_FLAGS_RELEASE:  ${CMAKE_CXX_FLAGS_RELEASE}")
-#DKBUILD_LOG("            LINK_OPTIONS:  ${LINK_OPTIONS}"}
 DKBUILD_LOG("     INCLUDE_DIRECTORIES:  ${INCLUDE_DIRECTORIES}")
 DKBUILD_LOG("        LINK_DIRECTORIES:  ${LINK_DIRECTORIES}")
 DKBUILD_LOG("  STATIC_LIBRARY_OPTIONS:  ${STATIC_LIBRARY_OPTIONS}")
@@ -1067,6 +1042,6 @@ DKSET(DKBUILD_LOG_FILE "")
 file(WRITE ${DKPROJECT}/CMakeLists.txt ${APP_CMAKEFILE})
 
 message(STATUS "\n")
-message(STATUS "***************************************")
-message(STATUS "********** Finnished ${APP_NAME} **********")
-message(STATUS "***************************************\n")
+message(STATUS "**************************************************")
+message(STATUS "****** Generated ${APP_NAME} - ${OS}  ************")
+message(STATUS "**************************************************\n")
