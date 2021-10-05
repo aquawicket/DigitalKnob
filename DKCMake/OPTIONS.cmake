@@ -418,6 +418,10 @@ if(CMAKE_GENERATOR STREQUAL "Unix Makefiles")
 		#DKSET(CMAKE_C_FLAGS "-fPIC")
 		DKSET(CMAKE_CXX_FLAGS "-std=c++17 -lstdc++fs -g -no-pie -fPIC")
 	endif()
+	if(RASPBERRY)
+		#DKSET(CMAKE_C_FLAGS "-fPIC")
+		DKSET(CMAKE_CXX_FLAGS "-std=c++17 -lstdc++fs -g -no-pie -fPIC")
+	endif()
 endif()
 
 
