@@ -1997,6 +1997,23 @@ endfunction()
 
 
 ###################### DKPlugin Link Libraries #####################
+function(DKLIB lib_path)	
+	DKSET(LIBLIST ${LIBLIST} ${lib_path}) ## used for double checking
+	if(NOT EXISTS ${lib_path})
+		message(STATUS "MISSING: ${lib_path}")
+		DKSET(QUEUE_BUILD ON) 
+	endif()
+	string(FIND "${LIBS}" "${lib_path}" index)
+	if(NOT ${index} EQUAL -1)
+		return() ## The library is already in the list
+	endif()
+	if(LINUX OR RASPBERRY OR ANDROID)
+		DKSET(LIBS debug ${lib_path} ${LIBS})  #Add to beginning of list
+	else()
+		DKSET(LIBS ${LIBS} debug ${lib_path})  #Add to end of list
+	endif()
+endfunction()
+
 function(DKDEBUG_LIB lib_path)
 	if(NOT DEBUG)
 		return()
@@ -2039,12 +2056,17 @@ function(DKRELEASE_LIB lib_path)
 endfunction()
 
 
+function(WIN_LIB)
+	if(WIN)
+		DK_LIB(${ARGV})
+	endif()
+endfunction()
+
 function(WIN_DEBUG_LIB)
 	if(WIN)
 		DKDEBUG_LIB(${ARGV})
 	endif()
 endfunction()
-
 
 function(WIN_RELEASE_LIB)
 	if(WIN)
@@ -2052,6 +2074,11 @@ function(WIN_RELEASE_LIB)
 	endif()
 endfunction()
 
+function(WIN32_LIB)
+	if(WIN_32)
+		DK_LIB(${ARGV})
+	endif()
+endfunction()
 
 function(WIN32_DEBUG_LIB)
 	if(WIN_32)
@@ -2059,13 +2086,17 @@ function(WIN32_DEBUG_LIB)
 	endif()
 endfunction()
 
-
 function(WIN32_RELEASE_LIB)
 	if(WIN_32)
 		DKRELEASE_LIB(${ARGV})
 	endif()
 endfunction()
 
+function(WIN64_LIB)
+	if(WIN_64)
+		DK_LIB(${ARGV})
+	endif()
+endfunction()
 
 function(WIN64_DEBUG_LIB)
 	if(WIN_64)
@@ -2080,6 +2111,11 @@ function(WIN64_RELEASE_LIB)
 	endif()
 endfunction()
 
+function(APPLE_LIB)
+	if(MAC OR IOS OR IOSSIM)
+		DK_LIB(${ARGV})
+	endif()
+endfunction()
 
 function(APPLE_DEBUG_LIB)
 	if(MAC OR IOS OR IOSSIM)
@@ -2087,13 +2123,17 @@ function(APPLE_DEBUG_LIB)
 	endif()
 endfunction()
 
-
 function(APPLE_RELEASE_LIB)
 	if(MAC OR IOS OR IOSSIM)
 		DKRELEASE_LIB(${ARGV})
 	endif()
 endfunction()
 
+function(APPLE32_LIB)
+	if(MAC_32 OR IOS_32 OR IOSSIM_32)
+		DK_LIB(${ARGV})
+	endif()
+endfunction()
 
 function(APPLE32_DEBUG_LIB)
 	if(MAC_32 OR IOS_32 OR IOSSIM_32)
@@ -2101,13 +2141,17 @@ function(APPLE32_DEBUG_LIB)
 	endif()
 endfunction()
 
-
 function(APPLE32_RELEASE_LIB)
 	if(MAC_32 OR IOS_32 OR IOSSIM_32)
 		DKRELEASE_LIB(${ARGV})
 	endif()
 endfunction()
 
+function(APPLE64_LIB)
+	if(MAC_64 OR IOS_64 OR IOSSIM_64)
+		DK_LIB(${ARGV})
+	endif()
+endfunction()
 
 function(APPLE64_DEBUG_LIB)
 	if(MAC_64 OR IOS_64 OR IOSSIM_64)
@@ -2115,13 +2159,17 @@ function(APPLE64_DEBUG_LIB)
 	endif()
 endfunction()
 
-
 function(APPLE64_RELEASE_LIB)
 	if(MAC_64 OR IOS_64 OR IOSSIM_64)
 		DKRELEASE_LIB(${ARGV})
 	endif()
 endfunction()
 
+function(MAC_LIB)
+	if(MAC)
+		DK_LIB(${ARGV})
+	endif()
+endfunction() 
 
 function(MAC_DEBUG_LIB)
 	if(MAC)
@@ -2129,13 +2177,17 @@ function(MAC_DEBUG_LIB)
 	endif()
 endfunction()
 
-
 function(MAC_RELEASE_LIB)
 	if(MAC)
 		DKRELEASE_LIB(${ARGV})
 	endif()
 endfunction()
 
+function(MAC32_LIB)
+	if(MAC_32)
+		DK_LIB(${ARGV})
+	endif()
+endfunction() 
 
 function(MAC32_DEBUG_LIB)
 	if(MAC_32)
@@ -2143,13 +2195,17 @@ function(MAC32_DEBUG_LIB)
 	endif()
 endfunction()
 
-
 function(MAC32_RELEASE_LIB)
 	if(MAC_32)
 		DKRELEASE_LIB(${ARGV})
 	endif()
 endfunction()
 
+function(MAC64_LIB)
+	if(MAC_64)
+		DK_LIB(${ARGV})
+	endif()
+endfunction() 
 
 function(MAC64_DEBUG_LIB)
 	if(MAC_64)
@@ -2157,13 +2213,17 @@ function(MAC64_DEBUG_LIB)
 	endif()
 endfunction()
 
-
 function(MAC64_RELEASE_LIB)
 	if(MAC_64)
 		DKRELEASE_LIB(${ARGV})
 	endif()
 endfunction()
 
+function(IOS_LIB)
+	if(IOS)
+		DK_LIB(${ARGV})
+	endif()
+endfunction() 
 
 function(IOS_DEBUG_LIB)
 	if(IOS)
@@ -2171,13 +2231,17 @@ function(IOS_DEBUG_LIB)
 	endif()
 endfunction()
 
-
 function(IOS_RELEASE_LIB)
 	if(IOS)
 		DKRELEASE_LIB(${ARGV})
 	endif()
 endfunction()
 
+function(IOS32_LIB)
+	if(IOS_32)
+		DK_LIB(${ARGV})
+	endif()
+endfunction() 
 
 function(IOS32_DEBUG_LIB)
 	if(IOS_32)
@@ -2185,13 +2249,17 @@ function(IOS32_DEBUG_LIB)
 	endif()
 endfunction()
 
-
 function(IOS32_RELEASE_LIB)
 	if(IOS_32)
 		DKRELEASE_LIB(${ARGV})
 	endif()
 endfunction()
 
+function(IOS64_LIB)
+	if(IOS_64)
+		DK_LIB(${ARGV})
+	endif()
+endfunction() 
 
 function(IOS64_DEBUG_LIB)
 	if(IOS_64)
@@ -2199,13 +2267,17 @@ function(IOS64_DEBUG_LIB)
 	endif()
 endfunction()
 
-
 function(IOS64_RELEASE_LIB)
 	if(IOS_64)
 		DKRELEASE_LIB(${ARGV})
 	endif()
 endfunction()
 
+function(IOSSIM_LIB)
+	if(IOSSIM)
+		DK_LIB(${ARGV})
+	endif()
+endfunction() 
 
 function(IOSSIM_DEBUG_LIB)
 	if(IOSSIM)
@@ -2213,13 +2285,17 @@ function(IOSSIM_DEBUG_LIB)
 	endif()
 endfunction()
 
-
 function(IOSSIM_RELEASE_LIB)
 	if(IOSSIM)
 		DKRELEASE_LIB(${ARGV})
 	endif()
 endfunction()
 
+function(IOSSIM32_LIB)
+	if(IOSSIM_32)
+		DK_LIB(${ARGV})
+	endif()
+endfunction()
 
 function(IOSSIM32_DEBUG_LIB)
 	if(IOSSIM_32)
@@ -2227,21 +2303,23 @@ function(IOSSIM32_DEBUG_LIB)
 	endif()
 endfunction()
 
-
 function(IOSSIM32_RELEASE_LIB)
 	if(IOSSIM_32)
 		DKRELEASE_LIB(${ARGV})
 	endif()
 endfunction()
 
+function(LINUX_LIB)
+	if(LINUX)
+		DK_LIB(${ARGV})
+	endif()
+endfunction() 
 
-#########################
 function(LINUX_DEBUG_LIB)
 	if(LINUX AND DEBUG)
 		DKDEBUG_LIB(${ARGV})
 	endif()
 endfunction()
-
 
 function(LINUX_RELEASE_LIB)
 	if(LINUX AND RELEASE)
@@ -2249,6 +2327,11 @@ function(LINUX_RELEASE_LIB)
 	endif()
 endfunction()
 
+function(LINUX32_LIB)
+	if(LINUX_32)
+		DK_LIB(${ARGV})
+	endif()
+endfunction() 
 
 function(LINUX32_DEBUG_LIB)
 	if(LINUX32 AND DEBUG)
@@ -2256,13 +2339,17 @@ function(LINUX32_DEBUG_LIB)
 	endif()
 endfunction()
 
-
 function(LINUX32_RELEASE_LIB)
 	if(LINUX32 AND RELEASE)
 		DKRELEASE_LIB(${ARGV})
 	endif()
 endfunction()
 
+function(LINUX64_LIB)
+	if(LINUX_64)
+		DK_LIB(${ARGV})
+	endif()
+endfunction() 
 
 function(LINUX64_DEBUG_LIB)
 	if(LINUX64 AND DEBUG)
@@ -2270,21 +2357,23 @@ function(LINUX64_DEBUG_LIB)
 	endif()
 endfunction()
 
-
 function(LINUX64_RELEASE_LIB)
 	if(LINUX64 AND RELEASE)
 		DKRELEASE_LIB(${ARGV})
 	endif()
 endfunction()
 
+function(RASPBERRY_LIB)
+	if(RASPBERRY)
+		DK_LIB(${ARGV})
+	endif()
+endfunction() 
 
-#############################
 function(RASPBERRY_DEBUG_LIB)
 	if(RASPBERRY AND DEBUG)
 		DKDEBUG_LIB(${ARGV})
 	endif()
 endfunction()
-
 
 function(RASPBERRY_RELEASE_LIB)
 	if(RASPBERRY AND RELEASE)
@@ -2292,6 +2381,11 @@ function(RASPBERRY_RELEASE_LIB)
 	endif()
 endfunction()
 
+function(RASPBERRY32_LIB)
+	if(RASPBERRY_32)
+		DK_LIB(${ARGV})
+	endif()
+endfunction() 
 
 function(RASPBERRY32_DEBUG_LIB)
 	if(RASPBERRY32 AND DEBUG)
@@ -2299,13 +2393,17 @@ function(RASPBERRY32_DEBUG_LIB)
 	endif()
 endfunction()
 
-
 function(RASPBERRY32_RELEASE_LIB)
 	if(RASPBERRY32 AND RELEASE)
 		DKRELEASE_LIB(${ARGV})
 	endif()
 endfunction()
 
+function(RASPBERRY64_LIB)
+	if(RASPBERRY_64)
+		DK_LIB(${ARGV})
+	endif()
+endfunction() 
 
 function(RASPBERRY64_DEBUG_LIB)
 	if(RASPBERRY64 AND DEBUG)
@@ -2313,21 +2411,23 @@ function(RASPBERRY64_DEBUG_LIB)
 	endif()
 endfunction()
 
-
 function(RASPBERRY64_RELEASE_LIB)
 	if(RASPBERRY64 AND RELEASE)
 		DKRELEASE_LIB(${ARGV})
 	endif()
 endfunction()
 
+function(ANDROID_LIB)
+	if(ANDROID)
+		DK_LIB(${ARGV})
+	endif()
+endfunction()
 
-###########################
 function(ANDROID_DEBUG_LIB)
 	if(ANDROID AND DEBUG)
 		DKDEBUG_LIB(${ARGV})
 	endif()
 endfunction()
-
 
 function(ANDROID_RELEASE_LIB)
 	if(ANDROID AND RELEASE)
@@ -2335,6 +2435,11 @@ function(ANDROID_RELEASE_LIB)
 	endif()
 endfunction()
 
+function(ANDROID32_LIB)
+	if(ANDROID_32)
+		DK_LIB(${ARGV})
+	endif()
+endfunction()
 
 function(ANDROID32_DEBUG_LIB)
 	if(ANDROID_32 AND DEBUG)
@@ -2342,20 +2447,23 @@ function(ANDROID32_DEBUG_LIB)
 	endif()
 endfunction()
 
-
 function(ANDROID32_RELEASE_LIB)
 	if(ANDROID_32 AND RELEASE)
 		DKRELEASE_LIB(${ARGV})
 	endif()
 endfunction()
 
+function(ANDROID64_LIB)
+	if(ANDROID_64)
+		DK_LIB(${ARGV})
+	endif()
+endfunction()
 
 function(ANDROID64_DEBUG_LIB)
 	if(ANDROID_64 AND DEBUG)
 		DKDEBUG_LIB(${ARGV})
 	endif()
 endfunction()
-
 
 function(ANDROID64_RELEASE_LIB)
 	if(ANDROID_64 AND RELEASE)
