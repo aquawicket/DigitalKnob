@@ -1,7 +1,6 @@
 
-# windows
 if(WIN)
-	LIST(APPEND WIN_LIBS opengl32.lib)
+	WIN_LIB(opengl32.lib)
 endif()
 
 if(LINUX)
@@ -12,7 +11,7 @@ if(LINUX)
 	if(NOT OPENGL_FOUND)
     	message(FATAL_ERROR "OPENGL not found!")
 	endif()
-	list(APPEND LINUX_LIBS ${OPENGL_LIBRARIES})
+	LINUX_LIB(${OPENGL_LIBRARIES})
 endif()
 
 
@@ -24,11 +23,11 @@ if(RASPBERRY)
 	if(NOT OPENGL_FOUND)
     	message(FATAL_ERROR "OPENGL not found!")
 	endif()
-	list(APPEND RASPBERRY_LIBS ${OPENGL_LIBRARIES})
+	RASPBERRY_LIB(${OPENGL_LIBRARIES})
 endif()	
 	
 if(ANDROID)
 	DKDEFINE(GL_GLEXT_PROTOTYPES)
-	list(APPEND ANDROID_LIBS GLESv1_CM)
-	list(APPEND ANDROID_LIBS GLESv2)
+	ANDROID_LIB(GLESv1_CM)
+	ANDROID_LIB(GLESv2)
 endif()

@@ -3,6 +3,9 @@
 # https://www.libsdl.org/release/SDL2-2.0.14.zip
 # https://www.libsdl.org/release/SDL2-2.0.16.zip
 
+### DEPENDS ###
+DKDEPEND(opengl)
+
 ### VERSION ###
 DKSET(SDL2_VERSION 2.0.16)
 DKSET(SDL2_NAME SDL2-${SDL2_VERSION})
@@ -23,23 +26,23 @@ dkFileReplace(${SDL2}/include/SDL_config_android.h "#define SDL_JOYSTICK_HIDAPI 
 DKINCLUDE(${SDL2}/include)
 ANDROID_INCLUDE(${ANDROIDNDK}/sources/android/cpufeatures)
 ANDROID_INCLUDE(${SDL2}/src)
-if(ANDROID)
-	DKDEFINE(GL_GLEXT_PROTOTYPES)
-endif()
+#if(ANDROID)
+#	DKDEFINE(GL_GLEXT_PROTOTYPES)
+#endif()
 RASPBERRY_INCLUDE(/opt/vc/lib) ##For Raspberry Pi
-if(LINUX)
-	LINUX_INCLUDE(${SDL2}/${OS}/${RELEASE_DIR}/include)
-	find_package(OpenGL REQUIRED)
-	include_directories(${OpenGL_INCLUDE_DIRS})
-	link_directories(${OpenGL_LIBRARY_DIRS})
-	add_definitions(${OpenGL_DEFINITIONS})
-	if(NOT OPENGL_FOUND)
-    	message(FATAL_ERROR "OPENGL not found!")
-	endif()
+#if(LINUX)
+LINUX_INCLUDE(${SDL2}/${OS}/${RELEASE_DIR}/include)
+#	find_package(OpenGL REQUIRED)
+#	include_directories(${OpenGL_INCLUDE_DIRS})
+#	link_directories(${OpenGL_LIBRARY_DIRS})
+#	add_definitions(${OpenGL_DEFINITIONS})
+#	if(NOT OPENGL_FOUND)
+#   	message(FATAL_ERROR "OPENGL not found!")
+#	endif()
 	#list(APPEND LINUX_LIBS ${OPENGL_LIBRARIES})
 	LINUX_LIB(${OPENGL_LIBRARIES})
 endif()
-WIN_LIB(opengl32.lib)
+#WIN_LIB(opengl32.lib)
 WIN_LIB(winmm.lib)
 WIN_LIB(imm32.lib)
 WIN_LIB(version.lib)
@@ -66,11 +69,7 @@ ANDROID_DEBUG_LIB(${SDL2}/${OS}/${DEBUG_DIR}/libSDL2.a)
 ANDROID_RELEASE_LIB(${SDL2}/${OS}/${RELEASE_DIR}/libSDL2.a)
 ANDROID_DEBUG_LIB(${SDL2}/${OS}/${DEBUG_DIR}/libSDL2main.a)
 ANDROID_RELEASE_LIB(${SDL2}/${OS}/${RELEASE_DIR}/libSDL2main.a)
-#LIST(APPEND WIN_LIBS opengl32.lib)
-#LIST(APPEND WIN_LIBS winmm.lib)
-#LIST(APPEND WIN_LIBS imm32.lib)
-#LIST(APPEND WIN_LIBS version.lib)
-#LIST(APPEND WIN_LIBS Setupapi.lib)
+
 
 
 ### 3RDPARTY LINK ###

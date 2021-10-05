@@ -20,8 +20,8 @@ DKINSTALL(${UV_DL} libuv ${UV})
 
 
 ### DKPLUGINS LINK ###
-LIST(APPEND WIN_LIBS Iphlpapi.lib)
-LIST(APPEND WIN_LIBS Userenv.lib)
+WIN_LIB(Iphlpapi.lib)
+WIN_LIB(Userenv.lib)
 DKINCLUDE(${UV}/include)
 DKINCLUDE(${UV}/${OS})
 WIN_DEBUG_LIB(${UV}/${OS}/${DEBUG_DIR}/uv_a.lib)

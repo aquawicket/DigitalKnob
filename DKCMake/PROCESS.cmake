@@ -1061,7 +1061,7 @@ endif()
 ##DKSET(DKINCLUDES "")
 ##DKSET(DKLIBRARIES "")
 
-DKSET(include_libs "${WIN_LIBS} ${DEBUG_LIBS} ${RELEASE_LIBS}")
+DKSET(include_libs "${WIN_LIBS} ${LIBS} ${DEBUG_LIBS} ${RELEASE_LIBS}")
 DKBUILD_LOG("\n\n ${APP_NAME} Include Libraries \n")
 foreach(the_lib ${include_libs})
 	DKBUILD_LOG(${the_lib})

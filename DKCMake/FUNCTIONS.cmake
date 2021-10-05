@@ -1997,21 +1997,25 @@ endfunction()
 
 
 ###################### DKPlugin Link Libraries #####################
-function(DK_LIB lib_path)	
-	DKSET(LIBLIST ${LIBLIST} ${lib_path}) ## used for double checking
-	if(NOT EXISTS ${lib_path})
-		message(STATUS "MISSING: ${lib_path}")
-		DKSET(QUEUE_BUILD ON) 
-	endif()
-	string(FIND "${LIBS}" "${lib_path}" index)
-	if(NOT ${index} EQUAL -1)
-		return() ## The library is already in the list
-	endif()
-	if(LINUX OR RASPBERRY OR ANDROID)
-		DKSET(LIBS debug ${lib_path} ${LIBS})  #Add to beginning of list
-	else()
-		DKSET(LIBS ${LIBS} debug ${lib_path})  #Add to end of list
-	endif()
+function(DK_LIB lib_path)
+	LIST(APPEND LIBS opengl32.lib)
+	#DKSET(LIBLIST ${LIBLIST} ${lib_path}) ## used for double checking
+	#string(FIND "${LIBS}" "/" index)
+	#if(NOT ${index} EQUAL -1)
+	#	if(NOT EXISTS ${lib_path})
+	#		message(STATUS "MISSING: ${lib_path}")
+	#		DKSET(QUEUE_BUILD ON)
+	#	endif()
+	#endif()
+	#string(FIND "${LIBS}" "${lib_path}" index)
+	#if(NOT ${index} EQUAL -1)
+	#	return() ## The library is already in the list
+	#endif()
+	#if(LINUX OR RASPBERRY OR ANDROID)
+	#	DKSET(LIBS debug ${lib_path} ${LIBS})  #Add to beginning of list
+	#else()
+	#	DKSET(LIBS ${LIBS} debug ${lib_path})  #Add to end of list
+	#endif()
 endfunction()
 
 function(DKDEBUG_LIB lib_path)
@@ -2033,7 +2037,6 @@ function(DKDEBUG_LIB lib_path)
 		DKSET(DEBUG_LIBS ${DEBUG_LIBS} debug ${lib_path})  #Add to end of list
 	endif()
 endfunction()
-
 
 function(DKRELEASE_LIB lib_path)
 	if(NOT RELEASE)

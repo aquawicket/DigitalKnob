@@ -19,7 +19,7 @@ DKINSTALL(${OPENAL_DL} openal ${OPENAL})
 ### LINK ###
 IF(WIN)
 	DKDEFINE(__WINDOWS_MM__)
-	LIST(APPEND WIN_LIBS winmm.lib)
+	WIN_LIB(winmm.lib)
 ENDIF()
 DKINCLUDE(${OPENAL}/include)
 DKINCLUDE(${OPENAL}/include/AL)

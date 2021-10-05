@@ -56,7 +56,7 @@ WIN32_DEBUG_LIB(${OPENCV}/${OS}/3rdparty/ippicv/ippicv_win/icv/lib/ia32/ippicvmt
 WIN32_RELEASE_LIB(${OPENCV}/${OS}/3rdparty/ippicv/ippicv_win/icv/lib/ia32/ippicvmt.lib)
 WIN64_DEBUG_LIB(${OPENCV}/${OS}/3rdparty/ippicv/ippicv_win/icv/lib/intel64/ippicvmt.lib)
 WIN64_RELEASE_LIB(${OPENCV}/${OS}/3rdparty/ippicv/ippicv_win/icv/lib/intel64/ippicvmt.lib)
-LIST(APPEND WIN_LIBS vfw32.lib)
+WIN_LIB(vfw32.lib)
 
 APPLE32_DEBUG_LIB(${OPENCV}/${OS}/3rdparty/ippicv/ippicv_mac/lib/ia32/libippicv.a)
 APPLE32_RELEASE_LIB(${OPENCV}/${OS}/3rdparty/ippicv/ippicv_mac/lib/ia32/libippicv.a)
