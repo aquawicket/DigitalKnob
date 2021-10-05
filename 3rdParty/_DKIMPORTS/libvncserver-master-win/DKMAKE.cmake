@@ -8,7 +8,7 @@ IF(ANDROID)
 ELSE()
 	DKDEPEND(libjpeg-turbo)
 ENDIF()
-DKDEPEND(openssl-vs2015)
+DKDEPEND(openssl)
 
 
 DKSET(VNCSERVER_VERSION master-win)
