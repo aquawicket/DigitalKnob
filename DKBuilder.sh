@@ -123,7 +123,7 @@ while :
 		#brew install cmake		
 		mkdir $DKPATH/DKApps/$APP/$OS
 		cd $DKPATH/DKApps/$APP/$OS
-		cmake -G "Xcode" -DMAC_64=ON -DDEBUG=ON -DRELEASE=ON -DREBUILD=ON -DSTATIC=ON $DKPATH
+		cmake -G "Xcode" -DMAC_64=ON -DCMAKE_OSX_ARCHITECTURES=x86_64 -DDEBUG=ON -DRELEASE=ON -DREBUILD=ON -DSTATIC=ON $DKPATH
 		xcodebuild -configuration Debug build
 		xcodebuild -configuration Release build
 	else #Linux, Raspberry Pi
