@@ -6,8 +6,8 @@ set "DKPATH=%DIGITALKNOB%\DK"
 set "GIT_DL=https://github.com/git-for-windows/git/releases/download/v2.30.1.windows.1/Git-2.30.1-32-bit.exe"
 set "CMAKE_DL=https://github.com/Kitware/CMake/releases/download/v3.21.1/cmake-3.21.1-windows-i386.msi"
 set "MSBUILD_DL=https://download.visualstudio.microsoft.com/download/pr/5e397ebe-38b2-4e18-a187-ac313d07332a/169156e6e9a005d49b357c42240184dc1e3ccc28ebc777e70d49257c074f77e8/vs_Community.exe"
-::set "download=certutil.exe -urlcache -split -f"
-set "download=bitsadmin /transfer myDownloadJob /download /priority normal"
+set "download=certutil.exe -urlcache -split -f"
+::set "download=bitsadmin /transfer myDownloadJob /download /priority normal"
 set "APP="
 set "OS="
 set "TYPE="
@@ -39,7 +39,7 @@ if exist %GIT%. (
 	echo "%GIT_DL%"
 	mkdir %DIGITALKNOB%
 	%download% %GIT_DL% %DIGITALKNOB%\Git-2.30.1-32-bit.exe
-	Git-2.30.1-32-bit.exe
+	%DIGITALKNOB%\Git-2.30.1-32-bit.exe
 )
 git clone https://github.com/aquawicket/DigitalKnob.git %DKPATH%
 cd %DKPATH%
@@ -126,7 +126,7 @@ if exist %CMAKE%. (
     echo "installing cmake"
 	echo "%CMAKE_DL%"
 	%download% %CMAKE_DL% %DIGITALKNOB%\cmake-3.21.1-windows-i386.msi
-	cmake-3.21.1-windows-i386.msi
+	%DIGITALKNOB%\cmake-3.21.1-windows-i386.msi
 )
 set "MSBUILD=C:\PROGRA~2\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe"
 if exist %MSBUILD%. (
@@ -135,7 +135,7 @@ if exist %MSBUILD%. (
     echo "installing Visual Studio"
 	echo "%MSBUILD_DL%"
 	%download% %MSBUILD_DL% %DIGITALKNOB%\vs_Community.exe
-	vs_Community.exe"
+	%DIGITALKNOB%\vs_Community.exe
 )
 set APP_PATH=%DKPATH%\DKApps\%APP%
 ECHO %APP_PATH%
