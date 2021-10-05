@@ -127,7 +127,8 @@ if exist "%CMAKE%" (echo "CMAKE = %CMAKE%") else (
 	%DIGITALKNOB%\cmake-3.21.1-windows-i386.msi
 	goto build
 )
-set "MSBUILD=C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe"
+if exist "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe" set "MSBUILD=C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe"
+if exist "C:\Program Files\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe" set "MSBUILD=C:\Program Files\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe"
 if exist %MSBUILD% (echo "MSBUILD = %MSBUILD%") else (
     echo "installing Visual Studio"
 	echo "%MSBUILD_DL%"
