@@ -31,7 +31,7 @@ ECHO "%choice%" is not valid, try again
 goto pickapp
 
 :gitupdate
-set "GIT=C:\PROGRA~1\Git\bin\git.exe"
+set "GIT=C:\Program Files (x86)\Git\bin\git.exe"
 if exist %GIT%. (
 	echo "found git"
 ) else (
@@ -128,7 +128,7 @@ if exist %CMAKE%. (
 	%download% %CMAKE_DL% %DIGITALKNOB%\cmake-3.21.1-windows-i386.msi
 	%DIGITALKNOB%\cmake-3.21.1-windows-i386.msi
 )
-set "MSBUILD=C:\PROGRA~2\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe"
+set "MSBUILD=C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe"
 if exist %MSBUILD%. (
 	echo "found msbuild"
 ) else (
