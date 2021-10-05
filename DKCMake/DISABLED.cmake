@@ -123,6 +123,7 @@ if(CMAKE_HOST_LINUX) # Disabled on Linux host machines
 endif()
 if(LINUX) # Disabled for Linux targets
 	DKDISABLE(android-build-tools)
+	DKDISABLE(android-studio)
 	DKDISABLE(DKHook) #NOTE: this has linux functions too
 	DKDISABLE(DKOcr)
 	DKDISABLE(DKOFWindow)
