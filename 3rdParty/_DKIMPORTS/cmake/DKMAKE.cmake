@@ -10,7 +10,7 @@ WIN_DKSET(CMAKE "C:/Program Files (x86)/CMake/bin")
 #DKSET(CMAKE_EXE ${shortpath})                     #FIXME: This does not stick
 
 WIN_DKSET(CMAKE_EXE C:/PROGRA~2/CMake/bin/cmake.exe)
-MAC_DKSET(CMAKE_EXE /opt/local/bin/cmake)
+MAC_DKSET(CMAKE_EXE cmake)
 LINUX_DKSET(CMAKE_EXE /usr/bin/cmake)
 
 
@@ -23,9 +23,9 @@ if(CMAKE_HOST_WIN32)
 endif()
 
 if(CMAKE_HOST_MAC)
-	if(NOT EXISTS ${CMAKE_EXE})
-		message(FATAL_ERROR "${CMAKE} not found")
-	endif()
+	#if(NOT EXISTS ${CMAKE_EXE})
+	#	message(FATAL_ERROR "${CMAKE} not found")
+	#endif()
 endif()
 
 if(CMAKE_HOST_LINUX)
