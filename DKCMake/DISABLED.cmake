@@ -17,13 +17,12 @@ DKDISABLE(DKOSGVideo)
 DKDISABLE(DKOSGViewer)
 DKDISABLE(DKOSGWidget)
 DKDISABLE(DKOSGWindow)
-DKDISABLE(DKSDLText)
 DKDISABLE(DKUpdate)
 DKDISABLE(jerryscript)
 DKDISABLE(libcaca)
 DKDISABLE(lua)
 DKDISABLE(ncurses)
-DKDISABLE(sdl2_ttf)
+
 
 
 if(NOT CMAKE_HOST_WIN32) # Disabled on Non-Windows host machines
@@ -44,6 +43,7 @@ if(WIN) # Disabled for Windows targets
 	DKDISABLE(DKPlugin2)
 	DKDISABLE(DKScreenRecorder)
 	DKDISABLE(DKSDLAudio)
+	DKDISABLE(DKSDLText)
 	DKDISABLE(DKSDLWav)
 	DKDISABLE(DKThread)
 	DKDISABLE(DKTorrent)  
@@ -86,6 +86,7 @@ if(WIN) # Disabled for Windows targets
 	DKDISABLE(podofo)
 	DKDISABLE(sdl2_giflib_sa)
 	DKDISABLE(sdl2_mixer)
+	DKDISABLE(sdl2_ttf)
 	DKDISABLE(tesseract)
 	DKDISABLE(waave)
 	DKDISABLE(xcode)
@@ -105,9 +106,11 @@ endif()
 
 if(CMAKE_HOST_APPLE)  # Disabled on Apple host machines
 	DKDISABLE(bzip2)
+	DKDISABLE(DKSDLText)
 	DKDISABLE(imagemagick)
 	DKDISABLE(libxml2)
 	DKDISABLE(openssl)
+	DKDISABLE(sdl2_ttf)
 	DKDISABLE(tidy-html5)
 endif()
 
