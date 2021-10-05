@@ -144,18 +144,12 @@ while :
 			# https://github.com/Homebrew/brew/issues/10368
 			# rm -fr $(brew --repo homebrew/core)
 			# brew tap homebrew/core
-		#brew install cmake
-		mkdir $DKPATH/DKApps/$APP/$OS/Debug
-		cd $DKPATH/DKApps/$APP/$OS/Debug
-		cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER="$CLANG_PATH" -DCMAKE_CXX_COMPILER="$CLANGPP_PATH" -DDEBUG=ON -DREBUILDALL=ON -DSTATIC=ON $DKPATH
-		make $APP
-		chmod +x $DKPATH/DKApps/$APP/$OS/Debug/$APP
-		
-		mkdir $DKPATH/DKApps/$APP/$OS/Release
-		cd $DKPATH/DKApps/$APP/$OS/Release
-		cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER="$CLANG_PATH" -DCMAKE_CXX_COMPILER="$CLANGPP_PATH" -DRELEASE=ON -DREBUILDALL=ON -DSTATIC=ON $DKPATH
-		make ${APP}
-		chmod +x $DKPATH/DKApps/$APP/$OS/Release/${APP}
+		#brew install cmake		
+		mkdir $DKPATH/DKApps/$APP/$OS
+		cd $DKPATH/DKApps/$APP/$OS
+		cmake -G "Xcode" -DMAC_64=ON -DDEBUG=ON -DRELEASE=ON -DREBUILD=ON -DSTATIC=ON $DKPATH
+		xcodebuild -configuration Debug build
+		xcodebuild -configuration Release build
 	else
 		cd $DKPATH/DKApps/$APP/$OS
 		cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER="$GCC_PATH" -DCMAKE_CXX_COMPILER="$GPP_PATH" -DDEBUG=ON -DRELEASE=ON -DREBUILDALL=ON -DSTATIC=ON $DKPATH
