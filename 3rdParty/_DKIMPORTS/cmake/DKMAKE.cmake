@@ -23,15 +23,15 @@ if(CMAKE_HOST_WIN32)
 endif()
 
 if(CMAKE_HOST_MAC)
-	#if(NOT EXISTS ${CMAKE_EXE})
-	#	message(FATAL_ERROR "${CMAKE} not found")
-	#endif()
+	if(NOT EXISTS ${CMAKE_EXE})
+		message(FATAL_ERROR "${CMAKE} not found")
+	endif()
 endif()
 
 if(CMAKE_HOST_LINUX)
-	#if(NOT EXISTS ${CMAKE_EXE})
-	#	message(FATAL_ERROR "${CMAKE} not found")
-	#endif()
+	if(NOT EXISTS ${CMAKE_EXE})
+		message(FATAL_ERROR "${CMAKE} not found")
+	endif()
 endif()
 
 
