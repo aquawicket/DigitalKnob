@@ -31,6 +31,8 @@ export CXX="$GPP_PATH"
 echo "GCC_PATH = $GCC_PATH"
 echo "GPP_PATH = $GPP_PATH"
 
+
+
 sudo echo
 
 while :
@@ -132,6 +134,12 @@ while :
 		make ${APP}
 		chmod +x $DKPATH/DKApps/$APP/$OS/Release/${APP}
 	elif [[ "$OSTYPE" == "darwin"* ]]; then
+		CLANG_PATH=$(which clang)
+		CLANGPP_PATH=$(which clang++)
+		export CC="$CLANG_PATH"
+		export CXX="$CLANGPP_PATH"
+		echo "CLANG_PATH = $CLANG_PATH"
+		echo "CLANGPP_PATH = $CLANGPP_PATH"
 		#ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 			# https://github.com/Homebrew/brew/issues/10368
 			# rm -fr $(brew --repo homebrew/core)
@@ -139,13 +147,13 @@ while :
 		#brew install cmake
 		mkdir $DKPATH/DKApps/$APP/$OS/Debug
 		cd $DKPATH/DKApps/$APP/$OS/Debug
-		cmake -G "Unix Makefiles" -DDEBUG=ON -DREBUILDALL=ON -DSTATIC=ON $DKPATH
+		cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER="$CLANG_PATH" -DCMAKE_CXX_COMPILER="$CLANGPP_PATH" -DDEBUG=ON -DREBUILDALL=ON -DSTATIC=ON $DKPATH
 		make $APP
 		chmod +x $DKPATH/DKApps/$APP/$OS/Debug/$APP
 		
 		mkdir $DKPATH/DKApps/$APP/$OS/Release
 		cd $DKPATH/DKApps/$APP/$OS/Release
-		cmake -G "Unix Makefiles" -DRELEASE=ON -DREBUILDALL=ON -DSTATIC=ON $DKPATH
+		cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER="$CLANG_PATH" -DCMAKE_CXX_COMPILER="$CLANGPP_PATH" -DRELEASE=ON -DREBUILDALL=ON -DSTATIC=ON $DKPATH
 		make ${APP}
 		chmod +x $DKPATH/DKApps/$APP/$OS/Release/${APP}
 	else
