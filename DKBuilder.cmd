@@ -37,6 +37,7 @@ if exist %GIT%. (
 ) else (
     echo "installing git"
 	echo "%GIT_DL%"
+	mkdir %DIGITALKNOB%
 	%download% %GIT_DL% %DIGITALKNOB%\Git-2.30.1-32-bit.exe
 	Git-2.30.1-32-bit.exe
 )
