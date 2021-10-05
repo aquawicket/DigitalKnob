@@ -33,14 +33,12 @@ goto pickapp
 :gitupdate
 if exist "GIT=C:\Program Files (x86)\Git\bin\git.exe". (
 	set "GIT=C:\Program Files (x86)\Git\bin\git.exe"
-	echo "found git"
 )
 if exist "C:\Program Files\Git\bin\git.exe". (
 	set "GIT=C:\Program Files\Git\bin\git.exe"
-	echo "found git"
 ) 
 if exist %GIT%. (
-	echo "installing git"
+	echo "GIT = %GIT%"
 ) else (
     echo "installing git"
 	echo "%GIT_DL%"
