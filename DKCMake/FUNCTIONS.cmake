@@ -128,6 +128,18 @@ endfunction()
 
 ##https://cmake.org/pipermail/cmake/2012-September/052205.html/
 function(DOWNLOAD url) # ARGV1 = dest_path
+	#TODO: Let's supply the ability to add a primary root address to download from,  for fast downloading from local hard drives or storage 
+	#      we will also add a "backup" root address to download from. In case one of the internet download fails.
+	#      Also, we will treat the url variable like a list. If it has more one item, treat them as alternative download links
+	if(NOT PrimaryDownloadServer)
+		message(STATUS "TODO: just set PrimaryDownloadServer to your mirror location and all file downoads will attempt that location first")
+	endif()
+	if(NOT SecondaryDownloadServer)
+		message(STATUS "TODO: just set SecondaryDownloadServer to your mirror location and all file downoads that fail will attempt secondary location next")
+	endif()
+	
+	
+
 	DKSET(CURRENT_DIR ${DKDOWNLOAD}) #set the default dl directory
 	get_filename_component(src_filename ${url} NAME)
 	if(${ARGC} GREATER 1)
@@ -164,17 +176,7 @@ function(DOWNLOAD url) # ARGV1 = dest_path
 		list(GET status 1 status_string)
 		if(NOT status_code EQUAL 0)
 			DKREMOVE(${CURRENT_DIR}/${dest_filename})
-			message(STATUS " ")
-			message(STATUS "*********************************************")
-			message(STATUS "CMAKE FAILED TO DOwNLOAD THIS FILE")
-			message(STATUS "PLEASE DOWNLOAD THE FILE TO THE digitalknob/Download direcotry")
-			message(STATUS "THE URL IS: ${url}") 
-			message(STATUS "*********************************************")
-			## TODO - copy the url to the clipboard and notify the user
-			message(FATAL_ERROR "error: downloading ${src_filename} status_code: ${status_code} status_string: ${status_string}")
-			##message(STATUS "Attempting to download with DKCurl...")
-			##DKSET(QUEUE_BUILD ON)
-			##WIN_COMMAND("${DIGITALKNOB}/DKCMake/DKCurl.exe ${url} ${CURRENT_DIR}/${src_filename}")
+			message(FATAL_ERROR "error: downloading ${url} \n status_code: ${status_code} \n status_string: ${status_string}")
 		else()
 			message(STATUS "downloading... done")
 		endif() 
