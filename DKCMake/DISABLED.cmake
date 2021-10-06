@@ -159,6 +159,7 @@ if(CMAKE_HOST_APPLE)  # Disabled on Apple host machines
 	#DKDISABLE(sdl2_ttf)
 	DKDISABLE(tesseract)
 	DKDISABLE(tidy-html5)
+	DKDISABLE(uwebsockets)
 	DKDISABLE(waave)
 endif()
 
