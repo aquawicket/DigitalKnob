@@ -324,6 +324,7 @@ if(ANDROID) # Disabled for Android targets
 	DKDISABLE(cef_binary)
 	DKDISABLE(curl)
 	DKDISABLE(DKCef)
+	DKDISABLE(DKCurl)
 	DKDISABLE(DKHook) #NOTE: this has linux functions too
 	DKDISABLE(DKOcr)
 	DKDISABLE(DKOFWindow)
@@ -385,6 +386,7 @@ if(ANDROID) # Disabled for Android targets
 	DKDISABLE(python)
 	DKDISABLE(rlottie)
 	DKDISABLE(rmlui)
+	DKDISABLE(sdl2_gif)
 	DKDISABLE(sdl2_giflib_sa)
 	DKDISABLE(sdl2_mixer)
 	#DKDISABLE(sdl2_ttf)
