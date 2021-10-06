@@ -145,6 +145,7 @@ if(CMAKE_HOST_APPLE)  # Disabled on Apple host machines
 	DKDISABLE(mesa-common-dev)
 	DKDISABLE(openal)
 	DKDISABLE(openal-android)
+	DKDISABLE(opencv)
 	DKDISABLE(openframeworks)
 	DKDISABLE(openscenegraph)
 	DKDISABLE(openssl)
@@ -325,7 +326,9 @@ if(ANDROID) # Disabled for Android targets
 	DKDISABLE(curl)
 	DKDISABLE(DKCef)
 	DKDISABLE(DKCurl)
+	DKDISABLE(DKDom)
 	DKDISABLE(DKHook) #NOTE: this has linux functions too
+	DKDISABLE(DKMySql)
 	DKDISABLE(DKOcr)
 	DKDISABLE(DKOFWindow)
 	DKDISABLE(DKPlugin1)
