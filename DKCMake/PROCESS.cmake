@@ -767,9 +767,9 @@ if(LINUX)
 		DKREMOVE(${DKPROJECT}/Backup)
 	endif()
 
-	LINUX_LIB(pthread)
-	LINUX_LIB(dl)
-	LINUX_LIB(libstdc++fs.a)
+	#LINUX_LIB(pthread)
+	#LINUX_LIB(dl)
+	#LINUX_LIB(libstdc++fs.a)
 	
 	#set(CMAKE_CXX_FLAGS "-g -no-pie -std=c++17")
 	
@@ -819,11 +819,11 @@ if(RASPBERRY)
 		DKREMOVE(${DKPROJECT}/Backup)
 	endif()
 
-    RASPBERRY_LIB(pthread)
-	RASPBERRY_LIB(dl)
-	RASPBERRY_LIB(libstdc++fs.a)
-	link_directories(/opt/vc/lib)
-	RASPBERRY_LIB(bcm_host)
+    #RASPBERRY_LIB(pthread)
+	#RASPBERRY_LIB(dl)
+	#RASPBERRY_LIB(libstdc++fs.a)
+	#link_directories(/opt/vc/lib)
+	#RASPBERRY_LIB(bcm_host)
 	
 	#set(CMAKE_CXX_FLAGS "-g -no-pie -std=c++17")
 	

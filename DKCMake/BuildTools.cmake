@@ -57,6 +57,9 @@ endif()
 if(CMAKE_HOST_LINUX AND LINUX)
 	DKDEPEND(libx11-dev)
 	##DKDEPEND(kdevelop)
+	LINUX_LIB(pthread)
+	LINUX_LIB(dl)
+	LINUX_LIB(libstdc++fs.a)
 	
 	# Linux
 	DKSET(DKCMAKE_LINUX_DEBUG ${CMAKE_EXE} -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Debug -DBUILD_SHARED_LIBS=OFF -DCMAKE_C_FLAGS=-fPIC)
@@ -74,6 +77,11 @@ endif()
 
 if(CMAKE_HOST_LINUX AND RASPBERRY)
 	DKDEPEND(libx11-dev)
+	RASPBERRY_LIB(pthread)
+	RASPBERRY_LIB(dl)
+	RASPBERRY_LIB(libstdc++fs.a)
+	link_directories(/opt/vc/lib)
+	RASPBERRY_LIB(bcm_host)
 	
 	# Raspberry
 	DKSET(DKCMAKE_RASPBERRY_DEBUG ${CMAKE_EXE} -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Debug -DBUILD_SHARED_LIBS=OFF -DCMAKE_C_FLAGS=-fPIC)
