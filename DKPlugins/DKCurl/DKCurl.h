@@ -4,15 +4,12 @@
 
 #include "DK/DK.h"
 #include "DK/DKUtil.h"
-
-#ifdef USE_curl
-	#include <curl/curl.h>
-#endif
+#include <curl/curl.h>
 
 class DKCurl : public DKObjectT<DKCurl>
 {
 public:
-#ifdef USE_curl
+
 	//TODO: Persistant connecton
 	bool Init();
 	bool End();
@@ -48,7 +45,6 @@ public:
 	DKString ftpName;
 	DKString ftpPass;
 	DKString ftpPort;
-#endif 
 };
 
 REGISTER_OBJECT(DKCurl, false);
