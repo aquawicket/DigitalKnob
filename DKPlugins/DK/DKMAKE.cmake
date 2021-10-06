@@ -8,6 +8,7 @@ endif()
 
 if(MAC)
 	DKDEPEND(boxer)
+	DKDEPEND(core_graphics)
 endif()
 
 if(IOS OR IOSSIM)

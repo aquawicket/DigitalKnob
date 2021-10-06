@@ -138,8 +138,6 @@ function(DOWNLOAD url) # ARGV1 = dest_path
 		message(STATUS "TODO: just set SecondaryDownloadServer to your mirror location and all file downoads that fail will attempt secondary location next")
 	endif()
 	
-	
-
 	DKSET(CURRENT_DIR ${DKDOWNLOAD}) #set the default dl directory
 	get_filename_component(src_filename ${url} NAME)
 	if(${ARGC} GREATER 1)
