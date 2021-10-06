@@ -1,5 +1,6 @@
 # DISABLED FOR ALL
 DKDISABLE(_TEMPLATE_)
+DKDISABLE(android-studio)
 DKDISABLE(conio.h)
 DKDISABLE(DKJerryscript)
 DKDISABLE(DKOFWindow)
@@ -63,7 +64,6 @@ if(NOT CMAKE_HOST_WIN32) # Disabled on Non-Windows host machines
 	DKDISABLE(php-win32-vs16-x64)
 endif()
 if(WIN) # Disabled for Windows targets
-	DKDISABLE(android-studio)
 	DKDISABLE(bzip2)
 	DKDISABLE(DKOcr)
 	DKDISABLE(flac)
@@ -159,7 +159,6 @@ if(CMAKE_HOST_LINUX) # Disabled on Linux host machines
 endif()
 if(LINUX) # Disabled for Linux targets
 	DKDISABLE(android-build-tools)
-	DKDISABLE(android-studio)
 	DKDISABLE(DKHook) #NOTE: this has linux functions too
 	DKDISABLE(DKOcr)
 	DKDISABLE(DKSDLWav)
@@ -202,7 +201,6 @@ endif()
 
 if(RASPBERRY) # Disabled for Raspberry Pi targets
 	DKDISABLE(android-build-tools)
-	DKDISABLE(android-studio)
 	DKDISABLE(cef_binary)
 	DKDISABLE(DKCef)
 	DKDISABLE(DKCefChild)
@@ -247,7 +245,6 @@ endif()
 
 
 if(ANDROID) # Disabled for Android targets
-	DKDISABLE(android-studio)
 	DKDISABLE(boxer)
 	DKDISABLE(bzip2)
 	DKDISABLE(cef_binary)
