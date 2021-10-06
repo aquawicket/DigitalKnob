@@ -14,6 +14,9 @@ set(SDL2_INCLUDE_DIRS "${SDL2_INCLUDE_DIR}")
 
 include_directories(${SDL2_INCLUDE_DIRS})
 
+
+find_package(FREETYPE REQUIRED)
+
 include_directories(${FREETYPE_INCLUDE_DIRS})
 include_directories(${FREETYPE_INCLUDE_DIR_freetype2})
 include_directories(${FREETYPE_INCLUDE_DIR_ft2build})
