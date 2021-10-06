@@ -33,8 +33,10 @@ Rml::FileHandle DKRmlFile::Open(const Rml::String& path){
 		int found = filename.rfind("?");
 		if(found > 0)
 			filename = filename.substr(0,found);
+#ifdef USE_DKCurl
 		DKCurl::Get()->Download(_url, DKFile::local_assets+"Cache/"+filename);
 		_url = DKFile::local_assets+"Cache/"+filename;
+#endif
 	}
 
 	FILE* fp = fopen(_url.c_str(), "rb");
