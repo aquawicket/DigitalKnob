@@ -4,6 +4,7 @@
 #include "DK/DKFile.h"
 #include "DKCurl/DKCurl.h"
 
+#ifdef USE_curl
 bool DKCurl::Init(){
 	DKDEBUGFUNC();	
 	DKClass::DKCreate("DKCurlJS");
@@ -575,3 +576,4 @@ int DKCurl::my_trace(CURL *handle, curl_infotype type, char *data, size_t size, 
 	dump(text, stderr, (unsigned char *)data, size);
 	return 0;
 }
+#endif

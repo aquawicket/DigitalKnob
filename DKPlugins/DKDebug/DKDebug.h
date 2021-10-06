@@ -2,7 +2,10 @@
 #ifndef DKDebug_H
 #define DKDebug_H
 #include "DK/DK.h"
-#include "DKCurl/DKCurl.h"
+
+//#ifdef USE_DKCurl
+//	#include "DKCurl/DKCurl.h"
+//#endif
 
 class DKDebug : public DKObjectT<DKDebug>
 {
