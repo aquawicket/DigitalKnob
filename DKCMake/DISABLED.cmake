@@ -112,6 +112,7 @@ if(CMAKE_HOST_APPLE)  # Disabled on Apple host machines
 	DKDISABLE(cef_binary)
 	#DKDISABLE(DKSDLText)
 	DKDISABLE(DKThread)
+	DKDISABLE(emsdk)
 	DKDISABLE(imagemagick)
 	DKDISABLE(libxml2)
 	DKDISABLE(openssl)
