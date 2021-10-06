@@ -108,6 +108,7 @@ if(CMAKE_HOST_APPLE)  # Disabled on Apple host machines
 	DKDISABLE(bzip2)
 	DKDISABLE(cef_binary)
 	DKDISABLE(DKCef)
+	DKDISABLE(DKCefChild)
 	DKDISABLE(DKCurl)
 	DKDISABLE(DKOcr)
 	DKDISABLE(DKWebSockets)
