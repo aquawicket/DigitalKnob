@@ -316,6 +316,7 @@ endif()
 
 
 if(ANDROID) # Disabled for Android targets
+	DKDISABLE(android-studio)
 	DKDISABLE(bzip2)
 	DKDISABLE(cef_binary)
 	DKDISABLE(DKHook) #NOTE: this has linux functions too
