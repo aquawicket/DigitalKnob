@@ -109,6 +109,7 @@ if(CMAKE_HOST_APPLE)  # Disabled on Apple host machines
 	DKDISABLE(android-ndk)
 	DKDISABLE(android-platform-tools)
 	DKDISABLE(bzip2)
+	DKDISABLE(cef_binary)
 	#DKDISABLE(DKSDLText)
 	DKDISABLE(DKThread)
 	DKDISABLE(imagemagick)
