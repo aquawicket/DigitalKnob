@@ -10,12 +10,13 @@ DKDEPEND(freetype)
 ### VERSION ###
 DKSET(SDLTTF_VERSION 2.0.15)
 DKSET(SDLTTF_NAME SDL2_ttf-${SDLTTF_VERSION})
+DKSET(SDLTTF_DL https://www.libsdl.org/projects/SDL_ttf/release/${SDLTTF_NAME}.zip)
 DKSET(SDLTTF ${3RDPARTY}/${SDLTTF_NAME})
 
 
 
 ### INSTALL ###
-DKINSTALL(https://www.libsdl.org/projects/SDL_ttf/release/${SDLTTF_NAME}.zip sdl2_ttf ${SDLTTF})
+DKINSTALL(${SDLTTF_DL} sdl2_ttf ${SDLTTF})
 
 
 
