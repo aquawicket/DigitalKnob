@@ -5,7 +5,6 @@
 
 #include "DKDuktape/DKDuktape.h"
 
-///////////////////////////////////////////////
 class DKWindowJS : public DKObjectT<DKWindowJS>
 {
 public:

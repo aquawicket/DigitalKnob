@@ -3,10 +3,7 @@
 #include "DKWindowJS.h"
 
 
-
-///////////////////////
-bool DKWindowJS::Init()
-{
+bool DKWindowJS::Init(){
 	DKDEBUGFUNC();
 	DKDuktape::AttachFunction("CPP_DKWindow_TestInt", DKWindowJS::TestInt);
 	DKDuktape::AttachFunction("CPP_DKWindow_TestString", DKWindowJS::TestString);
@@ -42,8 +39,6 @@ bool DKWindowJS::Init()
 	return true;
 }
 
-
-
 int DKWindowJS::TestInt(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	int input = duk_require_int(ctx, 0);
@@ -52,7 +47,6 @@ int DKWindowJS::TestInt(duk_context* ctx){
 	duk_push_int(ctx, output);
 	return 1;
 }
-
 
 int DKWindowJS::TestString(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
@@ -63,7 +57,6 @@ int DKWindowJS::TestString(duk_context* ctx){
 	return 1;
 }
 
-
 int DKWindowJS::TestReturnInt(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	int rval;
@@ -71,7 +64,6 @@ int DKWindowJS::TestReturnInt(duk_context* ctx){
 	duk_push_int(ctx, rval);
 	return 1;
 }
-
 
 int DKWindowJS::TestReturnString(duk_context* ctx)
 {
@@ -82,9 +74,6 @@ int DKWindowJS::TestReturnString(duk_context* ctx)
 	return 1;
 }
 
-
-
-
 int DKWindowJS::Create(duk_context* ctx)
 {
 	DKDEBUGFUNC(ctx);
@@ -92,14 +81,12 @@ int DKWindowJS::Create(duk_context* ctx)
 	return 1;
 }
 
-
 int DKWindowJS::Fullscreen(duk_context* ctx)
 {
 	DKDEBUGFUNC(ctx);
 	if(!DKWindow::Fullscreen()){ return 0; }
 	return 1;
 }
-
 
 int DKWindowJS::GetHeight(duk_context* ctx)
 {
@@ -110,7 +97,6 @@ int DKWindowJS::GetHeight(duk_context* ctx)
 	return 1;
 }
 
-
 int DKWindowJS::GetMouseX(duk_context* ctx)
 {
 	DKDEBUGFUNC(ctx);
@@ -119,7 +105,6 @@ int DKWindowJS::GetMouseX(duk_context* ctx)
 	duk_push_int(ctx, mouseX);
 	return 1;
 }
-
 
 int DKWindowJS::GetMouseY(duk_context* ctx)
 {
@@ -130,7 +115,6 @@ int DKWindowJS::GetMouseY(duk_context* ctx)
 	return 1;
 }
 
-
 int DKWindowJS::GetPixelRatio(duk_context* ctx)
 {
 	DKDEBUGFUNC(ctx);
@@ -139,7 +123,6 @@ int DKWindowJS::GetPixelRatio(duk_context* ctx)
 	duk_push_number(ctx, ratio);
 	return 1;
 }
-
 
 int DKWindowJS::GetWidth(duk_context* ctx)
 {
@@ -150,7 +133,6 @@ int DKWindowJS::GetWidth(duk_context* ctx)
 	return 1;
 }
 
-
 int DKWindowJS::GetX(duk_context* ctx)
 {
 	DKDEBUGFUNC(ctx);
@@ -159,7 +141,6 @@ int DKWindowJS::GetX(duk_context* ctx)
 	duk_push_int(ctx, x);
 	return 1;
 }
-
 
 int DKWindowJS::GetY(duk_context* ctx)
 {
@@ -170,14 +151,12 @@ int DKWindowJS::GetY(duk_context* ctx)
 	return 1;
 }
 
-
 int DKWindowJS::Hide(duk_context* ctx)
 {
 	DKDEBUGFUNC(ctx);
 	if(!DKWindow::Hide()){ return 0; }
 	return 1;
 }
-
 
 int DKWindowJS::IsFullscreen(duk_context* ctx)
 {
@@ -188,7 +167,6 @@ int DKWindowJS::IsFullscreen(duk_context* ctx)
 	return 1;
 }
 
-
 int DKWindowJS::IsVisible(duk_context* ctx)
 {
 	DKDEBUGFUNC(ctx);
@@ -198,14 +176,12 @@ int DKWindowJS::IsVisible(duk_context* ctx)
 	return 1;
 }
 
-
 int DKWindowJS::Maximize(duk_context* ctx)
 {
 	DKDEBUGFUNC(ctx);
 	if(!DKWindow::Maximize()){ return 0; }
 	return 1;
 }
-
 
 int DKWindowJS::MessageBox(duk_context* ctx)
 {
@@ -215,14 +191,12 @@ int DKWindowJS::MessageBox(duk_context* ctx)
 	return 1;
 }
 
-
 int DKWindowJS::Minimize(duk_context* ctx)
 {
 	DKDEBUGFUNC(ctx);
 	if(!DKWindow::Minimize()){ return 0; }
 	return 1;
 }
-
 
 int DKWindowJS::moveTo(duk_context* ctx)
 {
@@ -234,7 +208,6 @@ int DKWindowJS::moveTo(duk_context* ctx)
 	return 1;
 }
 
-
 int DKWindowJS::resizeTo(duk_context* ctx)
 {
 	DKDEBUGFUNC(ctx);
@@ -245,14 +218,12 @@ int DKWindowJS::resizeTo(duk_context* ctx)
 	return 1;
 }
 
-
 int DKWindowJS::Restore(duk_context* ctx)
 {
 	DKDEBUGFUNC(ctx);
 	if(!DKWindow::Restore()){ return 0; }
 	return 1;
 }
-
 
 int DKWindowJS::SetHeight(duk_context* ctx)
 {
@@ -262,7 +233,6 @@ int DKWindowJS::SetHeight(duk_context* ctx)
 	return 1;
 }
 
-
 int DKWindowJS::SetIcon(duk_context* ctx)
 {
 	DKDEBUGFUNC(ctx);
@@ -270,7 +240,6 @@ int DKWindowJS::SetIcon(duk_context* ctx)
 	if (!DKWindow::SetIcon(file)) { return 0; }
 	return 1;
 }
-
 
 int DKWindowJS::SetTitle(duk_context* ctx)
 {
@@ -280,7 +249,6 @@ int DKWindowJS::SetTitle(duk_context* ctx)
 	return 1;
 }
 
-
 int DKWindowJS::SetWidth(duk_context* ctx)
 {
 	DKDEBUGFUNC(ctx);
@@ -288,7 +256,6 @@ int DKWindowJS::SetWidth(duk_context* ctx)
 	if(!DKWindow::SetWidth(width)){ return 0; }
 	return 1;
 }
-
 
 int DKWindowJS::SetX(duk_context* ctx)
 {
@@ -298,7 +265,6 @@ int DKWindowJS::SetX(duk_context* ctx)
 	return 1;
 }
 
-
 int DKWindowJS::SetY(duk_context* ctx)
 {
 	DKDEBUGFUNC(ctx);
@@ -307,14 +273,12 @@ int DKWindowJS::SetY(duk_context* ctx)
 	return 1;
 }
 
-
 int DKWindowJS::Show(duk_context* ctx)
 {
 	DKDEBUGFUNC(ctx);
 	if(!DKWindow::Show()){ return 0; }
 	return 1;
 }
-
 
 int DKWindowJS::Windowed(duk_context* ctx)
 {

@@ -120,6 +120,7 @@ if(CMAKE_HOST_APPLE)  # Disabled on Apple host machines
 	DKDISABLE(flac)
 	DKDISABLE(freealut)
 	DKDISABLE(freealut-master)
+	DKDISABLE(ghostscript)
 	DKDISABLE(imagemagick)
 	DKDISABLE(jpeg) 
 	DKDISABLE(kdevelop)
