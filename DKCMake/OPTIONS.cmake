@@ -11,25 +11,25 @@ endif(COMMAND cmake_policy)
 #########################################################################
 ## Set variables for paths
 ###############################################################
-#get_filename_component(DIGITALKNOB ${CMAKE_SOURCE_DIR} ABSOLUTE)
-#get_filename_component(FOLDER_NAME ${DIGITALKNOB} NAME)
-#while(NOT FOLDER_NAME STREQUAL "digitalknob")
-#	get_filename_component(DIGITALKNOB ${DIGITALKNOB} DIRECTORY)
-#	get_filename_component(FOLDER_NAME ${DIGITALKNOB} NAME)
-#	DUMP(FOLDER_NAME)
-#endwhile()
+get_filename_component(DIGITALKNOB ${CMAKE_SOURCE_DIR} ABSOLUTE)
+get_filename_component(FOLDER_NAME ${DIGITALKNOB} NAME)
+while(NOT FOLDER_NAME STREQUAL "digitalknob")
+	get_filename_component(DIGITALKNOB ${DIGITALKNOB} DIRECTORY)
+	get_filename_component(FOLDER_NAME ${DIGITALKNOB} NAME)
+	#DUMP(FOLDER_NAME)
+endwhile()
 #DUMP(DIGITALKNOB)
 #DKSET(DKPATH ${DIGITALKNOB}/DK)
 
 #########################################################################
 ## Set variables for paths
 ###############################################################
-get_filename_component(DIGITALKNOB ${CMAKE_SOURCE_DIR} ABSOLUTE)
-DKSET(DKPATH ${DIGITALKNOB}/..)
-get_filename_component(DKPATH ${DKPATH} ABSOLUTE)
-DKSET(DKCMAKE ${DIGITALKNOB}/DKCMake)
-DKSET(DKPLUGINS ${DIGITALKNOB}/DKPlugins)
-DKSET(3RDPARTY ${DIGITALKNOB}/3rdParty)
+#get_filename_component(DIGITALKNOB ${CMAKE_SOURCE_DIR} ABSOLUTE)
+#DKSET(DKPATH ${DIGITALKNOB}/..)
+#get_filename_component(DKPATH ${DKPATH} ABSOLUTE)
+DKSET(DKCMAKE ${DIGITALKNOB}/DK/DKCMake)
+DKSET(DKPLUGINS ${DIGITALKNOB}/DK/DKPlugins)
+DKSET(3RDPARTY ${DIGITALKNOB}/DK/3rdParty)
 DKSET(DKIMPORTS ${3RDPARTY}/_DKIMPORTS)
 DKSET(DKDOWNLOAD ${DIGITALKNOB}/Download)
 DKSET(DKWEB http://127.0.0.1)
