@@ -16,17 +16,7 @@ get_filename_component(FOLDER_NAME ${DIGITALKNOB} NAME)
 while(NOT FOLDER_NAME STREQUAL "digitalknob")
 	get_filename_component(DIGITALKNOB ${DIGITALKNOB} DIRECTORY)
 	get_filename_component(FOLDER_NAME ${DIGITALKNOB} NAME)
-	#DUMP(FOLDER_NAME)
 endwhile()
-#DUMP(DIGITALKNOB)
-#DKSET(DKPATH ${DIGITALKNOB}/DK)
-
-#########################################################################
-## Set variables for paths
-###############################################################
-#get_filename_component(DIGITALKNOB ${CMAKE_SOURCE_DIR} ABSOLUTE)
-#DKSET(DKPATH ${DIGITALKNOB}/..)
-#get_filename_component(DKPATH ${DKPATH} ABSOLUTE)
 DKSET(DKCMAKE ${DIGITALKNOB}/DK/DKCMake)
 DKSET(DKPLUGINS ${DIGITALKNOB}/DK/DKPlugins)
 DKSET(3RDPARTY ${DIGITALKNOB}/DK/3rdParty)

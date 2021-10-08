@@ -3,7 +3,7 @@ DKDEPEND(bullet)
 DKDEPEND(osgworks)
 
 ### INSTALL ###
-DKINSTALL(http://digitalknob.com/Download/Libs/osgbullet-master.zip osgbullet-master)
+DKINSTALL(http://TODO.com/osgbullet-master.zip osgbullet-master)
 DKSET(OSGBULLET ${3RDPARTY}/osgbullet-master)
 
 

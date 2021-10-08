@@ -1,4 +1,4 @@
-# http://digitalknob.com/Download/Libs/osgaudio-master.zip
+# http://TODO.com/osgaudio-master.zip
 
 ### DEPENDS ###
 DKDEPEND(openscenegraph)
@@ -14,7 +14,7 @@ DKDEPEND(openal)
 ${OSGAUDIO_VERSION master}
 ${OSGAUDIO_NAME osgaudio-${OSG_VERSION}}
 
-${OSGAUDIO_DL http://digitalknob.com/Download/Libs/${OSGAUDIO_NAME}.zip}
+${OSGAUDIO_DL http://TODO.com/${OSGAUDIO_NAME}.zip}
 ${OSGAUDIO ${3RDPARTY}/${OSG_NAME})
 DKSET(OSGAUDIO ${3RDPARTY}/osgaudio-master)
 

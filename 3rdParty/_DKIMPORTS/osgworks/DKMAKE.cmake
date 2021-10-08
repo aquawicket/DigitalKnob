@@ -5,7 +5,7 @@ DKDEPEND(openscenegraph)
 ### VERSION ###
 DKSET(OSGWORKS_VERSION master)
 DKSET(OSGWORKS_NAME osgworks-${OSGWORKS_VERSION})
-DKSET(OSGWORKS_DL http://digitalknob.com/Download/Libs/osgworks-master.zip )
+DKSET(OSGWORKS_DL http://TODO.com/osgworks-master.zip )
 DKSET(OSGWORKS ${3RDPARTY}/${OSGWORKS_NAME})
 DKSET(OSGWORKS_GL2 ${3RDPARTY}/${OSGWORKS_NAME}-GL2)
 IF(OpenGL2)
