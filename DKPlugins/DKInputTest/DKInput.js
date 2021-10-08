@@ -51,18 +51,18 @@ function DKInput_End()
 ///////////////////////////////
 function DKInput_OnEvent(event)
 {
-	DKLog("DKInput_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
+	console.log("DKInput_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
 	
 	if(event.type){ //Browser
 		DKWidget_SetInnerHtml("lastevent", "Last Event: "+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event));
 		if(DK_GetType(event) != "mousemove"){
-			DKLog("Last Event: "+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+"\n");
+			console.log("Last Event: "+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+"\n");
 		}
 	}
 	else{ //App
 		DKWidget_SetInnerHtml("lastevent", "Last Event: "+event);
 		if(DK_GetType(event) != "mousemove"){
-			DKLog("Last Event: "+event+"\n");
+			console.log("Last Event: "+event+"\n");
 		}
 	}
 	
@@ -103,35 +103,35 @@ function DKInput_OnEvent(event)
 	
 	//element events
 	if(DK_Id(event, "esc")){
-		DKLog("esc\n")
+		console.log("esc\n")
 	}
 }
 
 /////////////////////////////////////////
 function DKInput_ProcessMouseDown(button)
 {
-	//DKLog("DKInput_ProcessMouseDown("+button+")\n");
+	//console.log("DKInput_ProcessMouseDown("+button+")\n");
 	DKWidget_Show(button+"button");	
 }
 
 ///////////////////////////////////////
 function DKInput_ProcessMouseUp(button)
 {
-	//DKLog("DKInput_ProcessMouseUp("+button+")\n");
+	//console.log("DKInput_ProcessMouseUp("+button+")\n");
 	DKWidget_Hide(button+"button");	
 }
 		
 //////////////////////////////////////
 function DKInput_ProcessKeyDown(key)
 {
-	//DKLog("DKInput_ProcessKeyDown("+key+")\n");
+	//console.log("DKInput_ProcessKeyDown("+key+")\n");
 	DKInput_Highlight(DKInput_KeyToDiv(key));
 }
 
 ////////////////////////////////////
 function DKInput_ProcessKeyUp(key)
 {
-	//DKLog("DKInput_ProcessKeyUp("+key+")\n");
+	//console.log("DKInput_ProcessKeyUp("+key+")\n");
 	DKInput_UnHighlight(DKInput_KeyToDiv(key));
 }
 
