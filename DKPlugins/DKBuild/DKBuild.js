@@ -557,10 +557,13 @@ function DKBuild_DoResults(){
 		if(TYPE === "Debug" || TYPE === "ALL"){
 			CPP_DKFile_Rename(app_path+OS+"/Debug/"+APP+".app", app_path+OS+"/Debug/"+APP+"_OLD.app", true)
 			CPP_DK_Execute("xcodebuild -target "+APP+" -configuration Debug build")
-			//update the info.plist in include the logo icon
-			let info_plist = CPP_DKFile_FileToString(app_path+OS+"/Debug/"+APP+".app/Contents/info.plist")
-			info_plist = info_plist.replace("<dict>", "<dict><key>CFBundleIconFile</key><string>logo</string>")
-			CPP_DKFile_StringToFile(info_plist, app_path+OS+"/Debug/"+APP+".app/Contents/info.plist")
+			
+			//update the info.plist to include the logo icon
+			if(CPP_DKFile_Exists(app_path+OS+"/Debug/"+APP+".app/Contents/info.plist")){
+				let info_plist = CPP_DKFile_FileToString(app_path+OS+"/Debug/"+APP+".app/Contents/info.plist")
+				info_plist = info_plist.replace("<dict>", "<dict><key>CFBundleIconFile</key><string>logo</string>")
+				CPP_DKFile_StringToFile(info_plist, app_path+OS+"/Debug/"+APP+".app/Contents/info.plist")
+			}
 			
 			//update install_name_tool if cef present
 			if(CPP_DKFile_Exists(app_path+OS+"/Debug/"+APP+".app/Contents/Frameworks/Chromium Embedded Framework.framework")){
@@ -587,10 +590,12 @@ function DKBuild_DoResults(){
 			CPP_DKFile_Rename(app_path+OS+"/Release/"+APP+".app", app_path+OS+"/Release/"+APP+"_OLD.app", true)
 			CPP_DK_Execute("xcodebuild -target "+APP+" -configuration Release build")
 			
-			//update the info.plist in include the logo icon
-			let info_plist = CPP_DKFile_FileToString(app_path+OS+"/Release/"+APP+".app/Contents/info.plist")
-			info_plist = info_plist.replace("<dict>", "<dict><key>CFBundleIconFile</key><string>logo</string>")
-			CPP_DKFile_StringToFile(info_plist, app_path+OS+"/Release/"+APP+".app/Contents/info.plist")
+			//update the info.plist to include the logo icon
+			if(CPP_DKFile_Exists(app_path+OS+"/Release/"+APP+".app/Contents/info.plist")){
+				let info_plist = CPP_DKFile_FileToString(app_path+OS+"/Release/"+APP+".app/Contents/info.plist")
+				info_plist = info_plist.replace("<dict>", "<dict><key>CFBundleIconFile</key><string>logo</string>")
+				CPP_DKFile_StringToFile(info_plist, app_path+OS+"/Release/"+APP+".app/Contents/info.plist")
+			}
 			
 			//update install_name_tool if cef present
 			if(CPP_DKFile_Exists(app_path+OS+"/Release/"+APP+".app/Contents/Frameworks/Chromium Embedded Framework.framework")){

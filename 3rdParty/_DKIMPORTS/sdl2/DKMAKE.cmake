@@ -33,7 +33,7 @@ ANDROID_INCLUDE(${SDL2}/src)
 #if(ANDROID)
 #	DKDEFINE(GL_GLEXT_PROTOTYPES)
 #endif()
-RASPBERRY_INCLUDE(/opt/vc/lib) ##For Raspberry Pi
+RASPBERRY_INCLUDE(/opt/vc/lib)
 #if(LINUX)
 LINUX_INCLUDE(${SDL2}/${OS}/${RELEASE_DIR}/include)
 #	find_package(OpenGL REQUIRED)
