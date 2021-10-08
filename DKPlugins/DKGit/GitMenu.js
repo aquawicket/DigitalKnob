@@ -77,10 +77,10 @@ function GitMenu_InstallGit() {
     var assets = DKAssets_LocalAssets();
 
     if (DK_GetOS() === "Win32") {
-        //DKCurl_Download("http://DigitalKnob.com/Download/Tools/Git-2.11.0-32-bit.exe", assets);
+        //DKCurl_Download("http://TODO.com/Git-2.11.0-32-bit.exe", assets);
         DK_System(assets + "/Git-2.11.0-32-bit.exe");
     } else if (DK_GetOS() === "Win64") {
-        //DKCurl_Download("http://DigitalKnob.com/Download/Tools/Git-2.11.0-64-bit.exe", assets);
+        //DKCurl_Download("http://TODO.com/Git-2.11.0-64-bit.exe", assets);
         DK_System(assets + "/Git-2.11.0-64-bit.exe");
     } else if (DK_GetOS() === "Mac") {//TODO
     } else if (DK_GetOS() === "Linux") {
@@ -98,17 +98,17 @@ function GitMenu_GitUpdate() {
     }
 
     console.log("Git Update DigitalKnob...\n");
-    DK_Execute(GIT + " clone https://github.com/aquawicket/DigitalKnob.git " + DKPATH + "/DK");
-    CPP_DKFile_ChDir(DKPATH + "/DK");
+    DK_Execute(GIT + " clone https://github.com/aquawicket/DigitalKnob.git " + DIGITALKNOB + "/DK");
+    CPP_DKFile_ChDir(DIGITALKNOB + "/DK");
     DK_Execute(GIT + " checkout -- .");
     DK_Execute(GIT + " pull origin master");
 
     //Multipe user folders
-    var contents = CPP_DKFile_DirectoryContents(DKPATH);
+    var contents = CPP_DKFile_DirectoryContents(DIGITALKNOB);
     var files = contents.split(",");
     for (var i = 0; i < files.length; i++) {
         //console.log("files["+i+"] = "+files[i]+"\n");
-        CPP_DKFile_ChDir(DKPATH);
+        CPP_DKFile_ChDir(DIGITALKNOB);
         if (CPP_DKFile_IsDirectory(files[i])) {
             continue;
         }
@@ -118,7 +118,7 @@ function GitMenu_GitUpdate() {
             var folder = files[i].replace(".txt", "");
             //console.log("folder = "+folder+"\n");
             console.log("Git Update " + folder + "...\n");
-            DK_Execute(GIT + " clone " + url + " " + DKPATH + "/" + folder);
+            DK_Execute(GIT + " clone " + url + " " + DIGITALKNOB + "/" + folder);
             DK_Execute(GIT + " checkout -- .");
             DK_Execute(GIT + " pull origin master");
         }
@@ -138,21 +138,21 @@ function GitMenu_GitCommit() {
     }
 
     console.log("Git Commit DigitalKnob...\n");
-    CPP_DKFile_ChDir(DKPATH + "/DK");
+    CPP_DKFile_ChDir(DIGITALKNOB + "/DK");
     DK_Execute(GIT + " init");
     DK_Execute(GIT + " config user.name \"dkuser\"");
-    DK_Execute(GIT + " config user.email \"dkuser@digitalknob.com\"");
+    DK_Execute(GIT + " config user.email \"dkuser@TODO.com\"");
     DK_Execute(GIT + " commit -a -m \"commit from git\"");
     DK_Execute(GIT + " config credential.helper store");
     //store credentials 
     DK_Execute(GIT + " push");
 
     //Multipe user folders
-    var contents = CPP_DKFile_DirectoryContents(DKPATH);
+    var contents = CPP_DKFile_DirectoryContents(DIGITALKNOB);
     var files = contents.split(",");
     for (var i = 0; i < files.length; i++) {
         //console.log("files["+i+"] = "+files[i]+"\n");
-        CPP_DKFile_ChDir(DKPATH);
+        CPP_DKFile_ChDir(DIGITALKNOB);
         if (CPP_DKFile_IsDirectory(files[i])) {
             continue;
         }
@@ -162,10 +162,10 @@ function GitMenu_GitCommit() {
             var folder = files[i].replace(".txt", "");
             //console.log("folder = "+folder+"\n");
             console.log("Git Commit " + folder + "...\n");
-            CPP_DKFile_ChDir(DKPATH + "/" + folder);
+            CPP_DKFile_ChDir(DIGITALKNOB + "/" + folder);
             DK_Execute(GIT + " init");
             DK_Execute(GIT + " config user.name \"dkuser\"");
-            DK_Execute(GIT + " config user.email \"dkuser@digitalknob.com\"");
+            DK_Execute(GIT + " config user.email \"dkuser@TODO.com\"");
             DK_Execute(GIT + " commit -a -m \"commit from git\"");
             DK_Execute(GIT + " config credential.helper store");
             //store credentials 

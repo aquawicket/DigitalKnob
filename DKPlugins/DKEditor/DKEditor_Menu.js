@@ -166,14 +166,14 @@ function DKEditor_Menu_OnEvent(event)
 	}
 	if(event.currentTarget.id === "DKEditor_Menu_Web"){
 		console.log("DKEditor_Menu_Web()\n");
-		//TODO - Create an iFrame and display digitalknob.com
+		//TODO - Create an iFrame and display TODO.com
 		var div = DK_CreateElement(document.body, "div", "DKIframe.html");
 		div.style.position = "absolute";
 		div.style.width = "100%";
 		div.style.height = "100%";
 		
 		var iframe = DK_CreateElement(div, "iframe", "iframe");
-		iframe.src = "http://digitalknob.com";
+		iframe.src = "http://TODO.com";
 		iframe.width = "100%";
 		iframe.height = "100%";
 		iframe.style.borderWidth = "0px";

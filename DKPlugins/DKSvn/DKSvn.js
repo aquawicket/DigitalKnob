@@ -82,11 +82,11 @@ function DKSvn_InstallSvn()
 function DKSvn_SvnUpdate()
 {
 	console.log(("Svn Update...\n");
-	DK_Execute(SVN +" cleanup "+DKPATH);
-	DK_Execute(SVN +" checkout https://github.com/aquawicket/DigitalKnob/trunk/ "+DKPATH);
+	DK_Execute(SVN +" cleanup "+DIGITALKNOB);
+	DK_Execute(SVN +" checkout https://github.com/aquawicket/DigitalKnob/trunk/ "+DIGITALKNOB);
 	
 	var mysvn = DKAssets_LocalAssets()+"mysvn.txt";
-	if(!dk.file.extist(mysvn)){ mysvn = DKPATH+"/mysvn.txt"; } //check for /mysvn.txt
+	if(!dk.file.extist(mysvn)){ mysvn = DIGITALKNOB+"/mysvn.txt"; } //check for /mysvn.txt
 	
 	//TODO: Multipe user folders
 	
@@ -102,8 +102,8 @@ function DKSvn_SvnUpdate()
 function DKSvn_SvnCommit()
 {
 	console.log(("Svn Commit...\n");
-	DK_Execute(SVN +" cleanup "+DKPATH);
-	DK_Execute(SVN +" commit -m update "+DKPATH);
+	DK_Execute(SVN +" cleanup "+DIGITALKNOB);
+	DK_Execute(SVN +" commit -m update "+DIGITALKNOB);
 	
 	//TODO: Multipe user folders
 	

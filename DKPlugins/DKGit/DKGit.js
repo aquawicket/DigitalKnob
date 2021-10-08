@@ -54,29 +54,29 @@ function DKGit_InstallGit() {
 
 function DKGit_GitUpdate() {
     console.log("Git Update DigitalKnob...\n")
-	if(!CPP_DKFile_Exists(DKPATH + "DK/.git")){
-		CPP_DK_Execute(GIT + " clone https://github.com/aquawicket/DigitalKnob.git " + DKPATH + "DK")
-		CPP_DKFile_ChDir(DKPATH + "DK")
+	if(!CPP_DKFile_Exists(DIGITALKNOB + "DK/.git")){
+		CPP_DK_Execute(GIT + " clone https://github.com/aquawicket/DigitalKnob.git " + DIGITALKNOB + "DK")
+		CPP_DKFile_ChDir(DIGITALKNOB + "DK")
 		CPP_DK_Execute(GIT + " checkout -- .")
 		//const branch = DKGit_GetCurrentBranch()
 		CPP_DK_Execute(GIT + " pull origin master")
 	}
 	else{
-		CPP_DKFile_ChDir(DKPATH + "DK")
+		CPP_DKFile_ChDir(DIGITALKNOB + "DK")
 		CPP_DK_Execute(GIT + " checkout -- .")
 		//const branch = DKGit_GetCurrentBranch()
 		CPP_DK_Execute(GIT + " pull")
 	}
 
     //Multipe user folders
-    var contents = CPP_DKFile_DirectoryContents(DKPATH)
+    var contents = CPP_DKFile_DirectoryContents(DIGITALKNOB)
     if (contents) {
         var files = contents.split(",")
         for (var i = 0; i < files.length; i++) {
             //console.log("files["+i+"] = "+files[i]+"\n")
 			//Look for text files that contain [MYGIT] in them
 			//The rest of the line is the repository address
-			CPP_DKFile_ChDir(DKPATH)
+			CPP_DKFile_ChDir(DIGITALKNOB)
             if (CPP_DKFile_IsDirectory(files[i]))
                 continue
 			if(files[i].indexOf(".txt") <= 1)
@@ -84,15 +84,15 @@ function DKGit_GitUpdate() {
             var url = CPP_DKFile_GetSetting(files[i], "[MYGIT]")
             if (url) {
 				var folder = files[i].replace(".txt", "")
-				if(!CPP_DKFile_Exists(DKPATH + folder + "/.git")){
-					CPP_DK_Execute(GIT + " clone " + url + " " + DKPATH + folder)
-					CPP_DKFile_ChDir(DKPATH + folder)
+				if(!CPP_DKFile_Exists(DIGITALKNOB + folder + "/.git")){
+					CPP_DK_Execute(GIT + " clone " + url + " " + DIGITALKNOB + folder)
+					CPP_DKFile_ChDir(DIGITALKNOB + folder)
 					CPP_DK_Execute(GIT + " checkout -- .")
 					//const branch = DKGit_GetCurrentBranch()
 					CPP_DK_Execute(GIT + " pull origin master")
 				}
 				else{
-					CPP_DKFile_ChDir(DKPATH + folder)
+					CPP_DKFile_ChDir(DIGITALKNOB + folder)
 					CPP_DK_Execute(GIT + " checkout -- .")
 					//const branch = DKGit_GetCurrentBranch()
 					CPP_DK_Execute(GIT + " pull")
@@ -110,7 +110,7 @@ function DKGit_GitUpdate() {
 function DKGit_GitCommit() {
 	/*
     console.log("Git Commit DigitalKnob...\n")
-    CPP_DKFile_ChDir(DKPATH + "/DK")
+    CPP_DKFile_ChDir(DIGITALKNOB + "/DK")
     //CPP_DK_Execute(GIT + " init")
     //DKGit_SetCredentials()
 	//const branch = DKGit_GetCurrentBranch()
@@ -119,14 +119,14 @@ function DKGit_GitCommit() {
 	*/
 	
     //Multipe user folders
-    var contents = CPP_DKFile_DirectoryContents(DKPATH)
+    var contents = CPP_DKFile_DirectoryContents(DIGITALKNOB)
     if (contents) {
         var files = contents.split(",")
         for (var i = 0; i < files.length; i++) {
-			if(CPP_DKFile_Exists(DKPATH + files[i] + "/.git")){
+			if(CPP_DKFile_Exists(DIGITALKNOB + files[i] + "/.git")){
 				console.log("\n\n")
                 console.log("### Git Commit " + files[i] + "... \n")
-                CPP_DKFile_ChDir(DKPATH + files[i])
+                CPP_DKFile_ChDir(DIGITALKNOB + files[i])
                 //CPP_DK_Execute(GIT + " init")
 				//DKGit_SetCredentials()
 				//const branch = DKGit_GetCurrentBranch()
@@ -156,11 +156,11 @@ function DKGit_GetCurrentBranch(){
 // the total number of "different" commits between the current branch and server branch
 function DKGit_CheckForDiff(){
 	//console.log("DKGit_CheckForDiff()")
-	let contents = CPP_DKFile_DirectoryContents(DKPATH)
+	let contents = CPP_DKFile_DirectoryContents(DIGITALKNOB)
 	let files = contents.split(",")
 	for(let i=0; i<files.length; i++){ 
-		if(CPP_DKFile_Exists(DKPATH+files[i]+"/DKApps")){
-				CPP_DKFile_ChDir(DKPATH + files[i])
+		if(CPP_DKFile_Exists(DIGITALKNOB+files[i]+"/DKApps")){
+				CPP_DKFile_ChDir(DIGITALKNOB + files[i])
 				console.log("Checking "+files[i]+" . . . ")
 				
 				CPP_DK_Execute(GIT + " commit -a -m \"commit from git\"")
@@ -183,11 +183,11 @@ function DKGit_CheckForDiff(){
 
 function DKGit_DiffCount(){
 	console.log("DKGit_DiffCount()")
-	let contents = CPP_DKFile_DirectoryContents(DKPATH)
+	let contents = CPP_DKFile_DirectoryContents(DIGITALKNOB)
 	let files = contents.split(",")
 	for(let i=0; i<files.length; i++){ 
-		if(CPP_DKFile_Exists(DKPATH+files[i]+"/DKApps")){
-			CPP_DKFile_ChDir(DKPATH + "/" + files[i])
+		if(CPP_DKFile_Exists(DIGITALKNOB+files[i]+"/DKApps")){
+			CPP_DKFile_ChDir(DIGITALKNOB + "/" + files[i])
 			const result = CPP_DK_Execute(GIT + " rev-list HEAD...origin/master --count", "rt")
 			console.log(result)
 		}

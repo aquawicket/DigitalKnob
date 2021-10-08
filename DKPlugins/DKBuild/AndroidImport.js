@@ -15,18 +15,18 @@ function AndroidImport_Import() {
     }
 
     var appdir = "";
-    var contents = DKFile_DirectoryContents(DKPATH);
+    var contents = DKFile_DirectoryContents(DIGITALKNOB);
     var files = contents.split(",");
 
     for (var i = 0; i < files.length; i++) {
-        if (dk.file.extist(DKPATH + "/" + files[i] + "/DKApps/" + APP)) {
-            appdir = DKPATH + "/" + files[i] + "/DKApps/" + APP;
+        if (dk.file.extist(DIGITALKNOB + "/" + files[i] + "/DKApps/" + APP)) {
+            appdir = DIGITALKNOB + "/" + files[i] + "/DKApps/" + APP;
         }
     }
 
     /*
-	if(dk.file.extist(DKPATH+"/DKApps/"+APP)){
-		appdir = DKPATH+"/DKApps/"+APP;
+	if(dk.file.extist(DIGITALKNOB+"/DKApps/"+APP)){
+		appdir = DIGITALKNOB+"/DKApps/"+APP;
 	}
 	*/
 
@@ -66,15 +66,15 @@ function AndroidImport_Import() {
 
     //Multipe user folders
     /*
-	var contents = DKFile_DirectoryContents(DKPATH);
+	var contents = DKFile_DirectoryContents(DIGITALKNOB);
 	var files = contents.split(",");
 	for(var i=0; i<files.length; i++){ //console.log("files["+i+"] = "+files[i]+"\n");
-		DKFile_ChDir(DKPATH);
+		DKFile_ChDir(DIGITALKNOB);
 		if(DKFile_IsDirectory(files[i])){ continue; }
 		var url = DKFile_GetSetting(files[i], "[MYGIT]");
 		if(url){ //console.log("url = "+url+"\n");
 			var folder = files[i].replace(".txt",""); //console.log("folder = "+folder+"\n");
-			if(dk.file.extist(DKPATH+"/"+folder+"/DKApps/"+APP+"/DKMAKE.cmake")){
+			if(dk.file.extist(DIGITALKNOB+"/"+folder+"/DKApps/"+APP+"/DKMAKE.cmake")){
 				appdir = folder+"/DKApps";
 			}
 		}

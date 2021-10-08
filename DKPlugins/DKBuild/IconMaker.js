@@ -2,7 +2,7 @@ const DKWEB = "http://127.0.0.1"
 const IMAGEMAGICK_VERSION = "7.1.0-4"
 const IMAGEMAGICK_NAME = "ImageMagick-"+IMAGEMAGICK_VERSION
 const IMAGEMAGICK_DL = "http://ftp.icm.edu.pl/packages/ImageMagick/binaries/" + IMAGEMAGICK_NAME + "-portable-Q16-x86.zip";
-const IMAGEMAGICK = DKPATH + "/DK/3rdParty/" + IMAGEMAGICK_NAME
+const IMAGEMAGICK = DIGITALKNOB + "/DK/3rdParty/" + IMAGEMAGICK_NAME
 const IMAGEMAGICK_CONVERT = IMAGEMAGICK + "/convert.exe";
 
 function IconMaker_init() {
@@ -73,8 +73,8 @@ function IconMaker_ValidateImageMagick() {
 }
 
 function IconMaker_InstallImageMagick() {
-    CPP_DKFile_MkDir(DKPATH + "/DK/Download");
-    var dlpath = DKPATH + "/DK/Download/" + IMAGEMAGICK_NAME + ".zip";
+    CPP_DKFile_MkDir(DIGITALKNOB + "/DK/Download");
+    var dlpath = DIGITALKNOB + "/DK/Download/" + IMAGEMAGICK_NAME + ".zip";
 
     CPP_DKCurl_Download(IMAGEMAGICK_DL, dlpath);
     CPP_DKArchive_Extract(dlpath, IMAGEMAGICK);

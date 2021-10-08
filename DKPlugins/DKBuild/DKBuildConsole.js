@@ -5,11 +5,11 @@ function DKBuildConsole_init() {
 	CPP_DK_Create("DKGit/DKGit.js")
 	
 	/*
-	let contents = CPP_DKFile_DirectoryContents(DKPATH)
+	let contents = CPP_DKFile_DirectoryContents(DIGITALKNOB)
 	let files = contents.split(",")
 	for(let i=0; i<files.length; i++){ 
-		if(CPP_DKFile_Exists(DKPATH+files[i]+"/DKApps")){
-			CPP_DKFile_ChDir(DKPATH+files[i])
+		if(CPP_DKFile_Exists(DIGITALKNOB+files[i]+"/DKApps")){
+			CPP_DKFile_ChDir(DIGITALKNOB+files[i])
 			const diff = CPP_DK_Execute("git diff")
 			if(diff)
 				console.log("*** THERE ARE CHANGES IN THE '"+files[i]+"' CODE BASE ***")
@@ -90,7 +90,7 @@ function DKBuildConsole_ChooseUpdate() {
     }
 	else if (key === 122){ //Clear Cmake Cache
 		console.log("Clearing CMake cache . . .")
-		CPP_DKFile_ChDir(DKPATH)
+		CPP_DKFile_ChDir(DIGITALKNOB)
 		if(CPP_DK_GetOS() === "Windows"){
 			CPP_DK_Execute("cmd /c for /r %i in (CMakeCache.*) do del \"%i\"")
 			CPP_DK_Execute("cmd /c for /d /r %i in (*CMakeFiles*) do rmdir /s /Q \"%i\"")
@@ -206,8 +206,8 @@ function DKBuildConsole_Process() {
     LEVEL = "RebuildAll"
 	while (UPDATE === "")
         DKBuildConsole_ChooseUpdate()
-    if (!CPP_DKFile_Exists(DKPATH)) {
-        console.error("ERROR: can't find " + DKPATH + " ")
+    if (!CPP_DKFile_Exists(DIGITALKNOB)) {
+        console.error("ERROR: can't find " + DIGITALKNOB + " ")
         CPP_DK_GetKey()
         CPP_DK_Exit()
     }

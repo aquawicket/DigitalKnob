@@ -79,11 +79,11 @@ function SvnMenu_InstallGit()
 	var assets = DKAssets_LocalAssets();
 	
 	if(DK_GetOS() === "Win32"){
-		DKCurl_Download("http://DigitalKnob.com/Download/Tools/Git-2.11.0-32-bit.exe", assets);
+		DKCurl_Download("http://TODO.com/Git-2.11.0-32-bit.exe", assets);
 		DK_System(assets+"Git-2.11.0-32-bit.exe");
 	}
 	else if(DK_GetOS() === "Win64"){
-		DKCurl_Download("http://DigitalKnob.com/Download/Tools/Git-2.11.0-64-bit.exe", assets);
+		DKCurl_Download("http://TODO.com/Git-2.11.0-64-bit.exe", assets);
 		DK_System(assets+"Git-2.11.0-64-bit.exe");
 	}
 	else if(DK_GetOS() === "Mac"){
@@ -105,22 +105,22 @@ function SvnMenu_GitUpdate()
 	}
 	
 	SVN("Git Update DigitalKnob...\n");
-	DK_Execute(SVN +" clone https://github.com/aquawicket/DigitalKnob.git "+DKPATH+"/DK");
-	DKFile_ChDir(DKPATH+"/DK");
+	DK_Execute(SVN +" clone https://github.com/aquawicket/DigitalKnob.git "+DIGITALKNOB+"/DK");
+	DKFile_ChDir(DIGITALKNOB+"/DK");
 	DK_Execute(SVN +" checkout -- .");
 	DK_Execute(SVN +" pull origin master");
 	
 	//Multipe user folders
-	var contents = DKFile_DirectoryContents(DKPATH);
+	var contents = DKFile_DirectoryContents(DIGITALKNOB);
 	var files = contents.split(",");
 	for(var i=0; i<files.length; i++){ //SVN("files["+i+"] = "+files[i]+"\n");
-		DKFile_ChDir(DKPATH);
+		DKFile_ChDir(DIGITALKNOB);
 		if(DKFile_IsDirectory(files[i])){ continue; }
 		var url = DKFile_GetSetting(files[i], "[MYSVN]");
 		if(url){ //SVN("url = "+url+"\n");
 			var folder = files[i].replace(".txt",""); //SVN("folder = "+folder+"\n");
 			SVN("Git Update "+folder+"...\n");
-			DK_Execute(SVN +" clone "+url+" "+DKPATH+"/"+folder);
+			DK_Execute(SVN +" clone "+url+" "+DIGITALKNOB+"/"+folder);
 			DK_Execute(SVN +" checkout -- .");
 			DK_Execute(SVN +" pull origin master");
 		}
@@ -142,28 +142,28 @@ function SvnMenu_GitCommit()
 	}
 	
 	SVN("Git Commit DigitalKnob...\n");
-	DKFile_ChDir(DKPATH+"/DK");
+	DKFile_ChDir(DIGITALKNOB+"/DK");
 	DK_Execute(SVN +" init");
 	DK_Execute(SVN +" config user.name \"dkuser\"");
-	DK_Execute(SVN +" config user.email \"dkuser@digitalknob.com\"");
+	DK_Execute(SVN +" config user.email \"dkuser@TODO.com\"");
 	DK_Execute(SVN +" commit -a -m \"commit from git\"");
 	DK_Execute(SVN +" config credential.helper store"); //store credentials 
 	DK_Execute(SVN +" push");
 	
 	//Multipe user folders
-	var contents = DKFile_DirectoryContents(DKPATH);
+	var contents = DKFile_DirectoryContents(DIGITALKNOB);
 	var files = contents.split(",");
 	for(var i=0; i<files.length; i++){ //SVN("files["+i+"] = "+files[i]+"\n");
-		DKFile_ChDir(DKPATH);
+		DKFile_ChDir(DIGITALKNOB);
 		if(DKFile_IsDirectory(files[i])){ continue; }
 		var url = DKFile_GetSetting(files[i], "[MYSVN]");
 		if(url){ //SVN("url = "+url+"\n");
 			var folder = files[i].replace(".txt",""); //SVN("folder = "+folder+"\n");
 			SVN("Git Commit "+folder+"...\n");
-			DKFile_ChDir(DKPATH+"/"+folder);
+			DKFile_ChDir(DIGITALKNOB+"/"+folder);
 			DK_Execute(SVN +" init");
 			DK_Execute(SVN +" config user.name \"dkuser\"");
-			DK_Execute(SVN +" config user.email \"dkuser@digitalknob.com\"");
+			DK_Execute(SVN +" config user.email \"dkuser@TODO.com\"");
 			DK_Execute(SVN +" commit -a -m \"commit from git\"");
 			DK_Execute(SVN +" config credential.helper store"); //store credentials 
 			DK_Execute(SVN +" push");

@@ -36,7 +36,7 @@ var hostname;
 if (!hostname) {
     hostname = window.location.hostname;
 }
-//if(!hostname){ hostname = "digitalknob.com"; }
+//if(!hostname){ hostname = "TODO.com"; }
 if (!hostname) {
     hostname = "127.0.0.1";
 }

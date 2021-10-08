@@ -5,7 +5,7 @@ let APP = ""  //DKAppname
 let TYPE = ""  //Debug, Release, ALL
 let LINK = ""  //Static, Dynamic
 let LEVEL = ""  //Build, Rebuild, RebuildAll
-let DKPATH = ""
+let DIGITALKNOB = ""
 let DKDOWNLOAD = ""
 let CMAKE = ""
 let ANDROIDNDK = ""
@@ -59,7 +59,7 @@ function DKBuild_init(){
 	CPP_DK_Create("DKArchive")
 
 	if(CPP_DK_GetOS() === "Windows"){
-		DKPATH = "C:/Users/"+USERNAME+"/digitalknob/"
+		DIGITALKNOB = "C:/Users/"+USERNAME+"/digitalknob/"
 		if(CPP_DK_GetOSArchitecture() === "32"){
 			CMAKE = "C:/Program Files/CMake/bin/cmake.exe"
 			VISUALSTUDIO = "C:/Program Files/Microsoft Visual Studio/"+VISUALSTUDIO_VERSION
@@ -74,32 +74,32 @@ function DKBuild_init(){
 		MSBUILD = CPP_DKFile_GetShortName(MSBUILD)
 	}
 	if(CPP_DK_GetOS() === "Mac"){
-		DKPATH = "/Users/"+USERNAME+"/digitalknob/"
+		DIGITALKNOB = "/Users/"+USERNAME+"/digitalknob/"
 		CMAKE = "/Applications/CMake.app/Contents/bin/cmake"
 		XCODE = "/Applications/Xcode.app"
 	}
 	if(CPP_DK_GetOS() === "Linux"){
-		DKPATH = "/home/"+USERNAME+"/digitalknob/"
+		DIGITALKNOB = "/home/"+USERNAME+"/digitalknob/"
 		CMAKE = "/usr/bin/cmake"
 		GCC = "/usr/bin/g++"
 	}
 	if(CPP_DK_GetOS() === "Raspberry"){
-		DKPATH = "/home/"+USERNAME+"/digitalknob/"
+		DIGITALKNOB = "/home/"+USERNAME+"/digitalknob/"
 		CMAKE = "/usr/bin/cmake"
 		GCC = "/usr/bin/g++"
 	}
 	
-	DKDOWNLOAD = DKPATH+"DK/Download"
+	DKDOWNLOAD = DIGITALKNOB+"DK/Download"
 	CPP_DKFile_MkDir(DKDOWNLOAD) //FIXME: code DKCurl to create directories automatically
 }
 
 function DKBuild_end(){
-	CPP_DKFile_Copy(CPP_DKFile_GetExePath(), DKPATH+CPP_DKFile_GetExeName(), true)
+	CPP_DKFile_Copy(CPP_DKFile_GetExePath(), DIGITALKNOB+CPP_DKFile_GetExeName(), true)
 }
 
 //This is and alternative way to get windows short paths
 function DKBuild_GetShortPath(fullPath){
-	let getShortPath = DKPATH+"DK/DKPlugins/DKFile/getShortPath.cmd"
+	let getShortPath = DIGITALKNOB+"DK/DKPlugins/DKFile/getShortPath.cmd"
 	let shortPath = CPP_DK_Execute(getShortPath+' "'+fullPath+'"')
 	//shortPath = shortPath.slice(0, -1)
 	while(shortPath.includes("\\")){
@@ -178,15 +178,15 @@ function DKBuild_ValidateXcode(){
 
 function DKBuild_InstallXcode(){
 	console.log("Installing Xcode")
-	//CPP_DKCurl_Download("http://DigitalKnob.com/Download/Tools/xcode4630916281a.dmg", DKDOWNLOAD)
+	//CPP_DKCurl_Download("http://TODO.com/xcode4630916281a.dmg", DKDOWNLOAD)
 	//TODO - Install Xcode
 }
 
 function DKBuild_ValidateNDK(){
     //GOAL: Eventually we'll use the DKMAKE.cmake script to install
-	const ANDROIDNDK_DL = DKBuild_GetDKMakeVariable(DKPATH+"DK/3rdParty/_DKIMPORTS/android-ndk/DKMAKE.cmake", "ANDROIDNDK_DL")
-	const ANDROIDNDK_VERSION = DKBuild_GetDKMakeVariable(DKPATH+"DK/3rdParty/_DKIMPORTS/android-ndk/DKMAKE.cmake", "ANDROIDNDK_VERSION")
-	ANDROIDNDK = DKPATH+"DK/3rdParty/android-ndk-"+ANDROIDNDK_VERSION
+	const ANDROIDNDK_DL = DKBuild_GetDKMakeVariable(DIGITALKNOB+"DK/3rdParty/_DKIMPORTS/android-ndk/DKMAKE.cmake", "ANDROIDNDK_DL")
+	const ANDROIDNDK_VERSION = DKBuild_GetDKMakeVariable(DIGITALKNOB+"DK/3rdParty/_DKIMPORTS/android-ndk/DKMAKE.cmake", "ANDROIDNDK_VERSION")
+	ANDROIDNDK = DIGITALKNOB+"DK/3rdParty/android-ndk-"+ANDROIDNDK_VERSION
 	
 	//set environment variables
 	if(ANDROIDNDK !== CPP_DK_Execute("echo %VS_NdkRoot%", "rt"))
@@ -198,7 +198,7 @@ function DKBuild_ValidateNDK(){
 		CPP_DKCurl_Download(ANDROIDNDK_DL, DKDOWNLOAD)
 		const index = ANDROIDNDK_DL.lastIndexOf("/")
 		const filename = ANDROIDNDK_DL.substring(index+1)
-		CPP_DKArchive_Extract(DKDOWNLOAD+"/"+filename, DKPATH+"DK/3rdParty")
+		CPP_DKArchive_Extract(DKDOWNLOAD+"/"+filename, DIGITALKNOB+"DK/3rdParty")
 		CPP_DKFile_StringToFile(ANDROIDNDK_VERSION, ANDROIDNDK+"/installed")
 	}
 }
@@ -321,63 +321,63 @@ function DKBuild_ResetAppsPlugins(){
 	console.log("Deleting Apps and Plugins... ")
 	
 	// Delete everything in DKApps except DKBuild
-	let apps = CPP_DKFile_DirectoryContents(DKPATH+"DK/DKApps")
+	let apps = CPP_DKFile_DirectoryContents(DIGITALKNOB+"DK/DKApps")
 	if(!apps)
 		console.error("DKBuild_ResetAppsPlugins(): apps invalid")
 	let list = apps.split(',')
 	for(let i=0; i<list.length; ++i){
 		if(list[i] === "DKBuilder"){ continue }
-		CPP_DKFile_Delete(DKPATH+"DK/DKApps/"+list[i])
+		CPP_DKFile_Delete(DIGITALKNOB+"DK/DKApps/"+list[i])
 	}
 	
 	//Multipe user folders
-	let contents = CPP_DKFile_DirectoryContents(DKPATH)
+	let contents = CPP_DKFile_DirectoryContents(DIGITALKNOB)
 	let files = contents.split(",")
 	for(let i=0; i<files.length; i++){
 		if(files[i].indexOf(".txt") <=1){ continue }
 		let url = CPP_DKFile_GetSetting(files[i], "[MYGIT]")
 		if(url){
 			let folder = files[i].replace(".txt","")
-			CPP_DKFile_Delete(DKPATH+folder)
+			CPP_DKFile_Delete(DIGITALKNOB+folder)
 		}
 	}
 	
 	// Delete DKPlugins
-	CPP_DKFile_Delete(DKPATH+"DK/DKPlugins")
+	CPP_DKFile_Delete(DIGITALKNOB+"DK/DKPlugins")
 }
 
 function DKBuild_Reset3rdParty(){
 	//TODO
 	console.log("Deleting 3rdParty... ")
 	console.log("Please wait. ")
-	CPP_DKFile_Delete(DKPATH+"DK/3rdParty")
+	CPP_DKFile_Delete(DIGITALKNOB+"DK/3rdParty")
 }
 
 function DKBuild_GetAppList(){
 	//DKApps folder
-	let apps = CPP_DKFile_DirectoryContents(DKPATH+"DK/DKApps")
+	let apps = CPP_DKFile_DirectoryContents(DIGITALKNOB+"DK/DKApps")
 	if(!apps){ return }
 	APP_LIST = apps.split(",")
 	for(let i=0; i<APP_LIST.length; i++){
-		if(!CPP_DKFile_IsDirectory(DKPATH+"DK/DKApps/"+APP_LIST[i]) || APP_LIST[i] === ".svn"){
+		if(!CPP_DKFile_IsDirectory(DIGITALKNOB+"DK/DKApps/"+APP_LIST[i]) || APP_LIST[i] === ".svn"){
 			APP_LIST.splice(i, 1)
 			i=0
 		}
 	}
 
 	//User DKApps folders
-	let contents = CPP_DKFile_DirectoryContents(DKPATH)
+	let contents = CPP_DKFile_DirectoryContents(DIGITALKNOB)
 	let files = contents.split(",")
 	for(let i=0; i<files.length; i++){ 
 		if(files[i].indexOf(".txt") <=1){ continue }
-		let url = CPP_DKFile_GetSetting(DKPATH+files[i], "[MYGIT]")
+		let url = CPP_DKFile_GetSetting(DIGITALKNOB+files[i], "[MYGIT]")
 		if(url){ 
 			let folder = files[i].replace(".txt","") 
-			let apps2 = CPP_DKFile_DirectoryContents(DKPATH+folder+"/DKApps")
+			let apps2 = CPP_DKFile_DirectoryContents(DIGITALKNOB+folder+"/DKApps")
 			if(apps2){
 				let APP_LIST2 = apps2.split(",")
 				for(let b=0; b<APP_LIST2.length; b++){
-					if(!CPP_DKFile_IsDirectory(DKPATH+folder+"/DKApps/"+APP_LIST2[b]) || APP_LIST2[b] === ".svn" || APP_LIST2[b] === ".git"){
+					if(!CPP_DKFile_IsDirectory(DIGITALKNOB+folder+"/DKApps/"+APP_LIST2[b]) || APP_LIST2[b] === ".svn" || APP_LIST2[b] === ".git"){
 						APP_LIST2.splice(b, 1)
 						b=0
 					}
@@ -422,13 +422,13 @@ function DKBuild_DoResults(){
 	cmake_string = cmake_string.replace("  "," ")
 	let DKApps = "DKApps"
 	
-	let contents = CPP_DKFile_DirectoryContents(DKPATH)
+	let contents = CPP_DKFile_DirectoryContents(DIGITALKNOB)
 	let files = contents.split(",")
 	for(let i=0; i<files.length; i++){ 
-		if(CPP_DKFile_Exists(DKPATH+files[i]+"/DKApps/"+APP))
+		if(CPP_DKFile_Exists(DIGITALKNOB+files[i]+"/DKApps/"+APP))
 			DKApps = files[i]+"/DKApps"
 	}
-	const app_path = DKPATH+DKApps+"/"+APP+"/"
+	const app_path = DIGITALKNOB+DKApps+"/"+APP+"/"
 	// NOTE: This was moved into DKCMake build scripts
 	/*
 	//// Create Icons
@@ -450,7 +450,7 @@ function DKBuild_DoResults(){
 		CPP_DKFile_MkDir(app_path+OS)
 		CPP_DKFile_ChDir(app_path+OS)
 		
-		const command = CMAKE+" -G \"Visual Studio 16 2019\" -A Win32 "+cmake_string+DKPATH+"DK"
+		const command = CMAKE+" -G \"Visual Studio 16 2019\" -A Win32 "+cmake_string+DIGITALKNOB+"DK"
 		console.log("COMMAND -->  "+command)
 		let rtvalue = CPP_DK_Execute(command)
 		if(rtvalue.indexOf("errors occurred!") > -1) 
@@ -470,9 +470,9 @@ function DKBuild_DoResults(){
 		
 		//upx compress the exe file
 		/*
-		if(CPP_DKFile_Exists(DKPATH+"DK/3rdParty/upx-3.95-win64/upx.exe")){
+		if(CPP_DKFile_Exists(DIGITALKNOB+"DK/3rdParty/upx-3.95-win64/upx.exe")){
 			console.warn("UPX compressing exe... please wait")
-			CPP_DK_Execute(DKPATH+"DK/3rdParty/upx-3.95-win64/upx.exe -9 -v "+app_path+OS+"/Release/"+APP+".exe")
+			CPP_DK_Execute(DIGITALKNOB+"DK/3rdParty/upx-3.95-win64/upx.exe -9 -v "+app_path+OS+"/Release/"+APP+".exe")
 		}
 		else
 			console.warn("DKBuild_DoResults(): UPX does not exists")
@@ -490,7 +490,7 @@ function DKBuild_DoResults(){
 		}
 		CPP_DKFile_MkDir(app_path+OS)
 		CPP_DKFile_ChDir(app_path+OS)
-		let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Visual Studio 16 2019\" -A x64 "+cmake_string+DKPATH+"DK")
+		let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Visual Studio 16 2019\" -A x64 "+cmake_string+DIGITALKNOB+"DK")
 		if(rtvalue.indexOf("errors occurred!") > -1) 
 			return
 		
@@ -508,9 +508,9 @@ function DKBuild_DoResults(){
 		
 		//upx compress the exe file
 		/*
-		if(CPP_DKFile_Exists(DKPATH+"3rdParty/upx-3.95-win64/upx.exe")){
+		if(CPP_DKFile_Exists(DIGITALKNOB+"3rdParty/upx-3.95-win64/upx.exe")){
 			console.warn("UPX compressing exe... please wait")
-			CPP_DK_Execute(DKPATH+"3rdParty/upx-3.95-win64/upx.exe -9 -v "+app_path+OS+"/Release/"+APP+".exe")
+			CPP_DK_Execute(DIGITALKNOB+"3rdParty/upx-3.95-win64/upx.exe -9 -v "+app_path+OS+"/Release/"+APP+".exe")
 		}
 		else{
 			console.warn("DKBuild_DoResults(): UPX does not exists")
@@ -523,7 +523,7 @@ function DKBuild_DoResults(){
 		DKBuild_ValidateXcode()
 		CPP_DKFile_MkDir(app_path+OS)
 		CPP_DKFile_ChDir(app_path+OS)
-		let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Xcode\" -DCMAKE_OSX_ARCHITECTURES=i386 "+cmake_string+DKPATH+"DK")
+		let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Xcode\" -DCMAKE_OSX_ARCHITECTURES=i386 "+cmake_string+DIGITALKNOB+"DK")
 		if(rtvalue.indexOf("errors occurred!") > -1){ return }
 		
 		if(TYPE === "Debug" || TYPE === "ALL"){
@@ -551,7 +551,7 @@ function DKBuild_DoResults(){
 		DKBuild_ValidateXcode()
 		CPP_DKFile_MkDir(app_path+OS)
 		CPP_DKFile_ChDir(app_path+OS)
-		let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Xcode\" -DCMAKE_OSX_ARCHITECTURES=x86_64 "+cmake_string+DKPATH+"DK")
+		let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Xcode\" -DCMAKE_OSX_ARCHITECTURES=x86_64 "+cmake_string+DIGITALKNOB+"DK")
 		if(rtvalue.indexOf("errors occurred!") > -1){ return }
 		
 		if(TYPE === "Debug" || TYPE === "ALL"){
@@ -620,7 +620,7 @@ function DKBuild_DoResults(){
 		DKBuild_ValidateXcode()
 		CPP_DKFile_MkDir(app_path+OS)
 		CPP_DKFile_ChDir(app_path+OS)
-		let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Xcode\" "+cmake_string+"-DCMAKE_TOOLCHAIN_FILE="+DKPATH+"DKCMake/iOS.cmake -DIOS_PLATFORM=OS "+DKPATH+"DK")
+		let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Xcode\" "+cmake_string+"-DCMAKE_TOOLCHAIN_FILE="+DIGITALKNOB+"DKCMake/iOS.cmake -DIOS_PLATFORM=OS "+DIGITALKNOB+"DK")
 		if(rtvalue.indexOf("errors occurred!") > -1) 
 			return 
 		if(TYPE === "Debug" || TYPE === "ALL")
@@ -636,7 +636,7 @@ function DKBuild_DoResults(){
 		DKBuild_ValidateXcode()
 		CPP_DKFile_MkDir(app_path+OS)
 		CPP_DKFile_ChDir(app_path+OS)
-		let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Xcode\" "+cmake_string+"-DCMAKE_TOOLCHAIN_FILE="+DKPATH+"DKCMake/iOS.cmake -DIOS_PLATFORM=OS "+DKPATH+"DK")
+		let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Xcode\" "+cmake_string+"-DCMAKE_TOOLCHAIN_FILE="+DIGITALKNOB+"DKCMake/iOS.cmake -DIOS_PLATFORM=OS "+DIGITALKNOB+"DK")
 		if(rtvalue.indexOf("errors occurred!") > -1)
 			return
 		if(TYPE === "Debug" || TYPE === "ALL")
@@ -652,7 +652,7 @@ function DKBuild_DoResults(){
 		DKBuild_ValidateXcode()
 		CPP_DKFile_MkDir(app_path+OS)
 		CPP_DKFile_ChDir(app_path+OS)
-		let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Xcode\" "+cmake_string+"-DCMAKE_TOOLCHAIN_FILE="+DKPATH+"DKCMake/iOS.cmake -DIOS_PLATFORM=SIMULATOR "+DKPATH+"DK")
+		let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Xcode\" "+cmake_string+"-DCMAKE_TOOLCHAIN_FILE="+DIGITALKNOB+"DKCMake/iOS.cmake -DIOS_PLATFORM=SIMULATOR "+DIGITALKNOB+"DK")
 		if(rtvalue.indexOf("errors occurred!") > -1) 
 			return
 		if(TYPE === "Debug" || TYPE === "ALL")
@@ -668,7 +668,7 @@ function DKBuild_DoResults(){
 		DKBuild_ValidateXcode()
 		CPP_DKFile_MkDir(app_path+OS)
 		CPP_DKFile_ChDir(app_path+OS)
-		let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Xcode\" "+cmake_string+"-DCMAKE_TOOLCHAIN_FILE="+DKPATH+"DKCMake/iOS.cmake -DIOS_PLATFORM=SIMULATOR64 "+DKPATH+"DK")
+		let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Xcode\" "+cmake_string+"-DCMAKE_TOOLCHAIN_FILE="+DIGITALKNOB+"DKCMake/iOS.cmake -DIOS_PLATFORM=SIMULATOR64 "+DIGITALKNOB+"DK")
 		if(rtvalue.indexOf("errors occurred!") > -1) 
 			return
 		if(TYPE === "Debug" || TYPE === "ALL")
@@ -688,7 +688,7 @@ function DKBuild_DoResults(){
 			cmake_string = cmake_string.replace("-DRELEASE=ON ", "");
 			CPP_DKFile_MkDir(app_path+OS+"/Debug")
 			CPP_DKFile_ChDir(app_path+OS+"/Debug")
-			let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DKPATH+"DK")
+			let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DIGITALKNOB+"DK")
 			if(rtvalue.indexOf("errors occurred!") > -1) 
 				return
 			CPP_DKFile_Rename(app_path+OS+"/Debug/"+APP, app_path+OS+"/Debug/"+APP+"_OLD", true)
@@ -710,7 +710,7 @@ function DKBuild_DoResults(){
 			cmake_string = cmake_string.replace("-DDEBUG=ON ", "");
 			CPP_DKFile_MkDir(app_path+OS+"/Release")
 			CPP_DKFile_ChDir(app_path+OS+"/Release")
-			let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DKPATH+"DK")
+			let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DIGITALKNOB+"DK")
 			if(rtvalue.indexOf("errors occurred!") > -1) 
 				return
 			CPP_DKFile_Rename(app_path+OS+"/Release/"+APP, app_path+OS+"/Release/"+APP+"_OLD", true)
@@ -741,8 +741,8 @@ function DKBuild_DoResults(){
 			cmake_string = cmake_string.replace("-DRELEASE=ON ", "");
 			CPP_DKFile_MkDir(app_path+OS+"/Debug")
 			CPP_DKFile_ChDir(app_path+OS+"/Debug")
-			console.log(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DKPATH+"DK")
-			let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DKPATH+"DK")
+			console.log(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DIGITALKNOB+"DK")
+			let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DIGITALKNOB+"DK")
 			if(rtvalue.indexOf("errors occurred!") > -1) 
 				return
 			CPP_DKFile_Rename(app_path+OS+"/Debug/"+APP, app_path+OS+"/Debug/"+APP+"_OLD", true)
@@ -764,8 +764,8 @@ function DKBuild_DoResults(){
 			cmake_string = cmake_string.replace("-DDEBUG=ON ", "");
 			CPP_DKFile_MkDir(app_path+OS+"/Release")
 			CPP_DKFile_ChDir(app_path+OS+"/Release")
-			console.log(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DKPATH+"DK")
-			let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DKPATH+"DK")
+			console.log(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DIGITALKNOB+"DK")
+			let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DIGITALKNOB+"DK")
 			if(rtvalue.indexOf("errors occurred!") > -1)
 				return
 			CPP_DKFile_Rename(app_path+OS+"/Release/"+APP, app_path+OS+"/Release/"+APP+"_OLD", true)
@@ -795,7 +795,7 @@ function DKBuild_DoResults(){
 			cmake_string = cmake_string.replace("-DRELEASE=ON ", "");
 			CPP_DKFile_MkDir(app_path+OS+"/Debug")
 			CPP_DKFile_ChDir(app_path+OS+"/Debug")
-			let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DKPATH+"DK")
+			let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DIGITALKNOB+"DK")
 			if(rtvalue.indexOf("Error 1") > -1) 
 				return
 			if(rtvalue.indexOf("errors occurred!") > -1)
@@ -819,7 +819,7 @@ function DKBuild_DoResults(){
 			cmake_string = cmake_string.replace("-DDEBUG=ON ", "");
 			CPP_DKFile_MkDir(app_path+OS+"/Release")
 			CPP_DKFile_ChDir(app_path+OS+"/Release")
-			let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DKPATH+"DK")
+			let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DIGITALKNOB+"DK")
 			if(rtvalue.indexOf("errors occurred!") > -1)
 				return //FIXME: this doesn't catch all build errors
 			CPP_DKFile_Rename(app_path+OS+"/Release/"+APP, app_path+OS+"/Release/"+APP+"_OLD", true)
@@ -849,7 +849,7 @@ function DKBuild_DoResults(){
 			cmake_string = cmake_string.replace("-DRELEASE=ON ", "");
 			CPP_DKFile_MkDir(app_path+OS+"/Debug")
 			CPP_DKFile_ChDir(app_path+OS+"/Debug")
-			let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DKPATH+"DK")
+			let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DIGITALKNOB+"DK")
 			if(rtvalue.indexOf("errors occurred!") > -1) 
 				return //FIXME: this doesn't catch all build errors
 			CPP_DKFile_Rename(app_path+OS+"/Debug/"+APP, app_path+OS+"/Debug/"+APP+"_OLD", true)
@@ -870,7 +870,7 @@ function DKBuild_DoResults(){
 			cmake_string = cmake_string.replace("-DDEBUG=ON ", "");
 			CPP_DKFile_MkDir(app_path+OS+"/Release")
 			CPP_DKFile_ChDir(app_path+OS+"/Release")
-			let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DKPATH+"DK")
+			let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DIGITALKNOB+"DK")
 			if(rtvalue.indexOf("errors occurred!") > -1) 
 				return  //FIXME: this doesn't catch all build errors
 			CPP_DKFile_Rename(app_path+OS+"/Release/"+APP, app_path+OS+"/Release/"+APP+"_OLD", true)
@@ -898,9 +898,9 @@ function DKBuild_DoResults(){
 		CPP_DKFile_MkDir(app_path+"android32")
 		CPP_DKFile_ChDir(app_path+"android32")
 		if(CPP_DK_GetOS() === "Windows")
-			let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Visual Studio 16 2019\" -A ARM -DCMAKE_SYSTEM_NAME=Android -DCMAKE_SYSTEM_VERSION=26 -DCMAKE_ANDROID_ARCH_ABI=armeabi-v7a -DCMAKE_ANDROID_NDK="+ANDROIDNDK+" -DCMAKE_ANDROID_STL_TYPE=c++_static -DCMAKE_CXX_STANDARD=17 -DCMAKE_CXX_EXTENSIONS=OFF -DANDROID_32=ON "+cmake_string+DKPATH+"DK")
+			let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Visual Studio 16 2019\" -A ARM -DCMAKE_SYSTEM_NAME=Android -DCMAKE_SYSTEM_VERSION=26 -DCMAKE_ANDROID_ARCH_ABI=armeabi-v7a -DCMAKE_ANDROID_NDK="+ANDROIDNDK+" -DCMAKE_ANDROID_STL_TYPE=c++_static -DCMAKE_CXX_STANDARD=17 -DCMAKE_CXX_EXTENSIONS=OFF -DANDROID_32=ON "+cmake_string+DIGITALKNOB+"DK")
 		if(CPP_DK_GetOS() === "Linux" || CPP_DK_GetOS() === "Mac")
-			rtvalue = CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DKPATH+"DK")
+			rtvalue = CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DIGITALKNOB+"DK")
 		if(rtvalue.indexOf("errors occurred!") > -1) 
 			return 
 			
@@ -934,9 +934,9 @@ function DKBuild_DoResults(){
 		CPP_DKFile_MkDir(app_path+"android64")
 		CPP_DKFile_ChDir(app_path+"android64")
 		if(CPP_DK_GetOS() === "Windows")
-			let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Visual Studio 16 2019\" -A ARM64 -DCMAKE_TOOLCHAIN_FILE="+ANDROIDNDK+"/build/cmake/android.toolchain.cmake -DANDROIDNDK="+ANDROIDNDK+" -DANDROID_ABI=arm64-v8a -DANDROID_NATIVE_API_LEVEL=24 –DCMAKE_SYSTEM_NAME=ANDROID "+cmake_string+DKPATH+"DK")
+			let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Visual Studio 16 2019\" -A ARM64 -DCMAKE_TOOLCHAIN_FILE="+ANDROIDNDK+"/build/cmake/android.toolchain.cmake -DANDROIDNDK="+ANDROIDNDK+" -DANDROID_ABI=arm64-v8a -DANDROID_NATIVE_API_LEVEL=24 –DCMAKE_SYSTEM_NAME=ANDROID "+cmake_string+DIGITALKNOB+"DK")
 		if(CPP_DK_GetOS() === "Linux" || CPP_DK_GetOS() === "Mac")
-			rtvalue = CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DKPATH+"DK")
+			rtvalue = CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DIGITALKNOB+"DK")
 		if(rtvalue.indexOf("errors occurred!") > -1) 
 			return 
 		
