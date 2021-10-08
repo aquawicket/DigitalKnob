@@ -82,6 +82,10 @@ endfunction()
 
 
 function(DKSET variable value)
+	#if(${variable} STREQUAL "DKPATH")
+	#	message(FATAL_ERROR "replace DKPATH with DIGITALKNOB")
+	#	Wait()
+	#endif()
 	set(${variable} ${value} ${ARGN} CACHE INTERNAL "")
 	#show library versions
 	dk_includes(${variable} "_VERSION" result)

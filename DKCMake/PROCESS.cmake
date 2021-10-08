@@ -1046,4 +1046,20 @@ message(STATUS "**************************************************")
 message(STATUS "****** Generated ${APP_NAME} - ${OS}  ************")
 message(STATUS "**************************************************\n")
 
-#add_custom_command(TARGET ${APP_NAME} POST_BUILD COMMAND ${CMAKE_COMMAND} -E echo "TEST: is this AFTER project generation?")
+
+# https://gist.github.com/baiwfg2/39881ba703e9c74e95366ed422641609
+#add_custom_command(TARGET ${APP_NAME}
+#    # Run after all other rules within the target have been executed
+#    POST_BUILD
+#    COMMAND echo -e "\texecuting a POST_BUILD command"
+#    COMMENT "This command will be executed after building bar"
+#    VERBATIM
+#)
+
+#add_custom_command(TARGET ${APP_NAME}
+#   # Run after all other rules within the target have been executed
+#    POST_BUILD
+#    COMMAND "${3RDPARTY}/upx-3.96/upx.exe" "-9 -v ${DKPROJECT}/${OS}/Release/${APP_NAME}.exe"
+#    COMMENT "This command will be executed after building bar"
+#    VERBATIM
+#)
