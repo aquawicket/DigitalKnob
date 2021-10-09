@@ -1,5 +1,7 @@
 # https://www.libsdl.org/
 #
+# https://stackoverflow.com/a/57734435/688352
+#
 # https://www.libsdl.org/release/SDL2-2.0.14.zip
 # https://www.libsdl.org/release/SDL2-2.0.16.zip
 
