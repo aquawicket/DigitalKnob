@@ -127,7 +127,7 @@ jstring CallCppFunction(JNIEnv* env, jclass cls, jstring data){
 	jstring str = (jstring)env->NewObject(strClass, ctorID, bytes, encoding);
 	return str;
 	/*
-	////////   SDL  /////////////////////////////////
+	////   SDL  ////
 	if(same(arry[0],"DKAndroid_onDropFile"))
 		DKClass::CallFunc("DKAndroid_onDropFile", static_cast<void*>(&jdata));
 	if(same(arry[0],"DKAndroid_onResize"))
@@ -174,7 +174,7 @@ jstring CallCppFunction(JNIEnv* env, jclass cls, jstring data){
 		DKClass::CallFunc("DKAndroid_onComposingText", static_cast<void*>(&jdata));
 	if(same(arry[0],"DKAndroid_onGetHint"))
 		return static_cast<jstring>(DKClass::CallFunc("DKAndroid_onGetHint", static_cast<void*>(&jdata)));
-	///////   OpenSceneGraph ////////////////
+	////   OpenSceneGraph ////
 	if(same(arry[0],"DKAndroid_onMousePress"))
 		DKClass::CallFunc("DKAndroid_onMousePress", static_cast<void*>(&jdata));
 	if(same(arry[0],"DKAndroid_onMouseRelease"))

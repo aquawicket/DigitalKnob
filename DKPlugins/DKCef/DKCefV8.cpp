@@ -4,18 +4,15 @@
 #include "DKDuktape/DKDuktape.h"
 #include "DKCef/DKCefV8.h"
 
-////////////////////
 bool DKCefV8::Init()
 {
 	DKClass::DKCreate("DKFileV8");
 	DKClass::DKCreate("DKAssetsV8");
 	
 	DKV8::AttachFunction("TestFunction", DKCefV8::TestFunction);
-
 	DKV8::AttachFunction("CPP_DK_Create", DKCefV8::_DKCreate);
 	DKV8::AttachFunction("CPP_DK_SetLog", DKCefV8::_SetLog);
 	DKV8::AttachFunction("CPP_DK_Valid", DKCefV8::_DKValid);
-	
 	DKV8::AttachFunction("CPP_DK_Beep", DKCefV8::Beep);
 	DKV8::AttachFunction("CPP_DK_ClickImage", DKCefV8::ClickImage);
 	DKV8::AttachFunction("CPP_DK_CpuUsed", DKCefV8::CpuUsed);
@@ -93,20 +90,14 @@ bool DKCefV8::Init()
 	DKV8::AttachFunction("CPP_DKCef_ShowDevTools", DKCefV8::ShowDevTools);
 	DKV8::AttachFunction("CPP_DKCef_Stop", DKCefV8::Stop);
 	DKV8::AttachFunction("CPP_DKCef_ViewPageSource", DKCefV8::ViewPageSource);
-
 	return true;
 }
 
-///////////////////
-bool DKCefV8::End()
-{
+bool DKCefV8::End(){
 	return true;
 }
 
-
-//////////////////////////////////////////////////////////
-bool DKCefV8::TestFunction(CefArgs args, CefReturn retval)
-{
+bool DKCefV8::TestFunction(CefArgs args, CefReturn retval){
 	DKDEBUGFUNC(args, retval);
 	int num = args->GetInt(0);
 	bool yn = args->GetBool(1);
@@ -117,26 +108,20 @@ bool DKCefV8::TestFunction(CefArgs args, CefReturn retval)
 	return true;
 }
 
-//////////////////////////////////////////////////////////
-bool DKCefV8::_DKCreate(CefArgs args, CefReturn retval)
-{
+bool DKCefV8::_DKCreate(CefArgs args, CefReturn retval){
 	DKDEBUGFUNC(args, retval);
 	DKString data = args->GetString(0);
 	DKClass::DKCreate(data);
 	return true;
 }
 
-/////////////////////////////////////////////////////
-bool DKCefV8::_Reload(CefArgs args, CefReturn retval)
-{
+bool DKCefV8::_Reload(CefArgs args, CefReturn retval){
 	DKDEBUGFUNC(args, retval);
 	DKDuktape::Reload();
 	return 1;
 }
 
-/////////////////////////////////////////////////////
-bool DKCefV8::_SetLog(CefArgs args, CefReturn retval)
-{
+bool DKCefV8::_SetLog(CefArgs args, CefReturn retval){
 	DKDEBUGFUNC(args, retval);
 	int lvl = args->GetInt(0);
 	DKString string = args->GetString(1);
@@ -144,9 +129,7 @@ bool DKCefV8::_SetLog(CefArgs args, CefReturn retval)
 	return true;
 }
 
-//////////////////////////////////////////////////////
-bool DKCefV8::_DKValid(CefArgs args, CefReturn retval)
-{
+bool DKCefV8::_DKValid(CefArgs args, CefReturn retval){
 	DKString data = args->GetString(0);
 	bool valid = DKClass::DKValid(data);
 	if(!valid){
@@ -158,18 +141,13 @@ bool DKCefV8::_DKValid(CefArgs args, CefReturn retval)
 }
 
 
-
-//////////////////////////////////////////////////
-bool DKCefV8::Beep(CefArgs args, CefReturn retval)
-{
+bool DKCefV8::Beep(CefArgs args, CefReturn retval){
 	DKDEBUGFUNC(args, retval);
 	DKUtil::Beep();
 	return true;
 }
 
-////////////////////////////////////////////////////////
-bool DKCefV8::ClickImage(CefArgs args, CefReturn retval)
-{
+bool DKCefV8::ClickImage(CefArgs args, CefReturn retval){
 	DKDEBUGFUNC(args, retval);
 	DKString file = args->GetString(0);
 	int x;
@@ -181,9 +159,7 @@ bool DKCefV8::ClickImage(CefArgs args, CefReturn retval)
 	return true;
 }
 
-/////////////////////////////////////////////////////
-bool DKCefV8::CpuUsed(CefArgs args, CefReturn retval)
-{
+bool DKCefV8::CpuUsed(CefArgs args, CefReturn retval){
 	DKDEBUGFUNC(args, retval);
 	int cpu;
 	if(!DKUtil::CpuUsed(cpu)){ return false; }
@@ -191,18 +167,15 @@ bool DKCefV8::CpuUsed(CefArgs args, CefReturn retval)
 	return true;
 }
 
-//////////////////////////////////////////////////////////
-bool DKCefV8::CpuUsedByApp(CefArgs args, CefReturn retval)
-{
+bool DKCefV8::CpuUsedByApp(CefArgs args, CefReturn retval){
 	DKDEBUGFUNC(args, retval);
 	int cpu;
 	if(!DKUtil::CpuUsedByApp(cpu)){ return false; }
 	if(!retval->SetInt(0, cpu)){ return false; }
 	return true;
 }
-//////////////////////////////////////////////////////////////
-bool DKCefV8::DrawTextOnScreen(CefArgs args, CefReturn retval)
-{
+
+bool DKCefV8::DrawTextOnScreen(CefArgs args, CefReturn retval){
 	DKDEBUGFUNC(args, retval);
 	DKString text = args->GetString(0);
 	if(!DKUtil::DrawTextOnScreen(text)){ 
@@ -230,17 +203,13 @@ bool DKCefV8::Execute(CefArgs args, CefReturn retval){
 	return true;
 }
 
-//////////////////////////////////////////////////
-bool DKCefV8::Exit(CefArgs args, CefReturn retval)
-{
+bool DKCefV8::Exit(CefArgs args, CefReturn retval){
 	DKDEBUGFUNC(args, retval);
 	DKApp::Exit();
 	return true;
 }
 
-//////////////////////////////////////////////////////////
-bool DKCefV8::GetClipboard(CefArgs args, CefReturn retval)
-{
+bool DKCefV8::GetClipboard(CefArgs args, CefReturn retval){
 	DKDEBUGFUNC(args, retval);
 	DKString string;
 	if(!DKUtil::GetClipboard(string)){ return false; }
@@ -248,9 +217,7 @@ bool DKCefV8::GetClipboard(CefArgs args, CefReturn retval)
 	return true;
 }
 
-////////////////////////////////////////////////////
-bool DKCefV8::GetFps(CefArgs args, CefReturn retval)
-{
+bool DKCefV8::GetFps(CefArgs args, CefReturn retval){
 	DKDEBUGFUNC(args, retval);
 	unsigned int fps;
 	DKUtil::GetFps(fps);
@@ -258,9 +225,7 @@ bool DKCefV8::GetFps(CefArgs args, CefReturn retval)
 	return true;
 }
 
-///////////////////////////////////////////////////////
-bool DKCefV8::GetFrames(CefArgs args, CefReturn retval)
-{
+bool DKCefV8::GetFrames(CefArgs args, CefReturn retval){
 	DKDEBUGFUNC(args, retval);
 	long frames;
 	if(!DKUtil::GetFrames(frames)){ return false; }
@@ -268,9 +233,7 @@ bool DKCefV8::GetFrames(CefArgs args, CefReturn retval)
 	return true;
 }
 
-//////////////////////////////////////////////////////////
-bool DKCefV8::GetFunctions(CefArgs args, CefReturn retval)
-{
+bool DKCefV8::GetFunctions(CefArgs args, CefReturn retval){
 	DKDEBUGFUNC(args, retval);
 #ifndef MAC
 	DKStringArray list;
@@ -286,9 +249,7 @@ bool DKCefV8::GetFunctions(CefArgs args, CefReturn retval)
 	return false;
 }
 
-////////////////////////////////////////////////////////
-bool DKCefV8::GetLocalIP(CefArgs args, CefReturn retval)
-{
+bool DKCefV8::GetLocalIP(CefArgs args, CefReturn retval){
 	DKDEBUGFUNC(args, retval);
 	DKString ip;
 	if(!DKUtil::GetLocalIP(ip)){ return false; }
@@ -296,9 +257,7 @@ bool DKCefV8::GetLocalIP(CefArgs args, CefReturn retval)
 	return true;
 }
 
-///////////////////////////////////////////////////////
-bool DKCefV8::GetMouseX(CefArgs args, CefReturn retval)
-{
+bool DKCefV8::GetMouseX(CefArgs args, CefReturn retval){
 	DKDEBUGFUNC(args, retval);
 	int mouseX = 0;
 	int mouseY = 0;
@@ -307,9 +266,7 @@ bool DKCefV8::GetMouseX(CefArgs args, CefReturn retval)
 	return true;
 }
 
-///////////////////////////////////////////////////////
-bool DKCefV8::GetMouseY(CefArgs args, CefReturn retval)
-{
+bool DKCefV8::GetMouseY(CefArgs args, CefReturn retval){
 	DKDEBUGFUNC(args, retval);
 	int mouseX = 0;
 	int mouseY = 0;
@@ -318,9 +275,7 @@ bool DKCefV8::GetMouseY(CefArgs args, CefReturn retval)
 	return true;
 }
 
-////////////////////////////////////////////////////////////////
-bool DKCefV8::GetPixelUnderMouse(CefArgs args, CefReturn retval)
-{
+bool DKCefV8::GetPixelUnderMouse(CefArgs args, CefReturn retval){
 	DKDEBUGFUNC(args, retval);
 	int mouseX = 0;
 	int mouseY = 0;
@@ -334,9 +289,7 @@ bool DKCefV8::GetPixelUnderMouse(CefArgs args, CefReturn retval)
 	return true;
 }
 
-/////////////////////////////////////////////////////////////
-bool DKCefV8::GetScreenHeight(CefArgs args, CefReturn retval)
-{
+bool DKCefV8::GetScreenHeight(CefArgs args, CefReturn retval){
 	DKDEBUGFUNC(args, retval);
 	int h;
 	if(!DKUtil::GetScreenHeight(h)){ return false; }
@@ -344,9 +297,7 @@ bool DKCefV8::GetScreenHeight(CefArgs args, CefReturn retval)
 	return true;
 }
 
-////////////////////////////////////////////////////////////
-bool DKCefV8::GetScreenWidth(CefArgs args, CefReturn retval)
-{
+bool DKCefV8::GetScreenWidth(CefArgs args, CefReturn retval){
 	DKDEBUGFUNC(args, retval);
 	int w;
 	if(!DKUtil::GetScreenWidth(w)){ return false; }
@@ -354,9 +305,7 @@ bool DKCefV8::GetScreenWidth(CefArgs args, CefReturn retval)
 	return true;
 }
 
-//////////////////////////////////////////////////////
-bool DKCefV8::GetTicks(CefArgs args, CefReturn retval)
-{
+bool DKCefV8::GetTicks(CefArgs args, CefReturn retval){
 	DKDEBUGFUNC(args, retval);
 	long ticks;
 	if(!DKUtil::GetTicks(ticks)){ return false; }
@@ -364,9 +313,7 @@ bool DKCefV8::GetTicks(CefArgs args, CefReturn retval)
 	return true;
 }
 
-///////////////////////////////////////////////////////
-bool DKCefV8::GetVolume(CefArgs args, CefReturn retval)
-{
+bool DKCefV8::GetVolume(CefArgs args, CefReturn retval){
 	DKDEBUGFUNC(args, retval);
 	int percent;
 	if(!DKUtil::GetVolume(percent)){ return false; }
@@ -375,9 +322,7 @@ bool DKCefV8::GetVolume(CefArgs args, CefReturn retval)
 	return 1;
 }
 
-/////////////////////////////////////////////////////////
-bool DKCefV8::HideConsole(CefArgs args, CefReturn retval)
-{
+bool DKCefV8::HideConsole(CefArgs args, CefReturn retval){
 	DKDEBUGFUNC(args, retval);
 #ifdef WIN32
 	HWND consoleWindow = GetConsoleWindow();
@@ -386,24 +331,18 @@ bool DKCefV8::HideConsole(CefArgs args, CefReturn retval)
 	return true;
 }
 
-///////////////////////////////////////////////////////
-bool DKCefV8::LeftClick(CefArgs args, CefReturn retval)
-{
+bool DKCefV8::LeftClick(CefArgs args, CefReturn retval){
 	DKDEBUGFUNC(args, retval);
 	return DKUtil::LeftClick();
 }
 
-/////////////////////////////////////////////////////////////
-bool DKCefV8::LowPowerMonitor(CefArgs args, CefReturn retval)
-{
+bool DKCefV8::LowPowerMonitor(CefArgs args, CefReturn retval){
 	DKDEBUGFUNC(args, retval);
 	if(!DKUtil::LowPowerMonitor()){ return false; }
 	return true;
 }
 
-////////////////////////////////////////////////////////////
-bool DKCefV8::PhysicalMemory(CefArgs args, CefReturn retval)
-{
+bool DKCefV8::PhysicalMemory(CefArgs args, CefReturn retval){
 	DKDEBUGFUNC(args, retval);
 	unsigned long long physicalMemory;
 	if(!DKUtil::PhysicalMemory(physicalMemory)){ return false; }
@@ -411,9 +350,7 @@ bool DKCefV8::PhysicalMemory(CefArgs args, CefReturn retval)
 	return true;
 }
 
-////////////////////////////////////////////////////////////////
-bool DKCefV8::PhysicalMemoryUsed(CefArgs args, CefReturn retval)
-{
+bool DKCefV8::PhysicalMemoryUsed(CefArgs args, CefReturn retval){
 	DKDEBUGFUNC(args, retval);
 	unsigned long long physicalMemory;
 	if(!DKUtil::PhysicalMemoryUsed(physicalMemory)){ return false; }
@@ -421,9 +358,7 @@ bool DKCefV8::PhysicalMemoryUsed(CefArgs args, CefReturn retval)
 	return true;
 }
 
-/////////////////////////////////////////////////////////////////////
-bool DKCefV8::PhysicalMemoryUsedByApp(CefArgs args, CefReturn retval)
-{
+bool DKCefV8::PhysicalMemoryUsedByApp(CefArgs args, CefReturn retval){
 	DKDEBUGFUNC(args, retval);
 	unsigned int physicalMemory;
 	if(!DKUtil::PhysicalMemoryUsedByApp(physicalMemory)){ return false; }
@@ -431,43 +366,33 @@ bool DKCefV8::PhysicalMemoryUsedByApp(CefArgs args, CefReturn retval)
 	return true;
 }
 
-//////////////////////////////////////////////////////
-bool DKCefV8::PressKey(CefArgs args, CefReturn retval)
-{
+bool DKCefV8::PressKey(CefArgs args, CefReturn retval){
 	DKDEBUGFUNC(args, retval);
 	int key = args->GetInt(0);
 	return DKUtil::PressKey(key);
 }
 
-//////////////////////////////////////////////////////////
-bool DKCefV8::QueueDuktape(CefArgs args, CefReturn retval)
-{
+bool DKCefV8::QueueDuktape(CefArgs args, CefReturn retval){
 	DKDEBUGFUNC(args, retval);
 	DKString code = args->GetString(0);
 	if(!DKCef::Get()->QueueDuktape(code)){ return false; }
 	return true;
 }
 
-////////////////////////////////////////////////////////
-bool DKCefV8::ReleaseKey(CefArgs args, CefReturn retval)
-{
+bool DKCefV8::ReleaseKey(CefArgs args, CefReturn retval){
 	DKDEBUGFUNC(args, retval);
 	int key = args->GetInt(0);
 	return DKUtil::ReleaseKey(key);
 }
 
-/////////////////////////////////////////////////
-bool DKCefV8::Run(CefArgs args, CefReturn retval)
-{
+bool DKCefV8::Run(CefArgs args, CefReturn retval){
 	DKDEBUGFUNC(args, retval);
 	DKString command = args->GetString(0);
 	DKString params = args->GetString(1);
 	return DKUtil::Run(command, params);
 }
 
-////////////////////////////////////////////////////////
-bool DKCefV8::RunDuktape(CefArgs args, CefReturn retval)
-{
+bool DKCefV8::RunDuktape(CefArgs args, CefReturn retval){
 	DKDEBUGFUNC(args, retval);
 	DKString rval;
 	DKString code = args->GetString(0);
@@ -475,7 +400,6 @@ bool DKCefV8::RunDuktape(CefArgs args, CefReturn retval)
 		DKERROR("DKCefV8::RunDuktape(): DKCef::Get()->RunDuktape() failed");
 		return false; 
 	}
-
 	if(!rval.empty()){
 		if(!retval->SetString(0, rval)){ 
 			DKERROR("DKCefV8::RunDuktape() retval->SetString(0, rval) failed\n");
@@ -485,59 +409,45 @@ bool DKCefV8::RunDuktape(CefArgs args, CefReturn retval)
 	return true;
 }
 
-//////////////////////////////////////////////////////////
-bool DKCefV8::SetBrightness(CefArgs args, CefReturn retval)
-{
+bool DKCefV8::SetBrightness(CefArgs args, CefReturn retval){
 	DKDEBUGFUNC(args, retval);
 	int percent = args->GetInt(0);
 	return DKUtil::SetBrightness(percent);
 }
 
-//////////////////////////////////////////////////////////
-bool DKCefV8::SetClipboard(CefArgs args, CefReturn retval)
-{
+bool DKCefV8::SetClipboard(CefArgs args, CefReturn retval){
 	DKDEBUGFUNC(args, retval);
 	DKString string = args->GetString(0);
 	return DKUtil::SetClipboard(string);
 }
 
-///////////////////////////////////////////////////////////////
-bool DKCefV8::SetClipboardFiles(CefArgs args, CefReturn retval)
-{
+bool DKCefV8::SetClipboardFiles(CefArgs args, CefReturn retval){
 	DKDEBUGFUNC(args, retval);
 	DKString filelist = args->GetString(0);
 	return DKUtil::SetClipboardFiles(filelist);
 }
 
-///////////////////////////////////////////////////////////////
-bool DKCefV8::SetClipboardImage(CefArgs args, CefReturn retval)
-{
+bool DKCefV8::SetClipboardImage(CefArgs args, CefReturn retval){
 	DKDEBUGFUNC(args, retval);
 	DKString file = args->GetString(0);
 	return DKUtil::SetClipboardImage(file);
 }
 
-//////////////////////////////////////////////////////////
-bool DKCefV8::SetFramerate(CefArgs args, CefReturn retval)
-{
+bool DKCefV8::SetFramerate(CefArgs args, CefReturn retval){
 	DKDEBUGFUNC(args, retval);
 	int fps = args->GetInt(0);
 	DKUtil::SetFramerate(fps);
 	return true;
 }
 
-/////////////////////////////////////////////////////////
-bool DKCefV8::SetMousePos(CefArgs args, CefReturn retval)
-{
+bool DKCefV8::SetMousePos(CefArgs args, CefReturn retval){
 	DKDEBUGFUNC(args, retval);
 	int x = args->GetInt(0);
 	int y = args->GetInt(1);
 	return DKUtil::SetMousePos(x,y);
 }
 
-///////////////////////////////////////////////////////
-bool DKCefV8::SetVolume(CefArgs args, CefReturn retval)
-{
+bool DKCefV8::SetVolume(CefArgs args, CefReturn retval){
 	DKDEBUGFUNC(args, retval);
 	int percent = args->GetInt(0);
 	DKINFO("DKCefV8::SetVolume(): volume ="+toString(percent)+"\n");
@@ -545,9 +455,7 @@ bool DKCefV8::SetVolume(CefArgs args, CefReturn retval)
 	return 1;
 }
 
-/////////////////////////////////////////////////////////
-bool DKCefV8::ShowConsole(CefArgs args, CefReturn retval)
-{
+bool DKCefV8::ShowConsole(CefArgs args, CefReturn retval){
 	DKDEBUGFUNC(args, retval);
 #ifdef WIN32
 	HWND consoleWindow = GetConsoleWindow();
@@ -556,42 +464,32 @@ bool DKCefV8::ShowConsole(CefArgs args, CefReturn retval)
 	return true;
 }
 
-///////////////////////////////////////////////////////
-bool DKCefV8::StrokeKey(CefArgs args, CefReturn retval)
-{
+bool DKCefV8::StrokeKey(CefArgs args, CefReturn retval){
 	DKDEBUGFUNC(args, retval);
 	int key = args->GetInt(0);
 	return DKUtil::StrokeKey(key);
 }
 
-///////////////////////////////////////////////////////
-bool DKCefV8::System(CefArgs args, CefReturn retval)
-{
+bool DKCefV8::System(CefArgs args, CefReturn retval){
 	DKDEBUGFUNC(args, retval);
 	DKString command = args->GetString(0);
 	DKString ret;
 	return DKUtil::System(command, ret);
 }
 
-////////////////////////////////////////////////////////////
-bool DKCefV8::TurnOffMonitor(CefArgs args, CefReturn retval)
-{
+bool DKCefV8::TurnOffMonitor(CefArgs args, CefReturn retval){
 	DKDEBUGFUNC(args, retval);
 	if(!DKUtil::TurnOffMonitor()){ return false; }
 	return true;
 }
 
-///////////////////////////////////////////////////////////
-bool DKCefV8::TurnOnMonitor(CefArgs args, CefReturn retval)
-{
+bool DKCefV8::TurnOnMonitor(CefArgs args, CefReturn retval){
 	DKDEBUGFUNC(args, retval);
 	if(!DKUtil::TurnOnMonitor()){ return false; }
 	return true;
 }
 
-///////////////////////////////////////////////////////////
-bool DKCefV8::VirtualMemory(CefArgs args, CefReturn retval)
-{
+bool DKCefV8::VirtualMemory(CefArgs args, CefReturn retval){
 	DKDEBUGFUNC(args, retval);
 	unsigned long long virtualMemory;
 	if(!DKUtil::VirtualMemory(virtualMemory)){ return false; }
@@ -599,9 +497,7 @@ bool DKCefV8::VirtualMemory(CefArgs args, CefReturn retval)
 	return true;
 }
 
-///////////////////////////////////////////////////////////////
-bool DKCefV8::VirtualMemoryUsed(CefArgs args, CefReturn retval)
-{
+bool DKCefV8::VirtualMemoryUsed(CefArgs args, CefReturn retval){
 	DKDEBUGFUNC(args, retval);
 	unsigned long long virtualMemory;
 	if(!DKUtil::VirtualMemoryUsed(virtualMemory)){ return false; }
@@ -609,9 +505,7 @@ bool DKCefV8::VirtualMemoryUsed(CefArgs args, CefReturn retval)
 	return true;
 }
 
-////////////////////////////////////////////////////////////////////
-bool DKCefV8::VirtualMemoryUsedByApp(CefArgs args, CefReturn retval)
-{
+bool DKCefV8::VirtualMemoryUsedByApp(CefArgs args, CefReturn retval){
 	DKDEBUGFUNC(args, retval);
 	unsigned int virtualMemory;
 	if(!DKUtil::VirtualMemoryUsedByApp(virtualMemory)){ return false; }
@@ -619,9 +513,7 @@ bool DKCefV8::VirtualMemoryUsedByApp(CefArgs args, CefReturn retval)
 	return true;
 }
 
-//////////////////////////////////////////////////////////
-bool DKCefV8::WaitForImage(CefArgs args, CefReturn retval)
-{
+bool DKCefV8::WaitForImage(CefArgs args, CefReturn retval){
 	DKDEBUGFUNC(args, retval);
 	DKString file = args->GetString(0);
 	int timeout = args->GetInt(1);

@@ -13,7 +13,7 @@ bool   DKApp::paused = false;
 //std::vector<boost::function<void()> > DKApp::loop_funcs;
 std::vector<std::function<void()> > DKApp::loop_funcs;
 
-/////////// MAIN ////////////////
+//// MAIN ////
 //#ifndef ANDROID
 int main(int argc, char **argv){
 	DKDEBUGFUNC(argc, argv);
