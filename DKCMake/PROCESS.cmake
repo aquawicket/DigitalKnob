@@ -589,7 +589,7 @@ if(MAC)
 	add_executable(${APP_NAME} MACOSX_BUNDLE ${App_SRC})
 	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${LIBS})
 	
-	DKUPDATE_INFO_Plist(${APP_NAME}) #this may need to be run at post build
+	#DKUPDATE_INFO_Plist(${APP_NAME}) #this may need to be run at post build
 	#set_target_properties(${APP_NAME} PROPERTIES DEBUG_POSTFIX d)
 endif()
 
