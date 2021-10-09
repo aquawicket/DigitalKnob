@@ -5,6 +5,9 @@
 
 ### DEPENDS ###
 DKDEPEND(opengl)
+if(MAC)
+	DKDEPEND(libiconv)
+endif()
 
 ### VERSION ###
 #if(ANDROID)
