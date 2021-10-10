@@ -565,7 +565,7 @@ if(NOT CMAKE_SCRIPT_MODE_FILE)
 		add_definitions(-DUSE_SHADERS)
 	endif()
 
-	if(DKCEF)
+	if(${DKCEF} STREQUAL "ON")
 		add_definitions(-DUSE_DKCef)
 	endif()
 endif() #NOT CMAKE_SCRIPT_MODE_FILE
