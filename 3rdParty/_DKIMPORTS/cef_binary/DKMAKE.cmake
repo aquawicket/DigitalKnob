@@ -10,6 +10,10 @@
 # https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_linuxarm64.tar.bz2
 
 
+if(MAC)
+	DKDEPEND(appkit)
+endif()
+
 ### VERSION ###
 DKSET(CEF_VERSION 81.3.3+g072a5f5+chromium-81.0.4044.138)
 WIN32_DKSET(CEF_NAME cef_binary_${CEF_VERSION}_windows32)
