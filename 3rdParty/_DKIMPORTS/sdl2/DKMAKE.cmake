@@ -25,6 +25,7 @@ DKSET(SDL2 ${3RDPARTY}/${SDL2_NAME})
 ### INSTALL ###
 DKINSTALL(${SDL2_DL} sdl2 ${SDL2})
 
+
 ### PATCH ###
 # https://discourse.libsdl.org/t/android-error-libsdl2-so-failed-to-load/25680/5
 dkFileReplace(${SDL2}/CMakeLists.txt "add_library(hidapi SHARED" "add_library(hidapi STATIC")
@@ -39,8 +40,8 @@ ANDROID_INCLUDE(${SDL2}/src)
 #	DKDEFINE(GL_GLEXT_PROTOTYPES)
 #endif()
 RASPBERRY_INCLUDE(/opt/vc/lib)
-LINUX_INCLUDE(/opt/local/include)
-LINUX_INCLUDE(/opt/local/lib)
+#LINUX_INCLUDE(/opt/local/include)
+#LINUX_INCLUDE(/opt/local/lib)
 #if(LINUX)
 LINUX_INCLUDE(${SDL2}/${OS}/${RELEASE_DIR}/include)
 #	find_package(OpenGL REQUIRED)
