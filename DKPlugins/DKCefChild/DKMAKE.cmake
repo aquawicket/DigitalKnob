@@ -31,10 +31,10 @@ IF(MAC_64)
 	DKRENAME(${DKPROJECT}/${OS}/${RELEASE_DIR}/${AppName}.app/Contents/Frameworks/cefchild.app/Contents/MacOS/cefchild "${DKPROJECT}/${OS}/${RELEASE_DIR}/${AppName}.app/Contents/Frameworks/cefchild.app/Contents/MacOS/${AppName} Helper")
 	DKRENAME(${DKPROJECT}/${OS}/${RELEASE_DIR}/${AppName}.app/Contents/Frameworks/cefchild.app "${DKPROJECT}/${OS}/${RELEASE_DIR}/${AppName}.app/Contents/Frameworks/${AppName} Helper.app")
 
-	MAC_COMMAND(install_name_tool -change "@executable_path/Chromium Embedded Framework" "@executable_path/../../../../Frameworks/Chromium Embedded Framework.framework/Chromium Embedded Framework" "${DKPROJECT}/${OS}/${DEBUG_DIR}/${AppName}.app/Contents/Frameworks/${AppName} Helper.app/Contents/MacOS/${AppName} Helper")
+	#MAC_COMMAND(install_name_tool -change "@executable_path/Chromium Embedded Framework" "@executable_path/../../../../Frameworks/Chromium Embedded Framework.framework/Chromium Embedded Framework" "${DKPROJECT}/${OS}/${DEBUG_DIR}/${AppName}.app/Contents/Frameworks/${AppName} Helper.app/Contents/MacOS/${AppName} Helper")
 	
 	#FIXME - command does not work because app does not exist yet
-	MAC_COMMAND(install_name_tool -change "@executable_path/Chromium Embedded Framework" "@executable_path/../Frameworks/Chromium Embedded Framework.framework/Chromium Embedded Framework" "${DKPROJECT}/${OS}/${DEBUG_DIR}/${AppName}.app/Contents/MacOS/${AppName}")
+	#MAC_COMMAND(install_name_tool -change "@executable_path/Chromium Embedded Framework" "@executable_path/../Frameworks/Chromium Embedded Framework.framework/Chromium Embedded Framework" "${DKPROJECT}/${OS}/${DEBUG_DIR}/${AppName}.app/Contents/MacOS/${AppName}")
 ENDIF()
 
 IF(LINUX_64)
@@ -132,12 +132,12 @@ ENDIF()
 
 ## cefchild mac64
 IF(MAC_64)
-	DKAPPEND_CMAKE("INCLUDE_DIRECTORIES(${BOOST}) \n")
+	#DKAPPEND_CMAKE("INCLUDE_DIRECTORIES(${BOOST}) \n")
 	DKAPPEND_CMAKE("INCLUDE_DIRECTORIES(${CEF}) \n")
 	DKAPPEND_CMAKE("INCLUDE_DIRECTORIES(${DKPLUGINS}/DK) \n")
 	DKAPPEND_CMAKE("INCLUDE_DIRECTORIES(${DKPLUGINS}/DKCef) \n")
-	DKAPPEND_CMAKE("LIST(APPEND CEF_DEBUG_LIBS debug \"${CEF}/${DEBUG_DIR}/Chromium Embedded Framework.framework\") \n")
-	DKAPPEND_CMAKE("LIST(APPEND CEF_RELEASE_LIBS optimized \"${CEF}/${RELEASE_DIR}/Chromium Embedded Framework.framework\") \n")
+	#DKAPPEND_CMAKE("LIST(APPEND CEF_DEBUG_LIBS debug \"${CEF}/${DEBUG_DIR}/Chromium Embedded Framework.framework\") \n")
+	#DKAPPEND_CMAKE("LIST(APPEND CEF_RELEASE_LIBS optimized \"${CEF}/${RELEASE_DIR}/Chromium Embedded Framework.framework\") \n")
 	DKAPPEND_CMAKE("FIND_LIBRARY(libcef_dll_wrapperD libcef_dll_wrapper.a ${CEF}/${OS}/libcef_dll_wrapper/${DEBUG_DIR}) \n")
 	DKAPPEND_CMAKE("FIND_LIBRARY(libcef_dll_wrapperR libcef_dll_wrapper.a ${CEF}/${OS}/libcef_dll_wrapper/${RELEASE_DIR}) \n")
 	DKAPPEND_CMAKE("FIND_LIBRARY(AK AppKit)\n")
