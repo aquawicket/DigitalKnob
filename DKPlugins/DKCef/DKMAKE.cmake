@@ -78,7 +78,7 @@ IF(MAC_64)
 	#LIST(APPEND RELEASE_LIBS ${AK})
 
 	#FIXME - command does not work because app does not exist yet
-	MAC_COMMAND(install_name_tool -change "@executable_path/Chromium Embedded Framework" "@executable_path/../Frameworks/Chromium Embedded Framework.framework/Chromium Embedded Framework" "${DKPROJECT}/mac64/Debug/${AppName}.app/Contents/MacOS/${AppName}")
+	#MAC_COMMAND(install_name_tool -change "@executable_path/Chromium Embedded Framework" "@executable_path/../Frameworks/Chromium Embedded Framework.framework/Chromium Embedded Framework" "${DKPROJECT}/mac64/Debug/${AppName}.app/Contents/MacOS/${AppName}")
 ENDIF()
 
 IF(LINUX_32)
