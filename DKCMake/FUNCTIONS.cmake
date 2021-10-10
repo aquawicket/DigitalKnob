@@ -32,7 +32,7 @@ endfunction()
 #CreateFunction("Testies")
 #Testies()
 
-
+# dk_debug_wait()  "ALIAS: WAIT()"
 function(Wait)
 	if(CMAKE_HOST_WIN32)	
 		DKEXECUTE_PROCESS(echo press and key to continue && timeout /t 60 > nul WORKING_DIRECTORY C:/)
@@ -47,7 +47,7 @@ function(Wait)
 endfunction()
 
 
-# WATCH( <variable_name> )
+# dk_debug_watch(<variable_name>)  "ALIASL WATCH(<variable_name>)"
 function(WATCH var)
 	variable_watch(var varwatch)
 endfunction()
@@ -57,19 +57,32 @@ function(varwatch var access val lst stack)
 endfunction()
 
 
-# DUMP( <variable_name> )
+# dk_debug_dump(<variable_name>)  "ALIAS: DUMP(<variable_name>)"
 function(DUMP dmpvar)
-	message(STATUS "\n\n")
+	message(status "\n")
 	message(STATUS "${dmpvar} = ${${dmpvar}}")
 	if(NOT DEFINED ${dmpvar})
 		message(STATUS "DUMP(${dmpvar}) variable not defined. The correct syntax is \"DUMP(varname)\", using the variable name")
 		message(STATUS "DUMP(varname): CORRECT        DUMP(\${varname}): INCORRECT")
 	endif()
-	MESSAGE(status "\n\n")
+	message(status "\n")
 	Wait()
 endfunction()
 
+# dk_file_getDKRoot
+function(dk_file_getDigitalknobPath)
+	get_filename_component(DIGITALKNOB ${CMAKE_SOURCE_DIR} ABSOLUTE)
+	get_filename_component(FOLDER_NAME ${DIGITALKNOB} NAME)
+	while(NOT FOLDER_NAME STREQUAL "digitalknob")
+		get_filename_component(DIGITALKNOB ${DIGITALKNOB} DIRECTORY)
+		get_filename_component(FOLDER_NAME ${DIGITALKNOB} NAME)
+		if(NOT FOLDER_NAME)
+			message(WARN "Could not locate digitalknob root path")
+		endif()
+	endwhile()
+endfunction)
 
+# dk_string_has
 function(dk_includes str substr result)
 	#message(STATUS "dk_includes(${str} ${substr})")
 	string(FIND "${str}" "${substr}" index)
@@ -97,17 +110,14 @@ endfunction()
 
 
 function(DELETE_CACHE)
+	message(STATUS "####### Deleteing CMake cache . . .")
 	get_filename_component(DIGITALKNOB ${CMAKE_SOURCE_DIR} ABSOLUTE)
-	message(STATUS "Deleteing CMake cache . . .")
 	if(CMAKE_HOST_WIN32)
-		# DKEXECUTE_PROCESS(for /r %i in (CMakeCache.*) do del "%i" WORKING_DIRECTORY ${DIGITALKNOB}) #does not work in batch files
-        # DKEXECUTE_PROCESS(for /d /r %i in (*CMakeFiles*) do rmdir /s /Q "%i" WORKING_DIRECTORY ${DIGITALKNOB}) #does not work in batch files
 		DKEXECUTE_PROCESS(for /r %%i in (CMakeCache.*) do del "%%i" WORKING_DIRECTORY ${DIGITALKNOB})
 		DKEXECUTE_PROCESS(for /d /r %%i in (*CMakeFiles*) do rd /s /q "%%i" WORKING_DIRECTORY ${DIGITALKNOB})
 	else()
 		DKEXECUTE_PROCESS(find . -name "CMakeCache.*" -delete WORKING_DIRECTORY ${DIGITALKNOB})
 		DKEXECUTE_PROCESS(rm -rf `find . -type d -name CMakeFiles` WORKING_DIRECTORY ${DIGITALKNOB})
-		# DKEXECUTE_PROCESS(find . -type d -name "CMakeFiles" -delete WORKING_DIRECTORY ${DIGITALKNOB}) #cannot delete non-empty directories
 	endif()
 endfunction()
 
@@ -127,6 +137,7 @@ endfunction()
 
 
 ##https://cmake.org/pipermail/cmake/2012-September/052205.html/
+# dk_file_download
 function(DOWNLOAD url dest_path) # ARGV1 = dest_path
 	#FIXME: Will not download if only 1 argument
 	#TODO: Let's supply the ability to add a primary root address to download from,  for fast downloading from local hard drives or storage 
@@ -182,7 +193,7 @@ function(DOWNLOAD url dest_path) # ARGV1 = dest_path
 	endif()
 endfunction()
 
-
+# dk_file_extract
 function(DKEXTRACT src dest)
 	if(NOT EXISTS ${dest})
 		dk_makeDirectory(${dest})
@@ -190,7 +201,7 @@ function(DKEXTRACT src dest)
 	execute_process(COMMAND ${CMAKE_EXE} -E tar xvf ${src} WORKING_DIRECTORY ${dest})
 endfunction()
 
-
+# dk_file_compress
 function(DKZIP path)
 	message(STATUS "Zipping: ${path}")
 	if(NOT EXISTS ${path})
@@ -199,7 +210,7 @@ function(DKZIP path)
 	execute_process(COMMAND ${CMAKE_EXE} -E tar "cfv" "${DKPROJECT}/assets.zip" --format=zip "." WORKING_DIRECTORY ${path}/)
 endfunction()
 
-
+# dk_file_copy
 function(DKCOPY from to overwrite)
 	if(EXISTS ${from})
 		if(IS_DIRECTORY ${from})
@@ -239,7 +250,7 @@ function(DKCOPY from to overwrite)
 	endif()
 endfunction()
 
-
+# dk_file_compair
 function(DKCOMPAREFILES fileA fileB)
 	execute_process(COMMAND ${CMAKE_EXE} -E compare_files ${fileA} ${fileB} RESULT_VARIABLE compare_result)
 	if(compare_result EQUAL 0)
@@ -251,7 +262,7 @@ function(DKCOMPAREFILES fileA fileB)
 	endif()
 endfunction()
 
-
+# dk_file_rename
 function(DKRENAME from to)
 	message(STATUS "Renameing ${from} to ${to}")
 	if(EXISTS ${from})
@@ -262,14 +273,16 @@ function(DKRENAME from to)
 	endif()
 endfunction()
 
-
+# dk_file_remove
 function(DKREMOVE path)
-	if(EXISTS ${path})
-		if(IS_DIRECTORY ${path})
-			execute_process(COMMAND ${CMAKE_EXE} -E remove_directory ${path})
-		else()
-			execute_process(COMMAND ${CMAKE_EXE} -E remove ${path})
-		endif()
+	if(NOT EXISTS ${path})
+		message(WARN "DKREMOVE(${path}): path does not exist")
+		return()
+	endif()
+	if(IS_DIRECTORY ${path})
+		execute_process(COMMAND ${CMAKE_EXE} -E remove_directory ${path})
+	else()
+		execute_process(COMMAND ${CMAKE_EXE} -E remove ${path})
 	endif()
 endfunction()
 
@@ -3429,11 +3442,6 @@ function(BIN2H)
 endfunction()
 
 function(dk_printSettings)
-	DKBUILD_LOG("\n")
-	DKBUILD_LOG("##############################################")
-	DKBUILD_LOG("###############  DigitalKnob  ################")
-	DKBUILD_LOG("##############################################")
-	DKBUILD_LOG("\n")
 	DKBUILD_LOG("###########  HOST SYSTEM VARIABLES  ##########")
 	DKBUILD_LOG("CMAKE_HOST_SYSTEM_NAME:        ${CMAKE_HOST_SYSTEM_NAME}")
 	DKBUILD_LOG("CMAKE_HOST_SYSTEM_VERSION:     ${CMAKE_HOST_SYSTEM_VERSION}")
