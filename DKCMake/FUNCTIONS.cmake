@@ -69,8 +69,8 @@ function(DUMP dmpvar)
 	Wait()
 endfunction()
 
-# dk_file_getDKRoot
-function(dk_file_getDigitalknobPath)
+# dk_file_getDigitalknobPath(<result>)
+function(dk_file_getDigitalknobPath result)
 	get_filename_component(DIGITALKNOB ${CMAKE_SOURCE_DIR} ABSOLUTE)
 	get_filename_component(FOLDER_NAME ${DIGITALKNOB} NAME)
 	while(NOT FOLDER_NAME STREQUAL "digitalknob")
@@ -80,7 +80,8 @@ function(dk_file_getDigitalknobPath)
 			message(WARN "Could not locate digitalknob root path")
 		endif()
 	endwhile()
-endfunction)
+	set(${result} ${DIGITALKNOB} PARENT_SCOPE) #just relay the result
+endfunction()
 
 # dk_string_has
 function(dk_includes str substr result)
@@ -111,7 +112,7 @@ endfunction()
 
 function(DELETE_CACHE)
 	message(STATUS "####### Deleteing CMake cache . . .")
-	get_filename_component(DIGITALKNOB ${CMAKE_SOURCE_DIR} ABSOLUTE)
+	dk_file_getDigitalknobPath(DIGITALKNOB)
 	if(CMAKE_HOST_WIN32)
 		DKEXECUTE_PROCESS(for /r %%i in (CMakeCache.*) do del "%%i" WORKING_DIRECTORY ${DIGITALKNOB})
 		DKEXECUTE_PROCESS(for /d /r %%i in (*CMakeFiles*) do rd /s /q "%%i" WORKING_DIRECTORY ${DIGITALKNOB})
