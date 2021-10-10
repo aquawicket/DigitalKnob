@@ -127,7 +127,7 @@ endfunction()
 
 
 ##https://cmake.org/pipermail/cmake/2012-September/052205.html/
-function(DOWNLOAD url) # ARGV1 = dest_path
+function(DOWNLOAD url dest_path) # ARGV1 = dest_path
 	#FIXME: Will not download if only 1 argument
 	#TODO: Let's supply the ability to add a primary root address to download from,  for fast downloading from local hard drives or storage 
 	#      we will also add a "backup" root address to download from. In case one of the internet download fails.
@@ -141,8 +141,8 @@ function(DOWNLOAD url) # ARGV1 = dest_path
 	
 	DKSET(CURRENT_DIR ${DKDOWNLOAD}) #set the default dl directory
 	get_filename_component(src_filename ${url} NAME)
-	if(${ARGC} GREATER 1)
-		set(dest_path ${ARGV1})
+	#if(${ARGC} GREATER 1)
+	#	set(dest_path ${ARGV1})
 		dk_getExtension(${dest_path} dest_ext)
 		if(NOT dest_ext)
 			message(STATUS "DKDOWNLOAD(): The destination path has no extension")
@@ -162,7 +162,7 @@ function(DOWNLOAD url) # ARGV1 = dest_path
 				#message(FATAL_ERROR "end")
 			endif()
 		endif()
-	endif()
+	#endif()
 	if(NOT EXISTS ${CURRENT_DIR}/${dest_filename})
 		message(STATUS "Downloading ${url}")
 		message(STATUS "To -> ${CURRENT_DIR}/${dest_filename}")
