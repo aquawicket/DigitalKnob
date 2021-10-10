@@ -74,7 +74,8 @@ WIN_VS(${CEF_NAME} cef.sln cefclient)
 MAC_PATH(${CEF}/${OS})
 MAC32_COMMAND(${DKCMAKE_MAC32} ${CEF})
 MAC64_COMMAND(${DKCMAKE_MAC64} ${CEF})
-MAC_XCODE(cef_binary_${CEF_VERSION} libcef_dll_wrapper)
+#MAC_XCODE(cef_binary_${CEF_VERSION} libcef_dll_wrapper)
+MAC_XCODE(cef libcef_dll_wrapper)
 
 
 LINUX_DEBUG_PATH(${CEF}/${OS}/${DEBUG_DIR})
