@@ -48,7 +48,12 @@ function DKBuildConsole_ChooseUpdate() {
     console.log("any other key to Skip")
     console.log("ESC. exit")
     console.log("\n")
-    const key = CPP_DK_GetKey()
+	
+	//UNIX FIX
+	var key = 10
+    while(key === 10)
+        key = CPP_DK_GetKey()
+	
     console.log("key = "+key)
 	//Esc
 	if (key === 27){
@@ -124,7 +129,12 @@ function DKBuildConsole_SelectOs() {
 	//console.log("BCKSPC. Back")
     console.log("ESC. exit")
     console.log("\n")
-    const key = CPP_DK_GetKey()
+    
+	//UNIX FIX
+	var key = 10
+    while(key === 10)
+        key = CPP_DK_GetKey()
+	
 	console.log("key = "+key)
     if (key === 27)
         CPP_DK_Exit()
@@ -167,7 +177,12 @@ function DKBuildConsole_SelectApp() {
         console.log(DKBuildConsole_TranslateOption(i) + ":" + APP_LIST[i] + "")
     console.log("ESC. exit")
     console.log("\n")
-    const key = CPP_DK_GetKey()
+    
+	//UNIX FIX
+	var key = 10
+    while(key === 10)
+        key = CPP_DK_GetKey()
+	
 	console.log("key = "+key)
     if (key === 27)
         CPP_DK_Exit()
@@ -184,7 +199,12 @@ function DKBuildConsole_SelectType() {
 	//console.log("BCKSPC. Back")
     console.log("ESC. exit")
     console.log("\n")
-    const key = CPP_DK_GetKey()
+    
+	//UNIX FIX
+	var key = 10
+    while(key === 10)
+        key = CPP_DK_GetKey()
+	
 	console.log("key = "+key)
     if (key === 27)
         CPP_DK_Exit()
