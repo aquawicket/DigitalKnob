@@ -128,6 +128,7 @@ endfunction()
 
 ##https://cmake.org/pipermail/cmake/2012-September/052205.html/
 function(DOWNLOAD url) # ARGV1 = dest_path
+	#FIXME: Will not download if only 1 argument
 	#TODO: Let's supply the ability to add a primary root address to download from,  for fast downloading from local hard drives or storage 
 	#      we will also add a "backup" root address to download from. In case one of the internet download fails.
 	#      Also, we will treat the url variable like a list. If it has more one item, treat them as alternative download links

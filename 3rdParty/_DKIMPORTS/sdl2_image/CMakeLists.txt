@@ -109,6 +109,7 @@ set(SDLIMAGE_SRC
 	IMG_xpm.c
 	IMG_xv.c
 	IMG_xxx.c
+	IMG_ImageIO.m
 )
 
 set(SDLIMAGE_SOURCES ${SDLIMAGE_SRC})
