@@ -123,35 +123,36 @@ bool DKEvents::RemoveEvents(DKObject* obj){
 }
 
 DKString DKEvents::GetType(){
-	DKDEBUGFUNC();
+	DKDEBUGRETURN(type);
 	return type;
 }
 
 DKString DKEvents::GetJSReturn(){
-	DKDEBUGFUNC();
+	DKDEBUGRETURN(jsreturn);
 	return jsreturn;
 }
 
 DKString DKEvents::GetId(){
-	DKDEBUGFUNC();
+	DKDEBUGRETURN(id);
 	return id;
 }
 
 DKString DKEvents::GetValue(){
-	DKDEBUGFUNC();
 	DKString value = toString(data, ",");
+	DKDEBUGRETURN(value);
 	return value;
 }
 
 DKString DKEvents::GetValue(int n){
-	DKDEBUGFUNC(n);
+	DKDEBUGRETURN(data[n]);
 	return data[n];
 }
 
 int DKEvents::GetKeyNum(){
-	//DKDEBUGFUNC();
-	if(data.size() < 1)
+	if (data.size() < 1) {
+		DKDEBUGRETURN(0);
 		return 0;
+	}
 	DKDEBUGRETURN(toInt(data[0]));
 	return toInt(data[0]);
 }

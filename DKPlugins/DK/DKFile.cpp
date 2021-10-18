@@ -301,13 +301,13 @@ bool DKFile::GetDrives(DKStringArray& strings){
 }
 
 bool DKFile::GetExeName(DKString& exename){
-	DKDEBUGFUNC(exename);
 	if(!DKFile::PathExists(DKFile::exe_path))
 		DKFile::GetExePath(DKFile::exe_path);
 	unsigned found = DKFile::exe_path.find_last_of("/");
 	if (found != std::string::npos && found < DKFile::exe_path.length()) {
 		exename = DKFile::exe_path.substr(found + 1);
 		DebugPath(exename);
+		DKDEBUGRETURN(exename);
 		return true;
 	}
 	return DKERROR("exename invalid \n");

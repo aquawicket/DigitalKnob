@@ -113,7 +113,7 @@ foreach(plugin ${dkdepend_list})
 		endif()
 
 		# THIS LINE ALONE, ADDS DKPLUGINS TO THE APP SOLUTION
-		add_subdirectory(${plugin_path})
+		add_subdirectory(${plugin_path} ${plugin_path}/${OS})
 		
 		DKSET(CURRENT_DIR ${plugin_path}/${OS})
 		dk_makeDirectory(${CURRENT_DIR})		
