@@ -291,7 +291,7 @@ bool DKFile::GetDrives(DKStringArray& strings){
 			strings.push_back(driveName);
 		}
 	}
-	return true && DKDEBUGRETURN(strings);
+	return true;//&& DKDEBUGRETURN(toString(strings));
 #endif //(WIN32)
 	return DKERROR("not implemented on this OS \n");
 }
