@@ -96,6 +96,7 @@ bool DKAssets::Init(){
 		DKFile::online_assets = "http://aquawicket.github.io/DigitalKnob/DKPlugins/";
 
 	DKINFO("DKFile::online_assets = "+DKFile::online_assets+"\n");
+	DKINFO("Loaded -> "+DKFile::online_assets+"settings.txt\n");
 	return true;
 }
 

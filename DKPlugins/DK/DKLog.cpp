@@ -73,13 +73,13 @@ bool Log(const char* file, int line, const char* func, const DKString& input, co
 	*/
 
 	///////// OUTPUT FILTERS /////////
-	if(!input.empty() && input.front() == '\n')
-		//return DKASSERT("log text should never start with \\n")
+	//if(!input.empty() && input.front() == '\n')
+		//return DKASSERT("bad practice to start a string with \\n")
 
 	//check LOG_HIDE strings
 	if(!log_hide.empty()){
 		DKStringArray hides;
-		toStringArray(hides, log_hide, ",");
+		toStringArray(hides, log_hide, " ");
 		for(unsigned int i=0; i<hides.size(); ++i){
 			if(!hides[i].empty() && has(input, hides[i]))
 				return true;

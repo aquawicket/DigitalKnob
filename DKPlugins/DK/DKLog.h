@@ -131,6 +131,38 @@ void DebugFunc(const char* file, int line, const char* func, const DKString& nam
 	func_string += " )\n";
 	Log(file, line, "", func_string, DK_DEBUG);
 }
+
+template <typename... Args>
+void DebugReturn(const char* file, int line, const char* func, const DKString& names, Args&&... args) {
+	if (log_show.empty() && !log_debug)
+		return;
+	int arg_count = sizeof...(Args);
+	DKStringArray arg_names;
+	if (!names.empty())
+		toStringArray(arg_names, names, ",");
+	std::ostringstream out;
+	getTemplateArgs(out, args...);
+	DKStringArray arg_values;
+	toStringArray(arg_values, out.str(), ",");
+	DKString func_string = func;
+	func_string += "( ";
+	for (int i = 0; i < arg_count; ++i) {
+		if (!names.empty()) {
+			func_string += arg_names[i];
+			func_string += ":";
+		}
+		if (i < (arg_count - 1)) {
+			func_string += arg_values[i];
+			func_string += ", ";
+		}
+		else {
+			func_string += " ) -> ";
+			func_string += arg_values[i];
+		}
+	}
+	func_string += "\n";
+	Log(file, line, "", func_string, DK_DEBUG);
+}
 #endif
 
 class logy{
@@ -151,7 +183,7 @@ namespace {
 void signal_handler(int signal);
 */
 
-#define  DKBUILDTIME() Log(__FILE__, __LINE__, __FUNCTION__, "__DATE__  __TIME__ \n", DK_INFO);
+#define  DKBUILDTIME() Log(__FILE__, __LINE__, __FUNCTION__, __DATE__  __TIME__, DK_INFO);
 #define  DKASSERT(message) Log(__FILE__, __LINE__, __FUNCTION__, message, DK_ASSERT);
 #define   DKFATAL(message) Log(__FILE__, __LINE__, __FUNCTION__, message, DK_FATAL);
 #define   DKERROR(message) Log(__FILE__, __LINE__, __FUNCTION__, message, DK_ERROR);
@@ -161,15 +193,17 @@ void signal_handler(int signal);
 #define DKVERBOSE(message) Log(__FILE__, __LINE__, __FUNCTION__, message, DK_VERBOSE);
 #define DEBUG_METHOD() logy _logy(__FUNCTION__);
 
-#ifndef ANDROID
-	#define DKDEBUGFUNC1(__FILE__, __LINE__, __FUNCTION__, ...) DebugFunc(__FILE__, __LINE__, __FUNCTION__, #__VA_ARGS__, __VA_ARGS__)
 #ifdef WIN32
+	#define DKDEBUGFUNC1(__FILE__, __LINE__, __FUNCTION__, ...) DebugFunc(__FILE__, __LINE__, __FUNCTION__, #__VA_ARGS__, __VA_ARGS__)
+	#define DKDEBUGRETURN1(__FILE__, __LINE__, __FUNCTION__, ...) DebugReturn(__FILE__, __LINE__, __FUNCTION__, #__VA_ARGS__, __VA_ARGS__)
 	#define DKDEBUGFUNC(...) DKDEBUGFUNC1(__FILE__, __LINE__, __FUNCTION__, __VA_ARGS__)
+	#define DKDEBUGRETURN(...) DKDEBUGRETURN1(__FILE__, __LINE__, __FUNCTION__, __VA_ARGS__)
+#elif defined(APPLE) || defined(LINUX)
+	#define DKDEBUGFUNC(...) DebugFunc(__FILE__, __LINE__, __FUNCTION__, "", ##__VA_ARGS__)
+	#define DKDEBUGRETURN(...) DebugReturn(__FILE__, __LINE__, __FUNCTION__, "", ##__VA_ARGS__)
 #else
-	#define DKDEBUGFUNC(...) DebugFunc(__FILE__, __LINE__, __FUNCTION__, "", ##__VA_ARGS__)	
-#endif
-#else
-	#define DKDEBUGFUNC(...) NULL
+	#define DKDEBUGFUNC(...) Log(__FILE__, __LINE__, __FUNCTION__, "", DK_DEBUG)
+	#define DKDEBUGRETURN(...) Log(__FILE__, __LINE__, __FUNCTION__, "", DK_DEBUG)
 #endif
 
 /*

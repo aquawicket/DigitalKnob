@@ -112,7 +112,7 @@ bool DKEvents::RemoveEvents(const DKString& variable){
 }
 
 bool DKEvents::RemoveEvents(DKObject* obj){
-	DKDEBUGFUNC("obj");
+	DKDEBUGFUNC("DKObject* obj");
 	for(unsigned int i = 0; i < events.size(); ++i){
 		if(events[i]->object == obj){
 			events.erase(events.begin()+i);

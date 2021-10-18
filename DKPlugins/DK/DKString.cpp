@@ -20,9 +20,9 @@ bool samei(const DKString& str, const DKString& str2){
 	return false;
 }
 
-bool has(const DKString& str, const DKString& str2){
-	int found = str.find(str2);
-	if(found!=std::string::npos)
+bool has(const DKString& search, const DKString& forthis){
+	int found = search.find(forthis);
+	if(found != std::string::npos)
 		return true;
 	return false;
 }

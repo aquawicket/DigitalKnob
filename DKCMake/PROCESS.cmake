@@ -112,6 +112,9 @@ foreach(plugin ${dkdepend_list})
 			file(WRITE ${plugin_path}/CMakeLists.txt ${CMAKE_FILE})
 		endif()
 
+		# THIS LINE ALONE, ADDS DKPLUGINS TO THE APP SOLUTION
+		add_subdirectory(${plugin_path})
+		
 		DKSET(CURRENT_DIR ${plugin_path}/${OS})
 		dk_makeDirectory(${CURRENT_DIR})		
 		if(WIN_32)
