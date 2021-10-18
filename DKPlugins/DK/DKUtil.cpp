@@ -340,37 +340,34 @@ bool DKUtil::GetPixelFromScreen(int x, int y, int& r, int& g, int& b){
 }
 
 bool DKUtil::GetProcessList(DKString& list){
-	DKDEBUGFUNC(list);
 #ifdef WIN32
-	return DKWindows::GetProcessList(list);
+	return DKWindows::GetProcessList(list) && DKDEBUGRETURN(list);
 #endif
 	return DKERROR("not implemented on this OS\n");
 }
 
 bool DKUtil::GetScreenHeight(int& h){
-	DKDEBUGFUNC(h);
 #ifdef WIN32
-	return DKWindows::GetScreenHeight(h);
+	return DKWindows::GetScreenHeight(h) && DKDEBUGRETURN(h);
 #endif
 #ifdef MAC
-	return DKMac::GetScreenHeight(h);
+	return DKMac::GetScreenHeight(h) && DKDEBUGRETURN(h);
 #endif
 #ifdef LINUX
-	return DKLinux::GetScreenHeight(h);
+	return DKLinux::GetScreenHeight(h) && DKDEBUGRETURN(h);
 #endif
 	return DKERROR("not implemented on this OS\n");
 }
 
 bool DKUtil::GetScreenWidth(int& w){
-	DKDEBUGFUNC(w);
 #ifdef WIN32
-	return DKWindows::GetScreenWidth(w);
+	return DKWindows::GetScreenWidth(w) && DKDEBUGRETURN(w);
 #endif
 #ifdef MAC
-	return DKMac::GetScreenWidth(w);
+	return DKMac::GetScreenWidth(w) && DKDEBUGRETURN(w);
 #endif
 #ifdef LINUX
-	return DKLinux::GetScreenWidth(w);
+	return DKLinux::GetScreenWidth(w) && DKDEBUGRETURN(w);
 #endif
 	return DKERROR("not implemented on this OS\n");
 }

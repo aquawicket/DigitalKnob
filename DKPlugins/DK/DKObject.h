@@ -106,17 +106,19 @@ public:
 		//DKDEBUGFUNC(id);
 		for(unsigned int i=0; i<instances.size(); ++i){
 			if(same(id, instances[i]->data[1])){
-				if(instances[i])
+				if (instances[i]) {
+					DKDEBUGRETURN(id, true);
 					return true;
+				}
 			}
 		}
 		return false;
 	}
 	static T* Get(const DKString& id = ""){
-		DKDEBUGFUNC(id);
 		for(unsigned int i=0; i<instances.size(); ++i){
 			if(id.empty() || same(id, instances[i]->data[1])){
-				if(instances[i])
+				if (instances[i])
+					DKDEBUGRETURN(id, instances[i]);
 					return instances[i];
 			}
 		}
@@ -124,7 +126,7 @@ public:
 		return 0;
 	}
 	static void GetInstances(DKStringArray& list){
-		DKDEBUGFUNC();
+		DKDEBUGFUNC("DKStringArray& list");
 		/*
 		if(list.empty())
 			return DKWARN("DKObject::GetInstances(): list is empty\n");
@@ -135,6 +137,7 @@ public:
 			else
 				list.push_back(instances[i]->data[0]+","+instances[i]->data[1]);
 		}
+		//DKDEBUGRETURN(toString(list));
 	}
 	static void GetInstances(std::vector<T*>& _instances){
 		DKDEBUGFUNC();

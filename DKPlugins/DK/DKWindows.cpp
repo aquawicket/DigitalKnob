@@ -342,29 +342,27 @@ bool DKWindows::GetProcessList(DKString& list){
 }
 
 bool DKWindows::GetScreenWidth(int& w){
-	DKDEBUGFUNC(w);
 	RECT desktop;
 	const HWND hDesktop = GetDesktopWindow();
 	if(!GetWindowRect(hDesktop, &desktop))
 		return DKERROR("GetWindowRect() failed");
 	w = desktop.right;
-	return true;
+	return true && DKDEBUGRETURN(w);
 }
 
 bool DKWindows::GetScreenHeight(int& h){
-	DKDEBUGFUNC(h);
 	RECT desktop;
 	const HWND hDesktop = GetDesktopWindow();
 	if(!GetWindowRect(hDesktop, &desktop))
 		return DKERROR("GetWindowRect() failed");
 	h = desktop.bottom;
-	return true;
+	return true && DKDEBUGRETURN(h);
 }
 
 bool DKWindows::GetUsername(DKString& username){
 	if(const char* usr_a = std::getenv("USERname")){
 		username = usr_a;
-		return true;
+		return true && DKDEBUGRETURN(username);
 	}
 	/*
 	TCHAR name[UNLEN + 1];

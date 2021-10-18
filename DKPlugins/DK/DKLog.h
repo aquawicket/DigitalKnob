@@ -118,7 +118,10 @@ void DebugFunc(const char* file, int line, const char* func, const DKString& nam
 	DKStringArray arg_values;
 	toStringArray(arg_values, out.str(), ",");
 	DKString func_string = func;
-	func_string += "( ";
+	if (arg_count)
+		func_string += "( ";
+	else
+		func_string += "(";
 	for(int i=0; i<arg_count; ++i){
 		if(!names.empty()){
 			func_string += arg_names[i];
@@ -128,14 +131,17 @@ void DebugFunc(const char* file, int line, const char* func, const DKString& nam
 		if(i < (arg_count-1))
 			func_string += ", ";
 	}
-	func_string += " )\n";
+	if (arg_count)
+		func_string += " )\n";
+	else
+		func_string += ")\n";
 	Log(file, line, "", func_string, DK_DEBUG);
 }
 
 template <typename... Args>
-void DebugReturn(const char* file, int line, const char* func, const DKString& names, Args&&... args) {
+bool DebugReturn(const char* file, int line, const char* func, const DKString& names, Args&&... args) {
 	if (log_show.empty() && !log_debug)
-		return;
+		return true;
 	int arg_count = sizeof...(Args);
 	DKStringArray arg_names;
 	if (!names.empty())
@@ -145,7 +151,10 @@ void DebugReturn(const char* file, int line, const char* func, const DKString& n
 	DKStringArray arg_values;
 	toStringArray(arg_values, out.str(), ",");
 	DKString func_string = func;
-	func_string += "( ";
+	if (arg_count)
+		func_string += "( ";
+	else
+		func_string += "(";
 	for (int i = 0; i < arg_count; ++i) {
 		if (!names.empty()) {
 			func_string += arg_names[i];
@@ -160,8 +169,12 @@ void DebugReturn(const char* file, int line, const char* func, const DKString& n
 			func_string += arg_values[i];
 		}
 	}
-	func_string += "\n";
+	if (arg_count)
+		func_string += "\n";
+	else
+		func_string += ")\n";
 	Log(file, line, "", func_string, DK_DEBUG);
+	return true;
 }
 #endif
 

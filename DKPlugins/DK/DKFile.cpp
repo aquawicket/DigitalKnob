@@ -167,7 +167,6 @@ bool DKFile::Delete(const DKString& path){
 }
 
 bool DKFile::FileToString(const DKString& file, DKString& string){
-	DKDEBUGFUNC(file, string);
 	DebugPath(file);
 	if(!PathExists(file))
 		return DKERROR("file:("+file+") path does not exist \n");
@@ -177,7 +176,7 @@ bool DKFile::FileToString(const DKString& file, DKString& string){
 	std::ifstream t(file.c_str());
 	std::string str((std::istreambuf_iterator<char>(t)), std::istreambuf_iterator<char>());
 	string = str;
-	return true;
+	return true && DKDEBUGRETURN(file, string);
 }
 
 bool DKFile::FindFile(DKString& filename, const DKString& path, const DKString& extension){
@@ -231,7 +230,7 @@ bool DKFile::GetAppName(DKString& appname){
 }
 
 bool DKFile::GetAppPath(DKString& apppath){
-	DKDEBUGFUNC(apppath);
+	//DKDEBUGFUNC(apppath);
 	if (!DKFile::PathExists(DKFile::exe_path))
 		DKFile::GetExePath(DKFile::exe_path);
 	unsigned found = 0;
@@ -240,19 +239,23 @@ bool DKFile::GetAppPath(DKString& apppath){
 	found = apppath.find_last_of("/");
 	apppath.erase (apppath.begin()+found+1, apppath.end()); 
 	DebugPath(apppath);
+	DKDEBUGRETURN(apppath);
 	return true;
 #elif defined(ANDROID)
 	apppath = "/mnt/sdcard/digitalknob/";
 	DebugPath(apppath);
+	DKDEBUGRETURN(apppath);
 	return true;
 #elif defined(MAC) || defined(IOS) || defined(LINUX)
 	apppath = DKFile::exe_path;
 	found = apppath.find_last_of("/");
 	apppath.erase (apppath.begin()+found+1, apppath.end());
 	DebugPath(apppath);
+	DKDEBUGRETURN(apppath);
 	return true;
 #endif
 	DebugPath(apppath);
+	DKDEBUGRETURN(apppath);
 	return DKERROR("not implemented on this OS \n");
 }
 
