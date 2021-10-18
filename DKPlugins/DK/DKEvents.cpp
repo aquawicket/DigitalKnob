@@ -149,9 +149,10 @@ DKString DKEvents::GetValue(int n){
 }
 
 int DKEvents::GetKeyNum(){
-	DKDEBUGFUNC();
+	//DKDEBUGFUNC();
 	if(data.size() < 1)
-		return 0; 
+		return 0;
+	DKDEBUGRETURN(toInt(data[0]));
 	return toInt(data[0]);
 }
 

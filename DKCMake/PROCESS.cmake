@@ -358,6 +358,12 @@ if(WIN_32)
 	
 	add_definitions(-D_USING_V110_SDK71_)
 	add_executable(${APP_NAME} WIN32 ${App_SRC})
+	
+	foreach(plugin ${dkdepend_list})
+		add_dependencies(${APP_NAME} ${plugin})	
+	endforeach()
+
+	
 	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${LIBS})
 	##set_source_files_properties(${DIGITALKNOB}/stdafx.cpp PROPERTIES COMPILE_FLAGS "/Ycstdafx.h")
 	
