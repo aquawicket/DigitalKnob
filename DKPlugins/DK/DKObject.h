@@ -118,7 +118,7 @@ public:
 		for(unsigned int i=0; i<instances.size(); ++i){
 			if(id.empty() || same(id, instances[i]->data[1])){
 				if (instances[i])
-					DKDEBUGRETURN(id, instances[i]);
+					//DKDEBUGRETURN(id, instances[i]);
 					return instances[i];
 			}
 		}

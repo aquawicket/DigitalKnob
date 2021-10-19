@@ -246,16 +246,16 @@ bool DKRml::LoadUrl(const DKString& url){
 	//Get the working path;
 	std::size_t found = _url.find_last_of("/");
 	workingPath = _url.substr(0, found + 1);
-	DKWARN("DKRml::LoadUrl(): workingPath: " + workingPath + "\n");
-	DKWARN("DKRml::LoadUrl(): href: " + href + "\n");
+	DKINFO("DKRml::LoadUrl(): workingPath: " + workingPath + "\n");
+	DKINFO("DKRml::LoadUrl(): href: " + href + "\n");
 	//get the protocol
 	int n = _url.find(":");
 	protocol = _url.substr(0,n);
-	DKWARN("DKRml::LoadUrl(): protocol: "+protocol+"\n");
+	DKINFO("DKRml::LoadUrl(): protocol: "+protocol+"\n");
 	found = _url.rfind("/");
 	_path = _url.substr(0,found+1);
 	//DKWARN("DKRml::LoadUrl(): last / at "+toString(found)+"\n");
-	DKWARN("DKRml::LoadUrl(): _path = "+_path+"\n");
+	DKINFO("DKRml::LoadUrl(): _path = "+_path+"\n");
 	DKString html;
 	if(has(_url, "http://") || has(_url, "https://")){
 		DKClass::DKCreate("DKCurl");

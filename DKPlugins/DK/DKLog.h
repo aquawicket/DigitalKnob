@@ -110,30 +110,30 @@ void DebugFunc(const char* file, int line, const char* func, const DKString& nam
 	if(log_show.empty() && !log_debug)
 		return;
 	int arg_count = sizeof...(Args);
-	DKStringArray arg_names;
-	if(!names.empty())
-		toStringArray(arg_names, names, ",");
+	//DKStringArray arg_names;
+	//if(!names.empty())
+	//	toStringArray(arg_names, names, ",");
 	std::ostringstream out;
 	getTemplateArgs(out, args...);
 	DKStringArray arg_values;
 	toStringArray(arg_values, out.str(), ",");
 	DKString func_string = func;
-	if (arg_count)
-		func_string += "( ";
-	else
+	//if (arg_count)
+	//	func_string += "( ";
+	//else
 		func_string += "(";
 	for(int i=0; i<arg_count; ++i){
-		if(!names.empty()){
-			func_string += arg_names[i];
-			func_string += ":";
-		}
+		//if(!names.empty()){
+		//	func_string += arg_names[i];
+		//	func_string += ":";
+		//}
 		func_string += arg_values[i];
 		if(i < (arg_count-1))
 			func_string += ", ";
 	}
-	if (arg_count)
-		func_string += " )\n";
-	else
+	//if (arg_count)
+	//	func_string += " )\n";
+	//else
 		func_string += ")\n";
 	Log(file, line, "", func_string, DK_DEBUG);
 }
@@ -143,29 +143,31 @@ bool DebugReturn(const char* file, int line, const char* func, const DKString& n
 	if (log_show.empty() && !log_debug)
 		return true;
 	int arg_count = sizeof...(Args);
-	DKStringArray arg_names;
-	if (!names.empty())
-		toStringArray(arg_names, names, ",");
+	//DKStringArray arg_names;
+	//if (!names.empty())
+	//	toStringArray(arg_names, names, ",");
 	std::ostringstream out;
 	getTemplateArgs(out, args...);
 	DKStringArray arg_values;
 	toStringArray(arg_values, out.str(), ",");
 	DKString func_string = func;
-	if (arg_count)
-		func_string += "( ";
-	else
+	//if (arg_count)
+	//	func_string += "( ";
+	//else
 		func_string += "(";
 	for (int i = 0; i < arg_count; ++i) {
-		if (!names.empty()) {
-			func_string += arg_names[i];
-			func_string += ":";
-		}
 		if (i < (arg_count - 1)) {
+			//if (!names.empty()) {
+			//	func_string += arg_names[i];
+			//	func_string += ":";
+			//}
 			func_string += arg_values[i];
 			func_string += ", ";
 		}
 		else {
-			func_string += " ) -> ";
+			func_string += ") -> ";
+			//func_string += arg_names[i];
+			//func_string += ":";
 			func_string += arg_values[i];
 		}
 	}

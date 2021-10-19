@@ -664,20 +664,19 @@ bool DKFile::GetShortName(const DKString& file, DKString& shortname){
 }
 
 bool DKFile::IsDirectory(const DKString& file){
-	DKDEBUGFUNC(file);
 	DebugPath(file);
 	if(!PathExists(file))
 		return DKERROR("("+file+") path does not exist \n");
 	struct stat s;
 	if(stat(file.c_str(),&s) == 0){
-		if( s.st_mode & S_IFDIR )
-			return true;
+		if (s.st_mode & S_IFDIR)
+			return true && DKDEBUGRETURN(file, true);
 		else if( s.st_mode & S_IFREG )
-			return false; //it's a file
+			return false && DKDEBUGRETURN(file, false); //it's a file
 		else
-			return false; //it's something else
+			return false && DKDEBUGRETURN(file, false); //it's something else
 	}
-	return false;
+	return DKERROR("unknown error \n");
 }
 
 bool DKFile::MakeDir(const DKString& dir){

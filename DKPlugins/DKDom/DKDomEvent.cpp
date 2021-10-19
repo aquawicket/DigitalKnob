@@ -246,7 +246,6 @@ int DKDomEvent::timeStamp(duk_context* ctx){
 }
 
 int DKDomEvent::type(duk_context* ctx){
-	DKDEBUGFUNC(ctx);
 	DKString eventAddress = duk_require_string(ctx, 0);
 	Rml::Event* event = DKRml::addressToEvent(eventAddress);
 	if (!event) {
@@ -262,7 +261,7 @@ int DKDomEvent::type(duk_context* ctx){
 		type = "contextmenu";
 	}
 	duk_push_string(ctx, type.c_str());
-	return true;
+	return true && DKDEBUGRETURN(ctx, type);
 }
 
 int DKDomEvent::isTrusted(duk_context* ctx){
