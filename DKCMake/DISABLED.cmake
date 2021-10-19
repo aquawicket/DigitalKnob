@@ -64,7 +64,7 @@ if(NOT CMAKE_HOST_WIN32) # Disabled on Non-Windows host machines
 	DKDISABLE(php-win32-vs16-x64)
 endif()
 if(WIN) # Disabled for Windows targets
-	DKDISABLE(bzip2)
+	#DKDISABLE(bzip2)
 	DKDISABLE(DKOcr)
 	DKDISABLE(flac)
 	DKDISABLE(freealut)
