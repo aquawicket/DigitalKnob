@@ -11,15 +11,15 @@ myapp.loadFiles = function myapp_loadFiles() {
 	//DKPlugin("DKGui/DKMessageBox.js")
 	//DKPlugin("DKGui/DKConsole.js")
 	
-	DKPlugin("DKGui/DKMessageBox.js")
+	DKPlugin("DKGui/TestApp.js")
 }
 
 myapp.loadApp = function myapp_loadApp() {
 	//DKConsole.prototype.create(document.body, "", "0rem", "0rem", "0rem", "100%", "25%")
 	console.log("**** DKSDLRmlUi ****")
 	
-	DKPlugin("DKGui/DKMessageBox.js", function() {
-		DKMessageBox.prototype.createMessage("this is a message", function(instance, okclicked) {
+	DKPlugin("DKGui/TestApp.js", function() {
+		TestApp.prototype.create(function(instance) {
             //if (instance) {
                 //console.log("instance: %c" + instance, "color:orange;")
             //    instance.html && (instance.html.style.backgroundColor = "red")
