@@ -656,16 +656,25 @@ dk.iE = function dk_iE() {
     // (indicating the use of another browser).
     return rv;
 }
-
-dk.fileToString = function dk_fileToString(url, dk_fileToString_callback) {
-    required({
-        url
-    }, {
-        dk_fileToString_callback
-    });
-    dk.sendRequest("GET", url, function dk_sendRequest_callback(success, url, data) {
-        return dk_fileToString_callback(data);
-    });
+if (!DUKTAPE) {
+	dk.fileToString = function dk_fileToString(url, dk_fileToString_callback) {
+		console.log("dk_fileToString("+url+")");
+		required({
+			url
+		}, {
+			dk_fileToString_callback
+		});
+		dk.sendRequest("GET", url, function dk_sendRequest_callback(success, url, data) {
+			return dk_fileToString_callback(data);
+		});
+	}
+} else {
+    dk.fileToString = function DKFile_fileToString(path, callback) {
+		console.log("dk.fileToString()")
+        //path = dk.validatepath(path);
+        const str = CPP_DKFile_FileToString(path);
+        return callback(str);
+    }
 }
 
 dk.sleep = function dk_sleep(milliseconds) {
