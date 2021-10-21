@@ -1,4 +1,9 @@
-const url = CPP_DKAssets_LocalAssets()+"index.html"
+const assets = CPP_DKAssets_LocalAssets()
+CPP_DKFile_ChDir(assets+"DKPhp/")
+const batch = assets+"DKPhp/RunPhpServers.bat"
+CPP_DK_System(batch)
+
+const url = assets+"index.html"
 //const url = CPP_DKAssets_LocalAssets()+"DKWebTest/index.html"
 
 /*

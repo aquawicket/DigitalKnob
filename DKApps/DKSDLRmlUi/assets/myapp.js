@@ -3,7 +3,8 @@ function MyApp(){}
 const myapp = DKPlugin(MyApp);
 
 
-myapp.loadFiles = function myapp_loadFiles() {	
+myapp.loadFiles = function myapp_loadFiles() {
+	DKPlugin("DK/DKPhp.js")
 	DKPlugin("DKFile/DKFile.js")
 	DKPlugin("DKGui/DKGui.js")
 	DKPlugin("DKGui/DKFrame.js")
