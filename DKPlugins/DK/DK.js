@@ -6,7 +6,7 @@ let DUKTAPE = window.DUKTAPE
 dk.useCPP = false;
 
 //Keep a object reference to the old console
-//if(!DUKTAPE) {
+if(!DUKTAPE) {
     dk.xconsole = new Object;
     //Create a logger for console
     dk.x = new Object;
@@ -33,7 +33,7 @@ dk.useCPP = false;
     console.warn = function() {
         dk.x && dk.x.logger("warn", arguments);
     }
-//}
+}
 
 const required = function required() {
     for (let n = 0; n < arguments.length; n++) {
@@ -656,8 +656,16 @@ dk.iE = function dk_iE() {
     // (indicating the use of another browser).
     return rv;
 }
-if (!DUKTAPE) {
-	dk.fileToString = function dk_fileToString(url, dk_fileToString_callback) {
+
+if(typeof CPP_DKFile_FileToString === "function"){
+	dk.fileToString = function DKFile_fileToString(path, callback) {
+		console.log("dk.fileToString()")
+        //path = dk.validatepath(path);
+        const str = CPP_DKFile_FileToString(path);
+        return callback(str);
+    }
+} else {
+    dk.fileToString = function dk_fileToString(url, dk_fileToString_callback) {
 		console.log("dk_fileToString("+url+")");
 		required({
 			url
@@ -668,13 +676,6 @@ if (!DUKTAPE) {
 			return dk_fileToString_callback(data);
 		});
 	}
-} else {
-    dk.fileToString = function DKFile_fileToString(path, callback) {
-		console.log("dk.fileToString()")
-        //path = dk.validatepath(path);
-        const str = CPP_DKFile_FileToString(path);
-        return callback(str);
-    }
 }
 
 dk.sleep = function dk_sleep(milliseconds) {

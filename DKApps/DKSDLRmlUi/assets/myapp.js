@@ -3,9 +3,12 @@ function MyApp(){}
 const myapp = DKPlugin(MyApp);
 
 
-myapp.loadFiles = function myapp_loadFiles() {
-	//DKPlugin("DKFile/DKFile.js")
-	//DKPlugin("DKGui/DKGui.js")
+myapp.loadFiles = function myapp_loadFiles() {	
+	DKPlugin("DKFile/DKFile.js")
+	DKPlugin("DKGui/DKGui.js")
+	DKPlugin("DKGui/DKFrame.js")
+	DKPlugin("DKGui/DKDrag.js")
+	//DKPlugin("DKGui/DKResize.js")
 	//DKPlugin("DKCodeRunner/DKCodeRunner.js")
 	//dk.notepad = DKPlugin("DKNotepad/DKNotepad.js")
 	//DKPlugin("DKGui/DKMessageBox.js")

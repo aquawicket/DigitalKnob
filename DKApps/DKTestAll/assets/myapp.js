@@ -5,9 +5,10 @@ const myapp = DKPlugin(MyApp);
 
 myapp.loadFiles = function myapp_loadFiles() {
 	//DKPlugin("DK/DKTrace.js")
-	//DKPlugin("DK/DKPhp.js")
-	//DKPlugin("DKFile/DKFile.js")
-	//DKPlugin("DKGui/DKGui.js")
+	DKPlugin("DK/DKPhp.js")
+	DKPlugin("DKFile/DKFile.js")
+	DKPlugin("DKGui/DKGui.js")
+	DKPlugin("DKGui/DKFrame.js")
 
 	//DKPlugin("DKCodeRunner/DKCodeRunner.js")
 	//dk.notepad = DKPlugin("DKNotepad/DKNotepad.js")
