@@ -312,17 +312,17 @@ int DKDomElement::outerHTML(duk_context* ctx){
 
 int DKDomElement::querySelector(duk_context* ctx){
 	DKString address = duk_require_string(ctx, 0);
-	DKString selector = duk_require_string(ctx, 1);
-	DKDEBUGFUNC(address, selector);
+	DKString selectors = duk_require_string(ctx, 1);
+	DKDEBUGFUNC(address, selectors);
 	Rml::Element* element = DKRml::addressToElement(address);
 	if (!element) {
 		DKERROR("element invalid\n");
 		duk_push_undefined(ctx);
 		return true;
 	}
-	if (has(selector, "[") && has(selector, "]"))
-		return DKERROR("attribute selectors unimplemented\n");
-	Rml::Element* queryElement = element->QuerySelector(selector.c_str());
+	//if (has(selectors, "[") && has(selectors, "]"))
+	//	return DKERROR("attribute selectors unimplemented\n");
+	Rml::Element* queryElement = element->QuerySelector(selectors.c_str());
 	if(!queryElement){
 		duk_push_undefined(ctx);
 		return DKERROR("queryElement invalid\n");
@@ -342,6 +342,8 @@ int DKDomElement::querySelectorAll(duk_context* ctx){
 		duk_push_undefined(ctx);
 		return true;
 	}
+	if (has(selectors, "[") && has(selectors, "]"))
+		return DKERROR("attribute selectors unimplemented\n");
 	Rml::ElementList elements;
 	element->QuerySelectorAll(elements, selectors.c_str());
 	if(elements.empty()){
