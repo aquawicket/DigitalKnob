@@ -194,7 +194,6 @@ int DKFileJS::GetModifiedTime(duk_context* ctx){
 	return true;
 }
 
-//TODO
 int DKFileJS::GetPaths(duk_context* ctx) {
 	DKString path = duk_require_string(ctx, 0);
 	DKString aPath;

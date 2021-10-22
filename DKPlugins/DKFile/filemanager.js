@@ -3,9 +3,10 @@
 function DKFileManager() {}
 
 DKFileManager.prototype.init = function DKFileManager_init(callback) {
-    DKPlugin("DKFile/DKFileAssociation.js")
-    dk.create("DKFile/filemanager.css")
-    callback && callback(true)
+    DKPlugin("DKFile/DKFileAssociation.js", function(){
+		dk.create("DKFile/filemanager.css");
+		callback && callback(true);
+	});
 }
 
 DKFileManager.prototype.end = function DKFileManager_end() {
@@ -17,14 +18,13 @@ DKFileManager.prototype.create = function DKFileManager_create(DKFileManager_cre
     const instance = new DKPlugin(DKFileManager)
     if (!instance)
         return error("instance invalid", DKFileManager_create_callback)
-
     dk.create("DKFile/filemanager.html", function dk_create_callback(html) {
-        if (!html)
+        if(!html)
             return error("html invalid")
-		if (!instance)
+		if(!instance)
 			return error("instance invalid")
         instance.html = html;
-        instance.box = html.querySelector("[dk_filemanager='box']")
+        //instance.box = html.querySelector("[dk_filemanager='box']")
         instance.up = html.querySelector("[dk_filemanager='up']")
         instance.path = html.querySelector("[dk_filemanager='path']")
         instance.list = html.querySelector("[dk_filemanager='list']")
