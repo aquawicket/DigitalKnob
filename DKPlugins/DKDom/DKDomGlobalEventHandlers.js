@@ -438,36 +438,38 @@ var GlobalEventHandlers = function(pointer) {
             this.mouseenter_func = func
         }
     });
-    this.mouseleave_func = null;
+    this.mouseleave_func = null
     Object.defineProperty(this, "onmouseleave", {
         get: function() {
-            return this.mouseleave_func;
+            return this.mouseleave_func
         },
         set: function(func) {
-            this.addEventListener("mouseleave", func);
+            func && this.addEventListener("mouseleave", func)
             this.mouseleave_func = func
         }
-    });
-    this.mousemove_func = null;
+    })
+    this.mousemove_func = null
     Object.defineProperty(this, "onmousemove", {
         get: function() {
-            return this.mousemove_func;
+            return this.mousemove_func
         },
         set: function(func) {
-            this.addEventListener("mousemove", func);
+			func && this.addEventListener("mousemove", func)
+			!func && this.removeEventListener("mousemove", this.mousemove_func)				
             this.mousemove_func = func
         }
-    });
-    this.mouseout_func = null;
+    })
+    this.mouseout_func = null
     Object.defineProperty(this, "onmouseout", {
         get: function() {
-            return this.mouseout_func;
+            return this.mouseout_func
         },
         set: function(func) {
-            this.addEventListener("mouseout", func);
+            func && this.addEventListener("mouseout", func)
+			!func && this.removeEventListener("mouseout", this.mouseout_func)				
             this.mouseout_func = func
         }
-    });
+    })
     this.mouseover_func = null;
     Object.defineProperty(this, "onmouseover", {
         get: function() {
@@ -839,10 +841,15 @@ var GlobalEventHandlers = function(pointer) {
         }
     });
     this.ontouchstart_func = null;
-    //Object.defineProperty(this, "ontouchstart", {
-    //	get: function(){ return this.touchstart_func; },
-    //	set: function(func){ this.addEventListener("touchstart", func); this.touchstart_func = func }
-    //});
+    Object.defineProperty(this, "ontouchstart", {
+    	get: function(){ 
+			return this.touchstart_func
+		},
+    	set: function(func){ 
+			this.addEventListener("touchstart", func); 
+			this.touchstart_func = func 
+		}
+    });
     this.transitioncancel_func = null;
     Object.defineProperty(this, "ontransitioncancel", {
         get: function() {

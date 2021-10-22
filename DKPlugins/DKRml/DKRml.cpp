@@ -374,8 +374,8 @@ void DKRml::ProcessEvent(Rml::Event& rmlEvent){
 #ifdef DRAG_FIX
 			if (!same(type, "mousedown")) {
 #endif
-				if (!same(type, "keydown")) 
-					rmlEvent.StopPropagation();
+				//if (!same(type, "keydown")) 
+					//rmlEvent.StopPropagation();
 #ifdef DRAG_FIX
 			}
 #endif

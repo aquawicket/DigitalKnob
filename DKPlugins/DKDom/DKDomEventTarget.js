@@ -58,7 +58,7 @@ var EventTarget = function(pointer) {
                 return true;
             var stack = this.listeners[event.type].slice()
             for (var i = 0; i < stack.length; i++)
-                stack[i].call(this, event)
+                stack[i] && stack[i].call(this, event)
             return !event.defaultPrevented;
         }
     })
