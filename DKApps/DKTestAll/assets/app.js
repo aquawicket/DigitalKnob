@@ -19,7 +19,7 @@ window.addEventListener("keydown", function window_onkeydown(event){
 		CPP_DKWindow_IsFullscreen() ? CPP_DKWindow_Windowed() : CPP_DKWindow_Fullscreen()
 	if(event.code === "F12")
 */		
-		CPP_DKCef_ShowDevTools(0)
+		//CPP_DKCef_ShowDevTools(0)
 //})
 
 
