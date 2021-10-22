@@ -32,10 +32,12 @@ myapp.loadFiles = function myapp_loadFiles() {
 myapp.loadApp = function myapp_loadApp() {
 	//DKConsole.prototype.create(document.body, "", "0rem", "0rem", "0rem", "100%", "25%")
 	
+	/*
 	DKPlugin("DKGui/TestApp.js", function() {
 		TestApp.prototype.init()
 		TestApp.prototype.create()
 	});
+	*/
 	
 	/*
 	DKPlugin("DKGui/DKMessageBox.js", function() {
@@ -58,12 +60,12 @@ myapp.loadApp = function myapp_loadApp() {
     });
 	*/
 	
-	/*
+	
 	DKPlugin("DKNotepad/DKNotepad.js", function() {
         DKNotepad.prototype.init();
         DKNotepad.prototype.create();
     });
-	*/
+	
 	
 	/*
 	DKPlugin("DKBuild/DKBuildGUI.js", function() {

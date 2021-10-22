@@ -320,6 +320,8 @@ int DKDomElement::querySelector(duk_context* ctx){
 		duk_push_undefined(ctx);
 		return true;
 	}
+	if (has(selector, "[") && has(selector, "]"))
+		return DKERROR("attribute selectors unimplemented\n");
 	Rml::Element* queryElement = element->QuerySelector(selector.c_str());
 	if(!queryElement){
 		duk_push_undefined(ctx);

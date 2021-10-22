@@ -1,5 +1,30 @@
 //"use strict";
 
+//if (!document.querySelectorAll) {
+    document.querySelectorAll = function(selectors) {
+      var style = document.createElement('style'), elements = [], element;
+      document.documentElement.firstChild.appendChild(style);
+      document._qsa = [];
+
+      style.styleSheet.cssText = selectors + '{x-qsa:expression(document._qsa && document._qsa.push(this))}';
+      window.scrollBy(0, 0);
+      style.parentNode.removeChild(style);
+
+      while (document._qsa.length) {
+        element = document._qsa.shift();
+        element.style.removeAttribute('x-qsa');
+        elements.push(element);
+      }
+      document._qsa = null;
+      return elements;
+    };
+//  }
+  
+  document.querySelector = function(selectors) {
+      var elements = document.querySelectorAll(selectors);
+      return (elements.length) ? elements[0] : null;
+    };
+	
 function DKNotepad(){}
 
 DKNotepad.prototype.init = function dk_notepad_init(callback) {
@@ -19,8 +44,10 @@ DKNotepad.prototype.create = function dk_notepad_create(dk_notepad_create_callba
     if (!instance)
         return error("instance invalid", dk_notepad_create_callback);
     dk.create("DKNotepad/DKNotepad.html", function dk_create_callback(html) {
-        if (!html)
+        if(!html)
             return error("html invalid");
+		if(!instance)
+			return error("instance invalid");
         instance.html = html;
         instance.menubar = html.querySelector("[dk_notepad='menubar']");
         instance.file = html.querySelector("[dk_notepad='file']");
