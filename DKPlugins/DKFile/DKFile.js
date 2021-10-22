@@ -489,10 +489,10 @@ if (typeof CPP_DKFile_GetRelativePath === "function") {
     }
 }
 
-if (typeof CPP_DKFile_GetPathObject === "function") {
+if (typeof CPP_DKFile_GetPaths === "function") {
 	DKFile.prototype.getPathObject = function DKFile_getPathObject(path, callback) {
 		//TODO - C++ side not implemented
-		const _pObj = CPP_DKFile_GetPathObject(path);
+		const _pObj = CPP_DKFile_GetPaths(path);
 		const pObj = new Object();
 		pObj.path = _pObj.split(",")[0];
 		pObj.aPath = _pObj.split(",")[1];
@@ -503,7 +503,7 @@ if (typeof CPP_DKFile_GetPathObject === "function") {
 		pObj.basename = _pObj.split(",")[6];
 		pObj.extension = _pObj.split(",")[7];
 		pObj.filename = _pObj.split(",")[8];
-		/*
+		
 		console.debug("path = " + pObj.path);
 		console.debug("aPath = " + pObj.aPath);
 		console.debug("root = " + pObj.root);
@@ -513,7 +513,7 @@ if (typeof CPP_DKFile_GetPathObject === "function") {
 		console.debug("basename = " + pObj.basename);
 		console.debug("extension = " + pObj.extension);
 		console.debug("filename = " + pObj.filename);
-		*/
+		
 		return callback(pObj);
 	}
 } else {
@@ -531,7 +531,7 @@ if (typeof CPP_DKFile_GetPathObject === "function") {
 			pObj.basename = _pObj.split(",")[6];
 			pObj.extension = _pObj.split(",")[7];
 			pObj.filename = _pObj.split(",")[8];
-			/*
+			
 			console.debug("path = " + pObj.path);
 			console.debug("aPath = " + pObj.aPath);
 			console.debug("root = " + pObj.root);
@@ -541,7 +541,7 @@ if (typeof CPP_DKFile_GetPathObject === "function") {
 			console.debug("basename = " + pObj.basename);
 			console.debug("extension = " + pObj.extension);
 			console.debug("filename = " + pObj.filename);
-			*/
+			
 			return callback(pObj);
 		});
 	}

@@ -5,7 +5,6 @@
 
 #include "DKDuktape/DKDuktape.h"
 
-///////////////////////////////////////////
 class DKFileJS : public DKObjectT<DKFileJS>
 {
 public:
@@ -27,6 +26,7 @@ public:
 	static int GetLocalCreationDate(duk_context* ctx);
 	static int GetLocalModifiedDate(duk_context* ctx);
 	static int GetModifiedTime(duk_context* ctx);
+	static int GetPaths(duk_context* ctx);
 	static int GetRelativePath(duk_context* ctx);
 	static int GetSetting(duk_context* ctx);
 	static int GetShortName(duk_context* ctx);
@@ -39,6 +39,5 @@ public:
 };
 
 REGISTER_OBJECT(DKFileJS, true)
-
 #endif //DKFileJS_H
 #endif //USE_DKDuktape
