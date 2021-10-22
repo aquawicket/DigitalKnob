@@ -407,7 +407,7 @@ bool RmlSDL2SystemInterface::LogMessage(Rml::Log::Type type, const Rml::String& 
 		DKERROR("[Rml] "+DKString(message)+"\n");
 		break;
 	case Rml::Log::LT_ASSERT:
-		DKERROR("[Rml] "+DKString(message)+"\n");
+		DKASSERT("[Rml] "+DKString(message)+"\n");
 		break;
 	case Rml::Log::LT_WARNING:
 		DKWARN("[Rml] "+DKString(message)+"\n");
@@ -419,7 +419,7 @@ bool RmlSDL2SystemInterface::LogMessage(Rml::Log::Type type, const Rml::String& 
 		DKDEBUG("[Rml] "+DKString(message)+"\n");
 		break;
     case Rml::Log::LT_MAX:
-		DKINFO("[Rml] "+DKString(message)+"\n");
+        DKVERBOSE("[Rml] "+DKString(message)+"\n");
         break;
 	};
 	return true;

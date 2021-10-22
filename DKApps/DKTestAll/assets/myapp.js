@@ -30,13 +30,54 @@ myapp.loadFiles = function myapp_loadFiles() {
 }
 
 myapp.loadApp = function myapp_loadApp() {
-	//DKConsole.prototype.create(document.body, "", "0rem", "0rem", "0rem", "100%", "25%")	
-	//TestApp.prototype.create(function(instance){})
+	//DKConsole.prototype.create(document.body, "", "0rem", "0rem", "0rem", "100%", "25%")
 	
+	DKPlugin("DKGui/TestApp.js", function() {
+		TestApp.prototype.init()
+		TestApp.prototype.create()
+	});
+	
+	/*
+	DKPlugin("DKGui/DKMessageBox.js", function() {
+		DKMessageBox.prototype.init()
+		DKMessageBox.prototype.create()
+	});
+	*/
+	
+	/*
+	dk.paint = DKPlugin("DKPaint/DKPaint.js", function() {
+        dk.paint.init();
+		const dkframe = DKFrame.prototype.create(byId("DKPaint/DKPaint.html"))
+    });
+	*/
+	
+	/*
+	DKPlugin("DKColorPicker/DKColorPicker.js", function() {
+        DKColorPicker.prototype.init();
+        DKColorPicker.prototype.create();
+    });
+	*/
+	
+	/*
+	DKPlugin("DKNotepad/DKNotepad.js", function() {
+        DKNotepad.prototype.init();
+        DKNotepad.prototype.create();
+    });
+	*/
+	
+	/*
+	DKPlugin("DKBuild/DKBuildGUI.js", function() {
+        DKBuildGUI.prototype.init();
+        DKBuildGUI.prototype.create();
+    });
+	*/
+	
+	/*
 	DKPlugin("DKFile/filemanager.js", function() {
         DKFileManager.prototype.init();
         DKFileManager.prototype.create();
     });
+	*/
 }
 
 DUKTAPE && myapp.loadFiles();

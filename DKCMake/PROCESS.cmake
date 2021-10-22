@@ -76,8 +76,14 @@ foreach(plugin ${dkdepend_list})
 		RETURN()
 	endif()
 
-	#This actually executes the 3rdParty library builds
+	#This actually executes the 3rdParty library builds, and dkplugin setup
 	include(${plugin_path}/DKMAKE.cmake)
+	
+	#string(TOUPPER ${plugin} PLUGIN_NAME)
+	#if(EXISTS "${${PLUGIN_NAME}}/CMakeLists.txt")
+	#	message(STATUS "PLUGIN_NAME = ${${PLUGIN_NAME}}/CMakeLists.txt")
+	#	add_subdirectory(${${PLUGIN_NAME}} ${${PLUGIN_NAME}}/${OS})
+	#endif()
 	
 	####################### DKPlugins #######################
 	string(FIND "${DKCPPPLUGS}" "${plugin}" index)
@@ -112,8 +118,10 @@ foreach(plugin ${dkdepend_list})
 			file(WRITE ${plugin_path}/CMakeLists.txt ${CMAKE_FILE})
 		endif()
 
-		# THIS LINE ALONE, ADDS DKPLUGINS TO THE APP SOLUTION
-		add_subdirectory(${plugin_path} ${plugin_path}/${OS})
+		# THIS ADDS THE PLUGINS TO THE APP SOLUTION
+		#if(EXISTS "${plugin_path}/CMakeLists.txt")
+			add_subdirectory(${plugin_path} ${plugin_path}/${OS})
+		#endif()
 		
 		DKSET(CURRENT_DIR ${plugin_path}/${OS})
 		dk_makeDirectory(${CURRENT_DIR})		
@@ -360,6 +368,9 @@ if(WIN_32)
 	add_executable(${APP_NAME} WIN32 ${App_SRC})
 	
 	foreach(plugin ${dkdepend_list})
+		#if(EXISTS "${3rdParty}/${plugin}/CMakeLists.txt")
+		#	add_dependencies(${APP_NAME} ${plugin})
+		#endif()
 		if(EXISTS "${DKPLUGINS}/${plugin}/CMakeLists.txt")
 			add_dependencies(${APP_NAME} ${plugin})
 		endif()	

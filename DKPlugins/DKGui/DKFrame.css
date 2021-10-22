@@ -7,7 +7,7 @@
 }
 
 [dk_frame="frame"]::after {
-    content: '';
+    /* content: ''; */
     position: absolute;
     border-style:solid;
     border-width: 1rem;
@@ -63,8 +63,7 @@
     top: 1rem;
     right: 63rem;
     height: 19rem;
-    background-color: rgb(212 210 212);
-
+    background-color: rgb(212, 210, 212);
 }
 
 [dk_frame="minimize"] {
