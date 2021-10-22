@@ -3,7 +3,8 @@
 function DKResize() {}
 
 DKResize.prototype.createBox = function DKResize_create(element) {
-    const dkresize = DKPlugin(DKResize)
+	console.log("DKResize.prototype.createBox")
+	const dkresize = DKPlugin(DKResize)
 
     dkresize.image = dk.gui.createElement(element, "img", "dk_resize_image");
     dkresize.image.setAttribute("src", "DKGui/resize.png");
@@ -13,7 +14,7 @@ DKResize.prototype.createBox = function DKResize_create(element) {
     dkresize.image.style.bottom = "0rem";
     dkresize.image.style.width = "18rem";
     dkresize.image.style.height = "18rem";
-
+	
     dkresize.corner = dk.gui.createElement(element, "div", "dk_resize_corner");
     dkresize.corner.style.removeProperty("top");
     dkresize.corner.style.position = "absolute";
@@ -23,7 +24,7 @@ DKResize.prototype.createBox = function DKResize_create(element) {
     dkresize.corner.style.height = "16rem";
     dkresize.corner.style.cursor = "nw-resize";
     dkresize.addHandle(dkresize.corner, element);
-
+	
     dkresize.top = dk.gui.createElement(element, "div", "dk_resize_top");
     dkresize.top.style.removeProperty("bottom");
     dkresize.top.style.removeProperty("width");

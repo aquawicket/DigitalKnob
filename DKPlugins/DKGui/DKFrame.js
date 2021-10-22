@@ -69,12 +69,10 @@ DKFrame.prototype.create = function DKFrame_create(obj) {
     })
     instance.frame.content.setAttribute("dk_frame", "content");
     instance.frame.appendChild(instance.frame.content);
-    DKPlugin("DKGui/DKResize.js", function(DKClass) {
+	DKPlugin("DKGui/DKResize.js", function(DKClass) {
         instance.resize = DKClass.prototype.createBox(instance.frame);
     })
-
     return instance;
-
 }
 
 DKFrame.prototype.close = function DKFrame_close() {
