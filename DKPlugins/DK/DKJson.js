@@ -72,19 +72,18 @@ DKJson.prototype.findPartialMatch = function DKJson_findPartialMatch(obj, key, v
     return foundObj
 }
 
-DKJson.prototype.findNestedObject = function DKJson_findNestedObject(obj, key, value) {
-    try {
-        JSON.stringify(obj, (_,nestedValue)=>{
-            if(nestedValue && nestedValue[key] && !value)
-                throw nestedValue
-            if (nestedValue && nestedValue[key] === value)
-                throw nestedValue
-            return nestedValue
-        }
-        )
-    } catch (result) {
-        return result
-    }
+if(!DUKTAPE){
+	DKJson.prototype.findNestedObject = function DKJson_findNestedObject(obj, key, value) {
+		try {
+			JSON.stringify(obj, function (_, nestedValue) {
+				if (nestedValue && nestedValue[key] && !value) throw nestedValue;
+				if (nestedValue && nestedValue[key] === value) throw nestedValue;
+				return nestedValue;
+			});
+		} catch (result) {
+			return result;
+		}
+	};
 }
 
 DKJson.prototype.saveJsonToFile = function DKJson_saveJsonToFile(json, path, flags, callback) {
