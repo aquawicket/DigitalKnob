@@ -371,14 +371,16 @@ void DKRml::ProcessEvent(Rml::Event& rmlEvent){
 			//DKINFO("Event: "+ev->type+", "+ev->id+"\n");
 			//FIXME - StopPropagation() on a mousedown even will bock the elements ability to drag
 			// we need to find a way to stop propagation of the event, while allowing drag events.
+/*
 #ifdef DRAG_FIX
 			if (!same(type, "mousedown")) {
 #endif
-				//if (!same(type, "keydown")) 
-					//rmlEvent.StopPropagation();
+				if (!same(type, "keydown")) 
+					rmlEvent.StopPropagation();
 #ifdef DRAG_FIX
 			}
 #endif
+*/
 			//ev->rEvent = NULL;
 			return;
 		}

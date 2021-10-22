@@ -24,7 +24,8 @@ var GlobalEventHandlers = function(pointer) {
             return this.abort_func;
         },
         set: function(func) {
-            this.addEventListener("abort", func);
+            func && this.addEventListener("abort", func)
+			!func && this.removeEventListener("abort", this.abort_func)
             this.abort_func = func
         }
     });
@@ -34,7 +35,8 @@ var GlobalEventHandlers = function(pointer) {
             return this.animationcancel_func;
         },
         set: function(func) {
-            this.addEventListener("animationcancel", func);
+            func && this.addEventListener("animationcancel", func)
+			!func && this.removeEventListener("animationcancel", this.animationcancel_func)
             this.animationcancel_func = func
         }
     });
@@ -44,7 +46,8 @@ var GlobalEventHandlers = function(pointer) {
             return this.animationend_func;
         },
         set: function(func) {
-            this.addEventListener("animationend", func);
+            func && this.addEventListener("animationend", func)
+			!func && this.removeEventListener("animationend", this.animationend_func)
             this.animationend_func = func
         }
     });
@@ -54,7 +57,8 @@ var GlobalEventHandlers = function(pointer) {
             return this.animationiteration_func;
         },
         set: function(func) {
-            this.addEventListener("animationiteration", func);
+            func && this.addEventListener("animationiteration", func)
+			!func && this.removeEventListener("animationiteration", this.animationiteration_func)
             this.animationiteration_func = func
         }
     });
@@ -64,7 +68,8 @@ var GlobalEventHandlers = function(pointer) {
             return this.animationstart_func;
         },
         set: function(func) {
-            this.addEventListener("animationstart", func);
+            func && this.addEventListener("animationstart", func)
+			!func && this.removeEventListener("animationstart", this.animationstart_func)
             this.animationstart_func = func
         }
     });
@@ -74,7 +79,8 @@ var GlobalEventHandlers = function(pointer) {
             return this.auxclick_func;
         },
         set: function(func) {
-            this.addEventListener("auxclick", func);
+            func && this.addEventListener("auxclick", func)
+			!func && this.removeEventListener("auxclick", this.auxclick_func)
             this.auxclick_func = func
         }
     });
@@ -84,7 +90,8 @@ var GlobalEventHandlers = function(pointer) {
             return this.blur_func;
         },
         set: function(func) {
-            this.addEventListener("blur", func);
+            func && this.addEventListener("blur", func)
+			!func && this.removeEventListener("blur", this.blur_func)
             this.blur_func = func
         }
     });
@@ -94,7 +101,8 @@ var GlobalEventHandlers = function(pointer) {
             return this.error_func;
         },
         set: function(func) {
-            this.addEventListener("error", func);
+            func && this.addEventListener("error", func)
+			!func && this.removeEventListener("error", this.error_func)
             this.error_func = func
         }
     });
@@ -104,7 +112,8 @@ var GlobalEventHandlers = function(pointer) {
             return this.focus_func;
         },
         set: function(func) {
-            this.addEventListener("focus", func);
+            func && this.addEventListener("focus", func)
+			!func && this.removeEventListener("focus", this.focus_func)
             this.focus_func = func
         }
     });
@@ -114,7 +123,8 @@ var GlobalEventHandlers = function(pointer) {
             return this.canplay_func;
         },
         set: function(func) {
-            this.addEventListener("canplay", func);
+            func && this.addEventListener("canplay", func)
+			!func && this.removeEventListener("canplay", this.canplay_func)
             this.canplay_func = func
         }
     });
@@ -124,7 +134,8 @@ var GlobalEventHandlers = function(pointer) {
             return this.canplaythrough_func;
         },
         set: function(func) {
-            this.addEventListener("canplaythrough", func);
+            func && this.addEventListener("canplaythrough", func)
+			!func && this.removeEventListener("canplaythrough", this.canplaythrough_func)
             this.canplaythrough_func = func
         }
     });
@@ -134,7 +145,8 @@ var GlobalEventHandlers = function(pointer) {
             return this.change_func;
         },
         set: function(func) {
-            this.addEventListener("change", func);
+            func && this.addEventListener("change", func)
+			!func && this.removeEventListener("change", this.change_func)
             this.change_func = func
         }
     });
@@ -144,7 +156,8 @@ var GlobalEventHandlers = function(pointer) {
             return this.click_func;
         },
         set: function(func) {
-            this.addEventListener("click", func);
+            func && this.addEventListener("click", func)
+			!func && this.removeEventListener("click", this.click_func)
             this.click_func = func
         }
     });
@@ -154,7 +167,8 @@ var GlobalEventHandlers = function(pointer) {
             return this.close_func;
         },
         set: function(func) {
-            this.addEventListener("close", func);
+            func && this.addEventListener("close", func)
+			!func && this.removeEventListener("close", this.close_func)
             this.close_func = func
         }
     });
@@ -164,7 +178,8 @@ var GlobalEventHandlers = function(pointer) {
             return this.contextmenu_func;
         },
         set: function(func) {
-            this.addEventListener("contextmenu", func);
+            func && this.addEventListener("contextmenu", func)
+			!func && this.removeEventListener("contextmenu", this.contextmenu_func)
             this.contextmenu_func = func
         }
     });
@@ -174,7 +189,8 @@ var GlobalEventHandlers = function(pointer) {
             return this.cuechange_func;
         },
         set: function(func) {
-            this.addEventListener("cuechange", func);
+            func && this.addEventListener("cuechange", func)
+			!func && this.removeEventListener("cuechange", this.cuechange_func)
             this.cuechange_func = func
         }
     });
@@ -184,7 +200,8 @@ var GlobalEventHandlers = function(pointer) {
             return this.dblclick_func;
         },
         set: function(func) {
-            this.addEventListener("dblclick", func);
+            func && this.addEventListener("dblclick", func)
+			!func && this.removeEventListener("dblclick", this.dblclick_func)
             this.dblclick_func = func
         }
     });
@@ -194,7 +211,8 @@ var GlobalEventHandlers = function(pointer) {
             return this.drag_func;
         },
         set: function(func) {
-            this.addEventListener("drag", func);
+            func && this.addEventListener("drag", func)
+			!func && this.removeEventListener("drag", this.drag_func)
             this.drag_func = func
         }
     });
@@ -204,7 +222,8 @@ var GlobalEventHandlers = function(pointer) {
             return this.dragend_func;
         },
         set: function(func) {
-            this.addEventListener("dragend", func);
+            func && this.addEventListener("dragend", func)
+			!func && this.removeEventListener("dragend", this.dragend_func)
             this.dragend_func = func
         }
     });
@@ -214,7 +233,8 @@ var GlobalEventHandlers = function(pointer) {
             return this.dragenter_func;
         },
         set: function(func) {
-            this.addEventListener("dragenter", func);
+            func && this.addEventListener("dragenter", func)
+			!func && this.removeEventListener("dragenter", this.dragenter_func)
             this.dragenter_func = func
         }
     });
@@ -224,7 +244,8 @@ var GlobalEventHandlers = function(pointer) {
             return this.dragexit_func;
         },
         set: function(func) {
-            this.addEventListener("dragexit", func);
+            func && this.addEventListener("dragexit", func)
+			!func && this.removeEventListener("dragexit", this.dragexit_func)
             this.dragexit_func = func
         }
     });
@@ -234,7 +255,8 @@ var GlobalEventHandlers = function(pointer) {
             return this.dragleave_func;
         },
         set: function(func) {
-            this.addEventListener("dragleave", func);
+            func && this.addEventListener("dragleave", func)
+			!func && this.removeEventListener("dragleave", this.dragleave_func)
             this.dragleave_func = func
         }
     });
@@ -244,7 +266,8 @@ var GlobalEventHandlers = function(pointer) {
             return this.dragover_func;
         },
         set: function(func) {
-            this.addEventListener("dragover", func);
+            func && this.addEventListener("dragover", func)
+			!func && this.removeEventListener("dragover", this.dragover_func)
             this.dragover_func = func
         }
     });
@@ -254,7 +277,8 @@ var GlobalEventHandlers = function(pointer) {
             return this.dragstart_func;
         },
         set: function(func) {
-            this.addEventListener("dragstart", func);
+            func && this.addEventListener("dragstart", func)
+			!func && this.removeEventListener("dragstart", this.dragstart_func)
             this.dragstart_func = func
         }
     });
@@ -264,7 +288,8 @@ var GlobalEventHandlers = function(pointer) {
             return this.drop_func;
         },
         set: function(func) {
-            this.addEventListener("drop", func);
+            func && this.addEventListener("drop", func)
+			!func && this.removeEventListener("drop", this.drop_func)
             this.drop_func = func
         }
     });
@@ -274,7 +299,8 @@ var GlobalEventHandlers = function(pointer) {
             return this.durationchange_func;
         },
         set: function(func) {
-            this.addEventListener("durationchange", func);
+            func && this.addEventListener("durationchange", func)
+			!func && this.removeEventListener("durationchange", this.durationchange_func)
             this.durationchange_func = func
         }
     });
@@ -284,7 +310,8 @@ var GlobalEventHandlers = function(pointer) {
             return this.emptied_func;
         },
         set: function(func) {
-            this.addEventListener("emptied", func);
+            func && this.addEventListener("emptied", func)
+			!func && this.removeEventListener("emptied", this.emptied_func)
             this.emptied_func = func
         }
     });
@@ -294,7 +321,8 @@ var GlobalEventHandlers = function(pointer) {
             return this.ended_func;
         },
         set: function(func) {
-            this.addEventListener("ended", func);
+            func && this.addEventListener("ended", func)
+			!func && this.removeEventListener("ended", this.ended_func)
             this.ended_func = func
         }
     });
@@ -304,7 +332,8 @@ var GlobalEventHandlers = function(pointer) {
             return this.gotpointercapture_func;
         },
         set: function(func) {
-            this.addEventListener("gotpointercapture", func);
+            func && this.addEventListener("gotpointercapture", func)
+			!func && this.removeEventListener("gotpointercapture", this.gotpointercapture_func)
             this.gotpointercapture_func = func
         }
     });
@@ -314,7 +343,8 @@ var GlobalEventHandlers = function(pointer) {
             return this.input_func;
         },
         set: function(func) {
-            this.addEventListener("input", func);
+            func && this.addEventListener("input", func)
+			!func && this.removeEventListener("input", this.input_func)
             this.input_func = func
         }
     });
@@ -324,7 +354,8 @@ var GlobalEventHandlers = function(pointer) {
             return this.invalid_func;
         },
         set: function(func) {
-            this.addEventListener("invalid", func);
+            func && this.addEventListener("invalid", func)
+			!func && this.removeEventListener("invalid", this.invalid_func)
             this.invalid_func = func
         }
     });
@@ -334,7 +365,8 @@ var GlobalEventHandlers = function(pointer) {
             return this.keydown_func;
         },
         set: function(func) {
-            this.addEventListener("keydown", func);
+            func && this.addEventListener("keydown", func)
+			!func && this.removeEventListener("keydown", this.keydown_func)
             this.keydown_func = func
         }
     });
@@ -344,7 +376,8 @@ var GlobalEventHandlers = function(pointer) {
             return this.keypress_func;
         },
         set: function(func) {
-            this.addEventListener("keypress", func);
+            func && this.addEventListener("keypress", func)
+			!func && this.removeEventListener("keypress", this.keypress_func)
             this.keypress_func = func
         }
     });
@@ -354,7 +387,8 @@ var GlobalEventHandlers = function(pointer) {
             return this.keyup_func;
         },
         set: function(func) {
-            this.addEventListener("keyup", func);
+            func && this.addEventListener("keyup", func)
+			!func && this.removeEventListener("keyup", this.keyup_func)
             this.keyup_func = func
         }
     });
@@ -364,7 +398,8 @@ var GlobalEventHandlers = function(pointer) {
             return this.load_func;
         },
         set: function(func) {
-            this.addEventListener("load", func);
+            func && this.addEventListener("load", func)
+			!func && this.removeEventListener("load", this.load_func)
             this.load_func = func
         }
     });
@@ -374,7 +409,8 @@ var GlobalEventHandlers = function(pointer) {
             return this.loadeddata_func;
         },
         set: function(func) {
-            this.addEventListener("loadeddata", func);
+            func && this.addEventListener("loadeddata", func)
+			!func && this.removeEventListener("loadeddata", this.loadeddata_func)
             this.loadeddata_func = func
         }
     });
@@ -384,7 +420,8 @@ var GlobalEventHandlers = function(pointer) {
             return this.loadedmetadata_func;
         },
         set: function(func) {
-            this.addEventListener("loadedmetadata", func);
+            func && this.addEventListener("loadedmetadata", func)
+			!func && this.removeEventListener("loadedmetadata", this.loadedmetadata_func)
             this.loadedmetadata_func = func
         }
     });
@@ -394,7 +431,8 @@ var GlobalEventHandlers = function(pointer) {
             return this.loadend_func;
         },
         set: function(func) {
-            this.addEventListener("loadend", func);
+            func && this.addEventListener("loadend", func)
+			!func && this.removeEventListener("loadend", this.loadend_func)
             this.loadend_func = func
         }
     });
@@ -404,7 +442,8 @@ var GlobalEventHandlers = function(pointer) {
             return this.loadstart_func;
         },
         set: function(func) {
-            this.addEventListener("loadstart", func);
+            func && this.addEventListener("loadstart", func)
+			!func && this.removeEventListener("loadstart", this.loadstart_func)
             this.loadstart_func = func
         }
     });
@@ -414,7 +453,8 @@ var GlobalEventHandlers = function(pointer) {
             return this.lostpointercapture_func;
         },
         set: function(func) {
-            this.addEventListener("lostpointercapture", func);
+            func && this.addEventListener("lostpointercapture", func)
+			!func && this.removeEventListener("lostpointercapture", this.lostpointercapture_func)
             this.lostpointercapture_func = func
         }
     });
@@ -424,7 +464,8 @@ var GlobalEventHandlers = function(pointer) {
             return this.mousedown_func;
         },
         set: function(func) {
-            this.addEventListener("mousedown", func);
+            func && this.addEventListener("mousedown", func)
+			!func && this.removeEventListener("mousedown", this.mousedown_func)
             this.mousedown_func = func
         }
     });
@@ -434,7 +475,8 @@ var GlobalEventHandlers = function(pointer) {
             return this.mouseenter_func;
         },
         set: function(func) {
-            this.addEventListener("mouseenter", func);
+            func && this.addEventListener("mouseenter", func)
+			!func && this.removeEventListener("mouseenter", this.mouseenter_func)
             this.mouseenter_func = func
         }
     });
@@ -445,6 +487,7 @@ var GlobalEventHandlers = function(pointer) {
         },
         set: function(func) {
             func && this.addEventListener("mouseleave", func)
+			!func && this.removeEventListener("mouseleave", this.mouseleave_func)	
             this.mouseleave_func = func
         }
     })
@@ -476,7 +519,8 @@ var GlobalEventHandlers = function(pointer) {
             return this.mouseover_func;
         },
         set: function(func) {
-            this.addEventListener("mouseover", func);
+            func && this.addEventListener("mouseover", func)
+			!func && this.removeEventListener("mouseover", this.mouseover_func)
             this.mouseover_func = func
         }
     });
@@ -486,7 +530,8 @@ var GlobalEventHandlers = function(pointer) {
             return this.mouseup_func;
         },
         set: function(func) {
-            this.addEventListener("mouseup", func);
+            func && this.addEventListener("mouseup", func)
+			!func && this.removeEventListener("mouseup", this.mouseup_func)
             this.mouseup_func = func
         }
     });
@@ -496,7 +541,8 @@ var GlobalEventHandlers = function(pointer) {
             return this.mousewheel_func;
         },
         set: function(func) {
-            this.addEventListener("mousewheel", func);
+            func && this.addEventListener("mousewheel", func)
+			!func && this.removeEventListener("mousewheel", this.mousewheel_func)
             this.mousewheel_func = func
         }
     });
@@ -506,7 +552,8 @@ var GlobalEventHandlers = function(pointer) {
             return this.wheel_func;
         },
         set: function(func) {
-            this.addEventListener("wheel", func);
+            func && this.addEventListener("wheel", func)
+			!func && this.removeEventListener("wheel", this.wheel_func)
             this.wheel_func = func
         }
     });
@@ -516,7 +563,8 @@ var GlobalEventHandlers = function(pointer) {
             return this.pause_func;
         },
         set: function(func) {
-            this.addEventListener("pause", func);
+            func && this.addEventListener("pause", func)
+			!func && this.removeEventListener("pause", this.pause_func)
             this.pause_func = func
         }
     });
@@ -526,7 +574,8 @@ var GlobalEventHandlers = function(pointer) {
             return this.play_func;
         },
         set: function(func) {
-            this.addEventListener("play", func);
+            func && this.addEventListener("play", func)
+			!func && this.removeEventListener("play", this.play_func)
             this.play_func = func
         }
     });
@@ -536,7 +585,8 @@ var GlobalEventHandlers = function(pointer) {
             return this.playing_func;
         },
         set: function(func) {
-            this.addEventListener("playing", func);
+            func && this.addEventListener("playing", func)
+			!func && this.removeEventListener("playing", this.playing_func)
             this.playing_func = func
         }
     });
@@ -546,18 +596,20 @@ var GlobalEventHandlers = function(pointer) {
             return this.pointerdown_func;
         },
         set: function(func) {
-            this.addEventListener("pointerdown", func);
+            func && this.addEventListener("pointerdown", func)
+			!func && this.removeEventListener("pointerdown", this.pointerdown_func)
             this.pointerdown_func = func
         }
     });
-    this.pointermov_func = null;
+    this.pointermove_func = null;
     Object.defineProperty(this, "onpointermove", {
         get: function() {
-            return this.pointermov_func;
+            return this.pointermove_func;
         },
         set: function(func) {
-            this.addEventListener("pointermov", func);
-            this.pointermov_func = func
+            func && this.addEventListener("pointermove", func)
+			!func && this.removeEventListener("pointermove", this.pointermove_func)
+            this.pointermove_func = func
         }
     });
     this.pointerup_func = null;
@@ -566,7 +618,8 @@ var GlobalEventHandlers = function(pointer) {
             return this.pointerup_func;
         },
         set: function(func) {
-            this.addEventListener("pointerup", func);
+            func && this.addEventListener("pointerup", func)
+			!func && this.removeEventListener("pointerup", this.pointerup_func)
             this.pointerup_func = func
         }
     });
@@ -576,7 +629,8 @@ var GlobalEventHandlers = function(pointer) {
             return this.pointercancel_func;
         },
         set: function(func) {
-            this.addEventListener("pointercancel", func);
+            func && this.addEventListener("pointercancel", func)
+			!func && this.removeEventListener("pointercancel", this.pointercancel_func)
             this.pointercancel_func = func
         }
     });
@@ -586,7 +640,8 @@ var GlobalEventHandlers = function(pointer) {
             return this.pointerover_func;
         },
         set: function(func) {
-            this.addEventListener("pointerover", func);
+            func && this.addEventListener("pointerover", func)
+			!func && this.removeEventListener("pointerover", this.pointerover_func)
             this.pointerover_func = func
         }
     });
@@ -596,7 +651,8 @@ var GlobalEventHandlers = function(pointer) {
             return this.pointerout_func;
         },
         set: function(func) {
-            this.addEventListener("pointerout", func);
+            func && this.addEventListener("pointerout", func)
+			!func && this.removeEventListener("pointerout", this.pointerout_func)
             this.pointerout_func = func
         }
     });
@@ -606,7 +662,8 @@ var GlobalEventHandlers = function(pointer) {
             return this.pointerenter_func;
         },
         set: function(func) {
-            this.addEventListener("pointerenter", func);
+            func && this.addEventListener("pointerenter", func)
+			!func && this.removeEventListener("pointerenter", this.pointerenter_func)
             this.pointerenter_func = func
         }
     });
@@ -616,7 +673,8 @@ var GlobalEventHandlers = function(pointer) {
             return this.pointerleave_func;
         },
         set: function(func) {
-            this.addEventListener("pointerleave", func);
+            func && this.addEventListener("pointerleave", func)
+			!func && this.removeEventListener("pointerleave", this.pointerleave_func)
             this.pointerleave_func = func
         }
     });
@@ -626,7 +684,8 @@ var GlobalEventHandlers = function(pointer) {
             return this.pointerlockchange_func;
         },
         set: function(func) {
-            this.addEventListener("pointerlockchange", func);
+            func && this.addEventListener("pointerlockchange", func)
+			!func && this.removeEventListener("pointerlockchange", this.pointerlockchange_func)
             this.pointerlockchange_func = func
         }
     });
@@ -636,7 +695,8 @@ var GlobalEventHandlers = function(pointer) {
             return this.pointerlockerror_func;
         },
         set: function(func) {
-            this.addEventListener("pointerlockerror", func);
+            func && this.addEventListener("pointerlockerror", func)
+			!func && this.removeEventListener("pointerlockerror", this.pointerlockerror_func)
             this.pointerlockerror_func = func
         }
     });
@@ -646,7 +706,8 @@ var GlobalEventHandlers = function(pointer) {
             return this.progress_func;
         },
         set: function(func) {
-            this.addEventListener("progress", func);
+            func && this.addEventListener("progress", func)
+			!func && this.removeEventListener("progress", this.progress_func)
             this.progress_func = func
         }
     });
@@ -656,7 +717,8 @@ var GlobalEventHandlers = function(pointer) {
             return this.ratechange_func;
         },
         set: function(func) {
-            this.addEventListener("ratechange", func);
+            func && this.addEventListener("ratechange", func)
+			!func && this.removeEventListener("ratechange", this.ratechange_func)
             this.ratechange_func = func
         }
     });
@@ -666,7 +728,8 @@ var GlobalEventHandlers = function(pointer) {
             return this.reset_func;
         },
         set: function(func) {
-            this.addEventListener("reset", func);
+            func && this.addEventListener("reset", func)
+			!func && this.removeEventListener("reset", this.reset_func)
             this.reset_func = func
         }
     });
@@ -676,7 +739,8 @@ var GlobalEventHandlers = function(pointer) {
             return this.resize_func;
         },
         set: function(func) {
-            this.addEventListener("resize", func);
+            func && this.addEventListener("resize", func)
+			!func && this.removeEventListener("resize", this.resize_func)
             this.resize_func = func
         }
     });
@@ -686,7 +750,8 @@ var GlobalEventHandlers = function(pointer) {
             return this.scroll_func;
         },
         set: function(func) {
-            this.addEventListener("scroll", func);
+            func && this.addEventListener("scroll", func)
+			!func && this.removeEventListener("scroll", this.scroll_func)
             this.scroll_func = func
         }
     });
@@ -696,7 +761,8 @@ var GlobalEventHandlers = function(pointer) {
             return this.seeked_func;
         },
         set: function(func) {
-            this.addEventListener("seeked", func);
+            func && this.addEventListener("seeked", func)
+			!func && this.removeEventListener("seeked", this.seeked_func)
             this.seeked_func = func
         }
     });
@@ -706,7 +772,8 @@ var GlobalEventHandlers = function(pointer) {
             return this.seeking_func;
         },
         set: function(func) {
-            this.addEventListener("seeking", func);
+            func && this.addEventListener("seeking", func)
+			!func && this.removeEventListener("seeking", this.seeking_func)
             this.seeking_func = func
         }
     });
@@ -716,7 +783,8 @@ var GlobalEventHandlers = function(pointer) {
             return this.select_func;
         },
         set: function(func) {
-            this.addEventListener("select", func);
+            func && this.addEventListener("select", func)
+			!func && this.removeEventListener("select", this.select_func)
             this.select_func = func
         }
     });
@@ -726,7 +794,8 @@ var GlobalEventHandlers = function(pointer) {
             return this.selectstart_func;
         },
         set: function(func) {
-            this.addEventListener("selectstart", func);
+            func && this.addEventListener("selectionstart", func)
+			!func && this.removeEventListener("selectionstart", this.selectionstart_func)
             this.selectstart_func = func
         }
     });
@@ -736,7 +805,8 @@ var GlobalEventHandlers = function(pointer) {
             return this.selectionchange_func;
         },
         set: function(func) {
-            this.addEventListener("selectionchange", func);
+            func && this.addEventListener("selectionchange", func)
+			!func && this.removeEventListener("selectionchange", this.selectionchange_func)
             this.selectionchange_func = func
         }
     });
@@ -746,7 +816,8 @@ var GlobalEventHandlers = function(pointer) {
             return this.show_func;
         },
         set: function(func) {
-            this.addEventListener("show", func);
+            func && this.addEventListener("show", func)
+			!func && this.removeEventListener("show", this.show_func)
             this.show_func = func
         }
     });
@@ -756,7 +827,8 @@ var GlobalEventHandlers = function(pointer) {
             return this.sort_func;
         },
         set: function(func) {
-            this.addEventListener("sort", func);
+            func && this.addEventListener("sort", func)
+			!func && this.removeEventListener("sort", this.sort_func)
             this.sort_func = func
         }
     });
@@ -766,7 +838,8 @@ var GlobalEventHandlers = function(pointer) {
             return this.stalled_func;
         },
         set: function(func) {
-            this.addEventListener("stalled", func);
+            func && this.addEventListener("stalled", func)
+			!func && this.removeEventListener("stalled", this.stalled_func)
             this.stalled_func = func
         }
     });
@@ -776,7 +849,8 @@ var GlobalEventHandlers = function(pointer) {
             return this.submit_func;
         },
         set: function(func) {
-            this.addEventListener("submit", func);
+            func && this.addEventListener("submit", func)
+			!func && this.removeEventListener("submit", this.submit_func)
             this.submit_func = func
         }
     });
@@ -786,7 +860,8 @@ var GlobalEventHandlers = function(pointer) {
             return this.suspend_func;
         },
         set: function(func) {
-            this.addEventListener("suspend", func);
+            func && this.addEventListener("suspend", func)
+			!func && this.removeEventListener("suspend", this.suspend_func)
             this.suspend_func = func
         }
     });
@@ -796,7 +871,8 @@ var GlobalEventHandlers = function(pointer) {
             return this.timeupdate_func;
         },
         set: function(func) {
-            this.addEventListener("timeupdate", func);
+            func && this.addEventListener("timeupdate", func)
+			!func && this.removeEventListener("timeupdate", this.timeupdate_func)
             this.timeupdate_func = func
         }
     });
@@ -806,7 +882,8 @@ var GlobalEventHandlers = function(pointer) {
             return this.volumechange_func;
         },
         set: function(func) {
-            this.addEventListener("volumechange", func);
+            func && this.addEventListener("volumechange", func)
+			!func && this.removeEventListener("volumechange", this.volumechange_func)
             this.volumechange_func = func
         }
     });
@@ -816,7 +893,8 @@ var GlobalEventHandlers = function(pointer) {
             return this.touchcancel_func;
         },
         set: function(func) {
-            this.addEventListener("touchcancel", func);
+            func && this.addEventListener("touchcancel", func)
+			!func && this.removeEventListener("touchcancel", this.touchcancel_func)
             this.touchcancel_func = func
         }
     });
@@ -826,7 +904,8 @@ var GlobalEventHandlers = function(pointer) {
             return this.touchend_func;
         },
         set: function(func) {
-            this.addEventListener("touchend", func);
+            func && this.addEventListener("touchend", func)
+			!func && this.removeEventListener("touchend", this.touchend_func)
             this.touchend_func = func
         }
     });
@@ -836,7 +915,8 @@ var GlobalEventHandlers = function(pointer) {
             return this.touchmove_func;
         },
         set: function(func) {
-            this.addEventListener("touchmove", func);
+            func && this.addEventListener("touchmove", func)
+			!func && this.removeEventListener("touchmove", this.touchmove_func)
             this.touchmove_func = func
         }
     });
@@ -846,7 +926,8 @@ var GlobalEventHandlers = function(pointer) {
 			return this.touchstart_func
 		},
     	set: function(func){ 
-			this.addEventListener("touchstart", func); 
+			func && this.addEventListener("touchstart", func)
+			!func && this.removeEventListener("touchstart", this.touchstart_func) 
 			this.touchstart_func = func 
 		}
     });
@@ -856,7 +937,8 @@ var GlobalEventHandlers = function(pointer) {
             return this.transitioncancel_func;
         },
         set: function(func) {
-            this.addEventListener("transitioncancel", func);
+            func && this.addEventListener("transitioncancel", func)
+			!func && this.removeEventListener("transitioncancel", this.transitioncancel_func)
             this.transitioncancel_func = func
         }
     });
@@ -866,7 +948,8 @@ var GlobalEventHandlers = function(pointer) {
             return this.transitionend_func;
         },
         set: function(func) {
-            this.addEventListener("transitionend", func);
+            func && this.addEventListener("transitionend", func)
+			!func && this.removeEventListener("transitionend", this.transitionend_func)
             this.transitionend_func = func
         }
     });
@@ -876,7 +959,8 @@ var GlobalEventHandlers = function(pointer) {
             return this.waiting_func;
         },
         set: function(func) {
-            this.addEventListener("waiting", func);
+            func && this.addEventListener("waiting", func)
+			!func && this.removeEventListener("waiting", this.waiting_func)
             this.waiting_func = func
         }
     });
