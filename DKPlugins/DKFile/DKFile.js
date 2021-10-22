@@ -491,7 +491,7 @@ if (typeof CPP_DKFile_GetRelativePath === "function") {
 
 if (typeof CPP_DKFile_GetPaths === "function") {
 	DKFile.prototype.getPathObject = function DKFile_getPathObject(path, callback) {
-		//TODO - C++ side not implemented
+		console.log("original path = " + path);
 		const _pObj = CPP_DKFile_GetPaths(path);
 		const pObj = new Object();
 		pObj.path = _pObj.split(",")[0];
@@ -504,22 +504,22 @@ if (typeof CPP_DKFile_GetPaths === "function") {
 		pObj.extension = _pObj.split(",")[7];
 		pObj.filename = _pObj.split(",")[8];
 		
-		console.debug("path = " + pObj.path);
-		console.debug("aPath = " + pObj.aPath);
-		console.debug("root = " + pObj.root);
-		console.debug("rPath = " + pObj.rPath);
-		console.debug("realpath = " + pObj.realpath);
-		console.debug("dir = " + pObj.dir);
-		console.debug("basename = " + pObj.basename);
-		console.debug("extension = " + pObj.extension);
-		console.debug("filename = " + pObj.filename);
+		console.log("path = " + pObj.path);
+		console.log("aPath = " + pObj.aPath);
+		console.log("root = " + pObj.root);
+		console.log("rPath = " + pObj.rPath);
+		console.log("realpath = " + pObj.realpath);
+		console.log("dir = " + pObj.dir);
+		console.log("basename = " + pObj.basename);
+		console.log("extension = " + pObj.extension);
+		console.log("filename = " + pObj.filename);
 		
 		return callback(pObj);
 	}
 } else {
 	DKFile.prototype.getPathObject = function DKFile_getPathObject(path, callback) {
     //path = dk.file.validatepath(path);
-    //console.debug("original path = \"" + path + "\"");
+    console.log("original path = " + path);
 		dk.php.call('GET', "DKFile/DKFile.php", "getPaths", path, function dk_php_call_callback(_pObj) {
 			const pObj = new Object();
 			pObj.path = _pObj.split(",")[0];
@@ -532,15 +532,15 @@ if (typeof CPP_DKFile_GetPaths === "function") {
 			pObj.extension = _pObj.split(",")[7];
 			pObj.filename = _pObj.split(",")[8];
 			
-			console.debug("path = " + pObj.path);
-			console.debug("aPath = " + pObj.aPath);
-			console.debug("root = " + pObj.root);
-			console.debug("rPath = " + pObj.rPath);
-			console.debug("realpath = " + pObj.realpath);
-			console.debug("dir = " + pObj.dir);
-			console.debug("basename = " + pObj.basename);
-			console.debug("extension = " + pObj.extension);
-			console.debug("filename = " + pObj.filename);
+			console.log("path = " + pObj.path);
+			console.log("aPath = " + pObj.aPath);
+			console.log("root = " + pObj.root);
+			console.log("rPath = " + pObj.rPath);
+			console.log("realpath = " + pObj.realpath);
+			console.log("dir = " + pObj.dir);
+			console.log("basename = " + pObj.basename);
+			console.log("extension = " + pObj.extension);
+			console.log("filename = " + pObj.filename);
 			
 			return callback(pObj);
 		});

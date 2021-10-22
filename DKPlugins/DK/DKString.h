@@ -35,6 +35,7 @@ typedef std::vector<DKStringArray> DKStringGrid;
 bool same(const DKString& str, const DKString& str2);
 bool samei(const DKString& str, const DKString& str2); //case insensitive
 bool has(const DKString& search, const DKString& forthis);
+int substr_count(const DKString& search, const DKString& forthis);
 
 // https://www.cplusplus.com/reference/string/to_string/
 DKString toString(const int& _int);

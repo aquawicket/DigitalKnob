@@ -39,7 +39,10 @@ DKFileManager.prototype.create = function DKFileManager_create(DKFileManager_cre
         instance.path.onkeypress = function() {
             instance.onPath(instance, event)
         }
-        instance.openFolder(instance, instance.path.value)
+		
+		const path = instance.path.value ? instance.path.value : ""
+		console.log("path = "+path)
+        instance.openFolder(instance, path)
         instance.dkFrame = DKFrame.prototype.create(instance)
         instance.dkFrame.setTitle("File Manager")
         DKFileManager_create_callback && DKFileManager_create_callback(instance)

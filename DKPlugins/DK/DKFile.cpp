@@ -254,6 +254,18 @@ bool DKFile::GetAppPath(DKString& apppath){
 	return DKERROR("not implemented on this OS \n");
 }
 
+bool DKFile::GetBasename(const DKString& path, DKString& basename){
+	basename = path;
+	if (basename.back() == '/')
+		basename.pop_back();
+	unsigned found = basename.find_last_of("/");
+	if (found != std::string::npos && found < basename.length()) {
+		basename = basename.substr(found + 1);
+		return true && DKDEBUGRETURN(path, basename);
+	}
+	return DKERROR("basename invalid \n");
+}
+
 bool DKFile::GetDirectoryContents(const DKString& path, DKStringArray& strings){
 	DebugPath(path);
 	if(!PathExists(path))
@@ -343,22 +355,27 @@ bool DKFile::GetExtention(const DKString& file, DKString& extension){
 
 bool DKFile::GetFileName(const DKString& path, DKString& filename){
 	DebugPath(path);
-	unsigned found = path.find_last_of("/");
-	if(found != std::string::npos && found < path.length()){
-		filename = path.substr(found+1);
+	filename = path;
+	if (filename.back() == '/')
+		filename.pop_back();
+	unsigned found = filename.find_last_of("/");
+	if(found != std::string::npos && found < filename.length()){
+		filename = filename.substr(found+1);
 		return true && DKDEBUGRETURN(path, filename);
 	}
 	DKWARN("/ not found in path ("+path+") \n");
-	filename = path;
 	DKWARN("returning this path as the filename("+filename+") \n");
 	return true && DKDEBUGRETURN(path, filename);
 }
 
 bool DKFile::GetFilePath(const DKString& file, DKString& path){
 	DebugPath(file);
-	unsigned int found = file.find_last_of("/");
-	if(found != std::string::npos && found < file.length()){
-		path = file.substr(0, found+1);
+	path = file;
+	if(path.back() == '/')
+		path.pop_back();
+	unsigned int found = path.find_last_of("/");
+	if(found != std::string::npos && found < path.length()){
+		path = path.substr(0, found+1);
 		DebugPath(path);
 		return true && DKDEBUGRETURN(file, path);
 	}
@@ -495,28 +512,32 @@ bool DKFile::GetModifiedTime(const DKString& path, DKString& time){
 	return DKERROR("not implemeneted on this OS \n");
 }
 
+bool DKFile::GetPath(DKString& path) {
+	if (path.empty() || same(path, "/") || same(path, "."))
+		path = DKFile::local_assets;
+	DKFile::GetAbsolutePath(path, path);
+	DKFile::ValidatePath(path);
+	DKDEBUGRETURN(path);
+	return true;
+}
+
 bool DKFile::GetRelativePath(const DKString& file, const DKString& path, DKString& out){
 	DebugPath(file);
 	DebugPath(path);
+	if (same(file, path))
+		return true;
 	if(!PathExists(file))
 		return DKERROR("("+file+") path does not exist \n");
 	DKString file2 = file;
-#ifdef WIN32
-	//replace(file2, "/", "\\");
-#endif
+	if (file2.back() == '/')
+		file2.pop_back();
 	DKString path2 = path;
-#ifdef WIN32
-	//replace(path2, "/", "\\");
-#endif
+	if (path2.back() == '/')
+		path2.pop_back();
 	DKINFO("DKFile::GetRelativePath("+file2+","+path2+",DKString&) \n");
 	int MAX_FILENAME_LEN = 512;
-//#ifdef WIN32
-//	int ABSOLUTE_NAME_START = 3;
-//	int SLASH = '\\';
-//#else
 	int ABSOLUTE_NAME_START = 1;
 	int SLASH = '/';
-//#endif
 	const char* absoluteFilename = file2.c_str();
 	const char* currentDirectory = path2.c_str();
 	// declarations - put here so this should work in a C compiler
@@ -538,9 +559,6 @@ bool DKFile::GetRelativePath(const DKString& file, const DKString& path, DKStrin
 		// not on the same drive, so only absolute filename will do
 		strcpy(relativeFilename, absoluteFilename);
 		out = relativeFilename;
-//#ifdef WIN32
-		//replace(out, "\\", "/");
-//#endif
 		DebugPath(out);
 		return true && DKDEBUGRETURN(file, path, out);
 	}
@@ -560,9 +578,6 @@ bool DKFile::GetRelativePath(const DKString& file, const DKString& path, DKStrin
 		}
 		strcpy(relativeFilename, &absoluteFilename[i]);
 		out = relativeFilename;
-//#ifdef WIN32
-		//replace(out, "\\", "/");
-//#endif
 		return true && DKDEBUGRETURN(file, path, out);
 	}
 	// The file is not in a child directory of the current directory, so we
@@ -602,9 +617,6 @@ bool DKFile::GetRelativePath(const DKString& file, const DKString& path, DKStrin
 	// copy the rest of the filename into the result string
 	strcpy(&relativeFilename[rfMarker], &absoluteFilename[afMarker]);
 	out = relativeFilename;
-//#ifdef WIN32
-//	replace(out, "\\", "/");
-//#endif
 	return true && DKDEBUGRETURN(file, path, out);
 }
 
@@ -823,4 +835,18 @@ bool DKFile::VerifyPath(DKString& path){
 		return true;
 	}
 	return DKERROR("Could not find path \n");
+}
+
+bool DKFile::ValidatePath(DKString& path){
+	if (has(path, "\\"))
+		replace(path, "\\", "/");
+	if (has(path, "://") && (substr_count(path, "//") > 0))
+		replace(path, "//", "/");
+	if (has(path, "://") && (substr_count(path, "//") > 1)) {
+		replace(path, "//", "/");
+		replace(path, ":/", "://");
+	}
+	if (DKFile::IsDirectory(path) && (path.back() != '/'))
+		path = path + "/";
+	return true;
 }

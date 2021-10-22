@@ -26,6 +26,7 @@ public:
 	static int GetLocalCreationDate(duk_context* ctx);
 	static int GetLocalModifiedDate(duk_context* ctx);
 	static int GetModifiedTime(duk_context* ctx);
+	static int GetPath(duk_context* ctx);
 	static int GetPaths(duk_context* ctx);
 	static int GetRelativePath(duk_context* ctx);
 	static int GetSetting(duk_context* ctx);

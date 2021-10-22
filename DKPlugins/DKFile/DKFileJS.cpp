@@ -21,6 +21,7 @@ bool DKFileJS::Init(){
 	DKDuktape::AttachFunction("CPP_DKFile_GetLocalCreationDate", DKFileJS::GetLocalCreationDate);
 	DKDuktape::AttachFunction("CPP_DKFile_GetLocalModifiedDate", DKFileJS::GetLocalModifiedDate);
 	DKDuktape::AttachFunction("CPP_DKFile_GetModifiedTime", DKFileJS::GetModifiedTime);
+	DKDuktape::AttachFunction("CPP_DKFile_GetPath", DKFileJS::GetPath);
 	DKDuktape::AttachFunction("CPP_DKFile_GetPaths", DKFileJS::GetPaths);
 	DKDuktape::AttachFunction("CPP_DKFile_GetRelativePath", DKFileJS::GetRelativePath);
 	DKDuktape::AttachFunction("CPP_DKFile_GetSetting", DKFileJS::GetSetting);
@@ -194,20 +195,33 @@ int DKFileJS::GetModifiedTime(duk_context* ctx){
 	return true;
 }
 
+int DKFileJS::GetPath(duk_context* ctx) {
+	DKString path = duk_require_string(ctx, 0);
+	DKFile::GetPath(path);
+	duk_push_string(ctx, path.c_str());
+	DKDEBUGRETURN(ctx, path);
+	return true;
+}
+
 int DKFileJS::GetPaths(duk_context* ctx) {
 	DKString path = duk_require_string(ctx, 0);
+	DKFile::GetPath(path);
 	DKString aPath;
 	if (!DKFile::GetAbsolutePath(path, aPath))
 		return DKERROR("DKFile::GetAbsolutePath() failed\n");
-	DKString root;
+	DKString root = DKFile::local_assets;
 	DKString dir;
 	if (!DKFile::GetFilePath(path, dir))
 		return DKERROR("DKFile::GetFilePath() failed \n");
 	DKString rPath;
-	if (!DKFile::GetRelativePath(path, dir, rPath))
+	if (!DKFile::GetRelativePath(path, aPath, rPath))
 		return DKERROR("DKFile::GetRelativePath() failed \n");
 	DKString realpath;
+	if (!DKFile::GetAbsolutePath(path, realpath))
+		return DKERROR("DKFile::GetAbsolutePath() failed\n");
 	DKString basename;
+	if (!DKFile::GetBasename(path, basename))
+		return DKERROR("DKFile::GetBasename() failed\n");
 	DKString extension;
 	if (!DKFile::GetExtention(path, extension))
 		return DKERROR("DKFile::GetExtention() failed \n");

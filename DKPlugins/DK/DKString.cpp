@@ -27,6 +27,16 @@ bool has(const DKString& search, const DKString& forthis){
 	return false;
 }
 
+int substr_count(const DKString& search, const DKString& forthis) {
+	int occurrences = 0;
+	std::string::size_type pos = 0;
+	while ((pos = search.find(forthis, pos)) != std::string::npos) {
+		++occurrences;
+		pos += forthis.length();
+	}
+	return occurrences;
+}
+
 DKString toString(const int& _int){
 	//DKASSERT("replace this with std::to_string()\n");
 	/*
