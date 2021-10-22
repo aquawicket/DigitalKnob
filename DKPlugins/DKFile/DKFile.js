@@ -175,28 +175,28 @@ DKFile.prototype.exists = function DKFile_exists(url, callback, usePhp) {
     }
 }
 
-if (!dk.hasCPP()) {
+if (typeof CPP_DKFile_GetShortName === "function") {
+    DKFile.prototype.getShortName = function DKFile_getShortName(path) {
+        path = dk.file.validatepath(path);
+        return (path);
+    }
+} else {
     DKFile.prototype.getShortName = function DKFile_getShortName(path) {
         path = dk.file.validatepath(path);
         return warn("DKFile.prototype.GetShortName(): not available for browser");
     }
-} else {
-    DKFile.prototype.getShortName = function DKFile_getShortName(path) {
-        path = dk.file.validatepath(path);
-        return CPP_DKFile_GetShortName(path);
-    }
 }
 
-if (!dk.hasCPP()) {
+if (typeof CPP_DKFile_Rename === "function") {
+    DKFile.prototype.rename = function DKFile_rename(path, newvalue, overwrite) {
+        path = dk.file.validatepath(path);
+        return CPP_DKFile_Rename(path, newvalue, overwrite);
+    }
+} else {
     DKFile.prototype.rename = function DKFile_rename(oldpath, newpath, overwrite) {
         oldpath = dk.file.validatepath(oldpath);
         newpath = dk.file.validatepath(newpath);
         console.debug("DKFile.prototype.rename(" + oldpath + "," + newpath + "," + overwrite + "): not implemented yet");
-    }
-} else {
-    DKFile.prototype.rename = function DKFile_rename(path, newvalue, overwrite) {
-        path = dk.file.validatepath(path);
-        return CPP_DKFile_Rename(path, newvalue, overwrite);
     }
 }
 
@@ -410,7 +410,14 @@ else {
     }
 }
 
-if (!DUKTAPE) {
+if (typeof CPP_DKFile_StringToFile === "function") {
+    DKFile.prototype.stringToFile = function DKFile_stringToFile(str, path, flags, callback) {
+        path = dk.file.validatepath(path);
+        const result = CPP_DKFile_StringToFile(str, path);
+        callback && callback(result);
+		return
+    }
+} else {
     DKFile.prototype.stringToFile = function DKFile_stringToFile(str, path, flags, callback) {
         path = dk.file.validatepath(path);
         if (!dk.php)
@@ -423,16 +430,14 @@ if (!DUKTAPE) {
             return ok(callback, result);
         });
     }
-} else {
-    DKFile.prototype.stringToFile = function DKFile_stringToFile(str, path, flags, callback) {
-        path = dk.file.validatepath(path);
-        const result = CPP_DKFile_StringToFile(str, path);
-        callback && callback(result);
-		return
-    }
 }
 
-if (!dk.hasCPP()) {
+if(typeof CPP_DKFile_DirectoryContents === "function") {
+    DKFile.prototype.directoryContents = function DKFile_directoryContents(path) {
+        path = dk.file.validatepath(path);
+        return CPP_DKFile_DirectoryContents(path);
+    }
+} else {
     DKFile.prototype.directoryContents = function DKFile_directoryContents(path, callback) {
         console.debug("DKFile.prototype.directoryContents(" + path + ")");
         path = dk.file.validatepath(path);
@@ -440,14 +445,16 @@ if (!dk.hasCPP()) {
             return callback(results)
         });
     }
-} else {
-    DKFile.prototype.directoryContents = function DKFile_directoryContents(path) {
-        path = dk.file.validatepath(path);
-        return CPP_DKFile_DirectoryContents(path);
-    }
 }
 
-if (!dk.hasCPP()) {
+if (typeof CPP_DKFile_GetAbsolutePath === "function") {
+    DKFile.prototype.getAbsolutePath = function DKFile_getAbsolutePath(path, callback) {
+        path = dk.file.validatepath(path);
+        const aPath = CPP_DKFile_GetAbsolutePath(path);
+        aPath = dk.file.validatepath(aPath);
+        return callback(aPath)
+    }
+} else {
     DKFile.prototype.getAbsolutePath = function DKFile_getAbsolutePath(path, callback) {
         path = dk.file.validatepath(path);
         //!path && (path = "/");
@@ -461,16 +468,16 @@ if (!dk.hasCPP()) {
             return callback(aPath);
         });
     }
-} else {
-    DKFile.prototype.getAbsolutePath = function DKFile_getAbsolutePath(path, callback) {
-        path = dk.file.validatepath(path);
-        const aPath = CPP_DKFile_GetAbsolutePath(path);
-        aPath = dk.file.validatepath(aPath);
-        return callback(aPath)
-    }
 }
 
-if (!dk.hasCPP()) {
+if (typeof CPP_DKFile_GetRelativePath === "function") {
+    DKFile.prototype.getRelativePath = function DKFile_getRelativePath(path, callback) {
+        path = dk.file.validatepath(path);
+        const rPath = CPP_DKFile_GetRelativePath(path);
+        rPath = dk.file.validatepath(rPath);
+        return callback(rPath);
+    }
+} else {
     DKFile.prototype.getRelativePath = function DKFile_getRelativePath(path, callback) {
         path = dk.file.validatepath(path);
         path = path.replace("\\", "/");
@@ -479,13 +486,6 @@ if (!dk.hasCPP()) {
             rPath = dk.file.validatepath(rPath);
             return callback(rPath);
         });
-    }
-} else {
-    DKFile.prototype.getRelativePath = function DKFile_getRelativePath(path, callback) {
-        path = dk.file.validatepath(path);
-        const rPath = CPP_DKFile_GetRelativePath(path);
-        rPath = dk.file.validatepath(rPath);
-        return callback(rPath);
     }
 }
 
@@ -518,18 +518,18 @@ DKFile.prototype.getPathObject = function DKFile_getPathObject(path, callback) {
     });
 }
 
-if (!dk.hasCPP()) {
+if(typeof CPP_DKFile_IsDirectory === "function") {
+    DKFile.prototype.isDir = function DKFile_isDir(path, callback) {
+        path = dk.file.validatepath(path);
+        const result = CPP_DKFile_IsDirectory(path);
+        return callback(!!result);
+    }
+} else {
     DKFile.prototype.isDir = function DKFile_isDir(path, callback) {
         path = dk.file.validatepath(path);
         dk.php.call('GET', "DKFile/DKFile.php", "isDir", path, function dk_php_call_callback(result) {
             return callback(!!result);
         });
-    }
-} else {
-    DKFile.prototype.isDir = function DKFile_isDir(path, callback) {
-        path = dk.file.validatepath(path);
-        const result = CPP_DKFile_IsDirectory(path);
-        return callback(!!result);
     }
 }
 
@@ -540,17 +540,17 @@ DKFile.prototype.getExtention = function DKFile_getExtention(path) {
     return extention;
 }
 
-if (!dk.hasCPP()) {
+if(typeof CPP_DKFile_Delete === "function") {
+    DKFile.prototype.delete = function DKFile_delete(path, callback) {
+        path = dk.file.validatepath(path);
+        return CPP_DKFile_Delete(path);
+    }
+} else {
     DKFile.prototype.delete = function DKFile_delete(path, callback) {
         path = dk.file.validatepath(path);
         console.log("Deleting: " + path);
         dk.php.call("GET", "DKFile/DKFile.php", "delete", path, function dk_php_call_callback(result) {
             return callback(!!result);
         });
-    }
-} else {
-    DKFile.prototype.delete = function DKFile_delete(path, callback) {
-        path = dk.file.validatepath(path);
-        return CPP_DKFile_Delete(path);
     }
 }
