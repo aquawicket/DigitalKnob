@@ -489,33 +489,62 @@ if (typeof CPP_DKFile_GetRelativePath === "function") {
     }
 }
 
-DKFile.prototype.getPathObject = function DKFile_getPathObject(path, callback) {
+if (typeof CPP_DKFile_GetPathObject === "function") {
+	DKFile.prototype.getPathObject = function DKFile_getPathObject(path, callback) {
+		//TODO - C++ side not implemented
+		const _pObj = CPP_DKFile_GetPathObject(path);
+		const pObj = new Object();
+		pObj.path = _pObj.split(",")[0];
+		pObj.aPath = _pObj.split(",")[1];
+		pObj.root = _pObj.split(",")[2];
+		pObj.rPath = _pObj.split(",")[3];
+		pObj.realpath = _pObj.split(",")[4];
+		pObj.dir = _pObj.split(",")[5];
+		pObj.basename = _pObj.split(",")[6];
+		pObj.extension = _pObj.split(",")[7];
+		pObj.filename = _pObj.split(",")[8];
+		/*
+		console.debug("path = " + pObj.path);
+		console.debug("aPath = " + pObj.aPath);
+		console.debug("root = " + pObj.root);
+		console.debug("rPath = " + pObj.rPath);
+		console.debug("realpath = " + pObj.realpath);
+		console.debug("dir = " + pObj.dir);
+		console.debug("basename = " + pObj.basename);
+		console.debug("extension = " + pObj.extension);
+		console.debug("filename = " + pObj.filename);
+		*/
+		return callback(pObj);
+	}
+} else {
+	DKFile.prototype.getPathObject = function DKFile_getPathObject(path, callback) {
     //path = dk.file.validatepath(path);
     //console.debug("original path = \"" + path + "\"");
-    dk.php.call('GET', "DKFile/DKFile.php", "getPaths", path, function dk_php_call_callback(_pObj) {
-        const pObj = new Object();
-        pObj.path = _pObj.split(",")[0];
-        pObj.aPath = _pObj.split(",")[1];
-        pObj.root = _pObj.split(",")[2];
-        pObj.rPath = _pObj.split(",")[3];
-        pObj.realpath = _pObj.split(",")[4];
-        pObj.dir = _pObj.split(",")[5];
-        pObj.basename = _pObj.split(",")[6];
-        pObj.extension = _pObj.split(",")[7];
-        pObj.filename = _pObj.split(",")[8];
-        /*
-        console.debug("path = " + pObj.path);
-        console.debug("aPath = " + pObj.aPath);
-        console.debug("root = " + pObj.root);
-        console.debug("rPath = " + pObj.rPath);
-        console.debug("realpath = " + pObj.realpath);
-        console.debug("dir = " + pObj.dir);
-        console.debug("basename = " + pObj.basename);
-        console.debug("extension = " + pObj.extension);
-        console.debug("filename = " + pObj.filename);
-        */
-        return callback(pObj);
-    });
+		dk.php.call('GET', "DKFile/DKFile.php", "getPaths", path, function dk_php_call_callback(_pObj) {
+			const pObj = new Object();
+			pObj.path = _pObj.split(",")[0];
+			pObj.aPath = _pObj.split(",")[1];
+			pObj.root = _pObj.split(",")[2];
+			pObj.rPath = _pObj.split(",")[3];
+			pObj.realpath = _pObj.split(",")[4];
+			pObj.dir = _pObj.split(",")[5];
+			pObj.basename = _pObj.split(",")[6];
+			pObj.extension = _pObj.split(",")[7];
+			pObj.filename = _pObj.split(",")[8];
+			/*
+			console.debug("path = " + pObj.path);
+			console.debug("aPath = " + pObj.aPath);
+			console.debug("root = " + pObj.root);
+			console.debug("rPath = " + pObj.rPath);
+			console.debug("realpath = " + pObj.realpath);
+			console.debug("dir = " + pObj.dir);
+			console.debug("basename = " + pObj.basename);
+			console.debug("extension = " + pObj.extension);
+			console.debug("filename = " + pObj.filename);
+			*/
+			return callback(pObj);
+		});
+	}
 }
 
 if(typeof CPP_DKFile_IsDirectory === "function") {
