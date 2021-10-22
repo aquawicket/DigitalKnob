@@ -4,19 +4,29 @@ const myapp = DKPlugin(MyApp);
 
 
 myapp.loadFiles = function myapp_loadFiles() {
-	DKPlugin("DK/DKPhp.js")
-	DKPlugin("DKFile/DKFile.js")
-	DKPlugin("DKGui/DKGui.js")
-	//DKPlugin("DKGui/DKConsole.js")
-	DKPlugin("DKGui/DKFrame.js")
-	DKPlugin("DKGui/DKDrag.js")
-	//DKPlugin("DKGui/DKResize.js")
-	DKPlugin("DKGui/TestApp.js")
-	//DKPlugin("DKGui/DKMessageBox.js")
-	//dk.notepad = DKPlugin("DKNotepad/DKNotepad.js")
-	//DKPlugin("DKCodeRunner/DKCodeRunner.js")
-	//DKPlugin("DKFile/filemanager.js")
-	
+	//DKPlugin("DK/DKTrace.js")
+    //DKPlugin("DK/DKErrorHandler.js")
+    DKPlugin("DK/DKPhp.js")
+    DKPlugin("DK/DKJson.js")
+    DKPlugin("DKFile/DKFile.js")
+    //DKPlugin("DK/DKValidate.js")
+    //DKPlugin("DK/DKTime.js")
+    //DKPlugin("DK/DKMqtt.js")
+    //DKPlugin("DK/DKNotifications.js")
+    //DKPlugin("DKDebug/DKDebug.js")
+    //DKPlugin("DKAudio/DKAudio.js")
+    //DKPlugin("DKGui/DKConsole.js")
+    DKPlugin("DKGui/DKGui.js")
+    DKPlugin("DKGui/DKFrame.js")
+    //DKPlugin("DKGui/DKMenu.js")
+    DKPlugin("DKGui/DKMessageBox.js")
+    DKPlugin("DKGui/DKDrag.js")
+    //DKPlugin("DKGui/DKResize.js")
+    //DKPlugin("DKGui/DKClipboard.js")
+    //DKPlugin("DKGui/DKTable.js")
+    //DKPlugin("DKDevTools/DKDevToolsButton.js")
+    //DKPlugin("DKChart/DKChart.js")
+    //DKPlugin("DKCodeMirror/DKCodeMirror.js")
 }
 
 myapp.loadApp = function myapp_loadApp() {
@@ -28,7 +38,6 @@ myapp.loadApp = function myapp_loadApp() {
         DKFileManager.prototype.create();
     });
 }
-
 
 DUKTAPE && myapp.loadFiles();
 DUKTAPE && myapp.loadApp();
