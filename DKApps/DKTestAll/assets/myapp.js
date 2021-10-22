@@ -60,10 +60,12 @@ myapp.loadApp = function myapp_loadApp() {
     });
 	*/
 	
+	/*
 	DKPlugin("DKNotepad/DKNotepad.js", function() {
         DKNotepad.prototype.init();
         DKNotepad.prototype.create();
     });
+	*/
 	
 	/*
 	DKPlugin("DKBuild/DKBuildGUI.js", function() {
@@ -72,12 +74,10 @@ myapp.loadApp = function myapp_loadApp() {
     });
 	*/
 	
-	/*
 	DKPlugin("DKFile/filemanager.js", function() {
         DKFileManager.prototype.init();
         DKFileManager.prototype.create();
     });
-	*/
 }
 
 DUKTAPE && myapp.loadFiles();
