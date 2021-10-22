@@ -60,12 +60,10 @@ myapp.loadApp = function myapp_loadApp() {
     });
 	*/
 	
-	
 	DKPlugin("DKNotepad/DKNotepad.js", function() {
         DKNotepad.prototype.init();
         DKNotepad.prototype.create();
     });
-	
 	
 	/*
 	DKPlugin("DKBuild/DKBuildGUI.js", function() {

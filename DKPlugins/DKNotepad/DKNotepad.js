@@ -49,14 +49,14 @@ DKNotepad.prototype.create = function dk_notepad_create(dk_notepad_create_callba
 		if(!instance)
 			return error("instance invalid");
         instance.html = html;
-        instance.menubar = html.querySelector('[dk_notepad="menubar"]');
-        instance.file = html.querySelector('[dk_notepad="file"]');
-        instance.edit = html.querySelector('[dk_notepad="edit"]');
-        instance.format = html.querySelector('[dk_notepad="format"]');
-        instance.view = html.querySelector('[dk_notepad="view"]');
-        instance.help = html.querySelector('[dk_notepad="help"]');
-        instance.container = html.querySelector('[dk_notepad="container"]');
-        instance.text = html.querySelector('[dk_notepad="text"]');
+        instance.menubar = html.querySelector("[dk_notepad='menubar']");
+        instance.file = html.querySelector("[dk_notepad='file']");
+        instance.edit = html.querySelector("[dk_notepad='edit']");
+        instance.format = html.querySelector("[dk_notepad='format']");
+        instance.view = html.querySelector("[dk_notepad='view']");
+        instance.help = html.querySelector("[dk_notepad='help']");
+        instance.container = html.querySelector("[dk_notepad='container']");
+        instance.text = html.querySelector("[dk_notepad='text']");
         instance.file.onclick = function() {
             instance.filemenu(instance, event);
         }

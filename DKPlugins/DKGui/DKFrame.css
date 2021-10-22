@@ -29,6 +29,13 @@
     /*width: unset;*/
 }
 
+[dk_frame="content"] > * {
+	margin-top:1px;
+	margin-left:1px;
+	margin-right:1px;
+	margin-bottom: 22px;
+}
+
 [dk_frame="titlebar"] {
     position: absolute;
     top: 0rem;
@@ -61,28 +68,28 @@
 [dk_frame="reload"] {
     position: absolute;
     top: 1rem;
-    right: 63rem;
-    height: 19rem;
+    right: 64rem;
+    height: 20rem;
     background-color: rgb(212, 210, 212);
 }
 
 [dk_frame="minimize"] {
     position: absolute;
-    top: 0rem;
-    right: 42rem;
+    top: 1rem;
+    right: 43rem;
     height: 20rem;
 }
 
 [dk_frame="maximize"] {
     position: absolute;
-    top: 0rem;
-    right: 21rem;
+    top: 1rem;
+    right: 22rem;
     height: 20rem;
 }
 
 [dk_frame="close"] {
     position: absolute;
-    top: 0rem;
-    right: 0rem;
+    top: 1rem;
+    right: 1rem;
     height: 20rem;
 }

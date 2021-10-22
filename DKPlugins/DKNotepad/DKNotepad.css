@@ -5,9 +5,10 @@
 
 [dk_notepad="menubar"] {
 	position:absolute;
-	width:100%;
-	height:20px;
-	height:20rem;
+	left: 0px;
+	right: 0px;
+	height: 20px;
+	height: 20rem;
 	background-color:rgb(220,220,220);
 	cursor:default;
 }
