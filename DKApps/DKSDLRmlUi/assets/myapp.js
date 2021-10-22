@@ -13,7 +13,7 @@ myapp.loadFiles = function myapp_loadFiles() {
     //DKPlugin("DK/DKTime.js")
     //DKPlugin("DK/DKMqtt.js")
     //DKPlugin("DK/DKNotifications.js")
-    //DKPlugin("DKDebug/DKDebug.js")
+    DKPlugin("DKDebug/DKDebug.js")
     //DKPlugin("DKAudio/DKAudio.js")
     //DKPlugin("DKGui/DKConsole.js")
     DKPlugin("DKGui/DKGui.js")
