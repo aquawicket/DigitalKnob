@@ -25,8 +25,8 @@
     bottom: 0rem;
     left: 0rem;
     right: 0rem;
-    height: unset;
-    width: unset;
+    /*height: unset;*/
+    /*width: unset;*/
 }
 
 [dk_frame="titlebar"] {

@@ -29,6 +29,7 @@ DKDrag.prototype.start = function DKDrag_start(event, element) {
         this.mouseStartX = event.clientX + document.documentElement.scrollLeft + document.body.scrollLeft;
         this.mouseStartY = event.clientY + document.documentElement.scrollTop + document.body.scrollTop;
     } else {
+		console.log("event.scrollX = " + event.scrollX)
         this.mouseStartX = event.clientX + window.scrollX || parseInt(event.changedTouches[0].clientX);
         this.mouseStartY = event.clientY + window.scrollY || parseInt(event.changedTouches[0].clientY);
     }
