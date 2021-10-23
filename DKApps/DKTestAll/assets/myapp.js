@@ -74,7 +74,6 @@ myapp.loadApp = function myapp_loadApp() {
     });
 	*/
 	
-	
 	DKPlugin("DKFile/filemanager.js", function() {
         DKFileManager.prototype.init();
         DKFileManager.prototype.create();

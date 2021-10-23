@@ -40,11 +40,14 @@ DKFileManager.prototype.create = function DKFileManager_create(DKFileManager_cre
             instance.onPath(instance, event)
         }
 		
+        instance.dkFrame = DKFrame.prototype.create(instance)
+        instance.dkFrame.setTitle("File Manager")
+		
+		//FIXME: browser return "" for instance.path.value, yet DK returnes undefined
 		const path = instance.path.value ? instance.path.value : ""
 		console.log("path = "+path)
         instance.openFolder(instance, path)
-        instance.dkFrame = DKFrame.prototype.create(instance)
-        instance.dkFrame.setTitle("File Manager")
+		
         DKFileManager_create_callback && DKFileManager_create_callback(instance)
         return instance;
     })
