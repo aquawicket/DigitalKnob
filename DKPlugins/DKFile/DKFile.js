@@ -32,28 +32,23 @@ DKFile.prototype.init = function DKFile_init() {
 }
 
 DKFile.prototype.validatepath = function DKFile_validatepath(path) {
-    //console.log("dk.file.validatepath(" + path + ")");
     if (path.charAt(0) === '/') {
         console.error(path + "  path has / as the first character");
         path = path.replace("/", "");
-        //console.debug("AFTER: " + path);
     }
     if (path.includes("\\")) {
         console.error(path + "  path contains \\");
         path = path.split("\\").join("/");
-        //console.debug("AFTER: " + path);
     }
     const count = path.split("//").length - 1;
     if (!path.includes("://") && (count > 0)) {
         console.error(path + "  path contains // seperator");
         path = path.split("//").join("/");
-        //console.debug("AFTER: " + path);
     }
     if (path.includes("://") && (count > 1)) {
         console.error(path + "  path contains // seperator");
         path = path.split("//").join("/");
         path = path.replace(":/", "://");
-        //console.debug("AFTER: " + path);
     }
     //TODO - Check that directory paths end with a /
     return path;
@@ -94,7 +89,6 @@ if (!DUKTAPE) {
             console.error("assets is invalid");
             return false;
         }
-        console.log("assets = " + assets);
         var search = assets;
         while (!CPP_DKFile_Exists(search + "/DK/DKPlugins")) {
             var n = search.lastIndexOf("/");
@@ -433,15 +427,19 @@ if (typeof CPP_DKFile_StringToFile === "function") {
 
 if(typeof CPP_DKFile_DirectoryContents === "function") {
     DKFile.prototype.directoryContents = function DKFile_directoryContents(path, callback) {
-        path = dk.file.validatepath(path);
-        return callback(CPP_DKFile_DirectoryContents(path))
+        path = dk.file.validatepath(path)
+		let results = CPP_DKFile_DirectoryContents(path)
+		results = results.replace("..,","")
+		results = results.replace(".,","")
+		return callback(results)
     }
 } else {
     DKFile.prototype.directoryContents = function DKFile_directoryContents(path, callback) {
-        console.debug("DKFile.prototype.directoryContents(" + path + ")");
-        path = dk.file.validatepath(path);
+        path = dk.file.validatepath(path)
         dk.php.call('POST', "DKFile/DKFile.php", "directoryContents", path, function dk_php_call_callback(results) {
-            return callback(results)
+            results = results.replace("..,","")
+			results = results.replace(".,","")
+			return callback(results)
         });
     }
 }
@@ -490,7 +488,7 @@ if (typeof CPP_DKFile_GetRelativePath === "function") {
 
 if (typeof CPP_DKFile_GetPaths === "function") {
 	DKFile.prototype.getPathObject = function DKFile_getPathObject(path, callback) {
-		console.log("original path = " + path);
+		//console.log("original path = " + path);
 		const _pObj = CPP_DKFile_GetPaths(path);
 		const pObj = new Object();
 		pObj.path = _pObj.split(",")[0];
@@ -502,6 +500,7 @@ if (typeof CPP_DKFile_GetPaths === "function") {
 		pObj.basename = _pObj.split(",")[6];
 		pObj.extension = _pObj.split(",")[7];
 		pObj.filename = _pObj.split(",")[8];
+		/*
 		console.log("path = " + pObj.path);
 		console.log("aPath = " + pObj.aPath);
 		console.log("root = " + pObj.root);
@@ -511,12 +510,14 @@ if (typeof CPP_DKFile_GetPaths === "function") {
 		console.log("basename = " + pObj.basename);
 		console.log("extension = " + pObj.extension);
 		console.log("filename = " + pObj.filename);
+		*/
 		return callback(pObj);
 	}
-} else {
+} 
+else {
 	DKFile.prototype.getPathObject = function DKFile_getPathObject(path, callback) {
-    //path = dk.file.validatepath(path);
-    console.log("original path = " + path);
+		//path = dk.file.validatepath(path);
+		//console.log("original path = " + path);
 		dk.php.call('GET', "DKFile/DKFile.php", "getPaths", path, function dk_php_call_callback(_pObj) {
 			const pObj = new Object();
 			pObj.path = _pObj.split(",")[0];
@@ -528,6 +529,7 @@ if (typeof CPP_DKFile_GetPaths === "function") {
 			pObj.basename = _pObj.split(",")[6];
 			pObj.extension = _pObj.split(",")[7];
 			pObj.filename = _pObj.split(",")[8];
+			/*
 			console.log("path = " + pObj.path);
 			console.log("aPath = " + pObj.aPath);
 			console.log("root = " + pObj.root);
@@ -537,6 +539,7 @@ if (typeof CPP_DKFile_GetPaths === "function") {
 			console.log("basename = " + pObj.basename);
 			console.log("extension = " + pObj.extension);
 			console.log("filename = " + pObj.filename);
+			*/
 			return callback(pObj);
 		});
 	}
