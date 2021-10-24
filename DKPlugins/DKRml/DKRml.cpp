@@ -521,7 +521,7 @@ Rml::Event* DKRml::addressToEvent(const DKString& address){
 DKString DKRml::eventToAddress(Rml::Event* event){
 	if (!event) {
 		DKERROR("DKRml::eventToAddress(): invalid event\n");
-		return NULL;
+		return "";
 	}
 	std::stringstream ss;
 	const void* address = static_cast<const void*>(event);
@@ -535,7 +535,7 @@ DKString DKRml::eventToAddress(Rml::Event* event){
 
 Rml::Element* DKRml::addressToElement(const DKString& address) {
 	//DKDEBUGFUNC(address);
-	Rml::Element* element;
+	Rml::Element* element = nullptr;
 	if (address == "window") {
 		element = DKRml::Get()->document->GetContext()->GetRootElement(); //Root element that holds all the documents.
 	}
@@ -547,23 +547,19 @@ Rml::Element* DKRml::addressToElement(const DKString& address) {
 	//}
 	else {
 		if (address.compare(0, 2, "0x") != 0 || address.size() <= 2 || address.find_first_not_of("0123456789abcdefABCDEF", 2) != std::string::npos) {
-			//DKERROR("NOTE: DKRml::addressToElement(): the address is not a valid hex notation");
+			DKERROR("NOTE: DKRml::addressToElement(): the address is not a valid hex notation");
 			return NULL;
 		}
 		//Convert a string of an address back into a pointer
 		std::stringstream ss;
 		ss << address.substr(2, address.size() - 2);
-		//int tmp(0);
 		std::uint64_t tmp;
 		if (!(ss >> std::hex >> tmp)) {
 			DKERROR("invalid address\n");
 			return NULL;
 		}
 		element = reinterpret_cast<Rml::Element*>(tmp);
-		//element = dynamic_cast<Rml::Element*>(tmp);
-		//element = static_cast<Rml::Element*>(tmp);
-	}
-	
+	}	
 	if (!element) {
 		DKERROR("invalid element\n");
 		return NULL;
@@ -576,7 +572,7 @@ Rml::Element* DKRml::addressToElement(const DKString& address) {
 DKString DKRml::elementToAddress(Rml::Element* element){
 	if (!element) {
 		DKERROR("DKRml::elementToAddress(): invalid element\n");
-		return NULL;
+		return "";
 	}
 	std::stringstream ss;
 	if (element == DKRml::Get()->document->GetContext()->GetRootElement())
@@ -596,5 +592,7 @@ DKString DKRml::elementToAddress(Rml::Element* element){
 		ss << address;
 #endif
 	}
+	if (same("0xDDDDDDDD", ss.str()))
+		return "";
 	return ss.str();
 }

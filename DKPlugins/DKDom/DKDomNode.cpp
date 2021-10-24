@@ -6,9 +6,7 @@
 #include "DKDom/DKDomNode.h"
 
 
-//////////////////////
-bool DKDomNode::Init()
-{
+bool DKDomNode::Init(){
 	DKDEBUGFUNC();
 	DKDuktape::AttachFunction("CPP_DKDomNode_baseURI", DKDomNode::baseURI);
 	DKDuktape::AttachFunction("CPP_DKDomNode_baseUriObject", DKDomNode::baseURIObject);
@@ -50,40 +48,27 @@ bool DKDomNode::Init()
 	DKDuktape::AttachFunction("CPP_DKDomNode_hasAttributes", DKDomNode::hasAttributes);
 	DKDuktape::AttachFunction("CPP_DKDomNode_isSupported", DKDomNode::isSupported);
 	DKDuktape::AttachFunction("CPP_DKDomNode_setUserData", DKDomNode::setUserData);
-
+	
 	DKClass::DKCreate("DKDom/DKDomNode.js");
 	return true;
 }
 
-
-////////////////////////////////////////
-int DKDomNode::baseURI(duk_context* ctx)
-{
+int DKDomNode::baseURI(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
-	DKERROR("DKDomNode::baseURI not implemented\n");
-	return false;
+	return DKERROR("DKDomNode::baseURI not implemented\n");
 }
 
-//////////////////////////////////////////////
-int DKDomNode::baseURIObject(duk_context* ctx)
-{
+int DKDomNode::baseURIObject(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
-	DKERROR("DKDomNode::baseURIObject not implemented\n");
-	return false;
+	return DKERROR("DKDomNode::baseURIObject not implemented\n");
 }
 
-///////////////////////////////////////////
-int DKDomNode::childNodes(duk_context* ctx)
-{
+int DKDomNode::childNodes(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
 	Rml::Element* element = DKRml::addressToElement(address);
-	if (!element) {
-		DKERROR("DKDomNode::childNodes(): element invalid\n");
-		duk_push_undefined(ctx);
-		return true;
-	}
-
+	if (!element)
+		return DKERROR("DKDomNode::childNodes(): element invalid\n");
 	int num = element->GetNumChildren();
 	Rml::ElementList elements;
 	for (int i = 0; i < num; i++) {
@@ -107,25 +92,17 @@ int DKDomNode::firstChild(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
 	Rml::Element* element = DKRml::addressToElement(address);
-	if (!element) {
-		DKERROR("DKDomNode::firstChild(): element invalid\n");
-		duk_push_undefined(ctx);
-		return true;
-	}
+	if (!element)
+		return DKERROR("DKDomNode::firstChild(): element invalid\n");
 	Rml::Element* firstChild = element->GetFirstChild();
-	if (!firstChild) {
-		DKERROR("DKDomNode::firstChild(): firstChild invalid\n");
-		duk_push_undefined(ctx);
-		return true;
-	}
+	if (!firstChild)
+		return DKERROR("DKDomNode::firstChild(): firstChild invalid\n");
 	DKString elementAddress = DKRml::elementToAddress(firstChild);
 	duk_push_string(ctx, elementAddress.c_str());
 	return true;
 }
 
-////////////////////////////////////////////
-int DKDomNode::isConnected(duk_context* ctx)
-{
+int DKDomNode::isConnected(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKERROR("DKDomNode::isConnected not implemented\n");
 	return false;
@@ -135,17 +112,11 @@ int DKDomNode::lastChild(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
 	Rml::Element* element = DKRml::addressToElement(address);
-	if (!element) {
-		DKERROR("DKDomNode::lastChild(): element invalid\n");
-		duk_push_undefined(ctx);
-		return true;
-	}
+	if (!element)
+		return DKERROR("DKDomNode::lastChild(): element invalid\n");
 	Rml::Element* lastChild = element->GetLastChild();
-	if (!lastChild) {
-		DKERROR("DKDomNode::lastChild(): lastChild invalid\n");
-		duk_push_undefined(ctx);
-		return true;
-	}
+	if (!lastChild)
+		return DKERROR("DKDomNode::lastChild(): lastChild invalid\n");
 	DKString elementAddress = DKRml::elementToAddress(lastChild);
 	duk_push_string(ctx, elementAddress.c_str());
 	return true;
@@ -155,39 +126,29 @@ int DKDomNode::nextSibling(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
 	Rml::Element* element = DKRml::addressToElement(address);
-	if (!element) {
-		duk_push_undefined(ctx);
+	if (!element)
 		return DKERROR("element invalid\n");
-	}
 	Rml::Element* nextSibling = element->GetNextSibling();
-	if (!nextSibling) {
-		duk_push_undefined(ctx);
+	if (!nextSibling)
 		return DKERROR("nextSibling invalid\n");
-	}
 	DKString elementAddress = DKRml::elementToAddress(nextSibling);
 	duk_push_string(ctx, elementAddress.c_str());
 	return true;
 }
 
-/////////////////////////////////////////
-int DKDomNode::nodeName(duk_context* ctx)
-{
+int DKDomNode::nodeName(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKERROR("DKDomNode::nodeName not implemented\n");
 	return false;
 }
 
-/////////////////////////////////////////
-int DKDomNode::nodeType(duk_context* ctx)
-{
+int DKDomNode::nodeType(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKERROR("DKDomNode::nodeType not implemented\n");
 	return false;
 }
 
-//////////////////////////////////////////
-int DKDomNode::nodeValue(duk_context* ctx)
-{
+int DKDomNode::nodeValue(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKERROR("DKDomNode::nodeValue not implemented\n");
 	return false;
@@ -197,15 +158,11 @@ int DKDomNode::ownerDocument(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
 	Rml::Element* element = DKRml::addressToElement(address);
-	if (!element) {
-		duk_push_undefined(ctx);
+	if (!element)
 		return DKERROR("element invalid\n");
-	}
 	Rml::Element* ownerDocument = element->GetOwnerDocument();
-	if (!ownerDocument) {
-		duk_push_undefined(ctx);
+	if (!ownerDocument)
 		return DKERROR("ownerDocument invalid\n");
-	}
 	DKString ownerDocumentAddress = DKRml::elementToAddress(ownerDocument);
 	duk_push_string(ctx, ownerDocumentAddress.c_str());
 	return true;
@@ -215,18 +172,14 @@ int DKDomNode::parentNode(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
 	Rml::Element* element = DKRml::addressToElement(address);
-	if (!element) {
-		duk_push_undefined(ctx);
-		DKERROR("element invalid\n");
-		return true; 
-	}
+	if (!element)
+		return DKERROR("element invalid\n"); 
 	Rml::Element* parentNode = element->GetParentNode();
-	if (!parentNode) {
-		duk_push_undefined(ctx);
-		DKERROR("parentNode invalid\n");
-		return true;
-	}
+	if (!parentNode)
+		return DKERROR("parentNode invalid\n");
 	DKString parentAddress = DKRml::elementToAddress(parentNode);
+	if (parentAddress.empty())
+		return DKERROR("parentAddress invalid\n");
 	duk_push_string(ctx, parentAddress.c_str());
 	return true;
 }
@@ -236,15 +189,11 @@ int DKDomNode::parentElement(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
 	Rml::Element* element = DKRml::addressToElement(address);
-	if (!element) {
-		duk_push_undefined(ctx);
+	if (!element)
 		return DKERROR("DKDomNode::parentElement(): element invalid\n");
-	}
 	Rml::Element* parentNode = element->GetParentNode();
-	if (!parentNode) {
-		duk_push_undefined(ctx);
+	if (!parentNode)
 		return DKERROR("DKDomNode::parentElement(): parentNode invalid\n");
-	}
 	DKString parentAddress = DKRml::elementToAddress(parentNode);
 	duk_push_string(ctx, parentAddress.c_str());
 	//TODO: check this on javascript side if it is an instance of Element
@@ -255,15 +204,11 @@ int DKDomNode::previousSibling(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
 	Rml::Element* element = DKRml::addressToElement(address);
-	if (!element) {
-		duk_push_undefined(ctx);
+	if (!element)
 		return DKERROR("element invalid\n");
-	}
 	Rml::Element* previousSibling = element->GetPreviousSibling();
-	if (!previousSibling) {
-		duk_push_undefined(ctx);
-		return DKWARN("previousSibling invalid\n");
-	}
+	if (!previousSibling)
+		return DKERROR("previousSibling invalid\n");
 	DKString elementAddress = DKRml::elementToAddress(previousSibling);
 	duk_push_string(ctx, elementAddress.c_str());
 	return true;
@@ -308,79 +253,48 @@ int DKDomNode::appendChild(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
 	Rml::Element* element = DKRml::addressToElement(address);
-	if(!element){
-		DKERROR("DKDomNode::appendChild(): element invalid\n");
-		duk_push_undefined(ctx);
-		return true;
-	}
+	if(!element)
+		return DKERROR("DKDomNode::appendChild(): element invalid\n");
 	DKString childAddress = duk_require_string(ctx, 1);
 	Rml::Element* child = DKRml::addressToElement(childAddress);
-	if(!child){
-		DKERROR("DKDomNode::appendChild(): child invalid\n");
-		duk_push_undefined(ctx);
-		return true;
-	}
-
-	if(!element->AppendChild(child->GetParentNode()->RemoveChild(child), true)){
-		DKERROR("DKDomNode::appendChild(): AppendChild failed\n");
-		duk_push_undefined(ctx);
-		return true;
-	}
-
+	if(!child)
+		return DKERROR("DKDomNode::appendChild(): child invalid\n");
+	if(!element->AppendChild(child->GetParentNode()->RemoveChild(child), true))
+		return DKERROR("DKDomNode::appendChild(): AppendChild failed\n");
 	duk_push_string(ctx, childAddress.c_str());
-
 	//post process if it's a <link>
 	if(same("link", child->GetTagName())){
-		if(child->HasAttribute("href")){
+		if(child->HasAttribute("href"))
 			DKRml::Get()->dkRmlConverter.PostProcess(child);
-		}	
 	}
-
 	//post process if it's a <script>
 	if (same("script", child->GetTagName())) {
-		if(child->HasAttribute("src")) {
+		if(child->HasAttribute("src"))
 			DKRml::Get()->dkRmlConverter.PostProcess(child);
-		}
 	}
-
 	return true;
 }
 
-//////////////////////////////////////////
-int DKDomNode::cloneNode(duk_context* ctx)
-{
+int DKDomNode::cloneNode(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
-	DKERROR("DKDomNode::cloneNode not implemented\n");
-	return false;
+	return DKERROR("DKDomNode::cloneNode not implemented\n");
 }
 
-////////////////////////////////////////////////////////
-int DKDomNode::compareDocumentPosition(duk_context* ctx)
-{
+int DKDomNode::compareDocumentPosition(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
-	DKERROR("DKDomNode::compareDocumentPosition not implemented\n");
-	return false;
+	return DKERROR("DKDomNode::compareDocumentPosition not implemented\n");
 }
 
-/////////////////////////////////////////
-int DKDomNode::contains(duk_context* ctx)
-{
+int DKDomNode::contains(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
 	Rml::Element* element = DKRml::addressToElement(address);
-	if (!element) {
-		DKERROR("DKDomNode::contains(): element invalid\n");
-		duk_push_undefined(ctx);
-		return true;
-	}
+	if (!element)
+		return DKERROR("DKDomNode::contains(): element invalid\n");
 	DKString nodeAddress = duk_require_string(ctx, 1);
 	Rml::Element* node = DKRml::addressToElement(nodeAddress);
-	if(!node){
-		DKERROR("DKDomNode::contains(): node invalid\n");
-		duk_push_undefined(ctx);
-		return true;
-	}
-
+	if(!node)
+		return DKERROR("DKDomNode::contains(): node invalid\n");
 	while(node){
 		if(node == element){ 
 			duk_push_boolean(ctx, true);
@@ -392,242 +306,150 @@ int DKDomNode::contains(duk_context* ctx)
 	return true;
 }
 
-////////////////////////////////////////////
-int DKDomNode::getBoxQuads(duk_context* ctx)
-{
+int DKDomNode::getBoxQuads(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
-	DKERROR("DKDomNode::getBoxQuads not implemented\n");
-	return false;
+	return DKERROR("DKDomNode::getBoxQuads not implemented\n");
 }
 
-/////////////////////////////////////////
-int DKDomNode::getRootNode(duk_context* ctx)
-{
+int DKDomNode::getRootNode(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
-	DKERROR("DKDomNode::getRootNode not implemented\n");
-	return false;
+	return DKERROR("DKDomNode::getRootNode not implemented\n");
 }
 
 int DKDomNode::hasChildNodes(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
 	Rml::Element* element = DKRml::addressToElement(address);
-	if (!element) {
-		DKERROR("element invalid\n");
-		duk_push_undefined(ctx);
-		return true;
-	}
+	if (!element)
+		return DKERROR("element invalid\n");
 	bool hasChildNodes = element->HasChildNodes();
 	duk_push_boolean(ctx, hasChildNodes);
 	return true;
 }
 
-/////////////////////////////////////////////
-int DKDomNode::insertBefore(duk_context* ctx)
-{
+int DKDomNode::insertBefore(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
 	Rml::Element* element = DKRml::addressToElement(address);
-	if (!element) {
-		DKERROR("element invalid\n");
-		duk_push_undefined(ctx);
-		return true;
-	}
-	
+	if (!element)
+		return DKERROR("element invalid\n");	
 	DKString childAddress = duk_require_string(ctx, 1);
 	Rml::Element* child = DKRml::addressToElement(childAddress);
-	if(!child){
-		DKERROR("child invalid\n");
-		duk_push_undefined(ctx);
-		return true;
-	}
-
+	if(!child)
+		return DKERROR("child invalid\n");
 	DKString adjacentAddress = duk_require_string(ctx, 2);
 	Rml::Element* adjacentElement = DKRml::addressToElement(adjacentAddress);
-	if(!adjacentElement){
-		DKERROR("adjacentElement invalid\n");
-		duk_push_undefined(ctx);
-		return true;
-	}
-
-	if(!element->InsertBefore(child->GetParentNode()->RemoveChild(child), adjacentElement)){
-		DKERROR("InsertBefore failed\n");
-		duk_push_undefined(ctx);
-		return true;
-	}
-
+	if(!adjacentElement)
+		return DKERROR("adjacentElement invalid\n");
+	if(!element->InsertBefore(child->GetParentNode()->RemoveChild(child), adjacentElement))
+		return DKERROR("InsertBefore failed\n");
 	duk_push_string(ctx, childAddress.c_str());
-
 	//post process if it's a <link>
 	if(same("link", child->GetTagName())){
 		if(child->HasAttribute("href"))
 			DKRml::Get()->dkRmlConverter.PostProcess(child);
 	}
-
 	//post process if it's a <script>
 	if (same("script", child->GetTagName())) {
 		if(child->HasAttribute("src"))
 			DKRml::Get()->dkRmlConverter.PostProcess(child);
 	}
-
 	return true;
 }
 
-///////////////////////////////////////////////////
-int DKDomNode::isDefaultNamespace(duk_context* ctx)
-{
+int DKDomNode::isDefaultNamespace(duk_context* ctx) {
 	DKDEBUGFUNC(ctx);
-	DKERROR("DKDomNode::isDefaultNamespace not implemented\n");
-	return false;
+	return DKERROR("DKDomNode::isDefaultNamespace not implemented\n");
 }
 
-////////////////////////////////////////////
-int DKDomNode::isEqualNode(duk_context* ctx)
-{
+int DKDomNode::isEqualNode(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
-	DKERROR("DKDomNode::isEqualNode not implemented\n");
-	return false;
+	return DKERROR("DKDomNode::isEqualNode not implemented\n");
 }
 
-///////////////////////////////////////////
-int DKDomNode::isSameNode(duk_context* ctx)
-{
+int DKDomNode::isSameNode(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
-	DKERROR("DKDomNode::isSameNode not implemented\n");
-	return false;
+	return DKERROR("DKDomNode::isSameNode not implemented\n");
 }
 
-/////////////////////////////////////////////
-int DKDomNode::lookupPrefix(duk_context* ctx)
-{
+int DKDomNode::lookupPrefix(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
-	DKERROR("DKDomNode::lookupPrefix not implemented\n");
-	return false;
+	return DKERROR("DKDomNode::lookupPrefix not implemented\n");
 }
 
-///////////////////////////////////////////////////
-int DKDomNode::lookupNamespaceURI(duk_context* ctx)
-{
+int DKDomNode::lookupNamespaceURI(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
-	DKERROR("DKDomNode::lookupNamespaceURI not implemented\n");
-	return false;
+	return DKERROR("DKDomNode::lookupNamespaceURI not implemented\n");
 }
 
-/////////////////////////////////////////
-int DKDomNode::normalize(duk_context* ctx)
-{
+int DKDomNode::normalize(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
-	DKERROR("DKDomNode::normalize not implemented\n");
-	return false;
+	return DKERROR("DKDomNode::normalize not implemented\n");
 }
 
-////////////////////////////////////////////
-int DKDomNode::removeChild(duk_context* ctx)
-{
+int DKDomNode::removeChild(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
 	Rml::Element* element = DKRml::addressToElement(address);
-	if(!element){
-		DKERROR("DKDomNode::removeChild(): element invalid\n");
-		duk_push_undefined(ctx);
-		return true;
-	}
+	if(!element)
+		return DKERROR("DKDomNode::removeChild(): element invalid\n");
 	DKString childAddress = duk_require_string(ctx, 1);
 	Rml::Element* child = DKRml::addressToElement(childAddress);
-	if(!child){
-		DKERROR("DKDomNode::removeChild(): child invalid\n");
-		duk_push_undefined(ctx);
-		return true;
-	}
+	if(!child)
+		return DKERROR("DKDomNode::removeChild(): child invalid\n");
 	//DKINFO("element->RemoveChild(child): " + element->GetTagName() + "->(" + child->GetTagName() + ")\n");
-	if(!element->RemoveChild(child)){
-		DKERROR("DKDomNode::removeChild(): element->RemoveChild failed\n");
-		duk_push_undefined(ctx);
-		return true;
-	}
+	if(!element->RemoveChild(child))
+		return DKERROR("DKDomNode::removeChild(): element->RemoveChild failed\n");
 	duk_push_string(ctx, childAddress.c_str());
 	return true;
 }
 
-/////////////////////////////////////////////
-int DKDomNode::replaceChild(duk_context* ctx)
-{
+int DKDomNode::replaceChild(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
 	Rml::Element* element = DKRml::addressToElement(address);
-	if (!element) {
-		DKERROR("element invalid\n");
-		duk_push_undefined(ctx);
-		return true;
-	}
-	
+	if (!element)
+		return DKERROR("element invalid\n");	
 	DKString newChildAddress = duk_require_string(ctx, 1);
 	Rml::Element* newChild = DKRml::addressToElement(newChildAddress);
-	if(!newChild){
-		DKERROR("newChild invalid\n");
-		duk_push_undefined(ctx);
-		return true;
-	}
-
+	if(!newChild)
+		return DKERROR("newChild invalid\n");
 	DKString oldChildAddress = duk_require_string(ctx, 2);
 	Rml::Element* oldChild = DKRml::addressToElement(oldChildAddress);
-	if(!oldChild){
-		DKERROR("oldChild invalid\n");
-		duk_push_undefined(ctx);
-		return true;
-	}
-
-	if(!element->ReplaceChild(newChild->GetParentNode()->RemoveChild(newChild), oldChild)){
-		DKERROR("replaceChild failed\n");
-		duk_push_undefined(ctx);
-		return true;
-	}
-
+	if(!oldChild)
+		return DKERROR("oldChild invalid\n");
+	if(!element->ReplaceChild(newChild->GetParentNode()->RemoveChild(newChild), oldChild))
+		return DKERROR("replaceChild failed\n");
 	duk_push_string(ctx, newChildAddress.c_str());
-
 	//post process if it's a <link>
 	if(same("link", oldChild->GetTagName())){
 		if(oldChild->HasAttribute("href"))
 			DKRml::Get()->dkRmlConverter.PostProcess(oldChild);
 	}
-
 	//post process if it's a <script>
 	if (same("script", oldChild->GetTagName())) {
 		if(oldChild->HasAttribute("src"))
 			DKRml::Get()->dkRmlConverter.PostProcess(oldChild);
 	}
-
 	return true;
 }
 
-////////////////////////////////////////////
-int DKDomNode::getUserData(duk_context* ctx)
-{
+int DKDomNode::getUserData(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
-	DKERROR("DKDomNode::getUserData not implemented\n");
-	return false;
+	return DKERROR("DKDomNode::getUserData not implemented\n");
 }
 
-//////////////////////////////////////////////
-int DKDomNode::hasAttributes(duk_context* ctx)
-{
+int DKDomNode::hasAttributes(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
-	DKERROR("DKDomNode::hasAttributes not implemented\n");
-	return false;
+	return DKERROR("DKDomNode::hasAttributes not implemented\n");
 }
 
-////////////////////////////////////////////
-int DKDomNode::isSupported(duk_context* ctx)
-{
+int DKDomNode::isSupported(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
-	DKERROR("DKDomNode::isSupported not implemented\n");
-	return false;
+	return DKERROR("DKDomNode::isSupported not implemented\n");
 }
 
-////////////////////////////////////////////
-int DKDomNode::setUserData(duk_context* ctx)
-{
+int DKDomNode::setUserData(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
-	DKERROR("DKDomNode::setUserData not implemented\n");
-	return false;
+	return DKERROR("DKDomNode::setUserData not implemented\n");
 }

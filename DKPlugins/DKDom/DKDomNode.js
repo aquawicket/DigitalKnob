@@ -81,7 +81,9 @@ var Node = function(pointer) {
     })
     Object.defineProperty(this, "parentNode", {
         get: function() {
+			
             var address = CPP_DKDomNode_parentNode(this.pointer)
+			console.log("address = "+address)
             if (!address)
                 return;
             return new HTMLElement(address)
@@ -149,6 +151,8 @@ var Node = function(pointer) {
     Node.prototype.normalize = function() {//TODO
     }
     Node.prototype.removeChild = function(child) {
+		//console.log("this.pointer = "+this.pointer)
+		//console.log("child.pointer = "+child.pointer)
         var address = CPP_DKDomNode_removeChild(this.pointer, child.pointer)
         if (!address)
             return null;

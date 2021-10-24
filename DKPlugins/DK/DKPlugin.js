@@ -308,14 +308,19 @@ DKPlugin.prototype.close = function DKPlugin_close() {
     console.group("DKPlugin.prototype.close(): " + this.id);
     //remove any owned html elements from the DOM
     for (let key in this) {
-        if (this[key]instanceof Element) {
+        if (this[key] instanceof Element) {
             if (!this[key].parentNode) {
                 console.error(this.constructor.name + " parentNode invalid");
                 continue;
             }
-            this[key].parentNode.removeChild(this[key]);
+			if(typeof this[key].parentNode.removeChild !== "function")
+				console.error(this.constructor.name + "removeChild is not a function")
+			if (this[key] instanceof Element && this[key].parentNode instanceof Element) {
+				console.log("this[key] = "+this[key])
+				this[key].parentNode.removeChild(this[key])
+			}
             if (!delete this[key])
-                console.error(this.constructor.name + " could not be deleted");
+                console.error(this.constructor.name + " could not be deleted")
         }
     }
     if (this.xclose && this.xclose !== this.close) {
