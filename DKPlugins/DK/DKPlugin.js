@@ -78,16 +78,12 @@ DKPlugin.fromFile = function DKPlugin_fromFile(args, DKPlugin_fromFile_callback)
             !DKPlugin.info && (DKPlugin.info = new Array)
             let klassName = null;
             if (DKPlugin.info[url]){
-				//console.log("DKPlugin.info["+url+"]")
                 klassName = DKPlugin.info[url]
 			}
             else {
-				//console.log("!DKPlugin.info["+url+"]")
                 const newfuncs = dk.getNewFuncs()
-				//console.log("newfuncs = "+newfuncs)
                 klassName = newfuncs[newfuncs.length - 1]
             }
-			//DUKTAPE && DKPlugin.instances && (klassName = DKPlugin.instances[DKPlugin.instances.length-1].klassName)
             if (!globalThis[klassName]) {
                 DKPlugin_fromFile_callback && DKPlugin_fromFile_callback(true);
                 return true;
