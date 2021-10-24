@@ -5,7 +5,7 @@ const myapp = DKPlugin(MyApp);
 
 myapp.loadFiles = function myapp_loadFiles() {
 	DKPlugin("DK/DKTrace.js")
-    DKPlugin("DK/DKErrorHandler.js")
+    //DKPlugin("DK/DKErrorHandler.js")
     DKPlugin("DK/DKPhp.js")
     DKPlugin("DK/DKJson.js")
     DKPlugin("DKFile/DKFile.js")
@@ -30,60 +30,59 @@ myapp.loadFiles = function myapp_loadFiles() {
 }
 
 myapp.loadApp = function myapp_loadApp() {
-	dk.errorCatcher(myapp, "myapp")
-	dk.errorhandler.create()
+	//dk.errorCatcher(myapp, "myapp")
+	//dk.errorhandler.create()
 	//DKTime.prototype.create()
 	//dk.audio.createSound("DKTasmota/PowerDown.mp3")
 	//DKConsole.prototype.create(document.body, "", "0rem", "0rem", "0rem", "100%", "25%")
-	dk.time.createClock(document.body, "2rem")
+	//dk.time.createClock(document.body, "2rem")
 	//DKDevToolsButton.prototype.create()
+	
 	/*
 	DKPlugin("DKGui/TestApp.js", function() {
-		TestApp.prototype.init()
 		TestApp.prototype.create()
 	});
 	*/
 	
 	/*
 	DKPlugin("DKGui/DKMessageBox.js", function() {
-		DKMessageBox.prototype.init()
 		DKMessageBox.prototype.create()
 	});
 	*/
 	
 	/*
 	dk.paint = DKPlugin("DKPaint/DKPaint.js", function() {
-        dk.paint.init();
 		const dkframe = DKFrame.prototype.create(byId("DKPaint/DKPaint.html"))
     });
 	*/
 	
 	/*
 	DKPlugin("DKColorPicker/DKColorPicker.js", function() {
-        DKColorPicker.prototype.init();
         DKColorPicker.prototype.create();
     });
 	*/
 	
 	/*
 	DKPlugin("DKNotepad/DKNotepad.js", function() {
-        DKNotepad.prototype.init();
         DKNotepad.prototype.create();
     });
 	*/
 	
 	/*
 	DKPlugin("DKBuild/DKBuildGUI.js", function() {
-        DKBuildGUI.prototype.init();
         DKBuildGUI.prototype.create();
     });
 	*/
-	
+
+	/*
 	DKPlugin("DKFile/filemanager.js", function() {
-        DKFileManager.prototype.init();
-        DKFileManager.prototype.create();
+		DKFileManager.prototype.create();
     });
+	*/
 	
+	DKPlugin("DKCodeRunner/DKCodeRunner.js", function(){
+		DKCodeRunner.prototype.create();
+	})
 }
 
 DUKTAPE && myapp.loadFiles();
