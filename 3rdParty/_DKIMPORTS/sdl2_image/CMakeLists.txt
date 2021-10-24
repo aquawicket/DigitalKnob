@@ -112,6 +112,10 @@ set(SDLIMAGE_SRC
 	IMG_ImageIO.m
 )
 
+if(CMAKE_HOST_APPLE)
+	list(APPEND SDLIMAGE_SRC IMG_ImageIO.m)
+endif()
+
 set(SDLIMAGE_SOURCES ${SDLIMAGE_SRC})
 
 include_directories(./)
