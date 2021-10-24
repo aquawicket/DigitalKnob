@@ -211,20 +211,20 @@ int DKDomNode::ownerDocument(duk_context* ctx){
 	return true;
 }
 
-///////////////////////////////////////////
-int DKDomNode::parentNode(duk_context* ctx)
-{
+int DKDomNode::parentNode(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
 	Rml::Element* element = DKRml::addressToElement(address);
 	if (!element) {
 		duk_push_undefined(ctx);
-		return DKERROR("element invalid\n");
+		DKERROR("element invalid\n");
+		return true; 
 	}
 	Rml::Element* parentNode = element->GetParentNode();
 	if (!parentNode) {
 		duk_push_undefined(ctx);
-		return DKERROR("parentNode invalid\n");
+		DKERROR("parentNode invalid\n");
+		return true;
 	}
 	DKString parentAddress = DKRml::elementToAddress(parentNode);
 	duk_push_string(ctx, parentAddress.c_str());

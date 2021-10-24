@@ -4,7 +4,7 @@
     border-color: rgb(22,20,20);
     background-color: rgb(51,47,47);
     padding: 0rem;
-    right:unset;
+    /*right:unset;*/
     width: 150rem;
     min-height: 18rem;
     border-style: solid;
@@ -27,5 +27,5 @@
 {
 	position: absolute;
     background-color: rgb(60,60,60);
-    color = rgb(255,255,255);
+    color: rgb(255,255,255);
 }

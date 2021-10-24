@@ -533,13 +533,15 @@ DKString DKRml::eventToAddress(Rml::Event* event){
 	return ss.str();
 }
 
-Rml::Element* DKRml::addressToElement(const DKString& address){
+Rml::Element* DKRml::addressToElement(const DKString& address) {
 	//DKDEBUGFUNC(address);
 	Rml::Element* element;
-	if (address == "window")
+	if (address == "window") {
 		element = DKRml::Get()->document->GetContext()->GetRootElement(); //Root element that holds all the documents.
-	else if (address == "document")
+	}
+	else if (address == "document") {
 		element = DKRml::Get()->document->GetOwnerDocument();
+	}
 	//else if (address == "document") {
 	//	element = DKRml::Get()->document;
 	//}
@@ -554,10 +556,17 @@ Rml::Element* DKRml::addressToElement(const DKString& address){
 		//int tmp(0);
 		std::uint64_t tmp;
 		if (!(ss >> std::hex >> tmp)) {
-			DKERROR("DKRml::addressToElement(" + address + "): invalid address\n");
+			DKERROR("invalid address\n");
 			return NULL;
 		}
 		element = reinterpret_cast<Rml::Element*>(tmp);
+		//element = dynamic_cast<Rml::Element*>(tmp);
+		//element = static_cast<Rml::Element*>(tmp);
+	}
+	
+	if (!element) {
+		DKERROR("invalid element\n");
+		return NULL;
 	}
 	if (element->GetTagName().empty())
 		return NULL;
