@@ -4,7 +4,7 @@ const myapp = DKPlugin(MyApp);
 
 
 myapp.loadFiles = function myapp_loadFiles() {
-	//DKPlugin("DK/DKTrace.js")
+	DKPlugin("DK/DKTrace.js")
     //DKPlugin("DK/DKErrorHandler.js")
     DKPlugin("DK/DKPhp.js")
     DKPlugin("DK/DKJson.js")
@@ -37,9 +37,9 @@ myapp.loadApp = function myapp_loadApp() {
 	//DKConsole.prototype.create(document.body, "", "0rem", "0rem", "0rem", "100%", "25%")
 	//dk.time.createClock(document.body, "2rem")
 	//DKDevToolsButton.prototype.create()
+	
 	/*
 	DKPlugin("DKGui/TestApp.js", function() {
-		TestApp.prototype.init()
 		TestApp.prototype.create()
 	});
 	*/
@@ -65,12 +65,9 @@ myapp.loadApp = function myapp_loadApp() {
     });
 	*/
 	
-	/*
 	DKPlugin("DKNotepad/DKNotepad.js", function() {
-        DKNotepad.prototype.init();
         DKNotepad.prototype.create();
     });
-	*/
 	
 	/*
 	DKPlugin("DKBuild/DKBuildGUI.js", function() {
@@ -79,11 +76,11 @@ myapp.loadApp = function myapp_loadApp() {
     });
 	*/
 	
+	/*
 	DKPlugin("DKFile/filemanager.js", function() {
-        DKFileManager.prototype.init();
         DKFileManager.prototype.create();
     });
-	
+	*/
 }
 
 DUKTAPE && myapp.loadFiles();

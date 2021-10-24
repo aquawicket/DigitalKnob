@@ -6,7 +6,7 @@ let DUKTAPE = window.DUKTAPE
 dk.useCPP = false;
 
 //Keep a object reference to the old console
-if(!DUKTAPE) {
+//if(!DUKTAPE) {
     dk.xconsole = new Object;
     //Create a logger for console
     dk.x = new Object;
@@ -33,7 +33,7 @@ if(!DUKTAPE) {
     console.warn = function() {
         dk.x && dk.x.logger("warn", arguments);
     }
-}
+//}
 
 const required = function required() {
     for (let n = 0; n < arguments.length; n++) {
@@ -1274,14 +1274,11 @@ dk.getNewFuncs = function dk_getNewFuncs() {
     for (var i in obj) {
         if ((typeof obj[i]).toString() == "function" && obj[i].toString().indexOf("[native code]") == -1) {
             if (!dk.windowfuncs.includes(obj[i].name) && obj[obj[i].name]) {
-				console.log("obj[i].name = "+obj[i].name)
                 newfuncs.push(obj[i].name)
                 dk.windowfuncs.push(obj[i].name)
             }
         }
     }
-	console.log("newfuncs = "+newfuncs)
-	console.log("newfuncs[newfuncs.length-1] = "+newfuncs[newfuncs.length-1])
     return newfuncs;
 }
 

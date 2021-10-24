@@ -92,7 +92,7 @@ DKFileManager.prototype.upDir = function(instance) {
     instance.openFolder(instance, up)
 }
 
-DKFileManager.prototype.onPath = function(instance) {
+DKFileManager.prototype.onPath = function(instance, event) {
     if (event.code === 'Enter')
         instance.openFolder(instance, instance.path.value)
 }

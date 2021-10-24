@@ -32,23 +32,23 @@ DKNotepad.prototype.create = function dk_notepad_create(dk_notepad_create_callba
         instance.help = html.querySelector("[dk_notepad='help']");
         instance.container = html.querySelector("[dk_notepad='container']");
         instance.text = html.querySelector("[dk_notepad='text']");
-        instance.file.onclick = function() {
-            instance.filemenu(instance, event);
+        instance.file.onclick = function(event) {
+            instance.filemenu(instance, event)
         }
-        instance.edit.onclick = function() {
-            instance.editmenu(instance, event);
+        instance.edit.onclick = function(event) {
+            instance.editmenu(instance, event)
         }
-        instance.format.onclick = function() {
-            instance.formatmenu(instance, event);
+        instance.format.onclick = function(event) {
+            instance.formatmenu(instance, event)
         }
-        instance.view.onclick = function() {
-            instance.viewmenu(instance, event);
+        instance.view.onclick = function(event) {
+            instance.viewmenu(instance, event)
         }
-        instance.help.onclick = function() {
-            instance.helpmenu(instance, event);
+        instance.help.onclick = function(event) {
+            instance.helpmenu(instance, event)
         }
-        instance.container.oncontextmenu = function() {
-            instance.rightclickmenu(instance, event);
+        instance.container.oncontextmenu = function(event) {
+            instance.rightclickmenu(instance, event)
         }
         instance.currentFile = "";
         instance.dkframe = DKFrame.prototype.create(instance);

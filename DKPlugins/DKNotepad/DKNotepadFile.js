@@ -41,7 +41,6 @@ dk.notepadfile.init = function dk_notepad_file_init() {
 }
 
 /*
-////////////////////////////
 function DKNotepadFile_end() {/*
 	document.removeEventListener("mousedown", DKNotepadFile_onevent);
 	byId("DKNotepadFile_New").removeEventListener("click", DKNotepadFile_onevent); //FIXME:   DKNotepadFile_New undefined
@@ -53,7 +52,6 @@ function DKNotepadFile_end() {/*
 	dk.close("DKNotepad/DKNotepadFile.html");
 }
 
-/////////////////////////////////////
 function DKNotepadFile_onevent(event) {
 	//console.warn("DKNotepadFile_onevent("+event.currentTarget.id+","+event.type+","+event.value+")");
 	if(event.currentTarget.id === "DKNotepadFile_New"){
@@ -92,13 +90,11 @@ dk.notepadfile.new = function dk_notepad_file_new() {
     dk.notepad.currentFile = "";
 }
 
-/////////////////////////////
 function DKNotepadFile_New() {
     byId("DKNotepad_Text").value = "";
     currentFile = "";
 }
 
-/////////////////////////////
 function DKNotepadFile_Open() {
     DKPlugin("DKFile/DKOpenFile.js", function() {
         DKFrame_Html("DKFile/DKOpenFile.html");
@@ -107,7 +103,6 @@ function DKNotepadFile_Open() {
     });
 }
 
-/////////////////////////////
 function DKNotepadFile_Save() {
     if (!currentFile) {
         DKNotepadFile_SaveAs();
@@ -123,7 +118,6 @@ function DKNotepadFile_Save() {
     });
 }
 
-///////////////////////////////
 function DKNotepadFile_SaveAs() {
     DKPlugin("DKFile/DKSaveFile.js", function() {
         DKFrame_Html("DKFile/DKSaveFile.html");
@@ -143,12 +137,10 @@ function DKNotepadFile_SaveAs() {
     });
 }
 
-//////////////////////////////
 function DKNotepadFile_Print() {
     CPP_DKCef_Print(0);
 }
 
-/////////////////////////////////////
 function DKNotepadFile_CheckForSave() {
     console.log("TODO\n");
 }
