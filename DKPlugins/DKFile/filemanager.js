@@ -318,7 +318,6 @@ DKFileManager.prototype.updatePath = function DKFileManager_updatePath(instance,
         dk.file.directoryContents(path.aPath, function dk_file_directoryContents_callback(results) {
             if (!results)
                 return error("results invalid")
-			console.log("results = "+results)
             const items = results.split(",")
             for (let n = 0; n < items.length; n++) {
                 dk.file.isDir(path.aPath + items[n], function dk_file_isDir_callback(dir) {

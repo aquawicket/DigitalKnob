@@ -4,8 +4,8 @@ const myapp = DKPlugin(MyApp);
 
 
 myapp.loadFiles = function myapp_loadFiles() {
-	DKPlugin("DK/DKTrace.js")
-    DKPlugin("DK/DKErrorHandler.js")
+	//DKPlugin("DK/DKTrace.js")
+    //DKPlugin("DK/DKErrorHandler.js")
     DKPlugin("DK/DKPhp.js")
     DKPlugin("DK/DKJson.js")
     DKPlugin("DKFile/DKFile.js")
@@ -30,12 +30,12 @@ myapp.loadFiles = function myapp_loadFiles() {
 }
 
 myapp.loadApp = function myapp_loadApp() {
-	dk.errorCatcher(myapp, "myapp")
-	dk.errorhandler.create()
+	//dk.errorCatcher(myapp, "myapp")
+	//dk.errorhandler.create()
 	//DKTime.prototype.create()
 	//dk.audio.createSound("DKTasmota/PowerDown.mp3")
 	//DKConsole.prototype.create(document.body, "", "0rem", "0rem", "0rem", "100%", "25%")
-	dk.time.createClock(document.body, "2rem")
+	//dk.time.createClock(document.body, "2rem")
 	//DKDevToolsButton.prototype.create()
 	/*
 	DKPlugin("DKGui/TestApp.js", function() {

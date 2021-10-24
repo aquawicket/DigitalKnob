@@ -266,11 +266,10 @@ var Element = function(pointer) {
     Element.prototype.matches = function() {//TODO
     }
     Element.prototype.querySelector = function(selectors) {//TODO
-		//var address = CPP_DKDomElement_querySelector(this.pointer, selectors)
-        //if (!address)
-        //    return;
-        //return new HTMLElement(address)
-		return CPP_DKDomElement_querySelector(this.pointer, selectors)
+		var address = CPP_DKDomElement_querySelector(this.pointer, selectors)
+        if (!address)
+            return;
+        return new HTMLElement(address)
     }
     Element.prototype.querySelectorAll = function(selectors) {//TODO
 		var addresses = CPP_DKDomElement_querySelectorAll(this.pointer, selectors)

@@ -502,7 +502,6 @@ if (typeof CPP_DKFile_GetPaths === "function") {
 		pObj.basename = _pObj.split(",")[6];
 		pObj.extension = _pObj.split(",")[7];
 		pObj.filename = _pObj.split(",")[8];
-		
 		console.log("path = " + pObj.path);
 		console.log("aPath = " + pObj.aPath);
 		console.log("root = " + pObj.root);
@@ -512,7 +511,6 @@ if (typeof CPP_DKFile_GetPaths === "function") {
 		console.log("basename = " + pObj.basename);
 		console.log("extension = " + pObj.extension);
 		console.log("filename = " + pObj.filename);
-		
 		return callback(pObj);
 	}
 } else {
@@ -530,7 +528,6 @@ if (typeof CPP_DKFile_GetPaths === "function") {
 			pObj.basename = _pObj.split(",")[6];
 			pObj.extension = _pObj.split(",")[7];
 			pObj.filename = _pObj.split(",")[8];
-			
 			console.log("path = " + pObj.path);
 			console.log("aPath = " + pObj.aPath);
 			console.log("root = " + pObj.root);
@@ -540,7 +537,6 @@ if (typeof CPP_DKFile_GetPaths === "function") {
 			console.log("basename = " + pObj.basename);
 			console.log("extension = " + pObj.extension);
 			console.log("filename = " + pObj.filename);
-			
 			return callback(pObj);
 		});
 	}
