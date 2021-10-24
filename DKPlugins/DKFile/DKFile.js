@@ -32,10 +32,12 @@ DKFile.prototype.init = function DKFile_init() {
 }
 
 DKFile.prototype.validatepath = function DKFile_validatepath(path) {
-    if (path.charAt(0) === '/') {
+    /*
+	if (path.charAt(0) === '/') {
         console.error(path + "  path has / as the first character");
         path = path.replace("/", "");
     }
+	*/
     if (path.includes("\\")) {
         console.error(path + "  path contains \\");
         path = path.split("\\").join("/");
