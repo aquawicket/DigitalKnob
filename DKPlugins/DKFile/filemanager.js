@@ -311,13 +311,14 @@ DKFileManager.prototype.upxCompress = function DKFileManager_upxCompress(instanc
 }
 
 DKFileManager.prototype.updatePath = function DKFileManager_updatePath(instance, _path) {
-    //console.debug("DKFileManager.prototype.updatPath(" + _path + ")")
+    //console.log("DKFileManager.prototype.updatPath("+_path+")")
     dk.file.getPathObject(_path, function dk_file_getPathObject(path) {
         instance.path.value = path.aPath;
         instance.list.innerHTML = "";
         dk.file.directoryContents(path.aPath, function dk_file_directoryContents_callback(results) {
             if (!results)
                 return error("results invalid")
+			console.log("results = "+results)
             const items = results.split(",")
             for (let n = 0; n < items.length; n++) {
                 dk.file.isDir(path.aPath + items[n], function dk_file_isDir_callback(dir) {

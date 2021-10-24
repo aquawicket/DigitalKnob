@@ -378,7 +378,6 @@ if (!dk.hasCPP()) {
 
 if(typeof CPP_DKFile_FileToString === "function") {
 	DKFile.prototype.fileToString = function DKFile_fileToString(path, callback) {
-		console.log("dk.file.fileToString()")
         path = dk.file.validatepath(path);
         const str = CPP_DKFile_FileToString(path);
         return callback(str);
@@ -433,9 +432,9 @@ if (typeof CPP_DKFile_StringToFile === "function") {
 }
 
 if(typeof CPP_DKFile_DirectoryContents === "function") {
-    DKFile.prototype.directoryContents = function DKFile_directoryContents(path) {
+    DKFile.prototype.directoryContents = function DKFile_directoryContents(path, callback) {
         path = dk.file.validatepath(path);
-        return CPP_DKFile_DirectoryContents(path);
+        return callback(CPP_DKFile_DirectoryContents(path))
     }
 } else {
     DKFile.prototype.directoryContents = function DKFile_directoryContents(path, callback) {
