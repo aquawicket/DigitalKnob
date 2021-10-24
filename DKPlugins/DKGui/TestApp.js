@@ -1,18 +1,22 @@
 //"use strict";
 
+console.log("function TestApp(){}")
 function TestApp(){}
    
 TestApp.prototype.init = function init(init_callback){
+	console.log("TestApp.prototype.init")
     //dk.create("DKGui/TestApp.html");
 	//dk.create("DKGui/TestApp.css");
     init_callback && init_callback(this)
 }
 
 TestApp.prototype.end = function end(){
+	console.log("TestApp.prototype.end")
     //dk.close("DKGui/TestApp.css");
 }
 
 TestApp.prototype.create = function create(create_callback) {
+	console.log("TestApp.prototype.create")
     const instance = DKPlugin(TestApp)
     dk.create("DKGui/TestApp.html", function dkcreate_callback(html) {
         if (!html)

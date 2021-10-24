@@ -1,8 +1,7 @@
-//"use strict";
+"use strict";
 
 function DKDrag(){}
 dk.drag = DKPlugin(DKDrag, "singleton")
-
 
 /*
 DKDrag.prototype.create = function DKDrag_create(){

@@ -9,17 +9,12 @@
 // DKPlugin(MyClass)
 //   This will creat an instance of the class. MyClass must be available. 
 //
-console.log("Loading DKPlugins.js")
 const DKPlugin = function DKPlugin() {
-    //console.debug("*** DKPlugin() ***");
     //DKPlugin.dumpInfo.apply(this, arguments);
-
     let DKPlugin_callback = null;
     if (arguments && typeof (arguments[arguments.length - 1]) === "function")
         DKPlugin_callback = arguments[arguments.length - 1];
-
     //Determine what type of plugin to make here
-
     //This is experamental
     if (!arguments.length) {
         //return error("running DKPlugin() with no arguments is experamental")
@@ -29,7 +24,6 @@ const DKPlugin = function DKPlugin() {
     if (typeof arguments[0] === "function") {
         var args = Array.prototype.slice.call(arguments);
         return DKPlugin.fromClass(args, function callback(result) {
-            console.log("DKPlugin_fromClass_callback("+result+")")
 			DKPlugin_callback && DKPlugin_callback(result);
         });
     }
@@ -37,7 +31,6 @@ const DKPlugin = function DKPlugin() {
     if (typeof arguments[0] === "string") {
         var args = Array.prototype.slice.call(arguments);
         DKPlugin.fromFile(args, function DKPlugin_fromFile_callback(result) {
-			console.log("DKPlugin_fromFile_callback("+result+")")
             DKPlugin_callback && DKPlugin_callback(result);
         });
     }
@@ -47,10 +40,8 @@ DKPlugin.fromFile = function DKPlugin_fromFile(args, DKPlugin_fromFile_callback)
     const url = args[0]
     const color = "color:rgb(200,100,200)"
     console.log("%c *** DKPlugin.fromFile(" + url + ") ***", color);
-
     //update the current list of functions
     dk.getNewFuncs();
-
     //Is the javascript file already loaded?
     var scripts = document.getElementsByTagName("script");
     for (var n = 0; n < scripts.length; n++) {
@@ -60,7 +51,6 @@ DKPlugin.fromFile = function DKPlugin_fromFile(args, DKPlugin_fromFile_callback)
             return true;
         }
     }
-
     // Adding the script tag to the head of the document
     var head = document.getElementsByTagName('head')[0];
     var script = document.createElement('script');
@@ -68,7 +58,6 @@ DKPlugin.fromFile = function DKPlugin_fromFile(args, DKPlugin_fromFile_callback)
     script.setAttribute('async', true);
     script.setAttribute('src', url);
     head.appendChild(script);
-
     script.onerror = function script_onerror(err) {
         return error("script.onerror", DKPlugin_fromFile_callback(false));
     }
@@ -92,18 +81,15 @@ DKPlugin.fromFile = function DKPlugin_fromFile(args, DKPlugin_fromFile_callback)
             Object.setPrototypeOf(klass, DKPlugin.prototype)
             //klass.prototype = DKPlugin.prototype;// = {};
             //Object.assign(klass.prototype, DKPlugin)
-
             for (let n = 0; n < args.length; n++) {
                 if (args[n] === "singleton") {
                     klass.singleton = "fromFile(): klass.singleton";
                     klass.prototype.singleton = "fromFile(): klass.prototype.singleton";
                 }
             }
-
             !DKPlugin.info && (DKPlugin.info = new Array)
             DKPlugin.info[url] = klass.name
             klass.prototype.url = url
-
             //console.log("%c DKPlugin.fromFile(): this = "+this.toString(), color);
             //console.log("%c DKPlugin.fromFile(): this.constructor.name = " + this.constructor.name, color);
             //console.log("%c DKPlugin.fromFile(): this.singleton = " + this.singleton, color);
@@ -112,7 +98,6 @@ DKPlugin.fromFile = function DKPlugin_fromFile(args, DKPlugin_fromFile_callback)
             //console.log("%c DKPlugin.fromFile(): klass.name = " + klass.name, color);
             //console.log("%c DKPlugin.fromFile(): klass.singleton = " + klass.singleton, color);
             //console.log("%c DKPlugin.fromFile(): klass.prototype = " + klass.prototype, color);
-
             if (typeof klass.prototype.init === "function") {
                 klass.prototype.init(function() {
                     DKPlugin_fromFile_callback && DKPlugin_fromFile_callback(klass);
@@ -130,7 +115,6 @@ DKPlugin.fromClass = function DKPlugin_fromClass(args, DKPlugin_fromFile_callbac
     console.log("%c *** DKPlugin.fromClass(" + args[0].name + ") ***", color);
     const klass = args[0]
     const klassName = klass.name
-
     //console.log("%c DKPlugin.fromClass(): this = "+this, color);
     //console.log("%c DKPlugin.fromClass(): this.constructor.name = " + this.constructor.name, color);
     //console.log("%c DKPlugin.fromClass(): this.singleton = " + this.singleton, color);
@@ -139,7 +123,6 @@ DKPlugin.fromClass = function DKPlugin_fromClass(args, DKPlugin_fromFile_callbac
     //console.log("%c DKPlugin.fromClass(): klass.name = " + klass.name, color);
     //console.log("%c DKPlugin.fromClass(): klass.singleton = " + klass.singleton, color);
     //console.log("%c DKPlugin.fromClass(): klass.prototype = " + klass.prototype, color);
-
     for (let n = 0; n < args.length; n++) {
         if (args[n] === "singleton") {
             klass.singleton = "fromClass(): klass.singleton";
@@ -157,19 +140,15 @@ DKPlugin.fromClass = function DKPlugin_fromClass(args, DKPlugin_fromFile_callbac
             }
         }
     }
-
     //https://stackoverflow.com/a/50402530/688352
     /*
     this[klassName] = {
         [klassName]: function() {
     */
-
     const instance = new klass;
     //dk.dump(instance)
     const instance2 = Object.create(klass);
     //dk.dump(instance2)
-    
-
     //console.log("%c new "+instance.constructor.name, color)
     //console.log("%c DKPlugin.fromClass(): klass.name = " + klass.name, color)
     //console.log("%c DKPlugin.fromClass(): klass.singleton = " + klass.singleton, color)
@@ -178,8 +157,6 @@ DKPlugin.fromClass = function DKPlugin_fromClass(args, DKPlugin_fromFile_callbac
     //console.log("%c DKPlugin.fromClass(): instance.constructor.name = " + instance.constructor.name, color);
     //console.log("%c DKPlugin.fromClass(): instance.singleton = " + instance.singleton, color);
     //console.log("%c DKPlugin.fromClass(): instance.prototype = " + instance.prototype, color);
-    
-
     if (instance.__proto__.constructor.name !== klassName) {
         console.error("A new " + klassName + " was defined in the " + instance.__proto__.constructor.name + " scope");
         console.error("instances of " + klassName + " must be constucted with the " + klassName + " class scope");
@@ -190,7 +167,6 @@ DKPlugin.fromClass = function DKPlugin_fromClass(args, DKPlugin_fromFile_callbac
         return error("instance !== result");
     !instance.supervised && DKPlugin.prototype.superviseFuncs(instance);
     return result;
-
     /*
         }
     }
@@ -208,9 +184,7 @@ DKPlugin.createInstance = function DKPlugin_createInstance() {
     const klass = window[klassName];
     //console.log("%c DKPlugin.createInstance(): klass.singleton = " + klass.singleton, color)
     //console.log("%c DKPlugin.createInstance(): klass.prototype.singleton = " + klass.prototype.singleton, color)
-
     this.klassName = this.constructor.name;
-
     //Is this instance already running?
     const i = DKPlugin.instances.indexOf(this);
     if (i > -1) {
@@ -218,7 +192,6 @@ DKPlugin.createInstance = function DKPlugin_createInstance() {
         DKPlugin.instances[i].ok = false;
         return DKPlugin.instances[i];
     }
-
     //Set the ID or kick out existing singletons, while looping
     let num = 0;
     for (let n = 0; n < DKPlugin.instances.length; n++) {
@@ -234,10 +207,8 @@ DKPlugin.createInstance = function DKPlugin_createInstance() {
         }
     }
     !this.id && (this.id = this.klassName + num);
-
     // Wrap the plugins memeber functions with error catching
     dk.errorCatcher(this, this.klassName);
-
     //Add the new instance to the plugin stack
     const newIndex = DKPlugin.instances.push(this) - 1;
     //DKPlugin.instances[newIndex].ok = true;
@@ -261,7 +232,6 @@ DKPlugin.prototype.init = function DKPlugin_init() {
         console.groupEnd();
         return error("the instance in DKPlugin.prototype.init() is a constructor of 'Object' and should be the class name");
     }
-
     if (this.xinit && this.xinit !== this.init) {
         console.group(this.constructor.name + ".xinit()");
         const rval = this.xinit.apply(this, arguments);
@@ -283,15 +253,12 @@ DKPlugin.prototype.end = function DKPlugin_end() {
     const klass = window[klassName];
     //console.log("%c DKPlugin.prototype.end(): klass.singleton = " + klass.singleton, color)
     //console.log("%c DKPlugin.prototype.end(): klass.prototype.singleton = " + klass.prototype.singleton, color)
-
     if (this.xend) {
         console.group(this.constructor.name + ".xend()");
         this.xend.apply(this, arguments);
         console.groupEnd();
     }
-
     DKPlugin.prototype.unsuperviseFuncs(this);
-
     var scripts = document.getElementsByTagName("script");
     for (var n = 0; n < scripts.length; n++) {
         if (scripts[n].src.includes(this.url)) {
@@ -300,7 +267,6 @@ DKPlugin.prototype.end = function DKPlugin_end() {
             console.log("Unloaded " + this.url);
         }
     }
-
     if (!delete this)
         console.error("delete this failed")
     else
@@ -340,7 +306,6 @@ DKPlugin.prototype.create = function DKPlugin_create(klass) {
 
 DKPlugin.prototype.close = function DKPlugin_close() {
     console.group("DKPlugin.prototype.close(): " + this.id);
-
     //remove any owned html elements from the DOM
     for (let key in this) {
         if (this[key]instanceof Element) {
@@ -353,19 +318,13 @@ DKPlugin.prototype.close = function DKPlugin_close() {
                 console.error(this.constructor.name + " could not be deleted");
         }
     }
-
-    
-
     if (this.xclose && this.xclose !== this.close) {
         console.group(this.constructor.name + ".close");
         this.xclose();        
         console.groupEnd();
     }
-
     DKPlugin.prototype.unsuperviseFuncs(this);
     DKPlugin.prototype.removeInstance(this);
-    
-
     //if any more of this type exist, don't end
     for (let n = 0; n < DKPlugin.instances.length; n++) {
         if (DKPlugin.instances[n].klassName === this.klassName) {
@@ -373,7 +332,6 @@ DKPlugin.prototype.close = function DKPlugin_close() {
             return
         }
     }
-
     //TODO - This can be handles by the user
     //this.end();
     console.groupEnd();

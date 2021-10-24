@@ -20,18 +20,18 @@ DKNotepad.prototype.create = function dk_notepad_create(dk_notepad_create_callba
         return error("instance invalid", dk_notepad_create_callback);
     dk.create("DKNotepad/DKNotepad.html", function dk_create_callback(html) {
         if(!html)
-            return error("html invalid");
+            return error("html invalid")
 		if(!instance)
-			return error("instance invalid");
-        instance.html = html;
-        instance.menubar = html.querySelector("[dk_notepad='menubar']");
-        instance.file = html.querySelector("[dk_notepad='file']");
-        instance.edit = html.querySelector("[dk_notepad='edit']");
-        instance.format = html.querySelector("[dk_notepad='format']");
-        instance.view = html.querySelector("[dk_notepad='view']");
-        instance.help = html.querySelector("[dk_notepad='help']");
-        instance.container = html.querySelector("[dk_notepad='container']");
-        instance.text = html.querySelector("[dk_notepad='text']");
+			return error("instance invalid")
+        instance.html = html
+        instance.menubar = html.querySelector("[dk_notepad='menubar']")
+        instance.file = html.querySelector("[dk_notepad='file']")
+        instance.edit = html.querySelector("[dk_notepad='edit']")
+        instance.format = html.querySelector("[dk_notepad='format']")
+        instance.view = html.querySelector("[dk_notepad='view']")
+        instance.help = html.querySelector("[dk_notepad='help']")
+        instance.container = html.querySelector("[dk_notepad='container']")
+        instance.text = html.querySelector("[dk_notepad='text']")
         instance.file.onclick = function(event) {
             instance.filemenu(instance, event)
         }
@@ -50,10 +50,10 @@ DKNotepad.prototype.create = function dk_notepad_create(dk_notepad_create_callba
         instance.container.oncontextmenu = function(event) {
             instance.rightclickmenu(instance, event)
         }
-        instance.currentFile = "";
-        instance.dkframe = DKFrame.prototype.create(instance);
-        dk_notepad_create_callback && dk_notepad_create_callback(instance);
-        return instance;
+        instance.currentFile = ""
+        instance.dkframe = DKFrame.prototype.create(instance)
+        dk_notepad_create_callback && dk_notepad_create_callback(instance)
+        return instance
     });
 }
 

@@ -2,7 +2,6 @@
 
 function DKFrame() {}
 
-
 DKFrame.prototype.init = function DKFrame_init() {
     dk.create("DKGui/DKFrame.css");
 }

@@ -46,41 +46,37 @@ myapp.loadApp = function myapp_loadApp() {
 	
 	/*
 	DKPlugin("DKGui/DKMessageBox.js", function() {
-		DKMessageBox.prototype.init()
 		DKMessageBox.prototype.create()
 	});
 	*/
 	
 	/*
 	dk.paint = DKPlugin("DKPaint/DKPaint.js", function() {
-        dk.paint.init();
 		const dkframe = DKFrame.prototype.create(byId("DKPaint/DKPaint.html"))
     });
 	*/
 	
 	/*
 	DKPlugin("DKColorPicker/DKColorPicker.js", function() {
-        DKColorPicker.prototype.init();
         DKColorPicker.prototype.create();
     });
 	*/
 	
+	/*
 	DKPlugin("DKNotepad/DKNotepad.js", function() {
         DKNotepad.prototype.create();
     });
+	*/
 	
 	/*
 	DKPlugin("DKBuild/DKBuildGUI.js", function() {
-        DKBuildGUI.prototype.init();
         DKBuildGUI.prototype.create();
     });
 	*/
-	
-	/*
+
 	DKPlugin("DKFile/filemanager.js", function() {
         DKFileManager.prototype.create();
     });
-	*/
 }
 
 DUKTAPE && myapp.loadFiles();

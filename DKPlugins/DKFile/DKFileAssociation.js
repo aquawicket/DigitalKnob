@@ -1,7 +1,7 @@
 "use strict";
 
-dk.fileassociation = DKPlugin(DKFileAssociation, "singleton")
 function DKFileAssociation() {}
+dk.fileassociation = DKPlugin(DKFileAssociation, "singleton")
 
 DKFileAssociation.prototype.edit = function DKFileAssociation_edit(file) {
     dk.fileassociation.opentext(file);
@@ -103,19 +103,8 @@ DKFileAssociation.prototype.openjs = function DKFileAssociation_openjs(path) {
 	else
         path = path.replace(dk.file.onlineAssets, "")	
 	DKPlugin(path, function(dkclass) {
-		console.log("dkclass = "+dkclass)
-        dkclass.prototype.init();
         dkclass.prototype.create();
     });
-	
-	/*
-	dk.create(path, function(node) {
-        const html = path.replace(".js", ".html");
-        dk.create(html, function() {
-            dk.frame.create(html);
-        });
-    });
-	*/
 }
 
 DKFileAssociation.prototype.opencss = function DKFileAssociation_opencss(path) {
@@ -151,10 +140,8 @@ DKFileAssociation.prototype.openaudio = function DKFileAssociation_openaudio(pat
     dk.create("DKAudio", function dk_create_callback() {
         dk.audio.playSound(path);
     });
-
     //dk.create("DKOSGAudio,"+file+",DKOSGWindow,"+path);
     //DKOSGAudio_Play("DKOSGAudio,"+file);
-
     //dk.create("DKSDLAudio,"+file+",DKSDLWindow,"+path);
     //DKSDLAudio_Play("DKSDLAudio,"+file);
 }
