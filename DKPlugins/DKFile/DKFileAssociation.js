@@ -98,16 +98,24 @@ DKFileAssociation.prototype.openhtml = function DKFileAssociation_openHtml(path)
 }
 
 DKFileAssociation.prototype.openjs = function DKFileAssociation_openjs(path) {
-    if (!dk.hasCPP())
-        path = path.replace(dk.file.onlineAssets, "");
-    else
-        path = path.replace(CPP_DKAssets_LocalAssets(), "");
-    dk.create(path, function(node) {
+    if (typeof CPP_DKAssets_LocalAssets === "function")
+		path = path.replace(CPP_DKAssets_LocalAssets(), "")
+	else
+        path = path.replace(dk.file.onlineAssets, "")	
+	DKPlugin(path, function(dkclass) {
+		console.log("dkclass = "+dkclass)
+        dkclass.prototype.init();
+        dkclass.prototype.create();
+    });
+	
+	/*
+	dk.create(path, function(node) {
         const html = path.replace(".js", ".html");
         dk.create(html, function() {
             dk.frame.create(html);
         });
     });
+	*/
 }
 
 DKFileAssociation.prototype.opencss = function DKFileAssociation_opencss(path) {

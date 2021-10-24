@@ -3,8 +3,9 @@
 function TestApp(){}
    
 TestApp.prototype.init = function init(init_callback){
-    //dk.create("DKGui/TestApp.css");
-    init_callback && init_callback(this);
+    //dk.create("DKGui/TestApp.html");
+	//dk.create("DKGui/TestApp.css");
+    init_callback && init_callback(this)
 }
 
 TestApp.prototype.end = function end(){

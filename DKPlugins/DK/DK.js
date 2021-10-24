@@ -1260,25 +1260,28 @@ dk.getNewFuncs = function dk_getNewFuncs() {
     !dk.windowfuncs && (dk.windowfuncs = new Array)
     const newfuncs = new Array
     const removedfuncs = new Array
-    const obj = window
+    const obj = globalThis//window
     //remove any function that have been removed from obj
     for (var i in dk.windowfuncs) {
         if (!obj[dk.windowfuncs[i]]) {
             obj[dk.windowfuncs[i]] = undefined
             //delete obj[dk.windowfuncs[i]]
             removedfuncs.push(dk.windowfuncs[i])
-            dk.windowfuncs.splice(i, 1);
+            dk.windowfuncs.splice(i, 1)
         }
     }
     //update windowfuncs and newfuncs
     for (var i in obj) {
         if ((typeof obj[i]).toString() == "function" && obj[i].toString().indexOf("[native code]") == -1) {
             if (!dk.windowfuncs.includes(obj[i].name) && obj[obj[i].name]) {
-                newfuncs.push(obj[i].name);
-                dk.windowfuncs.push(obj[i].name);
+				console.log("obj[i].name = "+obj[i].name)
+                newfuncs.push(obj[i].name)
+                dk.windowfuncs.push(obj[i].name)
             }
         }
     }
+	console.log("newfuncs = "+newfuncs)
+	console.log("newfuncs[newfuncs.length-1] = "+newfuncs[newfuncs.length-1])
     return newfuncs;
 }
 

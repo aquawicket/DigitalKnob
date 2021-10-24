@@ -29,13 +29,15 @@ const DKPlugin = function DKPlugin() {
     if (typeof arguments[0] === "function") {
         var args = Array.prototype.slice.call(arguments);
         return DKPlugin.fromClass(args, function callback(result) {
-            DKPlugin_callback && DKPlugin_callback(result);
+            console.log("DKPlugin_fromClass_callback("+result+")")
+			DKPlugin_callback && DKPlugin_callback(result);
         });
     }
     // Plugin from file
     if (typeof arguments[0] === "string") {
         var args = Array.prototype.slice.call(arguments);
-        DKPlugin.fromFile(args, function callback(result) {
+        DKPlugin.fromFile(args, function DKPlugin_fromFile_callback(result) {
+			console.log("DKPlugin_fromFile_callback("+result+")")
             DKPlugin_callback && DKPlugin_callback(result);
         });
     }
@@ -75,13 +77,17 @@ DKPlugin.fromFile = function DKPlugin_fromFile(args, DKPlugin_fromFile_callback)
             console.log("%cLoaded " + url, "color:green;");
             !DKPlugin.info && (DKPlugin.info = new Array)
             let klassName = null;
-            if (DKPlugin.info[url])
+            if (DKPlugin.info[url]){
+				//console.log("DKPlugin.info["+url+"]")
                 klassName = DKPlugin.info[url]
+			}
             else {
+				//console.log("!DKPlugin.info["+url+"]")
                 const newfuncs = dk.getNewFuncs()
+				//console.log("newfuncs = "+newfuncs)
                 klassName = newfuncs[newfuncs.length - 1]
             }
-			DUKTAPE && DKPlugin.instances && (klassName = DKPlugin.instances[DKPlugin.instances.length-1].klassName)
+			//DUKTAPE && DKPlugin.instances && (klassName = DKPlugin.instances[DKPlugin.instances.length-1].klassName)
             if (!globalThis[klassName]) {
                 DKPlugin_fromFile_callback && DKPlugin_fromFile_callback(true);
                 return true;
