@@ -193,7 +193,6 @@ dataselect, dataselect selectvalue, dataselect selectbox option {
     button-active-center: 43px 0px 19px 21px;
     button-active-right: 62px 0px 1px 21px;
 }
-
 button {
     border-width: 2px;
     color: black;
@@ -209,11 +208,9 @@ button {
     /* word-spacing: normal; */
     decorator: tiled-horizontal(button-left, button-center, button-right);
 }
-
 button:hover {
     decorator: tiled-horizontal(button-hover-left, button-hover-center, button-hover-right);
 }
-
 button:active {
     decorator: tiled-horizontal(button-active-left, button-active-center, button-active-right);
 }
@@ -226,11 +223,9 @@ input.button {
     border-width: 2px;
     decorator: tiled-horizontal(button-left, button-center, button-right);
 }
-
 input.button:hover {
     decorator: tiled-horizontal(button-hover-left, button-hover-center, button-hover-right);
 }
-
 input.button:active {
     decorator: tiled-horizontal(button-active-left, button-active-center, button-active-right);
 }
@@ -242,17 +237,14 @@ input.button:active {
     checkbox-active: 12px 0px 12px 12px;
     checkbox-checked: 24px 0px 12px 12px;
 }
-
 input.checkbox {
     width: 12px;
     height: 12px;
     decorator: image(checkbox);
 }
-
 input.checkbox:active {
     decorator: image(checkbox-active);
 }
-
 input.checkbox:checked {
     decorator: image(checkbox-checked);
 }
@@ -267,7 +259,6 @@ input.password {
     border-width: 1px;
     border-color: rgb(167,167,167);
 }
-
 input.password:focus {
     border-color: rgb(123,157,212);
 }
@@ -279,17 +270,14 @@ input.password:focus {
     radio-hover: 12px 0px 12px 12px;
     radio-checked: 24px 0px 12px 12px;
 }
-
 input.radio {
     width: 12px;
     height: 12px;
     decorator: image(radio);
 }
-
 input.radio:hover {
     decorator: image(radio-hover);
 }
-
 input.radio:checked {
     decorator: image(radio-checked);
 }
@@ -299,24 +287,20 @@ input.radio:checked {
     src: rangetrack.png;
     rangetrack: 0px 0px 4px 4px;
 }
-
 @spritesheet rangebar {
     src: rangebar.png;
     rangebar: 0px 0px 11px 21px;
 }
-
 input.range {
     width: 150px;
     /*height:150px;*/
 }
-
 input.range slidertrack {
     height: 4px;
     width: 4px;
     margin-top: 9px;
     decorator: image(rangetrack);
 }
-
 input.range sliderbar {
     width: 11px;
     height: 21px;
@@ -336,7 +320,6 @@ input.range sliderbar {
     reset-active-center: 43px 0px 19px 21px;
     reset-active-right: 62px 0px 1px 21px;
 }
-
 input.reset {
     color: black;
     width: 50px;
@@ -345,26 +328,25 @@ input.reset {
     border-width: 2px;
     decorator: tiled-horizontal(reset-left, reset-center, reset-right);
 }
-
 input.reset:hover {
     decorator: tiled-horizontal(reset-hover-left, reset-hover-center, reset-hover-right);
 }
-
 input.reset:active {
     decorator: tiled-horizontal(reset-active-left, reset-active-center, reset-active-right);
 }
 
 /* Text Inputs */
 input.text {
-    width: 100px;
+    /*
+	width: 100px;
     height: 21px;
     min-height: 19px;
-    background-color: white;
+    background-color: rgb(255,255,255);
     color: black;
     border-width: 1px;
     border-color: rgb(167,167,167);
+	*/
 }
-
 input.text:focus {
     border-color: rgb(123,157,212);
 }
@@ -380,7 +362,6 @@ textarea {
     border-color: rgb(167,167,167);
     /*resize: none;*/
 }
-
 textarea:focus {
     border-color: rgb(123,157,212);
 }
@@ -390,7 +371,6 @@ textarea:focus {
     src: select.png;
     selectarrow: 0px 0px 6px 6px;
 }
-
 select {
     background-color: white;
     color: black;
@@ -400,19 +380,15 @@ select {
     border-width: 1px;
     border-color: rgb(167,167,167);
 }
-
 select:hover {
     border-color: rgb(120,120,120);
 }
-
 select:focus {
     border-color: rgb(123,157,212);
 }
-
 select selectvalue {
     padding-left: 3px;
 }
-
 select selectarrow {
     width: 6px;
     height: 6px;
@@ -420,7 +396,6 @@ select selectarrow {
     margin-right: 6px;
     decorator: image(selectarrow);
 }
-
 select selectbox {
     /*border-style: solid;*/
     border-left-width: 1px;
@@ -428,12 +403,10 @@ select selectbox {
     border-bottom-width: 1px;
     border-color: rgb(123,157,212);
 }
-
 select selectbox option {
     padding-left: 3px;
     background-color: white;
 }
-
 select selectbox option:hover {
     background-color: rgb(123,157,212);
     color: white;
@@ -463,52 +436,41 @@ select selectbox option:hover {
     sliderarrowinc-hover2: 34px 85px 17px 17px;
     sliderarrowinc-active2: 34px 102px 17px 17px;
 }
-
 scrollbarvertical {
     width: 17px;
 }
-
 scrollbarvertical slidertrack {
     decorator: image(slidertrack);
 }
-
 scrollbarvertical sliderbar {
     min-height: 17px;
     decorator: image(sliderbar);
 }
-
 scrollbarvertical sliderbar:hover {
     decorator: image(sliderbar-hover);
 }
-
 scrollbarvertical sliderbar:active {
     decorator: image(sliderbar-active);
 }
-
 scrollbarvertical sliderarrowdec {
     height: 17px;
     width: 17px;
     decorator: image(sliderarrowdec);
 }
-
 scrollbarvertical sliderarrowdec:hover {
     decorator: image(sliderarrowdec-hover);
 }
-
 scrollbarvertical sliderarrowdec:active {
     decorator: image(sliderarrowdec-active);
 }
-
 scrollbarvertical sliderarrowinc {
     height: 17px;
     width: 17px;
     decorator: image(sliderarrowinc);
 }
-
 scrollbarvertical sliderarrowinc:hover {
     decorator: image(sliderarrowinc-hover);
 }
-
 scrollbarvertical sliderarrowinc:active {
     decorator: image(sliderarrowinc-active);
 }
@@ -516,48 +478,38 @@ scrollbarvertical sliderarrowinc:active {
 scrollbarhorizontal {
     width: 17px;
 }
-
 scrollbarhorizontal slidertrack {
     decorator: image(slidertrack2);
 }
-
 scrollbarhorizontal sliderbar {
     min-height: 17px;
     decorator: image(sliderbar2);
 }
-
 scrollbarhorizontal sliderbar:hover {
     decorator: image(sliderbar-hover2);
 }
-
 scrollbarhorizontal sliderbar:active {
     decorator: image(sliderbar-active2);
 }
-
 scrollbarhorizontal sliderarrowdec {
     height: 17px;
     width: 17px;
     decorator: image(sliderarrowdec2);
 }
-
 scrollbarhorizontal sliderarrowdec:hover {
     decorator: image(sliderarrowdec-hover2);
 }
-
 scrollbarhorizontal sliderarrowdec:active {
     decorator: image(sliderarrowdec-active2);
 }
-
 scrollbarhorizontal sliderarrowinc {
     height: 17px;
     width: 17px;
     decorator: image(sliderarrowinc2);
 }
-
 scrollbarhorizontal sliderarrowinc:hover {
     decorator: image(sliderarrowinc-hover2);
 }
-
 scrollbarhorizontal sliderarrowinc:active {
     decorator: image(sliderarrowinc-active2);
 }
