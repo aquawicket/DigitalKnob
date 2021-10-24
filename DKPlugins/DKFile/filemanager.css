@@ -78,7 +78,7 @@
 [dk_filemanager="folder"] {
     white-space: nowrap;
     padding-left: 17px;
-    background-image: url("folder.png");
+    /* background-image: url("folder.png"); */
     background-repeat: no-repeat;
     cursor: default;
 }

@@ -30,13 +30,13 @@ DKFileManager.prototype.create = function DKFileManager_create(DKFileManager_cre
         instance.list = html.querySelector("[dk_filemanager='list']")
         instance.cancel = html.querySelector("[dk_filemanager='cancel']")
         instance.ok = html.querySelector("[dk_filemanager='ok']")
-        instance.up.onclick = function() {
+        instance.up.onclick = function(event) {
             instance.upDir(instance, event)
         }
-        instance.list.onclick = function() {
+        instance.list.onclick = function(event) {
             instance.highlight(instance, event)
         }
-        instance.path.onkeypress = function() {
+        instance.path.onkeypress = function(event) {
             instance.onPath(instance, event)
         }
 		
@@ -255,7 +255,7 @@ DKFileManager.prototype.rename = function DKFileManager_rename(instance, node) {
     setTimeout(function() {
         if (renamerInput)
             renamerInput.focus()
-        document.addEventListener('mousedown', function(event) {
+        document.addEventListener('mousedown', function() {
             doRename()
         }, {
             once: true
@@ -326,16 +326,17 @@ DKFileManager.prototype.updatePath = function DKFileManager_updatePath(instance,
                         const folderpath = path.aPath + items[n] + "/";
                         const folder = dk.gui.createTag("div", instance.list, {
                             innerHTML: items[n],
-                            onclick: function onclick() {
+                            onclick: function onclick(event) {
                                 instance.highlight(instance, event)
                             },
-                            ondblclick: function ondblclick() {
+                            ondblclick: function ondblclick(event) {
                                 instance.dblclick(instance, event)
                             },
-                            oncontextmenu: function oncontextmenu() {
+                            oncontextmenu: function oncontextmenu(event) {
                                 instance.rightclickmenu(instance, event)
                             }
                         })
+						folder.style.backgroundImage = "url(\"DKFile/folder.png\")";
                         folder.setAttribute("dk_filemanager", "folder")
                         folder.setAttribute("path", folderpath)
                     }
@@ -350,13 +351,13 @@ DKFileManager.prototype.updatePath = function DKFileManager_updatePath(instance,
                         file.setAttribute("dk_filemanager", "file")
                         file.setAttribute("path", filepath)
                         file.innerHTML = items[n];
-                        file.onclick = function() {
+                        file.onclick = function(event) {
                             instance.highlight(instance, event)
                         }
-                        file.ondblclick = function() {
+                        file.ondblclick = function(event) {
                             instance.dblclick(instance, event)
                         }
-                        file.oncontextmenu = function() {
+                        file.oncontextmenu = function(event) {
                             instance.rightclickmenu(instance, event)
                         }
                         var extension = dk.file.getExtention(items[n])
