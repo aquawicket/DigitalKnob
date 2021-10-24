@@ -306,7 +306,14 @@ DKPlugin.prototype.create = function DKPlugin_create(klass) {
 
 DKPlugin.prototype.close = function DKPlugin_close() {
     console.group("DKPlugin.prototype.close(): " + this.id);
-    //remove any owned html elements from the DOM
+    /*
+	var arr = [];
+	for (let key in this) {
+		arr.push(key);
+	}
+	for (let n = arr.length; n--; ){
+		let key = arr[n];
+	*/
     for (let key in this) {
         if (this[key] instanceof Element) {
             if (!this[key].parentNode) {
@@ -315,11 +322,8 @@ DKPlugin.prototype.close = function DKPlugin_close() {
             }
 			if(typeof this[key].parentNode.removeChild !== "function")
 				console.error(this.constructor.name + "removeChild is not a function")
-			if (this[key] instanceof Element && this[key].parentNode instanceof Element) {
-				console.log("this[key] = "+this[key])
-				this[key].parentNode.removeChild(this[key])
-			}
-            if (!delete this[key])
+			this[key].parentNode.removeChild(this[key])
+		    if (!delete this[key])
                 console.error(this.constructor.name + " could not be deleted")
         }
     }
