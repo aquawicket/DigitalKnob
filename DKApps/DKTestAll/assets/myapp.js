@@ -74,9 +74,15 @@ myapp.loadApp = function myapp_loadApp() {
     });
 	*/
 
+	/*
 	DKPlugin("DKFile/filemanager.js", function() {
-        DKFileManager.prototype.create();
+		DKFileManager.prototype.create();
     });
+	*/
+	
+	DKPlugin("DKCodeRunner/DKCodeRunner.js", function(){
+		DKCodeRunner.prototype.create();
+	})
 }
 
 DUKTAPE && myapp.loadFiles();

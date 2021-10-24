@@ -24,8 +24,7 @@ DKFileManager.prototype.create = function DKFileManager_create(DKFileManager_cre
 		if(!instance)
 			return error("instance invalid")
         instance.html = html;
-        //instance.box = html.querySelector("[dk_filemanager='box']")
-        instance.up = html.querySelector("[dk_filemanager='up']")
+		instance.up = html.querySelector("[dk_filemanager='up']")
         instance.path = html.querySelector("[dk_filemanager='path']")
         instance.list = html.querySelector("[dk_filemanager='list']")
         instance.cancel = html.querySelector("[dk_filemanager='cancel']")

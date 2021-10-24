@@ -84,9 +84,8 @@ DKCodeRunner.prototype.create = function DKCodeRunner_create(parent, top, bottom
 	
 	dk.gui.createImageButton(document.body, "File Manager", "DKCodeRunner/folderIcon.png", "3rem", "", "", "50rem", "35rem", "30rem", function() {
         DKPlugin("DKFile/filemanager.js", function() {
-            DKFileManager.prototype.init()
-            DKFileManager.prototype.create()
-        });
+			DKFileManager.prototype.create();
+    }	);
     })
 	
 	dk.gui.createImageButton(document.body, "Debugger", "DKCodeRunner/Debugger.png", "3rem", "", "", "10rem", "35rem", "30rem", function() {

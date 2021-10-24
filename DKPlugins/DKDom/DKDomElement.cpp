@@ -322,8 +322,9 @@ int DKDomElement::querySelector(duk_context* ctx){
 	}
 	Rml::Element* queryElement = element->QuerySelector(selectors.c_str());
 	if(!queryElement){
-		duk_push_undefined(ctx);
-		return DKERROR("queryElement invalid\n");
+		duk_push_null(ctx);
+		DKVERBOSE("queryElement invalid\n");
+		return true;
 	}
 	DKString elementAddress = DKRml::elementToAddress(queryElement);
 	duk_push_string(ctx, elementAddress.c_str());
