@@ -1,5 +1,5 @@
 if(DK_PROCESS_INCLUDED)
-	message(WARN "PROCESS.cmake already included \n")
+	message(WARNING "PROCESS.cmake already included \n")
 	return()
 endif()
 set(DK_PROCESS_INCLUDED true)
