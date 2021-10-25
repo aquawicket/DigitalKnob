@@ -120,7 +120,11 @@ foreach(plugin ${dkdepend_list})
 
 		# THIS ADDS THE PLUGINS TO THE APP SOLUTION
 		if(EXISTS "${plugin_path}/CMakeLists.txt")
-			add_subdirectory(${plugin_path} ${plugin_path}/${OS})
+			if(LINUX)
+				add_subdirectory(${plugin_path} ${plugin_path}/${OS}/Debug)
+			else()
+				add_subdirectory(${plugin_path} ${plugin_path}/${OS})
+			endif()
 		endif()
 		
 		DKSET(CURRENT_DIR ${plugin_path}/${OS})
@@ -277,14 +281,14 @@ foreach(plugin ${dkdepend_list})
 	endif()
 	
 	## double check that the missing libs were built
-	foreach(the_lib ${LIBLIST})
-		if(NOT EXISTS ${the_lib})
+	#foreach(the_lib ${LIBLIST})
+		#if(NOT EXISTS ${the_lib})
 			#message(FATAL_ERROR "\n\n\n********************************************\nFAILED to find: ${the_lib} \n********************************************")
 			#message(FATAL_ERROR " ")
-		endif()
-	endforeach()
+		#endif()
+	#endforeach()
 	DKSET(CMAKE_FILE "") ##Linux cache file fix
-	endforeach()
+endforeach()
 
 	
 
@@ -315,7 +319,7 @@ list(FILTER App_SRC EXCLUDE REGEX "${DKPROJECT}/assets/*" )
 list(FILTER App_SRC EXCLUDE REGEX "${DKPROJECT}/${OS}/*" )
 	
 
-add_definitions(-DDKAPP) #Can we phase this out?
+add_definitions(-DDKAPP)
 include_directories(${DKPROJECT})
 
 ##########
