@@ -119,9 +119,9 @@ foreach(plugin ${dkdepend_list})
 		endif()
 
 		# THIS ADDS THE PLUGINS TO THE APP SOLUTION
-		#if(EXISTS "${plugin_path}/CMakeLists.txt")
+		if(EXISTS "${plugin_path}/CMakeLists.txt")
 			add_subdirectory(${plugin_path} ${plugin_path}/${OS})
-		#endif()
+		endif()
 		
 		DKSET(CURRENT_DIR ${plugin_path}/${OS})
 		dk_makeDirectory(${CURRENT_DIR})		
@@ -649,7 +649,9 @@ if(IOS)
 	add_executable(${APP_NAME} MACOSX_BUNDLE ${App_SRC})
 	
 	foreach(plugin ${dkdepend_list})
-		add_dependencies(${APP_NAME} ${plugin})	
+		if(EXISTS "${DKPLUGINS}/${plugin}/CMakeLists.txt")
+			add_dependencies(${APP_NAME} ${plugin})
+		endif()	
 	endforeach()
 	
 	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${LIBS})
@@ -723,7 +725,9 @@ if(IOSSIM)
 	add_executable(${APP_NAME} MACOSX_BUNDLE ${App_SRC})
 	
 	foreach(plugin ${dkdepend_list})
-		add_dependencies(${APP_NAME} ${plugin})	
+		if(EXISTS "${DKPLUGINS}/${plugin}/CMakeLists.txt")
+			add_dependencies(${APP_NAME} ${plugin})
+		endif()	
 	endforeach()
 	
 	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${LIBS})
@@ -785,7 +789,9 @@ if(LINUX)
 	endif()
 	
 	foreach(plugin ${dkdepend_list})
-		add_dependencies(${APP_NAME} ${plugin})	
+		if(EXISTS "${DKPLUGINS}/${plugin}/CMakeLists.txt")
+			add_dependencies(${APP_NAME} ${plugin})
+		endif()	
 	endforeach()
 	
 endif()
@@ -844,7 +850,9 @@ if(RASPBERRY)
 	endif()
 
 	foreach(plugin ${dkdepend_list})
-		add_dependencies(${APP_NAME} ${plugin})	
+		if(EXISTS "${DKPLUGINS}/${plugin}/CMakeLists.txt")
+			add_dependencies(${APP_NAME} ${plugin})
+		endif()	
 	endforeach()
 	
 endif()
@@ -902,7 +910,9 @@ if(ANDROID)
 	add_library(${APP_NAME} SHARED ${App_SRC})
 	
 	foreach(plugin ${dkdepend_list})
-		add_dependencies(${APP_NAME} ${plugin})	
+		if(EXISTS "${DKPLUGINS}/${plugin}/CMakeLists.txt")
+			add_dependencies(${APP_NAME} ${plugin})
+		endif()	
 	endforeach()
 	
 	#target_include_directories(${APP_NAME} PUBLIC ${INCLUDE_DIRECTORIES}) #of ${DKINCLUDES_LIST}
