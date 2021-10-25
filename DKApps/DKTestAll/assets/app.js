@@ -1,10 +1,12 @@
 const url = CPP_DKAssets_LocalAssets()+"index.html"
 //const url = CPP_DKAssets_LocalAssets()+"DKWebTest/index.html"
 
-CPP_DKFile_ChDir(CPP_DKAssets_LocalAssets()+"DKPhp/")
-const batch = CPP_DKAssets_LocalAssets()+"DKPhp/RunPhpServers.bat"
-CPP_DK_System(batch)
-
+if(CPP_DK_GetOS() == "Windows"){
+	CPP_DKFile_ChDir(CPP_DKAssets_LocalAssets()+"DKPhp/")
+	const batch = CPP_DKAssets_LocalAssets()+"DKPhp/RunPhpServers.bat"
+	CPP_DK_System(batch)
+}
+	
 //// Create Cef window
 const cef_x = 0
 const cef_y = 0

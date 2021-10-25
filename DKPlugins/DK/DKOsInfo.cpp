@@ -28,17 +28,7 @@ bool GetOSInfo(DKString& info){
 
 bool GetSystemOS(DKString& os){
 #if defined(WIN32)
-	//FIXME: GetSystemOS askes strictly for the OS, this should return Windows
 	os = "Windows";
-	/*
-	DKString arch;
-	GetOSArchitecture(arch);
-	if (same(arch, "32-bit")){
-		os = "Win32";
-	}
-	else if (same(arch, "64-bit")){
-		os = "Win64";
-	}*/
 #endif
 #if defined(MAC)
 	os = "Mac";
