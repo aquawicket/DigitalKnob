@@ -23,6 +23,9 @@ fi
 
 sudo echo
 
+# https://unix.stackexchange.com/a/293605
+COLUMNS=1
+
 while :
 	do
 	echo " "
