@@ -36,7 +36,6 @@ function DKBuildConsole_ChooseUpdate() {
     console.log("C. Commit")
     console.log("R. Reset Apps and Plugins")
     console.log("X. Reset Everything")
-	console.log("Z. Clear all CMake cache")
 	const assets = CPP_DKAssets_LocalAssets()
 	if(CPP_DKFile_Exists(assets+"cache.txt")){
 		const cache = CPP_DKFile_FileToString(assets+"cache.txt")
@@ -93,22 +92,6 @@ function DKBuildConsole_ChooseUpdate() {
         DKGit_GitUpdate()
 		UPDATE = ""
     }
-	else if (key === 122){ //Clear Cmake Cache
-		DKBuild_ClearCMakeCache()
-		/*
-		console.log("Clearing CMake cache . . .")
-		CPP_DKFile_ChDir(DIGITALKNOB)
-		if(CPP_DK_GetOS() === "Windows"){
-			CPP_DK_Execute("cmd /c for /r %i in (CMakeCache.*) do del \"%i\"")
-			CPP_DK_Execute("cmd /c for /d /r %i in (*CMakeFiles*) do rmdir /s /Q \"%i\"")
-		}else{
-			CPP_DK_Execute("find . -name \"CMakeCache.*\" -delete") 
-			//CPP_DK_Execute("find . -type d -name \"CMakeFiles\" -delete")
-			CPP_DK_Execute("rm -rf `find . -type d -name CMakeFiles`")
-		}
-		*/
-		UPDATE = ""
-	}
 }
 
 function DKBuildConsole_SelectOs() {
