@@ -57,7 +57,7 @@ function DKBuildConsole_ChooseUpdate() {
 	//Esc
 	if (key === 27){
         CPP_DK_Exit()
-		UPDATE = ""
+		//UPDATE = ""
 	}
 	//Spacebar
 	else if(key === 13){
@@ -65,32 +65,32 @@ function DKBuildConsole_ChooseUpdate() {
 	    APP = cache_json.APP
 		TYPE = cache_json.TYPE
 		LEVEL = cache_json.LEVEL
-		UPDATE = ""
+		//UPDATE = ""
 	}
 	//y key
     else if (key === 121) {
         CPP_DK_Create("DKGit/DKGit.js")
         DKGit_GitUpdate()
-		UPDATE = ""
+		//UPDATE = ""
     }
 	//c key
     else if (key === 99) {
         CPP_DK_Create("DKGit/DKGit.js")
         DKGit_GitCommit()
-		UPDATE = ""
+		//UPDATE = ""
     }
 	//r key
     else if (key === 114) { 
         DKBuild_ResetAppsPlugins()
         DKGit_GitUpdate()
-		UPDATE = ""
+		//UPDATE = ""
     }
 	//x key
     else if (key === 120) {
         DKBuild_Reset3rdParty()
         DKBuild_ResetAppsPlugins()
         DKGit_GitUpdate()
-		UPDATE = ""
+		//UPDATE = ""
     }
 }
 
@@ -252,264 +252,158 @@ function DKBuildConsole_Process() {
 function DKBuildConsole_TranslateOption(num) {
     if (num === 0)
         return "1"
-    if (num === 1) {
+    if (num === 1)
         return "2"
-    }
-    if (num === 2) {
+    if (num === 2)
         return "3"
-    }
-    if (num === 3) {
+    if (num === 3)
         return "4"
-    }
-    if (num === 4) {
+    if (num === 4)
         return "5"
-    }
-    if (num === 5) {
+    if (num === 5)
         return "6"
-    }
-    if (num === 6) {
+    if (num === 6)
         return "7"
-    }
-    if (num === 7) {
+    if (num === 7)
         return "8"
-    }
-    if (num === 8) {
+    if (num === 8)
         return "9"
-    }
-    if (num === 9) {
+    if (num === 9)
         return "a"
-    }
-    if (num === 10) {
+    if (num === 10)
         return "b"
-    }
-    if (num === 11) {
+    if (num === 11)
         return "c"
-    }
-    if (num === 12) {
+    if (num === 12)
         return "d"
-    }
-    if (num === 13) {
+    if (num === 13)
         return "e"
-    }
-    if (num === 14) {
+    if (num === 14)
         return "f"
-    }
-    if (num === 15) {
+    if (num === 15)
         return "g"
-    }
-    if (num === 16) {
+    if (num === 16)
         return "h"
-    }
-    if (num === 17) {
+    if (num === 17)
         return "i"
-    }
-    if (num === 18) {
+    if (num === 18)
         return "j"
-    }
-    if (num === 19) {
+    if (num === 19)
         return "k"
-    }
-    if (num === 20) {
+    if (num === 20)
         return "l"
-    }
-    if (num === 21) {
+    if (num === 21)
         return "m"
-    }
-    if (num === 22) {
+    if (num === 22)
         return "n"
-    }
-    if (num === 23) {
+    if (num === 23)
         return "o"
-    }
-    if (num === 24) {
+    if (num === 24)
         return "p"
-    }
-    if (num === 25) {
+    if (num === 25)
         return "q"
-    }
-    if (num === 26) {
+    if (num === 26)
         return "r"
-    }
-    if (num === 27) {
+    if (num === 27)
         return "s"
-    }
-    if (num === 28) {
+    if (num === 28)
         return "t"
-    }
-    if (num === 29) {
+    if (num === 29)
         return "u"
-    }
-    if (num === 30) {
+    if (num === 30)
         return "v"
-    }
-    if (num === 31) {
+    if (num === 31)
         return "w"
-    }
-    if (num === 32) {
+    if (num === 32)
         return "x"
-    }
-    if (num === 33) {
+    if (num === 33)
         return "y"
-    }
-    if (num === 34) {
+    if (num === 34)
         return "z"
-    }
 }
 
 function DKBuildConsole_KeyToApp(key) {
 	if(CPP_DK_GetOS() === "Linux"){
 		//F1 Linux
-		if (key === 80) {
+		if (key === 80)
 			APP = "ALLAPPS"
-		}
 		//F2 = 82... etc.
 	}
 	else{
 		//F1
-		if (key === 59) {
+		if (key === 59)
 			APP = "ALLAPPS"
-		}
 	}
-    if (key === 49) {
-        APP = APP_LIST[0]
-    }
-    //1
-    if (key === 50) {
-        APP = APP_LIST[1]
-    }
-    //2
-    if (key === 51) {
-        APP = APP_LIST[2]
-    }
-    //3 
-    if (key === 52) {
-        APP = APP_LIST[3]
-    }
-    //4
-    if (key === 53) {
-        APP = APP_LIST[4]
-    }
-    //5
-    if (key === 54) {
-        APP = APP_LIST[5]
-    }
-    //6
-    if (key === 55) {
-        APP = APP_LIST[6]
-    }
-    //7
-    if (key === 56) {
-        APP = APP_LIST[7]
-    }
-    //8
-    if (key === 57) {
-        APP = APP_LIST[8]
-    }
-    //9
-    if (key === 97) {
-        APP = APP_LIST[9]
-    }
-    //a
-    if (key === 98) {
-        APP = APP_LIST[10]
-    }
-    //b
-    if (key === 99) {
-        APP = APP_LIST[11]
-    }
-    //c
-    if (key === 100) {
-        APP = APP_LIST[12]
-    }
-    //d
-    if (key === 101) {
-        APP = APP_LIST[13]
-    }
-    //e
-    if (key === 102) {
-        APP = APP_LIST[14]
-    }
-    //f
-    if (key === 103) {
-        APP = APP_LIST[15]
-    }
-    //g
-    if (key === 104) {
-        APP = APP_LIST[16]
-    }
-    //h
-    if (key === 105) {
-        APP = APP_LIST[17]
-    }
-    //i
-    if (key === 106) {
-        APP = APP_LIST[18]
-    }
-    //j
-    if (key === 107) {
-        APP = APP_LIST[19]
-    }
-    //k
-    if (key === 108) {
-        APP = APP_LIST[20]
-    }
-    //l
-    if (key === 109) {
-        APP = APP_LIST[21]
-    }
-    //m
-    if (key === 110) {
-        APP = APP_LIST[22]
-    }
-    //n
-    if (key === 111) {
-        APP = APP_LIST[23]
-    }
-    //o
-    if (key === 112) {
-        APP = APP_LIST[24]
-    }
-    //p
-    if (key === 113) {
-        APP = APP_LIST[25]
-    }
-    //q
-    if (key === 114) {
-        APP = APP_LIST[26]
-    }
-    //r
-    if (key === 115) {
-        APP = APP_LIST[27]
-    }
-    //s
-    if (key === 116) {
-        APP = APP_LIST[28]
-    }
-    //t
-    if (key === 117) {
-        APP = APP_LIST[29]
-    }
-    //u
-    if (key === 118) {
-        APP = APP_LIST[30]
-    }
-    //v
-    if (key === 119) {
-        APP = APP_LIST[31]
-    }
-    //w
-    if (key === 120) {
-        APP = APP_LIST[32]
-    }
-    //x
-    if (key === 121) {
-        APP = APP_LIST[33]
-    }
-    //y
-    if (key === 122) {
-        APP = APP_LIST[34]
-    }
-    //z
+    if (key === 49)
+        APP = APP_LIST[0] //1
+    if (key === 50)
+        APP = APP_LIST[1] //2
+    if (key === 51)
+        APP = APP_LIST[2] //3 
+    if (key === 52)
+        APP = APP_LIST[3] //4
+    if (key === 53)
+        APP = APP_LIST[4] //5
+    if (key === 54)
+        APP = APP_LIST[5] //6
+    if (key === 55)
+        APP = APP_LIST[6] //7
+    if (key === 56)
+        APP = APP_LIST[7] //8
+    if (key === 57)
+        APP = APP_LIST[8] //9
+    if (key === 97)
+        APP = APP_LIST[9] //a
+    if (key === 98)
+        APP = APP_LIST[10] //b
+    if (key === 99)
+        APP = APP_LIST[11] //c
+    if (key === 100)
+        APP = APP_LIST[12] //d
+    if (key === 101)
+        APP = APP_LIST[13] //e
+    if (key === 102)
+        APP = APP_LIST[14] //f
+    if (key === 103)
+        APP = APP_LIST[15] //g
+    if (key === 104)
+        APP = APP_LIST[16] //h
+    if (key === 105)
+        APP = APP_LIST[17] //i
+    if (key === 106)
+        APP = APP_LIST[18] //j
+    if (key === 107)
+        APP = APP_LIST[19] //k
+    if (key === 108)
+        APP = APP_LIST[20] //l
+    if (key === 109)
+        APP = APP_LIST[21] //m
+    if (key === 110)
+        APP = APP_LIST[22] //n
+    if (key === 111)
+        APP = APP_LIST[23] //o
+    if (key === 112)
+        APP = APP_LIST[24] //p
+    if (key === 113)
+        APP = APP_LIST[25] //q
+    if (key === 114)
+        APP = APP_LIST[26] //r
+    if (key === 115)
+        APP = APP_LIST[27] //s
+    if (key === 116)
+        APP = APP_LIST[28] //t
+    if (key === 117)
+        APP = APP_LIST[29] //u
+    if (key === 118)
+        APP = APP_LIST[30] //v
+    if (key === 119)
+        APP = APP_LIST[31] //w
+    if (key === 120)
+        APP = APP_LIST[32] //x
+    if (key === 121)
+        APP = APP_LIST[33] //y
+    if (key === 122)
+        APP = APP_LIST[34] //z
 }
 
 DKBuildConsole_init()
