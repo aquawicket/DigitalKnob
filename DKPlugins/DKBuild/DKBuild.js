@@ -570,7 +570,8 @@ function DKBuild_DoResults(){
 			
 			if(CPP_DKFile_Exists(app_path+"assets/DKCef/mac64Debug")){
 				CPP_DKFile_MkDir(app_path+"mac64/Debug/"+APP+".app/Contents/Frameworks")
-				CPP_DKFile_Copy(app_path+"assets/DKCef/mac64Debug/Chromium Embedded Framework.framework", app_path+"mac64/Debug/"+APP+".app/Contents/Frameworks", true)
+				CPP_DKFile_Copy(app_path+"assets/DKCef/mac64Debug/Chromium Embedded Framework.framework", app_path+"mac64/Debug/"+APP+".app/Contents/Frameworks/Chromium Embedded Framework.framework", true)
+				//CPP_DKFile_Copy(app_path+"assets/DKCef/mac64Debug/Chromium Embedded Framework.framework/Resources", app_path+"mac64/Debug/"+APP+".app/Contents/Resources", true)
 			}
 			/*
 			//update install_name_tool if cef present
@@ -593,6 +594,7 @@ function DKBuild_DoResults(){
 				console.log(command)
 				CPP_DK_Execute(command)
 			}
+			
 			*/
 		}
 		if(TYPE === "Release" || TYPE === "ALL"){
