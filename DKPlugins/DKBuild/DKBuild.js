@@ -534,30 +534,7 @@ function DKBuild_DoResults(){
 	
 	///// MAC32 ////
 	if(OS === "mac32"){
-		DKBuild_ValidateXcode()
-		CPP_DKFile_MkDir(app_path+OS)
-		CPP_DKFile_ChDir(app_path+OS)
-		let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Xcode\" -DCMAKE_OSX_ARCHITECTURES=i386 "+cmake_string+DIGITALKNOB+"DK")
-		if(rtvalue.indexOf("errors occurred!") > -1){ return }
-		
-		if(TYPE === "Debug" || TYPE === "ALL"){
-			CPP_DKFile_Rename(app_path+OS+"/Debug/"+APP+".app", app_path+OS+"/Debug/"+APP+"_OLD.app", true)
-			CPP_DK_Execute("xcodebuild -target "+APP+" -configuration Debug build")
-			//update the info.plist in include the logo icon
-			let info_plist = CPP_DKFile_FileToString(app_path+OS+"/Debug/"+APP+".app/Contents/info.plist")
-			info_plist = info_plist.replace("<dict>", "<dict><key>CFBundleIconFile</key><string>logo</string>")
-			CPP_DKFile_StringToFile(info_plist, app_path+OS+"/Debug/"+APP+".app/Contents/info.plist")
-		}
-		if(TYPE === "Release" || TYPE === "ALL"){
-			CPP_DKFile_Rename(app_path+OS+"/Release/"+APP+".app", app_path+OS+"/Release/"+APP+"_OLD.app", true)
-			CPP_DK_Execute("xcodebuild -target "+APP+" -configuration Release build")
-			//update the info.plist in include the logo icon
-			let info_plist = CPP_DKFile_FileToString(app_path+OS+"/Release/"+APP+".app/Contents/info.plist")
-			info_plist = info_plist.replace("<dict>", "<dict><key>CFBundleIconFile</key><string>logo</string>")
-			CPP_DKFile_StringToFile(info_plist, app_path+OS+"/Release/"+APP+".app/Contents/info.plist")
-			//update install_name_tool if cef present
-			//TODO
-		}
+		//Copy from mac64
 	}
 	
 	///// MAC64 ////
@@ -582,9 +559,13 @@ function DKBuild_DoResults(){
 			}
 			*/
 			
-			if(CPP_DKFile_Exists(app_path+"assets/DKCef/mac64Debug")){
+			if(CPP_DKFile_Exists(app_path+"assets/DKCef/mac64Debug/Chromium Embedded Framework.framework")){
 				CPP_DKFile_MkDir(app_path+"mac64/Debug/"+APP+".app/Contents/Frameworks")
 				CPP_DKFile_Copy(app_path+"assets/DKCef/mac64Debug/Chromium Embedded Framework.framework", app_path+"mac64/Debug/"+APP+".app/Contents/Frameworks/Chromium Embedded Framework.framework", true)
+			}
+			if(CPP_DKFile_Exists(DIGITALKNOB+"DK/DKPlugins/DKCefChild/mac32/Debug/DKCefChild.app")){
+				CPP_DKFile_MkDir(app_path+"mac64/Debug/"+APP+".app/Contents/Frameworks")
+				CPP_DKFile_Copy(DIGITALKNOB+"DK/DKPlugins/DKCefChild/mac32/Debug/DKCefChild.app", app_path+"mac64/Debug/"+APP+".app/Contents/Frameworks/"+APP+" Helper", true)
 			}
 			/*
 			//update install_name_tool if cef present
@@ -614,6 +595,11 @@ function DKBuild_DoResults(){
 			//if(CPP_DKFile_Exists(app_path+OS+"/Release/"+APP+".app"))
 			//	CPP_DKFile_Rename(app_path+OS+"/Release/"+APP+".app", app_path+OS+"/Release/"+APP+"_OLD.app", true)
 			CPP_DK_Execute("xcodebuild -target "+APP+" -configuration Release build")
+			
+			if(CPP_DKFile_Exists(app_path+"assets/DKCef/mac64Release/Chromium Embedded Framework.framework")){
+				CPP_DKFile_MkDir(app_path+"mac64/Release/"+APP+".app/Contents/Frameworks")
+				CPP_DKFile_Copy(app_path+"assets/DKCef/mac64Release/Chromium Embedded Framework.framework", app_path+"mac64/Release/"+APP+".app/Contents/Frameworks/Chromium Embedded Framework.framework", true)
+			}
 			
 			/*
 			//update the info.plist to include the logo icon

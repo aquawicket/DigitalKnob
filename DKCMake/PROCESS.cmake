@@ -581,9 +581,7 @@ if(MAC)
 	
 	foreach(plugin ${dkdepend_list})
 		if(EXISTS "${DKPLUGINS}/${plugin}/CMakeLists.txt")
-			#if(NOT ${plugin} STREQUAL "DKCefChild")
-				add_dependencies(${APP_NAME} ${plugin})
-			#endif()
+			add_dependencies(${APP_NAME} ${plugin})
 		endif()
 	endforeach()
 	
