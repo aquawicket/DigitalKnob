@@ -61,6 +61,8 @@ IF(WIN_64)
 	LIST(APPEND RELEASE_LINK_FLAGS /DELAYLOAD:chrome_elf.dll)
 	WIN_LIB(winmm.lib)
 ENDIF()
+
+#https://bitbucket.org/chromiumembedded/cef/wiki/Tutorial#markdown-header-mac-os-x-build-steps
 IF(MAC_64)
 	#DKDEPEND(appkit)
 	if(DEBUG)
