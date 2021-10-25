@@ -95,23 +95,36 @@ function DKBuildConsole_ChooseUpdate() {
 }
 
 function DKBuildConsole_SelectOs() {
-    console.log("\n")
+	const OSes = [];
+	if(CPP_DK_GetOS() === "Windows"){
+		OSes.push("win32")
+		OSes.push("win64")
+		OSes.push("android32")
+		OSes.push("android64")
+	}
+	if(CPP_DK_GetOS() === "Mac"){
+		OSes.push("mac32")
+		OSes.push("mac64")
+		OSes.push("ios32")
+		OSes.push("ios64")
+		OSes.push("iossim32")
+		OSes.push("iossim64")
+	}
+	if(CPP_DK_GetOS() === "Linux"){
+		OSes.push("linux32")
+		OSes.push("linux64")
+	}
+	if(CPP_DK_GetOS() === "Raspberry"){
+		OSes.push("raspberry32")
+		OSes.push("raspberry64")
+	}
+	
+	console.log("\n")
     console.log("**** SELECT OS TO BUILD ****")
-    console.log("1. win32")
-    console.log("2. win64")
-    console.log("3. mac32")
-    console.log("4. mac64")
-    console.log("5. linux32")
-    console.log("6. linux64")
-    console.log("7. ios32")
-    console.log("8. ios64")
-    console.log("9. iossim32")
-    console.log("a. iossim64")
-    console.log("b. android32")
-    console.log("c. android64")
-    console.log("d. raspberry32")
-    console.log("e. raspberry64")
-	//console.log("BCKSPC. Back")
+	for(let n=1; n<OSes.length; n++){
+		console.log(n+". "+OSes[n-1])	
+	}
+
     console.log("ESC. exit")
     console.log("\n")
     
@@ -120,37 +133,27 @@ function DKBuildConsole_SelectOs() {
     while(key === 10)
         key = CPP_DK_GetKey()
 	
-	console.log("key = "+key)
-    if (key === 27)
+	//console.log("key = "+key)
+    if (key === 27) //Esc
         CPP_DK_Exit()
-    else if (key === 49)
-        OS = "win32"
-    else if (key === 50)
-        OS = "win64"
-    else if (key === 51)
-        OS = "mac32"
-    else if (key === 52)
-        OS = "mac64"
-    else if (key === 53)
-        OS = "linux32"
-    else if (key === 54)
-        OS = "linux64"
-    else if (key === 55)
-        OS = "ios32"
-    else if (key === 56)
-        OS = "ios64"
-    else if (key === 57)
-        OS = "iossim32"
-    else if (key === 97)
-        OS = "iossim64"
-    else if (key === 98)
-        OS = "android32"
-    else if (key === 99)
-        OS = "android64"
-    else if (key === 100)
-        OS = "raspberry32"
-    else if (key === 101)
-        OS = "raspberry64"
+	else if (key === 49) //1
+		OS = OSes[0]
+	else if (key === 50) //2	
+		OS = OSes[1]
+	else if (key === 51) //3
+		OS = OSes[2]
+	else if (key === 52) //4	
+		OS = OSes[3]
+	else if (key === 53) //5	
+		OS = OSes[4]
+	else if (key === 54) //6	
+		OS = OSes[5]
+	else if (key === 55) //7	
+		OS = OSes[6]
+	else if (key === 56) //8	
+		OS = OSes[7]
+	else if (key === 57) //9	
+		OS = OSes[8]
     else
         console.error("INVALID OPTION")
 }
