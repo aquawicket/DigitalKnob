@@ -562,10 +562,8 @@ function DKBuild_DoResults(){
 			if(CPP_DKFile_Exists(app_path+"assets/DKCef/mac64Debug/Chromium Embedded Framework.framework")){
 				CPP_DKFile_MkDir(app_path+"mac64/Debug/"+APP+".app/Contents/Frameworks")
 				CPP_DKFile_Copy(app_path+"assets/DKCef/mac64Debug/Chromium Embedded Framework.framework", app_path+"mac64/Debug/"+APP+".app/Contents/Frameworks/Chromium Embedded Framework.framework", true)
-			}
-			if(CPP_DKFile_Exists(DIGITALKNOB+"DK/DKPlugins/DKCefChild/mac64/Debug/DKCefChild.app")){
-				CPP_DKFile_MkDir(app_path+"mac64/Debug/"+APP+".app/Contents/Frameworks")
-				CPP_DKFile_Copy(DIGITALKNOB+"DK/DKPlugins/DKCefChild/mac64/Debug/DKCefChild.app", app_path+"mac64/Debug/"+APP+".app/Contents/Frameworks/"+APP+" Helper.app", true)
+				if(CPP_DKFile_Exists(DIGITALKNOB+"DK/DKPlugins/DKCefChild/mac64/Debug/DKCefChild.app"))
+					CPP_DKFile_Copy(DIGITALKNOB+"DK/DKPlugins/DKCefChild/mac64/Debug/DKCefChild.app", app_path+"mac64/Debug/"+APP+".app/Contents/Frameworks/"+APP+" Helper.app", true)
 			}
 			/*
 			//update install_name_tool if cef present
@@ -599,10 +597,8 @@ function DKBuild_DoResults(){
 			if(CPP_DKFile_Exists(app_path+"assets/DKCef/mac64Release/Chromium Embedded Framework.framework")){
 				CPP_DKFile_MkDir(app_path+"mac64/Release/"+APP+".app/Contents/Frameworks")
 				CPP_DKFile_Copy(app_path+"assets/DKCef/mac64Release/Chromium Embedded Framework.framework", app_path+"mac64/Release/"+APP+".app/Contents/Frameworks/Chromium Embedded Framework.framework", true)
-			}
-			if(CPP_DKFile_Exists(DIGITALKNOB+"DK/DKPlugins/DKCefChild/mac64/Release/DKCefChild.app")){
-				CPP_DKFile_MkDir(app_path+"mac64/Release/"+APP+".app/Contents/Frameworks")
-				CPP_DKFile_Copy(DIGITALKNOB+"DK/DKPlugins/DKCefChild/mac64/Release/DKCefChild.app", app_path+"mac64/Release/"+APP+".app/Contents/Frameworks/"+APP+" Helper.app", true)
+				if(CPP_DKFile_Exists(DIGITALKNOB+"DK/DKPlugins/DKCefChild/mac64/Release/DKCefChild.app"))
+					CPP_DKFile_Copy(DIGITALKNOB+"DK/DKPlugins/DKCefChild/mac64/Release/DKCefChild.app", app_path+"mac64/Release/"+APP+".app/Contents/Frameworks/"+APP+" Helper.app", true)
 			}
 			
 			/*

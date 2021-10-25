@@ -98,7 +98,14 @@ while :
 
 	echo " "
 	PS3='Please select an OS to build for: '
-	options=("linux32" "linux64" "mac64" "raspberry32" "Exit")
+	if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+		options=("linux32" "linux64" "raspberry32" "Exit")
+	elif [[ "$OSTYPE" == "darwin"* ]]; then
+		options=("mac64" "Exit")
+	else
+		echo "UNKNOWN OS TYPE ($OSTYPE)"
+		options=("Exit")
+	fi
 	select opt in "${options[@]}"
 	do
 		case $opt in
