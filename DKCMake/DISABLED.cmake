@@ -109,7 +109,7 @@ if(CMAKE_HOST_APPLE)  # Disabled on Apple host machines
 	DKDISABLE(android-platform-tools)
 	DKDISABLE(boxer)
 	DKDISABLE(bzip2)
-	DKDISABLE(DKCefChild)
+	#DKDISABLE(DKCefChild)
 	DKDISABLE(DKMySql)
 	DKDISABLE(DKOcr)
 	DKDISABLE(DKWebSockets)
@@ -255,6 +255,7 @@ if(ANDROID) # Disabled for Android targets
 	DKDISABLE(cef_binary)
 	DKDISABLE(curl)
 	DKDISABLE(DKCef)
+	DKDISABLE(DKCefChild)
 	DKDISABLE(DKCurl)
 	DKDISABLE(DKDom)
 	DKDISABLE(DKHook) #NOTE: this has linux functions too
