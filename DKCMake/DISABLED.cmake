@@ -56,7 +56,6 @@ DKDISABLE(waave)
 
 
 if(NOT CMAKE_HOST_WIN32) # Disabled on Non-Windows host machines
-	DKDISABLE(boxer)
 	DKDISABLE(glew)
 	DKDISABLE(mingw32)
 	DKDISABLE(mingw64)
@@ -108,6 +107,7 @@ if(CMAKE_HOST_APPLE)  # Disabled on Apple host machines
     DKDISABLE(android-build-tools)
 	DKDISABLE(android-ndk)
 	DKDISABLE(android-platform-tools)
+	DKDISABLE(boxer)
 	DKDISABLE(bzip2)
 	DKDISABLE(DKCefChild)
 	DKDISABLE(DKMySql)
@@ -157,6 +157,7 @@ if(CMAKE_HOST_LINUX) # Disabled on Linux host machines
 endif()
 if(LINUX) # Disabled for Linux targets
 	DKDISABLE(android-build-tools)
+	DKDISABLE(boxer)
 	DKDISABLE(DKHook) #NOTE: this has linux functions too
 	DKDISABLE(DKOcr)
 	DKDISABLE(DKSDLWav)
@@ -178,6 +179,7 @@ if(LINUX) # Disabled for Linux targets
 	DKDISABLE(lighttpd)
 	DKDISABLE(openal)
 	DKDISABLE(openal-android)
+	DKDISABLE(openssl)
 	DKDISABLE(podofo)
 	DKDISABLE(python)
 	DKDISABLE(sdl2_mixer)
@@ -199,6 +201,7 @@ endif()
 
 if(RASPBERRY) # Disabled for Raspberry Pi targets
 	DKDISABLE(android-build-tools)
+	DKDISABLE(boxer)
 	DKDISABLE(cef_binary)
 	DKDISABLE(DKCef)
 	DKDISABLE(DKCefChild)
@@ -223,6 +226,7 @@ if(RASPBERRY) # Disabled for Raspberry Pi targets
 	DKDISABLE(lighttpd)
 	DKDISABLE(openal)
 	DKDISABLE(openal-android)
+	DKDISABLE(openssl)
 	DKDISABLE(podofo)
 	DKDISABLE(python)
 	DKDISABLE(sdl2_mixer)
@@ -288,6 +292,7 @@ if(ANDROID) # Disabled for Android targets
 	DKDISABLE(openal)
 	DKDISABLE(openal-android)
 	DKDISABLE(opencv)
+	DKDISABLE(openssl)
 	DKDISABLE(podofo)
 	DKDISABLE(python)
 	DKDISABLE(rlottie)
