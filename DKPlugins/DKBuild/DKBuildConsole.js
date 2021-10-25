@@ -94,6 +94,8 @@ function DKBuildConsole_ChooseUpdate() {
 		UPDATE = ""
     }
 	else if (key === 122){ //Clear Cmake Cache
+		DKBuild_ClearCMakeCache()
+		/*
 		console.log("Clearing CMake cache . . .")
 		CPP_DKFile_ChDir(DIGITALKNOB)
 		if(CPP_DK_GetOS() === "Windows"){
@@ -104,9 +106,9 @@ function DKBuildConsole_ChooseUpdate() {
 			//CPP_DK_Execute("find . -type d -name \"CMakeFiles\" -delete")
 			CPP_DK_Execute("rm -rf `find . -type d -name CMakeFiles`")
 		}
+		*/
 		UPDATE = ""
 	}
-	
 }
 
 function DKBuildConsole_SelectOs() {

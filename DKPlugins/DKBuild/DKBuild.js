@@ -108,6 +108,18 @@ function DKBuild_GetShortPath(fullPath){
 	return shortPath
 }
 
+function DKBuild_ClearCMakeCache(){
+	console.log("Clearing CMake cache . . .")
+	CPP_DKFile_ChDir(DIGITALKNOB)
+	if(CPP_DK_GetOS() === "Windows"){
+		CPP_DK_Execute("cmd /c for /r %i in (CMakeCache.*) do del \"%i\"")
+		CPP_DK_Execute("cmd /c for /d /r %i in (*CMakeFiles*) do rmdir /s /Q \"%i\"")
+	}else{
+		CPP_DK_Execute("find . -name \"CMakeCache.*\" -delete") 
+		CPP_DK_Execute("rm -rf `find . -type d -name CMakeFiles`")
+	}
+}
+
 function DKBuild_ValidateCmake(){
 	console.log("Looking for CMake")
 	if(!CPP_DKFile_Exists(CMAKE))
