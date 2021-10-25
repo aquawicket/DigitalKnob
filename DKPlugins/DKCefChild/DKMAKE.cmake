@@ -24,13 +24,16 @@ IF(WIN_64)
 ENDIF()
 
 IF(MAC_64)
-	DKCOPY(${DKPLUGINS}/DKCefChild/${OS}/${DEBUG_DIR}/cefchild.app ${DKPROJECT}/${OS}/${DEBUG_DIR}/${AppName}.app/Contents/Frameworks/cefchild.app TRUE)
-	DKRENAME(${DKPROJECT}/${OS}/${DEBUG_DIR}/${AppName}.app/Contents/Frameworks/cefchild.app/Contents/MacOS/cefchild "${DKPROJECT}/${OS}/${DEBUG_DIR}/${AppName}.app/Contents/Frameworks/cefchild.app/Contents/MacOS/${AppName} Helper")
-	DKRENAME(${DKPROJECT}/${OS}/${DEBUG_DIR}/${AppName}.app/Contents/Frameworks/cefchild.app "${DKPROJECT}/${OS}/${DEBUG_DIR}/${AppName}.app/Contents/Frameworks/${AppName} Helper.app")
-	DKCOPY(${DKPLUGINS}/DKCefChild/${OS}/${RELEASE_DIR}/cefchild.app ${DKPROJECT}/${OS}/${RELEASE_DIR}/${AppName}.app/Contents/Frameworks/cefchild.app TRUE)
-	DKRENAME(${DKPROJECT}/${OS}/${RELEASE_DIR}/${AppName}.app/Contents/Frameworks/cefchild.app/Contents/MacOS/cefchild "${DKPROJECT}/${OS}/${RELEASE_DIR}/${AppName}.app/Contents/Frameworks/cefchild.app/Contents/MacOS/${AppName} Helper")
-	DKRENAME(${DKPROJECT}/${OS}/${RELEASE_DIR}/${AppName}.app/Contents/Frameworks/cefchild.app "${DKPROJECT}/${OS}/${RELEASE_DIR}/${AppName}.app/Contents/Frameworks/${AppName} Helper.app")
-
+	if(DEBUG)
+		DKCOPY(${DKPLUGINS}/DKCefChild/${OS}/${DEBUG_DIR}/cefchild.app "${DKPROJECT}/assets/DKCef/win64Debug/${AppName} Helper.app" TRUE)
+		#DKRENAME(${DKPROJECT}/${OS}/${DEBUG_DIR}/${AppName}.app/Contents/Frameworks/cefchild.app/Contents/MacOS/cefchild "${DKPROJECT}/${OS}/${DEBUG_DIR}/${AppName}.app/Contents/Frameworks/cefchild.app/Contents/MacOS/${AppName} Helper")
+		#DKRENAME(${DKPROJECT}/${OS}/${DEBUG_DIR}/${AppName}.app/Contents/Frameworks/cefchild.app "${DKPROJECT}/${OS}/${DEBUG_DIR}/${AppName}.app/Contents/Frameworks/${AppName} Helper.app")
+	endif()
+	if(RELEASE)
+		DKCOPY(${DKPLUGINS}/DKCefChild/${OS}/${RELEASE_DIR}/cefchild.app "${DKPROJECT}/assets/DKCef/win64Release/${AppName} Helper.app" TRUE)
+		#DKRENAME(${DKPROJECT}/${OS}/${RELEASE_DIR}/${AppName}.app/Contents/Frameworks/cefchild.app/Contents/MacOS/cefchild "${DKPROJECT}/${OS}/${RELEASE_DIR}/${AppName}.app/Contents/Frameworks/cefchild.app/Contents/MacOS/${AppName} Helper")
+		#DKRENAME(${DKPROJECT}/${OS}/${RELEASE_DIR}/${AppName}.app/Contents/Frameworks/cefchild.app "${DKPROJECT}/${OS}/${RELEASE_DIR}/${AppName}.app/Contents/Frameworks/${AppName} Helper.app")
+	endif()
 	#MAC_COMMAND(install_name_tool -change "@executable_path/Chromium Embedded Framework" "@executable_path/../../../../Frameworks/Chromium Embedded Framework.framework/Chromium Embedded Framework" "${DKPROJECT}/${OS}/${DEBUG_DIR}/${AppName}.app/Contents/Frameworks/${AppName} Helper.app/Contents/MacOS/${AppName} Helper")
 	
 	#FIXME - command does not work because app does not exist yet
