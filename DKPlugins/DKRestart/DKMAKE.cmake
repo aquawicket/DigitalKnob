@@ -10,6 +10,7 @@ if(WIN)
 	endif()
 endif()
 
+
 if(MAC)
 	if(DEBUG)
 		DKCOPY(${DKPLUGINS}/DKRestart/${OS}/${DEBUG_DIR}/DKRestart.app ${DKPROJECT}/assets/DKRestart/${OS}Debug/DKRestart.app TRUE)
@@ -18,6 +19,7 @@ if(MAC)
 		DKCOPY(${DKPLUGINS}/DKRestart/${OS}/${RELEASE_DIR}/DKRestart.app ${DKPROJECT}/assets/DKRestart/${OS}Release/DKRestart.app" TRUE)
 	endif()
 endif()
+
 
 if(LINUX)
 	if(DEBUG)
@@ -28,6 +30,7 @@ if(LINUX)
 	endif()
 endif()
 
+
 if(RASPBERRY)
 	if(DEBUG)
 		DKCOPY(${DKPLUGINS}/DKRestart/${OS}/${DEBUG_DIR}/DKRestart ${DKPROJECT}/assets/${OS}Debug/DKRestart TRUE)
@@ -36,7 +39,6 @@ if(RASPBERRY)
 		DKCOPY(${DKPLUGINS}/DKRestart/${OS}/${RELEASE_DIR}/DKRestart ${DKPROJECT}/assets/${OS}Release/DKRestart TRUE)
 	endif()
 endif()
-
 
 
 
@@ -57,6 +59,7 @@ if(WIN)
 #	DKAPPEND_CMAKE("TARGET_LINK_LIBRARIES(DKRestart \${DEBUG_LIBS} \${RELEASE_LIBS}) \n")
 	DKAPPEND_CMAKE("SET_TARGET_PROPERTIES(DKRestart PROPERTIES LINK_FLAGS_DEBUG \"/MANIFESTUAC:NO /SUBSYSTEM:CONSOLE /SAFESEH:NO\" LINK_FLAGS_RELEASE \"/INCREMENTAL:NO /OPT:NOREF /MANIFESTUAC:NO /SUBSYSTEM:CONSOLE /FORCE /SAFESEH:NO\") \n")
 endif()
+
 
 ## DKRestart mac
 if(MAC)
@@ -95,6 +98,7 @@ if(LINUX)
 		#DKAPPEND_CMAKE("TARGET_LINK_LIBRARIES(DKRestart  \${RELEASE_LIBS}) \n")
 	endif()
 endif()
+
 
 ## DKRestart raspberry
 if(RASPBERRY)
