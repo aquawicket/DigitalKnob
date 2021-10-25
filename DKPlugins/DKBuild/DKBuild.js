@@ -603,6 +603,7 @@ function DKBuild_DoResults(){
 			}
 			*/
 			
+			/*
 			//update install_name_tool if cef present
 			if(CPP_DKFile_Exists(app_path+OS+"/Release/"+APP+".app/Contents/Frameworks/Chromium Embedded Framework.framework")){
 				console.log("USING CHROMIUM EMBEDDED FRAMEWORK")
@@ -623,6 +624,7 @@ function DKBuild_DoResults(){
 				console.log(command)
 				CPP_DK_Execute(command)
 			}
+			*/
 		}
 	}
 	
