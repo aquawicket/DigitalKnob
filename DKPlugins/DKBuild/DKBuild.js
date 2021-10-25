@@ -588,7 +588,6 @@ function DKBuild_DoResults(){
 				console.log(command)
 				CPP_DK_Execute(command)
 			}
-			*/
 		}
 		if(TYPE === "Release" || TYPE === "ALL"){
 			//if(CPP_DKFile_Exists(app_path+OS+"/Release/"+APP+".app"))
