@@ -215,120 +215,6 @@ function DKBuild_ValidateNDK(){
 	}
 }
 
-function DKBuild_OsCheck(){
-	if(CPP_DK_GetOS() === "Windows"){
-		if(CPP_DK_GetOSArchitecture() === "32"){
-			if(OS === "win64"){
-				console.error(OS+" can only be build from a WIN64 machine") 
-				return false
-			}
-		}
-		if(OS === "mac"){
-			console.error(OS+" can only be build from an OSX machine") 
-			return false
-		}
-		if(OS === "ios"){
-			console.error(OS+" can only be build from an OSX machine") 
-			return false
-		}
-		if(OS === "ios-simulator"){
-			console.error(OS+" can only be build from an OSX machine") 
-			return false
-		}
-		if(OS === "linux"){
-			console.error(OS+" can only be build from a LINUX machine") 
-			return false
-		}
-		if(OS === "raspberry"){
-			console.error(OS+" can only be build from a Raspberry machine") 
-			return false
-		}
-	}
-	if(CPP_DK_GetOS() === "Mac"){
-		if(OS === "win32"){
-			console.error(OS+" can only be build from a Windows machine") 
-			return false
-		}
-		if(OS === "win64"){
-			console.error(OS+" can only be build from an Windows x64 machine") 
-			return false
-		}
-		if(OS === "linux"){
-			console.error(OS+" can only be build from a linux machine") 
-			return false
-		}
-		if(OS === "linux32"){
-			console.error(OS+" can only be build from a linux machine") 
-			return false
-		}
-		if(OS === "linux64"){
-			console.error(OS+" can only be build from a linux machine") 
-			return false
-		}
-		if(OS === "raspberry"){
-			console.error(OS+" can only be build from a Raspberry machine") 
-			return false
-		}
-	}
-	if(CPP_DK_GetOS() === "Linux"){
-		if(OS === "win32"){
-			console.error(OS+" can only be build from a Windows machine") 
-			return false
-		}
-		if(OS === "win64"){
-			console.error(OS+" can only be build from an WIN64 machine") 
-			return false
-		}
-		if(OS === "mac"){
-			console.error(OS+" can only be build from an OSX machine") 
-			return false
-		}
-		if(OS === "ios"){
-			console.error(OS+" can only be build from an OSX machine") 
-			return false
-		}
-		if(OS === "ios-simulator"){
-			console.error(OS+" can only be build from an OSX machine") 
-			return false
-		}
-		if(OS === "raspberry"){
-			console.error(OS+" can only be build from a Raspberry machine") 
-			return false
-		}
-	}
-	if(CPP_DK_GetOS() === "Raspberry"){
-		if(OS === "win32"){
-			console.error(OS+" can only be build from a Windows machine") 
-			return false
-		}
-		if(OS === "win64"){
-			console.error(OS+" can only be build from an WIN64 machine") 
-			return false
-		}
-		if(OS === "mac"){
-			console.error(OS+" can only be build from an OSX machine") 
-			return false
-		}
-		if(OS === "ios"){
-			console.error(OS+" can only be build from an OSX machine") 
-			return false
-		}
-		if(OS === "ios-simulator"){
-			console.error(OS+" can only be build from an OSX machine") 
-			return false
-		}
-	}
-	if(CPP_DK_GetOS() === "Android"){
-		console.error("Android is not capable of compiling Apps..  please use a desktop system") 
-		return false
-	}
-	if(CPP_DK_GetOS() === "iOS"){
-		console.error("iOS is not capable of compiling Apps..  please use a desktop system") 
-		return false
-	}
-	return true
-}
-
 function DKBuild_ResetAppsPlugins(){
 	console.log("Deleting Apps and Plugins... ")
 	
@@ -411,10 +297,6 @@ function DKBuild_DoResults(){
 	const assets = CPP_DKAssets_LocalAssets()
 	CPP_DKFile_StringToFile(cache_json, assets+"cache.txt")
 	
-	if(!DKBuild_OsCheck()){ 
-		console.log("DKBuild_OsCheck failed")
-		return 
-	}
 	DKBuild_ValidateCmake()
 	
 	////// Create the cmake string
