@@ -566,6 +566,7 @@ function DKBuild_DoResults(){
 				info_plist = info_plist.replace("<dict>", "<dict><key>CFBundleIconFile</key><string>logo</string>")
 				CPP_DKFile_StringToFile(info_plist, app_path+OS+"/Debug/"+APP+".app/Contents/info.plist")
 			}
+			*/
 			
 			//update install_name_tool if cef present
 			if(CPP_DKFile_Exists(app_path+OS+"/Debug/"+APP+".app/Contents/Frameworks/Chromium Embedded Framework.framework")){
@@ -601,6 +602,7 @@ function DKBuild_DoResults(){
 				info_plist = info_plist.replace("<dict>", "<dict><key>CFBundleIconFile</key><string>logo</string>")
 				CPP_DKFile_StringToFile(info_plist, app_path+OS+"/Release/"+APP+".app/Contents/info.plist")
 			}
+			*/
 			
 			//update install_name_tool if cef present
 			if(CPP_DKFile_Exists(app_path+OS+"/Release/"+APP+".app/Contents/Frameworks/Chromium Embedded Framework.framework")){
@@ -622,7 +624,6 @@ function DKBuild_DoResults(){
 				console.log(command)
 				CPP_DK_Execute(command)
 			}
-			*/
 		}
 	}
 	
