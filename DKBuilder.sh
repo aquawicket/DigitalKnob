@@ -6,17 +6,19 @@ echo "ostype = $OSTYPE"
 echo "machtype = $MACHTYPE"
 
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-	DKPATH="/home/$USER/digitalknob/DK"
+	DIGITALKNOB="/home/$USER/digitalknob"
+	DKPATH="$DIGITALKNOB/DK"
 elif [[ "$OSTYPE" == "darwin"* ]]; then
-	DKPATH="/Users/$USER/digitalknob/DK"
+	DIGITALKNOB="/Users/$USER/digitalknob"
+	DKPATH="$DIGITALKNOB/DK"
 elif [[ "$OSTYPE" == "cygwin" ]]; then
-	echo "TODO: DKPATH NOT SET"
+	echo "TODO: DIGITALKNOB NOT SET"
 elif [[ "$OSTYPE" == "msys" ]]; then
-	echo "TODO: DKPATH NOT SET"
+	echo "TODO: DIGITALKNOB NOT SET"
 elif [[ "$OSTYPE" == "win32" ]]; then
-	echo "TODO: DKPATH NOT SET" #I'm not sure this can happen
+	echo "TODO: DIGITALKNOB NOT SET" #I'm not sure this can happen
 elif [[ "$OSTYPE" == "freebsd"* ]]; then
-	echo "TODO: DKPATH NOT SET"
+	echo "TODO: DIGITALKNOB NOT SET"
 else
     echo "UNKNOWN OS TYPE ($OSTYPE)"
 fi
@@ -65,7 +67,7 @@ while :
 				else
 					sudo apt-get -y install git
 				fi
-				cd $DKPATH/DK
+				cd $DKPATH
 				git commit -a -m "git commit"
 				git push
 				echo "${options[@]}"
