@@ -605,6 +605,10 @@ function DKBuild_DoResults(){
 			}
 			*/
 			
+			if(USE_DKCef){
+				FILE(MAKE_DIRECTORY app_path+OS+"/Release/"+APP+".app/Contents/Frameworks)
+				DKCOPY(${CEF}/Debug app_path+OS+"/Release/"+APP+".app/Contents/Frameworks TRUE)
+			}
 			/*
 			//update install_name_tool if cef present
 			if(CPP_DKFile_Exists(app_path+OS+"/Release/"+APP+".app/Contents/Frameworks/Chromium Embedded Framework.framework")){
