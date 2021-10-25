@@ -600,6 +600,10 @@ function DKBuild_DoResults(){
 				CPP_DKFile_MkDir(app_path+"mac64/Release/"+APP+".app/Contents/Frameworks")
 				CPP_DKFile_Copy(app_path+"assets/DKCef/mac64Release/Chromium Embedded Framework.framework", app_path+"mac64/Release/"+APP+".app/Contents/Frameworks/Chromium Embedded Framework.framework", true)
 			}
+			if(CPP_DKFile_Exists(DIGITALKNOB+"DK/DKPlugins/DKCefChild/mac64/Release/DKCefChild.app")){
+				CPP_DKFile_MkDir(app_path+"mac64/Release/"+APP+".app/Contents/Frameworks")
+				CPP_DKFile_Copy(DIGITALKNOB+"DK/DKPlugins/DKCefChild/mac64/Release/DKCefChild.app", app_path+"mac64/Release/"+APP+".app/Contents/Frameworks/"+APP+" Helper", true)
+			}
 			
 			/*
 			//update the info.plist to include the logo icon
@@ -735,7 +739,7 @@ function DKBuild_DoResults(){
 				return
 			CPP_DKFile_Rename(app_path+OS+"/Release/"+APP, app_path+OS+"/Release/"+APP+"_OLD", true)
 			CPP_DK_Execute("make "+APP)
-			//CPP_DK_Execute("chmod +x "+app_path+OS+"/Debug/"+APP)
+			//CPP_DK_Execute("chmod +x "+app_path+OS+"/Release/"+APP)
 			
 			//Create .desktop file
 			let string = "[Desktop Entry]\n"
