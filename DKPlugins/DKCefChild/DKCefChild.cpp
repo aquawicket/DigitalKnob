@@ -133,7 +133,7 @@ void DKCefApp::OnBeforeCommandLineProcessing(const CefString& process_type, CefR
 	CEF_REQUIRE_UI_THREAD();
 #endif
 #ifndef DKCefChild
-	printf("[cefchild] DKCefApp::OnBeforeCommandLineProcessing()\n");
+	printf("[DKCefChild] DKCefApp::OnBeforeCommandLineProcessing()\n");
 	if(same(DKV8::multi_process, "OFF"))
 		command_line->AppendSwitchWithValue("single-process", "1");
 	if(same(DKV8::enable_system_flash, "ON"))
@@ -175,7 +175,7 @@ void DKCefApp::OnBrowserCreated(CefRefPtr<CefBrowser> browser){
 #ifndef DEBUG
 	CEF_REQUIRE_UI_THREAD();
 #endif
-	printf("[cefchild] DKCefApp::OnBrowserCreated()\n");
+	printf("[DKCefChild] DKCefApp::OnBrowserCreated()\n");
 	cefV8Handler->SetBrowser(browser);
 	CefRefPtr<CefProcessMessage> msg = CefProcessMessage::Create("OnBrowserCreated");
 	CefRefPtr<CefListValue> args = msg->GetArgumentList(); // Retrieve the argument list object.
@@ -186,7 +186,7 @@ void DKCefApp::OnContextInitialized(){
 #ifndef DEBUG
 	CEF_REQUIRE_UI_THREAD();
 #endif
-	printf("[cefchild] DKCefApp::OnContextInitialized()\n");
+	printf("[DKCefChild] DKCefApp::OnContextInitialized()\n");
 	//CefRefreshWebPlugins(); //FIXME
 }
 
@@ -194,7 +194,7 @@ void DKCefApp::OnContextCreated(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFram
 #ifndef DEBUG
 	CEF_REQUIRE_UI_THREAD();
 #endif
-	printf("[cefchild] DKCefApp::OnContextCreated()\n");
+	printf("[DKCefChild] DKCefApp::OnContextCreated()\n");
 	if(!cefV8Handler){
 		printf("DKCefApp::OnContextCreated(): v8handler cefV8Handler\n");
 		return;
@@ -225,7 +225,7 @@ bool DKCefApp::OnProcessMessageReceived(CefRefPtr<CefBrowser> browser, CefProces
 	CEF_REQUIRE_UI_THREAD();
 #endif
 	std::string name = std::string(message->GetName());
-	printf("[cefchild] DKCefApp::OnProcessMessageReceived(");
+	printf("[DKCefChild] DKCefApp::OnProcessMessageReceived(");
 	printf(name.c_str());
 	printf(")\n");
 	if(!cefV8Handler){

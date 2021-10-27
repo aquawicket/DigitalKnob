@@ -5,7 +5,6 @@
 
 #include "DKCef/DKCef.h"
 
-/////////////////////////////////////////
 class DKCefV8 : public DKObjectT<DKCefV8>
 {
 public:
@@ -98,6 +97,5 @@ public:
 };
 
 REGISTER_OBJECT(DKCefV8, false);
-
 #endif //DKCefV8_H
 //#endif //USE_DKCef

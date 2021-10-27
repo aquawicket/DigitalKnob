@@ -5,7 +5,6 @@
 
 #include "DKDuktape/DKDuktape.h"
 
-/////////////////////////////////////////
 class DKCefJS : public DKObjectT<DKCefJS>
 {
 public:
@@ -42,6 +41,5 @@ public:
 };
 
 REGISTER_OBJECT(DKCefJS, true)
-
 #endif //DKCefJS_H
 #endif //USE_DKDuktape

@@ -11,9 +11,7 @@
 
 class DKCefWindow;
 
-////////////////
-struct DKBrowser
-{
+struct DKBrowser{
 	DKString id;
 	int top;
 	int left;
@@ -23,7 +21,6 @@ struct DKBrowser
 	CefRefPtr<CefBrowser> browser;
 };
 
-//////////////////////////////////////////////////////
 class DialogCallback : public CefRunFileDialogCallback 
 {
 public:
@@ -31,7 +28,6 @@ public:
 	IMPLEMENT_REFCOUNTING(DialogCallback);
 };
 
-/////////////////////////////////////
 class DKCef : public DKObjectT<DKCef>
 {
 public:
@@ -92,7 +88,5 @@ public:
 #endif
 };
 
-
 REGISTER_OBJECT(DKCef, true);
-
 #endif //DKCef_H
