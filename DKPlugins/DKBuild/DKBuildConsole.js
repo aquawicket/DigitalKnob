@@ -121,7 +121,7 @@ function DKBuildConsole_SelectOs() {
 	
 	console.log("\n")
     console.log("**** SELECT OS TO BUILD ****")
-	for(let n=1; n<OSes.length; n++){
+	for(let n=1; n<OSes.length+1; n++){
 		console.log(n+". "+OSes[n-1])	
 	}
 
