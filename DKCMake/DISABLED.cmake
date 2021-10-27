@@ -212,6 +212,7 @@ if(RASPBERRY) # Disabled for Raspberry Pi targets
 	DKDISABLE(DKMidi)
 	DKDISABLE(DKOcr)
 	DKDISABLE(DKSDLCef)
+	DKDISABLE(DKSDLText)
 	DKDISABLE(DKSFMLWindow)
 	DKDISABLE(DKWebSockets)
 	DKDISABLE(flac)
