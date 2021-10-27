@@ -114,7 +114,9 @@ bool DKFile::CopyDirectory(fs::path const& source, fs::path const& destination, 
 #endif
 	// Iterate through the source directory
 	for(fs::directory_iterator file(source); file != fs::directory_iterator(); ++file){
+#ifndef ANDROID
 		try{
+#endif
 			fs::path current(file->path());
 			if(fs::is_directory(current) && recursive){
 				// Found directory: Recursion
@@ -132,10 +134,12 @@ bool DKFile::CopyDirectory(fs::path const& source, fs::path const& destination, 
 				}
 			}
 		}
+#ifndef ANDROID
 		catch(fs::filesystem_error const & e){
 			std:: cerr << e.what() << '\n';
 		}
 	}
+#endif
 	return true;
 }
 

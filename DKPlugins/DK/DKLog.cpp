@@ -213,12 +213,14 @@ bool Log(const char* file, int line, const char* func, const DKString& input, co
 			if(DKClass::HasFunc("DKDebug::ShowStackTrace"))
 				DKClass::CallFunc("DKDebug::ShowStackTrace");
 		}
-		if(exception_on_errors || lvl <= DK_ASSERT){	
+		if(exception_on_errors || lvl <= DK_ASSERT){
+#ifndef ANDROID			
 			try{
 				throw output; // throw an exception
 			}
 			//catch (const std::string& e){
 			catch(...){
+#endif
 			#ifdef WIN32
 				output += "\n\n Would you like to exit the application?";
 				boxer::Selection sel = boxer::show(output.c_str(), "EXCEPTION", boxer::Style::Error, boxer::Buttons::YesNo);
@@ -227,7 +229,9 @@ bool Log(const char* file, int line, const char* func, const DKString& input, co
 					return false;
 				}
 			#endif
+#ifndef ANDROID
 			}
+#endif
 		}
 		return false;
 	}
