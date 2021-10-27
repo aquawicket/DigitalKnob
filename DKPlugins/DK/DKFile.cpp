@@ -91,7 +91,9 @@ bool DKFile::CopyDirectory(fs::path const& source, fs::path const& destination, 
 	DKDEBUGFUNC(source, destination, overwrite, recursive);
 	DebugPath(source.string());
 	DebugPath(destination.string());
+#ifndef ANDROID
 	try{
+#endif
 		// Check whether the function call is valid
 		if(!fs::exists(source) || !fs::is_directory(source))
 			return DKERROR("Source directory "+source.string()+" does not exist or is not a directory \n");
@@ -100,10 +102,14 @@ bool DKFile::CopyDirectory(fs::path const& source, fs::path const& destination, 
 			if(!fs::create_directories(destination))
 				return DKERROR("Unable to create destination directory "+destination.string()+" \n");
 		}
+#ifndef ANDROID
 	}
 	catch(fs::filesystem_error const & e){
+#endif
 		return DKERROR(toString(e.what())+" \n");
+#ifndef ANDROID
 	}
+#endif
 	// Iterate through the source directory
 	for(fs::directory_iterator file(source); file != fs::directory_iterator(); ++file){
 		try{
