@@ -105,12 +105,8 @@ bool DKFile::CopyDirectory(fs::path const& source, fs::path const& destination, 
 #ifndef ANDROID
 	}
 	catch(fs::filesystem_error const& e){
-#else
-	//fs::filesystem_error& e;
-#endif
-	//	return DKERROR(toString(e.what())+" \n");
-#ifndef ANDROID
-	//}
+		return DKERROR(toString(e.what())+" \n");
+	}
 #endif
 	// Iterate through the source directory
 	for(fs::directory_iterator file(source); file != fs::directory_iterator(); ++file){
@@ -133,8 +129,8 @@ bool DKFile::CopyDirectory(fs::path const& source, fs::path const& destination, 
 					fs::copy_file( current, destination / current.filename() );
 				}
 			}
-		}
 #ifndef ANDROID
+		}
 		catch(fs::filesystem_error const & e){
 			std:: cerr << e.what() << '\n';
 		}
