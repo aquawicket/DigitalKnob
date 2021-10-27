@@ -88,7 +88,8 @@ bool DKArchive::Extract(const DKString& file, const DKString& path){
 }
 
 bool DKArchive::Compress(const DKString& path, const DKString& file){
-	DKDEBUGFUNC(path, file);	
+	DKDEBUGFUNC(path, file);
+#ifndef ANDROID
 	if(!DKFile::PathExists(path))
 		return DKERROR("path does not exist ("+path+")\n");
 	DKStringArray files;
@@ -145,6 +146,8 @@ bool DKArchive::Compress(const DKString& path, const DKString& file){
 	archive_write_free(a);
 #endif
 	return true;
+#endif
+	return DKERROR("not implemented");
 }
 
 int DKArchive::copy_data(struct archive* ar, struct archive* aw){
