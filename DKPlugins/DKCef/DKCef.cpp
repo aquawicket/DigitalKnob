@@ -202,23 +202,23 @@ if(!same(DKV8::multi_process, "ON")){
 #ifdef WIN32
 	#if defined(WIN32) && !defined(WIN64)
 		#ifdef DEBUG
-			DKString ep = DKFile::local_assets + "DKCef/win32Debug/cefchild.exe";
+			DKString ep = DKFile::local_assets + "DKCef/win32Debug/DKCefChild.exe";
 		#else
-			DKString ep = DKFile::local_assets + "DKCef/win32Release/cefchild.exe";
+			DKString ep = DKFile::local_assets + "DKCef/win32Release/DKCefChild.exe";
 		#endif
 	#endif
 	#ifdef WIN64
 		#ifdef DEBUG
-			DKString ep = DKFile::local_assets + "DKCef/win64Debug/cefchild.exe";
+			DKString ep = DKFile::local_assets + "DKCef/win64Debug/DKCefChild.exe";
 		#else
-			DKString ep = DKFile::local_assets + "DKCef/win64Release/cefchild.exe";
+			DKString ep = DKFile::local_assets + "DKCef/win64Release/DKCefChild.exe";
 		#endif
 	#endif
 	if(!DKFile::PathExists(ep)){
         DKWARN("DKCef::Init(): file not found: "+ep+"\n");
         //TODO: disable multi-process
     }
-	CefString(&settings.browser_subprocess_path) = ep.c_str(); //cefchild.exe
+	CefString(&settings.browser_subprocess_path) = ep.c_str(); //DKCefChild.exe
 #endif
 #ifdef MAC
 	DKString exepath;
@@ -230,12 +230,12 @@ if(!same(DKV8::multi_process, "ON")){
 	CefString(&settings.browser_subprocess_path) = ep.c_str(); //helper
 #endif
 #ifdef LINUX
-	DKString ep = DKFile::local_assets + "DKCef/cefchild";
+	DKString ep = DKFile::local_assets + "DKCef/DKCefChild";
 	if(!DKFile::PathExists(ep)){
         DKERROR("DKCef::Init(): file not found: "+ep+"\n");
         //TODO: disable multi-process
     }
-	CefString(&settings.browser_subprocess_path) = ep.c_str(); //cefchild
+	CefString(&settings.browser_subprocess_path) = ep.c_str(); //DKCefChild
 #endif
 	int major_version = cef_version_info(0);
 	int build_version = cef_version_info(4);
