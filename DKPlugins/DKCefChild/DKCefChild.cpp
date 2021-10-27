@@ -1,24 +1,47 @@
-//#include "DKCefChild/DKCefChild.h"
 #include "DKCefChild.h"
 
-//#ifndef LINUX
-//#include "include/cef_sandbox_win.h"
-//#endif
+#ifdef WIN
+	#ifdef CEF_USE_SANDBOX
+		#include "include/cef_sandbox_win.h"
+	#ENDIF
+#endif
+
+#ifdef MAC
+	#include "include/wrapper/cef_library_loader.h"
+	#ifdef CEF_USE_SANDBOX
+		#include "include/cef_sandbox_mac.h"
+	#endif
+#endif
+
+#ifdef LINUX
+	#ifdef CEF_USE_SANDBOX
+		#include "include/cef_sandbox_linux.h"
+	#endif
+#endif
 
 CefRefPtr<CefListValue> DKCefV8Handler::myRetval;
 
 int main(int argc, char* argv[]){
-	printf("[cefchild] main()\n");
+	printf("[DKCefChild] main()\n");
+
+#ifdef CEF_USE_SANDBOX
+	CefScopedSandboxContext sandbox_context;
+	if(!sandbox_context.Initialize(argc, argv))
+		return 1;
+#endif
+
+#ifdef MAC
+	CefScopedLibraryLoader library_loader;
+	if(!library_loader.LoadInMain())
+		return 1;
+#endif
+
 #ifdef WIN32
 	CefMainArgs main_args;
 #else
 	CefMainArgs main_args(argc, argv);
 #endif
-//  void* sandbox_info = NULL;
-//#ifndef LINUX
-//	CefScopedSandboxInfo scoped_sandbox;
-//	sandbox_info = scoped_sandbox.sandbox_info();
-//#endif
+
 	CefRefPtr<DKCefApp> app(new DKCefApp);
 	return CefExecuteProcess(main_args, app.get(), NULL);
 	//return CefExecuteProcess(main_args, app.get(), sandbox_info);

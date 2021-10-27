@@ -14,6 +14,9 @@
 #include "DKCef/DKCefWindow.h"
 #include "DKDuktape/DKDuktape.h"
 
+#ifdef MAC
+#include "include/wrapper/cef_library_loader.h"
+#endif
 
 #ifdef WIN32
 #include <delayimp.h>
@@ -122,8 +125,16 @@ bool DKCef::Init(){
 	}
 	__HrLoadAllImportsForDll("libcef.dll"); //delay loading the DLL to move it's locations  
 #endif
+
 	//IMPORTANT INFORMATION
 	//https://bitbucket.org/chromiumembedded/cef/wiki/GeneralUsage.md#markdown-header-application-structure
+	
+#ifdef MAC
+	CefScopedLibraryLoader library_loader;
+	if(!library_loader.LoadInMain())
+		return 1;
+#endif
+	
 #ifdef WIN32
 	CefMainArgs args(GetModuleHandle(NULL));
 #else
@@ -133,12 +144,16 @@ bool DKCef::Init(){
 		cefApp = new DKCefApp();
 		initialized = true;
 	}
+	
+if(!same(DKV8::multi_process, "ON")){
 	int exit_code = CefExecuteProcess(args, cefApp.get(), NULL);
 	if(exit_code >= 0) {
 	  // The sub-process has completed so return here.
 		return false;
 		DKClass::_Close("DKSDLWindow0");
 	}
+}
+
 	// checkout detailed settings options http://magpcss.org/ceforum/apidocs/projects/%28default%29/_cef_settings_t.html
 	// CefString(&settings.log_file).FromASCII("");
 	DKV8::SetFlags();
