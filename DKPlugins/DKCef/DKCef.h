@@ -24,7 +24,7 @@ struct DKBrowser{
 class DialogCallback : public CefRunFileDialogCallback 
 {
 public:
-	void OnFileDialogDismissed(int selected_accept_filter, const std::vector<CefString>& file_paths);
+	void OnFileDialogDismissed(int selected_accept_filter, const std::vector<CefString>& file_paths) override;
 	IMPLEMENT_REFCOUNTING(DialogCallback);
 };
 
