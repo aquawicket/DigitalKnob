@@ -21,7 +21,6 @@ class DKCefV8Handler;
 typedef std::map<DKString, std::function<bool(CefArgs, CefReturn)>>::iterator it_type;
 //#endif
 
-//////////
 class DKV8
 {
 public:
@@ -63,7 +62,6 @@ public:
 	static DKString sandbox;
 };
 
-//////////////////////////////////////////
 class DKCefV8Handler : public CefV8Handler
 {
 public:
@@ -77,7 +75,6 @@ public:
 	IMPLEMENT_REFCOUNTING(DKCefV8Handler);
 };
 
-///////////////////////////////////////////////////////////////////////////////////////////////
 class DKCefApp : public CefApp, public CefBrowserProcessHandler, public CefRenderProcessHandler
 {
 public:
@@ -86,16 +83,14 @@ public:
 
 	//bool SendEvent(const DKString& id, const DKString& type, const DKString& value);
 
-	virtual void OnBeforeCommandLineProcessing(const CefString& process_type, CefRefPtr<CefCommandLine> command_line);
+	virtual void OnBeforeCommandLineProcessing(const CefString& process_type, CefRefPtr<CefCommandLine> command_line) override;
 	virtual void OnBrowserCreated(CefRefPtr<CefBrowser> browser);
-	virtual void OnContextInitialized();
-	virtual void OnContextCreated(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefV8Context> context) OVERRIDE;
+	virtual void OnContextInitialized() override;
+	virtual void OnContextCreated(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefV8Context> context) override;
 	virtual bool OnProcessMessageReceived(CefRefPtr<CefBrowser> browser, CefProcessId source_process, CefRefPtr<CefProcessMessage> message);
-	virtual void OnUncaughtException(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefV8Context> context, CefRefPtr<CefV8Exception> exception, CefRefPtr<CefV8StackTrace> stackTrace);
+	virtual void OnUncaughtException(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefV8Context> context, CefRefPtr<CefV8Exception> exception, CefRefPtr<CefV8StackTrace> stackTrace) override;
 
 	IMPLEMENT_REFCOUNTING(DKCefApp);
 };
-
-
 
 #endif //DKCefApp_H
