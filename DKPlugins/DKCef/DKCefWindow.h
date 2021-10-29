@@ -76,7 +76,7 @@ public:
 	virtual CefRefPtr<CefKeyboardHandler> GetKeyboardHandler() override { return this; }
 	virtual CefRefPtr<CefLifeSpanHandler> GetLifeSpanHandler() override { return this; }
 	virtual CefRefPtr<CefLoadHandler> GetLoadHandler() override { return this; }
-	virtual CefRefPtr<CefPrintHandler> GetPrintHandler() override { return this; }
+	virtual CefRefPtr<CefPrintHandler> GetPrintHandler() { return this; }
 	virtual CefRefPtr<CefRenderHandler> GetRenderHandler() override { return this; }
 	
 	bool DoClose(CefRefPtr<CefBrowser> browser) override;
@@ -241,7 +241,7 @@ public:
 		CEF_REQUIRE_UI_THREAD();
 	}
 
-	void OnPopupSize(CefRefPtr<CefBrowser> browser, const CefRect& rect) overrite {
+	void OnPopupSize(CefRefPtr<CefBrowser> browser, const CefRect& rect) override {
 		DKDEBUGFUNC(browser, "const CefRect&");
 		CEF_REQUIRE_UI_THREAD();
 	}
