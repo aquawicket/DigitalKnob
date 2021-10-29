@@ -82,7 +82,7 @@ public:
 	bool DoClose(CefRefPtr<CefBrowser> browser) override;
 	void DoFrame();
 
-	void GetViewRect(CefRefPtr<CefBrowser> browser, CefRect& rect) override{
+	void GetViewRect(CefRefPtr<CefBrowser> browser, CefRect& rect) {
 		DKDEBUGFUNC(browser, "CefRect&");
 		CEF_REQUIRE_UI_THREAD();
 		//rect = CefRect(0, 0, dkCef->width, dkCef->height);
