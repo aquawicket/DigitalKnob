@@ -64,6 +64,7 @@ if(NOT CMAKE_HOST_WIN32) # Disabled on Non-Windows host machines
 	DKDISABLE(python)
 	DKDISABLE(php-win32-vs16-x64)
 	DKDISABLE(vs16-redistributable)
+	DKDISABLE(glintercept)
 endif()
 if(WIN) # Disabled for Windows targets
 	#DKDISABLE(bzip2)
