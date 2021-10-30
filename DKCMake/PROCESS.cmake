@@ -526,7 +526,7 @@ if(MAC)
 	# Create icons
 	dk_makeDirectory(${DKPROJECT}/icons/mac)
 	dk_makeDirectory(${DKPROJECT}/icons/mac/icons.iconset)
-    DKEXECUTE_PROCESS("sips -z 16 16 ${DKPROJECT}/icons/icon.png --out ${DKPROJECT}/icons/mac/icons.iconset/icon_16x16.png" WORKING_DIRECTORY ${DIGITALKNOB})
+    DKEXECUTE_PROCESS(sips -z 16 16 ${DKPROJECT}/icons/icon.png --out ${DKPROJECT}/icons/mac/icons.iconset/icon_16x16.png WORKING_DIRECTORY ${DIGITALKNOB})
     #CPP_DK_Execute("sips -z 32 32 ${DKPROJECT}/icons/icon.png --out ${DKPROJECT}/icons/mac/icons.iconset/icon_16x16@2x.png")
     #CPP_DK_Execute("sips -z 32 32 ${DKPROJECT}/icons/icon.png --out ${DKPROJECT}/icons/mac/icons.iconset/icon_32x32.png")
     #CPP_DK_Execute("sips -z 64 64 ${DKPROJECT}/icons/icon.png --out ${DKPROJECT}/icons/mac/icons.iconset/icon_32x32@2x.png")
