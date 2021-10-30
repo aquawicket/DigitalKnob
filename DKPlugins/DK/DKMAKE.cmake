@@ -9,6 +9,7 @@ endif()
 if(MAC)
 	DKDEPEND(boxer)
 	DKDEPEND(core_graphics)
+	DKDEPEND(carbon)
 endif()
 
 if(IOS OR IOSSIM)
