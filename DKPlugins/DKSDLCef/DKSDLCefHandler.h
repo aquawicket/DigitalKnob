@@ -80,7 +80,7 @@ public:
 	void OnLoadingStateChange(CefRefPtr<CefBrowser> browser, bool isLoading, bool canGoBack, bool canGoForward) override;
 	void OnPaint(CefRefPtr<CefBrowser> browser, PaintElementType type, const RectList &dirtyRects, const void *buffer, int width, int height) override;
 	void OnPopupShow(CefRefPtr<CefBrowser> browser, bool show) override;
-	void OnPopupSize(CefRefPtr<CefBrowser> browser, const CefRect& rect);
+	void OnPopupSize(CefRefPtr<CefBrowser> browser, const CefRect& rect) override;
 	bool OnPreKeyEvent(CefRefPtr<CefBrowser> browser, const CefKeyEvent& event, CefEventHandle os_event, bool* is_keyboard_shortcut);
 	bool OnPrintDialog(CefRefPtr<CefBrowser> browser, bool has_selection, CefRefPtr<CefPrintDialogCallback> callback);
 	bool OnPrintJob(CefRefPtr<CefBrowser> browser, const CefString& document_name, const CefString& pdf_file_path, CefRefPtr<CefPrintJobCallback> callback){ return true; }
