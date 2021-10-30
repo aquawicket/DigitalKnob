@@ -4,7 +4,8 @@ if(WIN)
 endif()
 
 if(MAC)
-	#TODO
+	FIND_LIBRARY(opengl_lib OpenGL)
+	MAC_LIB(${opengl_lib})
 endif()
 
 if(IOS)
