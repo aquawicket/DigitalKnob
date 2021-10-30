@@ -533,21 +533,21 @@ if(MAC)
         MACOSX_BUNDLE TRUE
         MACOSX_BUNDLE_BUNDLE_NAME "${APP_NAME}"
 		MACOSX_BUNDLE_ICON_FILE "logo"
-        MACOSX_BUNDLE_INFO_PLIST path/to/Info.plist
+        #MACOSX_BUNDLE_INFO_PLIST path/to/Info.plist
         MACOSX_BUNDLE_BUNDLE_VERSION "1.0"
         MACOSX_BUNDLE_LONG_VERSION_STRING "${APP_NAME} v1.0"
-        MACOSX_BUNDLE_SHORT_VERSION_STRING "2.0"
+        MACOSX_BUNDLE_SHORT_VERSION_STRING "1.0"
         MACOSX_BUNDLE_GUI_IDENTIFIER com.digitalknob.${APP_NAME}
         MACOSX_BUNDLE_COPYRIGHT "(C) 2021 DigitalKnob"
-        MACOSX_RPATH TRUE
+        #MACOSX_RPATH TRUE
         MACOSX_FRAMEWORK_IDENTIFIER "com.digitalknob.bundle.${APP_NAME}"
-        XCODE_ATTRIBUTE_LD_RUNPATH_SEARCH_PATHS "@loader_path/Libraries"
+        #XCODE_ATTRIBUTE_LD_RUNPATH_SEARCH_PATHS "@loader_path/Libraries"
         #RESOURCE "${RESOURCE_FILES}"
-        XCODE_ATTRIBUTE_ENABLE_HARDENED_RUNTIME TRUE
-        XCODE_ATTRIBUTE_EXECUTABLE_NAME "wrapper"
+        #XCODE_ATTRIBUTE_ENABLE_HARDENED_RUNTIME TRUE
+        #XCODE_ATTRIBUTE_EXECUTABLE_NAME "wrapper"
     )
+	#set_xcode_property(${APP_NAME} "Other Code Signing Flags" "--deep")
 	
-	set_xcode_property(${APP_NAME} "Other Code Signing Flags" "--deep")
 	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${LIBS})
 	
 	foreach(plugin ${dkdepend_list})
