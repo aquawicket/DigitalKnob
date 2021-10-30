@@ -422,7 +422,8 @@ if(WIN_32)
 	add_custom_command(
 		TARGET ${APP_NAME}
 		POST_BUILD
-		COMMAND ${CMAKE_COMMAND} -E echo "TARGET_FILE:APP_NAME = $<TARGET_FILE:${APP_NAME}>"
+		COMMAND ${CMAKE_COMMAND} -E echo "!!!!!! TARGET_FILE:APP_NAME = $<TARGET_FILE:${APP_NAME}>"
+		COMMAND ${CMAKE_COMMAND} -E echo "!!!!!! CONFIG = $<CONFIG>"
 	)
 	
 endif(WIN_32)
@@ -589,8 +590,8 @@ if(MAC)
 		BUNDLE True
 		MACOSX_BUNDLE_GUI_IDENTIFIER digitalknob.${APP_NAME}
 		MACOSX_BUNDLE_BUNDLE_NAME ${APP_NAME}
-		MACOSX_BUNDLE_BUNDLE_VERSION "0.1"
-		MACOSX_BUNDLE_SHORT_VERSION_STRING "0.1"
+		#MACOSX_BUNDLE_BUNDLE_VERSION "0.1"
+		#MACOSX_BUNDLE_SHORT_VERSION_STRING "0.1"
 	)
 	
 	foreach(plugin ${dkdepend_list})
@@ -601,6 +602,14 @@ if(MAC)
 	
 	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${LIBS})
 	
+	
+	add_custom_command(
+		TARGET ${APP_NAME}
+		POST_BUILD
+		COMMAND ${CMAKE_COMMAND} -E echo "!!!!!! TARGET_FILE:APP_NAME = $<TARGET_FILE:${APP_NAME}>"
+		COMMAND ${CMAKE_COMMAND} -E echo "!!!!!! CONFIG = $<CONFIG>"
+	)
+	
 	# Copy the CEF framework into the Frameworks directory.
 	if(EXISTS ${CEF})
 	message(STATUS "Adding Chromium Embedded Framework.framework to bundle . . .")
@@ -608,7 +617,7 @@ if(MAC)
 		TARGET ${APP_NAME}
 		POST_BUILD
 		COMMAND ${CMAKE_COMMAND} -E copy_directory
-				"${CEF}/Debug/Chromium Embedded Framework.framework"
+				"${CEF}/$<CONFIG>/Chromium Embedded Framework.framework"
 				"$<TARGET_FILE:${APP_NAME}>/Contents/Frameworks/Chromium Embedded Framework.framework"
 	)
 	endif()
