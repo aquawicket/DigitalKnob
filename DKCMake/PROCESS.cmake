@@ -639,7 +639,7 @@ if(MAC)
 	# Make bundle run in Terminal
 	# https://github.com/pyinstaller/pyinstaller/issues/5154#issuecomment-690646012
 	if(true)
-		message(STATUS "Making bundle app run in terminal . . .")
+		message(STATUS "Making bundle app run in terminal on double-click . . .")
 		DKSET(TERMINAL_SCRIPT 
 			"\#!/bin/bash\n"
 			"dir=$(dirname $0)\n"
