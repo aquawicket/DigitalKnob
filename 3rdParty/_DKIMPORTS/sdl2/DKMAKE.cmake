@@ -10,6 +10,7 @@ DKDEPEND(opengl)
 if(MAC)
 	DKDEPEND(libiconv)
 	DKDEPEND(core_audio)
+	DKDEPEND(audio_toolbox)
 endif()
 
 ### VERSION ###
