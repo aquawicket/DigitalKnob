@@ -485,7 +485,6 @@ if(WIN_64)
 		endif()	
 	endforeach()
 	
-	
 	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${LIBS})
 	##set_source_files_properties(${DIGITALKNOB}/stdafx.cpp PROPERTIES COMPILE_FLAGS "/Ycstdafx.h")
 	
@@ -553,19 +552,13 @@ if(MAC)
 		DKREMOVE(${DKPROJECT}/assets/cef.log)
 		DKREMOVE(${DKPROJECT}/assets/log.txt)
 	
-		## ICONS 
-		## // TODO
-		## message(STATUS "Building icons for ${APP_NAME} . . .")
-	
 		## copy the assets into the bundle resources
 		if(DEBUG)
-			#dk_makeDirectory(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app/Contents/Resources)
 			dk_makeDirectory(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app/Contents/Resources)
 			DKCOPY(${DKPROJECT}/assets/ ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app/Contents/Resources TRUE)
 			DKCOPY(${DKPROJECT}/icons/mac/logo.icns ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app/Contents/Resources/logo.icns TRUE)
 		endif()
 		if(RELEASE)
-			#dk_makeDirectory(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.app/Contents/Resources)
 			dk_makeDirectory(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.app/Contents/Resources)
 			DKCOPY(${DKPROJECT}/assets/ ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.app/Contents/Resources TRUE)
 			DKCOPY(${DKPROJECT}/icons/mac/logo.icns ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.app/Contents/Resources/logo.icns TRUE)
@@ -642,7 +635,6 @@ if(MAC)
 	#	)
 	#endif()
 	
-	#DKUPDATE_INFO_Plist(${APP_NAME}) #this may need to be run at post build
 	#set_target_properties(${APP_NAME} PROPERTIES DEBUG_POSTFIX d)
 endif()
 
@@ -664,7 +656,6 @@ if(IOS)
 		DKREMOVE(${DKPROJECT}/assets/log.txt)
 
 		## copy the assets into the app
-		message(STATUS "Building icons for ${APP_NAME} . . .")
 		if(DEBUG)
 			#dk_makeDirectory(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app/assets)
 			dk_makeDirectory(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app/assets)
@@ -741,7 +732,6 @@ if(IOSSIM)
 		DKREMOVE(${DKPROJECT}/assets/log.txt)
 	
 		## copy the assets into the app
-		message(STATUS "Building icons for ${APP_NAME} . . .")
 		if(DEBUG)
 			dk_makeDirectoy(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app/assets)
 			DKCOPY(${DKPROJECT}/assets/ ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app/assets TRUE)
