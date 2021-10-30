@@ -627,9 +627,6 @@ if(MAC)
 			COMMAND ${CMAKE_COMMAND} -E copy_directory
 					"${CEF}/$<CONFIG>/Chromium Embedded Framework.framework"
 					"$<TARGET_FILE_DIR:${APP_NAME}>/../Frameworks/Chromium Embedded Framework.framework"
-			COMMAND ${CMAKE_COMMAND} -E copy
-					"${DKPLUGINS}/DKCefChild/${OS}/$<CONFIG>/DKCefChild.app"
-					"$<TARGET_FILE_DIR:${APP_NAME}>/../Frameworks/${APP_NAME} Helper.app"
 		)
 	endif()
 	
