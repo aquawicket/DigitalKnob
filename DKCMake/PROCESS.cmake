@@ -423,6 +423,7 @@ if(WIN_32)
 		TARGET ${APP_NAME}
 		POST_BUILD
 		COMMAND ${CMAKE_COMMAND} -E echo "!!!!!! TARGET_FILE:APP_NAME = $<TARGET_FILE:${APP_NAME}>"
+		COMMAND ${CMAKE_COMMAND} -E echo "!!!!!! TARGET_FILE_DIR:APP_NAME =  $<TARGET_FILE_DIR:${APP_NAME}>
 		COMMAND ${CMAKE_COMMAND} -E echo "!!!!!! CONFIG = $<CONFIG>"
 	)
 	
@@ -607,6 +608,7 @@ if(MAC)
 		TARGET ${APP_NAME}
 		POST_BUILD
 		COMMAND ${CMAKE_COMMAND} -E echo "!!!!!! TARGET_FILE:APP_NAME = $<TARGET_FILE:${APP_NAME}>"
+		COMMAND ${CMAKE_COMMAND} -E echo "!!!!!! TARGET_FILE_DIR:APP_NAME =  $<TARGET_FILE_DIR:${APP_NAME}>
 		COMMAND ${CMAKE_COMMAND} -E echo "!!!!!! CONFIG = $<CONFIG>"
 	)
 	
@@ -618,7 +620,7 @@ if(MAC)
 		POST_BUILD
 		COMMAND ${CMAKE_COMMAND} -E copy_directory
 				"${CEF}/$<CONFIG>/Chromium Embedded Framework.framework"
-				"$<TARGET_FILE:${APP_NAME}>/Contents/Frameworks/Chromium Embedded Framework.framework"
+				"$<TARGET_FILE_DIR:${APP_NAME}>/Contents/Frameworks/Chromium Embedded Framework.framework"
 	)
 	endif()
 	
