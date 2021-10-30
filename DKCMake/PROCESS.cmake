@@ -531,6 +531,7 @@ if(MAC)
         XCODE_ATTRIBUTE_CODE_SIGN_IDENTITY ""
         OUTPUT_NAME "${APP_NAME}"
         MACOSX_BUNDLE TRUE
+		MACOSX_BUNDLE_EXECUTABLE_NAME "wrapper"
         MACOSX_BUNDLE_BUNDLE_NAME "${APP_NAME}"
 		MACOSX_BUNDLE_ICON_FILE "logo"
         #MACOSX_BUNDLE_INFO_PLIST path/to/Info.plist
@@ -545,6 +546,7 @@ if(MAC)
         #RESOURCE "${RESOURCE_FILES}"
         #XCODE_ATTRIBUTE_ENABLE_HARDENED_RUNTIME TRUE
         #XCODE_ATTRIBUTE_EXECUTABLE_NAME "wrapper"
+		#MACOSX_BUNDLE_INFO_PLIST ${DKCMAKE}/Info.plist
     )
 	#set_xcode_property(${APP_NAME} "Other Code Signing Flags" "--deep")
 	
