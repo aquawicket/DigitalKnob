@@ -617,19 +617,7 @@ if(MAC)
 	
 	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${LIBS})
 	
-	add_custom_command(
-		TARGET ${APP_NAME}
-		POST_BUILD
-		COMMAND ${CMAKE_COMMAND} -E echo "!!!!!! TARGET_FILE:APP_NAME = $<TARGET_FILE:${APP_NAME}>"
-		COMMAND ${CMAKE_COMMAND} -E echo "!!!!!! TARGET_FILE_DIR:APP_NAME = $<TARGET_FILE_DIR:${APP_NAME}>"
-		COMMAND ${CMAKE_COMMAND} -E echo "!!!!!! CONFIG = $<CONFIG>"
-	)
-	
-	# Copy the CEF framework and DKCefChild into the app bundle
-	if(NOT EXISTS "${DKPLUGINS}/DKCefChild/${OS}/Debug/DKCefChild.app")
-		message(FATAL_ERROR "cannot locate ${DKPLUGINS}/DKCefChild/${OS}/Debug/DKCefChild.app")
-	endif()
-	
+	# Copy the CEF framework into the app bundle
 	if(EXISTS ${CEF})
 		message(STATUS "Adding Chromium Embedded Framework.framework to bundle . . .")
 		add_custom_command(
@@ -638,6 +626,18 @@ if(MAC)
 			COMMAND ${CMAKE_COMMAND} -E copy_directory
 					"${CEF}/$<CONFIG>/Chromium Embedded Framework.framework"
 					"$<TARGET_FILE_DIR:${APP_NAME}>/../Frameworks/Chromium Embedded Framework.framework"
+			COMMAND ${CMAKE_COMMAND} -E copy
+					"${DKPLUGINS}/DKCefChild/${OS}/$<CONFIG>/DKCefChild.app"
+					"$<TARGET_FILE_DIR:${APP_NAME}>/../Frameworks/${APP_NAME} Helper.app"
+		)
+	endif()
+	
+	# Copy the DKCefChild into the app bundle
+	if(EXISTS "${DKPLUGINS}/DKCefChild/${OS}/$<CONFIG>/DKCefChild.app")
+		message(STATUS "Adding Chromium Embedded Framework.framework to bundle . . .")
+		add_custom_command(
+			TARGET ${APP_NAME}
+			POST_BUILD
 			COMMAND ${CMAKE_COMMAND} -E copy
 					"${DKPLUGINS}/DKCefChild/${OS}/$<CONFIG>/DKCefChild.app"
 					"$<TARGET_FILE_DIR:${APP_NAME}>/../Frameworks/${APP_NAME} Helper.app"
