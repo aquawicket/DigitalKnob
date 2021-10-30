@@ -594,6 +594,18 @@ if(MAC)
 	
 	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${LIBS})
 	
+	# Copy the CEF framework into the Frameworks directory.
+	if(CEF)
+	add_custom_command(
+		TARGET ${APP_NAME}
+		POST_BUILD
+		COMMAND ${CMAKE_COMMAND} -E copy_directory
+				"${CEF}/Debug/Chromium Embedded Framework.framework"
+				"${APP_NAME}/Contents/Frameworks/Chromium Embedded Framework.framework"
+		VERBATIM
+	)
+	endif()
+	
 	#DKUPDATE_INFO_Plist(${APP_NAME}) #this may need to be run at post build
 	#set_target_properties(${APP_NAME} PROPERTIES DEBUG_POSTFIX d)
 endif()
