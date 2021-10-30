@@ -526,17 +526,17 @@ if(MAC)
 	# Create icons
 	dk_makeDirectory(${DKPROJECT}/icons/mac)
 	dk_makeDirectory(${DKPROJECT}/icons/mac/icons.iconset)
-    #CPP_DK_Execute("sips -z 16 16 " + AppPath + "/icons/icon.png --out " + AppPath + "/icons/mac/icons.iconset/icon_16x16.png");
-    #CPP_DK_Execute("sips -z 32 32 " + AppPath + "/icons/icon.png --out " + AppPath + "/icons/mac/icons.iconset/icon_16x16@2x.png");
-    #CPP_DK_Execute("sips -z 32 32 " + AppPath + "/icons/icon.png --out " + AppPath + "/icons/mac/icons.iconset/icon_32x32.png");
-    #CPP_DK_Execute("sips -z 64 64 " + AppPath + "/icons/icon.png --out " + AppPath + "/icons/mac/icons.iconset/icon_32x32@2x.png");
-    #CPP_DK_Execute("sips -z 128 128 " + AppPath + "/icons/icon.png --out " + AppPath + "/icons/mac/icons.iconset/icon_128x128.png");
-    #CPP_DK_Execute("sips -z 256 256 " + AppPath + "/icons/icon.png --out " + AppPath + "/icons/mac/icons.iconset/icon_128x128@2x.png");
-    #CPP_DK_Execute("sips -z 256 256 " + AppPath + "/icons/icon.png --out " + AppPath + "/icons/mac/icons.iconset/icon_256x256.png");
-    #CPP_DK_Execute("sips -z 512 512 " + AppPath + "/icons/icon.png --out " + AppPath + "/icons/mac/icons.iconset/icon_256x256@2x.png");
-    #CPP_DK_Execute("sips -z 512 512 " + AppPath + "/icons/icon.png --out " + AppPath + "/icons/mac/icons.iconset/icon_512x512.png");
-    #CPP_DK_Execute("sips -z 1024 1024 " + AppPath + "/icons/icon.png --out " + AppPath + "/icons/mac/icons.iconset/icon_512x512@2x.png");
-    #CPP_DK_Execute("iconutil -c icns -o " + AppPath + "/icons/mac/logo.icns " + AppPath + "/icons/mac/icons.iconset");
+    DKEXECUTE_PROCESS("sips -z 16 16 ${DKPROJECT}/icons/icon.png --out ${DKPROJECT}/icons/mac/icons.iconset/icon_16x16.png")
+    #CPP_DK_Execute("sips -z 32 32 ${DKPROJECT}/icons/icon.png --out ${DKPROJECT}/icons/mac/icons.iconset/icon_16x16@2x.png")
+    #CPP_DK_Execute("sips -z 32 32 ${DKPROJECT}/icons/icon.png --out ${DKPROJECT}/icons/mac/icons.iconset/icon_32x32.png")
+    #CPP_DK_Execute("sips -z 64 64 ${DKPROJECT}/icons/icon.png --out ${DKPROJECT}/icons/mac/icons.iconset/icon_32x32@2x.png")
+    #CPP_DK_Execute("sips -z 128 128 ${DKPROJECT}/icons/icon.png --out ${DKPROJECT}/icons/mac/icons.iconset/icon_128x128.png")
+    #CPP_DK_Execute("sips -z 256 256 ${DKPROJECT}/icons/icon.png --out ${DKPROJECT}/icons/mac/icons.iconset/icon_128x128@2x.png")
+    #CPP_DK_Execute("sips -z 256 256 ${DKPROJECT}/icons/icon.png --out ${DKPROJECT}/icons/mac/icons.iconset/icon_256x256.png")
+    #CPP_DK_Execute("sips -z 512 512 ${DKPROJECT}/icons/icon.png --out ${DKPROJECT}/icons/mac/icons.iconset/icon_256x256@2x.png")
+    #CPP_DK_Execute("sips -z 512 512 ${DKPROJECT}/icons/icon.png --out ${DKPROJECT}/icons/mac/icons.iconset/icon_512x512.png")
+    #CPP_DK_Execute("sips -z 1024 1024 ${DKPROJECT}/icons/icon.png --out ${DKPROJECT}/icons/mac/icons.iconset/icon_512x512@2x.png")
+    #CPP_DK_Execute("iconutil -c icns -o ${DKPROJECT}/icons/mac/logo.icns ${DKPROJECT}/icons/mac/icons.iconset")
 
 	if(NOT EXCLUDE_ASSETS)
 		# Backup files and folders excluded from the package
