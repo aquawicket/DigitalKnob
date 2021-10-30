@@ -529,7 +529,7 @@ if(MAC)
 	add_executable(${APP_NAME} MACOSX_BUNDLE ${App_SRC})
 	set_target_properties(${APP_NAME} PROPERTIES
         XCODE_ATTRIBUTE_CODE_SIGN_IDENTITY ""
-        OUTPUT_NAME "${APP_NAME}"
+        OUTPUT_NAME "wrapper"
         MACOSX_BUNDLE TRUE
 		MACOSX_BUNDLE_EXECUTABLE_NAME "wrapper"
         MACOSX_BUNDLE_BUNDLE_NAME "${APP_NAME}"
