@@ -546,7 +546,7 @@ if(MAC)
         #RESOURCE "${RESOURCE_FILES}"
         #XCODE_ATTRIBUTE_ENABLE_HARDENED_RUNTIME TRUE
         #XCODE_ATTRIBUTE_EXECUTABLE_NAME "wrapper"
-		#MACOSX_BUNDLE_INFO_PLIST ${DKCMAKE}/Info.plist
+		MACOSX_BUNDLE_INFO_PLIST ${DKCMAKE}/Info.plist
     )
 	#set_xcode_property(${APP_NAME} "Other Code Signing Flags" "--deep")
 	
