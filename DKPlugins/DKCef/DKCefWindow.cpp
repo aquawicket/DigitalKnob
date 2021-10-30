@@ -276,7 +276,7 @@ bool DKCefWindow::GetWidth(const void* input, void* output)
 #ifdef MAC
 	//TODO
 	NSView* nsview = (NSView*)dkCef->current_browser->GetHost()->GetWindowHandle();
-	int width = nsview.frame.width;
+	int width = nsview.frame.size.width;
 	*(int*)output = width;
 	return true;
 #endif
