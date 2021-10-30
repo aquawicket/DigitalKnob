@@ -232,6 +232,15 @@ bool DKSDLWindow::Init() {
     DKINFO("##############################\n");
     //DKINFO("GL_MAJOR_VERSION = " + gl_major_version + "\n");
     //DKINFO("GL_MINOR_VERSION = " + gl_minor_version + "\n");
+    int profile;
+    SDL_GL_GetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, &profile);
+    DKINFO("SDL_GL_CONTEXT_PROFILE_MASK = "+ toString(profile)+"\n");
+    int major;
+    SDL_GL_GetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, &major);
+    DKINFO("SDL_GL_CONTEXT_MAJOR_VERSION = " + toString(major)+"\n");
+    int minor;
+    SDL_GL_GetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, &minor);
+    DKINFO("SDL_GL_CONTEXT_MINOR_VERSION = "+ toString(minor)+"\n");
     DKINFO("GL_VERSION = " + gl_version + "\n");
     DKINFO("GL_VENDOR = " + gl_vendor + "\n");
     DKINFO("GL_RENDERER = " + gl_renderer + "\n");
