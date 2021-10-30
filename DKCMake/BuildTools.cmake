@@ -115,7 +115,8 @@ if(CMAKE_HOST_WIN32 AND ANDROID)
 	# Andeoid arm32
 
 	# https://cmake.org/cmake/help/latest/manual/cmake-toolchains.7.html#cross-compiling-for-android
-	DKSET(DKCMAKE_ANDROID32 ${CMAKE_EXE} -G ${VISUALSTUDIO_NAME} -A ARM 
+	DKSET(DKCMAKE_ANDROID32 ${CMAKE_EXE} -G ${VISUALSTUDIO_NAME} -A ARM
+	"-DCMAKE_CXX_FLAGS=-std=c++1z"
 	-DCMAKE_SYSTEM_NAME=Android 
 	-DCMAKE_SYSTEM_VERSION=26 
 	-DCMAKE_ANDROID_ARCH_ABI=armeabi-v7a 
