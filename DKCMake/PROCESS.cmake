@@ -595,7 +595,8 @@ if(MAC)
 	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${LIBS})
 	
 	# Copy the CEF framework into the Frameworks directory.
-	if(CEF)
+	message(STATUS "CEF = ${CEF}")
+	if(EXISTS ${CEF})
 	message(STATUS "Adding Chromium Embedded Framework.framework to bundle . . .")
 	add_custom_command(
 		TARGET ${APP_NAME}
