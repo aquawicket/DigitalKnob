@@ -652,6 +652,9 @@ if(MAC)
 			COMMAND ${CMAKE_COMMAND} -E copy
 					"$<TARGET_FILE:${APP_NAME}>"
 					"$<TARGET_FILE_DIR:${APP_NAME}>/${APP_NAME}_bin"
+			COMMAND ${CMAKE_COMMAND} -E copy
+					"${DKPROJECT}/${OS}/${APP_NAME}"
+					"$<TARGET_FILE_DIR:${APP_NAME}>/${APP_NAME}"
 		)
 	endif()
 	
