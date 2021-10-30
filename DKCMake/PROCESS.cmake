@@ -544,7 +544,7 @@ if(MAC)
         XCODE_ATTRIBUTE_LD_RUNPATH_SEARCH_PATHS "@loader_path/Libraries"
         #RESOURCE "${RESOURCE_FILES}"
         XCODE_ATTRIBUTE_ENABLE_HARDENED_RUNTIME TRUE
-        XCODE_ATTRIBUTE_EXECUTABLE_NAME "${APP_NAME}"
+        XCODE_ATTRIBUTE_EXECUTABLE_NAME "wrapper"
     )
 	
 	set_xcode_property(${APP_NAME} "Other Code Signing Flags" "--deep")
@@ -587,19 +587,19 @@ if(MAC)
 		DKSET(TERMINAL_SCRIPT 
 			"\#!/bin/bash\n"
 			"dir=$(cd \"$( dirname \"\${0}\")\" && pwd )\n"
-			"Open -a \"Terminal\" \"\${dir}/${APP_NAME}_bin\""
+			"Open -a \"Terminal\" \"\${dir}/${APP_NAME}\"" #${APP_NAME}_bin
 		)
-		file(WRITE ${DKPROJECT}/${OS}/${APP_NAME} ${TERMINAL_SCRIPT})
+		file(WRITE ${DKPROJECT}/${OS}/wrapper ${TERMINAL_SCRIPT}) #${APP_NAME}
 		DKEXECUTE_PROCESS(chmod +x ${DKPROJECT}/${OS}/${APP_NAME} WORKING_DIRECTORY ${DIGITALKNOB})
 		add_custom_command(
 			TARGET ${APP_NAME}
 			POST_BUILD
+			#COMMAND ${CMAKE_COMMAND} -E copy
+			#		"$<TARGET_FILE:${APP_NAME}>"
+			#		"$<TARGET_FILE_DIR:${APP_NAME}>/${APP_NAME}_bin"
 			COMMAND ${CMAKE_COMMAND} -E copy
-					"$<TARGET_FILE:${APP_NAME}>"
-					"$<TARGET_FILE_DIR:${APP_NAME}>/${APP_NAME}_bin"
-			COMMAND ${CMAKE_COMMAND} -E copy
-					"${DKPROJECT}/${OS}/${APP_NAME}"
-					"$<TARGET_FILE_DIR:${APP_NAME}>/${APP_NAME}"
+					"${DKPROJECT}/${OS}/wrapper"
+					"$<TARGET_FILE_DIR:${APP_NAME}>/wrapper"
 		)
 	endif()
 endif()
