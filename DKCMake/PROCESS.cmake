@@ -727,6 +727,7 @@ if(LINUX)
 	DKCOPY(${DKPROJECT}/icons/icon.png ${DKPROJECT}/assets/icon.png TRUE)
 
 	## ASSETS ##
+	if(false)
 	# backup files not going in the package
 	DKCOPY(${DKPROJECT}/assets/USER ${DKPROJECT}/Backup/USER TRUE)
 	DKCOPY(${DKPROJECT}/assets/DKCef/linux32Debug ${DKPROJECT}/Backup/DKCef/linux32Debug TRUE)
@@ -750,6 +751,7 @@ if(LINUX)
 	# Restore the backed up assets
 	DKCOPY(${DKPROJECT}/Backup/ ${DKPROJECT}/assets/ FALSE)
 	DKREMOVE(${DKPROJECT}/Backup)
+	endif()
 
 	#LINUX_LIB(pthread)
 	#LINUX_LIB(dl)
