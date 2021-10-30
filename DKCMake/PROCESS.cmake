@@ -761,7 +761,7 @@ if(IOSSIM)
 	
 	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${LIBS})
 	
-	DKUPDATE_INFO_Plist(${APP_NAME}) #this may need to be run at post build
+	#DKUPDATE_INFO_Plist(${APP_NAME}) #this may need to be run at post build
 	#set_target_properties(${APP_NAME} PROPERTIES DEBUG_POSTFIX d)
 endif()
 
@@ -819,6 +819,11 @@ if(LINUX)
 	endforeach()
 	
 	# Create .desktop file
+	#DKSET(DESKTOP_FILE
+	#		"[Desktop Entry]\n"
+	#			"Encoding=UTF-8\n"
+	#		"Open -a \"Terminal\" \"\${dir}/${APP_NAME}_bin\""
+	#	)
 	#let string = "[Desktop Entry]\n"
 	#string += "Encoding=UTF-8\n"
 	#string += "Version=1.0\n"
@@ -828,6 +833,9 @@ if(LINUX)
 	#string += "Exec="+app_path+OS+"/Debug/"+APP+"\n"
 	#string += "Icon="+app_path+"icons/icon.png\n"
 	#CPP_DKFile_StringToFile(string, app_path+OS+"/Debug/"+APP+".desktop")
+	
+	# Install to apps menu
+	#CPP_DK_Execute("desktop-file-install --dir=$HOME/.local/share/applications "+APP+".desktop")
 	
 endif()
 
@@ -887,6 +895,8 @@ if(RASPBERRY)
 		endif()	
 	endforeach()
 	
+	# Install to apps menu
+	#CPP_DK_Execute("desktop-file-install --dir=$HOME/.local/share/applications "+APP+".desktop")
 endif()
 
 
