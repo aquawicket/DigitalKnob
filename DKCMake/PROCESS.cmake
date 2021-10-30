@@ -601,7 +601,7 @@ if(MAC)
 		POST_BUILD
 		COMMAND ${CMAKE_COMMAND} -E copy_directory
 				"${CEF}/Debug/Chromium Embedded Framework.framework"
-				"${APP_NAME}/Contents/Frameworks/Chromium Embedded Framework.framework"
+				"${CMAKE_BINARY_DIR}/${APP_NAME}.app/Contents/Frameworks/Chromium Embedded Framework.framework"
 		VERBATIM
 	)
 	endif()
