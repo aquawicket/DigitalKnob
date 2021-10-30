@@ -590,7 +590,7 @@ if(MAC)
 			"Open -a \"Terminal\" \"\${dir}/${APP_NAME}\"" #${APP_NAME}_bin
 		)
 		file(WRITE ${DKPROJECT}/${OS}/wrapper ${TERMINAL_SCRIPT}) #${APP_NAME}
-		DKEXECUTE_PROCESS(chmod +x ${DKPROJECT}/${OS}/${APP_NAME} WORKING_DIRECTORY ${DIGITALKNOB})
+		DKEXECUTE_PROCESS(chmod +x ${DKPROJECT}/${OS}/wrapper WORKING_DIRECTORY ${DIGITALKNOB})
 		add_custom_command(
 			TARGET ${APP_NAME}
 			POST_BUILD
