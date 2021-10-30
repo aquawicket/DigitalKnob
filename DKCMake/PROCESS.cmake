@@ -595,15 +595,15 @@ if(MAC)
 	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${LIBS})
 	
 	# Copy the CEF framework into the Frameworks directory.
-	message(STATUS "CEF = ${CEF}")
 	if(EXISTS ${CEF})
 	message(STATUS "Adding Chromium Embedded Framework.framework to bundle . . .")
 	add_custom_command(
 		TARGET ${APP_NAME}
 		POST_BUILD
+		COMMAND ${CMAKE_COMMAND} -E echo "TARGET_FILE:APP_NAME = $<TARGET_FILE:${APP_NAME}>"
 		COMMAND ${CMAKE_COMMAND} -E copy_directory
 				"${CEF}/Debug/Chromium Embedded Framework.framework"
-				"${CMAKE_CURRENT_BINARY_DIR}/${APP_NAME}.app/Contents/Frameworks/Chromium Embedded Framework.framework"
+				"${CMAKE_BINARY_DIR}/Release/${APP_NAME}.app/Contents/Frameworks/Chromium Embedded Framework.framework"
 		VERBATIM
 	)
 	endif()
