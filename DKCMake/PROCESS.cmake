@@ -612,6 +612,10 @@ if(MAC)
 	)
 	
 	# Copy the CEF framework and DKCefChild into the app bundle
+	if(NOT EXIST "${DKPLUGINS}/DKCefChild/${OS}/Debug/DKCefChild.app")
+		message(FATAL_ERROR "cannot locate DKCefChild.app")
+	endif()
+	
 	if(EXISTS ${CEF})
 		message(STATUS "Adding Chromium Embedded Framework.framework to bundle . . .")
 		add_custom_command(
