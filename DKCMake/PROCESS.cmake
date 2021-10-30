@@ -620,7 +620,7 @@ if(MAC)
 		POST_BUILD
 		COMMAND ${CMAKE_COMMAND} -E copy_directory
 				"${CEF}/$<CONFIG>/Chromium Embedded Framework.framework"
-				"$<TARGET_FILE_DIR:${APP_NAME}>/Contents/Frameworks/Chromium Embedded Framework.framework"
+				"$<TARGET_FILE_DIR:${APP_NAME}>/../Frameworks/Chromium Embedded Framework.framework"
 	)
 	endif()
 	
