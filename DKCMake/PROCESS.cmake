@@ -639,23 +639,20 @@ if(MAC)
 	# Make bundle run in Terminal
 	# https://github.com/pyinstaller/pyinstaller/issues/5154#issuecomment-690646012
 	if(true)
-	#	#!/bin/bash
-	#	dir=$(dirname $0)
-	#	Open -a "Terminal" ${dir}/DKBuilder_bin
+		message(STATUS "Making bundle app run in terminal . . .")
 		DKSET(TERMINAL_SCRIPT 
 			"\#!/bin/bash\n"
 			"dir=$(dirname $0)\n"
 			"Open -a \"Terminal\" \${dir}/${APP_NAME}_bin"
 		)
-		file(WRITE ${DKPROJECT}/${OS}/${APP_NAME}_SH ${TERMINAL_SCRIPT})
-	#	message(STATUS "Making bundle app run in terminal . . .")
-	#	add_custom_command(
-	#		TARGET ${APP_NAME}
-	#		POST_BUILD
-	#		COMMAND ${CMAKE_COMMAND} -E copy
-	#				"$<TARGET_FILE:${APP_NAME}>"
-	#				"$<TARGET_FILE_DIR:${APP_NAME}>/${APP_NAME}_bin"
-	#	)
+		file(WRITE ${DKPROJECT}/${OS}/${APP_NAME} ${TERMINAL_SCRIPT})
+		add_custom_command(
+			TARGET ${APP_NAME}
+			POST_BUILD
+			COMMAND ${CMAKE_COMMAND} -E copy
+					"$<TARGET_FILE:${APP_NAME}>"
+					"$<TARGET_FILE_DIR:${APP_NAME}>/${APP_NAME}_bin"
+		)
 	endif()
 	
 	#set_target_properties(${APP_NAME} PROPERTIES DEBUG_POSTFIX d)
