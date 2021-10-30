@@ -53,7 +53,7 @@ public:
 
 	virtual CefRefPtr<CefContextMenuHandler> GetContextMenuHandler() override { return this; }
 	virtual CefRefPtr<CefDialogHandler> GetDialogHandler() override { return this; }
-	virtual CefRefPtr<CefDisplayHandler> GetDisplayHandler(){ return this; }
+	virtual CefRefPtr<CefDisplayHandler> GetDisplayHandler() override { return this; }
 	virtual CefRefPtr<CefDownloadHandler> GetDownloadHandler() override { return this; }
 	virtual CefRefPtr<CefLifeSpanHandler> GetLifeSpanHandler() override { return this; }
 	virtual CefRefPtr<CefLoadHandler> GetLoadHandler() override { return this; }
