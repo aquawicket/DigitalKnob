@@ -569,34 +569,34 @@ if(MAC)
 		DKREMOVE(${DKPROJECT}/Backup)
 	endif()
 	
-	FIND_LIBRARY(CF CoreFoundation)
-	MAC_LIB(${CF})
-	FIND_LIBRARY(CO Cocoa)
-	MAC_LIB(${CO})
-	FIND_LIBRARY(CB Carbon)
-	MAC_LIB(${CB})
-	FIND_LIBRARY(AT AudioToolbox)
-	MAC_LIB(${AT})
-	FIND_LIBRARY(AU AudioUnit)
-	MAC_LIB(${AU})
-	FIND_LIBRARY(CA CoreAudio)
-	MAC_LIB(${CA})
-	FIND_LIBRARY(CV CoreVideo)
-	MAC_LIB(${CV})
-	FIND_LIBRARY(IO IOKit)
-	MAC_LIB(${IO})
-	FIND_LIBRARY(GL OpenGL)
-	MAC_LIB(${GL})
-	FIND_LIBRARY(FF ForceFeedback)
-	MAC_LIB(${FF})
-	FIND_LIBRARY(AK AppKit)
-	MAC_LIB(${AK})
+	#FIND_LIBRARY(CF CoreFoundation)
+	#MAC_LIB(${CF})
+	#FIND_LIBRARY(CO Cocoa)
+	#MAC_LIB(${CO})
+	#FIND_LIBRARY(CB Carbon)
+	#MAC_LIB(${CB})
+	#FIND_LIBRARY(AT AudioToolbox)
+	#MAC_LIB(${AT})
+	#FIND_LIBRARY(AU AudioUnit)
+	#MAC_LIB(${AU})
+	#FIND_LIBRARY(CA CoreAudio)
+	#MAC_LIB(${CA})
+	#FIND_LIBRARY(CV CoreVideo)
+	#MAC_LIB(${CV})
+	#FIND_LIBRARY(IO IOKit)
+	#MAC_LIB(${IO})
+	#FIND_LIBRARY(GL OpenGL)
+	#MAC_LIB(${GL})
+	#FIND_LIBRARY(FF ForceFeedback)
+	#MAC_LIB(${FF})
+	#FIND_LIBRARY(AK AppKit)
+	#MAC_LIB(${AK})
 	
 	SET(CMAKE_OSX_ARCHITECTURES "x86_64")
 	add_executable(${APP_NAME} MACOSX_BUNDLE ${App_SRC})
 	set_target_properties(${APP_NAME} PROPERTIES
 		BUNDLE True
-		MACOSX_BUNDLE_GUI_IDENTIFIER digitalknob.${APP_NAME}
+		MACOSX_BUNDLE_GUI_IDENTIFIER com.digitalknob.${APP_NAME}
 		MACOSX_BUNDLE_BUNDLE_NAME ${APP_NAME}
 		MACOSX_BUNDLE_ICON_FILE "logo"
 		#MACOSX_BUNDLE_BUNDLE_VERSION "0.1"
@@ -634,7 +634,6 @@ if(MAC)
 	#				"$<TARGET_FILE_DIR:${APP_NAME}>/../Frameworks/${APP_NAME} Helper.app"
 	#	)
 	#endif()
-	
 	
 	# Make bundle run in Terminal
 	# https://github.com/pyinstaller/pyinstaller/issues/5154#issuecomment-690646012
