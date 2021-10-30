@@ -536,10 +536,12 @@ function DKBuild_DoResults(){
 			return 
 		if(TYPE === "Debug" || TYPE === "ALL")
 			//CPP_DKFile_Rename(app_path+OS+"/Debug/"+APP+".app", app_path+OS+"/Debug/"+APP+"_OLD.app", true)
-			CPP_DK_Execute("xcodebuild -target "+APP+" -configuration Debug build -arch \"armv7 armv7s\"")
+			//CPP_DK_Execute("xcodebuild -target "+APP+" -configuration Debug build -arch \"armv7 armv7s\"")
+			CPP_DK_Execute("xcodebuild -target "+APP+" -configuration Debug build")
 		if(TYPE === "Release" || TYPE === "ALL")
 			//CPP_DKFile_Rename(app_path+OS+"/Release/"+APP+".app", app_path+OS+"/Release/"+APP+"_OLD.app", true)
-			CPP_DK_Execute("xcodebuild -target "+APP+" -configuration Release build -arch \"armv7 armv7s\"")
+			//CPP_DK_Execute("xcodebuild -target "+APP+" -configuration Release build -arch \"armv7 armv7s\"")
+			CPP_DK_Execute("xcodebuild -target "+APP+" -configuration Release build")
 	}
 	
 	///// IOS64 ////
@@ -563,15 +565,17 @@ function DKBuild_DoResults(){
 		DKBuild_ValidateXcode()
 		CPP_DKFile_MkDir(app_path+OS)
 		CPP_DKFile_ChDir(app_path+OS)
-		let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Xcode\" "+cmake_string+"-DCMAKE_TOOLCHAIN_FILE="+DIGITALKNOB+"DKCMake/iOS.cmake -DIOS_PLATFORM=SIMULATOR "+DIGITALKNOB+"DK")
+		let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Xcode\" "+cmake_string+"-DCMAKE_TOOLCHAIN_FILE="+DIGITALKNOB+"DKCMake/ios.toolchain.cmake -DIOS_PLATFORM=SIMULATOR "+DIGITALKNOB+"DK")
 		if(rtvalue.indexOf("errors occurred!") > -1) 
 			return
 		if(TYPE === "Debug" || TYPE === "ALL")
 			//CPP_DKFile_Rename(app_path+OS+"/Debug/"+APP+".app", app_path+OS+"/Debug/"+APP+"_OLD.app", true)
-			CPP_DK_Execute("xcodebuild -target "+APP+" -configuration Debug build -sdk iphonesimulator11.2")
+			//CPP_DK_Execute("xcodebuild -target "+APP+" -configuration Debug build -sdk iphonesimulator11.2")
+			CPP_DK_Execute("xcodebuild -target "+APP+" -configuration Debug build")
 		if(TYPE === "Release" || TYPE === "ALL")
 			//CPP_DKFile_Rename(app_path+OS+"/Release/"+APP+".app", app_path+OS+"/Release/"+APP+"_OLD.app", true)
-			CPP_DK_Execute("xcodebuild -target "+APP+" -configuration Release build -sdk iphonesimulator11.2")
+			//CPP_DK_Execute("xcodebuild -target "+APP+" -configuration Release build -sdk iphonesimulator11.2")
+			CPP_DK_Execute("xcodebuild -target "+APP+" -configuration Release build")
 	}
 	
 	///// IOSSIM64 //////
@@ -579,7 +583,7 @@ function DKBuild_DoResults(){
 		DKBuild_ValidateXcode()
 		CPP_DKFile_MkDir(app_path+OS)
 		CPP_DKFile_ChDir(app_path+OS)
-		let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Xcode\" "+cmake_string+"-DCMAKE_TOOLCHAIN_FILE="+DIGITALKNOB+"DKCMake/ios.toolchain.cmake -DPLATFORM=SIMULATOR64 "+DIGITALKNOB+"DK")
+		let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Xcode\" "+cmake_string+"-DCMAKE_TOOLCHAIN_FILE="+DIGITALKNOB+"DK/DKCMake/ios.toolchain.cmake -DPLATFORM=SIMULATOR64 "+DIGITALKNOB+"DK")
 		if(rtvalue.indexOf("errors occurred!") > -1) 
 			return
 		if(TYPE === "Debug" || TYPE === "ALL")
