@@ -12,6 +12,7 @@ if(MAC)
 	DKDEPEND(core_audio)
 	DKDEPEND(audio_toolbox)
 	DKDEPEND(cocoa)
+	DKDEPEND(core_video)
 endif()
 
 ### VERSION ###
