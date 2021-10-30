@@ -642,6 +642,7 @@ if(IOS)
 	set(CMAKE_CXX_FLAGS "-x objective-c++")
 	#set(CMAKE_XCODE_ATTRIBUTE_DEBUG_INFORMATION_FORMAT dwarf)
 	#set(MACOSX_BUNDLE_GUI_IDENTIFIER "com.digitalknob.\${PRODUCT_NAME:identifier}")
+	set(PRODUCT_BUNDLE_IDENTIFIER "com.digitalknob.${APP_NAME}")
 		
 	#GET_TARGET_PROPERTY(MyExecutable_PATH ${APP_NAME} LOCATION)
 	add_executable(${APP_NAME} MACOSX_BUNDLE ${App_SRC})
