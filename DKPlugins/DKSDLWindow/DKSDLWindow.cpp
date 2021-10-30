@@ -241,6 +241,15 @@ bool DKSDLWindow::Init() {
     int minor;
     SDL_GL_GetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, &minor);
     DKINFO("SDL_GL_CONTEXT_MINOR_VERSION = "+ toString(minor)+"\n");
+    int doubleBuffer;
+    SDL_GL_GetAttribute(SDL_GL_DOUBLEBUFFER, &doubleBuffer);
+    DKINFO("SDL_GL_DOUBLEBUFFER = " + toString(doubleBuffer) + "\n");
+    int acceleratedVisual;
+    SDL_GL_GetAttribute(SDL_GL_ACCELERATED_VISUAL, &acceleratedVisual);
+    DKINFO("SDL_GL_ACCELERATED_VISUAL = " + toString(acceleratedVisual) + "\n");
+    int depthSize;
+    SDL_GL_GetAttribute(SDL_GL_DEPTH_SIZE, &depthSize);
+    DKINFO("SDL_GL_DEPTH_SIZE = " + toString(depthSize) + "\n");
     DKINFO("GL_VERSION = " + gl_version + "\n");
     DKINFO("GL_VENDOR = " + gl_vendor + "\n");
     DKINFO("GL_RENDERER = " + gl_renderer + "\n");
