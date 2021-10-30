@@ -612,7 +612,7 @@ if(MAC)
 	)
 	
 	# Copy the CEF framework and DKCefChild into the app bundle
-	if(NOT EXIST "${DKPLUGINS}/DKCefChild/${OS}/Debug/DKCefChild.app")
+	if(NOT EXISTS "${DKPLUGINS}/DKCefChild/${OS}/Debug/DKCefChild.app")
 		message(FATAL_ERROR "cannot locate DKCefChild.app")
 	endif()
 	
