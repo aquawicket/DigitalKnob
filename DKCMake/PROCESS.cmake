@@ -533,7 +533,7 @@ if(MAC)
 		MACOSX_BUNDLE_BUNDLE_NAME ${APP_NAME}
 		MACOSX_BUNDLE_ICON_FILE "logo"
 	)
-	set_xcode_property ${APP_NAME} "Other Code Signing Flags" "--deep")
+	set_xcode_property(${APP_NAME} "Other Code Signing Flags" "--deep")
 	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${LIBS})
 	
 	foreach(plugin ${dkdepend_list})
