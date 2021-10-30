@@ -596,6 +596,7 @@ if(MAC)
 	
 	# Copy the CEF framework into the Frameworks directory.
 	if(CEF)
+	message(STATUS "Adding Chromium Embedded Framework.framework to bundle . . .")
 	add_custom_command(
 		TARGET ${APP_NAME}
 		POST_BUILD
