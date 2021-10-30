@@ -418,6 +418,13 @@ if(WIN_32)
 	
 	set_target_properties(${APP_NAME} PROPERTIES LINK_FLAGS_DEBUG ${DEBUG_FLAGS} LINK_FLAGS_RELEASE ${RELEASE_FLAGS})
 	#set_target_properties(${APP_NAME} PROPERTIES DEBUG_POSTFIX d)	
+	
+	add_custom_command(
+		TARGET ${APP_NAME}
+		POST_BUILD
+		COMMAND ${CMAKE_COMMAND} -E echo "TARGET_FILE:APP_NAME = $<TARGET_FILE:${APP_NAME}>"
+	)
+	
 endif(WIN_32)
 	
 ##########
@@ -580,7 +587,7 @@ if(MAC)
 	add_executable(${APP_NAME} MACOSX_BUNDLE ${App_SRC})
 	set_target_properties(${APP_NAME} PROPERTIES
 		BUNDLE True
-		MACOSX_BUNDLE_GUI_IDENTIFIER my.domain.style.identifier.${APP_NAME}
+		MACOSX_BUNDLE_GUI_IDENTIFIER digitalknob.${APP_NAME}
 		MACOSX_BUNDLE_BUNDLE_NAME ${APP_NAME}
 		MACOSX_BUNDLE_BUNDLE_VERSION "0.1"
 		MACOSX_BUNDLE_SHORT_VERSION_STRING "0.1"
@@ -600,11 +607,9 @@ if(MAC)
 	add_custom_command(
 		TARGET ${APP_NAME}
 		POST_BUILD
-		COMMAND ${CMAKE_COMMAND} -E echo "TARGET_FILE:APP_NAME = $<TARGET_FILE:${APP_NAME}>"
 		COMMAND ${CMAKE_COMMAND} -E copy_directory
 				"${CEF}/Debug/Chromium Embedded Framework.framework"
-				"${CMAKE_BINARY_DIR}/Release/${APP_NAME}.app/Contents/Frameworks/Chromium Embedded Framework.framework"
-		VERBATIM
+				"$<TARGET_FILE:${APP_NAME}>/Contents/Frameworks/Chromium Embedded Framework.framework"
 	)
 	endif()
 	
