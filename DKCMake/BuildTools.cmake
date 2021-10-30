@@ -98,6 +98,9 @@ endif()
 
 
 if(CMAKE_HOST_WIN32 AND ANDROID)
+	ANDROID_LIB(dl)
+	ANDROID_LIB(log)
+	ANDROID_LIB(android)
 	DKDEPEND(jdk)
 	DKDEPEND(apache-ant)
 	DKDEPEND(android-sdk)

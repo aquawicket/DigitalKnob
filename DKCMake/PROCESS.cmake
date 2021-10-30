@@ -328,9 +328,9 @@ include_directories(${DKPROJECT})
 
 ##########
 if(WIN_32)
-	DKCOPY(${DKPLUGINS}/_DKIMPORT/resource.h ${DKPROJECT}/resource.h FALSE) ## copy app default files recursivly without overwrite
-	DKCOPY(${DKPLUGINS}/_DKIMPORT/resource.rc ${DKPROJECT}/resource.rc FALSE) ## copy app default files recursivly without overwrite
-	
+	## OS SOURCE FILES ##
+	DKCOPY(${DKPLUGINS}/_DKIMPORT/resource.h ${DKPROJECT}/resource.h FALSE)
+	DKCOPY(${DKPLUGINS}/_DKIMPORT/resource.rc ${DKPROJECT}/resource.rc FALSE)
 	file(GLOB_RECURSE resources_SRC 
 	${DKPROJECT}/*.manifest
 	${DKPROJECT}/*.rc
@@ -379,7 +379,6 @@ if(WIN_32)
 		endif()	
 	endforeach()
 
-	
 	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${LIBS})
 	##set_source_files_properties(${DIGITALKNOB}/stdafx.cpp PROPERTIES COMPILE_FLAGS "/Ycstdafx.h")
 	
@@ -403,7 +402,6 @@ if(WIN_32)
 	string(REPLACE ";" " " RELEASE_FLAGS "${RELEASE_LINK_FLAGS}")
 	
 	set_target_properties(${APP_NAME} PROPERTIES LINK_FLAGS_DEBUG ${DEBUG_FLAGS} LINK_FLAGS_RELEASE ${RELEASE_FLAGS})
-	#set_target_properties(${APP_NAME} PROPERTIES DEBUG_POSTFIX d)	
 	
 	add_custom_command(
 		TARGET ${APP_NAME}
@@ -426,9 +424,9 @@ endif(WIN_32)
 	
 ##########
 if(WIN_64)
-	DKCOPY(${DKPLUGINS}/_DKIMPORT/resource.h ${DKPROJECT}/resource.h FALSE) ## copy app default files recursivly without overwrite
-	DKCOPY(${DKPLUGINS}/_DKIMPORT/resource.rc ${DKPROJECT}/resource.rc FALSE) ## copy app default files recursivly without overwrite
-	
+	## OS SOURCE FILES ##
+	DKCOPY(${DKPLUGINS}/_DKIMPORT/resource.h ${DKPROJECT}/resource.h FALSE)
+	DKCOPY(${DKPLUGINS}/_DKIMPORT/resource.rc ${DKPROJECT}/resource.rc FALSE)
 	file(GLOB_RECURSE resources_SRC 
 	${DKPROJECT}/*.manifest
 	${DKPROJECT}/*.rc
@@ -498,16 +496,6 @@ if(WIN_64)
 	string(REPLACE ";" " " RELEASE_FLAGS "${RELEASE_LINK_FLAGS}")
 	
 	set_target_properties(${APP_NAME} PROPERTIES LINK_FLAGS_DEBUG ${DEBUG_FLAGS} LINK_FLAGS_RELEASE ${RELEASE_FLAGS})
-	#set_target_properties(${APP_NAME} PROPERTIES DEBUG_POSTFIX d)
-	
-	#add_custom_command(
-    #TARGET ${APP_NAME}
-    #POST_BUILD
-    #COMMAND "mt.exe" -nologo
-    #        -manifest \"${DKPROJECT}/compatibility.manifest\"
-    #        -outputresource:"${DKPROJECT}/win32/Debug/${APP_NAME}.exe"\;\#1
-    #COMMENT "Adding manifest..."
-    #)
 endif(WIN_64)
 
 #######
@@ -564,13 +552,13 @@ if(MAC)
 		MACOSX_BUNDLE_ICON_FILE "logo"
 	)
 	
+	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${LIBS})
+	
 	foreach(plugin ${dkdepend_list})
 		if(EXISTS "${DKPLUGINS}/${plugin}/CMakeLists.txt")
 			add_dependencies(${APP_NAME} ${plugin})
 		endif()
 	endforeach()
-	
-	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${LIBS})
 	
 	# Copy the CEF framework into the app bundle
 	if(EXISTS ${CEF})
@@ -618,8 +606,6 @@ if(MAC)
 					"$<TARGET_FILE_DIR:${APP_NAME}>/${APP_NAME}"
 		)
 	endif()
-	
-	#set_target_properties(${APP_NAME} PROPERTIES DEBUG_POSTFIX d)
 endif()
 
 #######
@@ -639,13 +625,11 @@ if(IOS)
 	DKREMOVE(${DKPROJECT}/assets/log.txt)
 	## copy the assets into the app
 	if(DEBUG)
-		#dk_makeDirectory(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app/assets)
 		dk_makeDirectory(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app/assets)
 		DKCOPY(${DKPROJECT}/assets/ ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app/assets TRUE)
 		DKCOPY(${DKPROJECT}/icons/ios/ ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app TRUE)
 	endif()
 	if(RELEASE)
-		#dk_makeDirectory(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.app/assets)
 		dk_makeDirectory(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.app/assets)
 		DKCOPY(${DKPROJECT}/assets/ ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.app/assets TRUE)
 		DKCOPY(${DKPROJECT}/icons/ios/ ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.app TRUE)
@@ -689,9 +673,6 @@ if(IOS)
 	endforeach()
 	
 	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${LIBS})
-	
-	DKUPDATE_INFO_Plist(${APP_NAME}) #this may need to be run at post build
-	#set_target_properties(${APP_NAME} PROPERTIES DEBUG_POSTFIX d)
 endif()
 
 ##########
@@ -760,9 +741,6 @@ if(IOSSIM)
 	endforeach()
 	
 	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${LIBS})
-	
-	#DKUPDATE_INFO_Plist(${APP_NAME}) #this may need to be run at post build
-	#set_target_properties(${APP_NAME} PROPERTIES DEBUG_POSTFIX d)
 endif()
 
 #########
@@ -798,7 +776,6 @@ if(LINUX)
 	#LINUX_LIB(pthread)
 	#LINUX_LIB(dl)
 	#LINUX_LIB(libstdc++fs.a)
-	
 	#set(CMAKE_CXX_FLAGS "-g -no-pie -std=c++17")
 	
 	if(DEBUG)
@@ -819,24 +796,19 @@ if(LINUX)
 	endforeach()
 	
 	# Create .desktop file
-	#DKSET(DESKTOP_FILE
-	#		"[Desktop Entry]\n"
-	#			"Encoding=UTF-8\n"
-	#		"Open -a \"Terminal\" \"\${dir}/${APP_NAME}_bin\""
-	#	)
-	#let string = "[Desktop Entry]\n"
-	#string += "Encoding=UTF-8\n"
-	#string += "Version=1.0\n"
-	#string += "Type=Application\n"
-	#string += "Terminal=true\n"
-	#string += "Name="+APP+"\n"
-	#string += "Exec="+app_path+OS+"/Debug/"+APP+"\n"
-	#string += "Icon="+app_path+"icons/icon.png\n"
-	#CPP_DKFile_StringToFile(string, app_path+OS+"/Debug/"+APP+".desktop")
+	DKSET(DESKTOP_FILE
+		"[Desktop Entry]\n"
+		"Encoding=UTF-8\n"
+		"Version=1.0\n"
+		"Type=Application\n"
+		"Terminal=true\n"
+		"Name="+${APP_NAME}+"\n"
+		"Exec=${DKPROJECT}/${OS}/Debug/${APP_NAME}\n"
+		"Icon=${DKPROJECT}/icons/icon.png\n")
+	file(write ${DKPROJECT}/${OS}/Debug/${APP_NAME}.desktop ${DESKTOP_FILE})
 	
 	# Install to apps menu
-	#CPP_DK_Execute("desktop-file-install --dir=$HOME/.local/share/applications "+APP+".desktop")
-	
+	DKEXECUTE_PROCESS(desktop-file-install --dir=$HOME/.local/share/applications ${DKPROJECT}/${OS}/Release/${APP_NAME}.desktop WORKING_DIRECTORY ${DKPROJECT}/${OS}/Release)
 endif()
 
 
@@ -895,10 +867,21 @@ if(RASPBERRY)
 		endif()	
 	endforeach()
 	
+	# Create .desktop file
+	DKSET(DESKTOP_FILE
+		"[Desktop Entry]\n"
+		"Encoding=UTF-8\n"
+		"Version=1.0\n"
+		"Type=Application\n"
+		"Terminal=true\n"
+		"Name="+${APP_NAME}+"\n"
+		"Exec=${DKPROJECT}/${OS}/Debug/${APP_NAME}\n"
+		"Icon=${DKPROJECT}/icons/icon.png\n")
+	file(write ${DKPROJECT}/${OS}/Debug/${APP_NAME}.desktop ${DESKTOP_FILE})
+	
 	# Install to apps menu
-	#CPP_DK_Execute("desktop-file-install --dir=$HOME/.local/share/applications "+APP+".desktop")
+	DKEXECUTE_PROCESS(desktop-file-install --dir=$HOME/.local/share/applications ${DKPROJECT}/${OS}/Release/${APP_NAME}.desktop WORKING_DIRECTORY ${DKPROJECT}/${OS}/Release)
 endif()
-
 
 
 if(ANDROID)
@@ -941,14 +924,7 @@ if(ANDROID)
 	#set(CMAKE_ANDROID_NDK ${ANDROIDNDK})
 	#set(CMAKE_ANDROID_STL_TYPE c++_static)
 	
-	ANDROID_LIB(dl)
-	#ANDROID_LIB(GLESv1_CM)
-	#ANDROID_LIB(GLESv2)
-	ANDROID_LIB(log)
-	ANDROID_LIB(android)
-
 	#add_executable(DKAndroid ${App_SRC})
-
 	add_library(${APP_NAME} SHARED ${App_SRC})
 	
 	foreach(plugin ${dkdepend_list})
@@ -959,121 +935,10 @@ if(ANDROID)
 	
 	#target_include_directories(${APP_NAME} PUBLIC ${INCLUDE_DIRECTORIES}) #of ${DKINCLUDES_LIST}
 	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${LIBS})
-	#set_target_properties(${APP_NAME} PROPERTIES DEBUG_POSTFIX d)
 	#add_dependencies(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS})	
 	
 	#include_external_msproject(DKGradle ${DKPROJECT}/${OS}/DKGradle.androidproj)
 endif()
-
-
-###########
-#if(ANDROID)
-#	#copy android files from DKPlugins/_DKIMPORT
-#	#copy assets
-#	DKREMOVE(${DKPROJECT}/assets/USER)
-#	if(DEBUG)
-#		DKCOPY(${DKPROJECT}/assets/ ${DKPROJECT}/${OS}/${DEBUG_DIR}/assets TRUE)
-#		DKCOPY(${DKPROJECT}/icons/android/ ${DKPROJECT}/${OS}/${DEBUG_DIR}/res TRUE)
-#	endif()
-#	if(RELEASE)
-#		DKCOPY(${DKPROJECT}/assets/ ${DKPROJECT}/${OS}/${RELEASE_DIR}/assets TRUE)
-#		DKCOPY(${DKPROJECT}/icons/android/ ${DKPROJECT}/${OS}/${RELEASE_DIR}/res TRUE)
-#	endif()
-#	
-#	#update app name
-#	DKUPDATE_ANDROID_NAME(${APP_NAME})
-#	
-#	message(STATUS "Creating Android.mk file for ${APP_NAME}....")
-#	DKSET(ANDROID_APPMK ${ANDROID_APPMK} "LOCAL_PATH := $(call my-dir)\n")
-#	if(SDL)
-#		message(STATUS "USING SDL FOR ANDROID")
-#		DKSET(ANDROID_APPMK ${ANDROID_APPMK} "include $(CLEAR_VARS)\n")
-#		DKSET(ANDROID_APPMK ${ANDROID_APPMK} "LOCAL_MODULE := SDL2\n")
-#	if(DEBUG)
-#		DKSET(ANDROID_APPMK ${ANDROID_APPMK} "LOCAL_SRC_FILES := ${SDL}/${OS}/${DEBUG_DIR}/obj/local/armeabi-v7a/libSDL2.so\n")
-#	endif()
-#	if(RELEASE)
-#		DKSET(ANDROID_APPMK ${ANDROID_APPMK} "LOCAL_SRC_FILES := ${SDL}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/libSDL2.so\n")
-#	endif()
-#		DKSET(ANDROID_APPMK ${ANDROID_APPMK} "include $(PREBUILT_SHARED_LIBRARY)\n")
-#	endif()
-#	
-#	DKSET(ANDROID_APPMK ${ANDROID_APPMK} "include $(CLEAR_VARS)\n")
-#	if(DEBUG)
-#		DKSET(ANDROID_APPMK ${ANDROID_APPMK} "BUILD_TYPE := Debug\n\n")
-#	endif()
-#	if(RELEASE)
-#		DKSET(ANDROID_APPMK ${ANDROID_APPMK} "BUILD_TYPE := Release\n\n")
-#	endif()
-#	DKSET(ANDROID_APPMK ${ANDROID_APPMK} "LOCAL_MODULE := DKAndroid\n")
-#	DKSET(ANDROID_APPMK ${ANDROID_APPMK} "SRC_DIR := $(LOCAL_PATH)/../../..\n")
-#	DKSET(ANDROID_APPMK ${ANDROID_APPMK} "DK_DIR := C:/Users/$ENV{USERNAME}/digitalknob\n")
-#	DKSET(ANDROID_APPMK ${ANDROID_APPMK} "NDKLIBDIR := ${ANDROIDNDK}/sources/cxx-stl/gnu-libstdc++/4.8/libs/armeabi-v7a\n")
-#	DKSET(ANDROID_APPMK ${ANDROID_APPMK} "DKPLUGINS := $(DK_DIR)/DKPlugins\n")
-#	DKSET(ANDROID_APPMK ${ANDROID_APPMK} "3RDPARTY := $(DKPLUGINS)/3rdParty\n\n")
-#
-#	DKSET(ANDROID_APPMK ${ANDROID_APPMK} "LOCAL_C_INCLUDES := $(LOCAL_PATH)\n")
-#	DKSET(ANDROID_APPMK ${ANDROID_APPMK} "LOCAL_C_INCLUDES += $(SRC_DIR)\n")
-#	DKSET(ANDROID_APPMK ${ANDROID_APPMK} "LOCAL_CFLAGS := -fno-short-enums -fpermissive -fuse-ld=bfd\n")
-#	DKSET(ANDROID_APPMK ${ANDROID_APPMK} "LOCAL_LDLIBS := -llog -lGLESv1_CM -lz -landroid\n")
-#	#if(OPENGL2)
-#	#	DKSET(ANDROID_APPMK ${ANDROID_APPMK} "LOCAL_LDLIBS := -llog -lGLESv2 -lz\n")
-#	#else()
-#	#	DKSET(ANDROID_APPMK ${ANDROID_APPMK} "LOCAL_LDLIBS := -llog -lGLESv1_CM -lz\n")
-#	#endif()
-#	DKSET(ANDROID_APPMK ${ANDROID_APPMK} "APP_SRC := $(wildcard $(SRC_DIR)/*.cpp)\n")
-#	DKSET(ANDROID_APPMK ${ANDROID_APPMK} "APP_SRC += $(wildcard $(SRC_DIR)/*.c)\n")
-#	DKSET(ANDROID_APPMK ${ANDROID_APPMK} "LOCAL_SRC_FILES := $(APP_SRC:$(LOCAL_PATH)/%=%)\n\n")
-#
-#	DKSET(ANDROID_APPMK ${ANDROID_APPMK} "LOCAL_CPPFLAGS := -DANDROID\n")
-#	if(ANDROID_32)
-#		DKSET(ANDROID_APPMK ${ANDROID_APPMK} "LOCAL_CPPFLAGS += -DANDROID32\n")
-#	endif()
-#	if(ANDROID_64)
-#		DKSET(ANDROID_APPMK ${ANDROID_APPMK} "LOCAL_CPPFLAGS += -DANDROID64\n")
-#	endif()
-#	#DKSET(ANDROID_APPMK ${ANDROID_APPMK} "LOCAL_CPPFLAGS += -D__ANDROID__\n")
-#	DKSET(ANDROID_APPMK ${ANDROID_APPMK} "LOCAL_CPPFLAGS += -DDKAPP\n")
-#	DKSET(ANDROID_APPMK ${ANDROID_APPMK} "ifeq ($(BUILD_TYPE),Debug)\n")
-#	DKSET(ANDROID_APPMK ${ANDROID_APPMK} "	LOCAL_CPPFLAGS += -DDEBUG\n")
-#	DKSET(ANDROID_APPMK ${ANDROID_APPMK} "else\n")
-#	DKSET(ANDROID_APPMK ${ANDROID_APPMK} "	LOCAL_CPPFLAGS += -DNDEBUG\n")
-#	DKSET(ANDROID_APPMK ${ANDROID_APPMK} "endif\n")
-#
-#	DKSET(ANDROID_APPMK ${ANDROID_APPMK} "LIBDIR := $(BUILD_TYPE)/obj/local/armeabi\n")
-#	DKSET(ANDROID_APPMK ${ANDROID_APPMK} "ifeq ($(TARGET_ARCH_ABI),armeabi-v7a)\n")
-#	DKSET(ANDROID_APPMK ${ANDROID_APPMK} "	LOCAL_ARM_NEON := true\n")
-#	DKSET(ANDROID_APPMK ${ANDROID_APPMK} "	LIBDIR := $(BUILD_TYPE)/obj/local/armeabi-v7a\n")
-#	DKSET(ANDROID_APPMK ${ANDROID_APPMK} "endif\n\n")
-#	DKSET(ANDROID_APPMK ${ANDROID_APPMK} "LOCAL_LDFLAGS :=\n\n")
-#   foreach(each_define ${DKDEFINES_LIST})
-#		DKSET(ANDROID_LIBMK "${ANDROID_LIBMK} "LOCAL_LDFLAGS += ${each_define}\n")
-#	endforeach()
-#	DKSET(ANDROID_APPMK ${ANDROID_APPMK} "LOCAL_C_INCLUDES += ${DKPLUGINS}\n")
-#	foreach(each_include ${DKINCLUDES_LIST})
-#		DKSET(ANDROID_LIBMK "${ANDROID_LIBMK} "LOCAL_C_INCLUDES += ${each_include}\n")
-#	endforeach()
-#	#list(REVERSE DKLIBRARIES)
-#	DKSET(ANDROID_APPMK ${ANDROID_APPMK} ${DKLIBRARIES})
-#			
-#	if(SDL)
-#		DKSET(ANDROID_APPMK ${ANDROID_APPMK} "LOCAL_SHARED_LIBRARIES := SDL2\n")
-#	endif()
-#	DKSET(ANDROID_APPMK ${ANDROID_APPMK} "include $(BUILD_SHARED_LIBRARY)\n\n")
-#	
-#	if(DEBUG)
-#		file(WRITE ${DKPROJECT}/${OS}/${DEBUG_DIR}/jni/Android.mk ${ANDROID_APPMK})
-#	endif()
-#	if(RELEASE)
-#		file(WRITE ${DKPROJECT}/${OS}/${RELEASE_DIR}/jni/Android.mk ${ANDROID_APPMK})
-#	endif()
-#endif()
-
-
-#clean these cached variables
-##DKSET(DKDEFINES "")
-##DKSET(DKINCLUDES "")
-##DKSET(DKLIBRARIES "")
 
 DKSET(include_libs "${LIBS} ${DEBUG_LIBS} ${RELEASE_LIBS}")
 DKBUILD_LOG("\n\n ${APP_NAME} Include Libraries \n")
@@ -1104,29 +969,7 @@ DKBUILD_LOG("         DKLINKDIRS_LIST:  ${DKLINKDIRS_LIST}")
 file(WRITE ${DKPROJECT}/DKBUILD.log "${DKBUILD_LOG_FILE}")
 DKSET(DKBUILD_LOG_FILE "")
 	
-
-# Generate a CMakelists.txt for the app. This is a work in progress
-#file(WRITE ${DKPROJECT}/CMakeLists.txt ${APP_CMAKEFILE})
-
 message(STATUS "\n")
 message(STATUS "**************************************************")
 message(STATUS "****** Generated ${APP_NAME} - ${OS}  ************")
 message(STATUS "**************************************************\n")
-
-
-# https://gist.github.com/baiwfg2/39881ba703e9c74e95366ed422641609
-#add_custom_command(TARGET ${APP_NAME}
-#    # Run after all other rules within the target have been executed
-#    POST_BUILD
-#    COMMAND echo -e "\texecuting a POST_BUILD command"
-#    COMMENT "This command will be executed after building bar"
-#    VERBATIM
-#)
-
-#add_custom_command(TARGET ${APP_NAME}
-#   # Run after all other rules within the target have been executed
-#    POST_BUILD
-#    COMMAND "${3RDPARTY}/upx-3.96/upx.exe" "-9 -v ${DKPROJECT}/${OS}/Release/${APP_NAME}.exe"
-#    COMMENT "This command will be executed after building bar"
-#    VERBATIM
-#)
