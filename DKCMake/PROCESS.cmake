@@ -633,16 +633,16 @@ if(MAC)
 	endif()
 	
 	# Copy the DKCefChild into the app bundle
-	if(EXISTS "${DKPLUGINS}/DKCefChild/${OS}/$<CONFIG>/DKCefChild.app")
-		message(STATUS "Adding Chromium Embedded Framework.framework to bundle . . .")
-		add_custom_command(
-			TARGET ${APP_NAME}
-			POST_BUILD
-			COMMAND ${CMAKE_COMMAND} -E copy
-					"${DKPLUGINS}/DKCefChild/${OS}/$<CONFIG>/DKCefChild.app"
-					"$<TARGET_FILE_DIR:${APP_NAME}>/../Frameworks/${APP_NAME} Helper.app"
-		)
-	endif()
+	#if(EXISTS "${DKPLUGINS}/DKCefChild/${OS}/$<CONFIG>/DKCefChild.app")
+	#	message(STATUS "Adding Chromium Embedded Framework.framework to bundle . . .")
+	#	add_custom_command(
+	#		TARGET ${APP_NAME}
+	#		POST_BUILD
+	#		COMMAND ${CMAKE_COMMAND} -E copy
+	#				"${DKPLUGINS}/DKCefChild/${OS}/$<CONFIG>/DKCefChild.app"
+	#				"$<TARGET_FILE_DIR:${APP_NAME}>/../Frameworks/${APP_NAME} Helper.app"
+	#	)
+	#endif()
 	
 	#DKUPDATE_INFO_Plist(${APP_NAME}) #this may need to be run at post build
 	#set_target_properties(${APP_NAME} PROPERTIES DEBUG_POSTFIX d)
