@@ -407,15 +407,6 @@ if(WIN_32)
 	list(APPEND RELEASE_LINK_FLAGS /SAFESEH:NO)
 	string(REPLACE ";" " " RELEASE_FLAGS "${RELEASE_LINK_FLAGS}")
 	
-	#add_custom_command(
-    #TARGET ${APP_NAME}
-    #POST_BUILD
-    #COMMAND "mt.exe" -nologo
-    #        -manifest \"${DKPROJECT}/compatibility.manifest\"
-    #        -outputresource:"${DKPROJECT}/win32/Debug/${APP_NAME}.exe"\;\#1
-    #COMMENT "Adding manifest..."
-    #)
-	
 	set_target_properties(${APP_NAME} PROPERTIES LINK_FLAGS_DEBUG ${DEBUG_FLAGS} LINK_FLAGS_RELEASE ${RELEASE_FLAGS})
 	#set_target_properties(${APP_NAME} PROPERTIES DEBUG_POSTFIX d)	
 	
@@ -426,6 +417,15 @@ if(WIN_32)
 		COMMAND ${CMAKE_COMMAND} -E echo "!!!!!! TARGET_FILE_DIR:APP_NAME = $<TARGET_FILE_DIR:${APP_NAME}>"
 		COMMAND ${CMAKE_COMMAND} -E echo "!!!!!! CONFIG = $<CONFIG>"
 	)
+	
+	#add_custom_command(
+    #TARGET ${APP_NAME}
+    #POST_BUILD
+    #COMMAND "mt.exe" -nologo
+    #        -manifest \"${DKPROJECT}/compatibility.manifest\"
+    #        -outputresource:"${DKPROJECT}/win32/Debug/${APP_NAME}.exe"\;\#1
+    #COMMENT "Adding manifest..."
+    #)
 	
 endif(WIN_32)
 	
@@ -523,6 +523,21 @@ endif(WIN_64)
 
 #######
 if(MAC)
+	# Create icons
+	dk_makeDirectory(${DKPROJECT}/icons/mac)
+	dk_makeDirectory(${DKPROJECT}/icons/mac/icons.iconset)
+    #CPP_DK_Execute("sips -z 16 16 " + AppPath + "/icons/icon.png --out " + AppPath + "/icons/mac/icons.iconset/icon_16x16.png");
+    #CPP_DK_Execute("sips -z 32 32 " + AppPath + "/icons/icon.png --out " + AppPath + "/icons/mac/icons.iconset/icon_16x16@2x.png");
+    #CPP_DK_Execute("sips -z 32 32 " + AppPath + "/icons/icon.png --out " + AppPath + "/icons/mac/icons.iconset/icon_32x32.png");
+    #CPP_DK_Execute("sips -z 64 64 " + AppPath + "/icons/icon.png --out " + AppPath + "/icons/mac/icons.iconset/icon_32x32@2x.png");
+    #CPP_DK_Execute("sips -z 128 128 " + AppPath + "/icons/icon.png --out " + AppPath + "/icons/mac/icons.iconset/icon_128x128.png");
+    #CPP_DK_Execute("sips -z 256 256 " + AppPath + "/icons/icon.png --out " + AppPath + "/icons/mac/icons.iconset/icon_128x128@2x.png");
+    #CPP_DK_Execute("sips -z 256 256 " + AppPath + "/icons/icon.png --out " + AppPath + "/icons/mac/icons.iconset/icon_256x256.png");
+    #CPP_DK_Execute("sips -z 512 512 " + AppPath + "/icons/icon.png --out " + AppPath + "/icons/mac/icons.iconset/icon_256x256@2x.png");
+    #CPP_DK_Execute("sips -z 512 512 " + AppPath + "/icons/icon.png --out " + AppPath + "/icons/mac/icons.iconset/icon_512x512.png");
+    #CPP_DK_Execute("sips -z 1024 1024 " + AppPath + "/icons/icon.png --out " + AppPath + "/icons/mac/icons.iconset/icon_512x512@2x.png");
+    #CPP_DK_Execute("iconutil -c icns -o " + AppPath + "/icons/mac/logo.icns " + AppPath + "/icons/mac/icons.iconset");
+
 	if(NOT EXCLUDE_ASSETS)
 		# Backup files and folders excluded from the package
 		DKCOPY(${DKPROJECT}/assets/USER ${DKPROJECT}/Backup/USER TRUE)
@@ -583,7 +598,6 @@ if(MAC)
 	MAC_LIB(${FF})
 	FIND_LIBRARY(AK AppKit)
 	MAC_LIB(${AK})
-	
 	
 	SET(CMAKE_OSX_ARCHITECTURES "x86_64")
 	add_executable(${APP_NAME} MACOSX_BUNDLE ${App_SRC})
