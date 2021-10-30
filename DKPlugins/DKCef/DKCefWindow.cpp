@@ -188,9 +188,10 @@ bool DKCefWindow::GetHeight(const void* input, void* output)
 	return true;
 #endif
 #ifdef MAC
-	//TODO
 	NSView* nsview = (NSView*)dkCef->current_browser->GetHost()->GetWindowHandle();
-	if(!nsview){ return false; }
+	int height = nsview.frame.size.width;
+	*(int*)output = height;
+	return true;
 #endif
 #ifdef LINUX
 #ifdef USE_GDK
@@ -274,7 +275,6 @@ bool DKCefWindow::GetWidth(const void* input, void* output)
 	return true;
 #endif
 #ifdef MAC
-	//TODO
 	NSView* nsview = (NSView*)dkCef->current_browser->GetHost()->GetWindowHandle();
 	int width = nsview.frame.size.width;
 	*(int*)output = width;
