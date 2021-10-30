@@ -17,17 +17,7 @@ include(DKCMake/DISABLED.cmake)
 get_filename_component(APP_NAME ${DKPROJECT} NAME)
 string(REPLACE " " "_" APP_NAME ${APP_NAME})
 
-# Generate the apps CMakeLists.txt file
-#DKSET(APP_CMAKEFILE "#Generated File: any changes will be overwritten")
-#DKSET(APP_CMAKEFILE "${APP_CMAKEFILE}CMAKE_MINIMUM_REQUIRED(VERSION 3.4)")
-#DKSET(APP_CMAKEFILE "${APP_CMAKEFILE}CMAKE_POLICY(SET CMP0054 NEW)")
-#DKSET(APP_CMAKEFILE "${APP_CMAKEFILE}set(CMAKE_CXX_STANDARD 17)")
-#DKSET(APP_CMAKEFILE "${APP_CMAKEFILE}set(CMAKE_CXX_STANDARD_REQUIRED ON)")
-#DKSET(APP_CMAKEFILE "${APP_CMAKEFILE}PROJECT(${APP_NAME})")
-
-
 dk_printSettings()
-
 
 ############################################################################################
 ############################   ADD EXECUTABLE  #############################################
@@ -76,7 +66,7 @@ foreach(plugin ${dkdepend_list})
 		RETURN()
 	endif()
 
-	#This actually executes the 3rdParty library builds, and dkplugin setup
+	#This executes the 3rdParty library builds, and dkplugin setup
 	include(${plugin_path}/DKMAKE.cmake)
 	
 	#string(TOUPPER ${plugin} PLUGIN_NAME)
@@ -118,7 +108,7 @@ foreach(plugin ${dkdepend_list})
 			file(WRITE ${plugin_path}/CMakeLists.txt ${CMAKE_FILE})
 		endif()
 
-		# THIS ADDS THE PLUGINS TO THE APP SOLUTION
+		# ADD THE PLUGIN TO THE APP SOLUTION
 		if(EXISTS "${plugin_path}/CMakeLists.txt")
 			if(LINUX OR RASPBERRY)
 				if(DEBUG)
@@ -262,7 +252,7 @@ foreach(plugin ${dkdepend_list})
 #				RASPBERRY64_COMMAND(make)
 #			endif()
 #		endif()
-		if(ANDROID_32)
+		#if(ANDROID_32)
 			#ANDROID32_COMMAND(${DKCMAKE_ANDROID32} -DANDROID_32=ON -DDEBUG=ON -DRELEASE=ON -DREBUILD=ON ${plugin_path})
 #			if(DEBUG)
 #				ANDROID32_COMMAND(${MSBUILD} ${CURRENT_DIR}/${plugin}.sln /p:Configuration=Debug)
@@ -270,8 +260,8 @@ foreach(plugin ${dkdepend_list})
 #			if(RELEASE)
 #				ANDROID32_COMMAND(${MSBUILD} ${CURRENT_DIR}/${plugin}.sln /p:Configuration=Release)
 #			endif()
-		endif()
-		if(ANDROID_64)
+		#endif()
+		#if(ANDROID_64)
 			#ANDROID64_COMMAND(${DKCMAKE_ANDROID64} -DANDROID_64=ON -DDEBUG=ON -DRELEASE=ON -DREBUILD=ON ${plugin_path})
 #			if(DEBUG)
 #				ANDROID64_COMMAND(${MSBUILD} ${CURRENT_DIR}/${plugin}.sln /p:Configuration=Debug)
@@ -279,7 +269,7 @@ foreach(plugin ${dkdepend_list})
 #			if(RELEASE)
 #				ANDROID64_COMMAND(${MSBUILD} ${CURRENT_DIR}/${plugin}.sln /p:Configuration=Release)
 #			endif()
-		endif()
+		#endif()
 		
 #		include(${plugin_path}/DKMAKE.cmake) ##run it again to copy any .exe and .dll files. 
 	endif()
@@ -322,7 +312,6 @@ file(GLOB_RECURSE App_SRC
 list(FILTER App_SRC EXCLUDE REGEX "${DKPROJECT}/assets/*" )
 list(FILTER App_SRC EXCLUDE REGEX "${DKPROJECT}/${OS}/*" )
 	
-
 add_definitions(-DDKAPP)
 include_directories(${DKPROJECT})
 
@@ -349,14 +338,10 @@ if(WIN_32)
 	## ASSETS ##
 	# Backup files and folders excluded from the package
 	DKCOPY(${DKPROJECT}/assets/USER ${DKPROJECT}/Backup/USER TRUE)
-	##DKCOPY(${DKPROJECT}/assets/DKCef/win32Debug ${DKPROJECT}/Backup/DKCef/win32Debug TRUE)     #NOTE: need to remove all folders that are not for this OS
-	##DKCOPY(${DKPROJECT}/assets/DKCef/win32Release ${DKPROJECT}/Backup/DKCef/win32Release TRUE)
 	DKCOPY(${DKPROJECT}/assets/cef.log ${DKPROJECT}/Backup/cef.log TRUE)
 	DKCOPY(${DKPROJECT}/assets/log.txt ${DKPROJECT}/Backup/log.txt TRUE)
 	# Remove excluded files and folders before packaging
 	DKREMOVE(${DKPROJECT}/assets/USER)
-	##DKREMOVE(${DKPROJECT}/assets/DKCef/win32Debug)
-	##DKREMOVE(${DKPROJECT}/assets/DKCef/win32Release)
 	DKREMOVE(${DKPROJECT}/assets/cef.log)
 	DKREMOVE(${DKPROJECT}/assets/log.txt)
 	#Compress the assets, they will be included by resource.rc
@@ -369,6 +354,7 @@ if(WIN_32)
 	
 	add_definitions(-D_USING_V110_SDK71_)
 	add_executable(${APP_NAME} WIN32 ${App_SRC})
+	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${LIBS})
 	
 	foreach(plugin ${dkdepend_list})
 		#if(EXISTS "${3rdParty}/${plugin}/CMakeLists.txt")
@@ -379,7 +365,6 @@ if(WIN_32)
 		endif()	
 	endforeach()
 
-	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${LIBS})
 	##set_source_files_properties(${DIGITALKNOB}/stdafx.cpp PROPERTIES COMPILE_FLAGS "/Ycstdafx.h")
 	
 	list(APPEND DEBUG_LINK_FLAGS /MANIFEST:NO)
@@ -445,14 +430,10 @@ if(WIN_64)
 	## ASSETS ##
 	# Backup files and folders excluded from the package
 	DKCOPY(${DKPROJECT}/assets/USER ${DKPROJECT}/Backup/USER TRUE)
-	#DKCOPY(${DKPROJECT}/assets/DKCef/win64Debug ${DKPROJECT}/Backup/DKCef/win64Debug TRUE)
-	#DKCOPY(${DKPROJECT}/assets/DKCef/win64Release ${DKPROJECT}/Backup/DKCef/win64Release TRUE)
 	DKCOPY(${DKPROJECT}/assets/cef.log ${DKPROJECT}/Backup/cef.log TRUE)
 	DKCOPY(${DKPROJECT}/assets/log.txt ${DKPROJECT}/Backup/log.txt TRUE)
 	# Remove excluded files and folders before packaging
 	DKREMOVE(${DKPROJECT}/assets/USER)
-	#DKREMOVE(${DKPROJECT}/assets/DKCef/win64Debug)
-	#DKREMOVE(${DKPROJECT}/assets/DKCef/win64Release)
 	DKREMOVE(${DKPROJECT}/assets/cef.log)
 	DKREMOVE(${DKPROJECT}/assets/log.txt)
 	#Compress the assets, they will be included by resource.rc
@@ -466,6 +447,7 @@ if(WIN_64)
 		
 	add_definitions(-D_USING_V110_SDK71_)
 	add_executable(${APP_NAME} WIN32 ${App_SRC})
+	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${LIBS})
 	
 	foreach(plugin ${dkdepend_list})
 		if(EXISTS "${DKPLUGINS}/${plugin}/CMakeLists.txt")
@@ -473,7 +455,6 @@ if(WIN_64)
 		endif()	
 	endforeach()
 	
-	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${LIBS})
 	##set_source_files_properties(${DIGITALKNOB}/stdafx.cpp PROPERTIES COMPILE_FLAGS "/Ycstdafx.h")
 	
 	list(APPEND DEBUG_LINK_FLAGS /MANIFEST:NO)
@@ -551,7 +532,6 @@ if(MAC)
 		MACOSX_BUNDLE_BUNDLE_NAME ${APP_NAME}
 		MACOSX_BUNDLE_ICON_FILE "logo"
 	)
-	
 	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${LIBS})
 	
 	foreach(plugin ${dkdepend_list})
@@ -665,14 +645,13 @@ if(IOS)
 		
 	#GET_TARGET_PROPERTY(MyExecutable_PATH ${APP_NAME} LOCATION)
 	add_executable(${APP_NAME} MACOSX_BUNDLE ${App_SRC})
+	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${LIBS})
 	
 	foreach(plugin ${dkdepend_list})
 		if(EXISTS "${DKPLUGINS}/${plugin}/CMakeLists.txt")
 			add_dependencies(${APP_NAME} ${plugin})
 		endif()	
 	endforeach()
-	
-	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${LIBS})
 endif()
 
 ##########
@@ -733,14 +712,13 @@ if(IOSSIM)
 	
 	#GET_TARGET_PROPERTY(MyExecutable_PATH ${APP_NAME} LOCATION)
 	add_executable(${APP_NAME} MACOSX_BUNDLE ${App_SRC})
+	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${LIBS})
 	
 	foreach(plugin ${dkdepend_list})
 		if(EXISTS "${DKPLUGINS}/${plugin}/CMakeLists.txt")
 			add_dependencies(${APP_NAME} ${plugin})
 		endif()	
 	endforeach()
-	
-	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${LIBS})
 endif()
 
 #########
@@ -803,14 +781,13 @@ if(LINUX)
 		"Type=Application\n"
 		"Terminal=true\n"
 		"Name="+${APP_NAME}+"\n"
-		"Exec=${DKPROJECT}/${OS}/Debug/${APP_NAME}\n"
+		"Exec=${DKPROJECT}/${OS}/Release/${APP_NAME}\n"
 		"Icon=${DKPROJECT}/icons/icon.png\n")
-	file(write ${DKPROJECT}/${OS}/Debug/${APP_NAME}.desktop ${DESKTOP_FILE})
+	file(write ${DKPROJECT}/${OS}/Release/${APP_NAME}.desktop ${DESKTOP_FILE})
 	
 	# Install to apps menu
 	DKEXECUTE_PROCESS(desktop-file-install --dir=$HOME/.local/share/applications ${DKPROJECT}/${OS}/Release/${APP_NAME}.desktop WORKING_DIRECTORY ${DKPROJECT}/${OS}/Release)
 endif()
-
 
 #############
 if(RASPBERRY)
@@ -847,14 +824,12 @@ if(RASPBERRY)
 	#RASPBERRY_LIB(libstdc++fs.a)
 	#link_directories(/opt/vc/lib)
 	#RASPBERRY_LIB(bcm_host)
-	
 	#set(CMAKE_CXX_FLAGS "-g -no-pie -std=c++17")
 	
 	if(DEBUG)
 		add_definitions(-DDEBUG)
 		add_executable(${APP_NAME} ${App_SRC})
 		target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${LIBS})
-		#set_target_properties(${APP_NAME} PROPERTIES DEBUG_POSTFIX d)
 	endif()
 	if(RELEASE)
 		add_executable(${APP_NAME} ${App_SRC})
@@ -875,16 +850,17 @@ if(RASPBERRY)
 		"Type=Application\n"
 		"Terminal=true\n"
 		"Name="+${APP_NAME}+"\n"
-		"Exec=${DKPROJECT}/${OS}/Debug/${APP_NAME}\n"
+		"Exec=${DKPROJECT}/${OS}/Release/${APP_NAME}\n"
 		"Icon=${DKPROJECT}/icons/icon.png\n")
-	file(write ${DKPROJECT}/${OS}/Debug/${APP_NAME}.desktop ${DESKTOP_FILE})
+	file(write ${DKPROJECT}/${OS}/Release/${APP_NAME}.desktop ${DESKTOP_FILE})
 	
 	# Install to apps menu
 	DKEXECUTE_PROCESS(desktop-file-install --dir=$HOME/.local/share/applications ${DKPROJECT}/${OS}/Release/${APP_NAME}.desktop WORKING_DIRECTORY ${DKPROJECT}/${OS}/Release)
 endif()
 
-
+###########
 if(ANDROID)
+	## OS SOURCE FILES ##
 	DKCOPY(${DKPLUGINS}/_DKIMPORT/Android.h ${DKPROJECT}/Android.h FALSE) ## copy app default files recursivly without overwrite
 	if(ANDROID_32)
 		DKCOPY(${DKPLUGINS}/_DKIMPORT/android32 ${DKPROJECT}/android32 FALSE) ## copy app default files recursivly without overwrite
@@ -927,17 +903,16 @@ if(ANDROID)
 	#add_executable(DKAndroid ${App_SRC})
 	add_library(${APP_NAME} SHARED ${App_SRC})
 	
+	#target_include_directories(${APP_NAME} PUBLIC ${INCLUDE_DIRECTORIES}) #of ${DKINCLUDES_LIST}
+	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${LIBS})
+	#add_dependencies(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS})	
+	#include_external_msproject(DKGradle ${DKPROJECT}/${OS}/DKGradle.androidproj)
+	
 	foreach(plugin ${dkdepend_list})
 		if(EXISTS "${DKPLUGINS}/${plugin}/CMakeLists.txt")
 			add_dependencies(${APP_NAME} ${plugin})
 		endif()	
-	endforeach()
-	
-	#target_include_directories(${APP_NAME} PUBLIC ${INCLUDE_DIRECTORIES}) #of ${DKINCLUDES_LIST}
-	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${LIBS})
-	#add_dependencies(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS})	
-	
-	#include_external_msproject(DKGradle ${DKPROJECT}/${OS}/DKGradle.androidproj)
+	endforeach()	
 endif()
 
 DKSET(include_libs "${LIBS} ${DEBUG_LIBS} ${RELEASE_LIBS}")
