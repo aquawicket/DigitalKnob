@@ -552,10 +552,10 @@ function DKBuild_DoResults(){
 			return
 		if(TYPE === "Debug" || TYPE === "ALL")
 			//CPP_DKFile_Rename(app_path+OS+"/Debug/"+APP+".app", app_path+OS+"/Debug/"+APP+"_OLD.app", true)
-			CPP_DK_Execute("xcodebuild -target "+APP+" -configuration Debug build -arch \"armv7 armv7s\"")
+			CPP_DK_Execute("xcodebuild -target "+APP+" -configuration Debug build")
 		if(TYPE === "Release" || TYPE === "ALL")
 			//CPP_DKFile_Rename(app_path+OS+"/Release/"+APP+".app", app_path+OS+"/Release/"+APP+"_OLD.app", true)
-			CPP_DK_Execute("xcodebuild -target "+APP+" -configuration Release build -arch \"armv7 armv7s\"")
+			CPP_DK_Execute("xcodebuild -target "+APP+" -configuration Release build")
 	}
 	
 	///// IOSSIM32 //////
