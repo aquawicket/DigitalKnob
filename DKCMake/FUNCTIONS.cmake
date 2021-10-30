@@ -2789,8 +2789,8 @@ function(DKPLUGIN name)
 	DKSET(CMAKE_FILE "${CMAKE_FILE}endif()\n")
 	
 	DKSET(CMAKE_FILE "${CMAKE_FILE}if(IOS)\n")
-	DKSET(CMAKE_FILE "${CMAKE_FILE}		set(IOS_PLATFORM OS)\n")
-	DKSET(CMAKE_FILE "${CMAKE_FILE}		include(${DKCMAKE}/iOS.cmake)\n")
+	DKSET(CMAKE_FILE "${CMAKE_FILE}		set(PLATFORM OS64)\n")
+	DKSET(CMAKE_FILE "${CMAKE_FILE}		include(${DKCMAKE}/ios.toolchain.cmake)\n")
 	DKSET(CMAKE_FILE "${CMAKE_FILE}		add_definitions(-DIOS)\n")
 	DKSET(CMAKE_FILE "${CMAKE_FILE}endif()\n")
 	
