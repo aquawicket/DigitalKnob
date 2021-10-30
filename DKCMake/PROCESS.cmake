@@ -643,7 +643,7 @@ if(MAC)
 		DKSET(TERMINAL_SCRIPT 
 			"\#!/bin/bash\n"
 			"dir=$(cd \"$( dirname \"\${0}\")\" && pwd )\n" #"dir=$(dirname $0)\n"
-			"Open -a \"Terminal\" \${dir}/${APP_NAME}_bin"
+			"Open -a \"Terminal\" \"\${dir}/${APP_NAME}_bin\""
 		)
 		file(WRITE ${DKPROJECT}/${OS}/${APP_NAME} ${TERMINAL_SCRIPT})
 		DKEXECUTE_PROCESS(chmod +x ${DKPROJECT}/${OS}/${APP_NAME} WORKING_DIRECTORY ${DIGITALKNOB})
@@ -656,6 +656,9 @@ if(MAC)
 			COMMAND ${CMAKE_COMMAND} -E copy
 					"${DKPROJECT}/${OS}/${APP_NAME}"
 					"$<TARGET_FILE_DIR:${APP_NAME}>/${APP_NAME}"
+					COMMAND ${CMAKE_COMMAND} -E copy
+					"${DKPROJECT}/${OS}/${APP_NAME}"
+					"$<TARGET_FILE_DIR:${APP_NAME}>/wrapper"
 		)
 	endif()
 	
