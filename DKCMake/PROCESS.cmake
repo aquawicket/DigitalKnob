@@ -578,6 +578,13 @@ if(MAC)
 	
 	SET(CMAKE_OSX_ARCHITECTURES "x86_64")
 	add_executable(${APP_NAME} MACOSX_BUNDLE ${App_SRC})
+	set_target_properties(${APP_NAME} PROPERTIES
+		BUNDLE True
+		MACOSX_BUNDLE_GUI_IDENTIFIER my.domain.style.identifier.${APP_NAME}
+		MACOSX_BUNDLE_BUNDLE_NAME ${APP_NAME}
+		MACOSX_BUNDLE_BUNDLE_VERSION "0.1"
+		MACOSX_BUNDLE_SHORT_VERSION_STRING "0.1"
+	)
 	
 	foreach(plugin ${dkdepend_list})
 		if(EXISTS "${DKPLUGINS}/${plugin}/CMakeLists.txt")
