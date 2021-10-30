@@ -603,7 +603,6 @@ if(MAC)
 	
 	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${LIBS})
 	
-	
 	add_custom_command(
 		TARGET ${APP_NAME}
 		POST_BUILD
@@ -612,16 +611,19 @@ if(MAC)
 		COMMAND ${CMAKE_COMMAND} -E echo "!!!!!! CONFIG = $<CONFIG>"
 	)
 	
-	# Copy the CEF framework into the Frameworks directory.
+	# Copy the CEF framework and DKCefChild into the app bundle
 	if(EXISTS ${CEF})
-	message(STATUS "Adding Chromium Embedded Framework.framework to bundle . . .")
-	add_custom_command(
-		TARGET ${APP_NAME}
-		POST_BUILD
-		COMMAND ${CMAKE_COMMAND} -E copy_directory
-				"${CEF}/$<CONFIG>/Chromium Embedded Framework.framework"
-				"$<TARGET_FILE_DIR:${APP_NAME}>/../Frameworks/Chromium Embedded Framework.framework"
-	)
+		message(STATUS "Adding Chromium Embedded Framework.framework to bundle . . .")
+		add_custom_command(
+			TARGET ${APP_NAME}
+			POST_BUILD
+			COMMAND ${CMAKE_COMMAND} -E copy_directory
+					"${CEF}/$<CONFIG>/Chromium Embedded Framework.framework"
+					"$<TARGET_FILE_DIR:${APP_NAME}>/../Frameworks/Chromium Embedded Framework.framework"
+			COMMAND ${CMAKE_COMMAND} -E copy_directory
+					"${DKPlugins}/DKCefChild/${OS}/$<CONFIG>/DKCefChild.app"
+					"$<TARGET_FILE_DIR:${APP_NAME}>/../Frameworks/DKCefChild.app"
+		)
 	endif()
 	
 	#DKUPDATE_INFO_Plist(${APP_NAME}) #this may need to be run at post build
