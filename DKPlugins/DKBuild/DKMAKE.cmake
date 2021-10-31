@@ -1,5 +1,7 @@
 DKDEPEND(DKCurl)
 DKDEPEND(DKArchive)
-DKDEPEND(imagemagick)
+if(WIN)
+	DKDEPEND(imagemagick)
+endif()
 
 DKASSETS(DKBuild)
