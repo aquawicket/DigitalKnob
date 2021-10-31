@@ -800,7 +800,7 @@ if(LINUX)
 		"Version=1.0\n"
 		"Type=Application\n"
 		"Terminal=true\n"
-		"Name="+${APP_NAME}+"\n"
+		"Name=${APP_NAME}\n"
 		"Exec=${DKPROJECT}/${OS}/Debug/${APP_NAME}\n"
 		"Icon=${DKPROJECT}/icons/icon.png\n")
 	file(WRITE ${DKPROJECT}/${OS}/Debug/${APP_NAME}.desktop ${DESKTOP_FILE})
@@ -881,7 +881,7 @@ if(RASPBERRY)
 		"Version=1.0\n"
 		"Type=Application\n"
 		"Terminal=true\n"
-		"Name="+${APP_NAME}+"\n"
+		"Name=${APP_NAME}\n"
 		"Exec=${DKPROJECT}/${OS}/Debug/${APP_NAME}\n"
 		"Icon=${DKPROJECT}/icons/icon.png\n")
 	file(WRITE ${DKPROJECT}/${OS}/Debug/${APP_NAME}.desktop ${DESKTOP_FILE})
@@ -893,7 +893,7 @@ if(RASPBERRY)
 		"Version=1.0\n"
 		"Type=Application\n"
 		"Terminal=true\n"
-		"Name="+${APP_NAME}+"\n"
+		"Name=${APP_NAME}\n"
 		"Exec=${DKPROJECT}/${OS}/Release/${APP_NAME}\n"
 		"Icon=${DKPROJECT}/icons/icon.png\n")
 	file(WRITE ${DKPROJECT}/${OS}/Release/${APP_NAME}.desktop ${DESKTOP_FILE})
