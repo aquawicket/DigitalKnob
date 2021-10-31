@@ -138,7 +138,7 @@ while :
 		REPLY=
 	done
 
-	cd $DKPATH
+	cd $DIGITALKNOB
 	echo Deleteing CMake cache . . .
 	find . -name "CMakeCache.*" -delete
 	rm -rf `find . -type d -name CMakeFiles`
