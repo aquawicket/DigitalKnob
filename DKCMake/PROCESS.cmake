@@ -14,6 +14,7 @@ include(DKCMake/FUNCTIONS.cmake)
 include(DKCMake/OPTIONS.cmake)
 include(DKCMake/DISABLED.cmake)
 
+
 get_filename_component(APP_NAME ${DKPROJECT} NAME)
 string(REPLACE " " "_" APP_NAME ${APP_NAME})
 
@@ -932,7 +933,7 @@ if(ANDROID)
 	
 	#DKUPDATE_ANDROID_NAME(${APP_NAME})
 	
-	set(CMAKE_CXX_FLAGS "-DDKAPP -DUSE_DK -std=c++17")
+	set(CMAKE_CXX_FLAGS "-DDKAPP -DUSE_DK -std=c++1z")
 	set(CMAKE_CXX_FLAGS_DEBUG "-g2 -gdwarf-2 -O0 -DDEBUG") 
 	set(CMAKE_CXX_FLAGS_RELEASE "-O3")
 	#set(CMAKE_POSITION_INDEPENDENT_CODE TRUE)
