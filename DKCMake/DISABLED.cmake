@@ -154,7 +154,9 @@ if(CMAKE_HOST_APPLE)  # Disabled on Apple host machines
 	DKDISABLE(uwebsockets)
 	DKDISABLE(visualstudio)
 endif()
-
+if(IOS)
+	DKDISABLE(libarchive)
+endif()
 
 
 if(CMAKE_HOST_LINUX) # Disabled on Linux host machines
