@@ -793,7 +793,19 @@ if(LINUX)
 		endif()	
 	endforeach()
 	
-	# Create .desktop file
+	# Create .desktop file for Debug
+	DKSET(DESKTOP_FILE
+		"[Desktop Entry]\n"
+		"Encoding=UTF-8\n"
+		"Version=1.0\n"
+		"Type=Application\n"
+		"Terminal=true\n"
+		"Name="+${APP_NAME}+"\n"
+		"Exec=${DKPROJECT}/${OS}/Debug/${APP_NAME}\n"
+		"Icon=${DKPROJECT}/icons/icon.png\n")
+	file(WRITE ${DKPROJECT}/${OS}/Debug/${APP_NAME}.desktop ${DESKTOP_FILE})
+	
+	# Create .desktop file for Release
 	DKSET(DESKTOP_FILE
 		"[Desktop Entry]\n"
 		"Encoding=UTF-8\n"
@@ -805,8 +817,8 @@ if(LINUX)
 		"Icon=${DKPROJECT}/icons/icon.png\n")
 	file(WRITE ${DKPROJECT}/${OS}/Release/${APP_NAME}.desktop ${DESKTOP_FILE})
 	
-	# Install to apps menu
-	DKEXECUTE_PROCESS(desktop-file-install --dir=/home/$USER/.local/share/applications ${DKPROJECT}/${OS}/Release/${APP_NAME}.desktop WORKING_DIRECTORY ${DKPROJECT}/${OS}/Release)
+	# Install shortcut of Release build to the apps menu
+	DKEXECUTE_PROCESS(desktop-file-install --dir=/home/$ENV{USERNAME}/.local/share/applications ${DKPROJECT}/${OS}/Release/${APP_NAME}.desktop WORKING_DIRECTORY ${DKPROJECT}/${OS}/Release)
 endif()
 
 #############
@@ -862,7 +874,19 @@ if(RASPBERRY)
 		endif()	
 	endforeach()
 	
-	# Create .desktop file
+	# Create .desktop file for Debug
+	DKSET(DESKTOP_FILE
+		"[Desktop Entry]\n"
+		"Encoding=UTF-8\n"
+		"Version=1.0\n"
+		"Type=Application\n"
+		"Terminal=true\n"
+		"Name="+${APP_NAME}+"\n"
+		"Exec=${DKPROJECT}/${OS}/Debug/${APP_NAME}\n"
+		"Icon=${DKPROJECT}/icons/icon.png\n")
+	file(WRITE ${DKPROJECT}/${OS}/Debug/${APP_NAME}.desktop ${DESKTOP_FILE})
+	
+	# Create .desktop file for Release
 	DKSET(DESKTOP_FILE
 		"[Desktop Entry]\n"
 		"Encoding=UTF-8\n"
@@ -874,8 +898,8 @@ if(RASPBERRY)
 		"Icon=${DKPROJECT}/icons/icon.png\n")
 	file(WRITE ${DKPROJECT}/${OS}/Release/${APP_NAME}.desktop ${DESKTOP_FILE})
 	
-	# Install to apps menu
-	DKEXECUTE_PROCESS(desktop-file-install --dir=/home/$USER/.local/share/applications ${DKPROJECT}/${OS}/Release/${APP_NAME}.desktop WORKING_DIRECTORY ${DKPROJECT}/${OS}/Release)
+	# Install shortcut of Release build to the apps menu
+	DKEXECUTE_PROCESS(desktop-file-install --dir=/home/$ENV{USERNAME}/.local/share/applications ${DKPROJECT}/${OS}/Release/${APP_NAME}.desktop WORKING_DIRECTORY ${DKPROJECT}/${OS}/Release)
 endif()
 
 ###########
