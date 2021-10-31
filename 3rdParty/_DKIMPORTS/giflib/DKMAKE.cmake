@@ -111,11 +111,11 @@ MAC_RELEASE_COMMAND(make "CXXFLAGS=-arch x86_64" "CFLAGS=-arch x86_64" "LDFLAGS=
 
 
 IOS_DEBUG_PATH(${GIF}/${OS}/${DEBUG_DIR})
-IOS_DEBUG_COMMAND(../../configure --disable-shared --enable-static --arch-"armv7 armv7s")
+IOS_DEBUG_COMMAND(../../configure --disable-shared --enable-static) #--arch-"armv7 armv7s")
 IOS_DEBUG_COMMAND(make)
 
 IOS_RELEASE_PATH(${GIF}/${OS}/${RELEASE_DIR})
-IOS_RELEASE_COMMAND(../../configure --disable-shared --enable-static --arch-"armv7 armv7s")
+IOS_RELEASE_COMMAND(../../configure --disable-shared --enable-static) #--arch-"armv7 armv7s")
 IOS_RELEASE_COMMAND(make)
 
 
