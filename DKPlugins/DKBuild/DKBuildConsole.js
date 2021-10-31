@@ -50,7 +50,7 @@ function DKBuildConsole_ChooseUpdate() {
 	
 	//UNIX FIX
 	var key = 10
-    while(key === 10)
+    while(key === 10 || key === 0)
         key = CPP_DK_GetKey()
 	
     console.log("key = "+key)
@@ -130,7 +130,7 @@ function DKBuildConsole_SelectOs() {
     
 	//UNIX FIX
 	var key = 10
-    while(key === 10)
+    while(key === 10 || key === 0)
         key = CPP_DK_GetKey()
 	
 	//console.log("key = "+key)
@@ -168,7 +168,7 @@ function DKBuildConsole_SelectApp() {
     
 	//UNIX FIX
 	var key = 10
-    while(key === 10)
+    while(key === 10 || key === 0)
         key = CPP_DK_GetKey()
 	
 	console.log("key = "+key)
@@ -190,7 +190,7 @@ function DKBuildConsole_SelectType() {
     
 	//UNIX FIX
 	var key = 10
-    while(key === 10)
+    while(key === 10 || key === 0)
         key = CPP_DK_GetKey()
 	
 	console.log("key = "+key)
