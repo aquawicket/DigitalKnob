@@ -818,7 +818,7 @@ if(LINUX)
 	file(WRITE ${DKPROJECT}/${OS}/Release/${APP_NAME}.desktop ${DESKTOP_FILE})
 	
 	# Install shortcut of Release build to the apps menu
-	DKEXECUTE_PROCESS(desktop-file-install --dir=/home/$ENV{USERNAME}/.local/share/applications ${DKPROJECT}/${OS}/Release/${APP_NAME}.desktop WORKING_DIRECTORY ${DKPROJECT}/${OS}/Release)
+	DKEXECUTE_PROCESS(desktop-file-install --dir=/home/$ENV{USER}/.local/share/applications ${DKPROJECT}/${OS}/Release/${APP_NAME}.desktop WORKING_DIRECTORY ${DKPROJECT}/${OS}/Release)
 endif()
 
 #############
@@ -899,7 +899,7 @@ if(RASPBERRY)
 	file(WRITE ${DKPROJECT}/${OS}/Release/${APP_NAME}.desktop ${DESKTOP_FILE})
 	
 	# Install shortcut of Release build to the apps menu
-	DKEXECUTE_PROCESS(desktop-file-install --dir=/home/$ENV{USERNAME}/.local/share/applications ${DKPROJECT}/${OS}/Release/${APP_NAME}.desktop WORKING_DIRECTORY ${DKPROJECT}/${OS}/Release)
+	DKEXECUTE_PROCESS(desktop-file-install --dir=/home/$ENV{USER}/.local/share/applications ${DKPROJECT}/${OS}/Release/${APP_NAME}.desktop WORKING_DIRECTORY ${DKPROJECT}/${OS}/Release)
 endif()
 
 ###########
