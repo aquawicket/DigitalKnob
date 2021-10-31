@@ -806,7 +806,7 @@ if(LINUX)
 	file(WRITE ${DKPROJECT}/${OS}/Release/${APP_NAME}.desktop ${DESKTOP_FILE})
 	
 	# Install to apps menu
-	DKEXECUTE_PROCESS(desktop-file-install --dir=$HOME/.local/share/applications ${DKPROJECT}/${OS}/Release/${APP_NAME}.desktop WORKING_DIRECTORY ${DKPROJECT}/${OS}/Release)
+	DKEXECUTE_PROCESS(desktop-file-install --dir=/home/$USER/.local/share/applications ${DKPROJECT}/${OS}/Release/${APP_NAME}.desktop WORKING_DIRECTORY ${DKPROJECT}/${OS}/Release)
 endif()
 
 #############
@@ -875,7 +875,7 @@ if(RASPBERRY)
 	file(WRITE ${DKPROJECT}/${OS}/Release/${APP_NAME}.desktop ${DESKTOP_FILE})
 	
 	# Install to apps menu
-	DKEXECUTE_PROCESS(desktop-file-install --dir=$HOME/.local/share/applications ${DKPROJECT}/${OS}/Release/${APP_NAME}.desktop WORKING_DIRECTORY ${DKPROJECT}/${OS}/Release)
+	DKEXECUTE_PROCESS(desktop-file-install --dir=/home/$USER/.local/share/applications ${DKPROJECT}/${OS}/Release/${APP_NAME}.desktop WORKING_DIRECTORY ${DKPROJECT}/${OS}/Release)
 endif()
 
 ###########
