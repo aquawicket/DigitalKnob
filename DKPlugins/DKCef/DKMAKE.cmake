@@ -1,4 +1,4 @@
-message(STATUS "!!!!!!!!!! TEST     In DKCef:  and CMAKE_PROJECT_NAME = ${CMAKE_PROJECT_NAME} !!!!!!!!!!!")
+#NOTE: Use ${CMAKE_PROJECT_NAME} to reference the root parent project if needed
 
 DKDEPEND(cef_binary)
 IF(LINUX)
