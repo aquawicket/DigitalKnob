@@ -1,3 +1,5 @@
+message(STATUS "!!!!!!!!!! TEST     In DKCef:  and CMAKE_PROJECT_NAME = ${CMAKE_PROJECT_NAME} !!!!!!!!!!!")
+
 DKDEPEND(DKCef)
 
 DKSET(QUEUE_BUILD ON)

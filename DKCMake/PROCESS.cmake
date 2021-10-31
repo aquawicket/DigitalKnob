@@ -28,7 +28,7 @@ DKSET(DKAPP ON)
 ##################################################
 ##### Scan the DKPlugins and build the lists #####
 ##################################################
-include(${DKCMAKE}/BuildTools.cmake) #FIXME - this doesn't obey ordering, these dependencies shound come first. Possibly because it's not named "DKMAKE.cmake" ?
+include(${DKCMAKE}/BuildTools.cmake)
 include(${DKPROJECT}/DKMAKE.cmake)
 
 DKBUILD_LOG("############################################################")
@@ -992,3 +992,6 @@ message(STATUS "\n")
 message(STATUS "**************************************************")
 message(STATUS "****** Generated ${APP_NAME} - ${OS}  ************")
 message(STATUS "**************************************************\n")
+
+
+# https://gist.github.com/baiwfg2/39881ba703e9c74e95366ed422641609

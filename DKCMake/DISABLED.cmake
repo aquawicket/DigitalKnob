@@ -1,7 +1,6 @@
 # DISABLED FOR ALL
 DKDISABLE(_TEMPLATE_APP_)
 DKDISABLE(_TEMPLATE_LIB_)
-DKDISABLE(android-studio)
 DKDISABLE(conio.h)
 #DKDISABLE(DKCefChild)
 DKDISABLE(DKJerryscript)
@@ -57,16 +56,16 @@ DKDISABLE(tesseract)
 DKDISABLE(waave)
 
 
-
 if(NOT CMAKE_HOST_WIN32) # Disabled on Non-Windows host machines
+	DKDISABLE(android-studio)
 	DKDISABLE(glew)
+	DKDISABLE(glintercept)
 	DKDISABLE(mingw32)
 	DKDISABLE(mingw64)
 	DKDISABLE(msys)
 	DKDISABLE(python)
 	DKDISABLE(php-win32-vs16-x64)
 	DKDISABLE(vs16-redistributable)
-	DKDISABLE(glintercept)
 endif()
 if(WIN) # Disabled for Windows targets
 	#DKDISABLE(bzip2)

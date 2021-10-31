@@ -1,3 +1,6 @@
+#FIXME - There was an issue of these dependencies not following order. 
+# It may be fixed, but let's keep an eye out for it just in case.
+
 ### DEPENDS ###
 DKDEPEND(git)
 DKDEPEND(cmake)

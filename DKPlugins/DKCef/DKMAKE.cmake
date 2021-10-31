@@ -1,3 +1,5 @@
+message(STATUS "!!!!!!!!!! TEST     In DKCef:  and CMAKE_PROJECT_NAME = ${CMAKE_PROJECT_NAME} !!!!!!!!!!!")
+
 DKDEPEND(cef_binary)
 IF(LINUX)
 	DKDEPEND(libgtk2.0-dev)
