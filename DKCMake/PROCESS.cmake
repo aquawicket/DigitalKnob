@@ -803,7 +803,7 @@ if(LINUX)
 		"Name="+${APP_NAME}+"\n"
 		"Exec=${DKPROJECT}/${OS}/Release/${APP_NAME}\n"
 		"Icon=${DKPROJECT}/icons/icon.png\n")
-	file(write ${DKPROJECT}/${OS}/Release/${APP_NAME}.desktop ${DESKTOP_FILE})
+	file(WRITE ${DKPROJECT}/${OS}/Release/${APP_NAME}.desktop ${DESKTOP_FILE})
 	
 	# Install to apps menu
 	DKEXECUTE_PROCESS(desktop-file-install --dir=$HOME/.local/share/applications ${DKPROJECT}/${OS}/Release/${APP_NAME}.desktop WORKING_DIRECTORY ${DKPROJECT}/${OS}/Release)
@@ -872,7 +872,7 @@ if(RASPBERRY)
 		"Name="+${APP_NAME}+"\n"
 		"Exec=${DKPROJECT}/${OS}/Release/${APP_NAME}\n"
 		"Icon=${DKPROJECT}/icons/icon.png\n")
-	file(write ${DKPROJECT}/${OS}/Release/${APP_NAME}.desktop ${DESKTOP_FILE})
+	file(WRITE ${DKPROJECT}/${OS}/Release/${APP_NAME}.desktop ${DESKTOP_FILE})
 	
 	# Install to apps menu
 	DKEXECUTE_PROCESS(desktop-file-install --dir=$HOME/.local/share/applications ${DKPROJECT}/${OS}/Release/${APP_NAME}.desktop WORKING_DIRECTORY ${DKPROJECT}/${OS}/Release)
