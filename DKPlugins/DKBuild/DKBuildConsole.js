@@ -50,7 +50,7 @@ function DKBuildConsole_ChooseUpdate() {
 	
 	//UNIX FIX
 	var key = 10
-    while(key === 10 || key === 0)
+    while(key === 10 || key === 27 || key === 0)
         key = CPP_DK_GetKey()
 	
     console.log("key = "+key)
@@ -130,7 +130,7 @@ function DKBuildConsole_SelectOs() {
     
 	//UNIX FIX
 	var key = 10
-    while(key === 10 || key === 0)
+    while(key === 10 || key === 27 || key === 0)
         key = CPP_DK_GetKey()
 	
 	//console.log("key = "+key)
@@ -168,7 +168,7 @@ function DKBuildConsole_SelectApp() {
     
 	//UNIX FIX
 	var key = 10
-    while(key === 10 || key === 0)
+    while(key === 10 || key ===27 || key === 0)
         key = CPP_DK_GetKey()
 	
 	console.log("key = "+key)
@@ -190,7 +190,7 @@ function DKBuildConsole_SelectType() {
     
 	//UNIX FIX
 	var key = 10
-    while(key === 10 || key === 0)
+    while(key === 10 || key === 27 || key === 0)
         key = CPP_DK_GetKey()
 	
 	console.log("key = "+key)
@@ -326,14 +326,14 @@ function DKBuildConsole_TranslateOption(num) {
 }
 
 function DKBuildConsole_KeyToApp(key) {
-	if(CPP_DK_GetOS() === "Linux"){
-		//F1 Linux
+	if(CPP_DK_GetOS() === "Linux" || CPP_DK_GetOS() === "Mac"){
+		//F1 Unix
 		if (key === 80)
 			APP = "ALLAPPS"
 		//F2 = 82... etc.
 	}
 	else{
-		//F1
+		//F1 Windows
 		if (key === 59)
 			APP = "ALLAPPS"
 	}
