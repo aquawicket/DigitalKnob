@@ -357,23 +357,24 @@ endif()
 ###########################################################################
 if(DEBUG)
 	DKSET(CMAKE_BUILD_TYPE DEBUG)
+	add_definitions(-DDEBUG)
 endif()
 if(RELEASE)
 	DKSET(CMAKE_BUILD_TYPE RELEASE)
+	add_definitions(-DRELEASE)
 endif(RELEASE)
 
 
-## TODO - MOVE ALL DEFAULT COMPILER FLAGS TO DKCMAKE_ variables inside BuildTools.cmake
 
-###########################################################################
-## Set variables for Generator
-###########################################################################
-
-##### Microsoft Visual Studio 2019 #####
-if(CMAKE_GENERATOR STREQUAL "Visual Studio 16 2019")
-	if(WIN)
+if(WIN_32)
+	add_definitions(-DWIN32)
+	add_definitions(-D_WINDOWS)
+	## add_definitions(-D__STDC_CONSTANT_MACROS)
+	## add_definitions(-D_SCL_SECURE_NO_WARNINGS)
+	## add_definitions(-D_CRT_SECURE_NO_DEPRECATE)
+	if(CMAKE_GENERATOR STREQUAL "Visual Studio 16 2019")
 		DKSET(CMAKE_CXX_FLAGS "/DWIN32 /D_WINDOWS /W3 /nologo /GR /EHsc /Zm500 /D_WIN32_WINNT=0x0600 /D_USING_V110_SDK71_")
-		DKSET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /Yustdafx.h) #precompiled headers")
+		#DKSET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /Yustdafx.h) #precompiled headers")
 		if(STATIC)
 			DKSET(CMAKE_C_FLAGS_DEBUG "/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG")
 			DKSET(CMAKE_C_FLAGS_RELEASE "/MT /O2 /Ob2 /DNDEBUG")
@@ -386,184 +387,202 @@ if(CMAKE_GENERATOR STREQUAL "Visual Studio 16 2019")
 		endif()
 		DKSET(FLAGS "/W3 /nologo /Zm500 /EHsc /GR /D_WIN32_WINNT=0x0600 /D_USING_V110_SDK71_ /Zc:__cplusplus $<$<CONFIG:Debug>:/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG> $<$<CONFIG:Release>:/MT /O2 /Ob2 /DNDEBUG>")
 	endif()
-	if(ANDROID) ## https://stackoverflow.com/a/38057807/688352
-		if(STATIC)
-			DKSET(CMAKE_CXX_FLAGS_DEBUG "-DDEBUG -D_DEBUG -frtti -fexceptions -std=c++1z") # -lstdc++fs")
-			DKSET(CMAKE_CXX_FLAGS_RELEASE "-DNDEBUG -frtti -fexceptions -std=c++1z") # -lstdc++fs")
-		endif()
-		if(SHARED)
-			DKSET(CMAKE_CXX_FLAGS_DEBUG "-DDEBUG -D_DEBUG")
-			DKSET(CMAKE_CXX_FLAGS_RELEASE "-DNDEBUG")
-		endif()
+endif()
+
+if(WIN_64)
+	add_definitions(-DWIN32)
+	add_definitions(-DWIN64)
+	##add_definitions(-D_WINDOWS)
+	#add_definitions(-D__STDC_CONSTANT_MACROS)
+	#add_definitions(-D_SCL_SECURE_NO_WARNINGS)
+	#add_definitions(-D_CRT_SECURE_NO_DEPRECATE)
+	if(CMAKE_GENERATOR STREQUAL "Visual Studio 16 2019 Win64")
+		#DKSET(CMAKE_CXX_FLAGS "/DWIN32 /D_WINDOWS /W3 /nologo /GR /EHsc /Yustdafx.h /Zm500 /D_WIN32_WINNT=0x0600") #precompiled headers
+		DKSET(CMAKE_CXX_FLAGS "/DWIN32 /DWIN64 /D_WINDOWS /W3 /nologo /GR /EHsc /Zm500 /D_WIN32_WINNT=0x0600 /MACHINE:X64")
+		DKSET(CMAKE_CXX_FLAGS_DEBUG "/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG")
+		DKSET(CMAKE_CXX_FLAGS_RELEASE "/MT /O2 /Ob2 /DNDEBUG")
+		DKSET(FLAGS "/DWIN32 /DWIN64 /W3 /nologo /Zm500 /EHsc /GR /D_WIN32_WINNT=0x0600 /Zc:__cplusplus /MACHINE:X64 $<$<CONFIG:Debug>:/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG> $<$<CONFIG:Release>:/MT /O2 /Ob2 /DNDEBUG>")
 	endif()
 endif()
 
-##### Microsoft Visual Studio 2019 Win64 #####
-if(CMAKE_GENERATOR STREQUAL "Visual Studio 16 2019 Win64")
-	#DKSET(CMAKE_CXX_FLAGS "/DWIN32 /D_WINDOWS /W3 /nologo /GR /EHsc /Yustdafx.h /Zm500 /D_WIN32_WINNT=0x0600") #precompiled headers
-	DKSET(CMAKE_CXX_FLAGS "/DWIN32 /DWIN64 /D_WINDOWS /W3 /nologo /GR /EHsc /Zm500 /D_WIN32_WINNT=0x0600 /MACHINE:X64")
-	DKSET(CMAKE_CXX_FLAGS_DEBUG "/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG")
-	DKSET(CMAKE_CXX_FLAGS_RELEASE "/MT /O2 /Ob2 /DNDEBUG")
-	DKSET(FLAGS "/DWIN32 /DWIN64 /W3 /nologo /Zm500 /EHsc /GR /D_WIN32_WINNT=0x0600 /Zc:__cplusplus /MACHINE:X64 $<$<CONFIG:Debug>:/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG> $<$<CONFIG:Release>:/MT /O2 /Ob2 /DNDEBUG>")
-endif()
 
-##### Apple Xcode #####
-if(CMAKE_GENERATOR STREQUAL "Xcode")
-	DKSET(CMAKE_CXX_FLAGS "-x objective-c++")
-endif()
-
-##### Unix Makefiles #####
-if(CMAKE_GENERATOR STREQUAL "Unix Makefiles")
-	if(MAC)
+if(MAC_32)
+	add_definitions(-DMAC32)
+	add_definitions(-DMAC)
+	include_directories(/usr/X11/include)
+	if(CMAKE_GENERATOR STREQUAL "Xcode")
 		DKSET(CMAKE_C_FLAGS "-fPIC")
-		DKSET(CMAKE_CXX_FLAGS "-std=c++17")
+		DKSET(CMAKE_CXX_FLAGS "-x objective-c++ -std=c++17")
 	endif()
-	if(LINUX)
+endif()
+
+if(MAC_64)
+	add_definitions(-DMAC64)
+	add_definitions(-DMAC)
+	include_directories(/usr/X11/include)
+	if(CMAKE_GENERATOR STREQUAL "Xcode")
+		DKSET(CMAKE_C_FLAGS "-fPIC")
+		DKSET(CMAKE_CXX_FLAGS "-x objective-c++ -std=c++17")
+	endif()
+endif()
+
+if(IOS_32)
+	add_definitions(-DIOS32)
+	add_definitions(-DIOS)
+	include_directories(/usr/X11/include)
+	list(APPEND App_SRC ${PATH_PLUGINS}/DK/DKiPhone.mm)
+	#DKSET(FLAGS -DIOS)
+endif()
+
+if(IOS_64)
+	add_definitions(-DIOS64)
+	add_definitions(-DIOS)
+	include_directories(/usr/X11/include)
+	list(APPEND App_SRC ${PATH_PLUGINS}/DK/DKiPhone.mm)
+	#DKSET(FLAGS -DIOS)
+endif()
+
+if(IOSSIM_32)
+	add_definitions(-DIOS32)
+	add_definitions(-DIOS)
+	add_definitions(-DIOSSIM32)
+	add_definitions(-DIOSSIM)
+	include_directories(/usr/X11/include)
+	list(APPEND App_SRC ${PATH_PLUGINS}/DK/DKiPhone.mm)
+	DKSET(CMAKE_OSX_SYSROOT iphoneos)
+	#DKSET(FLAGS -DIOSSIM)
+endif()
+
+if(IOSSIM_64)
+	add_definitions(-DIOS64)
+	add_definitions(-DIOS)
+	add_definitions(-DIOSSIM64)
+	add_definitions(-DIOSSIM)
+	include_directories(/usr/X11/include)
+	list(APPEND App_SRC ${PATH_PLUGINS}/DK/DKiPhone.mm)
+	DKSET(CMAKE_OSX_SYSROOT iphoneos)
+	#DKSET(FLAGS -DIOSSIM)
+endif()
+
+if(LINUX_32)
+if(NOT RASPBERRY)
+	add_definitions(-DLINUX32)
+	add_definitions(-DLINUX)
+	include_directories(/usr/X11/include)
+	if(CMAKE_GENERATOR STREQUAL "Unix Makefiles")
 		DKSET(CMAKE_C_FLAGS "-fPIC")
 		DKSET(CMAKE_CXX_FLAGS "-std=c++17 -lstdc++fs -g -no-pie -fPIC")
 	endif()
-	if(RASPBERRY)
+endif()
+endif()
+
+if(LINUX_64)
+if(NOT RASPBERRY)
+	add_definitions(-DLINUX64)
+	add_definitions(-DLINUX)
+	include_directories(/usr/X11/include)
+	if(CMAKE_GENERATOR STREQUAL "Unix Makefiles")
+		DKSET(CMAKE_C_FLAGS "-fPIC")
+		DKSET(CMAKE_CXX_FLAGS "-std=c++17 -lstdc++fs -g -no-pie -fPIC")
+	endif()
+endif()
+endif()
+
+
+if(RASPBERRY_32)
+	add_definitions(-DRASPBERRY32)
+	add_definitions(-DRASPBERRY)
+	add_definitions(-DLINUX32) #FIXME - not all Raspberry OS's are Linux
+	add_definitions(-DLINUX) #FIXME
+	include_directories(/usr/X11/include)
+	if(CMAKE_GENERATOR STREQUAL "Unix Makefiles")
+		DKSET(CMAKE_C_FLAGS "-fPIC")
+		DKSET(CMAKE_CXX_FLAGS "-std=c++17 -lstdc++fs -g -no-pie -fPIC")
+	endif()
+endif()
+
+if(RASPBERRY_64)
+	add_definitions(-DRASPBERRY64)
+	add_definitions(-DRASPBERRY)
+	add_definitions(-DLINUX64) #FIXME - not all Raspberry OS's are Linux
+	add_definitions(-DLINUX) #FIXME
+	include_directories(/usr/X11/include)
+	if(CMAKE_GENERATOR STREQUAL "Unix Makefiles")
 		DKSET(CMAKE_C_FLAGS "-fPIC")
 		DKSET(CMAKE_CXX_FLAGS "-std=c++17 -lstdc++fs -g -no-pie -fPIC")
 	endif()
 endif()
 
 
-
-
-
-
-
-if(NOT CMAKE_SCRIPT_MODE_FILE)
-	if(WIN_32)
-		add_definitions(-DWIN32)
-		add_definitions(-D_WINDOWS)
-		## add_definitions(-D__STDC_CONSTANT_MACROS)
-		## add_definitions(-D_SCL_SECURE_NO_WARNINGS)
-		## add_definitions(-D_CRT_SECURE_NO_DEPRECATE)
+if(ANDROID_32) ## https://stackoverflow.com/a/38057807/688352
+	add_definitions(-DANDROID32)
+	add_definitions(-DANDROID)
+	if(CMAKE_GENERATOR STREQUAL "Visual Studio 16 2019")
+		DKSET(CMAKE_CXX_FLAGS_DEBUG "-DDEBUG -D_DEBUG -frtti -fexceptions -std=c++1z") # -lstdc++fs")
+		DKSET(CMAKE_CXX_FLAGS_RELEASE "-DNDEBUG -frtti -fexceptions -std=c++1z") # -lstdc++fs")
 	endif()
-
-	if(WIN_64)
-		add_definitions(-DWIN32)
-		add_definitions(-DWIN64)
-		##add_definitions(-D_WINDOWS)
-		#add_definitions(-D__STDC_CONSTANT_MACROS)
-		#add_definitions(-D_SCL_SECURE_NO_WARNINGS)
-		#add_definitions(-D_CRT_SECURE_NO_DEPRECATE)
+endif()
+	
+if(ANDROID_64)
+	add_definitions(-DANDROID64)
+	add_definitions(-DANDROID)
+	if(CMAKE_GENERATOR STREQUAL "Visual Studio 16 2019")
+		DKSET(CMAKE_CXX_FLAGS_DEBUG "-DDEBUG -D_DEBUG -frtti -fexceptions -std=c++1z") # -lstdc++fs")
+		DKSET(CMAKE_CXX_FLAGS_RELEASE "-DNDEBUG -frtti -fexceptions -std=c++1z") # -lstdc++fs")
 	endif()
+endif()
 
-	if(MAC_32)
-		add_definitions(-DMAC32)
-		add_definitions(-DMAC)
-		include_directories(/usr/X11/include)
-	endif()
 
-	if(MAC_64)
-		add_definitions(-DMAC64)
-		add_definitions(-DMAC)
-		include_directories(/usr/X11/include)
-	endif()
 
-	if(IOS_32)
-		add_definitions(-DIOS32)
-		add_definitions(-DIOS)
-		include_directories(/usr/X11/include)
-		list(APPEND App_SRC ${PATH_PLUGINS}/DK/DKiPhone.mm)
-		#DKSET(FLAGS -DIOS)
-	endif()
+## NOTE: These defines should be done as per needed in DKMAKE.cmake files
+if(OPENGL2)
+	add_definitions(-DOPENGL2)
+	add_definitions(-DUSE_SHADERS)
+endif()
 
-	if(IOS_64)
-		add_definitions(-DIOS64)
-		add_definitions(-DIOS)
-		include_directories(/usr/X11/include)
-		list(APPEND App_SRC ${PATH_PLUGINS}/DK/DKiPhone.mm)
-		#DKSET(FLAGS -DIOS)
-	endif()
+if(${DKCEF} STREQUAL "ON")
+	add_definitions(-DUSE_DKCef)
+endif()
 
-	if(IOSSIM_32)
-		add_definitions(-DIOS32)
-		add_definitions(-DIOS)
-		add_definitions(-DIOSSIM32)
-		add_definitions(-DIOSSIM)
-		include_directories(/usr/X11/include)
-		list(APPEND App_SRC ${PATH_PLUGINS}/DK/DKiPhone.mm)
-		DKSET(CMAKE_OSX_SYSROOT iphoneos)
-		#DKSET(FLAGS -DIOSSIM)
-	endif()
 
-	if(IOSSIM_64)
-		add_definitions(-DIOS64)
-		add_definitions(-DIOS)
-		add_definitions(-DIOSSIM64)
-		add_definitions(-DIOSSIM)
-		include_directories(/usr/X11/include)
-		list(APPEND App_SRC ${PATH_PLUGINS}/DK/DKiPhone.mm)
-		DKSET(CMAKE_OSX_SYSROOT iphoneos)
-		#DKSET(FLAGS -DIOSSIM)
-	endif()
 
-	if(LINUX_32)
-		if(NOT RASPBERRY)
-			add_definitions(-DLINUX32)
-			add_definitions(-DLINUX)
-			include_directories(/usr/X11/include)
-			if(DEBUG)
-				add_definitions(-DDEBUG)
-			endif()
-		endif()
-	endif()
-
-	if(LINUX_64)
-		if(NOT RASPBERRY)
-			add_definitions(-DLINUX64)
-			add_definitions(-DLINUX)
-			include_directories(/usr/X11/include)
-			if(DEBUG)
-				add_definitions(-DDEBUG)
-			endif()
-		endif()
-	endif()
-
-	if(RASPBERRY_32)
-		add_definitions(-DRASPBERRY32)
-		add_definitions(-DRASPBERRY)
-		add_definitions(-DLINUX32) #FIXME - not all Raspberry OS's are Linux
-		add_definitions(-DLINUX) #FIXME
-		include_directories(/usr/X11/include)
+## NEW STYLE
+if(WIN) #OS
+	add_definitions(-DWIN) #OS
+	if(X32) #ARCH
+		add_definitions(-DWIN_X32) #OS_ARCH
 		if(DEBUG)
-			add_definitions(-DDEBUG)
+			add_definitions(-DWIN_X32_DEBUG) #OS_ARCH_TYPE
+		endif()
+		if(RELEASE)
+			add_definitions(-DWIN_X32_RELEASE) #OS_ARCH_TYPE
 		endif()
 	endif()
-
-	if(RASPBERRY_64)
-		add_definitions(-DRASPBERRY64)
-		add_definitions(-DRASPBERRY)
-		add_definitions(-DLINUX64) #FIXME - not all Raspberry OS's are Linux
-		add_definitions(-DLINUX) #FIXME
-		include_directories(/usr/X11/include)
+	if(X64) #ARCH
+		add_definitions(-DWIN_X64) #OS_ARCH
 		if(DEBUG)
-			add_definitions(-DDEBUG)
+			add_definitions(-DWIN_X64_DEBUG) #OS_ARCH_TYPE
+		endif()
+		if(RELEASE)
+			add_definitions(-DWIN_X64_RELEASE) #OS_ARCH_TYPE
 		endif()
 	endif()
-
-	if(ANDROID_32)
-		add_definitions(-DANDROID32)
-		add_definitions(-DANDROID)
+	if(ARM32) #ARCH
+		add_definitions(-DWIN_ARM32) #OS_ARCH
+		if(DEBUG)
+			add_definitions(-DWIN_ARM32_DEBUG) #OS_ARCH_TYPE
+		endif()
+		if(RELEASE)
+			add_definitions(-DWIN_ARM32_RELEASE) #OS_ARCH_TYPE
+		endif()
 	endif()
-
-	if(ANDROID_64)
-		add_definitions(-DANDROID64)
-		add_definitions(-DANDROID)
+	if(ARM64) #ARCH
+		add_definitions(-DWIN_ARM64) #OS_ARCH
+		if(DEBUG)
+			add_definitions(-DWIN_ARM64_DEBUG) #OS_ARCH_TYPE
+		endif()
+		if(RELEASE)
+			add_definitions(-DWIN_ARM64_RELEASE) #OS_ARCH_TYPE
+		endif()
 	endif()
-
-
-	## NOTE: These defines should be done as per needed in DKMAKE.cmake files
-	if(OPENGL2)
-		add_definitions(-DOPENGL2)
-		add_definitions(-DUSE_SHADERS)
-	endif()
-
-	if(${DKCEF} STREQUAL "ON")
-		add_definitions(-DUSE_DKCef)
-	endif()
-endif() #NOT CMAKE_SCRIPT_MODE_FILE
+endif()
