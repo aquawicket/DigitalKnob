@@ -281,7 +281,7 @@ endfunction()
 # dk_file_remove
 function(DKREMOVE path)
 	if(NOT EXISTS ${path})
-		message("WARNING: DKREMOVE(${path}): path does not exist")
+		#message("WARNING: DKREMOVE(${path}): path does not exist")
 		return()
 	endif()
 	if(IS_DIRECTORY ${path})
