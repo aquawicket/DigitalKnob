@@ -157,6 +157,7 @@ endif()
 
 if(IOS)
 	DKDISABLE(libarchive)
+	DKDISABLE(freetype)
 	DKDISABLE(iconv)
 endif()
 
