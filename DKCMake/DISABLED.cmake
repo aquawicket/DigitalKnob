@@ -158,7 +158,7 @@ endif()
 
 if(IOS OR IOSSIM)
 	DKDISABLE(libarchive)
-	DKDISABLE(freetype)
+	#DKDISABLE(freetype)
 	DKDISABLE(libiconv)
 	DKDISABLE(libpng)
 endif()
