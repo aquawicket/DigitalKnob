@@ -198,7 +198,7 @@ if(CMAKE_HOST_WIN32 AND ANDROID)
 	#Andeoid arm32
 	DKSET(DKCMAKE_ANDROID32 ${CMAKE_EXE} -G ${VISUALSTUDIO_NAME} -A ARM
 	"-DCMAKE_C_FLAGS=-frtti -fexceptions -std=c17"
-	"-DCMAKE_CXX_FLAGS=-frtti -fexceptions -std=c++1z -lstdc++fs"
+	"-DCMAKE_CXX_FLAGS=-frtti -fexceptions -std=c++1z" #-lstdc++fs"
 	-DANDROID_TOOLCHAIN=clang
 	-DANDROID_ABI=armeabi-v7a
 	-DANDROID_NATIVE_API_LEVEL=android-26
@@ -211,7 +211,7 @@ if(CMAKE_HOST_WIN32 AND ANDROID)
 	#Android arm64
 	DKSET(DKCMAKE_ANDROID64 ${CMAKE_EXE} -G ${VISUALSTUDIO_NAME} -A ARM64
 	"-DCMAKE_C_FLAGS=-frtti -fexceptions -std=c17"
-	"-DCMAKE_CXX_FLAGS=-frtti -fexceptions -std=c++1z -lstdc++fs"
+	"-DCMAKE_CXX_FLAGS=-frtti -fexceptions -std=c++1z" #-lstdc++fs"
 	-DANDROID_TOOLCHAIN=clang
 	-DANDROID_ABI=arm64-v8a
 	-DANDROID_NATIVE_API_LEVEL=android-26

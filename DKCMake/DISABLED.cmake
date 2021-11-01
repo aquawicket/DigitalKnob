@@ -319,6 +319,7 @@ if(ANDROID) # Disabled for Android targets
 	DKDISABLE(smpeg2)
 	DKDISABLE(stackwalker)
 	DKDISABLE(tidy-html5)
+	DKDISABLE(tiff)
 	DKDISABLE(uwebsockets)
 	DKDISABLE(xcode)
 	DKDISABLE(xz)
