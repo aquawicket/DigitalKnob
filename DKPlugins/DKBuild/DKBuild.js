@@ -851,7 +851,7 @@ function DKBuild_DoResults(){
 		CPP_DKFile_MkDir(app_path+"android64")
 		CPP_DKFile_ChDir(app_path+"android64")
 		if(CPP_DK_GetOS() === "Windows")
-			let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Visual Studio 16 2019\" -A ARM64 -DCMAKE_TOOLCHAIN_FILE="+DIGITALKNOB+"/DKCmake/"+android.toolchain.cmake -DANDROIDNDK="+ANDROIDNDK+" -DANDROID_ABI=arm64-v8a -DANDROID_NATIVE_API_LEVEL=24 –DCMAKE_SYSTEM_NAME=ANDROID "+cmake_string+DIGITALKNOB+"DK")
+			let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Visual Studio 16 2019\" -A ARM64 -DCMAKE_TOOLCHAIN_FILE="+ANDROIDNDK+"/build/cmake/android.toolchain.cmake -DANDROIDNDK="+ANDROIDNDK+" -DANDROID_ABI=arm64-v8a -DANDROID_NATIVE_API_LEVEL=24 –DCMAKE_SYSTEM_NAME=ANDROID "+cmake_string+DIGITALKNOB+"DK")
 		if(CPP_DK_GetOS() === "Linux" || CPP_DK_GetOS() === "Mac")
 			rtvalue = CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DIGITALKNOB+"DK")
 		if(rtvalue.indexOf("errors occurred!") > -1) 
