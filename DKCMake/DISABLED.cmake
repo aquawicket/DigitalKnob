@@ -156,10 +156,11 @@ if(CMAKE_HOST_APPLE)  # Disabled on Apple host machines
 	DKDISABLE(visualstudio)
 endif()
 
-if(IOS)
+if(IOS OR IOSSIM)
 	DKDISABLE(libarchive)
 	DKDISABLE(freetype)
 	DKDISABLE(libiconv)
+	DKDISABLE(png)
 endif()
 
 
