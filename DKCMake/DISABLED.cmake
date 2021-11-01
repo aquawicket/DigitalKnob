@@ -1,6 +1,7 @@
 # DISABLED FOR ALL
 DKDISABLE(_TEMPLATE_APP_)
 DKDISABLE(_TEMPLATE_LIB_)
+DKDISABLE(android-studio)
 DKDISABLE(conio.h)
 #DKDISABLE(DKCefChild)
 DKDISABLE(DKJerryscript)
@@ -158,7 +159,7 @@ endif()
 if(IOS)
 	DKDISABLE(libarchive)
 	DKDISABLE(freetype)
-	DKDISABLE(iconv)
+	DKDISABLE(libiconv)
 endif()
 
 
