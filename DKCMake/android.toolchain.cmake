@@ -1,3 +1,5 @@
+message("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+
 # Copyright (C) 2016 The Android Open Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -458,9 +460,7 @@ list(APPEND ANDROID_COMPILER_FLAGS
   -ffunction-sections
   -funwind-tables
   -fstack-protector-strong
-  -no-canonical-prefixes
-  -std=c++1z 
-  -lstdc++fs)
+  -no-canonical-prefixes)
 
 # https://github.com/android/ndk/issues/885
 # If we're using LLD we need to use a slower build-id algorithm to work around

@@ -549,7 +549,7 @@ function DKBuild_DoResults(){
 		DKBuild_ValidateXcode()
 		CPP_DKFile_MkDir(app_path+OS)
 		CPP_DKFile_ChDir(app_path+OS)
-		let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Xcode\" "+cmake_string+"-DCMAKE_TOOLCHAIN_FILE="+DIGITALKNOB+"DK/DKCMake/ios.toolchain.cmake -DPLATFORM=OS64 "+DIGITALKNOB+"DK")
+		let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Xcode\" "+cmake_string+"-DCMAKE_TOOLCHAIN_FILE="+ANDROIDNDK+"/"+build+"/"+cmake+"/ios.toolchain.cmake -DPLATFORM=OS64 "+DIGITALKNOB+"DK")
 		if(rtvalue.indexOf("errors occurred!") > -1)
 			return
 		if(TYPE === "Debug" || TYPE === "ALL")
@@ -565,7 +565,7 @@ function DKBuild_DoResults(){
 		DKBuild_ValidateXcode()
 		CPP_DKFile_MkDir(app_path+OS)
 		CPP_DKFile_ChDir(app_path+OS)
-		let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Xcode\" "+cmake_string+"-DCMAKE_TOOLCHAIN_FILE="+DIGITALKNOB+"DKCMake/ios.toolchain.cmake -DIOS_PLATFORM=SIMULATOR "+DIGITALKNOB+"DK")
+		let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Xcode\" "+cmake_string+"-DCMAKE_TOOLCHAIN_FILE="+ANDROIDNDK+"/"+build+"/"+cmake+"/ios.toolchain.cmake -DIOS_PLATFORM=SIMULATOR "+DIGITALKNOB+"DK")
 		if(rtvalue.indexOf("errors occurred!") > -1) 
 			return
 		if(TYPE === "Debug" || TYPE === "ALL")
