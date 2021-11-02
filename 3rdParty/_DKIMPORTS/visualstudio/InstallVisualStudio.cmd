@@ -14,3 +14,5 @@ start /wait %VISUALSTUDIO% --noweb ^
 --add Microsoft.VisualStudio.Workload.NativeDesktop ^
 --passive --wait > nul
 echo %errorlevel%
+ECHO Exit
+pause

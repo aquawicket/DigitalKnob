@@ -15,3 +15,5 @@ start /wait %DKDOWNLOAD%\%VS_COMMUNITY% --layout "%DKDOWNLOAD%\VisualStudio" ^
 --add Microsoft.VisualStudio.Workload.NativeDesktop ^
 --lang en-US --passive --wait > nul
 echo %errorlevel%
+ECHO Exit
+pause
