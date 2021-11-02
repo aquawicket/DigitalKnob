@@ -528,8 +528,7 @@ if(MAC)
 	DKCOPY(${DKPROJECT}/Backup/ ${DKPROJECT}/assets/ FALSE)
 	DKREMOVE(${DKPROJECT}/Backup)
 
-	
-	SET(CMAKE_OSX_ARCHITECTURES "x86_64")
+	#SET(CMAKE_OSX_ARCHITECTURES "x86_64")
 	add_executable(${APP_NAME} MACOSX_BUNDLE ${App_SRC})
 	set_target_properties(${APP_NAME} PROPERTIES
         XCODE_ATTRIBUTE_CODE_SIGN_IDENTITY ""
@@ -537,19 +536,17 @@ if(MAC)
 		MACOSX_BUNDLE_EXECUTABLE_NAME "wrapper"
         MACOSX_BUNDLE_BUNDLE_NAME "${APP_NAME}"
 		MACOSX_BUNDLE_ICON_FILE "logo"
-        #MACOSX_BUNDLE_INFO_PLIST path/to/Info.plist
         MACOSX_BUNDLE_BUNDLE_VERSION "1.0"
         MACOSX_BUNDLE_LONG_VERSION_STRING "${APP_NAME} v1.0"
         MACOSX_BUNDLE_SHORT_VERSION_STRING "1.0"
         MACOSX_BUNDLE_GUI_IDENTIFIER com.digitalknob.${APP_NAME}
         MACOSX_BUNDLE_COPYRIGHT "(C) 2021 DigitalKnob"
-        #MACOSX_RPATH TRUE
-        MACOSX_FRAMEWORK_IDENTIFIER "com.digitalknob.bundle.${APP_NAME}"
+		MACOSX_FRAMEWORK_IDENTIFIER "com.digitalknob.bundle.${APP_NAME}"
+		MACOSX_BUNDLE_INFO_PLIST ${DKCMAKE}/Info.plist
+		#MACOSX_RPATH TRUE
         #XCODE_ATTRIBUTE_LD_RUNPATH_SEARCH_PATHS "@loader_path/Libraries"
         #RESOURCE "${RESOURCE_FILES}"
         #XCODE_ATTRIBUTE_ENABLE_HARDENED_RUNTIME TRUE
-        #XCODE_ATTRIBUTE_EXECUTABLE_NAME "wrapper"
-		MACOSX_BUNDLE_INFO_PLIST ${DKCMAKE}/Info.plist
     )
 	#set_xcode_property(${APP_NAME} "Other Code Signing Flags" "--deep")
 	
@@ -599,9 +596,6 @@ if(MAC)
 		add_custom_command(
 			TARGET ${APP_NAME}
 			POST_BUILD
-			#COMMAND ${CMAKE_COMMAND} -E copy
-			#		"$<TARGET_FILE:${APP_NAME}>"
-			#		"$<TARGET_FILE_DIR:${APP_NAME}>/${APP_NAME}_bin"
 			COMMAND ${CMAKE_COMMAND} -E copy
 					"${DKPROJECT}/${OS}/wrapper"
 					"$<TARGET_FILE_DIR:${APP_NAME}>/wrapper"
