@@ -5,7 +5,6 @@
 
 #include <jni.h>
 
-///////////////////////////////////////////////////////////////
 class DKSDLWindowAndroid : public DKObjectT<DKSDLWindowAndroid>
 {
 public:
@@ -37,8 +36,7 @@ public:
 	bool onSurfaceDestroyed(const void* input, void* output);
 	bool onTouch(const void* input, void* output);
 };
-	
-REGISTER_OBJECT(DKSDLWindowAndroid, true)
 
+REGISTER_OBJECT(DKSDLWindowAndroid, true)
 #endif //DKSDLWindowAndroid_H
 #endif //ANDROID

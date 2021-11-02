@@ -89,7 +89,7 @@ bool DKSDLWindowAndroid::onInitSDL(const void* input, void* output)
 	
     /* This interface could expand with ABI negotiation, callbacks, etc. */
 	JNI_OnLoad2(jd.env);
-    SDL_Android_Init(jd.env, jd.cls);
+    //SDL_Android_Init(jd.env, jd.cls);
 	SDL_SetHint(SDL_HINT_RENDER_DRIVER, "opengles");
     SDL_SetMainReady();
 	SDL_SetHint(SDL_HINT_RENDER_DRIVER, "opengles");

@@ -32,6 +32,7 @@ if(RASPBERRY)
 endif()
 if(ANDROID)
 	DKDEPEND(opengles)
+	DKDEPEND(opensles)
 endif()
 
 ### VERSION ###

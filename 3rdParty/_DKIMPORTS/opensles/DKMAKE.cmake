@@ -1,0 +1,5 @@
+if(ANDROID)
+	FIND_LIBRARY(opensles_lib OpenSLES)
+	ANDROID_LIB(${opensles_lib})
+)
+endif()
