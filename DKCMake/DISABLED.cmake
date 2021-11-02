@@ -142,7 +142,7 @@ if(CMAKE_HOST_APPLE)  # Disabled on Apple host machines
 	DKDISABLE(libxtst-dev)
 	DKDISABLE(lighttpd)
 	DKDISABLE(mesa-common-dev)
-	DKDISABLE(openal)
+	#DKDISABLE(openal)
 	DKDISABLE(openal-android)
 	DKDISABLE(opencv)
 	DKDISABLE(openssl)

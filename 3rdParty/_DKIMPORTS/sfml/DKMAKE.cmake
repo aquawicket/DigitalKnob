@@ -3,8 +3,8 @@
 ### DEPENDS ###
 DKDEPEND(opengl)
 DKDEPEND(windows_multimedia)
-DKDEPEND(avf_audio)
-#DKDEPEND(openal)
+#DKDEPEND(avf_audio)
+DKDEPEND(openal)
 DKDEPEND(flac)
 
 
