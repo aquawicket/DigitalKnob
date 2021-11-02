@@ -736,8 +736,6 @@ if(IOSSIM)
 	#	MobileCoreServices
 	#)
 	
-	
-	
 	#foreach(FW ${IOS_FRAMEWORKS})
 	#	set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -framework ${FW}")
 	#endforeach()
