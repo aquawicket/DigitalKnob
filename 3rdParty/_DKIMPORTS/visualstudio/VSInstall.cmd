@@ -1,0 +1,3 @@
+set "DKDOWNLOAD=C:\Users\%USERNAME%\digitalknob\Download"
+
+%DKDOWNLOAD%\vs_Community.exe --layout %DKDOWNLOAD%\vslayout --add Microsoft.VisualStudio.Component.CoreEditor Microsoft.VisualStudio.Workload.CoreEditor Microsoft.VisualStudio.Component.Roslyn.Compiler Microsoft.Component.MSBuild Microsoft.VisualStudio.Component.TextTemplating Microsoft.VisualStudio.Component.VC.CoreIde Microsoft.VisualStudio.Component.VC.Tools.x86.x64 Microsoft.VisualStudio.Component.Windows10SDK.19041 Microsoft.VisualStudio.Component.VC.Redist.14.Latest Microsoft.VisualStudio.ComponentGroup.NativeDesktop.Core Microsoft.VisualStudio.Workload.NativeDesktop --lang en-US
