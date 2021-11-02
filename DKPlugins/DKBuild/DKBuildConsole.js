@@ -103,11 +103,11 @@ function DKBuildConsole_SelectOs() {
 		OSes.push("android64")
 	}
 	if(CPP_DK_GetOS() === "Mac"){
-		OSes.push("mac32")
+		//OSes.push("mac32")
 		OSes.push("mac64")
-		OSes.push("ios32")
+		//OSes.push("ios32")
 		OSes.push("ios64")
-		OSes.push("iossim32")
+		//OSes.push("iossim32")
 		OSes.push("iossim64")
 	}
 	if(CPP_DK_GetOS() === "Linux"){
@@ -116,7 +116,7 @@ function DKBuildConsole_SelectOs() {
 	}
 	if(CPP_DK_GetOS() === "Raspberry"){
 		OSes.push("raspberry32")
-		OSes.push("raspberry64")
+		//OSes.push("raspberry64")
 	}
 	
 	console.log("\n")
