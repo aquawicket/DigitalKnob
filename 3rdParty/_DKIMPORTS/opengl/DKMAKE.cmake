@@ -1,4 +1,3 @@
-
 if(WIN)
 	WIN_LIB(opengl32.lib)
 endif()
@@ -6,6 +5,14 @@ endif()
 if(MAC)
 	FIND_LIBRARY(opengl_lib OpenGL)
 	APPLE_LIB(${opengl_lib})
+endif()
+
+if(IOS)
+	DKDEPEND(opengles)
+endif()
+
+if(IOSSIM)
+	DKDEPEND(opengles)
 endif()
 
 if(LINUX)
@@ -29,3 +36,7 @@ if(RASPBERRY)
 	endif()
 	RASPBERRY_LIB(${OPENGL_LIBRARIES})
 endif()	
+
+if(ANDROID)
+	DKDEPEND(opengles)
+endif()
