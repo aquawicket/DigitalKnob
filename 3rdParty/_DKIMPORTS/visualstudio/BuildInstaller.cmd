@@ -1,6 +1,7 @@
+set "VS_COMMUNITY=vs_community__621291036.1634852628.exe"
 set "DKDOWNLOAD=C:\Users\%USERNAME%\digitalknob\Download"
 
-start /wait %DKDOWNLOAD%\vs_community__621291036.1634852628.exe --layout "%DKDOWNLOAD%\vslayout" ^
+start /wait %DKDOWNLOAD%\%VS_COMMUNITY% --layout "%DKDOWNLOAD%\VisualStudio" ^
 --add Microsoft.VisualStudio.Component.CoreEditor ^
 --add Microsoft.VisualStudio.Workload.CoreEditor ^
 --add Microsoft.VisualStudio.Component.Roslyn.Compiler ^
