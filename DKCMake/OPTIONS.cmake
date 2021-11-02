@@ -72,12 +72,6 @@ endif()
 
 
 ###########################################################################
-## Get variables for OpenGL type
-###########################################################################
-option(OPENGL2 "Set the OpenGL Version" OFF)
-
-
-###########################################################################
 ## Get variables for CEF
 ###########################################################################
 option(DKCEF "Use Chromium Embeded Framework" OFF)
@@ -539,11 +533,6 @@ endif()
 
 
 ## NOTE: These defines should be done as per needed in DKMAKE.cmake files
-if(OPENGL2)
-	add_definitions(-DOPENGL2)
-	add_definitions(-DUSE_SHADERS)
-endif()
-
 if(${DKCEF} STREQUAL "ON")
 	add_definitions(-DUSE_DKCef)
 endif()

@@ -941,7 +941,7 @@ if(ANDROID)
 	DKSET(CMAKE_CXX_FLAGS_RELEASE "-DNDEBUG -03")
 	#set(CMAKE_POSITION_INDEPENDENT_CODE TRUE)
 	
-		set(CMAKE_ANDROID_GUI 1)
+	set(CMAKE_ANDROID_GUI 1)
 	#set(CMAKE_SYSTEM_NAME Android) 
 	#set(CMAKE_SYSTEM_VERSION 26)
 	#set(CMAKE_ANDROID_ARCH_ABI armeabi-v7a)
@@ -962,6 +962,8 @@ if(ANDROID)
 		endif()	
 	endforeach()	
 endif()
+
+
 
 DKSET(include_libs "${LIBS} ${DEBUG_LIBS} ${RELEASE_LIBS}")
 DKBUILD_LOG("\n\n ${APP_NAME} Include Libraries \n")
@@ -996,6 +998,5 @@ message(STATUS "\n")
 message(STATUS "**************************************************")
 message(STATUS "****** Generated ${APP_NAME} - ${OS}  ************")
 message(STATUS "**************************************************\n")
-
 
 # https://gist.github.com/baiwfg2/39881ba703e9c74e95366ed422641609
