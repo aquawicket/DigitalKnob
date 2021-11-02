@@ -1,5 +1,3 @@
-message("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-
 # Copyright (C) 2016 The Android Open Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -44,10 +42,12 @@ set(CMAKE_SYSTEM_VERSION 1)
 # twice on the first build, and on a rebuild ninja would see only one set of the
 # flags and rebuild the world.
 # https://github.com/android-ndk/ndk/issues/323
+message("!!!! android.toolchain.cmake called !!!!")
 if(ANDROID_NDK_TOOLCHAIN_INCLUDED)
   return()
 endif(ANDROID_NDK_TOOLCHAIN_INCLUDED)
 set(ANDROID_NDK_TOOLCHAIN_INCLUDED true)
+message("!!!! android.toolchain.cmake running !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 
 # Android NDK
 get_filename_component(ANDROID_NDK_EXPECTED_PATH
@@ -224,12 +224,12 @@ ${NDK_MIN_PLATFORM_LEVEL}.")
   string(REPLACE "android-" "" ANDROID_PLATFORM_LEVEL ${ANDROID_PLATFORM})
 endif()
 
-# And for LP64 we need to pull up to 21. No diagnostic is provided here because
-# minSdkVersion < 21 is valid for the project even though it may not be for this
+# And for LP64 we need to pull up to 26. No diagnostic is provided here because
+# minSdkVersion < 26 is valid for the project even though it may not be for this
 # ABI.
-if(ANDROID_ABI MATCHES "64(-v8a)?$" AND ANDROID_PLATFORM_LEVEL LESS 21)
-  set(ANDROID_PLATFORM android-21)
-  set(ANDROID_PLATFORM_LEVEL 21)
+if(ANDROID_ABI MATCHES "64(-v8a)?$" AND ANDROID_PLATFORM_LEVEL LESS 26)
+  set(ANDROID_PLATFORM android-26)
+  set(ANDROID_PLATFORM_LEVEL 26)
 endif()
 
 # ANDROID_PLATFORM beyond the maximum is an error. The correct way to specify
@@ -365,7 +365,7 @@ if(ANDROID_STL STREQUAL system)
   list(APPEND ANDROID_COMPILER_FLAGS_CXX "-stdlib=libstdc++")
   if(NOT "x${ANDROID_CPP_FEATURES}" STREQUAL "x")
     list(APPEND ANDROID_CXX_STANDARD_LIBRARIES "-lc++abi")
-    if(ANDROID_PLATFORM_LEVEL LESS 21)
+    if(ANDROID_PLATFORM_LEVEL LESS 26)
       list(APPEND ANDROID_CXX_STANDARD_LIBRARIES "-landroid_support")
     endif()
   endif()

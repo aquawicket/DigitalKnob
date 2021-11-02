@@ -1,7 +1,9 @@
-#if(DK_OPTIONS_INCLUDED)
-#  return()
-#endif()
-#set(DK_OPTIONS_INCLUDED true)
+message("!!!! OPTIONS.cmake called !!!!")
+if(DKOPTIONS_INCLUDED)
+  return()
+endif(DKOPTIONS_INCLUDED)
+set(DKOPTIONS_INCLUDED true)
+message("!!!! OPTIONS.cmake running !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 
 if(COMMAND cmake_policy)
 	CMAKE_POLICY(SET CMP0003 NEW) ##https://cmake.org/cmake/help/latest/policy/CMP0003.html
