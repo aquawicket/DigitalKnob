@@ -92,7 +92,7 @@ if(CMAKE_HOST_LINUX AND LINUX)
 	
 	# Linux Debug
 	DKSET(DKCMAKE_LINUX_DEBUG ${CMAKE_EXE} -G "Unix Makefiles" 
-	"CMAKE_CXX_FLAGS=-std=c++17 -lstdc++fs -g -no-pie -fPIC" 
+	"CMAKE_CXX_FLAGS=-std=gnu++17 -lstdc++fs -g -no-pie -fPIC" 
 	-DCMAKE_BUILD_TYPE=Debug 
 	-DBUILD_SHARED_LIBS=OFF 
 	-DCMAKE_C_FLAGS=-fPIC)
@@ -100,35 +100,35 @@ if(CMAKE_HOST_LINUX AND LINUX)
 	#Linux Release
 	DKSET(DKCMAKE_LINUX_RELEASE ${CMAKE_EXE} -G "Unix Makefiles"
 	-DCMAKE_C_FLAGS=-fPIC
-	"CMAKE_CXX_FLAGS=-std=c++17 -lstdc++fs -g -no-pie -fPIC" -
+	"CMAKE_CXX_FLAGS=-std=gnu++17 -lstdc++fs -g -no-pie -fPIC" -
 	DCMAKE_BUILD_TYPE=Release 
 	-DBUILD_SHARED_LIBS=OFF )
 
 	# Linux 32 Debug
 	DKSET(DKCMAKE_LINUX32_DEBUG ${CMAKE_EXE} -G "Unix Makefiles"
 	-DCMAKE_C_FLAGS=-fPIC
-	"CMAKE_CXX_FLAGS=-std=c++17 -lstdc++fs -g -no-pie -fPIC" 
+	"CMAKE_CXX_FLAGS=-std=gnu++17 -lstdc++fs -g -no-pie -fPIC" 
 	-DCMAKE_BUILD_TYPE=Debug 
 	-DBUILD_SHARED_LIBS=OFF)
 	
 	# Linux 32 Release
 	DKSET(DKCMAKE_LINUX32_RELEASE ${CMAKE_EXE} -G "Unix Makefiles"
 	-DCMAKE_C_FLAGS=-fPIC
-	"CMAKE_CXX_FLAGS=-std=c++17 -lstdc++fs -g -no-pie -fPIC" 
+	"CMAKE_CXX_FLAGS=-std=gnu++17 -lstdc++fs -g -no-pie -fPIC" 
 	-DCMAKE_BUILD_TYPE=Release 
 	-DBUILD_SHARED_LIBS=OFF)
 
 	# Linux 64 Debug
 	DKSET(DKCMAKE_LINUX64_DEBUG ${CMAKE_EXE} -G "Unix Makefiles"
 	-DCMAKE_C_FLAGS=-fPIC
-	"CMAKE_CXX_FLAGS=-std=c++17 -lstdc++fs -g -no-pie -fPIC" 
+	"CMAKE_CXX_FLAGS=-std=gnu++17 -lstdc++fs -g -no-pie -fPIC" 
 	-DCMAKE_BUILD_TYPE=Debug 
 	-DBUILD_SHARED_LIBS=OFF)
 	
 	#Linux 64 Release
 	DKSET(DKCMAKE_LINUX64_RELEASE ${CMAKE_EXE} -G "Unix Makefiles"
 	-DCMAKE_C_FLAGS=-fPIC
-	"CMAKE_CXX_FLAGS=-std=c++17 -lstdc++fs -g -no-pie -fPIC" 
+	"CMAKE_CXX_FLAGS=-std=gnu++17 -lstdc++fs -g -no-pie -fPIC" 
 	-DCMAKE_BUILD_TYPE=Release 
 	-DBUILD_SHARED_LIBS=OFF)
 endif()

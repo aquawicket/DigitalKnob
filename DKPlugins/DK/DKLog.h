@@ -208,18 +208,18 @@ void signal_handler(int signal);
 #define DKVERBOSE(message) Log(__FILE__, __LINE__, __FUNCTION__, message, DK_VERBOSE);
 #define DEBUG_METHOD() logy _logy(__FUNCTION__);
 
-//#ifdef WIN32
+#ifdef WIN32
 	#define DKDEBUGFUNC1(__FILE__, __LINE__, __FUNCTION__, ...) DebugFunc(__FILE__, __LINE__, __FUNCTION__, #__VA_ARGS__, __VA_ARGS__)
 	#define DKDEBUGRETURN1(__FILE__, __LINE__, __FUNCTION__, ...) DebugReturn(__FILE__, __LINE__, __FUNCTION__, #__VA_ARGS__, __VA_ARGS__)
-	#define DKDEBUGFUNC(...) DKDEBUGFUNC1(__FILE__, __LINE__, __FUNCTION__, __VA_ARGS__, "\n")
-	#define DKDEBUGRETURN(...) DKDEBUGRETURN1(__FILE__, __LINE__, __FUNCTION__, __VA_ARGS__, "\n")
-//#elif defined(APPLE) || defined(LINUX)
-//	#define DKDEBUGFUNC(...) DebugFunc(__FILE__, __LINE__, __FUNCTION__, "", ##__VA_ARGS__)
-//	#define DKDEBUGRETURN(...) DebugReturn(__FILE__, __LINE__, __FUNCTION__, "", ##__VA_ARGS__)
-//#else
-//	#define DKDEBUGFUNC(...) Log(__FILE__, __LINE__, __FUNCTION__, "", DK_DEBUG)
-//	#define DKDEBUGRETURN(...) Log(__FILE__, __LINE__, __FUNCTION__, "", DK_DEBUG)
-//#endif
+	#define DKDEBUGFUNC(...) DKDEBUGFUNC1(__FILE__, __LINE__, __FUNCTION__, __VA_ARGS__)
+	#define DKDEBUGRETURN(...) DKDEBUGRETURN1(__FILE__, __LINE__, __FUNCTION__, __VA_ARGS__)
+#elif defined(APPLE) || defined(LINUX)
+	#define DKDEBUGFUNC(...) DebugFunc(__FILE__, __LINE__, __FUNCTION__, "", ##__VA_ARGS__)
+	#define DKDEBUGRETURN(...) DebugReturn(__FILE__, __LINE__, __FUNCTION__, "", ##__VA_ARGS__)
+#else
+	#define DKDEBUGFUNC(...) Log(__FILE__, __LINE__, __FUNCTION__, "", DK_DEBUG)
+	#define DKDEBUGRETURN(...) Log(__FILE__, __LINE__, __FUNCTION__, "", DK_DEBUG)
+#endif
 
 /*
 template <typename... Args>
