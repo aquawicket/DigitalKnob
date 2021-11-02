@@ -1,2 +1,0 @@
-DKDEPEND(DKSDLWindow)
- #TODO
