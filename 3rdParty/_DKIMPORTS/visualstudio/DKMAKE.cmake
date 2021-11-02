@@ -28,6 +28,12 @@ DKSET(GENERATOR "Visual Studio 16 ${VISUALSTUDIO_VERSION}")
 ### INSTALL ###
 IF(NOT EXISTS "${VISUALSTUDIO}")
 	MESSAGE(STATUS "Installing Visual Studio ${VISUALSTUDIO_VERSION}")
-	DOWNLOAD(${VISUALSTUDIO_DL} ${DKDOWNLOAD}/vs_Community.exe)
-	DKCOMMAND(${DKDOWNLOAD}/vs_Community.exe)
+	if(EXISTS ${DKDOWNLOAD}/VisualStudio/vs_setup.exe)
+		# offline installer
+		DKCOMMAND(${3RDPARTY}/_DKIMPORTS/visualstudio/InstallVisualStudio.cmd)
+	else()
+		# online installer
+		DOWNLOAD(${VISUALSTUDIO_DL} ${DKDOWNLOAD}/vs_Community.exe)
+		DKCOMMAND(${DKDOWNLOAD}/vs_Community.exe)
+	endif()
 ENDIF()
