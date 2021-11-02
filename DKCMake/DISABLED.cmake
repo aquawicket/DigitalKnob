@@ -149,6 +149,7 @@ if(CMAKE_HOST_APPLE)  # Disabled on Apple host machines
 	DKDISABLE(podofo)
 	#DKDISABLE(sdl2_gif)
 	DKDISABLE(sdl2_mixer)
+	DKDISABLE(sfml)
 	DKDISABLE(tidy-html5)
 	DKDISABLE(tiff)
 	DKDISABLE(upx)
