@@ -108,7 +108,7 @@ endif()
 
 
 
-if(CMAKE_HOST_APPLE)  # Disabled on Apple host machines
+if(MAC)  # Disabled on Mac host machines
     DKDISABLE(android-build-tools)
 	DKDISABLE(android-ndk)
 	DKDISABLE(android-platform-tools)
@@ -148,6 +148,7 @@ if(CMAKE_HOST_APPLE)  # Disabled on Apple host machines
 	DKDISABLE(opencv)
 	DKDISABLE(openssl)
 	DKDISABLE(podofo)
+	DKDISABLE(quartz_core)
 	#DKDISABLE(sdl2_gif)
 	DKDISABLE(sdl2_mixer)
 	DKDISABLE(sfml)
