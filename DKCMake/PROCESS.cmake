@@ -503,14 +503,14 @@ if(MAC)
 	## ASSETS ##
 	# Backup files and folders excluded from the package
 	DKCOPY(${DKPROJECT}/assets/USER ${DKPROJECT}/Backup/USER TRUE)
-	DKCOPY(${DKPROJECT}/assets/DKCef/mac64Debug ${DKPROJECT}/Backup/DKCef/mac64Debug TRUE)
-	DKCOPY(${DKPROJECT}/assets/DKCef/mac64Release ${DKPROJECT}/Backup/DKCef/mac64Release TRUE)
+	#DKCOPY(${DKPROJECT}/assets/DKCef/mac64Debug ${DKPROJECT}/Backup/DKCef/mac64Debug TRUE)
+	#DKCOPY(${DKPROJECT}/assets/DKCef/mac64Release ${DKPROJECT}/Backup/DKCef/mac64Release TRUE)
 	DKCOPY(${DKPROJECT}/assets/cef.log ${DKPROJECT}/Backup/cef.log TRUE)
 	DKCOPY(${DKPROJECT}/assets/log.txt ${DKPROJECT}/Backup/log.txt TRUE)
 	# Remove excluded files and folders before packaging
 	DKREMOVE(${DKPROJECT}/assets/USER)
-	DKREMOVE(${DKPROJECT}/assets/DKCef/mac64Debug)
-	DKREMOVE(${DKPROJECT}/assets/DKCef/mac64Release)
+	#DKREMOVE(${DKPROJECT}/assets/DKCef/mac64Debug)
+	#DKREMOVE(${DKPROJECT}/assets/DKCef/mac64Release)
 	DKREMOVE(${DKPROJECT}/assets/cef.log)
 	DKREMOVE(${DKPROJECT}/assets/log.txt)
 	## copy the assets into the bundle resources
