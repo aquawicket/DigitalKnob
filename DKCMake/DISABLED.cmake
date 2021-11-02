@@ -120,6 +120,7 @@ if(MAC)  # Disabled on Mac host machines
 	DKDISABLE(DKOcr)
 	DKDISABLE(DKRmlIframe)
 	DKDISABLE(DKSFMLRml)
+	DKDISABLE(DKSFMLWindow)
 	DKDISABLE(DKWebSockets)
 	DKDISABLE(flac)
 	DKDISABLE(freealut)
