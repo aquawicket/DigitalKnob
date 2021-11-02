@@ -44,13 +44,17 @@ if(CMAKE_HOST_APPLE AND MAC OR IOS OR IOSSIM)
 	
 	# Mac 32
 	DKSET(DKCMAKE_MAC32 ${CMAKE_EXE} -G "Xcode" 
-	#"-DCMAKE_CXX_FLAGS=-x objective-c++ -std=c++17"
-	#-DCMAKE_OSX_ARCHITECTURES=x32 
-	#-DBUILD_SHARED_LIBS=OFF
+	-DCMAKE_OSX_ARCHITECTURES=x32
+	"-DCMAKE_CXX_FLAGS=-std=c++17" 
+	-DBUILD_SHARED_LIBS=OFF)
 	)
 
 	# Mac 64
-	DKSET(DKCMAKE_MAC64 ${CMAKE_EXE} -G "Xcode" -DCMAKE_OSX_ARCHITECTURES=x86_64 "-DCMAKE_CXX_FLAGS=-std=c++17" -DBUILD_SHARED_LIBS=OFF)
+	DKSET(DKCMAKE_MAC64 ${CMAKE_EXE} -G "Xcode" 
+	-DCMAKE_OSX_ARCHITECTURES=x86_64 
+	"-DCMAKE_CXX_FLAGS=-std=c++17" 
+	-DBUILD_SHARED_LIBS=OFF
+	)
 
 	# iOS 32
 	DKSET(DKCMAKE_IOS32 ${CMAKE_EXE} -G "Xcode" 
@@ -84,8 +88,8 @@ endif()
 
 ### LINUX ###
 if(CMAKE_HOST_LINUX AND LINUX)
-	DKDEPEND(libx11-dev)
 	##DKDEPEND(kdevelop)
+	DKDEPEND(libx11-dev)
 	LINUX_LIB(pthread)
 	LINUX_LIB(dl)
 	LINUX_LIB(libstdc++fs.a)
@@ -206,6 +210,7 @@ if(CMAKE_HOST_WIN32 AND ANDROID)
 	-DANDROID_STL_FORCE_FEATURES=TRUE
 	-DANDROID_NO_UNDEFINED=TURE
 	-DANDROID_STL=c++_static
+	-DCMAKE_CXX_FLAGS=-std=c++1z
 	)
 		
 	#Android arm64 with NDK toolchain
@@ -220,7 +225,6 @@ if(CMAKE_HOST_WIN32 AND ANDROID)
 	-DANDROID_STL=c++_static
 	-DCMAKE_CXX_FLAGS=-std=c++1z
 	)
-		
 		
 	# https://developer.android.com/ndk/guides/cmake
 	# https://cmake.org/cmake/help/latest/manual/cmake-toolchains.7.html#cross-compiling-for-android
