@@ -1,6 +1,6 @@
 set "VISUALSTUDIO=C:\Users\%USERNAME%\digitalknob\Download\VisualStudio\vs_setup.exe"
 
-start /wait %VISUALSTUDIO% --noweb ^
+%VISUALSTUDIO% --noweb ^
 --add Microsoft.VisualStudio.Component.CoreEditor ^
 --add Microsoft.VisualStudio.Workload.CoreEditor ^
 --add Microsoft.VisualStudio.Component.Roslyn.Compiler ^
@@ -11,8 +11,4 @@ start /wait %VISUALSTUDIO% --noweb ^
 --add Microsoft.VisualStudio.Component.Windows10SDK.19041 ^
 --add Microsoft.VisualStudio.Component.VC.Redist.14.Latest ^
 --add Microsoft.VisualStudio.ComponentGroup.NativeDesktop.Core ^
---add Microsoft.VisualStudio.Workload.NativeDesktop ^
---passive --wait > nul
-echo %errorlevel%
-ECHO Exit
-pause
+--add Microsoft.VisualStudio.Workload.NativeDesktop
