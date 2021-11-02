@@ -391,13 +391,14 @@ if(WIN_32)
 	
 	set_target_properties(${APP_NAME} PROPERTIES LINK_FLAGS_DEBUG ${DEBUG_FLAGS} LINK_FLAGS_RELEASE ${RELEASE_FLAGS})
 	
-	add_custom_command(
-		TARGET ${APP_NAME}
-		POST_BUILD
-		COMMAND ${CMAKE_COMMAND} -E echo "!!!!!! TARGET_FILE:APP_NAME = $<TARGET_FILE:${APP_NAME}>"
-		COMMAND ${CMAKE_COMMAND} -E echo "!!!!!! TARGET_FILE_DIR:APP_NAME = $<TARGET_FILE_DIR:${APP_NAME}>"
-		COMMAND ${CMAKE_COMMAND} -E echo "!!!!!! CONFIG = $<CONFIG>"
-	)
+	# TEST
+	#add_custom_command(
+	#	TARGET ${APP_NAME}
+	#	POST_BUILD
+	#	COMMAND ${CMAKE_COMMAND} -E echo "!!!!!! TARGET_FILE:APP_NAME = $<TARGET_FILE:${APP_NAME}>"
+	#	COMMAND ${CMAKE_COMMAND} -E echo "!!!!!! TARGET_FILE_DIR:APP_NAME = $<TARGET_FILE_DIR:${APP_NAME}>"
+	#	COMMAND ${CMAKE_COMMAND} -E echo "!!!!!! CONFIG = $<CONFIG>"
+	#)
 	
 	#add_custom_command(
     #TARGET ${APP_NAME}
@@ -649,9 +650,7 @@ if(IOS)
 	#	ImageIO
 	#	MobileCoreServices
 	#)
-	
-	list(APPEND App_SRC ${DKPLUGINS}/DK/DKiPhone.mm)
-	
+
 	#foreach(FW ${IOS_FRAMEWORKS})
 	#	set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -framework ${FW}")
 	#endforeach()
@@ -659,11 +658,12 @@ if(IOS)
 	#set(CMAKE_OSX_SYSROOT iphoneos)
 	#set(XCODE_ATTRIBUTE_SDKROOT iphoneos)
 	#set(CMAKE_OSK_ARCHITECTURES "$(ARCHS_STANDARD_32_BIT)")
-	set(CMAKE_CXX_FLAGS "-x objective-c++")
+	#set(CMAKE_CXX_FLAGS "-x objective-c++")
 	#set(CMAKE_XCODE_ATTRIBUTE_DEBUG_INFORMATION_FORMAT dwarf)
-	set(MACOSX_BUNDLE_GUI_IDENTIFIER "com.digitalknob.${APP_NAME}")
+	#set(MACOSX_BUNDLE_GUI_IDENTIFIER "com.digitalknob.${APP_NAME}")
 		
 	#GET_TARGET_PROPERTY(MyExecutable_PATH ${APP_NAME} LOCATION)
+	list(APPEND App_SRC ${DKPLUGINS}/DK/DKiPhone.mm)
 	add_executable(${APP_NAME} MACOSX_BUNDLE ${App_SRC})
 	set_target_properties(${APP_NAME} PROPERTIES
         XCODE_ATTRIBUTE_CODE_SIGN_IDENTITY ""
@@ -677,6 +677,7 @@ if(IOS)
         MACOSX_BUNDLE_GUI_IDENTIFIER com.digitalknob.${APP_NAME}
         MACOSX_BUNDLE_COPYRIGHT "(C) 2021 DigitalKnob"
         #MACOSX_RPATH TRUE
+		MACOSX_BUNDLE_GUI_IDENTIFIER "com.digitalknob.${APP_NAME}"
         MACOSX_FRAMEWORK_IDENTIFIER "com.digitalknob.bundle.${APP_NAME}"
         #XCODE_ATTRIBUTE_LD_RUNPATH_SEARCH_PATHS "@loader_path/Libraries"
         #RESOURCE "${RESOURCE_FILES}"
@@ -724,33 +725,54 @@ if(IOSSIM)
 	DKREMOVE(${DKPROJECT}/Backup)
 	
 	### FrameWorks ###
-	set(IOS_FRAMEWORKS
-		Foundation
-		AudioToolbox
-		CoreGraphics
-	   	QuartzCore
-		UIKit
-	    OpenGLES
-		ImageIO
-		MobileCoreServices
-	)
+	#set(IOS_FRAMEWORKS
+	#	Foundation
+	#	AudioToolbox
+	#	CoreGraphics
+	#  	QuartzCore
+	#	UIKit
+	#   OpenGLES
+	#	ImageIO
+	#	MobileCoreServices
+	#)
 	
-	list(APPEND App_SRC ${DKPLUGINS}/DK/DKiPhone.mm)
 	
-	foreach(FW ${IOS_FRAMEWORKS})
-		set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -framework ${FW}")
-	endforeach()
+	
+	#foreach(FW ${IOS_FRAMEWORKS})
+	#	set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -framework ${FW}")
+	#endforeach()
 	
 	##set(CMAKE_OSX_SYSROOT iphoneos)
 	##set(XCODE_ATTRIBUTE_SDKROOT iphoneos)
 	##set(CMAKE_OSX_ARCHITECTURES "$(ARCHS_STANDARD_32_BIT)")
-	set(CMAKE_CXX_FLAGS "-x objective-c++")
-    set(CMAKE_XCODE_ATTRIBUTE_CLANG_CXX_LIBRARY "libstdc++")
+	#set(CMAKE_CXX_FLAGS "-x objective-c++")
+    #set(CMAKE_XCODE_ATTRIBUTE_CLANG_CXX_LIBRARY "libstdc++")
 	##set(CMAKE_XCODE_ATTRIBUTE_DEBUG_INFORMATION_FORMAT dwarf)
-	set(MACOSX_BUNDLE_GUI_IDENTIFIER "com.digitalknob.${APP_NAME}")
+	#set(MACOSX_BUNDLE_GUI_IDENTIFIER "com.digitalknob.${APP_NAME}")
 	
 	#GET_TARGET_PROPERTY(MyExecutable_PATH ${APP_NAME} LOCATION)
+	list(APPEND App_SRC ${DKPLUGINS}/DK/DKiPhone.mm)
 	add_executable(${APP_NAME} MACOSX_BUNDLE ${App_SRC})
+	set_target_properties(${APP_NAME} PROPERTIES
+        XCODE_ATTRIBUTE_CODE_SIGN_IDENTITY ""
+        MACOSX_BUNDLE TRUE
+        MACOSX_BUNDLE_BUNDLE_NAME "${APP_NAME}"
+		MACOSX_BUNDLE_ICON_FILE "logo"
+        #MACOSX_BUNDLE_INFO_PLIST path/to/Info.plist
+        MACOSX_BUNDLE_BUNDLE_VERSION "1.0"
+        MACOSX_BUNDLE_LONG_VERSION_STRING "${APP_NAME} v1.0"
+        MACOSX_BUNDLE_SHORT_VERSION_STRING "1.0"
+        MACOSX_BUNDLE_GUI_IDENTIFIER com.digitalknob.${APP_NAME}
+        MACOSX_BUNDLE_COPYRIGHT "(C) 2021 DigitalKnob"
+        #MACOSX_RPATH TRUE
+		MACOSX_BUNDLE_GUI_IDENTIFIER "com.digitalknob.${APP_NAME}"
+        MACOSX_FRAMEWORK_IDENTIFIER "com.digitalknob.bundle.${APP_NAME}"
+        #XCODE_ATTRIBUTE_LD_RUNPATH_SEARCH_PATHS "@loader_path/Libraries"
+        #RESOURCE "${RESOURCE_FILES}"
+        #XCODE_ATTRIBUTE_ENABLE_HARDENED_RUNTIME TRUE
+        #XCODE_ATTRIBUTE_EXECUTABLE_NAME "wrapper"
+		MACOSX_BUNDLE_INFO_PLIST ${DKCMAKE}/Info.plist
+    )
 	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${LIBS})
 	
 	foreach(plugin ${dkdepend_list})
@@ -952,33 +974,24 @@ if(ANDROID)
 	DKCOPY(${DKPROJECT}/icons/icon.png ${DKPROJECT}/${OS}/res/drawable/icon.png TRUE)
 	
 	#DKUPDATE_ANDROID_NAME(${APP_NAME})
-	
-	#DKSET(CMAKE_CXX_FLAGS "-DDKAPP -DUSE_DK -frtti -fexceptions -std=c++1z -lstdc++fs")
-	#DKSET(CMAKE_CXX_FLAGS "-frtti -fexceptions -std=c++1z")
+	#DKSET(CMAKE_CXX_FLAGS "-DDKAPP -DUSE_DK -frtti -fexceptions -std=c++1z")
 	#DKSET(CMAKE_CXX_FLAGS_DEBUG "-DDEBUG -D_DEBUG -g2 -gdwarf-2 -O0")
 	#DKSET(CMAKE_CXX_FLAGS_RELEASE "-DNDEBUG -03")
 	#set(CMAKE_POSITION_INDEPENDENT_CODE TRUE)
 	
-	set(CMAKE_ANDROID_GUI 1)
-	#set(CMAKE_SYSTEM_NAME Android) 
-	#set(CMAKE_SYSTEM_VERSION 26)
-	#set(CMAKE_ANDROID_ARCH_ABI armeabi-v7a)
-	#set(CMAKE_ANDROID_NDK ${ANDROIDNDK})
-	#set(CMAKE_ANDROID_STL_TYPE c++_static)
-	
 	#add_executable(DKAndroid ${App_SRC})
+	set(CMAKE_ANDROID_GUI 1)
 	add_library(${APP_NAME} SHARED ${App_SRC})
-	
+	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${LIBS})	
 	#target_include_directories(${APP_NAME} PUBLIC ${INCLUDE_DIRECTORIES}) #of ${DKINCLUDES_LIST}
-	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${LIBS})
-	#add_dependencies(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS})	
-	#include_external_msproject(DKGradle ${DKPROJECT}/${OS}/DKGradle.androidproj)
-	
+
 	foreach(plugin ${dkdepend_list})
 		if(EXISTS "${DKPLUGINS}/${plugin}/CMakeLists.txt")
 			add_dependencies(${APP_NAME} ${plugin})
 		endif()	
-	endforeach()	
+	endforeach()
+
+	#include_external_msproject(DKGradle ${DKPROJECT}/${OS}/DKGradle.androidproj)	
 endif()
 
 

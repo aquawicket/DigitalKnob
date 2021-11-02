@@ -46,50 +46,42 @@ if(CMAKE_HOST_APPLE AND MAC OR IOS OR IOSSIM)
 	DKSET(DKCMAKE_MAC32 ${CMAKE_EXE} -G "Xcode" 
 	"-DCMAKE_CXX_FLAGS=-x objective-c++ -std=c++17"
 	-DCMAKE_OSX_ARCHITECTURES=x32 
-	-DBUILD_SHARED_LIBS=OFF build)
+	-DBUILD_SHARED_LIBS=OFF build
+	)
 
 	# Mac 64
 	DKSET(DKCMAKE_MAC64 ${CMAKE_EXE} -G "Xcode" 
 	"-DCMAKE_CXX_FLAGS=-x objective-c++ -std=c++17"
 	-DCMAKE_OSX_ARCHITECTURES=x86_64 
-	-DBUILD_SHARED_LIBS=OFF build)
+	-DBUILD_SHARED_LIBS=OFF build
+	)
 
 	# iOS 32
 	DKSET(DKCMAKE_IOS32 ${CMAKE_EXE} -G "Xcode" 
-	#"-DCMAKE_CXX_FLAGS=-x objective-c++ -std=c++17"
 	-DCMAKE_TOOLCHAIN_FILE=${DKCMAKE}/ios.toolchain.cmake 
 	-DPLATFORM=OS
 	-DSDK_VERSION=13.0
-	#-DBUILD_SHARED_LIBS=OFF
-	#build -arch i386
 	)
 
 	# iOS 64
 	DKSET(DKCMAKE_IOS64 ${CMAKE_EXE} -G "Xcode" 
-	#"-DCMAKE_CXX_FLAGS=-x objective-c++ -std=c++17"
 	-DCMAKE_TOOLCHAIN_FILE=${DKCMAKE}/ios.toolchain.cmake 
 	-DPLATFORM=OS64
 	-DSDK_VERSION=13.0
-	#-DBUILD_SHARED_LIBS=OFF
 	)
 
 	# iOS Simulator 32
 	DKSET(DKCMAKE_IOSSIM32 ${CMAKE_EXE} -G "Xcode" 
-	#"-DCMAKE_CXX_FLAGS=-x objective-c++ -std=c++17"
 	-DCMAKE_TOOLCHAIN_FILE=${DKCMAKE}/ios.toolchain.cmake 
 	-DPLATFORM=SIMULATOR
 	-DSDK_VERSION=13.0
-	#-DBUILD_SHARED_LIBS=OFF
 	)
-	#build -arch i386)
 
 	# iOS Simulator 64
 	DKSET(DKCMAKE_IOSSIM64 ${CMAKE_EXE} -G "Xcode" 
-	#"-DCMAKE_CXX_FLAGS=-x objective-c++ -std=c++17"
 	-DCMAKE_TOOLCHAIN_FILE=${DKCMAKE}/ios.toolchain.cmake 
 	-DPLATFORM=SIMULATOR64
 	-DSDK_VERSION=13.0
-	#-DBUILD_SHARED_LIBS=OFF
 	)
 endif()
 
