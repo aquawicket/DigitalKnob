@@ -8,6 +8,7 @@
 ### DEPENDS ###
 if(WIN)
 	DKDEPEND(opengl)
+	DKDEPEND(windows_multimedia)
 endif()	
 if(MAC)
 	DKDEPEND(opengl)
@@ -100,8 +101,7 @@ ANDROID_DEBUG_LIB(${SDL2}/${OS}/${DEBUG_DIR}/libSDL2.a)
 ANDROID_RELEASE_LIB(${SDL2}/${OS}/${RELEASE_DIR}/libSDL2.a)
 ANDROID_DEBUG_LIB(${SDL2}/${OS}/${DEBUG_DIR}/libSDL2main.a)
 ANDROID_RELEASE_LIB(${SDL2}/${OS}/${RELEASE_DIR}/libSDL2main.a)
-#WIN_LIB(opengl32.lib)
-WIN_LIB(winmm.lib)
+
 WIN_LIB(imm32.lib)
 WIN_LIB(version.lib)
 WIN_LIB(Setupapi.lib)
