@@ -1,4 +1,4 @@
-# https://developer.apple.com/documentation/appkit
+# https://developer.apple.com/documentation/uikit
 
 FIND_LIBRARY(uikit_lib UIKit)
-MAC_LIB(${uikit_lib})
+APPLE_LIB(${uikit_lib})
