@@ -218,8 +218,6 @@ if(CMAKE_HOST_WIN32 AND ANDROID)
 	DKSET(DKCMAKE_ANDROID32 ${CMAKE_EXE} -G ${VISUALSTUDIO_NAME} -A ARM
 	-DANDROID_NDK=${ANDROIDNDK}
 	-DCMAKE_TOOLCHAIN_FILE=${ANDROIDNDK}/build/cmake/android.toolchain.cmake
-	"-DCMAKE_C_FLAGS=-frtti -fexceptions -std=c17"
-	"-DCMAKE_CXX_FLAGS=-frtti -fexceptions -std=c++1z -lstdc++fs"
 	-DANDROID_TOOLCHAIN=clang
 	-DANDROID_ABI=armeabi-v7a
 	-DANDROID_NATIVE_API_LEVEL=android-26
