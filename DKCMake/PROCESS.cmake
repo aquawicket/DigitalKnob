@@ -1,9 +1,8 @@
-message("!!!! PROCESS.cmake called !!!!")
 if(DKPROCESS_INCLUDED)
   return()
 endif(DKPROCESS_INCLUDED)
 set(DKPROCESS_INCLUDED true)
-message("!!!! PROCESS.cmake running !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+
 
 message(STATUS "\n")
 message(STATUS "############################################################")

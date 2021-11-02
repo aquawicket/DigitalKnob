@@ -1,9 +1,7 @@
-message("!!!! BuildTools.cmake called !!!!")
 if(DKBUILDTOOLS_INCLUDED)
   return()
 endif(DKBUILDTOOLS_INCLUDED)
 set(DKBUILDTOOLS_INCLUDED true)
-message("!!!! BuildTools.cmake running !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 
 ### DEPENDS ###
 DKDEPEND(git)

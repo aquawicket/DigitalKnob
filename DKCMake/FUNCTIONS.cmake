@@ -1,9 +1,8 @@
-message("!!!! FUNCTIONS.cmake called !!!!")
 if(DKFUNCTIONS_INCLUDED)
   return()
 endif(DKFUNCTIONS_INCLUDED)
 set(DKFUNCTIONS_INCLUDED true)
-message("!!!! FUNCTIONS.cmake running !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+
 
 if(CMAKE_HOST_UNIX AND NOT CMAKE_HOST_APPLE)
 	set(CMAKE_HOST_LINUX TRUE CACHE INTERNAL "")
