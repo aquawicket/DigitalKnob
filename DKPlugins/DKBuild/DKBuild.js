@@ -325,14 +325,7 @@ function DKBuild_DoResults(){
 			DKApps = files[i]+"/DKApps"
 	}
 	const app_path = DIGITALKNOB+DKApps+"/"+APP+"/"
-	// NOTE: This was moved into DKCMake build scripts
-	/*
-	//// Create Icons
-	if(CPP_DK_GetOS() === "Windows"){
-		CPP_DK_Create("DKBuild/IconMaker.js")
-		IconMaker_Create(app_path)
-	}
-	*/
+
 	
 	////// WIN32 /////
 	if(OS === "win32"){
@@ -361,15 +354,10 @@ function DKBuild_DoResults(){
 			CPP_DK_Execute(MSBUILD+" "+app_path+OS+"/"+APP+".sln /p:Configuration=Release")
 		}
 		
-		//copy .pdb file to assets
 		//CPP_DKFile_Copy(app_path+OS+"/Release/"+APP+".pdb", app_path+"assets/"+APP+".pdb", true)
-		
-		//upx compress the exe file
 		/*
-		if(CPP_DKFile_Exists(DIGITALKNOB+"DK/3rdParty/upx-3.95-win64/upx.exe")){
-			console.warn("UPX compressing exe... please wait")
+		if(CPP_DKFile_Exists(DIGITALKNOB+"DK/3rdParty/upx-3.95-win64/upx.exe"))
 			CPP_DK_Execute(DIGITALKNOB+"DK/3rdParty/upx-3.95-win64/upx.exe -9 -v "+app_path+OS+"/Release/"+APP+".exe")
-		}
 		else
 			console.warn("DKBuild_DoResults(): UPX does not exists")
 		*/
@@ -399,18 +387,12 @@ function DKBuild_DoResults(){
 			CPP_DK_Execute(MSBUILD+" "+app_path+OS+"/"+APP+".sln /p:Configuration=Release")
 		}
 		
-		//copy .pdb file to assets
 		//CPP_DKFile_Copy(app_path+OS+"/Release/"+APP+".pdb", app_path+"assets/"+APP+".pdb", true)
-		
-		//upx compress the exe file
 		/*
-		if(CPP_DKFile_Exists(DIGITALKNOB+"3rdParty/upx-3.95-win64/upx.exe")){
-			console.warn("UPX compressing exe... please wait")
+		if(CPP_DKFile_Exists(DIGITALKNOB+"3rdParty/upx-3.95-win64/upx.exe"))
 			CPP_DK_Execute(DIGITALKNOB+"3rdParty/upx-3.95-win64/upx.exe -9 -v "+app_path+OS+"/Release/"+APP+".exe")
-		}
-		else{
+		else
 			console.warn("DKBuild_DoResults(): UPX does not exists")
-		}
 		*/
 	}
 	
@@ -456,24 +438,19 @@ function DKBuild_DoResults(){
 			//update install_name_tool if cef present
 			if(CPP_DKFile_Exists(app_path+OS+"/Debug/"+APP+".app/Contents/Frameworks/Chromium Embedded Framework.framework")){
 				console.log("USING CHROMIUM EMBEDDED FRAMEWORK")
-				
 				let command = "install_name_tool -change \"@executable_path/Chromium Embedded Framework\" \"@executable_path/../../../../Frameworks/Chromium Embedded Framework.framework/Chromium Embedded Framework\" \""+app_path+OS+"/Debug/"+APP+".app/Contents/Frameworks/"+APP+" Helper.app/Contents/MacOS/"+APP+" Helper\""
 				console.log(command)
 				CPP_DK_Execute(command)
-				
 				command = "install_name_tool -add_rpath \"@executable_path/../../../../\" \""+app_path+OS+"/Debug/"+APP+".app/Contents/Frameworks/"+APP+" Helper.app/Contents/MacOS/"+APP+" Helper\""
 				console.log(command)
 				CPP_DK_Execute(command)
-				
 				command = "install_name_tool -change \"@executable_path/Chromium Embedded Framework\" \"@executable_path/../Frameworks/Chromium Embedded Framework.framework/Chromium Embedded Framework\" \""+app_path+OS+"/Debug/"+APP+".app/Contents/Frameworks/"+APP+" Helper.app/Contents/MacOS/"+APP+"\""
 				console.log(command)
 				CPP_DK_Execute(command)
-				
 				command = "install_name_tool -add_rpath \"@executable_path/../\" \""+app_path+OS+"/Debug/"+APP+".app/Contents/MacOS/"+APP+"\""
 				console.log(command)
 				CPP_DK_Execute(command)
 			}
-			
 			*/
 		}
 		if(TYPE === "Release" || TYPE === "ALL"){
@@ -490,34 +467,24 @@ function DKBuild_DoResults(){
 					CPP_DKFile_Rename(app_path+"mac64/Debug/"+APP+".app/Contents/Frameworks/"+APP+" Helper.app/Contents/MacOS/DKCefChild", app_path+"mac64/Release/"+APP+".app/Contents/Frameworks/"+APP+" Helper.app/Contents/MacOS/"+APP+" Helper", true)
 				}
 			}
-			*/
-			
-			/*
 			//update the info.plist to include the logo icon
 			if(CPP_DKFile_Exists(app_path+OS+"/Release/"+APP+".app/Contents/info.plist")){
 				let info_plist = CPP_DKFile_FileToString(app_path+OS+"/Release/"+APP+".app/Contents/info.plist")
 				info_plist = info_plist.replace("<dict>", "<dict><key>CFBundleIconFile</key><string>logo</string>")
 				CPP_DKFile_StringToFile(info_plist, app_path+OS+"/Release/"+APP+".app/Contents/info.plist")
 			}
-			*/
-			
-			/*
 			//update install_name_tool if cef present
 			if(CPP_DKFile_Exists(app_path+OS+"/Release/"+APP+".app/Contents/Frameworks/Chromium Embedded Framework.framework")){
 				console.log("USING CHROMIUM EMBEDDED FRAMEWORK")
-				
 				let command = "install_name_tool -change \"@executable_path/Chromium Embedded Framework\" \"@executable_path/../../../../Frameworks/Chromium Embedded Framework.framework/Chromium Embedded Framework\" \""+app_path+OS+"/Release/"+APP+".app/Contents/Frameworks/"+APP+" Helper.app/Contents/MacOS/"+APP+" Helper\""
 				console.log(command)
 				CPP_DK_Execute(command)
-				
 				command = "install_name_tool -add_rpath \"@executable_path/../../../../\" \""+app_path+OS+"/Release/"+APP+".app/Contents/Frameworks/"+APP+" Helper.app/Contents/MacOS/"+APP+" Helper\""
 				console.log(command)
 				CPP_DK_Execute(command)
-				
 				command = "install_name_tool -change \"@executable_path/Chromium Embedded Framework\" \"@executable_path/../Frameworks/Chromium Embedded Framework.framework/Chromium Embedded Framework\" \""+app_path+OS+"/Release/"+APP+".app/Contents/Frameworks/"+APP+" Helper.app/Contents/MacOS/"+APP+"\""
 				console.log(command)
 				CPP_DK_Execute(command)
-				
 				command = "install_name_tool -add_rpath \"@executable_path/../\" \""+app_path+OS+"/Release/"+APP+".app/Contents/MacOS/"+APP+"\""
 				console.log(command)
 				CPP_DK_Execute(command)
@@ -610,8 +577,9 @@ function DKBuild_DoResults(){
 				return
 			CPP_DKFile_Rename(app_path+OS+"/Debug/"+APP, app_path+OS+"/Debug/"+APP+"_OLD", true)
 			CPP_DK_Execute("make "+APP)
-			//CPP_DK_Execute("chmod +x "+app_path+OS+"/Debug/"+APP)
 			
+			/*
+			//CPP_DK_Execute("chmod +x "+app_path+OS+"/Debug/"+APP)
 			//Create .desktop file
 			let string = "[Desktop Entry]\n"
 			string += "Encoding=UTF-8\n"
@@ -622,6 +590,7 @@ function DKBuild_DoResults(){
 			string += "Exec="+app_path+OS+"/Debug/"+APP+"\n"
 			string += "Icon="+app_path+"icons/icon.png\n"
 			CPP_DKFile_StringToFile(string, app_path+OS+"/Debug/"+APP+".desktop")
+			*/
 		}
 		if(TYPE === "Release" || TYPE === "ALL"){
 			cmake_string = cmake_string.replace("-DDEBUG=ON ", "");
@@ -632,8 +601,9 @@ function DKBuild_DoResults(){
 				return
 			CPP_DKFile_Rename(app_path+OS+"/Release/"+APP, app_path+OS+"/Release/"+APP+"_OLD", true)
 			CPP_DK_Execute("make "+APP)
-			//CPP_DK_Execute("chmod +x "+app_path+OS+"/Release/"+APP)
 			
+			//CPP_DK_Execute("chmod +x "+app_path+OS+"/Release/"+APP)
+			/*
 			//Create .desktop file
 			let string = "[Desktop Entry]\n"
 			string += "Encoding=UTF-8\n"
@@ -644,8 +614,8 @@ function DKBuild_DoResults(){
 			string += "Exec="+app_path+OS+"/Release/"+APP+"\n"
 			string += "Icon="+app_path+"icons/icon.png\n"
 			CPP_DKFile_StringToFile(string, app_path+OS+"/Release/"+APP+".desktop")
-			
 			CPP_DK_Execute("desktop-file-install --dir=$HOME/.local/share/applications "+APP+".desktop")
+			*/
 		}
 	}
 	
@@ -664,8 +634,9 @@ function DKBuild_DoResults(){
 				return
 			CPP_DKFile_Rename(app_path+OS+"/Debug/"+APP, app_path+OS+"/Debug/"+APP+"_OLD", true)
 			CPP_DK_Execute("make "+APP)
+			
+			/*
 			//CPP_DK_Execute("chmod +x "+app_path+OS+"/Debug/"+APP+"")
-
 			//Create .desktop file
 			let string = "[Desktop Entry]\n"
 			string += "Encoding=UTF-8\n"
@@ -676,6 +647,7 @@ function DKBuild_DoResults(){
 			string += "Exec="+app_path+OS+"/Debug/"+APP+"\n"
 			string += "Icon="+app_path+"icons/icon.png\n"
 			CPP_DKFile_StringToFile(string, app_path+OS+"/Debug/"+APP+".desktop")
+			*/
 		}
 		if(TYPE === "Release" || TYPE === "ALL"){
 			cmake_string = cmake_string.replace("-DDEBUG=ON ", "");
@@ -687,8 +659,9 @@ function DKBuild_DoResults(){
 				return
 			CPP_DKFile_Rename(app_path+OS+"/Release/"+APP, app_path+OS+"/Release/"+APP+"_OLD", true)
 			CPP_DK_Execute("make "+APP)
-			//CPP_DK_Execute("chmod +x "+app_path+OS+"/Release/"+APP)
 			
+			//CPP_DK_Execute("chmod +x "+app_path+OS+"/Release/"+APP)
+			/*
 			//Create .desktop file
 			let string = "[Desktop Entry]\n"
 			string += "Encoding=UTF-8\n"
@@ -699,8 +672,8 @@ function DKBuild_DoResults(){
 			string += "Exec="+app_path+OS+"/Release/"+APP+"\n"
 			string += "Icon="+app_path+"icons/icon.png\n"
 			CPP_DKFile_StringToFile(string, app_path+OS+"/Release/"+APP+".desktop")
-			
 			CPP_DK_Execute("desktop-file-install --dir=$HOME/.local/share/applications "+APP+".desktop")
+			*/
 		}
 	}
 	
@@ -719,8 +692,9 @@ function DKBuild_DoResults(){
 				return //FIXME: this doesn't catch all build errors
 			CPP_DKFile_Rename(app_path+OS+"/Debug/"+APP, app_path+OS+"/Debug/"+APP+"_OLD", true)
 			CPP_DK_Execute("make "+APP)
-			//CPP_DK_Execute("chmod +x "+app_path+OS+"/Debug/"+APP)
 			
+			//CPP_DK_Execute("chmod +x "+app_path+OS+"/Debug/"+APP)
+			/*
 			//Create .desktop file
 			let string = "[Desktop Entry]\n"
 			string += "Encoding=UTF-8\n"
@@ -731,6 +705,7 @@ function DKBuild_DoResults(){
 			string += "Exec="+app_path+OS+"/Debug/"+APP+"\n"
 			string += "Icon="+app_path+"icons/icon.png\n"
 			CPP_DKFile_StringToFile(string, app_path+OS+"/Debug/"+APP+".desktop")
+			*/
 		}
 		if(TYPE === "Release" || TYPE === "ALL"){
 			cmake_string = cmake_string.replace("-DDEBUG=ON ", "");
@@ -741,8 +716,9 @@ function DKBuild_DoResults(){
 				return //FIXME: this doesn't catch all build errors
 			CPP_DKFile_Rename(app_path+OS+"/Release/"+APP, app_path+OS+"/Release/"+APP+"_OLD", true)
 			CPP_DK_Execute("make "+APP)
-			//CPP_DK_Execute("chmod +x "+app_path+OS+"/Release/"+APP)
 			
+			//CPP_DK_Execute("chmod +x "+app_path+OS+"/Release/"+APP)
+			/*
 			//Create .desktop file
 			let string = "[Desktop Entry]\n"
 			string += "Encoding=UTF-8\n"
@@ -753,8 +729,8 @@ function DKBuild_DoResults(){
 			string += "Exec="+app_path+OS+"/Release/"+APP+"\n"
 			string += "Icon="+app_path+"icons/icon.png\n"
 			CPP_DKFile_StringToFile(string, app_path+OS+"/Release/"+APP+".desktop")
-			
 			CPP_DK_Execute("desktop-file-install --dir=$HOME/.local/share/applications "+APP+".desktop")
+			*/
 		}
 	}
 	
@@ -772,6 +748,7 @@ function DKBuild_DoResults(){
 			CPP_DKFile_Rename(app_path+OS+"/Debug/"+APP, app_path+OS+"/Debug/"+APP+"_OLD", true)
 			CPP_DK_Execute("make "+APP)
 
+			/*
 			//Create .desktop file
 			let string = "[Desktop Entry]\n"
 			string += "Encoding=UTF-8\n"
@@ -782,6 +759,7 @@ function DKBuild_DoResults(){
 			string += "Exec="+app_path+OS+"/Debug/"+APP+"\n"
 			string += "Icon="+app_path+"icons/icon.png\n"
 			CPP_DKFile_StringToFile(string, app_path+OS+"/Debug/"+APP+".desktop")
+			*/
 		}
 		if(TYPE === "Release" || TYPE === "ALL"){
 			cmake_string = cmake_string.replace("-DDEBUG=ON ", "");
@@ -794,6 +772,7 @@ function DKBuild_DoResults(){
 			CPP_DK_Execute("make "+APP)
 			
 			//Create .desktop file
+			/*
 			let string = "[Desktop Entry]\n"
 			string += "Encoding=UTF-8\n"
 			string += "Version=1.0\n"
@@ -803,8 +782,8 @@ function DKBuild_DoResults(){
 			string += "Exec="+app_path+OS+"/Release/"+APP+"\n"
 			string += "Icon="+app_path+"icons/icon.png\n"
 			CPP_DKFile_StringToFile(string, app_path+OS+"/Release/"+APP+".desktop")
-			
 			CPP_DK_Execute("desktop-file-install --dir=$HOME/.local/share/applications "+APP+".desktop")
+			*/
 		}
 	}
 	
