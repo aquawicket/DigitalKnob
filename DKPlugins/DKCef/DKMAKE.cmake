@@ -1,12 +1,16 @@
 #NOTE: Use ${CMAKE_PROJECT_NAME} to reference the root parent project if needed
 
-DKDEPEND(cef_binary)
+if(WIN)
+	DKDEPEND(windows_multimedia)
+endif()
 if(MAC)
+	DKDEPEND(appkit)
 	DKDEPEND(foundation)
 endif()
 if(LINUX)
 	DKDEPEND(libgtk2.0-dev)
 endif()
+DKDEPEND(cef_binary)
 DKDEPEND(DKDuktape)
 
 
@@ -39,7 +43,6 @@ if(WIN_32)
 	LIST(APPEND RELEASE_LINK_FLAGS /DELAYLOAD:libcef.dll)
 	LIST(APPEND DEBUG_LINK_FLAGS /DELAYLOAD:chrome_elf.dll)
 	LIST(APPEND RELEASE_LINK_FLAGS /DELAYLOAD:chrome_elf.dll)
-	WIN_LIB(winmm.lib)
 endif()
 
 if(WIN_64)
@@ -64,12 +67,10 @@ if(WIN_64)
 	LIST(APPEND RELEASE_LINK_FLAGS /DELAYLOAD:libcef.dll)
 	LIST(APPEND DEBUG_LINK_FLAGS /DELAYLOAD:chrome_elf.dll)
 	LIST(APPEND RELEASE_LINK_FLAGS /DELAYLOAD:chrome_elf.dll)
-	WIN_LIB(winmm.lib)
 endif()
 
 #https://bitbucket.org/chromiumembedded/cef/wiki/Tutorial#markdown-header-mac-os-x-build-steps
 if(MAC_64)
-	#DKDEPEND(appkit)
 	#if(DEBUG)
 		#DKCOPY(${CEF}/Debug/ ${DKPROJECT}/assets/DKCef/mac64Debug TRUE)
 		#FILE(MAKE_DIRECTORY ${DKPROJECT}/mac64/Debug/${AppName}.app/Contents/Frameworks)
