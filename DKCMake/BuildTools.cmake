@@ -206,29 +206,31 @@ if(CMAKE_HOST_WIN32 AND ANDROID)
 	DKSET(DKCMAKE_ANDROID32 ${CMAKE_EXE} -G ${VISUALSTUDIO_NAME} -A ARM
 	-DANDROID_NDK=${ANDROIDNDK}
 	-DCMAKE_TOOLCHAIN_FILE=${ANDROIDNDK}/build/cmake/android.toolchain.cmake
-	"-DCMAKE_C_FLAGS=-frtti -fexceptions -std=c17"
+	#"-DCMAKE_C_FLAGS=-frtti -fexceptions -std=c17"
 	#"-DCMAKE_CXX_FLAGS=-frtti -fexceptions -std=c++1z" #-lstdc++fs"
-	"-DCMAKE_CXX_FLAGS=-frtti -fexceptions -std=c++1z"
+	#"-DCMAKE_CXX_FLAGS=-frtti -fexceptions -std=c++1z"
 	#-DANDROID_TOOLCHAIN=clang
 	#-DANDROID_ABI=armeabi-v7a
 	#-DANDROID_NATIVE_API_LEVEL=android-26
 	#-DANDROID_STL_FORCE_FEATURES=TRUE
 	#-DANDROID_NO_UNDEFINED=TURE
-	#-DANDROID_STL=c++_static)
+	#-DANDROID_STL=c++_static
+	)
 		
 	#Android arm64
 	DKSET(DKCMAKE_ANDROID64 ${CMAKE_EXE} -G ${VISUALSTUDIO_NAME} -A ARM64
 	-DANDROID_NDK=${ANDROIDNDK}
 	-DCMAKE_TOOLCHAIN_FILE=${ANDROIDNDK}/build/cmake/android.toolchain.cmake
-	"-DCMAKE_C_FLAGS=-frtti -fexceptions -std=c17"
+	#"-DCMAKE_C_FLAGS=-frtti -fexceptions -std=c17"
 	#"-DCMAKE_CXX_FLAGS=-frtti -fexceptions -std=c++1z" #-lstdc++fs"
-	"-DCMAKE_CXX_FLAGS=-frtti -fexceptions -std=c++1z"
+	#"-DCMAKE_CXX_FLAGS=-frtti -fexceptions -std=c++1z"
 	#-DANDROID_TOOLCHAIN=clang
 	#-DANDROID_ABI=arm64-v8a
 	#-DANDROID_NATIVE_API_LEVEL=android-26
 	#-DANDROID_STL_FORCE_FEATURES=TRUE
 	#-DANDROID_NO_UNDEFINED=TURE
-	#-DANDROID_STL=c++_static)
+	#-DANDROID_STL=c++_static
+	)
 		
 		
 	# https://developer.android.com/ndk/guides/cmake
