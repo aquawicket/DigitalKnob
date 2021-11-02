@@ -532,7 +532,6 @@ if(MAC)
 	add_executable(${APP_NAME} MACOSX_BUNDLE ${App_SRC})
 	set_target_properties(${APP_NAME} PROPERTIES
         XCODE_ATTRIBUTE_CODE_SIGN_IDENTITY ""
-        #OUTPUT_NAME "wrapper"
         MACOSX_BUNDLE TRUE
 		MACOSX_BUNDLE_EXECUTABLE_NAME "wrapper"
         MACOSX_BUNDLE_BUNDLE_NAME "${APP_NAME}"
@@ -640,22 +639,22 @@ if(IOS)
 	DKREMOVE(${DKPROJECT}/Backup)
 
 	### FrameWorks ###
-	set(IOS_FRAMEWORKS
-		Foundation
-		AudioToolbox
-		CoreGraphics
-	   	QuartzCore
-		UIKit
-	    OpenGLES
-		ImageIO
-		MobileCoreServices
-	)
+	#set(IOS_FRAMEWORKS
+	#	Foundation
+	#	AudioToolbox
+	#	CoreGraphics
+	#   	QuartzCore
+	#	UIKit
+	#    OpenGLES
+	#	ImageIO
+	#	MobileCoreServices
+	#)
 	
 	list(APPEND App_SRC ${DKPLUGINS}/DK/DKiPhone.mm)
 	
-	foreach(FW ${IOS_FRAMEWORKS})
-		set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -framework ${FW}")
-	endforeach()
+	#foreach(FW ${IOS_FRAMEWORKS})
+	#	set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -framework ${FW}")
+	#endforeach()
 	
 	#set(CMAKE_OSX_SYSROOT iphoneos)
 	#set(XCODE_ATTRIBUTE_SDKROOT iphoneos)
@@ -666,6 +665,25 @@ if(IOS)
 		
 	#GET_TARGET_PROPERTY(MyExecutable_PATH ${APP_NAME} LOCATION)
 	add_executable(${APP_NAME} MACOSX_BUNDLE ${App_SRC})
+	set_target_properties(${APP_NAME} PROPERTIES
+        XCODE_ATTRIBUTE_CODE_SIGN_IDENTITY ""
+        MACOSX_BUNDLE TRUE
+        MACOSX_BUNDLE_BUNDLE_NAME "${APP_NAME}"
+		MACOSX_BUNDLE_ICON_FILE "logo"
+        #MACOSX_BUNDLE_INFO_PLIST path/to/Info.plist
+        MACOSX_BUNDLE_BUNDLE_VERSION "1.0"
+        MACOSX_BUNDLE_LONG_VERSION_STRING "${APP_NAME} v1.0"
+        MACOSX_BUNDLE_SHORT_VERSION_STRING "1.0"
+        MACOSX_BUNDLE_GUI_IDENTIFIER com.digitalknob.${APP_NAME}
+        MACOSX_BUNDLE_COPYRIGHT "(C) 2021 DigitalKnob"
+        #MACOSX_RPATH TRUE
+        MACOSX_FRAMEWORK_IDENTIFIER "com.digitalknob.bundle.${APP_NAME}"
+        #XCODE_ATTRIBUTE_LD_RUNPATH_SEARCH_PATHS "@loader_path/Libraries"
+        #RESOURCE "${RESOURCE_FILES}"
+        #XCODE_ATTRIBUTE_ENABLE_HARDENED_RUNTIME TRUE
+        #XCODE_ATTRIBUTE_EXECUTABLE_NAME "wrapper"
+		MACOSX_BUNDLE_INFO_PLIST ${DKCMAKE}/Info.plist
+    )
 	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${LIBS})
 	
 	foreach(plugin ${dkdepend_list})
