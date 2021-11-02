@@ -1,7 +1,10 @@
 # https://www.sfml-dev.org/files/SFML-2.4.2-sources.zip
 
 ### DEPENDS ###
-DKDEPEND(openal)
+DKDEPEND(opengl)
+DKDEPEND(windows_multimedia)
+DKDEPEND(avf_audio)
+#DKDEPEND(openal)
 DKDEPEND(flac)
 
 
@@ -67,8 +70,7 @@ ANDROID_DEBUG_LIB(${SFML}/${OS}/lib/${DEBUG_DIR}/libsfml-system-s-d.a)
 ANDROID_RELEASE_LIB(${SFML}/${OS}/lib/${RELEASE_DIR}/libsfml-system-s.a)
 ANDROID_DEBUG_LIB(${SFML}/${OS}/lib/${DEBUG_DIR}/libsfml-window-s-d.a)
 ANDROID_RELEASE_LIB(${SFML}/${OS}/lib/${RELEASE_DIR}/libsfml-window-s.a)
-WIN_LIB(opengl32.lib)
-WIN_LIB(winmm.lib)
+
 
 ### 3RDPARTY LINL ###
 DKSET(SFML_WIN
