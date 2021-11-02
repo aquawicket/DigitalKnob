@@ -5,15 +5,7 @@ endif()
 
 if(MAC)
 	FIND_LIBRARY(opengl_lib OpenGL)
-	MAC_LIB(${opengl_lib})
-endif()
-
-if(IOS)
-	#TODO
-endif()
-
-if(IOSSIM)
-	#TODO
+	APPLE_LIB(${opengl_lib})
 endif()
 
 if(LINUX)
@@ -37,9 +29,3 @@ if(RASPBERRY)
 	endif()
 	RASPBERRY_LIB(${OPENGL_LIBRARIES})
 endif()	
-	
-if(ANDROID)
-	DKDEFINE(GL_GLEXT_PROTOTYPES)
-	ANDROID_LIB(GLESv1_CM)
-	ANDROID_LIB(GLESv2)
-endif()

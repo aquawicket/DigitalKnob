@@ -1,11 +1,11 @@
 if(IOS)
 	FIND_LIBRARY(opengles_lib OpenGLES)
-	IOS_LIB(${opengles_lib})
+	APPLE_LIB(${opengles_lib})
 endif()
 
 if(IOSSIM)
 	FIND_LIBRARY(opengles_lib OpenGLES)
-	IOSSIM_LIB(${opengles_lib})
+	APPLE_LIB(${opengles_lib})
 endif()
 
 if(ANDROID)
