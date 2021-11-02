@@ -118,6 +118,7 @@ if(CMAKE_HOST_APPLE)  # Disabled on Apple host machines
 	DKDISABLE(DKMySql)
 	DKDISABLE(DKOcr)
 	DKDISABLE(DKRmlIframe)
+	DKDISABLE(DKSFMLRml)
 	DKDISABLE(DKWebSockets)
 	DKDISABLE(flac)
 	DKDISABLE(freealut)
