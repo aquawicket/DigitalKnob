@@ -13,8 +13,13 @@
 	//	#include <filesystem>
 	//	namespace fs = std::__fs::filesystem;
 	#elif __has_include(<experimental/filesystem>)
+#ifdef ANDROID
+		#include <filesystem>
+		namespace fs = std::filesystem;
+#else
 		#include <experimental/filesystem>
 		namespace fs = std::experimental::filesystem;
+#endif
 	#elif __has_include(<boost/filesystem.hpp>)
 		#include <boost/filesystem.hpp>
 		namespace fs = boost::filesystem;
