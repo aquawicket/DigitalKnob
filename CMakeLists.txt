@@ -9,12 +9,10 @@
 ### Rebuild App - the app (erase the app's cmake, and rebuild, but don't do anything with dependencies)
 ### Build All - (don't erase cmake files, but build the app and it's dependencies)
 ### Rebeuild All - (erase all cmake files, and build the app and it's dependencies)
-message("!!!! CMakeLists.txt called !!!!")
 if(DKCMAKELIST_INCLUDED)
   return()
 endif(DKCMAKELIST_INCLUDED)
 set(DKCMAKELIST_INCLUDED true)
-message("!!!! CMakeLists.txt running !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 
 
 if(CMAKE_HOST_UNIX)
