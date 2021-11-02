@@ -6,14 +6,32 @@
 # https://www.libsdl.org/release/SDL2-2.0.16.zip
 
 ### DEPENDS ###
-DKDEPEND(opengl)
+if(WIN)
+	DKDEPEND(opengl)
+endif()	
 if(MAC)
+	DKDEPEND(opengl)
 	DKDEPEND(libiconv)
 	DKDEPEND(core_audio)
 	DKDEPEND(audio_toolbox)
 	DKDEPEND(cocoa)
 	DKDEPEND(core_video)
 	DKDEPEND(force_feedback)
+endif()
+if(IOS)
+	DKDEPEND(opengles)
+endif()
+if(IOSSIM)
+	DKDEPEND(opengles)
+endif()
+if(LINUX)
+	DKDEPEND(opengl)
+endif()
+if(RASPBERRY)
+	DKDEPEND(opengl)
+endif()
+if(ANDROID)
+	DKDEPEND(opengles)
 endif()
 
 ### VERSION ###
