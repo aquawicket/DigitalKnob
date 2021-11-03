@@ -8,6 +8,7 @@ endif()
 
 if(MAC)
 	DKDEPEND(boxer)
+	DKDEPEND(core_foundation)
 	DKDEPEND(core_graphics)
 	DKDEPEND(carbon) #for DKOSinfo.cpp Gestalt()
 	DKDEPEND(iokit) #for DKMac.cpp IO*() and kIO*()
