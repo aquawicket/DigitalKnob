@@ -606,10 +606,10 @@ if(RASPBERRY_32)
 	add_definitions(-DLINUX32) #FIXME - not all Raspberry OS's are Linux
 	add_definitions(-DLINUX) #FIXME
 	include_directories(/usr/X11/include)
-	if(CMAKE_GENERATOR STREQUAL "Unix Makefiles")
+	#if(CMAKE_GENERATOR STREQUAL "Unix Makefiles")
 		DKSET(CMAKE_C_FLAGS "-fPIC")
-		DKSET(CMAKE_CXX_FLAGS "-std=c++17 -lstdc++fs -g -no-pie -fPIC")
-	endif()
+		DKSET(CMAKE_CXX_FLAGS "-std=gnu++17 -lstdc++fs -g -no-pie -fPIC")
+	#endif()
 endif()
 
 if(RASPBERRY_64)
@@ -637,7 +637,7 @@ if(RASPBERRY_64)
 	include_directories(/usr/X11/include)
 	if(CMAKE_GENERATOR STREQUAL "Unix Makefiles")
 		DKSET(CMAKE_C_FLAGS "-fPIC")
-		DKSET(CMAKE_CXX_FLAGS "-std=c++17 -lstdc++fs -g -no-pie -fPIC")
+		DKSET(CMAKE_CXX_FLAGS "-std=gnu++17 -lstdc++fs -g -no-pie -fPIC")
 	endif()
 endif()
 
