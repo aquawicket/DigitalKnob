@@ -1,6 +1,8 @@
 #include "DK/stdafx.h"
 #ifdef MAC
 #include "DKMac.h"
+
+#import "CoreFoundation/CoreFoundation.h"
 #import "CoreGraphics/CoreGraphics.h"
 
 
