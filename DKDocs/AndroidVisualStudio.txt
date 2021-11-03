@@ -1,6 +1,0 @@
-https://andrewlock.net/creating-and-editing-solution-files-with-the-net-cli/
-
-//Add project to .sln 
-dotnet sln C:\Users\IK\digitalknob\DKTestApps\DKApps\DKSDL_Test\android64\DKSDL_Test.sln add C:\Users\IK\digitalknob\DKTestApps\DKApps\DKSDL_Test\android64\dkapp.Packaging.androidproj
-
-ERROR: Invalid project `C:\Users\IK\digitalknob\DKTestApps\DKApps\DKSDL_Test\android64\dkapp.Packaging.androidproj`. The imported project "C:\Android.Default.props" was not found. Confirm that the expression in the Import declaration "\Android.Default.props" is correct, and that the file exists on disk.  C:\Users\IK\digitalknob\DKTestApps\DKApps\DKSDL_Test\android64\dkapp.Packaging.androidproj.
