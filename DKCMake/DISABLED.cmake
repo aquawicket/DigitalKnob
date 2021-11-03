@@ -134,6 +134,7 @@ if(MAC)  # Disabled on Mac host machines
 	DKDISABLE(android-platform-tools)
 	DKDISABLE(boxer)
 	DKDISABLE(bzip2)
+	DKDISABLE(carbon)
 	#DKDISABLE(DKCefChild)
 	DKDISABLE(DKMySql)
 	DKDISABLE(DKOcr)
