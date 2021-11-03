@@ -1,7 +1,7 @@
 if(ANDROID)
 	FIND_LIBRARY(opensles_lib OpenSLES)
 	if(NOT ${opensles_lib})
-		message(FATAL_ERROR "Could not locate OpenSLES library")
+		#message(FATAL_ERROR "Could not locate OpenSLES library")
 	endif()
 	ANDROID_LIB(${opensles_lib})
 endif()
