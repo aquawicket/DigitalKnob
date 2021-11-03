@@ -1,39 +1,36 @@
 #pragma once
-#ifndef DKSDLRml_H
-#define DKSDLRml_H
+#ifndef DKSFMLRml_H
+#define DKSFMLRml_H
 
 #include <RmlUi/Core.h>
 #include "DK/DK.h"
-#include "DKSDLWindow/DKSDLWindow.h"
+#include "DKSFMLWindow/DKSFMLWindow.h"
 #include "DKRml/DKRml.h"
-#include "DKSDLRml/DKSDLRmlSystem.h"
-#include "DKSDLRml/DKSDLRmlRenderer.h"
+#include "DKSFMLRml/DKSFMLRmlSystem.h"
+#include "DKSFMLRml/DKSFMLRmlRenderer.h"
 
 //#include "ShellRenderInterfaceOpenGL.h"
 //#define RML_SHELL_RENDER 1
 
-///////////////////////////////////////////
-class DKSDLRml : public DKObjectT<DKSDLRml>
+class DKSFMLRml : public DKObjectT<DKSFMLRml>
 {
 public:
 	bool Init();
 	bool End();
 
-	bool Handle(SDL_Event *event);
+	bool Handle(SFML_Event *event);
 	void Render();
 	void Update();
 	//void ProcessEvent(Rml::Core::Event& event);
 	
-	DKSDLWindow* dkSdlWindow;
+	DKSFMLWindow* dkSFMLWindow;
 	DKRml* dkRml;
 #ifdef RML_SHELL_RENDER
 	ShellRenderInterfaceOpenGL* Renderer;
 #else
-	RmlSDL2Renderer* Renderer;
+	RmlSFML2Renderer* Renderer;
 #endif
-	RmlSDL2SystemInterface* SystemInterface;
+	RmlSFML2SystemInterface* SystemInterface;
 };
-
-
-REGISTER_OBJECT(DKSDLRml, true)
-#endif //DKSDLRml_H
+REGISTER_OBJECT(DKSFMLRml, true)
+#endif //DKSFMLRml_H

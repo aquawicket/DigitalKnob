@@ -1,20 +1,19 @@
 #pragma once
-#ifndef DKSDLRmlSystem_H
-#define DKSDLRmlSystem_H
+#ifndef DKSFMLRmlSystem_H
+#define DKSFMLRmlSystem_H
 
 #include <RmlUi/Core.h>
-#include <SDL.h>
+#include <SFML.h>
 #include "DK/DK.h"
 
-///////////////////////////////////////////////////////////
-class RmlSDL2SystemInterface : public Rml::SystemInterface
+class RmlSFML2SystemInterface : public Rml::SystemInterface
 {
 public:
-    Rml::Input::KeyIdentifier TranslateKey(SDL_Keycode sdlkey);
+    Rml::Input::KeyIdentifier TranslateKey(SFML_Keycode sdlkey);
     int TranslateMouseButton(Uint8 button);
 	int GetKeyModifiers();
     double GetElapsedTime();
     bool LogMessage(Rml::Log::Type type, const Rml::String& message);
 };
 
-#endif //DKSDLRmlSystem_H
+#endif //DKSFMLRmlSystem_H

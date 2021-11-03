@@ -1,350 +1,350 @@
 #include <RmlUi/Core.h>
-#include "DKSDLRml/DKSDLRmlSystem.h"
+#include "DKSFMLRml/DKSFMLRmlSystem.h"
 
-Rml::Input::KeyIdentifier RmlSDL2SystemInterface::TranslateKey(SDL_Keycode sdlkey){
+Rml::Input::KeyIdentifier RmlSFML2SystemInterface::TranslateKey(SFML_Keycode sdlkey){
 	DKDEBUGFUNC(sdlkey);
     using namespace Rml::Input;
     switch(sdlkey) {
-        case SDLK_UNKNOWN:
+        case SFMLK_UNKNOWN:
             return KI_UNKNOWN;
             break;
-        case SDLK_SPACE:
+        case SFMLK_SPACE:
             return KI_SPACE;
             break;
-        case SDLK_0:
+        case SFMLK_0:
             return KI_0;
             break;
-        case SDLK_1:
+        case SFMLK_1:
             return KI_1;
             break;
-        case SDLK_2:
+        case SFMLK_2:
             return KI_2;
             break;
-        case SDLK_3:
+        case SFMLK_3:
             return KI_3;
             break;
-        case SDLK_4:
+        case SFMLK_4:
             return KI_4;
             break;
-        case SDLK_5:
+        case SFMLK_5:
             return KI_5;
             break;
-        case SDLK_6:
+        case SFMLK_6:
             return KI_6;
             break;
-        case SDLK_7:
+        case SFMLK_7:
             return KI_7;
             break;
-        case SDLK_8:
+        case SFMLK_8:
             return KI_8;
             break;
-        case SDLK_9:
+        case SFMLK_9:
             return KI_9;
             break;
-        case SDLK_a:
+        case SFMLK_a:
             return KI_A;
             break;
-        case SDLK_b:
+        case SFMLK_b:
             return KI_B;
             break;
-        case SDLK_c:
+        case SFMLK_c:
             return KI_C;
             break;
-        case SDLK_d:
+        case SFMLK_d:
             return KI_D;
             break;
-        case SDLK_e:
+        case SFMLK_e:
             return KI_E;
             break;
-        case SDLK_f:
+        case SFMLK_f:
             return KI_F;
             break;
-        case SDLK_g:
+        case SFMLK_g:
             return KI_G;
             break;
-        case SDLK_h:
+        case SFMLK_h:
             return KI_H;
             break;
-        case SDLK_i:
+        case SFMLK_i:
             return KI_I;
             break;
-        case SDLK_j:
+        case SFMLK_j:
             return KI_J;
             break;
-        case SDLK_k:
+        case SFMLK_k:
             return KI_K;
             break;
-        case SDLK_l:
+        case SFMLK_l:
             return KI_L;
             break;
-        case SDLK_m:
+        case SFMLK_m:
             return KI_M;
             break;
-        case SDLK_n:
+        case SFMLK_n:
             return KI_N;
             break;
-        case SDLK_o:
+        case SFMLK_o:
             return KI_O;
             break;
-        case SDLK_p:
+        case SFMLK_p:
             return KI_P;
             break;
-        case SDLK_q:
+        case SFMLK_q:
             return KI_Q;
             break;
-        case SDLK_r:
+        case SFMLK_r:
             return KI_R;
             break;
-        case SDLK_s:
+        case SFMLK_s:
             return KI_S;
             break;
-        case SDLK_t:
+        case SFMLK_t:
             return KI_T;
             break;
-        case SDLK_u:
+        case SFMLK_u:
             return KI_U;
             break;
-        case SDLK_v:
+        case SFMLK_v:
             return KI_V;
             break;
-        case SDLK_w:
+        case SFMLK_w:
             return KI_W;
             break;
-        case SDLK_x:
+        case SFMLK_x:
             return KI_X;
             break;
-        case SDLK_y:
+        case SFMLK_y:
             return KI_Y;
             break;
-        case SDLK_z:
+        case SFMLK_z:
             return KI_Z;
             break;
-        case SDLK_SEMICOLON:
+        case SFMLK_SEMICOLON:
             return KI_OEM_1;
             break;
-        case SDLK_QUOTE:
+        case SFMLK_QUOTE:
             return KI_OEM_7;
             break;
-        case SDLK_EQUALS:
+        case SFMLK_EQUALS:
             return KI_OEM_PLUS;
             break;
-        case SDLK_PLUS:
+        case SFMLK_PLUS:
             return KI_OEM_PLUS;
             break;
-        case SDLK_COMMA:
+        case SFMLK_COMMA:
             return KI_OEM_COMMA;
             break;
-        case SDLK_MINUS:
+        case SFMLK_MINUS:
             return KI_OEM_MINUS;
             break;
-        case SDLK_PERIOD:
+        case SFMLK_PERIOD:
             return KI_OEM_PERIOD;
             break;
-        case SDLK_SLASH:
+        case SFMLK_SLASH:
             return KI_OEM_2;
             break;
-        case SDLK_BACKQUOTE:
+        case SFMLK_BACKQUOTE:
             return KI_OEM_3;
             break;
-        case SDLK_LEFTBRACKET:
+        case SFMLK_LEFTBRACKET:
             return KI_OEM_4;
             break;
-        case SDLK_BACKSLASH:
+        case SFMLK_BACKSLASH:
             return KI_OEM_5;
             break;
-        case SDLK_RIGHTBRACKET:
+        case SFMLK_RIGHTBRACKET:
             return KI_OEM_6;
             break;
-        case SDLK_QUOTEDBL:
+        case SFMLK_QUOTEDBL:
             return KI_OEM_7;
             break;
-        case SDLK_ESCAPE:
+        case SFMLK_ESCAPE:
             return KI_ESCAPE;
             break;
-        case SDLK_KP_0:
+        case SFMLK_KP_0:
             return KI_NUMPAD0;
             break;
-        case SDLK_KP_1:
+        case SFMLK_KP_1:
             return KI_NUMPAD1;
             break;
-        case SDLK_KP_2:
+        case SFMLK_KP_2:
             return KI_NUMPAD2;
             break;
-        case SDLK_KP_3:
+        case SFMLK_KP_3:
             return KI_NUMPAD3;
             break;
-        case SDLK_KP_4:
+        case SFMLK_KP_4:
             return KI_NUMPAD4;
             break;
-        case SDLK_KP_5:
+        case SFMLK_KP_5:
             return KI_NUMPAD5;
             break;
-        case SDLK_KP_6:
+        case SFMLK_KP_6:
             return KI_NUMPAD6;
             break;
-        case SDLK_KP_7:
+        case SFMLK_KP_7:
             return KI_NUMPAD7;
             break;
-        case SDLK_KP_8:
+        case SFMLK_KP_8:
             return KI_NUMPAD8;
             break;
-        case SDLK_KP_9:
+        case SFMLK_KP_9:
             return KI_NUMPAD9;
             break;
-        case SDLK_KP_ENTER:
+        case SFMLK_KP_ENTER:
             return KI_NUMPADENTER;
             break;
-        case SDLK_KP_MULTIPLY:
+        case SFMLK_KP_MULTIPLY:
             return KI_MULTIPLY;
             break;
-        case SDLK_KP_PLUS:
+        case SFMLK_KP_PLUS:
             return KI_ADD;
             break;
-        case SDLK_KP_MINUS:
+        case SFMLK_KP_MINUS:
             return KI_SUBTRACT;
             break;
-        case SDLK_KP_PERIOD:
+        case SFMLK_KP_PERIOD:
             return KI_DECIMAL;
             break;
-        case SDLK_KP_DIVIDE:
+        case SFMLK_KP_DIVIDE:
             return KI_DIVIDE;
             break;
-        case SDLK_KP_EQUALS:
+        case SFMLK_KP_EQUALS:
             return KI_OEM_NEC_EQUAL;
             break;
-        case SDLK_BACKSPACE:
+        case SFMLK_BACKSPACE:
             return KI_BACK;
             break;
-        case SDLK_TAB:
+        case SFMLK_TAB:
             return KI_TAB;
             break;
-        case SDLK_CLEAR:
+        case SFMLK_CLEAR:
             return KI_CLEAR;
             break;
-        case SDLK_RETURN:
+        case SFMLK_RETURN:
             return KI_RETURN;
             break;
-        case SDLK_PAUSE:
+        case SFMLK_PAUSE:
             return KI_PAUSE;
             break;
-        case SDLK_CAPSLOCK:
+        case SFMLK_CAPSLOCK:
             return KI_CAPITAL;
             break;
-        case SDLK_PAGEUP:
+        case SFMLK_PAGEUP:
             return KI_PRIOR;
             break;
-        case SDLK_PAGEDOWN:
+        case SFMLK_PAGEDOWN:
             return KI_NEXT;
             break;
-        case SDLK_END:
+        case SFMLK_END:
             return KI_END;
             break;
-        case SDLK_HOME:
+        case SFMLK_HOME:
             return KI_HOME;
             break;
-        case SDLK_LEFT:
+        case SFMLK_LEFT:
             return KI_LEFT;
             break;
-        case SDLK_UP:
+        case SFMLK_UP:
             return KI_UP;
             break;
-        case SDLK_RIGHT:
+        case SFMLK_RIGHT:
             return KI_RIGHT;
             break;
-        case SDLK_DOWN:
+        case SFMLK_DOWN:
             return KI_DOWN;
             break;
-        case SDLK_INSERT:
+        case SFMLK_INSERT:
             return KI_INSERT;
             break;
-        case SDLK_DELETE:
+        case SFMLK_DELETE:
             return KI_DELETE;
             break;
-        case SDLK_HELP:
+        case SFMLK_HELP:
             return KI_HELP;
             break;
-        case SDLK_F1:
+        case SFMLK_F1:
             return KI_F1;
             break;
-        case SDLK_F2:
+        case SFMLK_F2:
             return KI_F2;
             break;
-        case SDLK_F3:
+        case SFMLK_F3:
             return KI_F3;
             break;
-        case SDLK_F4:
+        case SFMLK_F4:
             return KI_F4;
             break;
-        case SDLK_F5:
+        case SFMLK_F5:
             return KI_F5;
             break;
-        case SDLK_F6:
+        case SFMLK_F6:
             return KI_F6;
             break;
-        case SDLK_F7:
+        case SFMLK_F7:
             return KI_F7;
             break;
-        case SDLK_F8:
+        case SFMLK_F8:
             return KI_F8;
             break;
-        case SDLK_F9:
+        case SFMLK_F9:
             return KI_F9;
             break;
-        case SDLK_F10:
+        case SFMLK_F10:
             return KI_F10;
             break;
-        case SDLK_F11:
+        case SFMLK_F11:
             return KI_F11;
             break;
-        case SDLK_F12:
+        case SFMLK_F12:
             return KI_F12;
             break;
-        case SDLK_F13:
+        case SFMLK_F13:
             return KI_F13;
             break;
-        case SDLK_F14:
+        case SFMLK_F14:
             return KI_F14;
             break;
-        case SDLK_F15:
+        case SFMLK_F15:
             return KI_F15;
             break;
-        case SDLK_NUMLOCKCLEAR:
+        case SFMLK_NUMLOCKCLEAR:
             return KI_NUMLOCK;
             break;
-        case SDLK_PRINTSCREEN:
+        case SFMLK_PRINTSCREEN:
             return KI_SNAPSHOT;
             break;
-        case SDLK_SCROLLLOCK:
+        case SFMLK_SCROLLLOCK:
             return KI_SCROLL;
             break;
-        case SDLK_LSHIFT:
+        case SFMLK_LSHIFT:
             return KI_LSHIFT;
             break;
-        case SDLK_RSHIFT:
+        case SFMLK_RSHIFT:
             return KI_RSHIFT;
             break;
-        case SDLK_LCTRL:
+        case SFMLK_LCTRL:
             return KI_LCONTROL;
             break;
-        case SDLK_RCTRL:
+        case SFMLK_RCTRL:
             return KI_RCONTROL;
             break;
-        case SDLK_LALT:
+        case SFMLK_LALT:
             return KI_LMENU;
             break;
-        case SDLK_RALT:
+        case SFMLK_RALT:
             return KI_RMENU;
             break;
-        case SDLK_LGUI:
+        case SFMLK_LGUI:
             return KI_LMETA;
             break;
-        case SDLK_RGUI:
+        case SFMLK_RGUI:
             return KI_RMETA;
             break;
-        /*case SDLK_LSUPER:
+        /*case SFMLK_LSUPER:
             return KI_LWIN;
             break;
-        case SDLK_RSUPER:
+        case SFMLK_RSUPER:
             return KI_RWIN;
             break;*/
         default:
@@ -353,31 +353,31 @@ Rml::Input::KeyIdentifier RmlSDL2SystemInterface::TranslateKey(SDL_Keycode sdlke
     }
 }
 
-int RmlSDL2SystemInterface::TranslateMouseButton(Uint8 button){
+int RmlSFML2SystemInterface::TranslateMouseButton(Uint8 button){
 	DKDEBUGFUNC(button);
     switch(button){
-        case SDL_BUTTON_LEFT:
+        case SFML_BUTTON_LEFT:
             return 0;
-        case SDL_BUTTON_RIGHT:
+        case SFML_BUTTON_RIGHT:
             return 1;
-        case SDL_BUTTON_MIDDLE:
+        case SFML_BUTTON_MIDDLE:
             return 2;
-        case SDL_BUTTON(3):
+        case SFML_BUTTON(3):
             return 3;
-        case SDL_BUTTON(4):
+        case SFML_BUTTON(4):
             return 4;
-        case SDL_BUTTON(5):
+        case SFML_BUTTON(5):
             return 5;
-        case SDL_BUTTON(6):
+        case SFML_BUTTON(6):
             return 6;
         default:
             return 99; //FIXME
     }
 }
 
-int RmlSDL2SystemInterface::GetKeyModifiers(){
+int RmlSFML2SystemInterface::GetKeyModifiers(){
 	DKDEBUGFUNC();
-    SDL_Keymod sdlMods = SDL_GetModState();
+    SFML_Keymod sdlMods = SFML_GetModState();
     int retval = 0;
     if(sdlMods & KMOD_CTRL)
         retval |= Rml::Input::KM_CTRL;
@@ -390,12 +390,12 @@ int RmlSDL2SystemInterface::GetKeyModifiers(){
     return retval;
 }
 
-double RmlSDL2SystemInterface::GetElapsedTime(){
+double RmlSFML2SystemInterface::GetElapsedTime(){
 	//DKDEBUGFUNC();
-	return (float)SDL_GetTicks() / 1000;
+	return (float)SFML_GetTicks() / 1000;
 }
 
-bool RmlSDL2SystemInterface::LogMessage(Rml::Log::Type type, const Rml::String& message){
+bool RmlSFML2SystemInterface::LogMessage(Rml::Log::Type type, const Rml::String& message){
 	//DKDEBUGFUNC(type, message);
 	if(has(message,"Loaded font face"))
 		type = Rml::Log::LT_DEBUG;

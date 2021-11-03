@@ -1,30 +1,26 @@
 #pragma once
-#ifndef DKSDLRmlRenderer_H
-#define DKSDLRmlRenderer_H
+#ifndef DKSFMLRmlRenderer_H
+#define DKSFMLRmlRenderer_H
 
 #include <RmlUi/Core.h>
-//#include <RmlUi/Core/RenderInterface.h>
-#include <SDL.h>
+#include <SFML.h>
 
 #if !defined(ANDROID) && !defined(IOS)
-#include "SDL_opengl.h"
+#include "SFML_opengl.h"
 #else
-#include "SDL_opengles.h"
+#include "SFML_opengles.h"
 #endif
 
-#ifdef USE_SDL2_gif
+#ifdef USE_SFML2_gif
 extern "C" {
-	#include "SDL2_gif.h"
+	#include "SFML2_gif.h"
 }
 #endif
 
-
-
-////////////////////////////////////////////////////////////////
-class RmlSDL2Renderer : public Rml::RenderInterface
+class RmlSFML2Renderer : public Rml::RenderInterface
 {
 public:
-	RmlSDL2Renderer(SDL_Renderer* renderer, SDL_Window* screen);
+	RmlSFML2Renderer(SFML_Renderer* renderer, SFML_Window* screen);
 
 	/// Called by Rml when it wants to render geometry that it does not wish to optimise.
 	virtual void RenderGeometry(Rml::Vertex* vertices, int num_vertices, int* indices, int num_indices, Rml::TextureHandle texture, const Rml::Vector2f& translation);
@@ -41,14 +37,13 @@ public:
 
 	std::map<Rml::TextureHandle, DKString> texture_name; //texture to name map
 
-
 private:
-    SDL_Renderer* mRenderer;
-    SDL_Window* mScreen;
+    SFML_Renderer* mRenderer;
+    SFML_Window* mScreen;
 
-#ifdef USE_SDL2_gif
-	std::vector<SDL_GifAnim*> animations;
+#ifdef USE_SFML2_gif
+	std::vector<SFML_GifAnim*> animations;
 #endif
 };
 
-#endif //DKSDLRmlRenderer_H
+#endif //DKSFMLRmlRenderer_H
