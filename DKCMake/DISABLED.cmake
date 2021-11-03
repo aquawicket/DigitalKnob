@@ -340,6 +340,7 @@ if(ANDROID) # Disabled for Android targets
 	DKDISABLE(openal)
 	DKDISABLE(openal-android)
 	DKDISABLE(opencv)
+	DKDISABLE(opensles)
 	DKDISABLE(openssl)
 	DKDISABLE(podofo)
 	DKDISABLE(python)
