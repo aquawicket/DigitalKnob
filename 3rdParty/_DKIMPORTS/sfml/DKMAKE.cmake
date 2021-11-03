@@ -25,7 +25,7 @@ endif()
 
 DKDEPEND(openal)
 DKDEPEND(flac)
-
+DKDEPEND(libjpeg-turbo)
 
 ### VERSION ### 
 DKSET(SFML_VERSION 2.4.2)
