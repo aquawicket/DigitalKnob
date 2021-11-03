@@ -1,6 +1,7 @@
 # https://www.sfml-dev.org/files/SFML-2.4.2-sources.zip
 
 ### DEPENDS ###
+DKDEPEND(appkit)
 DKDEPEND(opengl)
 DKDEPEND(windows_multimedia)
 #DKDEPEND(avf_audio)
