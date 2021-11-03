@@ -361,6 +361,10 @@ if(WIN_32)
 	add_executable(${APP_NAME} WIN32 ${App_SRC})
 	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${LIBS})
 	
+	
+	## TODO: can we use include_external_msproject() to include all of our third party libraries created with CMake?
+	
+	
 	foreach(plugin ${dkdepend_list})
 		#if(EXISTS "${3rdParty}/${plugin}/CMakeLists.txt")
 		#	add_dependencies(${APP_NAME} ${plugin})
@@ -976,6 +980,7 @@ if(ANDROID)
 	#add_executable(DKAndroid ${App_SRC})
 	set(CMAKE_ANDROID_GUI 1)
 	add_library(${APP_NAME} SHARED ${App_SRC})
+	
 	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${LIBS})	
 	#target_include_directories(${APP_NAME} PUBLIC ${INCLUDE_DIRECTORIES}) #of ${DKINCLUDES_LIST}
 
