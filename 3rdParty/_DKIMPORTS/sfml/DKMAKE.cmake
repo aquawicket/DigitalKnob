@@ -20,6 +20,7 @@ if(WIN)
 endif()
 if(linux)
 	DKDEPEND(libudev-dev)
+	DKDEPEND(libgtk2.0-dev)
 endif()
 
 DKDEPEND(openal)
