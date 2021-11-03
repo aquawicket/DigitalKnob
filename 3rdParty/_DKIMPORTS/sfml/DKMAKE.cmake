@@ -1,10 +1,24 @@
 # https://www.sfml-dev.org/files/SFML-2.4.2-sources.zip
 
 ### DEPENDS ###
-DKDEPEND(appkit)
-DKDEPEND(opengl)
-DKDEPEND(windows_multimedia)
-#DKDEPEND(avf_audio)
+if(MAC)
+	DKDEPEND(core_foundation)
+	DKDEPEND(cocoa)
+	DKDEPEND(carbon)
+	DKDEPEND(audio_toolbox)
+	DKDEPEND(audio_unit)
+	DKDEPEND(core_audio)
+	DKDEPEND(core_video)
+	DKDEPEND(iokit)
+	DKDEPEND(opengl)
+	DKDEPEND(force_feedback)
+	DKDEPEND(appkit)
+endif()
+if(WIN)
+	DKDEPEND(opengl)
+	DKDEPEND(windows_multimedia)
+endif()
+
 DKDEPEND(openal)
 DKDEPEND(flac)
 
