@@ -1,4 +1,7 @@
+# https://github.com/uNetworking/uWebSockets
+#
 # https://github.com/uNetworking/uWebSockets/archive/v0.14.zip
+# https://github.com/uNetworking/uWebSockets/archive/refs/tags/v20.8.0.zip
 
 DKDEPEND(zlib)
 DKDEPEND(libuv)
@@ -6,11 +9,13 @@ DKDEPEND(libuv)
 
 
 ### VERSION ###
-DKSET(UWEBSOCKETS_MAJOR 0)
-DKSET(UWEBSOCKETS_MINOR 14)
-DKSET(UWEBSOCKETS_VERSION ${UWEBSOCKETS_MAJOR}.${UWEBSOCKETS_MINOR})
+DKSET(UWEBSOCKETS_MAJOR 20)
+DKSET(UWEBSOCKETS_MINOR 8)
+DKSET(UWEBSOCKETS_BUILD 0)
+DKSET(UWEBSOCKETS_VERSION v${UWEBSOCKETS_MAJOR}.${UWEBSOCKETS_MINOR}.${UWEBSOCKETS_BUILD})
 DKSET(UWEBSOCKETS_NAME uWebSockets-${UWEBSOCKETS_VERSION})
-DKSET(UWEBSOCKETS_DL https://github.com/uNetworking/uWebSockets/archive/v${UWEBSOCKETS_VERSION}.zip)
+#DKSET(UWEBSOCKETS_DL https://github.com/uNetworking/uWebSockets/archive/v${UWEBSOCKETS_VERSION}.zip)
+DKSET(UWEBSOCKETS_DL https://github.com/uNetworking/uWebSockets/archive/refs/tags/${UWEBSOCKETS_VERSION}.zip)
 DKSET(UWEBSOCKETS ${3RDPARTY}/${UWEBSOCKETS_NAME})
 
 
