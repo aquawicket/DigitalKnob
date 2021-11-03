@@ -92,6 +92,7 @@ if(WIN) # Disabled for Windows targets
 	DKDISABLE(mesa-common-dev)
 	DKDISABLE(openal)
 	DKDISABLE(openal-android)
+	DKDISABLE(opensles)
 	DKDISABLE(podofo)
 	DKDISABLE(sdl2_mixer)
 	DKDISABLE(xcode)
