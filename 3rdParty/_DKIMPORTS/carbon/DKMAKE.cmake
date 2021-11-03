@@ -2,6 +2,6 @@
 
 FIND_LIBRARY(carbon_lib Carbon)
 if(NOT ${carbon_lib})
-	message(FATAL_ERROR "Could not locate Carbon framework")
+	#message(FATAL_ERROR "Could not locate Carbon framework")
 endif()
 APPLE_LIB(${carbon_lib})
