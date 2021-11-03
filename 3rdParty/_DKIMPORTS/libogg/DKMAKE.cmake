@@ -22,6 +22,8 @@ APPLE_DEBUG_LIB(${OGG}/${OS}/${DEBUG_DIR}/src/.libs/libogg.a)
 APPLE_RELEASE_LIB(${OGG}/${OS}/${RELEASE_DIR}/src/.libs/libogg.a)
 LINUX_DEBUG_LIB(${OGG}/${OS}/${DEBUG_DIR}/src/.libs/libogg.a)
 LINUX_RELEASE_LIB(${OGG}/${OS}/${RELEASE_DIR}/src/.libs/libogg.a)
+RASPBERRY_DEBUG_LIB(${OGG}/${OS}/${DEBUG_DIR}/src/.libs/libogg.a)
+RASPBERRY_RELEASE_LIB(${OGG}/${OS}/${RELEASE_DIR}/src/.libs/libogg.a)
 ANDROID_DEBUG_LIB(${OGG}/${OS}/${DEBUG_DIR}/obj/local/armeabi-v7a/libogg.a)
 ANDROID_RELEASE_LIB(${OGG}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/libogg.a)
 
@@ -61,6 +63,7 @@ make
 exit \n")
 
 
+
 WIN64_DEBUG_PATH(${OGG}/${OS}/${DEBUG_DIR})
 WIN64_DEBUG_BASH("#!/bin/bash 
 cd /${OGG}/${OS}/${DEBUG_DIR} 
@@ -80,10 +83,10 @@ make
 exit \n")
 
 
+
 MAC_DEBUG_PATH(${OGG}/${OS}/${DEBUG_DIR})
 MAC_DEBUG_COMMAND(../../configure --disable-shared --enable-static --build=x86_64)
 MAC_DEBUG_COMMAND(make "CXXFLAGS=-arch x86_64" "CFLAGS=-arch x86_64" "LDFLAGS=-arch x86_64")
-
 MAC_RELEASE_PATH(${OGG}/${OS}/${RELEASE_DIR})
 MAC_RELEASE_COMMAND(../../configure --disable-shared --enable-static --build=x86_64)
 MAC_RELEASE_COMMAND(make "CXXFLAGS=-arch x86_64" "CFLAGS=-arch x86_64" "LDFLAGS=-arch x86_64")
@@ -92,19 +95,25 @@ MAC_RELEASE_COMMAND(make "CXXFLAGS=-arch x86_64" "CFLAGS=-arch x86_64" "LDFLAGS=
 IOSSIM_DEBUG_PATH(${OGG}/${OS}/${DEBUG_DIR})
 IOSSIM_DEBUG_COMMAND(../../configure --disable-shared --enable-static --build=x86_64)
 IOSSIM_DEBUG_COMMAND(make "CXXFLAGS=-arch x86_64" "CFLAGS=-arch x86_64" "LDFLAGS=-arch x86_64")
-
 IOSSIM_RELEASE_PATH(${OGG}/${OS}/${RELEASE_DIR})
 IOSSIM_RELEASE_COMMAND(../../configure --disable-shared --enable-static --build=x86_64)
 IOSSIM_RELEASE_COMMAND(make "CXXFLAGS=-arch x86_64" "CFLAGS=-arch x86_64" "LDFLAGS=-arch x86_64")
 
 
 LINUX_DEBUG_PATH(${OGG}/${OS}/${DEBUG_DIR})
-LINUX_DEBUG_COMMAND(../../configure --disable-shared --enable-static --build=x86_64)
+LINUX_DEBUG_COMMAND(../../configure --disable-shared --enable-static) #--build=x86_64)
 LINUX_DEBUG_COMMAND(make)
-
 LINUX_RELEASE_PATH(${OGG}/${OS}/${RELEASE_DIR})
-LINUX_RELEASE_COMMAND(../../configure --disable-shared --enable-static --build=x86_64)
+LINUX_RELEASE_COMMAND(../../configure --disable-shared --enable-static) # --build=x86_64)
 LINUX_RELEASE_COMMAND(make)
+
+
+RASPBERRY_DEBUG_PATH(${OGG}/${OS}/${DEBUG_DIR})
+RASPBERRY_DEBUG_COMMAND(../../configure --disable-shared --enable-static) # --build=x86_64)
+RASPBERRY_DEBUG_COMMAND(make)
+RASPBERRY_RELEASE_PATH(${OGG}/${OS}/${RELEASE_DIR})
+RASPBERRY_RELEASE_COMMAND(../../configure --disable-shared --enable-static) # --build=x86_64)
+RASPBERRY_RELEASE_COMMAND(make)
 
 
 ANDROID_NDK(${OGG_NAME})

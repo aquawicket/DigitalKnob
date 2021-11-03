@@ -35,6 +35,10 @@ LINUX_DEBUG_LIB(${VORBIS}/${OS}/${DEBUG_DIR}/lib/.libs/libvorbis.a)
 LINUX_RELEASE_LIB(${VORBIS}/${OS}/${RELEASE_DIR}/lib/.libs/libvorbis.a)
 LINUX_DEBUG_LIB(${VORBIS}/${OS}/${DEBUG_DIR}/lib/.libs/libvorbisfile.a)
 LINUX_RELEASE_LIB(${VORBIS}/${OS}/${RELEASE_DIR}/lib/.libs/libvorbisfile.a)
+RASPBERRY_DEBUG_LIB(${VORBIS}/${OS}/${DEBUG_DIR}/lib/.libs/libvorbis.a)
+RASPBERRY_RELEASE_LIB(${VORBIS}/${OS}/${RELEASE_DIR}/lib/.libs/libvorbis.a)
+RASPBERRY_DEBUG_LIB(${VORBIS}/${OS}/${DEBUG_DIR}/lib/.libs/libvorbisfile.a)
+RASPBERRY_RELEASE_LIB(${VORBIS}/${OS}/${RELEASE_DIR}/lib/.libs/libvorbisfile.a)
 ANDROID_DEBUG_LIB(${VORBIS}/${OS}/${DEBUG_DIR}/obj/local/armeabi-v7a/libvorbis.a)
 ANDROID_RELEASE_LIB(${VORBIS}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/libvorbis.a)
 
@@ -44,6 +48,7 @@ DKSET(VORBIS_WIN -DVORBIS_INCLUDE_DIR=${VORBIS}/include)
 DKSET(VORBIS_APPLE -DVORBIS_INCLUDE_DIR=${VORBIS}/include)
 DKSET(VORBIS_LINUX -DVORBIS_INCLUDE_DIR=${VORBIS}/include)
 DKSET(VORBIS_RASPBERRY -DVORBIS_INCLUDE_DIR=${VORBIS}/include)
+DKSET(VORBIS_ANDROID -DVORBIS_INCLUDE_DIR=${VORBIS}/include)
 	
 	
 ### COMPILE ###
@@ -90,7 +95,6 @@ exit \n")
 MAC_DEBUG_PATH(${VORBIS}/${OS}/${DEBUG_DIR})
 MAC_DEBUG_COMMAND(../../configure --disable-shared --enable-static --build=x86_64 ${OGG_APPLE_DEBUG})
 MAC_DEBUG_COMMAND(make "CXXFLAGS=-arch x86_64" "CFLAGS=-arch x86_64" "LDFLAGS=-arch x86_64")
-
 MAC_RELEASE_PATH(${VORBIS}/${OS}/${RELEASE_DIR})
 MAC_RELEASE_COMMAND(../../configure --disable-shared --enable-static --build=x86_64 ${OGG_APPLE_RELEASE})
 MAC_RELEASE_COMMAND(make "CXXFLAGS=-arch x86_64" "CFLAGS=-arch x86_64" "LDFLAGS=-arch x86_64")
@@ -99,7 +103,6 @@ MAC_RELEASE_COMMAND(make "CXXFLAGS=-arch x86_64" "CFLAGS=-arch x86_64" "LDFLAGS=
 IOSSIM_DEBUG_PATH(${VORBIS}/${OS}/${DEBUG_DIR})
 IOSSIM_DEBUG_COMMAND(../../configure --disable-shared --enable-static --build=x86_64 ${OGG_APPLE_DEBUG})
 IOSSIM_DEBUG_COMMAND(make "CXXFLAGS=-arch x86_64" "CFLAGS=-arch x86_64" "LDFLAGS=-arch x86_64")
-
 IOSSIM_RELEASE_PATH(${VORBIS}/${OS}/${RELEASE_DIR})
 IOSSIM_RELEASE_COMMAND(../../configure --disable-shared --enable-static --build=x86_64 ${OGG_APPLE_RELEASE})
 IOSSIM_RELEASE_COMMAND(make "CXXFLAGS=-arch x86_64" "CFLAGS=-arch x86_64" "LDFLAGS=-arch x86_64")
@@ -108,10 +111,17 @@ IOSSIM_RELEASE_COMMAND(make "CXXFLAGS=-arch x86_64" "CFLAGS=-arch x86_64" "LDFLA
 LINUX_DEBUG_PATH(${VORBIS}/${OS}/${DEBUG_DIR})
 LINUX_DEBUG_COMMAND(../../configure --disable-shared --enable-static ${OGG_LINUX_DEBUG})
 LINUX_DEBUG_COMMAND(make)
-
 LINUX_RELEASE_PATH(${VORBIS}/${OS}/${RELEASE_DIR})
 LINUX_RELEASE_COMMAND(../../configure --disable-shared --enable-static ${OGG_LINUX_RELEASE})
 LINUX_RELEASE_COMMAND(make)
+
+
+RASPBERRY_DEBUG_PATH(${VORBIS}/${OS}/${DEBUG_DIR})
+RASPBERRY_DEBUG_COMMAND(../../configure --disable-shared --enable-static ${OGG_RASPBERRY_DEBUG})
+RASPBERRY_DEBUG_COMMAND(make)
+RASPBERRY_RELEASE_PATH(${VORBIS}/${OS}/${RELEASE_DIR})
+RASPBERRY_RELEASE_COMMAND(../../configure --disable-shared --enable-static ${OGG_RASPBERRY_RELEASE})
+RASPBERRY_RELEASE_COMMAND(make)
 
 
 ANDROID_NDK(${VORBIS_VERSION})

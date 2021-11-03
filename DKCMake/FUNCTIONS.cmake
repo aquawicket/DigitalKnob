@@ -680,6 +680,7 @@ function(RASPBERRY64_DKSET)
 	endif()
 endfunction()
 
+
 ###################### DK_PATH ####################
 function(DKSETPATH path)
 	if(path STREQUAL "OFF")
@@ -691,7 +692,6 @@ function(DKSETPATH path)
 	endif()
 endfunction()
 
-#######################
 function(WIN_PATH path)
 	if(WIN)
 		DKSETPATH(${ARGV})
