@@ -22,7 +22,7 @@ if(CMAKE_HOST_WIN32 AND WIN)
 	"-DCMAKE_C_FLAGS=/DWIN32 /D_WINDOWS /W3 /nologo" 
 	"-DCMAKE_C_FLAGS_DEBUG=/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG" 
 	"-DCMAKE_C_FLAGS_RELEASE=/MT /O2 /Ob2 /DNDEBUG" 
-	"-DCMAKE_CXX_FLAGS=/DWIN32 /D_WINDOWS /W3 /nologo /GR /EHsc /Zm500 /D_WIN32_WINNT=0x0600 /D_USING_V110_SDK71_"
+	"-DCMAKE_CXX_FLAGS=/DWIN32 /D_WINDOWS /W3 /nologo" #/GR /EHsc /Zm500 /D_WIN32_WINNT=0x0600 /D_USING_V110_SDK71_
 	"-DCMAKE_CXX_FLAGS_DEBUG=/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG"
 	"-DCMAKE_CXX_FLAGS_RELEASE=/MT /O2 /Ob2 /DNDEBUG")
 
@@ -32,9 +32,9 @@ if(CMAKE_HOST_WIN32 AND WIN)
 	"-DCMAKE_C_FLAGS=/DWIN64 /D_WINDOWS /W3 /nologo" 
 	"-DCMAKE_C_FLAGS_DEBUG=/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG" 
 	"-DCMAKE_C_FLAGS_RELEASE=/MT /O2 /Ob2 /DNDEBUG" 
-	"-DCMAKE_CXX_FLAGS=/WIN32 /DWIN64 /D_WINDOWS /W3 /nologo /GR /EHsc /Zm500 /D_WIN32_WINNT=0x0600 /MACHINE:X64"
+	"-DCMAKE_CXX_FLAGS=/DWIN64 /D_WINDOWS /W3 /nologo" #/GR /EHsc /Zm500 /D_WIN32_WINNT=0x0600 /MACHINE:X64"
 	"-DCMAKE_CXX_FLAGS_DEBUG=/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG"
-	"-DCMAKE_CXX_FLAGS_RELEASE=/MT /O2 /Ob2 /DNDEBUG")
+	"-DCMAKE_CXX_FLAGS_RELEASE=/MT /O2 /Ob2 /DNDEBUG")	
 endif()
 
 
@@ -49,10 +49,7 @@ if(CMAKE_HOST_APPLE AND MAC OR IOS OR IOSSIM)
 	-DBUILD_SHARED_LIBS=OFF)
 
 	# Mac 64
-	DKSET(DKCMAKE_MAC64 ${CMAKE_EXE} -G "Xcode" 
-	-DCMAKE_OSX_ARCHITECTURES=x86_64 
-	#"-DCMAKE_CXX_FLAGS=-std=c++17" 
-	-DBUILD_SHARED_LIBS=OFF)
+	DKSET(DKCMAKE_MAC64 ${CMAKE_EXE} -G "Xcode" -DCMAKE_OSX_ARCHITECTURES=x86_64 -DBUILD_SHARED_LIBS=OFF build) #"-DCMAKE_CXX_FLAGS=-std=c++17" 
 
 	# iOS 32
 	DKSET(DKCMAKE_IOS32 ${CMAKE_EXE} -G "Xcode" 
@@ -90,7 +87,7 @@ if(CMAKE_HOST_LINUX AND LINUX)
 	
 	# Linux Debug
 	DKSET(DKCMAKE_LINUX_DEBUG ${CMAKE_EXE} -G "Unix Makefiles" 
-	"CMAKE_CXX_FLAGS=-std=gnu++17 -lstdc++fs -g -no-pie -fPIC" 
+	#"CMAKE_CXX_FLAGS=-std=gnu++17 -lstdc++fs -g -no-pie" 
 	-DCMAKE_BUILD_TYPE=Debug 
 	-DBUILD_SHARED_LIBS=OFF 
 	-DCMAKE_C_FLAGS=-fPIC)
@@ -98,35 +95,35 @@ if(CMAKE_HOST_LINUX AND LINUX)
 	#Linux Release
 	DKSET(DKCMAKE_LINUX_RELEASE ${CMAKE_EXE} -G "Unix Makefiles"
 	-DCMAKE_C_FLAGS=-fPIC
-	"CMAKE_CXX_FLAGS=-std=gnu++17 -lstdc++fs -g -no-pie -fPIC" -
+	#"CMAKE_CXX_FLAGS=-std=gnu++17 -lstdc++fs -g -no-pie" -
 	DCMAKE_BUILD_TYPE=Release 
 	-DBUILD_SHARED_LIBS=OFF)
 
 	# Linux 32 Debug
 	DKSET(DKCMAKE_LINUX32_DEBUG ${CMAKE_EXE} -G "Unix Makefiles"
 	-DCMAKE_C_FLAGS=-fPIC
-	"CMAKE_CXX_FLAGS=-std=gnu++17 -lstdc++fs -g -no-pie -fPIC" 
+	#"CMAKE_CXX_FLAGS=-std=gnu++17 -lstdc++fs -g -no-pie" 
 	-DCMAKE_BUILD_TYPE=Debug 
 	-DBUILD_SHARED_LIBS=OFF)
 	
 	# Linux 32 Release
 	DKSET(DKCMAKE_LINUX32_RELEASE ${CMAKE_EXE} -G "Unix Makefiles"
 	-DCMAKE_C_FLAGS=-fPIC
-	"CMAKE_CXX_FLAGS=-std=gnu++17 -lstdc++fs -g -no-pie -fPIC" 
+	#"CMAKE_CXX_FLAGS=-std=gnu++17 -lstdc++fs -g -no-pie" 
 	-DCMAKE_BUILD_TYPE=Release 
 	-DBUILD_SHARED_LIBS=OFF)
 
 	# Linux 64 Debug
 	DKSET(DKCMAKE_LINUX64_DEBUG ${CMAKE_EXE} -G "Unix Makefiles"
 	-DCMAKE_C_FLAGS=-fPIC
-	"CMAKE_CXX_FLAGS=-std=gnu++17 -lstdc++fs -g -no-pie -fPIC" 
+	#"CMAKE_CXX_FLAGS=-std=gnu++17 -lstdc++fs -g -no-pie" 
 	-DCMAKE_BUILD_TYPE=Debug 
 	-DBUILD_SHARED_LIBS=OFF)
 	
 	#Linux 64 Release
 	DKSET(DKCMAKE_LINUX64_RELEASE ${CMAKE_EXE} -G "Unix Makefiles"
 	-DCMAKE_C_FLAGS=-fPIC
-	"CMAKE_CXX_FLAGS=-std=gnu++17 -lstdc++fs -g -no-pie -fPIC" 
+	#"CMAKE_CXX_FLAGS=-std=gnu++17 -lstdc++fs -g -no-pie" 
 	-DCMAKE_BUILD_TYPE=Release 
 	-DBUILD_SHARED_LIBS=OFF)
 endif()
@@ -203,8 +200,8 @@ if(CMAKE_HOST_WIN32 AND ANDROID)
 	-DANDROID_PLATFORM=android-26
 	-DANDROID_STL_FORCE_FEATURES=TRUE
 	-DANDROID_NO_UNDEFINED=TURE
-	-DANDROID_STL=c++_static
-	-DCMAKE_CXX_FLAGS=-std=c++1z)
+	-DANDROID_STL=c++_static)
+	#-DCMAKE_CXX_FLAGS=-std=c++1z
 		
 	#Android arm64 with NDK toolchain
 	DKSET(DKCMAKE_ANDROID64 ${CMAKE_EXE} -G ${VISUALSTUDIO_NAME} -A ARM64
@@ -215,8 +212,8 @@ if(CMAKE_HOST_WIN32 AND ANDROID)
 	-DANDROID_PLATFORM=android-26
 	-DANDROID_STL_FORCE_FEATURES=TRUE
 	-DANDROID_NO_UNDEFINED=TURE
-	-DANDROID_STL=c++_static
-	-DCMAKE_CXX_FLAGS=-std=c++1z)
+	-DANDROID_STL=c++_static)
+	#-DCMAKE_CXX_FLAGS=-std=c++1z
 		
 	# https://developer.android.com/ndk/guides/cmake
 	# https://cmake.org/cmake/help/latest/manual/cmake-toolchains.7.html#cross-compiling-for-android
