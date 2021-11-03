@@ -135,6 +135,7 @@ if(MAC)  # Disabled on Mac host machines
 	DKDISABLE(boxer)
 	DKDISABLE(bzip2)
 	DKDISABLE(carbon)
+	DKDISABLE(core_foundation)
 	#DKDISABLE(DKCefChild)
 	DKDISABLE(DKMySql)
 	DKDISABLE(DKOcr)
