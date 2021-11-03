@@ -8,6 +8,9 @@ endif()
 
 if(IOS)
 	FIND_LIBRARY(opengles_lib OpenGLES)
+	if(NOT ${opengles_lib})
+		message(FATAL_ERROR "Could not locate OpenGLES framework")
+	endif()
 	APPLE_LIB(${opengles_lib})
 endif()
 
