@@ -5,7 +5,7 @@
 
 DKDEPEND(zlib)
 DKDEPEND(libuv)
-##DKDEPEND(openssl)
+DKDEPEND(openssl)
 
 
 ### VERSION ###

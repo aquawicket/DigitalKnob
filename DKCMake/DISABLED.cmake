@@ -73,6 +73,7 @@ if(WIN) # Disabled for Windows targets
 	#DKDISABLE(bzip2)
 	DKDISABLE(DKOcr)
 	DKDISABLE(flac)
+	DKDISABLE(foundation)
 	DKDISABLE(freealut)
 	DKDISABLE(freealut-master)
 	#DKDISABLE(imagemagick)
