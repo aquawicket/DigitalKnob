@@ -274,17 +274,19 @@ foreach(plugin ${dkdepend_list})
 					ANDROID64_COMMAND(${MSBUILD} ${CURRENT_DIR}/${plugin}.sln /p:Configuration=Release)
 				endif()
 			endif()
+		
+			## double check that the missing libs were built
+			foreach(the_lib ${LIBLIST})
+				if(NOT EXISTS ${the_lib})
+					message(FATAL_ERROR "\n\n\n****************************\nFAILED to find: ${the_lib} \n***********************************")
+					message(FATAL_ERROR " ")
+				endif()
+			endforeach()
 		endif()
-	endif()
+		
 	
-	## double check that the missing libs were built
-	#foreach(the_lib ${LIBLIST})
-		#if(NOT EXISTS ${the_lib})
-			#message(FATAL_ERROR "\n\n\n********************************************\nFAILED to find: ${the_lib} \n********************************************")
-			#message(FATAL_ERROR " ")
-		#endif()
-	#endforeach()
-	DKSET(CMAKE_FILE "") ##Linux cache file fix
+	endif()
+	DKSET(CMAKE_FILE "") ##DEBUG:   do we need this?   Linux cache file fix
 endforeach()
 
 	
