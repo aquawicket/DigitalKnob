@@ -7,8 +7,6 @@ std::vector<std::function<bool(sf::Event& e)> > DKSFMLWindow::event_funcs;
 //std::vector<boost::function<void()> > DKSFMLWindow::draw_funcs;
 std::vector<std::function<void()> > DKSFMLWindow::draw_funcs;
 
-
-/////////////////////////
 bool DKSFMLWindow::Init()
 {
 	DKDEBUGFUNC();
@@ -47,7 +45,6 @@ bool DKSFMLWindow::Init()
 	return true;
 }
 
-////////////////////////
 bool DKSFMLWindow::End()
 {
 	DKDEBUGFUNC();
@@ -55,7 +52,6 @@ bool DKSFMLWindow::End()
 	return true;
 }
 
-////////////////////////////
 void DKSFMLWindow::Process()
 {
 	DKDEBUGFUNC();
@@ -77,7 +73,6 @@ void DKSFMLWindow::Process()
 	window.display();
 }
 
-///////////////////////////////////////
 bool DKSFMLWindow::handle(sf::Event& e)
 {
 	DKDEBUGFUNC("sf::Event&");
@@ -88,8 +83,6 @@ bool DKSFMLWindow::handle(sf::Event& e)
 	return false; //allow event to continue
 }
 
-
-///////////////////////////////////////////////////////////
 bool DKSFMLWindow::TestInt(const void* input, void* output)
 {
 	DKDEBUGFUNC(input, output);
@@ -99,7 +92,6 @@ bool DKSFMLWindow::TestInt(const void* input, void* output)
 	return true;
 }
 
-//////////////////////////////////////////////////////////////
 bool DKSFMLWindow::TestString(const void* input, void* output)
 {
 	DKDEBUGFUNC(input, output);
@@ -109,7 +101,6 @@ bool DKSFMLWindow::TestString(const void* input, void* output)
 	return true;
 }
 
-/////////////////////////////////////////////////////////////////
 bool DKSFMLWindow::TestReturnInt(const void* input, void* output)
 {
 	DKDEBUGFUNC(input, output);
@@ -118,7 +109,6 @@ bool DKSFMLWindow::TestReturnInt(const void* input, void* output)
 	return true;
 }
 
-////////////////////////////////////////////////////////////////////
 bool DKSFMLWindow::TestReturnString(const void* input, void* output)
 {
 	DKDEBUGFUNC(input, output);
@@ -127,8 +117,6 @@ bool DKSFMLWindow::TestReturnString(const void* input, void* output)
 	return true;
 }
 
-
-//////////////////////////////////////////////////////////////
 bool DKSFMLWindow::Fullscreen(const void* input, void* output)
 {
 	DKDEBUGFUNC(input, output);
@@ -162,7 +150,6 @@ bool DKSFMLWindow::Fullscreen(const void* input, void* output)
 	return false;
 }
 
-////////////////////////////////////////////////////////////////
 bool DKSFMLWindow::GetClipboard(const void* input, void* output)
 {
 	DKDEBUGFUNC(input, output);
@@ -172,7 +159,6 @@ bool DKSFMLWindow::GetClipboard(const void* input, void* output)
 	return true;
 }
 
-/////////////////////////////////////////////////////////////
 bool DKSFMLWindow::GetHandle(const void* input, void* output)
 {
 	DKDEBUGFUNC(input, output);
@@ -197,7 +183,6 @@ bool DKSFMLWindow::GetHandle(const void* input, void* output)
 	return false;
 }
 
-/////////////////////////////////////////////////////////////
 bool DKSFMLWindow::GetHeight(const void* input, void* output)
 {
 	DKDEBUGFUNC(input, output);
@@ -206,7 +191,6 @@ bool DKSFMLWindow::GetHeight(const void* input, void* output)
 	return true;
 }
 
-/////////////////////////////////////////////////////////////
 bool DKSFMLWindow::GetMouseX(const void* input, void* output)
 {
 	DKDEBUGFUNC(input, output);
@@ -233,7 +217,6 @@ bool DKSFMLWindow::GetMouseX(const void* input, void* output)
 	return false;
 }
 
-/////////////////////////////////////////////////////////////
 bool DKSFMLWindow::GetMouseY(const void* input, void* output)
 {
 	DKDEBUGFUNC(input, output);
@@ -260,7 +243,6 @@ bool DKSFMLWindow::GetMouseY(const void* input, void* output)
 	return false;
 }
 
-////////////////////////////////////////////////////////////
 bool DKSFMLWindow::GetWidth(const void* input, void* output)
 {
 	DKDEBUGFUNC(input, output);
@@ -269,7 +251,6 @@ bool DKSFMLWindow::GetWidth(const void* input, void* output)
 	return true;
 }
 
-////////////////////////////////////////////////////////
 bool DKSFMLWindow::GetX(const void* input, void* output)
 {
 	DKDEBUGFUNC(input, output);
@@ -278,7 +259,6 @@ bool DKSFMLWindow::GetX(const void* input, void* output)
 	return true;
 }
 
-////////////////////////////////////////////////////////
 bool DKSFMLWindow::GetY(const void* input, void* output)
 {
 	DKDEBUGFUNC(input, output);
@@ -287,7 +267,6 @@ bool DKSFMLWindow::GetY(const void* input, void* output)
 	return true;
 }
 
-////////////////////////////////////////////////////////
 bool DKSFMLWindow::Hide(const void* input, void* output)
 {
 	DKDEBUGFUNC(input, output);
@@ -295,7 +274,6 @@ bool DKSFMLWindow::Hide(const void* input, void* output)
 	return true;
 }
 
-////////////////////////////////////////////////////////////////
 bool DKSFMLWindow::IsFullscreen(const void* input, void* output)
 {
 	DKDEBUGFUNC(input, output);
@@ -328,7 +306,6 @@ bool DKSFMLWindow::IsFullscreen(const void* input, void* output)
 	return false;
 }
 
-/////////////////////////////////////////////////////////////
 bool DKSFMLWindow::IsVisible(const void* input, void* output)
 {
 	DKDEBUGFUNC(input, output);
@@ -353,7 +330,6 @@ bool DKSFMLWindow::IsVisible(const void* input, void* output)
 	return false;
 }
 
-//////////////////////////////////////////////////////////////
 bool DKSFMLWindow::MessageBox(const void* input, void* output)
 {
 	DKDEBUGFUNC(input, output);
@@ -361,7 +337,6 @@ bool DKSFMLWindow::MessageBox(const void* input, void* output)
 	return false;
 }
 
-////////////////////////////////////////////////////////////
 bool DKSFMLWindow::Minimize(const void* input, void* output)
 {
 	DKDEBUGFUNC(input, output);
@@ -385,7 +360,6 @@ bool DKSFMLWindow::Minimize(const void* input, void* output)
 	return false;
 }
 
-///////////////////////////////////////////////////////////
 bool DKSFMLWindow::Restore(const void* input, void* output)
 {
 	DKDEBUGFUNC(input, output);
@@ -411,7 +385,6 @@ bool DKSFMLWindow::Restore(const void* input, void* output)
 	return false;
 }
 
-////////////////////////////////////////////////////////////////
 bool DKSFMLWindow::SetClipboard(const void* input, void* output)
 {
 	DKDEBUGFUNC(input, output);
@@ -419,7 +392,6 @@ bool DKSFMLWindow::SetClipboard(const void* input, void* output)
 	return false;
 }
 
-/////////////////////////////////////////////////////////////
 bool DKSFMLWindow::SetHeight(const void* input, void* output)
 {
 	DKDEBUGFUNC(input, output);
@@ -429,7 +401,6 @@ bool DKSFMLWindow::SetHeight(const void* input, void* output)
 	return true;
 }
 
-///////////////////////////////////////////////////////////
 bool DKSFMLWindow::SetIcon(const void* input, void* output)
 {
 	DKDEBUGFUNC(input, output);
@@ -468,7 +439,6 @@ bool DKSFMLWindow::SetIcon(const void* input, void* output)
 	return false;
 }
 
-////////////////////////////////////////////////////////////
 bool DKSFMLWindow::SetWidth(const void* input, void* output)
 {
 	DKDEBUGFUNC(input, output);
@@ -478,7 +448,6 @@ bool DKSFMLWindow::SetWidth(const void* input, void* output)
 	return true;
 }
 
-////////////////////////////////////////////////////////
 bool DKSFMLWindow::SetX(const void* input, void* output)
 {
 	DKDEBUGFUNC(input, output);
@@ -488,7 +457,6 @@ bool DKSFMLWindow::SetX(const void* input, void* output)
 	return true;
 }
 
-////////////////////////////////////////////////////////
 bool DKSFMLWindow::SetY(const void* input, void* output)
 {
 	DKDEBUGFUNC(input, output);
@@ -498,7 +466,6 @@ bool DKSFMLWindow::SetY(const void* input, void* output)
 	return true;
 }
 
-////////////////////////////////////////////////////////
 bool DKSFMLWindow::Show(const void* input, void* output)
 {
 	DKDEBUGFUNC(input, output);
@@ -522,7 +489,6 @@ bool DKSFMLWindow::Show(const void* input, void* output)
 	return false;
 }
 
-////////////////////////////////////////////////////////////
 bool DKSFMLWindow::Windowed(const void* input, void* output)
 {
 	DKDEBUGFUNC(input, output);
