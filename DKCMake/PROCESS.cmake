@@ -574,7 +574,7 @@ if(MAC)
 			COMMAND ${CMAKE_COMMAND} -E copy_directory
 					"${CEF}/$<CONFIG>/Chromium Embedded Framework.framework"
 					"$<TARGET_FILE_DIR:${APP_NAME}>/../Frameworks/Chromium Embedded Framework.framework"
-		)
+	)
 	endif()
 	
 	# Copy the DKCefChild into the app bundle

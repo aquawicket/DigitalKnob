@@ -72,18 +72,14 @@ endif()
 
 #https://bitbucket.org/chromiumembedded/cef/wiki/Tutorial#markdown-header-mac-os-x-build-steps
 if(MAC_64)
-	#if(DEBUG)
-		#DKCOPY(${CEF}/Debug/ ${DKPROJECT}/assets/DKCef/mac64Debug TRUE)
-		#FILE(MAKE_DIRECTORY ${DKPROJECT}/mac64/Debug/${AppName}.app/Contents/Frameworks)
-		#DKCOPY(${CEF}/Debug ${DKPROJECT}/mac64/Debug/${AppName}.app/Contents/Frameworks TRUE)
-		#MAC_COMMAND(install_name_tool -change "@executable_path/Chromium Embedded Framework" "@executable_path/../Frameworks/Chromium Embedded Framework.framework/Chromium Embedded Framework" "${DKPROJECT}/mac64/Debug/${AppName}.app/Contents/MacOS/${AppName}")
-	#endif()
-	#if(RELEASE)	
-		#DKCOPY(${CEF}/Release/ ${DKPROJECT}/assets/DKCef/mac64Release TRUE)
-		#FILE(MAKE_DIRECTORY ${DKPROJECT}/mac64/Release/${AppName}.app/Contents/Frameworks)
-		#DKCOPY(${CEF}/Release ${DKPROJECT}/mac64/Release/${AppName}.app/Contents/Frameworks TRUE)
-		#MAC_COMMAND(install_name_tool -change "@executable_path/Chromium Embedded Framework" "@executable_path/../Frameworks/Chromium Embedded Framework.framework/Chromium Embedded Framework" "${DKPROJECT}/mac64/Release/${AppName}.app/Contents/MacOS/${AppName}")
-	#endif()	
+	#message(STATUS "Adding Chromium Embedded Framework.framework to bundle . . .")
+	#add_custom_command(
+	#	TARGET ${CMAKE_PROJECT_NAME}
+	#	POST_BUILD
+	#	COMMAND ${CMAKE_COMMAND} -E copy_directory
+	#		"${CEF}/$<CONFIG>/Chromium Embedded Framework.framework"
+	#		"$<TARGET_FILE_DIR:${CMAKE_PROJECT_NAME}>/../Frameworks/Chromium Embedded Framework.framework"
+	#)
 endif()
 
 if(LINUX_32)
