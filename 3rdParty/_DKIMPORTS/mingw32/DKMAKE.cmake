@@ -1,4 +1,8 @@
-## https://sourceforge.net/projects/mingw-w64/files/Toolchains%20targetting%20Win32/Personal%20Builds/mingw-builds/4.9.2/threads-posix/dwarf/i686-4.9.2-release-posix-dwarf-rt_v3-rev1.7z
+if(NOT CMAKE_HOST_WIN32)
+	return()
+endif()
+
+# https://sourceforge.net/projects/mingw-w64/files/Toolchains%20targetting%20Win32/Personal%20Builds/mingw-builds/4.9.2/threads-posix/dwarf/i686-4.9.2-release-posix-dwarf-rt_v3-rev1.7z
 
 ### VERSION ###
 #DKSET(MINGW32_VERSION 4.9.2)
