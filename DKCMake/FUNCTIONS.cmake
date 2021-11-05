@@ -345,26 +345,28 @@ endfunction()
 
 
 function(DKINCLUDE path)
-	message(STATUS "DKINCLUDE(${path})")
-	list(FIND DKINCLUDES_LIST "${path}" index)
-	if(${index} GREATER -1)
-		return() ## If the include is already in the list, return.
-	endif()
-	#if(NOT EXISTS ${path})
-	#	message(WARNING "Error in call to: DKINCLUDE(): the path ${path} does not exist") #sometimes the os directory won't exist yet
-	#endif()
-	DKSET(DKINCLUDES_LIST ${DKINCLUDES_LIST} ${path})
-	include_directories(${path})
+	#message(STATUS "DKINCLUDE(${ARGV})")
+	foreach(item ${ARGV})
+		list(FIND DKINCLUDES_LIST "${item}" index)
+		if(${index} GREATER -1)
+			continue()  #item is already in the list
+		endif()
+		DKSET(DKINCLUDES_LIST ${DKINCLUDES_LIST} ${item})
+		include_directories(${item})
+	endforeach()
 endfunction()
 
 
 function(DKLINKDIR path)
-	list(FIND DKLINKDIRS_LIST "${path}" index)
-	if(${index} GREATER -1)
-		return() ## If the include is already in the list, return.
-	endif()
-	DKSET(DKLINKDIRS_LIST ${DKLINKDIRS_LIST} ${path})
-	link_directories(${path})
+	#message(STATUS "DKLINKDIR(${ARGV})")
+	foreach(item ${ARGV})
+		list(FIND DKLINKDIRS_LIST "${item}" index)
+		if(${index} GREATER -1)
+			continue()  #item is already in the list
+		endif()
+		DKSET(DKLINKDIRS_LIST ${DKLINKDIRS_LIST} ${item})
+		link_directories(${item})
+	endforeach()
 endfunction()
 
 
