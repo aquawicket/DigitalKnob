@@ -2023,12 +2023,15 @@ endfunction()
 
 ###################### DKPlugin Link Libraries #####################
 function(DK_LIB lib_path)
-	#DKSET(LIBLIST "${LIBLIST} ${lib_path}") ## used for double checking
-	string(FIND "${LIBS}" "${lib_path}" index)
-	if(NOT ${index} EQUAL -1)
-		return() ## The library is already in the list
-	endif()
-	DKSET(LIBS "${LIBS};${lib_path}")
+	#message(STATUS "DK_LIB(${ARGV})")
+	foreach(item ${ARGV})
+		#DKSET(LIBLIST "${LIBLIST} ${lib_path}") ## used for double checking
+		string(FIND "${LIBS}" "${item}" index)
+		if(NOT ${index} EQUAL -1)
+			continue() # item is already in the list
+		endif()
+		DKSET(LIBS "${LIBS};${item}")
+	endforeach()
 endfunction()
 
 function(DKDEBUG_LIB lib_path)
