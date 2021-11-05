@@ -369,10 +369,14 @@ endfunction()
 
 function(dk_makeDirectory path)
 	message(STATUS "dk_makeDirectory(${path})")
-	string(REPLACE "/" ";" path_list ${path})
 	if(CMAKE_HOST_APPLE)
-		file(MAKE_DIRECTORY ${path}) #FIXME: temporary fix for mac
+		DUMP(path)
+		file(RELATIVE_PATH rel_path "${DIGITALKNOB}/DK" ${path})
+		DUMP(rel_path)
+		file(MAKE_DIRECTORY ${rel_path}) #FIXME: temporary fix for mac
+		Wait()
 	endif()
+	string(REPLACE "/" ";" path_list ${path})
 	foreach(item ${path_list})
 		string(REPLACE "home" "/home" item ${item})
 		#DUMP(item)

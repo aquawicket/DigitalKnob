@@ -66,6 +66,7 @@ foreach(plugin ${dkdepend_list})
 	if(NOT plugin_path)
 		RETURN()
 	endif()
+	#message(STATUS "plugin_path = ${plugin_path}")
 
 	#This executes the 3rdParty library builds, and dkplugin setup
 	include(${plugin_path}/DKMAKE.cmake)
@@ -125,9 +126,9 @@ foreach(plugin ${dkdepend_list})
 		
 		
 		## Prebuild Plugins switch
-		if(TRUE)
-			DKSET(CURRENT_DIR ${plugin_path}/${OS})
-			dk_makeDirectory(${CURRENT_DIR})		
+		if(FALSE)
+			DKSET(CURRENT_DIR ${plugin_path})
+			dk_makeDirectory(${OS})
 			if(WIN_32)
 				WIN32_COMMAND(${DKCMAKE_WIN32} -DWIN_32=ON -DDEBUG=ON -DRELEASE=ON -DREBUILD=ON ${plugin_path})
 				if(DEBUG)
