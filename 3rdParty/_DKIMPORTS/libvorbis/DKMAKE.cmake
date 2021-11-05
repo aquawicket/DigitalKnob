@@ -93,10 +93,10 @@ exit \n")
 
 
 MAC_DEBUG_PATH(${VORBIS}/${OS}/${DEBUG_DIR})
-MAC_DEBUG_COMMAND(../../configure --disable-shared --enable-static --build=x86_64 ${OGG_APPLE_DEBUG})
+MAC_DEBUG_COMMAND(../../configure --with-ogg-includes=${OGG}/include --disable-shared --enable-static --build=x86_64 ${OGG_APPLE_DEBUG})
 MAC_DEBUG_COMMAND(make "CXXFLAGS=-arch x86_64" "CFLAGS=-arch x86_64" "LDFLAGS=-arch x86_64")
 MAC_RELEASE_PATH(${VORBIS}/${OS}/${RELEASE_DIR})
-MAC_RELEASE_COMMAND(../../configure --disable-shared --enable-static --build=x86_64 ${OGG_APPLE_RELEASE})
+MAC_RELEASE_COMMAND(../../configure --with-ogg-includes=${OGG}/include --disable-shared --enable-static --build=x86_64 ${OGG_APPLE_RELEASE})
 MAC_RELEASE_COMMAND(make "CXXFLAGS=-arch x86_64" "CFLAGS=-arch x86_64" "LDFLAGS=-arch x86_64")
 
 
