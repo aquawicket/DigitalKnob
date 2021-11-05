@@ -245,6 +245,7 @@ if(RASPBERRY) # Disabled for Raspberry Pi targets
 	DKDISABLE(libwebsockets)
 	DKDISABLE(libxml2)
 	DKDISABLE(lighttpd)
+	DKDISABLE(openal)
 	DKDISABLE(openal-android)
 	DKDISABLE(openssl)
 	DKDISABLE(podofo)
