@@ -1,6 +1,6 @@
 # https://deltaepsilon.ca/posts/compiling-libogg-libvorbis-for-dummies/
 #
-# https://ftp.osuosl.org/pub/xiph/releases/vorbis/libvorbis-1.3.5.zip
+# https://ftp.osuosl.org/pub/xiph/releases/vorbis/libvorbis-1.3.7.zip
 
 ### DEPENDS ###
 DKDEPEND(mingw32)
@@ -11,7 +11,7 @@ DKDEPEND(libogg)
 
 
 ### VERSION ###
-DKSET(VORBIS_VERSION 1.3.5)
+DKSET(VORBIS_VERSION 1.3.7)
 DKSET(VORBIS_NAME libvorbis-${VORBIS_VERSION})
 DKSET(VORBIS_DL https://ftp.osuosl.org/pub/xiph/releases/vorbis/${VORBIS_NAME}.zip)
 DKSET(VORBIS ${3RDPARTY}/${VORBIS_NAME})
@@ -56,15 +56,25 @@ ANDROID_RELEASE_LIB(${VORBIS}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/libvorb
 
 
 ### 3RDPARTY LINK ###
-DKSET(VORBIS_WIN -DVORBIS_INCLUDE_DIR=${VORBIS}/include -DVORBIS_LIBRARY=${VORBIS}/${OS}/${RELEASE_DIR}/lib/.libs/libvorbis.a 
+DKSET(VORBIS_WIN_DEBUG -DVORBIS_INCLUDE_DIR=${VORBIS}/include -DVORBIS_LIBRARY=${VORBIS}/${OS}/${DEBUG_DIR}/lib/.libs/libvorbis.a 
+-DVORBISFILE_LIBRARY=${VORBIS}/${OS}/${DEBUG_DIR}/lib/.libs/libvorbisfile.a -DVORBISENC_LIBRARY=${VORBIS}/${OS}/${DEBUG_DIR}/lib/.libs/libvorbisenc.a)
+DKSET(VORBIS_WIN_RELEASE -DVORBIS_INCLUDE_DIR=${VORBIS}/include -DVORBIS_LIBRARY=${VORBIS}/${OS}/${RELEASE_DIR}/lib/.libs/libvorbis.a 
 -DVORBISFILE_LIBRARY=${VORBIS}/${OS}/${RELEASE_DIR}/lib/.libs/libvorbisfile.a -DVORBISENC_LIBRARY=${VORBIS}/${OS}/${RELEASE_DIR}/lib/.libs/libvorbisenc.a)
-DKSET(VORBIS_APPLE -DVORBIS_INCLUDE_DIR=${VORBIS}/include -DVORBIS_LIBRARY=${VORBIS}/${OS}/${RELEASE_DIR}/lib/.libs/libvorbis.a 
+DKSET(VORBIS_APPLE_DEBUG -DVORBIS_INCLUDE_DIR=${VORBIS}/include -DVORBIS_LIBRARY=${VORBIS}/${OS}/${DEBUG_DIR}/lib/.libs/libvorbis.a 
+-DVORBISFILE_LIBRARY=${VORBIS}/${OS}/${DEBUG_DIR}/lib/.libs/libvorbisfile.a -DVORBISENC_LIBRARY=${VORBIS}/${OS}/${DEBUG_DIR}/lib/.libs/libvorbisenc.a)
+DKSET(VORBIS_APPLE_RELEASE -DVORBIS_INCLUDE_DIR=${VORBIS}/include -DVORBIS_LIBRARY=${VORBIS}/${OS}/${RELEASE_DIR}/lib/.libs/libvorbis.a 
 -DVORBISFILE_LIBRARY=${VORBIS}/${OS}/${RELEASE_DIR}/lib/.libs/libvorbisfile.a -DVORBISENC_LIBRARY=${VORBIS}/${OS}/${RELEASE_DIR}/lib/.libs/libvorbisenc.a)
-DKSET(VORBIS_LINUX -DVORBIS_INCLUDE_DIR=${VORBIS}/include -DVORBIS_LIBRARY=${VORBIS}/${OS}/${RELEASE_DIR}/lib/.libs/libvorbis.a 
+DKSET(VORBIS_LINUX_DEBUG -DVORBIS_INCLUDE_DIR=${VORBIS}/include -DVORBIS_LIBRARY=${VORBIS}/${OS}/${DEBUG_DIR}/lib/.libs/libvorbis.a 
+-DVORBISFILE_LIBRARY=${VORBIS}/${OS}/${DEBUG_DIR}/lib/.libs/libvorbisfile.a -DVORBISENC_LIBRARY=${VORBIS}/${OS}/${DEBUG_DIR}/lib/.libs/libvorbisenc.a)
+DKSET(VORBIS_LINUX_RELEASE -DVORBIS_INCLUDE_DIR=${VORBIS}/include -DVORBIS_LIBRARY=${VORBIS}/${OS}/${RELEASE_DIR}/lib/.libs/libvorbis.a 
 -DVORBISFILE_LIBRARY=${VORBIS}/${OS}/${RELEASE_DIR}/lib/.libs/libvorbisfile.a -DVORBISENC_LIBRARY=${VORBIS}/${OS}/${RELEASE_DIR}/lib/.libs/libvorbisenc.a)
-DKSET(VORBIS_RASPBERRY -DVORBIS_INCLUDE_DIR=${VORBIS}/include -DVORBIS_LIBRARY=${VORBIS}/${OS}/${RELEASE_DIR}/lib/.libs/libvorbis.a 
+DKSET(VORBIS_RASPBERRY_DEBUG -DVORBIS_INCLUDE_DIR=${VORBIS}/include -DVORBIS_LIBRARY=${VORBIS}/${OS}/${DEBUG_DIR}/lib/.libs/libvorbis.a 
+-DVORBISFILE_LIBRARY=${VORBIS}/${OS}/${DEBUG_DIR}/lib/.libs/libvorbisfile.a -DVORBISENC_LIBRARY=${VORBIS}/${OS}/${DEBUG_DIR}/lib/.libs/libvorbisenc.a)
+DKSET(VORBIS_RASPBERRY_RELEASE -DVORBIS_INCLUDE_DIR=${VORBIS}/include -DVORBIS_LIBRARY=${VORBIS}/${OS}/${RELEASE_DIR}/lib/.libs/libvorbis.a 
 -DVORBISFILE_LIBRARY=${VORBIS}/${OS}/${RELEASE_DIR}/lib/.libs/libvorbisfile.a -DVORBISENC_LIBRARY=${VORBIS}/${OS}/${RELEASE_DIR}/lib/.libs/libvorbisenc.a)
-DKSET(VORBIS_ANDROID -DVORBIS_INCLUDE_DIR=${VORBIS}/include -DVORBIS_LIBRARY=${VORBIS}/${OS}/${RELEASE_DIR}/lib/.libs/libvorbis.a 
+DKSET(VORBIS_ANDROID_DEBUG -DVORBIS_INCLUDE_DIR=${VORBIS}/include -DVORBIS_LIBRARY=${VORBIS}/${OS}/${DEBUG_DIR}/lib/.libs/libvorbis.a 
+-DVORBISFILE_LIBRARY=${VORBIS}/${OS}/${DEBUG_DIR}/lib/.libs/libvorbisfile.a -DVORBISENC_LIBRARY=${VORBIS}/${OS}/${DEBUG_DIR}/lib/.libs/libvorbisenc.a)
+DKSET(VORBIS_ANDROID_RELEASE -DVORBIS_INCLUDE_DIR=${VORBIS}/include -DVORBIS_LIBRARY=${VORBIS}/${OS}/${RELEASE_DIR}/lib/.libs/libvorbis.a 
 -DVORBISFILE_LIBRARY=${VORBIS}/${OS}/${RELEASE_DIR}/lib/.libs/libvorbisfile.a -DVORBISENC_LIBRARY=${VORBIS}/${OS}/${RELEASE_DIR}/lib/.libs/libvorbisenc.a)
 	
 	
@@ -77,8 +87,6 @@ export PATH=/${MSYS}/bin:$PATH\;
 ../../configure --disable-shared ${OGG_WIN_DEBUG} 
 make 
 exit \n")
-
-
 WIN32_PATH(${VORBIS}/${OS}/${RELEASE_DIR})
 WIN32_BASH("#!/bin/bash 
 cd /${VORBIS}/${OS}/${RELEASE_DIR} 
@@ -97,8 +105,6 @@ export PATH=/${MSYS}/bin:$PATH\;
 ../../configure --disable-shared ${OGG_WIN_DEBUG}
 make 
 exit \n")
-
-
 WIN64_PATH(${VORBIS}/${OS}/${RELEASE_DIR})
 WIN64_BASH("#!/bin/bash 
 cd /${VORBIS}/${OS}/${RELEASE_DIR} 
@@ -109,6 +115,7 @@ make
 exit \n")
 
 
+
 MAC_DEBUG_PATH(${VORBIS}/${OS}/${DEBUG_DIR})
 MAC_DEBUG_COMMAND(../../configure --with-ogg-includes=${OGG}/include --disable-shared --enable-static --build=x86_64 ${OGG_APPLE_DEBUG})
 MAC_DEBUG_COMMAND(make "CXXFLAGS=-arch x86_64" "CFLAGS=-arch x86_64" "LDFLAGS=-arch x86_64")
@@ -117,12 +124,14 @@ MAC_RELEASE_COMMAND(../../configure --with-ogg-includes=${OGG}/include --disable
 MAC_RELEASE_COMMAND(make "CXXFLAGS=-arch x86_64" "CFLAGS=-arch x86_64" "LDFLAGS=-arch x86_64")
 
 
+
 IOSSIM_DEBUG_PATH(${VORBIS}/${OS}/${DEBUG_DIR})
 IOSSIM_DEBUG_COMMAND(../../configure --disable-shared --enable-static --build=x86_64 ${OGG_APPLE_DEBUG})
 IOSSIM_DEBUG_COMMAND(make "CXXFLAGS=-arch x86_64" "CFLAGS=-arch x86_64" "LDFLAGS=-arch x86_64")
 IOSSIM_RELEASE_PATH(${VORBIS}/${OS}/${RELEASE_DIR})
 IOSSIM_RELEASE_COMMAND(../../configure --disable-shared --enable-static --build=x86_64 ${OGG_APPLE_RELEASE})
 IOSSIM_RELEASE_COMMAND(make "CXXFLAGS=-arch x86_64" "CFLAGS=-arch x86_64" "LDFLAGS=-arch x86_64")
+
 
 
 if(LINUX)
@@ -138,6 +147,8 @@ LINUX_RELEASE_PATH(${VORBIS}/${OS}/${RELEASE_DIR})
 LINUX_RELEASE_COMMAND(../../configure --disable-shared --enable-static ${OGG_LINUX_RELEASE})
 LINUX_RELEASE_COMMAND(make)
 
+
+
 if(RASPBERRY)
 	set(ENV{PKG_CONFIG_PATH} "${OGG}/${OS}/${DEBUG_DIR}")
 endif()
@@ -152,5 +163,17 @@ RASPBERRY_RELEASE_COMMAND(../../configure --disable-shared --enable-static ${OGG
 RASPBERRY_RELEASE_COMMAND(make)
 
 
-ANDROID_NDK(${VORBIS_VERSION})
 
+#ANDROID_NDK(${VORBIS_VERSION})
+if(ANDROID)
+	set(ENV{PKG_CONFIG_PATH} "${OGG}/${OS}/${DEBUG_DIR}")
+endif()
+ANDROID_DEBUG_PATH(${VORBIS}/${OS}/${DEBUG_DIR})
+ANDROID_DEBUG_COMMAND(../../configure --disable-shared --enable-static ${OGG_ANDROID_DEBUG})
+ANDROID_DEBUG_COMMAND(make)
+if(ANDROID)
+	set(ENV{PKG_CONFIG_PATH} "${OGG}/${OS}/${RELEASE_DIR}")
+endif()
+ANDROID_RELEASE_PATH(${VORBIS}/${OS}/${RELEASE_DIR})
+ANDROID_RELEASE_COMMAND(../../configure --disable-shared --enable-static ${OGG_ANDROID_RELEASE})
+ANDROID_RELEASE_COMMAND(make)
