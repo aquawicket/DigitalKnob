@@ -345,6 +345,7 @@ endfunction()
 
 
 function(DKINCLUDE path)
+	message(STATUS "DKINCLUDE(${path})")
 	list(FIND DKINCLUDES_LIST "${path}" index)
 	if(${index} GREATER -1)
 		return() ## If the include is already in the list, return.
