@@ -283,9 +283,9 @@ void DKCefApp::OnBeforeCommandLineProcessing(const CefString& process_type, CefR
 		command_line->AppendSwitchWithValue("enable-gpu", "1");
 	command_line->AppendSwitchWithValue("disable-extensions", "1");
 #ifdef LINUX
-    //TODO - onlyh do this is the flash flag is turned on
-	command_line->AppendSwitchWithValue("ppapi-flash-version", "25.0.0.127");
-	command_line->AppendSwitchWithValue("ppapi-flash-path", "/usr/lib/pepperflashplugin-nonfree/libpepflashplayer.so");
+    	//TODO - only do this is the flash flag is turned on
+	//command_line->AppendSwitchWithValue("ppapi-flash-version", "25.0.0.127");
+	//command_line->AppendSwitchWithValue("ppapi-flash-path", "/usr/lib/pepperflashplugin-nonfree/libpepflashplayer.so");
 #endif
 
 #endif //!DKCefChild
