@@ -4,9 +4,9 @@
 # https://github.com/native-toolkit/openal-android
 # https://openal.org/downloads/OpenAL11CoreSDK.zip
 # https://www.openal-soft.org/openal-releases/openal-soft-1.15.1.tar.bz2
-
+# https://www.openal-soft.org/openal-releases/openal-soft-1.21.1.tar.bz2
 ### VERSION ###
-DKSET(OPENAL_VERSION 1.15.1)
+DKSET(OPENAL_VERSION 1.21.1)
 DKSET(OPENAL_NAME openal-${OPENAL_VERSION})
 DKSET(OPENAL_DL https://www.openal-soft.org/openal-releases/openal-soft-${OPENAL_VERSION}.tar.bz2)
 DKSET(OPENAL ${3RDPARTY}/${OPENAL_NAME})
