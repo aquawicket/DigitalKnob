@@ -3,21 +3,11 @@ DKSET(CURRENT_DIR /usr)
 DKCOMMAND(sudo apt -y install libgtk2.0-dev)
 
 
-SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} pkg-config gtk+-2.0 --cflags")
-SET(CMAKE_CXX_LINK_EXECUTABLE "${CMAKE_CXX_LINK_EXECUTABLE} pkg-config gtk+-2.0 --libs")
+find_package(PkgConfig REQUIRED)
+pkg_check_modules(GTK2 REQUIRED gtk+-2.0)
 
+DKINCLUDE(${GTK2_INCLUDE_DIRS})
+DK_LIB(${GTK2_LIBRARIES})
 
-#DKINCLUDE(/usr/include/gtk-2.0)
-#DKINCLUDE(/usr/include/glib-2.0)
-#if(LINUX_32 OR RASPBERRY_32 OR ANDROID_32)
-#	DKINCLUDE(/usr/lib/i386-linux-gnu/ for?/gtk-2.0/include)
-#	DKINCLUDE(/usr/lib/i386-linux-gnu/ for?/glib-2.0/include)
-#else()
-#	DKINCLUDE(/usr/lib/x86_64-linux-gnu/gtk-2.0/include)
-#	DKINCLUDE(/usr/lib/x86_64-linux-gnu/glib-2.0/include)
-#endif()
-#DKINCLUDE(/usr/include/cairo)
-#DKINCLUDE(/usr/include/pango-1.0)
-#DKINCLUDE(/usr/include/gdk-pixbuf-2.0)
-#SET(CMAKE_CXX_LINK_EXECUTABLE "${CMAKE_CXX_LINK_EXECUTABLE} -lgdk_pixbuf-2.0")
-#SET(CMAKE_CXX_LINK_EXECUTABLE "${CMAKE_CXX_LINK_EXECUTABLE} -lgdk-x11-2.0")
+#INCLUDES -pthread -I/usr/include/gtk-2.0 -I/usr/lib/arm-linux-gnueabihf/gtk-2.0/include -I/usr/include/gio-unix-2.0 -I/usr/include/cairo -I/usr/include/pango-1.0 -I/usr/include/atk-1.0 -I/usr/include/cairo -I/usr/include/pixman-1 -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/libmount -I/usr/include/blkid -I/usr/include/pango-1.0 -I/usr/include/harfbuzz -I/usr/include/pango-1.0 -I/usr/include/fribidi -I/usr/include/glib-2.0 -I/usr/lib/arm-linux-gnueabihf/glib-2.0/include -I/usr/include/uuid -I/usr/include/freetype2 -I/usr/include/libpng16
+#LIBRARIES -lgtk-x11-2.0 -lgdk-x11-2.0 -lpangocairo-1.0 -latk-1.0 -lcairo -lgdk_pixbuf-2.0 -lgio-2.0 -lpangoft2-1.0 -lpango-1.0 -lgobject-2.0 -lglib-2.0 -lfontconfig -lfreetype
