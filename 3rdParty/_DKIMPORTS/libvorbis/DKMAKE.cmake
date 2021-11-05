@@ -27,28 +27,45 @@ WIN_DEBUG_LIB(${VORBIS}/${OS}/${DEBUG_DIR}/lib/.libs/libvorbis.a)
 WIN_RELEASE_LIB(${VORBIS}/${OS}/${RELEASE_DIR}/lib/.libs/libvorbis.a)
 WIN_DEBUG_LIB(${VORBIS}/${OS}/${DEBUG_DIR}/lib/.libs/libvorbisfile.a)
 WIN_RELEASE_LIB(${VORBIS}/${OS}/${RELEASE_DIR}/lib/.libs/libvorbisfile.a)
+WIN_DEBUG_LIB(${VORBIS}/${OS}/${DEBUG_DIR}/lib/.libs/libvorbisenc.a)
+WIN_RELEASE_LIB(${VORBIS}/${OS}/${RELEASE_DIR}/lib/.libs/libvorbisenc.a)
 APPLE_DEBUG_LIB(${VORBIS}/${OS}/${DEBUG_DIR}/lib/.libs/libvorbis.a)
 APPLE_RELEASE_LIB(${VORBIS}/${OS}/${RELEASE_DIR}/lib/.libs/libvorbis.a)
 APPLE_DEBUG_LIB(${VORBIS}/${OS}/${DEBUG_DIR}/lib/.libs/libvorbisfile.a)
 APPLE_RELEASE_LIB(${VORBIS}/${OS}/${RELEASE_DIR}/lib/.libs/libvorbisfile.a)
+APPLE_DEBUG_LIB(${VORBIS}/${OS}/${DEBUG_DIR}/lib/.libs/libvorbisenc.a)
+APPLE_RELEASE_LIB(${VORBIS}/${OS}/${RELEASE_DIR}/lib/.libs/libvorbisenc.a)
 LINUX_DEBUG_LIB(${VORBIS}/${OS}/${DEBUG_DIR}/lib/.libs/libvorbis.a)
 LINUX_RELEASE_LIB(${VORBIS}/${OS}/${RELEASE_DIR}/lib/.libs/libvorbis.a)
 LINUX_DEBUG_LIB(${VORBIS}/${OS}/${DEBUG_DIR}/lib/.libs/libvorbisfile.a)
 LINUX_RELEASE_LIB(${VORBIS}/${OS}/${RELEASE_DIR}/lib/.libs/libvorbisfile.a)
+LINUX_DEBUG_LIB(${VORBIS}/${OS}/${DEBUG_DIR}/lib/.libs/libvorbisenc.a)
+LINUX_RELEASE_LIB(${VORBIS}/${OS}/${RELEASE_DIR}/lib/.libs/libvorbisenc.a)
 RASPBERRY_DEBUG_LIB(${VORBIS}/${OS}/${DEBUG_DIR}/lib/.libs/libvorbis.a)
 RASPBERRY_RELEASE_LIB(${VORBIS}/${OS}/${RELEASE_DIR}/lib/.libs/libvorbis.a)
 RASPBERRY_DEBUG_LIB(${VORBIS}/${OS}/${DEBUG_DIR}/lib/.libs/libvorbisfile.a)
 RASPBERRY_RELEASE_LIB(${VORBIS}/${OS}/${RELEASE_DIR}/lib/.libs/libvorbisfile.a)
+RASPBERRY_DEBUG_LIB(${VORBIS}/${OS}/${DEBUG_DIR}/lib/.libs/libvorbisenc.a)
+RASPBERRY_RELEASE_LIB(${VORBIS}/${OS}/${RELEASE_DIR}/lib/.libs/libvorbisenc.a)
 ANDROID_DEBUG_LIB(${VORBIS}/${OS}/${DEBUG_DIR}/obj/local/armeabi-v7a/libvorbis.a)
 ANDROID_RELEASE_LIB(${VORBIS}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/libvorbis.a)
+ANDROID_DEBUG_LIB(${VORBIS}/${OS}/${DEBUG_DIR}/obj/local/armeabi-v7a/libvorbisfile.a)
+ANDROID_RELEASE_LIB(${VORBIS}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/libvorbisfile.a)
+ANDROID_DEBUG_LIB(${VORBIS}/${OS}/${DEBUG_DIR}/obj/local/armeabi-v7a/libvorbisenc.a)
+ANDROID_RELEASE_LIB(${VORBIS}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/libvorbisenc.a)
 
 
 ### 3RDPARTY LINK ###
-DKSET(VORBIS_WIN -DVORBIS_INCLUDE_DIR=${VORBIS}/include -DVORBIS_LIBRARY=${VORBIS}/${OS}/${RELEASE_DIR}/lib/.libs/libvorbis.a -DVORBISFILE_LIBRARY=${VORBIS}/${OS}/${RELEASE_DIR}/lib/.libs/libvorbisfile.a)
-DKSET(VORBIS_APPLE -DVORBIS_INCLUDE_DIR=${VORBIS}/include -DVORBIS_LIBRARY=${VORBIS}/${OS}/${RELEASE_DIR}/lib/.libs/libvorbis.a -DVORBISFILE_LIBRARY=${VORBIS}/${OS}/${RELEASE_DIR}/lib/.libs/libvorbisfile.a)
-DKSET(VORBIS_LINUX -DVORBIS_INCLUDE_DIR=${VORBIS}/include -DVORBIS_LIBRARY=${VORBIS}/${OS}/${RELEASE_DIR}/lib/.libs/libvorbis.a -DVORBISFILE_LIBRARY=${VORBIS}/${OS}/${RELEASE_DIR}/lib/.libs/libvorbisfile.a)
-DKSET(VORBIS_RASPBERRY -DVORBIS_INCLUDE_DIR=${VORBIS}/include -DVORBIS_LIBRARY=${VORBIS}/${OS}/${RELEASE_DIR}/lib/.libs/libvorbis.a -DVORBISFILE_LIBRARY=${VORBIS}/${OS}/${RELEASE_DIR}/lib/.libs/libvorbisfile.a)
-DKSET(VORBIS_ANDROID -DVORBIS_INCLUDE_DIR=${VORBIS}/include -DVORBIS_LIBRARY=${VORBIS}/${OS}/${DEBUG_DIR}/obj/local/armeabi-v7a/libvorbis.a)
+DKSET(VORBIS_WIN -DVORBIS_INCLUDE_DIR=${VORBIS}/include -DVORBIS_LIBRARY=${VORBIS}/${OS}/${RELEASE_DIR}/lib/.libs/libvorbis.a 
+-DVORBISFILE_LIBRARY=${VORBIS}/${OS}/${RELEASE_DIR}/lib/.libs/libvorbisfile.a -DVORBISENC_LIBRARY=${VORBIS}/${OS}/${RELEASE_DIR}/lib/.libs/libvorbisenc.a)
+DKSET(VORBIS_APPLE -DVORBIS_INCLUDE_DIR=${VORBIS}/include -DVORBIS_LIBRARY=${VORBIS}/${OS}/${RELEASE_DIR}/lib/.libs/libvorbis.a 
+-DVORBISFILE_LIBRARY=${VORBIS}/${OS}/${RELEASE_DIR}/lib/.libs/libvorbisfile.a -DVORBISENC_LIBRARY=${VORBIS}/${OS}/${RELEASE_DIR}/lib/.libs/libvorbisenc.a)
+DKSET(VORBIS_LINUX -DVORBIS_INCLUDE_DIR=${VORBIS}/include -DVORBIS_LIBRARY=${VORBIS}/${OS}/${RELEASE_DIR}/lib/.libs/libvorbis.a 
+-DVORBISFILE_LIBRARY=${VORBIS}/${OS}/${RELEASE_DIR}/lib/.libs/libvorbisfile.a -DVORBISENC_LIBRARY=${VORBIS}/${OS}/${RELEASE_DIR}/lib/.libs/libvorbisenc.a)
+DKSET(VORBIS_RASPBERRY -DVORBIS_INCLUDE_DIR=${VORBIS}/include -DVORBIS_LIBRARY=${VORBIS}/${OS}/${RELEASE_DIR}/lib/.libs/libvorbis.a 
+-DVORBISFILE_LIBRARY=${VORBIS}/${OS}/${RELEASE_DIR}/lib/.libs/libvorbisfile.a -DVORBISENC_LIBRARY=${VORBIS}/${OS}/${RELEASE_DIR}/lib/.libs/libvorbisenc.a)
+DKSET(VORBIS_ANDROID -DVORBIS_INCLUDE_DIR=${VORBIS}/include -DVORBIS_LIBRARY=${VORBIS}/${OS}/${RELEASE_DIR}/lib/.libs/libvorbis.a 
+-DVORBISFILE_LIBRARY=${VORBIS}/${OS}/${RELEASE_DIR}/lib/.libs/libvorbisfile.a -DVORBISENC_LIBRARY=${VORBIS}/${OS}/${RELEASE_DIR}/lib/.libs/libvorbisenc.a)
 	
 	
 ### COMPILE ###
