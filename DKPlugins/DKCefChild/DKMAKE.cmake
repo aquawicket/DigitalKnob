@@ -51,6 +51,16 @@ IF(LINUX)
 	ENDIF()
 ENDIF()
 
+IF(RASPBERRY)
+	DKREMOVE(${DKPROJECT}/assets/DKCef/DKCefChild)
+	IF(DEBUG)
+		DKCOPY(${DKPLUGINS}/DKCefChild/${OS}/${DEBUG_DIR}/DKCefChild ${DKPROJECT}/assets/DKCef TRUE)
+	ENDIF()
+	IF(RELEASE)
+		DKCOPY(${DKPLUGINS}/DKCefChild/${OS}/${RELEASE_DIR}/DKCefChild ${DKPROJECT}/assets/DKCef TRUE)
+	ENDIF()
+ENDIF()
+
 
 
 
@@ -197,10 +207,10 @@ IF(RASPBERRY)
 		DKAPPEND_CMAKE("INCLUDE_DIRECTORIES(${DKPLUGINS}) \n")
 		#DKAPPEND_CMAKE("INCLUDE_DIRECTORIES(${DKPLUGINS}/DKCef) \n")
 	IF(DEBUG)
-		DKAPPEND_CMAKE("FIND_LIBRARY(libcefD libcef.so ${CEF}/${DEBUG_DIR}) \n")
+		DKAPPEND_CMAKE("FIND_LIBRARY(libcef_dll_wrapperD libcef_dll_wrapper.a ${CEF}/${OS}/${DEBUG_DIR}/libcef_dll_wrapper) \n")
 		DKAPPEND_CMAKE("LIST(APPEND CEF_DEBUG_LIBS debug \${libcef_dll_wrapperD}) \n")
 		
-		DKAPPEND_CMAKE("FIND_LIBRARY(libcef_dll_wrapperD libcef_dll_wrapper.a ${CEF}/${OS}/${DEBUG_DIR}/libcef_dll_wrapper) \n")
+		DKAPPEND_CMAKE("FIND_LIBRARY(libcefD libcef.so ${CEF}/${DEBUG_DIR}) \n")
 		DKAPPEND_CMAKE("LIST(APPEND CEF_DEBUG_LIBS debug \${libcefD}) \n")
 		
 		DKAPPEND_CMAKE("FILE(GLOB DKCefChild_SRC ${DKPLUGINS}/DKCefChild/*.cpp) \n")
@@ -208,10 +218,10 @@ IF(RASPBERRY)
 		DKAPPEND_CMAKE("TARGET_LINK_LIBRARIES(DKCefChild  \${CEF_DEBUG_LIBS}) \n")
 	ENDIF()
 	IF(RELEASE)
-		DKAPPEND_CMAKE("FIND_LIBRARY(libcefR libcef.so ${CEF}/${RELEASE_DIR}) \n")
+		DKAPPEND_CMAKE("FIND_LIBRARY(libcef_dll_wrapperR libcef_dll_wrapper.a ${CEF}/${OS}/${RELEASE_DIR}/libcef_dll_wrapper) \n")
 		DKAPPEND_CMAKE("LIST(APPEND CEF_RELEASE_LIBS optimized \${libcef_dll_wrapperR}) \n")
 		
-		DKAPPEND_CMAKE("FIND_LIBRARY(libcef_dll_wrapperR libcef_dll_wrapper.a ${CEF}/${OS}/${RELEASE_DIR}/libcef_dll_wrapper) \n")
+		DKAPPEND_CMAKE("FIND_LIBRARY(libcefR libcef.so ${CEF}/${RELEASE_DIR}) \n")
 		DKAPPEND_CMAKE("LIST(APPEND CEF_RELEASE_LIBS optimized \${libcefR}) \n")
 		
 		DKAPPEND_CMAKE("FILE(GLOB DKCefChild_SRC ${DKPLUGINS}/DKCefChild/*.cpp) \n")
