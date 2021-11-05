@@ -150,7 +150,6 @@ if(MAC)  # Disabled on Mac host machines
 	DKDISABLE(libtorrent)
 	DKDISABLE(libudev-dev)
 	DKDISABLE(libuv)	
-	#DKDISABLE(libvorbis)
 	DKDISABLE(libwebp)
 	DKDISABLE(libwebsockets)
 	DKDISABLE(libx11-dev)
@@ -169,7 +168,6 @@ if(MAC)  # Disabled on Mac host machines
 	DKDISABLE(smpeg2)
 	DKDISABLE(tidy-html5)
 	DKDISABLE(tiff)
-	#DKDISABLE(upx)
 	DKDISABLE(uwebsockets)
 endif()
 
@@ -211,7 +209,6 @@ if(LINUX) # Disabled for Linux targets
 	DKDISABLE(sdl2_mixer)
 	DKDISABLE(sdl2_ttf)
 	DKDISABLE(stackwalker)
-	#DKDISABLE(upx)
 	DKDISABLE(uwebsockets)
 endif()
 if(LINUX_32) # Disabled for Linux 32bit targets
@@ -250,7 +247,6 @@ if(RASPBERRY) # Disabled for Raspberry Pi targets
 	DKDISABLE(sdl2_mixer)
 	DKDISABLE(sdl2_ttf)
 	DKDISABLE(stackwalker)
-	#DKDISABLE(upx)
 	DKDISABLE(uwebsockets)
 endif()
 if(RASPBERRY_32) # Disabled for Raspberry Pi 32bit targets
