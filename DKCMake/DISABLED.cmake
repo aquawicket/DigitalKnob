@@ -246,7 +246,7 @@ endif()
 if(RASPBERRY) # Disabled for Raspberry Pi targets
 	DKDISABLE(android-build-tools)
 	DKDISABLE(boxer)
-	DKDISABLE(cef_binary)
+	#DKDISABLE(cef_binary)
 	DKDISABLE(DKCef)
 	DKDISABLE(DKCefChild)
 	DKDISABLE(DKHook) #NOTE: this has linux functions too
