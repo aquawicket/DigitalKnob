@@ -65,13 +65,13 @@ endfunction()
 
 # dk_debug_dump(<variable_name>)  "ALIAS: DUMP(<variable_name>)"
 function(DUMP dmpvar)
-	message(status "\n")
+	message(STATUS " \n")
 	message(STATUS "${dmpvar} = ${${dmpvar}}")
 	if(NOT DEFINED ${dmpvar})
 		message(STATUS "DUMP(${dmpvar}) variable not defined. The correct syntax is \"DUMP(varname)\", using the variable name")
 		message(STATUS "DUMP(varname): CORRECT        DUMP(\${varname}): INCORRECT")
 	endif()
-	message(status "\n")
+	message(STATUS "\n")
 	Wait()
 endfunction()
 
@@ -115,7 +115,7 @@ function(DKUNSET variable)
 	unset(${variable})
 endfunction()
 
-# This little macro lets you set any XCode specific property
+# set a XCode specific property
 macro (set_xcode_property TARGET XCODE_PROPERTY XCODE_VALUE)
     set_property (TARGET ${TARGET} PROPERTY XCODE_ATTRIBUTE_${XCODE_PROPERTY} ${XCODE_VALUE})
 endmacro (set_xcode_property)
