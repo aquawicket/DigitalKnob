@@ -1,3 +1,7 @@
+if(NOT CMAKE_HOST_APPLE)
+	return()
+endif()
+
 # https://developer.apple.com/documentation/coreservices/carbon_core
 
 FIND_LIBRARY(carbon_lib Carbon)

@@ -94,7 +94,6 @@ if(WIN) # Disabled for Windows targets
 	DKDISABLE(opensles)
 	DKDISABLE(podofo)
 	DKDISABLE(sdl2_mixer)
-	DKDISABLE(xcode)
 endif()
 if(WIN_32) # Disabled for Windows 32bit targets
 	#
@@ -218,7 +217,6 @@ if(LINUX) # Disabled for Linux targets
 	DKDISABLE(upx)
 	DKDISABLE(uwebsockets)
 	DKDISABLE(visualstudio)
-	DKDISABLE(xcode)
 endif()
 if(LINUX_32) # Disabled for Linux 32bit targets
 	#
@@ -232,8 +230,8 @@ endif()
 if(RASPBERRY) # Disabled for Raspberry Pi targets
 	DKDISABLE(android-build-tools)
 	DKDISABLE(boxer)
-	DKDISABLE(DKCef)
-	DKDISABLE(DKCefChild)
+	#DKDISABLE(DKCef)
+	#DKDISABLE(DKCefChild)
 	DKDISABLE(DKHook) #NOTE: this has linux functions too
 	DKDISABLE(DKMidi)
 	DKDISABLE(DKOcr)
@@ -264,7 +262,6 @@ if(RASPBERRY) # Disabled for Raspberry Pi targets
 	DKDISABLE(upx)
 	DKDISABLE(uwebsockets)
 	DKDISABLE(visualstudio)
-	DKDISABLE(xcode)
 endif()
 if(RASPBERRY_32) # Disabled for Raspberry Pi 32bit targets
 	#
@@ -332,7 +329,6 @@ if(ANDROID) # Disabled for Android targets
 	DKDISABLE(tidy-html5)
 	DKDISABLE(tiff)
 	DKDISABLE(uwebsockets)
-	DKDISABLE(xcode)
 	DKDISABLE(xz)
 endif()
 if(ANDROID_32) # Disabled for Android 32bit targets

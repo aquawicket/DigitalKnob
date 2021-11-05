@@ -1,3 +1,7 @@
+if(NOT CMAKE_HOST_APPLE)
+	return()
+endif()
+
 # https://developer.apple.com/documentation/audiounit
 
 FIND_LIBRARY(audiounit_lib AudioUnit)

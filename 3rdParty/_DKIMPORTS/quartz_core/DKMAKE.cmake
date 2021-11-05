@@ -1,3 +1,7 @@
+if(NOT CMAKE_HOST_APPLE)
+	return()
+endif()
+
 # https://developer.apple.com/documentation/quartzcore
 
 FIND_LIBRARY(quartz_core_lib QuartzCore)

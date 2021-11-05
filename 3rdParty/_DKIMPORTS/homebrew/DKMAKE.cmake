@@ -1,3 +1,7 @@
+if(NOT CMAKE_HOST_APPLE)
+	return()
+endif()
+
 # https://brew.sh/
 
 #DKSET(HOMEBREW_VERSION ???)

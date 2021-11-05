@@ -1,3 +1,7 @@
+if(NOT CMAKE_HOST_APPLE)
+	return()
+endif()
+
 # https://developer.apple.com/documentation/corevideo
 
 FIND_LIBRARY(core_video_lib CoreVideo)

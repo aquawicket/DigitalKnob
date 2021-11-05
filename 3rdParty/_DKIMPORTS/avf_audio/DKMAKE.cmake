@@ -1,3 +1,7 @@
+if(NOT CMAKE_HOST_APPLE)
+	return()
+endif()
+
 # https://developer.apple.com/documentation/avfaudio?language=objc
 
 FIND_LIBRARY(avfaudio_lib AVFAudio)

@@ -1,3 +1,7 @@
+if(NOT CMAKE_HOST_APPLE)
+	return()
+endif()
+
 # https://developer.apple.com/documentation/imageio
 
 FIND_LIBRARY(imageio_lib ImageIO)

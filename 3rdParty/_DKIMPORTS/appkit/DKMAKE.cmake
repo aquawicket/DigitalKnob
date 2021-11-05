@@ -1,3 +1,7 @@
+if(NOT CMAKE_HOST_APPLE)
+	return()
+endif()
+
 # https://developer.apple.com/documentation/appkit
 
 FIND_LIBRARY(appkit_lib AppKit)
