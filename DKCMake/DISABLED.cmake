@@ -62,9 +62,6 @@ if(NOT CMAKE_HOST_WIN32) # Disabled on Non-Windows host machines
 	DKDISABLE(android-studio)
 	DKDISABLE(glew)
 	DKDISABLE(glintercept)
-	DKDISABLE(mingw32)
-	DKDISABLE(mingw64)
-	DKDISABLE(msys)
 	DKDISABLE(python)
 	DKDISABLE(php-win32-vs16-x64)
 	DKDISABLE(vs16-redistributable)
@@ -172,9 +169,8 @@ if(MAC)  # Disabled on Mac host machines
 	DKDISABLE(smpeg2)
 	DKDISABLE(tidy-html5)
 	DKDISABLE(tiff)
-	DKDISABLE(upx)
+	#DKDISABLE(upx)
 	DKDISABLE(uwebsockets)
-	DKDISABLE(visualstudio)
 endif()
 
 if(IOS OR IOSSIM)
@@ -186,7 +182,7 @@ endif()
 
 
 if(CMAKE_HOST_LINUX) # Disabled on Linux host machines
-	DKDISABLE(visualstudio)
+
 endif()
 if(LINUX) # Disabled for Linux targets
 	DKDISABLE(android-build-tools)
@@ -197,7 +193,7 @@ if(LINUX) # Disabled for Linux targets
 	DKDISABLE(DKSDLText)
 	DKDISABLE(DKTorrent)
 	DKDISABLE(DKWebSockets)
-	DKDISABLE(flac)
+	#DKDISABLE(flac)
 	DKDISABLE(freealut)
 	DKDISABLE(freealut-master)
 	DKDISABLE(ghostscript)
@@ -215,9 +211,8 @@ if(LINUX) # Disabled for Linux targets
 	DKDISABLE(sdl2_mixer)
 	DKDISABLE(sdl2_ttf)
 	DKDISABLE(stackwalker)
-	DKDISABLE(upx)
+	#DKDISABLE(upx)
 	DKDISABLE(uwebsockets)
-	DKDISABLE(visualstudio)
 endif()
 if(LINUX_32) # Disabled for Linux 32bit targets
 	#
@@ -255,9 +250,8 @@ if(RASPBERRY) # Disabled for Raspberry Pi targets
 	DKDISABLE(sdl2_mixer)
 	DKDISABLE(sdl2_ttf)
 	DKDISABLE(stackwalker)
-	DKDISABLE(upx)
+	#DKDISABLE(upx)
 	DKDISABLE(uwebsockets)
-	DKDISABLE(visualstudio)
 endif()
 if(RASPBERRY_32) # Disabled for Raspberry Pi 32bit targets
 	#
