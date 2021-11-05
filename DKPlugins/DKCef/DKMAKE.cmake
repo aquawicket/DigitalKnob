@@ -11,6 +11,7 @@ if(LINUX)
 	DKDEPEND(libgtk2.0-dev)
 endif()
 DKDEPEND(cef_binary)
+DKDEPEND(DK)
 DKDEPEND(DKDuktape)
 
 
