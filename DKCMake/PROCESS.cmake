@@ -126,9 +126,9 @@ foreach(plugin ${dkdepend_list})
 		
 		
 		## Prebuild Plugins switch
-		if(FALSE)
-			DKSET(CURRENT_DIR ${plugin_path})
-			dk_makeDirectory(${OS})
+		if(TRUE)
+			DKSET(CURRENT_DIR ${plugin_path}/${OS})
+			dk_makeDirectory(${CURRENT_DIR})
 			if(WIN_32)
 				WIN32_COMMAND(${DKCMAKE_WIN32} -DWIN_32=ON -DDEBUG=ON -DRELEASE=ON -DREBUILD=ON ${plugin_path})
 				if(DEBUG)
