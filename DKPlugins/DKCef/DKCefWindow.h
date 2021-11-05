@@ -1,7 +1,7 @@
 #pragma once
 #ifndef DKCefWindow_H
 #define DKCefWindow_H
-//#define USE_GDK
+#define USE_GDK
 
 #ifdef LINUX
 #ifdef USE_GDK
