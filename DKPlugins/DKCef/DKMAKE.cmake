@@ -77,7 +77,7 @@ endif()
 if(MAC_64)
 	#message(STATUS "Adding Chromium Embedded Framework.framework to bundle . . .")
 	#add_custom_command(
-	#	TARGET ${CMAKE_PROJECT_NAME}
+	#	TARGET DKCef
 	#	POST_BUILD
 	#	COMMAND ${CMAKE_COMMAND} -E copy_directory
 	#		"${CEF}/$<CONFIG>/Chromium Embedded Framework.framework"
