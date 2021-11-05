@@ -59,6 +59,7 @@ LINUX_DEBUG_LIB(${CEF}/${OS}/${DEBUG_DIR}/libcef_dll_wrapper/libcef_dll_wrapper.
 LINUX_RELEASE_LIB(${CEF}/${OS}/${RELEASE_DIR}/libcef_dll_wrapper/libcef_dll_wrapper.a)
 ## LINUX_DEBUG_LIB(${CEF}/${DEBUG_DIR}/cef_sandbox.a)
 ## LINUX_RELEASE_LIB(${CEF}/${RELEASE_DIR}/cef_sandbox.a)
+RASPBERRY_INCLUDE(${CEF})
 RASPBERRY_DEBUG_LIB(${CEF}/${DEBUG_DIR}/libcef.so)
 RASPBERRY_RELEASE_LIB(${CEF}/${RELEASE_DIR}/libcef.so)
 RASPBERRY_DEBUG_LIB(${CEF}/${OS}/${DEBUG_DIR}/libcef_dll_wrapper/libcef_dll_wrapper.a)
