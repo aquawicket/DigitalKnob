@@ -108,9 +108,15 @@ IOSSIM_RELEASE_COMMAND(../../configure --disable-shared --enable-static --build=
 IOSSIM_RELEASE_COMMAND(make "CXXFLAGS=-arch x86_64" "CFLAGS=-arch x86_64" "LDFLAGS=-arch x86_64")
 
 
+if(LINUX)
+	set(ENV{PKG_CONFIG_PATH} "${OGG}/${OS}/${DEBUG_DIR}")
+endif()
 LINUX_DEBUG_PATH(${VORBIS}/${OS}/${DEBUG_DIR})
 LINUX_DEBUG_COMMAND(../../configure --disable-shared --enable-static ${OGG_LINUX_DEBUG})
 LINUX_DEBUG_COMMAND(make)
+if(LINUX)
+	set(ENV{PKG_CONFIG_PATH} "${OGG}/${OS}/${RELEASE_DIR}")
+endif()
 LINUX_RELEASE_PATH(${VORBIS}/${OS}/${RELEASE_DIR})
 LINUX_RELEASE_COMMAND(../../configure --disable-shared --enable-static ${OGG_LINUX_RELEASE})
 LINUX_RELEASE_COMMAND(make)
