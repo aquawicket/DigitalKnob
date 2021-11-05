@@ -200,8 +200,10 @@ public:
 #ifdef LINUX
 #ifdef USE_GDK
 		GdkWindow* gdk_window = gdk_window_foreign_new(browser->GetHost()->GetWindowHandle());
-		if(!gdk_window)
-			return DKERROR("DKCefWindow::OnFullscreenModeChange(): gdk_window invalid\n");
+		if(!gdk_window){
+			DKERROR("DKCefWindow::OnFullscreenModeChange(): gdk_window invalid\n");
+			return;
+		}
 		if(fullscreen){
 			gdk_window_fullscreen(gdk_window);
 			isFullscreen = true;
