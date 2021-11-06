@@ -45,9 +45,10 @@ DKDISABLE(librocket)
 DKDISABLE(libtorrent)
 DKDISABLE(libvncserver-master)
 DKDISABLE(libvncserver-master-win)
+DKDISABLE(libx11)
 DKDISABLE(lua)
 DKDISABLE(ncurses)
-DKDISABLE(opencv)  #Enable later Takes too much CPU to constantly compile
+DKDISABLE(opencv)  #WORKING, just disabled because it takes so long to compile
 DKDISABLE(openframeworks)
 DKDISABLE(openscenegraph)
 DKDISABLE(osgaudio)
