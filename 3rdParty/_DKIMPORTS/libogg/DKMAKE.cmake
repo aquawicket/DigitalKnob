@@ -124,6 +124,8 @@ RASPBERRY_RELEASE_PATH(${OGG}/${OS}/${RELEASE_DIR})
 RASPBERRY_RELEASE_COMMAND(../../configure --disable-shared --enable-static)
 RASPBERRY_RELEASE_COMMAND(make)
 
+
+
 #ANDROID_NDK(${OGG_NAME})
 ANDROID_DEBUG_PATH(${OGG}/${OS}/${DEBUG_DIR})
 ANDROID_DEBUG_COMMAND(../../configure --disable-shared --enable-static) # --build=arm)
