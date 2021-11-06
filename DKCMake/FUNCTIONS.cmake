@@ -202,7 +202,6 @@ function(DOWNLOAD url dest_path) # ARGV1 = dest_path
 			message(FATAL_ERROR "error: downloading ${url} \n status_code: ${status_code} \n status_string: ${status_string}")
 		else()
 			message(STATUS "downloading... done")
-			Wait()
 		endif() 
 	endif()
 endfunction()
