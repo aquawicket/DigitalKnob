@@ -1,4 +1,4 @@
-# https://www.sfml-dev.org/files/SFML-2.4.2-sources.zip
+# https://www.sfml-dev.org/files/SFML-2.5.1-sources.zip
 
 ### DEPENDS ###
 if(MAC)
@@ -30,7 +30,7 @@ DKDEPEND(flac)
 DKDEPEND(libjpeg-turbo)
 
 ### VERSION ### 
-DKSET(SFML_VERSION 2.4.2)
+DKSET(SFML_VERSION 2.5.1)
 DKSET(SFML_NAME SFML-${SFML_VERSION})
 DKSET(SFML_DL https://www.sfml-dev.org/files/${SFML_NAME}-sources.zip)
 DKSET(SFML ${3RDPARTY}/${SFML_NAME})
@@ -47,7 +47,7 @@ DKSET(SFML_GRAPHICS_LIBRARY_RELEASE ${SFML}/${OS}/lib/${RELEASE_DIR}/sfml-graphi
 
 
 ### INSTALL ###
-DKINSTALL(${SFML_DL} sfml ${SFML})
+DKINSTALL(${SFML_DL} sfml ${SFML} NOPATCH)
 
 
 ### LINK ###
