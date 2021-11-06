@@ -1,3 +1,7 @@
+if(NOT CMAKE_HOST_UNIX)
+	return()
+endif()
+
 # https://github.com/mouuff/simple-getch
 #
 # https://github.com/mouuff/simple-getch/archive/refs/heads/master.zip

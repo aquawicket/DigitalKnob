@@ -1,3 +1,7 @@
+if(NOT CMAKE_HOST_WIN32)
+	return()
+endif()
+
 # FIXME: Let's replace this with boost::stacktrace for cross platform support.
 # https://www.boost.org/doc/libs/1_75_0/doc/html/stacktrace.html
 

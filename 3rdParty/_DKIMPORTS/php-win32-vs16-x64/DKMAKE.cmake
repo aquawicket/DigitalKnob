@@ -1,3 +1,7 @@
+if(NOT CMAKE_HOST_WIN32)
+	return()
+endif()
+
 # https://windows.php.net/downloads/releases
 #
 # https://phpdev.toolsforresearch.com/php-8.0.3-Win32-vs16-x64.zip

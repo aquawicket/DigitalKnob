@@ -1,3 +1,7 @@
+if(NOT CMAKE_HOST_LINUX)
+	return()
+endif()
+
 # https://www.kdevelop.org/
 #
 # https://download.kde.org/stable/kdevelop/5.6.1/bin/linux/KDevelop-5.6.1-x86_64.AppImage

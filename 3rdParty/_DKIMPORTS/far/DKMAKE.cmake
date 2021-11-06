@@ -1,3 +1,7 @@
+if(NOT CMAKE_HOST_WIN32)
+	return()
+endif()
+
 # http://findandreplace.sourceforge.net/
 #
 # https://sourceforge.net/projects/findandreplace/files/latest/download

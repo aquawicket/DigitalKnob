@@ -1,3 +1,6 @@
+if(NOT CMAKE_HOST_WIN32)
+	return()
+endif()
 ## https://raw.githubusercontent.com/SummersEpsilon/msinttypes/master/msinttypes-r26.zip
 
 ### VERSION ###
