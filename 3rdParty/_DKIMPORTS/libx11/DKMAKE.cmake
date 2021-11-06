@@ -11,7 +11,7 @@
 ### VERSION ###
 DKSET(LIBX11_VERSION 1.7.0)
 DKSET(LIBX11_NAME libx11-${LIBX11_VERSION})
-DKSET(LIBX11_DL https://www.x.org/releases/individual/lib/${LIBX11_NAME}.tar.gz)
+DKSET(LIBX11_DL http://www.x.org/releases/individual/lib/${LIBX11_NAME}.tar.gz)
 DKSET(LIBX11 ${3RDPARTY}/${LIBX11_NAME})
 
 
