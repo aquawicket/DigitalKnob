@@ -17,7 +17,8 @@ DKINSTALL(${OGG_DL} libogg ${OGG})
 
 ### DKPLUGINS LINK ###
 DKINCLUDE(${OGG}/include)
-ANDROID_INCLUDE(${OGG}/${OS})
+DKINCLUDE(${OGG}/${OS}/${DEBUG_DIR}/include)
+#ANDROID_INCLUDE(${OGG}/${OS})
 WIN_DEBUG_LIB(${OGG}/${OS}/${DEBUG_DIR}/src/.libs/libogg.a)
 WIN_RELEASE_LIB(${OGG}/${OS}/${RELEASE_DIR}/src/.libs/libogg.a)
 APPLE_DEBUG_LIB(${OGG}/${OS}/${DEBUG_DIR}/src/.libs/libogg.a)
