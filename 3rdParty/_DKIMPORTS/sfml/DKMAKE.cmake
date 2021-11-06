@@ -21,6 +21,7 @@ endif()
 if(LINUX OR RASPBERRY)
 	DKDEPEND(libudev-dev)
 	DKDEPEND(libgtk2.0-dev)
+	DKDEPEND(opengl)
 endif()
 
 DKDEPEND(openal)
