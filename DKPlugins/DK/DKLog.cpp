@@ -36,6 +36,7 @@ bool Clear(){
 	return true;
 }
 
+// https://www.lihaoyi.com/post/BuildyourownCommandLinewithANSIescapecodes.html
 bool ColorMap(){
 #ifdef WIN32
 	// Save Current Colors
@@ -59,6 +60,8 @@ void signal_handler(int signal) {
 	gSignalStatus = signal;
 }
 */
+
+// https://stackoverflow.com/a/9371717/688352  - The command windows is slow, read this
 
 bool Log(const char* file, int line, const char* func, const DKString& input, const int lvl){
 	/*
