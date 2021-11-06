@@ -2,6 +2,7 @@
     position: absolute;
     overflow: hidden;
     background-color: rgb(70,70,70);
+	/* font-size:20rem; */
 }
 
 [dk_filemanager="up"] {
@@ -28,7 +29,8 @@
 
 [dk_filemanager="path"] {
     position: absolute;
-    font-size: 11rem;
+    font-size: 16rem;
+	font-weight: bold;
     width: 100%;
     height: 84%;
     overflow: hidden;
@@ -41,7 +43,8 @@
 
 [dk_filemanager="drives"] {
     position: absolute;
-    font-size: 11rem;
+    font-size: 14rem;
+	font-weight: bold;
     top: 21rem;
     left: 4rem;
     width: 103rem;
@@ -59,7 +62,8 @@
 
 [dk_filemanager="list"] {
     position: absolute;
-    font-size: 10rem;
+    font-size: 14rem;
+	font-weight: bold;
     top: 21rem;
     left: 120rem;
     right: 3rem;
@@ -73,6 +77,10 @@
     border-width: 1rem;
     border-style: inset;
     border-color: rgb(60,60,60);
+}
+
+[dk_filemanager="list"]:hover {
+    border-color: rgb(60,60,120);
 }
 
 [dk_filemanager="folder"] {
