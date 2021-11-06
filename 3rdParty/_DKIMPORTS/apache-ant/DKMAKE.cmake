@@ -1,3 +1,7 @@
+if(NOT CMAKE_HOST_WIN32)
+	return()
+endif()
+
 ## https://mirror.cogentco.com/pub/apache/ant/binaries/apache-ant-1.9.15-bin.zip
 
 

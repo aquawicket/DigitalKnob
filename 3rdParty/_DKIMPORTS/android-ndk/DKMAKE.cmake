@@ -1,3 +1,7 @@
+if(NOT CMAKE_HOST_WIN32)
+	return()
+endif()
+
 # https://dl.google.com/android/repository/android-ndk-r21e-windows-x86_64.zip
 # https://dl.google.com/android/repository/android-ndk-r21e-darwin-x86_64.dmg
 # https://dl.google.com/android/repository/android-ndk-r21e-linux-x86_64.zip

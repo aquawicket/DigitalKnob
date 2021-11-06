@@ -1,3 +1,7 @@
+if(NOT CMAKE_HOST_UNIX)
+	return()
+endif()
+
 # https://github.com/nowres/conio-for-linux
 #
 # https://github.com/nowres/conio-for-linux/archive/refs/heads/master.zip

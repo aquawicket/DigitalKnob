@@ -1,3 +1,7 @@
+if(NOT CMAKE_HOST_WIN32)
+	return()
+endif()
+
 # https://dl.google.com/android/repository/sources-24_r01.zip
 # https://dl.google.com/android/repository/sources-26_r01.zip
 

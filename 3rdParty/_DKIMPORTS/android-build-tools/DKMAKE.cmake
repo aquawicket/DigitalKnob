@@ -1,3 +1,6 @@
+if(NOT CMAKE_HOST_WIN32)
+	return()
+endif()
 # Information
 # https://developer.android.com/studio/releases/build-tools
 # https://androidsdkoffline.blogspot.com/p/android-sdk-build-tools.html

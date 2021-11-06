@@ -1,3 +1,7 @@
+if(NOT CMAKE_HOST_WIN32)
+	return()
+endif()
+
 # https://dl.google.com/android/repository/platform-tools_r31.0.3-windows.zip
 # https://dl.google.com/android/repository/platform-tools_r31.0.3-darwin.zip
 # https://dl.google.com/android/repository/platform-tools_r31.0.3-linux.zip

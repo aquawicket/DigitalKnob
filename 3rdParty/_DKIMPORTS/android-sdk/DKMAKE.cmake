@@ -1,3 +1,7 @@
+if(NOT CMAKE_HOST_WIN32)
+	return()
+endif()
+
 ### VERSION ###
 DKSET(ANDROIDSDK ${3RDPARTY}/android-sdk)
 

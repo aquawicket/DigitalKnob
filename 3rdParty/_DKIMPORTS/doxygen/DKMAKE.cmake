@@ -1,3 +1,7 @@
+if(NOT CMAKE_HOST_WIN32)
+	return()
+endif()
+
 ### VERSION ###
 DKSET(DOXYGEN_MAJOR 1)
 DKSET(DOXYGEN_MINOR 8)

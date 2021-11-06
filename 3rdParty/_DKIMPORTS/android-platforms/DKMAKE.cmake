@@ -1,3 +1,7 @@
+if(NOT CMAKE_HOST_WIN32)
+	return()
+endif()
+
 # https://dl.google.com/android/repository/platform-26_r02.zip
 
 ### VERSION ###

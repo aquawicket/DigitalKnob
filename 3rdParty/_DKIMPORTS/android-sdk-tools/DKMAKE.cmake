@@ -1,3 +1,7 @@
+if(NOT CMAKE_HOST_WIN32)
+	return()
+endif()
+
 # https://developer.android.com/studio/releases/sdk-tools
 #
 # https://dl.google.com/android/repository/sdk-tools-windows-4333796.zip

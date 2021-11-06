@@ -1,3 +1,7 @@
+if(NOT CMAKE_HOST_WIN32)
+	return()
+endif()
+
 # https://dl.google.com/android/repository/sys-img/android/armeabi-v7a-24_r07.zip
 # https://dl.google.com/android/repository/sys-img/android/arm64-v8a-24_r07.zip
 # https://dl.google.com/android/repository/sys-img/android/x86-24_r08.zip
