@@ -1,3 +1,7 @@
+if(NOT CMAKE_HOST_WIN32)
+	return()
+endif()
+
 # https://www.nasm.us/pub/nasm/releasebuilds/2.15.05/win32/nasm-2.15.05-win32.zip
 
 ### VERSION ###
