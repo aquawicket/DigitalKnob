@@ -2,6 +2,7 @@
 #ifndef DKSFMLWindow_H
 #define DKSFMLWindow_H
 
+#include <gtk/gtk.h>.
 #include <SFML/Window.hpp>
 #include "DK/DK.h"
 
