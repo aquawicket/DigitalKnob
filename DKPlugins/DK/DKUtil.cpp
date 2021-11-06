@@ -209,7 +209,7 @@ bool DKUtil::Execute(const DKString& command, const DKString& mode, DKString& re
 	auto& dk_pclose = pclose;
 #endif
 	// https://stackoverflow.com/q/52164723/688352
-	const DKString commandWithErr = command+"2>&1";
+	const DKString commandWithErr = command+" 2>&1";
 	FILE* pipe = dk_popen(commandWithErr.c_str(), mode.c_str());
 	if(pipe == NULL)
 		return DKERROR("pipe invalid: "+toString(strerror(errno))+"\n");
