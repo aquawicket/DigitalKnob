@@ -248,6 +248,7 @@ if(RASPBERRY) # Disabled for Raspberry Pi targets
 	DKDISABLE(sdl2_mixer)
 	DKDISABLE(sdl2_ttf)
 	DKDISABLE(stackwalker)
+	DKDISABLE(upx)
 	DKDISABLE(uwebsockets)
 endif()
 if(RASPBERRY_32) # Disabled for Raspberry Pi 32bit targets
