@@ -198,6 +198,7 @@ bool DKUtil::DrawTextOnScreen(const DKString& text){
 	return DKERROR("not implemented on this OS\n");
 }
 
+
 bool DKUtil::Execute(const DKString& command, const DKString& mode, DKString& result){
 	DKDEBUGFUNC(command, mode);
 #ifdef WIN32
@@ -207,7 +208,9 @@ bool DKUtil::Execute(const DKString& command, const DKString& mode, DKString& re
 	auto& dk_popen = popen;
 	auto& dk_pclose = pclose;
 #endif
-	FILE* pipe = dk_popen(command.c_str(), mode.c_str());
+	// https://stackoverflow.com/q/52164723/688352
+	const DKString commandWithErr = command+"2>&1";
+	FILE* pipe = dk_popen(commandWithErr.c_str(), mode.c_str());
 	if(pipe == NULL)
 		return DKERROR("pipe invalid: "+toString(strerror(errno))+"\n");
 	char buffer[128];
