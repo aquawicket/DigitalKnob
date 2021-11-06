@@ -41,7 +41,7 @@ DKSET(OGG_APPLE_RELEASE CFLAGS=-I${OGG}/include --with-ogg-libraries=${OGG}/${OS
 DKSET(OGG_LINUX_DEBUG CFLAGS=-I${OGG}/include --with-ogg-libraries=${OGG}/${OS}/${DEBUG_DIR}/src/.libs)
 DKSET(OGG_LINUX_RELEASE CFLAGS=-I${OGG}/include --with-ogg-libraries=${OGG}/${OS}/${RELEASE_DIR}/src/.libs)
 DKSET(OGG_RASPBERRY_DEBUG CFLAGS=-I${OGG}/include --with-ogg-libraries=${OGG}/${OS}/${DEBUG_DIR}/src/.libs)
-DKSET(OGG_RASPBERRY_RELEASE CFLAGS=-I${OGG}/include --with-ogg-libraries=${OGG}/${OS}/${RELEASE_DIR}/src/.libs)
+DKSET(OGG_RASPBERRY_RELEASE CFLAGS="-I${OGG}/include -I${OGG}/${OS}/${RELEASE_DIR}/include" --with-ogg-libraries=${OGG}/${OS}/${RELEASE_DIR}/src/.libs/libogg.a)
 DKSET(OGG_ANDROID_DEBUG CFLAGS=-I${OGG}/include --with-ogg-libraries=${OGG}/${OS}/${DEBUG_DIR}/src/.libs)
 DKSET(OGG_ANDROID_RELEASE CFLAGS=-I${OGG}/include --with-ogg-libraries=${OGG}/${OS}/${RELEASE_DIR}/src/.libs)
 
@@ -110,20 +110,19 @@ IOSSIM_RELEASE_COMMAND(make "CXXFLAGS=-arch x86_64" "CFLAGS=-arch x86_64" "LDFLA
 
 
 LINUX_DEBUG_PATH(${OGG}/${OS}/${DEBUG_DIR})
-LINUX_DEBUG_COMMAND(../../configure --disable-shared --enable-static) #--build=x86_64)
+LINUX_DEBUG_COMMAND(../../configure --disable-shared --enable-static)
 LINUX_DEBUG_COMMAND(make)
 LINUX_RELEASE_PATH(${OGG}/${OS}/${RELEASE_DIR})
-LINUX_RELEASE_COMMAND(../../configure --disable-shared --enable-static) # --build=x86_64)
+LINUX_RELEASE_COMMAND(../../configure --disable-shared --enable-static)
 LINUX_RELEASE_COMMAND(make)
 
 
 RASPBERRY_DEBUG_PATH(${OGG}/${OS}/${DEBUG_DIR})
-RASPBERRY_DEBUG_COMMAND(../../configure --disable-shared --enable-static) # --build=arm)
+RASPBERRY_DEBUG_COMMAND(../../configure --disable-shared --enable-static)
 RASPBERRY_DEBUG_COMMAND(make)
 RASPBERRY_RELEASE_PATH(${OGG}/${OS}/${RELEASE_DIR})
-RASPBERRY_RELEASE_COMMAND(../../configure --disable-shared --enable-static) # --build=arm)
+RASPBERRY_RELEASE_COMMAND(../../configure --disable-shared --enable-static)
 RASPBERRY_RELEASE_COMMAND(make)
-
 
 #ANDROID_NDK(${OGG_NAME})
 ANDROID_DEBUG_PATH(${OGG}/${OS}/${DEBUG_DIR})
