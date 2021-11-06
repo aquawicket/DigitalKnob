@@ -18,10 +18,10 @@ WIN32_DKSET(UPX_DL https://github.com/upx/upx/releases/download/v${UPX_VERSION}/
 WIN64_DKSET(UPX_DL https://github.com/upx/upx/releases/download/v${UPX_VERSION}/${UPX_NAME}-win64.zip)
 LINUX_DKSET(UPX_DL https://github.com/upx/upx/releases/download/v${UPX_VERSION}/${UPX_NAME}-i386_linux.zip)
 RASPBERRY(https://github.com/upx/upx/releases/download/v${UPX_VERSION}/${UPX_NAME}-arm_linux.tar.xz
-DKSET(UPX ${3RDPARTY}/${UPX_NAME}_${OS})
+DKSET(UPX ${3RDPARTY}/${UPX_NAME})
 WIN32_DKSET(UPX_EXE ${UPX}/upx.exe)
 WIN64_DKSET(UPX_EXE ${UPX}/upx.exe)
 
 
 ### INSTALL ###
-DKINSTALL(${UPX_DL} upx ${UPX}_${OS})
+DKINSTALL(${UPX_DL} upx ${UPX})
