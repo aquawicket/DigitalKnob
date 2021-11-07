@@ -259,7 +259,7 @@ function(DKCOPY from to overwrite)
 			endif()
 		endif()
 	else()
-		message(STATUS !WARNING! "DKCOPY(): The source path does not exist.\n (${from})\n")
+		message(STATUS "!WARNING! DKCOPY(): The source path does not exist.\n (${from})\n")
 	endif()
 endfunction()
 
