@@ -173,6 +173,7 @@ if(MAC)  # Disabled on Mac host machines
 endif()
 
 if(IOS OR IOSSIM)
+	DKDISABLE(boxer)
 	DKDISABLE(libarchive)
 	DKDISABLE(libudev-dev)
 	DKDISABLE(libiconv)

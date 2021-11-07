@@ -4,7 +4,9 @@
 # https://github.com/aaronmjacobs/Boxer/archive/refs/heads/C.zip
 
 ### DEPENDS ###
-#DKDEPEND(libname)
+if(MAC OR IOS OR IOSSIM)
+	DKDEPEND(cocoa)
+endif()
 
 
 ### VERSION ###
