@@ -1972,9 +1972,9 @@ function(IOSSIM_XCODE_DEBUG folder)
 		
 		if(${ARGC} GREATER 1)
 			
-			DKEXECUTE_PROCESS(xcodebuild -target ${ARGV1} -configuration Debug build -sdk iphonesimulator11.2 WORKING_DIRECTORY ${3RDPARTY}/${folder}/${OS})
+			DKEXECUTE_PROCESS(xcodebuild -target ${ARGV1} -configuration Debug build WORKING_DIRECTORY ${3RDPARTY}/${folder}/${OS})
 		else()
-			DKEXECUTE_PROCESS(xcodebuild -configuration Debug build -sdk iphonesimulator11.2 WORKING_DIRECTORY ${3RDPARTY}/${folder}/${OS})
+			DKEXECUTE_PROCESS(xcodebuild -configuration Debug build WORKING_DIRECTORY ${3RDPARTY}/${folder}/${OS})
 		endif()
 	endif()
 endfunction()
@@ -1986,9 +1986,9 @@ function(IOSSIM_XCODE_RELEASE folder)
 		
 		if(${ARGC} GREATER 1)
 			
-			DKEXECUTE_PROCESS(xcodebuild -target ${ARGV1} -configuration Release build -sdk iphonesimulator11.2 WORKING_DIRECTORY ${3RDPARTY}/${folder}/${OS})
+			DKEXECUTE_PROCESS(xcodebuild -target ${ARGV1} -configuration Release build WORKING_DIRECTORY ${3RDPARTY}/${folder}/${OS})
 		else()
-			DKEXECUTE_PROCESS(xcodebuild -configuration Release build -sdk iphonesimulator11.2 WORKING_DIRECTORY ${3RDPARTY}/${folder}/${OS})
+			DKEXECUTE_PROCESS(xcodebuild -configuration Release build WORKING_DIRECTORY ${3RDPARTY}/${folder}/${OS})
 		endif()
 	endif()
 endfunction()
