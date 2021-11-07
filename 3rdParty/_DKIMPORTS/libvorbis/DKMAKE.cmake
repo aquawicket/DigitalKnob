@@ -79,22 +79,31 @@ DKSET(VORBIS_ANDROID_RELEASE -DVORBIS_INCLUDE_DIR=${VORBIS}/include -DVORBIS_LIB
 	
 	
 ### COMPILE ###
-WIN32_PATH(${VORBIS}/${OS}/${DEBUG_DIR})
-WIN32_BASH("#!/bin/bash 
-cd /${VORBIS}/${OS}/${DEBUG_DIR} 
-export PATH=/${MINGW32}/bin:$PATH\;
-export PATH=/${MSYS}/bin:$PATH\;
-../../configure --disable-shared ${OGG_WIN_DEBUG} 
-make 
-exit \n")
-WIN32_PATH(${VORBIS}/${OS}/${RELEASE_DIR})
-WIN32_BASH("#!/bin/bash 
-cd /${VORBIS}/${OS}/${RELEASE_DIR} 
-export PATH=/${MINGW32}/bin:$PATH\;
-export PATH=/${MSYS}/bin:$PATH\;
-../../configure --disable-shared ${OGG_WIN_RELEASE}
-make 
-exit \n")
+WIN32_DEBUG_PATH(${VORBIS}/${OS}/${DEBUG_DIR})
+WIN32_DEBUG_MSYS(../../configure --with-ogg-includes=${OGG}/include --disable-shared --enable-static ${OGG_WIN_DEBUG})
+WIN32_DEBUG_MSYS(make)
+WIN32_RELEASE_PATH(${VORBIS}/${OS}/${RELEASE_DIR})
+WIN32_RELEASE_MSYS(../../configure --with-ogg-includes=${OGG}/include --disable-shared --enable-static ${OGG_WIN_RELEASE})
+WIN32_RELEASE_MSYS(make)
+
+
+#WIN32_PATH(${VORBIS}/${OS}/${DEBUG_DIR})
+#WIN32_BASH("#!/bin/bash"
+#"cd /${VORBIS}/${OS}/${DEBUG_DIR}"
+#"export PATH=/${MINGW32}/bin:$PATH"
+#"export PATH=/${MSYS}/bin:$PATH"
+#"../../configure --disable-shared ${OGG_WIN_RELEASE}" 
+#"make"
+#"exit")
+
+#WIN32_PATH(${VORBIS}/${OS}/${RELEASE_DIR})
+#WIN32_BASH("#!/bin/bash"
+#"cd /${VORBIS}/${OS}/${RELEASE_DIR}"
+#"export PATH=/${MINGW32}/bin:$PATH"
+#"export PATH=/${MSYS}/bin:$PATH"
+#"../../configure --disable-shared ${OGG_WIN_RELEASE}"
+#"make"
+#"exit")
 
 
 WIN64_PATH(${VORBIS}/${OS}/${DEBUG_DIR})
