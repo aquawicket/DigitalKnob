@@ -21,29 +21,19 @@ endif()
 if(LINUX OR RASPBERRY)
 	DKDEPEND(libudev-dev)
 	DKDEPEND(libgtk2.0-dev)
-	DKDEPEND(opengl)
 	DKDEPEND(libx11-dev)
+	DKDEPEND(opengl)
 endif()
-
 DKDEPEND(openal)
 DKDEPEND(flac)
 DKDEPEND(libjpeg-turbo)
+
 
 ### VERSION ### 
 DKSET(SFML_VERSION 2.5.1)
 DKSET(SFML_NAME SFML-${SFML_VERSION})
 DKSET(SFML_DL https://www.sfml-dev.org/files/${SFML_NAME}-sources.zip)
 DKSET(SFML ${3RDPARTY}/${SFML_NAME})
-
-DKSET(SFML_INCLUDE_DIR ${SFML}/include)
-DKSET(SFML_MAIN_LIBRARY_DEBUG ${SFML}/${OS}/lib/${DEBUG_DIR}/sfml-main-d.lib)
-DKSET(SFML_MAIN_LIBRARY_RELEASE ${SFML}/${OS}/lib/${RELEASE_DIR}/sfml-main.lib)
-DKSET(SFML_SYSTEM_LIBRARY_DEBUG ${SFML}/${OS}/lib/${DEBUG_DIR}/sfml-system-s-d.lib)
-DKSET(SFML_SYSTEM_LIBRARY_RELEASE ${SFML}/${OS}/lib/${RELEASE_DIR}/sfml-system-s.lib)
-DKSET(SFML_WINDOW_LIBRARY_DEBUG ${SFML}/${OS}/lib/${DEBUG_DIR}/sfml-window-s-d.lib)
-DKSET(SFML_WINDOW_LIBRARY_RELEASE ${SFML}/${OS}/lib/${RELEASE_DIR}/sfml-window-s.lib)
-DKSET(SFML_GRAPHICS_LIBRARY_DEBUG ${SFML}/${OS}/lib/${DEBUG_DIR}/sfml-graphics-s-d.lib)
-DKSET(SFML_GRAPHICS_LIBRARY_RELEASE ${SFML}/${OS}/lib/${RELEASE_DIR}/sfml-graphics-s.lib)
 
 
 ### INSTALL ###
@@ -65,6 +55,7 @@ WIN_DEBUG_LIB(${SFML}/${OS}/lib/${DEBUG_DIR}/sfml-system-s-d.lib)
 WIN_RELEASE_LIB(${SFML}/${OS}/lib/${RELEASE_DIR}/sfml-system-s.lib)
 WIN_DEBUG_LIB(${SFML}/${OS}/lib/${DEBUG_DIR}/sfml-window-s-d.lib)
 WIN_RELEASE_LIB(${SFML}/${OS}/lib/${RELEASE_DIR}/sfml-window-s.lib)
+
 MAC_DEBUG_LIB(${SFML}/${OS}/lib/${DEBUG_DIR}/libsfml-audio-s-d.a)
 MAC_RELEASE_LIB(${SFML}/${OS}/lib/${RELEASE_DIR}/libsfml-audio-s.a)
 MAC_DEBUG_LIB(${SFML}/${OS}/lib/${DEBUG_DIR}/libsfml-graphics-s-d.a)
@@ -75,14 +66,51 @@ MAC_DEBUG_LIB(${SFML}/${OS}/lib/${DEBUG_DIR}/libsfml-system-s-d.a)
 MAC_RELEASE_LIB(${SFML}/${OS}/lib/${RELEASE_DIR}/libsfml-system-s.a)
 MAC_DEBUG_LIB(${SFML}/${OS}/lib/${DEBUG_DIR}/libsfml-window-s-d.a)
 MAC_RELEASE_LIB(${SFML}/${OS}/lib/${RELEASE_DIR}/libsfml-window-s.a)
-IOSSIM_DEBUG_LIB(${SFML}/Xcode-iOS/SFML/build/Debug-iphonesimulator/libSFML.a)
-IOSSIM_RELEASE_LIB(${SFML}/Xcode-iOS/SFML/build/${RELEASE_DIR}-iphonesimulator/libSFML.a)
-LINUX_DEBUG_LIB(${SFML}/${OS}/${DEBUG_DIR}/libSFML.a)
-LINUX_RELEASE_LIB(${SFML}/${OS}/${RELEASE_DIR}/libSFML.a)
-RASPBERRY_DEBUG_LIB(${SFML}/${OS}/${DEBUG_DIR}/libSFML.a)
-RASPBERRY_RELEASE_LIB(${SFML}/${OS}/${RELEASE_DIR}/libSFML.a)
-##ANDROID_DEBUG_LIB(${SFML}/${OS}/${DEBUG_DIR}/obj/local/armeabi-v7a/libSFML.so)
-##ANDROID_RELEASE_LIB(${SFML}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/libSFML.so)
+
+IOS_DEBUG_LIB(${SFML}/${OS}/lib/${DEBUG_DIR}/libsfml-audio-s-d.a)
+IOS_RELEASE_LIB(${SFML}/${OS}/lib/${RELEASE_DIR}/libsfml-audio-s.a)
+IOS_DEBUG_LIB(${SFML}/${OS}/lib/${DEBUG_DIR}/libsfml-graphics-s-d.a)
+IOS_RELEASE_LIB(${SFML}/${OS}/lib/${RELEASE_DIR}/libsfml-graphics-s.a)
+IOS_DEBUG_LIB(${SFML}/${OS}/lib/${DEBUG_DIR}/libsfml-network-s-d.a)
+IOS_RELEASE_LIB(${SFML}/${OS}/lib/${RELEASE_DIR}/libsfml-network-s.a)
+IOS_DEBUG_LIB(${SFML}/${OS}/lib/${DEBUG_DIR}/libsfml-system-s-d.a)
+IOS_RELEASE_LIB(${SFML}/${OS}/lib/${RELEASE_DIR}/libsfml-system-s.a)
+IOS_DEBUG_LIB(${SFML}/${OS}/lib/${DEBUG_DIR}/libsfml-window-s-d.a)
+IOS_RELEASE_LIB(${SFML}/${OS}/lib/${RELEASE_DIR}/libsfml-window-s.a)
+
+IOSSIM_DEBUG_LIB(${SFML}/${OS}/lib/${DEBUG_DIR}/libsfml-audio-s-d.a)
+IOSSIM_RELEASE_LIB(${SFML}/${OS}/lib/${RELEASE_DIR}/libsfml-audio-s.a)
+IOSSIM_DEBUG_LIB(${SFML}/${OS}/lib/${DEBUG_DIR}/libsfml-graphics-s-d.a)
+IOSSIM_RELEASE_LIB(${SFML}/${OS}/lib/${RELEASE_DIR}/libsfml-graphics-s.a)
+IOSSIM_DEBUG_LIB(${SFML}/${OS}/lib/${DEBUG_DIR}/libsfml-network-s-d.a)
+IOSSIM_RELEASE_LIB(${SFML}/${OS}/lib/${RELEASE_DIR}/libsfml-network-s.a)
+IOSSIM_DEBUG_LIB(${SFML}/${OS}/lib/${DEBUG_DIR}/libsfml-system-s-d.a)
+IOSSIM_RELEASE_LIB(${SFML}/${OS}/lib/${RELEASE_DIR}/libsfml-system-s.a)
+IOSSIM_DEBUG_LIB(${SFML}/${OS}/lib/${DEBUG_DIR}/libsfml-window-s-d.a)
+IOSSIM_RELEASE_LIB(${SFML}/${OS}/lib/${RELEASE_DIR}/libsfml-window-s.a)
+
+LINUX_DEBUG_LIB(${SFML}/${OS}/lib/${DEBUG_DIR}/libsfml-audio-s-d.a)
+LINUX_RELEASE_LIB(${SFML}/${OS}/lib/${RELEASE_DIR}/libsfml-audio-s.a)
+LINUX_DEBUG_LIB(${SFML}/${OS}/lib/${DEBUG_DIR}/libsfml-graphics-s-d.a)
+LINUX_RELEASE_LIB(${SFML}/${OS}/lib/${RELEASE_DIR}/libsfml-graphics-s.a)
+LINUX_DEBUG_LIB(${SFML}/${OS}/lib/${DEBUG_DIR}/libsfml-network-s-d.a)
+LINUX_RELEASE_LIB(${SFML}/${OS}/lib/${RELEASE_DIR}/libsfml-network-s.a)
+LINUX_DEBUG_LIB(${SFML}/${OS}/lib/${DEBUG_DIR}/libsfml-system-s-d.a)
+LINUX_RELEASE_LIB(${SFML}/${OS}/lib/${RELEASE_DIR}/libsfml-system-s.a)
+LINUX_DEBUG_LIB(${SFML}/${OS}/lib/${DEBUG_DIR}/libsfml-window-s-d.a)
+LINUX_RELEASE_LIB(${SFML}/${OS}/lib/${RELEASE_DIR}/libsfml-window-s.a)
+
+RASPBERRY_DEBUG_LIB(${SFML}/${OS}/lib/${DEBUG_DIR}/libsfml-audio-s-d.a)
+RASPBERRY_RELEASE_LIB(${SFML}/${OS}/lib/${RELEASE_DIR}/libsfml-audio-s.a)
+RASPBERRY_DEBUG_LIB(${SFML}/${OS}/lib/${DEBUG_DIR}/libsfml-graphics-s-d.a)
+RASPBERRY_RELEASE_LIB(${SFML}/${OS}/lib/${RELEASE_DIR}/libsfml-graphics-s.a)
+RASPBERRY_DEBUG_LIB(${SFML}/${OS}/lib/${DEBUG_DIR}/libsfml-network-s-d.a)
+RASPBERRY_RELEASE_LIB(${SFML}/${OS}/lib/${RELEASE_DIR}/libsfml-network-s.a)
+RASPBERRY_DEBUG_LIB(${SFML}/${OS}/lib/${DEBUG_DIR}/libsfml-system-s-d.a)
+RASPBERRY_RELEASE_LIB(${SFML}/${OS}/lib/${RELEASE_DIR}/libsfml-system-s.a)
+RASPBERRY_DEBUG_LIB(${SFML}/${OS}/lib/${DEBUG_DIR}/libsfml-window-s-d.a)
+RASPBERRY_RELEASE_LIB(${SFML}/${OS}/lib/${RELEASE_DIR}/libsfml-window-s.a)
+
 ANDROID_DEBUG_LIB(${SFML}/${OS}/lib/${DEBUG_DIR}/libsfml-audio-s-d.a)
 ANDROID_RELEASE_LIB(${SFML}/${OS}/lib/${RELEASE_DIR}/libsfml-audio-s.a)
 ANDROID_DEBUG_LIB(${SFML}/${OS}/lib/${DEBUG_DIR}/libsfml-graphics-s-d.a)
@@ -118,19 +146,26 @@ WIN_VS(SFML-${SFML_VERSION} SFML.sln)
 
 
 MAC_PATH(${SFML}/${OS})
+MAC32_COMMAND(${DKCMAKE_MAC32} ${JPEG_WIN} ${OPENAL_APPLE} ${OGG_APPLE_CMAKE} ${VORBIS_APPLE_RELEASE} ${FLAC_APPLE} ${SFML})
 MAC64_COMMAND(${DKCMAKE_MAC64} ${JPEG_WIN} ${OPENAL_APPLE} ${OGG_APPLE_CMAKE} ${VORBIS_APPLE_RELEASE} ${FLAC_APPLE} ${SFML})
 MAC_XCODE(SFML-${SFML_VERSION})
 
 
-#TODO
-#IOS
-#IOSSIM
+IOS_PATH(${SFML}/${OS})
+IOS32_COMMAND(${DKCMAKE_MAC32} ${JPEG_WIN} ${OPENAL_APPLE} ${OGG_APPLE_CMAKE} ${VORBIS_APPLE_RELEASE} ${FLAC_APPLE} ${SFML})
+IOS64_COMMAND(${DKCMAKE_MAC64} ${JPEG_WIN} ${OPENAL_APPLE} ${OGG_APPLE_CMAKE} ${VORBIS_APPLE_RELEASE} ${FLAC_APPLE} ${SFML})
+IOS_XCODE(SFML-${SFML_VERSION})
+
+
+IOSSIM_PATH(${SFML}/${OS})
+IOSSIM32_COMMAND(${DKCMAKE_MAC32} ${JPEG_WIN} ${OPENAL_APPLE} ${OGG_APPLE_CMAKE} ${VORBIS_APPLE_RELEASE} ${FLAC_APPLE} ${SFML})
+IOSSIM64_COMMAND(${DKCMAKE_MAC64} ${JPEG_WIN} ${OPENAL_APPLE} ${OGG_APPLE_CMAKE} ${VORBIS_APPLE_RELEASE} ${FLAC_APPLE} ${SFML})
+IOSSIM_XCODE(SFML-${SFML_VERSION})
 
 
 LINUX_DEBUG_PATH(${SFML}/${OS}/${DEBUG_DIR})
 LINUX_DEBUG_COMMAND(${DKCMAKE_LINUX_DEBUG} ${JPEG_LINUX_DEBUG} ${OPENAL_LINUX_DEBUG} ${OGG_LINUX_CMAKE} ${VORBIS_LINUX_DEBUG} ${FLAC_LINUX_DEBUG} ${SFML})
 LINUX_DEBUG_COMMAND(make)
-
 LINUX_RELEASE_PATH(${SFML}/${OS}/${RELEASE_DIR})
 LINUX_RELEASE_COMMAND(${DKCMAKE_LINUX_RELEASE} ${JPEG_LINUX_RELEASE} ${OPENAL_LINUX_RELEASE} ${OGG_LINUX_CMAKE} ${VORBIS_LINUX_RELEASE} ${FLAC_LINUX_RELEASE} ${SFML})
 LINUX_RELEASE_COMMAND(make)
@@ -139,11 +174,9 @@ LINUX_RELEASE_COMMAND(make)
 RASPBERRY_DEBUG_PATH(${SFML}/${OS}/${DEBUG_DIR})
 RASPBERRY_DEBUG_COMMAND(${DKCMAKE_RASPBERRY_DEBUG} ${JPEG_RASPBERRY_DEBUG} ${OPENAL_RASPBERRY_DEBUG} ${OGG_RASPBERRY_CMAKE} ${VORBIS_RASPBERRY_DEBUG} ${FLAC_RASPBERRY_DEBUG} ${SFML})
 RASPBERRY_DEBUG_COMMAND(make)
-
 RASPBERRY_RELEASE_PATH(${SFML}/${OS}/${RELEASE_DIR})
 RASPBERRY_RELEASE_COMMAND(${DKCMAKE_RASPBERRY_RELEASE} ${JPEG_RASPBERRY_RELEASE} ${OPENAL_RASPBERRY_RELEASE} ${OGG_RASPBERRY_CMAKE} ${VORBIS_RASPBERRY_RELEASE} ${FLAC_RASPBERRY_RELEASE} ${SFML})
 RASPBERRY_RELEASE_COMMAND(make)
-
 
 
 ANDROID_PATH(${SFML}/${OS})
