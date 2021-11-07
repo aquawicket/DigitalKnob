@@ -3,6 +3,7 @@
 
 ### DEPENDS ###
 DKDEPEND(nasm)
+DKDEPEND(libogg)
 
 ### VERSION ###
 DKSET(FLAC_VERSION 1.3.2)
@@ -79,10 +80,10 @@ exit \n")
 
 
 MAC_DEBUG_PATH(${FLAC}/${OS}/${DEBUG_DIR})
-MAC_DEBUG_COMMAND(../../configure --disable-shared --enable-static)
+MAC_DEBUG_COMMAND(../../configure --disable-shared --enable-static ${OGG_APPLE_DEBUG})
 MAC_DEBUG_COMMAND(make)
 MAC_RELEASE_PATH(${FLAC}/${OS}/${RELEASE_DIR})
-MAC_RELEASE_COMMAND(../../configure --disable-shared --enable-static)
+MAC_RELEASE_COMMAND(../../configure --disable-shared --enable-static ${OGG_APPLE_RELEASE})
 MAC_RELEASE_COMMAND(make)
 
 
