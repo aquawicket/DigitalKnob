@@ -50,10 +50,10 @@ DKSET(GIF_ANDROID -DGIF_INCLUDE_DIR=${GIF}/lib -DGIF_INCLUDE_DIR2=${GIF}/${OS} -
 
 ### COMPILE ###
 WIN32_DEBUG_PATH(${GIF}/${OS}/${DEBUG_DIR})
-WIN32_DEBUG_COMMAND(../../configure --disable-shared --enable-static)
-WIN32_DEBUG_COMMAND(make)
+WIN32_DEBUG_MSYS(../../configure --disable-shared --enable-static)
+WIN32_DEBUG_MSYS(make)
 WIN32_RELEASE_PATH(${GIF}/${OS}/${RELEASE_DIR})
-WIN32_RELEASE_COMMAND(../../configure --disable-shared --enable-static)
+WIN32_RELEASE_MSYS(../../configure --disable-shared --enable-static)
 WIN32_RELEASE_COMMAND(make)
 
 
