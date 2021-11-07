@@ -61,18 +61,6 @@ if(rmlui_debugger)
 	ANDROID_RELEASE_LIB(${RMLUI}/${OS}/${RELEASE_DIR}/libRmlDebugger.a)
 endif()
 
-### The RmlUi SDL example needs these libraries
-#${GLEW}\${OS}\lib\Debug\glew32d.lib
-#${JPEG}\${OS}\Debug\turbojpeg-static.lib
-#${PNG}\${OS}\Debug\libpng17_staticd.lib
-#${TIFF}\${OS}\Debug\tiff-static.lib
-#${ZLIB}\${OS}\Debug\zlibstaticd.lib
-#winmm.lib
-#Setupapi.lib
-#version.lib
-#imm32.lib
-
-
 
 
 
