@@ -1852,19 +1852,15 @@ function(MAC_XCODE_DEBUG folder)
 	endif()
 endfunction()
 
-
 function(MAC_XCODE_RELEASE folder)
 	if(MAC AND RELEASE AND QUEUE_BUILD)
-		
 		if(${ARGC} GREATER 1)
-			
 			DKEXECUTE_PROCESS(xcodebuild -target ${ARGV1} -configuration Release build WORKING_DIRECTORY ${3RDPARTY}/${folder}/${OS})
 		else()
 			DKEXECUTE_PROCESS(xcodebuild -configuration Release build WORKING_DIRECTORY ${3RDPARTY}/${folder}/${OS})
 		endif()
 	endif()
 endfunction()
-
 
 function(MAC_XCODE)
 	if(MAC)
@@ -1873,13 +1869,11 @@ function(MAC_XCODE)
 	endif()
 endfunction()
 
-
 function(MAC32_XCODE_DEBUG)
 	if(MAC_32)
 		MAC_XCODE_DEBUG(${ARGV})
 	endif()
 endfunction()
-
 
 function(MAC32_XCODE_RELEASE)
 	if(MAC_32)
@@ -1887,6 +1881,10 @@ function(MAC32_XCODE_RELEASE)
 	endif()
 endfunction()
 
+function(MAC32_XCODE)
+	MAC32_XCODE_DEBUG(${ARGV})
+	MAC32_XCODE_RELEASE(${ARGV})
+endfunction()
 
 function(MAC64_XCODE_DEBUG)
 	if(MAC_64)
@@ -1894,20 +1892,22 @@ function(MAC64_XCODE_DEBUG)
 	endif()
 endfunction()
 
-
-function(MAC64)
+function(MAC64_XCODE_RELEASE)
 	if(MAC_64)
 		MAC_XCODE_RELEASE(${ARGV})
 	endif()
 endfunction()
 
+function(MAC64_XCODE)
+	MAC64_XCODE_DEBUG(${ARGV})
+	MAC64_XCODE_RELEASE(${ARGV})
+endfunction()
+
+
 
 function(IOS_XCODE_DEBUG folder)
 	if(IOS AND DEBUG AND QUEUE_BUILD)
-
-		
-		if(${ARGC} GREATER 1)
-			
+		if(${ARGC} GREATER 1)	
 			DKEXECUTE_PROCESS(xcodebuild -target ${ARGV1} -configuration Debug build WORKING_DIRECTORY ${3RDPARTY}/${folder}/${OS})
 		else()
 			DKEXECUTE_PROCESS(xcodebuild -configuration Debug build WORKING_DIRECTORY ${3RDPARTY}/${folder}/${OS})
@@ -1915,20 +1915,15 @@ function(IOS_XCODE_DEBUG folder)
 	endif()
 endfunction()
 
-
 function(IOS_XCODE_RELEASE folder)
 	if(IOS AND RELEASE AND QUEUE_BUILD)
-
-		
 		if(${ARGC} GREATER 1)
-			
 			DKEXECUTE_PROCESS(xcodebuild -target ${ARGV1} -configuration Release build WORKING_DIRECTORY ${3RDPARTY}/${folder}/${OS})
 		else()
 			DKEXECUTE_PROCESS(xcodebuild -configuration Release build WORKING_DIRECTORY ${3RDPARTY}/${folder}/${OS})
 		endif()
 	endif()
 endfunction()
-
 
 function(IOS_XCODE)
 	if(IOS)
@@ -1937,13 +1932,11 @@ function(IOS_XCODE)
 	endif()
 endfunction()
 
-
 function(IOS32_XCODE_DEBUG)
 	if(IOS_32)
 		IOS_XCODE_DEBUG(${ARGV})
 	endif()
 endfunction()
-
 
 function(IOS32_XCODE_RELEASE)
 	if(IOS_32)
@@ -1951,6 +1944,10 @@ function(IOS32_XCODE_RELEASE)
 	endif()
 endfunction()
 
+function(IOS32_XCODE)
+	IOS32_XCODE_DEBUG(${ARGV})
+	IOS32_XCODE_RELEASE(${ARGV})
+endfunction()
 
 function(IOS64_XCODE_DEBUG)
 	if(IOS_64)
@@ -1958,20 +1955,21 @@ function(IOS64_XCODE_DEBUG)
 	endif()
 endfunction()
 
-
 function(IOS64_XCODE_RELEASE)
 	if(IOS64)
 		IOS_XCODE_RELEASE(${ARGV})
 	endif()
 endfunction()
 
+function(IOS64_XCODE)
+	IOS64_XCODE_DEBUG(${ARGV})
+	IOS64_XCODE_RELEASE(${ARGV})
+endfunction()
+
 
 function(IOSSIM_XCODE_DEBUG folder)
 	if(IOSSIM AND DEBUG AND QUEUE_BUILD)
-
-		
 		if(${ARGC} GREATER 1)
-			
 			DKEXECUTE_PROCESS(xcodebuild -target ${ARGV1} -configuration Debug build WORKING_DIRECTORY ${3RDPARTY}/${folder}/${OS})
 		else()
 			DKEXECUTE_PROCESS(xcodebuild -configuration Debug build WORKING_DIRECTORY ${3RDPARTY}/${folder}/${OS})
@@ -1979,13 +1977,9 @@ function(IOSSIM_XCODE_DEBUG folder)
 	endif()
 endfunction()
 
-
 function(IOSSIM_XCODE_RELEASE folder)
 	if(IOSSIM AND RELEASE AND QUEUE_BUILD)
-
-		
 		if(${ARGC} GREATER 1)
-			
 			DKEXECUTE_PROCESS(xcodebuild -target ${ARGV1} -configuration Release build WORKING_DIRECTORY ${3RDPARTY}/${folder}/${OS})
 		else()
 			DKEXECUTE_PROCESS(xcodebuild -configuration Release build WORKING_DIRECTORY ${3RDPARTY}/${folder}/${OS})
@@ -1993,14 +1987,10 @@ function(IOSSIM_XCODE_RELEASE folder)
 	endif()
 endfunction()
 
-
 function(IOSSIM_XCODE)
-	if(IOSSIM)
-		IOSSIM_XCODE_DEBUG(${ARGV})
-		IOSSIM_XCODE_RELEASE(${ARGV})
-	endif()
+	IOSSIM_XCODE_DEBUG(${ARGV})
+	IOSSIM_XCODE_RELEASE(${ARGV})
 endfunction()
-
 
 function(IOSSIM32_XCODE_DEBUG)
 	if(IOSSIM_32)
@@ -2008,28 +1998,22 @@ function(IOSSIM32_XCODE_DEBUG)
 	endif()
 endfunction()
 
-
 function(IOSSIM32_XCODE_RELEASE)
 	if(IOSSIM_32)
 		IOSSIM_XCODE_RELEASE(${ARGV})
 	endif()
 endfunction()
 
-
 function(IOSSIM32_XCODE)
-	if(IOSSIM_32)
-		IOSSIM32_XCODE_DEBUG(${ARGV})
-		IOSSIM32_XCODE_RELEASE(${ARGV})
-	endif()
+	IOSSIM32_XCODE_DEBUG(${ARGV})
+	IOSSIM32_XCODE_RELEASE(${ARGV})
 endfunction()
-
 
 function(IOSSIM64_XCODE_DEBUG)
 	if(IOSSIM_64)
 		IOSSIM_XCODE_DEBUG(${ARGV})
 	endif()
 endfunction()
-
 
 function(IOSSIM64_XCODE_RELEASE)
 	if(IOSSIM_64)
@@ -2038,10 +2022,8 @@ function(IOSSIM64_XCODE_RELEASE)
 endfunction()
 
 function(IOSSIM64_XCODE)
-	if(IOSSIM_64)
-		IOSSIM64_XCODE_DEBUG(${ARGV})
-		IOSSIM64_XCODE_RELEASE(${ARGV})
-	endif()
+	IOSSIM64_XCODE_DEBUG(${ARGV})
+	IOSSIM64_XCODE_RELEASE(${ARGV})
 endfunction()
 
 
