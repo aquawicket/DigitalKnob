@@ -143,7 +143,7 @@ bool DKSFMLWindow::Fullscreen(const void* input, void* output)
 	GdkWindow* gdk_window = gdk_window_foreign_new(window.getSystemHandle());
 	if(!gdk_window){ return false; }
 	gdk_window_fullscreen(gdk_window);
-	isFullscreen = true;
+	//isFullscreen = true;
 	return true;
 #endif
 	DKWARN("DKSFMLWindow::Fullscreen(): not implemented on this OS\n");
@@ -176,7 +176,7 @@ bool DKSFMLWindow::GetHandle(const void* input, void* output)
 #ifdef LINUX
 	GdkWindow* gdk_window = gdk_window_foreign_new(window.getSystemHandle());
 	if(!gdk_window){ return false; }
-	*(GdkWindow*)output = gdk_window;
+	//*(GdkWindow*)output = gdk_window; //FIXME
 	return true;
 #endif
 	DKWARN("DKSFMLWindow::GetHandle(): not implemented on this OS\n");
@@ -299,7 +299,7 @@ bool DKSFMLWindow::IsFullscreen(const void* input, void* output)
 	bool fullscreen = ((state & GDK_WINDOW_STATE_FULLSCREEN) != 0);
 	*(bool*)output = fullscreen;
 	*/
-	*(bool*)output = isFullscreen;
+	//*(bool*)output = isFullscreen;
 	return true;
 #endif
 	DKWARN("DKSFMLWindow::IsFullscreen(): not implemented on this OS\n");
@@ -511,7 +511,7 @@ bool DKSFMLWindow::Windowed(const void* input, void* output)
 	GdkWindow* gdk_window = gdk_window_foreign_new(window.getSystemHandle());
 	if(!gdk_window){ return false;}
 	gdk_window_unfullscreen(gdk_window);
-	isFullscreen = false;
+	//isFullscreen = false;
 	return true;
 #endif
 	DKWARN("DKSFMLWindow::Windowed(): not implemented on this OS\n");
