@@ -33,9 +33,8 @@ ANDROID_RELEASE_LIB(${OGG}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/libogg.a)
 
 
 ### 3RDPARTY LINK ###
-DKSET(OGG_WIN_DEBUG CFLAGS=-I${OGG}/include CPPFLAGS=-I${OGG}/include --with-ogg-includes=${OGG}/include --with-ogg-libraries=${OGG}/${OS}/${DEBUG_DIR}/src/.libs)
-DKSET(OGG_WIN_RELEASE CFLAGS=-I${OGG}/include --with-ogg-includes=${OGG}/include
---with-ogg-libraries=${OGG}/${OS}/${RELEASE_DIR}/src/.libs)
+DKSET(OGG_WIN_DEBUG CFLAGS=-I${OGG}/include --with-ogg-includes=${OGG}/include --with-ogg-libraries=${OGG}/${OS}/${DEBUG_DIR}/src/.libs)
+DKSET(OGG_WIN_RELEASE CFLAGS=-I${OGG}/include --with-ogg-includes=${OGG}/include --with-ogg-libraries=${OGG}/${OS}/${RELEASE_DIR}/src/.libs)
 DKSET(OGG_APPLE_DEBUG "CFLAGS=-I${OGG}/include -I${OGG}/${OS}/${RELEASE_DIR}/include" --with-ogg-libraries=${OGG}/${OS}/${DEBUG_DIR}/src/.libs)
 DKSET(OGG_APPLE_RELEASE "CFLAGS=-I${OGG}/include -I${OGG}/${OS}/${RELEASE_DIR}/include" --with-ogg-libraries=${OGG}/${OS}/${RELEASE_DIR}/src/.libs)
 DKSET(OGG_LINUX_DEBUG "CFLAGS=-I${OGG}/include -I${OGG}/${OS}/${RELEASE_DIR}/include" --with-ogg-libraries=${OGG}/${OS}/${DEBUG_DIR}/src/.libs)

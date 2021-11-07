@@ -80,7 +80,7 @@ DKSET(VORBIS_ANDROID_RELEASE -DVORBIS_INCLUDE_DIR=${VORBIS}/include -DVORBIS_LIB
 	
 ### COMPILE ###
 WIN32_DEBUG_PATH(${VORBIS}/${OS}/${DEBUG_DIR})
-WIN32_DEBUG_MSYS(../../configure --with-ogg-includes=${OGG}/include --disable-shared --enable-static CFLAGS=-I/C/Users/IK/digitalknob/DK/3rdParty/libogg-1.3.5/include)
+WIN32_DEBUG_MSYS(../../configure --with-ogg-includes=${OGG}/include --disable-shared --enable-static ${OGG_WIN_DEBUG})
 WIN32_DEBUG_MSYS(make)
 WIN32_RELEASE_PATH(${VORBIS}/${OS}/${RELEASE_DIR})
 WIN32_RELEASE_MSYS(../../configure --with-ogg-includes=${OGG}/include --disable-shared --enable-static ${OGG_WIN_RELEASE})
