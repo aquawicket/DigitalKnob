@@ -7,10 +7,6 @@
 # https://github.com/mirror/libX11/archive/refs/tags/libX11-1.7.0.zip
 
 
-### DEPENDS ###
-#DKDEPEND(depend_name)
-
-
 ### VERSION ###
 DKSET(LIBX11_VERSION 1.7.0)
 DKSET(LIBX11_NAME libx11-${LIBX11_VERSION})
@@ -38,43 +34,19 @@ ANDROID_RELEASE_LIB(${LIBX11}/${OS}/${RELEASE_DIR}/liblibx11.a)
 
 ### COMPILE ###
 WIN32_DEBUG_PATH(${LIBX11}/${OS}/${DEBUG_DIR})
-WIN32_DEBUG_BASH("#!/bin/bash 
-cd /${LIBX11}/${OS}/${DEBUG_DIR} 
-export PATH=/${MINGW32}/bin:$PATH\;
-export PATH=/${MSYS}/bin:$PATH\;
-../../configure --disable-shared --enable-static
-make 
-exit \n")
-
+WIN32_DEBUG_MSYS(../../configure --disable-shared --enable-static)
+WIN32_DEBUG_MSYS(make)
 WIN32_RELEASE_PATH(${LIBX11}/${OS}/${RELEASE_DIR})
-WIN32_RELEASE_BASH("#!/bin/bash 
-cd /${LIBX11}/${OS}/${RELEASE_DIR} 
-export PATH=/${MINGW32}/bin:$PATH\;
-export PATH=/${MSYS}/bin:$PATH\;
-../../configure --disable-shared --enable-static 
-make 
-exit \n")
-
+WIN32_RELEASE_MSYS(../../configure --disable-shared --enable-static)
+WIN32_RELEASE_COMMAND(make)
 
 
 WIN64_DEBUG_PATH(${LIBX11}/${OS}/${DEBUG_DIR})
-WIN64_DEBUG_BASH("#!/bin/bash 
-cd /${LIBX11}/${OS}/${DEBUG_DIR} 
-export PATH=/${MINGW64}/bin:$PATH\;
-export PATH=/${MSYS}/bin:$PATH\;
-../../configure --disable-shared --enable-static 
-make 
-exit \n")
-
+WIN64_DEBUG_COMMAND(../../configure --disable-shared --enable-static)
+WIN64_DEBUG_COMMAND(make)
 WIN64_RELEASE_PATH(${LIBX11}/${OS}/${RELEASE_DIR})
-WIN64_RELEASE_BASH("#!/bin/bash 
-cd /${LIBX11}/${OS}/${RELEASE_DIR} 
-export PATH=/${MINGW64}/bin:$PATH\;
-export PATH=/${MSYS}/bin:$PATH\;
-../../configure --disable-shared --enable-static 
-make 
-exit \n")
-
+WIN64_RELEASE_COMMAND(../../configure --disable-shared --enable-static)
+WIN64_RELEASE_COMMAND(make)
 
 
 MAC_DEBUG_PATH(${LIBX11}/${OS}/${DEBUG_DIR})
@@ -85,14 +57,12 @@ MAC_RELEASE_COMMAND(../../configure --disable-shared --enable-static --build=x86
 MAC_RELEASE_COMMAND(make "CXXFLAGS=-arch x86_64" "CFLAGS=-arch x86_64" "LDFLAGS=-arch x86_64")
 
 
-
 IOS_DEBUG_PATH(${LIBX11}/${OS}/${DEBUG_DIR})
 IOS_DEBUG_COMMAND(../../configure --disable-shared --enable-static)
 IOS_DEBUG_COMMAND(make)
 IOS_RELEASE_PATH(${LIBX11}/${OS}/${RELEASE_DIR})
 IOS_RELEASE_COMMAND(../../configure --disable-shared --enable-static)
 IOS_RELEASE_COMMAND(make)
-
 
 
 IOSSIM_DEBUG_PATH(${LIBX11}/${OS}/${DEBUG_DIR})
@@ -103,14 +73,12 @@ IOSSIM_RELEASE_COMMAND(../../configure --disable-shared --enable-static --build=
 IOSSIM_RELEASE_COMMAND(make "CXXFLAGS=-arch x86_64" "CFLAGS=-arch x86_64" "LDFLAGS=-arch x86_64")
 
 
-
 LINUX_DEBUG_PATH(${LIBX11}/${OS}/${DEBUG_DIR})
 LINUX_DEBUG_COMMAND(../../configure --disable-shared --enable-static)
 LINUX_DEBUG_COMMAND(make)
 LINUX_RELEASE_PATH(${LIBX11}/${OS}/${RELEASE_DIR})
 LINUX_RELEASE_COMMAND(../../configure --disable-shared --enable-static)
 LINUX_RELEASE_COMMAND(make)
-
 
 
 RASPBERRY_DEBUG_PATH(${LIBX11}/${OS}/${DEBUG_DIR})
@@ -121,8 +89,6 @@ RASPBERRY_RELEASE_COMMAND(../../configure --disable-shared --enable-static)
 RASPBERRY_RELEASE_COMMAND(make)
 
 
-
-#ANDROID_NDK(${LIBX11_NAME})
 ANDROID_DEBUG_PATH(${LIBX11}/${OS}/${DEBUG_DIR})
 ANDROID_DEBUG_COMMAND(../../configure --disable-shared --enable-static) # --build=arm)
 ANDROID_DEBUG_COMMAND(make)

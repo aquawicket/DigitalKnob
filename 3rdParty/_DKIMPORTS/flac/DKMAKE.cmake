@@ -43,40 +43,20 @@ DKSET(FLAC_ANDROID -DFLAC_INCLUDE_DIR=${FLAC}/include -DFLAC_LIBRARY_DEBUG=${FLA
 
 
 ### COMPILE ###
-WIN32_PATH(${FLAC}/${OS}/${DEBUG_DIR})
-WIN32_BASH("#!/bin/bash 
-cd /${FLAC}/${OS}/${DEBUG_DIR} 
-export PATH=/${MINGW32}/bin:$PATH\;
-export PATH=/${MSYS}/bin:$PATH\;
-../../configure --disable-shared
-make 
-exit \n")
-WIN32_PATH(${FLAC}/${OS}/${RELEASE_DIR})
-WIN32_BASH("#!/bin/bash 
-cd /${FLAC}/${OS}/${RELEASE_DIR} 
-export PATH=/${MINGW32}/bin:$PATH\;
-export PATH=/${MSYS}/bin:$PATH\;
-../../configure --disable-shared
-make 
-exit \n")
+WIN32_DEBUG_PATH(${FLAC}/${OS}/${DEBUG_DIR})
+WIN32_DEBUG_MSYS(../../configure --disable-shared --enable-static)
+WIN32_DEBUG_MSYS(make)
+WIN32_RELEASE_PATH(${FLAC}/${OS}/${RELEASE_DIR})
+WIN32_RELEASE_MSYS(../../configure --disable-shared --enable-static)
+WIN32_RELEASE_COMMAND(make)
 
 
-WIN64_PATH(${FLAC}/${OS}/${DEBUG_DIR})
-WIN64_BASH("#!/bin/bash 
-cd /${FLAC}/${OS}/${DEBUG_DIR} 
-export PATH=/${MINGW64}/bin:$PATH\;
-export PATH=/${MSYS}/bin:$PATH\;
-../../configure --disable-shared
-make 
-exit \n")
-WIN64_PATH(${FLAC}/${OS}/${RELEASE_DIR})
-WIN64_BASH("#!/bin/bash 
-cd /${FLAC}/${OS}/${RELEASE_DIR} 
-export PATH=/${MINGW64}/bin:$PATH\;
-export PATH=/${MSYS}/bin:$PATH\;
-../../configure --disable-shared
-make 
-exit \n")
+WIN64_DEBUG_PATH(${FLAC}/${OS}/${DEBUG_DIR})
+WIN64_DEBUG_COMMAND(../../configure --disable-shared --enable-static)
+WIN64_DEBUG_COMMAND(make)
+WIN64_RELEASE_PATH(${FLAC}/${OS}/${RELEASE_DIR})
+WIN64_RELEASE_COMMAND(../../configure --disable-shared --enable-static)
+WIN64_RELEASE_COMMAND(make)
 
 
 MAC_DEBUG_PATH(${FLAC}/${OS}/${DEBUG_DIR})
