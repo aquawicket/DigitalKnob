@@ -104,11 +104,11 @@ MAC_RELEASE_COMMAND(make "CXXFLAGS=-arch x86_64" "CFLAGS=-arch x86_64" "LDFLAGS=
 
 
 IOS_DEBUG_PATH(${VORBIS}/${OS}/${DEBUG_DIR})
-IOS_DEBUG_MSYS(../../configure --with-ogg-includes=${OGG}/include --disable-shared --enable-static ${OGG_WIN_DEBUG})
-IOS_DEBUG_MSYS(make)
+IOS_DEBUG_COMMAND(../../configure --with-ogg-includes=${OGG}/include --disable-shared --enable-static ${OGG_WIN_DEBUG})
+IOS_DEBUG_COMMAND(make)
 IOS_RELEASE_PATH(${VORBIS}/${OS}/${RELEASE_DIR})
-IOS_RELEASE_MSYS(../../configure --with-ogg-includes=${OGG}/include --disable-shared --enable-static ${OGG_WIN_RELEASE})
-IOS_RELEASE_MSYS(make)
+IOS_RELEASE_COMMAND(../../configure --with-ogg-includes=${OGG}/include --disable-shared --enable-static ${OGG_WIN_RELEASE})
+IOS_RELEASE_COMMAND(make)
 
 
 IOSSIM_DEBUG_PATH(${VORBIS}/${OS}/${DEBUG_DIR})
