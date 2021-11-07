@@ -2016,6 +2016,14 @@ function(IOSSIM32_XCODE_RELEASE)
 endfunction()
 
 
+function(IOSSIM32_XCODE)
+	if(IOSSIM_32)
+		IOSSIM32_XCODE_DEBUG(${ARGV})
+		IOSSIM32_XCODE_RELEASE(${ARGV})
+	endif()
+endfunction()
+
+
 function(IOSSIM64_XCODE_DEBUG)
 	if(IOSSIM_64)
 		IOSSIM_XCODE_DEBUG(${ARGV})
@@ -2026,6 +2034,13 @@ endfunction()
 function(IOSSIM64_XCODE_RELEASE)
 	if(IOSSIM_64)
 		IOSSIM_XCODE_RELEASE(${ARGV})
+	endif()
+endfunction()
+
+function(IOSSIM64_XCODE)
+	if(IOSSIM_64)
+		IOSSIM64_XCODE_DEBUG(${ARGV})
+		IOSSIM64_XCODE_RELEASE(${ARGV})
 	endif()
 endfunction()
 
