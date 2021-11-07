@@ -33,7 +33,7 @@ ANDROID_RELEASE_LIB(${OGG}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/libogg.a)
 
 
 ### 3RDPARTY LINK ###
-DKSET(OGG_WIN_DEBUG CFLAGS=-I${OGG}/include --with-ogg-includes=${OGG}/include --with-ogg-libraries=${OGG}/${OS}/${DEBUG_DIR}/src/.libs)
+DKSET(OGG_WIN_DEBUG CFLAGS=-I${OGG}/include CPPFLAGS=-I${OGG}/include --with-ogg-includes=${OGG}/include --with-ogg-libraries=${OGG}/${OS}/${DEBUG_DIR}/src/.libs)
 DKSET(OGG_WIN_RELEASE CFLAGS=-I${OGG}/include --with-ogg-includes=${OGG}/include
 --with-ogg-libraries=${OGG}/${OS}/${RELEASE_DIR}/src/.libs)
 DKSET(OGG_APPLE_DEBUG "CFLAGS=-I${OGG}/include -I${OGG}/${OS}/${RELEASE_DIR}/include" --with-ogg-libraries=${OGG}/${OS}/${DEBUG_DIR}/src/.libs)
@@ -54,22 +54,30 @@ DKSET(OGG_ANDROID_CMAKE "-DCMAKE_CXX_FLAGS=-I${OGG}/${OS}/${RELEASE_DIR}/include
 	
 ### COMPILE ###
 WIN32_DEBUG_PATH(${OGG}/${OS}/${DEBUG_DIR})
-WIN32_DEBUG_BASH("#!/bin/bash 
-cd /${OGG}/${OS}/${DEBUG_DIR} 
-export PATH=/${MINGW32}/bin:$PATH\;
-export PATH=/${MSYS}/bin:$PATH\;
-../../configure --disable-shared --enable-static
-make 
-exit \n")
+WIN32_DEBUG_MSYS(../../configure --disable-shared --enable-static)
+WIN32_DEBUG_MSYS(make)
 
 WIN32_RELEASE_PATH(${OGG}/${OS}/${RELEASE_DIR})
-WIN32_RELEASE_BASH("#!/bin/bash 
-cd /${OGG}/${OS}/${RELEASE_DIR} 
-export PATH=/${MINGW32}/bin:$PATH\;
-export PATH=/${MSYS}/bin:$PATH\;
-../../configure --disable-shared --enable-static 
-make 
-exit \n")
+WIN32_RELEASE_MSYS(../../configure --disable-shared --enable-static)
+WIN32_RELEASE_MSYS(make)
+
+#WIN32_DEBUG_PATH(${OGG}/${OS}/${DEBUG_DIR})
+#WIN32_DEBUG_BASH("#!/bin/bash"
+#"cd /${OGG}/${OS}/${DEBUG_DIR}"
+#"export PATH=/${MINGW32}/bin:$PATH"
+#"export PATH=/${MSYS}/bin:$PATH"
+#"../../configure --disable-shared --enable-static"
+#"make"
+#"exit")
+
+#WIN32_RELEASE_PATH(${OGG}/${OS}/${RELEASE_DIR})
+#WIN32_RELEASE_BASH("#!/bin/bash"
+#"cd /${OGG}/${OS}/${RELEASE_DIR}"
+#"export PATH=/${MINGW32}/bin:$PATH"
+#"export PATH=/${MSYS}/bin:$PATH"
+#"../../configure --disable-shared --enable-static"
+#"make"
+#"exit")
 
 
 

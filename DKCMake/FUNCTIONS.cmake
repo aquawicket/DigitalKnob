@@ -1078,10 +1078,88 @@ function(RASPBERRY64_RELEASE_PATH)
 endfunction()
 
 ###################  BASH  ######################
+function(WIN_MSYS str)
+	string(REPLACE ";" " " str "${ARGV}")
+	DKSET(msys "#!/bin/bash")
+	list(APPEND msys "cd ${CURRENT_DIR}")
+	list(APPEND msys "export PATH=${MINGW32}/bin:$PATH")
+	list(APPEND msys "export PATH=${MSYS}/bin:$PATH")
+	list(APPEND msys "${str}")
+	list(APPEND msys "exit")
+	string(REPLACE ";" "\n"	msys "${msys}")
+	string(REPLACE "C:/" "/c/" msys ${msys})
+	#message(STATUS "msys = ${msys}")
+	#Wait()
+	file(WRITE ${MSYS}/dkscript.tmp ${msys})
+	execute_process(COMMAND cmd /c ${MSYS}/bin/bash ${MSYS}/dkscript.tmp WORKING_DIRECTORY ${MSYS})
+endfunction()
+
+function(WIN_DEBUG_MSYS str)
+	if(WIN AND DEBUG)
+		WIN_MSYS(${ARGV})
+	endif()
+endfunction()
+
+function(WIN_RELEASE_MSYS str)
+	if(WIN AND RELEASE)
+		WIN_MSYS(${ARGV})
+	endif()
+endfunction()
+
+function(WIN32_MSYS str)
+	if(WIN_32)
+		WIN_MSYS(${ARGV})
+	endif()
+endfunction()
+
+function(WIN32_DEBUG_MSYS str)
+	if(WIN_32 AND DEBUG)
+		WIN_MSYS(${ARGV})
+	endif()
+endfunction()
+
+function(WIN32_RELEASE_MSYS str)
+	if(WIN_32 AND RELEASE)
+		WIN_MSYS(${ARGV})
+	endif()
+endfunction()
+
+function(WIN64_MSYS str)
+	if(WIN_64)
+		WIN_MSYS(${ARGV})
+	endif()
+endfunction()
+
+function(WIN64_DEBUG_MSYS str)
+	if(WIN_64 AND DEBUG)
+		WIN_MSYS(${ARGV})
+	endif()
+endfunction()
+
+function(WIN64_RELEASE_MSYS str)
+	if(WIN_64 AND RELEASE)
+		WIN_MSYS(${ARGV})
+	endif()
+endfunction()
+
+
+
+
+
+
+
 function(WIN_BASH str)
+	#message(STATUS "WIN32_BASH( ${ARGV} )")
+	#Wait()
 	if(WIN AND QUEUE_BUILD)
-		string(REPLACE ":/" "/" str ${str})
+		#message(STATUS "BEFORE( ${ARGV} )")
+		#Wait()
+		string(REPLACE ";" "\n"	str "${ARGV}")
+		#message(STATUS "AFTER( ${str} )")
+		#Wait()
+		string(REPLACE ":/Users" "/Users" str ${str})
 		file(WRITE ${MSYS}/dkscript.tmp ${str})
+		message(STATUS "WROTE( ${str} )")
 		message(STATUS "BASH -> ${str}")
 		execute_process(COMMAND cmd /c ${MSYS}/bin/bash ${MSYS}/dkscript.tmp WORKING_DIRECTORY ${MSYS})
 	endif()
@@ -1089,55 +1167,55 @@ endfunction()
 
 function(WIN_DEBUG_BASH str)
 	if(WIN AND DEBUG)
-		WIN_BASH(${str})
+		WIN_BASH(${ARGV})
 	endif()
 endfunction()
 
 function(WIN_RELEASE_BASH str)
 	if(WIN AND RELEASE)
-		WIN_BASH(${str})
+		WIN_BASH(${ARGV})
 	endif()
 endfunction()
 
 
 function(WIN32_BASH str)
 	if(WIN_32)
-		WIN_BASH(${str})
+		WIN_BASH(${ARGV})
 	endif()
 endfunction()
 
 
 function(WIN32_DEBUG_BASH str)
 	if(WIN_32 AND DEBUG)
-		WIN_BASH(${str})
+		WIN_BASH(${ARGV})
 	endif()
 endfunction()
 
 
 function(WIN32_RELEASE_BASH str)
 	if(WIN_32 AND RELEASE)
-		WIN_BASH(${str})
+		WIN_BASH(${ARGV})
 	endif()
 endfunction()
 
 
 function(WIN64_BASH str)
 	if(WIN_64)
-		WIN_BASH(${str})
+		WIN_BASH(${ARGV})
 	endif()
 endfunction()
 
 
 function(WIN64_DEBUG_BASH str)
 	if(WIN_64 AND DEBUG)
-		WIN_BASH(${str})
+		WIN_BASH(${ARGV})
 	endif()
 endfunction()
 
 
 function(WIN64_RELEASE_BASH str)
 	if(WIN_64 AND RELEASE)
-		WIN_BASH(${str})
+		WIN_BASH(${ARGV})
 	endif()
 endfunction()
 
@@ -1155,7 +1233,7 @@ endfunction()
 function(ANDROID32_BASH str)
 	if(ANDROID_32)
 		set(str ${str} ${ARGN})
-		ANDROID_BASH(${str})
+		ANDROID_BASH(${ARGV})
 	endif()
 endfunction()
 
@@ -1163,7 +1241,7 @@ endfunction()
 function(ANDROID64_BASH str)
 	if(ANDROID_64)
 		set(str ${str} ${ARGN})
-		ANDROID_BASH(${str})
+		ANDROID_BASH(${ARGV})
 	endif()
 endfunction()
 
