@@ -1594,12 +1594,11 @@ endfunction()
 
 
 ################# Visual Studio Build ################
-function(WIN_VS_DEBUG folder sln_file)
+function(WIN_VS_DEBUG folder sln_file) #target #arch
 	if(WIN AND DEBUG AND QUEUE_BUILD)
 		if(NOT EXISTS ${3RDPARTY}/${folder}/${OS}/${sln_file})
 			message(FATAL_ERROR "CANNOT FIND: ${3RDPARTY}/${folder}/${OS}/${sln_file}" )
 		endif()
-		#DKEXECUTE_PROCESS("set _CL_=/MTd" WORKING_DIRECTORY ${3RDPARTY}/${folder}/${OS})
 		if(${ARGC} GREATER 3)
 			set(EXECUTE_COMMAND ${MSBUILD} ${3RDPARTY}/${folder}/${OS}/${sln_file} /t:${ARGV2} /p:Configuration=Debug /p:Platform=${ARGV3})
 		elseif(${ARGC} GREATER 2)
@@ -1611,12 +1610,11 @@ function(WIN_VS_DEBUG folder sln_file)
 	endif()
 endfunction()
 
-function(WIN_VS_RELEASE folder sln_file)
+function(WIN_VS_RELEASE folder sln_file) #target #arch
 	if(WIN AND RELEASE AND QUEUE_BUILD)
 		if(NOT EXISTS ${3RDPARTY}/${folder}/${OS}/${sln_file})
 			message(FATAL_ERROR "CANNOT FIND: ${3RDPARTY}/${folder}/${OS}/${sln_file}" )
 		endif()
-		#DKEXECUTE_PROCESS("set _CL_=/MT" WORKING_DIRECTORY ${3RDPARTY}/${folder}/${OS})
 		if(${ARGC} GREATER 3)
 			set(EXECUTE_COMMAND ${MSBUILD} ${3RDPARTY}/${folder}/${OS}/${sln_file} /t:${ARGV2} /p:Configuration=Release /p:Platform=${ARGV3})
 		elseif(${ARGC} GREATER 2)

@@ -65,7 +65,7 @@ endif()
 
 
 IF(WIN_64)
-	DKCOPY(${BZIP2}/win32 ${BZIP2}/${OS}/${OS} TRUE) #copy project files that came with bzip
+	DKCOPY(${BZIP2}/win32 ${BZIP2}/${OS} TRUE) #copy project files that came with bzip
 	DKCOPY(${BZIP2}/build-VS2019 ${BZIP2}/${OS} TRUE)
 	WIN64_PATH(${BZIP2}/${OS})
 	WIN64_VS(${BZIP2_NAME} bzip2.sln libbz2-static x64)
