@@ -1,3 +1,6 @@
+if(NOT IOSSIM)
+	retuen
+endif()
 # https://github.com/guillemj/libmd
 #
 # https://github.com/guillemj/libmd/archive/refs/tags/1.0.4.zip
