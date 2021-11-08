@@ -397,7 +397,7 @@ if(WIN_32)
 	set_target_properties(${APP_NAME} PROPERTIES LINK_FLAGS_DEBUG ${DEBUG_FLAGS} LINK_FLAGS_RELEASE ${RELEASE_FLAGS})
 	
 	### PRE BUILD ###
-	#CPP_DKFile_Rename(app_path+OS+"/Release/"+APP+".app", app_path+OS+"/Release/"+APP+"_OLD.app", true)
+	DKRENAME(${CMAKE_BINARY_DIR}/${DEBUG_DIR}/${APP_NAME}.exe ${CMAKE_BINARY_DIR}/${DEBUG_DIR}/${APP_NAME}.backup)
 	
 	### POST BUILD ###
 	#CPP_DKFile_Copy(app_path+OS+"/Release/"+APP+".pdb", app_path+"assets/"+APP+".pdb", true)
