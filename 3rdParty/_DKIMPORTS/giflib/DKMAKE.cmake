@@ -67,10 +67,10 @@ WIN64_RELEASE_COMMAND(make)
 
 MAC_DEBUG_PATH(${GIF}/${OS}/${DEBUG_DIR})
 MAC_DEBUG_COMMAND(../../configure --disable-shared --enable-static)
-MAC_DEBUG_COMMAND(make "CXXFLAGS=-arch x86_64" "CFLAGS=-arch x86_64" "LDFLAGS=-arch x86_64")
+MAC_DEBUG_COMMAND(make)# "CXXFLAGS=-arch x86_64" "CFLAGS=-arch x86_64" "LDFLAGS=-arch x86_64")
 MAC_RELEASE_PATH(${GIF}/${OS}/${RELEASE_DIR})
 MAC_RELEASE_COMMAND(../../configure --disable-shared --enable-static)
-MAC_RELEASE_COMMAND(make "CXXFLAGS=-arch x86_64" "CFLAGS=-arch x86_64" "LDFLAGS=-arch x86_64")
+MAC_RELEASE_COMMAND(make)# "CXXFLAGS=-arch x86_64" "CFLAGS=-arch x86_64" "LDFLAGS=-arch x86_64")
 
 
 IOS_DEBUG_PATH(${GIF}/${OS}/${DEBUG_DIR})
@@ -83,10 +83,10 @@ IOS_RELEASE_COMMAND(make)
 
 IOSSIM_DEBUG_PATH(${GIF}/${OS}/${DEBUG_DIR})
 IOSSIM_DEBUG_COMMAND(../../configure --disable-shared --enable-static)
-IOSSIM_DEBUG_COMMAND(make "CXXFLAGS=-arch i386" "CFLAGS=-arch i386" "LDFLAGS=-arch i386")
+IOSSIM_DEBUG_COMMAND(make)# "CXXFLAGS=-arch i386" "CFLAGS=-arch i386" "LDFLAGS=-arch i386")
 IOSSIM_RELEASE_PATH(${GIF}/${OS}/${RELEASE_DIR})
 IOSSIM_RELEASE_COMMAND(../../configure --disable-shared --enable-static)
-IOSSIM_RELEASE_COMMAND(make "CXXFLAGS=-arch i386" "CFLAGS=-arch i386" "LDFLAGS=-arch i386")
+IOSSIM_RELEASE_COMMAND(make)# "CXXFLAGS=-arch i386" "CFLAGS=-arch i386" "LDFLAGS=-arch i386")
 
 
 LINUX_DEBUG_PATH(${GIF}/${OS}/${DEBUG_DIR})
