@@ -80,34 +80,34 @@ DKSET(VORBIS_ANDROID_RELEASE -DVORBIS_INCLUDE_DIR=${VORBIS}/include -DVORBIS_LIB
 	
 ### COMPILE ###
 WIN32_DEBUG_PATH(${VORBIS}/${OS}/${DEBUG_DIR})
-WIN32_DEBUG_MSYS(../../configure --with-ogg-includes=${OGG}/include --disable-shared --enable-static ${OGG_WIN_DEBUG})
+WIN32_DEBUG_MSYS(../../configure --disable-shared --enable-static --with-ogg-includes=${OGG}/include ${OGG_WIN_DEBUG})
 WIN32_DEBUG_MSYS(make)
 WIN32_RELEASE_PATH(${VORBIS}/${OS}/${RELEASE_DIR})
-WIN32_RELEASE_MSYS(../../configure --with-ogg-includes=${OGG}/include --disable-shared --enable-static ${OGG_WIN_RELEASE})
+WIN32_RELEASE_MSYS(../../configure --disable-shared --enable-static --with-ogg-includes=${OGG}/include ${OGG_WIN_RELEASE})
 WIN32_RELEASE_MSYS(make)
 
 
 WIN64_DEBUG_PATH(${VORBIS}/${OS}/${DEBUG_DIR})
-WIN64_DEBUG_MSYS(../../configure --with-ogg-includes=${OGG}/include --disable-shared --enable-static ${OGG_WIN_DEBUG})
+WIN64_DEBUG_MSYS(../../configure --disable-shared --enable-static --with-ogg-includes=${OGG}/include ${OGG_WIN_DEBUG})
 WIN64_DEBUG_MSYS(make)
 WIN64_RELEASE_PATH(${VORBIS}/${OS}/${RELEASE_DIR})
-WIN64_RELEASE_MSYS(../../configure --with-ogg-includes=${OGG}/include --disable-shared --enable-static ${OGG_WIN_RELEASE})
+WIN64_RELEASE_MSYS(../../configure --disable-shared --enable-static --with-ogg-includes=${OGG}/include ${OGG_WIN_RELEASE})
 WIN64_RELEASE_MSYS(make)
 
 
 MAC_DEBUG_PATH(${VORBIS}/${OS}/${DEBUG_DIR})
-MAC_DEBUG_COMMAND(../../configure --with-ogg-includes=${OGG}/include --disable-shared --enable-static --build=x86_64 ${OGG_APPLE_DEBUG})
-MAC_DEBUG_COMMAND(make "CXXFLAGS=-arch x86_64" "CFLAGS=-arch x86_64" "LDFLAGS=-arch x86_64")
+MAC_DEBUG_COMMAND(../../configure --disable-shared --enable-static --with-ogg-includes=${OGG}/include ${OGG_APPLE_DEBUG}) #--build=x86_64 
+MAC_DEBUG_COMMAND(make) #"CXXFLAGS=-arch x86_64" "CFLAGS=-arch x86_64" "LDFLAGS=-arch x86_64")
 MAC_RELEASE_PATH(${VORBIS}/${OS}/${RELEASE_DIR})
-MAC_RELEASE_COMMAND(../../configure --with-ogg-includes=${OGG}/include --disable-shared --enable-static --build=x86_64 ${OGG_APPLE_RELEASE})
-MAC_RELEASE_COMMAND(make "CXXFLAGS=-arch x86_64" "CFLAGS=-arch x86_64" "LDFLAGS=-arch x86_64")
+MAC_RELEASE_COMMAND(../../configure --disable-shared --enable-static --with-ogg-includes=${OGG}/include ${OGG_APPLE_RELEASE}) #--build=x86_64
+MAC_RELEASE_COMMAND(make) #"CXXFLAGS=-arch x86_64" "CFLAGS=-arch x86_64" "LDFLAGS=-arch x86_64")
 
 
 IOS_DEBUG_PATH(${VORBIS}/${OS}/${DEBUG_DIR})
-IOS_DEBUG_COMMAND(../../configure --with-ogg-includes=${OGG}/include --disable-shared --enable-static ${OGG_APPLE_DEBUG})
-IOS_DEBUG_COMMAND(make)
+IOS_DEBUG_COMMAND(../../configure --disable-shared --enable-static --with-ogg-includes=${OGG}/include ${OGG_APPLE_DEBUG}) #"--build=armv7 arm64"
+IOS_DEBUG_COMMAND(make) #"CXXFLAGS=-arch armv7 arm64" 
 IOS_RELEASE_PATH(${VORBIS}/${OS}/${RELEASE_DIR})
-IOS_RELEASE_COMMAND(../../configure --with-ogg-includes=${OGG}/include --disable-shared --enable-static ${OGG_APPLE_RELEASE})
+IOS_RELEASE_COMMAND(../../configure --disable-shared --enable-static --with-ogg-includes=${OGG}/include ${OGG_APPLE_RELEASE})
 IOS_RELEASE_COMMAND(make)
 
 
@@ -152,11 +152,11 @@ if(ANDROID)
 	set(ENV{PKG_CONFIG_PATH} "${OGG}/${OS}/${DEBUG_DIR}")
 endif()
 ANDROID_DEBUG_PATH(${VORBIS}/${OS}/${DEBUG_DIR})
-ANDROID_DEBUG_COMMAND(../../configure --disable-shared --enable-static ${OGG_ANDROID_DEBUG})
-ANDROID_DEBUG_COMMAND(make)
+ANDROID_DEBUG_MSYS(../../configure --disable-shared --enable-static ${OGG_ANDROID_DEBUG})
+ANDROID_DEBUG_MSYS(make)
 if(ANDROID)
 	set(ENV{PKG_CONFIG_PATH} "${OGG}/${OS}/${RELEASE_DIR}")
 endif()
 ANDROID_RELEASE_PATH(${VORBIS}/${OS}/${RELEASE_DIR})
-ANDROID_RELEASE_COMMAND(../../configure --disable-shared --enable-static ${OGG_ANDROID_RELEASE})
-ANDROID_RELEASE_COMMAND(make)
+ANDROID_RELEASE_MSYS(../../configure --disable-shared --enable-static ${OGG_ANDROID_RELEASE})
+ANDROID_RELEASE_MSYS(make)
