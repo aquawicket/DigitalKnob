@@ -84,18 +84,8 @@ RASPBERRY_RELEASE_COMMAND(make xml2)
 
 ##ANDROID_NDK(${XML2_VERSION})
 ANDROID_PATH(${XML2}/${OS})
-ANDROID32_BASH("#!/bin/bash 
-cd /${XML2}/${OS}
-export PATH=/${MINGW32}/bin:$PATH\;
-export PATH=/${MSYS}/bin:$PATH\;
-../configure --disable-shared --enable-static
-exit \n")
-ANDROID64_BASH("#!/bin/bash 
-cd /${XML2}/${OS}
-export PATH=/${MINGW64}/bin:$PATH\;
-export PATH=/${MSYS}/bin:$PATH\;
-../configure --disable-shared --enable-static
-exit \n")
+ANDROID32_MSYS(../configure --disable-shared --enable-static)
 ANDROID32_COMMAND(${DKCMAKE_ANDROID32} "-DANDROID_COMPILER_FLAGS=-DANDROID32 -D_ANDROID -I${XML2}/${OS}" ${ICONV_ANDROID} ${ZLIB_ANDROID} ${XML2})
+ANDROID64_MSYS(../configure --disable-shared --enable-static)
 ANDROID64_COMMAND(${DKCMAKE_ANDROID64} "-DANDROID_COMPILER_FLAGS=-DANDROID64 -D_ANDROID -I${XML2}/${OS}" ${ICONV_ANDROID} ${ZLIB_ANDROID} ${XML2})
 ANDROID_VS(${XML2_NAME} xml2.sln xml2)
