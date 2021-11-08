@@ -495,7 +495,7 @@ if(MAC)
 	## ICONS ##
 	dk_makeDirectory(${DKPROJECT}/icons/mac)
 	dk_makeDirectory(${DKPROJECT}/icons/mac/icons.iconset)
-    DKEXECUTE_PROCESS(sips -z 16 16 ${DKPROJECT}/icons/icon.png --out ${DKPROJECT}/icons/mac/icons.iconset/icon_16x16.png WORKING_DIRECTORY ${DIGITALKNOB})
+    	DKEXECUTE_PROCESS(sips -z 16 16 ${DKPROJECT}/icons/icon.png --out ${DKPROJECT}/icons/mac/icons.iconset/icon_16x16.png WORKING_DIRECTORY ${DIGITALKNOB})
 	DKEXECUTE_PROCESS(sips -z 32 32 ${DKPROJECT}/icons/icon.png --out ${DKPROJECT}/icons/mac/icons.iconset/icon_16x16@2x.png WORKING_DIRECTORY ${DIGITALKNOB})
 	DKEXECUTE_PROCESS(sips -z 32 32 ${DKPROJECT}/icons/icon.png --out ${DKPROJECT}/icons/mac/icons.iconset/icon_32x32.png WORKING_DIRECTORY ${DIGITALKNOB})
 	DKEXECUTE_PROCESS(sips -z 64 64 ${DKPROJECT}/icons/icon.png --out ${DKPROJECT}/icons/mac/icons.iconset/icon_32x32@2x.png WORKING_DIRECTORY ${DIGITALKNOB})
@@ -578,7 +578,7 @@ if(MAC)
 	endif()
 	
 	# Copy the DKCefChild into the app bundle
-	#if(EXISTS "${DKPLUGINS}/DKCefChild/${OS}/$<CONFIG>/DKCefChild.app")
+	if(EXISTS "${DKPLUGINS}/DKCefChild/${OS}/Release/DKCefChild.app")
 		message(STATUS "Adding Chromium Embedded Framework.framework to bundle . . .")
 		add_custom_command(
 			TARGET ${APP_NAME}
@@ -587,7 +587,7 @@ if(MAC)
 				"${DKPLUGINS}/DKCefChild/${OS}/$<CONFIG>/DKCefChild.app"
 				"$<TARGET_FILE_DIR:${APP_NAME}>/../Frameworks/${APP_NAME} Helper.app"
 		)
-	#endif()
+	endif()
 	
 	# Make bundle run in Terminal
 	# https://github.com/pyinstaller/pyinstaller/issues/5154#issuecomment-690646012
