@@ -287,7 +287,7 @@ foreach(plugin ${dkdepend_list})
 		
 	
 	endif()
-	DKSET(CMAKE_FILE "") ##DEBUG:   do we need this?   Linux cache file fix
+	#DKSET(CMAKE_FILE "") ##DEBUG:   do we need this?   Linux cache file fix
 endforeach()
 
 	
