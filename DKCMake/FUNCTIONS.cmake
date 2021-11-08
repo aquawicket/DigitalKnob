@@ -1595,11 +1595,13 @@ endfunction()
 
 ################# Visual Studio Build ################
 function(WIN_VS_DEBUG folder sln_file) #target #arch
+	message(STATUS "WIN_VS_DEBUG( ${ARGV} )")
 	if(WIN AND DEBUG AND QUEUE_BUILD)
 		if(NOT EXISTS ${3RDPARTY}/${folder}/${OS}/${sln_file})
 			message(FATAL_ERROR "CANNOT FIND: ${3RDPARTY}/${folder}/${OS}/${sln_file}" )
 		endif()
 		if(${ARGC} GREATER 3)
+			message(STATUS "GREATER THAN 3 ARGS  3=${ARGV3}")
 			set(EXECUTE_COMMAND ${MSBUILD} ${3RDPARTY}/${folder}/${OS}/${sln_file} /t:${ARGV2} /p:Configuration=Debug /p:Platform=${ARGV3})
 		elseif(${ARGC} GREATER 2)
 			set(EXECUTE_COMMAND ${MSBUILD} ${3RDPARTY}/${folder}/${OS}/${sln_file} /t:${ARGV2} /p:Configuration=Debug)
@@ -1611,11 +1613,13 @@ function(WIN_VS_DEBUG folder sln_file) #target #arch
 endfunction()
 
 function(WIN_VS_RELEASE folder sln_file) #target #arch
+	message(STATUS "WIN_VS_RELEASE( ${ARGV} )")
 	if(WIN AND RELEASE AND QUEUE_BUILD)
 		if(NOT EXISTS ${3RDPARTY}/${folder}/${OS}/${sln_file})
 			message(FATAL_ERROR "CANNOT FIND: ${3RDPARTY}/${folder}/${OS}/${sln_file}" )
 		endif()
 		if(${ARGC} GREATER 3)
+			message(STATUS "GREATER THAN 3 ARGS  3=${ARGV3}")
 			set(EXECUTE_COMMAND ${MSBUILD} ${3RDPARTY}/${folder}/${OS}/${sln_file} /t:${ARGV2} /p:Configuration=Release /p:Platform=${ARGV3})
 		elseif(${ARGC} GREATER 2)
 			set(EXECUTE_COMMAND ${MSBUILD} ${3RDPARTY}/${folder}/${OS}/${sln_file} /t:${ARGV2} /p:Configuration=Release)
@@ -1665,7 +1669,7 @@ function(WIN64_VS_RELEASE)
 endfunction()
 
 function(WIN64_VS)
-	if(WIN64)
+	if(WIN_64)
 		WIN_VS_DEBUG(${ARGV})
 		WIN_VS_RELEASE(${ARGV})
 	endif()
