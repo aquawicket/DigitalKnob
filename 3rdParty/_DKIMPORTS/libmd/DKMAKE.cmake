@@ -6,7 +6,7 @@
 ### VERSION ###
 DKSET(LIBMD_VERSION 1.0.4)
 DKSET(LIBMD_NAME libmd-${LIBMD_VERSION})
-DKSET(LIBMD_DL https://github.com/guillemj/libmd/archive/refs/tags/${LIBMD_VERSION}.zip
+DKSET(LIBMD_DL https://github.com/guillemj/libmd/archive/refs/tags/${LIBMD_VERSION}.zip)
 DKSET(LIBMD ${3RDPARTY}/${LIBMD_NAME})
 
 
@@ -26,6 +26,14 @@ RASPBERRY_DEBUG_LIB(${LIBMD}/${OS}/${DEBUG_DIR}/liblibmdd.a)
 RASPBERRY_RELEASE_LIB(${LIBMD}/${OS}/${RELEASE_DIR}/liblibmd.a)
 ANDROID_DEBUG_LIB(${LIBMD}/${OS}/${DEBUG_DIR}/liblibmdd.a)
 ANDROID_RELEASE_LIB(${LIBMD}/${OS}/${RELEASE_DIR}/liblibmd.a)
+
+
+### 3RDPARTY LINK ###
+#DKSET(LIBMD_WIN -DLIBMD_LIBRARY=${LIBMD}/${OS}/${DEBUG_DIR}/liblibmd.a)
+DKSET(LIBMD_APPLE -DLIBMD_LIBRARY=${LIBMD}/${OS}/${DEBUG_DIR}/liblibmd.a)
+#DKSET(LIBMD_LINUX -DLIBMD_LIBRARY=${LIBMD}/${OS}/${DEBUG_DIR}/liblibmd.a)
+#DKSET(LIBMD_RASPBERRY -DLIBMD_LIBRARY=${LIBMD}/${OS}/${DEBUG_DIR}/liblibmd.a)
+#DKSET(LIBMD_ANDROID -DLIBMD_LIBRARY=${LIBMD}/${OS}/${DEBUG_DIR}/liblibmd.a)
 
 
 ### COMPILE ###
