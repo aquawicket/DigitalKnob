@@ -29,50 +29,67 @@ ANDROID_RELEASE_LIB(${LIBMD}/${OS}/${RELEASE_DIR}/liblibmd.a)
 
 
 ### COMPILE ###
-WIN_PATH(${LIBMD}/${OS})
-WIN32_COMMAND(${DKCMAKE_WIN32} ${LIBMD})
-WIN64_COMMAND(${DKCMAKE_WIN64} ${LIBMD})
-WIN_VS(${LIBMD_NAME} libmd.sln libmd)
+WIN32_DEBUG_PATH(${LIBMD}/${OS}/${DEBUG_DIR})
+WIN32_DEBUG_MSYS(../../configure --disable-shared --enable-static --build=i686-w64-mingw32 CFLAGS=-march=i686)
+WIN32_DEBUG_MSYS(make)
+WIN32_RELEASE_PATH(${LIBMD}/${OS}/${RELEASE_DIR})
+WIN32_RELEASE_MSYS(../../configure --disable-shared --enable-static --build=i686-w64-mingw32 CFLAGS=-march=i686)
+WIN32_RELEASE_MSYS(make)
 
 
-MAC_PATH(${LIBMD}/${OS})
-MAC32_COMMAND(${DKCMAKE_MAC32} ${LIBMD})
-MAC64_COMMAND(${DKCMAKE_MAC64} ${LIBMD})
-MAC_XCODE(${LIBMD_NAME} libmd)
+WIN64_DEBUG_PATH(${LIBMD}/${OS}/${DEBUG_DIR})
+WIN64_DEBUG_MSYS(../../configure --disable-shared --enable-static --build=x86_64-w64-mingw32 CFLAGS=-march=x86-64)
+WIN64_DEBUG_MSYS(make)
+WIN64_RELEASE_PATH(${LIBMD}/${OS}/${RELEASE_DIR})
+WIN64_RELEASE_MSYS(../../configure --disable-shared --enable-static --build=x86_64-w64-mingw32 CFLAGS=-march=x86-64)
+WIN64_RELEASE_MSYS(make)
 
 
-IOS_PATH(${LIBMD}/${OS})
-IOS32_COMMAND(${DKCMAKE_IOS32} ${LIBMD})
-IOS64_COMMAND(${DKCMAKE_IOS64} ${LIBMD})
-IOS_XCODE(${LIBMD_NAME} libmd)
+MAC_DEBUG_PATH(${LIBMD}/${OS}/${DEBUG_DIR})
+MAC_DEBUG_COMMAND(../../configure --disable-shared --enable-static)
+MAC_DEBUG_COMMAND(make)# "CXXFLAGS=-arch x86_64" "CFLAGS=-arch x86_64" "LDFLAGS=-arch x86_64")
+MAC_RELEASE_PATH(${LIBMD}/${OS}/${RELEASE_DIR})
+MAC_RELEASE_COMMAND(../../configure --disable-shared --enable-static)
+MAC_RELEASE_COMMAND(make)# "CXXFLAGS=-arch x86_64" "CFLAGS=-arch x86_64" "LDFLAGS=-arch x86_64")
 
 
-IOSSIM_PATH(${LIBMD}/${OS})
-IOSSIM32_COMMAND(${DKCMAKE_IOSSIM32} ${LIBMD})
-IOSSIM64_COMMAND(${DKCMAKE_IOSSIM64} ${LIBMD})
-IOSSIM_XCODE(${LIBMD_NAME} libmd)
+IOS_DEBUG_PATH(${LIBMD}/${OS}/${DEBUG_DIR})
+IOS_DEBUG_COMMAND(../../configure --disable-shared --enable-static) #--arch-"armv7 armv7s")
+IOS_DEBUG_COMMAND(make)
+IOS_RELEASE_PATH(${LIBMD}/${OS}/${RELEASE_DIR})
+IOS_RELEASE_COMMAND(../../configure --disable-shared --enable-static) #--arch-"armv7 armv7s")
+IOS_RELEASE_COMMAND(make)
+
+
+IOSSIM_DEBUG_PATH(${LIBMD}/${OS}/${DEBUG_DIR})
+IOSSIM_DEBUG_COMMAND(../../configure --disable-shared --enable-static)
+IOSSIM_DEBUG_COMMAND(make)
+IOSSIM_RELEASE_PATH(${LIBMD}/${OS}/${RELEASE_DIR})
+IOSSIM_RELEASE_COMMAND(../../configure --disable-shared --enable-static)
+IOSSIM_RELEASE_COMMAND(make)
 
 
 LINUX_DEBUG_PATH(${LIBMD}/${OS}/${DEBUG_DIR})
-LINUX_DEBUG_COMMAND(${DKCMAKE_LINUX_DEBUG} ${LIBMD})
-LINUX_DEBUG_COMMAND(make libmd)
-
+LINUX_DEBUG_COMMAND(../../configure --disable-shared --enable-static)
+LINUX_DEBUG_COMMAND(make)
 LINUX_RELEASE_PATH(${LIBMD}/${OS}/${RELEASE_DIR})
-LINUX_RELEASE_COMMAND(${DKCMAKE_LINUX_RELEASE} ${LIBMD})
-LINUX_RELEASE_COMMAND(make libmd)
+LINUX_RELEASE_COMMAND(../../configure --disable-shared --enable-static)
+LINUX_RELEASE_COMMAND(make)
 
 
 RASPBERRY_DEBUG_PATH(${LIBMD}/${OS}/${DEBUG_DIR})
-RASPBERRY_DEBUG_COMMAND(${DKCMAKE_RASPBERRY_DEBUG} ${LIBMD})
-RASPBERRY_DEBUG_COMMAND(make libmd)
-
+RASPBERRY_DEBUG_COMMAND(../../configure --disable-shared --enable-static)
+RASPBERRY_DEBUG_COMMAND(make)
 RASPBERRY_RELEASE_PATH(${LIBMD}/${OS}/${RELEASE_DIR})
-RASPBERRY_RELEASE_COMMAND(${DKCMAKE_RASPBERRY_RELEASE} ${LIBMD})
-RASPBERRY_RELEASE_COMMAND(make libmd)
+RASPBERRY_RELEASE_COMMAND(../../configure --disable-shared --enable-static)
+RASPBERRY_RELEASE_COMMAND(make)
 
 
-##ANDROID_NDK(${LIBMD_NAME})
-ANDROID_PATH(${LIBMD}/${OS})
-ANDROID32_COMMAND(${DKCMAKE_ANDROID32} ${LIBMD})
-ANDROID64_COMMAND(${DKCMAKE_ANDROID64} ${LIBMD})
-ANDROID_VS(${LIBMD_NAME} libmd.sln libmd)
+
+ANDROID_NDK(${LIBMD_NAME})
+#ANDROID_DEBUG_PATH(${LIBMD}/${OS}/${DEBUG_DIR})
+#ANDROID_DEBUG_MSYS(../../configure --disable-shared --enable-static)
+#ANDROID_DEBUG_MSYS(make)
+#ANDROID_RELEASE_PATH(${LIBMD}/${OS}/${RELEASE_DIR})
+#ANDROID_RELEASE_MSYS(../../configure --disable-shared --enable-static)
+#ANDROID_RELEASE_MSYS(make)
