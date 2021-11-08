@@ -23,7 +23,7 @@
     
     //DKFile::appfilename = "/Users/aquawicket/Desktop/digitalknob/DKApps/"+appname+"/iossim32/Release-iphonesimulator/"+appname+".app/"+appname;
 	
-    DKApp dkapp;
+    DKApp dkapp(0,0);
     
 	#ifdef DKAPP
 		DKINFO("DKAPP defined\n");
@@ -82,7 +82,7 @@
 ///////////////
 - (void)dealloc
 {
-    [super dealloc];
+    //[super dealloc];
 }
 
 @end

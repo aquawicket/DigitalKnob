@@ -5,6 +5,7 @@
 #include "DKArchive/DKArchive.h"
 #include "DKAssets/DKAssets.h"
 #include <algorithm>
+#include <fstream>
 
 bool DKAssets::Init(){
 	DKDEBUGFUNC();

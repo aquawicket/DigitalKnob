@@ -5,6 +5,8 @@
 #ifdef WIN32
 	#include <boxer/boxer.h>
 #endif
+#include <fstream>
+
 extern bool log_fatal = true;      //console.assert()
 extern bool log_errors = true;     //console.error()
 extern bool log_warnings = true;   //console.warn()
