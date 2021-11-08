@@ -80,18 +80,18 @@ DKSET(VORBIS_ANDROID_RELEASE -DVORBIS_INCLUDE_DIR=${VORBIS}/include -DVORBIS_LIB
 	
 ### COMPILE ###
 WIN32_DEBUG_PATH(${VORBIS}/${OS}/${DEBUG_DIR})
-WIN32_DEBUG_MSYS(../../configure --disable-shared --enable-static --with-ogg-includes=${OGG}/include ${OGG_WIN_DEBUG}) #--build=i686-w64-mingw32 CFLAGS=-march=i686
+WIN32_DEBUG_MSYS(../../configure --disable-shared --enable-static --with-ogg-includes=${OGG}/include ${OGG_WIN_DEBUG} --build=i686-w64-mingw32 CFLAGS=-march=i686)
 WIN32_DEBUG_MSYS(make)
 WIN32_RELEASE_PATH(${VORBIS}/${OS}/${RELEASE_DIR})
-WIN32_RELEASE_MSYS(../../configure --disable-shared --enable-static --with-ogg-includes=${OGG}/include ${OGG_WIN_RELEASE}) #--build=i686-w64-mingw32 CFLAGS=-march=i686
+WIN32_RELEASE_MSYS(../../configure --disable-shared --enable-static --with-ogg-includes=${OGG}/include ${OGG_WIN_RELEASE} --build=i686-w64-mingw32 CFLAGS=-march=i686)
 WIN32_RELEASE_MSYS(make)
 
 
 WIN64_DEBUG_PATH(${VORBIS}/${OS}/${DEBUG_DIR})
-WIN64_DEBUG_MSYS(../../configure --disable-shared --enable-static --with-ogg-includes=${OGG}/include ${OGG_WIN_DEBUG}) #--build=x86_64-w64-mingw32 CFLAGS=-march=x86-64)
+WIN64_DEBUG_MSYS(../../configure --disable-shared --enable-static --with-ogg-includes=${OGG}/include ${OGG_WIN_DEBUG} --build=x86_64-w64-mingw32 CFLAGS=-march=x86-64)
 WIN64_DEBUG_MSYS(make)
 WIN64_RELEASE_PATH(${VORBIS}/${OS}/${RELEASE_DIR})
-WIN64_RELEASE_MSYS(../../configure --disable-shared --enable-static --with-ogg-includes=${OGG}/include ${OGG_WIN_RELEASE}) #--build=x86_64-w64-mingw32 CFLAGS=-march=x86-64)
+WIN64_RELEASE_MSYS(../../configure --disable-shared --enable-static --with-ogg-includes=${OGG}/include ${OGG_WIN_RELEASE} --build=x86_64-w64-mingw32 CFLAGS=-march=x86-64)
 WIN64_RELEASE_MSYS(make)
 
 

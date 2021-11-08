@@ -44,18 +44,18 @@ DKSET(FLAC_ANDROID -DFLAC_INCLUDE_DIR=${FLAC}/include -DFLAC_LIBRARY_DEBUG=${FLA
 
 ### COMPILE ###
 WIN32_DEBUG_PATH(${FLAC}/${OS}/${DEBUG_DIR})
-WIN32_DEBUG_MSYS(../../configure --disable-shared --enable-static) #--build=i686-w64-mingw32 CFLAGS=-march=i686
+WIN32_DEBUG_MSYS(../../configure --disable-shared --enable-static --build=i686-w64-mingw32 CFLAGS=-march=i686)
 WIN32_DEBUG_MSYS(make)
 WIN32_RELEASE_PATH(${FLAC}/${OS}/${RELEASE_DIR})
-WIN32_RELEASE_MSYS(../../configure --disable-shared --enable-static) #--build=i686-w64-mingw32 CFLAGS=-march=i686
+WIN32_RELEASE_MSYS(../../configure --disable-shared --enable-static --build=i686-w64-mingw32 CFLAGS=-march=i686)
 WIN32_RELEASE_MSYS(make)
 
 
 WIN64_DEBUG_PATH(${FLAC}/${OS}/${DEBUG_DIR})
-WIN64_DEBUG_MSYS(../../configure --disable-shared --enable-static) #--build=x86_64-w64-mingw32 CFLAGS=-march=x86-64)
+WIN64_DEBUG_MSYS(../../configure --disable-shared --enable-static --build=x86_64-w64-mingw32 CFLAGS=-march=x86-64)
 WIN64_DEBUG_MSYS(make)
 WIN64_RELEASE_PATH(${FLAC}/${OS}/${RELEASE_DIR})
-WIN64_RELEASE_MSYS(../../configure --disable-shared --enable-static) #--build=x86_64-w64-mingw32 CFLAGS=-march=x86-64)
+WIN64_RELEASE_MSYS(../../configure --disable-shared --enable-static --build=x86_64-w64-mingw32 CFLAGS=-march=x86-64)
 WIN64_RELEASE_MSYS(make)
 
 
