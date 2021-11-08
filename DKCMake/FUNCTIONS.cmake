@@ -129,7 +129,7 @@ function(DELETE_CACHE)
 		DKEXECUTE_PROCESS(for /d /r %%i in (*CMakeFiles*) do rd /s /q "%%i" WORKING_DIRECTORY ${DIGITALKNOB})
 	else()
 		DKEXECUTE_PROCESS(find . -name "CMakeCache.*" -delete WORKING_DIRECTORY ${DIGITALKNOB})
-		DKEXECUTE_PROCESS(rm -rf `find . -type d -name CMakeFiles` WORKING_DIRECTORY ${DIGITALKNOB})
+		DKEXECUTE_PROCESS("rm -rf `find . -type d -name CMakeFiles`" WORKING_DIRECTORY ${DIGITALKNOB})
 	endif()
 endfunction()
 
