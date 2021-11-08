@@ -39,18 +39,18 @@ ANDROID_RELEASE_LIB(${IMAGEMAGICK}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/li
 
 ### COMPILE ###
 WIN32_DEBUG_PATH(${IMAGEMAGICK}/${OS}/${DEBUG_DIR})
-WIN32_DEBUG_MSYS(../../configure --disable-shared --enable-static)
+WIN32_DEBUG_MSYS(../../configure --disable-shared --enable-static) #--build=i686-w64-mingw32 CFLAGS=-march=i686
 WIN32_DEBUG_MSYS(make)
 WIN32_RELEASE_PATH(${IMAGEMAGICK}/${OS}/${RELEASE_DIR})
-WIN32_RELEASE_MSYS(../../configure --disable-shared --enable-static)
+WIN32_RELEASE_MSYS(../../configure --disable-shared --enable-static) #--build=i686-w64-mingw32 CFLAGS=-march=i686
 WIN32_RELEASE_MSYS(make)
 
 
 WIN64_DEBUG_PATH(${IMAGEMAGICK}/${OS}/${DEBUG_DIR})
-WIN64_DEBUG_COMMAND(../../configure --disable-shared --enable-static)
+WIN64_DEBUG_COMMAND(../../configure --disable-shared --enable-static) #--build=x86_64-w64-mingw32 CFLAGS=-march=x86-64)
 WIN64_DEBUG_COMMAND(make)
 WIN64_RELEASE_PATH(${IMAGEMAGICK}/${OS}/${RELEASE_DIR})
-WIN64_RELEASE_COMMAND(../../configure --disable-shared --enable-static)
+WIN64_RELEASE_COMMAND(../../configure --disable-shared --enable-static) #--build=x86_64-w64-mingw32 CFLAGS=-march=x86-64)
 WIN64_RELEASE_COMMAND(make)
 
 
