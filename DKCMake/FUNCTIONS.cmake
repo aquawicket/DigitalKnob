@@ -1116,12 +1116,6 @@ function(WIN_RELEASE_MSYS str)
 	endif()
 endfunction()
 
-function(WIN32_MSYS str)
-	if(WIN_32)
-		WIN32_MSYS(${ARGV})
-	endif()
-endfunction()
-
 function(WIN32_DEBUG_MSYS str)
 	if(WIN_32 AND DEBUG)
 		WIN32_MSYS(${ARGV})

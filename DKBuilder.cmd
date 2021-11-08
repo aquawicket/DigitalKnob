@@ -48,6 +48,7 @@ cd "%DKPATH%"
 "%GIT%" checkout -- .
 "%GIT%" pull origin master
 goto pickapp
+
 :gitcommit
 if exist "C:\Program Files\Git\bin\git.exe" set "GIT=C:\Program Files\Git\bin\git.exe"
 if exist "C:\Program Files (x86)\Git\bin\git.exe" set "GIT=C:\Program Files (x86)\Git\bin\git.exe"
@@ -59,16 +60,19 @@ if exist "%GIT%" (echo "GIT = %GIT%") else (
 	"%DIGITALKNOB%\Git-2.30.1-32-bit.exe"
 	goto gitcommit
 )
-cd %DKPATH%/DK
+cd %DKPATH%
 "%GIT%" commit -a -m "git commit"
 "%GIT%" push
 goto pickapp
+
 :dkbuilder
 set APP=DKBuilder
 goto pickos
+
 :dksdlrmlui
 set APP=DKSDLRmlUi
 goto pickos
+
 :dktestall
 set APP=DKTestAll
 goto pickos
