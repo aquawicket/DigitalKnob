@@ -54,7 +54,7 @@ WIN32_DEBUG_MSYS(../../configure --disable-shared --enable-static)
 WIN32_DEBUG_MSYS(make)
 WIN32_RELEASE_PATH(${GIF}/${OS}/${RELEASE_DIR})
 WIN32_RELEASE_MSYS(../../configure --disable-shared --enable-static)
-WIN32_RELEASE_COMMAND(make)
+WIN32_RELEASE_MSYS(make)
 
 
 WIN64_DEBUG_PATH(${GIF}/${OS}/${DEBUG_DIR})
