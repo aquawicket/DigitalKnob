@@ -57,19 +57,19 @@ DKSET(XZ_ANDROID -DCMAKE_C_FLAGS=-DLZMA_API_STATIC -DCMAKE_CXX_FLAGS=-DLZMA_API_
 
 ### COMPILE ###
 WIN32_DEBUG_PATH(${XZ}/${OS}/${DEBUG_DIR})
-WIN32_DEBUG_MSYS(../../configure --disable-shared --enable-static)
+WIN32_DEBUG_MSYS(../../configure --disable-shared --enable-static) #--build=i686-w64-mingw32 CFLAGS=-march=i686
 WIN32_DEBUG_MSYS(make)
 WIN32_RELEASE_PATH(${XZ}/${OS}/${RELEASE_DIR})
-WIN32_RELEASE_MSYS(../../configure --disable-shared --enable-static)
+WIN32_RELEASE_MSYS(../../configure --disable-shared --enable-static) #--build=i686-w64-mingw32 CFLAGS=-march=i686
 WIN32_RELEASE_MSYS(make)
 
 
 # look at xz/windows/build.bash for details
 WIN64_DEBUG_PATH(${XZ}/${OS}/${DEBUG_DIR})
-WIN64_DEBUG_MSYS(../../configure --disable-shared --enable-static --prefix= --enable-silent-rules --disable-dependency-tracking --disable-nls --disable-scripts --build=x86_64-w64-mingw32 CFLAGS=-march=x86-64)
+WIN64_DEBUG_MSYS(../../configure --disable-shared --enable-static --build=x86_64-w64-mingw32 CFLAGS=-march=x86-64 --prefix= --enable-silent-rules --disable-dependency-tracking --disable-nls --disable-scripts)
 WIN64_DEBUG_MSYS(make)
 WIN64_RELEASE_PATH(${XZ}/${OS}/${RELEASE_DIR})
-WIN64_RELEASE_MSYS(../../configure --disable-shared --enable-static --prefix= --enable-silent-rules --disable-dependency-tracking --disable-nls --disable-scripts --build=x86_64-w64-mingw32 CFLAGS=-march=x86-64)
+WIN64_RELEASE_MSYS(../../configure --disable-shared --enable-static --build=x86_64-w64-mingw32 CFLAGS=-march=x86-64 --prefix= --enable-silent-rules --disable-dependency-tracking --disable-nls --disable-scripts)
 WIN64_RELEASE_MSYS(make)
 
 
