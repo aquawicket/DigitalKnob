@@ -68,19 +68,27 @@ WIN64_RELEASE_MSYS(make)
 
 
 MAC_DEBUG_PATH(${OGG}/${OS}/${DEBUG_DIR})
-MAC_DEBUG_COMMAND(../../configure --disable-shared --enable-static)# --build=x86_64)
-MAC_DEBUG_COMMAND(make)# "CXXFLAGS=-arch x86_64" "CFLAGS=-arch x86_64" "LDFLAGS=-arch x86_64")
+MAC_DEBUG_COMMAND(../../configure --disable-shared --enable-static)
+MAC_DEBUG_COMMAND(make)
 MAC_RELEASE_PATH(${OGG}/${OS}/${RELEASE_DIR})
-MAC_RELEASE_COMMAND(../../configure --disable-shared --enable-static)# --build=x86_64)
-MAC_RELEASE_COMMAND(make)# "CXXFLAGS=-arch x86_64" "CFLAGS=-arch x86_64" "LDFLAGS=-arch x86_64")
+MAC_RELEASE_COMMAND(../../configure --disable-shared --enable-static)
+MAC_RELEASE_COMMAND(make)
+
+
+IOS_DEBUG_PATH(${OGG}/${OS}/${DEBUG_DIR})
+IOS_DEBUG_COMMAND(../../configure --disable-shared --enable-static)
+IOS_DEBUG_COMMAND(make)
+IOS_RELEASE_PATH(${OGG}/${OS}/${RELEASE_DIR})
+IOS_RELEASE_COMMAND(../../configure --disable-shared --enable-static)
+IOS_RELEASE_COMMAND(make)
 
 
 IOSSIM_DEBUG_PATH(${OGG}/${OS}/${DEBUG_DIR})
-IOSSIM_DEBUG_COMMAND(../../configure --disable-shared --enable-static)# --build=x86_64)
-IOSSIM_DEBUG_COMMAND(make)# "CXXFLAGS=-arch x86_64" "CFLAGS=-arch x86_64" "LDFLAGS=-arch x86_64")
+IOSSIM_DEBUG_COMMAND(../../configure --disable-shared --enable-static)
+IOSSIM_DEBUG_COMMAND(make)
 IOSSIM_RELEASE_PATH(${OGG}/${OS}/${RELEASE_DIR})
-IOSSIM_RELEASE_COMMAND(../../configure --disable-shared --enable-static)# --build=x86_64)
-IOSSIM_RELEASE_COMMAND(make)# "CXXFLAGS=-arch x86_64" "CFLAGS=-arch x86_64" "LDFLAGS=-arch x86_64")
+IOSSIM_RELEASE_COMMAND(../../configure --disable-shared --enable-static)
+IOSSIM_RELEASE_COMMAND(make)
 
 
 LINUX_DEBUG_PATH(${OGG}/${OS}/${DEBUG_DIR})
@@ -100,8 +108,8 @@ RASPBERRY_RELEASE_COMMAND(make)
 
 
 ANDROID_DEBUG_PATH(${OGG}/${OS}/${DEBUG_DIR})
-ANDROID_DEBUG_COMMAND(../../configure --disable-shared --enable-static) # --build=arm)
+ANDROID_DEBUG_COMMAND(../../configure --disable-shared --enable-static)
 ANDROID_DEBUG_COMMAND(make)
 ANDROID_RELEASE_PATH(${OGG}/${OS}/${RELEASE_DIR})
-ANDROID_RELEASE_COMMAND(../../configure --disable-shared --enable-static) # --build=arm)
+ANDROID_RELEASE_COMMAND(../../configure --disable-shared --enable-static)
 ANDROID_RELEASE_COMMAND(make)

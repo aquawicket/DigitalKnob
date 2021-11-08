@@ -147,7 +147,7 @@ RASPBERRY_RELEASE_COMMAND(../../configure --disable-shared --enable-static ${OGG
 RASPBERRY_RELEASE_COMMAND(make)
 
 
-#ANDROID_NDK(${VORBIS_VERSION})
+#ANDROID_NDK(${VORBIS_NAME})
 if(ANDROID)
 	set(ENV{PKG_CONFIG_PATH} "${OGG}/${OS}/${DEBUG_DIR}")
 endif()
