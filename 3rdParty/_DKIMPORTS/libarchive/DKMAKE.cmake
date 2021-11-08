@@ -10,6 +10,7 @@ DKDEPEND(xz)
 DKDEPEND(bzip2)
 DKDEPEND(libxml2)
 DKDEPEND(libiconv)
+DKDEPEND(crypto)
 if(WIN)
 	DKDEPEND(openssl)
 endif()
@@ -23,7 +24,7 @@ DKSET(ARCHIVE ${3RDPARTY}/${ARCHIVE_NAME})
 
 
 ### INSTALL ###
-DKINSTALL(${ARCHIVE_DL} libarchive ${ARCHIVE})# NOPATCH)
+DKINSTALL(${ARCHIVE_DL} libarchive ${ARCHIVE} NOPATCH)
 
 
 ### DKPLUGINS LINK ###
