@@ -812,6 +812,14 @@ if(IOSSIM)
 	#	set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -framework ${FW}")
 	#endforeach()
 	
+	### PRE BUILD ###
+	if(DEBUG)
+		DKRENAME(${CMAKE_BINARY_DIR}/${DEBUG_DIR}/${APP_NAME}.app ${CMAKE_BINARY_DIR}/${DEBUG_DIR}/${APP_NAME}.backup)
+	endif()
+	if(RELEASE)
+		DKRENAME(${CMAKE_BINARY_DIR}/${RELEASE_DIR}/${APP_NAME}.app ${CMAKE_BINARY_DIR}/${RELEASE_DIR}/${APP_NAME}.backup)
+	endif()
+	
 	#GET_TARGET_PROPERTY(MyExecutable_PATH ${APP_NAME} LOCATION)
 	list(APPEND App_SRC ${DKPLUGINS}/DK/DKiPhone.mm)
 	add_executable(${APP_NAME} MACOSX_BUNDLE ${App_SRC})
@@ -847,14 +855,6 @@ if(IOSSIM)
 			add_dependencies(${APP_NAME} ${plugin})
 		endif()	
 	endforeach()
-	
-	### PRE BUILD ###
-	if(DEBUG)
-		DKRENAME(${CMAKE_BINARY_DIR}/${DEBUG_DIR}/${APP_NAME}.app ${CMAKE_BINARY_DIR}/${DEBUG_DIR}/${APP_NAME}.backup)
-	endif()
-	if(RELEASE)
-		DKRENAME(${CMAKE_BINARY_DIR}/${RELEASE_DIR}/${APP_NAME}.app ${CMAKE_BINARY_DIR}/${RELEASE_DIR}/${APP_NAME}.backup)
-	endif()
 	
 	### POST BUILD ###
 	#CPP_DK_Execute("chmod +x "+app_path+OS+"/Debug/"+APP)
