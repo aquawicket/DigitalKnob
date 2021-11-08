@@ -1,5 +1,5 @@
 if(NOT IOSSIM)
-	retuen
+	return()
 endif()
 # https://github.com/guillemj/libmd
 #
