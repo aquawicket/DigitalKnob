@@ -166,17 +166,19 @@ while :
 		sudo apt-get -y install cmake
 		sudo apt-get -y install gcc
 		sudo apt-get -y install g++
+		
 		mkdir $DKPATH/DKApps/$APP/$OS
 		mkdir $DKPATH/DKApps/$APP/$OS/Debug
 		cd $DKPATH/DKApps/$APP/$OS/Debug
 		cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER="$GCC_PATH" -DCMAKE_CXX_COMPILER="$GPP_PATH" -DDEBUG=ON -DREBUILDALL=ON -DSTATIC=ON $DKPATH
 		make $APP
 		chmod +x $DKPATH/DKApps/$APP/$OS/Debug/$APP
+		
 		mkdir $DKPATH/DKApps/$APP/$OS/Release
 		cd $DKPATH/DKApps/$APP/$OS/Release
 		cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER="$GCC_PATH" -DCMAKE_CXX_COMPILER="$GPP_PATH" -DRELEASE=ON -DREBUILDALL=ON -DSTATIC=ON $DKPATH
-		make ${APP}
-		chmod +x $DKPATH/DKApps/$APP/$OS/Release/${APP}
+		make $APP
+		chmod +x $DKPATH/DKApps/$APP/$OS/Release/$APP
 	fi
 
     unset APP
