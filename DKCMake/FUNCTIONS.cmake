@@ -1146,96 +1146,87 @@ function(WIN64_RELEASE_MSYS str)
 endfunction()
 
 
-function(WIN_BASH str)
-	if(WIN AND QUEUE_BUILD)
-		string(REPLACE ";" "\n"	str "${ARGV}")
-		string(REPLACE ":/Users" "/Users" str ${str})
-		file(WRITE ${MSYS}/dkscript.tmp ${str})
-		message(STATUS "WROTE( ${str} )")
-		message(STATUS "BASH -> ${str}")
-		execute_process(COMMAND cmd /c ${MSYS}/bin/bash ${MSYS}/dkscript.tmp WORKING_DIRECTORY ${MSYS})
-	endif()
-endfunction()
-
-function(WIN_DEBUG_BASH str)
-	if(WIN AND DEBUG)
-		WIN_BASH(${ARGV})
-	endif()
-endfunction()
-
-function(WIN_RELEASE_BASH str)
-	if(WIN AND RELEASE)
-		WIN_BASH(${ARGV})
-	endif()
-endfunction()
-
-
-function(WIN32_BASH str)
-	if(WIN_32)
-		WIN_BASH(${ARGV})
-	endif()
-endfunction()
-
-
-function(WIN32_DEBUG_BASH str)
-	if(WIN_32 AND DEBUG)
-		WIN_BASH(${ARGV})
-	endif()
-endfunction()
-
-
-function(WIN32_RELEASE_BASH str)
-	if(WIN_32 AND RELEASE)
-		WIN_BASH(${ARGV})
-	endif()
-endfunction()
-
-
-function(WIN64_BASH str)
-	if(WIN_64)
-		WIN_BASH(${ARGV})
-	endif()
-endfunction()
-
-
-function(WIN64_DEBUG_BASH str)
-	if(WIN_64 AND DEBUG)
-		WIN_BASH(${ARGV})
-	endif()
-endfunction()
-
-
-function(WIN64_RELEASE_BASH str)
-	if(WIN_64 AND RELEASE)
-		WIN_BASH(${ARGV})
-	endif()
-endfunction()
-
-
-function(ANDROID_BASH str)
-	if(ANDROID AND QUEUE_BUILD)
-		string(REPLACE ":/" "/" str ${str})
-		file(WRITE ${MSYS}/dkscript.tmp ${str})
-		message(STATUS "BASH-> ${str}")
-		DKEXECUTE_PROCESS(${MSYS}/bin/bash ${MSYS}/dkscript.tmp WORKING_DIRECTORY ${MSYS})
-	endif()
-endfunction()
-
-
-function(ANDROID32_BASH str)
-	if(ANDROID_32)
-		set(str ${str} ${ARGN})
-		ANDROID_BASH(${ARGV})
-	endif()
-endfunction()
-
-
-function(ANDROID64_BASH str)
-	if(ANDROID_64)
-		set(str ${str} ${ARGN})
-		ANDROID_BASH(${ARGV})
-	endif()
-endfunction()
+#function(WIN_BASH str)
+#	if(WIN AND QUEUE_BUILD)
+#		string(REPLACE ";" "\n"	str "${ARGV}")
+#		string(REPLACE ":/Users" "/Users" str ${str})
+#		file(WRITE ${MSYS}/dkscript.tmp ${str})
+#		message(STATUS "WROTE( ${str} )")
+#		message(STATUS "BASH -> ${str}")
+#		execute_process(COMMAND cmd /c ${MSYS}/bin/bash ${MSYS}/dkscript.tmp WORKING_DIRECTORY ${MSYS})
+#	endif()
+#endfunction()
+#
+#function(WIN_DEBUG_BASH str)
+#	if(WIN AND DEBUG)
+#		WIN_BASH(${ARGV})
+#	endif()
+#endfunction()
+#
+#function(WIN_RELEASE_BASH str)
+#	if(WIN AND RELEASE)
+#		WIN_BASH(${ARGV})
+#	endif()
+#endfunction()
+#
+#function(WIN32_BASH str)
+#	if(WIN_32)
+#		WIN_BASH(${ARGV})
+#	endif()
+#endfunction()
+#
+#function(WIN32_DEBUG_BASH str)
+#	if(WIN_32 AND DEBUG)
+#		WIN_BASH(${ARGV})
+#	endif()
+#endfunction()
+#
+#function(WIN32_RELEASE_BASH str)
+#	if(WIN_32 AND RELEASE)
+#		WIN_BASH(${ARGV})
+#	endif()
+#endfunction()
+#
+#function(WIN64_BASH str)
+#	if(WIN_64)
+#		WIN_BASH(${ARGV})
+#	endif()
+#endfunction()
+#
+#function(WIN64_DEBUG_BASH str)
+#	if(WIN_64 AND DEBUG)
+#
+#	endif()
+#endfunction()
+#
+#function(WIN64_RELEASE_BASH str)
+#	if(WIN_64 AND RELEASE)
+#		WIN_BASH(${ARGV})
+#	endif()
+#endfunction()
+#
+#function(ANDROID_BASH str)
+#	if(ANDROID AND QUEUE_BUILD)
+#		string(REPLACE ":/" "/" str ${str})
+#		file(WRITE ${MSYS}/dkscript.tmp ${str})
+#		message(STATUS "BASH-> ${str}")
+#		DKEXECUTE_PROCESS(${MSYS}/bin/bash ${MSYS}/dkscript.tmp WORKING_DIRECTORY ${MSYS})
+#	endif()
+#endfunction()
+#
+#function(ANDROID32_BASH str)
+#	if(ANDROID_32)
+#		set(str ${str} ${ARGN})
+#		ANDROID_BASH(${ARGV})
+#	endif()
+#endfunction()
+#
+#function(ANDROID64_BASH str)
+#	if(ANDROID_64)
+#		set(str ${str} ${ARGN})
+#		ANDROID_BASH(${ARGV})
+#	endif()
+#endfunction()
 
 
 ################### COMMAND ########################
@@ -1292,27 +1283,23 @@ function(WIN_COMMAND)
 	endif()	
 endfunction()
 
-
 function(WIN32_COMMAND)
-	if(WIN_32)
-		WIN_COMMAND(${ARGV})
+	if(WIN_32 AND QUEUE_BUILD)
+		DKCOMMAND(${ARGV})
 	endif()	
 endfunction()
-
 
 function(WIN32_DEBUG_COMMAND)
-	if(WIN_32 AND DEBUG)
-		WIN_COMMAND(${ARGV})
+	if(WIN_32 AND DEBUG AND QUEUE_BUILD)
+		DKCOMMAND(${ARGV})
 	endif()	
 endfunction()
-
 
 function(WIN32_RELEASE_COMMAND)
-	if(WIN_32 AND RELEASE)
-		WIN_COMMAND(${ARGV})
+	if(WIN_32 AND RELEASE AND QUEUE_BUILD)
+		DKCOMMAND(${ARGV})
 	endif()	
 endfunction()
-
 
 function(WIN64_COMMAND)
 	if(WIN_64)
@@ -1320,13 +1307,11 @@ function(WIN64_COMMAND)
 	endif()
 endfunction()
 
-
 function(WIN64_DEBUG_COMMAND)
 	if(WIN_64 AND DEBUG)
 		WIN_COMMAND(${ARGV})
 	endif()	
 endfunction()
-
 
 function(WIN64_RELEASE_COMMAND)
 	if(WIN_64 AND RELEASE)
@@ -1342,13 +1327,11 @@ function(MAC_COMMAND)
 	endif()
 endfunction()
 
-
 function(MAC_DEBUG_COMMAND)
 	if(MAC AND DEBUG)
 		MAC_COMMAND(${ARGV})
 	endif()
 endfunction()
-
 
 function(MAC_RELEASE_COMMAND)
 	if(MAC AND RELEASE)
@@ -1356,13 +1339,11 @@ function(MAC_RELEASE_COMMAND)
 	endif()
 endfunction()
 
-
 function(MAC32_COMMAND)
 	if(MAC_32)
 		MAC_COMMAND(${ARGV})
 	endif()
 endfunction()
-
 
 function(MAC32_DEBUG_COMMAND)
 	if(MAC_32 AND DEBUG)
@@ -1370,13 +1351,11 @@ function(MAC32_DEBUG_COMMAND)
 	endif()
 endfunction()
 
-
 function(MAC32_RELEASE_COMMAND)
 	if(MAC_32 AND RELEASE)
 		MAC_COMMAND(${ARGV})
 	endif()
 endfunction()
-
 
 function(MAC64_COMMAND)
 	if(MAC_64)
@@ -1384,13 +1363,11 @@ function(MAC64_COMMAND)
 	endif()
 endfunction()
 
-
 function(MAC64_DEBUG_COMMAND)
 	if(MAC_64 AND DEBUG)
 		MAC_COMMAND(${ARGV})
 	endif()
 endfunction()
-
 
 function(MAC64_RELEASE_COMMAND)
 	if(MAC_64 AND RELEASE)
@@ -1406,13 +1383,11 @@ function(IOS_COMMAND)
 	endif()
 endfunction()
 
-
 function(IOS_DEBUG_COMMAND)
 	if(IOS AND DEBUG)
 		IOS_COMMAND(${ARGV})
 	endif()
 endfunction()
-
 
 function(IOS_RELEASE_COMMAND)
 	if(IOS AND RELEASE)
@@ -1420,13 +1395,11 @@ function(IOS_RELEASE_COMMAND)
 	endif()
 endfunction()
 
-
 function(IOS32_COMMAND)
 	if(IOS_32)
 		IOS_COMMAND(${ARGV})
 	endif()
 endfunction()
-
 
 function(IOS64_COMMAND)
 	if(IOS_64)
@@ -1442,13 +1415,11 @@ function(IOSSIM_COMMAND)
 	endif()
 endfunction()
 
-
 function(IOSSIM_DEBUG_COMMAND)
 	if(IOSSIM AND DEBUG)
 		IOSSIM_COMMAND(${ARGV})
 	endif()
 endfunction()
-
 
 function(IOSSIM_RELEASE_COMMAND)
 	if(IOSSIM AND RELEASE)
@@ -1456,13 +1427,11 @@ function(IOSSIM_RELEASE_COMMAND)
 	endif()
 endfunction()
 
-
 function(IOSSIM32_COMMAND)
 	if(IOSSIM_32)
 		IOSSIM_COMMAND(${ARGV})
 	endif()
 endfunction()
-
 
 function(IOSSIM64_COMMAND)
 	if(IOSSIM_64)
@@ -1478,13 +1447,11 @@ function(LINUX_COMMAND)
 	endif()
 endfunction()
 
-
 function(LINUX_DEBUG_COMMAND)
 	if(LINUX AND DEBUG)
 		LINUX_COMMAND(${ARGV})
 	endif()
 endfunction()
-
 
 function(LINUX_RELEASE_COMMAND)
 	if(LINUX AND RELEASE)
@@ -1492,13 +1459,11 @@ function(LINUX_RELEASE_COMMAND)
 	endif()
 endfunction()
 
-
 function(LINUX32_COMMAND)
 	if(LINUX_32)
 		LINUX_COMMAND(${ARGV})
 	endif()
 endfunction()
-
 
 function(LINUX32_DEBUG_COMMAND)
 	if(LINUX_32 AND DEBUG)
@@ -1506,13 +1471,11 @@ function(LINUX32_DEBUG_COMMAND)
 	endif()
 endfunction()
 
-
 function(LINUX32_RELEASE_COMMAND)
 	if(LINUX_32 AND RELEASE)
 		LINUX_COMMAND(${ARGV})
 	endif()
 endfunction()
-
 
 function(LINUX64_COMMAND)
 	if(LINUX_64)
@@ -1520,13 +1483,11 @@ function(LINUX64_COMMAND)
 	endif()
 endfunction()
 
-
 function(LINUX64_DEBUG_COMMAND)
 	if(LINUX_64 AND DEBUG)
 		LINUX_COMMAND(${ARGV})
 	endif()
 endfunction()
-
 
 function(LINUX64_RELEASE_COMMAND)
 	if(LINUX_64 AND RELEASE)
@@ -1542,13 +1503,11 @@ function(RASPBERRY_COMMAND)
 	endif()
 endfunction()
 
-
 function(RASPBERRY_DEBUG_COMMAND)
 	if(RASPBERRY AND DEBUG)
 		RASPBERRY_COMMAND(${ARGV})
 	endif()
 endfunction()
-
 
 function(RASPBERRY_RELEASE_COMMAND)
 	if(RASPBERRY AND RELEASE)
@@ -1556,13 +1515,11 @@ function(RASPBERRY_RELEASE_COMMAND)
 	endif()
 endfunction()
 
-
 function(RASPBERRY32_COMMAND)
 	if(RASPBERRY_32)
 		RASPBERRY_COMMAND(${ARGV})
 	endif()
 endfunction()
-
 
 function(RASPBERRY32_DEBUG_COMMAND)
 	if(RASPBERRY_32 AND DEBUG)
@@ -1570,13 +1527,11 @@ function(RASPBERRY32_DEBUG_COMMAND)
 	endif()
 endfunction()
 
-
 function(RASPBERRY32_RELEASE_COMMAND)
 	if(RASPBERRY_32 AND RELEASE)
 		RASPBERRY_COMMAND(${ARGV})
 	endif()
 endfunction()
-
 
 function(RASPBERRY64_COMMAND)
 	if(RASPBERRY_64)
@@ -1584,13 +1539,11 @@ function(RASPBERRY64_COMMAND)
 	endif()
 endfunction()
 
-
 function(RASPBERRY64_DEBUG_COMMAND)
 	if(RASPBERRY_64 AND DEBUG)
 		RASPBERRY_COMMAND(${ARGV})
 	endif()
 endfunction()
-
 
 function(RASPBERRY64_RELEASE_COMMAND)
 	if(RASPBERRY_64 AND RELEASE)
@@ -1598,13 +1551,11 @@ function(RASPBERRY64_RELEASE_COMMAND)
 	endif()
 endfunction()
 
-
 function(ANDROID_COMMAND)
 	if(ANDROID AND QUEUE_BUILD)
 		DKCOMMAND(${ARGV})
 	endif()
 endfunction()
-
 
 function(ANDROID_DEBUG_COMMAND)
 	if(ANDROID AND DEBUG)
@@ -1612,13 +1563,11 @@ function(ANDROID_DEBUG_COMMAND)
 	endif()
 endfunction()
 
-
 function(ANDROID_RELEASE_COMMAND)
 	if(ANDROID AND RELEASE)
 		ANDROID_COMMAND(${ARGV})
 	endif()
 endfunction()
-
 
 function(ANDROID32_COMMAND)
 	if(ANDROID_32)
@@ -1626,13 +1575,11 @@ function(ANDROID32_COMMAND)
 	endif()
 endfunction()
 
-
 function(ANDROID32_DEBUG_COMMAND)
 	if(ANDROID_32 AND DEBUG)
 		ANDROID_COMMAND(${ARGV})
 	endif()
 endfunction()
-
 
 function(ANDROID32_RELEASE_COMMAND)
 	if(ANDROID_32 AND RELEASE)
@@ -1640,13 +1587,11 @@ function(ANDROID32_RELEASE_COMMAND)
 	endif()
 endfunction()
 
-
 function(ANDROID64_COMMAND)
 	if(ANDROID_64)
 		ANDROID_COMMAND(${ARGV})
 	endif()
 endfunction()
-
 
 function(ANDROID64_DEBUG_COMMAND)
 	if(ANDROID_64 AND DEBUG)
@@ -1654,20 +1599,12 @@ function(ANDROID64_DEBUG_COMMAND)
 	endif()
 endfunction()
 
-
 function(ANDROID64_RELEASE_COMMAND)
 	if(ANDROID_64 AND RELEASE)
 		ANDROID_COMMAND(${ARGV})
 	endif()
 endfunction()
 
-
-##################### MinGW Build ####################
-function(WIN_MINGW_DEBUG arg arg2)
-	if(WIN AND DEBUG AND QUEUE_BUILD)
-		#TODO
-	endif()
-endfunction()
 
 
 
@@ -1702,7 +1639,6 @@ function(WIN_VS_RELEASE folder sln_file)
 	endif()
 endfunction()
 
-
 function(WIN_VS)
 	if(WIN)
 		WIN_VS_DEBUG(${ARGV})
@@ -1710,20 +1646,17 @@ function(WIN_VS)
 	endif()
 endfunction()
 
-
 function(WIN32_VS_DEBUG)
 	if(WIN_32)
 		WIN_VS_DEBUG(${ARGV})
 	endif()
 endfunction()
 
-
 function(WIN32_VS_RELEASE)
 	if(WIN_32)
 		WIN_VS_RELEASE(${ARGV})
 	endif()
 endfunction()
-
 
 function(WIN32_VS)
 	if(WIN_32)
@@ -1732,20 +1665,17 @@ function(WIN32_VS)
 	endif()
 endfunction()
 
-
 function(WIN64_VS_DEBUG)
 	if(WIN_64)
 		WIN_VS_DEBUG(${ARGV})
 	endif()
 endfunction()
 
-
 function(WIN64_VS_RELEASE)
 	if(WIN_64)
 		WIN_VS_RELEASE(${ARGV})
 	endif()
 endfunction()
-
 
 function(WIN64_VS)
 	if(WIN64)
@@ -1754,14 +1684,11 @@ function(WIN64_VS)
 	endif()
 endfunction()
 
-
 function(ANDROID_VS_DEBUG folder sln_file)
 	if(ANDROID AND DEBUG AND QUEUE_BUILD)
 		if(NOT EXISTS ${3RDPARTY}/${folder}/${OS}/${sln_file})
 			message(FATAL_ERROR "CANNOT FIND: ${3RDPARTY}/${folder}/${OS}/${sln_file}" )
 		endif()
-
-		
 		if(${ARGC} GREATER 2)
 			
 			set(EXECUTE_COMMAND ${MSBUILD} ${3RDPARTY}/${folder}/${OS}/${sln_file} /t:${ARGV2} /p:Configuration=Debug)
@@ -1778,10 +1705,7 @@ function(ANDROID_VS_RELEASE folder sln_file)
 		if(NOT EXISTS ${3RDPARTY}/${folder}/${OS}/${sln_file})
 			message(FATAL_ERROR "CANNOT FIND: ${3RDPARTY}/${folder}/${OS}/${sln_file}" )
 		endif()
-
-		
 		if(${ARGC} GREATER 2)
-			
 			set(EXECUTE_COMMAND ${MSBUILD} ${3RDPARTY}/${folder}/${OS}/${sln_file} /t:${ARGV2} /p:Configuration=Release)
 		else()
 			set(EXECUTE_COMMAND ${MSBUILD} ${3RDPARTY}/${folder}/${OS}/${sln_file} /p:Configuration=Release)
@@ -1790,7 +1714,6 @@ function(ANDROID_VS_RELEASE folder sln_file)
 	endif()
 endfunction()
 
-
 function(ANDROID_VS)
 	if(ANDROID)
 		ANDROID_VS_DEBUG(${ARGV})
@@ -1798,20 +1721,17 @@ function(ANDROID_VS)
 	endif()
 endfunction()
 
-
 function(ANDROID32_VS_DEBUG)
 	if(ANDROID_32)
 		ANDROID_VS_DEBUG(${ARGV})
 	endif()
 endfunction()
 
-
 function(ANDROID32_VS_RELEASE)
 	if(ANDROID_32)
 		ANDROID_VS_RELEASE(${ARGV})
 	endif()
 endfunction()
-
 
 function(ANDROID32_VS)
 	if(ANDROID_32)
@@ -1820,20 +1740,17 @@ function(ANDROID32_VS)
 	endif()
 endfunction()
 
-
 function(ANDROID64_VS_DEBUG)
 	if(ANDROID_64)
 		ANDROID_VS_DEBUG(${ARGV})
 	endif()
 endfunction()
 
-
 function(ANDROID64_VS_RELEASE)
 	if(ANDROID_64)
 		ANDROID_VS_RELEASE(${ARGV})
 	endif()
 endfunction()
-
 
 function(ANDROID64_VS)
 	if(ANDROID64)
@@ -2041,7 +1958,6 @@ function(ANDROID_NDK_DEBUG folder)
 	endif()
 endfunction()
 
-
 function(ANDROID_NDK_RELEASE folder)
 	if(ANDROID AND RELEASE AND QUEUE_BUILD)
 		if(CMAKE_HOST_WIN32)
@@ -2053,7 +1969,6 @@ function(ANDROID_NDK_RELEASE folder)
 	endif()
 endfunction()
 
-
 function(ANDROID_NDK)
 	if(ANDROID)
 		ANDROID_NDK_DEBUG(${ARGV})
@@ -2061,13 +1976,11 @@ function(ANDROID_NDK)
 	endif()
 endfunction()
 
-
 function(ANDROID32_NDK_DEBUG)
 	if(ANDROID_32)
 		ANDROID_NDK_DEBUG(${ARGV})
 	endif()
 endfunction()
-
 
 function(ANDROID32_NDK_RELEASE)
 	if(ANDROID_32)
@@ -2075,13 +1988,11 @@ function(ANDROID32_NDK_RELEASE)
 	endif()
 endfunction()
 
-
 function(ANDROID64_NDK_DEBUG)
 	if(ANDROID_64)
 		ANDROID_NDK_DEBUG(${ARGV})
 	endif()
 endfunction()
-
 
 function(ANDROID64_NDK_RELEASE)
 	if(ANDROID_64)
@@ -2143,7 +2054,6 @@ function(DKRELEASE_LIB lib_path)
 	endif()
 endfunction()
 
-
 function(WIN_LIB)
 	if(WIN)
 		DK_LIB(${ARGV})
@@ -2191,7 +2101,6 @@ function(WIN64_DEBUG_LIB)
 		DKDEBUG_LIB(${ARGV})
 	endif()
 endfunction()
-
 
 function(WIN64_RELEASE_LIB)
 	if(WIN_64)
@@ -2260,13 +2169,13 @@ function(MAC_LIB)
 endfunction() 
 
 function(MAC_DEBUG_LIB)
-	if(MAC)
+	if(MAC AND DEBUG)
 		DKDEBUG_LIB(${ARGV})
 	endif()
 endfunction()
 
 function(MAC_RELEASE_LIB)
-	if(MAC)
+	if(MAC AND RELEASE)
 		DKRELEASE_LIB(${ARGV})
 	endif()
 endfunction()
@@ -2278,13 +2187,13 @@ function(MAC32_LIB)
 endfunction() 
 
 function(MAC32_DEBUG_LIB)
-	if(MAC_32)
+	if(MAC_32 AND DEBUG)
 		DKDEBUG_LIB(${ARGV})
 	endif()
 endfunction()
 
 function(MAC32_RELEASE_LIB)
-	if(MAC_32)
+	if(MAC_32 AND RELEASE)
 		DKRELEASE_LIB(${ARGV})
 	endif()
 endfunction()
@@ -2296,13 +2205,13 @@ function(MAC64_LIB)
 endfunction() 
 
 function(MAC64_DEBUG_LIB)
-	if(MAC_64)
+	if(MAC_64 AND DEBUG)
 		DKDEBUG_LIB(${ARGV})
 	endif()
 endfunction()
 
 function(MAC64_RELEASE_LIB)
-	if(MAC_64)
+	if(MAC_64 AND RELEASE)
 		DKRELEASE_LIB(${ARGV})
 	endif()
 endfunction()
@@ -2314,31 +2223,31 @@ function(IOS_LIB)
 endfunction() 
 
 function(IOS_DEBUG_LIB)
-	if(IOS AND NOT IOSSIM)
+	if(IOS AND DEBUG AND NOT IOSSIM)
 		DKDEBUG_LIB(${ARGV})
 	endif()
 endfunction()
 
 function(IOS_RELEASE_LIB)
-	if(IOS AND NOT IOSSIM)
+	if(IOS AND RELEASE AND NOT IOSSIM)
 		DKRELEASE_LIB(${ARGV})
 	endif()
 endfunction()
 
 function(IOS32_LIB)
-	if(IOS_32)
+	if(IOS_32 AND NOT IOSSIM)
 		DK_LIB(${ARGV})
 	endif()
 endfunction() 
 
 function(IOS32_DEBUG_LIB)
-	if(IOS_32)
+	if(IOS_32 AND DEBUG AND NOT IOSSIM)
 		DKDEBUG_LIB(${ARGV})
 	endif()
 endfunction()
 
 function(IOS32_RELEASE_LIB)
-	if(IOS_32)
+	if(IOS_32 AND RELEASE AND NOT IOSSIM)
 		DKRELEASE_LIB(${ARGV})
 	endif()
 endfunction()
@@ -2350,13 +2259,13 @@ function(IOS64_LIB)
 endfunction() 
 
 function(IOS64_DEBUG_LIB)
-	if(IOS_64)
+	if(IOS_64 AND DEBUG)
 		DKDEBUG_LIB(${ARGV})
 	endif()
 endfunction()
 
 function(IOS64_RELEASE_LIB)
-	if(IOS_64)
+	if(IOS_64 AND RELEASE)
 		DKRELEASE_LIB(${ARGV})
 	endif()
 endfunction()
@@ -2368,13 +2277,13 @@ function(IOSSIM_LIB)
 endfunction() 
 
 function(IOSSIM_DEBUG_LIB)
-	if(IOSSIM)
+	if(IOSSIM AND DEBUG)
 		DKDEBUG_LIB(${ARGV})
 	endif()
 endfunction()
 
 function(IOSSIM_RELEASE_LIB)
-	if(IOSSIM)
+	if(IOSSIM AND RELEASE)
 		DKRELEASE_LIB(${ARGV})
 	endif()
 endfunction()
@@ -2386,13 +2295,13 @@ function(IOSSIM32_LIB)
 endfunction()
 
 function(IOSSIM32_DEBUG_LIB)
-	if(IOSSIM_32)
+	if(IOSSIM_32 AND DEBUG)
 		DKDEBUG_LIB(${ARGV})
 	endif()
 endfunction()
 
 function(IOSSIM32_RELEASE_LIB)
-	if(IOSSIM_32)
+	if(IOSSIM_32 AND RELEASE)
 		DKRELEASE_LIB(${ARGV})
 	endif()
 endfunction()
@@ -2584,7 +2493,7 @@ endfunction()
 
 #######################
 function(APPLE_INCLUDE)
-	if(CMAKE_HOST_APPLE)
+	if(MAC OR IOS OR IOSSIM)
 		DKINCLUDE(${ARGV})
 	endif()
 endfunction()
@@ -2676,14 +2585,14 @@ endfunction()
 
 
 function(LINUX_DEBUG_INCLUDE)
-	if(DEBUG)
+	if(LINUX AND DEBUG)
 		DKINCLUDE(${ARGV})
 	endif()
 endfunction()
 
 
 function(LINUX_RELEASE_INCLUDE)
-	if(RELEASE)
+	if(LINUX AND RELEASE)
 		DKINCLUDE(${ARGV})
 	endif()
 endfunction()
