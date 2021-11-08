@@ -126,7 +126,7 @@ foreach(plugin ${dkdepend_list})
 		
 		
 		## Prebuild Plugins switch
-		if(LINUX OR IOSSIM)
+		if(TRUE)
 			DKSET(CURRENT_DIR ${plugin_path}/${OS})
 			dk_makeDirectory(${CURRENT_DIR})
 			if(WIN_32)
