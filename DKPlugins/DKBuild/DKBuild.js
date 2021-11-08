@@ -330,21 +330,15 @@ function DKBuild_DoResults(){
 	////// WIN32 /////
 	if(OS === "win32"){
 		DKBuild_ValidateVC2019()
-		if(LEVEL === "Rebuild" || LEVEL === "RebuildAll"){
-			CPP_DKFile_Delete(app_path+OS+"/CMakeFiles")
-			CPP_DKFile_Delete(app_path+OS+"/"+APP+".dir")
-			CPP_DKFile_Delete(app_path+OS+"/Win32")
-			CPP_DKFile_Delete(app_path+OS+"/CMakeCache.txt")	
-		}
+		//if(LEVEL === "Rebuild" || LEVEL === "RebuildAll"){
+		//	CPP_DKFile_Delete(app_path+OS+"/CMakeFiles")
+		//	CPP_DKFile_Delete(app_path+OS+"/"+APP+".dir")
+		//	CPP_DKFile_Delete(app_path+OS+"/Win32")
+		//	CPP_DKFile_Delete(app_path+OS+"/CMakeCache.txt")	
+		//}
 		CPP_DKFile_MkDir(app_path+OS)
 		CPP_DKFile_ChDir(app_path+OS)
-		
-		const command = CMAKE+" -G \"Visual Studio 16 2019\" -A Win32 "+cmake_string+DIGITALKNOB+"DK"
-		console.log("COMMAND -->  "+command)
-		let rtvalue = CPP_DK_Execute(command)
-		if(rtvalue.indexOf("errors occurred!") > -1) 
-			return
-		
+		let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Visual Studio 16 2019\" -A Win32 "+cmake_string+DIGITALKNOB+"DK")
 		if(TYPE === "Debug" || TYPE === "ALL"){
 			CPP_DKFile_Rename(app_path+OS+"/Debug/"+APP+".exe", app_path+OS+"/Debug/"+APP+"_OLD.exe", true)	
 			CPP_DK_Execute(MSBUILD+" "+app_path+OS+"/"+APP+".sln /p:Configuration=Debug")
@@ -375,8 +369,6 @@ function DKBuild_DoResults(){
 		CPP_DKFile_MkDir(app_path+OS)
 		CPP_DKFile_ChDir(app_path+OS)
 		let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Visual Studio 16 2019\" -A x64 "+cmake_string+DIGITALKNOB+"DK")
-		if(rtvalue.indexOf("errors occurred!") > -1) 
-			return
 		
 		if(TYPE === "Debug" || TYPE === "ALL"){
 			CPP_DKFile_Rename(app_path+OS+"/Debug/"+APP+".exe", app_path+OS+"/Debug/"+APP+"_OLD.exe", true)
@@ -407,8 +399,6 @@ function DKBuild_DoResults(){
 		CPP_DKFile_MkDir(app_path+OS)
 		CPP_DKFile_ChDir(app_path+OS)
 		let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Xcode\" -DCMAKE_OSX_ARCHITECTURES=x86_64 "+cmake_string+DIGITALKNOB+"DK")
-		if(rtvalue.indexOf("errors occurred!") > -1){ return }
-		
 		if(TYPE === "Debug" || TYPE === "ALL"){
 			//if(CPP_DKFile_Exists(app_path+OS+"/Debug/"+APP+".app"))
 			//	CPP_DKFile_Rename(app_path+OS+"/Debug/"+APP+".app", app_path+OS+"/Debug/"+APP+"_OLD.app", true)
@@ -499,8 +489,6 @@ function DKBuild_DoResults(){
 		CPP_DKFile_MkDir(app_path+OS)
 		CPP_DKFile_ChDir(app_path+OS)
 		let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Xcode\" "+cmake_string+" -DCMAKE_TOOLCHAIN_FILE="+DIGITALKNOB+"DK/DKCMake/ios.toolchain.cmake -DIOS_PLATFORM=OS -DSDK_VERSION=15.0 -DDEPLOYMENT_TARGET=13.0 "+DIGITALKNOB+"DK")
-		if(rtvalue.indexOf("errors occurred!") > -1) 
-			return 
 		if(TYPE === "Debug" || TYPE === "ALL")
 			//CPP_DKFile_Rename(app_path+OS+"/Debug/"+APP+".app", app_path+OS+"/Debug/"+APP+"_OLD.app", true)
 			//CPP_DK_Execute("xcodebuild -target "+APP+" -configuration Debug build -arch \"armv7 armv7s\"")
@@ -517,8 +505,6 @@ function DKBuild_DoResults(){
 		CPP_DKFile_MkDir(app_path+OS)
 		CPP_DKFile_ChDir(app_path+OS)
 		let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Xcode\" "+cmake_string+" -DCMAKE_TOOLCHAIN_FILE="+DIGITALKNOB+"DK/DKCMake/ios.toolchain.cmake -DPLATFORM=OS64 -DSDK_VERSION=15.0 -DDEPLOYMENT_TARGET=13.0 "+DIGITALKNOB+"DK")
-		if(rtvalue.indexOf("errors occurred!") > -1)
-			return
 		if(TYPE === "Debug" || TYPE === "ALL")
 			//CPP_DKFile_Rename(app_path+OS+"/Debug/"+APP+".app", app_path+OS+"/Debug/"+APP+"_OLD.app", true)
 			CPP_DK_Execute("xcodebuild -target "+APP+" -configuration Debug build")
@@ -533,8 +519,6 @@ function DKBuild_DoResults(){
 		CPP_DKFile_MkDir(app_path+OS)
 		CPP_DKFile_ChDir(app_path+OS)
 		let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Xcode\" "+cmake_string+" -DCMAKE_TOOLCHAIN_FILE="+DIGITALKNOB+"DK/DKCMake/ios.toolchain.cmake -DIOS_PLATFORM=SIMULATOR -DSDK_VERSION=15.0 -DDEPLOYMENT_TARGET=13.0 "+DIGITALKNOB+"DK")
-		if(rtvalue.indexOf("errors occurred!") > -1) 
-			return
 		if(TYPE === "Debug" || TYPE === "ALL")
 			//CPP_DKFile_Rename(app_path+OS+"/Debug/"+APP+".app", app_path+OS+"/Debug/"+APP+"_OLD.app", true)
 			//CPP_DK_Execute("xcodebuild -target "+APP+" -configuration Debug build -sdk iphonesimulator11.2")
@@ -551,8 +535,6 @@ function DKBuild_DoResults(){
 		CPP_DKFile_MkDir(app_path+OS)
 		CPP_DKFile_ChDir(app_path+OS)
 		let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Xcode\" "+cmake_string+" -DCMAKE_TOOLCHAIN_FILE="+DIGITALKNOB+"DK/DKCMake/ios.toolchain.cmake -DPLATFORM=SIMULATOR64 -DSDK_VERSION=15.0 -DDEPLOYMENT_TARGET=13.0 "+DIGITALKNOB+"DK")
-		if(rtvalue.indexOf("errors occurred!") > -1) 
-			return
 		if(TYPE === "Debug" || TYPE === "ALL")
 			//CPP_DKFile_Rename(app_path+OS+"/Debug/"+APP+".app", app_path+OS+"/Debug/"+APP+"_OLD.app", true)
 			//CPP_DK_Execute("xcodebuild -target "+APP+" -configuration Debug build -sdk iphonesimulator11.2")
@@ -573,49 +555,19 @@ function DKBuild_DoResults(){
 			CPP_DKFile_MkDir(app_path+OS+"/Debug")
 			CPP_DKFile_ChDir(app_path+OS+"/Debug")
 			let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DIGITALKNOB+"DK")
-			if(rtvalue.indexOf("errors occurred!") > -1) 
-				return
-			CPP_DKFile_Rename(app_path+OS+"/Debug/"+APP, app_path+OS+"/Debug/"+APP+"_OLD", true)
+			//CPP_DKFile_Rename(app_path+OS+"/Debug/"+APP, app_path+OS+"/Debug/"+APP+"_OLD", true)
 			CPP_DK_Execute("make "+APP)
-			
-			/*
 			//CPP_DK_Execute("chmod +x "+app_path+OS+"/Debug/"+APP)
-			//Create .desktop file
-			let string = "[Desktop Entry]\n"
-			string += "Encoding=UTF-8\n"
-			string += "Version=1.0\n"
-			string += "Type=Application\n"
-			string += "Terminal=true\n"
-			string += "Name="+APP+"\n"
-			string += "Exec="+app_path+OS+"/Debug/"+APP+"\n"
-			string += "Icon="+app_path+"icons/icon.png\n"
-			CPP_DKFile_StringToFile(string, app_path+OS+"/Debug/"+APP+".desktop")
-			*/
+
 		}
 		if(TYPE === "Release" || TYPE === "ALL"){
 			cmake_string = cmake_string.replace("-DDEBUG=ON ", "");
 			CPP_DKFile_MkDir(app_path+OS+"/Release")
 			CPP_DKFile_ChDir(app_path+OS+"/Release")
 			let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DIGITALKNOB+"DK")
-			if(rtvalue.indexOf("errors occurred!") > -1) 
-				return
-			CPP_DKFile_Rename(app_path+OS+"/Release/"+APP, app_path+OS+"/Release/"+APP+"_OLD", true)
+			//CPP_DKFile_Rename(app_path+OS+"/Release/"+APP, app_path+OS+"/Release/"+APP+"_OLD", true)
 			CPP_DK_Execute("make "+APP)
-			
 			//CPP_DK_Execute("chmod +x "+app_path+OS+"/Release/"+APP)
-			/*
-			//Create .desktop file
-			let string = "[Desktop Entry]\n"
-			string += "Encoding=UTF-8\n"
-			string += "Version=1.0\n"
-			string += "Type=Application\n"
-			string += "Terminal=true\n"
-			string += "Name="+APP+"\n"
-			string += "Exec="+app_path+OS+"/Release/"+APP+"\n"
-			string += "Icon="+app_path+"icons/icon.png\n"
-			CPP_DKFile_StringToFile(string, app_path+OS+"/Release/"+APP+".desktop")
-			CPP_DK_Execute("desktop-file-install --dir=$HOME/.local/share/applications "+APP+".desktop")
-			*/
 		}
 	}
 	
@@ -628,52 +580,19 @@ function DKBuild_DoResults(){
 			cmake_string = cmake_string.replace("-DRELEASE=ON ", "");
 			CPP_DKFile_MkDir(app_path+OS+"/Debug")
 			CPP_DKFile_ChDir(app_path+OS+"/Debug")
-			console.log(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DIGITALKNOB+"DK")
 			let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DIGITALKNOB+"DK")
-			if(rtvalue.indexOf("errors occurred!") > -1) 
-				return
-			CPP_DKFile_Rename(app_path+OS+"/Debug/"+APP, app_path+OS+"/Debug/"+APP+"_OLD", true)
+			//CPP_DKFile_Rename(app_path+OS+"/Debug/"+APP, app_path+OS+"/Debug/"+APP+"_OLD", true)
 			CPP_DK_Execute("make "+APP)
-			
-			/*
-			//CPP_DK_Execute("chmod +x "+app_path+OS+"/Debug/"+APP+"")
-			//Create .desktop file
-			let string = "[Desktop Entry]\n"
-			string += "Encoding=UTF-8\n"
-			string += "Version=1.0\n"
-			string += "Type=Application\n"
-			string += "Terminal=true\n"
-			string += "Name="+APP+"\n"
-			string += "Exec="+app_path+OS+"/Debug/"+APP+"\n"
-			string += "Icon="+app_path+"icons/icon.png\n"
-			CPP_DKFile_StringToFile(string, app_path+OS+"/Debug/"+APP+".desktop")
-			*/
+			//CPP_DK_Execute("chmod +x "+app_path+OS+"/Debug/"+APP)
 		}
 		if(TYPE === "Release" || TYPE === "ALL"){
 			cmake_string = cmake_string.replace("-DDEBUG=ON ", "");
 			CPP_DKFile_MkDir(app_path+OS+"/Release")
 			CPP_DKFile_ChDir(app_path+OS+"/Release")
-			console.log(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DIGITALKNOB+"DK")
 			let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DIGITALKNOB+"DK")
-			if(rtvalue.indexOf("errors occurred!") > -1)
-				return
-			CPP_DKFile_Rename(app_path+OS+"/Release/"+APP, app_path+OS+"/Release/"+APP+"_OLD", true)
+			//CPP_DKFile_Rename(app_path+OS+"/Release/"+APP, app_path+OS+"/Release/"+APP+"_OLD", true)
 			CPP_DK_Execute("make "+APP)
-			
 			//CPP_DK_Execute("chmod +x "+app_path+OS+"/Release/"+APP)
-			/*
-			//Create .desktop file
-			let string = "[Desktop Entry]\n"
-			string += "Encoding=UTF-8\n"
-			string += "Version=1.0\n"
-			string += "Type=Application\n"
-			string += "Terminal=true\n"
-			string += "Name="+APP+"\n"
-			string += "Exec="+app_path+OS+"/Release/"+APP+"\n"
-			string += "Icon="+app_path+"icons/icon.png\n"
-			CPP_DKFile_StringToFile(string, app_path+OS+"/Release/"+APP+".desktop")
-			CPP_DK_Execute("desktop-file-install --dir=$HOME/.local/share/applications "+APP+".desktop")
-			*/
 		}
 	}
 	
@@ -686,51 +605,18 @@ function DKBuild_DoResults(){
 			CPP_DKFile_MkDir(app_path+OS+"/Debug")
 			CPP_DKFile_ChDir(app_path+OS+"/Debug")
 			let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DIGITALKNOB+"DK")
-			if(rtvalue.indexOf("Error 1") > -1) 
-				return
-			if(rtvalue.indexOf("errors occurred!") > -1)
-				return //FIXME: this doesn't catch all build errors
-			CPP_DKFile_Rename(app_path+OS+"/Debug/"+APP, app_path+OS+"/Debug/"+APP+"_OLD", true)
+			//CPP_DKFile_Rename(app_path+OS+"/Debug/"+APP, app_path+OS+"/Debug/"+APP+"_OLD", true)
 			CPP_DK_Execute("make "+APP)
-			
 			//CPP_DK_Execute("chmod +x "+app_path+OS+"/Debug/"+APP)
-			/*
-			//Create .desktop file
-			let string = "[Desktop Entry]\n"
-			string += "Encoding=UTF-8\n"
-			string += "Version=1.0\n"
-			string += "Type=Application\n"
-			string += "Terminal=true\n"
-			string += "Name="+APP+"\n"
-			string += "Exec="+app_path+OS+"/Debug/"+APP+"\n"
-			string += "Icon="+app_path+"icons/icon.png\n"
-			CPP_DKFile_StringToFile(string, app_path+OS+"/Debug/"+APP+".desktop")
-			*/
 		}
 		if(TYPE === "Release" || TYPE === "ALL"){
 			cmake_string = cmake_string.replace("-DDEBUG=ON ", "");
 			CPP_DKFile_MkDir(app_path+OS+"/Release")
 			CPP_DKFile_ChDir(app_path+OS+"/Release")
 			let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DIGITALKNOB+"DK")
-			if(rtvalue.indexOf("errors occurred!") > -1)
-				return //FIXME: this doesn't catch all build errors
-			CPP_DKFile_Rename(app_path+OS+"/Release/"+APP, app_path+OS+"/Release/"+APP+"_OLD", true)
+			//CPP_DKFile_Rename(app_path+OS+"/Release/"+APP, app_path+OS+"/Release/"+APP+"_OLD", true)
 			CPP_DK_Execute("make "+APP)
-			
 			//CPP_DK_Execute("chmod +x "+app_path+OS+"/Release/"+APP)
-			/*
-			//Create .desktop file
-			let string = "[Desktop Entry]\n"
-			string += "Encoding=UTF-8\n"
-			string += "Version=1.0\n"
-			string += "Type=Application\n"
-			string += "Terminal=true\n"
-			string += "Name="+APP+"\n"
-			string += "Exec="+app_path+OS+"/Release/"+APP+"\n"
-			string += "Icon="+app_path+"icons/icon.png\n"
-			CPP_DKFile_StringToFile(string, app_path+OS+"/Release/"+APP+".desktop")
-			CPP_DK_Execute("desktop-file-install --dir=$HOME/.local/share/applications "+APP+".desktop")
-			*/
 		}
 	}
 	
@@ -743,47 +629,16 @@ function DKBuild_DoResults(){
 			CPP_DKFile_MkDir(app_path+OS+"/Debug")
 			CPP_DKFile_ChDir(app_path+OS+"/Debug")
 			let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DIGITALKNOB+"DK")
-			if(rtvalue.indexOf("errors occurred!") > -1) 
-				return //FIXME: this doesn't catch all build errors
-			CPP_DKFile_Rename(app_path+OS+"/Debug/"+APP, app_path+OS+"/Debug/"+APP+"_OLD", true)
+			//CPP_DKFile_Rename(app_path+OS+"/Debug/"+APP, app_path+OS+"/Debug/"+APP+"_OLD", true)
 			CPP_DK_Execute("make "+APP)
-
-			/*
-			//Create .desktop file
-			let string = "[Desktop Entry]\n"
-			string += "Encoding=UTF-8\n"
-			string += "Version=1.0\n"
-			string += "Type=Application\n"
-			string += "Terminal=true\n"
-			string += "Name="+APP+"\n"
-			string += "Exec="+app_path+OS+"/Debug/"+APP+"\n"
-			string += "Icon="+app_path+"icons/icon.png\n"
-			CPP_DKFile_StringToFile(string, app_path+OS+"/Debug/"+APP+".desktop")
-			*/
 		}
 		if(TYPE === "Release" || TYPE === "ALL"){
 			cmake_string = cmake_string.replace("-DDEBUG=ON ", "");
 			CPP_DKFile_MkDir(app_path+OS+"/Release")
 			CPP_DKFile_ChDir(app_path+OS+"/Release")
 			let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DIGITALKNOB+"DK")
-			if(rtvalue.indexOf("errors occurred!") > -1) 
-				return  //FIXME: this doesn't catch all build errors
-			CPP_DKFile_Rename(app_path+OS+"/Release/"+APP, app_path+OS+"/Release/"+APP+"_OLD", true)
+			//CPP_DKFile_Rename(app_path+OS+"/Release/"+APP, app_path+OS+"/Release/"+APP+"_OLD", true)
 			CPP_DK_Execute("make "+APP)
-			
-			//Create .desktop file
-			/*
-			let string = "[Desktop Entry]\n"
-			string += "Encoding=UTF-8\n"
-			string += "Version=1.0\n"
-			string += "Type=Application\n"
-			string += "Terminal=true\n"
-			string += "Name="+APP+"\n"
-			string += "Exec="+app_path+OS+"/Release/"+APP+"\n"
-			string += "Icon="+app_path+"icons/icon.png\n"
-			CPP_DKFile_StringToFile(string, app_path+OS+"/Release/"+APP+".desktop")
-			CPP_DK_Execute("desktop-file-install --dir=$HOME/.local/share/applications "+APP+".desktop")
-			*/
 		}
 	}
 	
@@ -795,11 +650,9 @@ function DKBuild_DoResults(){
 		CPP_DKFile_ChDir(app_path+"android32")
 		if(CPP_DK_GetOS() === "Windows")
 			let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Visual Studio 16 2019\" -A ARM -DCMAKE_TOOLCHAIN_FILE="+ANDROIDNDK+"/build/cmake/android.toolchain.cmake -DANDROIDNDK="+ANDROIDNDK+" -DANDROID_ABI=armeabi-v7a -DANDROID_NATIVE_API_LEVEL=21 -DCMAKE_CXX_FLAGS=-std=c++1z "+cmake_string+DIGITALKNOB+"DK")
-		if(CPP_DK_GetOS() === "Linux" || CPP_DK_GetOS() === "Mac")
-			rtvalue = CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DIGITALKNOB+"DK")
-		if(rtvalue.indexOf("errors occurred!") > -1) 
-			return 
-			
+		else if(CPP_DK_GetOS() === "Linux" || CPP_DK_GetOS() === "Mac")
+			let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DIGITALKNOB+"DK")
+
 		if(TYPE === "Debug" || TYPE === "ALL"){
 			//CPP_DKFile_Rename(app_path+OS+"/Debug/"+APP, app_path+OS+"/Debug/"+APP+"_OLD", true)
 			CPP_DK_Execute(MSBUILD+" "+app_path+OS+"/"+APP+".sln /p:Configuration=Debug")
@@ -808,7 +661,6 @@ function DKBuild_DoResults(){
 			//CPP_DKFile_Rename(app_path+OS+"/Release/"+APP, app_path+OS+"/Release/"+APP+"_OLD", true)
 			CPP_DK_Execute(MSBUILD+" "+app_path+OS+"/"+APP+".sln /p:Configuration=Release")
 		}
-		
 		/*
 		if(TYPE === "Debug" || TYPE === "ALL"){
 			CPP_DKFile_MkDir(app_path+"android32/Debug")
@@ -831,10 +683,8 @@ function DKBuild_DoResults(){
 		CPP_DKFile_ChDir(app_path+"android64")
 		if(CPP_DK_GetOS() === "Windows")
 			let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Visual Studio 16 2019\" -A ARM64 -DCMAKE_TOOLCHAIN_FILE="+ANDROIDNDK+"/build/cmake/android.toolchain.cmake -DANDROIDNDK="+ANDROIDNDK+" -DANDROID_ABI=arm64-v8a -DANDROID_NATIVE_API_LEVEL=21 -DCMAKE_CXX_FLAGS=-std=c++1z "+cmake_string+DIGITALKNOB+"DK")
-		if(CPP_DK_GetOS() === "Linux" || CPP_DK_GetOS() === "Mac")
+		else if(CPP_DK_GetOS() === "Linux" || CPP_DK_GetOS() === "Mac")
 			rtvalue = CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DIGITALKNOB+"DK")
-		if(rtvalue.indexOf("errors occurred!") > -1) 
-			return 
 		
 		if(TYPE === "Debug" || TYPE === "ALL"){
 			//CPP_DKFile_Rename(app_path+OS+"/Debug/"+APP, app_path+OS+"/Debug/"+APP+"_OLD", true)
@@ -844,7 +694,6 @@ function DKBuild_DoResults(){
 			//CPP_DKFile_Rename(app_path+OS+"/Release/"+APP, app_path+OS+"/Release/"+APP+"_OLD", true)
 			CPP_DK_Execute(MSBUILD+" "+app_path+OS+"/"+APP+".sln /p:Configuration=Release")
 		}
-		
 		/*
 		if(TYPE === "Debug" || TYPE === "ALL"){
 			CPP_DKFile_MkDir(app_path+"android64/Debug")
@@ -878,7 +727,7 @@ function DKBuild_DoResults(){
 	
 	//Refresh Icons on Windows
 	//CPP_DK_Execute("ie4uinit.exe -ClearIconCache")
-    //CPP_DK_Execute("ie4uinit.exe -show") //Windows 10
+    	//CPP_DK_Execute("ie4uinit.exe -show") //Windows 10
 }
 
 DKBuild_init()
