@@ -321,7 +321,7 @@ if(ANDROID) # Disabled for Android targets
 	DKDISABLE(DKSDLRml)
 	DKDISABLE(DKWebSockets)
 	DKDISABLE(DKWebview)
-	#DKDISABLE(flac)
+	DKDISABLE(flac)
 	DKDISABLE(freealut)
 	DKDISABLE(freealut-master)
 	DKDISABLE(giflib)
