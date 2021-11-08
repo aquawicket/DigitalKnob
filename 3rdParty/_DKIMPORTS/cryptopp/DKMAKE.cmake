@@ -42,7 +42,7 @@ MAC_XCODE(${CRYPTO_NAME} cryptopp.sln cryptopp-static)
 IOS_PATH(${CRYPTO}/${OS})
 IOS32_COMMAND(${DKCMAKE_MAC32} ${CRYPTO})
 IOS64_COMMAND(${DKCMAKE_MAC64} ${CRYPTO})
-IOS_XCOE(${CRYPTO_NAME} cryptopp.sln cryptopp-static)
+IOS_XCODE(${CRYPTO_NAME} cryptopp.sln cryptopp-static)
 
 
 IOSSIM_PATH(${CRYPTO}/${OS})
