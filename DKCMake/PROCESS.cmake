@@ -1002,11 +1002,12 @@ DKBUILD_LOG("          DKDEFINES_LIST:  ${DKDEFINES_LIST}")
 DKBUILD_LOG("         DKINCLUDES_LIST:  ${DKINCLUDES_LIST}")
 DKBUILD_LOG("         DKLINKDIRS_LIST:  ${DKLINKDIRS_LIST}")
 file(WRITE ${DKPROJECT}/DKBUILD.log "${DKBUILD_LOG_FILE}")
-DKSET(DKBUILD_LOG_FILE "")
+unset(DKBUILD_LOG_FILE)
 	
 message(STATUS "\n")
 message(STATUS "**************************************************")
 message(STATUS "****** Generated ${APP_NAME} - ${OS}  ************")
 message(STATUS "**************************************************\n")
 
+#unset(DEPENDALL_FILE)
 # https://gist.github.com/baiwfg2/39881ba703e9c74e95366ed422641609
