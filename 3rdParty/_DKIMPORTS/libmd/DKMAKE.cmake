@@ -74,8 +74,9 @@ IOS_RELEASE_COMMAND(../../configure --disable-shared --enable-static) #--arch-"a
 IOS_RELEASE_COMMAND(make)
 
 
-IOSSIM_DEBUG_PATH(${LIBMD})
-IOSSIM_DEBUG_COMMAND(./autogen)
+#IOSSIM_DEBUG_PATH(${LIBMD})
+#IOSSIM_DEBUG_COMMAND(./autogen)
+#MAC_COMMAND(sudo port install libmd)
 IOSSIM_DEBUG_PATH(${LIBMD}/${OS}/${DEBUG_DIR})
 IOSSIM_DEBUG_COMMAND(../../configure --disable-shared --enable-static)
 IOSSIM_DEBUG_COMMAND(make)
