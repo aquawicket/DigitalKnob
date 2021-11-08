@@ -5,6 +5,9 @@ endif()
 #
 # https://github.com/guillemj/libmd/archive/refs/tags/1.0.4.zip
 
+### DEPEND ###
+DKDEPEND(autotools)
+
 
 ### VERSION ###
 DKSET(LIBMD_VERSION 1.0.4)
@@ -15,7 +18,6 @@ DKSET(LIBMD ${3RDPARTY}/${LIBMD_NAME})
 
 ### INSTALL ###
 DKINSTALL(${LIBMD_DL} libmd ${LIBMD} NOPATCH)
-
 
 ### LINK ###
 DKINCLUDE(${LIBMD}/include)
@@ -72,8 +74,9 @@ IOS_RELEASE_COMMAND(../../configure --disable-shared --enable-static) #--arch-"a
 IOS_RELEASE_COMMAND(make)
 
 
+WIN32_DEBUG_PATH(${LIBMD})
 IOSSIM_DEBUG_PATH(${LIBMD}/${OS}/${DEBUG_DIR})
-IOSSIM_DEBUG_COMMAND(../../configure --disable-shared --enable-static)
+IOSSIM_DEBUG_COMMAND(../../autogen ../../configure --disable-shared --enable-static)
 IOSSIM_DEBUG_COMMAND(make)
 IOSSIM_RELEASE_PATH(${LIBMD}/${OS}/${RELEASE_DIR})
 IOSSIM_RELEASE_COMMAND(../../configure --disable-shared --enable-static)
