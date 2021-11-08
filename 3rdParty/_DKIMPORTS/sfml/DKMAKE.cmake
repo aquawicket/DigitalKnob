@@ -29,6 +29,8 @@ if(ANDROID)
 endif()
 DKDEPEND(openal)
 DKDEPEND(flac)
+DKDEPEND(libogg)
+DKDEPEND(libvorbis)
 DKDEPEND(libjpeg-turbo)
 
 
