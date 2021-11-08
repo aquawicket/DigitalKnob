@@ -1928,7 +1928,7 @@ function(IOS_XCODE_RELEASE folder)
 endfunction()
 
 function(IOS_XCODE)
-	if(IOS)
+	if(IOS AND NOT IOSSIM)
 		IOS_XCODE_DEBUG(${ARGV})
 		IOS_XCODE_RELEASE(${ARGV})
 	endif()
