@@ -2,6 +2,10 @@
 #
 # https://github.com/webstorage119/website-1/raw/master/cryptopp600.zip
 
+if(IOSSIM)
+	DKDEPEND(libmd)
+endif()
+
 ### VERSION ###
 DKSET(CRYPTO_VERSION 600)
 DKSET(CRYPTO_NAME cryptopp${CRYPTO_VERSION})
