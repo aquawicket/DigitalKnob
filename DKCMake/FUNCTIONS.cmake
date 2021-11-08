@@ -1172,7 +1172,7 @@ endfunction()
 
 function(ANDROID_MSYS str)
 	if(ANDROID AND DEBUG)
-		WIN_MSYS(${ARGV})
+		WIN32_MSYS(${ARGV}) #TODO: Test and see if Android needs it own MSYS function
 	endif()
 endfunction()
 
@@ -1223,88 +1223,6 @@ function(ANDROID64_RELEASE_MSYS str)
 		ANDROID_MSYS(${ARGV})
 	endif()
 endfunction()
-
-#function(WIN_BASH str)
-#	if(WIN AND QUEUE_BUILD)
-#		string(REPLACE ";" "\n"	str "${ARGV}")
-#		string(REPLACE ":/Users" "/Users" str ${str})
-#		file(WRITE ${MSYS}/dkscript.tmp ${str})
-#		message(STATUS "WROTE( ${str} )")
-#		message(STATUS "BASH -> ${str}")
-#		execute_process(COMMAND cmd /c ${MSYS}/bin/bash ${MSYS}/dkscript.tmp WORKING_DIRECTORY ${MSYS})
-#	endif()
-#endfunction()
-#
-#function(WIN_DEBUG_BASH str)
-#	if(WIN AND DEBUG)
-#		WIN_BASH(${ARGV})
-#	endif()
-#endfunction()
-#
-#function(WIN_RELEASE_BASH str)
-#	if(WIN AND RELEASE)
-#		WIN_BASH(${ARGV})
-#	endif()
-#endfunction()
-#
-#function(WIN32_BASH str)
-#	if(WIN_32)
-#		WIN_BASH(${ARGV})
-#	endif()
-#endfunction()
-#
-#function(WIN32_DEBUG_BASH str)
-#	if(WIN_32 AND DEBUG)
-#		WIN_BASH(${ARGV})
-#	endif()
-#endfunction()
-#
-#function(WIN32_RELEASE_BASH str)
-#	if(WIN_32 AND RELEASE)
-#		WIN_BASH(${ARGV})
-#	endif()
-#endfunction()
-#
-#function(WIN64_BASH str)
-#	if(WIN_64)
-#		WIN_BASH(${ARGV})
-#	endif()
-#endfunction()
-#
-#function(WIN64_DEBUG_BASH str)
-#	if(WIN_64 AND DEBUG)
-#
-#	endif()
-#endfunction()
-#
-#function(WIN64_RELEASE_BASH str)
-#	if(WIN_64 AND RELEASE)
-#		WIN_BASH(${ARGV})
-#	endif()
-#endfunction()
-#
-#function(ANDROID_BASH str)
-#	if(ANDROID AND QUEUE_BUILD)
-#		string(REPLACE ":/" "/" str ${str})
-#		file(WRITE ${MSYS}/dkscript.tmp ${str})
-#		message(STATUS "BASH-> ${str}")
-#		DKEXECUTE_PROCESS(${MSYS}/bin/bash ${MSYS}/dkscript.tmp WORKING_DIRECTORY ${MSYS})
-#	endif()
-#endfunction()
-#
-#function(ANDROID32_BASH str)
-#	if(ANDROID_32)
-#		set(str ${str} ${ARGN})
-#		ANDROID_BASH(${ARGV})
-#	endif()
-#endfunction()
-#
-#function(ANDROID64_BASH str)
-#	if(ANDROID_64)
-#		set(str ${str} ${ARGN})
-#		ANDROID_BASH(${ARGV})
-#	endif()
-#endfunction()
 
 
 ################### COMMAND ########################
