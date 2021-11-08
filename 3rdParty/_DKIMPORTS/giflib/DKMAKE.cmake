@@ -83,10 +83,10 @@ IOS_RELEASE_COMMAND(make)
 
 IOSSIM_DEBUG_PATH(${GIF}/${OS}/${DEBUG_DIR})
 IOSSIM_DEBUG_COMMAND(../../configure --disable-shared --enable-static)
-IOSSIM_DEBUG_COMMAND(make)# "CXXFLAGS=-arch i386" "CFLAGS=-arch i386" "LDFLAGS=-arch i386")
+IOSSIM_DEBUG_COMMAND(make)
 IOSSIM_RELEASE_PATH(${GIF}/${OS}/${RELEASE_DIR})
 IOSSIM_RELEASE_COMMAND(../../configure --disable-shared --enable-static)
-IOSSIM_RELEASE_COMMAND(make)# "CXXFLAGS=-arch i386" "CFLAGS=-arch i386" "LDFLAGS=-arch i386")
+IOSSIM_RELEASE_COMMAND(make)
 
 
 LINUX_DEBUG_PATH(${GIF}/${OS}/${DEBUG_DIR})
@@ -106,3 +106,9 @@ RASPBERRY_RELEASE_COMMAND(make)
 
 
 ANDROID_NDK(${GIF_NAME})
+ANDROID_DEBUG_PATH(${GIF}/${OS}/${DEBUG_DIR})
+ANDROID_DEBUG_COMMAND(../../configure --disable-shared --enable-static)
+ANDROID_DEBUG_COMMAND(make)
+ANDROID_RELEASE_PATH(${GIF}/${OS}/${RELEASE_DIR})
+ANDROID_RELEASE_COMMAND(../../configure --disable-shared --enable-static)
+ANDROID_RELEASE_COMMAND(make)

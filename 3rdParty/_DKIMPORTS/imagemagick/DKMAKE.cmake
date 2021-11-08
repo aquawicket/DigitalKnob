@@ -38,43 +38,66 @@ ANDROID_RELEASE_LIB(${IMAGEMAGICK}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/li
 
 
 ### COMPILE ###
-#WIN_PATH(${IMAGEMAGICK}/${OS}/${DEBUG_DIR})
-#WIN_BASH("#!/bin/bash\;
-#cd /${IMAGEMAGICK}/${OS}/${DEBUG_DIR}\;
-#export PATH=/${MINGW32}/bin:$PATH\;
-#export PATH=/${MSYS}/bin:$PATH\;
-#../../configure --disable-shared --enable-static\;
-#make\;
-#exit\;")
-
-#WIN_PATH(${IMAGEMAGICK}/${OS})
-#WIN32_COMMAND(${DKCMAKE_WIN32} ${IMAGEMAGICK})
-#WIN64_COMMAND(${DKCMAKE_WIN64} ${IMAGEMAGICK})
-#WIN_VS(${IMAGEMAGICK_NAME} imagemagick.sln imagemagick)
+WIN32_DEBUG_PATH(${IMAGEMAGICK}/${OS}/${DEBUG_DIR})
+WIN32_DEBUG_MSYS(../../configure --disable-shared --enable-static)
+WIN32_DEBUG_MSYS(make)
+WIN32_RELEASE_PATH(${IMAGEMAGICK}/${OS}/${RELEASE_DIR})
+WIN32_RELEASE_MSYS(../../configure --disable-shared --enable-static)
+WIN32_RELEASE_MSYS(make)
 
 
-MAC_PATH(${IMAGEMAGICK}/${OS})
-MAC64_COMMAND(${DKCMAKE_MAC64} ${IMAGEMAGICK})
-MAC_XCODE(${IMAGEMAGICK_NAME} imagemagick)
+WIN64_DEBUG_PATH(${IMAGEMAGICK}/${OS}/${DEBUG_DIR})
+WIN64_DEBUG_COMMAND(../../configure --disable-shared --enable-static)
+WIN64_DEBUG_COMMAND(make)
+WIN64_RELEASE_PATH(${IMAGEMAGICK}/${OS}/${RELEASE_DIR})
+WIN64_RELEASE_COMMAND(../../configure --disable-shared --enable-static)
+WIN64_RELEASE_COMMAND(make)
 
 
-IOS_PATH(${IMAGEMAGICK}/${OS})
-IOS64_COMMAND(${DKCMAKE_IOS64} ${IMAGEMAGICK})
-IOS_XCODE(${IMAGEMAGICK_NAME} imagemagick)
+MAC_DEBUG_PATH(${IMAGEMAGICK}/${OS}/${DEBUG_DIR})
+MAC_DEBUG_COMMAND(../../configure --disable-shared --enable-static)
+MAC_DEBUG_COMMAND(make)
+MAC_RELEASE_PATH(${IMAGEMAGICK}/${OS}/${RELEASE_DIR})
+MAC_RELEASE_COMMAND(../../configure --disable-shared --enable-static)
+MAC_RELEASE_COMMAND(make)
 
 
-IOSSIM_PATH(${IMAGEMAGICK}/${OS})
-IOSSIM_COMMAND(${DKCMAKE_IOSSIM64} ${IMAGEMAGICK})
-IOSSIM_XCODE(${IMAGEMAGICK_NAME} imagemagick)
+IOS_DEBUG_PATH(${IMAGEMAGICK}/${OS}/${DEBUG_DIR})
+IOS_DEBUG_COMMAND(../../configure --disable-shared --enable-static)
+IOS_DEBUG_COMMAND(make)
+IOS_RELEASE_PATH(${IMAGEMAGICK}/${OS}/${RELEASE_DIR})
+IOS_RELEASE_COMMAND(../../configure --disable-shared --enable-static)
+IOS_RELEASE_COMMAND(make)
+
+
+IOSSIM_DEBUG_PATH(${IMAGEMAGICK}/${OS}/${DEBUG_DIR})
+IOSSIM_DEBUG_COMMAND(../../configure --disable-shared --enable-static)
+IOSSIM_DEBUG_COMMAND(make)
+IOSSIM_RELEASE_PATH(${IMAGEMAGICK}/${OS}/${RELEASE_DIR})
+IOSSIM_RELEASE_COMMAND(../../configure --disable-shared --enable-static)
+IOSSIM_RELEASE_COMMAND(make)
 
 
 LINUX_DEBUG_PATH(${IMAGEMAGICK}/${OS}/${DEBUG_DIR})
-LINUX_DEBUG_COMMAND(${DKCMAKE_LINUX_DEBUG} ${IMAGEMAGICK})
-LINUX_DEBUG_COMMAND(make imagemagick)
-
+LINUX_DEBUG_COMMAND(../../configure --disable-shared --enable-static)
+LINUX_DEBUG_COMMAND(make)
 LINUX_RELEASE_PATH(${IMAGEMAGICK}/${OS}/${RELEASE_DIR})
-LINUX_RELEASE_COMMAND(${DKCMAKE_LINUX_RELEASE} ${IMAGEMAGICK})
-LINUX_RELEASE_COMMAND(make imagemagick)
+LINUX_RELEASE_COMMAND(../../configure --disable-shared --enable-static)
+LINUX_RELEASE_COMMAND(make)
+
+
+RASPBERRY_DEBUG_PATH(${IMAGEMAGICK}/${OS}/${DEBUG_DIR})
+RASPBERRY_DEBUG_COMMAND(../../configure --disable-shared --enable-static)
+RASPBERRY_DEBUG_COMMAND(make)
+RASPBERRY_RELEASE_PATH(${IMAGEMAGICK}/${OS}/${RELEASE_DIR})
+RASPBERRY_RELEASE_COMMAND(../../configure --disable-shared --enable-static)
+RASPBERRY_RELEASE_COMMAND(make)
 
 
 ANDROID_NDK(${IMAGEMAGICK_NAME})
+#ANDROID_DEBUG_PATH(${IMAGEMAGICK}/${OS}/${DEBUG_DIR})
+#ANDROID_DEBUG_COMMAND(../../configure --disable-shared --enable-static)
+#ANDROID_DEBUG_COMMAND(make)
+#ANDROID_RELEASE_PATH(${IMAGEMAGICK}/${OS}/${RELEASE_DIR})
+#ANDROID_RELEASE_COMMAND(../../configure --disable-shared --enable-static)
+#ANDROID_RELEASE_COMMAND(make)
