@@ -36,19 +36,19 @@ WIN_VS(${CRYPTO_NAME} cryptopp.sln cryptopp-static)
 MAC_PATH(${CRYPTO}/${OS})
 MAC32_COMMAND(${DKCMAKE_MAC32} ${CRYPTO})
 MAC64_COMMAND(${DKCMAKE_MAC64} ${CRYPTO})
-MAC_VS(${CRYPTO_NAME} cryptopp.sln cryptopp-static)
+MAC_XCODE(${CRYPTO_NAME} cryptopp.sln cryptopp-static)
 
 
 IOS_PATH(${CRYPTO}/${OS})
 IOS32_COMMAND(${DKCMAKE_MAC32} ${CRYPTO})
 IOS64_COMMAND(${DKCMAKE_MAC64} ${CRYPTO})
-IOS_VS(${CRYPTO_NAME} cryptopp.sln cryptopp-static)
+IOS_XCOE(${CRYPTO_NAME} cryptopp.sln cryptopp-static)
 
 
 IOSSIM_PATH(${CRYPTO}/${OS})
 IOSSIM32_COMMAND(${DKCMAKE_MAC32} ${CRYPTO})
 IOSSIM64_COMMAND(${DKCMAKE_MAC64} ${CRYPTO})
-IOSSIM_VS(${CRYPTO_NAME} cryptopp.sln cryptopp-static)
+IOSSIM_XCODE(${CRYPTO_NAME} cryptopp.sln cryptopp-static)
 
 
 LINUX_DEBUG_PATH(${CRYPRO}/${OS}/${DEBUG_DIR})
