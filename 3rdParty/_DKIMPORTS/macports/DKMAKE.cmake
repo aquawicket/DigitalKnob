@@ -11,5 +11,6 @@ DKSET(MACPORTS_DL https://github.com/macports/macports-base/releases/download/v2
 
 if(NOT EXISTS ${DKDOWNLOAD}/${MACPORTS_NAME})
 	DOWNLOAD(${MACPORTS_DL} ${DKDOWNLOAD}/${MACPORTS_NAME})
+	DKSET(QUEUE_BUILD ON)
 	MAC_COMMAND(${DKDOWNLOAD}/${MACPORTS_NAME})
 endif()
