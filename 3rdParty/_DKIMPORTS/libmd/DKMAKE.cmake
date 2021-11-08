@@ -76,7 +76,7 @@ IOS_RELEASE_COMMAND(make)
 
 WIN32_DEBUG_PATH(${LIBMD})
 IOSSIM_DEBUG_PATH(${LIBMD}/${OS}/${DEBUG_DIR})
-IOSSIM_DEBUG_COMMAND(../../automake ../../configure --disable-shared --enable-static)
+IOSSIM_DEBUG_COMMAND(../../autogen ../../automake ../../configure --disable-shared --enable-static)
 IOSSIM_DEBUG_COMMAND(make)
 IOSSIM_RELEASE_PATH(${LIBMD}/${OS}/${RELEASE_DIR})
 IOSSIM_RELEASE_COMMAND(../../configure --disable-shared --enable-static)
