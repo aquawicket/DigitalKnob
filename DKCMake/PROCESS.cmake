@@ -501,7 +501,12 @@ if(WIN_64)
 	set_target_properties(${APP_NAME} PROPERTIES LINK_FLAGS_DEBUG ${DEBUG_FLAGS} LINK_FLAGS_RELEASE ${RELEASE_FLAGS})
 	
 	### PRE BUILD ###
-	#CPP_DKFile_Rename(app_path+OS+"/Release/"+APP+".app", app_path+OS+"/Release/"+APP+"_OLD.app", true)
+	if(DEBUG)
+		DKRENAME(${CMAKE_BINARY_DIR}/${DEBUG_DIR}/${APP_NAME}.exe ${CMAKE_BINARY_DIR}/${DEBUG_DIR}/${APP_NAME}.backup)
+	endif()
+	if(RELEASE)
+		DKRENAME(${CMAKE_BINARY_DIR}/${RELEASE_DIR}/${APP_NAME}.exe ${CMAKE_BINARY_DIR}/${RELEASE_DIR}/${APP_NAME}.backup)
+	endif()
 	
 	### POST BUILD ###
 	#CPP_DKFile_Copy(app_path+OS+"/Release/"+APP+".pdb", app_path+"assets/"+APP+".pdb", true)
@@ -584,7 +589,12 @@ if(MAC)
 	endforeach()
 	
 	### PRE BUILD ###
-	#CPP_DKFile_Rename(app_path+OS+"/Release/"+APP+".app", app_path+OS+"/Release/"+APP+"_OLD.app", true)
+	if(DEBUG)
+		DKRENAME(${CMAKE_BINARY_DIR}/${DEBUG_DIR}/${APP_NAME}.app ${CMAKE_BINARY_DIR}/${DEBUG_DIR}/${APP_NAME}.backup)
+	endif()
+	if(RELEASE)
+		DKRENAME(${CMAKE_BINARY_DIR}/${RELEASE_DIR}/${APP_NAME}.app ${CMAKE_BINARY_DIR}/${RELEASE_DIR}/${APP_NAME}.backup)
+	endif()
 	
 	### POST BUILD ###
 	# Copy the CEF framework into the app bundle
@@ -750,7 +760,12 @@ if(IOS)
 	endforeach()
 	
 	### PRE BUILD ###
-	#CPP_DKFile_Rename(app_path+OS+"/Release/"+APP+".app", app_path+OS+"/Release/"+APP+"_OLD.app", true)
+	if(DEBUG)
+		DKRENAME(${CMAKE_BINARY_DIR}/${DEBUG_DIR}/${APP_NAME}.app ${CMAKE_BINARY_DIR}/${DEBUG_DIR}/${APP_NAME}.backup)
+	endif()
+	if(RELEASE)
+		DKRENAME(${CMAKE_BINARY_DIR}/${RELEASE_DIR}/${APP_NAME}.app ${CMAKE_BINARY_DIR}/${RELEASE_DIR}/${APP_NAME}.backup)
+	endif()
 	
 	### POST BUILD ###
 	#CPP_DK_Execute("chmod +x "+app_path+OS+"/Debug/"+APP)
@@ -842,7 +857,12 @@ if(IOSSIM)
 	endforeach()
 	
 	### PRE BUILD ###
-	#CPP_DKFile_Rename(app_path+OS+"/Release/"+APP+".app", app_path+OS+"/Release/"+APP+"_OLD.app", true)
+	if(DEBUG)
+		DKRENAME(${CMAKE_BINARY_DIR}/${DEBUG_DIR}/${APP_NAME}.app ${CMAKE_BINARY_DIR}/${DEBUG_DIR}/${APP_NAME}.backup)
+	endif()
+	if(RELEASE)
+		DKRENAME(${CMAKE_BINARY_DIR}/${RELEASE_DIR}/${APP_NAME}.app ${CMAKE_BINARY_DIR}/${RELEASE_DIR}/${APP_NAME}.backup)
+	endif()
 	
 	### POST BUILD ###
 	#CPP_DK_Execute("chmod +x "+app_path+OS+"/Debug/"+APP)
@@ -918,7 +938,12 @@ if(LINUX)
 	endif()
 	
 	### PRE BUILD ###
-	#CPP_DKFile_Rename(app_path+OS+"/Release/"+APP+".app", app_path+OS+"/Release/"+APP+"_OLD.app", true)
+	if(DEBUG)
+		DKRENAME(${CMAKE_BINARY_DIR}/${DEBUG_DIR}/${APP_NAME} ${CMAKE_BINARY_DIR}/${DEBUG_DIR}/${APP_NAME}.backup)
+	endif()
+	if(RELEASE)
+		DKRENAME(${CMAKE_BINARY_DIR}/${RELEASE_DIR}/${APP_NAME} ${CMAKE_BINARY_DIR}/${RELEASE_DIR}/${APP_NAME}.backup)
+	endif()
 	
 	### POST BUILD ###
 	#CPP_DK_Execute("chmod +x "+app_path+OS+"/Debug/"+APP)
@@ -992,7 +1017,12 @@ if(RASPBERRY)
 	DKEXECUTE_PROCESS(desktop-file-install --dir=/home/$ENV{USER}/.local/share/applications ${DKPROJECT}/${OS}/Release/${APP_NAME}.desktop WORKING_DIRECTORY ${DKPROJECT}/${OS}/Release)
 	
 	### PRE BUILD ###
-	#CPP_DKFile_Rename(app_path+OS+"/Release/"+APP+".app", app_path+OS+"/Release/"+APP+"_OLD.app", true)
+	if(DEBUG)
+		DKRENAME(${CMAKE_BINARY_DIR}/${DEBUG_DIR}/${APP_NAME} ${CMAKE_BINARY_DIR}/${DEBUG_DIR}/${APP_NAME}.backup)
+	endif()
+	if(RELEASE)
+		DKRENAME(${CMAKE_BINARY_DIR}/${RELEASE_DIR}/${APP_NAME} ${CMAKE_BINARY_DIR}/${RELEASE_DIR}/${APP_NAME}.backup)
+	endif()
 	
 	### POST BUILD ###
 	#CPP_DK_Execute("chmod +x "+app_path+OS+"/Debug/"+APP)
@@ -1048,7 +1078,12 @@ if(ANDROID)
 	#include_external_msproject(DKGradle ${DKPROJECT}/${OS}/DKGradle.androidproj)	
 	
 	### PRE BUILD ###
-	#CPP_DKFile_Rename(app_path+OS+"/Release/"+APP+".app", app_path+OS+"/Release/"+APP+"_OLD.app", true)
+	if(DEBUG)
+		DKRENAME(${CMAKE_BINARY_DIR}/${DEBUG_DIR}/${APP_NAME}.apk ${CMAKE_BINARY_DIR}/${DEBUG_DIR}/${APP_NAME}.backup)
+	endif()
+	if(RELEASE)
+		DKRENAME(${CMAKE_BINARY_DIR}/${RELEASE_DIR}/${APP_NAME}.apk ${CMAKE_BINARY_DIR}/${RELEASE_DIR}/${APP_NAME}.backup)
+	endif()
 	
 	### POST BUILD ###
 endif()
