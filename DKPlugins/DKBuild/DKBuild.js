@@ -330,62 +330,25 @@ function DKBuild_DoResults(){
 	////// WIN32 /////
 	if(OS === "win32"){
 		DKBuild_ValidateVC2019()
-		//if(LEVEL === "Rebuild" || LEVEL === "RebuildAll"){
-		//	CPP_DKFile_Delete(app_path+OS+"/CMakeFiles")
-		//	CPP_DKFile_Delete(app_path+OS+"/"+APP+".dir")
-		//	CPP_DKFile_Delete(app_path+OS+"/Win32")
-		//	CPP_DKFile_Delete(app_path+OS+"/CMakeCache.txt")	
-		//}
 		CPP_DKFile_MkDir(app_path+OS)
 		CPP_DKFile_ChDir(app_path+OS)
 		let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Visual Studio 16 2019\" -A Win32 "+cmake_string+DIGITALKNOB+"DK")
-		if(TYPE === "Debug" || TYPE === "ALL"){
-			CPP_DKFile_Rename(app_path+OS+"/Debug/"+APP+".exe", app_path+OS+"/Debug/"+APP+"_OLD.exe", true)	
+		if(TYPE === "Debug" || TYPE === "ALL")
 			CPP_DK_Execute(MSBUILD+" "+app_path+OS+"/"+APP+".sln /p:Configuration=Debug")
-		}
-		if(TYPE === "Release" || TYPE === "ALL"){
-			CPP_DKFile_Rename(app_path+OS+"/Release/"+APP+".exe", app_path+OS+"/Release/"+APP+"_OLD.exe", true)
+		if(TYPE === "Release" || TYPE === "ALL")
 			CPP_DK_Execute(MSBUILD+" "+app_path+OS+"/"+APP+".sln /p:Configuration=Release")
-		}
-		
-		//CPP_DKFile_Copy(app_path+OS+"/Release/"+APP+".pdb", app_path+"assets/"+APP+".pdb", true)
-		/*
-		if(CPP_DKFile_Exists(DIGITALKNOB+"DK/3rdParty/upx-3.95-win64/upx.exe"))
-			CPP_DK_Execute(DIGITALKNOB+"DK/3rdParty/upx-3.95-win64/upx.exe -9 -v "+app_path+OS+"/Release/"+APP+".exe")
-		else
-			console.warn("DKBuild_DoResults(): UPX does not exists")
-		*/
 	}
 	
 	////// WIN64 /////
 	if(OS === "win64"){
 		DKBuild_ValidateVC2019()
-		if(LEVEL === "Rebuild" || LEVEL === "RebuildAll"){
-			CPP_DKFile_Delete(app_path+OS+"/CMakeFiles")
-			CPP_DKFile_Delete(app_path+OS+"/"+APP+".dir")
-			CPP_DKFile_Delete(app_path+OS+"/Win32")
-			CPP_DKFile_Delete(app_path+OS+"/CMakeCache.txt")
-		}
 		CPP_DKFile_MkDir(app_path+OS)
 		CPP_DKFile_ChDir(app_path+OS)
 		let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Visual Studio 16 2019\" -A x64 "+cmake_string+DIGITALKNOB+"DK")
-		
-		if(TYPE === "Debug" || TYPE === "ALL"){
-			CPP_DKFile_Rename(app_path+OS+"/Debug/"+APP+".exe", app_path+OS+"/Debug/"+APP+"_OLD.exe", true)
+		if(TYPE === "Debug" || TYPE === "ALL")
 			CPP_DK_Execute(MSBUILD+" "+app_path+OS+"/"+APP+".sln /p:Configuration=Debug")
-		}
-		if(TYPE === "Release" || TYPE === "ALL"){
-			CPP_DKFile_Rename(app_path+OS+"/Release/"+APP+".exe", app_path+OS+"/Release/"+APP+"_OLD.exe", true)
+		if(TYPE === "Release" || TYPE === "ALL")
 			CPP_DK_Execute(MSBUILD+" "+app_path+OS+"/"+APP+".sln /p:Configuration=Release")
-		}
-		
-		//CPP_DKFile_Copy(app_path+OS+"/Release/"+APP+".pdb", app_path+"assets/"+APP+".pdb", true)
-		/*
-		if(CPP_DKFile_Exists(DIGITALKNOB+"3rdParty/upx-3.95-win64/upx.exe"))
-			CPP_DK_Execute(DIGITALKNOB+"3rdParty/upx-3.95-win64/upx.exe -9 -v "+app_path+OS+"/Release/"+APP+".exe")
-		else
-			console.warn("DKBuild_DoResults(): UPX does not exists")
-		*/
 	}
 	
 	///// MAC32 ////
@@ -399,88 +362,10 @@ function DKBuild_DoResults(){
 		CPP_DKFile_MkDir(app_path+OS)
 		CPP_DKFile_ChDir(app_path+OS)
 		let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Xcode\" -DCMAKE_OSX_ARCHITECTURES=x86_64 "+cmake_string+DIGITALKNOB+"DK")
-		if(TYPE === "Debug" || TYPE === "ALL"){
-			//if(CPP_DKFile_Exists(app_path+OS+"/Debug/"+APP+".app"))
-			//	CPP_DKFile_Rename(app_path+OS+"/Debug/"+APP+".app", app_path+OS+"/Debug/"+APP+"_OLD.app", true)
+		if(TYPE === "Debug" || TYPE === "ALL")
 			CPP_DK_Execute("xcodebuild -target "+APP+" -configuration Debug build")
-			
-			/*
-			//update the info.plist to include the logo icon
-			if(CPP_DKFile_Exists(app_path+OS+"/Debug/"+APP+".app/Contents/info.plist")){
-				let info_plist = CPP_DKFile_FileToString(app_path+OS+"/Debug/"+APP+".app/Contents/info.plist")
-				info_plist = info_plist.replace("<dict>", "<dict><key>CFBundleIconFile</key><string>logo</string>")
-				CPP_DKFile_StringToFile(info_plist, app_path+OS+"/Debug/"+APP+".app/Contents/info.plist")
-			}
-			*/
-			
-			/*
-			if(CPP_DKFile_Exists(app_path+"assets/DKCef/mac64Debug/Chromium Embedded Framework.framework")){
-				CPP_DKFile_MkDir(app_path+"mac64/Debug/"+APP+".app/Contents/Frameworks")
-				CPP_DKFile_Copy(app_path+"assets/DKCef/mac64Debug/Chromium Embedded Framework.framework", app_path+"mac64/Debug/"+APP+".app/Contents/Frameworks/Chromium Embedded Framework.framework", true)
-				if(CPP_DKFile_Exists(DIGITALKNOB+"DK/DKPlugins/DKCefChild/mac64/Debug/DKCefChild.app")){
-					CPP_DKFile_Copy(DIGITALKNOB+"DK/DKPlugins/DKCefChild/mac64/Debug/DKCefChild.app", app_path+"mac64/Debug/"+APP+".app/Contents/Frameworks/"+APP+" Helper.app", true)
-					CPP_DKFile_Rename(app_path+"mac64/Debug/"+APP+".app/Contents/Frameworks/"+APP+" Helper.app/Contents/MacOS/DKCefChild", app_path+"mac64/Debug/"+APP+".app/Contents/Frameworks/"+APP+" Helper.app/Contents/MacOS/"+APP+" Helper", true)
-				}
-			}
-			*/
-			
-			/*
-			//update install_name_tool if cef present
-			if(CPP_DKFile_Exists(app_path+OS+"/Debug/"+APP+".app/Contents/Frameworks/Chromium Embedded Framework.framework")){
-				console.log("USING CHROMIUM EMBEDDED FRAMEWORK")
-				let command = "install_name_tool -change \"@executable_path/Chromium Embedded Framework\" \"@executable_path/../../../../Frameworks/Chromium Embedded Framework.framework/Chromium Embedded Framework\" \""+app_path+OS+"/Debug/"+APP+".app/Contents/Frameworks/"+APP+" Helper.app/Contents/MacOS/"+APP+" Helper\""
-				console.log(command)
-				CPP_DK_Execute(command)
-				command = "install_name_tool -add_rpath \"@executable_path/../../../../\" \""+app_path+OS+"/Debug/"+APP+".app/Contents/Frameworks/"+APP+" Helper.app/Contents/MacOS/"+APP+" Helper\""
-				console.log(command)
-				CPP_DK_Execute(command)
-				command = "install_name_tool -change \"@executable_path/Chromium Embedded Framework\" \"@executable_path/../Frameworks/Chromium Embedded Framework.framework/Chromium Embedded Framework\" \""+app_path+OS+"/Debug/"+APP+".app/Contents/Frameworks/"+APP+" Helper.app/Contents/MacOS/"+APP+"\""
-				console.log(command)
-				CPP_DK_Execute(command)
-				command = "install_name_tool -add_rpath \"@executable_path/../\" \""+app_path+OS+"/Debug/"+APP+".app/Contents/MacOS/"+APP+"\""
-				console.log(command)
-				CPP_DK_Execute(command)
-			}
-			*/
-		}
-		if(TYPE === "Release" || TYPE === "ALL"){
-			//if(CPP_DKFile_Exists(app_path+OS+"/Release/"+APP+".app"))
-			//	CPP_DKFile_Rename(app_path+OS+"/Release/"+APP+".app", app_path+OS+"/Release/"+APP+"_OLD.app", true)
+		if(TYPE === "Release" || TYPE === "ALL")
 			CPP_DK_Execute("xcodebuild -target "+APP+" -configuration Release build")
-			
-			/*
-			if(CPP_DKFile_Exists(app_path+"assets/DKCef/mac64Release/Chromium Embedded Framework.framework")){
-				CPP_DKFile_MkDir(app_path+"mac64/Release/"+APP+".app/Contents/Frameworks")
-				CPP_DKFile_Copy(app_path+"assets/DKCef/mac64Release/Chromium Embedded Framework.framework", app_path+"mac64/Release/"+APP+".app/Contents/Frameworks/Chromium Embedded Framework.framework", true)
-				if(CPP_DKFile_Exists(DIGITALKNOB+"DK/DKPlugins/DKCefChild/mac64/Release/DKCefChild.app")){
-					CPP_DKFile_Copy(DIGITALKNOB+"DK/DKPlugins/DKCefChild/mac64/Release/DKCefChild.app", app_path+"mac64/Release/"+APP+".app/Contents/Frameworks/"+APP+" Helper.app", true)
-					CPP_DKFile_Rename(app_path+"mac64/Debug/"+APP+".app/Contents/Frameworks/"+APP+" Helper.app/Contents/MacOS/DKCefChild", app_path+"mac64/Release/"+APP+".app/Contents/Frameworks/"+APP+" Helper.app/Contents/MacOS/"+APP+" Helper", true)
-				}
-			}
-			//update the info.plist to include the logo icon
-			if(CPP_DKFile_Exists(app_path+OS+"/Release/"+APP+".app/Contents/info.plist")){
-				let info_plist = CPP_DKFile_FileToString(app_path+OS+"/Release/"+APP+".app/Contents/info.plist")
-				info_plist = info_plist.replace("<dict>", "<dict><key>CFBundleIconFile</key><string>logo</string>")
-				CPP_DKFile_StringToFile(info_plist, app_path+OS+"/Release/"+APP+".app/Contents/info.plist")
-			}
-			//update install_name_tool if cef present
-			if(CPP_DKFile_Exists(app_path+OS+"/Release/"+APP+".app/Contents/Frameworks/Chromium Embedded Framework.framework")){
-				console.log("USING CHROMIUM EMBEDDED FRAMEWORK")
-				let command = "install_name_tool -change \"@executable_path/Chromium Embedded Framework\" \"@executable_path/../../../../Frameworks/Chromium Embedded Framework.framework/Chromium Embedded Framework\" \""+app_path+OS+"/Release/"+APP+".app/Contents/Frameworks/"+APP+" Helper.app/Contents/MacOS/"+APP+" Helper\""
-				console.log(command)
-				CPP_DK_Execute(command)
-				command = "install_name_tool -add_rpath \"@executable_path/../../../../\" \""+app_path+OS+"/Release/"+APP+".app/Contents/Frameworks/"+APP+" Helper.app/Contents/MacOS/"+APP+" Helper\""
-				console.log(command)
-				CPP_DK_Execute(command)
-				command = "install_name_tool -change \"@executable_path/Chromium Embedded Framework\" \"@executable_path/../Frameworks/Chromium Embedded Framework.framework/Chromium Embedded Framework\" \""+app_path+OS+"/Release/"+APP+".app/Contents/Frameworks/"+APP+" Helper.app/Contents/MacOS/"+APP+"\""
-				console.log(command)
-				CPP_DK_Execute(command)
-				command = "install_name_tool -add_rpath \"@executable_path/../\" \""+app_path+OS+"/Release/"+APP+".app/Contents/MacOS/"+APP+"\""
-				console.log(command)
-				CPP_DK_Execute(command)
-			}
-			*/
-		}
 	}
 	
 	///// IOS32 ////
@@ -490,13 +375,9 @@ function DKBuild_DoResults(){
 		CPP_DKFile_ChDir(app_path+OS)
 		let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Xcode\" "+cmake_string+" -DCMAKE_TOOLCHAIN_FILE="+DIGITALKNOB+"DK/DKCMake/ios.toolchain.cmake -DIOS_PLATFORM=OS -DSDK_VERSION=15.0 -DDEPLOYMENT_TARGET=13.0 "+DIGITALKNOB+"DK")
 		if(TYPE === "Debug" || TYPE === "ALL")
-			//CPP_DKFile_Rename(app_path+OS+"/Debug/"+APP+".app", app_path+OS+"/Debug/"+APP+"_OLD.app", true)
-			//CPP_DK_Execute("xcodebuild -target "+APP+" -configuration Debug build -arch \"armv7 armv7s\"")
-			CPP_DK_Execute("xcodebuild -target "+APP+" -configuration Debug build")
+			CPP_DK_Execute("xcodebuild -target "+APP+" -configuration Debug build") //-arch \"armv7 armv7s\"")
 		if(TYPE === "Release" || TYPE === "ALL")
-			//CPP_DKFile_Rename(app_path+OS+"/Release/"+APP+".app", app_path+OS+"/Release/"+APP+"_OLD.app", true)
-			//CPP_DK_Execute("xcodebuild -target "+APP+" -configuration Release build -arch \"armv7 armv7s\"")
-			CPP_DK_Execute("xcodebuild -target "+APP+" -configuration Release build")
+			CPP_DK_Execute("xcodebuild -target "+APP+" -configuration Release build") //-arch \"armv7 armv7s\"")
 	}
 	
 	///// IOS64 ////
@@ -506,10 +387,8 @@ function DKBuild_DoResults(){
 		CPP_DKFile_ChDir(app_path+OS)
 		let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Xcode\" "+cmake_string+" -DCMAKE_TOOLCHAIN_FILE="+DIGITALKNOB+"DK/DKCMake/ios.toolchain.cmake -DPLATFORM=OS64 -DSDK_VERSION=15.0 -DDEPLOYMENT_TARGET=13.0 "+DIGITALKNOB+"DK")
 		if(TYPE === "Debug" || TYPE === "ALL")
-			//CPP_DKFile_Rename(app_path+OS+"/Debug/"+APP+".app", app_path+OS+"/Debug/"+APP+"_OLD.app", true)
 			CPP_DK_Execute("xcodebuild -target "+APP+" -configuration Debug build")
 		if(TYPE === "Release" || TYPE === "ALL")
-			//CPP_DKFile_Rename(app_path+OS+"/Release/"+APP+".app", app_path+OS+"/Release/"+APP+"_OLD.app", true)
 			CPP_DK_Execute("xcodebuild -target "+APP+" -configuration Release build")
 	}
 	
@@ -520,12 +399,8 @@ function DKBuild_DoResults(){
 		CPP_DKFile_ChDir(app_path+OS)
 		let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Xcode\" "+cmake_string+" -DCMAKE_TOOLCHAIN_FILE="+DIGITALKNOB+"DK/DKCMake/ios.toolchain.cmake -DIOS_PLATFORM=SIMULATOR -DSDK_VERSION=15.0 -DDEPLOYMENT_TARGET=13.0 "+DIGITALKNOB+"DK")
 		if(TYPE === "Debug" || TYPE === "ALL")
-			//CPP_DKFile_Rename(app_path+OS+"/Debug/"+APP+".app", app_path+OS+"/Debug/"+APP+"_OLD.app", true)
-			//CPP_DK_Execute("xcodebuild -target "+APP+" -configuration Debug build -sdk iphonesimulator11.2")
 			CPP_DK_Execute("xcodebuild -target "+APP+" -configuration Debug build")
 		if(TYPE === "Release" || TYPE === "ALL")
-			//CPP_DKFile_Rename(app_path+OS+"/Release/"+APP+".app", app_path+OS+"/Release/"+APP+"_OLD.app", true)
-			//CPP_DK_Execute("xcodebuild -target "+APP+" -configuration Release build -sdk iphonesimulator11.2")
 			CPP_DK_Execute("xcodebuild -target "+APP+" -configuration Release build")
 	}
 	
@@ -536,12 +411,8 @@ function DKBuild_DoResults(){
 		CPP_DKFile_ChDir(app_path+OS)
 		let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Xcode\" "+cmake_string+" -DCMAKE_TOOLCHAIN_FILE="+DIGITALKNOB+"DK/DKCMake/ios.toolchain.cmake -DPLATFORM=SIMULATOR64 -DSDK_VERSION=15.0 -DDEPLOYMENT_TARGET=13.0 "+DIGITALKNOB+"DK")
 		if(TYPE === "Debug" || TYPE === "ALL")
-			//CPP_DKFile_Rename(app_path+OS+"/Debug/"+APP+".app", app_path+OS+"/Debug/"+APP+"_OLD.app", true)
-			//CPP_DK_Execute("xcodebuild -target "+APP+" -configuration Debug build -sdk iphonesimulator11.2")
 			CPP_DK_Execute("xcodebuild -target "+APP+" -configuration Debug build")
 		if(TYPE === "Release" || TYPE === "ALL")
-			//CPP_DKFile_Rename(app_path+OS+"/Release/"+APP+".app", app_path+OS+"/Release/"+APP+"_OLD.app", true)
-			//CPP_DK_Execute("xcodebuild -target "+APP+" -configuration Release build -sdk iphonesimulator11.2")
 			CPP_DK_Execute("xcodebuild -target "+APP+" -configuration Release build")
 	}
 	
@@ -555,19 +426,14 @@ function DKBuild_DoResults(){
 			CPP_DKFile_MkDir(app_path+OS+"/Debug")
 			CPP_DKFile_ChDir(app_path+OS+"/Debug")
 			let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DIGITALKNOB+"DK")
-			//CPP_DKFile_Rename(app_path+OS+"/Debug/"+APP, app_path+OS+"/Debug/"+APP+"_OLD", true)
 			CPP_DK_Execute("make "+APP)
-			//CPP_DK_Execute("chmod +x "+app_path+OS+"/Debug/"+APP)
-
 		}
 		if(TYPE === "Release" || TYPE === "ALL"){
 			cmake_string = cmake_string.replace("-DDEBUG=ON ", "");
 			CPP_DKFile_MkDir(app_path+OS+"/Release")
 			CPP_DKFile_ChDir(app_path+OS+"/Release")
 			let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DIGITALKNOB+"DK")
-			//CPP_DKFile_Rename(app_path+OS+"/Release/"+APP, app_path+OS+"/Release/"+APP+"_OLD", true)
 			CPP_DK_Execute("make "+APP)
-			//CPP_DK_Execute("chmod +x "+app_path+OS+"/Release/"+APP)
 		}
 	}
 	
@@ -581,18 +447,14 @@ function DKBuild_DoResults(){
 			CPP_DKFile_MkDir(app_path+OS+"/Debug")
 			CPP_DKFile_ChDir(app_path+OS+"/Debug")
 			let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DIGITALKNOB+"DK")
-			//CPP_DKFile_Rename(app_path+OS+"/Debug/"+APP, app_path+OS+"/Debug/"+APP+"_OLD", true)
 			CPP_DK_Execute("make "+APP)
-			//CPP_DK_Execute("chmod +x "+app_path+OS+"/Debug/"+APP)
 		}
 		if(TYPE === "Release" || TYPE === "ALL"){
 			cmake_string = cmake_string.replace("-DDEBUG=ON ", "");
 			CPP_DKFile_MkDir(app_path+OS+"/Release")
 			CPP_DKFile_ChDir(app_path+OS+"/Release")
 			let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DIGITALKNOB+"DK")
-			//CPP_DKFile_Rename(app_path+OS+"/Release/"+APP, app_path+OS+"/Release/"+APP+"_OLD", true)
 			CPP_DK_Execute("make "+APP)
-			//CPP_DK_Execute("chmod +x "+app_path+OS+"/Release/"+APP)
 		}
 	}
 	
@@ -605,18 +467,14 @@ function DKBuild_DoResults(){
 			CPP_DKFile_MkDir(app_path+OS+"/Debug")
 			CPP_DKFile_ChDir(app_path+OS+"/Debug")
 			let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DIGITALKNOB+"DK")
-			//CPP_DKFile_Rename(app_path+OS+"/Debug/"+APP, app_path+OS+"/Debug/"+APP+"_OLD", true)
 			CPP_DK_Execute("make "+APP)
-			//CPP_DK_Execute("chmod +x "+app_path+OS+"/Debug/"+APP)
 		}
 		if(TYPE === "Release" || TYPE === "ALL"){
 			cmake_string = cmake_string.replace("-DDEBUG=ON ", "");
 			CPP_DKFile_MkDir(app_path+OS+"/Release")
 			CPP_DKFile_ChDir(app_path+OS+"/Release")
 			let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DIGITALKNOB+"DK")
-			//CPP_DKFile_Rename(app_path+OS+"/Release/"+APP, app_path+OS+"/Release/"+APP+"_OLD", true)
 			CPP_DK_Execute("make "+APP)
-			//CPP_DK_Execute("chmod +x "+app_path+OS+"/Release/"+APP)
 		}
 	}
 	
@@ -629,7 +487,6 @@ function DKBuild_DoResults(){
 			CPP_DKFile_MkDir(app_path+OS+"/Debug")
 			CPP_DKFile_ChDir(app_path+OS+"/Debug")
 			let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DIGITALKNOB+"DK")
-			//CPP_DKFile_Rename(app_path+OS+"/Debug/"+APP, app_path+OS+"/Debug/"+APP+"_OLD", true)
 			CPP_DK_Execute("make "+APP)
 		}
 		if(TYPE === "Release" || TYPE === "ALL"){
@@ -637,7 +494,6 @@ function DKBuild_DoResults(){
 			CPP_DKFile_MkDir(app_path+OS+"/Release")
 			CPP_DKFile_ChDir(app_path+OS+"/Release")
 			let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DIGITALKNOB+"DK")
-			//CPP_DKFile_Rename(app_path+OS+"/Release/"+APP, app_path+OS+"/Release/"+APP+"_OLD", true)
 			CPP_DK_Execute("make "+APP)
 		}
 	}
@@ -652,15 +508,10 @@ function DKBuild_DoResults(){
 			let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Visual Studio 16 2019\" -A ARM -DCMAKE_TOOLCHAIN_FILE="+ANDROIDNDK+"/build/cmake/android.toolchain.cmake -DANDROIDNDK="+ANDROIDNDK+" -DANDROID_ABI=armeabi-v7a -DANDROID_NATIVE_API_LEVEL=21 -DCMAKE_CXX_FLAGS=-std=c++1z "+cmake_string+DIGITALKNOB+"DK")
 		else if(CPP_DK_GetOS() === "Linux" || CPP_DK_GetOS() === "Mac")
 			let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DIGITALKNOB+"DK")
-
-		if(TYPE === "Debug" || TYPE === "ALL"){
-			//CPP_DKFile_Rename(app_path+OS+"/Debug/"+APP, app_path+OS+"/Debug/"+APP+"_OLD", true)
+		if(TYPE === "Debug" || TYPE === "ALL")
 			CPP_DK_Execute(MSBUILD+" "+app_path+OS+"/"+APP+".sln /p:Configuration=Debug")
-		}
-		if(TYPE === "Release" || TYPE === "ALL"){
-			//CPP_DKFile_Rename(app_path+OS+"/Release/"+APP, app_path+OS+"/Release/"+APP+"_OLD", true)
+		if(TYPE === "Release" || TYPE === "ALL")
 			CPP_DK_Execute(MSBUILD+" "+app_path+OS+"/"+APP+".sln /p:Configuration=Release")
-		}
 		/*
 		if(TYPE === "Debug" || TYPE === "ALL"){
 			CPP_DKFile_MkDir(app_path+"android32/Debug")
@@ -685,15 +536,10 @@ function DKBuild_DoResults(){
 			let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Visual Studio 16 2019\" -A ARM64 -DCMAKE_TOOLCHAIN_FILE="+ANDROIDNDK+"/build/cmake/android.toolchain.cmake -DANDROIDNDK="+ANDROIDNDK+" -DANDROID_ABI=arm64-v8a -DANDROID_NATIVE_API_LEVEL=21 -DCMAKE_CXX_FLAGS=-std=c++1z "+cmake_string+DIGITALKNOB+"DK")
 		else if(CPP_DK_GetOS() === "Linux" || CPP_DK_GetOS() === "Mac")
 			rtvalue = CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DIGITALKNOB+"DK")
-		
-		if(TYPE === "Debug" || TYPE === "ALL"){
-			//CPP_DKFile_Rename(app_path+OS+"/Debug/"+APP, app_path+OS+"/Debug/"+APP+"_OLD", true)
+		if(TYPE === "Debug" || TYPE === "ALL")
 			CPP_DK_Execute(MSBUILD+" "+app_path+OS+"/"+APP+".sln /p:Configuration=Debug")
-		}
-		if(TYPE === "Release" || TYPE === "ALL"){
-			//CPP_DKFile_Rename(app_path+OS+"/Release/"+APP, app_path+OS+"/Release/"+APP+"_OLD", true)
+		if(TYPE === "Release" || TYPE === "ALL")
 			CPP_DK_Execute(MSBUILD+" "+app_path+OS+"/"+APP+".sln /p:Configuration=Release")
-		}
 		/*
 		if(TYPE === "Debug" || TYPE === "ALL"){
 			CPP_DKFile_MkDir(app_path+"android64/Debug")
@@ -727,7 +573,7 @@ function DKBuild_DoResults(){
 	
 	//Refresh Icons on Windows
 	//CPP_DK_Execute("ie4uinit.exe -ClearIconCache")
-    	//CPP_DK_Execute("ie4uinit.exe -show") //Windows 10
+    //CPP_DK_Execute("ie4uinit.exe -show") //Windows 10
 }
 
 DKBuild_init()

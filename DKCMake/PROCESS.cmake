@@ -364,8 +364,6 @@ if(WIN_32)
 	
 	
 	## TODO: can we use include_external_msproject() to include all of our third party libraries created with CMake?
-	
-	
 	foreach(plugin ${dkdepend_list})
 		#if(EXISTS "${3rdParty}/${plugin}/CMakeLists.txt")
 		#	add_dependencies(${APP_NAME} ${plugin})
@@ -398,6 +396,13 @@ if(WIN_32)
 	
 	set_target_properties(${APP_NAME} PROPERTIES LINK_FLAGS_DEBUG ${DEBUG_FLAGS} LINK_FLAGS_RELEASE ${RELEASE_FLAGS})
 	
+	### PRE BUILD ###
+	#CPP_DKFile_Rename(app_path+OS+"/Release/"+APP+".app", app_path+OS+"/Release/"+APP+"_OLD.app", true)
+	
+	### POST BUILD ###
+	#CPP_DKFile_Copy(app_path+OS+"/Release/"+APP+".pdb", app_path+"assets/"+APP+".pdb", true)
+	#CPP_DK_Execute(DIGITALKNOB+"DK/3rdParty/upx-3.95-win64/upx.exe -9 -v "+app_path+OS+"/Release/"+APP+".exe")
+		
 	# "https://gist.github.com/baiwfg2/39881ba703e9c74e95366ed422641609"
 	# TEST
 	#add_custom_command(
@@ -489,6 +494,13 @@ if(WIN_64)
 	string(REPLACE ";" " " RELEASE_FLAGS "${RELEASE_LINK_FLAGS}")
 	
 	set_target_properties(${APP_NAME} PROPERTIES LINK_FLAGS_DEBUG ${DEBUG_FLAGS} LINK_FLAGS_RELEASE ${RELEASE_FLAGS})
+	
+	### PRE BUILD ###
+	#CPP_DKFile_Rename(app_path+OS+"/Release/"+APP+".app", app_path+OS+"/Release/"+APP+"_OLD.app", true)
+	
+	### POST BUILD ###
+	#CPP_DKFile_Copy(app_path+OS+"/Release/"+APP+".pdb", app_path+"assets/"+APP+".pdb", true)
+	#CPP_DK_Execute(DIGITALKNOB+"DK/3rdParty/upx-3.95-win64/upx.exe -9 -v "+app_path+OS+"/Release/"+APP+".exe")
 endif(WIN_64)
 
 #######
@@ -566,6 +578,10 @@ if(MAC)
 		endif()
 	endforeach()
 	
+	### PRE BUILD ###
+	#CPP_DKFile_Rename(app_path+OS+"/Release/"+APP+".app", app_path+OS+"/Release/"+APP+"_OLD.app", true)
+	
+	### POST BUILD ###
 	# Copy the CEF framework into the app bundle
 	if(EXISTS ${CEF})
 		message(STATUS "Adding Chromium Embedded Framework.framework to bundle . . .")
@@ -609,7 +625,40 @@ if(MAC)
 					"$<TARGET_FILE_DIR:${APP_NAME}>/wrapper"
 		)
 	endif()
-endif()
+	
+	#CPP_DK_Execute("chmod +x "+app_path+OS+"/Debug/"+APP)
+#			if(CPP_DKFile_Exists(app_path+"assets/DKCef/mac64Debug/Chromium Embedded Framework.framework")){
+#				CPP_DKFile_MkDir(app_path+"mac64/Debug/"+APP+".app/Contents/Frameworks")
+#				CPP_DKFile_Copy(app_path+"assets/DKCef/mac64Debug/Chromium Embedded Framework.framework", app_path+"mac64/Debug/"+APP+".app/Contents/Frameworks/Chromium Embedded Framework.framework", true)
+#				if(CPP_DKFile_Exists(DIGITALKNOB+"DK/DKPlugins/DKCefChild/mac64/Debug/DKCefChild.app")){
+#					CPP_DKFile_Copy(DIGITALKNOB+"DK/DKPlugins/DKCefChild/mac64/Debug/DKCefChild.app", app_path+"mac64/Debug/"+APP+".app/Contents/Frameworks/"+APP+" Helper.app", true)
+#					CPP_DKFile_Rename(app_path+"mac64/Debug/"+APP+".app/Contents/Frameworks/"+APP+" Helper.app/Contents/MacOS/DKCefChild", app_path+"mac64/Debug/"+APP+".app/Contents/Frameworks/"+APP+" Helper.app/Contents/MacOS/"+APP+" Helper", true)
+#				}
+#			}
+#			//update the info.plist to include the logo icon
+#			if(CPP_DKFile_Exists(app_path+OS+"/Debug/"+APP+".app/Contents/info.plist")){
+#				let info_plist = CPP_DKFile_FileToString(app_path+OS+"/Debug/"+APP+".app/Contents/info.plist")
+#				info_plist = info_plist.replace("<dict>", "<dict><key>CFBundleIconFile</key><string>logo</string>")
+#				CPP_DKFile_StringToFile(info_plist, app_path+OS+"/Debug/"+APP+".app/Contents/info.plist")
+#			}
+#			//update install_name_tool if cef present
+#			if(CPP_DKFile_Exists(app_path+OS+"/Debug/"+APP+".app/Contents/Frameworks/Chromium Embedded Framework.framework")){
+#				console.log("USING CHROMIUM EMBEDDED FRAMEWORK")
+#				let command = "install_name_tool -change \"@executable_path/Chromium Embedded Framework\" \"@executable_path/../../../../Frameworks/Chromium Embedded Framework.framework/Chromium Embedded Framework\" \""+app_path+OS+"/Debug/"+APP+".app/Contents/Frameworks/"+APP+" Helper.app/Contents/MacOS/"+APP+" Helper\""
+#				console.log(command)
+#				CPP_DK_Execute(command)
+#				command = "install_name_tool -add_rpath \"@executable_path/../../../../\" \""+app_path+OS+"/Debug/"+APP+".app/Contents/Frameworks/"+APP+" Helper.app/Contents/MacOS/"+APP+" Helper\""
+#				console.log(command)
+#				CPP_DK_Execute(command)
+#				command = "install_name_tool -change \"@executable_path/Chromium Embedded Framework\" \"@executable_path/../Frameworks/Chromium Embedded Framework.framework/Chromium Embedded Framework\" \""+app_path+OS+"/Debug/"+APP+".app/Contents/Frameworks/"+APP+" Helper.app/Contents/MacOS/"+APP+"\""
+#				console.log(command)
+#				CPP_DK_Execute(command)
+#				command = "install_name_tool -add_rpath \"@executable_path/../\" \""+app_path+OS+"/Debug/"+APP+".app/Contents/MacOS/"+APP+"\""
+#				console.log(command)
+#				CPP_DK_Execute(command)
+#			}
+#			*/
+#endif()
 
 #######
 if(IOS)
@@ -694,6 +743,12 @@ if(IOS)
 			add_dependencies(${APP_NAME} ${plugin})
 		endif()	
 	endforeach()
+	
+	### PRE BUILD ###
+	#CPP_DKFile_Rename(app_path+OS+"/Release/"+APP+".app", app_path+OS+"/Release/"+APP+"_OLD.app", true)
+	
+	### POST BUILD ###
+	#CPP_DK_Execute("chmod +x "+app_path+OS+"/Debug/"+APP)
 endif()
 
 ##########
@@ -780,6 +835,12 @@ if(IOSSIM)
 			add_dependencies(${APP_NAME} ${plugin})
 		endif()	
 	endforeach()
+	
+	### PRE BUILD ###
+	#CPP_DKFile_Rename(app_path+OS+"/Release/"+APP+".app", app_path+OS+"/Release/"+APP+"_OLD.app", true)
+	
+	### POST BUILD ###
+	#CPP_DK_Execute("chmod +x "+app_path+OS+"/Debug/"+APP)
 endif()
 
 #########
@@ -850,6 +911,12 @@ if(LINUX)
 		# Install shortcut of Release build to the apps menu
 		DKEXECUTE_PROCESS(desktop-file-install --dir=/home/$ENV{USER}/.local/share/applications ${DKPROJECT}/${OS}/Release/${APP_NAME}.desktop WORKING_DIRECTORY ${DKPROJECT}/${OS}/Release)
 	endif()
+	
+	### PRE BUILD ###
+	#CPP_DKFile_Rename(app_path+OS+"/Release/"+APP+".app", app_path+OS+"/Release/"+APP+"_OLD.app", true)
+	
+	### POST BUILD ###
+	#CPP_DK_Execute("chmod +x "+app_path+OS+"/Debug/"+APP)
 endif()
 
 #############
@@ -918,6 +985,12 @@ if(RASPBERRY)
 	
 	# Install shortcut of Release build to the apps menu
 	DKEXECUTE_PROCESS(desktop-file-install --dir=/home/$ENV{USER}/.local/share/applications ${DKPROJECT}/${OS}/Release/${APP_NAME}.desktop WORKING_DIRECTORY ${DKPROJECT}/${OS}/Release)
+	
+	### PRE BUILD ###
+	#CPP_DKFile_Rename(app_path+OS+"/Release/"+APP+".app", app_path+OS+"/Release/"+APP+"_OLD.app", true)
+	
+	### POST BUILD ###
+	#CPP_DK_Execute("chmod +x "+app_path+OS+"/Debug/"+APP)
 endif()
 
 ###########
@@ -968,6 +1041,11 @@ if(ANDROID)
 	endforeach()
 
 	#include_external_msproject(DKGradle ${DKPROJECT}/${OS}/DKGradle.androidproj)	
+	
+	### PRE BUILD ###
+	#CPP_DKFile_Rename(app_path+OS+"/Release/"+APP+".app", app_path+OS+"/Release/"+APP+"_OLD.app", true)
+	
+	### POST BUILD ###
 endif()
 
 
