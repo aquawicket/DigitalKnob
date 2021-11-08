@@ -3,7 +3,8 @@
 # https://github.com/webstorage119/website-1/raw/master/cryptopp600.zip
 
 if(IOSSIM)
-	DKDEPEND(libmd)
+	#DKDEPEND(libmd)
+	DKDEPEND(macports)
 endif()
 
 ### VERSION ###
