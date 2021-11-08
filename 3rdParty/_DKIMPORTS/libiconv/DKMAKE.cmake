@@ -33,8 +33,6 @@ LINUX_DEBUG_LIB(${ICONV}/${OS}/${DEBUG_DIR}/libiconv.a)
 LINUX_RELEASE_LIB(${ICONV}/${OS}/${RELEASE_DIR}/libiconv.a)
 RASPBERRY_DEBUG_LIB(${ICONV}/${OS}/${DEBUG_DIR}/libiconv.a)
 RASPBERRY_RELEASE_LIB(${ICONV}/${OS}/${RELEASE_DIR}/libiconv.a)
-##ANDROID_DEBUG_LIB(${ICONV}/${OS}/${DEBUG_DIR}/obj/local/armeabi-v7a/libiconv.a)
-##ANDROID_RELEASE_LIB(${ICONV}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/libiconv.a)
 ANDROID_DEBUG_LIB(${ICONV}/${OS}/${DEBUG_DIR}/libiconv.a)
 ANDROID_RELEASE_LIB(${ICONV}/${OS}/${RELEASE_DIR}/libiconv.a)
 
