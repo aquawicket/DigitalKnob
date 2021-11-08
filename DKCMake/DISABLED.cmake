@@ -329,6 +329,7 @@ if(ANDROID) # Disabled for Android targets
 	DKDISABLE(DKRml)
 	DKDISABLE(DKRmlIframe)
 	DKDISABLE(DKSDLRml)
+	DKDISABLE(DKSFMLWindow)
 	DKDISABLE(DKWebSockets)
 	DKDISABLE(DKWebview)
 	DKDISABLE(flac)
