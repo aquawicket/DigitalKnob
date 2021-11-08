@@ -20,8 +20,6 @@ DKSET(BZIP2 ${3RDPARTY}/${BZIP2_NAME})
 
 ### INSTALL ###
 DKINSTALL(${BZIP2_DL} bzip2 ${BZIP2})
-DKCOPY(${BZIP2}/win32 ${BZIP2}/win64 FALSE)
-DKCOPY(${BZIP2}/build-VS2019 ${BZIP2}/${OS} FALSE)
 if(NOT EXISTS ${BZIP2}/copy)
 	DKCOPY(${BZIP2} ${BZIP2}/copy TRUE)
 endif()
@@ -47,8 +45,7 @@ ANDROID_RELEASE_LIB(${BZIP2}/${OS}/libbz2.a)
 
 
 ### 3RDPARTY LINK ###
-#DKSET(BZIP2_WIN -DBZIP2_INCLUDE_DIR=${BZIP2}/${OS} -DBZIP2_LIBRARY_DEBUG=${BZIP2}/${OS}/libbz2.a -DBZIP2_LIBRARY_RELEASE=${BZIP2}/${OS}/libbz2.a)
-DKSET(BZIP2_WIN -DBZIP2_INCLUDE_DIR=${BZIP2} -DBZIP2_LIBRARY_DEBUG=${BZIP2}/${OS}/${DEBUG_DIR}/libbz2-static.lib -DBZIP2_LIBRARY_RELEASE=${BZIP2}/${OS}/${RELEASE_DIR}/libbz2-static.lib -DBZIP2_LIBRARIES=${BZIP2}/${OS}/${RELEASE_DIR})
+DKSET(BZIP2_WIN -DBZIP2_INCLUDE_DIR=${BZIP2} -DBZIP2_LIBRARY_DEBUG=${BZIP2}/${OS}/${DEBUG_DIR}/libbz2-static.lib -DBZIP2_LIBRARY_RELEASE=${BZIP2}/${OS}/${RELEASE_DIR}/libbz2-static.lib) #-DBZIP2_LIBRARIES=${BZIP2}/${OS}/${RELEASE_DIR}/libbz2-static.lib)
 DKSET(BZIP2_APPLE -DBZIP2_INCLUDE_DIR=${BZIP2}/${OS} -DBZIP2_LIBRARY_DEBUG=${BZIP2}/${OS}/libbz2.a -DBZIP2_LIBRARY_RELEASE=${BZIP2}/${OS}/libbz2.a)
 DKSET(BZIP2_LINUX -DBZIP2_INCLUDE_DIR=${BZIP2}/${OS} -DBZIP2_LIBRARY_DEBUG=${BZIP2}/${OS}/libbz2.a -DBZIP2_LIBRARY_RELEASE=${BZIP2}/${OS}/libbz2.a)
 DKSET(BZIP2_RASPBERRY -DBZIP2_INCLUDE_DIR=${BZIP2}/${OS} -DBZIP2_LIBRARY_DEBUG=${BZIP2}/${OS}/libbz2.a -DBZIP2_LIBRARY_RELEASE=${BZIP2}/${OS}/libbz2.a)
@@ -57,53 +54,46 @@ DKSET(BZIP2_ANDROID -DBZIP2_INCLUDE_DIR=${BZIP2}/${OS} -DBZIP2_LIBRARY_DEBUG=${B
 
 
 ### COMPILE ###
-
-WIN_PATH(${BZIP2}/${OS})
-WIN32_VS(${BZIP2_NAME} bzip2.sln libbz2-static)
-#WIN_VS(${BZIP2_NAME} bzip2.sln bzip2-static)
-WIN64_VS(${BZIP2_NAME} bzip2.sln libbz2-static x64)
-
-#if(WIN_32)
-#	if(NOT EXISTS ${BZIP2}/${OS}/bzip2.c)
-#		DKCOPY(${BZIP2}/copy ${BZIP2}/${OS} TRUE)
-#	endif()
-#WIN32_BASH("#!/bin/bash\;
-#cd /${BZIP2}/${OS}\;
-#export PATH=/${MINGW32}/bin:$PATH\;
-#export PATH=/${MSYS}/bin:$PATH\;
-#make CFLAGS='-static-libgcc'\;
-#exit\;")
+if(WIN_32)
+	if(NOT EXISTS ${BZIP2}/${OS}/bzip2.c)
+		DKCOPY(${BZIP2}/copy ${BZIP2}/${OS} TRUE)
+		DKCOPY(${BZIP2}/build-VS2019 ${BZIP2}/${OS} TRUE)
+	endif()
+	WIN32_PATH(${BZIP2}/${OS})
+	WIN32_VS(${BZIP2_NAME} bzip2.sln libbz2-static)
+	#WIN32_VS(${BZIP2_NAME} bzip2.sln bzip2-static)
+#	WIN32_MSYS(make "CFLAGS=-static-libgcc")
 #	DKCOPY(${MINGW32}/lib/gcc/i686-w64-mingw32/${MINGW32_VERSION}/libgcc.a ${BZIP2}/${OS} TRUE)
-#endif()
+endif()
 
-#IF(WIN_64)
-#	if(NOT EXISTS ${BZIP2}/${OS}/bzip2.c)
-#		DKCOPY(${BZIP2}/copy ${BZIP2}/${OS} TRUE)
-#	endif()
-#WIN64_BASH("#!/bin/bash\;
-#cd /${BZIP2}/${OS}\;
-#export PATH=/${MINGW64}/bin:$PATH\;
-#export PATH=/${MSYS}/bin:$PATH\;
-#make CFLAGS='-m64 -static-libgcc'\;
-#exit\;")
+
+IF(WIN_64)
+	if(NOT EXISTS ${BZIP2}/${OS}/bzip2.c)
+		DKCOPY(${BZIP2}/copy ${BZIP2}/${OS} TRUE)
+		DKCOPY(${BZIP2}/build-VS2019 ${BZIP2}/${OS} TRUE)
+	endif()
+	WIN64_PATH(${BZIP2}/${OS})
+	WIN64_VS(${BZIP2_NAME} bzip2.sln libbz2-static x64)
+	#WIN32_VS(${BZIP2_NAME} bzip2.sln bzip2-static)
+#	WIN64_MSYS(make "CFLAGS=-m64 -static-libgcc")
 #	DKCOPY(${MINGW64}/lib/gcc/x86_64-w64-mingw32/${MINGW32_VERSION}/libgcc.a ${BZIP2}/${OS} TRUE)
-#ENDIF()
-
+ENDIF()
 
 
 IF(MAC_64)
 	if(NOT EXISTS ${BZIP2}/${OS}/bzip2.c)
 		DKCOPY(${BZIP2}/copy ${BZIP2}/${OS} TRUE)
 	endif()
-	DKSETPATH(${BZIP2}/${OS})
-	MAC_COMMAND(make) #"CXXFLAGS=-arch x86_64" "CFLAGS=-arch x86_64" "LDFLAGS=-arch x86_64")
+	MAC_PATH(${BZIP2}/${OS})
+	MAC_COMMAND(make)
 ENDIF()
+
 
 IF(LINUX)
 	if(NOT EXISTS ${BZIP2}/${OS}/bzip2.c)
 		DKCOPY(${BZIP2}/copy ${BZIP2}/${OS} TRUE)
 	endif()
-	DKSETPATH(${BZIP2}/${OS})
+	LINUX_PATH(${BZIP2}/${OS})
 	LINUX_COMMAND(make)
 ENDIF()
 
@@ -112,7 +102,7 @@ IF(RASPBERRY)
 	if(NOT EXISTS ${BZIP2}/${OS}/bzip2.c)
 		DKCOPY(${BZIP2}/copy ${BZIP2}/${OS} TRUE)
 	endif()
-	DKSETPATH(${BZIP2}/${OS})
+	RASPBERRY_PATH(${BZIP2}/${OS})
 	RASPBERRY_COMMAND(make)
 ENDIF()
 
@@ -121,6 +111,6 @@ IF(ANDROID)
 	if(NOT EXISTS ${BZIP2}/${OS}/bzip2.c)
 		DKCOPY(${BZIP2}/copy ${BZIP2}/${OS} TRUE)
 	endif()
-	DKSETPATH(${BZIP2}/${OS})
+	ANDROID_PATH(${BZIP2}/${OS})
 	ANDROID_COMMAND(make)
 ENDIF()
