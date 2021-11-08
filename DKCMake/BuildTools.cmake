@@ -45,8 +45,8 @@ if(CMAKE_HOST_APPLE)
 	# Mac 32
 	DKSET(DKCMAKE_MAC32 ${CMAKE_EXE} -G "Xcode" 
 	-DCMAKE_OSX_ARCHITECTURES=x86
-	#"-DCMAKE_CXX_FLAGS=-std=c++17" 
 	-DBUILD_SHARED_LIBS=OFF)
+	#"-DCMAKE_CXX_FLAGS=-std=c++17" 
 
 	# Mac 64
 	DKSET(DKCMAKE_MAC64 ${CMAKE_EXE} -G "Xcode" 
@@ -97,45 +97,45 @@ if(CMAKE_HOST_LINUX AND LINUX)
 	
 	# Linux Debug
 	DKSET(DKCMAKE_LINUX_DEBUG ${CMAKE_EXE} -G "Unix Makefiles" 
-	#"CMAKE_CXX_FLAGS=-std=gnu++17 -lstdc++fs -g -no-pie" 
 	-DCMAKE_BUILD_TYPE=Debug 
 	-DBUILD_SHARED_LIBS=OFF 
 	-DCMAKE_C_FLAGS=-fPIC)
+	#"CMAKE_CXX_FLAGS=-std=gnu++17 -lstdc++fs -g -no-pie" 
 	
 	#Linux Release
 	DKSET(DKCMAKE_LINUX_RELEASE ${CMAKE_EXE} -G "Unix Makefiles"
 	-DCMAKE_C_FLAGS=-fPIC
-	#"CMAKE_CXX_FLAGS=-std=gnu++17 -lstdc++fs -g -no-pie" -
 	-DCMAKE_BUILD_TYPE=Release 
 	-DBUILD_SHARED_LIBS=OFF)
-
+	#"CMAKE_CXX_FLAGS=-std=gnu++17 -lstdc++fs -g -no-pie" 
+	
 	# Linux 32 Debug
 	DKSET(DKCMAKE_LINUX32_DEBUG ${CMAKE_EXE} -G "Unix Makefiles"
 	-DCMAKE_C_FLAGS=-fPIC
-	#"CMAKE_CXX_FLAGS=-std=gnu++17 -lstdc++fs -g -no-pie" 
 	-DCMAKE_BUILD_TYPE=Debug 
 	-DBUILD_SHARED_LIBS=OFF)
+	#"CMAKE_CXX_FLAGS=-std=gnu++17 -lstdc++fs -g -no-pie" 
 	
 	# Linux 32 Release
 	DKSET(DKCMAKE_LINUX32_RELEASE ${CMAKE_EXE} -G "Unix Makefiles"
 	-DCMAKE_C_FLAGS=-fPIC
-	#"CMAKE_CXX_FLAGS=-std=gnu++17 -lstdc++fs -g -no-pie" 
 	-DCMAKE_BUILD_TYPE=Release 
 	-DBUILD_SHARED_LIBS=OFF)
-
+	#"CMAKE_CXX_FLAGS=-std=gnu++17 -lstdc++fs -g -no-pie" 
+	
 	# Linux 64 Debug
 	DKSET(DKCMAKE_LINUX64_DEBUG ${CMAKE_EXE} -G "Unix Makefiles"
 	-DCMAKE_C_FLAGS=-fPIC
-	#"CMAKE_CXX_FLAGS=-std=gnu++17 -lstdc++fs -g -no-pie" 
 	-DCMAKE_BUILD_TYPE=Debug 
 	-DBUILD_SHARED_LIBS=OFF)
+	#"CMAKE_CXX_FLAGS=-std=gnu++17 -lstdc++fs -g -no-pie" 
 	
 	#Linux 64 Release
 	DKSET(DKCMAKE_LINUX64_RELEASE ${CMAKE_EXE} -G "Unix Makefiles"
 	-DCMAKE_C_FLAGS=-fPIC
-	#"CMAKE_CXX_FLAGS=-std=gnu++17 -lstdc++fs -g -no-pie" 
 	-DCMAKE_BUILD_TYPE=Release 
 	-DBUILD_SHARED_LIBS=OFF)
+	#"CMAKE_CXX_FLAGS=-std=gnu++17 -lstdc++fs -g -no-pie" 
 endif()
 
 
