@@ -95,7 +95,7 @@ IF(MAC_64)
 		DKCOPY(${BZIP2}/copy ${BZIP2}/${OS} TRUE)
 	endif()
 	DKSETPATH(${BZIP2}/${OS})
-	MAC_COMMAND(make "CXXFLAGS=-arch x86_64" "CFLAGS=-arch x86_64" "LDFLAGS=-arch x86_64")
+	MAC_COMMAND(make) #"CXXFLAGS=-arch x86_64" "CFLAGS=-arch x86_64" "LDFLAGS=-arch x86_64")
 ENDIF()
 
 IF(LINUX)
