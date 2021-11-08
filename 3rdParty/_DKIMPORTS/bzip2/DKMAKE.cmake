@@ -64,7 +64,7 @@ if(WIN_32)
 endif()
 
 
-IF(WIN_64)
+if(WIN_64)
 	DKCOPY(${BZIP2}/win32/bzip2.rc ${BZIP2}/${OS}/bzip2.rc FALSE) #copy project files that came with bzip
 	DKCOPY(${BZIP2}/win32/bzip2recover.rc ${BZIP2}/${OS}/bzip2recover.rc FALSE)
 	DKCOPY(${BZIP2}/win32/bzip2_version.h ${BZIP2}/${OS}/bzip2_version.h FALSE)
@@ -75,40 +75,40 @@ IF(WIN_64)
 	#WIN32_VS(${BZIP2_NAME} bzip2.sln bzip2-static)
 #	WIN64_MSYS(make "CFLAGS=-m64 -static-libgcc")
 #	DKCOPY(${MINGW64}/lib/gcc/x86_64-w64-mingw32/${MINGW32_VERSION}/libgcc.a ${BZIP2}/${OS} TRUE)
-ENDIF()
+endif()
 
 
-IF(MAC_64)
+if(MAC_64)
 	if(NOT EXISTS ${BZIP2}/${OS}/bzip2.c)
 		DKCOPY(${BZIP2}/copy ${BZIP2}/${OS} TRUE)
 	endif()
 	MAC_PATH(${BZIP2}/${OS})
 	MAC_COMMAND(make)
-ENDIF()
+endif()
 
 
-IF(LINUX)
+if(LINUX)
 	if(NOT EXISTS ${BZIP2}/${OS}/bzip2.c)
 		DKCOPY(${BZIP2}/copy ${BZIP2}/${OS} TRUE)
 	endif()
 	LINUX_PATH(${BZIP2}/${OS})
 	LINUX_COMMAND(make)
-ENDIF()
+endif()
 
 
-IF(RASPBERRY)
+if(RASPBERRY)
 	if(NOT EXISTS ${BZIP2}/${OS}/bzip2.c)
 		DKCOPY(${BZIP2}/copy ${BZIP2}/${OS} TRUE)
 	endif()
 	RASPBERRY_PATH(${BZIP2}/${OS})
 	RASPBERRY_COMMAND(make)
-ENDIF()
+endif()
 
 
-IF(ANDROID)
+if(ANDROID)
 	if(NOT EXISTS ${BZIP2}/${OS}/bzip2.c)
 		DKCOPY(${BZIP2}/copy ${BZIP2}/${OS} TRUE)
 	endif()
 	ANDROID_PATH(${BZIP2}/${OS})
 	ANDROID_COMMAND(make)
-ENDIF()
+endif()
