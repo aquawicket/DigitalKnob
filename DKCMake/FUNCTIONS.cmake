@@ -1079,7 +1079,7 @@ function(RASPBERRY64_RELEASE_PATH)
 	endif()
 endfunction()
 
-###################  BASH  ######################
+###################  Windows MSYS  ######################
 function(WIN_MSYS str)
 	if(WIN AND QUEUE_BUILD)
 		string(REPLACE ";" " " str "${ARGV}")
@@ -1145,6 +1145,60 @@ function(WIN64_RELEASE_MSYS str)
 	endif()
 endfunction()
 
+
+function(ANDROID_MSYS str)
+	if(ANDROID AND DEBUG)
+		WIN_MSYS(${ARGV})
+	endif()
+endfunction()
+
+function(ANDROID_DEBUG_MSYS str)
+	if(ANDROID AND DEBUG)
+		ANDROID_MSYS(${ARGV})
+	endif()
+endfunction()
+
+function(ANDROID_RELEASE_MSYS str)
+	if(ANDROID AND RELEASE)
+		ANDROID_MSYS(${ARGV})
+	endif()
+endfunction()
+
+function(ANDROID32_MSYS str)
+	if(ANDROID_32)
+		ANDROID_MSYS(${ARGV})
+	endif()
+endfunction()
+
+function(ANDROID32_DEBUG_MSYS str)
+	if(ANDROID_32 AND DEBUG)
+		ANDROID_MSYS(${ARGV})
+	endif()
+endfunction()
+
+function(ANDROID32_RELEASE_MSYS str)
+	if(ANDROID_32 AND RELEASE)
+		ANDROID_MSYS(${ARGV})
+	endif()
+endfunction()
+
+function(ANDROID64_MSYS str)
+	if(ANDROID_64)
+		ANDROID_MSYS(${ARGV})
+	endif()
+endfunction()
+
+function(ANDROID64_DEBUG_MSYS str)
+	if(ANDROID_64 AND DEBUG)
+		ANDROID_MSYS(${ARGV})
+	endif()
+endfunction()
+
+function(ANDROID64_RELEASE_MSYS str)
+	if(ANDROID_64 AND RELEASE)
+		ANDROID_MSYS(${ARGV})
+	endif()
+endfunction()
 
 #function(WIN_BASH str)
 #	if(WIN AND QUEUE_BUILD)
