@@ -1003,9 +1003,10 @@ DKBUILD_LOG("         DKINCLUDES_LIST:  ${DKINCLUDES_LIST}")
 DKBUILD_LOG("         DKLINKDIRS_LIST:  ${DKLINKDIRS_LIST}")
 file(WRITE ${DKPROJECT}/DKBUILD.log "${DKBUILD_LOG_FILE}")
 
-unset(DEPENDALL_FILE)
-unset(DESKTOP_FILE)
-unset(DKBUILD_LOG_FILE)
+DELETE_CACHE()
+#unset(DEPENDALL_FILE)
+#unset(DESKTOP_FILE)
+#unset(DKBUILD_LOG_FILE)
 	
 message(STATUS "\n")
 message(STATUS "**************************************************")
