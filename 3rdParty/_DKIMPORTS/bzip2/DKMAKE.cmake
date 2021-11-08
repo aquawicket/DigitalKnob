@@ -55,7 +55,7 @@ DKSET(BZIP2_ANDROID -DBZIP2_INCLUDE_DIR=${BZIP2}/${OS} -DBZIP2_LIBRARY_DEBUG=${B
 
 ### COMPILE ###
 if(WIN_32)
-	DKCOPY(${BZIP2}/build-VS2019 ${BZIP2}/${OS} TRUE)
+	DKCOPY(${BZIP2}/build-VS2019 ${BZIP2}/${OS} FALSE)
 	WIN32_PATH(${BZIP2}/${OS})
 	WIN32_VS(${BZIP2_NAME} bzip2.sln libbz2-static)
 	#WIN32_VS(${BZIP2_NAME} bzip2.sln bzip2-static)
@@ -65,8 +65,11 @@ endif()
 
 
 IF(WIN_64)
-	DKCOPY(${BZIP2}/win32 ${BZIP2}/${OS} TRUE) #copy project files that came with bzip
-	DKCOPY(${BZIP2}/build-VS2019 ${BZIP2}/${OS} TRUE)
+	DKCOPY(${BZIP2}/win32/bzip2.rc ${BZIP2}/${OS}/bzip2.rc FALSE) #copy project files that came with bzip
+	DKCOPY(${BZIP2}/win32/bzip2recover.rc ${BZIP2}/${OS}/bzip2recover.rc FALSE)
+	DKCOPY(${BZIP2}/win32/bzip2_version.h ${BZIP2}/${OS}/bzip2_version.h FALSE)
+	DKCOPY(${BZIP2}/win32/libbz2.rc ${BZIP2}/${OS}/libbz2.rc FALSE)
+	DKCOPY(${BZIP2}/build-VS2019 ${BZIP2}/${OS} FALSE)
 	WIN64_PATH(${BZIP2}/${OS})
 	WIN64_VS(${BZIP2_NAME} bzip2.sln libbz2-static x64)
 	#WIN32_VS(${BZIP2_NAME} bzip2.sln bzip2-static)
