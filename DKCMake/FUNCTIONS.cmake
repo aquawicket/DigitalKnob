@@ -151,7 +151,7 @@ endfunction()
 ##https://cmake.org/pipermail/cmake/2012-September/052205.html/
 # dk_file_download
 function(DOWNLOAD url dest_path) # ARGV1 = dest_path
-	message(STATUS "DOWNLOAD(${ARGC})")
+	message(STATUS "DOWNLOAD( ${ARGV} )")
 	#FIXME: Will not download if only 1 argument
 	#TODO: Let's supply the ability to add a primary root address to download from,  for fast downloading from local hard drives or storage 
 	#      we will also add a "backup" root address to download from. In case one of the internet download fails.
