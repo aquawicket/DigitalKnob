@@ -804,11 +804,6 @@ if(LINUX)
 		DKCOPY(${DKPROJECT}/Backup/ ${DKPROJECT}/assets/ FALSE)
 		DKREMOVE(${DKPROJECT}/Backup)
 	endif()
-
-	#LINUX_LIB(pthread)
-	#LINUX_LIB(dl)
-	#LINUX_LIB(libstdc++fs.a)
-	#set(CMAKE_CXX_FLAGS "-g -no-pie")
 	
 	if(DEBUG)
 		add_definitions(-DDEBUG)
@@ -1001,21 +996,11 @@ DKBUILD_LOG("                   FLAGS:  ${FLAGS}")
 DKBUILD_LOG("          DKDEFINES_LIST:  ${DKDEFINES_LIST}")
 DKBUILD_LOG("         DKINCLUDES_LIST:  ${DKINCLUDES_LIST}")
 DKBUILD_LOG("         DKLINKDIRS_LIST:  ${DKLINKDIRS_LIST}")
-file(WRITE ${DKPROJECT}/DKBUILD.log "${DKBUILD_LOG_FILE}")
-
-message(STATUS "Deleting ${CMAKE_BINARY_DIR}/CMakeCache.txt")
-DKREMOVE(${CMAKE_BINARY_DIR}/CMakeCache.txt)
-#file(WRITE ${CMAKE_BINARY_DIR}/CMakeCache.txt " ")
-#DELETE_CACHE()
-#unset(DEPENDALL_FILE)
-#unset(DESKTOP_FILE)
-#unset(DKBUILD_LOG_FILE)
+#file(WRITE ${DKPROJECT}/DKBUILD.log "${DKBUILD_LOG_FILE}")
 
 
-
+# "https://gist.github.com/baiwfg2/39881ba703e9c74e95366ed422641609"
 message(STATUS "\n")
 message(STATUS "**************************************************")
 message(STATUS "****** Generated ${APP_NAME} - ${OS}  ************")
 message(STATUS "**************************************************\n")
-
-# https://gist.github.com/baiwfg2/39881ba703e9c74e95366ed422641609

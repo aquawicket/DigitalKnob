@@ -106,7 +106,7 @@ if(CMAKE_HOST_LINUX AND LINUX)
 	DKSET(DKCMAKE_LINUX_RELEASE ${CMAKE_EXE} -G "Unix Makefiles"
 	-DCMAKE_C_FLAGS=-fPIC
 	#"CMAKE_CXX_FLAGS=-std=gnu++17 -lstdc++fs -g -no-pie" -
-	DCMAKE_BUILD_TYPE=Release 
+	-DCMAKE_BUILD_TYPE=Release 
 	-DBUILD_SHARED_LIBS=OFF)
 
 	# Linux 32 Debug
