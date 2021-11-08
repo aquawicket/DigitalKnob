@@ -52,11 +52,11 @@ WIN32_RELEASE_MSYS(make)
 
 
 WIN64_DEBUG_PATH(${FLAC}/${OS}/${DEBUG_DIR})
-WIN64_DEBUG_COMMAND(../../configure --disable-shared --enable-static)
-WIN64_DEBUG_COMMAND(make)
+WIN64_DEBUG_MSYS(../../configure --disable-shared --enable-static)
+WIN64_DEBUG_MSYS(make)
 WIN64_RELEASE_PATH(${FLAC}/${OS}/${RELEASE_DIR})
-WIN64_RELEASE_COMMAND(../../configure --disable-shared --enable-static)
-WIN64_RELEASE_COMMAND(make)
+WIN64_RELEASE_MSYS(../../configure --disable-shared --enable-static)
+WIN64_RELEASE_MSYS(make)
 
 
 MAC_DEBUG_PATH(${FLAC}/${OS}/${DEBUG_DIR})
