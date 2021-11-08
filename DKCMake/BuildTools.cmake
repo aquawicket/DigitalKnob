@@ -191,7 +191,7 @@ if(CMAKE_HOST_WIN32 AND ANDROID)
 	DKDEPEND(mingw32)
 	DKDEPEND(msys)
 	DKDEPEND(openssl)
-	DKINCLUDE(${ANDROIDNDK}/sources/android/cpufeatures)
+	#DKINCLUDE(${ANDROIDNDK}/sources/android/cpufeatures)
 	
 	#Android arm32 with NDK toolchain
 	DKSET(DKCMAKE_ANDROID32 ${CMAKE_EXE} -G ${VISUALSTUDIO_NAME} -A ARM
