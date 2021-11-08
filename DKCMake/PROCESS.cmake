@@ -514,6 +514,14 @@ endif(WIN_64)
 
 #######
 if(MAC)
+	### PRE BUILD ###
+	if(DEBUG)
+		DKRENAME(${CMAKE_BINARY_DIR}/${DEBUG_DIR}/${APP_NAME}.app ${CMAKE_BINARY_DIR}/${DEBUG_DIR}/${APP_NAME}.backup)
+	endif()
+	if(RELEASE)
+		DKRENAME(${CMAKE_BINARY_DIR}/${RELEASE_DIR}/${APP_NAME}.app ${CMAKE_BINARY_DIR}/${RELEASE_DIR}/${APP_NAME}.backup)
+	endif()
+	
 	## ICONS ##
 	dk_makeDirectory(${DKPROJECT}/icons/mac)
 	dk_makeDirectory(${DKPROJECT}/icons/mac/icons.iconset)
@@ -586,14 +594,6 @@ if(MAC)
 			add_dependencies(${APP_NAME} ${plugin})
 		endif()
 	endforeach()
-	
-	### PRE BUILD ###
-	if(DEBUG)
-		DKRENAME(${CMAKE_BINARY_DIR}/${DEBUG_DIR}/${APP_NAME}.app ${CMAKE_BINARY_DIR}/${DEBUG_DIR}/${APP_NAME}.backup)
-	endif()
-	if(RELEASE)
-		DKRENAME(${CMAKE_BINARY_DIR}/${RELEASE_DIR}/${APP_NAME}.app ${CMAKE_BINARY_DIR}/${RELEASE_DIR}/${APP_NAME}.backup)
-	endif()
 	
 	### POST BUILD ###
 	# Copy the CEF framework into the app bundle
@@ -676,6 +676,14 @@ endif()
 
 #######
 if(IOS)
+	### PRE BUILD ###
+	if(DEBUG)
+		DKRENAME(${CMAKE_BINARY_DIR}/${DEBUG_DIR}/${APP_NAME}.app ${CMAKE_BINARY_DIR}/${DEBUG_DIR}/${APP_NAME}.backup)
+	endif()
+	if(RELEASE)
+		DKRENAME(${CMAKE_BINARY_DIR}/${RELEASE_DIR}/${APP_NAME}.app ${CMAKE_BINARY_DIR}/${RELEASE_DIR}/${APP_NAME}.backup)
+	endif()
+	
     ## ASSETS ##
 	# Backup files and folders excluded from the package
 	DKCOPY(${DKPROJECT}/assets/USER ${DKPROJECT}/Backup/USER TRUE)
@@ -754,6 +762,12 @@ if(IOS)
 		endif()	
 	endforeach()
 	
+	### POST BUILD ###
+	#CPP_DK_Execute("chmod +x "+app_path+OS+"/Debug/"+APP)
+endif()
+
+##########
+if(IOSSIM)
 	### PRE BUILD ###
 	if(DEBUG)
 		DKRENAME(${CMAKE_BINARY_DIR}/${DEBUG_DIR}/${APP_NAME}.app ${CMAKE_BINARY_DIR}/${DEBUG_DIR}/${APP_NAME}.backup)
@@ -762,12 +776,6 @@ if(IOS)
 		DKRENAME(${CMAKE_BINARY_DIR}/${RELEASE_DIR}/${APP_NAME}.app ${CMAKE_BINARY_DIR}/${RELEASE_DIR}/${APP_NAME}.backup)
 	endif()
 	
-	### POST BUILD ###
-	#CPP_DK_Execute("chmod +x "+app_path+OS+"/Debug/"+APP)
-endif()
-
-##########
-if(IOSSIM)
 	## ASSETS ##
 	# Backup files and folders excluded from the package
 	DKCOPY(${DKPROJECT}/assets/USER ${DKPROJECT}/Backup/USER TRUE)
@@ -811,14 +819,6 @@ if(IOSSIM)
 	#foreach(FW ${IOS_FRAMEWORKS})
 	#	set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -framework ${FW}")
 	#endforeach()
-	
-	### PRE BUILD ###
-	if(DEBUG)
-		DKRENAME(${CMAKE_BINARY_DIR}/${DEBUG_DIR}/${APP_NAME}.app ${CMAKE_BINARY_DIR}/${DEBUG_DIR}/${APP_NAME}.backup)
-	endif()
-	if(RELEASE)
-		DKRENAME(${CMAKE_BINARY_DIR}/${RELEASE_DIR}/${APP_NAME}.app ${CMAKE_BINARY_DIR}/${RELEASE_DIR}/${APP_NAME}.backup)
-	endif()
 	
 	#GET_TARGET_PROPERTY(MyExecutable_PATH ${APP_NAME} LOCATION)
 	list(APPEND App_SRC ${DKPLUGINS}/DK/DKiPhone.mm)
