@@ -28,8 +28,8 @@ DKINSTALL(${CRYPTO_DL} cryptopp ${CRYPTO})
 ### LINK ###
 WIN_DEBUG_LIB(${CRYPTO}/${OS}/${DEBUG_DIR}/cryptopp-static.lib)
 WIN_RELEASE_LIB(${CRYPTO}/${OS}/${RELEASE_DIR}/cryptopp-static.lib)
-APPLE_DEBUG_LIB(${CRYPTO}/${OS}/${DEBUG_DIR}/libcryptopp-static.a)
-APPLE_RELEASE_LIB(${CRYPTO}/${OS}/${RELEASE_DIR}/libcryptopp-static.a)
+APPLE_DEBUG_LIB(${CRYPTO}/${OS}/cryptopp.build/${DEBUG_DIR}/cryptopp-object.build/libcryptopp-static.a)
+APPLE_RELEASE_LIB(${CRYPTO}/${OS}/cryptopp.build/${RELEASE_DIR}/cryptopp-object.build/libcryptopp-static.a)
 LINUX_DEBUG_LIB(${CRYPTO}/${OS}/${DEBUG_DIR}/libcryptopp-static.a)
 LINUX_RELEASE_LIB(${CRYPTO}/${OS}/${RELEASE_DIR}/libcryptopp-static.a)
 RASPBERRY_DEBUG_LIB(${CRYPTO}/${OS}/${DEBUG_DIR}/libcryptopp-static.a)
@@ -47,7 +47,7 @@ WIN_VS(${CRYPTO_NAME} cryptopp.sln cryptopp-static)
 
 MAC_PATH(${CRYPTO}/${OS})
 MAC32_COMMAND(${DKCMAKE_MAC32} ${CRYPTO})
-MAC64_COMMAND(${DKCMAKE_MAC64} -DLIBRARY_OUTPUT_DIRECTORY=${CRYPTO}/mac64 ${CRYPTO})
+MAC64_COMMAND(${DKCMAKE_MAC64} ${CRYPTO})
 MAC_XCODE(${CRYPTO_NAME} cryptopp-static)
 
 
