@@ -2,7 +2,7 @@
 ###
 ### This will be the ONLY CMakeLists.txt file in DigitalKnob
 ### All Apps will be build from here.
-### The required Tools, libraries and plugins will optionaly build from here. 
+### The required Tools, libraries and plugins will optionaly be build from here. 
 ###
 ### TODO
 ### Build App - just the app (do not delete cmake files, do not do anything with dependencies)
@@ -21,5 +21,5 @@ endif()
 
 CMAKE_MINIMUM_REQUIRED(VERSION 3.4)
 CMAKE_POLICY(SET CMP0054 NEW)
-PROJECT(DigitalKnob) C CXX)
+PROJECT(DigitalKnob C CXX)
 INCLUDE(DKCMake/PROCESS.cmake)
