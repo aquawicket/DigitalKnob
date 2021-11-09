@@ -2,6 +2,7 @@
 # https://github.com/madler/zlib
 #
 # https://www.zlib.net/fossils/zlib-1.2.11.tar.gz
+# https://github.com/madler/zlib/archive/refs/tags/v1.2.11.zip
 
 
 ### VERSION ###
@@ -26,8 +27,6 @@ LINUX_DEBUG_LIB(${ZLIB}/${OS}/${DEBUG_DIR}/libz.a)
 LINUX_RELEASE_LIB(${ZLIB}/${OS}/${RELEASE_DIR}/libz.a)
 RASPBERRY_DEBUG_LIB(${ZLIB}/${OS}/${DEBUG_DIR}/libz.a)
 RASPBERRY_RELEASE_LIB(${ZLIB}/${OS}/${RELEASE_DIR}/libz.a)
-##ANDROID_DEBUG_LIB(${ZLIB}/${OS}/${DEBUG_DIR}/obj/local/armeabi-v7a/libzlib.a)
-##ANDROID_RELEASE_LIB(${ZLIB}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/libzlib.a)
 ANDROID_DEBUG_LIB(${ZLIB}/${OS}/${DEBUG_DIR}/libz.a)
 ANDROID_RELEASE_LIB(${ZLIB}/${OS}/${RELEASE_DIR}/libz.a)
 
@@ -52,23 +51,19 @@ WIN_VS(${ZLIB_NAME} zlib.sln zlibstatic)
 
 
 MAC_PATH(${ZLIB}/${OS})
+MAC32_COMMAND(${DKCMAKE_MAC32} ${ZLIB})
 MAC64_COMMAND(${DKCMAKE_MAC64} ${ZLIB})
 MAC_XCODE(${ZLIB_NAME} zlibstatic)
 
-#MAC64_DEBUG_PATH(${ZLIB}/${OS}/${DEBUG_DIR})
-#MAC64_DEBUG_COMMAND(${DKCMAKE_LINUX_DEBUG} ${ZLIB})
-#MAC64_DEBUG_COMMAND(make zlibstatic)
-#MAC64_RELEASE_PATH(${ZLIB}/${OS}/${RELEASE_DIR})
-#MAC64_RELEASE_COMMAND(${DKCMAKE_LINUX_RELEASE} ${ZLIB})
-#MAC64_RELEASE_COMMAND(make zlibstatic)
-
 
 IOS_PATH(${ZLIB}/${OS})
+IOS32_COMMAND(${DKCMAKE_IOS32} ${ZLIB})
 IOS64_COMMAND(${DKCMAKE_IOS64} ${ZLIB})
 IOS_XCODE(${ZLIB_NAME} zlibstatic)
 
 
 IOSSIM_PATH(${ZLIB}/${OS})
+IOSSIM32_COMMAND(${DKCMAKE_IOSSIM32} ${ZLIB})
 IOSSIM64_COMMAND(${DKCMAKE_IOSSIM64} ${ZLIB})
 IOSSIM_XCODE(${ZLIB_NAME} zlibstatic)
 

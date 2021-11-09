@@ -1,6 +1,8 @@
 # https://www.cryptopp.com/
+# https://github.com/weidai11/cryptopp
 #
 # https://github.com/webstorage119/website-1/raw/master/cryptopp600.zip
+# https://github.com/weidai11/cryptopp/archive/refs/tags/CRYPTOPP_8_6_0.zip
 
 if(IOSSIM)
 	#DKDEPEND(libmd)
@@ -8,9 +10,13 @@ if(IOSSIM)
 endif()
 
 ### VERSION ###
-DKSET(CRYPTO_VERSION 600)
-DKSET(CRYPTO_NAME cryptopp${CRYPTO_VERSION})
-DKSET(CRYPTO_DL https://github.com/webstorage119/website-1/raw/master/${CRYPTO_NAME}.zip)
+#DKSET(CRYPTO_VERSION 600)
+#DKSET(CRYPTO_NAME cryptopp${CRYPTO_VERSION})
+#DKSET(CRYPTO_DL https://github.com/webstorage119/website-1/raw/master/${CRYPTO_NAME}.zip)
+
+DKSET(CRYPTO_VERSION 8_6_0)
+DKSET(CRYPTO_NAME CRYPTOPP_${CRYPTO_VERSION})
+DKSET(CRYPTO_DL https://github.com/weidai11/cryptopp/archive/refs/tags/${CRYPTO_NAME}.zip)
 DKSET(CRYPTO ${3RDPARTY}/${CRYPTO_NAME})
 
 
