@@ -1,3 +1,7 @@
+if(NOT ANDROID)
+	return()
+endif()
+
 # https://openal.org/
 # https://openal-soft.org/
 #
