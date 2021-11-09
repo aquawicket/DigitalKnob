@@ -34,8 +34,8 @@ LINUX_DEBUG_LIB(${CRYPTO}/${OS}/${DEBUG_DIR}/libcryptopp-static.a)
 LINUX_RELEASE_LIB(${CRYPTO}/${OS}/${RELEASE_DIR}/libcryptopp-static.a)
 RASPBERRY_DEBUG_LIB(${CRYPTO}/${OS}/${DEBUG_DIR}/libcryptopp.a)
 RASPBERRY_RELEASE_LIB(${CRYPTO}/${OS}/${RELEASE_DIR}/libcryptopp.a)
-ANDROID_DEBUG_LIB(${CRYPTO}/${OS}/${DEBUG_DIR}/libcryptopp-static.a)
-ANDROID_RELEASE_LIB(${CRYPTO}/${OS}/${RELEASE_DIR}/libcryptopp-static.a)
+ANDROID_DEBUG_LIB(${CRYPTO}/${OS}/${DEBUG_DIR}/libcryptopp.a)
+ANDROID_RELEASE_LIB(${CRYPTO}/${OS}/${RELEASE_DIR}/libcryptopp.a)
 
 
 ### COMPILE ###
