@@ -319,6 +319,14 @@ include_directories(${DKPROJECT})
 
 ##########
 if(WIN_32)
+	### PRE BUILD ###
+	if(DEBUG)
+		DKRENAME(${CMAKE_BINARY_DIR}/${DEBUG_DIR}/${APP_NAME}.exe ${CMAKE_BINARY_DIR}/${DEBUG_DIR}/${APP_NAME}.backup)
+	endif()
+	if(RELEASE)
+		DKRENAME(${CMAKE_BINARY_DIR}/${RELEASE_DIR}/${APP_NAME}.exe ${CMAKE_BINARY_DIR}/${RELEASE_DIR}/${APP_NAME}.backup)
+	endif()
+	
 	## OS SOURCE FILES ##
 	DKCOPY(${DKPLUGINS}/_DKIMPORT/resource.h ${DKPROJECT}/resource.h FALSE)
 	DKCOPY(${DKPLUGINS}/_DKIMPORT/resource.rc ${DKPROJECT}/resource.rc FALSE)
@@ -391,14 +399,6 @@ if(WIN_32)
 	
 	set_target_properties(${APP_NAME} PROPERTIES LINK_FLAGS_DEBUG ${DEBUG_FLAGS} LINK_FLAGS_RELEASE ${RELEASE_FLAGS})
 	
-	### PRE BUILD ###
-	if(DEBUG)
-		DKRENAME(${CMAKE_BINARY_DIR}/${DEBUG_DIR}/${APP_NAME}.exe ${CMAKE_BINARY_DIR}/${DEBUG_DIR}/${APP_NAME}.backup)
-	endif()
-	if(RELEASE)
-		DKRENAME(${CMAKE_BINARY_DIR}/${RELEASE_DIR}/${APP_NAME}.exe ${CMAKE_BINARY_DIR}/${RELEASE_DIR}/${APP_NAME}.backup)
-	endif()
-	
 	### POST BUILD ###
 	#CPP_DKFile_Copy(app_path+OS+"/Release/"+APP+".pdb", app_path+"assets/"+APP+".pdb", true)
 	#CPP_DK_Execute(DIGITALKNOB+"DK/3rdParty/upx-3.95-win64/upx.exe -9 -v "+app_path+OS+"/Release/"+APP+".exe")
@@ -426,6 +426,14 @@ endif(WIN_32)
 	
 ##########
 if(WIN_64)
+	### PRE BUILD ###
+	if(DEBUG)
+		DKRENAME(${CMAKE_BINARY_DIR}/${DEBUG_DIR}/${APP_NAME}.exe ${CMAKE_BINARY_DIR}/${DEBUG_DIR}/${APP_NAME}.backup)
+	endif()
+	if(RELEASE)
+		DKRENAME(${CMAKE_BINARY_DIR}/${RELEASE_DIR}/${APP_NAME}.exe ${CMAKE_BINARY_DIR}/${RELEASE_DIR}/${APP_NAME}.backup)
+	endif()
+	
 	## OS SOURCE FILES ##
 	DKCOPY(${DKPLUGINS}/_DKIMPORT/resource.h ${DKPROJECT}/resource.h FALSE)
 	DKCOPY(${DKPLUGINS}/_DKIMPORT/resource.rc ${DKPROJECT}/resource.rc FALSE)
@@ -495,14 +503,6 @@ if(WIN_64)
 	
 	set_target_properties(${APP_NAME} PROPERTIES LINK_FLAGS_DEBUG ${DEBUG_FLAGS} LINK_FLAGS_RELEASE ${RELEASE_FLAGS})
 	
-	### PRE BUILD ###
-	if(DEBUG)
-		DKRENAME(${CMAKE_BINARY_DIR}/${DEBUG_DIR}/${APP_NAME}.exe ${CMAKE_BINARY_DIR}/${DEBUG_DIR}/${APP_NAME}.backup)
-	endif()
-	if(RELEASE)
-		DKRENAME(${CMAKE_BINARY_DIR}/${RELEASE_DIR}/${APP_NAME}.exe ${CMAKE_BINARY_DIR}/${RELEASE_DIR}/${APP_NAME}.backup)
-	endif()
-	
 	### POST BUILD ###
 	#CPP_DKFile_Copy(app_path+OS+"/Release/"+APP+".pdb", app_path+"assets/"+APP+".pdb", true)
 	#CPP_DK_Execute(DIGITALKNOB+"DK/3rdParty/upx-3.95-win64/upx.exe -9 -v "+app_path+OS+"/Release/"+APP+".exe")
@@ -521,7 +521,7 @@ if(MAC)
 	## ICONS ##
 	dk_makeDirectory(${DKPROJECT}/icons/mac)
 	dk_makeDirectory(${DKPROJECT}/icons/mac/icons.iconset)
-    	DKEXECUTE_PROCESS(sips -z 16 16 ${DKPROJECT}/icons/icon.png --out ${DKPROJECT}/icons/mac/icons.iconset/icon_16x16.png WORKING_DIRECTORY ${DIGITALKNOB})
+    DKEXECUTE_PROCESS(sips -z 16 16 ${DKPROJECT}/icons/icon.png --out ${DKPROJECT}/icons/mac/icons.iconset/icon_16x16.png WORKING_DIRECTORY ${DIGITALKNOB})
 	DKEXECUTE_PROCESS(sips -z 32 32 ${DKPROJECT}/icons/icon.png --out ${DKPROJECT}/icons/mac/icons.iconset/icon_16x16@2x.png WORKING_DIRECTORY ${DIGITALKNOB})
 	DKEXECUTE_PROCESS(sips -z 32 32 ${DKPROJECT}/icons/icon.png --out ${DKPROJECT}/icons/mac/icons.iconset/icon_32x32.png WORKING_DIRECTORY ${DIGITALKNOB})
 	DKEXECUTE_PROCESS(sips -z 64 64 ${DKPROJECT}/icons/icon.png --out ${DKPROJECT}/icons/mac/icons.iconset/icon_32x32@2x.png WORKING_DIRECTORY ${DIGITALKNOB})
@@ -858,6 +858,14 @@ endif()
 
 #########
 if(LINUX)
+	### PRE BUILD ###
+	if(DEBUG)
+		DKRENAME(${CMAKE_BINARY_DIR}/${DEBUG_DIR}/${APP_NAME} ${CMAKE_BINARY_DIR}/${DEBUG_DIR}/${APP_NAME}.backup)
+	endif()
+	if(RELEASE)
+		DKRENAME(${CMAKE_BINARY_DIR}/${RELEASE_DIR}/${APP_NAME} ${CMAKE_BINARY_DIR}/${RELEASE_DIR}/${APP_NAME}.backup)
+	endif()
+	
 	## ICONS ##
 	DKCOPY(${DKPROJECT}/icons/icon.png ${DKPROJECT}/assets/icon.png TRUE)
 
@@ -925,20 +933,19 @@ if(LINUX)
 		DKEXECUTE_PROCESS(desktop-file-install --dir=/home/$ENV{USER}/.local/share/applications ${DKPROJECT}/${OS}/Release/${APP_NAME}.desktop WORKING_DIRECTORY ${DKPROJECT}/${OS}/Release)
 	endif()
 	
-	### PRE BUILD ###
-	if(DEBUG)
-		DKRENAME(${CMAKE_BINARY_DIR}/${DEBUG_DIR}/${APP_NAME} ${CMAKE_BINARY_DIR}/${DEBUG_DIR}/${APP_NAME}.backup)
-	endif()
-	if(RELEASE)
-		DKRENAME(${CMAKE_BINARY_DIR}/${RELEASE_DIR}/${APP_NAME} ${CMAKE_BINARY_DIR}/${RELEASE_DIR}/${APP_NAME}.backup)
-	endif()
-	
 	### POST BUILD ###
 	#CPP_DK_Execute("chmod +x "+app_path+OS+"/Debug/"+APP)
 endif()
 
 #############
 if(RASPBERRY)
+	### PRE BUILD ###
+	if(DEBUG)
+		DKRENAME(${CMAKE_BINARY_DIR}/${DEBUG_DIR}/${APP_NAME} ${CMAKE_BINARY_DIR}/${DEBUG_DIR}/${APP_NAME}.backup)
+	elseif(RELEASE)
+		DKRENAME(${CMAKE_BINARY_DIR}/${RELEASE_DIR}/${APP_NAME} ${CMAKE_BINARY_DIR}/${RELEASE_DIR}/${APP_NAME}.backup)
+	endif()
+	
 	## ICONS ##
 	DKCOPY(${DKPROJECT}/icons/icon.png ${DKPROJECT}/assets/icon.png TRUE)
 
@@ -1005,19 +1012,20 @@ if(RASPBERRY)
 	# Install shortcut of Release build to the apps menu
 	DKEXECUTE_PROCESS(desktop-file-install --dir=/home/$ENV{USER}/.local/share/applications ${DKPROJECT}/${OS}/Release/${APP_NAME}.desktop WORKING_DIRECTORY ${DKPROJECT}/${OS}/Release)
 	
-	### PRE BUILD ###
-	if(DEBUG)
-		DKRENAME(${CMAKE_BINARY_DIR}/${DEBUG_DIR}/${APP_NAME} ${CMAKE_BINARY_DIR}/${DEBUG_DIR}/${APP_NAME}.backup)
-	elseif(RELEASE)
-		DKRENAME(${CMAKE_BINARY_DIR}/${RELEASE_DIR}/${APP_NAME} ${CMAKE_BINARY_DIR}/${RELEASE_DIR}/${APP_NAME}.backup)
-	endif()
-	
 	### POST BUILD ###
 	#CPP_DK_Execute("chmod +x "+app_path+OS+"/Debug/"+APP)
 endif()
 
 ###########
 if(ANDROID)
+	### PRE BUILD ###
+	if(DEBUG)
+		DKRENAME(${CMAKE_BINARY_DIR}/${DEBUG_DIR}/${APP_NAME}.apk ${CMAKE_BINARY_DIR}/${DEBUG_DIR}/${APP_NAME}.backup)
+	endif()
+	if(RELEASE)
+		DKRENAME(${CMAKE_BINARY_DIR}/${RELEASE_DIR}/${APP_NAME}.apk ${CMAKE_BINARY_DIR}/${RELEASE_DIR}/${APP_NAME}.backup)
+	endif()
+	
 	## OS SOURCE FILES ##
 	DKCOPY(${DKPLUGINS}/_DKIMPORT/Android.h ${DKPROJECT}/Android.h FALSE) ## copy app default files recursivly without overwrite
 	if(ANDROID_32)
@@ -1064,14 +1072,6 @@ if(ANDROID)
 	endforeach()
 
 	#include_external_msproject(DKGradle ${DKPROJECT}/${OS}/DKGradle.androidproj)	
-	
-	### PRE BUILD ###
-	if(DEBUG)
-	#	DKRENAME(${CMAKE_BINARY_DIR}/${DEBUG_DIR}/${APP_NAME}.apk ${CMAKE_BINARY_DIR}/${DEBUG_DIR}/${APP_NAME}.backup)
-	endif()
-	if(RELEASE)
-	#	DKRENAME(${CMAKE_BINARY_DIR}/${RELEASE_DIR}/${APP_NAME}.apk ${CMAKE_BINARY_DIR}/${RELEASE_DIR}/${APP_NAME}.backup)
-	endif()
 	
 	### POST BUILD ###
 endif()
