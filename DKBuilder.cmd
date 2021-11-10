@@ -37,7 +37,6 @@ if exist "C:\Program Files\Git\bin\git.exe" set "GIT=C:\Program Files\Git\bin\gi
 if exist "C:\Program Files (x86)\Git\bin\git.exe" set "GIT=C:\Program Files (x86)\Git\bin\git.exe"
 if NOT exist "%GIT%" (
 	ECHO "installing git"
-	::echo "%GIT_DL%"
 	if NOT exist "%DIGITALKNOB%" mkdir "%DIGITALKNOB%"
 	%download% %GIT_DL% "%DIGITALKNOB%\Git-2.30.1-32-bit.exe"
 	if NOT "%ERRORLEVEL%" == "0" goto error
@@ -46,7 +45,7 @@ if NOT exist "%GIT%" (
 	goto gitupdate
 )
 if NOT exist "%DKPATH%" "%GIT%" clone https://github.com/aquawicket/DigitalKnob.git "%DKPATH%"
-::if NOT "%ERRORLEVEL%" == "0" goto error
+if NOT "%ERRORLEVEL%" == "0" goto error
 cd "%DKPATH%"
 "%GIT%" checkout -- .
 if NOT "%ERRORLEVEL%" == "0" goto error
@@ -59,7 +58,6 @@ if exist "C:\Program Files\Git\bin\git.exe" set "GIT=C:\Program Files\Git\bin\gi
 if exist "C:\Program Files (x86)\Git\bin\git.exe" set "GIT=C:\Program Files (x86)\Git\bin\git.exe"
 if NOT exist "%GIT%" (
 	ECHO "installing git"
-	::echo "%GIT_DL%"
 	if NOT exist "%DIGITALKNOB%" mkdir "%DIGITALKNOB%"
 	%download% %GIT_DL% "%DIGITALKNOB%\Git-2.30.1-32-bit.exe"
 	if NOT "%ERRORLEVEL%" == "0" goto error
@@ -159,7 +157,7 @@ if NOT "%ERRORLEVEL%" == "0" goto error
 echo ****** BUILDING %APP% - %OS% ******
 if exist "C:\Program Files\CMake\bin\cmake.exe" set "CMAKE=C:\Program Files\CMake\bin\cmake.exe"
 if exist "C:\Program Files (x86)\CMake\bin\cmake.exe" set "CMAKE=C:\Program Files (x86)\CMake\bin\cmake.exe"
-if exist "%CMAKE%" (echo "CMAKE = %CMAKE%") else (
+if NOT exist "%CMAKE%" (
     echo "installing cmake"
 	echo "%CMAKE_DL%"
 	%download% %CMAKE_DL% "%DIGITALKNOB%\cmake-3.21.1-windows-i386.msi"
@@ -170,7 +168,7 @@ if exist "%CMAKE%" (echo "CMAKE = %CMAKE%") else (
 )
 if exist "C:\Program Files\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe" set "MSBUILD=C:\Program Files\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe"
 if exist "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe" set "MSBUILD=C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe"
-if exist "%MSBUILD%" (echo "MSBUILD = %MSBUILD%") else (
+if NOT "%MSBUILD%" (
     echo "installing Visual Studio"
 	echo "%MSBUILD_DL%"
 	%download% %MSBUILD_DL% "%DIGITALKNOB%\vs_Community.exe"
@@ -190,12 +188,14 @@ if NOT "%ERRORLEVEL%" == "0" goto error
 if NOT "%ERRORLEVEL%" == "0" goto error
 "%MSBUILD%" %APP%.sln /p:Configuration=Release
 if NOT "%ERRORLEVEL%" == "0" goto error
-goto end
 
+
+ECHO Done
+pause
+goto end
 
 :error
 echo Failed with error code: %ERRORLEVEL%
 
 :end
-ECHO Exit
-pause
+
