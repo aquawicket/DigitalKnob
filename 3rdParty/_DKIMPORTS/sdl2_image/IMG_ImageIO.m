@@ -310,7 +310,8 @@ static SDL_Surface* Create_SDL_Surface_From_CGImage_Index(CGImageRef image_ref)
     if (surface) {
         uint8_t* pixels = (uint8_t*)surface->pixels;
         CGDataProviderRef provider = CGImageGetDataProvider(image_ref);
-        NSData* data = (id)CGDataProviderCopyData(provider);
+        // Changed by digitalknob
+        NSData* data = (id)CFBridgingRelease(CGDataProviderCopyData(provider));
         //[data autorelease];
         const uint8_t* bytes = [data bytes];
         size_t i;
