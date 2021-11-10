@@ -317,6 +317,7 @@ list(FILTER App_SRC EXCLUDE REGEX "${DKPROJECT}/${OS}/*" )
 	
 add_definitions(-DDKAPP)
 include_directories(${DKPROJECT})
+include_directories(${DKPLUGINS})
 
 ##########
 if(WIN_32)
