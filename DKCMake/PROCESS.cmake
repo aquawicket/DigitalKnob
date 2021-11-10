@@ -77,6 +77,23 @@ foreach(plugin ${dkdepend_list})
 	#	add_subdirectory(${${PLUGIN_NAME}} ${${PLUGIN_NAME}}/${OS})
 	#endif()
 	
+	# ADD THE 3rdParty library TO THE APP SOLUTION
+	string(FIND "${plugin}" "${3RDPARTY}" index)
+	if(${index} GREATER -1)
+		if(EXISTS "${plugin_path}/CMakeLists.txt")
+			if(LINUX OR RASPBERRY)
+				if(DEBUG)
+					add_subdirectory(${plugin_path} ${plugin_path}/${OS}/Debug)
+				endif()
+				if(RELEASE)
+					add_subdirectory(${plugin_path} ${plugin_path}/${OS}/Release)
+				endif()
+			else()
+				add_subdirectory(${plugin_path} ${plugin_path}/${OS})
+			endif()
+		endif()
+	endif()
+	
 	####################### DKPlugins #######################
 	string(FIND "${DKCPPPLUGS}" "${plugin}" index)
 	if(${index} GREATER -1)
