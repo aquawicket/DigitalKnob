@@ -13,7 +13,7 @@ if(WIN)
 	WIN_INCLUDE(${3RDPARTY}/stackwalker/StackWalker)
 endif()
 
-DKPLUGIN(DKDebug)
+generateCmake(DKDebug)
 DKASSETS(DKDebug)
 
 IF(DKAPP)

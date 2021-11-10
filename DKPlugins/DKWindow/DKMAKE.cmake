@@ -6,5 +6,5 @@ IF(USE_DKCef)
 	DKDEPEND(DKCef)
 ENDIF()
 
-DKPLUGIN(DKWindow)
+generateCmake(DKWindow)
 DKASSETS(DKWindow)

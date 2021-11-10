@@ -9,5 +9,5 @@ IF(USE_DKCef)
 ENDIF()
 
 
-DKPLUGIN(DKHandles)
+generateCmake(DKHandles)
 DKASSETS(DKHandles)

@@ -5,5 +5,5 @@ IF(USE_DKCef)
 	DKDEPEND(DKCef)
 ENDIF()
 
-DKPLUGIN(DKTray)
+generateCmake(DKTray)
 DKASSETS(DKTray)

@@ -2,5 +2,5 @@ DKDEPEND(DKAssets)
 DKDEPEND(DKSDLWindow)
 DKDEPEND(sdl2_ttf)
 
-DKPLUGIN(DKSDLText)
+generateCmake(DKSDLText)
 DKASSETS(DKSDLText)

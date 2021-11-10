@@ -9,5 +9,5 @@ IF(USE_DKCef)
 ENDIF()
 
 
-DKPLUGIN(DKOcr)
+generateCmake(DKOcr)
 DKASSETS(DKOcr)

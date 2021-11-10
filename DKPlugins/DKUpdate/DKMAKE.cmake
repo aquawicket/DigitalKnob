@@ -11,4 +11,4 @@ IF(USE_DKCef)
 ENDIF()
 
 
-DKPLUGIN(DKUpdate)
+generateCmake(DKUpdate)

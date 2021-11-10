@@ -44,5 +44,5 @@ if(ANDROID)
 endif()
 
 
-DKPLUGIN(DK)
+generateCmake(DK)
 DKASSETS(DK)

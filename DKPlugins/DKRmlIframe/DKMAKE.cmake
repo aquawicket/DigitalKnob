@@ -10,5 +10,5 @@ IF(USE_DKCef)
 	DKDEPEND(DKCef)
 ENDIF()
 
-DKPLUGIN(DKRmlIframe)
+generateCmake(DKRmlIframe)
 DKASSETS(DKRmlIframe)

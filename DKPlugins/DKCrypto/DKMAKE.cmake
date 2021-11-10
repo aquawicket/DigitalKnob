@@ -1,3 +1,3 @@
 DKDEPEND(cryptopp)
 
-DKPLUGIN(DKCrypto)
+generateCmake(DKCrypto)

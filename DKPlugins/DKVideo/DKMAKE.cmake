@@ -6,5 +6,5 @@ IF(USE_DKCef)
 ENDIF()
 
 
-DKPLUGIN(DKVideo)
+generateCmake(DKVideo)
 DKASSETS(DKVideo)

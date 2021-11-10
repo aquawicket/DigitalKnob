@@ -22,7 +22,7 @@ DKDEPEND(DKDuktape)
 DKSET(QUEUE_BUILD ON)  ## Possibly for DKCefChild
 
 
-DKPLUGIN(DKCef)
+generateCmake(DKCef)
 DKASSETS(DKCef)
 
 

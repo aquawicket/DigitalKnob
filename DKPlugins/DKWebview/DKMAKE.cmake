@@ -2,5 +2,5 @@ IF(NOT ANDROID)
 	RETURN()
 ENDIF()
 
-DKPLUGIN(DKWebview)
+generateCmake(DKWebview)
 DKASSETS(DKWebview)

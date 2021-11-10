@@ -5,5 +5,5 @@ IF(USE_DKCef)
 	DKDEPEND(DKCef)
 ENDIF()
 
-DKPLUGIN(DKAudio)
+generateCmake(DKAudio)
 DKASSETS(DKAudio)

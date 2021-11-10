@@ -16,5 +16,5 @@ IF(USE_DKCef)
 ENDIF()
 
 
-DKPLUGIN(DKWebSockets)
+generateCmake(DKWebSockets)
 DKASSETS(DKWebSockets)

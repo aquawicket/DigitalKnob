@@ -110,7 +110,7 @@ foreach(plugin ${dkdepend_list})
 		
 		if(NOT EXISTS ${plugin_path}/CMakeLists.txt)
 			message(STATUS "######  Creating CMakeLists.txt file for ${plugin} . . .")
-			createPluginCmakeFile(${plugin})
+			generateCmake(${plugin})
 		endif()
 
 		# ADD THE PLUGIN TO THE APP SOLUTION

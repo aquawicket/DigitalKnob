@@ -4,4 +4,4 @@ ELSE()
 	DKDEPEND(libvncserver-master)
 ENDIF()
 
-DKPLUGIN(DKVncServer)
+generateCmake(DKVncServer)

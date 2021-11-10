@@ -16,5 +16,5 @@ DKINCLUDE(${DKPLUGINS}/DKDuktape)
 DKINCLUDE(${DUKTAPE}/src)
 DKDEFINE(USE_DKDuktape)
 
-DKPLUGIN(DKDuktape)
+generateCmake(DKDuktape)
 DKASSETS(DKDuktape)

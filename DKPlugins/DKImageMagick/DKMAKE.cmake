@@ -1,6 +1,6 @@
 DKDEPEND(imagemagick)
 
-DKPLUGIN(DKImageMagick)
+generateCmake(DKImageMagick)
 DKASSETS(DKImageMagick)
 
 IF(WIN_32)

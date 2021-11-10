@@ -7,5 +7,5 @@ IF(USE_DKCef)
 	DKDEPEND(DKCef)
 ENDIF()
 
-DKPLUGIN(DKAssets)
+generateCmake(DKAssets)
 DKASSETS(DKAssets)

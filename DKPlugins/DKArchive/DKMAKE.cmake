@@ -8,4 +8,4 @@ IF(USE_DKCef)
 ENDIF()
 
 WIN_LIB(AdvAPI32.lib)
-DKPLUGIN(DKArchive)
+generateCmake(DKArchive)

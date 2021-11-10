@@ -1,4 +1,4 @@
 DKDEPEND(DKAudio)
 DKDEPEND(DKSDLWindow)
 
-DKPLUGIN(DKSDLWav)
+generateCmake(DKSDLWav)

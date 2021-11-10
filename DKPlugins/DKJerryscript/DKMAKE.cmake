@@ -1,1 +1,1 @@
-DKPLUGIN(DKJerryscript)
+generateCmake(DKJerryscript)

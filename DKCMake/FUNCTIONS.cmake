@@ -2744,7 +2744,7 @@ function(ANDROID64_RELEASE_INCLUDE)
 endfunction()
 
 
-function(createPluginCmakeFile name)
+function(generateCmake name)
 	dk_getPathToPlugin(${name} plugin_path)
 	if(NOT plugin_path)
 		message(FATAL_ERROR "createPluginCmakeFile(${name}): plugin not found")

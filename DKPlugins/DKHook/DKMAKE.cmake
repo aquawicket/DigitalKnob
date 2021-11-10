@@ -1,7 +1,7 @@
 IF(USE_DKCef)
 	DKDEPEND(DKCef)
 ENDIF()
-DKPLUGIN(DKHook)
+generateCmake(DKHook)
 DKASSETS(DKHook)
 
 ## hookdll windows

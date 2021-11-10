@@ -8,7 +8,7 @@ IF(USE_DKCef)
 ENDIF()
 
 
-DKPLUGIN(DKMySql)
+generateCmake(DKMySql)
 DKASSETS(DKMySql)
 
 #DKENABLE(mysql) ##MySql library

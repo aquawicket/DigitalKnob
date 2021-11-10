@@ -7,4 +7,4 @@ IF(USE_DKCef)
 ENDIF()
 
 
-DKPLUGIN(DKScreenRecorder)
+generateCmake(DKScreenRecorder)

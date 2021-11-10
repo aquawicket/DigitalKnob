@@ -17,5 +17,5 @@ IF(USE_DKCef)
 ENDIF()
 
 
-DKPLUGIN(DKMidi)
+generateCmake(DKMidi)
 DKASSETS(DKMidi)

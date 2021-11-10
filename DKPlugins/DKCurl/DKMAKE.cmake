@@ -9,4 +9,4 @@ IF(USE_DKCef)
 	DKDEPEND(DKCef)
 ENDIF()
 
-DKPLUGIN(DKCurl)
+generateCmake(DKCurl)

@@ -10,5 +10,5 @@ IF(USE_DKCef)
 ENDIF()
 
 
-## DKPLUGIN(DKWidget)
+## generateCmake(DKWidget)
 ## DKASSETS(DKWidget)

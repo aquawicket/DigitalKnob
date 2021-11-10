@@ -2,4 +2,4 @@ DKDEPEND(DKAudio)
 DKDEPEND(DKSDLWindow)
 DKDEPEND(sdl2_mixer)
 
-DKPLUGIN(DKSDLAudio)
+generateCmake(DKSDLAudio)

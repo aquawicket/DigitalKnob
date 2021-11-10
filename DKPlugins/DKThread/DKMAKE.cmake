@@ -8,6 +8,6 @@ IF(USE_DKCef)
 ENDIF()
 
 
-DKPLUGIN(DKThread)
+generateCmake(DKThread)
 DKASSETS(DKThread)
 DKINCLUDE(${THREADPOOL})

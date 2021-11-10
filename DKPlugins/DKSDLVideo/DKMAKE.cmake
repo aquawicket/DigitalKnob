@@ -6,5 +6,5 @@ DKDEPEND(waave)
 DKDEPEND(DKVideo)
 DKDEPEND(DKSDLWindow)
 
-DKPLUGIN(DKSDLVideo)
+generateCmake(DKSDLVideo)
 DKASSETS(DKSDLVideo)

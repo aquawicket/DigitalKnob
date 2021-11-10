@@ -2,4 +2,4 @@ DKDEPEND(glew)
 DKDEPEND(sdl2)
 DKDEPEND(DKWindow)
 
-DKPLUGIN(DKSDLWindow)
+generateCmake(DKSDLWindow)

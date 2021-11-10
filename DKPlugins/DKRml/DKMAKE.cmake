@@ -12,5 +12,5 @@ IF(USE_DKCef)
 ENDIF()
 
 
-DKPLUGIN(DKRml)
+generateCmake(DKRml)
 DKASSETS(DKRml)
