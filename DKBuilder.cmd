@@ -45,7 +45,7 @@ if exist "%GIT%" (echo "GIT = %GIT%") else (
 	if NOT "%ERRORLEVEL%" == "0" goto error
 	goto gitupdate
 )
-"%GIT%" clone https://github.com/aquawicket/DigitalKnob.git "%DKPATH%"
+if NOT exist "%DKPATH%" "%GIT%" clone https://github.com/aquawicket/DigitalKnob.git "%DKPATH%"
 ::if NOT "%ERRORLEVEL%" == "0" goto error
 cd "%DKPATH%"
 "%GIT%" checkout -- .
