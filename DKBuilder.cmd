@@ -35,9 +35,9 @@ goto pickapp
 :gitupdate
 if exist "C:\Program Files\Git\bin\git.exe" set "GIT=C:\Program Files\Git\bin\git.exe"
 if exist "C:\Program Files (x86)\Git\bin\git.exe" set "GIT=C:\Program Files (x86)\Git\bin\git.exe"
-if exist "%GIT%" (echo "GIT = %GIT%") else (
-	echo "installing git"
-	echo "%GIT_DL%"
+if NOT exist "%GIT%" (
+	ECHO "installing git"
+	::echo "%GIT_DL%"
 	if NOT exist "%DIGITALKNOB%" mkdir "%DIGITALKNOB%"
 	%download% %GIT_DL% "%DIGITALKNOB%\Git-2.30.1-32-bit.exe"
 	if NOT "%ERRORLEVEL%" == "0" goto error
@@ -57,9 +57,9 @@ goto pickapp
 :gitcommit
 if exist "C:\Program Files\Git\bin\git.exe" set "GIT=C:\Program Files\Git\bin\git.exe"
 if exist "C:\Program Files (x86)\Git\bin\git.exe" set "GIT=C:\Program Files (x86)\Git\bin\git.exe"
-if exist "%GIT%" (echo "GIT = %GIT%") else (
-	echo "installing git"
-	echo "%GIT_DL%"
+if NOT exist "%GIT%" (
+	ECHO "installing git"
+	::echo "%GIT_DL%"
 	if NOT exist "%DIGITALKNOB%" mkdir "%DIGITALKNOB%"
 	%download% %GIT_DL% "%DIGITALKNOB%\Git-2.30.1-32-bit.exe"
 	if NOT "%ERRORLEVEL%" == "0" goto error
