@@ -1,7 +1,7 @@
 #NOTE: Use ${CMAKE_PROJECT_NAME} to reference the root parent project if needed
 
 if(WIN)
-	DKDEPEND(windows_multimedia)
+	DKDEPEND(winmm.lib)
 endif()
 if(MAC)
 	#DKDEPEND(appkit)

@@ -3,7 +3,7 @@
 ### DEPENDS ###
 if(WIN)
 	DKDEPEND(opengl)
-	DKDEPEND(windows_multimedia)
+	DKDEPEND(winmm.lib)
 endif()
 if(MAC)
 	DKDEPEND(core_foundation)

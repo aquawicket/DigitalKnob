@@ -14,7 +14,7 @@ DKINSTALL(${RTMIDI_DL} rtmidi ${RTMIDI})
 ### LINK ###
 DKINCLUDE(${RTMIDI})
 if(WIN)
-	DKDEPEND(windows_multimedia)
+	DKDEPEND(winmm.lib)
 endif()
 if(MAC)
 	DKDEFINE(__MACOSX_CORE__)

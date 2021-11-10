@@ -13,7 +13,7 @@ DKSET(OPENAL ${3RDPARTY}/${OPENAL_NAME})
 
 
 IF(WIN)
-	DKDEPEND(windows_multimedia)
+	DKDEPEND(winmm.lib)
 ENDIF()
 
 
