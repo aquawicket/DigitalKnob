@@ -45,8 +45,7 @@ DKBUILD_LOG("\n")
 foreach(plugin ${dkdepend_list})
 	DKSET(QUEUE_BUILD OFF)
 	DKSET(LIBLIST "") ## used for double checking
-	DKSET(CMAKE_FILE "")
-	DKSET(ANDROID_LIBMK "")
+	#DKSET(CMAKE_FILE "")
 	
 	message(STATUS "############################################################")
 	message(STATUS "######  Processing   ${plugin} . . .                        ")
@@ -97,18 +96,21 @@ foreach(plugin ${dkdepend_list})
 		endif()
 	endif()
 	
-	if(QUEUE_BUILD AND CMAKE_FILE)
+	if(QUEUE_BUILD)
+		if(NOT EXISTS "${plugin_path}/CMakeLists.txt")
+			continue()
+		endif()
 		if(REBUILDALL)
 			DKREMOVE(${plugin_path}/CMakeLists.txt)
-			message(STATUS "######  Removed ${plugin}/CMakeLists.txt")
 			foreach(the_lib ${LIBLIST})
 				DKREMOVE(${the_lib})
 				message(STATUS "######  Removed ${the_lib}")
 			endforeach()
 		endif()
+		
 		if(NOT EXISTS ${plugin_path}/CMakeLists.txt)
 			message(STATUS "######  Creating CMakeLists.txt file for ${plugin} . . .")
-			file(WRITE ${plugin_path}/CMakeLists.txt ${CMAKE_FILE})
+			createPluginCmakeFile(${plugin})
 		endif()
 
 		# ADD THE PLUGIN TO THE APP SOLUTION
@@ -282,9 +284,7 @@ foreach(plugin ${dkdepend_list})
 			endforeach()
 		endif()
 		
-	
 	endif()
-	#DKSET(CMAKE_FILE "") ##DEBUG:   do we need this?   Linux cache file fix
 endforeach()
 
 	
