@@ -190,12 +190,13 @@ if NOT "%ERRORLEVEL%" == "0" goto error
 if NOT "%ERRORLEVEL%" == "0" goto error
 
 
-ECHO Done
-pause
+
 goto end
 
 :error
 echo Failed with error code: %ERRORLEVEL%
 
+ECHO Done
+pause
 :end
 
