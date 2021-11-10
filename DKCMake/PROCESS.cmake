@@ -71,28 +71,14 @@ foreach(plugin ${dkdepend_list})
 	#This executes the 3rdParty library builds, and dkplugin setup
 	include(${plugin_path}/DKMAKE.cmake)
 	
-	#string(TOUPPER ${plugin} PLUGIN_NAME)
-	#if(EXISTS "${${PLUGIN_NAME}}/CMakeLists.txt")
-	#	message(STATUS "PLUGIN_NAME = ${${PLUGIN_NAME}}/CMakeLists.txt")
-	#	add_subdirectory(${${PLUGIN_NAME}} ${${PLUGIN_NAME}}/${OS})
-	#endif()
 	
 	# ADD THE 3rdParty library TO THE APP SOLUTION
-	string(FIND "${plugin}" "${3RDPARTY}" index)
-	if(${index} GREATER -1)
-		if(EXISTS "${plugin_path}/CMakeLists.txt")
-			if(LINUX OR RASPBERRY)
-				if(DEBUG)
-					add_subdirectory(${plugin_path} ${plugin_path}/${OS}/Debug)
-				endif()
-				if(RELEASE)
-					add_subdirectory(${plugin_path} ${plugin_path}/${OS}/Release)
-				endif()
-			else()
-				add_subdirectory(${plugin_path} ${plugin_path}/${OS})
-			endif()
-		endif()
-	endif()
+	#string(TOUPPER ${plugin} PLUGIN_NAME)
+	#if(EXISTS "${${PLUGIN_NAME}}/CMakeLists.txt")
+	#	add_subdirectory(${${PLUGIN_NAME}} ${${PLUGIN_NAME}}/${OS})
+	#	message(STATUS "add_subdirectory( ${${PLUGIN_NAME}} ${${PLUGIN_NAME}}/${OS} )")
+	#endif()
+
 	
 	####################### DKPlugins #######################
 	string(FIND "${DKCPPPLUGS}" "${plugin}" index)
@@ -130,7 +116,7 @@ foreach(plugin ${dkdepend_list})
 			generateCmake(${plugin})
 		endif()
 
-		# ADD THE PLUGIN TO THE APP SOLUTION
+		# ADD THE DKPLUGIN TO THE APP SOLUTION
 		if(EXISTS "${plugin_path}/CMakeLists.txt")
 			if(LINUX OR RASPBERRY)
 				if(DEBUG)
