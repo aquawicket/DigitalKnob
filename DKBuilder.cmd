@@ -39,18 +39,18 @@ if NOT exist "%GIT%" (
 	ECHO "installing git"
 	if NOT exist "%DIGITALKNOB%" mkdir "%DIGITALKNOB%"
 	%download% %GIT_DL% "%DIGITALKNOB%\Git-2.30.1-32-bit.exe"
-	if NOT "%ERRORLEVEL%" == "0" goto error
+	::if NOT "%ERRORLEVEL%" == "0" goto error
 	"%DIGITALKNOB%\Git-2.30.1-32-bit.exe"
-	if NOT "%ERRORLEVEL%" == "0" goto error
+	::if NOT "%ERRORLEVEL%" == "0" goto error
 	goto gitupdate
 )
 if NOT exist "%DKPATH%" "%GIT%" clone https://github.com/aquawicket/DigitalKnob.git "%DKPATH%"
-if NOT "%ERRORLEVEL%" == "0" goto error
+::if NOT "%ERRORLEVEL%" == "0" goto error
 cd "%DKPATH%"
 "%GIT%" checkout -- .
-if NOT "%ERRORLEVEL%" == "0" goto error
+::if NOT "%ERRORLEVEL%" == "0" goto error
 "%GIT%" pull origin master
-if NOT "%ERRORLEVEL%" == "0" goto error
+::if NOT "%ERRORLEVEL%" == "0" goto error
 goto pickapp
 
 :gitcommit
@@ -60,9 +60,9 @@ if NOT exist "%GIT%" (
 	ECHO "installing git"
 	if NOT exist "%DIGITALKNOB%" mkdir "%DIGITALKNOB%"
 	%download% %GIT_DL% "%DIGITALKNOB%\Git-2.30.1-32-bit.exe"
-	if NOT "%ERRORLEVEL%" == "0" goto error
+	::if NOT "%ERRORLEVEL%" == "0" goto error
 	"%DIGITALKNOB%\Git-2.30.1-32-bit.exe"
-	if NOT "%ERRORLEVEL%" == "0" goto error
+	::if NOT "%ERRORLEVEL%" == "0" goto error
 	goto gitcommit
 )
 cd %DKPATH%
@@ -149,9 +149,9 @@ goto build
 echo Deleteing CMake cache . . .
 cd "%DIGITALKNOB%"
 for /r %%i in (CMakeCache.*) do del "%%i"
-if NOT "%ERRORLEVEL%" == "0" goto error
+::if NOT "%ERRORLEVEL%" == "0" goto error
 for /d /r %%i in (*CMakeFiles*) do rd /s /q "%%i"
-if NOT "%ERRORLEVEL%" == "0" goto error
+::if NOT "%ERRORLEVEL%" == "0" goto error
 
 
 echo ****** BUILDING %APP% - %OS% ******
@@ -161,9 +161,9 @@ if NOT exist "%CMAKE%" (
     echo "installing cmake"
 	echo "%CMAKE_DL%"
 	%download% %CMAKE_DL% "%DIGITALKNOB%\cmake-3.21.1-windows-i386.msi"
-	if NOT "%ERRORLEVEL%" == "0" goto error
+	::if NOT "%ERRORLEVEL%" == "0" goto error
 	"%DIGITALKNOB%\cmake-3.21.1-windows-i386.msi"
-	if NOT "%ERRORLEVEL%" == "0" goto error
+	::if NOT "%ERRORLEVEL%" == "0" goto error
 	goto build
 )
 if exist "C:\Program Files\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe" set "MSBUILD=C:\Program Files\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe"
@@ -172,22 +172,22 @@ if NOT "%MSBUILD%" (
     echo "installing Visual Studio"
 	echo "%MSBUILD_DL%"
 	%download% %MSBUILD_DL% "%DIGITALKNOB%\vs_Community.exe"
-	if NOT "%ERRORLEVEL%" == "0" goto error
+	::if NOT "%ERRORLEVEL%" == "0" goto error
 	"%DIGITALKNOB%\vs_Community.exe"
-	if NOT "%ERRORLEVEL%" == "0" goto error
+	::if NOT "%ERRORLEVEL%" == "0" goto error
 	goto build
 )
 set "APP_PATH=%DKPATH%\DKApps\%APP%"
 ECHO %APP_PATH%
 if NOT exist "%APP_PATH%\%OS%" mkdir "%APP_PATH%\%OS%"
-if NOT "%ERRORLEVEL%" == "0" goto error
+::if NOT "%ERRORLEVEL%" == "0" goto error
 cd "%APP_PATH%\%OS%"
 "%CMAKE%" -G "Visual Studio 16 2019" -A Win32 -DDEBUG=ON -DRELEASE=ON -DREBUILDALL=ON -DSTATIC=ON %DKPATH%
-if NOT "%ERRORLEVEL%" == "0" goto error
+::if NOT "%ERRORLEVEL%" == "0" goto error
 "%MSBUILD%" %APP%.sln /p:Configuration=Debug
-if NOT "%ERRORLEVEL%" == "0" goto error
+::if NOT "%ERRORLEVEL%" == "0" goto error
 "%MSBUILD%" %APP%.sln /p:Configuration=Release
-if NOT "%ERRORLEVEL%" == "0" goto error
+::if NOT "%ERRORLEVEL%" == "0" goto error
 
 
 
