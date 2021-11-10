@@ -38,7 +38,7 @@ if exist "C:\Program Files (x86)\Git\bin\git.exe" set "GIT=C:\Program Files (x86
 if exist "%GIT%" (echo "GIT = %GIT%") else (
 	echo "installing git"
 	echo "%GIT_DL%"
-	mkdir "%DIGITALKNOB%"
+	if NOT exists "%DIGITALKNOB%" mkdir "%DIGITALKNOB%"
 	%download% %GIT_DL% "%DIGITALKNOB%\Git-2.30.1-32-bit.exe"
 	if NOT "%ERRORLEVEL%" == "0" goto error
 	"%DIGITALKNOB%\Git-2.30.1-32-bit.exe"
