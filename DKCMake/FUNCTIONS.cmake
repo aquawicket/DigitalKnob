@@ -2745,19 +2745,19 @@ endfunction()
 
 
 function(generateCmake name)
-
+	DKINCLUDE(${DKPLUGINS})
+	
 	dk_getPathToPlugin(${name} plugin_path)
-	if(EXISTS "${plugin_path}/CMakeLists.txt")
-		message(STATUS "CMakeLists.txt file for ${plugin} already exists")
-		return()
-	endif()
+	#if(EXISTS "${plugin_path}/CMakeLists.txt")
+	#	message(STATUS "CMakeLists.txt file for ${plugin} already exists")
+	#	return()
+	#endif()
 
 	if(NOT plugin_path)
 		message(FATAL_ERROR "generateCmake(${name}): plugin not found")
 		return()
 	endif()
-	
-	DKINCLUDE(${DKPLUGINS})
+
 	
 	##Create CmakeLists.txt file
 	DKREMOVE(${plugin_path}/CMakeLists.txt)
