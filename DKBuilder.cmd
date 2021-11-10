@@ -49,9 +49,9 @@ if NOT exist "%DKPATH%" "%GIT%" clone https://github.com/aquawicket/DigitalKnob.
 ::if NOT "%ERRORLEVEL%" == "0" goto error
 cd "%DKPATH%"
 "%GIT%" checkout -- .
-::if NOT "%ERRORLEVEL%" == "0" goto error
+if NOT "%ERRORLEVEL%" == "0" goto error
 "%GIT%" pull origin master
-::if NOT "%ERRORLEVEL%" == "0" goto error
+if NOT "%ERRORLEVEL%" == "0" goto error
 goto pickapp
 
 :gitcommit
