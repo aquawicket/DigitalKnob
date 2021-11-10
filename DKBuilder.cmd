@@ -168,7 +168,7 @@ if NOT exist "%CMAKE%" (
 )
 if exist "C:\Program Files\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe" set "MSBUILD=C:\Program Files\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe"
 if exist "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe" set "MSBUILD=C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe"
-if NOT "%MSBUILD%" (
+if NOT exist "%MSBUILD%" (
     echo "installing Visual Studio"
 	echo "%MSBUILD_DL%"
 	%download% %MSBUILD_DL% "%DIGITALKNOB%\vs_Community.exe"
@@ -190,7 +190,6 @@ cd "%APP_PATH%\%OS%"
 ::if NOT "%ERRORLEVEL%" == "0" goto error
 
 
-
 goto end
 
 :error
@@ -199,4 +198,3 @@ echo Failed with error code: %ERRORLEVEL%
 ECHO Done
 pause
 :end
-
