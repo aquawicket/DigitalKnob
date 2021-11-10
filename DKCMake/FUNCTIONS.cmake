@@ -2745,9 +2745,15 @@ endfunction()
 
 
 function(generateCmake name)
+
 	dk_getPathToPlugin(${name} plugin_path)
+	if(EXISTS "${plugin_path}/CMakeLists.txt")
+		message(STATUS "CMakeLists.txt file for ${plugin} already exists")
+		return()
+	endif()
+
 	if(NOT plugin_path)
-		message(FATAL_ERROR "createPluginCmakeFile(${name}): plugin not found")
+		message(FATAL_ERROR "generateCmake(${name}): plugin not found")
 		return()
 	endif()
 	
