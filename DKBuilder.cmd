@@ -42,16 +42,16 @@ if exist "%GIT%" (echo "GIT = %GIT%") else (
 	%download% %GIT_DL% "%DIGITALKNOB%\Git-2.30.1-32-bit.exe"
 	if NOT "%ERRORLEVEL%" == "0" goto error
 	"%DIGITALKNOB%\Git-2.30.1-32-bit.exe"
-	::if NOT "%ERRORLEVEL%" == "0" goto error
+	if NOT "%ERRORLEVEL%" == "0" goto error
 	goto gitupdate
 )
 "%GIT%" clone https://github.com/aquawicket/DigitalKnob.git "%DKPATH%"
 if NOT "%ERRORLEVEL%" == "0" goto error
 cd "%DKPATH%"
 "%GIT%" checkout -- .
-if NOT "%ERRORLEVEL%" == "0" goto error
+::if NOT "%ERRORLEVEL%" == "0" goto error
 "%GIT%" pull origin master
-if NOT "%ERRORLEVEL%" == "0" goto error
+::if NOT "%ERRORLEVEL%" == "0" goto error
 goto pickapp
 
 :gitcommit
@@ -64,14 +64,14 @@ if exist "%GIT%" (echo "GIT = %GIT%") else (
 	%download% %GIT_DL% "%DIGITALKNOB%\Git-2.30.1-32-bit.exe"
 	if NOT "%ERRORLEVEL%" == "0" goto error
 	"%DIGITALKNOB%\Git-2.30.1-32-bit.exe"
-	::if NOT "%ERRORLEVEL%" == "0" goto error
+	if NOT "%ERRORLEVEL%" == "0" goto error
 	goto gitcommit
 )
 cd %DKPATH%
 "%GIT%" commit -a -m "git commit"
-if NOT "%ERRORLEVEL%" == "0" goto error
+::if NOT "%ERRORLEVEL%" == "0" goto error
 "%GIT%" push
-if NOT "%ERRORLEVEL%" == "0" goto error
+::if NOT "%ERRORLEVEL%" == "0" goto error
 goto pickapp
 
 :dkbuilder
