@@ -75,10 +75,10 @@ WIN64_RELEASE_MSYS(make)
 
 MAC_DEBUG_PATH(${XZ}/${OS}/${DEBUG_DIR})
 MAC_DEBUG_COMMAND(../../configure --disable-shared --enable-static)
-MAC_DEBUG_COMMAND(make "CXXFLAGS=-arch x86_64" "CFLAGS=-arch x86_64" "LDFLAGS=-arch x86_64")
+MAC_DEBUG_COMMAND(make)
 MAC_RELEASE_PATH(${XZ}/${OS}/${RELEASE_DIR})
 MAC_RELEASE_COMMAND(../../configure --disable-shared --enable-static)
-MAC_RELEASE_COMMAND(make "CXXFLAGS=-arch x86_64" "CFLAGS=-arch x86_64" "LDFLAGS=-arch x86_64")
+MAC_RELEASE_COMMAND(make)
 
 
 IOS_DEBUG_PATH(${XZ}/${OS}/${DEBUG_DIR})
@@ -90,10 +90,10 @@ IOS_RELEASE_COMMAND(make)
 
 
 IOSSIM_DEBUG_PATH(${XZ}/${OS}/${DEBUG_DIR})
-IOSSIM_DEBUG_COMMAND(../../configure --disable-shared --enable-static -target x86_64-apple-ios10.0-simulator)
+IOSSIM_DEBUG_COMMAND(../../configure --disable-shared --enable-static -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator15.0.sdk)
 IOSSIM_DEBUG_COMMAND(make)
 IOSSIM_RELEASE_PATH(${XZ}/${OS}/${RELEASE_DIR})
-IOSSIM_RELEASE_COMMAND(../../configure --disable-shared --enable-static -target x86_64-apple-ios10.0-simulator)
+IOSSIM_RELEASE_COMMAND(../../configure --disable-shared --enable-static)
 IOSSIM_RELEASE_COMMAND(make)
 
 

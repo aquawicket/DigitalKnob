@@ -1,4 +1,8 @@
+https://cmake.org/cmake/help/latest/module/ExternalProject.html
+
 https://www.infoq.com/articles/ios-9-bitcode/ 
+
+https://gitlab.kitware.com/cmake/community/-/wikis/doc/cmake/CrossCompiling
 
 
 Example compiler flags for Simulator64

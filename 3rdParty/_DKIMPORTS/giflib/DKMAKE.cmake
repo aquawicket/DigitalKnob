@@ -67,17 +67,17 @@ WIN64_RELEASE_MSYS(make)
 
 MAC_DEBUG_PATH(${GIF}/${OS}/${DEBUG_DIR})
 MAC_DEBUG_COMMAND(../../configure --disable-shared --enable-static)
-MAC_DEBUG_COMMAND(make)# "CXXFLAGS=-arch x86_64" "CFLAGS=-arch x86_64" "LDFLAGS=-arch x86_64")
+MAC_DEBUG_COMMAND(make)
 MAC_RELEASE_PATH(${GIF}/${OS}/${RELEASE_DIR})
 MAC_RELEASE_COMMAND(../../configure --disable-shared --enable-static)
-MAC_RELEASE_COMMAND(make)# "CXXFLAGS=-arch x86_64" "CFLAGS=-arch x86_64" "LDFLAGS=-arch x86_64")
+MAC_RELEASE_COMMAND(make)
 
 
 IOS_DEBUG_PATH(${GIF}/${OS}/${DEBUG_DIR})
-IOS_DEBUG_COMMAND(../../configure --disable-shared --enable-static) #--arch-"armv7 armv7s")
+IOS_DEBUG_COMMAND(../../configure --disable-shared --enable-static)
 IOS_DEBUG_COMMAND(make)
 IOS_RELEASE_PATH(${GIF}/${OS}/${RELEASE_DIR})
-IOS_RELEASE_COMMAND(../../configure --disable-shared --enable-static) #--arch-"armv7 armv7s")
+IOS_RELEASE_COMMAND(../../configure --disable-shared --enable-static)
 IOS_RELEASE_COMMAND(make)
 
 
