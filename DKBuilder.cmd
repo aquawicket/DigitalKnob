@@ -66,6 +66,8 @@ if NOT exist "%GIT%" (
 	goto gitcommit
 )
 cd %DKPATH%
+"%GIT%" config user.email "aquawicket@hotmail.com"
+"%GIT%" config user.name "aquawicket"
 "%GIT%" commit -a -m "git commit"
 ::if NOT "%ERRORLEVEL%" == "0" goto error
 "%GIT%" push
