@@ -1,6 +1,6 @@
-IF(NOT USE_DKCef)
-	RETURN()
-ENDIF()
+#IF(NOT USE_DKCef)
+#	RETURN()
+#ENDIF()
 
 DKDEPEND(DKRml)
 IF(USE_DKDuktape)
