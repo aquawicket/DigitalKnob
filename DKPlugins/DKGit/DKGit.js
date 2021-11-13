@@ -127,8 +127,8 @@ function DKGit_GitCommit() {
                 //CPP_DK_Execute(GIT + " init")
 				//DKGit_SetCredentials()
 				//const branch = DKGit_GetCurrentBranch()
-				CPP_DK_Execute(GIT + " config user.email "aquawicket@hotmail.com")
-				CPP_DK_Execute(GIT + " config user.name "aquawicket")
+				CPP_DK_Execute(GIT + " config user.email \"aquawicket@hotmail.com\"")
+				CPP_DK_Execute(GIT + " config user.name \"aquawicket\"")
 				CPP_DK_Execute(GIT + " commit -a -m \"commit from git\"")
                 CPP_DK_Execute(GIT + " push")
             }
