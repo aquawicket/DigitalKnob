@@ -1,4 +1,4 @@
-if(ANDROID OR IOS OR IOSSIM)
+if(ANDROID OR IOS OR IOSSIM OR MAC)
 	return()
 endif()
 # https://github.com/upx/upx/releases/download/v3.96/upx-3.96-win32.zip
