@@ -1027,19 +1027,21 @@ endif()
 if(ANDROID)
 	### PRE BUILD ###
 	if(DEBUG)
+		DKREMOVE(${CMAKE_BINARY_DIR}/${DEBUG_DIR}/${APP_NAME}.backup)
 		DKRENAME(${CMAKE_BINARY_DIR}/${DEBUG_DIR}/${APP_NAME}.apk ${CMAKE_BINARY_DIR}/${DEBUG_DIR}/${APP_NAME}.backup)
 	endif()
 	if(RELEASE)
+		DKREMOVE(${CMAKE_BINARY_DIR}/${RELEASE_DIR}/${APP_NAME}.backup)
 		DKRENAME(${CMAKE_BINARY_DIR}/${RELEASE_DIR}/${APP_NAME}.apk ${CMAKE_BINARY_DIR}/${RELEASE_DIR}/${APP_NAME}.backup)
 	endif()
 	
 	## OS SOURCE FILES ##
-	DKCOPY(${DKPLUGINS}/_DKIMPORT/Android.h ${DKPROJECT}/Android.h FALSE) ## copy app default files recursivly without overwrite
+	DKCOPY(${DKPLUGINS}/_DKIMPORT/Android.h ${DKPROJECT}/Android.h FALSE)
 	if(ANDROID_32)
-		DKCOPY(${DKPLUGINS}/_DKIMPORT/android32 ${DKPROJECT}/android32 FALSE) ## copy app default files recursivly without overwrite
+		DKCOPY(${DKPLUGINS}/_DKIMPORT/android32 ${DKPROJECT}/android32 FALSE)
 	endif()
 	if(ANDROID_64)
-		DKCOPY(${DKPLUGINS}/_DKIMPORT/android64 ${DKPROJECT}/android64 FALSE) ## copy app default files recursivly without overwrite
+		DKCOPY(${DKPLUGINS}/_DKIMPORT/android64 ${DKPROJECT}/android64 FALSE)
 	endif()
 	
 	## ICONS ##
