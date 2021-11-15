@@ -61,7 +61,7 @@ DKDISABLE(waave)
 
 if(NOT CMAKE_HOST_WIN32) # Disabled on Non-Windows host machines
 	DKDISABLE(android-studio)
-	DKDISABLE(glew)
+	#DKDISABLE(glew)
 	DKDISABLE(glintercept)
 	DKDISABLE(python)
 	DKDISABLE(php-win32-vs16-x64)
