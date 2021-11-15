@@ -1073,7 +1073,7 @@ if(ANDROID)
 	
 	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${LIBS})	
 	#target_include_directories(${APP_NAME} PUBLIC ${INCLUDE_DIRECTORIES}) #of ${DKINCLUDES_LIST}
-	target_include_directories(${SDL2}/include)
+	target_include_directories(${APP_NAME} ${SDL2}/include)
 
 	foreach(plugin ${dkdepend_list})
 		if(EXISTS "${DKPLUGINS}/${plugin}/CMakeLists.txt")
