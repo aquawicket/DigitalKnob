@@ -103,6 +103,8 @@ DKSET(IOSSIM_LIBTOOL ${IOSSIM_DEVROOT}/Toolchains/XcodeDefault.xctoolchain/usr/b
 DKSET(IOSSIM_HOST ${IOSSIM_ARCH}-apple-darwin)
 DKSET(IOSSIM_MIN_SDK_VERSION 13.0)
 DKSET(IOSSIM_SYSROOT ${IOSSIM_DEVROOT}/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator15.0.sdk)
+DKSET(IOSSIM_CFLAGS "-arch ${IOSSIM_ARCH} -mios-simulator-version-min=${IOSSIM_MIN_SDK_VERSION} -isysroot ${IOSSIM_SYSROOT}")
+DKSET(IOSSIM_CXXFLAGS "-arch ${IOSSIM_ARCH} -mios-simulator-version-min=${IOSSIM_MIN_SDK_VERSION} -isysroot ${IOSSIM_SYSROOT}")
 
 IOSSIM_DEBUG_PATH(${XZ}/${OS}/${DEBUG_DIR})
 IOSSIM_DEBUG_COMMAND(../../configure 
@@ -111,7 +113,8 @@ IOSSIM_DEBUG_COMMAND(../../configure
 	--host=${IOSSIM_HOST}
 	CC=${IOSSIM_CXX} 
 	CXX=${IOSSIM_CXX} 
-	CFLAGS="-arch ${IOSSIM_ARCH} -mios-simulator-version-min=${IOSSIM_MIN_SDK_VERSION} -isysroot ${IOSSIM_SYSROOT}")
+	CFLAGS=${IOSSIM_CFLAGS}
+	CFLAGS=${IOSSIM_CXXFLAGS})
 IOSSIM_DEBUG_COMMAND(make)
 IOSSIM_RELEASE_PATH(${XZ}/${OS}/${RELEASE_DIR})
 IOSSIM_RELEASE_COMMAND(../../configure 
@@ -120,7 +123,8 @@ IOSSIM_RELEASE_COMMAND(../../configure
 	--host=${IOSSIM_HOST}
 	CC=${IOSSIM_CXX} 
 	CXX=${IOSSIM_CXX} 
-	CFLAGS="-arch ${IOSSIM_ARCH} -mios-simulator-version-min=${IOSSIM_MIN_SDK_VERSION} -isysroot ${IOSSIM_SYSROOT}")
+	CFLAGS=${IOSSIM_CFLAGS}
+	CFLAGS=${IOSSIM_CXXFLAGS})
 IOSSIM_RELEASE_COMMAND(make)
 
 
