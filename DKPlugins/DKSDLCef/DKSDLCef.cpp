@@ -448,9 +448,10 @@ void DKSDLCef::Draw()
 {
 	//DKDEBUGFUNC();
 	///// Draw to DKRocket
-	if(DKClass::DKValid("DKRocket,DKRocket0")){ return; } 
+	if(DKClass::DKValid("DKRml,DKRml0")){ return; } 
 
 	///// Draw to DKSdlWindow
+	if (cefHandler->cef_images.size() < 1) { return; }
 	if(!cefHandler->cef_images[0]){ return; }
 	SDL_Rect texture_rect;
 	texture_rect.y = dkCef->dkBrowsers[0].top; // the y coordinate
