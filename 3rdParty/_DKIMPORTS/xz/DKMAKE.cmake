@@ -111,7 +111,7 @@ IOSSIM_DEBUG_COMMAND(../../configure
 	--disable-shared 
 	--enable-static
 	--host=${IOSSIM_HOST}
-	CC=${IOSSIM_CXX} 
+	CC=${IOSSIM_C} 
 	CXX=${IOSSIM_CXX} 
 	CFLAGS=${IOSSIM_CFLAGS}
 	CXXFLAGS=${IOSSIM_CXXFLAGS})
@@ -121,7 +121,7 @@ IOSSIM_RELEASE_COMMAND(../../configure
 	--disable-shared `
 	--enable-static
 	--host=${IOSSIM_HOST}
-	CC=${IOSSIM_CXX} 
+	CC=${IOSSIM_C} 
 	CXX=${IOSSIM_CXX} 
 	CFLAGS=${IOSSIM_CFLAGS}
 	CXXFLAGS=${IOSSIM_CXXFLAGS})
