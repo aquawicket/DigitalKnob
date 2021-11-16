@@ -68,7 +68,7 @@ foreach(plugin ${dkdepend_list})
 	endif()
 	#message(STATUS "plugin_path = ${plugin_path}")
 
-	#This executes the 3rdParty library builds, and dkplugin setup
+	#This executes the 3rdParty library builds, and dkplugin setup, creates CMakeLists.txt files
 	include(${plugin_path}/DKMAKE.cmake)
 	
 	
@@ -97,26 +97,7 @@ foreach(plugin ${dkdepend_list})
 		if(REBUILD OR REBUILDALL)
 			DKSET(QUEUE_BUILD ON)
 		endif()
-	endif()
-	
-	if(${index} GREATER -1 AND QUEUE_BUILD)
-		if(NOT EXISTS "${plugin_path}/CMakeLists.txt")
-			continue()
-		endif()
-		if(REBUILDALL)
-			DKREMOVE(${plugin_path}/CMakeLists.txt)
-			foreach(the_lib ${LIBLIST})
-				DKREMOVE(${the_lib})
-				message(STATUS "######  Removed ${the_lib}")
-			endforeach()
-		endif()
 		
-		if(NOT EXISTS ${plugin_path}/CMakeLists.txt)
-			message(STATUS "######  Creating CMakeLists.txt file for ${plugin} . . .")
-			generateCmake(${plugin})
-		endif()
-
-		# ADD THE DKPLUGIN TO THE APP SOLUTION
 		if(EXISTS "${plugin_path}/CMakeLists.txt")
 			if(LINUX OR RASPBERRY)
 				if(DEBUG)
@@ -128,6 +109,58 @@ foreach(plugin ${dkdepend_list})
 				add_subdirectory(${plugin_path} ${plugin_path}/${OS})
 			endif()
 		endif()
+	endif()
+	
+	####################### DKExecutables #######################
+	string(FIND "${DKCPPEXECS}" "${plugin}" index)
+	if(${index} GREATER -1)
+		DKENABLE(${plugin})
+		if(REBUILD OR REBUILDALL)
+			DKSET(QUEUE_BUILD ON)
+		endif()
+		
+		if(EXISTS "${plugin_path}/CMakeLists.txt")
+			if(LINUX OR RASPBERRY)
+				if(DEBUG)
+					add_subdirectory(${plugin_path} ${plugin_path}/${OS}/Debug)
+				elseif(RELEASE)
+					add_subdirectory(${plugin_path} ${plugin_path}/${OS}/Release)
+				endif()
+			else()
+				add_subdirectory(${plugin_path} ${plugin_path}/${OS})
+			endif()
+		endif()
+	endif()
+	
+	if(${index} GREATER -1 AND QUEUE_BUILD AND FALSE)
+		#if(NOT EXISTS "${plugin_path}/CMakeLists.txt")
+		#	continue()
+		#endif()
+		#if(REBUILDALL)
+		#	DKREMOVE(${plugin_path}/CMakeLists.txt)
+		#	foreach(the_lib ${LIBLIST})
+		#		DKREMOVE(${the_lib})
+		#		message(STATUS "######  Removed ${the_lib}")
+		#	endforeach()
+		#endif()
+		
+		#if(NOT EXISTS ${plugin_path}/CMakeLists.txt)
+		#	message(STATUS "######  Creating CMakeLists.txt file for ${plugin} . . .")
+		#	generateCmake(${plugin})
+		#endif()
+
+		# ADD THE DKPLUGIN TO THE APP SOLUTION
+		#if(EXISTS "${plugin_path}/CMakeLists.txt")
+		#	if(LINUX OR RASPBERRY)
+		#		if(DEBUG)
+		#			add_subdirectory(${plugin_path} ${plugin_path}/${OS}/Debug)
+		#		elseif(RELEASE)
+		#			add_subdirectory(${plugin_path} ${plugin_path}/${OS}/Release)
+		#		endif()
+		#	else()
+		#		add_subdirectory(${plugin_path} ${plugin_path}/${OS})
+		#	endif()
+		#endif()
 		
 		
 		## Prebuild Plugins switch

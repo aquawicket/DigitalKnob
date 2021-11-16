@@ -2934,13 +2934,9 @@ function(DKEXECUTABLE name)
 	file(APPEND ${plugin_path}/CMakeLists.txt "include(${DKCMAKE}/OPTIONS.cmake)\n")
 	file(APPEND ${plugin_path}/CMakeLists.txt "project(${name})\n")
 	
-	DKSET(DKCPPPLUGS ${DKCPPPLUGS} ${name})  #Add to list
+	DKSET(DKCPPEXECS ${DKCPPEXECS} ${name})  #Add to list
 endfunction()
 
-
-function(DKAPPEND_CMAKE str)
-	file(APPEND ${plugin_path}/CMakeLists.txt "${str}")
-endfunction()
 
 
 SET(ASSETS 
