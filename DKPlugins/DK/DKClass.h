@@ -3,10 +3,25 @@
 #ifndef DKClass_H
 #define DKClass_H
 
-//#include <boost/function.hpp>  //deprecated, using std::function now
-//#include <boost/bind/bind.hpp> //deprecated, using std::bind now
-#include <functional>
 #include "DKObject.h"
+#include "DKUtil.h"
+
+#define STD_FUNCTION //or BOOST_FUNCTION
+#ifdef STD_FUNCTION
+    #include <functional>
+    typedef std::function<bool(const void*, void*)> DKFunction;
+    typedef std::map<DKString, DKFunction> DKFunctionMap;
+    namespace dk_placeholders = std::placeholders;
+#elif defined (BOOST_FUNCTION)
+    #include <boost/function.hpp>
+    #include <boost/bind/bind.hpp>
+    typedef boost::function<bool(const void*, void*)> DKFunction;
+    namespace dk_placeholders = boost::placeholders;
+#else
+    DKERROR("No ::Function or ::Bind interface available");
+#endif
+
+
 
 class DKObject;
 class DKClass{
@@ -31,11 +46,11 @@ public:
 	static void GetClassList(DKStringArray& list);
 	static void GetObjects(DKStringArray& list);
 	static std::map<DKString, DKClass*>* classes;
+    static DKFunctionMap* functions;
 
 	/////  GLOBAL FUNCTIONS ////////////////// note: primarily for javascript access
 	static DKObject* DKCreate(const DKString& data){
 		DKDEBUGFUNC(data); //data = (class,id,var1,var2,var3,etc)
-		//DKINFO("DKClass::DKCreate("+data+")\n");
 		return DKClass::_Instance(data);
 	}
 
@@ -62,35 +77,36 @@ public:
 	template<class T>
 	static bool RegisterFunc(const DKString& name, bool (T::*func) (const void*, void*), T* _this){
 		DKDEBUGFUNC(name, func, _this);
-		//functions[name] = boost::bind(func, _this, boost::placeholders::_1, boost::placeholders::_2);
-		functions[name] = std::bind(func, _this, std::placeholders::_1, std::placeholders::_2);
-		if(!functions[name])
-			return DKERROR("RegisterFunc(" + name + "): failed to register function \n");
+        //functions[name] = std::bind(func, _this, dk_placeholders::_1, dk_placeholders::_2);
+        if(!functions)
+            functions = new DKFunctionMap();
+        if((*functions)[name])
+            DKERROR("RegisterFunc(" + name + "): failed to register function \n");
+        (*functions)[name] = std::bind(func, _this, dk_placeholders::_1, dk_placeholders::_2);
+        if(!(*functions)[name])
+            return DKERROR("RegisterFunc("+name+"): failed to register function \n");
 		return true;
 	}
 
 	static bool UnregisterFunc(const DKString& name){
 		DKDEBUGFUNC(name);
-		functions.erase(name);
-		if(functions[name])
+		functions->erase(name);
+        if((*functions)[name])
 			return DKERROR("UnegisterFunc("+name+"): failed to unregister function \n");
 		return true;
 	}
 
 	static bool HasFunc(const DKString& name){
 		DKDEBUGFUNC(name);
-		return (bool)functions[name];
+		return (bool)(*functions)[name];
 	}
 	
 	static bool CallFunc(const DKString& name, const void* input = NULL, void* output = NULL){
 		//DKDEBUGFUNC(name, input, output); //excessive logging
-		if(!functions[name])
+		if(!(*functions)[name])
 			return DKERROR("CallFunc("+name+") not registered\n");
-		return functions[name](input, output);
+		return (*functions)[name](input, output);
 	}
-
-	//static std::map<DKString, boost::function<bool (const void*, void*)> > functions;
-	static std::map<DKString, std::function<bool(const void*, void*)> > functions;
 };
 
 

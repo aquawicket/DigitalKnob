@@ -177,7 +177,6 @@ bool DKSDLWindow::Init() {
     title2 += mTime;
     DKString icon = DKFile::local_assets + "icon.ico";
     SetIcon(&icon, NULL);
-    //DKINFO(title+"\n");
     SDL_SetWindowTitle(window, title2.c_str());
     DKClass::RegisterFunc("DKSDLWindow::TestInt", &DKSDLWindow::TestInt, this);
     DKClass::RegisterFunc("DKSDLWindow::TestString", &DKSDLWindow::TestString, this);
@@ -729,6 +728,7 @@ bool DKSDLWindow::handle(SDL_Event *event) {
 void DKSDLWindow::MapInputs() {
     DKDEBUGFUNC();
     //sdlKeyCode translates (SDL_Event->key.keysym.sym) to keycode
+    sdlKeyCode.clear();
     sdlKeyCode[27] = 27; //esc
     sdlKeyCode[1073741882] = 112; //f1
     sdlKeyCode[1073741883] = 113; //f2
@@ -833,6 +833,7 @@ void DKSDLWindow::MapInputs() {
     sdlKeyCode[1073741904] = 37; //left
     sdlKeyCode[1073741903] = 39; //right
     //sdlCharCode translates (SDL_Event->key.keysym.sym) to charcode
+    sdlCharCode.clear();
     sdlCharCode[27] = 0; //esc
     sdlCharCode[1073741882] = 0; //f1
     sdlCharCode[1073741883] = 0; //f2
@@ -937,6 +938,7 @@ void DKSDLWindow::MapInputs() {
     sdlCharCode[1073741904] = 0; //left
     sdlCharCode[1073741903] = 0; //right
     //sdlShiftCharCode translates (SDL_Event->key.keysym.sym) to shifted charcode
+    sdlShiftCharCode.clear();
     sdlShiftCharCode[27] = 0; //esc
     sdlShiftCharCode[1073741882] = 0; //f1
     sdlShiftCharCode[1073741883] = 0; //f2
@@ -1041,6 +1043,7 @@ void DKSDLWindow::MapInputs() {
     sdlShiftCharCode[1073741904] = 0; //left
     sdlShiftCharCode[1073741903] = 0; //right
     //sdlMacCode translates (SDL_Event->key.keysym.sym) to native mac keycode
+    sdlMacCode.clear();
     sdlMacCode[27] = 53; //esc
     sdlMacCode[1073741882] = 122; //f1
     sdlMacCode[1073741883] = 120; //f2

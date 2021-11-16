@@ -145,7 +145,6 @@ bool DKAssets::GetAssetsPath(DKString& path){
     DKStringArray folders;
     DKFile::GetDirectoryContents(userpath + "/digitalknob", folders);
     for(int i=0; i<folders.size(); ++i){
-        DKINFO("TESTING FOR: "+userpath + "/digitalknob/"+folders[i]+"/DKApps/" + DKFile::app_name + "/assets/ \n");
         if(DKFile::PathExists(userpath + "/digitalknob/"+folders[i]+"/DKApps/" + DKFile::app_name + "/assets/") &&
             DKFile::PathExists(userpath + "/digitalknob/"+folders[i]+"/DKApps/" + DKFile::app_name + "/DKMAKE.cmake")){
             path = userpath + "/digitalknob/"+folders[i]+"/DKApps/" + DKFile::app_name + "/assets/";

@@ -1,6 +1,7 @@
 #include "DK/stdafx.h"
 #ifndef WIN32
 #include "DKUnix.h"
+#include "DKFile.h"
 #include <cstdlib>     // GetUsername()  std::getenv()
 #include <unistd.h>    // sleep()  / usleep()
 /*
@@ -37,7 +38,14 @@ bool DKUnix::GetUsername(DKString& username){
 	}
 #endif
 #ifdef IOS
-//TODO If we are on ios-simulator, We can get the username from the exepath on IOS
+    //Get the username from the app_path in case we are in ios-simulator
+    std::size_t pos = DKFile::app_path.find("/Library");
+    username = DKFile::app_path.substr(0, pos);
+    replace(username, "/Users/", "");
+    DKINFO("DKUnix::GetUsername() = "+username+"\n");
+    if(!username.empty())
+        return true;
+    return false;
 #endif
 #ifdef LINUX
 	if (const char* usr_a = std::getenv("USER")){ //'USERNAME' on Windows
