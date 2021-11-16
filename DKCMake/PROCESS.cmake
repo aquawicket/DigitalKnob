@@ -786,10 +786,10 @@ endif()
 if(IOSSIM)
 	### PRE BUILD ###
 	if(DEBUG)
-		DKRENAME(${CMAKE_BINARY_DIR}/${DEBUG_DIR}/${APP_NAME}_ios.app ${CMAKE_BINARY_DIR}/${DEBUG_DIR}/${APP_NAME}_ios.backup)
+		DKRENAME(${CMAKE_BINARY_DIR}/${DEBUG_DIR}/${APP_NAME}.app ${CMAKE_BINARY_DIR}/${DEBUG_DIR}/${APP_NAME}.backup)
 	endif()
 	if(RELEASE)
-		DKRENAME(${CMAKE_BINARY_DIR}/${RELEASE_DIR}/${APP_NAME}_ios.app ${CMAKE_BINARY_DIR}/${RELEASE_DIR}/${APP_NAME}_ios.backup)
+		DKRENAME(${CMAKE_BINARY_DIR}/${RELEASE_DIR}/${APP_NAME}.app ${CMAKE_BINARY_DIR}/${RELEASE_DIR}/${APP_NAME}.backup)
 	endif()
 	
 	## ASSETS ##
@@ -838,19 +838,19 @@ if(IOSSIM)
 	
 	#GET_TARGET_PROPERTY(MyExecutable_PATH ${APP_NAME} LOCATION)
 	list(APPEND App_SRC ${DKPLUGINS}/DK/DKiPhone.mm)
-	add_executable(${APP_NAME}_ios MACOSX_BUNDLE ${App_SRC})
-	set_target_properties(${APP_NAME}_ios PROPERTIES
+	add_executable(${APP_NAME} MACOSX_BUNDLE ${App_SRC})
+	set_target_properties(${APP_NAME} PROPERTIES
         XCODE_ATTRIBUTE_CODE_SIGN_IDENTITY ""
         MACOSX_BUNDLE TRUE
-        MACOSX_BUNDLE_BUNDLE_NAME "${APP_NAME}_ios"
+        MACOSX_BUNDLE_BUNDLE_NAME "${APP_NAME}"
 		MACOSX_BUNDLE_ICON_FILE "logo"
         MACOSX_BUNDLE_BUNDLE_VERSION "1.0"
-        MACOSX_BUNDLE_LONG_VERSION_STRING "${APP_NAME}_ios v1.0"
+        MACOSX_BUNDLE_LONG_VERSION_STRING "${APP_NAME} v1.0"
         MACOSX_BUNDLE_SHORT_VERSION_STRING "1.0"
-        MACOSX_BUNDLE_GUI_IDENTIFIER com.digitalknob.${APP_NAME}_ios
+        MACOSX_BUNDLE_GUI_IDENTIFIER com.digitalknob.${APP_NAME}
         MACOSX_BUNDLE_COPYRIGHT "(C) 2021 DigitalKnob"
-		MACOSX_BUNDLE_GUI_IDENTIFIER "com.digitalknob.${APP_NAME}_ios"
-        MACOSX_FRAMEWORK_IDENTIFIER "com.digitalknob.bundle.${APP_NAME}_ios"
+		MACOSX_BUNDLE_GUI_IDENTIFIER "com.digitalknob.${APP_NAME}"
+        MACOSX_FRAMEWORK_IDENTIFIER "com.digitalknob.bundle.${APP_NAME}"
 		MACOSX_BUNDLE_INFO_PLIST ${DKCMAKE}/Info.plist
 		#MACOSX_RPATH TRUE
         #XCODE_ATTRIBUTE_LD_RUNPATH_SEARCH_PATHS "@loader_path/Libraries"
@@ -864,11 +864,11 @@ if(IOSSIM)
 		##set(CMAKE_OSX_ARCHITECTURES "$(ARCHS_STANDARD_32_BIT)")
 		#set(CMAKE_CXX_FLAGS "-x objective-c++")
     )
-	target_link_libraries(${APP_NAME}_ios ${DEBUG_LIBS} ${RELEASE_LIBS} ${LIBS})
+	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${LIBS})
 	
 	foreach(plugin ${dkdepend_list})
 		if(EXISTS "${DKPLUGINS}/${plugin}/CMakeLists.txt")
-			add_dependencies(${APP_NAME}_ios ${plugin})
+			add_dependencies(${APP_NAME} ${plugin})
 		endif()	
 	endforeach()
 	
