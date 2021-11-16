@@ -19,9 +19,6 @@ DKDEPEND(DK)
 DKDEPEND(DKDuktape)
 
 
-DKSET(QUEUE_BUILD ON)  ## Possibly for DKCefChild
-
-
 generateCmake(DKCef)
 DKASSETS(DKCef)
 

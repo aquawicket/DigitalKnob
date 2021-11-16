@@ -2,7 +2,7 @@
 
 DKDEPEND(DKCef)
 
-DKSET(QUEUE_BUILD ON)
+#DKSET(QUEUE_BUILD ON)
 DKEXECUTABLE(DKCefChild)
 
 
@@ -63,7 +63,7 @@ IF(WIN)
 	DKAPPEND_CMAKE("cmake_policy(SET CMP0054 NEW)\n")
 	DKAPPEND_CMAKE("include(${DKCMAKE}/FUNCTIONS.cmake)\n")
 	DKAPPEND_CMAKE("include(${DKCMAKE}/OPTIONS.cmake)\n")
-	DKAPPEND_CMAKE("project(${name})\n")
+	DKAPPEND_CMAKE("project(DKCefChild)\n")
 	DKAPPEND_CMAKE("include_directories(${CEF})\n")
 	DKAPPEND_CMAKE("include_directories(${DKPLUGINS})\n")
 	

@@ -114,11 +114,6 @@ foreach(plugin ${dkdepend_list})
 	####################### DKExecutables #######################
 	string(FIND "${DKCPPEXECS}" "${plugin}" index)
 	if(${index} GREATER -1)
-		DKENABLE(${plugin})
-		if(REBUILD OR REBUILDALL)
-			DKSET(QUEUE_BUILD ON)
-		endif()
-		
 		if(EXISTS "${plugin_path}/CMakeLists.txt")
 			if(LINUX OR RASPBERRY)
 				if(DEBUG)
