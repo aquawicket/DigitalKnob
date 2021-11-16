@@ -89,19 +89,20 @@ IOS_RELEASE_COMMAND(../../configure --disable-shared --enable-static)
 IOS_RELEASE_COMMAND(make)
 
 
+
 IOSSIM_DEBUG_PATH(${XZ}/${OS}/${DEBUG_DIR})
 IOSSIM_DEBUG_COMMAND(../../configure 
 	--disable-shared 
 	--enable-static
-	--target=x86_64-apple-ios
-	--host=x86_64-apple-ios)
+	--host=x86_64-apple-darwin
+	CFLAGS="-miphoneos-version-min=13.0")
 IOSSIM_DEBUG_COMMAND(make)
 IOSSIM_RELEASE_PATH(${XZ}/${OS}/${RELEASE_DIR})
 IOSSIM_RELEASE_COMMAND(../../configure 
 	--disable-shared `
 	--enable-static
-	--target=x86_64-apple-ios
-	--host=x86_64-apple-ios)
+	--host=xx86_64-apple-darwin
+	CFLAGS="-miphoneos-version-min=13.0")
 IOSSIM_RELEASE_COMMAND(make)
 
 
