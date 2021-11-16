@@ -183,7 +183,9 @@ function DKBuildConsole_SelectType() {
     console.log("**** SELECT BUILD TYPE ****")
     console.log("1. Debug")
     console.log("2. Release")
-    console.log("3. All")
+	if(CPP_DK_GetOS() !== "Linux" && CPP_DK_GetOS() !== "Raspberry"){
+		console.log("3. All")
+	}
 	//console.log("BCKSPC. Back")
     console.log("ESC. exit")
     console.log("\n")
