@@ -19,7 +19,7 @@
 	#endif
 #endif
 
-CefRefPtr<CefListValue> DKCefV8Handler::myRetval;
+CefRefPtr<CefListValue> DKCefChildV8Handler::myRetval;
 
 int main(int argc, char* argv[]){
 	printf("[DKCefChild] main()\n");
@@ -42,14 +42,14 @@ int main(int argc, char* argv[]){
 	CefMainArgs main_args(argc, argv);
 #endif
 
-	CefRefPtr<DKCefApp> app(new DKCefApp);
+	CefRefPtr<DKCefChildApp> app(new DKCefChildApp);
 	return CefExecuteProcess(main_args, app.get(), NULL);
 	//return CefExecuteProcess(main_args, app.get(), sandbox_info);
 }
 
-bool DKCefV8Handler::Execute(const CefString& name, CefRefPtr<CefV8Value> object, const CefV8ValueList& arguments, CefRefPtr<CefV8Value>& retval, CefString& exception){
+bool DKCefChildV8Handler::Execute(const CefString& name, CefRefPtr<CefV8Value> object, const CefV8ValueList& arguments, CefRefPtr<CefV8Value>& retval, CefString& exception){
 	std::string func = name;
-	std::string text = "DKCefV8Handler::Execute("+func+", object, arguments, retval, exception)\n";
+	std::string text = "DKCefChildV8Handler::Execute("+func+", object, arguments, retval, exception)\n";
 	printf(text.c_str());
 	CefRefPtr<CefProcessMessage> msg = CefProcessMessage::Create(func.c_str());
 	CefRefPtr<CefListValue> args = msg->GetArgumentList(); // Retrieve the argument list object.
@@ -119,8 +119,8 @@ bool DKCefV8Handler::Execute(const CefString& name, CefRefPtr<CefV8Value> object
 	return true;
 }
 
-void DKCefV8Handler::SetBrowser(CefRefPtr<CefBrowser> _browser){
-	std::string text = "DKCefV8Handler::SetBrowser()\n";
+void DKCefChildV8Handler::SetBrowser(CefRefPtr<CefBrowser> _browser){
+	std::string text = "DKCefChildV8Handler::SetBrowser()\n";
 	printf(text.c_str());
 	browser = _browser;
 }
@@ -128,12 +128,12 @@ void DKCefV8Handler::SetBrowser(CefRefPtr<CefBrowser> _browser){
 
 
 
-void DKCefApp::OnBeforeCommandLineProcessing(const CefString& process_type, CefRefPtr<CefCommandLine> command_line){
+void DKCefChildApp::OnBeforeCommandLineProcessing(const CefString& process_type, CefRefPtr<CefCommandLine> command_line){
 #ifndef DEBUG
 	CEF_REQUIRE_UI_THREAD();
 #endif
 #ifndef DKCefChild
-	printf("[DKCefChild] DKCefApp::OnBeforeCommandLineProcessing()\n");
+	printf("[DKCefChild] DKCefChildApp::OnBeforeCommandLineProcessing()\n");
 	if(same(DKV8::multi_process, "OFF"))
 		command_line->AppendSwitchWithValue("single-process", "1");
 	if(same(DKV8::enable_system_flash, "ON"))
@@ -168,10 +168,10 @@ void DKCefApp::OnBeforeCommandLineProcessing(const CefString& process_type, CefR
 	command_line->AppendSwitchWithValue("ppapi-flash-path", "/usr/lib/pepperflashplugin-nonfree/libpepflashplayer.so");
 #endif //LINUX
 #endif //!DKCefChild
-	cefV8Handler = new DKCefV8Handler();
+	cefV8Handler = new DKCefChildV8Handler();
 }
 
-void DKCefApp::OnBrowserCreated(CefRefPtr<CefBrowser> browser){
+void DKCefChildApp::OnBrowserCreated(CefRefPtr<CefBrowser> browser){
 #ifndef DEBUG
 	CEF_REQUIRE_UI_THREAD();
 #endif
@@ -182,21 +182,21 @@ void DKCefApp::OnBrowserCreated(CefRefPtr<CefBrowser> browser){
 	//browser->SendProcessMessage(PID_RENDERER, msg); //FIXME
 }
 
-void DKCefApp::OnContextInitialized(){
+void DKCefChildApp::OnContextInitialized(){
 #ifndef DEBUG
 	CEF_REQUIRE_UI_THREAD();
 #endif
-	printf("[DKCefChild] DKCefApp::OnContextInitialized()\n");
+	printf("[DKCefChild] DKCefChildApp::OnContextInitialized()\n");
 	//CefRefreshWebPlugins(); //FIXME
 }
 
-void DKCefApp::OnContextCreated(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefV8Context> context){
+void DKCefChildApp::OnContextCreated(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefV8Context> context){
 #ifndef DEBUG
 	CEF_REQUIRE_UI_THREAD();
 #endif
-	printf("[DKCefChild] DKCefApp::OnContextCreated()\n");
+	printf("[DKCefChild] DKCefChildApp::OnContextCreated()\n");
 	if(!cefV8Handler){
-		printf("DKCefApp::OnContextCreated(): v8handler cefV8Handler\n");
+		printf("DKCefChildApp::OnContextCreated(): v8handler cefV8Handler\n");
 		return;
 	}
 	//cefV8Handler->SetBrowser(browser);
@@ -209,27 +209,27 @@ void DKCefApp::OnContextCreated(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFram
 	std::string func = "TestFunction";
 	CefRefPtr<CefV8Value> value = CefV8Value::CreateFunction(func.c_str(), cefV8Handler);
 	if(!ctx->SetValue(func.c_str(), value, V8_PROPERTY_ATTRIBUTE_NONE))
-		printf("DKCefApp::OnContextCreated(): ctx->SetValue() failed\n");
+		printf("DKCefChildApp::OnContextCreated(): ctx->SetValue() failed\n");
 	/*
 	//Load all of the c++ functions into the V8 context.
 	for(unsigned int i=0; i<funcs.size(); i++){
 		CefRefPtr<CefV8Value> value = CefV8Value::CreateFunction(funcs[i].c_str(), cefV8Handler);
 		if(!ctx->SetValue(funcs[i].c_str(), value, V8_PROPERTY_ATTRIBUTE_NONE))
-			printf("DKCefApp::OnContextCreated(): ctx->SetValue() failed\n");
+			printf("DKCefChildApp::OnContextCreated(): ctx->SetValue() failed\n");
 	}
 	*/
 }
 
-bool DKCefApp::OnProcessMessageReceived(CefRefPtr<CefBrowser> browser, CefProcessId source_process, CefRefPtr<CefProcessMessage> message){
+bool DKCefChildApp::OnProcessMessageReceived(CefRefPtr<CefBrowser> browser, CefProcessId source_process, CefRefPtr<CefProcessMessage> message){
 #ifndef DEBUG
 	CEF_REQUIRE_UI_THREAD();
 #endif
 	std::string name = std::string(message->GetName());
-	printf("[DKCefChild] DKCefApp::OnProcessMessageReceived(");
+	printf("[DKCefChild] DKCefChildApp::OnProcessMessageReceived(");
 	printf(name.c_str());
 	printf(")\n");
 	if(!cefV8Handler){
-		printf("DKCefApp::OnProcessMessageReceived(): cefV8Handler invalid\n");
+		printf("DKCefChildApp::OnProcessMessageReceived(): cefV8Handler invalid\n");
 		return false;
 	}
 	if(message->GetName() == "GetFunctions"){
@@ -266,7 +266,7 @@ bool DKCefApp::OnProcessMessageReceived(CefRefPtr<CefBrowser> browser, CefProces
 	}
 	/*
 	if(message->GetName() == "AttachFunction"){
-	//printf("DKCefApp::OnProcessMessageReceived(AttachFunction)\n");
+	//printf("DKCefChildApp::OnProcessMessageReceived(AttachFunction)\n");
 	CefRefPtr<CefListValue> args = message->GetArgumentList();
 	CefString func = args->GetString(0);
 	DKV8::funcs.push_back(std::string(func));
@@ -275,7 +275,7 @@ bool DKCefApp::OnProcessMessageReceived(CefRefPtr<CefBrowser> browser, CefProces
 	//printf("registered: %s\n", func.c_str());
 	}
 	if(message->GetName() == "retval"){
-		//printf("DKCefApp::OnProcessMessageReceived(retval)\n");
+		//printf("DKCefChildApp::OnProcessMessageReceived(retval)\n");
 		CefRefPtr<CefListValue> retval = message->GetArgumentList();
 
 		if(retval->GetType(0) == VTYPE_STRING){
