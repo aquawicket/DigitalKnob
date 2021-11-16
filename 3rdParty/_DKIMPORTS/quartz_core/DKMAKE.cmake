@@ -1,4 +1,4 @@
-if(NOT MAC)
+if(NOT CMAKE_HOST_APPLE)
 	return()
 endif()
 
