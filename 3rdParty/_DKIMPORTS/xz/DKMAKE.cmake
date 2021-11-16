@@ -91,7 +91,7 @@ IOS_RELEASE_COMMAND(make)
 DKSET(IOSSIM_ARCH x86_64)
 DKSET(IOSSIM_HOST ${IOSSIM_ARCH}-apple-darwin)
 DKSET(IOSSIM_MIN_SDK_VERSION 13.0)
-#DKSET(IOSSIM_SYSROOT)
+DKSET(IOSSIM_SYSROOT /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator15.0.sdk)
 
 IOSSIM_DEBUG_PATH(${XZ}/${OS}/${DEBUG_DIR})
 IOSSIM_DEBUG_COMMAND(export DEVROOT="xcode-select --print-path" \
