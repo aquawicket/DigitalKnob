@@ -80,6 +80,7 @@ MAC_RELEASE_PATH(${XZ}/${OS}/${RELEASE_DIR})
 MAC_RELEASE_COMMAND(../../configure --disable-shared --enable-static)
 MAC_RELEASE_COMMAND(make)
 
+
 IOS_DEBUG_PATH(${XZ}/${OS}/${DEBUG_DIR})
 IOS_DEBUG_COMMAND(../../configure --disable-shared --enable-static)
 IOS_DEBUG_COMMAND(make)
@@ -87,45 +88,12 @@ IOS_RELEASE_PATH(${XZ}/${OS}/${RELEASE_DIR})
 IOS_RELEASE_COMMAND(../../configure --disable-shared --enable-static)
 IOS_RELEASE_COMMAND(make)
 
-# SDK: /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator15.0.sdk
-# C compiler: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang
-# CXX compiler: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++
-# libtool: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/libtool
-# install name tool: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/install_name_tool
-# Autoconf target triple: x86_64-apple-ios
-
-
-DKSET(IOSSIM_ARCH x86_64)
-DKSET(IOSSIM_DEVROOT /Applications/Xcode.app/Contents/Developer)
-DKSET(IOSSIM_C ${IOSSIM_DEVROOT}/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang)
-DKSET(IOSSIM_CXX ${IOSSIM_DEVROOT}/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++)
-DKSET(IOSSIM_LIBTOOL ${IOSSIM_DEVROOT}/Toolchains/XcodeDefault.xctoolchain/usr/bin/libtool)
-DKSET(IOSSIM_DARWIN darwin20.6.0)
-DKSET(IOSSIM_HOST ${IOSSIM_ARCH}-apple-${IOSSIM_DARWIN})
-DKSET(IOSSIM_MIN_SDK_VERSION 13.0)
-DKSET(IOSSIM_SYSROOT ${IOSSIM_DEVROOT}/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator15.0.sdk)
-DKSET(IOSSIM_CFLAGS "-arch ${IOSSIM_ARCH} -mios-simulator-version-min=${IOSSIM_MIN_SDK_VERSION} -isysroot ${IOSSIM_SYSROOT}")
-DKSET(IOSSIM_CXXFLAGS "-arch ${IOSSIM_ARCH} -mios-simulator-version-min=${IOSSIM_MIN_SDK_VERSION} -isysroot ${IOSSIM_SYSROOT}")
 
 IOSSIM_DEBUG_PATH(${XZ}/${OS}/${DEBUG_DIR})
-IOSSIM_DEBUG_COMMAND(../../configure
-	--disable-shared
-	--enable-static
-	--host ${IOSSIM_HOST}
-	CC=${IOSSIM_C}
-	CXX=${IOSSIM_CXX}
-	CFLAGS=${IOSSIM_CFLAGS}
-	CXXFLAGS=${IOSSIM_CXXFLAGS})
+IOSSIM_DEBUG_COMMAND(DKCONFIGURE_IOSSIM64)
 IOSSIM_DEBUG_COMMAND(make)
 IOSSIM_RELEASE_PATH(${XZ}/${OS}/${RELEASE_DIR})
-IOSSIM_RELEASE_COMMAND(../../configure
-	--disable-shared
-	--enable-static
-	--host ${IOSSIM_HOST}
-	CC=${IOSSIM_C}
-	CXX=${IOSSIM_CXX}
-	CFLAGS=${IOSSIM_CFLAGS}
-	CXXFLAGS=${IOSSIM_CXXFLAGS})
+IOSSIM_RELEASE_COMMAND(DKCONFIGURE_IOSSIM64)
 IOSSIM_RELEASE_COMMAND(make)
 
 

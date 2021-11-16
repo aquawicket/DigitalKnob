@@ -52,6 +52,13 @@ if(CMAKE_HOST_APPLE)
 	-DCMAKE_OSX_ARCHITECTURES=x86_64 
 	-DBUILD_SHARED_LIBS=OFF) 
 
+# SDK: /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator15.0.sdk
+# C compiler: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang
+# CXX compiler: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++
+# libtool: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/libtool
+# install name tool: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/install_name_tool
+# Autoconf target triple: x86_64-apple-ios
+
 	# iOS 32
 	DKSET(DKCMAKE_IOS32 ${CMAKE_EXE} -G "Xcode" 
 	-DCMAKE_TOOLCHAIN_FILE=${DKCMAKE}/ios.toolchain.cmake 
@@ -79,6 +86,41 @@ if(CMAKE_HOST_APPLE)
 	-DPLATFORM=SIMULATOR64
 	-DSDK_VERSION=15.0 
 	-DDEPLOYMENT_TARGET=13.0)
+	
+	
+#AUTOTOOLS ../../configure for iOS
+DKSET(IOS_ARCH x86_64)
+DKSET(IOS_DARWIN darwin20.6.0)
+DKSET(IOS_MIN_SDK_VERSION 13.0)
+DKSET(XCODE_DEVROOT /Applications/Xcode.app/Contents/Developer)
+DKSET(CLANG ${XCODE_DEVROOT}/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang)
+DKSET(CLANGXX ${XCODE_DEVROOT}/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++)
+DKSET(IOS_LIBTOOL ${XCODE_DEVROOT}/Toolchains/XcodeDefault.xctoolchain/usr/bin/libtool)
+DKSET(IOS_HOST ${IOS_ARCH}-apple-${IOS_DARWIN})
+DKSET(IOS_SYSROOT ${XCODE_DEVROOT}/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhone15.0.sdk)
+DKSET(IOS_CFLAGS "-arch ${IOS_ARCH} -mios-simulator-version-min=${IOS_MIN_SDK_VERSION} -isysroot ${IOS_SYSROOT}")
+DKSET(IOS_CXXFLAGS "-arch ${IOS_ARCH} -mios-simulator-version-min=${IOS_MIN_SDK_VERSION} -isysroot ${IOS_SYSROOT}")
+DKSET(IOSSIM_SYSROOT ${XCODE_DEVROOT}/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator15.0.sdk)
+DKSET(IOSSIM_CFLAGS "-arch ${IOS_ARCH} -mios-simulator-version-min=${IOS_MIN_SDK_VERSION} -isysroot ${IOSSIM_SYSROOT}")
+DKSET(IOSSIM_CXXFLAGS "-arch ${IOS_ARCH} -mios-simulator-version-min=${IOS_MIN_SDK_VERSION} -isysroot ${IOSSIM_SYSROOT}")
+
+	DKSET(DKCONFIGURE_IOS64 ../../configure
+	--disable-shared
+	--enable-static
+	--host ${IOS_HOST}
+	CC=${CLANG}
+	CXX=${CLANGXX}
+	CFLAGS=${IOS_CFLAGS}
+	CXXFLAGS=${IOS_CXXFLAGS})
+	
+	DKSET(DKCONFIGURE_IOSSIM64 ../../configure
+	--disable-shared
+	--enable-static
+	--host ${IOS_HOST}
+	CC=${CLANG}
+	CXX=${CLANGXX}
+	CFLAGS=${IOS_CFLAGS}
+	CXXFLAGS=${IOS_CXXFLAGS})
 endif()
 
 
