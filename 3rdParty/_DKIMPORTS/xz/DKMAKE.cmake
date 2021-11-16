@@ -45,39 +45,35 @@ ANDROID_RELEASE_LIB(${XZ}/${OS}/obj/local/armeabi-v7a/liblzma.a)
 
 ### 3RDPARTY LINK ###
 DKSET(XZ_WIN -DCMAKE_C_FLAGS=/DLZMA_API_STATIC -DCMAKE_CXX_FLAGS=/DLZMA_API_STATIC -DLIBLZMA_INCLUDE_DIR=${XZ}/src/liblzma/api -DLIBLZMA_LIBRARY_DEBUG=${XZ}/${OS}/${DEBUG_DIR}/src/liblzma/.libs/liblzma.a -DLIBLZMA_LIBRARY_RELEASE=${XZ}/${OS}/${RELEASE_DIR}/src/liblzma/.libs/liblzma.a)
-
 DKSET(XZ_APPLE -DCMAKE_C_FLAGS=-DLZMA_API_STATIC -DCMAKE_CXX_FLAGS=-DLZMA_API_STATIC -DLIBLZMA_INCLUDE_DIR=${XZ}/src/liblzma/api -DLIBLZMA_LIBRARY_DEBUG=${XZ}/${OS}/${DEBUG_DIR}/src/liblzma/.libs/liblzma.a -DLIBLZMA_LIBRARY_RELEASE=${XZ}/${OS}/${RELEASE_DIR}/src/liblzma/.libs/liblzma.a)
-
 DKSET(XZ_LINUX -DCMAKE_C_FLAGS=-DLZMA_API_STATIC -DCMAKE_CXX_FLAGS=-DLZMA_API_STATIC -DLIBLZMA_INCLUDE_DIR=${XZ}/src/liblzma/api -DLIBLZMA_LIBRARY_DEBUG=${XZ}/${OS}/${DEBUG_DIR}/src/liblzma/.libs/liblzma.a -DLIBLZMA_LIBRARY_RELEASE=${XZ}/${OS}/${RELEASE_DIR}/src/liblzma/.libs/liblzma.a)
-
 DKSET(XZ_RASPBERRY -DCMAKE_C_FLAGS=-DLZMA_API_STATIC -DCMAKE_CXX_FLAGS=-DLZMA_API_STATIC -DLIBLZMA_INCLUDE_DIR=${XZ}/src/liblzma/api -DLIBLZMA_LIBRARY_DEBUG=${XZ}/${OS}/${DEBUG_DIR}/src/liblzma/.libs/liblzma.a -DLIBLZMA_LIBRARY_RELEASE=${XZ}/${OS}/${RELEASE_DIR}/src/liblzma/.libs/liblzma.a)
-
 DKSET(XZ_ANDROID -DCMAKE_C_FLAGS=-DLZMA_API_STATIC -DCMAKE_CXX_FLAGS=-DLZMA_API_STATIC -DLIBLZMA_INCLUDE_DIR=${XZ}/src/liblzma/api -DLIBLZMA_LIBRARY_DEBUG=${XZ}/${OS}/obj/local/armeabi-v7a/liblzma.a -DLIBLZMA_LIBRARY_RELEASE=${XZ}/${OS}/obj/local/armeabi-v7a/liblzma.a)
 
 
 ### COMPILE ###
 WIN32_DEBUG_PATH(${XZ}/${OS}/${DEBUG_DIR})
-WIN32_DEBUG_MSYS(../../configure --disable-shared --enable-static --build=i686-w64-mingw32 CFLAGS=-march=i686)
+WIN32_DEBUG_MSYS(${DKCONFIGURE_WIN32})
 WIN32_DEBUG_MSYS(make)
 WIN32_RELEASE_PATH(${XZ}/${OS}/${RELEASE_DIR})
-WIN32_RELEASE_MSYS(../../configure --disable-shared --enable-static --build=i686-w64-mingw32 CFLAGS=-march=i686)
+WIN32_RELEASE_MSYS(${DKCONFIGURE_WIN32})
 WIN32_RELEASE_MSYS(make)
 
 
 # look at xz/windows/build.bash for details
 WIN64_DEBUG_PATH(${XZ}/${OS}/${DEBUG_DIR})
-WIN64_DEBUG_MSYS(../../configure --disable-shared --enable-static --build=x86_64-w64-mingw32 CFLAGS=-march=x86-64 --prefix= --enable-silent-rules --disable-dependency-tracking --disable-nls --disable-scripts)
+WIN64_DEBUG_MSYS(${DKCONFIGURE_WIN64} --prefix= --enable-silent-rules --disable-dependency-tracking --disable-nls --disable-scripts)
 WIN64_DEBUG_MSYS(make)
 WIN64_RELEASE_PATH(${XZ}/${OS}/${RELEASE_DIR})
-WIN64_RELEASE_MSYS(../../configure --disable-shared --enable-static --build=x86_64-w64-mingw32 CFLAGS=-march=x86-64 --prefix= --enable-silent-rules --disable-dependency-tracking --disable-nls --disable-scripts)
+WIN64_DEBUG_MSYS(${DKCONFIGURE_WIN64}  --prefix= --enable-silent-rules --disable-dependency-tracking --disable-nls --disable-scripts)
 WIN64_RELEASE_MSYS(make)
 
 
 MAC_DEBUG_PATH(${XZ}/${OS}/${DEBUG_DIR})
-MAC_DEBUG_COMMAND(../../configure --disable-shared --enable-static)
+MAC_DEBUG_COMMAND(${DKCONFIGURE_MAC64})
 MAC_DEBUG_COMMAND(make)
 MAC_RELEASE_PATH(${XZ}/${OS}/${RELEASE_DIR})
-MAC_RELEASE_COMMAND(../../configure --disable-shared --enable-static)
+MAC_RELEASE_COMMAND(${DKCONFIGURE_MAC64})
 MAC_RELEASE_COMMAND(make)
 
 
@@ -85,7 +81,7 @@ IOS_DEBUG_PATH(${XZ}/${OS}/${DEBUG_DIR})
 IOS_DEBUG_COMMAND(${DKCONFIGURE_IOS64})
 IOS_DEBUG_COMMAND(make)
 IOS_RELEASE_PATH(${XZ}/${OS}/${RELEASE_DIR})
-IOS_DEBUG_COMMAND(${DKCONFIGURE_IOS64})
+IOS_RELEASE_COMMAND(${DKCONFIGURE_IOS64})
 IOS_RELEASE_COMMAND(make)
 
 
@@ -98,25 +94,25 @@ IOSSIM_RELEASE_COMMAND(make)
 
 
 LINUX_DEBUG_PATH(${XZ}/${OS}/${DEBUG_DIR})
-LINUX_DEBUG_COMMAND(../../configure --disable-shared --enable-static)
+LINUX_DEBUG_COMMAND(${DKCONFIGURE_LINUX})
 LINUX_DEBUG_COMMAND(make)
 LINUX_RELEASE_PATH(${XZ}/${OS}/${RELEASE_DIR})
-LINUX_RELEASE_COMMAND(../../configure --disable-shared --enable-static)
+LINUX_RELEASE_COMMAND(${DKCONFIGURE_LINUX})
 LINUX_RELEASE_COMMAND(make)
 
 
 RASPBERRY_DEBUG_PATH(${XZ}/${OS}/${DEBUG_DIR})
-RASPBERRY_DEBUG_COMMAND(../../configure --disable-shared --enable-static)
+RASPBERRY_DEBUG_COMMAND(${DKCONFIGURE_RASPBERRY})
 RASPBERRY_DEBUG_COMMAND(make)
 RASPBERRY_RELEASE_PATH(${XZ}/${OS}/${RELEASE_DIR})
-RASPBERRY_RELEASE_COMMAND(../../configure --disable-shared --enable-static)
+RASPBERRY_RELEASE_COMMAND(${DKCONFIGURE_RASPBERRY})
 RASPBERRY_RELEASE_COMMAND(make)
 
 
 ANDROID_NDK(${XZ_NAME})
-#ANDROID_DEBUG_MSYS(../../configure --disable-shared --enable-static)
+#ANDROID_DEBUG_MSYS(${DKCONFIGURE_ANDROID})
 #ANDROID_DEBUG_MSYS(make)
-#ANDROID_RELEASE_MSYS(../../configure --disable-shared --enable-static)
+#ANDROID_RELEASE_MSYS(${DKCONFIGURE_ANDROID})
 #ANDROID_RELEASE_MSYS(make)
 #ANDROID_PATH(${XZ}/${OS})
 #ANDROID32_COMMAND(${DKCMAKE_ANDROID32} ${XZ})

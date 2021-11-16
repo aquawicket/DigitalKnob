@@ -102,7 +102,23 @@ DKSET(IOS_CXXFLAGS "-arch ${IOS_ARCH} -mios-simulator-version-min=${IOS_MIN_SDK_
 DKSET(IOSSIM_SYSROOT ${XCODE_DEVROOT}/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator15.0.sdk)
 DKSET(IOSSIM_CFLAGS "-arch ${IOS_ARCH} -mios-simulator-version-min=${IOS_MIN_SDK_VERSION} -isysroot ${IOSSIM_SYSROOT}")
 DKSET(IOSSIM_CXXFLAGS "-arch ${IOS_ARCH} -mios-simulator-version-min=${IOS_MIN_SDK_VERSION} -isysroot ${IOSSIM_SYSROOT}")
-
+	
+	DKSET(DKCONFIGURE_WIN32 ../../configure 
+	--disable-shared 
+	--enable-static 
+	--build=i686-w64-mingw32 
+	CFLAGS=-march=i686)
+	
+	DKSET(DKCONFIGURE_WIN64 ../../configure 
+	--disable-shared 
+	--enable-static 
+	--build=x86_64-w64-mingw32 
+	CFLAGS=-march=x86-64)
+	
+	DKSET(DKCONFIGURE_MAC64 ../../configure
+	--disable-shared
+	--enable-static)
+	
 	DKSET(DKCONFIGURE_IOS64 ../../configure
 	--disable-shared
 	--enable-static
@@ -120,6 +136,18 @@ DKSET(IOSSIM_CXXFLAGS "-arch ${IOS_ARCH} -mios-simulator-version-min=${IOS_MIN_S
 	CXX=${CLANGXX}
 	CFLAGS=${IOSSIM_CFLAGS}
 	CXXFLAGS=${IOSSIM_CXXFLAGS})
+	
+	DKSET(DKCONFIGURE_LINUX ../../configure 
+	--disable-shared 
+	--enable-static)
+	
+	DKSET(DKCONFIGURE_RASPBERRY ../../configure 
+	--disable-shared 
+	--enable-static)
+	
+	DKSET(DKCONFIGURE_ANDROID ../../configure 
+	--disable-shared 
+	--enable-static)
 endif()
 
 
