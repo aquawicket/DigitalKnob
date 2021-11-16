@@ -104,19 +104,19 @@ MAC_RELEASE_COMMAND(make) #"CXXFLAGS=-arch x86_64" "CFLAGS=-arch x86_64" "LDFLAG
 
 
 IOS_DEBUG_PATH(${VORBIS}/${OS}/${DEBUG_DIR})
-IOS_DEBUG_COMMAND(../../configure --disable-shared --enable-static --with-ogg-includes=${OGG}/include ${OGG_APPLE_DEBUG}) #"--build=armv7 arm64"
-IOS_DEBUG_COMMAND(make) #"CXXFLAGS=-arch armv7 arm64" 
+IOS_DEBUG_COMMAND(${DKCONFIGURE_IOS64} --with-ogg-includes=${OGG}/include ${OGG_APPLE_DEBUG})
+IOS_DEBUG_COMMAND(make)
 IOS_RELEASE_PATH(${VORBIS}/${OS}/${RELEASE_DIR})
-IOS_RELEASE_COMMAND(../../configure --disable-shared --enable-static --with-ogg-includes=${OGG}/include ${OGG_APPLE_RELEASE})
+IOS_DEBUG_COMMAND(${DKCONFIGURE_IOS64} --with-ogg-includes=${OGG}/include ${OGG_APPLE_RELEASE})
 IOS_RELEASE_COMMAND(make)
 
 
 IOSSIM_DEBUG_PATH(${VORBIS}/${OS}/${DEBUG_DIR})
-IOSSIM_DEBUG_COMMAND(../../configure --disable-shared --enable-static ${OGG_APPLE_DEBUG}) #--build=x86_64
-IOSSIM_DEBUG_COMMAND(make) #"CXXFLAGS=-arch x86_64" "CFLAGS=-arch x86_64" "LDFLAGS=-arch x86_64")
+IOSSIM_DEBUG_COMMAND(${DKCONFIGURE_IOS64} ${OGG_APPLE_DEBUG})
+IOSSIM_DEBUG_COMMAND(make)
 IOSSIM_RELEASE_PATH(${VORBIS}/${OS}/${RELEASE_DIR})
-IOSSIM_RELEASE_COMMAND(../../configure --disable-shared --enable-static ${OGG_APPLE_RELEASE}) #--build=x86_64
-IOSSIM_RELEASE_COMMAND(make) #"CXXFLAGS=-arch x86_64" "CFLAGS=-arch x86_64" "LDFLAGS=-arch x86_64")
+IOSSIM_DEBUG_COMMAND(${DKCONFIGURE_IOS64} ${OGG_APPLE_RELEASE})
+IOSSIM_RELEASE_COMMAND(make)
 
 
 if(LINUX)
