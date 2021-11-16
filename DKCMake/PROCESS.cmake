@@ -109,9 +109,7 @@ foreach(plugin ${dkdepend_list})
 				add_subdirectory(${plugin_path} ${plugin_path}/${OS})
 			endif()
 		endif()
-	endif()
-	
-	if(FALSE) #${index} GREATER -1 AND QUEUE_BUILD)
+
 		#if(NOT EXISTS "${plugin_path}/CMakeLists.txt")
 		#	continue()
 		#endif()
@@ -143,7 +141,7 @@ foreach(plugin ${dkdepend_list})
 		
 		
 		## Prebuild Plugins switch
-		if(FALSE)
+		if(TRUE)
 			DKSET(CURRENT_DIR ${plugin_path}/${OS})
 			dk_makeDirectory(${CURRENT_DIR})
 			if(WIN_32)
