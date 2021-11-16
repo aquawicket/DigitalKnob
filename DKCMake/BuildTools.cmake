@@ -52,13 +52,6 @@ if(CMAKE_HOST_APPLE)
 	-DCMAKE_OSX_ARCHITECTURES=x86_64 
 	-DBUILD_SHARED_LIBS=OFF) 
 
-# SDK: /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator15.0.sdk
-# C compiler: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang
-# CXX compiler: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++
-# libtool: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/libtool
-# install name tool: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/install_name_tool
-# Autoconf target triple: x86_64-apple-ios
-
 	# iOS 32
 	DKSET(DKCMAKE_IOS32 ${CMAKE_EXE} -G "Xcode" 
 	-DCMAKE_TOOLCHAIN_FILE=${DKCMAKE}/ios.toolchain.cmake 
@@ -86,7 +79,13 @@ if(CMAKE_HOST_APPLE)
 	-DPLATFORM=SIMULATOR64
 	-DSDK_VERSION=15.0 
 	-DDEPLOYMENT_TARGET=13.0)
-	
+
+# SDK: /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator15.0.sdk
+# C compiler: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang
+# CXX compiler: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++
+# libtool: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/libtool
+# install name tool: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/install_name_tool
+# Autoconf target triple: x86_64-apple-ios	
 	
 #AUTOTOOLS ../../configure for iOS
 DKSET(IOS_ARCH x86_64)
@@ -119,8 +118,8 @@ DKSET(IOSSIM_CXXFLAGS "-arch ${IOS_ARCH} -mios-simulator-version-min=${IOS_MIN_S
 	--host ${IOS_HOST}
 	CC=${CLANG}
 	CXX=${CLANGXX}
-	CFLAGS=${IOS_CFLAGS}
-	CXXFLAGS=${IOS_CXXFLAGS})
+	CFLAGS=${IOSSIM_CFLAGS}
+	CXXFLAGS=${IOSSIM_CXXFLAGS})
 endif()
 
 
