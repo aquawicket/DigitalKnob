@@ -199,6 +199,6 @@ goto end
 :error
 echo Failed with error code: %ERRORLEVEL%
 
+:end
 ECHO Done
 pause
-:end
