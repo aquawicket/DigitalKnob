@@ -40,7 +40,7 @@
     
     DKApp dkapp(0,0);//argc, argv);
     DKApp::Init();
-    DKApp::Loop();
+    //DKApp::Loop();
 		
     [NSTimer scheduledTimerWithTimeInterval:1.0/30.0 target:self selector:@selector(updateScene) userInfo:nil repeats:YES];
 }
@@ -48,7 +48,8 @@
 ///////////////////
 - (void)updateScene
 {
-    DKApp::DoFrame();
+    while(DKApp::active)
+        DKApp::DoFrame();
 }
 
 /////////////////////////////////////////////////////////////////

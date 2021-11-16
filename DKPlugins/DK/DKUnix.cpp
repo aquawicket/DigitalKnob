@@ -36,6 +36,9 @@ bool DKUnix::GetUsername(DKString& username){
 		return true;
 	}
 #endif
+#ifdef IOS
+//TODO If we are on ios-simulator, We can get the username from the exepath on IOS
+#endif
 #ifdef LINUX
 	if (const char* usr_a = std::getenv("USER")){ //'USERNAME' on Windows
 		username = usr_a;

@@ -140,10 +140,11 @@ bool DKAssets::GetAssetsPath(DKString& path){
 	return false;
 #endif
 #ifdef IOS
-	// /Users/aquawicket/Library/Application Support/iPhone Simulator/6.1/Applications/D4BEB636-716E-445D-8CD9-8722785D7EB7/Appname.app/Appname
-	// /Users/aquawicket/Desktop/digitalknob/USER/DKApps/GuiTest/iossim32/Release-iphonesimulator/Appname.app/Appname
-	std::size_t pos = DKFile::app_path.find("/Library");
-	DKString userpath = DKFile::app_path.substr(0, pos);
+    std::size_t pos = DKFile::app_path.find("/Library");
+    DKString userpath = DKFile::app_path.substr(0, pos);
+    DKINFO("DKFile::app+_path = "+DKFile::app_path+"\n");
+    DKINFO("userpath = "+userpath+"\n");
+    
 	if(DKFile::PathExists(userpath + "/Desktop/digitalknob/DKApps/" + DKFile::app_name + "/assets/") && 
 	   DKFile::PathExists(userpath + "/Desktop/digitalknob/DKApps/" + DKFile::app_name + "/DKMAKE.cmake")){
 		path = userpath + "/Desktop/digitalknob/DKApps/" + DKFile::app_name + "/assets/";
