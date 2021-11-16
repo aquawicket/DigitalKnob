@@ -95,14 +95,14 @@ IOSSIM_DEBUG_PATH(${XZ}/${OS}/${DEBUG_DIR})
 IOSSIM_DEBUG_COMMAND(../../configure 
 	--disable-shared 
 	--enable-static
-	--host="${IOSSIM_HOST}")
+	--host=${IOSSIM_HOST})
 	#CFLAGS="-miphoneos-version-min=13.0")
 IOSSIM_DEBUG_COMMAND(make)
 IOSSIM_RELEASE_PATH(${XZ}/${OS}/${RELEASE_DIR})
 IOSSIM_RELEASE_COMMAND(../../configure 
 	--disable-shared `
 	--enable-static
-	--host="${IOSSIM_HOST}")
+	--host=${IOSSIM_HOST})
 	#CFLAGS="-miphoneos-version-min=13.0")
 IOSSIM_RELEASE_COMMAND(make)
 
