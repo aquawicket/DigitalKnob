@@ -34,7 +34,19 @@ if(CMAKE_HOST_WIN32 AND WIN)
 	"-DCMAKE_C_FLAGS_RELEASE=/MT /O2 /Ob2 /DNDEBUG" 
 	"-DCMAKE_CXX_FLAGS=/DWIN64 /D_WINDOWS /W3 /nologo" #/GR /EHsc /Zm500 /D_WIN32_WINNT=0x0600 /MACHINE:X64
 	"-DCMAKE_CXX_FLAGS_DEBUG=/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG"
-	"-DCMAKE_CXX_FLAGS_RELEASE=/MT /O2 /Ob2 /DNDEBUG")	
+	"-DCMAKE_CXX_FLAGS_RELEASE=/MT /O2 /Ob2 /DNDEBUG")
+	
+	DKSET(DKCONFIGURE_WIN32 ../../configure 
+	--disable-shared 
+	--enable-static 
+	--build=i686-w64-mingw32 
+	CFLAGS=-march=i686)
+	
+	DKSET(DKCONFIGURE_WIN64 ../../configure 
+	--disable-shared 
+	--enable-static 
+	--build=x86_64-w64-mingw32 
+	CFLAGS=-march=x86-64)
 endif()
 
 
@@ -103,18 +115,6 @@ DKSET(IOSSIM_SYSROOT ${XCODE_DEVROOT}/Platforms/iPhoneSimulator.platform/Develop
 DKSET(IOSSIM_CFLAGS "-arch ${IOS_ARCH} -mios-simulator-version-min=${IOS_MIN_SDK_VERSION} -isysroot ${IOSSIM_SYSROOT}")
 DKSET(IOSSIM_CXXFLAGS "-arch ${IOS_ARCH} -mios-simulator-version-min=${IOS_MIN_SDK_VERSION} -isysroot ${IOSSIM_SYSROOT}")
 	
-	DKSET(DKCONFIGURE_WIN32 ../../configure 
-	--disable-shared 
-	--enable-static 
-	--build=i686-w64-mingw32 
-	CFLAGS=-march=i686)
-	
-	DKSET(DKCONFIGURE_WIN64 ../../configure 
-	--disable-shared 
-	--enable-static 
-	--build=x86_64-w64-mingw32 
-	CFLAGS=-march=x86-64)
-	
 	DKSET(DKCONFIGURE_MAC64 ../../configure
 	--disable-shared
 	--enable-static)
@@ -136,18 +136,6 @@ DKSET(IOSSIM_CXXFLAGS "-arch ${IOS_ARCH} -mios-simulator-version-min=${IOS_MIN_S
 	CXX=${CLANGXX}
 	CFLAGS=${IOSSIM_CFLAGS}
 	CXXFLAGS=${IOSSIM_CXXFLAGS})
-	
-	DKSET(DKCONFIGURE_LINUX ../../configure 
-	--disable-shared 
-	--enable-static)
-	
-	DKSET(DKCONFIGURE_RASPBERRY ../../configure 
-	--disable-shared 
-	--enable-static)
-	
-	DKSET(DKCONFIGURE_ANDROID ../../configure 
-	--disable-shared 
-	--enable-static)
 endif()
 
 
@@ -194,6 +182,10 @@ if(LINUX)
 	-DCMAKE_BUILD_TYPE=Release
 	-DBUILD_SHARED_LIBS=OFF
 	-DCMAKE_C_FLAGS=-fPIC)
+	
+	DKSET(DKCONFIGURE_LINUX ../../configure 
+	--disable-shared 
+	--enable-static)
 endif()
 
 
@@ -241,6 +233,10 @@ if(CMAKE_HOST_LINUX AND RASPBERRY)
 	-DCMAKE_BUILD_TYPE=Release 
 	-DBUILD_SHARED_LIBS=OFF 
 	-DCMAKE_C_FLAGS=-fPIC)
+	
+	DKSET(DKCONFIGURE_RASPBERRY ../../configure 
+	--disable-shared 
+	--enable-static)
 endif()
 
 
@@ -281,7 +277,11 @@ if(CMAKE_HOST_WIN32 AND ANDROID)
 	-DANDROID_STL_FORCE_FEATURES=TRUE
 	-DANDROID_NO_UNDEFINED=TRUE
 	-DANDROID_STL=c++_static)
-		
+	
+	DKSET(DKCONFIGURE_ANDROID ../../configure 
+	--disable-shared 
+	--enable-static)
+	
 	# https://developer.android.com/ndk/guides/cmake
 	# https://cmake.org/cmake/help/latest/manual/cmake-toolchains.7.html#cross-compiling-for-android
 	#DKSET(DKCMAKE_ANDROID32_CPUFEATURES ${CMAKE_EXE} -G ${VISUALSTUDIO_NAME} -A ARM 
