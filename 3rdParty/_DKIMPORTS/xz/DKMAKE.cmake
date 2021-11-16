@@ -90,21 +90,24 @@ IOS_RELEASE_COMMAND(make)
 
 DKSET(IOSSIM_ARCH x86_64)
 DKSET(IOSSIM_HOST ${IOSSIM_ARCH}-apple-darwin)
+DKSET(IOSSIM_MIN_SDK_VERSION 13.0)
+#DKSET(IOSSIM_SYSROOT)
 
 IOSSIM_DEBUG_PATH(${XZ}/${OS}/${DEBUG_DIR})
-IOSSIM_DEBUG_COMMAND(../../configure 
+IOSSIM_DEBUG_COMMAND(export DEVROOT="xcode-select --print-path" \
+	../../configure 
 	--disable-shared 
 	--enable-static
 	--host=${IOSSIM_HOST}
-	CFLAGS="-arch ${IOSSIM_ARCH}")
-	#CFLAGS="-miphoneos-version-min=13.0")
+	CFLAGS="-arch ${IOSSIM_ARCH} -mios-simulator-version-min=${IOSSIM_MIN_SDK_VERSION}") # -isysroot ${IOSSIM_SYSROOT}")
 IOSSIM_DEBUG_COMMAND(make)
 IOSSIM_RELEASE_PATH(${XZ}/${OS}/${RELEASE_DIR})
-IOSSIM_RELEASE_COMMAND(../../configure 
+IOSSIM_RELEASE_COMMAND(export DEVROOT="xcode-select --print-path" \
+	../../configure 
 	--disable-shared `
 	--enable-static
-	--host=${IOSSIM_HOST})
-	CFLAGS="-arch ${IOSSIM_ARCH}")
+	--host=${IOSSIM_HOST}
+	CFLAGS="-arch ${IOSSIM_ARCH} -mios-simulator-version-min=${IOSSIM_MIN_SDK_VERSION}") # -isysroot ${IOSSIM_SYSROOT}")
 IOSSIM_RELEASE_COMMAND(make)
 
 
