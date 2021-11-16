@@ -108,22 +108,22 @@ DKSET(IOSSIM_CFLAGS "-arch ${IOSSIM_ARCH} -mios-simulator-version-min=${IOSSIM_M
 DKSET(IOSSIM_CXXFLAGS "-arch ${IOSSIM_ARCH} -mios-simulator-version-min=${IOSSIM_MIN_SDK_VERSION} -isysroot ${IOSSIM_SYSROOT}")
 
 IOSSIM_DEBUG_PATH(${XZ}/${OS}/${DEBUG_DIR})
-IOSSIM_DEBUG_COMMAND(../../configure 
-	--disable-shared 
+IOSSIM_DEBUG_COMMAND(../../configure
+	--disable-shared
 	--enable-static
 	--host ${IOSSIM_HOST}
-	CC=${IOSSIM_C} 
-	CXX=${IOSSIM_CXX} 
+	CC=${IOSSIM_C}
+	CXX=${IOSSIM_CXX}
 	CFLAGS=${IOSSIM_CFLAGS}
 	CXXFLAGS=${IOSSIM_CXXFLAGS})
 IOSSIM_DEBUG_COMMAND(make)
 IOSSIM_RELEASE_PATH(${XZ}/${OS}/${RELEASE_DIR})
-IOSSIM_RELEASE_COMMAND(../../configure 
-	--disable-shared `
+IOSSIM_RELEASE_COMMAND(../../configure
+	--disable-shared
 	--enable-static
 	--host ${IOSSIM_HOST}
-	CC=${IOSSIM_C} 
-	CXX=${IOSSIM_CXX} 
+	CC=${IOSSIM_C}
+	CXX=${IOSSIM_CXX}
 	CFLAGS=${IOSSIM_CFLAGS}
 	CXXFLAGS=${IOSSIM_CXXFLAGS})
 IOSSIM_RELEASE_COMMAND(make)
