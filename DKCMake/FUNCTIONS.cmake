@@ -2846,6 +2846,21 @@ function(generateCmake name)
 			endif()
 		endforeach()
 	endif()
+	
+	DKENABLE(${plugin})
+	WIN_DEBUG_LIB(${plugin_path}/${OS}/${DEBUG_DIR}/${plugin}.lib)
+	WIN_RELEASE_LIB(${plugin_path}/${OS}/${RELEASE_DIR}/${plugin}.lib)
+	APPLE_DEBUG_LIB(${plugin_path}/${OS}/${DEBUG_DIR}/lib${plugin}.a)
+	APPLE_RELEASE_LIB(${plugin_path}/${OS}/${RELEASE_DIR}/lib${plugin}.a)
+	LINUX_DEBUG_LIB(${plugin_path}/${OS}/${DEBUG_DIR}/lib${plugin}.a)
+	LINUX_RELEASE_LIB(${plugin_path}/${OS}/${RELEASE_DIR}/lib${plugin}.a)
+	RASPBERRY_DEBUG_LIB(${plugin_path}/${OS}/${DEBUG_DIR}/lib${plugin}.a)
+	RASPBERRY_RELEASE_LIB(${plugin_path}/${OS}/${RELEASE_DIR}/lib${plugin}.a)
+	ANDROID_DEBUG_LIB(${plugin_path}/${OS}/${DEBUG_DIR}/lib${plugin}.a)
+	ANDROID_RELEASE_LIB(${plugin_path}/${OS}/${RELEASE_DIR}/lib${plugin}.a)
+	if(REBUILD OR REBUILDALL)
+		DKSET(QUEUE_BUILD ON)
+	endif()
 endfunction()
 
 
@@ -2940,7 +2955,7 @@ function(DKEXECUTABLE name)
 	#file(APPEND ${plugin_path}/CMakeLists.txt "include(${DKCMAKE}/OPTIONS.cmake)\n")
 	#file(APPEND ${plugin_path}/CMakeLists.txt "project(${name})\n")
 	endif()
-	DKSET(DKCPPEXECS ${DKCPPEXECS} ${name})  #Add to list
+	DKSET(DKCPPPLUGS ${DKCPPPLUGS} ${name})  #Add to list	
 endfunction()
 
 function(DKAPPEND_CMAKE str)
