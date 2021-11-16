@@ -80,6 +80,12 @@ MAC_RELEASE_PATH(${XZ}/${OS}/${RELEASE_DIR})
 MAC_RELEASE_COMMAND(../../configure --disable-shared --enable-static)
 MAC_RELEASE_COMMAND(make)
 
+Using SDK: /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator15.0.sdk
+-- Using C compiler: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang
+-- Using CXX compiler: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++
+-- Using libtool: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/libtool
+-- Using install name tool: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/install_name_tool
+-- Autoconf target triple: x86_64-apple-ios
 
 IOS_DEBUG_PATH(${XZ}/${OS}/${DEBUG_DIR})
 IOS_DEBUG_COMMAND(../../configure --disable-shared --enable-static)
