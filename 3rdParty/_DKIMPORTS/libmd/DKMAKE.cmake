@@ -67,21 +67,18 @@ MAC_RELEASE_COMMAND(make)# "CXXFLAGS=-arch x86_64" "CFLAGS=-arch x86_64" "LDFLAG
 
 
 IOS_DEBUG_PATH(${LIBMD}/${OS}/${DEBUG_DIR})
-IOS_DEBUG_COMMAND(../../configure --disable-shared --enable-static) #--arch-"armv7 armv7s")
+IOS_DEBUG_COMMAND(${DKCONFIGURE_IOS64})
 IOS_DEBUG_COMMAND(make)
 IOS_RELEASE_PATH(${LIBMD}/${OS}/${RELEASE_DIR})
-IOS_RELEASE_COMMAND(../../configure --disable-shared --enable-static) #--arch-"armv7 armv7s")
+IOS_DEBUG_COMMAND(${DKCONFIGURE_IOS64})
 IOS_RELEASE_COMMAND(make)
 
 
-#IOSSIM_DEBUG_PATH(${LIBMD})
-#IOSSIM_DEBUG_COMMAND(./autogen)
-#MAC_COMMAND(sudo port install libmd)
 IOSSIM_DEBUG_PATH(${LIBMD}/${OS}/${DEBUG_DIR})
-IOSSIM_DEBUG_COMMAND(../../configure --disable-shared --enable-static)
+IOSSIM_DEBUG_COMMAND(${DKCONFIGURE_IOSSIM64})
 IOSSIM_DEBUG_COMMAND(make)
 IOSSIM_RELEASE_PATH(${LIBMD}/${OS}/${RELEASE_DIR})
-IOSSIM_RELEASE_COMMAND(../../configure --disable-shared --enable-static)
+IOSSIM_DEBUG_COMMAND(${DKCONFIGURE_IOSSIM64})
 IOSSIM_RELEASE_COMMAND(make)
 
 
