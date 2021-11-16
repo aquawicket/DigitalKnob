@@ -23,25 +23,24 @@
     
     //DKFile::appfilename = "/Users/aquawicket/Desktop/digitalknob/DKApps/"+appname+"/iossim32/Release-iphonesimulator/"+appname+".app/"+appname;
 	
-    DKApp dkapp(0,0);
+    //DKApp dkapp(0,0);
     
-	#ifdef DKAPP
-		DKINFO("DKAPP defined\n");
-	#endif
-		
-	DKINFO("Registered Classes\n");
-	DKStringArray classes;
-	DKClass::GetClassList(classes);
-	for(int i=0; i<classes.size(); i++){
-		DKINFO(classes[i]+"\n");
-	}
+	//DKStringArray classes;
+	//DKClass::GetClassList(classes);
+	//for(int i=0; i<classes.size(); i++){
+	//	DKINFO(classes[i]+"\n");
+	//}
 
 	//Attempt to preload these
-	DKClass::DKCreate("DKAssets");
-	DKClass::DKCreate("DKDuktape");
+	//DKClass::DKCreate("DKAssets");
+	//DKClass::DKCreate("DKDuktape");
 
-	DKObject* app = DKClass::DKCreate("App"); //App.h/App.cpp (user code)
-	dkapp.Init();
+	//DKObject* app = DKClass::DKCreate("App"); //App.h/App.cpp (user code)
+	//dkapp.Init();
+    
+    DKApp dkapp(0,0);//argc, argv);
+    DKApp::Init();
+    DKApp::Loop();
 		
     [NSTimer scheduledTimerWithTimeInterval:1.0/30.0 target:self selector:@selector(updateScene) userInfo:nil repeats:YES];
 }

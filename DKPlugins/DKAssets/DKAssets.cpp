@@ -196,7 +196,7 @@ bool DKAssets::GetDataPath(DKString& path){
 	path = DKFile::exe_path;
     unsigned n = path.find_last_of("/");
     path.erase(path.begin()+n+1, path.end());
-	path += "assets";
+	path += "assets/";
 	return true;
 #endif
 #ifdef LINUX

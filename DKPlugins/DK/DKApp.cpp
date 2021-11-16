@@ -47,7 +47,9 @@ DKApp::DKApp(int argc, char** argv){
 	else if (__cplusplus == 201103L) { DKINFO("C++11 \n"); }
 	else if (__cplusplus == 199711L) { DKINFO("C++98 \n"); }
 	else DKINFO("pre-standard C++ \n");
-	DKFile::exe_path = argv[0];
+    if(argc){
+        DKFile::exe_path = argv[0];
+    }
 	DKFile::NormalizePath(DKFile::exe_path);
 #ifdef WIN32
 	DKWindows::CreateConsoleHandler();
