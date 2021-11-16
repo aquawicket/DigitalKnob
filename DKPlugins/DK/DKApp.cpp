@@ -124,5 +124,5 @@ void DKApp::Exit(){
 //NSAutoreleasePool* pool = [NSAutoreleasePool new];
 int retval = UIApplicationMain(DKApp::argc, DKApp::argv, nil, @"iphoneViewerAppDelegate");
 //[pool release] ;
-return 0;
+//return 0;
 #endif
