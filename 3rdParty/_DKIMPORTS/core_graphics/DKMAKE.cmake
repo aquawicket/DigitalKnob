@@ -4,8 +4,8 @@ endif()
 
 # https://developer.apple.com/documentation/coregraphics?language=objc
 
-FIND_LIBRARY(core_graphics_lib CoreGraphics)
-if(NOT core_graphics_lib)
+FIND_LIBRARY(CoreGraphics_lib CoreGraphics)
+if(NOT CoreGraphics_lib)
 	message(FATAL_ERROR "Could not locate CoreGraphics framework")
 endif()
-APPLE_LIB(${core_graphics_lib})
+APPLE_LIB(${CoreGraphics_lib})
