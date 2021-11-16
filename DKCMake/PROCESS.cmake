@@ -726,26 +726,13 @@ if(IOS)
 	DKCOPY(${DKPROJECT}/Backup/ ${DKPROJECT}/assets/ FALSE)
 	DKREMOVE(${DKPROJECT}/Backup)
 
-	### FrameWorks ###
-	#set(IOS_FRAMEWORKS
-	#	Foundation
-	#	AudioToolbox
-	#	CoreGraphics
-	#   QuartzCore
-	#	UIKit
-	#   OpenGLES
-	#	ImageIO
-	#	MobileCoreServices)
-	#foreach(FW ${IOS_FRAMEWORKS})
-	#	set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -framework ${FW}")
-	#endforeach()
-		
 	#GET_TARGET_PROPERTY(MyExecutable_PATH ${APP_NAME} LOCATION)
 	list(APPEND App_SRC ${DKPLUGINS}/DK/DKiPhone.mm)
 	add_executable(${APP_NAME} MACOSX_BUNDLE ${App_SRC})
-	set_target_properties(${APP_NAME} PROPERTIES
+    set_target_properties(${APP_NAME} PROPERTIES
         XCODE_ATTRIBUTE_CODE_SIGN_IDENTITY ""
         MACOSX_BUNDLE TRUE
+		MACOSX_BUNDLE_EXECUTABLE_NAME "${APP_NAME}"
         MACOSX_BUNDLE_BUNDLE_NAME "${APP_NAME}"
 		MACOSX_BUNDLE_ICON_FILE "logo"
         MACOSX_BUNDLE_BUNDLE_VERSION "1.0"
@@ -753,20 +740,12 @@ if(IOS)
         MACOSX_BUNDLE_SHORT_VERSION_STRING "1.0"
         MACOSX_BUNDLE_GUI_IDENTIFIER com.digitalknob.${APP_NAME}
         MACOSX_BUNDLE_COPYRIGHT "(C) 2021 DigitalKnob"
-		MACOSX_BUNDLE_GUI_IDENTIFIER "com.digitalknob.${APP_NAME}"
-        MACOSX_FRAMEWORK_IDENTIFIER "com.digitalknob.bundle.${APP_NAME}"
+		MACOSX_FRAMEWORK_IDENTIFIER "com.digitalknob.bundle.${APP_NAME}"
 		MACOSX_BUNDLE_INFO_PLIST ${DKCMAKE}/Info.plist
 		#MACOSX_RPATH TRUE
         #XCODE_ATTRIBUTE_LD_RUNPATH_SEARCH_PATHS "@loader_path/Libraries"
         #RESOURCE "${RESOURCE_FILES}"
         #XCODE_ATTRIBUTE_ENABLE_HARDENED_RUNTIME TRUE
-        #XCODE_ATTRIBUTE_EXECUTABLE_NAME "wrapper"
-		##set(CMAKE_XCODE_ATTRIBUTE_DEBUG_INFORMATION_FORMAT dwarf)
-		#set(CMAKE_XCODE_ATTRIBUTE_CLANG_CXX_LIBRARY "libstdc++")
-		##set(CMAKE_OSX_SYSROOT iphoneos)
-		##set(XCODE_ATTRIBUTE_SDKROOT iphoneos)
-		##set(CMAKE_OSX_ARCHITECTURES "$(ARCHS_STANDARD_32_BIT)")
-		#set(CMAKE_CXX_FLAGS "-x objective-c++")
     )
 	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${LIBS})
 	
@@ -822,26 +801,13 @@ if(IOSSIM)
 	DKCOPY(${DKPROJECT}/Backup/ ${DKPROJECT}/assets/ FALSE)
 	DKREMOVE(${DKPROJECT}/Backup)
 	
-	### FrameWorks ###
-	#set(IOS_FRAMEWORKS
-	#	Foundation
-	#	AudioToolbox
-	#	CoreGraphics
-	#  	QuartzCore
-	#	UIKit
-	#   OpenGLES
-	#	ImageIO
-	#	MobileCoreServices)
-	#foreach(FW ${IOS_FRAMEWORKS})
-	#	set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -framework ${FW}")
-	#endforeach()
-	
 	#GET_TARGET_PROPERTY(MyExecutable_PATH ${APP_NAME} LOCATION)
 	list(APPEND App_SRC ${DKPLUGINS}/DK/DKiPhone.mm)
 	add_executable(${APP_NAME} MACOSX_BUNDLE ${App_SRC})
 	set_target_properties(${APP_NAME} PROPERTIES
         XCODE_ATTRIBUTE_CODE_SIGN_IDENTITY ""
         MACOSX_BUNDLE TRUE
+		MACOSX_BUNDLE_EXECUTABLE_NAME "${APP_NAME}"
         MACOSX_BUNDLE_BUNDLE_NAME "${APP_NAME}"
 		MACOSX_BUNDLE_ICON_FILE "logo"
         MACOSX_BUNDLE_BUNDLE_VERSION "1.0"
@@ -849,20 +815,12 @@ if(IOSSIM)
         MACOSX_BUNDLE_SHORT_VERSION_STRING "1.0"
         MACOSX_BUNDLE_GUI_IDENTIFIER com.digitalknob.${APP_NAME}
         MACOSX_BUNDLE_COPYRIGHT "(C) 2021 DigitalKnob"
-		MACOSX_BUNDLE_GUI_IDENTIFIER "com.digitalknob.${APP_NAME}"
-        MACOSX_FRAMEWORK_IDENTIFIER "com.digitalknob.bundle.${APP_NAME}"
+		MACOSX_FRAMEWORK_IDENTIFIER "com.digitalknob.bundle.${APP_NAME}"
 		MACOSX_BUNDLE_INFO_PLIST ${DKCMAKE}/Info.plist
 		#MACOSX_RPATH TRUE
         #XCODE_ATTRIBUTE_LD_RUNPATH_SEARCH_PATHS "@loader_path/Libraries"
         #RESOURCE "${RESOURCE_FILES}"
         #XCODE_ATTRIBUTE_ENABLE_HARDENED_RUNTIME TRUE
-        #XCODE_ATTRIBUTE_EXECUTABLE_NAME "wrapper"
-		##set(CMAKE_XCODE_ATTRIBUTE_DEBUG_INFORMATION_FORMAT dwarf)
-		#set(CMAKE_XCODE_ATTRIBUTE_CLANG_CXX_LIBRARY "libstdc++")
-		##set(CMAKE_OSX_SYSROOT iphoneos)
-		##set(XCODE_ATTRIBUTE_SDKROOT iphoneos)
-		##set(CMAKE_OSX_ARCHITECTURES "$(ARCHS_STANDARD_32_BIT)")
-		#set(CMAKE_CXX_FLAGS "-x objective-c++")
     )
 	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${LIBS})
 	
