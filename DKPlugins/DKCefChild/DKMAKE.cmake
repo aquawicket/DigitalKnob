@@ -181,7 +181,7 @@ if(RASPBERRY)
 	DKAPPEND_CMAKE("include(${DKCMAKE}/OPTIONS.cmake)\n")
 	DKAPPEND_CMAKE("project(DKCefChild)\n")
 	DKAPPEND_CMAKE("include_directories(${CEF})\n")
-	DKAPPEND_CMAKE("include_directories(${DKPLUGINS})\n"
+	DKAPPEND_CMAKE("include_directories(${DKPLUGINS})\n")
 		
 	if(DEBUG)
 		DKAPPEND_CMAKE("find_library(libcef_dll_wrapperD libcef_dll_wrapper.a ${CEF}/${OS}/${DEBUG_DIR}/libcef_dll_wrapper)\n")
