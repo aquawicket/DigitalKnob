@@ -93,11 +93,15 @@ IOSSIM_DEBUG_PATH(${XZ}/${OS}/${DEBUG_DIR})
 IOSSIM_DEBUG_COMMAND(../../configure 
 	--disable-shared 
 	--enable-static
-	--target=x86_64-apple-darwin
-	--host=x86_64-apple-darwin)
+	--target=x86_64-apple-ios13.0-simulator
+	--host=x86_64-apple-ios13.0-simulator)
 IOSSIM_DEBUG_COMMAND(make)
 IOSSIM_RELEASE_PATH(${XZ}/${OS}/${RELEASE_DIR})
-IOSSIM_RELEASE_COMMAND(../../configure --disable-shared --enable-static)
+IOSSIM_RELEASE_COMMAND(../../configure 
+	--disable-shared 
+	--enable-static
+	--target=x86_64-apple-ios13.0-simulator
+	--host=x86_64-apple-ios13.0-simulator)
 IOSSIM_RELEASE_COMMAND(make)
 
 
