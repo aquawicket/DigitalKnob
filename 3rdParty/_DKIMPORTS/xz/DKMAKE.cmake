@@ -101,7 +101,7 @@ DKSET(IOSSIM_C ${IOSSIM_DEVROOT}/Toolchains/XcodeDefault.xctoolchain/usr/bin/cla
 DKSET(IOSSIM_CXX ${IOSSIM_DEVROOT}/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++)
 DKSET(IOSSIM_LIBTOOL ${IOSSIM_DEVROOT}/Toolchains/XcodeDefault.xctoolchain/usr/bin/libtool)
 DKSET(IOSSIM_DARWIN darwin20.6.0)
-DKSET(IOSSIM_HOST ${IOSSIM_ARCH}-apple-${DIOSSIM_DARWIN})
+DKSET(IOSSIM_HOST ${IOSSIM_ARCH}-apple-${IOSSIM_DARWIN})
 DKSET(IOSSIM_MIN_SDK_VERSION 13.0)
 DKSET(IOSSIM_SYSROOT ${IOSSIM_DEVROOT}/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator15.0.sdk)
 DKSET(IOSSIM_CFLAGS "-arch ${IOSSIM_ARCH} -mios-simulator-version-min=${IOSSIM_MIN_SDK_VERSION} -isysroot ${IOSSIM_SYSROOT}")
