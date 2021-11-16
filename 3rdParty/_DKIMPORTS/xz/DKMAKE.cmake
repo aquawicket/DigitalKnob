@@ -90,7 +90,12 @@ IOS_RELEASE_COMMAND(make)
 
 
 IOSSIM_DEBUG_PATH(${XZ}/${OS}/${DEBUG_DIR})
-IOSSIM_DEBUG_COMMAND(../../configure --disable-shared --enable-static -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator15.0.sdk)
+IOSSIM_DEBUG_COMMAND(../../configure 
+	--disable-shared 
+	--enable-static
+	--target=x86_64-apple-darwin
+	--host=x86_64-apple-darwin
+	-isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator15.0.sdk)
 IOSSIM_DEBUG_COMMAND(make)
 IOSSIM_RELEASE_PATH(${XZ}/${OS}/${RELEASE_DIR})
 IOSSIM_RELEASE_COMMAND(../../configure --disable-shared --enable-static)
