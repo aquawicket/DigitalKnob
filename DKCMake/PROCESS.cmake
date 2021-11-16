@@ -689,7 +689,7 @@ if(MAC)
 endif()
 
 #######
-if(IOS)
+if(IOS AND NOT IOSSIM)
 	### PRE BUILD ###
 	if(DEBUG)
 		DKRENAME(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.backup)
@@ -816,7 +816,7 @@ if(IOSSIM)
         MACOSX_BUNDLE_GUI_IDENTIFIER com.digitalknob.${APP_NAME}
         MACOSX_BUNDLE_COPYRIGHT "(C) 2021 DigitalKnob"
 		MACOSX_FRAMEWORK_IDENTIFIER "com.digitalknob.bundle.${APP_NAME}"
-		MACOSX_BUNDLE_INFO_PLIST ${DKCMAKE}/Info.plist
+		#MACOSX_BUNDLE_INFO_PLIST ${DKCMAKE}/Info.plist
 		#MACOSX_RPATH TRUE
         #XCODE_ATTRIBUTE_LD_RUNPATH_SEARCH_PATHS "@loader_path/Libraries"
         #RESOURCE "${RESOURCE_FILES}"
