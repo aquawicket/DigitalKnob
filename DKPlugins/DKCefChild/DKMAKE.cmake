@@ -6,23 +6,23 @@ DKSET(QUEUE_BUILD ON)
 DKEXECUTABLE(DKCefChild)
 
 
-IF(WIN_32)
+IF(WIN)
 	IF(DEBUG)
-		DKCOPY(${DKPLUGINS}/DKCefChild/${OS}/${DEBUG_DIR}/DKCefChild.exe ${DKPROJECT}/assets/DKCef/win32Debug TRUE)
+		DKCOPY(${DKPLUGINS}/DKCefChild/${OS}/${DEBUG_DIR}/DKCefChild.exe ${DKPROJECT}/assets/DKCef/${OS}Debug TRUE)
 	ENDIF()
 	IF(RELEASE)
-		DKCOPY(${DKPLUGINS}/DKCefChild/${OS}/${RELEASE_DIR}/DKCefChild.exe ${DKPROJECT}/assets/DKCef/win32Release TRUE)
+		DKCOPY(${DKPLUGINS}/DKCefChild/${OS}/${RELEASE_DIR}/DKCefChild.exe ${DKPROJECT}/assets/DKCef/${OS}Release TRUE)
 	ENDIF()
 ENDIF()
 
-IF(WIN_64)
-	IF(DEBUG)
-		DKCOPY(${DKPLUGINS}/DKCefChild/${OS}/${DEBUG_DIR}/DKCefChild.exe ${DKPROJECT}/assets/DKCef/win64Debug TRUE)
-	ENDIF()
-	IF(RELEASE)
-		DKCOPY(${DKPLUGINS}/DKCefChild/${OS}/${RELEASE_DIR}/DKCefChild.exe ${DKPROJECT}/assets/DKCef/win64Release TRUE)
-	ENDIF()
-ENDIF()
+#IF(WIN_64)
+#	IF(DEBUG)
+#		DKCOPY(${DKPLUGINS}/DKCefChild/${OS}/${DEBUG_DIR}/DKCefChild.exe ${DKPROJECT}/assets/DKCef/${OS}Debug TRUE)
+#	ENDIF()
+#	IF(RELEASE)
+#		DKCOPY(${DKPLUGINS}/DKCefChild/${OS}/${RELEASE_DIR}/DKCefChild.exe ${DKPROJECT}/assets/DKCef/${OS}Release TRUE)
+#	ENDIF()
+#ENDIF()
 
 IF(MAC_64)
 #	if(DEBUG)
@@ -101,40 +101,6 @@ IF(WIN)
 	DKAPPEND_CMAKE("target_link_libraries(DKCefChild \${CEF_DEBUG_LIBS} \${CEF_RELEASE_LIBS} dbghelp.lib version.lib winmm.lib ws2_32.lib psapi.lib) \n")
 	DKAPPEND_CMAKE("set_target_properties(DKCefChild PROPERTIES LINK_FLAGS_DEBUG \"/MANIFESTUAC:NO /SUBSYSTEM:CONSOLE /SAFESEH:NO\" LINK_FLAGS_RELEASE \"/INCREMENTAL:NO /OPT:NOREF /MANIFESTUAC:NO /SUBSYSTEM:CONSOLE /FORCE /SAFESEH:NO\") \n")
 ENDIF()
-
-
-## DKCefChild win64
-#if(WIN_64)
-#	DKAPPEND_CMAKE("include_directories(${CEF}) \n")
-#	DKAPPEND_CMAKE("include_directories(${DKPLUGINS}) \n")
-#	#DKAPPEND_CMAKE("include_directories(${DKPLUGINS}/DKCef) \n")
-#
-#	#if(DEBUG)
-#		DKAPPEND_CMAKE("find_library(libcefD libcef.lib ${CEF}/${DEBUG_DIR}) \n")
-#		DKAPPEND_CMAKE("list(APPEND CEF_DEBUG_LIBS debug \${libcefD}) \n")
-#		
-#		DKAPPEND_CMAKE("find_library(libcef_dll_wrapperD libcef_dll_wrapper.lib ${CEF}/${OS}/libcef_dll_wrapper/${DEBUG_DIR}) \n")
-#		DKAPPEND_CMAKE("list(APPEND CEF_DEBUG_LIBS debug \${libcef_dll_wrapperD}) \n")
-#	
-#		#DKAPPEND_CMAKE("find_library(libcef_sandboxD cef_sandbox.lib ${CEF}/${DEBUG_DIR}) \n")
-#		#DKAPPEND_CMAKE("list(APPEND CEF_DEBUG_LIBS debug \${libcef_sandboxD}) \n")
-#	#endif()
-#	#if(RELEASE)
-#		DKAPPEND_CMAKE("find_library(libcefR libcef.lib ${CEF}/${RELEASE_DIR}) \n")
-#		DKAPPEND_CMAKE("list(APPEND CEF_RELEASE_LIBS optimized \${libcefR}) \n")
-#
-#		DKAPPEND_CMAKE("find_library(libcef_dll_wrapperR libcef_dll_wrapper.lib ${CEF}/${OS}/libcef_dll_wrapper/${RELEASE_DIR}) \n")
-#		DKAPPEND_CMAKE("list(APPEND CEF_RELEASE_LIBS optimized \${libcef_dll_wrapperR}) \n")
-#	
-#		#DKAPPEND_CMAKE("find_library(libcef_sandboxD cef_sandbox.lib ${CEF}/${DEBUG_DIR}) \n")
-#		#DKAPPEND_CMAKE("list(APPEND CEF_DEBUG_LIBS debug \${libcef_sandboxD}) \n")
-#	#endif()
-#	
-#	DKAPPEND_CMAKE("file(GLOB DKCefChild_SRC ${DKPLUGINS}/DKCefChild/*.cpp ${DKPLUGINS}/DKCefChild/*.manifest) \n")
-#	DKAPPEND_CMAKE("add_executable(DKCefChild WIN64 \${DKCefChild_SRC}) \n")
-#	DKAPPEND_CMAKE("target_link_libraries(DKCefChild \${CEF_DEBUG_LIBS} \${CEF_RELEASE_LIBS} dbghelp.lib version.lib winmm.lib ws2_32.lib psapi.lib) \n")
-#	DKAPPEND_CMAKE("set_target_properties(DKCefChild PROPERTIES LINK_FLAGS_DEBUG \"/MANIFESTUAC:NO /SUBSYSTEM:CONSOLE /SAFESEH:NO\" LINK_FLAGS_RELEASE \"/INCREMENTAL:NO /OPT:NOREF /MANIFESTUAC:NO /SUBSYSTEM:CONSOLE /FORCE /SAFESEH:NO\") \n")
-#endif()
 
 
 ## DKCefChild mac
