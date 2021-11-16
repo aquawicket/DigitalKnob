@@ -132,7 +132,7 @@ foreach(plugin ${dkdepend_list})
 		endif()
 	endif()
 	
-	if(${index} GREATER -1 AND QUEUE_BUILD AND FALSE)
+	if(FALSE) #${index} GREATER -1 AND QUEUE_BUILD)
 		#if(NOT EXISTS "${plugin_path}/CMakeLists.txt")
 		#	continue()
 		#endif()

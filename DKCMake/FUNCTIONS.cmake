@@ -2937,7 +2937,9 @@ function(DKEXECUTABLE name)
 	DKSET(DKCPPEXECS ${DKCPPEXECS} ${name})  #Add to list
 endfunction()
 
-
+function(DKAPPEND_CMAKE str)
+	file(APPEND ${plugin_path}/CMakeLists.txt "${str}")
+endfunction()
 
 SET(ASSETS 
 	PATTERN *.h EXCLUDE
