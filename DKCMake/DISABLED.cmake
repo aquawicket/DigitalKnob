@@ -87,7 +87,6 @@ if(WIN) # Disabled for Windows targets
 	DKDISABLE(libxrandr-dev)
 	DKDISABLE(libxtst-dev)
 	DKDISABLE(lighttpd)
-	DKDISABLE(jdk)
 	DKDISABLE(mesa-common-dev)
 	DKDISABLE(openal)
 	DKDISABLE(openal-android)
