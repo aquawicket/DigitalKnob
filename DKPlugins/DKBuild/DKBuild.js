@@ -301,7 +301,7 @@ function DKBuild_DoResults(){
 	
 	////// Create the cmake string
 	let cmake_string = ""
-		cmake_string = cmake_string+"--warn-uninitialized "
+		//cmake_string = cmake_string+"--warn-uninitialized "
 	if(TYPE === "Debug" || TYPE === "ALL")
 		cmake_string = cmake_string+"-DDEBUG=ON "
 	if(TYPE === "Release" || TYPE === "ALL")
