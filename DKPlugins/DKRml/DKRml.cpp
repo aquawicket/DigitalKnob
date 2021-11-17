@@ -53,12 +53,12 @@ bool DKRml::Init(){
 #endif
 	//Add missing stylesheet properties
 	//TODO - https://developer.mozilla.org/en-US/docs/Web/CSS/background-repeat
-	Rml::PropertyId background_repeat = Rml::StyleSheetSpecification::RegisterProperty("background-repeat", "repeat", false)
+	/*Rml::PropertyId background_repeat =  unused code */ Rml::StyleSheetSpecification::RegisterProperty("background-repeat", "repeat", false)
 		.AddParser("keyword", "repeat, space, round, no-repeat")
 		.AddParser("string")
 		.GetId(); //this supresses background-repeat warnings temporarily
 	//TODO - https://developer.mozilla.org/en-US/docs/Web/CSS/border-style
-	Rml::PropertyId border_style = Rml::StyleSheetSpecification::RegisterProperty("border-style", "none", false)
+	/* Rml::PropertyId border_style =  unused code */ Rml::StyleSheetSpecification::RegisterProperty("border-style", "none", false)
 		.AddParser("keyword", "none, hidden")
 		.AddParser("string")
 		.GetId(); //this supresses border-style warnings temporarily
@@ -111,7 +111,7 @@ bool DKRml::GetSourceCode(DKString& source_code) {
 	DKINFO("##################################################################\n");
 	
 	// Actually, we only want the  last html node
-	int n = source_code.rfind("<html");
+	unsigned long n = source_code.rfind("<html");
 	if(n < 0)
 		return DKWARN("html tag not found\n");
 
@@ -184,7 +184,7 @@ bool DKRml::LoadHtml(const DKString& html){
 	Rml::ElementList bodys;
 	Rml::Element* head = NULL;
 	Rml::Element* body = NULL;
-	Rml::ElementDocument* elementDocument = document->GetOwnerDocument();
+	//Rml::ElementDocument* elementDocument = document->GetOwnerDocument(); unused code
 	document->GetOwnerDocument()->GetElementsByTagName(heads, "head");
 	if (!heads.empty())
 		head = heads[0];

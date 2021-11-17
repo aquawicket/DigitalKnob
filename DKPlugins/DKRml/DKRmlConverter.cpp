@@ -4,7 +4,7 @@
 #include "DKDuktape/DKDuktape.h"
 #include "DKRml/DKRml.h"
 #include "DKXml/DKXml.h"
-#ifdef USE_tidy-html5
+#ifdef USE_tidy_html5
 	#include "tidy.h"
 	#include "tidybuffio.h"
 #endif
@@ -92,7 +92,7 @@ bool DKRmlConverter::Hyperlink(DKEvents* event){
 	DKDEBUGFUNC(event);
 	DKString elementAddress = event->GetId();
 	DKRml* dkRml = DKRml::Get("");
-	Rml::ElementDocument* doc = dkRml->document;
+	//Rml::ElementDocument* doc = dkRml->document; //unused code
 	Rml::Element* aElement = DKRml::addressToElement(elementAddress);
 	DKString value = aElement->GetAttribute("href")->Get<Rml::String>();
 	DKINFO("DKWidget::Hyperlink: "+value+"\n");
@@ -182,7 +182,7 @@ bool DKRmlConverter::PostProcess(Rml::Element* element) {
 		//DKEvents::AddEvent(id, "mouseover", &DKRmlConverter::MouseOverIframe, this);
 		//DKEvents::AddEvent(id, "click", &DKRmlConverter::ClickIframe, this);
 		DKString tag = "img";
-		Rml::Element* doc = DKRml::Get()->document;
+		//Rml::Element* doc = DKRml::Get()->document; //unused code
 		Rml::Element* cef_texture  = iframes[i]->AppendChild(DKRml::Get()->document->CreateElement(tag.c_str()), true);
 		if(!element)
 			return DKERROR("element invalid\n");
@@ -373,7 +373,7 @@ bool DKRmlConverter::Encode(std::string& data){
 	return true;
 }
 
-#ifdef USE_tidy-html5
+#ifdef USE_tidy_html5
 bool DKRmlConverter::TidyFile(const DKString& in, DKString& out){
 	DKINFO("####### CODE GOING INTO TIDY ##########\n");
 	DKINFO(in+"\n");
