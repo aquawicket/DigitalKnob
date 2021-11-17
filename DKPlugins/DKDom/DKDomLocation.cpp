@@ -23,7 +23,7 @@ bool DKDomLocation::Init(){
 }
 
 int DKDomLocation::hash(duk_context* ctx){
-	int found = DKRml::Get()->href.find("#");
+	unsigned long found = DKRml::Get()->href.find("#");
 	DKString hash;
 	if(found > 0)
 		hash = DKRml::Get()->href.substr(found);
@@ -41,7 +41,7 @@ int DKDomLocation::hostname(duk_context* ctx){
 	DKString hostname = DKRml::Get()->href;
 	//TODO
 	// 127.0.0.1 is the hostname of http://127.0.0.1/Test/file.html
-	int found = hostname.find("//");
+	unsigned long found = hostname.find("//");
 	if(found != std::string::npos)
 		hostname.erase(0, found);
 	hostname = "not implemented";

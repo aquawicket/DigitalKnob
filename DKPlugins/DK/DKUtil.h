@@ -29,7 +29,7 @@ public:
 	static bool GetDate(DKString& date);
 	static bool GetFps(unsigned int& fps);
 	static bool GetFramerate(int& framerate);
-	static bool GetFrames(long& frames);
+	static bool GetFrames(unsigned long& frames);
 	static bool GetKey(int& key);
 	static bool GetLocalIP(DKString& ip);
 	static bool GetMousePos(int& x, int& y);

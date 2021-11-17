@@ -349,7 +349,7 @@ bool DKDuktape::Reload(){
 	filelist.clear();
 	DKStringArray list;
 	DKClass::GetObjects(list);
-	for(unsigned int i=list.size()-1; i>0; --i){
+	for(unsigned long i=list.size()-1; i>0; --i){
 		if(!has(list[i],"DKJavascript,")){
 			if(has(list[i],"App0")){ continue; }
 			if(has(list[i],"DKAssets")){ continue; }
@@ -479,7 +479,7 @@ int DKDuktape::handle_fh(duk_context *ctx, FILE *f, const char *filename){
 	//DKDEBUGFUNC(ctx, f, filename);
 	char *buf = NULL;
 	int len;
-	int got;
+	unsigned long got;
 	int rc;
 	int retval = -1;
 	if (fseek(f, 0, SEEK_END) < 0) {

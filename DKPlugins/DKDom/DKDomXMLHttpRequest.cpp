@@ -17,7 +17,7 @@ int DKDomXMLHttpRequest::send(duk_context* ctx){
 	//void* object = duk_require_pointer(ctx, 0);
 	DKString method = duk_require_string(ctx, 0);
 	DKString url = duk_require_string(ctx, 1);
-	bool async = duk_require_boolean(ctx, 2);
+	/*bool async = */duk_require_boolean(ctx, 2);
 	//DKString user; //TODO
 	//DKString password; //TODO
 	//DKWARN("DKDomXMLHttpRequest::send("+method+","+url+","+toString(async)+")\n");

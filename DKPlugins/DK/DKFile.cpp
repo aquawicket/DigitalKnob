@@ -240,7 +240,7 @@ bool DKFile::GetAppPath(DKString& apppath){
 	//DKDEBUGFUNC(apppath);
 	if (!DKFile::PathExists(DKFile::exe_path))
 		DKFile::GetExePath(DKFile::exe_path);
-	unsigned found = 0;
+	unsigned long found = 0;
 #ifdef WIN32
 	apppath = DKFile::exe_path;
 	found = apppath.find_last_of("/");
@@ -319,7 +319,7 @@ bool DKFile::GetDrives(DKStringArray& strings){
 bool DKFile::GetExeName(DKString& exename){
 	if(!DKFile::PathExists(DKFile::exe_path))
 		DKFile::GetExePath(DKFile::exe_path);
-	unsigned found = DKFile::exe_path.find_last_of("/");
+	unsigned long found = DKFile::exe_path.find_last_of("/");
 	if (found != std::string::npos && found < DKFile::exe_path.length()) {
 		exename = DKFile::exe_path.substr(found + 1);
 		DebugPath(exename);
@@ -737,7 +737,7 @@ bool DKFile::RemoveDirectory(const DKString& path){
 bool DKFile::RemoveExtention(DKString& file){
 	DKDEBUGFUNC(file);
 	DebugPath(file);
-	unsigned found = file.find_last_of(".");
+	unsigned long found = file.find_last_of(".");
 	file = file.substr(0,found);
 	return true;
 }

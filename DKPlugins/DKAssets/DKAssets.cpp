@@ -191,7 +191,7 @@ bool DKAssets::GetDataPath(DKString& path){
 #endif
 #ifdef IOS //FIXME - double check that iOS doesn't have the MAC preprocessor definition.
 	path = DKFile::exe_path;
-    unsigned n = path.find_last_of("/");
+    unsigned long n = path.find_last_of("/");
     path.erase(path.begin()+n+1, path.end());
 	path += "assets/";
 	return true;

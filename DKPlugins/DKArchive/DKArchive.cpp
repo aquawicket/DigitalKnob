@@ -49,7 +49,7 @@ bool DKArchive::Extract(const DKString& file, const DKString& path){
     ext = archive_write_disk_new();
     archive_write_disk_set_options(ext, flags);
     archive_write_disk_set_standard_lookup(ext);
-	if ((r = archive_read_open_filename(a, file.c_str(), 10240)))
+	if ((/*r = */archive_read_open_filename(a, file.c_str(), 10240)))
 		return DKERROR("r = archive_read_open_filename(a, file.c_str(), 10240)");    
 	for(;;){
 		r = archive_read_next_header(a, &entry);
@@ -152,7 +152,7 @@ bool DKArchive::Compress(const DKString& path, const DKString& file){
 
 int DKArchive::copy_data(struct archive* ar, struct archive* aw){
 	//DKDEBUGFUNC(ar, aw);	
-	int r;
+	la_ssize_t r;
 	const void *buff;
 	size_t size;
 //#ifndef ANDROID

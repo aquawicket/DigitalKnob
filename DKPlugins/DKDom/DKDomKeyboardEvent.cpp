@@ -104,7 +104,7 @@ int DKDomKeyboardEvent::isComposing(duk_context* ctx){
 		return DKERROR("event invalid\n");
 	}
 	//TODO
-	bool isComposing;// = "undefined";
+	bool isComposing = false;
 	duk_push_boolean(ctx, isComposing);
 	return false;
 }
@@ -177,7 +177,7 @@ int DKDomKeyboardEvent::repeat(duk_context* ctx){
 		return DKERROR("event invalid\n");
 	}
 	//TODO
-	bool repeat;// = "undefined";
+	bool repeat = false;
 	duk_push_boolean(ctx, repeat);
 	return false;
 }

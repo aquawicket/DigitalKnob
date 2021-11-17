@@ -21,7 +21,7 @@ bool samei(const DKString& str, const DKString& str2){
 }
 
 bool has(const DKString& search, const DKString& forthis){
-	int found = search.find(forthis);
+	unsigned long found = search.find(forthis);
 	if(found != std::string::npos)
 		return true;
 	return false;

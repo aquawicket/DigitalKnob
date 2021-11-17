@@ -290,8 +290,11 @@ void DKRml::ProcessEvent(Rml::Event& rmlEvent){
 	Rml::Element* targetElement = rmlEvent.GetTargetElement();
 	DKString targetElementAddress = elementToAddress(targetElement);
 	DKString type = rmlEvent.GetType();
-	int phase = (int)rmlEvent.GetPhase(); //{ None, Capture = 1, Target = 2, Bubble = 4 };
-	/*
+	//TODO: implement this
+    //int phase = (int)rmlEvent.GetPhase(); //{ None, Capture = 1, Target = 2, Bubble = 4 };
+	
+    
+    /*
 	// Send this event back to duktape to be processed in javascript
 	DKString evnt = "{type:'"+type+"', eventPhase:"+toString(phase)+"}";
 	DKString code = "EventFromCPP('"+ currentElementAddress +"',"+evnt+");";

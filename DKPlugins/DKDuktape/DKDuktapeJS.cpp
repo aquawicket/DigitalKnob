@@ -500,23 +500,24 @@ int DKDuktapeJS::GetFps(duk_context* ctx){
 
 int DKDuktapeJS::GetFramerate(duk_context* ctx){
 	int framerate;
-	if(!DKUtil::GetFramerate(framerate)){ return 0; }
+	if(!DKUtil::GetFramerate(framerate))
+        return 0;
 	duk_push_int(ctx, framerate);
 	return 1;
 }
 
 int DKDuktapeJS::GetFrames(duk_context* ctx){
-	long frames;
-	if(!DKUtil::GetFrames(frames)){ return 0; }
+	unsigned long frames;
+	if(!DKUtil::GetFrames(frames))
+        return 0;
 	duk_push_int(ctx, frames);
 	return 1;
 }
 
 int DKDuktapeJS::GetFunctions(duk_context* ctx){
 	DKStringArray list;
-	for(unsigned int i=0; i < DKDuktape::functions.size(); ++i){
+	for(unsigned int i=0; i < DKDuktape::functions.size(); ++i)
 		list.push_back(DKDuktape::functions[i]);
-	}
 	DKString str = toString(list, ",");
 	duk_push_string(ctx, str.c_str());
 	return 1;
@@ -526,7 +527,8 @@ int DKDuktapeJS::GetId(duk_context* ctx){
 	DKString evt = duk_require_string(ctx, 0);
 	DKStringArray arry;
 	toStringArray(arry, evt, ",");
-	if(arry.size() < 1){ return 0; }
+	if(arry.size() < 1)
+        return 0;
 	duk_push_string(ctx, arry[0].c_str());
 	return 1;
 }
@@ -539,14 +541,16 @@ int DKDuktapeJS::GetJSEngine(duk_context* ctx){
 
 int DKDuktapeJS::GetKey(duk_context* ctx){
 	int key;
-	if(!DKUtil::GetKey(key)){ return 0; }
+	if(!DKUtil::GetKey(key))
+        return 0;
 	duk_push_int(ctx, key);
 	return 1;
 }
 
 int DKDuktapeJS::GetLocalIP(duk_context* ctx){
 	DKString ip;
-	if(!DKUtil::GetLocalIP(ip)){ return 0; }
+	if(!DKUtil::GetLocalIP(ip))
+        return 0;
 	duk_push_string(ctx, ip.c_str());
 	return 1;
 }
@@ -554,7 +558,8 @@ int DKDuktapeJS::GetLocalIP(duk_context* ctx){
 int DKDuktapeJS::GetMouseX(duk_context* ctx){
 	int mouseX = 0;
 	int mouseY = 0;
-	if(!DKUtil::GetMousePos(mouseX, mouseY)){ return 0; }
+	if(!DKUtil::GetMousePos(mouseX, mouseY))
+        return 0;
 	duk_push_int(ctx, mouseX);
 	return 1;
 }
@@ -630,7 +635,8 @@ int DKDuktapeJS::GetScreenWidth(duk_context* ctx){
 
 int DKDuktapeJS::GetTicks(duk_context* ctx){
 	long ticks;
-	if(!DKUtil::GetTicks(ticks)){ return 0; }
+	if(!DKUtil::GetTicks(ticks))
+        return 0;
 	duk_push_int(ctx, ticks);
 	return 1;
 }

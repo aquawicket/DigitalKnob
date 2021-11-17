@@ -63,7 +63,8 @@ bool DKUtil::Bin2C(const DKString& input, const DKString& output){
 #ifndef MAC
 	char *buf;
 	const char* ident  = "assets";
-	unsigned int i, file_size, need_comma;
+	unsigned int i, need_comma;
+    long file_size;
 	FILE* f_input = fopen(input.c_str(), "rb");
 	if (!f_input)
 		return DKERROR("can't open file for reading\n");
@@ -273,7 +274,7 @@ bool DKUtil::GetFramerate(int& framerate){
 	return true;
 }
 
-bool DKUtil::GetFrames(long& frames){
+bool DKUtil::GetFrames(unsigned long& frames){
 	DKDEBUGFUNC(frames);
 	frames = framecount;
 	return true;
@@ -514,7 +515,7 @@ bool DKUtil::LimitFramerate(){
 	if(!DKUtil::now){ DKUtil::InitFramerate(); }
 	//Framerate / cpu limiter
 	DKUtil::GetTicks(DKUtil::now);
-	int delta = DKUtil::now - DKUtil::lastFrame;
+	long delta = DKUtil::now - DKUtil::lastFrame;
 	if(delta < DKUtil::ticksPerFrame){
 		long sleep = DKUtil::ticksPerFrame - delta;
 		DKUtil::Sleep(sleep);

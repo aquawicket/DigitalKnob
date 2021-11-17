@@ -370,7 +370,7 @@ bool DKCurl::HttpFileDate(const DKString& url, DKString& filedate){
 		return DKERROR("curl_easy_preform() failed \n");
 	}
 	const time_t filetime = 0;
-	curlcode = curl_easy_getinfo(curl, CURLINFO_FILETIME, &filetime);
+	/*curlcode = unused code */curl_easy_getinfo(curl, CURLINFO_FILETIME, &filetime);
 	//curl_easy_cleanup(curl);
 	struct tm* clock;
 	clock = localtime(&filetime);
@@ -481,7 +481,7 @@ size_t DKCurl::WriteToFile(void *ptr, size_t size, size_t nmemb, FILE *stream){
 
 int DKCurl::WriteToBuffer(char *data, size_t size, size_t nmemb, std::string *buffer){
 	//DKDEBUGFUNC(data, size, nmemb, buffer);
-    int result = 0;
+    unsigned long result = 0;
     if(buffer != NULL){
         buffer->append(data, size * nmemb);
 		result = size * nmemb;
@@ -493,7 +493,7 @@ size_t DKCurl::read_callback(void *ptr, size_t size, size_t nmemb, void *stream)
 	//DKDEBUGFUNC(ptr, size, nmemb, stream);
     curl_off_t nread;
     size_t retcode = fread(ptr, size, nmemb, (FILE *)stream);
-    nread = (curl_off_t) retcode;
+    //nread = (curl_off_t) retcode;
 	printf(".");
     //fprintf(stderr, "*** We read %" CURL_FORMAT_CURL_OFF_T " bytes from filen", nread);
     return retcode;
