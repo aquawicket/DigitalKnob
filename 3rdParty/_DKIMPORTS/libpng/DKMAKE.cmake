@@ -67,10 +67,10 @@ IOS_XCODE(${PNG_NAME} png_static)
 #IOSSIM_XCODE(${PNG_NAME} png_static)
 
 IOSSIM_DEBUG_PATH(${PNG}/${OS}/${DEBUG_DIR})
-IOSSIM_DEBUG_COMMAND(${DKCONFIGURE_IOSSIM64} --disable-dependency-tracking ${ZLIB_IOS_DEBUG_CONFIG})
+IOSSIM_DEBUG_COMMAND(${DKCONFIGURE_IOSSIM64} --disable-dependency-tracking  -Wno-error-implicit-function-declaration ${ZLIB_IOS_DEBUG_CONFIG})
 IOSSIM_DEBUG_COMMAND(make)
 IOSSIM_RELEASE_PATH(${PNG}/${OS}/${RELEASE_DIR})
-IOSSIM_DEBUG_COMMAND(${DKCONFIGURE_IOSSIM64} --disable-dependency-tracking ${ZLIB_IOS_RELEASE_CONFIG})
+IOSSIM_DEBUG_COMMAND(${DKCONFIGURE_IOSSIM64} --disable-dependency-tracking  -Wno-error-implicit-function-declaration ${ZLIB_IOS_RELEASE_CONFIG})
 IOSSIM_RELEASE_COMMAND(make)
 
 
