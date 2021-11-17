@@ -67,10 +67,26 @@ IOS_XCODE(${PNG_NAME} png_static)
 #IOSSIM_XCODE(${PNG_NAME} png_static)
 
 IOSSIM_DEBUG_PATH(${PNG}/${OS}/${DEBUG_DIR})
-IOSSIM_DEBUG_COMMAND(${DKCONFIGURE_IOSSIM64} --disable-dependency-tracking  -Wno-error-implicit-function-declaration ${ZLIB_IOS_DEBUG_CONFIG})
+IOSSIM_DEBUG_COMMAND(${DKCONFIGURE_IOSSIM64} --disable-dependency-tracking "-DPNG_NO_CONFIG_H"
+    "-DHAVE_DLFCN_H=1"
+    "-DHAVE_INTTYPES_H=1"
+    "-DHAVE_LIBZ=1"
+    "-DHAVE_MEMORY_H=1"
+    "-DHAVE_MEMSET=1"
+    "-DHAVE_POW=1"
+    "-DHAVE_STDINT_H=1"
+    "-DHAVE_STDLIB_H=1"
+    "-DHAVE_STRINGS_H=1"
+    "-DHAVE_STRING_H=1"
+    "-DHAVE_SYS_STAT_H=1"
+    "-DHAVE_SYS_TYPES_H=1"
+    "-DHAVE_UNISTD_H=1"
+    "-DSTDC_HEADERS=1"
+    "-Drestrict=__restrict"
+	${ZLIB_IOS_DEBUG_CONFIG})
 IOSSIM_DEBUG_COMMAND(make)
 IOSSIM_RELEASE_PATH(${PNG}/${OS}/${RELEASE_DIR})
-IOSSIM_DEBUG_COMMAND(${DKCONFIGURE_IOSSIM64} --disable-dependency-tracking  -Wno-error-implicit-function-declaration ${ZLIB_IOS_RELEASE_CONFIG})
+IOSSIM_DEBUG_COMMAND(${DKCONFIGURE_IOSSIM64} --disable-dependency-tracking ${ZLIB_IOS_RELEASE_CONFIG})
 IOSSIM_RELEASE_COMMAND(make)
 
 
