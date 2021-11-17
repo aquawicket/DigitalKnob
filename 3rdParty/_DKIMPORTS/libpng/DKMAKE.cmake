@@ -67,23 +67,22 @@ IOS_XCODE(${PNG_NAME} png_static)
 #IOSSIM_XCODE(${PNG_NAME} png_static)
 
 
-# /Library/Developer/CommandLineTools/SDKs/MacOSX11.1.sdk/System/Library/Frameworks/Kernel.framework/Versions/A/Headers/sys/types.h
 # /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/System/Library/Frameworks/Kernel.framework/Versions/A/Headers/sys/types.h 
 # /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/Kernel.framework/Versions/A/Headers/sys/types.h
+# CFLAGS=-I/Library/Developer/CommandLineTools/SDKs/MacOSX11.1.sdk/System/Library/Frameworks/Kernel.framework/Versions/A/Headers
+# CXXFLAGS=-I/Library/Developer/CommandLineTools/SDKs/MacOSX11.1.sdk/System/Library/Frameworks/Kernel.framework/Versions/A/Headers
 
 IOSSIM_DEBUG_PATH(${PNG}/${OS}/${DEBUG_DIR})
 IOSSIM_DEBUG_COMMAND(${DKCONFIGURE_IOSSIM64} 
 	--disable-dependency-tracking 
-	CFLAGS=-I/Library/Developer/CommandLineTools/SDKs/MacOSX11.1.sdk/System/Library/Frameworks/Kernel.framework/Versions/A/Headers
-	CXXFLAGS=-I/Library/Developer/CommandLineTools/SDKs/MacOSX11.1.sdk/System/Library/Frameworks/Kernel.framework/Versions/A/Headers
+	"CFLAGS=-DPNG_ARM_NEON_OPT=0"
 	${ZLIB_IOS_DEBUG_CONFIG})
 IOSSIM_DEBUG_COMMAND(make clean)
 IOSSIM_DEBUG_COMMAND(make all)
 IOSSIM_RELEASE_PATH(${PNG}/${OS}/${RELEASE_DIR})
 IOSSIM_RELEASE_COMMAND(${DKCONFIGURE_IOSSIM64} 
 	--disable-dependency-tracking
-	CFLAGS=-I/Library/Developer/CommandLineTools/SDKs/MacOSX11.1.sdk/System/Library/Frameworks/Kernel.framework/Versions/A/Headers
-	CXXFLAGS=-I/Library/Developer/CommandLineTools/SDKs/MacOSX11.1.sdk/System/Library/Frameworks/Kernel.framework/Versions/A/Headers
+	"CFLAGS=-DPNG_ARM_NEON_OPT=0"
 	${ZLIB_IOS_RELEASE_CONFIG})
 IOSSIM_RELEASE_COMMAND(make clean)
 IOSSIM_RELEASE_COMMAND(make all)

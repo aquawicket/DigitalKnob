@@ -1,3 +1,5 @@
+# README: https://tinsuke.wordpress.com/2011/02/17/how-to-cross-compiling-libraries-for-ios-armv6armv7i386/
+
 # http://www.leptonica.org
 #
 # http://www.leptonica.org/source/leptonica-1.74.4.tar.gz

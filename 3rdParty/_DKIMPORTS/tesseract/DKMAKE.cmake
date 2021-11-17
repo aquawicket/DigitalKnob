@@ -1,3 +1,6 @@
+# README: https://tinsuke.wordpress.com/2011/02/17/how-to-cross-compiling-libraries-for-ios-armv6armv7i386/
+
+
 # https://github.com/tesseract-ocr/tessdoc
 #
 # https://github.com/tesseract-ocr/tessdoc/archive/refs/heads/master.zip
