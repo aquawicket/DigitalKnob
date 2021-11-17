@@ -4,7 +4,6 @@
 std::map<DKString, DKClass*>* DKClass::classes = NULL;
 DKFunctionMap* DKClass::functions = NULL;
 
-
 void DKClass::Register(const DKString& klass, DKClass* _class, bool singleton){
 	DKDEBUGFUNC(klass, _class, singleton);
 	if(!classes){ classes = new std::map<DKString, DKClass*>(); }

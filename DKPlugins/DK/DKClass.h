@@ -75,18 +75,19 @@ public:
 	}
 
 	template<class T>
-	static bool RegisterFunc(const DKString& name, bool (T::*func) (const void*, void*), T* _this){
+    static bool RegisterFunc(const DKString& name, bool (T::*func) (const void*, void*), T* _this){
 		DKDEBUGFUNC(name, func, _this);
-        //functions[name] = std::bind(func, _this, dk_placeholders::_1, dk_placeholders::_2);
+        //functions[name] = std::bind(func, _this, dk_placeholders::_1, dk_placeholders::_2); //member variable version
         if(!functions)
             functions = new DKFunctionMap();
         if((*functions)[name])
             DKERROR("RegisterFunc(" + name + "): failed to register function \n");
-        (*functions)[name] = std::bind(func, _this, dk_placeholders::_1, dk_placeholders::_2);
+        (*functions)[name] = std::bind(func, _this, dk_placeholders::_1, dk_placeholders::_2); //member pointer version
         if(!(*functions)[name])
             return DKERROR("RegisterFunc("+name+"): failed to register function \n");
-		return true;
+        return true;
 	}
+    
 
 	static bool UnregisterFunc(const DKString& name){
 		DKDEBUGFUNC(name);
