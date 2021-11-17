@@ -104,7 +104,7 @@ if(WIN_64) # Disabled for Windows 64bit targets
 endif()
 
 
-if(NOT APPLE)  Disabled on NON-Mac host machines
+if(NOT APPLE) #Disabled on NON-Mac host machines
 
 endif()
 if(MAC)  # Disabled on Mac host machines
