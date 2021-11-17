@@ -62,9 +62,17 @@ IOS_COMMAND(${DKCMAKE_IOS64} -DPNG_SHARED=OFF -DPNG_TESTS=OFF ${ZLIB_APPLE} ${PN
 IOS_XCODE(${PNG_NAME} png_static)
 
 
-#IOSSIM_PATH(${PNG}/${OS})
-#IOSSIM_COMMAND(${DKCMAKE_IOSSIM64} -DPNG_SHARED=OFF -DPNG_TESTS=OFF ${ZLIB_APPLE} ${PNG})
-#IOSSIM_XCODE(${PNG_NAME} png_static)
+IOSSIM_PATH(${PNG}/${OS})
+IOSSIM_COMMAND(../configure
+	--disable-shared
+	--enable-static
+	--host ${IOS_HOST}
+	CC=${CLANG}
+	CXX=${CLANGXX}
+	CFLAGS=${IOS_CFLAGS}
+	CXXFLAGS=${IOS_CXXFLAGS})
+IOSSIM_COMMAND(${DKCMAKE_IOSSIM64} -DPNG_SHARED=OFF -DPNG_TESTS=OFF -DDENABLE_BITCODE=FALSE ${ZLIB_APPLE} ${PNG})
+IOSSIM_XCODE(${PNG_NAME} png_static)
 
 
 # /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/System/Library/Frameworks/Kernel.framework/Versions/A/Headers/sys/types.h 
@@ -72,20 +80,20 @@ IOS_XCODE(${PNG_NAME} png_static)
 # CFLAGS=-I/Library/Developer/CommandLineTools/SDKs/MacOSX11.1.sdk/System/Library/Frameworks/Kernel.framework/Versions/A/Headers
 # CXXFLAGS=-I/Library/Developer/CommandLineTools/SDKs/MacOSX11.1.sdk/System/Library/Frameworks/Kernel.framework/Versions/A/Headers
 
-IOSSIM_DEBUG_PATH(${PNG}/${OS}/${DEBUG_DIR})
-IOSSIM_DEBUG_COMMAND(${DKCONFIGURE_IOSSIM64} 
-	--disable-dependency-tracking 
-	"CFLAGS=-DPNG_ARM_NEON_OPT=0"
-	${ZLIB_IOS_DEBUG_CONFIG})
-IOSSIM_DEBUG_COMMAND(make clean)
-IOSSIM_DEBUG_COMMAND(make all)
-IOSSIM_RELEASE_PATH(${PNG}/${OS}/${RELEASE_DIR})
-IOSSIM_RELEASE_COMMAND(${DKCONFIGURE_IOSSIM64} 
-	--disable-dependency-tracking
-	"CFLAGS=-DPNG_ARM_NEON_OPT=0"
-	${ZLIB_IOS_RELEASE_CONFIG})
-IOSSIM_RELEASE_COMMAND(make clean)
-IOSSIM_RELEASE_COMMAND(make all)
+#IOSSIM_DEBUG_PATH(${PNG}/${OS}/${DEBUG_DIR})
+#IOSSIM_DEBUG_COMMAND(${DKCONFIGURE_IOSSIM64} 
+#	--disable-dependency-tracking 
+#	"CFLAGS=-DPNG_ARM_NEON_OPT=0"
+#	${ZLIB_IOS_DEBUG_CONFIG})
+#IOSSIM_DEBUG_COMMAND(make clean)
+#IOSSIM_DEBUG_COMMAND(make all)
+#IOSSIM_RELEASE_PATH(${PNG}/${OS}/${RELEASE_DIR})
+#IOSSIM_RELEASE_COMMAND(${DKCONFIGURE_IOSSIM64} 
+#	--disable-dependency-tracking
+#	"CFLAGS=-DPNG_ARM_NEON_OPT=0"
+#	${ZLIB_IOS_RELEASE_CONFIG})
+#IOSSIM_RELEASE_COMMAND(make clean)
+#IOSSIM_RELEASE_COMMAND(make all)
 
 
 LINUX_DEBUG_PATH(${PNG}/${OS}/${DEBUG_DIR})
