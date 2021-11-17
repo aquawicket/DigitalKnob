@@ -2833,7 +2833,7 @@ function(generateCmake name)
 		file(APPEND ${plugin_path}/CMakeLists.txt "endif()\n")	
 	endif()
 	
-	DKSET(DKCPPPLUGS ${DKCPPPLUGS} ${name})  #Add to list
+	DKSET(DKPLUGIN_LIST ${DKPLUGIN_LIST} ${name})  #Add to list
 	
 	##add headers to DKPlugins.h
 	if(${name} STREQUAL DK OR STATIC)
@@ -2934,7 +2934,7 @@ function(DKDLL name)
 	file(APPEND ${plugin_path}/CMakeLists.txt "		set_target_properties(${name} PROPERTIES LINKER_LANGUAGE CPP)\n")
 	file(APPEND ${plugin_path}/CMakeLists.txt "endif()\n")
 	endif()
-	DKSET(DKCPPPLUGS ${DKCPPPLUGS} ${name})  #Add to list	
+	DKSET(DKPLUGIN_LIST ${DKPLUGIN_LIST} ${name})  #Add to list	
 endfunction()
 
 
@@ -2955,7 +2955,7 @@ function(DKEXECUTABLE name)
 	#file(APPEND ${plugin_path}/CMakeLists.txt "include(${DKCMAKE}/OPTIONS.cmake)\n")
 	#file(APPEND ${plugin_path}/CMakeLists.txt "project(${name})\n")
 	endif()
-	DKSET(DKCPPPLUGS ${DKCPPPLUGS} ${name})  #Add to list	
+	DKSET(DKPLUGIN_LIST ${DKPLUGIN_LIST} ${name})  #Add to list	
 endfunction()
 
 function(DKAPPEND_CMAKE str)

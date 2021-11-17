@@ -72,7 +72,7 @@ if(WIN) # Disabled for Windows targets
 	#DKDISABLE(flac)
 	DKDISABLE(freealut)
 	DKDISABLE(freealut-master)
-	DKDISABLE(jpeg) 
+	DKDISABLE(jpeg) #using libjpeg-turbo
 	DKDISABLE(kdevelop)
 	DKDISABLE(leptonica)
 	DKDISABLE(libasound2-dev)

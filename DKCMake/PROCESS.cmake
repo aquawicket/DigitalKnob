@@ -71,6 +71,13 @@ foreach(plugin ${dkdepend_list})
 	#This executes the 3rdParty library builds, and dkplugin setup, creates CMakeLists.txt files
 	include(${plugin_path}/DKMAKE.cmake)
 	
+	#NOTE: we won't have the library paths to remove until we've run DKCMake.cmake for the library
+	#if(REBUILDALL)
+		#foreach(the_lib ${LIBLIST})
+		#	DKREMOVE(${the_lib})
+		#	message(STATUS "######  Removed ${the_lib}")
+		#endforeach()
+	#endif()
 	
 	# ADD THE 3rdParty library TO THE APP SOLUTION
 	#string(TOUPPER ${plugin} PLUGIN_NAME)
@@ -79,10 +86,10 @@ foreach(plugin ${dkdepend_list})
 	#	message(STATUS "add_subdirectory( ${${PLUGIN_NAME}} ${${PLUGIN_NAME}}/${OS} )")
 	#endif()
 
-	
+	string(FIND "${DKPLUGIN_LIST}" "${plugin}" isDKPlugin) #isDKPlugin flag
 	####################### DKPlugins #######################
-	string(FIND "${DKCPPPLUGS}" "${plugin}" index)
-	if(${index} GREATER -1)
+	if(${isDKPlugin} GREATER -1)	
+		#Add the DKPlugin to the app project
 		if(EXISTS "${plugin_path}/CMakeLists.txt")
 			if(LINUX OR RASPBERRY)
 				if(DEBUG)
@@ -94,22 +101,6 @@ foreach(plugin ${dkdepend_list})
 				add_subdirectory(${plugin_path} ${plugin_path}/${OS})
 			endif()
 		endif()
-
-		#if(NOT EXISTS "${plugin_path}/CMakeLists.txt")
-		#	continue()
-		#endif()
-		#if(REBUILDALL)
-		#	DKREMOVE(${plugin_path}/CMakeLists.txt)
-		#	foreach(the_lib ${LIBLIST})
-		#		DKREMOVE(${the_lib})
-		#		message(STATUS "######  Removed ${the_lib}")
-		#	endforeach()
-		#endif()
-		
-		#if(NOT EXISTS ${plugin_path}/CMakeLists.txt)
-		#	message(STATUS "######  Creating CMakeLists.txt file for ${plugin} . . .")
-		#	generateCmake(${plugin})
-		#endif()		
 		
 		## Prebuild Plugins switch
 		if(FALSE)
