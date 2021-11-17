@@ -4,8 +4,8 @@ endif()
 
 # https://developer.apple.com/documentation/imageio
 
-FIND_LIBRARY(imageio_lib ImageIO)
-if(NOT imageio_lib)
+FIND_LIBRARY(ImageIO_lib ImageIO)
+if(NOT ImageIO_lib)
 	message(FATAL_ERROR "Could not locate ImageIO framework")
 endif()
-APPLE_LIB(${imageio_lib})
+APPLE_LIB(${ImageIO_lib})

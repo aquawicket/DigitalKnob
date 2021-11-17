@@ -22,6 +22,7 @@
 
 
 ### DEPENDS ###
+DKDEPEND(imageio)
 DKDEPEND(zlib)
 DKDEPEND(giflib)
 DKDEPEND(libpng)
@@ -29,7 +30,6 @@ DKDEPEND(libjpeg-turbo)
 DKDEPEND(libwebp)
 DKDEPEND(tiff)
 DKDEPEND(sdl2)
-
 
 
 ### VERSION ###
