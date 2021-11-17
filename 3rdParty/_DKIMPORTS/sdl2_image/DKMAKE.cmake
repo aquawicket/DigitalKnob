@@ -22,7 +22,10 @@
 
 
 ### DEPENDS ###
-DKDEPEND(imageio)
+if(IOS OR IOSSIM)
+	DKDEPEND(imageio)
+	DKDEPEND(mobile_core_services)
+endif()
 DKDEPEND(zlib)
 DKDEPEND(giflib)
 DKDEPEND(libpng)
