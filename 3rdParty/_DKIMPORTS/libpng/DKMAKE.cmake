@@ -61,13 +61,13 @@ IOS_PATH(${PNG}/${OS})
 IOS_COMMAND(${DKCMAKE_IOS64} -DPNG_SHARED=OFF -DPNG_TESTS=OFF ${ZLIB_APPLE} ${PNG})
 IOS_XCODE(${PNG_NAME} png_static)
 
-
+if(IOS)
 DKSET(DKCONFIGURE2_IOSSIM64 ${DKCONFIGURE_IOSSIM64})
 string(REPLACE "../../" "../" DKCONFIGURE2_IOSSIM64 ${DKCONFIGURE_IOSSIM64})
 IOSSIM_PATH(${DKCONFIGURE2_IOSSIM64})
 IOSSIM_COMMAND(${DKCMAKE_IOSSIM64} -DPNG_SHARED=OFF -DPNG_TESTS=OFF -DDENABLE_BITCODE=FALSE ${ZLIB_APPLE} ${PNG})
 IOSSIM_XCODE(${PNG_NAME} png_static)
-
+endif()
 
 # /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/System/Library/Frameworks/Kernel.framework/Versions/A/Headers/sys/types.h 
 # /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/Kernel.framework/Versions/A/Headers/sys/types.h
