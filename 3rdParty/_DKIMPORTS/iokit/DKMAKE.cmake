@@ -2,10 +2,10 @@ if(NOT CMAKE_HOST_APPLE)
 	return()
 endif()
 
-# https://developer.apple.com/documentation/iokit
+# https://developer.apple.com/documentation/IOKit
 
-FIND_LIBRARY(iokit_lib IOKit)
-if(NOT iokit_lib)
+FIND_LIBRARY(IOKit_lib IOKit)
+if(NOT IOKit_lib)
 	message(FATAL_ERROR "Could not locate IOKit framework")
 endif()
-APPLE_LIB(${iokit_lib})
+APPLE_LIB(${IOKit_lib})

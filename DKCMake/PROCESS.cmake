@@ -72,6 +72,7 @@ foreach(plugin ${dkdepend_list})
 	include(${plugin_path}/DKMAKE.cmake)
 	
 	#NOTE: we won't have the library paths to remove until we've run DKCMake.cmake for the library
+	# We want to to use this to refresh 3rdParty Plugins
 	#if(REBUILDALL)
 		#foreach(the_lib ${LIBLIST})
 		#	DKREMOVE(${the_lib})

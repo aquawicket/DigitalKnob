@@ -2,10 +2,10 @@ if(NOT MAC)
 	return()
 endif()
 
-# https://developer.apple.com/documentation/forcefeedback
+# https://developer.apple.com/documentation/ForceFeedback
 
-FIND_LIBRARY(forcefeedback_lib ForceFeedback)
-if(NOT forcefeedback_lib)
+FIND_LIBRARY(ForceFeedback_lib ForceFeedback)
+if(NOT ForceFeedback_lib)
 	message(FATAL_ERROR "Could not locate ForceFeedback framework")
 endif()
-APPLE_LIB(${forcefeedback_lib})
+APPLE_LIB(${ForceFeedback_lib})

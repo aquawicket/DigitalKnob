@@ -4,8 +4,8 @@ endif()
 
 # https://developer.apple.com/documentation/corefoundation
 
-FIND_LIBRARY(corefoundation_lib CoreFoundation)
-if(NOT corefoundation_lib)
+FIND_LIBRARY(CoreFoundation_lib CoreFoundation)
+if(NOT CoreFoundation_lib)
 	message(FATAL_ERROR "Could not locate CoreFoundation framework")
 endif()
-APPLE_LIB(${corefoundation_lib})
+APPLE_LIB(${CoreFoundation_lib})
