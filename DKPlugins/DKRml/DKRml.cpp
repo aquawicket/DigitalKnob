@@ -249,7 +249,7 @@ bool DKRml::LoadUrl(const DKString& url){
 	DKINFO("DKRml::LoadUrl(): workingPath: " + workingPath + "\n");
 	DKINFO("DKRml::LoadUrl(): href: " + href + "\n");
 	//get the protocol
-	int n = _url.find(":");
+	unsigned long n = _url.find(":");
 	protocol = _url.substr(0,n);
 	DKINFO("DKRml::LoadUrl(): protocol: "+protocol+"\n");
 	found = _url.rfind("/");
