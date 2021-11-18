@@ -370,18 +370,27 @@ function(DKLINKDIR path)
 		link_directories(${item})
 	endforeach()
 endfunction()
+		
 
-function(dk_getCurrentDirectory)
-	message(STATUS "dk_getCurrentDirectory")
-	if(CMAKE_HOST_UNIX)
-		UNIX_COMMAND("pwd")
-	endif()
-endfunction()
+#function(dk_getCurrentDirectory result)
+#	if(CMAKE_HOST_WIN32)
+#		execute_process(COMMAND echo "hello world" ECHO_OUTPUT_VARIABLE output WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
+#	else()
+#		execute_process(COMMAND pwd ECHO_OUTPUT_VARIABLE output WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
+#	endif()
+#	execute_process(COMMAND timeout /t 2 /nobreak WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})  ##wait 2 seconds for the stdout to flush
+#	message("output = ${output}")
+#	set(${result} ${output} PARENT_SCOPE)
+#endfunction()
+
 
 function(dk_makeDirectory path)
 	message(STATUS "dk_makeDirectory(${path})")
 	
+	make_directory(${path})  #requires full path
 	return()
+	
+	#build missing directory parents recursivley
 	if(CMAKE_HOST_APPLE)
 		file(RELATIVE_PATH rel_path "${DIGITALKNOB}/DK" ${path})
 		message(STATUS "RELATIVE_PATH(${path}) OF (${DIGITALKNOB}/DK) =-> ${rel_path}")
@@ -451,7 +460,7 @@ endfunction()
 
 function(DKREFRESH_ICONS)
 	DKEXECUTE_PROCESS(ie4uinit.exe -ClearIconCache)
-	##ie4uinit.exe -show   ##Windows 10
+	DKEXECUTE_PROCESS(ie4uinit.exe -show)   ##Windows 10
 endfunction()
 
 # For archive files such as libraries and assets, the arguments are:  The download src_path, the name of its _DKIMPORTS folder, The name given to the installed 3rdParty/folder  
@@ -579,6 +588,7 @@ function(dk_validatePath path result)
 	set(${result} ${path} PARENT_SCOPE)
 endfunction()
 
+
 function(dk_getShortPath path result)
 	if(CMAKE_HOST_WIN32)
 		execute_process(COMMAND ${DKCMAKE}/getShortPath.cmd ${path} OUTPUT_VARIABLE path WORKING_DIRECTORY ${DIGITALKNOB})
@@ -588,14 +598,15 @@ function(dk_getShortPath path result)
 	endif()
 endfunction()
 
-function(DKEXECUTE_PROCESS fullcmnd)
+
+
+function(DKEXECUTE_PROCESS command)
 	#math(EXPR index "${ARGC}-1")
 	#list(GET ARGV ${index} CDIR)
 	message(STATUS "")
-	message(STATUS "*** Commands ***")
+	message(STATUS "*** Command ***")
 	##message(STATUS ">  cd ${CDIR}")
-	#set(cmnd ${fullcmnd} ${ARGN})
-	set(cmnd "${ARGV}")
+	#set(cmnd ${command} ${ARGN})
 	#string(REPLACE "COMMAND" "" var2 "${cmnd}")
 	#string(REPLACE "command" "" var3 "${var2}")
 	#string(REPLACE "WORKING_DIRECTORY" " " var4 "${var3}")
@@ -603,20 +614,21 @@ function(DKEXECUTE_PROCESS fullcmnd)
 	#string(REPLACE "${CDIR}" " " var6 "${var5}")
 	#string(REPLACE ";" " " cmndstr "${var6}")
 	#message(STATUS "> ${cmndstr}")
-	message(STATUS "> ${cmnd}")
+	message(STATUS "> ${ARGV}")
 	message(STATUS "")
 	if(CMAKE_HOST_WIN32)
-		execute_process(COMMAND cmd /c ${cmnd} RESULT_VARIABLE result)
+		execute_process(COMMAND cmd /c ${cmnd} RESULT_VARIABLE result ERROR_VARIABLE error)
 	else()
-		execute_process(COMMAND ${cmnd} RESULT_VARIABLE result)
+		execute_process(COMMAND ${cmnd} RESULT_VARIABLE result ERROR_VARIABLE error)
 	endif()
 	if(NOT ${result} EQUAL 0)
 		if(CMAKE_HOST_WIN32)
 			execute_process(COMMAND timeout /t 2 /nobreak OUTPUT_QUIET WORKING_DIRECTORY ${DIGITALKNOB}) ##wait 2 seconds for the stdout to flush before printing error
 		else()
-			execute_process(COMMAND sleep 2 WORKING_DIRECTORY ${DIGITALKNOB}) ##wait for unix
+			execute_process(COMMAND sleep 2 WORKING_DIRECTORY ${DIGITALKNOB}) ##wait 2 seconds for the stdout to flush before printing error
 		endif()
-		message(FATAL_ERROR "\n\n *** DKEXECUTE_PROCESS(${cmnd}): -> returned ${result} *** \n\n")
+		message(FATAL_ERROR "ERROR:  ${ARGV}: -> returned ${result}")
+		message(FATAL_ERROR "error:  ${error}")
 	endif()
 endfunction()
 

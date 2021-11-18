@@ -5,5 +5,6 @@ include(${DKCMAKE}/FUNCTIONS.cmake)
 message(STATUS "Loaded Functions.cmake\n")
 
 
-message(STATUS "dk_getCurrentDirectory()")
-dk_getCurrentDirectory()
+
+dk_getCurrentDirectory(result)
+message(STATUS "result = ${result}")
