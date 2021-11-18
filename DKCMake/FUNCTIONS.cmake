@@ -627,8 +627,9 @@ function(DKEXECUTE_PROCESS command)
 		else()
 			execute_process(COMMAND sleep 2 WORKING_DIRECTORY ${DIGITALKNOB}) ##wait 2 seconds for the stdout to flush before printing error
 		endif()
-		message(STATUS "ERROR:  ${ARGV}: -> returned ${result}")
-		message(FATAL_ERROR "error:  ${error}")
+		message("\n\n\n")
+		message(FATAL_ERROR "ERROR:${result} - ${error}")
+		message("\n\n\n")
 	endif()
 endfunction()
 
