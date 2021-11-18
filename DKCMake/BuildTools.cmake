@@ -58,7 +58,7 @@ endif()
 # install name tool: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/install_name_tool
 # Autoconf target triple: x86_64-apple-ios
 
-#AUTOTOOLS ../../configure for iOS
+#AUTOTOOLS
 DKSET(IOS_ARCH x86_64)
 DKSET(IOS_DARWIN darwin20.6.0)
 DKSET(IOS_MIN_SDK_VERSION 13.0)
@@ -117,11 +117,7 @@ if(CMAKE_HOST_APPLE)
 	
 	DKSET(DKCONFIGURE_MAC64 ../../configure
 	--disable-shared
-	--enable-static
-	--disable-shared
-	--enable-static
-	CC=${CLANG}
-	CXX=${CLANGXX})
+	--enable-static)
 	
 	DKSET(DKCONFIGURE_IOS64 ../../configure
 	--disable-shared
