@@ -83,10 +83,6 @@ if(CMAKE_HOST_APPLE)
 
 	# Mac 64
 	DKSET(DKCMAKE_MAC64 ${CMAKE_EXE} -G "Xcode"
-	--disable-shared
-	--enable-static
-	CC=${CLANG}
-	CXX=${CLANGXX}
 	-DCMAKE_OSX_ARCHITECTURES=x86_64 
 	-DBUILD_SHARED_LIBS=OFF) 
 
@@ -121,7 +117,11 @@ if(CMAKE_HOST_APPLE)
 	
 	DKSET(DKCONFIGURE_MAC64 ../../configure
 	--disable-shared
-	--enable-static)
+	--enable-static
+	--disable-shared
+	--enable-static
+	CC=${CLANG}
+	CXX=${CLANGXX})
 	
 	DKSET(DKCONFIGURE_IOS64 ../../configure
 	--disable-shared
