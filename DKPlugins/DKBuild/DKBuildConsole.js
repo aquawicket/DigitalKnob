@@ -3,7 +3,6 @@ var working = true
 function DKBuildConsole_init() {
     CPP_DK_Create("DKBuild/DKBuild.js")
 	CPP_DK_Create("DKGit/DKGit.js")
-	
 	/*
 	let contents = CPP_DKFile_DirectoryContents(DIGITALKNOB)
 	let files = contents.split(",")
@@ -16,10 +15,8 @@ function DKBuildConsole_init() {
 		}
 	}
 	*/
-	
 	//console.log(DKGit_DiffCount())
 	//DKGit_CheckForDiff()
-    
 	while (working)
         DKBuildConsole_Process()
 }
@@ -29,253 +26,292 @@ function DKBuildConsole_end() {
 }
 
 function DKBuildConsole_ChooseUpdate() {
-while (UPDATE === ""){
-	UPDATE = "1"
-    console.log("\n")
-    console.log("**** Update DigitalKnob ??? ****")
-    console.log("Y. Update")
-    console.log("C. Commit")
-    console.log("R. Reset Apps and Plugins")
-    console.log("X. Reset Everything")
-	const assets = CPP_DKAssets_LocalAssets()
-	if(CPP_DKFile_Exists(assets+"cache.txt")){
-		const cache = CPP_DKFile_FileToString(assets+"cache.txt")
-		if(cache){
-			const cache_json = JSON.parse(cache)
-			console.log("ENTER: "+cache_json.APP+" -> "+cache_json.OS+" -> "+cache_json.TYPE+" -> "+cache_json.LEVEL)
+	while (UPDATE === ""){
+		console.log("\n")
+		console.log("**** Update DigitalKnob ??? ****")
+		console.log("Y. Update")
+		console.log("C. Commit")
+		console.log("R. Reset Apps and Plugins")
+		console.log("X. Reset Everything")
+		const assets = CPP_DKAssets_LocalAssets()
+		if(CPP_DKFile_Exists(assets+"cache.txt")){
+			const cache = CPP_DKFile_FileToString(assets+"cache.txt")
+			if(cache){
+				const cache_json = JSON.parse(cache)
+				console.log("ENTER: "+cache_json.APP+" -> "+cache_json.OS+" -> "+cache_json.TYPE+" -> "+cache_json.LEVEL)
+			}
+		}
+		console.log("any other key to Skip")
+		console.log("0. Back")
+		console.log("ESC. exit")
+		console.log("\n")
+		
+		//UNIX FIX
+		var key = 10
+		while(key === 10 || key === 0)
+			key = CPP_DK_GetKey()
+		
+		switch(key){
+			//Esc
+			case 27:
+				CPP_DK_Exit()
+				UPDATE = ""//Back
+				break
+			//Spacebar
+			case 13:
+				OS = cache_json.OS
+				APP = cache_json.APP
+				TYPE = cache_json.TYPE
+				LEVEL = cache_json.LEVEL
+				UPDATE = "1"
+				break
+			//y key
+			case 121:
+				CPP_DK_Create("DKGit/DKGit.js")
+				DKGit_GitUpdate()
+				UPDATE = "1"
+				break
+			//c key
+			case 99:
+				CPP_DK_Create("DKGit/DKGit.js")
+				DKGit_GitCommit()
+				UPDATE = "1"
+				break
+			//r key
+			case 114:
+				DKBuild_ResetAppsPlugins()
+				DKGit_GitUpdate()
+				UPDATE = "1"
+				break
+			//x key
+			case 120:
+				DKBuild_Reset3rdParty()
+				DKBuild_ResetAppsPlugins()
+				DKGit_GitUpdate()
+				UPDATE = "1"
+				break
+			default:
+				break
+				//console.error("INVALID OPTION")
 		}
 	}
-    console.log("any other key to Skip")
-	console.log("0. Back")
-    console.log("ESC. exit")
-    console.log("\n")
-	
-	//UNIX FIX
-	var key = 10
-    while(key === 10 || key === 0)
-        key = CPP_DK_GetKey()
-	
-    console.log("key = "+key)
-	//Esc
-	if (key === 27){
-        CPP_DK_Exit()
-		//UPDATE = ""
-	}
-	//Spacebar
-	else if(key === 13){
-		OS = cache_json.OS
-	    APP = cache_json.APP
-		TYPE = cache_json.TYPE
-		LEVEL = cache_json.LEVEL
-		//UPDATE = ""
-	}
-	//y key
-    else if (key === 121) {
-        CPP_DK_Create("DKGit/DKGit.js")
-        DKGit_GitUpdate()
-		//UPDATE = ""
-    }
-	//c key
-    else if (key === 99) {
-        CPP_DK_Create("DKGit/DKGit.js")
-        DKGit_GitCommit()
-		//UPDATE = ""
-    }
-	//r key
-    else if (key === 114) { 
-        DKBuild_ResetAppsPlugins()
-        DKGit_GitUpdate()
-		//UPDATE = ""
-    }
-	//x key
-    else if (key === 120) {
-        DKBuild_Reset3rdParty()
-        DKBuild_ResetAppsPlugins()
-        DKGit_GitUpdate()
-		//UPDATE = ""
-    }
-}
 }
 
 function DKBuildConsole_SelectOs() {
-while (OS === ""){
-	const OSes = [];
-	if(CPP_DK_GetOS() === "Windows"){
-		OSes.push("win32")
-		OSes.push("win64")
-		OSes.push("android32")
-		OSes.push("android64")
-	}
-	if(CPP_DK_GetOS() === "Mac"){
-		//OSes.push("mac32")
-		OSes.push("mac64")
-		//OSes.push("ios32")
-		OSes.push("ios64")
-		//OSes.push("iossim32")
-		OSes.push("iossim64")
-	}
-	if(CPP_DK_GetOS() === "Linux"){
-		OSes.push("linux32")
-		OSes.push("linux64")
-	}
-	if(CPP_DK_GetOS() === "Raspberry"){
-		OSes.push("raspberry32")
-		//OSes.push("raspberry64")
-	}
-	
-	console.log("\n")
-    console.log("**** SELECT OS TO BUILD ****")
-	for(let n=1; n<OSes.length+1; n++){
-		console.log(n+". "+OSes[n-1])	
-	}
+	while (OS === ""){
+		const OSes = [];
+		if(CPP_DK_GetOS() === "Windows"){
+			//if(CPP_DK_GetArch() === "i686")
+				OSes.push("win32")
+				OSes.push("win64")
+			//if(CPP_DK_GetArch() === "x86_64")
+				OSes.push("android32")
+				OSes.push("android64")
+		}
+		if(CPP_DK_GetOS() === "Mac"){
+			//OSes.push("mac32")
+			OSes.push("mac64")
+			//OSes.push("ios32")
+			OSes.push("ios64")
+			//OSes.push("iossim32")
+			OSes.push("iossim64")
+		}
+		if(CPP_DK_GetOS() === "Linux"){
+			OSes.push("linux32")
+			OSes.push("linux64")
+		}
+		if(CPP_DK_GetOS() === "Raspberry"){
+			OSes.push("raspberry32")
+			//OSes.push("raspberry64")
+		}
+		
+		console.log("\n")
+		console.log("**** SELECT OS TO BUILD ****")
+		for(let n=1; n<OSes.length+1; n++){
+			console.log(n+". "+OSes[n-1])	
+		}
 
-	console.log("0. Back")
-    console.log("ESC. exit")
-    console.log("\n")
-    
-	//UNIX FIX
-	var key = 10
-    while(key === 10 || key === 0)
-        key = CPP_DK_GetKey()
-	
-	//console.log("key = "+key)
-    if (key === 27) //Esc
-        CPP_DK_Exit()
-	else if (key === 49) //1
-		OS = OSes[0]
-	else if (key === 50) //2	
-		OS = OSes[1]
-	else if (key === 51) //3
-		OS = OSes[2]
-	else if (key === 52) //4	
-		OS = OSes[3]
-	else if (key === 53) //5	
-		OS = OSes[4]
-	else if (key === 54) //6	
-		OS = OSes[5]
-	else if (key === 55) //7	
-		OS = OSes[6]
-	else if (key === 56) //8	
-		OS = OSes[7]
-	else if (key === 57) //9	
-		OS = OSes[8]
-e	else if (key === 58){ //0
-		UPDATE === ""
-		break();
+		console.log("0. Back")
+		console.log("ESC. exit")
+		console.log("\n")
+		
+		//UNIX FIX
+		var key = 10
+		while(key === 10 || key === 0)
+			key = CPP_DK_GetKey()
+		
+		switch(key){
+			case 58: //0
+				APP = "" //Back
+				break
+			case 27: //Esc
+				OS = "" 
+				CPP_DK_Exit()
+				break
+			case 49: //1
+				OS = OSes[0]
+				break
+			case 50: //2	
+				OS = OSes[1]
+				break
+			case 51: //3
+				OS = OSes[2]
+				break
+			case 52: //4	
+				OS = OSes[3]
+				break
+			case 53: //5	
+				OS = OSes[4]
+				break
+			case 54: //6	
+				OS = OSes[5]
+				break
+			case 55: //7	
+				OS = OSes[6]
+				break
+			case 56: //8	
+				OS = OSes[7]
+				break
+			case 57: //9	
+				OS = OSes[8]
+				break
+			case 58: //0
+				OS = OSes[9]
+				break
+			default:
+				OS = ""
+				console.error("INVALID OPTION")
+				break
+		}
 	}
-	console.error("INVALID OPTION")
-	UPDATE === ""
-}
 	console.log("###########################")
 	console.log(OS + " ->")
 	console.log("###########################")
 }
 
 function DKBuildConsole_SelectApp() {
-while (APP === "")
-    console.log("**** SELECT APP TO BUILD ****")
-	console.log("F1. ALL APPS")
-    for (var i = 0; i < APP_LIST.length; ++i)
-        console.log(DKBuildConsole_TranslateOption(i) + ":" + APP_LIST[i] + "")
-	console.log("0. Back")
-    console.log("ESC. exit")
-    console.log("\n")
-    
-	//UNIX FIX
-	var key = 10
-    while(key === 10 || key === 0)
-        key = CPP_DK_GetKey()
-	
-	if (key === 58){ //0
-		OS === ""
-		break();
+	while (APP === ""){
+		console.log("**** SELECT APP TO BUILD ****")
+		console.log("F1. ALL APPS")
+		for (var i = 0; i < APP_LIST.length; ++i)
+			console.log(DKBuildConsole_TranslateOption(i) + ":" + APP_LIST[i] + "")
+		console.log("0. Back")
+		console.log("ESC. exit")
+		console.log("\n")
+		
+		//UNIX FIX
+		var key = 10
+		while(key === 10 || key === 0)
+			key = CPP_DK_GetKey()
+		
+		switch(key){
+			case 58: //0
+				OS = "" //Back
+				break
+			case 27:  //Esc
+				APP = ""
+				CPP_DK_Exit()
+				DKBuildConsole_KeyToApp(key)
+				break
+			default:
+				APP = ""
+				console.error("INVALID OPTION")
+				break
+		}
 	}
-    if (key === 27) //Esc
-        CPP_DK_Exit()
-    DKBuildConsole_KeyToApp(key)
-    if (APP === "")
-        console.error("INVALID OPTION")
-}
 	console.log("###########################")
 	console.log(OS + " -> " + APP + " ->")
 	console.log("###########################")
 }
 
 function DKBuildConsole_SelectType() {
-while(TYPE === ""){
-    console.log("**** SELECT BUILD TYPE ****")
-    console.log("1. Debug")
-    console.log("2. Release")
-	if(CPP_DK_GetOS() !== "Linux" && CPP_DK_GetOS() !== "Raspberry"){
-		console.log("3. All")
+	while(TYPE === ""){
+		console.log("**** SELECT BUILD TYPE ****")
+		console.log("1. Debug")
+		console.log("2. Release")
+		if(CPP_DK_GetOS() !== "Linux" && CPP_DK_GetOS() !== "Raspberry")
+			console.log("3. All")
+		console.log("0. Back")
+		console.log("ESC. exit")
+		console.log("\n")
+		
+		//UNIX FIX
+		var key = 10
+		while(key === 10 || key === 0)
+			key = CPP_DK_GetKey()
+		
+		switch(key){
+			case 58: //0
+				APP = "" //Back
+				break
+			case 27:
+				TYPE = ""
+				CPP_DK_Exit()
+				break
+			case 49:
+				TYPE = "Debug"
+				break
+			case 50:
+				TYPE = "Release"
+				break
+			case 51:
+				TYPE = "ALL"
+				break
+			default:
+				TYPE = ""
+				console.error("INVALID OPTION")
+				break
+		}
 	}
-	console.log("0. Back")
-    console.log("ESC. exit")
-    console.log("\n")
-    
-	//UNIX FIX
-	var key = 10
-    while(key === 10 || key === 0)
-        key = CPP_DK_GetKey()
-	
-	if (key === 58){ //0
-		APP === ""
-		break();
-	}
-    if (key === 27)
-        CPP_DK_Exit()
-    else if (key === 49)
-        TYPE = "Debug"
-    else if (key === 50)
-        TYPE = "Release"
-    else if (key === 51)
-        TYPE = "ALL"
-    else
-        console.error("INVALID OPTION")
-}
 }
 
 function DKBuildConsole_Process() {
-	UPDATE = ""
-    OS = ""
-    APP = ""
-    TYPE = ""
-    LEVEL = "RebuildAll"
-	DKBuildConsole_ChooseUpdate(
-	if (!CPP_DKFile_Exists(DIGITALKNOB)) {
-		console.error("ERROR: can't find " + DIGITALKNOB + " ")
-		CPP_DK_GetKey()
-		CPP_DK_Exit()
-	}
-	DKBuildConsole_SelectOs()
-	if(UPDATE === "")continue
-	
-	DKBuild_GetAppList()
-	if(APP === "")continue
-	
-	DKBuildConsole_SelectApp()
-	if(APP === "")continue
-	
-	DKBuildConsole_SelectType()
-	if(TYPE === "")continue
+	while(TYPE == ""){
+		UPDATE = ""
+		OS = ""
+		APP = ""
+		TYPE = ""
+		LEVEL = "RebuildAll"
+		DKBuildConsole_ChooseUpdate()
+		//if(!CPP_DKFile_Exists( ${DIGITALKNOB} ) ){
+		//	console.error("ERROR: can't find " + DIGITALKNOB + " ")
+		//	CPP_DK_GetKey()
+		//	CPP_DK_Exit()
+		//}
+		DKBuildConsole_SelectOs()
+		if(UPDATE !== "")
+			continue
 		
+		DKBuild_GetAppList()
+		if(APP === "")
+			continue
+		
+		DKBuildConsole_SelectApp()
+		if(APP === "")
+			continue
+		
+		DKBuildConsole_SelectType()
+		if(TYPE === "")
+			continue
+			
 		//console.log("Press any key to Build")
 		//CPP_DK_GetKey()
-	
-	if(APP == "ALLAPPS"){
-		for (var i = 0; i < APP_LIST.length; ++i){
-		    APP = APP_LIST[i]
+		
+		if(APP == "ALLAPPS"){
+			for (var i = 0; i < APP_LIST.length; ++i){
+				APP = APP_LIST[i]
+				console.log("###########################")
+				console.log(OS + " -> " + APP + " -> " + TYPE + "")
+				console.log("###########################")
+				DKBuild_DoResults()
+			}
+		}
+		else{
 			console.log("###########################")
 			console.log(OS + " -> " + APP + " -> " + TYPE + "")
 			console.log("###########################")
 			DKBuild_DoResults()
 		}
-	}
-	else{
-		console.log("###########################")
-		console.log(OS + " -> " + APP + " -> " + TYPE + "")
-		console.log("###########################")
-		DKBuild_DoResults()
 	}
 }    
 
