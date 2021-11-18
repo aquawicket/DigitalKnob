@@ -67,9 +67,10 @@ DKSET(CLANG ${XCODE_DEVROOT}/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang)
 DKSET(CLANGXX ${XCODE_DEVROOT}/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++)
 DKSET(IOS_LIBTOOL ${XCODE_DEVROOT}/Toolchains/XcodeDefault.xctoolchain/usr/bin/libtool)
 DKSET(IOS_HOST ${IOS_ARCH}-apple-${IOS_DARWIN})
-DKSET(IOS_SYSROOT ${XCODE_DEVROOT}/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhone15.0.sdk)
-DKSET(IOS_CFLAGS "-arch ${IOS_ARCH} -mios-simulator-version-min=${IOS_MIN_SDK_VERSION} -isysroot ${IOS_SYSROOT}")
-DKSET(IOS_CXXFLAGS "-arch ${IOS_ARCH} -mios-simulator-version-min=${IOS_MIN_SDK_VERSION} -isysroot ${IOS_SYSROOT}")
+DKSET(IOSSIM_HOST ${IOS_ARCH}-apple-${IOS_DARWIN})
+DKSET(IOS_SYSROOT ${XCODE_DEVROOT}/Platforms/iPhone.platform/Developer/SDKs/iPhone15.0.sdk)
+DKSET(IOS_CFLAGS "-arch ${IOS_ARCH} -mios-version-min=${IOS_MIN_SDK_VERSION} -isysroot ${IOS_SYSROOT}")
+DKSET(IOS_CXXFLAGS "-arch ${IOS_ARCH} -miosversion-min=${IOS_MIN_SDK_VERSION} -isysroot ${IOS_SYSROOT}")
 DKSET(IOSSIM_SYSROOT ${XCODE_DEVROOT}/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator15.0.sdk)
 DKSET(IOSSIM_CFLAGS "-arch ${IOS_ARCH} -mios-simulator-version-min=${IOS_MIN_SDK_VERSION} -isysroot ${IOSSIM_SYSROOT}")
 DKSET(IOSSIM_CXXFLAGS "-arch ${IOS_ARCH} -mios-simulator-version-min=${IOS_MIN_SDK_VERSION} -isysroot ${IOSSIM_SYSROOT}")
@@ -117,7 +118,12 @@ if(CMAKE_HOST_APPLE)
 	
 	DKSET(DKCONFIGURE_MAC64 ../../configure
 	--disable-shared
-	--enable-static)
+	--enable-static
+	--target=x86_64-apple-darwin
+	CC=${CLANG}
+	CXX=${CLANGXX}
+	CFLAGS=${IOS_CFLAGS}
+	CXXFLAGS=${IOS_CXXFLAGS})
 	
 	DKSET(DKCONFIGURE_IOS64 ../../configure
 	--disable-shared
@@ -131,7 +137,7 @@ if(CMAKE_HOST_APPLE)
 	DKSET(DKCONFIGURE_IOSSIM64 ../../configure
 	--disable-shared
 	--enable-static
-	--host ${IOS_HOST}
+	--host ${IOSSIM_HOST}
 	CC=${CLANG}
 	CXX=${CLANGXX}
 	CFLAGS=${IOSSIM_CFLAGS}

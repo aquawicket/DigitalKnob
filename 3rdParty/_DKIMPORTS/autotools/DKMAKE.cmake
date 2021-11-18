@@ -1,6 +1,7 @@
 # http://autogen.sourceforge.net
 # https://macappstore.org/autogen/
 # https://www.xmodulo.com/fix-failed-to-run-aclocal.html
+# https://thoughtbot.com/blog/the-magic-behind-configure-make-make-install
 
 if(CMAKE_HOST_APPLE)
 	MAC_COMMAND(brew install autogen)
