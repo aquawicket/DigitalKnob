@@ -372,13 +372,16 @@ function(DKLINKDIR path)
 endfunction()
 
 function(dk_getCurrentDirectory)
+	message(STATUS "dk_getCurrentDirectory")
 	if(CMAKE_HOST_UNIX)
-	
+		UNIX_COMMAND("pwd")
 	endif()
 endfunction()
 
 function(dk_makeDirectory path)
 	message(STATUS "dk_makeDirectory(${path})")
+	
+	return()
 	if(CMAKE_HOST_APPLE)
 		file(RELATIVE_PATH rel_path "${DIGITALKNOB}/DK" ${path})
 		message(STATUS "RELATIVE_PATH(${path}) OF (${DIGITALKNOB}/DK) =-> ${rel_path}")
