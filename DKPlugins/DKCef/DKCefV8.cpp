@@ -227,7 +227,7 @@ bool DKCefV8::GetFps(CefArgs args, CefReturn retval){
 
 bool DKCefV8::GetFrames(CefArgs args, CefReturn retval){
 	DKDEBUGFUNC(args, retval);
-	long frames;
+	unsigned long frames;
 	if(!DKUtil::GetFrames(frames)){ return false; }
 	if(!retval->SetInt(0, (int)frames)){ return false; }
 	return true;
