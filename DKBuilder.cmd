@@ -44,7 +44,8 @@ if NOT exist "%GIT%" (
 	::if NOT "%ERRORLEVEL%" == "0" goto error
 	"%DKDOWNLOAD%\Git-2.30.1-32-bit.exe"
 	::if NOT "%ERRORLEVEL%" == "0" goto error
-	goto gitupdate
+	if exist "C:\Program Files\Git\bin\git.exe" set "GIT=C:\Program Files\Git\bin\git.exe"
+	if exist "C:\Program Files (x86)\Git\bin\git.exe" set "GIT=C:\Program Files (x86)\Git\bin\git.exe"
 )
 if NOT exist "%DKPATH%" "%GIT%" clone https://github.com/aquawicket/DigitalKnob.git "%DKPATH%"
 ::if NOT "%ERRORLEVEL%" == "0" goto error
@@ -64,7 +65,8 @@ if NOT exist "%GIT%" (
 	::if NOT "%ERRORLEVEL%" == "0" goto error
 	"%DKDOWNLOAD%\Git-2.30.1-32-bit.exe"
 	::if NOT "%ERRORLEVEL%" == "0" goto error
-	goto gitcommit
+	if exist "C:\Program Files\Git\bin\git.exe" set "GIT=C:\Program Files\Git\bin\git.exe"
+	if exist "C:\Program Files (x86)\Git\bin\git.exe" set "GIT=C:\Program Files (x86)\Git\bin\git.exe"
 )
 cd %DKPATH%
 "%GIT%" config user.email "aquawicket@hotmail.com"
@@ -167,7 +169,8 @@ if NOT exist "%CMAKE%" (
 	::if NOT "%ERRORLEVEL%" == "0" goto error
 	"%DKDOWNLOAD%\cmake-3.21.1-windows-i386.msi"
 	::if NOT "%ERRORLEVEL%" == "0" goto error
-	goto build
+	if exist "C:\Program Files\CMake\bin\cmake.exe" set "CMAKE=C:\Program Files\CMake\bin\cmake.exe"
+	if exist "C:\Program Files (x86)\CMake\bin\cmake.exe" set "CMAKE=C:\Program Files (x86)\CMake\bin\cmake.exe"
 )
 if exist "C:\Program Files\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe" set "MSBUILD=C:\Program Files\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe"
 if exist "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe" set "MSBUILD=C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe"
@@ -179,7 +182,8 @@ if NOT exist "%MSBUILD%" (
 	::if NOT "%ERRORLEVEL%" == "0" goto error
 	"%DKDOWNLOAD%\vs_Community.exe"
 	::if NOT "%ERRORLEVEL%" == "0" goto error
-	goto build
+	if exist "C:\Program Files\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe" set "MSBUILD=C:\Program Files\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe"
+	if exist "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe" set "MSBUILD=C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe"
 )
 set "APP_PATH=%DKPATH%\DKApps\%APP%"
 ECHO %APP_PATH%
