@@ -179,6 +179,7 @@ function DKBuildConsole_SelectOs() {
 			default:
 				OS = ""
 				console.error("INVALID OPTION")
+				console.log("key = "+key)
 				break
 		}
 	}
@@ -212,8 +213,10 @@ function DKBuildConsole_SelectApp() {
 				break
 			default:
 				DKBuildConsole_KeyToApp(key)
-				if(APP === "")
+				if(APP === ""){
 					console.error("INVALID OPTION")
+					console.log("key = "+key)
+				}
 				break
 		}
 	}
@@ -258,6 +261,7 @@ function DKBuildConsole_SelectType() {
 			default:
 				TYPE = ""
 				console.error("INVALID OPTION")
+				console.log("key = "+key)
 				break
 		}
 	}
