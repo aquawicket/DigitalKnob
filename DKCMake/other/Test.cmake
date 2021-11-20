@@ -6,5 +6,4 @@ message(STATUS "Loaded Functions.cmake\n")
 
 
 
-dk_getCurrentDirectory(result)
-message(STATUS "result = ${result}")
+include(C:/Users/Administrator/digitalknob/DK/3rdParty/_DKIMPORTS/far/DKMAKE.cmake)
