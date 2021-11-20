@@ -10,6 +10,7 @@ endif()
 ### INSTALL ###
 #if(NOT EXISTS ${XQUARTZ})
 if(MAC)
+	DKINCLUDE(/opt/X11/include)
 	DKCOMMAND(brew install --cask xquartz)
 endif()
 #endif()
