@@ -212,6 +212,7 @@ if(LINUX) # Disabled for Linux targets
 	DKDISABLE(freealut)
 	DKDISABLE(freealut-master)
 	DKDISABLE(ghostscript)
+	DKDISABLE(glew)
 	DKDISABLE(imagemagick)
 	DKDISABLE(jdk)
 	DKDISABLE(leptonica)
