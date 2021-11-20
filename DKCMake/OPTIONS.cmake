@@ -223,7 +223,7 @@ if(WIN_32)
 			DKSET(CMAKE_CXX_FLAGS_RELEASE "/MD /O2 /Ob2 /DNDEBUG")
 		endif()
 		DKSET(FLAGS "/W3 /nologo /Zm500 /EHsc /GR /D_WIN32_WINNT=0x0600 /D_USING_V110_SDK71_ /Zc:__cplusplus $<$<CONFIG:Debug>:/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG> $<$<CONFIG:Release>:/MT /O2 /Ob2 /DNDEBUG>")
-	#endif()
+	#endif()	
 endif()
 
 if(WIN_64)
