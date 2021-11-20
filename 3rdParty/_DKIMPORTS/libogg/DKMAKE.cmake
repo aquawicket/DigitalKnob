@@ -38,8 +38,8 @@ DKSET(OGG_APPLE_DEBUG CFLAGS=-I${OGG}/include -I${OGG}/${OS}/${DEBUG_DIR}/includ
 DKSET(OGG_APPLE_RELEASE CFLAGS=-I${OGG}/include -I${OGG}/${OS}/${RELEASE_DIR}/include --with-ogg-libraries=${OGG}/${OS}/${RELEASE_DIR}/src/.libs)
 DKSET(OGG_LINUX_DEBUG CPPFLAGS=-I${OGG}/${OS}/${DEBUG_DIR}/include)
 DKSET(OGG_LINUX_RELEASE CPPFLAGS=-I${OGG}/${OS}/${RELEASE_DIR}/include)
-DKSET(OGG_RASPBERRY_DEBUG CFLAGS=-I${OGG}/include -I${OGG}/${OS}/${DEBUG_DIR}/include --with-ogg-libraries=${OGG}/${OS}/${DEBUG_DIR}/src/.libs)
-DKSET(OGG_RASPBERRY_RELEASE CFLAGS=-I${OGG}/include -I${OGG}/${OS}/${RELEASE_DIR}/include --with-ogg-libraries=${OGG}/${OS}/${RELEASE_DIR}/src/.libs)
+DKSET(OGG_RASPBERRY_DEBUG CPPFLAGS=-I${OGG}/${OS}/${DEBUG_DIR}/include)
+DKSET(OGG_RASPBERRY_RELEASE CPPFLAGS=-I${OGG}/${OS}/${RELEASE_DIR}/include)
 DKSET(OGG_ANDROID_DEBUG CFLAGS=-I${OGG}/include -I${OGG}/${OS}/${DEBUG_DIR}/include --with-ogg-libraries=${OGG}/${OS}/${DEBUG_DIR}/src/.libs)
 DKSET(OGG_ANDROID_RELEASE CFLAGS=-I${OGG}/include -I${OGG}/${OS}/${RELEASE_DIR}/include --with-ogg-libraries=${OGG}/${OS}/${RELEASE_DIR}/src/.libs)
 
