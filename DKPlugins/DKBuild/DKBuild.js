@@ -9,7 +9,8 @@ let DIGITALKNOB = ""
 let DKDOWNLOAD = ""
 let CMAKE = ""
 let ANDROIDNDK = ""
-let VISUALSTUDIO_VERSION = "2019"
+//let VISUALSTUDIO_VERSION = "2019"
+let VISUALSTUDIO_VERSION = "2022"
 let VISUALSTUDIO = ""
 let MSBUILD = ""
 let GCC = ""
@@ -66,7 +67,7 @@ function DKBuild_init(){
 		}
 		if(CPP_DK_GetOSArchitecture() === "64"){
 			CMAKE = "C:/Program Files (x86)/CMake/bin/cmake.exe"
-			VISUALSTUDIO = "C:/Program Files (x86)/Microsoft Visual Studio/"+VISUALSTUDIO_VERSION
+			VISUALSTUDIO = "C:/Program Files/Microsoft Visual Studio/"+VISUALSTUDIO_VERSION
 		}
 		//CMAKE = CPP_DKFile_GetShortName(CMAKE)
 		CMAKE = DKBuild_GetShortPath(CMAKE)
