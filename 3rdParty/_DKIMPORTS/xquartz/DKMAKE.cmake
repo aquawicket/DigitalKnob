@@ -10,7 +10,7 @@ endif()
 ### INSTALL ###
 #if(NOT EXISTS ${XQUARTZ})
 if(MAC)
-	DKCOMMAND("brew install --cask xquartz")
+	DKCOMMAND(brew install --cask xquartz)
 endif()
 #endif()
 
