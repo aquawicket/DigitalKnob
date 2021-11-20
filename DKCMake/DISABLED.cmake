@@ -134,7 +134,7 @@ if(MAC)  # Disabled on Mac host machines
 	DKDISABLE(libvorbis)
 	DKDISABLE(libwebp)
 	DKDISABLE(libwebsockets)
-	DKDISABLE(libx11-dev)
+	#DKDISABLE(libx11-dev)
 	DKDISABLE(libxml2)
 	DKDISABLE(libxrandr-dev)
 	DKDISABLE(libxtst-dev)
