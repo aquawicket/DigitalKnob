@@ -54,45 +54,45 @@ function DKBuildConsole_ChooseUpdate() {
 		switch(key){
 			//Esc
 			case 27:
-				CPP_DK_Exit()
 				UPDATE = ""//Back
+				CPP_DK_Exit()
 				break
 			//Spacebar
 			case 13:
+				UPDATE = "1"
 				OS = cache_json.OS
 				APP = cache_json.APP
 				TYPE = cache_json.TYPE
 				LEVEL = cache_json.LEVEL
-				UPDATE = "1"
 				break
 			//y key
 			case 121:
+				UPDATE = "1"
 				CPP_DK_Create("DKGit/DKGit.js")
 				DKGit_GitUpdate()
-				UPDATE = "1"
 				break
 			//c key
 			case 99:
+				UPDATE = "1"
 				CPP_DK_Create("DKGit/DKGit.js")
 				DKGit_GitCommit()
-				UPDATE = "1"
 				break
 			//r key
 			case 114:
+				UPDATE = "1"
 				DKBuild_ResetAppsPlugins()
 				DKGit_GitUpdate()
-				UPDATE = "1"
 				break
 			//x key
 			case 120:
+				UPDATE = "1"
 				DKBuild_Reset3rdParty()
 				DKBuild_ResetAppsPlugins()
 				DKGit_GitUpdate()
-				UPDATE = "1"
 				break
 			default:
+				UPDATE = "1"
 				break
-				//console.error("INVALID OPTION")
 		}
 	}
 }
@@ -191,6 +191,7 @@ function DKBuildConsole_SelectOs() {
 
 function DKBuildConsole_SelectApp() {
 	while (APP === ""){
+		DKBuild_GetAppList()
 		console.log("**** SELECT APP TO BUILD ****")
 		console.log("F1. ALL APPS")
 		for (var i = 0; i < APP_LIST.length; ++i)
@@ -242,7 +243,7 @@ function DKBuildConsole_SelectType() {
 		
 		switch(key){
 			case 58: //0
-				APP = "" //Back
+				OS = "" //Back
 				break
 			case 27:
 				TYPE = ""
@@ -273,17 +274,11 @@ function DKBuildConsole_Process() {
 		TYPE = ""
 		LEVEL = "RebuildAll"
 		DKBuildConsole_ChooseUpdate()
-		//if(!CPP_DKFile_Exists( ${DIGITALKNOB} ) ){
-		//	console.error("ERROR: can't find " + DIGITALKNOB + " ")
-		//	CPP_DK_GetKey()
-		//	CPP_DK_Exit()
-		//}
-		DKBuildConsole_SelectOs()
-		if(UPDATE !== "")
+		if(UPDATE === "")
 			continue
 		
-		DKBuild_GetAppList()
-		if(APP === "")
+		DKBuildConsole_SelectOs()
+		if(OS === "")
 			continue
 		
 		DKBuildConsole_SelectApp()
