@@ -65,7 +65,7 @@ DKSET(IOS_MIN_SDK_VERSION 13.0)
 DKSET(XCODE_DEVROOT /Applications/Xcode.app/Contents/Developer)
 DKSET(CLANG ${XCODE_DEVROOT}/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang)
 DKSET(CLANGXX ${XCODE_DEVROOT}/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++)
-DKSET(IOS_LIBTOOL ${XCODE_DEVROOT}/Toolchains/XcodeDefault.xctoolchain/usr/bin/libtool)
+DKSET(LIBTOOL ${XCODE_DEVROOT}/Toolchains/XcodeDefault.xctoolchain/usr/bin/libtool)
 DKSET(IOS_HOST ${IOS_ARCH}-apple-${IOS_DARWIN})
 DKSET(IOSSIM_HOST ${IOS_ARCH}-apple-${IOS_DARWIN})
 DKSET(IOS_SYSROOT ${XCODE_DEVROOT}/Platforms/iPhone.platform/Developer/SDKs/iPhone15.0.sdk)
@@ -74,6 +74,10 @@ DKSET(IOS_CXXFLAGS "-arch ${IOS_ARCH} -miosversion-min=${IOS_MIN_SDK_VERSION} -i
 DKSET(IOSSIM_SYSROOT ${XCODE_DEVROOT}/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator15.0.sdk)
 DKSET(IOSSIM_CFLAGS "-arch ${IOS_ARCH} -mios-simulator-version-min=${IOS_MIN_SDK_VERSION} -isysroot ${IOSSIM_SYSROOT}")
 DKSET(IOSSIM_CXXFLAGS "-arch ${IOS_ARCH} -mios-simulator-version-min=${IOS_MIN_SDK_VERSION} -isysroot ${IOSSIM_SYSROOT}")
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/Tk.framework/Versions/8.5/Headers/X11
+
+
 if(CMAKE_HOST_APPLE)
 	DKDEPEND(xcode)
 	
