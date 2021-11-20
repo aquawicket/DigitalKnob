@@ -12,6 +12,8 @@ let ANDROIDNDK = ""
 //let VISUALSTUDIO_VERSION = "2019"
 let VISUALSTUDIO_VERSION = "2022"
 let VISUALSTUDIO = ""
+//let VS_GENERATOR = "Visual Studio 16 2019"
+let VS_GENERATOR = "Visual Studio 17 2022"
 let MSBUILD = ""
 let GCC = ""
 let XCODE = ""
@@ -155,15 +157,15 @@ function DKBuild_InstallCmake(){
 }
 
 function DKBuild_ValidateVC2019(){
-	console.log("Looking for Visual Studio 2019")
+	console.log("Looking for Visual Studio")
 	if(!CPP_DKFile_Exists(VISUALSTUDIO))
 		DKBuild_InstallVC2019()
 	if(CPP_DKFile_Exists(VISUALSTUDIO))
-	console.log("Found Visual Studio 2019")
+	console.log("Found Visual Studio")
 }
 
 function DKBuild_InstallVC2019(){
-	console.log("Installing Visual Studio 2019")
+	console.log("Installing Visual Studio")
 	CPP_DKCurl_Download("https://download.visualstudio.microsoft.com/download/pr/5e397ebe-38b2-4e18-a187-ac313d07332a/169156e6e9a005d49b357c42240184dc1e3ccc28ebc777e70d49257c074f77e8/vs_Community.exe", DKDOWNLOAD)
 	CPP_DK_System(DKDOWNLOAD+"/vs_Community.exe")
 }
@@ -334,7 +336,7 @@ function DKBuild_DoResults(){
 		DKBuild_ValidateVC2019()
 		CPP_DKFile_MkDir(app_path+OS)
 		CPP_DKFile_ChDir(app_path+OS)
-		let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Visual Studio 16 2019\" -A Win32 "+cmake_string+DIGITALKNOB+"DK")
+		let rtvalue = CPP_DK_Execute(CMAKE+" -G \""+VS_GENERATOR+"\" -A Win32 "+cmake_string+DIGITALKNOB+"DK")
 		if(TYPE === "Debug" || TYPE === "ALL")
 			CPP_DK_Execute(MSBUILD+" "+app_path+OS+"/"+APP+".sln /p:Configuration=Debug")
 		if(TYPE === "Release" || TYPE === "ALL")
@@ -346,7 +348,7 @@ function DKBuild_DoResults(){
 		DKBuild_ValidateVC2019()
 		CPP_DKFile_MkDir(app_path+OS)
 		CPP_DKFile_ChDir(app_path+OS)
-		let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Visual Studio 16 2019\" -A x64 "+cmake_string+DIGITALKNOB+"DK")
+		let rtvalue = CPP_DK_Execute(CMAKE+" -G \""+VS_GENERATOR+"\" -A x64 "+cmake_string+DIGITALKNOB+"DK")
 		if(TYPE === "Debug" || TYPE === "ALL")
 			CPP_DK_Execute(MSBUILD+" "+app_path+OS+"/"+APP+".sln /p:Configuration=Debug")
 		if(TYPE === "Release" || TYPE === "ALL")
@@ -507,7 +509,7 @@ function DKBuild_DoResults(){
 		CPP_DKFile_MkDir(app_path+"android32")
 		CPP_DKFile_ChDir(app_path+"android32")
 		if(CPP_DK_GetOS() === "Windows")
-			let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Visual Studio 16 2019\" -A ARM -DCMAKE_TOOLCHAIN_FILE="+ANDROIDNDK+"/build/cmake/android.toolchain.cmake -DANDROIDNDK="+ANDROIDNDK+" -DANDROID_ABI=armeabi-v7a -DANDROID_NATIVE_API_LEVEL=21 -DCMAKE_CXX_FLAGS=-std=c++1z "+cmake_string+DIGITALKNOB+"DK")
+			let rtvalue = CPP_DK_Execute(CMAKE+" -G \""+VS_GENERATOR+"\" -A ARM -DCMAKE_TOOLCHAIN_FILE="+ANDROIDNDK+"/build/cmake/android.toolchain.cmake -DANDROIDNDK="+ANDROIDNDK+" -DANDROID_ABI=armeabi-v7a -DANDROID_NATIVE_API_LEVEL=21 -DCMAKE_CXX_FLAGS=-std=c++1z "+cmake_string+DIGITALKNOB+"DK")
 		else if(CPP_DK_GetOS() === "Linux" || CPP_DK_GetOS() === "Mac")
 			let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DIGITALKNOB+"DK")
 		if(TYPE === "Debug" || TYPE === "ALL")
@@ -535,7 +537,7 @@ function DKBuild_DoResults(){
 		CPP_DKFile_MkDir(app_path+"android64")
 		CPP_DKFile_ChDir(app_path+"android64")
 		if(CPP_DK_GetOS() === "Windows")
-			let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Visual Studio 16 2019\" -A ARM64 -DCMAKE_TOOLCHAIN_FILE="+ANDROIDNDK+"/build/cmake/android.toolchain.cmake -DANDROIDNDK="+ANDROIDNDK+" -DANDROID_ABI=arm64-v8a -DANDROID_NATIVE_API_LEVEL=21 -DCMAKE_CXX_FLAGS=-std=c++1z "+cmake_string+DIGITALKNOB+"DK")
+			let rtvalue = CPP_DK_Execute(CMAKE+" -G \""+VS_GENERATOR+"\" -A ARM64 -DCMAKE_TOOLCHAIN_FILE="+ANDROIDNDK+"/build/cmake/android.toolchain.cmake -DANDROIDNDK="+ANDROIDNDK+" -DANDROID_ABI=arm64-v8a -DANDROID_NATIVE_API_LEVEL=21 -DCMAKE_CXX_FLAGS=-std=c++1z "+cmake_string+DIGITALKNOB+"DK")
 		else if(CPP_DK_GetOS() === "Linux" || CPP_DK_GetOS() === "Mac")
 			rtvalue = CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DIGITALKNOB+"DK")
 		if(TYPE === "Debug" || TYPE === "ALL")
