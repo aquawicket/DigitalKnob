@@ -26,7 +26,9 @@ DKSET(VISUALSTUDIO_DL https://download.visualstudio.microsoft.com/download/pr/5e
 DKSET(VISUALSTUDIO "C:/Program Files/Microsoft Visual Studio/${VISUALSTUDIO_VERSION}/Community")
 DKSET(MSBUILD "${VISUALSTUDIO}/MSBuild/Current/Bin/MSBuild.exe")
 
-DKSET(GENERATOR "Visual Studio 16 ${VISUALSTUDIO_VERSION}")
+#DKSET(GENERATOR "Visual Studio 16 ${VISUALSTUDIO_VERSION}")  #2019
+DKSET(GENERATOR "Visual Studio 17 ${VISUALSTUDIO_VERSION}")  #2022
+
 
 
 ### INSTALL ###
