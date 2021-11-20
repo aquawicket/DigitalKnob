@@ -4,12 +4,15 @@ endif()
 # Information
 # https://docs.microsoft.com/en-us/cpp/build/building-on-the-command-line?view=msvc-160
 # https://docs.microsoft.com/en-us/visualstudio/msbuild/msbuild?view=vs-2019
-# https://docs.microsoft.com/en-us/visualstudio/msbuild/msbuild-command-line-reference?view=vs-2019
-# https://docs.microsoft.com/en-us/visualstudio/msbuild/common-msbuild-project-properties?view=vs-2019
-# https://cmake.org/cmake/help/v3.21/generator/Visual%20Studio%2017%202022.html
+# MSBuild command-line reference  https://docs.microsoft.com/en-us/visualstudio/msbuild/msbuild-command-line-reference?view=vs-2019
+# Common MSBuild project properties  https://docs.microsoft.com/en-us/visualstudio/msbuild/common-msbuild-project-properties?view=vs-2019
+# CMake Visual Studio 17 2022  https://cmake.org/cmake/help/v3.21/generator/Visual%20Studio%2017%202022.html
+# Create an Android Native Activity App  https://docs.microsoft.com/en-us/cpp/cross-platform/create-an-android-native-activity-app?view=msvc-160
 #
 # Downloads
-# https://download.visualstudio.microsoft.com/download/pr/5e397ebe-38b2-4e18-a187-ac313d07332a/169156e6e9a005d49b357c42240184dc1e3ccc28ebc777e70d49257c074f77e8/vs_Community.exe
+# VS2019  https://aka.ms/vs/16/release/vs_community.exe
+# VS2022  https://aka.ms/vs/17/release/vs_community.exe
+
 
 ### DEPENDS ###
 if(ANDROID)
@@ -19,17 +22,12 @@ if(ANDROID)
 endif()
  
 ### VERSION ###
-#DKSET(VISUALSTUDIO_BUILD 16)
 DKSET(VISUALSTUDIO_BUILD 17)
-#DKSET(VISUALSTUDIO_VERSION 2019)
 DKSET(VISUALSTUDIO_VERSION 2022)
-#DKSET(VISUALSTUDIO_NAME "Visual Studio ${VISUALSTUDIO_BUILD} ${VISUALSTUDIO_VERSION}")
-DKSET(VISUALSTUDIO_DL https://download.visualstudio.microsoft.com/download/pr/5e397ebe-38b2-4e18-a187-ac313d07332a/169156e6e9a005d49b357c42240184dc1e3ccc28ebc777e70d49257c074f77e8/vs_Community.exe)
-DKSET(VISUALSTUDIO "C:/Program Files/Microsoft Visual Studio/${VISUALSTUDIO_VERSION}/Community")
+DKSET(VISUALSTUDIO_PROGRAM_FILES Program Files)
+DKSET(VISUALSTUDIO_DL https://aka.ms/vs/${VISUALSTUDIO_BUILD}/release/vs_community.exe)
+DKSET(VISUALSTUDIO "C:/${VISUALSTUDIO_PROGRAM_FILES}/Microsoft Visual Studio/${VISUALSTUDIO_VERSION}/Community")
 DKSET(MSBUILD "${VISUALSTUDIO}/MSBuild/Current/Bin/MSBuild.exe")
-
-#DKSET(GENERATOR "Visual Studio 16 ${VISUALSTUDIO_VERSION}")  #2019
-#DKSET(GENERATOR "Visual Studio 17 ${VISUALSTUDIO_VERSION}")  #2022
 DKSET(VS_GENERATOR "Visual Studio ${VISUALSTUDIO_BUILD} ${VISUALSTUDIO_VERSION}")
 
 
