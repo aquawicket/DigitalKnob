@@ -10,7 +10,7 @@ endif()
 ### INSTALL ###
 #if(NOT EXISTS ${XQUARTZ})
 if(CMAKE_HOST_APPLE)
-	DKCOMMAND("brew install cmake")
+	DKCOMMAND("brew install xquartz")
 endif()
 #endif()
 
