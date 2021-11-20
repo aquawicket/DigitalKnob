@@ -3,10 +3,16 @@ if(NOT CMAKE_HOST_UNIX)
 endif()
 
 ### INSTALL ###
-DKSET(CURRENT_DIR /usr)
-DKCOMMAND(sudo apt -y install libx11-dev)
+if(MAC)
+	DKINCLUDE(/opt/X11/include)
+endif()
 
 
-### LINK ###
-DKINCLUDE(/usr/include/X11)
-SET(CMAKE_CXX_LINK_EXECUTABLE "${CMAKE_CXX_LINK_EXECUTABLE} -lX11")
+if(LINUX OR RASPBERRY)
+	DKSET(CURRENT_DIR /usr)
+	DKCOMMAND(sudo apt -y install libx11-dev)
+
+	### LINK ###
+	DKINCLUDE(/usr/include/X11)
+	SET(CMAKE_CXX_LINK_EXECUTABLE "${CMAKE_CXX_LINK_EXECUTABLE} -lX11")
+endif()
