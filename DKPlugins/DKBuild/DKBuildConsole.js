@@ -140,7 +140,7 @@ function DKBuildConsole_SelectOs() {
 			key = CPP_DK_GetKey()
 		
 		switch(key){
-			case 58: //0
+			case 48: //0
 				UPDATE = "" //Back
 				break
 			case 27: //Esc
@@ -205,7 +205,7 @@ function DKBuildConsole_SelectApp() {
 			key = CPP_DK_GetKey()
 		
 		switch(key){
-			case 58: //0
+			case 48: //0
 				OS = "" //Back
 				break
 			case 27:  //Esc
@@ -242,7 +242,7 @@ function DKBuildConsole_SelectType() {
 			key = CPP_DK_GetKey()
 		
 		switch(key){
-			case 58: //0
+			case 48: //0
 				OS = "" //Back
 				break
 			case 27:
