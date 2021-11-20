@@ -304,6 +304,11 @@ function DKBuildConsole_Process() {
 			console.log("###########################")
 			DKBuild_DoResults()
 		}
+		UPDATE = ""
+		OS = ""
+		APP = ""
+		TYPE = ""
+		LEVEL = "RebuildAll"
 	}
 }    
 
