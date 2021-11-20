@@ -284,7 +284,8 @@ DKCOPY(${DKPLUGINS}/_DKIMPORT/App.cpp ${DKPROJECT}/App.cpp FALSE) ## copy app de
 	
 ### Include all source files from the app folder for the compilers
 #file(GLOB App_SRC
-file(GLOB_RECURSE App_SRC 
+file(GLOB_RECURSE App_SRC
+	${DKPROJECT}/*.h
 	${DKPROJECT}/*.c
 	${DKPROJECT}/*.cpp)
 list(FILTER App_SRC EXCLUDE REGEX "${DKPROJECT}/assets/*" )
