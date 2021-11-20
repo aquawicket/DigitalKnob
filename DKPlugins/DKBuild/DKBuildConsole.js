@@ -54,7 +54,6 @@ function DKBuildConsole_ChooseUpdate() {
 		switch(key){
 			//Esc
 			case 27:
-				UPDATE = ""//Back
 				CPP_DK_Exit()
 				break
 			//Spacebar
@@ -142,10 +141,9 @@ function DKBuildConsole_SelectOs() {
 		
 		switch(key){
 			case 58: //0
-				APP = "" //Back
+				UPDATE = "" //Back
 				break
 			case 27: //Esc
-				OS = "" 
 				CPP_DK_Exit()
 				break
 			case 49: //1
@@ -210,13 +208,12 @@ function DKBuildConsole_SelectApp() {
 				OS = "" //Back
 				break
 			case 27:  //Esc
-				APP = ""
 				CPP_DK_Exit()
-				DKBuildConsole_KeyToApp(key)
 				break
 			default:
-				APP = ""
-				console.error("INVALID OPTION")
+				DKBuildConsole_KeyToApp(key)
+				if(APP === "")
+					console.error("INVALID OPTION")
 				break
 		}
 	}
