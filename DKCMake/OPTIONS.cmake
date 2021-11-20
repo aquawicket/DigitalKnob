@@ -25,7 +25,7 @@ DKSET(3RDPARTY ${DIGITALKNOB}/DK/3rdParty)
 DKSET(DKIMPORTS ${3RDPARTY}/_DKIMPORTS)
 DKSET(DKDOWNLOAD ${DIGITALKNOB}/Download)
 DKSET(DKWEB http://127.0.0.1)
-DKSET(CURRENT_DIRECTORY ${DIGITALKNOB})
+DKSET(CURRENT_DIR ${DIGITALKNOB})
 
 
 ###########################################################################
