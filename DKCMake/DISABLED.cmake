@@ -57,6 +57,7 @@ DKDISABLE(osgbullet)
 DKDISABLE(osgworks)
 DKDISABLE(sdl2_giflib_sa)
 DKDISABLE(tesseract)
+DKDISABLE(vs16-redistributable)
 DKDISABLE(waave)
 
 
