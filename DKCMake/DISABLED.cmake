@@ -219,7 +219,7 @@ if(LINUX) # Disabled for Linux targets
 	DKDISABLE(imagemagick)
 	DKDISABLE(jdk)
 	DKDISABLE(leptonica)
-	DKDISABLE(libvorbis)
+	#DKDISABLE(libvorbis)
 	DKDISABLE(libwebp)
 	DKDISABLE(libwebsockets)
 	DKDISABLE(libxml2)
