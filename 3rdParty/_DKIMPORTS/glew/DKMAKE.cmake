@@ -21,6 +21,8 @@ WIN_DEBUG_LIB(${GLEW}/${OS}/lib/${DEBUG_DIR}/libglew32d.lib)
 WIN_RELEASE_LIB(${GLEW}/${OS}/lib/${RELEASE_DIR}/libglew32.lib)
 #WIN_DEBUG_SHARED_LIB(${GLEW}/${OS}/bin/${DEBUG_DIR}/glew32d.lib)
 #WIN_RELEASE_SHARED_LIB(${GLEW}/${OS}/bin/${RELEASE_DIR}/glew32.lib)
+MAC_DEBUG_LIB(${GLEW}/${OS}/lib/${DEBUG_DIR}/libglewd.a)
+MAC_RELEASE_LIB(${GLEW}/${OS}/lib/${RELEASE_DIR}/libglew.a)
 
 
 ### INJECT ###
@@ -53,3 +55,8 @@ WIN_VS_RELEASE(${GLEW_NAME} glew.sln glew_s)
 #DKCOPY(${GLEW}/${OS}/lib/${RELEASE_DIR} ${GLEW}/${OS}/CMakeFiles/Export/lib/ TRUE)
 #DKCOPY(${GLEW}/${OS}/bin/${DEBUG_DIR} ${GLEW}/${OS}/CMakeFiles/Export/bin/ TRUE)
 #DKCOPY(${GLEW}/${OS}/bin/${RELEASE_DIR} ${GLEW}/${OS}/CMakeFiles/Export/bin/ TRUE)
+
+
+MAC_PATH(${GLEW}/${OS})
+MAC64_COMMAND(${DKCMAKE_MAC64} ${GLEW}/build/cmake)
+MAC_XCODE(${GLEW_NAME} glew_s)
