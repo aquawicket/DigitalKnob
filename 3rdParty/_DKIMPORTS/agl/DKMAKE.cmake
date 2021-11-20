@@ -12,4 +12,6 @@ FIND_LIBRARY(AGL_Lib AGL)
 if(NOT AGL_Lib)
 	message(FATAL_ERROR "Could not locate AGL framework")
 endif()
+
+DKDEFINE(GL_SILENCE_DEPRECATION)
 APPLE_LIB(${AGL_Lib})
