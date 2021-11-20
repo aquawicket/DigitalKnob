@@ -6,6 +6,8 @@ https://www.infoq.com/articles/ios-9-bitcode/
 
 https://gitlab.kitware.com/cmake/community/-/wikis/doc/cmake/CrossCompiling
 
+https://www.raywenderlich.com/2484-introduction-to-c-for-ios-developers-part-1
+
 
 Example compiler flags for Simulator64
 ---------------------------------------
