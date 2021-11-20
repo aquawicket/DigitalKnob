@@ -62,7 +62,6 @@ DKDISABLE(waave)
 
 if(NOT CMAKE_HOST_WIN32) # Disabled on Non-Windows host machines
 	DKDISABLE(android-studio)
-	#DKDISABLE(glew)
 	DKDISABLE(glintercept)
 	DKDISABLE(python)
 	DKDISABLE(php-win32-vs16-x64)
@@ -70,7 +69,6 @@ if(NOT CMAKE_HOST_WIN32) # Disabled on Non-Windows host machines
 endif()
 if(WIN) # Disabled for Windows targets
 	DKDISABLE(DKOcr)
-	#DKDISABLE(flac)
 	DKDISABLE(freealut)
 	DKDISABLE(freealut-master)
 	DKDISABLE(jpeg) #using libjpeg-turbo
@@ -150,7 +148,6 @@ if(MAC)  # Disabled on Mac host machines
 	DKDISABLE(sdl2_mixer)
 	DKDISABLE(smpeg2)
 	DKDISABLE(tidy-html5)
-	#DKDISABLE(tiff)
 	DKDISABLE(uwebsockets)
 endif()
 
@@ -189,14 +186,12 @@ if(IOS OR IOSSIM)
 	DKDISABLE(libxtst-dev)
 	DKDISABLE(lighttpd)
 	DKDISABLE(mesa-common-dev)
-	#DKDISABLE(mobile_core_services)
 	DKDISABLE(opencv)
 	DKDISABLE(openssl)
 	DKDISABLE(podofo)
 	DKDISABLE(sdl2_mixer)
 	DKDISABLE(smpeg2)
 	DKDISABLE(tidy-html5)
-	#DKDISABLE(tiff)
 	DKDISABLE(uwebsockets)
 endif()
 
@@ -219,7 +214,6 @@ if(LINUX) # Disabled for Linux targets
 	DKDISABLE(imagemagick)
 	DKDISABLE(jdk)
 	DKDISABLE(leptonica)
-	#DKDISABLE(libvorbis)
 	DKDISABLE(libwebp)
 	DKDISABLE(libwebsockets)
 	DKDISABLE(libxml2)
