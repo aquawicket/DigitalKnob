@@ -9,3 +9,6 @@ https://medium.com/@dtkatz/3-ways-to-fix-the-cors-error-and-how-access-control-a
 
 Git/Repository on a USB stick
 https://en.wikibooks.org/wiki/Git/Repository_on_a_USB_stick
+
+sciter - a cross platform html/js/css API
+https://github.com/sciter-sdk/go-sciter
