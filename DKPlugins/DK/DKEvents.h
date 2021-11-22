@@ -3,8 +3,6 @@
 #define DKEvents_H
 
 #include "DKObject.h"
-//#include <boost/function.hpp>
-//#include <boost/bind/bind.hpp>
 
 class DKObject;
 class DKEvents{
