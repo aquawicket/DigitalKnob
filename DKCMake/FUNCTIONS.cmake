@@ -3457,6 +3457,13 @@ function(DKBUILD_LOG entry)
 	file(APPEND ${DKPROJECT}/DKBUILD.log "${entry}\n")
 endfunction()
 
+function(ADD_SOURCE regex)
+	DKSET(SRC_INCLUDE ${SRC_INCLUDE} ${ARGV})
+endfunction()
+
+function(REMOVE_SOURCE regex)
+	DKSET(SRC_EXCLUDE ${SRC_EXCLUDE} ${ARGV})
+endfunction()
 
 # Function to wrap a given string into multiple lines at the given column position.
 # Parameters:
