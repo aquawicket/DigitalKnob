@@ -283,8 +283,8 @@ DKCOPY(${DKPLUGINS}/_DKIMPORT/assets.h ${DKPROJECT}/assets.h FALSE) ## copy app 
 #DKCOPY(${DKPLUGINS}/_DKIMPORT/App.cpp ${DKPROJECT}/App.cpp FALSE) ## copy app default files recursivly without overwrite
 	
 ### Include all source files from the app folder for the compilers
-#file(GLOB App_SRC
-file(GLOB_RECURSE App_SRC
+#file(GLOB_RECURSE App_SRC
+file(GLOB App_SRC
 	${DKPROJECT}/*.h
 	${DKPROJECT}/*.c
 	${DKPROJECT}/*.cpp)
