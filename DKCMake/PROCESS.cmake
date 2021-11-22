@@ -290,6 +290,16 @@ file(GLOB_RECURSE App_SRC
 	${DKPROJECT}/*.cpp)
 list(FILTER App_SRC EXCLUDE REGEX "${DKPROJECT}/assets/*" )
 list(FILTER App_SRC EXCLUDE REGEX "${DKPROJECT}/${OS}/*" )
+if(SRC_INCLUDE)
+	file(GLOB_RECURSE App_SRC_INCLUDE ${SRC_INCLUDE})
+	list(APPEND App_SRC ${App_SRC_INCLUDE})
+endif()
+if(SRC_EXCLUDE)
+	foreach(item ${SRC_EXCLUDE})
+		list(FILTER App_SRC EXCLUDE REGEX ${item})
+	endforeach()
+endif()
+
 	
 add_definitions(-DDKAPP)
 include_directories(${DKPROJECT})

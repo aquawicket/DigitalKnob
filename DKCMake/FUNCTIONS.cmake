@@ -3153,15 +3153,16 @@ function(DKRUNDEPENDS name)
 	unset(depends_script)
 	unset(index)
 	
+	set(KEEPLINE 0)
 	foreach(line ${lines})
 		string(FIND "${line}" "if(" index)
 		if(${index} GREATER -1)
-			set(disable_script "${disable_script}${line}\n")
+			set(KEEPLINE 1)
 		endif()
 		
 		string(FIND "${line}" "IF(" index)
 		if(${index} GREATER -1)
-			set(disable_script "${disable_script}${line}\n")
+			set(KEEPLINE 1)
 		endif()
 		
 		## elseif(
@@ -3169,12 +3170,12 @@ function(DKRUNDEPENDS name)
 		
 		string(FIND "${line}" "else(" index)
 		if(${index} GREATER -1)
-			set(disable_script "${disable_script}${line}\n")
+			set(KEEPLINE 1)
 		endif()
 		
 		string(FIND "${line}" "ELSE(" index)
 		if(${index} GREATER -1)
-			set(disable_script "${disable_script}${line}\n")
+			set(KEEPLINE 1)
 		endif()
 		
 		## endif(
@@ -3182,37 +3183,44 @@ function(DKRUNDEPENDS name)
 		
 		string(FIND "${line}" "return(" index)
 		if(${index} GREATER -1)
-			set(disable_script "${disable_script}${line}\n")
+			set(KEEPLINE 1)
 		endif()
 		
 		string(FIND "${line}" "RETURN(" index)
 		if(${index} GREATER -1)
-			set(disable_script "${disable_script}${line}\n")
+			set(KEEPLINE 1)
 		endif()
 		
 		string(FIND "${line}" "DKDISABLE(" index)
 		if(${index} GREATER -1)
+			set(KEEPLINE 1)
+		endif()
+		
+		string(FIND "${line}" "DKSET(" index)
+		if(${index} GREATER -1)
+			set(KEEPLINE 1)
+		endif()
+		
+		if(KEEPLINE)
 			set(disable_script "${disable_script}${line}\n")
 		endif()
 		
-		#string(FIND "${line}" "DKSET(" index)
-		#if(${index} GREATER -1)
-		#	set(disable_script "${disable_script}${line}\n")
-		#endif()
-		
-		## DKDISABLE(
-		##NOTE: The 'DKDEPEND(' search commands take care of 'DISABLE_DKDEPEND(' since 'DKDEPEND' is already in the word
+		string(FIND "${line}" ")" indexB) 
+		if(${indexB} GREATER -1)
+			set(KEEPLINE 0)
+		endif()
 	endforeach()
 	
+	set(KEEPLINE 0)
 	foreach(line ${lines})
 		string(FIND "${line}" "if(" index)
 		if(${index} GREATER -1)
-			set(depends_script "${depends_script}${line}\n")
+			set(KEEPLINE 1)
 		endif()
 		
 		string(FIND "${line}" "IF(" index)
 		if(${index} GREATER -1)
-			set(depends_script "${depends_script}${line}\n")
+			set(KEEPLINE 1)
 		endif()
 		
 		## elseif(
@@ -3220,12 +3228,12 @@ function(DKRUNDEPENDS name)
 		
 		string(FIND "${line}" "else(" index)
 		if(${index} GREATER -1)
-			set(depends_script "${depends_script}${line}\n")
+			set(KEEPLINE 1)
 		endif()
 		
 		string(FIND "${line}" "ELSE(" index)
 		if(${index} GREATER -1)
-			set(depends_script "${depends_script}${line}\n")
+			set(KEEPLINE 1)
 		endif()
 		
 		## endif(
@@ -3233,38 +3241,42 @@ function(DKRUNDEPENDS name)
 		
 		string(FIND "${line}" "return(" index)
 		if(${index} GREATER -1)
-			set(depends_script "${depends_script}${line}\n")
+			set(KEEPLINE 1)
 		endif()
 		
 		string(FIND "${line}" "RETURN(" index)
 		if(${index} GREATER -1)
-			set(depends_script "${depends_script}${line}\n")
+			set(KEEPLINE 1)
 		endif()
 		
 		string(FIND "${line}" "DKENABLE(" index)
 		if(${index} GREATER -1)
-			set(depends_script "${depends_script}${line}\n")
+			set(KEEPLINE 1)
 		endif()
 		
 		string(FIND "${line}" "DKDISABLE(" index)
 		if(${index} GREATER -1)
-			set(depends_script "${depends_script}${line}\n")
+			set(KEEPLINE 1)
 		endif()	
 		
 		string(FIND "${line}" "DKDEPEND(" index)
 		if(${index} GREATER -1)
-			set(depends_script "${depends_script}${line}\n")
+			set(KEEPLINE 1)
 		endif()
 		
 		string(FIND "${line}" "DKSET(" index)
-		string(FIND "${line}" ")" indexB) 
 		if(${index} GREATER -1)
-		if(${indexB} GREATER -1)
+			set(KEEPLINE 1)
+		endif()
+
+		if(KEEPLINE)
 			set(depends_script "${depends_script}${line}\n")
 		endif()
-		endif()
 		
-		# NOTE: The 'DKDEPEND(' search commands take care of 'DISABLE_DKDEPEND(' since 'DKDEPEND' is already a substring
+		string(FIND "${line}" ")" indexB) 
+		if(${indexB} GREATER -1)
+			set(KEEPLINE 0)
+		endif()
 	endforeach()
 	
 	if(disable_script)
