@@ -7,9 +7,7 @@
 class DKObject;
 class DKEvents{
 public:
-	//static bool AddEvent(const DKString& id, const DKString& type, boost::function<bool (DKEvents*)> func, DKObject* object);
 	static bool AddEvent(const DKString& id, const DKString& type, std::function<bool(DKEvents*)> func, DKObject* object);
-	//static bool AddEvent(const DKString& id, const DKString& type, const DKString& jsreturn, boost::function<bool (DKEvents*)> func, DKObject* object);
 	static bool AddEvent(const DKString& id, const DKString& type, const DKString& jsreturn, std::function<bool(DKEvents*)> func, DKObject* object);
 	static bool RemoveEvent(const DKString& id, const DKString& type, const DKString& jsreturn);
 	static bool RemoveEvents(const DKString& id, const DKString& type);
@@ -35,31 +33,26 @@ private:
 public:
 	DKStringArray data;
 	void* data2;
-	//boost::function<bool (DKEvents*)> event_func;
 	std::function<bool(DKEvents*)> event_func;
 
 	template<class T> 
 	static bool AddEvent(const DKString& id, const DKString& type, bool (T::*func) (DKEvents*), T* _this){
-		//return DKEvents::AddEvent(id, type, boost::bind(func, _this, boost::placeholders::_1), _this);
 		return DKEvents::AddEvent(id, type, std::bind(func, _this, std::placeholders::_1), _this);
 	};
 
 	template<class T>
 	static bool AddEvent(const DKString& id, const DKString& type, const DKString& jsreturn, bool (T::*func) (DKEvents*), T* _this){
-		//return DKEvents::AddEvent(id, type, jsreturn, boost::bind(func, _this, boost::placeholders::_1), _this);
 		return DKEvents::AddEvent(id, type, jsreturn, std::bind(func, _this, std::placeholders::_1), _this);
 	};
 
 	template<class T>
 	static void AddRegisterEventFunc(bool (T::*func)(const DKString&, const DKString&), T* _this){
-		//reg_funcs.push_back(boost::bind(func, _this, boost::placeholders::_1, boost::placeholders::_2));
 		reg_funcs.push_back(std::bind(func, _this, std::placeholders::_1, std::placeholders::_2));
 	}
 
 	template<class T>
 	static void RemoveRegisterEventFunc(bool (T::*func)(const DKString&, const DKString&), T* _this){
 		for(unsigned int i=0; i<reg_funcs.size(); ++i){
-			//if(reg_funcs[i] == boost::bind(func, _this, boost::placeholders::_1, boost::placeholders::_2)){
 			//if (reg_funcs[i] == std::bind(func, _this, std::placeholders::_1, std::placeholders::_2)) {
 			//	reg_funcs.erase(reg_funcs.begin() + i);
 			//}
@@ -68,14 +61,12 @@ public:
 	
 	template<class T>
 	static void AddUnegisterEventFunc(bool (T::*func)(const DKString&, const DKString&), T* _this){
-		//unreg_funcs.push_back(boost::bind(func, _this, boost::placeholders::_1, boost::placeholders::_2));
 		unreg_funcs.push_back(std::bind(func, _this, std::placeholders::_1, std::placeholders::_2));
 	}
 
 	template<class T>
 	static void RemoveUnegisterEventFunc(bool (T::*func)(const DKString&, const DKString&), T* _this){
 		for(unsigned int i=0; i<unreg_funcs.size(); ++i){
-			//if(unreg_funcs[i] == boost::bind(func, _this, boost::placeholders::_1, boost::placeholders::_2)){
 			//if (unreg_funcs[i] == std::bind(func, _this, std::placeholders::_1, std::placeholders::_2)) {
 			//	unreg_funcs.erase(unreg_funcs.begin() + i);
 			//}
@@ -84,25 +75,20 @@ public:
 	
 	template<class T>
 	static void AddSendEventFunc(bool (T::*func)(const DKString&, const DKString&, const DKString&), T* _this){
-		//send_funcs.push_back(boost::bind(func, _this, boost::placeholders::_1, boost::placeholders::_2, boost::placeholders::_3));
 		send_funcs.push_back(std::bind(func, _this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3));
 	}
 
 	template<class T>
 	static void RemoveSendEventFunc(bool (T::*func)(const DKString&, const DKString&, const DKString&), T* _this){
 		for(unsigned int i=0; i<send_funcs.size(); ++i){
-			//if(send_funcs[i] == boost::bind(func, _this, boost::placeholders::_1, boost::placeholders::_2, boost::placeholders::_3)){
 			//if (send_funcs[i] == std::bind(func, _this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3)) {
 			//	send_funcs.erase(send_funcs.begin() + i);
 			//}
 		}
 	}
 
-	//static std::vector<boost::function<bool (const DKString&, const DKString&)> > reg_funcs;
 	static std::vector<std::function<bool(const DKString&, const DKString&)> > reg_funcs;
-	//static std::vector<boost::function<bool (const DKString&, const DKString&)> > unreg_funcs;
 	static std::vector<std::function<bool(const DKString&, const DKString&)> > unreg_funcs;
-	//static std::vector<boost::function<bool (const DKString&, const DKString&, const DKString&)> > send_funcs;
 	static std::vector<std::function<bool(const DKString&, const DKString&, const DKString&)> > send_funcs;
 };
 
