@@ -69,6 +69,7 @@ if(NOT CMAKE_HOST_WIN32) # Disabled on Non-Windows host machines
 	DKDISABLE(vs16-redistributable)
 endif()
 if(WIN) # Disabled for Windows targets
+	DKDISABLE(build-essential)
 	DKDISABLE(DKOcr)
 	DKDISABLE(freealut)
 	DKDISABLE(freealut-master)
@@ -112,6 +113,7 @@ if(MAC)  # Disabled on Mac host machines
 	DKDISABLE(android-ndk)
 	DKDISABLE(android-platform-tools)
 	DKDISABLE(boxer)
+	DKDISABLE(build-essential)
 	DKDISABLE(bzip2)
 	DKDISABLE(DKMySql)
 	DKDISABLE(DKOcr)
@@ -155,6 +157,7 @@ endif()
 
 if(IOS OR IOSSIM)
 	DKDISABLE(boxer)
+	DKDISABLE(build-essential)
 	DKDISABLE(bzip2)
 	DKDISABLE(cef_binary)
 	DKDISABLE(DKCef)
@@ -203,6 +206,7 @@ if(CMAKE_HOST_LINUX) # Disabled on Linux host machines
 endif()
 if(LINUX) # Disabled for Linux targets
 	DKDISABLE(android-build-tools)
+	DKDISABLE(build-essential)
 	DKDISABLE(boxer)
 	DKDISABLE(DKHook) #NOTE: this has linux functions too
 	DKDISABLE(DKOcr)
