@@ -203,7 +203,7 @@ endif()
 if(NOT LINUX) # Disabled NON Linux targets
 	DKDISABLE(libglfw3-dev)
 	DKDISABLE(libgl1-mesa-dev)
-	DKDISABLE(libglu-mesa-dev)
+	DKDISABLE(libglu1-mesa-dev)
 endif()
 if(LINUX) # Disabled for Linux targets
 	DKDISABLE(android-build-tools)
