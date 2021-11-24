@@ -79,7 +79,7 @@ if(WIN) # Disabled for Windows targets
 	DKDISABLE(libgl1-mesa-dev)
 	DKDISABLE(libglib2.0-dev)
 	DKDISABLE(libgtk2.0-dev)
-	DKDISABLE(libsystemd-dev)  
+	DKDISABLE(libsystemd-dev) 
 	DKDISABLE(libudev-dev)
 	DKDISABLE(libwebp)
 	DKDISABLE(libwebsockets)
@@ -200,8 +200,9 @@ if(IOS OR IOSSIM)
 endif()
 
 
-if(CMAKE_HOST_LINUX) # Disabled on Linux host machines
-
+if(NOT LINUX) # Disabled NON Linux targets
+	DKDISABLE(libglfw3-dev)
+	DKDISABLE(libgl1-mesa-dev)
 endif()
 if(LINUX) # Disabled for Linux targets
 	DKDISABLE(android-build-tools)
@@ -216,7 +217,6 @@ if(LINUX) # Disabled for Linux targets
 	DKDISABLE(freealut)
 	DKDISABLE(freealut-master)
 	DKDISABLE(ghostscript)
-	#DKDISABLE(glew)
 	DKDISABLE(imagemagick)
 	DKDISABLE(jdk)
 	DKDISABLE(leptonica)
@@ -306,7 +306,6 @@ if(ANDROID) # Disabled for Android targets
 	DKDISABLE(kdevelop)
 	DKDISABLE(leptonica)
 	DKDISABLE(libasound2-dev)
-	DKDISABLE(libgl1-mesa-dev)
 	DKDISABLE(libglib2.0-dev)
 	DKDISABLE(libgtk2.0-dev)
 	DKDISABLE(libiconv)
