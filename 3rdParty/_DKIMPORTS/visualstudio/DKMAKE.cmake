@@ -26,15 +26,17 @@ DKSET(VISUALSTUDIO_BUILD 17)
 DKSET(VISUALSTUDIO_VERSION 2022)
 DKSET(VISUALSTUDIO_PROGRAM_FILES "Program Files")
 DKSET(VISUALSTUDIO_DL https://aka.ms/vs/${VISUALSTUDIO_BUILD}/release/vs_community.exe)
-DKSET(VISUALSTUDIO_16 "C:/Program Files (x86)/Microsoft Visual Studio/2019/Community")
 DKSET(VISUALSTUDIO "C:/${VISUALSTUDIO_PROGRAM_FILES}/Microsoft Visual Studio/${VISUALSTUDIO_VERSION}/Community")
 DKSET(MSBUILD "${VISUALSTUDIO}/MSBuild/Current/Bin/MSBuild.exe")
 DKSET(VS_GENERATOR "Visual Studio ${VISUALSTUDIO_BUILD} ${VISUALSTUDIO_VERSION}")
 
-
-
-### INSTALL ###
-IF(NOT EXISTS "${VISUALSTUDIO}" AND NOT EXISTS "${VISUALSTUDIO_16}")
+if(EXISTS ${VISUALSTUDIO})
+	#already have newest version
+elseif(EXISTS "C:/Program Files (x86)/Microsoft Visual Studio/2019/Community") #fall back to older version
+	DKSET(VISUALSTUDIO "C:/Program Files (x86)/Microsoft Visual Studio/2019/Community")
+	DKSET(MSBUILD "${VISUALSTUDIO}/MSBuild/Current/Bin/MSBuild.exe")
+	DKSET(VS_GENERATOR "Visual Studio 16 2019")
+else()  #install
 	MESSAGE(STATUS "Installing Visual Studio ${VISUALSTUDIO_VERSION}")
 	if(EXISTS ${DKDOWNLOAD}/VisualStudio/vs_setup.exe)
 		# offline installer
