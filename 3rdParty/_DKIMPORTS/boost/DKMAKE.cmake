@@ -77,7 +77,7 @@ date_time
 #dynamic_bitset
 #endian
 exception
-#fiber
+fiber
 filesystem
 #flyweight
 #foreach
@@ -89,9 +89,9 @@ filesystem
 #geometry
 #gil
 graph
-#graph_parallel
+graph_parallel
 #hana
-#headers
+headers
 #heap
 #histogram
 #hof
@@ -110,11 +110,11 @@ locale
 #lockfree
 log
 #logic
-#math
+math
 #metaparse
 #move
 #mp11
-#mpi
+mpi
 #mpl
 #msm
 #multiprecision
@@ -138,7 +138,7 @@ program_options
 #property_tree
 #proto
 #ptr_container
-#python
+python
 #qvm
 random
 #range
@@ -152,13 +152,13 @@ serialization
 #smart_ptr
 #sort
 #spirit
-#stacktrace
+stacktrace
 #statechart
 #static_assert
 #static_string
 #stl_interfaces
 system
-#test
+test
 thread
 #throw_exception
 timer
@@ -182,12 +182,21 @@ wave
 #yap
 )
 
-
-
-DKSET(BOOST_ALL 1)
 foreach(item ${BOOST_LIBS})
-	if(item)
-	if(BOOST_ALL OR boost_${item})
+	DKSET(boost_${item} 1)
+endforeach()
+
+DKSET(boost_fiber_nolib 1)
+DKSET(boost_graph_parallel 1)
+DKSET(boost_headers 1)
+DKSET(boost_math 1)
+DKSET(boost_mpi 1)
+DKSET(boost_python 1)
+DKSET(boost_test 1)
+
+foreach(item ${BOOST_LIBS})
+	if(item AND boost_${item} AND NOT boost_${item}_nolib)
+		DKSET(BOOST_WITH ${BOOST_WITH} --with-${item})
 		WIN32_DEBUG_LIB(${BOOST}/${OS}/${DEBUG_DIR}/lib/libboost_${item}.lib)
 		WIN32_RELEASE_LIB(${BOOST}/${OS}/${RELEASE_DIR}/lib/libboost_${item}.lib)
 		WIN64_DEBUG_LIB(${BOOST}/${OS}/${DEBUG_DIR}/lib/libboost_${item}.lib)
@@ -200,8 +209,6 @@ foreach(item ${BOOST_LIBS})
 		RASPBERRY_RELEASE_LIB(${BOOST}/${OS}/${RELEASE_DIR}/lib/libboost_${item}.a)
 		ANDROID_DEBUG_LIB(${BOOST}/${OS}/${DEBUG_DIR}/lib/libboost_${item}.a)
 		ANDROID_RELEASE_LIB(${BOOST}/${OS}/${RELEASE_DIR}/lib/libboost_${item}.a)
-		DKSET(BOOST_WITH ${BOOST_WITH} --with-${item})
-	endif()
 	endif()
 endforeach()
 
