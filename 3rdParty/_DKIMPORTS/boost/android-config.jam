@@ -34,6 +34,8 @@ $(NDK_ROOT)/toolchains/llvm/prebuilt/windows-x86_64/bin/clang++
 <compileflags>-I$(NDK_ROOT)/sources/cxx-stl/llvm-libc++/include
 <compileflags>-I$(NDK_ROOT)/sources/cxx-stl/llvm-libc++abi/include
 <compileflags>-I$(NDK_ROOT)/sources/android/support/include
+<compileflags>-I$(NDK_ROOT)/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include
+<compileflags>-I$(NDK_ROOT)/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/arm-linux-androideabi
 <compileflags>-DANDROID
 <compileflags>-Wa,--noexecstack
 <compileflags>-Wformat
