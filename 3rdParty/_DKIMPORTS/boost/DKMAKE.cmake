@@ -13,17 +13,26 @@
 if(ANDROID)
 	DKDEPEND(android-ndk) #version 21e or newer required
 	DKDEPEND(mingw32)
+	DKDEPEND(mingw64)
 endif()
 
 
 ### VERSION ###
-DKSET(BOOST_MAJOR 1)
-DKSET(BOOST_MINOR 78)
-DKSET(BOOST_BUILD 0_b1)
+if(ANDROID)
+	DKSET(BOOST_MAJOR 1)
+	DKSET(BOOST_MINOR 74)
+	DKSET(BOOST_BUILD 0)
+	DKSET(BOOST_DL https://sourceforge.net/projects/boost/files/boost/1.74.0/boost_1_74_0.zip)
+else()
+	DKSET(BOOST_MAJOR 1)
+	DKSET(BOOST_MINOR 78)
+	DKSET(BOOST_BUILD 0_b1)
+	DKSET(BOOST_DL https://boostorg.jfrog.io/artifactory/main/beta/1.78.0.beta1/source/boost_1_78_0_b1.zip)
+endif()
+
 DKSET(BOOST_VERSION ${BOOST_MAJOR}_${BOOST_MINOR}_${BOOST_BUILD})
 DKSET(BOOST_NAME boost_${BOOST_VERSION})
-DKSET(BOOST_DL https://sourceforge.net/projects/boost/files/boost/${BOOST_MAJOR}.${BOOST_MINOR}.${BOOST_BUILD}/${BOOST_NAME}.zip)
-DKSET(BOOST_DL https://boostorg.jfrog.io/artifactory/main/beta/1.78.0.beta1/source/boost_1_78_0_b1.zip)
+#DKSET(BOOST_DL https://sourceforge.net/projects/boost/files/boost/${BOOST_MAJOR}.${BOOST_MINOR}.${BOOST_BUILD}/${BOOST_NAME}.zip)
 DKSET(BOOST ${3RDPARTY}/${BOOST_NAME})
 
 
