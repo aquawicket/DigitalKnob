@@ -41,7 +41,7 @@ DKLINKDIR(${BOOST}/${OS}/${RELEASE_DIR}/lib)
 
 
 
-#DKSET(BOOST_LIBS
+#DKSET(boost_libs
 #accumulators
 #algorithm
 #align
@@ -183,8 +183,8 @@ dk_sublibrary(boost wave)
 #)
 
 if(STATIC)
-foreach(lib ${BOOST_LIBS})
-	#DKSET(boost_${lib} 1)
+
+foreach(lib ${boost_libs})
 	if(NOT boost_all)
 		DKSET(BOOST_WITH ${BOOST_WITH} --with-${lib})
 	endif()
@@ -198,8 +198,8 @@ DKSET(boost_mpi_nolib 1)
 DKSET(boost_python_nolib 1)
 DKSET(boost_test_nolib 1)
 DKSET(boost_stacktrace_nolib 1)
-foreach(lib ${BOOST_LIBS})
-	if(lib AND boost_${lib} OR boost_all)
+foreach(lib ${boost_libs})
+	if(lib AND boost_${lib})
 	if(NOT boost_${lib}_nolib)
 		WIN32_DEBUG_LIB(${BOOST}/${OS}/${DEBUG_DIR}/lib/libboost_${lib}.lib)
 		WIN32_RELEASE_LIB(${BOOST}/${OS}/${RELEASE_DIR}/lib/libboost_${lib}.lib)
