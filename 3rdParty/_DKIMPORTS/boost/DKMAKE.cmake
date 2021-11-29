@@ -41,6 +41,7 @@ DKLINKDIR(${BOOST}/${OS}/${RELEASE_DIR}/lib)
 
 if(STATIC)
 
+
 DKSET(BOOST_LIBS
 #accumulators
 #algorithm
@@ -186,6 +187,10 @@ foreach(item ${BOOST_LIBS})
 	DKSET(boost_${item} 1)
 	DKSET(BOOST_WITH ${BOOST_WITH} --with-${item})
 endforeach()
+
+if(boost_all)
+	DKUNSET(BOOST_WITH)
+endif()
 
 DKSET(boost_fiber_nolib 1)
 DKSET(boost_graph_parallel_nolib 1)
