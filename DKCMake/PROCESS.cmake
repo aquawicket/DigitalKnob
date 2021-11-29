@@ -384,6 +384,7 @@ if(WIN_32)
 	string(REPLACE ";" " " RELEASE_FLAGS "${RELEASE_LINK_FLAGS}")
 	
 	set_target_properties(${APP_NAME} PROPERTIES LINK_FLAGS_DEBUG ${DEBUG_FLAGS} LINK_FLAGS_RELEASE ${RELEASE_FLAGS})
+	set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT ${APP_NAME})
 	
 	### POST BUILD ###
 	#CPP_DKFile_Copy(app_path+OS+"/Release/"+APP+".pdb", app_path+"assets/"+APP+".pdb", true)
@@ -484,6 +485,7 @@ if(WIN_64)
 	string(REPLACE ";" " " RELEASE_FLAGS "${RELEASE_LINK_FLAGS}")
 	
 	set_target_properties(${APP_NAME} PROPERTIES LINK_FLAGS_DEBUG ${DEBUG_FLAGS} LINK_FLAGS_RELEASE ${RELEASE_FLAGS})
+	set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT ${APP_NAME})
 	
 	### POST BUILD ###
 	#CPP_DKFile_Copy(app_path+OS+"/Release/"+APP+".pdb", app_path+"assets/"+APP+".pdb", true)
@@ -559,6 +561,7 @@ if(MAC)
     )
 	#set_xcode_property(${APP_NAME} "Other Code Signing Flags" "--deep")	
 	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${LIBS})
+	set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY XCODE_STARTUP_PROJECT ${APP_NAME})
 	
 	foreach(plugin ${dkdepend_list})
 		if(EXISTS "${DKPLUGINS}/${plugin}/CMakeLists.txt")
@@ -597,7 +600,7 @@ if(MAC)
 	# https://github.com/pyinstaller/pyinstaller/issues/5154#issuecomment-690646012
 	if(true)
 		message(STATUS "Making bundle app run in terminal on double-click . . .")
-		DKSET(TERMINAL_SCRIPT 
+		set(TERMINAL_SCRIPT 
 			"\#!/bin/bash\n"
 			"dir=$(cd \"$( dirname \"\${0}\")\" && pwd )\n"
 			"Open -a \"Terminal\" \"\${dir}/${APP_NAME}\"" #${APP_NAME}_bin
