@@ -4,6 +4,7 @@
 #
 # https://sourceforge.net/projects/boost/files/boost/1.74.0/boost_1_74_0.zip
 # https://dl.bintray.com/boostorg/release/1.74.0/source/boost_1_74_0.zip
+# https://boostorg.jfrog.io/artifactory/main/beta/1.78.0.beta1/source/boost_1_78_0_b1.zip
 
 # Debugging: When calling b2 to compile the boost libraries, you can use the -q flag to make it stop at the first error.
 # Notes: abi=aapcs and binary-format=elf were added to android build to supress "No best alternative for libs/context/build/asm_sources"
@@ -17,11 +18,12 @@ endif()
 
 ### VERSION ###
 DKSET(BOOST_MAJOR 1)
-DKSET(BOOST_MINOR 74)
-DKSET(BOOST_BUILD 0)
+DKSET(BOOST_MINOR 78)
+DKSET(BOOST_BUILD 0_b1)
 DKSET(BOOST_VERSION ${BOOST_MAJOR}_${BOOST_MINOR}_${BOOST_BUILD})
 DKSET(BOOST_NAME boost_${BOOST_VERSION})
 DKSET(BOOST_DL https://sourceforge.net/projects/boost/files/boost/${BOOST_MAJOR}.${BOOST_MINOR}.${BOOST_BUILD}/${BOOST_NAME}.zip)
+DKSET(BOOST_DL https://boostorg.jfrog.io/artifactory/main/beta/1.78.0.beta1/source/boost_1_78_0_b1.zip)
 DKSET(BOOST ${3RDPARTY}/${BOOST_NAME})
 
 
@@ -179,8 +181,9 @@ xpressive
 yap
 )
 
+DKSET(BOOST_ALL 1)
 foreach(item ${BOOST_LIBS})
-	if(boost_${item})
+	if(BOOST_ALL OR boost_${item})
 		WIN32_DEBUG_LIB(${BOOST}/${OS}/${DEBUG_DIR}/lib/libboost_${item}.lib)
 		WIN32_RELEASE_LIB(${BOOST}/${OS}/${RELEASE_DIR}/lib/libboost_${item}.lib)
 		WIN64_DEBUG_LIB(${BOOST}/${OS}/${DEBUG_DIR}/lib/libboost_${item}.lib)
@@ -199,9 +202,9 @@ endforeach()
 
 ### COMPILE ###
 WIN32_PATH(${BOOST})
-WIN32_COMMAND(bootstrap.bat)
-WIN32_DEBUG_COMMAND(b2 toolset=msvc-14.2 address-model=32 variant=debug link=static threading=multi runtime-debugging=on runtime-link=static define=BOOST_ALL_NO_LIB --layout=system --build-dir=${BOOST}/${OS}/${DEBUG_DIR} --stagedir=${BOOST}/${OS}/${DEBUG_DIR})
-WIN32_RELEASE_COMMAND(b2 toolset=msvc-14.2 address-model=32 variant=release link=static threading=multi runtime-debugging=off runtime-link=static define=BOOST_ALL_NO_LIB --layout=system --build-dir=${BOOST}/${OS}/${RELEASE_DIR} --stagedir=${BOOST}/${OS}/${RELEASE_DIR})
+WIN32_COMMAND("bootstrap.bat vc143")
+WIN32_DEBUG_COMMAND(b2 toolset=msvc-14.3 address-model=32 variant=debug link=static threading=multi runtime-debugging=on runtime-link=static define=BOOST_ALL_NO_LIB --layout=system --build-dir=${BOOST}/${OS}/${DEBUG_DIR} --stagedir=${BOOST}/${OS}/${DEBUG_DIR})
+WIN32_RELEASE_COMMAND(b2 toolset=msvc-14.3 address-model=32 variant=release link=static threading=multi runtime-debugging=off runtime-link=static define=BOOST_ALL_NO_LIB --layout=system --build-dir=${BOOST}/${OS}/${RELEASE_DIR} --stagedir=${BOOST}/${OS}/${RELEASE_DIR})
 
 
 WIN64_PATH(${BOOST})
