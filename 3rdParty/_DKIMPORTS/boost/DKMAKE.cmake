@@ -114,7 +114,7 @@ log
 #metaparse
 #move
 #mp11
-mpi
+#mpi
 #mpl
 #msm
 #multiprecision
@@ -138,7 +138,7 @@ program_options
 #property_tree
 #proto
 #ptr_container
-python
+#python
 #qvm
 random
 #range

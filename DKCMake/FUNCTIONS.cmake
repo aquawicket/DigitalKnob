@@ -3322,7 +3322,6 @@ endfunction()
 
 function(DKDEPEND_ALL)
 	message(STATUS "***** DKDEPEND_ALL() *****")
-	#DKSET(DEPENDALL_FILE "")
 	set(DEPENDALL_FILE "")
 	
 	if(IS_DIRECTORY ${DKIMPORTS})
@@ -3335,7 +3334,7 @@ function(DKDEPEND_ALL)
 		endforeach()
     endif()
 	
-	## Find all DKPlugins Folders from DK root
+	## Find all DKPlugins Folders from digitalknob root
 	file(GLOB children RELATIVE ${DIGITALKNOB}/ ${DIGITALKNOB}/*)
   	foreach(child ${children})
 		if(EXISTS ${DIGITALKNOB}/${child}/DKPlugins)
@@ -3343,7 +3342,6 @@ function(DKDEPEND_ALL)
 			foreach(plugin ${plugins})
 				if(EXISTS ${DIGITALKNOB}/${child}/DKPlugins/${plugin}/DKMAKE.cmake)
 					if(NOT ${plugin} STREQUAL "_DKIMPORT")
-						#DKSET(DEPENDALL_FILE ${DEPENDALL_FILE} "DKDEPEND(${plugin})\n")
 						set(DEPENDALL_FILE ${DEPENDALL_FILE} "DKDEPEND(${plugin})\n")
 					endif()
 				endif()
