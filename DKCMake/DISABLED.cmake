@@ -282,7 +282,7 @@ if(ANDROID) # Disabled for Android targets
 	DKDISABLE(flac)
 	DKDISABLE(freealut)
 	DKDISABLE(freealut-master)
-	#DKDISABLE(giflib)
+	DKDISABLE(giflib)
 	DKDISABLE(imagemagick)
 	DKDISABLE(jpeg)
 	DKDISABLE(kdevelop)
