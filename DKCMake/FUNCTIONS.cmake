@@ -112,6 +112,7 @@ endfunction()
 
 
 function(DKUNSET variable)
+	set(${variable} "" CACHE INTERNAL "")
 	unset(${variable})
 endfunction()
 

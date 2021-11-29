@@ -189,8 +189,8 @@ foreach(item ${BOOST_LIBS})
 endforeach()
 
 if(boost_all)
-	DKSET(BOOST_WITH "")
 	DKUNSET(BOOST_WITH)
+	Wait()
 endif()
 
 DKSET(boost_fiber_nolib 1)
