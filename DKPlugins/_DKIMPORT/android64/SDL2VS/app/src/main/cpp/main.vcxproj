@@ -138,7 +138,7 @@
     <Link>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories);$(ToolchainPrebuiltPath)\lib\gcc\$(ToolchainName)\$(ToolchainFullVersionName)\$(PlatformShortName);$(StlLibraryPath);$(SolutionDir)$(Platform)\$(Configuration)</AdditionalLibraryDirectories>
       <LibraryDependencies>$(StlLibraryName);%(LibraryDependencies);m;dl;GLESv1_CM;GLESv2;log;android</LibraryDependencies>
-      <AdditionalDependencies>C:\Users\Administrator\digitalknob\DK\3rdParty\SDL2-2.0.16\android64\Debug\libSDL2.a;C:\Users\Administrator\digitalknob\DK\3rdParty\SDL2_ttf-2.0.15\android64\lib\Debug\SDL_ttf.a;C:\Users\Administrator\digitalknob\DK\3rdParty\freetype-2.5.5\android64\Debug\libfreetype.a;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(USERPROFILE)\digitalknob\DK\3rdParty\SDL2-2.0.16\android32\$(Configuration)\libSDL2.a;$(USERPROFILE)\digitalknob\DK\3rdParty\SDL2_ttf-2.0.15\android32\lib\$(Configuration)\SDL_ttf.a;$(USERPROFILE)\digitalknob\DK\3rdParty\freetype-2.5.5\android32\$(Configuration)\libfreetype.a;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
@@ -149,7 +149,7 @@
     <Link>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories);$(ToolchainPrebuiltPath)\lib\gcc\$(ToolchainName)\$(ToolchainFullVersionName)\$(PlatformShortName);$(StlLibraryPath);$(SolutionDir)$(Platform)\$(Configuration)</AdditionalLibraryDirectories>
       <LibraryDependencies>$(StlLibraryName);%(LibraryDependencies);m;dl;GLESv1_CM;GLESv2;log;android</LibraryDependencies>
-      <AdditionalDependencies>C:\Users\Administrator\digitalknob\DK\3rdParty\SDL2-2.0.16\android64\Release\libSDL2.a;C:\Users\Administrator\digitalknob\DK\3rdParty\SDL2_ttf-2.0.15\android64\lib\Release\SDL_ttf.a;C:\Users\Administrator\digitalknob\DK\3rdParty\freetype-2.5.5\android64\Release\libfreetype.a;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(USERPROFILE)\digitalknob\DK\3rdParty\SDL2-2.0.16\android32\$(Configuration)\libSDL2.a;$(USERPROFILE)\digitalknob\DK\3rdParty\SDL2_ttf-2.0.15\android32\lib\$(Configuration)\SDL_ttf.a;$(USERPROFILE)\digitalknob\DK\3rdParty\freetype-2.5.5\android32\$(Configuration)\libfreetype.a;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">
@@ -160,7 +160,7 @@
     <Link>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories);$(ToolchainPrebuiltPath)\lib\gcc\$(ToolchainName)\$(ToolchainFullVersionName)\$(PlatformShortName);$(StlLibraryPath);$(SolutionDir)$(Platform)\$(Configuration)</AdditionalLibraryDirectories>
       <LibraryDependencies>$(StlLibraryName);%(LibraryDependencies);m;dl;GLESv1_CM;GLESv2;log;android</LibraryDependencies>
-      <AdditionalDependencies>C:\Users\Administrator\digitalknob\DK\3rdParty\SDL2-2.0.16\android64\Debug\libSDL2.a;C:\Users\Administrator\digitalknob\DK\3rdParty\SDL2_ttf-2.0.15\android64\lib\Debug\SDL_ttf.a;C:\Users\Administrator\digitalknob\DK\3rdParty\freetype-2.5.5\android64\Debug\libfreetype.a;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(USERPROFILE)\digitalknob\DK\3rdParty\SDL2-2.0.16\android64\$(Configuration)\libSDL2.a;$(USERPROFILE)\digitalknob\DK\3rdParty\SDL2_ttf-2.0.15\android64\lib\$(Configuration)\SDL_ttf.a;$(USERPROFILE)\digitalknob\DK\3rdParty\freetype-2.5.5\android64\$(Configuration)\libfreetype.a;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">
@@ -171,7 +171,7 @@
     <Link>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories);$(ToolchainPrebuiltPath)\lib\gcc\$(ToolchainName)\$(ToolchainFullVersionName)\$(PlatformShortName);$(StlLibraryPath);$(SolutionDir)$(Platform)\$(Configuration)</AdditionalLibraryDirectories>
       <LibraryDependencies>$(StlLibraryName);%(LibraryDependencies);m;dl;GLESv1_CM;GLESv2;log;android</LibraryDependencies>
-      <AdditionalDependencies>C:\Users\Administrator\digitalknob\DK\3rdParty\SDL2-2.0.16\android64\Release\libSDL2.a;C:\Users\Administrator\digitalknob\DK\3rdParty\SDL2_ttf-2.0.15\android64\lib\Release\SDL_ttf.a;C:\Users\Administrator\digitalknob\DK\3rdParty\freetype-2.5.5\android64\Release\libfreetype.a;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(USERPROFILE)\digitalknob\DK\3rdParty\SDL2-2.0.16\android64\$(Configuration)\libSDL2.a;$(USERPROFILE)\digitalknob\DK\3rdParty\SDL2_ttf-2.0.15\android64\lib\$(Configuration)\SDL_ttf.a;$(USERPROFILE)\digitalknob\DK\3rdParty\freetype-2.5.5\android64\$(Configuration)\libfreetype.a;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
@@ -182,7 +182,7 @@
     <Link>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories);$(ToolchainPrebuiltPath)\lib\gcc\$(ToolchainName)\$(ToolchainFullVersionName)\$(PlatformShortName);$(StlLibraryPath);$(SolutionDir)$(Platform)\$(Configuration)</AdditionalLibraryDirectories>
       <LibraryDependencies>$(StlLibraryName);%(LibraryDependencies);m;dl;GLESv1_CM;GLESv2;log;android</LibraryDependencies>
-      <AdditionalDependencies>C:\Users\Administrator\digitalknob\DK\3rdParty\SDL2-2.0.16\android64\Debug\libSDL2.a;C:\Users\Administrator\digitalknob\DK\3rdParty\SDL2_ttf-2.0.15\android64\lib\Debug\SDL_ttf.a;C:\Users\Administrator\digitalknob\DK\3rdParty\freetype-2.5.5\android64\Debug\libfreetype.a;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(USERPROFILE)\digitalknob\DK\3rdParty\SDL2-2.0.16\android32\$(Configuration)\libSDL2.a;$(USERPROFILE)\digitalknob\DK\3rdParty\SDL2_ttf-2.0.15\android32\lib\$(Configuration)\SDL_ttf.a;$(USERPROFILE)\digitalknob\DK\3rdParty\freetype-2.5.5\android32\$(Configuration)\libfreetype.a;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'">
@@ -193,7 +193,7 @@
     <Link>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories);$(ToolchainPrebuiltPath)\lib\gcc\$(ToolchainName)\$(ToolchainFullVersionName)\$(PlatformShortName);$(StlLibraryPath);$(SolutionDir)$(Platform)\$(Configuration)</AdditionalLibraryDirectories>
       <LibraryDependencies>$(StlLibraryName);%(LibraryDependencies);m;dl;GLESv1_CM;GLESv2;log;android</LibraryDependencies>
-      <AdditionalDependencies>C:\Users\Administrator\digitalknob\DK\3rdParty\SDL2-2.0.16\android64\Release\libSDL2.a;C:\Users\Administrator\digitalknob\DK\3rdParty\SDL2_ttf-2.0.15\android64\lib\Release\SDL_ttf.a;C:\Users\Administrator\digitalknob\DK\3rdParty\freetype-2.5.5\android64\Release\libfreetype.a;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(USERPROFILE)\digitalknob\DK\3rdParty\SDL2-2.0.16\android32\$(Configuration)\libSDL2.a;$(USERPROFILE)\digitalknob\DK\3rdParty\SDL2_ttf-2.0.15\android32\lib\$(Configuration)\SDL_ttf.a;$(USERPROFILE)\digitalknob\DK\3rdParty\freetype-2.5.5\android32\$(Configuration)\libfreetype.a;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -204,7 +204,7 @@
     <Link>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories);$(ToolchainPrebuiltPath)\lib\gcc\$(ToolchainName)\$(ToolchainFullVersionName)\$(PlatformShortName);$(StlLibraryPath);$(SolutionDir)$(Platform)\$(Configuration)</AdditionalLibraryDirectories>
       <LibraryDependencies>$(StlLibraryName);%(LibraryDependencies);m;dl;GLESv1_CM;GLESv2;log;android</LibraryDependencies>
-      <AdditionalDependencies>C:\Users\Administrator\digitalknob\DK\3rdParty\SDL2-2.0.16\android64\Debug\libSDL2.a;C:\Users\Administrator\digitalknob\DK\3rdParty\SDL2_ttf-2.0.15\android64\lib\Debug\SDL_ttf.a;C:\Users\Administrator\digitalknob\DK\3rdParty\freetype-2.5.5\android64\Debug\libfreetype.a;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(USERPROFILE)\digitalknob\DK\3rdParty\SDL2-2.0.16\android64\$(Configuration)\libSDL2.a;$(USERPROFILE)\digitalknob\DK\3rdParty\SDL2_ttf-2.0.15\android64\lib\$(Configuration)\SDL_ttf.a;$(USERPROFILE)\digitalknob\DK\3rdParty\freetype-2.5.5\android64\$(Configuration)\libfreetype.a;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -215,7 +215,7 @@
     <Link>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories);$(ToolchainPrebuiltPath)\lib\gcc\$(ToolchainName)\$(ToolchainFullVersionName)\$(PlatformShortName);$(StlLibraryPath);$(SolutionDir)$(Platform)\$(Configuration)</AdditionalLibraryDirectories>
       <LibraryDependencies>$(StlLibraryName);%(LibraryDependencies);m;dl;GLESv1_CM;GLESv2;log;android</LibraryDependencies>
-      <AdditionalDependencies>C:\Users\Administrator\digitalknob\DK\3rdParty\SDL2-2.0.16\android64\Release\libSDL2.a;C:\Users\Administrator\digitalknob\DK\3rdParty\SDL2_ttf-2.0.15\android64\lib\Release\SDL_ttf.a;C:\Users\Administrator\digitalknob\DK\3rdParty\freetype-2.5.5\android64\Release\libfreetype.a;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(USERPROFILE)\digitalknob\DK\3rdParty\SDL2-2.0.16\android64\$(Configuration)\libSDL2.a;$(USERPROFILE)\digitalknob\DK\3rdParty\SDL2_ttf-2.0.15\android64\lib\$(Configuration)\SDL_ttf.a;$(USERPROFILE)\digitalknob\DK\3rdParty\freetype-2.5.5\android64\$(Configuration)\libfreetype.a;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
