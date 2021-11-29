@@ -77,7 +77,7 @@ date_time
 #dynamic_bitset
 #endian
 exception
-fiber
+#fiber
 filesystem
 #flyweight
 #foreach
@@ -89,7 +89,7 @@ filesystem
 #geometry
 #gil
 graph
-graph_parallel
+#graph_parallel
 #hana
 headers
 #heap
