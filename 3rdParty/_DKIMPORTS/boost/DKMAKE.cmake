@@ -152,7 +152,7 @@ serialization
 #smart_ptr
 #sort
 #spirit
-stacktrace
+#stacktrace
 #statechart
 #static_assert
 #static_string
