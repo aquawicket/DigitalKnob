@@ -101,7 +101,7 @@ bool DKWindows::CpuUsedByApp(int& cpu){
 bool DKWindows::CreateConsoleHandler(){
 	DKDEBUGFUNC();
 	if(!SetConsoleCtrlHandler((PHANDLER_ROUTINE)DKWindows::ConsoleHandler, true))
-		return DKERROR("Could not set Console Handler. \n");
+		return DKERROR("Could not set Console Handler\n");
 	DKWindows::consoleWindow = GetConsoleWindow();
 	RECT desktop;
 	const HWND hDesktop = GetDesktopWindow();
@@ -240,7 +240,7 @@ bool DKWindows::GetClipboard(DKString& text){
 	if(OpenClipboard(NULL)){
 		buffer = (char*)GetClipboardData(CF_TEXT);
 		if(!buffer)
-			return DKERROR("buffer invalid");
+			return DKERROR("buffer invalid\n");
 		text = buffer;
 		CloseClipboard(); 
 		return true;
@@ -274,7 +274,7 @@ bool DKWindows::GetMousePos(int& x, int& y){
 	DKDEBUGFUNC(x, y);
 	POINT p;
 	if(!::GetCursorPos(&p))
-		return DKERROR("::GetCursorPos() failed");
+		return DKERROR("::GetCursorPos() failed\n");
 	x = p.x;
 	y = p.y;
 	return true;
@@ -345,7 +345,7 @@ bool DKWindows::GetScreenWidth(int& w){
 	RECT desktop;
 	const HWND hDesktop = GetDesktopWindow();
 	if(!GetWindowRect(hDesktop, &desktop))
-		return DKERROR("GetWindowRect() failed");
+		return DKERROR("GetWindowRect() failed\n");
 	w = desktop.right;
 	return true && DKDEBUGRETURN(w);
 }
@@ -354,7 +354,7 @@ bool DKWindows::GetScreenHeight(int& h){
 	RECT desktop;
 	const HWND hDesktop = GetDesktopWindow();
 	if(!GetWindowRect(hDesktop, &desktop))
-		return DKERROR("GetWindowRect() failed");
+		return DKERROR("GetWindowRect() failed\n");
 	h = desktop.bottom;
 	return true && DKDEBUGRETURN(h);
 }
@@ -372,7 +372,7 @@ bool DKWindows::GetUsername(DKString& username){
 		return true;
 	}
 	*/
-	return DKERROR("ERROR: cannot get username");
+	return DKERROR("cannot get username\n");
 }
 
 bool DKWindows::GetVolume(int& percent){
@@ -698,35 +698,22 @@ bool DKWindows::SetClipboardImage(const DKString& file){
 	::SelectPalette(hDC, hOldPal, FALSE);
 	::ReleaseDC(NULL, hDC);
 	if(!hDIB)
-		return DKERROR("hDIB invalid");
+		return DKERROR("hDIB invalid\n");
 	return true;
 }
 
 bool DKWindows::SetMousePos(const int& x, const int& y){
 	DKDEBUGFUNC(x, y);
 	if(!::SetCursorPos(x, y))
-		return DKERROR("::SetCursorPos() failed");
+		return DKERROR("::SetCursorPos() failed\n");
 	return true;
 }
 
-void DKWindows::SetTitle(){
-	DKDEBUGFUNC();
-	//TODO - add string variable for title input
-	/////  Set the window title
-	DKString title; 
-	DKFile::GetExeName(title);
-	title += " - WIN32";
-#ifdef DEBUG
-	title += " DEBUG ";
-#else
-	title += " RELEASE ";
-#endif
-	DKString mTime;
-	DKString file;
-	DKFile::GetExePath(file);
-	DKFile::GetModifiedTime(file, mTime);
-	title += mTime;
-	SetConsoleTitle(title.c_str());
+bool DKWindows::SetTitle(const DKString& title){
+	DKDEBUGFUNC(title);
+	if (!SetConsoleTitle(title.c_str()))
+		return DKERROR("SetConsoleTitle() failed\n");
+	return true;
 }
 
 bool DKWindows::SetVolume(int& percent){

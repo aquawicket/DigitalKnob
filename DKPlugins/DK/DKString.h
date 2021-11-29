@@ -16,7 +16,7 @@
 #include <iomanip>  //std::setw
 #include <algorithm>
 #include <functional> 
-#include <cctype>
+//#include <cctype>
 #include <locale>
 #include <stdio.h>
 #include <stdlib.h>

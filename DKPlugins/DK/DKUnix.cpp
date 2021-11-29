@@ -39,7 +39,7 @@ bool DKUnix::GetUsername(DKString& username){
 #endif
 #ifdef IOS
     //Get the username from the app_path in case we are in ios-simulator
-    std::size_t pos = DKFile::app_path.find("/Library");
+    std::string::size_type pos = DKFile::app_path.find("/Library");
     username = DKFile::app_path.substr(0, pos);
     replace(username, "/Users/", "");
     DKINFO("DKUnix::GetUsername() = "+username+"\n");

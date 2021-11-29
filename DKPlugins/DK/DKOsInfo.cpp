@@ -7,6 +7,46 @@
 #import <CoreServices/CoreServices.h>
 #endif
 
+bool GetOSFlag(DKString& flag) {
+#ifdef WIN32
+	flag = "WIN32";
+#endif
+#ifdef WIN64
+	flag = "WIN64";
+#endif
+#ifdef MAC32
+	flag = "MAC32";
+#endif
+#ifdef MAC64
+	flag = "MAC64";
+#endif
+#ifdef IOS32
+	flag = "IOS32";
+#endif
+#ifdef IOS64
+	flag = "IOS64";
+#endif
+#ifdef LINUX32
+	flag = "LINUX32";
+#endif
+#ifdef LINUX64
+	flag = "LINUX64";
+#endif
+#ifdef RASPBERRY32
+	flag = "RASPBERRY32";
+#endif
+#ifdef RASPBERRY64
+	flag = "RASPBERRY64";
+#endif
+#ifdef ANDROID32
+	flag = "ANDROID32";
+#endif
+#ifdef ANDROID64
+	flag = "ANDROID64";
+#endif
+	return true;
+}
+
 bool GetOSInfo(DKString& info){
 	DKString oscompany;
 	GetOSCompany(oscompany);
@@ -143,7 +183,7 @@ bool GetOSName(DKString& osname){
 	osname = "Android";
 	return true;
 #elif defined(LINUX)
-	osname = "";
+	osname = "Linux";
 	return true;
 #endif
 	return DKERROR("not implemented on this OS \n");

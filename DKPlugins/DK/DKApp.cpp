@@ -10,7 +10,6 @@ int    DKApp::argc;
 char** DKApp::argv;
 bool   DKApp::active = false;
 bool   DKApp::paused = false;
-//std::vector<boost::function<void()> > DKApp::loop_funcs;
 std::vector<std::function<void()> > DKApp::loop_funcs;
 
 //// MAIN ////
@@ -41,41 +40,54 @@ DKApp::DKApp(int argc, char** argv){
 	DKApp::argc = argc;
 	DKApp::argv = argv;
 	DKUtil::SetMainThreadNow();
-	DKBUILDTIME();
-	if (__cplusplus == 201703L) { DKINFO("C++17 \n"); }
-	else if (__cplusplus == 201402L) { DKINFO("C++14 \n"); }
-	else if (__cplusplus == 201103L) { DKINFO("C++11 \n"); }
-	else if (__cplusplus == 199711L) { DKINFO("C++98 \n"); }
-	else DKINFO("pre-standard C++ \n");
-    if(argc){
-        DKFile::exe_path = argv[0];
-    }
+	if (argc)
+		DKFile::exe_path = argv[0];
 	DKFile::NormalizePath(DKFile::exe_path);
+
+	DKString appName;
+	DKFile::GetAppName(appName);
+	DKString version;
+	GetVersion(version);
+	DKString osFlag;
+	GetOSFlag(osFlag);
+	DKString buildType;
+#ifdef DEBUG
+		buildType = "DEBUG";
+#else
+		buildType = "RELEASE"
+#endif
+
+	DKINFO(appName + " " + version + " " + osFlag + " " + buildType +"\n");
+
+	if(__cplusplus == 201703L) { DKINFO("C++17 \n"); }
+	else if(__cplusplus == 201402L) { DKINFO("C++14 \n"); }
+	else if(__cplusplus == 201103L) { DKINFO("C++11 \n"); }
+	else if(__cplusplus == 199711L) { DKINFO("C++98 \n"); }
+	else DKINFO("pre-standard C++ \n");
 #ifdef WIN32
 	DKWindows::CreateConsoleHandler();
-	DKWindows::SetTitle();
+	DKWindows::SetTitle(appName + " " + version + " " + osFlag + " " + buildType);
 #endif
-	DKString info;
-	GetOSInfo(info);
-	DKINFO(info + "\n");
+	DKString osInfo;
+	GetOSInfo(osInfo);
+	DKINFO(osInfo + "\n");
 	DKString date;
 	DKUtil::GetDate(date);
 	DKString time;
 	DKUtil::GetTime(time);
 	DKINFO(date + " " + time + "\n");
-	//print args
 	if (DKApp::argc > 1) {
 		for (int i = 1; i < DKApp::argc; ++i)
-			DKINFO("argv[" + toString(i) + "] = " + toString(DKApp::argv[i]) + "\n");
+			DKINFO("argv[" + toString(i) + "] = " + toString(DKApp::argv[i]) + "\n"); //print args
 	}
 	//Display app path information
 	DKFile::GetExePath(DKFile::exe_path);
-	DKFile::GetExeName(DKFile::exe_name);
 	DKFile::GetAppPath(DKFile::app_path);
+	DKFile::GetExeName(DKFile::exe_name);
 	DKFile::GetAppName(DKFile::app_name);
 	DKINFO("DKFile::exe_path = " + DKFile::exe_path + "\n");
-	DKINFO("DKFile::exe_name = " + DKFile::exe_name + "\n");
 	DKINFO("DKFile::app_path = " + DKFile::app_path + "\n");
+	DKINFO("DKFile::exe_name = " + DKFile::exe_name + "\n");
 	DKINFO("DKFile::app_name = " + DKFile::app_name + "\n");
 	DKClass::DKCreate("DKAssets"); //Nothing will be logged to log.txt until here.
 	DKObject* app = DKClass::DKCreate("App"); //App.h/App.cpp (user code)

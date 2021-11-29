@@ -240,7 +240,7 @@ bool DKFile::GetAppPath(DKString& apppath){
 	//DKDEBUGFUNC(apppath);
 	if (!DKFile::PathExists(DKFile::exe_path))
 		DKFile::GetExePath(DKFile::exe_path);
-	unsigned long found = 0;
+	std::string::size_type found = 0;
 #ifdef WIN32
 	apppath = DKFile::exe_path;
 	found = apppath.find_last_of("/");
@@ -266,7 +266,7 @@ bool DKFile::GetBasename(const DKString& path, DKString& basename){
 	basename = path;
 	if (basename.back() == '/')
 		basename.pop_back();
-	unsigned found = basename.find_last_of("/");
+	std::string::size_type found = basename.find_last_of("/");
 	if (found != std::string::npos && found < basename.length()) {
 		basename = basename.substr(found + 1);
 		return true && DKDEBUGRETURN(path, basename);
@@ -319,7 +319,7 @@ bool DKFile::GetDrives(DKStringArray& strings){
 bool DKFile::GetExeName(DKString& exename){
 	if(!DKFile::PathExists(DKFile::exe_path))
 		DKFile::GetExePath(DKFile::exe_path);
-	unsigned long found = DKFile::exe_path.find_last_of("/");
+	std::string::size_type found = DKFile::exe_path.find_last_of("/");
 	if (found != std::string::npos && found < DKFile::exe_path.length()) {
 		exename = DKFile::exe_path.substr(found + 1);
 		DebugPath(exename);
@@ -356,7 +356,7 @@ bool DKFile::GetExtention(const DKString& file, DKString& extension){
 		DKWARN("file ("+file+") has no extension \n");
 		return true && DKDEBUGRETURN(file, extension);
 	}
-	unsigned found = file.find_last_of(".");
+	std::string::size_type found = file.find_last_of(".");
 	extension = file.substr(found,file.size());
 	return true && DKDEBUGRETURN(file, extension);
 }
@@ -366,7 +366,7 @@ bool DKFile::GetFileName(const DKString& path, DKString& filename){
 	filename = path;
 	if (filename.back() == '/')
 		filename.pop_back();
-	unsigned found = filename.find_last_of("/");
+	std::string::size_type found = filename.find_last_of("/");
 	if(found != std::string::npos && found < filename.length()){
 		filename = filename.substr(found+1);
 		return true && DKDEBUGRETURN(path, filename);
@@ -381,7 +381,7 @@ bool DKFile::GetFilePath(const DKString& file, DKString& path){
 	path = file;
 	if(path.back() == '/')
 		path.pop_back();
-	unsigned int found = path.find_last_of("/");
+	std::string::size_type found = path.find_last_of("/");
 	if(found != std::string::npos && found < path.length()){
 		path = path.substr(0, found+1);
 		DebugPath(path);
@@ -737,7 +737,7 @@ bool DKFile::RemoveDirectory(const DKString& path){
 bool DKFile::RemoveExtention(DKString& file){
 	DKDEBUGFUNC(file);
 	DebugPath(file);
-	unsigned long found = file.find_last_of(".");
+	std::string::size_type found = file.find_last_of(".");
 	file = file.substr(0,found);
 	return true;
 }
@@ -776,15 +776,15 @@ bool DKFile::SetSetting(const DKString& file, const DKString& setting, const DKS
 	//If the variable looks like this: [VARIABLE]
 	//then we return everything up to the next [VARIABLE] or to the end of the file.
 	if(has(setting,"[") && has(setting,"]")){
-		size_t temp = filestring.find(setting,0);
+		std::string::size_type temp = filestring.find(setting,0);
 		if(temp == std::string::npos){
 			filestring.append("\n" + setting + " " + value); //create entry
 			DKFile::StringToFile(filestring,path);
 			DKINFO("WROTE: "+filestring+" TO: "+path+" \n");
 			return true;
 		}
-		size_t start = filestring.find("]",temp);
-		size_t end = filestring.find("[",start);
+		std::string::size_type start = filestring.find("]",temp);
+		std::string::size_type end = filestring.find("[",start);
 		if(end == std::string::npos)
 			end = filestring.size();
 		//DKString string = filestring.substr(start+1, end-start-1);
@@ -797,15 +797,15 @@ bool DKFile::SetSetting(const DKString& file, const DKString& setting, const DKS
 	//If the variable looks like this:  VARIABLE 
 	//then we return the rest of the line
 	DKString string = setting + " ";
-	size_t temp = filestring.find(string,0);
+	std::string::size_type temp = filestring.find(string,0);
 	if(temp == std::string::npos){
 		filestring.append("\n" + setting + " " + value); //create entry
 		DKFile::StringToFile(filestring,file);
 		DKINFO("WROTE: "+filestring+" TO: "+file+" \n");
 		return true;
 	}
-	size_t start = filestring.find(" ",temp);
-	size_t end = filestring.find("\n",start);
+	std::string::size_type start = filestring.find(" ",temp);
+	std::string::size_type end = filestring.find("\n",start);
 	//DKString string = filestring.substr(start+1, end-start-1);
 	filestring.replace(start+1,end-start-1,value.c_str()); 
 	DKFile::StringToFile(filestring,file);

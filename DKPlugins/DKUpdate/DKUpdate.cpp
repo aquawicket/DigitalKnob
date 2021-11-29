@@ -258,7 +258,7 @@ bool DKUpdate::UpdatePlugin(const DKString& url)
 
 	//now we need to get the download directory and create the folder if it does not exist
 	//just take the last / in url2 the end of the string for the plugin name.
-	std::size_t found = url2.find_last_of("/");
+	std::string::size_type found = url2.find_last_of("/");
 	DKINFO("found = "+toString(found)+"\n");
 
 	DKString plugin = url2.substr(found+1, url2.size());

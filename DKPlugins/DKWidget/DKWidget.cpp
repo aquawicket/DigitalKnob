@@ -448,7 +448,7 @@ void DKWidget::GetAvailableId(const DKString& id, DKString& out)
 	
 	while(GetElementById(out)){
 		//if there is a .  the number must come before
-		std::size_t found = id.find_last_of(".");
+		std::string::size_type found = id.find_last_of(".");
 		if(found != -1){
 		    out = id.substr(0,found)+toString(i)+id.substr(found);
 		}
@@ -1138,9 +1138,9 @@ bool DKWidget::SetProperty(Rocket::Core::Element* element, const DKString& name,
 		if(has(value,"rgba")){
 			//DKINFO("DKWidget::SetProperty() background-color has rgba()\n");
 			//DKINFO(value+"\n");
-			std::size_t start = value.find_last_of(",")+1;
+			std::string::size_type start = value.find_last_of(",")+1;
 			//DKINFO("start:"+toString(start)+"\n");
-			std::size_t end = value.find_last_of(")");
+			std::string::size_type end = value.find_last_of(")");
 			//DKINFO("end:"+toString(end)+"\n");
 			int newvalue = (int)(toFloat(value.substr(start,end-start)) * 255);
 			finalValue.replace(start,end-start,toString(newvalue));

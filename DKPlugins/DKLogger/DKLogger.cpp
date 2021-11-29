@@ -98,7 +98,7 @@ bool Log(const char* file, int line, const char* func, const DKString& text, con
 	}
 	if(log_lines || lvl == DK_ERROR || lvl == DK_FATAL) {
 		DKString filename = file;
-		unsigned found = filename.find_last_of("/\\");
+		std::string::size_type found = filename.find_last_of("/\\");
 		if(found != std::string::npos && found < filename.length())
 			string += filename.substr(found+1);
 		string = string + ":" + toString(line) + "  ";

@@ -1,6 +1,7 @@
 # DISABLED FOR ALL
 DKDISABLE(_TEMPLATE_APP_)
 DKDISABLE(_TEMPLATE_LIB_)
+DKDISABLE(android_java_tools)
 DKDISABLE(conio.h)
 DKDISABLE(DKJerryscript)
 DKDISABLE(DKOFWindow)
@@ -181,7 +182,6 @@ if(NOT LINUX) # Disabled NON Linux targets
 	DKDISABLE(libudev-dev)
 	DKDISABLE(libx11-dev)
 	DKDISABLE(libxrandr-dev)
-	DKDISABLE(libsndfile1-dev)
 	DKDISABLE(libxtst-dev)
 	DKDISABLE(mesa-common-dev)
 endif()
@@ -237,7 +237,6 @@ if(RASPBERRY) # Disabled for Raspberry Pi targets
 	DKDISABLE(imagemagick)
 	DKDISABLE(jdk)
 	DKDISABLE(leptonica)
-	DKDISABLE(libsndfile1-dev)
 	DKDISABLE(libwebp)
 	DKDISABLE(libwebsockets)
 	DKDISABLE(libxml2)

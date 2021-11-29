@@ -83,6 +83,14 @@ extern DKString log_hide;
 extern bool stacktrace_on_errors;
 extern bool exception_on_errors;
 
+bool GetVersion(DKString& version);
+bool GetBuildMonth(const char* buildDate, DKString& buildMonth);
+bool GetBuildDay(const char* buildDate, DKString& buildDay);
+bool GetBuildYear(const char* buildDate, DKString& buildYear);
+bool GetBuildHour(const char* buildTime, DKString& buildHour);
+bool GetBuildMinute(const char* buildTime, DKString& buildMinute);
+bool GetBuildSecond(const char* buildTime, DKString& buildSecond);
+
 bool Clear();
 bool ColorMap();
 bool Log(const char* file, int line, const char* func, const DKString& input, const int lvl = DK_INFO);
@@ -198,7 +206,12 @@ namespace {
 void signal_handler(int signal);
 */
 
-#define  DKBUILDTIME() Log(__FILE__, __LINE__, __FUNCTION__, __DATE__  __TIME__, DK_INFO);
+#define DKBUILDMONTH(buildMonth) GetBuildMonth(__DATE__, buildMonth);
+#define DKBUILDDAY(buildDay) GetBuildDay(__DATE__, buildDay);
+#define DKBUILDYEAR(buildYear) GetBuildYear(__DATE__, buildYear);
+#define DKBUILDHOUR(buildHour) GetBuildHour(__TIME__, buildHour);
+#define DKBUILDMINUTE(buildMinute) GetBuildMinute(__TIME__, buildMinute);
+#define DKBUILDSECOND(buildSecond) GetBuildSecond(__TIME__, buildSecond);
 #define  DKASSERT(message) Log(__FILE__, __LINE__, __FUNCTION__, message, DK_ASSERT);
 #define   DKFATAL(message) Log(__FILE__, __LINE__, __FUNCTION__, message, DK_FATAL);
 #define   DKERROR(message) Log(__FILE__, __LINE__, __FUNCTION__, message, DK_ERROR);

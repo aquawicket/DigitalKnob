@@ -70,34 +70,27 @@ public:
 	int last_mouseX;
 	int last_mouseY;
 
-	//static std::vector<boost::function<bool(SDL_Event *event)> > event_funcs;
 	static std::vector<std::function<bool(SDL_Event* event)> > event_funcs;
-	//static std::vector<boost::function<void()> > render_funcs;
 	static std::vector<std::function<void()> > render_funcs;
-	//static std::vector<boost::function<void()> > update_funcs;
 	static std::vector<std::function<void()> > update_funcs;
 
 	template<class T>
 	static void AddEventFunc(bool (T::*func)(SDL_Event *event), T* _this){
-		//event_funcs.push_back(boost::bind(func, _this, boost::placeholders::_1));
 		event_funcs.push_back(std::bind(func, _this, std::placeholders::_1));
 	}
 
 	template<class T>
 	static void AddRenderFunc(void (T::*func)(), T* _this){
-		//render_funcs.push_back(boost::bind(func, _this));
 		render_funcs.push_back(std::bind(func, _this));
 	}
 
 	template<class T>
 	static void AddRenderFuncFirst(void (T::*func)(), T* _this){
-		//render_funcs.insert(render_funcs.begin(), boost::bind(func, _this));
 		render_funcs.insert(render_funcs.begin(), std::bind(func, _this));
 	}
 
 	template<class T>
 	static void AddUpdateFunc(void (T::* func)(), T* _this){
-		//update_funcs.push_back(boost::bind(func, _this));
 		update_funcs.push_back(std::bind(func, _this));
 	}
 };

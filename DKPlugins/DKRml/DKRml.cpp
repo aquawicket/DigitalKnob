@@ -111,7 +111,7 @@ bool DKRml::GetSourceCode(DKString& source_code) {
 	DKINFO("##################################################################\n");
 	
 	// Actually, we only want the  last html node
-	unsigned long n = source_code.rfind("<html");
+	std::string::size_type n = source_code.rfind("<html");
 	if(n < 0)
 		return DKWARN("html tag not found\n");
 
@@ -244,12 +244,12 @@ bool DKRml::LoadUrl(const DKString& url){
 	else
 		_url = workingPath + _url;
 	//Get the working path;
-	std::size_t found = _url.find_last_of("/");
+	std::string::size_type found = _url.find_last_of("/");
 	workingPath = _url.substr(0, found + 1);
 	DKINFO("DKRml::LoadUrl(): workingPath: " + workingPath + "\n");
 	DKINFO("DKRml::LoadUrl(): href: " + href + "\n");
 	//get the protocol
-	unsigned long n = _url.find(":");
+	std::string::size_type n = _url.find(":");
 	protocol = _url.substr(0,n);
 	DKINFO("DKRml::LoadUrl(): protocol: "+protocol+"\n");
 	found = _url.rfind("/");

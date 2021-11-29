@@ -21,12 +21,10 @@
 #ifdef ANDROID
 	#include <GLES/gl.h>
 #endif
+#include <DK/DKOsInfo.h>
 
-//std::vector<boost::function<bool(SDL_Event *event)> > DKSDLWindow::event_funcs;
 std::vector<std::function<bool(SDL_Event* event)> > DKSDLWindow::event_funcs;
-//std::vector<boost::function<void()> > DKSDLWindow::render_funcs;
 std::vector<std::function<void()> > DKSDLWindow::render_funcs;
-//std::vector<boost::function<void()> > DKSDLWindow::update_funcs;
 std::vector<std::function<void()> > DKSDLWindow::update_funcs;
 std::map<int, int> DKSDLWindow::sdlKeyCode;
 std::map<int, int> DKSDLWindow::sdlCharCode;
@@ -47,8 +45,7 @@ bool DKSDLWindow::Init() {
     if(SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_TIMER) < 0)
         return DKERROR("SDL_Init Error: " + DKString(SDL_GetError()) + "\n");
     DKString title;
-    DKFile::GetExeName(title);
-    DKFile::RemoveExtention(title);
+    DKFile::GetAppName(title);
     mTitle = title;
     winX = 0;
     winY = 0;
@@ -152,32 +149,23 @@ bool DKSDLWindow::Init() {
 #endif
 #endif
     //Set window Title
-    DKString title2;
-    DKFile::GetExeName(title2);
-#if defined(WIN32) && !defined(WIN64)
-    title2 += " - WIN32";
-#elif WIN64
-    title2 += " - WIN64";
-#endif
-#ifdef MAC
-    title2 += " - MAC";
-#endif
-#ifdef LINUX
-    title2 += " - LINUX";
-#endif
+    DKString appName;
+    DKFile::GetAppName(appName);
+    DKString version;
+    GetVersion(version);
+    DKString osFlag;
+    GetOSFlag(osFlag);
+    DKString buildType;
 #ifdef DEBUG
-    title2 += " DEBUG ";
+    buildType = "DEBUG";
 #else
-    title2 += " RELEASE ";
+    buildType = "RELEASE"
 #endif
-    DKString mTime;
-    DKString file;
-    DKFile::GetExePath(file);
-    DKFile::GetModifiedTime(file, mTime);
-    title2 += mTime;
+    DKString windowTitle = appName + " " + version + " " + osFlag + " " + buildType;
+
     DKString icon = DKFile::local_assets + "icon.ico";
     SetIcon(&icon, NULL);
-    SDL_SetWindowTitle(window, title2.c_str());
+    SDL_SetWindowTitle(window, windowTitle.c_str());
     DKClass::RegisterFunc("DKSDLWindow::TestInt", &DKSDLWindow::TestInt, this);
     DKClass::RegisterFunc("DKSDLWindow::TestString", &DKSDLWindow::TestString, this);
     DKClass::RegisterFunc("DKSDLWindow::TestReturnInt", &DKSDLWindow::TestReturnInt, this);
@@ -212,7 +200,7 @@ bool DKSDLWindow::Init() {
     MapInputs();
     SDL_SetEventFilter(&DKSDLWindow::EventFilter, this); //DEBUG : bypassing events here for now
 #if !defined(ANDROID) && !defined(IOS)
-	https://github.com/ocornut/imgui/issues/1116#issuecomment-297701113
+	// https://github.com/ocornut/imgui/issues/1116#issuecomment-297701113
     SDL_GLContext glcontext = SDL_GL_CreateContext(window);
     SDL_GL_MakeCurrent(window, glcontext);
     gl_version = (char*)glGetString(GL_VERSION);

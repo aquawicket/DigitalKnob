@@ -140,7 +140,7 @@ bool DKAssets::GetAssetsPath(DKString& path){
 	return false;
 #endif
 #ifdef IOS
-    std::size_t pos = DKFile::app_path.find("/Library");
+    std::string::size_type pos = DKFile::app_path.find("/Library");
     DKString userpath = DKFile::app_path.substr(0, pos);
     DKStringArray folders;
     DKFile::GetDirectoryContents(userpath + "/digitalknob", folders);
@@ -184,14 +184,14 @@ bool DKAssets::GetDataPath(DKString& path){
 #endif
 #ifdef MAC
     path = DKFile::exe_path;
-    unsigned n = path.find_last_of("/");
+    std::string::size_type n = path.find_last_of("/");
     path.erase (path.begin()+n+1, path.end());
 	replace(path, "/MacOS", "/Resources");
 	return true;
 #endif
 #ifdef IOS //FIXME - double check that iOS doesn't have the MAC preprocessor definition.
 	path = DKFile::exe_path;
-    unsigned long n = path.find_last_of("/");
+    std::string::size_type n = path.find_last_of("/");
     path.erase(path.begin()+n+1, path.end());
 	path += "assets/";
 	return true;

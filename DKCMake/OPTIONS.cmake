@@ -77,6 +77,21 @@ endif()
 option(DKCEF "Use Chromium Embeded Framework" OFF)
 
 
+########### Determine if we are building a DKApp, DKPlugin or 3rdParty #############
+#string(FIND "${CMAKE_BINARY_DIR}" "/DKApps/" index)
+#if(${index} GREATER -1)
+#	message(STATUS "Building DKApp . . .")
+#	DKSET(DKAPP ON)
+#	add_definitions(-DDKAPP)
+#endif()
+#string(FIND "${CMAKE_BINARY_DIR}" "/DKPlugin/" index)
+#if(${index} GREATER -1)
+#	message(STATUS "Building DKPlugin . . .")
+#endif()
+#string(FIND "${CMAKE_BINARY_DIR}" "/3rdParty/" index)
+#if(${index} GREATER -1)
+#	message(STATUS "Building 3rdParty . . .")
+#endif()
 
 
 ########### Determine the OS we are building for ####################

@@ -59,7 +59,7 @@ public:
 	static bool SetClipboardFiles(const DKString& filelist);
 	static bool SetClipboardImage(const DKString& file);
 	static bool SetMousePos(const int& x, const int& y);
-	static void SetTitle();
+	static bool SetTitle(const DKString& title);
 	static bool SetVolume(int& percent);
 	static bool Sleep(int milliseconds);
 	static bool StrokeKey(const int& key);

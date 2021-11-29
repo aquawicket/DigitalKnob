@@ -85,6 +85,7 @@ public:
 		DKDEBUGFUNC(id);		
 		//if(id.empty()){ return; }
 		for(unsigned long i = instances.size() - 1; i >= 0 && i < instances.size(); --i) {
+		//for (size_t i = instances.size() - 1; i >= 0 && i < instances.size(); --i) {
 			if(id.empty() || same(id, instances[i]->data[1])){
 				//if(has(id,"/"))
 				//	DKERROR("Close(): "+id+" contains a /\n");

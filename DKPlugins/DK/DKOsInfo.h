@@ -20,6 +20,7 @@
 	bool GetWinProductInfo(RTL_OSVERSIONINFOEXW& vi, DWORD& dwType);
 #endif //WIN32
 
+bool GetOSFlag(DKString& flag);
 bool GetOSInfo(DKString& info);
 bool GetSystemOS(DKString& os);
 bool GetOSCompany(DKString& oscompany);

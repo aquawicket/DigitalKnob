@@ -21,7 +21,7 @@ bool samei(const DKString& str, const DKString& str2){
 }
 
 bool has(const DKString& search, const DKString& forthis){
-	unsigned long found = search.find(forthis);
+	std::string::size_type found = search.find(forthis);
 	if(found != std::string::npos)
 		return true;
 	return false;
@@ -38,7 +38,6 @@ int substr_count(const DKString& search, const DKString& forthis) {
 }
 
 DKString toString(const int& _int){
-	//DKASSERT("replace this with std::to_string()\n");
 	/*
 	DKString s;
 	std::stringstream out;
@@ -50,7 +49,6 @@ DKString toString(const int& _int){
 }
 
 DKString toString(const long& _long){
-	//DKASSERT("replace this with std::to_string()\n");
 	/*
 	DKString s;
 	std::stringstream out;
@@ -62,7 +60,6 @@ DKString toString(const long& _long){
 }
 
 DKString toString(const float& _float){
-	//DKASSERT("replace this with std::to_string()\n");
 	/*
 	DKString s;
 	std::stringstream out;
@@ -74,7 +71,6 @@ DKString toString(const float& _float){
 }
 
 DKString toString(const double& _double){
-	//DKASSERT("replace this with std::to_string()\n");
 	/*
 	DKString s;
 	std::stringstream out;
@@ -86,7 +82,6 @@ DKString toString(const double& _double){
 }
 
 DKString toString(const unsigned int& _uint){
-	//DKASSERT("replace this with std::to_string()\n");
 	/*
 	DKString s;
 	std::stringstream out;
@@ -98,7 +93,6 @@ DKString toString(const unsigned int& _uint){
 }
 
 DKString toString(const unsigned long int& _ulongint){
-	//DKASSERT("replace this with std::to_string()\n");
 	/*
 	DKString s;
 	std::stringstream out;
@@ -110,7 +104,6 @@ DKString toString(const unsigned long int& _ulongint){
 }
 
 DKString toString(const unsigned long long int& _ulonglongint){
-	//DKASSERT("replace this with std::to_string()\n");
 	/*
 	DKString s;
 	std::stringstream out;
@@ -192,12 +185,10 @@ DKString toString(const HWND hwnd){
 
 DKString& rtrim(DKString& s, const char* t) {
 	return s.erase(s.find_last_not_of(t) + 1);
-	//return s;
 }
 
 DKString& ltrim(DKString& s, const char* t) {
 	return s.erase(0, s.find_first_not_of(t));
-	//return s;
 }
 
 DKString& trim(DKString& s, const char* t) {
@@ -272,7 +263,7 @@ HWND toHWND(const DKString& str){
 
 
 bool replace(DKString& str, const DKString& oldStr, const DKString& newStr){
-	size_t pos = 0;
+	std::string::size_type pos = 0;
 	while((pos = str.find(oldStr, pos)) != std::string::npos){
 		str.replace(pos, oldStr.length(), newStr);
 		pos += newStr.length();
@@ -281,7 +272,7 @@ bool replace(DKString& str, const DKString& oldStr, const DKString& newStr){
 }
 
 bool replace_first(DKString& str, const DKString& oldStr, const DKString& newStr){
-	size_t pos = 0;
+	std::string::size_type pos = 0;
 	if((pos = str.find(oldStr, pos)) != std::string::npos){
 		str.replace(pos, oldStr.length(), newStr);
 		pos += newStr.length();
@@ -303,7 +294,6 @@ bool Pad(int num, char character, DKString& str){
 	return true;
 }
 
-
 bool RemoveDuplicates(DKStringArray& arry){
 	sort( arry.begin(), arry.end() );
 	arry.erase( unique( arry.begin(), arry.end() ), arry.end() );
@@ -314,10 +304,10 @@ bool getSettingFromString(const DKString& filestring, const DKString& setting, D
 	//If the variable looks like this: [VARIABLE]
 	//then we return everything up to the next [VARIABLE] or to the end of the file.
 	if(has(setting,"[") && has(setting,"]")){
-		size_t temp = filestring.find(setting,0);
+		std::string::size_type temp = filestring.find(setting,0);
         if(temp == std::string::npos){return false;}
-		size_t start = filestring.find("]",temp);
-		size_t end = filestring.find("[",start);
+		std::string::size_type start = filestring.find("]",temp);
+		std::string::size_type end = filestring.find("[",start);
 		if(end == std::string::npos){end = filestring.size();}
 		DKString out = filestring.substr(start+1, end-start-1);
 		replace(out,"\r","");
@@ -329,10 +319,10 @@ bool getSettingFromString(const DKString& filestring, const DKString& setting, D
 	//If the variable looks like this:  VARIABLE 
 	//then we return the rest of the line
 	DKString string = setting + " ";
-	size_t temp = filestring.find(string,0);
+	std::string::size_type temp = filestring.find(string,0);
     if(temp == std::string::npos){return false;}
-	size_t start = filestring.find(" ",temp);
-	size_t end = filestring.find("\n",start);
+	std::string::size_type start = filestring.find(" ",temp);
+	std::string::size_type end = filestring.find("\n",start);
 	DKString out = filestring.substr(start+1, end-start-1);
 	replace(out,"\r","");
 	replace(out,"\n","");
@@ -349,7 +339,7 @@ bool toStringArray(DKStringArray& output, const DKString& str, const DKString& s
 	//int end;
 	while(1){
 	//while(end != std::string::npos){
-		int end = text.find(seperator, begin);
+		std::string::size_type end = text.find(seperator, begin);
 		if(end==std::string::npos){return true;}
 		DKString temp = text.substr(begin, end-begin);
 		replace(temp,"\r","");
@@ -379,7 +369,7 @@ bool ArrayToString(const DKStringArray& arry, DKString& str, const char* seperat
 /*
 DKStringArray getSettingsFromString(const DKString& filestring, const DKString& setting) {
 	if(has(setting,"[") && has(setting,"]")){
-		size_t temp = filestring.find(setting,0);
+		std::string::size_type temp = filestring.find(setting,0);
 #ifndef ANDROID
         if(temp == std::string::npos){return DKStringArray(0);}
 #else
@@ -388,8 +378,8 @@ DKStringArray getSettingsFromString(const DKString& filestring, const DKString& 
 			return temp;
 		}
 #endif
-		size_t start = filestring.find("]",temp);
-		size_t end = filestring.find("[",start);
+		std::string::size_type start = filestring.find("]",temp);
+		std::string::size_type end = filestring.find("[",start);
 		if(end == std::string::npos){end = filestring.size();}
 
 		DKString out = filestring.substr(start+1, end-start-1);

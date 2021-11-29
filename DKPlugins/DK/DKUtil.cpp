@@ -64,7 +64,8 @@ bool DKUtil::Bin2C(const DKString& input, const DKString& output){
 	char *buf;
 	const char* ident  = "assets";
 	unsigned int i, need_comma;
-    long file_size;
+    //long file_size;
+	size_t file_size;
 	FILE* f_input = fopen(input.c_str(), "rb");
 	if (!f_input)
 		return DKERROR("can't open file for reading\n");

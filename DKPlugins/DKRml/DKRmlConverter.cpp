@@ -35,12 +35,12 @@ bool DKRmlConverter::HtmlToRml(const DKString& html, DKString& rml){
 
 	/*
 	// :rgba(r,g,b,a)  <- convert a to 0-255
-	size_t end = 0;
+	std::string::size_type end = 0;
 	while(has(rml,":rgba(")){
-		size_t temp = rml.find(":rgba(",end);
+		std::string::size_type temp = rml.find(":rgba(",end);
         if(temp == std::string::npos)
 			return true;
-		size_t start = rml.find(",",temp);
+		std::string::size_type start = rml.find(",",temp);
 		start = rml.find(",",start+1);
 		start = rml.find(",",start+1);
 		end = rml.find(")",start);
@@ -240,7 +240,7 @@ bool DKRmlConverter::PostProcess(Rml::Element* element) {
 	// <script> tags
 	//get the path from the url
 	DKString path = DKRml::Get()->href;
-	std::size_t found = path.find_last_of("/");
+	std::string::size_type found = path.find_last_of("/");
 	path = path.substr(0,found);
 	path += "/";
 	Rml::ElementList scripts;
@@ -290,7 +290,7 @@ bool DKRmlConverter::PostProcess(Rml::Element* element) {
 	DKRml* dkRml = DKRml::Get();
 	Rml::ElementDocument* doc = dkRml->document;
 	DKString code = doc->GetContext()->GetRootElement()->GetInnerRML();
-	int n = code.rfind("<html");
+	std::string::size_type = code.rfind("<html");
 	if(n < 0){
 		DKERROR("html tag not found\n");
 		return true;

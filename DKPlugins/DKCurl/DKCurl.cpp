@@ -491,9 +491,8 @@ int DKCurl::WriteToBuffer(char *data, size_t size, size_t nmemb, std::string *bu
 
 size_t DKCurl::read_callback(void *ptr, size_t size, size_t nmemb, void *stream){
 	//DKDEBUGFUNC(ptr, size, nmemb, stream);
-    curl_off_t nread;
     size_t retcode = fread(ptr, size, nmemb, (FILE *)stream);
-    //nread = (curl_off_t) retcode;
+	//curl_off_t nread = (curl_off_t) retcode;
 	printf(".");
     //fprintf(stderr, "*** We read %" CURL_FORMAT_CURL_OFF_T " bytes from filen", nread);
     return retcode;

@@ -30,7 +30,7 @@ Rml::FileHandle DKRmlFile::Open(const Rml::String& path){
 		DKString filename;
 		DKFile::GetFileName(_url, filename);
 		//remove everything after ? in the filename if there is one
-		unsigned long found = filename.rfind("?");
+		std::string::size_type found = filename.rfind("?");
 		if(found > 0)
 			filename = filename.substr(0,found);
 #ifdef USE_DKCurl

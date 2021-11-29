@@ -25,6 +25,96 @@ extern DKString log_hide = ""; //comma seperated
 extern bool stacktrace_on_errors = false;
 extern bool exception_on_errors = false;
 
+bool GetVersion(DKString& version) {
+	DKString year;
+	DKBUILDYEAR(year);
+	version = year;
+	DKString month;
+	DKBUILDMONTH(month);
+	version = version + "." + month;
+	DKString day;
+	DKBUILDDAY(day);
+	version = version + "." + day;
+
+	DKString hour;
+	DKBUILDHOUR(hour);
+	version = version + hour;
+	/*
+	DKString minute;
+	DKBUILDMINUTE(minute);
+	version = version + minute;
+	DKString second;
+	DKBUILDMINUTE(second);
+	version = version + second;
+	*/
+
+	return true;
+}
+
+bool GetBuildMonth(const char* buildDate, DKString& buildMonth) {
+	buildMonth = buildDate;
+	std::string::size_type found = buildMonth.find_first_of(" ");
+	buildMonth = buildMonth.substr(0, found);
+	if (buildMonth == "Jan")
+		buildMonth = "01";
+	if (buildMonth == "Feb")
+		buildMonth = "02";
+	if (buildMonth == "Mar")
+		buildMonth = "03";
+	if (buildMonth == "Apr")
+		buildMonth = "04";
+	if (buildMonth == "May")
+		buildMonth = "05";
+	if (buildMonth == "Jun")
+		buildMonth = "06";
+	if (buildMonth == "Jul")
+		buildMonth = "07";
+	if (buildMonth == "Aug")
+		buildMonth = "08";
+	if (buildMonth == "Sep")
+		buildMonth = "09";
+	if (buildMonth == "Oct")
+		buildMonth = "10";
+	if (buildMonth == "Nov")
+		buildMonth = "11";
+	if (buildMonth == "Dec")
+		buildMonth = "12";
+	return true;
+}
+bool GetBuildDay(const char* buildDate, DKString& buildDay) {
+	buildDay = buildDate;
+	std::string::size_type foundA = buildDay.find_first_of(" ");
+	std::string::size_type foundB = buildDay.find_first_of(" ", foundA);
+	buildDay = buildDay.substr(foundA+1, foundB-1);
+	return true;
+}
+bool GetBuildYear(const char* buildDate, DKString& buildYear) {
+	buildYear = buildDate;
+	std::string::size_type found = buildYear.find_last_of(" ");
+	buildYear = buildYear.substr(found+3);
+	return true;
+}
+bool GetBuildHour(const char* buildTime, DKString& buildHour) {
+	buildHour = buildTime;
+	std::string::size_type found = buildHour.find_first_of(":");
+	buildHour = buildHour.substr(0, found);
+	return true;
+}
+bool GetBuildMinute(const char* buildTime, DKString& buildMinute) {
+	buildMinute = buildTime;
+	std::string::size_type foundA = buildMinute.find_first_of(":");
+	std::string::size_type foundB = buildMinute.find_first_of(":", foundA);
+	buildMinute = buildMinute.substr(foundA+1, foundB);
+	return true;
+}
+bool GetBuildSecond(const char* buildTime, DKString& buildSecond) {
+	buildSecond = buildTime;
+	std::string::size_type found = buildSecond.find_last_of(":");
+	buildSecond = buildSecond.substr(found+1);
+	return true;
+}
+
+
 bool Clear(){
 #ifdef WIN32
     system("cls");
@@ -121,7 +211,7 @@ bool Log(const char* file, int line, const char* func, const DKString& input, co
 	}
 	if(log_lines || lvl <= DK_ERROR) {
 		DKString filename = file;
-		unsigned found = filename.find_last_of("/\\");
+		std::string::size_type found = filename.find_last_of("/\\");
 		if(found != std::string::npos && found < filename.length())
 			output += filename.substr(found+1);
 		output = output + ":" + toString(line) + "  ";
