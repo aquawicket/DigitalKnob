@@ -18,17 +18,10 @@ endif()
 
 
 ### VERSION ###
-#if(ANDROID)
-#	DKSET(BOOST_MAJOR 1)
-#	DKSET(BOOST_MINOR 76)
-#	DKSET(BOOST_BUILD 0)
-#	DKSET(BOOST_DL https://sourceforge.net/projects/boost/files/boost/1.76.0/boost_1_76_0.zip)
-#else()
-	DKSET(BOOST_MAJOR 1)
-	DKSET(BOOST_MINOR 78)
-	DKSET(BOOST_BUILD 0_b1)
-	DKSET(BOOST_DL https://boostorg.jfrog.io/artifactory/main/beta/1.78.0.beta1/source/boost_1_78_0_b1.zip)
-#endif()
+DKSET(BOOST_MAJOR 1)
+DKSET(BOOST_MINOR 78)
+DKSET(BOOST_BUILD 0_b1)
+DKSET(BOOST_DL https://boostorg.jfrog.io/artifactory/main/beta/1.78.0.beta1/source/boost_1_78_0_b1.zip)
 
 DKSET(BOOST_VERSION ${BOOST_MAJOR}_${BOOST_MINOR}_${BOOST_BUILD})
 DKSET(BOOST_NAME boost_${BOOST_VERSION})
@@ -104,11 +97,20 @@ if(MAC)
 	DKSET(boost_nowide_nolib 1)
 endif()
 if(ANDROID)
+	DKSET(BOOST_WITHOUT ${BOOST_WITHOUT} --without-context)
+	DKSET(BOOST_WITHOUT ${BOOST_WITHOUT} --without-coroutine)
+	DKSET(BOOST_WITHOUT ${BOOST_WITHOUT} --without-json)
+	DKSET(BOOST_WITHOUT ${BOOST_WITHOUT} --without-locale)
+	DKSET(BOOST_WITHOUT ${BOOST_WITHOUT} --without-nowide)
+	DKSET(BOOST_WITHOUT ${BOOST_WITHOUT} --without-python)
+	DKSET(BOOST_WITHOUT ${BOOST_WITHOUT} --without-type_erasure)
 	DKSET(boost_context_nolib 1)
 	DKSET(boost_coroutine_nolib 1)
 	DKSET(boost_json_nolib 1)
 	DKSET(boost_locale_nolib 1)
 	DKSET(boost_nowide_nolib 1)
+	DKSET(boost_python_nolib 1)
+	DKSET(boost_type_erasure_nolib 1)
 endif()
 
 foreach(lib ${boost_targets})
@@ -214,7 +216,8 @@ ANDROID32_DEBUG_COMMAND(
 	--user-config=${BOOST}/android-config.jam
 	--build-dir=${BOOST}/${OS}/${DEBUG_DIR}
 	--stagedir=${BOOST}/${OS}/${DEBUG_DIR}
-	--without-python
+	${BOOST_WITH}
+	${BOOST_WITHOUT}
 	abi=aapcs
 	binary-format=elf )
 
@@ -233,7 +236,8 @@ ANDROID32_RELEASE_COMMAND(
 	--user-config=${BOOST}/android-config.jam
 	--build-dir=${BOOST}/${OS}/${RELEASE_DIR}
 	--stagedir=${BOOST}/${OS}/${RELEASE_DIR}
-	--without-python
+	${BOOST_WITH}
+	${BOOST_WITHOUT}
 	abi=aapcs
 	binary-format=elf )
 
