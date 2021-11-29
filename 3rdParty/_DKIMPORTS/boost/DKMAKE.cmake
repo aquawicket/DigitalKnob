@@ -18,17 +18,17 @@ endif()
 
 
 ### VERSION ###
-if(ANDROID)
-	DKSET(BOOST_MAJOR 1)
-	DKSET(BOOST_MINOR 76)
-	DKSET(BOOST_BUILD 0)
-	DKSET(BOOST_DL https://sourceforge.net/projects/boost/files/boost/1.76.0/boost_1_76_0.zip)
-else()
+#if(ANDROID)
+#	DKSET(BOOST_MAJOR 1)
+#	DKSET(BOOST_MINOR 76)
+#	DKSET(BOOST_BUILD 0)
+#	DKSET(BOOST_DL https://sourceforge.net/projects/boost/files/boost/1.76.0/boost_1_76_0.zip)
+#else()
 	DKSET(BOOST_MAJOR 1)
 	DKSET(BOOST_MINOR 78)
 	DKSET(BOOST_BUILD 0_b1)
 	DKSET(BOOST_DL https://boostorg.jfrog.io/artifactory/main/beta/1.78.0.beta1/source/boost_1_78_0_b1.zip)
-endif()
+#endif()
 
 DKSET(BOOST_VERSION ${BOOST_MAJOR}_${BOOST_MINOR}_${BOOST_BUILD})
 DKSET(BOOST_NAME boost_${BOOST_VERSION})
@@ -188,7 +188,7 @@ RASPBERRY64_RELEASE_COMMAND(./b2 toolset=gcc address-model=64 variant=release li
 ANDROID_PATH(${BOOST})
 ANDROID_MSYS(./SetupAndroid.sh)
 if(NOT EXISTS ${BOOST}/b2.exe)
-	ANDROID_COMMAND("bootstrap.bat vc142")
+	ANDROID_COMMAND("bootstrap.bat vc143")
 endif()
 
 

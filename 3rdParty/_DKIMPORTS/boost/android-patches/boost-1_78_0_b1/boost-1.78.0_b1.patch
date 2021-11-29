@@ -1,7 +1,7 @@
 diff -u -r boost_1_78_0_b1.orig/boost/asio/detail/config.hpp boost_1_78_0_b1/boost/asio/detail/config.hpp
 --- boost_1_78_0_b1.orig/boost/asio/detail/config.hpp
 +++ boost_1_78_0_b1/boost/asio/detail/config.hpp
-@@ -1056,7 +1056,11 @@
+@@ -1144,7 +1144,11 @@
  #    if (_LIBCPP_VERSION < 7000)
  #     if (__cplusplus >= 201402)
  #      if __has_include(<experimental/string_view>)
@@ -34,7 +34,7 @@ diff -u -r boost_1_78_0_b1.orig/boost/config/user.hpp boost_1_78_0_b1/boost/conf
 diff -u -r boost_1_78_0_b1.orig/boost/system/detail/error_code.hpp boost_1_78_0_b1/boost/system/detail/error_code.hpp
 --- boost_1_78_0_b1.orig/boost/system/detail/error_code.hpp
 +++ boost_1_78_0_b1/boost/system/detail/error_code.hpp
-@@ -19,6 +19,7 @@
+@@ -28,6 +28,7 @@
  #include <boost/cstdint.hpp>
  #include <boost/config.hpp>
  #include <ostream>
@@ -45,7 +45,7 @@ diff -u -r boost_1_78_0_b1.orig/boost/system/detail/error_code.hpp boost_1_78_0_
 diff -u -r boost_1_78_0_b1.orig/libs/filesystem/src/operations.cpp boost_1_78_0_b1/libs/filesystem/src/operations.cpp
 --- boost_1_78_0_b1.orig/libs/filesystem/src/operations.cpp
 +++ boost_1_78_0_b1/libs/filesystem/src/operations.cpp
-@@ -223,6 +223,21 @@
+@@ -294,6 +294,21 @@
  
  # if defined(BOOST_POSIX_API)
  
@@ -70,7 +70,7 @@ diff -u -r boost_1_78_0_b1.orig/libs/filesystem/src/operations.cpp boost_1_78_0_
 diff -u -r boost_1_78_0_b1.orig/libs/filesystem/src/path.cpp boost_1_78_0_b1/libs/filesystem/src/path.cpp
 --- boost_1_78_0_b1.orig/libs/filesystem/src/path.cpp
 +++ boost_1_78_0_b1/libs/filesystem/src/path.cpp
-@@ -32,7 +32,8 @@
+@@ -29,7 +29,8 @@
  # include "windows_file_codecvt.hpp"
  # include <windows.h>
  #elif defined(macintosh) || defined(__APPLE__) || defined(__APPLE_CC__) \
@@ -80,7 +80,7 @@ diff -u -r boost_1_78_0_b1.orig/libs/filesystem/src/path.cpp boost_1_78_0_b1/lib
  # include <boost/filesystem/detail/utf8_codecvt_facet.hpp>
  #endif
  
-@@ -864,7 +865,8 @@
+@@ -1127,7 +1127,8 @@
      std::locale global_loc = std::locale();
      return std::locale(global_loc, new windows_file_codecvt);
  # elif defined(macintosh) || defined(__APPLE__) || defined(__APPLE_CC__) \
@@ -93,7 +93,7 @@ diff -u -r boost_1_78_0_b1.orig/libs/filesystem/src/path.cpp boost_1_78_0_b1/lib
 diff -u -r boost_1_78_0_b1.orig/tools/build/src/tools/common.jam boost_1_78_0_b1/tools/build/src/tools/common.jam
 --- boost_1_78_0_b1.orig/tools/build/src/tools/common.jam
 +++ boost_1_78_0_b1/tools/build/src/tools/common.jam
-@@ -981,7 +981,7 @@
+@@ -984,7 +984,7 @@
      }
  
      # Ditto, from Clang 4
