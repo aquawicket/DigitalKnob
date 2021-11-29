@@ -317,5 +317,5 @@ if(ANDROID_32) # Disabled for Android 32bit targets
 	#
 endif()
 if(ANDROID_64) # Disabled for Android 64bit targets
-	#
+	DKDISABLE(boost)
 endif()
