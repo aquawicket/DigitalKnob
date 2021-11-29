@@ -54,7 +54,7 @@ DKApp::DKApp(int argc, char** argv){
 #ifdef DEBUG
 		buildType = "DEBUG";
 #else
-		buildType = "RELEASE"
+		buildType = "RELEASE";
 #endif
 
 	DKString title;
