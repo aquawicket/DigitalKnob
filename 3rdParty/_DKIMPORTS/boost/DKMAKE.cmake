@@ -185,13 +185,10 @@ wave
 
 foreach(item ${BOOST_LIBS})
 	DKSET(boost_${item} 1)
-	DKSET(BOOST_WITH ${BOOST_WITH} --with-${item})
+	if(NOT boost_all)
+		DKSET(BOOST_WITH ${BOOST_WITH} --with-${item})
+	endif()
 endforeach()
-
-if(boost_all)
-	DKUNSET(BOOST_WITH)
-	Wait()
-endif()
 
 DKSET(boost_fiber_nolib 1)
 DKSET(boost_graph_parallel_nolib 1)
@@ -201,7 +198,6 @@ DKSET(boost_mpi_nolib 1)
 DKSET(boost_python_nolib 1)
 DKSET(boost_test_nolib 1)
 DKSET(boost_stacktrace_nolib 1)
-
 foreach(item ${BOOST_LIBS})
 	if(item AND boost_${item} AND NOT boost_${item}_nolib)
 		WIN32_DEBUG_LIB(${BOOST}/${OS}/${DEBUG_DIR}/lib/libboost_${item}.lib)
