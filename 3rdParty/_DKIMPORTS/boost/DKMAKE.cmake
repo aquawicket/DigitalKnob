@@ -158,7 +158,7 @@ serialization
 #static_string
 #stl_interfaces
 system
-test
+#test
 thread
 #throw_exception
 timer
