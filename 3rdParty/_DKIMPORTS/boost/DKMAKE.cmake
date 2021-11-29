@@ -39,152 +39,43 @@ DKINCLUDE(${BOOST})
 DKLINKDIR(${BOOST}/${OS}/${DEBUG_DIR}/lib)
 DKLINKDIR(${BOOST}/${OS}/${RELEASE_DIR}/lib)
 
+dk_addTarget(boost atomic)
+dk_addTarget(boost chrono)
+dk_addTarget(boost container)
+dk_addTarget(boost context)
+dk_addTarget(boost contract)
+dk_addTarget(boost coroutine)
+dk_addTarget(boost date_time)
+dk_addTarget(boost exception)
+dk_addTarget(boost fiber)
+dk_addTarget(boost filesystem)
+dk_addTarget(boost graph)
+dk_addTarget(boost graph_parallel)
+dk_addTarget(boost headers)
+dk_addTarget(boost iostreams)
+dk_addTarget(boost json)
+dk_addTarget(boost locale)
+dk_addTarget(boost log)
+dk_addTarget(boost math)
+dk_addTarget(boost mpi)
+dk_addTarget(boost nowide)
+dk_addTarget(boost program_options)
+dk_addTarget(boost python)
+dk_addTarget(boost random)
+dk_addTarget(boost regex)
+dk_addTarget(boost serialization)
+dk_addTarget(boost stacktrace)
+dk_addTarget(boost system)
+dk_addTarget(boost test)
+dk_addTarget(boost thread)
+dk_addTarget(boost timer)
+dk_addTarget(boost type_erasure)
+dk_addTarget(boost wave)
 
-
-#DKSET(boost_libs
-#accumulators
-#algorithm
-#align
-#any
-#array
-#asio
-#assert
-#assign
-dk_sublibrary(boost atomic)
-#beast
-#bimap
-#bind
-#callable_traits
-dk_sublibrary(boost chrono)
-#circular_buffer
-#compatibility
-#compute
-#concept_check
-#config
-dk_sublibrary(boost container)
-#container_hash
-dk_sublibrary(boost context)
-dk_sublibrary(boost contract)
-#conversion
-#convert
-#core
-dk_sublibrary(boost coroutine)
-#coroutine2
-#crc
-dk_sublibrary(boost date_time)
-#detail
-#dll
-#dynamic_bitset
-#endian
-dk_sublibrary(boost exception)
-dk_sublibrary(boost fiber)
-dk_sublibrary(boost filesystem)
-#flyweight
-#foreach
-#format
-#function
-#functional
-#function_types
-#fusion
-#geometry
-#gil
-dk_sublibrary(boost graph)
-dk_sublibrary(boost graph_parallel)
-#hana
-dk_sublibrary(boost headers)
-#heap
-#histogram
-#hof
-#icl
-#integer
-#interprocess
-#intrusive
-#io
-dk_sublibrary(boost iostreams)
-#iterator
-dk_sublibrary(boost json)
-#lambda
-#lexical_cast
-dk_sublibrary(boost locale)
-#local_function
-#lockfree
-dk_sublibrary(boost log)
-#logic
-dk_sublibrary(boost math)
-#metaparse
-#move
-#mp11
-dk_sublibrary(boost mpi)
-#mpl
-#msm
-#multiprecision
-#multi_array
-#multi_index
-dk_sublibrary(boost nowide)
-#numeric
-#optional
-#outcome
-#parameter
-#parameter_python
-#phoenix
-#polygon
-#poly_collection
-#pool
-#predef
-#preprocessor
-#process
-dk_sublibrary(boost program_options)
-#property_map
-#property_tree
-#proto
-#ptr_container
-dk_sublibrary(boost python)
-#qvm
-dk_sublibrary(boost random)
-#range
-#ratio
-#rational
-dk_sublibrary(boost regex)
-#safe_numerics
-#scope_exit
-dk_sublibrary(boost serialization)
-#signals2
-#smart_ptr
-#sort
-#spirit
-dk_sublibrary(boost stacktrace)
-#statechart
-#static_assert
-#static_string
-#stl_interfaces
-dk_sublibrary(boost system)
-dk_sublibrary(boost test)
-dk_sublibrary(boost thread)
-#throw_exception
-dk_sublibrary(boost timer)
-#tokenizer
-#tti
-#tuple
-#typeof
-dk_sublibrary(boost type_erasure)
-#type_index
-#type_traits
-#units
-#unordered
-#utility
-#uuid
-#variant
-#variant2
-#vmd
-dk_sublibrary(boost wave)
-#winapi
-#xpressive
-#yap
-#)
 
 if(STATIC)
 
-foreach(lib ${boost_libs})
+foreach(lib ${boost_targets})
 	if(NOT boost_all)
 		DKSET(BOOST_WITH ${BOOST_WITH} --with-${lib})
 	endif()
@@ -198,9 +89,8 @@ DKSET(boost_mpi_nolib 1)
 DKSET(boost_python_nolib 1)
 DKSET(boost_test_nolib 1)
 DKSET(boost_stacktrace_nolib 1)
-foreach(lib ${boost_libs})
-	if(lib AND boost_${lib})
-	if(NOT boost_${lib}_nolib)
+foreach(lib ${boost_targets})
+	if(boost_${lib} AND NOT boost_${lib}_nolib)
 		WIN32_DEBUG_LIB(${BOOST}/${OS}/${DEBUG_DIR}/lib/libboost_${lib}.lib)
 		WIN32_RELEASE_LIB(${BOOST}/${OS}/${RELEASE_DIR}/lib/libboost_${lib}.lib)
 		WIN64_DEBUG_LIB(${BOOST}/${OS}/${DEBUG_DIR}/lib/libboost_${lib}.lib)
@@ -213,7 +103,6 @@ foreach(lib ${boost_libs})
 		RASPBERRY_RELEASE_LIB(${BOOST}/${OS}/${RELEASE_DIR}/lib/libboost_${lib}.a)
 		ANDROID_DEBUG_LIB(${BOOST}/${OS}/${DEBUG_DIR}/lib/libboost_${lib}.a)
 		ANDROID_RELEASE_LIB(${BOOST}/${OS}/${RELEASE_DIR}/lib/libboost_${lib}.a)
-	endif()
 	endif()
 endforeach()
 

@@ -28,8 +28,8 @@ IF(IOS)
 	DKDEFINE(RMLUI_NO_THIRDPARTY_CONTAINERS)
 ENDIF()
 DKINCLUDE(${RMLUI}/Include)
-dk_sublibrary(rmlui RmlCore)
-dk_sublibrary(rmlui RmlDebugger)
+dk_addTarget(rmlui RmlCore)
+dk_addTarget(rmlui RmlDebugger)
 
 if(rmlui_RmlCore)
 	WIN_DEBUG_LIB(${RMLUI}/${OS}/${DEBUG_DIR}/RmlCore.lib)
@@ -88,10 +88,10 @@ WIN64_COMMAND(${DKCMAKE_WIN64} "-DCMAKE_CXX_FLAGS=/DWIN64 /D_WINDOWS /W3 /nologo
 -DBUILD_TESTING=ON -DENABLE_LOTTIE_PLUGIN=OFF -DBUILD_LUA_BINDINGS=OFF -DENABLE_SVG_PLUGIN=OFF ${FREETYPE_WIN} ${SDL2IMAGE_WIN} ${GLEW64} ${SDL2_WIN} 
 #${SFML_WIN} 
 ${RMLUI})
-if(rmlui_RmlCore OR rmlui_all)
+if(rmlui_RmlCore)
 WIN_VS(${RMLUI_NAME} RmlUi.sln RmlCore)
 endif()
-if(rmlui_RmlDebugger OR rmlui_all)
+if(rmlui_RmlDebugger)
 	WIN_VS(${RMLUI_NAME} RmlUi.sln RmlDebugger)
 endif()
 
