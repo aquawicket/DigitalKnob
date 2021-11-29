@@ -8,6 +8,9 @@
 if(WIN)
 	DKDEPEND(opengl)
 	DKDEPEND(winmm.lib)
+	WIN_LIB(imm32.lib)
+	WIN_LIB(version.lib)
+	WIN_LIB(Setupapi.lib)
 endif()	
 if(MAC)
 	DKDEPEND(appkit)
@@ -117,10 +120,6 @@ RASPBERRY_RELEASE_LIB(${SDL2}/${OS}/${RELEASE_DIR}/libSDL2.a)
 #ANDROID_RELEASE_LIB(${SDL2}/${OS}/${RELEASE_DIR}/libhidapi.a)
 ANDROID_DEBUG_LIB(${SDL2}/${OS}/${DEBUG_DIR}/libSDL2.a)
 ANDROID_RELEASE_LIB(${SDL2}/${OS}/${RELEASE_DIR}/libSDL2.a)
-
-WIN_LIB(imm32.lib)
-WIN_LIB(version.lib)
-WIN_LIB(Setupapi.lib)
 
 
 ### 3RDPARTY LINK ###
