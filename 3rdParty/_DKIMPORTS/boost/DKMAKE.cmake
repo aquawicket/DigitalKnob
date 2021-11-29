@@ -41,8 +41,7 @@ DKLINKDIR(${BOOST}/${OS}/${RELEASE_DIR}/lib)
 
 if(STATIC)
 
-
-DKSET(BOOST_LIBS
+#DKSET(BOOST_LIBS
 #accumulators
 #algorithm
 #align
@@ -51,35 +50,35 @@ DKSET(BOOST_LIBS
 #asio
 #assert
 #assign
-atomic
+dk_sublibrary(boost atomic)
 #beast
 #bimap
 #bind
 #callable_traits
-chrono
+dk_sublibrary(boost chrono)
 #circular_buffer
 #compatibility
 #compute
 #concept_check
 #config
-container
+dk_sublibrary(boost container)
 #container_hash
-context
-contract
+dk_sublibrary(boost context)
+dk_sublibrary(boost contract)
 #conversion
 #convert
 #core
-coroutine
+dk_sublibrary(boost coroutine)
 #coroutine2
 #crc
-date_time
+dk_sublibrary(boost date_time)
 #detail
 #dll
 #dynamic_bitset
 #endian
-exception
-fiber
-filesystem
+dk_sublibrary(boost exception)
+dk_sublibrary(boost fiber)
+dk_sublibrary(boost filesystem)
 #flyweight
 #foreach
 #format
@@ -89,10 +88,10 @@ filesystem
 #fusion
 #geometry
 #gil
-graph
-graph_parallel
+dk_sublibrary(boost graph)
+dk_sublibrary(boost graph_parallel)
 #hana
-headers
+dk_sublibrary(boost headers)
 #heap
 #histogram
 #hof
@@ -101,27 +100,27 @@ headers
 #interprocess
 #intrusive
 #io
-iostreams
+dk_sublibrary(boost iostreams)
 #iterator
-json
+dk_sublibrary(boost json)
 #lambda
 #lexical_cast
-locale
+dk_sublibrary(boost locale)
 #local_function
 #lockfree
-log
+dk_sublibrary(boost log)
 #logic
-math
+dk_sublibrary(boost math)
 #metaparse
 #move
 #mp11
-mpi
+dk_sublibrary(boost mpi)
 #mpl
 #msm
 #multiprecision
 #multi_array
 #multi_index
-nowide
+dk_sublibrary(boost nowide)
 #numeric
 #optional
 #outcome
@@ -134,40 +133,40 @@ nowide
 #predef
 #preprocessor
 #process
-program_options
+dk_sublibrary(boost program_options)
 #property_map
 #property_tree
 #proto
 #ptr_container
-python
+dk_sublibrary(boost python)
 #qvm
-random
+dk_sublibrary(boost random)
 #range
 #ratio
 #rational
-regex
+dk_sublibrary(boost regex)
 #safe_numerics
 #scope_exit
-serialization
+dk_sublibrary(boost serialization)
 #signals2
 #smart_ptr
 #sort
 #spirit
-stacktrace
+dk_sublibrary(boost stacktrace)
 #statechart
 #static_assert
 #static_string
 #stl_interfaces
-system
-test
-thread
+dk_sublibrary(boost system)
+dk_sublibrary(boost test)
+dk_sublibrary(boost thread)
 #throw_exception
-timer
+dk_sublibrary(boost timer)
 #tokenizer
 #tti
 #tuple
 #typeof
-type_erasure
+dk_sublibrary(boost type_erasure)
 #type_index
 #type_traits
 #units
@@ -177,14 +176,14 @@ type_erasure
 #variant
 #variant2
 #vmd
-wave
+dk_sublibrary(boost wave)
 #winapi
 #xpressive
 #yap
-)
+#)
 
 foreach(item ${BOOST_LIBS})
-	DKSET(boost_${item} 1)
+	#DKSET(boost_${item} 1)
 	if(NOT boost_all)
 		DKSET(BOOST_WITH ${BOOST_WITH} --with-${item})
 	endif()
