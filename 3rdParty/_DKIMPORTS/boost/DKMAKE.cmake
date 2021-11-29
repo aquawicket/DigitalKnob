@@ -189,6 +189,7 @@ foreach(item ${BOOST_LIBS})
 endforeach()
 
 if(boost_all)
+	DKSET(BOOST_WITH "")
 	DKUNSET(BOOST_WITH)
 endif()
 
