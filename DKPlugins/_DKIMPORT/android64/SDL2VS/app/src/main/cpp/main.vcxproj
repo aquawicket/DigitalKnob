@@ -137,7 +137,7 @@
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories);$(ToolchainPrebuiltPath)\lib\gcc\$(ToolchainName)\$(ToolchainFullVersionName)\$(PlatformShortName);$(StlLibraryPath);$(SolutionDir)$(Platform)\$(Configuration)</AdditionalLibraryDirectories>
-      <LibraryDependencies>$(StlLibraryName);%(LibraryDependencies);m;dl;GLESv1_CM;GLESv2;log;android</LibraryDependencies>
+      <LibraryDependencies>$(StlLibraryName);%(LibraryDependencies);m;dl;GLESv1_CM;GLESv2;OpenSLES;log;android</LibraryDependencies>
       <AdditionalDependencies>$(USERPROFILE)\digitalknob\DK\3rdParty\SDL2-2.0.16\android32\$(Configuration)\libSDL2.a;$(USERPROFILE)\digitalknob\DK\3rdParty\SDL2_ttf-2.0.15\android32\lib\$(Configuration)\SDL_ttf.a;$(USERPROFILE)\digitalknob\DK\3rdParty\freetype-2.5.5\android32\$(Configuration)\libfreetype.a;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -148,7 +148,7 @@
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories);$(ToolchainPrebuiltPath)\lib\gcc\$(ToolchainName)\$(ToolchainFullVersionName)\$(PlatformShortName);$(StlLibraryPath);$(SolutionDir)$(Platform)\$(Configuration)</AdditionalLibraryDirectories>
-      <LibraryDependencies>$(StlLibraryName);%(LibraryDependencies);m;dl;GLESv1_CM;GLESv2;log;android</LibraryDependencies>
+      <LibraryDependencies>$(StlLibraryName);%(LibraryDependencies);m;dl;GLESv1_CM;GLESv2;OpenSLES;log;android</LibraryDependencies>
       <AdditionalDependencies>$(USERPROFILE)\digitalknob\DK\3rdParty\SDL2-2.0.16\android32\$(Configuration)\libSDL2.a;$(USERPROFILE)\digitalknob\DK\3rdParty\SDL2_ttf-2.0.15\android32\lib\$(Configuration)\SDL_ttf.a;$(USERPROFILE)\digitalknob\DK\3rdParty\freetype-2.5.5\android32\$(Configuration)\libfreetype.a;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -159,7 +159,7 @@
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories);$(ToolchainPrebuiltPath)\lib\gcc\$(ToolchainName)\$(ToolchainFullVersionName)\$(PlatformShortName);$(StlLibraryPath);$(SolutionDir)$(Platform)\$(Configuration)</AdditionalLibraryDirectories>
-      <LibraryDependencies>$(StlLibraryName);%(LibraryDependencies);m;dl;GLESv1_CM;GLESv2;log;android</LibraryDependencies>
+      <LibraryDependencies>$(StlLibraryName);%(LibraryDependencies);m;dl;GLESv1_CM;GLESv2;OpenSLES;log;android</LibraryDependencies>
       <AdditionalDependencies>$(USERPROFILE)\digitalknob\DK\3rdParty\SDL2-2.0.16\android64\$(Configuration)\libSDL2.a;$(USERPROFILE)\digitalknob\DK\3rdParty\SDL2_ttf-2.0.15\android64\lib\$(Configuration)\SDL_ttf.a;$(USERPROFILE)\digitalknob\DK\3rdParty\freetype-2.5.5\android64\$(Configuration)\libfreetype.a;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -170,7 +170,7 @@
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories);$(ToolchainPrebuiltPath)\lib\gcc\$(ToolchainName)\$(ToolchainFullVersionName)\$(PlatformShortName);$(StlLibraryPath);$(SolutionDir)$(Platform)\$(Configuration)</AdditionalLibraryDirectories>
-      <LibraryDependencies>$(StlLibraryName);%(LibraryDependencies);m;dl;GLESv1_CM;GLESv2;log;android</LibraryDependencies>
+      <LibraryDependencies>$(StlLibraryName);%(LibraryDependencies);m;dl;GLESv1_CM;GLESv2;OpenSLES;log;android</LibraryDependencies>
       <AdditionalDependencies>$(USERPROFILE)\digitalknob\DK\3rdParty\SDL2-2.0.16\android64\$(Configuration)\libSDL2.a;$(USERPROFILE)\digitalknob\DK\3rdParty\SDL2_ttf-2.0.15\android64\lib\$(Configuration)\SDL_ttf.a;$(USERPROFILE)\digitalknob\DK\3rdParty\freetype-2.5.5\android64\$(Configuration)\libfreetype.a;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -181,7 +181,7 @@
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories);$(ToolchainPrebuiltPath)\lib\gcc\$(ToolchainName)\$(ToolchainFullVersionName)\$(PlatformShortName);$(StlLibraryPath);$(SolutionDir)$(Platform)\$(Configuration)</AdditionalLibraryDirectories>
-      <LibraryDependencies>$(StlLibraryName);%(LibraryDependencies);m;dl;GLESv1_CM;GLESv2;log;android</LibraryDependencies>
+      <LibraryDependencies>$(StlLibraryName);%(LibraryDependencies);m;dl;GLESv1_CM;GLESv2;OpenSLES;log;android</LibraryDependencies>
       <AdditionalDependencies>$(USERPROFILE)\digitalknob\DK\3rdParty\SDL2-2.0.16\android32\$(Configuration)\libSDL2.a;$(USERPROFILE)\digitalknob\DK\3rdParty\SDL2_ttf-2.0.15\android32\lib\$(Configuration)\SDL_ttf.a;$(USERPROFILE)\digitalknob\DK\3rdParty\freetype-2.5.5\android32\$(Configuration)\libfreetype.a;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -192,7 +192,7 @@
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories);$(ToolchainPrebuiltPath)\lib\gcc\$(ToolchainName)\$(ToolchainFullVersionName)\$(PlatformShortName);$(StlLibraryPath);$(SolutionDir)$(Platform)\$(Configuration)</AdditionalLibraryDirectories>
-      <LibraryDependencies>$(StlLibraryName);%(LibraryDependencies);m;dl;GLESv1_CM;GLESv2;log;android</LibraryDependencies>
+      <LibraryDependencies>$(StlLibraryName);%(LibraryDependencies);m;dl;GLESv1_CM;GLESv2;OpenSLES;log;android</LibraryDependencies>
       <AdditionalDependencies>$(USERPROFILE)\digitalknob\DK\3rdParty\SDL2-2.0.16\android32\$(Configuration)\libSDL2.a;$(USERPROFILE)\digitalknob\DK\3rdParty\SDL2_ttf-2.0.15\android32\lib\$(Configuration)\SDL_ttf.a;$(USERPROFILE)\digitalknob\DK\3rdParty\freetype-2.5.5\android32\$(Configuration)\libfreetype.a;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -203,7 +203,7 @@
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories);$(ToolchainPrebuiltPath)\lib\gcc\$(ToolchainName)\$(ToolchainFullVersionName)\$(PlatformShortName);$(StlLibraryPath);$(SolutionDir)$(Platform)\$(Configuration)</AdditionalLibraryDirectories>
-      <LibraryDependencies>$(StlLibraryName);%(LibraryDependencies);m;dl;GLESv1_CM;GLESv2;log;android</LibraryDependencies>
+      <LibraryDependencies>$(StlLibraryName);%(LibraryDependencies);m;dl;GLESv1_CM;GLESv2;OpenSLES;log;android</LibraryDependencies>
       <AdditionalDependencies>$(USERPROFILE)\digitalknob\DK\3rdParty\SDL2-2.0.16\android64\$(Configuration)\libSDL2.a;$(USERPROFILE)\digitalknob\DK\3rdParty\SDL2_ttf-2.0.15\android64\lib\$(Configuration)\SDL_ttf.a;$(USERPROFILE)\digitalknob\DK\3rdParty\freetype-2.5.5\android64\$(Configuration)\libfreetype.a;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -214,7 +214,7 @@
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories);$(ToolchainPrebuiltPath)\lib\gcc\$(ToolchainName)\$(ToolchainFullVersionName)\$(PlatformShortName);$(StlLibraryPath);$(SolutionDir)$(Platform)\$(Configuration)</AdditionalLibraryDirectories>
-      <LibraryDependencies>$(StlLibraryName);%(LibraryDependencies);m;dl;GLESv1_CM;GLESv2;log;android</LibraryDependencies>
+      <LibraryDependencies>$(StlLibraryName);%(LibraryDependencies);m;dl;GLESv1_CM;GLESv2;OpenSLES;log;android</LibraryDependencies>
       <AdditionalDependencies>$(USERPROFILE)\digitalknob\DK\3rdParty\SDL2-2.0.16\android64\$(Configuration)\libSDL2.a;$(USERPROFILE)\digitalknob\DK\3rdParty\SDL2_ttf-2.0.15\android64\lib\$(Configuration)\SDL_ttf.a;$(USERPROFILE)\digitalknob\DK\3rdParty\freetype-2.5.5\android64\$(Configuration)\libfreetype.a;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
