@@ -1,4 +1,4 @@
-DKDEPEND(rmlui rmlui_debugger)
+#DKDEPEND(rmlui rmlui_debugger)
 DKDEPEND(DK)
 DKDEPEND(DKArchive)
 DKDEPEND(DKAssets)
