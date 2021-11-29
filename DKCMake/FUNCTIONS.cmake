@@ -2781,6 +2781,7 @@ function(generateCmake name)
 	file(APPEND ${plugin_path}/CMakeLists.txt "### ${name} ###\n")
 	file(APPEND ${plugin_path}/CMakeLists.txt "cmake_minimum_required(VERSION 3.10)\n")
 	file(APPEND ${plugin_path}/CMakeLists.txt "cmake_policy(SET CMP0054 NEW)\n")
+	file(APPEND ${plugin_path}/CMakeLists.txt "cmake_policy(SET CMP0002 OLD)\n")
 	file(APPEND ${plugin_path}/CMakeLists.txt "include(${DKCMAKE}/FUNCTIONS.cmake)\n")
 	file(APPEND ${plugin_path}/CMakeLists.txt "include(${DKCMAKE}/OPTIONS.cmake)\n")
 		
