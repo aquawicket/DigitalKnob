@@ -110,7 +110,7 @@ locale
 #lockfree
 log
 #logic
-math
+#math
 #metaparse
 #move
 #mp11
