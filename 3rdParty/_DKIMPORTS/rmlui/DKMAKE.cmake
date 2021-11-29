@@ -46,7 +46,7 @@ DKINCLUDE(${RMLUI}/Include)
 	ANDROID_RELEASE_LIB(${RMLUI}/${OS}/${RELEASE_DIR}/libRmlCore.a)
 #endif()
 
-if(rmlui_debugger)
+if(rmlui_debugger OR rmlui_all)
 	WIN_DEBUG_LIB(${RMLUI}/${OS}/${DEBUG_DIR}/RmlDebugger.lib)
 	WIN_DEBUG_LIB(${RMLUI}/${OS}/${DEBUG_DIR}/RmlDebugger.lib)
 	WIN_RELEASE_LIB(${RMLUI}/${OS}/${RELEASE_DIR}/RmlDebugger.lib)
