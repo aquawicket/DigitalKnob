@@ -159,7 +159,7 @@ bool DKSDLWindow::Init() {
 #ifdef DEBUG
     buildType = "DEBUG";
 #else
-    buildType = "RELEASE"
+    buildType = "RELEASE";
 #endif
     DKString windowTitle = appName + " " + version + " " + osFlag + " " + buildType;
 

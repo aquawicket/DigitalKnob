@@ -1184,8 +1184,19 @@ endfunction()
 
 
 function(ANDROID_MSYS)
-	if(ANDROID AND DEBUG)
-		WIN32_MSYS(${ARGV}) #TODO: Test and see if Android needs it own MSYS function
+	if(ANDROID)
+		string(REPLACE ";" " " str "${ARGV}")
+		DKSET(msys "#!/bin/bash")
+		list(APPEND msys "cd ${CURRENT_DIR}")
+		list(APPEND msys "export PATH=${MINGW32}/bin:$PATH")
+		list(APPEND msys "export PATH=${MSYS}/bin:$PATH")
+		list(APPEND msys "${str}")
+		list(APPEND msys "exit")
+		string(REPLACE ";" "\n"	msys "${msys}")
+		string(REPLACE "C:/" "/c/" msys ${msys})
+		file(WRITE ${MSYS}/dkscript.tmp ${msys})
+		message(STATUS "MSYS -> ${msys}")
+		execute_process(COMMAND cmd /c ${MSYS}/bin/bash ${MSYS}/dkscript.tmp WORKING_DIRECTORY ${MSYS})
 	endif()
 endfunction()
 

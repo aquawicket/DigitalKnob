@@ -1,6 +1,6 @@
 BOOST="$(cd "$(dirname "$0")"; pwd)"
 BOOST_VER1=1
-BOOST_VER2=74
+BOOST_VER2=76
 BOOST_VER3=0
 BOOST_DIR="boost_${BOOST_VER1}_${BOOST_VER2}_${BOOST_VER3}"
 
@@ -49,25 +49,6 @@ compute_host_tag ()
 }
 compute_host_tag
 
-
-# ---------
-# Bootstrap
-# ---------
-if [ ! -f ./b2 ]
-then
-  echo "Performing boost bootstrap"
-  case "$HOST_OS" in
-    windows)
-        cmd //c "bootstrap.bat" 2>&1 | tee -a android-bootstrap.log
-        ;;
-    *)  # Linux and others
-        ./bootstrap.sh 2>&1 | tee -a android-bootstrap.log
-    esac
-
-  if [ $? != 0 ] ; then
-  	echo "ERROR: Could not perform boostrap! See bootstrap.log for more info."
-  	exit 1
-  fi
   
   # ---------
   # Patching
@@ -101,4 +82,4 @@ then
       fi
     done
   done
-fi
+
