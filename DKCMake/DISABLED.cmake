@@ -178,6 +178,7 @@ if(NOT LINUX) # Disabled NON Linux targets
 	DKDISABLE(libglib2.0-dev)
 	DKDISABLE(libglu1-mesa-dev)
 	DKDISABLE(libgtk2.0-dev)
+	DKDISABLE(libsndfile1-dev)
 	DKDISABLE(libsystemd-dev)
 	DKDISABLE(libudev-dev)
 	DKDISABLE(libx11-dev)
