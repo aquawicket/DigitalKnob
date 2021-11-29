@@ -57,7 +57,9 @@ DKApp::DKApp(int argc, char** argv){
 		buildType = "RELEASE"
 #endif
 
-	DKINFO(appName + " " + version + " " + osFlag + " " + buildType +"\n");
+	DKString title;
+	title = appName + " " + version + " " + osFlag + " " + buildType +"\n";
+	DKINFO(title);
 
 	if(__cplusplus == 201703L) { DKINFO("C++17 \n"); }
 	else if(__cplusplus == 201402L) { DKINFO("C++14 \n"); }
@@ -77,8 +79,9 @@ DKApp::DKApp(int argc, char** argv){
 	DKUtil::GetTime(time);
 	DKINFO(date + " " + time + "\n");
 	if (DKApp::argc > 1) {
-		for (int i = 1; i < DKApp::argc; ++i)
+		for (int i = 1; i < DKApp::argc; ++i){
 			DKINFO("argv[" + toString(i) + "] = " + toString(DKApp::argv[i]) + "\n"); //print args
+		}
 	}
 	//Display app path information
 	DKFile::GetExePath(DKFile::exe_path);
