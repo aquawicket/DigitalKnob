@@ -289,7 +289,7 @@ if(ANDROID) # Disabled for Android targets
 	DKDISABLE(leptonica)
 	DKDISABLE(libiconv)
 	DKDISABLE(libogg)
-	#DKDISABLE(libpng)
+	DKDISABLE(libpng)
 	DKDISABLE(libuv)
 	DKDISABLE(libvorbis)
 	DKDISABLE(libwebp)
