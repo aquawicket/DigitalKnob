@@ -57,9 +57,7 @@ DKApp::DKApp(int argc, char** argv){
 		buildType = "RELEASE";
 #endif
 
-	DKString title;
-	title = appName + " " + version + " " + osFlag + " " + buildType +"\n";
-	DKINFO(title);
+	DKINFO(appName + " " + version + " " + osFlag + " " + buildType +"\n");
 
 	if(__cplusplus == 201703L) { DKINFO("C++17 \n"); }
 	else if(__cplusplus == 201402L) { DKINFO("C++14 \n"); }
