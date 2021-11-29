@@ -194,6 +194,7 @@ DKSET(boost_math_nolib 1)
 DKSET(boost_mpi_nolib 1)
 DKSET(boost_python_nolib 1)
 DKSET(boost_test_nolib 1)
+DKSET(boost_stacktrace_nolib 1)
 
 foreach(item ${BOOST_LIBS})
 	if(item AND boost_${item} AND NOT boost_${item}_nolib)
@@ -231,35 +232,47 @@ WIN64_RELEASE_COMMAND(b2 toolset=msvc-14.2 address-model=64 variant=release link
 
 
 MAC32_PATH(${BOOST})
-MAC32_COMMAND(./bootstrap.sh)
+if(NOT EXISTS ${BOOST}/b2)
+	MAC32_COMMAND(./bootstrap.sh)
+endif()
 MAC32_DEBUG_COMMAND(./b2 toolset=darwin address-model=32 variant=debug link=static threading=multi runtime-debugging=on runtime-link=static --layout=system --build-dir=${BOOST}/${OS}/${DEBUG_DIR} --stagedir=${BOOST}/${OS}/${DEBUG_DIR})
 MAC32_RELEASE_COMMAND(./b2 toolset=darwin address-model=32 variant=release link=static threading=multi runtime-debugging=off runtime-link=static --layout=system --build-dir=${BOOST}/${OS}/${RELEASE_DIR} --stagedir=${BOOST}/${OS}/${RELEASE_DIR})
 
 
 MAC64_PATH(${BOOST})
-MAC64_COMMAND(./bootstrap.sh)
+if(NOT EXISTS ${BOOST}/b2)
+	MAC64_COMMAND(./bootstrap.sh)
+endif()
 MAC64_DEBUG_COMMAND(./b2 toolset=darwin address-model=64 variant=debug link=static threading=multi runtime-debugging=on runtime-link=static --layout=system --build-dir=${BOOST}/${OS}/${DEBUG_DIR} --stagedir=${BOOST}/${OS}/${DEBUG_DIR})
 MAC64_RELEASE_COMMAND(./b2 toolset=darwin address-model=64 variant=release link=static threading=multi runtime-debugging=off runtime-link=static --layout=system --build-dir=${BOOST}/${OS}/${RELEASE_DIR} --stagedir=${BOOST}/${OS}/${RELEASE_DIR})
 
 
 LINUX32_PATH(${BOOST})
-LINUX32_COMMAND(./bootstrap.sh)
+if(NOT EXISTS ${BOOST}/b2)
+	LINUX32_COMMAND(./bootstrap.sh)
+endif()
 LINUX32_DEBUG_COMMAND(./b2 toolset=gcc address-model=32 variant=debug link=static threading=multi runtime-debugging=on runtime-link=static --layout=system --build-dir=${BOOST}/${OS}/${DEBUG_DIR} --stagedir=${BOOST}/${OS}/${DEBUG_DIR})
 LINUX32_RELEASE_COMMAND(./b2 toolset=gcc address-model=32 variant=release link=static threading=multi runtime-debugging=off runtime-link=static --layout=system --build-dir=${BOOST}/${OS}/${RELEASE_DIR} --stagedir=${BOOST}/${OS}/${RELEASE_DIR})
 
 LINUX64_PATH(${BOOST})
-LINUX64_COMMAND(sudo ./bootstrap.sh)
+if(NOT EXISTS ${BOOST}/b2)
+	LINUX64_COMMAND(sudo ./bootstrap.sh)
+endif()
 LINUX64_DEBUG_COMMAND(./b2 toolset=gcc address-model=64 variant=debug link=static threading=multi runtime-debugging=on runtime-link=static --layout=system --build-dir=${BOOST}/${OS}/${DEBUG_DIR} --stagedir=${BOOST}/${OS}/${DEBUG_DIR})
 LINUX64_RELEASE_COMMAND(./b2 toolset=gcc address-model=64 variant=release link=static threading=multi runtime-debugging=off runtime-link=static --layout=system --build-dir=${BOOST}/${OS}/${RELEASE_DIR} --stagedir=${BOOST}/${OS}/${RELEASE_DIR})
 
 
 RASPBERRY32_PATH(${BOOST})
-RASPBERRY32_COMMAND(./bootstrap.sh)
+if(NOT EXISTS ${BOOST}/b2)
+	RASPBERRY32_COMMAND(./bootstrap.sh)
+endif()
 RASPBERRY32_DEBUG_COMMAND(./b2 toolset=gcc address-model=32 variant=debug link=static threading=multi runtime-debugging=on runtime-link=static --layout=system --build-dir=${BOOST}/${OS}/${DEBUG_DIR} --stagedir=${BOOST}/${OS}/${DEBUG_DIR})
 RASPBERRY32_RELEASE_COMMAND(./b2 toolset=gcc address-model=32 variant=release link=static threading=multi runtime-debugging=off runtime-link=static --layout=system --build-dir=${BOOST}/${OS}/${RELEASE_DIR} --stagedir=${BOOST}/${OS}/${RELEASE_DIR})
 
 RASPBERRY64_PATH(${BOOST})
-RASPBERRY64_COMMAND(./bootstrap.sh)
+if(NOT EXISTS ${BOOST}/b2)
+	RASPBERRY64_COMMAND(./bootstrap.sh)
+endif()
 RASPBERRY64_DEBUG_COMMAND(./b2 toolset=gcc address-model=64 variant=debug link=static threading=multi runtime-debugging=on runtime-link=static --layout=system --build-dir=${BOOST}/${OS}/${DEBUG_DIR} --stagedir=${BOOST}/${OS}/${DEBUG_DIR})
 RASPBERRY64_RELEASE_COMMAND(./b2 toolset=gcc address-model=64 variant=release link=static threading=multi runtime-debugging=off runtime-link=static --layout=system --build-dir=${BOOST}/${OS}/${RELEASE_DIR} --stagedir=${BOOST}/${OS}/${RELEASE_DIR})
 
