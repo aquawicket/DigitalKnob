@@ -184,19 +184,19 @@ wave
 
 foreach(item ${BOOST_LIBS})
 	DKSET(boost_${item} 1)
+	DKSET(BOOST_WITH ${BOOST_WITH} --with-${item})
 endforeach()
 
 DKSET(boost_fiber_nolib 1)
-DKSET(boost_graph_parallel 1)
-DKSET(boost_headers 1)
-DKSET(boost_math 1)
-DKSET(boost_mpi 1)
-DKSET(boost_python 1)
-DKSET(boost_test 1)
+DKSET(boost_graph_parallel_nolib 1)
+DKSET(boost_headers_nolib 1)
+DKSET(boost_math_nolib 1)
+DKSET(boost_mpi_nolib 1)
+DKSET(boost_python_nolib 1)
+DKSET(boost_test_nolib 1)
 
 foreach(item ${BOOST_LIBS})
 	if(item AND boost_${item} AND NOT boost_${item}_nolib)
-		DKSET(BOOST_WITH ${BOOST_WITH} --with-${item})
 		WIN32_DEBUG_LIB(${BOOST}/${OS}/${DEBUG_DIR}/lib/libboost_${item}.lib)
 		WIN32_RELEASE_LIB(${BOOST}/${OS}/${RELEASE_DIR}/lib/libboost_${item}.lib)
 		WIN64_DEBUG_LIB(${BOOST}/${OS}/${DEBUG_DIR}/lib/libboost_${item}.lib)
@@ -215,13 +215,17 @@ endforeach()
 
 ### COMPILE ###
 WIN32_PATH(${BOOST})
-WIN32_COMMAND("bootstrap.bat vc143")
+if(NOT EXISTS ${BOOST}/b2.exe)
+	WIN32_COMMAND("bootstrap.bat vc143")
+endif()
 WIN32_DEBUG_COMMAND(b2 toolset=msvc-14.3 address-model=32 variant=debug link=static threading=multi runtime-debugging=on runtime-link=static define=BOOST_ALL_NO_LIB --layout=system ${BOOST_WITH} --build-dir=${BOOST}/${OS}/${DEBUG_DIR} --stagedir=${BOOST}/${OS}/${DEBUG_DIR})
 WIN32_RELEASE_COMMAND(b2 toolset=msvc-14.3 address-model=32 variant=release link=static threading=multi runtime-debugging=off runtime-link=static define=BOOST_ALL_NO_LIB --layout=system ${BOOST_WITH} --build-dir=${BOOST}/${OS}/${RELEASE_DIR} --stagedir=${BOOST}/${OS}/${RELEASE_DIR})
 
 
 WIN64_PATH(${BOOST})
-WIN64_COMMAND("bootstrap.bat vc143")
+if(NOT EXISTS ${BOOST}/b2.exe)
+	WIN32_COMMAND("bootstrap.bat vc143")
+endif()
 WIN64_DEBUG_COMMAND(b2 toolset=msvc-14.2 address-model=64 variant=debug link=static threading=multi runtime-debugging=on runtime-link=static define=BOOST_ALL_NO_LIB --layout=system --build-dir=${BOOST}/${OS}/${DEBUG_DIR} --stagedir=${BOOST}/${OS}/${DEBUG_DIR})
 WIN64_RELEASE_COMMAND(b2 toolset=msvc-14.2 address-model=64 variant=release link=static threading=multi runtime-debugging=off runtime-link=static define=BOOST_ALL_NO_LIB --layout=system --build-dir=${BOOST}/${OS}/${RELEASE_DIR} --stagedir=${BOOST}/${OS}/${RELEASE_DIR})
 
