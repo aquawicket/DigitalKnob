@@ -12,7 +12,8 @@ DKDEPEND(freetype)
 ### VERSION ###
 DKSET(RMLUI_VERSION master)
 DKSET(RMLUI_NAME RmlUi-${RMLUI_VERSION})
-DKSET(RMLUI_DL https://codeload.github.com/mikke89/RmlUi/zip/${RMLUI_VERSION})
+##DKSET(RMLUI_DL https://codeload.github.com/mikke89/RmlUi/zip/${RMLUI_VERSION})
+DKSET(RMLUI_DL https://github.com/aquawicket/RmlUi/archive/refs/heads/RCSS_attribute_selector_support.zip)
 DKSET(RMLUI ${3RDPARTY}/${RMLUI_NAME})
 
 
