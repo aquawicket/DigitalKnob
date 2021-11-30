@@ -1,3 +1,6 @@
+if(NOT ANDROID)
+	return()
+endif()
 ## https://github.com/fallahn/sdl2vs
 
 ### DEPENDS ###
@@ -23,7 +26,7 @@ DKREMOVE(${SDL2VS}/SDL2_image)
 ### LINK ###
 
 ### COMPILE ###
-##WIN_PATH(${SDL2VS}/${OS})
-##WIN32_COMMAND(${DKCMAKE_WIN32} ${SDL2VS})
-##WIN_VS(sdl2vs-${SDL2VS_VERSION} sdl2vs-${SDL2VS_VERSION}.sln)
+#ANDROID32_PATH(${SDL2VS}/${OS})
+#ANDROID32_COMMAND(${DKCMAKE_ANDROID32} ${SDL2VS})
+#ANDROID32_VS(sdl2vs-${SDL2VS_VERSION} sdl2vs-${SDL2VS_VERSION}.sln)
 
