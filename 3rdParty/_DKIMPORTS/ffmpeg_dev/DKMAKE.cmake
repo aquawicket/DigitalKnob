@@ -8,7 +8,7 @@ DKSET(FFMPEG_DL https://web.archive.org/web/20200918193140/https://ffmpeg.zerano
 DKSET(FFMPEG ${3RDPARTY}/${FFMPEG_NAME})
 
 ### INSTALL ###
-DKINSTALL(${FFMPEG_DL} ffmpeg-dev ${FFMPEG})
+DKINSTALL(${FFMPEG_DL} ffmpeg_dev ${FFMPEG})
 DKRENAME(${FFMPEG}/include/libavutil/time.h ${FFMPEG}/include/libavutil/time.h.EXCLUDE)
 
 
