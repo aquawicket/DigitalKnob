@@ -25,7 +25,7 @@ LINUX_DKSET(ANDROIDTOOLS_DL https://dl.google.com/android/repository/commandline
 
 
 ### INSTALL ###
-DKINSTALL(${ANDROIDTOOLS_DL} android-cmdline-tools ${ANDROIDTOOLS})
+DKINSTALL(${ANDROIDTOOLS_DL} android_cmdline_tools ${ANDROIDTOOLS})
 
 if(CMAKE_HOST_WIN32)
 	DKEXECUTE_PROCESS(COMMAND cmd /c sdkmanager --sdk_root=${ANDROIDSDK} WORKING_DIRECTORY ${ANDROIDTOOLS}/bin)
