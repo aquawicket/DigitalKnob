@@ -7,7 +7,7 @@ endif()
 # https://phpdev.toolsforresearch.com/php-8.0.3-Win32-vs16-x64.zip
 # https://windows.php.net/downloads/releases/php-8.0.12-Win32-vs16-x86.zip
 
-DKDEPEND(vs16-redistributable)
+DKDEPEND(vs16_redistributable)
 
 ### VERSION ###
 DKSET(PHP_VERSION 8.0.13-Win32-vs16-x86)
