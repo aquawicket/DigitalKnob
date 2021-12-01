@@ -15,7 +15,7 @@ DKSET(GETCH ${3RDPARTY}/${GETCH_NAME})
 
 
 ### INSTALL ###
-DKINSTALL(${GETCH_DL} simple-getch ${GETCH})
+DKINSTALL(${GETCH_DL} simple_getch ${GETCH})
 
 
 ### LINK ###
