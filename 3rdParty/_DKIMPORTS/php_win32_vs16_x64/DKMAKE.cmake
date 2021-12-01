@@ -17,4 +17,4 @@ DKSET(PHP ${3RDPARTY}/${PHP_NAME})
 
 
 ### INSTALL ###
-DKINSTALL(${PHP_DL} php-win32-vs16-x64 ${PHP})
+DKINSTALL(${PHP_DL} php_win32_vs16_x64 ${PHP})
