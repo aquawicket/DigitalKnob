@@ -136,6 +136,7 @@ if(MAC)  # Disabled on Mac host machines
 endif()
 
 if(IOS OR IOSSIM)
+	DKDISABLE(agl)
 	DKDISABLE(boxer)
 	DKDISABLE(bzip2)
 	DKDISABLE(cef_binary)
