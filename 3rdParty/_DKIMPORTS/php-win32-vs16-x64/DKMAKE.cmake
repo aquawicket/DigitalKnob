@@ -10,9 +10,9 @@ endif()
 DKDEPEND(vs16-redistributable)
 
 ### VERSION ###
-DKSET(PHP_VERSION 8.0.12-Win32-vs16-x86)
+DKSET(PHP_VERSION 8.0.13-Win32-vs16-x86)
 DKSET(PHP_NAME php-${PHP_VERSION})
-DKSET(PHP_DL https://windows.php.net/downloads/releases/${PHP_NAME}.zip)
+DKSET(PHP_DL https://windows.php.net/downloads/releases/php-8.0.13-Win32-vs16-x86.zip)
 DKSET(PHP ${3RDPARTY}/${PHP_NAME})
 
 
