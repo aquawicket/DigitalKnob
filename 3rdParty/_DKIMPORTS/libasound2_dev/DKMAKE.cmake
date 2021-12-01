@@ -4,7 +4,7 @@ endif()
 
 ### INSTALL ###
 DKSET(CURRENT_DIR /usr)
-DKCOMMAND(sudo apt -y install libasound2_dev)
+DKCOMMAND(sudo apt -y install libasound2-dev)
 
 
 ### LINK ###
