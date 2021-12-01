@@ -1,6 +1,6 @@
 ### DEPENDS ###
 DKDEPEND(jdk)
-DKDEPEND(apache-ant)
+DKDEPEND(apache_ant)
 DKDEPEND(nodejs)
 
 

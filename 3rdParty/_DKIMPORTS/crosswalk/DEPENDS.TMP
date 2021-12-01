@@ -1,0 +1,3 @@
+DKDEPEND(jdk)
+DKDEPEND(apache-ant)
+DKDEPEND(nodejs)
