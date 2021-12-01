@@ -474,6 +474,12 @@ function(DKINSTALL src_path import_path dest_path)
 	if(NOT ${import_path} STREQUAL ${import_path_lower})
 		message(FATAL_ERROR "ERROR: 2nd parameter in DKINSTALL() (${import_path}) must be all lowercase")
 	endif()
+	string(FIND ${import_path} - index)
+	if(${import_path} GREATER -1)
+		message(FATAL_ERROR "ERROR: 2nd parameter in DKINSTALL() (${import_path}) contains a - , please convert it to an underscore _")
+	endif()
+	
+	
 	if(NOT EXISTS ${DKIMPORTS}/${import_path})
 		message(FATAL_ERROR "ERROR: 2nd parameter in DKINSTALL() (${DKIMPORTS}/${import_path}) does not exist")
 	endif()
