@@ -1,4 +1,4 @@
-if(NOT CMAKE_HOST_UNIX)
+if(NOT CMAKE_HOST_LINUX)
 	return()
 endif()
 
