@@ -7,4 +7,4 @@ DKSET(JSYAML_DL https://codeload.github.com/nodeca/js-yaml/zip/refs/tags/${JSYAM
 DKSET(JSYAML ${3RDPARTY}/${JSYAML_NAME})
 
 ### INSTALL ###
-DKINSTALL(${JSYAML_DL} js_yaml ${JSYAML})
+DKINSTALL(${JSYAML_DL} js-yaml ${JSYAML})
