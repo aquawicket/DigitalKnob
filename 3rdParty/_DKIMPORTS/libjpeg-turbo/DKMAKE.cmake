@@ -19,7 +19,7 @@ DKSET(JPEG ${3RDPARTY}/${JPEG_NAME})
 
 
 ### INSTALL ###
-DKINSTALL(${JPEG_DL} libjpeg_turbo ${JPEG} NOPATCH)
+DKINSTALL(${JPEG_DL} libjpeg-turbo ${JPEG} NOPATCH)
 
 
 ### DKPLUGINS LINK ###
