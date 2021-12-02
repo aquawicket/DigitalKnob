@@ -1,5 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 <Project>
- <PropertyGroup>
-   <DefaultAndroidAPILevelNumber>26</DefaultAndroidAPILevelNumber>
- </PropertyGroup>
+	<PropertyGroup>
+		<PreferredToolArchitecture>ARM</PreferredToolArchitecture>
+		<DefaultAndroidAPILevelNumber>26</DefaultAndroidAPILevelNumber>
+	</PropertyGroup>
 </Project>
