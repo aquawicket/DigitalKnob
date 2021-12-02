@@ -20,15 +20,14 @@ if(CMAKE_HOST_LINUX)
 	DKSET(JDK_DL https://download.java.net/java/GA/jdk9/${JDK_VERSION}/binaries/${JDK_NAME}.tar.gz)
 endif()
 DKSET(JDK ${3RDPARTY}/${JDK_NAME})
-DKSETENV("JAVA_HOME" ${JDK})
-DKSETENV("VS_JavaHome" ${JDK})
-
 
 ### INSTALL ###
 DKINSTALL(${JDK_DL} jdk ${JDK})
 
 ### LINK ###
 DKINCLUDE(${JDK}/)	
+DKSETENV("JAVA_HOME" ${JDK})
+DKSETENV("VS_JavaHome" ${JDK})
 	
 
 
