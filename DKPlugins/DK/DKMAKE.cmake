@@ -20,22 +20,22 @@ if(IOS OR IOSSIM)
 endif()
 
 if(LINUX)
-	DKDEPEND(mesa_common_dev)
-	DKDEPEND(libgl1_mesa_dev)
-	DKDEPEND(libxrandr_dev)
-	DKDEPEND(libasound2_dev) ##TODO: Move to DKAudio
-	DKDEPEND(libxtst_dev)
-	DKDEPEND(simple_getch)
+	DKDEPEND(mesa-common-dev)
+	DKDEPEND(libgl1-mesa-dev)
+	DKDEPEND(libxrandr-dev)
+	DKDEPEND(libasound2-dev) ##TODO: Move to DKAudio
+	DKDEPEND(libxtst-dev)
+	DKDEPEND(simple-getch)
 	DKDEPEND(boxer)
 endif()
 
 if(RASPBERRY)
-	DKDEPEND(mesa_common_dev)
-	DKDEPEND(libgl1_mesa_dev)
-	DKDEPEND(libxrandr_dev)
-	DKDEPEND(libasound2_dev) ##TODO: Move to DKAudio
-	DKDEPEND(libxtst_dev)
-	DKDEPEND(simple_getch)
+	DKDEPEND(mesa-common-dev)
+	DKDEPEND(libgl1-mesa-dev)
+	DKDEPEND(libxrandr-dev)
+	DKDEPEND(libasound2-dev) ##TODO: Move to DKAudio
+	DKDEPEND(libxtst-dev)
+	DKDEPEND(simple-getch)
 	DKDEPEND(boxer)
 endif()
 
