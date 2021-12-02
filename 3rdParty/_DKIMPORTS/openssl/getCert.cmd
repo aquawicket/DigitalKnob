@@ -21,7 +21,7 @@ set CACERTS="C:\Users\Administrator\digitalknob\DK\3rdParty\openjdk-9.0.4_window
 echo -n | %OPENSSL_EXE% s_client -connect google.com:443 | %OPENSSL_EXE% x509 > %GOOGLE_CER%
 %KEYTOOL_EXE% -import -alias google -cacerts -file %GOOGLE_CER%
 
-echo -n | %OPENSSL_EXE% s_client -connect maven.apache.org:443 | %OPENSSL_EXE% x509 > %MAVEN_CER%
+echo -n | %OPENSSL_EXE% s_client -connect repo.maven.apache.org:443 | %OPENSSL_EXE% x509 > %MAVEN_CER%
 %KEYTOOL_EXE% -import -alias maven -cacerts -file %MAVEN_CER%
 
 echo press and key to continue && timeout /t 60 > nul
