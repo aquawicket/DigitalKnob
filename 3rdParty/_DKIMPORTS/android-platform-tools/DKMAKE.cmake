@@ -12,7 +12,7 @@ DKSET(ANDROIDPLATFORMTOOLS_VERSION 31.0.3)
 WIN_DKSET(ANDROIDPLATFORMTOOLS_DL https://dl.google.com/android/repository/platform-tools_r${ANDROIDPLATFORMTOOLS_VERSION}-windows.zip)
 MAC_DKSET(ANDROIDPLATFORMTOOLS_DL https://dl.google.com/android/repository/platform-tools_r${ANDROIDPLATFORMTOOLS_VERSION}-darwin.zip)
 LINUX_DKSET(ANDROIDPLATFORMTOOLS_DL https://dl.google.com/android/repository/platform-tools_r${ANDROIDPLATFORMTOOLS_VERSION}-linux.zip)
-DKSET(ANDROIDPLATFORMTOOLS ${ANDROIDSDK}/platform-tools/${ANDROIDPLATFORMTOOLS_VERSION})
+DKSET(ANDROIDPLATFORMTOOLS ${ANDROIDSDK}/platform-tools)
 
 
 ### INSTALL ###

@@ -15,9 +15,9 @@ DKSET(ANDROIDSDKTOOLS_BUILD 4333796)
 WIN_DKSET(ANDROIDSDKTOOLS_DL https://dl.google.com/android/repository/sdk-tools-windows-${ANDROIDSDKTOOLS_BUILD}.zip)
 MAC_DKSET(ANDROIDSDKTOOLS_DL https://dl.google.com/android/repository/sdk-tools-darwin-${ANDROIDSDKTOOLS_BUILD}.zip)
 LINUX_DKSET(ANDROIDSDKTOOLS_DL https://dl.google.com/android/repository/sdk-tools-linux-${ANDROIDSDKTOOLS_BUILD}.zip)
-DKSET(ANDROIDSDKTOOLS ${ANDROIDSDK}/sdk-tools/${ANDROIDSDKTOOLS_VERSION})
+DKSET(ANDROIDSDKTOOLS ${ANDROIDSDK}/tools)
 
 
 ### INSTALL ###
-file(MAKE_DIRECTORY ${ANDROIDSDK}/sdk-tools)
+file(MAKE_DIRECTORY ${ANDROIDSDK}/tools)
 DKINSTALL(${ANDROIDSDKTOOLS_DL} android-sdk-tools ${ANDROIDSDKTOOLS})
