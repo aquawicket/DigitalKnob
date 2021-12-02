@@ -199,9 +199,9 @@ function DKBuild_InstallXcode(){
 
 function DKBuild_ValidateNDK(){
     //GOAL: Eventually we'll use the DKMAKE.cmake script to install
+	const ANDROIDNDK_BUILD = DKBuild_GetDKMakeVariable(DIGITALKNOB+"DK/3rdParty/_DKIMPORTS/android-ndk/DKMAKE.cmake", "ANDROIDNDK_BUILD")
 	const ANDROIDNDK_DL = DKBuild_GetDKMakeVariable(DIGITALKNOB+"DK/3rdParty/_DKIMPORTS/android-ndk/DKMAKE.cmake", "ANDROIDNDK_DL")
-	const ANDROIDNDK_VERSION = DKBuild_GetDKMakeVariable(DIGITALKNOB+"DK/3rdParty/_DKIMPORTS/android-ndk/DKMAKE.cmake", "ANDROIDNDK_VERSION")
-	ANDROIDNDK = DIGITALKNOB+"DK/3rdParty/android-ndk-"+ANDROIDNDK_VERSION
+	ANDROIDNDK = DIGITALKNOB+"DK/3rdParty/android-sdk/ndk/"+ANDROIDNDK_BUILD
 	
 	//set environment variables
 	if(ANDROIDNDK !== CPP_DK_Execute("echo %VS_NdkRoot%", "rt"))
@@ -209,12 +209,12 @@ function DKBuild_ValidateNDK(){
 		
 	// Validate install
 	if(!CPP_DKFile_Exists(ANDROIDNDK+"/installed")){
-		console.log("Installing Android NDK "+ANDROIDNDK_VERSION+" . . .")
+		console.log("Installing Android NDK "+ANDROIDNDK_BUILD+" . . .")
 		CPP_DKCurl_Download(ANDROIDNDK_DL, DKDOWNLOAD)
 		const index = ANDROIDNDK_DL.lastIndexOf("/")
 		const filename = ANDROIDNDK_DL.substring(index+1)
-		CPP_DKArchive_Extract(DKDOWNLOAD+"/"+filename, DIGITALKNOB+"DK/3rdParty")
-		CPP_DKFile_StringToFile(ANDROIDNDK_VERSION, ANDROIDNDK+"/installed")
+		CPP_DKArchive_Extract(DKDOWNLOAD+"/"+filename, DIGITALKNOB+"DK/3rdParty/android-sdk/ndk")
+		CPP_DKFile_StringToFile(ANDROIDNDK_BUILD, ANDROIDNDK+"/installed")
 	}
 }
 
@@ -509,7 +509,7 @@ function DKBuild_DoResults(){
 		CPP_DKFile_MkDir(app_path+"android32")
 		CPP_DKFile_ChDir(app_path+"android32")
 		if(CPP_DK_GetOS() === "Windows")
-			let rtvalue = CPP_DK_Execute(CMAKE+" -G \""+VS_GENERATOR+"\" -A ARM -DCMAKE_TOOLCHAIN_FILE="+ANDROIDNDK+"/build/cmake/android.toolchain.cmake -DANDROIDNDK="+ANDROIDNDK+" -DANDROID_ABI=armeabi-v7a -DANDROID_NATIVE_API_LEVEL=21 -DCMAKE_CXX_FLAGS=-std=c++1z "+cmake_string+DIGITALKNOB+"DK")
+			let rtvalue = CPP_DK_Execute(CMAKE+" -G \""+VS_GENERATOR+"\" -A ARM -DCMAKE_TOOLCHAIN_FILE="+ANDROIDNDK+"/build/cmake/android.toolchain.cmake -DANDROIDNDK="+ANDROIDNDK+" -DANDROID_ABI=armeabi-v7a -DANDROID_NATIVE_API_LEVEL=26 -DCMAKE_CXX_FLAGS=-std=c++1z "+cmake_string+DIGITALKNOB+"DK")
 		else if(CPP_DK_GetOS() === "Linux" || CPP_DK_GetOS() === "Mac")
 			let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DIGITALKNOB+"DK")
 		if(TYPE === "Debug" || TYPE === "ALL")
@@ -537,7 +537,7 @@ function DKBuild_DoResults(){
 		CPP_DKFile_MkDir(app_path+"android64")
 		CPP_DKFile_ChDir(app_path+"android64")
 		if(CPP_DK_GetOS() === "Windows")
-			let rtvalue = CPP_DK_Execute(CMAKE+" -G \""+VS_GENERATOR+"\" -A ARM64 -DCMAKE_TOOLCHAIN_FILE="+ANDROIDNDK+"/build/cmake/android.toolchain.cmake -DANDROIDNDK="+ANDROIDNDK+" -DANDROID_ABI=arm64-v8a -DANDROID_NATIVE_API_LEVEL=21 -DCMAKE_CXX_FLAGS=-std=c++1z "+cmake_string+DIGITALKNOB+"DK")
+			let rtvalue = CPP_DK_Execute(CMAKE+" -G \""+VS_GENERATOR+"\" -A ARM64 -DCMAKE_TOOLCHAIN_FILE="+ANDROIDNDK+"/build/cmake/android.toolchain.cmake -DANDROIDNDK="+ANDROIDNDK+" -DANDROID_ABI=arm64-v8a -DANDROID_NATIVE_API_LEVEL=26 -DCMAKE_CXX_FLAGS=-std=c++1z "+cmake_string+DIGITALKNOB+"DK")
 		else if(CPP_DK_GetOS() === "Linux" || CPP_DK_GetOS() === "Mac")
 			rtvalue = CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DIGITALKNOB+"DK")
 		if(TYPE === "Debug" || TYPE === "ALL")
