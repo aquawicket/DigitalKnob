@@ -6,11 +6,11 @@ DKDEPEND(libpng)
 IF(ANDROID)
 	DKDEPEND(jpeg)
 ELSE()
-	DKDEPEND(libjpeg_turbo)
+	DKDEPEND(libjpeg-turbo)
 ENDIF()
 DKDEPEND(openssl)
 IF(LINUX)
-	DKDEPEND(libsystemd_dev)
+	DKDEPEND(libsystemd-dev)
 ENDIF()
 
 
