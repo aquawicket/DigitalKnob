@@ -185,7 +185,7 @@ if(NOT LINUX) # Disabled NON Linux targets
 	DKDISABLE(libx11-dev)
 	DKDISABLE(libxrandr-dev)
 	DKDISABLE(libxtst-dev)
-	DKDISABLE(mesa_common_dev)
+	DKDISABLE(mesa-common-dev)
 endif()
 if(LINUX) # Disabled for Linux targets
 	DKDISABLE(android-build-tools)
