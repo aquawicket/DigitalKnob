@@ -6,11 +6,12 @@ DKSET(TIDY_MINOR 8)
 DKSET(TIDY_BUILD 0)
 DKSET(TIDY_VERSION ${TIDY_MAJOR}.${TIDY_MINOR}.${TIDY_BUILD})
 DKSET(TIDY_NAME tidy_html5_${TIDY_VERSION})
+DKSET(TIDY_DL https://github.com/htacg/tidy-html5/archive/refs/tags/${TIDY_MAJOR}.${TIDY_MINOR}.${TIDY_BUILD}.zip)
 DKSET(TIDY ${3RDPARTY}/${TIDY_NAME})
 
 
 ### INSTALL ###
-DKINSTALL(https://github.com/htacg/tidy-html5/archive/refs/tags/${TIDY_MAJOR}.${TIDY_MINOR}.${TIDY_BUILD}.zip tidy_html5 ${TIDY})
+DKINSTALL(${TIDY_DL} tidy-html5 ${TIDY})
 
 
 
