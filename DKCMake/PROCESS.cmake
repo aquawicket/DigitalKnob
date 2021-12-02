@@ -38,13 +38,14 @@ DKBUILD_LOG("######  Enabled Dependencies (sorted by dependency)  #######")
 DKBUILD_LOG("############################################################")
 list(REMOVE_DUPLICATES dkdepend_list)
 foreach(plugin ${dkdepend_list})
-	DKBUILD_LOG("${plugin}")	
+	DKBUILD_LOG("${plugin}")
 endforeach()
 DKBUILD_LOG("\n")
 
 foreach(plugin ${dkdepend_list})
 	DKSET(QUEUE_BUILD OFF)
-	DKSET(LIBLIST "") ## used for double checking
+	DKSET(LIBLIST "") 
+	## used for double checking
 	#DKSET(CMAKE_FILE "")
 	
 	message(STATUS "############################################################")
@@ -89,7 +90,7 @@ foreach(plugin ${dkdepend_list})
 
 	string(FIND "${DKPLUGIN_LIST}" "${plugin}" isDKPlugin) #isDKPlugin flag
 	####################### DKPlugins #######################
-	if(${isDKPlugin} GREATER -1)	
+	if(${isDKPlugin} GREATER -1)
 		#Add the DKPlugin to the app project
 		if(EXISTS "${plugin_path}/CMakeLists.txt")
 			if(LINUX OR RASPBERRY)
@@ -288,8 +289,8 @@ file(GLOB App_SRC
 	${DKPROJECT}/*.h
 	${DKPROJECT}/*.c
 	${DKPROJECT}/*.cpp)
-list(FILTER App_SRC EXCLUDE REGEX "${DKPROJECT}/assets/*" )
-list(FILTER App_SRC EXCLUDE REGEX "${DKPROJECT}/${OS}/*" )
+list(FILTER App_SRC EXCLUDE REGEX "${DKPROJECT}/assets/*")
+list(FILTER App_SRC EXCLUDE REGEX "${DKPROJECT}/${OS}/*")
 if(SRC_INCLUDE)
 	file(GLOB App_SRC_INCLUDE ${SRC_INCLUDE})
 	list(APPEND App_SRC ${App_SRC_INCLUDE})
@@ -979,7 +980,7 @@ if(ANDROID)
 	#add_executable(DKAndroid ${App_SRC})
 	add_library(${APP_NAME} SHARED ${App_SRC})
 	
-	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${LIBS})	
+	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${LIBS})
 	#target_include_directories(${APP_NAME} PUBLIC ${INCLUDE_DIRECTORIES}) #of ${DKINCLUDES_LIST}
 	target_include_directories(${APP_NAME} PUBLIC ${SDL2}/include)
 
@@ -1017,7 +1018,7 @@ DKBUILD_LOG("     INCLUDE_DIRECTORIES:  ${INCLUDE_DIRECTORIES}")
 DKBUILD_LOG("        LINK_DIRECTORIES:  ${LINK_DIRECTORIES}")
 DKBUILD_LOG("  STATIC_LIBRARY_OPTIONS:  ${STATIC_LIBRARY_OPTIONS}")
 DKBUILD_LOG("             DEBUG_FLAGS:  ${DEBUG_FLAGS}")
-DKBUILD_LOG("           RELEASE_FLAGS:  ${RELEASE_FLAGS})")
+DKBUILD_LOG("           RELEASE_FLAGS:  ${RELEASE_FLAGS}")
 DKBUILD_LOG("                   FLAGS:  ${FLAGS}")
 DKBUILD_LOG("          DKDEFINES_LIST:  ${DKDEFINES_LIST}")
 DKBUILD_LOG("         DKINCLUDES_LIST:  ${DKINCLUDES_LIST}")
