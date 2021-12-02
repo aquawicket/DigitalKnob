@@ -16,4 +16,4 @@ DKSETENV("VS_AntHome" ${ANT})
 
 
 ### INSTALL ###
-DKINSTALL(${ANT_DL} apache_ant ${ANT})
+DKINSTALL(${ANT_DL} apache-ant ${ANT})
