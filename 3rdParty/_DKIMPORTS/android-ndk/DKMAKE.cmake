@@ -2,8 +2,6 @@ if(NOT CMAKE_HOST_WIN32)
 	return()
 endif()
 
-DUMP(CMAKE_CURRENT_LIST_DIR)
-
 # https://dl.google.com/android/repository/android-ndk-r21e-windows-x86_64.zip
 # https://dl.google.com/android/repository/android-ndk-r21e-darwin-x86_64.dmg
 # https://dl.google.com/android/repository/android-ndk-r21e-linux-x86_64.zip
