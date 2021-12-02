@@ -214,6 +214,7 @@ function DKBuild_ValidateNDK(){
 		const index = ANDROIDNDK_DL.lastIndexOf("/")
 		const filename = ANDROIDNDK_DL.substring(index+1)
 		CPP_DKArchive_Extract(DKDOWNLOAD+"/"+filename, DIGITALKNOB+"DK/3rdParty/android-sdk/ndk")
+		CPP_DKFile_Rename(DIGITALKNOB+"DK/3rdParty/android-sdk/ndk/android-ndk-r22b", ANDROIDNDK, true)
 		CPP_DKFile_StringToFile(ANDROIDNDK_BUILD, ANDROIDNDK+"/installed")
 	}
 }
