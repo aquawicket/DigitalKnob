@@ -6,7 +6,7 @@ DKDEPEND(libpng)
 IF(ANDROID)
 	DKDEPEND(jpeg)
 ELSE()
-	DKDEPEND(libjpeg_turbo)
+	DKDEPEND(libjpeg-turbo)
 ENDIF()
 DKDEPEND(openssl)
 
@@ -18,7 +18,7 @@ DKSET(VNCSERVER ${3RDPARTY}/${VNCSERVER_NAME})
 
 
 ### INSTALL ###
-DKINSTALL(${VNCSERVER_DL} libvncserver_master_win ${VNCSERVER})
+DKINSTALL(${VNCSERVER_DL} libvncserver-master_win ${VNCSERVER})
 
 
 
