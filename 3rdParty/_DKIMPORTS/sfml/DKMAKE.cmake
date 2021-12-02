@@ -36,7 +36,7 @@ DKDEPEND(openal)
 DKDEPEND(flac)
 DKDEPEND(libogg)
 DKDEPEND(libvorbis)
-DKDEPEND(libjpeg_turbo)
+DKDEPEND(libjpeg-turbo)
 
 
 ### VERSION ### 
