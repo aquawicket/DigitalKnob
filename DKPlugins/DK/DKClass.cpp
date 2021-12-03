@@ -141,15 +141,3 @@ void DKClass::GetObjects(DKStringArray& list){
 			(*classes)[it->first]->GetInstances(list);
 	}
 }
-
-
-
-
-void DKClass::testIt(classtype singleOrNon) {
-	if (singleOrNon) {
-		DKINFO("got a singleton (true)");
-	}
-	else {
-		DKINFO("got a non_singleton (false)");
-	}
-};

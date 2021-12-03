@@ -6,8 +6,6 @@
 #include "DKObject.h"
 #include "DKUtil.h"
 
-typedef enum { non_singleton, singleton } classtype; //make a simple switch with a label
-
 #define STD_FUNCTION //or BOOST_FUNCTION
 #ifdef STD_FUNCTION
     #include <functional>
@@ -24,6 +22,7 @@ typedef enum { non_singleton, singleton } classtype; //make a simple switch with
 #endif
 
 
+typedef enum { non_singleton, singleton } classtype; //make a simple switch with a label
 
 class DKObject;
 class DKClass{
@@ -111,18 +110,15 @@ public:
 		return (*functions)[name](input, output);
 	}
 
-
-	void testIt(classtype singleOrNon);
 };
 
 
-
 /////  GLOBAL CLASS REGISTER //////////////
-#define REGISTER_OBJECT(klass, _singleton) \
+#define REGISTER_OBJECT(klass, singleton_or_non) \
     class klass##Class : public DKClass { \
     public: \
         klass##Class(){ \
-            DKClass::Register(#klass, this, _singleton); \
+            DKClass::Register(#klass, this, singleton_or_non); \
 			klass::SetName(#klass); \
         } \
 		virtual void Singleton(){ \

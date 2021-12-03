@@ -21,6 +21,6 @@ public:
 	static bool PackageAssets(DKString& dataFolder, DKString& headerFile);
 };
 
-REGISTER_OBJECT(DKAssets, true);
+REGISTER_OBJECT(DKAssets, singleton);
 
 #endif //DKAssets_H

@@ -137,6 +137,7 @@ endif()
 
 if(IOS OR IOSSIM)
 	DKDISABLE(agl)
+	DKDISABLE(boost)
 	DKDISABLE(boxer)
 	DKDISABLE(bzip2)
 	DKDISABLE(cef_binary)

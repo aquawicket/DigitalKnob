@@ -74,7 +74,7 @@ dk_addTarget(boost timer)
 dk_addTarget(boost type_erasure)
 dk_addTarget(boost wave)
 
-
+#build these, but don't look for libraries
 DKSET(boost_fiber_nolib 1)
 DKSET(boost_graph_parallel_nolib 1)
 DKSET(boost_headers_nolib 1)
@@ -101,11 +101,7 @@ endif()
 
 if(STATIC)
 
-#foreach(lib ${boost_targets})
-#	if(lib)
-#		DKSET(BOOST_WITH ${BOOST_WITH} --with-${lib})
-#	endif()
-#endforeach()
+
 foreach(lib_OFF ${boost_targets_OFF})
 	if(lib_OFF)
 		DKSET(BOOST_WITHOUT ${BOOST_WITHOUT} --without-${lib_OFF})
@@ -161,6 +157,14 @@ if(NOT EXISTS ${BOOST}/b2)
 endif()
 MAC64_DEBUG_COMMAND(./b2 toolset=darwin address-model=64 variant=debug link=static threading=multi runtime-debugging=on runtime-link=static --layout=system ${BOOST_WITH} ${BOOST_WITHOUT} --build-dir=${BOOST}/${OS}/${DEBUG_DIR} --stagedir=${BOOST}/${OS}/${DEBUG_DIR})
 MAC64_RELEASE_COMMAND(./b2 toolset=darwin address-model=64 variant=release link=static threading=multi runtime-debugging=off runtime-link=static --layout=system ${BOOST_WITH} ${BOOST_WITHOUT} --build-dir=${BOOST}/${OS}/${RELEASE_DIR} --stagedir=${BOOST}/${OS}/${RELEASE_DIR})
+
+# TODO
+#IOSSIM64_PATH(${BOOST})
+#if(NOT EXISTS ${BOOST}/b2)
+#	MAC64_COMMAND(./bootstrap.sh)
+#endif()
+#IOSSIM64_DEBUG_COMMAND(./b2 toolset=darwin address-model=64 variant=debug link=static threading=multi runtime-debugging=on runtime-link=static --layout=system ${BOOST_WITH} ${BOOST_WITHOUT} #--build-dir=${BOOST}/${OS}/${DEBUG_DIR} --stagedir=${BOOST}/${OS}/${DEBUG_DIR})
+#IOSSIM64_RELEASE_COMMAND(./b2 toolset=darwin address-model=64 variant=release link=static threading=multi runtime-debugging=off runtime-link=static --layout=system ${BOOST_WITH} ${BOOST_WITHOUT} #--build-dir=${BOOST}/${OS}/${RELEASE_DIR} --stagedir=${BOOST}/${OS}/${RELEASE_DIR})
 
 
 LINUX32_PATH(${BOOST})
