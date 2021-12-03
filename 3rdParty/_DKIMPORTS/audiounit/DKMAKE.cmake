@@ -6,6 +6,6 @@ endif()
 
 FIND_LIBRARY(AudioUnit_lib AudioUnit)
 if(NOT AudioUnit_lib)
-	message(FATAL_ERROR "Could not locate AudioUnit framework")
+	message(STATUS "Could not locate AudioUnit framework")
 endif()
 APPLE_LIB(${AudioUnit_lib})

@@ -20,7 +20,7 @@ if(IOS)
 	if(opensles_lib)
 		APPLE_LIB(${opensles_lib})
 	else()
-		#message(FATAL_ERROR "Could not locate OpenSLES framework")
+		message(STATUS "Could not locate OpenSLES framework")
 	endif()
 endif()
 
