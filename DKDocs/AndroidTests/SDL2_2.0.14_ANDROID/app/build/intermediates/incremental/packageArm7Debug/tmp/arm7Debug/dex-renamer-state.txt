@@ -1,0 +1,10 @@
+#Tue Nov 30 05:21:45 PST 2021
+base.2=C\:\\Users\\Administrator\\digitalknob\\SDL2VS\\app\\build\\intermediates\\dex\\arm7Debug\\mergeProjectDexArm7Debug\\8\\classes.dex
+path.2=8/classes.dex
+base.1=C\:\\Users\\Administrator\\digitalknob\\SDL2VS\\app\\build\\intermediates\\dex\\arm7Debug\\mergeProjectDexArm7Debug\\2\\classes.dex
+path.1=2/classes.dex
+base.0=C\:\\Users\\Administrator\\digitalknob\\SDL2VS\\app\\build\\intermediates\\dex\\arm7Debug\\mergeProjectDexArm7Debug\\0\\classes.dex
+renamed.2=classes3.dex
+renamed.1=classes2.dex
+renamed.0=classes.dex
+path.0=0/classes.dex

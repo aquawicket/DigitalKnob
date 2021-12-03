@@ -1,0 +1,3 @@
+C:/Users/Administrator/digitalknob/SDL2VS/app/.cxx/cmake/arm7Debug/armeabi-v7a/CMakeFiles/edit_cache.dir
+C:/Users/Administrator/digitalknob/SDL2VS/app/.cxx/cmake/arm7Debug/armeabi-v7a/CMakeFiles/main.dir
+C:/Users/Administrator/digitalknob/SDL2VS/app/.cxx/cmake/arm7Debug/armeabi-v7a/CMakeFiles/rebuild_cache.dir

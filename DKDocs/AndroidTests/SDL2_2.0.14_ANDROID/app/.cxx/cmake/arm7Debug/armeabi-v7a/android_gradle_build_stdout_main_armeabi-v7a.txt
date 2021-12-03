@@ -1,0 +1,2 @@
+ninja: Entering directory `C:\Users\Administrator\digitalknob\SDL2VS\app\.cxx\cmake\arm7Debug\armeabi-v7a'
+ninja: no work to do.

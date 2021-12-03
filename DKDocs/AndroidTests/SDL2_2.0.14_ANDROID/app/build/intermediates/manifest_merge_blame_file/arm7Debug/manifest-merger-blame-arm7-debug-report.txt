@@ -1,0 +1,121 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<!--
+3 Replace com.test.game with the identifier of your game below, e.g.
+4     com.gamemaker.game
+5-->
+6<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+7    package="com.DKGradle"
+8    android:installLocation="auto"
+9    android:versionCode="1"
+10    android:versionName="1.0" >
+11
+12    <uses-sdk
+13        android:minSdkVersion="26"
+13-->C:\Users\Administrator\digitalknob\SDL2VS\app\src\main\AndroidManifest.xml
+14        android:targetSdkVersion="26" />
+14-->C:\Users\Administrator\digitalknob\SDL2VS\app\src\main\AndroidManifest.xml
+15
+16    <!-- OpenGL ES 2.0 -->
+17    <uses-feature android:glEsVersion="0x00020000" />
+17-->C:\Users\Administrator\digitalknob\SDL2VS\app\src\main\AndroidManifest.xml:12:5-54
+17-->C:\Users\Administrator\digitalknob\SDL2VS\app\src\main\AndroidManifest.xml:12:19-51
+18
+19    <!-- Touchscreen support -->
+20    <uses-feature
+20-->C:\Users\Administrator\digitalknob\SDL2VS\app\src\main\AndroidManifest.xml:15:5-17:36
+21        android:name="android.hardware.touchscreen"
+21-->C:\Users\Administrator\digitalknob\SDL2VS\app\src\main\AndroidManifest.xml:16:9-52
+22        android:required="false" />
+22-->C:\Users\Administrator\digitalknob\SDL2VS\app\src\main\AndroidManifest.xml:17:9-33
+23
+24    <!-- Game controller support -->
+25    <uses-feature
+25-->C:\Users\Administrator\digitalknob\SDL2VS\app\src\main\AndroidManifest.xml:20:5-22:36
+26        android:name="android.hardware.gamepad"
+26-->C:\Users\Administrator\digitalknob\SDL2VS\app\src\main\AndroidManifest.xml:21:9-48
+27        android:required="false" />
+27-->C:\Users\Administrator\digitalknob\SDL2VS\app\src\main\AndroidManifest.xml:22:9-33
+28
+29    <!-- External mouse input events -->
+30    <uses-feature
+30-->C:\Users\Administrator\digitalknob\SDL2VS\app\src\main\AndroidManifest.xml:25:5-27:36
+31        android:name="android.hardware.type.pc"
+31-->C:\Users\Administrator\digitalknob\SDL2VS\app\src\main\AndroidManifest.xml:26:9-48
+32        android:required="false" />
+32-->C:\Users\Administrator\digitalknob\SDL2VS\app\src\main\AndroidManifest.xml:27:9-33
+33
+34    <!-- Allow writing to external storage -->
+35    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+35-->C:\Users\Administrator\digitalknob\SDL2VS\app\src\main\AndroidManifest.xml:30:5-81
+35-->C:\Users\Administrator\digitalknob\SDL2VS\app\src\main\AndroidManifest.xml:30:22-78
+36    <!-- Allow access to the vibrator -->
+37    <uses-permission android:name="android.permission.VIBRATE" />
+37-->C:\Users\Administrator\digitalknob\SDL2VS\app\src\main\AndroidManifest.xml:32:5-66
+37-->C:\Users\Administrator\digitalknob\SDL2VS\app\src\main\AndroidManifest.xml:32:22-63
+38
+39    <!-- if you want to capture audio, uncomment this. -->
+40    <!-- <uses-permission android:name="android.permission.RECORD_AUDIO" /> -->
+41    <!--
+42 Create a Java class extending SDLActivity and place it in a
+43         directory under app/src/main/java matching the package, e.g. app/src/main/java/com/gamemaker/game/MyGame.java
+44 
+45         then replace "SDLActivity" with the name of your class (e.g. "MyGame")
+46         in the XML below.
+47
+48         An example Java class can be found in README-android.md
+49    -->
+50    <application
+50-->C:\Users\Administrator\digitalknob\SDL2VS\app\src\main\AndroidManifest.xml:45:5-74:19
+51        android:allowBackup="true"
+51-->C:\Users\Administrator\digitalknob\SDL2VS\app\src\main\AndroidManifest.xml:47:9-35
+52        android:debuggable="true"
+53        android:extractNativeLibs="false"
+54        android:hardwareAccelerated="true"
+54-->C:\Users\Administrator\digitalknob\SDL2VS\app\src\main\AndroidManifest.xml:49:9-43
+55        android:icon="@mipmap/ic_launcher"
+55-->C:\Users\Administrator\digitalknob\SDL2VS\app\src\main\AndroidManifest.xml:46:9-43
+56        android:label="@string/app_name"
+56-->C:\Users\Administrator\digitalknob\SDL2VS\app\src\main\AndroidManifest.xml:45:18-50
+57        android:testOnly="true"
+58        android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
+58-->C:\Users\Administrator\digitalknob\SDL2VS\app\src\main\AndroidManifest.xml:48:9-67
+59
+60        <!--
+61        Example of setting SDL hints from AndroidManifest.xml:
+62        <meta-data android:name="SDL_ENV.SDL_ACCELEROMETER_AS_JOYSTICK" android:value="0"/>
+63        -->
+64
+65        <activity
+65-->C:\Users\Administrator\digitalknob\SDL2VS\app\src\main\AndroidManifest.xml:55:9-73:20
+66            android:name="com.DKGradle.DKGradle"
+66-->C:\Users\Administrator\digitalknob\SDL2VS\app\src\main\AndroidManifest.xml:55:19-43
+67            android:alwaysRetainTaskState="true"
+67-->C:\Users\Administrator\digitalknob\SDL2VS\app\src\main\AndroidManifest.xml:57:13-49
+68            android:configChanges="orientation|uiMode|screenLayout|screenSize|smallestScreenSize|keyboard|keyboardHidden|navigation"
+68-->C:\Users\Administrator\digitalknob\SDL2VS\app\src\main\AndroidManifest.xml:59:13-133
+69            android:label="@string/app_name"
+69-->C:\Users\Administrator\digitalknob\SDL2VS\app\src\main\AndroidManifest.xml:56:13-45
+70            android:launchMode="singleInstance" >
+70-->C:\Users\Administrator\digitalknob\SDL2VS\app\src\main\AndroidManifest.xml:58:13-48
+71            <intent-filter>
+71-->C:\Users\Administrator\digitalknob\SDL2VS\app\src\main\AndroidManifest.xml:61:13-64:29
+72                <action android:name="android.intent.action.MAIN" />
+72-->C:\Users\Administrator\digitalknob\SDL2VS\app\src\main\AndroidManifest.xml:62:17-69
+72-->C:\Users\Administrator\digitalknob\SDL2VS\app\src\main\AndroidManifest.xml:62:25-66
+73
+74                <category android:name="android.intent.category.LAUNCHER" />
+74-->C:\Users\Administrator\digitalknob\SDL2VS\app\src\main\AndroidManifest.xml:63:17-77
+74-->C:\Users\Administrator\digitalknob\SDL2VS\app\src\main\AndroidManifest.xml:63:27-74
+75            </intent-filter>
+76            <!-- Drop file event -->
+77            <!--
+78            <intent-filter>
+79                <action android:name="android.intent.action.VIEW" />
+80                <category android:name="android.intent.category.DEFAULT" />
+81                <data android:mimeType="*/*" />
+82            </intent-filter>
+83            -->
+84        </activity>
+85    </application>
+86
+87</manifest>

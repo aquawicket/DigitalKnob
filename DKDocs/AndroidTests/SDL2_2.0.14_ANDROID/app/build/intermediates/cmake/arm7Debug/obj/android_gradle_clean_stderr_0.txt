@@ -1,0 +1,12 @@
+CMake Error in CMakeLists.txt:
+  Failed to run MSBuild command:
+
+    MSBuild.exe
+
+  to get the value of VCTargetsPath:
+
+    The system cannot find the file specified
+
+
+
+ninja: error: rebuilding 'build.ninja': subcommand failed

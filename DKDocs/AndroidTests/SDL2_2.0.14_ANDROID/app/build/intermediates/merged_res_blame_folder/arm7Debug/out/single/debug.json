@@ -1,0 +1,22 @@
+[
+    {
+        "merged": "C:\\Users\\Administrator\\digitalknob\\SDL2VS\\app\\build\\intermediates\\res\\merged\\arm7\\debug\\mipmap-xhdpi_ic_launcher.png.flat",
+        "source": "C:\\Users\\Administrator\\digitalknob\\SDL2VS\\app\\src\\main\\res\\mipmap-xhdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "C:\\Users\\Administrator\\digitalknob\\SDL2VS\\app\\build\\intermediates\\res\\merged\\arm7\\debug\\mipmap-hdpi_ic_launcher.png.flat",
+        "source": "C:\\Users\\Administrator\\digitalknob\\SDL2VS\\app\\src\\main\\res\\mipmap-hdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "C:\\Users\\Administrator\\digitalknob\\SDL2VS\\app\\build\\intermediates\\res\\merged\\arm7\\debug\\mipmap-xxxhdpi_ic_launcher.png.flat",
+        "source": "C:\\Users\\Administrator\\digitalknob\\SDL2VS\\app\\src\\main\\res\\mipmap-xxxhdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "C:\\Users\\Administrator\\digitalknob\\SDL2VS\\app\\build\\intermediates\\res\\merged\\arm7\\debug\\mipmap-xxhdpi_ic_launcher.png.flat",
+        "source": "C:\\Users\\Administrator\\digitalknob\\SDL2VS\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "C:\\Users\\Administrator\\digitalknob\\SDL2VS\\app\\build\\intermediates\\res\\merged\\arm7\\debug\\mipmap-mdpi_ic_launcher.png.flat",
+        "source": "C:\\Users\\Administrator\\digitalknob\\SDL2VS\\app\\src\\main\\res\\mipmap-mdpi\\ic_launcher.png"
+    }
+]
