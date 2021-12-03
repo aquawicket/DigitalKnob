@@ -11,9 +11,9 @@
 #include "DKRml/DKRmlHeadInstancer.h"
 
 #include <RmlUi/Core/StreamMemory.h>
-#include "../../3rdParty/RmlUi-master/Source/Core/PluginRegistry.h"
-#include "../../3rdParty/RmlUi-master/Source/Core/XMLNodeHandlerDefault.h"
-#include "../../3rdParty/RmlUi-master/Source/Core/XMLNodeHandlerBody.h"
+#include <Core/PluginRegistry.h>
+#include <Core/XMLNodeHandlerDefault.h>
+#include <Core/XMLNodeHandlerBody.h>
 
 #define DRAG_FIX 1
 DKRmlFile* DKRml::dkRmlFile = NULL;

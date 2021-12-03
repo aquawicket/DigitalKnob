@@ -51,6 +51,7 @@ if(rmlui_RmlCore)
 endif()
 
 if(rmlui_RmlDebugger)
+	DKDEFINE(USE_rmlui_debugger)
 	WIN_DEBUG_LIB(${RMLUI}/${OS}/${DEBUG_DIR}/RmlDebugger.lib)
 	WIN_DEBUG_LIB(${RMLUI}/${OS}/${DEBUG_DIR}/RmlDebugger.lib)
 	WIN_RELEASE_LIB(${RMLUI}/${OS}/${RELEASE_DIR}/RmlDebugger.lib)
