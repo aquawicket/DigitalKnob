@@ -198,7 +198,7 @@ if(LINUX) # Disabled for Linux targets
 	DKDISABLE(DKHook) #NOTE: this has linux functions too
 	DKDISABLE(DKOcr)
 	DKDISABLE(DKSDLWav)
-	DKDISABLE(DKSDLText)
+	#DKDISABLE(DKSDLText)
 	DKDISABLE(DKTorrent)
 	DKDISABLE(DKWebSockets)
 	DKDISABLE(freealut)
