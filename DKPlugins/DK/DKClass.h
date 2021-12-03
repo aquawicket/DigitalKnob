@@ -6,6 +6,8 @@
 #include "DKObject.h"
 #include "DKUtil.h"
 
+typedef enum { non_singleton, singleton } classtype; //make a simple switch with a label
+
 #define STD_FUNCTION //or BOOST_FUNCTION
 #ifdef STD_FUNCTION
     #include <functional>
@@ -108,7 +110,11 @@ public:
 			return DKERROR("CallFunc("+name+") not registered\n");
 		return (*functions)[name](input, output);
 	}
+
+
+	void testIt(classtype singleOrNon);
 };
+
 
 
 /////  GLOBAL CLASS REGISTER //////////////
