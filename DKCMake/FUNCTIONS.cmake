@@ -3645,9 +3645,8 @@ endfunction()
 # TODO
 # We can scan each plugin and attempt to create it's variable and infomation manually here
 function(dk_createSmartObject object)
-	message(STATUS("dk_createSmartObject(${object})")
+	message(STATUS "dk_createSmartObject(${object})")
 	
 	#is it a full and valid path
 		#is it a file or a folder
-
 endfunction()
