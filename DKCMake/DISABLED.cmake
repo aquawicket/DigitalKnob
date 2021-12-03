@@ -51,7 +51,7 @@ DKDISABLE(miniweb)
 DKDISABLE(ncurses)
 DKDISABLE(opencv)  #WORKING, just disabled because it takes so long to compile
 DKDISABLE(openframeworks)
-DKDISABLE(openscenegraph)
+#DKDISABLE(openscenegraph)
 DKDISABLE(osgaudio)
 DKDISABLE(osgbullet)
 DKDISABLE(osgworks)
