@@ -3646,7 +3646,5 @@ endfunction()
 # We can scan each plugin and attempt to create it's variable and infomation manually here
 function(dk_createSmartObject object)
 	message(STATUS "dk_createSmartObject(${object})")
-	
-	#is it a full and valid path
-		#is it a file or a folder
+	# We require something that can resolve to a full, valid path containing a DKMAKE.cmake file 
 endfunction()
