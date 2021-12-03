@@ -113,7 +113,6 @@ if(MAC)  # Disabled on Mac host machines
 	DKDISABLE(ghostscript)
 	DKDISABLE(imagemagick)
 	DKDISABLE(jpeg) 
-	DKDISABLE(kdevelop)
 	DKDISABLE(leptonica)
 	DKDISABLE(libtorrent)
 	DKDISABLE(libuv)
@@ -177,6 +176,7 @@ endif()
 
 if(NOT LINUX) # Disabled NON Linux targets
 	DKDISABLE(build-essential)
+	DKDISABLE(kdevelop)
 	DKDISABLE(libasound2-dev)
 	DKDISABLE(libgl1-mesa-dev)
 	DKDISABLE(libglfw3-dev)
@@ -235,7 +235,7 @@ if(RASPBERRY) # Disabled for Raspberry Pi targets
 	DKDISABLE(DKHook) #NOTE: this has linux functions too
 	DKDISABLE(DKMidi)
 	DKDISABLE(DKOcr)
-	DKDISABLE(DKSDLText)
+	#DKDISABLE(DKSDLText)
 	DKDISABLE(DKWebSockets)
 	DKDISABLE(freealut)
 	DKDISABLE(freealut-master)
