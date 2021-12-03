@@ -29,6 +29,7 @@ IF(IOS)
 	DKDEFINE(RMLUI_NO_THIRDPARTY_CONTAINERS)
 ENDIF()
 DKINCLUDE(${RMLUI}/Include)
+DKINCLUDE(${RMLUI}/Source)
 dk_addTarget(rmlui RmlCore)
 dk_addTarget(rmlui RmlDebugger)
 
