@@ -54,7 +54,8 @@ function DKBuildConsole_ChooseUpdate() {
 	var key = 10
 	while(key === 10 || key === 0)
 		key = CPP_DK_GetKey()
-		
+	
+	UPDATE = 1	
 	switch(key){
 		case 48:  //Back (0)
 			break
@@ -64,7 +65,6 @@ function DKBuildConsole_ChooseUpdate() {
 			break
 		//Spacebar
 		case 13:
-			UPDATE = 1
 			OS = cache_json.OS
 			APP = cache_json.APP
 			TYPE = cache_json.TYPE
@@ -92,7 +92,6 @@ function DKBuildConsole_ChooseUpdate() {
 			DKGit_GitUpdate()
 			break
 		default:
-			UPDATE = 1
 			break
 	}
 }
