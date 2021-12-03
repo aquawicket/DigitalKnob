@@ -3113,7 +3113,9 @@ function(DKDEPEND name)
 		message(STATUS "${name} IS DISABLED")
 		return()
 	endif()
-			
+	
+	dk_createSmartObject(${name}) #TODO:  automatically determin plugin, create variables, setup auto compiles, etc 
+	
 	# If DKDEPEND had second variable (a sub library), set that variable to ON
 	# if(${ARGC} GREATER 1)
 	#	list(FIND dkdepend_list "${name} ${args}" index)
@@ -3128,8 +3130,8 @@ function(DKDEPEND name)
 	# endif()
 		
 	list(FIND dkdepend_list "${name}" index)
-	if(${index} GREATER -1) #library is already in the list
-		return()
+	if(${index} GREATER -1)
+		return()  #library is already in the list
 	endif()
 	
 	DKRUNDEPENDS(${ARGV}) # strip everything from the file except if() else() elseif() endif() and DKDEPEND() before sorting.
@@ -3637,4 +3639,15 @@ function(dk_removeTarget name target)
 	endif()
 	DKSET(${name}_${target} 0)
 	DKUNSET(${name}_${target})
+endfunction()
+
+
+# TODO
+# We can scan each plugin and attempt to create it's variable and infomation manually here
+function(dk_createSmartObject object)
+	message(STATUS("dk_createSmartObject(${object})")
+	
+	#is it a full and valid path
+		#is it a file or a folder
+
 endfunction()
