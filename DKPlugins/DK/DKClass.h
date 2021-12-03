@@ -41,7 +41,7 @@ public:
 	static bool _Available(const DKString& data);
 	static void _Close(const DKString& data);
 
-	static void Register(const DKString& name, DKClass* _class, bool singleton);
+	static void Register(const DKString& name, DKClass* _class, bool _singleton);
 	static void CloseAll();
 	static void GetClassList(DKStringArray& list);
 	static void GetObjects(DKStringArray& list);
@@ -112,11 +112,11 @@ public:
 
 
 /////  GLOBAL CLASS REGISTER //////////////
-#define REGISTER_OBJECT(klass, singleton) \
+#define REGISTER_OBJECT(klass, _singleton) \
     class klass##Class : public DKClass { \
     public: \
         klass##Class(){ \
-            DKClass::Register(#klass, this, singleton); \
+            DKClass::Register(#klass, this, _singleton); \
 			klass::SetName(#klass); \
         } \
 		virtual void Singleton(){ \

@@ -4,12 +4,12 @@
 std::map<DKString, DKClass*>* DKClass::classes = NULL;
 DKFunctionMap* DKClass::functions = NULL;
 
-void DKClass::Register(const DKString& klass, DKClass* _class, bool singleton){
-	DKDEBUGFUNC(klass, _class, singleton);
+void DKClass::Register(const DKString& klass, DKClass* _class, bool _singleton){
+	DKDEBUGFUNC(klass, _class, _singleton);
 	if(!classes){ classes = new std::map<DKString, DKClass*>(); }
 	if((*classes)[klass]){ return; } //already exists
 	(*classes)[klass] = _class;
-	if(singleton)
+	if(_singleton)
 		(*classes)[klass]->Singleton();
 }
 

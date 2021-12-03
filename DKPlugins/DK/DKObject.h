@@ -35,7 +35,7 @@ public:
 	}
 	static void Singleton(){
 		DKDEBUGFUNC();
-		singleton = true;
+		_singleton = true;
 		instances.clear();
 	}
 	static T* Instance(const DKString& data){
@@ -43,7 +43,7 @@ public:
 		//if(has(data, ".js"))
 		//	DKERROR("DKObject::Instance(): this is a .js file. Can't work for Cef\n");
 		//data = (id,var1,var2,var3,etc)
-		if(!instances.empty() && singleton){
+		if(!instances.empty() && _singleton){
 			//DKWARN("DKClass singleton already created as "+instances[0]->data[0]+"\n");
 			return instances[0];
 		}
@@ -148,12 +148,12 @@ public:
 private:
 	static std::vector<T*> instances;
 	static char* classname;
-    static bool singleton;
+    static bool _singleton;
 };
 
 template<class T, class R>	char* DKBaseT<T,R>::classname;
 template<class T, class R>	unsigned long DKBaseT<T,R>::instance_count;
-template<class T, class R>	bool DKBaseT<T,R>::singleton;
+template<class T, class R>	bool DKBaseT<T,R>::_singleton;
 template<class T, class R>	std::vector<T*> DKBaseT<T,R>::instances;
 template <class T>
 class DKObjectT : public DKObject, public DKBaseT<T,T>{};
