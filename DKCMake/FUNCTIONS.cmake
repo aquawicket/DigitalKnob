@@ -3475,7 +3475,7 @@ endfunction()
 function(DKBUILD_LOG entry)
 	#DKSET(DKBUILD_LOG_FILE "${DKBUILD_LOG_FILE}${entry}\n")
 	message(STATUS "buildlog->  ${entry}")
-	file(APPEND ${DKPROJECT}/DKBUILD.log "${entry}\n")
+	file(APPEND ${DKPROJECT}/${OS}/DKBUILD.log "${entry}\n")
 endfunction()
 
 function(ADD_SOURCE regex)
