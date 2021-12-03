@@ -1,7 +1,0 @@
-[
-{
-  "directory": "C:/Users/Administrator/digitalknob/SDL2VS/app/.cxx/cmake/arm7Debug/armeabi-v7a",
-  "command": "C:\\Users\\Administrator\\digitalknob\\DK\\3rdParty\\android-sdk\\ndk\\21.4.7075529\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang++.exe --target=armv7-none-linux-androideabi26 --gcc-toolchain=C:/Users/Administrator/digitalknob/DK/3rdParty/android-sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/windows-x86_64 --sysroot=C:/Users/Administrator/digitalknob/DK/3rdParty/android-sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/windows-x86_64/sysroot  -Dmain_EXPORTS -IC:/Users/Administrator/digitalknob/DK/3rdParty/SDL2-2.0.16/include -IC:/Users/Administrator/digitalknob/DK/3rdParty/SDL2_ttf-2.0.15  -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -march=armv7-a -mthumb -Wformat -Werror=format-security   -O0 -fno-limit-debug-info  -fPIC   -o CMakeFiles\\main.dir\\src\\main\\cpp\\main.cpp.o -c C:\\Users\\Administrator\\digitalknob\\SDL2VS\\app\\src\\main\\cpp\\main.cpp",
-  "file": "C:/Users/Administrator/digitalknob/SDL2VS/app/src/main/cpp/main.cpp"
-}
-]

@@ -1,7 +1,0 @@
-Executable : C:\Users\Administrator\digitalknob\DK\3rdParty\android-sdk\cmake\3.10.2.4988404\bin\ninja.exe
-arguments : 
--C
-C:\Users\Administrator\digitalknob\SDL2VS\app\.cxx\cmake\arm7Debug\armeabi-v7a
-main
-jvmArgs : 
-
