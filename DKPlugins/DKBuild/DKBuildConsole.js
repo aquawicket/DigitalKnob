@@ -261,19 +261,15 @@ function DKBuildConsole_Process() {
 	while(TYPE === ""){
 		switch(true){
 			case UPDATE === "":
-				console.log("update menu")
 				DKBuildConsole_ChooseUpdate()
 				break
 			case (OS === ""):
-				console.log("os menu")
 				DKBuildConsole_SelectOs()
 				break
 			case APP === "":
-				console.log("app menu")
 				DKBuildConsole_SelectApp()
 				break
 			case TYPE === "":
-				console.log("type menu")
 				DKBuildConsole_SelectType()
 				break
 			default:
