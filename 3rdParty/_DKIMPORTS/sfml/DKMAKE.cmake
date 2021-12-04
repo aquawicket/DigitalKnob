@@ -1,4 +1,8 @@
+# https://www.sfml-dev.org
+# https://github.com/SFML/SFML
+#
 # https://www.sfml-dev.org/files/SFML-2.5.1-sources.zip
+# https://github.com/SFML/SFML/archive/refs/heads/master.zip
 
 ### DEPENDS ###
 if(WIN)
@@ -52,11 +56,14 @@ DKDEPEND(libjpeg-turbo)
 
 
 ### VERSION ### 
-DKSET(SFML_VERSION 2.5.1)
-DKSET(SFML_NAME SFML-${SFML_VERSION})
-DKSET(SFML_DL https://www.sfml-dev.org/files/${SFML_NAME}-sources.zip)
-DKSET(SFML ${3RDPARTY}/${SFML_NAME})
+#DKSET(SFML_VERSION 2.5.1)
+#DKSET(SFML_DL https://www.sfml-dev.org/files/SFML-2.5.1-sources.zip)
 
+DKSET(SFML_VERSION master)
+DKSET(SFML_DL https://github.com/SFML/SFML/archive/refs/heads/master.zip)
+
+DKSET(SFML_NAME SFML-${SFML_VERSION})
+DKSET(SFML ${3RDPARTY}/${SFML_NAME})
 
 ### INSTALL ###
 DKINSTALL(${SFML_DL} sfml ${SFML})
