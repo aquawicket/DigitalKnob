@@ -424,14 +424,21 @@ int DKDuktapeJS::Execute(duk_context* ctx){
 	int rtncode;
 	if(!DKUtil::Execute(command, mode, stdouterr, rtncode))
 		return DKERROR("DKUtil::Execute() failed");
-	// jsonRetrun = "{'rtncode':0, 'stdouterr':'the stdouterr string'}"
-	DKString jsonReturn = "{'rtncode':"+toString(rtncode)+",'stdouterr':"+stdouterr+"}";
-	if (jsonReturn.empty())
+	if (jsonReturn.empty()){
 		duk_push_undefined(ctx);
-	else
-		duk_push_string(ctx, jsonReturn.c_str());
-	DKWARN("OUTPUT -> " + jsonReturn + "\n");
-	DKERROR("CPP_DK_EXECUTE() now returns json. Adjust your return variable accordingly\n");
+	}
+	else{
+		if(rtncode == 0){
+			duk_push_string(ctx, srdouterr.c_str());
+		}
+		else{
+			// jsonRetrun = "{'rtncode':0, 'stdouterr':'the stdouterr string'}"
+			DKString jsonReturn = "{'rtncode':"+toString(rtncode)+",'stdouterr':"+stdouterr+"}";
+			duk_push_string(ctx, jsonReturn.c_str());
+			DKERROR(jsonReturn + "\n");
+			DKERROR("CPP_DK_EXECUTE() now returns json on rtncode error. Adjust your return variable accordingly\n");
+		}
+	}
 	return 1;
 }
 
