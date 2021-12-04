@@ -201,7 +201,7 @@ bool DKUtil::DrawTextOnScreen(const DKString& text){
 }
 
 
-bool DKUtil::Execute(const DKString& command, const DKString& mode, DKString& result){
+bool DKUtil::Execute(const DKString& command, const DKString& mode, DKString& stdouterr, int& rtncode){
 	DKDEBUGFUNC(command, mode);
 #ifdef WIN32
 	auto& dk_popen = _popen;
@@ -211,20 +211,20 @@ bool DKUtil::Execute(const DKString& command, const DKString& mode, DKString& re
 	auto& dk_pclose = pclose;
 #endif
 	// https://stackoverflow.com/q/52164723/688352
-	const DKString commandWithErr = command+" 2>&1";
+	const DKString commandWithErr = command+" 2>&1"; //get stdout and stderr together
 	FILE* pipe = dk_popen(commandWithErr.c_str(), mode.c_str());
 	if(pipe == NULL)
 		return DKERROR("pipe invalid: "+toString(strerror(errno))+"\n");
-	char buffer[128];
+	char buffer[128]; //FIXME: do we need a bigger buffer?
 	while(fgets(buffer, 128, pipe)){
-		DKINFO(buffer);
-		result += buffer;
+		DKINFO(buffer); //print stdout and stderror to screen line by line
+		stdouterr += buffer; //add the line to the output
 	}
 	if(!feof(pipe))
 		DKERROR("feof(pipe) failed\n");
-	if(dk_pclose(pipe) == -1)
-		return DKERROR("dk_pclose(pipe) failed\n");
-	trim(result);
+	rtncode = dk_pclose(pipe);
+	DKINFO("rtncode -> "+toString(rtncode) + "\n");
+	trim(stdouterr);
 	return true;
 }
 

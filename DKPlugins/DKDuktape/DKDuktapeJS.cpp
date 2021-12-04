@@ -420,13 +420,18 @@ int DKDuktapeJS::Execute(duk_context* ctx){
 	DKString mode = "r"; //default
 	if (duk_is_string(ctx, 1))
 		mode = duk_to_string(ctx, 1);
-	DKString result;
-	if(!DKUtil::Execute(command, mode, result))
+	DKString stdouterr;
+	int rtncode;
+	if(!DKUtil::Execute(command, mode, stdouterr, rtncode))
 		return DKERROR("DKUtil::Execute() failed");
-	if (result.empty())
+	// jsonRetrun = "{'rtncode':0, 'stdouterr':'the stdouterr string'}"
+	DKString jsonReturn = "{'rtncode':"+toString(rtncode)+",'stdouterr':"+stdouterr+"}";
+	if (jsonReturn.empty())
 		duk_push_undefined(ctx);
 	else
-		duk_push_string(ctx, result.c_str());
+		duk_push_string(ctx, jsonReturn.c_str());
+	DKWARN("OUTPUT -> " + jsonReturn + "\n");
+	DKERROR("CPP_DK_EXECUTE() now returns json. Adjust your return variable accordingly\n");
 	return 1;
 }
 

@@ -52,8 +52,9 @@ bool DKFile::AppendSystemPath(const DKString& path){
 	DKDEBUGFUNC(path);
 	DebugPath(path);
 	DKString command = "setx PATH %PATH%;"+path;
-	DKString rtn;
-	return DKUtil::Execute(command, "rt", rtn);
+	DKString stdouterr;
+	int rtncode;
+	return DKUtil::Execute(command, "rt", stdouterr, rtncode);
 }
 #endif
 
