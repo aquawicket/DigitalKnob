@@ -47,7 +47,7 @@ DKSET(SFML ${3RDPARTY}/${SFML_NAME})
 
 
 ### INSTALL ###
-DKINSTALL(${SFML_DL} sfml ${SFML} NOPATCH)
+DKINSTALL(${SFML_DL} sfml ${SFML})
 
 
 ### LINK ###
