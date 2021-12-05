@@ -53,8 +53,14 @@ DKApp::DKApp(int _argc, char** _argv){
 	DKString buildType;
 
 	DKINFO(appName + " " + version + " " + osFlag + " " + toString(DKBUILD_TYPE) + "\n");
-	DKINFO(toString(DKC_LANGUAGE_VERSION) + "\n");
-	DKINFO(toString(DKCPP_LANGUAGE_VERSION)+"\n");
+	DKINFO("OS:          " + toString(DKOS) + "\n");
+	DKINFO("OS Version:  " + toString(DKOS_VERSION) + "\n");
+	DKINFO("Processor:   " + toString(DKARCH) + "\n");
+	DKINFO("Bits:        " + toString(DKBITS) + "\n");
+	DKINFO("Compiler:    " + toString(DKCOMPILER) + " " + toString(DKCOMPILER_VERSION)+ "\n");
+	DKINFO("C Version:   " + toString(DKC_LANGUAGE_VERSION) + "\n");
+	DKINFO("C++ Version: " + toString(DKCPP_LANGUAGE_VERSION) + "\n");
+	DKINFO("Build type:  " + toString(DKBUILD_TYPE) + "\n");
 
 #ifdef WIN32
 	DKWindows::CreateConsoleHandler();
