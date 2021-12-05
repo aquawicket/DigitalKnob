@@ -7,6 +7,7 @@ if(WIN)
 endif()
 
 if(MAC)
+	DKDEFINE(__STDC_WANT_LIB_EXT1__)
 	DKDEPEND(boxer)
 	DKDEPEND(core_foundation)
 	DKDEPEND(core_services)
