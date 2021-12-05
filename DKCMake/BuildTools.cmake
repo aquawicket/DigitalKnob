@@ -280,8 +280,9 @@ if(CMAKE_HOST_WIN32 AND ANDROID)
 	-DANDROID_TOOLCHAIN=clang
 	-DANDROID_ABI=armeabi-v7a
 	-DANDROID_PLATFORM=26
-	-DANDROID_STL=c++_static
-	-DCMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++1z -Wno-macro-redefined") #-undef
+	-DANDROID_STL=c++_static)
+	#-DCMAKE_CXX_FLAGS=${CMAKE_CXX_FLAGS};-std=c++1z;-Wno-macro-redefined) #-undef
+	#string(REPLACE " " ";" CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS})
 	#"-DANDROID_CPP_FEATURES=rtti exceptions"
 	#-DANDROID_STL_FORCE_FEATURES=TRUE
 	#-DANDROID_NO_UNDEFINED=TRUE
