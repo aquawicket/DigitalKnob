@@ -747,8 +747,10 @@ bool DKUtil::SetClipboardImage(const DKString& file){
 bool DKUtil::SetFramerate(const int& fps){
 	DKDEBUGFUNC(fps);
 	_fps = fps;
-	if(_fps == 0)
-		ticksPerFrame = 0; return true;
+	if(_fps == 0){
+		ticksPerFrame = 0; 
+		return true;
+	}
 	ticksPerFrame = 1000 / _fps;
 	return true;
 }
