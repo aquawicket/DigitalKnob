@@ -294,7 +294,7 @@ bool DKWindows::GetPixelFromImage(const DKString& image, int x, int y){
 	GetObject(hBmp, sizeof(bm), &bm);
 	bm.bmWidth;
 	bm.bmHeight;
-	COLORREF centerColor = GetPixel(dcmem, x, y);
+	//COLORREF centerColor = GetPixel(dcmem, x, y);
 	return true;
 }
 
@@ -377,10 +377,10 @@ bool DKWindows::GetUsername(DKString& username){
 
 bool DKWindows::GetVolume(int& percent){
 	DKDEBUGFUNC(percent);
-	bool bScalar = true;
+	//bool bScalar = true;
 	HRESULT hr=NULL;
-	bool decibels = false;
-	bool scalar = false;
+	//bool decibels = false;
+	//bool scalar = false;
 	CoInitialize(NULL);
 	IMMDeviceEnumerator *deviceEnumerator = NULL;
 	hr = CoCreateInstance(__uuidof(MMDeviceEnumerator), NULL, CLSCTX_INPROC_SERVER, __uuidof(IMMDeviceEnumerator), (LPVOID *)&deviceEnumerator);
@@ -569,7 +569,7 @@ bool DKWindows::SetBrightness(const int& percent){
 	DKDEBUGFUNC(percent);
 	// Prepare variables
 	HMONITOR hMonitor = NULL;
-	HMONITOR hMonitorTest = NULL;
+	//HMONITOR hMonitorTest = NULL;
 	DWORD cPhysicalMonitors;
 	LPPHYSICAL_MONITOR pPhysicalMonitors = NULL;
 	// Get the screen
@@ -725,8 +725,8 @@ bool DKWindows::SetVolume(int& percent){
 		percent = 0;
 	bool bScalar = true;
     HRESULT hr=NULL;
-    bool decibels = false;
-    bool scalar = false;
+    //bool decibels = false;
+    //bool scalar = false;
     double newVolume = (double)percent / 100;
     CoInitialize(NULL);
     IMMDeviceEnumerator *deviceEnumerator = NULL;

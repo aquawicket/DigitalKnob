@@ -51,35 +51,13 @@ DKApp::DKApp(int _argc, char** _argv){
 	DKString osFlag;
 	GetOSFlag(osFlag);
 	DKString buildType;
-#ifdef DEBUG
-		buildType = "DEBUG";
-#else
-		buildType = "RELEASE";
-#endif
 
-	DKINFO(appName + " " + version + " " + osFlag + " " + buildType +"\n");
-
-#if __cplusplus > 202110L
-	DKINFO("Grater then C++23\n");
-#elif __cplusplus == 202110L
-	DKINFO("C++23 \n");
-#elif __cplusplus == 201902L
-	DKINFO("C++20 \n");
-#elif __cplusplus == 201703L
-	DKINFO("C++17 \n");
-#elif __cplusplus == 201402L
-	DKINFO("C++14 \n");
-#elif __cplusplus == 201103L
-	DKINFO("C++11 \n"); 
-#elif __cplusplus == 199711L
-	DKINFO("C++98 \n");
-#else
-	DKINFO("pre-C++98 \n");
-#endif
+	DKINFO(appName + " " + version + " " + osFlag + " " + toString(DKBUILD_TYPE) + "\n");
+	DKINFO(toString(DKLANGUAGE_VERSION)+"\n");
 
 #ifdef WIN32
 	DKWindows::CreateConsoleHandler();
-	DKWindows::SetTitle(appName + " " + version + " " + osFlag + " " + buildType);
+	DKWindows::SetTitle(appName + " " + version + " " + osFlag + " " + toString(DKBUILD_TYPE));
 #endif
 	DKString osInfo;
 	GetOSInfo(osInfo);

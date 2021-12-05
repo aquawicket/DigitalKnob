@@ -302,7 +302,7 @@ bool DKFile::GetDirectoryContents(const DKString& path, DKStringArray& strings){
 
 bool DKFile::GetDrives(DKStringArray& strings){
 #ifdef WIN32
-	TCHAR szDrive[] = " A:";
+	//TCHAR szDrive[] = " A:";
 	DWORD drives = GetLogicalDrives();
 	if(drives == 0)
 		return DKERROR("GetLogicalDrives() failed \n");

@@ -7,6 +7,7 @@
 #pragma once
 #ifndef DK_H
 #define DK_H
+#include "DKPreprocessor.h"
 
 #if defined(WIN32)
 #include "DK/DKWindows.h"

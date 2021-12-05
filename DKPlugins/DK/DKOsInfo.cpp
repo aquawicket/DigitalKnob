@@ -503,94 +503,25 @@ bool GetWinProductInfo(RTL_OSVERSIONINFOEXW& vi, DWORD& dwType) {
 	return false;
 }
 
-// https://sourceforge.net/p/predef/wiki/Compilers/
+// https://sourceforge.net/p/predef/wiki/Home/
 bool GetCompilerName(DKString& compilerName) {
-#ifdef __clang__ //place before __GNUC__
-	compilerName = "clang++";
-#elif __llvm__
-	compilerName = "llvm";
-#elif __MINGW32__ //place before __GNUC__
-	compilerName = "Mingw32";
-#elif __MINGW64__ //place before __GNUC__
-	compilerName = "Mingw64";
-#elif _MSC_VER
-	compilerName = "Microsoft Visual C++";
-#elif __GNUC__
-	compilerName = "GNU GCC";
-#else
-	compilerName = "UNKNOWN COMPILER";
-#endif
+	compilerName = DKCOMPILER;
+	return true;
 }
 
 bool GetCompilerVersion(DKString& compilerVersion) {
-#ifdef __clang__ //place before __GNUC__
-	compilerVersion = __clang_version__;
-#elif __llvm__
-	compilerVersion = __llvm__;
-#elif __MINGW32__ //place before __GNUC__
-	compilerVersion = __MINGW32_MAJOR_VERSION + "." + __MINGW32_MINOR_VERSION";
-#elif __MINGW64__ //place before __GNUC__
-	compilerVersion = __MINGW64_MAJOR_VERSION + "." + __MINGW64_MINOR_VERSION";
-#elif _MSC_VER
-	compilerVersion = _MSC_FULL_VER;
-#elif __GNUC__
-	compilerVersion = __GNUC__ + "." + __GNUC_MINOR__ + "." + __GNUC_PATCHLEVEL__;
-#else
-	compilerVersion = "UNKNOWN COMPILER VERSION";
-#endif
+	compilerVersion = DKCOMPILER_VERSION;
+	return true;
 }
 
-bool GetCorCpp(DKString& cOrCpp) {
-#ifdef __cplusplus
-	cOrCpp = "C++";
-#else
-	cOrCpp = "C";
-#endif
+bool GetLanguage(DKString& language) {
+	language = DKLANGUAGE;
+	return true;
 }
 
-// https://sourceforge.net/p/predef/wiki/Standards/
-bool GetCVersion(DKString& cVersion) {
-#if defined(__STDC__)
-#	if __STDC_VERSION__ > 201710L
-		cVersion = "Grater then C18";
-#	elif __STDC_VERSION__ == 201710L
-		cVersion = "C18";
-#	elif __STDC_VERSION__ == 201112L
-		cVersion = "C11";
-#	elif __STDC_VERSION__ == 199901L
-		cVersion = "C99";
-#	elif __STDC_VERSION__ == 199409L
-		cVersion = "C94";
-#	else
-		cVersion = "C90";
-#	endif
-#else
-	DKERROR("__STDC__ is not defined");
-#endif
-}
-
-bool GetCppVersion(DKString& cppVersion) {
-#ifdef __cplusplus
-#	if __cplusplus > 202110L
-		cppVersion = "Grater then C++23";
-#	elif __cplusplus == 202110L
-		cppVersion = "C++23";
-#	elif __cplusplus == 201902L
-		cppVersion = "C++20";
-#	elif __cplusplus == 201703L
-		cppVersion = "C++17";
-#	elif __cplusplus == 201402L
-		cppVersion = "C++14";
-#	elif __cplusplus == 201103L
-		cppVersion = "C++11";
-#	elif __cplusplus == 199711L
-		cppVersion = "C++98";
-#	else
-		cppVersion = "pre-C++98";
-#	endif
-#else
-	DKERROR("__cplusplus is not defined");
-#endif
+bool GetLanguageVersion(DKString& languageVersion) {
+	languageVersion = DKLANGUAGE_VERSION;
+	return true;
 }
 
 #endif //WIN32
