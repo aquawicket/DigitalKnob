@@ -1,3 +1,5 @@
+# Installed Build Tools revision NN.N.N is corrupted" https://stackoverflow.com/a/68430992/688352
+
 if(NOT CMAKE_HOST_WIN32)
 	return()
 endif()
