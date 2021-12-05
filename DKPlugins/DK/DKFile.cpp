@@ -397,10 +397,9 @@ bool DKFile::GetLocalCreationDate(const DKString& path, DKString& filedate){
 	if(!PathExists(path))
 		return false;
 #if defined(WIN32) || defined(MAC) || defined(LINUX)// || defined(ANDROID)	
-	struct tm* clock;               // create a time structure
 	struct stat attrib;             // create a file attribute structure
 	stat(path.c_str(), &attrib);    // get the attributes of afile.txt
-	localtime(&(attrib.st_ctime)); 
+	struct tm* clock = localtime(&(attrib.st_ctime));
 	DKString month = toString(clock->tm_mon);
 	DKString day = toString(clock->tm_mday);
 	DKString hour = toString(clock->tm_hour);
@@ -425,10 +424,9 @@ bool DKFile::GetLocalModifiedDate(const DKString& path, DKString& filedate){
 	if(!PathExists(path))
 		return false;
 #if defined(WIN32) || defined(MAC) || defined(LINUX)// || defined(ANDROID)
-	struct tm* clock;               // create a time structure
 	struct stat attrib;         // create a file attribute structure
 	stat(path.c_str(), &attrib);     // get the attributes of afile.txt
-	localtime(&(attrib.st_mtime)); 
+	struct tm* clock = localtime(&(attrib.st_mtime));
 	DKString month = toString(clock->tm_mon);
 	DKString day = toString(clock->tm_mday);
 	DKString hour = toString(clock->tm_hour);

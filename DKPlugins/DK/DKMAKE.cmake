@@ -1,5 +1,7 @@
 if(WIN)
-	DKDEFINE(_SILENCE_EXPERIMENTAL_FILESYSTEM_DEPRECATION_WARNING)
+	#DKDEFINE(_SILENCE_EXPERIMENTAL_FILESYSTEM_DEPRECATION_WARNING)
+	#DKDEFINE(__STDC_WANT_LIB_EXT1__) #enable CRT Secure functions extension
+	DKDEFINE(_CRT_SECURE_NO_WARNINGS) #supress VC CRT Secure function warnings
 	WIN_LIB(Psapi.lib) # GetProcessMemoryInfo()
 	WIN_LIB(pdh.lib)   # PdhOpenQueryA()
 	WIN_LIB(Dxva2.dll) # GetNumberOfPhysicalMonitorsFromHMONITOR()
@@ -7,8 +9,6 @@ if(WIN)
 endif()
 
 if(MAC)
-	#DKDEFINE(__STDC_WANT_LIB_EXT1__) #enable CRT Secure functions extension
-	DKDEFINE(_CRT_SECURE_NO_WARNINGS) #supress VC CRT Secure function warnings
 	DKDEPEND(boxer)
 	DKDEPEND(core_foundation)
 	DKDEPEND(core_services)
