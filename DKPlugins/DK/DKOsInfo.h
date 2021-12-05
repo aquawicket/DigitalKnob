@@ -31,11 +31,4 @@ bool GetOSBuild(DKString& osbuild);
 bool GetOSArchitecture(DKString& osarchitecture);
 bool GetComputerName(DKString& computername);
 
-//Compiler info
-bool GetCompilerName(DKString& compilerName);
-bool GetCompilerVersion(DKString& compilerVersion);
-bool GetCorCpp(DKString& cOrCpp);
-bool GetCVersion(DKString& cVersion);
-bool GetCppVersion(DKString& cppVersion);
-
 #endif //DKOsInfo_H

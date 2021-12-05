@@ -503,25 +503,4 @@ bool GetWinProductInfo(RTL_OSVERSIONINFOEXW& vi, DWORD& dwType) {
 	return false;
 }
 
-// https://sourceforge.net/p/predef/wiki/Home/
-bool GetCompilerName(DKString& compilerName) {
-	compilerName = DKCOMPILER;
-	return true;
-}
-
-bool GetCompilerVersion(DKString& compilerVersion) {
-	compilerVersion = DKCOMPILER_VERSION;
-	return true;
-}
-
-bool GetLanguage(DKString& language) {
-	language = DKLANGUAGE;
-	return true;
-}
-
-bool GetLanguageVersion(DKString& languageVersion) {
-	languageVersion = DKLANGUAGE_VERSION;
-	return true;
-}
-
 #endif //WIN32
