@@ -326,8 +326,8 @@ bool DKWindows::GetProcessList(DKString& list){
 			//Get the process name.
 			if (NULL != hProcess) {
 				HMODULE hMod;
-				DWORD cbNeeded;
-				if (EnumProcessModules(hProcess, &hMod, sizeof(hMod), &cbNeeded))
+				DWORD _cbNeeded;
+				if (EnumProcessModules(hProcess, &hMod, sizeof(hMod), &_cbNeeded))
 					GetModuleBaseName(hProcess, hMod, szProcessName, sizeof(szProcessName) / sizeof(TCHAR));
 			}
 			// Print the process name and identifier.

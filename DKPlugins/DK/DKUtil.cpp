@@ -251,16 +251,16 @@ bool DKUtil::GetClipboard(DKString& text){
 bool DKUtil::GetDate(DKString& date){
 	DKDEBUGFUNC(date);
 	time_t t = time(0);   // get time now
-	struct tm * now = localtime(&t);
+	struct tm* tm_now = localtime(&t);
 
 	//int standard = now->tm_hour % 12;
-	date = toString(now->tm_mon+1);
+	date = toString(tm_now->tm_mon+1);
 	date += "/";
-	DKString day = toString(now->tm_mday);
+	DKString day = toString(tm_now->tm_mday);
 	//Pad(2, '0', day);
 	date += day;
 	date += "/";
-	date += toString(now->tm_year + 1900);
+	date += toString(tm_now->tm_year + 1900);
 	return true;
 }
 
@@ -404,15 +404,15 @@ bool DKUtil::GetTicks(long& ticks){
 bool DKUtil::GetTime(DKString& _time){
 	DKDEBUGFUNC(_time);
 	time_t t = time(0);   // get time now
-	struct tm * now = localtime(&t);
-	int standard = now->tm_hour % 12;
+	struct tm* tm_now = localtime(&t);
+	int standard = tm_now->tm_hour % 12;
 	if(standard == 0){ standard = 12; }
 	_time = toString(standard);
 	_time += ":";
-	DKString minute = toString(now->tm_min);
+	DKString minute = toString(tm_now->tm_min);
 	Pad(2, '0', minute);
 	_time += minute;
-	if(now->tm_hour > 12 || (now->tm_hour % 12) == 0)
+	if(tm_now->tm_hour > 12 || (tm_now->tm_hour % 12) == 0)
 		_time += " PM";
 	else
 		_time += " AM";

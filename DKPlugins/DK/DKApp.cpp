@@ -35,10 +35,10 @@ int main(int argc, char **argv){
 }
 //#endif //!ANDROID
 
-DKApp::DKApp(int argc, char** argv){
-	DKDEBUGFUNC(argc, argv);
-	DKApp::argc = argc;
-	DKApp::argv = argv;
+DKApp::DKApp(int _argc, char** _argv){
+	DKDEBUGFUNC(_argc, _argv);
+	DKApp::argc = _argc;
+	DKApp::argv = _argv;
 	DKUtil::SetMainThreadNow();
 	if (argc)
 		DKFile::exe_path = argv[0];
@@ -59,11 +59,24 @@ DKApp::DKApp(int argc, char** argv){
 
 	DKINFO(appName + " " + version + " " + osFlag + " " + buildType +"\n");
 
-	if(__cplusplus == 201703L) { DKINFO("C++17 \n"); }
-	else if(__cplusplus == 201402L) { DKINFO("C++14 \n"); }
-	else if(__cplusplus == 201103L) { DKINFO("C++11 \n"); }
-	else if(__cplusplus == 199711L) { DKINFO("C++98 \n"); }
-	else DKINFO("pre-standard C++ \n");
+#if __cplusplus > 202110L
+	DKINFO("Grater then C++23\n");
+#elif __cplusplus == 202110L
+	DKINFO("C++23 \n");
+#elif __cplusplus == 201902L
+	DKINFO("C++20 \n");
+#elif __cplusplus == 201703L
+	DKINFO("C++17 \n");
+#elif __cplusplus == 201402L
+	DKINFO("C++14 \n");
+#elif __cplusplus == 201103L
+	DKINFO("C++11 \n"); 
+#elif __cplusplus == 199711L
+	DKINFO("C++98 \n");
+#else
+	DKINFO("pre-C++98 \n");
+#endif
+
 #ifdef WIN32
 	DKWindows::CreateConsoleHandler();
 	DKWindows::SetTitle(appName + " " + version + " " + osFlag + " " + buildType);
