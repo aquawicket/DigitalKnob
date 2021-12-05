@@ -3,5 +3,10 @@ if(NOT CMAKE_HOST_UNIX)
 endif()
 
 ### INSTALL ###
-DKSET(CURRENT_DIR /usr)
-DKCOMMAND(sudo apt -y install libglfw3-dev)
+if(LINUX)
+	DKSET(CURRENT_DIR /usr)
+	DKCOMMAND(sudo apt -y install libglfw3-dev)
+endif()
+if(MAC)
+	DKCOMMAND(glfw3)
+endif()
