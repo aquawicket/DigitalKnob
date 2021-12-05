@@ -26,8 +26,8 @@ DKINSTALL(${JDK_DL} jdk ${JDK})
 
 ### LINK ###
 DKINCLUDE(${JDK}/)	
-DKSETENV("JAVA_HOME" ${JDK}/bin)
-DKSETENV("VS_JavaHome" ${JDK}/bin)
+DKSETENV("JAVA_HOME" ${JDK})
+DKSETENV("VS_JavaHome" ${JDK})
 	
 
 
