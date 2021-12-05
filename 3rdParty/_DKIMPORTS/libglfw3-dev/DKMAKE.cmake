@@ -10,7 +10,7 @@ endif()
 if(MAC)
 	DKCOMMAND(brew install glfw3)
 	DKINCLUDE(/usr/local/include)
-	APPLE_LIB(/usr/local/lib/libglfw3.3.dylib)
+	APPLE_LIB(/usr/local/lib/libglfw.3.3.dylib)
 	
 	#FIND_LIBRARY(glfw_lib glfw3)
 	#if(NOT glfw_lib)
