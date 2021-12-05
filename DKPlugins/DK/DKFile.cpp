@@ -397,16 +397,16 @@ bool DKFile::GetLocalCreationDate(const DKString& path, DKString& filedate){
 	if(!PathExists(path))
 		return false;
 #if defined(WIN32) || defined(MAC) || defined(LINUX)// || defined(ANDROID)	
-	struct tm clock;               // create a time structure
+	struct tm* clock;               // create a time structure
 	struct stat attrib;             // create a file attribute structure
 	stat(path.c_str(), &attrib);    // get the attributes of afile.txt
-	localtime_s(&clock, &(attrib.st_ctime)); 
-	DKString month = toString(clock.tm_mon);
-	DKString day = toString(clock.tm_mday);
-	DKString hour = toString(clock.tm_hour);
-	DKString minute = toString(clock.tm_min);
-	DKString second = toString(clock.tm_sec);
-	DKString year = toString(clock.tm_year + 1900);
+	localtime(&(attrib.st_ctime)); 
+	DKString month = toString(clock->tm_mon);
+	DKString day = toString(clock->tm_mday);
+	DKString hour = toString(clock->tm_hour);
+	DKString minute = toString(clock->tm_min);
+	DKString second = toString(clock->tm_sec);
+	DKString year = toString(clock->tm_year + 1900);
 	Pad(4, '0', year);
 	Pad(2, '0', month);
 	Pad(2, '0', day);
@@ -425,16 +425,16 @@ bool DKFile::GetLocalModifiedDate(const DKString& path, DKString& filedate){
 	if(!PathExists(path))
 		return false;
 #if defined(WIN32) || defined(MAC) || defined(LINUX)// || defined(ANDROID)
-	struct tm clock;               // create a time structure
+	struct tm* clock;               // create a time structure
 	struct stat attrib;         // create a file attribute structure
 	stat(path.c_str(), &attrib);     // get the attributes of afile.txt
-	localtime_s(&clock, &(attrib.st_mtime)); 
-	DKString month = toString(clock.tm_mon);
-	DKString day = toString(clock.tm_mday);
-	DKString hour = toString(clock.tm_hour);
-	DKString minute = toString(clock.tm_min);
-	DKString second = toString(clock.tm_sec);
-	DKString year = toString(clock.tm_year + 1900);
+	localtime(&(attrib.st_mtime)); 
+	DKString month = toString(clock->tm_mon);
+	DKString day = toString(clock->tm_mday);
+	DKString hour = toString(clock->tm_hour);
+	DKString minute = toString(clock->tm_min);
+	DKString second = toString(clock->tm_sec);
+	DKString year = toString(clock->tm_year + 1900);
 	Pad(4, '0', year);
 	Pad(2, '0', month);
 	Pad(2, '0', day);
