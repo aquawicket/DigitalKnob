@@ -5,6 +5,8 @@
 #ifndef DKString_H
 #define DKString_H
 
+#define _SILENCE_CXX17_CODECVT_HEADER_DEPRECATION_WARNING //silence <codecvt> deprecation warnings
+
 #ifdef WIN32
 #include "windows.h"
 #endif

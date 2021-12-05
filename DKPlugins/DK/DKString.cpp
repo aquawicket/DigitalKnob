@@ -1,8 +1,6 @@
 #include "DK/stdafx.h"
 #include "DKString.h"
 #include "DKLog.h"
-
-#define _SILENCE_CXX17_CODECVT_HEADER_DEPRECATION_WARNING //silence codecvt deprecation warnings
 #include <codecvt> //string <--> wsting conversion
 
 
