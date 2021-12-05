@@ -96,7 +96,7 @@ bool ColorMap();
 bool Log(const char* file, int line, const char* func, const DKString& input, const int lvl = DK_INFO);
 bool SetLog(const int lvl, const DKString& text);
 
-#ifndef ANDROID
+//#ifndef ANDROID
 void getTemplateArgs(std::ostringstream& out);
 
 template <typename A, typename... Args>
@@ -186,7 +186,7 @@ bool DebugReturn(const char* file, int line, const char* func, const DKString& /
 	Log(file, line, "", func_string, DK_DEBUG);
 	return true;
 }
-#endif
+//#endif
 
 class logy{
 	public:

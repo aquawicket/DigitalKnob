@@ -106,24 +106,6 @@
 #		endif
 #	else
 #	endif
-#elif __linux__
-#	ifndef LINUX
-#		define LINUX
-#	endif
-#	if DKBITS == 32
-#		ifndef LINUX32
-#			define LINUX32
-#		endif
-#		define DKOS "LINUX32"
-#		define DKOS_VERSION "UNKNOWN"
-#	endif
-#	if DKBITS == 64
-#		ifndef LINUX64
-#			define LINUX64
-#		endif
-#		define DKOS "LINUX64"
-#		define DKOS_VERSION "UNKNOWN"
-#	endif
 #elif __ANDROID__
 #	ifndef ANDROID
 #		define ANDROID
@@ -141,6 +123,24 @@
 #		endif
 #		define DKOS "ANDROID64"
 #		define DKOS_VERSION TOSTRING(__ANDROID_API__)
+#	endif
+#elif __linux__
+#	ifndef LINUX
+#		define LINUX
+#	endif
+#	if DKBITS == 32
+#		ifndef LINUX32
+#			define LINUX32
+#		endif
+#		define DKOS "LINUX32"
+#		define DKOS_VERSION "UNKNOWN"
+#	endif
+#	if DKBITS == 64
+#		ifndef LINUX64
+#			define LINUX64
+#		endif
+#		define DKOS "LINUX64"
+#		define DKOS_VERSION "UNKNOWN"
 #	endif
 #elif MSDOS
 #	define DKOS "MSDOS"
