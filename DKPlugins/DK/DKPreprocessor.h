@@ -1,9 +1,10 @@
 // https://sourceforge.net/p/predef/wiki/Home/
+// https://github.com/nemequ/pre-defined-macros
 
 #define STRINGIFY(x) #x
 #define TOSTRING(x) STRINGIFY(x)
 
-#ifdef __clang__
+#if __clang__
 #	define DKCOMPILER "clang"
 #   define DKCOMPILER_VERSION TOSTRING(__clang_version__)
 #elif __llvm__
@@ -26,42 +27,44 @@
 #   define DKCOMPILER_VERSION "UNKNOWN COMPILER VERSION"
 #endif
 
-#ifdef __STDC__
-#	define DKLANGUAGE "C Standard"
+#if __STDC__
 #	if __STDC_VERSION__ > 201710L
-#		define DKLANGUAGE_VERSION "Grater then C18"
+#		define DKC_LANGUAGE_VERSION "Grater then C18"
 #	elif __STDC_VERSION__ == 201710L
-#		define DKLANGUAGE_VERSION "C18"
+#		define DKC_LANGUAGE_VERSION "C18"
 #	elif __STDC_VERSION__ == 201112L
-#		define DKLANGUAGE_VERSION "C11"
+#		define DKC_LANGUAGE_VERSION "C11"
 #	elif __STDC_VERSION__ == 199901L
-#		define DKLANGUAGE_VERSION "C99"
+#		define DKC_LANGUAGE_VERSION "C99"
 #	elif __STDC_VERSION__ == 199409L
-#		define DKLANGUAGE_VERSION "C94"
+#		define DKC_LANGUAGE_VERSION "C94"
 #	else
-#		define DKLANGUAGE_VERSION "C90"
+#		define DKC_LANGUAGE_VERSION "C90"
 #   endif
-#elif __cplusplus
-#	define DKLANGUAGE "C++ Standard"
+#else 
+#	define DKC_LANGUAGE_VERSION "NON-Standard C Language"
+#endif
+
+#if __cplusplus
 #	if __cplusplus > 202110L
-#		define DKLANGUAGE_VERSION "Grater then C++23"
+#		define DKCPP_LANGUAGE_VERSION "Grater then C++23"
 #	elif __cplusplus == 202110L
-#		define DKLANGUAGE_VERSION "C++23"
+#		define DKCPP_LANGUAGE_VERSION "C++23"
 #	elif __cplusplus == 201902L
-#		define DKLANGUAGE_VERSION "C++20"
+#		define DKCPP_LANGUAGE_VERSION "C++20"
 #	elif __cplusplus == 201703L
-#		define DKLANGUAGE_VERSION "C++17"
+#		define DKCPP_LANGUAGE_VERSION "C++17"
 #	elif __cplusplus == 201402L
-#		define DKLANGUAGE_VERSION "C++14"
+#		define DKCPP_LANGUAGE_VERSION "C++14"
 #	elif __cplusplus == 201103L
-#		define DKLANGUAGE_VERSION "C++11"
+#		define DKCPP_LANGUAGE_VERSION "C++11"
 #	elif __cplusplus == 199711L
-#		define DKLANGUAGE_VERSION "C++98"
+#		define DKCPP_LANGUAGE_VERSION "C++98"
 #	else
-#		define DKLANGUAGE_VERSIOND "pre-C++98"
+#		define DKCPP_LANGUAGE_VERSIOND "pre-C++98"
 #	endif
 #else
-#	define DKLANGUAGE_VERSION "NON-Standard Language"
+#	define DKCPP_LANGUAGE_VERSION "NON-Standard C++ Language"
 #endif
 
 #if DEBUG
