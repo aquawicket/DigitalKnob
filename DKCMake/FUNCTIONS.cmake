@@ -1636,8 +1636,8 @@ endfunction()
 
 ################# Visual Studio Build ################
 function(WIN_VS_DEBUG folder sln_file) #target #arch
-	message(STATUS "WIN_VS_DEBUG( ${ARGV} )")
 	if(WIN AND DEBUG AND QUEUE_BUILD)
+	message(STATUS "WIN_VS_DEBUG( ${ARGV} )")
 		if(NOT EXISTS ${3RDPARTY}/${folder}/${OS}/${sln_file})
 			message(FATAL_ERROR "CANNOT FIND: ${3RDPARTY}/${folder}/${OS}/${sln_file}" )
 		endif()
@@ -1654,8 +1654,8 @@ function(WIN_VS_DEBUG folder sln_file) #target #arch
 endfunction()
 
 function(WIN_VS_RELEASE folder sln_file) #target #arch
-	message(STATUS "WIN_VS_RELEASE( ${ARGV} )")
 	if(WIN AND RELEASE AND QUEUE_BUILD)
+	message(STATUS "WIN_VS_RELEASE( ${ARGV} )")
 		if(NOT EXISTS ${3RDPARTY}/${folder}/${OS}/${sln_file})
 			message(FATAL_ERROR "CANNOT FIND: ${3RDPARTY}/${folder}/${OS}/${sln_file}" )
 		endif()
