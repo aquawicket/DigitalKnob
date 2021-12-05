@@ -5,7 +5,23 @@
 
 #define STRINGIFY(x) #x
 #define TOSTRING(x) STRINGIFY(x)
-#define DKDEFINE(DKMACRO) if(!#DKMACRO){ define #DKMACRO }
+#define JOIN(a,b) a ## b
+
+#if __x86_64__ || _M_X64
+#	define DKARCH "x86_64"
+#	define DKBITS "64"
+#elif __i386 || _M_IX86
+#	define DKARCH "x86_32"
+#	define DKBITS "32"
+#elif __arm__
+#	define DKARCH "ARM32"
+#	define DKBITS "32"
+#elif __aarch64__
+#	define DKARCH "ARM64"
+#	define DKBITS "64"
+#else
+#	define DKARCH "UNKNOWN"
+#endif
 
 // https://web.archive.org/web/20191012035921/http://nadeausoftware.com/articles/2012/01/c_c_tip_how_use_compiler_predefined_macros_detect_operating_system
 #ifdef _WIN32
@@ -31,22 +47,55 @@
 #		ifndef IOS
 #			define IOS
 #		endif
-#		ifndef IOSSIM
-#			define IOSSIM
+#		if DKBITS == "32"
+#			ifndef IOS32
+#				define IOS32
+#			endif
+#			ifndef IOSSIM32
+#				define IOSSIM32
+#			endif
 #		endif
-#		define DKOS "IOSSIM"
+#		if DKBITS == "64"
+#			ifndef IOS64
+#				define IOS64
+#			endif
+#			ifndef IOSSIM64
+#				define IOSSIM64
+#			endif
+#		endif
+#		define DKOS "IOSSIM" DKBITS
 #		define DKOS_VERSION "UNKNOWN"
 #	elif TARGET_OS_IPHONE == 1
 #		ifndef IOS
 #			define IOS
 #		endif
-#		define DKOS "IOS"
+#		if DKBITS == "32"
+#			ifndef IOS32
+#				define IOS32
+#			endif
+#		endif
+#		if DKBITS == "64"
+#			ifndef IOS64
+#				define IOS64
+#			endif
+#		endif
+#		define DKOS "IOS" DKBITS
 #		define DKOS_VERSION "UNKNOWN"
 #	elif TARGET_OS_MAC == 1
 #		ifndef MAC
 #			define MAC
 #		endif
-#		define DKOS "MAC"
+#		if DKBITS == "32"
+#			ifndef MAC32
+#				define MAC32
+#			endif
+#		endif
+#		if DKBITS == "64"
+#			ifndef MAC64
+#				define MAC64
+#			endif
+#		endif
+#		define DKOS "MAC" DKBITS
 #		define DKOS_VERSION "UNKNOWN"
 #	else
 #	endif
@@ -54,13 +103,33 @@
 #	ifndef LINUX
 #		define LINUX
 #	endif
-#	define DKOS "LINUX"
+#	if DKBITS == "32"
+#		ifndef LINUX32
+#			define LINUX32
+#		endif
+#	endif
+#	if DKBITS == "64"
+#		ifndef LINUX64
+#			define LINUX64
+#		endif
+#	endif
+#	define DKOS "LINUX" DKBITS
 #	define DKOS_VERSION "UNKNOWN"
 #elif __ANDROID__
 #	ifndef ANDROID
 #		define ANDROID
 #	endif
-#	define DKOS "ANDROID"
+#	if DKBITS == "32"
+#		ifndef ANDROID32
+#			define ANDROID32
+#		endif
+#	endif
+#	if DKBITS == "64"
+#		ifndef ANDROID64
+#			define ANDROID64
+#		endif
+#	endif
+#	define DKOS "ANDROID" DKBITS
 #	define DKOS_VERSION TOSTRING(__ANDROID_API__)
 #elif MSDOS
 #	define DKOS "MSDOS"
@@ -71,21 +140,7 @@
 #endif
 
 
-#if __x86_64__ || _M_X64
-#	define DKARCH "x86_64"
-#	define DKBITS "64"
-#elif __i386 || _M_IX86
-#	define DKARCH "x86_32"
-#	define DKBITS "32"
-#elif __arm__
-#	define DKARCH "ARM32"
-#	define DKBITS "32"
-#elif __aarch64__
-#	define DKARCH "ARM64"
-#	define DKBITS "64"
-#else
-#	define DKARCH "UNKNOWN"
-#endif
+
 
 #if __clang__ && __GNUG__
 #	define DKCOMPILER "clang++"
