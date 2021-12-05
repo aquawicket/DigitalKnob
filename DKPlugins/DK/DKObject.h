@@ -19,9 +19,9 @@ public:
 		return true; 
 	}
 	DKStringArray data; //(class,id,var1,var2,var3,etc)
-	virtual void SetData(const DKString& data){
-		DKDEBUGFUNC(data);
-		toStringArray(this->data, data, ",");
+	virtual void SetData(const DKString& _data){
+		DKDEBUGFUNC(_data);
+		toStringArray(this->data, _data, ",");
 	}
 };
 

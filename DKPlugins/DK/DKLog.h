@@ -114,7 +114,7 @@ void getTemplateArgs(std::ostringstream& out, A arg1, Args&&... args) {
 }
 
 template <typename... Args>
-void DebugFunc(const char* file, int line, const char* func, const DKString& names, Args&&... args) {
+void DebugFunc(const char* file, int line, const char* func, const DKString& /*names*/, Args&&... args) {
 	if(log_show.empty() && !log_debug)
 		return;
 	int arg_count = sizeof...(Args);
@@ -147,7 +147,7 @@ void DebugFunc(const char* file, int line, const char* func, const DKString& nam
 }
 
 template <typename... Args>
-bool DebugReturn(const char* file, int line, const char* func, const DKString& names, Args&&... args) {
+bool DebugReturn(const char* file, int line, const char* func, const DKString& /*names*/, Args&&... args) {
 	if (log_show.empty() && !log_debug)
 		return true;
 	int arg_count = sizeof...(Args);
