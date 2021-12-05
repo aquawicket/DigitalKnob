@@ -6,10 +6,11 @@
 #ifndef __has_include
 	static_assert(false, "__has_include not supported");
 #else
-	#if __cplusplus >= 201703L// && __has_include(<filesystem>)
+	#if __cplusplus >= 201703L && __has_include(<filesystem>)
 		#include <filesystem>
 		namespace fs = std::filesystem;
 	#elif __has_include(<experimental/filesystem>)
+		#define _SILENCE_EXPERIMENTAL_FILESYSTEM_DEPRECATION_WARNING 1;
 		#include <experimental/filesystem>
 		namespace fs = std::experimental::filesystem;
 	#elif __has_include(<boost/filesystem.hpp>)
