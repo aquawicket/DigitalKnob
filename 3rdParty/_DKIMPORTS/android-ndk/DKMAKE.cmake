@@ -19,10 +19,10 @@ LINUX_DKSET(ANDROIDNDK_DL https://dl.google.com/android/repository/android-ndk-r
 #MAC_DKSET(ANDROIDNDK_DL https://dl.google.com/android/repository/android-ndk-r23b-darwin-x86_64.zip)
 #LINUX_DKSET(ANDROIDNDK_DL https://dl.google.com/android/repository/android-ndk-r23b-linux-x86_64.zip)
 
-DKSET(ANDROIDNDK ${3RDPARTY}/android-sdk/ndk/${ANDROIDNDK_BUILD})
+DKSET(ANDROIDNDK ${3RDPARTY}/android-sdk/ndk_bundle/${ANDROIDNDK_BUILD})
 DKSETENV("NDK_ROOT" ${ANDROIDNDK})
 DKSETENV("VS_NdkRoot" ${ANDROIDNDK})
 
 ### INSTALL ###
-file(MAKE_DIRECTORY ${3RDPARTY}/android-sdk/ndk)
+file(MAKE_DIRECTORY ${3RDPARTY}/android-sdk/ndk_bundle)
 DKINSTALL(${ANDROIDNDK_DL} android-ndk ${ANDROIDNDK})

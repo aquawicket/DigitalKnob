@@ -65,11 +65,11 @@ if(ANDROID)
 endif()
 
 ### VERSION ###
-#if(ANDROID)
-#	DKSET(SDL2_VERSION 2.0.14)
-#else()
+if(ANDROID)
+	DKSET(SDL2_VERSION 2.0.14)
+else()
 	DKSET(SDL2_VERSION 2.0.16)
-#endif()
+endif()
 
 DKSET(SDL2_NAME SDL2-${SDL2_VERSION})
 DKSET(SDL2_DL https://www.libsdl.org/release/${SDL2_NAME}.zip)

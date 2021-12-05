@@ -201,7 +201,7 @@ function DKBuild_ValidateNDK(){
     //GOAL: Eventually we'll use the DKMAKE.cmake script to install
 	const ANDROIDNDK_BUILD = DKBuild_GetDKMakeVariable(DIGITALKNOB+"DK/3rdParty/_DKIMPORTS/android-ndk/DKMAKE.cmake", "ANDROIDNDK_BUILD")
 	const ANDROIDNDK_DL = DKBuild_GetDKMakeVariable(DIGITALKNOB+"DK/3rdParty/_DKIMPORTS/android-ndk/DKMAKE.cmake", "ANDROIDNDK_DL")
-	ANDROIDNDK = DIGITALKNOB+"DK/3rdParty/android-sdk/ndk/"+ANDROIDNDK_BUILD
+	ANDROIDNDK = DIGITALKNOB+"DK/3rdParty/android-sdk/ndk_bundle/"+ANDROIDNDK_BUILD
 	
 	//set environment variables
 	if(ANDROIDNDK !== CPP_DK_Execute("echo %VS_NdkRoot%", "rt"))
@@ -213,8 +213,8 @@ function DKBuild_ValidateNDK(){
 		CPP_DKCurl_Download(ANDROIDNDK_DL, DKDOWNLOAD)
 		const index = ANDROIDNDK_DL.lastIndexOf("/")
 		const filename = ANDROIDNDK_DL.substring(index+1)
-		CPP_DKArchive_Extract(DKDOWNLOAD+"/"+filename, DIGITALKNOB+"DK/3rdParty/android-sdk/ndk")
-		CPP_DKFile_Rename(DIGITALKNOB+"DK/3rdParty/android-sdk/ndk/android-ndk-r22b", ANDROIDNDK, true)
+		CPP_DKArchive_Extract(DKDOWNLOAD+"/"+filename, DIGITALKNOB+"DK/3rdParty/android-sdk/ndk_bundle")
+		CPP_DKFile_Rename(DIGITALKNOB+"DK/3rdParty/android-sdk/ndk_bundle/android-ndk-r22b", ANDROIDNDK, true)
 		CPP_DKFile_StringToFile(ANDROIDNDK_BUILD, ANDROIDNDK+"/installed")
 	}
 }
