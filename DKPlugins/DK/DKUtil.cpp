@@ -163,7 +163,7 @@ bool DKUtil::CpuUsed(int& cpu){
 	return DKWindows::CpuUsed(cpu);
 #elif MAC
 	return DKMac::CpuUsed(cpu);
-#elif
+#elif LINUX
 	return DKLinux::CpuUsed(cpu);
 #else
 	return DKERROR("not implemented on this OS\n");
