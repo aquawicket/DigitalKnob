@@ -177,7 +177,7 @@ if(NOT LINUX) # Disabled NON Linux targets
 	DKDISABLE(kdevelop)
 	DKDISABLE(libasound2-dev)
 	DKDISABLE(libgl1-mesa-dev)
-	DKDISABLE(libglfw3-dev)
+	#DKDISABLE(libglfw3-dev)
 	DKDISABLE(libglib2.0-dev)
 	DKDISABLE(libglu1-mesa-dev)
 	DKDISABLE(libgtk2.0-dev)
