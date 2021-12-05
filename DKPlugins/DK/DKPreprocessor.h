@@ -1,5 +1,9 @@
 // https://sourceforge.net/p/predef/wiki/Home/
 // https://github.com/nemequ/pre-defined-macros
+// https://stackoverflow.com/a/3672331/688352
+
+
+
 
 #define STRINGIFY(x) #x
 #define TOSTRING(x) STRINGIFY(x)
