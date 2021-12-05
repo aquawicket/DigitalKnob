@@ -7,7 +7,8 @@ if(WIN)
 endif()
 
 if(MAC)
-	DKDEFINE(__STDC_WANT_LIB_EXT1__)
+	#DKDEFINE(__STDC_WANT_LIB_EXT1__) #enable CRT Secure functions extension
+	DKDEFINE(_CRT_SECURE_NO_WARNINGS) #supress VC CRT Secure function warnings
 	DKDEPEND(boxer)
 	DKDEPEND(core_foundation)
 	DKDEPEND(core_services)
