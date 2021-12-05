@@ -18,6 +18,7 @@ if(MAC)
 endif()
 
 if(IOS OR IOSSIM)
+	DKDEPEND(uikit)
 	LIST(APPEND DK_SRC DK/DKiPhone.mm)
 endif()
 
