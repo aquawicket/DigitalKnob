@@ -1,8 +1,10 @@
 # https://www.libsdl.org/
+# https://github.com/libsdl-org/SDL
 #
 # https://stackoverflow.com/a/57734435/688352
 #
 # https://www.libsdl.org/release/SDL2-2.0.16.zip
+# https://www.libsdl.org/release/SDL2-2.0.18.zip
 
 ### DEPENDS ###
 if(WIN)
@@ -70,7 +72,7 @@ endif()
 if(ANDROID)
 	DKSET(SDL2_VERSION 2.0.14)
 else()
-	DKSET(SDL2_VERSION 2.0.16)
+	DKSET(SDL2_VERSION 2.0.18)
 endif()
 
 DKSET(SDL2_NAME SDL2-${SDL2_VERSION})
@@ -85,8 +87,8 @@ DKINSTALL(${SDL2_DL} sdl2 ${SDL2})
 ### PATCH ###
 if(ANDROID)
 # https://discourse.libsdl.org/t/android-error-libsdl2-so-failed-to-load/25680/5
-dkFileReplace(${SDL2}/CMakeLists.txt "add_library(hidapi SHARED" "add_library(hidapi STATIC")
-dkFileReplace(${SDL2}/include/SDL_config_android.h "#define SDL_JOYSTICK_HIDAPI     1" "#undef SDL_JOYSTICK_HIDAPI")
+#dkFileReplace(${SDL2}/CMakeLists.txt "add_library(hidapi SHARED" "add_library(hidapi STATIC")
+#dkFileReplace(${SDL2}/include/SDL_config_android.h "#define SDL_JOYSTICK_HIDAPI     1" "#undef SDL_JOYSTICK_HIDAPI")
 endif()
 
 
