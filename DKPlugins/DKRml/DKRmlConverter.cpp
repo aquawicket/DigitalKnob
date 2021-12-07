@@ -1,3 +1,4 @@
+#include "DK/stdafx.h"
 #include "DKRmlConverter.h"
 #include "DK/DKLog.h"
 #include "DKCurl/DKCurl.h"
