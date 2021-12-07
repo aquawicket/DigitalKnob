@@ -1,5 +1,5 @@
 DKDEPEND(DKAssets)
-DKDEPEND(DKSDLWindow)
+DKDEPEND(DKSDLMetalWindow)
 DKDEPEND(DKRml)
 DKDEPEND(sdl2_image)
 ## DKDEPEND(sdl2_gif) ##Deprecated
