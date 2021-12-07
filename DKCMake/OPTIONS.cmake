@@ -9,7 +9,7 @@ if(COMMAND cmake_policy)
 endif(COMMAND cmake_policy)
 
 
-#########################################################################
+###############################################################
 ## Set variables for paths
 ###############################################################
 #get_filename_component(DIGITALKNOB ${CMAKE_SOURCE_DIR} ABSOLUTE)
@@ -313,7 +313,6 @@ if(IOS_32)
 	DKSET(CMAKE_SKIP_RPATH ON)
 	add_definitions(-DIOS)
 	#add_definitions(-DIOS32)
-	#list(APPEND App_SRC ${PATH_PLUGINS}/DK/DKiPhone.mm)
 	DKSET(CMAKE_TOOLCHAIN_FILE ${DKCMAKE}/ios.toolchain.cmake) 
 	DKSET(PLATFORM OS)
 	DKSET(SDK_VERSION 15.0)
@@ -332,7 +331,6 @@ if(IOS_64)
 	DKSET(CMAKE_SKIP_RPATH ON)
 	add_definitions(-DIOS)
 	#add_definitions(-DIOS64)
-	#list(APPEND App_SRC ${PATH_PLUGINS}/DK/DKiPhone.mm)
 	DKSET(CMAKE_TOOLCHAIN_FILE ${DKCMAKE}/ios.toolchain.cmake) 
 	DKSET(PLATFORM OS64)
 	DKSET(SDK_VERSION 15.0)
