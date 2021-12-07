@@ -1,0 +1,359 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|ARM">
+      <Configuration>Debug</Configuration>
+      <Platform>ARM</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|ARM">
+      <Configuration>Release</Configuration>
+      <Platform>ARM</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|ARM64">
+      <Configuration>Debug</Configuration>
+      <Platform>ARM64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|ARM64">
+      <Configuration>Release</Configuration>
+      <Platform>ARM64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x86">
+      <Configuration>Debug</Configuration>
+      <Platform>x86</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x86">
+      <Configuration>Release</Configuration>
+      <Platform>x86</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\jpeg-9d\jaricom.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\jpeg-9d\jcapimin.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\jpeg-9d\jcapistd.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\jpeg-9d\jcarith.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\jpeg-9d\jccoefct.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\jpeg-9d\jccolor.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\jpeg-9d\jcdctmgr.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\jpeg-9d\jchuff.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\jpeg-9d\jcinit.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\jpeg-9d\jcmainct.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\jpeg-9d\jcmarker.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\jpeg-9d\jcmaster.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\jpeg-9d\jcomapi.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\jpeg-9d\jcparam.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\jpeg-9d\jcprepct.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\jpeg-9d\jcsample.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\jpeg-9d\jctrans.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\jpeg-9d\jdapimin.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\jpeg-9d\jdapistd.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\jpeg-9d\jdarith.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\jpeg-9d\jdatadst.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\jpeg-9d\jdatasrc.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\jpeg-9d\jdcoefct.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\jpeg-9d\jdcolor.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\jpeg-9d\jddctmgr.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\jpeg-9d\jdhuff.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\jpeg-9d\jdinput.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\jpeg-9d\jdmainct.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\jpeg-9d\jdmarker.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\jpeg-9d\jdmaster.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\jpeg-9d\jdmerge.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\jpeg-9d\jdpostct.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\jpeg-9d\jdsample.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\jpeg-9d\jdtrans.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\jpeg-9d\jerror.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\jpeg-9d\jfdctflt.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\jpeg-9d\jfdctfst.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\jpeg-9d\jfdctint.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\jpeg-9d\jidctflt.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\jpeg-9d\jidctfst.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\jpeg-9d\jidctint.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\jpeg-9d\jquant1.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\jpeg-9d\jquant2.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\jpeg-9d\jutils.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\jpeg-9d\jmemmgr.c" />
+	<ClCompile Include="..\..\SDL2_image-2.0.5\external\jpeg-9b\jmem-android.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libpng-1.6.37\arm\arm_init.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libpng-1.6.37\arm\filter_neon_intrinsics.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libpng-1.6.37\arm\palette_neon_intrinsics.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libpng-1.6.37\png.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libpng-1.6.37\pngerror.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libpng-1.6.37\pngget.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libpng-1.6.37\pngmem.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libpng-1.6.37\pngpread.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libpng-1.6.37\pngread.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libpng-1.6.37\pngrio.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libpng-1.6.37\pngrtran.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libpng-1.6.37\pngrutil.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libpng-1.6.37\pngset.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libpng-1.6.37\pngtrans.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libpng-1.6.37\pngwio.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libpng-1.6.37\pngwrite.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libpng-1.6.37\pngwtran.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libpng-1.6.37\pngwutil.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libwebp-1.0.3\src\dec\alpha_dec.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libwebp-1.0.3\src\dec\buffer_dec.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libwebp-1.0.3\src\dec\frame_dec.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libwebp-1.0.3\src\dec\idec_dec.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libwebp-1.0.3\src\dec\io_dec.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libwebp-1.0.3\src\dec\quant_dec.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libwebp-1.0.3\src\dec\tree_dec.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libwebp-1.0.3\src\dec\vp8l_dec.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libwebp-1.0.3\src\dec\vp8_dec.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libwebp-1.0.3\src\dec\webp_dec.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libwebp-1.0.3\src\dsp\alpha_processing.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libwebp-1.0.3\src\dsp\alpha_processing_mips_dsp_r2.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libwebp-1.0.3\src\dsp\alpha_processing_neon.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libwebp-1.0.3\src\dsp\alpha_processing_sse2.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libwebp-1.0.3\src\dsp\alpha_processing_sse41.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libwebp-1.0.3\src\dsp\cpu.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libwebp-1.0.3\src\dsp\dec.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libwebp-1.0.3\src\dsp\dec_clip_tables.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libwebp-1.0.3\src\dsp\dec_mips32.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libwebp-1.0.3\src\dsp\dec_mips_dsp_r2.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libwebp-1.0.3\src\dsp\dec_msa.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libwebp-1.0.3\src\dsp\dec_neon.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libwebp-1.0.3\src\dsp\dec_sse2.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libwebp-1.0.3\src\dsp\dec_sse41.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libwebp-1.0.3\src\dsp\filters.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libwebp-1.0.3\src\dsp\filters_mips_dsp_r2.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libwebp-1.0.3\src\dsp\filters_msa.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libwebp-1.0.3\src\dsp\filters_neon.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libwebp-1.0.3\src\dsp\filters_sse2.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libwebp-1.0.3\src\dsp\lossless.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libwebp-1.0.3\src\dsp\lossless_mips_dsp_r2.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libwebp-1.0.3\src\dsp\lossless_msa.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libwebp-1.0.3\src\dsp\lossless_neon.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libwebp-1.0.3\src\dsp\lossless_sse2.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libwebp-1.0.3\src\dsp\rescaler.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libwebp-1.0.3\src\dsp\rescaler_mips32.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libwebp-1.0.3\src\dsp\rescaler_mips_dsp_r2.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libwebp-1.0.3\src\dsp\rescaler_msa.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libwebp-1.0.3\src\dsp\rescaler_neon.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libwebp-1.0.3\src\dsp\rescaler_sse2.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libwebp-1.0.3\src\dsp\upsampling.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libwebp-1.0.3\src\dsp\upsampling_mips_dsp_r2.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libwebp-1.0.3\src\dsp\upsampling_msa.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libwebp-1.0.3\src\dsp\upsampling_neon.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libwebp-1.0.3\src\dsp\upsampling_sse2.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libwebp-1.0.3\src\dsp\upsampling_sse41.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libwebp-1.0.3\src\dsp\yuv.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libwebp-1.0.3\src\dsp\yuv_mips32.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libwebp-1.0.3\src\dsp\yuv_mips_dsp_r2.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libwebp-1.0.3\src\dsp\yuv_neon.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libwebp-1.0.3\src\dsp\yuv_sse2.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libwebp-1.0.3\src\dsp\yuv_sse41.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libwebp-1.0.3\src\utils\bit_reader_utils.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libwebp-1.0.3\src\utils\color_cache_utils.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libwebp-1.0.3\src\utils\filters_utils.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libwebp-1.0.3\src\utils\huffman_utils.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libwebp-1.0.3\src\utils\quant_levels_dec_utils.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libwebp-1.0.3\src\utils\random_utils.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libwebp-1.0.3\src\utils\thread_utils.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libwebp-1.0.3\src\utils\utils.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\external\libwebp-1.0.3\src\utils\rescaler_utils.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\IMG.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\IMG_bmp.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\IMG_gif.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\IMG_jpg.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\IMG_lbm.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\IMG_pcx.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\IMG_png.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\IMG_pnm.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\IMG_svg.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\IMG_tga.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\IMG_tif.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\IMG_webp.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\IMG_WIC.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\IMG_xcf.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\IMG_xpm.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\IMG_xv.c" />
+    <ClCompile Include="..\..\SDL2_image-2.0.5\IMG_xxx.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SDL2\SDL2.vcxproj">
+      <Project>{b7be417c-b6c5-4a69-a056-e0cb0c6a344c}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\SDL2_image-2.0.5\SDL_image.h" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{03a9401d-ceff-4f5e-a7b4-fc2a0d9f6c95}</ProjectGuid>
+    <Keyword>Android</Keyword>
+    <RootNamespace>SDL2_image</RootNamespace>
+    <MinimumVisualStudioVersion>14.0</MinimumVisualStudioVersion>
+    <ApplicationType>Android</ApplicationType>
+    <ApplicationTypeRevision>3.0</ApplicationTypeRevision>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>Clang_5_0</PlatformToolset>
+    <AndroidAPILevel>android-26</AndroidAPILevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>Clang_5_0</PlatformToolset>
+    <AndroidAPILevel>android-26</AndroidAPILevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>Clang_5_0</PlatformToolset>
+    <AndroidAPILevel>android-26</AndroidAPILevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>Clang_5_0</PlatformToolset>
+    <AndroidAPILevel>android-26</AndroidAPILevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>Clang_5_0</PlatformToolset>
+    <AndroidAPILevel>android-26</AndroidAPILevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>Clang_5_0</PlatformToolset>
+    <AndroidAPILevel>android-26</AndroidAPILevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>Clang_5_0</PlatformToolset>
+    <AndroidAPILevel>android-26</AndroidAPILevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>Clang_5_0</PlatformToolset>
+    <AndroidAPILevel>android-26</AndroidAPILevel>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings" />
+  <ImportGroup Label="Shared" />
+  <ImportGroup Label="PropertySheets" />
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'">
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(Sysroot)\usr\include;$(StlIncludeDirectories)%(AdditionalIncludeDirectories);..\..\SDL2_image-2.0.5\external\jpeg-9d;..\..\SDL2_image-2.0.5\external\libpng-1.6.37;..\..\SDL2_image-2.0.5\external\libwebp-1.0.3;..\..\SDL2_ttf-2.0.15\include;..\..\SDL2-2.0.14\include;..\..\SDL2_image-2.0.5\VisualC\external\include</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>LOAD_WEBP;LOAD_BMP;LOAD_GIF;LOAD_LBM;LOAD_PCX;LOAD_PNM;LOAD_TGA;LOAD_XCF;LOAD_XPM;LOAD_XV;LOAD_JPG;AVOID_TABLES;LOAD_PNG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <CppLanguageStandard>c++1z</CppLanguageStandard>
+    </ClCompile>
+    <Link>
+      <LibraryDependencies>$(StlLibraryName);%(LibraryDependencies);m;dl;GLESv1_CM;GLESv2;log;android;C:\Users\aquawicket\digitalknob\DK\3rdParty\SDL2-2.0.14\android32\Debug\libSDL2.a;C:\Users\aquawicket\digitalknob\DK\3rdParty\zlib-1.2.11\android32\Debug\libz.a</LibraryDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories);$(ToolchainPrebuiltPath)\lib\gcc\$(ToolchainName)\$(ToolchainFullVersionName)\$(PlatformShortName);$(StlLibraryPath);$(SolutionDir)$(Platform)\$(Configuration)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(Sysroot)\usr\include;$(StlIncludeDirectories)%(AdditionalIncludeDirectories);..\..\SDL2_image-2.0.5\external\jpeg-9d;..\..\SDL2_image-2.0.5\external\libpng-1.6.37;..\..\SDL2_image-2.0.5\external\libwebp-1.0.3;..\..\SDL2_ttf-2.0.15\include;..\..\SDL2-2.0.14\include;..\..\SDL2_image-2.0.5\VisualC\external\include</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>LOAD_WEBP;LOAD_BMP;LOAD_GIF;LOAD_LBM;LOAD_PCX;LOAD_PNM;LOAD_TGA;LOAD_XCF;LOAD_XPM;LOAD_XV;LOAD_JPG;AVOID_TABLES;LOAD_PNG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <CppLanguageStandard>c++1z</CppLanguageStandard>
+    </ClCompile>
+    <Link>
+      <LibraryDependencies>$(StlLibraryName);%(LibraryDependencies);m;dl;GLESv1_CM;GLESv2;log;android;C:\Users\aquawicket\digitalknob\DK\3rdParty\SDL2-2.0.14\android32\Release\libSDL2.a;C:\Users\aquawicket\digitalknob\DK\3rdParty\zlib-1.2.11\android32\Release\libz.a</LibraryDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories);$(ToolchainPrebuiltPath)\lib\gcc\$(ToolchainName)\$(ToolchainFullVersionName)\$(PlatformShortName);$(StlLibraryPath);$(SolutionDir)$(Platform)\$(Configuration)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(Sysroot)\usr\include;$(StlIncludeDirectories)%(AdditionalIncludeDirectories);..\..\SDL2_image-2.0.5\external\jpeg-9d;..\..\SDL2_image-2.0.5\external\libpng-1.6.37;..\..\SDL2_image-2.0.5\external\libwebp-1.0.3;..\..\SDL2_ttf-2.0.15\include;..\..\SDL2-2.0.14\include;..\..\SDL2_image-2.0.5\VisualC\external\include</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>LOAD_WEBP;LOAD_BMP;LOAD_GIF;LOAD_LBM;LOAD_PCX;LOAD_PNM;LOAD_TGA;LOAD_XCF;LOAD_XPM;LOAD_XV;LOAD_JPG;AVOID_TABLES;LOAD_PNG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <CppLanguageStandard>c++1z</CppLanguageStandard>
+    </ClCompile>
+    <Link>
+      <LibraryDependencies>$(StlLibraryName);%(LibraryDependencies);m;dl;GLESv1_CM;GLESv2;log;android;C:\Users\aquawicket\digitalknob\DK\3rdParty\SDL2-2.0.14\android32\Debug\libSDL2.a;C:\Users\aquawicket\digitalknob\DK\3rdParty\zlib-1.2.11\android32\Debug\libz.a</LibraryDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories);$(ToolchainPrebuiltPath)\lib\gcc\$(ToolchainName)\$(ToolchainFullVersionName)\$(PlatformShortName);$(StlLibraryPath);$(SolutionDir)$(Platform)\$(Configuration)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(Sysroot)\usr\include;$(StlIncludeDirectories)%(AdditionalIncludeDirectories);..\..\SDL2_image-2.0.5\external\jpeg-9d;..\..\SDL2_image-2.0.5\external\libpng-1.6.37;..\..\SDL2_image-2.0.5\external\libwebp-1.0.3;..\..\SDL2_ttf-2.0.15\include;..\..\SDL2-2.0.14\include;..\..\SDL2_image-2.0.5\VisualC\external\include</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>LOAD_WEBP;LOAD_BMP;LOAD_GIF;LOAD_LBM;LOAD_PCX;LOAD_PNM;LOAD_TGA;LOAD_XCF;LOAD_XPM;LOAD_XV;LOAD_JPG;AVOID_TABLES;LOAD_PNG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <CppLanguageStandard>c++1z</CppLanguageStandard>
+    </ClCompile>
+    <Link>
+      <LibraryDependencies>$(StlLibraryName);%(LibraryDependencies);m;dl;GLESv1_CM;GLESv2;log;android;C:\Users\aquawicket\digitalknob\DK\3rdParty\SDL2-2.0.14\android32\Release\libSDL2.a;C:\Users\aquawicket\digitalknob\DK\3rdParty\zlib-1.2.11\android32\Release\libz.a</LibraryDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories);$(ToolchainPrebuiltPath)\lib\gcc\$(ToolchainName)\$(ToolchainFullVersionName)\$(PlatformShortName);$(StlLibraryPath);$(SolutionDir)$(Platform)\$(Configuration)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(Sysroot)\usr\include;$(StlIncludeDirectories)%(AdditionalIncludeDirectories);..\..\SDL2_image-2.0.5\external\jpeg-9d;..\..\SDL2_image-2.0.5\external\libpng-1.6.37;..\..\SDL2_image-2.0.5\external\libwebp-1.0.3;..\..\SDL2_ttf-2.0.15\include;..\..\SDL2-2.0.14\include;..\..\SDL2_image-2.0.5\VisualC\external\include</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>LOAD_WEBP;LOAD_BMP;LOAD_GIF;LOAD_LBM;LOAD_PCX;LOAD_PNM;LOAD_TGA;LOAD_XCF;LOAD_XPM;LOAD_XV;LOAD_JPG;AVOID_TABLES;LOAD_PNG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <CppLanguageStandard>c++1z</CppLanguageStandard>
+    </ClCompile>
+    <Link>
+      <LibraryDependencies>$(StlLibraryName);%(LibraryDependencies);m;dl;GLESv1_CM;GLESv2;log;android;C:\Users\aquawicket\digitalknob\DK\3rdParty\SDL2-2.0.14\android32\Debug\libSDL2.a;C:\Users\aquawicket\digitalknob\DK\3rdParty\zlib-1.2.11\android32\Debug\libz.a</LibraryDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories);$(ToolchainPrebuiltPath)\lib\gcc\$(ToolchainName)\$(ToolchainFullVersionName)\$(PlatformShortName);$(StlLibraryPath);$(SolutionDir)$(Platform)\$(Configuration)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(Sysroot)\usr\include;$(StlIncludeDirectories)%(AdditionalIncludeDirectories);..\..\SDL2_image-2.0.5\external\jpeg-9d;..\..\SDL2_image-2.0.5\external\libpng-1.6.37;..\..\SDL2_image-2.0.5\external\libwebp-1.0.3;..\..\SDL2_ttf-2.0.15\include;..\..\SDL2-2.0.14\include;..\..\SDL2_image-2.0.5\VisualC\external\include</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>LOAD_WEBP;LOAD_BMP;LOAD_GIF;LOAD_LBM;LOAD_PCX;LOAD_PNM;LOAD_TGA;LOAD_XCF;LOAD_XPM;LOAD_XV;LOAD_JPG;AVOID_TABLES;LOAD_PNG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <CppLanguageStandard>c++1z</CppLanguageStandard>
+    </ClCompile>
+    <Link>
+      <LibraryDependencies>$(StlLibraryName);%(LibraryDependencies);m;dl;GLESv1_CM;GLESv2;log;android;C:\Users\aquawicket\digitalknob\DK\3rdParty\SDL2-2.0.14\android32\Release\libSDL2.a;C:\Users\aquawicket\digitalknob\DK\3rdParty\zlib-1.2.11\android32\Release\libz.a</LibraryDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories);$(ToolchainPrebuiltPath)\lib\gcc\$(ToolchainName)\$(ToolchainFullVersionName)\$(PlatformShortName);$(StlLibraryPath);$(SolutionDir)$(Platform)\$(Configuration)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(Sysroot)\usr\include;$(StlIncludeDirectories)%(AdditionalIncludeDirectories);..\..\SDL2_image-2.0.5\external\jpeg-9d\android32\Release\jni;..\..\SDL2_image-2.0.5\external\jpeg-9d;..\..\SDL2_image-2.0.5\external\libpng-1.6.37;..\..\SDL2_image-2.0.5\external\libwebp-1.0.3;..\..\SDL2_ttf-2.0.15\include;..\..\SDL2-2.0.14\include;..\..\SDL2_image-2.0.5\VisualC\external\include</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>LOAD_WEBP;LOAD_BMP;LOAD_GIF;LOAD_LBM;LOAD_PCX;LOAD_PNM;LOAD_TGA;LOAD_XCF;LOAD_XPM;LOAD_XV;LOAD_JPG;AVOID_TABLES;LOAD_PNG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <EnableNeonCodegen>true</EnableNeonCodegen>
+      <CppLanguageStandard>c++1z</CppLanguageStandard>
+    </ClCompile>
+    <Link>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories);$(ToolchainPrebuiltPath)\lib\gcc\$(ToolchainName)\$(ToolchainFullVersionName)\$(PlatformShortName);$(StlLibraryPath);$(SolutionDir)$(Platform)\$(Configuration)</AdditionalLibraryDirectories>
+      <LibraryDependencies>$(StlLibraryName);%(LibraryDependencies);m;dl;GLESv1_CM;GLESv2;log;android;C:\Users\aquawicket\digitalknob\DK\3rdParty\SDL2-2.0.14\android32\Debug\libSDL2.a;C:\Users\aquawicket\digitalknob\DK\3rdParty\zlib-1.2.11\android32\Debug\libz.a</LibraryDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(Sysroot)\usr\include;$(StlIncludeDirectories)%(AdditionalIncludeDirectories);..\..\SDL2_image-2.0.5\external\jpeg-9d;..\..\SDL2_image-2.0.5\external\libpng-1.6.37;..\..\SDL2_image-2.0.5\external\libwebp-1.0.3;..\..\SDL2_ttf-2.0.15\include;..\..\SDL2-2.0.14\include;..\..\SDL2_image-2.0.5\VisualC\external\include</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>LOAD_WEBP;LOAD_BMP;LOAD_GIF;LOAD_LBM;LOAD_PCX;LOAD_PNM;LOAD_TGA;LOAD_XCF;LOAD_XPM;LOAD_XV;LOAD_JPG;AVOID_TABLES;LOAD_PNG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <EnableNeonCodegen>true</EnableNeonCodegen>
+      <CppLanguageStandard>c++1z</CppLanguageStandard>
+    </ClCompile>
+    <Link>
+      <LibraryDependencies>$(StlLibraryName);%(LibraryDependencies);m;dl;GLESv1_CM;GLESv2;log;android;C:\Users\aquawicket\digitalknob\DK\3rdParty\SDL2-2.0.14\android32\Release\libSDL2.a;C:\Users\aquawicket\digitalknob\DK\3rdParty\zlib-1.2.11\android32\Release\libz.a</LibraryDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories);$(ToolchainPrebuiltPath)\lib\gcc\$(ToolchainName)\$(ToolchainFullVersionName)\$(PlatformShortName);$(StlLibraryPath);$(SolutionDir)$(Platform)\$(Configuration)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets" />
+</Project>

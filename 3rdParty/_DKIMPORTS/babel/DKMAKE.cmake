@@ -1,0 +1,14 @@
+# https://unpkg.com/@babel/standalone@7.14.4/babel.min.js
+
+### VERSION ###
+DKSET(BABEL_MAJOR 7)
+DKSET(BABEL_MINOR 14)
+DKSET(BABEL_BUILD 4)
+DKSET(BABEL_VERSION ${BABEL_MAJOR}.${BABEL_MINOR}.${BABEL_BUILD})
+DKSET(BABEL_NAME babel-${BABEL_VERSION})
+DKSET(BABEL_DL https://unpkg.com/@babel/standalone@${BABEL_VERSION}/babel.min.js)
+DKSET(BABEL ${3RDPARTY}/${BABEL_NAME})
+
+
+### INSTALL ###
+DKINSTALL(${BABEL_DL} babel ${BABEL})

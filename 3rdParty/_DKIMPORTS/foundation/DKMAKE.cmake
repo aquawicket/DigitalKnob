@@ -1,0 +1,11 @@
+if(NOT CMAKE_HOST_APPLE)
+	return()
+endif()
+
+# https://developer.apple.com/documentation/foundation?language=objc
+
+FIND_LIBRARY(Foundation_lib Foundation)
+if(NOT Foundation_lib)
+	message(FATAL_ERROR "Could not location Foundation framework")
+endif()
+APPLE_LIB(${Foundation_lib})
