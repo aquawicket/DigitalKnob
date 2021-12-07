@@ -663,6 +663,10 @@ endif()
 
 #######
 if(IOS AND NOT IOSSIM)
+	file(GLOB_RECURSE m_SRC 
+	${DKPROJECT}/*.m)
+	list(APPEND App_SRC ${m_SRC})
+	
 	### PRE BUILD ###
 	if(DEBUG)
 		DKRENAME(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.backup)
@@ -692,7 +696,9 @@ if(IOS AND NOT IOSSIM)
 	DKREMOVE(${DKPROJECT}/Backup)
 
 	#GET_TARGET_PROPERTY(MyExecutable_PATH ${APP_NAME} LOCATION)
-	list(APPEND App_SRC ${DKPLUGINS}/DK/DKiPhone.mm)
+	if(USE_DK)
+		list(APPEND App_SRC ${DKPLUGINS}/DK/DKiPhone.mm)
+	endif()
 	add_executable(${APP_NAME} MACOSX_BUNDLE ${App_SRC})
     set_target_properties(${APP_NAME} PROPERTIES
         XCODE_ATTRIBUTE_CODE_SIGN_IDENTITY ""
@@ -726,6 +732,10 @@ endif()
 
 ##########
 if(IOSSIM)
+	file(GLOB_RECURSE m_SRC 
+	${DKPROJECT}/*.m)
+	list(APPEND App_SRC ${m_SRC})
+	
 	### PRE BUILD ###
 	if(DEBUG)
 		DKREMOVE(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.backup)
@@ -759,7 +769,9 @@ if(IOSSIM)
 	DKREMOVE(${DKPROJECT}/Backup)
 	
 	#GET_TARGET_PROPERTY(MyExecutable_PATH ${APP_NAME} LOCATION)
-	list(APPEND App_SRC ${DKPLUGINS}/DK/DKiPhone.mm)
+	if(USE_DK)
+		list(APPEND App_SRC ${DKPLUGINS}/DK/DKiPhone.mm)
+	endif()
 	add_executable(${APP_NAME} MACOSX_BUNDLE ${App_SRC})
 	set_target_properties(${APP_NAME} PROPERTIES
         XCODE_ATTRIBUTE_CODE_SIGN_IDENTITY ""
