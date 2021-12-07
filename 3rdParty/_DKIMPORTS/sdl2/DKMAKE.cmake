@@ -61,7 +61,7 @@ endif()
 
 ### VERSION ###
 if(ANDROID)
-	DKSET(SDL2_VERSION 2.0.15)
+	DKSET(SDL2_VERSION 2.0.16)
 else()
 	DKSET(SDL2_VERSION 2.0.18)
 endif()
