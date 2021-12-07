@@ -1,4 +1,5 @@
 #ifdef USE_DKCef
+#include "DK/stdafx.h"
 #include "DK/DKApp.h"
 #include "DKRml/DKRml.h"
 #include "DKRml/DKRmlV8.h"

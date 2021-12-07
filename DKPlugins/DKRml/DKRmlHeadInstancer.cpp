@@ -1,3 +1,4 @@
+#include "DK/stdafx.h"
 #include "DKRmlHeadInstancer.h"
 #include <RmlUi/Core/StringUtilities.h>
 #include <RmlUi/Core/XMLParser.h>

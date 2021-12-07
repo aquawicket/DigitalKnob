@@ -1,4 +1,5 @@
 #ifdef USE_DKDuktape
+#include "DK/stdafx.h"
 #include "DKRml.h"
 #include "DKRmlJS.h"
 
