@@ -125,7 +125,7 @@ if(MAC)  # Disabled on Mac host machines
 	DKDISABLE(openal-android)
 	DKDISABLE(openssl)
 	DKDISABLE(podofo)
-	DKDISABLE(quartz_core)
+	#DKDISABLE(quartz_core)
 	DKDISABLE(sdl2_mixer)
 	DKDISABLE(smpeg2)
 	DKDISABLE(tidy-html5)
