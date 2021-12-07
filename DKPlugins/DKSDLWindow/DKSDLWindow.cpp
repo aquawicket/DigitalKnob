@@ -1,7 +1,5 @@
 #include "DK/stdafx.h"
-#ifndef IOS
-	#include "SDL_syswm.h"
-#endif
+#include "SDL_syswm.h"
 #include "DK/DKAndroid.h"
 #include "DK/DKFile.h"
 #include "DKSDLWindow/DKSDLWindow.h"
