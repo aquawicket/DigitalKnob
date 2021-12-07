@@ -312,7 +312,9 @@ function(DKENABLE plugin)
 	if(NOT ${plugin})
 		DKSET(${plugin} ON)
 		DKSET(USE_${plugin} ON)
-		DKDEFINE(USE_${plugin})
+		#In c++ we can't use certian symbals in the preprocess or for macros. - must be turned to _
+		string(REPLACE "-" "_" plugin_macro "${plugin}")
+		DKDEFINE(USE_${plugin_macro})
 	endif()
 endfunction()
 
@@ -323,7 +325,9 @@ function(DKDISABLE plugin)
 	endif()
 	DKUNSET(${plugin})
 	DKUNSET(USE_${plugin})
-	DKUNDEFINE(USE_${plugin})
+	#In c++ we can't use certian symbals in the preprocess or for macros. - must be turned to _
+	string(REPLACE "-" "_" plugin_macro "${plugin}")
+	DKUNDEFINE(USE_${plugin_macro})
 	DKUNDEPEND(${plugin})
 endfunction()
 
