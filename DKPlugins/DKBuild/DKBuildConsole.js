@@ -59,6 +59,7 @@ function DKBuildConsole_ChooseUpdate() {
 	UPDATE = 1	
 	switch(key){
 		case 48:  //Back (0)
+			UPDATE = "";
 			break
 		//Esc
 		case 27:
@@ -245,7 +246,7 @@ function DKBuildConsole_SelectType() {
 		
 	switch(key){
 		case 48: //0
-			OS = "" //Back
+			APP = "" //Back
 			break
 		case 27:
 			TYPE = ""
