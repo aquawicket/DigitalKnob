@@ -277,10 +277,10 @@ if(PLUGINS_FILE)
 	file(WRITE ${DKPROJECT}/DKPlugins.h ${PLUGINS_FILE})
 endif()
 
-message(STATUS "Copying DKPlugins/_DKIMPORT/ to App...")
-DKCOPY(${DKPLUGINS}/_DKIMPORT/icons ${DKPROJECT}/icons FALSE) ## copy app default files recursivly without overwrite
-DKCOPY(${DKPLUGINS}/_DKIMPORT/assets.h ${DKPROJECT}/assets.h FALSE) ## copy app default files recursivly without overwrite
 if(USE_DK)
+	message(STATUS "Copying DKPlugins/_DKIMPORT/ to App...")
+	DKCOPY(${DKPLUGINS}/_DKIMPORT/icons ${DKPROJECT}/icons FALSE) ## copy app default files recursivly without overwrite
+	DKCOPY(${DKPLUGINS}/_DKIMPORT/assets.h ${DKPROJECT}/assets.h FALSE) ## copy app default files recursivly without overwrite
 	DKCOPY(${DKPLUGINS}/_DKIMPORT/App.h ${DKPROJECT}/App.h FALSE) ## copy app default files recursivly without overwrite
 	DKCOPY(${DKPLUGINS}/_DKIMPORT/App.cpp ${DKPROJECT}/App.cpp FALSE) ## copy app default files recursivly without overwrite
 endif()
@@ -321,35 +321,37 @@ if(WIN_32)
 	endif()
 	
 	## OS SOURCE FILES ##
-	DKCOPY(${DKPLUGINS}/_DKIMPORT/resource.h ${DKPROJECT}/resource.h FALSE)
-	DKCOPY(${DKPLUGINS}/_DKIMPORT/resource.rc ${DKPROJECT}/resource.rc FALSE)
-	file(GLOB_RECURSE resources_SRC 
-	${DKPROJECT}/*.manifest
-	${DKPROJECT}/*.rc
-	${DKPROJECT}/icons/windows/*.rc)
-	list(APPEND App_SRC ${resources_SRC})
+	if(USE_DK)
+		DKCOPY(${DKPLUGINS}/_DKIMPORT/resource.h ${DKPROJECT}/resource.h FALSE)
+		DKCOPY(${DKPLUGINS}/_DKIMPORT/resource.rc ${DKPROJECT}/resource.rc FALSE)
+		file(GLOB_RECURSE resources_SRC 
+		${DKPROJECT}/*.manifest
+		${DKPROJECT}/*.rc
+		${DKPROJECT}/icons/windows/*.rc)
+		list(APPEND App_SRC ${resources_SRC})
 	
-	## ICONS ##
-	if(IMAGEMAGICK_CONVERT)
-		message(STATUS "Building icons for ${APP_NAME} . . .")
-		dk_makeDirectory(${DKPROJECT}/icons/windows)
-		DKEXECUTE_PROCESS(COMMAND ${IMAGEMAGICK_CONVERT} ${DKPROJECT}/icons/icon.png -define icon:auto-resize=256,128,64,48,32,16 ${DKPROJECT}/icons/windows/icon.ico)
-		DKCOPY(${DKPROJECT}/icons/windows/icon.ico ${DKPROJECT}/assets/icon.ico TRUE) # copy the icon to assets
-		DKEXECUTE_PROCESS(COMMAND ${IMAGEMAGICK_CONVERT} ${DKPROJECT}/icons/icon.png -define icon:auto-resize=16 ${DKPROJECT}/assets/favicon.ico)
+		## ICONS ##
+		if(IMAGEMAGICK_CONVERT)
+			message(STATUS "Building icons for ${APP_NAME} . . .")
+			dk_makeDirectory(${DKPROJECT}/icons/windows)
+			DKEXECUTE_PROCESS(COMMAND ${IMAGEMAGICK_CONVERT} ${DKPROJECT}/icons/icon.png -define icon:auto-resize=256,128,64,48,32,16 ${DKPROJECT}/icons/windows/icon.ico)
+			DKCOPY(${DKPROJECT}/icons/windows/icon.ico ${DKPROJECT}/assets/icon.ico TRUE) # copy the icon to assets
+			DKEXECUTE_PROCESS(COMMAND ${IMAGEMAGICK_CONVERT} ${DKPROJECT}/icons/icon.png -define icon:auto-resize=16 ${DKPROJECT}/assets/favicon.ico)
+		endif()
+	
+		## ASSETS ##
+		# Backup files and folders excluded from the package
+		DKCOPY(${DKPROJECT}/assets/USER ${DKPROJECT}/Backup/USER TRUE)
+		# Remove excluded files and folders before packaging
+		DKREMOVE(${DKPROJECT}/assets/USER)
+		#Compress the assets, they will be included by resource.rc
+		message(STATUS "Creating assets.zip . . .")
+		DKZIP(${DKPROJECT}/assets)
+		# Restore the backed up files, excluded from assets
+		DKCOPY(${DKPROJECT}/Backup ${DKPROJECT}/assets TRUE)
+		DKREMOVE(${DKPROJECT}/Backup)
+		DKCOPY(${DKPLUGINS}/_DKIMPORT/assets.h ${DKPROJECT}/assets.h TRUE) #required
 	endif()
-	
-	## ASSETS ##
-	# Backup files and folders excluded from the package
-	DKCOPY(${DKPROJECT}/assets/USER ${DKPROJECT}/Backup/USER TRUE)
-	# Remove excluded files and folders before packaging
-	DKREMOVE(${DKPROJECT}/assets/USER)
-	#Compress the assets, they will be included by resource.rc
-	message(STATUS "Creating assets.zip . . .")
-	DKZIP(${DKPROJECT}/assets)
-	# Restore the backed up files, excluded from assets
-	DKCOPY(${DKPROJECT}/Backup ${DKPROJECT}/assets TRUE)
-	DKREMOVE(${DKPROJECT}/Backup)
-	DKCOPY(${DKPLUGINS}/_DKIMPORT/assets.h ${DKPROJECT}/assets.h TRUE) #required
 	
 	add_definitions(-D_USING_V110_SDK71_)
 	add_executable(${APP_NAME} WIN32 ${App_SRC})
