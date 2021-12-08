@@ -3,12 +3,16 @@
 // https://stackoverflow.com/a/3672331/688352
 
 
-#define STRINGIFY(x) #x
-#define TOSTRING(x) STRINGIFY(x)
-#define JOIN(a,b) a ## b
+#define STR(x) #x
+#define TOSTRING(x) STR(x)
 #define NAME(x) printf("%s", #x)
-#define NAME_VALUE(x) printf("%s=%s", #x, STRINGIFY(x))
-#define VALUE(x) printf(%s, STRINGIFY(x))
+#define NAME_VALUE(x) printf("%s=%s", #x, STR(x))
+#define VALUE(x) printf(%s, STR(x))
+//#define JOIN(a,b) a ## b
+// https://stackoverflow.com/a/59157875/688352
+#define JOIN_TWO(_1, _2) STR(_1) "." STR(_2)
+#define JOIN_THREE(_1, _2, _3) STR(_1) "." STR(_2) "." STR(_3)
+
 
 
 
@@ -169,7 +173,7 @@
 #   define DKCOMPILER_VERSION TOSTRING(__llvm__)
 #elif __MINGW32__
 #	define DKCOMPILER "Mingw32"
-#   define DKCOMPILER_VERSION TOSTRING(__MINGW32_MAJOR_VERSION).TOSTRING(__MINGW32_MINOR_VERSION);
+#   define DKCOMPILER_VERSION JOIN_TWO(__MINGW32_MAJOR_VERSION, __MINGW32_MINOR_VERSION);
 #elif __MINGW64__
 #	define DKCOMPILER "Mingw64"
 #   define DKCOMPILER_VERSION TOSTRING(__MINGW64_MAJOR_VERSION).TOSTRING(__MINGW64_MINOR_VERSION);
