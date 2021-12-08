@@ -884,11 +884,9 @@ bool DKUtil::VirtualMemory(unsigned long long& virtualMemory){
 	DKDEBUGFUNC(virtualMemory);
 #ifdef WIN32
 	return DKWindows::VirtualMemory(virtualMemory);
-#endif
-#ifdef MAC
+#elif MAC
 	return DKMac::VirtualMemory(virtualMemory);
-#endif
-#ifdef LINUX
+#elif LINUX
 	return DKLinux::VirtualMemory(virtualMemory);
 #else
 	return DKERROR("not implemented on this OS\n");
@@ -899,11 +897,9 @@ bool DKUtil::VirtualMemoryUsed(unsigned long long& virtualMemory){
 	DKDEBUGFUNC(virtualMemory);
 #ifdef WIN32
 	return DKWindows::VirtualMemoryUsed(virtualMemory);
-#endif
-#ifdef MAC
+#elif MAC
 	return DKMac::VirtualMemoryUsed(virtualMemory);
-#endif
-#ifdef LINUX
+#elif LINUX
 	return DKLinux::VirtualMemoryUsed(virtualMemory);
 #else
 	return DKERROR("not implemented on this OS\n");
@@ -914,11 +910,9 @@ bool DKUtil::VirtualMemoryUsedByApp(unsigned int& virtualMemory){
 	DKDEBUGFUNC(virtualMemory);
 #ifdef WIN32
 	return DKWindows::VirtualMemoryUsedByApp(virtualMemory);
-#endif
-#ifdef MAC
+#elif MAC
 	return DKMac::VirtualMemoryUsedByApp(virtualMemory);
-#endif
-#ifdef LINUX
+#elif LINUX
 	return DKLinux::VirtualMemoryUsedByApp(virtualMemory);
 #else
 	return DKERROR("not implemented on this OS\n");
