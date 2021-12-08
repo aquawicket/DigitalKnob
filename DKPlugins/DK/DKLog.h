@@ -238,15 +238,15 @@ void signal_handler(int signal);
 	#define DKDEBUGFUNC(...) DebugFunc(__FILE__, __LINE__, __FUNCTION__, "", ##__VA_ARGS__)
 	#define DKDEBUGRETURN(...) DebugReturn(__FILE__, __LINE__, __FUNCTION__, "", ##__VA_ARGS__)
 #else
-	#define DKDEBUGFUNC(...) Log(__FILE__, __LINE__, __FUNCTION__, "", DK_DEBUG)
-	#define DKDEBUGRETURN(...) Log(__FILE__, __LINE__, __FUNCTION__, "", DK_DEBUG)
+	#define DKDEBUGFUNC(...) DKLog::Log(__FILE__, __LINE__, __FUNCTION__, "", DK_DEBUG)
+	#define DKDEBUGRETURN(...) DKLog::Log(__FILE__, __LINE__, __FUNCTION__, "", DK_DEBUG)
 #endif
 
 /*
 template <typename... Args>
 void Test(const char* file, int line, const char* func, const DKString& names, Args&&... args){
 	DKString str = "test";
-	Log(file, line, func, str, DKDEBUG);
+	DKLog::Log(file, line, func, str, DKDEBUG);
 }
 #define TEST1(__FILE__, __LINE__, __FUNCTION__, ...)  Test(__FILE__, __LINE__, __FUNCTION__, #__VA_ARGS__, __VA_ARGS__)
 #define TEST(...) TEST1(__FILE__, __LINE__, __FUNCTION__, __VA_ARGS__)
