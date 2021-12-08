@@ -157,7 +157,7 @@ if(CMAKE_HOST_APPLE)
 	--disable-shared
 	--enable-static
 	--host ${IOSSIM_HOST}
-	CC=${CLANGXX}
+	CC=${CLANG}
 	CXX=${CLANGXX}
 	CFLAGS=${IOSSIM_CFLAGS}
 	CXXFLAGS=${IOSSIM_CXXFLAGS})
