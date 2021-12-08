@@ -8,7 +8,7 @@ IF(USE_DKCef)
 ENDIF()
 
 
-DKCOPY(${PUGIXML}/src/pugixml.hpp ${DKPLUGINS}/DKXml/pugixml.hpp FALSE)
+#DKCOPY(${PUGIXML}/src/pugixml.hpp ${DKPLUGINS}/DKXml/pugixml.hpp FALSE)
 DKCOPY(${PUGIXML}/src/pugixml.cpp ${DKPLUGINS}/DKXml/pugixml.cpp FALSE)
 DKINCLUDE(${PUGIXML}/src)
 DKINCLUDE(${XML2}/include)

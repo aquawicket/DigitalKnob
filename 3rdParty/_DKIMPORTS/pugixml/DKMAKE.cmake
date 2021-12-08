@@ -1,3 +1,5 @@
+# https://github.com/zeux/pugixml/releases/download/v1.6/pugixml-1.6.zip
+
 ### VERSION ###
 DKSET(PUGIXML_MAJOR 1)
 DKSET(PUGIXML_MINOR 6)
