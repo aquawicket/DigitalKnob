@@ -28,7 +28,7 @@ if(WARNING_4244)
 	DKSET(EXTRA_C_FLAGS ${EXTRA_C_FLAGS} /wd4244)
 endif()
 message(STATUS "EXTRA_C_FLAGS = ${EXTRA_C_FLAGS}")
-Wait()
+# Wait()
 
 
 ### DEPENDS ###
