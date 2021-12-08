@@ -848,8 +848,9 @@ bool DKUtil::TurnOnMonitor(){
 	DKDEBUGFUNC();
 #ifdef WIN32
 	return DKWindows::TurnOnMonitor();
-#endif
+#else
 	return DKERROR("not implemented on this OS\n");
+#endif
 }
 
 bool DKUtil::UpdateFps(){
@@ -889,8 +890,9 @@ bool DKUtil::VirtualMemory(unsigned long long& virtualMemory){
 #endif
 #ifdef LINUX
 	return DKLinux::VirtualMemory(virtualMemory);
-#endif
+#else
 	return DKERROR("not implemented on this OS\n");
+#endif
 }
 
 bool DKUtil::VirtualMemoryUsed(unsigned long long& virtualMemory){
@@ -903,8 +905,9 @@ bool DKUtil::VirtualMemoryUsed(unsigned long long& virtualMemory){
 #endif
 #ifdef LINUX
 	return DKLinux::VirtualMemoryUsed(virtualMemory);
-#endif
+#else
 	return DKERROR("not implemented on this OS\n");
+#endif
 }
 
 bool DKUtil::VirtualMemoryUsedByApp(unsigned int& virtualMemory){
@@ -917,30 +920,34 @@ bool DKUtil::VirtualMemoryUsedByApp(unsigned int& virtualMemory){
 #endif
 #ifdef LINUX
 	return DKLinux::VirtualMemoryUsedByApp(virtualMemory);
-#endif
+#else
 	return DKERROR("not implemented on this OS\n");
+#endif
 }
 
 bool DKUtil::WaitForImage(const DKString& file, int timeout){
 	DKDEBUGFUNC(file, timeout);
 #ifdef WIN32
 	return DKWindows::WaitForImage(file, timeout);
-#endif
+#else
 	return DKERROR("not implemented on this OS\n");
+#endif
 }
 
 bool DKUtil::WheelDown(){
 	DKDEBUGFUNC();
 #ifdef WIN32
 	return DKWindows::WheelDown();
-#endif
+#else
 	return DKERROR("not implemented on this OS\n");
+#endif
 }
 
 bool DKUtil::WheelUp(){
 	DKDEBUGFUNC();
 #ifdef WIN32
 	return DKWindows::WheelUp();
-#endif
+#else
 	return DKERROR("not implemented on this OS\n");
+#endif
 }

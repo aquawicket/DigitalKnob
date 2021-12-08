@@ -359,9 +359,10 @@ if(WIN_32)
 	add_executable(${APP_NAME} WIN32 ${App_SRC})
 	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${LIBS})
 	
-	#target_compile_options(${APP_NAME} PRIVATE
-	#	$<$<OR:$<CXX_COMPILER_ID:Clang>,$<CXX_COMPILER_ID:AppleClang>,$<CXX_COMPILER_ID:GNU>>: -Wall -Werror>
-	#	$<$<CXX_COMPILER_ID:MSVC>: /W4 /WX>)
+	#TreatWarningsAsErrors
+	target_compile_options(${APP_NAME} PRIVATE
+		$<$<OR:$<CXX_COMPILER_ID:Clang>,$<CXX_COMPILER_ID:AppleClang>,$<CXX_COMPILER_ID:GNU>>: -Wall -Werror>
+		$<$<CXX_COMPILER_ID:MSVC>: /W4 /WX>)
 	
 	## TODO: can we use include_external_msproject() to include all of our third party libraries created with CMake?
 	foreach(plugin ${dkdepend_list})
