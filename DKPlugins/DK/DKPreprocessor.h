@@ -6,6 +6,10 @@
 #define STRINGIFY(x) #x
 #define TOSTRING(x) STRINGIFY(x)
 #define JOIN(a,b) a ## b
+#define PRINT_NAME_AND_VALUE(x) printf("%s=%s\n", #x, STRINGIFY(x))
+#define PRINT_VALUE(x) printf(%s, STRINGIFY(x))
+
+
 
 #if __x86_64__ || _M_X64
 #	define DKARCH "x86_64"
