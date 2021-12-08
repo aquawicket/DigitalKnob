@@ -6,8 +6,9 @@
 #define STRINGIFY(x) #x
 #define TOSTRING(x) STRINGIFY(x)
 #define JOIN(a,b) a ## b
-#define PRINT_NAME_AND_VALUE(x) printf("%s=%s\n", #x, STRINGIFY(x))
-#define PRINT_VALUE(x) printf(%s, STRINGIFY(x))
+#define NAME(x) printf("%s", #x)
+#define NAME_VALUE(x) printf("%s=%s", #x, STRINGIFY(x))
+#define VALUE(x) printf(%s, STRINGIFY(x))
 
 
 
@@ -177,7 +178,7 @@
 #   define DKCOMPILER_VERSION TOSTRING(_MSC_FULL_VER)
 #elif __GNUG__
 #	define DKCOMPILER "GNU G++"
-#   define DKCOMPILER_VERSION TOSTRING(__GNUC__).TOSTRING(__GNUC_MINOR__).TOSTRING(__GNUC_PATCHLEVEL__);
+#   define DKCOMPILER_VERSION __GNUC__.__GNUC_MINOR__.__GNUC_PATCHLEVEL__;
 #elif __GNUC__
 #	define DKCOMPILER "GNU GCC"
 #   define DKCOMPILER_VERSION TOSTRING(__GNUC__) + "." + TOSTRING(__GNUC_MINOR__).TOSTRING(__GNUC_PATCHLEVEL__);
