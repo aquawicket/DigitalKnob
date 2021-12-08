@@ -5,9 +5,9 @@
 
 #define STR(x) #x
 #define TOSTRING(x) STR(x)
-#define NAME(x) printf("%s", #x)
-#define NAME_VALUE(x) printf("%s=%s", #x, STR(x))
-#define VALUE(x) printf(%s, STR(x))
+#define PRNT_NAME(x) printf("%s", #x)
+#define PRNT_NAME_VALUE(x) printf("%s=%s", #x, STR(x))
+#define PRNT_VALUE(x) printf(%s, STR(x))
 //#define JOIN(a,b) a ## b
 // https://stackoverflow.com/a/59157875/688352
 #define JOIN_TWO(_1, _2) STR(_1) "." STR(_2)
@@ -164,28 +164,28 @@
 
 #if __clang__ && __GNUG__
 #	define DKCOMPILER "clang++"
-#   define DKCOMPILER_VERSION TOSTRING(__clang_version__)
+#   define DKCOMPILER_VERSION STR(__clang_version__)
 #elif __clang__
 #	define DKCOMPILER "clang"
-#   define DKCOMPILER_VERSION TOSTRING(__clang_version__)
+#   define DKCOMPILER_VERSION STR(__clang_version__)
 #elif __llvm__
 #	define DKCOMPILER "llvm"
-#   define DKCOMPILER_VERSION TOSTRING(__llvm__)
+#   define DKCOMPILER_VERSION STR(__llvm__)
 #elif __MINGW32__
 #	define DKCOMPILER "Mingw32"
 #   define DKCOMPILER_VERSION JOIN_TWO(__MINGW32_MAJOR_VERSION, __MINGW32_MINOR_VERSION);
 #elif __MINGW64__
 #	define DKCOMPILER "Mingw64"
-#   define DKCOMPILER_VERSION TOSTRING(__MINGW64_MAJOR_VERSION).TOSTRING(__MINGW64_MINOR_VERSION);
+#   define DKCOMPILER_VERSION JOIN_TWO(__MINGW64_MAJOR_VERSION, __MINGW64_MINOR_VERSION);
 #elif _MSC_VER
 #	define DKCOMPILER "Microsoft Visual C++"
-#   define DKCOMPILER_VERSION TOSTRING(_MSC_FULL_VER)
+#   define DKCOMPILER_VERSION STR(_MSC_FULL_VER)
 #elif __GNUG__
 #	define DKCOMPILER "GNU G++"
-#   define DKCOMPILER_VERSION __GNUC__.__GNUC_MINOR__.__GNUC_PATCHLEVEL__;
+#   define DKCOMPILER_VERSION STR(__GNUC__, __GNUC_MINOR_, __GNUC_PATCHLEVEL__);
 #elif __GNUC__
 #	define DKCOMPILER "GNU GCC"
-#   define DKCOMPILER_VERSION TOSTRING(__GNUC__) + "." + TOSTRING(__GNUC_MINOR__).TOSTRING(__GNUC_PATCHLEVEL__);
+#   define DKCOMPILER_VERSION STR(__GNUC__, __GNUC_MINOR__, __GNUC_PATCHLEVEL__);
 #else
 #	define DKCOMPILER "UNKNOWN"
 #   define DKCOMPILER_VERSION "UNKNOWN"
