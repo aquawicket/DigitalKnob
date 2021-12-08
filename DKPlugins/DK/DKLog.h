@@ -64,24 +64,34 @@
 #define DK_SHOW 8
 #define DK_HIDE 9
 
-extern bool log_assert;
-extern bool log_fatal;
-extern bool log_errors;
-extern bool log_warnings;
-extern bool log_info;
-extern bool log_debug;
-extern bool log_verbose;
-extern bool log_msvc;
-extern bool log_xcode;
-extern bool log_file;
-extern bool log_gui_console;
-extern bool log_thread;
-extern bool log_lines;
-extern bool log_funcs;
-extern DKString log_show;
-extern DKString log_hide;
-extern bool stacktrace_on_errors;
-extern bool exception_on_errors;
+
+class DKLog {
+public:
+	static bool Clear();
+	static bool ColorMap();
+	static bool Log(const char* file, int line, const char* func, const DKString& input, const int lvl = DK_INFO);
+	static bool SetLog(const int lvl, const DKString& text);
+
+	static bool log_assert;
+	static bool log_fatal;
+	static bool log_errors;
+	static bool log_warnings;
+	static bool log_info;
+	static bool log_debug;
+	static bool log_verbose;
+	static bool log_msvc;
+	static bool log_xcode;
+	static bool log_file;
+	static bool log_gui_console;
+	static bool log_thread;
+	static bool log_lines;
+	static bool log_funcs;
+	static DKString log_show;
+	static DKString log_hide;
+	static bool stacktrace_on_errors;
+	static bool exception_on_errors;
+};
+
 
 bool GetVersion(DKString& version);
 bool GetBuildMonth(const char* buildDate, DKString& buildMonth);
@@ -91,10 +101,7 @@ bool GetBuildHour(const char* buildTime, DKString& buildHour);
 bool GetBuildMinute(const char* buildTime, DKString& buildMinute);
 bool GetBuildSecond(const char* buildTime, DKString& buildSecond);
 
-bool Clear();
-bool ColorMap();
-bool Log(const char* file, int line, const char* func, const DKString& input, const int lvl = DK_INFO);
-bool SetLog(const int lvl, const DKString& text);
+
 
 //#ifndef ANDROID
 void getTemplateArgs(std::ostringstream& out);
@@ -115,7 +122,7 @@ void getTemplateArgs(std::ostringstream& out, A arg1, Args&&... args) {
 
 template <typename... Args>
 void DebugFunc(const char* file, int line, const char* func, const DKString& /*names*/, Args&&... args) {
-	if(log_show.empty() && !log_debug)
+	if(DKLog::log_show.empty() && !DKLog::log_debug)
 		return;
 	int arg_count = sizeof...(Args);
 	//DKStringArray arg_names;
@@ -143,12 +150,12 @@ void DebugFunc(const char* file, int line, const char* func, const DKString& /*n
 	//	func_string += " )\n";
 	//else
 		func_string += ")\n";
-	Log(file, line, "", func_string, DK_DEBUG);
+	DKLog::Log(file, line, "", func_string, DK_DEBUG);
 }
 
 template <typename... Args>
 bool DebugReturn(const char* file, int line, const char* func, const DKString& /*names*/, Args&&... args) {
-	if (log_show.empty() && !log_debug)
+	if (DKLog::log_show.empty() && !DKLog::log_debug)
 		return true;
 	int arg_count = sizeof...(Args);
 	//DKStringArray arg_names;
@@ -183,7 +190,7 @@ bool DebugReturn(const char* file, int line, const char* func, const DKString& /
 		func_string += "\n";
 	else
 		func_string += ")\n";
-	Log(file, line, "", func_string, DK_DEBUG);
+	DKLog::Log(file, line, "", func_string, DK_DEBUG);
 	return true;
 }
 //#endif
@@ -212,13 +219,14 @@ void signal_handler(int signal);
 #define DKBUILDHOUR(buildHour) GetBuildHour(__TIME__, buildHour);
 #define DKBUILDMINUTE(buildMinute) GetBuildMinute(__TIME__, buildMinute);
 #define DKBUILDSECOND(buildSecond) GetBuildSecond(__TIME__, buildSecond);
-#define  DKASSERT(message) Log(__FILE__, __LINE__, __FUNCTION__, message, DK_ASSERT);
-#define   DKFATAL(message) Log(__FILE__, __LINE__, __FUNCTION__, message, DK_FATAL);
-#define   DKERROR(message) Log(__FILE__, __LINE__, __FUNCTION__, message, DK_ERROR);
-#define    DKWARN(message) Log(__FILE__, __LINE__, __FUNCTION__, message, DK_WARN);
-#define    DKINFO(message) Log(__FILE__, __LINE__, __FUNCTION__, message, DK_INFO);
-#define   DKDEBUG(message) Log(__FILE__, __LINE__, __FUNCTION__, message, DK_DEBUG);
-#define DKVERBOSE(message) Log(__FILE__, __LINE__, __FUNCTION__, message, DK_VERBOSE);
+#define  DKASSERT(message) DKLog::Log(__FILE__, __LINE__, __FUNCTION__, message, DK_ASSERT);
+#define   DKFATAL(message) DKLog::Log(__FILE__, __LINE__, __FUNCTION__, message, DK_FATAL);
+#define   DKERROR(message) DKLog::Log(__FILE__, __LINE__, __FUNCTION__, message, DK_ERROR);
+#define    DKWARN(message) DKLog::Log(__FILE__, __LINE__, __FUNCTION__, message, DK_WARN);
+#define    DKINFO(message) DKLog::Log(__FILE__, __LINE__, __FUNCTION__, message, DK_INFO);
+#define   DKDEBUG(message) DKLog::Log(__FILE__, __LINE__, __FUNCTION__, message, DK_DEBUG);
+#define DKVERBOSE(message) DKLog::Log(__FILE__, __LINE__, __FUNCTION__, message, DK_VERBOSE);
+
 #define DEBUG_METHOD() logy _logy(__FUNCTION__);
 
 #ifdef WIN32

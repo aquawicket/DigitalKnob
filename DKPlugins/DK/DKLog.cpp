@@ -7,23 +7,23 @@
 #endif
 #include <fstream>
 
-extern bool log_fatal = true;      //console.assert()
-extern bool log_errors = true;     //console.error()
-extern bool log_warnings = true;   //console.warn()
-extern bool log_info = true;       //console.info()
-extern bool log_debug = false;     //console.debug()
-extern bool log_verbose = false;   //console.verbose() //extra
-extern bool log_msvc = false;
-extern bool log_xcode = false;
-extern bool log_file = true;
-extern bool log_gui_console = true;
-extern bool log_thread = false;
-extern bool log_lines = false;
-extern bool log_funcs = false;
-extern DKString log_show = ""; //comma seperated 
-extern DKString log_hide = ""; //comma seperated
-extern bool stacktrace_on_errors = false;
-extern bool exception_on_errors = false;
+bool DKLog::log_fatal = true;      //console.assert()
+bool DKLog::log_errors = true;     //console.error()
+bool DKLog::log_warnings = true;   //console.warn()
+bool DKLog::log_info = true;       //console.info()
+bool DKLog::log_debug = false;     //console.debug()
+bool DKLog::log_verbose = false;   //console.verbose() //extra
+bool DKLog::log_msvc = false;
+bool DKLog::log_xcode = false;
+bool DKLog::log_file = true;
+bool DKLog::log_gui_console = true;
+bool DKLog::log_thread = false;
+bool DKLog::log_lines = false;
+bool DKLog::log_funcs = false;
+DKString DKLog::log_show = ""; //comma seperated 
+DKString DKLog::log_hide = ""; //comma seperated
+bool DKLog::stacktrace_on_errors = false;
+bool DKLog::exception_on_errors = false;
 
 bool GetVersion(DKString& version) {
 	DKString year;
@@ -115,7 +115,7 @@ bool GetBuildSecond(const char* buildTime, DKString& buildSecond) {
 }
 
 
-bool Clear(){
+bool DKLog::Clear(){
 #ifdef WIN32
     system("cls");
     //clrscr(); // #include conio.h
@@ -129,7 +129,7 @@ bool Clear(){
 }
 
 // https://www.lihaoyi.com/post/BuildyourownCommandLinewithANSIescapecodes.html
-bool ColorMap(){
+bool DKLog::ColorMap(){
 #ifdef WIN32
 	// Save Current Colors
 	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -155,7 +155,7 @@ void signal_handler(int signal) {
 
 // https://stackoverflow.com/a/9371717/688352  - The command windows is slow, read this
 
-bool Log(const char* file, int line, const char* func, const DKString& input, const int lvl){
+bool DKLog::Log(const char* file, int line, const char* func, const DKString& input, const int lvl){
 	/*
 	if(lvl == DK_ASSERT){
 		// Install a signal handler
@@ -334,7 +334,7 @@ bool Log(const char* file, int line, const char* func, const DKString& input, co
 }
 
 
-bool SetLog(const int lvl, const DKString& text){
+bool DKLog::SetLog(const int lvl, const DKString& text){
 	DKDEBUGFUNC(lvl, text);
 	((lvl == DK_ERROR) && same(text,"OFF")) ? log_errors = false :  log_errors = true;
 	((lvl == DK_WARN)  && same(text,"OFF")) ? log_warnings = false : log_warnings = true;
