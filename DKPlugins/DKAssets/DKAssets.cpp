@@ -23,7 +23,7 @@ bool DKAssets::Init(){
 	DKString file;
 	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[LOG_FILE]", file);
 	if(same(file, "OFF")){
-		log_file = false;
+		DKLog::log_file = false;
 	}
 	else{
 #ifndef ANDROID
@@ -47,50 +47,50 @@ bool DKAssets::Init(){
 	DKString debug;
 	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[LOG_DEBUG]", debug);
 	if(same(debug, "ON"))
-		log_debug = true;
+		DKLog::log_debug = true;
 
 	DKString info;
 	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[LOG_INFO]", info);
 	if(same(info, "OFF"))
-		log_info = false;
+		DKLog::log_info = false;
 
 	DKString warnings;
 	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[LOG_WARNINGS]", warnings);
 	if(same(warnings, "OFF"))
-		log_warnings = false;
+		DKLog::log_warnings = false;
 
 	DKString errors;
 	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[LOG_ERRORS]", errors);
 	if(same(errors, "OFF"))
-		log_errors = false;
+		DKLog::log_errors = false;
 	
 	DKString stacktraceonerrors;
 	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[STACKTRACE_ON_ERRORS]", stacktraceonerrors);
 	if(same(stacktraceonerrors, "ON"))
-		stacktrace_on_errors = true;
+		DKLog::stacktrace_on_errors = true;
 
 	DKString exceptiononerrors;
 	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[EXCEPTION_ON_ERRORS]", exceptiononerrors);
 	if(same(exceptiononerrors, "ON"))
-		exception_on_errors = true;
+		DKLog::exception_on_errors = true;
 
-	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[LOG_SHOW]", log_show);
-	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[LOG_HIDE]", log_hide);
+	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[LOG_SHOW]", DKLog::log_show);
+	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[LOG_HIDE]", DKLog::log_hide);
 
 	DKString threads;
 	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[LOG_THREAD]", threads);
 	if (same(threads, "ON"))
-		log_thread = true;
+		DKLog::log_thread = true;
 	
 	DKString lines;
 	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[LOG_LINES]", lines);
 	if(same(lines, "ON"))
-		log_lines = true;
+		DKLog::log_lines = true;
 
 	DKString funcs;
 	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[LOG_FUNCS]", funcs);
 	if(same(funcs, "ON"))
-		log_funcs = true;
+		DKLog::log_funcs = true;
 	
 	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[ONLINE_ASSETS]", DKFile::online_assets);
 	if(DKFile::online_assets.empty())
