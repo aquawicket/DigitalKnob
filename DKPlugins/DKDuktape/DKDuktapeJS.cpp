@@ -165,10 +165,10 @@ int DKDuktapeJS::_DKDEBUGVARS(duk_context* ctx){
 		if (duk_is_boolean(ctx, i)) { var += toString(duk_get_boolean(ctx, i)); }
 		if (duk_is_number(ctx, i)) { var += toString(duk_get_number(ctx, i)); }
 		if (duk_is_string(ctx, i)) { var += duk_get_string(ctx, i); }
-		if (!log_debug) {
-			log_debug = true;
+		if (!DKLog::log_debug) {
+			DKLog::log_debug = true;
 			DKDEBUG(info + var + "\n");
-			log_debug = false;
+			DKLog::log_debug = false;
 		}
 		else {
 			DKDEBUG(info + var + "\n");
@@ -336,7 +336,7 @@ int DKDuktapeJS::_SetLog(duk_context* ctx){
 	//TODO
 	int lvl = duk_require_int(ctx, 0);
 	DKString string = duk_require_string(ctx, 1);
-	SetLog(lvl, string);
+	DKLog::SetLog(lvl, string);
 	return 1;
 }
 
@@ -731,10 +731,10 @@ int DKDuktapeJS::LeftClick(duk_context* ctx){
 int DKDuktapeJS::LogGuiConsole(duk_context* ctx){
 	int state = duk_require_boolean(ctx, 0);
 	if(state){
-		log_gui_console = true;
+		DKLog::log_gui_console = true;
 		return 1;
 	}
-	log_gui_console = false;
+	DKLog::log_gui_console = false;
 	return 1;
 }
 
