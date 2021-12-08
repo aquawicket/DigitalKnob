@@ -60,12 +60,7 @@ if(ANDROID)
 endif()
 
 ### VERSION ###
-#if(ANDROID)
-#	DKSET(SDL2_VERSION 2.0.16)
-#else()
-	DKSET(SDL2_VERSION 2.0.18)
-#endif()
-
+DKSET(SDL2_VERSION 2.0.18)
 DKSET(SDL2_NAME SDL2-${SDL2_VERSION})
 DKSET(SDL2_DL https://www.libsdl.org/release/${SDL2_NAME}.zip)
 DKSET(SDL2 ${3RDPARTY}/${SDL2_NAME})
@@ -75,14 +70,6 @@ DKSET(SDL2 ${3RDPARTY}/${SDL2_NAME})
 DKINSTALL(${SDL2_DL} sdl2 ${SDL2})
 
 
-### PATCH ###
-if(ANDROID)
-# https://discourse.libsdl.org/t/android-error-libsdl2-so-failed-to-load/25680/5
-#dkFileReplace(${SDL2}/CMakeLists.txt "add_library(hidapi SHARED" "add_library(hidapi STATIC")
-#dkFileReplace(${SDL2}/include/SDL_config_android.h "#define SDL_JOYSTICK_HIDAPI     1" "#undef SDL_JOYSTICK_HIDAPI")
-endif()
-
-
 ### DKPLUGINS LINK ###
 DKINCLUDE(${SDL2}/include)
 ANDROID_INCLUDE(${ANDROIDNDK}/sources/android/cpufeatures)
@@ -90,17 +77,8 @@ ANDROID_INCLUDE(${SDL2}/src)
 RASPBERRY_INCLUDE(/opt/vc/lib)
 #LINUX_INCLUDE(/opt/local/include)
 #LINUX_INCLUDE(/opt/local/lib)
-#if(LINUX)
 LINUX_INCLUDE(${SDL2}/${OS}/${RELEASE_DIR}/include)
-#	find_package(OpenGL REQUIRED)
-#	include_directories(${OpenGL_INCLUDE_DIRS})
-#	link_directories(${OpenGL_LIBRARY_DIRS})
-#	add_definitions(${OpenGL_DEFINITIONS})
-#	if(NOT OPENGL_FOUND)
-#   	message(FATAL_ERROR "OPENGL not found!")
-#	endif()
-#	LINUX_LIB(${OPENGL_LIBRARIES})
-#endif()
+
 
 WIN_DEBUG_LIB(${SDL2}/${OS}/${DEBUG_DIR}/SDL2d.lib)
 WIN_RELEASE_LIB(${SDL2}/${OS}/${RELEASE_DIR}/SDL2.lib)
@@ -183,7 +161,6 @@ WIN_VS(${SDL2_NAME} SDL2.sln SDL2main)
 
 
 MAC_PATH(${SDL2}/${OS})
-#MAC_COMMAND(${DKCMAKE_MAC64} -DSDL_SHARED=OFF -DVIDEO_OPENGLES=OFF -DVIDEO_OPENGL=ON -DVIDEO_METAL=ON -DHAVE_BUILTIN_ICONV=0 -DHAVE_LIBICONV=0 ${ICONV_APPLE} ${SDL2})  #2.0.16
 MAC_COMMAND(${DKCMAKE_MAC64} -DSDL_SHARED=OFF -DSDL_OPENGL=ON -DSDL_METAL=ON -DHAVE_BUILTIN_ICONV=0 -DHAVE_LIBICONV=0 ${ICONV_APPLE} ${SDL2})
 MAC_XCODE(${SDL2_NAME} SDL2-static)
 
@@ -220,4 +197,3 @@ ANDROID_PATH(${SDL2}/${OS})
 ANDROID32_COMMAND(${DKCMAKE_ANDROID32} -DLIBTYPE=STATIC -DSDL_SHARED=OFF ${SDL2})
 ANDROID64_COMMAND(${DKCMAKE_ANDROID64} -DLIBTYPE=STATIC -DSDL_SHARED=OFF ${SDL2})
 ANDROID_VS(${SDL2_NAME} SDL2.sln SDL2-static)
-#ANDROID_VS(${SDL2_NAME} SDL2.sln SDL2main)
