@@ -13,24 +13,22 @@ echo "ostype =   $OSTYPE"
 echo "machtype = $MACHTYPE"
 
 
-
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
 	DIGITALKNOB="/home/$USER/digitalknob"
-	DKPATH="$DIGITALKNOB/DK"
 elif [[ "$OSTYPE" == "darwin"* ]]; then
 	DIGITALKNOB="/Users/$USER/digitalknob"
-	DKPATH="$DIGITALKNOB/DK"
 elif [[ "$OSTYPE" == "cygwin" ]]; then
-	echo "TODO: DIGITALKNOB NOT SET"
+	DIGITALKNOB="C:/Users/$USERNAME/digitalknob"
 elif [[ "$OSTYPE" == "msys" ]]; then
-	echo "TODO: DIGITALKNOB NOT SET"
-elif [[ "$OSTYPE" == "win32" ]]; then
-	echo "TODO: DIGITALKNOB NOT SET" #I'm not sure this can happen
+	DIGITALKNOB="C:/Users/$USERNAME/digitalknob"
+elif [[ "$OSTYPE" == "win32" ]]; then #I'm not sure this can happen
+	DIGITALKNOB="C:/Users/$USERNAME/digitalknob" 
 elif [[ "$OSTYPE" == "freebsd"* ]]; then
 	echo "TODO: DIGITALKNOB NOT SET"
 else
     echo "UNKNOWN OS TYPE ($OSTYPE)"
 fi
+DKPATH="$DIGITALKNOB/DK"
 
 sudo echo
 
