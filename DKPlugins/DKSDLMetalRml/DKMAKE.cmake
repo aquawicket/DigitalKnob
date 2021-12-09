@@ -1,3 +1,7 @@
+if(NOT USE_metal)
+	return()
+endif()
+
 DKDEPEND(DKAssets)
 DKDEPEND(DKSDLMetalWindow)
 DKDEPEND(DKRml)
