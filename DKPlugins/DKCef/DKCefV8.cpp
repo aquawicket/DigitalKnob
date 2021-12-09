@@ -125,7 +125,7 @@ bool DKCefV8::_SetLog(CefArgs args, CefReturn retval){
 	DKDEBUGFUNC(args, retval);
 	int lvl = args->GetInt(0);
 	DKString string = args->GetString(1);
-	SetLog(lvl, string);
+	DKLog::SetLog(lvl, string);
 	return true;
 }
 
@@ -192,14 +192,22 @@ bool DKCefV8::Execute(CefArgs args, CefReturn retval){
 	DKString mode = "r"; //default
 	if (args->GetType(1))
 		mode = args->GetString(1);
-	DKString result;
-	if (!DKUtil::Execute(command, mode, result))
+	DKString stdouterr;
+	int rtncode;
+	if (!DKUtil::Execute(command, mode, stdouterr, rtncode))
 		return DKERROR("DKUtil::Execute() failed");
-	if (result.empty())
-		retval->SetNull(0);
-	else
-		if(!retval->SetString(0, result))
-			return false;
+	if (rtncode == 0) {
+		if (!retval->SetString(0, stdouterr))
+			return DKERROR("SetString failed");
+	}
+	else {
+		// jsonRetrun = "{'rtncode':0, 'stdouterr':'the stdouterr string'}"
+		DKString jsonReturn = "{'rtncode':" + toString(rtncode) + ",'stdouterr':" + stdouterr + "}";
+		if (!retval->SetString(0, jsonReturn))
+			return DKERROR("SetString failed");
+		//DKERROR(jsonReturn + "\n");
+		//DKERROR("CPP_DK_EXECUTE() now returns json on rtncode error. Adjust your return variable accordingly\n");
+	}
 	return true;
 }
 
