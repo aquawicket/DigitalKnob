@@ -35,6 +35,7 @@ endif()
 if(RASPBERRY)
 	DKDEPEND(mesa-common-dev)
 	DKDEPEND(libgl1-mesa-dev)
+	DKDEPEND(libx11-dev)
 	DKDEPEND(libxrandr-dev)
 	DKDEPEND(libasound2-dev) ##TODO: Move to DKAudio
 	DKDEPEND(libxtst-dev)
