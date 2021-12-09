@@ -192,7 +192,7 @@ if(NOT LINUX) # Disabled NON Linux targets
 endif()
 if(LINUX) # Disabled for Linux targets
 	DKDISABLE(android-build-tools)
-	DKDISABLE(build-essential)
+	#DKDISABLE(build-essential)
 	DKDISABLE(boxer)
 	DKDISABLE(DKHook) #NOTE: this has linux functions too
 	DKDISABLE(DKOcr)
