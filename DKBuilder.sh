@@ -2,7 +2,6 @@
 
 if [ -e /proc/device-tree/model ]; then
 MODEL=$(tr -d '\0' </proc/device-tree/model)
-echo "model = $MODEL"
 fi
 if [[ "$MODEL" == "Raspberry"* ]]; then
 	echo "The Host is a Raspberry Pi"
