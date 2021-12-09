@@ -1,9 +1,13 @@
 #!/bin/bash
+MODEL=$( cat /proc/device-tree/model )
+echo "model = $MODEL"
 
 echo "hostname = $HOSTNAME"
 echo "hosttype = $HOSTTYPE"
-echo "ostype = $OSTYPE"
+echo "ostype =   $OSTYPE"
 echo "machtype = $MACHTYPE"
+
+
 
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
 	DIGITALKNOB="/home/$USER/digitalknob"
