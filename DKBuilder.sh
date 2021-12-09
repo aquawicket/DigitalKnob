@@ -1,5 +1,5 @@
 #!/bin/bash
-MODEL=$( cat /proc/device-tree/model )
+MODEL=$(tr -d '\0' </proc/device-tree/model)
 echo "model = $MODEL"
 
 echo "hostname = $HOSTNAME"
