@@ -1,14 +1,48 @@
-### MASTER CMakeLists.txt FILE ###
+### CMakeLists.txt for DKCMake ###
 ###
-### This will be the ONLY CMakeLists.txt file in DigitalKnob
-### All Apps will be build from here.
-### The required Tools, libraries and plugins will optionaly be build from here. 
+### 	source_path = thisDirectory
+###      build_path = AppDirectory/Platform+Architecture/BuildType
 ###
-### TODO
+###
+### *** DKCMake ***
+### This is the main CMakeLists.txt file for all projects within the code base.
+### All Apps, Tools, 3rd party libraries, plugins and executables  will be build from here.
+### All dependencies will be downloaded, acuired and built for the project as required. 
+### All DKPlugins and DKApp executables will be included into the Generated solution,
+### while any 3rd party libraries will be built prior and referenced externally to the project solution.
+###
+### *** DKBuilder ***
+### A text menu based build app called "DKBuilder" exists to simplify the build process for all DK projects.
+### And For convienience, there is also a build script provided, DKBuilder.sh(unix) or DKBuilder.cmd(windows), that can 
+### genrate and build any of the initial apps included in the DKApps directory, including the DKBuilder app itself.
+### This is the method that is encourcaged for getting started on generating and compiling DigitalKnob applications.
+###
+### *** building from the command line **
+### DKCmake works a bit differenct than traditional CMake in that this CMakeFile.txt location is always used as the source directory.
+### The app, platform and architecture are chosen by where the build directory is set to. For examples: say we want to build an app
+### in the DKApps directory called "MyApp" for linux x32_86 Debug.  The cmake source directory will be set here, /Users/username/digitalknob/DK ,
+### and the build directy will be set to /Users/username/digitalknob/DK/DKApps/MyApp/linux64/Debug. The set build directoy tells DKCMake everything 
+### it needs to know to begine to process, acuire all dependencies and build the project. 
+###
+### Example 2:  cmake -G "Visual Studio 17 2022" -A x64 -B C:/Users/username/digitalknob/DK/DKApps/DKBuilder/win64 -S C:/Users/username/digitalknob/DK
+###
+### Example 3: 
+### 	cd /Users/username/digitalknob/DK/DKApps/DKTestAll/linux64/Release
+###     cmake -G "Unix Makefiles" /Users/username/digitalknob/DK
+###
+###
+### TODO: DKCMake options and variables 
 ### Build App - just the app (do not delete cmake files, do not do anything with dependencies)
 ### Rebuild App - the app (erase the app's cmake, and rebuild, but don't do anything with dependencies)
 ### Build All - (don't erase cmake files, but build the app and it's dependencies)
 ### Rebeuild All - (erase all cmake files, and build the app and it's dependencies)
+###
+### Note: The current default setting is RebuildAll except that it does not erase 3rdParty buuilds. It will rebuild all DKPlugins though.
+###
+### TODO: Add a cmake input variable called "TargetName", allowing us to build a specific Library or Plugin. This should also build 
+### all of dependencies for that target. Good for quick testing of specific libraries, plugins or executables.
+
+
 if(DKCMAKELIST_INCLUDED)
   return()
 endif(DKCMAKELIST_INCLUDED)
