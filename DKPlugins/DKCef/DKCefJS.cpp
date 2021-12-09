@@ -1,4 +1,4 @@
-#ifdef USE_DKDuktape 
+#ifdef HAVE_DKDuktape 
 #include "DKCef/DKCef.h"
 #include "DKCef/DKCefJS.h"
 
@@ -243,4 +243,4 @@ int DKCefJS::ViewPageSource(duk_context* ctx){
 	return 1;
 }
 
-#endif //USE_DKDuktape
+#endif //HAVE_DKDuktape

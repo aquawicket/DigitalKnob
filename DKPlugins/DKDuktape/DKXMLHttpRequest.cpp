@@ -1,4 +1,4 @@
-#ifdef USE_DKDuktape 
+#ifdef HAVE_DKDuktape 
 #include "DK/DKApp.h"
 #include "DKDuktape/DKXMLHttpRequest.h"
 #include "DK/DKFile.h"
@@ -34,4 +34,4 @@ int DKXMLHttpRequest::send(duk_context* ctx){
 	return true;
 }
 
-#endif //USE_DKDuktape
+#endif //HAVE_DKDuktape

@@ -1,4 +1,4 @@
-#ifdef USE_DKCef
+#ifdef HAVE_DKCef
 #include "DKThread.h"
 #include "DKThreadV8.h"
 
@@ -61,4 +61,4 @@ void DKThreadV8::QueueItem()
 	DKUtil::Sleep(500); //Bad!  FIXME
 }
 
-#endif //USE_DKCef
+#endif //HAVE_DKCef

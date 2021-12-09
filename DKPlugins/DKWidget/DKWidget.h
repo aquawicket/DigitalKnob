@@ -1,4 +1,4 @@
-#ifdef USE_DKRocket
+#ifdef HAVE_DKRocket
 #pragma once
 #ifndef DKWidget_H
 #define DKWidget_H
@@ -163,4 +163,4 @@ public:
 REGISTER_OBJECT(DKWidget, false)
 
 #endif //DKWidget_H
-#endif //USE_DKRocket
+#endif //HAVE_DKRocket

@@ -61,7 +61,7 @@ public class DK extends Activity
 					@Override
 					public void run(){
 						//TODO: maybe we can check if the plugins is available - DKAvailable(data)
-						//if(USE_DKWebview){
+						//if(HAVE_DKWebview){
 							//OpenActivity("WebviewActivity");
 						//}
 					}

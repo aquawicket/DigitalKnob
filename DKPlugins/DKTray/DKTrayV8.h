@@ -1,4 +1,4 @@
-#ifdef USE_DKCef
+#ifdef HAVE_DKCef
 #pragma once
 #ifndef DKTrayV8_H
 #define DKTrayV8_H
@@ -22,4 +22,4 @@ public:
 REGISTER_OBJECT(DKTrayV8, false);
 
 #endif //DKTrayV8_H
-#endif //USE_DKCef
+#endif //HAVE_DKCef

@@ -1,4 +1,4 @@
-#ifdef USE_DKDuktape 
+#ifdef HAVE_DKDuktape 
 #pragma once
 #ifndef DKNavigator_H
 #define DKNavigator_H
@@ -20,4 +20,4 @@ public:
 REGISTER_OBJECT(DKNavigator, true)
 
 #endif //DKNavigator_H
-#endif //USE_DKDuktape
+#endif //HAVE_DKDuktape

@@ -12,10 +12,10 @@ DKString DKTray::icon;
 bool DKTray::Init()
 {
 	DKDEBUGFUNC();
-#ifdef USE_DKDuktape
+#ifdef HAVE_DKDuktape
 	DKClass::DKCreate("DKTrayJS");
 #endif
-#ifdef USE_DKCef
+#ifdef HAVE_DKCef
 	DKClass::DKCreate("DKTrayV8");
 #endif
 #ifdef WIN32

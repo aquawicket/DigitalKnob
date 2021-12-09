@@ -1,4 +1,4 @@
-#ifdef USE_DKCef
+#ifdef HAVE_DKCef
 #include "DK/DKApp.h"
 #include "DKWebSockets/DKWebSockets.h"
 #include "DKWebSockets/DKWebSocketsV8.h"
@@ -77,4 +77,4 @@ bool DKWebSocketsV8::MessageToServer(CefArgs args, CefReturn retval)
 }
 
 
-#endif //USE_DKCef
+#endif //HAVE_DKCef

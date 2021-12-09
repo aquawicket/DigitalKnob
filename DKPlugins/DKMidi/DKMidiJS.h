@@ -1,4 +1,4 @@
-#ifdef USE_DKDuktape 
+#ifdef HAVE_DKDuktape 
 #pragma once
 #ifndef DKMidiJS_H
 #define DKMidiJS_H
@@ -21,4 +21,4 @@ public:
 REGISTER_OBJECT(DKMidiJS, true)
 
 #endif //DKMidiJS_H
-#endif //USE_DKDuktape
+#endif //HAVE_DKDuktape

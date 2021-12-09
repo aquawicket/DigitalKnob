@@ -1,6 +1,6 @@
-#ifdef USE_DKMySql
-#ifdef USE_DKRocket
-#ifdef USE_DKDuktape 
+#ifdef HAVE_DKMySql
+#ifdef HAVE_DKRocket
+#ifdef HAVE_DKDuktape 
 #pragma once
 #ifndef DKWidgetMySqlJS_H
 #define DKWidgetMySqlJS_H
@@ -30,6 +30,6 @@ public:
 REGISTER_OBJECT(DKWidgetMySqlJS, true)
 
 #endif //DKWidgetMySqlJS_H
-#endif //USE_DKDuktape
-#endif //USE_DKRocket
-#endif //USE_DKMySql
+#endif //HAVE_DKDuktape
+#endif //HAVE_DKRocket
+#endif //HAVE_DKMySql

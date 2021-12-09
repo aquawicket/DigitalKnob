@@ -225,8 +225,8 @@ endif()
 # Fix for PThread library not in path
 set(CMAKE_THREAD_LIBS_INIT "-lpthread")
 set(CMAKE_HAVE_THREADS_LIBRARY 1)
-set(CMAKE_USE_WIN32_THREADS_INIT 0)
-set(CMAKE_USE_PTHREADS_INIT 1)
+set(CMAKE_HAVE_WIN32_THREADS_INIT 0)
+set(CMAKE_HAVE_PTHREADS_INIT 1)
 
 # Specify minimum version of deployment target.
 if(NOT DEFINED DEPLOYMENT_TARGET)

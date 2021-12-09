@@ -1,4 +1,4 @@
-#ifdef USE_DKDuktape 
+#ifdef HAVE_DKDuktape 
 #include "DK/DKApp.h"
 #include "DKDuktape/DKConsole.h"
 
@@ -161,4 +161,4 @@ int DKConsole::warn(duk_context* ctx){
 }
 
 
-#endif //USE_DKDuktape
+#endif //HAVE_DKDuktape

@@ -529,7 +529,7 @@ endif()
 
 ## NOTE: These defines should be done as per needed in DKMAKE.cmake files
 if(${DKCEF} STREQUAL "ON")
-	add_definitions(-DUSE_DKCef)
+	add_definitions(-DHAVE_DKCef)
 endif()
 
 

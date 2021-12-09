@@ -1,4 +1,4 @@
-#ifdef USE_DKDuktape 
+#ifdef HAVE_DKDuktape 
 #pragma once
 #ifndef DKAudioJS_H
 #define DKAudioJS_H
@@ -26,4 +26,4 @@ public:
 REGISTER_OBJECT(DKAudioJS, true)
 
 #endif //DKAudioJS_H
-#endif //USE_DKDuktape
+#endif //HAVE_DKDuktape

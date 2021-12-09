@@ -1,4 +1,4 @@
-#ifdef USE_DKCef
+#ifdef HAVE_DKCef
 #pragma once
 #ifndef DKAssetsV8_H
 #define DKAssetsV8_H
@@ -15,4 +15,4 @@ public:
 
 REGISTER_OBJECT(DKAssetsV8, false);
 #endif //DKAssetsV8_H
-#endif //USE_DKCef
+#endif //HAVE_DKCef

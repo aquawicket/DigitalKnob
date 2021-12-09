@@ -1,4 +1,4 @@
-#ifdef USE_DKDuktape 
+#ifdef HAVE_DKDuktape 
 #include "DKTray/DKTray.h"
 #include "DKTray/DKTrayJS.h"
 
@@ -64,4 +64,4 @@ int DKTrayJS::ShowBalloon(duk_context* ctx)
 }
 
 
-#endif //USE_DKDuktape
+#endif //HAVE_DKDuktape

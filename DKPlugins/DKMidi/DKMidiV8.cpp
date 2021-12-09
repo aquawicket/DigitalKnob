@@ -1,4 +1,4 @@
-#ifdef USE_DKCef
+#ifdef HAVE_DKCef
 #include "DK/DKApp.h"
 #include "DKMidi/DKMidi.h"
 #include "DKMidi/DKMidiV8.h"
@@ -81,4 +81,4 @@ bool DKMidiV8::ToggleMidiOutput(CefArgs args, CefReturn retval)
 	return true;
 }
 
-#endif //USE_DKCef
+#endif //HAVE_DKCef

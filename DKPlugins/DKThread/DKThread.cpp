@@ -4,10 +4,10 @@
 /////////////////////////
 bool DKThreadPool::Init()
 {
-#ifdef USE_DKDuktape 
+#ifdef HAVE_DKDuktape 
 	DKClass::DKCreate("DKThreadJS");
 #endif
-#ifdef USE_DKCef
+#ifdef HAVE_DKCef
 	DKClass::DKCreate("DKThreadV8");
 #endif
 	DKClass::DKCreate("DKThread/DKThreadPoolDlg.js");

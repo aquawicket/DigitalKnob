@@ -1,4 +1,4 @@
-#ifdef USE_DKDuktape 
+#ifdef HAVE_DKDuktape 
 #include "DK/DKApp.h"
 #include "DK/DKFile.h"
 #include "DKFile/DKFileJS.h"
@@ -324,4 +324,4 @@ int DKFileJS::VerifyPath(duk_context* ctx){
 	return true;
 }
 
-#endif //USE_DKDuktape
+#endif //HAVE_DKDuktape

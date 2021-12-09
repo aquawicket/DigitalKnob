@@ -1,4 +1,4 @@
-#ifdef USE_DKCef
+#ifdef HAVE_DKCef
 #pragma once
 #ifndef DKThreadV8_H
 #define DKThreadV8_H
@@ -20,4 +20,4 @@ public:
 REGISTER_OBJECT(DKThreadV8, true);
 
 #endif //DKThreadV8_H
-#endif //USE_DKCef
+#endif //HAVE_DKCef

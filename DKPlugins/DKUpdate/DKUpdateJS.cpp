@@ -1,4 +1,4 @@
-#ifdef USE_DKDuktape
+#ifdef HAVE_DKDuktape
 #include "DKUpdate/DKUpdate.h"
 #include "DKUpdate/DKUpdateJS.h"
 
@@ -91,4 +91,4 @@ int DKUpdateJS::UpdatePlugin(duk_context* ctx)
 	return 1;
 }
 
-#endif //USE_DKDuktape
+#endif //HAVE_DKDuktape

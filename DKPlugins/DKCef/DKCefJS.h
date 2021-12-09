@@ -1,4 +1,4 @@
-#ifdef USE_DKDuktape 
+#ifdef HAVE_DKDuktape 
 #pragma once
 #ifndef DKCefJS_H
 #define DKCefJS_H
@@ -42,4 +42,4 @@ public:
 
 REGISTER_OBJECT(DKCefJS, true)
 #endif //DKCefJS_H
-#endif //USE_DKDuktape
+#endif //HAVE_DKDuktape

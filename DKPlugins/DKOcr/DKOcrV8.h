@@ -1,4 +1,4 @@
-#ifdef USE_DKCef
+#ifdef HAVE_DKCef
 #pragma once
 #ifndef DKOcrV8_H
 #define DKOcrV8_H
@@ -18,4 +18,4 @@ public:
 REGISTER_OBJECT(DKOcrV8, false);
 
 #endif //DKOcrV8_H
-#endif //USE_DKCef
+#endif //HAVE_DKCef

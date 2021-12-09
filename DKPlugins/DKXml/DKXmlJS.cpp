@@ -1,4 +1,4 @@
-#ifdef USE_DKDuktape 
+#ifdef HAVE_DKDuktape 
 #include "DKXmlJS.h"
 #include "DKXml.h"
 
@@ -25,4 +25,4 @@ int DKXmlJS::GetXmlNode(duk_context* ctx)
 	return 1;
 }
 
-#endif //USE_DKDuktape
+#endif //HAVE_DKDuktape

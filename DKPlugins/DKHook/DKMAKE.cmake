@@ -1,4 +1,4 @@
-IF(USE_DKCef)
+IF(HAVE_DKCef)
 	DKDEPEND(DKCef)
 ENDIF()
 generateCmake(DKHook)

@@ -1,6 +1,6 @@
 //https://stackoverflow.com/questions/63166/how-to-determine-cpu-and-memory-consumption-from-inside-a-process
 
-//#ifdef USE_DKCef
+//#ifdef HAVE_DKCef
 #include "DKDuktape/DKDuktape.h"
 #include "DKCef/DKCefV8.h"
 
@@ -807,4 +807,4 @@ bool DKCefV8::ViewPageSource(CefArgs args, CefReturn retval)
 	return true;
 }
 
-//#endif //USE_DKCef
+//#endif //HAVE_DKCef

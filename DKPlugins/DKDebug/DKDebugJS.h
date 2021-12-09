@@ -1,4 +1,4 @@
-#ifdef USE_DKDuktape 
+#ifdef HAVE_DKDuktape 
 #pragma once
 #ifndef DKDebugJS_H
 #define DKDebugJS_H
@@ -15,4 +15,4 @@ public:
 REGISTER_OBJECT(DKDebugJS, true)
 
 #endif //DKDebugJS_H
-#endif //USE_DKDuktape
+#endif //HAVE_DKDuktape

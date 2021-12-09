@@ -1,4 +1,4 @@
-#ifdef USE_DKDuktape 
+#ifdef HAVE_DKDuktape 
 #include "DKScreenRecorder.h"
 #include "DKScreenRecorderJS.h"
 
@@ -29,4 +29,4 @@ int DKScreenRecorderJS::Stop(duk_context* ctx)
 	return 1;
 }
 
-#endif //USE_DKDuktape
+#endif //HAVE_DKDuktape

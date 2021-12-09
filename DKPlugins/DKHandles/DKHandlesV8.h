@@ -1,4 +1,4 @@
-#ifdef USE_DKCef
+#ifdef HAVE_DKCef
 #pragma once
 #ifndef DKHandlesV8_H
 #define DKHandlesV8_H
@@ -42,4 +42,4 @@ public:
 REGISTER_OBJECT(DKHandlesV8, false);
 
 #endif //DKHandlesV8_H
-#endif //USE_DKCef
+#endif //HAVE_DKCef

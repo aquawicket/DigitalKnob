@@ -1,4 +1,4 @@
-#ifdef USE_DKDuktape 
+#ifdef HAVE_DKDuktape 
 #include "DKArchive/DKArchive.h"
 #include "DKArchive/DKArchiveJS.h"
 
@@ -24,4 +24,4 @@ int DKArchiveJS::Extract(duk_context* ctx){
 	return true;
 }
 
-#endif //USE_DKDuktape
+#endif //HAVE_DKDuktape

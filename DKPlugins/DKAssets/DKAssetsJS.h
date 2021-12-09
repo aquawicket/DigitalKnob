@@ -1,4 +1,4 @@
-#ifdef USE_DKDuktape
+#ifdef HAVE_DKDuktape
 #pragma once
 #ifndef DKAssetsJS_H
 #define DKAssetsJS_H
@@ -20,4 +20,4 @@ public:
 REGISTER_OBJECT(DKAssetsJS, true)
 
 #endif //DKAssetsJS_H
-#endif //USE_DKDuktape
+#endif //HAVE_DKDuktape

@@ -3,7 +3,7 @@
 #define DKDebug_H
 #include "DK/DK.h"
 
-//#ifdef USE_DKCurl
+//#ifdef HAVE_DKCurl
 //	#include "DKCurl/DKCurl.h"
 //#endif
 

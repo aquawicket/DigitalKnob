@@ -1,4 +1,4 @@
-#ifdef USE_DKDuktape 
+#ifdef HAVE_DKDuktape 
 #pragma once
 #ifndef DKOcrJS_H
 #define DKOcrJS_H
@@ -18,4 +18,4 @@ public:
 REGISTER_OBJECT(DKOcrJS, true)
 
 #endif //DKOcrJS_H
-#endif //USE_DKDuktape
+#endif //HAVE_DKDuktape

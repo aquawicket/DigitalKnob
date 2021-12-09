@@ -1,4 +1,4 @@
-IF(NOT USE_DKCef)
+IF(NOT HAVE_DKCef)
 	RETURN()
 ENDIF()
 

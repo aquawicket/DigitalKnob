@@ -1,4 +1,4 @@
-#ifdef USE_DKCef
+#ifdef HAVE_DKCef
 #include "DKHandlesV8.h"
 #include "DKHandles.h"
 
@@ -414,4 +414,4 @@ bool DKHandlesV8::WindowExists(CefArgs args, CefReturn retval)
 	return true;
 }
 
-#endif //USE_DKCef
+#endif //HAVE_DKCef

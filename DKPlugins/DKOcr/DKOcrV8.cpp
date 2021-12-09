@@ -1,4 +1,4 @@
-#ifdef USE_DKCef
+#ifdef HAVE_DKCef
 #include "DK/DKApp.h"
 #include "DKOcr/DKOcr.h"
 #include "DKOcr/DKOcrV8.h"
@@ -29,4 +29,4 @@ bool DKOcrV8::ImageToText(CefArgs args, CefReturn retval)
 	return true;
 }
 
-#endif //USE_DKCef
+#endif //HAVE_DKCef

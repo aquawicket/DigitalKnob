@@ -1,4 +1,4 @@
-#ifdef USE_DKDuktape 
+#ifdef HAVE_DKDuktape 
 #include "DKDebug/DKDebug.h"
 #include "DKDebug/DKDebugJS.h"
 
@@ -25,4 +25,4 @@ int DKDebugJS::ShowStackTrace(duk_context* ctx){
 	return 1;
 }
 
-#endif //USE_DKDuktape
+#endif //HAVE_DKDuktape

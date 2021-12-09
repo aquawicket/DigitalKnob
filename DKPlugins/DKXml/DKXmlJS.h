@@ -1,4 +1,4 @@
-#ifdef USE_DKDuktape 
+#ifdef HAVE_DKDuktape 
 #pragma once
 #ifndef DKXmlJS_H
 #define DKXmlJS_H
@@ -16,4 +16,4 @@ public:
 
 
 #endif //DKXmlJS_H
-#endif //USE_DKDuktape
+#endif //HAVE_DKDuktape

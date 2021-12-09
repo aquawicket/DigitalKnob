@@ -1,9 +1,9 @@
 #DKDEPEND(boost Boost_Thread)
 DKDEPEND(threadpool)
-IF(USE_DKDuktape)
+IF(HAVE_DKDuktape)
 	DKDEPEND(DKDuktape)
 ENDIF()
-IF(USE_DKCef)
+IF(HAVE_DKCef)
 	DKDEPEND(DKCef)
 ENDIF()
 

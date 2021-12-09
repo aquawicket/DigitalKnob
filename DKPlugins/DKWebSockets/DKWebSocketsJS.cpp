@@ -1,4 +1,4 @@
-#ifdef USE_DKDuktape 
+#ifdef HAVE_DKDuktape 
 #include "DKWebSockets.h"
 #include "DKWebSocketsJS.h"
 
@@ -69,4 +69,4 @@ int DKWebSocketsJS::MessageToServer(duk_context* ctx)
 	return 1;
 }
 
-#endif //USE_DKDuktape
+#endif //HAVE_DKDuktape

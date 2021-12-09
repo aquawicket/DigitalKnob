@@ -1,7 +1,7 @@
-#ifdef USE_DKDuktape 
+#ifdef HAVE_DKDuktape 
 #include "DKCurl/DKCurl.h"
 #include "DKCurl/DKCurlJS.h"
-//#ifdef USE_DKThread
+//#ifdef HAVE_DKThread
 //	#include "DKThread/DKThread.h"
 //#endif
 
@@ -113,4 +113,4 @@ int DKCurlJS::HttpFileExists(duk_context* ctx)
 }
 
 
-#endif //USE_DKDuktape
+#endif //HAVE_DKDuktape

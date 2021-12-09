@@ -1,5 +1,5 @@
-#ifdef USE_DKRocket
-#ifdef USE_DKDuktape 
+#ifdef HAVE_DKRocket
+#ifdef HAVE_DKDuktape 
 #pragma once
 #ifndef DKWidgetJS_H
 #define DKWidgetJS_H
@@ -87,5 +87,5 @@ public:
 REGISTER_OBJECT(DKWidgetJS, true)
 
 #endif //DKWidgetJS_H
-#endif //USE_DKDuktape
-#endif //USE_DKRocket
+#endif //HAVE_DKDuktape
+#endif //HAVE_DKRocket

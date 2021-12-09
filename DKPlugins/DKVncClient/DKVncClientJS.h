@@ -1,4 +1,4 @@
-#ifdef USE_DKDuktape 
+#ifdef HAVE_DKDuktape 
 #pragma once
 #ifndef DKVncClientJS_H
 #define DKVncClientJS_H
@@ -21,4 +21,4 @@ public:
 REGISTER_OBJECT(DKVncClientJS, true)
 
 #endif //DKVncClientJS_H
-#endif //USE_DKDuktape
+#endif //HAVE_DKDuktape

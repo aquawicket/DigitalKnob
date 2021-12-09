@@ -1,5 +1,5 @@
 #ifdef WIN32
-#ifdef USE_DKDuktape 
+#ifdef HAVE_DKDuktape 
 #include "DKHandles.h"
 #include "DKHandlesJS.h"
 
@@ -376,5 +376,5 @@ int DKHandlesJS::WindowExists(duk_context* ctx)
 	return 1;
 }
 
-#endif //USE_DKDuktape
+#endif //HAVE_DKDuktape
 #endif //WIN32

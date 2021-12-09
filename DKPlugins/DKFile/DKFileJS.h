@@ -1,4 +1,4 @@
-#ifdef USE_DKDuktape 
+#ifdef HAVE_DKDuktape 
 #pragma once
 #ifndef DKFileJS_H
 #define DKFileJS_H
@@ -41,4 +41,4 @@ public:
 
 REGISTER_OBJECT(DKFileJS, true)
 #endif //DKFileJS_H
-#endif //USE_DKDuktape
+#endif //HAVE_DKDuktape

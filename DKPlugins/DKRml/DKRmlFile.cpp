@@ -33,7 +33,7 @@ Rml::FileHandle DKRmlFile::Open(const Rml::String& path){
 		std::string::size_type found = filename.rfind("?");
 		if(found > 0)
 			filename = filename.substr(0,found);
-#ifdef USE_DKCurl
+#ifdef HAVE_DKCurl
 		DKCurl::Get()->Download(_url, DKFile::local_assets+"Cache/"+filename);
 		_url = DKFile::local_assets+"Cache/"+filename;
 #endif

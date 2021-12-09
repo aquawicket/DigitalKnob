@@ -1,4 +1,4 @@
-#ifdef USE_DKDuktape
+#ifdef HAVE_DKDuktape
 #include "DK/DKFile.h"
 #include "DKAssets/DKAssets.h"
 #include "DKAssets/DKAssetsJS.h"
@@ -37,4 +37,4 @@ int DKAssetsJS::Protocol(duk_context* ctx){
 	return 1;
 }
 
-#endif //USE_DKDuktape
+#endif //HAVE_DKDuktape

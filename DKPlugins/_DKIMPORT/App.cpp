@@ -1,4 +1,4 @@
-#ifdef USE_DK
+#ifdef HAVE_DK
 #include "DK/stdafx.h"
 #include "assets.h"
 #include "App.h"
@@ -12,4 +12,4 @@ bool App::Init()
 	return true;
 }
 
-#endif //USE_DK
+#endif //HAVE_DK

@@ -1,4 +1,4 @@
-#ifdef USE_DKCef
+#ifdef HAVE_DKCef
 #include "DK/DKApp.h"
 #include "DKTray/DKTray.h"
 #include "DKTray/DKTrayV8.h"
@@ -70,4 +70,4 @@ bool DKTrayV8::ShowBalloon(CefArgs args, CefReturn retval)
 	return true;
 }
 
-#endif //USE_DKCef
+#endif //HAVE_DKCef

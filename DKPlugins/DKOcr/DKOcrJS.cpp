@@ -1,4 +1,4 @@
-#ifdef USE_DKDuktape 
+#ifdef HAVE_DKDuktape 
 #include "DKOcrJS.h"
 #include "DKOcr.h"
 
@@ -22,4 +22,4 @@ int DKOcrJS::ImageToText(duk_context* ctx)
 	return 1;
 }
 
-#endif //USE_DKDuktape
+#endif //HAVE_DKDuktape

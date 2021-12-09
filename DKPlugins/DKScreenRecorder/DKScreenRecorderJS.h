@@ -1,4 +1,4 @@
-#ifdef USE_DKDuktape 
+#ifdef HAVE_DKDuktape 
 #pragma once
 #ifndef DKScreenRecorderJS_H
 #define DKScreenRecorderJS_H
@@ -18,4 +18,4 @@ public:
 REGISTER_OBJECT(DKScreenRecorderJS, true)
 
 #endif //DKScreenRecorderJS_H
-#endif //USE_DKDuktape
+#endif //HAVE_DKDuktape

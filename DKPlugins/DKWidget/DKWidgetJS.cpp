@@ -1,5 +1,5 @@
-#ifdef USE_DKRocket
-#ifdef USE_DKDuktape 
+#ifdef HAVE_DKRocket
+#ifdef HAVE_DKDuktape 
 
 #include "Controls/WidgetTextInput.h"
 #include "Controls/ElementTextSelection.h"
@@ -879,5 +879,5 @@ int DKWidgetJS::GetClientHeight(duk_context* ctx)
 	return 1;
 }
 
-#endif //USE_DKDuktape
-#endif //USE_DKRocket
+#endif //HAVE_DKDuktape
+#endif //HAVE_DKRocket

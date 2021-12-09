@@ -1,4 +1,4 @@
-#ifdef USE_DKDuktape 
+#ifdef HAVE_DKDuktape 
 #pragma once
 #ifndef DKMySqlJS_H
 #define DKMySqlJS_H
@@ -18,4 +18,4 @@ public:
 
 REGISTER_OBJECT(DKMySqlJS, true)
 #endif //DKMySqlJS_H
-#endif //USE_DKDuktape
+#endif //HAVE_DKDuktape

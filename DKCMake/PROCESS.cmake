@@ -277,7 +277,7 @@ if(PLUGINS_FILE)
 	file(WRITE ${DKPROJECT}/DKPlugins.h ${PLUGINS_FILE})
 endif()
 
-if(USE_DK)
+if(HAVE_DK)
 	message(STATUS "Copying DKPlugins/_DKIMPORT/ to App...")
 	DKCOPY(${DKPLUGINS}/_DKIMPORT/icons ${DKPROJECT}/icons FALSE) ## copy app default files recursivly without overwrite
 	DKCOPY(${DKPLUGINS}/_DKIMPORT/assets.h ${DKPROJECT}/assets.h FALSE) ## copy app default files recursivly without overwrite
@@ -340,7 +340,7 @@ if(WIN_32)
 		endif()
 	endif()
 	
-	if(USE_DK)
+	if(HAVE_DK)
 		## ASSETS ##
 		# Backup files and folders excluded from the package
 		DKCOPY(${DKPROJECT}/assets/USER ${DKPROJECT}/Backup/USER TRUE)
@@ -700,7 +700,7 @@ if(IOS AND NOT IOSSIM)
 	DKREMOVE(${DKPROJECT}/Backup)
 
 	#GET_TARGET_PROPERTY(MyExecutable_PATH ${APP_NAME} LOCATION)
-	if(USE_DK)
+	if(HAVE_DK)
 		list(APPEND App_SRC ${DKPLUGINS}/DK/DKiPhone.mm)
 	endif()
 	add_executable(${APP_NAME} MACOSX_BUNDLE ${App_SRC})
@@ -770,7 +770,7 @@ if(IOSSIM)
 	DKREMOVE(${DKPROJECT}/Backup)
 	
 	#GET_TARGET_PROPERTY(MyExecutable_PATH ${APP_NAME} LOCATION)
-	if(USE_DK)
+	if(HAVE_DK)
 		list(APPEND App_SRC ${DKPLUGINS}/DK/DKiPhone.mm)
 	endif()
 	add_executable(${APP_NAME} MACOSX_BUNDLE ${App_SRC})
@@ -991,7 +991,7 @@ if(ANDROID)
 	DKCOPY(${DKPROJECT}/icons/icon.png ${DKPROJECT}/${OS}/res/drawable/icon.png TRUE)
 	
 	#DKUPDATE_ANDROID_NAME(${APP_NAME})
-	#DKSET(CMAKE_CXX_FLAGS "-DDKAPP -DUSE_DK -frtti -fexceptions -std=c++1z")
+	#DKSET(CMAKE_CXX_FLAGS "-DDKAPP -DHAVE_DK -frtti -fexceptions -std=c++1z")
 	#DKSET(CMAKE_CXX_FLAGS_DEBUG "-DDEBUG -D_DEBUG -g2 -gdwarf-2 -O0")
 	#DKSET(CMAKE_CXX_FLAGS_RELEASE "-DNDEBUG -03")
 	#set(CMAKE_POSITION_INDEPENDENT_CODE TRUE)

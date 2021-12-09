@@ -1,4 +1,4 @@
-#ifdef USE_DKDuktape
+#ifdef HAVE_DKDuktape
 #include "DKMySql/DKMySql.h"
 #include "DKMySql/DKMySqlJS.h"
 
@@ -48,4 +48,4 @@ int DKMySqlJS::Query(duk_context* ctx)
 	return 1;
 }
 
-#endif //USE_DKDuktape
+#endif //HAVE_DKDuktape

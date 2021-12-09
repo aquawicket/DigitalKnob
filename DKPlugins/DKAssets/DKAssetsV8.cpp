@@ -1,4 +1,4 @@
-#ifdef USE_DKCef
+#ifdef HAVE_DKCef
 #include "DK/DKApp.h"
 #include "DK/DKFile.h"
 #include "DKAssets/DKAssetsV8.h"
@@ -20,4 +20,4 @@ bool DKAssetsV8::LocalAssets(CefArgs args, CefReturn retval){
 	return true;
 }
 
-#endif //USE_DKCef
+#endif //HAVE_DKCef

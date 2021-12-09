@@ -1,4 +1,4 @@
-#ifdef USE_DKDuktape 
+#ifdef HAVE_DKDuktape 
 #include "DKWindow.h"
 #include "DKWindowJS.h"
 
@@ -287,4 +287,4 @@ int DKWindowJS::Windowed(duk_context* ctx)
 	return 1;
 }
 
-#endif //USE_DKDuktape
+#endif //HAVE_DKDuktape

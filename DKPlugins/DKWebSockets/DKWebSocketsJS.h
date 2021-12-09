@@ -1,4 +1,4 @@
-#ifdef USE_DKDuktape 
+#ifdef HAVE_DKDuktape 
 #pragma once
 #ifndef DKWebSocketsJS_H
 #define DKWebSocketsJS_H
@@ -22,4 +22,4 @@ public:
 REGISTER_OBJECT(DKWebSocketsJS, true)
 
 #endif //DKWebSocketsJS_H
-#endif //USE_DKDuktape
+#endif //HAVE_DKDuktape

@@ -1,4 +1,4 @@
-#ifdef USE_DKCef
+#ifdef HAVE_DKCef
 #pragma once
 #ifndef DKCurlV8_H
 #define DKCurlV8_H
@@ -24,4 +24,4 @@ public:
 REGISTER_OBJECT(DKCurlV8, false);
 
 #endif //DKCurlV8_H
-#endif //USE_DKCef
+#endif //HAVE_DKCef

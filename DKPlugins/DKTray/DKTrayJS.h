@@ -1,4 +1,4 @@
-#ifdef USE_DKDuktape 
+#ifdef HAVE_DKDuktape 
 #pragma once
 #ifndef DKTrayJS_H
 #define DKTrayJS_H
@@ -29,4 +29,4 @@ public:
 REGISTER_OBJECT(DKTrayJS, true)
 
 #endif //DKTrayJS_H
-#endif //USE_DKDuktape
+#endif //HAVE_DKDuktape

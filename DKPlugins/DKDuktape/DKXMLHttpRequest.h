@@ -1,4 +1,4 @@
-#ifdef USE_DKDuktape 
+#ifdef HAVE_DKDuktape 
 #pragma once
 #ifndef DKXMLHttpRequest_H
 #define DKXMLHttpRequest_H
@@ -18,4 +18,4 @@ public:
 REGISTER_OBJECT(DKXMLHttpRequest, true)
 
 #endif //DKXMLHttpRequest_H
-#endif //USE_DKDuktape
+#endif //HAVE_DKDuktape

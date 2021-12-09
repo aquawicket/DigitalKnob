@@ -1,4 +1,4 @@
-#ifdef USE_DKDuktape 
+#ifdef HAVE_DKDuktape 
 #include "DK/DKApp.h"
 #include "DKDuktape/DKNavigator.h"
 
@@ -42,4 +42,4 @@ int DKNavigator::productSub(duk_context* ctx){
 }
 
 
-#endif //USE_DKDuktape
+#endif //HAVE_DKDuktape

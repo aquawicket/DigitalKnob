@@ -1,4 +1,4 @@
-#ifdef USE_DKCef
+#ifdef HAVE_DKCef
 #pragma once
 #ifndef DKDebugV8_H
 #define DKDebugV8_H
@@ -17,4 +17,4 @@ public:
 REGISTER_OBJECT(DKDebugV8, false);
 
 #endif //DKDebugV8_H
-#endif //USE_DKCef
+#endif //HAVE_DKCef

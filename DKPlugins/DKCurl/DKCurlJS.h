@@ -1,4 +1,4 @@
-#ifdef USE_DKDuktape 
+#ifdef HAVE_DKDuktape 
 #pragma once
 #ifndef DKCurlJS_H
 #define DKCurlJS_H
@@ -23,4 +23,4 @@ public:
 REGISTER_OBJECT(DKCurlJS, true)
 
 #endif //DKCurlJS_H
-#endif //USE_DKDuktape
+#endif //HAVE_DKDuktape

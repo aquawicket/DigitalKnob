@@ -2,7 +2,7 @@
 #define STD_BOOL_H
 
 #if !defined(MAC) && !defined(IOS)
-#if !defined(USE_DK) && !defined(OSG_LIBRARY_STATIC)
+#if !defined(HAVE_DK) && !defined(OSG_LIBRARY_STATIC)
 typedef int bool;
 #endif
 #endif

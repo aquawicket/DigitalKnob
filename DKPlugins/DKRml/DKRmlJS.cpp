@@ -1,4 +1,4 @@
-#ifdef USE_DKDuktape
+#ifdef HAVE_DKDuktape
 #include "DK/stdafx.h"
 #include "DKRml.h"
 #include "DKRmlJS.h"
@@ -47,4 +47,4 @@ int DKRmlJS::PostProcess(duk_context* ctx) {
 	return true;
 }
 
-#endif //USE_DKDuktape
+#endif //HAVE_DKDuktape

@@ -1,4 +1,4 @@
-#ifdef USE_DKDuktape 
+#ifdef HAVE_DKDuktape 
 #include "DKVncClientJS.h"
 #include "DKVncClient.h"
 
@@ -56,4 +56,4 @@ int DKVncClientJS::TestReturnString(duk_context* ctx)
 	return 1;
 }
 
-#endif //USE_DKDuktape
+#endif //HAVE_DKDuktape

@@ -1,4 +1,4 @@
-#ifdef USE_DKDuktape 
+#ifdef HAVE_DKDuktape 
 #pragma once
 #ifndef DKWindowJS_H
 #define DKWindowJS_H
@@ -53,4 +53,4 @@ public:
 REGISTER_OBJECT(DKWindowJS, true)
 
 #endif //DKWindowJS_H
-#endif //USE_DKDuktape
+#endif //HAVE_DKDuktape

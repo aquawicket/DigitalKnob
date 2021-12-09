@@ -1,4 +1,4 @@
-#ifdef USE_DKCef
+#ifdef HAVE_DKCef
 #include "DK/DKApp.h"
 #include "DKWindow/DKWindow.h"
 #include "DKWindow/DKWindowV8.h"
@@ -302,4 +302,4 @@ bool DKWindowV8::Windowed(CefArgs args, CefReturn retval)
 	return true;
 }
 
-#endif //USE_DKCef
+#endif //HAVE_DKCef

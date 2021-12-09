@@ -1,4 +1,4 @@
-#ifdef USE_DKDuktape 
+#ifdef HAVE_DKDuktape 
 #include "DKMidi.h"
 #include "DKMidiJS.h"
 
@@ -73,4 +73,4 @@ int DKMidiJS::ToggleMidiOutput(duk_context* ctx)
 	return 1;
 }
 
-#endif //USE_DKDuktape
+#endif //HAVE_DKDuktape

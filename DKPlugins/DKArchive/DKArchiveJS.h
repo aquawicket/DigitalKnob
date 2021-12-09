@@ -1,4 +1,4 @@
-#ifdef USE_DKDuktape 
+#ifdef HAVE_DKDuktape 
 #pragma once
 #ifndef DKArchiveJS_H
 #define DKArchiveJS_H
@@ -17,4 +17,4 @@ public:
 REGISTER_OBJECT(DKArchiveJS, true)
 
 #endif //DKArchiveJS_H
-#endif //USE_DKDuktape
+#endif //HAVE_DKDuktape

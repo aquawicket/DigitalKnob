@@ -1,6 +1,6 @@
 //https://developer.mozilla.org/en-US/docs/Web/API/Screen
 
-#ifdef USE_DKDuktape 
+#ifdef HAVE_DKDuktape 
 #include "DK/DKApp.h"
 #include "DKDuktape/DKScreen.h"
 
@@ -116,4 +116,4 @@ int DKScreen::unlockOrientation(duk_context* ctx){
 	return false;
 }
 
-#endif //USE_DKDuktape
+#endif //HAVE_DKDuktape

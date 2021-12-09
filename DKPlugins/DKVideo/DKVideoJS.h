@@ -1,4 +1,4 @@
-#ifdef USE_DKDuktape 
+#ifdef HAVE_DKDuktape 
 #pragma once
 #ifndef DKVideoJS_H
 #define DKVideoJS_H
@@ -17,4 +17,4 @@ public:
 REGISTER_OBJECT(DKVideoJS, true)
 
 #endif //DKVideoJS_H
-#endif //USE_DKDuktape
+#endif //HAVE_DKDuktape

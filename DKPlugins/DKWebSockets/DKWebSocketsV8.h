@@ -1,4 +1,4 @@
-#ifdef USE_DKCef
+#ifdef HAVE_DKCef
 #pragma once
 #ifndef DKWebSocketsV8_H
 #define DKWebSocketsV8_H
@@ -23,4 +23,4 @@ public:
 REGISTER_OBJECT(DKWebSocketsV8, false);
 
 #endif //DKWebSocketsV8_H
-#endif //USE_DKCef
+#endif //HAVE_DKCef

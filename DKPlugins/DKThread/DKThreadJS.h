@@ -1,4 +1,4 @@
-#ifdef USE_DKDuktape 
+#ifdef HAVE_DKDuktape 
 #pragma once
 #ifndef DKThreadJS_H
 #define DKThreadJS_H
@@ -20,4 +20,4 @@ public:
 REGISTER_OBJECT(DKThreadJS, true)
 
 #endif //DKDKThreadJS_H
-#endif //USE_DKThread
+#endif //HAVE_DKThread

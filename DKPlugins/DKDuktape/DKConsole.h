@@ -1,4 +1,4 @@
-#ifdef USE_DKDuktape 
+#ifdef HAVE_DKDuktape 
 #pragma once
 #ifndef DKConsole_H
 #define DKConsole_H
@@ -29,4 +29,4 @@ public:
 REGISTER_OBJECT(DKConsole, true)
 
 #endif //DKConsole_H
-#endif //USE_DKDuktape
+#endif //HAVE_DKDuktape

@@ -1,4 +1,4 @@
-#ifdef USE_DKRocket
+#ifdef HAVE_DKRocket
 #include "DK/stdafx.h"
 #include "Controls/ElementTextSelection.h"
 #include "Controls/WidgetTextInput.h"
@@ -2017,4 +2017,4 @@ bool DKWidget::BuildOptionsString(const DKString& id, DKString &options)
 }
 
 
-#endif //USE_DKRocket
+#endif //HAVE_DKRocket

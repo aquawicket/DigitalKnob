@@ -1,4 +1,4 @@
-#ifdef USE_DKCef
+#ifdef HAVE_DKCef
 #pragma once
 #ifndef DKWindowV8_H
 #define DKWindowV8_H
@@ -46,4 +46,4 @@ public:
 REGISTER_OBJECT(DKWindowV8, false);
 
 #endif //DKWindowV8_H
-#endif //USE_DKCef
+#endif //HAVE_DKCef

@@ -1,4 +1,4 @@
-#ifdef USE_DKDuktape
+#ifdef HAVE_DKDuktape
 #include "DKAudio.h"
 #include "DKAudioJS.h"
 
@@ -107,4 +107,4 @@ int DKAudioJS::UnMute(duk_context* ctx){
 	return true;
 }
 
-#endif //USE_DKDuktape
+#endif //HAVE_DKDuktape

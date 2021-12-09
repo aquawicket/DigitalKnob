@@ -1,4 +1,4 @@
-#ifdef USE_DKCef
+#ifdef HAVE_DKCef
 #pragma once
 #ifndef DKMidiV8_H
 #define DKMidiV8_H
@@ -22,4 +22,4 @@ public:
 REGISTER_OBJECT(DKMidiV8, false);
 
 #endif //DKMidiV8_H
-#endif //USE_DKCef
+#endif //HAVE_DKCef

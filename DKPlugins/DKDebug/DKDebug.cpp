@@ -4,7 +4,7 @@
 #include "DKDebug/DKDebug.h"
 #include "DK/DKFile.h"
 #include "DKAssets/DKAssets.h"
-#ifdef USE_DKCurl 
+#ifdef HAVE_DKCurl 
 	#include "DKCurl/DKCurl.h"
 #endif
 #include <stdio.h>

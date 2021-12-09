@@ -1,4 +1,4 @@
-#ifdef USE_DKDuktape 
+#ifdef HAVE_DKDuktape 
 #include "DKThread.h"
 #include "DKThreadJS.h"
 
@@ -60,4 +60,4 @@ void DKThreadJS::QueueItem()
 	//DKDuktape::ctx = ctx2;
 }
 
-#endif //USE_DKThread
+#endif //HAVE_DKThread

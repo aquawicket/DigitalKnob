@@ -1,4 +1,4 @@
-#ifdef USE_DKCef
+#ifdef HAVE_DKCef
 #include "DK/DKApp.h"
 #include "DKUpdate/DKUpdate.h"
 #include "DKUpdate/DKUpdateV8.h"
@@ -54,4 +54,4 @@ bool DKUpdateV8::UpdatePlugin(CefArgs args, CefReturn retval)
 	return true;
 }
 
-#endif //USE_DKCef
+#endif //HAVE_DKCef

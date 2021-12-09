@@ -1,4 +1,4 @@
-#ifdef USE_DKCef
+#ifdef HAVE_DKCef
 #include "DK/stdafx.h"
 #include "DK/DKApp.h"
 #include "DKRml/DKRml.h"
@@ -24,4 +24,4 @@ bool DKRmlV8::DebuggerToggle(CefArgs args, CefReturn retval)
 	return true;
 }
 
-#endif //USE_DKCef
+#endif //HAVE_DKCef
