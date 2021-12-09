@@ -173,7 +173,7 @@ if(IOS OR IOSSIM)
 endif()
 
 
-if(NOT LINUX) # Disabled NON Linux targets
+if(NOT LINUX AND NOT RASPBERRY) # Disabled NON Linux targets
 	DKDISABLE(build-essential)
 	DKDISABLE(kdevelop)
 	DKDISABLE(libasound2-dev)
