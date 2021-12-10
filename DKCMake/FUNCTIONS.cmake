@@ -516,7 +516,7 @@ function(DKINSTALL src_path import_path dest_path)
 	dk_makeDirectory(${DKDOWNLOAD})
 	#rename src_filename to dest_filename + src_extension as we download to avoid duiplicate name conflicts
 	dkSet(dl_filename "${dest_filename}${src_extension}")
-	download(${src_path} ${dl_filename})
+	DOWNLOAD(${src_path} ${dl_filename})
 	dkset(FILETYPE "UNKNOWN")
 	if(NOT ${src_extension} STREQUAL "")
 		if(${src_extension} STREQUAL ".bz")
