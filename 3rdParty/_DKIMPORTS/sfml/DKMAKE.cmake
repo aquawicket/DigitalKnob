@@ -119,6 +119,13 @@ if(sfml_sfml-main)
 endif()
 
 if(sfml_sfml-network)
+
+	### DEBUG CODE ###
+	if(LINUX)
+		message(FATAL_ERROR "FIXME: (sfml sfml_sfml-network) This is sublibrary is disabled and should not show up here")
+	endif()
+	### DEBUG CODE ###
+	
 	WIN_DEBUG_LIB(${SFML}/${OS}/lib/${DEBUG_DIR}/sfml-network-s-d.lib)
 	WIN_RELEASE_LIB(${SFML}/${OS}/lib/${RELEASE_DIR}/sfml-network-s.lib)
 	MAC_DEBUG_LIB(${SFML}/${OS}/lib/${DEBUG_DIR}/libsfml-network-s-d.a)
