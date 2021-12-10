@@ -41,7 +41,9 @@ else()
 	message(STATUS "Found cmake at ${CMAKE_EXE}")
 endif()
 
-
+if(NOT EXISTS "${CMAKE_EXE}")
+	message(FATAL_ERROR "CMAKE IS NOT FOUND OR INVALID")
+endif()
 
 
 
