@@ -12,29 +12,27 @@ DKSET(WARNING_4244 ON)
 
 
 
+## Compiler Flags Notes
+# /fsanitize=address      			                        when using this, turn off /RTC1, it is incompatable 
+# /EHsc                                                     https://stackoverflow.com/a/4574319/688352
+# /D_SILENCE_EXPERIMENTAL_FILESYSTEM_DEPRECATION_WARNING
+# /D__STDC_WANT_LIB_EXT1__                                  enable CRT Secure functions extension
+# /D_CRT_SECURE_NO_WARNINGS                                 supress VC CRT Secure function warnings
+# CXXFLAGS /Yustdafx.h                                      precompiled headers
 
-
-#DKDEFINE(_SILENCE_EXPERIMENTAL_FILESYSTEM_DEPRECATION_WARNING)
-#DKDEFINE(__STDC_WANT_LIB_EXT1__) #enable CRT Secure functions extension
-#DKDEFINE(_CRT_SECURE_NO_WARNINGS) #supress VC CRT Secure function warnings
-#DKSET(CMAKE_CXX_FLAGS /Yustdafx.h) #precompiled headers")
-
-### process extra flags
 WIN32_DKSET(DK_C_FLAGS           "/DWIN32 /D_WINDOWS /D_CRT_SECURE_NO_WARNINGS /nologo /std:c17")
 WIN32_DKSET(DK_C_FLAGS_DEBUG     "/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG")
 WIN32_DKSET(DK_C_FLAGS_RELEASE   "/MT /O2 /Ob2 /DNDEBUG")
 WIN32_DKSET(DK_CXX_FLAGS         "/DWIN32 /D_WINDOWS /D_CRT_SECURE_NO_WARNINGS /nologo /GR /EHsc /Zm500 /D_WIN32_WINNT=0x0600 /std:c++17 /D_USING_V110_SDK71_ /Zc:__cplusplus")
 WIN32_DKSET(DK_CXX_FLAGS_DEBUG   "/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG")
 WIN32_DKSET(DK_CXX_FLAGS_RELEASE "/MT /O2 /Ob2 /DNDEBUG")
-		
-		
+				
 WIN64_DKSET(DK_C_FLAGS           "/DWIN64 /D_WINDOWS /D_CRT_SECURE_NO_WARNINGS /nologo /std:c17")
 WIN64_DKSET(DK_C_FLAGS_DEBUG     "/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG")
 WIN64_DKSET(DK_C_FLAGS_RELEASE   "/MT /O2 /Ob2 /DNDEBUG")
 WIN64_DKSET(DK_CXX_FLAGS         "/DWIN64 /D_WINDOWS /D_CRT_SECURE_NO_WARNINGS /nologo /GR /EHsc /Zm500 /D_WIN32_WINNT=0x0600 /std:c++17 /D_USING_V110_SDK71_ /Zc:__cplusplus /MACHINE:X64")
 WIN64_DKSET(DK_CXX_FLAGS_DEBUG   "/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG")
 WIN64_DKSET(DK_CXX_FLAGS_RELEASE "/MT /O2 /Ob2 /DNDEBUG")
-
 
 if(WARNINGS_AS_ERRORS)
 	DUMP(WARNINGS_AS_ERRORS)
@@ -45,7 +43,7 @@ if(WARNING_LEVEL)
 	WIN_DKSET(DK_C_FLAGS "${DK_C_FLAGS} /W${WARNING_LEVEL}")
 	WIN_DKSET(DK_CXX_FLAGS "${DK_CXX_FLAGS} /W${WARNING_LEVEL}")
 endif()
-if(WARNING_4244)
+if(WARNING_4244) # /wd4244 - Warning: possible loss of data 
 	WIN_DKSET(DK_C_FLAGS "${DK_C_FLAGS} /wd4244")
 	WIN_DKSET(DK_CXX_FLAGS "${DK_CXX_FLAGS} /wd4244")
 endif()
@@ -62,7 +60,6 @@ DKSET(CMAKE_C_FLAGS_RELEASE   ${DK_C_FLAGS_RELEASE})
 DKSET(CMAKE_CXX_FLAGS         ${DK_CXX_FLAGS})
 DKSET(CMAKE_CXX_FLAGS_DEBUG   ${DK_CXX_FLAGS_DEBUG})
 DKSET(CMAKE_CXX_FLAGS_RELEASE ${DK_CXX_FLAGS_RELEASE})
-
 message(STATUS "CMAKE_C_FLAGS           = ${CMKAE_C_FLAGS}")
 message(STATUS "CMAKE_C_FLAGS_DEBUG     = ${CMKAE_C_FLAGS_DEBUG}")
 message(STATUS "CMAKE_C_FLAGS_RELEASE   = ${CMKAE_C_FLAGS_RELEASE}")
@@ -70,25 +67,18 @@ message(STATUS "CMAKE_CXX_FLAGS         = ${CMKAE_CXX_FLAGS}")
 message(STATUS "CMAKE_CXX_FLAGS_DEBUG   = ${CMKAE_CXX_FLAGS_DEBUG}")
 message(STATUS "CMAKE_CXX_FLAGS_RELEASE = ${CMKAE_CXX_FLAGS_RELEASE}")
 
-
-
 Wait()
+
+
 
 ### DEPENDS ###
 DKDEPEND(git)
 DKDEPEND(cmake)
 
-
 ### WINDOWS ###	
 if(CMAKE_HOST_WIN32 AND WIN)
 	DKDEPEND(visualstudio)
 	DKDEPEND(imagemagick)
-	
-	##NOTE: When using /fsanitize=address,  /RTC1 is incompatable, so turn it off 
-	## /EHsc   https://stackoverflow.com/a/4574319/688352
-	
-	# suppressed warnings
-	# /wd4244 - possible loss of data
 	
 	# Windows 32
 	DKSET(DKCMAKE_WIN32 ${CMAKE_EXE} -G ${VS_GENERATOR} -A Win32
