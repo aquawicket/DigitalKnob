@@ -40,6 +40,7 @@ endfunction()
 
 # dk_debug_wait()  "ALIAS: WAIT()"
 function(Wait)
+	message(STATUS "${ARGV}")
 	if(CMAKE_HOST_WIN32)	
 		DKEXECUTE_PROCESS(echo press and key to continue && timeout /t 60 > nul WORKING_DIRECTORY C:/)
 		return()
@@ -561,7 +562,7 @@ function(DKINSTALL src_path import_path dest_path)
 		DUMP(FILETYPE)
 		DKREMOVE(${DKDOWNLOAD}/UNZIPPED)
 		DKEXTRACT(${DKDOWNLOAD}/${dl_filename} ${DKDOWNLOAD}/UNZIPPED)
-		Wait()
+		Wait("check the zip UNZIPPED folder")
 		#We either have a root folder in /UNZIPPED, or multiple files without a root folder
 		file(GLOB items RELATIVE "${DKDOWNLOAD}/UNZIPPED/" "${DKDOWNLOAD}/UNZIPPED/*")
 		list(LENGTH items count)
