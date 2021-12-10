@@ -21,7 +21,10 @@ LINUX_DKSET(CMAKE_EXE ${CMAKE}/cmake)
 
 
 ### INSTALL ###
+message(STATUS "looking for cmake at ${CMAKE_EXE}")
 if(NOT EXISTS "${CMAKE_EXE}")
+	message(STATUS "${CMAKE_EXE} NOT FOUND")
+	message(STATUS "Installing cmake ${CMAKE_VERSION}")
 	if(CMAKE_HOST_WIN32)
 		DOWNLOAD(${CMAKE_DL} ${DKDOWNLOAD})
 		DKCOMMAND(${DKDOWNLOAD}/${CMAKE_NAME}.msi)
@@ -32,8 +35,9 @@ if(NOT EXISTS "${CMAKE_EXE}")
 	if(CMAKE_HOST_LINUX)
 		DKCOMMAND(sudo apt-get -y install cmake)
 	endif()
+else()
+	message(STATUS "Found cmake at ${CMAKE_EXE}")
 endif()
-
 
 
 
