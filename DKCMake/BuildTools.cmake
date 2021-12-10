@@ -138,8 +138,8 @@ LINUX32_DKSET(DKCONFIGURE_FLAGS  --disable-shared --enable-static)
 
 # Linux 64
 LINUX64_DKSET(DKCMAKE_FLAGS  -DBUILD_SHARED_LIBS=OFF)
-LINUX64_DKSET(DKCMAKE_C_FLAGS    "-m64 -DLINUX -DLINUX32 -std=gnu17 -lstdcfs -no-pie -fPIC")
-LINUX64_DKSET(DKCMAKE_CXX_FLAGS  "-m64 -DLINUX -DLINUX32 -std=gnu++17 -lstdc++fs -no-pie -fPIC")
+LINUX64_DKSET(DKCMAKE_C_FLAGS    "-DLINUX -DLINUX32 -std=gnu17 -lstdcfs -no-pie -fPIC")
+LINUX64_DKSET(DKCMAKE_CXX_FLAGS  "-DLINUX -DLINUX32 -std=gnu++17 -lstdc++fs -no-pie -fPIC")
 LINUX64_DKSET(DKCONFIGURE_FLAGS  --disable-shared --enable-static)
 
 # Raspbery
