@@ -16,7 +16,6 @@ MAC_DKSET(CMAKE /usr/local/bin)
 LINUX_DKSET(CMAKE /usr/bin) 
 
 WIN_DKSET(CMAKE_EXE ${CMAKE}/cmake.exe)
-#MAC_DKSET(CMAKE_EXE cmake)
 MAC_DKSET(CMAKE_EXE ${CMAKE}/cmake)
 LINUX_DKSET(CMAKE_EXE ${CMAKE}/cmake)
 
@@ -31,8 +30,7 @@ if(NOT EXISTS ${CMAKE_EXE})
 		DKCOMMAND(brew install cmake)
 	endif()
 	if(CMAKE_HOST_LINUX)
-		message(FATAL_ERROR "${CMAKE} not found")
-		# TODO
+		DKCOMMAND(sudo apt-get -y install cmake)
 	endif()
 endif()
 
