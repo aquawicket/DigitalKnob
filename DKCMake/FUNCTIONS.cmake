@@ -398,7 +398,7 @@ function(dk_makeDirectory path)
 	message(STATUS "dk_makeDirectory( ${ARGV} )")
 	
 	make_directory(${path})  #requires full path
-	#return()
+	return()
 	
 	#build missing directory parents recursivley
 	if(CMAKE_HOST_APPLE)
