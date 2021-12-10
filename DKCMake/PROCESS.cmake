@@ -32,7 +32,7 @@ DKSET(DKAPP ON)
 include(${DKCMAKE}/BuildTools.cmake)
 include(${DKPROJECT}/DKMAKE.cmake)
 
-DKREMOVE(${DKPROJECT}/DKBUILD.log)
+DKREMOVE(${DKPROJECT}/${OS}/DKBUILD.log)
 DKBUILD_LOG("############################################################")
 DKBUILD_LOG("######  Enabled Dependencies (sorted by dependency)  #######")
 DKBUILD_LOG("############################################################")
