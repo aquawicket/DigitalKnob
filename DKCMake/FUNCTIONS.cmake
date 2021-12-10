@@ -9,6 +9,27 @@ if(CMAKE_HOST_UNIX AND NOT CMAKE_HOST_APPLE)
 endif()
 set(dkdepend_disable_list "" CACHE INTERNAL "")
 
+# dk_string_has
+function(dk_includes str substr result)
+	#message(STATUS "dk_includes(${str} ${substr})")
+	string(FIND "${str}" "${substr}" index)
+	if(${index} GREATER -1)
+		set(${result} true PARENT_SCOPE)
+	else()
+		set(${result} false PARENT_SCOPE)
+	endif()
+endfunction()
+
+function(DKSET variable value)
+	set(${variable} ${value} ${ARGN} CACHE INTERNAL "")
+	#show library versions
+	dk_includes(${variable} "_VERSION" result)
+	if(${result})
+		message(STATUS "${variable}: ${value}")
+	endif()
+endfunction()
+
+
 # Call DKDEBUG(${ARGV}) within function to debug
 DKSET(DKCMAKE_DEBUGGER OFF)
 macro(DKDEBUG)
@@ -104,30 +125,6 @@ function(dk_file_getDigitalknobPath result)
 	endwhile()
 	set(${result} ${DIGITALKNOB} PARENT_SCOPE) #just relay the result
 endfunction()
-
-# dk_string_has
-function(dk_includes str substr result)
-	DKDEBUG(${ARGV})
-	#message(STATUS "dk_includes(${str} ${substr})")
-	string(FIND "${str}" "${substr}" index)
-	if(${index} GREATER -1)
-		set(${result} true PARENT_SCOPE)
-	else()
-		set(${result} false PARENT_SCOPE)
-	endif()
-endfunction()
-
-
-function(DKSET variable value)
-	DKDEBUG(${ARGV})
-	set(${variable} ${value} ${ARGN} CACHE INTERNAL "")
-	#show library versions
-	dk_includes(${variable} "_VERSION" result)
-	if(${result})
-		message(STATUS "${variable}: ${value}")
-	endif()
-endfunction()
-
 
 function(DKUNSET variable)
 	DKDEBUG(${ARGV})
