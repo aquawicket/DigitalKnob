@@ -222,6 +222,7 @@ if(LINUX) # Disabled for Linux targets
 	DKDISABLE(sfml sfml_sfml-network)  #TODO: disabling individual sublibraries
 	DKDISABLE(stackwalker)
 	DKDISABLE(uwebsockets)
+	DKDISABLE(upx)
 endif()
 if(LINUX_32) # Disabled for Linux 32bit targets
 	#
