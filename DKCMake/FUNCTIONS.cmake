@@ -589,7 +589,6 @@ function(DKINSTALL src_path import_path dest_path)
 	#	DKSET(QUEUE_BUILD ON)
 	#	DKEXECUTE(${DKDOWNLOAD}/${src_filename})
 	else() #NOT ARCHIVE, just copy the file into it's 3rdParty folder
-		DUMP(${DKDOWNLOAD}/${dl_filename})
 		DKCOPY(${DKDOWNLOAD}/${dl_filename} ${dest_path}/${dl_filename} TRUE)
 	endif()
 	if("${ARGN}" STREQUAL "NOPATCH")
