@@ -212,10 +212,12 @@ endfunction()
 
 # dk_file_extract
 function(DKEXTRACT src dest)
+	message(STATUS "DKEXTRACT( ${ARGV} )")
 	if(NOT EXISTS ${dest})
 		dk_makeDirectory(${dest})
 	endif()
-	execute_process(COMMAND ${CMAKE_EXE} -E tar xvf ${src} WORKING_DIRECTORY ${dest})
+	#execute_process(COMMAND ${CMAKE_EXE} -E tar xvf ${src} WORKING_DIRECTORY ${dest})
+	DKEXECUTE_PROCESS(${CMAKE_EXE} -E tar xvf ${src} WORKING_DIRECTORY ${dest})
 endfunction()
 
 # dk_file_compress
@@ -393,10 +395,10 @@ endfunction()
 
 
 function(dk_makeDirectory path)
-	message(STATUS "dk_makeDirectory(${path})")
+	message(STATUS "dk_makeDirectory( ${ARGV} )")
 	
 	make_directory(${path})  #requires full path
-	return()
+	#return()
 	
 	#build missing directory parents recursivley
 	if(CMAKE_HOST_APPLE)
