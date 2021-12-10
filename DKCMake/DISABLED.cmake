@@ -72,9 +72,7 @@ if(NOT CMAKE_HOST_WIN32) # Disabled on Non-Windows host machines
 	DKDISABLE(vs16-redistributable)
 endif()
 if(WIN) # Disabled for Windows targets
-	
-	DKDISABLE(boost nowide) #TEST TEST TEST TEST TEST TEST
-	
+	#DKDISABLE(boost nowide) #TEST TEST TEST TEST TEST TEST
 	DKDISABLE(build-essential)
 	DKDISABLE(DKOcr)
 	DKDISABLE(DKWebSockets)
