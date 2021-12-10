@@ -557,7 +557,7 @@ function(DKINSTALL src_path import_path dest_path)
 		DKSET(FILETYPE "Archive")
 		message(STATUS "We will try to extract it in case it's an archive, but it may fail.")
 	endif()
-
+	Wait()
 	if(${FILETYPE} STREQUAL "Archive")
 		DKREMOVE(${DKDOWNLOAD}/UNZIPPED)
 		DKEXTRACT(${DKDOWNLOAD}/${dl_filename} ${DKDOWNLOAD}/UNZIPPED)
