@@ -105,7 +105,7 @@ foreach(plugin ${dkdepend_list})
 		endif()
 		
 		## Prebuild Plugins switch
-		if(asdf)
+		if(DONTRUN)
 			Wait()
 			DKSET(CURRENT_DIR ${plugin_path}/${OS})
 			dk_makeDirectory(${CURRENT_DIR})
@@ -270,7 +270,7 @@ message(STATUS "\n")
 message(STATUS "***************************************")
 message(STATUS "********** Creating ${APP_NAME} **********")
 message(STATUS "***************************************\n")
-
+DUMP(PLUGINS_FILE)
 ## Create the DKPlugins.h header file
 if(PLUGINS_FILE)
 	string(REPLACE "#include \"DKWindow.h\"" "" PLUGINS_FILE ${PLUGINS_FILE})
@@ -278,10 +278,10 @@ if(PLUGINS_FILE)
 	file(WRITE ${DKPROJECT}/DKPlugins.h ${PLUGINS_FILE})
 endif()
 
+DKCOPY(${DKPLUGINS}/_DKIMPORT/assets.h ${DKPROJECT}/assets.h FALSE) ## copy app default files recursivly without overwrite
 if(HAVE_DK)
 	message(STATUS "Copying DKPlugins/_DKIMPORT/ to App...")
 	DKCOPY(${DKPLUGINS}/_DKIMPORT/icons ${DKPROJECT}/icons FALSE) ## copy app default files recursivly without overwrite
-	DKCOPY(${DKPLUGINS}/_DKIMPORT/assets.h ${DKPROJECT}/assets.h FALSE) ## copy app default files recursivly without overwrite
 	DKCOPY(${DKPLUGINS}/_DKIMPORT/App.h ${DKPROJECT}/App.h FALSE) ## copy app default files recursivly without overwrite
 	DKCOPY(${DKPLUGINS}/_DKIMPORT/App.cpp ${DKPROJECT}/App.cpp FALSE) ## copy app default files recursivly without overwrite
 endif()
