@@ -173,7 +173,7 @@ function(DOWNLOAD url dest_path) # ARGV1 = dest_path
 		if(NOT dest_ext)
 			message(STATUS "DOWNLOAD(): The destination path has no extension")
 		else()
-			message(STATUS "DOWNLOAD(): extension = ${extension}")
+			message(STATUS "DOWNLOAD(): dest_ext = ${dest_ext}")
 		endif()
 		if(IS_DIRECTORY ${dest_path})
 			message(STATUS "DOWNLOAD(): IS_DIRECTORY: ${dest_path}")
