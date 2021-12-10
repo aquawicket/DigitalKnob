@@ -3672,7 +3672,7 @@ function(dk_printSettings)
 	DKBUILD_LOG("\n")
 endfunction()
 
-function(dk_addTarget lib sublib)
+function(dk_addTarget lib subLib)
 	message(STATUS "dk_addTarget( ${ARGV} )")
 	if(${LIB}_subLibs_OFF)
 		list(REMOVE_ITEM ${LIB}_subLibs_OFF ${subLib})
