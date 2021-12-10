@@ -25,6 +25,16 @@ DKSET(WARNING_4244 ON)
 # /D_CRT_SECURE_NO_WARNINGS                                 supress VC CRT Secure function warnings
 # CXXFLAGS /Yustdafx.h                                      precompiled headers
 
+# iOS Variables
+DKSET(IOS_DARWIN darwin20.6.0)
+DKSET(IOS_MIN_SDK 13.0)
+DKSET(XCODE_DEVROOT /Applications/Xcode.app/Contents/Developer)
+DKSET(CLANG ${XCODE_DEVROOT}/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang)
+DKSET(CLANGXX ${XCODE_DEVROOT}/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++)
+DKSET(LIBTOOL ${XCODE_DEVROOT}/Toolchains/XcodeDefault.xctoolchain/usr/bin/libtool)
+DKSET(IOS_SYSROOT ${XCODE_DEVROOT}/Platforms/iPhone.platform/Developer/SDKs/iPhone15.0.sdk)
+DKSET(IOSSIM_SYSROOT ${XCODE_DEVROOT}/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator15.0.sdk)
+
 # Windows 32
 WIN32_DKSET(DKCMAKE_FLAGS  -DBUILD_SHARED_LIBS=OFF)
 WIN32_DKSET(DKCMAKE_C_FLAGS           "/DWIN32 /D_WINDOWS /D_CRT_SECURE_NO_WARNINGS /nologo /std:c17")
@@ -60,16 +70,6 @@ MAC64_DKSET(DKCMAKE_FLAGS  -DCMAKE_OSX_ARCHITECTURES=x86_64 -DBUILD_SHARED_LIBS=
 MAC64_DKSET(DKCMAKE_C_FLAGS    "-DMAC -DMAC64 -std=c17 -x objective-c")
 MAC64_DKSET(DKCMAKE_CXX_FLAGS  "-DMAC -DMAC64 -std=c++17 -x objective-c++")
 MAC64_DKSET(DKCONFIGURE_FLAGS  --disable-shared --enable-static)
-
-# iOS Variables
-DKSET(IOS_DARWIN darwin20.6.0)
-DKSET(IOS_MIN_SDK 13.0)
-DKSET(XCODE_DEVROOT /Applications/Xcode.app/Contents/Developer)
-DKSET(CLANG ${XCODE_DEVROOT}/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang)
-DKSET(CLANGXX ${XCODE_DEVROOT}/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++)
-DKSET(LIBTOOL ${XCODE_DEVROOT}/Toolchains/XcodeDefault.xctoolchain/usr/bin/libtool)
-DKSET(IOS_SYSROOT ${XCODE_DEVROOT}/Platforms/iPhone.platform/Developer/SDKs/iPhone15.0.sdk)
-DKSET(IOSSIM_SYSROOT ${XCODE_DEVROOT}/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator15.0.sdk)
 
 # iOS 32
 IOS32_DKSET(DKCMAKE_FLAGS  -DCMAKE_TOOLCHAIN_FILE=${DKCMAKE}/ios.toolchain.cmake -DPLATFORM=OS -DSDK_VERSION=15.0 -DDEPLOYMENT_TARGET=${IOS_MIN_SDK} -DBUILD_SHARED_LIBS=OFF)
@@ -133,27 +133,31 @@ LINUX_DKSET(DKCMAKE_C_FLAGS    "-DLINUX -std=gnu17 -lstdcfs -no-pie -fPIC")
 LINUX_DKSET(DKCMAKE_CXX_FLAGS  "-DLINUX -std=gnu++17 -lstdc++fs -no-pie -fPIC")
 LINUX_DKSET(DKCONFIGURE_FLAGS  --disable-shared --enable-static)
 
+# Linux 32
 LINUX32_DKSET(DKCMAKE_FLAGS  -DBUILD_SHARED_LIBS=OFF)
 LINUX32_DKSET(DKCMAKE_C_FLAGS    "-m32 -DLINUX -DLINUX32 -std=gnu17 -lstdcfs -no-pie -fPIC")
 LINUX32_DKSET(DKCMAKE_CXX_FLAGS  "-m32 -DLINUX -DLINUX32 -std=gnu++17 -lstdc++fs -no-pie -fPIC")
 LINUX32_DKSET(DKCONFIGURE_FLAGS  --disable-shared --enable-static)
 
+# Linux 64
 LINUX64_DKSET(DKCMAKE_FLAGS  -DBUILD_SHARED_LIBS=OFF)
 LINUX64_DKSET(DKCMAKE_C_FLAGS    "-m64 -DLINUX -DLINUX32 -std=gnu17 -lstdcfs -no-pie -fPIC")
 LINUX64_DKSET(DKCMAKE_CXX_FLAGS  "-m64 -DLINUX -DLINUX32 -std=gnu++17 -lstdc++fs -no-pie -fPIC")
 LINUX64_DKSET(DKCONFIGURE_FLAGS  --disable-shared --enable-static)
 
-# Raspberyy
+# Raspbery
 RASPBERRY_DKSET(DKCMAKE_FLAGS   -DBUILD_SHARED_LIBS=OFF)
 RASPBERRY_DKSET(DKCMAKE_C_FLAGS    "-DLINUX -DRASPBERRY -std=gnu17 -lstdcfs -no-pie -fPIC")
 RASPBERRY_DKSET(DKCMAKE_CXX_FLAGS  "-DLINUX -DRASPBERRY -std=gnu++17 -lstdc++fs -no-pie -fPIC")
 RASPBERRY_DKSET(DKCONFIGURE_FLAGS  --disable-shared --enable-static)
 
+# Raspbery 32
 RASPBERRY32_DKSET(DKCMAKE_FLAGS  -DBUILD_SHARED_LIBS=OFF)
 RASPBERRY32_DKSET(DKCMAKE_C_FLAGS    "-m32 -DLINUX -DLINUX32 -DRASPBERRY -DRASPBERRY32 -std=gnu17 -lstdcfs -no-pie -fPIC")
 RASPBERRY32_DKSET(DKCMAKE_CXX_FLAGS  "-m32 -DLINUX -DLINUX32 -DRASPBERRY -DRASPBERRY32 -std=gnu++17 -lstdc++fs -no-pie -fPIC")
 RASPBERRY32_DKSET(DKCONFIGURE_FLAGS  --disable-shared --enable-static)
 
+# Raspbery 64
 RASPBERRY64_DKSET(DKCMAKE_FLAGS  -DBUILD_SHARED_LIBS=OFF)
 RASPBERRY64_DKSET(DKCMAKE_C_FLAGS    "-m64 -DLINUX -DLINUX64 -DRASPBERRY -DRASPBERRY32 -std=gnu17 -lstdcfs -no-pie -fPIC")
 RASPBERRY64_DKSET(DKCMAKE_CXX_FLAGS  "-m64 -DLINUX -DLINUX64 -DRASPBERRY -DRASPBERRY32 -std=gnu++17 -lstdc++fs -no-pie -fPIC")
@@ -202,7 +206,6 @@ ANDROID64_DKSET(DKCONFIGURE_CXXFLAGS      "-DANDROID -DANDROID64 -std=c++1z")
 
 
 if(WARNINGS_AS_ERRORS)
-	DUMP(WARNINGS_AS_ERRORS)
 	WIN_DKSET(DKCMAKE_C_FLAGS "${DKCMAKE_C_FLAGS} /WX")
 	WIN_DKSET(DKCMAKE_CXX_FLAGS "${DKCMAKE_CXX_FLAGS} /WX")
 endif()
