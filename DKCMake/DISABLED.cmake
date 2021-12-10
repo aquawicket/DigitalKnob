@@ -73,6 +73,7 @@ endif()
 if(WIN) # Disabled for Windows targets
 	DKDISABLE(build-essential)
 	DKDISABLE(DKOcr)
+	DKDISABLE(DKWebSockets)
 	DKDISABLE(freealut)
 	DKDISABLE(freealut-master)
 	DKDISABLE(jpeg) #using libjpeg_turbo
@@ -86,6 +87,7 @@ if(WIN) # Disabled for Windows targets
 	DKDISABLE(opensles)
 	DKDISABLE(podofo)
 	DKDISABLE(sdl2_mixer)
+	DKDISABLE(uwebsockets)
 endif()
 if(WIN_32) # Disabled for Windows 32bit targets
 	#
