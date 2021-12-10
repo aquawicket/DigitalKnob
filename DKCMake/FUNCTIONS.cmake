@@ -2841,7 +2841,7 @@ function(generateCmake name)
 	file(APPEND ${plugin_path}/CMakeLists.txt "endif()\n")
 
 	file(APPEND ${plugin_path}/CMakeLists.txt "add_library(${name} STATIC \${${name}_SRC})\n")
-	file(APPEND ${plugin_path}/CMakeLists.txt "target_compile_options(${name} PRIVATE ${CMAKE_CXX_FLAGS} $<$<CONFIG:Debug>:${CMAKE_CXX_FLAGS_DEBUG}> $<$<CONFIG:Release>:${CMAKE_CXX_FLAGS_RELEASE}>)\n")
+	file(APPEND ${plugin_path}/CMakeLists.txt "target_compile_options(${name} PRIVATE \${CMAKE_CXX_FLAGS} $<$<CONFIG:Debug>:\${CMAKE_CXX_FLAGS_DEBUG}> $<$<CONFIG:Release>:\${CMAKE_CXX_FLAGS_RELEASE}>)\n")
 	file(APPEND ${plugin_path}/CMakeLists.txt "if(CMAKE_HOST_WIN32)\n")
 	file(APPEND ${plugin_path}/CMakeLists.txt "		set_target_properties(${name} PROPERTIES LINKER_LANGUAGE CPP)\n")
 	file(APPEND ${plugin_path}/CMakeLists.txt "endif()\n")
