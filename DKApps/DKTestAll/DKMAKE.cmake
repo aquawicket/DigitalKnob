@@ -4,8 +4,7 @@
 
 DKENABLE(HAVE_DKCef) ##FIXME: Find a way to remove this requirement
 
-## ADD any and all plugins here
-DKDEPEND_ALL()
+DKDEPEND_ALL() ## ADD any and all plugins here
 
 if(CMAKE_HOST_LINUX)
 	DKSET(EXCLUDE_ASSETS ON) #assets are too large to embed on my old 1gb x86 dell laptop
