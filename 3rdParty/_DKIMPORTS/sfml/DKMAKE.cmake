@@ -72,6 +72,12 @@ DKINSTALL(${SFML_DL} sfml ${SFML} NOPATCH)
 ### LINK ###
 DKDEFINE(SFML_STATIC)
 DKINCLUDE(${SFML}/include)
+dk_addTarget(sfml sfml-audio)
+dk_addTarget(sfml sfml-graphics)
+dk_addTarget(sfml sfml-main)
+dk_addTarget(sfml sfml-network)
+dk_addTarget(sfml sfml-system)
+dk_addTarget(sfml sfml-window)
 
 if(sfml_sfml-audio)
 	WIN_DEBUG_LIB(${SFML}/${OS}/lib/${DEBUG_DIR}/sfml-audio-s-d.lib)
@@ -185,7 +191,6 @@ DKSET(SFML_WIN
 	-DSFML_AUDIO_LIBRARY_DEBUG=${SFML}/${OS}/lib/${DEBUG_DIR}/sfml-audio-s-d.lib
 	-DSFML_AUDIO_LIBRARY_RELEASE=${SFML}/${OS}/lib/${RELEASE_DIR}/sfml-audio-s.lib)
 
-
 ### COMPILE ###
 WIN_PATH(${SFML}/${OS})
 WIN32_COMMAND(${DKCMAKE_WIN32} -DSFML_OS_WINDOWS=1 ${JPEG_WIN} ${OPENAL_WIN} ${OGG_WIN_CMAKE} ${VORBIS_WIN_RELEASE} ${FLAC_WIN} ${SFML})
@@ -231,12 +236,3 @@ ANDROID_PATH(${SFML}/${OS})
 ANDROID32_COMMAND(${DKCMAKE_ANDROID32} ${JPEG_ANDROID} ${OPENAL_ANDROID} ${OGG_ANDROID_CMAKE} ${VORBIS_ANDROID_DEBUG} ${FLAC_ANDROID} ${FREETYPE_ANDROID} ${OGG_ANDROID_CMAKE} ${SFML})
 ANDROID64_COMMAND(${DKCMAKE_ANDROID64} ${JPEG_ANDROID} ${OPENAL_ANDROID} ${OGG_ANDROID_CMAKE} ${VORBIS_ANDROID_RELEASE} ${FLAC_ANDROID} ${FREETYPE_ANDROID} ${OGG_ANDROID_CMAKE} ${SFML})
 ANDROID_VS(SFML-${SFML_VERSION} SFML.sln)
-
-
-
-dk_addTarget(sfml sfml-audio)
-dk_addTarget(sfml sfml-graphics)
-dk_addTarget(sfml sfml-main)
-dk_addTarget(sfml sfml-network)
-dk_addTarget(sfml sfml-system)
-dk_addTarget(sfml sfml-window)

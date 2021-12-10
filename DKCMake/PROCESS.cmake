@@ -106,7 +106,6 @@ foreach(plugin ${dkdepend_list})
 		
 		## Prebuild Plugins switch
 		if(DONTRUN)
-			Wait()
 			DKSET(CURRENT_DIR ${plugin_path}/${OS})
 			dk_makeDirectory(${CURRENT_DIR})
 			if(WIN_32)
@@ -270,7 +269,6 @@ message(STATUS "\n")
 message(STATUS "***************************************")
 message(STATUS "********** Creating ${APP_NAME} **********")
 message(STATUS "***************************************\n")
-DUMP(PLUGINS_FILE)
 ## Create the DKPlugins.h header file
 if(PLUGINS_FILE)
 	string(REPLACE "#include \"DKWindow.h\"" "" PLUGINS_FILE ${PLUGINS_FILE})
