@@ -319,11 +319,19 @@ endfunction()
 
 function(DKENABLE plugin)
 	if(NOT ${plugin})
-		DKSET(${plugin} ON)
-		DKSET(HAVE_${plugin} ON)
-		#In c++ we can't use certian symbals in the preprocess or for macros. - must be turned to _
-		string(REPLACE "-" "_" plugin_macro "${plugin}")
-		DKDEFINE(HAVE_${plugin_macro})
+		if(${ARGC} GREATER 1)
+			DKSET(${${ARGV1}} ON)
+			DKSET(HAVE_${${ARGV1}} ON)
+			#In c++ we can't use certian symbals in the preprocess or for macros. - must be turned to _
+			string(REPLACE "-" "_" argv1_macro "${ARGV1}")
+			DKDEFINE(HAVE_${argv1_macro})
+		else()
+			DKSET(${plugin} ON)
+			DKSET(HAVE_${plugin} ON)
+			#In c++ we can't use certian symbals in the preprocess or for macros. - must be turned to _
+			string(REPLACE "-" "_" plugin_macro "${plugin}")
+			DKDEFINE(HAVE_${plugin_macro})
+		endif()
 	endif()
 endfunction()
 
@@ -332,12 +340,21 @@ function(DKDISABLE plugin)
 	if(NOT ${CMAKE_CURRENT_LIST_DIR} STREQUAL ${DKCMAKE} AND NOT ${CMAKE_CURRENT_LIST_DIR} STREQUAL ${DKPROJECT}) # /DKCMake or /App directory only
 		message(FATAL_ERROR "\n! WARNING !\n DKDISABLE() Can only be used from the DKCMake/DISABLED.cmake file. This is to avoid having disabled libraries hideing everywhere.\n")
 	endif()
-	DKUNSET(${plugin})
-	DKUNSET(HAVE_${plugin})
-	#In c++ we can't use certian symbals in the preprocess or for macros. - must be turned to _
-	string(REPLACE "-" "_" plugin_macro "${plugin}")
-	DKUNDEFINE(HAVE_${plugin_macro})
-	DKUNDEPEND(${plugin})
+	if(${ARGC} GREATER 1)
+		DKUNSET(${ARGV1})
+		DKUNSET(HAVE_${ARGV1})
+		#In c++ we can't use certian symbals in the preprocess or for macros. - must be turned to _
+		string(REPLACE "-" "_" argv1_macro "${ARGV1}")
+		DKUNDEFINE(HAVE_${argv1_macro})
+		DKUNDEPEND(${ARGV1})
+	else()
+		DKUNSET(${plugin})
+		DKUNSET(HAVE_${plugin})
+		#In c++ we can't use certian symbals in the preprocess or for macros. - must be turned to _
+		string(REPLACE "-" "_" plugin_macro "${plugin}")
+		DKUNDEFINE(HAVE_${plugin_macro})
+		DKUNDEPEND(${plugin})
+	endif()
 endfunction()
 
 
