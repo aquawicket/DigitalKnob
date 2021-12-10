@@ -337,7 +337,7 @@ endfunction()
 
 
 function(DKDISABLE plugin)
-	if(NOT ${CMAKE_CURRENT_LIST_DIR} STREQUAL ${DKCMAKE} AND NOT ${CMAKE_CURRENT_LIST_DIR} STREQUAL ${DKPROJECT}) # /DKCMake or /App directory only
+	if(NOT ${CMAKE_CURRENT_LIST_DIR} STREQUAL ${DKCMAKE} AND NOT ${CMAKE_CURRENT_LIST_DIR} STREQUAL ${DKPROJECT}) # /from DKCMake or /App directory only
 		message(FATAL_ERROR "\n! WARNING !\n DKDISABLE() Can only be used from the DKCMake/DISABLED.cmake file. This is to avoid having disabled libraries hideing everywhere.\n")
 	endif()
 	if(${ARGC} GREATER 1)
@@ -3201,8 +3201,8 @@ function(DKUNDEPEND name)
 	if(NOT ${CMAKE_CURRENT_LIST_DIR} STREQUAL ${DKCMAKE} AND NOT ${CMAKE_CURRENT_LIST_DIR} STREQUAL ${DKPROJECT}) # /DKCMake or /App directory only
 		message(FATAL_ERROR "\n! WARNING !\n DKUNDEPEND() Can only be used from the DKCMake/DISABLED.cmake file. This is to avoid having disabled libraries hideing everywhere.\n")
 	endif()
-	message(STATUS "DISABLING ${name}")
-	DKSET(dkdepend_disable_list ${dkdepend_disable_list} ${name})
+	message(STATUS "DISABLING ${ARGV}")
+	DKSET(dkdepend_disable_list ${dkdepend_disable_list} "${ARGV}")
 endfunction()
 
 
@@ -3383,11 +3383,12 @@ function(DKRUNDEPENDS name)
 		endif()
 	endif()
 	
-	if(${ARGC} GREATER 1)
-		DKSET(dkdepend_list ${dkdepend_list} "${name} ${ARGV1}")  #Add sublibrary to list
-	else()
-		DKSET(dkdepend_list ${dkdepend_list} ${name})  #Add library to list
-	endif()	
+	DKSET(dkdepend_list ${dkdepend_list} "${ARGV}")  #Add sublibrary to list
+	#if(${ARGC} GREATER 1)
+	#	DKSET(dkdepend_list ${dkdepend_list} "${name} ${ARGV1}")  #Add sublibrary to list
+	#else()
+	#	DKSET(dkdepend_list ${dkdepend_list} ${name})  #Add library to list
+	#endif()	
 	list(REMOVE_DUPLICATES dkdepend_list)
 endfunction()
 
