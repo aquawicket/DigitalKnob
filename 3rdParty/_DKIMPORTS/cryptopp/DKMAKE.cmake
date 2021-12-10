@@ -14,7 +14,7 @@ endif()
 #DKSET(CRYPTO_NAME cryptopp${CRYPTO_VERSION})
 #DKSET(CRYPTO_DL https://github.com/webstorage119/website-1/raw/master/${CRYPTO_NAME}.zip)
 
-DKSET(CRYPTO_VERSION 8_5_0)
+DKSET(CRYPTO_VERSION 8_2_0)
 DKSET(CRYPTO_NAME CRYPTOPP_${CRYPTO_VERSION})
 DKSET(CRYPTO_DL https://github.com/weidai11/cryptopp/archive/refs/tags/${CRYPTO_NAME}.zip)
 
