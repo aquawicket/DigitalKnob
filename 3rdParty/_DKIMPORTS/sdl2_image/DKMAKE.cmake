@@ -1,4 +1,6 @@
 # https://github.com/libsdl-org/SDL_image
+# https://github.com/libsdl-org/SDL_image
+# https://github.com/libsdl-org/SDL_image
 #
 # https://www.libsdl.org/projects/SDL_image/release/SDL2_image-2.0.1.zip
 # https://www.libsdl.org/projects/SDL_image/release/SDL2_image-2.0.5.zip

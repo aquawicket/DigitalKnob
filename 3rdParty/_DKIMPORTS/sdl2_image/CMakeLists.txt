@@ -111,7 +111,7 @@ set(SDLIMAGE_SRC
 	IMG_xxx.c
 )
 
-if(CMAKE_HOST_APPLE)
+if(CMAKE_HOST_APPLE AND IOS)
 	list(APPEND SDLIMAGE_SRC IMG_ImageIO.m)
 endif()
 

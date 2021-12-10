@@ -3204,7 +3204,7 @@ function(DKUNDEPEND name)
 	message(STATUS "DISABLING ${ARGV}")
 	DKSET(dkdepend_disable_list ${dkdepend_disable_list} "${ARGV}")
 	if(${ARGC} GREATER 1)
-		#dk_removeTarget(${name} ${ARGV1})
+		dk_removeTarget(${name} ${ARGV1})
 	endif()
 endfunction()
 
