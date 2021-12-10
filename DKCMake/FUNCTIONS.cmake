@@ -9,6 +9,15 @@ if(CMAKE_HOST_UNIX AND NOT CMAKE_HOST_APPLE)
 endif()
 set(dkdepend_disable_list "" CACHE INTERNAL "")
 
+set(DKDEBUG_FILE ${CMAKE_CURRENT_FUNCTION_LIST_FILE} CACHE INTERNAL "")
+set(DKDEBUG_LINE ${CMAKE_CURRENT_FUNCTION_LIST_LINE} CACHE INTERNAL "")
+set(DKDEBUG_FUNCTION ${CMAKE_CURRENT_FUNCTION} CACHE INTERNAL "")
+set(DKDEBUG_ARGV ${CMAKE_ARGV} CACHE INTERNAL "")
+macro(DKDEBUG)
+	dk_getFilename(${CMAKE_CURRENT_FUNCTION_LIST_FILE} FILENAME)
+	message(STATUS "${FILENAME}:${CMAKE_CURRENT_FUNCTION_LIST_LINE} -> ${CMAKE_CURRENT_FUNCTION}(${CMAKE_ARGV})")
+	Wait()
+endmacro()
 
 #####################################################################
 ###################         DKFUNCTIONS           ###################
@@ -318,6 +327,7 @@ endfunction()
 
 
 function(DKENABLE plugin)
+	DKDEBUG()
 	if(NOT ${plugin})
 		if(${ARGC} GREATER 1)
 			DKSET(${${ARGV1}} ON)
@@ -3157,13 +3167,16 @@ endfunction()
 
 # Add a library or plugin to the dependency list
 function(DKDEPEND name)
+	message(STATUS "DKDEPEND(${ARGV})")
+
 	list(FIND dkdepend_disable_list "${ARGV}" index)
 	if(${index} GREATER -1)
 		message(STATUS "${ARGV} IS DISABLED")
 		return()
 	endif()
 	
-	dk_createSmartObject(${name}) #TODO:  automatically determin plugin, create variables, setup auto compiles, etc 
+	# TODO
+	# dk_createSmartObject(${name}) #TODO:  automatically determin plugin, create variables, setup auto compiles, etc 
 	
 	# If DKDEPEND had second variable (a sub library), set that variable to ON
 	# if(${ARGC} GREATER 1)
