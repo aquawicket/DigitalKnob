@@ -9,6 +9,33 @@ if(CMAKE_HOST_UNIX AND NOT CMAKE_HOST_APPLE)
 endif()
 set(dkdepend_disable_list "" CACHE INTERNAL "")
 
+# Call DKDEBUG(${ARGV}) within function to debug
+set(DKCMAKE_DEBUGGER OFF CACHE INTERNAL "")
+macro(DKDEBUG)
+	if(NOT DKCMAKE_DEBUGGER)
+		return()
+	endif()
+	dk_getFilename(${CMAKE_CURRENT_FUNCTION_LIST_FILE} FILENAME)
+	message(STATUS "${FILENAME}:${CMAKE_CURRENT_FUNCTION_LIST_LINE} -> ${CMAKE_CURRENT_FUNCTION}(${ARGV})")
+	Wait()
+endmacro()
+
+# dk_file_getDigitalknobPath(<result>)
+function(dk_file_getDigitalknobPath result)
+	#DKDEBUG(${ARGV})
+	get_filename_component(DIGITALKNOB ${CMAKE_SOURCE_DIR} ABSOLUTE)
+	get_filename_component(FOLDER_NAME ${DIGITALKNOB} NAME)
+	while(NOT FOLDER_NAME STREQUAL "digitalknob")
+		get_filename_component(DIGITALKNOB ${DIGITALKNOB} DIRECTORY)
+		get_filename_component(FOLDER_NAME ${DIGITALKNOB} NAME)
+		if(NOT FOLDER_NAME)
+			message(WARNING "Could not locate digitalknob root path")
+		endif()
+	endwhile()
+	set(${result} ${DIGITALKNOB} PARENT_SCOPE) #just relay the result
+endfunction()
+
+
 # dk_string_has
 function(dk_includes str substr result)
 	#message(STATUS "dk_includes(${str} ${substr})")
@@ -21,6 +48,7 @@ function(dk_includes str substr result)
 endfunction()
 
 function(DKSET variable value)
+	#message(STATUS "DKSET(${ARGV})")
 	set(${variable} ${value} ${ARGN} CACHE INTERNAL "")
 	#show library versions
 	dk_includes(${variable} "_VERSION" result)
@@ -29,17 +57,13 @@ function(DKSET variable value)
 	endif()
 endfunction()
 
+function(DKUNSET variable)
+	DKDEBUG(${ARGV})
+	set(${variable} "" CACHE INTERNAL "")
+	unset(${variable})
+endfunction()
 
-# Call DKDEBUG(${ARGV}) within function to debug
-DKSET(DKCMAKE_DEBUGGER OFF)
-macro(DKDEBUG)
-	if(NOT DKCMAKE_DEBUGGER)
-		return()
-	endif()
-	dk_getFilename(${CMAKE_CURRENT_FUNCTION_LIST_FILE} FILENAME)
-	message(STATUS "${FILENAME}:${CMAKE_CURRENT_FUNCTION_LIST_LINE} -> ${CMAKE_CURRENT_FUNCTION}(${ARGV})")
-	Wait()
-endmacro()
+
 
 #####################################################################
 ###################         DKFUNCTIONS           ###################
@@ -110,28 +134,6 @@ function(DUMP dmpvar)
 	message(STATUS "\n")
 	Wait()
 endfunction()
-
-# dk_file_getDigitalknobPath(<result>)
-function(dk_file_getDigitalknobPath result)
-	DKDEBUG(${ARGV})
-	get_filename_component(DIGITALKNOB ${CMAKE_SOURCE_DIR} ABSOLUTE)
-	get_filename_component(FOLDER_NAME ${DIGITALKNOB} NAME)
-	while(NOT FOLDER_NAME STREQUAL "digitalknob")
-		get_filename_component(DIGITALKNOB ${DIGITALKNOB} DIRECTORY)
-		get_filename_component(FOLDER_NAME ${DIGITALKNOB} NAME)
-		if(NOT FOLDER_NAME)
-			message(WARNING "Could not locate digitalknob root path")
-		endif()
-	endwhile()
-	set(${result} ${DIGITALKNOB} PARENT_SCOPE) #just relay the result
-endfunction()
-
-function(DKUNSET variable)
-	DKDEBUG(${ARGV})
-	set(${variable} "" CACHE INTERNAL "")
-	unset(${variable})
-endfunction()
-
 
 # set a XCode specific property
 macro (set_xcode_property TARGET XCODE_PROPERTY XCODE_VALUE)
@@ -3374,7 +3376,7 @@ endfunction()
 
 # Add a library or plugin to the dependency list
 function(DKDEPEND name)
-	message(STATUS "DKDEPEND(${ARGV})")
+	DKDEBUG(${ARGV})
 
 	list(FIND dkdepend_disable_list "${ARGV}" index)
 	if(${index} GREATER -1)
