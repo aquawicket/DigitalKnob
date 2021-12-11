@@ -3562,7 +3562,7 @@ function(DKUNDEPEND name)
 	DKDEBUG(${ARGV})
 	## Only allow DKUNDEPEND command from these filters	
 	if(NOT ${CMAKE_CURRENT_LIST_DIR} STREQUAL ${DKCMAKE} AND NOT ${CMAKE_CURRENT_LIST_DIR} STREQUAL ${DKPROJECT}) # /DKCMake or /App directory only
-		message(FATAL_ERROR "\n! WARNING !\n DKUNDEPEND() Can only be used from the DKCMake/Disabled.cmake file. This is to avoid having disabled libraries hideing everywhere.\n")
+		message(FATAL_ERROR "\n! WARNING !\n DKUNDEPEND() Can only be used from the Disabled.cmake file. This is to avoid having disabled libraries hideing everywhere.\n")
 	endif()
 	message(STATUS "DISABLING ${ARGV}")
 	DKSET(dkdepend_disable_list ${dkdepend_disable_list} "${ARGV}")
@@ -3790,7 +3790,7 @@ function(DKDEPEND_ALL)
 		endif()
   	endforeach()
 	
-	#To exclude libraries, use DKDISABLE(lib) in your app DKMAKE.cmake file or in DKCMake/Disabled.cmake
+	#To exclude libraries, use DKDISABLE(lib) in your app DKMAKE.cmake file or in Disabled.cmake
 	string (REPLACE ";" "" DEPENDALL_FILE "${DEPENDALL_FILE}")
 	file(WRITE ${DKPROJECT}/DEPEND_ALL.txt "${DEPENDALL_FILE}")
 	unset(DEPENDALL_FILE)
