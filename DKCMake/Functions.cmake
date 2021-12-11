@@ -669,14 +669,11 @@ endfunction()
 function(DKEXECUTE_PROCESS commands)
 	DKDEBUG(${ARGV})
 	set(commands ${ARGV})
-	list(REMOVE_ITEM commands COMMAND)
+	list(REMOVE_ITEM commands COMMAND) # we can supply the cmake specific base commands
 	list(REMOVE_ITEM commands "cmd /c")
 	
 	list(FIND commands "WORKING_DIRECTORY" index) #find WORKING_DRIECTORY
-	if(index GREATER -1)
-		message(STATUS "${commands}")
-		message(STATUS "WORKING_DIRECTORY FOUND @ ${index}")
-	else()
+	if(index EUQALS -1)
 		set(command ${commands} WORKING_DIRECTORY ${CURRENT_DIR}) #add it if missing
 	endif()	
 	
@@ -696,9 +693,9 @@ function(DKEXECUTE_PROCESS commands)
 		else()
 			execute_process(COMMAND sleep 2 WORKING_DIRECTORY ${CURRENT_DIR}) ##wait 2 seconds for the stdout to flush before printing error
 		endif()
-		message("\n\n\n")
+		message("\n\n")
 		message(FATAL_ERROR "ERROR:${result} - ${error}")
-		message("\n\n\n")
+		message("\n\n")
 	endif()
 endfunction()
 
