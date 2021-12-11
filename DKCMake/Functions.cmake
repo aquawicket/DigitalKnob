@@ -673,7 +673,7 @@ function(DKEXECUTE_PROCESS commands)
 	list(REMOVE_ITEM commands "cmd /c")
 	
 	list(FIND commands "WORKING_DIRECTORY" index) #find WORKING_DRIECTORY
-	if(index EUQALS -1)
+	if(index EQUAL -1)
 		set(command ${commands} WORKING_DIRECTORY ${CURRENT_DIR}) #add it if missing
 	endif()	
 	
