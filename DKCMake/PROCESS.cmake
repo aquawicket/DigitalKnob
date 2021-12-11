@@ -571,7 +571,7 @@ if(MAC)
 		PRODUCT_BUNDLE_IDENTIFIER com.digitalknob.${APP_NAME}
 		PRODUCT_NAME com.digitalknob.${APP_NAME}
 		XCODE_ATTRIBUTE_CODE_SIGN_IDENTITY ""
-		#MACOSX_BUNDLE_INFO_PLIST ${DKPLUGINS}/_DKIMPORTS/mac/Info.plist
+		MACOSX_BUNDLE_INFO_PLIST ${DKPLUGINS}/_DKIMPORT/mac/Info.plist
     )
 	#set_xcode_property(${APP_NAME} "Other Code Signing Flags" "--deep")	
 	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${LIBS})
