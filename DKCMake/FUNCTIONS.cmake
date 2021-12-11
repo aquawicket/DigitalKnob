@@ -10,9 +10,7 @@ endif()
 set(dkdepend_disable_list "" CACHE INTERNAL "")
 
 
-set(DKCMAKE_DEBUGGER OFF CACHE INTERNAL "")
-# Prints the File : lineNumber : Function( variables )
-# example: DKDEBUG(${ARGV}) 
+set(DKCMAKE_DEBUGGER OFF CACHE INTERNAL "") # ON = All functions print their File : lineNumber : Function( variables )
 macro(DKDEBUG)
 	if(DKCMAKE_DEBUGGER)
 		dk_getFilename(${CMAKE_CURRENT_FUNCTION_LIST_FILE} FILENAME)
@@ -110,18 +108,6 @@ function(Wait)
 	message(STATUS "Wait() Not implemented for this platform")
 endfunction()
 
-
-# dk_debug_watch(<variable_name>)  "ALIASL WATCH(<variable_name>)"
-function(WATCH var)
-	DKDEBUG(${ARGV})
-	variable_watch(var varwatch)
-endfunction()
-function(varwatch var access val lst stack)
-    message(STATUS "Variable watch: var=${var} access=${access} val=${val} 1st=${1st} stack=${stack}")
-	Wait()
-endfunction()
-
-
 # dk_debug_dump(<variable_name>)  "ALIAS: DUMP(<variable_name>)"
 function(DUMP dmpvar)
 	DKDEBUG(${ARGV})
@@ -132,6 +118,16 @@ function(DUMP dmpvar)
 		message(STATUS "DUMP(varname): CORRECT        DUMP(\${varname}): INCORRECT")
 	endif()
 	message(STATUS "\n")
+	Wait()
+endfunction()
+
+# dk_debug_watch(<variable_name>)  "ALIASL WATCH(<variable_name>)"
+function(WATCH var)
+	DKDEBUG(${ARGV})
+	variable_watch(var varwatch)
+endfunction()
+function(varwatch var access val lst stack)
+    message(STATUS "Variable watch: var=${var} access=${access} val=${val} 1st=${1st} stack=${stack}")
 	Wait()
 endfunction()
 
@@ -153,7 +149,6 @@ function(DELETE_CACHE)
 		DKEXECUTE_PROCESS("rm -rf `find . -type d -name CMakeFiles`" WORKING_DIRECTORY ${DIGITALKNOB})
 	endif()
 endfunction()
-
 
 function(DKSETENV name value)
 	DKDEBUG(${ARGV})
@@ -674,19 +669,15 @@ endfunction()
 function(DKEXECUTE_PROCESS commands)
 	DKDEBUG(${ARGV})
 	set(commands ${ARGV})
-	#message(STATUS "")
-	#message(STATUS "*** Command ***")
-	#message(STATUS "> ${commands}")
-	#message(STATUS "")
 	list(REMOVE_ITEM commands COMMAND)
 	list(REMOVE_ITEM commands "cmd /c")
 	
-	list(FIND commands "WORKING_DIRECTORY" index) #find WORKING_DRIECTORY index	
+	list(FIND commands "WORKING_DIRECTORY" index) #find WORKING_DRIECTORY
 	if(index GREATER -1)
 		message(STATUS "${commands}")
 		message(STATUS "WORKING_DIRECTORY FOUND @ ${index}")
 	else()
-		set(command ${commands} WORKING_DIRECTORY ${CURRENT_DIR})
+		set(command ${commands} WORKING_DIRECTORY ${CURRENT_DIR}) #add it if missing
 	endif()	
 	
 	message(STATUS "")
