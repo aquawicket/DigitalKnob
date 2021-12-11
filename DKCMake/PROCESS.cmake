@@ -559,6 +559,7 @@ if(MAC)
 	add_executable(${APP_NAME} MACOSX_BUNDLE ${App_SRC})
 	set_target_properties(${APP_NAME} PROPERTIES
         MACOSX_BUNDLE TRUE
+		MACOSX_BUNDLE_INFO_PLIST ${DKPLUGINS}/_DKIMPORTS/mac/Info.plist
 		MACOSX_BUNDLE_BUNDLE_NAME com.digitalknob.${APP_NAME}
 		MACOSX_BUNDLE_BUNDLE_VERSION "1.0"
 		MACOSX_BUNDLE_COPYRIGHT "(C) 2021 DigitalKnob"
@@ -571,7 +572,6 @@ if(MAC)
 		PRODUCT_BUNDLE_IDENTIFIER com.digitalknob.${APP_NAME}
 		PRODUCT_NAME com.digitalknob.${APP_NAME}
 		XCODE_ATTRIBUTE_CODE_SIGN_IDENTITY ""
-		MACOSX_BUNDLE_INFO_PLIST ${DKPLUGINS}/_DKIMPORTS/mac/Info.plist
     )
 	#set_xcode_property(${APP_NAME} "Other Code Signing Flags" "--deep")	
 	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${LIBS})
