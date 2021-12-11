@@ -671,28 +671,33 @@ endfunction()
 
 
 
-function(DKEXECUTE_PROCESS command)
+function(DKEXECUTE_PROCESS commands)
 	DKDEBUG(${ARGV})
-	message(STATUS "")
-	message(STATUS "*** Command ***")
-	message(STATUS "> ${ARGV}")
-	message(STATUS "")
+	set(commands ${ARGV})
+	#message(STATUS "")
+	#message(STATUS "*** Command ***")
+	#message(STATUS "> ${commands}")
+	#message(STATUS "")
+	list(REMOVE_ITEM commands COMMAND)
+	list(REMOVE_ITEM commands "cmd /c")
 	
-	list(FIND ARGV "WORKING_DIRECTORY" index) #find WORKING_DRIECTORY index	
-	if(index EQUAL -1)
-		message(STATUS "WORKING_DIRECTORY NOT FOUND")
-	else()
-		message(STATUS "${ARGV}")
+	list(FIND commands "WORKING_DIRECTORY" index) #find WORKING_DRIECTORY index	
+	if(index GREATER -1)
+		message(STATUS "${commands}")
 		message(STATUS "WORKING_DIRECTORY FOUND @ ${index}")
-	endif()		
-
-	#math(EXPR index "${index}+1") #next argument is the path
-	#message(STATUS "FOUND ARGV(${index}) @index${index} value=${ARGV${index}}") 	
+	else()
+		set(command ${commands} WORKING_DIRECTORY ${CURRENT_DIR})
+	endif()	
+	
+	message(STATUS "")
+	message(STATUS "*** Commands ***")
+	message(STATUS "> ${commands}")
+	message(STATUS "")
 	
 	if(CMAKE_HOST_WIN32)
-		execute_process(COMMAND cmd /c ${ARGV} RESULT_VARIABLE result ERROR_VARIABLE error)
+		execute_process(COMMAND cmd /c ${commands} RESULT_VARIABLE result ERROR_VARIABLE error)
 	else()
-		execute_process(COMMAND ${ARGV} RESULT_VARIABLE result ERROR_VARIABLE error)
+		execute_process(COMMAND ${commands} RESULT_VARIABLE result ERROR_VARIABLE error)
 	endif()
 	if(NOT ${result} EQUAL 0)
 		if(CMAKE_HOST_WIN32)
