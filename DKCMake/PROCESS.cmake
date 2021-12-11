@@ -10,9 +10,9 @@ message(STATUS "######################  DigitalKnob  #######################")
 message(STATUS "############################################################")
 message(STATUS "\n")
 	
-include(DKCMake/FUNCTIONS.cmake)
-include(DKCMake/OPTIONS.cmake)
-include(DKCMake/DISABLED.cmake)
+include(DKCMake/Functions.cmake)
+include(DKCMake/Options.cmake)
+include(DKCMake/Disabled.cmake)
 
 
 get_filename_component(APP_NAME ${DKPROJECT} NAME)
@@ -29,7 +29,7 @@ DKSET(DKAPP ON)
 ##################################################
 ##### Scan the DKPlugins and build the lists #####
 ##################################################
-include(${DKCMAKE}/BuildTools.cmake)
+include(${DKCMAKE}/BuildFlags.cmake)
 include(${DKPROJECT}/DKMAKE.cmake)
 
 DKREMOVE(${DKPROJECT}/${OS}/DKBUILD.log)
