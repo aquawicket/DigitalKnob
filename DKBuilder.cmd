@@ -3,6 +3,7 @@
 
 set "DIGITALKNOB=C:\Users\%USERNAME%\digitalknob"
 set "DKPATH=%DIGITALKNOB%\DK"
+set "DKCMAKE=%DIGITALKNOB%\DKCMake"
 set "DKDOWNLOAD=%DIGITALKNOB%\Download"
 set "GIT_DL=https://github.com/git-for-windows/git/releases/download/v2.30.1.windows.1/Git-2.30.1-32-bit.exe"
 set "CMAKE_DL=https://github.com/Kitware/CMake/releases/download/v3.21.1/cmake-3.21.1-windows-i386.msi"
@@ -194,8 +195,8 @@ ECHO %APP_PATH%
 if NOT exist "%APP_PATH%\%OS%" mkdir "%APP_PATH%\%OS%"
 ::if NOT "%ERRORLEVEL%" == "0" goto error
 cd "%APP_PATH%\%OS%"
-::"%CMAKE%" -G "Visual Studio 16 2019" -A Win32 -DDEBUG=ON -DRELEASE=ON -DREBUILDALL=ON -DSTATIC=ON %DKPATH%
-"%CMAKE%" -G "Visual Studio 17 2022" -A Win32 -DDEBUG=ON -DRELEASE=ON -DREBUILDALL=ON -DSTATIC=ON %DKPATH%
+::"%CMAKE%" -G "Visual Studio 16 2019" -A Win32 -DDEBUG=ON -DRELEASE=ON -DREBUILDALL=ON -DSTATIC=ON %DKCMAKE%
+"%CMAKE%" -G "Visual Studio 17 2022" -A Win32 -DDEBUG=ON -DRELEASE=ON -DREBUILDALL=ON -DSTATIC=ON %DKMAKE%
 ::if NOT "%ERRORLEVEL%" == "0" goto error
 "%MSBUILD%" %APP%.sln /p:Configuration=Debug
 ::if NOT "%ERRORLEVEL%" == "0" goto error
