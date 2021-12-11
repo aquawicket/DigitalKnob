@@ -202,6 +202,7 @@ if(LINUX) # Disabled for Linux targets
 	DKDISABLE(DKOcr)
 	DKDISABLE(DKSDLWav)
 	DKDISABLE(DKSDLText)
+	DKDISABLE(DKSFMLWindow)
 	DKDISABLE(DKTorrent)
 	DKDISABLE(DKWebSockets)
 	DKDISABLE(freealut)
@@ -220,7 +221,7 @@ if(LINUX) # Disabled for Linux targets
 	#DKDISABLE(python)
 	DKDISABLE(sdl2_mixer)
 	DKDISABLE(sdl2_ttf)
-	#DKDISABLE(sfml sfml_sfml-network)  #TODO: disabling individual sublibraries
+	DKDISABLE(sfml) # sfml_sfml-network)  #TODO: disabling individual sublibraries
 	DKDISABLE(stackwalker)
 	DKDISABLE(uwebsockets)
 	DKDISABLE(upx)
