@@ -567,11 +567,11 @@ if(MAC)
 		MACOSX_BUNDLE_INFO_STRING
 		MACOSX_BUNDLE_LONG_VERSION_STRING "${APP_NAME} v1.0"
 		MACOSX_BUNDLE_SHORT_VERSION_STRING "1.0"
-        
-		MACOSX_FRAMEWORK_IDENTIFIER "com.digitalknob.bundle.${APP_NAME}" #required for wrapper
+		MACOSX_FRAMEWORK_IDENTIFIER "com.digitalknob.bundle.${APP_NAME}" #required for wrapper?
 		PRODUCT_BUNDLE_IDENTIFIER com.digitalknob.${APP_NAME}
 		PRODUCT_NAME com.digitalknob.${APP_NAME}
 		XCODE_ATTRIBUTE_CODE_SIGN_IDENTITY ""
+		MACOSX_BUNDLE_INFO_PLIST ${DKPLUGINS}/_DKIMPORTS/mac/Info.plist
     )
 	#set_xcode_property(${APP_NAME} "Other Code Signing Flags" "--deep")	
 	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${LIBS})
