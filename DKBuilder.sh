@@ -61,7 +61,6 @@ while :
 				git checkout -- .
 				git pull origin master
 				chmod +x $DKPATH/DKBuilder.sh
-				#echo "${options[@]}"
 				;;
 			"Git Commit")
 				echo "$opt"
@@ -78,7 +77,6 @@ while :
 				cd $DKPATH
 				git commit -a -m "git commit"
 				git push
-				#echo "${options[@]}"
 				;;
 			"DKBuilder")
 				echo "$opt"
@@ -98,7 +96,6 @@ while :
 			"Clear Screen")
 				echo "$opt"
 				clear
-				#echo "${options[@]}"
 				;;
 			"Exit")
 				echo "$opt"

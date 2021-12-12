@@ -209,7 +209,7 @@ cd "%APP_PATH%\%OS%"
 "%MSBUILD%" %APP%.sln /p:Configuration=Release
 ::if NOT "%ERRORLEVEL%" == "0" goto error
 
-
+pause
 goto end
 
 :error
