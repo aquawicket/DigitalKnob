@@ -33,8 +33,8 @@ function DKBuildConsole_end() {
 function DKBuildConsole_ChooseUpdate() {
 	console.log("\n")
 	console.log("**** Update DigitalKnob ??? ****")
-	console.log("Y. Update")
-	console.log("C. Commit")
+	console.log("1. Update")
+	console.log("2. Commit")
 	console.log("R. Reset Apps and Plugins")
 	console.log("X. Reset Everything")
 	console.log("Y. Clear Screen")
@@ -73,13 +73,13 @@ function DKBuildConsole_ChooseUpdate() {
 			TYPE = cache_json.TYPE
 			LEVEL = cache_json.LEVEL
 			break
-		//y key
-		case 121:
+		//1 key
+		case 49:
 			CPP_DK_Create("DKGit/DKGit.js")
 			DKGit_GitUpdate()
 			break
-		//c key
-		case 99:
+		//2 key
+		case 50:
 			CPP_DK_Create("DKGit/DKGit.js")
 			DKGit_GitCommit()
 			break
