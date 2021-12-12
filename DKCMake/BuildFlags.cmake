@@ -26,20 +26,20 @@ set(DKBUILDTOOLS_INCLUDED true)
 # clang--help                               general clang help                        https://explainshell.com/explain?cmd=clang+--help
 # gcc-fpu                                   ARM processor floating point math         https://explainshell.com/explain?cmd=gcc+-fpu
 
-# common flags for compilers / cmake
-#                                         MSVC                  GCC                 CLANG/LLVM        CMAKE
-# Enable runtime type information         /GR                   -frtti              -frtti            set(LLVM_ENABLE_RTTI ON)
-# Disable runtime type information        /GR-                  -fno-rtti           -fno-rtti         set(LLVM_ENABLE_RTTI OFF)
-# Standard C++ exception handling         /EHsc                 -fexceptions        -fexceptions                                  #https://stackoverflow.com/a/4574319/688352
-# No Exceptions                           /D_HAS_EXCEPTIONS=0   -fno-exceptions     -fno-exceptions                               #https://stackoverflow.com/a/65513682/688352
-# Enable updated __cplusplus macro        /Zc:__cplusplus       
-# Precompiled Header Memory Limit         /Zm<factor>                                                                             <factor> = memory size  EXAMPLE: /Zm500                                                                            
-# Use address sanatizer                   /fsanitize=address    -fsanitize=address  -fsanitize=address                            incompatable with /RTC1 
-# Suppress Startup Banner                 /nologo     
-# No Experimental filesystem warning      /D_SILENCE_EXPERIMENTAL_FILESYSTEM_DEPRECATION_WARNING
-# Enable CRT Secure functions extension   /D__STDC_WANT_LIB_EXT1__
-# supress CRT Secure function warnings    /D_CRT_SECURE_NO_WARNINGS
-# precompiled headers                     /Yu<file>                                                                               <file> = file name    EXAMPLE: /Yustdafx.h
+# common flags for compilers
+#                                         GCC                 CLANG/LLVM          MSVC                                                               NOTES
+# Enable runtime type information         -frtti              -frtti              /GR                                                         
+# Disable runtime type information        -fno-rtti           -fno-rtti           /GR-                                                         
+# Standard C++ exception handling         -fexceptions        -fexceptions        /EHsc                                                    #https://stackoverflow.com/a/4574319/688352
+# No Exceptions                           -fno-exceptions     -fno-exceptions     /D_HAS_EXCEPTIONS=0                                      #https://stackoverflow.com/a/65513682/688352
+# Use address sanatizer                   -fsanitize=address  -fsanitize=address  /fsanitize=address                                       incompatable with /RTC1 
+# Suppress Startup Banner                                                         /nologo     
+# Enable updated __cplusplus macro                                                /Zc:__cplusplus       
+# Precompiled Header Memory Limit                                                 /Zm<factor>                                              <factor> = memory size  EXAMPLE: /Zm500  
+# No Experimental filesystem warning                                              /D_SILENCE_EXPERIMENTAL_FILESYSTEM_DEPRECATION_WARNING
+# Enable CRT Secure functions extension                                           /D__STDC_WANT_LIB_EXT1__
+# supress CRT Secure function warnings                                            /D_CRT_SECURE_NO_WARNINGS
+# precompiled headers                                                             /Yu<file>                                                <file> = file name  EXAMPLE: /Yustdafx.h
 
 
 ### User Friendly Options ###
@@ -76,7 +76,7 @@ DKSET(MINGW64_GXX  C:/Users/Administrator/digitalknob/DK/3rdParty/mingw64-8.1.0/
 # Windows 32
 WIN32_DKSET(DKCMAKE_FLAGS                -DBUILD_SHARED_LIBS=OFF -DBUILD_STATIC_LIBS=ON)
 WIN32_DKSET(DKCMAKE_C_COMPILER           "${MSVC_CL}")
-WIN32_DKSET(DKCMAKE_C_FLAGS              "/DWIN32 /D_WINDOWS /D_CRT_SECURE_NO_WARNINGS /std:c17 /nologo")
+WIN32_DKSET(DKCMAKE_C_FLAGS              "/DWIN32 /D_WINDOWS /D_CRT_SECURE_NO_WARNINGS /D_WIN32_WINNT=0x0600 /D_USING_V110_SDK71_ /std:c17 /nologo /GR /EHsc /Zm500 /Zc:__cplusplus"")
 WIN32_DKSET(DKCMAKE_C_FLAGS_DEBUG        "/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG")
 WIN32_DKSET(DKCMAKE_C_FLAGS_RELEASE      "/MT /O2 /Ob2 /DNDEBUG")
 WIN32_DKSET(DKCMAKE_CXX_COMPILER         "${MSVC_CL}")
@@ -84,12 +84,12 @@ WIN32_DKSET(DKCMAKE_CXX_FLAGS            "/DWIN32 /D_WINDOWS /D_CRT_SECURE_NO_WA
 WIN32_DKSET(DKCMAKE_CXX_FLAGS_DEBUG      "/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG")
 WIN32_DKSET(DKCMAKE_CXX_FLAGS_RELEASE    "/MT /O2 /Ob2 /DNDEBUG")
 WIN32_DKSET(DKCONFIGURE_FLAGS            --build=i686-w64-mingw32 --disable-shared --enable-static)
-#WIN32_DKSET(DKCONFIGURE_CC               ${})
-WIN32_DKSET(DKCONFIGURE_CFLAGS           "-march=i686 -DWIN32 -D_WINDOWS -D_CRT_SECURE_NO_WARNINGS") # -std:c17")
+WIN32_DKSET(DKCONFIGURE_CC               ${MINGW32_GCC})
+WIN32_DKSET(DKCONFIGURE_CFLAGS           "-march=i686 -DWIN32 -D_WINDOWS -D_CRT_SECURE_NO_WARNINGS -std=gnu17")
 WIN32_DKSET(DKCONFIGURE_CFLAGS_DEBUG     "-MTd -Od -Ob0 -Zi -RTC1 -DDEBUG -D_DEBUG")
 WIN32_DKSET(DKCONFIGURE_CFLAGS_RELEASE   "-MT -O2 -Ob2 -DNDEBUG")
-#WIN32_DKSET(DKCONFIGURE_CXX	          ${})
-WIN32_DKSET(DKCONFIGURE_CXXFLAGS         "-march=i686 -DWIN32 -D_WINDOWS -D_CRT_SECURE_NO_WARNINGS -D_WIN32_WINNT=0x0600 -D_USING_V110_SDK71_") #-std:c++17 -GR -EHsc")
+WIN32_DKSET(DKCONFIGURE_CXX	          ${MINGW32_GXX})
+WIN32_DKSET(DKCONFIGURE_CXXFLAGS         "-march=i686 -DWIN32 -D_WINDOWS -D_CRT_SECURE_NO_WARNINGS -D_WIN32_WINNT=0x0600 -D_USING_V110_SDK71_ -std:gnu++17 -frtti -fexceptions")
 WIN32_DKSET(DKCONFIGURE_CXXFLAGS_DEBUG   "-MTd -Od -Ob0 -Zi -RTC1 -DDEBUG -D_DEBUG")
 WIN32_DKSET(DKCONFIGURE_CXXFLAGS_RELEASE "-MT -O2 -Ob2 -DNDEBUG")
 		
