@@ -3,12 +3,15 @@ if(DKBUILDTOOLS_INCLUDED)
 endif(DKBUILDTOOLS_INCLUDED)
 set(DKBUILDTOOLS_INCLUDED true)
 
-
-# https://llvm.org/docs/GettingStarted.html
+# https://clang.llvm.org/docs/ClangCommandLineReference.html
 # https://clang.llvm.org/docs/CrossCompilation.html
+# https://gcc.gnu.org/onlinedocs/gcc/C_002b_002b-Dialect-Options.html
+# https://gcc.gnu.org/onlinedocs/gcc/ARM-Options.html
+# https://llvm.org/docs/GettingStarted.html
 # https://llvm.org/docs/HowToCrossCompileLLVM.html
 # https://forums.raspberrypi.com/viewtopic.php?t=244095
-# https://gcc.gnu.org/onlinedocs/gcc/ARM-Options.html
+# https://bibouh123.wordpress.com/2014/10/13/compile-llvm-with-enabling-rtti/
+# https://chromium.googlesource.com/external/github.com/google/crc32c/+/refs/tags/1.0.5/CMakeLists.txt
 
 # Get the definition of any shell command                                             https://explainshell.com          
 # helpful terminal commands
@@ -20,6 +23,13 @@ set(DKBUILDTOOLS_INCLUDED true)
 # clang --version                           the version of clang on the host machine  https://explainshell.com/explain?cmd=clang+--version 
 # clang--help                               general clang help                        https://explainshell.com/explain?cmd=clang+--help
 # gcc-fpu                                   ARM processor floating point math         https://explainshell.com/explain?cmd=gcc+-fpu
+
+# common flags for compilers / cmake
+#                                      MSVC    GCC              CLANG             CMAKE
+# Enable runtime type information      /GR     -frtti           -frtti            set(LLVM_ENABLE_RTTI ON)
+# Disable runtime type information     /GR-    -fno-rtti        -fno-rtti         set(LLVM_ENABLE_RTTI OFF)
+# Standard C++ exception handling      /EHsc   -fexceptions     -fexceptions      
+# No Exceptions                                -fno-exceptions  -fno-exceptions   
  
 ### User Friendly Options ###
 DKSET(WARNINGS_AS_ERRORS OFF)
