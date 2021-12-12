@@ -98,10 +98,10 @@ function DKBuildConsole_ChooseUpdate() {
 		case 121:
 			console.log("clearing console . . .")
 			if(CPP_DK_GetOS() === "Windows"){
-				CPP_DK_Execute('cls')
+				CPP_DK_System('cls')
 			}
 			else{
-				CPP_DK_Execute('clear')
+				CPP_DK_System('clear')
 			}
 			UPDATE = ""
 			break
