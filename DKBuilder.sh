@@ -108,11 +108,11 @@ while :
 	PS3='Please select an OS to build for: '
 	if [[ "$MODEL" == "Raspberry"* ]]; then
 		options=("raspberry32" "Exit")
-	elif [[ "$OSTYPE" == "linux-gnu"* ] && [ "$HOSTYPE" == "x86_64"* ]]; then
+	elif [[ "$OSTYPE" == "linux-gnu"* ]] && [[ "$HOSTYPE" == "x86_64"* ]]; then
 		options=("linux64" "Exit")
 	elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
 		options=("linux32" "Exit")
-	elif [[ "$OSTYPE" == "darwin"* ] && [ "$HOSTYPE" == "x86_64"* ]]; then
+	elif [[ "$OSTYPE" == "darwin"* ]] && [[ "$HOSTYPE" == "x86_64"* ]]; then
 		options=("mac64" "Exit")
 	else
 		echo "UNKNOWN OS TYPE ($OSTYPE)"
