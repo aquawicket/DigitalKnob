@@ -13,13 +13,19 @@ WIN_DKSET(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v${CMAKE_V
 #dk_getShortPath("C:/Program Files (x86)/CMake/bin" CMAKE)
 WIN_DKSET(CMAKE C:/PROGRA~2/CMake/bin)
 MAC_DKSET(CMAKE /usr/local/bin)
+IOS_DKSET(CMAKE /usr/local/bin)
+IOSSIM_DKSET(CMAKE /usr/local/bin)
 LINUX_DKSET(CMAKE /usr/bin)
 RASPBERRY_DKSET(CMAKE /usr/bin)
+ANDROID_DKSET(CMAKE C:/PROGRA~2/CMake/bin)
 
 WIN_DKSET(CMAKE_EXE ${CMAKE}/cmake.exe)
 MAC_DKSET(CMAKE_EXE ${CMAKE}/cmake)
+IOS_DKSET(CMAKE_EXE ${CMAKE}/cmake)
+IOSSIM_DKSET(CMAKE_EXE ${CMAKE}/cmake)
 LINUX_DKSET(CMAKE_EXE ${CMAKE}/cmake)
 RASPBERRY_DKSET(CMAKE_EXE ${CMAKE}/cmake)
+ANDROID_DKSET(CMAKE_EXE ${CMAKE}/cmake.exe)
 
 
 ### INSTALL ###
