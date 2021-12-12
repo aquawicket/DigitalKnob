@@ -3,20 +3,23 @@ if(DKBUILDTOOLS_INCLUDED)
 endif(DKBUILDTOOLS_INCLUDED)
 set(DKBUILDTOOLS_INCLUDED true)
 
+
 # https://llvm.org/docs/GettingStarted.html
 # https://clang.llvm.org/docs/CrossCompilation.html
 # https://llvm.org/docs/HowToCrossCompileLLVM.html
 # https://forums.raspberrypi.com/viewtopic.php?t=244095
+# https://gcc.gnu.org/onlinedocs/gcc/ARM-Options.html
 
+# Get the definition of any shell command                                             https://explainshell.com          
 # helpful terminal commands
-# lscpu                                             see details about the cpu
-# uname -a                                          system identifier
-# gcc -c -Q -march=native --help=target             target specific compiler gcc flags
-# gcc --version                                     the version of gcc on the host machine
-# gcc --help                                        general gcc help 
-# clang --version                                   the version of clang on the host machine
-# clang--help                                       general clang help 
- 
+# lscpu                                     see details about the cpu                 https://explainshell.com/explain?cmd=lscpu
+# uname -a                                  system identifier                         https://explainshell.com/explain?cmd=uname+-a
+# gcc -c -Q -march=native --help=target     target specific compiler gcc flags        https://explainshell.com/explain?cmd=gcc+-c+-Q+-march%3Dnative+--help%3Dtarget
+# gcc --version                             the version of gcc on the host machine    https://explainshell.com/explain?cmd=gcc+--version
+# gcc --help                                general gcc help                          https://explainshell.com/explain?cmd=gcc+--help
+# clang --version                           the version of clang on the host machine  https://explainshell.com/explain?cmd=clang+--version 
+# clang--help                               general clang help                        https://explainshell.com/explain?cmd=clang+--help
+# gcc-fpu                                   ARM processor floating point math         https://explainshell.com/explain?cmd=gcc+-fpu
  
 ### User Friendly Options ###
 DKSET(WARNINGS_AS_ERRORS OFF)
@@ -43,6 +46,10 @@ DKSET(IOS_DARWIN      darwin20.6.0)
 DKSET(IOS_MIN_SDK     13.0)
 DKSET(IOS_SYSROOT     ${XCODE_DEVROOT}/Platforms/iPhone.platform/Developer/SDKs/iPhone15.0.sdk)
 DKSET(IOSSIM_SYSROOT  ${XCODE_DEVROOT}/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator15.0.sdk)
+
+# linux variables
+DKSET(LINUX_GCC   /usr/bin/gcc)
+DKSET(LINUX_GXX   /usr/bin/g++)
 
 # Windows 32
 WIN32_DKSET(DKCMAKE_FLAGS             -DBUILD_SHARED_LIBS=OFF)
@@ -165,10 +172,10 @@ LINUX32_DKSET(DKCMAKE_CXX_FLAGS          "-DLINUX -DLINUX32 -std=gnu++17 -lstdc+
 LINUX32_DKSET(DKCMAKE_CXX_FLAGS_DEBUG    "-DDEBUG -D_DEBUG")
 LINUX32_DKSET(DKCMAKE_CXX_FLAGS_RELEASE  "-DNDEBUG")
 LINUX32_DKSET(DKCONFIGURE_FLAGS          --disable-shared --enable-static)
-#MAC64_DKSET(DKCONFIGURE_CC               ${GCC})
-#MAC64_DKSET(DKCONFIGURE_CXX              ${GPP})
-MAC64_DKSET(DKCONFIGURE_CFLAGS           "-march=i686")
-MAC64_DKSET(DKCONFIGURE_CXXFLAGS         "-march=i686")
+LINUX32_DKSET(DKCONFIGURE_CC             ${LINUX_GCC})
+LINUX32_DKSET(DKCONFIGURE_CXX            ${LINUX_GXX})
+LINUX32_DKSET(DKCONFIGURE_CFLAGS         "-march=i686 -DLINUX -DLINUX32 -std=gnu11 -no-pie -fPIC")
+LINUX32_DKSET(DKCONFIGURE_CXXFLAGS       "-march=i686 -DLINUX -DLINUX32 -std=gnu++17 -lstdc++fs -no-pie -fPIC")
 
 # Linux 64
 LINUX64_DKSET(DKCMAKE_FLAGS              -DBUILD_SHARED_LIBS=OFF)
@@ -179,10 +186,10 @@ LINUX64_DKSET(DKCMAKE_CXX_FLAGS          "-DLINUX -DLINUX64 -std=gnu++17 -lstdc+
 LINUX64_DKSET(DKCMAKE_CXX_FLAGS_DEBUG    "-DDEBUG -D_DEBUG")
 LINUX64_DKSET(DKCMAKE_CXX_FLAGS_RELEASE  "-DNDEBUG")
 LINUX64_DKSET(DKCONFIGURE_FLAGS          --disable-shared --enable-static)
-#LINUX64_DKSET(DKCONFIGURE_CC             ${GCC})
-#LINUX64_DKSET(DKCONFIGURE_CXX            ${GPP})
-LINUX64_DKSET(DKCONFIGURE_CFLAGS         "-march=x86-64")
-LINUX64_DKSET(DKCONFIGURE_CXXFLAGS       "-march=x86-64")
+LINUX64_DKSET(DKCONFIGURE_CC             ${LINUX_GCC})
+LINUX64_DKSET(DKCONFIGURE_CXX            ${LINUX_GXX})
+LINUX64_DKSET(DKCONFIGURE_CFLAGS         "-march=x86-64 -DLINUX -DLINUX64 -std=gnu11 -no-pie -fPIC")
+LINUX64_DKSET(DKCONFIGURE_CXXFLAGS       "-march=x86-64 -DLINUX -DLINUX64 -std=gnu++17 -lstdc++fs -no-pie -fPIC")
 
 # Raspbery 32
 RASPBERRY32_DKSET(DKCMAKE_FLAGS              -DBUILD_SHARED_LIBS=OFF)
@@ -193,8 +200,8 @@ RASPBERRY32_DKSET(DKCMAKE_CXX_FLAGS          "-DLINUX -DLINUX32 -DRASPBERRY -DRA
 RASPBERRY32_DKSET(DKCMAKE_CXX_FLAGS_DEBUG    "-DDEBUG -D_DEBUG")
 RASPBERRY32_DKSET(DKCMAKE_CXX_FLAGS_RELEASE  "-DNDEBUG")
 RASPBERRY32_DKSET(DKCONFIGURE_FLAGS          --disable-shared --enable-static)
-#RASPBERRY32_DKSET(DKCONFIGURE_CC             ${GCC})
-#RASPBERRY32_DKSET(DKCONFIGURE_CXX            ${GPP})
+RASPBERRY32_DKSET(DKCONFIGURE_CC             ${LINUX_GCC})
+RASPBERRY32_DKSET(DKCONFIGURE_CXX            ${LINUX_GXX})
 RASPBERRY32_DKSET(DKCONFIGURE_CFLAGS         "-march=armv7l")
 RASPBERRY32_DKSET(DKCONFIGURE_CXXFLAGS       "-march=armv7l")
 
@@ -207,10 +214,10 @@ RASPBERRY64_DKSET(DKCMAKE_CXX_FLAGS          "-DLINUX -DLINUX64 -DRASPBERRY -DRA
 RASPBERRY64_DKSET(DKCMAKE_CXX_FLAGS_DEBUG    "-DDEBUG -D_DEBUG")
 RASPBERRY64_DKSET(DKCMAKE_CXX_FLAGS_RELEASE  "-DNDEBUG")
 RASPBERRY64_DKSET(DKCONFIGURE_FLAGS          --disable-shared --enable-static)
-#RASPBERRY64_DKSET(DKCONFIGURE_CC             ${GCC})
-#RASPBERRY64_DKSET(DKCONFIGURE_CXX            ${GPP})
-#RASPBERRY64_DKSET(DKCONFIGURE_CFLAGS         "-march=x86-64")
-#RASPBERRY64_DKSET(DKCONFIGURE_CXXFLAGS       "-march=x86-64")
+RASPBERRY64_DKSET(DKCONFIGURE_CC             ${LINUX_GCC})
+RASPBERRY64_DKSET(DKCONFIGURE_CXX            ${LINUX_GXX})
+#RASPBERRY64_DKSET(DKCONFIGURE_CFLAGS         "-march=armv7l")
+#RASPBERRY64_DKSET(DKCONFIGURE_CXXFLAGS       "-march=armv7l")
 
 # Android 32
 ANDROID32_DKSET(DKCMAKE_FLAGS
