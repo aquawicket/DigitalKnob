@@ -27,15 +27,19 @@ set(DKBUILDTOOLS_INCLUDED true)
 # gcc-fpu                                   ARM processor floating point math         https://explainshell.com/explain?cmd=gcc+-fpu
 
 # common flags for compilers / cmake
-#                                      MSVC                  GCC                 CLANG/LLVM        CMAKE
-# Enable runtime type information      /GR                   -frtti              -frtti            set(LLVM_ENABLE_RTTI ON)
-# Disable runtime type information     /GR-                  -fno-rtti           -fno-rtti         set(LLVM_ENABLE_RTTI OFF)
-# Standard C++ exception handling      /EHsc                 -fexceptions        -fexceptions                                  #https://stackoverflow.com/a/4574319/688352
-# No Exceptions                        /D_HAS_EXCEPTIONS=0   -fno-exceptions     -fno-exceptions                               #https://stackoverflow.com/a/65513682/688352
-# Enable updated __cplusplus macro     /Zc:__cplusplus       
-# Precompiled Header Memory Limit      /Zm<factor>                                                                             <factor> = memory size  EXAMPLE: /Zm500                                                                            
-# Suppress Startup Banner              /nologo               
-# Use address sanatizer                /fsanitize=address    -fsanitize=address  -fsanitize=address                            incompatable with /RTC1 
+#                                         MSVC                  GCC                 CLANG/LLVM        CMAKE
+# Enable runtime type information         /GR                   -frtti              -frtti            set(LLVM_ENABLE_RTTI ON)
+# Disable runtime type information        /GR-                  -fno-rtti           -fno-rtti         set(LLVM_ENABLE_RTTI OFF)
+# Standard C++ exception handling         /EHsc                 -fexceptions        -fexceptions                                  #https://stackoverflow.com/a/4574319/688352
+# No Exceptions                           /D_HAS_EXCEPTIONS=0   -fno-exceptions     -fno-exceptions                               #https://stackoverflow.com/a/65513682/688352
+# Enable updated __cplusplus macro        /Zc:__cplusplus       
+# Precompiled Header Memory Limit         /Zm<factor>                                                                             <factor> = memory size  EXAMPLE: /Zm500                                                                            
+# Use address sanatizer                   /fsanitize=address    -fsanitize=address  -fsanitize=address                            incompatable with /RTC1 
+# Suppress Startup Banner                 /nologo     
+# No Experimental filesystem warning      /D_SILENCE_EXPERIMENTAL_FILESYSTEM_DEPRECATION_WARNING
+# Enable CRT Secure functions extension   /D__STDC_WANT_LIB_EXT1__
+# supress CRT Secure function warnings    /D_CRT_SECURE_NO_WARNINGS
+# precompiled headers                     /Yu<file>                                                                               <file> = file name    EXAMPLE: /Yustdafx.h
 
 
 ### User Friendly Options ###
@@ -43,12 +47,7 @@ DKSET(WARNINGS_AS_ERRORS OFF)
 DKSET(WARNING_LEVEL 3)
 DKSET(WARNING_4244 ON)
 #DKSET(STATIC ON)
-#DKSET(SHARED OFF)
-## Compiler Flags Notes                                             
-# /D_SILENCE_EXPERIMENTAL_FILESYSTEM_DEPRECATION_WARNING
-# /D__STDC_WANT_LIB_EXT1__                                  enable CRT Secure functions extension
-# /D_CRT_SECURE_NO_WARNINGS                                 supress VC CRT Secure function warnings
-# CXXFLAGS /Yustdafx.h                                      precompiled headers
+#DKSET(SHARED OFF)                                          
 
 # xcode Variables
 DKSET(XCODE_DEVROOT  /Applications/Xcode.app/Contents/Developer)
