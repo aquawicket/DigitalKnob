@@ -117,7 +117,7 @@ if(MAC)  # Disabled on Mac host machines
 	DKDISABLE(freealut-master)
 	DKDISABLE(ghostscript)
 	DKDISABLE(imagemagick)
-	DKDISABLE(jpeg) 
+	DKDISABLE(jpeg)
 	DKDISABLE(leptonica)
 	DKDISABLE(libtorrent)
 	DKDISABLE(libuv)

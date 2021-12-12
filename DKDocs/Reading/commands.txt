@@ -15,3 +15,6 @@ sudo chmod +x filepath/filename.ext
 
 give ALL permissions
 sudo chmod +777 filepath/filename.ext
+
+set (on windows)
+print list of currect environment variables
