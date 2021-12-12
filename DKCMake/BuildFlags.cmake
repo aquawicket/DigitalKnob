@@ -145,11 +145,11 @@ MAC64_DKSET(DKCMAKE_CXX_FLAGS_DEBUG       "-DDEBUG -D_DEBUG")
 MAC64_DKSET(DKCMAKE_CXX_FLAGS_RELEASE     "-DNDEBUG")
 MAC64_DKSET(DKCONFIGURE_FLAGS             --disable-shared --enable-static)
 #MAC64_DKSET(DKCONFIGURE_CC                ${XCODE_CLANG})
-MAC64_DKSET(DKCONFIGURE_CFLAGS            "-DMAC -DMAC64 -std=c17 -L/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib") #-x objective-c") # https://stackoverflow.com/questions/28756343/clang-link-failure-error-source-file-is-not-valid-utf-8
+MAC64_DKSET(DKCONFIGURE_CFLAGS            "-DMAC -DMAC64 -std=c17 -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include -L/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib") #-x objective-c") # https://stackoverflow.com/questions/28756343/clang-link-failure-error-source-file-is-not-valid-utf-8
 MAC64_DKSET(DKCONFIGURE_CFLAGS_DEBUG      "-DDEBUG -D_DEBUG")
 MAC64_DKSET(DKCONFIGURE_CFLAGS_RELEASE    "-DNDEBUG")
 #MAC64_DKSET(DKCONFIGURE_CXX               ${XCODE_CLANGXX})
-MAC64_DKSET(DKCONFIGURE_CXXFLAGS          "-DMAC -DMAC64 -std=c++17") #-x objective-c++") #https://stackoverflow.com/questions/28756343/clang-link-failure-error-source-file-is-not-valid-utf-8
+MAC64_DKSET(DKCONFIGURE_CXXFLAGS          "-DMAC -DMAC64 -std=c++17 -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include -L/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib") #-x objective-c++") #https://stackoverflow.com/questions/28756343/clang-link-failure-error-source-file-is-not-valid-utf-8
 MAC64_DKSET(DKCONFIGURE_CXXFLAGS_DEBUG    "-DDEBUG -D_DEBUG")
 MAC64_DKSET(DKCONFIGURE_CXXFLAGS_RELEASE  "-DNDEBUG")
 
