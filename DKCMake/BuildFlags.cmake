@@ -12,6 +12,8 @@ set(DKBUILDTOOLS_INCLUDED true)
 # https://forums.raspberrypi.com/viewtopic.php?t=244095
 # https://bibouh123.wordpress.com/2014/10/13/compile-llvm-with-enabling-rtti/
 # https://chromium.googlesource.com/external/github.com/google/crc32c/+/refs/tags/1.0.5/CMakeLists.txt
+# https://docs.microsoft.com/en-us/cpp/build/reference/eh-exception-handling-model?view=msvc-170
+# https://stackoverflow.com/a/24836566/688352
 
 # Get the definition of any shell command                                             https://explainshell.com          
 # helpful terminal commands
@@ -25,11 +27,11 @@ set(DKBUILDTOOLS_INCLUDED true)
 # gcc-fpu                                   ARM processor floating point math         https://explainshell.com/explain?cmd=gcc+-fpu
 
 # common flags for compilers / cmake
-#                                      MSVC    GCC              CLANG             CMAKE
-# Enable runtime type information      /GR     -frtti           -frtti            set(LLVM_ENABLE_RTTI ON)
-# Disable runtime type information     /GR-    -fno-rtti        -fno-rtti         set(LLVM_ENABLE_RTTI OFF)
-# Standard C++ exception handling      /EHsc   -fexceptions     -fexceptions      
-# No Exceptions                                -fno-exceptions  -fno-exceptions   
+#                                      MSVC                  GCC              CLANG             CMAKE
+# Enable runtime type information      /GR                   -frtti           -frtti            set(LLVM_ENABLE_RTTI ON)
+# Disable runtime type information     /GR-                  -fno-rtti        -fno-rtti         set(LLVM_ENABLE_RTTI OFF)
+# Standard C++ exception handling      /EHsc                 -fexceptions     -fexceptions      
+# No Exceptions                        /D_HAS_EXCEPTIONS=0   -fno-exceptions  -fno-exceptions                               #https://stackoverflow.com/a/65513682/688352
  
 ### User Friendly Options ###
 DKSET(WARNINGS_AS_ERRORS OFF)
