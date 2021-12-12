@@ -241,7 +241,7 @@ if(RASPBERRY) # Disabled for Raspberry Pi targets
 	DKDISABLE(DKHook) #NOTE: this has linux functions too
 	DKDISABLE(DKMidi)
 	DKDISABLE(DKOcr)
-	#DKDISABLE(DKSDLText)
+	DKDISABLE(DKSDLText)
 	DKDISABLE(DKWebSockets)
 	DKDISABLE(freealut)
 	DKDISABLE(freealut-master)
