@@ -258,6 +258,7 @@ if(RASPBERRY) # Disabled for Raspberry Pi targets
 	DKDISABLE(openssl)
 	DKDISABLE(podofo)
 	DKDISABLE(python)
+	DKDISABLE(sdl2_gif)
 	DKDISABLE(sdl2_mixer)
 	DKDISABLE(sdl2_ttf)
 	DKDISABLE(stackwalker)
