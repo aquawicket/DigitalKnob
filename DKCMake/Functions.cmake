@@ -768,6 +768,13 @@ function(IOS64_DKSET)
 	endif()
 endfunction()
 
+function(IOSSIM_DKSET)
+	DKDEBUG(${ARGV})
+	if(IOSSIM)
+		DKSET(${ARGV})
+	endif()
+endfunction()
+
 function(IOSSIM32_DKSET)
 	DKDEBUG(${ARGV})
 	if(IOSSIM_32)
