@@ -1,0 +1,4 @@
+associate a file extention via command line 
+
+EXAMPLE: to fix .bat or .cmd files
+Open console as Administrator and type: assoc .bat=batfile
