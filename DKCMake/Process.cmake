@@ -29,9 +29,9 @@ DKSET(DKAPP ON)
 ##################################################
 include(${DKCMAKE}/BuildFlags.cmake)
 include(${DKPROJECT}/DKMAKE.cmake)
-
 DKREMOVE(${DKPROJECT}/${OS}/DKBUILD.log)
 dk_printSettings()
+
 DKBUILD_LOG("##############################################")
 DKBUILD_LOG("######  Enabled Dependencies (sorted)  #######")
 DKBUILD_LOG("##############################################")
