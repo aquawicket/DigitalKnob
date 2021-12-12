@@ -1,13 +1,27 @@
 #ifndef STD_BOOL_H
 #define STD_BOOL_H
 
-#if !defined(MAC) && !defined(IOS)
-#if !defined(HAVE_DK) && !defined(OSG_LIBRARY_STATIC)
-typedef int bool;
-#endif
+#ifndef __cplusplus
+#include <stdbool.h>
 #endif
 
-#define false 0
-#define true 1
+/*
+#ifndef __cplusplus
+#ifndef _BOOL
+typedef unsigned char bool;
+static const bool False = 0;
+static const bool True = 1;
+#endif
+#endif 
+*/
+
+//old way
+//#if !defined(MAC) && !defined(IOS)
+//#if !defined(HAVE_DK) && !defined(OSG_LIBRARY_STATIC)
+//typedef unsigned char bool;
+//#endif
+//#endif
+//#define false 0
+//#define true 1
 
 #endif
