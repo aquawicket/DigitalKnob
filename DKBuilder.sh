@@ -1,12 +1,8 @@
 #!/bin/bash
 
 if [ -e /proc/device-tree/model ]; then
-MODEL=$(tr -d '\0' </proc/device-tree/model)
+	MODEL=$(tr -d '\0' </proc/device-tree/model)
 fi
-if [[ "$MODEL" == "Raspberry"* ]]; then
-	echo "The Host is a Raspberry Pi"
-fi
-
 echo "hostname = $HOSTNAME"
 echo "hosttype = $HOSTTYPE"
 echo "ostype =   $OSTYPE"
@@ -110,9 +106,13 @@ while :
 
 	echo " "
 	PS3='Please select an OS to build for: '
-	if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-		options=("linux32" "linux64" "raspberry32" "Exit")
-	elif [[ "$OSTYPE" == "darwin"* ]]; then
+	if [[ "$MODEL" == "Raspberry"* ]]; then
+		options=("raspberry32" "Exit")
+	elif [[ "$OSTYPE" == "linux-gnu"* ] && [ "$HOSTYPE" == "x86_64"* ]]; then
+		options=("linux64" "Exit")
+	elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
+		options=("linux32" "Exit")
+	elif [[ "$OSTYPE" == "darwin"* ] && [ "$HOSTYPE" == "x86_64"* ]]; then
 		options=("mac64" "Exit")
 	else
 		echo "UNKNOWN OS TYPE ($OSTYPE)"
