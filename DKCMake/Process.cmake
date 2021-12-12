@@ -18,8 +18,6 @@ include(Disabled.cmake)
 get_filename_component(APP_NAME ${DKPROJECT} NAME)
 string(REPLACE " " "_" APP_NAME ${APP_NAME})
 
-dk_printSettings()
-
 ############################################################################################
 ############################   ADD EXECUTABLE  #############################################
 ############################################################################################
@@ -33,9 +31,10 @@ include(${DKCMAKE}/BuildFlags.cmake)
 include(${DKPROJECT}/DKMAKE.cmake)
 
 DKREMOVE(${DKPROJECT}/${OS}/DKBUILD.log)
-DKBUILD_LOG("############################################################")
-DKBUILD_LOG("######  Enabled Dependencies (sorted by dependency)  #######")
-DKBUILD_LOG("############################################################")
+dk_printSettings()
+DKBUILD_LOG("##############################################")
+DKBUILD_LOG("######  Enabled Dependencies (sorted)  #######")
+DKBUILD_LOG("##############################################")
 list(REMOVE_DUPLICATES dkdepend_list)
 foreach(plugin ${dkdepend_list})
 	DKBUILD_LOG("${plugin}")
