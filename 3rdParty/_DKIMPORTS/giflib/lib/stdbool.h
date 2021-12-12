@@ -1,17 +1,17 @@
 #ifndef STD_BOOL_H
 #define STD_BOOL_H
 
-#ifndef __cplusplus
-#include <stdbool.h>
-#endif
+//#ifndef __cplusplus
+//#include <stdbool.h>
+//#endif
 
-#ifndef __cplusplus
-#ifndef _BOOL
+//#ifndef __cplusplus
+//#ifndef _BOOL
 typedef unsigned char bool;
 static const bool false = 0;
 static const bool true = 1;
-#endif
-#endif 
+//#endif
+//#endif 
 
 //old way
 //#if !defined(MAC) && !defined(IOS)
