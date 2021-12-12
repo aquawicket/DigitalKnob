@@ -3980,6 +3980,7 @@ function(BIN2H)
     endif()
 endfunction()
 
+# https://cmake.org/cmake/help/latest/manual/cmake-variables.7.html
 function(dk_printSettings)
 	DKDEBUG(${ARGV})
 	DKBUILD_LOG("###########  HOST SYSTEM VARIABLES  ##########")
