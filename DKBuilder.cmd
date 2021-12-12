@@ -214,7 +214,7 @@ goto end
 
 :error
 echo Failed with error code: %ERRORLEVEL%
+pause
 
 :end
 ECHO Done
-pause
