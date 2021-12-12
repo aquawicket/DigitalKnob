@@ -56,7 +56,9 @@ while :
 				else
 					sudo apt-get -y install git
 				fi
-				git clone https://github.com/aquawicket/DigitalKnob.git $DKPATH
+				if [[ ! -d "$DKPATH/.git" ]]; then
+					git clone https://github.com/aquawicket/DigitalKnob.git $DKPATH
+				fi
 				cd $DKPATH
 				git checkout -- .
 				git pull origin master
