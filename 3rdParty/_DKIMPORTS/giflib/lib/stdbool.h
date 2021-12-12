@@ -5,7 +5,6 @@
 #include <stdbool.h>
 #endif
 
-/*
 #ifndef __cplusplus
 #ifndef _BOOL
 typedef unsigned char bool;
@@ -13,7 +12,6 @@ static const bool False = 0;
 static const bool True = 1;
 #endif
 #endif 
-*/
 
 //old way
 //#if !defined(MAC) && !defined(IOS)
