@@ -96,14 +96,15 @@ function DKBuildConsole_ChooseUpdate() {
 			break
 		//y key	
 		case 121:
+			console.log("clearing console . . .")
 			if(CPP_DK_GetOS() === "Windows"){
 				CPP_DK_Execute('cls')
 			}
 			else{
 				CPP_DK_Execute('clear')
 			}
-			UPDATE = "";
-			break;
+			UPDATE = ""
+			break
 		case 122:
 			console.log("Clearing CMake Cache Files . . .")
 			if(CPP_DK_GetOS() === "Windows"){
