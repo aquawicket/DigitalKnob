@@ -705,6 +705,27 @@ endfunction()
 
 ####################### DKSET ###########
 # FIXME: These set functions are mixing and matching Host vs Target.   the style should follow WIN64HOST_SET and WIN64_SET patterns 
+function(WIN_HOST_DKSET)
+	DKDEBUG(${ARGV})
+	if(CMAKE_HOST_WIN32)
+		DKSET(${ARGV})
+	endif()
+endfunction()
+
+function(MAC_HOST_DKSET)
+	DKDEBUG(${ARGV})
+	if(CMAKE_HOST_APPLE)
+		DKSET(${ARGV})
+	endif()
+endfunction()
+
+function(LINUX_HOST_DKSET)
+	DKDEBUG(${ARGV})
+	if(CMAKE_HOST_LINUX)
+		DKSET(${ARGV})
+	endif()
+endfunction()
+
 function(WIN_DKSET)
 	DKDEBUG(${ARGV})
 	if(WIN)
