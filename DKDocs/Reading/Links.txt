@@ -12,3 +12,6 @@ https://en.wikibooks.org/wiki/Git/Repository_on_a_USB_stick
 
 sciter - a cross platform html/js/css API
 https://github.com/sciter-sdk/go-sciter
+
+Windows Environment variables
+https://www.windows-commandline.com/windows-environment-variables/
