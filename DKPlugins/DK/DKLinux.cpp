@@ -31,6 +31,8 @@ bool DKLinux::GetKey(int& key){
 	DKDEBUGFUNC("key");
 
 	int ch_a;  // The getchar function returns an int (important for EOF check)
+	int ch_b;
+	int ch_c;
 	if ((ch_a = getchar()) == 27){ //1    Escape read, there's more characters to read
 		printf("ch_a:%d_", ch_a);
 		if ((ch_b = getchar()) == 79){ //2    It's a function key, there's one more characters to read
