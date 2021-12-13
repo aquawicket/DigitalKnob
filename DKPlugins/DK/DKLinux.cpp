@@ -29,40 +29,40 @@ t_key keys[] = {
 //F keys and arrow keys emmit 2 bytes
 bool DKLinux::GetKey(int& key){
 	DKDEBUGFUNC("key");
-
-	int ch_a;  // The getchar function returns an int (important for EOF check)
-	int ch_b;
-	int ch_c;
-	if ((ch_a = getchar()) == 27){ //1    Escape read, there's more characters to read
-		printf("ch_a:%d_", ch_a);
-		if ((ch_b = getchar()) == 79){ //2    It's a function key, there's one more characters to read
-			printf("ch_b:%d_", ch_b);
-			ch_c = getchar(); //3
-			printf("ch_c:%d  END\n", ch_c);
-			/*
-			switch (ch_c){ // Check which function key was input
-			case 83:// F4...
-				key = ch_c;
-				break;
-				//...1
-			default:
-				// Unknown key...
+	while (1) {
+		int ch_a;  // The getchar function returns an int (important for EOF check)
+		int ch_b;
+		int ch_c;
+		if ((ch_a = getchar()) == 27) { //1    Escape read, there's more characters to read
+			printf("%d_", ch_a);
+			if ((ch_b = getchar()) == 79) { //2    It's a function key, there's one more characters to read
+				printf("%d_", ch_b);
+				ch_c = getchar(); //3
+				printf("%d  END\n", ch_c);
+				/*
+				switch (ch_c){ // Check which function key was input
+				case 83:// F4...
+					key = ch_c;
+					break;
+					//...1
+				default:
+					// Unknown key...
+				}
+				*/
 			}
-			*/
+			else {
+				printf("ch_b:%d   END\n", ch_b);     // Not a function key, perhaps Alt-D?
+				//if (ch_b == 100){
+				//	// ...
+				//}
+			}
 		}
-		else{
-			printf("ch_b:%d   END\n", ch_b);     // Not a function key, perhaps Alt-D?
-			//if (ch_b == 100){
-			//	// ...
-			//}
+		else {
+			// Not escape, a normal key...
+			printf("ch_a:%d   END\n", ch_a);
+			//key = ch_a;
 		}
 	}
-	else{
-		// Not escape, a normal key...
-		printf("ch_a:%d   END\n", ch_a);
-		key = ch_a;
-	}
-
 			//Method 1
 			// int rtnvalue;
 			//system("stty raw", rtnvalue); // Set terminal to raw mode, (no wait for enter) 
