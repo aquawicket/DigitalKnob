@@ -28,6 +28,7 @@ t_key keys[] = {
 // https://github.com/depp/keycode
 //F keys and arrow keys emmit 2 bytes
 bool DKLinux::GetKey(int& key){
+	/*
 	DKDEBUGFUNC("key");
 	while (1) {
 		int ch_a;  // The getchar function returns an int (important for EOF check)
@@ -39,7 +40,7 @@ bool DKLinux::GetKey(int& key){
 				printf("%d_", ch_b);
 				ch_c = getchar(); //3
 				printf("%d  END\n", ch_c);
-				/*
+				
 				switch (ch_c){ // Check which function key was input
 				case 83:// F4...
 					key = ch_c;
@@ -48,10 +49,10 @@ bool DKLinux::GetKey(int& key){
 				default:
 					// Unknown key...
 				}
-				*/
+				
 			}
 			else {
-				printf("ch_b:%d   END\n", ch_b);     // Not a function key, perhaps Alt-D?
+				printf(":%d   END\n", ch_b);     // Not a function key, perhaps Alt-D?
 				//if (ch_b == 100){
 				//	// ...
 				//}
@@ -60,13 +61,14 @@ bool DKLinux::GetKey(int& key){
 		else {
 			// Not escape, a normal key...
 			printf("ch_a:%d   END\n", ch_a);
-			//key = ch_a;
+			key = ch_a;
 		}
 	}
+	*/
 			//Method 1
 			// int rtnvalue;
 			//system("stty raw", rtnvalue); // Set terminal to raw mode, (no wait for enter) 
-	 //key = getchar();       
+	 key = getchar();       
 			//system("stty cooked", rtnvalue); // Reset terminal to normal "cooked" mode
 			/*
 			//Method 2
