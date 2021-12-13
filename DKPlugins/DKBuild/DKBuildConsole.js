@@ -5,12 +5,9 @@ var APP    = ""
 var TYPE   = ""
 var LEVEL  = "RebuildAll";
 
-function getKey(){
-	
-	var key = 10
-	while(key === 10 || key === 0){
-		key = CPP_DK_GetKey()
-	}
+function getch(){
+	key = CPP_DK_getch()
+	console.log("key = "+key)
 	return key
 }
 
@@ -62,7 +59,7 @@ function DKBuildConsole_ChooseUpdate() {
 	console.log("ESC. exit")
 	console.log("\n")
 		
-	var key = getKey()
+	var key = getch()
 	
 	UPDATE = 1	
 	switch(key){
@@ -164,7 +161,7 @@ function DKBuildConsole_SelectOs() {
 	console.log("ESC. exit")
 	console.log("\n")
 		
-	var key = getKey()
+	var key = getch()
 
 	switch(key){
 		case 48: //0
@@ -221,7 +218,7 @@ function DKBuildConsole_SelectApp() {
 	console.log("ESC. exit")
 	console.log("\n")
 		
-	var key = getKey()
+	var key = getch()
 	
 	switch(key){
 		case 48: //0
@@ -250,7 +247,7 @@ function DKBuildConsole_SelectType() {
 	console.log("ESC. exit")
 	console.log("\n")
 	
-	var key = getKey()
+	var key = getch()
 		
 	switch(key){
 		case 48: //0
@@ -298,7 +295,7 @@ function DKBuildConsole_Process() {
 	}
 	
 	//console.log("Press any key to Build")
-	//CPP_DK_GetKey()
+	//CPP_DK_getch()
 		
 	if(APP == "ALLAPPS"){
 		for (var i = 0; i < APP_LIST.length; ++i){
