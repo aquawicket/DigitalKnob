@@ -470,12 +470,12 @@ int DKDuktapeJS::GetClipboard(duk_context* ctx){
 }
 
 int DKDuktapeJS::getch(duk_context* ctx){
-	int key = DKUtil::getch();
+	int key = getch();
 	duk_push_int(ctx, key);
 	return 1;
 }
 int DKDuktapeJS::getche(duk_context* ctx){
-	int key = DKUtil::getche();
+	int key = getche();
 	duk_push_int(ctx, key);
 	return 1;
 }

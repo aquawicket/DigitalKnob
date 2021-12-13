@@ -13,19 +13,19 @@ static struct termios current, old;
 */
 
 
-char getch(void) {
+char getch() {
 	DKDEBUGFUNC();
-	return DKUnix::getch_(0);
+	return getch_(0);
 }
 
-char getche(void) {
+char getche() {
 	DKDEBUGFUNC();
-	return DKUnix::getch_(1);
+	return getch_(1);
 }
 
 bool DKUnix::GetKey(int& key){
 	DKDEBUGFUNC(key);
-	return DKUnix::getch();
+	return getch();
 }
 
 bool DKUnix::Sleep(int milliseconds){

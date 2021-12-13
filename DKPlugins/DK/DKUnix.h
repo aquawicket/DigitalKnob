@@ -4,8 +4,8 @@
 #define DKUnix_H
 
 
-char getch(void);
-char getche(void);
+char getch();
+char getche();
 
 class DKUnix{
 public:
