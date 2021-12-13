@@ -123,10 +123,10 @@ function DKBuildConsole_ChooseUpdate() {
 function DKBuildConsole_SelectOs() {
 	const OSes = [];
 	if(CPP_DK_GetOS() === "Windows"){
-		//if(CPP_DK_GetArch() === "i686")
+		//if(CPP_DK_GetOSArchitecture() === "i686")
 			OSes.push("win32")
 			OSes.push("win64")
-		//if(CPP_DK_GetArch() === "x86_64")
+		//if(CPP_DK_GetOSArchitecture() === "x86_64")
 			OSes.push("android32")
 			OSes.push("android64")
 	}
