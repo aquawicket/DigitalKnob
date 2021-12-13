@@ -26,7 +26,7 @@ bool DKDuktapeJS::Init(){
 	DKString debug;
 	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[LOG_DEBUG]", debug);
 	DKString file;
-	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[LOG_FILE]", file);
+	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[LOG_FILE]", file); 
 	if(same(errors,"OFF")){ log_errors = false; }
 	if(same(warnings,"OFF")){ log_warnings = false; }
 	if(same(info,"OFF")){ log_info = false; }
@@ -71,6 +71,8 @@ bool DKDuktapeJS::Init(){
 	DKDuktape::AttachFunction("CPP_DK_GetArgs", DKDuktapeJS::GetArgs);
 	DKDuktape::AttachFunction("CPP_DK_GetBrowser", DKDuktapeJS::GetBrowser);
 	DKDuktape::AttachFunction("CPP_DK_GetClipboard", DKDuktapeJS::GetClipboard);
+	DKDuktape::AttachFunction("CPP_DK_getch", DKDuktapeJS::getch);
+	DKDuktape::AttachFunction("CPP_DK_getche", DKDuktapeJS::getche);
 	DKDuktape::AttachFunction("CPP_DK_GetData", DKDuktapeJS::GetData);
 	DKDuktape::AttachFunction("CPP_DK_GetDate", DKDuktapeJS::GetDate);
 	DKDuktape::AttachFunction("CPP_DK_GetEvents", DKDuktapeJS::GetEvents);
@@ -464,6 +466,17 @@ int DKDuktapeJS::GetClipboard(duk_context* ctx){
 	DKString string;
 	if(!DKUtil::GetClipboard(string)){ return 0; }
 	duk_push_string(ctx, string.c_str());
+	return 1;
+}
+
+int DKDuktapeJS::getch(duk_context* ctx){
+	int key = DKUtil::getch();
+	duk_push_int(ctx, key);
+	return 1;
+}
+int DKDuktapeJS::getche(duk_context* ctx){
+	int key = DKUtil::getche();
+	duk_push_int(ctx, key);
 	return 1;
 }
 

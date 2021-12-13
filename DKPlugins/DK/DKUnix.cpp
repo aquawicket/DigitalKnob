@@ -25,9 +25,7 @@ char getche(void) {
 
 bool DKUnix::GetKey(int& key){
 	DKDEBUGFUNC(key);
-	int c;
-	while ((c = getchar()) != '\n' && c != EOF) { }
-	return getch();
+	return DKUnix::getch();
 }
 
 bool DKUnix::Sleep(int milliseconds){
