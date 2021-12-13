@@ -67,7 +67,7 @@
 
 class DKLog {
 public:
-	static bool Clear();
+	static bool Clear(int& rtnvalue);
 	static bool ColorMap();
 	static bool Log(const char* file, int line, const char* func, const DKString& input, const int lvl = DK_INFO);
 	static bool SetLog(const int lvl, const DKString& text);

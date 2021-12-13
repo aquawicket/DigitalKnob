@@ -115,17 +115,8 @@ bool GetBuildSecond(const char* buildTime, DKString& buildSecond) {
 }
 
 
-bool DKLog::Clear(){
-#ifdef WIN32
-    system("cls");
-    //clrscr(); // #include conio.h
-#elif defined (LINUX)
-    system("clear");
-    //std::cout<< u8"\033[2J\033[1;1H"; //Escape Sequences Clear 
-#elif defined (APPLE)
-    system("clear");
-#endif
-	return true;
+bool DKLog::Clear(int& rtnvalue){
+    return DKUtil::System("cls", rtnvalue);
 }
 
 // https://www.lihaoyi.com/post/BuildyourownCommandLinewithANSIescapecodes.html

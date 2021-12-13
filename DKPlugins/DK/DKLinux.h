@@ -33,11 +33,11 @@ public:
 	static bool PhysicalMemory(unsigned long long& physicalMemory);
 	static bool PhysicalMemoryUsed(unsigned long long& physicalMemory);
 	static bool PhysicalMemoryUsedByApp(unsigned int& physicalMemory);
-	static bool Run(const DKString& command);
+	static bool Run(const DKString& command, int& rtnvalue);
 	static bool SetClipboard(const DKString& text);
 	static bool SetVolume(double nVolume);
 	static bool StrokeKey(const int& key);
-	static bool TurnOffMonitor();
+	static bool TurnOffMonitor(int& rtnvalue);
 	static bool TurnOnMonitor();
 	static bool VirtualMemory(unsigned long long& virtualMemory);
 	static bool VirtualMemoryUsed(unsigned long long& virtualMemory);

@@ -9,7 +9,7 @@
 #include <X11/extensions/XTest.h>  //requires  libxtst-dev
 #include <alsa/asoundlib.h>
 #include <unistd.h>         
-#include <termios.h>  //for system("stty raw") in GetKey()
+#include <termios.h>  //for system()
 
 /*
 #include <unistd.h> 
@@ -26,9 +26,10 @@ t_key keys[] = {
 bool DKLinux::GetKey(int& key){
 	DKDEBUGFUNC("key");
 	//Method 1
-	//system("stty raw"); // Set terminal to raw mode, (no wait for enter) 
+	// int rtnvalue;
+	//system("stty raw", rtnvalue); // Set terminal to raw mode, (no wait for enter) 
 	key = getchar();       
-	//system("stty cooked"); // Reset terminal to normal "cooked" mode
+	//system("stty cooked", rtnvalue); // Reset terminal to normal "cooked" mode
 	/*
 	//Method 2
 	if(!getch(key))
@@ -228,13 +229,11 @@ bool DKLinux::GetScreenHeight(int& h){
 	return true;
 }
 
-bool DKLinux::Run(const DKString& command){
+bool DKLinux::Run(const DKString& command, int& rtnvalue){
 	DKDEBUGFUNC(command);
 	DKString cmd = command;
 	cmd = "xdg-open "+cmd+" &";
-	int rtn = system(cmd.c_str());
-	//execl(cmd.c_str(), (char*)0);
-	return true;
+	return DKUtil::System(cmd.c_str(), rtnvalue);
 }
 
 bool DKLinux::KeyIsDown(int& key){
@@ -534,10 +533,9 @@ bool DKLinux::CpuUsedByApp(int& cpu){
 	return DKERROR("not implemented\n");
 }
 
-bool DKLinux::TurnOffMonitor(){
+bool DKLinux::TurnOffMonitor(int& rtnvalue){
 	DKDEBUGFUNC();
-	DKString rtn;
-	return DKUtil::System("xset dpms force off", rtn);
+	return DKUtil::System("xset dpms force off", rtnvalue);
 }
 
 bool DKLinux::TurnOnMonitor(){
