@@ -234,7 +234,29 @@ bool DKMac::TurnOffMonitor(){
 	if(!r) 
         return DKERROR("io_registry_entry_t invalid");
 	int err = IORegistryEntrySetCFProperty(r, CFSTR("IORequestIdle"), kCFBooleanTrue);
-	IOObjectRelease(r);
+    IOObjectRelease(r);
+    switch (err) {
+        case 1:
+            return DKERROR("KERN_INVALID_ADDRESS");
+        case 2:
+            return DKERROR("KERN_PROTECTION_FAILURE");
+        case 3:
+            return DKERROR("KERN_NO_SPACE");
+        case 4:
+            return DKERROR("KERN_INVALID_ARGUMENT");
+        case 5:
+            return DKERROR("KERN_FAILURE");
+        case 6:
+            return DKERROR("KERN_RESOURCE_SHORTAGE");
+        case 7:
+            return DKERROR("KERN_NOT_RECEIVER");
+        case 8:
+            return DKERROR("KERN_NO_ACCESS");
+        case 9:
+            return DKERROR("KERN_MEMORY_FAILURE");
+        default:
+            break;
+    }
 	return true;
 }
 

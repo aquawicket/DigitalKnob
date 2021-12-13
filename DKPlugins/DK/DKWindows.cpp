@@ -439,8 +439,7 @@ bool DKWindows::LeftRelease(){
 
 bool DKWindows::LowPowerMonitor(){
 	DKDEBUGFUNC();
-	SendMessage(HWND_BROADCAST, WM_SYSCOMMAND, SC_MONITORPOWER, (LPARAM) 1);
-	return true;
+	return SendMessage(HWND_BROADCAST, WM_SYSCOMMAND, SC_MONITORPOWER, (LPARAM) 1);
 }
 
 bool DKWindows::MiddlePress(){
@@ -772,14 +771,12 @@ bool DKWindows::StrokeKey(const int& key){
 bool DKWindows::TurnOffMonitor(){
 	DKDEBUGFUNC();
 	Sleep(500); // Eliminate user's interaction for 500 ms
-	SendMessage(HWND_BROADCAST, WM_SYSCOMMAND, SC_MONITORPOWER, (LPARAM) 2);
-	return true;
+	return SendMessage(HWND_BROADCAST, WM_SYSCOMMAND, SC_MONITORPOWER, (LPARAM) 2);
 }
 
 bool DKWindows::TurnOnMonitor(){
 	DKDEBUGFUNC();
-	SendMessage(HWND_BROADCAST, WM_SYSCOMMAND, SC_MONITORPOWER, (LPARAM) -1);
-	return true;
+	return SendMessage(HWND_BROADCAST, WM_SYSCOMMAND, SC_MONITORPOWER, (LPARAM) -1);
 }
 
 bool DKWindows::VirtualMemory(unsigned long long& virtualMemory){

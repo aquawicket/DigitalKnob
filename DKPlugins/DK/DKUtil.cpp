@@ -842,7 +842,8 @@ bool DKUtil::TurnOffMonitor(){
 #elif MAC
 	return DKMac::TurnOffMonitor();
 #elif LINUX
-	return DKLinux::TurnOffMonitor();
+	int rtnvalue;
+	return DKLinux::TurnOffMonitor(rtnvalue);
 #else
 	return DKERROR("not implemented on this OS\n");
 #endif
