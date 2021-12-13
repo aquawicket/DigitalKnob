@@ -23,32 +23,57 @@ t_key keys[] = {
 };
 */
 
+
+// http://xahlee.info/linux/linux_show_keycode_keysym.html
+// https://github.com/depp/keycode
 //F keys and arrow keys emmit 2 bytes
 bool DKLinux::GetKey(int& key){
 	DKDEBUGFUNC("key");
 
-
-	const int ESCAPE = 27;
-	while ((c = _getch()) != ESCAPE) {
-		if (c == 0 || c == '\xE0')
-			std::cout << "F key: " << _getch() << "\n"; // Be sure to eat the second byte.
-		else
-			std::cout << (int)c << '\n';
+	int ch_a;  // The getchar function returns an int (important for EOF check)
+	if ((ch_a = getchar()) == 27){ //1    Escape read, there's more characters to read
+		printf("ch_a:%d_", ch_a);
+		if ((ch_b = getchar()) == 79){ //2    It's a function key, there's one more characters to read
+			printf("ch_b:%d_", ch_b);
+			ch_c = getchar(); //3
+			printf("ch_c:%d  END\n", ch_c);
+			/*
+			switch (ch_c){ // Check which function key was input
+			case 83:// F4...
+				key = ch_c;
+				break;
+				//...
+			default:
+				// Unknown key...
+			}
+			*/
+		}
+		else{
+			printf("ch_b:%d   END\n", ch_b);     // Not a function key, perhaps Alt-D?
+			//if (ch_b == 100){
+			//	// ...
+			//}
+		}
+	}
+	else{
+		// Not escape, a normal key...
+		printf("ch_a:%d   END\n", ch_a);
+		key = cha;
 	}
 
-	//Method 1
-	// int rtnvalue;
-	//system("stty raw", rtnvalue); // Set terminal to raw mode, (no wait for enter) 
-	      //key = getchar();       
-	//system("stty cooked", rtnvalue); // Reset terminal to normal "cooked" mode
-	/*
-	//Method 2
-	if(!getch(key))
-		return DKERROR("get_ch(key) failed\n");
-	return true;
-	*/
-	//Method 3
-	//key = ch_get(keys);
+			//Method 1
+			// int rtnvalue;
+			//system("stty raw", rtnvalue); // Set terminal to raw mode, (no wait for enter) 
+	 //key = getchar();       
+			//system("stty cooked", rtnvalue); // Reset terminal to normal "cooked" mode
+			/*
+			//Method 2
+			if(!getch(key))
+				return DKERROR("get_ch(key) failed\n");
+			return true;
+			*/
+			//Method 3
+			//key = ch_get(keys);
 	return true;
 }
 
