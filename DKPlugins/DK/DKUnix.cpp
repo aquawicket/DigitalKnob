@@ -4,19 +4,18 @@
 #include "DKFile.h"
 #include <cstdlib>     // GetUsername()  std::getenv()
 #include <unistd.h>    // sleep()  / usleep()
+#include <termios.h>                  //for system(), tcsetattr()
+static struct termios current, old;
 /*
 #include <pwd.h>       //GetUsername()  getpwuid()/getuid()
 #include <unistd.h>    //GetUsername()  getlogin()/getlogin_r()
 #include <sys/types.h> //GetUsername()  getpwnam()
 */
-//#include <termios.h> //for system("stty raw") in GetKey
+
 
 bool DKUnix::GetKey(int& key){
 	DKDEBUGFUNC(key);
-	//system("stty raw"); // Set terminal to raw mode, (no wait for enter)
-	key = getchar();       
-	//system("stty cooked"); // Reset terminal to normal "cooked" mode
-	return true;
+	return DKUnix::GetKey(key);
 }
 
 bool DKUnix::Sleep(int milliseconds){
@@ -80,5 +79,53 @@ bool DKUnix::GetUsername(DKString& username){
 	return false;
 }
 
+char DKUnix::getch_(int echo) {
+	DKDEBUGFUNC();
+	char ch;
+	initTermios(echo);
+	ch = getchar();
+	restoreTermios();
+	return ch;
+}
+
+char DKUnix::getch(void) {
+	DKDEBUGFUNC();
+	return getch_(0);
+}
+
+char DKUnix::getche(void) {
+	DKDEBUGFUNC();
+	return getch_(1);
+}
+
+void DKUnix::initTermios(int echo) {
+	DKDEBUGFUNC();
+	tcgetattr(0, &old);              // save current terminal settings 
+	current = old;                   // store them
+	current.c_lflag &= ~ICANON;      // disable buffered i/o
+	if (echo) {
+		current.c_lflag |= ECHO;     // set echo mode on
+	}
+	else {
+		current.c_lflag &= ~ECHO;    // set echo mode off
+	}
+	tcsetattr(0, TCSANOW, &current);  // use created terminal settings
+	/*
+	// Fallback shell command method
+	if (echo) {
+		system("stty raw echo"); // Set terminal to raw mode with echo, (no wait for enter)
+	}
+	else {
+		system("stty raw -echo"); // Set terminal to raw mode without echo, (no wait for enter)
+	}
+	*/
+}
+
+void DKUnix::restoreTermios(void) {
+	DKDEBUGFUNC();
+	tcsetattr(0, TCSANOW, &old);
+	// Fallback shell command method
+	// system("stty cooked"); // Reset terminal to normal "cooked" mode
+}
 
 #endif //!WIN32

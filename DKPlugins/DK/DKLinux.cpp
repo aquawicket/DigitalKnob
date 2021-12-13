@@ -9,57 +9,11 @@
 #include <X11/extensions/XTest.h>  //requires libxtst-dev
 #include <alsa/asoundlib.h>
 #include <unistd.h>         
-#include <termios.h>               //for system(), tcsetattr()
-static struct termios current, old;
+#include <termios.h>               //for system()
 
 
-bool DKLinux::GetKey(int& key){
-	key = getch();
-	return true;
-}
-
-char DKLinux::getch_(int echo){
-	char ch;
-	initTermios(echo);
-	ch = getchar();
-	restoreTermios();
-	return ch;
-}
-
-char DKLinux::getch(void){
-	return getch_(0);
-}
-
-char DKLinux::getche(void){
-	return getch_(1);
-}
-
-void DKLinux::initTermios(int echo){
-	tcgetattr(0, &old);              // save current terminal settings 
-	current = old;                   // store them
-	current.c_lflag &= ~ICANON;      // disable buffered i/o
-	if (echo) {
-		current.c_lflag |= ECHO;     // set echo mode on
-	}
-	else {
-		current.c_lflag &= ~ECHO;    // set echo mode off
-	}
-	tcsetattr(0, TCSANOW, &current);  // use created terminal settings
-	/*
-	// Fallback shell command method
-	if (echo) {
-		system("stty raw echo"); // Set terminal to raw mode with echo, (no wait for enter)
-	}
-	else {
-		system("stty raw -echo"); // Set terminal to raw mode without echo, (no wait for enter)
-	}
-	*/
-}
-
-void DKLinux::restoreTermios(void){
-	tcsetattr(0, TCSANOW, &old);
-	// Fallback shell command method
-	// system("stty cooked"); // Reset terminal to normal "cooked" mode
+bool DKLinux::GetKey(int& key) {
+	return DKUnix::GetKey(key);
 }
 
 bool DKLinux::GetMousePos(int& x, int& y){

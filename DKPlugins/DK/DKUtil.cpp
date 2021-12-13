@@ -289,8 +289,6 @@ bool DKUtil::GetKey(int& key){
 	DKDEBUGFUNC("key");
 #ifdef WIN32
 	return DKWindows::GetKey(key);
-#elif LINUX
-	return DKLinux::GetKey(key);
 #elif !WIN32
 	return DKUnix::GetKey(key);
 #else

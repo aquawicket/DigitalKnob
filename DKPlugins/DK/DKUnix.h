@@ -8,6 +8,12 @@ public:
 	static bool GetKey(int& key);
 	static bool Sleep(int milliseconds);
 	static bool GetUsername(DKString& username);
+
+	static char getch(void);
+	static char getche(void);
+	static char getch_(int echo);
+	static void initTermios(int echo);
+	static void restoreTermios(void);
 };
 
 #endif //DKUnix_H
