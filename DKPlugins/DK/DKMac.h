@@ -9,7 +9,7 @@
 
 class DKMac{
 public:
-	static bool GetKey(int&, int& y);
+	static bool GetKey(int& key);
 	static bool GetMousePos(int& x, int& y);
 	static bool SetMousePos(const int& x, const int& y);
 	static bool GetScreenWidth(int& w);
