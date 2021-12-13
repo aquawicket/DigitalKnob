@@ -1,3 +1,7 @@
+if(CMAKE_HOST_WIN32)
+	return()
+endif()
+
 # https://invisible-island.net/ncurses/ncurses.html
 #
 # https://invisible-island.net/datafiles/release/ncurses.tar.gz
@@ -20,10 +24,17 @@ DKINSTALL(${NCURSES_DL} ncurses ${NCURSES})
 ### LINK ###
 DKINCLUDE(${NCURSES}/include)
 DKINCLUDE(${NCURSES}/${OS})
+MAC_DEBUG_LIB(${NCURSES}/${OS}/${DEBUG_DIR}/ncursesd.a)
+MAC_RELEASE_LIB(${NCURSES}/${OS}/${RELEASE_DIR}/ncurses.a)
 LINUX_DEBUG_LIB(${NCURSES}/${OS}/${DEBUG_DIR}/ncursesd.a)
 LINUX_RELEASE_LIB(${NCURSES}/${OS}/${RELEASE_DIR}/ncurses.a)
 
-
+MAC_DEBUG_PATH(${NCURSES}/${OS}/${DEBUG_DIR})
+MAC_DEBUG_COMMAND(${DKCONFIGURE_LINUX})
+MAC_DEBUG_COMMAND(make)
+MAC_RELEASE_PATH(${NCURSES}/${OS}/${RELEASE_DIR})
+MAC_RELEASE_COMMAND(${DKCONFIGURE_LINUX})
+MAC_(make)
 
 LINUX_DEBUG_PATH(${NCURSES}/${OS}/${DEBUG_DIR})
 LINUX_DEBUG_COMMAND(${DKCONFIGURE_LINUX})

@@ -49,7 +49,7 @@ DKDISABLE(libvncserver-master-win)
 DKDISABLE(libx11)
 DKDISABLE(lua)
 DKDISABLE(miniweb)
-DKDISABLE(ncurses)
+#DKDISABLE(ncurses)
 DKDISABLE(opencv)  #WORKING, just disabled because it takes so long to compile
 DKDISABLE(openframeworks)
 DKDISABLE(openscenegraph)
