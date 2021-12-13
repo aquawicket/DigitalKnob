@@ -23,12 +23,23 @@ t_key keys[] = {
 };
 */
 
+//F keys and arrow keys emmit 2 bytes
 bool DKLinux::GetKey(int& key){
 	DKDEBUGFUNC("key");
+
+
+	const int ESCAPE = 27;
+	while ((c = _getch()) != ESCAPE) {
+		if (c == 0 || c == '\xE0')
+			std::cout << "F key: " << _getch() << "\n"; // Be sure to eat the second byte.
+		else
+			std::cout << (int)c << '\n';
+	}
+
 	//Method 1
 	// int rtnvalue;
 	//system("stty raw", rtnvalue); // Set terminal to raw mode, (no wait for enter) 
-	key = getchar();       
+	      //key = getchar();       
 	//system("stty cooked", rtnvalue); // Reset terminal to normal "cooked" mode
 	/*
 	//Method 2
