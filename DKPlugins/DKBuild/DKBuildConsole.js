@@ -4,7 +4,17 @@ var OS     = ""
 var APP    = ""
 var TYPE   = ""
 var LEVEL  = "RebuildAll";
+
+function getKey(){
 	
+	var key = 10
+	while(key === 10 || key === 0){
+		key = CPP_DK_GetKey()
+	}
+	return key
+}
+
+
 function DKBuildConsole_init() {
     CPP_DK_Create("DKBuild/DKBuild.js")
 	CPP_DK_Create("DKGit/DKGit.js")
@@ -52,10 +62,7 @@ function DKBuildConsole_ChooseUpdate() {
 	console.log("ESC. exit")
 	console.log("\n")
 		
-	//UNIX FIX
-	var key = 10
-	while(key === 10 || key === 0)
-		key = CPP_DK_GetKey()
+	var key = getKey()
 	
 	UPDATE = 1	
 	switch(key){
@@ -157,10 +164,7 @@ function DKBuildConsole_SelectOs() {
 	console.log("ESC. exit")
 	console.log("\n")
 		
-	//UNIX FIX
-	var key = 10
-	while(key === 10 || key === 0)
-		key = CPP_DK_GetKey()
+	var key = getKey()
 
 	switch(key){
 		case 48: //0
@@ -217,10 +221,7 @@ function DKBuildConsole_SelectApp() {
 	console.log("ESC. exit")
 	console.log("\n")
 		
-	//UNIX FIX
-	var key = 10
-	while(key === 10 || key === 0)
-		key = CPP_DK_GetKey()
+	var key = getKey()
 	
 	switch(key){
 		case 48: //0
@@ -249,10 +250,7 @@ function DKBuildConsole_SelectType() {
 	console.log("ESC. exit")
 	console.log("\n")
 	
-	//UNIX FIX
-	var key = 10
-	while(key === 10 || key === 0)
-		key = CPP_DK_GetKey()
+	var key = getKey()
 		
 	switch(key){
 		case 48: //0
