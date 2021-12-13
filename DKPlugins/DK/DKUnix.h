@@ -3,14 +3,15 @@
 #ifndef DKUnix_H
 #define DKUnix_H
 
+
+char getch(void);
+char getche(void);
+
 class DKUnix{
 public:
 	static bool GetKey(int& key);
 	static bool Sleep(int milliseconds);
 	static bool GetUsername(DKString& username);
-
-	static char getch(void);
-	static char getche(void);
 	static char getch_(int echo);
 	static void initTermios(int echo);
 	static void restoreTermios(void);

@@ -13,6 +13,16 @@ static struct termios current, old;
 */
 
 
+char getch(void) {
+	DKDEBUGFUNC();
+	return DKUnix::getch_(0);
+}
+
+char getche(void) {
+	DKDEBUGFUNC();
+	return DKUnix::getch_(1);
+}
+
 bool DKUnix::GetKey(int& key){
 	DKDEBUGFUNC(key);
 	return getch();
@@ -86,16 +96,6 @@ char DKUnix::getch_(int echo) {
 	ch = getchar();
 	restoreTermios();
 	return ch;
-}
-
-char DKUnix::getch(void) {
-	DKDEBUGFUNC();
-	return getch_(0);
-}
-
-char DKUnix::getche(void) {
-	DKDEBUGFUNC();
-	return getch_(1);
 }
 
 void DKUnix::initTermios(int echo) {
