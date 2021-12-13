@@ -33,10 +33,8 @@ int DKConsole::_assert(duk_context* ctx){
 }
 
 int DKConsole::clear(duk_context* ctx){
-	//FIXME - make this work on all OS's
-	DKString out;
-	if(!DKUtil::System("cls", out)) 
-		return DKERROR("DKUtil::System(cls, out) failed");
+	int rtnvalue = DKUtil::System("cls", rtnvalue);
+	duk_push_int(ctx, rtnvalue);
 	return true;
 }
 

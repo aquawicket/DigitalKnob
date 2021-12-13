@@ -818,8 +818,11 @@ bool DKUtil::StrokeKey(const int& key){
 #endif
 }
 
-bool DKUtil::System(const DKString& command, DKString& out){
+bool DKUtil::System(const DKString& command, int& rtnvalue){
 	DKDEBUGFUNC(command);
+	rtnvalue = std::system(command.c_str());
+	return true;
+/*
 #if !defined(IOS)
 	int ret = system(command.c_str());
 	std::stringstream buffer;
@@ -829,6 +832,7 @@ bool DKUtil::System(const DKString& command, DKString& out){
 #else
 	return DKERROR("not implemented on this OS\n");
 #endif
+*/
 }
 
 bool DKUtil::TurnOffMonitor(){

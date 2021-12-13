@@ -914,9 +914,9 @@ int DKDuktapeJS::StrokeKey(duk_context* ctx){
 
 int DKDuktapeJS::System(duk_context* ctx){
 	DKString command = duk_require_string(ctx, 0);
-	DKString out;
-	if(!DKUtil::System(command, out)){ return 0; }
-	duk_push_string(ctx, out.c_str());
+	int rtnvalue;
+	if(!DKUtil::System(command, rtnvalue)){ return 0; }
+	duk_push_int(ctx, rtnvalue);
 	return 1;
 }
 
