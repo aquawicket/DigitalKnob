@@ -1,10 +1,14 @@
 #include "DK/stdafx.h"
 #ifdef MAC
 #include "DKMac.h"
+#include "DKUnix.h"
 
 #import "CoreFoundation/CoreFoundation.h"
 #import "CoreGraphics/CoreGraphics.h"
 
+bool DKMac::GetKey(int& key) {
+    return DKUnix::GetKey(key)
+}
 
 bool DKMac::GetMousePos(int& x, int& y){
 	CGEventRef ourEvent = CGEventCreate(NULL);

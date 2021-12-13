@@ -1,6 +1,7 @@
 #include "DK/stdafx.h"
 #ifdef LINUX
 #include "DKLinux.h"
+#include "DKUnix.h"
 #include "DKLog.h"
 #include <stdio.h>
 #include <stdlib.h>
