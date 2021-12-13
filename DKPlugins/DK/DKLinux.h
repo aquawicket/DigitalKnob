@@ -2,14 +2,21 @@
 #pragma once
 #ifndef DKLinux_H
 #define DKLinux_H
-
 #define DESKTOP //FIXME: Linux could potentially be an embedded device
-
 #include "DKString.h"
+
+// http://xahlee.info/linux/linux_show_keycode_keysym.html
+// https://github.com/depp/keycode
+// https://eklitzke.org/blocking-io-nonblocking-io-and-epoll
 
 class DKLinux{
 public:
-	static bool getch(int& key);
+	static char getch(void)
+	static char getche(void)
+	static char getch_(int echo)
+	static void initTermios(int echo)
+	static void restoreTermios(void)
+
 	static bool CpuInit();
 	static bool CpuUsed(int& cpu);
 	static bool CpuUsedByApp(int& cpu);

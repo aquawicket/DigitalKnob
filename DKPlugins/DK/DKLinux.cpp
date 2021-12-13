@@ -6,140 +6,60 @@
 #include <stdlib.h>
 #include <X11/Xlib.h>
 #include <X11/XKBlib.h>
-#include <X11/extensions/XTest.h>  //requires  libxtst-dev
+#include <X11/extensions/XTest.h>  //requires libxtst-dev
 #include <alsa/asoundlib.h>
 #include <unistd.h>         
-#include <termios.h>  //for system()
-
-/*
-#include <unistd.h> 
-#include "getch.h"
-t_key keys[] = {
-  {"[A", K_UP},
-  {"[B", K_DOWN},
-  {"[D", K_LEFT},
-  {"[C", K_RIGHT},
-  {NULL, K_UNK},
-};
-*/
+#include <termios.h>               //for system(), tcsetattr()
+static struct termios current, old;
 
 
-// http://xahlee.info/linux/linux_show_keycode_keysym.html
-// https://github.com/depp/keycode
-//F keys and arrow keys emmit 2 bytes
 bool DKLinux::GetKey(int& key){
-	/*
-	DKDEBUGFUNC("key");
-	while (1) {
-		int ch_a;  // The getchar function returns an int (important for EOF check)
-		int ch_b;
-		int ch_c;
-		if ((ch_a = getchar()) == 27) { //1    Escape read, there's more characters to read
-			printf("%d_", ch_a);
-			if ((ch_b = getchar()) == 79) { //2    It's a function key, there's one more characters to read
-				printf("%d_", ch_b);
-				ch_c = getchar(); //3
-				printf("%d  END\n", ch_c);
-				
-				switch (ch_c){ // Check which function key was input
-				case 83:// F4...
-					key = ch_c;
-					break;
-					//...1
-				default:
-					// Unknown key...
-				}
-				
-			}
-			else {
-				printf(":%d   END\n", ch_b);     // Not a function key, perhaps Alt-D?
-				//if (ch_b == 100){
-				//	// ...
-				//}
-			}
-		}
-		else {
-			// Not escape, a normal key...
-			printf("ch_a:%d   END\n", ch_a);
-			key = ch_a;
-		}
-	}
-	*/
-			//Method 1
-			// int rtnvalue;
-			//system("stty raw", rtnvalue); // Set terminal to raw mode, (no wait for enter) 
-	 key = getchar();       
-			//system("stty cooked", rtnvalue); // Reset terminal to normal "cooked" mode
-			/*
-			//Method 2
-			if(!getch(key))
-				return DKERROR("get_ch(key) failed\n");
-			return true;
-			*/
-			//Method 3
-			//key = ch_get(keys);
+	key = getch();
 	return true;
 }
 
-// https://eklitzke.org/blocking-io-nonblocking-io-and-epoll
-bool DKLinux::getch(int& key){
-	DKDEBUGFUNC("key");
-    int stored;
-	int buffer[128];
-	struct termios old = {0};
-    fflush(stdout);
-    if(tcgetattr(0, &old) < 0)
-        return DKERROR("tcsetattr(0, &old) failed");
-    old.c_lflag &= ~ICANON;
-    old.c_lflag &= ~ECHO;
-    old.c_cc[VMIN] = 1;
-    old.c_cc[VTIME] = 0;
-    if(tcsetattr(0, TCSANOW, &old) < 0)
-        return DKERROR("tcsetattr(0, TCSANOW, &old) ICANON failed");
-    if(read(0, &buffer, sizeof(buffer)) < 0)
-		return DKERROR("read(0, &buffer, sizeof(buffer)) failed");
-	// fetch the current flags
-	int flags;
-    if((flags = fcntl(STDIN_FILENO, F_GETFL, 0)) == -1)
-		return DKERROR("fcntl(STDIN_FILENO, F_GETFL, 0) failed");
-	int stored_flags = flags; //store the old flags to recall later
-    // now set the flags to what they are + non-blocking
-    if ((flags = fcntl(STDIN_FILENO, F_SETFL, flags | O_NONBLOCK)) == -1)
-        return DKERROR("fcntl(STDIN_FILENO, F_SETFL, f | O_NONBLOCK) failed");
-	// read the buffer until we run out of data
+char DKLinux::getch_(int echo){
+	char ch;
+	initTermios(echo);
+	ch = getchar();
+	restoreTermios();
+	return ch;
+}
+
+char DKLinux::getch(void){
+	return getch_(0);
+}
+
+char DKLinux::getche(void){
+	return getch_(1);
+}
+
+void DKLinux::initTermios(int echo){
+	tcgetattr(0, &old);              // save current terminal settings 
+	current = old;                   // store them
+	current.c_lflag &= ~ICANON;      // disable buffered i/o
+	if (echo) {
+		current.c_lflag |= ECHO;     // set echo mode on
+	}
+	else {
+		current.c_lflag &= ~ECHO;    // set echo mode off
+	}
+	tcsetattr(0, TCSANOW, &current);  // use created terminal settings
 	/*
-	while(buffer){
-		stored = buffer;
-		int arrayLength = sizeof(buffer)/sizeof(buffer[0]);
-		if(read(0, &buffer, arrayLength) < 0)
-			return DKERROR("2nd read(0 &buffer, sizeof(buffer) failed");
+	// Fallback shell command method
+	if (echo) {
+		system("stty raw echo"); // Set terminal to raw mode with echo, (no wait for enter)
+	}
+	else {
+		system("stty raw -echo"); // Set terminal to raw mode without echo, (no wait for enter)
 	}
 	*/
-	if(!buffer[0])
-		return DKERROR("buffer invalid");
-    int i=0;
-    while(i < (sizeof(buffer)/sizeof(buffer[0])) && buffer[i])
-        i++;
-    if(!buffer[i-1])
-		return DKERROR("buffer invalid");
-    key = buffer[i-1];
-	if ((flags = fcntl(STDIN_FILENO, F_SETFL, stored_flags)) == -1)
-		DKERROR("fcntl(STDIN_FILENO, F_SETFL, stored_flags)) failed");
-    old.c_lflag |= ICANON;
-    old.c_lflag |= ECHO;
-    if(tcsetattr(0, TCSADRAIN, &old) < 0)
-        return DKERROR("tcsetattr(0, TCSADRAIN, &old) failed");	
-	/*
-	if(!stored)
-		return DKERROR("stored has no data, and it should");
-	if(buffer)
-		return DKERROR("buffer has data and it shouldn't");
-	key = stored;
-	*/
-	//int c;
-	//while((c = getc(stdin) != EOF && c != '\n')){} //clear out stdin 
-	//DKINFO("DKLinux::getch(): key = "+key+"\n");
-	return true;
+}
+
+void DKLinux::restoreTermios(void){
+	tcsetattr(0, TCSANOW, &old);
+	// Fallback shell command method
+	// system("stty cooked"); // Reset terminal to normal "cooked" mode
 }
 
 bool DKLinux::GetMousePos(int& x, int& y){
