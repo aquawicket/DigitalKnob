@@ -7,7 +7,7 @@
 #import "CoreGraphics/CoreGraphics.h"
 
 bool DKMac::GetKey(int& key) {
-    return DKUnix::GetKey(key)
+    return DKUnix::GetKey(key);
 }
 
 bool DKMac::GetMousePos(int& x, int& y){
