@@ -60,7 +60,7 @@ bool DKLinux::GetKey(int& key){
 	else{
 		// Not escape, a normal key...
 		printf("ch_a:%d   END\n", ch_a);
-		key = cha;
+		key = ch_a;
 	}
 
 			//Method 1
