@@ -18,3 +18,5 @@ sudo chmod +777 filepath/filename.ext
 
 set (on windows)
 print list of currect environment variables
+
+xev - print contents of X events
