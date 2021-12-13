@@ -15,12 +15,12 @@ static struct termios current, old;
 
 char getch(void) {
 	DKDEBUGFUNC();
-	return getch_(0);
+	return DKUnix::getch_(0);
 }
 
 char getche(void) {
 	DKDEBUGFUNC();
-	return getch_(1);
+	return DKUnix::getch_(1);
 }
 
 bool DKUnix::GetKey(int& key){
