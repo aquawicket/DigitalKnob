@@ -689,7 +689,7 @@ bool DKUtil::Run(const DKString& command, const DKString& params){
 	return true;
 #elif LINUX
 	int rtnvalue;
-	return DKLinux::Run(command, rtnvalue);
+	return DKLinux::Run(command, rtnvalue);1
 #else
 	return DKERROR("not implemented on this OS\n");
 #endif
