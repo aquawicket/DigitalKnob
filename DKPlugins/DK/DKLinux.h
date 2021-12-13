@@ -11,11 +11,11 @@
 
 class DKLinux{
 public:
-	static char getch(void)
-	static char getche(void)
-	static char getch_(int echo)
-	static void initTermios(int echo)
-	static void restoreTermios(void)
+	static char getch(void);
+	static char getche(void);
+	static char getch_(int echo);
+	static void initTermios(int echo);
+	static void restoreTermios(void);
 
 	static bool CpuInit();
 	static bool CpuUsed(int& cpu);
