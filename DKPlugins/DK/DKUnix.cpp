@@ -13,12 +13,12 @@ static struct termios current, old;
 */
 
 
-char getch() {
+char getch(void) {
 	DKDEBUGFUNC();
 	return getch_(0);
 }
 
-char getche() {
+char getche(void) {
 	DKDEBUGFUNC();
 	return getch_(1);
 }

@@ -71,8 +71,8 @@ bool DKDuktapeJS::Init(){
 	DKDuktape::AttachFunction("CPP_DK_GetArgs", DKDuktapeJS::GetArgs);
 	DKDuktape::AttachFunction("CPP_DK_GetBrowser", DKDuktapeJS::GetBrowser);
 	DKDuktape::AttachFunction("CPP_DK_GetClipboard", DKDuktapeJS::GetClipboard);
-	DKDuktape::AttachFunction("CPP_DK_getch", DKDuktapeJS::getch);
-	DKDuktape::AttachFunction("CPP_DK_getche", DKDuktapeJS::getche);
+	DKDuktape::AttachFunction("CPP_DK_getch", DKDuktapeJS::_getch);
+	DKDuktape::AttachFunction("CPP_DK_getche", DKDuktapeJS::_getche);
 	DKDuktape::AttachFunction("CPP_DK_GetData", DKDuktapeJS::GetData);
 	DKDuktape::AttachFunction("CPP_DK_GetDate", DKDuktapeJS::GetDate);
 	DKDuktape::AttachFunction("CPP_DK_GetEvents", DKDuktapeJS::GetEvents);
@@ -469,12 +469,12 @@ int DKDuktapeJS::GetClipboard(duk_context* ctx){
 	return 1;
 }
 
-int DKDuktapeJS::getch(duk_context* ctx){
+int DKDuktapeJS::_getch(duk_context* ctx){
 	int key = getch();
 	duk_push_int(ctx, key);
 	return 1;
 }
-int DKDuktapeJS::getche(duk_context* ctx){
+int DKDuktapeJS::_getche(duk_context* ctx){
 	int key = getche();
 	duk_push_int(ctx, key);
 	return 1;
