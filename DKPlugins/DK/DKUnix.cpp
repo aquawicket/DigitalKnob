@@ -15,7 +15,7 @@ static struct termios current, old;
 
 bool DKUnix::GetKey(int& key){
 	DKDEBUGFUNC(key);
-	return DKUnix::GetKey(key);
+	return getch()
 }
 
 bool DKUnix::Sleep(int milliseconds){
