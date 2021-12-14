@@ -19,6 +19,12 @@ sudo chmod +777 filepath/filename.ext
 set (on windows)
 print list of currect environment variables
 
+ser %VARIABLE%  (on windows)
+print a variables value
+
+printenv (unix)
+print list of currect environment variables
+
 xev - print contents of X events
 
 Have the Mac terminal close when your app exits
