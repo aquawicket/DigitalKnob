@@ -451,6 +451,7 @@ function DKBuild_DoResults(){
 			cmake_string = cmake_string.replace("-DDEBUG=OFF", "-DDEBUG=ON");
 			cmake_string = cmake_string.replace("-DRELEASE=ON", "-DRELEASE=OFF");
 			console.log("cmake_string = "+cmake_string+"\n");
+			CPP_DK_getch(); //pause
 			CPP_DKFile_MkDir(app_path+OS+"/Debug")
 			CPP_DKFile_ChDir(app_path+OS+"/Debug")
 			let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DIGITALKNOB+"DK/DKCMake")
@@ -460,6 +461,7 @@ function DKBuild_DoResults(){
 			cmake_string = cmake_string.replace("-DDEBUG=ON", "-DDEBUG=OFF");
 			cmake_string = cmake_string.replace("-DRELEASE=OFF", "-DRELEASE=ON");
 			console.log("cmake_string = "+cmake_string+"\n");
+			CPP_DK_getch(); //pause
 			CPP_DKFile_MkDir(app_path+OS+"/Release")
 			CPP_DKFile_ChDir(app_path+OS+"/Release")
 			let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DIGITALKNOB+"DK/DKCMake")
