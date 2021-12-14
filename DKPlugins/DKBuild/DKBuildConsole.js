@@ -130,13 +130,13 @@ function DKBuildConsole_SelectOs() {
 		var arch = CPP_DK_Execute("ECHO %PROCESSOR_ARCHITECTURE%")
 		//console.log("arch = "+arch)
 		//if(CPP_DK_GetOSArchitecture() === "i686")
-		if(arch === "i686"){
+		//if(arch === "i686" || arch === "x86"){
 			OSes.push("win32")
-		}
+		//}
 		//if(CPP_DK_GetOSArchitecture() === "x86_64")
-		if(arch === "x86_64"){
+		//if(arch === "x86_64"){
 			OSes.push("win64")
-		}
+		//}
 		OSes.push("android32")
 		OSes.push("android64")
 	}
