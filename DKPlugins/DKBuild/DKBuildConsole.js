@@ -128,7 +128,7 @@ function DKBuildConsole_SelectOs() {
 	const OSes = [];
 	if(CPP_DK_GetOS() === "Windows"){
 		var arch = CPP_DK_System("ECHO %PROCESSOR_ARCHITECTURE%")
-		console.log(arch)
+		console.log("arch = "+arch)
 		//if(CPP_DK_GetOSArchitecture() === "i686")
 			OSes.push("win32")
 			OSes.push("win64")
@@ -138,7 +138,7 @@ function DKBuildConsole_SelectOs() {
 	}
 	if(CPP_DK_GetOS() === "Mac"){
 		var arch = CPP_DK_System("uname -m")
-		console.log(arch)
+		console.log("arch = "+arch)
 		//OSes.push("mac32")
 		OSes.push("mac64")
 		//OSes.push("ios32")
@@ -148,13 +148,13 @@ function DKBuildConsole_SelectOs() {
 	}
 	if(CPP_DK_GetOS() === "Linux"){
 		var arch = CPP_DK_System("uname -m")
-		console.log(arch)
+		console.log("arch = "+arch)
 		OSes.push("linux32")
 		OSes.push("linux64")
 	}
 	if(CPP_DK_GetOS() === "Raspberry"){
 		var arch = CPP_DK_System("uname -m")
-		console.log(arch)
+		console.log("arch = "+arch)
 		OSes.push("raspberry32")
 		//OSes.push("raspberry64")
 	}
