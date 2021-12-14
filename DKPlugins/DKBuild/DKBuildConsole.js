@@ -38,7 +38,6 @@ function DKBuildConsole_end() {
 }
 
 function DKBuildConsole_ChooseUpdate() {
-	console.log("\n")
 	console.log("**** Update DigitalKnob ??? ****")
 	console.log("1. Update")
 	console.log("2. Commit")
@@ -232,9 +231,9 @@ function DKBuildConsole_SelectOs() {
 }
 
 function DKBuildConsole_SelectApp() {
-	DKBuild_GetAppList()
 	console.log("**** SELECT APP TO BUILD ****")
 	console.log("F1. ALL APPS")
+	DKBuild_GetAppList()
 	for (var i = 0; i < APP_LIST.length; ++i)
 		console.log(DKBuildConsole_TranslateOption(i) + ":" + APP_LIST[i] + "")
 	console.log("0. Back")
@@ -245,8 +244,7 @@ function DKBuildConsole_SelectApp() {
 	
 	switch(key){
 		case 48: //0
-			OS = "" //Back
-			break
+			OS = "" //Back			break
 		case 27:  //Esc
 			CPP_DK_Exit()
 			break

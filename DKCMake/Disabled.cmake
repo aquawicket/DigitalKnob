@@ -190,6 +190,7 @@ if(NOT LINUX AND NOT RASPBERRY) # Disabled NON Linux targets
 	DKDISABLE(libsystemd-dev)
 	DKDISABLE(libudev-dev)
 	DKDISABLE(libx11-dev)
+	DKDISABLE(libxcursor-dev)
 	DKDISABLE(libxrandr-dev)
 	DKDISABLE(libxtst-dev)
 	DKDISABLE(mesa-common-dev)
