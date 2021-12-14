@@ -39,10 +39,9 @@ int DKDomConsole::_assert(duk_context* ctx){
 }
 
 int DKDomConsole::clear(duk_context* ctx){
-	//FIXME - make this work on all OS's
-	DKString out;
+	int out;
 	if(!DKUtil::System("cls", out))
-		return DKERROR("!DKUtil::System(\"cls\", out)\n");
+		return DKERROR("!DKUtil::System(\"cls\", out) failed\n");
 	return true;
 }
 
