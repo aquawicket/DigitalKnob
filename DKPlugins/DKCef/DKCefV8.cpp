@@ -481,7 +481,7 @@ bool DKCefV8::StrokeKey(CefArgs args, CefReturn retval){
 bool DKCefV8::System(CefArgs args, CefReturn retval){
 	DKDEBUGFUNC(args, retval);
 	DKString command = args->GetString(0);
-	DKString ret;
+	int ret;
 	return DKUtil::System(command, ret);
 }
 
