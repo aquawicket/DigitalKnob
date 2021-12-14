@@ -9,7 +9,9 @@
 #include "DK/DKUtil.h"
 #include "DKDuktape/DKDuktapeJS.h"
 #include <signal.h>
-#include <conio.h>
+#if WIN32
+	#include "conio.h"          //getch, getche
+#endif
 
 
 bool DKDuktapeJS::Init(){
