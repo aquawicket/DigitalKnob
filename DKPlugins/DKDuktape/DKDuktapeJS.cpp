@@ -734,19 +734,19 @@ int DKDuktapeJS::Include(duk_context* ctx){
 int DKDuktapeJS::KeyIsDown(duk_context* ctx){
 	int key = duk_require_int(ctx, 0);
 	if(!DKUtil::KeyIsDown(key)){
-		duk_push_bool(ctx, false);
+		duk_push_boolean(ctx, false);
 		return 1;
 	}
-	duk_push_bool(ctx, true);
+	duk_push_boolean(ctx, true);
 	return 1;
 }
 
 int DKDuktapeJS::LeftClick(duk_context* ctx){
 	if(!DKUtil::LeftClick()){ 
-		duk_push_bool(ctx, false);
+		duk_push_boolean(ctx, false);
 		return 1;
 	}
-	duk_push_bool(ctx, true);
+	duk_push_boolean(ctx, true);
 	return 1;
 }
 
