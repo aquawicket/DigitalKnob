@@ -316,9 +316,9 @@ function DKBuild_DoResults(){
 		cmake_string = cmake_string+"-DREBUILD=ON "
 	if(LEVEL === "RebuildAll")
 		cmake_string = cmake_string+"-DREBUILDALL=ON "
-	if(LINK.indexOf("Static"))
+	if(LINK.indexOf("Static") !== -1)
 		cmake_string = cmake_string+"-DSTATIC=ON "
-	if(LINK.indexOf("Shared"))
+	if(LINK.indexOf("Shared") !== -1)
 		cmake_string = cmake_string+"-DSHARED=ON "
 	cmake_string = cmake_string.replace("  "," ")
 	let DKApps = "DKApps"
