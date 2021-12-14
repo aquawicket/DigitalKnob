@@ -244,7 +244,8 @@ function DKBuildConsole_SelectApp() {
 	
 	switch(key){
 		case 48: //0
-			OS = "" //Back			break
+			OS = "" //Back			
+			break
 		case 27:  //Esc
 			CPP_DK_Exit()
 			break
@@ -262,7 +263,6 @@ function DKBuildConsole_SelectType() {
 	console.log("**** SELECT BUILD TYPE ****")
 	console.log("1. Debug")
 	console.log("2. Release")
-	//if(CPP_DK_GetOS() !== "Linux" && CPP_DK_GetOS() !== "Raspberry")
 	console.log("3. All")
 	console.log("0. Back")
 	console.log("ESC. exit")
