@@ -3,7 +3,7 @@ let UPDATE = "" //allow the first screen to loop
 let OS = ""   //win32,win64,mac32,mac64,linux32,linux64,ios32,ios64,iossim32,iossim64,android32,android64,raspberry32,raspberry64 
 let APP = ""  //DKAppname
 let TYPE = ""  //Debug, Release, ALL
-let LINK = ""  //Static, Dynamic
+let LINK = ""  Static//, Dynamic
 let LEVEL = ""  //Build, Rebuild, RebuildAll
 let DIGITALKNOB = ""
 let DKDOWNLOAD = ""
@@ -305,7 +305,7 @@ function DKBuild_DoResults(){
 	
 	////// Create the cmake string
 	let cmake_string = ""
-		//cmake_string = cmake_string+"--warn-uninitialized "
+	//cmake_string = cmake_string+"--warn-uninitialized "
 	if(TYPE === "Debug" || TYPE === "ALL")
 		cmake_string = cmake_string+"-DDEBUG=ON "
 	if(TYPE === "Release" || TYPE === "ALL")
@@ -316,13 +316,12 @@ function DKBuild_DoResults(){
 		cmake_string = cmake_string+"-DREBUILD=ON "
 	if(LEVEL === "RebuildAll")
 		cmake_string = cmake_string+"-DREBUILDALL=ON "
-	if(LINK === "Shared")
-		cmake_string = cmake_string+"-DSHARED=ON "
-	else
+	if(LINK.indexOf("Static"))
 		cmake_string = cmake_string+"-DSTATIC=ON "
+	if(LINK.indexOf("Shared"))
+		cmake_string = cmake_string+"-DSHARED=ON "
 	cmake_string = cmake_string.replace("  "," ")
 	let DKApps = "DKApps"
-	
 	let contents = CPP_DKFile_DirectoryContents(DIGITALKNOB)
 	let files = contents.split(",")
 	for(let i=0; i<files.length; i++){ 
