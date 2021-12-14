@@ -3,14 +3,14 @@
 #include "DKWindows.h"
 #include "DKFile.h"
 #include "DKLog.h"
-#include <shellapi.h> //DKFile::Execute()
-#include "conio.h"
+#include <shellapi.h>       //DKFile::Execute()
+#include "conio.h"          //getch, getche
 #include <mmdeviceapi.h>
 #include <endpointvolume.h>
 #include <psapi.h>
 #include "shlobj.h"
-#include <cstdlib>  //DKUtil::GetUsername() std::getenv()
-//#include <Lmcons.h> //DKUtil::GetUsername() GetUserName()
+#include <cstdlib>          //DKUtil::GetUsername() std::getenv()
+//#include <Lmcons.h>       //DKUtil::GetUsername() GetUserName()
 //Monitor brightness
 #include "PhysicalMonitorEnumerationAPI.h"
 #include "HighLevelMonitorConfigurationAPI.h"
