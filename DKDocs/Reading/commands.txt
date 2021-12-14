@@ -20,3 +20,8 @@ set (on windows)
 print list of currect environment variables
 
 xev - print contents of X events
+
+Have the Mac terminal close when your app exits
+in Terminal.app
+Preferences > Profiles > (Select a Profile) > Shell.
+on 'When the shell exits' chosen 'Close the window'
