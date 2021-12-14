@@ -7,7 +7,7 @@ var LEVEL  = "RebuildAll";
 
 function getch(){
 	key = CPP_DK_getch()
-	console.log("key = "+key)
+	//console.log("key = "+key)
 	return key
 }
 
@@ -128,17 +128,21 @@ function DKBuildConsole_SelectOs() {
 	const OSes = [];
 	if(CPP_DK_GetOS() === "Windows"){
 		var arch = CPP_DK_Execute("ECHO %PROCESSOR_ARCHITECTURE%")
-		console.log("arch = "+arch)
+		//console.log("arch = "+arch)
 		//if(CPP_DK_GetOSArchitecture() === "i686")
+		if(arch === "i686"){
 			OSes.push("win32")
-			OSes.push("win64")
+		}
 		//if(CPP_DK_GetOSArchitecture() === "x86_64")
-			OSes.push("android32")
-			OSes.push("android64")
+		if(arch === "x86_64"){
+			OSes.push("win64")
+		}
+		OSes.push("android32")
+		OSes.push("android64")
 	}
 	if(CPP_DK_GetOS() === "Mac"){
 		var arch = CPP_DK_Execute("uname -m")
-		console.log("arch = "+arch)
+		//console.log("arch = "+arch)
 		//OSes.push("mac32")
 		OSes.push("mac64")
 		//OSes.push("ios32")
@@ -148,15 +152,26 @@ function DKBuildConsole_SelectOs() {
 	}
 	if(CPP_DK_GetOS() === "Linux"){
 		var arch = CPP_DK_Execute("uname -m")
-		console.log("arch = "+arch)
-		OSes.push("linux32")
-		OSes.push("linux64")
+		//console.log("arch = "+arch)
+		if(arch = "i686"){
+			OSes.push("linux32")
+		}
+		else if(arch = "x86_64"){
+			OSes.push("linux64")
+		}
+		else{
+			console.log("ERROR: Unrecognized architecture")
+		}
 	}
 	if(CPP_DK_GetOS() === "Raspberry"){
 		var arch = CPP_DK_Execute("uname -m")
-		console.log("arch = "+arch)
-		OSes.push("raspberry32")
-		//OSes.push("raspberry64")
+		//console.log("arch = "+arch)
+		//if(arch = "amrv7l"){
+			OSes.push("raspberry32")
+		//}
+		//else if(arch = "amrv7l64")
+			//OSes.push("raspberry64")
+		//}
 	}
 		
 	console.log("\n")
