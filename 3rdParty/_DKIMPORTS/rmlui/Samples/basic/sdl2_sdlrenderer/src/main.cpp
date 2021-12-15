@@ -42,6 +42,8 @@
 
 #include <SDL.h>
 
+//#include <GL/glew.h>
+
 int main(int /*argc*/, char** /*argv*/)
 {
 #ifdef RMLUI_PLATFORM_WIN32
@@ -53,15 +55,31 @@ int main(int /*argc*/, char** /*argv*/)
 
     SDL_Init( SDL_INIT_VIDEO );
     SDL_Window * screen = SDL_CreateWindow("RmlUi SDL2 with SDL_Renderer test", 20, 20, window_width, window_height, SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE);
-
-    /*
-     * Force a specific back-end
-    SDL_SetHint(SDL_HINT_RENDER_BATCHING, "1");
-    SDL_SetHint(SDL_HINT_RENDER_DRIVER, "software");
-    SDL_SetHint(SDL_HINT_RENDER_DRIVER, "opengles2");
-    */
-    
+	/*SDL_GLContext glcontext = SDL_GL_CreateContext(screen);
+	int oglIdx = -1;
+	int nRD = SDL_GetNumRenderDrivers();
+	for (int i = 0; i < nRD; i++)
+	{
+		SDL_RendererInfo info;
+		if (!SDL_GetRenderDriverInfo(i, &info))
+		{
+			if (!strcmp(info.name, "opengl"))
+			{
+				oglIdx = i;
+			}
+		}
+	}*/
     SDL_Renderer * renderer = SDL_CreateRenderer(screen, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+	
+	/*GLenum err = glewInit();
+	
+	if (err != GLEW_OK)
+		fprintf(stderr, "GLEW ERROR: %s\n", glewGetErrorString(err));
+
+	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
+	glMatrixMode(GL_PROJECTION | GL_MODELVIEW);
+	glLoadIdentity();
+	glOrtho(0, window_width, window_height, 0, 0, 1);*/
 	
 	RmlUiSDL2Renderer Renderer(renderer, screen);
 	RmlUiSDL2SystemInterface SystemInterface;
@@ -168,6 +186,7 @@ int main(int /*argc*/, char** /*argv*/)
 	Rml::Shutdown();
 
     SDL_DestroyRenderer(renderer);
+	//SDL_GL_DeleteContext(glcontext);
     SDL_DestroyWindow(screen);
     SDL_Quit();
 
