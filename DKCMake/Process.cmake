@@ -86,8 +86,7 @@ foreach(plugin ${dkdepend_list})
 	#	add_subdirectory(${${PLUGIN_NAME}} ${${PLUGIN_NAME}}/${OS})
 	#	message(STATUS "add_subdirectory( ${${PLUGIN_NAME}} ${${PLUGIN_NAME}}/${OS} )")
 	#endif()
-
-	string(FIND "${DKPLUGIN_LIST}" "${plugin}" isDKPlugin) #isDKPlugin flag
+	string(FIND "${DKPLUGIN_LIST}" "${plugin}" isDKPlugin)
 	####################### DKPlugins #######################
 	if(${isDKPlugin} GREATER -1)
 		#Add the DKPlugin to the app project
@@ -103,7 +102,7 @@ foreach(plugin ${dkdepend_list})
 			endif()
 		endif()
 		
-		## Prebuild Plugins switch
+		## Prebuild DKPlugins switch
 		if(0)
 			Wait("Prebuilding Plugins")
 			DKSET(CURRENT_DIR ${plugin_path}/${OS})
