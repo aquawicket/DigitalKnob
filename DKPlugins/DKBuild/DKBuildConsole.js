@@ -64,10 +64,12 @@ function DKBuildConsole_ChooseUpdate() {
 	switch(key){
 		case 48:  //Back (0)
 			UPDATE = "";
+			console.log("Back")
 			break
 		//Esc
 		case 27:
 			CPP_DK_Exit()
+			console.log("Exit")
 			break
 		//Spacebar
 		case 13:
@@ -187,10 +189,12 @@ function DKBuildConsole_SelectOs() {
 
 	switch(key){
 		case 48: //0
-			UPDATE = "" //Back
+			UPDATE = ""
+			console.log("Back")
 			break
 		case 27: //Esc
 			CPP_DK_Exit()
+			console.log("Exit")
 			break
 		case 49: //1
 			OS = OSes[0]
@@ -244,10 +248,12 @@ function DKBuildConsole_SelectApp() {
 	
 	switch(key){
 		case 48: //0
-			OS = "" //Back			
+			OS = ""	
+			console.log("Back")			
 			break
 		case 27:  //Esc
 			CPP_DK_Exit()
+			console.log("Exit")
 			break
 		default:
 			DKBuildConsole_KeyToApp(key)
@@ -272,11 +278,13 @@ function DKBuildConsole_SelectType() {
 		
 	switch(key){
 		case 48: //0
-			APP = "" //Back
+			APP = ""
+			console.log("Back")
 			break
 		case 27:
 			TYPE = ""
 			CPP_DK_Exit()
+			console.log("Exit")
 			break
 		case 49:
 			TYPE = "Debug"
