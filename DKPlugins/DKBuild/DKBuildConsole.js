@@ -39,8 +39,8 @@ function DKBuildConsole_end() {
 
 function DKBuildConsole_ChooseUpdate() {
 	console.log("**** Update DigitalKnob ??? ****")
-	console.log("1. Update")
-	console.log("2. Commit")
+	console.log("1. Git Update")
+	console.log("2. Git Commit")
 	console.log("R. Reset Apps and Plugins")
 	console.log("X. Reset Everything")
 	console.log("Y. Clear Screen")
@@ -62,17 +62,18 @@ function DKBuildConsole_ChooseUpdate() {
 	
 	UPDATE = 1	
 	switch(key){
-		case 48:  //Back (0)
+		case 48:  // Key_0
+			console.log("-> Back")
 			UPDATE = "";
-			console.log("Back")
 			break
 		//Esc
 		case 27:
+			console.log("-> Exit")
 			CPP_DK_Exit()
-			console.log("Exit")
 			break
 		//Spacebar
 		case 13:
+			console.log("-> Rerunning last configuration")
 			OS = cache_json.OS
 			APP = cache_json.APP
 			TYPE = cache_json.TYPE
@@ -80,28 +81,32 @@ function DKBuildConsole_ChooseUpdate() {
 			break
 		//1 key
 		case 49:
+			console.log("-> Git Update")
 			CPP_DK_Create("DKGit/DKGit.js")
 			DKGit_GitUpdate()
 			break
 		//2 key
 		case 50:
+			console.log("-> Git Commit")
 			CPP_DK_Create("DKGit/DKGit.js")
 			DKGit_GitCommit()
 			break
 		//r key
 		case 114:
+			console.log("-> Reset Apps and Plugins")
 			DKBuild_ResetAppsPlugins()
 			DKGit_GitUpdate()
 			break
 		//x key
 		case 120:
+			console.log("-> Reset Everything")
 			DKBuild_Reset3rdParty()
 			DKBuild_ResetAppsPlugins()
 			DKGit_GitUpdate()
 			break
 		//y key	
 		case 121:
-			console.log("clearing console . . .")
+			console.log("-> Clear Screen")
 			if(CPP_DK_GetOS() === "Windows"){
 				CPP_DK_System('cls')
 			}
@@ -111,7 +116,7 @@ function DKBuildConsole_ChooseUpdate() {
 			UPDATE = ""
 			break
 		case 122:
-			console.log("Clearing CMake Cache Files . . .")
+			console.log("-> Clear cmake cache")
 			if(CPP_DK_GetOS() === "Windows"){
 				CPP_DK_Execute('for /r %i in (CMakeCache.*) do del "%%i"')
 				CPP_DK_Execute('for /d /r %i in (*CMakeFiles*) do rd /s /q "%%i"')
@@ -189,47 +194,56 @@ function DKBuildConsole_SelectOs() {
 
 	switch(key){
 		case 48: //0
+			console.log("-> Back")
 			UPDATE = ""
-			console.log("Back")
 			break
 		case 27: //Esc
 			CPP_DK_Exit()
-			console.log("Exit")
+			console.log("-> Exit")
 			break
 		case 49: //1
+			console.log("-> "+OSes[0])
 			OS = OSes[0]
 			break
 		case 50: //2	
+			console.log("-> "+OSes[1])
 			OS = OSes[1]
 			break
 		case 51: //3
+			console.log("-> "+OSes[2])
 			OS = OSes[2]
 			break
-		case 52: //4	
+		case 52: //4
+			console.log("-> "+OSes[3])
 			OS = OSes[3]
 			break
-		case 53: //5	
+		case 53: //5
+			console.log("-> "+OSes[4])
 			OS = OSes[4]
 			break
-		case 54: //6	
+		case 54: //6
+			console.log("-> "+OSes[5])
 			OS = OSes[5]
 			break
-		case 55: //7	
+		case 55: //7
+			console.log("-> "+OSes[6])
 			OS = OSes[6]
 			break
 		case 56: //8	
+			console.log("-> "+OSes[7])
 			OS = OSes[7]
 			break
-		case 57: //9	
+		case 57: //9
+			console.log("-> "+OSes[8])
 			OS = OSes[8]
 			break
 		case 58: //0
+			console.log("-> "+OSes[9])
 			OS = OSes[9]
 			break
 		default:
+			console.error("("+key+")INVALID OPTION")
 			OS = ""
-			console.error("INVALID OPTION")
-			console.log("key = "+key)
 			break
 	}
 }
@@ -248,18 +262,18 @@ function DKBuildConsole_SelectApp() {
 	
 	switch(key){
 		case 48: //0
+			console.log("-> Back")	
 			OS = ""	
-			console.log("Back")			
 			break
 		case 27:  //Esc
+			console.log("-> Exit")
 			CPP_DK_Exit()
-			console.log("Exit")
 			break
 		default:
 			DKBuildConsole_KeyToApp(key)
+			console.log("-> "+APP)
 			if(APP === ""){
-				console.error("INVALID OPTION")
-				console.log("key = "+key)
+				console.error("("+key+")INVALID OPTION")
 			}
 		break
 	}
@@ -278,27 +292,29 @@ function DKBuildConsole_SelectType() {
 		
 	switch(key){
 		case 48: //0
+			console.log("-> Back")
 			APP = ""
-			console.log("Back")
 			break
 		case 27:
+			console.log("-> Exit")
 			TYPE = ""
 			CPP_DK_Exit()
-			console.log("Exit")
 			break
 		case 49:
+			console.log("-> Debug")
 			TYPE = "Debug"
 			break
 		case 50:
+			console.log("-> Release")
 			TYPE = "Release"
 			break
 		case 51:
+			console.log("-> ALL")
 			TYPE = "ALL"
 			break
 		default:
+			console.error("("+key+")INVALID OPTION")
 			TYPE = ""
-			console.error("INVALID OPTION")
-			console.log("key = "+key)
 			break
 	}
 }
