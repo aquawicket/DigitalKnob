@@ -256,40 +256,6 @@ function DKBuild_Reset3rdParty(){
 }
 
 function DKBuild_GetAppList(){
-	/*
-	//DKApps folder
-	let apps = CPP_DKFile_DirectoryContents(DIGITALKNOB+"DK/DKApps")
-	if(!apps){ return }
-	APP_LIST = apps.split(",")
-	for(let i=0; i<APP_LIST.length; i++){
-		if(!CPP_DKFile_IsDirectory(DIGITALKNOB+"DK/DKApps/"+APP_LIST[i]) || APP_LIST[i] === ".svn"){
-			APP_LIST.splice(i, 1)
-			i=0
-		}
-	}
-
-	//User DKApps folders
-	let contents = CPP_DKFile_DirectoryContents(DIGITALKNOB)
-	let files = contents.split(",")
-	for(let i=0; i<files.length; i++){ 
-		if(files[i].indexOf(".txt") <=1){ continue }
-		let url = CPP_DKFile_GetSetting(DIGITALKNOB+files[i], "[MYGIT]")
-		if(url){ 
-			let folder = files[i].replace(".txt","") 
-			let apps2 = CPP_DKFile_DirectoryContents(DIGITALKNOB+folder+"/DKApps")
-			if(apps2){
-				let APP_LIST2 = apps2.split(",")
-				for(let b=0; b<APP_LIST2.length; b++){
-					if(!CPP_DKFile_IsDirectory(DIGITALKNOB+folder+"/DKApps/"+APP_LIST2[b]) || APP_LIST2[b] === ".svn" || APP_LIST2[b] === ".git"){
-						APP_LIST2.splice(b, 1)
-						b=0
-					}
-				}
-				APP_LIST = APP_LIST.concat(APP_LIST2)
-			}
-		}
-	}
-	*/
 	
 	APP_LIST = []
 	let contents = CPP_DKFile_DirectoryContents(DIGITALKNOB)
@@ -307,6 +273,18 @@ function DKBuild_GetAppList(){
 		}
 		}
 	}
+}
+
+function DKBuild_FindAppPath(name){
+	let DKApps = "DKApps"
+	let contents = CPP_DKFile_DirectoryContents(DIGITALKNOB)
+	let files = contents.split(",")
+	for(let i=0; i<files.length; i++){ 
+		if(CPP_DKFile_Exists(DIGITALKNOB+files[i]+"/DKApps/"+APP+"/DKMAKE.cmake"))
+			DKApps = files[i]+"/DKApps"
+	}
+	const app_path = DIGITALKNOB+DKApps+"/"+APP+"/"
+	return app_path
 }
 
 function DKBuild_DoResults(){
@@ -340,6 +318,8 @@ function DKBuild_DoResults(){
 	if(LINK.indexOf("Shared") !== -1)
 		cmake_string = cmake_string+"-DSHARED=ON "
 	cmake_string = cmake_string.replace("  "," ")
+	
+	/*
 	let DKApps = "DKApps"
 	let contents = CPP_DKFile_DirectoryContents(DIGITALKNOB)
 	let files = contents.split(",")
@@ -348,7 +328,8 @@ function DKBuild_DoResults(){
 			DKApps = files[i]+"/DKApps"
 	}
 	const app_path = DIGITALKNOB+DKApps+"/"+APP+"/"
-
+	*/
+	const app_path = DKBuild_FindAppPath(APP)
 	
 	////// WIN32 /////
 	if(OS === "win32"){
