@@ -152,10 +152,10 @@ function DKBuildConsole_SelectOs() {
 	if(CPP_DK_GetOS() === "Linux"){
 		var arch = CPP_DK_Execute("uname -m")
 		//console.log("arch = "+arch)
-		if(arch = "i686"){
+		if(arch === "i686"){
 			OSes.push("linux32")
 		}
-		else if(arch = "x86_64"){
+		else if(arch === "x86_64"){
 			OSes.push("linux64")
 		}
 		else{
