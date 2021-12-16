@@ -666,7 +666,8 @@ endif()
 #######
 if(IOS AND NOT IOSSIM)
 	file(GLOB_RECURSE m_SRC 
-	${DKPROJECT}/*.m)
+	${DKPROJECT}/*.m
+	${DKPROJECT}/*.mm)
 	list(APPEND App_SRC ${m_SRC})
 	
 	### PRE BUILD ###
@@ -718,6 +719,7 @@ if(IOS AND NOT IOSSIM)
 		XCODE_ATTRIBUTE_CODE_SIGN_IDENTITY ""
 		MACOSX_BUNDLE_INFO_PLIST ${DKPLUGINS}/_DKIMPORT/mac/Info.plist
     )
+	set_xcode_property(PRODUCT_BUNDLE_IDENTIFIER com.digitalknob.${APP_NAME})
 	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${LIBS})
 	
 	foreach(plugin ${dkdepend_list})
