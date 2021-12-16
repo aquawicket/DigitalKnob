@@ -699,7 +699,7 @@ if(IOS AND NOT IOSSIM)
 
 	#GET_TARGET_PROPERTY(MyExecutable_PATH ${APP_NAME} LOCATION)
 	if(HAVE_DK)
-		list(APPEND App_SRC ${DKPLUGINS}/DK/DKiPhone.mm)
+		list(APPEND App_SRC ${DKPLUGINS}/DK/DKiOS.mm)
 	endif()
 	add_executable(${APP_NAME} MACOSX_BUNDLE ${App_SRC})
     set_target_properties(${APP_NAME} PROPERTIES
@@ -770,7 +770,7 @@ if(IOSSIM)
 	
 	#GET_TARGET_PROPERTY(MyExecutable_PATH ${APP_NAME} LOCATION)
 	if(HAVE_DK)
-		list(APPEND App_SRC ${DKPLUGINS}/DK/DKiPhone.mm)
+		list(APPEND App_SRC ${DKPLUGINS}/DK/DKiOS.mm)
 	endif()
 	add_executable(${APP_NAME} MACOSX_BUNDLE ${App_SRC})
 	set_target_properties(${APP_NAME} PROPERTIES
