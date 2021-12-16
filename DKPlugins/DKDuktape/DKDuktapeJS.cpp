@@ -42,41 +42,41 @@ bool DKDuktapeJS::Init(){
 	//duk_eval_string(DKDuktape::ctx, "var CPP_DK_INFO = 2;");
 	//duk_eval_string(DKDuktape::ctx, "var CPP_DK_DEBUG = 3;");
 
-	DKDuktape::AttachFunction("CPP_DK_DKDEBUGFUNC", DKDuktapeJS::_DKDEBUGFUNC);
-	DKDuktape::AttachFunction("CPP_DK_DKDEBUGVARS", DKDuktapeJS::_DKDEBUGVARS);
-	DKDuktape::AttachFunction("CPP_DK_AddEvent", DKDuktapeJS::_AddEvent);
-	DKDuktape::AttachFunction("CPP_DK_Available", DKDuktapeJS::_Available);
-	DKDuktape::AttachFunction("CPP_DK_Close", DKDuktapeJS::_Close);
-	DKDuktape::AttachFunction("CPP_DK_Create", DKDuktapeJS::_Create);
+	DKDuktape::AttachFunction("CPP_DK_DKDEBUGFUNC",  DKDuktapeJS::_DKDEBUGFUNC);
+	DKDuktape::AttachFunction("CPP_DK_DKDEBUGVARS",  DKDuktapeJS::_DKDEBUGVARS);
+	DKDuktape::AttachFunction("CPP_DK_AddEvent",     DKDuktapeJS::_AddEvent);
+	DKDuktape::AttachFunction("CPP_DK_Available",    DKDuktapeJS::_Available);
+	DKDuktape::AttachFunction("CPP_DK_Close",        DKDuktapeJS::_Close);
+	DKDuktape::AttachFunction("CPP_DK_Create",       DKDuktapeJS::_Create);
 	DKDuktape::AttachFunction("CPP_DK_DKLoadPlugin", DKDuktapeJS::_LoadPlugin);
-	DKDuktape::AttachFunction("CPP_DK_RemoveEvent", DKDuktapeJS::_RemoveEvent);
+	DKDuktape::AttachFunction("CPP_DK_RemoveEvent",  DKDuktapeJS::_RemoveEvent);
 	DKDuktape::AttachFunction("CPP_DK_RemoveEvents", DKDuktapeJS::_RemoveEvents);
-	DKDuktape::AttachFunction("CPP_DK_SendEvent", DKDuktapeJS::_SendEvent);
-	DKDuktape::AttachFunction("CPP_DK_Valid", DKDuktapeJS::_Valid);
+	DKDuktape::AttachFunction("CPP_DK_SendEvent",    DKDuktapeJS::_SendEvent);
+	DKDuktape::AttachFunction("CPP_DK_Valid",        DKDuktapeJS::_Valid);
 
 	// Desktop console window
 	DKDuktape::AttachFunction("CPP_DK_setConsolePosition", DKDuktapeJS::setConsolePosition);
 
 
-	DKDuktape::AttachFunction("CPP_DK_Beep", DKDuktapeJS::Beep);
-	DKDuktape::AttachFunction("CPP_DK_CallLoops", DKDuktapeJS::CallLoops);
-	DKDuktape::AttachFunction("CPP_DK_CallFunc", DKDuktapeJS::CallFunc);
-	DKDuktape::AttachFunction("CPP_DK_ClearEvents", DKDuktapeJS::ClearEvents);
-	DKDuktape::AttachFunction("CPP_DK_ClickImage", DKDuktapeJS::ClickImage);
-	DKDuktape::AttachFunction("CPP_DK_CpuUsed", DKDuktapeJS::CpuUsed);
+	DKDuktape::AttachFunction("CPP_DK_Beep",         DKDuktapeJS::Beep);
+	DKDuktape::AttachFunction("CPP_DK_CallLoops",    DKDuktapeJS::CallLoops);
+	DKDuktape::AttachFunction("CPP_DK_CallFunc",     DKDuktapeJS::CallFunc);
+	DKDuktape::AttachFunction("CPP_DK_ClearEvents",  DKDuktapeJS::ClearEvents);
+	DKDuktape::AttachFunction("CPP_DK_ClickImage",   DKDuktapeJS::ClickImage);
+	DKDuktape::AttachFunction("CPP_DK_CpuUsed",      DKDuktapeJS::CpuUsed);
 	DKDuktape::AttachFunction("CPP_DK_CpuUsedByApp", DKDuktapeJS::CpuUsedByApp);
-	DKDuktape::AttachFunction("CPP_DK_Crash", DKDuktapeJS::Crash);
-	DKDuktape::AttachFunction("CPP_DK_DoFrame", DKDuktapeJS::DoFrame);
-	DKDuktape::AttachFunction("CPP_DK_DoubleClick", DKDuktapeJS::DoubleClick);
-	DKDuktape::AttachFunction("CPP_DK_DumpError", DKDuktapeJS::DumpError);
-	DKDuktape::AttachFunction("CPP_DK_Execute", DKDuktapeJS::Execute);
-	DKDuktape::AttachFunction("CPP_DK_Exit", DKDuktapeJS::Exit);
-	DKDuktape::AttachFunction("CPP_DK_GetArgs", DKDuktapeJS::GetArgs);
-	DKDuktape::AttachFunction("CPP_DK_GetBrowser", DKDuktapeJS::GetBrowser);
+	DKDuktape::AttachFunction("CPP_DK_Crash",        DKDuktapeJS::Crash);
+	DKDuktape::AttachFunction("CPP_DK_DoFrame",      DKDuktapeJS::DoFrame);
+	DKDuktape::AttachFunction("CPP_DK_DoubleClick",  DKDuktapeJS::DoubleClick);
+	DKDuktape::AttachFunction("CPP_DK_DumpError",    DKDuktapeJS::DumpError);
+	DKDuktape::AttachFunction("CPP_DK_Execute",      DKDuktapeJS::Execute);
+	DKDuktape::AttachFunction("CPP_DK_Exit",         DKDuktapeJS::Exit);
+	DKDuktape::AttachFunction("CPP_DK_GetArgs",      DKDuktapeJS::GetArgs);
+	DKDuktape::AttachFunction("CPP_DK_GetBrowser",   DKDuktapeJS::GetBrowser);
 	DKDuktape::AttachFunction("CPP_DK_GetClipboard", DKDuktapeJS::GetClipboard);
-	DKDuktape::AttachFunction("CPP_DK_getch", DKDuktapeJS::_getch);
-	DKDuktape::AttachFunction("CPP_DK_getche", DKDuktapeJS::_getche);
-	DKDuktape::AttachFunction("CPP_DK_GetData", DKDuktapeJS::GetData);
+	DKDuktape::AttachFunction("CPP_DK_getch",        DKDuktapeJS::_getch);
+	DKDuktape::AttachFunction("CPP_DK_getche",       DKDuktapeJS::_getche);
+	DKDuktape::AttachFunction("CPP_DK_GetData",      DKDuktapeJS::GetData);
 	DKDuktape::AttachFunction("CPP_DK_GetDate", DKDuktapeJS::GetDate);
 	DKDuktape::AttachFunction("CPP_DK_GetEvents", DKDuktapeJS::GetEvents);
 	DKDuktape::AttachFunction("CPP_DK_GetFps", DKDuktapeJS::GetFps);
@@ -186,13 +186,11 @@ int DKDuktapeJS::_DKDEBUGVARS(duk_context* ctx){
 int DKDuktapeJS::_AddEvent(duk_context* ctx){
 	DKString id = duk_require_string(ctx, 0);
 	DKString type = duk_require_string(ctx, 1);
-
 	DKString jsreturn;
 	if(duk_to_string(ctx, 2)){
 		jsreturn = duk_to_string(ctx, 2);
 		replace(jsreturn, "function ", "");
 	}
-
 	DKEvents::AddEvent(id, type, jsreturn, &DKDuktape::OnEvent, DKDuktape::Get());
 	return 1;
 }
@@ -200,9 +198,8 @@ int DKDuktapeJS::_AddEvent(duk_context* ctx){
 int DKDuktapeJS::_Available(duk_context* ctx){
 	DKString data = duk_require_string(ctx, 0);
 	bool available = DKClass::DKAvailable(data);
-	if(!available){
+	if(!available)
 		return 0;
-	}
 	return 1;
 }
 
@@ -273,7 +270,6 @@ int DKDuktapeJS::_Create(duk_context* ctx){
 		}
 		duk_pop(ctx);
     }
-
 	duk_push_string(ctx, obj->data[1].c_str());
 	return 1;
 }
@@ -292,8 +288,8 @@ int DKDuktapeJS::_RemoveEvent(duk_context* ctx){
 		jsreturn = duk_to_string(ctx, 2);
 		replace(jsreturn, "function ", "");
 	}
-
-	if(!DKEvents::RemoveEvent(id, type, jsreturn)){ return 0; }
+	if(!DKEvents::RemoveEvent(id, type, jsreturn))
+		return 0;
 	return 1;
 }
 
@@ -301,7 +297,8 @@ int DKDuktapeJS::_RemoveEvents(duk_context* ctx){
 	//variable can be id or jsreturn
 	DKString variable = duk_to_string(ctx, 0);
 	replace(variable, "function ", ""); //jsreturn type
-	if(!DKEvents::RemoveEvents(variable)){ return 0; } //sending id or jsreturn
+	if(!DKEvents::RemoveEvents(variable))
+		return 0;//sending id or jsreturn
 	return 1;
 }
 
@@ -310,20 +307,15 @@ int DKDuktapeJS::_SendEvent(duk_context* ctx){
 	DKString id = duk_require_string(ctx, 0);
 	DKString type = duk_require_string(ctx, 1);
 	DKString param;
-
 	//if(duk_get_string(ctx, 1)){
 	//	type = duk_get_string(ctx, 1);
 	//}
-
-	if(duk_get_string(ctx, 2)){
+	if(duk_get_string(ctx, 2))
 		param = duk_get_string(ctx, 2);
-	}
-
 	if(!param.empty()){
 		DKEvents::SendEvent(id, type, param);
 		return 1;
 	}
-
 	DKEvents::SendEvent(id, type, "");
 	return 1;
 }
@@ -331,9 +323,8 @@ int DKDuktapeJS::_SendEvent(duk_context* ctx){
 int DKDuktapeJS::_Valid(duk_context* ctx){
 	DKString data = duk_require_string(ctx, 0);
 	bool valid = DKClass::DKValid(data);
-	if(!valid){
+	if(!valid)
 		return 0;
-	}
 	return 1;
 }
 
@@ -360,7 +351,8 @@ int DKDuktapeJS::CallFunc(duk_context* ctx){
 	DKString args = duk_require_string(ctx, 1);
 	DKString result;
 
-	if(!DKClass::CallFunc(func, &args, &result)){ return 0;	}
+	if(!DKClass::CallFunc(func, &args, &result))
+		return 0;
 	
 	duk_push_string(ctx, result.c_str());
 	return 1;
@@ -375,23 +367,28 @@ int DKDuktapeJS::ClickImage(duk_context* ctx){
 	DKString file = duk_require_string(ctx, 0);
 	int x;
 	int y;
-	if(!DKUtil::FindImageOnScreen(file, x, y)){ return 0; }
-	if(!DKUtil::SetMousePos(x, y)){ return 0; }
-	if(!DKUtil::LeftClick()){ return 0; }
+	if(!DKUtil::FindImageOnScreen(file, x, y))
+		return 0;
+	if(!DKUtil::SetMousePos(x, y))
+		return 0;
+	if(!DKUtil::LeftClick())
+		return 0;
 	duk_push_true(ctx);
 	return 1;
 }
 
 int DKDuktapeJS::CpuUsed(duk_context* ctx){
 	int cpu;
-	if(!DKUtil::CpuUsed(cpu)){ return 0; }
+	if(!DKUtil::CpuUsed(cpu))
+		return 0;
 	duk_push_number(ctx, cpu);
 	return 1;
 }
 
 int DKDuktapeJS::CpuUsedByApp(duk_context* ctx){
 	int cpu;
-	if(!DKUtil::CpuUsedByApp(cpu)){ return 0; }
+	if(!DKUtil::CpuUsedByApp(cpu))
+		return 0;
 	duk_push_number(ctx, cpu);
 	return 1;
 }
@@ -411,12 +408,14 @@ int DKDuktapeJS::DoFrame(duk_context* ctx){
 }
 
 int DKDuktapeJS::DoubleClick(duk_context* ctx){
-	if(!DKUtil::DoubleClick()){ return 0; }
+	if(!DKUtil::DoubleClick())
+		return 0;
 	return 1;
 }
 
 int DKDuktapeJS::DumpError(duk_context* ctx){
-	if(!DKDuktape::DumpError("")){ return 0; }
+	if(!DKDuktape::DumpError(""))
+		return 0;
 	return 1;
 }
 
@@ -467,7 +466,8 @@ int DKDuktapeJS::GetBrowser(duk_context* ctx){
 
 int DKDuktapeJS::GetClipboard(duk_context* ctx){
 	DKString string;
-	if(!DKUtil::GetClipboard(string)){ return 0; }
+	if(!DKUtil::GetClipboard(string))
+		return 0;
 	duk_push_string(ctx, string.c_str());
 	return 1;
 }
@@ -485,7 +485,8 @@ int DKDuktapeJS::_getche(duk_context* ctx){
 
 int DKDuktapeJS::GetData(duk_context* ctx){
 	DKString data = duk_require_string(ctx, 0);
-	if(!DKClass::DKValid(data)){ return 0; }
+	if(!DKClass::DKValid(data))
+		return 0;
 	DKString output = toString(DKClass::DKGet(data)->data, ",");
 	duk_push_string(ctx, output.c_str());
 	return 1;
@@ -493,7 +494,8 @@ int DKDuktapeJS::GetData(duk_context* ctx){
 
 int DKDuktapeJS::GetDate(duk_context* ctx){
 	DKString date;
-	if(!DKUtil::GetDate(date)){ return 0; }
+	if(!DKUtil::GetDate(date))
+		return 0;
 	duk_push_string(ctx, date.c_str());
 	return 1;
 }
@@ -509,7 +511,6 @@ int DKDuktapeJS::GetEvents(duk_context* ctx){
 		list += DKEvents::events[i]->GetJSReturn();
 		list += ",";
 	}
-
 	duk_push_string(ctx, list.c_str());
 	return 1;
 }
@@ -590,7 +591,8 @@ int DKDuktapeJS::GetMouseX(duk_context* ctx){
 int DKDuktapeJS::GetMouseY(duk_context* ctx){
 	int mouseX = 0;
 	int mouseY = 0;
-	if(!DKUtil::GetMousePos(mouseX, mouseY)){ return 0; }
+	if(!DKUtil::GetMousePos(mouseX, mouseY))
+		return 0;
 	duk_push_int(ctx, mouseY);
 	return 1;
 }
@@ -625,11 +627,13 @@ int DKDuktapeJS::GetObjects(duk_context* ctx){
 int DKDuktapeJS::GetPixelUnderMouse(duk_context* ctx){
 	int mouseX = 0;
 	int mouseY = 0;
-	if (!DKUtil::GetMousePos(mouseX, mouseY)) { return 0; }
+	if (!DKUtil::GetMousePos(mouseX, mouseY))
+		return 0;
 	int r;
 	int g;
 	int b;
-	if (!DKUtil::GetPixelFromScreen(mouseX, mouseY, r, g, b)) { return 0; }
+	if (!DKUtil::GetPixelFromScreen(mouseX, mouseY, r, g, b))
+		return 0;
 	DKString rgb = toString(r) + "," + toString(g) + "," + toString(b);
 	duk_push_string(ctx, rgb.c_str());
 	return 1;
@@ -644,14 +648,16 @@ int DKDuktapeJS::GetProcessList(duk_context* ctx){
 
 int DKDuktapeJS::GetScreenHeight(duk_context* ctx){
 	int h;
-	if(!DKUtil::GetScreenHeight(h)){ return 0; }
+	if(!DKUtil::GetScreenHeight(h))
+		return 0;
 	duk_push_int(ctx, h);
 	return 1;
 }
 
 int DKDuktapeJS::GetScreenWidth(duk_context* ctx){
 	int w;
-	if(!DKUtil::GetScreenWidth(w)){ return 0; }
+	if(!DKUtil::GetScreenWidth(w))
+		return 0;
 	duk_push_int(ctx, w);
 	return 1;
 }
@@ -666,7 +672,8 @@ int DKDuktapeJS::GetTicks(duk_context* ctx){
 
 int DKDuktapeJS::GetTime(duk_context* ctx){
 	DKString time;
-	if(!DKUtil::GetTime(time)){ return 0; }
+	if(!DKUtil::GetTime(time))
+		return 0;
 	duk_push_string(ctx, time.c_str());
 	return 1;
 }
@@ -675,7 +682,8 @@ int DKDuktapeJS::GetType(duk_context* ctx){
 	DKString evt = duk_require_string(ctx, 0);
 	DKStringArray arry;
 	toStringArray(arry, evt, ",");
-	if(arry.size() < 2){ return 0; }
+	if(arry.size() < 2)
+		return 0;
 	duk_push_string(ctx, arry[1].c_str());
 	return 1;
 }
@@ -696,9 +704,8 @@ int DKDuktapeJS::GetValue(duk_context* ctx){
 		if(DKClass::DKValid("DKWidget,DKWidget0")){
 			DKString rval;
 			DKDuktape::RunDuktape("DKWidget_GetValue(\""+evt+"\");", rval);
-			if(rval.empty()){
+			if(rval.empty())
 				return 0;
-			}
 			duk_push_string(ctx, rval.c_str());
 			return 1;
 		}
@@ -711,7 +718,8 @@ int DKDuktapeJS::GetValue(duk_context* ctx){
 
 int DKDuktapeJS::GetVolume(duk_context* ctx){
 	int percent;
-	if(!DKUtil::GetVolume(percent)){ return 0; }
+	if(!DKUtil::GetVolume(percent))
+		return 0;
 	duk_push_number(ctx, percent);
 	return 1;
 }
@@ -763,7 +771,8 @@ int DKDuktapeJS::LogGuiConsole(duk_context* ctx){
 }
 
 int DKDuktapeJS::LowPowerMonitor(duk_context* ctx){
-	if(!DKUtil::LowPowerMonitor()){ return 0; }
+	if(!DKUtil::LowPowerMonitor())
+		return 0;
 	return 1;
 }
 
@@ -779,8 +788,10 @@ int DKDuktapeJS::MessageBox(duk_context* ctx){
 	DKString value;
 	if(arry.size() > 2)
 		value = arry[2];
-	if(value.empty())
-		DKEvents::SendEvent("DKMessage.html", cmd, id+","+type+","+message); return 0; 
+	if(value.empty()){
+		DKEvents::SendEvent("DKMessage.html", cmd, id+","+type+","+message); 
+		return 0; 
+	}
 	if(same(value,"CANCEL"))
 		return 0;
 	duk_push_string(ctx, value.c_str());
@@ -791,37 +802,41 @@ int DKDuktapeJS::MouseToImage(duk_context* ctx){
 	DKString file = duk_require_string(ctx, 0);
 	int x;
 	int y;
-	if(!DKUtil::FindImageOnScreen(file, x, y)){ return 0; }
-	if(!DKUtil::SetMousePos(x, y)){ return 0; }
+	if(!DKUtil::FindImageOnScreen(file, x, y))
+		return 0;
+	if(!DKUtil::SetMousePos(x, y))
+		return 0;
 	return 1;
 }
 
 int DKDuktapeJS::PhysicalMemory(duk_context* ctx){
 	unsigned long long physicalMemory;
-	if(!DKUtil::PhysicalMemory(physicalMemory)){ return 0; }
+	if(!DKUtil::PhysicalMemory(physicalMemory))
+		return 0;
 	duk_push_number(ctx, (double)physicalMemory);
 	return 1;
 }
 
 int DKDuktapeJS::PhysicalMemoryUsed(duk_context* ctx){
 	unsigned long long physicalMemory;
-	if(!DKUtil::PhysicalMemoryUsed(physicalMemory)){ return 0; }
+	if(!DKUtil::PhysicalMemoryUsed(physicalMemory))
+		return 0;
 	duk_push_number(ctx, (double)physicalMemory);
 	return 1;
 }
 
 int DKDuktapeJS::PhysicalMemoryUsedByApp(duk_context* ctx){
 	unsigned int physicalMemory;
-	if(!DKUtil::PhysicalMemoryUsedByApp(physicalMemory)){ return 0; }
+	if(!DKUtil::PhysicalMemoryUsedByApp(physicalMemory))
+		return 0;
 	duk_push_number(ctx, physicalMemory);
 	return 1;
 }
 
 int DKDuktapeJS::PressKey(duk_context* ctx){
 	int key = duk_require_int(ctx, 0);
-	if(!DKUtil::PressKey(key)){
+	if(!DKUtil::PressKey(key))
 		return 0;
-	}
 	return 1;
 }
 
@@ -833,9 +848,8 @@ int DKDuktapeJS::QueueDuktape(duk_context* ctx){
 
 int DKDuktapeJS::ReleaseKey(duk_context* ctx){
 	int key = duk_require_int(ctx, 0);
-	if(!DKUtil::ReleaseKey(key)){
+	if(!DKUtil::ReleaseKey(key))
 		return 0;
-	}
 	return 1;
 }
 
@@ -845,7 +859,8 @@ int DKDuktapeJS::Reload(duk_context* ctx){
 }
 
 int DKDuktapeJS::RightClick(duk_context* ctx){
-	if(!DKUtil::RightClick()){ return 0; }
+	if(!DKUtil::RightClick())
+		return 0;
 	return 1;
 }
 
@@ -876,26 +891,30 @@ int DKDuktapeJS::SetBrightness(duk_context* ctx){
 
 int DKDuktapeJS::SetClipboard(duk_context* ctx){
 	DKString string = duk_require_string(ctx, 0);
-	if(!DKUtil::SetClipboard(string)){ return 0; }
+	if(!DKUtil::SetClipboard(string))
+		return 0;
 	return 1;
 }
 
 int DKDuktapeJS::SetClipboardFiles(duk_context* ctx){
 	DKString filelist = duk_require_string(ctx, 0);
-	if(!DKUtil::SetClipboardFiles(filelist)){ return 0; }
+	if(!DKUtil::SetClipboardFiles(filelist))
+		return 0;
 	return 1;
 }
 
 int DKDuktapeJS::SetClipboardImage(duk_context* ctx){
 	DKString file = duk_require_string(ctx, 0);
-	if(!DKUtil::SetClipboardImage(file)){ return 0; }
+	if(!DKUtil::SetClipboardImage(file))
+		return 0;
 	return 1;
 }
 
 int DKDuktapeJS::SetCursorPos(duk_context* ctx){
 	int x = duk_require_int(ctx, 0);
 	int y = duk_require_int(ctx, 1);
-	if(!DKUtil::SetMousePos(x, y)){ return 0; }
+	if(!DKUtil::SetMousePos(x, y))
+		return 0;
 	return 1;
 }
 
@@ -907,7 +926,8 @@ int DKDuktapeJS::SetFramerate(duk_context* ctx){
 
 int DKDuktapeJS::SetVolume(duk_context* ctx){
 	int percent = duk_require_int(ctx, 0);
-	if(!DKUtil::SetVolume(percent)){ return 0; }
+	if(!DKUtil::SetVolume(percent))
+		return 0;
 	return 1;
 }
 
@@ -921,7 +941,8 @@ int DKDuktapeJS::ShowConsole(duk_context* ctx){
 
 int DKDuktapeJS::Sleep(duk_context* ctx){
 	int milliseconds = duk_require_int(ctx, 0);
-	if(!DKUtil::Sleep(milliseconds)){ return 0; }
+	if(!DKUtil::Sleep(milliseconds))
+		return 0;
 	return 1;
 }
 
@@ -939,23 +960,27 @@ int DKDuktapeJS::StrokeKey(duk_context* ctx){
 int DKDuktapeJS::System(duk_context* ctx){
 	DKString command = duk_require_string(ctx, 0);
 	int rtnvalue;
-	if(!DKUtil::System(command, rtnvalue)){ return 0; }
+	if(!DKUtil::System(command, rtnvalue))
+		return 0;
 	duk_push_int(ctx, rtnvalue);
 	return 1;
 }
 
 int DKDuktapeJS::TurnOffMonitor(duk_context* ctx){
-	if(!DKUtil::TurnOffMonitor()){ return 0; }
+	if(!DKUtil::TurnOffMonitor())
+		return 0;
 	return 1;
 }
 
 int DKDuktapeJS::TurnOnMonitor(duk_context* ctx){
-	if(!DKUtil::TurnOnMonitor()){ return 0; }
+	if(!DKUtil::TurnOnMonitor())
+		return 0;
 	return 1;
 }
 
 int DKDuktapeJS::Trace(duk_context* ctx){
-	if (!DKDuktape::Trace()) { return 0; }
+	if (!DKDuktape::Trace())
+		return 0;
 	return 1;
 }
 
@@ -966,32 +991,37 @@ int DKDuktapeJS::Value(duk_context* ctx){
 	toStringArray(events, evt, ",");
 	if(events.size() > 2){
 		//DKINFO("Value:"+events[2]+"\n");
-		if(!same(events[2],value)){ return 0; }
+		if(!same(events[2],value))
+			return 0;
 		return 1;
 	}
 	//DKINFO("Value:"+events[1]+"\n");
 	DKERROR("DKDuktapeJS::Value(): We should not get here \n");
-	if(!same(events[1],value)){ return 0; }
+	if(!same(events[1],value))
+		return 0;
 	return 1;
 }
 
 int DKDuktapeJS::VirtualMemory(duk_context* ctx){
 	unsigned long long virtualMemory;
-	if(!DKUtil::VirtualMemory(virtualMemory)){ return 0; }
+	if(!DKUtil::VirtualMemory(virtualMemory))
+		return 0;
 	duk_push_number(ctx, (double)virtualMemory);
 	return 1;
 }
 
 int DKDuktapeJS::VirtualMemoryUsed(duk_context* ctx){
 	unsigned long long virtualMemory;
-	if(!DKUtil::VirtualMemoryUsed(virtualMemory)){ return 0; }
+	if(!DKUtil::VirtualMemoryUsed(virtualMemory))
+		return 0;
 	duk_push_number(ctx, (double)virtualMemory);
 	return 1;
 }
 
 int DKDuktapeJS::VirtualMemoryUsedByApp(duk_context* ctx){
 	unsigned int virtualMemory;
-	if(!DKUtil::VirtualMemoryUsedByApp(virtualMemory)){ return 0; }
+	if(!DKUtil::VirtualMemoryUsedByApp(virtualMemory))
+		return 0;
 	duk_push_number(ctx, virtualMemory);
 	return 1;
 }
