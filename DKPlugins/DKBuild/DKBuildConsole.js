@@ -353,8 +353,6 @@ function BuildConsole_PostBuildOptions(){
 			OpenAppSolution(OS, APP)
 			break
 		default:
-			console.error("("+key+")INVALID OPTION")
-			TYPE = ""
 			break
 	}
 }
