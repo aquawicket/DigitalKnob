@@ -256,6 +256,7 @@ function DKBuild_Reset3rdParty(){
 }
 
 function DKBuild_GetAppList(){
+	/*
 	//DKApps folder
 	let apps = CPP_DKFile_DirectoryContents(DIGITALKNOB+"DK/DKApps")
 	if(!apps){ return }
@@ -286,6 +287,24 @@ function DKBuild_GetAppList(){
 				}
 				APP_LIST = APP_LIST.concat(APP_LIST2)
 			}
+		}
+	}
+	*/
+	
+	APP_LIST = []
+	let contents = CPP_DKFile_DirectoryContents(DIGITALKNOB)
+	let items = contents.split(",")
+	for(let i=0; i<items.length; i++){
+		if(CPP_DKFile_Exists(DIGITALKNOB+items[i]+"/DKApps")){
+		if(CPP_DKFile_IsDirectory(DIGITALKNOB+items[i]+"/DKApps")){
+			let dkApps = CPP_DKFile_DirectoryContents(DIGITALKNOB+items[i]+"/DKApps")
+			let dkAppsArray = dkApps.split(",")
+			for(let nn=0; nn < dkAppsArray.length; nn++){
+				if(CPP_DKFile_Exists(DIGITALKNOB+items[i]+"/DKApps/"+dkAppsArray[nn]+"/DKMAKE.cmake")){
+					APP_LIST.push(dkAppsArray[nn])
+				}
+			}
+		}
 		}
 	}
 }
