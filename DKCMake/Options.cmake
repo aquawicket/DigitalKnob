@@ -198,14 +198,14 @@ string(REPLACE "/Release" "" DKPROJECT ${DKPROJECT})
 ###########################################################################
 ## Set variables for Build Type
 ###########################################################################
-if(DEBUG)
-	DKSET(CMAKE_BUILD_TYPE DEBUG)
-	add_definitions(-DDEBUG)
-endif()
-if(RELEASE)
-	DKSET(CMAKE_BUILD_TYPE RELEASE)
-	add_definitions(-DRELEASE)
-endif(RELEASE)
+#if(DEBUG)
+#	DKSET(CMAKE_BUILD_TYPE DEBUG)
+	#add_definitions(-DDEBUG)
+#endif()
+#if(RELEASE)
+#	DKSET(CMAKE_BUILD_TYPE RELEASE)
+	#add_definitions(-DRELEASE)
+#endif(RELEASE)
 
 
 
