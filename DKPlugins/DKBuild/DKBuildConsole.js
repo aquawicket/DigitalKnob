@@ -407,22 +407,43 @@ function DKBuildConsole_Process() {
 
 function DKBuildConsole_RunApp(os, app, type){
 	const app_path = DKBuild_FindAppPath(app)
-	const exe_name = app+".exe"
+	if(os === "win32" || os === "win64"){
+		const exe_name = app+".exe"
+	}
+	else if(os === "linux32" || os === "linux64" || os === "raspberry32" || os === "raspberry64"){
+		const exe_name = app
+	}
+	else if(os === "mac32" || os === "mac64"){
+		const exe_name = app+".app/Contents/MacOS/wrapper"
+	}
+	else{
+		console.log("the OS ("+os+") is not implemented")
+		return false
+	}
 	const exe_path = app_path="/"+os+"/"+type+"/"+exe_name
 	if(CPP_DKFile_Exists(exe_path)){
 		CPP_DK_Execute("cmd /c "+exe_path)
-		return 
+		return true
 	}
 	console.log("ERROR: path does not exist: "+exe_path)
 }
 
-DKBuildConsole_OpenAppSolution(os, app){
+function DKBuildConsole_OpenAppSolution(os, app){
 	const app_path = DKBuild_FindAppPath(app)
-	const solution_name = app+".sln"
+	if(os === "win32" || os === "win64"){
+		const solution_name = app+".sln"
+	}
+	else if(os === "mac32" || os === "mac64" || os === "ios32" || os === "ios64" || os === "iossim32" || os === "iossim64"){
+		const solution_name = app+".xcodeproj"
+	}
+	else{
+		console.log("the OS ("+os+") is not implemented")
+		return false
+	}
 	const solution_path = app_path="/"+os+"/"+solution_name
 	if(CPP_DKFile_Exists(solution_path)){
 		CPP_DK_Execute("cmd /c "+solution_path)
-		return 
+		return true
 	}
 	console.log("ERROR: path does not exist: "+solution_path)
 }
