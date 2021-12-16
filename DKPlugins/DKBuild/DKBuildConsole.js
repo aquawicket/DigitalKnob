@@ -53,9 +53,9 @@ function DKBuildConsole_ChooseUpdate() {
 			console.log("ENTER: "+cache_json.APP+" -> "+cache_json.OS+" -> "+cache_json.TYPE+" -> "+cache_json.LEVEL)
 		}
 	}
-	console.log("any other key to Skip")
 	console.log("0. Back")
 	console.log("ESC. exit")
+	console.log(" Any Other Key To Skip")
 	console.log("\n")
 		
 	var key = getch()
@@ -295,22 +295,62 @@ function DKBuildConsole_SelectType() {
 			console.log("-> Back")
 			APP = ""
 			break
-		case 27:
+		case 27: //Esc
 			console.log("-> Exit")
 			TYPE = ""
 			CPP_DK_Exit()
 			break
-		case 49:
+		case 49: //1
 			console.log("-> Debug")
 			TYPE = "Debug"
 			break
-		case 50:
+		case 50: //2
 			console.log("-> Release")
 			TYPE = "Release"
 			break
-		case 51:
+		case 51: //3
 			console.log("-> ALL")
 			TYPE = "ALL"
+			break
+		default:
+			console.error("("+key+")INVALID OPTION")
+			TYPE = ""
+			break
+	}
+}
+
+function BuildConsole_PostBuildOptions(){
+	console.log("**** Post-Build Options ****")
+	console.log("1. Run "+APP+" Debug Executable")
+	console.log("2. Run "+APP+" Release Executable")
+	console.log("3. Open Generated "+APP+" Soluton")
+	console.log("0. Back")
+	console.log("ESC. exit")
+	console.log(" Any Other Key To Skip") 
+	console.log("\n")
+	var key = getch()
+		
+	switch(key){
+		case 48: //0
+			console.log("-> Back")
+			APP = ""
+			break
+		case 27: //Esc
+			console.log("-> Exit")
+			TYPE = ""
+			CPP_DK_Exit()
+			break
+		case 49: //1
+			console.log("-> Run "+APP+" Debug Executable")
+			RunApp(OS, APP, "Debug")
+			break
+		case 50: //2
+			console.log("-> Run "+APP+" Release Executable")
+			RunApp(OS, APP, "Release")
+			break
+		case 51: //3
+			console.log("-> Open Generated "+APP+" Soluton")
+			OpenAppSolution(OS, APP)
 			break
 		default:
 			console.error("("+key+")INVALID OPTION")
@@ -357,6 +397,8 @@ function DKBuildConsole_Process() {
 		console.log("###########################")
 		DKBuild_DoResults()
 	}
+	
+	BuildConsole_PostBuildOptions()
 	
 	UPDATE = ""
 	OS     = ""	
