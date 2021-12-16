@@ -407,6 +407,7 @@ function DKBuildConsole_Process() {
 
 function DKBuildConsole_RunApp(os, app, type){
 	const app_path = DKBuild_FindAppPath(app)
+	console.log("app_path = "+app_path)
 	if(os === "win32" || os === "win64"){
 		const exe_name = app+".exe"
 	}

@@ -280,10 +280,10 @@ function DKBuild_FindAppPath(name){
 	let contents = CPP_DKFile_DirectoryContents(DIGITALKNOB)
 	let files = contents.split(",")
 	for(let i=0; i<files.length; i++){ 
-		if(CPP_DKFile_Exists(DIGITALKNOB+files[i]+"/DKApps/"+APP+"/DKMAKE.cmake"))
+		if(CPP_DKFile_Exists(DIGITALKNOB+files[i]+"/DKApps/"+name+"/DKMAKE.cmake"))
 			DKApps = files[i]+"/DKApps"
 	}
-	const app_path = DIGITALKNOB+DKApps+"/"+APP+"/"
+	const app_path = DIGITALKNOB+DKApps+"/"+name+"/"
 	return app_path
 }
 
