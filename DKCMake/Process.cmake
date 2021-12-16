@@ -946,8 +946,9 @@ if(RASPBERRY)
 	endif()
 	
 	# Install shortcut of Release build to the apps menu
-	DKEXECUTE_PROCESS(desktop-file-install --dir=/home/$ENV{USER}/.local/share/applications ${DKPROJECT}/${OS}/Release/${APP_NAME}.desktop WORKING_DIRECTORY ${DKPROJECT}/${OS}/Release)
-	
+	if(RELEASE)
+		DKEXECUTE_PROCESS(desktop-file-install --dir=/home/$ENV{USER}/.local/share/applications ${DKPROJECT}/${OS}/Release/${APP_NAME}.desktop WORKING_DIRECTORY ${DKPROJECT}/${OS}/Release)
+	endif()
 	### POST BUILD ###
 	#CPP_DK_Execute("chmod +x "+app_path+OS+"/Debug/"+APP)
 endif()
