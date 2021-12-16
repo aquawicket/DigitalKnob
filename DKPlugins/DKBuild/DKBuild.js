@@ -319,16 +319,6 @@ function DKBuild_DoResults(){
 		cmake_string = cmake_string+"-DSHARED=ON "
 	cmake_string = cmake_string.replace("  "," ")
 	
-	/*
-	let DKApps = "DKApps"
-	let contents = CPP_DKFile_DirectoryContents(DIGITALKNOB)
-	let files = contents.split(",")
-	for(let i=0; i<files.length; i++){ 
-		if(CPP_DKFile_Exists(DIGITALKNOB+files[i]+"/DKApps/"+APP))
-			DKApps = files[i]+"/DKApps"
-	}
-	const app_path = DIGITALKNOB+DKApps+"/"+APP+"/"
-	*/
 	const app_path = DKBuild_FindAppPath(APP)
 	
 	////// WIN32 /////

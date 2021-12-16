@@ -342,15 +342,15 @@ function BuildConsole_PostBuildOptions(){
 			break
 		case 49: //1
 			console.log("-> Run "+APP+" Debug Executable")
-			RunApp(OS, APP, "Debug")
+			DKBuildConsole_RunApp(OS, APP, "Debug")
 			break
 		case 50: //2
 			console.log("-> Run "+APP+" Release Executable")
-			RunApp(OS, APP, "Release")
+			DKBuildConsole_RunApp(OS, APP, "Release")
 			break
 		case 51: //3
 			console.log("-> Open Generated "+APP+" Soluton")
-			OpenAppSolution(OS, APP)
+			DKBuildConsole_OpenAppSolution(OS, APP)
 			break
 		default:
 			break
@@ -405,6 +405,27 @@ function DKBuildConsole_Process() {
 	LEVEL  = "RebuildAll";
 }    
 
+function DKBuildConsole_RunApp(os, app, type){
+	const app_path = DKBuild_FindAppPath(app)
+	const exe_name = app+".exe"
+	const exe_path = app_path="/"+os+"/"+type+"/"+exe_name
+	if(CPP_DKFile_Exists(exe_path)){
+		CPP_DK_Execute("cmd /c "+exe_path)
+		return 
+	}
+	console.log("ERROR: path does not exist: "+exe_path)
+}
+
+DKBuildConsole_OpenAppSolution(os, app){
+	const app_path = DKBuild_FindAppPath(app)
+	const solution_name = app+".sln"
+	const solution_path = app_path="/"+os+"/"+solution_name
+	if(CPP_DKFile_Exists(solution_path)){
+		CPP_DK_Execute("cmd /c "+solution_path)
+		return 
+	}
+	console.log("ERROR: path does not exist: "+solution_path)
+}
 
 function DKBuildConsole_TranslateOption(num) {
     if (num === 0)
