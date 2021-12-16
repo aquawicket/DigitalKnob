@@ -423,7 +423,7 @@ function DKBuildConsole_RunApp(os, app, type){
 	}
 	const exe_path = app_path+os+"/"+type+"/"+exe_name
 	if(CPP_DKFile_Exists(exe_path)){
-		CPP_DK_System('cmd /c \"'+exe_path+'\"')
+		CPP_DK_System('\"'+exe_path+'\"')
 		return true
 	}
 	console.log("ERROR: path does not exist: "+exe_path)
@@ -443,7 +443,7 @@ function DKBuildConsole_OpenAppSolution(os, app){
 	}
 	const solution_path = app_path+os+"/"+solution_name
 	if(CPP_DKFile_Exists(solution_path)){
-		CPP_DK_Execute("cmd /c "+solution_path)
+		CPP_DK_System('\"'+solution_path+'\"')
 		return true
 	}
 	console.log("ERROR: path does not exist: "+solution_path)
