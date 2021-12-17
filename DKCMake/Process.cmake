@@ -505,7 +505,8 @@ endif(WIN_64)
 #######
 if(MAC)
 	file(GLOB_RECURSE m_SRC 
-	${DKPROJECT}/*.m)
+	${DKPROJECT}/*.m
+	${DKPROJECT}/*.mm)
 	list(APPEND App_SRC ${m_SRC})
 	
 	### PRE BUILD ###
@@ -699,9 +700,9 @@ if(IOS AND NOT IOSSIM)
 	DKREMOVE(${DKPROJECT}/Backup)
 
 	#GET_TARGET_PROPERTY(MyExecutable_PATH ${APP_NAME} LOCATION)
-	if(HAVE_DK)
+	#if(HAVE_DK)
 		list(APPEND App_SRC ${DKPLUGINS}/DK/DKiOS.mm)
-	endif()
+	#endif()
 	add_executable(${APP_NAME} MACOSX_BUNDLE ${App_SRC})
     set_target_properties(${APP_NAME} PROPERTIES
         MACOSX_BUNDLE TRUE
@@ -735,7 +736,8 @@ endif()
 ##########
 if(IOSSIM)
 	file(GLOB_RECURSE m_SRC 
-	${DKPROJECT}/*.m)
+	${DKPROJECT}/*.m
+	${DKPROJECT}/*.mm)
 	list(APPEND App_SRC ${m_SRC})
 	
 	### PRE BUILD ###
@@ -771,9 +773,9 @@ if(IOSSIM)
 	DKREMOVE(${DKPROJECT}/Backup)
 	
 	#GET_TARGET_PROPERTY(MyExecutable_PATH ${APP_NAME} LOCATION)
-	if(HAVE_DK)
+	#if(HAVE_DK)
 		list(APPEND App_SRC ${DKPLUGINS}/DK/DKiOS.mm)
-	endif()
+	#endif()
 	add_executable(${APP_NAME} MACOSX_BUNDLE ${App_SRC})
 	set_target_properties(${APP_NAME} PROPERTIES
         MACOSX_BUNDLE TRUE
@@ -1033,8 +1035,12 @@ DKBUILD_LOG("         DKINCLUDES_LIST:  ${DKINCLUDES_LIST}")
 DKBUILD_LOG("         DKLINKDIRS_LIST:  ${DKLINKDIRS_LIST}")
 DKSET(include_libs "${LIBS} ${DEBUG_LIBS} ${RELEASE_LIBS}")
 
+DKBUILD_LOG(" *** ${APP_NAME} Source Files *** \n\n")
+foreach(src ${App_SRC})
+	DKBUILD_LOG(${src})
+endforeach()
 
-DKBUILD_LOG(" *** ${APP_NAME} Include Libraries *** \n\n")
+DKBUILD_LOG("\n\n *** ${APP_NAME} Include Libraries *** \n\n")
 DKBUILD_LOG(" ** Common libraries **")
 foreach(lib ${LIBS})
 	DKBUILD_LOG(${lib})
