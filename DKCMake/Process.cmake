@@ -700,9 +700,9 @@ if(IOS AND NOT IOSSIM)
 	DKREMOVE(${DKPROJECT}/Backup)
 
 	#GET_TARGET_PROPERTY(MyExecutable_PATH ${APP_NAME} LOCATION)
-	#if(HAVE_DK)
+	if(HAVE_DK)
 		list(APPEND App_SRC ${DKPLUGINS}/DK/DKiOS.mm)
-	#endif()
+	endif()
 	add_executable(${APP_NAME} MACOSX_BUNDLE ${App_SRC})
     set_target_properties(${APP_NAME} PROPERTIES
         MACOSX_BUNDLE TRUE
@@ -773,9 +773,9 @@ if(IOSSIM)
 	DKREMOVE(${DKPROJECT}/Backup)
 	
 	#GET_TARGET_PROPERTY(MyExecutable_PATH ${APP_NAME} LOCATION)
-	#if(HAVE_DK)
+	if(HAVE_DK)
 		list(APPEND App_SRC ${DKPLUGINS}/DK/DKiOS.mm)
-	#endif()
+	endif()
 	add_executable(${APP_NAME} MACOSX_BUNDLE ${App_SRC})
 	set_target_properties(${APP_NAME} PROPERTIES
         MACOSX_BUNDLE TRUE
@@ -793,6 +793,7 @@ if(IOSSIM)
 		XCODE_ATTRIBUTE_CODE_SIGN_IDENTITY ""
 		#MACOSX_BUNDLE_INFO_PLIST ${DKPLUGINS}/_DKIMPORT/ios/Info.plist
     )
+	set_xcode_property(PRODUCT_BUNDLE_IDENTIFIER com.digitalknob.${APP_NAME})
 	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${LIBS})
 	
 	foreach(plugin ${dkdepend_list})
