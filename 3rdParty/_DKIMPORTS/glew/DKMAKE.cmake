@@ -1,3 +1,7 @@
+if(IOS OR IOSSIM OR ANDROID)
+	return()
+endif()
+
 # http://glew.sourceforge.net/
 #
 # https://github.com/nigels-com/glew/releases/download/glew-2.2.0/glew-2.2.0.zip
