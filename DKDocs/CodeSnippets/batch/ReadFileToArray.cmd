@@ -1,12 +1,13 @@
 :: https://stackoverflow.com/a/18869970
+:: Read lines of a file into an array and echo them back
 
 @echo off
-set "file=C:\Users\Admin\Documents\url.txt"
+set "file=ServiceList.txt"
 set /A i=0
 
 for /F "usebackq delims=" %%a in ("%file%") do (
 set /A i+=1
-call echo %%i%%
+::call echo %%i%%
 call set array[%%i%%]=%%a
 call set n=%%i%%
 )
