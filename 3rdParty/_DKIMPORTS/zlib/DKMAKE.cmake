@@ -43,17 +43,10 @@ DKSET(ZLIB_IOS_RELEASE_CONFIG "CFLAGS= -I${ZLIB} -I${ZLIB}/${OS} -I${ZLIB}/${OS}
 
 
 ### COMPILE ###
-if(LINUX OR RASPBERRY)
-	if(DEBUG)
-		DKSETPATH(${ZLIB}/${OS}/${DEBUG_DIR})
-	elseif(RELEASE)
-		DKSETPATH(${ZLIB}/${OS}/${RELEASE_DIR})
-	endif()
-else()
-	DKSETPATH(${ZLIB}/${OS})
-endif()
+DKSETPATH(${ZLIB}/${BUILD_DIR})
 
 DKCOMMAND(${DKCMAKE_BUILD} ${ZLIB})
+
 WIN_VS(${ZLIB_NAME} zlib.sln zlibstatic)
 MAC_XCODE(${ZLIB_NAME} zlibstatic)
 IOS_XCODE(${ZLIB_NAME} zlibstatic)
