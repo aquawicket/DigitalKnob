@@ -58,7 +58,7 @@ if NOT "%errorlevel%" == "0" goto Error
 
 ::******************* Install.cmd *********************
 set "vs_setup=%dkdownload%\VisualStudio\vs_setup.exe"
-(echo %vs_setup% --noweb ^^) > Install.cmd
+(echo %vs_setup% --noweb --noUpdateInstaller ^^) > Install.cmd
 (set LF=^^)
 for /L %%i in (1,1,%length%) do (echo --add !array[%%i]! !LF!) >> Install.cmd
 if NOT "%errorlevel%" == "0" goto Error
