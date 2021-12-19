@@ -51,10 +51,8 @@ for /L %%i in (1,1,%length%) do (
 ::******************* BuildInstaller.cmd *********************
 (echo start /wait %vs_community% --layout "%dkdownload%\VisualStudio" ^^) > BuildInstaller.cmd
 (set LF=^^)
-for /L %%i in (1,1,%length%) do echo --add !array[%%i]! !LF! >> BuildInstaller.cmd
-
+for /L %%i in (1,1,%length%) do (echo --add !array[%%i]! !LF!) >> BuildInstaller.cmd
 (echo --lang en-US --passive --wait) >> BuildInstaller.cmd
-
 if NOT "%errorlevel%" == "0" goto Error
 ::****************************************
 
@@ -62,7 +60,7 @@ if NOT "%errorlevel%" == "0" goto Error
 set "vs_setup=%dkdownload%\VisualStudio\vs_setup.exe"
 (echo %vs_setup% --noweb ^^) > Install.cmd
 (set LF=^^)
-for /L %%i in (1,1,%length%) do echo --add !array[%%i]! !LF! >> Install.cmd
+for /L %%i in (1,1,%length%) do (echo --add !array[%%i]! !LF!) >> Install.cmd
 if NOT "%errorlevel%" == "0" goto Error
 ::****************************************
 
