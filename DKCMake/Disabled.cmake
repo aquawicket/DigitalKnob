@@ -173,6 +173,7 @@ if(IOS OR IOSSIM)
 	DKDISABLE(sdl2_mixer)
 	DKDISABLE(smpeg2)
 	DKDISABLE(tidy-html5)
+	DKDISABLE(tiff)
 	DKDISABLE(uwebsockets)
 endif()
 
