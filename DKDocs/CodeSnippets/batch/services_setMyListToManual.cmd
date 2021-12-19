@@ -1,4 +1,4 @@
-:: loop through Services.txt, set to manual(demand)
+:: loop through services_MyList.txt, set to manual(demand)
 :: https://superuser.com/a/607582/600216
 :: also via registry   HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\
 :: All services can be set to manual by changing their start field to 3
@@ -7,7 +7,7 @@
 
 @echo off
 echo #### Windows Services ####
-for /f "tokens=*" %%a in (ServiceList.txt) do (
+for /f "tokens=*" %%a in (service_MyList.txt) do (
 	echo %%a 
 	sc stop %%a 
 	sc config "%%a" start=demand

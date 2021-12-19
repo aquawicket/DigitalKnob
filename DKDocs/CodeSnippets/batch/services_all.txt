@@ -66,8 +66,7 @@ DISPLAY_NAME: Microsoft App-V Client
 SERVICE_NAME: AppXSvc
 DISPLAY_NAME: AppX Deployment Service (AppXSVC)
         TYPE               : 30  WIN32  
-        STATE              : 4  RUNNING 
-                                (STOPPABLE, NOT_PAUSABLE, ACCEPTS_SHUTDOWN)
+        STATE              : 1  STOPPED 
         WIN32_EXIT_CODE    : 0  (0x0)
         SERVICE_EXIT_CODE  : 0  (0x0)
         CHECKPOINT         : 0x0
@@ -983,9 +982,10 @@ DISPLAY_NAME: Netlogon
 
 SERVICE_NAME: Netman
 DISPLAY_NAME: Network Connections
-        TYPE               : 20  WIN32_SHARE_PROCESS  
-        STATE              : 1  STOPPED 
-        WIN32_EXIT_CODE    : 1077  (0x435)
+        TYPE               : 30  WIN32  
+        STATE              : 4  RUNNING 
+                                (STOPPABLE, NOT_PAUSABLE, IGNORES_SHUTDOWN)
+        WIN32_EXIT_CODE    : 0  (0x0)
         SERVICE_EXIT_CODE  : 0  (0x0)
         CHECKPOINT         : 0x0
         WAIT_HINT          : 0x0
@@ -1732,7 +1732,8 @@ DISPLAY_NAME: Recommended Troubleshooting Service
 SERVICE_NAME: TrustedInstaller
 DISPLAY_NAME: Windows Modules Installer
         TYPE               : 10  WIN32_OWN_PROCESS  
-        STATE              : 1  STOPPED 
+        STATE              : 4  RUNNING 
+                                (STOPPABLE, NOT_PAUSABLE, ACCEPTS_PRESHUTDOWN)
         WIN32_EXIT_CODE    : 0  (0x0)
         SERVICE_EXIT_CODE  : 0  (0x0)
         CHECKPOINT         : 0x0
