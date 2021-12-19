@@ -4,28 +4,29 @@ setlocal enabledelayedexpansion
 
 set "dkdownload=C:\Users\%USERNAME%\digitalknob\Download"
 if not exist "%dkdownload%" (
-	set "errorlevel=The folder %dkdownload% does no exist" 
+	set "errorlevel=The folder %dkdownload% does not exist" 
 	Goto :Error
 )
 
 set "vsconfig=2022.vsconfig"
 if not exist "%vsconfig%" (
-	set "errorlevel=The file %vsconfig% does no exist" 
+	set "errorlevel=The file %vsconfig% does not exist" 
 	Goto :Error
 )
 
 set "vs_community=%dkdownload%\vs_Community.exe"
 if not exist "%vs_community%" (
-	set "errorlevel=The file %vs_community% does no exist" 
+	set "errorlevel=The file %vs_community% does not exist" 
 	Goto :Error
 )
 
 set /A i=0
+echo i = %i%
 
 :: Loop through file and store lines into an array
-for /F "skip=3 usebackq delims=" %%a in (!file!) do (
+for /F "skip=3 usebackq delims=" %%a in (%vsconfig%) do (
 	set /A i+=1
-	::echo !i!
+	echo i = !i!
 	set item=%%a
 	
 	::remove " 
@@ -40,7 +41,7 @@ for /F "skip=3 usebackq delims=" %%a in (!file!) do (
 )
 
 ::subtract 2 from length
-set /a length=!length!-2  
+set /a length=%length%-2  
 
 for /L %%i in (1,1,%length%) do (
 	echo !array[%%i]!
@@ -48,12 +49,13 @@ for /L %%i in (1,1,%length%) do (
 
 :: We have the variables we need, so preform the task
 ::****************************************
-start /wait %vs_community% --layout "%dkdownload%\VisualStudio" ^
-for /L %%i in (1,1,%length%) do (
-	--add !array[%%i]! ^
-)
---lang en-US --passive --wait > nul
-::if NOT "%errorlevel%" == "0" goto Error
+(echo start /wait %vs_community% --layout "%dkdownload%\VisualStudio" ^^) > test.txt
+(set LF=^^)
+for /L %%i in (1,1,%length%) do echo --add !array[%%i]! !LF! >> test.txt
+
+(echo --lang en-US --passive --wait) >> test.txt
+
+if NOT "%errorlevel%" == "0" goto Error
 ::****************************************
 
 ::****************************************
