@@ -482,7 +482,7 @@ if(LINUX OR RASPBERRY)
 	elseif(RELEASE)
 		DKSET(BUILD_DIR ${OS}/${RELEASE_DIR})
 	endif()
-elseif()
+else()
 	DKSET(BUILD_DIR ${OS})
 endif()
 
