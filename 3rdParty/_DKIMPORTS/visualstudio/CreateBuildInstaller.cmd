@@ -24,7 +24,7 @@ set /A i=0
 echo i = %i%
 
 :: Loop through file and store lines into an array
-for /F "skip=3 usebackq delims=" %%a in (%vsconfig%) do (
+for /F "skip=3 tokens=1" %%a in (%vsconfig%) do (
 	set /A i+=1
 	echo i = !i!
 	set item=%%a
@@ -49,11 +49,11 @@ for /L %%i in (1,1,%length%) do (
 
 :: We have the variables we need, so preform the task
 ::****************************************
-(echo start /wait %vs_community% --layout "%dkdownload%\VisualStudio" ^^) > test.txt
+(echo start /wait %vs_community% --layout "%dkdownload%\VisualStudio" ^^) > BuildInstaller.cmd
 (set LF=^^)
-for /L %%i in (1,1,%length%) do echo --add !array[%%i]! !LF! >> test.txt
+for /L %%i in (1,1,%length%) do echo --add !array[%%i]! !LF! >> BuildInstaller.cmd
 
-(echo --lang en-US --passive --wait) >> test.txt
+(echo --lang en-US --passive --wait) >> BuildInstaller.cmd
 
 if NOT "%errorlevel%" == "0" goto Error
 ::****************************************
