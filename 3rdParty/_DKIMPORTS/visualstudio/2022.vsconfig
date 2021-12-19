@@ -41,6 +41,7 @@
     "Component.Android.NDK.R21E",
     "Component.Ant",
     "Component.MDD.Android",
-    "Microsoft.VisualStudio.Workload.NativeMobile"
+    "Microsoft.VisualStudio.Workload.NativeMobile",
+    "Microsoft.VisualStudio.Component.VC.14.29.16.11.x86.x64"
   ]
 }
