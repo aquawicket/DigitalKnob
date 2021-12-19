@@ -1,18 +1,22 @@
 :: Build a Visual Studio 17 2022 installer from 2022.vsconfig file
-@echo off
+@echo off &setlocal enabledelayedexpansion
 set "file=2022.vsconfig"
-if not exist "%file%" (Goto :Error)
+if not exist "!file!" (Goto :Error)
 set /A i=0
 
-for /F "skip=3 usebackq delims=" %%a in ("%file%") do (
+:: Loop through file and store lines into an array
+for /F "skip=3 usebackq delims=" %%a in (!file!) do (
 	set /A i+=1
-	::call echo %%i%%
-	call set array[%%i%%]=%%a
-	call set n=%%i%%
+	::echo !i!
+	set array[!i!]=%%a
+	set length=!i!
 )
 
-for /L %%i in (1,1,%n%) do (
-	call echo %%array[%%i]%%
+::subtract 2 from length
+set /a length=!length!-2  
+
+for /L %%i in (1,1,%length%) do (
+	echo !array[%%i]!
 )
 
 pause
