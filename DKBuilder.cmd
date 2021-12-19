@@ -1,5 +1,5 @@
 :: Windows Batch file DK builder
-@ECHO off
+@echo off
 
 set "DIGITALKNOB=C:\Users\%USERNAME%\digitalknob"
 set "DKPATH=%DIGITALKNOB%\DK"
@@ -174,9 +174,9 @@ if NOT exist "%CMAKE%" (
     echo "installing cmake"
 	echo "%CMAKE_DL%"
 	%download% %CMAKE_DL% "%DKDOWNLOAD%\cmake-3.21.1-windows-i386.msi"
-	::if NOT "%ERRORLEVEL%" == "0" goto error
-	"%DKDOWNLOAD%\cmake-3.21.1-windows-i386.msi /S"
-	::if NOT "%ERRORLEVEL%" == "0" goto error
+	if NOT "%ERRORLEVEL%" == "0" goto error
+	"%DKDOWNLOAD%\cmake-3.21.1-windows-i386.msi"
+	if NOT "%ERRORLEVEL%" == "0" goto error
 	if exist "C:\Program Files\CMake\bin\cmake.exe" set "CMAKE=C:\Program Files\CMake\bin\cmake.exe"
 	if exist "C:\Program Files (x86)\CMake\bin\cmake.exe" set "CMAKE=C:\Program Files (x86)\CMake\bin\cmake.exe"
 )
