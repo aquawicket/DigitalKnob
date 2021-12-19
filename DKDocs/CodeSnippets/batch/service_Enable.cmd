@@ -1,6 +1,6 @@
 @ECHO off
 
-set "SERVICE_NAME=NlaSvc"     
+set "SERVICE_NAME=schedule"     
 ::Put name here --^
 
 
