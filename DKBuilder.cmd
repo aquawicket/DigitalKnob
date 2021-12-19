@@ -45,7 +45,7 @@ if NOT exist "%GIT%" (
 	ECHO "installing git"
 	%download% %GIT_DL% "%DKDOWNLOAD%\Git-2.30.1-32-bit.exe"
 	::if NOT "%ERRORLEVEL%" == "0" goto error
-	"%DKDOWNLOAD%\Git-2.30.1-32-bit.exe"
+	"%DKDOWNLOAD%\Git-2.30.1-32-bit.exe" /VERYSILENT /NORESTART
 	::if NOT "%ERRORLEVEL%" == "0" goto error
 	if exist "C:\Program Files\Git\bin\git.exe" set "GIT=C:\Program Files\Git\bin\git.exe"
 	if exist "C:\Program Files (x86)\Git\bin\git.exe" set "GIT=C:\Program Files (x86)\Git\bin\git.exe"
@@ -66,7 +66,7 @@ if NOT exist "%GIT%" (
 	ECHO "installing git"
 	%download% %GIT_DL% "%DKDOWNLOAD%\Git-2.30.1-32-bit.exe"
 	::if NOT "%ERRORLEVEL%" == "0" goto error
-	"%DKDOWNLOAD%\Git-2.30.1-32-bit.exe"
+	"%DKDOWNLOAD%\Git-2.30.1-32-bit.exe /VERYSILENT /NORESTART"
 	::if NOT "%ERRORLEVEL%" == "0" goto error
 	if exist "C:\Program Files\Git\bin\git.exe" set "GIT=C:\Program Files\Git\bin\git.exe"
 	if exist "C:\Program Files (x86)\Git\bin\git.exe" set "GIT=C:\Program Files (x86)\Git\bin\git.exe"
@@ -174,7 +174,7 @@ if NOT exist "%CMAKE%" (
 	echo "%CMAKE_DL%"
 	%download% %CMAKE_DL% "%DKDOWNLOAD%\cmake-3.21.1-windows-i386.msi"
 	::if NOT "%ERRORLEVEL%" == "0" goto error
-	"%DKDOWNLOAD%\cmake-3.21.1-windows-i386.msi"
+	"%DKDOWNLOAD%\cmake-3.21.1-windows-i386.msi /S"
 	::if NOT "%ERRORLEVEL%" == "0" goto error
 	if exist "C:\Program Files\CMake\bin\cmake.exe" set "CMAKE=C:\Program Files\CMake\bin\cmake.exe"
 	if exist "C:\Program Files (x86)\CMake\bin\cmake.exe" set "CMAKE=C:\Program Files (x86)\CMake\bin\cmake.exe"
