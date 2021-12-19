@@ -53,6 +53,7 @@ for /L %%i in (1,1,%length%) do (
 	--add !array[%%i]! ^
 )
 --lang en-US --passive --wait > nul
+::if NOT "%errorlevel%" == "0" goto Error
 ::****************************************
 
 ::****************************************
@@ -67,7 +68,7 @@ exit /b
 :Error
 cls & Color 0c
 echo(
-echo %errorlevel%
+echo Failed with error code: %errorlevel%
 Pause>nul
 exit /b
 ::****************************************
