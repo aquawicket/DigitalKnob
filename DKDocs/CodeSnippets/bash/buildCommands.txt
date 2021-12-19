@@ -1,0 +1,5 @@
+# linux
+
+wget https://raw.githubusercontent.com/aquawicket/DigitalKnob/master/DKBuilder.sh
+chmod +x DKBuilder.sh
+./DKBuilder.sh
