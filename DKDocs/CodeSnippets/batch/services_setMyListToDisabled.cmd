@@ -2,7 +2,12 @@
 :: loop through services_MyList.txt, stop and diable any service in the list
 
 echo #### Windows Services ####
-for /F "tokens=*" %%A in (services_MyList.txt) do echo %%A & sc stop %%A & sc config "%%A" start=disabled & reg add HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\%%A /t REG_DWORD /v Start /d 4 /f
+for /f "tokens=*" %%a in (services_MyList.txt) do (
+	echo %%a
+	sc stop %%a
+	sc config "%%a" start=disabled
+	reg add HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\%%a /t REG_DWORD /v Start /d 4 /f
+)
 
 pause
 

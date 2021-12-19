@@ -1,0 +1,4 @@
+MicrosoftEdgeUpdate.exe
+SearchApp.exe
+SearchIndexer.exe
+TextInputHost.exe
