@@ -492,12 +492,11 @@ if(CMAKE_HOST_WIN32 AND WIN)
 	# Universal Variables
 	if(WIN_32)
 		DKSET(DKCMAKE_BUILD ${CMAKE_EXE} -G ${VS_GENERATOR} -A Win32 ${DKCMAKE_FLAGS})
-		DKSET(DKCONFIGURE_BUILD ../../configure ${DKCONFIGURE_FLAGS})
 	endif()
 	if(WIN_64)
 		DKSET(DKCMAKE_BUILD ${CMAKE_EXE} -G ${VS_GENERATOR} -A x64 ${DKCMAKE_FLAGS})
-		DKSET(DKCONFIGURE_BUILD ../../configure ${DKCONFIGURE_FLAGS})
 	endif()
+	DKSET(DKCONFIGURE_BUILD ../../configure ${DKCONFIGURE_FLAGS})
 endif()
 
 if(CMAKE_HOST_APPLE)
@@ -517,6 +516,10 @@ if(CMAKE_HOST_APPLE)
 	DKSET(DKCONFIGURE_IOSSIM32 ../../configure ${DKCONFIGURE_FLAGS})  # iOS Simulator 32
 	DKSET(DKCMAKE_IOSSIM64 ${CMAKE_EXE} -G "Xcode" ${DKCMAKE_FLAGS})  # iOS Simulator 64
 	DKSET(DKCONFIGURE_IOSSIM64 ../../configure ${DKCONFIGURE_FLAGS})  # iOS Simulator 64
+	
+	# Universal Variables
+	DKSET(DKCMAKE_BUILD ${CMAKE_EXE} -G "Xcode" ${DKCMAKE_FLAGS})
+	DKSET(DKCONFIGURE_BUILD ../../configure ${DKCONFIGURE_FLAGS})
 endif()
 
 if(LINUX)
@@ -533,6 +536,17 @@ if(LINUX)
 	DKSET(DKCMAKE_LINUX64_DEBUG ${CMAKE_EXE} -G "Unix Makefiles" ${DKCMAKE_FLAGS} -DCMAKE_BUILD_TYPE=Debug)      # Linux 64 Debug
 	DKSET(DKCMAKE_LINUX64_RELEASE ${CMAKE_EXE} -G "Unix Makefiles" ${DKCMAKE_FLAGS} -DCMAKE_BUILD_TYPE=Release)  # Linux 64 Release
 	DKSET(DKCONFIGURE_LINUX ../../configure ${DKCONFIGURE_FLAGS})                                                # Linux
+	
+	# Universal Variables
+	if(DEBUG)
+		DKSET(DKCMAKE_BUILD ${CMAKE_EXE} -G "Unix Makefiles" ${DKCMAKE_FLAGS} -DCMAKE_BUILD_TYPE=Debug)        # Linux Debug
+	endif()
+	if(RELEASE)
+		DKSET(DKCMAKE_BUILD ${CMAKE_EXE} -G "Unix Makefiles" ${DKCMAKE_FLAGS} -DCMAKE_BUILD_TYPE=Release)        # Linux Debug
+	endif()
+	DKSET(DKCMAKE_BUILD_DEBUG ${CMAKE_EXE} -G "Unix Makefiles" ${DKCMAKE_FLAGS} -DCMAKE_BUILD_TYPE=Debug)        # Linux Debug
+	DKSET(DKCMAKE_BUILD_RELEASE ${CMAKE_EXE} -G "Unix Makefiles" ${DKCMAKE_FLAGS} -DCMAKE_BUILD_TYPE=Release)    # Linux Release
+	DKSET(DKCONFIGURE_BUILD ../../configure ${DKCONFIGURE_FLAGS})  
 endif()
 
 if(CMAKE_HOST_LINUX AND RASPBERRY)
@@ -550,6 +564,17 @@ if(CMAKE_HOST_LINUX AND RASPBERRY)
 	DKSET(DKCMAKE_RASPBERRY64_DEBUG ${CMAKE_EXE} -G "Unix Makefiles" ${DKCMAKE_FLAGS} -DCMAKE_BUILD_TYPE=Debug)      # RaspBerry 64 Debug
 	DKSET(DKCMAKE_RASPBERRY64_RELEASE ${CMAKE_EXE} -G "Unix Makefiles" ${DKCMAKE_FLAGS} -DCMAKE_BUILD_TYPE=Release)  # RaspBerry 64 Release
 	DKSET(DKCONFIGURE_RASPBERRY ../../configure ${DKCONFIGURE_FLAGS})                                                # RaspBerry
+	
+	# Universal Variables
+	if(DEBUG)
+		DKSET(DKCMAKE_BUILD ${CMAKE_EXE} -G "Unix Makefiles" ${DKCMAKE_FLAGS} -DCMAKE_BUILD_TYPE=Debug)        # Raspberry Debug
+	endif()
+	if(RELEASE)
+		DKSET(DKCMAKE_BUILD ${CMAKE_EXE} -G "Unix Makefiles" ${DKCMAKE_FLAGS} -DCMAKE_BUILD_TYPE=Release)        # Raspberry Debug
+	endif()
+	DKSET(DKCMAKE_BUILD_DEBUG ${CMAKE_EXE} -G "Unix Makefiles" ${DKCMAKE_FLAGS} -DCMAKE_BUILD_TYPE=Debug)        # Raspberry Debug
+	DKSET(DKCMAKE_BUILD_RELEASE ${CMAKE_EXE} -G "Unix Makefiles" ${DKCMAKE_FLAGS} -DCMAKE_BUILD_TYPE=Release)    # Raspberry Release
+	DKSET(DKCONFIGURE_BUILD ../../configure ${DKCONFIGURE_FLAGS})  
 endif()
 
 if(CMAKE_HOST_WIN32 AND ANDROID)
@@ -571,4 +596,13 @@ if(CMAKE_HOST_WIN32 AND ANDROID)
 	DKSET(DKCMAKE_ANDROID32 ${CMAKE_EXE} -G ${VS_GENERATOR} -A ARM ${DKCMAKE_FLAGS})    # Android 32
 	DKSET(DKCMAKE_ANDROID64 ${CMAKE_EXE} -G ${VS_GENERATOR} -A ARM64 ${DKCMAKE_FLAGS})  # Android 64
 	DKSET(DKCONFIGURE_ANDROID ../../configure ${DKCONFIGURE_FLAGS})                     # Android
+	
+	# Universal Variables
+	if(ANDROID_32)
+		DKSET(DKCMAKE_BUILD ${CMAKE_EXE} -G ${VS_GENERATOR} -A ARM ${DKCMAKE_FLAGS})    # Android 32
+	endif()
+	if(ANDROID_64)
+		DKSET(DKCMAKE_BUILD ${CMAKE_EXE} -G ${VS_GENERATOR} -A ARM64 ${DKCMAKE_FLAGS})  # Android 64
+	endif()
+	DKSET(DKCONFIGURE_BUILD ../../configure ${DKCONFIGURE_FLAGS})                     # Android
 endif()
