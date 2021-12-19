@@ -1,0 +1,10 @@
+// on unix
+
+//Make the current user require no sudo password
+echo "$USER ALL=(ALL:ALL) NOPASSWD: ALL" | sudo tee /etc/sudoers.d/$USER
+
+// Append foobar to the sudoers file?
+echo 'foobar ALL=(ALL:ALL) ALL' | sudo EDITOR='tee -a' visudo
+
+// Another method to try
+$USER ALL=(ALL) NOPASSWD: ALL | sudo EDITOR='tee -a' visudo

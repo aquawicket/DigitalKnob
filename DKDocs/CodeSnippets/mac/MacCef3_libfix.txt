@@ -1,0 +1,16 @@
+Alter these paths to match your Users directory, then copy and paste the needed commands.
+
+### Debug ###
+install_name_tool -change "@executable_path/Chromium Embedded Framework" "@executable_path/../../../../Frameworks/Chromium Embedded Framework.framework/Chromium Embedded Framework" "/Users/aquawicket/Desktop/digitalknob/DKApps/DKTemplate/mac64/Debug/DKTemplate.app/Contents/Frameworks/DKTemplate Helper.app/Contents/MacOS/DKTemplate Helper"
+
+install_name_tool -change "@executable_path/Chromium Embedded Framework" "@executable_path/../Frameworks/Chromium Embedded Framework.framework/Chromium Embedded Framework" "/Users/aquawicket/Desktop/digitalknob/DKApps/DKTemplate/mac64/Debug/DKTemplate.app/Contents/MacOS/DKTemplate"
+
+
+### Release ###
+install_name_tool -change "@executable_path/Chromium Embedded Framework" "@executable_path/../../../../Frameworks/Chromium Embedded Framework.framework/Chromium Embedded Framework" "/Users/aquawicket/Desktop/digitalknob/DKApps/DKTemplate/mac64/Release/DKTemplate.app/Contents/Frameworks/DKTemplate Helper.app/Contents/MacOS/DKTemplate Helper"
+
+install_name_tool -add_rpath "@executable_path/../../../../" "/Users/aquawicket/Desktop/digitalknob/DKApps/DKTemplate/mac64/Release/DKTemplate.app/Contents/Frameworks/DKTemplate Helper.app/Contents/MacOS/DKTemplate Helper"
+
+install_name_tool -change "@executable_path/Chromium Embedded Framework" "@executable_path/../Frameworks/Chromium Embedded Framework.framework/Chromium Embedded Framework" "/Users/aquawicket/Desktop/digitalknob/DKApps/DKTemplate/mac64/Release/DKTemplate.app/Contents/MacOS/DKTemplate"
+
+install_name_tool -add_rpath "@executable_path/../" "/Users/aquawicket/Desktop/digitalknob/DKApps/DKTemplate/mac64/Release/DKTemplate.app/Contents/MacOS/DKTemplate"

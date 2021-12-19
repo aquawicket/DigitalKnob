@@ -1,4 +1,4 @@
-start /wait C:\Users\Administrator\digitalknob\Download\vs_Community.exe --layout "C:\Users\Administrator\digitalknob\Download\VisualStudio" ^
+C:\Users\Administrator\digitalknob\Download\VisualStudio\vs_setup.exe --noweb --noUpdateInstaller ^
 --add Microsoft.VisualStudio.Component.CoreEditor ^
 --add Microsoft.VisualStudio.Workload.CoreEditor ^
 --add Microsoft.Net.Component.4.7.2.TargetingPack ^
@@ -41,4 +41,3 @@ start /wait C:\Users\Administrator\digitalknob\Download\vs_Community.exe --layou
 --add Component.MDD.Android ^
 --add Microsoft.VisualStudio.Workload.NativeMobile ^
 --add Microsoft.VisualStudio.Component.VC.14.29.16.11.x86.x64 ^
---lang en-US --passive --wait
