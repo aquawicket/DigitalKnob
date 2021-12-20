@@ -103,8 +103,8 @@ foreach(plugin ${dkdepend_list})
 		endif()
 		
 		## Prebuild DKPlugins switch
-		if(1)
-			#Wait("Prebuilding Plugins")
+		if(0)
+			Wait("Prebuilding Plugins")
 			DKSET(CURRENT_DIR ${plugin_path}/${OS})
 			dk_makeDirectory(${CURRENT_DIR})
 			if(WIN_32)
