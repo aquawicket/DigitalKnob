@@ -41,7 +41,8 @@
 ###
 ### TODO: Add a cmake input variable called "TargetName", allowing us to build a specific Library or Plugin. This should also build 
 ### all of dependencies for that target. Good for quick testing of specific libraries, plugins or executables.
-
+###
+### https://gitlab.kitware.com/cmake/community/-/wikis/doc/cmake/Examples
 
 if(DKCMAKELIST_INCLUDED)
   return()
