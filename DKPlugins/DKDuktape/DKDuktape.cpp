@@ -10,13 +10,19 @@ DKStringArray DKDuktape::filelist;
 DKStringArray DKDuktape::functions;
 DKStringArray DKDuktape::codeToRun;
 
+#ifdef USE_DUK_CLOOP
 bool DKDuktape::c_evloop = true;
+#endif
+#ifdef USE_DUK_POLL
 extern void poll_register(duk_context *ctx);
+#endif
+#ifdef USE_DUK_EMCALOOP || defined(USE_DUK_CLOOP)
 extern void eventloop_register(duk_context *ctx);
 extern int eventloop_run(duk_context *ctx, void *udata);
 //extern void ncurses_register(duk_context *ctx);
 //extern void socket_register(duk_context *ctx);
 //extern void fileio_register(duk_context *ctx);
+#endif
 
 const char *duk_push_string_file_raw(duk_context *ctx, const char *path, duk_uint_t flags) {
 	FILE *f = NULL;
@@ -90,8 +96,12 @@ bool DKDuktape::Init(){
 		DKClass::DKCreate("DKXMLHttpRequest");
 			
 		//Register javascript Timers: setTimeout, clearTimeout, setInterval, clearInterval
+#ifdef USE_DUK_POLL
 		poll_register(ctx);
+#endif
+#ifdef USE_DUK_CLOOP
 		if(c_evloop){ //c_eventloop.js
+
 			eventloop_register(ctx);
 			DKString file = DKFile::local_assets+"DKDuktape/c_eventloop.js";
 			if(!LoadFile(file)){ return false; }
@@ -99,11 +109,15 @@ bool DKDuktape::Init(){
 				return DKERROR("DKDuktape::Init(): Error in handle_file\n");
 		}
 		else{ //ecma_eventloop.js
+#ifdef USE_DUK_EMCALOOP
 			DKString file = DKFile::local_assets+"DKDuktape/ecma_eventloop.js";
 			if(!LoadFile(file)){ return false; }
 			if(handle_file(ctx, file.c_str()) != 0)
 				return DKERROR("DKDuktape::Init(): Error in handle_file\n");
+#endif
 		}
+#endif		
+		
         DKString app = DKFile::local_assets+"app.js";
 		LoadFile(app);
 	}
