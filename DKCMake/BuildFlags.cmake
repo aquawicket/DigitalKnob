@@ -66,8 +66,8 @@ DKSET(IOS_SYSROOT     ${XCODE_DEVROOT}/Platforms/iPhone.platform/Developer/SDKs/
 DKSET(IOSSIM_SYSROOT  ${XCODE_DEVROOT}/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator15.0.sdk)
 
 # linux variables
-DKSET(LINUX_GCC   "/usr/bin/gcc")
-DKSET(LINUX_GXX   "/usr/bin/g++")
+DKSET(LINUX_GCC /usr/bin/gcc)
+DKSET(LINUX_GXX /usr/bin/g++)
 
 # Visual C++ variables 
 DKSET(MSVC_CL      C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.30.30705/bin/Hostx64/x86/cl.exe)
@@ -520,6 +520,12 @@ message(STATUS "\n")
 
 
 #then, create the command line flags
+if(DKCMAKE_C_COMPILER)
+	DKSET(DKCMAKE_FLAGS ${DKCMAKE_FLAGS} -DKCMAKE_C_COMPILER=${DKCMAKE_C_COMPILER})
+endif()	
+if(DKCMAKE_CXX_COMPILER)
+	DKSET(DKCMAKE_FLAGS ${DKCMAKE_FLAGS} -DKCMAKE_CXX_COMPILER=${DKCMAKE_CXX_COMPILER})
+endif()
 if(DKCMAKE_C_FLAGS)
 	DKSET(DKCMAKE_FLAGS ${DKCMAKE_FLAGS} -DCMAKE_C_FLAGS=${DKCMAKE_C_FLAGS})
 endif()
