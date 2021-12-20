@@ -262,26 +262,6 @@ string(REPLACE "/Release" "" DKPROJECT ${DKPROJECT})
 
 
 
-
-
-
-###########################################################################
-## Set variables for Build Type
-###########################################################################
-#if(DEBUG)
-#	DKSET(CMAKE_BUILD_TYPE DEBUG)
-	#add_definitions(-DDEBUG)
-#endif()
-#if(RELEASE)
-#	DKSET(CMAKE_BUILD_TYPE RELEASE)
-	#add_definitions(-DRELEASE)
-#endif(RELEASE)
-
-## NOTE: These defines should be done as per needed in DKMAKE.cmake files
-
-
-
-
 ## NEW STYLE
 #if(WIN) #OS
 #	add_definitions(-DWIN) #OS
