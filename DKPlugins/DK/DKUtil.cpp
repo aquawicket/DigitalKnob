@@ -161,9 +161,9 @@ bool DKUtil::CpuUsed(int& cpu){
 	DKDEBUGFUNC(cpu);
 #if WIN32
 	return DKWindows::CpuUsed(cpu);
-#elif MAC
+#elif defined(MAC)
 	return DKMac::CpuUsed(cpu);
-#elif LINUX
+#elif defined(LINUX)
 	return DKLinux::CpuUsed(cpu);
 #else
 	return DKERROR("not implemented on this OS\n");
@@ -174,9 +174,9 @@ bool DKUtil::CpuUsedByApp(int& cpu){
 	DKDEBUGFUNC(cpu);
 #if WIN32
 	return DKWindows::CpuUsedByApp(cpu);
-#elif MAC
+#elif defined(MAC)
 	return DKMac::CpuUsedByApp(cpu);
-#elif LINUX
+#elif defined(LINUX)
 	return DKLinux::CpuUsedByApp(cpu);
 #else
 	return DKERROR("not implemented on this OS\n");
@@ -244,7 +244,7 @@ bool DKUtil::GetClipboard(DKString& text){
 	DKDEBUGFUNC(text);
 #ifdef WIN32
 	return DKWindows::GetClipboard(text);
-#elif LINUX
+#elif defined(LINUX)
 	return DKLinux::GetClipboard(text);
 #else
 	return DKERROR("not implemented on this OS\n");
@@ -315,11 +315,11 @@ bool DKUtil::GetMousePos(int& x, int& y){
 	DKDEBUGFUNC(x, y);
 #ifdef WIN32
 	return DKWindows::GetMousePos(x, y);
-#elif MAC
+#elif defined(MAC)
 	return DKMac::GetMousePos(x, y);
-#elif LINUX
+#elif defined(LINUX)
 	return DKLinux::GetMousePos(x, y);
-#elif ANDROID
+#elif defined(ANDROID)
 	return DKAndroid::GetMousePos(x, y);
 #else
 	return DKERROR("not implemented on this OS\n");
@@ -355,9 +355,9 @@ bool DKUtil::GetProcessList(DKString& list){
 bool DKUtil::GetScreenHeight(int& h){
 #ifdef WIN32
 	return DKWindows::GetScreenHeight(h) && DKDEBUGRETURN(h);
-#elif MAC
+#elif defined(MAC)
 	return DKMac::GetScreenHeight(h) && DKDEBUGRETURN(h);
-#elif LINUX
+#elif defined(LINUX)
 	return DKLinux::GetScreenHeight(h) && DKDEBUGRETURN(h);
 #else
 	return DKERROR("not implemented on this OS\n");
@@ -367,9 +367,9 @@ bool DKUtil::GetScreenHeight(int& h){
 bool DKUtil::GetScreenWidth(int& w){
 #ifdef WIN32
 	return DKWindows::GetScreenWidth(w) && DKDEBUGRETURN(w);
-#elif MAC
+#elif defined(MAC)
 	return DKMac::GetScreenWidth(w) && DKDEBUGRETURN(w);
-#elif LINUX
+#elif defined(LINUX)
 	return DKLinux::GetScreenWidth(w) && DKDEBUGRETURN(w);
 #else
 	return DKERROR("not implemented on this OS\n");
@@ -430,7 +430,7 @@ bool DKUtil::GetVolume(int& percent){
 	DKDEBUGFUNC(percent);
 #ifdef WIN32
 	return DKWindows::GetVolume(percent);
-#elif LINUX
+#elif defined(LINUX)
 	return DKLinux::GetVolume(percent);
 #else
 	return DKERROR("not implemented on this OS\n");
@@ -464,7 +464,7 @@ bool DKUtil::KeyIsDown(int& key){
 	DKDEBUGFUNC(key);
 #ifdef WIN32
 	return DKWindows::KeyIsDown(key);
-#elif LINUX
+#elif defined(LINUX)
 	return DKLinux::KeyIsDown(key);
 #else
 	return DKERROR("not implemented on this OS\n");
@@ -484,9 +484,9 @@ bool DKUtil::LeftPress(){
 	DKDEBUGFUNC();
 #ifdef WIN32
 	return DKWindows::LeftPress();
-#elif MAC
+#elif defined(MAC)
 	return DKMac::LeftPress();
-#elif LINUX
+#elif defined(LINUX)
 	return DKLinux::LeftPress();
 #else
 	return DKERROR("not implemented on this OS\n");
@@ -497,9 +497,9 @@ bool DKUtil::LeftRelease(){
 	DKDEBUGFUNC();
 #ifdef WIN32
 	return DKWindows::LeftRelease();
-#elif MAC
+#elif defined(MAC)
 	return DKMac::LeftRelease();
-#elif LINUX
+#elif defined(LINUX)
 	return DKLinux::LeftRelease();
 #else
 	return DKERROR("not implemented on this OS\n");
@@ -534,9 +534,9 @@ bool DKUtil::MiddlePress(){
 	DKDEBUGFUNC();
 #ifdef WIN32
 	return DKWindows::MiddlePress();
-#elif MAC
+#elif defined(MAC)
 	return DKMac::MiddlePress();
-#elif LINUX
+#elif defined(LINUX)
 	return DKLinux::MiddlePress();
 #else
 	return DKERROR("not implemented on this OS\n");
@@ -547,9 +547,9 @@ bool DKUtil::MiddleRelease(){
 	DKDEBUGFUNC();
 #ifdef WIN32
 	return DKWindows::MiddleRelease();
-#elif MAC
+#elif defined(MAC)
 	return DKMac::MiddleRelease();
-#elif LINUX
+#elif defined(LINUX)
 	return DKLinux::MiddleRelease();
 #else
 	return DKERROR("not implemented on this OS\n");
@@ -560,9 +560,9 @@ bool DKUtil::PhysicalMemory(unsigned long long& physicalMemory){
 	DKDEBUGFUNC(physicalMemory);
 #ifdef WIN32
 	return DKWindows::PhysicalMemory(physicalMemory);
-#elif MAC
+#elif defined(MAC)
 	return DKMac::PhysicalMemory(physicalMemory);
-#elif LINUX
+#elif defined(LINUX)
 	return DKLinux::PhysicalMemory(physicalMemory);
 #else
 	return DKERROR("not implemented on this OS\n");
@@ -573,9 +573,9 @@ bool DKUtil::PhysicalMemoryUsed(unsigned long long& physicalMemory){
 	DKDEBUGFUNC(physicalMemory);
 #ifdef WIN32
 	return DKWindows::PhysicalMemoryUsed(physicalMemory);
-#elif MAC
+#elif defined(MAC)
 	return DKMac::PhysicalMemoryUsed(physicalMemory);
-#elif LINUX
+#elif defined(LINUX)
 	return DKLinux::PhysicalMemoryUsed(physicalMemory);
 #else
 	return DKERROR("not implemented on this OS\n");
@@ -586,9 +586,9 @@ bool DKUtil::PhysicalMemoryUsedByApp(unsigned int& physicalMemory){
 	DKDEBUGFUNC(physicalMemory);
 #ifdef WIN32
 	return DKWindows::PhysicalMemoryUsedByApp(physicalMemory);
-#elif MAC
+#elif defined(MAC)
 	return DKMac::PhysicalMemoryUsedByApp(physicalMemory);
-#elif LINUX
+#elif defined(LINUX)
 	return DKLinux::PhysicalMemoryUsedByApp(physicalMemory);
 #else
 	return DKERROR("not implemented on this OS\n");
@@ -599,9 +599,9 @@ bool DKUtil::PressKey(const int& key){
 	DKDEBUGFUNC(key);
 #ifdef WIN32
 	return DKWindows::PressKey(key);
-#elif MAC
+#elif defined(MAC)
 	return DKMac::PressKey(key);
-#elif LINUX
+#elif defined(LINUX)
 	return DKLinux::PressKey(key);
 #else
 	return DKERROR("not implemented on this OS\n");
@@ -612,9 +612,9 @@ bool DKUtil::ReleaseKey(const int& key){
 	DKDEBUGFUNC(key);
 #ifdef WIN32
 	return DKWindows::ReleaseKey(key);
-#elif MAC
+#elif defined(MAC)
 	return DKMac::ReleaseKey(key);
-#elif LINUX
+#elif defined(LINUX)
 	return DKLinux::ReleaseKey(key);
 #else
 	return DKERROR("not implemented on this OS\n");
@@ -634,9 +634,9 @@ bool DKUtil::RightPress(){
 	DKDEBUGFUNC();
 #ifdef WIN32
 	return DKWindows::RightPress();
-#elif MAC
+#elif defined(MAC)
 	return DKMac::RightPress();
-#elif LINUX
+#elif defined(LINUX)
 	return DKLinux::RightPress();
 #else
 	return DKERROR("not implemented on this OS\n");
@@ -647,9 +647,9 @@ bool DKUtil::RightRelease(){
 	DKDEBUGFUNC();
 #ifdef WIN32
 	return DKWindows::RightRelease();
-#elif MAC
+#elif defined(MAC)
 	return DKMac::RightRelease();
-#elif LINUX
+#elif defined(LINUX)
 	return DKLinux::RightRelease();
 #else
 	return DKERROR("not implemented on this OS\n");
@@ -685,7 +685,7 @@ bool DKUtil::Run(const DKString& command, const DKString& params){
 		return DKERROR("("+command+","+params+"): Enable redirection failed: "+error+"\n");    
 	}
 	return true;
-#elif LINUX
+#elif defined(LINUX)
 	int rtnvalue;
 	return DKLinux::Run(command, rtnvalue);
 #else
@@ -718,7 +718,7 @@ bool DKUtil::SetClipboard(const DKString& text){
 	DKDEBUGFUNC(text);
 #if WIN32
 	return DKWindows::SetClipboard(text);
-#elif LINUX
+#elif defined(LINUX)
 	return DKLinux::SetClipboard(text);
 #else
 	return DKERROR("not implemented on this OS\n");
@@ -763,7 +763,7 @@ bool DKUtil::SetMainThreadNow(){
 #elif defined(MAC) || defined(IOS) || defined(LINUX)
 	DKUtil::mainThreadId = (unsigned long int)pthread_self();
 	return true;
-#elif ANDROID
+#elif defined(ANDROID)
 	DKUtil::mainThreadId = (int)pthread_self();
 	return true;
 #else
@@ -775,9 +775,9 @@ bool DKUtil::SetMousePos(const int& x, const int& y){
 	DKDEBUGFUNC(x, y);
 #ifdef WIN32
 	return DKWindows::SetMousePos(x, y);
-#elif MAC
+#elif defined(MAC)
 	return DKMac::SetMousePos(x, y);
-#elif LINUX
+#elif defined(LINUX)
 	return DKLinux::SetMousePos(x, y);
 #else
 	return DKERROR("not implemented on this OS\n");
@@ -788,7 +788,7 @@ bool DKUtil::SetVolume(int& percent){
 	DKDEBUGFUNC(percent);
 #ifdef WIN32
 	return DKWindows::SetVolume(percent);
-#elif LINUX
+#elif defined(LINUX)
 	return DKLinux::SetVolume(percent);
 #else
 	return DKERROR("not implemented on this OS\n");
@@ -810,7 +810,7 @@ bool DKUtil::StrokeKey(const int& key){
 	DKDEBUGFUNC(key);
 #ifdef WIN32
 	return DKWindows::StrokeKey(key);
-#elif LINUX
+#elif defined(LINUX)
 	return DKLinux::StrokeKey(key);
 #else
 	return DKERROR("not implemented on this OS\n");
@@ -831,9 +831,9 @@ bool DKUtil::TurnOffMonitor(){
 	DKDEBUGFUNC();
 #ifdef WIN32
 	return DKWindows::TurnOffMonitor();
-#elif MAC
+#elif defined(MAC)
 	return DKMac::TurnOffMonitor();
-#elif LINUX
+#elif defined(LINUX)
 	int rtnvalue;
 	return DKLinux::TurnOffMonitor(rtnvalue);
 #else
@@ -881,9 +881,9 @@ bool DKUtil::VirtualMemory(unsigned long long& virtualMemory){
 	DKDEBUGFUNC(virtualMemory);
 #ifdef WIN32
 	return DKWindows::VirtualMemory(virtualMemory);
-#elif MAC
+#elif defined(MAC)
 	return DKMac::VirtualMemory(virtualMemory);
-#elif LINUX
+#elif defined(LINUX)
 	return DKLinux::VirtualMemory(virtualMemory);
 #else
 	return DKERROR("not implemented on this OS\n");
@@ -894,9 +894,9 @@ bool DKUtil::VirtualMemoryUsed(unsigned long long& virtualMemory){
 	DKDEBUGFUNC(virtualMemory);
 #ifdef WIN32
 	return DKWindows::VirtualMemoryUsed(virtualMemory);
-#elif MAC
+#elif defined(MAC)
 	return DKMac::VirtualMemoryUsed(virtualMemory);
-#elif LINUX
+#elif defined(LINUX)
 	return DKLinux::VirtualMemoryUsed(virtualMemory);
 #else
 	return DKERROR("not implemented on this OS\n");
@@ -907,9 +907,9 @@ bool DKUtil::VirtualMemoryUsedByApp(unsigned int& virtualMemory){
 	DKDEBUGFUNC(virtualMemory);
 #ifdef WIN32
 	return DKWindows::VirtualMemoryUsedByApp(virtualMemory);
-#elif MAC
+#elif defined(MAC)
 	return DKMac::VirtualMemoryUsedByApp(virtualMemory);
-#elif LINUX
+#elif defined(LINUX)
 	return DKLinux::VirtualMemoryUsedByApp(virtualMemory);
 #else
 	return DKERROR("not implemented on this OS\n");
