@@ -123,14 +123,14 @@
 #			define ANDROID64
 #		endif
 #		define DKOS "ANDROID64"
-#		define DKOS_VERSION TOSTRING(__ANDROID_API__)
+//#		define DKOS_VERSION TOSTRING(__ANDROID_API__)  FIXME: defining from another macro
 #	endif
 #	if DKBITS == 32
 #		ifndef ANDROID32
 #			define ANDROID32
 #		endif
 #		define DKOS "ANDROID32"
-#		define DKOS_VERSION TOSTRING(__ANDROID_API__)
+//#		define DKOS_VERSION TOSTRING(__ANDROID_API__)  FIXME: defining from another macro
 #	endif
 #elif __linux__
 #	ifndef LINUX
@@ -163,28 +163,28 @@
 
 #if __clang__ && __GNUG__
 #	define DKCOMPILER "clang++"
-#   define DKCOMPILER_VERSION STR(__clang_version__)
+//#   define DKCOMPILER_VERSION STR(__clang_version__)  FIXME: defining from another macro
 #elif __clang__
 #	define DKCOMPILER "clang"
-#   define DKCOMPILER_VERSION STR(__clang_version__)
+//#   define DKCOMPILER_VERSION STR(__clang_version__)  FIXME: defining from another macro
 #elif __llvm__
 #	define DKCOMPILER "llvm"
-#   define DKCOMPILER_VERSION STR(__llvm__)
+//#   define DKCOMPILER_VERSION STR(__llvm__)  FIXME: defining from another macro
 #elif __MINGW64__
 #	define DKCOMPILER "Mingw64"
-#   define DKCOMPILER_VERSION JOIN_TWO(__MINGW64_MAJOR_VERSION, __MINGW64_MINOR_VERSION)
+//#   define DKCOMPILER_VERSION JOIN_TWO(__MINGW64_MAJOR_VERSION, __MINGW64_MINOR_VERSION)  FIXME: defining from another macro
 #elif __MINGW32__
 #	define DKCOMPILER "Mingw32"
-#   define DKCOMPILER_VERSION JOIN_TWO(__MINGW32_MAJOR_VERSION, __MINGW32_MINOR_VERSION)
+//#   define DKCOMPILER_VERSION JOIN_TWO(__MINGW32_MAJOR_VERSION, __MINGW32_MINOR_VERSION)  FIXME: defining from another macro
 #elif _MSC_VER
 #	define DKCOMPILER "Microsoft Visual C++"
-#   define DKCOMPILER_VERSION STR(_MSC_FULL_VER)
+//#   define DKCOMPILER_VERSION STR(_MSC_FULL_VER)  FIXME: defining from another macro
 #elif __GNUG__
 #	define DKCOMPILER "GNU G++"
-#   define DKCOMPILER_VERSION JOIN_THREE(__GNUC__, __GNUC_MINOR_, __GNUC_PATCHLEVEL__)
+//#   define DKCOMPILER_VERSION JOIN_THREE(__GNUC__, __GNUC_MINOR_, __GNUC_PATCHLEVEL__)  FIXME: defining from another macro
 #elif __GNUC__
 #	define DKCOMPILER "GNU GCC"
-#   define DKCOMPILER_VERSION JOIN_THREE(__GNUC__, __GNUC_MINOR__, __GNUC_PATCHLEVEL__)
+//#   define DKCOMPILER_VERSION JOIN_THREE(__GNUC__, __GNUC_MINOR__, __GNUC_PATCHLEVEL__)  FIXME: defining from another macro
 #else
 #	define DKCOMPILER "UNKNOWN"
 #   define DKCOMPILER_VERSION "UNKNOWN"

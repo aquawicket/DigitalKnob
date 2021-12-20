@@ -46,3 +46,10 @@ IOSSIM_XCODE(${ZLIB_NAME} zlibstatic)
 LINUX_COMMAND(make zlibstatic)
 RASPBERRY_COMMAND(make zlibstatic)
 ANDROID_VS(${ZLIB_NAME} zlib.sln zlibstatic)
+
+
+#DKCOMPILE(WIN          MSBUILD   zlib-1.2.11  zlib.sln   zlibstatic   zlibstatic.lib)
+#DKCOMPILE(APPLE        XCODE     zlib-1.2.11             zlibstatic   libz.a)
+#DKCOMPILE(LINUX        MAKE      zlib-1.2.11             zlibstatic   libz.a)
+#DKCOMPILE(RASPBERRY    MAKE      zlib-1.2.11             zlibstatic   libz.a)
+#DKCOMPILE(ANDROID      ANDROID   zlib-1.2.11  zlib.sln   zlibstatic   libz.a)
