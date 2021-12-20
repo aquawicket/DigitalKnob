@@ -15,7 +15,7 @@ if(WIN)
 	DKDEPEND(openssl)
 endif()
 if(RASPBERRY)
-	DKDEPEND(libcgg)
+	DKDEPEND(libgcc)
 endif()
 
 
