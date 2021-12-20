@@ -467,7 +467,7 @@ function DKBuild_DoResults(){
 			cmake_string = cmake_string.replace("-DRELEASE=ON", "-DRELEASE=OFF");
 			CPP_DKFile_MkDir(app_path+OS+"/Debug")
 			CPP_DKFile_ChDir(app_path+OS+"/Debug")
-			let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DIGITALKNOB+"DK/DKCMake")
+			let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" -DCMAKE_C_COMPILER=/usr/bin/gcc "+cmake_string+DIGITALKNOB+"DK/DKCMake")
 			CPP_DK_Execute("make "+APP)
 		}
 		if(TYPE === "Release" || TYPE === "ALL"){
@@ -475,7 +475,7 @@ function DKBuild_DoResults(){
 			cmake_string = cmake_string.replace("-DRELEASE=ON", "-DRELEASE=OFF");
 			CPP_DKFile_MkDir(app_path+OS+"/Release")
 			CPP_DKFile_ChDir(app_path+OS+"/Release")
-			let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DIGITALKNOB+"DK/DKCMake")
+			let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" -DCMAKE_CXX_COMPILER=/usr/bin/g++ "+cmake_string+DIGITALKNOB+"DK/DKCMake")
 			CPP_DK_Execute("make "+APP)
 		}
 	}
