@@ -781,13 +781,10 @@ if(IOSSIM)
 	endif()
 	add_executable(${APP_NAME} MACOSX_BUNDLE ${App_SRC} ${RES_SOURCES})
 	
-	#individually set the file's path properties
-	foreach(RES_FILE ${RES_SOURCES})
-		#Get the relative path from the data-folder to the particular file
-		file(RELATIVE_PATH RES_PATH "${SOURCE_ROOT}/data-folder" ${RES_FILE})
-		#Set it's location inside the app package (under Resources)
-		set_property(SOURCE ${RES_FILE} PROPERTY MACOSX_PACKAGE_LOCATION "Resources/${RES_PATH}")
-	endforeach(RES_FILE)
+	target_sources(${APP_NAME} PRIVATE Assets.xcassets)
+		set_source_files_properties(Assets.xcassets PROPERTIES
+		MACOSX_PACKAGE_LOCATION Resources
+	)
 	
 	set_target_properties(${APP_NAME} PROPERTIES
         MACOSX_BUNDLE TRUE
@@ -803,6 +800,7 @@ if(IOSSIM)
 		PRODUCT_BUNDLE_IDENTIFIER com.digitalknob.${APP_NAME}
 		PRODUCT_NAME com.digitalknob.${APP_NAME}
 		XCODE_ATTRIBUTE_CODE_SIGN_IDENTITY ""
+		RESOURCE ${RES_SOURCES}
 		#MACOSX_BUNDLE_INFO_PLIST ${DKPLUGINS}/_DKIMPORT/ios/Info.plist
     )
 	#set_xcode_property(PRODUCT_BUNDLE_IDENTIFIER com.digitalknob.${APP_NAME})
