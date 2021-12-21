@@ -807,7 +807,7 @@ if(IOSSIM)
 		XCODE_ATTRIBUTE_CODE_SIGN_IDENTITY "")
 		#RESOURCE ${RES_SOURCES}
 		#MACOSX_BUNDLE_INFO_PLIST ${DKPLUGINS}/_DKIMPORT/ios/Info.plist
-    )
+    
 	#set_xcode_property(PRODUCT_BUNDLE_IDENTIFIER com.digitalknob.${APP_NAME})
 	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${LIBS})
 	
