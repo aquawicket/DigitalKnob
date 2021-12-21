@@ -320,6 +320,7 @@ if(ANDROID) # Disabled for Android targets
 	DKDISABLE(python)
 	DKDISABLE(rlottie)
 	DKDISABLE(rmlui)
+	DKDISABLE(rtmidi)
 	DKDISABLE(sdl2_gif)
 	DKDISABLE(sdl2_mixer)
 	DKDISABLE(sfml)
