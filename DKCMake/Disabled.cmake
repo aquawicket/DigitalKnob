@@ -285,6 +285,7 @@ if(ANDROID) # Disabled for Android targets
 	DKDISABLE(DKCef)
 	DKDISABLE(DKCefChild)
 	DKDISABLE(DKCurl)
+	DKDISABLE(cryptopp)
 	DKDISABLE(DKDom)
 	DKDISABLE(DKHook) #NOTE: this has linux functions too
 	DKDISABLE(DKMySql)
