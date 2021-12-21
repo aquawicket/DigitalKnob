@@ -103,8 +103,9 @@ foreach(plugin ${dkdepend_list})
 		endif()
 		
 		## Prebuild DKPlugins switch
-		if(0)
-			Wait("Prebuilding Plugins")
+		## TODO: set this to work when the library files are absent.
+		## If the library files already exist, we can skip this. 
+		if(1)
 			DKSET(CURRENT_DIR ${plugin_path}/${OS})
 			dk_makeDirectory(${CURRENT_DIR})
 			if(WIN_32)
