@@ -758,33 +758,38 @@ if(IOSSIM)
 	DKREMOVE(${DKPROJECT}/assets/USER)
 	
 	## copy the assets into the app
-	if(DEBUG)
-		dk_makeDirectory(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app/assets)
-		DKCOPY(${DKPROJECT}/assets/ ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app/assets TRUE)
-		DKCOPY(${DKPROJECT}/icons/ios/ ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app TRUE)
-	endif()
-	if(RELEASE)
-		dk_makeDirectory(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.app/assets)
-		DKCOPY(${DKPROJECT}/assets/ ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.app/assets TRUE)
-		DKCOPY(${DKPROJECT}/icons/ios/ ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.app TRUE)
-	endif()
+	#if(DEBUG)
+	#	dk_makeDirectory(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app/assets)
+	#	DKCOPY(${DKPROJECT}/assets/ ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app/assets TRUE)
+	#	DKCOPY(${DKPROJECT}/icons/ios/ ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app TRUE)
+	#endif()
+	#if(RELEASE)
+	#	dk_makeDirectory(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.app/assets)
+	#	DKCOPY(${DKPROJECT}/assets/ ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.app/assets TRUE)
+	#	DKCOPY(${DKPROJECT}/icons/ios/ ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.app TRUE)
+	#endif()
 	
 	# Restore the backed up files, excluded from assets
 	DKCOPY(${DKPROJECT}/Backup/ ${DKPROJECT}/assets/ FALSE)
 	DKREMOVE(${DKPROJECT}/Backup)
 	
 	#GET_TARGET_PROPERTY(MyExecutable_PATH ${APP_NAME} LOCATION)
+	file(GLOB_RECURSE RES_SOURCES "${DKPROJECT}/icons/ios/*")
+	
 	file(GLOB_RECURSE RES_SOURCES "${DKPROJECT}/assets/*")
+	DUMP(RES_SOURCES)
+	
+	
 	
 	if(HAVE_DK)
 		list(APPEND App_SRC ${DKPLUGINS}/DK/DKiOS.mm)
 	endif()
 	add_executable(${APP_NAME} MACOSX_BUNDLE ${App_SRC} ${RES_SOURCES})
 	
-	target_sources(${APP_NAME} PRIVATE Assets.xcassets)
-		set_source_files_properties(Assets.xcassets PROPERTIES
-		MACOSX_PACKAGE_LOCATION Resources
-	)
+	#target_sources(${APP_NAME} PRIVATE Assets.xcassets)
+	#	set_source_files_properties(Assets.xcassets PROPERTIES
+	#	MACOSX_PACKAGE_LOCATION Resources
+	#)
 	
 	set_target_properties(${APP_NAME} PROPERTIES
         MACOSX_BUNDLE TRUE
@@ -799,8 +804,8 @@ if(IOSSIM)
 		MACOSX_FRAMEWORK_IDENTIFIER "com.digitalknob.bundle.${APP_NAME}"
 		PRODUCT_BUNDLE_IDENTIFIER com.digitalknob.${APP_NAME}
 		PRODUCT_NAME com.digitalknob.${APP_NAME}
-		XCODE_ATTRIBUTE_CODE_SIGN_IDENTITY ""
-		RESOURCE ${RES_SOURCES}
+		XCODE_ATTRIBUTE_CODE_SIGN_IDENTITY "")
+		#RESOURCE ${RES_SOURCES}
 		#MACOSX_BUNDLE_INFO_PLIST ${DKPLUGINS}/_DKIMPORT/ios/Info.plist
     )
 	#set_xcode_property(PRODUCT_BUNDLE_IDENTIFIER com.digitalknob.${APP_NAME})
