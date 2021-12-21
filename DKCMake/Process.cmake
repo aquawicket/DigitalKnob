@@ -774,17 +774,20 @@ if(IOSSIM)
 	DKREMOVE(${DKPROJECT}/Backup)
 	
 	#GET_TARGET_PROPERTY(MyExecutable_PATH ${APP_NAME} LOCATION)
-	file(GLOB_RECURSE RES_SOURCES "${DKPROJECT}/icons/ios/*")
 	
-	file(GLOB_RECURSE RES_SOURCES "${DKPROJECT}/assets/*")
-	DUMP(RES_SOURCES)
-	
-	
+	if(NOT RES_FILES)
+		DKSET(RES_FILES "")
+	endif()
+	file(GLOB_RECURSE RES_ASSETS "${DKPROJECT}/icons/ios/*")
+	list(APPEND RES_FILES ${RES_ICONS})
+	file(GLOB_RECURSE RES_ASSETS "${DKPROJECT}/assets/*")
+	list(APPEND RES_FILES ${RES_ASSETS})
+	DUMP(RES_FILES)
 	
 	if(HAVE_DK)
 		list(APPEND App_SRC ${DKPLUGINS}/DK/DKiOS.mm)
 	endif()
-	add_executable(${APP_NAME} MACOSX_BUNDLE ${App_SRC} ${RES_SOURCES})
+	add_executable(${APP_NAME} MACOSX_BUNDLE ${App_SRC} ${RES_FILES})
 	
 	#target_sources(${APP_NAME} PRIVATE Assets.xcassets)
 	#	set_source_files_properties(Assets.xcassets PROPERTIES
