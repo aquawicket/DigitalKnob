@@ -106,6 +106,8 @@ foreach(plugin ${dkdepend_list})
 		## TODO: set this to work when the library files are absent.
 		## If the library files already exist, we can skip this. 
 		if(1)
+			message(STATIC "Prebuilding ${plugin}")
+			Wait()
 			DKSET(CURRENT_DIR ${plugin_path}/${OS})
 			dk_makeDirectory(${CURRENT_DIR})
 			if(WIN_32)
