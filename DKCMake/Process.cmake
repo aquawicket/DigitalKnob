@@ -350,13 +350,15 @@ if(WIN_32)
 	
 	
 	####################### Create Executable Target ###################
-	DKCOPY(${DKPLUGINS}/_DKIMPORT/resource.h ${DKPROJECT}/resource.h FALSE)
-	DKCOPY(${DKPLUGINS}/_DKIMPORT/resource.rc ${DKPROJECT}/resource.rc FALSE)
-	file(GLOB_RECURSE resources_SRC 
-		${DKPROJECT}/*.manifest
-		${DKPROJECT}/*.rc
-		${DKPROJECT}/icons/windows/*.rc)
-		list(APPEND App_SRC ${resources_SRC})
+	if(HAVE_DK)
+		DKCOPY(${DKPLUGINS}/_DKIMPORT/resource.h ${DKPROJECT}/resource.h FALSE)
+		DKCOPY(${DKPLUGINS}/_DKIMPORT/resource.rc ${DKPROJECT}/resource.rc FALSE)
+		file(GLOB_RECURSE resources_SRC 
+			${DKPROJECT}/*.manifest
+			${DKPROJECT}/*.rc
+			${DKPROJECT}/icons/windows/*.rc)
+			list(APPEND App_SRC ${resources_SRC})
+	endif()
 	add_executable(${APP_NAME} WIN32 ${App_SRC})
 	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${LIBS})
 	
