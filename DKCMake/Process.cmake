@@ -430,18 +430,19 @@ if(WIN_64)
 	endif()
 	
 		
-	################# BACKUP USERDATA / INJECT ASSETS #####################	
-	DKCOPY(${DKPROJECT}/assets/USER ${DKPROJECT}/Backup/USER TRUE)
-	DKREMOVE(${DKPROJECT}/assets/USER)
-	#Compress the assets, they will be included by resource.rc
-	message(STATUS "Creating assets.zip . . .")
-	DKZIP(${DKPROJECT}/assets)
-	# Restore the backed up files
-	DKCOPY(${DKPROJECT}/Backup/ ${DKPROJECT}/assets/ TRUE)
-	DKREMOVE(${DKPROJECT}/Backup)
-	#dummy assets.h file, or the builder wil complain about assets.h missing
-	DKCOPY(${DKPLUGINS}/_DKIMPORT/assets.h ${DKPROJECT}/assets.h TRUE)
-	
+	################# BACKUP USERDATA / INJECT ASSETS #####################
+	if(HAVE_DK)
+		DKCOPY(${DKPROJECT}/assets/USER ${DKPROJECT}/Backup/USER TRUE)
+		DKREMOVE(${DKPROJECT}/assets/USER)
+		#Compress the assets, they will be included by resource.rc
+		message(STATUS "Creating assets.zip . . .")
+		DKZIP(${DKPROJECT}/assets)
+		# Restore the backed up files
+		DKCOPY(${DKPROJECT}/Backup/ ${DKPROJECT}/assets/ TRUE)
+		DKREMOVE(${DKPROJECT}/Backup)
+		#dummy assets.h file, or the builder wil complain about assets.h missing
+		DKCOPY(${DKPLUGINS}/_DKIMPORT/assets.h ${DKPROJECT}/assets.h TRUE)
+	endif()
 
 	###################### Backup Executable ###########################
 	if(DEBUG)
@@ -453,13 +454,15 @@ if(WIN_64)
 	
 	
 	####################### Create Executable Target ###################
-	##set_source_files_properties(${DIGITALKNOB}/stdafx.cpp PROPERTIES COMPILE_FLAGS "/Ycstdafx.h")
-	DKCOPY(${DKPLUGINS}/_DKIMPORT/resource.h ${DKPROJECT}/resource.h FALSE)
-	DKCOPY(${DKPLUGINS}/_DKIMPORT/resource.rc ${DKPROJECT}/resource.rc FALSE)
-	file(GLOB_RECURSE resources_SRC 
-		${DKPROJECT}/*.manifest
-		${DKPROJECT}/*.rc
-		${DKPROJECT}/icons/windows/*.rc)
+	if(HAVE_DK)
+		##set_source_files_properties(${DIGITALKNOB}/stdafx.cpp PROPERTIES COMPILE_FLAGS "/Ycstdafx.h")
+		DKCOPY(${DKPLUGINS}/_DKIMPORT/resource.h ${DKPROJECT}/resource.h FALSE)
+		DKCOPY(${DKPLUGINS}/_DKIMPORT/resource.rc ${DKPROJECT}/resource.rc FALSE)
+		file(GLOB_RECURSE resources_SRC 
+			${DKPROJECT}/*.manifest
+			${DKPROJECT}/*.rc
+			${DKPROJECT}/icons/windows/*.rc)
+	endif()
 	list(APPEND App_SRC ${resources_SRC})
 	add_executable(${APP_NAME} WIN32 ${App_SRC})
 
