@@ -808,10 +808,10 @@ if(IOSSIM)
 	endif()
 	add_executable(${APP_NAME} MACOSX_BUNDLE ${App_SRC} ${RES_FILES})
 	
-	#add_custom_command(TARGET ${APP_NAME} PRE_BUILD
-    #COMMAND ${CMAKE_COMMAND} -E copy_directory 
-    #         ${CMAKE_CURRENT_LIST_DIR}/Samples $<TARGET_FILE_DIR:${APP_NAME}>
-	#)
+	add_custom_command(TARGET ${APP_NAME} PRE_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_directory 
+             ${CMAKE_CURRENT_LIST_DIR}/Resources $<TARGET_FILE_DIR:${APP_NAME}>
+	)
 
 	set_target_properties(${APP_NAME} PROPERTIES
         MACOSX_BUNDLE TRUE
