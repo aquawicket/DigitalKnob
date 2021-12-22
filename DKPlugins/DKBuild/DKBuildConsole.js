@@ -323,7 +323,7 @@ function BuildConsole_PostBuildOptions(){
 	console.log("**** Post-Build Options ****")
 	console.log("1. Run "+APP+" Debug Executable")
 	console.log("2. Run "+APP+" Release Executable")
-	console.log("3. Open Generated "+APP+" Soluton")
+	console.log("3. Open Generated "+APP+" Solution")
 	console.log("0. Back")
 	console.log("ESC. exit")
 	console.log(" Any Other Key To Skip") 
