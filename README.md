@@ -9,16 +9,14 @@
 ### Supported Platforms <br>
 Windows 32 <br>
 Windows 64 <br>
-Mac 32 (TODO) <br>
 Mac 64 <br>
-Linux 32 (TODO) <br>
+Linux 32 <br>
 Linux 64 <br>
-iPhone/iPad 32 (TODO) <br>
-iPhone/iPad 64 (TODO) <br>
-iPhone/iPad-Simulator 32 (TODO) <br>
+iPhone/iPad 64 (<br>
 iPhone/iPad-Simulator 64 <br>
 Android 32 <br>
-Android 64 (TODO) <br>
+Android 64 <br>
+Raspberry Pi <br>
 Chrome <br>
 Safari <br>
 Firefox <br>
@@ -32,8 +30,16 @@ Internet Explorer (9.0+) <br>
 [OpenFrameworks](https://github.com/openframeworks/openFrameworks) (TODO) <br>
 [Emscripten](https://github.com/kripken/emscripten) (TODO) <br>
 
-### Supported Libraries <br>
-[Archive](https://github.com/libarchive/libarchive) <br>
+### Supported Tools, Libraries and Frameworks <br>
+[Agl](https://developer.apple.com/documentation/agl/agl?language=objc) <br>
+[Android-NDK](https://github.com/android/ndk) <br>
+[AppKit](https://developer.apple.com/documentation/appkit?language=objc) <br>
+[astyle](http://astyle.sourceforge.net/) <br>
+[AudioUnit](https://developer.apple.com/documentation/audiotoolbox/audiounit?language=objc) <br>
+[AudioToolbox](https://developer.apple.com/documentation/audiotoolbox?language=objc) <br>
+[autotools](https://www.gnu.org/software/automake/manual/html_node/Autotools-Introduction.html) <br>
+[AvfAudio](https://developer.apple.com/documentation/avfaudio?language=objc) <br>
+[AVFoundation](https://developer.apple.com/documentation/avfoundation?language=objc) <br>
 [Boost](https://github.com/boostorg/boost) <br>
 [Boost-android](https://github.com/MysticTreeGames/Boost-for-Android) <br>
 [Boost-iOS](https://github.com/danoli3/ofxOSXBoost) <br>
@@ -51,6 +57,7 @@ Internet Explorer (9.0+) <br>
 [ImageMagick++](https://github.com/ImageMagick/ImageMagick/tree/master/Magick%2B%2B) <br>
 [Jpeg](https://github.com/LuaDist/libjpeg) <br>
 [Jpeg-Turbo](https://github.com/libjpeg-turbo/libjpeg-turbo) <br>
+[libarchive](https://github.com/libarchive/libarchive) <br>
 [libiconv](http://gnuwin32.sourceforge.net/packages/libiconv.htm) <br>
 [libtorrent](https://github.com/arvidn/libtorrent) <br>
 [libuv](https://github.com/libuv/libuv) <br>
