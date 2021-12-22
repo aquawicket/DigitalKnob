@@ -505,23 +505,11 @@ if(WIN_64)
 	#CPP_DK_Execute(DIGITALKNOB+"DK/3rdParty/upx-3.95-win64/upx.exe -9 -v "+app_path+OS+"/Release/"+APP+".exe")
 endif(WIN_64)
 
+
 #######
 if(MAC)
-	file(GLOB_RECURSE m_SRC 
-	${DKPROJECT}/*.m
-	${DKPROJECT}/*.mm)
-	list(APPEND App_SRC ${m_SRC})
-	
-	### PRE BUILD ###
-	if(DEBUG)
-		DKRENAME(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.backup)
-	endif()
-	if(RELEASE)
-		DKRENAME(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.app ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.backup)
-	endif()
-	
+	########################## CREATE ICONS ###############################
 	if(EXISTS ${DKPROJECT}/icons/icon.png)
-		## ICONS ##
 		dk_makeDirectory(${DKPROJECT}/icons/mac)
 		dk_makeDirectory(${DKPROJECT}/icons/mac/icons.iconset)
 		DKEXECUTE_PROCESS(sips -z 16 16 ${DKPROJECT}/icons/icon.png --out ${DKPROJECT}/icons/mac/icons.iconset/icon_16x16.png WORKING_DIRECTORY ${DIGITALKNOB})
@@ -537,49 +525,43 @@ if(MAC)
 		DKEXECUTE_PROCESS(iconutil -c icns -o ${DKPROJECT}/icons/mac/logo.icns ${DKPROJECT}/icons/mac/icons.iconset WORKING_DIRECTORY ${DIGITALKNOB})
 	endif()
 	
-	## ASSETS ##
+	###################### BACKUP USERDATA ###############################
 	# Backup files and folders excluded from the package
 	DKCOPY(${DKPROJECT}/assets/USER ${DKPROJECT}/Backup/USER TRUE)
 	# Remove excluded files and folders before packaging
 	DKREMOVE(${DKPROJECT}/assets/USER)
-	
 	## copy the assets into the bundle resources
-	if(DEBUG)
-		dk_makeDirectory(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app/Contents/Resources)
-		DKCOPY(${DKPROJECT}/assets/ ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app/Contents/Resources TRUE)
-		DKCOPY(${DKPROJECT}/icons/mac/logo.icns ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app/Contents/Resources/logo.icns TRUE)
-	endif()
-	if(RELEASE)
-		dk_makeDirectory(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.app/Contents/Resources)
-		DKCOPY(${DKPROJECT}/assets/ ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.app/Contents/Resources TRUE)
-		DKCOPY(${DKPROJECT}/icons/mac/logo.icns ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.app/Contents/Resources/logo.icns TRUE)
-	endif()
+	#if(DEBUG)
+	#	dk_makeDirectory(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app/Contents/Resources)
+	#	DKCOPY(${DKPROJECT}/assets/ ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app/Contents/Resources TRUE)
+	#	DKCOPY(${DKPROJECT}/icons/mac/logo.icns ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app/Contents/Resources/logo.icns TRUE)
+	#endif()
+	#if(RELEASE)
+	#	dk_makeDirectory(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.app/Contents/Resources)
+	#	DKCOPY(${DKPROJECT}/assets/ ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.app/Contents/Resources TRUE)
+	#	DKCOPY(${DKPROJECT}/icons/mac/logo.icns ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.app/Contents/Resources/logo.icns TRUE)
+	#endif()
 	# Restore the backed up files, excluded from assets
 	DKCOPY(${DKPROJECT}/Backup/ ${DKPROJECT}/assets/ FALSE)
 	DKREMOVE(${DKPROJECT}/Backup)
-
-	SET(CMAKE_OSX_ARCHITECTURES "x86_64")
-	add_executable(${APP_NAME} MACOSX_BUNDLE ${App_SRC})
-	set_target_properties(${APP_NAME} PROPERTIES
-        MACOSX_BUNDLE TRUE
-		MACOSX_BUNDLE_BUNDLE_NAME com.digitalknob.${APP_NAME}
-		MACOSX_BUNDLE_BUNDLE_VERSION "1.0"
-		MACOSX_BUNDLE_COPYRIGHT "(C) 2021 DigitalKnob"
-		MACOSX_BUNDLE_GUI_IDENTIFIER com.digitalknob.${APP_NAME}
-		MACOSX_BUNDLE_ICON_FILE "logo"
-		MACOSX_BUNDLE_INFO_STRING "Digitalknob"
-		MACOSX_BUNDLE_LONG_VERSION_STRING "${APP_NAME} v1.0"
-		MACOSX_BUNDLE_SHORT_VERSION_STRING "1.0"
-		MACOSX_FRAMEWORK_IDENTIFIER "com.digitalknob.bundle.${APP_NAME}"
-		PRODUCT_BUNDLE_IDENTIFIER com.digitalknob.${APP_NAME}
-		PRODUCT_NAME com.digitalknob.${APP_NAME}
-		XCODE_ATTRIBUTE_CODE_SIGN_IDENTITY ""
-		MACOSX_BUNDLE_INFO_PLIST ${DKPLUGINS}/_DKIMPORT/mac/Info.plist
-    )
-	#set_xcode_property(${APP_NAME} "Other Code Signing Flags" "--deep")	
-	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${LIBS})
-	set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY XCODE_STARTUP_PROJECT ${APP_NAME})
 	
+	###################### Backup Executable ###########################
+	if(DEBUG)
+		DKRENAME(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.backup)
+	endif()
+	if(RELEASE)
+		DKRENAME(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.app ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.backup)
+	endif()
+	
+	####################### Create Executable Target ###################
+	#SET(CMAKE_OSX_ARCHITECTURES "x86_64")
+	file(GLOB_RECURSE m_SRC 
+	${DKPROJECT}/*.m
+	${DKPROJECT}/*.mm)
+	list(APPEND App_SRC ${m_SRC})
+	add_executable(${APP_NAME} MACOSX_BUNDLE ${App_SRC})
+	
+	########################## Add Dependencies ########################
 	foreach(plugin ${dkdepend_list})
 		if(EXISTS "${DKPLUGINS}/${plugin}/CMakeLists.txt")
 			if(NOT ${plugin} MATCHES "DKCefChild")
@@ -588,7 +570,42 @@ if(MAC)
 		endif()
 	endforeach()
 	
-	### POST BUILD ###
+	
+	######################### Create Info.plist #######################
+	DKSET(PRODUCT_BUNDLE_IDENTIFIER com.digitalknob.${APP_NAME})
+	DKSET(CFBundleDevelopmentRegion en)
+	DKSET(CFBundleDisplayName ${APP_NAME})
+	DKSET(CFBundleExecutable wrapper) ##${APP_NAME})
+	DKSET(CFBundleGetInfoString DigitalKnob)
+	DKSET(CFBundleIconFile icon.png)
+	#DKSET(CFBundleIconFiles icon.png)
+	DKSET(CFBundleIdentifier ${PRODUCT_BUNDLE_IDENTIFIER})
+	DKSET(CFBundleInfoDictionaryVersion 6.0)
+	DKSET(CFBundleLongVersionString 1.0.0)
+	DKSET(CFBundleName ${APP_NAME})
+	DKSET(CFBundlePackageType APPL)
+	DKSET(CFBundleShortVersionString 1.0)
+	DKSET(CFBundleSignature ????)
+	DKSET(CFBundleVersion 1.0)
+	#DKSET(LSRequiresIPhoneOS NO)
+	DKSET(NSMainNibFile "")
+	DKSET(UILaunchStoryboardName dk)
+	DKSET(UIMainStoryboardFile dk.storyboard)
+	set_target_properties(${APP_NAME} PROPERTIES MACOSX_BUNDLE TRUE MACOSX_BUNDLE_INFO_PLIST ${DKPLUGINS}/_DKIMPORT/ios/Info.plist)
+	
+	
+	###################### Add Assets to Bundle #######################
+	add_custom_command(TARGET ${APP_NAME} PRE_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_directory ${DKPROJECT}/assets $<TARGET_FILE_DIR:${APP_NAME}>/Resources)
+	add_custom_command(TARGET ${APP_NAME} PRE_BUILD COMMAND ${CMAKE_COMMAND} -E copy_directory ${DKPROJECT}/icons/mac/icons.iconset $<TARGET_FILE_DIR:${APP_NAME}>/Resources/icons.iconset)
+	
+	
+	############# Link Libraries, Set Startup Project #################
+	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${LIBS})
+	set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY XCODE_STARTUP_PROJECT ${APP_NAME})
+	
+	
+	####################### Do Post Build Stuff #######################
 	# Copy the CEF framework into the app bundle
 	if(EXISTS ${CEF})
 		message(STATUS "Adding Chromium Embedded Framework.framework to bundle . . .")
@@ -667,22 +684,9 @@ if(MAC)
 #			*/
 endif()
 
-#######
-if(IOS AND NOT IOSSIM)
-	file(GLOB_RECURSE m_SRC 
-	${DKPROJECT}/*.m
-	${DKPROJECT}/*.mm)
-	list(APPEND App_SRC ${m_SRC})
-	
-	### PRE BUILD ###
-	if(DEBUG)
-		DKRENAME(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.backup)
-	endif()
-	if(RELEASE)
-		DKRENAME(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.app ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.backup)
-	endif()
-	
-	## ICONS ##
+##########
+if(IOS OR IOSSIM)
+	########################## CREATE ICONS ###############################
 	if(EXISTS ${DKPROJECT}/icons/icon.png)
 		dk_makeDirectory(${DKPROJECT}/icons/ios)
 		dk_makeDirectory(${DKPROJECT}/icons/ios/icons.iconset)
@@ -699,130 +703,56 @@ if(IOS AND NOT IOSSIM)
 		DKEXECUTE_PROCESS(iconutil -c icns -o ${DKPROJECT}/icons/ios/logo.icns ${DKPROJECT}/icons/ios/icons.iconset WORKING_DIRECTORY ${DIGITALKNOB})
 	endif()
 	
-    ## ASSETS ##
+	
+	###################### BACKUP USERDATA ###############################
 	# Backup files and folders excluded from the package
-	DKCOPY(${DKPROJECT}/assets/USER ${DKPROJECT}/Backup/USER TRUE)
+	#DKCOPY(${DKPROJECT}/assets/USER ${DKPROJECT}/Backup/USER TRUE)
 	# Remove excluded files and folders before packaging
-	DKREMOVE(${DKPROJECT}/assets/USER)
-	## copy the assets into the app
+	#DKREMOVE(${DKPROJECT}/assets/USER)
+	# Restore the backed up files, excluded from assets
+	#DKCOPY(${DKPROJECT}/Backup/ ${DKPROJECT}/assets/ FALSE)
+	#DKREMOVE(${DKPROJECT}/Backup)
+	
+	
+	###################### Backup Executable ###########################
 	if(DEBUG)
-		dk_makeDirectory(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app/assets)
-		DKCOPY(${DKPROJECT}/assets/ ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app/assets TRUE)
-		DKCOPY(${DKPROJECT}/icons/ios/ ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app TRUE)
+		DKRENAME(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.backup)
 	endif()
 	if(RELEASE)
-		dk_makeDirectory(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.app/assets)
-		DKCOPY(${DKPROJECT}/assets/ ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.app/assets TRUE)
-		DKCOPY(${DKPROJECT}/icons/ios/ ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.app TRUE)
+		DKRENAME(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.app ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.backup)
 	endif()
-	# Restore the backed up files, excluded from assets
-	DKCOPY(${DKPROJECT}/Backup/ ${DKPROJECT}/assets/ FALSE)
-	DKREMOVE(${DKPROJECT}/Backup)
-
-	#GET_TARGET_PROPERTY(MyExecutable_PATH ${APP_NAME} LOCATION)
+	
+	
+	####################### Create Executable Target ###################
+	file(GLOB_RECURSE m_SRC 
+	${DKPROJECT}/*.m
+	${DKPROJECT}/*.mm)
+	list(APPEND App_SRC ${m_SRC})
 	if(HAVE_DK)
 		list(APPEND App_SRC ${DKPLUGINS}/DK/DKiOS.mm)
 	endif()
-	add_executable(${APP_NAME} MACOSX_BUNDLE ${App_SRC})
-    set_target_properties(${APP_NAME} PROPERTIES
-        MACOSX_BUNDLE TRUE
-		MACOSX_BUNDLE_BUNDLE_NAME com.digitalknob.${APP_NAME}
-		MACOSX_BUNDLE_BUNDLE_VERSION "1.0"
-		MACOSX_BUNDLE_COPYRIGHT "(C) 2021 DigitalKnob"
-		MACOSX_BUNDLE_GUI_IDENTIFIER com.digitalknob.${APP_NAME}
-		MACOSX_BUNDLE_ICON_FILE "logo"
-		MACOSX_BUNDLE_INFO_STRING "Digitalknob"
-		MACOSX_BUNDLE_LONG_VERSION_STRING "${APP_NAME} v1.0"
-		MACOSX_BUNDLE_SHORT_VERSION_STRING "1.0"
-		MACOSX_FRAMEWORK_IDENTIFIER "com.digitalknob.bundle.${APP_NAME}"
-		PRODUCT_BUNDLE_IDENTIFIER com.digitalknob.${APP_NAME}
-		PRODUCT_NAME com.digitalknob.${APP_NAME}
-		XCODE_ATTRIBUTE_CODE_SIGN_IDENTITY ""
-		MACOSX_BUNDLE_INFO_PLIST ${DKPLUGINS}/_DKIMPORT/ios/Info.plist
-    )
-	set_xcode_property(PRODUCT_BUNDLE_IDENTIFIER com.digitalknob.${APP_NAME})
-	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${LIBS})
+	add_executable(${APP_NAME} MACOSX_BUNDLE ${App_SRC} ${RES_FILES})
 	
+	
+	########################## Add Dependencies ########################
 	foreach(plugin ${dkdepend_list})
 		if(EXISTS "${DKPLUGINS}/${plugin}/CMakeLists.txt")
 			add_dependencies(${APP_NAME} ${plugin})
 		endif()	
 	endforeach()
 	
-	### POST BUILD ###
-	#CPP_DK_Execute("chmod +x "+app_path+OS+"/Debug/"+APP)
-endif()
-
-##########
-if(IOSSIM)
-	file(GLOB_RECURSE m_SRC 
-	${DKPROJECT}/*.m
-	${DKPROJECT}/*.mm)
-	list(APPEND App_SRC ${m_SRC})
 	
-	### PRE BUILD ###
-	if(DEBUG)
-		DKREMOVE(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.backup)
-		DKRENAME(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.backup)
-	endif()
-	if(RELEASE)
-		DKREMOVE(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.backup)
-		DKRENAME(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.app ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.backup)
-	endif()
-	
-	## ICONS ##
-	if(EXISTS ${DKPROJECT}/icons/icon.png)
-		dk_makeDirectory(${DKPROJECT}/icons/ios)
-		dk_makeDirectory(${DKPROJECT}/icons/ios/icons.iconset)
-		DKEXECUTE_PROCESS(sips -z 16 16 ${DKPROJECT}/icons/icon.png --out ${DKPROJECT}/icons/ios/icons.iconset/icon_16x16.png WORKING_DIRECTORY ${DIGITALKNOB})
-		DKEXECUTE_PROCESS(sips -z 32 32 ${DKPROJECT}/icons/icon.png --out ${DKPROJECT}/icons/ios/icons.iconset/icon_16x16@2x.png WORKING_DIRECTORY ${DIGITALKNOB})
-		DKEXECUTE_PROCESS(sips -z 32 32 ${DKPROJECT}/icons/icon.png --out ${DKPROJECT}/icons/ios/icons.iconset/icon_32x32.png WORKING_DIRECTORY ${DIGITALKNOB})
-		DKEXECUTE_PROCESS(sips -z 64 64 ${DKPROJECT}/icons/icon.png --out ${DKPROJECT}/icons/ios/icons.iconset/icon_32x32@2x.png WORKING_DIRECTORY ${DIGITALKNOB})
-		DKEXECUTE_PROCESS(sips -z 128 128 ${DKPROJECT}/icons/icon.png --out ${DKPROJECT}/icons/ios/icons.iconset/icon_128x128.png WORKING_DIRECTORY ${DIGITALKNOB})
-		DKEXECUTE_PROCESS(sips -z 256 256 ${DKPROJECT}/icons/icon.png --out ${DKPROJECT}/icons/ios/icons.iconset/icon_128x128@2x.png WORKING_DIRECTORY ${DIGITALKNOB})
-		DKEXECUTE_PROCESS(sips -z 256 256 ${DKPROJECT}/icons/icon.png --out ${DKPROJECT}/icons/ios/icons.iconset/icon_256x256.png WORKING_DIRECTORY ${DIGITALKNOB})
-		DKEXECUTE_PROCESS(sips -z 512 512 ${DKPROJECT}/icons/icon.png --out ${DKPROJECT}/icons/ios/icons.iconset/icon_256x256@2x.png WORKING_DIRECTORY ${DIGITALKNOB})
-		DKEXECUTE_PROCESS(sips -z 512 512 ${DKPROJECT}/icons/icon.png --out ${DKPROJECT}/icons/ios/icons.iconset/icon_512x512.png WORKING_DIRECTORY ${DIGITALKNOB})
-		DKEXECUTE_PROCESS(sips -z 1024 1024 ${DKPROJECT}/icons/icon.png --out ${DKPROJECT}/icons/ios/icons.iconset/icon_512x512@2x.png WORKING_DIRECTORY ${DIGITALKNOB})
-		DKEXECUTE_PROCESS(iconutil -c icns -o ${DKPROJECT}/icons/ios/logo.icns ${DKPROJECT}/icons/ios/icons.iconset WORKING_DIRECTORY ${DIGITALKNOB})
-	endif()
-	
-	## ASSETS ##
-	# Backup files and folders excluded from the package
-	DKCOPY(${DKPROJECT}/assets/USER ${DKPROJECT}/Backup/USER TRUE)
-	# Remove excluded files and folders before packaging
-	DKREMOVE(${DKPROJECT}/assets/USER)
-	
-	# Restore the backed up files, excluded from assets
-	DKCOPY(${DKPROJECT}/Backup/ ${DKPROJECT}/assets/ FALSE)
-	DKREMOVE(${DKPROJECT}/Backup)
-	
-	#if(NOT RES_FILES)
-	#	DKSET(RES_FILES "")
-	#endif()
-	#file(GLOB_RECURSE RES_ASSETS "${DKPROJECT}/icons/ios/*")
-	#list(APPEND RES_FILES ${RES_ICONS})
-	#file(GLOB_RECURSE RES_ASSETS "${DKPROJECT}/assets/*")
-	#list(APPEND RES_FILES ${RES_ASSETS})
-	
-	if(HAVE_DK)
-		list(APPEND App_SRC ${DKPLUGINS}/DK/DKiOS.mm)
-	endif()
-	add_executable(${APP_NAME} MACOSX_BUNDLE ${App_SRC} ${RES_FILES})
-	
-	add_custom_command(TARGET ${APP_NAME} PRE_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy_directory 
-             ${DKPROJECT}/assets $<TARGET_FILE_DIR:${APP_NAME}>/assets
-	)
-
+	######################### Create Info.plist #######################
 	DKSET(PRODUCT_BUNDLE_IDENTIFIER com.digitalknob.${APP_NAME})
 	DKSET(CFBundleDevelopmentRegion en)
 	DKSET(CFBundleDisplayName ${APP_NAME})
 	DKSET(CFBundleExecutable ${APP_NAME})
+	DKSET(CFBundleGetInfoString DigitalKnob)
 	DKSET(CFBundleIconFile icon.png)
 	#DKSET(CFBundleIconFiles icon.png)
 	DKSET(CFBundleIdentifier ${PRODUCT_BUNDLE_IDENTIFIER})
 	DKSET(CFBundleInfoDictionaryVersion 6.0)
+	DKSET(CFBundleLongVersionString 1.0.0)
 	DKSET(CFBundleName ${APP_NAME})
 	DKSET(CFBundlePackageType APPL)
 	DKSET(CFBundleShortVersionString 1.0)
@@ -832,32 +762,21 @@ if(IOSSIM)
 	DKSET(NSMainNibFile "")
 	DKSET(UILaunchStoryboardName dk)
 	DKSET(UIMainStoryboardFile dk.storyboard)
+	set_target_properties(${APP_NAME} PROPERTIES MACOSX_BUNDLE TRUE MACOSX_BUNDLE_INFO_PLIST ${DKPLUGINS}/_DKIMPORT/ios/Info.plist)
+		
+		
+	###################### Add Assets to Bundle #######################
+	add_custom_command(TARGET ${APP_NAME} PRE_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_directory ${DKPROJECT}/assets $<TARGET_FILE_DIR:${APP_NAME}>/assets)
+	add_custom_command(TARGET ${APP_NAME} PRE_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_directory ${DKPROJECT}/icons/ios/icons.iconset $<TARGET_FILE_DIR:${APP_NAME}>/Resources/icons.iconset)
 	
-	set_target_properties(${APP_NAME} PROPERTIES
-        MACOSX_BUNDLE TRUE
-		#MACOSX_BUNDLE_BUNDLE_NAME com.digitalknob.${APP_NAME}
-		#MACOSX_BUNDLE_BUNDLE_VERSION "1.0"
-		#MACOSX_BUNDLE_COPYRIGHT "(C) 2021 DigitalKnob"
-		#MACOSX_BUNDLE_GUI_IDENTIFIER com.digitalknob.${APP_NAME}
-		#MACOSX_BUNDLE_ICON_FILE "logo"
-		#MACOSX_BUNDLE_INFO_STRING "Digitalknob"
-		#MACOSX_BUNDLE_LONG_VERSION_STRING "${APP_NAME} v1.0"
-		#MACOSX_BUNDLE_SHORT_VERSION_STRING "1.0"
-		#MACOSX_FRAMEWORK_IDENTIFIER "com.digitalknob.bundle.${APP_NAME}"
-		#XCODE_ATTRIBUTE_CODE_SIGN_IDENTITY ""
-		MACOSX_BUNDLE_INFO_PLIST ${DKPLUGINS}/_DKIMPORT/ios/Info.plist)
-    
+	
+	############# Link Libraries, Set Startup Project #################
 	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${LIBS})
-	
-	foreach(plugin ${dkdepend_list})
-		if(EXISTS "${DKPLUGINS}/${plugin}/CMakeLists.txt")
-			add_dependencies(${APP_NAME} ${plugin})
-		endif()	
-	endforeach()
-	
-	### POST BUILD ###
-	#CPP_DK_Execute("chmod +x "+app_path+OS+"/Debug/"+APP)
+	set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY XCODE_STARTUP_PROJECT ${APP_NAME})
 endif()
+
 
 #########
 if(LINUX)

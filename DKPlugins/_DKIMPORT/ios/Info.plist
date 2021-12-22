@@ -8,12 +8,16 @@
 	<string>${CFBundleDisplayName}</string>
 	<key>CFBundleExecutable</key>
 	<string>${CFBundleExecutable}</string>
+	<key>CFBundleGetInfoString</key>
+	<string>${CFBundleGetInfoString}</string>
 	<key>CFBundleIconFile</key>
 	<string>${CFBundleIconFile}</string>
 	<key>CFBundleIdentifier</key>
 	<string>${CFBundleIdentifier}</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>${CFBundleInfoDictionaryVersion}</string>
+	<key>CFBundleLongVersionString</key>
+	<string>${CFBundleLongVersionString}</string>
 	<key>CFBundleName</key>
 	<string>${CFBundleName}</string>
 	<key>CFBundlePackageType</key>
