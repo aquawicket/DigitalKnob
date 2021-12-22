@@ -11,7 +11,7 @@
 	<key>CFBundleIconFile</key>
 	<string>${CFBundleIconFile}</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.digitalknob.${PRODUCT_NAME:identifier}</string>
+	<string>${CFBundleIdentifier}</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>${CFBundleInfoDictionaryVersion}</string>
 	<key>CFBundleName</key>

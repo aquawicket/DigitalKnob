@@ -814,8 +814,6 @@ if(IOSSIM)
 	)
 
 	DKSET(PRODUCT_BUNDLE_IDENTIFIER com.digitalknob.${APP_NAME})
-
-
 	DKSET(CFBundleDevelopmentRegion en)
 	DKSET(CFBundleDisplayName ${APP_NAME})
 	DKSET(CFBundleExecutable ${APP_NAME})
