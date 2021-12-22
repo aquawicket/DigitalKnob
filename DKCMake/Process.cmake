@@ -594,7 +594,7 @@ if(MAC)
 	
 	
 	###################### Copy Assets to Bundle #######################
-	add_custom_command(TARGET ${APP_NAME} PRE_BUILD COMMAND ${CMAKE_COMMAND} -E copy_directory ${DKPROJECT}/assets $<TARGET_FILE_DIR:${APP_NAME}>/Contents/Resources)
+	add_custom_command(TARGET ${APP_NAME} PRE_BUILD COMMAND ${CMAKE_COMMAND} -E copy_directory ${DKPROJECT}/assets $<TARGET_FILE_DIR:${APP_NAME}>/../../Contents/Resources)
 	if(EXISTS ${DKPROJECT}/icons/mac/icons.iconset)
 		add_custom_command(TARGET ${APP_NAME} PRE_BUILD COMMAND ${CMAKE_COMMAND} -E copy ${DKPROJECT}/icons/mac/icons.iconset $<TARGET_FILE_DIR:${APP_NAME}>/Resources/icons.iconset)
 	endif()
@@ -666,7 +666,9 @@ if(MAC)
 #			*/
 endif()
 
-##########
+
+
+#################
 if(IOS OR IOSSIM)
 	########################## CREATE ICONS ###############################
 	if(EXISTS ${DKPROJECT}/icons/icon.png)
@@ -760,6 +762,7 @@ if(IOS OR IOSSIM)
 endif()
 
 
+
 #########
 if(LINUX)
 	########################## CREATE ICONS ###############################
@@ -839,6 +842,8 @@ if(LINUX)
 	####################### Do Post Build Stuff #######################
 	#CPP_DK_Execute("chmod +x "+app_path+OS+"/Debug/"+APP)
 endif()
+
+
 
 #############
 if(RASPBERRY)
@@ -926,26 +931,7 @@ endif()
 
 ###########
 if(ANDROID)
-	### PRE BUILD ###
-	if(DEBUG)
-		DKREMOVE(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.backup)
-		DKRENAME(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.apk ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.backup)
-	endif()
-	if(RELEASE)
-		DKREMOVE(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.backup)
-		DKRENAME(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.apk ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.backup)
-	endif()
-	
-	## OS SOURCE FILES ##
-	DKCOPY(${DKPLUGINS}/_DKIMPORT/Android.h ${DKPROJECT}/Android.h FALSE)
-	if(ANDROID_32)
-		DKCOPY(${DKPLUGINS}/_DKIMPORT/android32 ${DKPROJECT}/android32 FALSE)
-	endif()
-	if(ANDROID_64)
-		DKCOPY(${DKPLUGINS}/_DKIMPORT/android64 ${DKPROJECT}/android64 FALSE)
-	endif()
-	
-	## ICONS ##
+	########################## CREATE ICONS ###############################
 	if(IMAGEMAGICK_CONVERT)
 		message(STATUS "Building icons for ${APP_NAME} . . .")
 		dk_makeDirectory(${DKPROJECT}/icons/android/drawable-hdpi)
@@ -962,18 +948,32 @@ if(ANDROID)
 	DKCOPY(${DKPROJECT}/icons/icon.png ${DKPROJECT}/assets/icon.png TRUE)
 	DKCOPY(${DKPROJECT}/icons/icon.png ${DKPROJECT}/${OS}/res/drawable/icon.png TRUE)
 	
-	#DKUPDATE_ANDROID_NAME(${APP_NAME})
-	#DKSET(CMAKE_CXX_FLAGS "-DDKAPP -DHAVE_DK -frtti -fexceptions -std=c++1z")
-	#DKSET(CMAKE_CXX_FLAGS_DEBUG "-DDEBUG -D_DEBUG -g2 -gdwarf-2 -O0")
-	#DKSET(CMAKE_CXX_FLAGS_RELEASE "-DNDEBUG -03")
-	#set(CMAKE_POSITION_INDEPENDENT_CODE TRUE)
+	
+	###################### Backup Executable ###########################
+	if(DEBUG)
+		DKREMOVE(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.backup)
+		DKRENAME(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.apk ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.backup)
+	endif()
+	if(RELEASE)
+		DKREMOVE(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.backup)
+		DKRENAME(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.apk ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.backup)
+	endif()
+	
+	
+	## OS SOURCE FILES ##
+	DKCOPY(${DKPLUGINS}/_DKIMPORT/Android.h ${DKPROJECT}/Android.h FALSE)
+	if(ANDROID_32)
+		DKCOPY(${DKPLUGINS}/_DKIMPORT/android32 ${DKPROJECT}/android32 FALSE)
+	endif()
+	if(ANDROID_64)
+		DKCOPY(${DKPLUGINS}/_DKIMPORT/android64 ${DKPROJECT}/android64 FALSE)
+	endif()
+	
 	
 	set(CMAKE_ANDROID_GUI 1)
-	#add_executable(DKAndroid ${App_SRC})
 	add_library(${APP_NAME} SHARED ${App_SRC})
 	
 	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${LIBS})
-	#target_include_directories(${APP_NAME} PUBLIC ${INCLUDE_DIRECTORIES}) #of ${DKINCLUDES_LIST}
 	target_include_directories(${APP_NAME} PUBLIC ${SDL2}/include)
 
 	foreach(plugin ${dkdepend_list})
