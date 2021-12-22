@@ -40,6 +40,7 @@ Internet Explorer (9.0+) <br>
 [autotools](https://www.gnu.org/software/automake/manual/html_node/Autotools-Introduction.html) <br>
 [AvfAudio](https://developer.apple.com/documentation/avfaudio?language=objc) <br>
 [AVFoundation](https://developer.apple.com/documentation/avfoundation?language=objc) <br>
+[AVKit](https://developer.apple.com/documentation/avkit?language=objc) <br>
 [Boost](https://github.com/boostorg/boost) <br>
 [Boost-android](https://github.com/MysticTreeGames/Boost-for-Android) <br>
 [Boost-iOS](https://github.com/danoli3/ofxOSXBoost) <br>
