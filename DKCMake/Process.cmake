@@ -589,8 +589,8 @@ if(MAC)
 	DKSET(CFBundleVersion 1.0)
 	#DKSET(LSRequiresIPhoneOS NO)
 	DKSET(NSMainNibFile "")
-	DKSET(UILaunchStoryboardName dk)
-	DKSET(UIMainStoryboardFile dk.storyboard)
+	#DKSET(UILaunchStoryboardName dk)
+	#DKSET(UIMainStoryboardFile dk.storyboard)
 	set_target_properties(${APP_NAME} PROPERTIES MACOSX_BUNDLE TRUE MACOSX_BUNDLE_INFO_PLIST ${DKPLUGINS}/_DKIMPORT/ios/Info.plist)
 	
 	
@@ -760,8 +760,8 @@ if(IOS OR IOSSIM)
 	DKSET(CFBundleVersion 1.0)
 	#DKSET(LSRequiresIPhoneOS NO)
 	DKSET(NSMainNibFile "")
-	DKSET(UILaunchStoryboardName dk)
-	DKSET(UIMainStoryboardFile dk.storyboard)
+	#DKSET(UILaunchStoryboardName dk)
+	#DKSET(UIMainStoryboardFile dk.storyboard)
 	set_target_properties(${APP_NAME} PROPERTIES MACOSX_BUNDLE TRUE MACOSX_BUNDLE_INFO_PLIST ${DKPLUGINS}/_DKIMPORT/ios/Info.plist)
 		
 		
