@@ -311,27 +311,8 @@ include_directories(${DKPLUGINS})
 
 ##########
 if(WIN_32)
-	### PRE BUILD ###
-	if(DEBUG)
-		DKREMOVE(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.backup)
-		DKRENAME(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.exe ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.backup)
-	endif()
-	if(RELEASE)
-		DKREMOVE(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.backup)
-		DKRENAME(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.exe ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.backup)
-	endif()
-	
-	## OS SOURCE FILES ##
+	########################## CREATE ICONS ###############################
 	if(EXISTS ${DKPROJECT}/icons/icon.png)
-		DKCOPY(${DKPLUGINS}/_DKIMPORT/resource.h ${DKPROJECT}/resource.h FALSE)
-		DKCOPY(${DKPLUGINS}/_DKIMPORT/resource.rc ${DKPROJECT}/resource.rc FALSE)
-		file(GLOB_RECURSE resources_SRC 
-		${DKPROJECT}/*.manifest
-		${DKPROJECT}/*.rc
-		${DKPROJECT}/icons/windows/*.rc)
-		list(APPEND App_SRC ${resources_SRC})
-
-		## ICONS ##
 		if(IMAGEMAGICK_CONVERT)
 			message(STATUS "Building icons for ${APP_NAME} . . .")
 			dk_makeDirectory(${DKPROJECT}/icons/windows)
@@ -341,6 +322,19 @@ if(WIN_32)
 		endif()
 	endif()
 	
+	
+	###################### Backup Executable ###########################
+	if(DEBUG)
+		DKREMOVE(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.backup)
+		DKRENAME(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.exe ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.backup)
+	endif()
+	if(RELEASE)
+		DKREMOVE(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.backup)
+		DKRENAME(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.exe ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.backup)
+	endif()
+	
+	
+	###################### BACKUP USERDATA ###############################	
 	if(HAVE_DK)
 		## ASSETS ##
 		# Backup files and folders excluded from the package
@@ -356,20 +350,20 @@ if(WIN_32)
 		DKCOPY(${DKPLUGINS}/_DKIMPORT/assets.h ${DKPROJECT}/assets.h TRUE) #required
 	endif()	
 	
-	#add_definitions(-D_USING_V110_SDK71_)
+	
+	####################### Create Executable Target ###################
+	DKCOPY(${DKPLUGINS}/_DKIMPORT/resource.h ${DKPROJECT}/resource.h FALSE)
+	DKCOPY(${DKPLUGINS}/_DKIMPORT/resource.rc ${DKPROJECT}/resource.rc FALSE)
+	file(GLOB_RECURSE resources_SRC 
+		${DKPROJECT}/*.manifest
+		${DKPROJECT}/*.rc
+		${DKPROJECT}/icons/windows/*.rc)
+		list(APPEND App_SRC ${resources_SRC})
 	add_executable(${APP_NAME} WIN32 ${App_SRC})
 	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${LIBS})
 	
-	#TreatWarningsAsErrors
-	#target_compile_options(${APP_NAME} PRIVATE
-	#	$<$<OR:$<CXX_COMPILER_ID:Clang>,$<CXX_COMPILER_ID:AppleClang>,$<CXX_COMPILER_ID:GNU>>: -Wall -Werror>
-	#	$<$<CXX_COMPILER_ID:MSVC>: /W4 /WX>)
-	
-	## TODO: can we use include_external_msproject() to include all of our third party libraries created with CMake?
+	########################## Add Dependencies ########################
 	foreach(plugin ${dkdepend_list})
-		#if(EXISTS "${3rdParty}/${plugin}/CMakeLists.txt")
-		#	add_dependencies(${APP_NAME} ${plugin})
-		#endif()
 		if(EXISTS "${DKPLUGINS}/${plugin}/CMakeLists.txt")
 			add_dependencies(${APP_NAME} ${plugin})
 		endif()	
@@ -434,15 +428,6 @@ if(WIN_64)
 		DKRENAME(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.exe ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.backup)
 	endif()
 	
-	## OS SOURCE FILES ##
-	DKCOPY(${DKPLUGINS}/_DKIMPORT/resource.h ${DKPROJECT}/resource.h FALSE)
-	DKCOPY(${DKPLUGINS}/_DKIMPORT/resource.rc ${DKPROJECT}/resource.rc FALSE)
-	file(GLOB_RECURSE resources_SRC 
-	${DKPROJECT}/*.manifest
-	${DKPROJECT}/*.rc
-	${DKPROJECT}/icons/windows/*.rc)
-	list(APPEND App_SRC ${resources_SRC})
-	
 	## ICONS ##
 	if(IMAGEMAGICK_CONVERT)
 		message(STATUS "Building icons for ${APP_NAME} . . .")
@@ -452,10 +437,8 @@ if(WIN_64)
 		DKEXECUTE_PROCESS(COMMAND ${IMAGEMAGICK_CONVERT} ${DKPROJECT}/icons/icon.png -define icon:auto-resize=16 ${DKPROJECT}/assets/favicon.ico)
 	endif()
 	
-	## ASSETS ##
-	# Backup files and folders excluded from the package
+	###################### BACKUP USERDATA ###############################
 	DKCOPY(${DKPROJECT}/assets/USER ${DKPROJECT}/Backup/USER TRUE)
-	# Remove excluded files and folders before packaging
 	DKREMOVE(${DKPROJECT}/assets/USER)
 	#Compress the assets, they will be included by resource.rc
 	message(STATUS "Creating assets.zip . . .")
@@ -466,15 +449,25 @@ if(WIN_64)
 	#dummy assets.h file, or the builder wil complain about assets.h missing
 	DKCOPY(${DKPLUGINS}/_DKIMPORT/assets.h ${DKPROJECT}/assets.h TRUE)
 		
-	add_definitions(-D_USING_V110_SDK71_)
+	####################### Create Executable Target ###################
+	DKCOPY(${DKPLUGINS}/_DKIMPORT/resource.h ${DKPROJECT}/resource.h FALSE)
+	DKCOPY(${DKPLUGINS}/_DKIMPORT/resource.rc ${DKPROJECT}/resource.rc FALSE)
+	file(GLOB_RECURSE resources_SRC 
+		${DKPROJECT}/*.manifest
+		${DKPROJECT}/*.rc
+		${DKPROJECT}/icons/windows/*.rc)
+	list(APPEND App_SRC ${resources_SRC})
 	add_executable(${APP_NAME} WIN32 ${App_SRC})
-	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${LIBS})
-	
+
+
+	########################## Add Dependencies ########################
 	foreach(plugin ${dkdepend_list})
 		if(EXISTS "${DKPLUGINS}/${plugin}/CMakeLists.txt")
 			add_dependencies(${APP_NAME} ${plugin})
 		endif()	
 	endforeach()
+	
+	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${LIBS})
 	
 	##set_source_files_properties(${DIGITALKNOB}/stdafx.cpp PROPERTIES COMPILE_FLAGS "/Ycstdafx.h")
 	
@@ -556,8 +549,8 @@ if(MAC)
 	####################### Create Executable Target ###################
 	#SET(CMAKE_OSX_ARCHITECTURES "x86_64")
 	file(GLOB_RECURSE m_SRC 
-	${DKPROJECT}/*.m
-	${DKPROJECT}/*.mm)
+		${DKPROJECT}/*.m
+		${DKPROJECT}/*.mm)
 	list(APPEND App_SRC ${m_SRC})
 	add_executable(${APP_NAME} MACOSX_BUNDLE ${App_SRC})
 	
@@ -591,7 +584,7 @@ if(MAC)
 	DKSET(NSMainNibFile "")
 	#DKSET(UILaunchStoryboardName dk)
 	#DKSET(UIMainStoryboardFile dk.storyboard)
-	set_target_properties(${APP_NAME} PROPERTIES MACOSX_BUNDLE TRUE MACOSX_BUNDLE_INFO_PLIST ${DKPLUGINS}/_DKIMPORT/ios/Info.plist)
+	set_target_properties(${APP_NAME} PROPERTIES MACOSX_BUNDLE TRUE MACOSX_BUNDLE_INFO_PLIST ${DKPLUGINS}/_DKIMPORT/mac/Info.plist)
 	
 	
 	###################### Add Assets to Bundle #######################
@@ -610,45 +603,27 @@ if(MAC)
 	# Copy the CEF framework into the app bundle
 	if(EXISTS ${CEF})
 		message(STATUS "Adding Chromium Embedded Framework.framework to bundle . . .")
-		add_custom_command(
-			TARGET ${APP_NAME}
-			POST_BUILD
-			COMMAND ${CMAKE_COMMAND} -E copy_directory
-					"${CEF}/$<CONFIG>/Chromium Embedded Framework.framework"
-					"$<TARGET_FILE_DIR:${APP_NAME}>/../Frameworks/Chromium Embedded Framework.framework"
-	)
+		add_custom_command(TARGET ${APP_NAME} POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy_directory "${CEF}/$<CONFIG>/Chromium Embedded Framework.framework" "$<TARGET_FILE_DIR:${APP_NAME}>/../Frameworks/Chromium Embedded Framework.framework")
 	endif()
 	
 	# Copy the DKCefChild into the app bundle
 	if(EXISTS "${DKPLUGINS}/DKCefChild/${OS}/Release/DKCefChild.app")
 		message(STATUS "Adding Chromium Embedded Framework.framework to bundle . . .")
-		add_custom_command(
-			TARGET ${APP_NAME}
-			POST_BUILD
-			COMMAND ${CMAKE_COMMAND} -E copy
-				"${DKPLUGINS}/DKCefChild/${OS}/$<CONFIG>/DKCefChild.app"
-				"$<TARGET_FILE_DIR:${APP_NAME}>/../Frameworks/${APP_NAME} Helper.app"
-		)
+		add_custom_command(TARGET ${APP_NAME} POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy "${DKPLUGINS}/DKCefChild/${OS}/$<CONFIG>/DKCefChild.app" "$<TARGET_FILE_DIR:${APP_NAME}>/../Frameworks/${APP_NAME} Helper.app")
 	endif()
 	
-	# Make bundle run in Terminal
+	# Make bundle open with Terminal
 	# https://github.com/pyinstaller/pyinstaller/issues/5154#issuecomment-690646012
 	if(true)
 		message(STATUS "Making bundle app run in terminal on double-click . . .")
 		set(TERMINAL_SCRIPT 
 			"\#!/bin/bash\n"
 			"dir=$(cd \"$( dirname \"\${0}\")\" && pwd )\n"
-			"Open -a \"Terminal\" \"\${dir}/${APP_NAME}\"" #${APP_NAME}_bin
+			"Open -a \"Terminal\" \"\${dir}/${APP_NAME}\""
 		)
 		file(WRITE ${DKPROJECT}/${OS}/wrapper ${TERMINAL_SCRIPT}) #${APP_NAME}
 		DKEXECUTE_PROCESS(chmod +x ${DKPROJECT}/${OS}/wrapper WORKING_DIRECTORY ${DKPROJECT}/${OS})
-		add_custom_command(
-			TARGET ${APP_NAME}
-			POST_BUILD
-			COMMAND ${CMAKE_COMMAND} -E copy
-					"${DKPROJECT}/${OS}/wrapper"
-					"$<TARGET_FILE_DIR:${APP_NAME}>/wrapper"
-		)
+		add_custom_command(TARGET ${APP_NAME} POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy "${DKPROJECT}/${OS}/wrapper" "$<TARGET_FILE_DIR:${APP_NAME}>/wrapper")
 	endif()
 	
 	#CPP_DK_Execute("chmod +x "+app_path+OS+"/Debug/"+APP)
