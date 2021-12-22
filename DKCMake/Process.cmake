@@ -795,13 +795,13 @@ if(IOSSIM)
 	DKCOPY(${DKPROJECT}/Backup/ ${DKPROJECT}/assets/ FALSE)
 	DKREMOVE(${DKPROJECT}/Backup)
 	
-	if(NOT RES_FILES)
-		DKSET(RES_FILES "")
-	endif()
-	file(GLOB_RECURSE RES_ASSETS "${DKPROJECT}/icons/ios/*")
-	list(APPEND RES_FILES ${RES_ICONS})
-	file(GLOB_RECURSE RES_ASSETS "${DKPROJECT}/assets/*")
-	list(APPEND RES_FILES ${RES_ASSETS})
+	#if(NOT RES_FILES)
+	#	DKSET(RES_FILES "")
+	#endif()
+	#file(GLOB_RECURSE RES_ASSETS "${DKPROJECT}/icons/ios/*")
+	#list(APPEND RES_FILES ${RES_ICONS})
+	#file(GLOB_RECURSE RES_ASSETS "${DKPROJECT}/assets/*")
+	#list(APPEND RES_FILES ${RES_ASSETS})
 	
 	if(HAVE_DK)
 		list(APPEND App_SRC ${DKPLUGINS}/DK/DKiOS.mm)
@@ -810,7 +810,7 @@ if(IOSSIM)
 	
 	add_custom_command(TARGET ${APP_NAME} PRE_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy_directory 
-             ${DKPROJECT}/Resources $<TARGET_FILE_DIR:${APP_NAME}>
+             ${DKPROJECT}/assets $<TARGET_FILE_DIR:${APP_NAME}>
 	)
 
 	set_target_properties(${APP_NAME} PROPERTIES
@@ -827,7 +827,6 @@ if(IOSSIM)
 		PRODUCT_BUNDLE_IDENTIFIER com.digitalknob.${APP_NAME}
 		PRODUCT_NAME com.digitalknob.${APP_NAME}
 		XCODE_ATTRIBUTE_CODE_SIGN_IDENTITY "")
-		#RESOURCE ${RES_SOURCES}
 		#MACOSX_BUNDLE_INFO_PLIST ${DKPLUGINS}/_DKIMPORT/ios/Info.plist
     
 	#set_xcode_property(PRODUCT_BUNDLE_IDENTIFIER com.digitalknob.${APP_NAME})
