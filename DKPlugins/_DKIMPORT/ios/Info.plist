@@ -5,29 +5,31 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>${CFBundleDevelopmentRegion}</string>
 	<key>CFBundleDisplayName</key>
-	<string>${PRODUCT_NAME}</string>
+	<string>${CFBundleDisplayName}</string>
 	<key>CFBundleExecutable</key>
-	<string>${PRODUCT_NAME}</string>
+	<string>${CFBundleExecutable}</string>
 	<key>CFBundleIconFile</key>
-	<string>icon.png</string>
+	<string>${CFBundleIconFile}</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.digitalknob.${PRODUCT_NAME}</string>
+	<string>${CFBundleIdentifier}</string>
 	<key>CFBundleInfoDictionaryVersion</key>
-	<string>6.0</string>
+	<string>${CFBundleInfoDictionaryVersion}</string>
 	<key>CFBundleName</key>
-	<string>${PRODUCT_NAME}</string>
-	<key>CFBundleShortVersionString</key>
-	<string>1.0.0</string>
+	<string>${CFBundleName}</string>
 	<key>CFBundlePackageType</key>
-	<string>APPL</string>
+	<string>${CFBundlePackageType}</string>
+	<key>CFBundleShortVersionString</key>
+	<string>${CFBundleShortVersionString}</string>
 	<key>CFBundleSignature</key>
-	<string>????</string>
+	<string>${CFBundleSignature}</string>
 	<key>CFBundleVersion</key>
-	<string>1.0</string>
+	<string>${CFBundleVersion}</string>
 	<key>NSMainNibFile</key>
-	<string></string>
+	<string>${NSMainNibFile}</string>
 	<key>UILaunchStoryboardName</key>
-	<string>dk</string>
+	<string>${UILaunchStoryboardName}</string>
+	<key>UIMainStoryboardFile</key>
+	<string>${UIMainStoryboardFile}</string>
 	<key>UISupportedInterfaceOrientations</key>
 	<array/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
