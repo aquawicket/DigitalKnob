@@ -591,7 +591,10 @@ if(MAC)
 	DKSET(NSMainNibFile "")
 	#DKSET(UILaunchStoryboardName dk)
 	#DKSET(UIMainStoryboardFile dk.storyboard)
-	set_target_properties(${APP_NAME} PROPERTIES MACOSX_BUNDLE TRUE MACOSX_BUNDLE_INFO_PLIST ${DKPLUGINS}/_DKIMPORT/mac/Info.plist)
+	set_target_properties(${APP_NAME} PROPERTIES 
+		MACOSX_BUNDLE TRUE 
+		XCODE_ATTRIBUTE_CODE_SIGN_IDENTITY ""
+		MACOSX_BUNDLE_INFO_PLIST ${DKPLUGINS}/_DKIMPORT/mac/Info.plist)
 	
 	
 	###################### Copy Assets to Bundle #######################
