@@ -810,7 +810,7 @@ if(IOSSIM)
 	
 	add_custom_command(TARGET ${APP_NAME} PRE_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy_directory 
-             ${DKPROJECT}/assets $<TARGET_FILE_DIR:${APP_NAME}>
+             ${DKPROJECT}/assets $<TARGET_FILE_DIR:${APP_NAME}>/assets
 	)
 
 	set_target_properties(${APP_NAME} PROPERTIES
