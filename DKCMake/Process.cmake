@@ -594,9 +594,9 @@ if(MAC)
 	
 	
 	###################### Copy Assets to Bundle #######################
-	add_custom_command(TARGET ${APP_NAME} PRE_BUILDCOMMAND ${CMAKE_COMMAND} -E copy_directory ${DKPROJECT}/assets $<TARGET_FILE_DIR:${APP_NAME}>/Contents/Resources)
+	add_custom_command(TARGET ${APP_NAME} PRE_BUILD COMMAND ${CMAKE_COMMAND} -E copy_directory ${DKPROJECT}/assets $<TARGET_FILE_DIR:${APP_NAME}>/Contents/Resources)
 	if(EXISTS ${DKPROJECT}/icons/mac/icons.iconset)
-		add_custom_command(TARGET ${APP_NAME} PRE_BUILD COMMAND ${CMAKE_COMMAND} -E copy_directory ${DKPROJECT}/icons/mac/icons.iconset $<TARGET_FILE_DIR:${APP_NAME}>/Resources/icons.iconset)
+		add_custom_command(TARGET ${APP_NAME} PRE_BUILD COMMAND ${CMAKE_COMMAND} -E copy ${DKPROJECT}/icons/mac/icons.iconset $<TARGET_FILE_DIR:${APP_NAME}>/Resources/icons.iconset)
 	endif()
 	
 	
@@ -750,7 +750,7 @@ if(IOS OR IOSSIM)
 	###################### Add Assets to Bundle #######################
 	add_custom_command(TARGET ${APP_NAME} PRE_BUILD COMMAND ${CMAKE_COMMAND} -E copy_directory ${DKPROJECT}/assets $<TARGET_FILE_DIR:${APP_NAME}>/assets)
 	if(EXISTS ${DKPROJECT}/icons/mac/icons.iconset)
-		add_custom_command(TARGET ${APP_NAME} PRE_BUILD COMMAND ${CMAKE_COMMAND} -E copy_directory ${DKPROJECT}/icons/ios/icons.iconset $<TARGET_FILE_DIR:${APP_NAME}>/Resources/icons.iconset)
+		add_custom_command(TARGET ${APP_NAME} PRE_BUILD COMMAND ${CMAKE_COMMAND} -E copy ${DKPROJECT}/icons/ios/icons.iconset $<TARGET_FILE_DIR:${APP_NAME}>/Resources/icons.iconset)
 	endif()
 	
 	
@@ -762,17 +762,11 @@ endif()
 
 #########
 if(LINUX)
-	### PRE BUILD ###
-	if(DEBUG)
-		DKRENAME(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME} ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.backup)
-	elseif(RELEASE)
-		DKRENAME(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME} ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.backup)
-	endif()
-	
-	## ICONS ##
+	########################## CREATE ICONS ###############################
 	DKCOPY(${DKPROJECT}/icons/icon.png ${DKPROJECT}/assets/icon.png TRUE)
-
-	## ASSETS ##
+	
+	
+	############### BACKUP USERDATA / inject assets #######################
 	if(false)
 		# backup files not going in the package
 		DKCOPY(${DKPROJECT}/assets/USER ${DKPROJECT}/Backup/USER TRUE)
@@ -787,24 +781,34 @@ if(LINUX)
 		DKREMOVE(${DKPROJECT}/Backup)
 	endif()
 	
+	
+	###################### Backup Executable ###########################
 	if(DEBUG)
-		add_definitions(-DDEBUG)
-		add_executable(${APP_NAME} ${App_SRC})
-		target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${LIBS})
-		#set_target_properties(${APP_NAME} PROPERTIES DEBUG_POSTFIX d)
+		DKCOPY(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME} ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.backup TRUE)
 	elseif(RELEASE)
-		add_executable(${APP_NAME} ${App_SRC})
+		DKCOPY(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME} ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.backup TRUE)
+	endif()
+	
+	
+	####################### Create Executable Target ###################
+	add_executable(${APP_NAME} ${App_SRC})
+	if(DEBUG)
+		target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${LIBS})
+	elseif(RELEASE)
 		target_link_libraries(${APP_NAME} ${RELEASE_LIBS} ${LIBS})
 	endif()
 	
+	
+	########################## Add Dependencies ########################
 	foreach(plugin ${dkdepend_list})
 		if(EXISTS "${DKPLUGINS}/${plugin}/CMakeLists.txt")
 			add_dependencies(${APP_NAME} ${plugin})
 		endif()	
 	endforeach()
 	
+	
+	############# Create .desktop Icon Files and Install ##############
 	if(DEBUG)
-		# Create .desktop file for Debug
 		DKSET(DESKTOP_FILE
 			"[Desktop Entry]\n"
 			"Encoding=UTF-8\n"
@@ -816,7 +820,6 @@ if(LINUX)
 			"Icon=${DKPROJECT}/icons/icon.png\n")
 		file(WRITE ${DKPROJECT}/${OS}/Debug/${APP_NAME}.desktop ${DESKTOP_FILE})
 	elseif(RELEASE)
-		# Create .desktop file for Release
 		DKSET(DESKTOP_FILE
 			"[Desktop Entry]\n"
 			"Encoding=UTF-8\n"
@@ -832,23 +835,18 @@ if(LINUX)
 		DKEXECUTE_PROCESS(desktop-file-install --dir=/home/$ENV{USER}/.local/share/applications ${DKPROJECT}/${OS}/Release/${APP_NAME}.desktop WORKING_DIRECTORY ${DKPROJECT}/${OS}/Release)
 	endif()
 	
-	### POST BUILD ###
+	
+	####################### Do Post Build Stuff #######################
 	#CPP_DK_Execute("chmod +x "+app_path+OS+"/Debug/"+APP)
 endif()
 
 #############
 if(RASPBERRY)
-	### PRE BUILD ###
-	if(DEBUG)
-		DKRENAME(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME} ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.backup)
-	elseif(RELEASE)
-		DKRENAME(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME} ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.backup)
-	endif()
-	
-	## ICONS ##
+	########################## CREATE ICONS ###############################
 	DKCOPY(${DKPROJECT}/icons/icon.png ${DKPROJECT}/assets/icon.png TRUE)
 
-	## ASSETS ##
+
+	############### BACKUP USERDATA / inject assets #######################
 	if(false)
 		# backup files not going in the package
 		DKCOPY(${DKPROJECT}/assets/USER ${DKPROJECT}/Backup/USER TRUE)
@@ -863,21 +861,33 @@ if(RASPBERRY)
 		DKREMOVE(${DKPROJECT}/Backup)
 	endif()
 	
+	
+	###################### Backup Executable ###########################
 	if(DEBUG)
-		add_definitions(-DDEBUG)
-		add_executable(${APP_NAME} ${App_SRC})
+		DKRENAME(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME} ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.backup)
+	elseif(RELEASE)
+		DKRENAME(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME} ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.backup)
+	endif()
+	
+	
+	####################### Create Executable Target ###################
+	add_executable(${APP_NAME} ${App_SRC})
+	if(DEBUG)
 		target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${LIBS})
 	elseif(RELEASE)
-		add_executable(${APP_NAME} ${App_SRC})
 		target_link_libraries(${APP_NAME} ${RELEASE_LIBS} ${LIBS})
 	endif()
 
+
+	########################## Add Dependencies ########################
 	foreach(plugin ${dkdepend_list})
 		if(EXISTS "${DKPLUGINS}/${plugin}/CMakeLists.txt")
 			add_dependencies(${APP_NAME} ${plugin})
 		endif()	
 	endforeach()
 	
+	
+	############# Create .desktop Icon Files and Install ##############
 	if(DEBUG)
 	# Create .desktop file for Debug
 	DKSET(DESKTOP_FILE
@@ -908,7 +918,9 @@ if(RASPBERRY)
 	if(RELEASE)
 		DKEXECUTE_PROCESS(desktop-file-install --dir=/home/$ENV{USER}/.local/share/applications ${DKPROJECT}/${OS}/Release/${APP_NAME}.desktop WORKING_DIRECTORY ${DKPROJECT}/${OS}/Release)
 	endif()
-	### POST BUILD ###
+	
+	
+	####################### Do Post Build Stuff #######################
 	#CPP_DK_Execute("chmod +x "+app_path+OS+"/Debug/"+APP)
 endif()
 
