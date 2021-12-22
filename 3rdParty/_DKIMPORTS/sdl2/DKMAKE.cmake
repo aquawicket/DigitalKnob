@@ -242,4 +242,4 @@ if(SDL2-static)
 endif()
 if(sdl2_SDL2main)
 	ANDROID_VS(${SDL2_NAME} SDL2.sln SDL2main)
-endif
+endif()
