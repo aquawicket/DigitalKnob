@@ -105,7 +105,7 @@ foreach(plugin ${dkdepend_list})
 		## Prebuild DKPlugins switch
 		## TODO: set this to work when the library files are absent.
 		## If the library files already exist, we can skip this. 
-		if(1)
+		#if(1)
 			message(STATIC "Prebuilding ${plugin}")
 			Wait()
 			DKSET(CURRENT_DIR ${plugin_path}/${OS})
@@ -260,7 +260,7 @@ foreach(plugin ${dkdepend_list})
 					message(FATAL_ERROR " ")
 				endif()
 			endforeach()
-		endif()
+		#endif()
 		
 	endif()
 endforeach()
