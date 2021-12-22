@@ -9,7 +9,7 @@
 	<key>CFBundleExecutable</key>
 	<string>${PRODUCT_NAME}</string>
 	<key>CFBundleIconFile</key>
-	<string></string>
+	<string>icon.png</string>
 	<key>CFBundleIdentifier</key>
 	<string>com.digitalknob.$(PRODUCT_NAME}</string>
 	<key>CFBundleInfoDictionaryVersion</key>
@@ -27,7 +27,7 @@
 	<key>NSMainNibFile</key>
 	<string></string>
 	<key>UILaunchStoryboardName</key>
-	<string>iOS Launch Screen</string>
+	<string>dk</string>
 	<key>UISupportedInterfaceOrientations</key>
 	<array/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
