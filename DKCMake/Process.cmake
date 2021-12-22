@@ -321,20 +321,9 @@ if(WIN_32)
 			DKEXECUTE_PROCESS(COMMAND ${IMAGEMAGICK_CONVERT} ${DKPROJECT}/icons/icon.png -define icon:auto-resize=16 ${DKPROJECT}/assets/favicon.ico)
 		endif()
 	endif()
+
 	
-	
-	###################### Backup Executable ###########################
-	if(DEBUG)
-		DKREMOVE(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.backup)
-		DKRENAME(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.exe ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.backup)
-	endif()
-	if(RELEASE)
-		DKREMOVE(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.backup)
-		DKRENAME(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.exe ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.backup)
-	endif()
-	
-	
-	###################### BACKUP USERDATA ###############################	
+	################# BACKUP USERDATA / INJECT ASSETS #####################	
 	if(HAVE_DK)
 		## ASSETS ##
 		# Backup files and folders excluded from the package
@@ -349,6 +338,15 @@ if(WIN_32)
 		DKREMOVE(${DKPROJECT}/Backup)
 		DKCOPY(${DKPLUGINS}/_DKIMPORT/assets.h ${DKPROJECT}/assets.h TRUE) #required
 	endif()	
+	
+	
+	###################### Backup Executable ###########################
+	if(DEBUG)
+		DKCOPY(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.exe ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.backup TRUE)
+	endif()
+	if(RELEASE)
+		DKCOPY(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.exe ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.backup TRUE)
+	endif()
 	
 	
 	####################### Create Executable Target ###################
@@ -420,15 +418,7 @@ endif(WIN_32)
 	
 ##########
 if(WIN_64)
-	### PRE BUILD ###
-	if(DEBUG)
-		DKRENAME(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.exe ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.backup)
-	endif()
-	if(RELEASE)
-		DKRENAME(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.exe ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.backup)
-	endif()
-	
-	## ICONS ##
+	########################## CREATE ICONS ###############################
 	if(IMAGEMAGICK_CONVERT)
 		message(STATUS "Building icons for ${APP_NAME} . . .")
 		dk_makeDirectory(${DKPROJECT}/icons/windows)
@@ -437,7 +427,8 @@ if(WIN_64)
 		DKEXECUTE_PROCESS(COMMAND ${IMAGEMAGICK_CONVERT} ${DKPROJECT}/icons/icon.png -define icon:auto-resize=16 ${DKPROJECT}/assets/favicon.ico)
 	endif()
 	
-	###################### BACKUP USERDATA ###############################
+		
+	################# BACKUP USERDATA / INJECT ASSETS #####################	
 	DKCOPY(${DKPROJECT}/assets/USER ${DKPROJECT}/Backup/USER TRUE)
 	DKREMOVE(${DKPROJECT}/assets/USER)
 	#Compress the assets, they will be included by resource.rc
@@ -448,8 +439,19 @@ if(WIN_64)
 	DKREMOVE(${DKPROJECT}/Backup)
 	#dummy assets.h file, or the builder wil complain about assets.h missing
 	DKCOPY(${DKPLUGINS}/_DKIMPORT/assets.h ${DKPROJECT}/assets.h TRUE)
-		
+	
+
+	###################### Backup Executable ###########################
+	if(DEBUG)
+		DKRENAME(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.exe ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.backup)
+	endif()
+	if(RELEASE)
+		DKRENAME(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.exe ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.backup)
+	endif()
+	
+	
 	####################### Create Executable Target ###################
+	##set_source_files_properties(${DIGITALKNOB}/stdafx.cpp PROPERTIES COMPILE_FLAGS "/Ycstdafx.h")
 	DKCOPY(${DKPLUGINS}/_DKIMPORT/resource.h ${DKPROJECT}/resource.h FALSE)
 	DKCOPY(${DKPLUGINS}/_DKIMPORT/resource.rc ${DKPROJECT}/resource.rc FALSE)
 	file(GLOB_RECURSE resources_SRC 
@@ -467,9 +469,9 @@ if(WIN_64)
 		endif()	
 	endforeach()
 	
-	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${LIBS})
 	
-	##set_source_files_properties(${DIGITALKNOB}/stdafx.cpp PROPERTIES COMPILE_FLAGS "/Ycstdafx.h")
+	############# Link Libraries, Set Startup Project #################
+	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${LIBS})
 	
 	list(APPEND DEBUG_LINK_FLAGS /MANIFEST:NO)
 	list(APPEND DEBUG_LINK_FLAGS /MANIFESTUAC:NO)
@@ -493,7 +495,8 @@ if(WIN_64)
 	set_target_properties(${APP_NAME} PROPERTIES LINK_FLAGS_DEBUG ${DEBUG_FLAGS} LINK_FLAGS_RELEASE ${RELEASE_FLAGS})
 	set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT ${APP_NAME})
 	
-	### POST BUILD ###
+	
+	####################### Do Post Build Stuff #######################
 	#CPP_DKFile_Copy(app_path+OS+"/Release/"+APP+".pdb", app_path+"assets/"+APP+".pdb", true)
 	#CPP_DK_Execute(DIGITALKNOB+"DK/3rdParty/upx-3.95-win64/upx.exe -9 -v "+app_path+OS+"/Release/"+APP+".exe")
 endif(WIN_64)
@@ -518,7 +521,8 @@ if(MAC)
 		DKEXECUTE_PROCESS(iconutil -c icns -o ${DKPROJECT}/icons/mac/logo.icns ${DKPROJECT}/icons/mac/icons.iconset WORKING_DIRECTORY ${DIGITALKNOB})
 	endif()
 	
-	###################### BACKUP USERDATA ###############################
+	
+	################# BACKUP USERDATA / INJECT ASSETS #####################	
 	# Backup files and folders excluded from the package
 	DKCOPY(${DKPROJECT}/assets/USER ${DKPROJECT}/Backup/USER TRUE)
 	# Remove excluded files and folders before packaging
@@ -538,6 +542,7 @@ if(MAC)
 	DKCOPY(${DKPROJECT}/Backup/ ${DKPROJECT}/assets/ FALSE)
 	DKREMOVE(${DKPROJECT}/Backup)
 	
+	
 	###################### Backup Executable ###########################
 	if(DEBUG)
 		DKRENAME(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.backup)
@@ -553,6 +558,7 @@ if(MAC)
 		${DKPROJECT}/*.mm)
 	list(APPEND App_SRC ${m_SRC})
 	add_executable(${APP_NAME} MACOSX_BUNDLE ${App_SRC})
+	
 	
 	########################## Add Dependencies ########################
 	foreach(plugin ${dkdepend_list})
@@ -587,8 +593,8 @@ if(MAC)
 	set_target_properties(${APP_NAME} PROPERTIES MACOSX_BUNDLE TRUE MACOSX_BUNDLE_INFO_PLIST ${DKPLUGINS}/_DKIMPORT/mac/Info.plist)
 	
 	
-	###################### Add Assets to Bundle #######################
-	add_custom_command(TARGET ${APP_NAME} PRE_BUILDCOMMAND ${CMAKE_COMMAND} -E copy_directory ${DKPROJECT}/assets $<TARGET_FILE_DIR:${APP_NAME}>/Resources)
+	###################### Copy Assets to Bundle #######################
+	add_custom_command(TARGET ${APP_NAME} PRE_BUILDCOMMAND ${CMAKE_COMMAND} -E copy_directory ${DKPROJECT}/assets $<TARGET_FILE_DIR:${APP_NAME}>/Contents/Resources)
 	if(EXISTS ${DKPROJECT}/icons/mac/icons.iconset)
 		add_custom_command(TARGET ${APP_NAME} PRE_BUILD COMMAND ${CMAKE_COMMAND} -E copy_directory ${DKPROJECT}/icons/mac/icons.iconset $<TARGET_FILE_DIR:${APP_NAME}>/Resources/icons.iconset)
 	endif()
