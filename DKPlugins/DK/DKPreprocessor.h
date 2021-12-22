@@ -32,82 +32,82 @@
 #endif
 
 // https://web.archive.org/web/20191012035921/http://nadeausoftware.com/articles/2012/01/c_c_tip_how_use_compiler_predefined_macros_detect_operating_system
-#ifdef _WIN32
+#if _WIN32
 #	ifndef WIN
-#		define WIN
+#		define WIN 1
+#	endif
+#   ifndef WIN32
+#		define WIN32 1
+#	endif
+#	if DKBITS == 32
+#		define DKOS "WIN32"
+#		define DKOS_VERSION "UNKNOWN"
 #	endif
 #	if DKBITS == 64
 #		ifndef WIN64
-#			define WIN64
+#			define WIN64 1
 #		endif
 #		define DKOS "WIN64"
-#		define DKOS_VERSION "UNKNOWN"
-#	endif
-#	if DKBITS == 32
-#		ifndef WIN32
-#			define WIN32
-#		endif
-#		define DKOS "WIN32"
 #		define DKOS_VERSION "UNKNOWN"
 #	endif
 #elif __APPLE__ && __MACH__
 #	include <TargetConditionals.h>
 #	if TARGET_IPHONE_SIMULATOR == 1
 #		ifndef IOS
-#			define IOS
+#			define IOS 1
 #		endif
 #		if DKBITS == 64
 #			ifndef IOS64
-#				define IOS64
+#				define IOS64 1
 #			endif
 #			ifndef IOSSIM64
-#				define IOSSIM64
+#				define IOSSIM64 1
 #			endif
 #			define DKOS "IOSSIM64"
 #			define DKOS_VERSION "UNKNOWN"
 #		endif
 #		if DKBITS == 32
 #			ifndef IOS32
-#				define IOS32
+#				define IOS32 1
 #			endif
 #			ifndef IOSSIM32
-#				define IOSSIM32
+#				define IOSSIM32 1
 #			endif
 #			define DKOS "IOSSIM32"
 #			define DKOS_VERSION "UNKNOWN"
 #		endif
 #	elif TARGET_OS_IPHONE == 1
 #		ifndef IOS
-#			define IOS
+#			define IOS 1
 #		endif
 #		if DKBITS == 64
 #			ifndef IOS64
-#				define IOS64
+#				define IOS64 1
 #			endif
 #			define DKOS "IOS64"
 #			define DKOS_VERSION "UNKNOWN"
 #		endif
 #		if DKBITS == 32
 #			ifndef IOS32
-#				define IOS32
+#				define IOS32 1
 #			endif
 #			define DKOS "IOS32"
 #			define DKOS_VERSION "UNKNOWN"
 #		endif
 #	elif TARGET_OS_MAC == 1
 #		ifndef MAC
-#			define MAC
+#			define MAC 1
 #		endif
 #		if DKBITS == 64
 #			ifndef MAC64
-#				define MAC64
+#				define MAC64 1
 #			endif
 #			define DKOS "MAC64"
 #			define DKOS_VERSION "UNKNOWN"
 #		endif
 #		if DKBITS == 32
 #			ifndef MAC32
-#				define MAC32
+#				define MAC32 1
 #			endif
 #			define DKOS "MAC32"
 #			define DKOS_VERSION "UNKNOWN"
@@ -116,36 +116,36 @@
 #	endif
 #elif __ANDROID__
 #	ifndef ANDROID
-#		define ANDROID
+#		define ANDROID 1
 #	endif
 #	if DKBITS == 64
 #		ifndef ANDROID64
-#			define ANDROID64
+#			define ANDROID64 1
 #		endif
 #		define DKOS "ANDROID64"
 #		define DKOS_VERSION "UNKNOWN" //TOSTRING(__ANDROID_API__)  FIXME: defining from another macro
 #	endif
 #	if DKBITS == 32
 #		ifndef ANDROID32
-#			define ANDROID32
+#			define ANDROID32 1
 #		endif
 #		define DKOS "ANDROID32"
 #		define DKOS_VERSION "UNKNOWN" //TOSTRING(__ANDROID_API__)  FIXME: defining from another macro
 #	endif
 #elif __linux__
 #	ifndef LINUX
-#		define LINUX
+#		define LINUX 1
 #	endif
 #	if DKBITS == 64
 #		ifndef LINUX64
-#			define LINUX64
+#			define LINUX64 1
 #		endif
 #		define DKOS "LINUX64"
 #		define DKOS_VERSION "UNKNOWN"
 #	endif
 #	if DKBITS == 32
 #		ifndef LINUX32
-#			define LINUX32
+#			define LINUX32 1
 #		endif
 #		define DKOS "LINUX32"
 #		define DKOS_VERSION "UNKNOWN"
