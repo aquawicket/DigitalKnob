@@ -960,7 +960,7 @@ if(ANDROID)
 	endif()
 	
 	
-	## OS SOURCE FILES ##
+	####################### Create Executable Target ###################
 	DKCOPY(${DKPLUGINS}/_DKIMPORT/Android.h ${DKPROJECT}/Android.h FALSE)
 	if(ANDROID_32)
 		DKCOPY(${DKPLUGINS}/_DKIMPORT/android32 ${DKPROJECT}/android32 FALSE)
@@ -968,23 +968,24 @@ if(ANDROID)
 	if(ANDROID_64)
 		DKCOPY(${DKPLUGINS}/_DKIMPORT/android64 ${DKPROJECT}/android64 FALSE)
 	endif()
-	
-	
 	set(CMAKE_ANDROID_GUI 1)
 	add_library(${APP_NAME} SHARED ${App_SRC})
 	
-	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${LIBS})
-	target_include_directories(${APP_NAME} PUBLIC ${SDL2}/include)
-
+	
+	########################## Add Dependencies ########################
 	foreach(plugin ${dkdepend_list})
 		if(EXISTS "${DKPLUGINS}/${plugin}/CMakeLists.txt")
 			add_dependencies(${APP_NAME} ${plugin})
 		endif()	
 	endforeach()
-
+	
+	######################### Link Libraries ###########################
+	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${LIBS})
+	target_include_directories(${APP_NAME} PUBLIC ${SDL2}/include)
 	#include_external_msproject(DKGradle ${DKPROJECT}/${OS}/DKGradle.androidproj)	
 	
-	### POST BUILD ###
+	
+	####################### Do Post Build Stuff #######################
 endif()
 
 DKBUILD_LOG("\n\n")
