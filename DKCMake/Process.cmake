@@ -813,13 +813,15 @@ if(IOSSIM)
              ${DKPROJECT}/assets $<TARGET_FILE_DIR:${APP_NAME}>/assets
 	)
 
-	
+	DKSET(PRODUCT_BUNDLE_IDENTIFIER com.digitalknob.${APP_NAME})
+
+
 	DKSET(CFBundleDevelopmentRegion en)
 	DKSET(CFBundleDisplayName ${APP_NAME})
 	DKSET(CFBundleExecutable ${APP_NAME})
 	DKSET(CFBundleIconFile icon.png)
 	#DKSET(CFBundleIconFiles icon.png)
-	DKSET(CFBundleIdentifier com.digitalknob.${APP_NAME})
+	DKSET(CFBundleIdentifier ${PRODUCT_BUNDLE_IDENTIFIER})
 	DKSET(CFBundleInfoDictionaryVersion 6.0)
 	DKSET(CFBundleName ${APP_NAME})
 	DKSET(CFBundlePackageType APPL)
@@ -845,7 +847,6 @@ if(IOSSIM)
 		#XCODE_ATTRIBUTE_CODE_SIGN_IDENTITY ""
 		MACOSX_BUNDLE_INFO_PLIST ${DKPLUGINS}/_DKIMPORT/ios/Info.plist)
     
-	#set_xcode_property(PRODUCT_BUNDLE_IDENTIFIER com.digitalknob.${APP_NAME})
 	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${LIBS})
 	
 	foreach(plugin ${dkdepend_list})
