@@ -428,12 +428,14 @@ endif(WIN_32)
 ##########
 if(WIN_64)
 	########################## CREATE ICONS ###############################
-	if(IMAGEMAGICK_CONVERT)
-		message(STATUS "Building icons for ${APP_NAME} . . .")
-		dk_makeDirectory(${DKPROJECT}/icons/windows)
-		DKEXECUTE_PROCESS(COMMAND ${IMAGEMAGICK_CONVERT} ${DKPROJECT}/icons/icon.png -define icon:auto-resize=256,128,64,48,32,16 ${DKPROJECT}/icons/windows/icon.ico)
-		DKCOPY(${DKPROJECT}/icons/windows/icon.ico ${DKPROJECT}/assets/icon.ico TRUE)
-		DKEXECUTE_PROCESS(COMMAND ${IMAGEMAGICK_CONVERT} ${DKPROJECT}/icons/icon.png -define icon:auto-resize=16 ${DKPROJECT}/assets/favicon.ico)
+	if(EXISTS ${DKPROJECT}/icons/icon.png)
+		if(IMAGEMAGICK_CONVERT)
+			message(STATUS "Building icons for ${APP_NAME} . . .")
+			dk_makeDirectory(${DKPROJECT}/icons/windows)
+			DKEXECUTE_PROCESS(COMMAND ${IMAGEMAGICK_CONVERT} ${DKPROJECT}/icons/icon.png -define icon:auto-resize=256,128,64,48,32,16 ${DKPROJECT}/icons/windows/icon.ico)
+			DKCOPY(${DKPROJECT}/icons/windows/icon.ico ${DKPROJECT}/assets/icon.ico TRUE)
+			DKEXECUTE_PROCESS(COMMAND ${IMAGEMAGICK_CONVERT} ${DKPROJECT}/icons/icon.png -define icon:auto-resize=16 ${DKPROJECT}/assets/favicon.ico)
+		endif()
 	endif()
 	
 		
