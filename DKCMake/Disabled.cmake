@@ -316,6 +316,7 @@ if(ANDROID) # Disabled for Android targets
 	DKDISABLE(rtmidi)
 	DKDISABLE(sdl2_gif)
 	DKDISABLE(sdl2_mixer)
+	DKDISABLE(sdl2_ttf)
 	DKDISABLE(sfml)
 	DKDISABLE(smpeg2)
 	DKDISABLE(stackwalker)
