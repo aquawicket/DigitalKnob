@@ -535,7 +535,7 @@ if(MAC)
 		DKCOPY(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.backup TRUE)
 	endif()
 	if(RELEASE)
-		DKRCOPY(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.app ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.backup TRUE)
+		DKCOPY(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.app ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.backup TRUE)
 	endif()
 	
 	####################### Create Executable Target ###################
