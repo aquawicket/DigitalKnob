@@ -49,7 +49,6 @@ DKDISABLE(libvncserver-master-win)
 DKDISABLE(libx11)
 DKDISABLE(lua)
 DKDISABLE(miniweb)
-#DKDISABLE(ncurses)
 DKDISABLE(notepadpp)
 DKDISABLE(opencv)  #WORKING, just disabled because it takes so long to compile
 DKDISABLE(openframeworks)
@@ -74,13 +73,12 @@ if(NOT CMAKE_HOST_WIN32) # Disabled on Non-Windows host machines
 	DKDISABLE(vs16-redistributable)
 endif()
 if(WIN) # Disabled for Windows targets
-	#DKDISABLE(boost nowide) #TEST TEST TEST TEST TEST TEST
 	DKDISABLE(build-essential)
 	DKDISABLE(DKOcr)
 	DKDISABLE(DKWebSockets)
 	DKDISABLE(freealut)
 	DKDISABLE(freealut-master)
-	DKDISABLE(jpeg) #using libjpeg_turbo
+	DKDISABLE(jpeg) #using libjpeg_turbo instead
 	DKDISABLE(kdevelop)
 	DKDISABLE(leptonica)
 	DKDISABLE(libwebp)
@@ -185,7 +183,6 @@ if(NOT LINUX AND NOT RASPBERRY) # Disabled NON Linux targets
 	DKDISABLE(kdevelop)
 	DKDISABLE(libasound2-dev)
 	DKDISABLE(libgl1-mesa-dev)
-	#DKDISABLE(libglfw3-dev)
 	DKDISABLE(libglib2.0-dev)
 	DKDISABLE(libglu1-mesa-dev)
 	DKDISABLE(libgtk2.0-dev)
@@ -200,7 +197,6 @@ if(NOT LINUX AND NOT RASPBERRY) # Disabled NON Linux targets
 endif()
 if(LINUX) # Disabled for Linux targets
 	DKDISABLE(android-build-tools)
-	#DKDISABLE(build-essential)
 	DKDISABLE(boxer)
 	DKDISABLE(DKHook) #NOTE: this has linux functions too
 	DKDISABLE(DKOcr)
@@ -222,9 +218,7 @@ if(LINUX) # Disabled for Linux targets
 	DKDISABLE(openal-android)
 	DKDISABLE(openssl)
 	DKDISABLE(podofo)
-	#DKDISABLE(python)
 	DKDISABLE(sdl2_mixer)
-	#DKDISABLE(sdl2_ttf)
 	DKDISABLE(sfml) # sfml_sfml-network)  #TODO: disabling individual sublibraries
 	DKDISABLE(stackwalker)
 	DKDISABLE(uwebsockets)
@@ -250,7 +244,6 @@ if(RASPBERRY) # Disabled for Raspberry Pi targets
 	DKDISABLE(freealut)
 	DKDISABLE(freealut-master)
 	DKDISABLE(ghostscript)
-	#DKDISABLE(glew)
 	DKDISABLE(imagemagick)
 	DKDISABLE(jdk)
 	DKDISABLE(leptonica)
@@ -264,7 +257,6 @@ if(RASPBERRY) # Disabled for Raspberry Pi targets
 	DKDISABLE(python)
 	DKDISABLE(sdl2_gif)
 	DKDISABLE(sdl2_mixer)
-	#DKDISABLE(sdl2_ttf)
 	DKDISABLE(stackwalker)
 	DKDISABLE(upx)
 	DKDISABLE(uwebsockets)

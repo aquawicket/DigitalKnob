@@ -4232,17 +4232,10 @@ function(log args)
 endfunction()
 
 
-
-
 function(dk_RemoveSubstring removethis fromthis result)
-	
 	foreach(item ${fromthis})
-		message("item = ${item}")
 		string(REPLACE ${removethis} "" item ${item})
 		list(APPEND rtn ${item})
 	endforeach()
-	
-	
-	message(STATUS "**************** rtn=${rtn}")
 	set(${result} ${rtn} PARENT_SCOPE) #return result
 endfunction()
