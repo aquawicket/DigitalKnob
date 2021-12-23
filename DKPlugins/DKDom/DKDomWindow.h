@@ -1,5 +1,9 @@
 //https://developer.mozilla.org/en-US/docs/Web/API/Window
 
+
+// This code is of interest if we are to get window to be a true global object
+// https://github.com/svaarala/duktape/blob/master/tests/api/test-set-global-object.c
+
 #pragma once
 #ifndef DKDomWindow_H
 #define DKDomWindow_H

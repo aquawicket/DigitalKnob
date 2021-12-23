@@ -4,6 +4,10 @@
 #include "DKDom/DKDomWindow.h"
 #include "DKDom/DKDomElement.h"
 
+
+//https://github.com/svaarala/duktape/blob/master/tests/api/test-set-global-object.c
+
+
 bool DKDomWindow::Init()
 {
 	DKDEBUGFUNC();
