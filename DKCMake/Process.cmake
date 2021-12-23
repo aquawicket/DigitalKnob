@@ -593,7 +593,7 @@ if(MAC)
 	###################### Copy Assets to Bundle #######################
 	add_custom_command(TARGET ${APP_NAME} PRE_BUILD COMMAND ${CMAKE_COMMAND} -E copy_directory ${DKPROJECT}/assets $<TARGET_BUNDLE_CONTENT_DIR:${APP_NAME}>/Resources)
 	if(EXISTS ${DKPROJECT}/icons/mac/icons.iconset)
-		add_custom_command(TARGET ${APP_NAME} PRE_BUILD COMMAND ${CMAKE_COMMAND} -E copy ${DKPROJECT}/icons/mac/icons.iconset $<TARGET_BUNDLE_CONTENT_DIR:${APP_NAME}>/icons.iconset)
+		add_custom_command(TARGET ${APP_NAME} PRE_BUILD COMMAND ${CMAKE_COMMAND} -E copy ${DKPROJECT}/icons/mac/icons.icns $<TARGET_BUNDLE_CONTENT_DIR:${APP_NAME}>/icons.icns)
 	endif()
 	
 	
