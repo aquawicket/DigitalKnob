@@ -61,7 +61,7 @@ while :
 				cd $DKPATH
 				git checkout -- .
 				git pull origin master
-				chmod +x $DKPATH/DKBuilder.sh
+				chmod +x $DKPATH/build.sh
 				;;
 			"Git Commit")
 				echo "$opt"
