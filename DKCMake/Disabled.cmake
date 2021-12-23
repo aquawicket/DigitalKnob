@@ -224,7 +224,7 @@ if(LINUX) # Disabled for Linux targets
 	DKDISABLE(podofo)
 	#DKDISABLE(python)
 	DKDISABLE(sdl2_mixer)
-	DKDISABLE(sdl2_ttf)
+	#DKDISABLE(sdl2_ttf)
 	DKDISABLE(sfml) # sfml_sfml-network)  #TODO: disabling individual sublibraries
 	DKDISABLE(stackwalker)
 	DKDISABLE(uwebsockets)
@@ -264,7 +264,7 @@ if(RASPBERRY) # Disabled for Raspberry Pi targets
 	DKDISABLE(python)
 	DKDISABLE(sdl2_gif)
 	DKDISABLE(sdl2_mixer)
-	DKDISABLE(sdl2_ttf)
+	#DKDISABLE(sdl2_ttf)
 	DKDISABLE(stackwalker)
 	DKDISABLE(upx)
 	DKDISABLE(uwebsockets)
