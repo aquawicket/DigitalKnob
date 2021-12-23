@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# to run this script requires privledges 
+# > chmod +x build.sh
+
 if [ -e /proc/device-tree/model ]; then
 	MODEL=$(tr -d '\0' </proc/device-tree/model)
 fi

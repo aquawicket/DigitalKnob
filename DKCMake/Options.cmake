@@ -8,7 +8,9 @@ if(COMMAND cmake_policy)
 	cmake_policy(SET CMP0003 NEW) ##https://cmake.org/cmake/help/latest/policy/CMP0003.html
 endif(COMMAND cmake_policy)
 
-
+if(Target)
+	message(STATUS "You've specified to build Target = ${Target}")
+endif()
 ###############################################################
 ## Set variables for paths
 ###############################################################
