@@ -6,6 +6,6 @@
 DKSET(IOSCMAKE_VERSION master)
 DKSET(IOSCMAKE_NAME ios-${VERSION})
 DKSET(IOSCMAKE_DL https://github.com/leetal/ios-cmake/archive/refs/heads/master.zip)
-DKSET(IOSCMAKE ${3RDPARTY}/${IOS_CMAKE})
+DKSET(IOSCMAKE ${3RDPARTY}/${IOSCMAKE})
 
 DKINSTALL(${IOSCMAKE_DL} ios-cmake ${IOSCMAKE}) 
