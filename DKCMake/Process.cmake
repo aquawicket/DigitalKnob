@@ -517,46 +517,33 @@ if(MAC)
 		DKEXECUTE_PROCESS(sips -z 512 512 ${DKPROJECT}/icons/icon.png --out ${DKPROJECT}/icons/mac/icons.iconset/icon_512x512.png WORKING_DIRECTORY ${DIGITALKNOB})
 		DKEXECUTE_PROCESS(sips -z 1024 1024 ${DKPROJECT}/icons/icon.png --out ${DKPROJECT}/icons/mac/icons.iconset/icon_512x512@2x.png WORKING_DIRECTORY ${DIGITALKNOB})
 		DKEXECUTE_PROCESS(iconutil -c icns -o ${DKPROJECT}/icons/mac/icons.icns ${DKPROJECT}/icons/mac/icons.iconset WORKING_DIRECTORY ${DIGITALKNOB})
-		
 		set(MACOSX_BUNDLE_ICON_FILE icons.icns)
-		# And this part tells CMake where to find and install the file itself
-		set(icons_ICON ${DKPROJECT}/icons/mac/icons.icns)
-		set_source_files_properties(${icons_ICON} PROPERTIES MACOSX_PACKAGE_LOCATION "Resources")
+		set(app_ICONS ${DKPROJECT}/icons/mac/icons.icns)
+		set_source_files_properties(${app_ICONS} PROPERTIES MACOSX_PACKAGE_LOCATION "Resources")
 	endif()
 	
 	
 	################# BACKUP USERDATA / INJECT ASSETS #####################	
 	DKCOPY(${DKPROJECT}/assets/USER ${DKPROJECT}/Backup/USER TRUE)
 	DKREMOVE(${DKPROJECT}/assets/USER)
-	#if(DEBUG)
-	#	dk_makeDirectory(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app/Contents/Resources)
-	#	DKCOPY(${DKPROJECT}/assets/ ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app/Contents/Resources TRUE)
-	#	DKCOPY(${DKPROJECT}/icons/mac/icons.icns ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app/Contents/icons.icns TRUE)
-	#endif()
-	#if(RELEASE)
-	#	dk_makeDirectory(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.app/Contents/Resources)
-	#	DKCOPY(${DKPROJECT}/assets/ ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.app/Contents/Resources TRUE)
-	#	DKCOPY(${DKPROJECT}/icons/mac/icons.icns ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.app/Contents/icons.icns TRUE)
-	#endif()
 	DKCOPY(${DKPROJECT}/Backup/ ${DKPROJECT}/assets/ FALSE)
 	DKREMOVE(${DKPROJECT}/Backup)
 	
 	
 	###################### Backup Executable ###########################
 	if(DEBUG)
-		DKRENAME(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.backup)
+		DKCOPY(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.backup TRUE)
 	endif()
 	if(RELEASE)
-		DKRENAME(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.app ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.backup)
+		DKRCOPY(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.app ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.backup TRUE)
 	endif()
 	
 	####################### Create Executable Target ###################
-	#SET(CMAKE_OSX_ARCHITECTURES "x86_64")
 	file(GLOB_RECURSE m_SRC 
 		${DKPROJECT}/*.m
 		${DKPROJECT}/*.mm)
 	list(APPEND App_SRC ${m_SRC})
-	add_executable(${APP_NAME} MACOSX_BUNDLE ${icons_ICON} ${App_SRC})
+	add_executable(${APP_NAME} MACOSX_BUNDLE ${app_ICONS} ${App_SRC})
 	
 	
 	########################## Add Dependencies ########################
@@ -575,7 +562,7 @@ if(MAC)
 	DKSET(CFBundleDisplayName ${APP_NAME})
 	DKSET(CFBundleExecutable wrapper) ##${APP_NAME})
 	DKSET(CFBundleGetInfoString "DigitalKnob")
-	DKSET(CFBundleIconFile "icons")
+	#DKSET(CFBundleIconFile "icons.icns")
 	#DKSET(CFBundleIconFiles "icons.icns")
 	DKSET(CFBundleIdentifier ${PRODUCT_BUNDLE_IDENTIFIER})
 	DKSET(CFBundleInfoDictionaryVersion 6.0)
@@ -597,9 +584,6 @@ if(MAC)
 	
 	###################### Copy Assets to Bundle #######################
 	add_custom_command(TARGET ${APP_NAME} PRE_BUILD COMMAND ${CMAKE_COMMAND} -E copy_directory ${DKPROJECT}/assets $<TARGET_BUNDLE_CONTENT_DIR:${APP_NAME}>/Resources)
-	if(EXISTS ${DKPROJECT}/icons/mac/icons.iconset)
-		#add_custom_command(TARGET ${APP_NAME} PRE_BUILD COMMAND ${CMAKE_COMMAND} -E copy ${DKPROJECT}/icons/mac/icons.icns $<TARGET_BUNDLE_CONTENT_DIR:${APP_NAME}>/icons.icns)
-	endif()
 	
 	
 	############# Link Libraries, Set Startup Project #################
@@ -686,7 +670,10 @@ if(IOS OR IOSSIM)
 		DKEXECUTE_PROCESS(sips -z 512 512 ${DKPROJECT}/icons/icon.png --out ${DKPROJECT}/icons/ios/icons.iconset/icon_256x256@2x.png WORKING_DIRECTORY ${DIGITALKNOB})
 		DKEXECUTE_PROCESS(sips -z 512 512 ${DKPROJECT}/icons/icon.png --out ${DKPROJECT}/icons/ios/icons.iconset/icon_512x512.png WORKING_DIRECTORY ${DIGITALKNOB})
 		DKEXECUTE_PROCESS(sips -z 1024 1024 ${DKPROJECT}/icons/icon.png --out ${DKPROJECT}/icons/ios/icons.iconset/icon_512x512@2x.png WORKING_DIRECTORY ${DIGITALKNOB})
-		DKEXECUTE_PROCESS(iconutil -c icns -o ${DKPROJECT}/icons/ios/logo.icns ${DKPROJECT}/icons/ios/icons.iconset WORKING_DIRECTORY ${DIGITALKNOB})
+		DKEXECUTE_PROCESS(iconutil -c icns -o ${DKPROJECT}/icons/ios/icons.icns ${DKPROJECT}/icons/ios/icons.iconset WORKING_DIRECTORY ${DIGITALKNOB})
+		set(MACOSX_BUNDLE_ICON_FILE icons.icns)
+		set(app_ICONS ${DKPROJECT}/icons/mac/icons.icns)
+		set_source_files_properties(${app_ICONS} PROPERTIES MACOSX_PACKAGE_LOCATION "Resources")
 	endif()
 	
 	
@@ -717,7 +704,7 @@ if(IOS OR IOSSIM)
 	if(HAVE_DK)
 		list(APPEND App_SRC ${DKPLUGINS}/DK/DKiOS.mm)
 	endif()
-	add_executable(${APP_NAME} MACOSX_BUNDLE ${App_SRC} ${RES_FILES})
+	add_executable(${APP_NAME} MACOSX_BUNDLE ${app_ICONS} ${App_SRC} ${RES_FILES})
 	
 	
 	########################## Add Dependencies ########################
@@ -734,7 +721,7 @@ if(IOS OR IOSSIM)
 	DKSET(CFBundleDisplayName ${APP_NAME})
 	DKSET(CFBundleExecutable ${APP_NAME})
 	DKSET(CFBundleGetInfoString DigitalKnob)
-	DKSET(CFBundleIconFile "icons")
+	#DKSET(CFBundleIconFile "icons.icns")
 	#DKSET(CFBundleIconFiles icons.icns)
 	DKSET(CFBundleIdentifier ${PRODUCT_BUNDLE_IDENTIFIER})
 	DKSET(CFBundleInfoDictionaryVersion 6.0)
