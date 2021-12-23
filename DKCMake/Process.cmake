@@ -729,8 +729,8 @@ if(IOS OR IOSSIM)
 	DKSET(CFBundleDisplayName ${APP_NAME})
 	DKSET(CFBundleExecutable ${APP_NAME})
 	DKSET(CFBundleGetInfoString DigitalKnob)
-	DKSET(CFBundleIconFile icon.png)
-	#DKSET(CFBundleIconFiles icon.png)
+	DKSET(CFBundleIconFile "icons")
+	#DKSET(CFBundleIconFiles icons.icns)
 	DKSET(CFBundleIdentifier ${PRODUCT_BUNDLE_IDENTIFIER})
 	DKSET(CFBundleInfoDictionaryVersion 6.0)
 	DKSET(CFBundleLongVersionString 1.0.0)
@@ -748,8 +748,8 @@ if(IOS OR IOSSIM)
 		
 	###################### Add Assets to Bundle #######################
 	add_custom_command(TARGET ${APP_NAME} PRE_BUILD COMMAND ${CMAKE_COMMAND} -E copy_directory ${DKPROJECT}/assets $<TARGET_FILE_DIR:${APP_NAME}>/assets)
-	if(EXISTS ${DKPROJECT}/icons/mac/icons.iconset)
-		add_custom_command(TARGET ${APP_NAME} PRE_BUILD COMMAND ${CMAKE_COMMAND} -E copy ${DKPROJECT}/icons/ios/icons.iconset $<TARGET_FILE_DIR:${APP_NAME}>/Resources/icons.iconset)
+	if(EXISTS ${DKPROJECT}/icons/mac/icons.icns)
+		add_custom_command(TARGET ${APP_NAME} PRE_BUILD COMMAND ${CMAKE_COMMAND} -E copy ${DKPROJECT}/icons/ios/icons.icns $<TARGET_FILE_DIR:${APP_NAME}>/Resources/icons.icns)
 	endif()
 	
 	
