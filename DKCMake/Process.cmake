@@ -523,16 +523,16 @@ if(MAC)
 	################# BACKUP USERDATA / INJECT ASSETS #####################	
 	DKCOPY(${DKPROJECT}/assets/USER ${DKPROJECT}/Backup/USER TRUE)
 	DKREMOVE(${DKPROJECT}/assets/USER)
-	if(DEBUG)
-		dk_makeDirectory(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app/Contents/Resources)
-		DKCOPY(${DKPROJECT}/assets/ ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app/Contents/Resources TRUE)
-		DKCOPY(${DKPROJECT}/icons/mac/icons.icns ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app/Contents/icons.icns TRUE)
-	endif()
-	if(RELEASE)
-		dk_makeDirectory(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.app/Contents/Resources)
-		DKCOPY(${DKPROJECT}/assets/ ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.app/Contents/Resources TRUE)
-		DKCOPY(${DKPROJECT}/icons/mac/icons.icns ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.app/Contents/icons.icns TRUE)
-	endif()
+	#if(DEBUG)
+	#	dk_makeDirectory(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app/Contents/Resources)
+	#	DKCOPY(${DKPROJECT}/assets/ ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app/Contents/Resources TRUE)
+	#	DKCOPY(${DKPROJECT}/icons/mac/icons.icns ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app/Contents/icons.icns TRUE)
+	#endif()
+	#if(RELEASE)
+	#	dk_makeDirectory(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.app/Contents/Resources)
+	#	DKCOPY(${DKPROJECT}/assets/ ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.app/Contents/Resources TRUE)
+	#	DKCOPY(${DKPROJECT}/icons/mac/icons.icns ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.app/Contents/icons.icns TRUE)
+	#endif()
 	DKCOPY(${DKPROJECT}/Backup/ ${DKPROJECT}/assets/ FALSE)
 	DKREMOVE(${DKPROJECT}/Backup)
 	
@@ -591,10 +591,10 @@ if(MAC)
 	
 	
 	###################### Copy Assets to Bundle #######################
-	#add_custom_command(TARGET ${APP_NAME} PRE_BUILD COMMAND ${CMAKE_COMMAND} -E copy_directory ${DKPROJECT}/assets $<TARGET_FILE_DIR:${APP_NAME}>/../../Contents/Resources)
-	#if(EXISTS ${DKPROJECT}/icons/mac/icons.iconset)
-	#	add_custom_command(TARGET ${APP_NAME} PRE_BUILD COMMAND ${CMAKE_COMMAND} -E copy ${DKPROJECT}/icons/mac/icons.iconset $<TARGET_FILE_DIR:${APP_NAME}>/Resources/icons.iconset)
-	#endif()
+	add_custom_command(TARGET ${APP_NAME} PRE_BUILD COMMAND ${CMAKE_COMMAND} -E copy_directory ${DKPROJECT}/assets $<TARGET_BUNDLE_CONTENT_DIR:${APP_NAME}>/Resources)
+	if(EXISTS ${DKPROJECT}/icons/mac/icons.iconset)
+		add_custom_command(TARGET ${APP_NAME} PRE_BUILD COMMAND ${CMAKE_COMMAND} -E copy ${DKPROJECT}/icons/mac/icons.iconset $<TARGET_FILE_DIR:${APP_NAME}>/icons.iconset)
+	endif()
 	
 	
 	############# Link Libraries, Set Startup Project #################
