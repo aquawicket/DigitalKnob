@@ -502,6 +502,15 @@ endif(WIN_64)
 
 #######
 if(MAC)
+	###################### Backup Executable ###########################
+	if(DEBUG)
+		DKCOPY(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.backup TRUE)
+	endif()
+	if(RELEASE)
+		DKCOPY(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.app ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.backup TRUE)
+	endif()
+	
+	
 	########################## CREATE ICONS ###############################
 	if(EXISTS ${DKPROJECT}/icons/icon.png)
 		dk_makeDirectory(${DKPROJECT}/icons/mac)
@@ -528,15 +537,6 @@ if(MAC)
 	DKREMOVE(${DKPROJECT}/assets/USER)
 	DKCOPY(${DKPROJECT}/Backup/ ${DKPROJECT}/assets/ FALSE)
 	DKREMOVE(${DKPROJECT}/Backup)
-	
-	
-	###################### Backup Executable ###########################
-	if(DEBUG)
-		DKCOPY(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.backup TRUE)
-	endif()
-	if(RELEASE)
-		DKCOPY(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.app ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.backup TRUE)
-	endif()
 	
 	####################### Create Executable Target ###################
 	file(GLOB_RECURSE m_SRC 
@@ -582,7 +582,10 @@ if(MAC)
 		MACOSX_BUNDLE_INFO_PLIST ${DKPLUGINS}/_DKIMPORT/mac/Info.plist)
 	
 	
-	###################### Copy Assets to Bundle #######################
+	##############Delete Exlusions and Copy Assets to Bundle #######################
+	
+	DKREMOVE(${DKPROJECT}/assets/log.txt)
+	DKREMOVE(${DKPROJECT}/assets/cef.txt)
 	add_custom_command(TARGET ${APP_NAME} PRE_BUILD COMMAND ${CMAKE_COMMAND} -E copy_directory ${DKPROJECT}/assets $<TARGET_BUNDLE_CONTENT_DIR:${APP_NAME}>/Resources)
 	
 	
@@ -656,6 +659,27 @@ endif()
 # https://github.com/forexample/testapp/blob/master/CMakeLists.txt
 #################
 if(IOS OR IOSSIM)
+	
+	###################### Backup Executable ###########################
+	if(DEBUG)
+		DKRENAME(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.backup)
+	endif()
+	if(RELEASE)
+		DKRENAME(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.app ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.backup)
+	endif()
+	
+	###################### BACKUP USERDATA ###############################
+	# Backup files and folders excluded from the package
+	#DKCOPY(${DKPROJECT}/assets/USER ${DKPROJECT}/Backup/USER TRUE)
+	# Remove excluded files and folders before packaging
+	#DKREMOVE(${DKPROJECT}/assets/USER)
+	# Restore the backed up files, excluded from assets
+	#DKCOPY(${DKPROJECT}/Backup/ ${DKPROJECT}/assets/ FALSE)
+	#DKREMOVE(${DKPROJECT}/Backup)
+	
+	
+	
+	
 	########################## Images ##############################
 	#TODO
 	
@@ -681,26 +705,6 @@ if(IOS OR IOSSIM)
 	
 	####################### Storyboards ############################
 	#TODO
-	
-	
-	
-	###################### BACKUP USERDATA ###############################
-	# Backup files and folders excluded from the package
-	#DKCOPY(${DKPROJECT}/assets/USER ${DKPROJECT}/Backup/USER TRUE)
-	# Remove excluded files and folders before packaging
-	#DKREMOVE(${DKPROJECT}/assets/USER)
-	# Restore the backed up files, excluded from assets
-	#DKCOPY(${DKPROJECT}/Backup/ ${DKPROJECT}/assets/ FALSE)
-	#DKREMOVE(${DKPROJECT}/Backup)
-	
-	
-	###################### Backup Executable ###########################
-	if(DEBUG)
-		DKRENAME(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.backup)
-	endif()
-	if(RELEASE)
-		DKRENAME(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.app ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.backup)
-	endif()
 	
 	
 	####################### Create Executable Target ###################
@@ -761,6 +765,14 @@ endif()
 
 #########
 if(LINUX)
+	###################### Backup Executable ###########################
+	if(DEBUG)
+		DKCOPY(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME} ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.backup TRUE)
+	elseif(RELEASE)
+		DKCOPY(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME} ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.backup TRUE)
+	endif()
+	
+	
 	########################## CREATE ICONS ###############################
 	DKCOPY(${DKPROJECT}/icons/icon.png ${DKPROJECT}/assets/icon.png TRUE)
 	
@@ -781,14 +793,6 @@ if(LINUX)
 	endif()
 	
 	
-	###################### Backup Executable ###########################
-	if(DEBUG)
-		DKCOPY(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME} ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.backup TRUE)
-	elseif(RELEASE)
-		DKCOPY(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME} ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.backup TRUE)
-	endif()
-	
-	
 	####################### Create Executable Target ###################
 	add_executable(${APP_NAME} ${App_SRC})
 	if(DEBUG)
@@ -798,7 +802,7 @@ if(LINUX)
 	endif()
 	
 	
-	########################## Add Dependencies ########################
+	###################### Add Build Dependencies ######################
 	foreach(plugin ${dkdepend_list})
 		if(EXISTS "${DKPLUGINS}/${plugin}/CMakeLists.txt")
 			add_dependencies(${APP_NAME} ${plugin})
@@ -806,7 +810,7 @@ if(LINUX)
 	endforeach()
 	
 	
-	############# Create .desktop Icon Files and Install ##############
+	############# Create .desktop Icon Files / Install ################
 	if(DEBUG)
 		DKSET(DESKTOP_FILE
 			"[Desktop Entry]\n"
