@@ -114,6 +114,8 @@ function(DUMP dmpvar)
 	message(STATUS " \n")
 	message(STATUS "************** DUMP ****************")
 	message(STATUS "${dmpvar} = ${${dmpvar}}")
+	list(LENGTH ${dmpvar} dmpvar_LENGTH)
+	message(STATUS "dmpvar_LENGTH = ${dmpvar_LENGTH}")
 	if(NOT DEFINED ${dmpvar})
 		message(STATUS "DUMP(${dmpvar}) variable not defined. The correct syntax is \"DUMP(varname)\", using the variable name")
 		message(STATUS "DUMP(varname): CORRECT        DUMP(\${varname}): INCORRECT")
@@ -4212,4 +4214,35 @@ function(dk_createSmartObject object)
 	DKDEBUG(${ARGV})
 	message(STATUS "dk_createSmartObject(${object})")
 	# We require something that can resolve to a full, valid path containing a DKMAKE.cmake file 
+endfunction()
+
+# A simple, quick and easy logger
+function(log args)
+	message(STATUS "${ARGV}")
+	set(output " ")
+	foreach(arg ${ARGV})
+		if(DEFINED ${arg})
+			set(output "${output} ${arg}=${${dmpvar}} ")
+		else()
+			set(output "${output} ${arg}")
+		endif()
+			message(STATUS "${output}")
+	endforeach()
+	Wait()
+endfunction()
+
+
+
+
+function(dk_RemoveSubstring removethis fromthis result)
+	
+	foreach(item ${fromthis})
+		message("item = ${item}")
+		string(REPLACE ${removethis} "" item ${item})
+		list(APPEND rtn ${item})
+	endforeach()
+	
+	
+	message(STATUS "**************** rtn=${rtn}")
+	set(${result} ${rtn} PARENT_SCOPE) #return result
 endfunction()
