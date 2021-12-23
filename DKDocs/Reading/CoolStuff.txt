@@ -2,3 +2,6 @@ Rob van der Woude's Scripting Pages   https://www.robvanderwoude.com
 Batch file debugging                  https://www.robvanderwoude.com/battech_debugging.php
 https://blog.sevagas.com/PE-injection-explained
 C to Bash and Batch script translator https://batsh.org/#   
+
+
+Batch Scripts https://github.com/npocmaka/batch.scripts
