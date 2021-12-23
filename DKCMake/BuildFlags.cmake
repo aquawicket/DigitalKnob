@@ -459,6 +459,18 @@ if(RELEASE)
 endif(RELEASE)
 
 
+#this is incorrect. Build directory goes by IDE/compiler, not OS
+# Here's the list
+
+# COMPILER                 Build_root         Target configs
+# ---------------------------------------------------
+# VisualStudio_cl           ${OS}             /multiple      /win
+# VisualStudio clang/++     ${OS}             /multi
+# XCode_clang/++            ${OS}             /multi
+# MinGW_gcc/++              ${OS}/${TYPE}     /single        /win   for example, win can be multiple or single 
+# Linux_gcc/++              ${OS}/${TYPE}     /single
+# RaspberryPi_gcc/++        ${OS}/${TYPE}     /single           
+# ./configure               ${OS}/${TYPE}     /single
 
 if(LINUX OR RASPBERRY)
 	if(DEBUG)
