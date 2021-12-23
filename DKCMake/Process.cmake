@@ -517,6 +517,11 @@ if(MAC)
 		DKEXECUTE_PROCESS(sips -z 512 512 ${DKPROJECT}/icons/icon.png --out ${DKPROJECT}/icons/mac/icons.iconset/icon_512x512.png WORKING_DIRECTORY ${DIGITALKNOB})
 		DKEXECUTE_PROCESS(sips -z 1024 1024 ${DKPROJECT}/icons/icon.png --out ${DKPROJECT}/icons/mac/icons.iconset/icon_512x512@2x.png WORKING_DIRECTORY ${DIGITALKNOB})
 		DKEXECUTE_PROCESS(iconutil -c icns -o ${DKPROJECT}/icons/mac/icons.icns ${DKPROJECT}/icons/mac/icons.iconset WORKING_DIRECTORY ${DIGITALKNOB})
+		
+		set(MACOSX_BUNDLE_ICON_FILE icons.icns)
+		# And this part tells CMake where to find and install the file itself
+		set(icons_ICON ${DKPROJECT}/icons/mac/icons.icns)
+		set_source_files_properties(${icons_ICON} PROPERTIES MACOSX_PACKAGE_LOCATION "Resources")
 	endif()
 	
 	
@@ -551,7 +556,7 @@ if(MAC)
 		${DKPROJECT}/*.m
 		${DKPROJECT}/*.mm)
 	list(APPEND App_SRC ${m_SRC})
-	add_executable(${APP_NAME} MACOSX_BUNDLE ${App_SRC})
+	add_executable(${APP_NAME} MACOSX_BUNDLE ${icons_ICON} ${App_SRC})
 	
 	
 	########################## Add Dependencies ########################
@@ -593,7 +598,7 @@ if(MAC)
 	###################### Copy Assets to Bundle #######################
 	add_custom_command(TARGET ${APP_NAME} PRE_BUILD COMMAND ${CMAKE_COMMAND} -E copy_directory ${DKPROJECT}/assets $<TARGET_BUNDLE_CONTENT_DIR:${APP_NAME}>/Resources)
 	if(EXISTS ${DKPROJECT}/icons/mac/icons.iconset)
-		add_custom_command(TARGET ${APP_NAME} PRE_BUILD COMMAND ${CMAKE_COMMAND} -E copy ${DKPROJECT}/icons/mac/icons.icns $<TARGET_BUNDLE_CONTENT_DIR:${APP_NAME}>/icons.icns)
+		#add_custom_command(TARGET ${APP_NAME} PRE_BUILD COMMAND ${CMAKE_COMMAND} -E copy ${DKPROJECT}/icons/mac/icons.icns $<TARGET_BUNDLE_CONTENT_DIR:${APP_NAME}>/icons.icns)
 	endif()
 	
 	
