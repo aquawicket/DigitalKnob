@@ -653,10 +653,13 @@ if(MAC)
 endif()
 
 
-
+# https://github.com/forexample/testapp/blob/master/CMakeLists.txt
 #################
 if(IOS OR IOSSIM)
-	########################## CREATE ICONS ###############################
+	########################## Images ##############################
+	#TODO
+	
+	########################## ICONS ###############################
 	if(EXISTS ${DKPROJECT}/icons/icon.png)
 		dk_makeDirectory(${DKPROJECT}/icons/ios)
 		dk_makeDirectory(${DKPROJECT}/icons/ios/icons.iconset)
@@ -675,6 +678,10 @@ if(IOS OR IOSSIM)
 		set(app_ICONS ${DKPROJECT}/icons/mac/icons.icns)
 		set_source_files_properties(${app_ICONS} PROPERTIES MACOSX_PACKAGE_LOCATION "Resources")
 	endif()
+	
+	####################### Storyboards ############################
+	#TODO
+	
 	
 	
 	###################### BACKUP USERDATA ###############################
