@@ -3,6 +3,7 @@
 #include "DKDom.h"
 #include "DKDom/DKDomWindow.h"
 #include "DKDom/DKDomElement.h"
+#include "duktape.h"
 
 
 //https://github.com/svaarala/duktape/blob/master/tests/api/test-set-global-object.c
@@ -129,6 +130,65 @@ bool DKDomWindow::Init()
 	DKDuktape::AttachFunction("CPP_DKDomWindow_openDialog", DKDomWindow::openDialog);
 	DKDuktape::AttachFunction("CPP_DKDomWindow_releaseEvents", DKDomWindow::releaseEvents);
 	DKDuktape::AttachFunction("CPP_DKDomWindow_showModalDialog", DKDomWindow::showModalDialog);
+
+
+
+
+
+	/*
+	 *  First, build a new global object which contains a few keys we
+	 *  want to see.
+	 */
+#include "DKDuktape.h"
+
+	DKDuktape* dt = DKDuktape::Get();
+	printf("build replacement global object\n");
+	duk_eval_string(dt->ctx,
+		"({\n"
+		"    print: this.print,\n"
+		"    JSON: this.JSON,\n"
+		"    eval: this.eval,\n"
+		"    newGlobal: true,\n"
+		"    testName: 'my new global'\n"
+		"})\n");
+
+	printf("top before: %ld\n", (long)duk_get_top(dt->ctx));
+	duk_set_global_object(dt->ctx);
+	printf("top after: %ld\n", (long)duk_get_top(dt->ctx));
+
+	/*
+	 *  Print available keys.  This exercises access to the global object
+	 *  directly.
+	 */
+	//dump_global_object_keys(dt->ctx);
+
+	/*
+	 *  Test that indirect eval executes in the new global object too.
+	 */
+	printf("indirect eval\n");
+	duk_eval_string_noresult(dt->ctx,
+		"var myEval = eval;  // writes 'myEval' to global object as a side effect\n"
+	);
+	//dump_global_object_keys(dt->ctx);
+	duk_eval_string_noresult(dt->ctx,
+		"myEval('print(this.newGlobal)');"
+	);
+
+	/*
+	 *  Test access to global object through an object environment.
+	 */
+	printf("access through this.xxx and variable lookup xxx\n");
+	duk_eval_string_noresult(dt->ctx,
+		"print('this.testName:', this.testName);\n"
+	);
+	duk_eval_string_noresult(dt->ctx,
+		"print('testName:', testName);\n"
+	);
+
+	printf("final top: %ld\n", (long)duk_get_top(dt->ctx));
+
+
+
 	// Javascript bindings
 	DKClass::DKCreate("DKDom/DKDomWindow.js");
 	return true;

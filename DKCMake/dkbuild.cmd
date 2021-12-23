@@ -4,8 +4,11 @@
 
 @echo off
 echo Please type the name of the library, tool or app to build. Then press enter.
+set /p input=
+echo %input%
 
 
+CMAKE -G "VS_GENERATOR" -A Win32 -DDEBUG -DRELEASE -DSTATIC
 
 
 pause

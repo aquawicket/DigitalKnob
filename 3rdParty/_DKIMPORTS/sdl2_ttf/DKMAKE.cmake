@@ -9,20 +9,20 @@ DKDEPEND(freetype)
 
 
 ### VERSION ###
-if(LINUX OR RASPBERRY)
+#if(LINUX OR RASPBERRY)
 	DKSET(SDLTTF_VERSION main)
 	DKSET(SDLTTF_NAME SDL2_ttf-${SDLTTF_VERSION})
 	DKSET(SDLTTF_DL https://github.com/libsdl-org/SDL_ttf/archive/refs/heads/main.zip)
-else()
-	DKSET(SDLTTF_VERSION 2.0.15)
-	DKSET(SDLTTF_NAME SDL2_ttf-${SDLTTF_VERSION})
-	DKSET(SDLTTF_DL https://www.libsdl.org/projects/SDL_ttf/release/${SDLTTF_NAME}.zip)
-endif()
+#else()
+#	DKSET(SDLTTF_VERSION 2.0.15)
+#	DKSET(SDLTTF_NAME SDL2_ttf-${SDLTTF_VERSION})
+#	DKSET(SDLTTF_DL https://www.libsdl.org/projects/SDL_ttf/release/${SDLTTF_NAME}.zip)
+#endif()
 DKSET(SDLTTF ${3RDPARTY}/${SDLTTF_NAME})
 
 
 ### INSTALL ###
-DKINSTALL(${SDLTTF_DL} sdl2_ttf ${SDLTTF})
+DKINSTALL(${SDLTTF_DL} sdl2_ttf ${SDLTTF} NOPATCH)
 
 
 
