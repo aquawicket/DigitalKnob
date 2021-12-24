@@ -8,7 +8,6 @@ if(COMMAND cmake_policy)
 	cmake_policy(SET CMP0003 NEW) ##https://cmake.org/cmake/help/latest/policy/CMP0003.html
 endif(COMMAND cmake_policy)
 
-
 ###############################################################
 ## Set variables for paths
 ###############################################################
@@ -26,8 +25,15 @@ DKSET(CURRENT_DIR ${DIGITALKNOB})
 ## Bulid the TARGET passed from the command line
 ###########################################################################
 if(TARGET)
-	message(STATUS "You've specified to build Target = ${TARGET}")
-	dk_exit()
+	message(STATUS "Building ${TARGET}\n")
+	dk_FindTarget(${TARGET} target_path)
+	if(NOT target_path)
+		message(STATUS "ERROR: Could not find target ${TARGET}")
+		Wait("press any key to exit")
+		dk_exit()
+	endif()
+	message("found ${TARGET} at ${target_path}")
+	DKSET(CMAKE_BINARY_DIR ${target_path}/win32)
 endif()
 
 
