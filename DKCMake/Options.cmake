@@ -35,9 +35,10 @@ if(TARGET)
 	message("found ${TARGET}:(${target_type}) at ${target_path}")
 	set(CMAKE_BINARY_DIR "${target_path}/${OS}")
 	DKSET(BYPASS_DISABLE ON)
-	#if(NOT ${target_type} STREQUAL DKApp)
-		#DKDEPEND(${TARGET})
-	#endif()
+	DKSET(QUEUE_BUILD ON)
+	if(NOT ${target_type} STREQUAL DKApp)
+		DKDEPEND(${TARGET})
+	endif()
 endif()
 
 

@@ -1,7 +1,9 @@
+# https://github.com/DanBloomberg/leptonica
 # README: https://tinsuke.wordpress.com/2011/02/17/how-to-cross-compiling-libraries-for-ios-armv6armv7i386/
 
 # http://www.leptonica.org
 #
+# https://github.com/DanBloomberg/leptonica/archive/refs/tags/1.82.0.zip
 # http://www.leptonica.org/source/leptonica-1.74.4.tar.gz
 
 ### DEPENDS ###
@@ -18,11 +20,11 @@ DKDEPEND(giflib)
 
 ### VERSION ###
 DKSET(LEPTONICA_MAJOR 1)
-DKSET(LEPTONICA_MINOR 74)
-DKSET(LEPTONICA_BUILD 4)
+DKSET(LEPTONICA_MINOR 82)
+DKSET(LEPTONICA_BUILD 0)
 DKSET(LEPTONICA_VERSION ${LEPTONICA_MAJOR}.${LEPTONICA_MINOR}.${LEPTONICA_BUILD})
 DKSET(LEPTONICA_NAME leptonica-${LEPTONICA_VERSION})
-DKSET(LEPTONICA_DL http://www.leptonica.org/source/leptonica-${LEPTONICA_MAJOR}.${LEPTONICA_MINOR}.${LEPTONICA_BUILD}.tar.gz)
+DKSET(LEPTONICA_DL https://github.com/DanBloomberg/leptonica/archive/refs/tags/${LEPTONICA_VERSION}.zip)
 DKSET(LEPTONICA ${3RDPARTY}/${LEPTONICA_NAME})
 
 

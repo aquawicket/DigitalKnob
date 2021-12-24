@@ -45,7 +45,8 @@ endforeach()
 DKBUILD_LOG("\n")
 
 foreach(plugin ${dkdepend_list})
-	DKSET(QUEUE_BUILD OFF)
+	#DKSET(QUEUE_BUILD OFF)
+	DKSET(QUEUE_BUILD ON)
 	DKSET(LIBLIST "") 
 	## used for double checking
 	#DKSET(CMAKE_FILE "")
@@ -108,12 +109,14 @@ foreach(plugin ${dkdepend_list})
 		## Prebuild DKPlugins switch
 		## TODO: set this to work when the library files are absent.
 		## If the library files already exist, we can skip this. 
-		foreach(lib ${LIBLIST})
-				if(NOT EXISTS ${lib})
-					set(PREBUILD ON)
-				endif()
-		endforeach()
+		#foreach(lib ${LIBLIST})
+		#	if(NOT EXISTS ${lib})
+		#		set(PREBUILD ON)
+		#		DKSET(QUEUE_BUILD ON)
+		#	endif()
+		#endforeach()
 		
+		DKSET(PREBUILD ON)
 		if(PREBUILD)
 			message(STATUS "******* Prebuilding ${plugin} *******")
 			#DKSET(CURRENT_DIR ${plugin_path}/${OS})
