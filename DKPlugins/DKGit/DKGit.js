@@ -98,6 +98,11 @@ function DKGit_GitUpdate() {
         }
     }
 
+	if (CPP_DK_GetOS() != "Windows"){
+		CPP_DK_Execute("chmod +x "+DIGITALKNOB+"/DK/build.sh")
+		CPP_DK_Execute("chmod +x "+DIGITALKNOB+"/DK/DKCMake/dkbuild.sh")
+	}
+	
     if (CPP_DK_Available("DKAudio"))
         dk.create("DKAudio")
     if (CPP_DK_Valid("DKAudioJS,DKAudioJS0"))
