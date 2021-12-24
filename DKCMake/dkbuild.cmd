@@ -16,7 +16,7 @@ if NOT exist "%CMAKE%" (
 
 echo Please type the name of the library, tool or app to build. Then press enter.
 set /p input=
-set "cmnd="%CMAKE%" -G "Visual Studio 17 2022" -A Win32 -DDEBUG=ON -DRELEASE=ON -DSTATIC=ON -DTARGET=%input% -S "%DKCMAKE%" -B "%DIGITALKNOB%\build""
+set "cmnd="%CMAKE%" -G "Visual Studio 17 2022" -A Win32 -DDEBUG=ON -DRELEASE=ON -DSTATIC=ON -DREBUILDALL=ON -DTARGET=%input% -S "%DKCMAKE%" -B "%DKCMAKE%\build""
 echo %cmnd%
 %cmnd%
 

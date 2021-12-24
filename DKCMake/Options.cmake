@@ -33,7 +33,8 @@ if(TARGET)
 		dk_exit()
 	endif()
 	message("found ${TARGET} at ${target_path}")
-	DKSET(CMAKE_BINARY_DIR ${target_path}/win32)
+	set(CMAKE_BINARY_DIR "${target_path}/win32")
+	Wait("CMAKE_BINARY_DIR = ${CMAKE_BINARY_DIR}")
 endif()
 
 

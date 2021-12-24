@@ -1,3 +1,5 @@
+# TODO https://stackoverflow.com/a/6595001/688352
+
 if(DKPROCESS_INCLUDED)
   return()
 endif(DKPROCESS_INCLUDED)
@@ -21,9 +23,10 @@ string(REPLACE " " "_" APP_NAME ${APP_NAME})
 ############################################################################################
 ############################   ADD EXECUTABLE  #############################################
 ############################################################################################
-PROJECT(${APP_NAME})
-DKSET(DKAPP ON)
-
+if(NOT TARGET)
+	PROJECT(${APP_NAME})
+	DKSET(DKAPP ON)
+endif()
 ##################################################
 ##### Scan the DKPlugins and build the lists #####
 ##################################################
