@@ -67,7 +67,7 @@ foreach(plugin ${dkdepend_list})
 	#################### 3rdParty libs #####################
 	dk_getPathToPlugin(${plugin} plugin_path)
 	if(NOT plugin_path)
-		RETURN()
+		return()
 	endif()
 	#message(STATUS "plugin_path = ${plugin_path}")
 
@@ -113,7 +113,7 @@ foreach(plugin ${dkdepend_list})
 					set(PREBUILD ON)
 				endif()
 		endforeach()
-			
+		
 		if(PREBUILD)
 			message(STATUS "******* Prebuilding ${plugin} *******")
 			#DKSET(CURRENT_DIR ${plugin_path}/${OS})
