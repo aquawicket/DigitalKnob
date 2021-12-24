@@ -4250,4 +4250,4 @@ function(dk_FindTarget)
 	## search all DKApps folders
 	## search all DKPlugins folders
 	## search all 3rdParty/_DKIMPORT folders
-endif()
+endfunction()
