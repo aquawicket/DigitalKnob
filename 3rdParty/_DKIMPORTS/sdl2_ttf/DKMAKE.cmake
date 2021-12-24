@@ -1,6 +1,7 @@
 # https://github.com/libsdl-org/SDL_ttf
 # https://www.libsdl.org/projects/SDL_ttf/
 #
+# https://github.com/aquawicket/SDL_ttf/archive/refs/heads/main.zip
 # https://www.libsdl.org/projects/SDL_ttf/release/SDL2_ttf-2.0.15.zip
 
 ### DEPENDS ###
@@ -9,15 +10,9 @@ DKDEPEND(freetype)
 
 
 ### VERSION ###
-#if(LINUX OR RASPBERRY)
-	DKSET(SDLTTF_VERSION main)
-	DKSET(SDLTTF_NAME SDL2_ttf-${SDLTTF_VERSION})
-	DKSET(SDLTTF_DL https://github.com/libsdl-org/SDL_ttf/archive/refs/heads/main.zip)
-#else()
-#	DKSET(SDLTTF_VERSION 2.0.15)
-#	DKSET(SDLTTF_NAME SDL2_ttf-${SDLTTF_VERSION})
-#	DKSET(SDLTTF_DL https://www.libsdl.org/projects/SDL_ttf/release/${SDLTTF_NAME}.zip)
-#endif()
+DKSET(SDLTTF_VERSION main)
+DKSET(SDLTTF_NAME SDL2_ttf-${SDLTTF_VERSION})
+DKSET(SDLTTF_DL https://github.com/aquawicket/SDL_ttf/archive/refs/heads/${SDLTTF_VERSION}.zip)
 DKSET(SDLTTF ${3RDPARTY}/${SDLTTF_NAME})
 
 

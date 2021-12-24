@@ -1,10 +1,10 @@
 # https://github.com/libsdl-org/SDL_image
-# https://github.com/libsdl-org/SDL_image
-# https://github.com/libsdl-org/SDL_image
+# https://github.com/aquawicket/SDL_image
 #
+# https://github.com/aquawicket/SDL_image/archive/refs/heads/main.zip
+# https://github.com/libsdl-org/SDL_image/archive/refs/heads/main.zip
 # https://www.libsdl.org/projects/SDL_image/release/SDL2_image-2.0.1.zip
 # https://www.libsdl.org/projects/SDL_image/release/SDL2_image-2.0.5.zip
-# https://github.com/libsdl-org/SDL_image/archive/refs/heads/main.zip
 #
 # Notes:  VS compiler options
 #
@@ -43,7 +43,7 @@ DKDEPEND(sdl2)
 #DKSET(SDL2IMAGE_BUILD 5)  
 DKSET(SDL2IMAGE_VERSION main)
 DKSET(SDL2IMAGE_NAME SDL2_image-${SDL2IMAGE_VERSION})
-DKSET(SDL2IMAGE_DL https://github.com/libsdl-org/SDL_image/archive/refs/heads/${SDL2IMAGE_VERSION}.zip)  #main
+DKSET(SDL2IMAGE_DL https://github.com/aquawicket/SDL_image/archive/refs/heads/${SDL2IMAGE_VERSION}.zip)
 DKSET(SDL2IMAGE ${3RDPARTY}/${SDL2IMAGE_NAME})
 
 
