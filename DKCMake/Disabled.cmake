@@ -5,20 +5,19 @@ DKDISABLE(android_java_tools)
 DKDISABLE(conio.h)
 DKDISABLE(DKJerryscript)
 DKDISABLE(DKOFWindow)
-DKDISABLE(DKOSGAudio)
-DKDISABLE(DKOSGCef)
-DKDISABLE(DKOSGLights)
-DKDISABLE(DKOSGManipulator)
-DKDISABLE(DKOSGModel)
-DKDISABLE(DKOSGNotify)
-DKDISABLE(DKOSGPhysics)
-DKDISABLE(DKOSGPicker)
-DKDISABLE(DKOSGRml)
-DKDISABLE(DKOSGStats)
-DKDISABLE(DKOSGTerrain)
-DKDISABLE(DKOSGVideo)
-DKDISABLE(DKOSGViewer)
-DKDISABLE(DKWebSockets)
+DKDISABLE(DKOSGAudio)               # Openscenegraph
+DKDISABLE(DKOSGCef)                 # Openscenegraph
+DKDISABLE(DKOSGLights)              # Openscenegraph
+DKDISABLE(DKOSGManipulator)         # Openscenegraph
+DKDISABLE(DKOSGModel)               # Openscenegraph
+DKDISABLE(DKOSGNotify)              # Openscenegraph
+DKDISABLE(DKOSGPhysics)             # Openscenegraph
+DKDISABLE(DKOSGPicker)              # Openscenegraph
+DKDISABLE(DKOSGRml)                 # Openscenegraph
+DKDISABLE(DKOSGStats)               # Openscenegraph
+DKDISABLE(DKOSGTerrain)             # Openscenegraph
+DKDISABLE(DKOSGVideo)               # Openscenegraph
+DKDISABLE(DKOSGViewer)              # Openscenegraph 
 DKDISABLE(DKOSGWidget)
 DKDISABLE(DKOSGWindow)
 DKDISABLE(DKPlugin1)
@@ -28,7 +27,6 @@ DKDISABLE(DKScreenRecorder)
 DKDISABLE(DKSDLAudio)
 DKDISABLE(DKSDLWav)
 DKDISABLE(DKSDLVideo)
-DKDISABLE(DKSFMLRml)
 DKDISABLE(DKThread)
 DKDISABLE(DKTorrent)
 DKDISABLE(DKUpdate)
@@ -39,30 +37,26 @@ DKDISABLE(emsdk-portable)
 DKDISABLE(ffmpeg-dev)
 DKDISABLE(ffmpeg-shared)
 DKDISABLE(ffmpeg-static)
-DKDISABLE(glintercept)
-DKDISABLE(jerryscript)
+DKDISABLE(jpeg)                     # using libjpeg_turbo instead
 DKDISABLE(libcaca)
-DKDISABLE(librocket)
-DKDISABLE(libtorrent)
+DKDISABLE(librocket)                # replaced with RmlUi
 DKDISABLE(libvncserver)
 DKDISABLE(libvncserver-master-win)
 DKDISABLE(libx11)
-DKDISABLE(lua)
 DKDISABLE(miniweb)
 DKDISABLE(notepadpp)
-DKDISABLE(opencv)  #WORKING, just disabled because it takes so long to compile
 DKDISABLE(openframeworks)
-DKDISABLE(openscenegraph)
-DKDISABLE(osgaudio)
-DKDISABLE(osgbullet)
-DKDISABLE(osgworks)
-DKDISABLE(sdl2_gif)
-DKDISABLE(sdl2_giflib_sa)
-DKDISABLE(simple-getch)
-DKDISABLE(tesseract)
-DKDISABLE(uwebsockets)
-DKDISABLE(vs16-redistributable)
-DKDISABLE(waave)
+DKDISABLE(openscenegraph)          # Openscenegraph
+DKDISABLE(osgaudio)                # Openscenegraph
+DKDISABLE(osgbullet)               # Openscenegraph
+DKDISABLE(osgworks)                # Openscenegraph
+DKDISABLE(sdl2_gif)                # my use SDL_Image animation
+DKDISABLE(sdl2_giflib_sa)          # updated version of sdl2_gif
+DKDISABLE(simple-getch)            # kept for reference
+
+
+# Temporarily disabled
+DKDISABLE(opencv)  #WORKING, just disabled because it takes so long to compile
 
 
 if(NOT CMAKE_HOST_WIN32) # Disabled on Non-Windows host machines
@@ -78,25 +72,29 @@ if(WIN) # Disabled for Windows targets
 	DKDISABLE(DKWebSockets)
 	DKDISABLE(freealut)
 	DKDISABLE(freealut-master)
-	DKDISABLE(jpeg) #using libjpeg_turbo instead
-	DKDISABLE(kdevelop)
+	DKDISABLE(jerryscript)
 	DKDISABLE(leptonica)
+	DKDISABLE(libtorrent)
 	DKDISABLE(libwebp)
 	DKDISABLE(libwebsockets)
 	DKDISABLE(lighttpd)
+	DKDISABLE(lua)
 	DKDISABLE(openal)
 	DKDISABLE(openal-android)
 	DKDISABLE(opensles)
 	DKDISABLE(podofo)
 	DKDISABLE(sdl2_mixer)
+	DKDISABLE(tesseract)
+	DKDISABLE(uwebsockets)
+	DKDISABLE(waave)
 endif()
 if(WIN_32) # Disabled for Windows 32bit targets
 	#
 endif()
 if(WIN_64) # Disabled for Windows 64bit targets
-	DKDISABLE(DKWebSockets)
+	#DKDISABLE(DKWebSockets)
 	DKDISABLE(smpeg2)
-	DKDISABLE(uwebsockets)
+	#DKDISABLE(uwebsockets)
 endif()
 
 
@@ -117,7 +115,7 @@ if(MAC)  # Disabled on Mac host machines
 	DKDISABLE(freealut-master)
 	DKDISABLE(ghostscript)
 	DKDISABLE(imagemagick)
-	DKDISABLE(jpeg)
+	DKDISABLE(jerryscript)
 	DKDISABLE(leptonica)
 	DKDISABLE(libtorrent)
 	DKDISABLE(libuv)
@@ -126,15 +124,18 @@ if(MAC)  # Disabled on Mac host machines
 	DKDISABLE(libwebsockets)
 	DKDISABLE(libxml2)
 	DKDISABLE(lighttpd)
+	DKDISABLE(lua)
 	DKDISABLE(mobile_core_services)
 	DKDISABLE(openal-android)
 	DKDISABLE(openssl)
 	DKDISABLE(podofo)
 	DKDISABLE(sdl2_mixer)
 	DKDISABLE(smpeg2)
+	DKDISABLE(tesseract)
 	DKDISABLE(tidy-html5)
 	DKDISABLE(tiff)
 	DKDISABLE(uwebsockets)
+	DKDISABLE(waave)
 endif()
 
 if(IOS OR IOSSIM)
@@ -155,7 +156,7 @@ if(IOS OR IOSSIM)
 	DKDISABLE(freealut-master)
 	DKDISABLE(glew)
 	DKDISABLE(imagemagick)
-	DKDISABLE(jpeg)
+	DKDISABLE(jerryscript)
 	DKDISABLE(libiconv)
 	DKDISABLE(libmd)
 	DKDISABLE(libpng)
@@ -166,15 +167,18 @@ if(IOS OR IOSSIM)
 	DKDISABLE(libwebsockets)
 	DKDISABLE(libxml2)
 	DKDISABLE(lighttpd)
+	DKDISABLE(lua)
 	DKDISABLE(openal-android)
 	DKDISABLE(openssl)
 	DKDISABLE(podofo)
 	DKDISABLE(rtmidi)
 	DKDISABLE(sdl2_mixer)
 	DKDISABLE(smpeg2)
+	DKDISABLE(tesseract)
 	DKDISABLE(tidy-html5)
 	DKDISABLE(tiff)
 	DKDISABLE(uwebsockets)
+	DKDISABLE(waave)
 endif()
 
 
@@ -198,10 +202,10 @@ endif()
 if(LINUX) # Disabled for Linux targets
 	DKDISABLE(android-build-tools)
 	DKDISABLE(boxer)
-	DKDISABLE(DKHook) #NOTE: this has linux functions too
+	DKDISABLE(DKHook)         # NOTE: this has linux functions too
 	DKDISABLE(DKOcr)
 	DKDISABLE(DKSDLWav)
-	DKDISABLE(DKSDLText)
+	DKDISABLE(DKSFMLRml)
 	DKDISABLE(DKSFMLWindow)
 	DKDISABLE(DKTorrent)
 	DKDISABLE(DKWebSockets)
@@ -210,64 +214,58 @@ if(LINUX) # Disabled for Linux targets
 	DKDISABLE(ghostscript)
 	DKDISABLE(imagemagick)
 	DKDISABLE(jdk)
+	DKDISABLE(jerryscript)
 	DKDISABLE(leptonica)
+	DKDISABLE(libtorrent)
 	DKDISABLE(libwebp)
 	DKDISABLE(libwebsockets)
 	DKDISABLE(libxml2)
 	DKDISABLE(lighttpd)
+	DKDISABLE(lua)
 	DKDISABLE(openal-android)
 	DKDISABLE(openssl)
 	DKDISABLE(podofo)
 	DKDISABLE(sdl2_mixer)
-	DKDISABLE(sfml) # sfml_sfml-network)  #TODO: disabling individual sublibraries
+	DKDISABLE(sfml)           # sfml_sfml-network)  #TODO: disabling individual sublibraries
 	DKDISABLE(stackwalker)
+	DKDISABLE(tesseract)
 	DKDISABLE(uwebsockets)
 	DKDISABLE(upx)
+	DKDISABLE(waave)
 endif()
-if(LINUX_32) # Disabled for Linux 32bit targets
-	#
-endif()
-if(LINUX_64) # Disabled for Linux 64bit targets
-	#
-endif()
-
 
 
 if(RASPBERRY) # Disabled for Raspberry Pi targets
 	DKDISABLE(android-build-tools)
 	DKDISABLE(boxer)
-	DKDISABLE(DKHook) #NOTE: this has linux functions too
+	DKDISABLE(DKHook)           # NOTE: this has linux functions too
 	DKDISABLE(DKMidi)
 	DKDISABLE(DKOcr)
-	DKDISABLE(DKSDLText)
 	DKDISABLE(DKWebSockets)
 	DKDISABLE(freealut)
 	DKDISABLE(freealut-master)
 	DKDISABLE(ghostscript)
 	DKDISABLE(imagemagick)
 	DKDISABLE(jdk)
+	DKDISABLE(jerryscript)
 	DKDISABLE(leptonica)
+	DKDISABLE(libtorrent)
 	DKDISABLE(libwebp)
 	DKDISABLE(libwebsockets)
 	DKDISABLE(libxml2)
 	DKDISABLE(lighttpd)
+	DKDISABLE(lua)
 	DKDISABLE(openal-android)
 	DKDISABLE(openssl)
 	DKDISABLE(podofo)
 	DKDISABLE(python)
-	DKDISABLE(sdl2_gif)
 	DKDISABLE(sdl2_mixer)
 	DKDISABLE(stackwalker)
+	DKDISABLE(tesseract)
 	DKDISABLE(upx)
 	DKDISABLE(uwebsockets)
+	DKDISABLE(waave)
 endif()
-if(RASPBERRY_32) # Disabled for Raspberry Pi 32bit targets
-	#
-endif()
-if(RASPBERRY_64) # Disabled for Raspberry Pi 64bit targets
-	#
-endif()
-
 
 
 if(ANDROID) # Disabled for Android targets
@@ -275,12 +273,13 @@ if(ANDROID) # Disabled for Android targets
 	DKDISABLE(bzip2)
 	DKDISABLE(cef_binary)
 	DKDISABLE(curl)
+	DKDISABLE(cryptopp)
 	DKDISABLE(DKCef)
 	DKDISABLE(DKCefChild)
 	DKDISABLE(DKCurl)
-	DKDISABLE(cryptopp)
+	DKDISABLE(DKWebSockets)
 	DKDISABLE(DKDom)
-	DKDISABLE(DKHook) #NOTE: this has linux functions too
+	DKDISABLE(DKHook)        # NOTE: this has linux functions too
 	DKDISABLE(DKMySql)
 	DKDISABLE(DKOcr)
 	DKDISABLE(DKRml)
@@ -296,9 +295,10 @@ if(ANDROID) # Disabled for Android targets
 	DKDISABLE(giflib)
 	DKDISABLE(glew)
 	DKDISABLE(imagemagick)
-	DKDISABLE(jpeg)
+	DKDISABLE(jerryscript)
 	DKDISABLE(kdevelop)
 	DKDISABLE(leptonica)
+	DKDISABLE(libtorrent)
 	DKDISABLE(libiconv)
 	DKDISABLE(libogg)
 	DKDISABLE(libpng)
@@ -308,6 +308,7 @@ if(ANDROID) # Disabled for Android targets
 	DKDISABLE(libwebsockets)
 	DKDISABLE(libxml2)
 	DKDISABLE(lighttpd)
+	DKDISABLE(lua)
 	DKDISABLE(openal-android)
 	DKDISABLE(openssl)
 	DKDISABLE(podofo)
@@ -315,19 +316,17 @@ if(ANDROID) # Disabled for Android targets
 	DKDISABLE(rlottie)
 	DKDISABLE(rmlui)
 	DKDISABLE(rtmidi)
-	DKDISABLE(sdl2_gif)
 	DKDISABLE(sdl2_mixer)
 	DKDISABLE(sdl2_ttf)
 	DKDISABLE(sfml)
 	DKDISABLE(smpeg2)
 	DKDISABLE(stackwalker)
+	DKDISABLE(tesseract)
 	DKDISABLE(tidy-html5)
 	DKDISABLE(tiff)
 	DKDISABLE(uwebsockets)
 	DKDISABLE(xz)
-endif()
-if(ANDROID_32) # Disabled for Android 32bit targets
-	#
+	DKDISABLE(waave)
 endif()
 if(ANDROID_64) # Disabled for Android 64bit targets
 	DKDISABLE(boost)

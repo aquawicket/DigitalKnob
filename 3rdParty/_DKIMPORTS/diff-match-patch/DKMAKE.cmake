@@ -1,5 +1,7 @@
 # https://github.com/google/diff-match-patch
+# https://github.com/aquawicket/diff-match-patch
 #
+# https://github.com/aquawicket/diff-match-patch/archive/refs/heads/master.zip
 # https://github.com/google/diff-match-patch/archive/refs/heads/master.zip
 
 ### DEPENDS ###
@@ -9,7 +11,7 @@
 ### VERSION ###
 DKSET(DIFF_MATCH_PATCH_VERSION master)
 DKSET(DIFF_MATCH_PATCH_NAME diff-match-patch-${DIFF_MATCH_PATCH_VERSION})
-DKSET(DIFF_MATCH_PATCH_DL https://github.com/google/diff-match-patch/archive/refs/heads/${DIFF_MATCH_PATCH_VERSION}.zip)
+DKSET(DIFF_MATCH_PATCH_DL https://github.com/aquawicket/diff-match-patch/archive/refs/heads/${DIFF_MATCH_PATCH_VERSION}.zip)
 DKSET(DIFF_MATCH_PATCH ${3RDPARTY}/${DIFF_MATCH_PATCH_NAME})
 
 

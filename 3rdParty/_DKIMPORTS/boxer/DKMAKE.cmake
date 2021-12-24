@@ -1,5 +1,7 @@
 # https://github.com/aaronmjacobs/Boxer
+# https://github.com/aquawicket/Boxer
 #
+# https://github.com/aquawicket/Boxer/archive/refs/heads/master.zip
 # https://github.com/aaronmjacobs/Boxer/archive/refs/heads/master.zip
 # https://github.com/aaronmjacobs/Boxer/archive/refs/heads/C.zip
 
@@ -12,7 +14,7 @@ endif()
 ### VERSION ###
 DKSET(BOXER_VERSION master)
 DKSET(BOXER_NAME boxer-${BOXER_VERSION})
-DKSET(BOXER_DL https://github.com/aaronmjacobs/Boxer/archive/refs/heads/${BOXER_VERSION}.zip)
+DKSET(BOXER_DL https://github.com/aquawicket/Boxer/archive/refs/heads/${BOXER_VERSION}.zip)
 DKSET(BOXER ${3RDPARTY}/${BOXER_NAME})
 
 
