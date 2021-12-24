@@ -1,3 +1,4 @@
+#ifdef HAVE_eventloop
 #ifdef ANDROID
 /*
  * Copyright (C) 2008 The Android Open Source Project
@@ -36,4 +37,5 @@ extern int poll(struct pollfd *, nfds_t, int);
 __END_DECLS
 #endif // ANDROID_POLL_H
 
-#endif
+#endif //ANDROID
+#endif //HAVE_eventloop

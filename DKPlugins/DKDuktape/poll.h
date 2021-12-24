@@ -1,4 +1,4 @@
-#ifdef USE_eventloop
+#ifdef HAVE_eventloop
 #pragma once
 #ifndef DKPoll_H
 #define DKPoll_H
@@ -25,4 +25,4 @@
 #endif
 
 #endif //DKPoll_H
-#endif //USE_eventloop
+#endif //HAVE_eventloop
