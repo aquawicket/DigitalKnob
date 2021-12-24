@@ -34,6 +34,7 @@ if(TARGET)
 	endif()
 	message("found ${TARGET} at ${target_path}")
 	set(CMAKE_BINARY_DIR "${target_path}/win32")
+	DKSET(BYPASS_DISABLE ON)
 	DKDEPEND(${TARGET})
 endif()
 

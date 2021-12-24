@@ -373,6 +373,10 @@ endfunction()
 
 function(DKDISABLE plugin)
 	DKDEBUG(${ARGV})
+	if(BYPASS_DISABLE)
+		message(STATUS "******** DKDISABLE(${plugin}) ignored.  BYPASS_DISABLE is set to ON. ${plugin} will not be disabled ********")
+		return()
+	endif()
 	if(NOT ${CMAKE_CURRENT_LIST_DIR} STREQUAL ${DKCMAKE} AND NOT ${CMAKE_CURRENT_LIST_DIR} STREQUAL ${DKPROJECT}) # /from DKCMake or /App directory only
 		message(FATAL_ERROR "\n! WARNING !\n DKDISABLE() Can only be used from the DKCMake/Disabled.cmake file. This is to avoid having disabled libraries hideing everywhere.\n")
 	endif()
