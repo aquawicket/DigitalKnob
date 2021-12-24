@@ -84,9 +84,7 @@ do
 done
 	
 echo Please type the name of the library, tool or app to build. Then press enter.
-
-# set /p input=
-input="DKCore"
+read input 
 cmnd="cmake -G \"Unix Makefiles\" -DDEBUG=ON -DRELEASE=ON -DSTATIC=ON -DREBUILDALL=ON -DTARGET=$input -DOS=$OS -S $DKCMAKE -B $DKCMAKE/temp"
 
 echo " "
