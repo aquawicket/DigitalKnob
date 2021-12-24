@@ -1,5 +1,6 @@
 # https://github.com/libsdl-org/SDL_ttf
-# https://www.libsdl.org/projects/SDL_ttf/
+# https://www.libsdl.org/projects/SDL_ttf
+# https://github.com/aquawicket/SDL_ttf
 #
 # https://github.com/aquawicket/SDL_ttf/archive/refs/heads/main.zip
 # https://www.libsdl.org/projects/SDL_ttf/release/SDL2_ttf-2.0.15.zip
