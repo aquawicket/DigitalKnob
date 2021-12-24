@@ -3598,7 +3598,7 @@ endfunction()
 # Add a library or plugin to the dependency list
 function(DKDEPEND name)
 	DKDEBUG(${ARGV})
-	list(FIND dkdepend_disable_list "${ARGV}" index)
+	list(FIND dkdepend_disable_list "${name}" index)
 	if(${index} GREATER -1)
 		message(STATUS "${ARGV} IS DISABLED")
 		return()
@@ -3620,7 +3620,7 @@ function(DKDEPEND name)
 	#	endif()
 	# endif()
 		
-	list(FIND dkdepend_list "${name}" index)
+	list(FIND dkdepend_list "${ARGV}" index)
 	if(${index} GREATER -1)
 		return()  #library is already in the list
 	endif()
