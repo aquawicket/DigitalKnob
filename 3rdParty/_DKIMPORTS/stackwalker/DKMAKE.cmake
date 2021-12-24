@@ -12,9 +12,9 @@ endif()
 # https://www.boost.org/doc/libs/1_75_0/doc/html/stacktrace.html
 
 ### VERSION ###
-DKSET(STACKWALKER_VERSION 2005-07-27-v1)
+DKSET(STACKWALKER_VERSION 2013-01-07-v14)
 DKSET(STACKWALKER_NAME stackwalker-${STACKWALKER_VERSION})
-DKSET(STACKWALKER_DL https://github.com/ConnectedVision/connectedvision/raw/master/build_env/Conan/packages/StackWalker/2014.12.28/2.3.0/stackwalker-2014.12.28.zip)
+DKSET(STACKWALKER_DL https://github.com/ConnectedVision/connectedvision/raw/master/build_env/Conan/packages/StackWalker/2014.12.28/2.3.0/stackwalker-2014-12-28.zip)
 DKSET(STACKWALKER ${3RDPARTY}/${STACKWALKER_NAME})
 
 
