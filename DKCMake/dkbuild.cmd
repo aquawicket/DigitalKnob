@@ -38,7 +38,9 @@ goto pickos
 echo Please type the name of the library, tool or app to build. Then press enter.
 set /p input=
 set "cmnd="%CMAKE%" -G "Visual Studio 17 2022" -A %CPU% -DDEBUG=ON -DRELEASE=ON -DSTATIC=ON -DREBUILDALL=ON -DTARGET=%input% -DOS=%OS% -S "%DKCMAKE%" -B "%DKCMAKE%\temp""
+echo.
 echo %cmnd%
+echo.
 %cmnd%
 
 
