@@ -33,10 +33,8 @@ if(TARGET)
 		dk_exit()
 	endif()
 	message("found ${TARGET} at ${target_path}")
-	
-	#file(WRITE ${DKCMAKE}/DKMAKE.cmake DKDEPEND(${TARGET}))
-	set(CMAKE_BINARY_DIR "${CMAKE_BINARY_DIR}/win32")
-	#message(STATUS "CMAKE_BINARY_DIR = ${CMAKE_BINARY_DIR}")
+	set(CMAKE_BINARY_DIR "${target_path}/win32")
+	DKDEPEND(${TARGET})
 endif()
 
 
