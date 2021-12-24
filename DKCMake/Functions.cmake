@@ -63,7 +63,13 @@ function(DKUNSET variable)
 	unset(${variable})
 endfunction()
 
-
+function(dk_exit)
+	if(CMAKE_HOST_WIN32)
+		execute_process(COMMAND taskkill /IM cmake.exe /F WORKING_DIRECTORY ${CMAKE_CURRENT_LIST_DIR})
+	else()
+		execute_process(COMMAND killall -9 cmake WORKING_DIRECTORY ${CMAKE_CURRENT_LIST_DIR})
+	endif()
+endfunction()
 
 #####################################################################
 ###################         DKFUNCTIONS           ###################
@@ -3959,7 +3965,7 @@ endfunction()
 function(DKBUILD_LOG entry)
 	DKDEBUG(${ARGV})
 	#DKSET(DKBUILD_LOG_FILE "${DKBUILD_LOG_FILE}${entry}\n")
-	message(STATUS "buildlog->  ${entry}")
+	message(STATUS "	${entry}")
 	file(APPEND ${DKPROJECT}/${OS}/DKBUILD.log "${entry}\n")
 endfunction()
 
