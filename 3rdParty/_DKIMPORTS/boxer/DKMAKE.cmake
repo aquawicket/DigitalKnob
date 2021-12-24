@@ -10,7 +10,7 @@ if(RASPBERRY)
 endif()
 
 ### DEPENDS ###
-if(MAC OR IOS OR IOSSIM OR)
+if(MAC OR IOS OR IOSSIM)
 	DKDEPEND(cocoa)
 endif()
 
