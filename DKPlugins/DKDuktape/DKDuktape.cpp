@@ -10,13 +10,15 @@ DKStringArray DKDuktape::filelist;
 DKStringArray DKDuktape::functions;
 DKStringArray DKDuktape::codeToRun;
 
-bool DKDuktape::c_evloop = true;
-extern void poll_register(duk_context *ctx);
-extern void eventloop_register(duk_context *ctx);
-extern int eventloop_run(duk_context *ctx, void *udata);
-//extern void ncurses_register(duk_context *ctx);
-//extern void socket_register(duk_context *ctx);
-//extern void fileio_register(duk_context *ctx);
+#ifdef HAVE_eventloop
+	bool DKDuktape::c_evloop = true;
+	extern void poll_register(duk_context *ctx);
+	extern void eventloop_register(duk_context *ctx);
+	extern int eventloop_run(duk_context *ctx, void *udata);
+	//extern void ncurses_register(duk_context *ctx);
+	//extern void socket_register(duk_context *ctx);
+	//extern void fileio_register(duk_context *ctx);
+#endif
 
 const char *duk_push_string_file_raw(duk_context *ctx, const char *path, duk_uint_t flags) {
 	FILE *f = NULL;
@@ -66,7 +68,6 @@ duk_int_t duk_peval_file(duk_context *ctx, const char *path) {
 bool DKDuktape::Init(){
 	DKDEBUGFUNC();
 	ctx = NULL;
-	//c_evloop = true;
 	if(!ctx){
 		void* my_udata = (void*)0xdeadbeef;  /* whatever's most useful, can be NULL */
 		//ctx = duk_create_heap_default();
@@ -90,6 +91,7 @@ bool DKDuktape::Init(){
 		DKClass::DKCreate("DKXMLHttpRequest");
 			
 		//Register javascript Timers: setTimeout, clearTimeout, setInterval, clearInterval
+#ifdef HAVE_eventloop
 		poll_register(ctx);
 		if(c_evloop){ //c_eventloop.js
 			eventloop_register(ctx);
@@ -104,6 +106,8 @@ bool DKDuktape::Init(){
 			if(handle_file(ctx, file.c_str()) != 0)
 				return DKERROR("DKDuktape::Init(): Error in handle_file\n");
 		}
+#endif
+
         DKString app = DKFile::local_assets+"app.js";
 		LoadFile(app);
 	}
@@ -458,125 +462,6 @@ bool DKDuktape::UnloadFile(const DKString& path){
 	return false;
 }
 
-//////////////////////////////////////////////////////////////////
-////////////// eventloop stuff  //////////////////////////////////
-//////////////////////////////////////////////////////////////////
-int DKDuktape::handle_file(duk_context *ctx, const char *filename) {
-	//DKDEBUGFUNC(/*ctx, filename*/);
-	FILE *f = NULL;
-	int retval;
-	f = fopen(filename, "rb");
-	if(!f){
-		DKERROR("DKDuktape::handle_file(): failed to open source file \n");
-		return -1;
-	}
-	retval = handle_fh(ctx, f, filename);
-	fclose(f);
-	return retval;
-}
-
-int DKDuktape::handle_fh(duk_context *ctx, FILE *f, const char *filename){
-	//DKDEBUGFUNC(ctx, f, filename);
-	char *buf = NULL;
-	int len;
-	unsigned long got;
-	int rc;
-	int retval = -1;
-	if (fseek(f, 0, SEEK_END) < 0) {
-		DKERROR("DKDuktape::handle_fh(): SEEK_END Error \n");
-		return -1;
-	}
-	len = (int) ftell(f);
-	if (fseek(f, 0, SEEK_SET) < 0) {
-		DKERROR("DKDuktape::handle_fh(): SEEK_SET Error \n");
-		return -1;
-	}
-	buf = (char *) malloc(len);
-	if (!buf) {
-		DKERROR("DKDuktape::handle_fh(): buf invalid \n");
-		return -1;
-	}
-	got = fread((void *) buf, (size_t) 1, (size_t) len, f);
-	duk_push_lstring(ctx, buf, got);
-	duk_push_string(ctx, filename);
-	free(buf);
-	buf = NULL;
-	rc = duk_safe_call(ctx, wrapped_compile_execute, NULL, 2 /*nargs*/, 1 /*nret*/);
-	if (rc != DUK_EXEC_SUCCESS) {
-		DKERROR("DKDuktape::handle_fh(): DUK_EXEC_SUCCESS failed \n");
-		return -1;
-	} else {
-		duk_pop(ctx);
-		retval = 0;
-	}
-	if (buf) 
-		free(buf);
-	return retval;
-}
-
-int DKDuktape::wrapped_compile_execute(duk_context *ctx, void *udata){
-	//DKDEBUGFUNC(ctx);
-	int comp_flags = 0;
-	//int rc;
-	//Compile input and place it into global _USERCODE
-	duk_compile(ctx, comp_flags);
-	duk_push_global_object(ctx);
-	duk_insert(ctx, -2);  // [ ... global func ]
-	duk_put_prop_string(ctx, -2, "_USERCODE");
-	duk_pop(ctx);
-#if 0
-	printf("compiled usercode\n");
-#endif
-	//Start a zero timer which will call _USERCODE from within the event loop.
-	//DKINFO("DKDuktape: set _USERCODE timer\n");
-	//duk_eval_string(ctx, "setTimeout(function() { _USERCODE(); }, 0);");
-	//duk_pop(ctx);
-	/*
-	if(c_evloop){
-		DKINFO("DKDuktape: calling eventloop_run()\n");
-		rc = duk_safe_call(ctx, eventloop_run, 0 , 1 );
-		if (rc != 0) {
-			DKINFO("DKDuktape: eventloop_run() failed: "+toString(duk_to_string(ctx, -1))+"\n");
-		}
-		duk_pop(ctx);
-	} 
-	else{
-		//DKINFO("DKDuktape: calling EventLoop.run()\n");
-		duk_eval_string(ctx, "EventLoop.run();");
-		duk_pop(ctx);
-	}
-	*/
-	return 0;
-}
-
-void DKDuktape::EventLoop(){
-	//DKDEBUGFUNC();
-	if(!DKUtil::InMainThread())
-		return;
-	//cycle through queue codeToRun
-	if(codeToRun.size() > 0){
-		DKString rval;
-		DKDuktape::RunDuktape(codeToRun[0], rval);
-		if(!rval.empty())
-			DKWARN("DKDuktape::EventLoop(): rval = "+rval+"\n");
-		codeToRun.erase(codeToRun.begin());
-	}
-	//run the duktape event loop for timers
-	int rc;
-	if(c_evloop){ //c_eventloop.js
-		//DKINFO("DKDuktape: calling c++ eventloop_run()\n");
-		rc = duk_safe_call(ctx, eventloop_run, NULL, 0, 1);
-		if(rc != 0)
-			DKERROR("DKDuktape: eventloop_run() failed: "+toString(duk_to_string(ctx, -1))+"\n");
-		duk_pop(ctx);
-	} 
-	else{ //ecma_eventloop.js
-		//DKINFO("DKDuktape: calling javascript EventLoop.run()\n");
-		duk_eval_string(ctx, "EventLoop.run();");
-		duk_pop(ctx);
-	}
-}
-
 DKString DKDuktape::eventToAddress(DKEvents* event) {
 	if (!event) {
 		DKERROR("DKDuktape::eventToAddress(): invalid event\n");
@@ -615,3 +500,127 @@ DKEvents* DKDuktape::addressToEvent(const DKString& address) {
 	//}
 	return event;
 }
+
+void DKDuktape::EventLoop(){
+	//DKDEBUGFUNC();
+	if(!DKUtil::InMainThread())
+		return;
+	//cycle through queue codeToRun
+	if(codeToRun.size() > 0){
+		DKString rval;
+		DKDuktape::RunDuktape(codeToRun[0], rval);
+		if(!rval.empty())
+			DKWARN("DKDuktape::EventLoop(): rval = "+rval+"\n");
+		codeToRun.erase(codeToRun.begin());
+	}
+		
+#if HAVE_eventloop
+	//run the duktape event loop for timers
+	int rc;
+	if(c_evloop){ //c_eventloop.js
+		//DKINFO("DKDuktape: calling c++ eventloop_run()\n");
+		rc = duk_safe_call(ctx, eventloop_run, NULL, 0, 1);
+		if(rc != 0)
+			DKERROR("DKDuktape: eventloop_run() failed: "+toString(duk_to_string(ctx, -1))+"\n");
+		duk_pop(ctx);
+	} 
+	else{ //ecma_eventloop.js
+		//DKINFO("DKDuktape: calling javascript EventLoop.run()\n");
+		duk_eval_string(ctx, "EventLoop.run();");
+		duk_pop(ctx);
+	}
+#endif //HAVE_eventloop
+}
+
+//////////////////////////////////////////////////////////////////
+////////////// eventloop stuff  //////////////////////////////////
+//////////////////////////////////////////////////////////////////
+#ifdef HAVE_eventloop
+	int DKDuktape::handle_file(duk_context *ctx, const char *filename) {
+		//DKDEBUGFUNC(/*ctx, filename*/);
+		FILE *f = NULL;
+		int retval;
+		f = fopen(filename, "rb");
+		if(!f){
+			DKERROR("DKDuktape::handle_file(): failed to open source file \n");
+			return -1;
+		}
+		retval = handle_fh(ctx, f, filename);
+		fclose(f);
+		return retval;
+	}
+
+	int DKDuktape::handle_fh(duk_context *ctx, FILE *f, const char *filename){
+		//DKDEBUGFUNC(ctx, f, filename);
+		char *buf = NULL;
+		int len;
+		unsigned long got;
+		int rc;
+		int retval = -1;
+		if (fseek(f, 0, SEEK_END) < 0) {
+			DKERROR("DKDuktape::handle_fh(): SEEK_END Error \n");
+			return -1;
+		}
+		len = (int) ftell(f);
+		if (fseek(f, 0, SEEK_SET) < 0) {
+			DKERROR("DKDuktape::handle_fh(): SEEK_SET Error \n");
+			return -1;
+		}
+		buf = (char *) malloc(len);
+		if (!buf) {
+			DKERROR("DKDuktape::handle_fh(): buf invalid \n");
+			return -1;
+		}
+		got = fread((void *) buf, (size_t) 1, (size_t) len, f);
+		duk_push_lstring(ctx, buf, got);
+		duk_push_string(ctx, filename);
+		free(buf);
+		buf = NULL;
+		rc = duk_safe_call(ctx, wrapped_compile_execute, NULL, 2 /*nargs*/, 1 /*nret*/);
+		if (rc != DUK_EXEC_SUCCESS) {
+			DKERROR("DKDuktape::handle_fh(): DUK_EXEC_SUCCESS failed \n");
+			return -1;
+		} else {
+			duk_pop(ctx);
+			retval = 0;
+		}
+		if (buf) 
+			free(buf);
+		return retval;
+	}
+
+	int DKDuktape::wrapped_compile_execute(duk_context *ctx, void *udata){
+		//DKDEBUGFUNC(ctx);
+		int comp_flags = 0;
+		//int rc;
+		//Compile input and place it into global _USERCODE
+		duk_compile(ctx, comp_flags);
+		duk_push_global_object(ctx);
+		duk_insert(ctx, -2);  // [ ... global func ]
+		duk_put_prop_string(ctx, -2, "_USERCODE");
+		duk_pop(ctx);
+	#if 0
+		printf("compiled usercode\n");
+	#endif
+		//Start a zero timer which will call _USERCODE from within the event loop.
+		//DKINFO("DKDuktape: set _USERCODE timer\n");
+		//duk_eval_string(ctx, "setTimeout(function() { _USERCODE(); }, 0);");
+		//duk_pop(ctx);
+		/*
+		if(c_evloop){
+			DKINFO("DKDuktape: calling eventloop_run()\n");
+			rc = duk_safe_call(ctx, eventloop_run, 0 , 1 );
+			if (rc != 0) {
+				DKINFO("DKDuktape: eventloop_run() failed: "+toString(duk_to_string(ctx, -1))+"\n");
+			}
+			duk_pop(ctx);
+		} 
+		else{
+			//DKINFO("DKDuktape: calling EventLoop.run()\n");
+			duk_eval_string(ctx, "EventLoop.run();");
+			duk_pop(ctx);
+		}
+		*/
+		return 0;
+	}
+#endif //HAVE_eventloop

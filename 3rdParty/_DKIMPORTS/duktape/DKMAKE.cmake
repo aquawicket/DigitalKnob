@@ -11,8 +11,6 @@ DKDEPEND(python)
 DKDEPEND(nodejs)
 
 ### VERSION ###
-##DKSET(DUKTAPE_VERSION 2.6.0)
-##DKSET(DUKTAPE_VERSION master)
 DKSET(DUKTAPE_VERSION let-support)
 DKSET(DUKTAPE_NAME duktape-${DUKTAPE_VERSION})
 #DKSET(DUKTAPE_DL https://duktape.org/${DUKTAPE_NAME}.tar.xz)
@@ -39,15 +37,15 @@ DKCOPY(${DUKTAPE}/dist/src/ ${DUKTAPE}/src TRUE)
 endif()
 
 
-if(NOT EXISTS ${DUKTAPE}/src/duktape.cpp)
-	DKCOPY(${DUKTAPE}/src/duktape.c ${DUKTAPE}/src/duktape.cpp FALSE)
-endif()
-if(NOT EXISTS ${DUKTAPE}/examples/eventloop/poll.cpp)
-	DKCOPY(${DUKTAPE}/examples/eventloop/poll.c ${DUKTAPE}/examples/eventloop/poll.cpp FALSE)
-endif()
-if(NOT EXISTS ${DUKTAPE}/examples/eventloop/c_eventloop.cpp)
-	DKCOPY(${DUKTAPE}/examples/eventloop/c_eventloop.c ${DUKTAPE}/examples/eventloop/c_eventloop.cpp FALSE)
-endif()
+#if(NOT EXISTS ${DUKTAPE}/src/duktape.cpp)
+#	DKCOPY(${DUKTAPE}/src/duktape.c ${DUKTAPE}/src/duktape.cpp FALSE)
+#endif()
+#if(NOT EXISTS ${DUKTAPE}/examples/eventloop/poll.cpp)
+#	DKCOPY(${DUKTAPE}/examples/eventloop/poll.c ${DUKTAPE}/examples/eventloop/poll.cpp FALSE)
+#endif()
+#if(NOT EXISTS ${DUKTAPE}/examples/eventloop/c_eventloop.cpp)
+#	DKCOPY(${DUKTAPE}/examples/eventloop/c_eventloop.c ${DUKTAPE}/examples/eventloop/c_eventloop.cpp FALSE)
+#endif()
 
 
 
