@@ -26,7 +26,7 @@ DKSET(CURRENT_DIR ${DIGITALKNOB})
 ###########################################################################
 if(TARGET)
 	message(STATUS "Building ${TARGET}\n")
-	dk_FindTarget(${TARGET} target_path target_type)
+	dk_FindTarget("${TARGET}" target_path target_type)
 	if(NOT target_path)
 		message(STATUS "ERROR: Could not find target ${TARGET}")
 		Wait("press any key to exit")

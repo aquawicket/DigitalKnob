@@ -45,8 +45,7 @@ endforeach()
 DKBUILD_LOG("\n")
 
 foreach(plugin ${dkdepend_list})
-	#DKSET(QUEUE_BUILD OFF)
-	DKSET(QUEUE_BUILD ON)
+	DKSET(QUEUE_BUILD OFF)
 	DKSET(LIBLIST "") 
 	## used for double checking
 	#DKSET(CMAKE_FILE "")
@@ -90,7 +89,11 @@ foreach(plugin ${dkdepend_list})
 	#	add_subdirectory(${${PLUGIN_NAME}} ${${PLUGIN_NAME}}/${OS})
 	#	message(STATUS "add_subdirectory( ${${PLUGIN_NAME}} ${${PLUGIN_NAME}}/${OS} )")
 	#endif()
-	string(FIND "${DKPLUGIN_LIST}" "${plugin}" isDKPlugin)
+	string(TOLOWER "${DKPLUGIN_LIST}" DKPLUGIN_LIST_lower)
+	string(TOLOWER "${plugin}" plugin_lower)
+	
+	#string(FIND "${DKPLUGIN_LIST}" "${plugin}" isDKPlugin)
+	string(FIND "${DKPLUGIN_LIST_lower}" "${plugin_lower}" isDKPlugin)
 	####################### DKPlugins #######################
 	if(${isDKPlugin} GREATER -1)
 		#Add the DKPlugin to the app project
@@ -109,14 +112,14 @@ foreach(plugin ${dkdepend_list})
 		## Prebuild DKPlugins switch
 		## TODO: set this to work when the library files are absent.
 		## If the library files already exist, we can skip this. 
-		#foreach(lib ${LIBLIST})
-		#	if(NOT EXISTS ${lib})
-		#		set(PREBUILD ON)
-		#		DKSET(QUEUE_BUILD ON)
-		#	endif()
-		#endforeach()
+		foreach(lib ${LIBLIST})
+			if(NOT EXISTS ${lib})
+				DKSET(PREBUILD ON)
+				DKSET(QUEUE_BUILD ON)
+			endif()
+		endforeach()
 		
-		DKSET(PREBUILD ON)
+		#DKSET(PREBUILD ON)
 		if(PREBUILD)
 			message(STATUS "******* Prebuilding ${plugin} *******")
 			#DKSET(CURRENT_DIR ${plugin_path}/${OS})
