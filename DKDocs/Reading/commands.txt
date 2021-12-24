@@ -35,3 +35,5 @@ on 'When the shell exits' chosen 'Close the window'
 See a list of required shared library of an executable (Linux)
 ldd executable.name
 
+Delete a non-empty directory without comfirmation and spaces in the name (windows)
+rmdir /Q /S "folder name"
