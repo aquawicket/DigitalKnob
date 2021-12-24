@@ -3557,6 +3557,9 @@ SET(ASSETS
 
 # Add a library's files to the App's assets
 function(DKASSETS name)
+	if(NOT DKAPP)
+		return()
+	endif()	
 	DKDEBUG(${ARGV})
 	dk_getPathToPlugin(${name} plugin_path)
 	if(NOT plugin_path)

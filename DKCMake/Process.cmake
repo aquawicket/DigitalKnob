@@ -252,7 +252,9 @@ foreach(plugin ${dkdepend_list})
 	endif()
 endforeach()
 
-	
+if(NOT DKAPP)
+	return()
+endif()	
 
 message(STATUS "\n")
 message(STATUS "***************************************")
