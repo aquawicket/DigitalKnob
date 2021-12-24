@@ -8,19 +8,10 @@ if(COMMAND cmake_policy)
 	cmake_policy(SET CMP0003 NEW) ##https://cmake.org/cmake/help/latest/policy/CMP0003.html
 endif(COMMAND cmake_policy)
 
-if(TARGET)
-	message(STATUS "You've specified to build Target = ${TARGET}")
-	dk_exit()
-endif()
+
 ###############################################################
 ## Set variables for paths
 ###############################################################
-#get_filename_component(DIGITALKNOB ${CMAKE_SOURCE_DIR} ABSOLUTE)
-#get_filename_component(FOLDER_NAME ${DIGITALKNOB} NAME)
-#while(NOT FOLDER_NAME STREQUAL "digitalknob")
-#	get_filename_component(DIGITALKNOB ${DIGITALKNOB} DIRECTORY)
-#	get_filename_component(FOLDER_NAME ${DIGITALKNOB} NAME)
-#endwhile()
 dk_file_getDigitalknobPath(DIGITALKNOB)
 DKSET(DKCMAKE ${DIGITALKNOB}/DK/DKCMake)
 DKSET(DKPLUGINS ${DIGITALKNOB}/DK/DKPlugins)
@@ -29,6 +20,15 @@ DKSET(DKIMPORTS ${3RDPARTY}/_DKIMPORTS)
 DKSET(DKDOWNLOAD ${DIGITALKNOB}/Download)
 DKSET(DKWEB "http://127.0.0.1")
 DKSET(CURRENT_DIR ${DIGITALKNOB})
+
+
+###########################################################################
+## Bulid the TARGET passed from the command line
+###########################################################################
+if(TARGET)
+	message(STATUS "You've specified to build Target = ${TARGET}")
+	dk_exit()
+endif()
 
 
 ###########################################################################

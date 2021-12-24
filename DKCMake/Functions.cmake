@@ -4245,3 +4245,9 @@ function(dk_RemoveSubstring removethis fromthis result)
 	endforeach()
 	set(${result} ${rtn} PARENT_SCOPE) #return result
 endfunction()
+
+function(dk_FindTarget)
+	## search all DKApps folders
+	## search all DKPlugins folders
+	## search all 3rdParty/_DKIMPORT folders
+endif()
