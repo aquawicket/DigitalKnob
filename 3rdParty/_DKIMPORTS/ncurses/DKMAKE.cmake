@@ -1,10 +1,9 @@
-if(CMAKE_HOST_WIN32)
-	return()
-endif()
-
 # https://invisible-island.net/ncurses/ncurses.html
 #
 # https://invisible-island.net/datafiles/release/ncurses.tar.gz
+if(CMAKE_HOST_WIN32)
+	return()
+endif()
 
 
 ### VERSION ###
@@ -21,11 +20,11 @@ DKINSTALL(${NCURSES_DL} ncurses ${NCURSES})
 ### LINK ###
 DKINCLUDE(${NCURSES}/include)
 DKINCLUDE(${NCURSES}/${OS})
-MAC_DEBUG_LIB(${NCURSES}/${OS}/${DEBUG_DIR}/lib/libncursesd.a)
+MAC_DEBUG_LIB(${NCURSES}/${OS}/${DEBUG_DIR}/lib/libncurses.a)
 MAC_RELEASE_LIB(${NCURSES}/${OS}/${RELEASE_DIR}/lib/libncurses.a)
-LINUX_DEBUG_LIB(${NCURSES}/${OS}/${DEBUG_DIR}/lib/libncursesd.a)
+LINUX_DEBUG_LIB(${NCURSES}/${OS}/${DEBUG_DIR}/lib/libncurses.a)
 LINUX_RELEASE_LIB(${NCURSES}/${OS}/${RELEASE_DIR}/lib/libncurses.a)
-RASPBERRY_DEBUG_LIB(${NCURSES}/${OS}/${DEBUG_DIR}/lib/libncursesd.a)
+RASPBERRY_DEBUG_LIB(${NCURSES}/${OS}/${DEBUG_DIR}/lib/libncurses.a)
 RASPBERRY_RELEASE_LIB(${NCURSES}/${OS}/${RELEASE_DIR}/lib/libncurses.a)
 
 MAC_DEBUG_PATH(${NCURSES}/${OS}/${DEBUG_DIR})
