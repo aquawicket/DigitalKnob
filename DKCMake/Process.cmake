@@ -108,7 +108,13 @@ foreach(plugin ${dkdepend_list})
 		## Prebuild DKPlugins switch
 		## TODO: set this to work when the library files are absent.
 		## If the library files already exist, we can skip this. 
-		if(1)
+		foreach(lib ${LIBLIST})
+				if(NOT EXISTS ${lib})
+					set(PREBUILD ON)
+				endif()
+		endforeach()
+			
+		if(PREBUILD)
 			message(STATUS "******* Prebuilding ${plugin} *******")
 			#DKSET(CURRENT_DIR ${plugin_path}/${OS})
 			#dk_makeDirectory(${CURRENT_DIR})
@@ -240,6 +246,8 @@ foreach(plugin ${dkdepend_list})
 				endif()
 			endif()
 		
+			set(PREBUILD OFF)
+
 			## double check that the missing libs were built
 			foreach(lib ${LIBLIST})
 				if(NOT EXISTS ${lib})
