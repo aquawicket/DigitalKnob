@@ -1,5 +1,5 @@
 #include <RmlUi/Core.h>
-#include <SFML_image.h>
+//#include <SFML_image.h>
 #include "DK/DK.h"
 #include "DK/DKString.h"
 #include "DKSFMLRml/DKSFMLRmlRenderer.h"

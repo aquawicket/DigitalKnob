@@ -3,7 +3,7 @@
 #define DKSFMLRmlSystem_H
 
 #include <RmlUi/Core.h>
-#include <SFML.h>
+//#include <SFML.h>
 #include "DK/DK.h"
 
 class RmlSFML2SystemInterface : public Rml::SystemInterface

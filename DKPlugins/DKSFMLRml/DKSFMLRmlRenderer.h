@@ -3,7 +3,7 @@
 #define DKSFMLRmlRenderer_H
 
 #include <RmlUi/Core.h>
-#include <SFML.h>
+//#include <SFML.h>
 
 #if !defined(ANDROID) && !defined(IOS)
 #include "SFML_opengl.h"
