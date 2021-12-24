@@ -377,7 +377,7 @@ function(DKDISABLE plugin)
 		message(STATUS "******** DKDISABLE(${plugin}) ignored.  BYPASS_DISABLE is set to ON. ${plugin} will not be disabled ********")
 		return()
 	endif()
-	if(NOT ${CMAKE_CURRENT_LIST_DIR} STREQUAL ${DKCMAKE} AND NOT ${CMAKE_CURRENT_LIST_DIR} STREQUAL ${DKPROJECT}) # /from DKCMake or /App directory only
+	if(NOT ${CMAKE_CURRENT_LIST_DIR} STREQUAL ${DKCMAKE} AND NOT ${CMAKE_CURRENT_LIST_DIR} STREQUAL ${DKPROJECT}) # /from DKCMake or curremt Project directory only
 		message(FATAL_ERROR "\n! WARNING !\n DKDISABLE() Can only be used from the DKCMake/Disabled.cmake file. This is to avoid having disabled libraries hideing everywhere.\n")
 	endif()
 	if(${ARGC} GREATER 1)
@@ -3598,7 +3598,7 @@ endfunction()
 # Add a library or plugin to the dependency list
 function(DKDEPEND name)
 	DKDEBUG(${ARGV})
-	list(FIND dkdepend_disable_list "${name}" index)
+	list(FIND dkdepend_disable_list "${ARGV}" index)
 	if(${index} GREATER -1)
 		message(STATUS "${ARGV} IS DISABLED")
 		return()
@@ -3620,7 +3620,7 @@ function(DKDEPEND name)
 	#	endif()
 	# endif()
 		
-	list(FIND dkdepend_list "${ARGV}" index)
+	list(FIND dkdepend_list "${name}" index)
 	if(${index} GREATER -1)
 		return()  #library is already in the list
 	endif()
@@ -4206,11 +4206,13 @@ function(dk_addTarget name target)
 	endif()
 	if(${name}_all)
 		DKSET(${name}_${target} 1)
+		# DKSET(${name}::${target} 1) # TESTME
 	endif()
 endfunction()
 
 function(dk_removeTarget name target)
 	DKDEBUG(${ARGV})
+	message(STATUS "dk_removeTarget( ${ARGV} )")
 	if(${name}_targets)
 		list(REMOVE_ITEM ${name}_targets ${target})
 	endif()
@@ -4221,6 +4223,7 @@ function(dk_removeTarget name target)
 	endif()
 	DKSET(${name}_${target} 0)
 	DKUNSET(${name}_${target})
+	#DKUNSET(${name}::${target}) # TESTME
 endfunction()
 
 
