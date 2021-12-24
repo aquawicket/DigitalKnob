@@ -100,7 +100,7 @@ endfunction()
 #CreateFunction("Testies")
 #Testies()
 
-function(Wait msg)
+function(Wait)
 	DKDEBUG(${ARGV})
 	set(msg ${ARGV})
 	if(NOT msg)
