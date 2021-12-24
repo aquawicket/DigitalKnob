@@ -1,5 +1,5 @@
 #include "DK/stdafx.h"
-#include "SFML.h"
+//#include "SFML.h"
 #include "DK/DKFile.h"
 #include "DKAssets/DKAssets.h"
 #include "DKSFMLRml/DKSFMLRml.h"

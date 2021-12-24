@@ -17,7 +17,7 @@ if NOT exist "%CMAKE%" (
 set "OS="
 set "CPU="
 :pickos
-echo " "
+echo.
 echo 1. win32
 echo 2. win64
 echo 3. android32

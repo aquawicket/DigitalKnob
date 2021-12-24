@@ -2,7 +2,7 @@
 #include "DK/DKApp.h"
 #include "DK/DKOsInfo.h"
 #include "DK/DKFile.h"
-#ifdef WIN32
+#ifdef HAVE_boxer
 	#include <boxer/boxer.h>
 #endif
 

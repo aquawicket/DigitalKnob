@@ -2,7 +2,7 @@
 #include "DKLog.h"
 #include "DKFile.h"
 #include <cstring>
-#ifdef WIN32
+#ifdef HAVE_boxer
 	#include <boxer/boxer.h>
 #endif
 #include <fstream>
@@ -307,7 +307,7 @@ bool DKLog::Log(const char* file, int line, const char* func, const DKString& in
 			//catch (const std::string& e){
 			catch(...){
 #endif
-			#ifdef WIN32
+			#ifdef HAVE_boxer
 				output += "\n\n Would you like to exit the application?";
 				boxer::Selection sel = boxer::show(output.c_str(), "EXCEPTION", boxer::Style::Error, boxer::Buttons::YesNo);
 				if(sel == boxer::Selection::Yes){
