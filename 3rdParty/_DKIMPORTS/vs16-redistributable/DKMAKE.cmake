@@ -6,7 +6,7 @@
 if(NOT CMAKE_HOST_WIN32)
 	return()
 endif()
-if(visualstudio)
+if(VISUALSTUDIO)
 	return()
 endif()
 
