@@ -80,11 +80,11 @@ WIN64_RELEASE_MSYS(make)
 
 
 MAC64_DEBUG_DKSETPATH(${FLAC}/${OS}/${DEBUG_DIR})
-MAC64_DEBUG_COMMAND(../../configure --disable-shared --enable-static) #${OGG_APPLE_DEBUG})
-MAC64_DEBUG_COMMAND(make)
+MAC64_DEBUG_DKQCOMMAND(../../configure --disable-shared --enable-static) #${OGG_APPLE_DEBUG})
+MAC64_DEBUG_DKQCOMMAND(make)
 MAC64_RELEASE_DKSETPATH(${FLAC}/${OS}/${RELEASE_DIR})
-MAC64_RELEASE_COMMAND(../../configure --disable-shared --enable-static) #${OGG_APPLE_RELEASE})
-MAC64_RELEASE_COMMAND(make)
+MAC64_RELEASE_DKQCOMMAND(../../configure --disable-shared --enable-static) #${OGG_APPLE_RELEASE})
+MAC64_RELEASE_DKQCOMMAND(make)
 
 
 IOS_DEBUG_DKSETPATH(${FLAC}/${OS}/${DEBUG_DIR})
