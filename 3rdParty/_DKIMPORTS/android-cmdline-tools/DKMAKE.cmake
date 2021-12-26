@@ -1,4 +1,4 @@
-if(NOT CMAKE_HOST_WIN32)
+if(NOT WIN_HOST)
 	return()
 endif()
 
@@ -27,7 +27,7 @@ LINUX_HOST_SET(ANDROIDTOOLS_DL https://dl.google.com/android/repository/commandl
 ### INSTALL ###
 DKINSTALL(${ANDROIDTOOLS_DL} android-cmdline-tools ${ANDROIDTOOLS})
 
-if(CMAKE_HOST_WIN32)
+if(WIN_HOST)
 	DKEXECUTE_PROCESS(COMMAND cmd /c sdkmanager --sdk_root=${ANDROIDSDK} WORKING_DIRECTORY ${ANDROIDTOOLS}/bin)
 #	if(NOT EXISTS ${ANDROIDSDK}/build-tools/${ANDROIDBUILDTOOLS_VERSION})
 #		message("Installing Android build-tools: ${ANDROIDBUILDTOOLS_VERSION} . . .")
@@ -95,7 +95,7 @@ if(CMAKE_HOST_WIN32)
 endif()
 
 
-#if(CMAKE_HOST_APPLE)
+#if(MAC_HOST)
 #	if(NOT EXISTS ${ANDROIDSDK}/build-tools/${ANDROIDBUILDTOOLS_VERSION})
 #		message("Installing Android build-tools: ${ANDROIDBUILDTOOLS_VERSION} . . .")
 #		set(ARGUMNTS "${ANDROIDSDK}/bin/sdkmanager --install build-tools\\;${ANDROIDBUILDTOOLS_VERSION} --sdk_root=${ANDROIDSDK}")
@@ -112,7 +112,7 @@ endif()
 
 
 
-#if(CMAKE_HOST_LINUX)
+#if(LINUX_HOST)
 #	if(NOT EXISTS ${ANDROIDSDK}/build-tools/${ANDROIDBUILDTOOLS_VERSION})
 #		message("Installing Android build-tools: ${ANDROIDBUILDTOOLS_VERSION} . . .")
 #		set(ARGUMNTS "${ANDROIDSDK}/bin/sdkmanager --install build-tools\\;${ANDROIDBUILDTOOLS_VERSION} --sdk_root=${ANDROIDSDK}")

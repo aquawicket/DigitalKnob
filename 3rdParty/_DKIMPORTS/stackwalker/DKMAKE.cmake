@@ -4,7 +4,7 @@
 # https://github.com/ConnectedVision/connectedvision/raw/master/build_env/Conan/packages/StackWalker/2014.12.28/2.3.0/stackwalker-2014-12-28.zip
 # https://www.codeproject.com/KB/threads/StackWalker/stackwalker.zip
 
-if(NOT CMAKE_HOST_WIN32)
+if(NOT WIN_HOST)
 	return()
 endif()
 

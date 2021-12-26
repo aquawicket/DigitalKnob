@@ -3,7 +3,7 @@
 # https://aka.ms/vs/16/release/vc_redist.x86.exe
 # https://softmany.com/microsoft-visual-c-redistributable-package/download/
 
-if(NOT CMAKE_HOST_WIN32)
+if(NOT WIN_HOST)
 	return()
 endif()
 if(VISUALSTUDIO)

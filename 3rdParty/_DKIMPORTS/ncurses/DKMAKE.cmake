@@ -1,7 +1,7 @@
 # https://invisible-island.net/ncurses/ncurses.html
 #
 # https://invisible-island.net/datafiles/release/ncurses.tar.gz
-if(CMAKE_HOST_WIN32)
+if(WIN_HOST)
 	return()
 endif()
 

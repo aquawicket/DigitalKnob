@@ -7,15 +7,15 @@
 
 ### VERSION ###
 DKSET(JDK_VERSION 9.0.4)
-if(CMAKE_HOST_WIN32)
+if(WIN_HOST)
 	DKSET(JDK_NAME openjdk-${JDK_VERSION}_windows-x64_bin)
 	DKSET(JDK_DL https://download.java.net/java/GA/jdk9/${JDK_VERSION}/binaries/${JDK_NAME}.tar.gz)
 endif()
-if(CMAKE_HOST_APPLE)
+if(MAC_HOST)
 	DKSET(JDK_NAME openjdk-${JDK_VERSION}_osx-x64_bin)
 	DKSET(JDK_DL https://download.java.net/java/GA/jdk9/${JDK_VERSION}/binaries/${JDK_NAME}.tar.gz)
 endif()
-if(CMAKE_HOST_LINUX)
+if(LINUX_HOST)
 	DKSET(JDK_NAME openjdk-${JDK_VERSION}_linux-x64_bin)
 	DKSET(JDK_DL https://download.java.net/java/GA/jdk9/${JDK_VERSION}/binaries/${JDK_NAME}.tar.gz)
 endif()

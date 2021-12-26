@@ -8,7 +8,7 @@ DKSET(EMSCRIPTEN_NAME emsdk-${EMSCRIPTEN_VERSION})
 DKSET(EMSCRIPTEN_DL https://github.com/emscripten-core/emsdk/archive/refs/tags/${EMSCRIPTEN_VERSION}.zip)
 DKSET(EMSCRIPTEN ${3RDPARTY}/${EMSCRIPTEN_NAME})
 
-IF(CMAKE_HOST_WIN32)
+IF(WIN_HOST)
 	IF(NOT EXISTS ${EMSCRIPTEN})
 		DKSET(CURRENT_DIR ${DKDOWNLOAD})
 		## DOWNLOAD(www.internet.com/emsdk-portable-64bit.zip) ## find an online link

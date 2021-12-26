@@ -1,4 +1,4 @@
-if(NOT CMAKE_HOST_WIN32)
+if(NOT WIN_HOST)
 	return()
 endif()
 
