@@ -41,7 +41,7 @@ WIN64_DKQCOMMAND(${DKCMAKE_BUILD} -Dshared=OFF -Dunicode=OFF -Dstatic_runtime=ON
 WIN_VS(${TORRENT_NAME} libtorrent.sln torrent-rasterbar)
 
 
-MAC_PATH(${TORRENT}/${OS})
+MAC_DKSETPATH(${TORRENT}/${OS})
 MAC64_DKQCOMMAND(${DKCMAKE_BUILD} ${TORRENT})
 MAC_XCODE_DEBUG(${TORRENT_NAME} libtorrent-rasterbar)
 

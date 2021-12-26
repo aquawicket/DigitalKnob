@@ -58,7 +58,7 @@ WIN_DKQCOMMAND(${DKCMAKE_BUILD} -DWITH_SIMD=OFF ${JPEG})
 WIN_VS(${JPEG_NAME} libjpeg-turbo.sln turbojpeg-static)
 
 
-MAC_PATH(${JPEG}/${OS})
+MAC_DKSETPATH(${JPEG}/${OS})
 MAC32_DKQCOMMAND(${DKCMAKE_BUILD} ${JPEG})
 MAC_XCODE(${JPEG_NAME} turbojpeg-static)
 

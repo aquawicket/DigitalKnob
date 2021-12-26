@@ -86,7 +86,7 @@ if(MAC_64)
 	if(NOT EXISTS ${BZIP2}/${OS}/bzip2.c)
 		DKCOPY(${BZIP2}/copy ${BZIP2}/${OS} TRUE)
 	endif()
-	MAC_PATH(${BZIP2}/${OS})
+	MAC_DKSETPATH(${BZIP2}/${OS})
 	MAC_DKQCOMMAND(make)
 endif()
 

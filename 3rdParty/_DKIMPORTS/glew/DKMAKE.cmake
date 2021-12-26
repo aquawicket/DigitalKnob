@@ -67,7 +67,7 @@ WIN_VS_RELEASE(${GLEW_NAME} glew.sln glew_s)
 #DKCOPY(${GLEW}/${OS}/bin/${RELEASE_DIR} ${GLEW}/${OS}/CMakeFiles/Export/bin/ TRUE)
 
 
-MAC_PATH(${GLEW}/${OS})
+MAC_DKSETPATH(${GLEW}/${OS})
 MAC64_DKQCOMMAND(${DKCMAKE_BUILD} ${GLEW}/build/cmake)
 MAC_XCODE(${GLEW_NAME} glew_s)
 
