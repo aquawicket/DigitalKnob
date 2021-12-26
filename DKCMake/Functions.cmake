@@ -147,6 +147,8 @@ function(CreateWrappers name)
 	
 	CreateFunc("function(UNIX_HOST_${name})\n if(UNIX_HOST)\n ${name}(\${ARGV})\n endif()\n endfunction()\n")
 	CreateFunc("function(APPLE_${name})\n if(MAC OR IOS OR IOSSIM)\n ${name}(\${ARGV})\n endif()\n endfunction()\n")
+	CreateFunc("function(APPLE_DEBUG_${name})\n if(MAC OR IOS OR IOSSIM AND DEBUG)\n ${name}(\${ARGV})\n endif()\n endfunction()\n")
+	CreateFunc("function(APPLE_RELEASE_${name})\n if(MAC OR IOS OR IOSSIM AND RELEASE)\n ${name}(\${ARGV})\n endif()\n endfunction()\n")
 endfunction()
 
 # dk_string_has
