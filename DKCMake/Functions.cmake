@@ -105,6 +105,9 @@ function(CreateWrappers name)
 	cmake_language(EVAL CODE "function(LINUX_HOST_${name})\n if(LINUX_HOST)\n ${name}(\${ARGV})\n endif()\n endfunction()\n")
 	cmake_language(EVAL CODE "function(LINUX32_HOST_${name})\n if(LINUX_HOST AND X86)\n ${name}(\${ARGV})\n endif()\n endfunction()\n")
 	cmake_language(EVAL CODE "function(LINUX64_HOST_${name})\n if(LINUX_HOST AND X64)\n ${name}(\${ARGV})\n endif()\n endfunction()\n")
+	
+	cmake_language(EVAL CODE "function(UNIX_HOST_${name})\n if(UNIX_HOST)\n ${name}(\${ARGV})\n endif()\n endfunction()\n")
+	cmake_language(EVAL CODE "function(APPLE_${name})\n if(MAC OR IOS OR IOSSIM)\n ${name}(\${ARGV})\n endif()\n endfunction()\n")
 endfunction()
 
 macro(DKINFO msg)
