@@ -149,7 +149,7 @@ WIN64_DEBUG_DKQCOMMAND(b2 toolset=msvc-14.3 address-model=64 variant=debug link=
 WIN64_RELEASE_DKQCOMMAND(b2 toolset=msvc-14.3 address-model=64 variant=release link=static threading=multi runtime-debugging=off runtime-link=static define=BOOST_ALL_NO_LIB --layout=system ${BOOST_WITH} ${BOOST_WITHOUT} --build-dir=${BOOST}/${OS}/${RELEASE_DIR} --stagedir=${BOOST}/${OS}/${RELEASE_DIR})
 
 
-MAC32_PATH(${BOOST})
+MAC32_DKSETPATH(${BOOST})
 if(NOT EXISTS ${BOOST}/b2)
 	MAC32_DKQCOMMAND(./bootstrap.sh)
 endif()
@@ -157,7 +157,7 @@ MAC32_DEBUG_COMMAND(./b2 toolset=darwin address-model=32 variant=debug link=stat
 MAC32_RELEASE_COMMAND(./b2 toolset=darwin address-model=32 variant=release link=static threading=multi runtime-debugging=off runtime-link=static --layout=system ${BOOST_WITH} ${BOOST_WITHOUT} --build-dir=${BOOST}/${OS}/${RELEASE_DIR} --stagedir=${BOOST}/${OS}/${RELEASE_DIR})
 
 
-MAC64_PATH(${BOOST})
+MAC64_DKSETPATH(${BOOST})
 if(NOT EXISTS ${BOOST}/b2)
 	MAC64_DKQCOMMAND(./bootstrap.sh)
 endif()
