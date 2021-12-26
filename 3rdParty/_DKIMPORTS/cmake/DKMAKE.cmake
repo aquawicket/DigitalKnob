@@ -7,9 +7,9 @@ endif()
 
 
 ### VERSION ###
-DKSET(CMAKE_VERSION 3.21.1)
-DKSET(CMAKE_NAME cmake-${CMAKE_VERSION}-windows-i386)
-WIN_SET(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v${CMAKE_VERSION}/${CMAKE_NAME}.msi)
+WIN_HOST_SET(CMAKE_VERSION 3.21.1)
+WIN_HOST_SET(CMAKE_NAME cmake-${CMAKE_VERSION}-windows-i386)
+WIN_HOST_SET(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v${CMAKE_VERSION}/${CMAKE_NAME}.msi)
 #dk_getShortPath("C:/Program Files (x86)/CMake/bin" CMAKE)
 WIN_HOST_SET(CMAKE C:/PROGRA~2/CMake/bin)
 MAC_HOST_SET(CMAKE /usr/local/bin)
