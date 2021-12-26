@@ -1574,7 +1574,14 @@ function(DKCOMMAND)
 endfunction()
 
 
-#####################
+#########################
+function(WIN_HOST_COMMAND)
+	DKDEBUG(${ARGV})
+	if(CMAKE_HOST_WIN32)
+		DKCOMMAND(${ARGV})
+	endif()
+endfunction()
+
 function(WIN_COMMAND)
 	DKDEBUG(${ARGV})
 	if(WIN AND QUEUE_BUILD)
@@ -1625,7 +1632,14 @@ function(WIN64_RELEASE_COMMAND)
 endfunction()
 
 
-#####################
+##########################
+function(MAC_HOST_COMMAND)
+	DKDEBUG(${ARGV})
+	if(CMAKE_HOST_APPLE)
+		DKCOMMAND(${ARGV})
+	endif()
+endfunction()
+
 function(MAC_COMMAND)
 	DKDEBUG(${ARGV})
 	if(MAC AND QUEUE_BUILD)
@@ -1764,7 +1778,14 @@ function(IOSSIM64_COMMAND)
 endfunction()
 
 
-#######################
+############################
+function(LINUX_HOST_COMMAND)
+	DKDEBUG(${ARGV})
+	if(CMAKE_HOST_LINUX)
+		DKCOMMAND(${ARGV})
+	endif()
+endfunction()
+
 function(LINUX_COMMAND)
 	DKDEBUG(${ARGV})
 	if(LINUX AND QUEUE_BUILD)
