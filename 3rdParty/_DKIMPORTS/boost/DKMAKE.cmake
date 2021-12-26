@@ -133,7 +133,7 @@ endforeach()
 
 
 ### COMPILE ###
-WIN32_PATH(${BOOST})
+WIN32_DKSETPATH(${BOOST})
 if(NOT EXISTS ${BOOST}/b2.exe)
 	WIN32_DKQCOMMAND("bootstrap.bat vc143")
 endif()
