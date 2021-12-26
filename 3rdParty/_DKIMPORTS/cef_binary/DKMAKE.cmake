@@ -16,8 +16,8 @@ endif()
 
 ### VERSION ###
 DKSET(CEF_VERSION 81.3.3+g072a5f5+chromium-81.0.4044.138)
-WIN32_SET(CEF_NAME cef_binary_${CEF_VERSION}_windows32)
-WIN64_SET(CEF_NAME cef_binary_${CEF_VERSION}_windows64)
+WIN32_DKSET(CEF_NAME cef_binary_${CEF_VERSION}_windows32)
+WIN64_DKSET(CEF_NAME cef_binary_${CEF_VERSION}_windows64)
 MAC64_SET(CEF_NAME cef_binary_${CEF_VERSION}_macosx64)
 LINUX32_SET(CEF_NAME cef_binary_${CEF_VERSION}_linux32)
 LINUX64_SET(CEF_NAME cef_binary_${CEF_VERSION}_linux64)

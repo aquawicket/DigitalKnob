@@ -14,11 +14,11 @@ else()
 	DKSET(IMAGEMAGICK_VERSION 7.1.0-0)
 endif()
 DKSET(IMAGEMAGICK_NAME ImageMagick-${IMAGEMAGICK_VERSION})
-WIN_SET(IMAGEMAGICK_DL http://ftp.icm.edu.pl/packages/ImageMagick/binaries/${IMAGEMAGICK_NAME}.zip)
+WIN_DKSET(IMAGEMAGICK_DL http://ftp.icm.edu.pl/packages/ImageMagick/binaries/${IMAGEMAGICK_NAME}.zip)
 LINUX_SET(IMAGEMAGICK_DL https://github.com/ImageMagick/ImageMagick/archive/refs/tags/${IMAGEMAGICK_VERSION}.zip)
 MAC_SET(IMAGEMAGICK_DL https://github.com/ImageMagick/ImageMagick/archive/refs/tags/${IMAGEMAGICK_VERSION}.zip )
 DKSET(IMAGEMAGICK ${3RDPARTY}/${IMAGEMAGICK_NAME})
-WIN_SET(IMAGEMAGICK_CONVERT ${IMAGEMAGICK}/convert.exe)
+WIN_DKSET(IMAGEMAGICK_CONVERT ${IMAGEMAGICK}/convert.exe)
 
 
 ### INSTALL ###

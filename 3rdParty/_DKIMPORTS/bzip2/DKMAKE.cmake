@@ -13,7 +13,7 @@ DKDEPEND(libgcc)
 ### VERSION ###
 DKSET(BZIP2_VERSION 1.0.8)
 DKSET(BZIP2_NAME bzip2-${BZIP2_VERSION})
-WIN_SET(BZIP2_DL https://github.com/kiyolee/bzip2-win-build/archive/refs/tags/v${BZIP2_VERSION}.zip)
+WIN_DKSET(BZIP2_DL https://github.com/kiyolee/bzip2-win-build/archive/refs/tags/v${BZIP2_VERSION}.zip)
 LINUX_SET(BZIP2_DL ftp://sourceware.org/pub/bzip2/${BZIP2_NAME}.tar.gz)
 RASPBERRY_SET(BZIP2_DL ftp://sourceware.org/pub/bzip2/${BZIP2_NAME}.tar.gz)
 DKSET(BZIP2 ${3RDPARTY}/${BZIP2_NAME})

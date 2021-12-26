@@ -16,13 +16,13 @@ LINUX_HOST_SET(ANDROIDNDK_DL https://dl.google.com/android/repository/android-nd
 
 #DKSET(ANDROIDNDK_VERSION r22b)
 #DKSET(ANDROIDNDK_BUILD 22.1.7171670)
-#WIN_SET(ANDROIDNDK_DL https://dl.google.com/android/repository/android-ndk-r22b-windows-x86_64.zip)
+#WIN_DKSET(ANDROIDNDK_DL https://dl.google.com/android/repository/android-ndk-r22b-windows-x86_64.zip)
 #MAC_SET(ANDROIDNDK_DL https://dl.google.com/android/repository/android-ndk-r22b-darwin-x86_64.zip)
 #LINUX_SET(ANDROIDNDK_DL https://dl.google.com/android/repository/android-ndk-r22b-linux-x86_64.zip)
 
 #DKSET(ANDROIDNDK_VERSION r23b)
 #DKSET(ANDROIDNDK_BUILD 23.1.7779620)
-#WIN_SET(ANDROIDNDK_DL https://dl.google.com/android/repository/android-ndk-r23b-windows-x86_64.zip)
+#WIN_DKSET(ANDROIDNDK_DL https://dl.google.com/android/repository/android-ndk-r23b-windows-x86_64.zip)
 #MAC_SET(ANDROIDNDK_DL https://dl.google.com/android/repository/android-ndk-r23b-darwin-x86_64.zip)
 #LINUX_SET(ANDROIDNDK_DL https://dl.google.com/android/repository/android-ndk-r23b-linux-x86_64.zip)
 
