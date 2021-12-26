@@ -1,5 +1,3 @@
-# TODO https://stackoverflow.com/a/6595001/688352
-
 if(DKPROCESS_INCLUDED)
   return()
 endif(DKPROCESS_INCLUDED)
