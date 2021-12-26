@@ -750,10 +750,17 @@ endfunction()
 ###############################################################
 
 ####################### DKSET ###########
-# FIXME: These set functions are mixing and matching Host vs Target.   the style should follow WIN64HOST_SET and WIN64_SET patterns 
+# FIXME: These set functions are mixing and matching Host vs Target.   the style should follow WIN64_HOST_SET and WIN64_SET patterns 
 function(WIN_HOST_SET)
 	DKDEBUG(${ARGV})
 	if(WIN_HOST)
+		DKSET(${ARGV})
+	endif()
+endfunction()
+
+function(UNIX_HOST_SET)
+	DKDEBUG(${ARGV})
+	if(UNIX_HOST)
 		DKSET(${ARGV})
 	endif()
 endfunction()
