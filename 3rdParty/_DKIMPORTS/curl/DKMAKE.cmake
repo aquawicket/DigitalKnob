@@ -3,6 +3,7 @@
 # https://curl.haxx.se/download/curl-7.34.0.zip
 
 ### DEPENDS ###
+DKDEPEND(ws2_32.lib)
 DKDEPEND(zlib)
 DKDEPEND(openssl)
 
