@@ -10,7 +10,7 @@ ENDIF()
 
 if(WIN)
 	DKCOPY(${STACKWALKER}/StackWalker/StackWalker.cpp ${DKPLUGINS}/DKDebug/StackWalker.cpp FALSE)
-	WIN_INCLUDE(${3RDPARTY}/stackwalker/StackWalker)
+	WIN_DKINCLUDE(${3RDPARTY}/stackwalker/StackWalker)
 endif()
 
 generateCmake(DKDebug)

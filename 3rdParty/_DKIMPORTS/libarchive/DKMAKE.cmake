@@ -31,7 +31,7 @@ DKINSTALL(${ARCHIVE_DL} libarchive ${ARCHIVE}) #NOPATCH
 DKDEFINE(LIBARCHIVE_STATIC)
 DKINCLUDE(${ARCHIVE}/libarchive)
 DKINCLUDE(${ARCHIVE}/${OS})
-ANDROID_INCLUDE(${ARCHIVE}/contrib/android/include)
+ANDROID_DKINCLUDE(${ARCHIVE}/contrib/android/include)
 WIN_DEBUG_LIB(${ARCHIVE}/${OS}/libarchive/${DEBUG_DIR}/archive_static.lib)
 WIN_RELEASE_LIB(${ARCHIVE}/${OS}/libarchive/${RELEASE_DIR}/archive_static.lib)
 APPLE_DEBUG_LIB(${ARCHIVE}/${OS}/libarchive/${DEBUG_DIR}/libarchive.a)

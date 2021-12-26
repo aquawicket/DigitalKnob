@@ -74,10 +74,10 @@ DKINSTALL(${SDL2_DL} sdl2 ${SDL2})
 
 ### DKPLUGINS LINK ###
 DKINCLUDE(${SDL2}/include)
-ANDROID_INCLUDE(${ANDROIDNDK}/sources/android/cpufeatures)
-ANDROID_INCLUDE(${SDL2}/src)
-RASPBERRY_INCLUDE(/opt/vc/lib)
-LINUX_INCLUDE(${SDL2}/${OS}/${RELEASE_DIR}/include)
+ANDROID_DKINCLUDE(${ANDROIDNDK}/sources/android/cpufeatures)
+ANDROID_DKINCLUDE(${SDL2}/src)
+RASPBERRY_DKINCLUDE(/opt/vc/lib)
+LINUX_DKINCLUDE(${SDL2}/${OS}/${RELEASE_DIR}/include)
 
 #dk_addTarget(sdl2 SDL2static)
 #dk_addTarget(sdl2 SDL2main)
