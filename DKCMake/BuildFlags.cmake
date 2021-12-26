@@ -14,6 +14,7 @@ set(DKBUILDTOOLS_INCLUDED true)
 # https://chromium.googlesource.com/external/github.com/google/crc32c/+/refs/tags/1.0.5/CMakeLists.txt
 # https://docs.microsoft.com/en-us/cpp/build/reference/eh-exception-handling-model?view=msvc-170
 # https://stackoverflow.com/a/24836566/688352
+# https://docs.microsoft.com/en-us/cpp/c-runtime-library/crt-library-features?view=msvc-170
 
 # Get the definition of any shell command                                             https://explainshell.com          
 # helpful terminal commands
