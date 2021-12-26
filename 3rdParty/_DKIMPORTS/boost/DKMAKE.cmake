@@ -153,34 +153,34 @@ MAC32_DKSETPATH(${BOOST})
 if(NOT EXISTS ${BOOST}/b2)
 	MAC32_DKQCOMMAND(./bootstrap.sh)
 endif()
-MAC32_DEBUG_COMMAND(./b2 toolset=darwin address-model=32 variant=debug link=static threading=multi runtime-debugging=on runtime-link=static --layout=system ${BOOST_WITH} ${BOOST_WITHOUT} --build-dir=${BOOST}/${OS}/${DEBUG_DIR} --stagedir=${BOOST}/${OS}/${DEBUG_DIR})
-MAC32_RELEASE_COMMAND(./b2 toolset=darwin address-model=32 variant=release link=static threading=multi runtime-debugging=off runtime-link=static --layout=system ${BOOST_WITH} ${BOOST_WITHOUT} --build-dir=${BOOST}/${OS}/${RELEASE_DIR} --stagedir=${BOOST}/${OS}/${RELEASE_DIR})
+MAC32_DEBUG_DKQCOMMAND(./b2 toolset=darwin address-model=32 variant=debug link=static threading=multi runtime-debugging=on runtime-link=static --layout=system ${BOOST_WITH} ${BOOST_WITHOUT} --build-dir=${BOOST}/${OS}/${DEBUG_DIR} --stagedir=${BOOST}/${OS}/${DEBUG_DIR})
+MAC32_RELEASE_DKQCOMMAND(./b2 toolset=darwin address-model=32 variant=release link=static threading=multi runtime-debugging=off runtime-link=static --layout=system ${BOOST_WITH} ${BOOST_WITHOUT} --build-dir=${BOOST}/${OS}/${RELEASE_DIR} --stagedir=${BOOST}/${OS}/${RELEASE_DIR})
 
 
 MAC64_DKSETPATH(${BOOST})
 if(NOT EXISTS ${BOOST}/b2)
 	MAC64_DKQCOMMAND(./bootstrap.sh)
 endif()
-MAC64_DEBUG_COMMAND(./b2 toolset=darwin address-model=64 variant=debug link=static threading=multi runtime-debugging=on runtime-link=static --layout=system ${BOOST_WITH} ${BOOST_WITHOUT} --build-dir=${BOOST}/${OS}/${DEBUG_DIR} --stagedir=${BOOST}/${OS}/${DEBUG_DIR})
-MAC64_RELEASE_COMMAND(./b2 toolset=darwin address-model=64 variant=release link=static threading=multi runtime-debugging=off runtime-link=static --layout=system ${BOOST_WITH} ${BOOST_WITHOUT} --build-dir=${BOOST}/${OS}/${RELEASE_DIR} --stagedir=${BOOST}/${OS}/${RELEASE_DIR})
+MAC64_DEBUG_DKQCOMMAND(./b2 toolset=darwin address-model=64 variant=debug link=static threading=multi runtime-debugging=on runtime-link=static --layout=system ${BOOST_WITH} ${BOOST_WITHOUT} --build-dir=${BOOST}/${OS}/${DEBUG_DIR} --stagedir=${BOOST}/${OS}/${DEBUG_DIR})
+MAC64_RELEASE_DKQCOMMAND(./b2 toolset=darwin address-model=64 variant=release link=static threading=multi runtime-debugging=off runtime-link=static --layout=system ${BOOST_WITH} ${BOOST_WITHOUT} --build-dir=${BOOST}/${OS}/${RELEASE_DIR} --stagedir=${BOOST}/${OS}/${RELEASE_DIR})
 
 # TODO
-#IOSSIM64_PATH(${BOOST})
+#IOSSIM64_DKSETPATH(${BOOST})
 #if(NOT EXISTS ${BOOST}/b2)
 #	MAC64_DKQCOMMAND(./bootstrap.sh)
 #endif()
-#IOSSIM64_DEBUG_COMMAND(./b2 toolset=darwin address-model=64 variant=debug link=static threading=multi runtime-debugging=on runtime-link=static --layout=system ${BOOST_WITH} ${BOOST_WITHOUT} #--build-dir=${BOOST}/${OS}/${DEBUG_DIR} --stagedir=${BOOST}/${OS}/${DEBUG_DIR})
-#IOSSIM64_RELEASE_COMMAND(./b2 toolset=darwin address-model=64 variant=release link=static threading=multi runtime-debugging=off runtime-link=static --layout=system ${BOOST_WITH} ${BOOST_WITHOUT} #--build-dir=${BOOST}/${OS}/${RELEASE_DIR} --stagedir=${BOOST}/${OS}/${RELEASE_DIR})
+#IOSSIM64_DEBUG_DKQCOMMAND(./b2 toolset=darwin address-model=64 variant=debug link=static threading=multi runtime-debugging=on runtime-link=static --layout=system ${BOOST_WITH} ${BOOST_WITHOUT} #--build-dir=${BOOST}/${OS}/${DEBUG_DIR} --stagedir=${BOOST}/${OS}/${DEBUG_DIR})
+#IOSSIM64_RELEASE_CDKQOMMAND(./b2 toolset=darwin address-model=64 variant=release link=static threading=multi runtime-debugging=off runtime-link=static --layout=system ${BOOST_WITH} ${BOOST_WITHOUT} #--build-dir=${BOOST}/${OS}/${RELEASE_DIR} --stagedir=${BOOST}/${OS}/${RELEASE_DIR})
 
 
-LINUX32_PATH(${BOOST})
+LINUX32_DKSETPATH(${BOOST})
 if(NOT EXISTS ${BOOST}/b2)
 	LINUX32_DKQCOMMAND(./bootstrap.sh)
 endif()
-LINUX32_DEBUG_COMMAND(./b2 toolset=gcc address-model=32 variant=debug link=static threading=multi runtime-debugging=on runtime-link=static --layout=system ${BOOST_WITH} ${BOOST_WITHOUT} --build-dir=${BOOST}/${OS}/${DEBUG_DIR} --stagedir=${BOOST}/${OS}/${DEBUG_DIR})
+LINUX32_DEBUG_DKQCOMMAND(./b2 toolset=gcc address-model=32 variant=debug link=static threading=multi runtime-debugging=on runtime-link=static --layout=system ${BOOST_WITH} ${BOOST_WITHOUT} --build-dir=${BOOST}/${OS}/${DEBUG_DIR} --stagedir=${BOOST}/${OS}/${DEBUG_DIR})
 LINUX32_RELEASE_DKQCOMMAND(./b2 toolset=gcc address-model=32 variant=release link=static threading=multi runtime-debugging=off runtime-link=static --layout=system ${BOOST_WITH} ${BOOST_WITHOUT} --build-dir=${BOOST}/${OS}/${RELEASE_DIR} --stagedir=${BOOST}/${OS}/${RELEASE_DIR})
 
-LINUX64_PATH(${BOOST})
+LINUX64_DKSETPATH(${BOOST})
 if(NOT EXISTS ${BOOST}/b2)
 	LINUX64_DKQCOMMAND(sudo ./bootstrap.sh)
 endif()
@@ -188,14 +188,14 @@ LINUX64_DEBUG_DKQCOMMAND(./b2 toolset=gcc address-model=64 variant=debug link=st
 LINUX64_RELEASE_DKQCOMMAND(./b2 toolset=gcc address-model=64 variant=release link=static threading=multi runtime-debugging=off runtime-link=static --layout=system ${BOOST_WITH} ${BOOST_WITHOUT} --build-dir=${BOOST}/${OS}/${RELEASE_DIR} --stagedir=${BOOST}/${OS}/${RELEASE_DIR})
 
 
-RASPBERRY32_PATH(${BOOST})
+RASPBERRY32_DKSETPATH(${BOOST})
 if(NOT EXISTS ${BOOST}/b2)
 	RASPBERRY32_DKQCOMMAND(./bootstrap.sh)
 endif()
 RASPBERRY32_DEBUG_DKQCOMMAND(./b2 toolset=gcc address-model=32 variant=debug link=static threading=multi runtime-debugging=on runtime-link=static --layout=system ${BOOST_WITH} ${BOOST_WITHOUT} --build-dir=${BOOST}/${OS}/${DEBUG_DIR} --stagedir=${BOOST}/${OS}/${DEBUG_DIR})
 RASPBERRY32_RELEASE_DKQCOMMAND(./b2 toolset=gcc address-model=32 variant=release link=static threading=multi runtime-debugging=off runtime-link=static --layout=system ${BOOST_WITH} ${BOOST_WITHOUT} --build-dir=${BOOST}/${OS}/${RELEASE_DIR} --stagedir=${BOOST}/${OS}/${RELEASE_DIR})
 
-RASPBERRY64_PATH(${BOOST})
+RASPBERRY64_DKSETPATH(${BOOST})
 if(NOT EXISTS ${BOOST}/b2)
 	RASPBERRY64_DKQCOMMAND(./bootstrap.sh)
 endif()
@@ -203,14 +203,14 @@ RASPBERRY64_DEBUG_DKQCOMMAND(./b2 toolset=gcc address-model=64 variant=debug lin
 RASPBERRY64_RELEASE_DKQCOMMAND(./b2 toolset=gcc address-model=64 variant=release link=static threading=multi runtime-debugging=off runtime-link=static --layout=system ${BOOST_WITH} ${BOOST_WITHOUT} --build-dir=${BOOST}/${OS}/${RELEASE_DIR} --stagedir=${BOOST}/${OS}/${RELEASE_DIR})
 
 
-ANDROID_PATH(${BOOST})
+ANDROID_DKSETPATH(${BOOST})
 ANDROID_MSYS(./SetupAndroid.sh)
 if(NOT EXISTS ${BOOST}/b2.exe)
 	ANDROID_DKQCOMMAND("bootstrap.bat vc143")
 endif()
 
 
-ANDROID32_DEBUG_COMMAND(
+ANDROID32_DEBUG_DKQCOMMAND(
 	setx NDK_ROOT ${ANDROIDNDK} &&
 	b2
 	toolset=clang-armeabiv7a
@@ -230,7 +230,7 @@ ANDROID32_DEBUG_COMMAND(
 	abi=aapcs
 	binary-format=elf )
 
-ANDROID32_RELEASE_COMMAND(
+ANDROID32_RELEASE_DKQCOMMAND(
 	setx NDK_ROOT ${ANDROIDNDK} &&
 	b2
 	toolset=clang-armeabiv7a
@@ -250,7 +250,7 @@ ANDROID32_RELEASE_COMMAND(
 	abi=aapcs
 	binary-format=elf )
 
-ANDROID64_DEBUG_COMMAND(
+ANDROID64_DEBUG_DKQCOMMAND(
 	setx NDK_ROOT ${ANDROIDNDK} &&
 	b2
 	toolset=clang-arm64v8a
@@ -271,7 +271,7 @@ ANDROID64_DEBUG_COMMAND(
 	abi=aapcs
 	binary-format=elf )
 	
-ANDROID64_RELEASE_COMMAND(
+ANDROID64_RELEASE_DKQCOMMAND(
 	setx NDK_ROOT ${ANDROIDNDK} &&
 	b2
 	toolset=clang-arm64v8a
@@ -308,7 +308,7 @@ if(SHARED)
 #	WIN32_RELEASE_LIB(${BOOST}/${OS}/lib/boost_system.lib)
 #endif()
 
-#WIN_PATH(${BOOST})
+#WIN_DKSETPATH(${BOOST})
 #WIN32_DKQCOMMAND(bootstrap.bat)
 #WIN_DKQCOMMAND(b2 toolset=msvc-14.0 link=shared variant=debug runtime-debugging=on runtime-link=shared --threading=multi --layout=system --build-dir=${BOOST}/${OS}/${DEBUG_DIR} --stagedir=${BOOST}/${OS}/${DEBUG_DIR})
 #WIN_DKQCOMMAND(b2 toolset=msvc-14.0 link=shared variant=release runtime-debugging=off runtime-link=shared --threading=multi --layout=system --build-dir=${BOOST}/${OS}/${RELEASE_DIR} --stagedir=${BOOST}/${OS}/${RELEASE_DIR})
