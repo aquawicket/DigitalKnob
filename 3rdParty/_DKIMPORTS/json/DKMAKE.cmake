@@ -22,7 +22,7 @@ DKINCLUDE(${JSON}/include/nlohmann)
 return()
 
 ### COMPILE ###
-WIN_PATH(${JSON}/${OS})
+WIN_DKSETPATH(${JSON}/${OS})
 WIN32_DKQCOMMAND(${DKCMAKE_BUILD} ${JSON})
 WIN64_DKQCOMMAND(${DKCMAKE_BUILD} ${JSON})
 WIN_VS(${JSON_NAME} nlohmann_json.sln json_unit)
