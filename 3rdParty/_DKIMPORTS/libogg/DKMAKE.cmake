@@ -32,22 +32,22 @@ ANDROID_RELEASE_LIB(${OGG}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/libogg.a)
 
 
 ### 3RDPARTY LINK ###
-DKSET(OGG_WIN_DEBUG CFLAGS=-I${OGG}/include --with-ogg-includes=${OGG}/include --with-ogg-libraries=${OGG}/${OS}/${DEBUG_DIR}/src/.libs)
-DKSET(OGG_WIN_RELEASE CFLAGS=-I${OGG}/include --with-ogg-includes=${OGG}/include --with-ogg-libraries=${OGG}/${OS}/${RELEASE_DIR}/src/.libs)
-DKSET(OGG_APPLE_DEBUG CFLAGS=-I${OGG}/include --with-ogg-includes=${OGG}/include --with-ogg-libraries=${OGG}/${OS}/${DEBUG_DIR}/src/.libs)
-DKSET(OGG_APPLE_RELEASE CFLAGS=-I${OGG}/include --with-ogg-includes=${OGG}/include --with-ogg-libraries=${OGG}/${OS}/${RELEASE_DIR}/src/.libs)
-DKSET(OGG_LINUX_DEBUG CPPFLAGS=-I${OGG}/${OS}/${DEBUG_DIR}/include)
-DKSET(OGG_LINUX_RELEASE CPPFLAGS=-I${OGG}/${OS}/${RELEASE_DIR}/include)
-DKSET(OGG_RASPBERRY_DEBUG CPPFLAGS=-I${OGG}/${OS}/${DEBUG_DIR}/include)
-DKSET(OGG_RASPBERRY_RELEASE CPPFLAGS=-I${OGG}/${OS}/${RELEASE_DIR}/include)
-DKSET(OGG_ANDROID_DEBUG CFLAGS=-I${OGG}/include -I${OGG}/${OS}/${DEBUG_DIR}/include --with-ogg-libraries=${OGG}/${OS}/${DEBUG_DIR}/src/.libs)
-DKSET(OGG_ANDROID_RELEASE CFLAGS=-I${OGG}/include -I${OGG}/${OS}/${RELEASE_DIR}/include --with-ogg-libraries=${OGG}/${OS}/${RELEASE_DIR}/src/.libs)
+WIN_DEBUG_DKSET(OGG_CONFIGURE CFLAGS=-I${OGG}/include --with-ogg-includes=${OGG}/include --with-ogg-libraries=${OGG}/${OS}/${DEBUG_DIR}/src/.libs)
+WIN_RELEASE_DKSET(OGG_CONFIGURE CFLAGS=-I${OGG}/include --with-ogg-includes=${OGG}/include --with-ogg-libraries=${OGG}/${OS}/${RELEASE_DIR}/src/.libs)
+APPLE_DEBUG_DKSET(OGG_CONFIGURE CFLAGS=-I${OGG}/include --with-ogg-includes=${OGG}/include --with-ogg-libraries=${OGG}/${OS}/${DEBUG_DIR}/src/.libs)
+APPLE_RELEASE_DKSET(OGG_CONFIGURE CFLAGS=-I${OGG}/include --with-ogg-includes=${OGG}/include --with-ogg-libraries=${OGG}/${OS}/${RELEASE_DIR}/src/.libs)
+LINUX_DEBUG_DKSET(OGG_CONFIGURE CPPFLAGS=-I${OGG}/${OS}/${DEBUG_DIR}/include)
+LINUX_RELEASE_DKSET(OGG_CONFIGURE CPPFLAGS=-I${OGG}/${OS}/${RELEASE_DIR}/include)
+RASPBERRY_DEBUG_DKSET(OGG_CONFIGURE CPPFLAGS=-I${OGG}/${OS}/${DEBUG_DIR}/include)
+RASPBERRY_RELEASE_DKSET(OGG_CONFIGURE CPPFLAGS=-I${OGG}/${OS}/${RELEASE_DIR}/include)
+ANDROID_DEBUG_DKSET(OGG_CONFIGURE CFLAGS=-I${OGG}/include -I${OGG}/${OS}/${DEBUG_DIR}/include --with-ogg-libraries=${OGG}/${OS}/${DEBUG_DIR}/src/.libs)
+ANDROID_RELEASE_DKSET(OGG_CONFIGURE CFLAGS=-I${OGG}/include -I${OGG}/${OS}/${RELEASE_DIR}/include --with-ogg-libraries=${OGG}/${OS}/${RELEASE_DIR}/src/.libs)
 
-DKSET(OGG_WIN_CMAKE "-DCMAKE_CXX_FLAGS=-I${OGG}/${OS}/${RELEASE_DIR}/include" -DOGG_INCLUDE_DIR=${OGG}/include -DOGG_LIBRARY=${OGG}/${OS}/${RELEASE_DIR}/src/.libs/libogg.a)
-DKSET(OGG_APPLE_CMAKE "-DCMAKE_CXX_FLAGS=-I${OGG}/${OS}/${RELEASE_DIR}/include" -DOGG_INCLUDE_DIR=${OGG}/include -DOGG_LIBRARY=${OGG}/${OS}/${RELEASE_DIR}/src/.libs/libogg.a)
-DKSET(OGG_LINUX_CMAKE "-DCMAKE_CXX_FLAGS=-I${OGG}/${OS}/${RELEASE_DIR}/include" -DOGG_INCLUDE_DIR=${OGG}/include -DOGG_LIBRARY=${OGG}/${OS}/${RELEASE_DIR}/src/.libs/libogg.a)
-DKSET(OGG_RASPBERRY_CMAKE "-DCMAKE_CXX_FLAGS=-I${OGG}/${OS}/${RELEASE_DIR}/include" -DOGG_INCLUDE_DIR=${OGG}/include -DOGG_LIBRARY=${OGG}/${OS}/${RELEASE_DIR}/src/.libs/libogg.a)
-DKSET(OGG_ANDROID_CMAKE "-DCMAKE_CXX_FLAGS=-I${OGG}/${OS}/${RELEASE_DIR}/include" -DOGG_INCLUDE_DIR=${OGG}/include -DOGG_LIBRARY=${OGG}/${OS}/${RELEASE_DIR}/src/.libs/libogg.a)
+WIN_DKSET(OGG_CMAKE "-DCMAKE_CXX_FLAGS=-I${OGG}/${OS}/${RELEASE_DIR}/include" -DOGG_INCLUDE_DIR=${OGG}/include -DOGG_LIBRARY=${OGG}/${OS}/${RELEASE_DIR}/src/.libs/libogg.a)
+APPLE_DKSET(OGG_CMAKE "-DCMAKE_CXX_FLAGS=-I${OGG}/${OS}/${RELEASE_DIR}/include" -DOGG_INCLUDE_DIR=${OGG}/include -DOGG_LIBRARY=${OGG}/${OS}/${RELEASE_DIR}/src/.libs/libogg.a)
+LINUX_DKSET(OGG_CMAKE "-DCMAKE_CXX_FLAGS=-I${OGG}/${OS}/${RELEASE_DIR}/include" -DOGG_INCLUDE_DIR=${OGG}/include -DOGG_LIBRARY=${OGG}/${OS}/${RELEASE_DIR}/src/.libs/libogg.a)
+RASPBERRY_DKSET(OGG_CMAKE "-DCMAKE_CXX_FLAGS=-I${OGG}/${OS}/${RELEASE_DIR}/include" -DOGG_INCLUDE_DIR=${OGG}/include -DOGG_LIBRARY=${OGG}/${OS}/${RELEASE_DIR}/src/.libs/libogg.a)
+ANDROID_DKSET(OGG_CMAKE "-DCMAKE_CXX_FLAGS=-I${OGG}/${OS}/${RELEASE_DIR}/include" -DOGG_INCLUDE_DIR=${OGG}/include -DOGG_LIBRARY=${OGG}/${OS}/${RELEASE_DIR}/src/.libs/libogg.a)
 
 	
 ### COMPILE ###
