@@ -5,4 +5,4 @@ DKDEPEND(nodejs)
 
 
 ### INSTALL ###
-WIN_COMMAND("npm install -g crosswalk-app-tools")
+WIN_DKQCOMMAND("npm install -g crosswalk-app-tools")

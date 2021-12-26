@@ -25,15 +25,15 @@ if(NOT EXISTS ${DUKTAPE}/src)
 DKSETPATH(${DUKTAPE})
 DKSET(QUEUE_BUILD ON)
 
-LINUX_COMMAND(sudo apt-get -y install python python-yaml)
-LINUX_COMMAND(python ${DUKTAPE}/util/dist.py)
+LINUX_DKQCOMMAND(sudo apt-get -y install python python-yaml)
+LINUX_DKQCOMMAND(python ${DUKTAPE}/util/dist.py)
 
-WIN_COMMAND(${PYTHON}/Scripts/pip install PyYAML)
-WIN_COMMAND(${PYTHON_EXE} ${DUKTAPE}/util/dist.py)
+WIN_DKQCOMMAND(${PYTHON}/Scripts/pip install PyYAML)
+WIN_DKQCOMMAND(${PYTHON_EXE} ${DUKTAPE}/util/dist.py)
 DKCOPY(${DUKTAPE}/dist/src/ ${DUKTAPE}/src TRUE)
 
 #DKINSTALL(https://codeload.github.com/nodeca/js-yaml/zip/refs/tags/3.14.1 js-yaml-3.14.1 ${DUKTAPE_NAME}/src-tools/lib/extdeps/js-yaml)
-#WIN32_COMMAND(${NODE_EXE} ${DUKTAPE}/src-tools/index.js configure --output-directory ${DUKTAPE}/src --source-directory ${DUKTAPE}/src-input --config-directory ${DUKTAPE}/config)
+#WIN32_DKQCOMMAND(${NODE_EXE} ${DUKTAPE}/src-tools/index.js configure --output-directory ${DUKTAPE}/src --source-directory ${DUKTAPE}/src-input --config-directory ${DUKTAPE}/config)
 endif()
 
 

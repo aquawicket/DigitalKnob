@@ -43,8 +43,8 @@ WIN_VS(${ZLIB_NAME} zlib.sln zlibstatic)
 MAC_XCODE(${ZLIB_NAME} zlibstatic)
 IOS_XCODE(${ZLIB_NAME} zlibstatic)
 IOSSIM_XCODE(${ZLIB_NAME} zlibstatic)
-LINUX_COMMAND(make zlibstatic)
-RASPBERRY_COMMAND(make zlibstatic)
+LINUX_DKQCOMMAND(make zlibstatic)
+RASPBERRY_DKQCOMMAND(make zlibstatic)
 ANDROID_VS(${ZLIB_NAME} zlib.sln zlibstatic)
 
 

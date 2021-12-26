@@ -71,18 +71,18 @@ RASPBERRY_RELEASE_LIB(${CEF}/${OS}/${RELEASE_DIR}/libcef_dll_wrapper/libcef_dll_
 ### COMPILE ###
 DKSETPATH(${CEF}/${BUILD_DIR})
 
-WIN_COMMAND(${DKCMAKE_BUILD} -DUSE_SANDBOX=Off ${CEF})
+WIN_DKQCOMMAND(${DKCMAKE_BUILD} -DUSE_SANDBOX=Off ${CEF})
 WIN_VS(${CEF_NAME} cef.sln libcef_dll_wrapper)
 WIN_VS(${CEF_NAME} cef.sln cefsimple)
 
-MAC_COMMAND(${DKCMAKE_BUILD} ${CEF})
+MAC_DKQCOMMAND(${DKCMAKE_BUILD} ${CEF})
 MAC_XCODE(${CEF_NAME} libcef_dll_wrapper)
 MAC_XCODE(${CEF_NAME} cefsimple)
 
-LINUX_COMMAND(${DKCMAKE_BUILD} ${CEF})
-LINUX_COMMAND(make libcef_dll_wrapper)
-LINUX_COMMAND(make cefsimple)
+LINUX_DKQCOMMAND(${DKCMAKE_BUILD} ${CEF})
+LINUX_DKQCOMMAND(make libcef_dll_wrapper)
+LINUX_DKQCOMMAND(make cefsimple)
 
-RASPBERRY_COMMAND(${DKCMAKE_BUILD} -DPROJECT_ARCH="linuxarm" ${CEF})
-RASPBERRY_COMMAND(make libcef_dll_wrapper)
-RASPBERRY_COMMAND(make cefsimple)
+RASPBERRY_DKQCOMMAND(${DKCMAKE_BUILD} -DPROJECT_ARCH="linuxarm" ${CEF})
+RASPBERRY_DKQCOMMAND(make libcef_dll_wrapper)
+RASPBERRY_DKQCOMMAND(make cefsimple)

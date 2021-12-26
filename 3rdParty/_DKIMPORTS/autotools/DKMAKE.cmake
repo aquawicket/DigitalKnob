@@ -4,7 +4,7 @@
 # https://thoughtbot.com/blog/the-magic-behind-configure-make-make-install
 
 if(MAC_HOST)
-	MAC_COMMAND(brew install autogen)
-	MAC_COMMAND(brew install autoconf)
-	MAC_COMMAND(brew install automake)
+	MAC_DKQCOMMAND(brew install autogen)
+	MAC_DKQCOMMAND(brew install autoconf)
+	MAC_DKQCOMMAND(brew install automake)
 endif()

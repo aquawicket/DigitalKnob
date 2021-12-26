@@ -87,7 +87,7 @@ if(MAC_64)
 		DKCOPY(${BZIP2}/copy ${BZIP2}/${OS} TRUE)
 	endif()
 	MAC_PATH(${BZIP2}/${OS})
-	MAC_COMMAND(make)
+	MAC_DKQCOMMAND(make)
 endif()
 
 
@@ -96,7 +96,7 @@ if(LINUX)
 		DKCOPY(${BZIP2}/copy ${BZIP2}/${OS} TRUE)
 	endif()
 	LINUX_PATH(${BZIP2}/${OS})
-	LINUX_COMMAND(make)
+	LINUX_DKQCOMMAND(make)
 endif()
 
 
@@ -105,7 +105,7 @@ if(RASPBERRY)
 		DKCOPY(${BZIP2}/copy ${BZIP2}/${OS} TRUE)
 	endif()
 	RASPBERRY_PATH(${BZIP2}/${OS})
-	RASPBERRY_COMMAND(make)
+	RASPBERRY_DKQCOMMAND(make)
 endif()
 
 
@@ -115,5 +115,5 @@ ANDROID_NDK(${BZIP2_NAME})
 #		DKCOPY(${BZIP2}/copy ${BZIP2}/${OS} TRUE)
 #	endif()
 #	ANDROID_PATH(${BZIP2}/${OS})
-#	ANDROID_COMMAND(make)
+#	ANDROID_DKQCOMMAND(make)
 #endif()

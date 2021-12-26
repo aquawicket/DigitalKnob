@@ -40,8 +40,8 @@ WIN32_RELEASE_LIB(${FFMPEG}/lib/swscale.lib)
 
 
 ### COMPILE ###
-WIN32_COMMAND(call C:/Windows/System32/cmd.exe /K ${VISUALSTUDIO}/VC/vcvarsall.bat amd64)
-WIN32_COMMAND(${VISUALSTUDIO}/VC/bin/amd64_x86/lib.exe /machine:i386 /def:${FFMPEG}/lib/avcodec-56.def /out:${FFMPEG}/lib/avcodec.lib & 
+WIN32_DKQCOMMAND(call C:/Windows/System32/cmd.exe /K ${VISUALSTUDIO}/VC/vcvarsall.bat amd64)
+WIN32_DKQCOMMAND(${VISUALSTUDIO}/VC/bin/amd64_x86/lib.exe /machine:i386 /def:${FFMPEG}/lib/avcodec-56.def /out:${FFMPEG}/lib/avcodec.lib & 
 ${VC2013}/VC/bin/amd64_x86/lib.exe /machine:i386 /def:${FFMPEG}/lib/avdevice-56.def /out:${FFMPEG}/lib/avdevice.lib & 
 ${VC2013}/VC/bin/amd64_x86/lib.exe /machine:i386 /def:${FFMPEG}/lib/avfilter-5.def /out:${FFMPEG}/lib/avfilter.lib & 
 ${VC2013}/VC/bin/amd64_x86/lib.exe /machine:i386 /def:${FFMPEG}/avformat-56.def /out:${FFMPEG}/lib/avformat.lib & 
