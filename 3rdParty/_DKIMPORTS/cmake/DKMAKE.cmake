@@ -9,14 +9,14 @@ endif()
 ### VERSION ###
 DKSET(CMAKE_VERSION 3.21.1)
 DKSET(CMAKE_NAME cmake-${CMAKE_VERSION}-windows-i386)
-WIN_DKSET(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v${CMAKE_VERSION}/${CMAKE_NAME}.msi)
+WIN_SET(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v${CMAKE_VERSION}/${CMAKE_NAME}.msi)
 #dk_getShortPath("C:/Program Files (x86)/CMake/bin" CMAKE)
-WIN_HOST_DKSET(CMAKE C:/PROGRA~2/CMake/bin)
-MAC_HOST_DKSET(CMAKE /usr/local/bin)
-LINUX_HOST_DKSET(CMAKE /usr/bin)
-WIN_HOST_DKSET(CMAKE_EXE ${CMAKE}/cmake.exe)
-MAC_HOST_DKSET(CMAKE_EXE ${CMAKE}/cmake)
-LINUX_HOST_DKSET(CMAKE_EXE ${CMAKE}/cmake)
+WIN_HOST_SET(CMAKE C:/PROGRA~2/CMake/bin)
+MAC_HOST_SET(CMAKE /usr/local/bin)
+LINUX_HOST_SET(CMAKE /usr/bin)
+WIN_HOST_SET(CMAKE_EXE ${CMAKE}/cmake.exe)
+MAC_HOST_SET(CMAKE_EXE ${CMAKE}/cmake)
+LINUX_HOST_SET(CMAKE_EXE ${CMAKE}/cmake)
 
 
 

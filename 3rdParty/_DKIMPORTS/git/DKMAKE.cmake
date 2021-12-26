@@ -3,13 +3,13 @@
 ### VERSION ###
 DKSET(GIT_VERSION 2.31.1)
 DKSET(GIT_NAME Git-${GIT_VERSION}-32-bit)
-WIN_HOST_DKSET(GIT_DL https://github.com/git-for-windows/git/releases/download/v${GIT_VERSION}.windows.1/${GIT_NAME}.exe)
-WIN_HOST_DKSET(GIT "C:/Program Files (x86)/Git")
-MAC_HOST_DKSET(GIT /usr/bin)
-LINUX_HOST_DKSET(GIT /usr/bin)
-WIN_HOST_DKSET(GIT_EXE ${GIT}/bin/git.exe)
-MAC_HOST_DKSET(GIT_EXE ${GIT}/git)
-LINUX_HOST_DKSET(GIT_EXE ${GIT}/git)
+WIN_HOST_SET(GIT_DL https://github.com/git-for-windows/git/releases/download/v${GIT_VERSION}.windows.1/${GIT_NAME}.exe)
+WIN_HOST_SET(GIT "C:/Program Files (x86)/Git")
+MAC_HOST_SET(GIT /usr/bin)
+LINUX_HOST_SET(GIT /usr/bin)
+WIN_HOST_SET(GIT_EXE ${GIT}/bin/git.exe)
+MAC_HOST_SET(GIT_EXE ${GIT}/git)
+LINUX_HOST_SET(GIT_EXE ${GIT}/git)
 
 
 ### INSTALL ###
