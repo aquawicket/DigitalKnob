@@ -47,6 +47,7 @@ set(DKBUILDTOOLS_INCLUDED true)
 DKSET(WARNINGS_AS_ERRORS OFF)
 DKSET(WARNING_LEVEL 3)
 DKSET(WARNING_4244 ON)
+DKSET(WARNING_5105 ON)
 #DKSET(STATIC ON)
 #DKSET(SHARED OFF)                                          
 
@@ -374,6 +375,10 @@ endif()
 if(WARNING_4244) # /wd4244 - Warning: possible loss of data 
 	WIN_DKSET(DKCMAKE_C_FLAGS "${DKCMAKE_C_FLAGS} /wd4244")
 	WIN_DKSET(DKCMAKE_CXX_FLAGS "${DKCMAKE_CXX_FLAGS} /wd4244")
+endif()
+if(WARNING_5105) # /wd5105 - macro producing defined is undefined behaviour
+	WIN_DKSET(DKCMAKE_C_FLAGS "${DKCMAKE_C_FLAGS} /wd5105")
+	WIN_DKSET(DKCMAKE_CXX_FLAGS "${DKCMAKE_CXX_FLAGS} /wd5105")
 endif()
 
 

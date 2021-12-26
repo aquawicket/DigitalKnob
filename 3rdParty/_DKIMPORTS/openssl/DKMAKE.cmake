@@ -1,10 +1,19 @@
+# https://github.com/openssl/openssl
+# https://www.openssl.org/
+#
 # https://www.npcglib.org/~stathis/downloads/openssl-1.0.2h-vs2015.7z
+# https://github.com/openssl/openssl/archive/refs/tags/openssl-3.0.1.zip
 
 
 ### VERSION ###
+#WIN_DKSET(OPENSSL_VERSION 3.0.1)
+#DKSET(OPENSSL_NAME openssl-${OPENSSL_VERSION})
+#WIN_DKSET(OPENSSL_DL https://github.com/openssl/openssl/archive/refs/tags/${OPENSSL_NAME}.zip)
+
 WIN_DKSET(OPENSSL_VERSION 1.0.2h-vs2015)
 DKSET(OPENSSL_NAME openssl-${OPENSSL_VERSION})
-WIN_DKSET(OPENSSL_DL https://www.npcglib.org/~stathis/downloads/openssl-${OPENSSL_VERSION}.7z)
+WIN_DKSET(OPENSSL_DL https://www.npcglib.org/~stathis/downloads/${OPENSSL_NAME}.7z)
+
 DKSET(OPENSSL ${3RDPARTY}/${OPENSSL_NAME})
 
 
