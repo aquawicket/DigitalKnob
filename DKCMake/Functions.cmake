@@ -809,7 +809,7 @@ function(DKEXECUTE_PROCESS commands)
 	
 	DKINFO("")
 	DKINFO("*** Commands ***")
-	DKINFO("> ${commands}")
+	DKINFO("-> ${commands}")
 	DKINFO("")
 	
 	if(WIN_HOST)
