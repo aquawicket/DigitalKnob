@@ -1,3 +1,5 @@
+# https://asitdhal.medium.com/cmake-functions-and-macros-22293041519f
+
 if(DKFUNCTIONS_INCLUDED)
   return()
 endif(DKFUNCTIONS_INCLUDED)

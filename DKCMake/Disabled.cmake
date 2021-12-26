@@ -60,7 +60,7 @@ DKDISABLE(simple-getch)            # kept for reference
 DKDISABLE(opencv)  #WORKING, just disabled because it takes so long to compile
 
 
-if(NOT CMAKE_HOST_WIN32) # Disabled on Non-Windows host machines
+if(NOT WIN_HOST) # Disabled on Non-Windows host machines
 	DKDISABLE(android-studio)
 	DKDISABLE(glintercept)
 	DKDISABLE(python)
@@ -97,9 +97,6 @@ if(WIN_64) # Disabled for Windows 64bit targets
 endif()
 
 
-if(NOT APPLE) #Disabled on NON-Mac host machines
-
-endif()
 if(MAC)  # Disabled on Mac host machines
     DKDISABLE(android-build-tools)
 	DKDISABLE(android-ndk)
