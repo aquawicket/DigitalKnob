@@ -47,7 +47,7 @@ ANDROID_RELEASE_LIB(${LEPTONICA}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/libl
 
 
 ### 3rdParty Link ###
-DKSET(LEPTONICA_WIN -DLeptonica_DIR=${LEPTONICA}/${OS})
+WIN_DKSET(LEPTONICA_CMAKE -DLeptonica_DIR=${LEPTONICA}/${OS})
 
 
 ### COMPILE ###
