@@ -72,17 +72,6 @@ function(DKUNSET variable)
 	unset(${variable})
 endfunction()
 
-macro(DKINFO message)
-	message(STATUS "${message}")
-	dk_exit()
-endmacro()
-
-macro(DKERROR message)
-	dk_getFilename(${CMAKE_CURRENT_FUNCTION_LIST_FILE} FILENAME)
-	message(FATAL_ERROR "${FILENAME}:${CMAKE_CURRENT_FUNCTION_LIST_LINE} -> ${CMAKE_CURRENT_FUNCTION}(${ARGV}) ERROR: ${message}")
-	dk_exit()
-endmacro()
-
 function(dk_exit)
 	message("dk_exit()")
 	if(WIN_HOST)
@@ -91,6 +80,16 @@ function(dk_exit)
 		execute_process(COMMAND killall -9 cmake WORKING_DIRECTORY ${CMAKE_CURRENT_LIST_DIR})
 	endif()
 endfunction()
+
+macro(DKINFO message)
+	message(STATUS "${message}")
+endmacro()
+
+macro(DKERROR message)
+	dk_getFilename(${CMAKE_CURRENT_FUNCTION_LIST_FILE} FILENAME)
+	message(FATAL_ERROR "${FILENAME}:${CMAKE_CURRENT_FUNCTION_LIST_LINE} -> ${CMAKE_CURRENT_FUNCTION}(${ARGV}) ERROR: ${message}")
+	dk_exit()
+endmacro()
 
 #####################################################################
 ###################         DKFUNCTIONS           ###################
@@ -3707,6 +3706,12 @@ function(DKDEPEND name)
 	
 endfunction()
 
+function(MAC_DEPEND)
+	if(MAC)
+		DKDEPEND(${ARGV})
+	endif()
+endfunction()
+
 
 # Remove a library or plugin from the dependency list
 function(DKUNDEPEND name)
@@ -3852,7 +3857,7 @@ function(DKRUNDEPENDS name)
 			set(KEEPLINE 1)
 		endif()	
 		
-		string(FIND "${line}" "DKDEPEND(" index)
+		string(FIND "${line}" "DEPEND(" index)
 		if(${index} GREATER -1)
 			set(KEEPLINE 1)
 		endif()

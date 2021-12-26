@@ -34,11 +34,3 @@ endif()
 if(NOT EXISTS "${CMAKE_EXE}")
 	DKERROR("CMAKE IS NOT FOUND OR INVALID")
 endif()
-
-
-
-
-
-
-
-
