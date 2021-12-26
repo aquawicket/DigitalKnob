@@ -132,10 +132,10 @@ endmacro()
 
 ## dynamic functions
 function(CreateFunction name)
-	cmake_language(EVAL CODE "function(${name})\n Wait(\"\${ARGV}\")\n endfunction()")
+	cmake_language(EVAL CODE "function(${name})\n message(STATUS \"${name}(\${ARGV})\")\n endfunction()")
 endfunction()
-CreateFunction("Testies")
-Testies("this is a test")
+CreateFunction("MyDynamicFunc")
+MyDynamicFunc("string" 15)
 
 # dk_debug_dump(<variable_name>)  "ALIAS: DUMP(<variable_name>)"
 macro(DUMP dmpvar)
