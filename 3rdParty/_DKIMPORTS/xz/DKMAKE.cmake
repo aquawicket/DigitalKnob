@@ -52,19 +52,19 @@ DKSET(XZ_ANDROID -DCMAKE_C_FLAGS=-DLZMA_API_STATIC -DCMAKE_CXX_FLAGS=-DLZMA_API_
 
 
 ### COMPILE ###
-WIN32_DEBUG_PATH(${XZ}/${OS}/${DEBUG_DIR})
+WIN32_DEBUG_DKSETPATH(${XZ}/${OS}/${DEBUG_DIR})
 WIN32_DEBUG_MSYS(${DKCONFIGURE_BUILD})
 WIN32_DEBUG_MSYS(make)
-WIN32_RELEASE_PATH(${XZ}/${OS}/${RELEASE_DIR})
+WIN32_RELEASE_DKSETPATH(${XZ}/${OS}/${RELEASE_DIR})
 WIN32_RELEASE_MSYS(${DKCONFIGURE_BUILD})
 WIN32_RELEASE_MSYS(make)
 
 
 # look at xz/windows/build.bash for details
-WIN64_DEBUG_PATH(${XZ}/${OS}/${DEBUG_DIR})
+WIN64_DEBUG_DKSETPATH(${XZ}/${OS}/${DEBUG_DIR})
 WIN64_DEBUG_MSYS(${DKCONFIGURE_BUILD} --prefix= --enable-silent-rules --disable-dependency-tracking --disable-nls --disable-scripts)
 WIN64_DEBUG_MSYS(make)
-WIN64_RELEASE_PATH(${XZ}/${OS}/${RELEASE_DIR})
+WIN64_RELEASE_DKSETPATH(${XZ}/${OS}/${RELEASE_DIR})
 WIN64_DEBUG_MSYS(${DKCONFIGURE_BUILD}  --prefix= --enable-silent-rules --disable-dependency-tracking --disable-nls --disable-scripts)
 WIN64_RELEASE_MSYS(make)
 
