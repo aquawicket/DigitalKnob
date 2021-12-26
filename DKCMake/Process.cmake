@@ -3,18 +3,16 @@ if(DKPROCESS_INCLUDED)
 endif(DKPROCESS_INCLUDED)
 set(DKPROCESS_INCLUDED true)
 
-
-message(STATUS "\n")
-message(STATUS "############################################################")
-message(STATUS "######################  DigitalKnob  #######################")
-message(STATUS "############################################################")
-message(STATUS "\n")
-	
 include(Functions.cmake)
 include(Options.cmake)
 include(Disabled.cmake)
 
-
+DKINFO("\n")
+DKINFO("############################################################")
+DKINFO("######################  DigitalKnob  #######################")
+DKINFO("############################################################")
+DKINFO("\n")
+	
 get_filename_component(APP_NAME ${DKPROJECT} NAME)
 string(REPLACE " " "_" APP_NAME ${APP_NAME})
 
@@ -48,9 +46,9 @@ foreach(plugin ${dkdepend_list})
 	## used for double checking
 	#DKSET(CMAKE_FILE "")
 	
-	message(STATUS "############################################################")
-	message(STATUS "######  Processing   ${plugin} . . .                        ")
-	message(STATUS "############################################################")
+	DKINFO("############################################################")
+	DKINFO("######  Processing   ${plugin} . . .                        ")
+	DKINFO("############################################################")
 	
 	##Strip any sublibrary named in the plugin, and enable it
 	string(FIND "${plugin}" " " index)
@@ -67,7 +65,7 @@ foreach(plugin ${dkdepend_list})
 	if(NOT plugin_path)
 		return()
 	endif()
-	#message(STATUS "plugin_path = ${plugin_path}")
+	#DKINFO("plugin_path = ${plugin_path}")
 
 	#This executes the 3rdParty library builds, and dkplugin setup, creates CMakeLists.txt files
 	include(${plugin_path}/DKMAKE.cmake)
@@ -77,7 +75,7 @@ foreach(plugin ${dkdepend_list})
 	#if(REBUILDALL)
 		#foreach(lib ${LIBLIST})
 		#	DKREMOVE(${lib})
-		#	message(STATUS "######  Removed ${lib}")
+		#	DKINFO("######  Removed ${lib}")
 		#endforeach()
 	#endif()
 	
@@ -85,7 +83,7 @@ foreach(plugin ${dkdepend_list})
 	#string(TOUPPER ${plugin} PLUGIN_NAME)
 	#if(EXISTS "${${PLUGIN_NAME}}/CMakeLists.txt")
 	#	add_subdirectory(${${PLUGIN_NAME}} ${${PLUGIN_NAME}}/${OS})
-	#	message(STATUS "add_subdirectory( ${${PLUGIN_NAME}} ${${PLUGIN_NAME}}/${OS} )")
+	#	DKINFO("add_subdirectory( ${${PLUGIN_NAME}} ${${PLUGIN_NAME}}/${OS} )")
 	#endif()
 	string(TOLOWER "${DKPLUGIN_LIST}" DKPLUGIN_LIST_lower)
 	string(TOLOWER "${plugin}" plugin_lower)
@@ -119,7 +117,7 @@ foreach(plugin ${dkdepend_list})
 		
 		#DKSET(PREBUILD ON)
 		if(PREBUILD)
-			message(STATUS "******* Prebuilding ${plugin} *******")
+			DKINFO("******* Prebuilding ${plugin} *******")
 			#DKSET(CURRENT_DIR ${plugin_path}/${OS})
 			#dk_makeDirectory(${CURRENT_DIR})
 			DKSETPATH(${plugin_path}/${BUILD_DIR})
@@ -255,8 +253,7 @@ foreach(plugin ${dkdepend_list})
 			## double check that the missing libs were built
 			foreach(lib ${LIBLIST})
 				if(NOT EXISTS ${lib})
-					message(FATAL_ERROR "\n\n\n****************************\nFAILED to find: ${lib} \n***********************************")
-					message(FATAL_ERROR " ")
+					DKERROR("\n\n\n****************************\nFAILED to find: ${lib} \n***********************************")
 				endif()
 			endforeach()
 		endif()
@@ -268,10 +265,10 @@ if(NOT DKAPP)
 	return()
 endif()	
 
-message(STATUS "\n")
-message(STATUS "***************************************")
-message(STATUS "********** Creating ${APP_NAME} **********")
-message(STATUS "***************************************\n")
+DKINFO("\n")
+DKINFO("***************************************")
+DKINFO("********** Creating ${APP_NAME} **********")
+DKINFO("***************************************\n")
 
 # Create version from date
 string(TIMESTAMP year "%y")
@@ -287,7 +284,7 @@ if(PLUGINS_FILE)
 endif()
 
 if(HAVE_DK)
-	message(STATUS "Copying DKPlugins/_DKIMPORT/ to App...")
+	DKINFO("Copying DKPlugins/_DKIMPORT/ to App...")
 	DKCOPY(${DKPLUGINS}/_DKIMPORT/icons ${DKPROJECT}/icons FALSE) ## copy app default files recursivly without overwrite
 	DKCOPY(${DKPLUGINS}/_DKIMPORT/assets.h ${DKPROJECT}/assets.h FALSE) ## copy app default files recursivly without overwrite
 	DKCOPY(${DKPLUGINS}/_DKIMPORT/App.h ${DKPROJECT}/App.h FALSE) ## copy app default files recursivly without overwrite
@@ -322,7 +319,7 @@ if(WIN_32)
 	########################## CREATE ICONS ###############################
 	if(EXISTS ${DKPROJECT}/icons/icon.png)
 		if(IMAGEMAGICK_CONVERT)
-			message(STATUS "Building icons for ${APP_NAME} . . .")
+			DKINFO("Building icons for ${APP_NAME} . . .")
 			dk_makeDirectory(${DKPROJECT}/icons/windows)
 			DKEXECUTE_PROCESS(COMMAND ${IMAGEMAGICK_CONVERT} ${DKPROJECT}/icons/icon.png -define icon:auto-resize=256,128,64,48,32,16 ${DKPROJECT}/icons/windows/icon.ico)
 			DKCOPY(${DKPROJECT}/icons/windows/icon.ico ${DKPROJECT}/assets/icon.ico TRUE) # copy the icon to assets
@@ -339,7 +336,7 @@ if(WIN_32)
 		# Remove excluded files and folders before packaging
 		DKREMOVE(${DKPROJECT}/assets/USER)
 		#Compress the assets, they will be included by resource.rc
-		message(STATUS "Creating assets.zip . . .")
+		DKINFO("Creating assets.zip . . .")
 		DKZIP(${DKPROJECT}/assets)
 		# Restore the backed up files, excluded from assets
 		DKCOPY(${DKPROJECT}/Backup ${DKPROJECT}/assets TRUE)
@@ -431,7 +428,7 @@ if(WIN_64)
 	########################## CREATE ICONS ###############################
 	if(EXISTS ${DKPROJECT}/icons/icon.png)
 		if(IMAGEMAGICK_CONVERT)
-			message(STATUS "Building icons for ${APP_NAME} . . .")
+			DKINFO("Building icons for ${APP_NAME} . . .")
 			dk_makeDirectory(${DKPROJECT}/icons/windows)
 			DKEXECUTE_PROCESS(COMMAND ${IMAGEMAGICK_CONVERT} ${DKPROJECT}/icons/icon.png -define icon:auto-resize=256,128,64,48,32,16 ${DKPROJECT}/icons/windows/icon.ico)
 			DKCOPY(${DKPROJECT}/icons/windows/icon.ico ${DKPROJECT}/assets/icon.ico TRUE)
@@ -445,7 +442,7 @@ if(WIN_64)
 		DKCOPY(${DKPROJECT}/assets/USER ${DKPROJECT}/Backup/USER TRUE)
 		DKREMOVE(${DKPROJECT}/assets/USER)
 		#Compress the assets, they will be included by resource.rc
-		message(STATUS "Creating assets.zip . . .")
+		DKINFO("Creating assets.zip . . .")
 		DKZIP(${DKPROJECT}/assets)
 		# Restore the backed up files
 		DKCOPY(${DKPROJECT}/Backup/ ${DKPROJECT}/assets/ TRUE)
@@ -614,20 +611,20 @@ if(MAC)
 	####################### Do Post Build Stuff #######################
 	# Copy the CEF framework into the app bundle
 	if(EXISTS ${CEF})
-		message(STATUS "Adding Chromium Embedded Framework.framework to bundle . . .")
+		DKINFO("Adding Chromium Embedded Framework.framework to bundle . . .")
 		add_custom_command(TARGET ${APP_NAME} POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy_directory "${CEF}/$<CONFIG>/Chromium Embedded Framework.framework" "$<TARGET_FILE_DIR:${APP_NAME}>/../Frameworks/Chromium Embedded Framework.framework")
 	endif()
 	
 	# Copy the DKCefChild into the app bundle
 	if(EXISTS "${DKPLUGINS}/DKCefChild/${OS}/Release/DKCefChild.app")
-		message(STATUS "Adding Chromium Embedded Framework.framework to bundle . . .")
+		DKINFO("Adding Chromium Embedded Framework.framework to bundle . . .")
 		add_custom_command(TARGET ${APP_NAME} POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy "${DKPLUGINS}/DKCefChild/${OS}/$<CONFIG>/DKCefChild.app" "$<TARGET_FILE_DIR:${APP_NAME}>/../Frameworks/${APP_NAME} Helper.app")
 	endif()
 	
 	# Make bundle open with Terminal
 	# https://github.com/pyinstaller/pyinstaller/issues/5154#issuecomment-690646012
 	if(true)
-		message(STATUS "Making bundle app run in terminal on double-click . . .")
+		DKINFO("Making bundle app run in terminal on double-click . . .")
 		set(TERMINAL_SCRIPT 
 			"\#!/bin/bash\n"
 			"dir=$(cd \"$( dirname \"\${0}\")\" && pwd )\n"
@@ -800,9 +797,9 @@ if(LINUX)
 		DKCOPY(${DKPROJECT}/assets/USER ${DKPROJECT}/Backup/USER TRUE)
 		DKREMOVE(${DKPROJECT}/assets/USER)
 		# Remove excluded files and folders before packaging
-		message(STATUS "Creating assets.zip . . .")
+		DKINFO("Creating assets.zip . . .")
 		DKZIP(${DKPROJECT}/assets)
-		#message(STATUS "Creating assets.h . . .")
+		#DKINFO("Creating assets.h . . .")
 		bin2h(SOURCE_FILE ${DKPROJECT}/assets.zip HEADER_FILE ${DKPROJECT}/assets.h VARIABLE_NAME "ASSETS_H")
 		# Restore the backed up assets
 		DKCOPY(${DKPROJECT}/Backup/ ${DKPROJECT}/assets/ FALSE)
@@ -874,9 +871,9 @@ if(RASPBERRY)
 		DKCOPY(${DKPROJECT}/assets/USER ${DKPROJECT}/Backup/USER TRUE)
 		# Remove excluded files and folders before packaging
 		DKREMOVE(${DKPROJECT}/assets/USER)
-		message(STATUS "Creating assets.zip . . .")
+		DKINFO("Creating assets.zip . . .")
 		DKZIP(${DKPROJECT}/assets)
-		#message(STATUS "Creating assets.h . . .")
+		#DKINFO("Creating assets.h . . .")
 		bin2h(SOURCE_FILE ${DKPROJECT}/assets.zip HEADER_FILE ${DKPROJECT}/assets.h VARIABLE_NAME "ASSETS_H")
 		# Restore the backed up assets
 		DKCOPY(${DKPROJECT}/Backup/ ${DKPROJECT}/assets/ FALSE)
@@ -950,7 +947,7 @@ endif()
 if(ANDROID)
 	########################## CREATE ICONS ###############################
 	if(IMAGEMAGICK_CONVERT)
-		message(STATUS "Building icons for ${APP_NAME} . . .")
+		DKINFO("Building icons for ${APP_NAME} . . .")
 		dk_makeDirectory(${DKPROJECT}/icons/android/drawable-hdpi)
 		DKEXECUTE_PROCESS(COMMAND ${IMAGEMAGICK_CONVERT} ${DKPROJECT}/icons/icon.png -resize 72x72 ${DKPROJECT}/icons/android/drawable-hdpi/icon.png)
 		dk_makeDirectory(${DKPROJECT}/icons/android/drawable-ldpi)
@@ -1053,7 +1050,7 @@ foreach(lib ${RELEASE_LIBS})
 endforeach()
 
 
-message(STATUS "\n\n")
-message(STATUS "**************************************************")
-message(STATUS "****** Generated ${APP_NAME} - ${OS}  ************")
-message(STATUS "**************************************************\n")
+DKINFO("\n\n")
+DKINFO("**************************************************")
+DKINFO("****** Generated ${APP_NAME} - ${OS}  ************")
+DKINFO("**************************************************\n")
