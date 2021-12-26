@@ -3738,7 +3738,12 @@ function(DKRUNDEPENDS name)
 			set(KEEPLINE 1)
 		endif()
 		
-		#string(FIND "${line}" "DKSET(" index)
+		#string(FIND "${line}" "SET(" index)
+		#if(${index} GREATER -1)
+		#	set(KEEPLINE 1)
+		#endif()
+		
+		#string(FIND "${line}" "DKSET(" index) # taken care of by SET( sytax above
 		#if(${index} GREATER -1)
 		#	set(KEEPLINE 1)
 		#endif()
@@ -3811,7 +3816,7 @@ function(DKRUNDEPENDS name)
 			set(KEEPLINE 1)
 		endif()
 		
-		#string(FIND "${line}" "DKSET(" index)
+		#string(FIND "${line}" "DKSET(" index) # taken care of by SET( sytax above 
 		#if(${index} GREATER -1)
 		#	set(KEEPLINE 1)
 		#endif()
