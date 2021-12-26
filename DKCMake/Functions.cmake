@@ -113,18 +113,6 @@ function(MyFunc args result)
 	set(${result} ${args} PARENT_SCOPE) #just relay the arguments
 endfunction()
 
-
-## Attempting to create dynamic functions
-#function(CreateFunction name)
-#	cmake_language(EVAL CODE "
-#		function(${name}) 
-#			DUMP(name)
-#		endfunction()"
-#	)
-#endfunction()
-#CreateFunction("Testies")
-#Testies()
-
 macro(Wait)
 	DKDEBUG(${ARGV})
 	set(msg ${ARGV})
@@ -141,6 +129,13 @@ macro(Wait)
 	endif()	
 	DKINFO("Wait() Not implemented for this platform")
 endmacro()
+
+## dynamic functions
+function(CreateFunction name)
+	cmake_language(EVAL CODE "function(${name})\n Wait(\"\${ARGV}\")\n endfunction()")
+endfunction()
+CreateFunction("Testies")
+Testies("this is a test")
 
 # dk_debug_dump(<variable_name>)  "ALIAS: DUMP(<variable_name>)"
 macro(DUMP dmpvar)
