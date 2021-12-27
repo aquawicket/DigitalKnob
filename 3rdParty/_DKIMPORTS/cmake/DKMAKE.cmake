@@ -11,14 +11,16 @@ MAC_DKDEPEND(homebrew)
 WIN_HOST_DKSET(CMAKE_VERSION 3.21.1)
 WIN_HOST_DKSET(CMAKE_NAME cmake-${CMAKE_VERSION}-windows-i386)
 WIN_HOST_DKSET(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v${CMAKE_VERSION}/${CMAKE_NAME}.msi)
-#dk_getShortPath("C:\Program Files (x86)\CMake" CMAKE)
+
 
 WIN_HOST_DKSET(CMAKE "C:/Program Files (x86)/CMake/bin")
+dk_getShortPath("${CMAKE} CMAKE)
+DUMP(CMAKE)
 #WIN_HOST_DKSET(CMAKE C:/PROGRA~2/CMake/bin)
 MAC_HOST_DKSET(CMAKE /usr/local/bin)
 LINUX_HOST_DKSET(CMAKE /usr/bin)
 
-WIN_HOST_DKSET(CMAKE_EXE "\"${CMAKE}/cmake.exe\"")
+WIN_HOST_DKSET(CMAKE_EXE ${CMAKE}/cmake.exe)
 UNIX_HOST_DKSET(CMAKE_EXE ${CMAKE}/cmake)
 
 
@@ -33,7 +35,7 @@ if(NOT EXISTS "${CMAKE_EXE}")
 	LINUX_HOST_DKCOMMAND(sudo apt-get -y install cmake)
 else()
 	DKINFO("Found cmake at ${CMAKE_EXE}")
-	DKEXECUTE_PROCESS(${CMAKE_EXE} --version version.txt)
+	#DKEXECUTE_PROCESS(${CMAKE_EXE} --version ${CMAKE}/version.txt)
 endif()
 
 if(NOT EXISTS "${CMAKE_EXE}")
