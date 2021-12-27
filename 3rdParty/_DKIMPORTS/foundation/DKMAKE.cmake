@@ -6,6 +6,6 @@ endif()
 
 FIND_LIBRARY(Foundation_lib Foundation)
 if(NOT Foundation_lib)
-	message(FATAL_ERROR "Could not location Foundation framework")
+	message(WARNING "Could not location Foundation framework")
 endif()
 APPLE_LIB(${Foundation_lib})
