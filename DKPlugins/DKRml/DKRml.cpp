@@ -1,5 +1,5 @@
 #include "DK/stdafx.h"
-#ifdef USE_rmlui_debugger
+#ifdef HAVE_rmlui_debugger
 #include <RmlUi/Debugger.h>
 #endif
 #include "DKRml/DKRml.h"
@@ -46,7 +46,7 @@ bool DKRml::Init(){
 		DKERROR("No registered window found\n");
 		return false;
 	}
-#ifdef USE_rmlui_debugger
+#ifdef HAVE_rmlui_debugger
 	if (!Rml::Debugger::Initialise(context))
 		return DKERROR("Rml::Debugger::Initialise(): failed\n");
 #endif
@@ -443,7 +443,7 @@ bool DKRml::SendEvent(const DKString& elementAddress, const DKString& type, cons
 }
 
 bool DKRml::DebuggerOff(){
-#ifdef USE_rmlui_debugger
+#ifdef HAVE_rmlui_debugger
 	Rml::Debugger::SetVisible(false);
 	DKINFO("Rml Debugger OFF\n");
 #else
@@ -453,7 +453,7 @@ bool DKRml::DebuggerOff(){
 }
 
 bool DKRml::DebuggerOn(){
-#ifdef USE_rmlui_debugger
+#ifdef HAVE_rmlui_debugger
 	Rml::Debugger::SetVisible(true);
 	DKINFO("Rml Debugger ON\n");
 #else
@@ -464,7 +464,7 @@ bool DKRml::DebuggerOn(){
 
 bool DKRml::DebuggerToggle(){
 	DKDEBUGFUNC();
-#ifdef USE_rmlui_debugger
+#ifdef HAVE_rmlui_debugger
 	if(Rml::Debugger::IsVisible()) //FIXME:  always returns false
 		DKRml::DebuggerOff();
 	else
