@@ -1,7 +1,7 @@
 if(DKPROCESS_INCLUDED)
   return()
 endif(DKPROCESS_INCLUDED)
-DKSET(DKPROCESS_INCLUDED true)
+set(DKPROCESS_INCLUDED true CACHE INTERNAL "")
 
 include(Functions.cmake)
 include(Options.cmake)
