@@ -37,3 +37,6 @@ ldd executable.name
 
 Delete a non-empty directory without comfirmation and spaces in the name (windows)
 rmdir /Q /S "folder name"
+
+Search for a foldername\file.name combination recursivley.
+for /r %a in (foldername) do @if exist "%~fa\file.name" echo %~fa
