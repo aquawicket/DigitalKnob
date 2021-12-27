@@ -14,9 +14,9 @@ WIN_HOST_DKSET(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v${CM
 
 
 WIN_HOST_DKSET(CMAKE "C:/Program Files (x86)/CMake/bin")
-dk_getShortPath("${CMAKE} CMAKE)
-DUMP(CMAKE)
-#WIN_HOST_DKSET(CMAKE C:/PROGRA~2/CMake/bin)
+WIN_GetShortPath(${CMAKE} CMAKE)
+#DUMP(CMAKE)
+
 MAC_HOST_DKSET(CMAKE /usr/local/bin)
 LINUX_HOST_DKSET(CMAKE /usr/bin)
 
