@@ -1,7 +1,5 @@
 # https://nodejs.org/dist/v14.16.1/node-v14.16.1-win-x86.zip
 
-message("CMAKE_EXE = ${CMAKE_EXE}")
-
 ### VERSION ###
 DKSET(NODEJS_VERSION v14.16.1)
 DKSET(NODEJS_NAME node-${NODEJS_VERSION}-win-x86)
