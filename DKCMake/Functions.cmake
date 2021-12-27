@@ -2264,6 +2264,7 @@ function(DKRUNDEPENDS name)
 			set(disable_script "${disable_script}${line}\n")
 		endif()
 		
+		# FIXME: we need to get a proper count of openeing (  before we can determine that we have actually reached the closing )
 		string(FIND "${line}" ")" indexB) 
 		if(${indexB} GREATER -1)
 			set(KEEPLINE 0)
@@ -2318,25 +2319,26 @@ function(DKRUNDEPENDS name)
 			set(KEEPLINE 1)
 		endif()	
 		
-		string(FIND "${line}" "DEPEND(" index)
+		string(FIND "${line}" "DKDEPEND(" index)
 		if(${index} GREATER -1)
 			set(KEEPLINE 1)
 		endif()
 		
-		string(FIND "${line}" "SET(" index)
+		string(FIND "${line}" "DKSET(" index)
 		if(${index} GREATER -1)
 			set(KEEPLINE 1)
 		endif()
 		
-		#string(FIND "${line}" "DKSET(" index) # taken care of by SET( sytax above 
-		#if(${index} GREATER -1)
-		#	set(KEEPLINE 1)
-		#endif()
+		string(FIND "${line}" "message(" index)
+		if(${index} GREATER -1)
+			set(KEEPLINE 1)
+		endif()
 
 		if(KEEPLINE)
 			set(depends_script "${depends_script}${line}\n")
 		endif()
 		
+		# FIXME: we need to get a proper count of openeing (  before we can determine that we have actually reached the closing )
 		string(FIND "${line}" ")" indexB) 
 		if(${indexB} GREATER -1)
 			set(KEEPLINE 0)
@@ -2864,6 +2866,4 @@ macro(readonly_guard VAR access value current_list_file stack)
   endif()
 endmacro()
 
-
-
-#include(Functions_Ext.cmake)
+include(Functions_Ext.cmake)

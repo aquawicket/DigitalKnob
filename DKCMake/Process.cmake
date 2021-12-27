@@ -4,7 +4,7 @@ endif(DKPROCESS_INCLUDED)
 set(DKPROCESS_INCLUDED true)
 
 include(Functions.cmake)
-include(Functions_Ext.cmake)
+#include(Functions_Ext.cmake)
 include(Options.cmake)
 include(Disabled.cmake)
 
