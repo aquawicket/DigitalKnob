@@ -78,7 +78,7 @@ compute_host_tag
       if [ $? != 0 ] ; then
         echo "ERROR: Patch failure !! Please check your android-patches directory!"
         echo "       Problem patch: $dir/$PATCHNAME"
-        exit 1
+        exit 0
       fi
     done
   done
