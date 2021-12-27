@@ -50,6 +50,7 @@ echo.
 
 
 ::rmdir /Q /S "%DKCMAKE%\temp"
-echo %ERRORLEVEL% > log.txt
+echo %ERRORLEVEL%
+pause
 :end
 ECHO Done
