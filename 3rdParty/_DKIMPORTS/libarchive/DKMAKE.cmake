@@ -3,6 +3,10 @@
 #
 # Downloads
 # https://github.com/libarchive/libarchive/archive/refs/tags/v3.5.1.zip
+#
+# INSTALL TARGETS given no BUNDLE DESTINATION for MACOSX_BUNDLE executabletarget "bsdcat".
+# https://github.com/libarchive/libarchive/issues/1563
+
 
 ### DEPENDS ###
 DKDEPEND(zlib)
@@ -11,9 +15,7 @@ DKDEPEND(bzip2)
 DKDEPEND(libxml2)
 DKDEPEND(libiconv)
 DKDEPEND(cryptopp)
-if(WIN)
-	DKDEPEND(openssl)
-endif()
+WIN_DKDEPEND(openssl)
 
 
 ### VERSION ###
