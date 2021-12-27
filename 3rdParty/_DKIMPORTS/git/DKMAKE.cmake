@@ -13,7 +13,7 @@ LINUX_HOST_DKSET(GIT_EXE ${GIT}/git)
 
 
 ### INSTALL ###
-message(STATUS "looking for git at ${GIT_EXE}")
+DKINFO("looking for git at ${GIT_EXE}")
 if(NOT EXISTS ${GIT_EXE})
 	message(STATUS "git NOT FOUND")
 	message(STATUS "Installing git ${CMAKE_VERSION}")
