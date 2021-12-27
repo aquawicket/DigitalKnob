@@ -88,6 +88,6 @@ read input
 echo " "
 echo "cmake -G "Unix Makefiles" -DDEBUG=ON -DRELEASE=ON -DSTATIC=ON -DREBUILDALL=ON -DTARGET=$input -DOS=$OS -S $DKCMAKE -B $DKCMAKE/temp"
 echo " "
-cmake -G "Unix Makefiles" -DDEBUG=ON -DRELEASE=ON -DSTATIC=ON -DREBUILDALL=ON -DTARGET=$input -DOS=$OS -S $DKCMAKE -B $DKCMAKE/temp
+cmake -G "Unix Makefiles" -DDEBUG=ON -DRELEASE=ON -DSTATIC=ON -DREBUILDALL=ON -DHAVE_DKDuktape=1 -DTARGET=$input -DOS=$OS -S $DKCMAKE -B $DKCMAKE/temp
 
 exec $SHELL #keep terminal open

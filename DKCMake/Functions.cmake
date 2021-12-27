@@ -2816,61 +2816,29 @@ function(dk_RemoveSubstring removethis fromthis result)
 	set(${result} ${rtn} PARENT_SCOPE) #return result
 endfunction()
 
-#case sensitive for path checking
-function(dk_PathExists path result)
-	get_filename_component(abspath ${path} REALPATH)
-	file(TO_CMAKE_PATH "${path}" abspath)
-	if(${path} STREQUAL ${abspath})
-		DKINFO("${path} MATCHES ${abspath}")
-		set(${result} TRUE PARENT_SCOPE)
-		return()
-	endif()
-	DKINFO("${path} DOES NOT MATCH ${abspath}")
-	set(${result} FALSE PARENT_SCOPE)
-endfunction()
 
 function(dk_FindTarget target result_path result_type)
-	## search all DKApps folders
-	file(GLOB children RELATIVE ${DIGITALKNOB}/ ${DIGITALKNOB}/*)
-  	foreach(child ${children})
-		if(EXISTS ${DIGITALKNOB}/${child}/DKApps)
-			#dk_PathExists(${DIGITALKNOB}/${child}/DKApps/${target}/DKMAKE.cmake pathexists)
-			#if(pathexists)
-			if(EXISTS ${DIGITALKNOB}/${child}/DKApps/${target}/DKMAKE.cmake)
-				set(${result_path} ${DIGITALKNOB}/${child}/DKApps/${target} PARENT_SCOPE)
-				set(${result_type} DKApp PARENT_SCOPE)
-				return()
-			endif()
+	## search up to 4 levels deep
+	file(GLOB children RELATIVE ${DIGITALKNOB}/ 
+		${DIGITALKNOB}/${target}/DKMAKE.cmake 
+		${DIGITALKNOB}/**/${target}/DKMAKE.cmake 
+		${DIGITALKNOB}/**/**/${target}/DKMAKE.cmake 
+		${DIGITALKNOB}/**/**/**/${target}/DKMAKE.cmake
+		${DIGITALKNOB}/**/**/**/**/${target}/DKMAKE.cmake)
+	foreach(child ${children})
+		DKINFO("FOUND: ${DIGITALKNOB}/${child}")
+		string(REPLACE "/DKMAKE.cmake" "" path ${DIGITALKNOB}/${child})
+		set(${result_path} ${path} PARENT_SCOPE)
+		
+		file(STRINGS ${path}/DKMAKE.cmake dkmake_string)
+		string(FIND "${dkmake_string}" "DKAPP" index)
+		if(${index} GREATER -1)
+			set(${result_type} DKAPP PARENT_SCOPE) 
+		else()
+			set(${result_type} DKLIB PARENT_SCOPE) #DKLIB is default, we need to label executables to detect them
 		endif()
-  	endforeach()
-
-	## search all DKPlugins folders
-	file(GLOB children RELATIVE ${DIGITALKNOB}/ ${DIGITALKNOB}/*)
-  	foreach(child ${children})
-		if(EXISTS ${DIGITALKNOB}/${child}/DKPlugins)
-			#dk_PathExists(${DIGITALKNOB}/${child}/DKPlugins/${target}/DKMAKE.cmake pathexists)
-			#if(pathexists)
-			if(EXISTS ${DIGITALKNOB}/${child}/DKPlugins/${target}/DKMAKE.cmake)
-				set(${result_path} ${DIGITALKNOB}/${child}/DKPlugins/${target} PARENT_SCOPE)
-				set(${result_type} DKPlugin PARENT_SCOPE)
-				return()
-			endif()
-		endif()
-  	endforeach()
-
-	## search all 3rdParty/_DKIMPORT folders
-	file(GLOB children RELATIVE ${DIGITALKNOB}/ ${DIGITALKNOB}/*)
-  	foreach(child ${children})
-		if(EXISTS ${DIGITALKNOB}/${child}/3rdParty/_DKIMPORTS)
-			#dk_PathExists(${DIGITALKNOB}/${child}/3rdParty/_DKIMPORTS/${target}/DKMAKE.cmake pathexists)
-			#if(pathexists)
-			if(EXISTS ${DIGITALKNOB}/${child}/3rdParty/_DKIMPORTS/${target})
-				set(${result_path} ${DIGITALKNOB}/${child}/3rdParty/_DKIMPORTS/${target} PARENT_SCOPE)
-				set(${result_type} 3rdParty PARENT_SCOPE)
-				return()
-			endif()
-		endif()
-  	endforeach()
+		return() #return the found occurance
+	endforeach()
 endfunction()
 
 
