@@ -6,6 +6,6 @@ endif()
 
 FIND_LIBRARY(gameController_lib GameController)
 if(NOT gameController_lib)
-	message(FATAL_ERROR "Could not locate GameController framework")
+	message(WARNING "Could not locate GameController framework")
 endif()
 APPLE_LIB(${gameController_lib})
