@@ -42,8 +42,6 @@ for /f "delims=" %%a in ('dir /b /s /a-d DKMAKE.cmake ^| findstr /E /R "%input%\
 set "target_path=%path:~0,-13%"
 echo %target_path%
 set "cmnd="%CMAKE%" -G "Visual Studio 17 2022" -A %CPU% -DDEBUG=ON -DRELEASE=ON -DSTATIC=ON -DREBUILDALL=ON -DHAVE_DKDuktape=1 -DTARGET=%input% -DOS=%OS% -S "%DKCMAKE%" -B "%target_path%\%OS%" 
-::"%DKCMAKE%\temp""
-cd %DKCMAKE%
 echo.
 echo %cmnd%
 echo.
