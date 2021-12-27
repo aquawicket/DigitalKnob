@@ -6,6 +6,6 @@ endif()
 
 FIND_LIBRARY(CoreAudio_lib CoreAudio)
 if(NOT CoreAudio_lib)
-	message(FATAL_ERROR "Could not locate CoreAudio framework")
+	message(WARNING "Could not locate CoreAudio framework")
 endif()
 APPLE_LIB(${CoreAudio_lib})

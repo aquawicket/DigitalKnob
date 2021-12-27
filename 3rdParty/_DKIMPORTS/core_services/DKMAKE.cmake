@@ -6,6 +6,6 @@ endif()
 
 FIND_LIBRARY(CoreServices_lib CoreServices)
 if(NOT CoreServices_lib)
-	message(FATAL_ERROR "Could not locate CoreServices framework")
+	message(WARNING "Could not locate CoreServices framework")
 endif()
 APPLE_LIB(${CoreServices_lib})

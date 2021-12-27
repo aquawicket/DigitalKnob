@@ -6,6 +6,6 @@ endif()
 
 FIND_LIBRARY(Cocoa_lib Cocoa)
 if(NOT Cocoa_lib)
-	message(FATAL_ERROR "Could not locate Cocoa framework")
+	message(WARNING "Could not locate Cocoa framework")
 endif()
 APPLE_LIB(${Cocoa_lib})

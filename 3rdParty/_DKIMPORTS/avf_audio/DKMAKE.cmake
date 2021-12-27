@@ -6,6 +6,6 @@ endif()
 
 FIND_LIBRARY(AVFAaudio_lib AVFAudio)
 if(NOT AVFAaudio_lib)
-	message(FATAL_ERROR "Could not locate AVFAudio framework")
+	message(WARNING "Could not locate AVFAudio framework")
 endif()
 APPLE_LIB(${AVFAaudio_lib})

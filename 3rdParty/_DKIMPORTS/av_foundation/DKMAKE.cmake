@@ -6,6 +6,6 @@ endif()
 
 FIND_LIBRARY(avFoundtaion_Lib AVFoundation)
 if(NOT avFoundtaion_Lib)
-	message(STATUS "Could not locate AVFoundation framework")
+	message(WARNING "Could not locate AVFoundation framework")
 endif()
 APPLE_LIB(${avFoundtaion_Lib})
