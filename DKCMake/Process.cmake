@@ -27,7 +27,6 @@ endif()
 ##### Scan the DKPlugins and build the lists #####
 ##################################################
 include(${DKCMAKE}/BuildFlags.cmake)
-DUMP(DKCMAKE_BUILD)
 include(${DKPROJECT}/DKMAKE.cmake)
 DKREMOVE(${DKPROJECT}/${OS}/DKBUILD.log)
 dk_printSettings()
