@@ -6,6 +6,6 @@ endif()
 
 FIND_LIBRARY(MobileCoreServices_lib MobileCoreServices)
 if(NOT MobileCoreServices_lib)
-	message(FATAL_ERROR "Could not locate MobileCoreServices framework")
+	message(WARNING "Could not locate MobileCoreServices framework")
 endif()
 APPLE_LIB(${MobileCoreServices_lib})

@@ -6,6 +6,6 @@ endif()
 
 FIND_LIBRARY(Metal_lib Metal)
 if(NOT Metal_lib)
-	message(FATAL_ERROR "Could not locate Metal framework")
+	message(WARNING "Could not locate Metal framework")
 endif()
 APPLE_LIB(${Metal_lib})
