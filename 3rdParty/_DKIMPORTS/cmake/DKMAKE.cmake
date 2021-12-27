@@ -8,7 +8,7 @@ MAC_DKDEPEND(homebrew)
 
 
 ### VERSION ###
-WIN_HOST_DKSET(CMAKE_VERSION 3.22.1)
+WIN_HOST_DKSET(CMAKE_VERSION 3.21.1)
 WIN_HOST_DKSET(CMAKE_NAME cmake-${CMAKE_VERSION}-windows-i386)
 WIN_HOST_DKSET(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v${CMAKE_VERSION}/${CMAKE_NAME}.msi)
 #dk_getShortPath("C:\Program Files (x86)\CMake" CMAKE)
@@ -18,7 +18,7 @@ WIN_HOST_DKSET(CMAKE "C:/Program Files (x86)/CMake/bin")
 MAC_HOST_DKSET(CMAKE /usr/local/bin)
 LINUX_HOST_DKSET(CMAKE /usr/bin)
 
-WIN_HOST_DKSET(CMAKE_EXE "${CMAKE}/cmake.exe")
+WIN_HOST_DKSET(CMAKE_EXE "\"${CMAKE}/cmake.exe\"")
 UNIX_HOST_DKSET(CMAKE_EXE ${CMAKE}/cmake)
 
 
