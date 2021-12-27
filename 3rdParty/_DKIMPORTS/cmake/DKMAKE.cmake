@@ -33,6 +33,7 @@ if(NOT EXISTS "${CMAKE_EXE}")
 	LINUX_HOST_DKCOMMAND(sudo apt-get -y install cmake)
 else()
 	DKINFO("Found cmake at ${CMAKE_EXE}")
+	DKEXECUTE_PROCESS(${CMAKE_EXE} --version version.txt)
 endif()
 
 if(NOT EXISTS "${CMAKE_EXE}")
