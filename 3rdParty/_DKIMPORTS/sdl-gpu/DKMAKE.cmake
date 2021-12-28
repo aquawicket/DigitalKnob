@@ -4,6 +4,9 @@
 # https://github.com/aquawicket/sdl-gpu/archive/refs/heads/master.zip
 # https://github.com/grimfang4/sdl-gpu/archive/refs/heads/master.zip
 
+### DEPENDS ###
+DKDEPEND(sdl2)
+
 
 ### VERSION ###
 DKSET(SDLGPU_VERSION master)
