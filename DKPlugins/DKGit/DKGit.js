@@ -54,13 +54,20 @@ function DKGit_GitUpdate() {
 	if(!CPP_DKFile_Exists(DIGITALKNOB + "DK/.git")){
 		CPP_DK_Execute(GIT + " clone https://github.com/aquawicket/DigitalKnob.git " + DIGITALKNOB + "DK")
 		CPP_DKFile_ChDir(DIGITALKNOB + "DK")
-		CPP_DK_Execute(GIT + " checkout -- .")
+		//CPP_DK_Execute(GIT + " checkout -- .")
+		CPP_DK_Execute(GIT + " checkout Development")
+		
 		//const branch = DKGit_GetCurrentBranch()
-		CPP_DK_Execute(GIT + " pull origin master")
+		
+		//CPP_DK_Execute(GIT + " pull origin master")
+		CPP_DK_Execute(GIT + " pull Development")
 	}
 	else{
 		CPP_DKFile_ChDir(DIGITALKNOB + "DK")
-		CPP_DK_Execute(GIT + " checkout -- .")
+		
+		//CPP_DK_Execute(GIT + " checkout -- .")
+		CPP_DK_Execute(GIT + " checkout Development")
+		
 		//const branch = DKGit_GetCurrentBranch()
 		CPP_DK_Execute(GIT + " pull")
 	}
@@ -84,9 +91,14 @@ function DKGit_GitUpdate() {
 				if(!CPP_DKFile_Exists(DIGITALKNOB + folder + "/.git")){
 					CPP_DK_Execute(GIT + " clone " + url + " " + DIGITALKNOB + folder)
 					CPP_DKFile_ChDir(DIGITALKNOB + folder)
-					CPP_DK_Execute(GIT + " checkout -- .")
+					
+					//CPP_DK_Execute(GIT + " checkout -- .")
+					CPP_DK_Execute(GIT + " checkout Development")
+					
 					//const branch = DKGit_GetCurrentBranch()
-					CPP_DK_Execute(GIT + " pull origin master")
+					
+					//CPP_DK_Execute(GIT + " pull origin master")
+					CPP_DK_Execute(GIT + " pull Development")
 				}
 				else{
 					CPP_DKFile_ChDir(DIGITALKNOB + folder)
