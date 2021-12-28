@@ -1401,7 +1401,11 @@ endfunction()
 
 
 function(dk_getPathToPlugin name result)
-
+	list(FIND dkdepend_disable_list "${ARGV}" index)
+	if(${index} GREATER -1)
+		DKINFO("${ARGV} IS DISABLED")
+		return()
+	endif()
 	file(GLOB children RELATIVE ${DIGITALKNOB} ${DIGITALKNOB}/*)
  	foreach(child ${children})
 		if(EXISTS ${DIGITALKNOB}/${child}/3rdParty/_DKIMPORTS/${name}/DKMAKE.cmake)
