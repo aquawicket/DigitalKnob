@@ -20,14 +20,14 @@ DKINSTALL(${WAAVE_DL} waave ${WAAVE})
 
 ### LINK ###
 DKINCLUDE(${WAAVE}/src)
-WIN_DEBUG_LIB(${WAAVE}/${OS}/${DEBUG_DIR}/waave.lib)
-WIN_RELEASE_LIB(${WAAVE}/${OS}/${RELEASE_DIR}/waave.lib)
-APPLE_DEBUG_LIB(${WAAVE}/${OS}/${DEBUG_DIR}/libwaave.a)
-APPLE_RELEASE_LIB(${WAAVE}/${OS}/${RELEASE_DIR}/libwaave.a)
-LINUX_DEBUG_LIB(${WAAVE}/${OS}/${DEBUG_DIR}/libwaave.a)
-LINUX_RELEASE_LIB(${WAAVE}/${OS}/${RELEASE_DIR}/libwaave.a)
-ANDROID_DEBUG_LIB(${WAAVE}/${OS}/${DEBUG_DIR}/obj/local/armeabi-v7a/libwaave.a)
-ANDROID_RELEASE_LIB(${WAAVE}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/libwaave.a)
+WIN_DEBUG_DKLIB(${WAAVE}/${OS}/${DEBUG_DIR}/waave.lib)
+WIN_RELEASE_DKLIB(${WAAVE}/${OS}/${RELEASE_DIR}/waave.lib)
+APPLE_DEBUG_DKLIB(${WAAVE}/${OS}/${DEBUG_DIR}/libwaave.a)
+APPLE_RELEASE_DKLIB(${WAAVE}/${OS}/${RELEASE_DIR}/libwaave.a)
+LINUX_DEBUG_DKLIB(${WAAVE}/${OS}/${DEBUG_DIR}/libwaave.a)
+LINUX_RELEASE_DKLIB(${WAAVE}/${OS}/${RELEASE_DIR}/libwaave.a)
+ANDROID_DEBUG_DKLIB(${WAAVE}/${OS}/${DEBUG_DIR}/obj/local/armeabi-v7a/libwaave.a)
+ANDROID_RELEASE_DKLIB(${WAAVE}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/libwaave.a)
 
 
 ### COMPILE ###

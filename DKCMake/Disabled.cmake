@@ -1,3 +1,8 @@
+if(DISABLED_INCLUDED)
+  return()
+endif(DISABLED_INCLUDED)
+DKSET(DISABLED_INCLUDED 1)
+
 # DISABLED FOR ALL
 DKDISABLE(_TEMPLATE-APP_)
 DKDISABLE(_TEMPLATE-LIB_)
@@ -153,6 +158,7 @@ if(IOS OR IOSSIM)
 	DKDISABLE(glew)
 	DKDISABLE(imagemagick)
 	DKDISABLE(jerryscript)
+	DKDISABLE(libarchive)
 	DKDISABLE(libiconv)
 	DKDISABLE(libmd)
 	DKDISABLE(libpng)
@@ -266,7 +272,7 @@ endif()
 
 
 if(ANDROID) # Disabled for Android targets
-	DKDISABLE(boxer)
+	#DKDISABLE(boxer)
 	DKDISABLE(bzip2)
 	DKDISABLE(cef_binary)
 	DKDISABLE(curl)
@@ -276,11 +282,14 @@ if(ANDROID) # Disabled for Android targets
 	DKDISABLE(DKCurl)
 	DKDISABLE(DKWebSockets)
 	DKDISABLE(DKDom)
+	DKDISABLE(DKHandles)
 	DKDISABLE(DKHook)        # NOTE: this has linux functions too
+	DKDISABLE(DKMidi)
 	DKDISABLE(DKMySql)
 	DKDISABLE(DKOcr)
 	DKDISABLE(DKRml)
 	DKDISABLE(DKRmlIframe)
+	DKDISABLE(DKSDLCef)
 	DKDISABLE(DKSDLRml)
 	DKDISABLE(DKSDLText)
 	DKDISABLE(DKSFMLWindow)

@@ -59,8 +59,13 @@ while :
 					git clone https://github.com/aquawicket/DigitalKnob.git $DKPATH
 				fi
 				cd $DKPATH
-				git checkout -- .
-				git pull origin master
+				
+				#git checkout -- .
+				#git pull origin master
+				
+				git checkout Development
+				git pull
+				
 				chmod +x $DKPATH/build.sh
 				chmod +x $DKCMAKE/dkbuild.sh
 				;;

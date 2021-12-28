@@ -36,8 +36,8 @@ WIN32_INCLUDE(${OPENFRAMEWORKS}/libs/openFrameworks/sound)
 WIN32_INCLUDE(${OPENFRAMEWORKS}/libs/fmodex/include)
 WIN32_INCLUDE(${OPENFRAMEWORKS}/libs/openFrameworks/video)
 WIN32_INCLUDE(${OPENFRAMEWORKS}/libs/videoInput/include)
-WIN_DEBUG_LIB(${OPENFRAMEWORKS}/${OS}/lib/${DEBUG_DIR}/openFrameworks.lib)
-WIN_RELEASE_LIB(${OPENFRAMEWORKS}/${OS}/lib/${RELEASE_DIR}/openFrameworks.lib)
+WIN_DEBUG_DKLIB(${OPENFRAMEWORKS}/${OS}/lib/${DEBUG_DIR}/openFrameworks.lib)
+WIN_RELEASE_DKLIB(${OPENFRAMEWORKS}/${OS}/lib/${RELEASE_DIR}/openFrameworks.lib)
 
 
 ### COMPILE ###

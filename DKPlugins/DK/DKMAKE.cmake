@@ -1,7 +1,7 @@
 if(WIN)
-	WIN_LIB(Psapi.lib) # GetProcessMemoryInfo()
-	WIN_LIB(pdh.lib)   # PdhOpenQueryA()
-	WIN_LIB(Dxva2.dll) # GetNumberOfPhysicalMonitorsFromHMONITOR()
+	WIN_DKLIB(Psapi.lib) # GetProcessMemoryInfo()
+	WIN_DKLIB(pdh.lib)   # PdhOpenQueryA()
+	WIN_DKLIB(Dxva2.dll) # GetNumberOfPhysicalMonitorsFromHMONITOR()
 	DKDEPEND(boxer)
 endif()
 

@@ -21,12 +21,12 @@ DKINSTALL(${FREEALUT_DL} freealut ${FREEALUT})
 ### LINK ###
 DKDEFINE(AL_LIBTYPE_STATIC)
 DKINCLUDE(${FREEALUT}/include)
-WIN_DEBUG_LIB(${FREEALUT}/${OS}/${DEBUG_DIR}/alut_static.lib)
-WIN_RELEASE_LIB(${FREEALUT}/${OS}/${RELEASE_DIR}/alut_static.lib)
-APPLE_DEBUG_LIB(${FREEALUT}/${OS}/${DEBUG_DIR}/libalut_static.a)
-APPLE_RELEASE_LIB(${FREEALUT}/${OS}/${RELEASE_DIR}/libalut_static.a)
-LINUX_DEBUG_LIB(${FREEALUT}/${OS}/${DEBUG_DIR}/libalut_static.a)
-LINUX_RELEASE_LIB(${FREEALUT}/${OS}/${RELEASE_DIR}/libalut_static.a)
+WIN_DEBUG_DKLIB(${FREEALUT}/${OS}/${DEBUG_DIR}/alut_static.lib)
+WIN_RELEASE_DKLIB(${FREEALUT}/${OS}/${RELEASE_DIR}/alut_static.lib)
+APPLE_DEBUG_DKLIB(${FREEALUT}/${OS}/${DEBUG_DIR}/libalut_static.a)
+APPLE_RELEASE_DKLIB(${FREEALUT}/${OS}/${RELEASE_DIR}/libalut_static.a)
+LINUX_DEBUG_DKLIB(${FREEALUT}/${OS}/${DEBUG_DIR}/libalut_static.a)
+LINUX_RELEASE_DKLIB(${FREEALUT}/${OS}/${RELEASE_DIR}/libalut_static.a)
 
 
 

@@ -21,16 +21,16 @@ DKINSTALL(${DIFF_MATCH_PATCH_DL} diff-match-patch ${DIFF_MATCH_PATCH})
 
 ### LINK ###
 # DKINCLUDE(${DIFF_MATCH_PATCH}/include)
-# WIN_DEBUG_LIB(${DIFF_MATCH_PATCH}/${OS}/${DEBUG_DIR}/diff-match-patchd.lib)
-# WIN_RELEASE_LIB(${DIFF_MATCH_PATCH}/${OS}/${RELEASE_DIR}/diff-match-patch.lib)
-# APPLE_DEBUG_LIB(${DIFF_MATCH_PATCH}/${OS}/${DEBUG_DIR}/libdiff-match-patchd.a)
-# APPLE_RELEASE_LIB(${DIFF_MATCH_PATCH}/${OS}/${RELEASE_DIR}/libdiff-match-patch.a)
-# LINUX_DEBUG_LIB(${DIFF_MATCH_PATCH}/${OS}/${DEBUG_DIR}/libdiff-match-patchd.a)
-# LINUX_RELEASE_LIB(${DIFF_MATCH_PATCH}/${OS}/${RELEASE_DIR}/libdiff-match-patch.a)
-# RASPBERRY_DEBUG_LIB(${DIFF_MATCH_PATCH}/${OS}/${DEBUG_DIR}/libdiff-match-patchd.a)
-# RASPBERRY_RELEASE_LIB(${DIFF_MATCH_PATCH}/${OS}/${RELEASE_DIR}/libdiff-match-patch.a)
-# ANDROID_DEBUG_LIB(${DIFF_MATCH_PATCH}/${OS}/${DEBUG_DIR}/libdiff-match-patchd.a)
-# ANDROID_RELEASE_LIB(${DIFF_MATCH_PATCH}/${OS}/${RELEASE_DIR}/libdiff-match-patch.a)
+# WIN_DEBUG_DKLIB(${DIFF_MATCH_PATCH}/${OS}/${DEBUG_DIR}/diff-match-patchd.lib)
+# WIN_RELEASE_DKLIB(${DIFF_MATCH_PATCH}/${OS}/${RELEASE_DIR}/diff-match-patch.lib)
+# APPLE_DEBUG_DKLIB(${DIFF_MATCH_PATCH}/${OS}/${DEBUG_DIR}/libdiff-match-patchd.a)
+# APPLE_RELEASE_DKLIB(${DIFF_MATCH_PATCH}/${OS}/${RELEASE_DIR}/libdiff-match-patch.a)
+# LINUX_DEBUG_DKLIB(${DIFF_MATCH_PATCH}/${OS}/${DEBUG_DIR}/libdiff-match-patchd.a)
+# LINUX_RELEASE_DKLIB(${DIFF_MATCH_PATCH}/${OS}/${RELEASE_DIR}/libdiff-match-patch.a)
+# RASPBERRY_DEBUG_DKLIB(${DIFF_MATCH_PATCH}/${OS}/${DEBUG_DIR}/libdiff-match-patchd.a)
+# RASPBERRY_RELEASE_DKLIB(${DIFF_MATCH_PATCH}/${OS}/${RELEASE_DIR}/libdiff-match-patch.a)
+# ANDROID_DEBUG_DKLIB(${DIFF_MATCH_PATCH}/${OS}/${DEBUG_DIR}/libdiff-match-patchd.a)
+# ANDROID_RELEASE_DKLIB(${DIFF_MATCH_PATCH}/${OS}/${RELEASE_DIR}/libdiff-match-patch.a)
 
 
 ### COMPILE ###

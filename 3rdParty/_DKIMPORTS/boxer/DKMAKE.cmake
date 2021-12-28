@@ -5,12 +5,12 @@
 # https://github.com/aaronmjacobs/Boxer/archive/refs/heads/master.zip
 # https://github.com/aaronmjacobs/Boxer/archive/refs/heads/C.zip
 
-if(RASPBERRY)
+if(RASPBERRY OR ANDROID)
 	return() 
 endif()
 
 ### DEPENDS ###
-if(MAC OR IOS OR IOSSIM)
+if(APPLE)
 	DKDEPEND(cocoa)
 endif()
 
@@ -29,10 +29,10 @@ DKINSTALL(${BOXER_DL} boxer ${BOXER})
 ### LINK ###
 DKINCLUDE(${BOXER}/include)
 DKINCLUDE(${BOXER}/${OS})
-WIN_DEBUG_LIB(${BOXER}/${OS}/${DEBUG_DIR}/Boxer.lib)
-WIN_RELEASE_LIB(${BOXER}/${OS}/${RELEASE_DIR}/Boxer.lib)
-UNIX_DEBUG_LIB(${BOXER}/${OS}/${DEBUG_DIR}/libBoxer.a)
-UNIX_RELEASE_LIB(${BOXER}/${OS}/${RELEASE_DIR}/libBoxer.a)
+WIN_DEBUG_DKLIB(${BOXER}/${OS}/${DEBUG_DIR}/Boxer.lib)
+WIN_RELEASE_DKLIB(${BOXER}/${OS}/${RELEASE_DIR}/Boxer.lib)
+UNIX_DEBUG_DKLIB(${BOXER}/${OS}/${DEBUG_DIR}/libBoxer.a)
+UNIX_RELEASE_DKLIB(${BOXER}/${OS}/${RELEASE_DIR}/libBoxer.a)
 
 
 ### COMPILE ###

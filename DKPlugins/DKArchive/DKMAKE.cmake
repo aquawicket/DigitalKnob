@@ -7,5 +7,5 @@ IF(HAVE_DKCef)
 	DKDEPEND(DKCef)
 ENDIF()
 
-WIN_LIB(AdvAPI32.lib)
+WIN_DKLIB(AdvAPI32.lib)
 generateCmake(DKArchive)

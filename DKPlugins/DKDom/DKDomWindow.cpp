@@ -136,11 +136,8 @@ bool DKDomWindow::Init()
 
 
 	/*
-	 *  First, build a new global object which contains a few keys we
-	 *  want to see.
-	 */
+	  //First, build a new global object which contains a few keys we want to see.
 #include "DKDuktape.h"
-
 	DKDuktape* dt = DKDuktape::Get();
 	printf("build replacement global object\n");
 	duk_eval_string(dt->ctx,
@@ -156,15 +153,13 @@ bool DKDomWindow::Init()
 	duk_set_global_object(dt->ctx);
 	printf("top after: %ld\n", (long)duk_get_top(dt->ctx));
 
-	/*
-	 *  Print available keys.  This exercises access to the global object
-	 *  directly.
-	 */
+	
+	//Print available keys.  This exercises access to the global object directly.
+	
 	//dump_global_object_keys(dt->ctx);
 
-	/*
-	 *  Test that indirect eval executes in the new global object too.
-	 */
+	//Test that indirect eval executes in the new global object too.
+	 
 	printf("indirect eval\n");
 	duk_eval_string_noresult(dt->ctx,
 		"var myEval = eval;  // writes 'myEval' to global object as a side effect\n"
@@ -174,9 +169,8 @@ bool DKDomWindow::Init()
 		"myEval('print(this.newGlobal)');"
 	);
 
-	/*
-	 *  Test access to global object through an object environment.
-	 */
+	// Test access to global object through an object environment.
+	 
 	printf("access through this.xxx and variable lookup xxx\n");
 	duk_eval_string_noresult(dt->ctx,
 		"print('this.testName:', this.testName);\n"
@@ -186,6 +180,7 @@ bool DKDomWindow::Init()
 	);
 
 	printf("final top: %ld\n", (long)duk_get_top(dt->ctx));
+	*/
 
 
 

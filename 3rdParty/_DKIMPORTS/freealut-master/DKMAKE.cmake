@@ -12,8 +12,8 @@ DKINSTALL(${FREEALUT_DL} freealut_master ${FREEALUT})
 
 ### LINK ###
 DKINCLUDE(${FREEALUT}/include)
-ANDROID_DEBUG_LIB(${FREEALUT}/${OS}/${DEBUG_DIR}/obj/local/armeabi-v7a/libalut.a)
-ANDROID_RELEASE_LIB(${FREEALUT}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/libalut.a)
+ANDROID_DEBUG_DKLIB(${FREEALUT}/${OS}/${DEBUG_DIR}/obj/local/armeabi-v7a/libalut.a)
+ANDROID_RELEASE_DKLIB(${FREEALUT}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/libalut.a)
 
 
 ### COMPILE ###

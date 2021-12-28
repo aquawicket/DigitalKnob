@@ -17,14 +17,14 @@ DKINSTALL(${WEBSOCKETS_DL} libwebsockets ${WEBSOCKETS})
 ### LINK ###
 DKINCLUDE(${WEBSOCKETS}/lib)
 DKINCLUDE(${WEBSOCKETS}/${OS})
-WIN_DEBUG_LIB(${WEBSOCKETS}/${OS}/lib/${DEBUG_DIR}/websockets_static.lib)
-WIN_RELEASE_LIB(${WEBSOCKETS}/${OS}/lib/${RELEASE_DIR}/websockets_static.lib)
-## APPLE_DEBUG_LIB(${WEBSOCKETS}/${OS}/lib/${DEBUG_DIR}/libwebsockets.a)
-## APPLE_RELEASE_LIB(${WEBSOCKETS}/${OS}/lib/${RELEASE_DIR}/libwebsockets.a)
-LINUX_DEBUG_LIB(${WEBSOCKETS}/${OS}/${DEBUG_DIR}/lib/libwebsockets.a)
-LINUX_RELEASE_LIB(${WEBSOCKETS}/${OS}/${RELEASE_DIR}/lib/libwebsockets.a)
-## ANDROID_DEBUG_LIB(${WEBSOCKETS}/${OS}/${DEBUG_DIR}/obj/local/armeabi-v7a/libwebsockets.a)
-## ANDROID_RELEASE_LIB(${WEBSOCKETS}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/libwebsockets.a)
+WIN_DEBUG_DKLIB(${WEBSOCKETS}/${OS}/lib/${DEBUG_DIR}/websockets_static.lib)
+WIN_RELEASE_DKLIB(${WEBSOCKETS}/${OS}/lib/${RELEASE_DIR}/websockets_static.lib)
+## APPLE_DEBUG_DKLIB(${WEBSOCKETS}/${OS}/lib/${DEBUG_DIR}/libwebsockets.a)
+## APPLE_RELEASE_DKLIB(${WEBSOCKETS}/${OS}/lib/${RELEASE_DIR}/libwebsockets.a)
+LINUX_DEBUG_DKLIB(${WEBSOCKETS}/${OS}/${DEBUG_DIR}/lib/libwebsockets.a)
+LINUX_RELEASE_DKLIB(${WEBSOCKETS}/${OS}/${RELEASE_DIR}/lib/libwebsockets.a)
+## ANDROID_DEBUG_DKLIB(${WEBSOCKETS}/${OS}/${DEBUG_DIR}/obj/local/armeabi-v7a/libwebsockets.a)
+## ANDROID_RELEASE_DKLIB(${WEBSOCKETS}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/libwebsockets.a)
 
 
 ### COMPILE ###
