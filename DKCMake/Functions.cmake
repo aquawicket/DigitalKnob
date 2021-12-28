@@ -502,7 +502,7 @@ endfunction()
 
 function(DKDISABLE plugin)
 	if(BYPASS_DISABLE)
-		DKINFO("******** DKDISABLE(${plugin}) ignored.  BYPASS_DISABLE is set to ON. ${plugin} will not be disabled ********")
+		DKINFO("* DKDISABLE(${plugin}) ignored.  BYPASS_DISABLE is set to ON. ${plugin} will not be disabled *")
 		return()
 	endif()
 	if(NOT ${CMAKE_CURRENT_LIST_DIR} STREQUAL ${DKCMAKE} AND NOT ${CMAKE_CURRENT_LIST_DIR} STREQUAL ${DKPROJECT}) # /from DKCMake or curremt Project directory only
