@@ -20,16 +20,16 @@ DKINSTALL(${GETCH_DL} simple-getch ${GETCH})
 
 ### LINK ###
 DKINCLUDE(${GETCH}/getch/include)
-#WIN_DEBUG_LIB(${GETCH}/getch/libgetch.a)
-#WIN_RELEASE_LIB(${GETCH}/getch/libgetch.a)
-#APPLE_DEBUG_LIB(${GETCH}/getch/libgetch.a)
-#APPLE_RELEASE_LIB(${GETCH}/getch/libgetch.a)
-LINUX_DEBUG_LIB(${GETCH}/getch/libgetch.a)
-LINUX_RELEASE_LIB(${GETCH}/getch/libgetch.a)
-RASPBERRY_DEBUG_LIB(${GETCH}/getch/libgetch.a)
-RASPBERRY_RELEASE_LIB(${GETCH}/getch/libgetch.a)
-#ANDROID_DEBUG_LIB(${GETCH}/getch/libgetch.a)
-#ANDROID_RELEASE_LIB(${GETCH}/getch/libgetch.a)
+#WIN_DEBUG_DKLIB(${GETCH}/getch/libgetch.a)
+#WIN_RELEASE_DKLIB(${GETCH}/getch/libgetch.a)
+#APPLE_DEBUG_DKLIB(${GETCH}/getch/libgetch.a)
+#APPLE_RELEASE_DKLIB(${GETCH}/getch/libgetch.a)
+LINUX_DEBUG_DKLIB(${GETCH}/getch/libgetch.a)
+LINUX_RELEASE_DKLIB(${GETCH}/getch/libgetch.a)
+RASPBERRY_DEBUG_DKLIB(${GETCH}/getch/libgetch.a)
+RASPBERRY_RELEASE_DKLIB(${GETCH}/getch/libgetch.a)
+#ANDROID_DEBUG_DKLIB(${GETCH}/getch/libgetch.a)
+#ANDROID_RELEASE_DKLIB(${GETCH}/getch/libgetch.a)
 
 
 

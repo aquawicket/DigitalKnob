@@ -4,4 +4,4 @@ if(NOT WIN_HOST)
 	return()
 endif()
 
-WIN_LIB(Ws2_32.lib)
+WIN_DKLIB(Ws2_32.lib)

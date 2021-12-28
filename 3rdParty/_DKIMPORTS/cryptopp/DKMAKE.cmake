@@ -26,16 +26,16 @@ DKINSTALL(${CRYPTO_DL} cryptopp ${CRYPTO})
 
 
 ### LINK ###
-WIN_DEBUG_LIB(${CRYPTO}/${OS}/${DEBUG_DIR}/cryptopp-static.lib)
-WIN_RELEASE_LIB(${CRYPTO}/${OS}/${RELEASE_DIR}/cryptopp-static.lib)
-APPLE_DEBUG_LIB(${CRYPTO}/${OS}/cryptopp.build/Debug/cryptopp-object.build/libcryptopp-object.a)
-APPLE_RELEASE_LIB(${CRYPTO}/${OS}/cryptopp.build/Release/cryptopp-object.build/libcryptopp-object.a)
-LINUX_DEBUG_LIB(${CRYPTO}/${OS}/${DEBUG_DIR}/libcryptopp.a)
-LINUX_RELEASE_LIB(${CRYPTO}/${OS}/${RELEASE_DIR}/libcryptopp.a)
-RASPBERRY_DEBUG_LIB(${CRYPTO}/${OS}/${DEBUG_DIR}/libcryptopp.a)
-RASPBERRY_RELEASE_LIB(${CRYPTO}/${OS}/${RELEASE_DIR}/libcryptopp.a)
-ANDROID_DEBUG_LIB(${CRYPTO}/${OS}/${DEBUG_DIR}/libcryptopp.a)
-ANDROID_RELEASE_LIB(${CRYPTO}/${OS}/${RELEASE_DIR}/libcryptopp.a)
+WIN_DEBUG_DKLIB(${CRYPTO}/${OS}/${DEBUG_DIR}/cryptopp-static.lib)
+WIN_RELEASE_DKLIB(${CRYPTO}/${OS}/${RELEASE_DIR}/cryptopp-static.lib)
+APPLE_DEBUG_DKLIB(${CRYPTO}/${OS}/cryptopp.build/Debug/cryptopp-object.build/libcryptopp-object.a)
+APPLE_RELEASE_DKLIB(${CRYPTO}/${OS}/cryptopp.build/Release/cryptopp-object.build/libcryptopp-object.a)
+LINUX_DEBUG_DKLIB(${CRYPTO}/${OS}/${DEBUG_DIR}/libcryptopp.a)
+LINUX_RELEASE_DKLIB(${CRYPTO}/${OS}/${RELEASE_DIR}/libcryptopp.a)
+RASPBERRY_DEBUG_DKLIB(${CRYPTO}/${OS}/${DEBUG_DIR}/libcryptopp.a)
+RASPBERRY_RELEASE_DKLIB(${CRYPTO}/${OS}/${RELEASE_DIR}/libcryptopp.a)
+ANDROID_DEBUG_DKLIB(${CRYPTO}/${OS}/${DEBUG_DIR}/libcryptopp.a)
+ANDROID_RELEASE_DKLIB(${CRYPTO}/${OS}/${RELEASE_DIR}/libcryptopp.a)
 
 
 ### COMPILE ###

@@ -24,8 +24,8 @@ DKDEFINE(AL_LIBTYPE_STATIC)
 ANDROID_DKINCLUDE(${OPENAL}/include)
 ANDROID_DKINCLUDE(${OPENAL}/include/AL)
 ANDROID_DKINCLUDE(${OPENAL}/${OS}/${RELEASE_DIR}/jni)
-ANDROID_DEBUG_LIB(${OPENAL}/${OS}/${DEBUG_DIR}/obj/local/armeabi-v7a/libopenal.a)
-ANDROID_RELEASE_LIB(${OPENAL}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/libopenal.a)
+ANDROID_DEBUG_DKLIB(${OPENAL}/${OS}/${DEBUG_DIR}/obj/local/armeabi-v7a/libopenal.a)
+ANDROID_RELEASE_DKLIB(${OPENAL}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/libopenal.a)
 
 
 ### COMPILE ###

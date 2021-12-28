@@ -22,16 +22,16 @@ DKINSTALL(${TORRENT_DL} libtorrent ${TORRENT})
 
 ### LINK ###
 DKINCLUDE(${TORRENT}/include)
-WIN_DEBUG_LIB(${TORRENT}/${OS}/${DEBUG_DIR}/torrent-rasterbar.lib)
-WIN_RELEASE_LIB(${TORRENT}/${OS}/${RELEASE_DIR}/torrent-rasterbar.lib)
-MAC_DEBUG_LIB(${TORRENT}/${OS}/lib/${DEBUG_DIR}/libtorrent-rasterbar.a)
-MAC_RELEASE_LIB(${TORRENT}/${OS}/lib/${RELEASE_DIR}/libtorrent-rasterbar.a)
-IOSSIM_DEBUG_LIB(${TORRENT}/${OS}/${DEBUG_DIR}/lib/.libs/libtorrent-rasterbar.a)
-IOSSIM_RELEASE_LIB(${TORRENT}/${OS}/${RELEASE_DIR}/lib/.libs/libtorrent-rasterbar.a)
-LINUX_DEBUG_LIB(${TORRENT}/${OS}/${DEBUG_DIR}/libtorrent-rasterbar.a)
-LINUX_RELEASE_LIB(${TORRENT}/${OS}/${RELEASE_DIR}/libtorrent-rasterbar.a)
-ANDROID_DEBUG_LIB(${TORRENT}/${OS}/${DEBUG_DIR}/obj/local/armeabi-v7a/libtorrent-rasterbar.a)
-ANDROID_RELEASE_LIB(${TORRENT}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/libtorrent-rasterbar.a)
+WIN_DEBUG_DKLIB(${TORRENT}/${OS}/${DEBUG_DIR}/torrent-rasterbar.lib)
+WIN_RELEASE_DKLIB(${TORRENT}/${OS}/${RELEASE_DIR}/torrent-rasterbar.lib)
+MAC_DEBUG_DKLIB(${TORRENT}/${OS}/lib/${DEBUG_DIR}/libtorrent-rasterbar.a)
+MAC_RELEASE_DKLIB(${TORRENT}/${OS}/lib/${RELEASE_DIR}/libtorrent-rasterbar.a)
+IOSSIM_DEBUG_DKLIB(${TORRENT}/${OS}/${DEBUG_DIR}/lib/.libs/libtorrent-rasterbar.a)
+IOSSIM_RELEASE_DKLIB(${TORRENT}/${OS}/${RELEASE_DIR}/lib/.libs/libtorrent-rasterbar.a)
+LINUX_DEBUG_DKLIB(${TORRENT}/${OS}/${DEBUG_DIR}/libtorrent-rasterbar.a)
+LINUX_RELEASE_DKLIB(${TORRENT}/${OS}/${RELEASE_DIR}/libtorrent-rasterbar.a)
+ANDROID_DEBUG_DKLIB(${TORRENT}/${OS}/${DEBUG_DIR}/obj/local/armeabi-v7a/libtorrent-rasterbar.a)
+ANDROID_RELEASE_DKLIB(${TORRENT}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/libtorrent-rasterbar.a)
 
 
 ### COMPILE ###
@@ -43,7 +43,7 @@ WIN_VS(${TORRENT_NAME} libtorrent.sln torrent-rasterbar)
 
 MAC_DKSETPATH(${TORRENT}/${OS})
 MAC64_DKQCOMMAND(${DKCMAKE_BUILD} ${TORRENT})
-MAC_XCODE_DEBUG(${TORRENT_NAME} libtorrent-rasterbar)
+MAC_DEBUG_XCODE(${TORRENT_NAME} libtorrent-rasterbar)
 
 
 IOS_DKSETPATH(${TORRENT}/${OS})

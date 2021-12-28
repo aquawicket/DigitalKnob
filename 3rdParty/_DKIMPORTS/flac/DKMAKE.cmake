@@ -18,14 +18,14 @@ DKINSTALL(${FLAC_DL} flac ${FLAC})
 
 ### LINK ###
 DKINCLUDE(${FLAC})
-WIN_DEBUG_LIB(${FLAC}/${OS}/${DEBUG_DIR}/src/libFLAC/.libs/libFLAC-static.a)
-WIN_RELEASE_LIB(${FLAC}/${OS}/${RELEASE_DIR}/src/libFLAC/.libs/libFLAC-static.a)
-APPLE_DEBUG_LIB(${FLAC}/${OS}/${DEBUG_DIR}/src/libFLAC/.libs/libFLAC-static.a)
-APPLE_RELEASE_LIB(${FLAC}/${OS}/${RELEASE_DIR}/src/libFLAC/.libs/libFLAC-static.a)
-LINUX_DEBUG_LIB(${FLAC}/${OS}/${DEBUG_DIR}/src/libFLAC/.libs/libFLAC-static.a)
-LINUX_RELEASE_LIB(${FLAC}/${OS}/${RELEASE_DIR}/src/libFLAC/.libs/libFLAC-static.a)
-ANDROID_DEBUG_LIB(${FLAC}/${OS}/${DEBUG_DIR}/src/libFLAC/.libs/libFLAC-static.a)
-ANDROID_RELEASE_LIB(${FLAC}/${OS}/${RELEASE_DIR}/src/libFLAC/.libs/libFLAC-static.a)
+WIN_DEBUG_DKLIB(${FLAC}/${OS}/${DEBUG_DIR}/src/libFLAC/.libs/libFLAC-static.a)
+WIN_RELEASE_DKLIB(${FLAC}/${OS}/${RELEASE_DIR}/src/libFLAC/.libs/libFLAC-static.a)
+APPLE_DEBUG_DKLIB(${FLAC}/${OS}/${DEBUG_DIR}/src/libFLAC/.libs/libFLAC-static.a)
+APPLE_RELEASE_DKLIB(${FLAC}/${OS}/${RELEASE_DIR}/src/libFLAC/.libs/libFLAC-static.a)
+LINUX_DEBUG_DKLIB(${FLAC}/${OS}/${DEBUG_DIR}/src/libFLAC/.libs/libFLAC-static.a)
+LINUX_RELEASE_DKLIB(${FLAC}/${OS}/${RELEASE_DIR}/src/libFLAC/.libs/libFLAC-static.a)
+ANDROID_DEBUG_DKLIB(${FLAC}/${OS}/${DEBUG_DIR}/src/libFLAC/.libs/libFLAC-static.a)
+ANDROID_RELEASE_DKLIB(${FLAC}/${OS}/${RELEASE_DIR}/src/libFLAC/.libs/libFLAC-static.a)
 
 
 ### 3rd Party Link ###

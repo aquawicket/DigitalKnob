@@ -12,14 +12,14 @@ DKINSTALL(${LIGHTTPD_DL} lighttpd ${LIGHTTPD})
 ### LINK ###
 DKINCLUDE(${LIGHTTPD}/lib)
 DKINCLUDE(${LIGHTTPD}/${OS}/${RELEASE_DIR})
-WIN_DEBUG_LIB(${LIGHTTPD}/${OS}/lib/${DEBUG_DIR}/liblighttpd.lib)
-WIN_RELEASE_LIB(${LIGHTTPD}/${OS}/lib/${RELEASE_DIR}/liblighttpd.lib)
-APPLE_DEBUG_LIB(${LIGHTTPD}/${OS}/lib/${DEBUG_DIR}/liblighttpd.a)
-APPLE_RELEASE_LIB(${LIGHTTPD}/${OS}/lib/${RELEASE_DIR}/liblighttpd.a)
-LINUX_DEBUG_LIB(${LIGHTTPD}/${OS}/${DEBUG_DIR}/lib/liblighttpd.a)
-LINUX_RELEASE_LIB(${LIGHTTPD}/${OS}/${RELEASE_DIR}/lib/liblighttpd.a)
-ANDROID_DEBUG_LIB(${LIGHTTPD}/${OS}/${DEBUG_DIR}/obj/local/armeabi-v7a/liblighttpd.a)
-ANDROID_RELEASE_LIB(${LIGHTTPD}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/liblighttpd.a)
+WIN_DEBUG_DKLIB(${LIGHTTPD}/${OS}/lib/${DEBUG_DIR}/liblighttpd.lib)
+WIN_RELEASE_DKLIB(${LIGHTTPD}/${OS}/lib/${RELEASE_DIR}/liblighttpd.lib)
+APPLE_DEBUG_DKLIB(${LIGHTTPD}/${OS}/lib/${DEBUG_DIR}/liblighttpd.a)
+APPLE_RELEASE_DKLIB(${LIGHTTPD}/${OS}/lib/${RELEASE_DIR}/liblighttpd.a)
+LINUX_DEBUG_DKLIB(${LIGHTTPD}/${OS}/${DEBUG_DIR}/lib/liblighttpd.a)
+LINUX_RELEASE_DKLIB(${LIGHTTPD}/${OS}/${RELEASE_DIR}/lib/liblighttpd.a)
+ANDROID_DEBUG_DKLIB(${LIGHTTPD}/${OS}/${DEBUG_DIR}/obj/local/armeabi-v7a/liblighttpd.a)
+ANDROID_RELEASE_DKLIB(${LIGHTTPD}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/liblighttpd.a)
 
 
 ### COMPILE ###

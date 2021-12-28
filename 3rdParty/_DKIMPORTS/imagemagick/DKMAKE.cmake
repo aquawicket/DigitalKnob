@@ -27,14 +27,14 @@ DKINSTALL(${IMAGEMAGICK_DL} imagemagick ${IMAGEMAGICK})
 
 ### LINK ###
 #DKINCLUDE(${IMAGEMAGICK}/${OS})
-#WIN_DEBUG_LIB(${IMAGEMAGICK}/${OS}/${DEBUG_DIR}/imagemagickd.lib)
-#WIN_RELEASE_LIB(${IMAGEMAGICK}/${OS}/${RELEASE_DIR}/imagemagick.lib)
-APPLE_DEBUG_LIB(${IMAGEMAGICK}/${OS}/${DEBUG_DIR}/libimagemagick.a)
-APPLE_RELEASE_LIB(${IMAGEMAGICK}/${OS}/${RELEASE_DIR}/libimagemagick.a)
-LINUX_DEBUG_LIB(${IMAGEMAGICK}/${OS}/${DEBUG_DIR}/libimagemagick.a)
-LINUX_RELEASE_LIB(${IMAGEMAGICK}/${OS}/${RELEASE_DIR}/libimagemagick.a)
-ANDROID_DEBUG_LIB(${IMAGEMAGICK}/${OS}/${DEBUG_DIR}/obj/local/armeabi-v7a/libimagemagick.a)
-ANDROID_RELEASE_LIB(${IMAGEMAGICK}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/libimagemagick.a)
+#WIN_DEBUG_DKLIB(${IMAGEMAGICK}/${OS}/${DEBUG_DIR}/imagemagickd.lib)
+#WIN_RELEASE_DKLIB(${IMAGEMAGICK}/${OS}/${RELEASE_DIR}/imagemagick.lib)
+APPLE_DEBUG_DKLIB(${IMAGEMAGICK}/${OS}/${DEBUG_DIR}/libimagemagick.a)
+APPLE_RELEASE_DKLIB(${IMAGEMAGICK}/${OS}/${RELEASE_DIR}/libimagemagick.a)
+LINUX_DEBUG_DKLIB(${IMAGEMAGICK}/${OS}/${DEBUG_DIR}/libimagemagick.a)
+LINUX_RELEASE_DKLIB(${IMAGEMAGICK}/${OS}/${RELEASE_DIR}/libimagemagick.a)
+ANDROID_DEBUG_DKLIB(${IMAGEMAGICK}/${OS}/${DEBUG_DIR}/obj/local/armeabi-v7a/libimagemagick.a)
+ANDROID_RELEASE_DKLIB(${IMAGEMAGICK}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/libimagemagick.a)
 
 
 ### COMPILE ###

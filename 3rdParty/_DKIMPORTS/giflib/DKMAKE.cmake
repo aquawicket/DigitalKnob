@@ -27,16 +27,16 @@ DKINSTALL(${GIF_DL} giflib ${GIF})
 
 ### DKPLUGINS LINK ###
 DKINCLUDE(${GIF}/lib)
-WIN_DEBUG_LIB(${GIF}/${OS}/${DEBUG_DIR}/lib/.libs/libgif.a)
-WIN_RELEASE_LIB(${GIF}/${OS}/${RELEASE_DIR}/lib/.libs/libgif.a)
-APPLE_DEBUG_LIB(${GIF}/${OS}/${DEBUG_DIR}/lib/.libs/libgif.a)
-APPLE_RELEASE_LIB(${GIF}/${OS}/${RELEASE_DIR}/lib/.libs/libgif.a)
-LINUX_DEBUG_LIB(${GIF}/${OS}/${DEBUG_DIR}/lib/.libs/libgif.a)
-LINUX_RELEASE_LIB(${GIF}/${OS}/${RELEASE_DIR}/lib/.libs/libgif.a)
-RASPBERRY_DEBUG_LIB(${GIF}/${OS}/${DEBUG_DIR}/lib/.libs/libgif.a)
-RASPBERRY_RELEASE_LIB(${GIF}/${OS}/${RELEASE_DIR}/lib/.libs/libgif.a)
-ANDROID_DEBUG_LIB(${GIF}/${OS}/${DEBUG_DIR}/obj/local/armeabi-v7a/libgif.a)
-ANDROID_RELEASE_LIB(${GIF}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/libgif.a)
+WIN_DEBUG_DKLIB(${GIF}/${OS}/${DEBUG_DIR}/lib/.libs/libgif.a)
+WIN_RELEASE_DKLIB(${GIF}/${OS}/${RELEASE_DIR}/lib/.libs/libgif.a)
+APPLE_DEBUG_DKLIB(${GIF}/${OS}/${DEBUG_DIR}/lib/.libs/libgif.a)
+APPLE_RELEASE_DKLIB(${GIF}/${OS}/${RELEASE_DIR}/lib/.libs/libgif.a)
+LINUX_DEBUG_DKLIB(${GIF}/${OS}/${DEBUG_DIR}/lib/.libs/libgif.a)
+LINUX_RELEASE_DKLIB(${GIF}/${OS}/${RELEASE_DIR}/lib/.libs/libgif.a)
+RASPBERRY_DEBUG_DKLIB(${GIF}/${OS}/${DEBUG_DIR}/lib/.libs/libgif.a)
+RASPBERRY_RELEASE_DKLIB(${GIF}/${OS}/${RELEASE_DIR}/lib/.libs/libgif.a)
+ANDROID_DEBUG_DKLIB(${GIF}/${OS}/${DEBUG_DIR}/obj/local/armeabi-v7a/libgif.a)
+ANDROID_RELEASE_DKLIB(${GIF}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/libgif.a)
 
 
 
