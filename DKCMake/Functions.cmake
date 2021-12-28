@@ -621,7 +621,7 @@ function(dk_getDirectory path result)
 endfunction()
 
 
-macro(dk_getFilename path result)
+function(dk_getFilename path result)
 	string(FIND ${path} "/" index REVERSE)
 	if(${index} EQUAL -1)
 		return() #no path dividers found
@@ -629,7 +629,7 @@ macro(dk_getFilename path result)
 	MATH(EXPR index "${index}+1")
 	string(SUBSTRING ${path} ${index} -1 filename) 
     set(${result} ${filename} PARENT_SCOPE)
-endmacro()
+endfunction()
 
 
 function(dk_getExtension path result)
@@ -894,7 +894,7 @@ function(MSYS)
 		string(REPLACE "C:/" "/c/" msys ${msys})
 		file(WRITE ${MSYS}/dkscript.tmp ${msys})
 		DKINFO("MSYS -> ${msys}")
-		DKEXECUTE_PROCESS(cmd /c ${MSYS}/bin/bash ${MSYS}/dkscript.tmp)# WORKING_DIRECTORY ${MSYS})
+		DKEXECUTE_PROCESS(${MSYS}/bin/bash ${MSYS}/dkscript.tmp)# WORKING_DIRECTORY ${MSYS})
 	endif()
 endfunction()
 AliasFunctions("MSYS")
