@@ -30,28 +30,36 @@ set(dkdepend_disable_list "" CACHE INTERNAL "")
 #CreateFunction("MyDynamicFunc")
 #MyDynamicFunc("string" 15)
 
-
-macro(DKINFO msg)
-	message(STATUS "${msg}")
-endmacro()
-
-
-macro(DKWARN msg)
-	message(WARNING "${msg}")
-endmacro()
-
-
-set(DKCMAKE_DEBUGGER OFF CACHE INTERNAL "") # ON = All functions print their File : lineNumber : Function( variables )
-macro(DKDEBUG)
-	if(DKCMAKE_DEBUGGER)
+macro(printStackInfo)
+	if(${CMAKE_CURRENT_FUNCTION_LIST_FILE})
 		dk_getFilename(${CMAKE_CURRENT_FUNCTION_LIST_FILE} FILENAME)
 		DKINFO("${FILENAME}:${CMAKE_CURRENT_FUNCTION_LIST_LINE} -> ${CMAKE_CURRENT_FUNCTION}(${ARGV})")
-		Wait()
 	endif()
 endmacro()
 
+macro(DKASSERT msg)
+	message(FATAL_ERROR "${msg}")
+endmacro()
+macro(DKERROR msg)
+	message(SEND_ERROR "${msg}")
+endmacro()
+macro(DKWARN msg)
+	message(WARNING "${msg}")
+endmacro()
+macro(DKINFO msg)
+	message(STATUS "${msg}")
+endmacro()
+macro(DKDEBUG msg)
+	message(DEBUG "${msg}")
+endmacro()
+macro(VERBOSE msg)
+	message(VERBOSE "${msg}")
+endmacro()
+macro(TRACE msg)
+	message(VERBOSE "${msg}")
+endmacro()
 
-# dk_file_getDigitalknobPath(<result>)
+
 function(dk_file_getDigitalknobPath result)
 	get_filename_component(DIGITALKNOB ${CMAKE_SOURCE_DIR} ABSOLUTE)
 	get_filename_component(FOLDER_NAME ${DIGITALKNOB} NAME)
@@ -200,13 +208,6 @@ macro(dk_exit)
 	else()
 		execute_process(COMMAND killall -9 cmake WORKING_DIRECTORY ${CMAKE_CURRENT_LIST_DIR})
 	endif()
-endmacro()
-
-
-macro(DKERROR msg)
-	dk_getFilename(${CMAKE_CURRENT_FUNCTION_LIST_FILE} FILENAME)
-	message(FATAL_ERROR "CALLSTACK: ${FILENAME}:${CMAKE_CURRENT_FUNCTION_LIST_LINE} : ${CMAKE_CURRENT_FUNCTION}(${ARGV}) : ${msg}")
-	dk_exit()
 endmacro()
 
 #####################################################################
