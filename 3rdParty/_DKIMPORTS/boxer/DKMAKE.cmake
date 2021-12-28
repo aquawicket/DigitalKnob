@@ -5,12 +5,12 @@
 # https://github.com/aaronmjacobs/Boxer/archive/refs/heads/master.zip
 # https://github.com/aaronmjacobs/Boxer/archive/refs/heads/C.zip
 
-if(RASPBERRY)
+if(RASPBERRY OR ANDROID)
 	return() 
 endif()
 
 ### DEPENDS ###
-if(MAC OR IOS OR IOSSIM)
+if(APPLE)
 	DKDEPEND(cocoa)
 endif()
 
