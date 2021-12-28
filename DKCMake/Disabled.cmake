@@ -322,6 +322,7 @@ if(ANDROID) # Disabled for Android targets
 	DKDISABLE(rlottie)
 	DKDISABLE(rmlui)
 	DKDISABLE(rtmidi)
+	DKDISABLE(sdl-gpu)
 	DKDISABLE(sdl2_mixer)
 	DKDISABLE(sdl2_ttf)
 	DKDISABLE(sfml)
