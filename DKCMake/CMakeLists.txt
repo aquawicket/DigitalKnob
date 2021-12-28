@@ -41,17 +41,16 @@
 ###
 ### TODO: Add a cmake input variable called "TargetName", allowing us to build a specific Library or Plugin. This should also build 
 ### all of dependencies for that target. Good for quick testing of specific libraries, plugins or executables.
-
-
 if(DKCMAKELIST_INCLUDED)
   return()
 endif(DKCMAKELIST_INCLUDED)
-set(DKCMAKELIST_INCLUDED true)
+set(DKCMAKELIST_INCLUDED 1)
 
 
 if(CMAKE_HOST_UNIX)
 	execute_process(COMMAND sudo echo WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}) #ask for sudo password ahead of time
 endif()
+
 
 CMAKE_MINIMUM_REQUIRED(VERSION 3.4)
 CMAKE_POLICY(SET CMP0054 NEW)

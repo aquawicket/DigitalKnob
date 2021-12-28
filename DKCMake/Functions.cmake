@@ -3,7 +3,7 @@
 if(DKFUNCTIONS_INCLUDED)
   return()
 endif(DKFUNCTIONS_INCLUDED)
-set(DKFUNCTIONS_INCLUDED true)
+set(DKFUNCTIONS_INCLUDED 1)
 
 if(CMAKE_HOST_WIN32)
 	set(WIN_HOST TRUE CACHE INTERNAL "")
@@ -195,7 +195,7 @@ endfunction()
 
 macro(DKERROR msg)
 	dk_getFilename(${CMAKE_CURRENT_FUNCTION_LIST_FILE} FILENAME)
-	message(FATAL_ERROR "${FILENAME}:${CMAKE_CURRENT_FUNCTION_LIST_LINE} -> ${CMAKE_CURRENT_FUNCTION}(${ARGV}) ERROR: ${msg}")
+	message(FATAL_ERROR "CALLSTACK: ${FILENAME}:${CMAKE_CURRENT_FUNCTION_LIST_LINE} : ${CMAKE_CURRENT_FUNCTION}(${ARGV}) : ${msg}")
 	dk_exit()
 endmacro()
 
@@ -831,8 +831,7 @@ function(DKEXECUTE_PROCESS commands)
 			execute_process(COMMAND sleep 2 WORKING_DIRECTORY ${CURRENT_DIR}) ##wait 2 seconds for the stdout to flush before printing error
 		endif()
 		DKINFO("\n\n")
-		DKERROR("ERROR:${result} - ${error}")
-		DKINFO("\n\n")
+		DKERROR("ERROR: ${result} : ${error}\n\n")
 	endif()
 endfunction()
 

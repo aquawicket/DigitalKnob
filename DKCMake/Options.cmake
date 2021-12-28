@@ -1,9 +1,10 @@
 if(DKOPTIONS_INCLUDED)
   return()
 endif(DKOPTIONS_INCLUDED)
-set(DKOPTIONS_INCLUDED true)
+DKSET(DKOPTIONS_INCLUDED 1)
 
 
+# FIXME: work to remove this
 if(COMMAND cmake_policy)
 	cmake_policy(SET CMP0003 NEW) ##https://cmake.org/cmake/help/latest/policy/CMP0003.html
 endif(COMMAND cmake_policy)
@@ -35,7 +36,7 @@ if(TARGET)
 	DKINFO("found ${TARGET}:(${target_type}) at ${target_path}")
 	#DKSET(BYPASS_DISABLE ON)
 	DKSET(QUEUE_BUILD ON)
-	DKDEPEND(visualstudio)
+	WIN_DKDEPEND(visualstudio)
 	#if(NOT "${target_type}" STREQUAL "DKAPP")
 	#	DKDEPEND(${TARGET})
 	#else()
