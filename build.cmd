@@ -173,6 +173,13 @@ for /r %%i in (CMakeCache.*) do del "%%i"
 for /d /r %%i in (*CMakeFiles*) do rd /s /q "%%i"
 ::if NOT "%ERRORLEVEL%" == "0" goto error
 
+echo Deleteing .tmp files . . .
+cd "%DIGITALKNOB%"
+for /r %%i in (*.tmp) do del "%%i"
+::if NOT "%ERRORLEVEL%" == "0" goto error
+for /r %%i in (*.TMP) do del "%%i"
+::if NOT "%ERRORLEVEL%" == "0" goto error
+
 
 echo ****** BUILDING %APP% - %OS% ******
 if exist "C:\Program Files\CMake\bin\cmake.exe" set "CMAKE=C:\Program Files\CMake\bin\cmake.exe"

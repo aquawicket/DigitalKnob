@@ -294,6 +294,18 @@ function(DELETE_CACHE)
 	endif()
 endfunction()
 
+function(DELETE_TMP_FILES)
+	DKINFO("####### Deleteing Temporary files . . .")
+	dk_file_getDigitalknobPath(DIGITALKNOB)
+	if(WIN_HOST)
+		DKEXECUTE_PROCESS(for /r %%i in (*.TMP) do del "%%i" WORKING_DIRECTORY ${DIGITALKNOB})
+		DKEXECUTE_PROCESS(for /r %%i in (*.tmp) do del "%%i" WORKING_DIRECTORY ${DIGITALKNOB})
+	else()
+		DKEXECUTE_PROCESS(find . -name "*.TMP" -delete WORKING_DIRECTORY ${DIGITALKNOB})
+		DKEXECUTE_PROCESS(find . -name "*.tmp" -delete WORKING_DIRECTORY ${DIGITALKNOB})
+	endif()
+endfunction()
+
 
 function(DKSETENV name value)
 	DKINFO("DKSETENV(${name} ${value})")

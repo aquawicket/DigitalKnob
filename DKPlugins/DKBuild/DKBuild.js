@@ -123,6 +123,18 @@ function DKBuild_ClearCMakeCache(){
 	}
 }
 
+function DKBuild_DeleteTmpFiles(){
+	console.log("Deleting .TMP files . . .")
+	CPP_DKFile_ChDir(DIGITALKNOB)
+	if(CPP_DK_GetOS() === "Windows"){
+		CPP_DK_Execute("cmd /c for /r %i in (*.tmp) do del \"%i\"")
+		CPP_DK_Execute("cmd /c for /r %i in (*.TMP) do del \"%i\"")
+	}else{
+		CPP_DK_Execute("find . -name \"*.tmp\" -delete") 
+		CPP_DK_Execute("find . -name \"*.TMP\" -delete") 
+	}
+}
+
 function DKBuild_ValidateCmake(){
 	console.log("Looking for CMake")
 	if(!CPP_DKFile_Exists(CMAKE))
@@ -291,6 +303,7 @@ function DKBuild_DoResults(){
 	console.log("DKBuild_DoResults(): OS="+OS+" APP="+APP+" TYPE="+TYPE+" LEVEL="+LEVEL)
 	
 	DKBuild_ClearCMakeCache()
+	DKBuild_DeleteTmpFiles()
 	
 	//save configuration to cache
 	const cache = {"OS":OS, "APP":APP, "TYPE":TYPE, "LEVEL":LEVEL}

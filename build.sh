@@ -163,6 +163,10 @@ while :
 	echo Deleteing CMake cache . . .
 	find . -name "CMakeCache.*" -delete
 	rm -rf `find . -type d -name CMakeFiles`
+	
+	echo Deleteing .tmp files . . .
+	find . -name "*.tmp" -delete
+	find . -name "*.TMP" -delete
 		
 	if [[ "$OSTYPE" == "darwin"* ]]; then
 		#CLANG_PATH=$(which clang)
