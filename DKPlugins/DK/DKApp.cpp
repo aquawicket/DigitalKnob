@@ -16,6 +16,13 @@ std::vector<std::function<void()> > DKApp::loop_funcs;
 //#ifndef ANDROID
 int main(int argc, char **argv){
 	DKDEBUGFUNC(argc, argv);
+/*	
+#ifdef IOS
+	@autoreleasepool{
+		return UIApplicationMain(argc, argv, nil, @"iphoneViewerAppDelegate");
+	}
+#else
+*/
 	//try{
 		DKApp dkapp(argc, argv);
 		DKApp::Init();
@@ -133,11 +140,3 @@ void DKApp::Exit(){
 	DKUtil::CallExit();
 	exit(0);
 }
-
-// For iphone
-#ifdef IOS
-//NSAutoreleasePool* pool = [NSAutoreleasePool new];
-int retval = UIApplicationMain(DKApp::argc, DKApp::argv, nil, @"iphoneViewerAppDelegate");
-//[pool release] ;
-//return 0;
-#endif
