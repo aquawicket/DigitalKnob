@@ -116,19 +116,10 @@ function DKBuildConsole_ChooseUpdate() {
 			UPDATE = ""
 			break
 		case 122:
-			console.log("-> Clear cmake cache")
-			if(CPP_DK_GetOS() === "Windows"){
-				CPP_DK_Execute('for /r %i in (CMakeCache.*) do del "%%i"')
-				CPP_DK_Execute('for /d /r %i in (*CMakeFiles*) do rd /s /q "%%i"')
-				CPP_DK_Execute('for /r %i in (*.tmp) do del "%%i"')
-				CPP_DK_Execute('for /r %i in (*.TMP) do del "%%i"')
-			}
-			else{
-				CPP_DK_Execute('find . -name "CMakeCache.*" -delete')
-				CPP_DK_Execute('"rm -rf `find . -type d -name CMakeFiles`"')
-				CPP_DK_Execute('find . -name "*.tmp" -delete')
-				CPP_DK_Execute('find . -name "*.TMP" -delete')
-			}
+			DKBuild_ClearCMakeCache()
+			DKBuild_DeleteTmpFiles()
+			UPDATE = ""
+			break
 		default:
 			break
 	}
