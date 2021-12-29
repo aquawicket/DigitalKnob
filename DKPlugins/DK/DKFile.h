@@ -3,26 +3,26 @@
 #define DKFile_H
 
 
-#ifndef __has_include
-	static_assert(false, "__has_include not supported");
-#else
-	#if __has_include(<filesystem>) // && __cplusplus >= 201703L 
-		#include <filesystem>
-//#ifndef ANDROID
-		namespace fs = std::filesystem;
-//#else
-//		namespace fs = std::__fs::filesystem;
-//#endif
-	#elif __has_include(<experimental/filesystem>)
-		#define _SILENCE_EXPERIMENTAL_FILESYSTEM_DEPRECATION_WARNING 1;
-		#include <experimental/filesystem>
+#ifdef __has_include
+#	if __has_include(<filesystem>) // && __cplusplus >= 201703L 
+#		include <filesystem>
+#		ifndef ANDROID
+			namespace fs = std::filesystem;
+#		else
+			namespace fs = std::__fs::filesystem;
+#		endif
+#	elif __has_include(<experimental/filesystem>)
+#   	define _SILENCE_EXPERIMENTAL_FILESYSTEM_DEPRECATION_WARNING 1;
+#		include <experimental/filesystem>
 		namespace fs = std::experimental::filesystem;
-	#elif __has_include(<boost/filesystem.hpp>)
-		#include <boost/filesystem.hpp>
+#	elif __has_include(<boost/filesystem.hpp>)
+#		include <boost/filesystem.hpp>
 		namespace fs = boost::filesystem;
-	#else
+#	else
 		static_assert(false, "filesystem unavalable");
-	#endif
+#	endif
+#else
+	static_assert(false, "__has_include not supported");
 #endif
 
 #include "DK/DK.h"
