@@ -1,4 +1,5 @@
 # https://asitdhal.medium.com/cmake-functions-and-macros-22293041519f
+# https://asitdhal.medium.com/cmake-functions-and-macros-22293041519f
 
 if(DKFUNCTIONS_INCLUDED)
   return()
@@ -310,7 +311,7 @@ endfunction()
 
 ##https://cmake.org/pipermail/cmake/2012-September/052205.html/
 # dk_file_download
-function(DOWNLOAD url dest_path) # ARGV1 = dest_path
+function(DOWNLOAD src_path dest_path) # ARGV1 = dest_path
 	#FIXME: Will not download if only 1 argument
 	#TODO: Let's supply the ability to add a primary root address to download from,  for fast downloading from local hard drives or storage 
 	#      we will also add a "backup" root address to download from. In case one of the internet download fails.
@@ -322,50 +323,103 @@ function(DOWNLOAD url dest_path) # ARGV1 = dest_path
 	#	DKINFO("TODO: just set SecondaryDownloadServer to your mirror location and all file downoads that fail will attempt secondary location next")
 	#endif()
 	
-	DKSET(CURRENT_DIR ${DKDOWNLOAD}) #set the default dl directory
-	get_filename_component(src_filename ${url} NAME)
-	DKINFO("DOWNLOAD(): src_filename = ${src_filename}")
-	#if(${ARGC} GREATER 1)
-	#	set(dest_path ${ARGV1})
-		dk_getExtension(${dest_path} dest_ext)
-		if(NOT dest_ext)
-			DKINFO("DOWNLOAD(): The destination path has no extension")
-		else()
-			DKINFO("DOWNLOAD(): dest_ext = ${dest_ext}")
-		endif()
-		if(IS_DIRECTORY ${dest_path})
-			DKINFO("DOWNLOAD(): dest_path IS_DIRECTORY: ${dest_path}")
-			set(CURRENT_DIR ${dest_path})
-		else()
-			DKINFO("DOWNLOAD(): dest_path IS NOT DIRECTORY: ${dest_path}")
-			get_filename_component(dest_filename ${dest_path} NAME)
-			get_filename_component(dest_dir ${dest_path} DIRECTORY)
-			if(NOT dest_filename STREQUAL src_filename)
-				DKINFO("DOWNLOAD(): The filenames are different")
-				DKINFO("DOWNLOAD(): src_filename = ${src_filename}")
-				DKINFO("DOWNLOAD(): dest_filename = ${dest_filename}")
-				DKINFO("DOWNLOAD(): dest_dir = ${dest_dir}")
-				#DKERROR("end")
-			endif()
-		endif()
-	#endif()
-	if(NOT EXISTS ${CURRENT_DIR}/${dest_filename})
-		DKINFO("Downloading ${url}")
-		DKINFO("To -> ${CURRENT_DIR}/${dest_filename}")
-		file(DOWNLOAD ${url} ${CURRENT_DIR}/${dest_filename} SHOW_PROGRESS 
-			#no TIMEOUT
-			STATUS status 
-			#no LOG
-		)
-		list(GET status 0 status_code) 
-		list(GET status 1 status_string)
-		if(NOT status_code EQUAL 0)
-			DKREMOVE(${CURRENT_DIR}/${dest_filename})
-			DKERROR("error: downloading ${url} \n status_code: ${status_code} \n status_string: ${status_string}")
-		else()
-			DKINFO("downloading... done")
-		endif() 
+	## Setup all src_path variables
+	if(NOT src_path)
+		DKERROR("src_path is invalid")
+		return()
 	endif()
+	DKINFO("DOWNLOAD(): src_path = ${src_path}")
+	
+	get_filename_component(src_dir ${src_path} DIRECTORY)
+	if(NOT src_dir)
+		DKERROR("src_dir is invalid")
+		return()
+	endif()
+	DKINFO("DOWNLOAD(): src_dir = ${src_dir}")
+	
+	get_filename_component(src_filename ${src_path} NAME)
+	if(NOT src_filename)
+		DKERROR("src_filename is invalid")
+		return()
+	endif()
+	DKINFO("DOWNLOAD(): src_filename = ${src_filename}")
+	
+	dk_getExtension(${src_path} src_ext)	
+	if(NOT src_ext)
+		DKERROR("src_ext is invalid")
+		return()
+	endif()
+	DKINFO("DOWNLOAD(): src_ext = ${src_ext}")
+	
+	## Setup all dest_path variables
+	if(NOT dest_path)
+		set(dest_path ${DKDOWNLOAD})
+	endif()
+	if(NOT dest_path)
+		DKERROR("dest_path is invalid")
+		return()
+	endif()	
+	if(IS_DIRECTORY ${dest_path})
+		set(dest_path "${dest_path}/${src_filename}")
+	endif()
+	DKINFO("DOWNLOAD(): dest_path = ${dest_path}")
+	
+	get_filename_component(dest_dir ${dest_path} DIRECTORY)
+	if(NOT dest_dir)
+		DKERROR("dest_dir is invalid")
+		return()
+	endif()
+	if(NOT EXISTS ${dest_dir})
+		DKWARN("The destination directory does not exists. It will be created \n ${dest_dir}")
+	endif()
+	DKINFO("DOWNLOAD(): dest_dir = ${dest_dir}")
+	
+	get_filename_component(dest_filename ${dest_path} NAME)
+	if(NOT dest_filename)
+		DKERROR("dest_filename is invalid")
+		return()
+	endif()
+	DKINFO("DOWNLOAD(): dest_filename = ${dest_filename}")
+	
+	dk_getExtension(${dest_path} dest_ext)
+	if(NOT dest_ext)
+		DKERROR("dest_ext is invalid")
+		return()
+	endif()
+	DKINFO("DOWNLOAD(): dest_ext = ${dest_ext}")
+	
+	if(EXISTS ${dest_path})
+		DKWARN("DOWNLOAD(): The destination path already exists \n ${dest_path}")
+		return()
+	endif()
+	
+	## setup temporary dl_path variables
+	set(dl_filename "DL_${dest_filename}.dl")
+	set(dl_path ${dest_dir}/${dl_filename})
+	if(EXISTS ${dl_path})
+		DKREMOVE(${dl_path})
+	endif()
+	if(EXISTS ${dl_path})
+		DKERROR("The temporary destination path already exists and could not be removed \n ${dl_path}")
+		return()
+	endif()
+	
+	DKINFO("Downloading ${src_path}")
+	DKINFO("To -> ${dest_path}")
+	file(DOWNLOAD ${src_path} ${dl_path} SHOW_PROGRESS 
+		#no TIMEOUT
+		STATUS status 
+		#no LOG
+	)
+	list(GET status 0 status_code) 
+	list(GET status 1 status_string)
+	if(NOT status_code EQUAL 0)
+		DKREMOVE(${dl_path})
+		DKERROR("error: downloading ${src_path} \n status_code: ${status_code} \n status_string: ${status_string}")
+	else()
+		DKRENAME(${dl_path} ${dest_path} false)
+		DKINFO("downloading... done \n")
+	endif() 
 endfunction()
 AliasFunctions("DOWNLOAD")
 
