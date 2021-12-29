@@ -695,7 +695,7 @@ if(IOS OR IOSSIM)
 		DKEXECUTE_PROCESS(sips -z 1024 1024 ${DKPROJECT}/icons/icon.png --out ${DKPROJECT}/icons/ios/icons.iconset/icon_512x512@2x.png WORKING_DIRECTORY ${DIGITALKNOB})
 		DKEXECUTE_PROCESS(iconutil -c icns -o ${DKPROJECT}/icons/ios/icons.icns ${DKPROJECT}/icons/ios/icons.iconset WORKING_DIRECTORY ${DIGITALKNOB})
 		set(MACOSX_BUNDLE_ICON_FILE icons.icns)
-		set(app_ICONS ${DKPROJECT}/icons/mac/icons.icns)
+		set(app_ICONS ${DKPROJECT}/icons/ios/icons.icns)
 		set_source_files_properties(${app_ICONS} PROPERTIES MACOSX_PACKAGE_LOCATION "Resources")
 	endif()
 	
