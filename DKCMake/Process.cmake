@@ -357,8 +357,8 @@ if(WIN_32)
 	
 	####################### Create Executable Target ###################
 	if(HAVE_DK)
-		DKCOPY(${DKPLUGINS}/_DKIMPORT/resource.h ${DKPROJECT}/resource.h FALSE)
-		DKCOPY(${DKPLUGINS}/_DKIMPORT/resource.rc ${DKPROJECT}/resource.rc FALSE)
+		DKCOPY(${DKPLUGINS}/_DKIMPORT/win/resource.h ${DKPROJECT}/resource.h FALSE)
+		DKCOPY(${DKPLUGINS}/_DKIMPORT/win/resource.rc ${DKPROJECT}/resource.rc FALSE)
 		file(GLOB_RECURSE resources_SRC 
 			${DKPROJECT}/*.manifest
 			${DKPROJECT}/*.rc
@@ -464,8 +464,8 @@ if(WIN_64)
 	####################### Create Executable Target ###################
 	if(HAVE_DK)
 		##set_source_files_properties(${DIGITALKNOB}/stdafx.cpp PROPERTIES COMPILE_FLAGS "/Ycstdafx.h")
-		DKCOPY(${DKPLUGINS}/_DKIMPORT/resource.h ${DKPROJECT}/resource.h FALSE)
-		DKCOPY(${DKPLUGINS}/_DKIMPORT/resource.rc ${DKPROJECT}/resource.rc FALSE)
+		DKCOPY(${DKPLUGINS}/_DKIMPORT/win/resource.h ${DKPROJECT}/resource.h FALSE)
+		DKCOPY(${DKPLUGINS}/_DKIMPORT/win/resource.rc ${DKPROJECT}/resource.rc FALSE)
 		file(GLOB_RECURSE resources_SRC 
 			${DKPROJECT}/*.manifest
 			${DKPROJECT}/*.rc
@@ -976,12 +976,12 @@ if(ANDROID)
 	
 	
 	####################### Create Executable Target ###################
-	DKCOPY(${DKPLUGINS}/_DKIMPORT/Android.h ${DKPROJECT}/Android.h FALSE)
+	DKCOPY(${DKPLUGINS}/_DKIMPORT/android/Android.h ${DKPROJECT}/Android.h FALSE)
 	if(ANDROID_32)
-		DKCOPY(${DKPLUGINS}/_DKIMPORT/android32 ${DKPROJECT}/android32 FALSE)
+		DKCOPY(${DKPLUGINS}/_DKIMPORT/android ${DKPROJECT}/android32 FALSE)
 	endif()
 	if(ANDROID_64)
-		DKCOPY(${DKPLUGINS}/_DKIMPORT/android64 ${DKPROJECT}/android64 FALSE)
+		DKCOPY(${DKPLUGINS}/_DKIMPORT/android ${DKPROJECT}/android64 FALSE)
 	endif()
 	set(CMAKE_ANDROID_GUI 1)
 	add_library(${APP_NAME} SHARED ${App_SRC})
