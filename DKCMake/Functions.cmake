@@ -5,7 +5,6 @@ if(DKFUNCTIONS_INCLUDED)
 endif(DKFUNCTIONS_INCLUDED)
 set(DKFUNCTIONS_INCLUDED 1)
 
-
 if(CMAKE_HOST_WIN32)
 	set(WIN_HOST TRUE CACHE INTERNAL "")
 endif()
@@ -19,8 +18,21 @@ if(CMAKE_HOST_UNIX AND NOT CMAKE_HOST_APPLE)
 	set(LINUX_HOST TRUE CACHE INTERNAL "")
 endif()
 
-
 set(dkdepend_disable_list "" CACHE INTERNAL "")
+
+function(dk_file_getDigitalknobPath result)
+	get_filename_component(DIGITALKNOB ${CMAKE_SOURCE_DIR} ABSOLUTE)
+	get_filename_component(FOLDER_NAME ${DIGITALKNOB} NAME)
+	while(NOT FOLDER_NAME STREQUAL "digitalknob")
+		get_filename_component(DIGITALKNOB ${DIGITALKNOB} DIRECTORY)
+		get_filename_component(FOLDER_NAME ${DIGITALKNOB} NAME)
+		if(NOT FOLDER_NAME)
+			message(FATAL_ERROR "Could not locate digitalknob root path")
+		endif()
+	endwhile()
+	set(${result} ${DIGITALKNOB} PARENT_SCOPE) #just relay the result
+endfunction()
+dk_file_getDigitalknobPath(DIGITALKNOB)
 
 
 ## dynamic functions
@@ -60,26 +72,12 @@ macro(TRACE msg)
 endmacro()
 
 
-function(dk_file_getDigitalknobPath result)
-	get_filename_component(DIGITALKNOB ${CMAKE_SOURCE_DIR} ABSOLUTE)
-	get_filename_component(FOLDER_NAME ${DIGITALKNOB} NAME)
-	while(NOT FOLDER_NAME STREQUAL "digitalknob")
-		get_filename_component(DIGITALKNOB ${DIGITALKNOB} DIRECTORY)
-		get_filename_component(FOLDER_NAME ${DIGITALKNOB} NAME)
-		if(NOT FOLDER_NAME)
-			DKWARN( "Could not locate digitalknob root path")
-		endif()
-	endwhile()
-	set(${result} ${DIGITALKNOB} PARENT_SCOPE) #just relay the result
-endfunction()
-
-
-execute_process(COMMAND ${CMAKE_EXE} -E remove ${CMAKE_SOURCE_DIR}/Functions_Ext.cmake)
+execute_process(COMMAND ${CMAKE_EXE} -E remove ${DIGITALKNOB}/DK/DKCMake/Functions_Ext.cmake)
 function(CreateFunc str)
 	if(0)
 		cmake_language(EVAL CODE ${str}) # only available on cmake 1.18+
 	else()
-		file(APPEND ${CMAKE_SOURCE_DIR}/Functions_Ext.cmake "${str}")
+		file(APPEND ${DIGITALKNOB}/DK/DKCMake/Functions_Ext.cmake "${str}")
 	endif()
 endfunction()
 
