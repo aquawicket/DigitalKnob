@@ -1,4 +1,5 @@
-@ECHO OFF
+@echo off
+if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*) & exit )
 
 echo #### Windows Environment Variables ####
 set
@@ -42,5 +43,3 @@ set
 ::echo USERPROFILE = %USERPROFILE%
 ::echo VSEDEFLOGDIR = %VSEDEFLOGDIR%
 ::echo windir = %windir%
-
-pause

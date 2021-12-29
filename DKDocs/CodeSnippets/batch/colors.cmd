@@ -18,8 +18,9 @@
 
 :: Color <background><foreground>  
 :: Example: Color 0c    "black backgroung with red text"
-
 @echo off
+if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*) & exit )
+
 cls
 Color 72
 echo green on silver
