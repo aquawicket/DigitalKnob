@@ -448,11 +448,15 @@ endfunction()
 
 
 # dk_file_rename
-function(DKRENAME from to)
+function(DKRENAME from to overwrite)
 	DKINFO("Renameing ${from} to ${to}")
 	if(EXISTS ${from})
 		if(EXISTS ${to})
-			return()
+			if(NOT ${overwrite})
+				message(WARNING "Cannot rename file. Destiantion exists and not set to overwrite")
+				return()
+			endif()
+			DKREMOVE(${to})
 		endif()
 		file(RENAME ${from} ${to})
 	endif()
@@ -755,10 +759,10 @@ function(DKINSTALL src_path import_path dest_path)
 		list(LENGTH items count)
 		if(${count} GREATER 2) ##NOTE: This should be "${count} GREATER 1" but msys has a readme file in it next to the inner msys folder and that messes things up for more than 1
 			#Zip extracted with no root folder, Rename UNZIPPED and move to 3rdParty
-			DKRENAME(${DKDOWNLOAD}/UNZIPPED ${dest_path})
+			DKRENAME(${DKDOWNLOAD}/UNZIPPED ${dest_path} true)
 		else()
 			if(EXISTS ${DKDOWNLOAD}/UNZIPPED/${dest_filename}) ##Zip extracted to expected folder. Move the folder to 3rdParty
-				DKRENAME(${DKDOWNLOAD}/UNZIPPED/${dest_filename} ${dest_path})
+				DKRENAME(${DKDOWNLOAD}/UNZIPPED/${dest_filename} ${dest_path} true)
 				DKREMOVE(${DKDOWNLOAD}/UNZIPPED)
 			else() #Zip extracted to a root folder, but not named what we expected. Rename and move folder to 3rdParty
 				foreach(item ${items})
@@ -766,7 +770,7 @@ function(DKINSTALL src_path import_path dest_path)
 						list(REMOVE_ITEM items ${item}) #remove any readme.txt or other non-directory items
 					endif()
 				endforeach()
-				DKRENAME(${DKDOWNLOAD}/UNZIPPED/${items} ${dest_path})
+				DKRENAME(${DKDOWNLOAD}/UNZIPPED/${items} ${dest_path} true)
 				DKREMOVE(${DKDOWNLOAD}/UNZIPPED)
 			endif() 
 		endif()
@@ -1445,7 +1449,7 @@ function(DKDEPEND name)
 		return()  #library is already in the list
 	endif()
 	
-	DKRUNDEPENDS(${ARGV}) # strip everything from the file except if() else() elseif() endif() and DKDEPEND() before sorting.
+	DKRUNDEPENDS(${name}) # strip everything from the file except if() else() elseif() endif() and DKDEPEND() before sorting.
 	# else()
 	#	list(FIND dkdepend_list "${name}" index)
 	#	if(${index} GREATER -1)
@@ -1761,7 +1765,7 @@ function(DKUPDATE_ANDROID_NAME name)
 				set(new_name ${each_file})
 				string(REPLACE "dkapp" "${name}" new_name "${new_name}")
 				DKINFO("Renaming ${each_file} to ${new_name}")
-				DKRENAME(${DKPROJECT}/${OS}/${each_file} ${DKPROJECT}/${OS}/${new_name})
+				DKRENAME(${DKPROJECT}/${OS}/${each_file} ${DKPROJECT}/${OS}/${new_name} true)
 			endif()
 		endforeach()
 	endif()
