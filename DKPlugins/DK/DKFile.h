@@ -8,7 +8,11 @@
 #else
 	#if __has_include(<filesystem>) // && __cplusplus >= 201703L 
 		#include <filesystem>
+#ifndef ANDROID
 		namespace fs = std::filesystem;
+#else
+		namespace fs = std::__fs::filesystem;
+#endif
 	#elif __has_include(<experimental/filesystem>)
 		#define _SILENCE_EXPERIMENTAL_FILESYSTEM_DEPRECATION_WARNING 1;
 		#include <experimental/filesystem>
