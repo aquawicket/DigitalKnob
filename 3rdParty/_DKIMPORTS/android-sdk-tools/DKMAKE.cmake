@@ -24,5 +24,5 @@ DKINSTALL(${ANDROIDSDKTOOLS_DL} android-sdk-tools ${ANDROIDSDKTOOLS})
 
 
 #license signing
-DKDEPEND(java)
-DKEXECUTE_PROCESS(${ANDROIDSDKTOOLS}/bin/sdkmanager.bat --licenses)
+#DKDEPEND(java)
+#DKEXECUTE_PROCESS(${ANDROIDSDKTOOLS}/bin/sdkmanager.bat --licenses)

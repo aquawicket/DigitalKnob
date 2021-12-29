@@ -44,7 +44,7 @@ function DKBuildConsole_ChooseUpdate() {
 	console.log("R. Reset Apps and Plugins")
 	console.log("X. Reset Everything")
 	console.log("Y. Clear Screen")
-	console.log("Z. Clear cmake cache")
+	console.log("Z. Clear cmake cache and .tmp files")
 	const assets = CPP_DKAssets_LocalAssets()
 	if(CPP_DKFile_Exists(assets+"cache.txt")){
 		const cache = CPP_DKFile_FileToString(assets+"cache.txt")
@@ -120,10 +120,14 @@ function DKBuildConsole_ChooseUpdate() {
 			if(CPP_DK_GetOS() === "Windows"){
 				CPP_DK_Execute('for /r %i in (CMakeCache.*) do del "%%i"')
 				CPP_DK_Execute('for /d /r %i in (*CMakeFiles*) do rd /s /q "%%i"')
+				CPP_DK_Execute('for /r %i in (*.tmp) do del "%%i"')
+				CPP_DK_Execute('for /r %i in (*.TMP) do del "%%i"')
 			}
 			else{
 				CPP_DK_Execute('find . -name "CMakeCache.*" -delete')
 				CPP_DK_Execute('"rm -rf `find . -type d -name CMakeFiles`"')
+				CPP_DK_Execute('find . -name "*.tmp" -delete')
+				CPP_DK_Execute('find . -name "*.TMP" -delete')
 			}
 		default:
 			break
