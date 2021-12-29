@@ -1,8 +1,9 @@
 :: NOTE: you'll need to download and install openssl for this, link below
 :: https://slproweb.com/products/Win32OpenSSL.html
 :: https://slproweb.com/download/Win32OpenSSL-1_1_1L.exe
-
 @echo off
+if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*) & exit )
+
 echo This will download the .cer file from google and put it into the JDK keystore.
 echo When asked, the PASSWORD = "changeit"
 echo also type "yes" when asked

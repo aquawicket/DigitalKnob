@@ -28,7 +28,3 @@ DKINSTALL(${JDK_DL} jdk ${JDK})
 DKINCLUDE(${JDK}/)	
 DKSETENV("JAVA_HOME" ${JDK})
 DKSETENV("VS_JavaHome" ${JDK})
-	
-
-
-

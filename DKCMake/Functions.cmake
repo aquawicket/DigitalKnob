@@ -372,6 +372,7 @@ function(DOWNLOAD src_path dest_path) # ARGV1 = dest_path
 	if(NOT EXISTS ${dest_dir})
 		DKWARN("The destination directory does not exists. It will be created \n ${dest_dir}")
 	endif()
+	DKSET(CURRENT_DIR ${dest_dir})
 	DKDEBUG("DOWNLOAD(): dest_dir = ${dest_dir}")
 	
 	get_filename_component(dest_filename ${dest_path} NAME)
