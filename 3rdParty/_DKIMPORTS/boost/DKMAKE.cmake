@@ -10,11 +10,9 @@
 # Notes: abi=aapcs and binary-format=elf were added to android build to supress "No best alternative for libs/context/build/asm_sources"
 
 ### DEPENDS ###
-if(ANDROID)
-	DKDEPEND(android-ndk) #version 21e or newer required
-	DKDEPEND(mingw32)
-	DKDEPEND(mingw64)
-endif()
+ANDROID_DKDEPEND(android-ndk) #version 21e or newer required
+ANDROID_DKDEPEND(mingw32)
+ANDROID_DKDEPEND(mingw64)
 
 
 ### VERSION ###

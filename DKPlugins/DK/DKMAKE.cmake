@@ -16,7 +16,7 @@ endif()
 
 if(IOS OR IOSSIM)
 	DKDEPEND(uikit)
-	LIST(APPEND DK_SRC DK/DKiPhone.mm)
+	#LIST(APPEND DK_SRC DK/DKiOS.mm)
 endif()
 
 if(LINUX)
