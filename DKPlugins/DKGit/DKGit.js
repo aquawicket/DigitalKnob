@@ -218,13 +218,12 @@ function DKGit_ForcePull(){
 }
 
 function DKGit_ShowUntrackedFiles(){
-	console.log("DKGit_AhowUntrackedFiles()")
+	console.log("DKGit_ShowUntrackedFiles()")
 	CPP_DK_Execute(GIT + " clean -n -d") //Shows what will be deleted
 }
 
 function DKGit_DeleteUntrackedFiles(){
 	console.log("DKGit_DeleteUntrackedFiles()")
-	CPP_DK_Execute(GIT + " clean -n -d") //Shows what will be deleted
 	var key = 10
     while (key === 10)
         key = CPP_DK_GetKey()

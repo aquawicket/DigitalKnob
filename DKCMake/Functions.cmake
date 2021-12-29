@@ -987,11 +987,8 @@ endfunction()
 AliasFunctions("RELEASE_VS" "NO_DEBUG_RELEASE_TAGS")
 
 function(VS)
-
-	if(WIN)
-		DEBUG_VS(${ARGV})
-		RELEASE_VS(${ARGV})
-	endif()
+	DEBUG_VS(${ARGV})
+	RELEASE_VS(${ARGV})
 endfunction()
 AliasFunctions("VS" "NO_DEBUG_RELEASE_TAGS")
 
@@ -1061,7 +1058,6 @@ AliasFunctions("NDK" "NO_DEBUG_RELEASE_TAGS")
 
 ###################### DKPlugin Link Libraries #####################
 function(DKLIB lib_path)
-
 	foreach(item ${ARGV})
 		#DKSET(LIBLIST "${LIBLIST} ${lib_path}") ## used for double checking
 		string(FIND "${LIBS}" "${item}" index)
@@ -1074,7 +1070,6 @@ endfunction()
 AliasFunctions("DKLIB" "NO_DEBUG_RELEASE_TAGS")
 
 function(DEBUG_DKLIB lib_path)
-
 	if(NOT DEBUG)
 		return()
 	endif()	
@@ -1096,7 +1091,6 @@ endfunction()
 AliasFunctions("DEBUG_DKLIB" "NO_DEBUG_RELEASE_TAGS")
 
 function(RELEASE_DKLIB lib_path)
-
 	if(NOT RELEASE)
 		return()
 	endif()
@@ -1119,7 +1113,6 @@ AliasFunctions("RELEASE_DKLIB" "NO_DEBUG_RELEASE_TAGS")
 
 
 function(generateCmake plugin_name)
-
 	dk_getPathToPlugin(${plugin_name} plugin_path)
 	if(NOT EXISTS "${plugin_path}")
 		DKERROR("generateCmake(${plugin_name}): plugin not found")

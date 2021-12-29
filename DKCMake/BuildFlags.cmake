@@ -450,7 +450,7 @@ endif()
 
 
 
-#this is incorrect. Build directory goes by IDE/compiler, not OS
+# FIXME: This is incorrect. Build directory goes by IDE/compiler, not OS
 # Here's the list
 
 # COMPILER                 Build_root         Target configs
