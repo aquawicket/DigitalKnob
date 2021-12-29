@@ -75,7 +75,7 @@ endmacro()
 execute_process(COMMAND ${CMAKE_EXE} -E remove ${DIGITALKNOB}/DK/DKCMake/Functions_Ext.cmake)
 function(CreateFunc str)
 	if(0)
-		cmake_language(EVAL CODE ${str}) # only available on cmake 1.18+
+		cmake_language(EVAL CODE ${str}) # only available on cmake 3.18+
 	else()
 		file(APPEND ${DIGITALKNOB}/DK/DKCMake/Functions_Ext.cmake "${str}")
 	endif()
