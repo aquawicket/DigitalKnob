@@ -1440,7 +1440,7 @@ function(DKDEPEND name)
 	#	endif()
 	# endif()
 		
-	list(FIND dkdepend_list "${name}" index)
+	list(FIND dkdepend_list "${ARGV}" index)
 	if(${index} GREATER -1)
 		return()  #library is already in the list
 	endif()
