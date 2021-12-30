@@ -6,6 +6,6 @@ endif()
 
 FIND_LIBRARY(coremotion_lib CoreMotion)
 if(NOT coremotion_lib)
-	message(WARNING "Could not locate CoreMotion framework")
+	DKWARN("Could not locate CoreMotion framework")
 endif()
 APPLE_DKLIB(${coremotion_lib})

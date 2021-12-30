@@ -6,6 +6,6 @@ endif()
 
 FIND_LIBRARY(CoreServices_lib CoreServices)
 if(NOT CoreServices_lib)
-	message(WARNING "Could not locate CoreServices framework")
+	DKWARN("Could not locate CoreServices framework")
 endif()
 APPLE_DKLIB(${CoreServices_lib})

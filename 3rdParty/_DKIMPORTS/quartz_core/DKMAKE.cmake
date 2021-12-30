@@ -6,6 +6,6 @@ endif()
 
 FIND_LIBRARY(QuartzCore_lib QuartzCore)
 if(NOT QuartzCore_lib)
-	message(WARNING "Could not locate QuartzCore framework")
+	DKWARN("Could not locate QuartzCore framework")
 endif()
 APPLE_DKLIB(${QuartzCore_lib})

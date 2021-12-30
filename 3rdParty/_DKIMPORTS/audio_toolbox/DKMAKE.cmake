@@ -6,6 +6,6 @@ endif()
 
 FIND_LIBRARY(AudioToolbox_lib AudioToolbox)
 if(NOT AudioToolbox_lib)
-	message(WARNING "Could not locate AudioToolbox framework")
+	DKWARN("Could not locate AudioToolbox framework")
 endif()
 APPLE_DKLIB(${AudioToolbox_lib})

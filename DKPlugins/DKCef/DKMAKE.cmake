@@ -73,7 +73,7 @@ endif()
 
 #https://bitbucket.org/chromiumembedded/cef/wiki/Tutorial#markdown-header-mac-os-x-build-steps
 if(MAC_64)
-	#message(STATUS "Adding Chromium Embedded Framework.framework to bundle . . .")
+	#DKINFO("Adding Chromium Embedded Framework.framework to bundle . . .")
 	#add_custom_command(
 	#	TARGET DKCef
 	#	POST_BUILD
