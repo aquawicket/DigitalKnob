@@ -1,34 +1,42 @@
+# https://en.wikipedia.org/wiki/ANSI_escape_code#Colors
+
 string(ASCII 27 ESC)
 set(ColourReset "${ESC}[m")
 set(ColourBold  "${ESC}[1m")
-set(Red         "${ESC}[31m")
-set(Green       "${ESC}[32m")
-set(Yellow      "${ESC}[33m")
-set(Blue        "${ESC}[34m")
-set(Magenta     "${ESC}[35m")
-set(Cyan        "${ESC}[36m")
-set(White       "${ESC}[37m")
-set(BoldRed     "${ESC}[1;31m")
-set(BoldGreen   "${ESC}[1;32m")
-set(BoldYellow  "${ESC}[1;33m")
-set(BoldBlue    "${ESC}[1;34m")
-set(BoldMagenta "${ESC}[1;35m")
-set(BoldCyan    "${ESC}[1;36m")
-set(BoldWhite   "${ESC}[1;37m")
+set(black       "${ESC}[30m")
+set(red         "${ESC}[31m")
+set(green       "${ESC}[32m")
+set(yellow      "${ESC}[33m")
+set(blue        "${ESC}[34m")
+set(magenta     "${ESC}[35m")
+set(cyan        "${ESC}[36m")
+set(white       "${ESC}[37m")
+set(Black     "${ESC}[1;30m")  # 90m
+set(Red       "${ESC}[1;31m")  # 91m
+set(Green     "${ESC}[1;32m")  # 92m
+set(Yellow    "${ESC}[1;33m")  # 93m
+set(Blue      "${ESC}[1;34m")  # 94m
+set(Magenta   "${ESC}[1;35m")  # 95m
+set(Cyan      "${ESC}[1;36m")  # 96m
+set(White     "${ESC}[1;37m")  # 97m
+set(BRwhite   "${ESC}[30;47m")
   
-  
-message("This is normal")
-message("${Red}This is Red${ColourReset}")
-message("${Green}This is Green${ColourReset}")
-message("${Yellow}This is Yellow${ColourReset}")
-message("${Blue}This is Blue${ColourReset}")
-message("${Magenta}This is Magenta${ColourReset}")
-message("${Cyan}This is Cyan${ColourReset}")
-message("${White}This is White${ColourReset}")
-message("${BoldRed}This is BoldRed${ColourReset}")
-message("${BoldGreen}This is BoldGreen${ColourReset}")
-message("${BoldYellow}This is BoldYellow${ColourReset}")
-message("${BoldBlue}This is BoldBlue${ColourReset}")
-message("${BoldMagenta}This is BoldMagenta${ColourReset}")
-message("${BoldCyan}This is BoldCyan${ColourReset}")
-message("${BoldWhite}This is BoldWhite\n\n${ColourReset}")
+message("Text Color normal")
+message("${black}Text Color black${ColourReset}")
+message("${red}Text Color red${ColourReset}")
+message("${green}Text Color green${ColourReset}")
+message("${yellow}Text Color yellow${ColourReset}")
+message("${blue}Text Color blue${ColourReset}")
+message("${magenta}Text Color magenta${ColourReset}")
+message("${cyan}Text Color cyan${ColourReset}")
+message("${white}Text Color white${ColourReset}")
+message("${black}Text Color black${ColourReset}")
+message("${red}Text Color red${ColourReset}")
+message("${green}Text Color green${ColourReset}")
+message("${yellow}Text Color yellow${ColourReset}")
+message("${blue}Text Color blue${ColourReset}")
+message("${magenta}Text Color magenta${ColourReset}")
+message("${cyan}Text Color cyan${ColourReset}")
+message("${white}Text Color white${ColourReset}")
+
+
