@@ -339,7 +339,8 @@ function DKBuild_DoResults(){
 		DKBuild_ValidateVC2019()
 		CPP_DKFile_MkDir(app_path+OS)
 		CPP_DKFile_ChDir(app_path+OS)
-		let rtvalue = CPP_DK_Execute(CMAKE+" -G \""+VS_GENERATOR+"\" -A Win32 "+cmake_string+DIGITALKNOB+"DK/DKCMake")
+		const cmake_command = CMAKE+" -G \""+VS_GENERATOR+"\" -A Win32 "+cmake_string+DIGITALKNOB+"DK/DKCMake"
+		let rtvalue = CPP_DK_Execute(cmake_command)
 		if(TYPE === "Debug" || TYPE === "ALL")
 			CPP_DK_Execute(MSBUILD+" "+app_path+OS+"/"+APP+".sln /p:Configuration=Debug")
 		if(TYPE === "Release" || TYPE === "ALL")
@@ -351,7 +352,8 @@ function DKBuild_DoResults(){
 		DKBuild_ValidateVC2019()
 		CPP_DKFile_MkDir(app_path+OS)
 		CPP_DKFile_ChDir(app_path+OS)
-		let rtvalue = CPP_DK_Execute(CMAKE+" -G \""+VS_GENERATOR+"\" -A x64 "+cmake_string+DIGITALKNOB+"DK/DKCMake")
+		const cmake_command = CMAKE+" -G \""+VS_GENERATOR+"\" -A x64 "+cmake_string+DIGITALKNOB+"DK/DKCMake"
+		let rtvalue = CPP_DK_Execute(cmake_command)
 		if(TYPE === "Debug" || TYPE === "ALL")
 			CPP_DK_Execute(MSBUILD+" "+app_path+OS+"/"+APP+".sln /p:Configuration=Debug")
 		if(TYPE === "Release" || TYPE === "ALL")
@@ -368,7 +370,8 @@ function DKBuild_DoResults(){
 		DKBuild_ValidateXcode()
 		CPP_DKFile_MkDir(app_path+OS)
 		CPP_DKFile_ChDir(app_path+OS)
-		let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Xcode\" -DCMAKE_OSX_ARCHITECTURES=x86_64 "+cmake_string+DIGITALKNOB+"DK/DKCMake")
+		const cmake_command = CMAKE+" -G \"Xcode\" -DCMAKE_OSX_ARCHITECTURES=x86_64 "+cmake_string+DIGITALKNOB+"DK/DKCMake"
+		let rtvalue = CPP_DK_Execute(cmake_command)
 		if(TYPE === "Debug" || TYPE === "ALL")
 			CPP_DK_Execute("xcodebuild -target "+APP+" -configuration Debug build")
 		if(TYPE === "Release" || TYPE === "ALL")
@@ -380,7 +383,8 @@ function DKBuild_DoResults(){
 		DKBuild_ValidateXcode()
 		CPP_DKFile_MkDir(app_path+OS)
 		CPP_DKFile_ChDir(app_path+OS)
-		let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Xcode\" "+cmake_string+" -DCMAKE_TOOLCHAIN_FILE="+DIGITALKNOB+"DK/DKCMake/ios.toolchain.cmake -DIOS_PLATFORM=OS -DSDK_VERSION=15.0 -DDEPLOYMENT_TARGET=13.0 "+DIGITALKNOB+"DK/DKCMake")
+		const cmake_command = CMAKE+" -G \"Xcode\" "+cmake_string+" -DCMAKE_TOOLCHAIN_FILE="+DIGITALKNOB+"DK/DKCMake/ios.toolchain.cmake -DIOS_PLATFORM=OS -DSDK_VERSION=15.0 -DDEPLOYMENT_TARGET=13.0 "+DIGITALKNOB+"DK/DKCMake"
+		let rtvalue = CPP_DK_Execute(cmake_command)
 		if(TYPE === "Debug" || TYPE === "ALL")
 			CPP_DK_Execute("xcodebuild -target "+APP+" -configuration Debug build") //-arch \"armv7 armv7s\"")
 		if(TYPE === "Release" || TYPE === "ALL")
@@ -392,7 +396,8 @@ function DKBuild_DoResults(){
 		DKBuild_ValidateXcode()
 		CPP_DKFile_MkDir(app_path+OS)
 		CPP_DKFile_ChDir(app_path+OS)
-		let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Xcode\" "+cmake_string+" -DCMAKE_TOOLCHAIN_FILE="+DIGITALKNOB+"DK/DKCMake/ios.toolchain.cmake -DPLATFORM=OS64 -DSDK_VERSION=15.0 -DDEPLOYMENT_TARGET=13.0 "+DIGITALKNOB+"DK/DKCMake")
+		const cmake_command = CMAKE+" -G \"Xcode\" "+cmake_string+" -DCMAKE_TOOLCHAIN_FILE="+DIGITALKNOB+"DK/DKCMake/ios.toolchain.cmake -DPLATFORM=OS64 -DSDK_VERSION=15.0 -DDEPLOYMENT_TARGET=13.0 "+DIGITALKNOB+"DK/DKCMake"
+		let rtvalue = CPP_DK_Execute(cmake_command)
 		if(TYPE === "Debug" || TYPE === "ALL")
 			CPP_DK_Execute("xcodebuild -target "+APP+" -configuration Debug build")
 		if(TYPE === "Release" || TYPE === "ALL")
@@ -404,7 +409,8 @@ function DKBuild_DoResults(){
 		DKBuild_ValidateXcode()
 		CPP_DKFile_MkDir(app_path+OS)
 		CPP_DKFile_ChDir(app_path+OS)
-		let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Xcode\" "+cmake_string+" -DCMAKE_TOOLCHAIN_FILE="+DIGITALKNOB+"DK/DKCMake/ios.toolchain.cmake -DIOS_PLATFORM=SIMULATOR -DSDK_VERSION=15.0 -DDEPLOYMENT_TARGET=13.0 "+DIGITALKNOB+"DK/DKCMake")
+		const cmake_command = CMAKE+" -G \"Xcode\" "+cmake_string+" -DCMAKE_TOOLCHAIN_FILE="+DIGITALKNOB+"DK/DKCMake/ios.toolchain.cmake -DIOS_PLATFORM=SIMULATOR -DSDK_VERSION=15.0 -DDEPLOYMENT_TARGET=13.0 "+DIGITALKNOB+"DK/DKCMake"
+		let rtvalue = CPP_DK_Execute(cmake_command)
 		if(TYPE === "Debug" || TYPE === "ALL")
 			CPP_DK_Execute("xcodebuild -target "+APP+" -configuration Debug build")
 		if(TYPE === "Release" || TYPE === "ALL")
@@ -416,7 +422,8 @@ function DKBuild_DoResults(){
 		DKBuild_ValidateXcode()
 		CPP_DKFile_MkDir(app_path+OS)
 		CPP_DKFile_ChDir(app_path+OS)
-		let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Xcode\" "+cmake_string+" -DCMAKE_TOOLCHAIN_FILE="+DIGITALKNOB+"DK/DKCMake/ios.toolchain.cmake -DPLATFORM=SIMULATOR64 -DSDK_VERSION=15.0 -DDEPLOYMENT_TARGET=13.0 "+DIGITALKNOB+"DK/DKCMake")
+		const cmake_command = CMAKE+" -G \"Xcode\" "+cmake_string+" -DCMAKE_TOOLCHAIN_FILE="+DIGITALKNOB+"DK/DKCMake/ios.toolchain.cmake -DPLATFORM=SIMULATOR64 -DSDK_VERSION=15.0 -DDEPLOYMENT_TARGET=13.0 "+DIGITALKNOB+"DK/DKCMake"
+		let rtvalue = CPP_DK_Execute(cmake command)
 		if(TYPE === "Debug" || TYPE === "ALL")
 			CPP_DK_Execute("xcodebuild -target "+APP+" -configuration Debug build")
 		if(TYPE === "Release" || TYPE === "ALL")
@@ -433,7 +440,8 @@ function DKBuild_DoResults(){
 			cmake_string = cmake_string.replace("-DRELEASE=ON", "-DRELEASE=OFF");
 			CPP_DKFile_MkDir(app_path+OS+"/Debug")
 			CPP_DKFile_ChDir(app_path+OS+"/Debug")
-			let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DIGITALKNOB+"DK/DKCMake")
+			const cmake_command = CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DIGITALKNOB+"DK/DKCMake"
+			let rtvalue = CPP_DK_Execute(cmake_command)
 			CPP_DK_Execute("make "+APP)
 		}
 		if(TYPE === "Release" || TYPE === "ALL"){
@@ -441,7 +449,8 @@ function DKBuild_DoResults(){
 			cmake_string = cmake_string.replace("-DRELEASE=OFF", "-DRELEASE=ON");
 			CPP_DKFile_MkDir(app_path+OS+"/Release")
 			CPP_DKFile_ChDir(app_path+OS+"/Release")
-			let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DIGITALKNOB+"DK/DKCMake")
+			const cmake_command = CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DIGITALKNOB+"DK/DKCMake"
+			let rtvalue = CPP_DK_Execute(cmake_command)
 			CPP_DK_Execute("make "+APP)
 		}
 	}
@@ -457,7 +466,8 @@ function DKBuild_DoResults(){
 			console.log("cmake_string = "+cmake_string+"\n");
 			CPP_DKFile_MkDir(app_path+OS+"/Debug")
 			CPP_DKFile_ChDir(app_path+OS+"/Debug")
-			let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DIGITALKNOB+"DK/DKCMake")
+			const cmake_command = CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DIGITALKNOB+"DK/DKCMake"
+			let rtvalue = CPP_DK_Execute(cmake_command)
 			CPP_DK_Execute("make "+APP)
 		}
 		if(TYPE === "Release" || TYPE === "ALL"){
@@ -466,7 +476,8 @@ function DKBuild_DoResults(){
 			console.log("cmake_string = "+cmake_string+"\n");
 			CPP_DKFile_MkDir(app_path+OS+"/Release")
 			CPP_DKFile_ChDir(app_path+OS+"/Release")
-			let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DIGITALKNOB+"DK/DKCMake")
+			const cmake_command = CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DIGITALKNOB+"DK/DKCMake"
+			let rtvalue = CPP_DK_Execute(cmake_command)
 			CPP_DK_Execute("make "+APP)
 		}
 	}
@@ -480,7 +491,9 @@ function DKBuild_DoResults(){
 			cmake_string = cmake_string.replace("-DRELEASE=ON", "-DRELEASE=OFF");
 			CPP_DKFile_MkDir(app_path+OS+"/Debug")
 			CPP_DKFile_ChDir(app_path+OS+"/Debug")
-			let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DIGITALKNOB+"DK/DKCMake")
+			const cmake_command = CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DIGITALKNOB+"DK/DKCMake"
+			let rtvalue = CPP_DK_Execute(cmake_command)
+			console.log(cmake_command)
 			CPP_DK_Execute("make "+APP)
 		}
 		if(TYPE === "Release" || TYPE === "ALL"){
@@ -488,7 +501,9 @@ function DKBuild_DoResults(){
 			cmake_string = cmake_string.replace("-DRELEASE=OFF", "-DRELEASE=ON");
 			CPP_DKFile_MkDir(app_path+OS+"/Release")
 			CPP_DKFile_ChDir(app_path+OS+"/Release")
-			let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DIGITALKNOB+"DK/DKCMake")
+			const cmake_command = CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DIGITALKNOB+"DK/DKCMake"
+			let rtvalue = CPP_DK_Execute(cmake_command)
+			console.log(cmake_command)
 			CPP_DK_Execute("make "+APP)
 		}
 	}
@@ -502,7 +517,9 @@ function DKBuild_DoResults(){
 			cmake_string = cmake_string.replace("-DRELEASE=ON", "-DRELEASE=OFF");
 			CPP_DKFile_MkDir(app_path+OS+"/Debug")
 			CPP_DKFile_ChDir(app_path+OS+"/Debug")
-			let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DIGITALKNOB+"DK/DKCMake")
+			const cmake_command = CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DIGITALKNOB+"DK/DKCMake"
+			console.log(cmake_command);
+			let rtvalue = CPP_DK_Execute(cmake_command)
 			CPP_DK_Execute("make "+APP)
 		}
 		if(TYPE === "Release" || TYPE === "ALL"){
@@ -510,7 +527,9 @@ function DKBuild_DoResults(){
 			cmake_string = cmake_string.replace("-DRELEASE=OFF", "-DRELEASE=ON");
 			CPP_DKFile_MkDir(app_path+OS+"/Release")
 			CPP_DKFile_ChDir(app_path+OS+"/Release")
-			let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DIGITALKNOB+"DK/DKCMake")
+			const cmake_command = CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DIGITALKNOB+"DK/DKCMake"
+			console.log(cmake_command);
+			let rtvalue = CPP_DK_Execute(cmake_command)
 			CPP_DK_Execute("make "+APP)
 		}
 	}
@@ -522,7 +541,9 @@ function DKBuild_DoResults(){
 		CPP_DKFile_MkDir(app_path+"android32")
 		CPP_DKFile_ChDir(app_path+"android32")
 		if(CPP_DK_GetOS() === "Windows")
-			let rtvalue = CPP_DK_Execute(CMAKE+" -G \""+VS_GENERATOR+"\" -A ARM -DCMAKE_TOOLCHAIN_FILE="+ANDROIDNDK+"/build/cmake/android.toolchain.cmake -DANDROIDNDK="+ANDROIDNDK+" -DANDROID_ABI=armeabi-v7a -DANDROID_PLATFORM=26 -DCMAKE_CXX_FLAGS=-std=c++1z "+cmake_string+DIGITALKNOB+"DK/DKCMake")
+			const cmake_command = CMAKE+" -G \""+VS_GENERATOR+"\" -A ARM -DCMAKE_TOOLCHAIN_FILE="+ANDROIDNDK+"/build/cmake/android.toolchain.cmake -DANDROIDNDK="+ANDROIDNDK+" -DANDROID_ABI=armeabi-v7a -DANDROID_PLATFORM=26 -DCMAKE_CXX_FLAGS=-std=c++1z "+cmake_string+DIGITALKNOB+"DK/DKCMake"
+			console.log(cmake_command)
+			let rtvalue = CPP_DK_Execute(cmake_command)
 		else if(CPP_DK_GetOS() === "Linux" || CPP_DK_GetOS() === "Mac")
 			let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DIGITALKNOB+"DK/DKCMake")
 		if(TYPE === "Debug" || TYPE === "ALL")
@@ -550,7 +571,9 @@ function DKBuild_DoResults(){
 		CPP_DKFile_MkDir(app_path+"android64")
 		CPP_DKFile_ChDir(app_path+"android64")
 		if(CPP_DK_GetOS() === "Windows")
-			let rtvalue = CPP_DK_Execute(CMAKE+" -G \""+VS_GENERATOR+"\" -A ARM64 -DCMAKE_TOOLCHAIN_FILE="+ANDROIDNDK+"/build/cmake/android.toolchain.cmake -DANDROIDNDK="+ANDROIDNDK+" -DANDROID_ABI=arm64-v8a -DANDROID_PLATFORM=26 -DCMAKE_CXX_FLAGS=-std=c++1z "+cmake_string+DIGITALKNOB+"DK/DKCMake")
+			const cmake_command = CMAKE+" -G \""+VS_GENERATOR+"\" -A ARM64 -DCMAKE_TOOLCHAIN_FILE="+ANDROIDNDK+"/build/cmake/android.toolchain.cmake -DANDROIDNDK="+ANDROIDNDK+" -DANDROID_ABI=arm64-v8a -DANDROID_PLATFORM=26 -DCMAKE_CXX_FLAGS=-std=c++1z "+cmake_string+DIGITALKNOB+"DK/DKCMake"
+			console.log(cmake_command)
+			let rtvalue = CPP_DK_Execute(cmake_command)
 		else if(CPP_DK_GetOS() === "Linux" || CPP_DK_GetOS() === "Mac")
 			rtvalue = CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DIGITALKNOB+"DK/DKCMake")
 		if(TYPE === "Debug" || TYPE === "ALL")

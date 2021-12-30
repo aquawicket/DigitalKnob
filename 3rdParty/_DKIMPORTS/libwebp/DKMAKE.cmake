@@ -26,8 +26,8 @@ DKINSTALL(${WEBP_DL} libwebp ${WEBP})
 
 ### DKPLUGINS LINK ###
 DKINCLUDE(${WEBP})
-WIN_DEBUG_DKLIB(${WEBP}/${OS}/${DEBUG_DIR}/libwebp.lib)
-WIN_RELEASE_DKLIB(${WEBP}/${OS}/${RELEASE_DIR}/libwebp.lib)
+WIN_DEBUG_DKLIB(${WEBP}/${OS}/${DEBUG_DIR}/webp.lib)
+WIN_RELEASE_DKLIB(${WEBP}/${OS}/${RELEASE_DIR}/webp.lib)
 APPLE_DEBUG_DKLIB(${WEBP}/${OS}/WebP.build/${DEBUG_DIR}/webpdecode.build/libwebpdecode.a)
 APPLE_RELEASE_DKLIB(${WEBP}/${OS}/WebP.build/${RELEASE_DIR}/webpdecode.build/libwebpdecode.a)
 APPLE_DEBUG_DKLIB(${WEBP}/${OS}/WebP.build/${DEBUG_DIR}/webpdsp.build/libwebpdsp.a)
