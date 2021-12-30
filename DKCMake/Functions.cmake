@@ -108,23 +108,6 @@ macro(DKTRACE msg)
 	message(WARNING "${H_black}${STACK_HEADER}${CLR}${B_blue}${msg}${CLR}")
 endmacro()
 
-## Test Log ##
-#DKTRACE("DKTRACE")
-#DKVERBOSE("DKVERBOSE")
-#DKDEBUG("DKDEBUG")
-#DKINFO("DKINFO")
-#DKWARN("DKWARN")
-#DKERROR("DKERROR")
-#DKASSERT("DKASSERT")
-
-
-## dynamic functions
-#function(CreateFunction name)
-#	cmake_language(EVAL CODE "function(${name})\n DKINFO(\"${name}(\${ARGV})\")\n endfunction()")
-#endfunction()
-#CreateFunction("MyDynamicFunc")
-#MyDynamicFunc("string" 15)
-
 
 function(dk_file_getDigitalknobPath result)
 	get_filename_component(DIGITALKNOB ${CMAKE_SOURCE_DIR} ABSOLUTE)
@@ -240,6 +223,14 @@ function(AliasFunctions name)
 endfunction()
 
 
+## Create a dynamic named functions
+#function(CreateFunction name)
+#	cmake_language(EVAL CODE "function(${name})\n DKINFO(\"${name}(\${ARGV})\")\n endfunction()")
+#endfunction()
+#CreateFunction("MyDynamicFunc")
+#MyDynamicFunc("string" 15)
+
+
 # dk_string_has
 function(dk_includes str substr result)
 	string(FIND "${str}" "${substr}" index)
@@ -249,6 +240,7 @@ function(dk_includes str substr result)
 		set(${result} false PARENT_SCOPE)
 	endif()
 endfunction()
+
 
 # https://stackoverflow.com/a/29250496/688352
 function(DKSET variable value)
@@ -2331,6 +2323,9 @@ macro(readonly_guard VAR access value current_list_file stack)   # Watcher for r
 		set(${VAR} "${_${VAR}_readonly_val}")                    # Restore a value of the variable to the initial one.
 	endif()
 endmacro()
+
+
+
 
 
 include(${DIGITALKNOB}/DK/DKCMake/Functions_Ext.cmake)
