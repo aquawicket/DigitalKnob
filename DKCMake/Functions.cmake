@@ -1,6 +1,19 @@
 # https://asitdhal.medium.com/cmake-functions-and-macros-22293041519f
 # https://asitdhal.medium.com/cmake-functions-and-macros-22293041519f
 
+########### SETTINGS ##############
+###################################
+
+set(PRINT_CALL_DETAILS 1)
+set(PRINT_FILE_NAMES 1)
+set(PRINT_LINE_NUMBERS 1)
+set(PRINT_FUNCTION_NAMES 1)
+set(PRINT_FUNCTION_ ARGUMENTS 1)
+
+###################################
+
+
+
 if(DKFUNCTIONS_INCLUDED)
   return()
 endif(DKFUNCTIONS_INCLUDED)
@@ -24,15 +37,29 @@ set(dkdepend_disable_list "" CACHE INTERNAL "")
 
 macro(updateStack)
 	if(NOT CMAKE_CURRENT_FUNCTION_LIST_FILE)
-		get_filename_component(STACK_FILENAME ${CMAKE_CURRENT_LIST_FILE} NAME)
-		set(STACK_LINE ${CMAKE_CURRENT_LIST_LINE})
+		if(PRINT_FILE_NAMES)
+			get_filename_component(STACK_FILENAME ${CMAKE_CURRENT_LIST_FILE} NAME)
+		endif()
+		if(PRINT_LINE_NUMBERS)		
+			set(STACK_LINE ${CMAKE_CURRENT_LIST_LINE})
+		endif()
 	else()
-		get_filename_component(STACK_FILENAME ${CMAKE_CURRENT_FUNCTION_LIST_FILE} NAME)
-		set(STACK_LINE ${CMAKE_CURRENT_FUNCTION_LIST_LINE})
+		if(PRINT_FILE_NAMES)
+			get_filename_component(STACK_FILENAME ${CMAKE_CURRENT_FUNCTION_LIST_FILE} NAME)
+		endif()
+		if(PRINT_LINE_NUMBERS)	
+			set(STACK_LINE ${CMAKE_CURRENT_FUNCTION_LIST_LINE})
+		endif()
 	endif()
-	set(STACK_FUNCTION ${CMAKE_CURRENT_FUNCTION})
-	set(STACK_ARGS ${ARGV})
-	set(STACK_HEADER "${STACK_FILENAME}:${STACK_LINE}::${STACK_FUNCTION}(${STACK_ARGS}): ")
+	if(PRINT_FUNCTION_NAMES)
+		set(STACK_FUNCTION ${CMAKE_CURRENT_FUNCTION})
+	endif()
+	if(PRINT_FUNCTION_ARGUMENTS)
+		set(STACK_ARGS ${ARGV})
+	endif()
+	if(PRINT_CALL_DETAILS)
+		set(STACK_HEADER "${STACK_FILENAME}:${STACK_LINE}::${STACK_FUNCTION}(${STACK_ARGS}): ")
+	endif()
 endmacro()
 
 
