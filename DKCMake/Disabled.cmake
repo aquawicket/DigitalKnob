@@ -99,6 +99,7 @@ if(WIN_32) # Disabled for Windows 32bit targets
 	#
 endif()
 if(WIN_64) # Disabled for Windows 64bit targets
+	DKDISABLE(java)
 	DKDISABLE(smpeg2)
 endif()
 
