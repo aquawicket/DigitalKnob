@@ -423,7 +423,7 @@ function DKBuild_DoResults(){
 		CPP_DKFile_MkDir(app_path+OS)
 		CPP_DKFile_ChDir(app_path+OS)
 		const cmake_command = CMAKE+" -G \"Xcode\" "+cmake_string+" -DCMAKE_TOOLCHAIN_FILE="+DIGITALKNOB+"DK/DKCMake/ios.toolchain.cmake -DPLATFORM=SIMULATOR64 -DSDK_VERSION=15.0 -DDEPLOYMENT_TARGET=13.0 "+DIGITALKNOB+"DK/DKCMake"
-		let rtvalue = CPP_DK_Execute(cmake command)
+		let rtvalue = CPP_DK_Execute(cmake_command)
 		if(TYPE === "Debug" || TYPE === "ALL")
 			CPP_DK_Execute("xcodebuild -target "+APP+" -configuration Debug build")
 		if(TYPE === "Release" || TYPE === "ALL")
@@ -540,10 +540,11 @@ function DKBuild_DoResults(){
 		DKBuild_ValidateVC2019()
 		CPP_DKFile_MkDir(app_path+"android32")
 		CPP_DKFile_ChDir(app_path+"android32")
-		if(CPP_DK_GetOS() === "Windows")
+		if(CPP_DK_GetOS() === "Windows"){
 			const cmake_command = CMAKE+" -G \""+VS_GENERATOR+"\" -A ARM -DCMAKE_TOOLCHAIN_FILE="+ANDROIDNDK+"/build/cmake/android.toolchain.cmake -DANDROIDNDK="+ANDROIDNDK+" -DANDROID_ABI=armeabi-v7a -DANDROID_PLATFORM=26 -DCMAKE_CXX_FLAGS=-std=c++1z "+cmake_string+DIGITALKNOB+"DK/DKCMake"
 			console.log(cmake_command)
 			let rtvalue = CPP_DK_Execute(cmake_command)
+		}
 		else if(CPP_DK_GetOS() === "Linux" || CPP_DK_GetOS() === "Mac")
 			let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DIGITALKNOB+"DK/DKCMake")
 		if(TYPE === "Debug" || TYPE === "ALL")
@@ -570,10 +571,11 @@ function DKBuild_DoResults(){
 		DKBuild_ValidateVC2019()
 		CPP_DKFile_MkDir(app_path+"android64")
 		CPP_DKFile_ChDir(app_path+"android64")
-		if(CPP_DK_GetOS() === "Windows")
+		if(CPP_DK_GetOS() === "Windows"){
 			const cmake_command = CMAKE+" -G \""+VS_GENERATOR+"\" -A ARM64 -DCMAKE_TOOLCHAIN_FILE="+ANDROIDNDK+"/build/cmake/android.toolchain.cmake -DANDROIDNDK="+ANDROIDNDK+" -DANDROID_ABI=arm64-v8a -DANDROID_PLATFORM=26 -DCMAKE_CXX_FLAGS=-std=c++1z "+cmake_string+DIGITALKNOB+"DK/DKCMake"
 			console.log(cmake_command)
 			let rtvalue = CPP_DK_Execute(cmake_command)
+		}
 		else if(CPP_DK_GetOS() === "Linux" || CPP_DK_GetOS() === "Mac")
 			rtvalue = CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DIGITALKNOB+"DK/DKCMake")
 		if(TYPE === "Debug" || TYPE === "ALL")
