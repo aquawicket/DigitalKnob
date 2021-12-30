@@ -5,7 +5,7 @@ set(ColourReset "${ESC}[0m")
 set(ColourBold  "${ESC}[1m")
 
 # Regular Colors
-set(black       "${ESC}[30;47m")
+set(black       "${ESC}[30;100m")
 set(red         "${ESC}[31m")
 set(green       "${ESC}[32m")
 set(yellow      "${ESC}[33m")
@@ -25,7 +25,7 @@ set(B_cyan        "${ESC}[1;36m")
 set(B_white       "${ESC}[1;37m")
 
 # Underline
-set(U_black       "${ESC}[4;30;47m")
+set(U_black       "${ESC}[4;30;100m")
 set(U_red         "${ESC}[4;31m")
 set(U_green       "${ESC}[4;32m")
 set(U_yellow      "${ESC}[4;33m")
@@ -44,8 +44,8 @@ set(H_magenta   "${ESC}[0;95m")
 set(H_cyan      "${ESC}[0;96m")
 set(H_white     "${ESC}[0;97m")
 
-# Bold High Intensity
-set(HB_black     "${ESC}[1;30;90m")
+# High Intensity Bold
+set(HB_black     "${ESC}[1;90m")
 set(HB_red       "${ESC}[1;91m")
 set(HB_green     "${ESC}[1;92m")
 set(HB_yellow    "${ESC}[1;93m")
