@@ -21,6 +21,59 @@ endif()
 
 set(dkdepend_disable_list "" CACHE INTERNAL "")
 
+
+macro(updateStack)
+	if(NOT CMAKE_CURRENT_FUNCTION_LIST_FILE)
+		get_filename_component(STACK_FILENAME ${CMAKE_CURRENT_LIST_FILE} NAME)
+		set(STACK_LINE ${CMAKE_CURRENT_LIST_LINE})
+	else()
+		get_filename_component(STACK_FILENAME ${CMAKE_CURRENT_FUNCTION_LIST_FILE} NAME)
+		set(STACK_LINE ${CMAKE_CURRENT_FUNCTION_LIST_LINE})
+	endif()
+	set(STACK_FUNCTION ${CMAKE_CURRENT_FUNCTION})
+	set(STACK_ARGS ${ARGV})
+	set(STACK_HEADER "${STACK_FILENAME}:${STACK_LINE}::${STACK_FUNCTION}(${STACK_ARGS}): ")
+endmacro()
+
+
+macro(DKASSERT msg)
+	updateStack()
+	message(FATAL_ERROR "${H_black}${STACK_HEADER}${CLR}${BG_red}${msg}${CLR}")
+endmacro()
+macro(DKERROR msg)
+	updateStack()
+	message(SEND_ERROR "${H_black}${STACK_HEADER}${CLR}${red}${msg}${CLR}")
+endmacro()
+macro(DKWARN msg)
+	updateStack()
+	message(STATUS "${H_black}${STACK_HEADER}${CLR}${yellow}${msg}${CLR}")
+endmacro()
+macro(DKINFO msg)
+	updateStack()
+	message(STATUS "${cyan}${STACK_HEADER}${CLR}${msg}")
+endmacro()
+macro(DKDEBUG msg)
+	updateStack()
+	message(DEBUG "${H_black}${STACK_HEADER}${CLR}${cyan}${msg}${CLR}")
+endmacro()
+macro(VERBOSE msg)
+	updateStack()
+	message(VERBOSE "${H_black}${STACK_HEADER}${CLR}${magenta}${msg}${CLR}")
+endmacro()
+macro(TRACE msg)
+	updateStack()
+	message(TRACE "${H_black}${STACK_HEADER}${CLR}${B_blue}${msg}${CLR}")
+endmacro()
+
+
+## dynamic functions
+#function(CreateFunction name)
+#	cmake_language(EVAL CODE "function(${name})\n DKINFO(\"${name}(\${ARGV})\")\n endfunction()")
+#endfunction()
+#CreateFunction("MyDynamicFunc")
+#MyDynamicFunc("string" 15)
+
+
 function(dk_file_getDigitalknobPath result)
 	get_filename_component(DIGITALKNOB ${CMAKE_SOURCE_DIR} ABSOLUTE)
 	get_filename_component(FOLDER_NAME ${DIGITALKNOB} NAME)
@@ -28,70 +81,12 @@ function(dk_file_getDigitalknobPath result)
 		get_filename_component(DIGITALKNOB ${DIGITALKNOB} DIRECTORY)
 		get_filename_component(FOLDER_NAME ${DIGITALKNOB} NAME)
 		if(NOT FOLDER_NAME)
-			message(FATAL_ERROR "Could not locate digitalknob root path")
+			DKASSERT("Could not locate digitalknob root path")
 		endif()
 	endwhile()
 	set(${result} ${DIGITALKNOB} PARENT_SCOPE) #just relay the result
 endfunction()
 dk_file_getDigitalknobPath(DIGITALKNOB)
-
-
-## dynamic functions
-#function(CreateFunction name)
-#	cmake_language(EVAL CODE "function(${name})\n message(STATUS \"${name}(\${ARGV})\")\n endfunction()")
-#endfunction()
-#CreateFunction("MyDynamicFunc")
-#MyDynamicFunc("string" 15)
-
-macro(updateStack)
-	#if(${CMAKE_CURRENT_FUNCTION_LIST_FILE})
-		
-		if(NOT CMAKE_CURRENT_FUNCTION_LIST_FILE)
-			get_filename_component(STACK_FILENAME ${CMAKE_CURRENT_LIST_FILE} NAME)
-			set(STACK_LINE ${CMAKE_CURRENT_LIST_LINE})
-		else()
-			get_filename_component(STACK_FILENAME ${CMAKE_CURRENT_FUNCTION_LIST_FILE} NAME)
-			set(STACK_LINE ${CMAKE_CURRENT_FUNCTION_LIST_LINE})
-		endif()
-		set(STACK_FUNCTION ${CMAKE_CURRENT_FUNCTION})
-		set(STACK_ARGS ${ARGV})
-		set(STACK_HEADER "${STACK_FILENAME}:${STACK_LINE}::${STACK_FUNCTION}(${STACK_ARGS}):  ")
-		
-		#CMAKE_CURRENT_SOURCE_DIR
-		#CMAKE_CURRENT_BINARY_DIR
-		#CMAKE_CURRENT_FUNCTION
-		#CMAKE_CURRENT_FUNCTION_LIST_DIR
-		#CMAKE_CURRENT_FUNCTION_LIST_FILE
-		#CMAKE_CURRENT_FUNCTION_LIST_LINE
-		#CMAKE_CURRENT_LIST_DIR
-		#CMAKE_CURRENT_LIST_FILE
-		#CMAKE_CURRENT_LIST_LINE
-		
-	#endif()
-endmacro()
-
-macro(DKASSERT msg)
-	message(FATAL_ERROR "${msg}")
-endmacro()
-macro(DKERROR msg)
-	message(SEND_ERROR "${msg}")
-endmacro()
-macro(DKWARN msg)
-	message(WARNING "${msg}")
-endmacro()
-macro(DKINFO msg)
-	updateStack()
-	message(STATUS "${STACK_HEADER} ${msg}")
-endmacro()
-macro(DKDEBUG msg)
-	message(DEBUG "${msg}")
-endmacro()
-macro(VERBOSE msg)
-	message(VERBOSE "${msg}")
-endmacro()
-macro(TRACE msg)
-	message(VERBOSE "${msg}")
-endmacro()
 
 
 execute_process(COMMAND ${CMAKE_EXE} -E remove ${DIGITALKNOB}/DK/DKCMake/Functions_Ext.cmake)
@@ -554,7 +549,7 @@ function(DKRENAME from to overwrite)
 	if(EXISTS ${from})
 		if(EXISTS ${to})
 			if(NOT ${overwrite})
-				message(WARNING "Cannot rename file. Destiantion exists and not set to overwrite")
+				DKWARN("Cannot rename file. Destiantion exists and not set to overwrite")
 				return()
 			endif()
 			DKREMOVE(${to})
@@ -1727,7 +1722,42 @@ function(DKRUNDEPENDS name)
 		if(${index} GREATER -1)
 			set(KEEPLINE 1)
 		endif()
+		
+		string(FIND "${line}" "DKASSERT(" index)
+		if(${index} GREATER -1)
+			set(KEEPLINE 1)
+		endif()
+		
+		string(FIND "${line}" "DKERROR(" index)
+		if(${index} GREATER -1)
+			set(KEEPLINE 1)
+		endif()
+		
+		string(FIND "${line}" "DKWARN(" index)
+		if(${index} GREATER -1)
+			set(KEEPLINE 1)
+		endif()
+		
+		string(FIND "${line}" "DKINFO(" index)
+		if(${index} GREATER -1)
+			set(KEEPLINE 1)
+		endif()
+		
+		string(FIND "${line}" "DKDEBUG(" index)
+		if(${index} GREATER -1)
+			set(KEEPLINE 1)
+		endif()
 
+		string(FIND "${line}" "DKVERBOSE(" index)
+		if(${index} GREATER -1)
+			set(KEEPLINE 1)
+		endif()
+		
+		string(FIND "${line}" "DKTRACE(" index)
+		if(${index} GREATER -1)
+			set(KEEPLINE 1)
+		endif()
+		
 		if(KEEPLINE)
 			set(depends_script "${depends_script}${line}\n")
 		endif()
@@ -2247,7 +2277,7 @@ endmacro()
 
 macro(readonly_guard VAR access value current_list_file stack)   # Watcher for readonly property.
 	if ("${access}" STREQUAL "MODIFIED_ACCESS")
-		message(WARNING "'${VAR}' is READONLY")
+		DKWARN("'${VAR}' is READONLY")
 		set(${VAR} "${_${VAR}_readonly_val}")                    # Restore a value of the variable to the initial one.
 	endif()
 endmacro()
