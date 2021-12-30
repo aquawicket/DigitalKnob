@@ -1,17 +1,6 @@
 #ifndef HEADINSTANCER_H
 #define HEADINSTANCER_H
 
-#include <RmlUi/Core/StringUtilities.h>
-#include <RmlUi/Core/XMLParser.h>
-#include <RmlUi/Core/SystemInterface.h>
-
-#include "../../3rdParty/RmlUi-master/Source/Core/DocumentHeader.h"
-//#include "TemplateCache.h"
-#include <RmlUi/Core/Core.h>
-#include <RmlUi/Core/Element.h>
-#include <RmlUi/Core/ElementDocument.h>
-#include <RmlUi/Core/URL.h>
-#include <RmlUi/Core/Factory.h>
 #include <RmlUi/Core/XMLNodeHandler.h>
 
 class HeadInstancer : public Rml::XMLNodeHandler{

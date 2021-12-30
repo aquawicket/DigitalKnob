@@ -1,6 +1,17 @@
 #include "DK/stdafx.h"
 #include "DKRmlHeadInstancer.h"
 
+#include <RmlUi/Core/StringUtilities.h>
+#include <RmlUi/Core/XMLParser.h>
+#include <RmlUi/Core/SystemInterface.h>
+
+#include "../../3rdParty/RmlUi-master/Source/Core/DocumentHeader.h"
+//#include "TemplateCache.h"
+#include <RmlUi/Core/Core.h>
+#include <RmlUi/Core/Element.h>
+#include <RmlUi/Core/ElementDocument.h>
+#include <RmlUi/Core/URL.h>
+#include <RmlUi/Core/Factory.h>
 
 static Rml::String Absolutepath(const Rml::String& source, const Rml::String& base)
 {
