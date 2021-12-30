@@ -1553,12 +1553,10 @@ function(dk_getPathToPlugin name result)
 	file(GLOB children RELATIVE ${DIGITALKNOB} ${DIGITALKNOB}/*)
  	foreach(child ${children})
 		if(EXISTS ${DIGITALKNOB}/${child}/3rdParty/_DKIMPORTS/${name}/DKMAKE.cmake)
-			#DKINFO("FOUND ${name} Plugin at ${DIGITALKNOB}/${child}/3rdParty/_DKIMPORTS/${name}")
 			set(${result} "${DIGITALKNOB}/${child}/3rdParty/_DKIMPORTS/${name}" PARENT_SCOPE)
 			return()
     	endif()
 		if(EXISTS ${DIGITALKNOB}/${child}/DKPlugins/${name}/DKMAKE.cmake)
-			#DKINFO("FOUND ${name} Plugin at ${DIGITALKNOB}/${child}/DKPlugins/${name}")
 			set(${result} "${DIGITALKNOB}/${child}/DKPlugins/${name}" PARENT_SCOPE)
 			return()
     	endif()
@@ -1570,19 +1568,19 @@ endfunction()
 # Add a library or plugin to the dependency list
 function(DKDEPEND name)
 	if(${ARGC} GREATER 1)
-		DUMP(ARGV)
-		Wait()
-		dk_exit()
+		DKINFO("ARGV = ${ARGV}")
+		#DUMP(ARGV) # FIXME: DUMP not working here, show 2 for the ARGC count, but only shows variable name ARGV, no value
 	endif()
 
 	list(FIND dkdepend_disable_list ${name} index)
 	if(${index} GREATER -1)
-		DKINFO("${name} IS DISABLED  (ARGV = ${ARGV})")
+		DKINFO("${name} IS DISABLED")
 		return()
 	endif()
 	
-	# TODO
+	# TODO TODO TODO TODO 
 	# dk_createSmartObject(${name}) #TODO:  automatically determin plugin, create variables, setup auto compiles, etc 
+	# TODO TODO TODO TODO 
 	
 	# If DKDEPEND had second variable (a sub library), set that variable to ON
 	# if(${ARGC} GREATER 1)
