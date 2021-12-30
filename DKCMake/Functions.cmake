@@ -43,11 +43,31 @@ dk_file_getDigitalknobPath(DIGITALKNOB)
 #CreateFunction("MyDynamicFunc")
 #MyDynamicFunc("string" 15)
 
-macro(printStackInfo)
-	if(${CMAKE_CURRENT_FUNCTION_LIST_FILE})
-		dk_getFilename(${CMAKE_CURRENT_FUNCTION_LIST_FILE} FILENAME)
-		DKINFO("${FILENAME}:${CMAKE_CURRENT_FUNCTION_LIST_LINE} -> ${CMAKE_CURRENT_FUNCTION}(${ARGV})")
-	endif()
+macro(updateStack)
+	#if(${CMAKE_CURRENT_FUNCTION_LIST_FILE})
+		
+		if(NOT CMAKE_CURRENT_FUNCTION_LIST_FILE)
+			get_filename_component(STACK_FILENAME ${CMAKE_CURRENT_LIST_FILE} NAME)
+			set(STACK_LINE ${CMAKE_CURRENT_LIST_LINE})
+		else()
+			get_filename_component(STACK_FILENAME ${CMAKE_CURRENT_FUNCTION_LIST_FILE} NAME)
+			set(STACK_LINE ${CMAKE_CURRENT_FUNCTION_LIST_LINE})
+		endif()
+		set(STACK_FUNCTION ${CMAKE_CURRENT_FUNCTION})
+		set(STACK_ARGS ${ARGV})
+		set(STACK_HEADER "${STACK_FILENAME}:${STACK_LINE}::${STACK_FUNCTION}(${STACK_ARGS}):  ")
+		
+		#CMAKE_CURRENT_SOURCE_DIR
+		#CMAKE_CURRENT_BINARY_DIR
+		#CMAKE_CURRENT_FUNCTION
+		#CMAKE_CURRENT_FUNCTION_LIST_DIR
+		#CMAKE_CURRENT_FUNCTION_LIST_FILE
+		#CMAKE_CURRENT_FUNCTION_LIST_LINE
+		#CMAKE_CURRENT_LIST_DIR
+		#CMAKE_CURRENT_LIST_FILE
+		#CMAKE_CURRENT_LIST_LINE
+		
+	#endif()
 endmacro()
 
 macro(DKASSERT msg)
@@ -60,7 +80,8 @@ macro(DKWARN msg)
 	message(WARNING "${msg}")
 endmacro()
 macro(DKINFO msg)
-	message(STATUS "${msg}")
+	updateStack()
+	message(STATUS "${STACK_HEADER} ${msg}")
 endmacro()
 macro(DKDEBUG msg)
 	message(DEBUG "${msg}")
@@ -182,7 +203,7 @@ function(dk_includes str substr result)
 	endif()
 endfunction()
 
-
+# https://stackoverflow.com/a/29250496/688352
 function(DKSET variable value)
 	set(${variable} ${value} ${ARGN} CACHE INTERNAL "")
 	#show library versions
@@ -254,6 +275,8 @@ macro(DUMP dmpvar)
 	endif()
 	DKINFO("${FILENAME}:${CMAKE_CURRENT_FUNCTION_LIST_LINE} -> ${CMAKE_CURRENT_FUNCTION}(${ARGV})")
 	DKINFO("${dmpvar} = ${${dmpvar}}")
+	DKINFO("${dmpvar} = \"${dmpvar}\"")
+	DKINFO("${dmpvar} = \"${${dmpvar}}\"")
 	list(LENGTH ${dmpvar} dmpvar_LENGTH)
 	DKINFO("dmpvar_LENGTH = ${dmpvar_LENGTH}")
 	if(NOT DEFINED ${dmpvar})
@@ -1499,10 +1522,15 @@ endfunction()
 
 # Add a library or plugin to the dependency list
 function(DKDEPEND name)
+	if(${ARGC} GREATER 1)
+		DUMP(ARGV)
+		Wait()
+		dk_exit()
+	endif()
 
-	list(FIND dkdepend_disable_list "${ARGV}" index)
+	list(FIND dkdepend_disable_list ${name} index)
 	if(${index} GREATER -1)
-		DKINFO("${ARGV} IS DISABLED")
+		DKINFO("${name} IS DISABLED  (ARGV = ${ARGV})")
 		return()
 	endif()
 	
@@ -1522,7 +1550,7 @@ function(DKDEPEND name)
 	#	endif()
 	# endif()
 		
-	list(FIND dkdepend_list "${ARGV}" index)
+	list(FIND dkdepend_list ${name} index)
 	if(${index} GREATER -1)
 		return()  #library is already in the list
 	endif()
@@ -1983,6 +2011,7 @@ function(dk_printSettings)
 
 	DKBUILD_LOG("#################  HOST SYSTEM VARIABLES  ################")
 	DKBUILD_LOG("CMAKE_EXE:                     ${CMAKE_EXE}")
+	DKBUILD_LOG("CMAKE_VERSION:                 ${CMAKE_VERSION}")
 	DKBUILD_LOG("CMAKE_HOST_SYSTEM_NAME:        ${CMAKE_HOST_SYSTEM_NAME}")
 	DKBUILD_LOG("CMAKE_HOST_SYSTEM_VERSION:     ${CMAKE_HOST_SYSTEM_VERSION}")
 	DKBUILD_LOG("CMAKE_HOST_SYSTEM_PROCESSOR:   ${CMAKE_HOST_SYSTEM_PROCESSOR}")

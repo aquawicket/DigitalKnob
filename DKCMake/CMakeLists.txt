@@ -46,6 +46,7 @@ if(DKCMAKELIST_INCLUDED)
 endif(DKCMAKELIST_INCLUDED)
 set(DKCMAKELIST_INCLUDED 1)
 
+variable_watch(DKCMAKE_BUILD) 
 
 if(CMAKE_HOST_UNIX)
 	execute_process(COMMAND sudo echo WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}) #ask for sudo password ahead of time

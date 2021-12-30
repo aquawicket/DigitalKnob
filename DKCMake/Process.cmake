@@ -6,6 +6,7 @@ if(DKPROCESS_INCLUDED)
 endif(DKPROCESS_INCLUDED)
 DKSET(DKPROCESS_INCLUDED 1)
 
+#variable_watch(DKCMAKE_BUILD) 
 
 DKINFO("\n")
 DKINFO("############################################################")
