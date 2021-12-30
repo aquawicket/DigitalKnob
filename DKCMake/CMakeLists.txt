@@ -56,5 +56,8 @@ endif()
 CMAKE_MINIMUM_REQUIRED(VERSION 3.4)
 CMAKE_POLICY(SET CMP0054 NEW)
 
+
+include(Color.cmake)
+
 PROJECT(DigitalKnob)
 INCLUDE(Process.cmake)
