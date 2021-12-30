@@ -5,8 +5,8 @@
 ###################################
 
 set(PRINT_CALL_DETAILS 1)
-set(PRINT_FILE_NAMES 1)
-set(PRINT_LINE_NUMBERS 1)
+set(PRINT_FILE_NAMES 0)
+set(PRINT_LINE_NUMBERS 0)
 set(PRINT_FUNCTION_NAMES 1)
 set(PRINT_FUNCTION_ ARGUMENTS 1)
 
@@ -77,19 +77,22 @@ macro(DKWARN msg)
 endmacro()
 macro(DKINFO msg)
 	updateStack()
-	message(STATUS "${H_black}${STACK_HEADER}${CLR}${msg}")
+	message(STATUS "${H_black}${STACK_HEADER}${CLR}${white}${msg}${CLR}")
 endmacro()
 macro(DKDEBUG msg)
 	updateStack()
-	message(DEBUG "${H_black}${STACK_HEADER}${CLR}${cyan}${msg}${CLR}")
+	#message(DEBUG "${H_black}${STACK_HEADER}${CLR}${cyan}${msg}${CLR}")
+	message(STATUS "${H_black}${STACK_HEADER}${CLR}${cyan}${msg}${CLR}")
 endmacro()
 macro(DKVERBOSE msg)
 	updateStack()
-	message(VERBOSE "${H_black}${STACK_HEADER}${CLR}${magenta}${msg}${CLR}")
+	#message(VERBOSE "${H_black}${STACK_HEADER}${CLR}${magenta}${msg}${CLR}")
+	message(STATUS "${H_black}${STACK_HEADER}${CLR}${magenta}${msg}${CLR}")
 endmacro()
 macro(DKTRACE msg)
 	updateStack()
-	message(TRACE "${H_black}${STACK_HEADER}${CLR}${B_blue}${msg}${CLR}")
+	#message(TRACE "${H_black}${STACK_HEADER}${CLR}${B_blue}${msg}${CLR}")
+	message(WARNING "${H_black}${STACK_HEADER}${CLR}${B_blue}${msg}${CLR}")
 endmacro()
 
 ## Test Log ##
@@ -98,8 +101,8 @@ DKVERBOSE("DKVERBOSE")
 DKDEBUG("DKDEBUG")
 DKINFO("DKINFO")
 DKWARN("DKWARN")
-DKERROR("DKERROR")
-DKASSERT("DKASSERT")
+#DKERROR("DKERROR")
+#DKASSERT("DKASSERT")
 
 
 ## dynamic functions
