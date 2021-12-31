@@ -8,11 +8,14 @@
 # https://download.java.net/openjdk/jdk8u41/ri/openjdk-8u41-b04-windows-i586-14_jan_2020.zip
 
 ### VERSION ###
-#DKSET(JDK_VERSION 9.0.4)
-DKSET(JDK_VERSION 8u41-b04)
-
-#WIN_HOST_DKSET(JDK_DL https://download.java.net/openjdk/jdk8u41/ri/openjdk-8u41-b04-windows-i586-14_jan_2020.zip)
+DKSET(JDK_VERSION 9.0.4)
+DKSET(JDK_NAME openjdk-${JDK_VERSION}_windows-x64_bin)
 WIN_HOST_DKSET(JDK_DL https://download.java.net/java/GA/jdk9/${JDK_VERSION}/binaries/${JDK_NAME}.tar.gz)
+
+
+#DKSET(JDK_VERSION 8u41-b04)
+#WIN_HOST_DKSET(JDK_DL https://download.java.net/openjdk/jdk8u41/ri/openjdk-8u41-b04-windows-i586-14_jan_2020.zip)
+
 
 
 MAC_HOST_DKSET(JDK_NAME openjdk-${JDK_VERSION}_osx-x64_bin)
@@ -23,7 +26,6 @@ LINUX_HOST_DKSET(JDK_DL https://download.java.net/java/GA/jdk9/${JDK_VERSION}/bi
 
 
 ### INSTALL ###
-DKSET(JDK_NAME openjdk-${JDK_VERSION})
 DKSET(JDK ${3RDPARTY}/${JDK_NAME})
 DKINSTALL(${JDK_DL} jdk ${JDK})
 
