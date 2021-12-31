@@ -3,6 +3,7 @@
 #
 # Downloads
 # https://github.com/libarchive/libarchive/archive/refs/tags/v3.5.1.zip
+# https://github.com/libarchive/libarchive/releases/download/v3.5.2/libarchive-3.5.2.zip
 #
 # INSTALL TARGETS given no BUNDLE DESTINATION for MACOSX_BUNDLE executabletarget "bsdcat".
 # https://github.com/libarchive/libarchive/issues/1563
@@ -19,10 +20,17 @@ WIN_DKDEPEND(openssl)
 
 
 ### VERSION ###
-DKSET(ARCHIVE_VERSION 3.5.1)
+#DKSET(ARCHIVE_VERSION 3.5.1)
+#DKSET(ARCHIVE_NAME libarchive-${ARCHIVE_VERSION})
+#DKSET(ARCHIVE_DL https://github.com/libarchive/libarchive/archive/refs/tags/v${ARCHIVE_VERSION}.zip)
+#DKSET(ARCHIVE ${3RDPARTY}/${ARCHIVE_NAME})
+
+DKSET(ARCHIVE_VERSION 3.5.2)
 DKSET(ARCHIVE_NAME libarchive-${ARCHIVE_VERSION})
-DKSET(ARCHIVE_DL https://github.com/libarchive/libarchive/archive/refs/tags/v${ARCHIVE_VERSION}.zip)
+DKSET(ARCHIVE_DL https://github.com/libarchive/libarchive/releases/download/v3.5.2/libarchive-3.5.2.zip)
 DKSET(ARCHIVE ${3RDPARTY}/${ARCHIVE_NAME})
+
+
 
 
 ### INSTALL ###
