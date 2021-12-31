@@ -710,7 +710,7 @@ if(IOS OR IOSSIM)
 	${DKPROJECT}/*.mm)
 	list(APPEND App_SRC ${m_SRC})
 	if(HAVE_DK)
-		list(APPEND App_SRC ${DKPLUGINS}/DK/DKiOS.mm)
+		list(APPEND App_SRC ${DKPLUGINS}/DK/DK_uikitappdelegate.m)
 	endif()
 	add_executable(${APP_NAME} MACOSX_BUNDLE ${app_ICONS} ${App_SRC} ${RES_FILES})
 		
