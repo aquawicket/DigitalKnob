@@ -709,10 +709,10 @@ if(IOS OR IOSSIM)
 	${DKPROJECT}/*.m
 	${DKPROJECT}/*.mm)
 	list(APPEND App_SRC ${m_SRC})
-	if(HAVE_DK)
-		list(APPEND App_SRC ${DKPLUGINS}/DK/DKAppDelegate.h)
-		list(APPEND App_SRC ${DKPLUGINS}/DK/DKAppDelegate.m)
-	endif()
+	#if(HAVE_DK)
+	#	list(APPEND App_SRC ${DKPLUGINS}/DK/DKAppDelegate.h)
+	#	list(APPEND App_SRC ${DKPLUGINS}/DK/DKAppDelegate.m)
+	#endif()
 	add_executable(${APP_NAME} MACOSX_BUNDLE ${app_ICONS} ${App_SRC} ${RES_FILES})
 		
 	########################## Add Dependencies ########################

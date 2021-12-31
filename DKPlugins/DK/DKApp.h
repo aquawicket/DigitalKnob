@@ -3,7 +3,6 @@
 #define DKApp_H
 
 #include "DK/DK.h"
-#define USE_AppDelegate 1
 
 class DKApp{
 public:
