@@ -79,6 +79,7 @@ if(WIN) # Disabled for Windows targets
 	DKDISABLE(DKWebSockets)
 	DKDISABLE(freealut)
 	DKDISABLE(freealut-master)
+	DKDISABLE(java)
 	DKDISABLE(jerryscript)
 	DKDISABLE(leptonica)
 	DKDISABLE(libtorrent)
