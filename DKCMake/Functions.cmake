@@ -956,7 +956,7 @@ function(DKEXECUTE_PROCESS commands)
 	DKINFO("")
 	
 	if(WIN_HOST)
-		execute_process(COMMAND cmd /c ${commands} RESULT_VARIABLE result ERROR_VARIABLE error)
+		execute_process(COMMAND ${commands} RESULT_VARIABLE result ERROR_VARIABLE error) #FIXME: Do we always need  cmd /c  here?
 	else()
 		execute_process(COMMAND ${commands} RESULT_VARIABLE result ERROR_VARIABLE error)
 	endif()
@@ -967,7 +967,7 @@ function(DKEXECUTE_PROCESS commands)
 			execute_process(COMMAND sleep 2 WORKING_DIRECTORY ${CURRENT_DIR}) ##wait 2 seconds for the stdout to flush before printing error
 		endif()
 		DKINFO("\n\n")
-		DKERROR("ERROR: ${result} : ${error}\n\n")
+		DKERROR("ERROR: result=${result} error=${error}\n\n")
 	endif()
 endfunction()
 
