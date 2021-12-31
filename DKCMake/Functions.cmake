@@ -2316,8 +2316,10 @@ macro(readonly_guard VAR access value current_list_file stack)   # Watcher for r
 	endif()
 endmacro()
 
-
-
+function(dk_prependFile path string)
+	file(READ "${path}" file_data)
+	file(write "${pah}" "${string}\n${filedata}"
+endfunction()
 
 
 include(${DIGITALKNOB}/DK/DKCMake/Functions_Ext.cmake)
