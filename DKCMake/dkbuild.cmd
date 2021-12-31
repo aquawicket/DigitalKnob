@@ -4,6 +4,7 @@
 @echo off
 if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*) & exit )
 
+:: get digitalknob paths and install CMake if needed
 set "DIGITALKNOB=C:\Users\%USERNAME%\digitalknob"
 set "DKPATH=%DIGITALKNOB%\DK"
 set "DKCMAKE=%DIGITALKNOB%\DK\DKCMake"
@@ -15,6 +16,7 @@ if NOT exist "%CMAKE%" (
 	exit
 )
 
+:: get the info needed to start the project file generation
 set "OS="
 set "CPU="
 :pickos
@@ -38,20 +40,31 @@ goto pickos
 :picktarget
 echo Please type the name of the library, tool or app to build. Then press enter.
 set /p input=
+
+::Search digitalknob for the matching entry containing a DKMAKE.cmake file  
 cd %DIGITALKNOB%
 for /f "delims=" %%a in ('dir /b /s /a-d DKMAKE.cmake ^| findstr /E /R "%input%\\DKMAKE.cmake" ') do set "path=%%a"
 set "target_path=%path:~0,-13%"
-echo %target_path%
+echo target_path = %target_path%
+
+:: Run the cmake configureation on the project
 set "cmnd="%CMAKE%" -G "Visual Studio 17 2022" -A %CPU% -DDEBUG=ON -DRELEASE=ON -DSTATIC=ON -DREBUILDALL=ON -DHAVE_DKDuktape=1 -DTARGET=%input% -DOS=%OS% -S "%DKCMAKE%" -B "%target_path%\%OS%" 
 echo.
 echo %cmnd%
 echo.
 %cmnd%
-"cmd /c "%DKCMAKE%\temp\%input%.cmd"
+
+::A build.bat file is created for the target/os from Options.cmake
+set "app_batch="%target_path%\%OS%"\build.cmd"
+"%app_batch%"
 
 
-::rmdir /Q /S "%DKCMAKE%\temp"
-echo %ERRORLEVEL%
+if NOT "%ERRORLEVEL%" == "0" goto error
+goto end
+
+:error
+echo ERRORLEVEL = %ERRORLEVEL%
 pause
+
 :end
 ECHO Done

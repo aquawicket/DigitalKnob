@@ -1,4 +1,4 @@
-/*
+#if USE_AppDelegate
 #ifdef IOS
 #import "DKApp.h"
 #import "DKClass.h"
@@ -88,4 +88,4 @@
 
 @end
 #endif //IOS
-*/
+#endif USE_AppDelegate
