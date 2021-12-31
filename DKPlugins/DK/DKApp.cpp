@@ -6,6 +6,14 @@
 	#include <boxer/boxer.h>
 #endif
 
+#ifdef IOS
+#ifdef __has_include
+#if __has_include(<SDL_main.h>)
+    #include "SDL_main.h"
+#endif
+#endif
+#endif
+
 int    DKApp::argc;
 char** DKApp::argv;
 bool   DKApp::active = false;
