@@ -17,11 +17,13 @@ std::vector<std::function<void()> > DKApp::loop_funcs;
 int main(int argc, char **argv){
 	DKDEBUGFUNC(argc, argv);
 
+/*
 #if USE_AppDelegate
 	@autoreleasepool{
 		return UIApplicationMain(argc, argv, nil, @"iphoneViewerAppDelegate");
 	}
 #else
+*/
 	//try{
 		DKApp dkapp(argc, argv);
 		DKApp::Init();
@@ -38,7 +40,7 @@ int main(int argc, char **argv){
 	//		}
 	//	}
 	//}
-#endif
+//#endif
 }
 //#endif //!ANDROID
 
