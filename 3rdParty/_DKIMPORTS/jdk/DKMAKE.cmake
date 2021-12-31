@@ -11,8 +11,8 @@
 #DKSET(JDK_VERSION 9.0.4)
 DKSET(JDK_VERSION 8u41-b04)
 
-WIN_HOST_DKSET(JDK_DL https://download.java.net/openjdk/jdk8u41/ri/openjdk-8u41-b04-windows-i586-14_jan_2020.zip)
-#WIN_HOST_DKSET(JDK_DL https://download.java.net/java/GA/jdk9/${JDK_VERSION}/binaries/${JDK_NAME}.tar.gz)
+#WIN_HOST_DKSET(JDK_DL https://download.java.net/openjdk/jdk8u41/ri/openjdk-8u41-b04-windows-i586-14_jan_2020.zip)
+WIN_HOST_DKSET(JDK_DL https://download.java.net/java/GA/jdk9/${JDK_VERSION}/binaries/${JDK_NAME}.tar.gz)
 
 
 MAC_HOST_DKSET(JDK_NAME openjdk-${JDK_VERSION}_osx-x64_bin)
