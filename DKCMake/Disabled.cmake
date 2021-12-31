@@ -235,6 +235,7 @@ if(LINUX) # Disabled for Linux targets
 	DKDISABLE(openal-android)
 	DKDISABLE(openssl)
 	DKDISABLE(podofo)
+	DKDISABLE(sdl-gpu)
 	DKDISABLE(sdl2_mixer)
 	DKDISABLE(sfml)           # sfml_sfml-network)  #TODO: disabling individual sublibraries
 	DKDISABLE(stackwalker)
