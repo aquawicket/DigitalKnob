@@ -2318,7 +2318,7 @@ endmacro()
 
 function(dk_prependFile path string)
 	file(READ "${path}" file_data)
-	file(write "${pah}" "${string}\n${filedata}"
+	file(write "${pah}" "${string}\n${filedata}")
 endfunction()
 
 
