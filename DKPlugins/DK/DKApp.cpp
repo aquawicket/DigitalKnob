@@ -17,9 +17,9 @@ std::vector<std::function<void()> > DKApp::loop_funcs;
 int main(int argc, char **argv){
 	DKDEBUGFUNC(argc, argv);
 
-#if USE_iOSAppDelegate
+#if USE_AppDelegate
 	@autoreleasepool{
-		return UIApplicationMain(argc, argv, nil, @"iOSAppDelegate");
+		return UIApplicationMain(argc, argv, nil, @"AppDelegate");
 	}
 #else
 
