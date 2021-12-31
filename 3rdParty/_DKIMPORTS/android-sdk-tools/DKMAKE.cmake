@@ -22,7 +22,14 @@ DKSET(ANDROIDSDKTOOLS ${ANDROIDSDK}/tools)
 file(MAKE_DIRECTORY ${ANDROIDSDKTOOLS})
 DKINSTALL(${ANDROIDSDKTOOLS_DL} android-sdk-tools ${ANDROIDSDKTOOLS})
 
+# TODO
+#In tools/bin/sdkmanager.bat
+#replace this ...
+#%DEFAULT_JVM_OPTS%
+#with this
+#%DEFAULT_JVM_OPTS% --add-modules java.xml.bind %JAVA_OPTS%
+
 
 #license signing
 #DKDEPEND(java)
-#DKEXECUTE_PROCESS(${ANDROIDSDKTOOLS}/bin/sdkmanager.bat --licenses)
+#DKCOMMAND(${ANDROIDSDKTOOLS}/bin/sdkmanager.bat --licenses)
