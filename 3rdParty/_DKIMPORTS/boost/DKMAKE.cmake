@@ -133,10 +133,10 @@ endforeach()
 ### COMPILE ###
 WIN32_DKSETPATH(${BOOST})
 if(NOT EXISTS ${BOOST}/b2.exe)
-	WIN32_DKQCOMMAND("bootstrap.bat vc143")
+	WIN32_DKQCOMMAND(cmd /c "bootstrap.bat vc143")
 endif()
-WIN32_DEBUG_DKQCOMMAND(b2 toolset=msvc-14.3 address-model=32 variant=debug link=static threading=multi runtime-debugging=on runtime-link=static define=BOOST_ALL_NO_LIB --layout=system ${BOOST_WITH} ${BOOST_WITHOUT} --build-dir=${BOOST}/${OS}/${DEBUG_DIR} --stagedir=${BOOST}/${OS}/${DEBUG_DIR})
-WIN32_RELEASE_DKQCOMMAND(b2 toolset=msvc-14.3 address-model=32 variant=release link=static threading=multi runtime-debugging=off runtime-link=static define=BOOST_ALL_NO_LIB --layout=system ${BOOST_WITH} ${BOOST_WITHOUT} --build-dir=${BOOST}/${OS}/${RELEASE_DIR} --stagedir=${BOOST}/${OS}/${RELEASE_DIR})
+WIN32_DEBUG_DKQCOMMAND(cmd /c b2 toolset=msvc-14.3 address-model=32 variant=debug link=static threading=multi runtime-debugging=on runtime-link=static define=BOOST_ALL_NO_LIB --layout=system ${BOOST_WITH} ${BOOST_WITHOUT} --build-dir=${BOOST}/${OS}/${DEBUG_DIR} --stagedir=${BOOST}/${OS}/${DEBUG_DIR})
+WIN32_RELEASE_DKQCOMMAND(cmd /c b2 toolset=msvc-14.3 address-model=32 variant=release link=static threading=multi runtime-debugging=off runtime-link=static define=BOOST_ALL_NO_LIB --layout=system ${BOOST_WITH} ${BOOST_WITHOUT} --build-dir=${BOOST}/${OS}/${RELEASE_DIR} --stagedir=${BOOST}/${OS}/${RELEASE_DIR})
 
 
 WIN64_DKSETPATH(${BOOST})
