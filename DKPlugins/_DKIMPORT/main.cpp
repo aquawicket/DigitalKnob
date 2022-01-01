@@ -1,3 +1,4 @@
+#include "assets.h"
 #include "DK/DKApp.h"
 
 int main(int argc, char **argv)
