@@ -6,6 +6,7 @@
 	#include <boxer/boxer.h>
 #endif
 
+/*
 #ifdef IOS
 #ifdef __has_include
 #if __has_include(<SDL_main.h>)
@@ -13,6 +14,7 @@
 #endif
 #endif
 #endif
+*/
 
 int    DKApp::argc;
 char** DKApp::argv;
@@ -20,6 +22,7 @@ bool   DKApp::active = false;
 bool   DKApp::paused = false;
 std::vector<std::function<void()> > DKApp::loop_funcs;
 
+/*
 //// MAIN ////
 //#ifndef ANDROID
 int main(int argc, char **argv){
@@ -42,6 +45,7 @@ int main(int argc, char **argv){
 	//}
 }
 //#endif //!ANDROID
+*/
 
 DKApp::DKApp(int _argc, char** _argv){
 	DKDEBUGFUNC(_argc, _argv);
@@ -97,9 +101,9 @@ DKApp::DKApp(int _argc, char** _argv){
 	DKINFO("DKFile::exe_name = " + DKFile::exe_name + "\n");
 	DKINFO("DKFile::app_name = " + DKFile::app_name + "\n");
 	DKClass::DKCreate("DKAssets"); //Nothing will be logged to log.txt until here.
-	if (DKClass::DKAvailable("App")) {
-		DKObject* app = DKClass::DKCreate("App"); //App.h/App.cpp (user code)
-	}
+	//if (DKClass::DKAvailable("App")) {
+	//	DKObject* app = DKClass::DKCreate("App"); //App.h/App.cpp (user code)
+	//}
 	DKClass::DKCreate("DKDuktape");
 	DKClass::DKCreate("DKDebug");
 }

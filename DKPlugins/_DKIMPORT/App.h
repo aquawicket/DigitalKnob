@@ -1,3 +1,4 @@
+/*
 #ifdef HAVE_DK
 #pragma once
 #ifndef App_H
@@ -19,3 +20,4 @@ REGISTER_OBJECT(App, true);
 
 #endif //App_H
 #endif //HAVE_DK
+*/
