@@ -379,7 +379,6 @@ function(DKSETENV name value)
 		if(WIN_HOST)
 			DKINFO("Setting %${name}% environment variable to ${value}")
 			DKEXECUTE_PROCESS(setx ${name} ${value}) # https://stackoverflow.com/a/69246810
-			#DKEXECUTE_PROCESS(setx ${name} \"${value}\")
 		else()
 			DKINFO("DKSETENV() not implemented on this system")
 		endif()
