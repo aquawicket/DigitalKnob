@@ -34,6 +34,19 @@ endif()
 
 set(dkdepend_disable_list "" CACHE INTERNAL "")
 
+function(dk_file_getDigitalknobPath result)
+	get_filename_component(DIGITALKNOB ${CMAKE_SOURCE_DIR} ABSOLUTE)
+	get_filename_component(FOLDER_NAME ${DIGITALKNOB} NAME)
+	while(NOT FOLDER_NAME STREQUAL "digitalknob")
+		get_filename_component(DIGITALKNOB ${DIGITALKNOB} DIRECTORY)
+		get_filename_component(FOLDER_NAME ${DIGITALKNOB} NAME)
+		if(NOT FOLDER_NAME)
+			DKASSERT("Could not locate digitalknob root path")
+		endif()
+	endwhile()
+	set(${result} ${DIGITALKNOB} PARENT_SCOPE) #just relay the result
+endfunction()
+dk_file_getDigitalknobPath(DIGITALKNOB)
 
 macro(updateStack)
 	if(PRINT_CALL_DETAILS)
@@ -66,7 +79,7 @@ macro(updateStack)
 	endif()
 endmacro()
 
-include(Color.cmake)
+include(${DIGITALKNOB}/DK/DKCMake/Color.cmake)
 macro(DKASSERT msg)
 	updateStack()
 	message(FATAL_ERROR "${H_black}${STACK_HEADER}${CLR}${BG_red}${msg}${CLR}")
@@ -102,19 +115,7 @@ macro(DKTRACE msg)
 endmacro()
 
 
-function(dk_file_getDigitalknobPath result)
-	get_filename_component(DIGITALKNOB ${CMAKE_SOURCE_DIR} ABSOLUTE)
-	get_filename_component(FOLDER_NAME ${DIGITALKNOB} NAME)
-	while(NOT FOLDER_NAME STREQUAL "digitalknob")
-		get_filename_component(DIGITALKNOB ${DIGITALKNOB} DIRECTORY)
-		get_filename_component(FOLDER_NAME ${DIGITALKNOB} NAME)
-		if(NOT FOLDER_NAME)
-			DKASSERT("Could not locate digitalknob root path")
-		endif()
-	endwhile()
-	set(${result} ${DIGITALKNOB} PARENT_SCOPE) #just relay the result
-endfunction()
-dk_file_getDigitalknobPath(DIGITALKNOB)
+
 
 
 execute_process(COMMAND ${CMAKE_COMMAND} -E remove ${DIGITALKNOB}/DK/DKCMake/Functions_Ext.cmake)
@@ -363,17 +364,17 @@ endfunction()
 
 
 function(DKSETENV name value)
-	DKINFO("DKSETENV(${name} ${value})")
-
-	DKINFO("ENVname = $ENV{${name}}")
-	DKINFO("value = ${value}")
+	#DKINFO("DKSETENV(${name} ${value})")
+	#DKINFO("ENVname = $ENV{${name}}")
+	#DKINFO("value = ${value}")
 	
+	if(ENV{${name}})
+		string(FIND $ENV{${name}} ${value} index)
+	else()
+		set(index -1)
+	endif()
 	
-	string(FIND $ENV{${name}} ${value} index)
 	if(${index} EQUAL -1)
-	
-	
-	
 	#if(NOT "$ENV{${name}}" STREQUAL "${value}")
 		if(WIN_HOST)
 			DKINFO("Setting %${name}% environment variable to ${value}")
