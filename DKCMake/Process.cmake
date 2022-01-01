@@ -747,9 +747,9 @@ if(IOS OR IOSSIM)
 			
 	###################### Add Assets to Bundle #######################
 	add_custom_command(TARGET ${APP_NAME} PRE_BUILD COMMAND ${CMAKE_COMMAND} -E copy_directory ${DKPROJECT}/assets $<TARGET_FILE_DIR:${APP_NAME}>/assets)
-	if(EXISTS ${DKPROJECT}/icons/mac/icons.icns)
-		add_custom_command(TARGET ${APP_NAME} PRE_BUILD COMMAND ${CMAKE_COMMAND} -E copy ${DKPROJECT}/icons/ios/icons.icns $<TARGET_FILE_DIR:${APP_NAME}>/Resources/icons.icns)
-	endif()
+	#if(EXISTS ${DKPROJECT}/icons/mac/icons.icns)
+	#	add_custom_command(TARGET ${APP_NAME} PRE_BUILD COMMAND ${CMAKE_COMMAND} -E copy ${DKPROJECT}/icons/ios/icons.icns $<TARGET_FILE_DIR:${APP_NAME}>/Resources/icons.icns)
+	#endif()
 	
 	############# Link Libraries, Set Startup Project #################
 	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${LIBS})
