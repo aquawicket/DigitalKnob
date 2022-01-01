@@ -316,9 +316,18 @@ function DKBuildConsole_SelectType() {
 
 function BuildConsole_PostBuildOptions(){
 	console.log("**** Post-Build Options ****")
-	console.log("1. Run "+APP+" Debug Executable")
-	console.log("2. Run "+APP+" Release Executable")
-	console.log("3. Open Generated "+APP+" Solution")
+	let num = 1
+	const exe_path = DKBuildConsole_FindAppExecutablePath(OS, APP, TYPE)
+	if(exe_path){
+		console.log(num+". Run "+APP+" Debug Executable")
+		num++
+		console.log(num+". Run "+APP+" Release Executable")
+		num++
+	}
+	const solution_path = DKBuildConsole_FindAppSolutionPath(OS, APP, TYPE)
+	if(solution_path){
+		console.log(num+". Open Generated "+APP+" Solution")
+	}
 	console.log("0. Back")
 	console.log("ESC. exit")
 	console.log(" Any Other Key To Skip") 
@@ -400,7 +409,7 @@ function DKBuildConsole_Process() {
 	LEVEL  = "RebuildAll";
 }    
 
-function DKBuildConsole_RunApp(os, app, type){
+function DKBuildConsole_FindAppExecutablePath(os, app, type){
 	const app_path = DKBuild_FindAppPath(app)
 	console.log("app_path = "+app_path)
 	if(os === "win32" || os === "win64"){
@@ -417,6 +426,14 @@ function DKBuildConsole_RunApp(os, app, type){
 		return false
 	}
 	const exe_path = app_path+os+"/"+type+"/"+exe_name
+	if(CPP_DKFile_Exists(exe_path)){
+		return exe_Path
+	}
+	return 0
+}
+
+function DKBuildConsole_RunApp(os, app, type){
+	const exe_path = DKBuildConsole_FindAppExecutablePath(os, app, type)
 	if(CPP_DKFile_Exists(exe_path)){
 		CPP_DK_Run('\"'+exe_path+'\"',"")
 		return true
