@@ -50,17 +50,17 @@ compute_host_tag ()
 compute_host_tag
 
   
-  # ---------
-  # Patching
-  # ---------
-  BOOST_VER=${BOOST_VER1}_${BOOST_VER2}_${BOOST_VER3}
-  PATCH_BOOST_DIR="$BOOST/android-patches/boost-${BOOST_VER}"
+# ---------
+# Patching
+# ---------
+BOOST_VER=${BOOST_VER1}_${BOOST_VER2}_${BOOST_VER3}
+PATCH_BOOST_DIR="$BOOST/android-patches/boost-${BOOST_VER}"
 
-  for dir in $PATCH_BOOST_DIR; do
-    if [ ! -d "$dir" ]; then
-      echo "Could not find directory '$dir' while looking for android-patches"
-      exit 1
-    fi
+for dir in $PATCH_BOOST_DIR; do
+	if [ ! -d "$dir" ]; then
+		echo "Could not find directory '$dir' while looking for android-patches"
+		exit 1
+	fi
 
     PATCHES=`(cd $dir && ls *.patch | sort) 2> /dev/null`
 
@@ -70,16 +70,21 @@ compute_host_tag
     fi
 
     for PATCH in $PATCHES; do
-      PATCH=`echo $PATCH | sed -e s%^\./%%g`
-      PATCHDIR=`dirname $PATCH`
-      PATCHNAME=`basename $PATCH`
-      echo "Applying $PATCHNAME into $BOOST_DIR/$PATCHDIR"
-      patch -p1 < $dir/$PATCH
-      if [ $? != 0 ] ; then
-        echo "ERROR: Patch failure !! Please check your android-patches directory!"
-        echo "       Problem patch: $dir/$PATCHNAME"
-        exit 0
-      fi
-    done
-  done
-
+		if grep -Fxq "$PATCH" ${BOOST}/installed
+		then
+			echo "The $PATCHNAME patch has already been applied"
+		else
+			PATCH=`echo $PATCH | sed -e s%^\./%%g`
+			PATCHDIR=`dirname $PATCH`
+			PATCHNAME=`basename $PATCH`
+			echo "Applying $PATCHNAME into $BOOST_DIR/$PATCHDIR"
+			patch -p1 < $dir/$PATCH
+			echo "$PATCH" >> ${BOOST}/installed
+			if [ $? != 0 ] ; then
+				echo "ERROR: Patch failure !! Please check your android-patches directory!"
+				echo "Problem patch: $dir/$PATCHNAME"
+				exit 1
+			fi
+		fi
+	done
+done

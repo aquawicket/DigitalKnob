@@ -179,5 +179,5 @@ macro(printStyleChart)
 	message(      "${ESC_10}     ESC_10        ${CLR}")
 endmacro()
 
-#printColorChart()
-#printStyleChart()
+# printColorChart()
+# printStyleChart()
