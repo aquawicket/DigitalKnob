@@ -43,9 +43,11 @@ LINUX_HOST_DKSET(ANDROIDNDK_DL https://dl.google.com/android/repository/android-
 #LINUX_HOST_DKSET(ANDROIDNDK_DL https://dl.google.com/android/repository/android-ndk-r23b-linux-x86_64.zip)
 
 DKSET(ANDROIDNDK ${3RDPARTY}/android-sdk/ndk/${ANDROIDNDK_BUILD})
-DKSETENV("NDK_ROOT" ${ANDROIDNDK})
-DKSETENV("VS_NdkRoot" ${ANDROIDNDK})
+
 
 ### INSTALL ###
 file(MAKE_DIRECTORY ${3RDPARTY}/android-sdk/ndk)
 DKINSTALL(${ANDROIDNDK_DL} android-ndk ${ANDROIDNDK})
+
+DKSETENV("NDK_ROOT" ${ANDROIDNDK})
+DKSETENV("VS_NdkRoot" ${ANDROIDNDK})

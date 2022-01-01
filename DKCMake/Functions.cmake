@@ -66,7 +66,7 @@ macro(updateStack)
 	endif()
 endmacro()
 
-
+include(Color.cmake)
 macro(DKASSERT msg)
 	updateStack()
 	message(FATAL_ERROR "${H_black}${STACK_HEADER}${CLR}${BG_red}${msg}${CLR}")
@@ -362,6 +362,8 @@ endfunction()
 
 function(DKSETENV name value)
 	DKINFO("DKSETENV(${name} ${value})")
+	DKINFO("ENV{{name}}} = ${ENV{${name}}}")
+	DKINFO("value = ${value}")
 	if(NOT "$ENV{${name}}" STREQUAL "${value}")
 		if(WIN_HOST)
 			DKINFO("Setting %${name}% environment variable to ${value}")
