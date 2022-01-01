@@ -1,5 +1,5 @@
-#include "assets.h"
 #include "DK/DKApp.h"
+#include "assets.h"
 
 int main(int argc, char **argv)
 {
