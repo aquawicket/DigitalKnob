@@ -141,15 +141,13 @@ bool DKDomWindow::Init()
 	DKDuktape::AttachFunction("CPP_DKDomWindow_showModalDialog", DKDomWindow::showModalDialog);
 
 	
-	
+	/*
 	// TEST GREATING A GLOBAL OBJECT, later to be used to create the global Window object
 	// https://github.com/svaarala/duktape/blob/master/tests/api/test-set-global-object.c
 	/////////////////////////////////////////////////////////////////////////////////////
 	
-
-	
-     //First, build a new global object which contains a few keys we want to see.
-#include "DKDuktape.h"
+    //First, build a new global object which contains a few keys we want to see.
+	#include "DKDuktape.h"
 	DKDuktape* dt = DKDuktape::Get();
 	printf("build replacement global object\n");
 	duk_eval_string(dt->ctx,
@@ -180,7 +178,7 @@ bool DKDomWindow::Init()
 	duk_eval_string_noresult(dt->ctx, "print('testName:', testName);\n");
 	printf("final top: %ld\n", (long)duk_get_top(dt->ctx));
 	///////////////////////////////////////////////////////////////////////////////
-	
+	*/
 	
 
 	// Javascript bindings
