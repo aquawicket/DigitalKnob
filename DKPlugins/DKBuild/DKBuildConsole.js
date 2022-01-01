@@ -319,9 +319,7 @@ function BuildConsole_PostBuildOptions(){
 	let num = 1
 	const exe_path = DKBuildConsole_FindAppExecutablePath(OS, APP, TYPE)
 	if(exe_path){
-		console.log(num+". Run "+APP+" Debug Executable")
-		num++
-		console.log(num+". Run "+APP+" Release Executable")
+		console.log(num+". Launch "+APP+" Executable")
 		num++
 	}
 	const solution_path = DKBuildConsole_FindAppSolutionPath(OS, APP, TYPE)
@@ -349,10 +347,6 @@ function BuildConsole_PostBuildOptions(){
 			DKBuildConsole_RunApp(OS, APP, "Debug")
 			break
 		case 50: //2
-			console.log("-> Run "+APP+" Release Executable")
-			DKBuildConsole_RunApp(OS, APP, "Release")
-			break
-		case 51: //3
 			console.log("-> Open Generated "+APP+" Soluton")
 			DKBuildConsole_OpenAppSolution(OS, APP)
 			break
@@ -411,7 +405,6 @@ function DKBuildConsole_Process() {
 
 function DKBuildConsole_FindAppExecutablePath(os, app, type){
 	const app_path = DKBuild_FindAppPath(app)
-	console.log("app_path = "+app_path)
 	if(os === "win32" || os === "win64"){
 		const exe_name = app+".exe"
 	}
@@ -425,11 +418,38 @@ function DKBuildConsole_FindAppExecutablePath(os, app, type){
 		console.log("the OS ("+os+") is not implemented")
 		return false
 	}
+	
+	if(type === "ALL")
+		type = "Release"
 	const exe_path = app_path+os+"/"+type+"/"+exe_name
+	
+	console.log("exe_path = "+exe_path)
 	if(CPP_DKFile_Exists(exe_path)){
-		return exe_Path
+		return exe_path
 	}
 	return 0
+}
+
+function DKBuildConsole_FindAppSolutionPath(os, app, type){
+	const app_path = DKBuild_FindAppPath(app)
+	let solution_path
+	if(os === "win32" || os === "win64"){
+		solution_path = app_path+os+"/"+app+".sln"
+	}
+	else if(os === "mac32" || os === "mac64"){
+		solution_path = app_path+os+"/"+app+".xcodeproj"
+	}
+	else if(os === "linux32" || os === "linux64" || os === "raspberry32" || os === "raspberry64"){
+		console.error("the OS ("+os+") is not implemented")
+	}
+	else{
+		console.error("the OS ("+os+") is not implemented")
+		return false
+	}
+	console.log("solution_path = "+solution_path)
+	if(CPP_DKFile_Exists(solution_path)){
+		return solution_path
+	}
 }
 
 function DKBuildConsole_RunApp(os, app, type){
