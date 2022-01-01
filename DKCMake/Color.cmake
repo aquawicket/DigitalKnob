@@ -1,4 +1,6 @@
 # https://en.wikipedia.org/wiki/ANSI_escape_code#Colors
+# 
+# ←[0m←[37m     if these kinda symbols show up, color is not working 
 
 string(ASCII 27 ESC)
 set(CLR         "${ESC}[0m")    #reset color
