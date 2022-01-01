@@ -2,6 +2,7 @@
 #ifndef DKSDLWindow_H
 #define DKSDLWindow_H
 
+#define SDL_MAIN_HANDLED 1
 #include "SDL.h"
 #include "DK/DK.h"
 
