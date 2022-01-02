@@ -48,7 +48,7 @@ function(dk_file_getDigitalknobPath result)
 endfunction()
 dk_file_getDigitalknobPath(DIGITALKNOB)
 
-macro(updateStack)
+macro(updateLogInfo)
 	if(PRINT_CALL_DETAILS)
 		set(STACK_HEADER "")
 		if(NOT CMAKE_CURRENT_FUNCTION_LIST_FILE)
@@ -79,37 +79,42 @@ macro(updateStack)
 	endif()
 endmacro()
 
+
+####  message log
 include(${DIGITALKNOB}/DK/DKCMake/Color.cmake)
 macro(DKASSERT msg)
-	updateStack()
+	updateLogInfo()
 	message(FATAL_ERROR "${H_black}${STACK_HEADER}${CLR}${BG_red}${msg}${CLR}")
-endmacro()
-macro(DKERROR msg)
-	updateStack()
-	#message(SEND_ERROR "${H_black}${STACK_HEADER}${CLR}${red}${msg}${CLR}")
 	message(FATAL_ERROR "${H_black}${STACK_HEADER}${CLR}${red}${msg}${CLR}")
 	dk_exit()
 endmacro()
+macro(DKERROR msg)
+	updateLogInfo()
+	#message(SEND_ERROR "${H_black}${STACK_HEADER}${CLR}${red}${msg}${CLR}")
+	message(FATAL_ERROR "${H_black}${STACK_HEADER}${CLR}${red}${msg}${CLR}")
+	dk_exit()
+	Wait()
+endmacro()
 macro(DKWARN msg)
-	updateStack()
+	updateLogInfo()
 	message(WARNING "${H_black}${STACK_HEADER}${CLR}${yellow}${msg}${CLR}")
 endmacro()
 macro(DKINFO msg)
-	updateStack()
+	updateLogInfo()
 	message(STATUS "${H_black}${STACK_HEADER}${CLR}${white}${msg}${CLR}")
 endmacro()
 macro(DKDEBUG msg)
-	updateStack()
+	updateLogInfo()
 	#message(DEBUG "${H_black}${STACK_HEADER}${CLR}${cyan}${msg}${CLR}")  # DEBUG FLAG NOT WORKING
 	message(STATUS "${H_black}${STACK_HEADER}${CLR}${cyan}${msg}${CLR}")
 endmacro()
 macro(DKVERBOSE msg)
-	updateStack()
+	updateLogInfo()
 	#message(VERBOSE "${H_black}${STACK_HEADER}${CLR}${magenta}${msg}${CLR}") # VERBOSE FLAG NOT WORKING
 	message(STATUS "${H_black}${STACK_HEADER}${CLR}${magenta}${msg}${CLR}")
 endmacro()
 macro(DKTRACE msg)
-	updateStack()
+	updateLogInfo()
 	#message(TRACE "${H_black}${STACK_HEADER}${CLR}${B_blue}${msg}${CLR}") # TRACE FLAG NOT WORKING
 	message(WARNING "${H_black}${STACK_HEADER}${CLR}${B_blue}${msg}${CLR}")
 endmacro()
@@ -217,16 +222,9 @@ function(AliasFunctions name)
 endfunction()
 
 
-## Create a dynamic named functions
-#function(CreateFunction name)
-#	cmake_language(EVAL CODE "function(${name})\n DKINFO(\"${name}(\${ARGV})\")\n endfunction()")
-#endfunction()
-#CreateFunction("MyDynamicFunc")
-#MyDynamicFunc("string" 15)
-
-
 # dk_string_has
 function(dk_includes str substr result)
+	
 	string(FIND "${str}" "${substr}" index)
 	if(${index} GREATER -1)
 		set(${result} true PARENT_SCOPE)
@@ -266,20 +264,56 @@ endmacro()
 #####################################################################
 ###################         DKFUNCTIONS           ###################
 #####################################################################
-## TODO:    https://foonathan.net/2016/03/cmake-install/ 
+## TOREAD:    https://foonathan.net/2016/03/cmake-install/ 
 
-## Example function that uses a result variable to retrun a value
-# MyFunc("ABC" "123" 5 myResult)
-# DKINFO("return value = ${myResult}") # should print->  return value = ABC;123;5
-function(MyFunc args result)
-	set(args ${ARGV})
-	list(GET args -1 result)
-	list(REMOVE_AT args -1)
-	#work with ${args} and set ${result} here
-	set(${result} ${args} PARENT_SCOPE) #just relay the arguments
-endfunction()
+# TestReturnValue(args result)
+#####################################################
+# 	Example function that uses returns value with a supplied variable 
+# Implementation: 
+	function(TestReturnValue args result)
+		set(args ${ARGV})
+		list(GET args -1 result)
+		list(REMOVE_AT args -1)
+		set(${result} ${args} PARENT_SCOPE) #just relay the arguments
+	endfunction()
 
+# Usage:
+	TestReturnValue("ABC" "123" 5 myResult)
+	message(STATUS "TestReturnValue() -> myResult = ${myResult}") # should print->  return value = ABC;123;5
+#####################################################
 
+# CreateFunction(name contents args)
+######################################################
+# 	Example that creates functions dynamicaly at run time
+# Implementation:	
+	function(CreateFunction name contents args)
+		if(CMAKE_VERSION VERSION_LESS 3.18)
+			if(NOT extFileCleared CACHE INTERNAL "")
+				file(WRITE ext_functions.cmake "")
+				set(extFileCleared)
+			endif()
+			file(APPEND ext_functions.cmake "function(${name})\n${contents}\nendfunction()")
+			include(ext_functions.cmake)
+		else()
+			cmake_language(EVAL CODE "function(${name})\n${contents}\nendfunction()")
+		endif()	
+	endfunction()
+	
+# Usage:
+	CreateFunction("MyDynamicFunc"  
+		message(STATUS "\n ARG : ${arg} \n")
+		"foreach(arg IN LIST ${ARGN}) \n\
+			set(count 0) \n\
+			message(STATUS \"arg:${count} = ${arg}\") \n\
+			MATH(EXPR count \"${cound}+1\") \n\
+		endforeach()"
+	)
+	
+	set(myVariable "myVariable")
+	MyDynamicFunc("myStringData" "My;List;Data" "${myVariable}" 17 moreData)
+##################################################
+
+# 
 macro(Wait)
 	dk_getFilename(${CMAKE_CURRENT_FUNCTION_LIST_FILE} FILENAME)
 	DKINFO("${FILENAME}:${CMAKE_CURRENT_FUNCTION_LIST_LINE} -> ${CMAKE_CURRENT_FUNCTION}(${ARGV})")
@@ -854,7 +888,8 @@ function(DKINSTALL src_path import_name dest_path)
 	string(FIND ${src_filename_lower} ${import_name} index)
 	if(${index} EQUAL -1)
 		DKDEBUG("The download filename ${src_filename} does not contaian the import name ${import_name}")
-		string(FIND ${dest_filename} ${import_name} index)
+		string(TOLOWER ${dest_filename} dest_filename_lower)
+		string(FIND ${dest_filename_lower} ${import_name} index)
 		if(${index} EQUAL -1)
 			set(dl_filename "${import_name}-${dest_filename}${src_extension}") 
 		else()
