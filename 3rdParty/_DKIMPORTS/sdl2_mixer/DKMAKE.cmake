@@ -15,7 +15,7 @@ DKSET(SDLMIXER_DL https://www.libsdl.org/projects/SDL_mixer/release/SDL2_mixer-$
 
 
 ### INSTALL ###
-DKINSTALL(SDLMIXER_DL SDL2_mixer ${SDLMIXER})
+DKINSTALL(SDLMIXER_DL sdl2_mixer ${SDLMIXER})
 
 
 
