@@ -130,6 +130,7 @@ if(MAC)  # Disabled on Mac host machines
 	DKDISABLE(libxml2)
 	DKDISABLE(lighttpd)
 	DKDISABLE(lua)
+	DKDISABLE(mlocate)
 	DKDISABLE(mobile_core_services)
 	DKDISABLE(openal-android)
 	DKDISABLE(openssl)
