@@ -270,56 +270,58 @@ endmacro()
 #####################################################
 # 	Example function that uses returns value with a supplied variable 
 # Implementation: 
-	function(TestReturnValue args result)
-		set(args ${ARGV})
-		list(GET args -1 result)
-		list(REMOVE_AT args -1)
-		set(${result} ${args} PARENT_SCOPE) #just relay the arguments
-	endfunction()
-
+#	function(TestReturnValue args result)
+#		set(args ${ARGV})
+#		list(GET args -1 result)
+#		list(REMOVE_AT args -1)
+#		set(${result} ${args} PARENT_SCOPE) #just relay the arguments
+#	endfunction()
+#
 # Usage:
-	TestReturnValue("ABC" "123" 5 myResult)
-	message(STATUS "TestReturnValue() -> myResult = ${myResult}") # should print->  return value = ABC;123;5
+#	TestReturnValue("ABC" "123" 5 myResult)
+#	message(STATUS "TestReturnValue() -> myResult = ${myResult}") # should print->  return value = ABC;123;5
 #####################################################
 
 # CreateFunction(name contents args)
 ######################################################
 # 	Example that creates functions dynamicaly at run time
 # Implementation:	
-	function(CreateFunction name contents args)
-		if(CMAKE_VERSION VERSION_LESS 3.18)
-			if(NOT extFileCleared CACHE INTERNAL "")
-				file(WRITE ext_functions.cmake "")
-				set(extFileCleared)
-			endif()
-			file(APPEND ext_functions.cmake "function(${name})\n${contents}\nendfunction()")
-			include(ext_functions.cmake)
-		else()
-			cmake_language(EVAL CODE "function(${name})\n${contents}\nendfunction()")
-		endif()	
-	endfunction()
+#	function(CreateFunction name contents) #args)
+#		if(CMAKE_VERSION VERSION_LESS 3.18)
+#			if(NOT extFileCleared)
+#				file(WRITE ext_functions.cmake "")
+#				set(extFileCleared 1 CACHE INTERNAL "")
+#			endif()
+#			file(APPEND ext_functions.cmake "function(${name}) ${contents} \nendfunction() \n")
+#			include(ext_functions.cmake)
+#		else()
+#			cmake_language(EVAL CODE "function(${name}) \n${contents} endfunction()")
+#		endif()	
+#	endfunction()
 	
 # Usage:
-	CreateFunction("MyDynamicFunc"  
-		message(STATUS "\n ARG : ${arg} \n")
-		"foreach(arg IN LIST ${ARGN}) \n\
-			set(count 0) \n\
-			message(STATUS \"arg:${count} = ${arg}\") \n\
-			MATH(EXPR count \"${cound}+1\") \n\
-		endforeach()"
-	)
-	
-	set(myVariable "myVariable")
-	MyDynamicFunc("myStringData" "My;List;Data" "${myVariable}" 17 moreData)
+#	CreateFunction(MyDynamicFunc 
+#		"message(STATUS \"Test message\")") 
+#		"foreach(arg IN LIST ${ARGN})
+#			set(count 0) 
+#			message(STATUS \"arg:${count} = ${arg}\")
+#			MATH(EXPR count \"${cound}+1\")
+#		endforeach()"
+#		${ARGN}
+#	)
+#	
+#	set(myVariable "myVariable")
+#	MyDynamicFunc("myStringData" "My;List;Data" "${myVariable}" 17 moreData)
 ##################################################
 
-# 
+# Wait(message)  
+#############################
+# Wait until keypress or timeout (60 seconds). The 'message' parameter is optional
 macro(Wait)
-	dk_getFilename(${CMAKE_CURRENT_FUNCTION_LIST_FILE} FILENAME)
-	DKINFO("${FILENAME}:${CMAKE_CURRENT_FUNCTION_LIST_LINE} -> ${CMAKE_CURRENT_FUNCTION}(${ARGV})")
+	DKDEBUG("Wait(${ARGV})")
 	set(msg ${ARGV})
 	if(NOT msg)
-		set(msg "press and key to continue")
+		set(msg "press and key to continue") #default
 	endif()
 	if(WIN_HOST)	
 		execute_process(COMMAND cmd /c echo ${msg} && timeout /t 60 > nul WORKING_DIRECTORY C:/)

@@ -8,4 +8,4 @@ endif()
 ### INSTALL ###
 DKSET(CURRENT_DIR /usr)
 DKCOMMAND(sudo apt -y install mlocate)
-sudo updatedb
+DKCOMMAND(sudo updatedb)
