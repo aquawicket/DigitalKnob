@@ -2,20 +2,20 @@
 
 ### DEPENDS ###
 DKDEPEND(smpeg2)
-IF(NOT WIN_64)
-	DKDEPEND(libogg)
-	DKDEPEND(libvorbis)
-ENDIF()
+DKDEPEND(libogg)
+DKDEPEND(libvorbis)
+
 
 
 ### VERSION ###
 DKSET(SDLMIXER_VERSION 2.0.1)
 DKSET(SDLMIXER ${3RDPARTY}/SDL2_mixer-${SDLMIXER_VERSION})
+DKSET(SDLMIXER_DL https://www.libsdl.org/projects/SDL_mixer/release/SDL2_mixer-${SDLMIXER_VERSION}.zip)
 
 
 
 ### INSTALL ###
-DKINSTALL(https://www.libsdl.org/projects/SDL_mixer/release/SDL2_mixer-${SDLMIXER_VERSION}.zip SDL2_mixer ${SDLMIXER})
+DKINSTALL(SDLMIXER_DL SDL2_mixer ${SDLMIXER})
 
 
 
@@ -33,9 +33,11 @@ ANDROID_DEBUG_DKLIB(${SDLMIXER}/${OS}/${DEBUG_DIR}/obj/local/armeabi-v7a/libSDL2
 ANDROID_RELEASE_DKLIB(${SDLMIXER}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/libSDL2_mixer.a)
 
 
+
 ### COMPILE ###
 DKSETPATH(${SDLMIXER}/${OS})
 DKQCOMMAND(${DKCMAKE_BUILD} ${SDL2_CMAKE} ${VORBIS_CMAKE} ${OGG_INCLUDE} ${SMPEG2_CMAKE} ${SDLMIXER})
+
 
 
 WIN_VS(${SDLMIXER_NAME} SDLMIXER.sln SDLMIXER)
