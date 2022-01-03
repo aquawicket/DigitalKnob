@@ -1,4 +1,4 @@
-DKDEPEND(php-win32-vs16-x64)
+DKDEPEND(php_binary)
 
 DKCOPY(${PHP}/php.exe ${DKPLUGINS}/DKPhp/php.exe TRUE)
 DKCOPY(${PHP}/php8ts.dll ${DKPLUGINS}/DKPhp/php8ts.dll TRUE)
