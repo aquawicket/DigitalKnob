@@ -100,8 +100,7 @@ function DKBuildConsole_ChooseUpdate() {
 		//x key
 		case 120:
 			console.log("-> Reset Everything")
-			DKBuild_Reset3rdParty()
-			DKBuild_ResetAppsPlugins()
+			DKBuild_ResetEverything()
 			DKGit_GitUpdate()
 			break
 		//y key	

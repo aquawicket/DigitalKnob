@@ -259,13 +259,12 @@ function DKBuild_ResetAppsPlugins(){
 	}
 }
 
-function DKBuild_Reset3rdParty(){
+function DKBuild_ResetEverything(){
 	let contents = CPP_DKFile_DirectoryContents(DIGITALKNOB)
 	let items = contents.split(",")
 	for(let n=0; n<items.length; n++){
 		if(CPP_DKFile_Exists(DIGITALKNOB+items[n]+"/.git")){
-			if(CPP_DKFile_Exists(DIGITALKNOB+items[n]+"/3rdParty"))
-					DKGit_CleanFolder(DIGITALKNOB+items[n]+"/3rdParty")
+			DKGit_CleanFolder(DIGITALKNOB+items[n])
 		}
 	}
 }
