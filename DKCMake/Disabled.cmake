@@ -92,6 +92,7 @@ if(WIN) # Disabled for Windows targets
 	DKDISABLE(opensles)
 	DKDISABLE(podofo)
 	DKDISABLE(tesseract)
+	DKDISABLE(tiff)
 	DKDISABLE(uwebsockets)
 	DKDISABLE(waave)
 endif()

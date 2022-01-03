@@ -1,16 +1,19 @@
+# https://github.com/htacg/tidy-html5
+#
 # https://github.com/htacg/tidy-html5/archive/5.7.28.zip
 
 ### VERSION ###
 DKSET(TIDY_MAJOR 5)
 DKSET(TIDY_MINOR 8)
 DKSET(TIDY_BUILD 0)
-DKSET(TIDY_VERSION ${TIDY_MAJOR}.${TIDY_MINOR}.${TIDY_BUILD})
-DKSET(TIDY_NAME tidy_html5_${TIDY_VERSION})
-DKSET(TIDY_DL https://github.com/htacg/tidy-html5/archive/refs/tags/${TIDY_MAJOR}.${TIDY_MINOR}.${TIDY_BUILD}.zip)
-DKSET(TIDY ${3RDPARTY}/${TIDY_NAME})
+DKSET(TIDY_DL https://github.com/htacg/tidy-html5/archive/5.7.28.zip)
+
 
 
 ### INSTALL ###
+DKSET(TIDY_VERSION ${TIDY_MAJOR}.${TIDY_MINOR}.${TIDY_BUILD})
+DKSET(TIDY_NAME tidy_html5_${TIDY_VERSION})
+DKSET(TIDY ${3RDPARTY}/${TIDY_NAME})
 DKINSTALL(${TIDY_DL} tidy-html5 ${TIDY})
 
 
@@ -36,7 +39,7 @@ ANDROID_RELEASE_DKLIB(${TIDY}/${OS}/${RELEASE_DIR}/libtidy.a)
 
 ### COMPILE ###
 DKSETPATH(${TIDY}/${BUILD_DIR})
-DKQCOMMAND(${DKCMAKE_BUILD} ${ZLIB_CMAKE} ${TIDY})
+DKQCOMMAND(${DKCMAKE_BUILD} -DBUILD_SHARED_LIB=OFF ${ZLIB_CMAKE} ${TIDY})
 
 
 WIN_VS(${TIDY_NAME} tidy.sln tidy-static)
