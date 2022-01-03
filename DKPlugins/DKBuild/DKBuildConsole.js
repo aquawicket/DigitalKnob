@@ -439,10 +439,12 @@ function DKBuildConsole_FindAppSolutionPath(os, app, type){
 		solution_path = app_path+os+"/"+app+".xcodeproj"
 	}
 	else if(os === "linux32" || os === "linux64" || os === "raspberry32" || os === "raspberry64"){
-		console.error("the OS ("+os+") is not implemented")
+		//solution_path = app_path+os+"/"+app+".xcodeproj"
+		console.warn("the OS ("+os+") is not implemented")
+		return false
 	}
 	else{
-		console.error("the OS ("+os+") is not implemented")
+		console.warn("the OS ("+os+") is not implemented")
 		return false
 	}
 	console.log("solution_path = "+solution_path)
