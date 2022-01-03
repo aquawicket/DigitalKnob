@@ -19,7 +19,7 @@ HINSTANCE DKWindows::hInstance = 0L;
 HWND DKWindows::consoleWindow;
 
 
-int main(int argc, char **argv);
+extern int main(int argc, char **argv);
 
 //////////// WIN32 MAIN //////////////////////////////////////////////////////////////////////////
 int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLine, int nCmdShow) {

@@ -1,5 +1,7 @@
 :: Build a Visual Studio 17 2022 installer from 2022.vsconfig file
-@echo off 
+@echo off
+if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*) & exit )
+
 setlocal enabledelayedexpansion
 
 set "dkdownload=C:\Users\%USERNAME%\digitalknob\Download"

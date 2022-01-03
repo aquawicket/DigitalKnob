@@ -34,12 +34,13 @@ if(TARGET)
 		dk_exit()
 	endif()
 	DKINFO("found ${TARGET}:(${target_type}) at ${target_path}")
-	#DKSET(BYPASS_DISABLE ON)
+	DKSET(BYPASS_DISABLE ON)
 	DKSET(QUEUE_BUILD ON)
 	WIN_DKDEPEND(visualstudio)
 	#if(NOT "${target_type}" STREQUAL "DKAPP")
 	#	DKDEPEND(${TARGET})
 	#else()
+		project(${TARGET})
 		DKSET(DKAPP 1)
 		file(WRITE ${DKCMAKE}/temp/${TARGET}.cmd "\"${MSBUILD}\" ${CMAKE_BINARY_DIR}/DigitalKnob.sln /p:Configuration=Release\n")
 		file(APPEND ${DKCMAKE}/temp/${TARGET}.cmd "${CMAKE_BINARY_DIR}/${RELEASE_DIR}/${TARGET}.exe")
@@ -202,9 +203,54 @@ if(${index} GREATER -1)
 	DKSET(CMAKE_SKIP_RPATH ON)
 	string(REPLACE "/iossim64" "" DKPROJECT ${CMAKE_BINARY_DIR})
 endif()
+
+
+###########################################################################################
+###########################################################################################
+## NOTICE ##
+## WORK IN PROGRESS ##
+## Working to consolidate and remove the need for seperate raspberry pi functions
+## The build setup is almost Identicle to linux. We will try to compile Rpi by excluding
+## the RASPBERRY flag variables in place of the LINUX functions. In this conversion,
+## Raspberry will listen to LINUX 32/64 and RPI 32/34.   The RASPBERRY flags will do nothing
+## and we should be able to remove them once everythng is working.
+string(FIND "${CMAKE_BINARY_DIR}" "/raspberry32" index)
+if(${index} GREATER -1)
+	DKINFO("*** Creating RASPBERRY x32 Project Files ***")
+	DKSET(RASPBERRY ON)     #To be disabled
+	DKSET(RASPBERRY_32 ON)  #To be disabled
+	#DKSET(LINUX ON)
+	#DKSET(LINUX32 ON)
+	DKSET(RPI ON)
+	DKSET(RPI32 ON)
+	DKSET(OS "raspberry32")
+	DKSET(DEBUG_DIR Debug)
+	DKSET(RELEASE_DIR Release)
+	string(REPLACE "/raspberry32" "" DKPROJECT ${CMAKE_BINARY_DIR})
+endif()
+string(FIND "${CMAKE_BINARY_DIR}" "/raspberry64" index)
+if(${index} GREATER -1)
+	DKINFO("*** Creating Raspberry x64 Project Files ***")
+	DKSET(RASPBERRY ON)     #To be disabled
+	DKSET(RASPBERRY_64 ON)  #To be disabled
+	#DKSET(LINUX ON)
+	#DKSET(LINUX64 ON)
+	DKSET(RPI ON)
+	DKSET(RPI64 ON)
+	DKSET(OS "raspberry64")
+	DKSET(DEBUG_DIR Debug)
+	DKSET(RELEASE_DIR Release)
+	string(REPLACE "/raspberry64" "" DKPROJECT ${CMAKE_BINARY_DIR})
+endif()
+#########################################################################################
+#########################################################################################
+
+
+
 string(FIND "${CMAKE_BINARY_DIR}" "/linux32" index)
 if(${index} GREATER -1)
 if(NOT RASPBERRY)
+if(NOT RPI)
 	DKINFO("*** Creating Linux x32 Project Files ***")
 	DKSET(LINUX ON)
 	DKSET(LINUX_32 ON)
@@ -214,9 +260,11 @@ if(NOT RASPBERRY)
 	string(REPLACE "/linux32" "" DKPROJECT ${CMAKE_BINARY_DIR})
 endif()
 endif()
+endif()
 string(FIND "${CMAKE_BINARY_DIR}" "/linux64" index)
 if(${index} GREATER -1)
 if(NOT RASPBERRY)
+if(NOT RPI)
 	DKINFO("*** Creating Linux x64 Project Files ***")
 	DKSET(LINUX ON)
 	DKSET(LINUX_64 ON)
@@ -226,26 +274,12 @@ if(NOT RASPBERRY)
 	string(REPLACE "/linux64" "" DKPROJECT ${CMAKE_BINARY_DIR})
 endif()
 endif()
-string(FIND "${CMAKE_BINARY_DIR}" "/raspberry32" index)
-if(${index} GREATER -1)
-	DKINFO("*** Creating RASPBERRY x32 Project Files ***")
-	DKSET(RASPBERRY ON)
-	DKSET(RASPBERRY_32 ON)
-	DKSET(OS "raspberry32")
-	DKSET(DEBUG_DIR Debug)
-	DKSET(RELEASE_DIR Release)
-	string(REPLACE "/raspberry32" "" DKPROJECT ${CMAKE_BINARY_DIR})
 endif()
-string(FIND "${CMAKE_BINARY_DIR}" "/raspberry64" index)
-if(${index} GREATER -1)
-	DKINFO("*** Creating Raspberry x64 Project Files ***")
-	DKSET(RASPBERRY ON)
-	DKSET(RASPBERRY_64 ON)
-	DKSET(OS "raspberry64")
-	DKSET(DEBUG_DIR Debug)
-	DKSET(RELEASE_DIR Release)
-	string(REPLACE "/raspberry64" "" DKPROJECT ${CMAKE_BINARY_DIR})
-endif()
+
+
+
+
+
 string(FIND "${CMAKE_BINARY_DIR}" "/android32" index)
 if(${index} GREATER -1)
 	DKINFO("*** Creating Android x32 Project Files ***")

@@ -6,6 +6,6 @@ endif()
 
 FIND_LIBRARY(CoreHaptics_lib CoreHaptics)
 if(NOT CoreHaptics_lib)
-	message(WARNING "Could not locate CoreHaptics framework")
+	DKWARN("Could not locate CoreHaptics framework")
 endif()
 APPLE_DKLIB(${CoreHaptics_lib})

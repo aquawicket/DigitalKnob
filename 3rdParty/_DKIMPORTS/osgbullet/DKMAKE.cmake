@@ -76,40 +76,40 @@ ENDIF(osgdb_sgb)
 
 
 ### COMPILE ###
-DKSETPATH(${OSGBULLET}/${OS})
-WIN32_DKQCOMMAND(${CMAKE_EXE} -G ${GENERATOR} "-DCMAKE_CXX_FLAGS=/DWIN32 /D_WINDOWS /W3 /nologo /GR /EHsc /DOSG_LIBRARY_STATIC /DOSGWORKS_STATIC" "-DCMAKE_CXX_FLAGS_DEBUG=/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG" "-DCMAKE_CXX_FLAGS_RELEASE=/MT /O2 /Ob2 /DNDEBUG" "-DOSGInstallType=Source And Build Tree" -DOSGBuildRoot=${OSG}/${OS} -DOSGSourceRoot=${OSG} "-DBulletInstallType=Source And Build Tree" -DBulletBuildRoot=${BULLET}/${OS} -DBulletSourceRoot=${BULLET} -DosgWorks_DIR=${OSGWORKS}/${OS}/lib -DBUILD_SHARED_LIBS=OFF -DOSGBULLET_BUILD_APPLICATIONS=OFF -DOSGBULLET_BUILD_EXAMPLES=OFF -DOSGBULLET_INSTALL_DATA=OFF ${OSGBULLET})
-WIN32_DEBUG_VS(osgbullet-master osgBullet.sln)
-WIN32_RELEASE_VS(osgbullet-master osgBullet.sln)
+DKSETPATH(${OSGBULLET}/${BUILD_DIR})
 
-DKSETPATH(${OSGBULLET}/${OS})
-WIN64_DKQCOMMAND(${CMAKE_EXE} -G ${X64GENERATOR} "-DCMAKE_CXX_FLAGS=/DWIN32 /D_WINDOWS /W3 /nologo /GR /EHsc /DOSG_LIBRARY_STATIC /DOSGWORKS_STATIC" "-DCMAKE_CXX_FLAGS_DEBUG=/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG" "-DCMAKE_CXX_FLAGS_RELEASE=/MT /O2 /Ob2 /DNDEBUG" "-DOSGInstallType=Source And Build Tree" -DOSGBuildRoot=${OSG}/${OS} -DOSGSourceRoot=${OSG} "-DBulletInstallType=Source And Build Tree" -DBulletBuildRoot=${BULLET}/${OS} -DBulletSourceRoot=${BULLET} -DosgWorks_DIR=${OSGWORKS}/${OS}/lib -DBUILD_SHARED_LIBS=OFF -DOSGBULLET_BUILD_APPLICATIONS=OFF -DOSGBULLET_BUILD_EXAMPLES=OFF -DOSGBULLET_INSTALL_DATA=OFF ${OSGBULLET})
-WIN64_DEBUG_VS(osgbullet-master osgBullet.sln)
-WIN64_RELEASE_VS(osgbullet-master osgBullet.sln)
+WIN_DKQCOMMAND(${DKCMAKE_BUILD} "-DOSGInstallType=Source And Build Tree" -DOSGBuildRoot=${OSG}/${OS} -DOSGSourceRoot=${OSG} "-DBulletInstallType=Source And Build Tree" -DBulletBuildRoot=${BULLET}/${OS} -DBulletSourceRoot=${BULLET} -DosgWorks_DIR=${OSGWORKS}/${OS}/lib -DOSGBULLET_BUILD_APPLICATIONS=OFF -DOSGBULLET_BUILD_EXAMPLES=OFF -DOSGBULLET_INSTALL_DATA=OFF ${OSGBULLET})
+WIN_DEBUG_VS(osgbullet-master osgBullet.sln)
+WIN_RELEASE_VS(osgbullet-master osgBullet.sln)
 
-DKSETPATH(${OSGBULLET}/${OS})
-MAC_DKQCOMMAND(${CMAKE_EXE} -G "Xcode" -DCMAKE_OSX_ARCHITECTURES=x86_64 "-DOSGInstallType=Source And Build Tree" -DOSGBuildRoot=${OSG}/${OS} -DOSGSourceRoot=${OSG} "-DBulletInstallType=Source And Build Tree" -DBulletBuildRoot=${BULLET}/${OS} -DBulletSourceRoot=${BULLET} -DosgWorks_DIR=${OSGWORKS}/${OS}/lib -DBUILD_SHARED_LIBS=OFF -DOSGBULLET_BUILD_APPLICATIONS=OFF -DOSGBULLET_BUILD_EXAMPLES=OFF -DOSGBULLET_INSTALL_DATA=OF ${OSGBULLET})
+
+WIN_DKQCOMMAND(${DKCMAKE_BUILD} "-DOSGInstallType=Source And Build Tree" -DOSGBuildRoot=${OSG}/${OS} -DOSGSourceRoot=${OSG} "-DBulletInstallType=Source And Build Tree" -DBulletBuildRoot=${BULLET}/${OS} -DBulletSourceRoot=${BULLET} -DosgWorks_DIR=${OSGWORKS}/${OS}/lib -DOSGBULLET_BUILD_APPLICATIONS=OFF -DOSGBULLET_BUILD_EXAMPLES=OFF -DOSGBULLET_INSTALL_DATA=OFF ${OSGBULLET})
+WIN_DEBUG_VS(osgbullet-master osgBullet.sln)
+WIN_RELEASE_VS(osgbullet-master osgBullet.sln)
+
+
+MAC_DKQCOMMAND(${DKCMAKE_BUILD} "-DOSGInstallType=Source And Build Tree" -DOSGBuildRoot=${OSG}/${OS} -DOSGSourceRoot=${OSG} "-DBulletInstallType=Source And Build Tree" -DBulletBuildRoot=${BULLET}/${OS} -DBulletSourceRoot=${BULLET} -DosgWorks_DIR=${OSGWORKS}/${OS}/lib -DOSGBULLET_BUILD_APPLICATIONS=OFF -DOSGBULLET_BUILD_EXAMPLES=OFF -DOSGBULLET_INSTALL_DATA=OF ${OSGBULLET})
 MAC_DEBUG_XCODE(osgbullet-master)
 MAC_RELEASE_XCODE(osgbullet-master)
 
-DKSETPATH(${OSGBULLET}/ios)
-IOS_DKQCOMMAND(${CMAKE_EXE} -G "Xcode" -DCMAKE_TOOLCHAIN_FILE=${DKCMAKE}/iOS.cmake -DIOS_PLATFORM=OS "-DOSGInstallType=Source And Build Tree" -DOSGBuildRoot=${OSG}/ios -DOSGSourceRoot=${OSG} "-DBulletInstallType=Source And Build Tree" -DBulletBuildRoot=${BULLET}/ios -DBulletSourceRoot=${BULLET} -DosgWorks_DIR=${OSGWORKS}/ios/lib -DBUILD_SHARED_LIBS=OFF -DOSGBULLET_BUILD_APPLICATIONS=OFF -DOSGBULLET_BUILD_EXAMPLES=OFF -DOSGBULLET_INSTALL_DATA=OF ${OSGBULLET})
+
+IOS_DKQCOMMAND(${DKCMAKE_BUILD} "-DOSGInstallType=Source And Build Tree" -DOSGBuildRoot=${OSG}/ios -DOSGSourceRoot=${OSG} "-DBulletInstallType=Source And Build Tree" -DBulletBuildRoot=${BULLET}/ios -DBulletSourceRoot=${BULLET} -DosgWorks_DIR=${OSGWORKS}/ios/lib -DOSGBULLET_BUILD_APPLICATIONS=OFF -DOSGBULLET_BUILD_EXAMPLES=OFF -DOSGBULLET_INSTALL_DATA=OF ${OSGBULLET})
 IOS_DEBUG_XCODE(osgbullet-master)
 IOS_RELEASE_XCODE(osgbullet-master)
 
-DKSETPATH(${OSGBULLET}/ios-simulator)
-IOSSIM_DKQCOMMAND(${CMAKE_EXE} -G "Xcode" -DCMAKE_TOOLCHAIN_FILE=${DKCMAKE}/iOS.cmake -DIOS_PLATFORM=SIMULATOR "-DOSGInstallType=Source And Build Tree" -DOSGBuildRoot=${OSG}/ios-simulator -DOSGSourceRoot=${OSG} "-DBulletInstallType=Source And Build Tree" -DBulletBuildRoot=${BULLET}/ios-simulator -DBulletSourceRoot=${BULLET} -DosgWorks_DIR=${OSGWORKS}/ios-simulator/lib -DBUILD_SHARED_LIBS=OFF -DOSGBULLET_BUILD_APPLICATIONS=OFF -DOSGBULLET_BUILD_EXAMPLES=OFF -DOSGBULLET_INSTALL_DATA=OF ${OSGBULLET})
+
+IOSSIM_DKQCOMMAND(${DKCMAKE_BUILD} "-DOSGInstallType=Source And Build Tree" -DOSGBuildRoot=${OSG}/ios-simulator -DOSGSourceRoot=${OSG} "-DBulletInstallType=Source And Build Tree" -DBulletBuildRoot=${BULLET}/ios-simulator -DBulletSourceRoot=${BULLET} -DosgWorks_DIR=${OSGWORKS}/ios-simulator/lib -DOSGBULLET_BUILD_APPLICATIONS=OFF -DOSGBULLET_BUILD_EXAMPLES=OFF -DOSGBULLET_INSTALL_DATA=OF ${OSGBULLET})
 IOSSIM_DEBUG_XCODE(osgbullet-master)
 IOSSIM_RELEASE_XCODE(osgbullet-master)
 
 
-DKSETPATH(${OSGBULLET}/${OS}/Debug)
-LINUX_DEBUG_DKQCOMMAND(${CMAKE_EXE} -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=DEBUG "-DOSGInstallType=Source And Build Tree" -DOSGBuildRoot=${OSG}/${OS}/Debug -DOSGSourceRoot=${OSG} "-DBulletInstallType=Source And Build Tree" -DBulletBuildRoot=${BULLET}/${OS}/Debug -DBulletSourceRoot=${BULLET} -DosgWorks_DIR=${OSGWORKS}/${OS}/Debug/lib/x86_64-linux-gnu -DBUILD_SHARED_LIBS=OFF -DOSGBULLET_BUILD_APPLICATIONS=OFF -DOSGBULLET_BUILD_EXAMPLES=OFF -DOSGBULLET_INSTALL_DATA=OFF ${OSGBULLET})
+LINUX_DEBUG_DKQCOMMAND(${DKCMAKE_BUILD} "-DOSGInstallType=Source And Build Tree" -DOSGBuildRoot=${OSG}/${OS}/Debug -DOSGSourceRoot=${OSG} "-DBulletInstallType=Source And Build Tree" -DBulletBuildRoot=${BULLET}/${OS}/Debug -DBulletSourceRoot=${BULLET} -DosgWorks_DIR=${OSGWORKS}/${OS}/Debug/lib/x86_64-linux-gnu -DOSGBULLET_BUILD_APPLICATIONS=OFF -DOSGBULLET_BUILD_EXAMPLES=OFF -DOSGBULLET_INSTALL_DATA=OFF ${OSGBULLET})
 LINUX_DEBUG_DKQCOMMAND(make)
-
-DKSETPATH(${OSGBULLET}/${OS}/Release)
-LINUX_RELEASE_DKQCOMMAND(${CMAKE_EXE} -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=RELEASE "-DOSGInstallType=Source And Build Tree" -DOSGBuildRoot=${OSG}/${OS}/Release -DOSGSourceRoot=${OSG} "-DBulletInstallType=Source And Build Tree" -DBulletBuildRoot=${BULLET}/${OS}/Release -DBulletSourceRoot=${BULLET} -DosgWorks_DIR=${OSGWORKS}/${OS}/Release/lib/x86_64-linux-gnu -DBUILD_SHARED_LIBS=OFF -DOSGBULLET_BUILD_APPLICATIONS=OFF -DOSGBULLET_BUILD_EXAMPLES=OFF -DOSGBULLET_INSTALL_DATA=OFF ${OSGBULLET})
+LINUX_RELEASE_DKQCOMMAND(${DKCMAKE_BUILD} "-DOSGInstallType=Source And Build Tree" -DOSGBuildRoot=${OSG}/${OS}/Release -DOSGSourceRoot=${OSG} "-DBulletInstallType=Source And Build Tree" -DBulletBuildRoot=${BULLET}/${OS}/Release -DBulletSourceRoot=${BULLET} -DosgWorks_DIR=${OSGWORKS}/${OS}/Release/lib/x86_64-linux-gnu -DOSGBULLET_BUILD_APPLICATIONS=OFF -DOSGBULLET_BUILD_EXAMPLES=OFF -DOSGBULLET_INSTALL_DATA=OFF ${OSGBULLET})
 LINUX_RELEASE_DKQCOMMAND(make)
 
 
-ANDROID_DEBUG_NDK(osgbullet-master)
-ANDROID_RELEASE_NDK(osgbullet-master)
+
+ANDROID_DKQCOMMAND(${DKCMAKE_BUILD} "-DOSGInstallType=Source And Build Tree" -DOSGBuildRoot=${OSG}/${OS} -DOSGSourceRoot=${OSG} "-DBulletInstallType=Source And Build Tree" -DBulletBuildRoot=${BULLET}/${OS} -DBulletSourceRoot=${BULLET} -DosgWorks_DIR=${OSGWORKS}/${OS}/lib -DOSGBULLET_BUILD_APPLICATIONS=OFF -DOSGBULLET_BUILD_EXAMPLES=OFF -DOSGBULLET_INSTALL_DATA=OFF ${OSGBULLET})
+ANDROID_DEBUG_VS(osgbullet-master osgBullet.sln)
+ANDROID_RELEASE_VS(osgbullet-master osgBullet.sln)

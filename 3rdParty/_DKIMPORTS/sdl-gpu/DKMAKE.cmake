@@ -4,6 +4,9 @@
 # https://github.com/aquawicket/sdl-gpu/archive/refs/heads/master.zip
 # https://github.com/grimfang4/sdl-gpu/archive/refs/heads/master.zip
 
+### DEPENDS ###
+DKDEPEND(sdl2)
+
 
 ### VERSION ###
 DKSET(SDLGPU_VERSION master)
@@ -18,31 +21,33 @@ DKINSTALL(${SDLGPU_DL} sdl-gpu ${SDLGPU})
 
 ### DKPLUGINS LINK ###
 DKINCLUDE(${SDLGPU}/include)
-WIN_DEBUG_DKLIB(${SDLGPU}/${OS}/${DEBUG_DIR}/sdl-gpu.lib)
-WIN_RELEASE_DKLIB(${SDLGPU}/${OS}/${RELEASE_DIR}/sdl-gpu.lib)
-MAC_DEBUG_DKLIB(${SDLGPU}/${OS}/${DEBUG_DIR}/libsdl-gpu.a)
-MAC_RELEASE_DKLIB(${SDLGPU}/${OS}/${RELEASE_DIR}/libsdl-gpu.a)
-IOS_DEBUG_DKLIB(${SDLGPU}/${OS}/${DEBUG_DIR}/libsdl-gpu.a)
-IOS_RELEASE_DKLIB(${SDLGPU}/${OS}/${RELEASE_DIR}/libsdl-gpu.a)
-IOSSIM_DEBUG_DKLIB(${SDLGPU}/${OS}/${DEBUG_DIR}/libsdl-gpu.a)
-IOSSIM_RELEASE_DKLIB(${SDLGPU}/${OS}/${RELEASE_DIR}/libsdl-gpu.a)
-LINUX_DEBUG_DKLIB(${SDLGPU}/${OS}/${DEBUG_DIR}/libsdl-gpu.a)
-LINUX_RELEASE_DKLIB(${SDLGPU}/${OS}/${RELEASE_DIR}/libsdl-gpu.a)
-RASPBERRY_DEBUG_DKLIB(${SDLGPU}/${OS}/${DEBUG_DIR}/libsdl-gpu.a)
-RASPBERRY_RELEASE_DKLIB(${SDLGPU}/${OS}/${RELEASE_DIR}/libsdl-gpu.a)
-ANDROID_DEBUG_DKLIB(${SDLGPU}/${OS}/${DEBUG_DIR}/libsdl-gpu.a)
-ANDROID_RELEASE_DKLIB(${SDLGPU}/${OS}/${RELEASE_DIR}/libsdl-gpu.a)
+WIN_DEBUG_DKLIB(${SDLGPU}/${OS}/SDL_gpu-VS/lib/Debug/SDL2_gpu_s.lib)
+WIN_RELEASE_DKLIB(${SDLGPU}/${OS}/SDL_gpu-VS/lib/Release/SDL2_gpu_s.lib)
+MAC_DEBUG_DKLIB(${SDLGPU}/${OS}/SDL_gpu/lib/Debug/libSDL2_gpu.a)
+MAC_RELEASE_DKLIB(${SDLGPU}/${OS}/SDL_gpu/lib/Debug/libSDL2_gpu.a)
+IOS_DEBUG_DKLIB(${SDLGPU}/${OS}/SDL_gpu/lib/Debug/libSDL2_gpu_s.a)
+IOS_RELEASE_DKLIB(${SDLGPU}/${OS}/SDL_gpu/lib/Debug/libSDL2_gpu_s.a)
+IOSSIM_DEBUG_DKLIB(${SDLGPU}/${OS}/SDL_gpu/lib/Debug/libSDL2_gpu_s.a)
+IOSSIM_RELEASE_DKLIB(${SDLGPU}/${OS}/SDL_gpu/lib/Debug/libSDL2_gpu_s.a)
+LINUX_DEBUG_DKLIB(${SDLGPU}/${OS}/SDL_gpu/lib/Debug/libSDL2_gpu_s.a)
+LINUX_RELEASE_DKLIB(${SDLGPU}/${OS}/SDL_gpu/lib/Debug/libSDL2_gpu_s.a)
+RASPBERRY_DEBUG_DKLIB(${SDLGPU}/${OS}/SDL_gpu/lib/Debug/libSDL2_gpu_s.a)
+RASPBERRY_RELEASE_DKLIB(${SDLGPU}/${OS}/SDL_gpu/lib/Debug/libSDL2_gpu_s.a)
+ANDROID_DEBUG_DKLIB(${SDLGPU}/${OS}/SDL_gpu-VS/lib/Debug/libSDL2_gpu_s.a)
+ANDROID_RELEASE_DKLIB(${SDLGPU}/${OS}/SDL_gpu-VS/lib/Debug/libSDL2_gpu_s.a)
+DKLIB(${SDLGPU}/${OS}/${RELEASE_DIR}/libsdl-gpu.a)
+
 
 
 ### COMPILE ###
 DKSETPATH(${SDLGPU}/${BUILD_DIR})
-DKQCOMMAND(${DKCMAKE_BUILD} ${SDLGPU})
+DKQCOMMAND(${DKCMAKE_BUILD} ${SDL2_CMAKE} ${SDLGPU})
 
 
-WIN_VS(${SDLGPU_NAME} sdlgpu.sln sdlgpu)
-MAC_XCODE(${SDLGPU_NAME} sdlgpu)
-IOS_XCODE(${SDLGPU_NAME} sdlgpu)
-IOSSIM_XCODE(${SDLGPU_NAME} sdlgpu)
-LINUX_DKQCOMMAND(make sdlgpu)
-RASPBERRY_DKQCOMMAND(make sdlgpu)
-ANDROID_VS(${SDLGPU_NAME} sdlgpu.sln sdlgpu)
+WIN_VS(${SDLGPU_NAME} SDL_gpu.sln SDL_gpu)
+MAC_XCODE(${SDLGPU_NAME} SDL_gpu)
+IOS_XCODE(${SDLGPU_NAME} SDL_gpu)
+IOSSIM_XCODE(${SDLGPU_NAME} SDL_gpu)
+LINUX_DKQCOMMAND(make SDL_gpu)
+RASPBERRY_DKQCOMMAND(make SDL_gpu)
+ANDROID_VS(${SDLGPU_NAME} SDL_gpu.sln SDL_gpu)

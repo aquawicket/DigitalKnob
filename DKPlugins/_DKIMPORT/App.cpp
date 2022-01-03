@@ -3,9 +3,6 @@
 #include "assets.h"
 #include "App.h"
 
-////////////////
-// For Doxygen purporses, this is a test.
-////////////////
 bool App::Init()
 {
 	DKINFO("App::Init()\n");

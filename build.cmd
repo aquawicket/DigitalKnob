@@ -1,5 +1,6 @@
 :: Windows Batch file DK builder
 @echo off
+if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*) & exit )
 
 set "DIGITALKNOB=C:\Users\%USERNAME%\digitalknob"
 set "DKPATH=%DIGITALKNOB%\DK"
@@ -170,6 +171,13 @@ cd "%DIGITALKNOB%"
 for /r %%i in (CMakeCache.*) do del "%%i"
 ::if NOT "%ERRORLEVEL%" == "0" goto error
 for /d /r %%i in (*CMakeFiles*) do rd /s /q "%%i"
+::if NOT "%ERRORLEVEL%" == "0" goto error
+
+echo Deleteing .tmp files . . .
+cd "%DIGITALKNOB%"
+for /r %%i in (*.tmp) do del "%%i"
+::if NOT "%ERRORLEVEL%" == "0" goto error
+for /r %%i in (*.TMP) do del "%%i"
 ::if NOT "%ERRORLEVEL%" == "0" goto error
 
 

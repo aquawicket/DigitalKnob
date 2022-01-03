@@ -1,2 +1,2 @@
-message(STATUS "Default DKApp DKMAKE.cmake file")
+DKINFO("Default DKApp DKMAKE.cmake file")
 DKDEPEND(DK)

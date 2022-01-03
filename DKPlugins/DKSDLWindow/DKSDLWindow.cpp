@@ -33,6 +33,8 @@ std::map<int, int> DKSDLWindow::sdlMacCode;
 
 bool DKSDLWindow::Init() {
     DKDEBUGFUNC();
+	SDL_SetMainReady(); //Bypass SDL_main() //https://wiki.libsdl.org/SDL_SetMainReady
+	
 #ifdef ANDROID
     //DKINFO("CallJavaFunction(OpenActivity,SDLActivity)\n");
     //CallJavaFunction("OpenActivity","SDLActivity");
@@ -41,7 +43,6 @@ bool DKSDLWindow::Init() {
     DKString sdl_renderer;
     DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[SDL_RENDERER]", sdl_renderer);
     DKINFO("settings.txt: [SDL_RENDERER] = " + sdl_renderer + "\n");
-    SDL_SetMainReady(); //Bypass SDLmain  //https://wiki.libsdl.org/SDL_SetMainReady
     if(SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_TIMER) < 0)
         return DKERROR("SDL_Init Error: " + DKString(SDL_GetError()) + "\n");
     DKString title;

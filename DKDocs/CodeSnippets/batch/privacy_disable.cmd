@@ -1,4 +1,6 @@
 @echo off
+if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*) & exit )
+ 
 echo disable using your machine for sending windows updates to others
 reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\DeliveryOptimization\Config" /v DownloadMode /t REG_DWORD /d 0 /f
 echo disable sending settings to cloud
@@ -30,4 +32,3 @@ reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v AllowSearch
 echo disable language detection
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v AlwaysUseAutoLangDetection /t REG_DWORD /d 0 /f
 echo done
-pause

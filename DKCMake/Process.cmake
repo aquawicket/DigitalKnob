@@ -6,7 +6,8 @@ if(DKPROCESS_INCLUDED)
 endif(DKPROCESS_INCLUDED)
 DKSET(DKPROCESS_INCLUDED 1)
 
-
+# TODO:  variable_watch function
+#variable_watch(DKCMAKE_BUILD) 
 
 DKINFO("\n")
 DKINFO("############################################################")
@@ -71,6 +72,7 @@ foreach(plugin ${dkdepend_list})
 	#This executes the 3rdParty library builds, and dkplugin setup, creates CMakeLists.txt files
 	include(${plugin_path}/DKMAKE.cmake)
 	
+	
 	#NOTE: we won't have the library paths to remove until we've run DKCMake.cmake for the library
 	# We want to to use this to refresh 3rdParty Plugins
 	#if(REBUILDALL)
@@ -86,12 +88,15 @@ foreach(plugin ${dkdepend_list})
 	#	add_subdirectory(${${PLUGIN_NAME}} ${${PLUGIN_NAME}}/${OS})
 	#	DKINFO("add_subdirectory( ${${PLUGIN_NAME}} ${${PLUGIN_NAME}}/${OS} )")
 	#endif()
-	string(TOLOWER "${DKPLUGIN_LIST}" DKPLUGIN_LIST_lower)
-	string(TOLOWER "${plugin}" plugin_lower)
 	
-	#string(FIND "${DKPLUGIN_LIST}" "${plugin}" isDKPlugin)
-	string(FIND "${DKPLUGIN_LIST_lower}" "${plugin_lower}" isDKPlugin)
+	#install(TARGETS <target_name> DESTINATION ${DIGITALKNOB}/DKInstall/lib/${OS})
+	#install(FILES file.h DESTINATION ${DIGITALKNOB}/DKInstall/lib/${OS})
+	
 	####################### DKPlugins #######################
+	# Libraries in the /DKPlugins folder
+	string(TOLOWER "${DKPLUGIN_LIST}" DKPLUGIN_LIST_lower)
+	string(TOLOWER "${plugin}" plugin_lower)	
+	string(FIND "${DKPLUGIN_LIST_lower}" "${plugin_lower}" isDKPlugin)
 	if(${isDKPlugin} GREATER -1)
 		#Add the DKPlugin to the app project
 		if(EXISTS "${plugin_path}/CMakeLists.txt")
@@ -107,8 +112,7 @@ foreach(plugin ${dkdepend_list})
 		endif()
 		
 		## Prebuild DKPlugins switch
-		## TODO: set this to work when the library files are absent.
-		## If the library files already exist, we can skip this. 
+		## Only prebuild if the library binaries are missing
 		foreach(lib ${LIBLIST})
 			if(NOT EXISTS ${lib})
 				DKSET(PREBUILD ON)
@@ -161,7 +165,7 @@ foreach(plugin ${dkdepend_list})
 			if(IOS_32)
 				IOS_DKQCOMMAND(${DKCMAKE_BUILD} -DIOS_32=ON -DDEBUG=ON -DRELEASE=ON -DREBUILD=ON ${plugin_path})
 				if(DEBUG)
-					IOS_DKQCOMMAND(xcodebuild -configuration Debug build) #-sdk iphoneos13.0)
+					IOS_DKQCOMMAND(xcodebuild -configuration Debug build)
 				endif()
 				if(RELEASE)
 					IOS_DKQCOMMAND(xcodebuild -configuration Release build)
@@ -288,8 +292,9 @@ if(HAVE_DK)
 	DKINFO("Copying DKPlugins/_DKIMPORT/ to App...")
 	DKCOPY(${DKPLUGINS}/_DKIMPORT/icons ${DKPROJECT}/icons FALSE) ## copy app default files recursivly without overwrite
 	DKCOPY(${DKPLUGINS}/_DKIMPORT/assets.h ${DKPROJECT}/assets.h FALSE) ## copy app default files recursivly without overwrite
-	DKCOPY(${DKPLUGINS}/_DKIMPORT/App.h ${DKPROJECT}/App.h FALSE) ## copy app default files recursivly without overwrite
-	DKCOPY(${DKPLUGINS}/_DKIMPORT/App.cpp ${DKPROJECT}/App.cpp FALSE) ## copy app default files recursivly without overwrite
+	#DKCOPY(${DKPLUGINS}/_DKIMPORT/App.h ${DKPROJECT}/App.h FALSE) ## copy app default files recursivly without overwrite
+	#DKCOPY(${DKPLUGINS}/_DKIMPORT/App.cpp ${DKPROJECT}/App.cpp FALSE) ## copy app default files recursivly without overwrite
+	DKCOPY(${DKPLUGINS}/_DKIMPORT/main.cpp ${DKPROJECT}/main.cpp FALSE)
 endif()
 	
 ### Include all source files from the app folder for the compilers
@@ -327,7 +332,6 @@ if(WIN_32)
 			DKEXECUTE_PROCESS(COMMAND ${IMAGEMAGICK_CONVERT} ${DKPROJECT}/icons/icon.png -define icon:auto-resize=16 ${DKPROJECT}/assets/favicon.ico)
 		endif()
 	endif()
-
 	
 	################# BACKUP USERDATA / INJECT ASSETS #####################	
 	if(HAVE_DK)
@@ -344,21 +348,19 @@ if(WIN_32)
 		DKREMOVE(${DKPROJECT}/Backup)
 		DKCOPY(${DKPLUGINS}/_DKIMPORT/assets.h ${DKPROJECT}/assets.h TRUE) #required
 	endif()	
-	
-	
+		
 	###################### Backup Executable ###########################
 	if(DEBUG)
-		DKCOPY(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.exe ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.backup TRUE)
+		DKRENAME(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.exe ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.backup true)
 	endif()
 	if(RELEASE)
-		DKCOPY(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.exe ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.backup TRUE)
+		DKRENAME(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.exe ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.backup true)
 	endif()
-	
-	
+		
 	####################### Create Executable Target ###################
 	if(HAVE_DK)
-		DKCOPY(${DKPLUGINS}/_DKIMPORT/resource.h ${DKPROJECT}/resource.h FALSE)
-		DKCOPY(${DKPLUGINS}/_DKIMPORT/resource.rc ${DKPROJECT}/resource.rc FALSE)
+		DKCOPY(${DKPLUGINS}/_DKIMPORT/win/resource.h ${DKPROJECT}/resource.h FALSE)
+		DKCOPY(${DKPLUGINS}/_DKIMPORT/win/resource.rc ${DKPROJECT}/resource.rc FALSE)
 		file(GLOB_RECURSE resources_SRC 
 			${DKPROJECT}/*.manifest
 			${DKPROJECT}/*.rc
@@ -436,8 +438,7 @@ if(WIN_64)
 			DKEXECUTE_PROCESS(COMMAND ${IMAGEMAGICK_CONVERT} ${DKPROJECT}/icons/icon.png -define icon:auto-resize=16 ${DKPROJECT}/assets/favicon.ico)
 		endif()
 	endif()
-	
-		
+			
 	################# BACKUP USERDATA / INJECT ASSETS #####################
 	if(HAVE_DK)
 		DKCOPY(${DKPROJECT}/assets/USER ${DKPROJECT}/Backup/USER TRUE)
@@ -454,18 +455,17 @@ if(WIN_64)
 
 	###################### Backup Executable ###########################
 	if(DEBUG)
-		DKRENAME(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.exe ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.backup)
+		DKRENAME(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.exe ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.backup true)
 	endif()
 	if(RELEASE)
-		DKRENAME(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.exe ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.backup)
+		DKRENAME(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.exe ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.backup true)
 	endif()
-	
-	
+		
 	####################### Create Executable Target ###################
 	if(HAVE_DK)
 		##set_source_files_properties(${DIGITALKNOB}/stdafx.cpp PROPERTIES COMPILE_FLAGS "/Ycstdafx.h")
-		DKCOPY(${DKPLUGINS}/_DKIMPORT/resource.h ${DKPROJECT}/resource.h FALSE)
-		DKCOPY(${DKPLUGINS}/_DKIMPORT/resource.rc ${DKPROJECT}/resource.rc FALSE)
+		DKCOPY(${DKPLUGINS}/_DKIMPORT/win/resource.h ${DKPROJECT}/resource.h FALSE)
+		DKCOPY(${DKPLUGINS}/_DKIMPORT/win/resource.rc ${DKPROJECT}/resource.rc FALSE)
 		file(GLOB_RECURSE resources_SRC 
 			${DKPROJECT}/*.manifest
 			${DKPROJECT}/*.rc
@@ -474,15 +474,13 @@ if(WIN_64)
 	list(APPEND App_SRC ${resources_SRC})
 	add_executable(${APP_NAME} WIN32 ${App_SRC})
 
-
 	########################## Add Dependencies ########################
 	foreach(plugin ${dkdepend_list})
 		if(EXISTS "${DKPLUGINS}/${plugin}/CMakeLists.txt")
 			add_dependencies(${APP_NAME} ${plugin})
 		endif()	
 	endforeach()
-	
-	
+		
 	############# Link Libraries, Set Startup Project #################
 	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${LIBS})
 	
@@ -507,8 +505,7 @@ if(WIN_64)
 	
 	set_target_properties(${APP_NAME} PROPERTIES LINK_FLAGS_DEBUG ${DEBUG_FLAGS} LINK_FLAGS_RELEASE ${RELEASE_FLAGS})
 	set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT ${APP_NAME})
-	
-	
+		
 	####################### Do Post Build Stuff #######################
 	#CPP_DKFile_Copy(app_path+OS+"/Release/"+APP+".pdb", app_path+"assets/"+APP+".pdb", true)
 	#CPP_DK_Execute(DIGITALKNOB+"DK/3rdParty/upx-3.95-win64/upx.exe -9 -v "+app_path+OS+"/Release/"+APP+".exe")
@@ -524,8 +521,7 @@ if(MAC)
 	if(RELEASE)
 		DKCOPY(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.app ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.backup TRUE)
 	endif()
-	
-	
+		
 	########################## CREATE ICONS ###############################
 	if(EXISTS ${DKPROJECT}/icons/icon.png)
 		dk_makeDirectory(${DKPROJECT}/icons/mac)
@@ -545,8 +541,7 @@ if(MAC)
 		set(app_ICONS ${DKPROJECT}/icons/mac/icons.icns)
 		set_source_files_properties(${app_ICONS} PROPERTIES MACOSX_PACKAGE_LOCATION "Resources")
 	endif()
-	
-	
+		
 	################# BACKUP USERDATA / INJECT ASSETS #####################	
 	DKCOPY(${DKPROJECT}/assets/USER ${DKPROJECT}/Backup/USER TRUE)
 	DKREMOVE(${DKPROJECT}/assets/USER)
@@ -559,8 +554,7 @@ if(MAC)
 		${DKPROJECT}/*.mm)
 	list(APPEND App_SRC ${m_SRC})
 	add_executable(${APP_NAME} MACOSX_BUNDLE ${app_ICONS} ${App_SRC})
-	
-	
+		
 	########################## Add Dependencies ########################
 	foreach(plugin ${dkdepend_list})
 		if(EXISTS "${DKPLUGINS}/${plugin}/CMakeLists.txt")
@@ -569,8 +563,7 @@ if(MAC)
 			endif()
 		endif()
 	endforeach()
-	
-	
+		
 	######################### Create Info.plist #######################
 	DKSET(PRODUCT_BUNDLE_IDENTIFIER com.digitalknob.${APP_NAME})
 	DKSET(CFBundleDevelopmentRegion en)
@@ -595,19 +588,16 @@ if(MAC)
 		MACOSX_BUNDLE TRUE 
 		XCODE_ATTRIBUTE_CODE_SIGN_IDENTITY ""
 		MACOSX_BUNDLE_INFO_PLIST ${DKPLUGINS}/_DKIMPORT/mac/Info.plist)
-	
-	
+		
 	##############Delete Exlusions and Copy Assets to Bundle #######################
 	
 	DKREMOVE(${DKPROJECT}/assets/log.txt)
 	DKREMOVE(${DKPROJECT}/assets/cef.txt)
 	add_custom_command(TARGET ${APP_NAME} PRE_BUILD COMMAND ${CMAKE_COMMAND} -E copy_directory ${DKPROJECT}/assets $<TARGET_BUNDLE_CONTENT_DIR:${APP_NAME}>/Resources)
-	
-	
+		
 	############# Link Libraries, Set Startup Project #################
 	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${LIBS})
 	set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY XCODE_STARTUP_PROJECT ${APP_NAME})
-	
 	
 	####################### Do Post Build Stuff #######################
 	# Copy the CEF framework into the app bundle
@@ -677,10 +667,10 @@ if(IOS OR IOSSIM)
 	
 	###################### Backup Executable ###########################
 	if(DEBUG)
-		DKRENAME(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.backup)
+		DKRENAME(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.backup true)
 	endif()
 	if(RELEASE)
-		DKRENAME(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.app ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.backup)
+		DKRENAME(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.app ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.backup true)
 	endif()
 	
 	###################### BACKUP USERDATA ###############################
@@ -691,10 +681,7 @@ if(IOS OR IOSSIM)
 	# Restore the backed up files, excluded from assets
 	#DKCOPY(${DKPROJECT}/Backup/ ${DKPROJECT}/assets/ FALSE)
 	#DKREMOVE(${DKPROJECT}/Backup)
-	
-	
-	
-	
+		
 	########################## Images ##############################
 	#TODO
 	
@@ -714,33 +701,31 @@ if(IOS OR IOSSIM)
 		DKEXECUTE_PROCESS(sips -z 1024 1024 ${DKPROJECT}/icons/icon.png --out ${DKPROJECT}/icons/ios/icons.iconset/icon_512x512@2x.png WORKING_DIRECTORY ${DIGITALKNOB})
 		DKEXECUTE_PROCESS(iconutil -c icns -o ${DKPROJECT}/icons/ios/icons.icns ${DKPROJECT}/icons/ios/icons.iconset WORKING_DIRECTORY ${DIGITALKNOB})
 		set(MACOSX_BUNDLE_ICON_FILE icons.icns)
-		set(app_ICONS ${DKPROJECT}/icons/mac/icons.icns)
+		set(app_ICONS ${DKPROJECT}/icons/ios/icons.icns)
 		set_source_files_properties(${app_ICONS} PROPERTIES MACOSX_PACKAGE_LOCATION "Resources")
 	endif()
 	
 	####################### Storyboards ############################
 	#TODO
-	
-	
+		
 	####################### Create Executable Target ###################
 	file(GLOB_RECURSE m_SRC 
 	${DKPROJECT}/*.m
 	${DKPROJECT}/*.mm)
 	list(APPEND App_SRC ${m_SRC})
-	if(HAVE_DK)
-		list(APPEND App_SRC ${DKPLUGINS}/DK/DKiOS.mm)
-	endif()
+	#if(HAVE_DK)
+	#	list(APPEND App_SRC ${DKPLUGINS}/DK/DKAppDelegate.h)
+	#	list(APPEND App_SRC ${DKPLUGINS}/DK/DKAppDelegate.m)
+	#endif()
 	add_executable(${APP_NAME} MACOSX_BUNDLE ${app_ICONS} ${App_SRC} ${RES_FILES})
-	
-	
+		
 	########################## Add Dependencies ########################
 	foreach(plugin ${dkdepend_list})
 		if(EXISTS "${DKPLUGINS}/${plugin}/CMakeLists.txt")
 			add_dependencies(${APP_NAME} ${plugin})
 		endif()	
 	endforeach()
-	
-	
+		
 	######################### Create Info.plist #######################
 	DKSET(PRODUCT_BUNDLE_IDENTIFIER com.digitalknob.${APP_NAME})
 	DKSET(CFBundleDevelopmentRegion en)
@@ -748,7 +733,6 @@ if(IOS OR IOSSIM)
 	DKSET(CFBundleExecutable ${APP_NAME})
 	DKSET(CFBundleGetInfoString DigitalKnob)
 	DKSET(CFBundleIconFile "icons.icns")
-	#DKSET(CFBundleIconFiles icons.icns)
 	DKSET(CFBundleIdentifier ${PRODUCT_BUNDLE_IDENTIFIER})
 	DKSET(CFBundleInfoDictionaryVersion 6.0)
 	DKSET(CFBundleLongVersionString 1.0.0)
@@ -762,14 +746,12 @@ if(IOS OR IOSSIM)
 	#DKSET(UILaunchStoryboardName dk)
 	#DKSET(UIMainStoryboardFile dk.storyboard)
 	set_target_properties(${APP_NAME} PROPERTIES MACOSX_BUNDLE TRUE MACOSX_BUNDLE_INFO_PLIST ${DKPLUGINS}/_DKIMPORT/ios/Info.plist)
-		
-		
+			
 	###################### Add Assets to Bundle #######################
 	add_custom_command(TARGET ${APP_NAME} PRE_BUILD COMMAND ${CMAKE_COMMAND} -E copy_directory ${DKPROJECT}/assets $<TARGET_FILE_DIR:${APP_NAME}>/assets)
-	if(EXISTS ${DKPROJECT}/icons/mac/icons.icns)
-		add_custom_command(TARGET ${APP_NAME} PRE_BUILD COMMAND ${CMAKE_COMMAND} -E copy ${DKPROJECT}/icons/ios/icons.icns $<TARGET_FILE_DIR:${APP_NAME}>/Resources/icons.icns)
-	endif()
-	
+	#if(EXISTS ${DKPROJECT}/icons/mac/icons.icns)
+	#	add_custom_command(TARGET ${APP_NAME} PRE_BUILD COMMAND ${CMAKE_COMMAND} -E copy ${DKPROJECT}/icons/ios/icons.icns $<TARGET_FILE_DIR:${APP_NAME}>/Resources/icons.icns)
+	#endif()
 	
 	############# Link Libraries, Set Startup Project #################
 	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${LIBS})
@@ -787,10 +769,8 @@ if(LINUX)
 		DKCOPY(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME} ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.backup TRUE)
 	endif()
 	
-	
 	########################## CREATE ICONS ###############################
 	DKCOPY(${DKPROJECT}/icons/icon.png ${DKPROJECT}/assets/icon.png TRUE)
-	
 	
 	############### BACKUP USERDATA / inject assets #######################
 	if(false)
@@ -807,7 +787,6 @@ if(LINUX)
 		DKREMOVE(${DKPROJECT}/Backup)
 	endif()
 	
-	
 	####################### Create Executable Target ###################
 	add_executable(${APP_NAME} ${App_SRC})
 	if(DEBUG)
@@ -816,14 +795,12 @@ if(LINUX)
 		target_link_libraries(${APP_NAME} ${RELEASE_LIBS} ${LIBS})
 	endif()
 	
-	
 	###################### Add Build Dependencies ######################
 	foreach(plugin ${dkdepend_list})
 		if(EXISTS "${DKPLUGINS}/${plugin}/CMakeLists.txt")
 			add_dependencies(${APP_NAME} ${plugin})
 		endif()	
 	endforeach()
-	
 	
 	############# Create .desktop Icon Files / Install ################
 	if(DEBUG)
@@ -853,7 +830,6 @@ if(LINUX)
 		DKEXECUTE_PROCESS(desktop-file-install --dir=/home/$ENV{USER}/.local/share/applications ${DKPROJECT}/${OS}/Release/${APP_NAME}.desktop WORKING_DIRECTORY ${DKPROJECT}/${OS}/Release)
 	endif()
 	
-	
 	####################### Do Post Build Stuff #######################
 	#CPP_DK_Execute("chmod +x "+app_path+OS+"/Debug/"+APP)
 endif()
@@ -864,7 +840,6 @@ endif()
 if(RASPBERRY)
 	########################## CREATE ICONS ###############################
 	DKCOPY(${DKPROJECT}/icons/icon.png ${DKPROJECT}/assets/icon.png TRUE)
-
 
 	############### BACKUP USERDATA / inject assets #######################
 	if(false)
@@ -881,14 +856,12 @@ if(RASPBERRY)
 		DKREMOVE(${DKPROJECT}/Backup)
 	endif()
 	
-	
 	###################### Backup Executable ###########################
 	if(DEBUG)
-		DKRENAME(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME} ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.backup)
+		DKRENAME(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME} ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.backup true)
 	elseif(RELEASE)
-		DKRENAME(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME} ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.backup)
+		DKRENAME(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME} ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.backup true)
 	endif()
-	
 	
 	####################### Create Executable Target ###################
 	add_executable(${APP_NAME} ${App_SRC})
@@ -898,15 +871,13 @@ if(RASPBERRY)
 		target_link_libraries(${APP_NAME} ${RELEASE_LIBS} ${LIBS})
 	endif()
 
-
 	########################## Add Dependencies ########################
 	foreach(plugin ${dkdepend_list})
 		if(EXISTS "${DKPLUGINS}/${plugin}/CMakeLists.txt")
 			add_dependencies(${APP_NAME} ${plugin})
 		endif()	
 	endforeach()
-	
-	
+		
 	############# Create .desktop Icon Files and Install ##############
 	if(DEBUG)
 	# Create .desktop file for Debug
@@ -938,8 +909,7 @@ if(RASPBERRY)
 	if(RELEASE)
 		DKEXECUTE_PROCESS(desktop-file-install --dir=/home/$ENV{USER}/.local/share/applications ${DKPROJECT}/${OS}/Release/${APP_NAME}.desktop WORKING_DIRECTORY ${DKPROJECT}/${OS}/Release)
 	endif()
-	
-	
+		
 	####################### Do Post Build Stuff #######################
 	#CPP_DK_Execute("chmod +x "+app_path+OS+"/Debug/"+APP)
 endif()
@@ -962,31 +932,26 @@ if(ANDROID)
 	endif()
 	DKCOPY(${DKPROJECT}/icons/icon.png ${DKPROJECT}/assets/icon.png TRUE)
 	DKCOPY(${DKPROJECT}/icons/icon.png ${DKPROJECT}/${OS}/res/drawable/icon.png TRUE)
-	
-	
+		
 	###################### Backup Executable ###########################
 	if(DEBUG)
-		DKREMOVE(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.backup)
-		DKRENAME(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.apk ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.backup)
+		DKRENAME(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.apk ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.backup true)
 	endif()
 	if(RELEASE)
-		DKREMOVE(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.backup)
-		DKRENAME(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.apk ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.backup)
+		DKRENAME(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.apk ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.backup true)
 	endif()
-	
-	
+		
 	####################### Create Executable Target ###################
-	DKCOPY(${DKPLUGINS}/_DKIMPORT/Android.h ${DKPROJECT}/Android.h FALSE)
+	DKCOPY(${DKPLUGINS}/_DKIMPORT/android/Android.h ${DKPROJECT}/Android.h FALSE)
 	if(ANDROID_32)
-		DKCOPY(${DKPLUGINS}/_DKIMPORT/android32 ${DKPROJECT}/android32 FALSE)
+		DKCOPY(${DKPLUGINS}/_DKIMPORT/android ${DKPROJECT}/android32 FALSE)
 	endif()
 	if(ANDROID_64)
-		DKCOPY(${DKPLUGINS}/_DKIMPORT/android64 ${DKPROJECT}/android64 FALSE)
+		DKCOPY(${DKPLUGINS}/_DKIMPORT/android ${DKPROJECT}/android64 FALSE)
 	endif()
 	set(CMAKE_ANDROID_GUI 1)
 	add_library(${APP_NAME} SHARED ${App_SRC})
-	
-	
+		
 	########################## Add Dependencies ########################
 	foreach(plugin ${dkdepend_list})
 		if(EXISTS "${DKPLUGINS}/${plugin}/CMakeLists.txt")
@@ -998,8 +963,7 @@ if(ANDROID)
 	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${LIBS})
 	target_include_directories(${APP_NAME} PUBLIC ${SDL2}/include)
 	#include_external_msproject(DKGradle ${DKPROJECT}/${OS}/DKGradle.androidproj)	
-	
-	
+		
 	####################### Do Post Build Stuff #######################
 endif()
 

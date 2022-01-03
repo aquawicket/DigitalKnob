@@ -6,6 +6,6 @@ endif()
 
 FIND_LIBRARY(GLKit_Lib GLKit)
 if(NOT GLKit_Lib)
-	message(WARNING "Could not locate GLKit framework")
+	DKWARN("Could not locate GLKit framework")
 endif()
 APPLE_DKLIB(${GLKit_Lib})

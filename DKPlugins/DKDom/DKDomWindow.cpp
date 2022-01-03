@@ -7,7 +7,16 @@
 
 
 //https://github.com/svaarala/duktape/blob/master/tests/api/test-set-global-object.c
-
+static void dump_global_object_keys(duk_context *ctx) {
+	/* Prints only non-enumerable keys.  We can't use e.g.
+	 * Object.getOwnPropertyNames() here because we might
+	 * not have 'Object' any more.
+	 */
+	duk_eval_string_noresult(ctx,
+	"(function () {\n"
+	"    for (var k in this) { print('key:', k); }\n"
+	"})()\n");
+}
 
 bool DKDomWindow::Init()
 {
@@ -131,13 +140,14 @@ bool DKDomWindow::Init()
 	DKDuktape::AttachFunction("CPP_DKDomWindow_releaseEvents", DKDomWindow::releaseEvents);
 	DKDuktape::AttachFunction("CPP_DKDomWindow_showModalDialog", DKDomWindow::showModalDialog);
 
-
-
-
-
+	
 	/*
-	  //First, build a new global object which contains a few keys we want to see.
-#include "DKDuktape.h"
+	// TEST GREATING A GLOBAL OBJECT, later to be used to create the global Window object
+	// https://github.com/svaarala/duktape/blob/master/tests/api/test-set-global-object.c
+	/////////////////////////////////////////////////////////////////////////////////////
+	
+    //First, build a new global object which contains a few keys we want to see.
+	#include "DKDuktape.h"
 	DKDuktape* dt = DKDuktape::Get();
 	printf("build replacement global object\n");
 	duk_eval_string(dt->ctx,
@@ -153,36 +163,23 @@ bool DKDomWindow::Init()
 	duk_set_global_object(dt->ctx);
 	printf("top after: %ld\n", (long)duk_get_top(dt->ctx));
 
-	
 	//Print available keys.  This exercises access to the global object directly.
-	
-	//dump_global_object_keys(dt->ctx);
+	dump_global_object_keys(dt->ctx);
 
 	//Test that indirect eval executes in the new global object too.
-	 
 	printf("indirect eval\n");
-	duk_eval_string_noresult(dt->ctx,
-		"var myEval = eval;  // writes 'myEval' to global object as a side effect\n"
-	);
-	//dump_global_object_keys(dt->ctx);
-	duk_eval_string_noresult(dt->ctx,
-		"myEval('print(this.newGlobal)');"
-	);
+	duk_eval_string_noresult(dt->ctx,"var myEval = eval;  // writes 'myEval' to global object as a side effect\n");
+	dump_global_object_keys(dt->ctx);
+	duk_eval_string_noresult(dt->ctx,"myEval('print(this.newGlobal)');");
 
 	// Test access to global object through an object environment.
-	 
 	printf("access through this.xxx and variable lookup xxx\n");
-	duk_eval_string_noresult(dt->ctx,
-		"print('this.testName:', this.testName);\n"
-	);
-	duk_eval_string_noresult(dt->ctx,
-		"print('testName:', testName);\n"
-	);
-
+	duk_eval_string_noresult(dt->ctx, "print('this.testName:', this.testName);\n");
+	duk_eval_string_noresult(dt->ctx, "print('testName:', testName);\n");
 	printf("final top: %ld\n", (long)duk_get_top(dt->ctx));
+
+	///////////////////////////////////////////////////////////////////////////////
 	*/
-
-
 
 	// Javascript bindings
 	DKClass::DKCreate("DKDom/DKDomWindow.js");

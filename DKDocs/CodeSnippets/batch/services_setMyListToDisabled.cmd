@@ -1,5 +1,6 @@
-@ECHO OFF
 :: loop through services_MyList.txt, stop and diable any service in the list
+@echo off
+if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*) & exit )
 
 echo #### Windows Services ####
 for /f "tokens=*" %%a in (services_MyList.txt) do (
@@ -9,7 +10,6 @@ for /f "tokens=*" %%a in (services_MyList.txt) do (
 	reg add HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\%%a /t REG_DWORD /v Start /d 4 /f
 )
 
-pause
 
 :: https://superuser.com/a/607582/600216
 :: also via registry   HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\

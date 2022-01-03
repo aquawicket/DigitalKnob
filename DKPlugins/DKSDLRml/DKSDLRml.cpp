@@ -35,7 +35,7 @@ bool DKSDLRml::End(){
 bool DKSDLRml::Handle(SDL_Event *event) {
 	//DKDEBUGFUNC(event);
 	if(!dkRml->document)
-		return DKERROR("dkRml->document invalid");
+		return DKERROR("dkRml->document invalid\n");
 	Rml::Element* hover;
 	switch(event->type){
 		case SDL_MOUSEMOTION:

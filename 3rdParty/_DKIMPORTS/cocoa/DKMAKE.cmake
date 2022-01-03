@@ -6,6 +6,6 @@ endif()
 
 FIND_LIBRARY(Cocoa_lib Cocoa)
 if(NOT Cocoa_lib)
-	message(WARNING "Could not locate Cocoa framework")
+	DKWARN("Could not locate Cocoa framework")
 endif()
 APPLE_DKLIB(${Cocoa_lib})

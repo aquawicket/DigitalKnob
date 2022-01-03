@@ -153,6 +153,14 @@ function DKGit_GitCommit() {
         DKAudio_PlaySound("DKBuild/ding.wav")
 }
 
+function DKGit_ListCommits(){
+	CPP_DK_Execute(GIT + "log --oneline")
+}
+
+function DKGit_UpdateLastCommitMessage(message){
+	CPP_DK_Execute(GIT + "commit --amend -m \""+message+"\"")
+}
+
 function DKGit_SetCredentials(){
     CPP_DK_Execute(GIT + " config user.name \"aquawicket\"")
     CPP_DK_Execute(GIT + " config user.email \"aquawicket@hotmail.com\"")
@@ -161,6 +169,22 @@ function DKGit_SetCredentials(){
 
 function DKGit_GetCurrentBranch(){
 	return CPP_DK_Execute("git rev-parse --abbrev-ref HEAD", "rt")
+}
+
+function DKGit_SwitchBranch(branch){
+	CPP_DK_Execute(GIT + "checkout "+branch)
+}
+
+function DKGit_ListLocalBranches(){
+	CPP_DK_Execute(GIT + "branch")
+}
+
+function DKGit_ListRemoteBranches(){
+	CPP_DK_Execute(GIT + "branch -r")
+}
+
+function DKGit_ListAllBranches(){
+	CPP_DK_Execute(GIT + "branch -a")
 }
 
 // https://stackoverflow.com/questions/3258243/check-if-pull-needed-in-git
@@ -217,17 +241,19 @@ function DKGit_ForcePull(){
 	CPP_DK_Execute(GIT + " pull")
 }
 
+function DKGit_CleanFolder(path){
+	console.log("cleaning "+path)
+	CPP_DKFile_ChDir(path)
+	DKGit_DeleteUntrackedFiles()
+}
+
 function DKGit_ShowUntrackedFiles(){
-	console.log("DKGit_AhowUntrackedFiles()")
+	//console.log("DKGit_ShowUntrackedFiles()")
 	CPP_DK_Execute(GIT + " clean -n -d") //Shows what will be deleted
 }
 
 function DKGit_DeleteUntrackedFiles(){
-	console.log("DKGit_DeleteUntrackedFiles()")
-	CPP_DK_Execute(GIT + " clean -n -d") //Shows what will be deleted
-	var key = 10
-    while (key === 10)
-        key = CPP_DK_GetKey()
+	//console.log("DKGit_DeleteUntrackedFiles()")
 	CPP_DK_Execute(GIT + " clean -f -d") //Actually deletes
 }
 

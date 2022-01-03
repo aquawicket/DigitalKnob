@@ -6,6 +6,6 @@ endif()
 
 FIND_LIBRARY(IOKit_lib IOKit)
 if(NOT IOKit_lib)
-	message(WARNING "Could not locate IOKit framework")
+	DKWARN("Could not locate IOKit framework")
 endif()
 APPLE_DKLIB(${IOKit_lib})

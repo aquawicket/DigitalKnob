@@ -1,5 +1,6 @@
 :: Windows Features apps
 @echo off
+if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*) & exit )
 
 :: list all compoents
 dism /online /get-features /format:table
@@ -9,5 +10,3 @@ dism /online /get-features /format:table
 
 :: disable a component, replace <COMPONONT_NAME>
 ::dism /online /disable-feature /featurename:<COMPONENT_NAME>
-
-pause

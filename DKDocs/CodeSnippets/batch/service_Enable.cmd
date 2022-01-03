@@ -1,4 +1,5 @@
-@ECHO off
+@echo off
+if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*) & exit )
 
 set "SERVICE_NAME=schedule"     
 ::Put name here --^
@@ -9,4 +10,3 @@ sc config "%SERVICE_NAME%" start=auto
 echo "Press any key to start the service"
 pause
 sc start %SERVICE_NAME%
-pause

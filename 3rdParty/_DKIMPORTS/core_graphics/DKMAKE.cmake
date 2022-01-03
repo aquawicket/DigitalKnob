@@ -6,6 +6,6 @@ endif()
 
 FIND_LIBRARY(CoreGraphics_lib CoreGraphics)
 if(NOT CoreGraphics_lib)
-	message(WARNING "Could not locate CoreGraphics framework")
+	DKWARN("Could not locate CoreGraphics framework")
 endif()
 APPLE_DKLIB(${CoreGraphics_lib})
