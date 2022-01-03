@@ -1,10 +1,12 @@
+# https://github.com/boostorg/boost
 # https://www.boost.org/
 # https://www.boost.org/doc/libs/1_76_0/tools/build/doc/html/index.html - B2 User Manual - 1.76.0
 # https://github.com/LibCMaker/LibCMaker#readme
 #
+# https://github.com/boostorg/boost/archive/refs/tags/boost-1.78.0.zip
 # https://sourceforge.net/projects/boost/files/boost/1.74.0/boost_1_74_0.zip
 # https://dl.bintray.com/boostorg/release/1.74.0/source/boost_1_74_0.zip
-# https://boostorg.jfrog.io/artifactory/main/beta/1.78.0.beta1/source/boost_1_78_0_b1.zip
+# https://boostorg.jfrog.io/artifactory/main/beta/1.78.0.beta1/source/boost_1_78_0.zip
 
 # Debugging: When calling b2 to compile the boost libraries, you can use the -q flag to make it stop at the first error.
 # Notes: abi=aapcs and binary-format=elf were added to android build to supress "No best alternative for libs/context/build/asm_sources"
@@ -18,16 +20,14 @@ ANDROID_DKDEPEND(mingw64)
 ### VERSION ###
 DKSET(BOOST_MAJOR 1)
 DKSET(BOOST_MINOR 78)
-DKSET(BOOST_BUILD 0_b1)
-DKSET(BOOST_DL https://boostorg.jfrog.io/artifactory/main/beta/1.78.0.beta1/source/boost_1_78_0_b1.zip)
-
-DKSET(BOOST_VERSION ${BOOST_MAJOR}_${BOOST_MINOR}_${BOOST_BUILD})
-DKSET(BOOST_NAME boost_${BOOST_VERSION})
-#DKSET(BOOST_DL https://sourceforge.net/projects/boost/files/boost/${BOOST_MAJOR}.${BOOST_MINOR}.${BOOST_BUILD}/${BOOST_NAME}.zip)
-DKSET(BOOST ${3RDPARTY}/${BOOST_NAME})
+DKSET(BOOST_BUILD 0)
+DKSET(BOOST_DL https://github.com/boostorg/boost/archive/refs/tags/boost-1.78.0.zip)
 
 
 ### INSTALL ###
+DKSET(BOOST_VERSION ${BOOST_MAJOR}_${BOOST_MINOR}_${BOOST_BUILD})
+DKSET(BOOST_NAME boost_${BOOST_VERSION})
+DKSET(BOOST ${3RDPARTY}/${BOOST_NAME})
 DKINSTALL(${BOOST_DL} boost ${BOOST})
 
 
