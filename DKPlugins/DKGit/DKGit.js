@@ -163,6 +163,22 @@ function DKGit_GetCurrentBranch(){
 	return CPP_DK_Execute("git rev-parse --abbrev-ref HEAD", "rt")
 }
 
+function DKGit_SwitchBranch(branch){
+	CPP_DK_Execute(GIT + "checkout "+branch)
+}
+
+function DKGit_ListLocalBranches(){
+	CPP_DK_Execute(GIT + "branch")
+}
+
+function DKGit_ListRemoteBranches(){
+	CPP_DK_Execute(GIT + "branch -r")
+}
+
+function DKGit_ListAllBranches(){
+	CPP_DK_Execute(GIT + "branch -a")
+}
+
 // https://stackoverflow.com/questions/3258243/check-if-pull-needed-in-git
 // https://stackoverflow.com/questions/3258243/check-if-pull-needed-in-git#comment20583319_12791408
 // the total number of "different" commits between the current branch and server branch
