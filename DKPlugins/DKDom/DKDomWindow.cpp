@@ -177,9 +177,9 @@ bool DKDomWindow::Init()
 	duk_eval_string_noresult(dt->ctx, "print('this.testName:', this.testName);\n");
 	duk_eval_string_noresult(dt->ctx, "print('testName:', testName);\n");
 	printf("final top: %ld\n", (long)duk_get_top(dt->ctx));
+
 	///////////////////////////////////////////////////////////////////////////////
 	*/
-	
 
 	// Javascript bindings
 	DKClass::DKCreate("DKDom/DKDomWindow.js");

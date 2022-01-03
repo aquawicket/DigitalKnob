@@ -35,6 +35,8 @@ RASPBERRY_DEBUG_DKLIB(${SDLGPU}/${OS}/SDL_gpu/lib/Debug/libSDL2_gpu_s.a)
 RASPBERRY_RELEASE_DKLIB(${SDLGPU}/${OS}/SDL_gpu/lib/Debug/libSDL2_gpu_s.a)
 ANDROID_DEBUG_DKLIB(${SDLGPU}/${OS}/SDL_gpu-VS/lib/Debug/libSDL2_gpu_s.a)
 ANDROID_RELEASE_DKLIB(${SDLGPU}/${OS}/SDL_gpu-VS/lib/Debug/libSDL2_gpu_s.a)
+DKLIB(${SDLGPU}/${OS}/${RELEASE_DIR}/libsdl-gpu.a)
+
 
 
 ### COMPILE ###

@@ -19,6 +19,7 @@ if(DKFUNCTIONS_INCLUDED)
 endif(DKFUNCTIONS_INCLUDED)
 set(DKFUNCTIONS_INCLUDED 1)
 
+
 if(CMAKE_HOST_WIN32)
 	set(WIN_HOST TRUE CACHE INTERNAL "")
 endif()
@@ -119,11 +120,8 @@ macro(DKTRACE msg)
 	message(WARNING "${H_black}${STACK_HEADER}${CLR}${B_blue}${msg}${CLR}")
 endmacro()
 
-
-
-
-
 execute_process(COMMAND ${CMAKE_COMMAND} -E remove ${DIGITALKNOB}/DK/DKCMake/Functions_Ext.cmake)
+
 function(CreateFunc str)
 	if(0)
 		cmake_language(EVAL CODE ${str}) # only available on cmake 3.18+
@@ -224,7 +222,6 @@ endfunction()
 
 # dk_string_has
 function(dk_includes str substr result)
-	
 	string(FIND "${str}" "${substr}" index)
 	if(${index} GREATER -1)
 		set(${result} true PARENT_SCOPE)
@@ -232,7 +229,6 @@ function(dk_includes str substr result)
 		set(${result} false PARENT_SCOPE)
 	endif()
 endfunction()
-
 
 # https://stackoverflow.com/a/29250496/688352
 function(DKSET variable value)
