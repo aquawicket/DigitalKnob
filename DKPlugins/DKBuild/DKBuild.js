@@ -232,43 +232,45 @@ function DKBuild_ValidateNDK(){
 }
 
 function DKBuild_ResetAppsPlugins(){
-	console.log("Deleting Apps and Plugins... ")
-	
-	// Delete everything in DKApps except DKBuild
-	let apps = CPP_DKFile_DirectoryContents(DIGITALKNOB+"DK/DKApps")
-	if(!apps)
-		console.error("DKBuild_ResetAppsPlugins(): apps invalid")
-	let list = apps.split(',')
-	for(let i=0; i<list.length; ++i){
-		if(list[i] === "DKBuilder"){ continue }
-		CPP_DKFile_Delete(DIGITALKNOB+"DK/DKApps/"+list[i])
-	}
-	
-	//Multipe user folders
 	let contents = CPP_DKFile_DirectoryContents(DIGITALKNOB)
-	let files = contents.split(",")
-	for(let i=0; i<files.length; i++){
-		if(files[i].indexOf(".txt") <=1){ continue }
-		let url = CPP_DKFile_GetSetting(files[i], "[MYGIT]")
-		if(url){
-			let folder = files[i].replace(".txt","")
-			CPP_DKFile_Delete(DIGITALKNOB+folder)
+	let items = contents.split(",")
+	for(let n=0; n<items.length; n++){
+		if(CPP_DKFile_Exists(DIGITALKNOB+items[n]+"/.git")){
+			if(CPP_DKFile_Exists(DIGITALKNOB+items[n]+"/DKApps")){
+				let app_contents = CPP_DKFile_DirectoryContents(DIGITALKNOB+items[n]+"/DKApps")
+				let apps = app_contents.split(",")
+				for(let nn=0; nn<apps.length; nn++){
+					if(CPP_DKFile_IsDirectory(DIGITALKNOB+items[n]+"/DKApps/"+apps[nn])){
+						if(apps[nn] !== "DKBuilder")
+							DKGit_CleanFolder(DIGITALKNOB+items[n]+"/DKApps/"+apps[nn])
+					}
+				}
+			}
 		}
 	}
 	
-	// Delete DKPlugins
-	CPP_DKFile_Delete(DIGITALKNOB+"DK/DKPlugins")
+	let contents = CPP_DKFile_DirectoryContents(DIGITALKNOB)
+	let items = contents.split(",")
+	for(let n=0; n<items.length; n++){
+		if(CPP_DKFile_Exists(DIGITALKNOB+items[n]+"/.git")){
+			if(CPP_DKFile_Exists(DIGITALKNOB+items[n]+"/DKPlugins"))
+					DKGit_CleanFolder(DIGITALKNOB+items[n]+"/DKPlugins")
+		}
+	}
 }
 
 function DKBuild_Reset3rdParty(){
-	//TODO
-	console.log("Deleting 3rdParty... ")
-	console.log("Please wait. ")
-	CPP_DKFile_Delete(DIGITALKNOB+"DK/3rdParty")
+	let contents = CPP_DKFile_DirectoryContents(DIGITALKNOB)
+	let items = contents.split(",")
+	for(let n=0; n<items.length; n++){
+		if(CPP_DKFile_Exists(DIGITALKNOB+items[n]+"/.git")){
+			if(CPP_DKFile_Exists(DIGITALKNOB+items[n]+"/3rdParty"))
+					DKGit_CleanFolder(DIGITALKNOB+items[n]+"/3rdParty")
+		}
+	}
 }
 
 function DKBuild_GetAppList(){
-	
 	APP_LIST = []
 	let contents = CPP_DKFile_DirectoryContents(DIGITALKNOB)
 	let items = contents.split(",")
