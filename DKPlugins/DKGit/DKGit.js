@@ -153,6 +153,14 @@ function DKGit_GitCommit() {
         DKAudio_PlaySound("DKBuild/ding.wav")
 }
 
+function DKGit_ListCommits(){
+	CPP_DK_Execute(GIT + "log --oneline")
+}
+
+function DKGit_UpdateLastCommitMessage(message){
+	CPP_DK_Execute(GIT + "commit --amend -m \""+message+"\"")
+}
+
 function DKGit_SetCredentials(){
     CPP_DK_Execute(GIT + " config user.name \"aquawicket\"")
     CPP_DK_Execute(GIT + " config user.email \"aquawicket@hotmail.com\"")
