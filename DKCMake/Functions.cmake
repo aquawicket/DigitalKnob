@@ -1369,8 +1369,8 @@ function(generateCmake plugin_name)
 	file(APPEND ${plugin_path}/CMakeLists.txt "		set_target_properties(${plugin_name} PROPERTIES LINKER_LANGUAGE CPP)\n")
 	file(APPEND ${plugin_path}/CMakeLists.txt "endif()\n")
 	
-	#install(TARGETS <target_name> DESTINATION ${DIGITALKNOB}/DKInstall/lib/${OS})
-	#install(FILES file.h DESTINATION ${DIGITALKNOB}/DKInstall/lib/${OS})
+	file(APPEND ${plugin_path}/CMakeLists.txt "install(TARGETS ${plugin_name} DESTINATION ${DIGITALKNOB}/DKInstall/lib/${OS})\n")
+	file(APPEND ${plugin_path}/CMakeLists.txt "install(FILES \${${plugin_name}_SRC} DESTINATION ${DIGITALKNOB}/DKInstall/lib/${OS})\n")
 	
 	##add headers to DKPlugins.h
 	if(${plugin_name} STREQUAL DK OR STATIC)

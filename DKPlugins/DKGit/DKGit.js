@@ -241,16 +241,19 @@ function DKGit_ForcePull(){
 	CPP_DK_Execute(GIT + " pull")
 }
 
+function DKGit_CleanFolder(path){
+	console.log("cleaning "+path)
+	CPP_DKFile_ChDir(path)
+	DKGit_DeleteUntrackedFiles()
+}
+
 function DKGit_ShowUntrackedFiles(){
-	console.log("DKGit_ShowUntrackedFiles()")
+	//console.log("DKGit_ShowUntrackedFiles()")
 	CPP_DK_Execute(GIT + " clean -n -d") //Shows what will be deleted
 }
 
 function DKGit_DeleteUntrackedFiles(){
-	console.log("DKGit_DeleteUntrackedFiles()")
-	var key = 10
-    while (key === 10)
-        key = CPP_DK_GetKey()
+	//console.log("DKGit_DeleteUntrackedFiles()")
 	CPP_DK_Execute(GIT + " clean -f -d") //Actually deletes
 }
 
