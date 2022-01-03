@@ -126,14 +126,14 @@ if(SDLMIXER_SUPPORT_OGG_MUSIC)
 	#include_directories(external/libvorbis-1.3.3/include)
 	#list(APPEND SDLMIXER_LIBRARIES VORBIS_FILE)
 
-	include_directories(${OGG_INCLUDE_DIRS})
-	include_directories(${VORBIS_INCLUDE_DIRS})
+	include_directories(${OGG_INCLUDE_DIR})
+	include_directories(${VORBIS_INCLUDE_DIR})
 endif()
 
 if(SDLMIXER_SUPPORT_MP3_MUSIC)
 	add_definitions(-DMP3_MUSIC)
 	#add_subdirectory(external/smpeg2-2.0.0)
-	include_directories(${SMPEG_INCLUDE_DIRS})
+	include_directories(${SMPEG_INCLUDE_DIR})
 	#list(APPEND SDLMIXER_LIBRARIES SMPEG)
 endif()
 
