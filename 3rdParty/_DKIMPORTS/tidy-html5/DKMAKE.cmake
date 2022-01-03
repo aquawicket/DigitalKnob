@@ -1,12 +1,13 @@
 # https://github.com/htacg/tidy-html5
 #
 # https://github.com/htacg/tidy-html5/archive/5.7.28.zip
+# https://github.com/htacg/tidy-html5/archive/refs/tags/5.8.0.zip
 
 ### VERSION ###
 DKSET(TIDY_MAJOR 5)
 DKSET(TIDY_MINOR 8)
 DKSET(TIDY_BUILD 0)
-DKSET(TIDY_DL https://github.com/htacg/tidy-html5/archive/5.7.28.zip)
+DKSET(TIDY_DL https://github.com/htacg/tidy-html5/archive/refs/tags/5.8.0.zip)
 
 
 
@@ -31,8 +32,6 @@ LINUX_DEBUG_DKLIB(${TIDY}/${OS}/${DEBUG_DIR}/libtidy.a)
 LINUX_RELEASE_DKLIB(${TIDY}/${OS}/${RELEASE_DIR}/libtidy.a)
 RASPBERRY_DEBUG_DKLIB(${TIDY}/${OS}/${DEBUG_DIR}/libtidy.a)
 RASPBERRY_RELEASE_DKLIB(${TIDY}/${OS}/${RELEASE_DIR}/libtidy.a)
-#ANDROID_DEBUG_DKLIB(${TIDY}/${OS}/${DEBUG_DIR}/obj/local/armeabi-v7a/libtidys.a)
-#ANDROID_RELEASE_DKLIB(${TIDY}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/libtidys.a)
 ANDROID_DEBUG_DKLIB(${TIDY}/${OS}/${DEBUG_DIR}/libtidy.a)
 ANDROID_RELEASE_DKLIB(${TIDY}/${OS}/${RELEASE_DIR}/libtidy.a)
 
