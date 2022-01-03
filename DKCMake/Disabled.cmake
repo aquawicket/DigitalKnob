@@ -136,7 +136,7 @@ if(MAC)  # Disabled on Mac host machines
 	DKDISABLE(openssl)
 	DKDISABLE(podofo)
 	#DKDISABLE(sdl2_mixer)
-	#DKDISABLE(smpeg2)
+	DKDISABLE(smpeg2)
 	DKDISABLE(tesseract)
 	DKDISABLE(tidy-html5)
 	DKDISABLE(tiff)
