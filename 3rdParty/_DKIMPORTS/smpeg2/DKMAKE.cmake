@@ -6,11 +6,12 @@ DKDEPEND(sdl2)
 
 ### VERSION ###
 DKSET(SMPEG2_VERSION 2.0.0)
-DKSET(SMPEG2_NAME smpeg2-${SMPEG2_VERSION})
+DKSET(SMPEG2_dl https://www.libsdl.org/projects/smpeg/release/smpeg2-2.0.0.tar.gz)
+
 
 ### INSTALL ###
-## https://www.libsdl.org/projects/smpeg/release/smpeg2-2.0.0.tar.gz
-DKINSTALL(https://www.libsdl.org/projects/smpeg/release/${SMPEG2_NAME}.tar.gz smpeg2 ${SMPEG2})
+DKSET(SMPEG2_NAME smpeg2-${SMPEG2_VERSION})
+DKINSTALL(${SMPEG2_DL} smpeg2 ${SMPEG2})
 DKSET(SMPEG2 ${3RDPARTY}/${SMPEG2_NAME})
 
 
@@ -24,8 +25,6 @@ LINUX_DEBUG_DKLIB(${SMPEG2}/${OS}/${DEBUG_DIR}/lib/libsmpeg2.a)
 LINUX_RELEASE_DKLIB(${SMPEG2}/${OS}/${RELEASE_DIR}/lib/libsmpeg2.a)
 RASPBERRY_DEBUG_DKLIB(${SMPEG2}/${OS}/${DEBUG_DIR}/lib/libsmpeg2.a)
 RASPBERRY_RELEASE_DKLIB(${SMPEG2}/${OS}/${RELEASE_DIR}/lib/libsmpeg2.a)
-##ANDROID_DEBUG_DKLIB(${SMPEG2}/${OS}/${DEBUG_DIR}/obj/local/armeabi-v7a/libSMPEG.a)
-##ANDROID_RELEASE_DKLIB(${SMPEG2}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/libSMPEG.a)
 ANDROID_DEBUG_DKLIB(${SMPEG2}/${OS}/${DEBUG_DIR}/lib/libsmpeg2.a)
 ANDROID_RELEASE_DKLIB(${SMPEG2}/${OS}/${RELEASE_DIR}/lib/libsmpeg2.a)
 
@@ -45,7 +44,7 @@ DKSETPATH(${SMPEG2}/${BUILD_DIR})
 WIN_DKQCOMMAND(${DKCMAKE_BUILD} ${SDL2_CMAKE} ${SMPEG2})
 WIN_VS(${SMPEG2_NAME} SMPEG.sln SMPEG)
 
-MAC_DKQCOMMAND(${DKCMAKE_BUILD} ${SDL2_CMAKE} ${SMPEG2})
+MAC_DKQCOMMAND(${DKCMAKE_BUILD} -DCMAKE_CXX_FLAGS=-Wno-register ${SDL2_CMAKE} ${SMPEG2})
 MAC_XCODE(${SMPEG2_NAME} SMPEG)
 
 IOS_DKQCOMMAND(${DKCMAKE_BUILD} ${SDL2_CMAKE} ${SMPEG2})
