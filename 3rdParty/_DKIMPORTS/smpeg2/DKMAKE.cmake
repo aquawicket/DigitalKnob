@@ -6,7 +6,7 @@ DKDEPEND(sdl2)
 
 ### VERSION ###
 DKSET(SMPEG2_VERSION 2.0.0)
-DKSET(SMPEG2_dl https://www.libsdl.org/projects/smpeg/release/smpeg2-2.0.0.tar.gz)
+DKSET(SMPEG2_DL https://www.libsdl.org/projects/smpeg/release/smpeg2-2.0.0.tar.gz)
 
 
 ### INSTALL ###
