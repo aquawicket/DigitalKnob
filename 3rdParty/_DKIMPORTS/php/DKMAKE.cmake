@@ -1,10 +1,19 @@
+# https://github.com/php/php-src
+# https://www.php.net
+#
 # https://www.php.net/distributions/php-8.0.9.tar.gz
+# https://github.com/php/php-src/archive/refs/tags/php-8.0.14.zip
+
+
 
 ### VERSION ###
-DKSET(PHP_VERSION 8.0.9)
-DKSET(PHP_NAME php-${PHP_VERSION})
-DKSET(PHP_DL https://www.php.net/distributions/${PHP_NAME}.tar.gz)
-DKSET(PHP ${3RDPARTY}/${PHP_NAME})
+DKSET(PHP_VERSION 8.0.14)
+DKSET(PHP_DL https://github.com/php/php-src/archive/refs/tags/php-8.0.14.zip)
+
+
+
 
 ### INSTALL ###
+DKSET(PHP_NAME php-${PHP_VERSION})
+DKSET(PHP ${3RDPARTY}/${PHP_NAME})
 DKINSTALL(${PHP_DL} php ${PHP})
