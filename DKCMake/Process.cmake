@@ -72,6 +72,7 @@ foreach(plugin ${dkdepend_list})
 	#This executes the 3rdParty library builds, and dkplugin setup, creates CMakeLists.txt files
 	include(${plugin_path}/DKMAKE.cmake)
 	
+	
 	#NOTE: we won't have the library paths to remove until we've run DKCMake.cmake for the library
 	# We want to to use this to refresh 3rdParty Plugins
 	#if(REBUILDALL)
@@ -87,12 +88,15 @@ foreach(plugin ${dkdepend_list})
 	#	add_subdirectory(${${PLUGIN_NAME}} ${${PLUGIN_NAME}}/${OS})
 	#	DKINFO("add_subdirectory( ${${PLUGIN_NAME}} ${${PLUGIN_NAME}}/${OS} )")
 	#endif()
-	string(TOLOWER "${DKPLUGIN_LIST}" DKPLUGIN_LIST_lower)
-	string(TOLOWER "${plugin}" plugin_lower)
 	
-	#string(FIND "${DKPLUGIN_LIST}" "${plugin}" isDKPlugin)
-	string(FIND "${DKPLUGIN_LIST_lower}" "${plugin_lower}" isDKPlugin)
+	#install(TARGETS <target_name> DESTINATION ${DIGITALKNOB}/DKInstall/lib/${OS})
+	#install(FILES file.h DESTINATION ${DIGITALKNOB}/DKInstall/lib/${OS})
+	
 	####################### DKPlugins #######################
+	# Libraries in the /DKPlugins folder
+	string(TOLOWER "${DKPLUGIN_LIST}" DKPLUGIN_LIST_lower)
+	string(TOLOWER "${plugin}" plugin_lower)	
+	string(FIND "${DKPLUGIN_LIST_lower}" "${plugin_lower}" isDKPlugin)
 	if(${isDKPlugin} GREATER -1)
 		#Add the DKPlugin to the app project
 		if(EXISTS "${plugin_path}/CMakeLists.txt")
