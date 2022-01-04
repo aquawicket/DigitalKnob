@@ -7,13 +7,11 @@ endif()
 
 
 ### VERSION ####
-DKSET(ANDROID_CMAKE_VERSION 3.18.1)
-DKSET(ANDROID_CMAKE_DL  https://marketplace.visualstudio.com/_apis/public/gallery/publishers/VisualCPPTeam/vsextensions/JavaToolsForAndroidProjVS2019/2.8/vspackage)
-
+DKSET(ANDROIDJAVA_VERSION 2.8)
+DKSET(ANDROIDJAVA_NAME androoidjavatools-${ANDROIDJAVA_VERSION})
+DKSET(ANDROIDJAVA_DL https://marketplace.visualstudio.com/_apis/public/gallery/publishers/VisualCPPTeam/vsextensions/JavaToolsForAndroidProjVS2019/2.8/vspackage)
+DKSET(ANDROIDJAVA ${3RDPARTY}/${ANDROIDJAVA_NAME})
 
 
 ### INSTALL ###
-DKSET(ANDROID_CMAKE_NAME android_cmake-${ANDROID_CMAKE_VERSION})
-DKSET(ANDROID_CMAKE ${3RDPARTY}/android-sdk/cmake/${ANDROID_CMAKE_VERSION})
-DKINSTALL(${ANDROID_CMAKE_DL} android-java-tools ${ANDROID_CMAKE})
-
+DKINSTALL(${ANDROIDJAVA_DL} android-java-tools ${ANDROIDJAVA})
