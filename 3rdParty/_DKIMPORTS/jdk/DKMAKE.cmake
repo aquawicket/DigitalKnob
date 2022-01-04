@@ -7,6 +7,7 @@
 
 # https://download.java.net/openjdk/jdk8u41/ri/openjdk-8u41-b04-windows-i586-14_jan_2020.zip
 
+
 ### VERSION ###
 DKSET(JDK_VERSION 9.0.4)
 DKSET(JDK_NAME openjdk-${JDK_VERSION}_windows-x64_bin)
