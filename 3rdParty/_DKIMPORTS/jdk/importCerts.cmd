@@ -2,7 +2,7 @@
 :: https://slproweb.com/products/Win32OpenSSL.html
 :: https://slproweb.com/download/Win32OpenSSL-1_1_1L.exe
 @echo off
-if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*) & exit )
+::if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*) & exit )
 
 
 ::echo This will download the .cer file from google and put it into the JDK keystore.
@@ -27,27 +27,19 @@ if exist "C:\Program Files\OpenSSL-Win64\bin\openssl.exe" set "OPENSSL_EXE=C:\Pr
 ::if exist "%OPENSSL%\bin\opensslMT.exe" set "OPENSSL_EXE=%OPENSSL%\bin\opensslMT.exe"
 ::if exist "%OPENSSL%\bin\openssl.exe" set "OPENSSL_EXE=%OPENSSL%\bin\openssl.exe"
 
-
-
 ::keytool -import -noprompt -file PathToCertificate -alias SomeCertificateAlias -keystore PathToKeyStore -storepass KeyStorePassword
-
-
-
 :: echo -n | %OPENSSL_EXE% ca -config %JDK%\ssl\openssl.cnf
 :: echo -n | %OPENSSL_EXE% ca -config %JDK%\ssl\openssl.cnf -policy policy_anything -extensions ssl_server -out requests/server-signed.pem -infiles requests/server.pem
-
 
 :: list the keys
 :: keytool.exe -list
 :: keytool.exe -cacerts -list
 
-:: delete the keys first if they already exist
-"%KEYTOOL_EXE%" -delete -noprompt -cacerts -alias google -storepass changeit
-"%KEYTOOL_EXE%" -delete -noprompt -cacerts -alias maven -storepass changeit
-
+:: create and import the google.cer key
 echo -n | "%OPENSSL_EXE%" s_client -connect google.com:443 | "%OPENSSL_EXE%" x509 > "%GOOGLE_CERT%"
 "%KEYTOOL_EXE%" -import -noprompt -alias google -cacerts -file "%GOOGLE_CERT%" -storepass changeit
 
+:: create and import the maven.cer key
 echo -n | "%OPENSSL_EXE%" s_client -connect repo.maven.apache.org:443 | "%OPENSSL_EXE%" x509 > "%MAVEN_CERT%"
 "%KEYTOOL_EXE%" -import -noprompt -alias maven -cacerts -file "%MAVEN_CERT%" -storepass changeit
 
