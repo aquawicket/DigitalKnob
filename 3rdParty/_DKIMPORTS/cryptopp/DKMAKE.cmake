@@ -1,7 +1,7 @@
 # https://www.cryptopp.com/
 # https://github.com/weidai11/cryptopp
 #
-# https://github.com/weidai11/cryptopp/archive/refs/tags/CRYPTOPP_8_6_0.zip
+# https://github.com/weidai11/cryptopp/archive/refs/tags/CRYPTOPP_8_5_0.zip
 
 if(IOSSIM)
 	#DKDEPEND(libmd)
@@ -9,8 +9,8 @@ if(IOSSIM)
 endif()
 
 ### VERSION ###
-DKSET(CRYPTO_VERSION 8_6_0)
-DKSET(CRYPTO_DL https://github.com/weidai11/cryptopp/archive/refs/tags/CRYPTOPP_8_6_0.zip)
+DKSET(CRYPTO_VERSION 8_5_0)
+DKSET(CRYPTO_DL https://github.com/weidai11/cryptopp/archive/refs/tags/CRYPTOPP_8_5_0.zip)
 
 
 
