@@ -32,7 +32,7 @@ DKINSTALL(${ANDROIDSDKTOOLS_DL} android-sdk-tools ${ANDROIDSDKTOOLS})
 
 
 #license signing
-if(EXISTS ${ANDROIDSDKTOOLS}/installed)
-DKDEPEND(java)
-DKCOMMAND(${ANDROIDSDKTOOLS}/bin/sdkmanager.bat --licenses)
-endif()
+#if(EXISTS ${ANDROIDSDKTOOLS}/installed)
+#DKDEPEND(java)
+#DKCOMMAND(${ANDROIDSDKTOOLS}/bin/sdkmanager.bat --licenses)
+#endif()
