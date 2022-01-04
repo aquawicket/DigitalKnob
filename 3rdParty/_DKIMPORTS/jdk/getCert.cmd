@@ -12,8 +12,8 @@ echo press and key to continue && timeout /t 60 > nul
 
 
 set "DIGITALKNOB=C:\Users\%USERNAME%\digitalknob"
-::set "JDK=%DIGITALKNOB%\DK\3rdParty\openssl-1.0.2h-vs2015
-set "JDK=%DIGITALKNOB%\DK\3rdParty\openjdk-8u41-b04-windows-i586-14_jan_2020"
+::set "JDK=%DIGITALKNOB%\DK\3rdParty\openjdk-8u41-b04-windows-i586-14_jan_2020"
+set "JDK=%DIGITALKNOB%\DK\3rdParty\openjdk-9.0.4_windows-x64_bin"
 set "GOOGLE_CERT=%JDK%\google.cer"
 set "MAVEN_CERT=%JDK%\maven.cer"
 set "KEYTOOL_EXE=%JDK%\bin\keytool.exe"
