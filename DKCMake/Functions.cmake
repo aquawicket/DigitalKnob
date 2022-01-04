@@ -991,7 +991,7 @@ function(DKINSTALL src_path import_name dest_path)
 	endif()
 	file(WRITE ${dest_path}/installed "${dest_filename}\n")
 endfunction()
-
+AliasFunctions("DKSETPATH" "NO_DEBUG_RELEASE_TAGS")
 
 function(dk_validatePath path result)
 	get_filename_component(path ${path} ABSOLUTE)
