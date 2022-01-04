@@ -31,10 +31,16 @@ if exist "C:\Program Files\OpenSSL-Win64\bin\openssl.exe" set "OPENSSL_EXE=C:\Pr
 ::echo -n | %OPENSSL_EXE% ca -config %JDK%\ssl\openssl.cnf
 ::echo -n | %OPENSSL_EXE% ca -config %JDK%\ssl\openssl.cnf -policy policy_anything -extensions ssl_server -out requests/server-signed.pem -infiles requests/server.pem
 
+
+::echo -n | "C:\Program Files\OpenSSL-Win64\bin\openssl.exe" s_client -connect google.com:443 | "C:\Program Files\OpenSSL-Win64\bin\openssl.exe" x509 > "C:\Users\%USERNAME%\digitalknob\DK\3rdParty\openjdk-8u41-b04-windows-i586-14_jan_2020\google.cer" "C:\Users\%USERNAME%\digitalknob\DK\3rdParty\openjdk-8u41-b04-windows-i586-14_jan_2020\bin\keytool.exe" -import -alias google -file "C:\Users\%USERNAME%\digitalknob\DK\3rdParty\openjdk-8u41-b04-windows-i586-14_jan_2020"\google.cer"
+
+::echo -n | "C:\Program Files\OpenSSL-Win64\bin\openssl.exe" s_client -connect repo.maven.apache.org:443 | "C:\Program Files\OpenSSL-Win64\bin\openssl.exe" x509 > "C:\Users\%USERNAME%\digitalknob\DK\3rdParty\openjdk-8u41-b04-windows-i586-14_jan_2020\maven.cer" "C:\Users\%USERNAME%\digitalknob\DK\3rdParty\openjdk-8u41-b04-windows-i586-14_jan_2020\bin\keytool.exe" -import -alias maven -file "C:\Users\%USERNAME%\digitalknob\DK\3rdParty\openjdk-8u41-b04-windows-i586-14_jan_2020\maven.cer"
+
+
 echo -n | "%OPENSSL_EXE%" s_client -connect google.com:443 | "%OPENSSL_EXE%" x509 > "%GOOGLE_CERT%"
-"%KEYTOOL_EXE%" -import -alias google -cacerts -file "%GOOGLE_CERT%"
+"%KEYTOOL_EXE%" -import -alias google -file "%GOOGLE_CERT%"
 
 echo -n | "%OPENSSL_EXE%" s_client -connect repo.maven.apache.org:443 | "%OPENSSL_EXE%" x509 > "%MAVEN_CERT%"
-"%KEYTOOL_EXE%" -import -alias maven -cacerts -file "%MAVEN_CERT%"
+"%KEYTOOL_EXE%" -import -alias maven -file "%MAVEN_CERT%"
 
 echo press and key to continue && timeout /t 60 > nul
