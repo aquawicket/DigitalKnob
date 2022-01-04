@@ -687,6 +687,15 @@ function(DKDISABLE plugin)
 	if(NOT ${CMAKE_CURRENT_LIST_DIR} STREQUAL ${DKCMAKE} AND NOT ${CMAKE_CURRENT_LIST_DIR} STREQUAL ${DKPROJECT}) # /from DKCMake or curremt Project directory only
 		DKERROR("\n! WARNING !\n DKDISABLE() Can only be used from the DKCMake/Disabled.cmake file. This is to avoid having disabled libraries hideing everywhere.\n")
 	endif()
+	
+	if(NOT EXISTS ${DKIMPORTS}/${plugin}/DKMAKE.cmake)
+	if(NOT EXISTS ${DKPLUGINS}/${plugin}/DKMAKE.cmake)
+		DKERROR("DKDISABLE(${plugin}):  unable to locate plugin in /3rdParty/_DKIMPORTS  or /DKPlugins")
+		dk_exit()
+		return()
+	endif()
+	endif()
+	
 	if(${ARGC} GREATER 1)
 		DKUNSET(${ARGV1})
 		DKUNSET(HAVE_${ARGV1})
