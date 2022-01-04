@@ -12,9 +12,9 @@ echo press and key to continue && timeout /t 60 > nul
 
 
 set "DIGITALKNOB=C:\Users\%USERNAME%\digitalknob"
-set "THIRDPARTY=%DIGITALKNOB%\DK\3rdParty"
-::set "JDK=%3RDPARTY%\openssl-1.0.2h-vs2015
-set "JDK=%3RDPARTY%\openjdk-9.0.4_windows-x64_bin"
+::set "JDK=%DIGITALKNOB%\DK\3rdParty\openssl-1.0.2h-vs2015
+set "JDK=%DIGITALKNOB%\DK\3rdParty\openjdk-8u41-b04-windows-i586-14_jan_2020"
+#set "OPENSSL=C:\Program Files\OpenSSL-Win64"
 set "GOOGLE_CERT=%JDK%\google.cer"
 set "MAVEN_CERT=%JDK%\maven.cer"
 set "KEYTOOL_EXE=%JDK%\bin\keytool.exe"
@@ -24,9 +24,9 @@ set "CACERTS=%JDK%\lib\security\cacerts"
 if exist "C:\Windows\System32\openssl.exe" set "OPENSSL_EXE=C:\Windows\System32\openssl.exe"
 if exist "C:\Windows\System32\OpenSSL-win32\bin\openssl.exe" set "OPENSSL_EXE=C:\Windows\System32\OpenSSL-win32\bin\openssl.exe"
 if exist "C:\Program Files (x86)\OpenSSL-win32\bin\openssl.exe" set "OPENSSL_EXE=C:\Program Files (x86)\OpenSSL-win32\bin\openssl.exe"
-if exist "C:\Program Files\OpenSSL-win32\bin\openssl.exe" set "OPENSSL_EXE=C:\Program Files\OpenSSL-win32\bin\openssl.exe"
-::if exist "%OPENSSL%\bin\opensslMT.exe" set "OPENSSL_EXE=%JDK%\bin\opensslMT.exe"
-::if exist "%OPENSSL%\bin\openssl.exe" set "OPENSSL_EXE=%JDK%\bin\openssl.exe"
+if exist "C:\Program Files\OpenSSL-Win64\bin\openssl.exe" set "OPENSSL_EXE=C:\Program Files\OpenSSL-Win64\bin\openssl.exe"
+::if exist "%OPENSSL%\bin\opensslMT.exe" set "OPENSSL_EXE=%OPENSSL%\bin\opensslMT.exe"
+::if exist "%OPENSSL%\bin\openssl.exe" set "OPENSSL_EXE=%OPENSSL%\bin\openssl.exe"
 
 ::echo -n | %OPENSSL_EXE% ca -config %JDK%\ssl\openssl.cnf
 ::echo -n | %OPENSSL_EXE% ca -config %JDK%\ssl\openssl.cnf -policy policy_anything -extensions ssl_server -out requests/server-signed.pem -infiles requests/server.pem
