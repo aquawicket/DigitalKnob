@@ -1,8 +1,7 @@
 # https://www.cryptopp.com/
 # https://github.com/weidai11/cryptopp
 #
-# https://github.com/webstorage119/website-1/raw/master/cryptopp600.zip
-# https://github.com/weidai11/cryptopp/archive/refs/tags/CRYPTOPP_8_6_0.zip
+# https://github.com/weidai11/cryptopp/archive/refs/tags/CRYPTOPP_8_5_0.zip
 
 if(IOSSIM)
 	#DKDEPEND(libmd)
@@ -10,18 +9,14 @@ if(IOSSIM)
 endif()
 
 ### VERSION ###
-#DKSET(CRYPTO_VERSION 600)
-#DKSET(CRYPTO_NAME cryptopp${CRYPTO_VERSION})
-#DKSET(CRYPTO_DL https://github.com/webstorage119/website-1/raw/master/${CRYPTO_NAME}.zip)
-
 DKSET(CRYPTO_VERSION 8_5_0)
-DKSET(CRYPTO_NAME CRYPTOPP_${CRYPTO_VERSION})
-DKSET(CRYPTO_DL https://github.com/weidai11/cryptopp/archive/refs/tags/${CRYPTO_NAME}.zip)
+DKSET(CRYPTO_DL https://github.com/weidai11/cryptopp/archive/refs/tags/CRYPTOPP_8_5_0.zip)
 
-DKSET(CRYPTO ${3RDPARTY}/${CRYPTO_NAME})
 
 
 ### INSTALL ###
+DKSET(CRYPTO_NAME CRYPTOPP_${CRYPTO_VERSION})
+DKSET(CRYPTO ${3RDPARTY}/${CRYPTO_NAME})
 DKINSTALL(${CRYPTO_DL} cryptopp ${CRYPTO})
 
 
@@ -43,6 +38,7 @@ DKSETPATH(${CRYPTO}/${BUILD_DIR})
 
 WIN_DKQCOMMAND(${DKCMAKE_BUILD} -DBUILD_STATIC=ON -DBUILD_SHARED=OFF -DBUILD_TESTING=OFF ${CRYPTO})
 WIN_VS(${CRYPTO_NAME} cryptopp.sln cryptopp-static)
+
 
 if(MAC)
 	string(REPLACE "-DMAC " " " DKCMAKE_MAC64_CRYPTOPP "${DKCMAKE_BUILD}") #fix of class named MAC in cryptopp

@@ -1,7 +1,7 @@
 BOOST="$(cd "$(dirname "$0")"; pwd)"
 BOOST_VER1=1
 BOOST_VER2=78
-BOOST_VER3=0_b1
+BOOST_VER3=0
 BOOST_DIR="boost_${BOOST_VER1}_${BOOST_VER2}_${BOOST_VER3}"
 
 # ---------

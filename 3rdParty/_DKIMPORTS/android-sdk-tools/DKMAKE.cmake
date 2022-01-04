@@ -22,6 +22,7 @@ DKSET(ANDROIDSDKTOOLS ${ANDROIDSDK}/tools)
 file(MAKE_DIRECTORY ${ANDROIDSDKTOOLS})
 DKINSTALL(${ANDROIDSDKTOOLS_DL} android-sdk-tools ${ANDROIDSDKTOOLS})
 
+
 # TODO
 #In tools/bin/sdkmanager.bat
 #replace this ...
@@ -31,5 +32,7 @@ DKINSTALL(${ANDROIDSDKTOOLS_DL} android-sdk-tools ${ANDROIDSDKTOOLS})
 
 
 #license signing
+#if(EXISTS ${ANDROIDSDKTOOLS}/installed)
 #DKDEPEND(java)
 #DKCOMMAND(${ANDROIDSDKTOOLS}/bin/sdkmanager.bat --licenses)
+#endif()

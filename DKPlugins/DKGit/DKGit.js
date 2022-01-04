@@ -58,7 +58,7 @@ function DKGit_GitUpdate() {
 		//CPP_DK_Execute(GIT + " pull origin master")
 		
 		CPP_DK_Execute(GIT + " checkout Development")
-		CPP_DK_Execute(GIT + " pull Development")
+		CPP_DK_Execute(GIT + " pull")
 		//const branch = DKGit_GetCurrentBranch()
 	}
 	else{
