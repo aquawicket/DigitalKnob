@@ -1,8 +1,8 @@
 Windows Registry Editor Version 5.00
 
 [HKEY_LOCAL_MACHINE\SOFTWARE\JavaSoft\Java Runtime Environment]
-"CurrentVersion"="8u41-b04"
+"CurrentVersion"="9.0.4"
 
-[HKEY_LOCAL_MACHINE\SOFTWARE\JavaSoft\Java Runtime Environment\8u41-b04
-"JavaHome"="C:\\Users\\Administrator\\digitalknob\\DK\\3rdParty\\openjdk-8u41-b04-windows-i586-14_jan_2020"
-"RuntimeLib"="C:\\Users\\Administrator\\digitalknob\\DK\\3rdParty\\openjdk-8u41-b04-windows-i586-14_jan_2020\\bin\\server\\jvm.dll"
+[HKEY_LOCAL_MACHINE\SOFTWARE\JavaSoft\Java Runtime Environment\9.0.4
+"JavaHome"="C:\\Users\\Administrator\\digitalknob\\DK\\3rdParty\\openjdk-9.0.4_windows-x64_bin"
+"RuntimeLib"="C:\\Users\\Administrator\\digitalknob\\DK\\3rdParty\\openjdk-9.0.4_windows-x64_bin\\bin\\server\\jvm.dll"
