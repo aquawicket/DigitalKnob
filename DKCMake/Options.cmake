@@ -51,12 +51,13 @@ endif()
 ###########################################################################
 ## Get variables for Build Type
 ###########################################################################
-option(DEBUG "Build Debug Output" OFF)
-option(RELEASE "Build Release Output" OFF)
+option(DEBUG "Build Debug Output" ON)
+option(RELEASE "Build Release Output" ON)
 if(NOT DEBUG)
 if(NOT RELEASE)
-	DKINFO(No Build type selected. Defaulting to DEBUG)
+	DKINFO(No Build type selected. Defaulting to DEBUG and RELEASE)
 	DKSET(DEBUG ON)
+	DKSET(RELEASE ON)
 endif()
 endif()
 
