@@ -6,45 +6,29 @@
 	#include <boxer/boxer.h>
 #endif
 
-/*
-#ifdef IOS
-#ifdef __has_include
-#if __has_include(<SDL_main.h>)
-    #include "SDL_main.h"
-#endif
-#endif
-#endif
-*/
-
 int    DKApp::argc;
 char** DKApp::argv;
 bool   DKApp::active = false;
 bool   DKApp::paused = false;
 std::vector<std::function<void()> > DKApp::loop_funcs;
 
+
 /*
-//// MAIN ////
-//#ifndef ANDROID
-int main(int argc, char **argv){
-	DKDEBUGFUNC(argc, argv);
-	//try{
-		DKApp dkapp(argc, argv);
-		DKApp::Init();
-		DKApp::Loop();
-	//}
-	//catch (...){
-	//	std::cout << "Exception:\n";
-	//	if(DKClass::HasFunc("DKDebug::ShowStackTrace")){
-	//		DKClass::CallFunc("DKDebug::ShowStackTrace");
-	//		boxer::Selection sel = boxer::show("An exception in the main thread has occured.\n", "EXCEPTION", boxer::Style::Error, boxer::Buttons::YesNo);
-	//		if(sel == boxer::Selection::Yes){
-	//			DKApp::Exit();
-	//			return false;
-	//		}
-	//	}
-	//}
+// Root try/catch block
+try{
+	//code to try
 }
-//#endif //!ANDROID
+catch (...){
+	std::cout << "Exception:\n";
+	if(DKClass::HasFunc("DKDebug::ShowStackTrace")){
+		DKClass::CallFunc("DKDebug::ShowStackTrace");
+		boxer::Selection sel = boxer::show("An exception in the main thread has occured.\n", "EXCEPTION", boxer::Style::Error, boxer::Buttons::YesNo);
+		if(sel == boxer::Selection::Yes){
+			DKApp::Exit();
+			return false;
+		}
+	}
+}
 */
 
 DKApp::DKApp(int _argc, char** _argv){
@@ -127,7 +111,6 @@ void DKApp::DoFrame(){
 		return;
 	}
 	DKUtil::LimitFramerate();
-	//DKUtil::SendTick();
 	CallLoops(); //Call loop functions
 }
 
