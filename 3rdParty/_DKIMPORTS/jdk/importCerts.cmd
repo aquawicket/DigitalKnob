@@ -31,6 +31,8 @@ if exist "C:\Program Files\OpenSSL-Win64\bin\openssl.exe" set "OPENSSL_EXE=C:\Pr
 :: echo -n | %OPENSSL_EXE% ca -config %JDK%\ssl\openssl.cnf
 :: echo -n | %OPENSSL_EXE% ca -config %JDK%\ssl\openssl.cnf -policy policy_anything -extensions ssl_server -out requests/server-signed.pem -infiles requests/server.pem
 
+taskkill /IM "java.exe" /F
+
 :: list the keys
 :: keytool.exe -list
 :: keytool.exe -cacerts -list
