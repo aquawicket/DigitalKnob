@@ -181,9 +181,9 @@ function(AliasFunctions name)
 	CreateFunc("macro(IOS_DEBUG_${name})\n if(IOS AND DEBUG AND NOT IOSSIM)\n ${name}(\${ARGV})\n endif()\n endmacro()\n")
 	CreateFunc("macro(IOS32_DEBUG_${name})\n if(IOS_32 AND DEBUG AND NOT IOSSIM)\n ${name}(\${ARGV})\n endif()\n endmacro()\n")
 	CreateFunc("macro(IOS64_DEBUG_${name})\n if(IOS_64 AND DEBUG AND NOT IOSSIM)\n ${name}(\${ARGV})\n endif()\n endmacro()\n")
-	CreateFunc("macro(IOSSIM_DEBUG_${name})\n if(IOSSIM AND DEBUG AND NOT IOSSIM)\n ${name}(\${ARGV})\n endif()\n endmacro()\n")
-	CreateFunc("macro(IOSSIM32_DEBUG_${name})\n if(IOSSIM_32 AND DEBUG AND NOT IOSSIM)\n ${name}(\${ARGV})\n endif()\n endmacro()\n")
-	CreateFunc("macro(IOSSIM64_DEBUG_${name})\n if(IOSSIM_64 AND DEBUG AND NOT IOSSIM)\n ${name}(\${ARGV})\n endif()\n endmacro()\n")
+	CreateFunc("macro(IOSSIM_DEBUG_${name})\n if(IOSSIM AND DEBUG)\n ${name}(\${ARGV})\n endif()\n endmacro()\n")
+	CreateFunc("macro(IOSSIM32_DEBUG_${name})\n if(IOSSIM_32 AND DEBUG)\n ${name}(\${ARGV})\n endif()\n endmacro()\n")
+	CreateFunc("macro(IOSSIM64_DEBUG_${name})\n if(IOSSIM_64 AND DEBUG)\n ${name}(\${ARGV})\n endif()\n endmacro()\n")
 	CreateFunc("macro(LINUX_DEBUG_${name})\n if(LINUX AND DEBUG)\n ${name}(\${ARGV})\n endif()\n endmacro()\n")
 	CreateFunc("macro(LINUX32_DEBUG_${name})\n if(LINUX_32 AND DEBUG)\n ${name}(\${ARGV})\n endif()\n endmacro()\n")
 	CreateFunc("macro(LINUX64_DEBUG_${name})\n if(LINUX_64 AND DEBUG)\n ${name}(\${ARGV})\n endif()\n endmacro()\n")
@@ -1026,7 +1026,7 @@ function(DKEXECUTE_PROCESS commands)
 	DKINFO("")
 	
 	if(WIN_HOST)
-		execute_process(COMMAND ${commands} RESULT_VARIABLE result ERROR_VARIABLE error) #FIXME: Do we always need  cmd /c  here?
+		execute_process(COMMAND cmd /c ${commands} RESULT_VARIABLE result ERROR_VARIABLE error) #FIXME: Do we always need  cmd /c  here?
 	else()
 		execute_process(COMMAND ${commands} RESULT_VARIABLE result ERROR_VARIABLE error)
 	endif()
@@ -1373,8 +1373,8 @@ function(generateCmake plugin_name)
 	file(APPEND ${plugin_path}/CMakeLists.txt "		set_target_properties(${plugin_name} PROPERTIES LINKER_LANGUAGE CPP)\n")
 	file(APPEND ${plugin_path}/CMakeLists.txt "endif()\n")
 	
-	file(APPEND ${plugin_path}/CMakeLists.txt "install(TARGETS ${plugin_name} DESTINATION ${DIGITALKNOB}/DKInstall/lib/${OS})\n")
-	file(APPEND ${plugin_path}/CMakeLists.txt "install(FILES \${${plugin_name}_SRC} DESTINATION ${DIGITALKNOB}/DKInstall/lib/${OS})\n")
+	#file(APPEND ${plugin_path}/CMakeLists.txt "install(TARGETS ${plugin_name} DESTINATION ${DIGITALKNOB}/DKInstall/lib/${OS})\n")
+	#file(APPEND ${plugin_path}/CMakeLists.txt "install(FILES \${${plugin_name}_SRC} DESTINATION ${DIGITALKNOB}/DKInstall/lib/${OS})\n")
 	
 	##add headers to DKPlugins.h
 	if(${plugin_name} STREQUAL DK OR STATIC)

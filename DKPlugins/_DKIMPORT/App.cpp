@@ -1,3 +1,4 @@
+/*
 #ifdef HAVE_DK
 #include "DK/stdafx.h"
 #include "assets.h"
@@ -10,3 +11,4 @@ bool App::Init()
 }
 
 #endif //HAVE_DK
+*/
