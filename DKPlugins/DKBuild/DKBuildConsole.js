@@ -313,6 +313,8 @@ function DKBuildConsole_SelectType() {
 	}
 }
 
+
+// launch iOS simulator app: https://stackoverflow.com/a/35262865/688352
 function BuildConsole_PostBuildOptions(){
 	console.log("**** Post-Build Options ****")
 	let num = 1

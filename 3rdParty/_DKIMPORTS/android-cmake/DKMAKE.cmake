@@ -1,9 +1,9 @@
-# https://dl.google.com/android/repository/7c386a739f915fbd60051f2572c24782388e807.cmake-3.18.1-windows.zip
+# https://dl.google.com/android/repository/7c386a739f915f5bd60051f2572c24782388e807.cmake-3.18.1-windows.zip
 
 
 ### VERSION ####
 WIN_DKSET(ANDROID_CMAKE_VERSION 3.18.1)
-WIN_DKSET(ANDROID_CMAKE_DL https://dl.google.com/android/repository/7c386a739f915fbd60051f2572c24782388e807.cmake-3.18.1-windows.zip)
+WIN_DKSET(ANDROID_CMAKE_DL https://dl.google.com/android/repository/7c386a739f915f5bd60051f2572c24782388e807.cmake-3.18.1-windows.zip)
 
 
 
