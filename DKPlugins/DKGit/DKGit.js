@@ -154,11 +154,11 @@ function DKGit_GitCommit() {
 }
 
 function DKGit_ListCommits(){
-	CPP_DK_Execute(GIT + "log --oneline")
+	CPP_DK_Execute(GIT + " log --oneline")
 }
 
 function DKGit_UpdateLastCommitMessage(message){
-	CPP_DK_Execute(GIT + "commit --amend -m \""+message+"\"")
+	CPP_DK_Execute(GIT + " commit --amend -m \""+message+"\"")
 }
 
 function DKGit_SetCredentials(){
@@ -168,23 +168,23 @@ function DKGit_SetCredentials(){
 }
 
 function DKGit_GetCurrentBranch(){
-	return CPP_DK_Execute("git rev-parse --abbrev-ref HEAD", "rt")
+	return CPP_DK_Execute(GIT + " rev-parse --abbrev-ref HEAD", "rt")
 }
 
 function DKGit_SwitchBranch(branch){
-	CPP_DK_Execute(GIT + "checkout "+branch)
+	CPP_DK_Execute(GIT + " checkout "+branch)
 }
 
 function DKGit_ListLocalBranches(){
-	CPP_DK_Execute(GIT + "branch")
+	CPP_DK_Execute(GIT + " branch")
 }
 
 function DKGit_ListRemoteBranches(){
-	CPP_DK_Execute(GIT + "branch -r")
+	CPP_DK_Execute(GIT + " branch -r")
 }
 
 function DKGit_ListAllBranches(){
-	CPP_DK_Execute(GIT + "branch -a")
+	CPP_DK_Execute(GIT + " branch -a")
 }
 
 // https://stackoverflow.com/questions/3258243/check-if-pull-needed-in-git
@@ -233,6 +233,11 @@ function DKGit_DiffCount(){
 function DKGit_CreateBranch(name){
 	console.log("DKGit_CreateBranch("+name+")")
 	CPP_DK_Execute(GIT + " checkout -b "+name+" master")
+}
+
+function DKGit_PushNewBranch(name){
+	console.log("DKGit_CreateBranch("+name+")")
+	CPP_DK_Execute(GIT + " push --set-upstream origin "+name)
 }
 
 function DKGit_ForcePull(){
