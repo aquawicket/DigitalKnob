@@ -891,7 +891,8 @@ if(RASPBERRY)
 		"Exec=${DKPROJECT}/${OS}/Debug/${APP_NAME}\n"
 		"Icon=${DKPROJECT}/icons/icon.png\n")
 	file(WRITE ${DKPROJECT}/${OS}/Debug/${APP_NAME}.desktop ${DESKTOP_FILE})
-	elseif(RELEASE)
+	endif()
+	if(RELEASE)
 	# Create .desktop file for Release
 	DKSET(DESKTOP_FILE
 		"[Desktop Entry]\n"
