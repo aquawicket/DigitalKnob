@@ -762,6 +762,7 @@ endif()
 
 #########
 if(LINUX)
+if(NOT RASPBERRY)
 	###################### Backup Executable ###########################
 	if(DEBUG)
 		DKCOPY(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME} ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.backup TRUE)
@@ -832,6 +833,7 @@ if(LINUX)
 	
 	####################### Do Post Build Stuff #######################
 	#CPP_DK_Execute("chmod +x "+app_path+OS+"/Debug/"+APP)
+endif()
 endif()
 
 
