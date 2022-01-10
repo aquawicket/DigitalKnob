@@ -49,36 +49,46 @@ function DKGit_InstallGit() {
     }
 }
 
+function DKGit_Clone(url, directory){
+	console.log("DKGit_Clone("+url+", "+directory+")")
+	if(!CPP_DKFile_Exists(directory + "/.git")){
+		CPP_DK_Execute(GIT+" clone "+url+" "+directory)
+		CPP_DKFile_ChDir(directory)
+		CPP_DK_Execute(GIT + " checkout -- .")
+		return true;
+	}
+	console.log("Local repository already exists")
+	CPP_DKFile_ChDir(directory)
+	CPP_DK_Execute(GIT + " checkout -- .")
+	return false;
+}
+
+function DKGit_Checkout(branch){
+	const branches = DKGit_GetLocalBranchList()
+	if(!branches.includes(branch)){
+		DKGit_CreateBranch(branch)
+	}
+	console.log("Checking out "+branch)
+	CPP_DK_Execute(GIT + " checkout "+branch)
+}
+
+function DKGit_PullBranch(branch){
+	DKGit_Checkout(branch)
+	CPP_DK_Execute(GIT + " pull")
+}
+
 function DKGit_GitUpdate() {
     console.log("Git Update DigitalKnob...\n")
-	if(!CPP_DKFile_Exists(DIGITALKNOB + "DK/.git")){
-		CPP_DK_Execute(GIT + " clone https://github.com/aquawicket/DigitalKnob.git " + DIGITALKNOB + "DK")
-		CPP_DKFile_ChDir(DIGITALKNOB + "DK")
-		//CPP_DK_Execute(GIT + " checkout -- .")
-		//CPP_DK_Execute(GIT + " pull origin master")
-		
-		CPP_DK_Execute(GIT + " checkout Development")
-		CPP_DK_Execute(GIT + " pull")
-		//const branch = DKGit_GetCurrentBranch()
-	}
-	else{
-		CPP_DKFile_ChDir(DIGITALKNOB + "DK")
-		//CPP_DK_Execute(GIT + " checkout -- .")
-		CPP_DK_Execute(GIT + " checkout Development")
-		CPP_DK_Execute(GIT + " pull")
-		//const branch = DKGit_GetCurrentBranch()
-
-	}
-
+	DKGit_Clone("https://github.com/aquawicket/DigitalKnob.git", DIGITALKNOB+"DK")	
+	DKGit_PullBranch("Development")
+	
     //Multipe user folders
+	CPP_DKFile_ChDir(DIGITALKNOB)
     var contents = CPP_DKFile_DirectoryContents(DIGITALKNOB)
     if (contents) {
         var files = contents.split(",")
         for (var i = 0; i < files.length; i++) {
-            //console.log("files["+i+"] = "+files[i]+"\n")
-			//Look for text files that contain [MYGIT] in them
-			//The rest of the line is the repository address
-			CPP_DKFile_ChDir(DIGITALKNOB)
+			//Look for text files that contain [MYGIT] in them. The rest of the line is the repository address
             if (CPP_DKFile_IsDirectory(files[i]))
                 continue
 			if(files[i].indexOf(".txt") <= 1)
@@ -86,22 +96,8 @@ function DKGit_GitUpdate() {
             var url = CPP_DKFile_GetSetting(files[i], "[MYGIT]")
             if (url) {
 				var folder = files[i].replace(".txt", "")
-				if(!CPP_DKFile_Exists(DIGITALKNOB + folder + "/.git")){
-					CPP_DK_Execute(GIT + " clone " + url + " " + DIGITALKNOB + folder)
-					CPP_DKFile_ChDir(DIGITALKNOB + folder)
-					//CPP_DK_Execute(GIT + " checkout -- .")
-					//CPP_DK_Execute(GIT + " pull origin master")
-					CPP_DK_Execute(GIT + " checkout Development")
-					CPP_DK_Execute(GIT + " pull")
-					//const branch = DKGit_GetCurrentBranch()
-				}
-				else{
-					CPP_DKFile_ChDir(DIGITALKNOB + folder)
-					//CPP_DK_Execute(GIT + " checkout -- .")
-					CPP_DK_Execute(GIT + " checkout Development")
-					CPP_DK_Execute(GIT + " pull")
-					//const branch = DKGit_GetCurrentBranch()
-				}
+				DKGit_Clone(url, DIGITALKNOB+folder)
+				DKGit_PullBranch("Development")
             }
         }
     }
@@ -167,6 +163,17 @@ function DKGit_SetCredentials(){
     CPP_DK_Execute(GIT + " config credential.helper store")
 }
 
+function DKGit_CreateBranch(name){
+	console.log("Creating New branch "+name)
+	CPP_DK_Execute(GIT + " checkout -b "+name+" master")
+	DKGit_PushNewBranch(name)
+}
+
+function DKGit_PushNewBranch(name){
+	console.log("Pushing New branch "+name+" to remote")
+	CPP_DK_Execute(GIT + " push --set-upstream origin "+name)
+}
+
 function DKGit_GetCurrentBranch(){
 	return CPP_DK_Execute(GIT + " rev-parse --abbrev-ref HEAD", "rt")
 }
@@ -175,8 +182,8 @@ function DKGit_SwitchBranch(branch){
 	CPP_DK_Execute(GIT + " checkout "+branch)
 }
 
-function DKGit_ListLocalBranches(){
-	CPP_DK_Execute(GIT + " branch")
+function DKGit_GetLocalBranchList(){
+	return CPP_DK_Execute(GIT + " branch")
 }
 
 function DKGit_ListRemoteBranches(){
@@ -228,16 +235,6 @@ function DKGit_DiffCount(){
 			console.log(result)
 		}
 	}
-}
-
-function DKGit_CreateBranch(name){
-	console.log("DKGit_CreateBranch("+name+")")
-	CPP_DK_Execute(GIT + " checkout -b "+name+" master")
-}
-
-function DKGit_PushNewBranch(name){
-	console.log("DKGit_CreateBranch("+name+")")
-	CPP_DK_Execute(GIT + " push --set-upstream origin "+name)
 }
 
 function DKGit_ForcePull(){
