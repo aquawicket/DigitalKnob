@@ -149,6 +149,16 @@ function DKGit_GitCommit() {
         DKAudio_PlaySound("DKBuild/ding.wav")
 }
 
+// https://stackoverflow.com/questions/5601931/what-is-the-best-and-safest-way-to-merge-a-git-branch-into-master/5602109#5602109
+function DKGit_MergeSquashAndPush(branch){
+	console.log("Merging "+branch+" into master and pushing to remote")
+	CPP_DK_Execute(GIT + " checkout master")
+	CPP_DK_Execute(GIT + " pull origin master")
+	CPP_DK_Execute(GIT + " merge --squash "+branch)
+	CPP_DK_Execute(GIT + " push origin master")
+}
+
+
 function DKGit_ListCommits(){
 	CPP_DK_Execute(GIT + " log --oneline")
 }
