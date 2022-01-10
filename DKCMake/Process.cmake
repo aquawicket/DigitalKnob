@@ -258,7 +258,8 @@ foreach(plugin ${dkdepend_list})
 			## double check that the missing libs were built
 			foreach(lib ${LIBLIST})
 				if(NOT EXISTS ${lib})
-					DKERROR("\n\n\n****************************\nFAILED to find: ${lib} \n***********************************")
+					DKINFO("\n\n\n****************************\nFAILED to find: ${lib} \n***********************************")
+					#DKERROR(" ")
 				endif()
 			endforeach()
 		endif()
@@ -762,6 +763,7 @@ endif()
 
 #########
 if(LINUX)
+if(NOT RASPBERRY)
 	###################### Backup Executable ###########################
 	if(DEBUG)
 		DKCOPY(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME} ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.backup TRUE)
@@ -833,6 +835,7 @@ if(LINUX)
 	####################### Do Post Build Stuff #######################
 	#CPP_DK_Execute("chmod +x "+app_path+OS+"/Debug/"+APP)
 endif()
+endif()
 
 
 
@@ -891,7 +894,8 @@ if(RASPBERRY)
 		"Exec=${DKPROJECT}/${OS}/Debug/${APP_NAME}\n"
 		"Icon=${DKPROJECT}/icons/icon.png\n")
 	file(WRITE ${DKPROJECT}/${OS}/Debug/${APP_NAME}.desktop ${DESKTOP_FILE})
-	elseif(RELEASE)
+	endif()
+	if(RELEASE)
 	# Create .desktop file for Release
 	DKSET(DESKTOP_FILE
 		"[Desktop Entry]\n"
