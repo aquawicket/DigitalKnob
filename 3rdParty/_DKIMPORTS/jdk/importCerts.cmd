@@ -1,7 +1,9 @@
 :: NOTE: you'll need to download and install openssl for this, link below
 :: https://slproweb.com/products/Win32OpenSSL.html
 :: https://slproweb.com/download/Win32OpenSSL-1_1_1L.exe
-@echo off
+
+::@echo off
+if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*) & exit )
 ::if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*) & exit )
 
 
@@ -13,7 +15,8 @@
 
 set "DIGITALKNOB=C:\Users\%USERNAME%\digitalknob"
 ::set "JDK=%DIGITALKNOB%\DK\3rdParty\openjdk-8u41-b04-windows-i586-14_jan_2020"
-set "JDK=%DIGITALKNOB%\DK\3rdParty\openjdk-9.0.4_windows-x64_bin"
+::set "JDK=%DIGITALKNOB%\DK\3rdParty\openjdk-9.0.4_windows-x64_bin"
+set "JDK=%DIGITALKNOB%\DK\3rdParty\openjdk-11_windows-x64_bin"
 set "GOOGLE_CERT=%JDK%\google.cer"
 set "MAVEN_CERT=%JDK%\maven.cer"
 set "KEYTOOL_EXE=%JDK%\bin\keytool.exe"

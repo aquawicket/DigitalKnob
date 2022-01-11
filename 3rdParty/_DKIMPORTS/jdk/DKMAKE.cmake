@@ -11,10 +11,12 @@
 ### VERSION ###
 #WIN_HOST_DKSET(JDK_VERSION 8u41-b04-windows-i586-14_jan_2020)
 #WIN_HOST_DKSET(JDK_DL https://download.java.net/openjdk/jdk8u41/ri/openjdk-8u41-b04-windows-i586-14_jan_2020.zip)
-#WIN_HOST_DKSET(JDK_VERSION 9.0.4_windows-x64_bin)
-#WIN_HOST_DKSET(JDK_DL https://download.java.net/java/GA/jdk9/9.0.4/binaries/openjdk-9.0.4_windows-x64_bin.tar.gz)
-WIN_HOST_DKSET(JDK_VERSION 11_windows-x64_bin)
-WIN_HOST_DKSET(JDK_DL https://download.java.net/java/ga/jdk11/openjdk-11_windows-x64_bin.zip)
+
+WIN_HOST_DKSET(JDK_VERSION 9.0.4_windows-x64_bin)
+WIN_HOST_DKSET(JDK_DL https://download.java.net/java/GA/jdk9/9.0.4/binaries/openjdk-9.0.4_windows-x64_bin.tar.gz)
+
+#WIN_HOST_DKSET(JDK_VERSION 11_windows-x64_bin)
+#WIN_HOST_DKSET(JDK_DL https://download.java.net/java/ga/jdk11/openjdk-11_windows-x64_bin.zip)
 
 
 MAC_HOST_DKSET(JDK_VERSION 9.0.4_osx-x64_bin)
