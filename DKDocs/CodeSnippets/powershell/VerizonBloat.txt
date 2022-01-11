@@ -1,16 +1,9 @@
-adb devices
-adb shell
+clear |
+adb devices |
+adb shell |
 
-pm uninstall -k --user 0 aetherpal.device
-pm uninstall -k --user 0 android.bips
-pm uninstall -k --user 0 android.bookmarkprovider
-pm uninstall -k --user 0 android.cellbroadcastreceiver
-pm uninstall -k --user 0 android.cellbroadcastreceiver.overlay.common
-pm uninstall -k --user 0 android.documentsui
-pm uninstall -k --user 0 android.dreams.basic
-pm uninstall -k --user 0 android.dreams.phototable
-pm uninstall -k --user 0 android.egg
-pm uninstall -k --user 0 android.emergency
+
+pm uninstall -k --user 0 aetherpal.device ' 
 pm uninstall -k --user 0 android.hotwordenrollment.okgoogle
 pm uninstall -k --user 0 android.mms
 pm uninstall -k --user 0 android.mms.service
@@ -179,3 +172,18 @@ android.browser
 google.android.syncadapters.calendar
 android.calendar
 
+
+
+adb shell pm disable-user --user 0 com.samsung.android.themestore
+adb shell pm disable-user --user 0 com.samsung.android.aremoji
+adb shell pm disable-user --user 0 com.sec.android.app.samsungapps
+adb shell pm disable-user --user 0 com.samsung.android.game.gamehome
+adb shell pm disable-user --user 0 com.samsung.android.scloud
+adb shell pm disable-user --user 0 com.samsung.android.emojiupdater
+adb shell pm disable-user --user 0 com.samsung.android.smartfitting
+adb shell pm disable-user --user 0 com.samsung.android.game.gametools
+adb shell pm disable-user --user 0 com.enhance.gameservice
+adb shell pm disable-user --user 0 com.samsung.android.game.gos
+adb shell pm disable-user --user 0 com.monotype.android.font.foundation
+adb shell pm disable-user --user 0 com.sec.android.app.billing
+adb shell pm disable-user --user 0 com.samsung.android.wellbeing
