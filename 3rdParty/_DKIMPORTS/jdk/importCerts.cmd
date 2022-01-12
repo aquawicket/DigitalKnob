@@ -16,7 +16,11 @@ if exist "C:\Program Files\OpenSSL-Win64\bin\openssl.exe" set "OPENSSL_EXE=C:\Pr
 :: echo -n | %OPENSSL_EXE% ca -config %JDK%\ssl\openssl.cnf
 :: echo -n | %OPENSSL_EXE% ca -config %JDK%\ssl\openssl.cnf -policy policy_anything -extensions ssl_server -out requests/server-signed.pem -infiles requests/server.pem
 
-taskkill /IM "java.exe" /F
+
+::The /F parameter tells taskkill to Force the process(es) to kill.
+::The /IM parameter allows you to specify the name of the process executable(s) to kill.
+::The /T switch specifies to terminate all child processes along with the parent process
+taskkill /F /IM /T "java.exe" 
 
 :: list the keys
 :: keytool.exe -list
