@@ -41,6 +41,6 @@ DKSETENV("JAVA_VERSION" ${JDK_VERSION})
 DKSETENV("VS_JavaHome" ${JDK})
 
 #Add registry entries
-WIN_DKCOMMAND(reg add HKLM\SOFTWARE\JavaSoft\Java Runtime Environment /v CurrentVersion /t REG_SZ /d %JAVA_VERSION% /f)
-WIN_DKCOMMAND(reg add HKLM\SOFTWARE\JavaSoft\Java Runtime Environment\%JAVA_VERSION% /v JavaHome /t REG_SZ /d "%JAVA_HOME%" /f)
-WIN_DKCOMMAND(reg add HKLM\SOFTWARE\JavaSoft\Java Runtime Environment\%JAVA_VERSION% /v RuntimeLib /t REG_SZ /d "%JAVA_HOME%\bin\server\jvm.dll" /f)
+WIN_HOST_DKCOMMAND(reg add HKLM\\SOFTWARE\\JavaSoft\\Java Runtime Environment /v CurrentVersion /t REG_SZ /d %JAVA_VERSION% /f)
+WIN_HOSTANDROID_DKCOMMAND(reg add HKLM\\SOFTWARE\\JavaSoft\\Java Runtime Environment\\%JAVA_VERSION% /v JavaHome /t REG_SZ /d "%JAVA_HOME%" /f)
+WIN_HOSTANDROID_DKCOMMAND(reg add HKLM\\SOFTWARE\\JavaSoft\\Java Runtime Environment\\%JAVA_VERSION% /v RuntimeLib /t REG_SZ /d "%JAVA_HOME%\bin\server\jvm.dll" /f)
