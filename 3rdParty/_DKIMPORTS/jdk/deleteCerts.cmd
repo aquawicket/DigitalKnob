@@ -2,9 +2,9 @@
 if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*) & exit )
 
 
-set "GOOGLE_CERT=%JDK_HOME%\google.cer"
-set "MAVEN_CERT=%JDK_HOME%\maven.cer"
-set "KEYTOOL_EXE=%JDK_HOME%\bin\keytool.exe"
+set "GOOGLE_CERT=%JAVA_HOME%\google.cer"
+set "MAVEN_CERT=%JAVA_HOME%\maven.cer"
+set "KEYTOOL_EXE=%JAVA_HOME%\bin\keytool.exe"
 if exist "C:\Program Files (x86)\OpenSSL-win32\bin\openssl.exe" set "OPENSSL_EXE=C:\Program Files (x86)\OpenSSL-win32\bin\openssl.exe"
 if exist "C:\Program Files\OpenSSL-Win64\bin\openssl.exe" set "OPENSSL_EXE=C:\Program Files\OpenSSL-Win64\bin\openssl.exe"
 
