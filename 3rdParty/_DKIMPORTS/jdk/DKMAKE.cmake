@@ -9,8 +9,8 @@
 
 
 ### VERSION ###
-WIN_HOST_DKSET(JDK8_VERSION openjdk-8u41-b04-windows-i586-14_jan_2020)
-WIN_HOST_DKSET(JDK8_DL https://download.java.net/openjdk/jdk8u41/ri/openjdk-8u41-b04-windows-i586-14_jan_2020.zip)
+#WIN_HOST_DKSET(JDK8_VERSION openjdk-8u41-b04-windows-i586-14_jan_2020)
+#WIN_HOST_DKSET(JDK8_DL https://download.java.net/openjdk/jdk8u41/ri/openjdk-8u41-b04-windows-i586-14_jan_2020.zip)
 
 #WIN_HOST_DKSET(JDK_VERSION 9.0.4_windows-x64_bin)
 #WIN_HOST_DKSET(JDK_DL https://download.java.net/java/GA/jdk9/9.0.4/binaries/openjdk-9.0.4_windows-x64_bin.tar.gz)
