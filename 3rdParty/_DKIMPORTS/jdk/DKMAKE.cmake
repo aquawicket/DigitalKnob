@@ -41,7 +41,11 @@ DKSETENV("JAVA_VERSION" ${JDK_VERSION})
 DKSETENV("VS_JavaHome" ${JDK})
 
 #Add registry entries
-WIN_HOST_DKCOMMAND(reg add "HKLM\SOFTWARE\JavaSoft\Java Runtime Environment" /v CurrentVersion /t REG_SZ /d %JAVA_VERSION% /f /reg:64)
-WIN_HOST_DKCOMMAND(reg add "HKLM\SOFTWARE\JavaSoft\Java Runtime Environment\${JDK_VERSION}" /v JavaHome /t REG_SZ /d "${JDK_HOME}" /f /reg:64)
-WIN_HOST_DKCOMMAND(reg add "HKLM\SOFTWARE\JavaSoft\Java Runtime Environment\${JDK_VERSION}" /v RuntimeLib /t REG_SZ /d "${JDK_HOME}\bin\server\jvm.dll" /f /reg:64)
+#WIN_HOST_DKCOMMAND(reg add "\"HKLM\SOFTWARE\JavaSoft\Java Runtime Environment\"" /v CurrentVersion /t REG_SZ /d %JAVA_VERSION% /f /reg:64)
+#WIN_HOST_DKCOMMAND(reg add "\"HKLM\SOFTWARE\JavaSoft\Java Runtime Environment\${JDK_VERSION}\"" /v JavaHome /t REG_SZ /d "${JDK_HOME}" /f /reg:64)
+#WIN_HOST_DKCOMMAND(reg add "\"HKLM\SOFTWARE\JavaSoft\Java Runtime Environment\${JDK_VERSION}\"" /v RuntimeLib /t REG_SZ /d "\"${JDK_HOME}\bin\server\jvm.dll\"" /f /reg:64)
 
+
+dk_addRegistryKey("HKLM/SOFTWARE/JavaSoft/Java Runtime Environment" "CurrentVersion" "${JDK_VERSION}")
+dk_addRegistryKey("HKLM/SOFTWARE/JavaSoft/Java Runtime Environment/${JDK_VERSION}" "JavaHome" "${JDK}")
+dk_addRegistryKey("HKLM/SOFTWARE/JavaSoft/Java Runtime Environment/${JDK_VERSION}" "RuntimeLib" "${JDK}/bin/server/jvm.dll")
