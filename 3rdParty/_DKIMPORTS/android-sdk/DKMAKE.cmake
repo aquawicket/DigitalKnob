@@ -21,4 +21,4 @@ DKDEPEND(android-build-tools)
 DKDEPEND(android-sdk-tools)
 DKDEPEND(android-cmake)
 
-DKCOPY(${DKIMPORTS}/SignLicenses.cmd ${ANDROIDSDK}/SignLicenses.cmd false)
+DKCOPY(${DKIMPORTS}/android-sdk/SignLicenses.cmd ${ANDROIDSDK}/SignLicenses.cmd false)
