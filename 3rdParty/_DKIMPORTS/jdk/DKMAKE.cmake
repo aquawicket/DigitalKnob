@@ -9,20 +9,14 @@
 
 
 ### VERSION ###
-WIN_HOST_DKSET(JDK8_VERSION openjdk-8u41-b04-windows-i586-14_jan_2020)
-WIN_HOST_DKSET(JDK8_DL https://download.java.net/openjdk/jdk8u41/ri/openjdk-8u41-b04-windows-i586-14_jan_2020.zip)
-DKSET(JDK8_NAME openjdk-${JDK8_VERSION})
-DKSET(JDK8 ${3RDPARTY}/${JDK8_NAME})
-DKINSTALL(${JDK8_DL} jdk ${JDK8})
+#WIN_HOST_DKSET(JDK8_VERSION 1.8.0_41)
+#WIN_HOST_DKSET(JDK8_DL https://download.java.net/openjdk/jdk8u41/ri/openjdk-8u41-b04-windows-i586-14_jan_2020.zip)
 
-WIN_HOST_DKSET(JDK9_VERSION 9.0.4_windows-x64_bin)
+WIN_HOST_DKSET(JDK9_VERSION 9.0.4)
 WIN_HOST_DKSET(JDK9_DL https://download.java.net/java/GA/jdk9/9.0.4/binaries/openjdk-9.0.4_windows-x64_bin.tar.gz)
-DKSET(JDK9_NAME openjdk-${JDK9_VERSION})
-DKSET(JDK9 ${3RDPARTY}/${JDK9_NAME})
-DKINSTALL(${JDK9_DL} jdk ${JDK9})
 
-WIN_HOST_DKSET(JDK_VERSION 11_windows-x64_bin)
-WIN_HOST_DKSET(JDK_DL https://download.java.net/java/ga/jdk11/openjdk-11_windows-x64_bin.zip)
+#WIN_HOST_DKSET(JDK_VERSION 11)
+#WIN_HOST_DKSET(JDK_DL https://download.java.net/java/ga/jdk11/openjdk-11_windows-x64_bin.zip)
 
 
 MAC_HOST_DKSET(JDK_VERSION 9.0.4_osx-x64_bin)
@@ -43,4 +37,5 @@ DKINSTALL(${JDK_DL} jdk ${JDK})
 ### LINK ###
 DKINCLUDE(${JDK}/)	
 DKSETENV("JAVA_HOME" ${JDK})
+DKSETENV("JAVA_VERSION" ${JDK_VERSION)
 DKSETENV("VS_JavaHome" ${JDK})
