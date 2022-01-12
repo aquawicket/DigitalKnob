@@ -15,9 +15,11 @@ DKSET(JDK8_NAME openjdk-${JDK8_VERSION})
 DKSET(JDK8 ${3RDPARTY}/${JDK8_NAME})
 DKINSTALL(${JDK8_DL} jdk ${JDK8})
 
-
-#WIN_HOST_DKSET(JDK_VERSION 9.0.4_windows-x64_bin)
-#WIN_HOST_DKSET(JDK_DL https://download.java.net/java/GA/jdk9/9.0.4/binaries/openjdk-9.0.4_windows-x64_bin.tar.gz)
+WIN_HOST_DKSET(JDK9_VERSION 9.0.4_windows-x64_bin)
+WIN_HOST_DKSET(JDK9_DL https://download.java.net/java/GA/jdk9/9.0.4/binaries/openjdk-9.0.4_windows-x64_bin.tar.gz)
+DKSET(JDK9_NAME openjdk-${JDK9_VERSION})
+DKSET(JDK9 ${3RDPARTY}/${JDK9_NAME})
+DKINSTALL(${JDK9_DL} jdk ${JDK9})
 
 WIN_HOST_DKSET(JDK_VERSION 11_windows-x64_bin)
 WIN_HOST_DKSET(JDK_DL https://download.java.net/java/ga/jdk11/openjdk-11_windows-x64_bin.zip)
