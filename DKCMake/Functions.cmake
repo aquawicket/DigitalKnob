@@ -2397,15 +2397,15 @@ function(dk_prependFile path string)
 endfunction()
 
 
-include(${DIGITALKNOB}/DK/DKCMake/Functions_Ext.cmake)
-
-
 function(dk_addRegistryKey key value data)
 	string(REPLACE "/" "\\" key   ${key})
 	string(REPLACE "/" "\\" value ${value})
 	string(REPLACE "/" "\\" data  ${data})
-
 	execute_process(COMMAND reg add "${key}" /v "${value}" /t REG_SZ /d "${data}" /f /reg:64 OUTPUT_VARIABLE _output ERROR_VARIABLE _output RESULT_VARIABLE _failed)
 	DKINFO("_output = ${_output}")
 	DKINFO("_failed = ${_failed}")
 endfunction()
+
+
+
+include(${DIGITALKNOB}/DK/DKCMake/Functions_Ext.cmake)
