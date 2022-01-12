@@ -172,18 +172,3 @@ android.browser
 google.android.syncadapters.calendar
 android.calendar
 
-
-
-adb shell pm disable-user --user 0 com.samsung.android.themestore
-adb shell pm disable-user --user 0 com.samsung.android.aremoji
-adb shell pm disable-user --user 0 com.sec.android.app.samsungapps
-adb shell pm disable-user --user 0 com.samsung.android.game.gamehome
-adb shell pm disable-user --user 0 com.samsung.android.scloud
-adb shell pm disable-user --user 0 com.samsung.android.emojiupdater
-adb shell pm disable-user --user 0 com.samsung.android.smartfitting
-adb shell pm disable-user --user 0 com.samsung.android.game.gametools
-adb shell pm disable-user --user 0 com.enhance.gameservice
-adb shell pm disable-user --user 0 com.samsung.android.game.gos
-adb shell pm disable-user --user 0 com.monotype.android.font.foundation
-adb shell pm disable-user --user 0 com.sec.android.app.billing
-adb shell pm disable-user --user 0 com.samsung.android.wellbeing
