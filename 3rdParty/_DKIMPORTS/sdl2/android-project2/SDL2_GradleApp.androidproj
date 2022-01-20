@@ -81,8 +81,8 @@
   <ItemDefinitionGroup>
     <GradlePackage>
       <ProjectDirectory>$(ProjectDir)app</ProjectDirectory>
-      <GradlePlugin>gradle:4.2.2</GradlePlugin>
-      <GradleVersion>6.7.1</GradleVersion>
+      <GradlePlugin>gradle:7.0.3</GradlePlugin>
+      <GradleVersion>7.0.3</GradleVersion>
     </GradlePackage>
   </ItemDefinitionGroup>
   <ImportGroup Label="ExtensionSettings" />
