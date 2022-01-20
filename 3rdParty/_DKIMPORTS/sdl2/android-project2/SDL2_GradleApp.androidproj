@@ -83,6 +83,7 @@
       <ProjectDirectory>$(ProjectDir)app</ProjectDirectory>
       <GradlePlugin>gradle:7.0.3</GradlePlugin>
       <GradleVersion>7.0.3</GradleVersion>
+      <ApkFileName Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">app-debug.apk</ApkFileName>
     </GradlePackage>
   </ItemDefinitionGroup>
   <ImportGroup Label="ExtensionSettings" />
@@ -95,7 +96,7 @@
     <GradleTemplate Include="gradle\wrapper\gradle-wrapper.properties.template" />
   </ItemGroup>
   <ItemGroup>
-    <JavaCompile Include="app\src\main\java\com\SDL2_GradleApp\SDL2_GradleApp.java" />
+    <!-- <JavaCompile Include="app\src\main\java\com\SDL2_GradleApp\SDL2_GradleApp.java" /> -->
     <JavaCompile Include="app\src\main\java\org\libsdl\app\HIDDevice.java" />
     <JavaCompile Include="app\src\main\java\org\libsdl\app\HIDDeviceBLESteamController.java" />
     <JavaCompile Include="app\src\main\java\org\libsdl\app\HIDDeviceManager.java" />
