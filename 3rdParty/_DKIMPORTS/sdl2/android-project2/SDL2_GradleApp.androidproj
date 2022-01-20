@@ -106,7 +106,7 @@
     <JavaCompile Include="app\src\main\java\org\libsdl\app\SDLControllerManager.java" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\main\main.vcxproj" />
+    <ProjectReference Include="app\jni\src\main.vcxproj" />
   </ItemGroup>
   <Import Project="$(AndroidTargetsPath)\Android.targets" />
   <ImportGroup Label="ExtensionTargets" />
