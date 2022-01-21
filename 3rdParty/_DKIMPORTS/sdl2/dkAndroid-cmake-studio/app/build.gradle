@@ -40,7 +40,7 @@ android {
     if (!project.hasProperty('EXCLUDE_NATIVE_LIBS')) {
         externalNativeBuild {
 			cmake {
-				path 'jni/CMakeLists.txt'
+				path 'jni/src/CMakeLists.txt'
             }
         }
     }
