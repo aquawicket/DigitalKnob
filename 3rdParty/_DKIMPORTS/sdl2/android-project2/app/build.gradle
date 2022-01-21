@@ -38,9 +38,11 @@ android {
         }
     }
     if (!project.hasProperty('EXCLUDE_NATIVE_LIBS')) {
-        sourceSets.main {
+        /*
+		sourceSets.main {
             jniLibs.srcDir 'libs'
         }
+		*/
         externalNativeBuild {
             //ndkBuild {
             //    path 'jni/Android.mk'
