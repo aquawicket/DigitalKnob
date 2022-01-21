@@ -20,15 +20,14 @@ android {
         versionCode 1
         versionName "1.0"
         externalNativeBuild {
-            //ndkBuild {
+            cmake {
+				arguments "-DANDROID_APP_PLATFORM=android-26", "-DANDROID_STL=c++_static"
+                abiFilters 'armeabi-v7a' //, 'arm64-v8a', 'x86', 'x86_64'
+            }
+			//ndkBuild {
             //    arguments "APP_PLATFORM=android-26"
             //    abiFilters 'armeabi-v7a', 'arm64-v8a', 'x86', 'x86_64'
             //}
-             cmake {
-                 arguments "-DANDROID_APP_PLATFORM=android-26", "-DANDROID_STL=c++_static"
-                 //abiFilters 'armeabi-v7a', 'arm64-v8a', 'x86', 'x86_64'
-                 abiFilters 'armeabi-v7a'
-             }
         }
     }
     buildTypes {
@@ -38,23 +37,18 @@ android {
         }
     }
     if (!project.hasProperty('EXCLUDE_NATIVE_LIBS')) {
-        //sourceSets.main {
-        //    jniLibs.srcDir 'libs'
-        //}
         externalNativeBuild {
-            //ndkBuild {
+			cmake {
+				path 'jni/CMakeLists.txt'
+            }
+			//ndkBuild {
             //    path 'jni/Android.mk'
             //}
-             cmake {
-                 path 'jni/CMakeLists.txt'
-             }
         }
-       
     }
     lintOptions {
         abortOnError false
     }
-    
     if (buildAsLibrary) {
         libraryVariants.all { variant ->
             variant.outputs.each { output ->
