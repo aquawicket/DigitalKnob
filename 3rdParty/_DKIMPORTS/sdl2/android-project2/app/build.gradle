@@ -20,9 +20,9 @@ android {
         versionCode 1
         versionName "1.0"
         externalNativeBuild {
-			cmake {
+            cmake {
 				arguments "-DANDROID_APP_PLATFORM=android-26", "-DANDROID_STL=c++_static"
-				abiFilters 'armeabi-v7a' //, 'arm64-v8a', 'x86', 'x86_64'
+                abiFilters 'armeabi-v7a' //, 'arm64-v8a', 'x86', 'x86_64'
             }
 			//ndkBuild {
             //    arguments "APP_PLATFORM=android-26"
@@ -49,7 +49,6 @@ android {
     lintOptions {
         abortOnError false
     }
-    
     if (buildAsLibrary) {
         libraryVariants.all { variant ->
             variant.outputs.each { output ->
