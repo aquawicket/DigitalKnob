@@ -56,6 +56,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <AndroidAPILevel>android-26</AndroidAPILevel>
+    <TargetName>app-debug</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -105,9 +106,6 @@
     <JavaCompile Include="app\src\main\java\org\libsdl\app\SDLActivity.java" />
     <JavaCompile Include="app\src\main\java\org\libsdl\app\SDLAudioManager.java" />
     <JavaCompile Include="app\src\main\java\org\libsdl\app\SDLControllerManager.java" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="app\jni\src\main.vcxproj" />
   </ItemGroup>
   <Import Project="$(AndroidTargetsPath)\Android.targets" />
   <ImportGroup Label="ExtensionTargets" />
