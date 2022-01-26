@@ -1,0 +1,226 @@
+I even gave Gradle a chance, but I was disturbed not to know what he was doing and decided to put him aside and do it myself to learn, here it is.
+
+Tutorial build java and JNI/NDK APK
+1. Install JDK8 and the android SDK with NDK, build-tools, platform-tools and the android platform 23.
+
+2. Set the environment variables.
+
+$ export SDK="${HOME}/Programs/Android" \
+  export BUILD_TOOLS="${SDK}/build-tools/29.0.2" \
+  export PLATFORM="${SDK}/platforms/android-23" \
+  export ANDROID_API=23 \
+  export APK_NAME="APKName" \
+  export PACKAGE_NAME="some.some.some" \
+  export ORG_DIRS="${PACKAGE_NAME//./\/}" \
+  export NDK="${SDK}/ndk-bundle"
+  export ANDROID_TOOLCHAIN="${NDK}/toolchains/llvm/prebuilt/linux-x86_64/bin/armv7a-linux-androideabi23-clang"
+3. Create project directories and files.
+
+Create directories tree:
+
+$ mkdir -p  src/"${ORG_DIRS}" res/layout build/gen build/obj build/apk jni
+Create ./AndroidManifest.xml file:
+
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="some.some.some"
+          versionCode="1"
+          versionName="0.1">
+    <uses-sdk android:minSdkVersion="23"/>
+    <application android:label="Hello">
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+    </application>
+</manifest>
+Create ./res/layout/main.xml file:
+
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/my_text"/>
+</LinearLayout>
+Create src/some/some/some/MainActivity.java file:
+
+package some.some.some;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.widget.TextView;
+
+public class MainActivity extends Activity {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.main);
+
+        TextView text = (TextView)findViewById(R.id.my_text);
+        text.setText("Hello, world!");
+    }
+}
+4. Generate R.java file with Android Asset Packaging Tool (aapt).
+
+$ "${BUILD_TOOLS}/aapt" package -f -m -J build/gen/ -S res \
+       -M AndroidManifest.xml -I "${PLATFORM}/android.jar"
+The -f flag serves to aapt to overwrite any existing output file.
+
+The -m causes it to create package directories under the output directory.
+
+The -J makes it generate the R.java file and sets the output directory.
+
+The -S points out the resource directory. The -M specifies the manifest.
+
+The -I adds the platform .jar as an "include file".
+
+It all creates: build/gen/"${ORG_DIRS}"/R.java.
+
+5. Compile the java files with javac.
+
+$ javac -bootclasspath "${JAVA_HOME}/jre/lib/rt.jar" \
+      -classpath "${PLATFORM}/android.jar" -d build/obj \
+      build/gen/"${ORG_DIRS}"/R.java src/"${ORG_DIRS}"/MainActivity.java
+If you see compile errors about JDK version, try use the -source 1.7 -target 1.7 tags in javac command.
+
+6. Translate the .class files in build/obj/ to Dalvik byte code with dx tool.
+
+$ "${BUILD_TOOLS}/dx" --dex --output=build/apk/classes.dex build/obj/
+7. Package to create APK using the aapt tool again.
+
+$ "${BUILD_TOOLS}/aapt" package -f -M AndroidManifest.xml -S res/ \
+      -I "${PLATFORM}/android.jar" \
+      -F build/"${APK_NAME}".unsigned.apk build/apk/
+8. Using zipalign tool in the APK.
+
+It serves to aligns uncompressed files in the APK on 4-byte boundaries for easier memory mapping.
+
+$ "${BUILD_TOOLS}/zipalign" -f -p 4 \
+      build/"${APK_NAME}".unsigned.apk build/"${APK_NAME}".aligned.apk
+9. Create a key store and key for signing with the Java keytool.
+
+$ keytool -genkeypair -keystore keystore.jks -alias androidkey \
+      -validity 10000 -keyalg RSA -keysize 2048
+10. Sign the APK with apksigner tool.
+
+$ "${BUILD_TOOLS}/apksigner" sign --ks keystore.jks \
+      --ks-key-alias androidkey --out build/"${APK_NAME}".apk \
+      build/"${APK_NAME}".aligned.apk
+11. Test your app with the adb tool.
+
+$ "${SDK}/platform-tools/adb" install -r build/"${APK_NAME}".apk
+$ "${SDK}/platform-tools/adb" shell am start -n "${PACKAGE_NAME}"/.MainActivity
+You can use adb logcat before adb shell... to debug.
+
+Until the step 11 you built the APK from your java code. Now let's see how to make a APK of the JNI/NDK code.
+
+12. Change the MainActivity.java file and recompile and translate again.
+
+Change the src/some/some/some/MainActivity.java file:
+
+package some.some.some;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.widget.TextView;
+
+public class MainActivity extends Activity {
+    static {
+        System.loadLibrary("hello");
+    }
+
+    public native String getMessage();
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.main);
+
+        TextView text = (TextView)findViewById(R.id.my_text);
+        text.setText(getMessage());
+    }
+}
+Recompile:
+
+$ javac -bootclasspath "${JAVA_HOME}/jre/lib/rt.jar" \
+      -classpath "${PLATFORM}/android.jar" -d build/obj \
+      build/gen/"${ORG_DIRS}"/R.java src/"${ORG_DIRS}"/MainActivity.java
+And Translate to Dalvik byte code again:
+
+$ "${BUILD_TOOLS}/dx" --dex --output=build/apk/classes.dex build/obj/
+13. Search the C function signature that corresponds to the Java method with javah tool.
+
+$ javah -classpath "${PLATFORM}/android.jar:build/obj" \
+      -o /tmp/jni.h "${PACKAGE_NAME}".MainActivity
+$ grep -A1 _getMessage /tmp/jni.h
+JNIEXPORT jstring JNICALL Java_some_some_some_MainActivity_getMessage
+  (JNIEnv *, jobject);
+14. Create hello.c file.
+
+#include <stdlib.h>
+#include <jni.h>
+#include <time.h>
+
+static const char *const messages[] = {
+  "Hello, world!",
+  "Hej världen!",
+  "Bonjour, monde!",
+  "Hallo Welt!"
+};
+
+JNIEXPORT jstring JNICALL
+Java_net_hanshq_hello_MainActivity_getMessage(JNIEnv *env, jobject obj) {
+  int i;
+  srand(time(NULL));
+  i = rand() % (sizeof(messages) / sizeof(messages[0]));
+  return (*env)->NewStringUTF(env, messages[i]);
+}
+15. Create the libhello.so with arm toolchain
+
+First, create the build/apk/lib/armeabi-v7a directory:
+
+$ mkdir -p build/apk/lib/armeabi-v7a
+Build the libhello.so:
+
+$ ${ANDROID_TOOLCHAIN} -shared -o build/apk/lib/armeabi-v7a/libhello.so jni/hello.c
+16. Package the APK again.
+
+$ "${BUILD_TOOLS}/aapt" package -f -M AndroidManifest.xml -S res/ \
+      -I "${PLATFORM}/android.jar" \
+      -F build/"${APK_NAME}".unsigned.apk build/apk/
+17. Zipalign the APK again.
+
+$ "${BUILD_TOOLS}/zipalign" -f -p 4 \
+      build/"${APK_NAME}".unsigned.apk build/"${APK_NAME}".aligned.apk
+18. Sign the APK again.
+
+$ "${BUILD_TOOLS}/apksigner" sign --ks keystore.jks \
+      --ks-key-alias androidkey --out build/"${APK_NAME}".apk \
+      build/"${APK_NAME}".aligned.apk
+19. Check the APK content with aapt tool or jar tool.
+
+with aapt:
+
+$ "${BUILD_TOOLS}/aapt" list build/"${APK_NAME}".apk
+or aapt with more details:
+
+$ "${BUILD_TOOLS}/aapt" list -v build/"${APK_NAME}".apk
+or with jar:
+
+$ jar tf build/"${APK_NAME}"
+20. Test your app with the adb tool again.
+
+$ "${SDK}/platform-tools/adb" install -r build/"${APK_NAME}".apk
+$ "${SDK}/platform-tools/adb" shell am start --activity-clear-top -n "${PACKAGE_NAME}"/.MainActivity
+The --activity-clear-top is for clean the task avoiding the warning "Warning: Activity not started, its current task has been brought to the front".
+
+This tutorial was based on: https://www.hanshq.net/command-line-android.html
