@@ -284,7 +284,6 @@ endif()
 
 
 if(ANDROID) # Disabled for Android targets
-	#DKDISABLE(boxer)
 	DKDISABLE(bzip2)
 	DKDISABLE(cef_binary)
 	DKDISABLE(curl)
@@ -333,11 +332,10 @@ if(ANDROID) # Disabled for Android targets
 	DKDISABLE(podofo)
 	DKDISABLE(python)
 	DKDISABLE(rlottie)
-	DKDISABLE(rmlui)
+	#DKDISABLE(rmlui)
 	DKDISABLE(rtmidi)
 	DKDISABLE(sdl-gpu)
 	DKDISABLE(sdl2_mixer)
-	#DKDISABLE(sdl2_ttf)
 	DKDISABLE(sfml)
 	DKDISABLE(smpeg2)
 	DKDISABLE(stackwalker)
