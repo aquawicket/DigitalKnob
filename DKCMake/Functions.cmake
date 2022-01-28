@@ -722,7 +722,7 @@ function(DKDEFINE str)
 	DKSET(DKDEFINES_LIST ${DKDEFINES_LIST} ${str})
 	add_definitions(-D${str})
 endfunction()
-
+AliasFunctions("DKDEFINE")
 
 function(DKUNDEFINE str)
 	if(NOT DKDEFINES_LIST)
