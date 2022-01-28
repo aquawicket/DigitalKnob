@@ -75,6 +75,7 @@ function DKGit_Checkout(branch){
 function DKGit_PullBranch(branch){
 	DKGit_Checkout(branch)
 	CPP_DK_Execute(GIT + " pull")
+	CPP_DK_Execute(GIT + " branch --set-upstream-to=origin/"+branch)
 }
 
 function DKGit_GitUpdate() {
@@ -89,11 +90,11 @@ function DKGit_GitUpdate() {
         var files = contents.split(",")
         for (var i = 0; i < files.length; i++) {
 			//Look for text files that contain [MYGIT] in them. The rest of the line is the repository address
-            if (CPP_DKFile_IsDirectory(files[i]))
+            if (CPP_DKFile_IsDirectory(DIGITALKNOB+files[i]))
                 continue
 			if(files[i].indexOf(".txt") <= 1)
 				continue
-            var url = CPP_DKFile_GetSetting(files[i], "[MYGIT]")
+            var url = CPP_DKFile_GetSetting(DIGITALKNOB+files[i], "[MYGIT]")
             if (url) {
 				var folder = files[i].replace(".txt", "")
 				DKGit_Clone(url, DIGITALKNOB+folder)
