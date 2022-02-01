@@ -1,7 +1,7 @@
 @echo off
 if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*) & exit )
 
-set "Folder=openjdk-8u41"
+set "Folder=openjdk-1.8.0_41"
 set "CurrentVersion=1.8.0_41"
 
 set "JAVA_VERSION=%CurrentVersion%"
