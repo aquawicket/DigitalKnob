@@ -6,7 +6,7 @@ set "CurrentVersion=1.8.0_41"
 
 set "JAVA_VERSION=%CurrentVersion%"
 setx JAVA_VERSION %CurrentVersion%
-set "JAVA_HOME=C:\Users\Administrator\digitalknob\DK\3rdParty\%Folder%"
+set "JAVA_HOME=C:\Users\%USERNAME%\digitalknob\DK\3rdParty\%Folder%"
 setx JAVA_HOME %JAVA_HOME%
 setx VS_JavaHome %JAVA_HOME%
 setx STUDIO_JDK %JAVA_HOME%
