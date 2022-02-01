@@ -7,7 +7,7 @@ endif()
 # https://r5---sn-a5meknsy.gvt1.com/edgedl/android/studio/install/4.2.2.0/android-studio-ide-202.7486908-windows.exe?cms_redirect=yes&mh=2R&mip=47.148.227.149&mm=28&mn=sn-a5meknsy&ms=nvh&mt=1627334431&mv=m&mvi=5&pl=16&rmhost=r2---sn-a5meknsy.gvt1.com&shardbypass=yes&smhost=r6---sn-a5mekner.gvt1.com
 # https://redirector.gvt1.com/edgedl/android/studio/install/2020.3.1.26/android-studio-2020.3.1.26-windows.exe
 
-DKDEPEND(jdk)
+#DKDEPEND(jdk)
 DKDEPEND(android-sdk)
 DKDEPEND(android-ndk)
 
@@ -33,8 +33,8 @@ MAC_HOST_DKSET(ANDROIDSTUDIO_EXE "${ANDROIDSTUDIO}/Android Studio.app")
 LINUX_HOST_DKSET(ANDROIDSTUDIO "${3RDPARTY}/android-studio/bin")
 LINUX_HOST_DKSET(ANDROIDSTUDIO_EXE "${ANDROIDSTUDIO}/Android Studio.app")
 
-DKSETENV("STUDIO_JDK" ${JDK})
-DKSETENV("STUDIO_GRADLE_JDK" ${JDK})
+DKSETENV("STUDIO_JDK" ${JDK8})
+DKSETENV("STUDIO_GRADLE_JDK" ${JDK8})
 
 
 ### INSTALL ###

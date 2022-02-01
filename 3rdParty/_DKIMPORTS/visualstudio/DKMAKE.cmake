@@ -16,7 +16,7 @@ endif()
 
 ### DEPENDS ###
 if(ANDROID)
-	DKDEPEND(jdk)
+	#DKDEPEND(jdk)
 	DKDEPEND(apache-ant)
 	DKDEPEND(android-sdk)
 endif()

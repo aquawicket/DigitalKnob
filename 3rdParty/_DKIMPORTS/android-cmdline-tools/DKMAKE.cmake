@@ -16,7 +16,7 @@ endif()
 #https://dl.google.com/android/repository/commandlinetools-win-7583922_latest.zip
 
 ### DEPENDS ###
-DKDEPEND(jdk)
+#DKDEPEND(jdk8)
 
 ### VERSION ###
 DKSET(ANDROIDTOOLS ${3RDPARTY}/android-cmdline-tools)

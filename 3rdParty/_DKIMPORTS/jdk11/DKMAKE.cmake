@@ -6,8 +6,8 @@
 
 ### VERSION ###
 
-WIN_HOST_DKSET(JDK_VERSION 11)
-WIN_HOST_DKSET(JDK_DL https://download.java.net/java/ga/jdk11/openjdk-11_windows-x64_bin.zip)
+WIN_HOST_DKSET(JDK11_VERSION 11)
+WIN_HOST_DKSET(JDK11_DL https://download.java.net/java/ga/jdk11/openjdk-11_windows-x64_bin.zip)
 
 
 ### INSTALL ###

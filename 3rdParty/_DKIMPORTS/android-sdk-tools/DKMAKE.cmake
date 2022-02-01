@@ -9,7 +9,7 @@ endif()
 # https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip
 
 ### DEPENDS ###
-DKDEPEND(JDK)
+#DKDEPEND(JDK)
 
 ### VERSION ###
 DKSET(ANDROIDSDKTOOLS_VERSION 26.2.0) #revision
