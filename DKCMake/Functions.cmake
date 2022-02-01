@@ -2347,6 +2347,7 @@ endfunction()
 function(dk_RemoveSubstring removethis fromthis result)
 	foreach(item ${fromthis})
 		string(REPLACE ${removethis} "" item ${item})
+		string(REPLACE "  " " " item ${item}) #replace doube spaces with single space
 		list(APPEND rtn ${item})
 	endforeach()
 	set(${result} ${rtn} PARENT_SCOPE) #return result
