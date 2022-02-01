@@ -17,12 +17,12 @@ DKINSTALL(${JDK11_DL} jdk11 ${JDK11})
 
 
 ### LINK ###
-#DKINCLUDE(${JDK11}/)	
-#DKSETENV("JAVA_HOME" ${JDK11})
-#DKSETENV("JAVA_VERSION" ${JDK11_VERSION})
-#DKSETENV("VS_JavaHome" ${JDK11})
+DKINCLUDE(${JDK11}/)	
+DKSETENV("JAVA_HOME" ${JDK11})
+DKSETENV("JAVA_VERSION" ${JDK11_VERSION})
+DKSETENV("VS_JavaHome" ${JDK11})
 
 #Add registry entries
-#dk_addRegistryKey("HKLM/SOFTWARE/JavaSoft/Java Runtime Environment" "CurrentVersion" "${JDK11_VERSION}")
-#dk_addRegistryKey("HKLM/SOFTWARE/JavaSoft/Java Runtime Environment/${JDK11_VERSION}" "JavaHome" "${JDK11}")
-#dk_addRegistryKey("HKLM/SOFTWARE/JavaSoft/Java Runtime Environment/${JDK11_VERSION}" "RuntimeLib" "${JDK11}/bin/server/jvm.dll")
+dk_addRegistryKey("HKLM/SOFTWARE/JavaSoft/Java Runtime Environment" "CurrentVersion" "${JDK11_VERSION}")
+dk_addRegistryKey("HKLM/SOFTWARE/JavaSoft/Java Runtime Environment/${JDK11_VERSION}" "JavaHome" "${JDK11}")
+dk_addRegistryKey("HKLM/SOFTWARE/JavaSoft/Java Runtime Environment/${JDK11_VERSION}" "RuntimeLib" "${JDK11}/bin/server/jvm.dll")
