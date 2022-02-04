@@ -8,7 +8,9 @@
 :: Example:  call AppendEnvPath C:\Windows\System32 result
 ::           echo AppendEnvPath returned: %result%
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-%DKINIT%
+%DKBATCH%
+if %DEBUG%==1 echo -^> %~n0()
+
 set "path=%~1"
 if %DEBUG%==1 echo AppendEnvPath(path: %path%)
 
@@ -18,4 +20,6 @@ if not "%ERRORLEVEL%" == "0" (echo ERROR:%ERRORLEVEL% & goto :EOF)
 
 if %DEBUG%==1 echo AppendEnvPath(result: %result%)
 endlocal & set "%3=%result%"
+
+if %DEBUG%==1 echo ^<- %~n0()
 goto :EOF

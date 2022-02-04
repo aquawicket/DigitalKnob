@@ -7,8 +7,12 @@
 ::
 :: Example:  call SendData apple
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-%DKINIT%
+%DKBATCH%
+if %DEBUG%==1 echo -^> %~n0()
+
 set "input=%1"
 echo    SendData received the value: %input%
 endlocal
+
+if %DEBUG%==1 echo ^<- %~n0()
 goto :EOF

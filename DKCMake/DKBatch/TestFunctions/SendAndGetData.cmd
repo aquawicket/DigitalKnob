@@ -9,9 +9,13 @@
 :: Example:  call SendAndGetData orange rval
 ::           echo SendAndGetData returned: %rval%
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-%DKINIT%
+%DKBATCH%
+if %DEBUG%==1 echo -^> %~n0()
+
 set "input=%1"
 echo    SendAndGetData received the value: %input%
 set "output=%input%Tree"
 endlocal & set "%2=%output%"
+
+if %DEBUG%==1 echo ^<- %~n0()
 goto :EOF
