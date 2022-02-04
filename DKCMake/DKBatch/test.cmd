@@ -1,4 +1,4 @@
-@echo off & call %DKBATCH% %0
+%DKBATCH%
 %DKINIT%
 
 
