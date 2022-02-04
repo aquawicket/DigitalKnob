@@ -18,7 +18,8 @@ if %DEBUG%==1 echo *** DEBUG MODE ON ***
 
 :: add root of dkbatch to global environment variables, and subfolders to local environment variables
 @setlocal enableextensions enabledelayedexpansion
-call %~dp0\StringFunctions\Contains "%PATH%\" "%~dp0" result
+echo ~dp0 = %~dp0
+call %~dp0\StringFunctions\Contains "%PATH%" %~dp0 result
 if "%result%"=="0" (setx PATH "%PATH%";%~dp0)
 endlocal
 set "PATH=%PATH%;%~dp0;%~dp0\TestFunctions;%~dp0\StringFunctions;%~dp0\SystemFunctions"

@@ -6,7 +6,7 @@
 :: Example:  call Contains boy "see the boy run" result
 ::           echo Contains returned: %result%
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-setlocal ENABLEEXTENSIONS
+@setlocal enableextensions enabledelayedexpansion
 set string=%~1
 set searchVal=%~2
 if %DEBUG%==1 echo Contains(string: %string%;  searchVal: %searchVal%;  result: %result%) & echo:
