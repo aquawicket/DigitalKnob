@@ -8,7 +8,7 @@
 :: Example:  call GetData rval
 ::           echo GetData returned: %rval%
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-setlocal ENABLEEXTENSIONS
+%DKINIT%
 set "output=peach"
 endlocal & set "%1=%output%"
 goto :EOF

@@ -1,13 +1,9 @@
 
 
-::if "%1" == ":ShowColors" goto %1
-
+:: Check arg1 for valid sub-fnction and goto it
 set z=%1
-::if not "x!string:%searchVal%=!"=="x%string%" goto %1
-if not "x!z::=!"=="x%z%" goto %1
-::if not "x%1::="=="x%1" goto %1
-::if not "%1::="=="%1" goto %1
-
+if not "!z::=!"=="%z%" goto %1
+echo ERROR: sub-function "%1" invalid.
 goto :EOF
 
 
@@ -19,7 +15,7 @@ goto :EOF
 ::
 :: Example:  call Color :ShowColors
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-setlocal ENABLEEXTENSIONS
+%DKINIT%
 echo [101;93m STYLES [0m
 echo ^<ESC^>[0m [0mReset[0m
 echo ^<ESC^>[1m [1mBold[0m

@@ -6,7 +6,10 @@
 :: Example:  call dkbatch
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 @echo off
-if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*) & exit )
+set caller=%0
+if not "%1"=="" set "caller=%1"
+if not defined in_subprocess (cmd /k set in_subprocess=y ^& %caller% %*) & exit )
+
 
 set DEBUG=1
 
@@ -17,7 +20,8 @@ echo:
 if %DEBUG%==1 echo *** DEBUG MODE ON ***
 
 :: add root of dkbatch to global environment variables, and subfolders to local environment variables
-@setlocal enableextensions enabledelayedexpansion
+set "DKINIT=@echo off & @setlocal enableextensions enabledelayedexpansion"
+%DKINIT%
 ::call %~dp0\StringFunctions\Contains "%PATH%" %~dp0 result
 ::if "%result%"=="0" (setx PATH "%PATH%";%~dp0)
 call %~dp0\StringFunctions\Contains "%DKBATCH%" "%~dp0\dkbatch.cmd" result

@@ -1,7 +1,6 @@
-@setlocal enableextensions enabledelayedexpansion
-@echo off
-if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*) & exit )
-call %DKBATCH%
+@echo off & call %DKBATCH% %0
+%DKINIT%
+
 
 echo Calling "TemplateFunc 369 string result"
 call TEMPLATE 369 string result

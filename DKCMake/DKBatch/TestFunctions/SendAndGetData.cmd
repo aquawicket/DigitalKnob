@@ -9,7 +9,7 @@
 :: Example:  call SendAndGetData orange rval
 ::           echo SendAndGetData returned: %rval%
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-setlocal ENABLEEXTENSIONS
+%DKINIT%
 set "input=%1"
 echo    SendAndGetData received the value: %input%
 set "output=%input%Tree"

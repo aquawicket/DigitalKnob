@@ -8,7 +8,7 @@
 :: Example:  call AppendEnvPath C:\Windows\System32 result
 ::           echo AppendEnvPath returned: %result%
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-setlocal ENABLEEXTENSIONS
+%DKINIT%
 set "path=%~1"
 if %DEBUG%==1 echo AppendEnvPath(path: %path%)
 

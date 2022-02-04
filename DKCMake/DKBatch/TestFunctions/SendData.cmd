@@ -7,7 +7,7 @@
 ::
 :: Example:  call SendData apple
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-setlocal ENABLEEXTENSIONS
+%DKINIT%
 set "input=%1"
 echo    SendData received the value: %input%
 endlocal

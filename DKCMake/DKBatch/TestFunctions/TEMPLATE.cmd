@@ -10,7 +10,7 @@
 :: Example:  call TEMPLATE someValue "anotherValue" theResult
 ::           echo TEMPLATE returned: %theResult%
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-setlocal ENABLEEXTENSIONS
+%DKINIT%
 set "in1=%~1"
 set "in2=%~2"
 ::if %DEBUG%==1 echo TEMPLATE(in1: %in1%;  in2: %in2%;  out1: %out1%)
