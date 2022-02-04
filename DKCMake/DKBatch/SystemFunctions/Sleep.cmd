@@ -1,3 +1,5 @@
+%DKBATCH%
+::if %DEBUG%==1 echo -^> %~n0()
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 :Sleep seconds
 ::
@@ -5,10 +7,6 @@
 ::
 :: Args: %1 Number of seconds to wait for (by val)
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-%DKBATCH%
-if %DEBUG%==1 echo -^> %~n0()
-
-
 set /a n=%1+1
 echo Sleeping for %1 seconds . . .
 ping -n %n% 127.0.0.1 >nul
