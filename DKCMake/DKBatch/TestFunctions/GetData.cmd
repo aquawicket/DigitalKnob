@@ -1,3 +1,5 @@
+%DKBATCH%
+%DKIN% %~n0()
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 :GetData output
 ::
@@ -8,11 +10,8 @@
 :: Example:  call GetData rval
 ::           echo GetData returned: %rval%
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-%DKBATCH%
-if %DEBUG%==1 echo -^> %~n0()
-
 set "output=peach"
 endlocal & set "%1=%output%"
 
-if %DEBUG%==1 echo ^<- %~n0()
+%DKOUT% %~n0()
 goto :EOF

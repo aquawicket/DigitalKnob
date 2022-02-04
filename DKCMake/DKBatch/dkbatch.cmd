@@ -1,3 +1,4 @@
+if defined DKIN goto :EOF
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 :dkbatch
 ::
@@ -5,15 +6,15 @@
 ::
 :: Example:  call dkbatch
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-if defined DKINIT goto :EOF
-set DKLOADED=1
 @echo off
 set caller=%0
 if not "%1"=="" set "caller=%1"
 if not defined in_subprocess (cmd /k set in_subprocess=y ^& %caller% %*) & exit )
 
 set DEBUG=1
-if %DEBUG%==1 echo -^> %~n0()
+set "DKIN=if %DEBUG%==1 echo -^> "
+set "DKOUT=if %DEBUG%==1 echo ^<- "
+%DKIN% %~n0()
 
 
 set "DKINIT=@setlocal enableextensions enabledelayedexpansion"
@@ -35,5 +36,6 @@ endlocal
 set "PATH=%PATH%;%~dp0;%~dp0\TestFunctions;%~dp0\StringFunctions;%~dp0\SystemFunctions"
 
 
-if %DEBUG%==1 echo ^<- %~n0()
+
+%DKOUT% %~n0()
 goto :EOF

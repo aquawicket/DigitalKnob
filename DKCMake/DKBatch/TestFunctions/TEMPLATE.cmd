@@ -1,3 +1,5 @@
+%DKBATCH%
+%DKIN% %~n0()
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 :TEMPLATE in1 in2 out1
 ::
@@ -10,9 +12,6 @@
 :: Example:  call TEMPLATE someValue "anotherValue" theResult
 ::           echo TEMPLATE returned: %theResult%
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-%DKBATCH%
-if %DEBUG%==1 echo -^> %~n0()
-
 set "in1=%~1"
 set "in2=%~2"
 ::if %DEBUG%==1 echo TEMPLATE(in1: %in1%;  in2: %in2%;  out1: %out1%)
@@ -25,5 +24,5 @@ echo     TEMPLATE(out1: %out1%)
 endlocal & set "%3=%out1%"
 
 
-if %DEBUG%==1 echo ^<- %~n0()
+%DKOUT% %~n0()
 goto :EOF

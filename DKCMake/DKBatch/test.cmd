@@ -1,8 +1,14 @@
+:: https://github.com/ClicketyClickDK/Underscore
+
 %DKBATCH%
-if %DEBUG%==1 echo -^> %~n0()
+%DKIN% %~n0()
 
 
 call Sleep 2
+
+DOSKEY dktest=Debug
+call dktest
+
 
 echo Calling "TemplateFunc 369 string result"
 call TEMPLATE 369 string result
@@ -36,4 +42,5 @@ call Color :ShowColors
 call Sleep 2
 
 
-if %DEBUG%==1 echo ^<- %~n0()
+%DKOUT% %~n0()
+goto :EOF

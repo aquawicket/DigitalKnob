@@ -1,4 +1,5 @@
-
+%DKBATCH%
+%DKIN% %~n0()
 
 :: Check arg1 for valid sub-fnction and goto it
 set z=%1
@@ -15,10 +16,6 @@ goto :EOF
 ::
 :: Example:  call Color :ShowColors
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-%DKBATCH%
-if %DEBUG%==1 echo -^> %~n0()
-
-
 echo [101;93m STYLES [0m
 echo ^<ESC^>[0m [0mReset[0m
 echo ^<ESC^>[1m [1mBold[0m
@@ -73,5 +70,5 @@ echo ^<ESC^>[7m and nested ^<ESC^>[31m [7mbefore [31mnested[0m
 echo ^<ESC^>[31m and nested ^<ESC^>[7m [31mbefore [7mnested[0m
 
 
-if %DEBUG%==1 echo ^<- %~n0()
+%DKOUT% %~n0()
 goto :EOF

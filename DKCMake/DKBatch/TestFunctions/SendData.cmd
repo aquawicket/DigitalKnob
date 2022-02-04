@@ -1,3 +1,5 @@
+%DKBATCH%
+%DKIN% %~n0()
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 :SendData input
 ::
@@ -7,12 +9,9 @@
 ::
 :: Example:  call SendData apple
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-%DKBATCH%
-if %DEBUG%==1 echo -^> %~n0()
-
 set "input=%1"
 echo    SendData received the value: %input%
 endlocal
 
-if %DEBUG%==1 echo ^<- %~n0()
+%DKOUT% %~n0()
 goto :EOF

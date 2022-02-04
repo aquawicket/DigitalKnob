@@ -1,3 +1,5 @@
+%DKBATCH%
+%DKIN% %~n0()
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 :SendAndGetData input output
 ::
@@ -9,13 +11,10 @@
 :: Example:  call SendAndGetData orange rval
 ::           echo SendAndGetData returned: %rval%
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-%DKBATCH%
-if %DEBUG%==1 echo -^> %~n0()
-
 set "input=%1"
 echo    SendAndGetData received the value: %input%
 set "output=%input%Tree"
 endlocal & set "%2=%output%"
 
-if %DEBUG%==1 echo ^<- %~n0()
+%DKOUT% %~n0()
 goto :EOF

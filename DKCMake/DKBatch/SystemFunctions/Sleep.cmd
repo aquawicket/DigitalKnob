@@ -1,5 +1,5 @@
 %DKBATCH%
-::if %DEBUG%==1 echo -^> %~n0()
+%DKIN% %~n0()
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 :Sleep seconds
 ::
@@ -13,5 +13,5 @@ ping -n %n% 127.0.0.1 >nul
 endlocal 
 
 
-if %DEBUG%==1 echo ^<- %~n0()
+%DKOUT% %~n0()
 goto :EOF
