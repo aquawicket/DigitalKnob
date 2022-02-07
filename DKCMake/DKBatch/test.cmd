@@ -2,6 +2,8 @@
 :: https://github.com/ClicketyClickDK/Underscore
 call Sleep 2
 
+call dkprint this is a test
+
 echo Calling "TemplateFunc 369 string result"
 call TEMPLATE 369 string result
 echo TemplateFunc returned: %result%
