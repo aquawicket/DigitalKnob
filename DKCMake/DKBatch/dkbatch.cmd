@@ -16,10 +16,9 @@ if not "%1"=="" set "caller=%1"
 if not defined in_subprocess (cmd /k set in_subprocess=y ^& %caller% %*) & exit )
 %DKIN%
 
-
-echo *****************************
-echo ********** dkbatch **********
-echo *****************************
+::echo *****************************
+::echo ********** dkbatch **********
+::echo *****************************
 if %DEBUG%==1 echo *** DEBUG MODE ON ***
 echo:
 
