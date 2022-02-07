@@ -6,9 +6,6 @@ if(DKPROCESS_INCLUDED)
 endif(DKPROCESS_INCLUDED)
 DKSET(DKPROCESS_INCLUDED 1)
 
-# TODO:  variable_watch function
-#variable_watch(DKCMAKE_BUILD) 
-
 DKINFO("\n")
 DKINFO("############################################################")
 DKINFO("######################  DigitalKnob  #######################")
@@ -32,6 +29,7 @@ include(${DKCMAKE}/BuildFlags.cmake)
 include(${DKPROJECT}/DKMAKE.cmake)
 DKREMOVE(${DKPROJECT}/${OS}/DKBUILD.log)
 dk_printSettings()
+dk_printAllVariables()
 
 DKBUILD_LOG("##############################################")
 DKBUILD_LOG("######  Enabled Dependencies (sorted)  #######")
