@@ -1,5 +1,4 @@
 %DKBATCH%
-%DKIN%
 
 :: Check arg1 for valid sub-fnction and goto it
 ::set z=%1

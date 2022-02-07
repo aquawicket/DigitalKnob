@@ -1,5 +1,4 @@
 %DKBATCH%
-%DKIN%
 :: https://github.com/ClicketyClickDK/Underscore
 call Sleep 2
 
