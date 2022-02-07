@@ -16,7 +16,6 @@ add_library(giflib
   lib/gif_lib.h
   lib/gif_lib_private.h
   lib/gifalloc.c
-  lib/openbsd-reallocarray.c
   lib/quantize.c
 )
 
