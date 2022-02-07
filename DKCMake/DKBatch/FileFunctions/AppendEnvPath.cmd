@@ -1,5 +1,5 @@
 %DKBATCH%
-%DKIN% %~n0()
+%DKIN%
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 :AppendEnvPath path result
 ::
@@ -29,5 +29,4 @@ if %DEBUG%==1 (
 endlocal & set "%3=%result%"
 
 
-%DKOUT% %~n0()
-goto :EOF
+%DKOUT%

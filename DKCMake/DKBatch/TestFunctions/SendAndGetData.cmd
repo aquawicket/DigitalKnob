@@ -1,5 +1,5 @@
 %DKBATCH%
-%DKIN% %~n0()
+%DKIN%
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 :SendAndGetData input output
 ::
@@ -16,5 +16,4 @@ echo    SendAndGetData received the value: %input%
 set "output=%input%Tree"
 endlocal & set "%2=%output%"
 
-%DKOUT% %~n0()
-goto :EOF
+%DKOUT%

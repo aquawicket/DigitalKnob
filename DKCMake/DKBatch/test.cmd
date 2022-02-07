@@ -1,5 +1,5 @@
 %DKBATCH%
-%DKIN% %~n0()
+%DKIN%
 :: https://github.com/ClicketyClickDK/Underscore
 call Sleep 2
 
@@ -35,5 +35,4 @@ call Color :ShowColors
 call Sleep 2
 
 
-%DKOUT% %~n0()
-goto :EOF
+%DKOUT%

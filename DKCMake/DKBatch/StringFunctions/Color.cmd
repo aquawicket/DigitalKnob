@@ -1,11 +1,12 @@
 %DKBATCH%
-%DKIN% %~n0()
+%DKIN%
 
 :: Check arg1 for valid sub-fnction and goto it
-set z=%1
-if not "!z::=!"=="%z%" goto %1
-echo ERROR: sub-function "%1" invalid.
-goto :EOF
+::set z=%1
+::if not "!z::=!"=="%z%" goto %1
+::%ON_ERROR%
+::echo ERROR: sub-function "%1" invalid.
+::goto :EOF
 
 
 
@@ -70,5 +71,4 @@ echo ^<ESC^>[7m and nested ^<ESC^>[31m [7mbefore [31mnested[0m
 echo ^<ESC^>[31m and nested ^<ESC^>[7m [31mbefore [7mnested[0m
 
 
-%DKOUT% %~n0()
-goto :EOF
+%DKOUT%

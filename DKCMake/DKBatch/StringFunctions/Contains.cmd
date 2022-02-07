@@ -1,5 +1,5 @@
 %DKBATCH%
-%DKIN% %~n0()
+%DKIN%
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 :Contains "string" "searchVal" result
 ::
@@ -18,5 +18,4 @@ if %DEBUG%==1 echo Contains()result: %result% & echo:
 endlocal & set %3=%result%
 
 
-%DKOUT% %~n0()
-goto :EOF
+%DKOUT%

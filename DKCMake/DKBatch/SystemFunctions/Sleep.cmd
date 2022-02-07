@@ -1,5 +1,5 @@
 %DKBATCH%
-%DKIN% %~n0()
+%DKIN%
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 :Sleep seconds
 ::
@@ -13,5 +13,4 @@ ping -n %n% 127.0.0.1 >nul
 endlocal 
 
 
-%DKOUT% %~n0()
-goto :EOF
+%DKOUT%

@@ -1,5 +1,5 @@
 %DKBATCH%
-%DKIN% %~n0()
+%DKIN%
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 :TEMPLATE in1 in2 out1
 ::
@@ -24,5 +24,4 @@ echo     TEMPLATE(out1: %out1%)
 endlocal & set "%3=%out1%"
 
 
-%DKOUT% %~n0()
-goto :EOF
+%DKOUT%

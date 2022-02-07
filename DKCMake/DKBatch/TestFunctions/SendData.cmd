@@ -1,5 +1,5 @@
 %DKBATCH%
-%DKIN% %~n0()
+%DKIN%
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 :SendData input
 ::
@@ -13,5 +13,4 @@ set "input=%1"
 echo    SendData received the value: %input%
 endlocal
 
-%DKOUT% %~n0()
-goto :EOF
+%DKOUT%

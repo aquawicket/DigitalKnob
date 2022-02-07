@@ -1,5 +1,5 @@
 %DKBATCH%
-%DKIN% %~n0()
+%DKIN%
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 :EndProcess process error
 ::
@@ -22,5 +22,4 @@ if errorlevel 1 taskkill /f /im "%process%
 
 
 endlocal & set "%2=%ERRORLEVEL%"
-%DKOUT% %~n0()
-goto :EOF
+%DKOUT%

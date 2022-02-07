@@ -1,5 +1,5 @@
 %DKBATCH%
-%DKIN% %~n0()
+%DKIN%
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 :UninstallPackage name error
 ::
@@ -32,5 +32,4 @@ if not exist "%ANDROID_HOME%/platform-tools/adb" (
 
 :end 
 endlocal & set "%2=%ERRORLEVEL%"
-%DKOUT% %~n0()
-goto :EOF
+%DKOUT%

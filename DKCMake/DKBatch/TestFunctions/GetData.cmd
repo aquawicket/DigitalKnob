@@ -1,5 +1,5 @@
 %DKBATCH%
-%DKIN% %~n0()
+%DKIN%
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 :GetData output
 ::
@@ -13,5 +13,4 @@
 set "output=peach"
 endlocal & set "%1=%output%"
 
-%DKOUT% %~n0()
-goto :EOF
+%DKOUT%

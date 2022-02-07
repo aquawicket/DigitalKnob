@@ -1,4 +1,9 @@
-if defined DKIN goto :EOF
+@echo off
+set DEBUG=1
+::if %DEBUG%==1 echo -^> %~n0()
+set "DKIN=if %DEBUG%==1 echo -^> %~n1()"
+set "DKOUT=if %DEBUG%==1 echo ^<- %~n1()"
+if defined DKINIT goto :EOF
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 :dkbatch
 ::
@@ -6,19 +11,15 @@ if defined DKIN goto :EOF
 ::
 :: Example:  call dkbatch
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-@echo off
+
 set caller=%0
 if not "%1"=="" set "caller=%1"
 if not defined in_subprocess (cmd /k set in_subprocess=y ^& %caller% %*) & exit )
 
-set DEBUG=1
-set "DKIN=if %DEBUG%==1 echo -^> "
-set "DKOUT=if %DEBUG%==1 echo ^<- "
-%DKIN% %~n0()
-
-
 set "DKINIT=@setlocal enableextensions enabledelayedexpansion"
 %DKINIT%
+
+set "onError=if errorlevel 1 echo echo ^<ESC^>[91m [91m ERROR: The last command failed [0m 
 
 echo *****************************
 echo ********** dkbatch **********
@@ -37,5 +38,4 @@ set "PATH=%PATH%;%~dp0;%~dp0\TestFunctions;%~dp0\StringFunctions;%~dp0\SystemFun
 
 
 
-%DKOUT% %~n0()
-goto :EOF
+::if %DEBUG%==1 echo ^<- %~n0()
