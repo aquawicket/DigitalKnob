@@ -5,8 +5,10 @@
 @echo off
 ::echo %1 %2 %3
 set DEBUG=1
-set "DKIN=if %DEBUG%==1 echo -^> %~n1()"
-set "DKOUT=if %DEBUG%==1 echo ^<- %~n1()"
+for /f "tokens=1,* delims= " %%a in ("%*") do set ALL_BUT_FIRST=%%b
+set "DKIN=if %DEBUG%==1 echo -^> %~n1^(%ALL_BUT_FIRST%^)"
+::TODO - try and get the return values printed in the echo below
+set "DKOUT=if %DEBUG%==1 echo ^<- %~n1^(^)"
 if "%2"=="DKEND" %DKOUT% & goto :EOF
 set "DKEND=call %0 %%0 DKEND"
 

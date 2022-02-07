@@ -28,4 +28,4 @@ if %DEBUG%==1 (
 endlocal & set "%3=%result%"
 
 
-%DKOUT%
+%DKEND%

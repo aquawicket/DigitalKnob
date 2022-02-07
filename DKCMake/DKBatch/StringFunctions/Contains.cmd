@@ -16,5 +16,4 @@ if "%string%"=="" set result=0
 if %DEBUG%==1 echo Contains()result: %result% & echo:
 endlocal & set %3=%result%
 
-
-%DKOUT%
+%DKEND%

@@ -2,39 +2,57 @@
 :: https://github.com/ClicketyClickDK/Underscore
 call Sleep 2
 
-call dkprint this is a test
+echo:
 
-echo Calling "TemplateFunc 369 string result"
+call NestedNodes1
+
+echo:
+
+call dkprint this is a test of dkprint
+
+echo:
+
 call TEMPLATE 369 string result
 echo TemplateFunc returned: %result%
+
 echo:
 
 call Sleep 2
 
-echo Calling "SendData apple"
+echo:
+
 call SendData apple
+
 echo:
 
 call Sleep 2
 
-echo Calling "GetData result"
+echo:
+
 call GetData result 
 echo GetData returned: %result%
+
 echo:
 
 call Sleep 2
 
-echo Calling "SendAndGetData orange result"
+echo:
+
 call SendAndGetData orange result
 echo SendAndGetData returned: %result%
+
 echo:
 
 call Sleep 2
+
+echo:
 
 call Color :ShowColors
 
+echo:
+
 call Sleep 2
 
+echo:
 
-::%DKOUT%
 %DKEND%

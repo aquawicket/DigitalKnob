@@ -7,6 +7,7 @@
 echo This is Batch script (.bat)
 echo:
 cscript //nologo //E:jscript %0 %*
+%DKEND%
 exit /b
 
 

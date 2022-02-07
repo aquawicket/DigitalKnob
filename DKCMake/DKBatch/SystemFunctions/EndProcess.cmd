@@ -21,4 +21,4 @@ if errorlevel 1 taskkill /f /im "%process%
 
 
 endlocal & set "%2=%ERRORLEVEL%"
-%DKOUT%
+%DKEND%
