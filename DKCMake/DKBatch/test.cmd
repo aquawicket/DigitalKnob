@@ -1,14 +1,7 @@
-:: https://github.com/ClicketyClickDK/Underscore
-
 %DKBATCH%
 %DKIN% %~n0()
-
-
+:: https://github.com/ClicketyClickDK/Underscore
 call Sleep 2
-
-DOSKEY dktest=Debug
-call dktest
-
 
 echo Calling "TemplateFunc 369 string result"
 call TEMPLATE 369 string result

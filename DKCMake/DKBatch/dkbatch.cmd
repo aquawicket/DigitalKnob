@@ -27,12 +27,12 @@ if %DEBUG%==1 echo *** DEBUG MODE ON ***
 echo:
 
 :: add %DKBATCH% command to global environment variables
-::call %~dp0\StringFunctions\Contains "%DKBATCH%" "%~dp0\dkbatch.cmd" result
-::if "%result%"=="0" (setx DKBATCH "%~dp0\dkbatch.cmd")
-::if "%result%"=="0" (setx DKBATCH "@echo off & call %~dp0\dkbatch.cmd %%0")
-if "%DKBATCH%"=="" setx DKBATCH "@echo off & call %0 %%0"
+if "%DKBATCH%"=="" setx DKBATCH "@echo off & call %0 %%0 & @setlocal enableextensions enabledelayedexpansion"
 
 endlocal
+
+
+:: Add dkbatch subfolders to the PATH environment variable
 set "PATH=%PATH%;%~dp0;%~dp0\TestFunctions;%~dp0\StringFunctions;%~dp0\SystemFunctions"
 
 
