@@ -220,6 +220,14 @@ function(AliasFunctions name)
 	CreateFunc("macro(ANDROID64_RELEASE_${name})\n if(ANDROID_64 AND RELEASE)\n ${name}(\${ARGV})\n endif()\n endmacro()\n")	
 endfunction()
 
+### print all variables
+function(dk_printAllVariables)
+	get_cmake_property(_variableNames VARIABLES)
+	list (SORT _variableNames)
+	foreach (_variableName ${_variableNames})
+		message(STATUS "${_variableName}=${${_variableName}}")
+	endforeach()
+endfunction()
 
 # dk_string_has
 function(dk_includes str substr result)
