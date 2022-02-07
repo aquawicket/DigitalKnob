@@ -11,6 +11,10 @@
 :: Example:  call EndProcess iexplore.exe error
 ::           echo EndProcess returned: %error%
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+if not defined %1 (
+	echo ERROR: arg1 "process" invalid
+	goto :EOF
+)
 set "process=%~1"
 
 tasklist /fi "imagename eq %process%" |find ":" > nul
