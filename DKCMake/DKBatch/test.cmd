@@ -36,4 +36,5 @@ call Color :ShowColors
 call Sleep 2
 
 
-%DKOUT%
+::%DKOUT%
+%DKEND%

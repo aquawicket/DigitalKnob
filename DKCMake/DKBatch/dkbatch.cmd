@@ -3,11 +3,16 @@
 :: https://ss64.com/nt/
 
 @echo off
+::echo %1 %2 %3
 set DEBUG=1
 set "DKIN=if %DEBUG%==1 echo -^> %~n1()"
 set "DKOUT=if %DEBUG%==1 echo ^<- %~n1()"
+if "%2"=="DKEND" %DKOUT% & goto :EOF
+set "DKEND=call %0 %%0 DKEND"
+
 set "onError=if errorlevel 1 echo echo ^<ESC^>[91m [91m ERROR: The last command failed & echo FILE: %~f1 [0m 
 if defined DKLOADED (
+	::set "PARENT=%PREV%" set "PREV=%~n1"
 	%DKIN% & TITLE %1 & goto :EOF
 )
 set caller=%0
@@ -15,6 +20,7 @@ if not "%1"=="" set "caller=%1"
 ::if not defined in_subprocess (cmd /k set in_subprocess=y ^& %caller% %* > log.txt 2>&1) & exit )
 if not defined in_subprocess (cmd /k set in_subprocess=y ^& %caller% %*) & exit )
 %DKIN%
+
 
 ::echo *****************************
 ::echo ********** dkbatch **********

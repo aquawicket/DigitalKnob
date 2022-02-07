@@ -15,4 +15,4 @@ echo    SendAndGetData received the value: %input%
 set "output=%input%Tree"
 endlocal & set "%2=%output%"
 
-%DKOUT%
+%DKEND%

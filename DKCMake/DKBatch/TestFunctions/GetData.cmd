@@ -12,4 +12,4 @@
 set "output=peach"
 endlocal & set "%1=%output%"
 
-%DKOUT%
+%DKEND%

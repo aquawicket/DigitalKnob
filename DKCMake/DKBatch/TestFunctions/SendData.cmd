@@ -12,4 +12,4 @@ set "input=%1"
 echo    SendData received the value: %input%
 endlocal
 
-%DKOUT%
+%DKEND%

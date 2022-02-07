@@ -23,4 +23,4 @@ echo     TEMPLATE(out1: %out1%)
 endlocal & set "%3=%out1%"
 
 
-%DKOUT%
+%DKEND%
