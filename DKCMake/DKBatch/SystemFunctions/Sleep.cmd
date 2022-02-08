@@ -12,4 +12,5 @@ ping -n %n% 127.0.0.1 >nul
 endlocal 
 
 
+:end
 %DKEND%

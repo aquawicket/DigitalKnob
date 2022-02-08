@@ -4,6 +4,8 @@ call Sleep 2
 
 echo:
 
+%ERROR% "the error message"
+
 call NestedNodes1
 
 echo:
@@ -55,4 +57,5 @@ call Sleep 2
 
 echo:
 
+:end
 %DKEND%

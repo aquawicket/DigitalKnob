@@ -8,11 +8,14 @@ set DEBUG=1
 for /f "tokens=1,* delims= " %%a in ("%*") do set ALL_BUT_FIRST=%%b
 set "DKIN=if %DEBUG%==1 echo -^> %~n1^(%ALL_BUT_FIRST%^)"
 ::TODO - try and get the return values printed in the echo below
-set "DKOUT=if %DEBUG%==1 echo ^<- %~n1^(^)"
-if "%2"=="DKEND" %DKOUT% & goto :EOF
-set "DKEND=call %0 %%0 DKEND"
 
-set "onError=if errorlevel 1 echo echo ^<ESC^>[91m [91m ERROR: The last command failed & echo FILE: %~f1 [0m 
+set "DOEND=if %DEBUG%==1 echo ^<- %~n1^(^)"
+::set "DOERROR=echo ERROR: %~n1 %3 & goto :EOF"
+if "%2"=="DKEND" %DOEND% & goto :EOF
+::if "%2"=="DKERROR" %DOERROR% & goto :EOF
+set "DKEND=call %0 %%0 DKEND"
+::set "DKERROR=call %0 %%0 DKERROR %2"
+
 if defined DKLOADED (
 	::set "PARENT=%PREV%" set "PREV=%~n1"
 	%DKIN% & TITLE %1 & goto :EOF
@@ -23,6 +26,7 @@ if not "%1"=="" set "caller=%1"
 if not defined in_subprocess (cmd /k set in_subprocess=y ^& %caller% %*) & exit )
 %DKIN%
 
+set "ERROR=DKERROR %1 "
 
 ::echo *****************************
 ::echo ********** dkbatch **********
