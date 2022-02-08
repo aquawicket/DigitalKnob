@@ -1,27 +1,31 @@
 %DKBATCH%
 :: https://github.com/ClicketyClickDK/Underscore
-call Sleep 2
 
+
+
+
+::call Sleep 2
 echo:
 
 
-set "ERRORLEVEL=0" & echo ERRORLEVEL set to %ERRORLEVEL%
+set "ERRORLEVEL=1"
 %IF_ERROR% "IF_ERROR: This throws an error if ERRLVL in not 0, and continues"
 echo: 
+pause: 
 
-echo Testing ERROR...
 %ERROR% "ERROR: This throws an error, and continues"
 echo:
 
-echo Testing IF_FATAL...
-set "ERRORLEVEL=0" & echo ERRORLEVEL set to %ERRORLEVEL%
-%IF_FATAL% "IF_FATAL: This thows an error if ERRLVL in not 0, and exits the program"
-::%IF_FATAL%
+set "ERRORLEVEL=1"
+::%IF_FATAL% "IF_FATAL: This thows an error if ERRLVL in not 0, and exits the program"
 echo:
 
-echo Testing FATAL...
-%FATAL% "FATAL: This throws an error, and exits the program"
+::%FATAL% "FATAL: This throws an error, and exits the program"
 echo:
+
+
+
+
 
 call NestedNodes1
 
