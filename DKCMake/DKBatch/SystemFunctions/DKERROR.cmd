@@ -43,6 +43,7 @@ if not "%ERRORLEVEL%"=="0" (
 	)
 	echo.
 	echo.
+	pause
 	exit /b %ERRORLEVEL%
 )
 goto :EOF
@@ -102,6 +103,7 @@ for /f "delims=" %%a in ('findstr /n "^" "%~f2"') do (
 )
 echo.
 echo.
+pause
 exit /b %ERRORLEVEL%
 
 :FATAL
@@ -128,4 +130,6 @@ for /f "delims=" %%a in ('findstr /n "^" "%~f2"') do (
 )
 echo.
 echo.
+echo Press any key to exit . . .
+pause >nul
 exit /b %ERRORLEVEL%
