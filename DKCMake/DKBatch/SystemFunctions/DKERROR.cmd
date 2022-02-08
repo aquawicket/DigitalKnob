@@ -21,6 +21,8 @@ if "%1"=="FATAL" (goto :FATAL)
 :IF_ERROR
 if not "%ERRORLEVEL%"=="0" (
 	for /f "delims=:" %%a in ('findstr /n /c:"%~3" "%~f2"') do set "line=%%a"
+	echo.
+	echo.
 	echo [91m IF_ERROR: %ERRORLEVEL% - %3 [0m
 	echo [91m  File: %~f2: !line! [0m
 	set /A n = 1
@@ -39,6 +41,8 @@ if not "%ERRORLEVEL%"=="0" (
 		)		
 		set /a n+=1
 	)
+	echo.
+	echo.
 	exit /b %ERRORLEVEL%
 )
 goto :EOF
@@ -46,6 +50,8 @@ goto :EOF
 :IF_FATAL
 if not "%ERRORLEVEL%"=="0" (
 	for /f "delims=:" %%a in ('findstr /n /c:"%~3" "%~f2"') do set "line=%%a"
+	echo.
+	echo.
 	echo [31m IF_FATAL: %ERRORLEVEL% - %3 [0m
 	echo [31m  File: %~f2:!line! [0m
 	set /A n = 1
@@ -64,6 +70,8 @@ if not "%ERRORLEVEL%"=="0" (
 		)		
 		set /a n+=1
 	)
+	echo.
+	echo.
 	echo Press any key to exit . . .
 	pause >nul
 	exit %ERRORLEVEL%
@@ -72,6 +80,8 @@ goto :EOF
 
 :ERROR
 for /f "delims=:" %%a in ('findstr /n /c:"%~3" "%~f2"') do set "line=%%a"
+echo.
+echo.
 echo [91m ERROR: %ERRORLEVEL% - %3 [0m
 echo [91m  File: %~f2:!line! [0m
 set /A n = 1
@@ -90,10 +100,14 @@ for /f "delims=" %%a in ('findstr /n "^" "%~f2"') do (
 	)		
 	set /a n+=1
 )
+echo.
+echo.
 exit /b %ERRORLEVEL%
 
 :FATAL
 for /f "delims=:" %%a in ('findstr /n /c:"%~3" "%~f2"') do set "line=%%a"
+echo.
+echo.
 echo [31m FATAL: %ERRORLEVEL% - %3 [0m
 echo [31m  File: %~f2:!line! [0m
 set /A n = 1
@@ -112,4 +126,6 @@ for /f "delims=" %%a in ('findstr /n "^" "%~f2"') do (
 	)		
 	set /a n+=1
 )
+echo.
+echo.
 exit /b %ERRORLEVEL%
