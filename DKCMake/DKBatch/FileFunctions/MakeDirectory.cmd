@@ -13,7 +13,6 @@ set "path=%~1"
 
 set "path=%path:/=\%"
 echo "%path%"
-pause
 mkdir "%path%"
 
 endlocal

@@ -47,7 +47,7 @@ echo:
 if "%DKBATCH%"=="" setx DKBATCH "@echo off & call %0 %%0 & @setlocal enableextensions enabledelayedexpansion"
 
 :: Add dkbatch subfolders to the PATH environment variable
-set "PATH=%PATH%;%~dp0;%~dp0\TestFunctions;%~dp0\StringFunctions;%~dp0\SystemFunctions"
+set "PATH=%PATH%;%~dp0;%~dp0\FileFunctions;%~dp0\TestFunctions;%~dp0\StringFunctions;%~dp0\SystemFunctions"
 
 
 

@@ -17,7 +17,6 @@ set "dest=%dest:/=\%"
 echo CopyPath
 echo "%src%"
 echo "%dest%"
-pause
 copy "%src%" "%dest%"
 
 endlocal
