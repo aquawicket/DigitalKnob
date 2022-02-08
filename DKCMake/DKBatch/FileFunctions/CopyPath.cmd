@@ -10,12 +10,15 @@
 :: Example:  call MakeDirectory C:/Test/Folder
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 set "src=%~1"
-Set "dest=%~1"
+set "dest=%~2"
 
-set "path=%path:/=\%"
-echo "%path%"
+set "src=%src:/=\%"
+set "dest=%dest:/=\%"
+echo CopyPath
+echo "%src%"
+echo "%dest%"
 pause
-mkdir "%path%"
+copy "%src%" "%dest%"
 
 endlocal
 %DKEND%

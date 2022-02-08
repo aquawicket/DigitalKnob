@@ -11,7 +11,7 @@
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 set "path=%~1"
 
-set "path=%variable:/=\%"
+set "path=%path:/=\%"
 echo "%path%"
 pause
 mkdir "%path%"
