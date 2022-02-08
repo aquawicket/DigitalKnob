@@ -4,7 +4,24 @@ call Sleep 2
 
 echo:
 
-%ERROR% "the error message"
+
+set "ERRORLEVEL=0" & echo ERRORLEVEL set to %ERRORLEVEL%
+%IF_ERROR% "IF_ERROR: This throws an error if ERRLVL in not 0, and continues"
+echo: 
+
+echo Testing ERROR...
+%ERROR% "ERROR: This throws an error, and continues"
+echo:
+
+echo Testing IF_FATAL...
+set "ERRORLEVEL=0" & echo ERRORLEVEL set to %ERRORLEVEL%
+%IF_FATAL% "IF_FATAL: This thows an error if ERRLVL in not 0, and exits the program"
+::%IF_FATAL%
+echo:
+
+echo Testing FATAL...
+%FATAL% "FATAL: This throws an error, and exits the program"
+echo:
 
 call NestedNodes1
 

@@ -22,11 +22,20 @@ if defined DKLOADED (
 )
 set caller=%0
 if not "%1"=="" set "caller=%1"
+
+set "TRY_FATAL=DKERROR ERROR %1 "
+set "IF_ERROR=call DKERROR IF_ERROR %1 "
+set "ERROR=call DKERROR ERROR %1 "
+set "IF_FATAL=call DKERROR IF_FATAL %1 "
+set "FATAL=DKERROR ERROR %1 "
+
+
 ::if not defined in_subprocess (cmd /k set in_subprocess=y ^& %caller% %* > log.txt 2>&1) & exit )
 if not defined in_subprocess (cmd /k set in_subprocess=y ^& %caller% %*) & exit )
 %DKIN%
 
-set "ERROR=DKERROR %1 "
+
+
 
 ::echo *****************************
 ::echo ********** dkbatch **********
