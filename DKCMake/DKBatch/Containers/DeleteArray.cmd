@@ -13,4 +13,10 @@ endlocal & (for /L %%G IN (0,1,!n!) do (
 	set /A count+=1
 ))
 
+
+:: DOSTIPS version
+:: :remove_array
+:: for /f "delims==" %%a in ('"set %~1[ 2>NUL"') do set "%%a="
+:: EXIT /b
+
 %DKEND%

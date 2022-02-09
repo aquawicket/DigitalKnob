@@ -14,12 +14,12 @@ if not defined DKSETTNGS ( call %DKBATCH_PATH%settings )
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 for /f "tokens=1,* delims= " %%a in ("%*") do set ALL_BUT_FIRST=%%b
-set "DKIN=if %DEBUG%==1 echo -^> %~n1^(%ALL_BUT_FIRST%^)"
+set "DKIN=if %DEBUG%==1 echo. & echo [94m--^> %~n1^(%ALL_BUT_FIRST%^)[0m"
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 ::TODO - try and get the return values printed in the echo below
-set "DOEND=endlocal & if %DEBUG%==1 echo ^<- %~n1^(^)"
+set "DOEND=endlocal & if %DEBUG%==1 echo [94m^<-- %~n1^(^)[0m & echo."
 ::set "DOEND=if %DEBUG%==1 echo ^<- %~n1^(^)"
 if "%~2"=="DKEND" %DOEND% & goto :EOF
 set "DKEND=call %0 %%0 DKEND"
@@ -42,8 +42,8 @@ if "%cnt%" gtr "1" (
 if defined DKLOADED (
 	::set "PARENT=%PREV%" set "PREV=%~n1"
 	%DKIN%
+	if %DEBUG_dkbatch.cmd%==1 echo. & echo [94m--^> %~n0^(%*^)[0m
 	TITLE %1
-	if %DEBUG_dkbatch.cmd%==1 echo -^> %~n0^(%*^)
 	goto :dkbatch_end
 )
 ::::::::::::::::::::::::::
@@ -71,7 +71,7 @@ if not defined in_subprocess (cmd /k set in_subprocess=y ^& %caller% %*) & exit 
 
 :: Print debug function entry
 %DKIN%
-if %DEBUG_dkbatch.cmd%==1 echo -^> %~n0^(%*^)
+if %DEBUG_dkbatch.cmd%==1 echo. & echo [94m--^> %~n0^(%*^)[0m
 
 if %DEBUG%==1 ( 
 	echo *****************************
@@ -98,4 +98,4 @@ endlocal & set "PATH=%PATH%;%folders%"
 
 set DKLOADED=1
 :dkbatch_end
-if %DEBUG_dkbatch.cmd%==1 echo ^<- %~n0^(^)
+if %DEBUG_dkbatch.cmd%==1 echo [94m^<-- %~n0^(^)[0m & echo.

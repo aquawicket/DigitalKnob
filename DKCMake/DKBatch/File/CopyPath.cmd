@@ -11,12 +11,9 @@
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 set "src=%~1"
 set "dest=%~2"
-
 set "src=%src:/=\%"
 set "dest=%dest:/=\%"
-echo CopyPath
-echo "%src%"
-echo "%dest%"
 copy "%src%" "%dest%"
+%IF_ERROR% ""
 
 %DKEND%
