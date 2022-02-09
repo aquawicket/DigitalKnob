@@ -13,10 +13,10 @@
 ::
 ::
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-if "%1"=="IF_ERROR" (goto :IF_ERROR)
-if "%1"=="ERROR" (goto :ERROR)
-if "%1"=="IF_FATAL" (goto :IF_FATAL)
-if "%1"=="FATAL" (goto :FATAL)
+if "%~1"=="IF_ERROR" (goto :IF_ERROR)
+if "%~1"=="ERROR" (goto :ERROR)
+if "%~1"=="IF_FATAL" (goto :IF_FATAL)
+if "%~1"=="FATAL" (goto :FATAL)
 
 :IF_ERROR
 if not "%ERRORLEVEL%"=="0" (

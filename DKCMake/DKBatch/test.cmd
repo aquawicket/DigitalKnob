@@ -8,23 +8,19 @@
 echo:
 
 
-set "ERRORLEVEL=1"
-%IF_ERROR% "IF_ERROR: This throws an error if ERRLVL in not 0, and continues"
-echo: 
-pause: 
+::set "ERRORLEVEL=1"
+::%IF_ERROR% "IF_ERROR: This throws an error if ERRLVL in not 0, and continues"
+::echo: 
 
-%ERROR% "ERROR: This throws an error, and continues"
-echo:
+::%ERROR% "ERROR: This throws an error, and continues"
+::echo:
 
-set "ERRORLEVEL=1"
+::set "ERRORLEVEL=1"
 ::%IF_FATAL% "IF_FATAL: This thows an error if ERRLVL in not 0, and exits the program"
-echo:
+::echo:
 
 ::%FATAL% "FATAL: This throws an error, and exits the program"
-echo:
-
-
-
+::echo:
 
 
 call NestedNodes1
@@ -35,12 +31,16 @@ call dkprint this is a test of dkprint
 
 echo:
 
+copy NUL %DKBATCH_PATH%CATCH\EmptyFile.txt
+
+echo:
+
 call TEMPLATE 369 string result
 echo TemplateFunc returned: %result%
 
 echo:
 
-call Sleep 2
+::call Sleep 2
 
 echo:
 
@@ -48,7 +48,7 @@ call SendData apple
 
 echo:
 
-call Sleep 2
+::call Sleep 2
 
 echo:
 
@@ -57,7 +57,7 @@ echo GetData returned: %result%
 
 echo:
 
-call Sleep 2
+::call Sleep 2
 
 echo:
 
@@ -66,7 +66,7 @@ echo SendAndGetData returned: %result%
 
 echo:
 
-call Sleep 2
+::call Sleep 2
 
 echo:
 
@@ -74,7 +74,7 @@ call Color :ShowColors
 
 echo:
 
-call Sleep 2
+::call Sleep 2
 
 echo:
 
