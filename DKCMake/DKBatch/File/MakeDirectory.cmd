@@ -12,7 +12,7 @@
 set "path=%~1"
 set "path=%path:/=\%"
 if not exist "%path%" ( mkdir "%path%" )
-else ( echo %n~0(%*): path already exists )
+::else ( echo %n~0(%*): path already exists )
 
 endlocal
 %DKEND%
