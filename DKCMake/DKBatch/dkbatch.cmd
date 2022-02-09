@@ -19,9 +19,9 @@ set "DKIN=if %DEBUG%==1 echo -^> %~n1^(%ALL_BUT_FIRST%^)"
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 ::TODO - try and get the return values printed in the echo below
-::set "DOEND=endlocal & if %DEBUG%==1 echo ^<- %~n1^(^)"
-set "DOEND=if %DEBUG%==1 echo ^<- %~n1^(^)"
-if "%2"=="DKEND" %DOEND% & goto :EOF
+set "DOEND=endlocal & if %DEBUG%==1 echo ^<- %~n1^(^)"
+::set "DOEND=if %DEBUG%==1 echo ^<- %~n1^(^)"
+if "%~2"=="DKEND" %DOEND% & goto :EOF
 set "DKEND=call %0 %%0 DKEND"
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -57,6 +57,10 @@ set "ERROR=call DKERROR ERROR %1 "
 set "IF_FATAL=call DKERROR IF_FATAL %1 "
 set "FATAL=DKERROR ERROR %1 "
 
+::set "REQUIRED_1=if [%%1]==[] echo [91m	%~n0(%*): argument 1 is invalid [0m & goto :EOF"
+::set "REQUIRED_2=if [%%2]==[] echo [91m	%~n0(%*): argument 2 is invalid [0m & goto :EOF"
+::set "REQUIRED_3=if [%%3]==[] echo [91m	%~n0(%*): argument 3 is invalid [0m & goto :EOF"
+
 set caller=%0
 if not "%1"=="" set "caller=%1"
 if not defined in_subprocess (cmd /k set in_subprocess=y ^& %caller% %*) & exit )
@@ -78,8 +82,8 @@ if %DEBUG%==1 (
 )
 
 :: import %DKBATCH% command to global environment variables
-::if "%DKBATCH%"=="" setx DKBATCH "@echo off & call %0 %%0 & @setlocal enableextensions enabledelayedexpansion"
-if "%DKBATCH%"=="" setx DKBATCH "@echo off & call %0 %%0"
+if "%DKBATCH%"=="" setx DKBATCH "@echo off & call %0 %%0 & @setlocal enableextensions enabledelayedexpansion"
+::if "%DKBATCH%"=="" setx DKBATCH "@echo off & call %0 %%0"
 
 :: Add dkbatch subfolders to the user PATH environment variable
 ::::::::::::::::::::::::::::::::::::::::::::::::
