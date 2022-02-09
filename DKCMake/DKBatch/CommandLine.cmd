@@ -1,5 +1,7 @@
 %DKBATCH%
 
+COLOR 1A
+
 :enter_command
 echo Enter a command:
 set /p command=

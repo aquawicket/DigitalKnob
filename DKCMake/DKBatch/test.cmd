@@ -1,6 +1,6 @@
 %DKBATCH%
-:: https://github.com/ClicketyClickDK/Underscore
 
+:: https://github.com/ClicketyClickDK/Underscore
 set TEST_DKVARIABLES=1
 set TEST_DKERRORS=1
 set TEST_DKNESTING=1
@@ -27,6 +27,7 @@ if defined TEST_DKVARIABLES (
 	echo:
 )
 :::::::::::::::::::::::::::
+
 
 
 ::::::::::::::::::::::::::::
@@ -107,8 +108,7 @@ if defined TEST_DKCOLOR (
 	echo:
 )
 ::::::::::::::::::::::::
-
-
+echo line %#=%111%=#%
 :::::::::::::::::::::::::
 if defined TEST_DKSLEEP (
 	echo ##############################
@@ -152,3 +152,17 @@ if defined TEST_DKERRORS (
 
 :end
 %DKEND%
+
+
+
+
+
+
+
+
+
+
+
+
+
+

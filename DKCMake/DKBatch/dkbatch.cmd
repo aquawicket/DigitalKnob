@@ -38,11 +38,18 @@ if "%cnt%" gtr "1" (
 :end_NO_RELATIVE_PATHS
 :::::::::::::::::::::::::::
 
+::prepareLineNumbers
+>nul 2>nul (
+	call %DKBATCH_PATH%3rdParty\jrepl "(\x25#=\x25)\d*(\x25=#\x25)" "$1+ln+$2" /j /f "%~f1" /o "%~f1.new"
+	fc /b "%~f1" "%~f1.new" && del "%~f1.new" || move /y "%~f1.new" "%~f1"
+)
+	
 :::::::::::::::::::::::::::
 if defined DKLOADED (
 	::set "PARENT=%PREV%" set "PREV=%~n1"
 	%DKIN%
 	if %DEBUG_dkbatch.cmd%==1 echo. & echo [94m--^> %~n0^(%*^)[0m
+
 	TITLE %1
 	goto :dkbatch_end
 )
@@ -56,6 +63,7 @@ set "IF_ERROR=call DKERROR IF_ERROR %1 "
 set "ERROR=call DKERROR ERROR %1 "
 set "IF_FATAL=call DKERROR IF_FATAL %1 "
 set "FATAL=DKERROR ERROR %1 "
+
 
 ::set "REQUIRED_1=if [%%1]==[] echo [91m	%~n0(%*): argument 1 is invalid [0m & goto :EOF"
 ::set "REQUIRED_2=if [%%2]==[] echo [91m	%~n0(%*): argument 2 is invalid [0m & goto :EOF"
