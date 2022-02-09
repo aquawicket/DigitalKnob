@@ -1,22 +1,23 @@
 %DKBATCH%
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-:TEMPLATE in1 in2 out1
+:TEMPLATE in1 in2 out1 out2
 ::
 :: Func:  *description*
 ::
-:: in1:   *description*
-:: in2:   *description*
-:: out1:  *description* 
+:: in1:   first input variable
+:: in2:   second input variable
+:: out1:  first output variable
+:: out2:  second output variable
 ::
-:: Example:  call TEMPLATE someValue "anotherValue" theResult
-::           echo TEMPLATE returned: %theResult%
+:: Example:  call TEMPLATE someValue "anotherValue" result1 result2
+::           echo TEMPLATE returned: %result1% %result2%
+:: 
+::  Output:  TEMPLATE returned: someValue "anotherValue"
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 set "in1=%~1"
 set "in2=%~2"
-::if %DEBUG%==1 echo TEMPLATE(in1: %in1%;  in2: %in2%;  out1: %out1%)
-set "out1=someOutputValue"
+set "out1=%in1%"
+set "out2=%in2%"
 
-::if %DEBUG%==1 echo Contains()result: %result%
-endlocal & set "%3=%out1%"
-
+endlocal & set "%3=%out1%" & set "%4=%out2%" 
 %DKEND%

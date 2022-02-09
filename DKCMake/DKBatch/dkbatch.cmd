@@ -1,9 +1,16 @@
-@echo off
 :: https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/windows-commands
 :: https://home.csulb.edu/~murdock/dosindex.html
 :: https://ss64.com/nt/
 
-call settings
+@echo off
+
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+if not defined DKBATCH_PATH ( set "DKBATCH_PATH=%~dp0" )
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::
+if not defined DKSETTNGS ( call %DKBATCH_PATH%settings )
+::::::::::::::::::::::::::::::::::::::::::
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 for /f "tokens=1,* delims= " %%a in ("%*") do set ALL_BUT_FIRST=%%b
@@ -12,19 +19,16 @@ set "DKIN=if %DEBUG%==1 echo -^> %~n1^(%ALL_BUT_FIRST%^)"
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 ::TODO - try and get the return values printed in the echo below
-set "DOEND=endlocal & if %DEBUG%==1 echo ^<- %~n1^(^)"
-::set "DOERROR=echo ERROR: %~n1 %3 & goto :EOF"
+::set "DOEND=endlocal & if %DEBUG%==1 echo ^<- %~n1^(^)"
+set "DOEND=if %DEBUG%==1 echo ^<- %~n1^(^)"
 if "%2"=="DKEND" %DOEND% & goto :EOF
-::if "%2"=="DKERROR" %DOERROR% & goto :EOF
 set "DKEND=call %0 %%0 DKEND"
-::set "DKERROR=call %0 %%0 DKERROR %2"
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 :::::::::::::::::::::::::::
 if %NO_RELATIVE_PATHS%==1 goto :NO_RELATIVE_PATHS
 goto :end_NO_RELATIVE_PATHS
 :NO_RELATIVE_PATHS
-set "DKBATCH_PATH=%~dp0"
 cd "%DKBATCH_PATH%CATCH"
 set cnt=0
 for %%A in (*) do set /a cnt+=1
@@ -39,7 +43,7 @@ if defined DKLOADED (
 	::set "PARENT=%PREV%" set "PREV=%~n1"
 	%DKIN%
 	TITLE %1
-	if %DEBUG_dkbatch.cmd%==1 echo -^> dkbatch^(%*^)
+	if %DEBUG_dkbatch.cmd%==1 echo -^> %~n0^(%*^)
 	goto :dkbatch_end
 )
 ::::::::::::::::::::::::::
@@ -63,32 +67,31 @@ if not defined in_subprocess (cmd /k set in_subprocess=y ^& %caller% %*) & exit 
 
 :: Print debug function entry
 %DKIN%
-if %DEBUG_dkbatch.cmd%==1 echo -^> dkbatch^(%*^)
+if %DEBUG_dkbatch.cmd%==1 echo -^> %~n0^(%*^)
 
-::echo *****************************
-::echo ********** dkbatch **********
-::echo *****************************
-if %DEBUG%==1 echo *** DEBUG MODE ON ***
-echo:
+if %DEBUG%==1 ( 
+	echo *****************************
+	echo ********** dkbatch **********
+	echo *****************************
+	echo *** DEBUG MODE ON *** 
+	echo:
+)
 
-:: add %DKBATCH% command to global environment variables
-if "%DKBATCH%"=="" setx DKBATCH "@echo off & call %0 %%0 & @setlocal enableextensions enabledelayedexpansion"
+:: import %DKBATCH% command to global environment variables
+::if "%DKBATCH%"=="" setx DKBATCH "@echo off & call %0 %%0 & @setlocal enableextensions enabledelayedexpansion"
+if "%DKBATCH%"=="" setx DKBATCH "@echo off & call %0 %%0"
 
-:: Add dkbatch subfolders to the PATH environment variable
-set "PATH=%PATH%;%~dp0;%~dp0\FileFunctions;%~dp0\TestFunctions;%~dp0\StringFunctions;%~dp0\SystemFunctions"
-
-
-
-
-:::::::::::::::::::::::::::::::::::::::::::::::::
-@setlocal enableextensions enabledelayedexpansion
-
-:: anything that needs a private scope to dkbatch should be done here
-
-endlocal
+:: Add dkbatch subfolders to the user PATH environment variable
 ::::::::::::::::::::::::::::::::::::::::::::::::
+setlocal enabledelayedexpansion
+set "folders=%DKBATCH_PATH%"
+for /d %%D in (%DKBATCH_PATH%*) do ( set "folders=!folders!;%%D" ) 
+endlocal & set "PATH=%PATH%;%folders%"
+:::::::::::::::::::::::::::::::::::::::::::::::
+
+
+
 
 set DKLOADED=1
-
 :dkbatch_end
 if %DEBUG_dkbatch.cmd%==1 echo ^<- %~n0^(^)

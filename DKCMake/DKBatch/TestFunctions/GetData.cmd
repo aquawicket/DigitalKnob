@@ -10,6 +10,6 @@
 ::           echo GetData returned: %rval%
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 set "output=peach"
-endlocal & set "%1=%output%"
 
+endlocal & set "%1=%output%"
 %DKEND%

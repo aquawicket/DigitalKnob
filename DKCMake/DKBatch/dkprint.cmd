@@ -1,2 +1,1 @@
-@echo off
-echo %*
+echo ( %* )

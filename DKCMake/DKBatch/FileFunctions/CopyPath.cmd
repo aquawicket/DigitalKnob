@@ -19,5 +19,4 @@ echo "%src%"
 echo "%dest%"
 copy "%src%" "%dest%"
 
-endlocal
 %DKEND%
