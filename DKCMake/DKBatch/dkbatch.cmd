@@ -4,7 +4,7 @@
 :: https://ss64.com/nt/
 
 set DEBUG=1
-set NO_RELATIVE_PATHS=0
+set NO_RELATIVE_PATHS=1
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 for /f "tokens=1,* delims= " %%a in ("%*") do set ALL_BUT_FIRST=%%b
@@ -23,8 +23,7 @@ set "DKEND=call %0 %%0 DKEND"
 
 
 :::::::::::::::::::::::::::
-
-if %NO_RELATIVE_PATHS%==1 ( goto :NO_RELATIVE_PATHS )
+if %NO_RELATIVE_PATHS%==1 goto :NO_RELATIVE_PATHS
 goto :end_NO_RELATIVE_PATHS
 :NO_RELATIVE_PATHS
 set "DKBATCH_PATH=%~dp0"
@@ -32,7 +31,7 @@ cd "%DKBATCH_PATH%CATCH"
 set cnt=0
 for %%A in (*) do set /a cnt+=1
 if "%cnt%" gtr "1" (
-	call "%DKBATCH_PATH%SystemFunctions\DKERROR" "ERROR" "%1" "Extra files found in the CATCH folder Something is using relative paths"
+	call "%DKBATCH_PATH%SystemFunctions\DKERROR" "ERROR" "%~1" "Extra files found in the CATCH folder Something is using relative paths"
 )
 :end_NO_RELATIVE_PATHS
 :::::::::::::::::::::::::::
