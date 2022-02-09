@@ -10,15 +10,14 @@
 :: Example:  call EndProcess iexplore.exe error
 ::           echo EndProcess returned: %error%
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-if not defined %1 (
+if "%~1"=="" (
 	echo ERROR: arg1 "process" invalid
 	goto :EOF
 )
 set "process=%~1"
 
-tasklist /fi "imagename eq %process%" |find ":" > nul
+tasklist /fi "imagename eq %process%" |find ":" >nul
 if errorlevel 1 taskkill /f /im "%process%
 
 
-endlocal & set "%2=%ERRORLEVEL%"
 %DKEND%

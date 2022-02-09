@@ -7,9 +7,9 @@
 set DEBUG=1
 for /f "tokens=1,* delims= " %%a in ("%*") do set ALL_BUT_FIRST=%%b
 set "DKIN=if %DEBUG%==1 echo -^> %~n1^(%ALL_BUT_FIRST%^)"
-::TODO - try and get the return values printed in the echo below
 
-set "DOEND=if %DEBUG%==1 echo ^<- %~n1^(^)"
+::TODO - try and get the return values printed in the echo below
+set "DOEND=endlocal & if %DEBUG%==1 echo ^<- %~n1^(^)"
 ::set "DOERROR=echo ERROR: %~n1 %3 & goto :EOF"
 if "%2"=="DKEND" %DOEND% & goto :EOF
 ::if "%2"=="DKERROR" %DOERROR% & goto :EOF

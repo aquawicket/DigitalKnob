@@ -10,9 +10,7 @@
 :: Example:  call MakeDirectory C:/Test/Folder
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 set "path=%~1"
-
 set "path=%path:/=\%"
-echo "%path%"
 mkdir "%path%"
 
 endlocal
