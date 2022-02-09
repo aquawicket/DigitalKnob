@@ -1,6 +1,10 @@
 Command Line Reference
 https://docs.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2012-r2-and-2012/cc754340(v=ws.11)
 
+https://www.tutorialspoint.com/batch_script/batch_script_quick_guide.htm
+
+https://www.dostips.com/DtTutoFunctions.php
+
 SS64
 https://ss64.com/nt/
 
@@ -15,3 +19,4 @@ GEQ - greater than or equal
 
 If (conditionals)
 https://ss64.com/nt/if.html
+
