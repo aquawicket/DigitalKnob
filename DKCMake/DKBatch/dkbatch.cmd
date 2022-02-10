@@ -4,6 +4,10 @@
 
 @echo off
 
+:::::::::::::::::::::::::::::::::::::::::::::
+::set "return=call return %~n1 %~n1 & set %~n1"
+:::::::::::::::::::::::::::::::::::::::::::::
+
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 if not defined DKBATCH_PATH ( set "DKBATCH_PATH=%~dp0" )
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -22,7 +26,7 @@ set "DKIN=if %DEBUG%==1 echo. & echo [94m--^> %~n1^(%ALL_BUT_FIRST%^)[0m"
 set "DOEND=endlocal & if %DEBUG%==1 echo [94m^<-- %~n1^(^)[0m & echo."
 ::set "DOEND=if %DEBUG%==1 echo ^<- %~n1^(^)"
 if "%~2"=="DKEND" %DOEND% & goto :EOF
-set "DKEND=call %0 %%0 DKEND"
+set "DKEND=call %0 %%0 DKEND & call return %%0 %%0"
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 :::::::::::::::::::::::::::
