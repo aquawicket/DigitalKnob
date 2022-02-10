@@ -18,14 +18,13 @@ if not defined DKSETTNGS ( call %DKBATCH_PATH%settings )
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 for /f "tokens=1,* delims= " %%a in ("%*") do set ALL_BUT_FIRST=%%b
-set "DKIN=if %DEBUG%==1 echo. & echo [94m--^> %~n1^(%ALL_BUT_FIRST%^)[0m"
+set "DKIN=if %DEBUG%==1 echo. & echo [94m--^> %~n1^([0m[35m%ALL_BUT_FIRST%[0m[94m^)[0m"
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 ::TODO - try and get the return values printed in the echo below
-set "DOEND=endlocal & if %DEBUG%==1 echo [94m^<-- %~n1^(^)[0m & echo."
-::set "DOEND=if %DEBUG%==1 echo ^<- %~n1^(^)"
-if "%~2"=="DKEND" %DOEND% & goto :EOF
+set "DOEND=endlocal & if %DEBUG%==1 echo [94m^<-- %~n1^(^)[0m "
+if "%~2"=="DKEND" %DOEND%:[35m!%1![0m & echo. & goto :EOF
 set "DKEND=call %0 %%0 DKEND & call return %%0 %%0"
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -85,13 +84,13 @@ if not defined in_subprocess (cmd /k set in_subprocess=y ^& %caller% %*) & exit 
 %DKIN%
 if %DEBUG_dkbatch.cmd%==1 echo. & echo [94m--^> %~n0^(%*^)[0m
 
-if %DEBUG%==1 ( 
-	echo *****************************
-	echo ********** dkbatch **********
-	echo *****************************
-	echo *** DEBUG MODE ON *** 
-	echo:
-)
+::if %DEBUG%==1 ( 
+::	echo *****************************
+::	echo ********** dkbatch **********
+::	echo *****************************
+::	echo *** DEBUG MODE ON *** 
+::	echo:
+::)
 
 :: import %DKBATCH% command to global environment variables
 if "%DKBATCH%"=="" setx DKBATCH "@echo off & call %0 %%0 & @setlocal enableextensions enabledelayedexpansion"
