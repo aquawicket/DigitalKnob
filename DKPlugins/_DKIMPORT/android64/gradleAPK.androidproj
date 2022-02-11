@@ -52,7 +52,7 @@
   <Import Project="$(AndroidTargetsPath)\Android.props" />
   <ItemDefinitionGroup>
     <GradlePackage>
-      <ProjectDirectory>C:\Users\Administrator\digitalknob\sdl2vs\4_SDL2RMLApp</ProjectDirectory>
+      <ProjectDirectory>$(ProjectDir)</ProjectDirectory>
       <GradlePlugin>gradle:7.0.3</GradlePlugin>
       <GradleVersion>7.0.3</GradleVersion>
       <AndroidAppLibName>main</AndroidAppLibName>
@@ -68,20 +68,20 @@
   <ImportGroup Label="ExtensionSettings" />
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">
-    <OutDir>C:\Users\Administrator\digitalknob\sdl2vs\6_SDL2RMLApp\app\build\outputs\apk\debug\</OutDir>
-    <IntDir>$(ProjectDir)app\build\intermediate</IntDir>
+    <OutDir>$(SolutionDir)$(Configuration)</OutDir>
+    <IntDir>$(SolutionDir)$(SolutionName).dir</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">
-    <OutDir>C:\Users\Administrator\digitalknob\sdl2vs\AndroidProject1\app\build\outputs\apk\release</OutDir>
-    <IntDir>$(ProjectDir)app\build\intermediates</IntDir>
+    <OutDir>$(SolutionDir)$(Configuration)</OutDir>
+    <IntDir>$(SolutionDir)$(SolutionName).dir</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|ARM64'">
-    <OutDir>C:\Users\Administrator\digitalknob\sdl2vs\AndroidProject1\app\build\outputs\apk\release</OutDir>
-    <IntDir>$(ProjectDir)app\build\intermediates</IntDir>
+    <OutDir>$(SolutionDir)$(Configuration)</OutDir>
+    <IntDir>$(SolutionDir)$(SolutionName).dir</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|ARM64'">
-    <OutDir>C:\Users\Administrator\digitalknob\sdl2vs\AndroidProject1\app\build\outputs\apk\release</OutDir>
-    <IntDir>$(ProjectDir)app\build\intermediates</IntDir>
+    <OutDir>$(SolutionDir)$(Configuration)</OutDir>
+    <IntDir>$(SolutionDir)$(SolutionName).dir</IntDir>
   </PropertyGroup>
   <!-- <ItemGroup>
     <GradleTemplate Include="app\build.gradle.template" />
