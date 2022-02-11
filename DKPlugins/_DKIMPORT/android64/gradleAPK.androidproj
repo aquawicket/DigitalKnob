@@ -76,20 +76,20 @@
   <ImportGroup Label="ExtensionSettings" />
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">
-    <OutDir>$(SolutionDir)$(Configuration)</OutDir>
-    <IntDir>$(SolutionDir)$(SolutionName).dir</IntDir>
+    <OutDir>$(ProjectDir)$(Configuration)</OutDir>
+    <IntDir>$(ProjectDir)$(SolutionName).dir</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">
-    <OutDir>$(SolutionDir)$(Configuration)</OutDir>
-    <IntDir>$(SolutionDir)$(SolutionName).dir</IntDir>
+    <OutDir>$(ProjectDir)$(Configuration)</OutDir>
+    <IntDir>$(ProjectDir)$(SolutionName).dir</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|ARM64'">
-    <OutDir>$(SolutionDir)$(Configuration)</OutDir>
-    <IntDir>$(SolutionDir)$(SolutionName).dir</IntDir>
+    <OutDir>$(ProjectDir)$(Configuration)</OutDir>
+    <IntDir>$(ProjectDir)$(SolutionName).dir</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|ARM64'">
-    <OutDir>$(SolutionDir)$(Configuration)</OutDir>
-    <IntDir>$(SolutionDir)$(SolutionName).dir</IntDir>
+    <OutDir>$(ProjectDir)$(Configuration)</OutDir>
+    <IntDir>$(ProjectDir)$(SolutionName).dir</IntDir>
   </PropertyGroup>
   <!-- <ItemGroup>
     <GradleTemplate Include="app\build.gradle.template" />
@@ -99,7 +99,7 @@
     <GradleTemplate Include="gradle\wrapper\gradle-wrapper.properties.template" />
   </ItemGroup> -->
   <ItemGroup>
-    <ProjectReference Include="main.vcxproj" />
+    <ProjectReference Include="$(SolutionName).vcxproj" />
   </ItemGroup>
   <Import Project="$(AndroidTargetsPath)\Android.targets" />
   <ImportGroup Label="ExtensionTargets" />
