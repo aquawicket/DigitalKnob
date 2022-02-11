@@ -1,0 +1,83 @@
+# https://developer.android.com/ndk/guides/standalone_toolchain
+
+cmake_minimum_required(VERSION 3.6)
+
+project(DKSdl2)
+
+message(STATUS "CMAKE_ANDROID_ARCH_ABI = ${CMAKE_ANDROID_ARCH_ABI}")
+if(NOT CMAKE_ANDROID_ARCH_ABI)
+	message(FATAL_ERROR "ERROR: CMAKE_ANDROID_ARCH_ABI is invalid")
+endif()
+if(${CMAKE_ANDROID_ARCH_ABI} STREQUAL "armeabi-v7a")
+	set(CMAKE_CXX_STANDARD_LIBRARIES_INIT "-lm")
+	set(OS android32)
+	add_definitions(-DANDROID32)
+elseif(${CMAKE_ANDROID_ARCH_ABI} STREQUAL "arm64-v8a")
+	set(CMAKE_CXX_STANDARD_LIBRARIES_INIT "-lm")
+	set(OS android64)
+	add_definitions(-DANDROID64)
+elseif(${CMAKE_ANDROID_ARCH_ABI} STREQUAL "x86")	
+	set(OS android_x86)
+	add_definitions(-DANDROID_X86)
+elseif(${CMAKE_ANDROID_ARCH_ABI} STREQUAL "x86_64")
+	set(OS android_x86_64)
+	add_definitions(-DANDROID_X86_64)
+endif()
+
+set(DIGITALKNOB C:/Users/Administrator/digitalknob)
+set(FREETYPE ${DIGITALKNOB}/DK/3rdParty/freetype-2.5.5)
+set(ZLIB ${DIGITALKNOB}/DK/3rdParty/zlib-1.2.11)
+set(GIF ${DIGITALKNOB}/DK/3rdParty/giflib-5.1.1)
+set(PNG ${DIGITALKNOB}/DK/3rdParty/libpng-1.6.35)
+set(JPEG ${DIGITALKNOB}/DK/3rdParty/libjpeg-turbo-2.1.1)
+#set(WEBP ${DIGITALKNOB}/DK/3rdParty/libwebp-?.?.?)
+#set(TIFF ${DIGITALKNOB}/DK/3rdParty/tiff-?.?.?)
+#set(GLEW ${DIGITALKNOB}/DK/3rdParty/glew-?.?.?)
+set(SDL2 ${DIGITALKNOB}/DK/3rdParty/SDL2-main)
+set(SDL2_TTF ${DIGITALKNOB}/DK/3rdParty/SDL2_ttf-main)
+set(SDL2IMAGE ${DIGITALKNOB}/DK/3rdParty/SDL2_image-main)
+set(RMLUI ${DIGITALKNOB}/DK/3rdParty/RmlUi-master)
+
+add_definitions(-DANDROID)
+add_definitions(-DPNG_STATIC)
+include_directories(${SDL2}/include)
+include_directories(${SDL2_TTF})
+include_directories(${SDL2IMAGE})
+add_definitions(-DRMLUI_STATIC_LIB)
+add_definitions(-DCHOBO_FLAT_MAP_NO_THROW)
+add_definitions(-DRMLUI_USE_CUSTOM_RTTI)
+include_directories(${RMLUI}/Include)
+include_directories(${RMLUI}/Source)
+
+file(GLOB main_SRC
+	${CMAKE_SOURCE_DIR}/*.h
+	${CMAKE_SOURCE_DIR}/*.c
+	${CMAKE_SOURCE_DIR}/*.cpp)
+	
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-rtti -std=c++1z")
+add_library(main SHARED ${main_SRC})
+
+target_link_libraries(main -ldl)
+target_link_libraries(main -landroid)
+target_link_libraries(main -llog)
+target_link_libraries(main -lGLESv1_CM)
+target_link_libraries(main -lGLESv2)
+target_link_libraries(main -lOpenSLES)
+
+target_link_libraries(main ${ZLIB}/${OS}/Debug/libz.a)
+target_link_libraries(main ${GIF}/${OS}/Debug/libgiflib.a)
+target_link_libraries(main ${PNG}/${OS}/Debug/libpng16d.a)
+target_link_libraries(main ${JPEG}/${OS}/Debug/libturbojpeg.a)
+target_link_libraries(main ${SDL2}/${OS}/Debug/libSDL2.a)
+target_link_libraries(main ${SDL2_TTF}/${OS}/lib/Debug/SDL_ttf.a)
+target_link_libraries(main ${SDL2IMAGE}/${OS}/lib/Debug/SDL_image.a)
+target_link_libraries(main ${FREETYPE}/${OS}/Debug/libfreetype.a)
+target_link_libraries(main ${RMLUI}/${OS}/Debug/libRmlCore.a)
+target_link_libraries(main ${RMLUI}/${OS}/Debug/libRmlDebugger.a)
+
+#add_library(hidapi SHARED ${SDL2}/src/hidapi/android/hid.cpp)
+#target_link_libraries(hidapi -llog)
+#target_link_libraries(main hidapi)
+
+include_external_msproject(gradleAPK gradleAPK.androidproj TYPE 39E2626F-3545-4960-A6E8-258AD8476CE5)
+set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT gradleAPK)
