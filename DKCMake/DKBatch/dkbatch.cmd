@@ -4,69 +4,69 @@
 
 @echo off
 
-:::::::::::::::::::::::::::::::::::::::::::::
-::set "return=call return %~n1 %~n1 & set %~n1"
-:::::::::::::::::::::::::::::::::::::::::::::
-
-::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+::: %DKBATCH_PATH% :::::::::::::::::::::::::::::::::::::
 if not defined DKBATCH_PATH ( set "DKBATCH_PATH=%~dp0" )
-::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
-::::::::::::::::::::::::::::::::::::::::::
+::: settinge() :::::::::::::::::::::::::::::::::::::::::
 if not defined DKSETTNGS ( call %DKBATCH_PATH%settings )
-::::::::::::::::::::::::::::::::::::::::::
 
-:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+::: %ALL_BUT_FIRST$ ::::::::::::::::::::::::::::::::::::::::::::::
 for /f "tokens=1,* delims= " %%a in ("%*") do set ALL_BUT_FIRST=%%b
-set "DKIN=if %DEBUG%==1 echo. & echo [94m--^> %~n1^([0m[35m%ALL_BUT_FIRST%[0m[94m^)[0m"
-:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
-::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-::TODO - try and get the return values printed in the echo below
+::: %DKIN% :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+set "DKIN=if %DEBUG%==1 echo. & echo [94m--^> %~n1^([0m[35m%ALL_BUT_FIRST%[0m[94m^)[0m"
+
+::: %DKEND% ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 set "DOEND=endlocal & if %DEBUG%==1 echo [94m^<-- %~n1^(^)[0m "
 if "%~2"=="DKEND" %DOEND%:[35m!%1![0m & echo. & goto :EOF
 set "DKEND=call %0 %%0 DKEND & call return %%0 %%0"
-:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
-:::::::::::::::::::::::::::
-if %NO_RELATIVE_PATHS%==1 goto :NO_RELATIVE_PATHS
-goto :end_NO_RELATIVE_PATHS
-:NO_RELATIVE_PATHS
+::: NO_RELATIVE_PATHS() :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+if %NO_RELATIVE_PATHS%==0 goto :end
 cd "%DKBATCH_PATH%CATCH"
 set cnt=0
 for %%A in (*) do set /a cnt+=1
 if "%cnt%" gtr "1" (
 	call "%DKBATCH_PATH%SystemFunctions\DKERROR" "ERROR" "%~1" "Extra files found in the CATCH folder Something is using relative paths"
 )
-:end_NO_RELATIVE_PATHS
-:::::::::::::::::::::::::::
+:end
 
-::prepareLineNumbers
+::: prepareLineNumbers() ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 >nul 2>nul (
 	call %DKBATCH_PATH%3rdParty\jrepl "(\x25#=\x25)\d*(\x25=#\x25)" "$1+ln+$2" /j /f "%~f1" /o "%~f1.new"
 	fc /b "%~f1" "%~f1.new" && del "%~f1.new" || move /y "%~f1.new" "%~f1"
 )
-	
-:::::::::::::::::::::::::::
+
+:::: DKLOADED() ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 if defined DKLOADED (
-	::set "PARENT=%PREV%" set "PREV=%~n1"
 	%DKIN%
 	if %DEBUG_dkbatch.cmd%==1 echo. & echo [94m--^> %~n0^(%*^)[0m
-
-	TITLE %1
+	::TITLE %~n0^(%*^)
 	goto :dkbatch_end
 )
-::::::::::::::::::::::::::
+
+
+
+
 
 ::#########################################################################
 ::     DKBATCH first run entry point (NOT LOADED YET)
 ::#########################################################################
-set "TRY_FATAL=DKERROR ERROR %1 "
-set "IF_ERROR=call DKERROR IF_ERROR %1 "
-set "ERROR=call DKERROR ERROR %1 "
-set "IF_FATAL=call DKERROR IF_FATAL %1 "
-set "FATAL=DKERROR ERROR %1 "
 
+::: %TRY_FATAL% :::::::::::::::::::
+set "TRY_FATAL=DKERROR ERROR %1 "
+
+::: %IF_ERROR% :::::::::::::::::::::::::
+set "IF_ERROR=call DKERROR IF_ERROR %1 "
+
+::: %ERROR% ::::::::::::::::::::::
+set "ERROR=call DKERROR ERROR %1 "
+
+::: %IF_FATAL% :::::::::::::::::::::::::
+set "IF_FATAL=call DKERROR IF_FATAL %1 "
+
+::: %FATAL% :::::::::::::::::
+set "FATAL=DKERROR ERROR %1 "
 
 ::set "REQUIRED_1=if [%%1]==[] echo [91m	%~n0(%*): argument 1 is invalid [0m & goto :EOF"
 ::set "REQUIRED_2=if [%%2]==[] echo [91m	%~n0(%*): argument 2 is invalid [0m & goto :EOF"
@@ -74,7 +74,9 @@ set "FATAL=DKERROR ERROR %1 "
 
 set caller=%0
 if not "%1"=="" set "caller=%1"
-if not defined in_subprocess (cmd /k set in_subprocess=y ^& %caller% %*) & exit )
+::if "%1"=="" ( set "caller=%0" ) else ( set "caller=%1" )
+if not defined in_subprocess (cmd /k set in_subprocess=y ^& %caller% %ALL_BUT_FIRST%) & exit )
+::if not defined in_subprocess (cmd /k set in_subprocess=y ^& %caller% %*) & exit )
 
 ::#########################################################################
 ::     DKBATCH first subprocess creation entry point (NO SUBPROCESS YET)
@@ -84,25 +86,16 @@ if not defined in_subprocess (cmd /k set in_subprocess=y ^& %caller% %*) & exit 
 %DKIN%
 if %DEBUG_dkbatch.cmd%==1 echo. & echo [94m--^> %~n0^(%*^)[0m
 
-::if %DEBUG%==1 ( 
-::	echo *****************************
-::	echo ********** dkbatch **********
-::	echo *****************************
-::	echo *** DEBUG MODE ON *** 
-::	echo:
-::)
-
 :: import %DKBATCH% command to global environment variables
 if "%DKBATCH%"=="" setx DKBATCH "@echo off & call %0 %%0 & @setlocal enableextensions enabledelayedexpansion"
-::if "%DKBATCH%"=="" setx DKBATCH "@echo off & call %0 %%0"
 
 :: Add dkbatch subfolders to the user PATH environment variable
-::::::::::::::::::::::::::::::::::::::::::::::::
+::: AddDKPaths() ::::::::::::::::::::::::::::::::::::::::::::::::::
 setlocal enabledelayedexpansion
 set "folders=%DKBATCH_PATH%"
 for /d %%D in (%DKBATCH_PATH%*) do ( set "folders=!folders!;%%D" ) 
 endlocal & set "PATH=%PATH%;%folders%"
-:::::::::::::::::::::::::::::::::::::::::::::::
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 
 
