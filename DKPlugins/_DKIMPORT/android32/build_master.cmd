@@ -27,6 +27,7 @@ echo 1. Set and map all variables and environment variables
 :: Build architecture and type
 set "BUILD_TYPE=Debug"
 set "ABI=armeabi-v7a"
+::set "ABI=arm64-v8a"
 
 :: App package name and lable
 set "TYPE=com"
@@ -58,7 +59,8 @@ echo 2. Install 3rd party tools
 if not exist %ANDROID_HOME% ( %ERROR% "Environment Variable ANDROID_HOME does not exist" )
 
 :: JDK
-if %GRADLE% NEQ 1 ( set "JAVA_HOME=C:/Users/%USERNAME%/digitalknob/DK/3rdParty/openjdk-1.8.0_41"
+if %GRADLE% EQU 0 ( 
+	set "JAVA_HOME=C:/Users/%USERNAME%/digitalknob/DK/3rdParty/openjdk-1.8.0_41"
 ) else (
 	set "JAVA_HOME=C:/Users/%USERNAME%/digitalknob/DK/3rdParty/openjdk-11"
 )
