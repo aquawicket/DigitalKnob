@@ -10,5 +10,6 @@ call TestReturn3 %var%
 echo TestReturn3 gave me back %TestReturn3%.
 echo I'm gonna subtract 10 and pass it down to TestReturn.
 
-set /A %0=%TestReturn3%-10
-%DKEND%
+set /A %0=%TestReturn3%-10  
+  
+%DKEND% 

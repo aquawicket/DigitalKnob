@@ -31,6 +31,9 @@ if "%cnt%" gtr "1" (
 )
 :end
 
+::: add %DKEND% to the end of the file if needed :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+>nul findstr /i /c:"%%DKEND%%" "%~dpn1.cmd" || ( echo.>>"%~dpn1.cmd" & echo.>>"%~dpn1.cmd" &echo %%DKEND%%>>"%~dpn1.cmd" )
+
 ::: prepareLineNumbers() ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 >nul 2>nul (
 	call %DKBATCH_PATH%3rdParty\jrepl "(\x25#=\x25)\d*(\x25=#\x25)" "$1+ln+$2" /j /f "%~f1" /o "%~f1.new"
