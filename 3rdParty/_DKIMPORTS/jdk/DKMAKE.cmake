@@ -1,4 +1,3 @@
-return
 # https://docs.microsoft.com/en-us/java/openjdk/download
 # https://jdk.java.net/archive/
 #
