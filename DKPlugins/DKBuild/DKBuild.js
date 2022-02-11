@@ -559,9 +559,12 @@ function DKBuild_DoResults(){
 		else if(CPP_DK_GetOS() === "Linux" || CPP_DK_GetOS() === "Mac")
 			let rtvalue = CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DIGITALKNOB+"DK/DKCMake")
 		if(TYPE === "Debug" || TYPE === "ALL")
-			CPP_DK_Execute(MSBUILD+" "+app_path+OS+"/"+APP+".sln /p:Configuration=Debug")
+			CPP_DK_Execute(MSBUILD+" "+app_path+OS+"/"+APP+".sln /t:"+APP+" /p:Configuration=Debug")
 		if(TYPE === "Release" || TYPE === "ALL")
-			CPP_DK_Execute(MSBUILD+" "+app_path+OS+"/"+APP+".sln /p:Configuration=Release")
+			CPP_DK_Execute(MSBUILD+" "+app_path+OS+"/"+APP+".sln /t:"+APP+" /p:Configuration=Release")
+		
+		CPP_DK_Execute(app_path+OS+"/gradlew --project-dir "+app_path+OS+" --info clean build") 
+		
 		/*
 		if(TYPE === "Debug" || TYPE === "ALL"){
 			CPP_DKFile_MkDir(app_path+"android32/Debug")
@@ -590,9 +593,11 @@ function DKBuild_DoResults(){
 		else if(CPP_DK_GetOS() === "Linux" || CPP_DK_GetOS() === "Mac")
 			rtvalue = CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DIGITALKNOB+"DK/DKCMake")
 		if(TYPE === "Debug" || TYPE === "ALL")
-			CPP_DK_Execute(MSBUILD+" "+app_path+OS+"/"+APP+".sln /p:Configuration=Debug")
+			CPP_DK_Execute(MSBUILD+" "+app_path+OS+"/"+APP+".sln /t:"+APP+" /p:Configuration=Debug")
 		if(TYPE === "Release" || TYPE === "ALL")
-			CPP_DK_Execute(MSBUILD+" "+app_path+OS+"/"+APP+".sln /p:Configuration=Release")
+			CPP_DK_Execute(MSBUILD+" "+app_path+OS+"/"+APP+".sln /t:"+APP+" /p:Configuration=Release")
+		
+		CPP_DK_Execute(app_path+OS+"/gradlew --project-dir "+app_path+OS+" --info clean build") 
 		/*
 		if(TYPE === "Debug" || TYPE === "ALL"){
 			CPP_DKFile_MkDir(app_path+"android64/Debug")
