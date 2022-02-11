@@ -7,11 +7,11 @@
 		<AndroidAPIFriendlyName_android-26>Oreo 8.0.0</AndroidAPIFriendlyName_android-26>
 		<AndroidAPILevel>android-26</AndroidAPILevel>
 		<AndroidSDKAPILevelRoot>C:\Users\Administrator\digitalknob\DK\3rdParty\android-sdk\Platforms\android-26\</AndroidSDKAPILevelRoot>
-		<ClangTarget>aarch64-none-linux-android26</ClangTarget>
+		<ClangTarget>aarch64-none-linux-androideabi26</ClangTarget>
 		<TargetOsAndVersion>android-26</TargetOsAndVersion>
 		<TargetPlatformDisplayName>Android 26.0</TargetPlatformDisplayName>
 		<TargetPlatformMoniker>Android,Version=26.0</TargetPlatformMoniker>
-		<TargetPlatformVersion>26.0</TargetPlatformVersion>
+		<TargetPlatformVersion>20.0</TargetPlatformVersion>
 		<PreprocessorDefinitions>__ANDROID_API__=26;NDEBUG;</PreprocessorDefinitions>
 	</PropertyGroup>
 </Project>
