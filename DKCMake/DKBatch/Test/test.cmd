@@ -116,22 +116,22 @@ if not defined TEST_DKERRORS goto :end
 	echo ##      TESTING Errors        ##
 	echo ################################
 	set ERRORLEVEL=0
-	%IF_ERROR% "IF_ERROR: This throws an error if ERRLVL in not 0, and continues"
+	%IF_ERROR% "IF_ERROR: This throws an error if ERRLVL is not 0, and continues"
 	echo:
 	
 	set ERRORLEVEL=1
-	%IF_ERROR% "IF_ERROR: This throws an error if ERRLVL in not 0, and continues"
+	%IF_ERROR% "IF_ERROR: This throws an error if ERRLVL is not 0, and continues"
 	echo: 
 
 	%ERROR% "ERROR: This throws an error, and continues"
 	echo:
 
 	set ERRORLEVEL=0
-	%IF_FATAL% "IF_FATAL: This thows an error if ERRLVL in not 0, and exits the program"
+	%IF_FATAL% "IF_FATAL: This thows an error if ERRLVL is not 0, and exits the program"
 	echo:
 	
 	set ERRORLEVEL=1
-	%IF_FATAL% "IF_FATAL: This thows an error if ERRLVL in not 0, and exits the program"
+	%IF_FATAL% "IF_FATAL: This thows an error if ERRLVL is not 0, and exits the program"
 	echo:
 
 	%FATAL% "FATAL: This throws an error, and exits the program"
