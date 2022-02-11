@@ -947,10 +947,12 @@ if(ANDROID)
 	if(ANDROID_32)
 		DKCOPY(${DKPLUGINS}/_DKIMPORT/android32/Android.h ${DKPROJECT}/Android.h FALSE)
 		DKCOPY(${DKPLUGINS}/_DKIMPORT/android32/Directory.Build.targets ${DKPROJECT}/android32/Directory.Build.targets FALSE)
+		DKCOPY(${DKPLUGINS}/_DKIMPORT/android32/gradleAPK.androidproj ${DKPROJECT}/android32/gradleAPK.androidproj FALSE)
 	endif()
 	if(ANDROID_64)
 		DKCOPY(${DKPLUGINS}/_DKIMPORT/android64/Android.h ${DKPROJECT}/Android.h FALSE)
 		DKCOPY(${DKPLUGINS}/_DKIMPORT/android64/Directory.Build.targets ${DKPROJECT}/android64/Directory.Build.targets FALSE)
+		DKCOPY(${DKPLUGINS}/_DKIMPORT/android64/gradleAPK.androidproj  ${DKPROJECT}/android64/gradleAPK.androidproj  FALSE)
 	endif()
 	set(CMAKE_ANDROID_GUI 1)
 	add_library(${APP_NAME} SHARED ${App_SRC})
@@ -965,7 +967,9 @@ if(ANDROID)
 	######################### Link Libraries ###########################
 	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${LIBS})
 	target_include_directories(${APP_NAME} PUBLIC ${SDL2}/include)
-	#include_external_msproject(DKGradle ${DKPROJECT}/${OS}/DKGradle.androidproj)	
+	
+	include_external_msproject(gradleAPK gradleAPK.androidproj TYPE 39E2626F-3545-4960-A6E8-258AD8476CE5)
+	set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT gradleAPK)
 		
 	####################### Do Post Build Stuff #######################
 endif()
