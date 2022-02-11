@@ -145,8 +145,8 @@ if %compiler% NEQ CMAKE goto :end
 echo Compiling with CMAKE
 
 ::Prep Visual Studio Project
-call CopyPath %APP_PATH%/visualStudio/%ABI%/Directory.Build.targets %CMAKE_BINARY_DIR%/Directory.Build.targets
-call CopyPath %APP_PATH%/visualStudio/%ABI%/gradleAPK.androidproj %CMAKE_BINARY_DIR%/gradleAPK.androidproj
+::call CopyPath %APP_PATH%/visualStudio/%ABI%/Directory.Build.targets %CMAKE_BINARY_DIR%/Directory.Build.targets
+::call CopyPath %APP_PATH%/visualStudio/%ABI%/gradleAPK.androidproj %CMAKE_BINARY_DIR%/gradleAPK.androidproj
 
 ::Generate CMake project files
 "%CMAKE%" -G "Visual Studio 17 2022" -A %CMAKE_GENERATOR_ARCH% -DANDROID_ABI=%ABI% -DANDROID_PLATFORM=%ANDROID_API% -DANDROID_NDK=%NDK_ROOT% -DCMAKE_TOOLCHAIN_FILE=%NDK_ROOT%/build/cmake/android.toolchain.cmake -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static %CMAKE_SOURCE_DIR% -B%CMAKE_BINARY_DIR%
