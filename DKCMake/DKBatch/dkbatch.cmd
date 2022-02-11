@@ -32,8 +32,11 @@ if "%cnt%" gtr "1" (
 :end
 
 ::: add %DKEND% to the end of the file if needed :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
->nul findstr /i /c:"%%DKEND%%" "%~dpn1.cmd" || ( echo.>>"%~dpn1.cmd" & echo.>>"%~dpn1.cmd" &echo %%DKEND%%>>"%~dpn1.cmd" )
-
+if not exist "%~1" ( echo [91m cannot find "%~1" [0m & goto :end )
+::echo [91m Testins for DKEND in "%~1" [0m
+>nul findstr /i /c:"%%DKEND%%" "%~1" || ( echo.>>"%~1" & echo.>>"%~1" &echo %%DKEND%%>>"%~1" )
+:end
+	
 ::: prepareLineNumbers() ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 >nul 2>nul (
 	call %DKBATCH_PATH%3rdParty\jrepl "(\x25#=\x25)\d*(\x25=#\x25)" "$1+ln+$2" /j /f "%~f1" /o "%~f1.new"
@@ -90,7 +93,8 @@ if not defined in_subprocess (cmd /k set in_subprocess=y ^& %caller% %ALL_BUT_FI
 if %DEBUG_dkbatch.cmd%==1 echo. & echo [94m--^> %~n0^(%*^)[0m
 
 :: import %DKBATCH% command to global environment variables
-if "%DKBATCH%"=="" setx DKBATCH "@echo off & call %0 %%0 & @setlocal enableextensions enabledelayedexpansion"
+if "%DKBATCH%"=="" setx DKBATCH "@echo off & call %0 %%0 %%* & @setlocal enableextensions enabledelayedexpansion"
+
 
 :: Add dkbatch subfolders to the user PATH environment variable
 ::: AddDKPaths() ::::::::::::::::::::::::::::::::::::::::::::::::::

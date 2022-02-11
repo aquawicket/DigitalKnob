@@ -13,8 +13,8 @@ set TEST_DKCOLOR=1
 set TEST_DKSLEEP=1
 
 
-::::::::::::::::::::::::::::
-if defined TEST_DKVARIABLES (
+::::::::::::::::::::::::::::::::::::::::::
+if not defined TEST_DKVARIABLES goto :end
 	echo #################################
 	echo ##      TESTING Variables      ##
 	echo #################################
@@ -25,103 +25,93 @@ if defined TEST_DKVARIABLES (
 	set "Test_variableA=!Test_variableA! added some data to the end"
 	echo Test_variableA: !Test_variableA!
 	echo:
-)
-:::::::::::::::::::::::::::
+:end
 
 
-
-::::::::::::::::::::::::::::
-if defined TEST_DKNESTING (
+::::::::::::::::::::::::::::::::::::::::::
+if not defined TEST_DKNESTING goto :end
 	echo #################################
 	echo ##      TESTING Nesting        ##
 	echo #################################
 	call NestedNodes1
 	echo:
-)
-:::::::::::::::::::::::::::
+:end
 
 
-:::::::::::::::::::::::::
-if defined TEST_DKPRINT (
+::::::::::::::::::::::::::::::::::::::::::
+if not defined TEST_DKPRINT goto :end
 	echo #################################
 	echo ##      TESTING dkprint        ##
 	echo #################################
 	call dkprint this is a test of dkprint
 	echo:
-)
-:::::::::::::::::::::::::
+:end
 
 
-::::::::::::::::::::::::::::
-if defined TEST_DKTEMPLATE (
+:::::::::::::::::::::::::::::::::::::::::::
+if not defined TEST_DKTEMPLATE goto :end
 	echo ##################################
 	echo ##      TESTING TEMPLATE        ##
 	echo ##################################
 	call TEMPLATE 369 string result1 result2
 	echo TemplateFunc returned: !result1! !result2!
 	echo:
-)
-:::::::::::::::::::::::::::
+:end
 
 
-::::::::::::::::::::::::::::
-if defined TEST_DKSENDDATA (
+:::::::::::::::::::::::::::::::::::::::::::
+if not defined TEST_DKSENDDATA goto :end
 	echo ##################################
 	echo ##      TESTING SendData        ##
 	echo ##################################
 	call SendData apple
 	echo:
-)
-:::::::::::::::::::::::::::
+:end
 
 
-::::::::::::::::::::::::::::
-if defined TEST_DKGETDATA (
+::::::::::::::::::::::::::::::::::::::::::
+if not defined TEST_DKGETDATA goto :end
 	echo #################################
 	echo ##      TESTING GetData        ##
 	echo #################################
 	call GetData result 
 	echo GetData returned: !result!
 	echo:
-)
-:::::::::::::::::::::::::::
+:end
 
 
-::::::::::::::::::::::::::::::::::
-if defined TEST_DKSENDANDGETDATA (
+:::::::::::::::::::::::::::::::::::::::::::::::
+if not defined TEST_DKSENDANDGETDATA goto :end
 	echo ######################################
 	echo ##      TESTING SendAndGetData      ##
 	echo ######################################
 	call SendAndGetData orange result
 	echo SendAndGetData returned: !result!
 	echo:
-)
-::::::::::::::::::::::::::::::::::
+:end
 
 
-:::::::::::::::::::::::::
-if defined TEST_DKCOLOR (
+:::::::::::::::::::::::::::::::::::::::
+if not defined TEST_DKCOLOR goto :end
 	echo ##############################
 	echo ##      TESTING Color       ##
 	echo ##############################
-	call Color :ShowColors
+	call Color
 	echo:
-)
-::::::::::::::::::::::::
-echo line %#=%111%=#%
-:::::::::::::::::::::::::
-if defined TEST_DKSLEEP (
+:end
+
+:::::::::::::::::::::::::::::::::::::::
+if not defined TEST_DKSLEEP goto :end
 	echo ##############################
 	echo ##      TESTING Sleep       ##
 	echo ##############################
 	call Sleep 2
 	echo:
-)
-::::::::::::::::::::::::
+:end
 
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-if defined TEST_DKERRORS (
+if not defined TEST_DKERRORS goto :end
 	echo ################################
 	echo ##      TESTING Errors        ##
 	echo ################################
@@ -146,23 +136,8 @@ if defined TEST_DKERRORS (
 
 	!FATAL! "FATAL: This throws an error, and exits the program"
 	echo:
-)
-::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-
-
 :end
+
+
+
 %DKEND%
-
-
-
-
-
-
-
-
-
-
-
-
-
-
