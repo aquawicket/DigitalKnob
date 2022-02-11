@@ -33,21 +33,29 @@
     <ConfigurationType>Application</ConfigurationType>
     <AndroidAPILevel>android-26</AndroidAPILevel>
     <TargetName>$(RootNamespace)-debug</TargetName>
+	<PackagePath>$(ProjectDir)app\build\outputs\apk\debug\$(RootNamespace)-debug.apk</PackagePath>
+    <DebuggerFlavor>AndroidDebugger</DebuggerFlavor>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <AndroidAPILevel>android-26</AndroidAPILevel>
     <TargetName>$(RootNamespace)-release-unsigned</TargetName>
+	<PackagePath>$(ProjectDir)app\build\outputs\apk\release\$(RootNamespace)-release-unsigned.apk</PackagePath>
+    <DebuggerFlavor>AndroidDebugger</DebuggerFlavor>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|ARM'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <AndroidAPILevel>android-26</AndroidAPILevel>
     <TargetName>$(RootNamespace)-release-unsigned</TargetName>
+	<PackagePath>$(ProjectDir)app\build\outputs\apk\release\$(RootNamespace)-release-unsigned.apk</PackagePath>
+    <DebuggerFlavor>AndroidDebugger</DebuggerFlavor>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|ARM'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <AndroidAPILevel>android-26</AndroidAPILevel>
     <TargetName>$(RootNamespace)-release-unsigned</TargetName>
+	<PackagePath>$(ProjectDir)app\build\outputs\apk\release\$(RootNamespace)-release-unsigned.apk</PackagePath>
+    <DebuggerFlavor>AndroidDebugger</DebuggerFlavor>
   </PropertyGroup>
   <Import Project="$(AndroidTargetsPath)\Android.props" />
   <ItemDefinitionGroup>
