@@ -25,14 +25,14 @@ if not "%ERRORLEVEL%"=="0" (
 	echo.
 	echo [91m IF_ERROR: %ERRORLEVEL% - %3 [0m
 	echo [91m  File: %~f2: !line! [0m
-	set /A n = 1
-	set /A min = !line!-6
-	set /A max = !line!+6
+	set /A n=1
+	set /A min=!line!-6
+	set /A max=!line!+6
 	for /f "delims=" %%a in ('findstr /n "^" "%~f2"') do (
-		if !n! lss !max! (
-			if !n! gtr !min! (
-				set "string=%%a"
-				if !n! equ !line! (
+		if !n! LSS !max! (
+			if !n! GTR !min! (
+				set string=%%a
+				if !n! EQU !line! (
 					echo [30;41m^>	!n!:	!string:~2,-1%![0m
 				) else (
 					echo		!n!:	!string:~2,-1%!
@@ -46,7 +46,7 @@ if not "%ERRORLEVEL%"=="0" (
 	pause
 	exit /b %ERRORLEVEL%
 )
-goto :EOF
+goto :eof
 
 :IF_FATAL
 if not "%ERRORLEVEL%"=="0" (
@@ -77,7 +77,7 @@ if not "%ERRORLEVEL%"=="0" (
 	pause >nul
 	exit %ERRORLEVEL%
 )
-goto :EOF
+goto :eof
 
 :ERROR
 for /f "delims=:" %%a in ('findstr /n /c:"%~3" "%~f2"') do set "line=%%a"

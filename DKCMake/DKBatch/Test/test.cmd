@@ -20,10 +20,10 @@ if not defined TEST_DKVARIABLES goto :end
 	echo #################################
 	echo creating Test_variableA
 	set Test_variableA=Some string data
-	echo Test_variableA: !Test_variableA!
+	echo Test_variableA: %Test_variableA%
 	echo appending Test_variableA
-	set "Test_variableA=!Test_variableA! added some data to the end"
-	echo Test_variableA: !Test_variableA!
+	set Test_variableA=%Test_variableA% added some data to the end
+	echo Test_variableA: %Test_variableA%
 	echo:
 :end
 
@@ -54,7 +54,7 @@ if not defined TEST_DKTEMPLATE goto :end
 	echo ##      TESTING TEMPLATE        ##
 	echo ##################################
 	call TEMPLATE 369 string result1 result2
-	echo TemplateFunc returned: !result1! !result2!
+	echo TemplateFunc returned: %result1% %result2%
 	echo:
 :end
 
@@ -75,7 +75,7 @@ if not defined TEST_DKGETDATA goto :end
 	echo ##      TESTING GetData        ##
 	echo #################################
 	call GetData result 
-	echo GetData returned: !result!
+	echo GetData returned: %result%
 	echo:
 :end
 
@@ -86,7 +86,7 @@ if not defined TEST_DKSENDANDGETDATA goto :end
 	echo ##      TESTING SendAndGetData      ##
 	echo ######################################
 	call SendAndGetData orange result
-	echo SendAndGetData returned: !result!
+	echo SendAndGetData returned: %result%
 	echo:
 :end
 
@@ -115,26 +115,26 @@ if not defined TEST_DKERRORS goto :end
 	echo ################################
 	echo ##      TESTING Errors        ##
 	echo ################################
-	set "ERRORLEVEL=0"
-	!IF_ERROR! "IF_ERROR: This throws an error if ERRLVL in not 0, and continues"
+	set ERRORLEVEL=0
+	%IF_ERROR% "IF_ERROR: This throws an error if ERRLVL in not 0, and continues"
 	echo:
 	
-	set "ERRORLEVEL=1"
-	!IF_ERROR! "IF_ERROR: This throws an error if ERRLVL in not 0, and continues"
+	set ERRORLEVEL=1
+	%IF_ERROR% "IF_ERROR: This throws an error if ERRLVL in not 0, and continues"
 	echo: 
 
-	!ERROR! "ERROR: This throws an error, and continues"
+	%ERROR% "ERROR: This throws an error, and continues"
 	echo:
 
-	set "ERRORLEVEL=0"
-	!IF_FATAL! "IF_FATAL: This thows an error if ERRLVL in not 0, and exits the program"
+	set ERRORLEVEL=0
+	%IF_FATAL% "IF_FATAL: This thows an error if ERRLVL in not 0, and exits the program"
 	echo:
 	
-	set "ERRORLEVEL=1"
-	!IF_FATAL! "IF_FATAL: This thows an error if ERRLVL in not 0, and exits the program"
+	set ERRORLEVEL=1
+	%IF_FATAL% "IF_FATAL: This thows an error if ERRLVL in not 0, and exits the program"
 	echo:
 
-	!FATAL! "FATAL: This throws an error, and exits the program"
+	%FATAL% "FATAL: This throws an error, and exits the program"
 	echo:
 :end
 
