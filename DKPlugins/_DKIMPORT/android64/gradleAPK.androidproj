@@ -71,6 +71,11 @@
       <ApkFileName Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">$(RootNamespace)-release-unsigned.apk</ApkFileName>
       <ApkFileName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|ARM64'">$(RootNamespace)-release-unsigned.apk</ApkFileName>
       <ApkFileName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|ARM64'">$(RootNamespace)-release-unsigned.apk</ApkFileName>
+      <ToolName>gradlew.bat</ToolName>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|ARM64'">
+      </AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">
+      </AdditionalOptions>
     </GradlePackage>
   </ItemDefinitionGroup>
   <ImportGroup Label="ExtensionSettings" />

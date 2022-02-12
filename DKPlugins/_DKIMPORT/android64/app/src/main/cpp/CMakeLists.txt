@@ -2,21 +2,16 @@
 
 cmake_minimum_required(VERSION 3.6)
 
-project(DKSdl2)
-
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY_DEBUG "${CMAKE_BINARY_DIR}/app/src/main/jniLibs/armeabi-v7a")
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY_RELEASE "${CMAKE_BINARY_DIR}/app/src/main/jniLibs/armeabi-v7a")
+project(SDLRendRml)
 
 message(STATUS "CMAKE_ANDROID_ARCH_ABI = ${CMAKE_ANDROID_ARCH_ABI}")
 if(NOT CMAKE_ANDROID_ARCH_ABI)
 	message(FATAL_ERROR "ERROR: CMAKE_ANDROID_ARCH_ABI is invalid")
 endif()
 if(${CMAKE_ANDROID_ARCH_ABI} STREQUAL "armeabi-v7a")
-	set(CMAKE_CXX_STANDARD_LIBRARIES_INIT "-lm")
 	set(OS android32)
 	add_definitions(-DANDROID32)
 elseif(${CMAKE_ANDROID_ARCH_ABI} STREQUAL "arm64-v8a")
-	set(CMAKE_CXX_STANDARD_LIBRARIES_INIT "-lm")
 	set(OS android64)
 	add_definitions(-DANDROID64)
 elseif(${CMAKE_ANDROID_ARCH_ABI} STREQUAL "x86")	
@@ -26,6 +21,10 @@ elseif(${CMAKE_ANDROID_ARCH_ABI} STREQUAL "x86_64")
 	set(OS android_x86_64)
 	add_definitions(-DANDROID_X86_64)
 endif()
+
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY_DEBUG "${CMAKE_BINARY_DIR}/app/src/main/jniLibs/${CMAKE_ANDROID_ARCH_ABI}")
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY_RELEASE "${CMAKE_BINARY_DIR}/app/src/main/jniLibs/${CMAKE_ANDROID_ARCH_ABI}")
+
 
 set(DIGITALKNOB C:/Users/Administrator/digitalknob)
 set(FREETYPE ${DIGITALKNOB}/DK/3rdParty/freetype-2.5.5)
@@ -60,8 +59,9 @@ file(GLOB main_SRC
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-rtti -std=c++1z")
 add_library(main SHARED ${main_SRC})
 
-target_link_libraries(main -ldl)
-target_link_libraries(main -landroid)
+#target_link_libraries(main -lm)
+#target_link_libraries(main -ldl)
+#target_link_libraries(main -landroid)
 target_link_libraries(main -llog)
 target_link_libraries(main -lGLESv1_CM)
 target_link_libraries(main -lGLESv2)
@@ -81,7 +81,6 @@ target_link_libraries(main ${RMLUI}/${OS}/Debug/libRmlDebugger.a)
 #add_library(hidapi SHARED ${SDL2}/src/hidapi/android/hid.cpp)
 #target_link_libraries(hidapi -llog)
 #target_link_libraries(main hidapi)
-
 
 include_external_msproject(gradleAPK gradleAPK.androidproj TYPE 39E2626F-3545-4960-A6E8-258AD8476CE5)
 set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT gradleAPK)
