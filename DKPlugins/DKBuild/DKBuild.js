@@ -552,7 +552,7 @@ function DKBuild_DoResults(){
 		CPP_DKFile_MkDir(app_path+"android32")
 		CPP_DKFile_ChDir(app_path+"android32")
 		if(CPP_DK_GetOS() === "Windows"){
-			const cmake_command = CMAKE+" -G \""+VS_GENERATOR+"\" -A ARM -DANDROID_ABI=armeabi-v7a -DANDROID_PLATFORM=26 -DANDROIDNDK="+ANDROIDNDK+" -DCMAKE_TOOLCHAIN_FILE="+ANDROIDNDK+"/build/cmake/android.toolchain.cmake -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static "+cmake_string+DIGITALKNOB+"DK/DKCMake"
+			const cmake_command = CMAKE+" -G \""+VS_GENERATOR+"\" -A ARM -DANDROID_ABI=armeabi-v7a -DANDROID_PLATFORM=26 -DANDROIDNDK="+ANDROIDNDK+" -DCMAKE_TOOLCHAIN_FILE="+ANDROIDNDK+"/build/cmake/android.toolchain.cmake -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS=-std=c++1z "+cmake_string+DIGITALKNOB+"DK/DKCMake"
 			
 			//const cmake_command = CMAKE+" -G \""+VS_GENERATOR+"\" -A ARM -DANDROID_ABI=%ABI% -DANDROID_PLATFORM=%ANDROID_API% -DANDROID_NDK=%NDK_ROOT% -DCMAKE_TOOLCHAIN_FILE=%NDK_ROOT%/build/cmake/android.toolchain.cmake -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static %CMAKE_SOURCE_DIR% -B%CMAKE_BINARY_DIR%
 			
@@ -568,13 +568,10 @@ function DKBuild_DoResults(){
 			CPP_DK_Execute(MSBUILD+" "+app_path+OS+"/"+APP+".sln /t:main /p:Configuration=Release")
 		}
 		
-		CPP_DK_Execute("EndProcess.cmd adb.exe")
-		CPP_DK_Execute("EndProcess.cmd java.exe")
-		
+		//CPP_DK_Execute("EndProcess.cmd adb.exe")
+		//CPP_DK_Execute("EndProcess.cmd java.exe")
 		CPP_DK_Execute(app_path+OS+"/gradlew --project-dir "+app_path+OS+" --info clean build")
-		
-		CPP_DK_Execute("EndProcess.cmd adb.exe")
-		CPP_DK_Execute("EndProcess.cmd java.exe")
+
 		
 		/*
 		if(TYPE === "Debug" || TYPE === "ALL"){
@@ -597,7 +594,7 @@ function DKBuild_DoResults(){
 		CPP_DKFile_MkDir(app_path+"android64")
 		CPP_DKFile_ChDir(app_path+"android64")
 		if(CPP_DK_GetOS() === "Windows"){
-			const cmake_command = CMAKE+" -G \""+VS_GENERATOR+"\" -A ARM64 -DCMAKE_TOOLCHAIN_FILE="+ANDROIDNDK+"/build/cmake/android.toolchain.cmake -DANDROIDNDK="+ANDROIDNDK+" -DANDROID_ABI=arm64-v8a -DANDROID_PLATFORM=26 -DCMAKE_CXX_FLAGS=-std=c++1z "+cmake_string+DIGITALKNOB+"DK/DKCMake"
+			const cmake_command = CMAKE+" -G \""+VS_GENERATOR+"\" -A ARM64 -DANDROID_ABI=arm64-v8a -DANDROID_PLATFORM=26 -DANDROIDNDK="+ANDROIDNDK+" -DCMAKE_TOOLCHAIN_FILE="+ANDROIDNDK+"/build/cmake/android.toolchain.cmake -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS=-std=c++1z "+cmake_string+DIGITALKNOB+"DK/DKCMake"
 			console.log(cmake_command)
 			let rtvalue = CPP_DK_Execute(cmake_command)
 		}
@@ -605,16 +602,13 @@ function DKBuild_DoResults(){
 			rtvalue = CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DIGITALKNOB+"DK/DKCMake")
 		if(TYPE === "Debug" || TYPE === "ALL")
 			CPP_DK_Execute(MSBUILD+" "+app_path+OS+"/"+APP+".sln /t:main /p:Configuration=Debug")
-		if(TYPE === "Release" || TYPE === "ALL")
+		else if(TYPE === "Release" || TYPE === "ALL")
 			CPP_DK_Execute(MSBUILD+" "+app_path+OS+"/"+APP+".sln /t:main /p:Configuration=Release")
 		
-		CPP_DK_Execute("EndProcess.cmd adb.exe")
-		CPP_DK_Execute("EndProcess.cmd java.exe")
-		
+		//CPP_DK_Execute("EndProcess.cmd adb.exe")
+		//CPP_DK_Execute("EndProcess.cmd java.exe")
 		CPP_DK_Execute(app_path+OS+"/gradlew --project-dir "+app_path+OS+" --info clean build")
-		
-		CPP_DK_Execute("EndProcess.cmd adb.exe")
-		CPP_DK_Execute("EndProcess.cmd java.exe")
+
 		/*
 		if(TYPE === "Debug" || TYPE === "ALL"){
 			CPP_DKFile_MkDir(app_path+"android64/Debug")
