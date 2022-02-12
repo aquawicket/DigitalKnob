@@ -145,7 +145,6 @@ if %compiler% EQU GRADLE goto :gradle
 :::::: COMPILE WITH CMAKE ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 if %compiler% NEQ CMAKE goto :end
 echo Compiling with CMAKE
-
 ::Prep Visual Studio Project
 ::call CopyPath %APP_PATH%/visualStudio/%ABI%/Directory.Build.targets %CMAKE_BINARY_DIR%/Directory.Build.targets
 ::call CopyPath %APP_PATH%/visualStudio/%ABI%/gradleAPK.androidproj %CMAKE_BINARY_DIR%/gradleAPK.androidproj
@@ -153,8 +152,8 @@ echo Compiling with CMAKE
 ::Generate CMake project files
 "%CMAKE%" -G "Visual Studio 17 2022" -A %CMAKE_GENERATOR_ARCH% -DANDROID_ABI=%ABI% -DANDROID_PLATFORM=%ANDROID_API% -DANDROID_NDK=%NDK_ROOT% -DCMAKE_TOOLCHAIN_FILE=%NDK_ROOT%/build/cmake/android.toolchain.cmake -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static %CMAKE_SOURCE_DIR% -B%CMAKE_BINARY_DIR%
 %IF_ERROR% "CMAKE failed to generate the project files."
-"%CMAKE%" --build %CMAKE_BINARY_DIR%
-call CopyPath %CMAKE_BINARY_DIR%/%BUILD_TYPE%/libmain.so %APP_PATH%/build/apk/lib/%ABI%/libmain.so
+"%CMAKE%" --build %CMAKE_BINARY_DIR% --target main
+::call CopyPath %CMAKE_BINARY_DIR%/%BUILD_TYPE%/libmain.so %APP_PATH%/build/apk/lib/%ABI%/libmain.so
 :end
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -163,6 +162,7 @@ if %compiler% NEQ NDK goto :end
 echo Compiling with ndk-build
 call %NDK_ROOT%/ndk-build NDK_LOG=1 APP_BUILD_SCRIPT=%APP_PATH%/cpp/Android.mk NDK_PROJECT_PATH=%APP_PATH%
 call CopyPath %APP_PATH%\libs\%ABI%\libmain.so %APP_PATH%/build/apk/lib/%ABI%/libmain.so
+call CopyPath %APP_PATH%\libs\%ABI%\libmain.so %APP_PATH%/jniLibs/%ABI%/libmain.so
 :end
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -171,15 +171,16 @@ if %compiler% NEQ CLANG goto :end
 echo Compiling with NDK Toolchain
 call MakeDirectory %APP_PATH%/build/apk/lib/%ABI%
 cmd /c %ANDROID_TOOLCHAIN% -shared -o %APP_PATH%/build/apk/lib/%ABI%/libmain.so %APP_PATH%/cpp/main.c
+call CopyPath %APP_PATH%/build/apk/lib/%ABI%/libmain.so %APP_PATH%/jniLibs/%ABI%/libmain.so
 :end
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
-call CopyPath %APP_PATH%/build/apk/lib/%ABI%/libmain.so %APP_PATH%/jniLibs/%ABI%/libmain.so
+
 :::::: COMPILE WITH GRADLE :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 :gradle
-if "%compiler%"=="GRADLE" (
-	set GRADLE_SETTINGS=--project-prop=BUILD_LIBS
-)
+::if "%compiler%"=="GRADLE" (
+	::set GRADLE_SETTINGS=--project-prop=BUILD_LIBS
+::)
 if %GRADLE% NEQ 1 goto :end
 echo Compiling with Gradle
 set "GRADLE_USER_HOME=C:\Users\%USERNAME%\digitalknob\DK\3rdParty\gradle"

@@ -943,7 +943,10 @@ if(ANDROID)
 		DKRENAME(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.apk ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.backup true)
 	endif()
 		
-	####################### Create Executable Target ###################
+	####################### Create Library Target ###################
+	set(CMAKE_LIBRARY_OUTPUT_DIRECTORY_DEBUG "${CMAKE_BINARY_DIR}/app/src/main/jniLibs/armeabi-v7a")
+	set(CMAKE_LIBRARY_OUTPUT_DIRECTORY_RELEASE "${CMAKE_BINARY_DIR}/app/src/main/jniLibs/armeabi-v7a")
+
 	if(ANDROID_32)
 		DKCOPY(${DKPLUGINS}/_DKIMPORT/android32/ ${DKPROJECT}/android32/ FALSE)
 		#DKCOPY(${DKPLUGINS}/_DKIMPORT/android32/Android.h ${DKPROJECT}/Android.h FALSE)
@@ -953,18 +956,22 @@ if(ANDROID)
 		#DKCOPY(${DKPLUGINS}/_DKIMPORT/android64/Android.h ${DKPROJECT}/Android.h FALSE)
 	endif()
 	set(CMAKE_ANDROID_GUI 1)
-	add_library(${APP_NAME} SHARED ${App_SRC})
+	#add_library(${APP_NAME} SHARED ${App_SRC})
+	add_library(main SHARED ${App_SRC})
 		
 	########################## Add Dependencies ########################
 	foreach(plugin ${dkdepend_list})
 		if(EXISTS "${DKPLUGINS}/${plugin}/CMakeLists.txt")
-			add_dependencies(${APP_NAME} ${plugin})
+			#add_dependencies(${APP_NAME} ${plugin})
+			add_dependencies(main ${plugin})
 		endif()	
 	endforeach()
 	
 	######################### Link Libraries ###########################
-	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${LIBS})
-	target_include_directories(${APP_NAME} PUBLIC ${SDL2}/include)
+	#target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${LIBS})
+	#target_include_directories(${APP_NAME} PUBLIC ${SDL2}/include)
+	target_link_libraries(main ${DEBUG_LIBS} ${RELEASE_LIBS} ${LIBS})
+	target_include_directories(main PUBLIC ${SDL2}/include)
 	
 	include_external_msproject(gradleAPK gradleAPK.androidproj TYPE 39E2626F-3545-4960-A6E8-258AD8476CE5)
 	set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT gradleAPK)

@@ -4,6 +4,9 @@ cmake_minimum_required(VERSION 3.6)
 
 project(DKSdl2)
 
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY_DEBUG "${CMAKE_BINARY_DIR}/app/src/main/jniLibs/armeabi-v7a")
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY_RELEASE "${CMAKE_BINARY_DIR}/app/src/main/jniLibs/armeabi-v7a")
+
 message(STATUS "CMAKE_ANDROID_ARCH_ABI = ${CMAKE_ANDROID_ARCH_ABI}")
 if(NOT CMAKE_ANDROID_ARCH_ABI)
 	message(FATAL_ERROR "ERROR: CMAKE_ANDROID_ARCH_ABI is invalid")
@@ -78,6 +81,7 @@ target_link_libraries(main ${RMLUI}/${OS}/Debug/libRmlDebugger.a)
 #add_library(hidapi SHARED ${SDL2}/src/hidapi/android/hid.cpp)
 #target_link_libraries(hidapi -llog)
 #target_link_libraries(main hidapi)
+
 
 include_external_msproject(gradleAPK gradleAPK.androidproj TYPE 39E2626F-3545-4960-A6E8-258AD8476CE5)
 set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT gradleAPK)

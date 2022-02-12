@@ -99,7 +99,7 @@
     <GradleTemplate Include="gradle\wrapper\gradle-wrapper.properties.template" />
   </ItemGroup> -->
   <ItemGroup>
-    <ProjectReference Include="$(SolutionName).vcxproj" />
+    <ProjectReference Include="main.vcxproj" />
   </ItemGroup>
   <Import Project="$(AndroidTargetsPath)\Android.targets" />
   <ImportGroup Label="ExtensionTargets" />
