@@ -446,14 +446,14 @@ function DKBuild_DoResults(){
 			cmake_string = cmake_string.replace("-DRELEASE=ON", "-DRELEASE=OFF");
 			CPP_DKFile_MkDir(app_path+OS+"/Debug")
 			CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+" -S"+DIGITALKNOB+"DK/DKCMake -B"+app_path+OS+"/Debug")
-			CPP_DK_Execute(app_path+OS+"/make "+APP)
+			CPP_DK_Execute("make "+app_path+OS+" "+APP)
 		}
 		if(TYPE === "Release" || TYPE === "ALL"){
 			cmake_string = cmake_string.replace("-DDEBUG=ON", "-DDEBUG=OFF");
 			cmake_string = cmake_string.replace("-DRELEASE=OFF", "-DRELEASE=ON");
 			CPP_DKFile_MkDir(app_path+OS+"/Release")
 			CPP_DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+" -S"+DIGITALKNOB+"DK/DKCMake -B"+app_path+OS+"/Release")
-			CPP_DK_Execute(app_path+OS+"/make "+APP)
+			CPP_DK_Execute("make "+app_path+OS+" "+APP)
 		}
 	}
 	
