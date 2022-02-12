@@ -974,6 +974,7 @@ if(ANDROID)
 	target_include_directories(main PUBLIC ${SDL2}/include)
 	
 	include_external_msproject(gradleAPK gradleAPK.androidproj TYPE 39E2626F-3545-4960-A6E8-258AD8476CE5)
+	set_property(TARGET gradleAPK PROPERTY VS_SOLUTION_DEPLOY ON)
 	set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT gradleAPK)
 		
 	####################### Do Post Build Stuff #######################
