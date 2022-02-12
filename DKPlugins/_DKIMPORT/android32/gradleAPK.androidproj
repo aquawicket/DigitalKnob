@@ -33,28 +33,28 @@
     <ConfigurationType>Application</ConfigurationType>
     <AndroidAPILevel>android-26</AndroidAPILevel>
     <TargetName>$(RootNamespace)-debug</TargetName>
-	<PackagePath>$(ProjectDir)app\build\outputs\apk\debug\$(RootNamespace)-debug.apk</PackagePath>
+    <PackagePath>$(ProjectDir)app\build\outputs\apk\debug\$(RootNamespace)-debug.apk</PackagePath>
     <DebuggerFlavor>AndroidDebugger</DebuggerFlavor>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <AndroidAPILevel>android-26</AndroidAPILevel>
     <TargetName>$(RootNamespace)-release-unsigned</TargetName>
-	<PackagePath>$(ProjectDir)app\build\outputs\apk\release\$(RootNamespace)-release-unsigned.apk</PackagePath>
+    <PackagePath>$(ProjectDir)app\build\outputs\apk\release\$(RootNamespace)-release-unsigned.apk</PackagePath>
     <DebuggerFlavor>AndroidDebugger</DebuggerFlavor>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|ARM'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <AndroidAPILevel>android-26</AndroidAPILevel>
     <TargetName>$(RootNamespace)-release-unsigned</TargetName>
-	<PackagePath>$(ProjectDir)app\build\outputs\apk\release\$(RootNamespace)-release-unsigned.apk</PackagePath>
+    <PackagePath>$(ProjectDir)app\build\outputs\apk\release\$(RootNamespace)-release-unsigned.apk</PackagePath>
     <DebuggerFlavor>AndroidDebugger</DebuggerFlavor>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|ARM'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <AndroidAPILevel>android-26</AndroidAPILevel>
     <TargetName>$(RootNamespace)-release-unsigned</TargetName>
-	<PackagePath>$(ProjectDir)app\build\outputs\apk\release\$(RootNamespace)-release-unsigned.apk</PackagePath>
+    <PackagePath>$(ProjectDir)app\build\outputs\apk\release\$(RootNamespace)-release-unsigned.apk</PackagePath>
     <DebuggerFlavor>AndroidDebugger</DebuggerFlavor>
   </PropertyGroup>
   <Import Project="$(AndroidTargetsPath)\Android.props" />
@@ -100,6 +100,17 @@
   </ItemGroup> -->
   <ItemGroup>
     <ProjectReference Include="main.vcxproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <JavaCompile Include="com.digitalknob.sdl2app\MyApp.java" />
+    <JavaCompile Include="org.libsdl.app\HIDDevice.java" />
+    <JavaCompile Include="org.libsdl.app\HIDDeviceBLESteamController.java" />
+    <JavaCompile Include="org.libsdl.app\HIDDeviceManager.java" />
+    <JavaCompile Include="org.libsdl.app\HIDDeviceUSB.java" />
+    <JavaCompile Include="org.libsdl.app\SDL.java" />
+    <JavaCompile Include="org.libsdl.app\SDLActivity.java" />
+    <JavaCompile Include="org.libsdl.app\SDLAudioManager.java" />
+    <JavaCompile Include="org.libsdl.app\SDLControllerManager.java" />
   </ItemGroup>
   <Import Project="$(AndroidTargetsPath)\Android.targets" />
   <ImportGroup Label="ExtensionTargets" />
