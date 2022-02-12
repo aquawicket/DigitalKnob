@@ -60,7 +60,7 @@
   <Import Project="$(AndroidTargetsPath)\Android.props" />
   <ItemDefinitionGroup>
     <GradlePackage>
-      <ProjectDirectory>$(ProjectDir)</ProjectDirectory>
+      <ProjectDirectory>$(ProjectDir)app</ProjectDirectory>
       <GradlePlugin>gradle:7.0.3</GradlePlugin>
       <GradleVersion>7.0.3</GradleVersion>
       <AndroidAppLibName>main</AndroidAppLibName>
