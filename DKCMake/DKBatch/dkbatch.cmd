@@ -18,7 +18,7 @@ set "DKIN=if %DEBUG%==1 echo. & echo [94m--^> %~n1^([0m[35m%ALL_BUT_FIRST%[0
 
 ::: %DKEND% ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 set "DOEND=endlocal & if %DEBUG%==1 echo [94m^<-- %~n1^(^)[0m "
-if "%~2"=="DKEND" %DOEND%:[35m!%1![0m & echo. & goto :EOF
+if "%~2"=="DKEND" %DOEND%:[35m!%1![0m & echo. & if "!DKLOADED!"=="%~1" ( timeout 10 & exit %ERRORLEVEL% ) else ( goto :eof )
 set "DKEND=call %0 %%0 DKEND & call return %%0 %%0"
 
 ::: NO_RELATIVE_PATHS() :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -81,7 +81,11 @@ set "FATAL=DKERROR ERROR %1 "
 set caller=%0
 if not "%1"=="" set "caller=%1"
 ::if "%1"=="" ( set "caller=%0" ) else ( set "caller=%1" )
-if not defined in_subprocess (cmd /k set in_subprocess=y ^& %caller% %ALL_BUT_FIRST%) & exit )
+
+if not "%STAY_OPEN%"=="" (
+	if not defined in_subprocess (cmd /k set in_subprocess=y ^& %caller% %ALL_BUT_FIRST%) & exit )
+)
+
 ::if not defined in_subprocess (cmd /k set in_subprocess=y ^& %caller% %*) & exit )
 
 ::#########################################################################
@@ -107,6 +111,7 @@ endlocal & set "PATH=%PATH%;%folders%"
 
 
 
-set DKLOADED=1
+set DKLOADED=%1
+echo DKLOADED = %DKLOADED%
 :dkbatch_end
 if %DEBUG_dkbatch.cmd%==1 echo [94m^<-- %~n0^(^)[0m & echo.
