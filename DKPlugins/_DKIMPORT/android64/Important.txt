@@ -1,0 +1,38 @@
+
+We use CMake directly and just have Gradle compile the javascript and do the packaging. 
+But in order for that to work, we nee to make a change to a Visual Studio File.
+
+This Android.Common.targets file in Visual Studio needs some changes for Gradle to ignore c++.
+This can be done with overlaying property sheets, but I havn't got that far yet. 
+
+
+File:
+C:\Program Files\Microsoft Visual Studio\2022\Community\Msbuild\Microsoft\MDD\Android\V150\Android.Common.targets
+
+
+Original:
+LINE: 536
+	  <GradlePlatform Condition="'$(Platform)' == 'ARM'">ARM7</GradlePlatform>
+      <GradlePlatform Condition="'$(Platform)' == 'ARM64'">ARM8</GradlePlatform>
+      <GradlePlatform Condition="'$(Platform)' == 'x64'">x86-64</GradlePlatform>
+      <AssembleParameter>%(GradlePackage.AssembleParameter)</AssembleParameter>
+      <AssembleParameter Condition="'$(AssembleParameter)' == ''">assemble$(GradlePlatform)$(Configuration)</AssembleParameter>
+	
+	
+	
+Editied:
+Line: 536	
+<!--###############################  EDITED BY DIGITALKNOB  #######################################
+	  <GradlePlatform Condition="'$(Platform)' == 'ARM'">ARM7</GradlePlatform>
+      <GradlePlatform Condition="'$(Platform)' == 'ARM64'">ARM8</GradlePlatform>
+      <GradlePlatform Condition="'$(Platform)' == 'x64'">x86-64</GradlePlatform>
+      <AssembleParameter>%(GradlePackage.AssembleParameter)</AssembleParameter>
+      <AssembleParameter Condition="'$(AssembleParameter)' == ''">assemble$(GradlePlatform)$(Configuration)</AssembleParameter> -->
+	  
+	   <GradlePlatform Condition="'$(Platform)' == 'ARM'"></GradlePlatform>
+		<GradlePlatform Condition="'$(Platform)' == 'ARM64'"></GradlePlatform>
+		<GradlePlatform Condition="'$(Platform)' == 'x64'"></GradlePlatform>
+		<AssembleParameter>%(GradlePackage.AssembleParameter)</AssembleParameter>
+		<AssembleParameter Condition="'$(AssembleParameter)' == ''">build</AssembleParameter>
+<!--########################################### END ################################################-->
+
