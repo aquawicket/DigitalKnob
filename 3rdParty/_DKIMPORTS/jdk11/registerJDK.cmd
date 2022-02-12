@@ -1,5 +1,4 @@
-@echo off
-if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*) & exit )
+@echo off & %dkbatch%
 
 set "Folder=openjdk-11"
 set "CurrentVersion=11"
@@ -15,3 +14,6 @@ reg add "HKLM\SOFTWARE\JavaSoft\Java Runtime Environment" /v CurrentVersion /t R
 reg add "HKLM\SOFTWARE\JavaSoft\Java Runtime Environment\%CurrentVersion%" /v JavaHome /t REG_SZ /d "%JAVA_HOME%" /f
 reg add "HKLM\SOFTWARE\JavaSoft\Java Runtime Environment\%CurrentVersion%" /v RuntimeLib /t REG_SZ /d "%JAVA_HOME%\bin\server\jvm.dll" /f
 
+ 
+ 
+%DKEND% 

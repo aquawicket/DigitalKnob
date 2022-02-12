@@ -2,8 +2,7 @@
 :: https://slproweb.com/products/Win32OpenSSL.html
 :: https://slproweb.com/download/Win32OpenSSL-1_1_1L.exe
 
-@echo off
-if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*) & exit )
+@echo off & %dkbatch%
 
 
 set "GOOGLE_CERT=%JAVA_HOME%\google.cer"

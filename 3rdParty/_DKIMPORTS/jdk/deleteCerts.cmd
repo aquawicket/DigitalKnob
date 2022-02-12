@@ -1,5 +1,4 @@
-@echo off
-if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*) & exit )
+@echo off & %dkbatch%
 
 
 set "GOOGLE_CERT=%JAVA_HOME%\google.cer"

@@ -1,5 +1,5 @@
 @echo off
-if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*) & exit )
+%dkbatch%
 
 set "DIGITALKNOB=C:\Users\Administrator\digitalknob"
 set "ADB=%DIGITALKNOB%\DK\3rdParty\android-sdk\platform-tools\adb.exe"

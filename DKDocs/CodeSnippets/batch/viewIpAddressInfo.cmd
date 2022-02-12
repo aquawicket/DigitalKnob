@@ -1,5 +1,5 @@
 :: View Ip Address information
 @echo off
-if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*) & exit )
+%dkbatch%
 
 netsh interface ipv4 show config

@@ -1,6 +1,6 @@
 :: Using colors in batch files
 @echo off
-if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*) & exit )
+%dkbatch%
 
 ::0 = Black
 ::1 = Blue

@@ -1,5 +1,4 @@
-@echo off
-if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*) & exit )
+@echo off & %dkbatch%
 
 set "Folder=openjdk-9.0.4"
 set "CurrentVersion=9.0.4"

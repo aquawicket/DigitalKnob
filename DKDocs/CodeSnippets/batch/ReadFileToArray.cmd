@@ -1,7 +1,7 @@
 :: https://stackoverflow.com/a/18869970
 :: Read lines of a file into an array and echo them back
 @echo off
-if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*) & exit )
+%dkbatch%
 
 set "file=ServiceList.txt"
 set /A i=0

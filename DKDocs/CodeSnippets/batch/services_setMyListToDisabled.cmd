@@ -1,6 +1,6 @@
 :: loop through services_MyList.txt, stop and diable any service in the list
 @echo off
-if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*) & exit )
+%dkbatch%
 
 echo #### Windows Services ####
 for /f "tokens=*" %%a in (services_MyList.txt) do (

@@ -1,6 +1,6 @@
 ::Kill a process
 @echo off
-if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*) & exit )
+%dkbatch%
 
 :: kill by PID number
 ::taskkill /F /PID pid_number

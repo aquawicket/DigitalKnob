@@ -5,7 +5,7 @@
 :: reg add HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\AarSvc_31cf0 /t REG_DWORD /v Start /d 3 /f
 :: reg add HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\diagnosticshub.standardcollector.service /t REG_DWORD /v Start /d 3 /f
 @echo off
-if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*) & exit )
+%dkbatch%
 
 echo #### Windows Services ####
 for /f "tokens=*" %%a in (service_MyList.txt) do (

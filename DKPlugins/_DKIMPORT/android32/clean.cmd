@@ -24,12 +24,13 @@ for /d /r %%i in (*ARM64) do rd /s /q "%%i"
 for /d /r %%i in (*CMakeFiles) do rd /s /q "%%i"
 for /d /r %%i in (*Debug) do rd /s /q "%%i"
 for /d /r %%i in (*Release) do rd /s /q "%%i"
+for /d /r %%i in (*MinSizeRel) do rd /s /q "%%i"
+for /d /r %%i in (*RelWithDebInfo) do rd /s /q "%%i"
 for /r %%i in (CMakeCache.*) do del "%%i"
 for /r %%i in (cmake_install.*) do del "%%i"
 for /r %%i in (*.vcxproj) do del "%%i"
 for /r %%i in (*.sln) do del "%%i"
 for /r %%i in (*.filters) do del "%%i"
 for /r %%i in (*.user) do del "%%i"
-del gradleAPK.androidproj
-del Directory.Build.targets
+
 %DKEND%

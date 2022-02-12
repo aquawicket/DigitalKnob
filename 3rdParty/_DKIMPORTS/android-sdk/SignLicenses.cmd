@@ -1,5 +1,4 @@
-@echo off
-if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*) & exit )
+@echo off & %dkbatch%
 
 set "JAVA_HOME=C:\Users\%USERNAME%\digitalknob\DK\3rdParty\openjdk-9.0.4"
 call "%JAVA_HOME%\registerJDK.cmd"
