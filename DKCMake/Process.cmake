@@ -978,8 +978,8 @@ if(ANDROID)
 	set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT gradleAPK)
 		
 	# push assets to device
-	message(STATUS "${CMAKE_BINARY_DIR}/copy_assets.cmd")
-	DKCOMMAND(${CMAKE_BINARY_DIR}/copy_assets.cmd)
+	#message(STATUS "${CMAKE_BINARY_DIR}/copy_assets.cmd")
+	#DKCOMMAND(${CMAKE_BINARY_DIR}/copy_assets.cmd)
 	####################### Do Post Build Stuff #######################
 endif()
 
