@@ -17,7 +17,7 @@ android {
 			doNotStrip '**.so'
 		}		
         if (buildAsApplication) {
-			applicationId "com.digitalknob.sdl2app"
+			applicationId "com.digitalknob.dk"
         }
         minSdkVersion 26
         targetSdkVersion 26

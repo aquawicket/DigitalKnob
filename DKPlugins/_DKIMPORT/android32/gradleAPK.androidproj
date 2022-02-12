@@ -25,7 +25,7 @@
     <ProjectVersion>1.0</ProjectVersion>
     <ProjectGuid>{f38408b0-8d17-4d2b-aeb4-5fa30b7f6373}</ProjectGuid>
     <_PackagingProjectWithoutNativeComponent>false</_PackagingProjectWithoutNativeComponent>
-    <LaunchActivity Condition="'$(LaunchActivity)' == ''">com.digitalknob.sdl2app.MyApp</LaunchActivity>
+    <LaunchActivity Condition="'$(LaunchActivity)' == ''">com.digitalknob.dk.DKApp</LaunchActivity>
     <JavaSourceRoots>src\main\java</JavaSourceRoots>
   </PropertyGroup>
   <Import Project="$(AndroidTargetsPath)\Android.Default.props" />
@@ -66,7 +66,7 @@
       <AndroidAppLibName>main</AndroidAppLibName>
       <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
       </AdditionalOptions>
-      <ApplicationName>com.digitalknob.sdl2app</ApplicationName>
+      <ApplicationName>com.digitalknob.dk</ApplicationName>
       <ApkFileName Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">$(RootNamespace)-debug.apk</ApkFileName>
       <ApkFileName Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">$(RootNamespace)-release-unsigned.apk</ApkFileName>
       <ApkFileName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|ARM'">$(RootNamespace)-release-unsigned.apk</ApkFileName>
@@ -102,7 +102,7 @@
     <ProjectReference Include="main.vcxproj" />
   </ItemGroup>
   <ItemGroup>
-    <JavaCompile Include="app\src\main\java\com\digitalknob\sdl2app\MyApp.java" />
+    <JavaCompile Include="app\src\main\java\com\digitalknob\dk\DKApp.java" />
     <JavaCompile Include="app\src\main\java\org\libsdl\app\HIDDevice.java" />
     <JavaCompile Include="app\src\main\java\org\libsdl\app\HIDDeviceBLESteamController.java" />
     <JavaCompile Include="app\src\main\java\org\libsdl\app\HIDDeviceManager.java" />

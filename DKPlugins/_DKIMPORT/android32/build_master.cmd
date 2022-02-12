@@ -32,8 +32,8 @@ set "ABI=armeabi-v7a"
 :: App package name and lable
 set "TYPE=com"
 set "COMPANY=digitalknob"
-set "APP_NAME=sdl2app"
-set "APP_LABEL=MyApp"
+set "APP_NAME=dk"
+set "APP_LABEL=DKApp"
 
 :::::::::::::::::: AAPT :::::::::::::::::::::
 :: App signing

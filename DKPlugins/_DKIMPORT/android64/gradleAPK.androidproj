@@ -25,7 +25,7 @@
     <ProjectVersion>1.0</ProjectVersion>
     <ProjectGuid>{f38408b0-8d17-4d2b-aeb4-5fa30b7f6373}</ProjectGuid>
     <_PackagingProjectWithoutNativeComponent>false</_PackagingProjectWithoutNativeComponent>
-    <LaunchActivity Condition="'$(LaunchActivity)' == ''">com.digitalknob.sdl2app.MyApp</LaunchActivity>
+    <LaunchActivity Condition="'$(LaunchActivity)' == ''">com.digitalknob.dk.DKApp</LaunchActivity>
     <JavaSourceRoots>src\main\java</JavaSourceRoots>
   </PropertyGroup>
   <Import Project="$(AndroidTargetsPath)\Android.Default.props" />
@@ -66,7 +66,7 @@
       <AndroidAppLibName>main</AndroidAppLibName>
       <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">
       </AdditionalOptions>
-      <ApplicationName>com.digitalknob.sdl2app</ApplicationName>
+      <ApplicationName>com.digitalknob.dk</ApplicationName>
       <ApkFileName Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">$(RootNamespace)-debug.apk</ApkFileName>
       <ApkFileName Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">$(RootNamespace)-release-unsigned.apk</ApkFileName>
       <ApkFileName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|ARM64'">$(RootNamespace)-release-unsigned.apk</ApkFileName>
@@ -102,15 +102,15 @@
     <ProjectReference Include="main.vcxproj" />
   </ItemGroup>
   <ItemGroup>
-    <JavaCompile Include="com.digitalknob.sdl2app\MyApp.java" />
-    <JavaCompile Include="org.libsdl.app\HIDDevice.java" />
-    <JavaCompile Include="org.libsdl.app\HIDDeviceBLESteamController.java" />
-    <JavaCompile Include="org.libsdl.app\HIDDeviceManager.java" />
-    <JavaCompile Include="org.libsdl.app\HIDDeviceUSB.java" />
-    <JavaCompile Include="org.libsdl.app\SDL.java" />
-    <JavaCompile Include="org.libsdl.app\SDLActivity.java" />
-    <JavaCompile Include="org.libsdl.app\SDLAudioManager.java" />
-    <JavaCompile Include="org.libsdl.app\SDLControllerManager.java" />
+    <JavaCompile Include="app\src\main\java\com\digitalknob\dk\DKApp.java" />
+    <JavaCompile Include="app\src\main\java\org\libsdl\app\HIDDevice.java" />
+    <JavaCompile Include="app\src\main\java\org\libsdl\app\HIDDeviceBLESteamController.java" />
+    <JavaCompile Include="app\src\main\java\org\libsdl\app\HIDDeviceManager.java" />
+    <JavaCompile Include="app\src\main\java\org\libsdl\app\HIDDeviceUSB.java" />
+    <JavaCompile Include="app\src\main\java\org\libsdl\app\SDL.java" />
+    <JavaCompile Include="app\src\main\java\org\libsdl\app\SDLActivity.java" />
+    <JavaCompile Include="app\src\main\java\org\libsdl\app\SDLAudioManager.java" />
+    <JavaCompile Include="app\src\main\java\org\libsdl\app\SDLControllerManager.java" />
   </ItemGroup>
   <Import Project="$(AndroidTargetsPath)\Android.targets" />
   <ImportGroup Label="ExtensionTargets" />
