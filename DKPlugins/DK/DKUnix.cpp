@@ -31,7 +31,7 @@ bool DKUnix::GetKey(int& key){
 bool DKUnix::Sleep(int milliseconds){
 	//DKDEBUGFUNC(milliseconds);
 #ifdef ANDROID
-	sleep(milliseconds * 1000);
+	usleep(milliseconds * 1000);
 #else
 	usleep(milliseconds * 1000);
 #endif

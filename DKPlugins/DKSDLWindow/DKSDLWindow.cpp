@@ -97,7 +97,7 @@ bool DKSDLWindow::Init() {
     DKString result;
 #if defined(ANDROID) || defined(IOS)
     DKINFO("Creating SDLWindow for mobile device\n");
-    /*
+    
     SDL_SetHint(SDL_HINT_RENDER_DRIVER, "opengles");
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_ES);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 1);
@@ -109,9 +109,9 @@ bool DKSDLWindow::Init() {
     DKINFO("DKSDLWindow Width: " + toString(width) + " Height: " + toString(height) + "\n");
     if(SDL_CreateWindowAndRenderer(width, height, SDL_WINDOW_RESIZABLE, &window, &renderer) < 0)
         return DKERROR("SDL_CreateWindow Error: " + DKString(SDL_GetError()) + "\n");
-     */
-
-     //SDL_SetHint(SDL_HINT_VIDEO_MINIMIZE_ON_FOCUS_LOSS, "0");
+    
+    /*
+    //SDL_SetHint(SDL_HINT_VIDEO_MINIMIZE_ON_FOCUS_LOSS, "0");
     width = DKAndroid::android_width;
     height = DKAndroid::android_height;
     SDL_Window* sdlWindow = SDL_CreateWindow("RmlUi SDL2 with SDL_Renderer", 0, 0, width, height, SDL_WINDOW_RESIZABLE);
@@ -119,7 +119,7 @@ bool DKSDLWindow::Init() {
         printf("SDL_Window* invalid: %s\n", SDL_GetError());
     window = sdlWindow;
 
-    SDL_Renderer* sdlRenderer = SDL_CreateRenderer(sdlWindow, -1, SDL_RENDERER_ACCELERATED/* | SDL_RENDERER_PRESENTVSYNC*/);
+    SDL_Renderer* sdlRenderer = SDL_CreateRenderer(sdlWindow, -1, SDL_RENDERER_ACCELERATED);// | SDL_RENDERER_PRESENTVSYNC);
     if (!sdlRenderer)
         printf("SDL renderer invalid: %s\n", SDL_GetError());
     renderer = sdlRenderer;
@@ -133,7 +133,7 @@ bool DKSDLWindow::Init() {
     printf("SDL_Renderer Driver = %s\n", rendererName.c_str());
     mTitle = DKString("SDL_Renderer RmlUi - " + rendererName);
     SDL_SetWindowTitle(sdlWindow, mTitle.c_str());
-
+    */
 #endif
 #if !defined(ANDROID) && !defined(IOS)
     DKINFO("Creating SDLWindow for Desktop\n");

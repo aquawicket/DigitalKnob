@@ -382,6 +382,11 @@ bool DKUtil::GetThreadId(unsigned long int& id){
 	return true;
 }
 
+// https://people.cs.rutgers.edu/~pxk/416/notes/c-tutorials/gettime.html
+// 1 second = 1000 milliseconds         1e+3
+// 1 second = 1000000 microseconds      1e+6
+// 1 second = 1000000000 nanoseconds    1e+9
+
 bool DKUtil::GetTicks(long& ticks){
 	//DKDEBUGFUNC(ticks);
 	//boost::posix_time::ptime tick = boost::posix_time::second_clock::local_time();
@@ -392,9 +397,15 @@ bool DKUtil::GetTicks(long& ticks){
 	ticks = GetTickCount();
 	return true;
 #else
-	struct timeval tv;
-	gettimeofday(&tv, 0);
-	ticks = unsigned((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
+	/*
+	struct timeval tval;
+	gettimeofday(&tval, NULL);
+	ticks = ((tval.tv_sec * 1000) + (tval.tv_usec / 1000));
+	return true;
+	*/
+	struct timespec ts;
+	clock_gettime(CLOCK_MONOTONIC, &ts);
+	ticks = ((ts.tv_sec * 1000) + (ts.tv_nsec / 1000000));
 	return true;
 #endif
 }
@@ -454,7 +465,7 @@ bool DKUtil::InitFps(){
 
 bool DKUtil::InitFramerate(){
 	DKDEBUGFUNC();
-	GetTicks(DKUtil::now);
+	DKUtil::GetTicks(DKUtil::now);
 	DKUtil::GetTicks(DKUtil::lastFrame);
 	DKUtil::GetTicks(DKUtil::lastSecond);
 	return true;
@@ -511,8 +522,6 @@ bool DKUtil::LimitFramerate(){
 	if(!DKUtil::now){ DKUtil::InitFramerate(); }
 	//Framerate / cpu limiter
 	DKUtil::GetTicks(DKUtil::now);
-	if (DKUtil::now < 0)   //ANDROID
-		return true;       //ANDROID
 	long delta = DKUtil::now - DKUtil::lastFrame;
 	if(delta < DKUtil::ticksPerFrame){
 		long sleep = DKUtil::ticksPerFrame - delta;
