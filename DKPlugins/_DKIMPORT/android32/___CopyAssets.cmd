@@ -12,11 +12,19 @@ if not exist %ANDROID_HOME% (
 )
 
 set ASSETS=%APP_ROOT%/app/src/main/assets
-if exist %APP_ROOT%\..\assets (
-	set ASSETS=%APP_ROOT%/../assets
+if exist %APP_ROOT%..\assets (
+	set ASSETS=%APP_ROOT%..\assets
 )
 
 set DEVICE_PATH=/sdcard/Android/data/%PACKAGE_NAME%/files/assets
+
+echo Deleting folder
+echo.
+echo. PATH: %DEVICE_PATH%
+echo.
+"%ANDROID_HOME%/platform-tools/adb" shell rm -r %DEVICE_PATH%
+::%IF_ERROR% "Failed to delete the folder on the device"
+
 
 echo Copying assets to device
 echo.
