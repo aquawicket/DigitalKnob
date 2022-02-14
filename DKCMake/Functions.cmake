@@ -1022,7 +1022,7 @@ endfunction()
 function(DKEXECUTE_PROCESS commands)
 	set(commands ${ARGV})
 	list(REMOVE_ITEM commands COMMAND) # we can supply the cmake specific base commands
-	list(REMOVE_ITEM commands "cmd /c")
+	list(REMOVE_ITEM commands "cmd /c ")
 	
 	list(FIND commands "WORKING_DIRECTORY" index) #find WORKING_DRIECTORY
 	if(index EQUAL -1)
