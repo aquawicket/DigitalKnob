@@ -180,7 +180,9 @@ bool DKAssets::GetDataPath(DKString& path){
 	//TODO - folder should be named /appname_Data/
 	//CallJavaFunction("getApplicationName", "");
 	//path = "/mnt/sdcard/"+DKFile::exe_path;
-	path = DKFile::exe_path+"/assets/";
+	//path = DKFile::exe_path+"/assets/";
+	
+	path = DKFile::exe_path +"/assets/";
 	return true;
 #endif
 #ifdef MAC

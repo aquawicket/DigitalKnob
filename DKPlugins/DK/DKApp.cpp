@@ -5,6 +5,9 @@
 #ifdef HAVE_boxer
 	#include <boxer/boxer.h>
 #endif
+#if ANDROID
+	#include <SDL.h>
+#endif 
 
 int    DKApp::argc;
 char** DKApp::argv;
@@ -36,8 +39,15 @@ DKApp::DKApp(int _argc, char** _argv){
 	DKApp::argc = _argc;
 	DKApp::argv = _argv;
 	DKUtil::SetMainThreadNow();
+
 	if (argc)
 		DKFile::exe_path = argv[0];
+#if ANDROID
+	if (!SDL_AndroidGetExternalStorageState())
+		DKERROR("SDL_AndroidGetExternalStorageState(): failed");
+	const char* externalStoragePath = SDL_AndroidGetExternalStoragePath();
+	DKFile::exe_path = externalStoragePath;
+#endif
 	DKFile::NormalizePath(DKFile::exe_path);
 
 	DKString appName;

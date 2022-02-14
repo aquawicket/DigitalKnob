@@ -511,6 +511,8 @@ bool DKUtil::LimitFramerate(){
 	if(!DKUtil::now){ DKUtil::InitFramerate(); }
 	//Framerate / cpu limiter
 	DKUtil::GetTicks(DKUtil::now);
+	if (DKUtil::now < 0)   //ANDROID
+		return true;       //ANDROID
 	long delta = DKUtil::now - DKUtil::lastFrame;
 	if(delta < DKUtil::ticksPerFrame){
 		long sleep = DKUtil::ticksPerFrame - delta;
