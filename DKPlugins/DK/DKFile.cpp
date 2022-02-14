@@ -249,7 +249,17 @@ bool DKFile::GetAppPath(DKString& apppath){
 	DebugPath(apppath);
 	return true && DKDEBUGRETURN(apppath);
 #elif defined(ANDROID)
-	apppath = "/mnt/sdcard/digitalknob/";
+	apppath = DKFile::exe_path;
+	found = apppath.find_last_of("/");
+	apppath.erase(apppath.begin() + found + 1, apppath.end());
+	//apppath = "/mnt/sdcard/digitalknob/";
+	/*
+	#include <SDL.h>
+	const char* externalStoragePath = SDL_AndroidGetExternalStoragePath();
+	//int externalStorageState = SDL_AndroidGetExternalStorageState();
+	DKString appPath = externalStoragePath;
+	appPath += "/assets/";
+	*/
 	DebugPath(apppath);
 	return true && DKDEBUGRETURN(apppath);
 #elif defined(MAC) || defined(IOS) || defined(LINUX)
@@ -332,6 +342,7 @@ bool DKFile::GetExeName(DKString& exename){
 bool DKFile::GetExePath(DKString& exepath){
 	//DKFile::exe_path should hold the full file path of this executable from argv[0];
 	//If is doesn't, we should fill that now and figure out why it didn't get assigned.
+
 	if (!DKFile::PathExists(DKFile::exe_path)) {
 		DKWARN("GetExePath(): DKFile::exe_path is invalid. It should have been set by argv[0] at app start \n");
 		DKClass::DKCreate("DKDebug");

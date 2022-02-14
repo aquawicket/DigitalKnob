@@ -1,13 +1,15 @@
+//#if HAVE_sdl2
 #if !IOS && !ANDROID
 	#define SDL_MAIN_HANDLED
 #else
 	#include "SDL_main.h"
 #endif
-#include "App.h"
+//#endif
+#include "DK/DKApp.h"
 
 int main(int argc, char** argv)
 {
-#if !IOS && !ANDROID
+#if !IOS
 	SDL_SetMainReady();
 #endif
 	DKApp dkapp(argc, argv);

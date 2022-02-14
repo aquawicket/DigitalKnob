@@ -6,6 +6,7 @@
 	#include <boxer/boxer.h>
 #endif
 #include <fstream>
+//#include <debugapi.h> //OutputDebugString()
 
 bool DKLog::log_fatal = true;      //console.assert()
 bool DKLog::log_errors = true;     //console.error()
@@ -13,7 +14,7 @@ bool DKLog::log_warnings = true;   //console.warn()
 bool DKLog::log_info = true;       //console.info()
 bool DKLog::log_debug = false;     //console.debug()
 bool DKLog::log_verbose = false;   //console.verbose() //extra
-bool DKLog::log_msvc = false;
+bool DKLog::log_msvc = false;      //OutputDebugString()
 bool DKLog::log_xcode = false;
 bool DKLog::log_file = true;
 bool DKLog::log_gui_console = true;
@@ -257,15 +258,17 @@ bool DKLog::Log(const char* file, int line, const char* func, const DKString& in
 	}
 
 	// // // IDE Software Output
-#if(log_msvc)
-	OutputDebugString(string.c_str()); //Output to Visual Studio
-#endif
+	if(log_msvc){
+		//OutputDebugString(string.c_str()); //Output to Visual Studio
+	}
 #if defined(MAC) || defined (IOS)
 	//if(log_xcode)
 	//	NSLog(@"%s", string.c_str()); //Output to XCode
 #endif
 #ifdef ANDROID
 	// https://developer.android.com/ndk/reference/group/logging
+
+
 	if(lvl == DK_FATAL) //Android Studio 
 		__android_log_write(ANDROID_LOG_FATAL, "DKAndroid", output.c_str());
 	else if(lvl == DK_ERROR) //Android Studio 
