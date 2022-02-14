@@ -979,7 +979,7 @@ if(ANDROID)
 		
 	# push assets to device
 	message(STATUS "${CMAKE_BINARY_DIR}/___CopyAssets.cmd")
-	DKCOMMAND(${CMAKE_BINARY_DIR}/___CopyAssets.cmd)
+	DKCOMMAND(${CMAKE_BINARY_DIR}/___CopyAssets.cmd & exit)
 	####################### Do Post Build Stuff #######################
 endif()
 
