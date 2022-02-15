@@ -340,7 +340,7 @@ function DKBuild_DoResults(){
 	
 	const app_path = DKBuild_FindAppPath(APP)
 	
-	////// WIN32 /////
+	////// WIN x86 /////
 	if(OS === "win32"){
 		DKBuild_ValidateVC2019()
 		CPP_DKFile_MkDir(app_path+OS)
@@ -355,7 +355,7 @@ function DKBuild_DoResults(){
 				return
 	}
 	
-	////// WIN64 /////
+	////// WIN x86_64 /////
 	if(OS === "win64"){
 		DKBuild_ValidateVC2019()
 		CPP_DKFile_MkDir(app_path+OS)
@@ -375,7 +375,7 @@ function DKBuild_DoResults(){
 		//Copy from mac64
 	}
 	
-	///// MAC64 ////
+	///// MAC x86_64 ////
 	if(OS === "mac64"){
 		DKBuild_ValidateXcode()
 		CPP_DKFile_MkDir(app_path+OS)
@@ -478,7 +478,7 @@ function DKBuild_DoResults(){
 		}
 	}
 	
-	////// ANDROID32 //////
+	////// ANDROID armeabi-v7a //////
 	if(OS === "android32"){
 		DKBuild_ValidateNDK()
 		DKBuild_ValidateVC2019()
@@ -505,21 +505,13 @@ function DKBuild_DoResults(){
 		if(CPP_DK_Execute(app_path+OS+"/gradlew --project-dir "+app_path+OS+" --info clean build").error)
 			return
 		
-		/*
-		if(TYPE === "Debug" || TYPE === "ALL"){
-			CPP_DKFile_MkDir(app_path+"android32/Debug")
-			CPP_DKFile_ChDir(app_path+"android32/Debug")
-			//CPP_DK_Execute(ANDROIDNDK+"/ndk-build.cmd NDK_DEBUG=1 NDKLOG=1")
-		}
-		if(TYPE === "Release" || TYPE === "ALL"){
-			CPP_DKFile_MkDir(app_path+"android32/Release")
-			CPP_DKFile_ChDir(app_path+"android32/Release")
-			//CPP_DK_Execute(ANDROIDNDK+"/ndk-build.cmd NDK_DEBUG=0 NDKLOG=1")
-		}
-		*/
+		if(CPP_DK_Execute(app_path+OS+"/___Install.cmd").error)
+			return
+		
+		
 	}
 	
-	////// ANDROID64 /////
+	////// ANDROID6 arm64-v8a/////
 	if(OS === "android64"){
 		DKBuild_ValidateNDK()
 		DKBuild_ValidateVC2019()
@@ -545,19 +537,9 @@ function DKBuild_DoResults(){
 		
 		if(CPP_DK_Execute(app_path+OS+"/gradlew --project-dir "+app_path+OS+" --info clean build").error)
 			return
-
-		/*
-		if(TYPE === "Debug" || TYPE === "ALL"){
-			CPP_DKFile_MkDir(app_path+"android64/Debug")
-			CPP_DKFile_ChDir(app_path+"android64/Debug")
-			//CPP_DK_Execute(ANDROIDNDK+"/ndk-build.cmd NDK_DEBUG=1 NDKLOG=1")
-		}
-		if(TYPE === "Release" || TYPE === "ALL"){
-			CPP_DKFile_MkDir(app_path+"android64/Release")
-			CPP_DKFile_ChDir(app_path+"android64/Release")
-			//CPP_DK_Execute(ANDROIDNDK+"/ndk-build.cmd NDK_DEBUG=0 NDKLOG=1")
-		}
-		*/
+		
+		if(CPP_DK_Execute(app_path+OS+"/___Install.cmd").error)
+			return
 	}
 	
 	
