@@ -158,6 +158,7 @@ function DKGit_MergeSquashAndPush(branch){
 	CPP_DK_Execute(GIT + " checkout master")
 	CPP_DK_Execute(GIT + " pull origin master")
 	CPP_DK_Execute(GIT + " merge --squash "+branch)
+	CPP_DK_Execute(GIT + " commit -a -m \"Merged Development Branch in to Master\"")
 	CPP_DK_Execute(GIT + " push origin master")
 }
 
