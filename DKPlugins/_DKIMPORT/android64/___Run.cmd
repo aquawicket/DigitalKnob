@@ -7,8 +7,8 @@ set "APP_PATH=%APP_ROOT%app/src/main"
 echo 1. Set and map all variables and environment variables
 :: Build architecture and type
 set "BUILD_TYPE=Debug"
-set "ABI=armeabi-v7a"
-::set "ABI=arm64-v8a"
+::set "ABI=armeabi-v7a"
+set "ABI=arm64-v8a"
 
 :: Choose a C++ Compilers setting
 :: 		options: CMAKE, NDK, CLANG    or GRADLE: must be enabled in build.gradle
