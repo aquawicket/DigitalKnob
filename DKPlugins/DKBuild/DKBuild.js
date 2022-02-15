@@ -94,6 +94,12 @@ function DKBuild_init(){
 	
 	DKDOWNLOAD = DIGITALKNOB+"Download"
 	CPP_DKFile_MkDir(DKDOWNLOAD) //FIXME: code DKCurl to create directories automatically
+	
+	/* Error handling example 
+	const rtn = CPP_DK_Execute("cd TestError")
+	if(rtn.error)
+		console.error("\n\n "+rtn.command+" \n   ERROR:("+rtn.code+"): "+rtn.error)
+	*/
 }
 
 function DKBuild_end(){

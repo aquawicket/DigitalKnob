@@ -419,24 +419,36 @@ int DKDuktapeJS::DumpError(duk_context* ctx){
 	return 1;
 }
 
+/*//////////////////////////
+    Javascript Example:
+
+	const rtn = CPP_DK_Execute("cd TestError")
+	if(rtn.error)
+		console.error("\n\n "+rtn.command+" \n   ERROR:("+rtn.code+"): "+rtn.error)
+*/
 int DKDuktapeJS::Execute(duk_context* ctx){
 	DKString command = duk_require_string(ctx, 0);
 	DKString mode = "r"; //default
 	if (duk_is_string(ctx, 1))
 		mode = duk_to_string(ctx, 1);
-	DKString stdouterr;
-	int rtncode;
-	if(!DKUtil::Execute(command, mode, stdouterr, rtncode))
+	DKString message;
+	int return_code;
+	if(!DKUtil::Execute(command, mode, message, return_code))
 		return DKERROR("DKUtil::Execute() failed");
-	if(rtncode == 0){
-		duk_push_string(ctx, stdouterr.c_str());
+	if(return_code == 0){
+		duk_push_string(ctx, message.c_str());
 	}
 	else{
-		// jsonRetrun = "{'rtncode':0, 'stdouterr':'the stdouterr string'}"
-		DKString jsonReturn = "{'rtncode':"+toString(rtncode)+",'stdouterr':"+stdouterr+"}";
-		duk_push_string(ctx, jsonReturn.c_str());
-		//DKERROR(jsonReturn + "\n");
-		//DKERROR("CPP_DK_EXECUTE() now returns json on rtncode error. Adjust your return variable accordingly\n");
+		DKERROR("\n    DKUtil::Execute("+command+") ->\n\n        ERROR:("+toString(return_code)+")  "+message+"\n");
+		//create json object: { "command":"string", "error":"string", "code":int }
+		duk_idx_t obj_idx;
+		obj_idx = duk_push_object(ctx);
+		duk_push_string(ctx, command.c_str());
+		duk_put_prop_string(ctx, obj_idx, "command");
+		duk_push_string(ctx, message.c_str());
+		duk_put_prop_string(ctx, obj_idx, "error");
+		duk_push_int(ctx, return_code);
+		duk_put_prop_string(ctx, obj_idx, "code");
 	}
 	return 1;
 }
