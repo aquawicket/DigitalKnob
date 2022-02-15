@@ -162,7 +162,6 @@ function DKGit_MergeSquashAndPush(branch){
 	CPP_DK_Execute(GIT + " push origin master")
 }
 
-
 function DKGit_ListCommits(){
 	CPP_DK_Execute(GIT + " log --oneline")
 }
