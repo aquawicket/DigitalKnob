@@ -1669,6 +1669,7 @@ function(DKDEPEND name)
 		return()  #library is already in the list
 	endif()
 	
+	DKENABLE(${name})
 	DKRUNDEPENDS(${name}) # strip everything from the file except if() else() elseif() endif() and DKDEPEND() before sorting.
 	# else()
 	#	list(FIND dkdepend_list "${name}" index)
