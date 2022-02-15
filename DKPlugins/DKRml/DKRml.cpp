@@ -1,13 +1,15 @@
 #include "DK/stdafx.h"
 #ifdef HAVE_rmlui_debugger
-#include <RmlUi/Debugger.h>
+#	include <RmlUi/Debugger.h>
 #endif
 #include "DKRml/DKRml.h"
 #include "DKWindow/DKWindow.h"
-#include "DKCurl/DKCurl.h"
 #include "DKDuktape/DKDuktape.h"
 #include "DKXml/DKXml.h"
 #include "DKRml/DKRmlHeadInstancer.h"
+#ifdef HAVE_DKCurl
+#	include "DKCurl/DKCurl.h"
+#endif
 
 #include <RmlUi/Core/StreamMemory.h>
 #include <Core/PluginRegistry.h>
@@ -227,7 +229,7 @@ bool DKRml::LoadHtml(const DKString& html){
 	document->Show();
 #ifdef ANDROID
 	//We have to make sure the fonts are loaded on ANDROID
-	LoadFonts();
+	LoadFonts(DKFile::local_assets);
 #endif
 	return true;
 }
@@ -255,7 +257,9 @@ bool DKRml::LoadUrl(const DKString& url){
 	_path = _url.substr(0,found+1);
 	//DKWARN("DKRml::LoadUrl(): last / at "+toString(found)+"\n");
 	DKINFO("DKRml::LoadUrl(): _path = "+_path+"\n");
+	
 	DKString html;
+#ifdef HAVE_DKCurl
 	if(has(_url, "http://") || has(_url, "https://")){
 		DKClass::DKCreate("DKCurl");
 		if(!DKCurl::Get()->HttpFileExists(_url))
@@ -263,7 +267,8 @@ bool DKRml::LoadUrl(const DKString& url){
 		if(!DKCurl::Get()->HttpToString(_url, html))
 			return DKERROR("Could not get html from url "+_url+"\n");
 	}
-	else{
+#endif
+	if (!has(_url, "http://") && !has(_url, "https://")) {
 		if(!DKFile::FileToString(_url, html))
 			return DKERROR("DKFile::FileToString failed on "+_url+"\n");
 	}
@@ -583,7 +588,9 @@ DKString DKRml::elementToAddress(Rml::Element* element){
 		ss << "document";
 	else if (element == DKRml::Get()->document) {
 		//TEST: Let's just test if we ever hear anything from this one
+#ifdef HAVE_Throw
 		throw DKERROR("!!!! element = DKRml::Get()->document  !!!!");
+#endif
 		ss << "document";
 	}
 	else {
