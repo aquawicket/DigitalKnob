@@ -1,6 +1,6 @@
 #include "DK/stdafx.h"
 #include "SDL_syswm.h"
-#include "DK/DKAndroid.h"
+//#include "DK/DKAndroid.h"
 #include "DK/DKFile.h"
 #include "DKSDLWindow/DKSDLWindow.h"
 
@@ -97,6 +97,7 @@ bool DKSDLWindow::Init() {
     DKString result;
 #if defined(ANDROID) || defined(IOS)
     DKINFO("Creating SDLWindow for mobile device\n");
+    
     SDL_SetHint(SDL_HINT_RENDER_DRIVER, "opengles");
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_ES);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 1);
@@ -108,9 +109,31 @@ bool DKSDLWindow::Init() {
     DKINFO("DKSDLWindow Width: " + toString(width) + " Height: " + toString(height) + "\n");
     if(SDL_CreateWindowAndRenderer(width, height, SDL_WINDOW_RESIZABLE, &window, &renderer) < 0)
         return DKERROR("SDL_CreateWindow Error: " + DKString(SDL_GetError()) + "\n");
-	//GLenum err = glewInit();
-	//if (err != GLEW_OK)
-	//	DKERROR("GLEW ERROR: "+glewGetErrorString(err)+"\n");
+    
+    /*
+    //SDL_SetHint(SDL_HINT_VIDEO_MINIMIZE_ON_FOCUS_LOSS, "0");
+    width = DKAndroid::android_width;
+    height = DKAndroid::android_height;
+    SDL_Window* sdlWindow = SDL_CreateWindow("RmlUi SDL2 with SDL_Renderer", 0, 0, width, height, SDL_WINDOW_RESIZABLE);
+    if (!sdlWindow)
+        printf("SDL_Window* invalid: %s\n", SDL_GetError());
+    window = sdlWindow;
+
+    SDL_Renderer* sdlRenderer = SDL_CreateRenderer(sdlWindow, -1, SDL_RENDERER_ACCELERATED);// | SDL_RENDERER_PRESENTVSYNC);
+    if (!sdlRenderer)
+        printf("SDL renderer invalid: %s\n", SDL_GetError());
+    renderer = sdlRenderer;
+
+    SDL_RendererInfo sdlRenderinfo;
+    if (SDL_GetRendererInfo(renderer, &sdlRenderinfo) < 0)
+        printf("SDL_GetRendererInfo() failed: %s\n", SDL_GetError());
+
+    // Print the SDL_Render name, and display it in the mTitle bar
+    DKString rendererName = sdlRenderinfo.name;
+    printf("SDL_Renderer Driver = %s\n", rendererName.c_str());
+    mTitle = DKString("SDL_Renderer RmlUi - " + rendererName);
+    SDL_SetWindowTitle(sdlWindow, mTitle.c_str());
+    */
 #endif
 #if !defined(ANDROID) && !defined(IOS)
     DKINFO("Creating SDLWindow for Desktop\n");
@@ -547,22 +570,19 @@ bool DKSDLWindow::Windowed(const void* input, void* output) {
 }
 
 bool DKSDLWindow::drawBackground(SDL_Renderer *renderer, int w, int h){
-    SDL_Color col[2] = {  { 0x66, 0x66, 0x66, 0xff }, { 0x99, 0x99, 0x99, 0xff }, };
+    SDL_Color sdlColor[2] = { { 100, 100, 100, 255 }, { 150, 150, 150, 255 } };
+    SDL_Rect sdlRect({ 0,0,8,8 });
     int i, x, y;
-    SDL_Rect rect;
-    rect.w = 20;
-    rect.h = 20;
-    for (y = 0; y < h; y += rect.h) {
-        for (x = 0; x < w; x += rect.w) {
-            /* use an 20x20 checkerboard pattern */
+    for (y = 0; y < h; y += sdlRect.h) {
+        for (x = 0; x < w; x += sdlRect.w) {
             i = (((x ^ y) >> 3) & 1);
-            SDL_SetRenderDrawColor(renderer, col[i].r, col[i].g, col[i].b, col[i].a);
-            rect.x = x;
-            rect.y = y;
-            SDL_RenderFillRect(renderer, &rect);
+            sdlRect.x = x;
+            sdlRect.y = y;
+            SDL_SetRenderDrawColor(renderer, sdlColor[i].r, sdlColor[i].g, sdlColor[i].b, sdlColor[i].a);
+            SDL_RenderFillRect(renderer, &sdlRect);
         }
     }
-	return true;
+    return true;
 }
 
 void DKSDLWindow::Process() {

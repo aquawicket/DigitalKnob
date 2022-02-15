@@ -1,0 +1,174 @@
+clear |
+adb devices |
+adb shell |
+
+
+pm uninstall -k --user 0 aetherpal.device ' 
+pm uninstall -k --user 0 android.hotwordenrollment.okgoogle
+pm uninstall -k --user 0 android.mms
+pm uninstall -k --user 0 android.mms.service
+pm uninstall -k --user 0 android.printspooler
+pm uninstall -k --user 0 android.providers.downloads.ui
+pm uninstall -k --user 0 android.providers.partnerbookmarks
+pm uninstall -k --user 0 android.sharedstoragebackup
+pm uninstall -k --user 0 android.statementservice
+pm uninstall -k --user 0 android.stk
+pm uninstall -k --user 0 android.vpndialogs
+pm uninstall -k --user 0 android.wallpaper.livepicker
+pm uninstall -k --user 0 android.wallpaperbackup
+pm uninstall -k --user 0 android.wallpapercropper
+pm uninstall -k --user 0 asurion.android.verizon.vms
+pm uninstall -k --user 0 audible.application
+pm uninstall -k --user 0 bleacherreport.android.teamstream
+pm uninstall -k --user 0 boxer.app
+pm uninstall -k --user 0 cnn.mobile.android.phone
+pm uninstall -k --user 0 cnn.mobile.android.phone.edgepanel
+pm uninstall -k --user 0 com.LogiaGroup.LogiaDeck
+pm uninstall -k --user 0 com.customermobile.preload.vzw
+pm uninstall -k --user 0 com.samsung.android.app.tips
+pm uninstall -k --user 0 com.samsung.vzwapiservice
+pm uninstall -k --user 0 com.securityandprivacy.android.verizon.vms
+pm uninstall -k --user 0 com.telecomsys.directedsms.android.SCG
+pm uninstall -k --user 0 com.vcast.mediamanager
+pm uninstall -k --user 0 com.verizon.mips.services
+pm uninstall -k --user 0 com.verizon.obdm_permissions
+pm uninstall -k --user 0 com.verizon.onetalk.dialer
+pm uninstall -k --user 0 com.vzw.apnlib
+pm uninstall -k --user 0 com.vzw.ecid
+pm uninstall -k --user 0 com.vzw.hss.myverizon
+pm uninstall -k --user 0 drivemode
+pm uninstall -k --user 0 dsi.ant.plugins.antplus
+pm uninstall -k --user 0 dsi.ant.sample.acquirechannels
+pm uninstall -k --user 0 dsi.ant.service.socket
+pm uninstall -k --user 0 enhance.gameservice
+pm uninstall -k --user 0 facebook.appmanager
+pm uninstall -k --user 0 facebook.katana
+pm uninstall -k --user 0 facebook.services
+pm uninstall -k --user 0 facebook.system
+pm uninstall -k --user 0 foxnextgames.m3
+pm uninstall -k --user 0 gocro.smartnews.android
+pm uninstall -k --user 0 google.android.apps.docs
+pm uninstall -k --user 0 google.android.apps.photos
+pm uninstall -k --user 0 google.android.apps.tachyon
+pm uninstall -k --user 0 google.android.apps.wellbeing
+pm uninstall -k --user 0 google.android.dialer
+pm uninstall -k --user 0 google.android.feedback
+pm uninstall -k --user 0 google.android.gm
+pm uninstall -k --user 0 google.android.googlequicksearchbox
+pm uninstall -k --user 0 google.android.inputmethod.latin
+pm uninstall -k --user 0 google.android.marvin.talkback
+pm uninstall -k --user 0 google.android.music
+pm uninstall -k --user 0 google.android.printservice.recommendation
+pm uninstall -k --user 0 google.android.tts
+pm uninstall -k --user 0 google.android.videos
+pm uninstall -k --user 0 google.ar.lens
+pm uninstall -k --user 0 google.vr.vrcore
+pm uninstall -k --user 0 greatbigstory.greatbigstory
+pm uninstall -k --user 0 gsn.android.tripeaks
+pm uninstall -k --user 0 hunge.app
+pm uninstall -k --user 0 innogames.foeandroid
+pm uninstall -k --user 0 linkedin.android
+pm uninstall -k --user 0 microsoft.skydrive
+pm uninstall -k --user 0 mobeam.barcodeService
+pm uninstall -k --user 0 motricity.verizon.ssodownloadable
+pm uninstall -k --user 0 pandora.android
+pm uninstall -k --user 0 playstudios.popslots
+pm uninstall -k --user 0 samsung.android.app.aodservice
+pm uninstall -k --user 0 samsung.android.app.appsedge
+pm uninstall -k --user 0 samsung.android.app.camera.sticker.facearavatar.preload
+pm uninstall -k --user 0 samsung.android.app.contacts
+pm uninstall -k --user 0 samsung.android.app.dressroom
+pm uninstall -k --user 0 samsung.android.app.ledbackcover
+pm uninstall -k --user 0 samsung.android.app.routines
+pm uninstall -k --user 0 samsung.android.app.sbrowseredge
+pm uninstall -k --user 0 samsung.android.app.social
+pm uninstall -k --user 0 samsung.android.app.spage
+pm uninstall -k --user 0 samsung.android.app.vrsetupwizardstub
+pm uninstall -k --user 0 samsung.android.app.watchmanagerstub
+pm uninstall -k --user 0 samsung.android.ardrawing
+pm uninstall -k --user 0 samsung.android.authfw
+pm uninstall -k --user 0 samsung.android.bixby.agent
+pm uninstall -k --user 0 samsung.android.bixby.agent.dummy
+pm uninstall -k --user 0 samsung.android.bixby.service
+pm uninstall -k --user 0 samsung.android.bixby.wakeup
+pm uninstall -k --user 0 samsung.android.bixbyvision.framework
+pm uninstall -k --user 0 samsung.android.calendar
+pm uninstall -k --user 0 samsung.android.da.daagent
+pm uninstall -k --user 0 samsung.android.drivelink.stub
+pm uninstall -k --user 0 samsung.android.email.provider
+pm uninstall -k --user 0 samsung.android.game.gamehome
+pm uninstall -k --user 0 samsung.android.game.gametools
+pm uninstall -k --user 0 samsung.android.game.gos
+pm uninstall -k --user 0 samsung.android.gametuner.thin
+pm uninstall -k --user 0 samsung.android.hmt.vrshell
+pm uninstall -k --user 0 samsung.android.hmt.vrsvc
+pm uninstall -k --user 0 samsung.android.kidsinstaller
+pm uninstall -k --user 0 samsung.android.mateagent
+pm uninstall -k --user 0 samsung.android.oneconnect
+pm uninstall -k --user 0 samsung.android.samsungpass
+pm uninstall -k --user 0 samsung.android.samsungpassautofill
+pm uninstall -k --user 0 samsung.android.scloud
+pm uninstall -k --user 0 samsung.android.sdk.handwriting
+pm uninstall -k --user 0 samsung.android.sdk.professionalaudio.utility.jammonitor
+pm uninstall -k --user 0 samsung.android.service.aircommand
+pm uninstall -k --user 0 samsung.android.service.livedrawing
+pm uninstall -k --user 0 samsung.android.service.peoplestripe
+pm uninstall -k --user 0 samsung.android.spay
+pm uninstall -k --user 0 samsung.android.spayfw
+pm uninstall -k --user 0 samsung.android.svoiceime
+pm uninstall -k --user 0 samsung.android.universalswitch
+pm uninstall -k --user 0 samsung.android.visioncloudagent
+pm uninstall -k --user 0 samsung.android.visionintelligence
+pm uninstall -k --user 0 samsung.android.visionintelligence
+pm uninstall -k --user 0 samsung.android.voc
+pm uninstall -k --user 0 samsung.android.wellbeing
+pm uninstall -k --user 0 samsung.android.widgetapp.yahooedge.finance
+pm uninstall -k --user 0 samsung.android.widgetapp.yahooedge.sport
+pm uninstall -k --user 0 samsung.app.highlightplayer
+pm uninstall -k --user 0 samsung.desktopsystemui
+pm uninstall -k --user 0 samsung.ecomm.global
+pm uninstall -k --user 0 samsung.safetyinformation
+pm uninstall -k --user 0 samsung.storyservice
+pm uninstall -k --user 0 samsung.vmmhux
+pm uninstall -k --user 0 samsung.vvm
+pm uninstall -k --user 0 sec.android.app.chromecustomizations
+pm uninstall -k --user 0 sec.android.app.desktoplauncher
+pm uninstall -k --user 0 sec.android.app.dexonpc
+pm uninstall -k --user 0 sec.android.app.kidshome
+pm uninstall -k --user 0 sec.android.app.popupcalculator
+pm uninstall -k --user 0 sec.android.app.sbrowser
+pm uninstall -k --user 0 sec.android.cover.ledcover
+pm uninstall -k --user 0 sec.android.daemonapp
+pm uninstall -k --user 0 sec.android.desktopmode.uiservice
+pm uninstall -k --user 0 sec.android.easyMover.Agent
+pm uninstall -k --user 0 sec.android.easyonehand
+pm uninstall -k --user 0 sec.android.splitsound
+pm uninstall -k --user 0 sec.android.widgetapp.samsungapps
+pm uninstall -k --user 0 sec.penup
+pm uninstall -k --user 0 synchronoss.dcs.att.r2g
+pm uninstall -k --user 0 vcast.mediamanager
+pm uninstall -k --user 0 vzw.hs.android.modlite
+pm uninstall -k --user 0 vzw.hss.myverizon
+pm uninstall -k --user 0 wavemarket.waplauncher
+pm uninstall -k --user 0 wb.goog.dcuniverse
+pm uninstall -k --user 0 wb.goog.got.conquest
+pm uninstall -k --user 0 wsomacp
+
+
+
+### SENSITIVE ###
+dsi.ant.server
+samsung.android.beaconmanager
+
+
+### KEEP ###
+sec.android.app.voicenote
+samsung.android.messaging
+google.android.youtube | Youtube
+google.android.apps.maps
+android.deskclock
+android.chrome
+android.browser
+google.android.syncadapters.calendar
+android.calendar
+

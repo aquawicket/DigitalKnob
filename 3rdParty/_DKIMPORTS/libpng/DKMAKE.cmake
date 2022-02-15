@@ -1,20 +1,30 @@
+# https://github.com/glennrp/libpng
 # http://www.libpng.org/pub/png/libpng.html
 #
 # https://sourceforge.net/projects/libpng/files/libpng17/1.7.0-oldbetas/libpng-1.7.0beta34.tar.gz
+# https://github.com/glennrp/libpng/archive/refs/tags/v1.6.35.zip
 
 DKDEPEND(zlib)
 
 ### VERSION ###
+#DKSET(PNG_MAJOR 1)
+#DKSET(PNG_MINOR 7)
+#DKSET(PNG_BUILD 0beta34)
+#DKSET(PNG_VERSION ${PNG_MAJOR}.${PNG_MINOR}.${PNG_BUILD})
+#DKSET(PNG_NAME libpng-${PNG_VERSION})
+#DKSET(PNG_DL https://sourceforge.net/projects/libpng/files/libpng${PNG_MAJOR}${PNG_MINOR}/${PNG_MAJOR}.${PNG_MINOR}.0-oldbetas/${PNG_NAME}.tar.gz)
+
+
 DKSET(PNG_MAJOR 1)
-DKSET(PNG_MINOR 7)
-DKSET(PNG_BUILD 0beta34)
+DKSET(PNG_MINOR 6)
+DKSET(PNG_BUILD 35)
 DKSET(PNG_VERSION ${PNG_MAJOR}.${PNG_MINOR}.${PNG_BUILD})
 DKSET(PNG_NAME libpng-${PNG_VERSION})
-DKSET(PNG_DL https://sourceforge.net/projects/libpng/files/libpng${PNG_MAJOR}${PNG_MINOR}/${PNG_MAJOR}.${PNG_MINOR}.0-oldbetas/${PNG_NAME}.tar.gz)
-DKSET(PNG ${3RDPARTY}/${PNG_NAME})
+DKSET(PNG_DL https://github.com/glennrp/libpng/archive/refs/tags/v1.6.35.zip)
 
 
 ### INSTALL ###
+DKSET(PNG ${3RDPARTY}/${PNG_NAME})
 DKINSTALL(${PNG_DL} libpng ${PNG})
 
 
@@ -32,8 +42,8 @@ LINUX_DEBUG_DKLIB(${PNG}/${OS}/${DEBUG_DIR}/libpng${PNG_MAJOR}${PNG_MINOR}d.a)
 LINUX_RELEASE_DKLIB(${PNG}/${OS}/${RELEASE_DIR}/libpng${PNG_MAJOR}${PNG_MINOR}.a)
 RASPBERRY_DEBUG_DKLIB(${PNG}/${OS}/${DEBUG_DIR}/libpng${PNG_MAJOR}${PNG_MINOR}d.a)
 RASPBERRY_RELEASE_DKLIB(${PNG}/${OS}/${RELEASE_DIR}/libpng${PNG_MAJOR}${PNG_MINOR}.a)
-ANDROID_DEBUG_DKLIB(${PNG}/${OS}/${DEBUG_DIR}/obj/local/armeabi-v7a/libpng.a)
-ANDROID_RELEASE_DKLIB(${PNG}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/libpng.a)
+ANDROID_DEBUG_DKLIB(${PNG}/${OS}/${DEBUG_DIR}/libpng${PNG_MAJOR}${PNG_MINOR}d.a)
+ANDROID_RELEASE_DKLIB(${PNG}/${OS}/${RELEASE_DIR}/libpng${PNG_MAJOR}${PNG_MINOR}.a)
 
 
 ### 3RDPARTY LINK ###
@@ -48,10 +58,17 @@ ANDROID_DKSET(PNG_CMAKE -DPNG_INCLUDE_DIR=${PNG} -DPNG_INCLUDE_DIR2=${PNG}/${OS}
 DKSETPATH(${PNG}/${BUILD_DIR})
 DKQCOMMAND(${DKCMAKE_BUILD} -DPNG_STATIC=ON -DPNG_SHARED=OFF -DPNG_TESTS=OFF ${ZLIB_CMAKE} ${PNG})
 
-WIN_VS(${PNG_NAME} libpng.sln png${PNG_MAJOR}${PNG_MINOR}_static)
-MAC_XCODE(${PNG_NAME} png${PNG_MAJOR}${PNG_MINOR}_static)
-IOS_XCODE(${PNG_NAME} png${PNG_MAJOR}${PNG_MINOR}_static)
-IOSSIM_XCODE(${PNG_NAME} png${PNG_MAJOR}${PNG_MINOR}_static)
-LINUX_DKQCOMMAND(make png${PNG_MAJOR}${PNG_MINOR}_static)
-RASPBERRY_DKQCOMMAND(make png${PNG_MAJOR}${PNG_MINOR}_static)
-ANDROID_VS(${PNG_NAME} libpng.sln png${PNG_MAJOR}${PNG_MINOR}_static)
+
+if(PNG_MINOR LESS 7)
+	DKSET(PNG_VCPROJ png_static)
+else()
+	DKSET(PNG_VCPROJ png${PNG_MAJOR}${PNG_MINOR}_static)
+endif()
+
+WIN_VS(${PNG_NAME} libpng.sln ${PNG_VCPROJ})
+MAC_XCODE(${PNG_NAME} ${PNG_VCPROJ})
+IOS_XCODE(${PNG_NAME} ${PNG_VCPROJ})
+IOSSIM_XCODE(${PNG_NAME} ${PNG_VCPROJ})
+LINUX_DKQCOMMAND(make ${PNG_VCPROJ})
+RASPBERRY_DKQCOMMAND(make ${PNG_VCPROJ})
+ANDROID_VS(${PNG_NAME} libpng.sln ${PNG_VCPROJ})

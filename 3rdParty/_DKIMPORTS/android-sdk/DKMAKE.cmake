@@ -9,13 +9,16 @@ DKSETENV("ANDROID_HOME" ${ANDROIDSDK})
 DKSETENV("VS_AndroidHome" ${ANDROIDSDK})
 
 ### DEPENDS ###
-DKDEPEND(jdk)
+DKDEPEND(jdk8)
 DKDEPEND(apache-ant)
+DKDEPEND(android-cmdline-tools)
 DKDEPEND(android-ndk)
-#DKDEPEND(android-cmdline-tools)
 DKDEPEND(android-platforms)
 DKDEPEND(android-sources)
 #DKDEPEND(android-system-images)
 DKDEPEND(android-platform-tools)
 DKDEPEND(android-build-tools)
 DKDEPEND(android-sdk-tools)
+DKDEPEND(android-cmake)
+
+DKCOPY(${DKIMPORTS}/android-sdk/SignLicenses.cmd ${ANDROIDSDK}/SignLicenses.cmd false)

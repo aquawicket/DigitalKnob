@@ -1,5 +1,5 @@
 @echo off
-if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*) & exit )
+%dkbatch%
 setlocal ENABLEDELAYEDEXPANSION
 
 set "string=Windows Push Notifications User Service"

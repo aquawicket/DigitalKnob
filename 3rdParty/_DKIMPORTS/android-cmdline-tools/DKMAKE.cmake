@@ -16,7 +16,7 @@ endif()
 #https://dl.google.com/android/repository/commandlinetools-win-7583922_latest.zip
 
 ### DEPENDS ###
-DKDEPEND(jdk)
+#DKDEPEND(jdk8)
 
 ### VERSION ###
 DKSET(ANDROIDTOOLS ${3RDPARTY}/android-cmdline-tools)
@@ -29,6 +29,7 @@ LINUX_HOST_DKSET(ANDROIDTOOLS_DL https://dl.google.com/android/repository/comman
 ### INSTALL ###
 DKINSTALL(${ANDROIDTOOLS_DL} android-cmdline-tools ${ANDROIDTOOLS})
 
+return()
 if(WIN_HOST)
 	DKEXECUTE_PROCESS(sdkmanager --sdk_root=${ANDROIDSDK} WORKING_DIRECTORY ${ANDROIDTOOLS}/bin)
 	if(NOT EXISTS ${ANDROIDSDK}/build-tools/${ANDROIDBUILDTOOLS_VERSION})

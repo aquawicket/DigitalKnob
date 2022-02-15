@@ -8,6 +8,8 @@ endif()
 # https://dl.google.com/android/repository/sdk-tools-darwin-4333796.zip
 # https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip
 
+### DEPENDS ###
+#DKDEPEND(JDK)
 
 ### VERSION ###
 DKSET(ANDROIDSDKTOOLS_VERSION 26.2.0) #revision

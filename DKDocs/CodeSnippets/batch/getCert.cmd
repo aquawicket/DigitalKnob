@@ -1,5 +1,5 @@
 @echo off
-if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*) & exit )
+%dkbatch%
 
 set openssl="C:\Users\aquawicket\digitalknob\DK\3rdParty\openssl-1.0.2h-vs2015\bin\opensslMT"
 set certs="C:\Users\aquawicket\digitalknob\DK\3rdParty\openjdk-9.0.4_windows-x64_bin\lib\security"

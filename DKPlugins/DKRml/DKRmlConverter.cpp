@@ -1,11 +1,13 @@
 #include "DK/stdafx.h"
 #include "DKRmlConverter.h"
 #include "DK/DKLog.h"
-#include "DKCurl/DKCurl.h"
+#ifdef HAVE_DKCurl
+	#include "DKCurl/DKCurl.h"
+#endif
 #include "DKDuktape/DKDuktape.h"
 #include "DKRml/DKRml.h"
 #include "DKXml/DKXml.h"
-#ifdef USE_tidy_html5
+#ifdef HAVE_tidy_html5
 	#include "tidy.h"
 	#include "tidybuffio.h"
 #endif
@@ -255,6 +257,7 @@ bool DKRmlConverter::PostProcess(Rml::Element* element) {
 		if(!src.empty()){
 			if(has(processed, src))
 				continue;
+#ifdef HAVE_DKCurl
 			if(has(path, "http://")){
 				DKString js;
 				DKClass::DKCreate("DKCurl");
@@ -265,7 +268,8 @@ bool DKRmlConverter::PostProcess(Rml::Element* element) {
 					processed += src+",";
 					DKDuktape::Get()->LoadJSString(path+src, js);
 			}
-			else{
+#endif
+			if(!has(path, "http://")) {
 				processed += src+",";
 				//DKString app = DKRml::Get()->workingPath +src;
 				//DKDuktape::LoadFile(app);

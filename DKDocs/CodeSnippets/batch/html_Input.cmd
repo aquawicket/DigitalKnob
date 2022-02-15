@@ -1,7 +1,7 @@
 <!-- :
 :: PasswordSubmitter.bat
 @echo off
-if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*) & exit )
+%dkbatch%
 setlocal EnableDelayedExpansion
 
 if "%~1" equ "/?" (

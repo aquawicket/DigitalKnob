@@ -1,6 +1,5 @@
 :: Build a Visual Studio 17 2022 installer from 2022.vsconfig file
-@echo off
-if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*) & exit )
+@echo off & %dkbatch%
 
 setlocal enabledelayedexpansion
 

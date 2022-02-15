@@ -1,8 +1,7 @@
+%DKBATCH%
 :: Let's ask the use to type in what they want to build
 :: could be an app, library or anything with a DKMAKE.cmake file
 :: We whould also give the option to list targets as well
-@echo off
-if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*) & exit )
 
 :: get digitalknob paths and install CMake if needed
 set "DIGITALKNOB=C:\Users\%USERNAME%\digitalknob"

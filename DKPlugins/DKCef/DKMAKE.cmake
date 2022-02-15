@@ -1,5 +1,8 @@
 #NOTE: Use ${CMAKE_PROJECT_NAME} to reference the root parent project if needed
 
+if(ANDROID)
+	return()
+endif()
 if(WIN)
 	DKDEPEND(winmm.lib)
 endif()
