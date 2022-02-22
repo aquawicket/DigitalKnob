@@ -1,21 +1,14 @@
-# https://jerryscript.net
 # https://github.com/jerryscript-project/jerryscript
-#
-# https://github.com/jerryscript-project/jerryscript/archive/refs/tags/v2.4.0.zip
-
-### DEPENDS ###
-#DKDEPEND(libname)
+# https://jerryscript.net
 
 
-### VERSION ###
-DKSET(JERRYSCRIPT_VERSION 2.4.0)
-DKSET(JERRYSCRIPT_NAME jerryscript-${JERRYSCRIPT_VERSION})
-DKSET(JERRYSCRIPT_DL https://github.com/jerryscript-project/jerryscript/archive/refs/tags/v${JERRYSCRIPT_VERSION}.zip)
-DKSET(JERRYSCRIPT ${3RDPARTY}/${JERRYSCRIPT_NAME})
 
-
-### INSTALL ###
-DKINSTALL(${JERRYSCRIPT_DL} jerryscript ${JERRYSCRIPT})
+DKIMPORT(https://github.com/jerryscript-project/jerryscript)
+#DKSET(JERRYSCRIPT_VERSION 2.4.0)
+#DKSET(JERRYSCRIPT_NAME jerryscript-${JERRYSCRIPT_VERSION})
+#DKSET(JERRYSCRIPT_DL https://github.com/jerryscript-project/jerryscript/archive/refs/tags/v2.4.0.zip)
+#DKSET(JERRYSCRIPT ${3RDPARTY}/${JERRYSCRIPT_NAME})
+#DKINSTALL(${JERRYSCRIPT_DL} jerryscript ${JERRYSCRIPT})
 
 
 ### LINK ###

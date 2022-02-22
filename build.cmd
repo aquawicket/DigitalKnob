@@ -56,7 +56,7 @@ if NOT exist "%DKPATH%" "%GIT%" clone https://github.com/aquawicket/DigitalKnob.
 ::if NOT "%ERRORLEVEL%" == "0" goto error
 cd "%DKPATH%"
 
-::"%GIT%" checkout -- .
+"%GIT%" checkout -- .
 ::"%GIT%" pull origin master 
 
 "%GIT%" checkout Development
@@ -233,3 +233,4 @@ pause
 
 :end
 ECHO Done
+exit

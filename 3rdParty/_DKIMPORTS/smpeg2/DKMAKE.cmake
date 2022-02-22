@@ -1,18 +1,13 @@
 ## https://www.libsdl.org/projects/smpeg/release/smpeg2-2.0.0.tar.gz
 
-### DEPENDS ###
-DKDEPEND(sdl2)
+DKDEPEND(sdl)
 
 
-### VERSION ###
 DKSET(SMPEG2_VERSION 2.0.0)
 DKSET(SMPEG2_DL https://www.libsdl.org/projects/smpeg/release/smpeg2-2.0.0.tar.gz)
-
-
-### INSTALL ###
 DKSET(SMPEG2_NAME smpeg2-${SMPEG2_VERSION})
 DKINSTALL(${SMPEG2_DL} smpeg2 ${SMPEG2})
-DKSET(SMPEG2 ${3RDPARTY}/${SMPEG2_NAME})
+DKSET(SMPEG2 ${3RDPARTY}/${SMPEG2_NAME} PATCH)
 
 
 ### DKPLUGINS LINK ###

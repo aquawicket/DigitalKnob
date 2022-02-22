@@ -1,4 +1,4 @@
-@echo off & %dkbatch%
+%dkbatch%
 
 set "Folder=openjdk-11"
 set "CurrentVersion=11"

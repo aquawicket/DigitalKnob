@@ -1,17 +1,14 @@
+# https://github.com/xiph/flac
 # https://ftp.osuosl.org/pub/xiph/releases/flac/flac-1.3.2-win.zip
 # https://ftp.osuosl.org/pub/xiph/releases/flac/flac-1.3.2.tar.xz
 
 ### DEPENDS ###
 DKDEPEND(nasm)
-DKDEPEND(libogg)
+DKDEPEND(ogg)
 
-### VERSION ###
+#DKIMPORT(https://github.com/xiph/flac)
 DKSET(FLAC_VERSION 1.3.2)
 DKSET(FLAC_DL https://ftp.osuosl.org/pub/xiph/releases/flac/flac-1.3.2.tar.xz)
-
-
-
-### INSTALL ###
 DKSET(FLAC_NAME flac-${FLAC_VERSION})
 DKSET(FLAC ${3RDPARTY}/${FLAC_NAME})
 DKINSTALL(${FLAC_DL} flac ${FLAC})

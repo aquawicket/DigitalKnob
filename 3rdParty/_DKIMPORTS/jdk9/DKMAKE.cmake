@@ -26,12 +26,12 @@ DKINSTALL(${JDK9_DL} jdk9 ${JDK9})
 
 
 ### LINK ###
-DKINCLUDE(${JDK9}/)	
-DKSETENV("JAVA_HOME" ${JDK9})
-DKSETENV("JAVA_VERSION" ${JDK9_VERSION})
-DKSETENV("VS_JavaHome" ${JDK9})
+#DKINCLUDE(${JDK9}/)	
+#DKSETENV("JAVA_HOME" ${JDK9})
+#DKSETENV("JAVA_VERSION" ${JDK9_VERSION})
+#DKSETENV("VS_JavaHome" ${JDK9})
 
 #Add registry entries
-dk_addRegistryKey("HKLM/SOFTWARE/JavaSoft/Java Runtime Environment" "CurrentVersion" "${JDK9_VERSION}")
-dk_addRegistryKey("HKLM/SOFTWARE/JavaSoft/Java Runtime Environment/${JDK9_VERSION}" "JavaHome" "${JDK9}")
-dk_addRegistryKey("HKLM/SOFTWARE/JavaSoft/Java Runtime Environment/${JDK9_VERSION}" "RuntimeLib" "${JDK9}/bin/server/jvm.dll")
+#dk_addRegistryKey("HKLM/SOFTWARE/JavaSoft/Java Runtime Environment" "CurrentVersion" "${JDK9_VERSION}")
+#dk_addRegistryKey("HKLM/SOFTWARE/JavaSoft/Java Runtime Environment/${JDK9_VERSION}" "JavaHome" "${JDK9}")
+#dk_addRegistryKey("HKLM/SOFTWARE/JavaSoft/Java Runtime Environment/${JDK9_VERSION}" "RuntimeLib" "${JDK9}/bin/server/jvm.dll")

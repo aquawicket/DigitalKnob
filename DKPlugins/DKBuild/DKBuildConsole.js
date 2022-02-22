@@ -39,12 +39,14 @@ function DKBuildConsole_end() {
 
 function DKBuildConsole_ChooseUpdate() {
 	console.log("**** Update DigitalKnob ??? ****")
-	console.log("1. Git Update")
-	console.log("2. Git Commit")
-	console.log("R. Reset Apps and Plugins")
-	console.log("X. Reset Everything")
-	console.log("Y. Clear Screen")
-	console.log("Z. Clear cmake cache and .tmp files")
+	console.log("  1:  Git Update")
+	console.log("  2:  Git Commit")
+	console.log("  A:  Reset Apps")
+	console.log("  P:  Reset Plugins")
+	console.log("  T:  Reset 3rdParty")
+	console.log("  X:  Reset Everything")
+	console.log("  Y:  Clear Screen")
+	console.log("  Z:  Clear cmake cache and .tmp files")
 	const assets = CPP_DKAssets_LocalAssets()
 	if(CPP_DKFile_Exists(assets+"cache.txt")){
 		const cache = CPP_DKFile_FileToString(assets+"cache.txt")
@@ -53,32 +55,16 @@ function DKBuildConsole_ChooseUpdate() {
 			console.log("ENTER: "+cache_json.APP+" -> "+cache_json.OS+" -> "+cache_json.TYPE+" -> "+cache_json.LEVEL)
 		}
 	}
-	console.log("0. Back")
-	console.log("ESC. exit")
-	console.log(" Any Other Key To Skip")
+	console.log("  0:  BACK")
+	console.log("esc:  EXIT")
+	console.log("      Any Other Key To Skip")
 	console.log("\n")
-		
+	
+	//Scan Codes - https://docs.microsoft.com/en-us/previous-versions/visualstudio/visual-studio-6.0/aa299374(v=vs.60)?redirectedfrom=MSDN	
 	var key = getch()
 	
 	UPDATE = 1	
 	switch(key){
-		case 48:  // Key_0
-			console.log("-> Back")
-			UPDATE = "";
-			break
-		//Esc
-		case 27:
-			console.log("-> Exit")
-			CPP_DK_Exit()
-			break
-		//Spacebar
-		case 13:
-			console.log("-> Rerunning last configuration")
-			OS = cache_json.OS
-			APP = cache_json.APP
-			TYPE = cache_json.TYPE
-			LEVEL = cache_json.LEVEL
-			break
 		//1 key
 		case 49:
 			console.log("-> Git Update")
@@ -91,20 +77,32 @@ function DKBuildConsole_ChooseUpdate() {
 			CPP_DK_Create("DKGit/DKGit.js")
 			DKGit_GitCommit()
 			break
-		//r key
-		case 114:
-			console.log("-> Reset Apps and Plugins")
+		//A key	
+		case 97:
+			console.log("-> Reset Apps")
 			DKBuild_ResetAppsPlugins()
 			DKGit_GitUpdate()
 			break
-		//x key
+		//P key
+		case 112:
+			console.log("-> Reset Plugins")
+			DKBuild_ResetEverything()
+			DKGit_GitUpdate()
+			break
+		//T key
+		case 116:
+			console.log("-> Reset 3rdParty")
+			DKBuild_ResetEverything()
+			DKGit_GitUpdate()
+			break
+		//X key
 		case 120:
 			console.log("-> Reset Everything")
 			DKBuild_ResetEverything()
 			DKGit_GitUpdate()
 			break
-		//y key	
-		case 121:
+		//C key	
+		case 99:
 			console.log("-> Clear Screen")
 			if(CPP_DK_GetOS() === "Windows"){
 				CPP_DK_System('cls')
@@ -114,10 +112,29 @@ function DKBuildConsole_ChooseUpdate() {
 			}
 			UPDATE = ""
 			break
-		case 122:
+		//S key
+		case 115:
 			DKBuild_ClearCMakeCache()
 			DKBuild_DeleteTmpFiles()
 			UPDATE = ""
+			break
+		//0 key
+		case 48:
+			console.log("-> BACK")
+			UPDATE = "";
+			break
+		//Esc
+		case 27:
+			console.log("-> EXIT")
+			CPP_DK_Exit()
+			break
+		//Enter
+		case 13:
+			console.log("-> Rerunning last configuration")
+			OS = cache_json.OS
+			APP = cache_json.APP
+			TYPE = cache_json.TYPE
+			LEVEL = cache_json.LEVEL
 			break
 		default:
 			break
@@ -177,23 +194,23 @@ function DKBuildConsole_SelectOs() {
 	console.log("\n")
 	console.log("**** SELECT OS TO BUILD ****")
 	for(let n=1; n<OSes.length+1; n++){
-		console.log(n+". "+OSes[n-1])	
+		console.log("  "+n+":  "+OSes[n-1])	
 	}
 
-	console.log("0. Back")
-	console.log("ESC. exit")
+	console.log("  0:  BACK")
+	console.log("esc:  EXIT")
 	console.log("\n")
 		
 	var key = getch()
 
 	switch(key){
 		case 48: //0
-			console.log("-> Back")
+			console.log("-> BACK")
 			UPDATE = ""
 			break
 		case 27: //Esc
 			CPP_DK_Exit()
-			console.log("-> Exit")
+			console.log("-> EXIT")
 			break
 		case 49: //1
 			console.log("-> "+OSes[0])
@@ -244,23 +261,23 @@ function DKBuildConsole_SelectOs() {
 
 function DKBuildConsole_SelectApp() {
 	console.log("**** SELECT APP TO BUILD ****")
-	console.log("F1. ALL APPS")
+	console.log(" F1:  ALL APPS")
 	DKBuild_GetAppList()
 	for (var i = 0; i < APP_LIST.length; ++i)
-		console.log(DKBuildConsole_TranslateOption(i) + ":" + APP_LIST[i] + "")
-	console.log("0. Back")
-	console.log("ESC. exit")
+		console.log("  "+DKBuildConsole_TranslateOption(i) + ":  " + APP_LIST[i] + "")
+	console.log("  0:  BACK")
+	console.log("esc:  EXIT")
 	console.log("\n")
 		
 	var key = getch()
 	
 	switch(key){
 		case 48: //0
-			console.log("-> Back")	
+			console.log("-> BACK")	
 			OS = ""	
 			break
 		case 27:  //Esc
-			console.log("-> Exit")
+			console.log("-> EXIT")
 			CPP_DK_Exit()
 			break
 		default:
@@ -275,22 +292,22 @@ function DKBuildConsole_SelectApp() {
 
 function DKBuildConsole_SelectType() {
 	console.log("**** SELECT BUILD TYPE ****")
-	console.log("1. Debug")
-	console.log("2. Release")
-	console.log("3. All")
-	console.log("0. Back")
-	console.log("ESC. exit")
+	console.log("  1:  Debug")
+	console.log("  2:  Release")
+	console.log("  3:  All")
+	console.log("  0:  BACK")
+	console.log("esc:  EXIT")
 	console.log("\n")
 	
 	var key = getch()
 		
 	switch(key){
 		case 48: //0
-			console.log("-> Back")
+			console.log("-> BACK")
 			APP = ""
 			break
 		case 27: //Esc
-			console.log("-> Exit")
+			console.log("-> EXIT")
 			TYPE = ""
 			CPP_DK_Exit()
 			break
@@ -327,19 +344,19 @@ function BuildConsole_PostBuildOptions(){
 	if(solution_path){
 		console.log(num+". Open Generated "+APP+" Solution")
 	}
-	console.log("0. Back")
-	console.log("ESC. exit")
-	console.log(" Any Other Key To Skip") 
+	console.log("  0:  BACK")
+	console.log("esc:  EXIT")
+	console.log("      Any Other Key To Skip") 
 	console.log("\n")
 	var key = getch()
 		
 	switch(key){
 		case 48: //0
-			console.log("-> Back")
+			console.log("-> BACK")
 			APP = ""
 			break
 		case 27: //Esc
-			console.log("-> Exit")
+			console.log("-> EXIT")
 			TYPE = ""
 			CPP_DK_Exit()
 			break

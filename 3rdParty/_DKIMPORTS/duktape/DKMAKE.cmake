@@ -10,15 +10,13 @@
 DKDEPEND(python)
 DKDEPEND(nodejs)
 
-### VERSION ###
-DKSET(DUKTAPE_VERSION let-support)
-DKSET(DUKTAPE_NAME duktape-${DUKTAPE_VERSION})
-#DKSET(DUKTAPE_DL https://duktape.org/${DUKTAPE_NAME}.tar.xz)
-DKSET(DUKTAPE_DL https://github.com/aquawicket/duktape/archive/refs/heads/${DUKTAPE_VERSION}.zip)
-DKSET(DUKTAPE ${3RDPARTY}/${DUKTAPE_NAME})
-
-### INSTALL ###
-DKINSTALL(${DUKTAPE_DL} duktape ${DUKTAPE})
+#DKIMPORT(https://github.com/aquawicket/duktape PATCH)
+DKIMPORT(https://github.com/aquawicket/duktape/archive/0701a460ca25c2dc76a96bd3187849ca278d1865.zip PATCH)
+#DKSET(DUKTAPE_VERSION let-support)
+#DKSET(DUKTAPE_NAME duktape-${DUKTAPE_VERSION})
+#DKSET(DUKTAPE_DL https://github.com/aquawicket/duktape/archive/refs/heads/${DUKTAPE_VERSION}.zip)
+#DKSET(DUKTAPE ${3RDPARTY}/${DUKTAPE_NAME})
+#DKINSTALL(${DUKTAPE_DL} duktape ${DUKTAPE})
 
 
 if(NOT EXISTS ${DUKTAPE}/src)

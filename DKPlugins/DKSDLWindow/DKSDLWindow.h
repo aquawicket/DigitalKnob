@@ -2,7 +2,7 @@
 #ifndef DKSDLWindow_H
 #define DKSDLWindow_H
 
-#define SDL_MAIN_HANDLED 1 //Bypass SDL_main() //https://wiki.libsdl.org/SDL_SetMainReady
+//#define SDL_MAIN_HANDLED 1 //Bypass SDL_main() //https://wiki.libsdl.org/SDL_SetMainReady
 #include "SDL.h"
 #include "DK/DK.h"
 

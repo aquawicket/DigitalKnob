@@ -5,15 +5,14 @@
 DKDEPEND(freetype)
 
 
-### VERSION ###
-DKSET(ROCKET_VERSION master)
-DKSET(ROCKET_NAME libRocket-${ROCKET_VERSION})
-DKSET(ROCKET_DL https://github.com/libRocket/libRocket/archive/${ROCKET_VERSION}.zip)
-DKSET(ROCKET ${3RDPARTY}/${ROCKET_NAME})
+DKIMPORT(https://github.com/libRocket/libRocket)
+#DKSET(ROCKET_VERSION master)
+#DKSET(ROCKET_NAME libRocket-${ROCKET_VERSION})
+#DKSET(ROCKET_DL https://github.com/libRocket/libRocket/archive/${ROCKET_VERSION}.zip)
+#DKSET(ROCKET ${3RDPARTY}/${ROCKET_NAME})
+#DKINSTALL(${ROCLET_DL} libRocket ${ROCKET})
 
 
-### INSTALL ###
-DKINSTALL(${ROCLET_DL} libRocket ${ROCKET})
 #DKRENAME(${DKDOWNLOAD}/${ROCKET_VERSION}.zip ${DKDOWNLOAD}/${ROCKET_NAME}.zip)
 
 ##SET(STRING "${GIT_EXE} clone https://github.com/aquawicket/libRocket.git ${3RDPARTY}/${ROCKET_NAME}")

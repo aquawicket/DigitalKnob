@@ -2,8 +2,8 @@
 
 ### DEPENDS ###
 DKDEPEND(openscenegraph)
-DKDEPEND(libogg)
-DKDEPEND(libvorbis)
+DKDEPEND(ogg)
+DKDEPEND(vorbis)
 DKDEPEND(freealut)
 DKDEPEND(openal-android)
 DKDEPEND(freealut)
@@ -12,15 +12,14 @@ DKDEPEND(openal)
 
 ### VERSION ###
 ${OSGAUDIO_VERSION master}
-${OSGAUDIO_NAME osgaudio-${OSG_VERSION}}
-
 ${OSGAUDIO_DL http://TODO.com/${OSGAUDIO_NAME}.zip}
+${OSGAUDIO_NAME osgaudio-${OSG_VERSION}}
 ${OSGAUDIO ${3RDPARTY}/${OSG_NAME})
 DKSET(OSGAUDIO ${3RDPARTY}/osgaudio-master)
 
 
 ### INSTALL ###
-DKINSTALL(${OSG_AUDIODL} osgaudio-master ${OSGAUDIO})
+DKINSTALL(${OSG_AUDIODL} osgaudio ${OSGAUDIO})
 
 
 

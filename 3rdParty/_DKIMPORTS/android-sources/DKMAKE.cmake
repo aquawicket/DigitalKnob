@@ -1,3 +1,5 @@
+# https://github.com/AndroidSDKSources
+
 if(NOT WIN_HOST)
 	return()
 endif()

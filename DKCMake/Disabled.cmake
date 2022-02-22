@@ -3,6 +3,8 @@ if(DISABLED_INCLUDED)
 endif(DISABLED_INCLUDED)
 DKSET(DISABLED_INCLUDED 1)
 
+DKDISABLE(tiff)
+
 # DISABLED FOR ALL
 DKDISABLE(_TEMPLATE-APP_)
 DKDISABLE(_TEMPLATE-LIB_)
@@ -44,6 +46,7 @@ DKDISABLE(emsdk-portable)
 DKDISABLE(ffmpeg-dev)
 DKDISABLE(ffmpeg-shared)
 DKDISABLE(ffmpeg-static)
+DKDISABLE(gradle)
 DKDISABLE(jpeg)                     # using libjpeg_turbo instead
 DKDISABLE(libcaca)
 DKDISABLE(librocket)                # replaced with RmlUi
@@ -75,6 +78,7 @@ if(NOT WIN_HOST) # Disabled on Non-Windows host machines
 endif()
 if(WIN) # Disabled for Windows targets
 	DKDISABLE(build-essential)
+	#DKDISABLE(bzip2)
 	DKDISABLE(DKOcr)
 	DKDISABLE(DKWebSockets)
 	DKDISABLE(freealut)
@@ -106,9 +110,9 @@ endif()
 
 
 if(MAC)  # Disabled on Mac host machines
-    DKDISABLE(android-build-tools)
-	DKDISABLE(android-ndk)
-	DKDISABLE(android-platform-tools)
+    #DKDISABLE(android-build-tools)
+	#DKDISABLE(android-ndk)
+	#DKDISABLE(android-platform-tools)
 	DKDISABLE(boxer)
 	DKDISABLE(build-essential)
 	DKDISABLE(bzip2)
@@ -120,6 +124,8 @@ if(MAC)  # Disabled on Mac host machines
 	DKDISABLE(ghostscript)
 	DKDISABLE(imagemagick)
 	DKDISABLE(java)
+	DKDISABLE(JDK8)
+	DKDISABLE(JDK11)
 	DKDISABLE(jerryscript)
 	DKDISABLE(leptonica)
 	DKDISABLE(libtorrent)
@@ -284,6 +290,7 @@ endif()
 
 
 if(ANDROID) # Disabled for Android targets
+	DKDISABLE(boxer)
 	DKDISABLE(bzip2)
 	DKDISABLE(cef_binary)
 	DKDISABLE(curl)

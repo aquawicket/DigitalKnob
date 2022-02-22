@@ -60,7 +60,7 @@ while :
 				fi
 				cd $DKPATH
 				
-				#git checkout -- .
+				git checkout -- .
 				#git pull origin master
 				
 				git checkout Development
@@ -195,13 +195,13 @@ while :
 		mkdir $DKPATH/DKApps/$APP/$OS
 		mkdir $DKPATH/DKApps/$APP/$OS/Debug
 		cd $DKPATH/DKApps/$APP/$OS/Debug
-		cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER="$GCC_PATH" -DCMAKE_CXX_COMPILER="$GPP_PATH" -DDEBUG=ON -DREBUILDALL=ON -DSTATIC=ON $DKCMAKE
+		cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER="$GCC_PATH" -DCMAKE_CXX_COMPILER="$GPP_PATH" -DRELEASE=OFF -DDEBUG=ON -DREBUILDALL=ON -DSTATIC=ON $DKCMAKE
 		make $APP
 		chmod +x $DKPATH/DKApps/$APP/$OS/Debug/$APP
 		
 		mkdir $DKPATH/DKApps/$APP/$OS/Release
 		cd $DKPATH/DKApps/$APP/$OS/Release
-		cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER="$GCC_PATH" -DCMAKE_CXX_COMPILER="$GPP_PATH" -DRELEASE=ON -DREBUILDALL=ON -DSTATIC=ON $DKCMAKE
+		cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER="$GCC_PATH" -DCMAKE_CXX_COMPILER="$GPP_PATH" -DDEBUG=OFF -DRELEASE=ON -DREBUILDALL=ON -DSTATIC=ON $DKCMAKE
 		make $APP
 		chmod +x $DKPATH/DKApps/$APP/$OS/Release/$APP
 	fi

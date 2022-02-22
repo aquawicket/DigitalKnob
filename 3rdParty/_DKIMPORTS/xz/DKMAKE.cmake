@@ -3,22 +3,17 @@
 # https://tukaani.org/xz/xz-5.2.5.tar.gz
 # https://github.com/xz-mirror/xz/archive/refs/tags/v5.2.5.zip
 
-### DEPENDS ###
+
 DKDEPEND(mingw32)
 DKDEPEND(mingw64)
 DKDEPEND(msys)
 
 
-### VERSION ###
+#DKIMPORT(https://github.com/xz-mirror/xz)
 DKSET(XZ_VERSION 5.2.5)
 DKSET(XZ_NAME xz-${XZ_VERSION})
-#DKSET(XZ_DL https://github.com/xz-mirror/xz/archive/refs/tags/v${XZ_VERSION}.zip)
 DKSET(XZ_DL https://tukaani.org/xz/${XZ_NAME}.tar.gz)
 DKSET(XZ ${3RDPARTY}/${XZ_NAME})
-
-
-
-### INSTALL ###
 DKINSTALL(${XZ_DL} xz ${XZ})
 
 
@@ -109,7 +104,6 @@ RASPBERRY_RELEASE_DKQCOMMAND(${DKCONFIGURE_BUILD})
 RASPBERRY_RELEASE_DKQCOMMAND(make)
 
 
-#ANDROID_NDK(${XZ_NAME})
 ANDROID_DEBUG_MSYS(${DKCONFIGURE_BUILD})
 ANDROID_DEBUG_MSYS(make)
 ANDROID_RELEASE_MSYS(${DKCONFIGURE_BUILD})

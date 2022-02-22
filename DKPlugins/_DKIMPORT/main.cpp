@@ -5,7 +5,9 @@
 	#include "SDL_main.h"
 #endif
 #endif
+
 #include "DK/DKApp.h"
+#include "assets.h"
 
 int main(int argc, char** argv)
 {

@@ -1,20 +1,20 @@
+# http://glew.sourceforge.net
+
 if(IOS OR IOSSIM OR ANDROID)
 	return()
 endif()
 
-# http://glew.sourceforge.net/
-#
-# https://github.com/nigels-com/glew/releases/download/glew-2.2.0/glew-2.2.0.zip
 
-### VERSION ###
-DKSET(GLEW_VERSION 2.2.0)
-DKSET(GLEW_NAME glew-${GLEW_VERSION})
-DKSET(GLEW_DL https://github.com/nigels-com/glew/releases/download/${GLEW_NAME}/${GLEW_NAME}.zip)
-DKSET(GLEW ${3RDPARTY}/${GLEW_NAME})
+#DKIMPORT(https://github.com/nigels-com/glew)
+DKIMPORT(https://github.com/nigels-com/glew/releases/download/glew-2.2.0/glew-2.2.0.zip)
+#DKSET(GLEW_VERSION 2.2.0)
+#DKSET(GLEW_NAME glew-${GLEW_VERSION})
+#DKSET(GLEW_DL https://github.com/nigels-com/glew/releases/download/glew-2.2.0/glew-2.2.0.zip)
+#DKSET(GLEW ${3RDPARTY}/${GLEW_NAME})
+#DKINSTALL(${GLEW_DL} glew ${GLEW})
 
 
-### INSTALL ###
-DKINSTALL(${GLEW_DL} glew ${GLEW})
+
 DKCOPY(${GLEW}/build/cmake ${GLEW}/${OS}/CMakeFiles/Export/lib/cmake/glew TRUE)
 
 

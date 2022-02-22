@@ -3,9 +3,12 @@ if(NOT WIN_HOST)
 endif()
 
 # https://developer.android.com/studio/archive
-#
-# https://r5---sn-a5meknsy.gvt1.com/edgedl/android/studio/install/4.2.2.0/android-studio-ide-202.7486908-windows.exe?cms_redirect=yes&mh=2R&mip=47.148.227.149&mm=28&mn=sn-a5meknsy&ms=nvh&mt=1627334431&mv=m&mvi=5&pl=16&rmhost=r2---sn-a5meknsy.gvt1.com&shardbypass=yes&smhost=r6---sn-a5mekner.gvt1.com
-# https://redirector.gvt1.com/edgedl/android/studio/install/2020.3.1.26/android-studio-2020.3.1.26-windows.exe
+# https://developer.android.com/studio#downloads
+# 
+
+
+
+
 
 #DKDEPEND(jdk)
 DKDEPEND(android-sdk)
@@ -13,11 +16,6 @@ DKDEPEND(android-ndk)
 
 
 ### VERSION ###
-#DKSET(ANDROIDSTUDIO_VERSION 202.7486908-windows)
-#DKSET(ANDROIDSTUDIO_NAME android-studio-ide-${ANDROIDSTUDIO_VERSION})
-#WIN_HOST_DKSET(ANDROIDSTUDIO_DL "https://r5---sn-a5meknsy.gvt1.com/edgedl/android/studio/install/4.2.2.0/android-studio-ide-202.7486908-windows.exe?cms_redirect=yes&mh=2R&mip=47.148.227.149&mm=28&mn=sn-a5meknsy&ms=nvh&mt=1627334431&mv=m&mvi=5&pl=16&rmhost=r2---sn-a5meknsy.gvt1.com&shardbypass=yes&smhost=r6---sn-a5mekner.gvt1.com")
-
-
 DKSET(ANDROIDSTUDIO_VERSION 2020.3.1.26-windows)
 DKSET(ANDROIDSTUDIO_NAME android-studio-ide-${ANDROIDSTUDIO_VERSION})
 WIN_HOST_DKSET(ANDROIDSTUDIO_DL "https://redirector.gvt1.com/edgedl/android/studio/install/2020.3.1.26/android-studio-2020.3.1.26-windows.exe")

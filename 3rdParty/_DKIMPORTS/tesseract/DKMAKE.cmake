@@ -1,21 +1,15 @@
+# https://github.com/tesseract-ocr/tessdoc
 # README: https://tinsuke.wordpress.com/2011/02/17/how-to-cross-compiling-libraries-for-ios-armv6armv7i386/
 
 
-# https://github.com/tesseract-ocr/tessdoc
-#
-# https://github.com/tesseract-ocr/tessdoc/archive/refs/heads/master.zip
-
 DKDEPEND(leptonica)
 
-### VERSION ###
-DKSET(TESSERACT_VERSION master)
-DKSET(TESSERACT_NAME tesseract-${TESSERACT_VERSION})
-DKSET(TESSERACT_DL https://github.com/tesseract-ocr/tessdoc/archive/refs/heads/${TESSERACT_VERSION}.zip)
-DKSET(TESSERACT ${3RDPARTY}/${TESSERACT_NAME})
-
-
-### INSTALL ###
-DKINSTALL(${TESSERACT_DL} tesseract ${TESSERACT})
+DKIMPORT(https://github.com/tesseract-ocr/tessdoc)
+#DKSET(TESSERACT_VERSION master)
+#DKSET(TESSERACT_NAME tesseract-${TESSERACT_VERSION})
+#DKSET(TESSERACT_DL https://github.com/tesseract-ocr/tessdoc/archive/refs/heads/master.zip)
+#DKSET(TESSERACT ${3RDPARTY}/${TESSERACT_NAME})
+#DKINSTALL(${TESSERACT_DL} tesseract ${TESSERACT})
 
 
 ### LINK ###

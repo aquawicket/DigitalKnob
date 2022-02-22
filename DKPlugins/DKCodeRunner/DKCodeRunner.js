@@ -43,6 +43,12 @@ DKCodeRunner.prototype.create = function DKCodeRunner_create(parent, top, bottom
 	textarea.style.color = "rgb(200,200,200)"
 	textarea.style.backgroundColor = "rgb(30,30,30)"
 	div.appendChild(textarea)
+	
+	dk.file.fileToString("cache.txt", function(str){
+		textarea.value = str
+	})
+	
+	
 	textarea.oncontextmenu = function textarea_oncontextmenu(event) {
 		event.preventDefault();
 		const dkmenu = DKMenu.prototype.create(textarea)
@@ -53,6 +59,18 @@ DKCodeRunner.prototype.create = function DKCodeRunner_create(parent, top, bottom
 			console.log("clicked Test 2")
 		})
 	}
+	
+	
+	// CEF ///////////////////////////////////////////////
+	textarea.oninput = function textarea_oninput(event) {
+		console.log("input")
+	}
+	// RML /////////////////////////////////////////////////
+	//textarea.onchange = function textarea_onchange(event) {
+	//	console.log("change")
+	//}
+	
+	
 	
 	dk.gui.createButton(document.body, "Run Code", "4rem", "", "50rem", "", "100rem", "20rem", function() {
         console.log("*** Running Code ***")
@@ -85,7 +103,7 @@ DKCodeRunner.prototype.create = function DKCodeRunner_create(parent, top, bottom
 	dk.gui.createImageButton(document.body, "File Manager", "DKCodeRunner/folderIcon.png", "3rem", "", "", "50rem", "35rem", "30rem", function() {
         DKPlugin("DKFile/filemanager.js", function() {
 			DKFileManager.prototype.create();
-    }	);
+		});
     })
 	
 	dk.gui.createImageButton(document.body, "Debugger", "DKCodeRunner/Debugger.png", "3rem", "", "", "10rem", "35rem", "30rem", function() {

@@ -1,28 +1,34 @@
-## https://download.osgeo.org/libtiff/
+# https://gitlab.com/libtiff/libtiff
+# http://www.simplesystems.org/libtiff/
+# https://download.osgeo.org/libtiff/
 
-### VERSION ###
-DKSET(TIFF_VERSION 4.0.3)
+
+#DKIMPORT(https://gitlab.com/libtiff/libtiff)
+DKSET(TIFF_VERSION 4.2.0)
+#DKSET(TIFF_DL https://download.osgeo.org/libtiff/old/tiff-4.0.3.zip PATCH)
+DKSET(TIFF_DL https://gitlab.com/libtiff/libtiff/-/archive/v4.2.0/libtiff-v4.2.0.zip)
 DKSET(TIFF_NAME tiff-${TIFF_VERSION})
 DKSET(TIFF ${3RDPARTY}/${TIFF_NAME})
-
-
-### INSTALL ###
-## https://download.osgeo.org/libtiff/old/tiff-4.0.3.zip
-DKINSTALL(https://download.osgeo.org/libtiff/old/${TIFF_NAME}.zip tiff ${TIFF})
+DKINSTALL(${TIFF_DL} tiff ${TIFF})
 
 
 ### DKPLUGINS LINK ###
 DKINCLUDE(${TIFF}/libtiff)
+DEBUG_DKINCLUDE(${TIFF}/${OS}/${DEBUG_DIR}/libtiff)
+RELEASE_DKINCLUDE(${TIFF}/${OS}/${RELEASE_DIR}/libtiff)
+#RASPBERRY_RELEASE_DKLIB(${TIFF}/${OS}/${RELEASE_DIR}/
 WIN_DEBUG_DKLIB(${TIFF}/${OS}/${DEBUG_DIR}/tiff-static.lib)
 WIN_RELEASE_DKLIB(${TIFF}/${OS}/${RELEASE_DIR}/tiff-static.lib)
 APPLE_DEBUG_DKLIB(${TIFF}/${OS}/${DEBUG_DIR}/libtiff-static.a)
 APPLE_RELEASE_DKLIB(${TIFF}/${OS}/${RELEASE_DIR}/libtiff-static.a)
-LINUX_DEBUG_DKLIB(${TIFF}/${OS}/${DEBUG_DIR}/libtiff-static.a)
-LINUX_RELEASE_DKLIB(${TIFF}/${OS}/${RELEASE_DIR}/libtiff-static.a)
-RASPBERRY_DEBUG_DKLIB(${TIFF}/${OS}/${DEBUG_DIR}/libtiff-static.a)
-RASPBERRY_RELEASE_DKLIB(${TIFF}/${OS}/${RELEASE_DIR}/libtiff-static.a)
-##ANDROID_DEBUG_DKLIB(${TIFF}/${OS}/${DEBUG_DIR}/obj/local/armeabi-v7a/libtiff.a)
-##ANDROID_RELEASE_DKLIB(${TIFF}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/libtiff.a)
+#LINUX_DEBUG_DKLIB(${TIFF}/${OS}/${DEBUG_DIR}/libtiff-static.a)
+#LINUX_RELEASE_DKLIB(${TIFF}/${OS}/${RELEASE_DIR}/libtiff-static.a)
+LINUX_DEBUG_DKLIB(${TIFF}/${OS}/${DEBUG_DIR}/libtiff/libtiff.a)
+LINUX_RELEASE_DKLIB(${TIFF}/${OS}/${RELEASE_DIR}/libtiff/libtiff.a)
+#RASPBERRY_DEBUG_DKLIB(${TIFF}/${OS}/${DEBUG_DIR}/libtiff-static.a)
+#RASPBERRY_RELEASE_DKLIB(${TIFF}/${OS}/${RELEASE_DIR}/libtiff-static.a)
+RASPBERRY_DEBUG_DKLIB(${TIFF}/${OS}/${DEBUG_DIR}/libtiff/libtiff.a)
+RASPBERRY_RELEASE_DKLIB(${TIFF}/${OS}/${RELEASE_DIR}/libtiff/libtiff.a)
 ANDROID_DEBUG_DKLIB(${TIFF}/${OS}/${DEBUG_DIR}/libtiff-static.a)
 ANDROID_RELEASE_DKLIB(${TIFF}/${OS}/${RELEASE_DIR}/libtiff-static.a)
 
@@ -43,6 +49,6 @@ WIN_VS(${TIFF_NAME} tiff.sln tiff-static)
 MAC_XCODE(${TIFF_NAME} tiff-static)
 IOS_XCODE(${TIFF_NAME} tiff-static)
 IOSSIM_XCODE(${TIFF_NAME} tiff-static)
-LINUX_DKQCOMMAND(make tiff-static)
-RASPBERRY_DKQCOMMAND(make tiff-static)
+LINUX_DKQCOMMAND(make) #tiff-static)
+RASPBERRY_DKQCOMMAND(make) #tiff-static)
 ANDROID_VS(${TIFF_NAME} tiff.sln tiff-static)

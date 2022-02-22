@@ -41,7 +41,7 @@ if(RASPBERRY)
 endif()
 
 if(ANDROID)
-	DKDEPEND(sdl2)
+	DKDEPEND(sdl)
 endif()
 
 

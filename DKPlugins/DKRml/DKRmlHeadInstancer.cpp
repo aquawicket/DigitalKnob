@@ -5,8 +5,7 @@
 #include <RmlUi/Core/XMLParser.h>
 #include <RmlUi/Core/SystemInterface.h>
 
-#include "../../3rdParty/RmlUi-master/Source/Core/DocumentHeader.h"
-//#include "TemplateCache.h"
+#include <Core/DocumentHeader.h>
 #include <RmlUi/Core/Core.h>
 #include <RmlUi/Core/Element.h>
 #include <RmlUi/Core/ElementDocument.h>

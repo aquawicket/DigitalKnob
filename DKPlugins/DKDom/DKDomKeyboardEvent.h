@@ -13,7 +13,7 @@ class DKDomKeyboardEvent : public DKObjectT<DKDomKeyboardEvent>
 {
 public:
 	bool Init();
-	
+
 	// Properties
 	static int altKey(duk_context* ctx);
 	static int code(duk_context* ctx);

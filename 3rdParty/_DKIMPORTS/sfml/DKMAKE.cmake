@@ -53,20 +53,18 @@ if(ANDROID)
 endif()
 DKDEPEND(openal)
 DKDEPEND(flac)
-DKDEPEND(libogg)
-DKDEPEND(libvorbis)
+DKDEPEND(ogg)
+DKDEPEND(vorbis)
 DKDEPEND(libjpeg-turbo)
 
 
-### VERSION ### 
-DKSET(SFML_VERSION master)
-DKSET(SFML_DL https://github.com/aquawicket/SFML/archive/refs/heads/${SFML_VERSION}.zip)
-DKSET(SFML_NAME SFML-${SFML_VERSION})
-DKSET(SFML ${3RDPARTY}/${SFML_NAME})
-
-
-### INSTALL ###
-DKINSTALL(${SFML_DL} sfml ${SFML})
+#DKIMPORT(https://github.com/SFML/SFML)
+DKIMPORT(https://github.com/SFML/SFML/archive/a733e4cd7e0056922e4f74f1932749b4d6a5744d.zip)
+#DKSET(SFML_VERSION master)
+#DKSET(SFML_DL https://github.com/aquawicket/SFML/archive/refs/heads/${SFML_VERSION}.zip)
+#DKSET(SFML_NAME SFML-${SFML_VERSION})
+#DKSET(SFML ${3RDPARTY}/${SFML_NAME})
+#DKINSTALL(${SFML_DL} sfml ${SFML})
 
 
 ### LINK ###

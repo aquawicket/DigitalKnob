@@ -347,12 +347,18 @@ void DKRml::ProcessEvent(Rml::Event& rmlEvent){
 #endif
 	if (same(type, "mouseup") && rmlEvent.GetParameter<int>("button", 0) == 1) 
 		type = "contextmenu";
+	if (same(type, "change"))
+		type = "input";
+
+	//DKINFO("event type = " + type+"\n");
 	for(unsigned int i = 0; i < DKEvents::events.size(); ++i){
 		DKEvents* ev = DKEvents::events[i];
+		
 		//certain stored events are altered before comparison 
 		DKString _type = ev->GetType();
-		if (same(_type, "input"))
-			_type = "change";
+		//if (same(_type, "input"))
+		//	_type = "change";
+		
 		//// PROCESS ELEMENT EVENTS //////
 		if (same(ev->GetId(), currentElementAddress) && same(_type, type)) {
 			ev->data.clear();

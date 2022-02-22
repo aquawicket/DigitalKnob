@@ -53,7 +53,7 @@ echo %cmnd%
 echo.
 %cmnd%
 
-::A build.bat file is created for the target/os from Options.cmake
+::A build.bat file is created for the target/os from Variables.cmake
 set "app_batch="%target_path%\%OS%"\build.cmd"
 "%app_batch%"
 
@@ -66,4 +66,6 @@ echo ERRORLEVEL = %ERRORLEVEL%
 pause
 
 :end
-ECHO Done
+ECHO Done 
+ 
+%DKEND% 

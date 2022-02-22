@@ -1,8 +1,7 @@
 # https://robertying.io/posts/compile-openssl-and-curl-for-android
-
 # https://curl.se/
-#
 # https://curl.haxx.se/download/curl-7.34.0.zip
+# https://github.com/curl/curl
 
 ### DEPENDS ###
 WIN_DKDEPEND(ws2_32.lib)
@@ -12,21 +11,23 @@ DKDEPEND(openssl)
 
 
 
-### VERSION ###
-DKSET(CURL_VERSION 7.34.0)
-DKSET(CURL_NAME curl-${CURL_VERSION})
-DKSET(CURL_DL https://curl.haxx.se/download/${CURL_NAME}.zip)
-DKSET(CURL ${3RDPARTY}/${CURL_NAME})
-
-
-### INSTALL ###
-DKINSTALL(${CURL_DL} curl ${CURL})
+DKIMPORT(https://github.com/curl/curl/archive/refs/tags/curl-7_43_0.zip)
+#DKSET(CURL_VERSION 7.34.0)
+#DKSET(CURL_NAME curl-${CURL_VERSION})
+#DKSET(CURL_DL https://curl.haxx.se/download/${CURL_NAME}.zip)
+#DKSET(CURL ${3RDPARTY}/${CURL_NAME})
+#DKINSTALL(${CURL_DL} curl ${CURL})
 
 
 ### DKPLUGINS LINK ###
 DKDEFINE(CURL_STATICLIB)
 DKINCLUDE(${CURL}/include)
 DKINCLUDE(${CURL}/${OS}/include/curl)
+if(DEBUG)
+	DKINCLUDE(${CURL}/${OS}/${DEBUG_DIR}/include/curl)
+elseif(RELEASE)
+	DKINCLUDE(${CURL}/${OS}/${RELEASE_DIR}/include/curl)
+endif()
 WIN_DEBUG_DKLIB(${CURL}/${OS}/lib/${DEBUG_DIR}/libcurl.lib)
 WIN_RELEASE_DKLIB(${CURL}/${OS}/lib/${RELEASE_DIR}/libcurl.lib)
 APPLE_DEBUG_DKLIB(${CURL}/${OS}/lib/${DEBUG_DIR}/libcurl.a)

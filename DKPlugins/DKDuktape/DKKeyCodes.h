@@ -364,8 +364,6 @@ enum Key {
     //TODO
 }
 #endif //MAC
-
-
 ////////////
 #ifdef LINUX
 // Linux Keyboard mapping table

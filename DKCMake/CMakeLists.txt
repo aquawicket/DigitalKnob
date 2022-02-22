@@ -41,10 +41,28 @@
 ###
 ### TODO: Add a cmake input variable called "TargetName", allowing us to build a specific Library or Plugin. This should also build 
 ### all of dependencies for that target. Good for quick testing of specific libraries, plugins or executables.
+###
+### https://cmake.org/cmake/help/git-master/guide/tutorial/index.html
+###
 if(DKCMAKELIST_INCLUDED)
   return()
 endif(DKCMAKELIST_INCLUDED)
 set(DKCMAKELIST_INCLUDED 1)
+
+message(STATUS "\nCMake version ${CMAKE_VERSION}\n")
+
+#########  DUMP ALL STARTUP VARIABLES TO FILE  #####################################################################
+macro(DUMP_ALL_VARIABLES file)
+	execute_process(COMMAND ${CMAKE_COMMAND} -E remove ${file})
+	get_cmake_property(vars VARIABLES)
+	list (SORT vars)
+	foreach (var ${vars})
+		file(APPEND ${file} "${var} ==           ${${var}}\n")
+	endforeach()
+endmacro()
+####################################################################################################################
+DUMP_ALL_VARIABLES(${CMAKE_SOURCE_DIR}/CMAKE_START_VARIABLES.txt)
+
 
 #variable_watch(DKCMAKE_BUILD) 
 
@@ -52,9 +70,21 @@ if(CMAKE_HOST_UNIX)
 	execute_process(COMMAND sudo echo WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}) #ask for sudo password ahead of time
 endif()
 
-
 CMAKE_MINIMUM_REQUIRED(VERSION 3.10)
 CMAKE_POLICY(SET CMP0054 NEW)
 
+DUMP_ALL_VARIABLES(${CMAKE_SOURCE_DIR}/CMAKE_MID_VARIABLES.txt)
+
+
+
 PROJECT(DigitalKnob)
-INCLUDE(Process.cmake)
+
+
+DUMP_ALL_VARIABLES(${CMAKE_SOURCE_DIR}/CMAKE_PROJECT_VARIABLES.txt)
+
+INCLUDE(Generate.cmake)
+
+
+
+
+DUMP_ALL_VARIABLES(${CMAKE_SOURCE_DIR}/CMAKE_END_VARIABLES.txt)

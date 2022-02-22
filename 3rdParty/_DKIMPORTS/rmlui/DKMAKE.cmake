@@ -1,29 +1,23 @@
 # https://github.com/mikke89/RmlUi
 # https://github.com/aquawicket/RmlUi
-#
-# https://github.com/aquawicket/RmlUi/archive/refs/heads/master.zip
-# https://codeload.github.com/mikke89/RmlUi/zip/master 
+
 
 ### DEPENDS ###
 DKDEPEND(freetype)
 #DKDEPEND(glew)
-#DKDEPEND(sdl2)
-#DKDEPEND(sdl2_image)
+#DKDEPEND(sdl)
+#DKDEPEND(sdl_image)
 #DKDEPEND(sfml)
 
 
 
 ### VERSION ###
-DKSET(RMLUI_VERSION master)
+#DKSET(RMLUI_DL https://github.com/mikke89/RmlUi/archive/34a77f7034882a04252ca5a531354c144d92a806.zip)
+DKSET(RMLUI_DL https://github.com/aquawicket/RmlUi/archive/9216572b79563159cc28af8fa56d051f58630449.zip)
+DKSET(RMLUI_VERSION aquawicket)
 DKSET(RMLUI_NAME RmlUi-${RMLUI_VERSION})
-DKSET(RMLUI_DL https://github.com/aquawicket/RmlUi/archive/refs/heads/${RMLUI_VERSION}.zip)
-#DKSET(RMLUI_DL https://codeload.github.com/mikke89/RmlUi/zip/${RMLUI_VERSION}.zip)
 DKSET(RMLUI ${3RDPARTY}/${RMLUI_NAME})
-
-
-
-### INSTALL ###
-DKINSTALL(${RMLUI_DL} rmlui ${RMLUI})
+DKINSTALL(${RMLUI_DL} rmlui ${RMLUI} PATCH)
 
 
 

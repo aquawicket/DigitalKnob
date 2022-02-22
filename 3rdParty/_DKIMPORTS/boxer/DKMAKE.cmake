@@ -1,9 +1,4 @@
 # https://github.com/aaronmjacobs/Boxer
-# https://github.com/aquawicket/Boxer
-#
-# https://github.com/aquawicket/Boxer/archive/refs/heads/master.zip
-# https://github.com/aaronmjacobs/Boxer/archive/refs/heads/master.zip
-# https://github.com/aaronmjacobs/Boxer/archive/refs/heads/C.zip
 
 if(RASPBERRY OR ANDROID)
 	return() 
@@ -15,15 +10,9 @@ if(APPLE)
 endif()
 
 
-### VERSION ###
-DKSET(BOXER_VERSION master)
-DKSET(BOXER_NAME boxer-${BOXER_VERSION})
-DKSET(BOXER_DL https://github.com/aquawicket/Boxer/archive/refs/heads/${BOXER_VERSION}.zip)
-DKSET(BOXER ${3RDPARTY}/${BOXER_NAME})
-
-
-### INSTALL ###
-DKINSTALL(${BOXER_DL} boxer ${BOXER})
+### IMPORT ###
+#DKIMPORT(https://github.com/aaronmjacobs/Boxer)
+DKIMPORT(https://github.com/aaronmjacobs/Boxer/archive/01c17f6a9cd66068f7890ea887ab3b9a673f0434.zip)
 
 
 ### LINK ###

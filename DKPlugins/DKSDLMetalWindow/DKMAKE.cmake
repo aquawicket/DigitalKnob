@@ -1,4 +1,4 @@
-DKDEPEND(sdl2)
+DKDEPEND(sdl)
 DKDEPEND(DKWindow)
 
 generateCmake(DKSDLMetalWindow)

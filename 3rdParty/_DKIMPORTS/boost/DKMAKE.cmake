@@ -15,6 +15,8 @@ ANDROID_DKDEPEND(android-ndk) #version 21e or newer required
 ANDROID_DKDEPEND(mingw32)
 ANDROID_DKDEPEND(mingw64)
 
+### IMPORT ###
+#DKINPORT_GIT(https://github.com/boostorg/boost)
 
 ### VERSION ###
 DKSET(BOOST_MAJOR 1)

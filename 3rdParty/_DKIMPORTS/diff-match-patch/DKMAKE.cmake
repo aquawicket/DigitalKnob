@@ -4,19 +4,14 @@
 # https://github.com/aquawicket/diff-match-patch/archive/refs/heads/master.zip
 # https://github.com/google/diff-match-patch/archive/refs/heads/master.zip
 
-### DEPENDS ###
-#DKDEPEND(libname)
+#DKIMPORT(https://github.com/google/diff-match-patch)
+DKIMPORT(https://github.com/google/diff-match-patch/archive/62f2e689f498f9c92dbc588c58750addec9b1654.zip)
 
-
-### VERSION ###
-DKSET(DIFF_MATCH_PATCH_VERSION master)
-DKSET(DIFF_MATCH_PATCH_NAME diff-match-patch-${DIFF_MATCH_PATCH_VERSION})
-DKSET(DIFF_MATCH_PATCH_DL https://github.com/aquawicket/diff-match-patch/archive/refs/heads/${DIFF_MATCH_PATCH_VERSION}.zip)
-DKSET(DIFF_MATCH_PATCH ${3RDPARTY}/${DIFF_MATCH_PATCH_NAME})
-
-
-### INSTALL ###
-DKINSTALL(${DIFF_MATCH_PATCH_DL} diff-match-patch ${DIFF_MATCH_PATCH})
+#DKSET(DIFF_MATCH_PATCH_VERSION 62f2e68)
+#DKSET(DIFF_MATCH_PATCH_DL https://github.com/google/diff-match-patch/archive/62f2e689f498f9c92dbc588c58750addec9b1654.zip)
+#DKSET(DIFF_MATCH_PATCH_NAME diff-match-patch-${DIFF_MATCH_PATCH_VERSION})
+#DKSET(DIFF_MATCH_PATCH ${3RDPARTY}/${DIFF_MATCH_PATCH_NAME})
+#DKINSTALL(${DIFF_MATCH_PATCH_DL} diff-match-patch ${DIFF_MATCH_PATCH})
 
 
 ### LINK ###

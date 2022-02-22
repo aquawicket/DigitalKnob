@@ -1,3 +1,5 @@
+CPP_DK_Create("DKDuktapeDom")
+
 const assets = CPP_DKAssets_LocalAssets()
 CPP_DKFile_ChDir(assets+"DKPhp/")
 const batch = assets+"DKPhp/RunPhpServers.bat"
@@ -30,6 +32,7 @@ const sdl_y_offest = 30
 const sdl_width_offset = 1
 const sdl_height_offset = -30
 CPP_DK_Create("DKWindow")
+CPP_DK_Create("DKDom")
 CPP_DK_Create("DKRml")
 window.resizeTo(sdl_width+sdl_width_offset, sdl_height+sdl_height_offset)
 window.moveTo(sdl_x+sdl_x_offset, sdl_y+sdl_y_offest)
@@ -43,6 +46,7 @@ window.addEventListener("keydown", function(event){
 		CPP_DKWindow_IsFullscreen() ? CPP_DKWindow_Windowed() : dk.window.fullscreen()
 	
 })
+
 
 
 //// Console window

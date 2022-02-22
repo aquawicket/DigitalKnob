@@ -1,5 +1,7 @@
 # https://github.com/libusb/libusb
 
-# https://github.com/libusb/libusb/archive/refs/tags/v1.0.24.zip
+
+#DKIMPORT(https://github.com/libusb/libusb)
+DKIMPORT(https://github.com/libusb/libusb/archive/4622bfcf44db373c53502e3fe873bd611e8332f6.zip)
 
 # TODO

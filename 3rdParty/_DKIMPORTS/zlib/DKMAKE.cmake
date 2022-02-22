@@ -1,19 +1,14 @@
-# http://www.zlib.net/
 # https://github.com/madler/zlib
-#
-# https://www.zlib.net/fossils/zlib-1.2.11.tar.gz
-# https://github.com/madler/zlib/archive/refs/tags/v1.2.11.zip
+# http://www.zlib.net/
 
 
-### VERSION ###
-DKSET(ZLIB_VERSION 1.2.11)
-DKSET(ZLIB_NAME zlib-${ZLIB_VERSION})
-DKSET(ZLIB_DL https://www.zlib.net/fossils/${ZLIB_NAME}.tar.gz)
-DKSET(ZLIB ${3RDPARTY}/${ZLIB_NAME})
-
-
-### INSTALL ###
-DKINSTALL(${ZLIB_DL} zlib ${ZLIB})
+#DKIMPORT(https://github.com/madler/zlib)
+DKIMPORT(https://github.com/madler/zlib/archive/cacf7f1d4e3d44d871b605da3b647f07d718623f.zip)
+#DKSET(ZLIB_VERSION 1.2.11)
+#DKSET(ZLIB_NAME zlib-${ZLIB_VERSION})
+#DKSET(ZLIB_DL https://www.zlib.net/fossils/zlib-1.2.11.tar.gz)
+#DKSET(ZLIB ${3RDPARTY}/${ZLIB_NAME})
+#DKINSTALL(${ZLIB_DL} zlib ${ZLIB})
 
 
 ### DKPLUGINS LINK ###

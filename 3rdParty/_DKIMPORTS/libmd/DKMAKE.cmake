@@ -1,23 +1,21 @@
+# https://github.com/guillemj/libmd
+
 if(NOT IOSSIM)
 	return()
 endif()
-# https://github.com/guillemj/libmd
-#
-# https://github.com/guillemj/libmd/archive/refs/tags/1.0.4.zip
+
 
 ### DEPEND ###
 DKDEPEND(autotools)
 
 
-### VERSION ###
-DKSET(LIBMD_VERSION 1.0.4)
-DKSET(LIBMD_NAME libmd-${LIBMD_VERSION})
-DKSET(LIBMD_DL https://github.com/guillemj/libmd/archive/refs/tags/${LIBMD_VERSION}.zip)
-DKSET(LIBMD ${3RDPARTY}/${LIBMD_NAME})
+DKIMPORT(https://github.com/guillemj/libmd)
+#DKSET(LIBMD_VERSION 1.0.4)
+#DKSET(LIBMD_NAME libmd-${LIBMD_VERSION})
+#DKSET(LIBMD_DL https://github.com/guillemj/libmd/archive/refs/tags/1.0.4.zip)
+#DKSET(LIBMD ${3RDPARTY}/${LIBMD_NAME})
+#DKINSTALL(${LIBMD_DL} libmd ${LIBMD} NOPATCH)
 
-
-### INSTALL ###
-DKINSTALL(${LIBMD_DL} libmd ${LIBMD} NOPATCH)
 
 ### LINK ###
 DKINCLUDE(${LIBMD}/include)

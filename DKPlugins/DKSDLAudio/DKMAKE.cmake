@@ -1,5 +1,5 @@
 DKDEPEND(DKAudio)
 DKDEPEND(DKSDLWindow)
-DKDEPEND(sdl2_mixer)
+DKDEPEND(sdl_mixer)
 
 generateCmake(DKSDLAudio)

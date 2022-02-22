@@ -8,14 +8,12 @@ DKDEPEND(openal)
 
 
 ### VERSION ###
-DKSET(FREEALUT_VERSION 1.1.0)
-DKSET(FREEALUT_NAME freealut-${FREEALUT_VERSION})
-DKSET(FREEALUT_DL http://distro.ibiblio.org/rootlinux/rootlinux-ports/more/freealut/${FREEALUT_NAME}.tar.gz)
-DKSET(FREEALUT ${3RDPARTY}/${FREEALUT_NAME})
-
-
-### INSTALL ###
-DKINSTALL(${FREEALUT_DL} freealut ${FREEALUT})
+DKIMPORT(https://github.com/vancegroup/freealut)
+#DKSET(FREEALUT_VERSION 1.1.0)
+#DKSET(FREEALUT_NAME freealut-${FREEALUT_VERSION})
+#DKSET(FREEALUT_DL http://distro.ibiblio.org/rootlinux/rootlinux-ports/more/freealut/${FREEALUT_NAME}.tar.gz)
+#DKSET(FREEALUT ${3RDPARTY}/${FREEALUT_NAME})
+#DKINSTALL(${FREEALUT_DL} freealut ${FREEALUT})
 
 
 ### LINK ###

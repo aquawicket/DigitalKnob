@@ -8,10 +8,6 @@ DKSET(JPEG_VERSION 9d)
 DKSET(JPEG_NAME jpeg-${JPEG_VERSION})
 DKSET(JPEG_DL http://www.ijg.org/files/jpegsr${JPEG_VERSION}.zip)
 DKSET(JPEG ${3RDPARTY}/${JPEG_NAME})
-
-
-
-### INSTALL ###
 DKINSTALL(${JPEG_DL} jpeg ${JPEG})
 
 

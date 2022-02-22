@@ -1,10 +1,12 @@
+# https://github.com/Homebrew/brew
+# https://brew.sh/
+
 if(NOT MAC_HOST)
 	return()
 endif()
 
-# https://brew.sh/
 
-#DKSET(HOMEBREW_VERSION ???)
+#DKIMPORT(https://github.com/Homebrew/brew)
 
 MAC_DKQCOMMAND("ruby -e \"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)\"")
 # https://github.com/Homebrew/brew/issues/10368

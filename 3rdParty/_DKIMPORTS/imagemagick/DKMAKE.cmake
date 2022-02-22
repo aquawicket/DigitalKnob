@@ -1,28 +1,25 @@
 # https://imagemagick.org/index.php
 # https://github.com/ImageMagick/ImageMagick
-#
-# https://github.com/ImageMagick/ImageMagick/archive/refs/tags/7.1.0-0.zip
-# http://ftp.icm.edu.pl/packages/ImageMagick/binaries/ImageMagick-7.1.0-portable-Q16-x86.zip
+
 
 ### DEPENDS ###
 #DKDEPEND(ghostscript)
 
-### VERSION ###
+#DKIMPORT(https://github.com/ImageMagick/ImageMagick)
 if(WIN)
 	DKSET(IMAGEMAGICK_VERSION 7.1.0-portable-Q16-x86)
 else()
 	DKSET(IMAGEMAGICK_VERSION 7.1.0-0)
 endif()
 DKSET(IMAGEMAGICK_NAME ImageMagick-${IMAGEMAGICK_VERSION})
-WIN_DKSET(IMAGEMAGICK_DL http://ftp.icm.edu.pl/packages/ImageMagick/binaries/${IMAGEMAGICK_NAME}.zip)
-LINUX_DKSET(IMAGEMAGICK_DL https://github.com/ImageMagick/ImageMagick/archive/refs/tags/${IMAGEMAGICK_VERSION}.zip)
-MAC_DKSET(IMAGEMAGICK_DL https://github.com/ImageMagick/ImageMagick/archive/refs/tags/${IMAGEMAGICK_VERSION}.zip )
+WIN_DKSET(IMAGEMAGICK_DL http://ftp.icm.edu.pl/packages/ImageMagick/binaries/ImageMagick-7.1.0-portable-Q16-x86.zip)
+LINUX_DKSET(IMAGEMAGICK_DL https://github.com/ImageMagick/ImageMagick/archive/refs/tags/7.1.0-0.zip)
+MAC_DKSET(IMAGEMAGICK_DL https://github.com/ImageMagick/ImageMagick/archive/refs/tags/7.1.0-0.zip)
 DKSET(IMAGEMAGICK ${3RDPARTY}/${IMAGEMAGICK_NAME})
-WIN_DKSET(IMAGEMAGICK_CONVERT ${IMAGEMAGICK}/convert.exe)
-
-
-### INSTALL ###
 DKINSTALL(${IMAGEMAGICK_DL} imagemagick ${IMAGEMAGICK})
+
+
+WIN_DKSET(IMAGEMAGICK_CONVERT ${IMAGEMAGICK}/convert.exe)
 
 
 ### LINK ###

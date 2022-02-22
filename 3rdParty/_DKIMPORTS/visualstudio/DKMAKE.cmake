@@ -16,8 +16,7 @@ endif()
 
 ### DEPENDS ###
 if(ANDROID)
-	#DKDEPEND(jdk)
-	DKDEPEND(apache-ant)
+	DKDEPEND(ant)
 	DKDEPEND(android-sdk)
 endif()
  
@@ -28,6 +27,7 @@ DKSET(VISUALSTUDIO_PROGRAM_FILES "Program Files")
 DKSET(VISUALSTUDIO_DL https://aka.ms/vs/${VISUALSTUDIO_BUILD}/release/vs_community.exe)
 DKSET(VISUALSTUDIO "C:/${VISUALSTUDIO_PROGRAM_FILES}/Microsoft Visual Studio/${VISUALSTUDIO_VERSION}/Community")
 DKSET(MSBUILD "${VISUALSTUDIO}/MSBuild/Current/Bin/MSBuild.exe")
+DKSET(DUMPBIN "${VISUALSTUDIO}/VC/Tools/MSVC/14.30.30705/bin/Hostx86/x86/dumpbin.exe")
 DKSET(VS_GENERATOR "Visual Studio ${VISUALSTUDIO_BUILD} ${VISUALSTUDIO_VERSION}")
 
 if(EXISTS ${VISUALSTUDIO})

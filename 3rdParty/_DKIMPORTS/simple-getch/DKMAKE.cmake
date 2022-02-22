@@ -1,21 +1,17 @@
+# https://github.com/mouuff/simple-getch
+
 if(NOT UNIX_HOST)
 	return()
 endif()
 
-# https://github.com/mouuff/simple-getch
-#
-# https://github.com/mouuff/simple-getch/archive/refs/heads/master.zip
 
 
-### VERSION ###
-DKSET(GETCH_VERSION master)
-DKSET(GETCH_NAME simple-getch-${GETCH_VERSION})
-DKSET(GETCH_DL https://github.com/mouuff/simple-getch/archive/refs/heads/${GETCH_VERSION}.zip)
-DKSET(GETCH ${3RDPARTY}/${GETCH_NAME})
-
-
-### INSTALL ###
-DKINSTALL(${GETCH_DL} simple-getch ${GETCH})
+DKIMPORT(https://github.com/mouuff/simple-getch)
+#DKSET(GETCH_VERSION master)
+#DKSET(GETCH_DL https://github.com/mouuff/simple-getch/archive/refs/heads/master.zip)
+#DKSET(GETCH_NAME simple-getch-${GETCH_VERSION})
+#DKSET(GETCH ${3RDPARTY}/${GETCH_NAME})
+#DKINSTALL(${GETCH_DL} simple-getch ${GETCH})
 
 
 ### LINK ###

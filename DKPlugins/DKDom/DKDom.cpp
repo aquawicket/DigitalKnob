@@ -4,19 +4,21 @@
 bool DKDom::Init(){
 	DKDEBUGFUNC();
 
-	/*
 	//Load the Duktape javascript DOM
-		DKClass::DKCreate("DKDuktape/DKGlobalEventHandlers.js");
-		DKClass::DKCreate("DKEventTarget");
-			DKClass::DKCreate("DKEvent");
-				DKClass::DKCreate("DKUIEvent");
-				DKClass::DKCreate("DKKeyboardEvent");
-			DKClass::DKCreate("DKDuktape/DKWindow.js");
-				DKClass::DKCreate("DKConsole");
-				DKClass::DKCreate("DKNavigator");
-				DKClass::DKCreate("DKScreen");
-				DKClass::DKCreate("DKXMLHttpRequest");
-	*/			
+#ifdef DUKTAPE_DOM
+	DKClass::DKCreate("DKEventTarget");
+	DKClass::DKCreate("DKDuktape/DKGlobalEventHandlers.js");
+	DKClass::DKCreate("DKEvent");
+	DKClass::DKCreate("DKUIEvent");
+#ifndef IOS
+	DKClass::DKCreate("DKKeyboardEvent");
+#endif
+	DKClass::DKCreate("DKDuktape/DKWindow.js");
+	DKClass::DKCreate("DKConsole");
+	DKClass::DKCreate("DKNavigator");
+	DKClass::DKCreate("DKScreen");
+	DKClass::DKCreate("DKXMLHttpRequest");
+#endif
 
 
 	//Load the Duktape javascript DOM

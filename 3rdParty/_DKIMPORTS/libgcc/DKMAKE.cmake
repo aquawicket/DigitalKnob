@@ -1,14 +1,11 @@
-### VERSION ###
 if(WIN_32)
 	DKDEPEND(mingw32)
 elseif(WIN_64)
 	DKDEPEND(mingw64)
 endif()
 
-#DKSET(LIBGCC_VERSION ???)
+
 DKSET(LIBGCC_NAME libgcc)
-#DKSET(LIBGCC_???.zip)
-#DKSET(LIBGCC ${3RDPARTY}/${LIBGCC_NAME})
 if(WIN_32)
 	DKSET(LIBGCC ${MINGW32}/lib/gcc/i686-w64-mingw32/${MINGW32_VERSION})
 endif()
