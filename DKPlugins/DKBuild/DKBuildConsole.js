@@ -86,13 +86,13 @@ function DKBuildConsole_ChooseUpdate() {
 		//P key
 		case 112:
 			console.log("-> Reset Plugins")
-			DKBuild_ResetEverything()
+			DKBuild_ResetPlugins()
 			DKGit_GitUpdate()
 			break
 		//T key
 		case 116:
 			console.log("-> Reset 3rdParty")
-			DKBuild_ResetEverything()
+			DKBuild_Reset3rdParty()
 			DKGit_GitUpdate()
 			break
 		//X key
