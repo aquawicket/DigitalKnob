@@ -45,8 +45,8 @@ function DKBuildConsole_ChooseUpdate() {
 	console.log("  P:  Reset Plugins")
 	console.log("  T:  Reset 3rdParty")
 	console.log("  X:  Reset Everything")
-	console.log("  Y:  Clear Screen")
-	console.log("  Z:  Clear cmake cache and .tmp files")
+	console.log("  C:  Clear Screen")
+	console.log("  S:  Clear cmake cache and .tmp files")
 	const assets = CPP_DKAssets_LocalAssets()
 	if(CPP_DKFile_Exists(assets+"cache.txt")){
 		const cache = CPP_DKFile_FileToString(assets+"cache.txt")
