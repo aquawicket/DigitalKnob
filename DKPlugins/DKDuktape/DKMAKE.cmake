@@ -1,6 +1,6 @@
 DKDEPEND(duktape)
 DKDEPEND(DK)
-if(ENABLE_babel)
+if(USE_babel)
 	DKDEPEND(babel)
 endif()
 
