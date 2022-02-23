@@ -529,7 +529,7 @@ function DKBuild_DoResults(){
 				return false
 		}
 		
-		if(!DKBuild_Command(DIGITALKNOB+"DK/3rdParty/_DKIMPORTS/jdk/registerJDK.bat"))
+		if(!DKBuild_Command(DIGITALKNOB+"DK/3rdParty/_DKIMPORTS/jdk/registerJDK.cmd"))
 			return false
 		
 		if(!DKBuild_Command(app_path+OS+"/gradlew --project-dir "+app_path+OS+" --info clean build"))
@@ -564,7 +564,10 @@ function DKBuild_DoResults(){
 				return false
 		}
 		
-		if(!DKBuild_Command(DIGITALKNOB+"DK/3rdParty/_DKIMPORTS/jdk/registerJDK.bat"))
+		if(!DKBuild_Command(DIGITALKNOB+"DK/3rdParty/_DKIMPORTS/jdk/registerJDK.cmd"))
+			return false
+		
+		if(!DKBuild_Command(app_path+OS+"/gradlew --project-dir "+app_path+OS+" --info clean build"))
 			return false
 		
 		if(!DKBuild_Command(app_path+OS+"/___Install.cmd"))
