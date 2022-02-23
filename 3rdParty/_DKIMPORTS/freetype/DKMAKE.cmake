@@ -2,8 +2,9 @@
 # https://www.freetype.org/
 
 
-#DKIMPORT(https://github.com/freetype/freetype NOPATCH)
+#DKIMPORT(https://github.com/freetype/freetype)
 DKIMPORT(https://github.com/freetype/freetype/archive/20ec99be7ecfd1a07e1ff7a7ef3e510203ea33bd.zip)
+
 #DKSET(FREETYPE_VERSION 2.5.5)
 #DKSET(FREETYPE_NAME freetype-${FREETYPE_VERSION})
 #DKSET(FREETYPE_DL https://sourceforge.net/projects/freetype/files/freetype2/2.5.5/freetype-2.5.5.tar.gz)
@@ -16,18 +17,18 @@ DKINCLUDE(${FREETYPE}/include)
 DKINCLUDE(${FREETYPE}/${OS}/include/freetype2)
 WIN_DEBUG_DKLIB(${FREETYPE}/${OS}/${DEBUG_DIR}/freetyped.lib)
 WIN_RELEASE_DKLIB(${FREETYPE}/${OS}/${RELEASE_DIR}/freetype.lib)
-MAC_DEBUG_DKLIB(${FREETYPE}/${OS}/${DEBUG_DIR}/libfreetyped.a)
-MAC_RELEASE_DKLIB(${FREETYPE}/${OS}/${RELEASE_DIR}/libfreetype.a)
-IOS_DEBUG_DKLIB(${FREETYPE}/${OS}/${DEBUG_DIR}/libfreetyped.a)
-IOS_RELEASE_DKLIB(${FREETYPE}/${OS}/${RELEASE_DIR}/libfreetype.a)
-IOSSIM_DEBUG_DKLIB(${FREETYPE}/${OS}/${DEBUG_DIR}/libfreetyped.a)
-IOSSIM_RELEASE_DKLIB(${FREETYPE}/${OS}/${RELEASE_DIR}/libfreetype.a)
-LINUX_DEBUG_DKLIB(${FREETYPE}/${OS}/${DEBUG_DIR}/libfreetyped.a)
-LINUX_RELEASE_DKLIB(${FREETYPE}/${OS}/${RELEASE_DIR}/libfreetype.a)
-RASPBERRY_DEBUG_DKLIB(${FREETYPE}/${OS}/${DEBUG_DIR}/libfreetyped.a)
-RASPBERRY_RELEASE_DKLIB(${FREETYPE}/${OS}/${RELEASE_DIR}/libfreetype.a)
-ANDROID_DEBUG_DKLIB(${FREETYPE}/${OS}/${DEBUG_DIR}/libfreetyped.a)
-ANDROID_RELEASE_DKLIB(${FREETYPE}/${OS}/${RELEASE_DIR}/libfreetype.a)
+UNIX_DEBUG_DKLIB(${FREETYPE}/${OS}/${DEBUG_DIR}/libfreetyped.a)
+UNIX_RELEASE_DKLIB(${FREETYPE}/${OS}/${RELEASE_DIR}/libfreetype.a)
+#IOS_DEBUG_DKLIB(${FREETYPE}/${OS}/${DEBUG_DIR}/libfreetyped.a)
+#IOS_RELEASE_DKLIB(${FREETYPE}/${OS}/${RELEASE_DIR}/libfreetype.a)
+#IOSSIM_DEBUG_DKLIB(${FREETYPE}/${OS}/${DEBUG_DIR}/libfreetyped.a)
+#IOSSIM_RELEASE_DKLIB(${FREETYPE}/${OS}/${RELEASE_DIR}/libfreetype.a)
+#LINUX_DEBUG_DKLIB(${FREETYPE}/${OS}/${DEBUG_DIR}/libfreetyped.a)
+#LINUX_RELEASE_DKLIB(${FREETYPE}/${OS}/${RELEASE_DIR}/libfreetype.a)
+#RASPBERRY_DEBUG_DKLIB(${FREETYPE}/${OS}/${DEBUG_DIR}/libfreetyped.a)
+#RASPBERRY_RELEASE_DKLIB(${FREETYPE}/${OS}/${RELEASE_DIR}/libfreetype.a)
+#ANDROID_DEBUG_DKLIB(${FREETYPE}/${OS}/${DEBUG_DIR}/libfreetyped.a)
+#ANDROID_RELEASE_DKLIB(${FREETYPE}/${OS}/${RELEASE_DIR}/libfreetype.a)
 
 
 
@@ -42,7 +43,7 @@ ANDROID_DKSET(FREETYPE_CMAKE -DFREETYPE_INCLUDE_DIRS=${FREETYPE}/include -DFREET
 	
 ### COMPILE ###
 DKSETPATH(${FREETYPE}/${BUILD_DIR})
-DKQCOMMAND(${DKCMAKE_BUILD} -DFT_REQUIRE_ZLIB=TRUE -DCMAKE_DISABLE_FIND_PACKAGE_HarfBuzz=TRUE ${ZLIB_CMAKE} ${FREETYPE})
+DKQCOMMAND(${DKCMAKE_BUILD} -DFT_REQUIRE_ZLIB=TRUE -DCMAKE_DISABLE_FIND_PACKAGE_HarfBuzz=TRUE ${ZLIB_CMAKE} ${BZIP2_CMAKE} ${FREETYPE})
 
 
 WIN_VS(${FREETYPE_NAME} freetype.sln freetype)
