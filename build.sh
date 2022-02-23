@@ -64,7 +64,9 @@ while :
 				git pull --all
 				git checkout -- .
 				git checkout Development
-				if [[ $? -eq 0]]; then
+				if [[ "$?" == "0" ]]; then
+					echo "Development branch selected"
+				else
 					echo "Remote has no Development branch. Creating..."
 					git checkout -b Development master
 					git push --set-upstream origin Development
