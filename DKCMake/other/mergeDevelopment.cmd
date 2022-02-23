@@ -2,11 +2,14 @@
 
 set "branch=Development"
 
+set "DIGITALKNOB=C:\Users\%USERNAME%\digitalknob"
+set "DKPATH=%DIGITALKNOB%\DK"
 if exist "C:\Program Files\Git\bin\git.exe" set "GIT=C:\Program Files\Git\bin\git.exe"
 if exist "C:\Program Files (x86)\Git\bin\git.exe" set "GIT=C:\Program Files (x86)\Git\bin\git.exe"
 if NOT exist "%GIT%" (
 	ERROR "Could not find git"
 )
+cd %DKPATH%
 pause
 echo Merging %branch% into master and pushing to remote
 "%GIT%" checkout %branch%
