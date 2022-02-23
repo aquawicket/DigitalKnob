@@ -408,7 +408,7 @@ function DKBuild_DoResults(){
 	if(OS === "mac64"){
 		DKBuild_ValidateXcode()
 		CPP_DKFile_MkDir(app_path+OS)
-		if(!DKBuild_Command(CMAKE+" -G \"Xcode\" -DCMAKE_OSX_ARCHITECTURES=x86_64 "+cmake_string+" -S"+DIGITALKNOB+"DK/DKCMake -B"+app_path+OS))
+		if(!DKBuild_Command(CMAKE+" -G \"Xcode\" -T buildsystem=1 -DCMAKE_OSX_ARCHITECTURES=x86_64 "+cmake_string+" -S"+DIGITALKNOB+"DK/DKCMake -B"+app_path+OS))
 			return false
 
 		//CPP_DKFile_ChDir(app_path+OS)
