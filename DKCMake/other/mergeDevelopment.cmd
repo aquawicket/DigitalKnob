@@ -17,17 +17,14 @@ echo Merging %branch% into master and pushing to remote
 
 if NOT "%ERRORLEVEL%" == "0" (
 	echo THERE WAN AN ERROR MERGING
+	:: If there are conflicts
+	CPP_DK_Execute(GIT + " git status")
 ) else (
-	echo THE MERGE WAS SUCCESSFUL 
+	echo THE MERGE WAS SUCCESSFUL
+	:: After conflicts resolved
+	"%GIT%" commit -a -m "Merge %branch% Branch in to Master"
+	"%GIT%" push origin master
 )
-
-	
-:: If there are conflicts
-::CPP_DK_Execute(GIT + " git status")
-
-:: After conflicts resolved
-::"%GIT%" commit -a -m "Merge Development Branch in to Master"
-::"%GIT%" push origin master
  
  
 %DKEND% 
