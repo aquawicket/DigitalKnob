@@ -2,6 +2,12 @@
 
 set "branch=Development"
 
+if exist "C:\Program Files\Git\bin\git.exe" set "GIT=C:\Program Files\Git\bin\git.exe"
+if exist "C:\Program Files (x86)\Git\bin\git.exe" set "GIT=C:\Program Files (x86)\Git\bin\git.exe"
+if NOT exist "%GIT%" (
+	ERROR "Could not find git"
+)
+
 echo Merging %branch% into master and pushing to remote
 "%GIT%" checkout %branch%
 "%GIT%" pull
@@ -22,3 +28,6 @@ if NOT "%ERRORLEVEL%" == "0" (
 :: After conflicts resolved
 ::"%GIT%" commit -a -m "Merge Development Branch in to Master"
 ::"%GIT%" push origin master
+ 
+ 
+%DKEND% 
