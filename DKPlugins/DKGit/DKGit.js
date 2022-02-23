@@ -138,7 +138,7 @@ function DKGit_GitCommit() {
 				//CPP_DK_Execute(GIT + " diff git diff --color-words & echo. & echo. & echo Press any key to proceed with commit")
 				
 				console.log("\n ########## Changed Files ##########")
-				CPP_DK_Execute(GIT + " diff git diff --name-only & echo ################################### & echo. & echo Press any key to proceed with commit")
+				CPP_DK_Execute(GIT + " diff --stat & echo ################################### & echo. & echo Press any key to proceed with commit")
 				CPP_DK_Execute("pause")
 				CPP_DK_Execute(GIT + " commit -a -m \"commit from git\"")
                 CPP_DK_Execute(GIT + " push")
