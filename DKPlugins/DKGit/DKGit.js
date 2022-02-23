@@ -1,3 +1,5 @@
+//git stash -  https://opensource.com/article/21/4/git-stash
+
 var GIT = ""
 
 function DKGit_init() {

@@ -66,9 +66,9 @@ DKCodeRunner.prototype.create = function DKCodeRunner_create(parent, top, bottom
 		console.log("input")
 	}
 	// RML /////////////////////////////////////////////////
-	//textarea.onchange = function textarea_onchange(event) {
-	//	console.log("change")
-	//}
+	textarea.onchange = function textarea_onchange(event) {
+		console.log("change")
+	}
 	
 	
 	
