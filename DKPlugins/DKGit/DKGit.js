@@ -195,7 +195,7 @@ function DKGit_SwitchBranch(branch){
 	return CPP_DK_Execute(GIT + " checkout "+branch)
 }
 
-function DKGit_ListLocalBranches((){
+function DKGit_ListLocalBranches(){
 	return CPP_DK_Execute(GIT + " branch")
 }
 
