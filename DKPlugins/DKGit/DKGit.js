@@ -137,9 +137,15 @@ function DKGit_GitCommit() {
 				}
 				//CPP_DK_Execute(GIT + " diff git diff --color-words & echo. & echo. & echo Press any key to proceed with commit")
 				
-				console.log("\n ########## Changed Files ##########")
-				CPP_DK_Execute(GIT + " diff --stat & echo ################################### & echo. & echo Press any key to proceed with commit")
-				CPP_DK_Execute("pause")
+				console.log("\n########## Changed Files ##########")
+				CPP_DK_Execute(GIT + " diff --stat --color-words")
+				console.log("\nPress c to proceed with the commit,     Press any other key to cancel")
+				var key = getch()
+				if(key !== 99){ // the c key
+					console.log("COMMIT CANCELED\n\n\n")
+					return;
+				}
+
 				CPP_DK_Execute(GIT + " commit -a -m \"commit from git\"")
                 CPP_DK_Execute(GIT + " push")
             }
