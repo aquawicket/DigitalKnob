@@ -1,5 +1,4 @@
 # https://asitdhal.medium.com/cmake-functions-and-macros-22293041519f
-# https://asitdhal.medium.com/cmake-functions-and-macros-22293041519f
 
 ########### SETTINGS ##############
 ###################################

@@ -1,9 +1,3 @@
-if(DKOPTIONS_INCLUDED)
-  return()
-endif(DKOPTIONS_INCLUDED)
-DKSET(DKOPTIONS_INCLUDED 1)
-
-
 # FIXME: work to remove this
 if(COMMAND cmake_policy)
 	cmake_policy(SET CMP0003 NEW) ##https://cmake.org/cmake/help/latest/policy/CMP0003.html

@@ -44,12 +44,13 @@
 ###
 ### https://cmake.org/cmake/help/git-master/guide/tutorial/index.html
 ###
-if(DKCMAKELIST_INCLUDED)
-  return()
-endif(DKCMAKELIST_INCLUDED)
-set(DKCMAKELIST_INCLUDED 1)
-
 message(STATUS "\nCMake version ${CMAKE_VERSION}\n")
+CMAKE_MINIMUM_REQUIRED(VERSION 3.10)
+CMAKE_POLICY(SET CMP0054 NEW)
+
+if(CMAKE_HOST_UNIX)
+	execute_process(COMMAND sudo echo WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}) #ask for sudo password ahead of time
+endif()
 
 #########  DUMP ALL STARTUP VARIABLES TO FILE  #####################################################################
 macro(DUMP_ALL_VARIABLES file)
@@ -62,29 +63,15 @@ macro(DUMP_ALL_VARIABLES file)
 endmacro()
 ####################################################################################################################
 DUMP_ALL_VARIABLES(${CMAKE_SOURCE_DIR}/CMAKE_START_VARIABLES.txt)
-
-
 #variable_watch(DKCMAKE_BUILD) 
 
-if(CMAKE_HOST_UNIX)
-	execute_process(COMMAND sudo echo WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}) #ask for sudo password ahead of time
-endif()
-
-CMAKE_MINIMUM_REQUIRED(VERSION 3.10)
-CMAKE_POLICY(SET CMP0054 NEW)
 
 DUMP_ALL_VARIABLES(${CMAKE_SOURCE_DIR}/CMAKE_MID_VARIABLES.txt)
 
-
-
 PROJECT(DigitalKnob)
-
 
 DUMP_ALL_VARIABLES(${CMAKE_SOURCE_DIR}/CMAKE_PROJECT_VARIABLES.txt)
 
 INCLUDE(Generate.cmake)
-
-
-
 
 DUMP_ALL_VARIABLES(${CMAKE_SOURCE_DIR}/CMAKE_END_VARIABLES.txt)
