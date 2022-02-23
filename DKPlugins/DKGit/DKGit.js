@@ -64,7 +64,7 @@ function DKGit_Clone(url, directory){
 }
 
 function DKGit_Checkout(branch){
-	//const branches = DKGit_GetLocalBranchList()
+	//const branches = DKGit_ListLocalBranches()
 	const branches = DKGit_ListRemoteBranches()
 	console.log(branches)
 	if(!branches.includes(branch)){
@@ -195,7 +195,7 @@ function DKGit_SwitchBranch(branch){
 	return CPP_DK_Execute(GIT + " checkout "+branch)
 }
 
-function DKGit_GetLocalBranchList(){
+function DKGit_ListLocalBranches((){
 	return CPP_DK_Execute(GIT + " branch")
 }
 
@@ -205,6 +205,14 @@ function DKGit_ListRemoteBranches(){
 
 function DKGit_ListAllBranches(){
 	return CPP_DK_Execute(GIT + " branch -a")
+}
+
+function DKGit_DeleteLocalBranch(branch){
+	CPP_DK_Execute(GIT + " branch -d "+branch)
+}
+
+function DKGit_DeleteRemoteBranch(branch){
+	CPP_DK_Execute(GIT + " push origin --delete "+branch)
 }
 
 // https://stackoverflow.com/questions/3258243/check-if-pull-needed-in-git
