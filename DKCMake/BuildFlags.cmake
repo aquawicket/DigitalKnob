@@ -1,3 +1,8 @@
+if(DKBUILDTOOLS_INCLUDED)
+  return()
+endif(DKBUILDTOOLS_INCLUDED)
+set(DKBUILDTOOLS_INCLUDED 1)
+
 # https://clang.llvm.org/docs/ClangCommandLineReference.html
 # https://clang.llvm.org/docs/CrossCompilation.html
 # https://gcc.gnu.org/onlinedocs/gcc/C_002b_002b-Dialect-Options.html

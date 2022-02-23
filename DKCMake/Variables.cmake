@@ -1,3 +1,9 @@
+if(DKOPTIONS_INCLUDED)
+  return()
+endif(DKOPTIONS_INCLUDED)
+DKSET(DKOPTIONS_INCLUDED 1)
+
+
 # FIXME: work to remove this
 if(COMMAND cmake_policy)
 	cmake_policy(SET CMP0003 NEW) ##https://cmake.org/cmake/help/latest/policy/CMP0003.html
@@ -14,6 +20,9 @@ DKSET(DKIMPORTS ${3RDPARTY}/_DKIMPORTS)
 DKSET(DKDOWNLOAD ${DIGITALKNOB}/Download)
 DKSET(DKWEB "http://127.0.0.1")
 DKSET(CURRENT_DIR ${DIGITALKNOB})
+
+DKSET(CMAKE_SUPPRESS_REGENERATION true)
+DKSET(CMAKE_INSTALL_PREFIX ${DIGITALKNOB}/DKBIN)
 
 
 ###########################################################################
@@ -49,7 +58,7 @@ option(DEBUG "Build Debug Output" ON)
 option(RELEASE "Build Release Output" ON)
 if(NOT DEBUG)
 if(NOT RELEASE)
-	DKINFO(No Build type selected. Defaulting to DEBUG and RELEASE)
+	DKINFO("No Build type selected. Defaulting to DEBUG and RELEASE")
 	DKSET(DEBUG ON)
 	DKSET(RELEASE ON)
 endif()
@@ -65,7 +74,7 @@ option(REBUILDALL "Rebuild the app and all dependencies" OFF)
 if(NOT BUILD)
 if(NOT REBUILD)
 if(NOT REBUILDALL)
-	DKINFO(No Build level selected, defaulting to REBUILDALL)
+	DKINFO("No Build level selected, defaulting to REBUILDALL")
 	DKSET(REBUILDALL ON)
 endif()
 endif()

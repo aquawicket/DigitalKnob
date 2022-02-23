@@ -1,6 +1,10 @@
 include(Functions.cmake)
 include(Variables.cmake)
 include(Disabled.cmake)
+#if(DKPROCESS_INCLUDED)
+#  return()
+#endif(DKPROCESS_INCLUDED)
+#DKSET(DKPROCESS_INCLUDED 1)
 
 DKINFO("\n")
 DKINFO("############################################################")
@@ -64,8 +68,8 @@ foreach(plugin ${dkdepend_list})
 	#DKINFO("plugin_path = ${plugin_path}")
 
 	#This executes the 3rdParty library builds, and dkplugin setup, creates CMakeLists.txt files
+	DKSET(CURRENT_PLUGIN ${plugin})
 	include(${plugin_path}/DKMAKE.cmake)
-	
 	
 	#NOTE: we won't have the library paths to remove until we've run DKCMake.cmake for the library
 	# We want to to use this to refresh 3rdParty Plugins
@@ -257,7 +261,9 @@ foreach(plugin ${dkdepend_list})
 				endif()
 			endforeach()
 		endif()
-		
+	endif()
+	if(EXISTS ${plugin_path}/${BUILD_DIR}/cmake_install.cmake)
+		#DKQCOMMAND(${CMAKE_COMMAND} --install ${plugin_path}/${BUILD_DIR})
 	endif()
 endforeach()
 
@@ -396,10 +402,9 @@ if(WIN_32)
 	set_target_properties(${APP_NAME} PROPERTIES LINK_FLAGS_DEBUG ${DEBUG_FLAGS} LINK_FLAGS_RELEASE ${RELEASE_FLAGS})
 	set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT ${APP_NAME})
 	
-	### POST BUILD ###
-	#CPP_DKFile_Copy(app_path+OS+"/Release/"+APP+".pdb", app_path+"assets/"+APP+".pdb", true)
-	#CPP_DK_Execute(DIGITALKNOB+"DK/3rdParty/upx-3.95-win64/upx.exe -9 -v "+app_path+OS+"/Release/"+APP+".exe")
-		
+	
+	#DKSET(CMAKE_BUILD_TYPE "")
+	####################### Do Post Build Stuff #######################
 	# "https://gist.github.com/baiwfg2/39881ba703e9c74e95366ed422641609"
 	# TEST
 	#add_custom_command(
@@ -408,6 +413,7 @@ if(WIN_32)
 	#	COMMAND ${CMAKE_COMMAND} -E echo "!!!!!! TARGET_FILE:APP_NAME = $<TARGET_FILE:${APP_NAME}>"
 	#	COMMAND ${CMAKE_COMMAND} -E echo "!!!!!! TARGET_FILE_DIR:APP_NAME = $<TARGET_FILE_DIR:${APP_NAME}>"
 	#	COMMAND ${CMAKE_COMMAND} -E echo "!!!!!! CONFIG = $<CONFIG>"
+	#	#COMMAND cmd /c ${CMAKE_COMMAND} --build ${DKPROJECT}/${OS} --target ${APP_NAME}
 	#)
 	
 	#add_custom_command(
@@ -419,6 +425,10 @@ if(WIN_32)
     #COMMENT "Adding manifest..."
     #)
 	
+	#CPP_DKFile_Copy(app_path+OS+"/Release/"+APP+".pdb", app_path+"assets/"+APP+".pdb", true)
+	#CPP_DK_Execute(DIGITALKNOB+"DK/3rdParty/upx-3.95-win64/upx.exe -9 -v "+app_path+OS+"/Release/"+APP+".exe")
+	
+
 endif(WIN_32)
 	
 ##########
@@ -502,6 +512,15 @@ if(WIN_64)
 	set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT ${APP_NAME})
 		
 	####################### Do Post Build Stuff #######################
+	# "https://gist.github.com/baiwfg2/39881ba703e9c74e95366ed422641609"
+	# TEST
+	add_custom_command(
+		TARGET ${APP_NAME}
+		POST_BUILD
+		COMMAND ${CMAKE_COMMAND} -E echo "!!!!!! TARGET_FILE:APP_NAME = $<TARGET_FILE:${APP_NAME}>"
+		COMMAND ${CMAKE_COMMAND} -E echo "!!!!!! TARGET_FILE_DIR:APP_NAME = $<TARGET_FILE_DIR:${APP_NAME}>"
+		COMMAND ${CMAKE_COMMAND} -E echo "!!!!!! CONFIG = $<CONFIG>"
+	)
 	#CPP_DKFile_Copy(app_path+OS+"/Release/"+APP+".pdb", app_path+"assets/"+APP+".pdb", true)
 	#CPP_DK_Execute(DIGITALKNOB+"DK/3rdParty/upx-3.95-win64/upx.exe -9 -v "+app_path+OS+"/Release/"+APP+".exe")
 endif(WIN_64)
@@ -595,6 +614,16 @@ if(MAC)
 	set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY XCODE_STARTUP_PROJECT ${APP_NAME})
 	
 	####################### Do Post Build Stuff #######################
+	# "https://gist.github.com/baiwfg2/39881ba703e9c74e95366ed422641609"
+	# TEST
+	add_custom_command(
+		TARGET ${APP_NAME}
+		POST_BUILD
+		COMMAND ${CMAKE_COMMAND} -E echo "!!!!!! TARGET_FILE:APP_NAME = $<TARGET_FILE:${APP_NAME}>"
+		COMMAND ${CMAKE_COMMAND} -E echo "!!!!!! TARGET_FILE_DIR:APP_NAME = $<TARGET_FILE_DIR:${APP_NAME}>"
+		COMMAND ${CMAKE_COMMAND} -E echo "!!!!!! CONFIG = $<CONFIG>"
+	)
+	
 	# Copy the CEF framework into the app bundle
 	if(EXISTS ${CEF})
 		DKINFO("Adding Chromium Embedded Framework.framework to bundle . . .")
@@ -751,6 +780,17 @@ if(IOS OR IOSSIM)
 	############# Link Libraries, Set Startup Project #################
 	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${LIBS})
 	set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY XCODE_STARTUP_PROJECT ${APP_NAME})
+	
+	####################### Do Post Build Stuff #######################
+	# "https://gist.github.com/baiwfg2/39881ba703e9c74e95366ed422641609"
+	# TEST
+	add_custom_command(
+		TARGET ${APP_NAME}
+		POST_BUILD
+		COMMAND ${CMAKE_COMMAND} -E echo "!!!!!! TARGET_FILE:APP_NAME = $<TARGET_FILE:${APP_NAME}>"
+		COMMAND ${CMAKE_COMMAND} -E echo "!!!!!! TARGET_FILE_DIR:APP_NAME = $<TARGET_FILE_DIR:${APP_NAME}>"
+		COMMAND ${CMAKE_COMMAND} -E echo "!!!!!! CONFIG = $<CONFIG>"
+	)
 endif()
 
 
@@ -827,6 +867,15 @@ if(NOT RASPBERRY)
 	endif()
 	
 	####################### Do Post Build Stuff #######################
+	# "https://gist.github.com/baiwfg2/39881ba703e9c74e95366ed422641609"
+	# TEST
+	add_custom_command(
+		TARGET ${APP_NAME}
+		POST_BUILD
+		COMMAND ${CMAKE_COMMAND} -E echo "!!!!!! TARGET_FILE:APP_NAME = $<TARGET_FILE:${APP_NAME}>"
+		COMMAND ${CMAKE_COMMAND} -E echo "!!!!!! TARGET_FILE_DIR:APP_NAME = $<TARGET_FILE_DIR:${APP_NAME}>"
+		COMMAND ${CMAKE_COMMAND} -E echo "!!!!!! CONFIG = $<CONFIG>"
+	)
 	#CPP_DK_Execute("chmod +x "+app_path+OS+"/Debug/"+APP)
 endif()
 endif()
@@ -909,6 +958,15 @@ if(RASPBERRY)
 	endif()
 		
 	####################### Do Post Build Stuff #######################
+	# "https://gist.github.com/baiwfg2/39881ba703e9c74e95366ed422641609"
+	# TEST
+	add_custom_command(
+		TARGET ${APP_NAME}
+		POST_BUILD
+		COMMAND ${CMAKE_COMMAND} -E echo "!!!!!! TARGET_FILE:APP_NAME = $<TARGET_FILE:${APP_NAME}>"
+		COMMAND ${CMAKE_COMMAND} -E echo "!!!!!! TARGET_FILE_DIR:APP_NAME = $<TARGET_FILE_DIR:${APP_NAME}>"
+		COMMAND ${CMAKE_COMMAND} -E echo "!!!!!! CONFIG = $<CONFIG>"
+	)
 	#CPP_DK_Execute("chmod +x "+app_path+OS+"/Debug/"+APP)
 endif()
 
@@ -940,8 +998,8 @@ if(ANDROID)
 	endif()
 		
 	####################### Create Library Target ###################
-	set(CMAKE_LIBRARY_OUTPUT_DIRECTORY_DEBUG "${CMAKE_BINARY_DIR}/app/src/main/jniLibs/armeabi-v7a")
-	set(CMAKE_LIBRARY_OUTPUT_DIRECTORY_RELEASE "${CMAKE_BINARY_DIR}/app/src/main/jniLibs/armeabi-v7a")
+	set(CMAKE_LIBRARY_OUTPUT_DIRECTORY_DEBUG "${CMAKE_BINARY_DIR}/app/src/main/jniLibs/${ANDROID_ABI}")
+	set(CMAKE_LIBRARY_OUTPUT_DIRECTORY_RELEASE "${CMAKE_BINARY_DIR}/app/src/main/jniLibs/${ANDROID_ABI}")
 
 	if(ANDROID_32)
 		DKCOPY(${DKPLUGINS}/_DKIMPORT/android/ ${DKPROJECT}/android32/ FALSE)
@@ -973,11 +1031,26 @@ if(ANDROID)
 	set_property(TARGET gradleAPK PROPERTY VS_SOLUTION_DEPLOY ON) # NOT WORKING
 	set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT gradleAPK)
 		
-	# push assets to device
-	message(STATUS "#################### ${CMAKE_BINARY_DIR}/___CopyAssets.cmd #############################")
-	DKCOMMAND(cmd /c ${CMAKE_BINARY_DIR}/___CopyAssets.cmd)
 	####################### Do Post Build Stuff #######################
+	# "https://gist.github.com/baiwfg2/39881ba703e9c74e95366ed422641609"
+	# TEST
+	add_custom_command(
+		TARGET main
+		POST_BUILD
+		COMMAND ${CMAKE_COMMAND} -E echo "!!!!!! TARGET_FILE:APP_NAME = $<TARGET_FILE:main>"
+		COMMAND ${CMAKE_COMMAND} -E echo "!!!!!! TARGET_FILE_DIR:APP_NAME = $<TARGET_FILE_DIR:main>"
+		COMMAND ${CMAKE_COMMAND} -E echo "!!!!!! CONFIG = $<CONFIG>"
+	)
+	
+	#if(CPP_DK_Execute(app_path+OS+"/gradlew --project-dir "+app_path+OS+" --info clean build").error)
+	#	return
+	#if(CPP_DK_Execute(app_path+OS+"/___Install.cmd").error)
+	#	return
+		
 endif()
+
+
+
 
 DKBUILD_LOG("\n\n")
 DKBUILD_LOG("########### ${APP_NAME} Post-Generated Compiler Settings ###########")
@@ -1026,6 +1099,18 @@ foreach(lib ${RELEASE_LIBS})
 	endif()
 endforeach()
 
+# This needs to be a Post-Build after the executable is available
+#DKBUILD_LOG("\n")
+#DKBUILD_LOG(" ### Dynamic libraries ###")
+#if(LINUX OR RASPBERRY OR ANDROID)
+#	DKCOMMAND(ldd >> ${DKPROJECT}/${OS}/DKBUILD.log)
+#elseif(MAC OR IOS)
+	# TODO
+	#DKCOMMAND(otool -L ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app)
+#elseif(WIN)	
+	# TODO
+	#"C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.30.30705/bin/Hostx86/x86/dumpbin.exe" /dependents ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.exe
+#endif()
 
 DKINFO("\n\n")
 DKINFO("**************************************************")
