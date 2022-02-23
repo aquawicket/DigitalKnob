@@ -55,16 +55,21 @@ while :
 				else
 					sudo apt-get -y install git
 				fi
+				
+				
 				if [[ ! -d "$DKPATH/.git" ]]; then
 					git clone https://github.com/aquawicket/DigitalKnob.git $DKPATH
 				fi
 				cd $DKPATH
-				
+				git pull --all
 				git checkout -- .
-				#git pull origin master
-				
 				git checkout Development
-				git pull
+				if [[ $? -eq 0]]; then
+					echo "Remote has no Development branch. Creating..."
+					git checkout -b Development master
+					git push --set-upstream origin Development
+				fi
+								
 				
 				chmod +x $DKPATH/build.sh
 				chmod +x $DKCMAKE/dkbuild.sh
