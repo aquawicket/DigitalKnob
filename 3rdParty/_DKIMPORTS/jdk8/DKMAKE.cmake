@@ -1,19 +1,12 @@
 # https://docs.microsoft.com/en-us/java/openjdk/download
 # https://jdk.java.net/archive/
-#
-# https://download.java.net/openjdk/jdk8u41/ri/openjdk-8u41-b04-windows-i586-14_jan_2020.zip
-# https://github.com/AdoptOpenJDK/openjdk8-upstream-binaries/releases/download/jdk8u312-b07/OpenJDK8U-jdk_x64_windows_8u312b07.zip
-# https://download.java.net/openjdk/jdk8u41/ri/openjdk-8u41-b04-linux-x64-14_jan_2020.tar.gz
 
 
-### VERSION ###
 WIN_HOST_DKSET(JDK8_VERSION 1.8.0_41)
 WIN_HOST_DKSET(JDK8_DL https://download.java.net/openjdk/jdk8u41/ri/openjdk-8u41-b04-windows-i586-14_jan_2020.zip)
 
-
-#MAC_HOST_DKSET(JDK8_VERSION 1.8.0_41)
-#MAC_HOST_DKSET(JDK8_DL https://download.java.net/openjdk/jdk8u41/ri/openjdk-8u41-b04_osx-x64_14_jan_2020.tar.gz)
-
+MAC_HOST_DKSET(JDK8_VERSION 1.8.0_41)
+MAC_HOST_DKSET(JDK8_DL https://download.java.net/openjdk/jdk8u41/ri/openjdk-8u41-b04_osx-x64_14_jan_2020.tar.gz)
 
 LINUX_HOST_DKSET(JDK8_VERSION 1.8.0_41)
 LINUX_HOST_DKSET(JDK8_DL https://download.java.net/openjdk/jdk8u41/ri/openjdk-8u41-b04-linux-x64-14_jan_2020.tar.gz)
