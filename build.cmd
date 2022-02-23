@@ -52,17 +52,22 @@ if NOT exist "%GIT%" (
 	if exist "C:\Program Files\Git\bin\git.exe" set "GIT=C:\Program Files\Git\bin\git.exe"
 	if exist "C:\Program Files (x86)\Git\bin\git.exe" set "GIT=C:\Program Files (x86)\Git\bin\git.exe"
 )
-if NOT exist "%DKPATH%" "%GIT%" clone https://github.com/aquawicket/DigitalKnob.git "%DKPATH%"
-::if NOT "%ERRORLEVEL%" == "0" goto error
+if NOT exist "%DKPATH%\.git" (
+	"%GIT%" clone https://github.com/aquawicket/DigitalKnob.git "%DKPATH%"
+)
+if NOT "%ERRORLEVEL%" == "0" goto error
+
 cd "%DKPATH%"
-
+"%GIT%" pull --all
 "%GIT%" checkout -- .
-::"%GIT%" pull origin master 
-
+if NOT "%ERRORLEVEL%" == "0" goto error
 "%GIT%" checkout Development
-"%GIT%" pull
+if NOT "%ERRORLEVEL%" == "0" (
+	echo Remote has no Development branch. Creating...
+	"%GIT%" checkout -b Development master
+	"%GIT%" push --set-upstream origin Development
+)
 
-::if NOT "%ERRORLEVEL%" == "0" goto error
 
 ::if NOT "%ERRORLEVEL%" == "0" goto error
 goto pickapp

@@ -1,5 +1,4 @@
 # https://asitdhal.medium.com/cmake-functions-and-macros-22293041519f
-# https://asitdhal.medium.com/cmake-functions-and-macros-22293041519f
 
 ########### SETTINGS ##############
 ###################################
@@ -1181,6 +1180,10 @@ function(DKMERGE_FLAGS args result)
 			endif()
 		endforeach()
 		if(${placeholder} GREATER 0)
+			list(LENGTH args args_length)
+			if(${placeholder} GREATER ${args_length})
+				math(EXPR placeholder "${args_length}-1")
+			endif()			
 			list(INSERT args ${placeholder} "${DK_${word}}")  #FIXME:  Error on Linux:  List index: 6 out of range (-6, 5)
 		endif()
 	endforeach()
@@ -2551,8 +2554,7 @@ function(DKIMPORT url) #Lib #ID #Patch
 		return()
 	endif()
 	
-	#DKDEBUG("math(EXPR last \"${count}-1\"") #OUTPUT_FORMAT DECIMAL)")  CMake 3.13+
-	math(EXPR last "${count}-1")
+	math(EXPR last "${count}-1")  #OUTPUT_FORMAT DECIMAL)")  CMake 3.13+
 	list(GET url_list ${last} url${last})
 	
 	

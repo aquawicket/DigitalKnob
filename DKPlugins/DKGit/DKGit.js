@@ -53,14 +53,9 @@ function DKGit_Clone(url, directory){
 	console.log("DKGit_Clone("+url+", "+directory+")")
 	if(!CPP_DKFile_Exists(directory + "/.git")){
 		CPP_DK_Execute(GIT+" clone "+url+" "+directory)
-		CPP_DKFile_ChDir(directory)
-		CPP_DK_Execute(GIT + " checkout -- .")
-		return true;
 	}
-	console.log("Local repository already exists")
 	CPP_DKFile_ChDir(directory)
 	CPP_DK_Execute(GIT + " checkout -- .")
-	return false;
 }
 
 function DKGit_Checkout(branch){
@@ -82,7 +77,7 @@ function DKGit_PullBranch(branch){
 
 function DKGit_GitUpdate() {
     console.log("Git Update DigitalKnob...\n")
-	DKGit_Clone("https://github.com/aquawicket/DigitalKnob.git", DIGITALKNOB+"DK")	
+	DKGit_Clone("https://github.com/aquawicket/DigitalKnob.git", DIGITALKNOB+"DK")
 	DKGit_PullBranch("Development")
 	
     //Multipe user folders
@@ -117,17 +112,7 @@ function DKGit_GitUpdate() {
 }
 
 function DKGit_GitCommit() {
-	/*
-    console.log("Git Commit DigitalKnob...\n")
-    CPP_DKFile_ChDir(DIGITALKNOB + "/DK")
-    //CPP_DK_Execute(GIT + " init")
-    //DKGit_SetCredentials()
-	//const branch = DKGit_GetCurrentBranch()
-	CPP_DK_Execute(GIT + " commit -a -m \"commit from git\"")
-    CPP_DK_Execute(GIT + " push")
-	*/
-	
-    //Multipe user folders
+    //Multipe folders in digitalknob/
     var contents = CPP_DKFile_DirectoryContents(DIGITALKNOB)
     if (contents) {
         var files = contents.split(",")
@@ -137,10 +122,10 @@ function DKGit_GitCommit() {
                 console.log("### Git Commit " + files[i] + "... \n")
                 CPP_DKFile_ChDir(DIGITALKNOB + files[i])
                 //CPP_DK_Execute(GIT + " init")
-				//DKGit_SetCredentials()
+				DKGit_SetCredentials()
 				//const branch = DKGit_GetCurrentBranch()
-				CPP_DK_Execute(GIT + " config user.email \"aquawicket@hotmail.com\"")
-				CPP_DK_Execute(GIT + " config user.name \"aquawicket\"")
+				CPP_DK_Execute(GIT + " diff --color-words & echo. & echo. & echo Press any key to proceed with commit")
+				CPP_DK_Execute("pause")
 				CPP_DK_Execute(GIT + " commit -a -m \"commit from git\"")
                 CPP_DK_Execute(GIT + " push")
             }
@@ -152,14 +137,37 @@ function DKGit_GitCommit() {
         DKAudio_PlaySound("DKBuild/ding.wav")
 }
 
-// https://stackoverflow.com/questions/5601931/what-is-the-best-and-safest-way-to-merge-a-git-branch-into-master/5602109#5602109
-function DKGit_MergeSquashAndPush(branch){
+// https://stackoverflow.com/a/5608860/688352
+// https://www.atlassian.com/git/tutorials/merging-vs-rebasing
+function DKGit_MergeBranchAndPush(branch){
 	console.log("Merging "+branch+" into master and pushing to remote")
+	CPP_DK_Execute(GIT + " checkout "+branch)
+	CPP_DK_Execute(GIT + " pull")
 	CPP_DK_Execute(GIT + " checkout master")
 	CPP_DK_Execute(GIT + " pull origin master")
-	CPP_DK_Execute(GIT + " merge --squash "+branch)
-	CPP_DK_Execute(GIT + " commit -a -m \"Merged Development Branch in to Master\"")
+	CPP_DK_Execute(GIT + " merge --no-ff --no-commit "+branch)
+	//CPP_DK_Execute(GIT + " merge "+branch)
+	//CPP_DK_Execute(GIT + " merge --squash "+branch)
+	
+	// If there are conflicts
+	//CPP_DK_Execute(GIT + " git status")
+
+	//After conflicts resolved
+	CPP_DK_Execute(GIT + " commit -a -m \"Merge Development Branch in to Master\"")
 	CPP_DK_Execute(GIT + " push origin master")
+}
+
+// https://stackoverflow.com/a/29048781/688352
+// https://www.atlassian.com/git/tutorials/merging-vs-rebasing
+function DKGit_RebaseBranchAndPush(branch){
+	console.log("Rebasing "+branch+" into master and pushing to remote")
+	CPP_DK_Execute(GIT + " checkout master")
+	CPP_DK_Execute(GIT + " pull")
+	CPP_DK_Execute(GIT + " checkout "+branch)
+	CPP_DK_Execute(GIT + " pull")
+	CPP_DK_Execute(GIT + " rebase -i master")
+	CPP_DK_Execute(GIT + " checkout master")
+	CPP_DK_Execute(GIT + " merge "+branch)
 }
 
 function DKGit_ListCommits(){
@@ -171,19 +179,19 @@ function DKGit_UpdateLastCommitMessage(message){
 }
 
 function DKGit_SetCredentials(){
+	CPP_DK_Execute(GIT + " config user.email \"aquawicket@hotmail.com\"")
     CPP_DK_Execute(GIT + " config user.name \"aquawicket\"")
-    CPP_DK_Execute(GIT + " config user.email \"aquawicket@hotmail.com\"")
-    CPP_DK_Execute(GIT + " config credential.helper store")
+    //CPP_DK_Execute(GIT + " config credential.helper store")
 }
 
 function DKGit_CreateBranch(name){
-	console.log("Creating New branch "+name)
+	console.debug("DKGit_CreateBranch("+name+")")
 	CPP_DK_Execute(GIT + " checkout -b "+name+" master")
 	DKGit_PushNewBranch(name)
 }
 
 function DKGit_PushNewBranch(name){
-	console.log("Pushing New branch "+name+" to remote")
+	console.debug(" DKGit_PushNewBranch("+name+")")
 	CPP_DK_Execute(GIT + " push --set-upstream origin "+name)
 }
 

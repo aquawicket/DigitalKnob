@@ -11,20 +11,8 @@ var Console = function(pointer) {
     Console.prototype.clear = function() {
         CPP_DKConsole_clear();
     }
-	Console.prototype.count = function() {
-        CPP_DKConsole_count();
-    }
-	Console.prototype.countReset = function() {
-        CPP_DKConsole_countReset();
-    }
     Console.prototype.debug = function(msg) {
         CPP_DKConsole_debug(msg + "\n");
-    }
-	Console.prototype.dir = function() {
-        CPP_DKConsole_dir();
-    }
-	Console.prototype.dirxml = function() {
-        CPP_DKConsole_dirxml();
     }
     Console.prototype.error = function(msg) {
         //CPP_DKConsole_error(msg + "\n");
@@ -58,28 +46,7 @@ var Console = function(pointer) {
     Console.prototype.log = function(msg) {
         CPP_DKConsole_log(msg + "\n");
     }
-	Console.prototype.profile = function(msg) {
-        CPP_DKConsole_profile();
-    }
-	Console.prototype.profileEnd = function(msg) {
-        CPP_DKConsole_profileEnd();
-    }
-	Console.prototype.table = function(msg) {
-        CPP_DKConsole_table();
-    }
-	Console.prototype.time = function(msg) {
-        CPP_DKConsole_time();
-    }
-	Console.prototype.timeEnd = function(msg) {
-        CPP_DKConsole_timeEnd();
-    }
-	Console.prototype.timeLog = function(msg) {
-        CPP_DKConsole_timeLog();
-    }
-	Console.prototype.timeStamp = function(msg) {
-        CPP_DKConsole_timeStamp();
-    }
-	Console.prototype.trace = function(msg) {
+    Console.prototype.trace = function(msg) {
 		CPP_DKConsole_trace(msg + "\n");
     }
     Console.prototype.warn = function(msg) {
