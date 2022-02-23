@@ -124,7 +124,7 @@ function DKGit_GitCommit() {
                 //CPP_DK_Execute(GIT + " init")
 				DKGit_SetCredentials()
 				//const branch = DKGit_GetCurrentBranch()
-				CPP_DK_Execute(GIT + " diff --color-words")
+				CPP_DK_Execute(GIT + " diff --color-words & echo Press any key to proceed with commit")
 				CPP_DK_Execute("pause")
 				CPP_DK_Execute(GIT + " commit -a -m \"commit from git\"")
                 CPP_DK_Execute(GIT + " push")
