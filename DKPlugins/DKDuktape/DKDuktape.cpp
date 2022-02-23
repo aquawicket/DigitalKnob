@@ -76,8 +76,9 @@ bool DKDuktape::Init(){
 			return DKERROR("Failed to create a Duktape heap.\n");
 		DKClass::DKCreate("DKDuktapeJS");
 
-/*
 #ifdef USE_DuktapeDom
+		DKClass::DKCreate("DKDuktapeDom");
+#else
 		//Load the Duktape javascript DOM
 		DKClass::DKCreate("DKEventTarget");
 		DKClass::DKCreate("DKDuktape/DKGlobalEventHandlers.js");
@@ -91,10 +92,7 @@ bool DKDuktape::Init(){
 		DKClass::DKCreate("DKNavigator");
 		DKClass::DKCreate("DKScreen");
 		DKClass::DKCreate("DKXMLHttpRequest");
-#else
-		DKClass::DKCreate("DKDom2");
 #endif
-*/
 
 		//Register javascript Timers: setTimeout, clearTimeout, setInterval, clearInterval
 #ifdef HAVE_eventloop

@@ -1,0 +1,45 @@
+#ifdef HAVE_DKDuktape 
+#include "DK/DKApp.h"
+#include "DKDuktapeDom/DKNavigator.h"
+
+
+bool DKNavigator::Init(){
+	DKDEBUGFUNC();
+	DKDuktape::AttachFunction("CPP_DKNavigator_onLine", DKNavigator::onLine);
+	DKDuktape::AttachFunction("CPP_DKNavigator_platform", DKNavigator::platform);
+	DKDuktape::AttachFunction("CPP_DKNavigator_productSub", DKNavigator::productSub);
+	
+	DKClass::DKCreate("DKDuktapeDom/DKNavigator.js");
+	return true;
+}
+
+int DKNavigator::onLine(duk_context* ctx){
+	//TODO
+	return false;
+}
+
+int DKNavigator::platform(duk_context* ctx){
+	//TODO - complete this for all OS's
+#ifdef WIN64
+	duk_push_string(ctx, "Win32");
+	return true;
+#endif
+#ifdef WIN32
+	duk_push_string(ctx, "Win64");
+	return true;
+#endif
+#ifdef MAC
+	duk_push_string(ctx, "MacIntel");
+	return true;
+#endif
+	DKERROR("DKNavigator::platform(): platform invalid\n");
+	return false;
+}
+
+int DKNavigator::productSub(duk_context* ctx){
+	//TODO
+	return false;
+}
+
+
+#endif //HAVE_DKDuktape
