@@ -754,6 +754,9 @@ endfunction()
 
 
 function(DKDEFINE str)
+	if(CMAKE_SCRIPT_MODE_FILE)
+		return()
+	endif()
 	list(FIND DKDEFINES_LIST "${str}" index)
 	if(${index} GREATER -1)
 		return() ## already in the list, return.
@@ -964,6 +967,9 @@ function(DKINSTALL src_path import_name dest_path)
 	endif()
 	
 	DOWNLOAD(${src_path} ${DKDOWNLOAD}/${dl_filename})
+	if(NOT EXISTS ${DKDOWNLOAD}/${dl_filename})
+		return()
+	endif()
 	
 	set(FILETYPE "UNKNOWN")
 	if(NOT ${src_extension} STREQUAL "")
@@ -2639,6 +2645,69 @@ function(DKIMPORT url) #Lib #ID #Patch
 		DKERROR("One of the required LIBVAR variables vas not satisfied")
 		return()
 	endif()
+endfunction()
+
+function(dk_DownloadAll3rdParty)
+	DKDEPEND_ALL() ## ADD any and all plugins here
+	
+	# Get a list of all /3rdParty/DKMAKE.cmake paths
+	file(GLOB All3rdParty ${DKIMPORTS}/*)
+	foreach(item ${All3rdParty})
+		if(EXISTS ${item}/DKMAKE.cmake)
+	
+			DKINFO("item = ${item}")
+			file(STRINGS ${item}/DKMAKE.cmake lines)
+			
+			unset(temp_import_script)
+			unset(index)
+			unset(indexB)
+			set(KEEPLINE 0)
+	
+			foreach(line ${lines})
+				
+				string(FIND "${line}" "set(" index)
+				if(${index} GREATER -1)
+					set(KEEPLINE 1)
+				endif()
+				
+				string(FIND "${line}" "SET(" index)
+				if(${index} GREATER -1)
+					set(KEEPLINE 1)
+				endif()
+		
+				string(FIND "${line}" "DOWNLOAD(" index)
+				if(${index} GREATER -1)
+					set(KEEPLINE 1)
+				endif()
+				
+				string(FIND "${line}" "DKINSTALL(" index)
+				if(${index} GREATER -1)
+					set(KEEPLINE 1)
+				endif()
+				
+				string(FIND "${line}" "DKIMPORT(" index)
+				if(${index} GREATER -1)
+					set(KEEPLINE 1)
+				endif()
+				
+				if(KEEPLINE)
+					set(dl_import_script "${dl_import_script}${line}\n")
+				endif()
+			
+				string(FIND "${line}" ")" indexB) 
+				if(${indexB} GREATER -1)
+					set(KEEPLINE 0)
+				endif()
+			endforeach()
+
+			if(dl_import_script)
+				file(WRITE ${DKDOWNLOAD}/TEMP/dl_import.TMP "${dl_import_script}")
+				INCLUDE(${DKDOWNLOAD}/TEMP/dl_import.TMP)
+				DKREMOVE(${DKDOWNLOAD}/TEMP/dl_import.TMP)
+			endif()
+
+		endif()
+	endforeach()
 endfunction()
 
 ###################################################################

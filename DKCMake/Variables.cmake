@@ -307,17 +307,19 @@ if(${index} GREATER -1)
 	DKSET(CMAKE_SKIP_RPATH ON)
 	string(REPLACE "/android64" "" DKPROJECT ${CMAKE_BINARY_DIR})
 endif()
-if(NOT OS)
-	DKINFO("CMAKE_BINARY_DIR = ${CMAKE_BINARY_DIR}")
-	DKERROR("The binary directory must contain an os folder. \n Valid folders are win32,win64,mac32,mac64,linux32,linux64,ios32,ios64,iossim32,iossim64,android32,android64,raspberry32 or raspberry64 \n EXAMPLE: digitalknob/DKApps/MyApp/win32")
-	DKREMOVE(${CMAKE_BINARY_DIR})
+
+if(NOT CMAKE_SCRIPT_MODE_FILE)
+	if(NOT OS)
+		DKINFO("CMAKE_BINARY_DIR = ${CMAKE_BINARY_DIR}")
+		DKERROR("The binary directory must contain an os folder. \n Valid folders are win32,win64,mac32,mac64,linux32,linux64,ios32,ios64,iossim32,iossim64,android32,android64,raspberry32 or raspberry64 \n 	EXAMPLE: digitalknob/DKApps/MyApp/win32")
+		#DKREMOVE(${CMAKE_BINARY_DIR})
+	endif()
+
+	## we use /Debug and /Release folders for Linux, Android and Raspberry
+	## if they are present, remove them and let DEBUG and RELEASE flags deal with that later.
+	string(REPLACE "/Debug" "" DKPROJECT ${DKPROJECT})
+	string(REPLACE "/Release" "" DKPROJECT ${DKPROJECT})
 endif()
-
-## we use /Debug and /Release folders for Linux, Android and Raspberry
-## if they are present, remove them and let DEBUG and RELEASE flags deal with that later.
-string(REPLACE "/Debug" "" DKPROJECT ${DKPROJECT})
-string(REPLACE "/Release" "" DKPROJECT ${DKPROJECT})
-
 
 
 ## NEW STYLE

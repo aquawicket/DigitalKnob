@@ -9,7 +9,7 @@
 ### VERSION ###
 DKSET(MINIWEB_VERSION 20130309)
 DKSET(MINIWEB_NAME "miniweb-win32-${MINIWEB_VERSION}.exe")
-DKSET(MINIWEB_DL hhttps://sourceforge.net/projects/miniweb/files/miniweb/0.8/miniweb-win32-20130309.zip)
+DKSET(MINIWEB_DL https://sourceforge.net/projects/miniweb/files/miniweb/0.8/miniweb-win32-20130309.zip)
 DKSET(MINIWEB "${3RDPARTY}/${MINIWEB_NAME}")
 DKSET(MINIWEB_EXE "${MINIWEB}/miniweb.exe")
 
