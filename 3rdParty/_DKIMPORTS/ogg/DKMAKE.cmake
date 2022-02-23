@@ -1,19 +1,14 @@
-# https://deltaepsilon.ca/posts/compiling-libogg-libvorbis-for-dummies/
-# https://ftp.osuosl.org/pub/xiph/releases/ogg/
-#
-# https://ftp.osuosl.org/pub/xiph/releases/ogg/libogg-1.3.2.zip
-# https://ftp.osuosl.org/pub/xiph/releases/ogg/libogg-1.3.5.zip
+# https://github.com/xiph/ogg
+# https://deltaepsilon.ca/posts/compiling-libogg-libvorbis-for-dummies
+# https://ftp.osuosl.org/pub/xiph/releases/ogg
 
-### VERSION ###
+
+#DKIMORT(https://github.com/xiph/ogg)
 DKSET(OGG_VERSION 1.3.5)
 DKSET(OGG_DL https://ftp.osuosl.org/pub/xiph/releases/ogg/libogg-1.3.5.zip)
-
-
-
-### INSTALL ###
 DKSET(OGG_NAME libogg-${OGG_VERSION})
 DKSET(OGG ${3RDPARTY}/${OGG_NAME})
-DKINSTALL(${OGG_DL} libogg ${OGG})
+DKINSTALL(${OGG_DL} ogg ${OGG})
 
 
 ### DKPLUGINS LINK ###

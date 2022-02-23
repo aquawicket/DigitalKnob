@@ -1,3 +1,4 @@
+# https://github.com/xiph/vorbis
 # https://deltaepsilon.ca/posts/compiling-libogg-libvorbis-for-dummies/
 #
 # https://ftp.osuosl.org/pub/xiph/releases/vorbis/libvorbis-1.3.7.zip
@@ -7,18 +8,15 @@ WIN_DKDEPEND(mingw32)
 WIN_DKDEPEND(mingw64)
 WIN_DKDEPEND(msys)
 DKDEPEND(libgcc)
-DKDEPEND(libogg)
+DKDEPEND(ogg)
 
 
-### VERSION ###
+#DKIMPORT(https://github.com/xiph/vorbis)
 DKSET(VORBIS_VERSION 1.3.7)
 DKSET(VORBIS_DL https://ftp.osuosl.org/pub/xiph/releases/vorbis/libvorbis-1.3.7.zip)
-
-
-### INSTALL ###
 DKSET(VORBIS_NAME libvorbis-${VORBIS_VERSION})
 DKSET(VORBIS ${3RDPARTY}/${VORBIS_NAME})
-DKINSTALL(${VORBIS_DL} libvorbis ${VORBIS})
+DKINSTALL(${VORBIS_DL} vorbis ${VORBIS})
 
 
 ### dkplugin LINK ###
