@@ -16,26 +16,4 @@
 #   DKCMake filesystem - %DIGITALKNOB%/DKCMake/filesystem/filesystem.cmake
 
 
-###################################################################
-# dk_FunctionName( ${arg0} ${arg1} rtn-var )
-#  
-# Description
-#
-#  ${arg0}: Description
-#  rtn-var: Description
-#          
-# Reference: https://website.com
-###################################################################
-function(dk_file_getDigitalknobPath result)
-	get_filename_component(DIGITALKNOB ${CMAKE_SOURCE_DIR} ABSOLUTE)
-	get_filename_component(FOLDER_NAME ${DIGITALKNOB} NAME)
-	while(NOT FOLDER_NAME STREQUAL "digitalknob")
-		get_filename_component(DIGITALKNOB ${DIGITALKNOB} DIRECTORY)
-		get_filename_component(FOLDER_NAME ${DIGITALKNOB} NAME)
-		if(NOT FOLDER_NAME)
-			DKASSERT("Could not locate digitalknob root path")
-		endif()
-	endwhile()
-	set(${result} ${DIGITALKNOB} PARENT_SCOPE)
-endfunction()
-dk_file_getDigitalknobPath(DIGITALKNOB)
+

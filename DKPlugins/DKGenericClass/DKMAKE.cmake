@@ -1,2 +1,0 @@
-generateCmake(DKGenericClass)
-DKASSETS(DKGenericClass)
