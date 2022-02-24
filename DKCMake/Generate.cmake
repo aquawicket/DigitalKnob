@@ -263,7 +263,7 @@ foreach(plugin ${dkdepend_list})
 		endif()
 	endif()
 	if(EXISTS ${plugin_path}/${BUILD_DIR}/cmake_install.cmake)
-		#DKQCOMMAND(${CMAKE_COMMAND} --install ${plugin_path}/${BUILD_DIR})
+		DKQCOMMAND(${CMAKE_COMMAND} --install ${plugin_path}/${BUILD_DIR})
 	endif()
 endforeach()
 
