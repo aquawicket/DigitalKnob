@@ -11,9 +11,9 @@ if(NOT MAC)
 else()	
 	DKSET(FREETYPE_VERSION 2.5.5)
 	DKSET(FREETYPE_NAME freetype-${FREETYPE_VERSION})
-	DKSET(FREETYPE_DL https://sourceforge.net/projects/freetype/files/freetype2/2.5.5/freetype-2.5.5.tar.gz PATCH)
+	DKSET(FREETYPE_DL https://sourceforge.net/projects/freetype/files/freetype2/2.5.5/freetype-2.5.5.tar.gz)
 	DKSET(FREETYPE ${3RDPARTY}/${FREETYPE_NAME})
-	DKINSTALL(${FREETYPE_DL} freetype ${FREETYPE})
+	DKINSTALL(${FREETYPE_DL} freetype ${FREETYPE} PATCH)
 endif()
 
 
