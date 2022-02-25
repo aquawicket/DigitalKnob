@@ -274,10 +274,10 @@ function DKBuildConsole_SelectOs() {
 
 function DKBuildConsole_SelectApp() {
 	console.log("**** SELECT APP TO BUILD ****")
-	console.log(" F1:  ALL APPS")
 	DKBuild_GetAppList()
 	for (var i = 0; i < APP_LIST.length; ++i)
 		console.log("  "+DKBuildConsole_TranslateOption(i) + ":  " + APP_LIST[i] + "")
+	console.log(" F1:  ALL APPS")
 	console.log("  0:  BACK")
 	console.log("esc:  EXIT")
 	console.log("\n")
