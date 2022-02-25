@@ -22,7 +22,7 @@ DKINSTALL(${XZ_DL} xz ${XZ})
 ### DKPLUGINS LINK ###
 DKDEFINE(LZMA_API_STATIC)
 DKINCLUDE(${XZ}/src/liblzma/api)
-#[[ WIN_DEBUG_DKLIB(${XZ}/${OS}/${DEBUG_DIR}/src/liblzma/.libs/liblzma.a)
+#WIN_DEBUG_DKLIB(${XZ}/${OS}/${DEBUG_DIR}/src/liblzma/.libs/liblzma.a)
 WIN_RELEASE_DKLIB(${XZ}/${OS}/${RELEASE_DIR}/src/liblzma/.libs/liblzma.a)
 MAC_DEBUG_DKLIB(${XZ}/${OS}/${DEBUG_DIR}/src/liblzma/.libs/liblzma.a)
 MAC_RELEASE_DKLIB(${XZ}/${OS}/${RELEASE_DIR}/src/liblzma/.libs/liblzma.a)
@@ -35,7 +35,7 @@ LINUX_RELEASE_DKLIB(${XZ}/${OS}/${RELEASE_DIR}/src/liblzma/.libs/liblzma.a)
 RASPBERRY_DEBUG_DKLIB(${XZ}/${OS}/${DEBUG_DIR}/src/liblzma/.libs/liblzma.a)
 RASPBERRY_RELEASE_DKLIB(${XZ}/${OS}/${RELEASE_DIR}/src/liblzma/.libs/liblzma.a)
 ANDROID_DEBUG_DKLIB(${XZ}/${OS}/obj/local/armeabi-v7a/liblzma.a)
-ANDROID_RELEASE_DKLIB(${XZ}/${OS}/obj/local/armeabi-v7a/liblzma.a) ]]
+ANDROID_RELEASE_DKLIB(${XZ}/${OS}/obj/local/armeabi-v7a/liblzma.a)
 
 
 
