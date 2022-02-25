@@ -22,7 +22,7 @@ DKINSTALL(${XZ_DL} xz ${XZ})
 ### DKPLUGINS LINK ###
 DKDEFINE(LZMA_API_STATIC)
 DKINCLUDE(${XZ}/src/liblzma/api)
-WIN_DEBUG_DKLIB(${XZ}/${OS}/${DEBUG_DIR}/src/liblzma/.libs/liblzma.a)
+#[[ WIN_DEBUG_DKLIB(${XZ}/${OS}/${DEBUG_DIR}/src/liblzma/.libs/liblzma.a)
 WIN_RELEASE_DKLIB(${XZ}/${OS}/${RELEASE_DIR}/src/liblzma/.libs/liblzma.a)
 MAC_DEBUG_DKLIB(${XZ}/${OS}/${DEBUG_DIR}/src/liblzma/.libs/liblzma.a)
 MAC_RELEASE_DKLIB(${XZ}/${OS}/${RELEASE_DIR}/src/liblzma/.libs/liblzma.a)
@@ -35,7 +35,7 @@ LINUX_RELEASE_DKLIB(${XZ}/${OS}/${RELEASE_DIR}/src/liblzma/.libs/liblzma.a)
 RASPBERRY_DEBUG_DKLIB(${XZ}/${OS}/${DEBUG_DIR}/src/liblzma/.libs/liblzma.a)
 RASPBERRY_RELEASE_DKLIB(${XZ}/${OS}/${RELEASE_DIR}/src/liblzma/.libs/liblzma.a)
 ANDROID_DEBUG_DKLIB(${XZ}/${OS}/obj/local/armeabi-v7a/liblzma.a)
-ANDROID_RELEASE_DKLIB(${XZ}/${OS}/obj/local/armeabi-v7a/liblzma.a)
+ANDROID_RELEASE_DKLIB(${XZ}/${OS}/obj/local/armeabi-v7a/liblzma.a) ]]
 
 
 
@@ -46,6 +46,34 @@ LINUX_DKSET(XZ_CMAKE -DCMAKE_C_FLAGS=-DLZMA_API_STATIC -DCMAKE_CXX_FLAGS=-DLZMA_
 RASPBERRY_DKSET(XZ_CMAKE -DCMAKE_C_FLAGS=-DLZMA_API_STATIC -DCMAKE_CXX_FLAGS=-DLZMA_API_STATIC -DLIBLZMA_INCLUDE_DIR=${XZ}/src/liblzma/api -DLIBLZMA_LIBRARY_DEBUG=${XZ}/${OS}/${DEBUG_DIR}/src/liblzma/.libs/liblzma.a -DLIBLZMA_LIBRARY_RELEASE=${XZ}/${OS}/${RELEASE_DIR}/src/liblzma/.libs/liblzma.a)
 ANDROID_DKSET(XZ_CMAKE -DCMAKE_C_FLAGS=-DLZMA_API_STATIC -DCMAKE_CXX_FLAGS=-DLZMA_API_STATIC -DLIBLZMA_INCLUDE_DIR=${XZ}/src/liblzma/api -DLIBLZMA_LIBRARY_DEBUG=${XZ}/${OS}/obj/local/armeabi-v7a/liblzma.a -DLIBLZMA_LIBRARY_RELEASE=${XZ}/${OS}/obj/local/armeabi-v7a/liblzma.a)
 
+
+################################
+WIN_DEBUG_DKLIB(${XZ}/${OS}/${DEBUG_DIR}/liblzma.lib)
+WIN_RELEASE_DKLIB(${XZ}/${OS}/${RELEASE_DIR}/liblzma.lib)
+MAC_DEBUG_DKLIB(${XZ}/${OS}/${DEBUG_DIR}/liblzma.a)
+MAC_RELEASE_DKLIB(${XZ}/${OS}/${RELEASE_DIR}/liblzma.a)
+IOS_DEBUG_DKLIB(${XZ}/${OS}/${DEBUG_DIR}/liblzma.a)
+IOS_RELEASE_DKLIB(${XZ}/${OS}/${RELEASE_DIR}/liblzma.a)
+IOSSIM_DEBUG_DKLIB(${XZ}/${OS}/${DEBUG_DIR}/liblzma.a)
+IOSSIM_RELEASE_DKLIB(${XZ}/${OS}/${RELEASE_DIR}/liblzma.a)
+LINUX_DEBUG_DKLIB(${XZ}/${OS}/${DEBUG_DIR}/liblzma.a)
+LINUX_RELEASE_DKLIB(${XZ}/${OS}/${RELEASE_DIR}/liblzma.a)
+RASPBERRY_DEBUG_DKLIB(${XZ}/${OS}/${DEBUG_DIR}/liblzma.a)
+RASPBERRY_RELEASE_DKLIB(${XZ}/${OS}/${RELEASE_DIR}/liblzma.a)
+ANDROID_DEBUG_DKLIB(${XZ}/${OS}/${DEBUG_DIR}/liblzma.a)
+ANDROID_RELEASE_DKLIB(${XZ}/${OS}/${RELEASE_DIR}/liblzma.a)
+
+DKSETPATH(${XZ}/${BUILD_DIR})
+DKQCOMMAND(${DKCMAKE_BUILD} ${XZ})
+WIN_VS(${XZ_NAME} xz.sln liblzma)
+MAC_XCODE(${XZ_NAME} liblzma)
+IOS_XCODE(${XZ_NAME} liblzma)
+IOSSIM_XCODE(${XZ_NAME} liblzma)
+LINUX_DKQCOMMAND(make liblzma)
+RASPBERRY_DKQCOMMAND(make liblzma)
+ANDROID_VS(${XZ_NAME} xz.sln liblzma)	
+return()
+###########################
 
 ### COMPILE ###
 WIN32_DEBUG_DKSETPATH(${XZ}/${OS}/${DEBUG_DIR})
