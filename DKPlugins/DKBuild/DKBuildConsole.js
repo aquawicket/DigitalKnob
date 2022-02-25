@@ -41,11 +41,11 @@ function DKBuildConsole_ChooseUpdate() {
 		const cache = CPP_DKFile_FileToString(assets+"cache.txt")
 		if(cache){
 			const cache_json = JSON.parse(cache)
-			console.log("ENTER:  "+cache_json.APP+" -> "+cache_json.OS+" -> "+cache_json.TYPE+" -> "+cache_json.LEVEL)
+			console.log("Enter:  "+cache_json.APP+" -> "+cache_json.OS+" -> "+cache_json.TYPE+" -> "+cache_json.LEVEL)
 		}
 	}
 	console.log("    0:  BACK")
-	console.log("  esc:  EXIT")
+	console.log("  Esc:  EXIT")
 	console.log("        Any Other Key To Skip")
 	console.log("\n")
 	
@@ -197,7 +197,7 @@ function DKBuildConsole_SelectOs() {
 	}
 
 	console.log("    0:  BACK")
-	console.log("  esc:  EXIT")
+	console.log("  Esc:  EXIT")
 	console.log("\n")
 		
 	var key = getch()
@@ -265,7 +265,7 @@ function DKBuildConsole_SelectApp() {
 		console.log("  "+DKBuildConsole_TranslateOption(i) + ":  " + APP_LIST[i] + "")
 	console.log("   F1:  ALL APPS")
 	console.log("    0:  BACK")
-	console.log("  esc:  EXIT")
+	console.log("  Esc:  EXIT")
 	console.log("\n")
 		
 	var key = getch()
@@ -295,7 +295,7 @@ function DKBuildConsole_SelectType() {
 	console.log("    2:  Release")
 	console.log("    3:  All")
 	console.log("    0:  BACK")
-	console.log("  esc:  EXIT")
+	console.log("  Esc:  EXIT")
 	console.log("\n")
 	
 	var key = getch()
@@ -344,7 +344,7 @@ function BuildConsole_PostBuildOptions(){
 		console.log("    "+num+":  Open Generated "+APP+" Solution")
 	}
 	console.log("    0:  BACK")
-	console.log("  esc:  EXIT")
+	console.log("  Esc:  EXIT")
 	console.log("        Any Other Key To Skip") 
 	console.log("\n")
 	var key = getch()
