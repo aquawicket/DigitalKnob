@@ -14,7 +14,7 @@ function getch(){
 function DKBuildConsole_init() {
     CPP_DK_Create("DKBuild/DKBuild.js")
 	CPP_DK_Create("DKGit/DKGit.js")
-	DKGit_CheckForUpdate()
+	//DKGit_CheckForDiff()
 	while (working)
         DKBuildConsole_Process()
 }
