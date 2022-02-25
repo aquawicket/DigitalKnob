@@ -206,11 +206,23 @@ function DKGit_DeleteLocalBranch(branch){
 	CPP_DK_Execute(GIT + " branch -d "+branch)
 }
 
+function DKGit_isDiff()
+	let contents = CPP_DKFile_DirectoryContents(DIGITALKNOB)
+	let files = contents.split(",")
+	for(let i=0; i<files.length; i++){ 
+		if(CPP_DKFile_Exists(DIGITALKNOB+files[i]+"/.git")){
+			CPP_DKFile_ChDir(DIGITALKNOB+files[i])
+			const diff = CPP_DK_Execute("git diff")
+			if(diff)
+				console.log("*** THERE ARE CHANGES IN THE '"+files[i]+"' CODE BASE ***")
+		}
+	}
+endfunction()
+
 // https://stackoverflow.com/questions/3258243/check-if-pull-needed-in-git
 // https://stackoverflow.com/questions/3258243/check-if-pull-needed-in-git#comment20583319_12791408
 // the total number of "different" commits between the current branch and server branch
-function DKGit_CheckForDiff(){
-	//console.log("DKGit_CheckForDiff()")
+function DKGit_CheckForUpdate(){
 	let contents = CPP_DKFile_DirectoryContents(DIGITALKNOB)
 	let files = contents.split(",")
 	for(let i=0; i<files.length; i++){ 

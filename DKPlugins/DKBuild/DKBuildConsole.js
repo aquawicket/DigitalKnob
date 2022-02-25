@@ -11,24 +11,10 @@ function getch(){
 	return key
 }
 
-
 function DKBuildConsole_init() {
     CPP_DK_Create("DKBuild/DKBuild.js")
 	CPP_DK_Create("DKGit/DKGit.js")
-	/*
-	let contents = CPP_DKFile_DirectoryContents(DIGITALKNOB)
-	let files = contents.split(",")
-	for(let i=0; i<files.length; i++){ 
-		if(CPP_DKFile_Exists(DIGITALKNOB+files[i]+"/DKApps")){
-			CPP_DKFile_ChDir(DIGITALKNOB+files[i])
-			const diff = CPP_DK_Execute("git diff")
-			if(diff)
-				console.log("*** THERE ARE CHANGES IN THE '"+files[i]+"' CODE BASE ***")
-		}
-	}
-	*/
-	//console.log(DKGit_DiffCount())
-	//DKGit_CheckForDiff()
+	DKGit_CheckForUpdate()
 	while (working)
         DKBuildConsole_Process()
 }
@@ -329,7 +315,6 @@ function DKBuildConsole_SelectType() {
 			break
 	}
 }
-
 
 // launch iOS simulator app: https://stackoverflow.com/a/35262865/688352
 function BuildConsole_PostBuildOptions(){
