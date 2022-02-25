@@ -15,20 +15,6 @@ function getch(){
 function DKBuildConsole_init() {
     CPP_DK_Create("DKBuild/DKBuild.js")
 	CPP_DK_Create("DKGit/DKGit.js")
-
-	/*
-	let contents = CPP_DKFile_DirectoryContents(DIGITALKNOB)
-	let files = contents.split(",")
-	for(let i=0; i<files.length; i++){ 
-		if(CPP_DKFile_Exists(DIGITALKNOB+files[i]+"/DKApps")){
-			CPP_DKFile_ChDir(DIGITALKNOB+files[i])
-			const diff = CPP_DK_Execute("git diff")
-			if(diff)
-				console.log("*** THERE ARE CHANGES IN THE '"+files[i]+"' CODE BASE ***")
-		}
-	}
-	*/
-	//console.log(DKGit_DiffCount())
 	//DKGit_CheckForDiff()
 	while (working)
         DKBuildConsole_Process()
@@ -40,27 +26,27 @@ function DKBuildConsole_end() {
 
 function DKBuildConsole_ChooseUpdate() {
 	console.log("**** Update DigitalKnob ??? ****")
-	console.log("  1:  Git Update")
-	console.log("  2:  Git Commit")
-	console.log("  3.  Push assets")
-	console.log("  4.  Pull assets")
-	console.log("  A:  Reset Apps")
-	console.log("  P:  Reset Plugins")
-	console.log("  T:  Reset 3rdParty")
-	console.log("  X:  Reset Everything")
-	console.log("  C:  Clear Screen")
-	console.log("  S:  Clear cmake cache and .tmp files")
+	console.log("    1:  Git Update")
+	console.log("    2:  Git Commit")
+	console.log("    3.  Push assets")
+	console.log("    4.  Pull assets")
+	console.log("    A:  Reset Apps")
+	console.log("    P:  Reset Plugins")
+	console.log("    T:  Reset 3rdParty")
+	console.log("    X:  Reset Everything")
+	console.log("    C:  Clear Screen")
+	console.log("    S:  Clear cmake cache and .tmp files")
 	const assets = CPP_DKAssets_LocalAssets()
 	if(CPP_DKFile_Exists(assets+"cache.txt")){
 		const cache = CPP_DKFile_FileToString(assets+"cache.txt")
 		if(cache){
 			const cache_json = JSON.parse(cache)
-			console.log("ENTER: "+cache_json.APP+" -> "+cache_json.OS+" -> "+cache_json.TYPE+" -> "+cache_json.LEVEL)
+			console.log("ENTER:  "+cache_json.APP+" -> "+cache_json.OS+" -> "+cache_json.TYPE+" -> "+cache_json.LEVEL)
 		}
 	}
-	console.log("  0:  BACK")
-	console.log("esc:  EXIT")
-	console.log("      Any Other Key To Skip")
+	console.log("    0:  BACK")
+	console.log("  esc:  EXIT")
+	console.log("        Any Other Key To Skip")
 	console.log("\n")
 	
 	//Scan Codes - https://docs.microsoft.com/en-us/previous-versions/visualstudio/visual-studio-6.0/aa299374(v=vs.60)?redirectedfrom=MSDN	
@@ -207,11 +193,11 @@ function DKBuildConsole_SelectOs() {
 	console.log("\n")
 	console.log("**** SELECT OS TO BUILD ****")
 	for(let n=1; n<OSes.length+1; n++){
-		console.log("  "+n+":  "+OSes[n-1])	
+		console.log("    "+n+":  "+OSes[n-1])	
 	}
 
-	console.log("  0:  BACK")
-	console.log("esc:  EXIT")
+	console.log("    0:  BACK")
+	console.log("  esc:  EXIT")
 	console.log("\n")
 		
 	var key = getch()
@@ -277,9 +263,9 @@ function DKBuildConsole_SelectApp() {
 	DKBuild_GetAppList()
 	for (var i = 0; i < APP_LIST.length; ++i)
 		console.log("  "+DKBuildConsole_TranslateOption(i) + ":  " + APP_LIST[i] + "")
-	console.log(" F1:  ALL APPS")
-	console.log("  0:  BACK")
-	console.log("esc:  EXIT")
+	console.log("   F1:  ALL APPS")
+	console.log("    0:  BACK")
+	console.log("  esc:  EXIT")
 	console.log("\n")
 		
 	var key = getch()
@@ -305,11 +291,11 @@ function DKBuildConsole_SelectApp() {
 
 function DKBuildConsole_SelectType() {
 	console.log("**** SELECT BUILD TYPE ****")
-	console.log("  1:  Debug")
-	console.log("  2:  Release")
-	console.log("  3:  All")
-	console.log("  0:  BACK")
-	console.log("esc:  EXIT")
+	console.log("    1:  Debug")
+	console.log("    2:  Release")
+	console.log("    3:  All")
+	console.log("    0:  BACK")
+	console.log("  esc:  EXIT")
 	console.log("\n")
 	
 	var key = getch()
@@ -350,16 +336,16 @@ function BuildConsole_PostBuildOptions(){
 	let num = 1
 	const exe_path = DKBuildConsole_FindAppExecutablePath(OS, APP, TYPE)
 	if(exe_path){
-		console.log(num+". Launch "+APP+" Executable")
+		console.log("    "+num+":  Launch "+APP+" Executable")
 		num++
 	}
 	const solution_path = DKBuildConsole_FindAppSolutionPath(OS, APP, TYPE)
 	if(solution_path){
-		console.log(num+". Open Generated "+APP+" Solution")
+		console.log("    "+num+":  Open Generated "+APP+" Solution")
 	}
-	console.log("  0:  BACK")
-	console.log("esc:  EXIT")
-	console.log("      Any Other Key To Skip") 
+	console.log("    0:  BACK")
+	console.log("  esc:  EXIT")
+	console.log("        Any Other Key To Skip") 
 	console.log("\n")
 	var key = getch()
 		
@@ -405,9 +391,6 @@ function DKBuildConsole_Process() {
 			default:
 		}
 	}
-	
-	//console.log("Press any key to Build")
-	//CPP_DK_getch()
 		
 	if(APP == "ALLAPPS"){
 		for (var i = 0; i < APP_LIST.length; ++i){
