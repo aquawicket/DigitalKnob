@@ -1,3 +1,5 @@
+//git stash -  https://opensource.com/article/21/4/git-stash
+
 var GIT = ""
 
 function DKGit_init() {
@@ -123,9 +125,27 @@ function DKGit_GitCommit() {
                 CPP_DKFile_ChDir(DIGITALKNOB + files[i])
                 //CPP_DK_Execute(GIT + " init")
 				DKGit_SetCredentials()
-				//const branch = DKGit_GetCurrentBranch()
-				CPP_DK_Execute(GIT + " diff --color-words & echo. & echo. & echo Press any key to proceed with commit")
-				CPP_DK_Execute("pause")
+				const branch = DKGit_GetCurrentBranch()
+				if(branch === "master" || branch === "main"){
+					console.log("You are currently checked out to the master or main of the repository")
+					console.log("We don't feel comfortable writing to the master. please switch to, or create a development branch")
+					console.log("Switch to Existing:  >  git checkout <branch_name>")
+					console.log("Create new branch:   >  git checkout -b <branch_name> master & git push")
+					console.log("aborting commit")
+					CPP_DK_Execute("pause")
+					return;
+				}
+				//CPP_DK_Execute(GIT + " diff git diff --color-words & echo. & echo. & echo Press any key to proceed with commit")
+				
+				console.log("\n########## Changed Files ##########")
+				CPP_DK_Execute(GIT + " diff --stat --color-words")
+				console.log("\nPress c to proceed with the commit,     Press any other key to cancel")
+				var key = getch()
+				if(key !== 99){ // the c key
+					console.log("COMMIT CANCELED\n\n\n")
+					return;
+				}
+
 				CPP_DK_Execute(GIT + " commit -a -m \"commit from git\"")
                 CPP_DK_Execute(GIT + " push")
             }
@@ -135,39 +155,6 @@ function DKGit_GitCommit() {
         dk.create("DKAudio")
     if (CPP_DK_Valid("DKAudioJS,DKAudioJS0"))
         DKAudio_PlaySound("DKBuild/ding.wav")
-}
-
-// https://stackoverflow.com/a/5608860/688352
-// https://www.atlassian.com/git/tutorials/merging-vs-rebasing
-function DKGit_MergeBranchAndPush(branch){
-	console.log("Merging "+branch+" into master and pushing to remote")
-	CPP_DK_Execute(GIT + " checkout "+branch)
-	CPP_DK_Execute(GIT + " pull")
-	CPP_DK_Execute(GIT + " checkout master")
-	CPP_DK_Execute(GIT + " pull origin master")
-	CPP_DK_Execute(GIT + " merge --no-ff --no-commit "+branch)
-	//CPP_DK_Execute(GIT + " merge "+branch)
-	//CPP_DK_Execute(GIT + " merge --squash "+branch)
-	
-	// If there are conflicts
-	//CPP_DK_Execute(GIT + " git status")
-
-	//After conflicts resolved
-	CPP_DK_Execute(GIT + " commit -a -m \"Merge Development Branch in to Master\"")
-	CPP_DK_Execute(GIT + " push origin master")
-}
-
-// https://stackoverflow.com/a/29048781/688352
-// https://www.atlassian.com/git/tutorials/merging-vs-rebasing
-function DKGit_RebaseBranchAndPush(branch){
-	console.log("Rebasing "+branch+" into master and pushing to remote")
-	CPP_DK_Execute(GIT + " checkout master")
-	CPP_DK_Execute(GIT + " pull")
-	CPP_DK_Execute(GIT + " checkout "+branch)
-	CPP_DK_Execute(GIT + " pull")
-	CPP_DK_Execute(GIT + " rebase -i master")
-	CPP_DK_Execute(GIT + " checkout master")
-	CPP_DK_Execute(GIT + " merge "+branch)
 }
 
 function DKGit_ListCommits(){
@@ -217,10 +204,6 @@ function DKGit_ListAllBranches(){
 
 function DKGit_DeleteLocalBranch(branch){
 	CPP_DK_Execute(GIT + " branch -d "+branch)
-}
-
-function DKGit_DeleteRemoteBranch(branch){
-	CPP_DK_Execute(GIT + " push origin --delete "+branch)
 }
 
 // https://stackoverflow.com/questions/3258243/check-if-pull-needed-in-git
@@ -284,7 +267,6 @@ function DKGit_ShowUntrackedFiles(){
 }
 
 function DKGit_DeleteUntrackedFiles(){
-	//console.log("DKGit_DeleteUntrackedFiles()")
 	CPP_DK_Execute(GIT + " clean -f -d") //Actually deletes
 }
 
@@ -319,12 +301,6 @@ function DKGit_UndoLastCommit(){
 	CPP_DK_Execute(GIT +" status")
 }
 
-function DKGit_DeleteLastCommit(){
-	console.log("DKGit_DeleteLastCommit()")
-	CPP_DK_Execute(GIT +" reset –hard HEAD^")
-	CPP_DK_Execute(GIT +" status")
-}
-
 function DKGit_CompairBranches(branchA, branchB){
 	console.log("DKGit_CompairBranches("+branchA+", "+branchB+")")
 	CPP_DK_Execute(GIT +" diff "+branchA+".."+branchB)
@@ -336,10 +312,8 @@ function DKGit_CreateTag(tagName){
 	CPP_DK_Execute(GIT + " push origin "+tagName)
 }
 
-function DKGit_DeleteTag(tagName){
-	console.log("DKGit_DeleteTag("+tagName+")")
-	CPP_DK_Execute(GIT + " push origin :refs/tags/"+tagName) //deletes remote tag
-	CPP_DK_Execute(GIT + " tag -d "+tagName) //deletes local tag
+function DKGit_DeleteLocalTag(tagName){
+	CPP_DK_Execute(GIT + " tag -d "+tagName)
 }
 
 function DKGit_RenameBranch(oldName, newName){
@@ -350,8 +324,102 @@ function DKGit_RenameBranch(oldName, newName){
 	CPP_DK_Execute(GIT + " push origin -u "+newName) //Reset the upstream branch for the new branch name
 }
 
+function DKGit_Rename(oldName, newName){
+	CPP_DK_Execute(GIT + " mv "+oldName+" tmp")
+	CPP_DK_Execute(GIT + " mv tmp "+newName)
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function DKGit_DeleteRemoteTag(tagName){
+	console.log("This section of code is for reference. These actions must be preformed manually")	
+	return;
+	
+	/*
+	CPP_DK_Execute(GIT + " push origin :refs/tags/"+tagName)
+	*/
+}
+
+function DKGit_DeleteRemoteBranch(branch){
+	console.log("This section of code is for reference. These actions must be preformed manually")	
+	return;
+	
+	/*
+	CPP_DK_Execute(GIT + " push origin --delete "+branch)
+	*/
+}
+
+function DKGit_DeleteLastCommit(){
+	console.log("This section of code is for reference. These actions must be preformed manually")	
+	return;
+	
+	/*
+	CPP_DK_Execute(GIT +" reset –hard HEAD^")
+	CPP_DK_Execute(GIT +" status")
+	*/
+}
+
+// https://stackoverflow.com/a/5608860/688352
+// https://www.atlassian.com/git/tutorials/merging-vs-rebasing
+function DKGit_MergeBranchAndPush(branch){
+	console.log("This section of code is for reference. These actions must be preformed manually")	
+	return;
+	
+	/*
+	console.log("Merging "+branch+" into master and pushing to remote")
+	CPP_DK_Execute(GIT + " checkout "+branch)
+	CPP_DK_Execute(GIT + " pull")
+	CPP_DK_Execute(GIT + " checkout master")
+	CPP_DK_Execute(GIT + " pull origin master")
+	CPP_DK_Execute(GIT + " merge --no-ff --no-commit "+branch)
+	//CPP_DK_Execute(GIT + " merge "+branch)
+	//CPP_DK_Execute(GIT + " merge --squash "+branch)
+	
+	// If there are conflicts
+	//CPP_DK_Execute(GIT + " git status")
+
+	//After conflicts resolved
+	CPP_DK_Execute(GIT + " commit -a -m \"Merge Development Branch in to Master\"")
+	CPP_DK_Execute(GIT + " push origin master")
+	*/
+}
+
+// https://stackoverflow.com/a/29048781/688352
+// https://www.atlassian.com/git/tutorials/merging-vs-rebasing
+function DKGit_RebaseBranchAndPush(branch){
+	console.log("This section of code is for reference. These actions must be preformed manually")	
+	return;
+	/*
+	console.log("Rebasing "+branch+" into master and pushing to remote")
+	CPP_DK_Execute(GIT + " checkout master")
+	CPP_DK_Execute(GIT + " pull")
+	CPP_DK_Execute(GIT + " checkout "+branch)
+	CPP_DK_Execute(GIT + " pull")
+	CPP_DK_Execute(GIT + " rebase -i master")
+	CPP_DK_Execute(GIT + " checkout master")
+	CPP_DK_Execute(GIT + " merge "+branch)
+	*/
+}
+
 //https://gist.github.com/heiswayi/350e2afda8cece810c0f6116dadbe651
 function DKGit_ResetRepository(){
+	console.log("This section of code is for reference. These actions must be preformed manually")	
+	return;
+	
+	/*
 	//Check out to a temporary branch:
 	CPP_DK_Execute(GIT + " checkout --orphan TEMP_BRANCH")
 
@@ -369,11 +437,8 @@ function DKGit_ResetRepository(){
 
 	//Finally, force update to our repository:
 	CPP_DK_Execute(GIT + " push -f origin master")
+	*/
 }
 
-function DKGit_Rename(oldName, newName){
-	CPP_DK_Execute(GIT + " mv "+oldName+" tmp")
-	CPP_DK_Execute(GIT + " mv tmp "+newName)
-}
 
 DKGit_init()
