@@ -779,10 +779,9 @@ function(DKINCLUDE path)
 		DKSET(DKINCLUDES_LIST ${DKINCLUDES_LIST} ${item})
 		include_directories(${item})
 		
-		# TODO
 		if(INSTALL_DKLIBS)
-			file(INSTALL DIRECTORY ${path}/ DESTINATION ${CMAKE_INSTALL_PREFIX}/include/${CURRENT_PLUGIN} FILES_MATCHING PATTERN "*.h")
-			DeleteEmptyDirectories(${CMAKE_INSTALL_PREFIX}/include/${CURRENT_PLUGIN})
+			dk_getFilename(${CMAKE_CURRENT_LIST_DIR} LIB_NAME)
+			file(INSTALL DIRECTORY ${path}/ DESTINATION ${CMAKE_INSTALL_PREFIX}/${LIB_NAME}/include FILES_MATCHING PATTERN "*.h")
 		endif()
 		
 	endforeach()
@@ -1327,11 +1326,10 @@ function(DKLIB lib_path)
 			continue() # item is already in the list
 		endif()
 		DKSET(LIBS "${LIBS};${item}")
-		
-		# TODO
+
 		if(INSTALL_DKLIBS)
-			file(INSTALL ${lib_path} DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/${OS})
-			DeleteEmptyDirectories(${CMAKE_INSTALL_PREFIX}/lib/${OS})
+			dk_getFilename(${CMAKE_CURRENT_LIST_DIR} LIB_NAME)
+			file(INSTALL ${lib_path} DESTINATION ${CMAKE_INSTALL_PREFIX}/${LIB_NAME}/lib/${OS})
 		endif()
 		
 	endforeach()
@@ -1356,11 +1354,10 @@ function(DEBUG_DKLIB lib_path)
 	else()
 		DKSET(DEBUG_LIBS ${DEBUG_LIBS} debug ${lib_path})  #Add to end of list
 	endif()
-	
-	# TODO
+
 	if(INSTALL_DKLIBS)
-		file(INSTALL ${lib_path} DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/${OS}/Debug)
-		DeleteEmptyDirectories(${CMAKE_INSTALL_PREFIX}/lib/${OS}/Debug)
+		dk_getFilename(${CMAKE_CURRENT_LIST_DIR} LIB_NAME)
+		file(INSTALL ${lib_path} DESTINATION ${CMAKE_INSTALL_PREFIX}/${LIB_NAME}/lib/${OS}/Debug)
 	endif()
 	
 endfunction()
@@ -1385,10 +1382,9 @@ function(RELEASE_DKLIB lib_path)
 		DKSET(RELEASE_LIBS ${RELEASE_LIBS} optimized ${lib_path})  #Add to end of list
 	endif()
 	
-	# TODO
 	if(INSTALL_DKLIBS)
-		file(INSTALL ${lib_path} DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/${OS}/Release)
-		DeleteEmptyDirectories(${CMAKE_INSTALL_PREFIX}/lib/${OS}/Release)
+		dk_getFilename(${CMAKE_CURRENT_LIST_DIR} LIB_NAME)
+		file(INSTALL ${lib_path} DESTINATION ${CMAKE_INSTALL_PREFIX}/${LIB_NAME}/lib/${OS}/Release)
 	endif()
 	
 endfunction()

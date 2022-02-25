@@ -66,7 +66,6 @@ foreach(plugin ${dkdepend_list})
 	#DKINFO("plugin_path = ${plugin_path}")
 
 	#This executes the 3rdParty library builds, and dkplugin setup, creates CMakeLists.txt files
-	DKSET(CURRENT_PLUGIN ${plugin})
 	include(${plugin_path}/DKMAKE.cmake)
 	
 	#NOTE: we won't have the library paths to remove until we've run DKCMake.cmake for the library
@@ -93,6 +92,16 @@ foreach(plugin ${dkdepend_list})
 	string(TOLOWER "${DKPLUGIN_LIST}" DKPLUGIN_LIST_lower)
 	string(TOLOWER "${plugin}" plugin_lower)	
 	string(FIND "${DKPLUGIN_LIST_lower}" "${plugin_lower}" isDKPlugin)
+	
+	# Install 3rd Party Libs
+	if(INSTALL_DKLIBS)
+		if(${isDKPlugin} EQUAL -1)
+			if(EXISTS ${plugin_path}/${BUILD_DIR}/cmake_install.cmake)
+				DKQCOMMAND(${CMAKE_COMMAND} --install ${plugin_path}/${BUILD_DIR})
+			endif()
+		endif()
+	endif()
+	
 	if(${isDKPlugin} GREATER -1)
 		#Add the DKPlugin to the app project
 		if(EXISTS "${plugin_path}/CMakeLists.txt")
@@ -256,14 +265,24 @@ foreach(plugin ${dkdepend_list})
 				if(NOT EXISTS ${lib})
 					DKINFO("\n\n\n****************************\nFAILED to find: ${lib} \n***********************************")
 					#DKERROR(" ")
+				else()
+				
+					# Install DKPlugin Libs
+					if(INSTALL_DKLIBS)
+						if(EXISTS ${plugin_path}/${BUILD_DIR}/cmake_install.cmake)
+							DKQCOMMAND(${CMAKE_COMMAND} --install ${plugin_path}/${BUILD_DIR})
+						endif()
+					endif()
+					
 				endif()
 			endforeach()
+			
+			
 		endif()
 	endif()
-	if(EXISTS ${plugin_path}/${BUILD_DIR}/cmake_install.cmake)
-		DKQCOMMAND(${CMAKE_COMMAND} --install ${plugin_path}/${BUILD_DIR})
-	endif()
 endforeach()
+
+DeleteEmptyDirectories(${CMAKE_INSTALL_PREFIX})
 
 if(NOT DKAPP)
 	return()
