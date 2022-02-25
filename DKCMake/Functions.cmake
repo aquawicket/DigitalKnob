@@ -1101,6 +1101,7 @@ function(DKSETPATH path)
 	endif()	
 	DKSET(CURRENT_DIR ${path})
 	if(NOT EXISTS ${CURRENT_DIR})
+		DKINFO("Creating directory: ${CURRENT_DIR})")
 		dk_makeDirectory(${CURRENT_DIR})
 	endif()
 	
