@@ -1,8 +1,4 @@
-if(DKOPTIONS_INCLUDED)
-  return()
-endif(DKOPTIONS_INCLUDED)
-DKSET(DKOPTIONS_INCLUDED 1)
-
+include_guard()
 
 # FIXME: work to remove this
 if(COMMAND cmake_policy)

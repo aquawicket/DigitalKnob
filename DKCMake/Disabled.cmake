@@ -1,7 +1,4 @@
-if(DISABLED_INCLUDED)
-  return()
-endif(DISABLED_INCLUDED)
-DKSET(DISABLED_INCLUDED 1)
+include_guard()
 
 DKDISABLE(tiff)
 

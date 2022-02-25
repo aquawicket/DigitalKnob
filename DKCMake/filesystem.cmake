@@ -1,3 +1,5 @@
+include_guard()
+
 #     dk.filesystem.js - %DIGITALKNOB%/DK/Api/filesystem/filesystem.js
 #    dk.filesystem.cpp - %DIGITALKNOB%/DK/Api/filesystem/filesystem.cpp
 #      javascript FSAA - https://developer.mozilla.org/en-US/docs/Web/API/filesystem

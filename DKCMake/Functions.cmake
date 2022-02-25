@@ -1,22 +1,16 @@
+include_guard()
 # https://asitdhal.medium.com/cmake-functions-and-macros-22293041519f
 
 ########### SETTINGS ##############
 ###################################
 
+# Extra Log Info Variables
 set(PRINT_CALL_DETAILS 1)
 set(PRINT_FILE_NAMES 0)
 set(PRINT_LINE_NUMBERS 0)
 set(PRINT_FUNCTION_NAMES 1)
 set(PRINT_FUNCTION_ ARGUMENTS 0)
 
-###################################
-
-
-
-if(DKFUNCTIONS_INCLUDED)
-  return()
-endif(DKFUNCTIONS_INCLUDED)
-set(DKFUNCTIONS_INCLUDED 1)
 
 
 if(CMAKE_HOST_WIN32)

@@ -1,11 +1,8 @@
+include_guard()
 include(Functions.cmake)
 include(filesystem.cmake)
 include(Variables.cmake)
 include(Disabled.cmake)
-#if(DKPROCESS_INCLUDED)
-#  return()
-#endif(DKPROCESS_INCLUDED)
-#DKSET(DKPROCESS_INCLUDED 1)
 
 DKINFO("\n")
 DKINFO("############################################################")

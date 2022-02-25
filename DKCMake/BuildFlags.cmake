@@ -1,7 +1,4 @@
-if(DKBUILDTOOLS_INCLUDED)
-  return()
-endif(DKBUILDTOOLS_INCLUDED)
-set(DKBUILDTOOLS_INCLUDED 1)
+include_guard()
 
 # https://clang.llvm.org/docs/ClangCommandLineReference.html
 # https://clang.llvm.org/docs/CrossCompilation.html
