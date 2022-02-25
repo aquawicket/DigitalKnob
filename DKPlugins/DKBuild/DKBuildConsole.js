@@ -15,6 +15,7 @@ function getch(){
 function DKBuildConsole_init() {
     CPP_DK_Create("DKBuild/DKBuild.js")
 	CPP_DK_Create("DKGit/DKGit.js")
+
 	/*
 	let contents = CPP_DKFile_DirectoryContents(DIGITALKNOB)
 	let files = contents.split(",")
@@ -41,6 +42,8 @@ function DKBuildConsole_ChooseUpdate() {
 	console.log("**** Update DigitalKnob ??? ****")
 	console.log("  1:  Git Update")
 	console.log("  2:  Git Commit")
+	console.log("  3.  Push assets")
+	console.log("  4.  Pull assets")
 	console.log("  A:  Reset Apps")
 	console.log("  P:  Reset Plugins")
 	console.log("  T:  Reset 3rdParty")
@@ -76,6 +79,16 @@ function DKBuildConsole_ChooseUpdate() {
 			console.log("-> Git Commit")
 			CPP_DK_Create("DKGit/DKGit.js")
 			DKGit_GitCommit()
+			break
+		//3 key
+		case 51:
+			console.log("-> Push assets")
+				dk.file.pushDKAssets()
+			break
+		//4 key
+		case 52:
+			console.log("-> Pull assets")
+				 dk.file.pullDKAssets()
 			break
 		//A key	
 		case 97:
