@@ -61,7 +61,10 @@ foreach(plugin ${dkdepend_list})
 	#################### 3rdParty libs #####################
 	dk_getPathToPlugin(${plugin} plugin_path)
 	if(NOT plugin_path)
-		return()
+		DEBUG_LINE()
+		Wait()
+		break()
+		
 	endif()
 	#DKINFO("plugin_path = ${plugin_path}")
 

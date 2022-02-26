@@ -76,6 +76,7 @@ set(CMAKE_MACOSX_BUNDLE OFF)
 
 # Definitions common to all targets:
 add_compile_definitions(
+add_definitions(
     # Package info:
     PACKAGE_NAME="XZ Utils"
     PACKAGE_BUGREPORT="lasse.collin@tukaani.org"

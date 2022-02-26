@@ -4,16 +4,18 @@
 # https://github.com/xz-mirror/xz/archive/refs/tags/v5.2.5.zip
 
 
-DKDEPEND(mingw32)
-DKDEPEND(mingw64)
-DKDEPEND(msys)
+
 
 ### cmake ###
 #DKIMPORT(https://github.com/xz-mirror/xz)
 DKIMPORT(https://github.com/xz-mirror/xz/archive/20e7a33e2d59c6a814447d3991f21e2702174b20.zip)
 #DKSET(XZ_DL https://github.com/xz-mirror/xz/archive/refs/tags/v5.2.5.zip)
 
+
 ### autotools ###
+#DKDEPEND(mingw32)
+#DKDEPEND(mingw64)
+#DKDEPEND(msys2)
 #DKSET(XZ_VERSION 5.2.5)
 #DKSET(XZ_DL https://tukaani.org/xz/${XZ_NAME}.tar.gz)
 #DKSET(XZ_NAME xz-${XZ_VERSION})

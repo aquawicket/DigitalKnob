@@ -3,6 +3,7 @@ include_guard()
 
 ########### SETTINGS ##############
 ###################################
+set(DKCMAKE_DEBUG_LINE OFF CACHE INTERNAL "") # ON = DEBUG_LINE prints the File : lineNumber : Function( variables )
 
 # Extra Log Info Variables
 set(PRINT_CALL_DETAILS 1)
@@ -124,6 +125,17 @@ macro(DKTRACE msg)
 	updateLogInfo()
 	#message(TRACE "${H_black}${STACK_HEADER}${CLR}${B_blue}${msg}${CLR}") # TRACE FLAG NOT WORKING
 	message(WARNING "${H_black}${STACK_HEADER}${CLR}${B_blue}${msg}${CLR}")
+endmacro()
+
+macro(DEBUG_LINE)
+	if(DKCMAKE_DEBUG_LINE)
+		#dk_getFilename(${CMAKE_CURRENT_FUNCTION_LIST_FILE} FILENAME)
+		if(NOT CMAKE_CURRENT_FUNCTION_LIST_FILE)
+			set(CMAKE_CURRENT_FUNCTION_LIST_FILE "unknown")
+		endif()
+		get_filename_component(FILENAME ${CMAKE_CURRENT_FUNCTION_LIST_FILE} NAME) 
+		message(STATUS "${cyan}${FILENAME}:${CMAKE_CURRENT_FUNCTION_LIST_LINE} -> ${CMAKE_CURRENT_FUNCTION}(${ARGV})${CLR}")
+	endif()
 endmacro()
 
 execute_process(COMMAND ${CMAKE_COMMAND} -E remove ${DIGITALKNOB}/DK/DKCMake/Functions_Ext.cmake)
@@ -267,7 +279,8 @@ endfunction()
 
 
 macro(dk_exit)
-	DKINFO("dk_exit()")
+	#DKINFO("dk_exit()")
+	DEBUG_LINE()
 	if(WIN_HOST)
 		execute_process(COMMAND taskkill /IM cmake.exe /F WORKING_DIRECTORY ${CMAKE_CURRENT_LIST_DIR})
 	else()
@@ -332,7 +345,7 @@ endmacro()
 #############################
 # Wait until keypress or timeout (60 seconds). The 'message' parameter is optional
 macro(Wait)
-	DKDEBUG("Wait(${ARGV})")
+	DEBUG_LINE()
 	set(msg ${ARGV})
 	if(NOT msg)
 		set(msg "press and key to continue") #default
@@ -383,9 +396,9 @@ endmacro()
 
 
 # set a XCode specific property
-macro (set_xcode_property TARGET XCODE_PROPERTY XCODE_VALUE)
+macro(set_xcode_property TARGET XCODE_PROPERTY XCODE_VALUE)
     set_property (TARGET ${TARGET} PROPERTY XCODE_ATTRIBUTE_${XCODE_PROPERTY} ${XCODE_VALUE})
-endmacro (set_xcode_property)
+endmacro(set_xcode_property)
 
 
 function(DELETE_CACHE)
@@ -962,6 +975,7 @@ function(DKINSTALL src_path import_name dest_path)
 	
 	DOWNLOAD(${src_path} ${DKDOWNLOAD}/${dl_filename})
 	if(NOT EXISTS ${DKDOWNLOAD}/${dl_filename})
+		DKERROR("The download files does not exist")
 		return()
 	endif()
 	
@@ -972,7 +986,12 @@ function(DKINSTALL src_path import_name dest_path)
 		elseif(${src_extension} STREQUAL ".bz2")
 			set(FILETYPE "Archive")
 		elseif(${src_extension} STREQUAL ".exe")
-			set(FILETYPE "Executable")
+			string(FIND ${src_filename} ".sfx.exe" index)
+			if(${index} GREATER -1)
+				set(FILETYPE "Archive")
+			else()
+				set(FILETYPE "Executable")
+			endif()
 		elseif(${src_extension} STREQUAL ".gz")
 			set(FILETYPE "Archive")
 		elseif(${src_extension} STREQUAL ".js")
@@ -1132,26 +1151,29 @@ AliasFunctions("DKSETPATH")
 
 ###################  Windows MSYS  ######################
 function(MSYS)
+	DEBUG_LINE()
 	if(QUEUE_BUILD)
 		string(REPLACE ";" " " str "${ARGV}")
-		set(msys "#!/bin/bash")
-		list(APPEND msys "cd ${CURRENT_DIR}")
+		set(bash "#!/bin/bash")
+		list(APPEND bash "cd ${CURRENT_DIR}")
 		if(WIN_32 OR ANDROID_32)
-			list(APPEND msys "export PATH=${MINGW32}/bin:$PATH")
+			list(APPEND bash "export PATH=${MINGW32}/bin:$PATH")
 		elseif(WIN_64 OR ANDROID_64)
-			list(APPEND msys "export PATH=${MINGW64}/bin:$PATH")
+			list(APPEND bash "export PATH=${MINGW64}/bin:$PATH")
 		else()
-			DKERROR("MSYS(): ERROR: not WIN_32, WIN_64, ANDROID_32 or ANDROID_64")
+			DKERROR("MSYS2(): ERROR: not WIN_32, WIN_64, ANDROID_32 or ANDROID_64")
 		endif()
-		list(APPEND msys "export PATH=${MSYS}/bin:$PATH")
-		list(APPEND msys "${str}")
-		list(APPEND msys "exit")
-		list(APPEND msys " ")
-		string(REPLACE ";" "\n"	msys "${msys}")
-		string(REPLACE "C:/" "/c/" msys ${msys})
-		file(WRITE ${MSYS}/dkscript.tmp ${msys})
-		DKINFO("MSYS -> ${msys}")
-		DKEXECUTE_PROCESS(${MSYS}/bin/bash ${MSYS}/dkscript.tmp)# WORKING_DIRECTORY ${MSYS})
+		#list(APPEND bash "export PATH=${MSYS2}/bin:$PATH")
+		list(APPEND bash "export PATH=${MSYS2}/usr/bin:$PATH")
+		list(APPEND bash "${str}")
+		list(APPEND bash "exit")
+		list(APPEND bash " ")
+		string(REPLACE ";" "\n"	bash "${bash}")
+		string(REPLACE "C:/" "/c/" bash ${bash})
+		file(WRITE ${MSYS2}/dkscript.tmp ${bash})
+		DKINFO("MSYS -> ${bash}")
+		#DKEXECUTE_PROCESS(${MSYS2}/bin/bash ${MSYS2}/dkscript.tmp)# WORKING_DIRECTORY ${MSYS2})
+		DKEXECUTE_PROCESS(${MSYS2}/usr/bin/bash ${MSYS2}/dkscript.tmp)# WORKING_DIRECTORY ${MSYS2})
 	endif()
 endfunction()
 AliasFunctions("MSYS")
@@ -1397,6 +1419,7 @@ AliasFunctions("RELEASE_DKLIB" "NO_DEBUG_RELEASE_TAGS")
 
 
 function(generateCmake plugin_name)
+	DEBUG_LINE()
 	dk_getPathToPlugin(${plugin_name} plugin_path)
 	if(NOT EXISTS "${plugin_path}")
 		DKERROR("generateCmake(${plugin_name}): plugin not found")
@@ -1493,7 +1516,7 @@ endfunction()
 
 
 function(DKDLL name)
-
+	DEBUG_LINE()
 	dk_getPathToPlugin(${name} plugin_path)
 	if(NOT EXISTS "${plugin_path}")
 		DKINFO("DKDLL(): ${name} plugin not found")
@@ -1568,7 +1591,7 @@ endfunction()
 
 # TODO
 function(DKEXECUTABLE name)
-
+	DEBUG_LINE()
 	dk_getPathToPlugin(${name} plugin_path)
 	if(NOT EXISTS "${plugin_path}")
 		DKERROR("DKEXECUTABLE(): ${name} plugin not found")
@@ -1589,7 +1612,7 @@ endfunction()
 
 
 function(DKTESTAPP name)
-
+	DEBUG_LINE()
 	dk_getPathToPlugin(${name} plugin_path)
 	if(NOT EXISTS "${plugin_path}/test")
 		DKINFO("DKTESTAPP(): ${name}_test app not found")
@@ -1616,7 +1639,7 @@ endfunction()
 
 
 function(ADDTO_DKPLUGIN_LIST name)
-
+	DEBUG_LINE()
 	dk_getPathToPlugin(${name} plugin_path)
 	if(NOT EXISTS "${plugin_path}")
 		DKERROR("DKEXECUTABLE(): ${name} plugin not found")
@@ -1671,10 +1694,10 @@ SET(ASSETS
 
 # Add a library's files to the App's assets
 function(DKASSETS name)
+	DEBUG_LINE()
 	if(NOT DKAPP)
 		return()
 	endif()	
-
 	dk_getPathToPlugin(${name} plugin_path)
 	if(NOT plugin_path)
 		DKERROR("${name} plugin not found")
@@ -1687,6 +1710,7 @@ endfunction()
 
 
 function(dk_getPathToPlugin name result)
+	DEBUG_LINE()
 	list(FIND dkdepend_disable_list "${ARGV}" index)
 	if(${index} GREATER -1)
 		DKINFO("${ARGV} IS DISABLED")
@@ -1703,12 +1727,15 @@ function(dk_getPathToPlugin name result)
 			return()
     	endif()
   	endforeach()
-	DKERROR("Could not find ${name} Plugin.")
+	set(${result} "")
+	#DKERROR("Could not find ${name} Plugin.")
+	DKASSERT("Could not find ${name} Plugin.")
 endfunction()
 
 
 # Add a library or plugin to the dependency list
 function(DKDEPEND name)
+	DEBUG_LINE()
 	if(${ARGC} GREATER 1)
 		DKINFO("ARGV = ${ARGV}")
 		#DUMP(ARGV) # FIXME: DUMP not working here, show 2 for the ARGC count, but only shows variable name ARGV, no value
@@ -1776,7 +1803,7 @@ endfunction()
 ### WARNING: BE CAREFULL WRITING NEW VARIABLES TO USE WITH CONDITIONALS, AS THEY MIGHT BE IGNORED 
 ##########################
 function(DKRUNDEPENDS name)
-
+	DEBUG_LINE()
 	dk_getPathToPlugin(${name} plugin_path)
 	if(NOT plugin_path)
 		DKERROR("DKRUNDEPENDS() ${name} plugin not found")

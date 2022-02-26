@@ -2,13 +2,9 @@ if(NOT WIN_HOST)
 	return()
 endif()
 
-# https://sourceforge.net/projects/mingw-w64/files/Toolchains%20targetting%20Win32/Personal%20Builds/mingw-builds/4.9.2/threads-posix/dwarf/i686-4.9.2-release-posix-dwarf-rt_v3-rev1.7z
 
-### VERSION ###
 DKSET(MINGW32_VERSION 8.1.0)
-DKSET(MINGW32_NAME mingw32-${MINGW32_VERSION})
 DKSET(MINGW32_DL https://sourceforge.net/projects/mingw-w64/files/Toolchains%20targetting%20Win32/Personal%20Builds/mingw-builds/8.1.0/threads-posix/dwarf/i686-8.1.0-release-posix-dwarf-rt_v6-rev0.7z)
+DKSET(MINGW32_NAME mingw32-${MINGW32_VERSION})
 DKSET(MINGW32 ${3RDPARTY}/${MINGW32_NAME})
-
-### INSTALL ###
 DKINSTALL(${MINGW32_DL} mingw32 ${MINGW32})

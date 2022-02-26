@@ -5,11 +5,11 @@
 
 if(WIN_32)
 	DKDEPEND(mingw32)
-	DKDEPEND(msys)
+	DKDEPEND(msys2)
 endif()
 if(WIN_64)
 	DKDEPEND(mingw64)
-	DKDEPEND(msys)
+	DKDEPEND(msys2)
 endif()
 
 
