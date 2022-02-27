@@ -23,6 +23,6 @@ if(NOT EXISTS ${MSYS2}/msys2.exe)
 	#DKCOMMAND(${MSYS2}/msys2.exe)
 	DKCOMMAND(${MSYS2}/usr/bin/bash.exe -c "pacman -Syu --noconfirm")
 	DKCOMMAND(${MSYS2}/usr/bin/bash.exe -c "pacman -Sy --noconfirm")
-	DKCOMMAND(${MSYS2}/usr/bin/bash.exe -c "pacman -S --noconfirm --needed base-devel mingw-w64-x86_64-toolchain") # choose 15 mingw-w64-x86_64-make
+	DKCOMMAND(${MSYS2}/usr/bin/bash.exe -c "pacman -S --noconfirm --needed base-devel mingw-w64-x86_64-make")
 	Wait()
 endif()
