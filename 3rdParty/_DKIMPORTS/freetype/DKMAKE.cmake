@@ -3,7 +3,9 @@
 
 DKDEPEND(bzip2)
 DKDEPEND(zlib)
-DKDEPEND(libpng)
+if(NOT RASPBERRY)
+	DKDEPEND(libpng)
+endif()
 
 if(NOT MAC)
 	#DKIMPORT(https://github.com/freetype/freetype)
