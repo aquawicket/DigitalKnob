@@ -1736,6 +1736,8 @@ endfunction()
 # Add a library or plugin to the dependency list
 function(DKDEPEND name)
 	DEBUG_LINE()
+	DKDEBUG("CMAKE_CURRENT_LIST_DIR = ${CMAKE_CURRENT_LIST_DIR}")
+	
 	if(${ARGC} GREATER 1)
 		DKINFO("ARGV = ${ARGV}")
 		#DUMP(ARGV) # FIXME: DUMP not working here, show 2 for the ARGC count, but only shows variable name ARGV, no value
