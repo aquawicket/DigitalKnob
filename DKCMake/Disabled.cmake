@@ -1,6 +1,7 @@
 include_guard()
 
 DKDISABLE(tiff)
+DKDISABLE(msys2)
 
 # DISABLED FOR ALL
 DKDISABLE(_TEMPLATE-APP_)
