@@ -6,7 +6,8 @@
 ### DEPENDS ###
 WIN_DKDEPEND(mingw32)
 WIN_DKDEPEND(mingw64)
-WIN_DKDEPEND(msys2)
+WIN_DKDEPEND(msys)
+#WIN_DKDEPEND(msys2)
 DKDEPEND(libgcc)
 DKDEPEND(ogg)
 

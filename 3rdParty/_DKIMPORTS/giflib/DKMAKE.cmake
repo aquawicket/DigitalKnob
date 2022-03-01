@@ -5,12 +5,12 @@
 
 if(WIN_32)
 	DKDEPEND(mingw32)
-	DKDEPEND(msys2)
 endif()
 if(WIN_64)
 	DKDEPEND(mingw64)
-	DKDEPEND(msys2)
 endif()
+WIN_DKDEPEND(msys)
+#WIN_DKDEPEND(msys2)
 
 
 #DKIMPORT(https://github.com/mirrorer/giflib)
