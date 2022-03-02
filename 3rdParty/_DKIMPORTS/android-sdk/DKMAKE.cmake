@@ -11,6 +11,7 @@ DKSETENV("VS_AndroidHome" ${ANDROIDSDK})
 ### DEPENDS ###
 DKDEPEND(jdk)
 DKDEPEND(jdk8)
+DKDEPEND(jdk9)
 DKDEPEND(ant)
 DKDEPEND(android-cmdline-tools)
 DKDEPEND(android-ndk)
