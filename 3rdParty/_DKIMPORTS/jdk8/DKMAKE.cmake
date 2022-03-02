@@ -15,7 +15,7 @@ LINUX_HOST_DKSET(JDK8_DL https://download.java.net/openjdk/jdk8u41/ri/openjdk-8u
 ### INSTALL ###
 DKSET(JDK8_NAME openjdk-${JDK8_VERSION})
 DKSET(JDK8 ${3RDPARTY}/${JDK8_NAME})
-DKINSTALL(${JDK8_DL} jdk8 ${JDK8})
+DKINSTALL(${JDK8_DL} jdk8 ${JDK8} PATCH)
 
 
 ### LINK ###

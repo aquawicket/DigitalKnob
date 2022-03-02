@@ -26,7 +26,7 @@ LINUX_HOST_DKSET(JDK_DL https://download.java.net/java/GA/jdk9/9.0.4/binaries/op
 ### INSTALL ###
 DKSET(JDK_NAME openjdk-${JDK_VERSION})
 DKSET(JDK ${3RDPARTY}/${JDK_NAME})
-DKINSTALL(${JDK_DL} jdk ${JDK})
+DKINSTALL(${JDK_DL} jdk ${JDK} PATCH)
 
 ### LINK ###
 DKINCLUDE(${JDK}/)	

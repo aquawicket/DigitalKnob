@@ -317,7 +317,6 @@ if(ANDROID) # Disabled for Android targets
 	DKDISABLE(glew)
 	DKDISABLE(imagemagick)
 	DKDISABLE(java)
-	DKDISABLE(jdk9)
 	DKDISABLE(jerryscript)
 	DKDISABLE(kdevelop)
 	DKDISABLE(leptonica)
