@@ -16,7 +16,7 @@ WIN_DKDEPEND(openssl)
 
 
 #DKIMPORT(https://github.com/libarchive/libarchive)
-DKIMPORT(https://github.com/libarchive/libarchive/archive/93f03b0f5d7316714df9b289a49150ab7a63bfaf.zip)
+DKIMPORT(https://github.com/libarchive/libarchive/archive/93f03b0f5d7316714df9b289a49150ab7a63bfaf.zip PATCH)
 
 #DKSET(LIBARCHIVE_VERSION 3.6.0)
 #DKSET(LIBARCHIVE_DL https://github.com/libarchive/libarchive/releases/download/v3.6.0/libarchive-3.6.0.zip)
