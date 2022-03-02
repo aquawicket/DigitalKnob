@@ -20,8 +20,8 @@ endif()
 
 ### VERSION ###
 #DKSET(ANDROIDTOOLS ${3RDPARTY}/android-cmdline-tools)
-DKSET(ANDROIDTOOLS ${3RDPARTY}/android-sdk/cmdline-tools)
-file(MAKE_DIRECTORY ${3RDPARTY}/android-sdk/cmdline-tools)
+DKSET(ANDROIDTOOLS ${3RDPARTY}/android-sdk/cmdline-tools/latest)
+file(MAKE_DIRECTORY ${3RDPARTY}/android-sdk/cmdline-tools/latest)
 
 DKSET(SDKMANAGER_EXE ${ANDROIDTOOLS}/bin/sdkmanager.bat)
 WIN_HOST_DKSET(ANDROIDTOOLS_DL https://dl.google.com/android/repository/commandlinetools-win-7583922_latest.zip)
