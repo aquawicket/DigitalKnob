@@ -1,22 +1,17 @@
+include_guard()
 # https://asitdhal.medium.com/cmake-functions-and-macros-22293041519f
 
 ########### SETTINGS ##############
 ###################################
+set(DKCMAKE_DEBUG_LINE OFF CACHE INTERNAL "") # ON = DEBUG_LINE prints the File : lineNumber : Function( variables )
 
+# Extra Log Info Variables
 set(PRINT_CALL_DETAILS 1)
 set(PRINT_FILE_NAMES 0)
 set(PRINT_LINE_NUMBERS 0)
 set(PRINT_FUNCTION_NAMES 1)
 set(PRINT_FUNCTION_ ARGUMENTS 0)
 
-###################################
-
-
-
-if(DKFUNCTIONS_INCLUDED)
-  return()
-endif(DKFUNCTIONS_INCLUDED)
-set(DKFUNCTIONS_INCLUDED 1)
 
 
 if(CMAKE_HOST_WIN32)
@@ -55,9 +50,10 @@ function(dk_file_getDigitalknobPath result)
 			DKASSERT("Could not locate digitalknob root path")
 		endif()
 	endwhile()
-	set(${result} ${DIGITALKNOB} PARENT_SCOPE) #just relay the result
+	set(${result} ${DIGITALKNOB} PARENT_SCOPE)
 endfunction()
 dk_file_getDigitalknobPath(DIGITALKNOB)
+
 
 macro(updateLogInfo)
 	if(PRINT_CALL_DETAILS)
@@ -96,7 +92,7 @@ include(${DIGITALKNOB}/DK/DKCMake/Color.cmake)
 macro(DKASSERT msg)
 	updateLogInfo()
 	message(FATAL_ERROR "${H_black}${STACK_HEADER}${CLR}${BG_red}${msg}${CLR}")
-	message(FATAL_ERROR "${H_black}${STACK_HEADER}${CLR}${red}${msg}${CLR}")
+	#message(FATAL_ERROR "${H_black}${STACK_HEADER}${CLR}${red}${msg}${CLR}")
 	dk_exit()
 endmacro()
 macro(DKERROR msg)
@@ -129,6 +125,17 @@ macro(DKTRACE msg)
 	updateLogInfo()
 	#message(TRACE "${H_black}${STACK_HEADER}${CLR}${B_blue}${msg}${CLR}") # TRACE FLAG NOT WORKING
 	message(WARNING "${H_black}${STACK_HEADER}${CLR}${B_blue}${msg}${CLR}")
+endmacro()
+
+macro(DEBUG_LINE)
+	if(DKCMAKE_DEBUG_LINE)
+		#dk_getFilename(${CMAKE_CURRENT_FUNCTION_LIST_FILE} FILENAME)
+		if(NOT CMAKE_CURRENT_FUNCTION_LIST_FILE)
+			set(CMAKE_CURRENT_FUNCTION_LIST_FILE "unknown")
+		endif()
+		get_filename_component(FILENAME ${CMAKE_CURRENT_FUNCTION_LIST_FILE} NAME) 
+		message(STATUS "${cyan}${FILENAME}:${CMAKE_CURRENT_FUNCTION_LIST_LINE} -> ${CMAKE_CURRENT_FUNCTION}(${ARGV})${CLR}")
+	endif()
 endmacro()
 
 execute_process(COMMAND ${CMAKE_COMMAND} -E remove ${DIGITALKNOB}/DK/DKCMake/Functions_Ext.cmake)
@@ -272,7 +279,8 @@ endfunction()
 
 
 macro(dk_exit)
-	DKINFO("dk_exit()")
+	#DKINFO("dk_exit()")
+	DEBUG_LINE()
 	if(WIN_HOST)
 		execute_process(COMMAND taskkill /IM cmake.exe /F WORKING_DIRECTORY ${CMAKE_CURRENT_LIST_DIR})
 	else()
@@ -337,7 +345,7 @@ endmacro()
 #############################
 # Wait until keypress or timeout (60 seconds). The 'message' parameter is optional
 macro(Wait)
-	DKDEBUG("Wait(${ARGV})")
+	DEBUG_LINE()
 	set(msg ${ARGV})
 	if(NOT msg)
 		set(msg "press and key to continue") #default
@@ -388,9 +396,9 @@ endmacro()
 
 
 # set a XCode specific property
-macro (set_xcode_property TARGET XCODE_PROPERTY XCODE_VALUE)
+macro(set_xcode_property TARGET XCODE_PROPERTY XCODE_VALUE)
     set_property (TARGET ${TARGET} PROPERTY XCODE_ATTRIBUTE_${XCODE_PROPERTY} ${XCODE_VALUE})
-endmacro (set_xcode_property)
+endmacro(set_xcode_property)
 
 
 function(DELETE_CACHE)
@@ -754,6 +762,9 @@ endfunction()
 
 
 function(DKDEFINE str)
+	if(CMAKE_SCRIPT_MODE_FILE)
+		return()
+	endif()
 	list(FIND DKDEFINES_LIST "${str}" index)
 	if(${index} GREATER -1)
 		return() ## already in the list, return.
@@ -781,10 +792,9 @@ function(DKINCLUDE path)
 		DKSET(DKINCLUDES_LIST ${DKINCLUDES_LIST} ${item})
 		include_directories(${item})
 		
-		# TODO
 		if(INSTALL_DKLIBS)
-			file(INSTALL DIRECTORY ${path}/ DESTINATION ${CMAKE_INSTALL_PREFIX}/include/${CURRENT_PLUGIN} FILES_MATCHING PATTERN "*.h")
-			DeleteEmptyDirectories(${CMAKE_INSTALL_PREFIX}/include/${CURRENT_PLUGIN})
+			dk_getFilename(${CMAKE_CURRENT_LIST_DIR} LIB_NAME)
+			file(INSTALL DIRECTORY ${path}/ DESTINATION ${CMAKE_INSTALL_PREFIX}/${LIB_NAME}/include FILES_MATCHING PATTERN "*.h")
 		endif()
 		
 	endforeach()
@@ -964,6 +974,10 @@ function(DKINSTALL src_path import_name dest_path)
 	endif()
 	
 	DOWNLOAD(${src_path} ${DKDOWNLOAD}/${dl_filename})
+	if(NOT EXISTS ${DKDOWNLOAD}/${dl_filename})
+		DKERROR("The download files does not exist")
+		return()
+	endif()
 	
 	set(FILETYPE "UNKNOWN")
 	if(NOT ${src_extension} STREQUAL "")
@@ -972,7 +986,12 @@ function(DKINSTALL src_path import_name dest_path)
 		elseif(${src_extension} STREQUAL ".bz2")
 			set(FILETYPE "Archive")
 		elseif(${src_extension} STREQUAL ".exe")
-			set(FILETYPE "Executable")
+			string(FIND ${src_filename} ".sfx.exe" index)
+			if(${index} GREATER -1)
+				set(FILETYPE "Archive")
+			else()
+				set(FILETYPE "Executable")
+			endif()
 		elseif(${src_extension} STREQUAL ".gz")
 			set(FILETYPE "Archive")
 		elseif(${src_extension} STREQUAL ".js")
@@ -1101,6 +1120,7 @@ function(DKSETPATH path)
 	endif()	
 	DKSET(CURRENT_DIR ${path})
 	if(NOT EXISTS ${CURRENT_DIR})
+		DKINFO("Creating directory: ${CURRENT_DIR})")
 		dk_makeDirectory(${CURRENT_DIR})
 	endif()
 	
@@ -1131,29 +1151,57 @@ AliasFunctions("DKSETPATH")
 
 ###################  Windows MSYS  ######################
 function(MSYS)
+	DEBUG_LINE()
 	if(QUEUE_BUILD)
 		string(REPLACE ";" " " str "${ARGV}")
-		set(msys "#!/bin/bash")
-		list(APPEND msys "cd ${CURRENT_DIR}")
+		set(bash "#!/bin/bash")
+		list(APPEND bash "cd ${CURRENT_DIR}")
 		if(WIN_32 OR ANDROID_32)
-			list(APPEND msys "export PATH=${MINGW32}/bin:$PATH")
+			list(APPEND bash "export PATH=${MINGW32}/bin:$PATH")
 		elseif(WIN_64 OR ANDROID_64)
-			list(APPEND msys "export PATH=${MINGW64}/bin:$PATH")
+			list(APPEND bash "export PATH=${MINGW64}/bin:$PATH")
 		else()
 			DKERROR("MSYS(): ERROR: not WIN_32, WIN_64, ANDROID_32 or ANDROID_64")
 		endif()
-		list(APPEND msys "export PATH=${MSYS}/bin:$PATH")
-		list(APPEND msys "${str}")
-		list(APPEND msys "exit")
-		list(APPEND msys " ")
-		string(REPLACE ";" "\n"	msys "${msys}")
-		string(REPLACE "C:/" "/c/" msys ${msys})
-		file(WRITE ${MSYS}/dkscript.tmp ${msys})
-		DKINFO("MSYS -> ${msys}")
-		DKEXECUTE_PROCESS(${MSYS}/bin/bash ${MSYS}/dkscript.tmp)# WORKING_DIRECTORY ${MSYS})
+		list(APPEND bash "export PATH=${MSYS}/bin:$PATH")
+		list(APPEND bash "${str}")
+		list(APPEND bash "exit")
+		list(APPEND bash " ")
+		string(REPLACE ";" "\n"	bash "${bash}")
+		string(REPLACE "C:/" "/c/" bash ${bash})
+		file(WRITE ${MSYS}/dkscript.tmp ${bash})
+		DKINFO("MSYS -> ${bash}")
+		DKEXECUTE_PROCESS(${MSYS}/bin/bash ${MSYS}/dkscript.tmp)
 	endif()
 endfunction()
 AliasFunctions("MSYS")
+
+###################  Windows MSYS2  ######################
+function(MSYS2)
+	DEBUG_LINE()
+	if(QUEUE_BUILD)
+		string(REPLACE ";" " " str "${ARGV}")
+		set(bash "#!/bin/bash")
+		list(APPEND bash "cd ${CURRENT_DIR}")
+		if(WIN_32 OR ANDROID_32)
+			list(APPEND bash "export PATH=${MINGW32}/bin:$PATH")
+		elseif(WIN_64 OR ANDROID_64)
+			list(APPEND bash "export PATH=${MINGW64}/bin:$PATH")
+		else()
+			DKERROR("MSYS2(): ERROR: not WIN_32, WIN_64, ANDROID_32 or ANDROID_64")
+		endif()
+		list(APPEND bash "export PATH=${MSYS2}/usr/bin:$PATH")
+		list(APPEND bash "${str}")
+		list(APPEND bash "exit")
+		list(APPEND bash " ")
+		string(REPLACE ";" "\n"	bash "${bash}")
+		string(REPLACE "C:/" "/c/" bash ${bash})
+		file(WRITE ${MSYS2}/dkscript.tmp ${bash})
+		DKINFO("MSYS2 -> ${bash}")
+		DKEXECUTE_PROCESS(${MSYS2}/usr/bin/bash ${MSYS2}/dkscript.tmp)
+	endif()
+endfunction()
+AliasFunctions("MSYS2")
 
 
 function(DKMERGE_FLAGS args result)
@@ -1195,9 +1243,9 @@ function(DKCOMMAND)
 	if(NOT EXISTS ${CURRENT_DIR})
 		DKSET(CURRENT_DIR ${DIGITALKNOB})
 	endif()
-	DKDEBUG("z${ARGV}")
+	#DKDEBUG("${ARGV}")
 	DKMERGE_FLAGS("${ARGV}" merged_args)
-	DKDEBUG("${ARGV}")
+	#DKDEBUG("${ARGV}")
 	DKEXECUTE_PROCESS(${merged_args} WORKING_DIRECTORY ${CURRENT_DIR})
 endfunction()
 AliasFunctions("DKCOMMAND")
@@ -1326,11 +1374,14 @@ function(DKLIB lib_path)
 			continue() # item is already in the list
 		endif()
 		DKSET(LIBS "${LIBS};${item}")
-		
-		# TODO
+
 		if(INSTALL_DKLIBS)
-			file(INSTALL ${lib_path} DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/${OS})
-			DeleteEmptyDirectories(${CMAKE_INSTALL_PREFIX}/lib/${OS})
+			if(EXISTS ${lib_path})
+				dk_getFilename(${CMAKE_CURRENT_LIST_DIR} LIB_NAME)
+				file(INSTALL ${lib_path} DESTINATION ${CMAKE_INSTALL_PREFIX}/${LIB_NAME}/lib/${OS})
+			else()
+				DKERROR("Could not locate ${lib_path}")
+			endif()
 		endif()
 		
 	endforeach()
@@ -1355,11 +1406,10 @@ function(DEBUG_DKLIB lib_path)
 	else()
 		DKSET(DEBUG_LIBS ${DEBUG_LIBS} debug ${lib_path})  #Add to end of list
 	endif()
-	
-	# TODO
+
 	if(INSTALL_DKLIBS)
-		file(INSTALL ${lib_path} DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/${OS}/Debug)
-		DeleteEmptyDirectories(${CMAKE_INSTALL_PREFIX}/lib/${OS}/Debug)
+		dk_getFilename(${CMAKE_CURRENT_LIST_DIR} LIB_NAME)
+		file(INSTALL ${lib_path} DESTINATION ${CMAKE_INSTALL_PREFIX}/${LIB_NAME}/lib/${OS}/Debug)
 	endif()
 	
 endfunction()
@@ -1384,10 +1434,9 @@ function(RELEASE_DKLIB lib_path)
 		DKSET(RELEASE_LIBS ${RELEASE_LIBS} optimized ${lib_path})  #Add to end of list
 	endif()
 	
-	# TODO
 	if(INSTALL_DKLIBS)
-		file(INSTALL ${lib_path} DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/${OS}/Release)
-		DeleteEmptyDirectories(${CMAKE_INSTALL_PREFIX}/lib/${OS}/Release)
+		dk_getFilename(${CMAKE_CURRENT_LIST_DIR} LIB_NAME)
+		file(INSTALL ${lib_path} DESTINATION ${CMAKE_INSTALL_PREFIX}/${LIB_NAME}/lib/${OS}/Release)
 	endif()
 	
 endfunction()
@@ -1395,6 +1444,7 @@ AliasFunctions("RELEASE_DKLIB" "NO_DEBUG_RELEASE_TAGS")
 
 
 function(generateCmake plugin_name)
+	DEBUG_LINE()
 	dk_getPathToPlugin(${plugin_name} plugin_path)
 	if(NOT EXISTS "${plugin_path}")
 		DKERROR("generateCmake(${plugin_name}): plugin not found")
@@ -1491,7 +1541,7 @@ endfunction()
 
 
 function(DKDLL name)
-
+	DEBUG_LINE()
 	dk_getPathToPlugin(${name} plugin_path)
 	if(NOT EXISTS "${plugin_path}")
 		DKINFO("DKDLL(): ${name} plugin not found")
@@ -1566,7 +1616,7 @@ endfunction()
 
 # TODO
 function(DKEXECUTABLE name)
-
+	DEBUG_LINE()
 	dk_getPathToPlugin(${name} plugin_path)
 	if(NOT EXISTS "${plugin_path}")
 		DKERROR("DKEXECUTABLE(): ${name} plugin not found")
@@ -1587,7 +1637,7 @@ endfunction()
 
 
 function(DKTESTAPP name)
-
+	DEBUG_LINE()
 	dk_getPathToPlugin(${name} plugin_path)
 	if(NOT EXISTS "${plugin_path}/test")
 		DKINFO("DKTESTAPP(): ${name}_test app not found")
@@ -1614,7 +1664,7 @@ endfunction()
 
 
 function(ADDTO_DKPLUGIN_LIST name)
-
+	DEBUG_LINE()
 	dk_getPathToPlugin(${name} plugin_path)
 	if(NOT EXISTS "${plugin_path}")
 		DKERROR("DKEXECUTABLE(): ${name} plugin not found")
@@ -1669,10 +1719,10 @@ SET(ASSETS
 
 # Add a library's files to the App's assets
 function(DKASSETS name)
+	DEBUG_LINE()
 	if(NOT DKAPP)
 		return()
 	endif()	
-
 	dk_getPathToPlugin(${name} plugin_path)
 	if(NOT plugin_path)
 		DKERROR("${name} plugin not found")
@@ -1685,6 +1735,7 @@ endfunction()
 
 
 function(dk_getPathToPlugin name result)
+	DEBUG_LINE()
 	list(FIND dkdepend_disable_list "${ARGV}" index)
 	if(${index} GREATER -1)
 		DKINFO("${ARGV} IS DISABLED")
@@ -1701,12 +1752,17 @@ function(dk_getPathToPlugin name result)
 			return()
     	endif()
   	endforeach()
-	DKERROR("Could not find ${name} Plugin.")
+	set(${result} "")
+	#DKERROR("Could not find ${name} Plugin.")
+	DKASSERT("Could not find ${name} Plugin.")
 endfunction()
 
 
 # Add a library or plugin to the dependency list
 function(DKDEPEND name)
+	DEBUG_LINE()
+	DKDEBUG("CMAKE_CURRENT_LIST_DIR = ${CMAKE_CURRENT_LIST_DIR}")
+	
 	if(${ARGC} GREATER 1)
 		DKINFO("ARGV = ${ARGV}")
 		#DUMP(ARGV) # FIXME: DUMP not working here, show 2 for the ARGC count, but only shows variable name ARGV, no value
@@ -1774,7 +1830,7 @@ endfunction()
 ### WARNING: BE CAREFULL WRITING NEW VARIABLES TO USE WITH CONDITIONALS, AS THEY MIGHT BE IGNORED 
 ##########################
 function(DKRUNDEPENDS name)
-
+	DEBUG_LINE()
 	dk_getPathToPlugin(${name} plugin_path)
 	if(NOT plugin_path)
 		DKERROR("DKRUNDEPENDS() ${name} plugin not found")
@@ -2639,6 +2695,69 @@ function(DKIMPORT url) #Lib #ID #Patch
 		DKERROR("One of the required LIBVAR variables vas not satisfied")
 		return()
 	endif()
+endfunction()
+
+function(dk_DownloadAll3rdParty)
+	DKDEPEND_ALL() ## ADD any and all plugins here
+	
+	# Get a list of all /3rdParty/DKMAKE.cmake paths
+	file(GLOB All3rdParty ${DKIMPORTS}/*)
+	foreach(item ${All3rdParty})
+		if(EXISTS ${item}/DKMAKE.cmake)
+	
+			DKINFO("item = ${item}")
+			file(STRINGS ${item}/DKMAKE.cmake lines)
+			
+			unset(temp_import_script)
+			unset(index)
+			unset(indexB)
+			set(KEEPLINE 0)
+	
+			foreach(line ${lines})
+				
+				string(FIND "${line}" "set(" index)
+				if(${index} GREATER -1)
+					set(KEEPLINE 1)
+				endif()
+				
+				string(FIND "${line}" "SET(" index)
+				if(${index} GREATER -1)
+					set(KEEPLINE 1)
+				endif()
+		
+				string(FIND "${line}" "DOWNLOAD(" index)
+				if(${index} GREATER -1)
+					set(KEEPLINE 1)
+				endif()
+				
+				string(FIND "${line}" "DKINSTALL(" index)
+				if(${index} GREATER -1)
+					set(KEEPLINE 1)
+				endif()
+				
+				string(FIND "${line}" "DKIMPORT(" index)
+				if(${index} GREATER -1)
+					set(KEEPLINE 1)
+				endif()
+				
+				if(KEEPLINE)
+					set(dl_import_script "${dl_import_script}${line}\n")
+				endif()
+			
+				string(FIND "${line}" ")" indexB) 
+				if(${indexB} GREATER -1)
+					set(KEEPLINE 0)
+				endif()
+			endforeach()
+
+			if(dl_import_script)
+				file(WRITE ${DKDOWNLOAD}/TEMP/dl_import.TMP "${dl_import_script}")
+				INCLUDE(${DKDOWNLOAD}/TEMP/dl_import.TMP)
+				DKREMOVE(${DKDOWNLOAD}/TEMP/dl_import.TMP)
+			endif()
+
+		endif()
+	endforeach()
 endfunction()
 
 ###################################################################

@@ -1,9 +1,7 @@
-if(DISABLED_INCLUDED)
-  return()
-endif(DISABLED_INCLUDED)
-DKSET(DISABLED_INCLUDED 1)
+include_guard()
 
 DKDISABLE(tiff)
+DKDISABLE(msys2)
 
 # DISABLED FOR ALL
 DKDISABLE(_TEMPLATE-APP_)
@@ -319,8 +317,6 @@ if(ANDROID) # Disabled for Android targets
 	DKDISABLE(glew)
 	DKDISABLE(imagemagick)
 	DKDISABLE(java)
-	DKDISABLE(jdk8)
-	DKDISABLE(jdk9)
 	DKDISABLE(jerryscript)
 	DKDISABLE(kdevelop)
 	DKDISABLE(leptonica)

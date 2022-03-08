@@ -238,7 +238,7 @@ function DKBuild_ValidateNDK(){
 	}
 }
 
-function DKBuild_ResetAppsPlugins(){
+function DKBuild_ResetApps(){
 	let contents = CPP_DKFile_DirectoryContents(DIGITALKNOB)
 	let items = contents.split(",")
 	for(let n=0; n<items.length; n++){
@@ -255,13 +255,26 @@ function DKBuild_ResetAppsPlugins(){
 			}
 		}
 	}
-	
+}
+
+function DKBuild_ResetPlugins(){
 	let contents = CPP_DKFile_DirectoryContents(DIGITALKNOB)
 	let items = contents.split(",")
 	for(let n=0; n<items.length; n++){
 		if(CPP_DKFile_Exists(DIGITALKNOB+items[n]+"/.git")){
 			if(CPP_DKFile_Exists(DIGITALKNOB+items[n]+"/DKPlugins"))
 					DKGit_CleanFolder(DIGITALKNOB+items[n]+"/DKPlugins")
+		}
+	}
+}
+
+function DKBuild_Reset3rdParty(){
+	let contents = CPP_DKFile_DirectoryContents(DIGITALKNOB)
+	let items = contents.split(",")
+	for(let n=0; n<items.length; n++){
+		if(CPP_DKFile_Exists(DIGITALKNOB+items[n]+"/.git")){
+			if(CPP_DKFile_Exists(DIGITALKNOB+items[n]+"/3rdPatry"))
+					DKGit_CleanFolder(DIGITALKNOB+items[n]+"/3rdParty")
 		}
 	}
 }
@@ -395,7 +408,7 @@ function DKBuild_DoResults(){
 	if(OS === "mac64"){
 		DKBuild_ValidateXcode()
 		CPP_DKFile_MkDir(app_path+OS)
-		if(!DKBuild_Command(CMAKE+" -G \"Xcode\" -DCMAKE_OSX_ARCHITECTURES=x86_64 "+cmake_string+" -S"+DIGITALKNOB+"DK/DKCMake -B"+app_path+OS))
+		if(!DKBuild_Command(CMAKE+" -G \"Xcode\" -T buildsystem=1 -DCMAKE_OSX_ARCHITECTURES=x86_64 "+cmake_string+" -S"+DIGITALKNOB+"DK/DKCMake -B"+app_path+OS))
 			return false
 
 		//CPP_DKFile_ChDir(app_path+OS)
@@ -529,6 +542,9 @@ function DKBuild_DoResults(){
 				return false
 		}
 		
+		if(!DKBuild_Command(DIGITALKNOB+"DK/3rdParty/_DKIMPORTS/jdk/registerJDK.cmd"))
+			return false
+		
 		if(!DKBuild_Command(app_path+OS+"/gradlew --project-dir "+app_path+OS+" --info clean build"))
 			return false
 		
@@ -560,6 +576,12 @@ function DKBuild_DoResults(){
 			if(!DKBuild_Command(CMAKE+" --build "+app_path+OS+" --target main --config Release"))
 				return false
 		}
+		
+		if(!DKBuild_Command(DIGITALKNOB+"DK/3rdParty/_DKIMPORTS/jdk/registerJDK.cmd"))
+			return false
+		
+		if(!DKBuild_Command(app_path+OS+"/gradlew --project-dir "+app_path+OS+" --info clean build"))
+			return false
 		
 		if(!DKBuild_Command(app_path+OS+"/___Install.cmd"))
 			return false

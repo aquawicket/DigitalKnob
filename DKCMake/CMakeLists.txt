@@ -1,3 +1,5 @@
+include_guard()
+
 ### CMakeLists.txt for DKCMake ###
 ###
 ### 	source_path = thisDirectory

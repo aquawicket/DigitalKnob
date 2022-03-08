@@ -1,3 +1,4 @@
+include_guard()
 # string.cmake
 # https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String
 

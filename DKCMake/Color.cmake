@@ -1,3 +1,5 @@
+include_guard()
+
 # https://en.wikipedia.org/wiki/ANSI_escape_code#Colors
 # 
 # ←[0m←[37m     if these kinda symbols show up, escape characters are removed and color is not working 

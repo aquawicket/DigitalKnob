@@ -10,7 +10,7 @@ endif()
 
 DKDEPEND(mingw32)
 DKDEPEND(mingw64)
-DKDEPEND(msys)
+DKDEPEND(msys2)
 DKDEPEND(libgcc)
 
 

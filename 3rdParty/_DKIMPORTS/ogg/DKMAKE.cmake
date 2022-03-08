@@ -2,6 +2,7 @@
 # https://deltaepsilon.ca/posts/compiling-libogg-libvorbis-for-dummies
 # https://ftp.osuosl.org/pub/xiph/releases/ogg
 
+DKDEPEND(msys)
 
 #DKIMORT(https://github.com/xiph/ogg)
 DKSET(OGG_VERSION 1.3.5)

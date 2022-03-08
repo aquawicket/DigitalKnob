@@ -1,10 +1,8 @@
+include_guard()
 include(Functions.cmake)
+include(filesystem.cmake)
 include(Variables.cmake)
 include(Disabled.cmake)
-#if(DKPROCESS_INCLUDED)
-#  return()
-#endif(DKPROCESS_INCLUDED)
-#DKSET(DKPROCESS_INCLUDED 1)
 
 DKINFO("\n")
 DKINFO("############################################################")
@@ -63,12 +61,14 @@ foreach(plugin ${dkdepend_list})
 	#################### 3rdParty libs #####################
 	dk_getPathToPlugin(${plugin} plugin_path)
 	if(NOT plugin_path)
-		return()
+		DEBUG_LINE()
+		Wait()
+		break()
+		
 	endif()
 	#DKINFO("plugin_path = ${plugin_path}")
 
 	#This executes the 3rdParty library builds, and dkplugin setup, creates CMakeLists.txt files
-	DKSET(CURRENT_PLUGIN ${plugin})
 	include(${plugin_path}/DKMAKE.cmake)
 	
 	#NOTE: we won't have the library paths to remove until we've run DKCMake.cmake for the library
@@ -95,6 +95,16 @@ foreach(plugin ${dkdepend_list})
 	string(TOLOWER "${DKPLUGIN_LIST}" DKPLUGIN_LIST_lower)
 	string(TOLOWER "${plugin}" plugin_lower)	
 	string(FIND "${DKPLUGIN_LIST_lower}" "${plugin_lower}" isDKPlugin)
+	
+	# Install 3rd Party Libs
+	if(INSTALL_DKLIBS)
+		if(${isDKPlugin} EQUAL -1)
+			if(EXISTS ${plugin_path}/${BUILD_DIR}/cmake_install.cmake)
+				DKQCOMMAND(${CMAKE_COMMAND} --install ${plugin_path}/${BUILD_DIR})
+			endif()
+		endif()
+	endif()
+	
 	if(${isDKPlugin} GREATER -1)
 		#Add the DKPlugin to the app project
 		if(EXISTS "${plugin_path}/CMakeLists.txt")
@@ -258,14 +268,24 @@ foreach(plugin ${dkdepend_list})
 				if(NOT EXISTS ${lib})
 					DKINFO("\n\n\n****************************\nFAILED to find: ${lib} \n***********************************")
 					#DKERROR(" ")
+				else()
+				
+					# Install DKPlugin Libs
+					if(INSTALL_DKLIBS)
+						if(EXISTS ${plugin_path}/${BUILD_DIR}/cmake_install.cmake)
+							DKQCOMMAND(${CMAKE_COMMAND} --install ${plugin_path}/${BUILD_DIR})
+						endif()
+					endif()
+					
 				endif()
 			endforeach()
+			
+			
 		endif()
 	endif()
-	if(EXISTS ${plugin_path}/${BUILD_DIR}/cmake_install.cmake)
-		#DKQCOMMAND(${CMAKE_COMMAND} --install ${plugin_path}/${BUILD_DIR})
-	endif()
 endforeach()
+
+DeleteEmptyDirectories(${CMAKE_INSTALL_PREFIX})
 
 if(NOT DKAPP)
 	return()
@@ -352,10 +372,10 @@ if(WIN_32)
 		
 	###################### Backup Executable ###########################
 	if(DEBUG)
-		DKRENAME(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.exe ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.backup true)
+		DKRENAME(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.exe ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.exe.backup true)
 	endif()
 	if(RELEASE)
-		DKRENAME(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.exe ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.backup true)
+		DKRENAME(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.exe ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.exe.backup true)
 	endif()
 		
 	####################### Create Executable Target ###################
@@ -460,10 +480,10 @@ if(WIN_64)
 
 	###################### Backup Executable ###########################
 	if(DEBUG)
-		DKRENAME(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.exe ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.backup true)
+		DKRENAME(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.exe ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.exe.backup true)
 	endif()
 	if(RELEASE)
-		DKRENAME(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.exe ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.backup true)
+		DKRENAME(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.exe ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.exe.backup true)
 	endif()
 		
 	####################### Create Executable Target ###################
@@ -530,10 +550,10 @@ endif(WIN_64)
 if(MAC)
 	###################### Backup Executable ###########################
 	if(DEBUG)
-		DKCOPY(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.backup TRUE)
+		DKCOPY(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app.backup TRUE)
 	endif()
 	if(RELEASE)
-		DKCOPY(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.app ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.backup TRUE)
+		DKCOPY(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.app ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.app.backup TRUE)
 	endif()
 		
 	########################## CREATE ICONS ###############################
@@ -691,10 +711,10 @@ if(IOS OR IOSSIM)
 	
 	###################### Backup Executable ###########################
 	if(DEBUG)
-		DKRENAME(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.backup true)
+		DKRENAME(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app.backup true)
 	endif()
 	if(RELEASE)
-		DKRENAME(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.app ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.backup true)
+		DKRENAME(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.app ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.app.backup true)
 	endif()
 	
 	###################### BACKUP USERDATA ###############################
@@ -991,10 +1011,10 @@ if(ANDROID)
 		
 	###################### Backup Executable ###########################
 	if(DEBUG)
-		DKRENAME(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.apk ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.backup true)
+		DKRENAME(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.apk ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.apk.backup true)
 	endif()
 	if(RELEASE)
-		DKRENAME(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.apk ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.backup true)
+		DKRENAME(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.apk ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.apk.backup true)
 	endif()
 		
 	####################### Create Library Target ###################

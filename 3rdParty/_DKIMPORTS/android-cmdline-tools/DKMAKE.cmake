@@ -19,7 +19,10 @@ endif()
 #DKDEPEND(jdk8)
 
 ### VERSION ###
-DKSET(ANDROIDTOOLS ${3RDPARTY}/android-cmdline-tools)
+#DKSET(ANDROIDTOOLS ${3RDPARTY}/android-cmdline-tools)
+DKSET(ANDROIDTOOLS ${3RDPARTY}/android-sdk/cmdline-tools/latest)
+file(MAKE_DIRECTORY ${3RDPARTY}/android-sdk/cmdline-tools/latest)
+
 DKSET(SDKMANAGER_EXE ${ANDROIDTOOLS}/bin/sdkmanager.bat)
 WIN_HOST_DKSET(ANDROIDTOOLS_DL https://dl.google.com/android/repository/commandlinetools-win-7583922_latest.zip)
 MAC_HOST_DKSET(ANDROIDTOOLS_DL https://dl.google.com/android/repository/commandlinetools-mac-7302050_latest.zip)

@@ -1,4 +1,3 @@
-@echo off
 %dkbatch%
 
 set "DIGITALKNOB=C:\Users\Administrator\digitalknob"
@@ -8,7 +7,24 @@ set "ADB=%DIGITALKNOB%\DK\3rdParty\android-sdk\platform-tools\adb.exe"
 ::cd %Y%
 "%ADB%" devices
 for %%X in (
-"android.autoinstalls.config.motorola.layout"
+"com.verizon.loginengine.unbranded"
+"com.verizon.mips.services"
+"com.verizon.obdm_permissions"
+"com.verizon.onetalk.dialer"
+"com.vzw.apnlib"
+"com.vzw.apnservice"
+"com.vzw.ecid"
+"com.vzw.hs.android.modlite"
+"com.vzw.hss.myverizon" ) do (
+	echo Uninstalling %%X
+    "%ADB%" shell pm uninstall %%X
+    "%ADB%" shell pm uninstall --user 0 %%X
+)
+
+
+
+goto :eof
+("android.autoinstalls.config.motorola.layout"
 "cci.usage"
 "com.LogiaGroup.LogiaDeck"
 "com.aetherpal.device"
@@ -356,15 +372,6 @@ for %%X in (
 "com.telecomsys.directedsms.android.SCG"
 "com.topjohnwu.magisk"
 "com.vcast.mediamanager"
-"com.verizon.loginengine.unbranded"
-"com.verizon.mips.services"
-"com.verizon.obdm_permissions"
-"com.verizon.onetalk.dialer"
-"com.vzw.apnlib"
-"com.vzw.apnservice"
-"com.vzw.ecid"
-"com.vzw.hs.android.modlite"
-"com.vzw.hss.myverizon"
 "com.wavemarket.waplauncher"
 "com.wb.goog.dcuniverse"
 "com.wb.goog.got.conquest"
@@ -396,4 +403,6 @@ for %%X in (
 ::Google Login Service ==> "com.google.android.gsf.login"
 ::Explorer ==> "com.mi.android.globalFileexplorer"
 ::Find device ==> "com.xiaomi.finddevice"
-::END-80#
+::END-80# 
+ 
+%DKEND% 
