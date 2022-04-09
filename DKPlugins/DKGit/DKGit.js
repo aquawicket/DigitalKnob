@@ -74,7 +74,10 @@ function DKGit_Checkout(branch){
 // Retrieve the name of the default branch.  I.E.  main or master
 function DKGit_GetDefaultBranch(){
 	const ref = CPP_DK_Execute(GIT + " ls-remote --symref origin HEAD")
-	console.log("DKGit_GetDefaultBranch() -> "+ref)
+	const start = ref.lastIndexOf("/");
+	const end = ref.lastIndexOf(" ");
+	const default_branch = ref.substring(start, end);
+	console.log("DKGit_GetDefaultBranch() -> "+default_branch)
 	return "master"
 }
 
