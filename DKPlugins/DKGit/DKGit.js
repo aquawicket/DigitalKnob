@@ -71,6 +71,13 @@ function DKGit_Checkout(branch){
 	CPP_DK_Execute(GIT + " checkout "+branch)
 }
 
+// Retrieve the name of the default branch.  I.E.  main or master
+function DKGit_GetDefaultBranch(){
+	const ref = CPP_DK_Execute(GIT + " ls-remote --symref origin HEAD")
+	console.log("DKGit_GetDefaultBranch() -> "+ref)
+	return "master"
+}
+
 function DKGit_PullBranch(branch){
 	DKGit_Checkout(branch)
 	CPP_DK_Execute(GIT + " pull")
@@ -126,11 +133,13 @@ function DKGit_GitCommit() {
                 //CPP_DK_Execute(GIT + " init")
 				DKGit_SetCredentials()
 				const branch = DKGit_GetCurrentBranch()
-				if(branch === "master" || branch === "main"){
-					console.log("You are currently checked out to the master or main of the repository")
-					console.log("We don't feel comfortable writing to the master. please switch to, or create a development branch")
+				const default_branch = DKGit_GetDefaultBranch()
+				if(branch === default_branch){
+				//if(branch === "master" || branch === "main"){
+					console.log("You are currently checked out to the default branch of the repository")
+					console.log("We don't feel comfortable writing to the main/master. please switch to, or create a development branch")
 					console.log("Switch to Existing:  >  git checkout <branch_name>")
-					console.log("Create new branch:   >  git checkout -b <branch_name> master & git push")
+					console.log("Create new branch:   >  git checkout -b <branch_name> main & git push")
 					console.log("aborting commit")
 					CPP_DK_Execute("pause")
 					return;
@@ -176,7 +185,8 @@ function DKGit_SetCredentials(){
 
 function DKGit_CreateBranch(name){
 	console.debug("DKGit_CreateBranch("+name+")")
-	CPP_DK_Execute(GIT + " checkout -b "+name+" master")
+	const default_branch = DKGit_GetDefaultBranch()
+	CPP_DK_Execute(GIT + " checkout -b "+name+" "+default_branch)
 	DKGit_PushNewBranch(name)
 }
 
@@ -246,7 +256,9 @@ function DKGit_DiffCount(){
 	for(let i=0; i<files.length; i++){ 
 		if(CPP_DKFile_Exists(DIGITALKNOB+files[i]+"/DKApps")){
 			CPP_DKFile_ChDir(DIGITALKNOB + "/" + files[i])
-			const result = CPP_DK_Execute(GIT + " rev-list HEAD...origin/master --count", "rt")
+			const default_branch = DKGit_GetDefaultBranch()
+			const result = CPP_DK_Execute(GIT + " rev-list HEAD...origin/"+default_branch+" --count", "rt")
+			//const result = CPP_DK_Execute(GIT + " rev-list HEAD...origin/master --count", "rt")
 			console.log(result)
 		}
 	}
