@@ -13,7 +13,8 @@ DKDEPEND(freetype)
 
 ### VERSION ###
 #DKSET(RMLUI_DL https://github.com/mikke89/RmlUi/archive/34a77f7034882a04252ca5a531354c144d92a806.zip)
-DKSET(RMLUI_DL https://github.com/aquawicket/RmlUi/archive/9216572b79563159cc28af8fa56d051f58630449.zip)
+#DKSET(RMLUI_DL https://github.com/aquawicket/RmlUi/archive/9216572b79563159cc28af8fa56d051f58630449.zip)
+DKSET(RMLUI_DL https://github.com/aquawicket/RmlUi/archive/8ee72bdcd683afefbb66467fcddc20539ab67297.zip)
 DKSET(RMLUI_VERSION aquawicket)
 DKSET(RMLUI_NAME RmlUi-${RMLUI_VERSION})
 DKSET(RMLUI ${3RDPARTY}/${RMLUI_NAME})

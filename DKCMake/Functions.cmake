@@ -2099,7 +2099,6 @@ endfunction()
 
 
 function (dkFileReplace filePath find replace)
-
 	file(READ ${filePath} fileString)
 	string(FIND "${fileString}" "${find}" index)
 	if(${index} GREATER -1)
@@ -2112,7 +2111,6 @@ endfunction()
 
 
 function(DKUPDATE_ANDROID_NAME name)
-
 	string(TOLOWER ${name} name)
 	if(ANDROID)
 		## update all files and folders recursivley

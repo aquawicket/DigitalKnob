@@ -460,5 +460,14 @@ function DKGit_ResetRepository(){
 	*/
 }
 
+//https://www.git-tower.com/learn/git/faq/git-rename-master-to-main
+function DKGit_RenameMasterToMain(){
+	CPP_DK_Execute(GIT + " branch -m master main")   //rename local master branch to main
+	CPP_DK_Execute(GIT + " push -u origin main")   //push main to server
+	
+	//https://stackoverflow.com/questions/67870769/cant-change-git-default-branch-to-main-on-the-command-line    //Set the default branch to main
+	//CPP_DK_Execute(GIT + " git push origin --delete master")   //Delete the master branch from server
+}
+
 
 DKGit_init()

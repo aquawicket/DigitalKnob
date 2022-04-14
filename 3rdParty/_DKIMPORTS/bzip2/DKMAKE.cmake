@@ -61,6 +61,9 @@ if(WIN_32)
 	DKCOPY(${BZIP2}/build-VS2019 ${BZIP2}/${OS} FALSE)
 	WIN32_DKSETPATH(${BZIP2}/${OS})
 	WIN32_VS(${BZIP2_NAME} bzip2.sln libbz2-static)
+	
+	dkFileReplace(${BZIP2}/win32/bzip2-static/bzip2-static.vcxproj v142 v143)
+	dkFileReplace(${BZIP2}/win32/bzip2-static/libbz2-static.vcxproj v142 v143)
 endif()
 
 
@@ -72,6 +75,9 @@ if(WIN_64)
 	DKCOPY(${BZIP2}/build-VS2019 ${BZIP2}/${OS} FALSE)
 	WIN64_DKSETPATH(${BZIP2}/${OS})
 	WIN64_VS(${BZIP2_NAME} bzip2.sln libbz2-static x64)
+	
+	dkFileReplace(${BZIP2}/${OS}/bzip2-static/bzip2-static.vcxproj v142 v143)
+	dkFileReplace(${BZIP2}/${OS}/bzip2-static/libbz2-static.vcxproj v142 v143)
 endif()
 
 
