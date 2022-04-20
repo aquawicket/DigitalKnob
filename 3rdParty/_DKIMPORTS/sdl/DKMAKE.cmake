@@ -59,7 +59,9 @@ ANDROID_DKDEPEND(opensles)
 
 
 #DKIMPORT(https://github.com/libsdl-org/SDL)
-DKIMPORT(https://github.com/libsdl-org/SDL/archive/9d86ec85730e98f6f4d7827f4fda806e9c134f0d.zip)
+DKIMPORT(https://github.com/libsdl-org/SDL/archive/d9009388c8924b15f74ec38a26cc62ea42b40110.zip)
+#DKIMPORT(https://github.com/libsdl-org/SDL/archive/d9009388c8924b15f74ec38a26cc62ea42b40110.zip)
+#DKIMPORT(https://github.com/libsdl-org/SDL/archive/9d86ec85730e98f6f4d7827f4fda806e9c134f0d.zip)
 #DKSET(SDL_VERSION 1803297)
 #DKSET(SDL_DL https://github.com/libsdl-org/SDL/archive/18032979d892639ad4e03584a40a4d205cd2f5fd.zip)
 #DKSET(SDL_NAME SDL2-${SDL_VERSION})

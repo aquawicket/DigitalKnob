@@ -38,7 +38,8 @@ DKDEPEND(sdl)
 
 
 #DKIMPORT(https://github.com/libsdl-org/SDL_image)
-DKIMPORT(https://github.com/libsdl-org/SDL_image/archive/fc370dc71d7726023c063618c7b04c1ed30637e2.zip PATCH)
+DKIMPORT(https://github.com/libsdl-org/SDL_image/archive/915b794f2c6d8247f775000ee0b96f660cbb9331.zip PATCH)
+#DKIMPORT(https://github.com/libsdl-org/SDL_image/archive/fc370dc71d7726023c063618c7b04c1ed30637e2.zip PATCH)
 #DKSET(SDL_IMAGE_VERSION main)
 #DKSET(SDL_IMAGE_NAME SDL2_image-${SDL_IMAGE_VERSION})
 #DKSET(SDL_IMAGE_DL https://github.com/aquawicket/SDL_image/archive/refs/heads/${SDL_IMAGE_VERSION}.zip)
