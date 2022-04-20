@@ -1,10 +1,10 @@
 # https://slproweb.com/products/Win32OpenSSL.html
 #
-# https://slproweb.com/download/Win64OpenSSL-3_0_1.exe
+# https://slproweb.com/download/Win64OpenSSL-3_0_2.exe
 
 ### VERSION ###
 DKSET(OPENSSL_BINARY_VERSION 3.0.1)
-WIN_HOST_DKSET(OPENSSL_BINARY_DL https://slproweb.com/download/Win64OpenSSL-3_0_1.exe)
+WIN_HOST_DKSET(OPENSSL_BINARY_DL https://slproweb.com/download/Win64OpenSSL-3_0_2.exe)
 
 
 ### INSTALL ###
