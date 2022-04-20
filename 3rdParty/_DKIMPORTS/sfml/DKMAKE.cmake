@@ -58,8 +58,8 @@ DKDEPEND(vorbis)
 DKDEPEND(libjpeg-turbo)
 
 
-#DKIMPORT(https://github.com/SFML/SFML)
-DKIMPORT(https://github.com/SFML/SFML/archive/c7705a8d9a79bb2c8868518c32ae54f14220793c.zip)
+#DKIMPORT(https://github.com/SFML/SFML PATCH)
+DKIMPORT(https://github.com/SFML/SFML/archive/c7705a8d9a79bb2c8868518c32ae54f14220793c.zip PATCH)
 #DKIMPORT(https://github.com/SFML/SFML/archive/a733e4cd7e0056922e4f74f1932749b4d6a5744d.zip)
 #DKSET(SFML_VERSION master)
 #DKSET(SFML_DL https://github.com/aquawicket/SFML/archive/refs/heads/${SFML_VERSION}.zip)
