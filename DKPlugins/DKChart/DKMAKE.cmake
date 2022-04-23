@@ -3,6 +3,7 @@ DKDEPEND(chart.js)
 
 if(MOMENT)
 	DKCOPY(${MOMENT}/ ${DKPLUGINS}/DKChart/ FALSE)
+	DKRENAME(${DKPLUGINS}/DKChart/moment.js ${DKPLUGINS}/DKChart/moment.min.js TRUE)
 endif()
 if(CHART.JS)
 	DKCOPY(${CHART.JS}/ ${DKPLUGINS}/DKChart/ FALSE)
