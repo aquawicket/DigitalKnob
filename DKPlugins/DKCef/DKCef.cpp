@@ -470,12 +470,18 @@ bool DKCef::NewBrowser(const DKString& id, const int& top, const int& left, cons
 	DKDEBUGFUNC(id, top, left, width, height, url);
 	DKINFO("DKCef::NewBrowser("+id+","+toString(top)+","+toString(left)+","+toString(width)+","+toString(height)+","+url+")\n");
 	
+	/*
 	int _width = width;
 	int _height = height;
 	if(!_width)
 		_width = 800;
 	if(!_height)
 		_height = 600;
+	*/
+	int _width = width ? width : 800;
+	int _height = height ? height : 40;
+
+
 	CefWindowInfo window_info;
 	CefBrowserSettings browserSettings;
 	if(DKClass::DKValid("DKWindow,DKWindow0")){
@@ -497,7 +503,7 @@ bool DKCef::NewBrowser(const DKString& id, const int& top, const int& left, cons
 		dkBrowsers.push_back(dkBrowser);
 		
 		current_browser = CefBrowserHost::CreateBrowserSync(window_info, cefHandler, url, browserSettings, NULL, NULL);
-		if(current_browser)
+		if(!current_browser)
 			return DKERROR("DKCef::NewBrowser(): current_browser invalid\n"); 
 		//if(!CefBrowserHost::CreateBrowser(window_info, cefHandler, url, browserSettings, NULL, NULL))
 		//	return DKERROR("CefBrowserHost::CreateBrowser() failed\n");
