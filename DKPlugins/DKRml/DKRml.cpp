@@ -85,6 +85,8 @@ bool DKRml::Init(){
 	DKFile::FileToString(workingPath +"DKRml/blank.html", html);
 	DKFile::ChDir(workingPath);
 	LoadHtml(html);
+	//DKClass::DKCreate("DKDom");
+
 	return true;
 }
 
@@ -170,13 +172,19 @@ bool DKRml::LoadHtml(const DKString& html){
 	Rml::PluginRegistry::NotifyDocumentOpen(context, stream->GetSourceURL().GetURL());
 	document = context->CreateDocument("html");
 	
+	/*
+	//Create DOM javascript instance of window
+	Rml::Element* window = context->GetRootElement();
+	DKString window_rval;
+	DKString window_address = elementToAddress(window);
+	DKDuktape::RunDuktape("var window = new Window(\"" + window_address + "\");", window_rval);
+	*/
 
 	//Create DOM javascript instance of the document using the documents element address
-	DKString rval;
+	DKString document_rval;
 	DKString document_address = elementToAddress(document);
-	DKDuktape::RunDuktape("var document = new Document(\"" + document_address + "\");", rval);
+	DKDuktape::RunDuktape("var document = new Document(\"" + document_address + "\");", document_rval);
 	Rml::Element* ele = document;
-	
 	
 	Rml::XMLParser parser(ele);
 	parser.Parse(stream.get());
@@ -231,6 +239,19 @@ bool DKRml::LoadHtml(const DKString& html){
 	//We have to make sure the fonts are loaded on ANDROID
 	LoadFonts(DKFile::local_assets);
 #endif
+
+	
+	//Create DOM javascript instance of window
+	Rml::Element* window = context->GetRootElement();
+	DKString window_rval;
+	DKString window_address = elementToAddress(window);
+	DKDuktape::RunDuktape("var window = new Window(\"" + window_address + "\");", window_rval);
+	
+	//Create DOM javascript instance of the document using the documents element address
+	DKString document_rvalA;
+	DKString document_addressA = elementToAddress(document);
+	DKDuktape::RunDuktape("var document = new Document(\"" + document_addressA + "\");", document_rvalA);
+
 	return true;
 }
 
@@ -507,6 +528,7 @@ bool DKRml::UnregisterEvent(const DKString& elementAddress, const DKString& type
 	return true;
 }
 
+/*
 Rml::Event* DKRml::addressToEvent(const DKString& address){
 	//DKDEBUGFUNC(address);
 	Rml::Event* event;
@@ -611,3 +633,100 @@ DKString DKRml::elementToAddress(Rml::Element* element){
 		return "";
 	return ss.str();
 }
+*/
+
+
+
+
+
+
+
+Rml::Event* DKRml::addressToEvent(const DKString& address) {
+	//DKDEBUGFUNC(address);
+	Rml::Event* event;
+	if (address.compare(0, 2, "0x") != 0 || address.size() <= 2 || address.find_first_not_of("0123456789abcdefABCDEF", 2) != std::string::npos) {
+		DKERROR("the address (" + address + ") is not a valid hex notation\n");
+		return NULL;
+	}
+	//Convert a string of an address back into a pointer
+	std::stringstream ss;
+	ss << address.substr(2, address.size() - 2);
+	//int tmp(0);
+	std::uint64_t tmp;
+	if (!(ss >> std::hex >> tmp)) {
+		DKERROR("DKRml::addressToEvent(" + address + "): invalid address\n");
+		return NULL;
+	}
+	event = reinterpret_cast<Rml::Event*>(tmp);
+	if (!event->GetCurrentElement()) {
+		DKERROR("DKRml::addressToEvent(" + address + "): currentElement invalid\n");
+		return NULL;
+	}
+	return event;
+}
+
+DKString DKRml::eventToAddress(Rml::Event* event) {
+	if (!event) {
+		DKERROR("DKRml::eventToAddress(): invalid event\n");
+		return "";
+	}
+	std::stringstream ss;
+	const void* address = static_cast<const void*>(event);
+#ifdef WIN32
+	ss << "0x" << address;
+#else 
+	ss << address;
+#endif
+	return ss.str();
+}
+
+Rml::Element* DKRml::addressToElement(const DKString& address) {
+	//DKDEBUGFUNC(address);
+	Rml::Element* element = nullptr;
+	
+	if (address.compare(0, 2, "0x") != 0 || address.size() <= 2 || address.find_first_not_of("0123456789abcdefABCDEF", 2) != std::string::npos) {
+		DKERROR("NOTE: DKRml::addressToElement("+address+"): the address is not a valid hex notation\n");
+		return NULL;
+	}
+
+	//Convert a string of an address back into a pointer
+	std::stringstream ss;
+	ss << address.substr(2, address.size() - 2);
+	std::uint64_t tmp;
+	if (!(ss >> std::hex >> tmp)) {
+		DKERROR("invalid address\n");
+		return NULL;
+	}
+	element = reinterpret_cast<Rml::Element*>(tmp);	
+	if (!element) {
+		DKERROR("invalid element\n");
+		return NULL;
+	}
+	if (element->GetTagName().empty())
+		return NULL;
+	return element;
+}
+
+DKString DKRml::elementToAddress(Rml::Element* element){
+	if (!element) {
+		DKERROR("DKRml::elementToAddress(): invalid element\n");
+		return "";
+	}
+	std::stringstream ss;
+	const void* address = static_cast<const void*>(element);
+#ifdef WIN32
+		ss << "0x" << address;
+#else 
+		ss << address;
+#endif
+	if (same("0xDDDDDDDD", ss.str()))
+		return "";
+	return ss.str();
+}
+
+
+
+
+//Rml::Element* window = DKRml::Get()->document->GetContext()->GetRootElement();
+//Rml::Element* document = DKRml::Get()->document->GetOwnerDocument();
+//Rml::Element* subdocument = DKRml::Get()->document;
