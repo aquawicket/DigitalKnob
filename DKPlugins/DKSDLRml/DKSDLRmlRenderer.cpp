@@ -28,8 +28,7 @@ void RmlSDL2Renderer::RenderGeometry(Rml::Vertex* vertices, int num_vertices, in
 #endif 
     glPushMatrix();
     glTranslatef(translation.x, translation.y, 0);
- 
- 
+  
     std::vector<Rml::Vector2f> Positions(num_vertices);
     std::vector<Rml::Colourb> Colors(num_vertices);
     std::vector<Rml::Vector2f> TexCoords(num_vertices);
