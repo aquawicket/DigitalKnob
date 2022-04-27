@@ -176,6 +176,14 @@ bool DKRml::LoadHtml(const DKString& html){
 	DKDuktape::RunDuktape("var document = new Document(\"" + document_address + "\");", rval);
 	Rml::Element* ele = document;
 	
+	/*
+	//Create DOM javascript instance of the document using the documents element address
+	Rml::Element* window = context->GetRootElement();
+	DKString window_rval;
+	DKString window_address = elementToAddress(window);
+	DKDuktape::RunDuktape("var window_address = " + window_address, window_rval);
+	DKDuktape::RunDuktape("var window = new Window(\"" + window_address + "\");", window_rval);
+	*/
 	
 	Rml::XMLParser parser(ele);
 	parser.Parse(stream.get());
@@ -272,13 +280,6 @@ bool DKRml::LoadUrl(const DKString& url){
 			return DKERROR("DKFile::FileToString failed on "+_url+"\n");
 	}
 	LoadHtml(html);
-
-	//Create DOM javascript instance of the document using the documents element address
-	Rml::Element* window = context->GetRootElement();
-	DKString window_rval;
-	DKString window_address = elementToAddress(window);
-	DKDuktape::RunDuktape("var window_address = " + window_address, window_rval);
-	DKDuktape::RunDuktape("var window = new Window(\"" + window_address + "\");", window_rval);
 
 	return true;
 }
