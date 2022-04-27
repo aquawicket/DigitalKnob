@@ -447,7 +447,7 @@ bool DKSDLCef::TransparentPixel(SDL_Event *event)
 void DKSDLCef::Draw()
 {
 	//DKDEBUGFUNC();
-	///// Draw to DKRocket
+	///// Draw to DKRml
 	if(DKClass::DKValid("DKRml,DKRml0")){ return; } 
 
 	///// Draw to DKSdlWindow
