@@ -169,7 +169,6 @@ bool DKRml::LoadHtml(const DKString& html){
 	stream->SetSourceURL("[document from memory]");
 	Rml::PluginRegistry::NotifyDocumentOpen(context, stream->GetSourceURL().GetURL());
 	document = context->CreateDocument("html");
-	
 
 	//Create DOM javascript instance of the document using the documents element address
 	DKString rval;
@@ -273,6 +272,14 @@ bool DKRml::LoadUrl(const DKString& url){
 			return DKERROR("DKFile::FileToString failed on "+_url+"\n");
 	}
 	LoadHtml(html);
+
+	//Create DOM javascript instance of the document using the documents element address
+	Rml::Element* window = context->GetRootElement();
+	DKString window_rval;
+	DKString window_address = elementToAddress(window);
+	DKDuktape::RunDuktape("var window_address = " + window_address, window_rval);
+	DKDuktape::RunDuktape("var window = new Window(\"" + window_address + "\");", window_rval);
+
 	return true;
 }
 

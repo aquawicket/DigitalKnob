@@ -361,6 +361,7 @@ Window.prototype = EventTarget.prototype
 Object.assign(Window.prototype, GlobalEventHandlers)
 Object.assign(Window.prototype, WindowEventHandlers)
 
+/*
 //Create the global window object
 var window = new Window("window")
 globalThis.window = window
@@ -371,3 +372,4 @@ window.dk = dk
 const DUKTAPE = true
 window.DUKTAPE = DUKTAPE
 console.log("DUKTAPE = "+DUKTAPE)
+*/

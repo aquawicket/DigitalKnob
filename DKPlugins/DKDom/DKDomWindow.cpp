@@ -4,6 +4,7 @@
 #include "DKDom/DKDomWindow.h"
 #include "DKDom/DKDomElement.h"
 #include "duktape.h"
+#include "DKDuktape.h"
 
 
 //https://github.com/svaarala/duktape/blob/master/tests/api/test-set-global-object.c
@@ -183,6 +184,28 @@ bool DKDomWindow::Init()
 
 	// Javascript bindings
 	DKClass::DKCreate("DKDom/DKDomWindow.js");
+	
+	//Create the global window object
+	DKDuktape* dt = DKDuktape::Get();
+	duk_eval_string(dt->ctx, "var window = new Window('window')");
+	duk_eval_string(dt->ctx, "globalThis.window = window");
+	duk_eval_string(dt->ctx, "var dk = new Object");
+	duk_eval_string(dt->ctx, "window.dk = dk");
+	duk_eval_string(dt->ctx, "const DUKTAPE = true");
+	duk_eval_string(dt->ctx, "window.DUKTAPE = DUKTAPE");
+	duk_eval_string(dt->ctx, "console.log('DUKTAPE = '+DUKTAPE)");
+
+	/*
+	duk_eval_string(dt->ctx,
+		"({\n"
+		"    print: this.print,\n"
+		"    JSON: this.JSON,\n"
+		"    eval: this.eval,\n"
+		"    newGlobal: true,\n"
+		"    window: window\n"
+		"})\n");
+	*/
+
 	return true;
 }
 
