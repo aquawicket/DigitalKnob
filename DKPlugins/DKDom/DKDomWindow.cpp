@@ -181,28 +181,8 @@ bool DKDomWindow::Init()
 	///////////////////////////////////////////////////////////////////////////////
 	*/
 
-	//Rml::Element* window = DKRml::Get()->document->GetContext()->GetRootElement();
-	//Rml::Element* document = DKRml::Get()->document->GetOwnerDocument();
-	//Rml::Element* subdocument = DKRml::Get()->document;
-
-	/*
-	#include "DKDuktape.h"
-	DKDuktape* dt = DKDuktape::Get();
-	duk_eval_string(dt->ctx,
-		"({\n"
-		"    print: this.print,\n"
-		"    JSON: this.JSON,\n"
-		"    eval: this.eval,\n"
-		"    newGlobal: true,\n"
-		"    window: 'window'\n"
-		"})\n");
-	*/
-
 	// Javascript bindings
 	DKClass::DKCreate("DKDom/DKDomWindow.js");
-
-	
-
 	return true;
 }
 
