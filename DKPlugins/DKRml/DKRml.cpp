@@ -10,7 +10,6 @@
 #ifdef HAVE_DKCurl
 #	include "DKCurl/DKCurl.h"
 #endif
-
 #include <RmlUi/Core/StreamMemory.h>
 #include <Core/PluginRegistry.h>
 #include <Core/XMLNodeHandlerDefault.h>
@@ -78,13 +77,12 @@ bool DKRml::Init(){
 	Rml::Factory::RegisterElementInstancer("body", new Rml::ElementInstancerElement);
 	Rml::XMLParser::RegisterNodeHandler("body", std::make_shared<Rml::XMLNodeHandlerDefault>());
 	
-	DKClass::DKCreate("DKDom");
-	
 	DKString html;
 	DKString workingPath = DKFile::local_assets;
 	DKFile::FileToString(workingPath +"DKRml/blank.html", html);
 	DKFile::ChDir(workingPath);
 	LoadHtml(html);
+	DKClass::DKCreate("DKDom");
 	return true;
 }
 
@@ -175,15 +173,6 @@ bool DKRml::LoadHtml(const DKString& html){
 	DKString document_address = elementToAddress(document);
 	DKDuktape::RunDuktape("var document = new Document(\"" + document_address + "\");", rval);
 	Rml::Element* ele = document;
-	
-	/*
-	//Create DOM javascript instance of the document using the documents element address
-	Rml::Element* window = context->GetRootElement();
-	DKString window_rval;
-	DKString window_address = elementToAddress(window);
-	DKDuktape::RunDuktape("var window_address = " + window_address, window_rval);
-	DKDuktape::RunDuktape("var window = new Window(\"" + window_address + "\");", window_rval);
-	*/
 	
 	Rml::XMLParser parser(ele);
 	parser.Parse(stream.get());
@@ -515,6 +504,7 @@ bool DKRml::UnregisterEvent(const DKString& elementAddress, const DKString& type
 	return true;
 }
 
+/*
 Rml::Event* DKRml::addressToEvent(const DKString& address){
 	//DKDEBUGFUNC(address);
 	Rml::Event* event;
@@ -617,5 +607,92 @@ DKString DKRml::elementToAddress(Rml::Element* element){
 	}
 	if (same("0xDDDDDDDD", ss.str()))
 		return "";
+	return ss.str();
+}
+*/
+
+
+
+Rml::Event* DKRml::addressToEvent(const DKString& address) {
+	//DKDEBUGFUNC(address);
+	Rml::Event* event;
+	if (address.compare(0, 2, "0x") != 0 || address.size() <= 2 || address.find_first_not_of("0123456789abcdefABCDEF", 2) != std::string::npos) {
+		DKERROR("the address (" + address + ") is not a valid hex notation\n");
+		return NULL;
+	}
+	//Convert a string of an address back into a pointer
+	std::stringstream ss;
+	ss << address.substr(2, address.size() - 2);
+	//int tmp(0);
+	std::uint64_t tmp;
+	if (!(ss >> std::hex >> tmp)) {
+		DKERROR("DKRml::addressToEvent(" + address + "): invalid address\n");
+		return NULL;
+	}
+	event = reinterpret_cast<Rml::Event*>(tmp);
+	if (!event->GetCurrentElement()) {
+		DKERROR("DKRml::addressToEvent(" + address + "): currentElement invalid\n");
+		return NULL;
+	}
+	return event;
+}
+
+DKString DKRml::eventToAddress(Rml::Event* event) {
+	if (!event) {
+		DKERROR("DKRml::eventToAddress(): invalid event\n");
+		return "";
+	}
+	std::stringstream ss;
+	const void* address = static_cast<const void*>(event);
+#ifdef WIN32
+	ss << "0x" << address;
+#else 
+	ss << address;
+#endif
+	return ss.str();
+}
+
+Rml::Element* DKRml::addressToElement(const DKString& address) {
+	//DKDEBUGFUNC(address);
+	Rml::Element* element = nullptr;
+	if (address.compare(0, 2, "0x") != 0 || address.size() <= 2 || address.find_first_not_of("0123456789abcdefABCDEF", 2) != std::string::npos) {
+		DKERROR("NOTE: DKRml::addressToElement(): the address is not a valid hex notation");
+		return NULL;
+	}
+	//Convert a string of an address back into a pointer
+	std::stringstream ss;
+	ss << address.substr(2, address.size() - 2);
+	std::uint64_t tmp;
+	if (!(ss >> std::hex >> tmp)) {
+		DKERROR("invalid address\n");
+		return NULL;
+	}
+	element = reinterpret_cast<Rml::Element*>(tmp);
+	
+	if (!element) {
+		DKERROR("invalid element\n");
+		return NULL;
+	}
+	if (element->GetTagName().empty())
+		return NULL;
+	return element;
+}
+
+DKString DKRml::elementToAddress(Rml::Element* element) {
+	if (!element) {
+		DKERROR("DKRml::elementToAddress(): invalid element\n");
+		return "";
+	}
+	std::stringstream ss;
+	const void* address = static_cast<const void*>(element);
+#ifdef WIN32
+	ss << "0x" << address;
+#else 
+	ss << address;
+#endif
+	if (same("0xDDDDDDDD", ss.str())) {
+		DKERROR("DKRml::elementToAddress(): ss = 0xDDDDDDDD\n");
+		return "";
+	}
 	return ss.str();
 }

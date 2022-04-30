@@ -22,34 +22,34 @@ bool DKDom::Init(){
 
 
 	//Load the Duktape javascript DOM
-		DKClass::DKCreate("DKDomEventTarget");
-			DKClass::DKCreate("DKDom/DKDomGlobalEventHandlers.js");
-			DKClass::DKCreate("DKDomXMLHttpRequestEventTarget");
-				DKClass::DKCreate("DKDomXMLHttpRequest");
-			DKClass::DKCreate("DKDomWindowEventHandlers");
-			DKClass::DKCreate("DKDomEvent");
-				DKClass::DKCreate("DKDomUIEvent");
-				DKClass::DKCreate("DKDomKeyboardEvent");
-				DKClass::DKCreate("DKDomMouseEvent");
+	DKClass::DKCreate("DKDomEventTarget");
+		DKClass::DKCreate("DKDom/DKDomGlobalEventHandlers.js");
+		DKClass::DKCreate("DKDomXMLHttpRequestEventTarget");
+		DKClass::DKCreate("DKDomXMLHttpRequest");
+		DKClass::DKCreate("DKDomWindowEventHandlers");
+		DKClass::DKCreate("DKDomEvent");
+			DKClass::DKCreate("DKDomUIEvent");
+			DKClass::DKCreate("DKDomKeyboardEvent");
+			DKClass::DKCreate("DKDomMouseEvent");
 			
-			DKClass::DKCreate("DKDomNode");
-				DKClass::DKCreate("DKDomElement");
-					DKClass::DKCreate("DKDomHTMLElement");
-					DKClass::DKCreate("DKDomHTMLCollection");
-						DKClass::DKCreate("DKDomHTMLImageElement");
-						DKClass::DKCreate("DKDomHTMLScriptElement");
-						DKClass::DKCreate("DKDomHTMLSpanElement");
-			DKClass::DKCreate("DKDomCSSStyleDeclaration");
+		DKClass::DKCreate("DKDomNode");
+			DKClass::DKCreate("DKDomElement");
+				DKClass::DKCreate("DKDomHTMLElement");
+				DKClass::DKCreate("DKDomHTMLCollection");
+					DKClass::DKCreate("DKDomHTMLImageElement");
+					DKClass::DKCreate("DKDomHTMLScriptElement");
+					DKClass::DKCreate("DKDomHTMLSpanElement");
+		DKClass::DKCreate("DKDomCSSStyleDeclaration");
 			
-			//DKClass::DKCreate("DKDomWindowOrWorkerGlobalScope");
-			DKClass::DKCreate("DKDomDocumentOrShadowRoot");
-			DKClass::DKCreate("DKDom/DKDomWindowOrWorkerGlobalScope.js");
-			DKClass::DKCreate("DKDomWindow");
-				DKClass::DKCreate("DKDomDocument");
-				DKClass::DKCreate("DKDomConsole");
-				DKClass::DKCreate("DKDomLocation");
-				DKClass::DKCreate("DKDomNavigator");
-				DKClass::DKCreate("DKDomScreen");
-			
+		//DKClass::DKCreate("DKDomWindowOrWorkerGlobalScope");
+		DKClass::DKCreate("DKDomDocumentOrShadowRoot");
+		DKClass::DKCreate("DKDom/DKDomWindowOrWorkerGlobalScope.js");
+		DKClass::DKCreate("DKDomWindow");
+			DKClass::DKCreate("DKDomDocument");
+			DKClass::DKCreate("DKDomConsole");
+			DKClass::DKCreate("DKDomLocation");
+			DKClass::DKCreate("DKDomNavigator");
+			DKClass::DKCreate("DKDomScreen");
+		
 	return true;
 }

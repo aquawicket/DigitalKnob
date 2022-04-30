@@ -187,24 +187,30 @@ bool DKDomWindow::Init()
 	
 	//Create the global window object
 	DKDuktape* dt = DKDuktape::Get();
-	duk_eval_string(dt->ctx, "var window = new Window('window')");
-	duk_eval_string(dt->ctx, "globalThis.window = window");
-	duk_eval_string(dt->ctx, "var dk = new Object");
-	duk_eval_string(dt->ctx, "window.dk = dk");
-	duk_eval_string(dt->ctx, "const DUKTAPE = true");
-	duk_eval_string(dt->ctx, "window.DUKTAPE = DUKTAPE");
-	duk_eval_string(dt->ctx, "console.log('DUKTAPE = '+DUKTAPE)");
-
-	/*
+	if(DKClass::DKValid("DKRml0")) {
+		Rml::Element* window = DKRml::Get()->document->GetContext()->GetRootElement(); //Root element that holds all the documents.
+		DKString window_address = DKRml::Get()->elementToAddress(window);
+		DKString var_window = "var window = new Window('" + window_address + "')";
+		duk_eval_string(dt->ctx, var_window.c_str());
+	}
+	else{
+		duk_eval_string(dt->ctx, "var window = new Window('window')");
+	}
+		
+	//duk_eval_string(dt->ctx, "globalThis.window = window");
 	duk_eval_string(dt->ctx,
 		"({\n"
 		"    print: this.print,\n"
 		"    JSON: this.JSON,\n"
 		"    eval: this.eval,\n"
 		"    newGlobal: true,\n"
-		"    window: window\n"
+		"    window: this.window\n"
 		"})\n");
-	*/
+	duk_eval_string(dt->ctx, "var dk = new Object");
+	duk_eval_string(dt->ctx, "window.dk = dk");
+	duk_eval_string(dt->ctx, "const DUKTAPE = true");
+	duk_eval_string(dt->ctx, "window.DUKTAPE = DUKTAPE");
+	duk_eval_string(dt->ctx, "console.log('DUKTAPE = '+DUKTAPE)");
 
 	return true;
 }

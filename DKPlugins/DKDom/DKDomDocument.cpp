@@ -14,6 +14,14 @@ bool DKDomDocument::Init(){
 	DKDuktape::AttachFunction("CPP_DKDomDocument_getElementById", DKDomDocument::getElementById);
 	DKDuktape::AttachFunction("CPP_DKDomDocument_getElementsByTagName", DKDomDocument::getElementsByTagName);
 	DKClass::DKCreate("DKDom/DKDomDocument.js");
+
+	//Create DOM javascript instance of the document using the documents element address
+	if (DKClass::DKValid("DKRml0")) {
+		DKString rval;
+		DKString document_address = DKRml::Get()->elementToAddress(DKRml::Get()->document);
+		DKDuktape::RunDuktape("var document = new Document(\"" + document_address + "\");", rval);
+	}
+
 	return true;
 }
 
