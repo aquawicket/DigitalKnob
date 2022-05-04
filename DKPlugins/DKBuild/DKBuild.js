@@ -108,7 +108,8 @@ function DKBuild_end(){
 
 //This is and alternative way to get windows short paths
 function DKBuild_GetShortPath(fullPath){
-	let getShortPath = DIGITALKNOB+"DK/DKPlugins/DKFile/getShortPath.cmd"
+	const assets = CPP_DKAssets_LocalAssets()
+	let getShortPath = assets+"/DKFile/getShortPath.cmd"
 	let shortPath = CPP_DK_Execute(getShortPath+' "'+fullPath+'"')
 	//shortPath = shortPath.slice(0, -1)
 	while(shortPath.includes("\\")){
