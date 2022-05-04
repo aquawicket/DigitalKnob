@@ -1,5 +1,6 @@
 ### DKDEPENDS ###
-DKDEPEND(bullet)
+#DKDEPEND(bullet)
+DKDEPEND(bullet3)
 DKDEPEND(osgworks)
 
 ### INSTALL ###
