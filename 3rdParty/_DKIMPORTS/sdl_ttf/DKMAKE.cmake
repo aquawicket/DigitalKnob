@@ -1,8 +1,5 @@
 # https://github.com/libsdl-org/SDL_ttf
 # https://www.libsdl.org/projects/SDL_ttf
-# https://github.com/aquawicket/SDL_ttf
-#
-# https://github.com/aquawicket/SDL_ttf/archive/refs/heads/main.zip
 # https://www.libsdl.org/projects/SDL_ttf/release/SDL2_ttf-2.0.15.zip
 
 ### DEPENDS ###
@@ -15,7 +12,6 @@ DKIMPORT(https://github.com/libsdl-org/SDL_ttf/archive/970e703dd144ffefdcd7cb5f4
 #DKIMPORT(https://github.com/libsdl-org/SDL_ttf/archive/9a8650d82824bd8d971dd77d74b67315c4150b07.zip PATCH)
 #DKSET(SDL_TTF_VERSION main)
 #DKSET(SDL_TTF_NAME SDL2_ttf-${SDL_TTF_VERSION})
-#DKSET(SDL_TTF_DL https://github.com/aquawicket/SDL_ttf/archive/refs/heads/${SDL_TTF_VERSION}.zip)
 #DKSET(SDL_TTF ${3RDPARTY}/${SDL_TTF_NAME})
 #DKINSTALL(${SDL_TTF_DL} sdl_ttf ${SDL_TTF})
 

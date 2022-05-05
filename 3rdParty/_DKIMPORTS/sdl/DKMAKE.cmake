@@ -1,8 +1,6 @@
 # https://github.com/libsdl-org/SDL
-# https://github.com/aquawicket/SDL
 # https://www.libsdl.org/
 # https://stackoverflow.com/a/57734435/688352
-# https://github.com/aquawicket/SDL/archive/refs/heads/main.zip
 # https://www.libsdl.org/release/SDL2-2.0.16.zip
 # https://www.libsdl.org/release/SDL2-2.0.18.zip
 

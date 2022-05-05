@@ -1,7 +1,5 @@
 # https://github.com/google/diff-match-patch
-# https://github.com/aquawicket/diff-match-patch
 #
-# https://github.com/aquawicket/diff-match-patch/archive/refs/heads/master.zip
 # https://github.com/google/diff-match-patch/archive/refs/heads/master.zip
 
 #DKIMPORT(https://github.com/google/diff-match-patch)

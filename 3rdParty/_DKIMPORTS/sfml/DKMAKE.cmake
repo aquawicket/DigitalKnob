@@ -1,8 +1,6 @@
 # https://github.com/SFML/SFML
-# https://github.com/aquawicket/SFML
 # https://www.sfml-dev.org
 #
-# https://github.com/aquawicket/SFML/archive/refs/heads/master.zip
 # https://github.com/SFML/SFML/archive/refs/heads/master.zip
 # https://www.sfml-dev.org/files/SFML-2.5.1-sources.zip
 
@@ -62,7 +60,6 @@ DKDEPEND(libjpeg-turbo)
 DKIMPORT(https://github.com/SFML/SFML/archive/c7705a8d9a79bb2c8868518c32ae54f14220793c.zip PATCH)
 #DKIMPORT(https://github.com/SFML/SFML/archive/a733e4cd7e0056922e4f74f1932749b4d6a5744d.zip)
 #DKSET(SFML_VERSION master)
-#DKSET(SFML_DL https://github.com/aquawicket/SFML/archive/refs/heads/${SFML_VERSION}.zip)
 #DKSET(SFML_NAME SFML-${SFML_VERSION})
 #DKSET(SFML ${3RDPARTY}/${SFML_NAME})
 #DKINSTALL(${SFML_DL} sfml ${SFML})

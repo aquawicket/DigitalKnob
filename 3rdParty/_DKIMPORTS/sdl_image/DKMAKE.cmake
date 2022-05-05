@@ -1,7 +1,5 @@
 # https://github.com/libsdl-org/SDL_image
-# https://github.com/aquawicket/SDL_image
 #
-# https://github.com/aquawicket/SDL_image/archive/refs/heads/main.zip
 # https://github.com/libsdl-org/SDL_image/archive/refs/heads/main.zip
 # https://www.libsdl.org/projects/SDL_image/release/SDL2_image-2.0.1.zip
 # https://www.libsdl.org/projects/SDL_image/release/SDL2_image-2.0.5.zip
@@ -42,7 +40,6 @@ DKIMPORT(https://github.com/libsdl-org/SDL_image/archive/915b794f2c6d8247f775000
 #DKIMPORT(https://github.com/libsdl-org/SDL_image/archive/fc370dc71d7726023c063618c7b04c1ed30637e2.zip PATCH)
 #DKSET(SDL_IMAGE_VERSION main)
 #DKSET(SDL_IMAGE_NAME SDL2_image-${SDL_IMAGE_VERSION})
-#DKSET(SDL_IMAGE_DL https://github.com/aquawicket/SDL_image/archive/refs/heads/${SDL_IMAGE_VERSION}.zip)
 #DKSET(SDL_IMAGE ${3RDPARTY}/${SDL_IMAGE_NAME})
 #DKINSTALL(${SDL_IMAGE_DL} sdl_image ${SDL_IMAGE}) #NOPATCH)
 
