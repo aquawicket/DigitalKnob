@@ -22,8 +22,8 @@ ANDROID_DKDEPEND(mingw64)
 DKSET(BOOST_MAJOR 1)
 DKSET(BOOST_MINOR 78)
 DKSET(BOOST_BUILD 0)
-#DKSET(BOOST_DL https://boostorg.jfrog.io/artifactory/main/release/1.78.0/source/boost_1_78_0.zip)
-DKSET(BOOST_DL https://versaweb.dl.sourceforge.net/project/boost/boost/1.78.0/boost_1_78_0.zip)
+#DKSET(BOOST_DL https://boostorg.jfrog.io/artifactory/main/release/1.78.0/source/boost_1_78_0.zip PATCH)
+DKSET(BOOST_DL https://versaweb.dl.sourceforge.net/project/boost/boost/1.78.0/boost_1_78_0.zip PATCH)
 
 
 ### INSTALL ###
