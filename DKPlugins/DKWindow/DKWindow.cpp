@@ -8,6 +8,8 @@
 bool DKWindow::Init()
 {
 	DKDEBUGFUNC();
+	if (!DKClass::DKValid("DKSDLWindow,DKSDLWindow0") && !DKClass::DKValid("DKOSGWindow,DKOSGWindow0"))
+		return DKERROR("DKWindow::Init(): DO NOT create DKWindow directly, use DKSDLWindow or DKOSGWindow\n");
 	DKClass::DKCreate("DKWindowJS");
 	DKClass::DKCreate("DKWindowV8");
 	return true;

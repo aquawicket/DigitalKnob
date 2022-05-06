@@ -252,8 +252,7 @@ if(!same(DKV8::multi_process, "ON")){
 		return false;
 	}
 	DKUtil::GetThreadId(cefThreadId); //store the main Cef threadId
-	//if(DKClass::DKValid("DKSDLWindow,DKSDLWindow0")){
-	if (DKClass::DKValid("DKWindow,DKWindow0")) {
+	if (DKClass::DKValid("DKSDLWindow,DKSDLWindow0")) {
 		if(DKClass::DKAvailable("DKSDLCef")){
 			DKClass::DKCreate("DKSDLCef");
 			//NewBrowser(id, top, left, width, height, url);

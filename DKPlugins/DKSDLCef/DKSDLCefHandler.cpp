@@ -164,6 +164,10 @@ void DKSDLCefHandler::OnAfterCreated(CefRefPtr<CefBrowser> browser)
 	background_images.push_back(NULL);
 	
 	dkCef->current_browser = browser;
+	if (!dkCef->dkBrowsers.size()) {
+		DKERROR("DKSDLCefHandler::OnAfterCreated(): !dkCef->dkBrowsers.size()\n");
+		return;
+	}
 	dkCef->dkBrowsers[dkCef->dkBrowsers.size()-1].browser = browser;
 }
 
