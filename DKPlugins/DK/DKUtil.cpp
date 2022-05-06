@@ -268,7 +268,7 @@ bool DKUtil::GetDate(DKString& date){
 }
 
 bool DKUtil::GetFps(unsigned int& fps){
-	DKDEBUGFUNC(fps);
+	//DKDEBUGFUNC(fps);
 	fps = (unsigned int)framespersecond;
 	return true;
 }
