@@ -71,7 +71,7 @@ if(NOT WIN_HOST) # Disabled on Non-Windows host machines
 	DKDISABLE(android-studio)
 	DKDISABLE(glintercept)
 	DKDISABLE(python)
-	DKDISABLE(php-win32-vs16-x64)
+	DKDISABLE(php_binary)
 	DKDISABLE(vs16-redistributable)
 endif()
 if(WIN) # Disabled for Windows targets
