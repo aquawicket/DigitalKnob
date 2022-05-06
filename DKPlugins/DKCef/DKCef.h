@@ -47,7 +47,7 @@ public:
 	bool GetBrowsers(int& num);
 	bool GetCurrentBrowser(int& browser);
 	bool GetPageSource(const int& browser, DKString& _source);
-	bool GetUrl(int& browser, DKString& url);
+	bool GetUrl(const int& browser, DKString& url);
 	bool GoBack(const int& browser);
 	bool GoForward(const int& browser);
 	bool NewBrowser(const DKString& id, const int& top, const int& left, const int& width, const int& height, const DKString& url);
