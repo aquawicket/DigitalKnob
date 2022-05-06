@@ -150,7 +150,7 @@ if(!same(DKV8::multi_process, "ON")){
 	if(exit_code >= 0) {
 	  // The sub-process has completed so return here.
 		return false;
-		DKClass::_Close("DKSDLWindow0");
+		DKClass::_Close("DKWindow0");
 	}
 }
 
@@ -158,8 +158,7 @@ if(!same(DKV8::multi_process, "ON")){
 	// CefString(&settings.log_file).FromASCII("");
 	DKV8::SetFlags();
 	CefSettings settings;
-	//if(DKClass::DKValid("DKWindow,DKWindow0"))
-	if (DKClass::DKValid("DKSDLWindow,DKSDLWindow0"))
+	if(DKClass::DKValid("DKWindow,DKWindow0"))
 		settings.windowless_rendering_enabled = true;
 	void* sandbox_info = NULL;
 	if(same(DKV8::sandbox, "OFF"))
@@ -253,7 +252,8 @@ if(!same(DKV8::multi_process, "ON")){
 		return false;
 	}
 	DKUtil::GetThreadId(cefThreadId); //store the main Cef threadId
-	if(DKClass::DKValid("DKSDLWindow,DKSDLWindow0")){
+	//if(DKClass::DKValid("DKSDLWindow,DKSDLWindow0")){
+	if (DKClass::DKValid("DKWindow,DKWindow0")) {
 		if(DKClass::DKAvailable("DKSDLCef")){
 			DKClass::DKCreate("DKSDLCef");
 			//NewBrowser(id, top, left, width, height, url);
@@ -490,8 +490,7 @@ bool DKCef::NewBrowser(const DKString& id, const int& top, const int& left, cons
 
 	CefWindowInfo window_info;
 	CefBrowserSettings browserSettings;
-	//if(DKClass::DKValid("DKWindow,DKWindow0")){
-	if (DKClass::DKValid("DKSDLWindow,DKSDLWindow0")) {
+	if (DKClass::DKValid("DKWindow,DKWindow0")) {
 		browserSettings.windowless_frame_rate = 60;
 		window_info.SetAsWindowless(NULL);
 		window_info.y = top;
