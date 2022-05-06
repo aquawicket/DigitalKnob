@@ -158,7 +158,8 @@ if(!same(DKV8::multi_process, "ON")){
 	// CefString(&settings.log_file).FromASCII("");
 	DKV8::SetFlags();
 	CefSettings settings;
-	if(DKClass::DKValid("DKWindow,DKWindow0"))
+	//if(DKClass::DKValid("DKWindow,DKWindow0"))
+	if (DKClass::DKValid("DKSDLWindow,DKSDLWindow0"))
 		settings.windowless_rendering_enabled = true;
 	void* sandbox_info = NULL;
 	if(same(DKV8::sandbox, "OFF"))
@@ -483,21 +484,14 @@ bool DKCef::NewBrowser(const void* input, void* output){
 
 bool DKCef::NewBrowser(const DKString& id, const int& top, const int& left, const int& width, const int& height, const DKString& url){
 	DKDEBUGFUNC(id, top, left, width, height, url);
-	//DKINFO("DKCef::NewBrowser("+id+","+toString(top)+","+toString(left)+","+toString(width)+","+toString(height)+","+url+")\n");
-	/*
-	int _width = width;
-	int _height = height;
-	if(!_width)
-		_width = 800;
-	if(!_height)
-		_height = 600;
-	*/
+
 	int _width = width ? width : 800;
 	int _height = height ? height : 40;
 
 	CefWindowInfo window_info;
 	CefBrowserSettings browserSettings;
-	if(DKClass::DKValid("DKWindow,DKWindow0")){
+	//if(DKClass::DKValid("DKWindow,DKWindow0")){
+	if (DKClass::DKValid("DKSDLWindow,DKSDLWindow0")) {
 		browserSettings.windowless_frame_rate = 60;
 		window_info.SetAsWindowless(NULL);
 		window_info.y = top;
