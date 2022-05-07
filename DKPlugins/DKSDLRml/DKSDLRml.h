@@ -7,7 +7,7 @@
 #include "DKSDLWindow/DKSDLWindow.h"
 #include "DKRml/DKRml.h"
 #include "DKSDLRml/DKSDLRmlSystem.h"
-#include "DKSDLRml/DKSDLRmlRenderer.h"
+#include "DKSDLRml/DKSDLRmlOpenGL.h"
 
 //#include "ShellRenderInterfaceOpenGL.h"
 //#define RML_SHELL_RENDER 1

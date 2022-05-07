@@ -1,6 +1,6 @@
 #pragma once
-#ifndef DKSDLRmlRenderer_H
-#define DKSDLRmlRenderer_H
+#ifndef DKSDLRmlOpenGL_H
+#define DKSDLRmlOpenGL_H
 
 #include <RmlUi/Core.h>
 //#include <RmlUi/Core/RenderInterface.h>
@@ -19,8 +19,6 @@ extern "C" {
 #endif
 
 
-
-////////////////////////////////////////////////////////////////
 class RmlSDL2Renderer : public Rml::RenderInterface
 {
 public:

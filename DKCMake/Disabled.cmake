@@ -8,7 +8,7 @@ DKDISABLE(_TEMPLATE-APP_)
 DKDISABLE(_TEMPLATE-LIB_)
 DKDISABLE(android-java-tools)
 DKDISABLE(astyle)
-DKDISABLE(conio.h)
+DKDISABLE(conio-for-linux)
 DKDISABLE(DKJerryscript)
 DKDISABLE(DKOFWindow)
 DKDISABLE(DKOSGAudio)               # Openscenegraph

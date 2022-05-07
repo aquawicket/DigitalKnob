@@ -2,7 +2,7 @@
 #include <SDL_image.h>
 #include "DK/DK.h"
 #include "DK/DKString.h"
-#include "DKSDLRml/DKSDLRmlRenderer.h"
+#include "DKSDLRml/DKSDLRmlOpenGL.h"
 #include "DKSDLWindow/DKSDLWindow.h"
 
 #if !defined(IOS) && !defined(ANDROID)
