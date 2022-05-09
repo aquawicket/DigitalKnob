@@ -414,15 +414,15 @@ bool DKSDLCef::TransparentPixel(SDL_Event *event)
 bool DKSDLCef::Draw()
 {
 	//DKDEBUGFUNC();
-	if(DKClass::DKValid("DKRml,DKRml0"))
+	if(!DKClass::DKValid("DKRml,DKRml0"))
 		return DKERROR("DKSDLCef::Draw(): DKRml class instance is invalid\n");
 	if (!cefHandler->cef_texture[0])
 		return false;// DKERROR("DKSDLCef::Draw(): cefHandler->cef_texture[0] is invalid\n");
 	if (cefHandler->cef_texture.size() < 1)
 		return DKERROR("DKSDLCef::Draw(): cefHandler->cef_texture.size() < 1\n");
 	SDL_Rect texture_rect;
-	texture_rect.y = 10;// dkCef->dkBrowsers[0].top; // the y coordinate
-	texture_rect.x = 10;// dkCef->dkBrowsers[0].left;  //the x coordinate
+	texture_rect.y = dkCef->dkBrowsers[0].top; // the y coordinate
+	texture_rect.x = dkCef->dkBrowsers[0].left;  //the x coordinate
 	texture_rect.w = dkCef->dkBrowsers[0].width; //the width of the texture
 	texture_rect.h = dkCef->dkBrowsers[0].height; //the height of the texture
 	

@@ -20,7 +20,7 @@ public:
 	bool End();
 
 	bool Handle(SDL_Event *event);
-	void Render();
+	bool Render();
 	void Update();
 	//void ProcessEvent(Rml::Core::Event& event);
 	

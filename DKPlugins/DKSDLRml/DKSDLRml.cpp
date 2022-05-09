@@ -125,7 +125,7 @@ bool DKSDLRml::Handle(SDL_Event *event) {
 	return false; //allow event to continue
 }
 
-void DKSDLRml::Render(){
+bool DKSDLRml::Render(){
     //DKDEBUGFUNC();
 	if(dkSdlWindow->width != dkRml->context->GetDimensions().x || dkSdlWindow->height != dkRml->context->GetDimensions().y){
 		dkRml->context->SetDimensions(Rml::Vector2i(dkSdlWindow->width, dkSdlWindow->height));
@@ -134,8 +134,11 @@ void DKSDLRml::Render(){
 		SDL_RenderDrawPoint(dkSdlWindow->renderer, -1, -1);
 	}
 	dkRml->context->Render();
+	return true;
 }
 
 void DKSDLRml::Update(){
+	if(!DKApp::active)
+		return;
 	dkRml->context->Update();
 }
