@@ -10,20 +10,30 @@
 #endif //LINUX
 
 #include "DKCef/DKCef.h"
+#include <include/cef_request_context_handler.h>
 
 class DKCef;
 
-class DKCefWindow : public CefClient, 
+class DKCefWindow : public CefClient,
+					//public CefAccessibilityHandler, //Error: cannot instantiate abstract class
 					public CefContextMenuHandler,
+					public CefDialogHandler,
 					public CefDisplayHandler,
 					public CefDownloadHandler,
+					public CefDragHandler,
+					public CefExtensionHandler,
 					public CefFindHandler,
-					// public CefGeolocationHandler, 
+					public CefFocusHandler,
+					public CefJSDialogHandler,
 					public CefKeyboardHandler,
-					public CefLifeSpanHandler, 
-					public CefLoadHandler, 
-					public CefPrintHandler,
-					public CefRenderHandler				    
+					public CefLifeSpanHandler,
+					public CefLoadHandler,
+					public CefPrintHandler,          //Error: cannot instantiate abstract class
+					public CefRenderHandler,
+					public CefRequestContextHandler,
+					public CefRequestHandler,
+					//public CefResourceHandler,       //Error: cannot instantiate abstract class
+					public CefResourceRequestHandler
 {
 public:
 	DKCefWindow();
@@ -76,10 +86,12 @@ public:
 	virtual CefRefPtr<CefKeyboardHandler> GetKeyboardHandler() override { return this; }
 	virtual CefRefPtr<CefLifeSpanHandler> GetLifeSpanHandler() override { return this; }
 	virtual CefRefPtr<CefLoadHandler> GetLoadHandler() override { return this; }
-	virtual CefRefPtr<CefPrintHandler> GetPrintHandler() { return this; }
+	//virtual CefRefPtr<CefPrintHandler> GetPrintHandler() { return this; }
 	virtual CefRefPtr<CefRenderHandler> GetRenderHandler() override { return this; }
 	
+	// CefLifeSpanHandler
 	bool DoClose(CefRefPtr<CefBrowser> browser) override;
+
 	void DoFrame();
 
 	void GetViewRect(CefRefPtr<CefBrowser> browser, CefRect& rect) override {
