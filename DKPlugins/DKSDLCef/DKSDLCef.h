@@ -8,7 +8,6 @@
 #include <include/cef_browser_process_handler.h>
 #include <include/cef_display_handler.h>
 #include "SDL.h"
-
 #include "DK/DK.h"
 #include "DK/DKApp.h"
 #include "DKCef/DKCef.h"
@@ -25,7 +24,6 @@
 
 class DKSDLCefHandler;
 
-///////////////////////////////////////////
 class DKSDLCef : public DKObjectT<DKSDLCef>
 {
 public:
@@ -41,16 +39,16 @@ public:
 	bool OnResize(const void* input, void* output);
 	bool SetupCef();
 	bool TransparentPixel(SDL_Event *event);
-	void Draw();
+	bool Draw();
 	
 	DKSDLWindow* dkSdlWindow;
-	DKCef* dkCef;
-	bool _mouseLMBdown;
-	DKSDLCefKeyboard _keyAdapter;
-	float _scrollFactor;
 	SDL_Texture* popup_image;
+	DKCef* dkCef;
 	CefRect popup_rect;
 	DKSDLCefHandler* cefHandler;
+	DKSDLCefKeyboard _keyAdapter;
+	bool _mouseLMBdown;
+	float _scrollFactor;
 };
 
 REGISTER_OBJECT(DKSDLCef, true);

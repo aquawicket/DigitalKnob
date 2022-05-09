@@ -29,7 +29,7 @@ public:
 #ifdef RML_SHELL_RENDER
 	ShellRenderInterfaceOpenGL* Renderer;
 #else
-	RmlSDL2Renderer* Renderer;
+	DKSDLRmlOpenGL* Renderer;
 #endif
 	RmlSDL2SystemInterface* SystemInterface;
 };

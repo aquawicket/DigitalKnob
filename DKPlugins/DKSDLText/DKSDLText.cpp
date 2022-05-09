@@ -2,7 +2,6 @@
 #include "DKSDLText.h"
 #include "DK/DKFile.h"
 
-//////////////////////
 bool DKSDLText::Init()
 {
 	if(!DKSDLWindow::Valid("DKSDLWindow0")){ return false; }
@@ -23,7 +22,6 @@ bool DKSDLText::Init()
 	return true;
 }
 
-/////////////////////
 bool DKSDLText::End()
 {
 	//SDL_FreeSurface(surface);
@@ -32,7 +30,6 @@ bool DKSDLText::End()
 	return true;
 }
 
-/////////////////////////////////////////////
 bool DKSDLText::SetText(const DKString& text)
 {
 	surface = TTF_RenderText_Solid(font, text.c_str(), color);
@@ -41,8 +38,7 @@ bool DKSDLText::SetText(const DKString& text)
 	return true;
 }
 
-////////////////////////
-void DKSDLText::Render()
+bool DKSDLText::Render()
 {
 	//DEBUG CODE
 	SetText(" ");
@@ -70,4 +66,5 @@ void DKSDLText::Render()
 	SDL_Rect dstrect = {left, top, texW, texH};
 	SDL_RenderCopy(dkSdlWindow->renderer, texture, NULL, &dstrect);
 	SDL_DestroyTexture(texture);
+	return true;
 }

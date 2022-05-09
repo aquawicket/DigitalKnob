@@ -16,7 +16,7 @@ bool DKSDLRml::Init(){
 #ifdef RML_SHELL_RENDER
 	Renderer = new ShellRenderInterfaceOpenGL();
 #else
-	Renderer = new RmlSDL2Renderer(dkSdlWindow->renderer, dkSdlWindow->window);
+	Renderer = new DKSDLRmlOpenGL(dkSdlWindow->renderer, dkSdlWindow->window);
 #endif
 	SystemInterface = new RmlSDL2SystemInterface();
 	Rml::SetRenderInterface(Renderer);

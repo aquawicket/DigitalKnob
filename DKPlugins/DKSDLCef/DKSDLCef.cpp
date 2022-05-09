@@ -12,7 +12,6 @@
 #endif
 
 
-/////////////////////
 bool DKSDLCef::Init()
 {
 	DKDEBUGFUNC();
@@ -38,7 +37,6 @@ bool DKSDLCef::Init()
 	return true;
 }
 
-////////////////////
 bool DKSDLCef::End()
 {
 	DKDEBUGFUNC();
@@ -49,7 +47,6 @@ bool DKSDLCef::End()
 	return true;
 }
 
-//////////////////////////////////////////////////////////////////////////////////////////
 bool DKSDLCef::GetCefMouseButton(const int& button, CefBrowserHost::MouseButtonType& type)
 {
 	DKDEBUGFUNC(button, type);
@@ -59,7 +56,6 @@ bool DKSDLCef::GetCefMouseButton(const int& button, CefBrowserHost::MouseButtonT
 	return true;
 }
 
-//////////////////////////////////////////////////////////////////////////////
 bool DKSDLCef::GetScrollDeltas(SDL_Event* event, float &deltaX, float &deltaY)
 {
 	DKDEBUGFUNC(event, deltaX, deltaY);
@@ -80,7 +76,6 @@ bool DKSDLCef::GetScrollDeltas(SDL_Event* event, float &deltaX, float &deltaY)
 	return deltaX != 0.0f || deltaY != 0.0f;
 }
 
-//////////////////////////////////////////////////////////
 bool DKSDLCef::GetTexture(const void* input, void* output)
 {
 	//DKDEBUGFUNC(input, output);
@@ -102,7 +97,6 @@ bool DKSDLCef::GetTexture(const void* input, void* output)
 	return true;
 }
 
-///////////////////////////////////////
 bool DKSDLCef::Handle(SDL_Event* event)
 {
 	//DKDEBUGFUNC(event);
@@ -335,7 +329,6 @@ bool DKSDLCef::Handle(SDL_Event* event)
 	return false;
 }
 
-///////////////////////////////////////////////////////
 bool DKSDLCef::OnClick(const void* input, void* output)
 {
 	DKDEBUGFUNC(input, output);
@@ -355,7 +348,6 @@ bool DKSDLCef::OnClick(const void* input, void* output)
 	return false;
 }
 
-///////////////////////////////////////////////////////////
 bool DKSDLCef::OnMouseOver(const void* input, void* output)
 {
 	DKDEBUGFUNC(input, output);
@@ -364,10 +356,8 @@ bool DKSDLCef::OnMouseOver(const void* input, void* output)
 	toStringArray(arry,str,","); // id,top,left,width,height
 
 	int browser;
-	if(!dkCef->GetBrowserNumber(arry[0], browser)){
-		DKERROR("DKSDLCef::OnMouseOver(): browser is invalid\n");
-		return false;
-	}
+	if(!dkCef->GetBrowserNumber(arry[0], browser))
+		return DKERROR("DKSDLCef::OnMouseOver(): browser is invalid\n");
 
 	//work with the browser here
 	OnResize(input, NULL);
@@ -375,7 +365,6 @@ bool DKSDLCef::OnMouseOver(const void* input, void* output)
 	return true; 
 }
 
-////////////////////////////////////////////////////////
 bool DKSDLCef::OnResize(const void* input, void* output)
 {
 	DKDEBUGFUNC(input, output);
@@ -385,10 +374,8 @@ bool DKSDLCef::OnResize(const void* input, void* output)
 	//DKINFO("DKSDLCef::OnResize("+arry[0]+","+arry[1]+","+arry[2]+","+arry[3]+","+arry[4]+")\n");
 
 	int browser;
-	if(!dkCef->GetBrowserNumber(arry[0], browser)){
-		DKERROR("DKSDLCef::OnResize(): browser is invalid\n");
-		return false;
-	}
+	if(!dkCef->GetBrowserNumber(arry[0], browser))
+		return DKERROR("DKSDLCef::OnResize(): browser is invalid\n");
 	if(dkCef->fullscreen){
 		dkCef->dkBrowsers[browser].top = 0;
 		dkCef->dkBrowsers[browser].left = 0;
@@ -409,7 +396,6 @@ bool DKSDLCef::OnResize(const void* input, void* output)
 	return true;
 }
 
-/////////////////////////
 bool DKSDLCef::SetupCef()
 {
 	DKDEBUGFUNC();
@@ -422,7 +408,6 @@ bool DKSDLCef::SetupCef()
 	return true;
 }
 
-/////////////////////////////////////////////////
 bool DKSDLCef::TransparentPixel(SDL_Event *event)
 {
 	DKDEBUGFUNC(event);
@@ -443,21 +428,21 @@ bool DKSDLCef::TransparentPixel(SDL_Event *event)
 	return false;
 }
 
-/////////////////////
-void DKSDLCef::Draw()
+bool DKSDLCef::Draw()
 {
 	//DKDEBUGFUNC();
-	///// Draw to DKRml
-	if(DKClass::DKValid("DKRml,DKRml0")){ return; } 
-
-	///// Draw to DKSdlWindow
-	if (cefHandler->cef_images.size() < 1) { return; }
-	if(!cefHandler->cef_images[0]){ return; }
+	if(DKClass::DKValid("DKRml,DKRml0"))
+		return DKERROR("DKSDLCef::Draw(): DKRml class instance is invalid\n");
+	if (!cefHandler->cef_images[0])
+		return true; //DKERROR("DKSDLCef::Draw(): cefHandler->cef_images[0] is invalid\n");
+	if (cefHandler->cef_images.size() < 1)
+		return DKERROR("DKSDLCef::Draw(): cefHandler->cef_images.size() < 1\n");
 	SDL_Rect texture_rect;
 	texture_rect.y = dkCef->dkBrowsers[0].top; // the y coordinate
 	texture_rect.x = dkCef->dkBrowsers[0].left;  //the x coordinate
 	texture_rect.w = dkCef->dkBrowsers[0].width; //the width of the texture
 	texture_rect.h = dkCef->dkBrowsers[0].height; //the height of the texture
-	//SDL_RenderClear(dkSdlWindow->sdlren);
+	//SDL_RenderClear(dkSdlWindow->renderer);
 	SDL_RenderCopy(dkSdlWindow->renderer, cefHandler->cef_images[0], NULL, &texture_rect);
+	return true;
 }

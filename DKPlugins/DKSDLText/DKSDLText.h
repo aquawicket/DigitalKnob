@@ -7,7 +7,6 @@
 #include "SDL_ttf.h"
 
 
-/////////////////////////////////////////////
 class DKSDLText : public DKObjectT<DKSDLText>
 {
 public:
@@ -15,7 +14,7 @@ public:
 	bool End();
 	
 	bool SetText(const DKString& text);
-	void Render();
+	bool Render();
 
 	DKSDLWindow* dkSdlWindow;
 	TTF_Font* font;

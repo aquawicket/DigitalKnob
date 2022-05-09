@@ -72,7 +72,7 @@ public:
 	int last_mouseY;
 
 	static std::vector<std::function<bool(SDL_Event* event)> > event_funcs;
-	static std::vector<std::function<void()> > render_funcs;
+	static std::vector<std::function<bool()> > render_funcs;
 	static std::vector<std::function<void()> > update_funcs;
 
 	template<class T>
@@ -81,12 +81,12 @@ public:
 	}
 
 	template<class T>
-	static void AddRenderFunc(void (T::*func)(), T* _this){
+	static void AddRenderFunc(bool (T::*func)(), T* _this){
 		render_funcs.push_back(std::bind(func, _this));
 	}
 
 	template<class T>
-	static void AddRenderFuncFirst(void (T::*func)(), T* _this){
+	static void AddRenderFuncFirst(bool (T::*func)(), T* _this){
 		render_funcs.insert(render_funcs.begin(), std::bind(func, _this));
 	}
 
