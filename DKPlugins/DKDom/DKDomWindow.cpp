@@ -187,7 +187,7 @@ bool DKDomWindow::Init()
 	
 	//Create the global window object
 	DKDuktape* dt = DKDuktape::Get();
-	if(DKClass::DKValid("DKRml0")) {
+	if(DKClass::DKValid("DKRml,DKRml0")) {
 		Rml::Element* window = DKRml::Get()->document->GetContext()->GetRootElement(); //Root element that holds all the documents.
 		DKString window_address = DKRml::Get()->elementToAddress(window);
 		DKString var_window = "var window = new Window('" + window_address + "')";

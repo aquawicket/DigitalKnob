@@ -19,6 +19,22 @@ bool DKDuktapeDom::Init(){
 	DKClass::DKCreate("DKScreen");
 	DKClass::DKCreate("DKXMLHttpRequest");
 
+	//create global window 
+	duk_eval_string(dt->ctx, "var window = new Window('window')");
+	//duk_eval_string(dt->ctx, "globalThis.window = window");
+	duk_eval_string(dt->ctx,
+		"({\n"
+		"    print: this.print,\n"
+		"    JSON: this.JSON,\n"
+		"    eval: this.eval,\n"
+		"    newGlobal: true,\n"
+		"    window: this.window\n"
+		"})\n");
+	duk_eval_string(dt->ctx, "var dk = new Object");
+	duk_eval_string(dt->ctx, "window.dk = dk");
+	duk_eval_string(dt->ctx, "const DUKTAPE = true");
+	duk_eval_string(dt->ctx, "window.DUKTAPE = DUKTAPE");
+	duk_eval_string(dt->ctx, "console.log('DUKTAPE = '+DUKTAPE)");
 
 	//Load the RmlUi Dom
 	/*

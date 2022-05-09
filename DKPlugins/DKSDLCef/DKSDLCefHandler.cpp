@@ -423,7 +423,7 @@ void DKSDLCefHandler::OnPaint(CefRefPtr<CefBrowser> browser, PaintElementType ty
 	if(cef_texture[n]) {
 		SDL_SetRenderTarget(dkSdlWindow->renderer, cef_texture[n]);
 		//SDL_SetRenderDrawBlendMode(dkSdlWindow->renderer, SDL_BLENDMODE_NONE);
-		SDL_SetRenderDrawColor(dkSdlWindow->renderer, 255, 0, 255, 255);
+		SDL_SetRenderDrawColor(dkSdlWindow->renderer, 255, 255, 255, 255);
 		SDL_RenderFillRect(dkSdlWindow->renderer, NULL);
 		SDL_RenderCopy(dkSdlWindow->renderer, cef_contentB, NULL, NULL);
 		if(dkSdlCef->popup_image){
