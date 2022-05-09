@@ -66,12 +66,12 @@ void DKSDLCefHandler::CloseAllBrowsers(bool force_close)
 		return;
 	}
 
-	if(browser_list_.empty()){ return; }
+	if(browser_list_.empty())
+		return;
 
 	BrowserList::const_iterator it = browser_list_.begin();
-	for(; it != browser_list_.end(); ++it){
+	for(; it != browser_list_.end(); ++it)
 		(*it)->GetHost()->CloseBrowser(force_close);
-	}
 }
 
 bool DKSDLCefHandler::DoClose(CefRefPtr<CefBrowser> browser) 
@@ -82,10 +82,8 @@ bool DKSDLCefHandler::DoClose(CefRefPtr<CefBrowser> browser)
 	// Closing the main window requires special handling. See the DoClose()
 	// documentation in the CEF header for a detailed destription of this
 	// process.
-	if (browser_list_.size() == 1) {
-		// Set a flag to indicate that the window close should be allowed.
-		is_closing_ = true;
-	}
+	if (browser_list_.size() == 1)
+		is_closing_ = true; // Set a flag to indicate that the window close should be allowed.
 
 	// Allow the close. For windowed browsers this will result in the OS close
 	// event being sent.
@@ -95,6 +93,8 @@ bool DKSDLCefHandler::DoClose(CefRefPtr<CefBrowser> browser)
 void DKSDLCefHandler::DoFrame()
 { 
 	//DKDEBUGFUNC();
+	if(!DKApp::active)
+		return;
 	CefDoMessageLoopWork(); //FIXME: this breaks SDL keyboard events for Mac OSX
 }
 
@@ -115,7 +115,7 @@ void DKSDLCefHandler::GetViewRect(CefRefPtr<CefBrowser> browser, CefRect& rect)
 		} 
 	}
 	rect = CefRect(0, 0, dkCef->dkBrowsers[i].width, dkCef->dkBrowsers[i].height);
-	//DKINFO("DKSDLCefHandler::GetViewRect(): "+dkCef->dkBrowsers[i].id+": 0,0,"+toString(dkCef->dkBrowsers[i].width)+","+toString(dkCef->dkBrowsers[i].height)+"\n");
+	DKDEBUGRETURN(browser, dkCef->dkBrowsers[i].id, dkCef->dkBrowsers[i].top, dkCef->dkBrowsers[i].left, dkCef->dkBrowsers[i].width, dkCef->dkBrowsers[i].height);
 }
 
 void DKSDLCefHandler::OnBeforeClose(CefRefPtr<CefBrowser> browser)
@@ -137,8 +137,8 @@ void DKSDLCefHandler::OnBeforeClose(CefRefPtr<CefBrowser> browser)
 	for(unsigned int i=0; i<browser_list_.size(); i++){
 		if(browser_list_[i]->IsSame(browser)){
 			browser_list_.erase(browser_list_.begin()+i);
-			cef_images.erase(cef_images.begin()+i);
-			background_images.erase(background_images.begin()+i);
+			cef_texture.erase(cef_texture.begin()+i);
+			cef_content.erase(cef_content.begin()+i);
 			break;
 		}
 	}
@@ -150,8 +150,8 @@ void DKSDLCefHandler::OnAfterCreated(CefRefPtr<CefBrowser> browser)
 	DKDEBUGFUNC(browser);
 	CEF_REQUIRE_UI_THREAD();
 	browser_list_.push_back(browser); //Add to the list of existing browsers.
-	cef_images.push_back(NULL);
-	background_images.push_back(NULL);
+	cef_texture.push_back(NULL);
+	cef_content.push_back(NULL);
 	
 	dkCef->current_browser = browser;
 	if (!dkCef->dkBrowsers.size()) {
@@ -165,16 +165,14 @@ void DKSDLCefHandler::OnBeforeContextMenu(CefRefPtr<CefBrowser> browser, CefRefP
 {
 	DKDEBUGFUNC(browser, frame, params, model);
 	model->Clear(); //remove original context menu
-
 	DKString data;
 	data += params->GetSelectionText();
 	data += ";";
 	data += params->GetSourceUrl();
 	data += ";";
 	data += params->GetLinkUrl();
-	//DKINFO("DKSDLCefHandler::OnBeforeContextMenu(): data = "+data+"\n");
-
 	DKEvents::SendEvent("window", "DKCef_ContextMenu", data);
+	DKDEBUGRETURN(data);
 }
 
 void DKSDLCefHandler::OnBeforeDownload(CefRefPtr<CefBrowser> browser, CefRefPtr<CefDownloadItem> download_item, const CefString& suggested_name, CefRefPtr<CefBeforeDownloadCallback> callback)
@@ -214,7 +212,7 @@ bool DKSDLCefHandler::OnConsoleMessage(CefRefPtr<CefBrowser> browser, cef_log_se
 	replace(string,"%c","");
 	int identifier = browser->GetIdentifier();
 
-	if(level == LOGSEVERITY_DEFAULT){ 
+	if(level == LOGSEVERITY_DEFAULT){
 		DKINFO("[CEF:"+toString(identifier)+"] "+string+"\n");
 	}
 	else if(level == LOGSEVERITY_VERBOSE){ 
@@ -232,9 +230,9 @@ bool DKSDLCefHandler::OnConsoleMessage(CefRefPtr<CefBrowser> browser, cef_log_se
 	else if(level == LOGSEVERITY_ERROR){ 
 		DKERROR("[CEF:"+toString(identifier)+"] "+string+"\n");
 	}
-	else if(level == LOGSEVERITY_DISABLE){
-		return true; 
-	}
+	//else if(level == LOGSEVERITY_DISABLE){
+	//	return true; 
+	//}
 	return true;
 }
 
@@ -249,19 +247,19 @@ void DKSDLCefHandler::OnCursorChange(CefRefPtr<CefBrowser> browser, CefCursorHan
 {
 	DKDEBUGFUNC(browser, cursor, type, "const CefCursorInfo&");
 	//FIXME
-#ifdef WIN32
-	HWND hwnd;
-	if(!DKClass::CallFunc("DKSDLWindow::GetHandle", NULL, &hwnd)){ return; }
-	if(!::IsWindow(hwnd)){ return; }
-	SetClassLongPtr(hwnd, GCLP_HCURSOR, static_cast<LONG>(reinterpret_cast<LONG_PTR>(cursor)));
-	SetCursor(cursor);
-#endif
-#ifdef LINUX
-	//Display* dpy;// = glfwGetX11Display();
-	//Cursor c;
-	//c = XCreateFontCursor(dpy, XC_xterm); 
-	//XDefineCursor(dpy, w, c);
-#endif
+#	ifdef WIN32
+		HWND hwnd;
+		if(!DKClass::CallFunc("DKSDLWindow::GetHandle", NULL, &hwnd)){ return; }
+		if(!::IsWindow(hwnd)){ return; }
+		SetClassLongPtr(hwnd, GCLP_HCURSOR, static_cast<LONG>(reinterpret_cast<LONG_PTR>(cursor)));
+		SetCursor(cursor);
+#	endif
+#	ifdef LINUX
+		//Display* dpy;// = glfwGetX11Display();
+		//Cursor c;
+		//c = XCreateFontCursor(dpy, XC_xterm); 
+		//XDefineCursor(dpy, w, c);
+#	endif
 }
 
 void DKSDLCefHandler::OnFindResult(CefRefPtr<CefBrowser> browser, int identifier, int count, const CefRect& selectionRect, int activeMatchOrdinal, bool finalUpdate)
@@ -293,9 +291,8 @@ void DKSDLCefHandler::OnFullscreenModeChange(CefRefPtr<CefBrowser> browser, bool
 void DKSDLCefHandler::OnLoadEnd(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, int httpStatusCode)
 {
 	DKDEBUGFUNC(browser, frame, httpStatusCode);
-	if(frame->IsMain()){
+	if(frame->IsMain())
 		DKEvents::SendEvent("window", "DKCef_OnLoadEnd", toString(httpStatusCode));
-	}
 
 	//FIXME - causes facebook to hang
 	//store the page source in dkCef->source
@@ -310,9 +307,9 @@ void DKSDLCefHandler::OnLoadEnd(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFram
 /*
 	CefRefPtr<CefProcessMessage> msg = CefProcessMessage::Create("TestMessage");
 	CefRefPtr<CefListValue> args = msg->GetArgumentList(); // Retrieve the argument list object.
-#ifndef DEBUG
-	browser->SendProcessMessage(PID_BROWSER, msg);
-#endif
+#	ifndef DEBUG
+		browser->SendProcessMessage(PID_BROWSER, msg);
+#	endif
 */
 }
 
@@ -356,49 +353,64 @@ void DKSDLCefHandler::OnPaint(CefRefPtr<CefBrowser> browser, PaintElementType ty
 	//DKDEBUGFUNC(browser, type, "const RectList&", buffer, width, height);
 	//if(browser->GetIdentifier() != dkCef->current_browser->GetIdentifier()){ return; }
 	bool found = false;
-	unsigned int b=0;
-	for(b=0; b<browser_list_.size(); ++b){
-		if(browser_list_[b]->IsSame(browser)){
+	unsigned int n=0;
+	for(n=0; n<browser_list_.size(); ++n){
+		if(browser_list_[n]->IsSame(browser)){
 			found = true;
 			break;
 		}
 	}
-	if(!found){ return; }
+	if(!found)
+		return;
 
 	if(type == PET_VIEW){
-		if(dirtyRects.size() == 0){ return; }
+		if(dirtyRects.size() == 0)
+			return;
 		int w, h;
-		SDL_QueryTexture(cef_images[b], NULL, NULL, &w, &h);
-		if(w != width || h != height){
-			cef_images[b] = SDL_CreateTexture(dkSdlWindow->renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_TARGET, width, height);
-		}
+		SDL_QueryTexture(cef_texture[n], NULL, NULL, &w, &h);
+		if (w != width || h != height)
+			cef_texture[n] = SDL_CreateTexture(dkSdlWindow->renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_TARGET, width, height);
 
+		/*
 		int w2, h2;
-		SDL_QueryTexture(background_images[b], NULL, NULL, &w2, &h2);
-		if (w2 != width || h2 != height) {
-			background_images[b] = SDL_CreateTexture(dkSdlWindow->renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, width, height);
+		SDL_QueryTexture(cef_content[n], NULL, NULL, &w2, &h2);
+		if (w2 != width || h2 != height)
+			cef_content[n] = SDL_CreateTexture(dkSdlWindow->renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, width, height);
+		SDL_SetTextureBlendMode(cef_content[n], SDL_BLENDMODE_BLEND);
+		unsigned char* texture_data;
+		int texture_pitch;
+		if (SDL_LockTexture(cef_content[n], NULL, (void**)&texture_data, &texture_pitch) != 0) {
+			DKERROR("SDL_LockTexture(cef_content[n]...) failed\n");
+			return;
 		}
+		std::memcpy(texture_data, buffer, width * height * 4); //copies cef bitmap to sdl texture
+		SDL_UnlockTexture(cef_content[n]);
+		*/
 
-		unsigned char * texture_data = NULL;
-		int texture_pitch = 0;
-		if(SDL_LockTexture(background_images[b], NULL, (void **)&texture_data, &texture_pitch) == 0){
-			//copies whole cef bitmap to sdl texture
-			std::memcpy(texture_data, buffer, width * height * 4);
-			SDL_UnlockTexture(background_images[b]);
+		//int w2, h2;
+		//SDL_QueryTexture(cef_contentB, NULL, NULL, &w2, &h2);
+		//if (w2 != width || h2 != height)
+			cef_contentB = SDL_CreateTexture(dkSdlWindow->renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, width, height);
+		SDL_SetTextureBlendMode(cef_contentB, SDL_BLENDMODE_BLEND);
+		unsigned char* texture_data;
+		int texture_pitch;
+		if (SDL_LockTexture(cef_contentB, NULL, (void**)&texture_data, &texture_pitch) != 0) {
+			DKERROR("SDL_LockTexture(cef_contentB...) failed\n");
+			return;
 		}
+		std::memcpy(texture_data, buffer, width * height * 4); //copies cef bitmap to sdl texture
+		SDL_UnlockTexture(cef_contentB);
 	}
 
 	else if(type == PET_POPUP){ //FIXME
 		DKINFO("DKSDLCefHandler::OnPaint(): type == PET_POPUP\n");
 		//if(dirtyRects.size() == 0){ return; }
-		if(!dkSdlCef->popup_image){
+		if(!dkSdlCef->popup_image)
 			dkSdlCef->popup_image = SDL_CreateTexture(dkSdlWindow->renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, width, height);
-		}
 		int w, h;
 		SDL_QueryTexture(dkSdlCef->popup_image, NULL, NULL, &w, &h);
-		if(w != width || h != height){
+		if(w != width || h != height)
 			dkSdlCef->popup_image = SDL_CreateTexture(dkSdlWindow->renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, width, height);
-		}
 		void* mPixels;
 		int mPitch;
 		if(SDL_LockTexture(dkSdlCef->popup_image, NULL, &mPixels, &mPitch) == 0){
@@ -407,10 +419,13 @@ void DKSDLCefHandler::OnPaint(CefRefPtr<CefBrowser> browser, PaintElementType ty
 			SDL_UnlockTexture(dkSdlCef->popup_image);
 		}
 	}
-
-	if(cef_images[b]) {	
-		SDL_SetRenderTarget(dkSdlWindow->renderer, cef_images[b]);
-		SDL_RenderCopy(dkSdlWindow->renderer, background_images[b], NULL, NULL);
+	
+	if(cef_texture[n]) {
+		SDL_SetRenderTarget(dkSdlWindow->renderer, cef_texture[n]);
+		//SDL_SetRenderDrawBlendMode(dkSdlWindow->renderer, SDL_BLENDMODE_NONE);
+		SDL_SetRenderDrawColor(dkSdlWindow->renderer, 255, 0, 255, 255);
+		SDL_RenderFillRect(dkSdlWindow->renderer, NULL);
+		SDL_RenderCopy(dkSdlWindow->renderer, cef_contentB, NULL, NULL);
 		if(dkSdlCef->popup_image){
 			SDL_Rect popup;
 			popup.x = dkSdlCef->popup_rect.x;
@@ -467,7 +482,6 @@ bool DKSDLCefHandler::OnPreKeyEvent(CefRefPtr<CefBrowser> browser, const CefKeyE
 		//DKINFO("OnPreKeyEvent(): KeyChar: "+toString(event.character)+"\n");
 		DKEvents::SendEvent("window", "keypress", toString(event.character));
 	}
-
 	return false;
 }
 
@@ -494,51 +508,36 @@ bool DKSDLCefHandler::OnProcessMessageReceived(CefRefPtr<CefBrowser> browser, Ce
 	str += message->GetName();
 	str += "(";
 	for(unsigned int i=0; i<args->GetSize(); i++){
-		if(args->GetType(i) == VTYPE_INVALID){
+		if(args->GetType(i) == VTYPE_INVALID)
 			str += "invalid";
-		}
-		if(args->GetType(i) == VTYPE_NULL){
+		if(args->GetType(i) == VTYPE_NULL)
 			str += "null";
-		}
-		if(args->GetType(i) == VTYPE_BOOL){
+		if(args->GetType(i) == VTYPE_BOOL)
 			str += toString(args->GetBool(i));
-		}
-		if(args->GetType(i) == VTYPE_INT){
+		if (args->GetType(i) == VTYPE_INT)
 			str += toString(args->GetInt(i));
-		}
-		if(args->GetType(i) == VTYPE_DOUBLE){
+		if(args->GetType(i) == VTYPE_DOUBLE)
 			str += toString(args->GetDouble(i));
-		}
-		if(args->GetType(i) == VTYPE_STRING){
+		if(args->GetType(i) == VTYPE_STRING)
 			str += args->GetString(i).ToString();
-		}
-		if(args->GetType(i) == VTYPE_BINARY){
+		if(args->GetType(i) == VTYPE_BINARY)
 			str += "binary";
-		}
-		if(args->GetType(i) == VTYPE_DICTIONARY){
+		if(args->GetType(i) == VTYPE_DICTIONARY)
 			str += "dictionary";
-		}
-		if(args->GetType(i) == VTYPE_LIST){
+		if (args->GetType(i) == VTYPE_LIST)
 			str += "list";
-		}
-
-		if(i < args->GetSize()-1){
+		if(i < args->GetSize()-1)
 			str += ",";
-		}
 	}
 	str += ")";
 	DKINFO(str+"\n");
-
 	if(DKString(message->GetName()) == "OnBrowserCreated"){
 		DKV8::GetFunctions(browser);
 		return false;
 	}
-	if(DKString(message->GetName()) == "OnContextCreated"){
+	if(DKString(message->GetName()) == "OnContextCreated")
 		return false;
-	}
-
 	DKV8::Execute(browser, DKString(message->GetName()), args);
-
 	return false;
 }
 

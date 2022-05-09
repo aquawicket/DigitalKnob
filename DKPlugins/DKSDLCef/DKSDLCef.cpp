@@ -19,11 +19,8 @@ bool DKSDLCef::Init()
 	dkSdlWindow = DKSDLWindow::Instance("DKSDLWindow0");
 	//id = data[1];
 	dkCef = DKCef::Get();
-	if(!dkSdlWindow || !dkCef){
-		DKERROR("DKOSGRocket::Init(): INVALID OBJECTS\n");
-		return false;
-	}
-
+	if(!dkSdlWindow || !dkCef)
+		return DKERROR("DKSDLCef::Init(): INVALID OBJECTS\n");
 	SetupCef();
 	_mouseLMBdown = false;
 	_scrollFactor = 120.0f;
@@ -61,18 +58,14 @@ bool DKSDLCef::GetScrollDeltas(SDL_Event* event, float &deltaX, float &deltaY)
 	DKDEBUGFUNC(event, deltaX, deltaY);
 	deltaX = 0.0f;
 	deltaY = 0.0f;
-	if(event->wheel.y > 0){
+	if(event->wheel.y > 0)
 		deltaY = _scrollFactor;
-	}
-	if(event->wheel.y < 0){
+	if(event->wheel.y < 0)
 		deltaY = -_scrollFactor;
-	}
-	if(event->wheel.x > 0){
+	if(event->wheel.x > 0)
 		deltaX = -_scrollFactor;
-	}
-	if(event->wheel.x < 0){
+	if(event->wheel.x < 0)
 		deltaX = _scrollFactor;
-	}
 	return deltaX != 0.0f || deltaY != 0.0f;
 }
 
@@ -81,18 +74,15 @@ bool DKSDLCef::GetTexture(const void* input, void* output)
 	//DKDEBUGFUNC(input, output);
 	DKString id = *(DKString*)input;
 	int browser;
-	if(!dkCef->GetBrowserNumber(id, browser)){
-		DKERROR("DKSDLCef::GetTexture(): The browser is invalid\n");
-		return false;
-	}
-
-	if(!cefHandler->cef_images[browser]){
-		cefHandler->cef_images[browser] = SDL_CreateTexture(dkSdlWindow->renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_TARGET, dkCef->dkBrowsers[browser].width, dkCef->dkBrowsers[browser].height);
-		cefHandler->background_images[browser] = SDL_CreateTexture(dkSdlWindow->renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, dkCef->dkBrowsers[browser].width, dkCef->dkBrowsers[browser].height);
+	if(!dkCef->GetBrowserNumber(id, browser))
+		return DKERROR("DKSDLCef::GetTexture(): The browser is invalid\n");
+	if(!cefHandler->cef_texture[browser]){
+		cefHandler->cef_texture[browser] = SDL_CreateTexture(dkSdlWindow->renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_TARGET, dkCef->dkBrowsers[browser].width, dkCef->dkBrowsers[browser].height);
+		cefHandler->cef_content[browser] = SDL_CreateTexture(dkSdlWindow->renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, dkCef->dkBrowsers[browser].width, dkCef->dkBrowsers[browser].height);
 	}
 	struct DKTexture{ SDL_Texture* texture; };
 	DKTexture out = *(DKTexture*)output;
-	out.texture = cefHandler->cef_images[browser];
+	out.texture = cefHandler->cef_texture[browser];
 	*(DKTexture*)output = out;
 	return true;
 }
@@ -101,15 +91,11 @@ bool DKSDLCef::Handle(SDL_Event* event)
 {
 	//DKDEBUGFUNC(event);
 	int browser;
-	if(!dkCef->GetCurrentBrowser(browser)){
-		//DKERROR("DKSDLCef::Handle(): The browser is invalid\n");
-		return false;
-	}
+	if(!dkCef->GetCurrentBrowser(browser))
+		return DKERROR("DKSDLCef::Handle(): The browser is invalid\n");
 	//DKINFO("DKSDLCef::Handle(): GetCurrentBrowser = "+toString(i)+"\n");
-
 	//DKINFO("number_of_browsers = "+toString(dkCef->GetBrowsers())+"\n");
 	//DKINFO("current_browser = "+toString(dkCef->GetCurrentBrowser())+"\n");
-
 	//switch(event->type){
 		//case SDL_MOUSEMOTION:
 		//case SDL_DRAG:
@@ -132,20 +118,21 @@ bool DKSDLCef::Handle(SDL_Event* event)
 		case SDL_MOUSEBUTTONDOWN:{
 			//DKINFO("DKSDLCef::Handle(): CurrentBrowser = "+toString(i)+"\n");
 			int clicks = 1;
-			if(event->button.clicks == 2){ // double click
+			if(event->button.clicks == 2)// double click
 				clicks = 2;
-			}
-			if(event->button.button == 3){
+			if(event->button.button == 3)
 				_mouseLMBdown = true;
-			}
-
 			CefMouseEvent mouse_event;
             mouse_event.x = event->motion.x - dkCef->dkBrowsers[browser].left;
 			mouse_event.y = event->motion.y - dkCef->dkBrowsers[browser].top;
-			if(mouse_event.x < 0){return false;}
-			if(mouse_event.x > dkCef->dkBrowsers[browser].width){return false;}
-			if(mouse_event.y < 0){return false;}
-			if(mouse_event.y > dkCef->dkBrowsers[browser].height){return false;}
+			if(mouse_event.x < 0) 
+				return false;
+			if(mouse_event.x > dkCef->dkBrowsers[browser].width)
+				return false;
+			if(mouse_event.y < 0)
+				return false;
+			if(mouse_event.y > dkCef->dkBrowsers[browser].height)
+				return false;
 			dkCef->SetFocus(browser);
 			//mouse_event.modifiers = _keyAdapter.getCefModifiers(event->key.keysym.mod);
 
@@ -157,19 +144,21 @@ bool DKSDLCef::Handle(SDL_Event* event)
 
 		case SDL_MOUSEBUTTONUP:{
 			int clicks = 1;
-			if(event->button.clicks == 2){ // double click
+			if(event->button.clicks == 2) // double click
 				clicks = 2;
-			}
-            if(event->button.button == 3){
+            if(event->button.button == 3)
 				_mouseLMBdown = false;
-			}
 			CefMouseEvent mouse_event;
             mouse_event.x = event->motion.x - dkCef->dkBrowsers[browser].left;
 			mouse_event.y = event->motion.y - dkCef->dkBrowsers[browser].top;
-			if(mouse_event.x < 0){return false;}
-			if(mouse_event.x > dkCef->dkBrowsers[browser].width){return false;}
-			if(mouse_event.y < 0){return false;}
-			if(mouse_event.y > dkCef->dkBrowsers[browser].height){return false;}
+			if(mouse_event.x < 0)
+				return false;
+			if(mouse_event.x > dkCef->dkBrowsers[browser].width)
+				return false;
+			if(mouse_event.y < 0)
+				return false;
+			if(mouse_event.y > dkCef->dkBrowsers[browser].height)
+				return false;
 			dkCef->SetFocus(browser);
 			//mouse_event.modifiers = _keyAdapter.getCefModifiers(event->key.keysym.mod);
 
@@ -187,7 +176,8 @@ bool DKSDLCef::Handle(SDL_Event* event)
 		*/
 		
 		case SDL_KEYDOWN:{
-			if(dkCef->keyboardFocus < 0){ return false; }
+			if(dkCef->keyboardFocus < 0)
+				return false;
 			//print SDL2 key data
 			/*
 			DKINFO("SDL_KEYDOWN: event->key.keysym.sym = "+toString(event->key.keysym.sym)+"\n");
@@ -245,22 +235,22 @@ bool DKSDLCef::Handle(SDL_Event* event)
 		}
 
 		case SDL_KEYUP:{
-			if(dkCef->keyboardFocus < 0){ return false; }
-
+			if(dkCef->keyboardFocus < 0)
+				return false;
 			CefKeyEvent KeyEvent;
        		KeyEvent.type = KEYEVENT_KEYUP;
 			KeyEvent.windows_key_code = DKSDLWindow::sdlKeyCode[event->key.keysym.sym];
-#ifdef MAC
-			KeyEvent.native_key_code = DKSDLWindow::sdlMacCode[event->key.keysym.sym];
-#endif
+#			ifdef MAC
+				KeyEvent.native_key_code = DKSDLWindow::sdlMacCode[event->key.keysym.sym];
+#			endif
 			//KeyEvent.unmodified_character = DKSDLWindow::sdlKeyCode[event->key.keysym.sym];
        		KeyEvent.modifiers = _keyAdapter.getCefModifiers(event->key.keysym.mod);
 
 			//DKINFO("KEYUP: windows_key_code = "+toString(KeyEvent.windows_key_code)+"\n");
 			//DKINFO("KEYUP: modifiers = "+toString(KeyEvent.modifiers)+"\n");
-#ifndef MAC
-			dkCef->dkBrowsers[dkCef->keyboardFocus].browser->GetHost()->SendKeyEvent(KeyEvent);
-#endif
+#			ifndef MAC
+				dkCef->dkBrowsers[dkCef->keyboardFocus].browser->GetHost()->SendKeyEvent(KeyEvent);
+#			endif
 			return true;
 		}
 					   
@@ -335,13 +325,9 @@ bool DKSDLCef::OnClick(const void* input, void* output)
 	DKString str = *(DKString*)input;
 	DKStringArray arry;
 	toStringArray(arry,str,","); // id,top,left,width,height
-
 	int browser;
-	if(!dkCef->GetBrowserNumber(arry[0], browser)){
-		DKERROR("DKSDLCef::OnClick(): browser is invalid\n");
-		return false;
-	}
-
+	if(!dkCef->GetBrowserNumber(arry[0], browser))
+		return DKERROR("DKSDLCef::OnClick(): browser is invalid\n");
 	OnResize(input, NULL);
 	dkCef->SetFocus(browser);
 	dkCef->SetKeyboardFocus(browser);
@@ -354,11 +340,9 @@ bool DKSDLCef::OnMouseOver(const void* input, void* output)
 	DKString str = *(DKString*)input;
 	DKStringArray arry;
 	toStringArray(arry,str,","); // id,top,left,width,height
-
 	int browser;
 	if(!dkCef->GetBrowserNumber(arry[0], browser))
 		return DKERROR("DKSDLCef::OnMouseOver(): browser is invalid\n");
-
 	//work with the browser here
 	OnResize(input, NULL);
 	dkCef->SetFocus(browser);
@@ -372,7 +356,6 @@ bool DKSDLCef::OnResize(const void* input, void* output)
 	DKStringArray arry;
 	toStringArray(arry,str,","); // id,top,left,width,height
 	//DKINFO("DKSDLCef::OnResize("+arry[0]+","+arry[1]+","+arry[2]+","+arry[3]+","+arry[4]+")\n");
-
 	int browser;
 	if(!dkCef->GetBrowserNumber(arry[0], browser))
 		return DKERROR("DKSDLCef::OnResize(): browser is invalid\n");
@@ -433,16 +416,17 @@ bool DKSDLCef::Draw()
 	//DKDEBUGFUNC();
 	if(DKClass::DKValid("DKRml,DKRml0"))
 		return DKERROR("DKSDLCef::Draw(): DKRml class instance is invalid\n");
-	if (!cefHandler->cef_images[0])
-		return true; //DKERROR("DKSDLCef::Draw(): cefHandler->cef_images[0] is invalid\n");
-	if (cefHandler->cef_images.size() < 1)
-		return DKERROR("DKSDLCef::Draw(): cefHandler->cef_images.size() < 1\n");
+	if (!cefHandler->cef_texture[0])
+		return false;// DKERROR("DKSDLCef::Draw(): cefHandler->cef_texture[0] is invalid\n");
+	if (cefHandler->cef_texture.size() < 1)
+		return DKERROR("DKSDLCef::Draw(): cefHandler->cef_texture.size() < 1\n");
 	SDL_Rect texture_rect;
-	texture_rect.y = dkCef->dkBrowsers[0].top; // the y coordinate
-	texture_rect.x = dkCef->dkBrowsers[0].left;  //the x coordinate
+	texture_rect.y = 10;// dkCef->dkBrowsers[0].top; // the y coordinate
+	texture_rect.x = 10;// dkCef->dkBrowsers[0].left;  //the x coordinate
 	texture_rect.w = dkCef->dkBrowsers[0].width; //the width of the texture
 	texture_rect.h = dkCef->dkBrowsers[0].height; //the height of the texture
-	//SDL_RenderClear(dkSdlWindow->renderer);
-	SDL_RenderCopy(dkSdlWindow->renderer, cefHandler->cef_images[0], NULL, &texture_rect);
+	
+	SDL_SetRenderTarget(dkSdlWindow->renderer, NULL);
+	SDL_RenderCopy(dkSdlWindow->renderer, cefHandler->cef_texture[0], NULL, &texture_rect);
 	return true;
 }

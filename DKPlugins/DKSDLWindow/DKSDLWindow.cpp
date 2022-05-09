@@ -155,7 +155,7 @@ bool DKSDLWindow::Init() {
     renderer = NULL;
     if(!same(sdl_renderer, "SOFTWARE")) {
         result = "SDL_RENDERER_ACCELERATED"; // | SDL_RENDERER_PRESENTVSYNC";
-        renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED /*| SDL_RENDERER_PRESENTVSYNC*/);
+        renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_TARGETTEXTURE/*| SDL_RENDERER_PRESENTVSYNC*/);
     }
     if(!renderer) {
         result = "SDL_RENDERER_SOFTWARE";
@@ -571,6 +571,7 @@ bool DKSDLWindow::Windowed(const void* input, void* output) {
     return true;
 }
 
+//FIXME: This is very slow
 bool DKSDLWindow::drawBackground(SDL_Renderer *renderer, int w, int h){
     SDL_Color sdlColor[2] = { { 100, 100, 100, 255 }, { 150, 150, 150, 255 } };
     SDL_Rect sdlRect({ 0,0,8,8 });
@@ -592,10 +593,9 @@ void DKSDLWindow::Process() {
     if(SDL_GetWindowFlags(window) & SDL_WINDOW_HIDDEN)
         DKUtil::Sleep(1000); //FIXME - look for a better way to save cpu usage here
 
-    //SDL_SetRenderTarget(renderer, NULL);
-    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255); //white
+    SDL_SetRenderTarget(renderer, NULL);
+    SDL_SetRenderDrawColor(renderer, 127, 127, 127, 255); //white
     SDL_RenderClear(renderer);
-    //SDL_RenderDrawLine(renderer, 0, height / 2, width, height / 2 );
 	//drawBackground(renderer, width, height);
 	
     for(unsigned int i = 0; i < render_funcs.size(); ++i) 

@@ -500,6 +500,7 @@ bool DKCef::NewBrowser(const DKString& id, const int& top, const int& left, cons
 	CefBrowserSettings browserSettings;
 	if (DKClass::DKValid("DKWindow,DKWindow0")) {
 		browserSettings.windowless_frame_rate = 60;
+		//browserSettings.background_color = 0;
 		window_info.SetAsWindowless(NULL);
 		window_info.y = top;
 		window_info.x = left;
