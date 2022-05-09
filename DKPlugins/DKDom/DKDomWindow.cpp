@@ -196,7 +196,7 @@ bool DKDomWindow::Init()
 	else{
 		duk_eval_string(dt->ctx, "var window = new Window('window')");
 	}
-		
+
 	//duk_eval_string(dt->ctx, "globalThis.window = window");
 	duk_eval_string(dt->ctx,
 		"({\n"
@@ -208,8 +208,12 @@ bool DKDomWindow::Init()
 		"})\n");
 	duk_eval_string(dt->ctx, "var dk = new Object");
 	duk_eval_string(dt->ctx, "window.dk = dk");
+	duk_eval_string(dt->ctx, "window.id = 'window'");
 	duk_eval_string(dt->ctx, "const DUKTAPE = true");
 	duk_eval_string(dt->ctx, "window.DUKTAPE = DUKTAPE");
+
+	duk_eval_string(dt->ctx, "console.log('window = '+window)");
+	duk_eval_string(dt->ctx, "console.log('window.id = '+window.id)");
 	duk_eval_string(dt->ctx, "console.log('DUKTAPE = '+DUKTAPE)");
 
 	return true;
