@@ -126,7 +126,7 @@ void DKApp::DoFrame(){
 
 void DKApp::CallLoops(){
 	for(unsigned int i = 0; i < loop_funcs.size(); ++i){
-		if(active)
+		//if(active)
 			loop_funcs[i]();
 	}
 }
@@ -136,5 +136,5 @@ void DKApp::Exit(){
 	DKINFO("DKApp::Exit():\n");
 	active = false;
 	DKUtil::CallExit();
-	exit(0);
+	//exit(0);
 }

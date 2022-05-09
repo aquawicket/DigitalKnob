@@ -4,17 +4,14 @@
 //#define USE_GDK    
 
 #ifdef LINUX
-#ifdef USE_GDK
-#include <gdk/gdk.h>
-#endif //USE_GDK
+#	ifdef USE_GDK
+#		include <gdk/gdk.h>
+#	endif //USE_GDK
 #endif //LINUX
 
 #include "DKCef/DKCef.h"
-//#include <include/cef_life_span_handler.h>
-//#include <include/cef_request_context_handler.h>
 
 class DKCef;
-
 class DKCefWindow : public CefClient,
 					//public CefAccessibilityHandler, //Error: cannot instantiate abstract class
 					public CefContextMenuHandler,
@@ -29,7 +26,7 @@ class DKCefWindow : public CefClient,
 					public CefKeyboardHandler,
 					public CefLifeSpanHandler,
 					public CefLoadHandler,
-					public CefPrintHandler,          //Error: cannot instantiate abstract class
+					public CefPrintHandler,
 					public CefRenderHandler,
 					//public CefRequestContextHandler,
 					public CefRequestHandler,

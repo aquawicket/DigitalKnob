@@ -54,7 +54,8 @@ void DKCefWindow::DoFrame(){
 	ReleaseDC(hwnd, hdc);
 #endif
 */
-
+	if (!DKApp::active)
+		return;
 	CefDoMessageLoopWork(); //FIXME: this breaks SDL keyboard events for Mac OSX
 };
 
