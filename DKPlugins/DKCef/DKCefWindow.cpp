@@ -803,3 +803,238 @@ bool DKCefWindow::Windowed(const void* input, void* output)
 	DKWARN("DKCefWindow::Windowed(): not implemented on this OS\n");
 	return false;
 }
+
+
+void DKCefWindow::GetViewRect(CefRefPtr<CefBrowser> browser, CefRect& rect)
+{
+	DKDEBUGFUNC(browser, "CefRect&");
+	CEF_REQUIRE_UI_THREAD();
+	//rect = CefRect(0, 0, dkCef->width, dkCef->height);
+}
+
+void DKCefWindow::OnAfterCreated(CefRefPtr<CefBrowser> browser)
+{
+	DKDEBUGFUNC(browser);
+	CEF_REQUIRE_UI_THREAD();
+	//dkCef->browsers.push_back(browser);
+}
+
+bool DKCefWindow::OnBeforePopup(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, const CefString& target_url, const CefString& target_frame_name, CefLifeSpanHandler::WindowOpenDisposition target_disposition, bool user_gesture, const CefPopupFeatures& popupFeatures, CefWindowInfo& windowInfo, CefRefPtr<CefClient>& client, CefBrowserSettings& settings, CefRefPtr<CefDictionaryValue>& extra_info, bool* no_javascript_access)
+{
+	DKDEBUGFUNC(browser, frame, "const CefString&", "const CefString&", target_disposition, user_gesture, "const CefPopupFeatures&", "CefWindowInfo&", client, "CefBrowserSettings&", no_javascript_access);
+	CEF_REQUIRE_UI_THREAD();
+	return false;
+}
+
+void DKCefWindow::OnBeforeContextMenu(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefContextMenuParams> params, CefRefPtr<CefMenuModel> model)
+{
+	DKDEBUGFUNC(browser, frame, params, model);
+	CEF_REQUIRE_UI_THREAD();
+}
+
+void DKCefWindow::OnBeforeDownload(CefRefPtr<CefBrowser> browser, CefRefPtr<CefDownloadItem> download_item, const CefString& suggested_name, CefRefPtr<CefBeforeDownloadCallback> callback)
+{
+	DKDEBUGFUNC(browser, download_item, "const CefString&", callback);
+	CEF_REQUIRE_UI_THREAD();
+#ifdef WIN32
+	UNREFERENCED_PARAMETER(browser);
+	UNREFERENCED_PARAMETER(download_item);
+#endif
+	callback->Continue(suggested_name, true);
+}
+
+bool DKCefWindow::OnConsoleMessage(CefRefPtr<CefBrowser> browser, cef_log_severity_t level, const CefString& message, const CefString& source, int line)
+{
+	//DKDEBUGFUNC(browser, level, "const CefString&", "const CefString&", line);
+	CEF_REQUIRE_UI_THREAD();
+	DKString msg = message.ToString();
+	replace(msg, "%c", "");
+	//DKINFO("DKSDLCefHandler::OnConsoleMessage("+msg+","+source.ToString()+","+toString(line)+")\n");
+	DKString string = message.ToString();
+	replace(string, "%c", "");
+	int identifier = browser->GetIdentifier();
+	if (level == LOGSEVERITY_VERBOSE)
+		DKDEBUG("[CEF:" + toString(identifier) + "] " + string + "\n");
+	if (level == LOGSEVERITY_DEBUG)
+		DKDEBUG("[CEF:" + toString(identifier) + "] " + string + "\n");
+	if (level == LOGSEVERITY_DEFAULT)
+		DKINFO("[CEF:" + toString(identifier) + "] " + string + "\n");
+	if (level == LOGSEVERITY_INFO)
+		DKINFO("[CEF:" + toString(identifier) + "] " + string + "\n");
+	if (level == LOGSEVERITY_WARNING)
+		DKWARN("[CEF:" + toString(identifier) + "] " + string + "\n");
+	if (level == LOGSEVERITY_ERROR)
+		DKWARN("[CEF:" + toString(identifier) + "] " + string + "\n");  //NOTE: Not DKERROR: We don't need javascript to throw C++ exceptions
+	if (level == LOGSEVERITY_DISABLE)
+		return true;
+	return true;
+}
+
+bool DKCefWindow::OnContextMenuCommand(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefContextMenuParams> params, int command_id, CefContextMenuHandler::EventFlags event_flags)
+{
+	DKDEBUGFUNC(browser, frame, params, command_id, event_flags);
+	CEF_REQUIRE_UI_THREAD();
+	return false;
+}
+
+void DKCefWindow::OnCursorChange(CefRefPtr<CefBrowser> browser, CefCursorHandle cursor, CursorType type, const CefCursorInfo& custom_cursor_info)
+{
+	DKDEBUGFUNC(browser, cursor, type, "const CefCursorInfo&");
+#ifdef WIN32
+	HWND hwnd;
+	if (!DKClass::CallFunc("DKSDLWindow::GetHandle", NULL, &hwnd)) { return; }
+	if (!::IsWindow(hwnd)) { return; }
+	SetClassLongPtr(hwnd, GCLP_HCURSOR, static_cast<LONG>(reinterpret_cast<LONG_PTR>(cursor)));
+	SetCursor(cursor);
+#endif
+#ifdef LINUX
+	//Display* dpy;// = glfwGetX11Display();
+	//Cursor c;
+	//c = XCreateFontCursor(dpy, XC_xterm); 
+	//XDefineCursor(dpy, w, c);
+#endif
+}
+
+void DKCefWindow::OnFindResult(CefRefPtr<CefBrowser> browser, int identifier, int count, const CefRect& selectionRect, int activeMatchOrdinal, bool finalUpdate)
+{
+	DKDEBUGFUNC(browser, identifier, count, "const CefRect&", activeMatchOrdinal, finalUpdate);
+	CEF_REQUIRE_UI_THREAD();
+}
+
+bool DKCefWindow::OnFileDialog(CefRefPtr<CefBrowser> browser, CefDialogHandler::FileDialogMode mode, const CefString& title, const CefString& default_file_path, const std::vector<CefString>& accept_filters, int selected_accept_filter, CefRefPtr<CefFileDialogCallback> callback) 
+{
+	DKDEBUGFUNC(browser, mode, "const CefString&", "const CefString&", "const std::vector<CefString>&", selected_accept_filter, callback);
+	return false;
+}
+
+void DKCefWindow::OnFullscreenModeChange(CefRefPtr<CefBrowser> browser, bool fullscreen)
+{
+	DKDEBUGFUNC(browser, fullscreen);
+	CEF_REQUIRE_UI_THREAD();
+#ifdef WIN32
+	HWND hwnd = GetActiveWindow();
+	DWORD dwStyle = GetWindowLong(hwnd, GWL_STYLE);
+	if (dwStyle & WS_OVERLAPPEDWINDOW) {
+		MONITORINFO mi = { sizeof(mi) };
+		if (GetWindowPlacement(hwnd, &g_wpPrev) && GetMonitorInfo(MonitorFromWindow(hwnd, MONITOR_DEFAULTTOPRIMARY), &mi)) {
+			SetWindowLong(hwnd, GWL_STYLE, dwStyle & ~WS_OVERLAPPEDWINDOW);
+			SetWindowPos(hwnd, HWND_TOP,
+				mi.rcMonitor.left, mi.rcMonitor.top,
+				mi.rcMonitor.right - mi.rcMonitor.left,
+				mi.rcMonitor.bottom - mi.rcMonitor.top,
+				SWP_NOOWNERZORDER | SWP_FRAMECHANGED);
+		}
+	}
+	else {
+		SetWindowLong(hwnd, GWL_STYLE, dwStyle | WS_OVERLAPPEDWINDOW);
+		SetWindowPlacement(hwnd, &g_wpPrev);
+		SetWindowPos(hwnd, NULL, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOZORDER | SWP_NOOWNERZORDER | SWP_FRAMECHANGED);
+	}
+#endif
+#ifdef LINUX
+#ifdef USE_GDK
+	GdkWindow* gdk_window = gdk_window_foreign_new(browser->GetHost()->GetWindowHandle());
+	if (!gdk_window) {
+		DKERROR("DKCefWindow::OnFullscreenModeChange(): gdk_window invalid\n");
+		return;
+	}
+	if (fullscreen) {
+		gdk_window_fullscreen(gdk_window);
+		isFullscreen = true;
+	}
+	else {
+		gdk_window_unfullscreen(gdk_window);
+		isFullscreen = false;
+	}
+#endif //USE_GDK
+#endif //LINUX
+}
+
+void DKCefWindow::OnLoadEnd(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, int httpStatusCode)
+{
+	DKDEBUGFUNC(browser, frame, httpStatusCode);
+	if (frame->IsMain())
+		DKEvents::SendEvent("window", "DKCef_OnLoadEnd", toString(httpStatusCode));
+}
+
+void DKCefWindow::OnLoadError(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefLoadHandler::ErrorCode errorCode, const CefString& errorText, const CefString& failedUrl)
+{
+	DKDEBUGFUNC(browser, frame, errorCode, "const CefString&", "const CefString&");
+	CEF_REQUIRE_UI_THREAD();
+}
+
+void DKCefWindow::OnLoadingStateChange(CefRefPtr<CefBrowser> browser, bool isLoading, bool canGoBack, bool canGoForward)
+{
+	DKDEBUGFUNC(browser, isLoading, canGoBack, canGoForward);
+	CEF_REQUIRE_UI_THREAD();
+	DKEvents::SendEvent("window", "DKCef_OnLoadingStateChange", toString(browser->GetIdentifier()));
+}
+
+void DKCefWindow::OnPaint(CefRefPtr<CefBrowser> browser, PaintElementType type, const RectList& dirtyRects, const void* buffer, int width, int height)
+{
+	DKDEBUGFUNC(browser, type, "const RectList&", buffer, width, height);
+	CEF_REQUIRE_UI_THREAD();
+}
+
+void DKCefWindow::OnPopupShow(CefRefPtr<CefBrowser> browser, bool show)
+{
+	DKDEBUGFUNC(browser, show);
+	CEF_REQUIRE_UI_THREAD();
+}
+
+void DKCefWindow::OnPopupSize(CefRefPtr<CefBrowser> browser, const CefRect& rect)
+{
+	DKDEBUGFUNC(browser, "const CefRect&");
+	CEF_REQUIRE_UI_THREAD();
+}
+
+bool DKCefWindow::OnPreKeyEvent(CefRefPtr<CefBrowser> browser, const CefKeyEvent& event, CefEventHandle os_event, bool* is_keyboard_shortcut)
+{
+	DKDEBUGFUNC(browser, "const CefKeyEvent&", os_event, is_keyboard_shortcut);
+	CEF_REQUIRE_UI_THREAD();
+	if (event.type == KEYEVENT_RAWKEYDOWN)
+		DKEvents::SendEvent("window", "keydown", toString(event.windows_key_code)); //DKKeyboardEvent event = new DKEvents();
+	if (event.type == KEYEVENT_KEYDOWN)
+		DKINFO("OnPreKeyEvent(): KeyDown: " + toString(event.character) + "\n");
+	if (event.type == KEYEVENT_KEYUP)
+		//DKINFO("OnPreKeyEvent(): KeyUp: "+toString(event.character)+"\n");
+		if (event.type == KEYEVENT_CHAR)
+			DKEvents::SendEvent("window", "keypress", toString(event.character));
+	return false;
+}
+
+bool DKCefWindow::OnPrintDialog(CefRefPtr<CefBrowser> browser, bool has_selection, CefRefPtr<CefPrintDialogCallback> callback)
+{
+	DKDEBUGFUNC(browser, has_selection, callback);
+	return true;
+}
+
+
+bool DKCefWindow::OnProcessMessageReceived(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefProcessId source_process, CefRefPtr<CefProcessMessage> message)
+{
+	DKDEBUGFUNC(browser, source_process, message);
+	CEF_REQUIRE_UI_THREAD();
+
+	if (message->GetName() == "GetFunctions") {
+		DKV8::GetFunctions(browser); //DKINFO("DKCefWindow::OnProcessMessageReceived(GetFunctions)\n");
+	}
+
+	if (has(message->GetName(), "CallFunc(")) {
+		//DKINFO("DKCefWindow::OnProcessMessageReceived(CallFunc)\n");
+		//get function name
+		DKString func = message->GetName();
+		replace(func, "CallFunc(", "");
+		replace(func, ")", "");
+		//get arguments
+		CefRefPtr<CefListValue> arguments = message->GetArgumentList();
+		DKV8::Execute(browser, func, arguments);
+	}
+	return false;
+}
+
+bool DKCefWindow::OnTooltip(CefRefPtr<CefBrowser> browser, CefString& text)
+{
+	DKDEBUGFUNC(browser, "CefString&");
+	CEF_REQUIRE_UI_THREAD();
+	return true;
+}
