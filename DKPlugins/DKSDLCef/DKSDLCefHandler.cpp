@@ -477,7 +477,7 @@ bool DKSDLCefHandler::OnPrintDialog(CefRefPtr<CefBrowser> browser, bool has_sele
 	return true;
 }
 
-bool DKSDLCefHandler::OnProcessMessageReceived(CefRefPtr<CefBrowser> browser, CefProcessId source_process, CefRefPtr<CefProcessMessage> message) 
+bool DKSDLCefHandler::OnProcessMessageReceived(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefProcessId source_process, CefRefPtr<CefProcessMessage> message)
 {
 	DKDEBUGFUNC(browser, source_process, message);
 #ifndef DEBUG

@@ -292,7 +292,7 @@ void DKCefApp::OnBeforeCommandLineProcessing(const CefString& process_type, CefR
 	DKV8::v8handler = new DKCefV8Handler();
 }
 
-void DKCefApp::OnBrowserCreated(CefRefPtr<CefBrowser> browser) {
+void DKCefApp::OnBrowserCreated(CefRefPtr<CefBrowser> browser, CefRefPtr<CefDictionaryValue> extra_info) {
 	DKDEBUGFUNC(browser);
 #ifndef DEBUG
 	CEF_REQUIRE_UI_THREAD();
@@ -328,7 +328,7 @@ void DKCefApp::OnContextCreated(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFram
 	}
 }
 
-bool DKCefApp::OnProcessMessageReceived(CefRefPtr<CefBrowser> browser, CefProcessId source_process, CefRefPtr<CefProcessMessage> message) {
+bool DKCefApp::OnProcessMessageReceived(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefProcessId source_process, CefRefPtr<CefProcessMessage> message) {
 	DKDEBUGFUNC(browser, source_process, message);
 #ifndef DEBUG
 	CEF_REQUIRE_UI_THREAD();

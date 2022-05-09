@@ -67,28 +67,60 @@ class DKCefV8Handler : public CefV8Handler
 public:
 	DKCefV8Handler(){}
 
-	virtual bool Execute(const CefString& name, CefRefPtr<CefV8Value> object, const CefV8ValueList& arguments, CefRefPtr<CefV8Value>& retval, CefString& exception) OVERRIDE;
+	// CefV8Handler
+	bool Execute(const CefString& name, CefRefPtr<CefV8Value> object, const CefV8ValueList& arguments, CefRefPtr<CefV8Value>& retval, CefString& exception) override;
+
 	void SetBrowser(CefRefPtr<CefBrowser> _browser);
-	
 	CefRefPtr<CefBrowser> browser;
 
 	IMPLEMENT_REFCOUNTING(DKCefV8Handler);
 };
 
-class DKCefApp : public CefApp, public CefBrowserProcessHandler, public CefRenderProcessHandler
+
+// CefV8Accessor
+//bool Get(const CefString& name, const CefRefPtr<CefV8Value> object, CefRefPtr<CefV8Value>& retval, CefString& exception) override;
+
+
+class DKCefApp : public CefApp,
+					//public CefResourceBundleHandler,  //Error: cannot instantiate abstract class
+					public CefBrowserProcessHandler, 
+					public CefRenderProcessHandler
 {
 public:
-	virtual CefRefPtr<CefBrowserProcessHandler> GetBrowserProcessHandler() OVERRIDE { return this; }
-	virtual CefRefPtr<CefRenderProcessHandler> GetRenderProcessHandler() OVERRIDE { return this; }
 
+	// CefApp
+	void OnBeforeCommandLineProcessing(const CefString& process_type, CefRefPtr<CefCommandLine> command_line) override;
+	void OnRegisterCustomSchemes(CefRawPtr<CefSchemeRegistrar> registrar) override {}
+	//CefRefPtr<CefResourceBundleHandler> GetResourceBundleHandler() override;
+	CefRefPtr<CefBrowserProcessHandler> GetBrowserProcessHandler() override { return this; }
+	CefRefPtr<CefRenderProcessHandler> GetRenderProcessHandler() override { return this; }
+
+	// CefResourceBundleHandler
+	//bool GetLocalizedString(int string_id, CefString& string) override;
+	//bool GetDataResource(int resource_id, void*& data, size_t& data_size) override;
+	//bool GetDataResourceForScale(int resource_id, ScaleFactor scale_factor, void*& data, size_t& data_size) override;
+	
+	// CefBrowserProcessHandler
+	void OnContextInitialized() override;
+	void OnBeforeChildProcessLaunch(CefRefPtr<CefCommandLine> command_line) override {}
+	void OnRenderProcessThreadCreated(CefRefPtr<CefListValue> extra_info) override {}
+	//CefRefPtr<CefPrintHandler> GetPrintHandler() override;
+	void OnScheduleMessagePumpWork(int64 delay_ms) override {}
+
+	// CefRenderProcessHandler
+	void OnRenderThreadCreated(CefRefPtr<CefListValue> extra_info) override {}
+	void OnWebKitInitialized() override {}
+	void OnBrowserCreated(CefRefPtr<CefBrowser> browser, CefRefPtr<CefDictionaryValue> extra_info) override;
+	void OnBrowserDestroyed(CefRefPtr<CefBrowser> browser) override {}
+	//CefRefPtr<CefLoadHandler> GetLoadHandler() override;
+	void OnContextCreated(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefV8Context> context) override;
+	void OnContextReleased(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefV8Context> context) override {}
+	void OnUncaughtException(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefV8Context> context, CefRefPtr<CefV8Exception> exception, CefRefPtr<CefV8StackTrace> stackTrace) override;
+	void OnFocusedNodeChanged(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefDOMNode> node) override {}
+	bool OnProcessMessageReceived(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefProcessId source_process, CefRefPtr<CefProcessMessage> message) override;
+
+	// DKCef
 	//bool SendEvent(const DKString& id, const DKString& type, const DKString& value);
-
-	virtual void OnBeforeCommandLineProcessing(const CefString& process_type, CefRefPtr<CefCommandLine> command_line) override;
-	virtual void OnBrowserCreated(CefRefPtr<CefBrowser> browser);
-	virtual void OnContextInitialized() override;
-	virtual void OnContextCreated(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefV8Context> context) override;
-	virtual bool OnProcessMessageReceived(CefRefPtr<CefBrowser> browser, CefProcessId source_process, CefRefPtr<CefProcessMessage> message);
-	virtual void OnUncaughtException(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefV8Context> context, CefRefPtr<CefV8Exception> exception, CefRefPtr<CefV8StackTrace> stackTrace) override;
 
 	IMPLEMENT_REFCOUNTING(DKCefApp);
 };

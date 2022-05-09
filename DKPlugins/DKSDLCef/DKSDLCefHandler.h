@@ -4,21 +4,32 @@
 
 #include <list>
 #include <include/cef_client.h>
+
+//cef handlers
+#include <include/cef_accessibility_handler.h>
 #include <include/cef_context_menu_handler.h>
 #include <include/cef_dialog_handler.h>
 #include <include/cef_display_handler.h>
 #include <include/cef_download_handler.h>
 #include <include/cef_drag_handler.h>
+#include <include/cef_extension_handler.h>
 #include <include/cef_find_handler.h>
 #include <include/cef_focus_handler.h>
 #include <include/cef_jsdialog_handler.h>
 #include <include/cef_keyboard_handler.h>
 #include <include/cef_life_span_handler.h>
 #include <include/cef_load_handler.h>
+#include <include/cef_print_handler.h>
 #include <include/cef_render_handler.h>
+#include <include/cef_request_context_handler.h>
 #include <include/cef_request_handler.h>
+#include <include/cef_resource_handler.h>
+#include <include/cef_resource_request_handler.h>
 
-#include <include/cef_browser_process_handler.h>
+
+
+
+
 //#include <include/cef_geolocation.h>
 #include "SDL.h"
 
@@ -46,19 +57,25 @@ private:
 
 
 class DKSDLCefHandler : public CefClient,
+						//public CefAccessibilityHandler, //Error: cannot instantiate abstract class
 						public CefContextMenuHandler,
 						public CefDialogHandler,
 						public CefDisplayHandler,
 						public CefDownloadHandler,
 						public CefDragHandler,
+						public CefExtensionHandler,
 						public CefFindHandler,
 						public CefFocusHandler,
 						public CefJSDialogHandler,
 						public CefKeyboardHandler,
 						public CefLifeSpanHandler,
 						public CefLoadHandler,
+						//public CefPrintHandler,          //Error: cannot instantiate abstract class
 						public CefRenderHandler,
-						public CefRequestHandler
+						public CefRequestContextHandler,
+						public CefRequestHandler,
+						//public CefResourceHandler,       //Error: cannot instantiate abstract class
+						public CefResourceRequestHandler
 {
 public:
 
@@ -77,6 +94,11 @@ public:
 	DKSDLCef* dkSdlCef;
 	std::vector<SDL_Texture*> cef_images;
 	std::vector<SDL_Texture*> background_images;
+
+
+	// CefAccessibilityHandler
+	//void OnAccessibilityTreeChange(CefRefPtr<CefValue> value) override;
+	//void OnAccessibilityLocationChange(CefRefPtr<CefValue> value) override;
 
 	// CefContextMenuHandler
 	virtual CefRefPtr<CefContextMenuHandler> GetContextMenuHandler() override { return this; }
@@ -111,17 +133,38 @@ public:
 	//bool OnDragEnter(CefRefPtr<CefBrowser> browser, CefRefPtr<CefDragData> dragData, DragOperationsMask mask) override;
 	//void OnDraggableRegionsChanged(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, const std::vector<CefDraggableRegion>& regions) override;
 
+	// CefExtensionHandler
+	//virtual CefRefPtr<CefExtensionHandler> GetExtensionHandler() override { return this; }
+	//void OnExtensionLoadFailed(cef_errorcode_t result) override;
+	//void OnExtensionLoaded(CefRefPtr<CefExtension> extension) override;
+	//void OnExtensionUnloaded(CefRefPtr<CefExtension> extension) override;
+	//bool OnBeforeBackgroundBrowser(CefRefPtr<CefExtension> extension, const CefString& url, CefRefPtr<CefClient>& client, CefBrowserSettings& settings) override;
+	//bool OnBeforeBrowser(CefRefPtr<CefExtension> extension, CefRefPtr<CefBrowser> browser, CefRefPtr<CefBrowser> active_browser, int index, const CefString& url, bool active, CefWindowInfo& windowInfo, CefRefPtr<CefClient>& client, CefBrowserSettings& settings) override;
+	//CefRefPtr<CefBrowser> GetActiveBrowser(CefRefPtr<CefExtension> extension, CefRefPtr<CefBrowser> browser, bool include_incognito) override;
+	//bool CanAccessBrowser(CefRefPtr<CefExtension> extension, CefRefPtr<CefBrowser> browser, bool include_incognito, CefRefPtr<CefBrowser> target_browser) override;
+	//bool GetExtensionResource(CefRefPtr<CefExtension> extension, CefRefPtr<CefBrowser> browser, const CefString& file, CefRefPtr<CefGetExtensionResourceCallback> callback) override;
+
 	// CefFindHandler
 	virtual CefRefPtr<CefFindHandler> GetFindHandler() override { return this; }
+	void OnFindResult(CefRefPtr<CefBrowser> browser, int identifier, int count, const CefRect& selectionRect, int activeMatchOrdinal, bool finalUpdate) override;
 
 	// CefFocusHandler
 	virtual CefRefPtr<CefFocusHandler> GetFocusHandler() override { return this; }
+	//void OnTakeFocus(CefRefPtr<CefBrowser> browser, bool next) override;
+	//bool OnSetFocus(CefRefPtr<CefBrowser> browser, FocusSource source) override;
+	//void OnGotFocus(CefRefPtr<CefBrowser> browser) override;
 
 	// CefJSDialogHandler
 	virtual CefRefPtr<CefJSDialogHandler> GetJSDialogHandler() override { return this; }
+	//bool OnJSDialog(CefRefPtr<CefBrowser> browser, const CefString& origin_url, JSDialogType dialog_type, const CefString& message_text, const CefString& default_prompt_text, CefRefPtr<CefJSDialogCallback> callback, bool& suppress_message) override;
+	//bool OnBeforeUnloadDialog(CefRefPtr<CefBrowser> browser, const CefString& message_text, bool is_reload, CefRefPtr<CefJSDialogCallback> callback) override;
+	//void OnResetDialogState(CefRefPtr<CefBrowser> browser) override;
+	//void OnDialogClosed(CefRefPtr<CefBrowser> browser) override;
 
 	// CefKeyboardHandler
 	virtual CefRefPtr<CefKeyboardHandler> GetKeyboardHandler() override { return this; }
+	bool OnPreKeyEvent(CefRefPtr<CefBrowser> browser, const CefKeyEvent& event, CefEventHandle os_event, bool* is_keyboard_shortcut) override;
+	//bool OnKeyEvent(CefRefPtr<CefBrowser> browser, const CefKeyEvent& event, CefEventHandle os_event) override;
 
 	// CefLifeSpanHandler
 	virtual CefRefPtr<CefLifeSpanHandler> GetLifeSpanHandler() override { return this; }
@@ -136,6 +179,15 @@ public:
 	//void OnLoadStart(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, TransitionType transition_type) override;
 	void OnLoadEnd(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, int httpStatusCode) override;
 	void OnLoadError(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefLoadHandler::ErrorCode errorCode, const CefString& errorText, const CefString& failedUrl) override;
+
+	// CefPrintHandler
+	//virtual CefRefPtr<CefPrintHandler> GetPrintHandler() override { return this; }
+	void OnPrintStart(CefRefPtr<CefBrowser> browser) {};
+	//void OnPrintSettings(CefRefPtr<CefBrowser> browser, CefRefPtr<CefPrintSettings> settings, bool get_defaults);
+	bool OnPrintDialog(CefRefPtr<CefBrowser> browser, bool has_selection, CefRefPtr<CefPrintDialogCallback> callback);
+	bool OnPrintJob(CefRefPtr<CefBrowser> browser, const CefString& document_name, const CefString& pdf_file_path, CefRefPtr<CefPrintJobCallback> callback) { return true; }
+	void OnPrintReset(CefRefPtr<CefBrowser> browser) {};
+	//CefSize GetPdfPaperSize(int device_units_per_inch);
 
 	// CefRenderHandler
 	virtual CefRefPtr<CefRenderHandler> GetRenderHandler() override { return this; }
@@ -156,22 +208,65 @@ public:
 	//void OnTextSelectionChanged(CefRefPtr<CefBrowser> browser, const CefString& selected_text, const CefRange& selected_range) override;
 	//void OnVirtualKeyboardRequested(CefRefPtr<CefBrowser> browser, TextInputMode input_mode) override;
 
+	// CefRenderProcessHandler   //Located in DKCefApp.h
+	//virtual CefRefPtr<CefRenderProcessHandler> GetRenderProcessHandler() override { return this; }
+	//void OnRenderThreadCreated(CefRefPtr<CefListValue> extra_info) override;
+	//void OnWebKitInitialized() override;
+	//void OnBrowserCreated(CefRefPtr<CefBrowser> browser, CefRefPtr<CefDictionaryValue> extra_info) override;
+	//void OnBrowserDestroyed(CefRefPtr<CefBrowser> browser) override;
+	//virtual CefRefPtr<CefLoadHandler> GetLoadHandler() override;
+	//void OnContextCreated(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefV8Context> context) override;
+	//void OnContextReleased(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefV8Context> context) override;
+	//void OnUncaughtException(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefV8Context> context, CefRefPtr<CefV8Exception> exception, CefRefPtr<CefV8StackTrace> stackTrace) override;
+	//void OnFocusedNodeChanged(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefDOMNode> node) override;
+	bool OnProcessMessageReceived(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefProcessId source_process, CefRefPtr<CefProcessMessage> message) override;
+	
+	// CefRequestContextHandler
+	//virtual CefRefPtr<CefRequestContextHandler> GetRequestContextHandler() override { return this; }
+	//void OnRequestContextInitialized(CefRefPtr<CefRequestContext> request_context) override;
+	//bool OnBeforePluginLoad(const CefString& mime_type, const CefString& plugin_url, bool is_main_frame, const CefString& top_origin_url, CefRefPtr<CefWebPluginInfo> plugin_info, PluginPolicy* plugin_policy) override;
+	//CefRefPtr<CefResourceRequestHandler> GetResourceRequestHandler(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefRequest> request, bool is_navigation, bool is_download, const CefString& request_initiator, bool& disable_default_handling) override;
+
 	// CefRequestHandler
-	//virtual CefRefPtr<CefRequestHandler> GetRequestHandler() override { return this; }
+	virtual CefRefPtr<CefRequestHandler> GetRequestHandler() override { return this; }
+	//bool OnBeforeBrowse(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefRequest> request, bool user_gesture, bool is_redirect) override;
+	//bool OnOpenURLFromTab(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, const CefString& target_url, WindowOpenDisposition target_disposition, bool user_gesture) override;
+	//CefRefPtr<CefResourceRequestHandler> GetResourceRequestHandler(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefRequest> request, bool is_navigation, bool is_download, const CefString& request_initiator, bool& disable_default_handling) override;
+	//bool GetAuthCredentials(CefRefPtr<CefBrowser> browser, const CefString& origin_url, bool isProxy, const CefString& host, int port, const CefString& realm, const CefString& scheme, CefRefPtr<CefAuthCallback> callback) override;
+	//bool OnQuotaRequest(CefRefPtr<CefBrowser> browser, const CefString& origin_url, int64 new_size, CefRefPtr<CefRequestCallback> callback) override;
+	//bool OnCertificateError(CefRefPtr<CefBrowser> browser, cef_errorcode_t cert_error, const CefString& request_url, CefRefPtr<CefSSLInfo> ssl_info, CefRefPtr<CefRequestCallback> callback) override;
+	//bool OnSelectClientCertificate(CefRefPtr<CefBrowser> browser, bool isProxy, const CefString& host, int port, const X509CertificateList& certificates, CefRefPtr<CefSelectClientCertificateCallback> callback) override;
+	//void OnPluginCrashed(CefRefPtr<CefBrowser> browser, const CefString& plugin_path) override;
+	//void OnRenderViewReady(CefRefPtr<CefBrowser> browser) override;
+	//void OnRenderProcessTerminated(CefRefPtr<CefBrowser> browser, TerminationStatus status) override;
+
+	// CefResourceHandler
+	//virtual CefRefPtr<CefResourceHandler> GetResourceHandler() override { return this; }
+	//bool Open(CefRefPtr<CefRequest> request, bool& handle_request, CefRefPtr<CefCallback> callback) override;
+	//bool ProcessRequest(CefRefPtr<CefRequest> request, CefRefPtr<CefCallback> callback) override;
+	//void GetResponseHeaders(CefRefPtr<CefResponse> response, int64& response_length, CefString& redirectUrl) override;
+	//bool Skip(int64 bytes_to_skip, int64& bytes_skipped, CefRefPtr<CefResourceSkipCallback> callback) override;
+	//bool Read(void* data_out, int bytes_to_read, int& bytes_read, CefRefPtr<CefResourceReadCallback> callback) override;
+	//bool ReadResponse(void* data_out, int bytes_to_read, int& bytes_read, CefRefPtr<CefCallback> callback) override;
+	//void Cancel() override;
+
+	// CefResourceRequestHandler
+	//virtual CefRefPtr<CefResourceRequestHandler> GetResourceRequestHandler() override { return this; }
+	//CefRefPtr<CefCookieAccessFilter> GetCookieAccessFilter(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefRequest> request) override;
+	//ReturnValue OnBeforeResourceLoad(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefRequest> request, CefRefPtr<CefRequestCallback> callback) override;
+	//CefRefPtr<CefResourceHandler> GetResourceHandler( CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefRequest> request) override;
+	//void OnResourceRedirect(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefRequest> request, CefRefPtr<CefResponse> response, CefString& new_url) override;
+	//bool OnResourceResponse(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefRequest> request, CefRefPtr<CefResponse> response) override;
+	//CefRefPtr<CefResponseFilter> GetResourceResponseFilter(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefRequest> request, CefRefPtr<CefResponse> response) override;
+	//void OnResourceLoadComplete(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefRequest> request, CefRefPtr<CefResponse> response, URLRequestStatus status, int64 received_content_length) override;
+	//void OnProtocolExecution(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefRequest> request, bool& allow_os_execution) override;
 
 
-	bool OnProcessMessageReceived(CefRefPtr<CefBrowser> browser, CefProcessId source_process, CefRefPtr<CefProcessMessage> message);
 
+	// Miscellaneous
 	void CloseAllBrowsers(bool force_close);
 	void DoFrame();
 	bool IsClosing() const { return is_closing_; }
-	void OnFindResult(CefRefPtr<CefBrowser> browser, int identifier, int count, const CefRect& selectionRect, int activeMatchOrdinal, bool finalUpdate);
-	bool OnPreKeyEvent(CefRefPtr<CefBrowser> browser, const CefKeyEvent& event, CefEventHandle os_event, bool* is_keyboard_shortcut);
-	bool OnPrintDialog(CefRefPtr<CefBrowser> browser, bool has_selection, CefRefPtr<CefPrintDialogCallback> callback);
-	bool OnPrintJob(CefRefPtr<CefBrowser> browser, const CefString& document_name, const CefString& pdf_file_path, CefRefPtr<CefPrintJobCallback> callback){ return true; }
-	void OnPrintReset(CefRefPtr<CefBrowser> browser){}
-	void OnPrintSettings(CefRefPtr<CefBrowser> browser, CefRefPtr<CefPrintSettings> settings, bool get_defaults){}
-	void OnPrintStart(CefRefPtr<CefBrowser> browser){}
 	//bool OnRequestGeolocationPermission(CefRefPtr<CefBrowser> browser, const CefString& requesting_url, int request_id, CefRefPtr<CefGeolocationCallback> callback);
 	
 	IMPLEMENT_REFCOUNTING(DKSDLCefHandler);
