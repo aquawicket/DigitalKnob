@@ -494,7 +494,7 @@ bool DKCef::NewBrowser(const DKString& id, const int& top, const int& left, cons
 	DKDEBUGFUNC(id, top, left, width, height, url);
 
 	int _width = width ? width : 800;
-	int _height = height ? height : 40;
+	int _height = height ? height : 600;
 
 	CefWindowInfo window_info;
 	CefBrowserSettings browserSettings;

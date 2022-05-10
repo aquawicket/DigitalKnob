@@ -176,6 +176,8 @@ bool DKRmlConverter::PostProcess(Rml::Element* element) {
 		DKString iLeft = toString(iframes[i]->GetAbsoluteLeft());
 		DKString iWidth = toString(iframes[i]->GetClientWidth());
 		DKString iHeight = toString(iframes[i]->GetClientHeight());
+		//DKString iWidth = toString(iframes[i]->GetOffsetWidth());
+		//DKString iHeight = toString(iframes[i]->GetOffsetHeight());
 		DKString url;
 		if(!iframes[i]->GetAttribute("src"))
 			 return DKERROR("iframe has no source tag\n");
@@ -187,13 +189,17 @@ bool DKRmlConverter::PostProcess(Rml::Element* element) {
 		DKString tag = "img";
 		//Rml::Element* doc = DKRml::Get()->document; //unused code
 		Rml::Element* cef_texture  = iframes[i]->AppendChild(DKRml::Get()->document->CreateElement(tag.c_str()), true);
-		if(!element)
-			return DKERROR("element invalid\n");
+		if(!cef_texture)
+			return DKERROR("cef_texture invalid\n");
 		DKString cef_id = "iframe_"+id;
 		cef_texture->SetAttribute("id", cef_id.c_str());
 		//This is what RmlSDL2Renderer::LoadTexture and RmlSDL2Renderer::RenderGeometry
 		//use to detect if the texture is a cef image. If will contain a iframe_ in the src.
 		cef_texture->SetAttribute("src", cef_id.c_str());
+		//cef_texture->SetProperty("top", "0rem");
+		//cef_texture->SetProperty("bottom", "0rem");
+		//cef_texture->SetProperty("left", "0rem");
+		//cef_texture->SetProperty("right", "0rem");
 		cef_texture->SetProperty("width", "100%");
 		cef_texture->SetProperty("height", "100%");
 		DKString data = id+","+iTop+","+iLeft+","+iWidth+","+iHeight+","+url;
