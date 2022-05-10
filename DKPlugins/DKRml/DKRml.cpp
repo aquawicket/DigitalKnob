@@ -444,6 +444,9 @@ bool DKRml::SendEvent(const DKString& elementAddress, const DKString& type, cons
 	if (same("window", elementAddress)) {
 		element = DKRml::Get()->document->GetContext()->GetRootElement();
 	}
+	else if (same("sdlwindow", elementAddress)) {
+		element = DKRml::Get()->document->GetContext()->GetRootElement();
+	}
 	else {
 		element = addressToElement(elementAddress);
 	}

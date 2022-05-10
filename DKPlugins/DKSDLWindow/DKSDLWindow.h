@@ -66,8 +66,8 @@ public:
 	DKString mTitle;
 	int winX;
 	int winY;
-	unsigned int width;
-	unsigned int height;
+	int width;
+	int height;
 	int last_mouseX;
 	int last_mouseY;
 

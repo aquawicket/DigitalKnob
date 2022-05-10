@@ -196,7 +196,7 @@ public:
 	//bool GetRootScreenRect(CefRefPtr<CefBrowser> browser, CefRect& rect) override;
 	void GetViewRect(CefRefPtr<CefBrowser> browser, CefRect& rect) override;
 	//bool GetScreenPoint(CefRefPtr<CefBrowser> browser, int viewX, int viewY, int& screenX, int& screenY) override;
-	//bool GetScreenInfo(CefRefPtr<CefBrowser> browser, CefScreenInfo& screen_info) override;
+	bool GetScreenInfo(CefRefPtr<CefBrowser> browser, CefScreenInfo& screen_info) override;
 	void OnPopupShow(CefRefPtr<CefBrowser> browser, bool show) override;
 	void OnPopupSize(CefRefPtr<CefBrowser> browser, const CefRect& rect) override;
 	void OnPaint(CefRefPtr<CefBrowser> browser, PaintElementType type, const RectList& dirtyRects, const void* buffer, int width, int height) override;

@@ -32,6 +32,8 @@ bool DKCef::initialized = false;
 
 bool DKCef::Init(){
 	DKDEBUGFUNC();
+	//CefEnableHighDPISupport();
+
 	DKClass::DKCreate("DKCefJS");
 	DKClass::DKCreate("DKCefV8");
 	
@@ -71,7 +73,7 @@ bool DKCef::Init(){
 	*/
 	
 	fullscreen = false;
-
+	
 #	if defined(WIN32) && !defined(WIN64)
 		DKString elf_dll;
 		DKString cef_dll;
@@ -130,7 +132,7 @@ bool DKCef::Init(){
 
 	//IMPORTANT INFORMATION
 	//https://bitbucket.org/chromiumembedded/cef/wiki/GeneralUsage.md#markdown-header-application-structure
-	
+
 #	ifdef MAC
 		CefScopedLibraryLoader library_loader;
 		if(!library_loader.LoadInMain())

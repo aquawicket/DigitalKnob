@@ -557,3 +557,9 @@ bool DKSDLCefHandler::OnTooltip(CefRefPtr<CefBrowser> browser, CefString& text)
 	CEF_REQUIRE_UI_THREAD();
 	return true;
 }
+
+bool DKSDLCefHandler::GetScreenInfo(CefRefPtr<CefBrowser> browser, CefScreenInfo& screen_info){
+	DKDEBUGFUNC(browser, "CefScreenInfo&");
+	CEF_REQUIRE_UI_THREAD();
+	return true;
+}

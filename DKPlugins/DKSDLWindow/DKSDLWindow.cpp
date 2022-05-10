@@ -147,7 +147,7 @@ bool DKSDLWindow::Init() {
     SDL_SetHintWithPriority(SDL_HINT_RENDER_DRIVER, "opengl", SDL_HINT_OVERRIDE);
     //SDL_SetHint(SDL_HINT_RENDER_OPENGL_SHADERS, 0);
     SDL_SetHintWithPriority(SDL_HINT_RENDER_OPENGL_SHADERS, 0, SDL_HINT_OVERRIDE);
-    window = SDL_CreateWindow(mTitle.c_str(), winX, winY, width, height, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE | SDL_WINDOW_OPENGL);
+    window = SDL_CreateWindow(mTitle.c_str(), winX, winY, width, height, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE | SDL_WINDOW_OPENGL | SDL_WINDOW_ALLOW_HIGHDPI);
     if(!window) {
         SDL_Quit();
         return DKERROR("SDL_CreateWindow Error: " + DKString(SDL_GetError()) + "\n");
@@ -268,6 +268,7 @@ bool DKSDLWindow::Init() {
     //DKINFO("GL_SHADING_LANGUAGE_VERSION = "+gl_shading+"\n");
     DKINFO("GL_EXTENSIONS = "+gl_extensions+"\n");
     DKINFO("SDL Renderer = " + result + "\n");
+    SDL_GL_GetDrawableSize(window, &width, &height);
     DKINFO("Resolution = " + toString(width) + "x" + toString(height) + "\n");
     DKINFO("Render Driver = " + toString(info.name) + "\n");
     DKINFO("max_texture_height = "+toString(info.max_texture_height)+"\n");
