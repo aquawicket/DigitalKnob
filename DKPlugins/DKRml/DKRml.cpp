@@ -453,7 +453,7 @@ bool DKRml::SendEvent(const DKString& elementAddress, const DKString& type, cons
 	if(!element)
 		return DKERROR("element invalid\n");
 	Rml::Dictionary parameters;
-	parameters["msg0"] = value.c_str();
+	parameters["param1"] = value.c_str();
 	element->DispatchEvent(type.c_str(), parameters, false);
 	return true;
 }
