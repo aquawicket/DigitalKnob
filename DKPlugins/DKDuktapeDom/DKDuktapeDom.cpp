@@ -20,6 +20,7 @@ bool DKDuktapeDom::Init(){
 	DKClass::DKCreate("DKXMLHttpRequest");
 
 	//create global window 
+	DKDuktape* dt = DKDuktape::Get();
 	duk_eval_string(dt->ctx, "var window = new Window('window')");
 	duk_eval_string(dt->ctx,
 		"({\n"
