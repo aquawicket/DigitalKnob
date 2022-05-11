@@ -19,8 +19,10 @@ bool DKSDLCef::Init()
 	dkSdlWindow = DKSDLWindow::Instance("DKSDLWindow0");
 	//id = data[1];
 	dkCef = DKCef::Get();
-	if(!dkSdlWindow || !dkCef)
-		return DKERROR("DKSDLCef::Init(): INVALID OBJECTS\n");
+	if(!dkSdlWindow)
+		return DKERROR("dkSdlWindow is invalid\n");
+	if(!dkCef)
+		return DKERROR("dlCef is invalid\n");
 	SetupCef();
 	_mouseLMBdown = false;
 	_scrollFactor = 120.0f;
@@ -75,7 +77,7 @@ bool DKSDLCef::GetTexture(const void* input, void* output)
 	DKString id = *(DKString*)input;
 	int browser;
 	if(!dkCef->GetBrowserNumber(id, browser))
-		return DKERROR("DKSDLCef::GetTexture(): The browser is invalid\n");
+		return DKERROR("browser is invalid\n");
 	if(!cefHandler->cef_texture[browser]){
 		cefHandler->cef_texture[browser] = SDL_CreateTexture(dkSdlWindow->renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_TARGET, dkCef->dkBrowsers[browser].width, dkCef->dkBrowsers[browser].height);
 		cefHandler->cef_content[browser] = SDL_CreateTexture(dkSdlWindow->renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, dkCef->dkBrowsers[browser].width, dkCef->dkBrowsers[browser].height);
@@ -90,9 +92,10 @@ bool DKSDLCef::GetTexture(const void* input, void* output)
 bool DKSDLCef::Handle(SDL_Event* event)
 {
 	//DKDEBUGFUNC(event);
-	int browser;
-	if(!dkCef->GetCurrentBrowser(browser))
-		return DKERROR("DKSDLCef::Handle(): The browser is invalid\n");
+	int browser_index;
+	if (!dkCef->GetCurrentBrowser(browser_index))
+		return false;// DKERROR("browser_index is invalid\n");
+	
 	//DKINFO("DKSDLCef::Handle(): GetCurrentBrowser = "+toString(i)+"\n");
 	//DKINFO("number_of_browsers = "+toString(dkCef->GetBrowsers())+"\n");
 	//DKINFO("current_browser = "+toString(dkCef->GetCurrentBrowser())+"\n");
@@ -123,22 +126,22 @@ bool DKSDLCef::Handle(SDL_Event* event)
 			if(event->button.button == 3)
 				_mouseLMBdown = true;
 			CefMouseEvent mouse_event;
-            mouse_event.x = event->motion.x - dkCef->dkBrowsers[browser].left;
-			mouse_event.y = event->motion.y - dkCef->dkBrowsers[browser].top;
+            mouse_event.x = event->motion.x - dkCef->dkBrowsers[browser_index].left;
+			mouse_event.y = event->motion.y - dkCef->dkBrowsers[browser_index].top;
 			if(mouse_event.x < 0) 
 				return false;
-			if(mouse_event.x > dkCef->dkBrowsers[browser].width)
+			if(mouse_event.x > dkCef->dkBrowsers[browser_index].width)
 				return false;
 			if(mouse_event.y < 0)
 				return false;
-			if(mouse_event.y > dkCef->dkBrowsers[browser].height)
+			if(mouse_event.y > dkCef->dkBrowsers[browser_index].height)
 				return false;
-			dkCef->SetFocus(browser);
+			dkCef->SetFocus(browser_index);
 			//mouse_event.modifiers = _keyAdapter.getCefModifiers(event->key.keysym.mod);
 
 			CefBrowserHost::MouseButtonType type;
 			GetCefMouseButton(event->button.button, type);
-			dkCef->dkBrowsers[browser].browser->GetHost()->SendMouseClickEvent(mouse_event, type, false, clicks);
+			dkCef->dkBrowsers[browser_index].browser->GetHost()->SendMouseClickEvent(mouse_event, type, false, clicks);
 			return true;
 		}
 
@@ -149,22 +152,22 @@ bool DKSDLCef::Handle(SDL_Event* event)
             if(event->button.button == 3)
 				_mouseLMBdown = false;
 			CefMouseEvent mouse_event;
-            mouse_event.x = event->motion.x - dkCef->dkBrowsers[browser].left;
-			mouse_event.y = event->motion.y - dkCef->dkBrowsers[browser].top;
+            mouse_event.x = event->motion.x - dkCef->dkBrowsers[browser_index].left;
+			mouse_event.y = event->motion.y - dkCef->dkBrowsers[browser_index].top;
 			if(mouse_event.x < 0)
 				return false;
-			if(mouse_event.x > dkCef->dkBrowsers[browser].width)
+			if(mouse_event.x > dkCef->dkBrowsers[browser_index].width)
 				return false;
 			if(mouse_event.y < 0)
 				return false;
-			if(mouse_event.y > dkCef->dkBrowsers[browser].height)
+			if(mouse_event.y > dkCef->dkBrowsers[browser_index].height)
 				return false;
-			dkCef->SetFocus(browser);
+			dkCef->SetFocus(browser_index);
 			//mouse_event.modifiers = _keyAdapter.getCefModifiers(event->key.keysym.mod);
 
 			CefBrowserHost::MouseButtonType type;
 			GetCefMouseButton(event->button.button, type);
-			dkCef->dkBrowsers[browser].browser->GetHost()->SendMouseClickEvent(mouse_event, type, true, clicks);
+			dkCef->dkBrowsers[browser_index].browser->GetHost()->SendMouseClickEvent(mouse_event, type, true, clicks);
  
 			return true;
 		}
@@ -283,8 +286,8 @@ bool DKSDLCef::Handle(SDL_Event* event)
 			*/
 
 			CefMouseEvent mouse_event;
-			mouse_event.x = event->motion.x - dkCef->dkBrowsers[browser].left;
-			mouse_event.y = event->motion.y - dkCef->dkBrowsers[browser].top;
+			mouse_event.x = event->motion.x - dkCef->dkBrowsers[browser_index].left;
+			mouse_event.y = event->motion.y - dkCef->dkBrowsers[browser_index].top;
 			//DKINFO("Mouse: X="+toString(mouse_event.x)+" Y="+toString(mouse_event.y)+"\n");
 			uint32 modifiers = _keyAdapter.getCefModifiers(event->key.keysym.mod);
 
@@ -296,7 +299,7 @@ bool DKSDLCef::Handle(SDL_Event* event)
 				modifiers |= EVENTFLAG_RIGHT_MOUSE_BUTTON;
 	
 			mouse_event.modifiers = modifiers;
-			dkCef->dkBrowsers[browser].browser->GetHost()->SendMouseMoveEvent(mouse_event, false);
+			dkCef->dkBrowsers[browser_index].browser->GetHost()->SendMouseMoveEvent(mouse_event, false);
 			return true;
 		}
 
@@ -307,11 +310,11 @@ bool DKSDLCef::Handle(SDL_Event* event)
 				int mouseX;
 				int mouseY;
 				SDL_GetMouseState(&mouseX, &mouseY);
-				mouse_event.x = mouseX - dkCef->dkBrowsers[browser].left;
-				mouse_event.y = mouseY - dkCef->dkBrowsers[browser].top;
+				mouse_event.x = mouseX - dkCef->dkBrowsers[browser_index].left;
+				mouse_event.y = mouseY - dkCef->dkBrowsers[browser_index].top;
 				//DKINFO("Mouse: X="+toString(mouse_event.x)+" Y="+toString(mouse_event.y)+"\n");
 				//uint32 modifiers = _keyAdapter.getCefModifiers(event->key.keysym.mod);
-				dkCef->dkBrowsers[browser].browser->GetHost()->SendMouseWheelEvent(mouse_event, (int)deltaX, (int)deltaY);
+				dkCef->dkBrowsers[browser_index].browser->GetHost()->SendMouseWheelEvent(mouse_event, (int)deltaX, (int)deltaY);
 			}
 			return true;
 		}
@@ -327,7 +330,7 @@ bool DKSDLCef::OnClick(const void* input, void* output)
 	toStringArray(arry,str,","); // id,top,left,width,height
 	int browser;
 	if(!dkCef->GetBrowserNumber(arry[0], browser))
-		return DKERROR("DKSDLCef::OnClick(): browser is invalid\n");
+		return DKERROR("browser is invalid\n");
 	OnResize(input, NULL);
 	dkCef->SetFocus(browser);
 	dkCef->SetKeyboardFocus(browser);
@@ -342,7 +345,7 @@ bool DKSDLCef::OnMouseOver(const void* input, void* output)
 	toStringArray(arry,str,","); // id,top,left,width,height
 	int browser;
 	if(!dkCef->GetBrowserNumber(arry[0], browser))
-		return DKERROR("DKSDLCef::OnMouseOver(): browser is invalid\n");
+		return DKERROR("browser is invalid\n");
 	//work with the browser here
 	OnResize(input, NULL);
 	dkCef->SetFocus(browser);
@@ -358,7 +361,7 @@ bool DKSDLCef::OnResize(const void* input, void* output)
 	//DKINFO("DKSDLCef::OnResize("+arry[0]+","+arry[1]+","+arry[2]+","+arry[3]+","+arry[4]+")\n");
 	int browser;
 	if(!dkCef->GetBrowserNumber(arry[0], browser))
-		return DKERROR("DKSDLCef::OnResize(): browser is invalid\n");
+		return DKERROR("browser is invalid\n");
 	if(dkCef->fullscreen){
 		dkCef->dkBrowsers[browser].top = 0;
 		dkCef->dkBrowsers[browser].left = 0;
@@ -415,11 +418,11 @@ bool DKSDLCef::Draw()
 {
 	//DKDEBUGFUNC();
 	if(!DKClass::DKValid("DKRml,DKRml0"))
-		return DKERROR("DKSDLCef::Draw(): DKRml class instance is invalid\n");
+		return DKERROR("DKRml class instance is invalid\n");
 	if (!cefHandler->cef_texture[0])
-		return false;// DKERROR("DKSDLCef::Draw(): cefHandler->cef_texture[0] is invalid\n");
+		return false;// DKERROR("cefHandler->cef_texture[0] is invalid\n");
 	if (cefHandler->cef_texture.size() < 1)
-		return DKERROR("DKSDLCef::Draw(): cefHandler->cef_texture.size() < 1\n");
+		return DKERROR("cefHandler->cef_texture.size() < 1\n");
 	SDL_Rect texture_rect;
 	texture_rect.y = dkCef->dkBrowsers[0].top; // the y coordinate
 	texture_rect.x = dkCef->dkBrowsers[0].left;  //the x coordinate

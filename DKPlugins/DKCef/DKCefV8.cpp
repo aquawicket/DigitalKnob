@@ -537,7 +537,6 @@ bool DKCefV8::WaitForImage(CefArgs args, CefReturn retval){
 
 
 //CEF js functions
-//////////////////////////////////////////////////////////
 bool DKCefV8::CloseBrowser(CefArgs args, CefReturn retval)
 {
 	DKDEBUGFUNC(args, retval);
@@ -546,7 +545,6 @@ bool DKCefV8::CloseBrowser(CefArgs args, CefReturn retval)
 	return true;
 }
 
-///////////////////////////////////////////////////////////
 bool DKCefV8::CloseDevTools(CefArgs args, CefReturn retval)
 {
 	DKDEBUGFUNC(args, retval);
@@ -555,7 +553,6 @@ bool DKCefV8::CloseDevTools(CefArgs args, CefReturn retval)
 	return true;
 }
 
-//////////////////////////////////////////////////
 bool DKCefV8::Copy(CefArgs args, CefReturn retval)
 {
 	DKDEBUGFUNC(args, retval);
@@ -563,7 +560,6 @@ bool DKCefV8::Copy(CefArgs args, CefReturn retval)
 	return true;
 }
 
-///////////////////////////////////////////////////////
 bool DKCefV8::CopyImage(CefArgs args, CefReturn retval)
 {
 	DKDEBUGFUNC(args, retval);
@@ -572,7 +568,6 @@ bool DKCefV8::CopyImage(CefArgs args, CefReturn retval)
 	return true;
 }
 
-/////////////////////////////////////////////////
 bool DKCefV8::Cut(CefArgs args, CefReturn retval)
 {
 	DKDEBUGFUNC(args, retval);
@@ -580,7 +575,6 @@ bool DKCefV8::Cut(CefArgs args, CefReturn retval)
 	return true;
 }
 
-/////////////////////////////////////////////////////////
 bool DKCefV8::DownloadUrl(CefArgs args, CefReturn retval)
 {
 	DKDEBUGFUNC(args, retval);
@@ -589,7 +583,6 @@ bool DKCefV8::DownloadUrl(CefArgs args, CefReturn retval)
 	return true;
 }
 
-////////////////////////////////////////////////////////
 bool DKCefV8::FileDialog(CefArgs args, CefReturn retval)
 {
 	DKDEBUGFUNC(args, retval);
@@ -599,7 +592,6 @@ bool DKCefV8::FileDialog(CefArgs args, CefReturn retval)
 	return true;
 }
 
-//////////////////////////////////////////////////
 bool DKCefV8::Find(CefArgs args, CefReturn retval)
 {
 	DKDEBUGFUNC(args, retval);
@@ -609,7 +601,6 @@ bool DKCefV8::Find(CefArgs args, CefReturn retval)
 	return true;
 }
 
-//////////////////////////////////////////////////////////
 bool DKCefV8::GetBrowserId(CefArgs args, CefReturn retval)
 {
 	DKDEBUGFUNC(args, retval);
@@ -620,7 +611,6 @@ bool DKCefV8::GetBrowserId(CefArgs args, CefReturn retval)
 	return true;
 }
 
-/////////////////////////////////////////////////////////
 bool DKCefV8::GetBrowsers(CefArgs args, CefReturn retval)
 {
 	DKDEBUGFUNC(args, retval);
@@ -630,7 +620,6 @@ bool DKCefV8::GetBrowsers(CefArgs args, CefReturn retval)
 	return true;
 }
 
-///////////////////////////////////////////////////////////////
 bool DKCefV8::GetCurrentBrowser(CefArgs args, CefReturn retval)
 {
 	DKDEBUGFUNC(args, retval);
@@ -640,7 +629,6 @@ bool DKCefV8::GetCurrentBrowser(CefArgs args, CefReturn retval)
 	return true;
 }
 
-///////////////////////////////////////////////////////////
 bool DKCefV8::GetPageSource(CefArgs args, CefReturn retval)
 {
 	DKDEBUGFUNC(args, retval);
@@ -653,7 +641,6 @@ bool DKCefV8::GetPageSource(CefArgs args, CefReturn retval)
 	return true;
 }
 
-////////////////////////////////////////////////////
 bool DKCefV8::GetUrl(CefArgs args, CefReturn retval)
 {
 	DKDEBUGFUNC(args, retval);
@@ -666,7 +653,6 @@ bool DKCefV8::GetUrl(CefArgs args, CefReturn retval)
 	return true;
 }
 
-////////////////////////////////////////////////////
 bool DKCefV8::GoBack(CefArgs args, CefReturn retval)
 {
 	DKDEBUGFUNC(args, retval);
@@ -675,7 +661,6 @@ bool DKCefV8::GoBack(CefArgs args, CefReturn retval)
 	return true;
 }
 
-///////////////////////////////////////////////////////
 bool DKCefV8::GoForward(CefArgs args, CefReturn retval)
 {
 	DKDEBUGFUNC(args, retval);
@@ -684,7 +669,6 @@ bool DKCefV8::GoForward(CefArgs args, CefReturn retval)
 	return true;
 }
 
-////////////////////////////////////////////////////////
 bool DKCefV8::NewBrowser(CefArgs args, CefReturn retval)
 {
 	DKDEBUGFUNC(args, retval);
@@ -698,7 +682,6 @@ bool DKCefV8::NewBrowser(CefArgs args, CefReturn retval)
 	return true;
 }
 
-///////////////////////////////////////////////////
 bool DKCefV8::Paste(CefArgs args, CefReturn retval)
 {
 	DKDEBUGFUNC(args, retval);
@@ -706,7 +689,6 @@ bool DKCefV8::Paste(CefArgs args, CefReturn retval)
 	return true;
 }
 
-///////////////////////////////////////////////////
 bool DKCefV8::Popup(CefArgs args, CefReturn retval)
 {
 	DKDEBUGFUNC(args, retval);
@@ -715,7 +697,6 @@ bool DKCefV8::Popup(CefArgs args, CefReturn retval)
 	return true;
 }
 
-///////////////////////////////////////////////////
 bool DKCefV8::Print(CefArgs args, CefReturn retval)
 {
 	DKDEBUGFUNC(args, retval);
@@ -724,7 +705,6 @@ bool DKCefV8::Print(CefArgs args, CefReturn retval)
 	return true;
 }
 
-////////////////////////////////////////////////////
 bool DKCefV8::Reload(CefArgs args, CefReturn retval)
 {
 	DKDEBUGFUNC(args, retval);
@@ -733,7 +713,6 @@ bool DKCefV8::Reload(CefArgs args, CefReturn retval)
 	return true;
 }
 
-/////////////////////////////////////////////////////////
 bool DKCefV8::RemoveFocus(CefArgs args, CefReturn retval)
 {
 	DKDEBUGFUNC(args, retval);
@@ -742,7 +721,6 @@ bool DKCefV8::RemoveFocus(CefArgs args, CefReturn retval)
 	return true;
 }
 
-///////////////////////////////////////////////////////////
 bool DKCefV8::RunJavascript(CefArgs args, CefReturn retval)
 {
 	DKDEBUGFUNC(args, retval);
@@ -752,7 +730,6 @@ bool DKCefV8::RunJavascript(CefArgs args, CefReturn retval)
 	return true;
 }
 
-//////////////////////////////////////////////////////
 bool DKCefV8::SetFocus(CefArgs args, CefReturn retval)
 {
 	DKDEBUGFUNC(args, retval);
@@ -761,7 +738,6 @@ bool DKCefV8::SetFocus(CefArgs args, CefReturn retval)
 	return true;
 }
 
-//////////////////////////////////////////////////////////////
 bool DKCefV8::SetKeyboardFocus(CefArgs args, CefReturn retval)
 {
 	DKDEBUGFUNC(args, retval);
@@ -770,7 +746,6 @@ bool DKCefV8::SetKeyboardFocus(CefArgs args, CefReturn retval)
 	return true;
 }
 
-////////////////////////////////////////////////////
 bool DKCefV8::SetUrl(CefArgs args, CefReturn retval)
 {
 	DKDEBUGFUNC(args, retval);
@@ -780,7 +755,6 @@ bool DKCefV8::SetUrl(CefArgs args, CefReturn retval)
 	return true;
 }
 
-//////////////////////////////////////////////////////////
 bool DKCefV8::ShowDevTools(CefArgs args, CefReturn retval)
 {
 	DKDEBUGFUNC(args, retval);
@@ -789,7 +763,6 @@ bool DKCefV8::ShowDevTools(CefArgs args, CefReturn retval)
 	return true;
 }
 
-//////////////////////////////////////////////////
 bool DKCefV8::Stop(CefArgs args, CefReturn retval)
 {
 	DKDEBUGFUNC(args, retval);
@@ -798,7 +771,6 @@ bool DKCefV8::Stop(CefArgs args, CefReturn retval)
 	return true;
 }
 
-////////////////////////////////////////////////////////////
 bool DKCefV8::ViewPageSource(CefArgs args, CefReturn retval)
 {
 	DKDEBUGFUNC(args, retval);

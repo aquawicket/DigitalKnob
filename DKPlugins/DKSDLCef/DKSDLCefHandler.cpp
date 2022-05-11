@@ -207,7 +207,6 @@ bool DKSDLCefHandler::OnConsoleMessage(CefRefPtr<CefBrowser> browser, cef_log_se
 	CEF_REQUIRE_UI_THREAD();
 	DKString msg = message.ToString();
 	replace(msg, "%c", "");
-	//DKINFO("DKSDLCefHandler::OnConsoleMessage("+msg+","+source.ToString()+","+toString(line)+")\n");
 	DKString string = message.ToString();
 	replace(string,"%c","");
 	int identifier = browser->GetIdentifier();

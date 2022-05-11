@@ -429,10 +429,8 @@ bool DKCef::GetBrowsers(int& num){
 }
 
 bool DKCef::GetCurrentBrowser(int& browser){
-	if(!current_browser){ 
-		DKDEBUGRETURN(current_browser);
-		return false; 
-	}
+	if (!current_browser)
+		return false;// DKERROR("current_browser invalid\n");
 	for(unsigned int i=0; i<dkBrowsers.size(); ++i){
 		if(dkBrowsers[i].browser->IsSame(current_browser)){
 			browser = i;
@@ -521,7 +519,7 @@ bool DKCef::NewBrowser(const DKString& id, const int& top, const int& left, cons
 		
 		current_browser = CefBrowserHost::CreateBrowserSync(window_info, cefHandler, url, browserSettings, NULL, NULL);
 		if(!current_browser)
-			return DKERROR("DKCef::NewBrowser(): current_browser invalid\n"); 
+			return DKERROR("current_browser invalid \n"); 
 		//if(!CefBrowserHost::CreateBrowser(window_info, cefHandler, url, browserSettings, NULL, NULL))
 		//	return DKERROR("CefBrowserHost::CreateBrowser() failed\n");
 		
@@ -744,11 +742,13 @@ bool DKCef::SendEvent(const DKString& id, const DKString& type, const DKString& 
 
 	//FIXME - make this work on all the browsers
 	//DKSendEvent to first browsers only for now. 
+	/*
 	CefRefPtr<CefFrame> frame = dkBrowsers[0].browser->GetMainFrame();
 	if(!frame)
 		return DKERROR("DKCef::SendEvent(): frame invalid \n");
 	DKString string = "CPP_DK_SendEvent(\""+id+"\",\""+type+"\",\""+value+"\");";
 	frame->ExecuteJavaScript(string.c_str(), frame->GetURL(), 0);
+	*/
 
 	/*
 	//DKSendEvent to all browsers
