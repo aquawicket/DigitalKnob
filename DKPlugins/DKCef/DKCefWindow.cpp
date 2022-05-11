@@ -951,46 +951,39 @@ void DKCefWindow::OnFullscreenModeChange(CefRefPtr<CefBrowser> browser, bool ful
 #endif //LINUX
 }
 
-void DKCefWindow::OnLoadEnd(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, int httpStatusCode)
-{
+void DKCefWindow::OnLoadEnd(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, int httpStatusCode){
 	DKDEBUGFUNC(browser, frame, httpStatusCode);
 	if (frame->IsMain())
 		DKEvents::SendEvent("window", "DKCef_OnLoadEnd", toString(httpStatusCode));
 }
 
-void DKCefWindow::OnLoadError(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefLoadHandler::ErrorCode errorCode, const CefString& errorText, const CefString& failedUrl)
-{
+void DKCefWindow::OnLoadError(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefLoadHandler::ErrorCode errorCode, const CefString& errorText, const CefString& failedUrl){
 	DKDEBUGFUNC(browser, frame, errorCode, "const CefString&", "const CefString&");
 	CEF_REQUIRE_UI_THREAD();
 }
 
-void DKCefWindow::OnLoadingStateChange(CefRefPtr<CefBrowser> browser, bool isLoading, bool canGoBack, bool canGoForward)
-{
+void DKCefWindow::OnLoadingStateChange(CefRefPtr<CefBrowser> browser, bool isLoading, bool canGoBack, bool canGoForward){
 	DKDEBUGFUNC(browser, isLoading, canGoBack, canGoForward);
 	CEF_REQUIRE_UI_THREAD();
 	DKEvents::SendEvent("window", "DKCef_OnLoadingStateChange", toString(browser->GetIdentifier()));
 }
 
-void DKCefWindow::OnPaint(CefRefPtr<CefBrowser> browser, PaintElementType type, const RectList& dirtyRects, const void* buffer, int width, int height)
-{
+void DKCefWindow::OnPaint(CefRefPtr<CefBrowser> browser, PaintElementType type, const RectList& dirtyRects, const void* buffer, int width, int height){
 	DKDEBUGFUNC(browser, type, "const RectList&", buffer, width, height);
 	CEF_REQUIRE_UI_THREAD();
 }
 
-void DKCefWindow::OnPopupShow(CefRefPtr<CefBrowser> browser, bool show)
-{
+void DKCefWindow::OnPopupShow(CefRefPtr<CefBrowser> browser, bool show){
 	DKDEBUGFUNC(browser, show);
 	CEF_REQUIRE_UI_THREAD();
 }
 
-void DKCefWindow::OnPopupSize(CefRefPtr<CefBrowser> browser, const CefRect& rect)
-{
+void DKCefWindow::OnPopupSize(CefRefPtr<CefBrowser> browser, const CefRect& rect){
 	DKDEBUGFUNC(browser, "const CefRect&");
 	CEF_REQUIRE_UI_THREAD();
 }
 
-bool DKCefWindow::OnPreKeyEvent(CefRefPtr<CefBrowser> browser, const CefKeyEvent& event, CefEventHandle os_event, bool* is_keyboard_shortcut)
-{
+bool DKCefWindow::OnPreKeyEvent(CefRefPtr<CefBrowser> browser, const CefKeyEvent& event, CefEventHandle os_event, bool* is_keyboard_shortcut){
 	DKDEBUGFUNC(browser, "const CefKeyEvent&", os_event, is_keyboard_shortcut);
 	CEF_REQUIRE_UI_THREAD();
 	if (event.type == KEYEVENT_RAWKEYDOWN)

@@ -15,7 +15,11 @@ var Console = function(pointer) {
         CPP_DKConsole_debug(msg + "\n");
     }
     Console.prototype.error = function(msg) {
-        //CPP_DKConsole_error(msg + "\n");
+	
+		if(!msg){
+			CPP_DKConsole_error("msg invalid \n");
+			return;
+		}
 		const e = new Error(msg);
 		if (!e.stack) {
 			try {

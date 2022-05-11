@@ -63,6 +63,8 @@ bool DKDomEventTarget::OnEvent(DKEvents* event){
 	if(duk_peval_string(ctx, newEvent.c_str()) != 0)
 		DKDuktape::DumpError(newEvent);
 	*/
+
+
 	//dispatch the event
 	DKString dispatchEvent = "DispatchEvent(\""+rmlEventAddress+"\")";
 	if(duk_peval_string(ctx, dispatchEvent.c_str()) != 0)

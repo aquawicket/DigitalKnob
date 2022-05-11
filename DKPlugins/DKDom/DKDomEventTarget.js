@@ -54,8 +54,36 @@ var EventTarget = function(pointer) {
     })
     Object.defineProperty(this, "dispatchEvent", {
         value: function(event) {
-            if (!(event.type in this.listeners))
+			if(!this){
+				console.error("dispatchEvent(): this invalid"); 
+				return false;
+			}
+			if(!this.listeners){
+				console.error("dispatchEvent(): this.listeners invalid"); 
+				return false;
+			}
+			if(!event){
+				console.error("dispatchEvent(): event invalid");
+				return false;
+			}
+			if(!event.type){
+				console.error("dispatchEvent(): event.type invalid"); 
+				return false;
+			}
+            if(!(event.type in this.listeners))
                 return true;
+			
+			/*
+			//print event variable
+			console.log("--------EVENT-------------------------")
+			console.log(" event                  = "+event)
+			console.log(" event.type             = "+event.type)
+			console.log(" event.currentTarget    = "+event.currentTarget)
+			console.log(" event.currentTarget.id = "+event.currentTarget.id)
+			console.log(" event.value            = "+event.value)
+			console.log("--------------------------------------")
+			*/
+			
             var stack = this.listeners[event.type].slice()
             for (var i = 0; i < stack.length; i++)
                 stack[i] && stack[i].call(this, event)
