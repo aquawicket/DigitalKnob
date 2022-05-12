@@ -78,10 +78,9 @@ bool DKSDLCef::GetTexture(const void* input, void* output)
 	int browser;
 	if(!dkCef->GetBrowserNumber(id, browser))
 		return DKERROR("browser is invalid\n");
-	if(!cefHandler->cef_texture[browser]){
-		cefHandler->cef_texture[browser] = SDL_CreateTexture(dkSdlWindow->renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_TARGET, dkCef->dkBrowsers[browser].width, dkCef->dkBrowsers[browser].height);
-		cefHandler->cef_content[browser] = SDL_CreateTexture(dkSdlWindow->renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, dkCef->dkBrowsers[browser].width, dkCef->dkBrowsers[browser].height);
-	}
+	if (!cefHandler->cef_texture[browser])
+		return DKERROR("cefHandler->cef_texture[browser] is invalid\n");
+
 	struct DKTexture{ SDL_Texture* texture; };
 	DKTexture out = *(DKTexture*)output;
 	out.texture = cefHandler->cef_texture[browser];
@@ -417,12 +416,13 @@ bool DKSDLCef::TransparentPixel(SDL_Event *event)
 bool DKSDLCef::Draw()
 {
 	//DKDEBUGFUNC();
-	if(!DKClass::DKValid("DKRml,DKRml0"))
-		return DKERROR("DKRml class instance is invalid\n");
+	if (DKClass::DKValid("DKRml,DKRml0"))
+		return false; //We have a valid DKRml instance, so we are drawing to rml textures instead of striaght to SDL
 	if (!cefHandler->cef_texture.size())
 		return DKERROR("!cef_texture.size()\n");
 	if (!cefHandler->cef_texture[0])
 		return DKERROR("cefHandler->cef_texture[0] is invalid\n");
+
 	SDL_Rect texture_rect;
 	texture_rect.y = dkCef->dkBrowsers[0].top; // the y coordinate
 	texture_rect.x = dkCef->dkBrowsers[0].left;  //the x coordinate

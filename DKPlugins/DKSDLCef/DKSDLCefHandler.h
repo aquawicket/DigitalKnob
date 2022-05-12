@@ -93,8 +93,6 @@ public:
 	DKCef* dkCef;
 	DKSDLCef* dkSdlCef;
 	std::vector<SDL_Texture*> cef_texture;
-	std::vector<SDL_Texture*> cef_content;
-	SDL_Texture* cef_contentB;
 
 
 	// CefAccessibilityHandler

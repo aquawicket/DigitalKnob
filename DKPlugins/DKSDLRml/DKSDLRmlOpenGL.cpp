@@ -54,9 +54,8 @@ void DKSDLRmlOpenGL::RenderGeometry(Rml::Vertex* vertices, int num_vertices, int
 			
 			struct DKTexture{ SDL_Texture* texture; };
 			DKTexture output;
-			if(!DKClass::CallFunc("DKSDLCef::GetTexture", &id, &output))
-                return;
-			sdl_texture = output.texture;
+            if (DKClass::CallFunc("DKSDLCef::GetTexture", &id, &output))
+                sdl_texture = output.texture;
 		}
         
 		if(!sdl_texture){ return; }

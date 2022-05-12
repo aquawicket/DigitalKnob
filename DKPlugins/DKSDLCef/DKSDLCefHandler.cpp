@@ -138,7 +138,6 @@ void DKSDLCefHandler::OnBeforeClose(CefRefPtr<CefBrowser> browser)
 		if(browser_list_[i]->IsSame(browser)){
 			browser_list_.erase(browser_list_.begin()+i);
 			cef_texture.erase(cef_texture.begin()+i);
-			cef_content.erase(cef_content.begin()+i);
 			break;
 		}
 	}
@@ -151,7 +150,6 @@ void DKSDLCefHandler::OnAfterCreated(CefRefPtr<CefBrowser> browser)
 	CEF_REQUIRE_UI_THREAD();
 	browser_list_.push_back(browser); //Add to the list of existing browsers.
 	cef_texture.push_back(NULL);
-	cef_content.push_back(NULL);
 	
 	dkCef->current_browser = browser;
 	if (!dkCef->dkBrowsers.size()) {
@@ -365,42 +363,22 @@ void DKSDLCefHandler::OnPaint(CefRefPtr<CefBrowser> browser, PaintElementType ty
 	if(type == PET_VIEW){
 		if(dirtyRects.size() == 0)
 			return;
-		int w, h;
-		SDL_QueryTexture(cef_texture[n], NULL, NULL, &w, &h);
-		if (w != width || h != height)
-			cef_texture[n] = SDL_CreateTexture(dkSdlWindow->renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_TARGET, width, height);
 
-		/*
 		int w2, h2;
-		SDL_QueryTexture(cef_content[n], NULL, NULL, &w2, &h2);
+		SDL_QueryTexture(cef_texture[n], NULL, NULL, &w2, &h2);
 		if (w2 != width || h2 != height)
-			cef_content[n] = SDL_CreateTexture(dkSdlWindow->renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, width, height);
-		SDL_SetTextureBlendMode(cef_content[n], SDL_BLENDMODE_BLEND);
+			cef_texture[n] = SDL_CreateTexture(dkSdlWindow->renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, width, height);
+		SDL_SetTextureBlendMode(cef_texture[n], SDL_BLENDMODE_BLEND);
 		unsigned char* texture_data;
 		int texture_pitch;
-		if (SDL_LockTexture(cef_content[n], NULL, (void**)&texture_data, &texture_pitch) != 0) {
-			DKERROR("SDL_LockTexture(cef_content[n]...) failed\n");
+		if (SDL_LockTexture(cef_texture[n], NULL, (void**)&texture_data, &texture_pitch) != 0) {
+			DKERROR("SDL_LockTexture(cef_texture[n]...) failed\n");
 			return;
 		}
 		std::memcpy(texture_data, buffer, width * height * 4); //copies cef bitmap to sdl texture
-		SDL_UnlockTexture(cef_content[n]);
-		*/
-
-		int w2, h2;
-		SDL_QueryTexture(cef_content[n], NULL, NULL, &w2, &h2);
-		if (w2 != width || h2 != height)
-			cef_content[n] = SDL_CreateTexture(dkSdlWindow->renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, width, height);
-		SDL_SetTextureBlendMode(cef_content[n], SDL_BLENDMODE_BLEND);
-		unsigned char* texture_data;
-		int texture_pitch;
-		if (SDL_LockTexture(cef_content[n], NULL, (void**)&texture_data, &texture_pitch) != 0) {
-			DKERROR("SDL_LockTexture(cef_content[n]...) failed\n");
-			return;
-		}
-		std::memcpy(texture_data, buffer, width * height * 4); //copies cef bitmap to sdl texture
-		SDL_UnlockTexture(cef_content[n]);
+		SDL_UnlockTexture(cef_texture[n]);
 	}
-
+	/*
 	else if(type == PET_POPUP){ //FIXME
 		DKINFO("DKSDLCefHandler::OnPaint(): type == PET_POPUP\n");
 		//if(dirtyRects.size() == 0){ return; }
@@ -418,13 +396,13 @@ void DKSDLCefHandler::OnPaint(CefRefPtr<CefBrowser> browser, PaintElementType ty
 			SDL_UnlockTexture(dkSdlCef->popup_image);
 		}
 	}
-	
+	*/
+	/*
 	if(cef_texture[n]) {
 		SDL_SetRenderTarget(dkSdlWindow->renderer, cef_texture[n]);
-		//SDL_SetRenderDrawBlendMode(dkSdlWindow->renderer, SDL_BLENDMODE_NONE);
 		SDL_SetRenderDrawColor(dkSdlWindow->renderer, 255, 255, 255, 255);
 		SDL_RenderFillRect(dkSdlWindow->renderer, NULL);
-		SDL_RenderCopy(dkSdlWindow->renderer, cef_content[n], NULL, NULL);
+		SDL_RenderCopy(dkSdlWindow->renderer, cef_texture[n], NULL, NULL);
 		if(dkSdlCef->popup_image){
 			SDL_Rect popup;
 			popup.x = dkSdlCef->popup_rect.x;
@@ -435,6 +413,7 @@ void DKSDLCefHandler::OnPaint(CefRefPtr<CefBrowser> browser, PaintElementType ty
 		}
 		SDL_SetRenderTarget(dkSdlWindow->renderer, NULL);
 	}
+	*/
 }
 
 void DKSDLCefHandler::OnPopupShow(CefRefPtr<CefBrowser> browser, bool show)
