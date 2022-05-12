@@ -551,7 +551,7 @@ function(DOWNLOAD src_path dest_path) # ARGV1 = dest_path
 	DKDEBUG("      To -> ${dest_path}")
 	
 	## setup temp_path variables
-	set(temp_filename "DL_${dest_filename}.dl")
+	set(temp_filename "${dest_filename}.downloading")
 	set(temp_path ${dest_dir}/${temp_filename})
 	DKDEBUG("temp_path = ${temp_path}")
 	if(EXISTS ${temp_path})
