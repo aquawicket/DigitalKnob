@@ -69,7 +69,7 @@ class DKLog {
 public:
 	static bool Clear(int& rtnvalue);
 	static bool ColorMap();
-	static bool Log(const char* file, int line, const char* func, const DKString& input, const int lvl = DK_INFO);
+	static bool Log(const char* file, int line, const char* func, const DKString& input, const int lvl = DK_INFO, const int color_override = 0);
 	static bool SetLog(const int lvl, const DKString& text);
 
 	static bool log_assert;
@@ -226,6 +226,7 @@ void signal_handler(int signal);
 #define    DKINFO(message) DKLog::Log(__FILE__, __LINE__, __FUNCTION__, message, DK_INFO);
 #define   DKDEBUG(message) DKLog::Log(__FILE__, __LINE__, __FUNCTION__, message, DK_DEBUG);
 #define DKVERBOSE(message) DKLog::Log(__FILE__, __LINE__, __FUNCTION__, message, DK_VERBOSE);
+#define DKJSERROR(message) DKLog::Log(__FILE__, __LINE__, __FUNCTION__, message, DK_INFO, DKERROR_COLOR);
 
 #define DEBUG_METHOD() logy _logy(__FUNCTION__);
 

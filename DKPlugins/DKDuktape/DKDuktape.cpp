@@ -102,13 +102,13 @@ bool DKDuktape::Init(){
 			DKString file = DKFile::local_assets+"DKDuktape/c_eventloop.js";
 			if(!LoadFile(file)){ return false; }
 			if(handle_file(ctx, file.c_str()) != 0)
-				return DKERROR("DKDuktape::Init(): Error in handle_file\n");
+				return DKERROR("Error in handle_file\n");
 		}
 		else{ //ecma_eventloop.js
 			DKString file = DKFile::local_assets+"DKDuktape/ecma_eventloop.js";
 			if(!LoadFile(file)){ return false; }
 			if(handle_file(ctx, file.c_str()) != 0)
-				return DKERROR("DKDuktape::Init(): Error in handle_file\n");
+				return DKERROR("Error in handle_file\n");
 		}
 #endif
 
@@ -145,7 +145,7 @@ void DKDuktape::my_fatal(void* udata, const char* msg) {
 bool DKDuktape::AttachFunction(const DKString& name, duk_c_function func){
 	DKDEBUGFUNC(name, func);
 	if(!ctx)
-		return DKERROR("DKDuktape::AttachFunction(): ctx invalid\n");
+		return DKERROR("ctx invalid\n");
 	duk_require_stack(ctx, 1);
 	duk_push_global_object(ctx);
 	duk_push_c_function(ctx, func, DUK_VARARGS);
@@ -257,11 +257,13 @@ bool DKDuktape::DumpError(const DKString& code){
 		codeWithLineNumbers += toString(currentLine)+"  "+line+"\n";
 		currentLine++;
 	}
-	DKERROR(message+"\n");
-	DKERROR(fileName+"\n");
-	DKERROR(lineNumber+": "+lineString+"\n");
+	//DKERROR(message+"\n");
+	//DKERROR(fileName+"\n");
+	//DKERROR(lineNumber+": "+lineString+"\n");
+	DKJSERROR(message+"\n"+fileName+"\n"+lineNumber+": "+lineString+"\n");
+
 	//DKERROR("\n\n*** SOURCE CODE ***\n" + codeWithLineNumbers + "\n");
-	DKERROR("\n*** CALL STACK ***\n" + stack + "\n\n");
+	DKJSERROR("\n*** CALL STACK ***\n" + stack + "\n\n");
 	// Send error event to javascript
 	/*
 	replace(stack, "'", "\\'");

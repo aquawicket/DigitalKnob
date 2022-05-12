@@ -207,9 +207,13 @@ DKPlugin.createInstance = function DKPlugin_createInstance() {
         }
     }
     !this.id && (this.id = this.klassName + num);
-    // Wrap the plugins memeber functions with error catching
-    dk.errorCatcher(this, this.klassName);
-    //Add the new instance to the plugin stack
+    
+	// TEMPORARILY DISABLED
+	// Wrap the plugins memeber functions with error catching
+	//dk.errorCatcher(this, this.klassName);
+    
+	
+	//Add the new instance to the plugin stack
     const newIndex = DKPlugin.instances.push(this) - 1;
     //DKPlugin.instances[newIndex].ok = true;
     this.dkplugin = true;

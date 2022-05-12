@@ -429,8 +429,14 @@ bool DKCef::GetBrowsers(int& num){
 }
 
 bool DKCef::GetCurrentBrowser(int& browser){
-	if (!current_browser)
-		return false;// DKERROR("current_browser invalid\n");
+	if (!current_browser) {
+		//return false;// DKERROR("current_browser invalid\n");
+		DKWARN("current_browser invalid\n")
+		if (dkBrowsers.size() && dkBrowsers[0].browser) {
+			DKWARN("setting current_browser to dkBrowsers[0].browser");
+			current_browser = dkBrowsers[0].browser;
+		}
+	}
 	for(unsigned int i=0; i<dkBrowsers.size(); ++i){
 		if(dkBrowsers[i].browser->IsSame(current_browser)){
 			browser = i;

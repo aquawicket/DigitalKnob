@@ -147,7 +147,7 @@ void signal_handler(int signal) {
 
 // https://stackoverflow.com/a/9371717/688352  - The command windows is slow, read this
 
-bool DKLog::Log(const char* file, int line, const char* func, const DKString& input, const int lvl){
+bool DKLog::Log(const char* file, int line, const char* func, const DKString& input, const int lvl, const int color_override) {
 	/*
 	if(lvl == DK_ASSERT){
 		// Install a signal handler
@@ -164,66 +164,71 @@ bool DKLog::Log(const char* file, int line, const char* func, const DKString& in
 		//return DKASSERT("bad practice to start a string with \\n")
 
 	//check LOG_HIDE strings
-	if(!log_hide.empty()){
+	if (!log_hide.empty()) {
 		DKStringArray hides;
 		toStringArray(hides, log_hide, " ");
-		for(unsigned int i=0; i<hides.size(); ++i){
-			if(!hides[i].empty() && has(input, hides[i]))
+		for (unsigned int i = 0; i < hides.size(); ++i) {
+			if (!hides[i].empty() && has(input, hides[i]))
 				return true;
 		}
 	}
 	//check LOG_SHOW strings
 	bool force = false;
-	if(!log_show.empty()){
+	if (!log_show.empty()) {
 		DKStringArray shows;
 		toStringArray(shows, log_show, ",");
-		for(unsigned int i=0; i<shows.size(); ++i){
-			if(!shows[i].empty() && has(input, shows[i])){
+		for (unsigned int i = 0; i < shows.size(); ++i) {
+			if (!shows[i].empty() && has(input, shows[i])) {
 				force = true;
 				break;
 			}
 		}
 	}
-	if(!force){
-		if(log_fatal == false && lvl == DK_FATAL){ return false; }
-		if(log_errors == false && lvl == DK_ERROR){ return false; }
-		if(log_warnings == false && lvl == DK_WARN){ return true; }
-		if(log_info == false && lvl == DK_INFO){ return true; }
-		if(log_debug == false && lvl == DK_DEBUG){ return true; }
-		if(log_verbose == false && lvl == DK_VERBOSE){ return true; }
+	if (!force) {
+		if (log_fatal == false && lvl == DK_FATAL) { return false; }
+		if (log_errors == false && lvl == DK_ERROR) { return false; }
+		if (log_warnings == false && lvl == DK_WARN) { return true; }
+		if (log_info == false && lvl == DK_INFO) { return true; }
+		if (log_debug == false && lvl == DK_DEBUG) { return true; }
+		if (log_verbose == false && lvl == DK_VERBOSE) { return true; }
 	}
 
 	DKString output;
 
 	///// ADD extra info if requested
-	if(log_thread){
+	if (log_thread) {
 		unsigned long int threadId;
 		DKUtil::GetThreadId(threadId);
 		output = output + "THREAD: " + toString((unsigned int)threadId) + "  ";
 	}
-	if(log_lines || lvl <= DK_ERROR) {
+	if (log_lines || lvl <= DK_ERROR) {
 		DKString filename = file;
 		std::string::size_type found = filename.find_last_of("/\\");
-		if(found != std::string::npos && found < filename.length())
-			output += filename.substr(found+1);
+		if (found != std::string::npos && found < filename.length())
+			output += filename.substr(found + 1);
 		output = output + ":" + toString(line) + "  ";
 	}
-	if(log_funcs || lvl <= DK_ERROR) {
-		if(strlen(func))
+	if (log_funcs || lvl <= DK_ERROR) {
+		if (strlen(func))
 			output = output + func + "() ";
 	}
-	output += input; 
+	output += input;
 
 	/////// Main Console Color Decorators ///////
 #	ifdef WIN32
-	   	WORD color;
-		if(lvl == DK_ASSERT){ color = DKASSERT_COLOR; }
-		if(lvl == DK_FATAL){ color = DKFATAL_COLOR; }
-		if(lvl == DK_ERROR){ color = DKERROR_COLOR; }
-		if(lvl == DK_WARN){ color = DKWARN_COLOR; }
-	    if(lvl == DK_INFO){ color = DKINFO_COLOR; }
-		if(lvl == DK_DEBUG){ color = DKDEBUG_COLOR; }
-		if(lvl == DK_VERBOSE){ color = DKVERBOSE_COLOR; }
+		WORD color;
+		if (!color_override) {
+			if (lvl == DK_ASSERT) { color = DKASSERT_COLOR; }
+			if (lvl == DK_FATAL) { color = DKFATAL_COLOR; }
+			if (lvl == DK_ERROR) { color = DKERROR_COLOR; }
+			if (lvl == DK_WARN) { color = DKWARN_COLOR; }
+			if (lvl == DK_INFO) { color = DKINFO_COLOR; }
+			if (lvl == DK_DEBUG) { color = DKDEBUG_COLOR; }
+			if (lvl == DK_VERBOSE) { color = DKVERBOSE_COLOR; }
+		}
+		else {
+			color = color_override;
+		}
 		HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 		CONSOLE_SCREEN_BUFFER_INFO consoleInfo;
 		GetConsoleScreenBufferInfo(hConsole, &consoleInfo);
