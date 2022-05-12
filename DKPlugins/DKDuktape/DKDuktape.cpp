@@ -257,13 +257,13 @@ bool DKDuktape::DumpError(const DKString& code){
 		codeWithLineNumbers += toString(currentLine)+"  "+line+"\n";
 		currentLine++;
 	}
-	//DKERROR(message+"\n");
-	//DKERROR(fileName+"\n");
-	//DKERROR(lineNumber+": "+lineString+"\n");
-	DKJSERROR(message+"\n"+fileName+"\n"+lineNumber+": "+lineString+"\n");
+	//DKREDINFO(message+"\n");
+	//DKREDINFO(fileName+"\n");
+	//DKREDINFO(lineNumber+": "+lineString+"\n");
+	DKREDINFO(message+"\n"+fileName+"\n"+lineNumber+": "+lineString+"\n");
 
 	//DKERROR("\n\n*** SOURCE CODE ***\n" + codeWithLineNumbers + "\n");
-	DKJSERROR("\n*** CALL STACK ***\n" + stack + "\n\n");
+	DKREDINFO("\n*** CALL STACK ***\n" + stack + "\n\n");
 	// Send error event to javascript
 	/*
 	replace(stack, "'", "\\'");

@@ -78,9 +78,10 @@ bool DKSDLCef::GetTexture(const void* input, void* output)
 	int browser;
 	if(!dkCef->GetBrowserNumber(id, browser))
 		return DKERROR("browser is invalid\n");
-	if (!cefHandler->cef_texture[browser])
-		return DKERROR("cefHandler->cef_texture[browser] is invalid\n");
-
+	if (!cefHandler->cef_texture[browser]) {
+		DKREDINFO("cefHandler->cef_texture[browser] is invalid\n");
+		return false;
+	}
 	struct DKTexture{ SDL_Texture* texture; };
 	DKTexture out = *(DKTexture*)output;
 	out.texture = cefHandler->cef_texture[browser];

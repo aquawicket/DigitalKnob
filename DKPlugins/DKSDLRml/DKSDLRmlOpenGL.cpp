@@ -60,7 +60,7 @@ void DKSDLRmlOpenGL::RenderGeometry(Rml::Vertex* vertices, int num_vertices, int
         
 		if(!sdl_texture){ return; }
         if(SDL_GL_BindTexture(sdl_texture, &texw, &texh) == -1)
-			DKERROR("SDL_GL_BindTexture: "+DKString(SDL_GetError())+"\n");
+			DKREDINFO("SDL_GL_BindTexture: "+DKString(SDL_GetError())+"\n");
     }
  
     for(int  i = 0; i < num_vertices; i++) {
