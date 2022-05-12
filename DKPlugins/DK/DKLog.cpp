@@ -215,31 +215,31 @@ bool DKLog::Log(const char* file, int line, const char* func, const DKString& in
 	output += input; 
 
 	/////// Main Console Color Decorators ///////
-#ifdef WIN32
-	WORD color;
-	if(lvl == DK_ASSERT){ color = DKASSERT_COLOR; }
-	if(lvl == DK_FATAL){ color = DKFATAL_COLOR; }
-	if(lvl == DK_ERROR){ color = DKERROR_COLOR; }
-	if(lvl == DK_WARN){ color = DKWARN_COLOR; }
-    if(lvl == DK_INFO){ color = DKINFO_COLOR; }
-	if(lvl == DK_DEBUG){ color = DKDEBUG_COLOR; }
-	if(lvl == DK_VERBOSE){ color = DKVERBOSE_COLOR; }
-	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-	CONSOLE_SCREEN_BUFFER_INFO consoleInfo;
-	GetConsoleScreenBufferInfo(hConsole, &consoleInfo);
-	WORD saved_attributes = consoleInfo.wAttributes;  // Save current attributes
-	if(color)
-		SetConsoleTextAttribute(hConsole, color);
-#elif !defined(LINUX)
-    char color[10];
-	if(lvl == DK_ASSERT){ strcpy(color, DKASSERT_COLOR); }
-	if(lvl == DK_FATAL){ strcpy(color, DKFATAL_COLOR); }
-	if(lvl == DK_ERROR){ strcpy(color, DKERROR_COLOR); }
-	if(lvl == DK_WARN){ strcpy(color, DKWARN_COLOR); }
-    if(lvl == DK_INFO){ strcpy(color, DKINFO_COLOR); }
-	if(lvl == DK_DEBUG){ strcpy(color, DKDEBUG_COLOR); }
-	if(lvl == DK_VERBOSE){ strcpy(color, DKVERBOSE_COLOR); }
-#endif
+#	ifdef WIN32
+	   	WORD color;
+		if(lvl == DK_ASSERT){ color = DKASSERT_COLOR; }
+		if(lvl == DK_FATAL){ color = DKFATAL_COLOR; }
+		if(lvl == DK_ERROR){ color = DKERROR_COLOR; }
+		if(lvl == DK_WARN){ color = DKWARN_COLOR; }
+	    if(lvl == DK_INFO){ color = DKINFO_COLOR; }
+		if(lvl == DK_DEBUG){ color = DKDEBUG_COLOR; }
+		if(lvl == DK_VERBOSE){ color = DKVERBOSE_COLOR; }
+		HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+		CONSOLE_SCREEN_BUFFER_INFO consoleInfo;
+		GetConsoleScreenBufferInfo(hConsole, &consoleInfo);
+		WORD saved_attributes = consoleInfo.wAttributes;  // Save current attributes
+		if(color)
+			SetConsoleTextAttribute(hConsole, color);
+#	elif !defined(LINUX)
+		char color[10];
+		if(lvl == DK_ASSERT){ strcpy(color, DKASSERT_COLOR); }
+		if(lvl == DK_FATAL){ strcpy(color, DKFATAL_COLOR); }
+		if(lvl == DK_ERROR){ strcpy(color, DKERROR_COLOR); }
+		if(lvl == DK_WARN){ strcpy(color, DKWARN_COLOR); }
+		if(lvl == DK_INFO){ strcpy(color, DKINFO_COLOR); }
+		if(lvl == DK_DEBUG){ strcpy(color, DKDEBUG_COLOR); }
+		if(lvl == DK_VERBOSE){ strcpy(color, DKVERBOSE_COLOR); }
+#	endif
 
 	/// /// ///  OUTPUTS /// /// ///
 
@@ -258,42 +258,42 @@ bool DKLog::Log(const char* file, int line, const char* func, const DKString& in
 	}
 
 	// // // IDE Software Output
-	if(log_msvc){
-		//OutputDebugString(string.c_str()); //Output to Visual Studio
-	}
-#if defined(MAC) || defined (IOS)
-	//if(log_xcode)
-	//	NSLog(@"%s", string.c_str()); //Output to XCode
-#endif
-#ifdef ANDROID
-	// https://developer.android.com/ndk/reference/group/logging
+#	ifdef WIN
+		if(log_msvc)
+			OutputDebugString(output.c_str()); //Output to Visual Studio
+#	endif
+#	if defined(MAC) || defined (IOS)
+		if(log_xcode)
+			NSLog(@"%s", string.c_str()); //Output to XCode
+	#endif
+#	ifdef ANDROID
+		// https://developer.android.com/ndk/reference/group/logging
 
-
-	if(lvl == DK_FATAL) //Android Studio 
-		__android_log_write(ANDROID_LOG_FATAL, "DKAndroid", output.c_str());
-	else if(lvl == DK_ERROR) //Android Studio 
-		__android_log_write(ANDROID_LOG_ERROR, "DKAndroid", output.c_str());
-	else if(lvl == DK_WARN)
-		__android_log_write(ANDROID_LOG_WARN, "DKAndroid", output.c_str());
-	else if(lvl == DK_INFO)
-		__android_log_write(ANDROID_LOG_INFO, "DKAndroid", output.c_str()); //Default
-	else if(lvl == DK_DEBUG)
-		__android_log_write(ANDROID_LOG_DEBUG, "DKAndroid", output.c_str());
-	else if(lvl == DK_VERBOSE)
-		__android_log_write(ANDROID_LOG_VERBOSE, "DKAndroid", output.c_str());
-	else //if(lvl == DK_INFO)
-		__android_log_write(ANDROID_LOG_INFO, "DKAndroid", output.c_str());
-#endif
+		if(lvl == DK_FATAL) //Android Studio 
+			__android_log_write(ANDROID_LOG_FATAL, "DKAndroid", output.c_str());
+		else if(lvl == DK_ERROR) //Android Studio 
+			__android_log_write(ANDROID_LOG_ERROR, "DKAndroid", output.c_str());
+		else if(lvl == DK_WARN)
+			__android_log_write(ANDROID_LOG_WARN, "DKAndroid", output.c_str());
+		else if(lvl == DK_INFO)
+			__android_log_write(ANDROID_LOG_INFO, "DKAndroid", output.c_str()); //Default
+		else if(lvl == DK_DEBUG)
+			__android_log_write(ANDROID_LOG_DEBUG, "DKAndroid", output.c_str());
+		else if(lvl == DK_VERBOSE)
+			__android_log_write(ANDROID_LOG_VERBOSE, "DKAndroid", output.c_str());
+		else //if(lvl == DK_INFO)
+			__android_log_write(ANDROID_LOG_INFO, "DKAndroid", output.c_str());
+#	endif
 
 	// // // Restore Default Color Decorators
-#ifdef WIN32
-	SetConsoleTextAttribute(hConsole, saved_attributes);
-#endif
+#	ifdef WIN32
+		SetConsoleTextAttribute(hConsole, saved_attributes);
+#	endif
 
-	//if(log_gui_console && DKUtil::InMainThread() && DKApp::active){
-	//	DKEvents::SendEvent("DKLog", "level", toString(lvl));
-	//	DKEvents::SendEvent("DKLog", "string", string);
-	//}
+//	if(log_gui_console && DKUtil::InMainThread() && DKApp::active){
+//		DKEvents::SendEvent("DKLog", "level", toString(lvl));
+//		DKEvents::SendEvent("DKLog", "string", string);
+//	}
 	
 	//On errors, show the stack trace or open a message box
 	if(lvl <= DK_ERROR){
@@ -303,24 +303,24 @@ bool DKLog::Log(const char* file, int line, const char* func, const DKString& in
 				DKClass::CallFunc("DKDebug::ShowStackTrace");
 		}
 		if(exception_on_errors || lvl <= DK_ASSERT){
-#ifndef ANDROID			
-			try{
-				throw output; // throw an exception
-			}
-			//catch (const std::string& e){
-			catch(...){
-#endif
-			#ifdef HAVE_boxer
+#			ifndef ANDROID			
+				try{
+					throw output; // throw an exception
+				}
+				//catch (const std::string& e){
+				catch(...){
+#			endif
+#			ifdef HAVE_boxer
 				output += "\n\n Would you like to exit the application?";
 				boxer::Selection sel = boxer::show(output.c_str(), "EXCEPTION", boxer::Style::Error, boxer::Buttons::YesNo);
 				if(sel == boxer::Selection::Yes){
 					DKApp::Exit();
 					return false;
 				}
-			#endif
-#ifndef ANDROID
-			}
-#endif
+#			endif
+#			ifndef ANDROID
+				}
+#			endif
 		}
 		return false;
 	}

@@ -20,17 +20,17 @@ var Console = function(pointer) {
 			CPP_DKConsole_error("msg invalid \n");
 			return;
 		}
-		const e = new Error(msg);
-		if (!e.stack) {
+		const err = new Error(msg);
+		if (!err.stack) {
 			try {
-				throw e; // old browsers need the Error thrown to fill the stack
+				throw err; // old browsers need the Error thrown to fill the stack
 			} 
-			catch (e) {
-				if (!e.stack)
-					return error("e.stack invalid"); // browser too old
+			catch (err) {
+				if (!err.stack)
+					return error("err.stack invalid"); // browser too old
 			}
 		}
-		CPP_DKConsole_error(e.stack+"\n");
+		CPP_DKConsole_error(err.stack+"\n");
     }
     Console.prototype.exception = function(msg) {
         CPP_DKConsole_exception(msg + "\n");
