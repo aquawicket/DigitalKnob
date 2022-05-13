@@ -7,9 +7,6 @@ endif()
 # 
 
 
-
-
-
 #DKDEPEND(jdk)
 DKDEPEND(android-sdk)
 DKDEPEND(android-ndk)
