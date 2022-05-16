@@ -10,9 +10,10 @@ DKDEPEND(freetype)
 #DKDEPEND(sfml)
 
 DKSET(RMLUI_VERSION master)
+DKSET(RMLUI_VERSION RCSS_attribute_selector_support)
 DKSET(RMLUI_NAME rmlui-${RMLUI_VERSION})
 DKSET(RMLUI ${3RDPARTY}/${RMLUI_NAME})
-DKGITCLONE(https://github.com/aquawicket/RmlUi.git ${RMLUI})
+DKGITCLONE(https://github.com/aquawicket/RmlUi.git ${RMLUI} RCSS_attribute_selector_support)
 file(WRITE ${3RDPARTY}/rmlui-master/installed "${RMLUI_VERSION}")
 DKPATCH(rmlui ${RMLUI})
 

@@ -2550,9 +2550,16 @@ endif()
 endfunction()
 
 function(DKGITCLONE url path)
+	DKSET(CURRENT_DIR ${path})
 	if(NOT EXISTS ${path}/.git)
 		DKCOMMAND("git clone ${url} ${path}")
 	endif()
+	DKCOMMAND("git checkout -- .")
+	if(${ARGC} GREATER 1)
+		set(branch ${ARGV1})
+		DKCOMMAND("git checkout ${branch}")
+	endif()
+	DKCOMMAND("git pull")
 endfunction()
 
 function(DKIMPORT url) #Lib #ID #Patch
