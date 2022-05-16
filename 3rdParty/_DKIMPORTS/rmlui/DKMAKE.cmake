@@ -9,17 +9,28 @@ DKDEPEND(freetype)
 #DKDEPEND(sdl_image)
 #DKDEPEND(sfml)
 
+DKSET(RMLUI_VERSION master)
+DKSET(RMLUI_NAME rmlui-${RMLUI_VERSION})
+DKSET(RMLUI ${3RDPARTY}/${RMLUI_NAME})
+DKGITCLONE(https://github.com/aquawicket/RmlUi.git ${RMLUI})
+file(WRITE ${3RDPARTY}/rmlui-master/installed "${RMLUI_VERSION}")
+DKPATCH(rmlui ${RMLUI})
 
+
+#DKIMPORT(https://github.com/mikke89/RmlUi)
+#DKIMPORT(https://github.com/mikke89/RmlUi/archive/d56f17e49ca2ee88aadeb304228cd1eae14e3f51.zip PATCH)            # master
+
+#DKIMPORT(https://github.com/aquawicket/RmlUi PATCH)
+#DKIMPORT(https://github.com/aquawicket/RmlUi/archive/d56f17e49ca2ee88aadeb304228cd1eae14e3f51.zip PATCH)
+#DKIMPORT(https://github.com/aquawicket/RmlUi/archive/ee328b7cea7f85ca8d64fb3a73c5b4a15300e095.zip PATCH)  # RCSS_attribute_selector_support
 
 ### VERSION ###
-#DKSET(RMLUI_DL https://github.com/mikke89/RmlUi/archive/34a77f7034882a04252ca5a531354c144d92a806.zip)
-DKSET(RMLUI_DL https://github.com/mikke89/RmlUi/archive/2242e34bb7ff58e0000b8f9ca4fa58473335149a.zip)
-#DKSET(RMLUI_DL https://github.com/aquawicket/RmlUi/archive/8ee72bdcd683afefbb66467fcddc20539ab67297.zip)
-#DKSET(RMLUI_DL https://github.com/aquawicket/RmlUi/archive/c5ef9b0cab97e00928bce26dd8ffbb508f47047f.zip)
-DKSET(RMLUI_VERSION aquawicket)
-DKSET(RMLUI_NAME RmlUi-${RMLUI_VERSION})
-DKSET(RMLUI ${3RDPARTY}/${RMLUI_NAME})
-DKINSTALL(${RMLUI_DL} rmlui ${RMLUI} PATCH)
+#DKSET(RMLUI_DL https://github.com/mikke89/RmlUi/archive/d56f17e49ca2ee88aadeb304228cd1eae14e3f51.zip)     # master
+#DKSET(RMLUI_DL https://github.com/aquawicket/RmlUi/archive/59b7eff791b52120e67e54d833f24e5b17e3468b.zip)  # RCSS_attribute_selector_support
+#DKSET(RMLUI_VERSION aquawicket)
+#DKSET(RMLUI_NAME RmlUi-${RMLUI_VERSION})
+#DKSET(RMLUI ${3RDPARTY}/${RMLUI_NAME})
+#DKINSTALL(${RMLUI_DL} rmlui ${RMLUI} PATCH)
 
 
 
@@ -101,12 +112,12 @@ endif()
 
 ## Test Building with Msys/Mingw
 ##WIN32_DKQCOMMAND(${CMAKE_EXE} -G "MSYS Makefiles" -DCMAKE_MAKE_PROGRAM=${MSYS}/bin/make.exe -DENABLE_PRECOMPILED_HEADERS=OFF -DDISABLE_RTTI_AND_EXCEPTIONS=ON -DBUILD_SHARED_LIBS=OFF -DFREETYPE_INCLUDE_DIR_freetype2=${FREETYPE}/include -DFREETYPE_INCLUDE_DIR_ft2build=${FREETYPE}/include -DFREETYPE_LIBRARY_DEBUG=${FREETYPE}/${OS}/${DEBUG_DIR}/freetype.lib -DFREETYPE_LIBRARY_RELEASE=${FREETYPE}/${OS}/${RELEASE_DIR}/freetype.lib ${RMLUI})
-##WIN32_BASH("#!/bin/bash\;
-##cd /${RMLUI}/${OS}\;
-##export PATH=/c/mingw32/bin:$PATH\;
-##export PATH=/c/msys/bin:$PATH\;
-##make\;
-##exit\;")
+##WIN32_BASH("#!/bin/bash
+##cd /${RMLUI}/${OS}
+##export PATH=/c/mingw32/bin:$PATH
+##export PATH=/c/msys/bin:$PATH
+##make
+##exit")
 
 
 MAC_DKQCOMMAND(${DKCMAKE_BUILD} -DENABLE_PRECOMPILED_HEADERS=OFF ${FREETYPE_CMAKE} ${RMLUI})

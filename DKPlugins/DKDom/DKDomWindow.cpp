@@ -576,7 +576,7 @@ int DKDomWindow::getComputedStyle(duk_context* ctx){
 		duk_push_undefined(ctx);
 		return DKERROR("DKDomCSSStyleDeclaration::getPropertyValue(): element invalid\n");
 	}
-	Rml::ComputedValues values = element->GetComputedValues();
+	const Rml::ComputedValues& values = element->GetComputedValues();
 	duk_push_undefined(ctx);
 	return DKERROR("DKDomWindow::getComputedStyle not implemented\n");
 }

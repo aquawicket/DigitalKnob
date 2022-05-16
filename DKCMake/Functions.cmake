@@ -909,6 +909,12 @@ function(DKREFRESH_ICONS)
 	DKEXECUTE_PROCESS(ie4uinit.exe -show)   ##Windows 10
 endfunction()
 
+function(DKPATCH import_name dest_path)
+	DKINFO("\nCOPYING PATCH FILES FROM _IMPORTS/${import_name} TO ${dest_path}")
+	DKINFO("To stop patch files from overwriting install files, remove the \"PATCH\" argument from the end of the DKIMPORT or DKINSTALL command\n")
+	DKINFO("located in ${DKIMPORTS}/${import_name}/DKMAKE.cmake")
+	DKCOPY(${DKIMPORTS}/${import_name}/ ${dest_path}/ TRUE)
+endfunction()
 
 # For archive files such as libraries and assets, the arguments are:  The download src_path, the name of its _DKIMPORTS folder, The name given to the installed 3rdParty/folder  
 # For executable files such as software amd IDE's the arguments are:  The download src_path, the name of the final name of the dl file, The installation path to check for installation.
@@ -1046,10 +1052,7 @@ function(DKINSTALL src_path import_name dest_path)
 		DKCOPY(${DKDOWNLOAD}/${dl_filename} ${dest_path}/${dl_filename} TRUE)
 	endif()
 	if("${ARGN}" STREQUAL "PATCH")
-		DKINFO("\nCOPYING PATCH FILES FROM _IMPORTS/${import_name} TO COMPLETE INSTALL.")
-		DKINFO("To stop patch files from overwriting install files, remove the \"PATCH\" argument from the end of the DKIMPORT or DKINSTALL command\n")
-		DKINFO("located in ${DKIMPORTS}/${import_name}/DKMAKE.cmake")
-		DKCOPY(${DKIMPORTS}/${import_name}/ ${dest_path}/ TRUE)
+		DKPATCH(${import_name} ${dest_path})
 	else()
 		file(GLOB ITEMS ${DKIMPORTS}/${import_name}/*)
 		list(LENGTH ITEMS count)
@@ -2546,6 +2549,11 @@ if(WIN_HOST)
 endif()
 endfunction()
 
+function(DKGITCLONE url path)
+	if(NOT EXISTS ${path}/.git)
+		DKCOMMAND("git clone ${url} ${path}")
+	endif()
+endfunction()
 
 function(DKIMPORT url) #Lib #ID #Patch
 # IS THE URL VALID           Example https://github.com/aquawicket/DigitalKnob/archive/01c17f6a9cd66068f7890ea887ab3b9a673f0434.zip)
