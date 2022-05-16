@@ -189,6 +189,13 @@ bool DKRmlConverter::PostProcess(Rml::Element* element) {
 		DKString tag = "img";
 		//Rml::Element* doc = DKRml::Get()->document; //unused code
 		Rml::Element* cef_texture  = iframes[i]->AppendChild(DKRml::Get()->document->CreateElement(tag.c_str()), true);
+
+		DKString iTopB = toString(iframes[i]->GetAbsoluteTop());
+		DKString iLeftB = toString(iframes[i]->GetAbsoluteLeft());
+		DKString iWidthB = toString(iframes[i]->GetClientWidth());
+		DKString iHeightB = toString(iframes[i]->GetClientHeight());
+
+
 		if(!cef_texture)
 			return DKERROR("cef_texture invalid\n");
 		DKString cef_id = "iframe_"+id;
