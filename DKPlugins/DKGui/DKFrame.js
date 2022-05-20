@@ -107,10 +107,12 @@ DKFrame.prototype.createFrame = function DKFrame_createFrame(title, width, heigh
 
     //See DKFrame.css for styling    
     frame.setAttribute("dk_frame", "frame");
-    frame.style.top = newtop + "px";
+    frame.style.position = "absolute";
+	frame.style.top = newtop + "px";
     frame.style.left = newleft + "px";
     frame.style.width = width + "rem";
     frame.style.height = newheight + "rem";
+	//console.log("frame.style.top = "+frame.style.top)
     frame.onmousedown = function DKFrame_frame_onmousedown(event) {
         (document.body.lastChild !== frame) && (frame.mousedown_target = event.target);
         instance.bringToFront(event.currentTarget);
