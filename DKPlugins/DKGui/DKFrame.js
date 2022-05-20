@@ -112,7 +112,6 @@ DKFrame.prototype.createFrame = function DKFrame_createFrame(title, width, heigh
     frame.style.left = newleft + "px";
     frame.style.width = width + "rem";
     frame.style.height = newheight + "rem";
-	//console.log("frame.style.top = "+frame.style.top)
     frame.onmousedown = function DKFrame_frame_onmousedown(event) {
         (document.body.lastChild !== frame) && (frame.mousedown_target = event.target);
         instance.bringToFront(event.currentTarget);
