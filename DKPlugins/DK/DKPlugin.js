@@ -285,12 +285,16 @@ DKPlugin.prototype.end = function DKPlugin_end() {
 }
 
 DKPlugin.prototype.create = function DKPlugin_create(klass) {
-    console.group("DKPlugin.prototype.create(" + klass + ")");
-    //console.group("DKPlugin.prototype.create(): " + this.constructor.name);
+	if(!klass)
+		return error("klass is invalid")
+	
+	//console.group("DKPlugin.prototype.create(" + klass + ")");
+	//console.group("DKPlugin.prototype.create(): " + this.constructor.name);
     if (!this) {
         console.groupEnd();
         return error("this is invalid");
     }
+	
     if ((this && this.singleton) || (this.prototype && this.prototype.singleton))
         this.create = function() {
             console.log("create() is disabled on singletons after first call");

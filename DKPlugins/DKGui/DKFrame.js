@@ -5,7 +5,8 @@ function DKFrame() {}
 DKFrame.prototype.init = function DKFrame_init() {
     dk.create("DKGui/DKFrame.css");
 }
-DKFrame.prototype.end = function DKFrame_end() {//dk.close("DKGui/DKFrame.css");
+DKFrame.prototype.end = function DKFrame_end() {
+	//dk.close("DKGui/DKFrame.css");
 }
 
 DKFrame.prototype.create = function DKFrame_create(obj) {
@@ -14,18 +15,19 @@ DKFrame.prototype.create = function DKFrame_create(obj) {
     let instance;
     let type;
     let element;
-    if (obj instanceof DKFrame)
+    if (obj && obj instanceof DKFrame)
         type = "DKFrame"
-    else if (obj instanceof HTMLElement) {
+    else if (obj && obj instanceof HTMLElement) {
         type = "HTMLElement"
         element = obj;
-    } else if (obj instanceof DKPlugin)
+    } 
+	else if (obj && obj instanceof DKPlugin)
         type = "DKPlugin"
-    else if (obj.dkplugin)
+    else if (obj && obj.dkplugin)
         type = "DKPlugin"
-    else if (typeof obj === "string")
+    else if (obj && typeof obj === "string")
         type = "string"
-    else if (obj.constructor.name)
+    else if (obj && obj.constructor.name)
         type = obj.constructor.name
     else
         return error("Could not determine argument type")
@@ -69,7 +71,15 @@ DKFrame.prototype.create = function DKFrame_create(obj) {
     instance.frame.content.setAttribute("dk_frame", "content");
     instance.frame.appendChild(instance.frame.content);
 	DKPlugin("DKGui/DKResize.js", function(DKClass) {
-        instance.resize = DKClass.prototype.createBox(instance.frame);
+		if(!DKClass)
+			return error("DKClass invalid")
+		console.log("DKClass = "+DKClass)
+		
+		//if(!DKClass.prototype)
+		//	return error("DKClass.prototype invalid")
+        
+		//instance.resize = DKClass.prototype.createBox(instance.frame);
+		this.resize = null
     })
     return instance;
 }
@@ -119,9 +129,9 @@ DKFrame.prototype.createFrame = function DKFrame_createFrame(title, width, heigh
     }
     dk.drag.addHandle(frame.titlebar, frame);
 
-    frame.titlebaricon = dk.gui.createElement(frame.titlebar, "img", "dk_frame_titlebaricon");
-    frame.titlebaricon.src = "DKGui/window.png";
-    frame.titlebaricon.setAttribute("dk_frame", "titlebaricon");
+    //frame.titlebaricon = dk.gui.createElement(frame.titlebar, "img", "dk_frame_titlebaricon");
+    //frame.titlebaricon.src = "DKGui/window.png";
+    //frame.titlebaricon.setAttribute("dk_frame", "titlebaricon");
 
     //See DKFrame.css for styling
     frame.titlebartext = dk.gui.createElement(frame.titlebar, "div", "dk_frame_titlebartext");
