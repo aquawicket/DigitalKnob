@@ -98,7 +98,7 @@ int DKFileJS::FileToString(duk_context* ctx){
 	DKString path = duk_require_string(ctx, 0);
 	DKString string;
 	if (!DKFile::FileToString(path, string))
-		return DKERROR("DKFile::FileToString() failed\n")
+		/*return*/ DKERROR("DKFile::FileToString() failed\n")
 	duk_push_string(ctx, string.c_str());
 	return true;
 }
