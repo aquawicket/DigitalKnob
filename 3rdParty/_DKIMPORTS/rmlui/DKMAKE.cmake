@@ -13,7 +13,7 @@ DKDEPEND(freetype)
 #DKSET(RMLUI_VERSION RCSS_attribute_selector_support)
 
 DKSET(RMLUI_VERSION f53538c1f3a5d518e3958379422071253dc639bd)
-DKGITCLONE(https://github.com/aquawicket/RmlUi.git master ${RMLUI_VERSION})
+DKGITCLONE(https://github.com/aquawicket/RmlUi.git ${RMLUI_VERSION})
 #DKPATCH(rmlui ${RMLUI})
 
 #DKIMPORT(https://github.com/mikke89/RmlUi)
