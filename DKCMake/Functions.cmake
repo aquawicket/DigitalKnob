@@ -1109,8 +1109,8 @@ function(DKEXECUTE_PROCESS commands)
 			execute_process(COMMAND sleep 2 WORKING_DIRECTORY ${CURRENT_DIR}) ##wait 2 seconds for the stdout to flush before printing error
 		endif()
 		DKINFO("\n\n")
-		#DKERROR("ERROR: result=${result} error=${error}\n\n")
-		DKASSERT("ERROR: result=${result} error=${error}\n\n")
+		#DKERROR("ERROR: command=${commands}\n  result=${result}\n   error=${error}\n\n")
+		DKASSERT("ERROR: command=${commands}\n  result=${result}\n   error=${error}\n\n")
 	endif()
 endfunction()
 
@@ -2549,18 +2549,134 @@ if(WIN_HOST)
 endif()
 endfunction()
 
-function(DKGITCLONE url path)
-	DKSET(CURRENT_DIR ${path})
-	if(NOT EXISTS ${path}/.git)
-		DKCOMMAND("git clone ${url} ${path}")
+function(DKGITCLONE url) #path)
+# IS THE URL VALID           Example https://github.com/aquawicket/DigitalKnob/archive/01c17f6a9cd66068f7890ea887ab3b9a673f0434.zip)
+	# must contain https://github.com/
+	#split into list converting / to divider ;
+	string(REPLACE "/" ";" url_list ${url})
+	#foreach(item ${url_list})
+	#	DKDEBUG("item = ${item}")
+	#endforeach()
+	
+	list(LENGTH url_list count)
+	#DKDEBUG("url_list is ${count}")
+	if(${count} LESS 5)
+		DKERROR("url_list doesn't contain enough elements to have a 'orginization/library'")
+		return()
+	endif()	
+	
+	if(${ARGC} GREATER 1)
+		if(NOT "${ARGV1}" STREQUAL "PATCH")
+			set(version ${ARGV1})
+		endif()
 	endif()
+	
+	if(${ARGC} GREATER 2)
+		if(NOT "${ARGV2}" STREQUAL "PATCH")
+			set(version ${ARGV2})
+		endif()
+	endif()
+	
+	if(NOT Lib)
+		string(FIND ${url} "github.com" result)
+		if(${result} EQUAL -1)
+			string(FIND ${url} "gitlab.com" result)
+			if(${result} EQUAL -1)
+				DKERROR("The url does not contain 'github.com' OR 'gitlab.com'")
+				return()
+			endif()
+		endif()
+	
+		list(GET url_list 3 org)
+		#DKDEBUG("org = ${org}")
+	
+		list(GET url_list 4 Lib)
+		#DKDEBUG("Lib = ${Lib}")
+		
+		string(FIND ${Lib} ".git" index)
+		if(${index} GREATER -1)
+			string(SUBSTRING ${Lib} 0 ${index} Lib)
+		endif()
+	endif()
+	
+	string(TOLOWER ${Lib} Lib)
+	#DKDEBUG("Lib = ${Lib}")
+	
+	math(EXPR last "${count}-1")  #OUTPUT_FORMAT DECIMAL)")  CMake 3.13+
+	list(GET url_list ${last} url${last})
+	
+	string(FIND ${url${last}} ".git" index)
+	if(${index} GREATER -1)
+		if(NOT ID)
+			string(SUBSTRING ${url${last}} 0 ${index} ID)
+			string(TOLOWER ${ID} FOLDER)
+			#DKDEBUG("$(FOLDER) = ${FOLDER}")
+		endif()
+	endif()
+	
+	## check current folder name
+	if(NOT "${DKIMPORTS}/${FOLDER}" STREQUAL "${CMAKE_CURRENT_LIST_DIR}")
+		DKERROR("The Imports folder is named inncorrectly. \n CURRENTLY: ${CMAKE_CURRENT_LIST_DIR} \n SHOULD BE: ${DKIMPORTS}/${FOLDER}")
+		return()
+	endif()
+	
+	############################################
+	string(TOUPPER ${Lib} LIBVAR)
+	if(NOT LIBVAR)
+		DKINFO("$(LIBVAR) is invalid")
+		return()
+	endif()
+	DKDEBUG("LIBVAR = ${LIBVAR}")
+	
+	DKSET(${LIBVAR}_FOLDER ${FOLDER})
+	if(NOT ${LIBVAR}_FOLDER)
+		DKINFO("${LIBVAR}_FOLDER is invalid")
+		return()
+	endif()
+	DKDEBUG("${LIBVAR}_FOLDER = ${${LIBVAR}_FOLDER}")
+	
+	DKSET(${LIBVAR}_VERSION ${version})
+	if(NOT ${LIBVAR}_VERSION)
+		DKINFO("${LIBVAR}_VERSION is invalid")
+		return()
+	endif()
+	DKDEBUG("${LIBVAR}_VERSION = ${${LIBVAR}_VERSION}")
+	
+	DKSET(${LIBVAR}_NAME ${FOLDER}-${${LIBVAR}_VERSION})
+	if(NOT ${LIBVAR}_NAME)
+		DKINFO("${LIBVAR}_NAME is invalid")
+		return()
+	endif()
+	DKDEBUG("${LIBVAR}_NAME = ${${LIBVAR}_NAME}")
+	
+	DKSET(${LIBVAR} ${3RDPARTY}/${${LIBVAR}_NAME})
+	if(NOT ${LIBVAR})
+		DKINFO("${${LIBVAR}} is invalid")
+		return()
+	endif()
+	DKDEBUG("${${LIBVAR}} = ${${LIBVAR}}")
+	
+	#############################################
+	#DKSET(CURRENT_DIR ${${LIBVAR}})
+	if(NOT EXISTS ${${LIBVAR}}/.git)
+		if(EXISTS ${${LIBVAR}})
+			DKREMOVE(${${LIBVAR}})
+		endif()
+		DKCOMMAND("git clone ${url} ${${LIBVAR}}")
+	endif()
+	DKSET(CURRENT_DIR ${${LIBVAR}})
 	DKCOMMAND("git checkout -- .")
 	if(${ARGC} GREATER 1)
 		set(branch ${ARGV1})
 		DKCOMMAND("git checkout ${branch}")
+	else()
+		DKCOMMAND("git checkout main")
+		DKCOMMAND("git checkout master")
 	endif()
 	DKCOMMAND("git pull")
 endfunction()
+
+
 
 function(DKIMPORT url) #Lib #ID #Patch
 # IS THE URL VALID           Example https://github.com/aquawicket/DigitalKnob/archive/01c17f6a9cd66068f7890ea887ab3b9a673f0434.zip)
