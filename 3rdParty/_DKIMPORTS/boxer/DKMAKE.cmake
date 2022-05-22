@@ -11,8 +11,8 @@ endif()
 
 
 ### IMPORT ###
-#DKIMPORT(https://github.com/aaronmjacobs/Boxer)
-DKIMPORT(https://github.com/aaronmjacobs/Boxer/archive/01c17f6a9cd66068f7890ea887ab3b9a673f0434.zip)
+DKGITCLONE(https://github.com/aaronmjacobs/Boxer.git)
+#DKIMPORT(https://github.com/aaronmjacobs/Boxer/archive/01c17f6a9cd66068f7890ea887ab3b9a673f0434.zip)
 
 
 ### LINK ###

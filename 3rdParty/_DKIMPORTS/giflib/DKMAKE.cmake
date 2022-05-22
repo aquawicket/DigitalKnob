@@ -13,8 +13,10 @@ WIN_DKDEPEND(msys)
 #WIN_DKDEPEND(msys2)
 
 
-#DKIMPORT(https://github.com/mirrorer/giflib)
-DKIMPORT(https://github.com/mirrorer/giflib/archive/fa37672085ce4b3d62c51627ab3c8cf2dda8009a.zip PATCH)
+DKGITCLONE(https://github.com/mirrorer/giflib.git PATCH)
+
+#DKIMPORT(https://github.com/mirrorer/giflib/archive/fa37672085ce4b3d62c51627ab3c8cf2dda8009a.zip PATCH)
+
 #DKSET(GIFLIB_VERSION 5.1.1)
 #DKSET(GIFLIB_DL https://sourceforge.net/projects/giflib/files/giflib-5.1.1.tar.gz)
 #DKSET(GIFLIB_NAME giflib-${GIFLIB_VERSION})

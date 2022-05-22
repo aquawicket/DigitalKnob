@@ -3,7 +3,8 @@
 #
 # https://github.com/emscripten-core/emsdk/archive/refs/tags/2.0.26.zip
 
-DKIMPORT(https://github.com/emscripten-core/emsdk)
+DKGITCLONE(https://github.com/emscripten-core/emsdk.git)
+
 #DKSET(EMSCRIPTEN_VERSION 2.0.26)
 #DKSET(EMSCRIPTEN_NAME emsdk-${EMSCRIPTEN_VERSION})
 #DKSET(EMSCRIPTEN_DL https://github.com/emscripten-core/emsdk/archive/refs/tags/${EMSCRIPTEN_VERSION}.zip)

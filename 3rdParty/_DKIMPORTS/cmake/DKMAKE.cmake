@@ -10,8 +10,10 @@ if(COMPILE_CMAKE)
 	################################################################################################################
 	DKDEPEND(msys2)
 	#DKIMPORT(https://github.com/Kitware/CMake)
-	WIN_HOST_DKSET(CMAKE_VERSION 3a169af9524339e8b2e82130da7605040daf7925)
-	DKIMPORT(https://github.com/Kitware/CMake/archive/3a169af9524339e8b2e82130da7605040daf7925.zip)
+	
+	DKGITCLONE(https://github.com/Kitware/CMake.git)
+	#WIN_HOST_DKSET(CMAKE_VERSION 3a169af9524339e8b2e82130da7605040daf7925)
+	#DKIMPORT(https://github.com/Kitware/CMake/archive/3a169af9524339e8b2e82130da7605040daf7925.zip)
 
 	DKSET(QUEUE_BUILD ON)
 	MSYS(pacman -S --needed git base-devel mingw-w64-x86_64-gcc)

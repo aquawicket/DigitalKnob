@@ -2,8 +2,10 @@
 #
 # https://github.com/dtrebilco/glintercept/releases/download/1.3.4/GLIntercept_1_3_4.exe
 
-#DKIMPORT(https://github.com/dtrebilco/glintercept)
-DKIMPORT(https://github.com/dtrebilco/glintercept/archive/e204189eff4045c24d48b82c93d4f012ed44e166.zip)
+DKGITCLONE(https://github.com/dtrebilco/glintercept.git)
+
+#DKIMPORT(https://github.com/dtrebilco/glintercept/archive/e204189eff4045c24d48b82c93d4f012ed44e166.zip)
+
 #DKSET(GLINTERCEPT_MAJOR 1)
 #DKSET(GLINTERCEPT_MINOR 3)
 #DKSET(GLINTERCEPT_BUILD 4)

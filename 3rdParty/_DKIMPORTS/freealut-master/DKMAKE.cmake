@@ -1,12 +1,11 @@
 ## https://github.com/vancegroup/freealut
 
+
+### INSTALL ###
 DKSET(FREEALUT_VERSION master)
 DKSET(FREEALUT_NAME freealut-${FREEALUT_VERSION})
 #DKSET(FREEALUT_DL ???)
 DKSET(FREEALUT ${3RDPARTY}/${FREEALUT_NAME})
-
-
-### INSTALL ###
 DKINSTALL(${FREEALUT_DL} freealut_master ${FREEALUT})
 
 

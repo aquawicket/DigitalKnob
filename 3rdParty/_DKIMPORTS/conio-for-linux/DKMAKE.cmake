@@ -9,8 +9,10 @@ endif()
 ### DEPENDS ###
 DKDEPEND(ncurses)
 
+DKGITCLONE(https://github.com/nowres/conio-for-linux.git)
 
-DKIMPORT(https://github.com/nowres/conio-for-linux)
+#DKIMPORT(https://github.com/nowres/conio-for-linux)
+
 #DKSET(CONIO-FOR-LINUX_VERSION master)
 #DKSET(CONIO-FOR-LINUX_NAME conio-${CONIO-FOR-LINUX_VERSION})
 #DKSET(CONIO-FOR-LINUX_DL https://github.com/nowres/conio-for-linux/archive/refs/heads/${CONIO-FOR-LINUX_VERSION}.zip)
