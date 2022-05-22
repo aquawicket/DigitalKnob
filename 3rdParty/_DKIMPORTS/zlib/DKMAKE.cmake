@@ -2,8 +2,10 @@
 # http://www.zlib.net/
 
 
+DKGITCLONE(https://github.com/madler/zlib)
+
 #DKIMPORT(https://github.com/madler/zlib)
-DKIMPORT(https://github.com/madler/zlib/archive/cacf7f1d4e3d44d871b605da3b647f07d718623f.zip)
+#DKIMPORT(https://github.com/madler/zlib/archive/cacf7f1d4e3d44d871b605da3b647f07d718623f.zip)
 
 #DKSET(ZLIB_VERSION 1.2.11)
 #DKSET(ZLIB_NAME zlib-${ZLIB_VERSION})
