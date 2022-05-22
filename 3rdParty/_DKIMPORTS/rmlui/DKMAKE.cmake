@@ -12,7 +12,6 @@ DKDEPEND(freetype)
 
 #DKGITCLONE(https://github.com/aquawicket/RmlUi.git PATCH)
 DKGITCLONE(https://github.com/aquawicket/RmlUi.git RCSS_attribute_selector_support PATCH)
-#DKPATCH(rmlui ${RMLUI})
 
 
 ### LINK ###

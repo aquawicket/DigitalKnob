@@ -2549,18 +2549,27 @@ if(WIN_HOST)
 endif()
 endfunction()
 
-function(DKGITCLONE url) #path)
-# IS THE URL VALID           Example https://github.com/aquawicket/DigitalKnob/archive/01c17f6a9cd66068f7890ea887ab3b9a673f0434.zip)
-	# must contain https://github.com/
-	#split into list converting / to divider ;
-	string(REPLACE "/" ";" url_list ${url})
+
+######### TODO ###########
+function(DKNEWINSTALL url)  # to be renaed to DKIMPORT
+	
+	string(REPLACE "/" ";" url_list ${url})  #split url path into list
 	#foreach(item ${url_list})
 	#	DKDEBUG("item = ${item}")
 	#endforeach()
 	
-	list(LENGTH url_list count)
-	#DKDEBUG("url_list is ${count}")
-	if(${count} LESS 5)
+endfunction()
+#############
+
+
+function(DKGITCLONE url)
+
+	
+	
+	list(LENGTH url_list url_list_count)
+	#DKDEBUG("url_list is ${url_list_count}")
+	
+	if(${url_list_count} LESS 5)
 		DKERROR("url_list doesn't contain enough elements to have a 'orginization/library'")
 		return()
 	endif()	
@@ -2596,7 +2605,7 @@ function(DKGITCLONE url) #path)
 	string(TOLOWER ${Lib} Lib)
 	#DKDEBUG("Lib = ${Lib}")
 	
-	math(EXPR last "${count}-1")  #OUTPUT_FORMAT DECIMAL)")  CMake 3.13+
+	math(EXPR last "${url_list_count}-1")  #OUTPUT_FORMAT DECIMAL)")  CMake 3.13+
 	list(GET url_list ${last} url${last})
 	
 	string(FIND ${url${last}} ".git" index)
