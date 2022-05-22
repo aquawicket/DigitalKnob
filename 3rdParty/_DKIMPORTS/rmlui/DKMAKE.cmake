@@ -9,28 +9,10 @@ DKDEPEND(freetype)
 #DKDEPEND(sdl_image)
 #DKDEPEND(sfml)
 
-#DKSET(RMLUI_VERSION master)
-#DKSET(RMLUI_VERSION RCSS_attribute_selector_support)
 
-DKSET(RMLUI_VERSION f53538c1f3a5d518e3958379422071253dc639bd)
-DKGITCLONE(https://github.com/aquawicket/RmlUi.git ${RMLUI_VERSION})
+#DKGITCLONE(https://github.com/aquawicket/RmlUi.git PATCH)
+DKGITCLONE(https://github.com/aquawicket/RmlUi.git RCSS_attribute_selector_support PATCH)
 #DKPATCH(rmlui ${RMLUI})
-
-#DKIMPORT(https://github.com/mikke89/RmlUi)
-#DKIMPORT(https://github.com/mikke89/RmlUi/archive/d56f17e49ca2ee88aadeb304228cd1eae14e3f51.zip PATCH)            # master
-
-#DKIMPORT(https://github.com/aquawicket/RmlUi PATCH)
-#DKIMPORT(https://github.com/aquawicket/RmlUi/archive/d56f17e49ca2ee88aadeb304228cd1eae14e3f51.zip PATCH)
-#DKIMPORT(https://github.com/aquawicket/RmlUi/archive/ee328b7cea7f85ca8d64fb3a73c5b4a15300e095.zip PATCH)  # RCSS_attribute_selector_support
-
-### VERSION ###
-#DKSET(RMLUI_DL https://github.com/mikke89/RmlUi/archive/d56f17e49ca2ee88aadeb304228cd1eae14e3f51.zip)     # master
-#DKSET(RMLUI_DL https://github.com/aquawicket/RmlUi/archive/59b7eff791b52120e67e54d833f24e5b17e3468b.zip)  # RCSS_attribute_selector_support
-#DKSET(RMLUI_VERSION aquawicket)
-#DKSET(RMLUI_NAME RmlUi-${RMLUI_VERSION})
-#DKSET(RMLUI ${3RDPARTY}/${RMLUI_NAME})
-#DKINSTALL(${RMLUI_DL} rmlui ${RMLUI} PATCH)
-
 
 
 ### LINK ###
