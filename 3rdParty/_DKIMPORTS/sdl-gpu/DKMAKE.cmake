@@ -3,8 +3,8 @@
 
 DKDEPEND(sdl)
 
-#DKIMPORT(https://github.com/grimfang4/sdl-gpu)
-DKIMPORT(https://github.com/grimfang4/sdl-gpu/archive/b21d5bed8d1bbbbc236060a04ce076950faac05c.zip)
+DKGITCLONE(https://github.com/grimfang4/sdl-gpu.git)
+#DKIMPORT(https://github.com/grimfang4/sdl-gpu/archive/b21d5bed8d1bbbbc236060a04ce076950faac05c.zip)
 #DKIMPORT(https://github.com/grimfang4/sdl-gpu/archive/b21d5bed8d1bbbbc236060a04ce076950faac05c.zip)
 #DKSET(SDL-GPU_VERSION master)
 #DKSET(SDL-GPU_NAME sdl-gpu-${SDL-GPU_VERSION})

@@ -7,8 +7,8 @@ DKDEPEND(sdl)
 DKDEPEND(freetype)
 
 
-#DKIMPORT(https://github.com/libsdl-org/SDL_ttf)
-DKIMPORT(https://github.com/libsdl-org/SDL_ttf/archive/970e703dd144ffefdcd7cb5f47b20f56d903172c.zip PATCH)
+DKGITCLONE(https://github.com/libsdl-org/SDL_ttf.git)
+#DKIMPORT(https://github.com/libsdl-org/SDL_ttf/archive/970e703dd144ffefdcd7cb5f47b20f56d903172c.zip PATCH)
 #DKIMPORT(https://github.com/libsdl-org/SDL_ttf/archive/9a8650d82824bd8d971dd77d74b67315c4150b07.zip PATCH)
 #DKSET(SDL_TTF_VERSION main)
 #DKSET(SDL_TTF_NAME SDL2_ttf-${SDL_TTF_VERSION})

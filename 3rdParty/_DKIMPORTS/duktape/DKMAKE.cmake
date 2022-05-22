@@ -10,7 +10,9 @@
 DKDEPEND(python)
 DKDEPEND(nodejs)
 
-DKIMPORT(https://github.com/aquawicket/duktape/archive/0701a460ca25c2dc76a96bd3187849ca278d1865.zip PATCH)
+DKGITCLONE(https://github.com/aquawicket/duktape.git PATCH)
+
+#DKIMPORT(https://github.com/aquawicket/duktape/archive/0701a460ca25c2dc76a96bd3187849ca278d1865.zip PATCH)
 
 #DKSET(DUKTAPE_VERSION let-support)
 #DKSET(DUKTAPE_NAME duktape-${DUKTAPE_VERSION})
