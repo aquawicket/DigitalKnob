@@ -9,9 +9,8 @@ ANDROID_DKDEPEND(dl)
 DKDEPEND(zlib)
 DKDEPEND(openssl)
 
-DKGITCLONE(https://github.com/curl/curl.git)
-
-#DKIMPORT(https://github.com/curl/curl/archive/refs/tags/curl-7_43_0.zip)
+#DKGITCLONE(https://github.com/curl/curl.git curl-7_83_1)
+DKIMPORT(https://github.com/curl/curl/archive/refs/tags/curl-7_43_0.zip)
 
 #DKSET(CURL_VERSION 7.34.0)
 #DKSET(CURL_NAME curl-${CURL_VERSION})
