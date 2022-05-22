@@ -2,14 +2,16 @@
 # http://www.simplesystems.org/libtiff/
 # https://download.osgeo.org/libtiff/
 
-
-#DKIMPORT(https://gitlab.com/libtiff/libtiff)
-DKSET(TIFF_VERSION 4.2.0)
 #DKSET(TIFF_DL https://download.osgeo.org/libtiff/old/tiff-4.0.3.zip PATCH)
-DKSET(TIFF_DL https://gitlab.com/libtiff/libtiff/-/archive/v4.2.0/libtiff-v4.2.0.zip)
-DKSET(TIFF_NAME tiff-${TIFF_VERSION})
-DKSET(TIFF ${3RDPARTY}/${TIFF_NAME})
-DKINSTALL(${TIFF_DL} tiff ${TIFF})
+
+
+DKGITCLONE(https://gitlab.com/libtiff/libtiff.git)
+
+#DKSET(TIFF_VERSION 4.2.0)
+#DKSET(TIFF_DL https://gitlab.com/libtiff/libtiff/-/archive/v4.2.0/libtiff-v4.2.0.zip)
+#DKSET(TIFF_NAME tiff-${TIFF_VERSION})
+#DKSET(TIFF ${3RDPARTY}/${TIFF_NAME})
+#DKINSTALL(${TIFF_DL} tiff ${TIFF})
 
 
 ### DKPLUGINS LINK ###

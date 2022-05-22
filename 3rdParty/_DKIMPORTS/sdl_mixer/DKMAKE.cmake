@@ -8,12 +8,13 @@ DKDEPEND(vorbis)
 
 
 
-#DKIMPORT(https://github.com/libsdl-org/SDL_mixer)
-DKSET(SDL_MIXER_VERSION 2.0.1)
-DKSET(SDL_MIXER_NAME SDL2_mixer-${SDL_MIXER_VERSION})
-DKSET(SDL_MIXER_DL https://www.libsdl.org/projects/SDL_mixer/release/SDL2_mixer-2.0.1.zip)
-DKSET(SDL_MIXER ${3RDPARTY}/SDL2_mixer-${SDL_MIXER_VERSION})
-DKINSTALL(${SDL_MIXER_DL} sdl_mixer ${SDL_MIXER} PATCH)
+DKGITCLONE(https://github.com/libsdl-org/SDL_mixer.git PATCH)
+
+#DKSET(SDL_MIXER_VERSION 2.0.1)
+#DKSET(SDL_MIXER_NAME SDL2_mixer-${SDL_MIXER_VERSION})
+#DKSET(SDL_MIXER_DL https://www.libsdl.org/projects/SDL_mixer/release/SDL2_mixer-2.0.1.zip)
+#DKSET(SDL_MIXER ${3RDPARTY}/SDL2_mixer-${SDL_MIXER_VERSION})
+#DKINSTALL(${SDL_MIXER_DL} sdl_mixer ${SDL_MIXER} PATCH)
 
 
 

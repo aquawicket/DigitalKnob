@@ -4,7 +4,8 @@
 
 DKDEPEND(leptonica)
 
-DKIMPORT(https://github.com/tesseract-ocr/tessdoc)
+DKGITCLONE(https://github.com/tesseract-ocr/tessdoc.git)
+
 #DKSET(TESSERACT_VERSION master)
 #DKSET(TESSERACT_NAME tesseract-${TESSERACT_VERSION})
 #DKSET(TESSERACT_DL https://github.com/tesseract-ocr/tessdoc/archive/refs/heads/master.zip)

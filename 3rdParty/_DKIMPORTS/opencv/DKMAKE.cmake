@@ -13,14 +13,16 @@ DKSET(OPENCV_MAJOR 4)
 DKSET(OPENCV_MINOR 5)
 DKSET(OPENCV_BUILD 3)
 #DKSET(OPENCV_VERSION 3.4.1)
-DKSET(OPENCV_VERSION 4.5.3)
+#DKSET(OPENCV_VERSION 4.5.3)
+
+
+DKGITCLONE(https://github.com/opencv/opencv.git)
+
+
 DKSET(OPENCV_NAME opencv-${OPENCV_VERSION})
 #DKSET(OPENCV_DL https://sourceforge.net/projects/opencvlibrary/files/opencv-unix/${OPENCV_VERSION}/${OPENCV_NAME}.zip)
 DKSET(OPENCV_DL https://github.com/opencv/opencv/archive/refs/tags/${OPENCV_VERSION}.zip)
 DKSET(OPENCV ${3RDPARTY}/${OPENCV_NAME})
-
-
-### INSTALL ###
 DKINSTALL(${OPENCV_DL} opencv ${OPENCV})
 
 

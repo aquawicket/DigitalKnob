@@ -6,7 +6,8 @@ endif()
 
 
 
-DKIMPORT(https://github.com/mouuff/simple-getch)
+DKGITCLONE(https://github.com/mouuff/simple-getch.git)
+
 #DKSET(GETCH_VERSION master)
 #DKSET(GETCH_DL https://github.com/mouuff/simple-getch/archive/refs/heads/master.zip)
 #DKSET(GETCH_NAME simple-getch-${GETCH_VERSION})
