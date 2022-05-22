@@ -2,7 +2,7 @@
 # http://www.zlib.net/
 
 
-DKGITCLONE(https://github.com/madler/zlib)
+DKGITCLONE(https://github.com/madler/zlib.git)
 
 #DKIMPORT(https://github.com/madler/zlib)
 #DKIMPORT(https://github.com/madler/zlib/archive/cacf7f1d4e3d44d871b605da3b647f07d718623f.zip)

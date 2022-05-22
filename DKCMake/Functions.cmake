@@ -2564,7 +2564,10 @@ endfunction()
 
 function(DKGITCLONE url)
 
-	
+	string(REPLACE "/" ";" url_list ${url})  #split url path into list
+	#foreach(item ${url_list})
+	#	DKDEBUG("item = ${item}")
+	#endforeach()
 	
 	list(LENGTH url_list url_list_count)
 	#DKDEBUG("url_list is ${url_list_count}")
@@ -2574,6 +2577,7 @@ function(DKGITCLONE url)
 		return()
 	endif()	
 	
+	set(version "master")
 	if(${ARGC} GREATER 1)
 		if(NOT "${ARGV1}" STREQUAL "PATCH")
 			set(version "${ARGV1}")
@@ -2670,11 +2674,7 @@ function(DKGITCLONE url)
 	endif()
 	DKSET(CURRENT_DIR ${${LIBVAR}})
 	DKCOMMAND("git checkout -- .")
-	DKCOMMAND("git checkout master")
-	if(${ARGC} GREATER 1)
-		set(version ${ARGV1})
-		DKCOMMAND("git checkout ${version}")
-	endif()
+	DKCOMMAND("git checkout ${version}")
 	DKCOMMAND("git pull")
 	
 	set(arg_list "${ARGN}")
