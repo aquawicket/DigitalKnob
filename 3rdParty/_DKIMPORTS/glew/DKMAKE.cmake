@@ -5,9 +5,9 @@ if(IOS OR IOSSIM OR ANDROID)
 endif()
 
 
-DKGITCLONE(https://github.com/nigels-com/glew,git)
+#DKGITCLONE(https://github.com/nigels-com/glew.git)
 
-#DKIMPORT(https://github.com/nigels-com/glew/releases/download/glew-2.2.0/glew-2.2.0.zip)
+DKIMPORT(https://github.com/nigels-com/glew/releases/download/glew-2.2.0/glew-2.2.0.zip)
 
 #DKSET(GLEW_VERSION 2.2.0)
 #DKSET(GLEW_NAME glew-${GLEW_VERSION})

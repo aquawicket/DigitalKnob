@@ -2569,10 +2569,10 @@ function(DKGITCLONE url)
 	#	DKDEBUG("item = ${item}")
 	#endforeach()
 	
-	list(LENGTH url_list url_list_count)
-	#DKDEBUG("url_list is ${url_list_count}")
+	list(LENGTH url_list url_list_size)
+	#DKDEBUG("url_list is ${url_list_size}")
 	
-	if(${url_list_count} LESS 5)
+	if(${url_list_size} LESS 5)
 		DKERROR("url_list doesn't contain enough elements to have a 'orginization/library'")
 		return()
 	endif()	
@@ -2609,7 +2609,7 @@ function(DKGITCLONE url)
 	string(TOLOWER ${Lib} Lib)
 	#DKDEBUG("Lib = ${Lib}")
 	
-	math(EXPR last "${url_list_count}-1")  #OUTPUT_FORMAT DECIMAL)")  CMake 3.13+
+	math(EXPR last "${url_list_size}-1")  #OUTPUT_FORMAT DECIMAL)")  CMake 3.13+
 	list(GET url_list ${last} url${last})
 	
 	string(FIND ${url${last}} ".git" index)
