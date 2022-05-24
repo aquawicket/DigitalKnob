@@ -35,7 +35,7 @@ DKDEPEND(tiff)
 DKDEPEND(sdl)
 
 
-DKGITCLONE(https://github.com/libsdl-org/SDL_image.git)
+DKGITCLONE(https://github.com/libsdl-org/SDL_image.git main PATCH)
 #DKIMPORT(https://github.com/libsdl-org/SDL_image/archive/915b794f2c6d8247f775000ee0b96f660cbb9331.zip PATCH)
 #DKIMPORT(https://github.com/libsdl-org/SDL_image/archive/fc370dc71d7726023c063618c7b04c1ed30637e2.zip PATCH)
 #DKSET(SDL_IMAGE_VERSION main)
