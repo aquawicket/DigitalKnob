@@ -103,9 +103,11 @@ set(SDLIMAGE_SUPPORT_XV ON CACHE BOOL "Support for XV file format")
 		
 set(SDLIMAGE_SRC
 	IMG.c
+	IMG_avif.c
 	IMG_bmp.c
 	IMG_gif.c
 	IMG_jpg.c
+	IMG_jxl.c
 	IMG_lbm.c
 	IMG_pcx.c
 	IMG_png.c

@@ -10,7 +10,7 @@ std::vector<std::function<void()> > DKSFMLWindow::draw_funcs;
 bool DKSFMLWindow::Init()
 {
 	DKDEBUGFUNC();
-	window.create(sf::VideoMode(800, 600), "My window");
+	window.create(sf::VideoMode({ 800, 600 }), "My window");
 	DKClass::RegisterFunc("DKSFMLWindow::TestInt", &DKSFMLWindow::TestInt, this);
 	DKClass::RegisterFunc("DKSFMLWindow::TestString", &DKSFMLWindow::TestString, this);
 	DKClass::RegisterFunc("DKSFMLWindow::TestReturnInt", &DKSFMLWindow::TestReturnInt, this);
