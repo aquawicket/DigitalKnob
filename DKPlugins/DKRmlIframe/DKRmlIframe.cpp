@@ -8,7 +8,7 @@
 bool DKRmlIframe::Init()
 {
 	DKDEBUGFUNC();
-	auto iframe_instancer = std::make_unique<Rml::ElementInstancerIframe>();
+	auto iframe_instancer = std::make_unique<ElementInstancerIframe>();
 	Rml::Factory::RegisterElementInstancer("iframe", iframe_instancer.get());
 	return true;
 }
