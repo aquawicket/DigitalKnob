@@ -1,12 +1,12 @@
 #include "ElementIframe.h"
-#include "../../../Include/RmlUi/Core/ComputedValues.h"
-#include "../../../Include/RmlUi/Core/ElementDocument.h"
-#include "../../../Include/RmlUi/Core/ElementUtilities.h"
-#include "../../../Include/RmlUi/Core/GeometryUtilities.h"
-#include "../../../Include/RmlUi/Core/PropertyIdSet.h"
-#include "../../../Include/RmlUi/Core/StyleSheet.h"
-#include "../../../Include/RmlUi/Core/URL.h"
-#include "../TextureDatabase.h"
+#include "../Include/RmlUi/Core/ComputedValues.h"
+#include "../Include/RmlUi/Core/ElementDocument.h"
+#include "../Include/RmlUi/Core/ElementUtilities.h"
+#include "../Include/RmlUi/Core/GeometryUtilities.h"
+#include "../Include/RmlUi/Core/PropertyIdSet.h"
+#include "../Include/RmlUi/Core/StyleSheet.h"
+#include "../Include/RmlUi/Core/URL.h"
+#include "../Source/Core/TextureDatabase.h"
 
 namespace Rml {
 

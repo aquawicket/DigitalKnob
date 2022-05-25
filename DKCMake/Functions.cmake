@@ -2551,18 +2551,21 @@ endfunction()
 
 
 ######### TODO ###########
-function(DKNEWINSTALL url)  # to be renaed to DKIMPORT
-	
-	string(REPLACE "/" ";" url_list ${url})  #split url path into list
-	#foreach(item ${url_list})
-	#	DKDEBUG("item = ${item}")
-	#endforeach()
-	
+##
+##   DKIMPORT(url) #args
+##  
+##  github GIT:  https://github.com/orginization/library.git    DKIMPORT_GITHUB(url) #branch #PATCH
+##  github DL:   https://github.com/orginization/library        DKIMPORT_GITHUB(url) #lib #id #PATCH
+##  lib url DL:  https://website.com/library.zip                DKIMPORT_DL(url) #lib #id #PATCH
+##  exe url DL:  https://website.com/executable.exe				DKIMPORT_DL(url) #lib #id #PATCH
+
+function(DKGITCLONE url)  # to be renaed to DKIMPORT
+	DKIMPORT_GITHUB(${ARGV})
 endfunction()
 #############
 
 
-function(DKGITCLONE url)
+function(DKIMPORT_GITHUB url) #branch #PATCH
 
 	string(REPLACE "/" ";" url_list ${url})  #split url path into list
 	#foreach(item ${url_list})
@@ -2571,16 +2574,17 @@ function(DKGITCLONE url)
 	
 	list(LENGTH url_list url_list_size)
 	#DKDEBUG("url_list is ${url_list_size}")
-	
+
+	# GITHUB
 	if(${url_list_size} LESS 5)
 		DKERROR("url_list doesn't contain enough elements to have a 'orginization/library'")
 		return()
 	endif()	
 	
-	set(version "master")
+	set(branch "master")
 	if(${ARGC} GREATER 1)
 		if(NOT "${ARGV1}" STREQUAL "PATCH")
-			set(version "${ARGV1}")
+			set(branch "${ARGV1}")
 		endif()
 	endif()
 	
@@ -2642,14 +2646,14 @@ function(DKGITCLONE url)
 	endif()
 	DKDEBUG("${LIBVAR}_FOLDER = ${${LIBVAR}_FOLDER}")
 	
-	DKSET(${LIBVAR}_VERSION ${version})
-	if(NOT ${LIBVAR}_VERSION)
-		DKINFO("${LIBVAR}_VERSION is invalid")
+	DKSET(${LIBVAR}_BRANCH ${branch})
+	if(NOT ${LIBVAR}_BRANCH)
+		DKINFO("${LIBVAR}_BRANCH is invalid")
 		return()
 	endif()
-	DKDEBUG("${LIBVAR}_VERSION = ${${LIBVAR}_VERSION}")
+	DKDEBUG("${LIBVAR}_BRANCH = ${${LIBVAR}_BRANCH}")
 	
-	DKSET(${LIBVAR}_NAME ${FOLDER}-${${LIBVAR}_VERSION})
+	DKSET(${LIBVAR}_NAME ${FOLDER}-${${LIBVAR}_BRANCH})
 	if(NOT ${LIBVAR}_NAME)
 		DKINFO("${LIBVAR}_NAME is invalid")
 		return()
@@ -2674,7 +2678,7 @@ function(DKGITCLONE url)
 	endif()
 	DKSET(CURRENT_DIR ${${LIBVAR}})
 	DKCOMMAND("git checkout -- .")
-	DKCOMMAND("git checkout ${version}")
+	DKCOMMAND("git checkout ${branch}")
 	DKCOMMAND("git pull")
 	
 	set(arg_list "${ARGN}")
@@ -2818,12 +2822,12 @@ function(DKIMPORT url) #Lib #ID #Patch
 	endif()
 		
 	############################################
-	DKSET(${LIBVAR}_VERSION ${ID})
-	DKSET(${LIBVAR}_NAME ${FOLDER}-${${LIBVAR}_VERSION})
+	DKSET(${LIBVAR}_BRANCH ${ID})
+	DKSET(${LIBVAR}_NAME ${FOLDER}-${${LIBVAR}_BRANCH})
 	DKSET(${LIBVAR} ${3RDPARTY}/${${LIBVAR}_NAME})
 	
-	if(${LIBVAR} AND ${LIBVAR}_VERSION AND ${LIBVAR}_NAME AND ${LIBVAR}_DL)
-		DKDEBUG("${LIBVAR}_VERSION = ${${LIBVAR}_VERSION}") 
+	if(${LIBVAR} AND ${LIBVAR}_BRANCH AND ${LIBVAR}_NAME AND ${LIBVAR}_DL)
+		DKDEBUG("${LIBVAR}_BRANCH = ${${LIBVAR}_BRANCH}") 
 		DKDEBUG("${LIBVAR}_DL = ${${LIBVAR}_DL}")
 		DKDEBUG("${LIBVAR}_NAME = ${${LIBVAR}_NAME}")
 		DKDEBUG("${LIBVAR} = ${${LIBVAR}}") 

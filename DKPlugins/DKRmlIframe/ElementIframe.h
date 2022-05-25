@@ -1,11 +1,11 @@
 #ifndef ELEMENTIFRAME_H
 #define ELEMENTIFRAME_H
 
-#include "../../../Include/RmlUi/Core/Header.h"
-#include "../../../Include/RmlUi/Core/Element.h"
-#include "../../../Include/RmlUi/Core/Geometry.h"
-#include "../../../Include/RmlUi/Core/Texture.h"
-#include "../../../Include/RmlUi/Core/Spritesheet.h"
+#include "../Include/RmlUi/Core/Header.h"
+#include "../Include/RmlUi/Core/Element.h"
+#include "../Include/RmlUi/Core/Geometry.h"
+#include "../Include/RmlUi/Core/Texture.h"
+#include "../Include/RmlUi/Core/Spritesheet.h"
 
 namespace Rml {
 
