@@ -1,7 +1,7 @@
 #ifndef DKRMLIFRAMEINSTANCER_H
 #define DKRMLIFRAMEINSTANCER_H
 
-#include "DKRmlIframe/ElementIframe.h"
+//#include "DKRmlIframe/ElementIframe.h"
 #include "../include/RmlUi/Core/ElementInstancer.h"
 
 
@@ -10,10 +10,10 @@
 	is typically used for specialized element types.
  */
 
-class ElementInstancerIframe : public Rml::ElementInstancer
+class ElementIframeInstancer : public Rml::ElementInstancer
 {
 public:
-	~ElementInstancerIframe() {}
+	~ElementIframeInstancer() {}
 
 	// Instances an element given the tag name and attributes.
 	// @param[in] parent The element the new element is destined to be parented to.
