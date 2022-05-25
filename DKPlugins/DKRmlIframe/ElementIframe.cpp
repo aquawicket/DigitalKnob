@@ -26,7 +26,7 @@
  *
  */
 
-#include "ElementImage.h"
+#include "ElementIframe.h"
 #include "../../../Include/RmlUi/Core/ComputedValues.h"
 #include "../../../Include/RmlUi/Core/ElementDocument.h"
 #include "../../../Include/RmlUi/Core/ElementUtilities.h"
@@ -38,20 +38,20 @@
 
 namespace Rml {
 
-// Constructs a new ElementImage.
-ElementImage::ElementImage(const String& tag) : Element(tag), dimensions(-1, -1), rect_source(RectSource::None), geometry(this)
+// Constructs a new ElementIframe.
+ElementIframe::ElementIframe(const String& tag) : Element(tag), dimensions(-1, -1), rect_source(RectSource::None), geometry(this)
 {
 	dimensions_scale = 1.0f;
 	geometry_dirty = false;
 	texture_dirty = true;
 }
 
-ElementImage::~ElementImage()
+ElementIframe::~ElementIframe()
 {
 }
 
 // Sizes the box to the element's inherent size.
-bool ElementImage::GetIntrinsicDimensions(Vector2f& _dimensions, float& _ratio)
+bool ElementIframe::GetIntrinsicDimensions(Vector2f& _dimensions, float& _ratio)
 {
 	// Check if we need to reload the texture.
 	if (texture_dirty)
@@ -84,7 +84,7 @@ bool ElementImage::GetIntrinsicDimensions(Vector2f& _dimensions, float& _ratio)
 }
 
 // Renders the element.
-void ElementImage::OnRender()
+void ElementIframe::OnRender()
 {
 	// Regenerate the geometry if required (this will be set if 'rect' changes but does not result in a resize).
 	if (geometry_dirty)
@@ -95,7 +95,7 @@ void ElementImage::OnRender()
 }
 
 // Called when attributes on the element are changed.
-void ElementImage::OnAttributeChange(const ElementAttributes& changed_attributes)
+void ElementIframe::OnAttributeChange(const ElementAttributes& changed_attributes)
 {
 	// Call through to the base element's OnAttributeChange().
 	Element::OnAttributeChange(changed_attributes);
@@ -133,7 +133,7 @@ void ElementImage::OnAttributeChange(const ElementAttributes& changed_attributes
 		DirtyLayout();
 }
 
-void ElementImage::OnPropertyChange(const PropertyIdSet& changed_properties)
+void ElementIframe::OnPropertyChange(const PropertyIdSet& changed_properties)
 {
     Element::OnPropertyChange(changed_properties);
 
@@ -143,7 +143,7 @@ void ElementImage::OnPropertyChange(const PropertyIdSet& changed_properties)
     }
 }
 
-void ElementImage::OnChildAdd(Element* child)
+void ElementIframe::OnChildAdd(Element* child)
 {
 	// Load the texture once we have attached to the document so that it can immediately be found during the call to `Rml::GetTextureSourceList`. The
 	// texture won't actually be loaded from the backend before it is shown. However, only do this if we have an active context so that the dp-ratio
@@ -155,18 +155,18 @@ void ElementImage::OnChildAdd(Element* child)
 }
 
 // Regenerates the element's geometry.
-void ElementImage::OnResize()
+void ElementIframe::OnResize()
 {
 	GenerateGeometry();
 }
 
-void ElementImage::OnDpRatioChange()
+void ElementIframe::OnDpRatioChange()
 {
 	texture_dirty = true;
 	DirtyLayout();
 }
 
-void ElementImage::OnStyleSheetChange()
+void ElementIframe::OnStyleSheetChange()
 {
 	if (HasAttribute("sprite"))
 	{
@@ -175,7 +175,7 @@ void ElementImage::OnStyleSheetChange()
 	}
 }
 
-void ElementImage::GenerateGeometry()
+void ElementIframe::GenerateGeometry()
 {
 	// Release the old geometry before specifying the new vertices.
 	geometry.Release(true);
@@ -221,7 +221,7 @@ void ElementImage::GenerateGeometry()
 	geometry_dirty = false;
 }
 
-bool ElementImage::LoadTexture()
+bool ElementIframe::LoadTexture()
 {
 	texture_dirty = false;
 	geometry_dirty = true;
@@ -287,7 +287,7 @@ bool ElementImage::LoadTexture()
 	return true;
 }
 
-void ElementImage::UpdateRect()
+void ElementIframe::UpdateRect()
 {
 	if(rect_source != RectSource::Sprite)
 	{

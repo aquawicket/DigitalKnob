@@ -26,14 +26,14 @@
  *
  */
 
-#ifndef RMLUI_CORE_ELEMENTS_ELEMENTIMAGE_H
-#define RMLUI_CORE_ELEMENTS_ELEMENTIMAGE_H
+#ifndef RMLUI_CORE_ELEMENTS_ElementIframe_H
+#define RMLUI_CORE_ELEMENTS_ElementIframe_H
 
-#include "../../../Include/RmlUi/Core/Header.h"
-#include "../../../Include/RmlUi/Core/Element.h"
-#include "../../../Include/RmlUi/Core/Geometry.h"
-#include "../../../Include/RmlUi/Core/Texture.h"
-#include "../../../Include/RmlUi/Core/Spritesheet.h"
+#include "../Include/RmlUi/Core/Header.h"
+#include "../Include/RmlUi/Core/Element.h"
+#include "../Include/RmlUi/Core/Geometry.h"
+#include "../Include/RmlUi/Core/Texture.h"
+#include "../Include/RmlUi/Core/Spritesheet.h"
 
 namespace Rml {
 
@@ -62,15 +62,15 @@ namespace Rml {
 	@author Peter Curry
  */
 
-class RMLUICORE_API ElementImage : public Element
+class RMLUICORE_API ElementIframe : public Element
 {
 public:
-	RMLUI_RTTI_DefineWithParent(ElementImage, Element)
+	RMLUI_RTTI_DefineWithParent(ElementIframe, Element)
 
-	/// Constructs a new ElementImage. This should not be called directly; use the Factory instead.
+	/// Constructs a new ElementIframe. This should not be called directly; use the Factory instead.
 	/// @param[in] tag The tag the element was declared as in RML.
-	ElementImage(const String& tag);
-	virtual ~ElementImage();
+	ElementIframe(const String& tag);
+	virtual ~ElementIframe();
 
 	/// Returns the element's inherent size.
 	bool GetIntrinsicDimensions(Vector2f& dimensions, float& ratio) override;
