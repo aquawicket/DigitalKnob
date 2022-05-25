@@ -1,6 +1,7 @@
 #include "DK/stdafx.h"
-#include "DKRmlIframe/DKRmlIframe.h"
 
+#include "DKRmlIframe/DKRmlIframe.h"
+#include "DKRMLIframe/ElementIframeInstancer.h"
 
 bool DKRmlIframe::Init()
 {
