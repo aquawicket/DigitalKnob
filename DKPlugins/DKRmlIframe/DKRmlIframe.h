@@ -1,10 +1,15 @@
 #pragma once
 #ifndef DKRmlIframe_H
 #define DKRmlIframe_H
-#include "DKRml/DKRml.h"
+
+#include "DKRmlIframe/DKRmlIframe.h"
 #include "DKRmlIframe/ElementIframe.h"
 #include "DKRmlIframe/ElementIframeInstancer.h"
-#include "../include/RmlUi/Core/ElementInstancer.h"
+
+#include "DKRml/DKRml.h"
+#include "../Include/RmlUi/Core/ElementInstancer.h"
+#include "../Include/RmlUi/Core/Element.h"
+
 
 class DKRmlIframe : public DKObjectT<DKRmlIframe>
 {

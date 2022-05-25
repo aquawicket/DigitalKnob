@@ -7,6 +7,8 @@
 
 Rml::FileHandle DKRmlFile::Open(const Rml::String& path){
 	DKDEBUGFUNC("path");
+	if(path.empty())
+		return DKERROR("path invalid");
 
 	DKString _url = path;
 	
