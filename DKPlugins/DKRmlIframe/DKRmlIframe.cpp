@@ -5,16 +5,15 @@
 #include "../include/RmlUi/Core/ElementInstancer.h"
 
 
-bool DKRocketIframe::Init()
+bool DKRmlIframe::Init()
 {
 	DKDEBUGFUNC();
 	auto iframe_instancer = std::make_unique< Rml::ElementInstancerGeneric< Rml::ElementIframe > >();
 	Rml::Factory::RegisterElementInstancer("iframe", iframe_instancer.get());
-
 	return true;
 }
 
-bool DKRocketIframe::End()
+bool DKRmlIframe::End()
 {
 	DKDEBUGFUNC();
 	return true;

@@ -1,14 +1,14 @@
 #pragma once
-#ifndef DKRocketIframe_H
-#define DKRocketIframe_H
+#ifndef DKRmlIframe_H
+#define DKRmlIframe_H
 #include "DKRml/DKRml.h"
 
-class DKRocketIframe : /*public Rocket::Core::EventListener,*/ public DKObjectT<DKRocketIframe>
+class DKRmlIframe : /*public Rocket::Core::EventListener,*/ public DKObjectT<DKRmlIframe>
 {
 public:
 	bool Init();
 	bool End();
 };
 
-REGISTER_OBJECT(DKRocketIframe, true)
+REGISTER_OBJECT(DKRmlIframe, true)
 #endif //DKRocketIframe_H
