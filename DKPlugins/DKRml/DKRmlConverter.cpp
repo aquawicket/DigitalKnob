@@ -163,57 +163,92 @@ bool DKRmlConverter::PostProcess(Rml::Element* element) {
 	Rml::Element* doc = DKRml::Get()->document;
 	if(element != doc && element->GetParentNode())
 		element = element->GetParentNode();
+
 	// Create cef contexts for iFrames
 	Rml::ElementList iframes;
 	Rml::ElementUtilities::GetElementsByTagName(iframes, element, "iframe");
 	for(unsigned int i=0; i<iframes.size(); ++i){
 		if(iframes[i]->HasChildNodes())
-			continue;
+			continue; //aready processed
 		DKString id = iframes[i]->GetId();
 		if(has(processed, id))
-			continue;
-		DKString iTop = toString(iframes[i]->GetAbsoluteTop());
-		DKString iLeft = toString(iframes[i]->GetAbsoluteLeft());
-		DKString iWidth = toString(iframes[i]->GetClientWidth());
-		DKString iHeight = toString(iframes[i]->GetClientHeight());
-		//DKString iWidth = toString(iframes[i]->GetOffsetWidth());
-		//DKString iHeight = toString(iframes[i]->GetOffsetHeight());
-		DKString url;
+			continue; //allready processed
+
+		DKString absoluteTop  = toString(iframes[i]->GetAbsoluteTop());
+		DKString absoluteLeft = toString(iframes[i]->GetAbsoluteLeft());
+		DKString clientTop    = toString(iframes[i]->GetClientTop());
+		DKString clientLeft   = toString(iframes[i]->GetClientLeft());
+		DKString clientWidth  = toString(iframes[i]->GetClientWidth());
+		DKString clientHeight = toString(iframes[i]->GetClientHeight());
+		DKString offsetTop    = toString(iframes[i]->GetOffsetTop());
+		DKString offsetLeft   = toString(iframes[i]->GetOffsetLeft());
+		DKString offsetWidth  = toString(iframes[i]->GetOffsetWidth());
+		DKString offsetHeight = toString(iframes[i]->GetOffsetHeight());
+		DKString srollTop     = toString(iframes[i]->GetScrollTop());
+		DKString srollLeft    = toString(iframes[i]->GetScrollLeft());
+		DKString srollWidth   = toString(iframes[i]->GetScrollWidth());
+		DKString srollHeight  = toString(iframes[i]->GetScrollHeight());
+		DKString top          = element->GetProperty("top")->ToString();
+		DKString bottom       = element->GetProperty("bottom")->ToString();
+		DKString left         = element->GetProperty("left")->ToString();
+		DKString right        = element->GetProperty("right")->ToString();
+		DKString width        = element->GetProperty("width")->ToString();
+		DKString height       = element->GetProperty("height")->ToString();
+
+		DKString src;
 		if(!iframes[i]->GetAttribute("src"))
 			 return DKERROR("iframe has no source tag\n");
-		url = iframes[i]->GetAttribute("src")->Get<Rml::String>();
+		src = iframes[i]->GetAttribute("src")->Get<Rml::String>();
+		
 		DKClass::DKCreate("DKCef");
 		//DKEvents::AddEvent(id, "resize", &DKRmlConverter::ResizeIframe, this);
 		//DKEvents::AddEvent(id, "mouseover", &DKRmlConverter::MouseOverIframe, this);
 		//DKEvents::AddEvent(id, "click", &DKRmlConverter::ClickIframe, this);
 		DKString tag = "img";
 		//Rml::Element* doc = DKRml::Get()->document; //unused code
-		Rml::Element* cef_texture  = iframes[i]->AppendChild(DKRml::Get()->document->CreateElement(tag.c_str()), true);
+		Rml::Element* cef_img  = iframes[i]->AppendChild(DKRml::Get()->document->CreateElement(tag.c_str()), true);
 
-		DKString iTopB = toString(iframes[i]->GetAbsoluteTop());
-		DKString iLeftB = toString(iframes[i]->GetAbsoluteLeft());
-		DKString iWidthB = toString(iframes[i]->GetClientWidth());
-		DKString iHeightB = toString(iframes[i]->GetClientHeight());
+		DKString cefAbsoluteTop = toString(cef_img->GetAbsoluteTop());
+		DKString cefAbsoluteLeft = toString(cef_img->GetAbsoluteLeft());
+		DKString cefClientTop = toString(cef_img->GetClientTop());
+		DKString cefClientLeft = toString(cef_img->GetClientLeft());
+		DKString cefClientWidth = toString(cef_img->GetClientWidth());
+		DKString cefClientHeight = toString(cef_img->GetClientHeight());
+		DKString cefOffsetTop = toString(cef_img->GetOffsetTop());
+		DKString cefOffsetLeft = toString(cef_img->GetOffsetLeft());
+		DKString cefOffsetWidth = toString(cef_img->GetOffsetWidth());
+		DKString cefOffsetHeight = toString(cef_img->GetOffsetHeight());
+		DKString cefSrollTop = toString(cef_img->GetScrollTop());
+		DKString cefSrollLeft = toString(cef_img->GetScrollLeft());
+		DKString cefSrollWidth = toString(cef_img->GetScrollWidth());
+		DKString cefSrollHeight = toString(cef_img->GetScrollHeight());
+		DKString cefTop = element->GetProperty("top")->ToString();
+		DKString cefBottom = element->GetProperty("bottom")->ToString();
+		DKString cefLeft = element->GetProperty("left")->ToString();
+		DKString cefRight = element->GetProperty("right")->ToString();
+		DKString cefWidth = element->GetProperty("width")->ToString();
+		DKString cefHeight = element->GetProperty("height")->ToString();
 
 
-		if(!cef_texture)
-			return DKERROR("cef_texture invalid\n");
+		if(!cef_img)
+			return DKERROR("cef_img invalid\n");
 		DKString cef_id = "iframe_"+id;
-		cef_texture->SetAttribute("id", cef_id.c_str());
+		cef_img->SetAttribute("id", cef_id.c_str());
 		//This is what RmlSDL2Renderer::LoadTexture and RmlSDL2Renderer::RenderGeometry
 		//use to detect if the texture is a cef image. If will contain a iframe_ in the src.
-		cef_texture->SetAttribute("src", cef_id.c_str());
-		//cef_texture->SetProperty("top", "0rem");
-		//cef_texture->SetProperty("bottom", "0rem");
-		//cef_texture->SetProperty("left", "0rem");
-		//cef_texture->SetProperty("right", "0rem");
-		cef_texture->SetProperty("width", "100%");
-		cef_texture->SetProperty("height", "100%");
-		DKString data = id+","+iTop+","+iLeft+","+iWidth+","+iHeight+","+url;
+		cef_img->SetAttribute("src", cef_id.c_str());
+		//cef_img->SetProperty("top", "0rem");
+		//cef_img->SetProperty("bottom", "0rem");
+		//cef_img->SetProperty("left", "0rem");
+		//cef_img->SetProperty("right", "0rem");
+		cef_img->SetProperty("width", "100%");
+		cef_img->SetProperty("height", "100%");
+		DKString data = id+","+absoluteTop+","+absoluteLeft+","+clientWidth+","+clientHeight+","+src;
 		DKClass::CallFunc("DKCef::NewBrowser", &data, NULL);
 		//DKClass::CallFunc("DKSDLCef::OnResize", &data, NULL); //call OnResize in DKCef window handler
 		processed += id+",";
 	}
+
 	// <a> tags with href attribute
 	Rml::ElementList aElements;
 	Rml::ElementUtilities::GetElementsByTagName(aElements, element, "a");
