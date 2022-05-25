@@ -42,7 +42,7 @@ namespace Rml {
 	@author Peter Curry
  */
 
-class RMLUICORE_API ElementIframe : public Element
+class ElementIframe : public Element
 {
 public:
 	RMLUI_RTTI_DefineWithParent(ElementIframe, Element)
