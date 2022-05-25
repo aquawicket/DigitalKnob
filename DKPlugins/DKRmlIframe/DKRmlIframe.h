@@ -3,7 +3,7 @@
 #define DKRmlIframe_H
 #include "DKRml/DKRml.h"
 
-class DKRmlIframe : /*public Rocket::Core::EventListener,*/ public DKObjectT<DKRmlIframe>
+class DKRmlIframe : public DKObjectT<DKRmlIframe>
 {
 public:
 	bool Init();
