@@ -77,6 +77,10 @@ bool DKRml::Init(){
 	Rml::Factory::RegisterElementInstancer("body", new Rml::ElementInstancerElement);
 	Rml::XMLParser::RegisterNodeHandler("body", std::make_shared<Rml::XMLNodeHandlerDefault>());
 	
+	// Make sure custom_instancer is kept alive until after the call to Rml::Shutdown
+	//auto custom_instancer = std::make_unique< Rml::ElementInstancerGeneric< CustomElement > >();
+	//Rml::Factory::RegisterElementInstancer("custom", custom_instancer.get());
+
 	DKString html;
 	DKString workingPath = DKFile::local_assets;
 	DKFile::FileToString(workingPath +"DKRml/blank.html", html);
