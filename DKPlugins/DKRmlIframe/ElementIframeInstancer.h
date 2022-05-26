@@ -19,8 +19,8 @@ public:
 		geometry_dirty = false;
 		texture_dirty = true;
 	}
-	ElementIframe::~ElementIframe(){
-	}
+
+	ElementIframe::~ElementIframe(){}
 
 	/*
 	// Sizes the box to the element's inherent size.
@@ -84,6 +84,7 @@ public:
 		if (dirty_layout)
 			DirtyLayout();
 	}
+
 	void ElementIframe::OnPropertyChange(const Rml::PropertyIdSet& changed_properties){
 		/*
 		Element::OnPropertyChange(changed_properties);
@@ -91,6 +92,7 @@ public:
 			GenerateGeometry();
 		*/
 	}
+
 	void ElementIframe::OnChildAdd(Element* child){
 		/*
 		// Load the texture once we have attached to the document so that it can immediately be found during the call to `Rml::GetTextureSourceList`. The
@@ -100,15 +102,18 @@ public:
 			LoadTexture();
 		*/
 	}
+
 	void ElementIframe::OnResize(){ // Regenerates the element's geometry.
 		//GenerateGeometry();
 	}
+
 	void ElementIframe::OnDpRatioChange(){
 		/*
 		texture_dirty = true;
 		DirtyLayout();
 		*/
 	}
+
 	void ElementIframe::OnStyleSheetChange(){
 		/*
 		if (HasAttribute("sprite")){
@@ -117,6 +122,7 @@ public:
 		}
 		*/
 	}
+
 	void ElementIframe::GenerateGeometry(){
 		/*
 		// Release the old geometry before specifying the new vertices.
@@ -151,6 +157,7 @@ public:
 		geometry_dirty = false;
 		*/
 	}
+
 	bool ElementIframe::LoadTexture(){
 		/*
 		texture_dirty = false;
@@ -200,6 +207,7 @@ public:
 		*/
 		return true;
 	}
+
 	void ElementIframe::UpdateRect(){
 		/*
 		if (rect_source != RectSource::Sprite){
@@ -229,6 +237,7 @@ public:
 		}
 		*/
 	}
+
 	Rml::Texture texture; // The texture this element is rendering from.
 	bool texture_dirty; // True if we need to refetch the texture's source from the element's attributes.
 	float dimensions_scale; // A factor which scales the intrinsic dimensions based on the dp-ratio and image scale.
@@ -253,10 +262,8 @@ public:
 		RMLUI_UNUSED(parent);
 		RMLUI_UNUSED(attributes);
 		RMLUI_ZoneScopedN("ElementIframeInstance");
-		//static Pool< ElementIframe > ele(200, true);
-		//ElementIframe* ptr = ele.AllocateAndConstruct(tag);
-		ElementIframe* ptr = new ElementIframe(tag);
-		return Rml::ElementPtr(static_cast<Rml::Element*>(ptr));
+		ElementIframe* elementIframe = new ElementIframe(tag);
+		return Rml::ElementPtr(static_cast<Rml::Element*>(elementIframe));
 	}
 
 	// Releases an element instanced by this instancer.
