@@ -114,24 +114,24 @@ namespace Rml {
 		}
 		// Regenerates the element's geometry.
 		void ElementIframe::OnResize(){
-			GenerateGeometry();
+			//GenerateGeometry();
 		}
 		void ElementIframe::OnDpRatioChange(){
-			
+			/*
 			texture_dirty = true;
 			DirtyLayout();
-			
+			*/
 		}
 		void ElementIframe::OnStyleSheetChange(){
-			
+			/*
 			if (HasAttribute("sprite")){
 				texture_dirty = true;
 				DirtyLayout();
 			}
-			
+			*/
 		}
 		void ElementIframe::GenerateGeometry(){
-			
+			/*
 			// Release the old geometry before specifying the new vertices.
 			geometry.Release(true);
 			Vector< Vertex >& vertices = geometry.GetVertices();
@@ -162,10 +162,10 @@ namespace Rml {
 			Vector2f quad_size = GetBox().GetSize(Box::CONTENT).Round();
 			GeometryUtilities::GenerateQuad(&vertices[0], &indices[0], Vector2f(0, 0), quad_size, quad_colour, texcoords[0], texcoords[1]);
 			geometry_dirty = false;
-			
+			*/
 		}
 		bool ElementIframe::LoadTexture(){
-			
+			/*
 			texture_dirty = false;
 			geometry_dirty = true;
 			dimensions_scale = 1.0f;
@@ -210,11 +210,11 @@ namespace Rml {
 			}
 			// Set the texture onto our geometry object.
 			geometry.SetTexture(&texture);
-			
+			*/
 			return true;
 		}
 		void ElementIframe::UpdateRect(){
-			
+			/*
 			if (rect_source != RectSource::Sprite){
 				bool valid_rect = false;
 				String rect_string = GetAttribute< String >("rect", "");
@@ -240,7 +240,7 @@ namespace Rml {
 					rect_source = RectSource::None;
 				}
 			}
-			
+			*/
 		}
 		// The texture this element is rendering from.
 		Texture texture;
