@@ -97,20 +97,20 @@ namespace Rml {
 				DirtyLayout();
 		}
 		void ElementIframe::OnPropertyChange(const PropertyIdSet& changed_properties){
-	
+			/*
 			Element::OnPropertyChange(changed_properties);
 			if (changed_properties.Contains(PropertyId::ImageColor) || changed_properties.Contains(PropertyId::Opacity))
 				GenerateGeometry();
-			
+			*/
 		}
 		void ElementIframe::OnChildAdd(Element* child){
-			
+			/*
 			// Load the texture once we have attached to the document so that it can immediately be found during the call to `Rml::GetTextureSourceList`. The
 			// texture won't actually be loaded from the backend before it is shown. However, only do this if we have an active context so that the dp-ratio
 			// can be retrieved. If there is no context now the texture loading will be deferred until the next layout update.
 			if (child == this && texture_dirty && GetContext())
 				LoadTexture();
-			
+			*/
 		}
 		// Regenerates the element's geometry.
 		void ElementIframe::OnResize(){
