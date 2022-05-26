@@ -8,7 +8,7 @@ bool DKRmlIframe::Init()
 	DKDEBUGFUNC();
 	// Make sure custom_instancer is kept alive until after the call to Rml::Shutdown
 	//auto custom_instancer = std::make_unique<Rml::ElementIframeInstancer>();
-	ref = std::make_unique<Rml::ElementIframeInstancer>();
+	ref = std::make_unique<ElementIframeInstancer>();
 
 	Rml::Factory::RegisterElementInstancer("iframe", ref.get());
 

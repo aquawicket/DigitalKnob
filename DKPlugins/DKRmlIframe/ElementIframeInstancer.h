@@ -18,12 +18,12 @@
 #include "../Source/Core/TextureDatabase.h"
 
 
-namespace Rml {
+//namespace Rml {
 	// Iframe Instancer that creates the provided element type using new and delete. This instancer is typically used for specialized element types.
-	class ElementIframe : public Element 
+	class ElementIframe : public Rml::Element 
 	{
 	public:
-		ElementIframe::ElementIframe(const String& tag) : Element(tag), dimensions(-1, -1), rect_source(RectSource::None), geometry(this){
+		ElementIframe::ElementIframe(const Rml::String& tag) : Rml::Element(tag), dimensions(-1, -1), rect_source(RectSource::None), geometry(this){
 			dimensions_scale = 1.0f;
 			geometry_dirty = false;
 			texture_dirty = true;
@@ -73,7 +73,7 @@ namespace Rml {
 		}
 		*/
 		// Called when attributes on the element are changed.
-		void ElementIframe::OnAttributeChange(const ElementAttributes& changed_attributes){
+		void ElementIframe::OnAttributeChange(const Rml::ElementAttributes& changed_attributes){
 			// Call through to the base element's OnAttributeChange().
 			Element::OnAttributeChange(changed_attributes);
 			bool dirty_layout = false;
@@ -96,7 +96,7 @@ namespace Rml {
 			if (dirty_layout)
 				DirtyLayout();
 		}
-		void ElementIframe::OnPropertyChange(const PropertyIdSet& changed_properties){
+		void ElementIframe::OnPropertyChange(const Rml::PropertyIdSet& changed_properties){
 			/*
 			Element::OnPropertyChange(changed_properties);
 			if (changed_properties.Contains(PropertyId::ImageColor) || changed_properties.Contains(PropertyId::Opacity))
@@ -243,24 +243,24 @@ namespace Rml {
 			*/
 		}
 		// The texture this element is rendering from.
-		Texture texture;
+		Rml::Texture texture;
 		// True if we need to refetch the texture's source from the element's attributes.
 		bool texture_dirty;
 		// A factor which scales the intrinsic dimensions based on the dp-ratio and image scale.
 		float dimensions_scale;
 		// The element's computed intrinsic dimensions. If either of these values are set to -1, then
 		// that dimension has not been computed yet.
-		Vector2f dimensions;
+		Rml::Vector2f dimensions;
 		// The rectangle extracted from the sprite or 'rect' attribute. The rect_source will be None if
 		// these have not been specified or are invalid.
-		Rectangle rect;
+		Rml::Rectangle rect;
 		enum class RectSource { None, Attribute, Sprite } rect_source;
 		// The geometry used to render this element.
-		Geometry geometry;
+		Rml::Geometry geometry;
 		bool geometry_dirty;
 	};
 
-	class ElementIframeInstancer : public ElementInstancer 
+	class ElementIframeInstancer : public Rml::ElementInstancer 
 	{
 	public:
 		virtual ~ElementIframeInstancer() {};
@@ -269,22 +269,22 @@ namespace Rml {
 		// @param[in] tag The tag of the element to instance.
 		// @param[in] attributes Dictionary of attributes.
 		// @return A unique pointer to the instanced element.
-		Rml::ElementPtr InstanceElement(Rml::Element* RMLUI_UNUSED_PARAMETER(parent), const String& tag, const XMLAttributes& RMLUI_UNUSED_PARAMETER(attributes)) override{
+		Rml::ElementPtr InstanceElement(Rml::Element* RMLUI_UNUSED_PARAMETER(parent), const Rml::String& tag, const Rml::XMLAttributes& RMLUI_UNUSED_PARAMETER(attributes)) override{
 			RMLUI_UNUSED(parent);
 			RMLUI_UNUSED(attributes);
 			RMLUI_ZoneScopedN("ElementIframeInstance");
 			//static Pool< ElementIframe > ele(200, true);
 			//ElementIframe* ptr = ele.AllocateAndConstruct(tag);
-			Rml::ElementIframe* ptr = new ElementIframe(tag);
-			return ElementPtr(static_cast<Element*>(ptr));
+			ElementIframe* ptr = new ElementIframe(tag);
+			return Rml::ElementPtr(static_cast<Rml::Element*>(ptr));
 		}
 		// Releases an element instanced by this instancer.
 		// @param[in] element The element to release.
-		void ReleaseElement(Element* element) override{
+		void ReleaseElement(Rml::Element* element) override{
 			RMLUI_ZoneScopedN("ElementIframeRelease");
 			delete element;
 		}
 	};
-} //Rml
+//} //Rml
 
 #endif

@@ -11,7 +11,7 @@ public:
 	bool Init();
 	bool End();
 
-	std::shared_ptr<Rml::ElementIframeInstancer> ref;
+	std::shared_ptr<ElementIframeInstancer> ref;
 };
 
 REGISTER_OBJECT(DKRmlIframe, true)
