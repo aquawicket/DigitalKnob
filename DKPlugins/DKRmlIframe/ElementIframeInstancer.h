@@ -1,24 +1,16 @@
 #ifndef DKRMLIFRAMEINSTANCER_H
 #define DKRMLIFRAMEINSTANCER_H
 
-#include "DKRmlIframe/DKRmlIframe.h"
-#include "DKRmlIframe/ElementIframeInstancer.h"
-
 #include "../Include/RmlUi/Core/Element.h"
-#include "../include/RmlUi/Core/ElementInstancer.h"
-#include "../Source/Core/Pool.h"
-#include "../Include/RmlUi/Core/Spritesheet.h"
-#include "../Include/RmlUi/Core/Header.h"
-#include "../Include/RmlUi/Core/Element.h"
-#include "../Include/RmlUi/Core/Geometry.h"
 #include "../Include/RmlUi/Core/Texture.h"
+#include "../Include/RmlUi/Core/ElementInstancer.h"
+#include "../Include/RmlUi/Core/Geometry.h"
 #include "../Include/RmlUi/Core/Spritesheet.h"
-#include "../include/RmlUi/Core/ElementInstancer.h"
-#include "../Include/RmlUi/Core/URL.h"
-#include "../Source/Core/TextureDatabase.h"
 
+//#include "../Include/RmlUi/Core/Header.h"
+//#include "../Include/RmlUi/Core/URL.h"
+//#include "../Source/Core/TextureDatabase.h"
 
-// Iframe Instancer that creates the provided element type using new and delete. This instancer is typically used for specialized element types.
 class ElementIframe : public Rml::Element 
 {
 public:
@@ -29,10 +21,10 @@ public:
 	}
 	ElementIframe::~ElementIframe(){
 	}
+
 	/*
 	// Sizes the box to the element's inherent size.
-		bool ElementIframe::GetIntrinsicDimensions(Vector2f& _dimensions, float& _ratio){
-		
+	bool ElementIframe::GetIntrinsicDimensions(Vector2f& _dimensions, float& _ratio){
 		// Check if we need to reload the texture.
 		if (texture_dirty)
 			LoadTexture();
@@ -58,6 +50,7 @@ public:
 		return true;
 	}
 	*/
+
 	/*
 	// Renders the element.
 	void ElementIframe::OnRender(){
@@ -68,19 +61,18 @@ public:
 		geometry.Render(GetAbsoluteOffset(Box::CONTENT));
 	}
 	*/
+
 	// Called when attributes on the element are changed.
 	void ElementIframe::OnAttributeChange(const Rml::ElementAttributes& changed_attributes){
 		// Call through to the base element's OnAttributeChange().
 		Element::OnAttributeChange(changed_attributes);
 		bool dirty_layout = false;
-		// Check for a changed 'src' attribute. If this changes, the old texture handle is released,
-		// forcing a reload when the layout is regenerated.
+		// Check for a changed 'src' attribute. If this changes, the old texture handle is released, forcing a reload when the layout is regenerated.
 		if (changed_attributes.find("src") != changed_attributes.end() || changed_attributes.find("sprite") != changed_attributes.end()){
 			texture_dirty = true;
 			dirty_layout = true;
 		}
-		// Check for a changed 'width' attribute. If this changes, a layout is forced which will
-		// recalculate the dimensions.
+		// Check for a changed 'width' attribute. If this changes, a layout is forced which will recalculate the dimensions.
 		if (changed_attributes.find("width") != changed_attributes.end() || changed_attributes.find("height") != changed_attributes.end())
 			dirty_layout = true;
 		// Check for a change to the 'rect' attribute. If this changes, the coordinates are
@@ -108,8 +100,7 @@ public:
 			LoadTexture();
 		*/
 	}
-	// Regenerates the element's geometry.
-	void ElementIframe::OnResize(){
+	void ElementIframe::OnResize(){ // Regenerates the element's geometry.
 		//GenerateGeometry();
 	}
 	void ElementIframe::OnDpRatioChange(){
@@ -238,20 +229,12 @@ public:
 		}
 		*/
 	}
-	// The texture this element is rendering from.
-	Rml::Texture texture;
-	// True if we need to refetch the texture's source from the element's attributes.
-	bool texture_dirty;
-	// A factor which scales the intrinsic dimensions based on the dp-ratio and image scale.
-	float dimensions_scale;
-	// The element's computed intrinsic dimensions. If either of these values are set to -1, then
-	// that dimension has not been computed yet.
-	Rml::Vector2f dimensions;
-	// The rectangle extracted from the sprite or 'rect' attribute. The rect_source will be None if
-	// these have not been specified or are invalid.
-	Rml::Rectangle rect;
-	enum class RectSource { None, Attribute, Sprite } rect_source;
-	// The geometry used to render this element.
+	Rml::Texture texture; // The texture this element is rendering from.
+	bool texture_dirty; // True if we need to refetch the texture's source from the element's attributes.
+	float dimensions_scale; // A factor which scales the intrinsic dimensions based on the dp-ratio and image scale.
+	Rml::Vector2f dimensions; // The element's computed intrinsic dimensions. If either of these values are set to -1, then that dimension has not been computed yet.
+	Rml::Rectangle rect; // The rectangle extracted from the sprite or 'rect' attribute. The rect_source will be None if these have not been specified or are invalid.
+	enum class RectSource { None, Attribute, Sprite } rect_source; // The geometry used to render this element.
 	Rml::Geometry geometry;
 	bool geometry_dirty;
 };
@@ -260,6 +243,7 @@ class ElementIframeInstancer : public Rml::ElementInstancer
 {
 public:
 	virtual ~ElementIframeInstancer() {};
+
 	// Instances an element given the tag name and attributes.
 	// @param[in] parent The element the new element is destined to be parented to.
 	// @param[in] tag The tag of the element to instance.
@@ -274,6 +258,7 @@ public:
 		ElementIframe* ptr = new ElementIframe(tag);
 		return Rml::ElementPtr(static_cast<Rml::Element*>(ptr));
 	}
+
 	// Releases an element instanced by this instancer.
 	// @param[in] element The element to release.
 	void ReleaseElement(Rml::Element* element) override{
