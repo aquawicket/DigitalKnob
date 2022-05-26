@@ -1,27 +1,14 @@
 #include "DK/stdafx.h"
-
 #include "DKRmlIframe/DKRmlIframe.h"
 
-
-bool DKRmlIframe::Init()
-{
+bool DKRmlIframe::Init(){
 	DKDEBUGFUNC();
-	// Make sure custom_instancer is kept alive until after the call to Rml::Shutdown
-	//auto custom_instancer = std::make_unique<Rml::ElementIframeInstancer>();
-	ref = std::make_unique<ElementIframeInstancer>();
-
+	ref = std::make_unique<ElementIframeInstancer>(); // Make sure custom_instancer is kept alive until after the call to Rml::Shutdown
 	Rml::Factory::RegisterElementInstancer("iframe", ref.get());
-
-	// Make sure custom_instancer is kept alive until after the call to Rml::Shutdown
-	//auto custom_instancer = std::make_unique< Rml::ElementInstancerGeneric< Rml::ElementIframe > >();
-	//Rml::Factory::RegisterElementInstancer("iframe", custom_instancer.get());
-
-
 	return true;
 }
 
-bool DKRmlIframe::End()
-{
+bool DKRmlIframe::End(){
 	DKDEBUGFUNC();
 	return true;
 }

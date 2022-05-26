@@ -10,7 +10,6 @@ class DKRmlIframe : public DKObjectT<DKRmlIframe>
 public:
 	bool Init();
 	bool End();
-
 	std::shared_ptr<ElementIframeInstancer> ref;
 };
 
