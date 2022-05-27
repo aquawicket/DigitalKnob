@@ -1,5 +1,5 @@
-#ifndef RmlElementInstancer_H
-#define RmlElementInstancer_H
+#ifndef DKRmlElementInstancer_H
+#define DKRmlElementInstancer_H
 
 #include "../Include/RmlUi/Core/ComputedValues.h"
 #include "../Include/RmlUi/Core/Element.h"
@@ -257,4 +257,4 @@ public:
 	}
 };
 
-#endif //RmlElementInstancer
+#endif //DKRmlElementInstancer
