@@ -24,6 +24,7 @@ bool DKRml::Init(){
 	DKClass::DKCreate("DKRmlV8");
 
 	DKClass::DKCreate("DKRmlIframe");
+	DKClass::DKCreate("DKRmlElement");
 
 	document = NULL;
 	if(!dkRmlFile){ 
