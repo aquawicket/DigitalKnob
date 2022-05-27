@@ -1,5 +1,5 @@
-#ifndef RmlElementInstancer_H
-#define RmlElementInstancer_H
+#ifndef RmlIframeInstancer_H
+#define RmlIframeInstancer_H
 
 #include "../Include/RmlUi/Core/ComputedValues.h"
 #include "../Include/RmlUi/Core/Element.h"
@@ -12,19 +12,19 @@
 #include "../Include/RmlUi/Core/StyleSheet.h"
 #include "../Include/RmlUi/Core/URL.h"
 
-class RmlElement : public Rml::Element 
+class RmlIframe : public Rml::Element 
 {
 public:
-	RmlElement::RmlElement(const Rml::String& tag) : Rml::Element(tag), dimensions(-1, -1), rect_source(RectSource::None), geometry(this){
+	RmlIframe::RmlIframe(const Rml::String& tag) : Rml::Element(tag), dimensions(-1, -1), rect_source(RectSource::None), geometry(this){
 		dimensions_scale = 1.0f;
 		geometry_dirty = false;
 		texture_dirty = true;
 	}
 
-	RmlElement::~RmlElement(){}
+	RmlIframe::~RmlIframe(){}
 
 	// Sizes the box to the element's inherent size.
-	bool RmlElement::GetIntrinsicDimensions(Rml::Vector2f& _dimensions, float& _ratio){
+	bool RmlIframe::GetIntrinsicDimensions(Rml::Vector2f& _dimensions, float& _ratio){
 		// Check if we need to reload the texture.
 		if (texture_dirty)
 			LoadTexture();
@@ -51,7 +51,7 @@ public:
 	}
 
 	// Renders the element.
-	void RmlElement::OnRender(){
+	void RmlIframe::OnRender(){
 		// Regenerate the geometry if required (this will be set if 'rect' changes but does not result in a resize).
 		if (geometry_dirty)
 			GenerateGeometry();
@@ -60,7 +60,7 @@ public:
 	}
 
 	// Called when attributes on the element are changed.
-	void RmlElement::OnAttributeChange(const Rml::ElementAttributes& changed_attributes){
+	void RmlIframe::OnAttributeChange(const Rml::ElementAttributes& changed_attributes){
 		// Call through to the base element's OnAttributeChange().
 		Element::OnAttributeChange(changed_attributes);
 		bool dirty_layout = false;
@@ -82,13 +82,13 @@ public:
 			DirtyLayout();
 	}
 
-	void RmlElement::OnPropertyChange(const Rml::PropertyIdSet& changed_properties){
+	void RmlIframe::OnPropertyChange(const Rml::PropertyIdSet& changed_properties){
 		Element::OnPropertyChange(changed_properties);
 		if (changed_properties.Contains(Rml::PropertyId::ImageColor) || changed_properties.Contains(Rml::PropertyId::Opacity))
 			GenerateGeometry();
 	}
 
-	void RmlElement::OnChildAdd(Element* child){
+	void RmlIframe::OnChildAdd(Element* child){
 		// Load the texture once we have attached to the document so that it can immediately be found during the call to `Rml::GetTextureSourceList`. The
 		// texture won't actually be loaded from the backend before it is shown. However, only do this if we have an active context so that the dp-ratio
 		// can be retrieved. If there is no context now the texture loading will be deferred until the next layout update.
@@ -96,23 +96,23 @@ public:
 			LoadTexture();
 	}
 
-	void RmlElement::OnResize(){ // Regenerates the element's geometry.
+	void RmlIframe::OnResize(){ // Regenerates the element's geometry.
 		GenerateGeometry();
 	}
 
-	void RmlElement::OnDpRatioChange(){
+	void RmlIframe::OnDpRatioChange(){
 		texture_dirty = true;
 		DirtyLayout();
 	}
 
-	void RmlElement::OnStyleSheetChange(){
+	void RmlIframe::OnStyleSheetChange(){
 		if (HasAttribute("sprite")){
 			texture_dirty = true;
 			DirtyLayout();
 		}
 	}
 
-	void RmlElement::GenerateGeometry(){
+	void RmlIframe::GenerateGeometry(){
 		// Release the old geometry before specifying the new vertices.
 		geometry.Release(true);
 		Rml::Vector< Rml::Vertex >& vertices = geometry.GetVertices();
@@ -145,7 +145,7 @@ public:
 		geometry_dirty = false;
 	}
 
-	bool RmlElement::LoadTexture(){
+	bool RmlIframe::LoadTexture(){
 		texture_dirty = false;
 		geometry_dirty = true;
 		dimensions_scale = 1.0f;
@@ -193,7 +193,7 @@ public:
 		return true;
 	}
 
-	void RmlElement::UpdateRect(){
+	void RmlIframe::UpdateRect(){
 		if (rect_source != RectSource::Sprite){
 			bool valid_rect = false;
 			Rml::String rect_string = GetAttribute< Rml::String >("rect", "");
@@ -231,10 +231,10 @@ public:
 	bool geometry_dirty;
 };
 
-class RmlElementInstancer : public Rml::ElementInstancer
+class RmlIframeInstancer : public Rml::ElementInstancer
 {
 public:
-	virtual ~RmlElementInstancer() {};
+	virtual ~RmlIframeInstancer() {};
 
 	// Instances an element given the tag name and attributes.
 	// @param[in] parent The element the new element is destined to be parented to.
@@ -244,17 +244,17 @@ public:
 	Rml::ElementPtr InstanceElement(Rml::Element* RMLUI_UNUSED_PARAMETER(parent), const Rml::String& tag, const Rml::XMLAttributes& RMLUI_UNUSED_PARAMETER(attributes)) override{
 		RMLUI_UNUSED(parent);
 		RMLUI_UNUSED(attributes);
-		RMLUI_ZoneScopedN("RmlElementInstance");
-		RmlElement* dkElement = new RmlElement(tag);
+		RMLUI_ZoneScopedN("RmlIframeInstance");
+		RmlIframe* dkElement = new RmlIframe(tag);
 		return Rml::ElementPtr(static_cast<Rml::Element*>(dkElement));
 	}
 
 	// Releases an element instanced by this instancer.
 	// @param[in] element The element to release.
 	void ReleaseElement(Rml::Element* element) override{
-		RMLUI_ZoneScopedN("RmlElementRelease");
+		RMLUI_ZoneScopedN("RmlIframeRelease");
 		delete element;
 	}
 };
 
-#endif //RmlElementInstancer
+#endif //RmlIframeInstancer

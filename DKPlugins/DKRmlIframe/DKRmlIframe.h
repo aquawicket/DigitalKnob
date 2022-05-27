@@ -2,15 +2,15 @@
 #ifndef DKRmlIframe_H
 #define DKRmlIframe_H
 
-#include "DKRmlIframe/RmlElementInstancer.h"
+#include "DKRmlIframe/RmlIframeInstancer.h"
 
 class DKRmlIframe : public DKObjectT<DKRmlIframe>
 {
 public:
 	bool Init();
 	bool End();
-	std::shared_ptr<RmlElementInstancer> ref;
+	std::shared_ptr<RmlIframeInstancer> ref;
 };
 
 REGISTER_OBJECT(DKRmlIframe, true)
-#endif
+#endif //DKRmlIframe_H
