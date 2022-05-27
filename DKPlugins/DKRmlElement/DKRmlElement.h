@@ -9,7 +9,7 @@ class DKRmlDKElement : public DKObjectT<DKRmlDKElement>
 public:
 	bool Init();
 	bool End();
-	std::shared_ptr<DKElementInstancer> ref;
+	std::shared_ptr<DKRmlDKElementInstancer> ref;
 };
 
 REGISTER_OBJECT(DKRmlDKElement, true)

@@ -1,5 +1,5 @@
-#ifndef DKRMLDKELEMENT_H
-#define DKRMLDKELEMENT_H
+#ifndef DKRmlDKElementInstancer_H
+#define DKRmlDKElementInstancer_H
 
 #include "../Include/RmlUi/Core/Element.h"
 #include "../Include/RmlUi/Core/Texture.h"
@@ -7,10 +7,10 @@
 #include "../Include/RmlUi/Core/Geometry.h"
 #include "../Include/RmlUi/Core/Spritesheet.h"
 
-//#include "../include/RmlUi/Core/PropertyIdSet.h"  // OnPropertyChange()
-//#include "../Include/RmlUi/Core/Header.h"
-//#include "../Include/RmlUi/Core/URL.h"
-//#include "../Source/Core/TextureDatabase.h"
+#include "../include/RmlUi/Core/PropertyIdSet.h"  // OnPropertyChange()
+#include "../Include/RmlUi/Core/Header.h"
+#include "../Include/RmlUi/Core/URL.h"
+#include "../Source/Core/TextureDatabase.h"
 
 class DKElement : public Rml::Element 
 {
@@ -23,9 +23,8 @@ public:
 
 	DKElement::~DKElement(){}
 
-	/*
 	// Sizes the box to the element's inherent size.
-	bool DKElement::GetIntrinsicDimensions(Vector2f& _dimensions, float& _ratio){
+	bool DKElement::GetIntrinsicDimensions(Rml::Vector2f& _dimensions, float& _ratio){
 		// Check if we need to reload the texture.
 		if (texture_dirty)
 			LoadTexture();
@@ -50,18 +49,15 @@ public:
 		_ratio = dimensions.x / dimensions.y;
 		return true;
 	}
-	*/
 
-	/*
 	// Renders the element.
 	void DKElement::OnRender(){
 		// Regenerate the geometry if required (this will be set if 'rect' changes but does not result in a resize).
 		if (geometry_dirty)
 			GenerateGeometry();
 		// Render the geometry beginning at this element's content region.
-		geometry.Render(GetAbsoluteOffset(Box::CONTENT));
+		geometry.Render(GetAbsoluteOffset(Rml::Box::CONTENT));
 	}
-	*/
 
 	// Called when attributes on the element are changed.
 	void DKElement::OnAttributeChange(const Rml::ElementAttributes& changed_attributes){
@@ -87,55 +83,46 @@ public:
 	}
 
 	void DKElement::OnPropertyChange(const Rml::PropertyIdSet& changed_properties){
-		/*
 		Element::OnPropertyChange(changed_properties);
 		if (changed_properties.Contains(Rml::PropertyId::ImageColor) || changed_properties.Contains(Rml::PropertyId::Opacity))
 			GenerateGeometry();
-		*/
 	}
 
 	void DKElement::OnChildAdd(Element* child){
-		/*
 		// Load the texture once we have attached to the document so that it can immediately be found during the call to `Rml::GetTextureSourceList`. The
 		// texture won't actually be loaded from the backend before it is shown. However, only do this if we have an active context so that the dp-ratio
 		// can be retrieved. If there is no context now the texture loading will be deferred until the next layout update.
 		if (child == this && texture_dirty && GetContext())
 			LoadTexture();
-		*/
 	}
 
 	void DKElement::OnResize(){ // Regenerates the element's geometry.
-		//GenerateGeometry();
+		GenerateGeometry();
 	}
 
 	void DKElement::OnDpRatioChange(){
-		/*
 		texture_dirty = true;
 		DirtyLayout();
-		*/
 	}
 
 	void DKElement::OnStyleSheetChange(){
-		/*
 		if (HasAttribute("sprite")){
 			texture_dirty = true;
 			DirtyLayout();
 		}
-		*/
 	}
 
 	void DKElement::GenerateGeometry(){
-		/*
 		// Release the old geometry before specifying the new vertices.
 		geometry.Release(true);
-		Vector< Vertex >& vertices = geometry.GetVertices();
-		Vector< int >& indices = geometry.GetIndices();
+		Rml::Vector< Rml::Vertex >& vertices = geometry.GetVertices();
+		Rml::Vector< int >& indices = geometry.GetIndices();
 		vertices.resize(4);
 		indices.resize(6);
 		// Generate the texture coordinates.
-		Vector2f texcoords[2];
+		Rml::Vector2f texcoords[2];
 		if (rect_source != RectSource::None){
-			Vector2f texture_dimensions((float)texture.GetDimensions(GetRenderInterface()).x, (float)texture.GetDimensions(GetRenderInterface()).y);
+			Rml::Vector2f texture_dimensions((float)texture.GetDimensions(GetRenderInterface()).x, (float)texture.GetDimensions(GetRenderInterface()).y);
 			if (texture_dimensions.x == 0)
 				texture_dimensions.x = 1;
 			if (texture_dimensions.y == 0)
@@ -146,33 +133,31 @@ public:
 			texcoords[1].y = (rect.y + rect.height) / texture_dimensions.y;
 		}
 		else{
-			texcoords[0] = Vector2f(0, 0);
-			texcoords[1] = Vector2f(1, 1);
+			texcoords[0] = Rml::Vector2f(0, 0);
+			texcoords[1] = Rml::Vector2f(1, 1);
 		}
 		const ComputedValues& computed = GetComputedValues();
 		float opacity = computed.opacity();
-		Colourb quad_colour = computed.image_color();
+		Rml::Colourb quad_colour = computed.image_color();
 		quad_colour.alpha = (byte)(opacity * (float)quad_colour.alpha);
-		Vector2f quad_size = GetBox().GetSize(Box::CONTENT).Round();
-		GeometryUtilities::GenerateQuad(&vertices[0], &indices[0], Vector2f(0, 0), quad_size, quad_colour, texcoords[0], texcoords[1]);
+		Rml::Vector2f quad_size = GetBox().GetSize(Rml::Box::CONTENT).Round();
+		GeometryUtilities::GenerateQuad(&vertices[0], &indices[0], Rml::Vector2f(0, 0), quad_size, quad_colour, texcoords[0], texcoords[1]);
 		geometry_dirty = false;
-		*/
 	}
 
 	bool DKElement::LoadTexture(){
-		/*
 		texture_dirty = false;
 		geometry_dirty = true;
 		dimensions_scale = 1.0f;
 		const float dp_ratio = ElementUtilities::GetDensityIndependentPixelRatio(this);
 		// Check for a sprite first, this takes precedence.
-		const String sprite_name = GetAttribute< String >("sprite", "");
+		const Rml::String sprite_name = GetAttribute< Rml::String >("sprite", "");
 		if (!sprite_name.empty()){
 			// Load sprite.
 			bool valid_sprite = false;
-			if (ElementDocument* document = GetOwnerDocument()){
-				if (const StyleSheet* style_sheet = document->GetStyleSheet()){
-					if (const Sprite* sprite = style_sheet->GetSprite(sprite_name)){
+			if (Rml::ElementDocument* document = GetOwnerDocument()){
+				if (const Rml::StyleSheet* style_sheet = document->GetStyleSheet()){
+					if (const Rml::Sprite* sprite = style_sheet->GetSprite(sprite_name)){
 						rect = sprite->rectangle;
 						rect_source = RectSource::Sprite;
 						texture = sprite->sprite_sheet->texture;
@@ -182,43 +167,41 @@ public:
 				}
 			}
 			if (!valid_sprite){
-				texture = Texture();
+				texture = Rml::Texture();
 				rect_source = RectSource::None;
 				UpdateRect();
-				Log::Message(Log::LT_WARNING, "Could not find sprite '%s' specified in element element %s", sprite_name.c_str(), GetAddress().c_str());
+				Rml::Log::Message(Rml::Log::LT_WARNING, "Could not find sprite '%s' specified in element element %s", sprite_name.c_str(), GetAddress().c_str());
 				return false;
 			}
 		}
 		else{
 			// Load image from source URL.
-			const String source_name = GetAttribute< String >("src", "");
+			const Rml::String source_name = GetAttribute< Rml::String >("src", "");
 		if (source_name.empty()){
-				texture = Texture();
+				texture = Rml::Texture();
 				rect_source = RectSource::None;
 				return false;
 			}
-		URL source_url;
-			if (ElementDocument* document = GetOwnerDocument())
+		Rml::URL source_url;
+			if (Rml::ElementDocument* document = GetOwnerDocument())
 				source_url.SetURL(document->GetSourceURL());
 			texture.Set(source_name, source_url.GetPath());
 			dimensions_scale = dp_ratio;
 		}
 		// Set the texture onto our geometry object.
 		geometry.SetTexture(&texture);
-		*/
 		return true;
 	}
 
 	void DKElement::UpdateRect(){
-		/*
 		if (rect_source != RectSource::Sprite){
 			bool valid_rect = false;
-			String rect_string = GetAttribute< String >("rect", "");
+			Rml::String rect_string = GetAttribute< Rml::String >("rect", "");
 			if (!rect_string.empty()){
-				StringList coords_list;
-				StringUtilities::ExpandString(coords_list, rect_string, ' ');
+				Rml::StringList coords_list;
+				Rml::StringUtilities::ExpandString(coords_list, rect_string, ' ');
 				if (coords_list.size() != 4){
-					Log::Message(Log::LT_WARNING, "Element '%s' has an invalid 'rect' attribute; rect requires 4 space-separated values, found %zu.", GetAddress().c_str(), coords_list.size());
+					Rml::Log::Message(Rml::Log::LT_WARNING, "Element '%s' has an invalid 'rect' attribute; rect requires 4 space-separated values, found %zu.", GetAddress().c_str(), coords_list.size());
 				}
 				else{
 					rect.x = (float)std::atof(coords_list[0].c_str());
@@ -236,23 +219,22 @@ public:
 				rect_source = RectSource::None;
 			}
 		}
-		*/
 	}
 
 	Rml::Texture texture; // The texture this element is rendering from.
-	bool texture_dirty; // True if we need to refetch the texture's source from the element's attributes.
-	float dimensions_scale; // A factor which scales the intrinsic dimensions based on the dp-ratio and image scale.
 	Rml::Vector2f dimensions; // The element's computed intrinsic dimensions. If either of these values are set to -1, then that dimension has not been computed yet.
 	Rml::Rectangle rect; // The rectangle extracted from the sprite or 'rect' attribute. The rect_source will be None if these have not been specified or are invalid.
-	enum class RectSource { None, Attribute, Sprite } rect_source; // The geometry used to render this element.
 	Rml::Geometry geometry;
+	enum class RectSource { None, Attribute, Sprite } rect_source; // The geometry used to render this element.
+	bool texture_dirty; // True if we need to refetch the texture's source from the element's attributes.
+	float dimensions_scale; // A factor which scales the intrinsic dimensions based on the dp-ratio and image scale.
 	bool geometry_dirty;
 };
 
-class DKElementInstancer : public Rml::ElementInstancer 
+class DKRmlDKElementInstancer : public Rml::ElementInstancer
 {
 public:
-	virtual ~DKElementInstancer() {};
+	virtual ~DKRmlDKElementInstancer() {};
 
 	// Instances an element given the tag name and attributes.
 	// @param[in] parent The element the new element is destined to be parented to.
@@ -262,7 +244,7 @@ public:
 	Rml::ElementPtr InstanceElement(Rml::Element* RMLUI_UNUSED_PARAMETER(parent), const Rml::String& tag, const Rml::XMLAttributes& RMLUI_UNUSED_PARAMETER(attributes)) override{
 		RMLUI_UNUSED(parent);
 		RMLUI_UNUSED(attributes);
-		RMLUI_ZoneScopedN("DKElementInstance");
+		RMLUI_ZoneScopedN("DKRmlElementInstance");
 		DKElement* dkElement = new DKElement(tag);
 		return Rml::ElementPtr(static_cast<Rml::Element*>(dkElement));
 	}
@@ -270,9 +252,9 @@ public:
 	// Releases an element instanced by this instancer.
 	// @param[in] element The element to release.
 	void ReleaseElement(Rml::Element* element) override{
-		RMLUI_ZoneScopedN("DKElementRelease");
+		RMLUI_ZoneScopedN("DKRmlElementRelease");
 		delete element;
 	}
 };
 
-#endif
+#endif //DKRmlDKElementInstancer

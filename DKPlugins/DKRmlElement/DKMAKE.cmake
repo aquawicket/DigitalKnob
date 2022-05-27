@@ -10,5 +10,5 @@ IF(HAVE_DKCef)
 	DKDEPEND(DKCef)
 ENDIF()
 
-generateCmake(DKRmlDKElement)
-DKASSETS(DKRmlDKElement)
+generateCmake(DKRmlElement)
+DKASSETS(DKRmlElement)
