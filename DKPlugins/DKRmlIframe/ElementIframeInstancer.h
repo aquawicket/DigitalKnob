@@ -7,6 +7,7 @@
 #include "../Include/RmlUi/Core/Geometry.h"
 #include "../Include/RmlUi/Core/Spritesheet.h"
 
+//#include "../include/RmlUi/Core/PropertyIdSet.h"  // OnPropertyChange()
 //#include "../Include/RmlUi/Core/Header.h"
 //#include "../Include/RmlUi/Core/URL.h"
 //#include "../Source/Core/TextureDatabase.h"
@@ -88,7 +89,7 @@ public:
 	void ElementIframe::OnPropertyChange(const Rml::PropertyIdSet& changed_properties){
 		/*
 		Element::OnPropertyChange(changed_properties);
-		if (changed_properties.Contains(PropertyId::ImageColor) || changed_properties.Contains(PropertyId::Opacity))
+		if (changed_properties.Contains(Rml::PropertyId::ImageColor) || changed_properties.Contains(Rml::PropertyId::Opacity))
 			GenerateGeometry();
 		*/
 	}
