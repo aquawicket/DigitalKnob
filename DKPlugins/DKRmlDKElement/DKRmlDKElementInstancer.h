@@ -1,5 +1,5 @@
-#ifndef DKRMLELEMENTTESTINSTANCER_H
-#define DKRMLELEMENTTESTINSTANCER_H
+#ifndef DKRMLDKELEMENT_H
+#define DKRMLDKELEMENT_H
 
 #include "../Include/RmlUi/Core/Element.h"
 #include "../Include/RmlUi/Core/Texture.h"
@@ -12,20 +12,20 @@
 //#include "../Include/RmlUi/Core/URL.h"
 //#include "../Source/Core/TextureDatabase.h"
 
-class ElementTest : public Rml::Element 
+class DKElement : public Rml::Element 
 {
 public:
-	ElementTest::ElementTest(const Rml::String& tag) : Rml::Element(tag), dimensions(-1, -1), rect_source(RectSource::None), geometry(this){
+	DKElement::DKElement(const Rml::String& tag) : Rml::Element(tag), dimensions(-1, -1), rect_source(RectSource::None), geometry(this){
 		dimensions_scale = 1.0f;
 		geometry_dirty = false;
 		texture_dirty = true;
 	}
 
-	ElementTest::~ElementTest(){}
+	DKElement::~DKElement(){}
 
 	/*
 	// Sizes the box to the element's inherent size.
-	bool ElementTest::GetIntrinsicDimensions(Vector2f& _dimensions, float& _ratio){
+	bool DKElement::GetIntrinsicDimensions(Vector2f& _dimensions, float& _ratio){
 		// Check if we need to reload the texture.
 		if (texture_dirty)
 			LoadTexture();
@@ -54,7 +54,7 @@ public:
 
 	/*
 	// Renders the element.
-	void ElementTest::OnRender(){
+	void DKElement::OnRender(){
 		// Regenerate the geometry if required (this will be set if 'rect' changes but does not result in a resize).
 		if (geometry_dirty)
 			GenerateGeometry();
@@ -64,7 +64,7 @@ public:
 	*/
 
 	// Called when attributes on the element are changed.
-	void ElementTest::OnAttributeChange(const Rml::ElementAttributes& changed_attributes){
+	void DKElement::OnAttributeChange(const Rml::ElementAttributes& changed_attributes){
 		// Call through to the base element's OnAttributeChange().
 		Element::OnAttributeChange(changed_attributes);
 		bool dirty_layout = false;
@@ -86,7 +86,7 @@ public:
 			DirtyLayout();
 	}
 
-	void ElementTest::OnPropertyChange(const Rml::PropertyIdSet& changed_properties){
+	void DKElement::OnPropertyChange(const Rml::PropertyIdSet& changed_properties){
 		/*
 		Element::OnPropertyChange(changed_properties);
 		if (changed_properties.Contains(Rml::PropertyId::ImageColor) || changed_properties.Contains(Rml::PropertyId::Opacity))
@@ -94,7 +94,7 @@ public:
 		*/
 	}
 
-	void ElementTest::OnChildAdd(Element* child){
+	void DKElement::OnChildAdd(Element* child){
 		/*
 		// Load the texture once we have attached to the document so that it can immediately be found during the call to `Rml::GetTextureSourceList`. The
 		// texture won't actually be loaded from the backend before it is shown. However, only do this if we have an active context so that the dp-ratio
@@ -104,18 +104,18 @@ public:
 		*/
 	}
 
-	void ElementTest::OnResize(){ // Regenerates the element's geometry.
+	void DKElement::OnResize(){ // Regenerates the element's geometry.
 		//GenerateGeometry();
 	}
 
-	void ElementTest::OnDpRatioChange(){
+	void DKElement::OnDpRatioChange(){
 		/*
 		texture_dirty = true;
 		DirtyLayout();
 		*/
 	}
 
-	void ElementTest::OnStyleSheetChange(){
+	void DKElement::OnStyleSheetChange(){
 		/*
 		if (HasAttribute("sprite")){
 			texture_dirty = true;
@@ -124,7 +124,7 @@ public:
 		*/
 	}
 
-	void ElementTest::GenerateGeometry(){
+	void DKElement::GenerateGeometry(){
 		/*
 		// Release the old geometry before specifying the new vertices.
 		geometry.Release(true);
@@ -159,7 +159,7 @@ public:
 		*/
 	}
 
-	bool ElementTest::LoadTexture(){
+	bool DKElement::LoadTexture(){
 		/*
 		texture_dirty = false;
 		geometry_dirty = true;
@@ -209,7 +209,7 @@ public:
 		return true;
 	}
 
-	void ElementTest::UpdateRect(){
+	void DKElement::UpdateRect(){
 		/*
 		if (rect_source != RectSource::Sprite){
 			bool valid_rect = false;
@@ -249,10 +249,10 @@ public:
 	bool geometry_dirty;
 };
 
-class ElementTestInstancer : public Rml::ElementInstancer 
+class DKElementInstancer : public Rml::ElementInstancer 
 {
 public:
-	virtual ~ElementTestInstancer() {};
+	virtual ~DKElementInstancer() {};
 
 	// Instances an element given the tag name and attributes.
 	// @param[in] parent The element the new element is destined to be parented to.
@@ -262,15 +262,15 @@ public:
 	Rml::ElementPtr InstanceElement(Rml::Element* RMLUI_UNUSED_PARAMETER(parent), const Rml::String& tag, const Rml::XMLAttributes& RMLUI_UNUSED_PARAMETER(attributes)) override{
 		RMLUI_UNUSED(parent);
 		RMLUI_UNUSED(attributes);
-		RMLUI_ZoneScopedN("ElementTestInstance");
-		ElementTest* elementTest = new ElementTest(tag);
-		return Rml::ElementPtr(static_cast<Rml::Element*>(elementTest));
+		RMLUI_ZoneScopedN("DKElementInstance");
+		DKElement* dkElement = new DKElement(tag);
+		return Rml::ElementPtr(static_cast<Rml::Element*>(dkElement));
 	}
 
 	// Releases an element instanced by this instancer.
 	// @param[in] element The element to release.
 	void ReleaseElement(Rml::Element* element) override{
-		RMLUI_ZoneScopedN("ElementTestRelease");
+		RMLUI_ZoneScopedN("DKElementRelease");
 		delete element;
 	}
 };
