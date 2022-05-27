@@ -1,16 +1,16 @@
 #pragma once
-#ifndef DKRmlDKElement_H
-#define DKRmlDKElement_H
+#ifndef DKRmlElement_H
+#define DKRmlElement_H
 
-#include "DKRmlDKElement/DKRmlDKElementInstancer.h"
+#include "DKRmlElement/RmlElementInstancer.h"
 
-class DKRmlDKElement : public DKObjectT<DKRmlDKElement>
+class DKRmlElement : public DKObjectT<DKRmlElement>
 {
 public:
 	bool Init();
 	bool End();
-	std::shared_ptr<DKRmlDKElementInstancer> ref;
+	std::shared_ptr<RmlElementInstancer> ref;
 };
 
-REGISTER_OBJECT(DKRmlDKElement, true)
-#endif //DKRocketIframe_H
+REGISTER_OBJECT(DKRmlElement, true)
+#endif
