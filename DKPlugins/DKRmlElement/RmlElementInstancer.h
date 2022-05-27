@@ -1,16 +1,16 @@
 #ifndef RmlElementInstancer_H
 #define RmlElementInstancer_H
 
+#include "../Include/RmlUi/Core/ComputedValues.h"
 #include "../Include/RmlUi/Core/Element.h"
-#include "../Include/RmlUi/Core/Texture.h"
+#include "../Include/RmlUi/Core/ElementDocument.h"
+#include "../Include/RmlUi/Core/ElementUtilities.h"
 #include "../Include/RmlUi/Core/ElementInstancer.h"
 #include "../Include/RmlUi/Core/Geometry.h"
-#include "../Include/RmlUi/Core/Spritesheet.h"
-
-#include "../include/RmlUi/Core/PropertyIdSet.h"  // OnPropertyChange()
-#include "../Include/RmlUi/Core/Header.h"
+#include "../Include/RmlUi/Core/GeometryUtilities.h"
+#include "../Include/RmlUi/Core/PropertyIdSet.h"
+#include "../Include/RmlUi/Core/StyleSheet.h"
 #include "../Include/RmlUi/Core/URL.h"
-#include "../Source/Core/TextureDatabase.h"
 
 class RmlElement : public Rml::Element 
 {
@@ -136,12 +136,12 @@ public:
 			texcoords[0] = Rml::Vector2f(0, 0);
 			texcoords[1] = Rml::Vector2f(1, 1);
 		}
-		const ComputedValues& computed = GetComputedValues();
+		const Rml::Style::ComputedValues& computed = GetComputedValues();
 		float opacity = computed.opacity();
 		Rml::Colourb quad_colour = computed.image_color();
-		quad_colour.alpha = (byte)(opacity * (float)quad_colour.alpha);
+		quad_colour.alpha = (Rml::byte)(opacity * (float)quad_colour.alpha);
 		Rml::Vector2f quad_size = GetBox().GetSize(Rml::Box::CONTENT).Round();
-		GeometryUtilities::GenerateQuad(&vertices[0], &indices[0], Rml::Vector2f(0, 0), quad_size, quad_colour, texcoords[0], texcoords[1]);
+		Rml::GeometryUtilities::GenerateQuad(&vertices[0], &indices[0], Rml::Vector2f(0, 0), quad_size, quad_colour, texcoords[0], texcoords[1]);
 		geometry_dirty = false;
 	}
 
@@ -149,13 +149,13 @@ public:
 		texture_dirty = false;
 		geometry_dirty = true;
 		dimensions_scale = 1.0f;
-		const float dp_ratio = ElementUtilities::GetDensityIndependentPixelRatio(this);
+		const float dp_ratio = Rml::ElementUtilities::GetDensityIndependentPixelRatio(this);
 		// Check for a sprite first, this takes precedence.
-		const Rml::String sprite_name = GetAttribute< Rml::String >("sprite", "");
+		const Rml::String sprite_name = Rml::Element::GetAttribute< Rml::String >("sprite", "");
 		if (!sprite_name.empty()){
 			// Load sprite.
 			bool valid_sprite = false;
-			if (Rml::ElementDocument* document = GetOwnerDocument()){
+			if (Rml::ElementDocument * document = Rml::Element::GetOwnerDocument()) {
 				if (const Rml::StyleSheet* style_sheet = document->GetStyleSheet()){
 					if (const Rml::Sprite* sprite = style_sheet->GetSprite(sprite_name)){
 						rect = sprite->rectangle;
