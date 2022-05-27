@@ -1,0 +1,14 @@
+#IF(NOT HAVE_DKCef)
+#	RETURN()
+#ENDIF()
+
+DKDEPEND(DKRml)
+IF(HAVE_DKDuktape)
+	DKDEPEND(DKDuktape)
+ENDIF()
+IF(HAVE_DKCef)
+	DKDEPEND(DKCef)
+ENDIF()
+
+generateCmake(DKRmlElementTest)
+DKASSETS(DKRmlElementTest)
