@@ -21,6 +21,8 @@ public:
 		texture_dirty = true;
 	}
 
+	DKString processed;
+
 	RmlIframe::~RmlIframe(){}
 
 	/*
@@ -145,6 +147,36 @@ public:
 		Rml::Vector2f quad_size = GetBox().GetSize(Rml::Box::CONTENT).Round();
 		Rml::GeometryUtilities::GenerateQuad(&vertices[0], &indices[0], Rml::Vector2f(0, 0), quad_size, quad_colour, texcoords[0], texcoords[1]);
 		geometry_dirty = false;
+
+		
+		Rml::String id = GetAttribute< Rml::String >("id", "");
+		if (has(processed, id))
+			return; //allready processed
+
+		Rml::String src = GetAttribute< Rml::String >("src", "");
+		float top = computed.top().value;
+		float left = computed.left().value;
+		//float bottom = computed.bottom().value;
+		//float right = computed.right().value;
+		float width = computed.width().value;
+		float height = computed.height().value;
+		int _width = width ? width : 800;
+		int _height = height ? height : 600;
+
+		replace(id, "[CEF]", "");
+		DKString data = id + ",";
+		data += toString(top);
+		data += ",";
+		data += toString(left);
+		data += ",";
+		data += toString(_width);
+		data += ",";
+		data += toString(_height);
+		data += ",";
+		data += src;
+		DKClass::CallFunc("DKCef::NewBrowser", &data, NULL);
+		processed += id + ",";
+		
 	}
 
 	bool RmlIframe::LoadTexture(){ // 3
@@ -163,7 +195,7 @@ public:
 		Rml::URL source_url;
 		if (Rml::ElementDocument* document = GetOwnerDocument())
 			source_url.SetURL(document->GetSourceURL());
-		texture.Set("[CEF]"+id_name, source_url.GetPath());  
+		texture.Set("[CEF]"+id_name, source_url.GetPath());
 		dimensions_scale = dp_ratio;
 		geometry.SetTexture(&texture);
 		return true;

@@ -164,7 +164,7 @@ bool DKRmlConverter::PostProcess(Rml::Element* element) {
 	if(element != doc && element->GetParentNode())
 		element = element->GetParentNode();
 
-	
+	/*
 	// Create cef contexts for iFrames
 	Rml::ElementList iframes;
 	Rml::ElementUtilities::GetElementsByTagName(iframes, element, "iframe");
@@ -204,12 +204,10 @@ bool DKRmlConverter::PostProcess(Rml::Element* element) {
 		DKString cef_id = "[CEF]" + id;
 		iframes[i]->SetAttribute("id", cef_id.c_str());
 		iframes[i]->SetProperty("position", "absolute");
-
 		iframes[i]->SetProperty("top", "100px");
 		iframes[i]->SetProperty("left", "100px");
 		iframes[i]->SetProperty("right", "100px");
 		iframes[i]->SetProperty("bottom", "100px");
-
 		//iframes[i]->SetProperty("background_color", "rgba(255,255,255,255)");
 		
 		DKClass::DKCreate("DKCef");
@@ -217,46 +215,33 @@ bool DKRmlConverter::PostProcess(Rml::Element* element) {
 		//DKEvents::AddEvent(id, "resize", &DKRmlConverter::ResizeIframe, this);
 		//DKEvents::AddEvent(id, "mouseover", &DKRmlConverter::MouseOverIframe, this);
 		//DKEvents::AddEvent(id, "click", &DKRmlConverter::ClickIframe, this);
-		
-		/*
-		Rml::Element* cef_img  = iframes[i]->AppendChild(DKRml::Get()->document->CreateElement("img"), true);
-		DKString cefAbsoluteTop = toString(cef_img->GetAbsoluteTop());
-		DKString cefAbsoluteLeft = toString(cef_img->GetAbsoluteLeft());
-		DKString cefClientTop = toString(cef_img->GetClientTop());
-		DKString cefClientLeft = toString(cef_img->GetClientLeft());
-		DKString cefClientWidth = toString(cef_img->GetClientWidth());
-		DKString cefClientHeight = toString(cef_img->GetClientHeight());
-		DKString cefOffsetTop = toString(cef_img->GetOffsetTop());
-		DKString cefOffsetLeft = toString(cef_img->GetOffsetLeft());
-		DKString cefOffsetWidth = toString(cef_img->GetOffsetWidth());
-		DKString cefOffsetHeight = toString(cef_img->GetOffsetHeight());
-		DKString cefSrollTop = toString(cef_img->GetScrollTop());
-		DKString cefSrollLeft = toString(cef_img->GetScrollLeft());
-		DKString cefSrollWidth = toString(cef_img->GetScrollWidth());
-		DKString cefSrollHeight = toString(cef_img->GetScrollHeight());
-		DKString cefTop = element->GetProperty("top")->ToString();
-		DKString cefBottom = element->GetProperty("bottom")->ToString();
-		DKString cefLeft = element->GetProperty("left")->ToString();
-		DKString cefRight = element->GetProperty("right")->ToString();
-		DKString cefWidth = element->GetProperty("width")->ToString();
-		DKString cefHeight = element->GetProperty("height")->ToString();
-		
-		if(!cef_img)
-			return DKERROR("cef_img invalid\n");
-		cef_img->SetAttribute("id", cef_id.c_str());
-		//This is what RmlSDL2Renderer::LoadTexture and RmlSDL2Renderer::RenderGeometry
-		//use to detect if the texture is a cef image. If will contain a [CEF] in the src.
-		cef_img->SetAttribute("src", cef_id.c_str());
-		cef_img->SetProperty("width", "100%");
-		cef_img->SetProperty("height", "100%");
-		*/
 
-		DKString data = id+","+absoluteTop+","+absoluteLeft+","+clientWidth+","+clientHeight+","+src;
+		const Rml::Style::ComputedValues& computed = iframes[i]->GetComputedValues();
+		float top = computed.top().value;
+		float left = computed.left().value;
+		//float bottom = computed.bottom().value;
+		//float right = computed.right().value;
+		float width = computed.width().value;
+		float height = computed.height().value;
+		int _width = width ? width : 800;
+		int _height = height ? height : 600;
+
+		DKString data = id + ",";
+		data += toString(top);
+		data += ",";
+		data += toString(left);
+		data += ",";
+		data += toString(_width);
+		data += ",";
+		data += toString(_height);
+		data += ",";
+		data += src;
 		DKClass::CallFunc("DKCef::NewBrowser", &data, NULL);
+		
 		//DKClass::CallFunc("DKSDLCef::OnResize", &data, NULL); //call OnResize in DKCef window handler
 		processed += id+",";
 	}
-
+	*/
 
 	// <a> tags with href attribute
 	Rml::ElementList aElements;
