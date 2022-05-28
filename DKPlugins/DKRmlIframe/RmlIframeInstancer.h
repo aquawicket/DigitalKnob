@@ -23,6 +23,7 @@ public:
 
 	RmlIframe::~RmlIframe(){}
 
+/*
 	// Sizes the box to the element's inherent size.
 	bool RmlIframe::GetIntrinsicDimensions(Rml::Vector2f& _dimensions, float& _ratio){
 		// Check if we need to reload the texture.
@@ -49,7 +50,9 @@ public:
 		_ratio = dimensions.x / dimensions.y;
 		return true;
 	}
+*/
 
+/*
 	// Renders the element.
 	void RmlIframe::OnRender(){
 		// Regenerate the geometry if required (this will be set if 'rect' changes but does not result in a resize).
@@ -58,9 +61,11 @@ public:
 		// Render the geometry beginning at this element's content region.
 		geometry.Render(GetAbsoluteOffset(Rml::Box::CONTENT));
 	}
+*/
 
 	// Called when attributes on the element are changed.
 	void RmlIframe::OnAttributeChange(const Rml::ElementAttributes& changed_attributes){
+
 		// Call through to the base element's OnAttributeChange().
 		Element::OnAttributeChange(changed_attributes);
 		bool dirty_layout = false;
@@ -80,18 +85,22 @@ public:
 		}
 		if (dirty_layout)
 			DirtyLayout();
+
 	}
 
 	void RmlIframe::OnPropertyChange(const Rml::PropertyIdSet& changed_properties){
+
 		Element::OnPropertyChange(changed_properties);
 		if (changed_properties.Contains(Rml::PropertyId::ImageColor) || changed_properties.Contains(Rml::PropertyId::Opacity))
 			GenerateGeometry();
+
 	}
 
 	void RmlIframe::OnChildAdd(Element* child){
 		// Load the texture once we have attached to the document so that it can immediately be found during the call to `Rml::GetTextureSourceList`. The
 		// texture won't actually be loaded from the backend before it is shown. However, only do this if we have an active context so that the dp-ratio
 		// can be retrieved. If there is no context now the texture loading will be deferred until the next layout update.
+		
 		if (child == this && texture_dirty && GetContext())
 			LoadTexture();
 	}
@@ -101,18 +110,23 @@ public:
 	}
 
 	void RmlIframe::OnDpRatioChange(){
+
 		texture_dirty = true;
 		DirtyLayout();
+
 	}
 
 	void RmlIframe::OnStyleSheetChange(){
+
 		if (HasAttribute("sprite")){
 			texture_dirty = true;
 			DirtyLayout();
 		}
+
 	}
 
 	void RmlIframe::GenerateGeometry(){
+
 		// Release the old geometry before specifying the new vertices.
 		geometry.Release(true);
 		Rml::Vector< Rml::Vertex >& vertices = geometry.GetVertices();
@@ -143,9 +157,11 @@ public:
 		Rml::Vector2f quad_size = GetBox().GetSize(Rml::Box::CONTENT).Round();
 		Rml::GeometryUtilities::GenerateQuad(&vertices[0], &indices[0], Rml::Vector2f(0, 0), quad_size, quad_colour, texcoords[0], texcoords[1]);
 		geometry_dirty = false;
+
 	}
 
 	bool RmlIframe::LoadTexture(){
+
 		texture_dirty = false;
 		geometry_dirty = true;
 		dimensions_scale = 1.0f;
@@ -190,10 +206,12 @@ public:
 		}
 		// Set the texture onto our geometry object.
 		geometry.SetTexture(&texture);
+
 		return true;
 	}
 
 	void RmlIframe::UpdateRect(){
+
 		if (rect_source != RectSource::Sprite){
 			bool valid_rect = false;
 			Rml::String rect_string = GetAttribute< Rml::String >("rect", "");
@@ -219,6 +237,7 @@ public:
 				rect_source = RectSource::None;
 			}
 		}
+
 	}
 
 	Rml::Texture texture; // The texture this element is rendering from.
