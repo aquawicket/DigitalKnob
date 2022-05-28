@@ -52,16 +52,13 @@ public:
 	}
 	*/
 
-	
 	// Renders the element.
 	void RmlIframe::OnRender(){
 		// Regenerate the geometry if required (this will be set if 'rect' changes but does not result in a resize).
 		if (geometry_dirty)
 			GenerateGeometry();
-		// Render the geometry beginning at this element's content region.
-		geometry.Render(GetAbsoluteOffset(Rml::Box::CONTENT));
+		geometry.Render(GetAbsoluteOffset(Rml::Box::CONTENT)); // Render the geometry beginning at this element's content region.
 	}
-
 
 	// Called when attributes on the element are changed.
 	void RmlIframe::OnAttributeChange(const Rml::ElementAttributes& changed_attributes){  // 1
@@ -151,57 +148,28 @@ public:
 	}
 
 	bool RmlIframe::LoadTexture(){ // 3
-		//Original RmlUi img element code
 		texture_dirty = false;
 		geometry_dirty = true;
 		dimensions_scale = 1.0f;
 		const float dp_ratio = Rml::ElementUtilities::GetDensityIndependentPixelRatio(this);
-		/*
-		// Check for a sprite first, this takes precedence.
-		const Rml::String sprite_name = Rml::Element::GetAttribute< Rml::String >("sprite", "");
-		if (!sprite_name.empty()){
-			// Load sprite.
-			bool valid_sprite = false;
-			if (Rml::ElementDocument * document = Rml::Element::GetOwnerDocument()) {
-				if (const Rml::StyleSheet* style_sheet = document->GetStyleSheet()){
-					if (const Rml::Sprite* sprite = style_sheet->GetSprite(sprite_name)){
-						rect = sprite->rectangle;
-						rect_source = RectSource::Sprite;
-						texture = sprite->sprite_sheet->texture;
-						dimensions_scale = sprite->sprite_sheet->display_scale * dp_ratio;
-						valid_sprite = true;
-					}
-				}
-			}
-			if (!valid_sprite){
-				texture = Rml::Texture();
-				rect_source = RectSource::None;
-				UpdateRect();
-				Rml::Log::Message(Rml::Log::LT_WARNING, "Could not find sprite '%s' specified in element element %s", sprite_name.c_str(), GetAddress().c_str());
-				return false;
-			}
+
+		//Get the Browser id for the CEF Texture
+		const Rml::String id_name = GetAttribute< Rml::String >("id", "");
+		if (id_name.empty()){
+			texture = Rml::Texture();
+			rect_source = RectSource::None;
+			return false;
 		}
-		else{
-		*/
-			const Rml::String id_name = GetAttribute< Rml::String >("id", ""); // Load image from source URL.
-			if (id_name.empty()){
-				texture = Rml::Texture();
-				rect_source = RectSource::None;
-				return false;
-			}
-			Rml::URL source_url;
-			if (Rml::ElementDocument* document = GetOwnerDocument())
-				source_url.SetURL(document->GetSourceURL());
-			texture.Set("[CEF]"+id_name, source_url.GetPath());  
-			dimensions_scale = dp_ratio;
-		//}
-		// Set the texture onto our geometry object.
+		Rml::URL source_url;
+		if (Rml::ElementDocument* document = GetOwnerDocument())
+			source_url.SetURL(document->GetSourceURL());
+		texture.Set("[CEF]"+id_name, source_url.GetPath());  
+		dimensions_scale = dp_ratio;
 		geometry.SetTexture(&texture);
 		return true;
 	}
 
 	void RmlIframe::UpdateRect(){
-
 		if (rect_source != RectSource::Sprite){
 			bool valid_rect = false;
 			Rml::String rect_string = GetAttribute< Rml::String >("rect", "");
