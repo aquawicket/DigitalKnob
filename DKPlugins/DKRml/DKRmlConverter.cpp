@@ -164,6 +164,7 @@ bool DKRmlConverter::PostProcess(Rml::Element* element) {
 	if(element != doc && element->GetParentNode())
 		element = element->GetParentNode();
 
+	
 	// Create cef contexts for iFrames
 	Rml::ElementList iframes;
 	Rml::ElementUtilities::GetElementsByTagName(iframes, element, "iframe");
@@ -199,15 +200,26 @@ bool DKRmlConverter::PostProcess(Rml::Element* element) {
 		if(!iframes[i]->GetAttribute("src"))
 			 return DKERROR("iframe has no source tag\n");
 		src = iframes[i]->GetAttribute("src")->Get<Rml::String>();
+
+		DKString cef_id = "[CEF]" + id;
+		iframes[i]->SetAttribute("id", cef_id.c_str());
+		iframes[i]->SetProperty("position", "absolute");
+
+		iframes[i]->SetProperty("top", "100px");
+		iframes[i]->SetProperty("left", "100px");
+		iframes[i]->SetProperty("right", "100px");
+		iframes[i]->SetProperty("bottom", "100px");
+
+		//iframes[i]->SetProperty("background_color", "rgba(255,255,255,255)");
 		
 		DKClass::DKCreate("DKCef");
+
 		//DKEvents::AddEvent(id, "resize", &DKRmlConverter::ResizeIframe, this);
 		//DKEvents::AddEvent(id, "mouseover", &DKRmlConverter::MouseOverIframe, this);
 		//DKEvents::AddEvent(id, "click", &DKRmlConverter::ClickIframe, this);
-		DKString tag = "img";
-		//Rml::Element* doc = DKRml::Get()->document; //unused code
-		Rml::Element* cef_img  = iframes[i]->AppendChild(DKRml::Get()->document->CreateElement(tag.c_str()), true);
-
+		
+		/*
+		Rml::Element* cef_img  = iframes[i]->AppendChild(DKRml::Get()->document->CreateElement("img"), true);
 		DKString cefAbsoluteTop = toString(cef_img->GetAbsoluteTop());
 		DKString cefAbsoluteLeft = toString(cef_img->GetAbsoluteLeft());
 		DKString cefClientTop = toString(cef_img->GetClientTop());
@@ -228,26 +240,23 @@ bool DKRmlConverter::PostProcess(Rml::Element* element) {
 		DKString cefRight = element->GetProperty("right")->ToString();
 		DKString cefWidth = element->GetProperty("width")->ToString();
 		DKString cefHeight = element->GetProperty("height")->ToString();
-
-
+		
 		if(!cef_img)
 			return DKERROR("cef_img invalid\n");
-		DKString cef_id = "iframe_"+id;
 		cef_img->SetAttribute("id", cef_id.c_str());
 		//This is what RmlSDL2Renderer::LoadTexture and RmlSDL2Renderer::RenderGeometry
-		//use to detect if the texture is a cef image. If will contain a iframe_ in the src.
+		//use to detect if the texture is a cef image. If will contain a [CEF] in the src.
 		cef_img->SetAttribute("src", cef_id.c_str());
-		//cef_img->SetProperty("top", "0rem");
-		//cef_img->SetProperty("bottom", "0rem");
-		//cef_img->SetProperty("left", "0rem");
-		//cef_img->SetProperty("right", "0rem");
 		cef_img->SetProperty("width", "100%");
 		cef_img->SetProperty("height", "100%");
+		*/
+
 		DKString data = id+","+absoluteTop+","+absoluteLeft+","+clientWidth+","+clientHeight+","+src;
 		DKClass::CallFunc("DKCef::NewBrowser", &data, NULL);
 		//DKClass::CallFunc("DKSDLCef::OnResize", &data, NULL); //call OnResize in DKCef window handler
 		processed += id+",";
 	}
+
 
 	// <a> tags with href attribute
 	Rml::ElementList aElements;

@@ -45,13 +45,12 @@ void DKSDLRmlOpenGL::RenderGeometry(Rml::Vertex* vertices, int num_vertices, int
 
 		//Cef
 		//The id is mapped to the texture in texture_name
-		//If the id contains iframe_ , it is a cef image
+		//If the id contains [CEF] , it is a cef image
 		//Update the texture with DKSDLCef::GetTexture(id);
 		///////////////////////////////////////////////////////////
-		if(has(texture_name[texture],"iframe_")){
+        if (has(texture_name[texture], "[CEF]")) {
 			DKString id = texture_name[texture];
-			replace(id,"iframe_","");
-			
+            replace(id, "[CEF]", "");
 			struct DKTexture{ SDL_Texture* texture; };
 			DKTexture output;
             if (DKClass::CallFunc("DKSDLCef::GetTexture", &id, &output))
@@ -145,9 +144,9 @@ bool DKSDLRmlOpenGL::LoadTexture(Rml::TextureHandle& texture_handle, Rml::Vector
 	//DKDEBUGFUNC(texture_handle, texture_dimensions, "Rml::String&");
 
 	//CEF Texture
-	//The source variable is the id of the iframe. It will contain iframe_ in it's id.
+	//The source variable is the id of the iframe. It will contain [CEF] in it's id.
 	//We will map that id to the texture handle for later use. 
-	if(has(source,"iframe_")){
+    if (has(source, "[CEF]")) {
 		texture_handle = reinterpret_cast<Rml::TextureHandle>(&source);
 		texture_name[texture_handle] = source;
 		return true;

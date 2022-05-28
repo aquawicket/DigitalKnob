@@ -73,8 +73,9 @@ bool DKSDLCef::GetScrollDeltas(SDL_Event* event, float &deltaX, float &deltaY)
 
 bool DKSDLCef::GetTexture(const void* input, void* output)
 {
-	//DKDEBUGFUNC(input, output);
 	DKString id = *(DKString*)input;
+	DKDEBUGFUNC(id, "void* output");
+	//replace(id, "[CEF]", "");
 	int browser;
 	if(!dkCef->GetBrowserNumber(id, browser))
 		return DKERROR("browser is invalid\n");

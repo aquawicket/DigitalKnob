@@ -521,9 +521,10 @@ bool DKCef::NewBrowser(const DKString& id, const int& top, const int& left, cons
 		dkBrowser.width = _width;
 		dkBrowser.height = _height;
 		dkBrowser.url = url;
+		replace(dkBrowser.url, "[CEF]", "");
 		dkBrowsers.push_back(dkBrowser);
 		
-		current_browser = CefBrowserHost::CreateBrowserSync(window_info, cefHandler, url, browserSettings, NULL, NULL);
+		current_browser = CefBrowserHost::CreateBrowserSync(window_info, cefHandler, dkBrowser.url, browserSettings, NULL, NULL);
 		if(!current_browser)
 			return DKERROR("current_browser invalid \n"); 
 		//if(!CefBrowserHost::CreateBrowser(window_info, cefHandler, url, browserSettings, NULL, NULL))

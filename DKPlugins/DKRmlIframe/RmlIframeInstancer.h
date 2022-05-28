@@ -23,7 +23,7 @@ public:
 
 	RmlIframe::~RmlIframe(){}
 
-/*
+	/*
 	// Sizes the box to the element's inherent size.
 	bool RmlIframe::GetIntrinsicDimensions(Rml::Vector2f& _dimensions, float& _ratio){
 		// Check if we need to reload the texture.
@@ -50,9 +50,9 @@ public:
 		_ratio = dimensions.x / dimensions.y;
 		return true;
 	}
-*/
+	*/
 
-/*
+	
 	// Renders the element.
 	void RmlIframe::OnRender(){
 		// Regenerate the geometry if required (this will be set if 'rect' changes but does not result in a resize).
@@ -61,11 +61,10 @@ public:
 		// Render the geometry beginning at this element's content region.
 		geometry.Render(GetAbsoluteOffset(Rml::Box::CONTENT));
 	}
-*/
+
 
 	// Called when attributes on the element are changed.
-	void RmlIframe::OnAttributeChange(const Rml::ElementAttributes& changed_attributes){
-
+	void RmlIframe::OnAttributeChange(const Rml::ElementAttributes& changed_attributes){  // 1
 		// Call through to the base element's OnAttributeChange().
 		Element::OnAttributeChange(changed_attributes);
 		bool dirty_layout = false;
@@ -85,48 +84,40 @@ public:
 		}
 		if (dirty_layout)
 			DirtyLayout();
-
 	}
 
-	void RmlIframe::OnPropertyChange(const Rml::PropertyIdSet& changed_properties){
-
+	void RmlIframe::OnPropertyChange(const Rml::PropertyIdSet& changed_properties){ // 4
 		Element::OnPropertyChange(changed_properties);
 		if (changed_properties.Contains(Rml::PropertyId::ImageColor) || changed_properties.Contains(Rml::PropertyId::Opacity))
 			GenerateGeometry();
-
 	}
 
-	void RmlIframe::OnChildAdd(Element* child){
+	void RmlIframe::OnChildAdd(Element* child){ // 2
 		// Load the texture once we have attached to the document so that it can immediately be found during the call to `Rml::GetTextureSourceList`. The
 		// texture won't actually be loaded from the backend before it is shown. However, only do this if we have an active context so that the dp-ratio
 		// can be retrieved. If there is no context now the texture loading will be deferred until the next layout update.
-		
 		if (child == this && texture_dirty && GetContext())
 			LoadTexture();
 	}
 
-	void RmlIframe::OnResize(){ // Regenerates the element's geometry.
+	// Regenerates the element's geometry.
+	void RmlIframe::OnResize(){ // 6 
 		GenerateGeometry();
 	}
 
 	void RmlIframe::OnDpRatioChange(){
-
 		texture_dirty = true;
 		DirtyLayout();
-
 	}
 
 	void RmlIframe::OnStyleSheetChange(){
-
 		if (HasAttribute("sprite")){
 			texture_dirty = true;
 			DirtyLayout();
 		}
-
 	}
 
-	void RmlIframe::GenerateGeometry(){
-
+	void RmlIframe::GenerateGeometry(){ // 5
 		// Release the old geometry before specifying the new vertices.
 		geometry.Release(true);
 		Rml::Vector< Rml::Vertex >& vertices = geometry.GetVertices();
@@ -157,15 +148,15 @@ public:
 		Rml::Vector2f quad_size = GetBox().GetSize(Rml::Box::CONTENT).Round();
 		Rml::GeometryUtilities::GenerateQuad(&vertices[0], &indices[0], Rml::Vector2f(0, 0), quad_size, quad_colour, texcoords[0], texcoords[1]);
 		geometry_dirty = false;
-
 	}
 
-	bool RmlIframe::LoadTexture(){
-
+	bool RmlIframe::LoadTexture(){ // 3
+		//Original RmlUi img element code
 		texture_dirty = false;
 		geometry_dirty = true;
 		dimensions_scale = 1.0f;
 		const float dp_ratio = Rml::ElementUtilities::GetDensityIndependentPixelRatio(this);
+		/*
 		// Check for a sprite first, this takes precedence.
 		const Rml::String sprite_name = Rml::Element::GetAttribute< Rml::String >("sprite", "");
 		if (!sprite_name.empty()){
@@ -191,22 +182,21 @@ public:
 			}
 		}
 		else{
-			// Load image from source URL.
-			const Rml::String source_name = GetAttribute< Rml::String >("src", "");
-		if (source_name.empty()){
+		*/
+			const Rml::String id_name = GetAttribute< Rml::String >("id", ""); // Load image from source URL.
+			if (id_name.empty()){
 				texture = Rml::Texture();
 				rect_source = RectSource::None;
 				return false;
 			}
-		Rml::URL source_url;
+			Rml::URL source_url;
 			if (Rml::ElementDocument* document = GetOwnerDocument())
 				source_url.SetURL(document->GetSourceURL());
-			texture.Set(source_name, source_url.GetPath());
+			texture.Set("[CEF]"+id_name, source_url.GetPath());  
 			dimensions_scale = dp_ratio;
-		}
+		//}
 		// Set the texture onto our geometry object.
 		geometry.SetTexture(&texture);
-
 		return true;
 	}
 
