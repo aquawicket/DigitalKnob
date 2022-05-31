@@ -17,18 +17,28 @@ var CSSStyleDeclaration = function(pointer) {
         this[propertyName] = CPP_DKDomCSSStyleDeclaration_getPropertyPriority(this.pointer, propertyName)
         return this[propertyName];
     }
+	
     CSSStyleDeclaration.prototype.getPropertyValue = function(propertyName) {
         this[propertyName] = CPP_DKDomCSSStyleDeclaration_getPropertyValue(this.pointer, propertyName)
         return this[propertyName];
     }
+	
+	// item:  https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleDeclaration/item
+	CSSStyleDeclaration.prototype.item = function(index) {
+        this[index] = CPP_DKDomCSSStyleDeclaration_item(this.pointer, index)
+        return this[index];
+    }
+	
     CSSStyleDeclaration.prototype.removeProperty = function(propertyName) {
         var oldValue = CPP_DKDomCSSStyleDeclaration_removeProperty(this.pointer, propertyName)
         return oldValue;
     }
+	
     CSSStyleDeclaration.prototype.setProperty = function(propertyName, propertyValue, priority) {
         CPP_DKDomCSSStyleDeclaration_setProperty(this.pointer, propertyName, propertyValue)
         this[propertyName] = propertyValue;
     }
+	
     const proxy = new Proxy(this,{
         has: function(target, key) {
             return key in target;

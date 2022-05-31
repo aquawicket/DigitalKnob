@@ -60,25 +60,27 @@ int DKDomCSSStyleDeclaration::getPropertyValue(duk_context* ctx){
 	return true;
 }
 
+// returns a CSS property name from a CSSStyleDeclaration by index.
+// https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleDeclaration/item
 int DKDomCSSStyleDeclaration::item(duk_context* ctx) {
 	/*
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
 	Rml::Element* element = DKRml::addressToElement(address);
 	if (!element) {
-		DKERROR("DKDomCSSStyleDeclaration::getPropertyValue(): element invalid\n");
+		DKERROR("element invalid\n");
 		duk_push_boolean(ctx, false);
 		return true;
 	}
-	DKString propertyName = duk_require_string(ctx, 1);
-	const Rml::Property* prop = element->GetProperty(propertyName.c_str());
-	if (!prop) {
-		DKERROR("DKDomCSSStyleDeclaration::getPropertyValue: prop is invalid\n");
+	int propertyIndex = duk_require_int(ctx, 1);
+	const propertyName = element->GetPropertyNameByIndex(propertyIndex);
+	if (!propertyName) {
+		DKERROR("propertyName is invalid\n");
 		duk_push_boolean(ctx, false);
 		return true;
 	}
 	DKString propertyValue = element->GetProperty(propertyName.c_str())->ToString();
-	duk_push_string(ctx, propertyValue.c_str());
+	duk_push_string(ctx, propertyName.c_str());
 	return true;
 	*/
 	return DKERROR("not implemented \n");
