@@ -297,8 +297,8 @@ int DKDomElement::outerHTML(duk_context* ctx){
 	}
 	//get
 	if (!duk_is_string(ctx, 1)) {
-		DKERROR("DKDomElement::outerHTML(): FIXME: TODO\n"); return false;
-		DKString outerHtml = element->GetInnerRML(); //FIXME: element has bot GetOuterRml
+		//DKERROR("DKDomElement::outerHTML(): FIXME: TODO\n");
+		DKString outerHtml = element->GetInnerRML(); //FIXME: element needs GetOuterRml
 		if (outerHtml.empty()) { return true; }
 		duk_push_string(ctx, outerHtml.c_str());
 	}
