@@ -152,6 +152,13 @@ var HTMLElement = function(pointer) {
             return CPP_DKDomHTMLElement_offsetWidth(pointer);
         }
     });
+	
+	// outerText: https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/outerText
+	Object.defineProperty(this, "outerText", {
+        get: function() {
+            return CPP_DKDomHTMLElement_outerText(pointer);
+        }
+    });
     Object.defineProperty(this, "properties", {
         get: function() {
             return CPP_DKDomHTMLElement_properties(pointer);

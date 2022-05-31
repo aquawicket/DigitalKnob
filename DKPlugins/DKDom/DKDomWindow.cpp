@@ -569,12 +569,13 @@ int DKDomWindow::focus(duk_context* ctx){
 }
 
 //TODO - finish implementation
+// getComputedStyle: https://developer.mozilla.org/en-US/docs/Web/API/Window/getComputedStyle
 int DKDomWindow::getComputedStyle(duk_context* ctx){
 	DKString address = duk_require_string(ctx, 0);
 	Rml::Element* element = DKRml::addressToElement(address);
 	if (!element) {
 		duk_push_undefined(ctx);
-		return DKERROR("DKDomCSSStyleDeclaration::getPropertyValue(): element invalid\n");
+		return DKERROR("DKDomWindow::getComputedStyle(): element invalid\n");
 	}
 	const Rml::ComputedValues& values = element->GetComputedValues();
 	duk_push_undefined(ctx);

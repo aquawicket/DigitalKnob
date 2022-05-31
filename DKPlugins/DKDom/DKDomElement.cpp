@@ -287,25 +287,28 @@ int DKDomElement::innerHTML(duk_context* ctx){
 	return true && DKDEBUGRETURN(ctx, innerHTML);
 }
 
+// outerHTML:  https://developer.mozilla.org/en-US/docs/Web/API/Element/outerHTML
 int DKDomElement::outerHTML(duk_context* ctx){
+	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
 	Rml::Element* element = DKRml::addressToElement(address);
-	if (!element) {
+	if(!element){
 		DKERROR("element invalid\n");
 		duk_push_undefined(ctx);
 		return true;
 	}
 	//get
-	if (!duk_is_string(ctx, 1)) {
-		//DKERROR("DKDomElement::outerHTML(): FIXME: TODO\n");
-		DKString outerHtml = element->GetInnerRML(); //FIXME: element needs GetOuterRml
-		if (outerHtml.empty()) { return true; }
+	if(!duk_is_string(ctx, 1)){
+		//DKString outerHtml = element->GetInnerRML(); 
+		DKString outerHtml = DKRml::GetOuterRML(element); //FIXME: supply a DKRml::GetOuterRml method
+		if(outerHtml.empty()){ return true; }
 		duk_push_string(ctx, outerHtml.c_str());
 	}
 	//set
-	else {
+	else{
 		DKString outerHTML = duk_require_string(ctx, 1);
-		element->SetInnerRML(outerHTML.c_str());
+		//element->SetOuterRML(outerHTML.c_str());
+		DKRml::SetOuterRML(element, outerHTML.c_str()); //FIXME: supply a DKRml::SetOuterRml method
 	}
 	return true && DKDEBUGRETURN(ctx, outerHTML);
 }

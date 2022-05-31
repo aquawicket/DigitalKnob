@@ -71,6 +71,14 @@ var Window = function(pointer)
 			return CPP_DKDomWindow_fullScreen(pointer, val)
         }
     })
+	
+	// getComputedStyle: https://developer.mozilla.org/en-US/docs/Web/API/Window/getComputedStyle
+	Object.defineProperty(this, "getComputedStyle", {
+        get: function() {
+			return CPP_DKDomWindow_getComputedStyle(pointer)
+        }
+    })
+	
     Object.defineProperty(this, "history", {
         get: function() {
 			return CPP_DKDomWindow_history(pointer)
