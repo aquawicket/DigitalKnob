@@ -282,8 +282,6 @@ bool DKRml::LoadUrl(const DKString& url){
 }
 
 void DKRml::ProcessEvent(Rml::Event& rmlEvent){
-	//TODO - make rmlEvent accessable through javascript
-	//1. Create Javascript Event object that references the rmlEvent
 	DKString rmlEventAddress = eventToAddress(&rmlEvent);
 	//DKString code = "new Event("+rmlEventAddress+")";
 	//DKString rval;
@@ -519,115 +517,6 @@ bool DKRml::UnregisterEvent(const DKString& elementAddress, const DKString& type
 	return true;
 }
 
-/*
-Rml::Event* DKRml::addressToEvent(const DKString& address){
-	//DKDEBUGFUNC(address);
-	Rml::Event* event;
-	if (address.compare(0, 2, "0x") != 0 || address.size() <= 2 || address.find_first_not_of("0123456789abcdefABCDEF", 2) != std::string::npos) {
-		DKERROR("the address ("+address+") is not a valid hex notation\n");
-		return NULL;
-	}
-	//Convert a string of an address back into a pointer
-	std::stringstream ss;
-	ss << address.substr(2, address.size() - 2);
-	//int tmp(0);
-	std::uint64_t tmp;
-	if (!(ss >> std::hex >> tmp)) {
-		DKERROR("DKRml::addressToEvent(" + address + "): invalid address\n");
-		return NULL;
-	}
-	event = reinterpret_cast<Rml::Event*>(tmp);
-	if (!event->GetCurrentElement()) {
-		DKERROR("DKRml::addressToEvent(" + address + "): currentElement invalid\n");
-		return NULL;
-	}
-	return event;
-}
-
-DKString DKRml::eventToAddress(Rml::Event* event){
-	if (!event) {
-		DKERROR("DKRml::eventToAddress(): invalid event\n");
-		return "";
-	}
-	std::stringstream ss;
-	const void* address = static_cast<const void*>(event);
-#ifdef WIN32
-	ss << "0x" << address;
-#else 
-	ss << address;
-#endif
-	return ss.str();
-}
-
-Rml::Element* DKRml::addressToElement(const DKString& address) {
-	//DKDEBUGFUNC(address);
-	Rml::Element* element = nullptr;
-	if (address == "window") {
-		element = DKRml::Get()->document->GetContext()->GetRootElement(); //Root element that holds all the documents.
-	}
-	else if (address == "document") {
-		element = DKRml::Get()->document->GetOwnerDocument();
-	}
-	//else if (address == "document") {
-	//	element = DKRml::Get()->document;
-	//}
-	else {
-		if (address.compare(0, 2, "0x") != 0 || address.size() <= 2 || address.find_first_not_of("0123456789abcdefABCDEF", 2) != std::string::npos) {
-			DKERROR("NOTE: DKRml::addressToElement(): the address is not a valid hex notation");
-			return NULL;
-		}
-		//Convert a string of an address back into a pointer
-		std::stringstream ss;
-		ss << address.substr(2, address.size() - 2);
-		std::uint64_t tmp;
-		if (!(ss >> std::hex >> tmp)) {
-			DKERROR("invalid address\n");
-			return NULL;
-		}
-		element = reinterpret_cast<Rml::Element*>(tmp);
-	}	
-	if (!element) {
-		DKERROR("invalid element\n");
-		return NULL;
-	}
-	if (element->GetTagName().empty())
-		return NULL;
-	return element;
-}
-
-DKString DKRml::elementToAddress(Rml::Element* element){
-	if (!element) {
-		DKERROR("DKRml::elementToAddress(): invalid element\n");
-		return "";
-	}
-	std::stringstream ss;
-	if (element == DKRml::Get()->document->GetContext()->GetRootElement())
-		ss << "window";
-	else if (element == DKRml::Get()->document->GetOwnerDocument())
-		ss << "document";
-	else if (element == DKRml::Get()->document) {
-		//TEST: Let's just test if we ever hear anything from this one
-#ifdef HAVE_Throw
-		throw DKERROR("!!!! element = DKRml::Get()->document  !!!!");
-#endif
-		ss << "document";
-	}
-	else {
-		const void* address = static_cast<const void*>(element);
-#ifdef WIN32
-		ss << "0x" << address;
-#else 
-		ss << address;
-#endif
-	}
-	if (same("0xDDDDDDDD", ss.str()))
-		return "";
-	return ss.str();
-}
-*/
-
-
-
 Rml::Event* DKRml::addressToEvent(const DKString& address) {
 	//DKDEBUGFUNC(address);
 	Rml::Event* event;
@@ -710,4 +599,46 @@ DKString DKRml::elementToAddress(Rml::Element* element) {
 		return "";
 	}
 	return ss.str();
+}
+
+//TODO
+bool DKRml::GetOuterHTML(Rml::Element* element, DKString& outerHtml) {
+	/*
+	//DKDEBUGFUNC(element, outerHtml);
+	if (!element)
+		return DKERROR("element invalid");
+	Rml::Element* parent = element->GetParentNode();
+	DKString htmlstring;
+	parent->GetInnerRML(htmlstring);
+	if (htmlstring.empty())
+		return DKERROR("htmlstring is empty \n");
+	DKXml xml;
+	if (!xml.LoadDocumentFromString(htmlstring))
+		return DKERROR("xml.LoadDocumentFromString() failed \n");
+	xml.RemoveNodes("handle");
+	DKString id = element->GetId();
+	DKString style;
+	BuildStyleString(id, style);
+	xml.SetAttributes("//*[@id=\"" + id + "\"]", "style", style); //Update the style string
+	style = "";
+
+	DKStringArray ids;
+	GetElements(id, ids);
+	for (unsigned int i = 0; i < ids.size(); ++i) {
+		BuildStyleString(ids[i], style);
+		xml.SetAttributes("//*[@id=\"" + ids[i] + "\"]", "style", style); //Update the style string
+		style = "";
+		//TODO - rebuild options string for <select> elements
+	}
+
+	if (!xml.GetFullNode("//*[@id=\"" + id + "\"]", outerHtml))
+		return DKERROR("xml.GetFullNode() failed \n");
+	return true;
+	*/
+	return DKERROR("not implemented \n");
+}
+
+//TODO
+bool DKRml::SetOuterHTML(Rml::Element* element, const DKString& outerHtml) {
+	return DKERROR("not implemented \n");
 }

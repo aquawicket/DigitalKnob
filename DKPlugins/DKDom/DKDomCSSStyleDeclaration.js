@@ -10,8 +10,13 @@ var CSSStyleDeclaration = function(pointer) {
     //parentRule
 
     // Properties
+	//cssFloat
 
     // Methods
+	CSSStyleDeclaration.prototype.getPropertyPriority = function(propertyName) {
+        this[propertyName] = CPP_DKDomCSSStyleDeclaration_getPropertyPriority(this.pointer, propertyName)
+        return this[propertyName];
+    }
     CSSStyleDeclaration.prototype.getPropertyValue = function(propertyName) {
         this[propertyName] = CPP_DKDomCSSStyleDeclaration_getPropertyValue(this.pointer, propertyName)
         return this[propertyName];

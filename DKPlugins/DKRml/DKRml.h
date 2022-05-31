@@ -31,6 +31,8 @@ public:
 	static DKString eventToAddress(Rml::Event* event);
 	static Rml::Element* addressToElement(const DKString& address);
 	static DKString elementToAddress(Rml::Element* element);
+	static bool GetOuterHTML(Rml::Element* element, DKString& outerHtml);
+	static bool SetOuterHTML(Rml::Element* element, const DKString& outerHtml);
 	DKString href;
 	DKString protocol;
 	DKString _path;

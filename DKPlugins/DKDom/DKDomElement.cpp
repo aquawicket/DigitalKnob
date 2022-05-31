@@ -299,16 +299,15 @@ int DKDomElement::outerHTML(duk_context* ctx){
 	}
 	//get
 	if(!duk_is_string(ctx, 1)){
-		//DKString outerHtml = element->GetInnerRML(); 
-		DKString outerHtml = DKRml::GetOuterRML(element); //FIXME: supply a DKRml::GetOuterRml method
+		DKString outerHtml;
+		DKRml::GetOuterHTML(element, outerHtml);
 		if(outerHtml.empty()){ return true; }
 		duk_push_string(ctx, outerHtml.c_str());
 	}
 	//set
 	else{
 		DKString outerHTML = duk_require_string(ctx, 1);
-		//element->SetOuterRML(outerHTML.c_str());
-		DKRml::SetOuterRML(element, outerHTML.c_str()); //FIXME: supply a DKRml::SetOuterRml method
+		DKRml::SetOuterHTML(element, outerHTML.c_str());
 	}
 	return true && DKDEBUGRETURN(ctx, outerHTML);
 }

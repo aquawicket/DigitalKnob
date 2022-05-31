@@ -7,7 +7,7 @@
 #include "DKDuktape.h"
 
 
-//https://github.com/svaarala/duktape/blob/master/tests/api/test-set-global-object.c
+// https://github.com/svaarala/duktape/blob/master/tests/api/test-set-global-object.c
 static void dump_global_object_keys(duk_context *ctx) {
 	/* Prints only non-enumerable keys.  We can't use e.g.
 	 * Object.getOwnPropertyNames() here because we might
@@ -577,7 +577,8 @@ int DKDomWindow::getComputedStyle(duk_context* ctx){
 		duk_push_undefined(ctx);
 		return DKERROR("DKDomWindow::getComputedStyle(): element invalid\n");
 	}
-	const Rml::ComputedValues& values = element->GetComputedValues();
+	const Rml::ComputedValues& computedValues = element->GetComputedValues();
+
 	duk_push_undefined(ctx);
 	return DKERROR("DKDomWindow::getComputedStyle not implemented\n");
 }
