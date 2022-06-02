@@ -405,6 +405,11 @@ else {
     }
 }
 
+//	dk.file.stringToFile(string, path, flags, callback)
+//		(str)    string: the text string to save
+//		(path)   string: the file path to save to
+//		(flags)     int: FILE_APPEND, FILE_USE_INCLUDE_PATH, LOCK_EX
+//		(callback) bool: return boolean result variable
 if (typeof CPP_DKFile_StringToFile === "function") {
     DKFile.prototype.stringToFile = function DKFile_stringToFile(str, path, flags, callback) {
         path = dk.file.validatepath(path);

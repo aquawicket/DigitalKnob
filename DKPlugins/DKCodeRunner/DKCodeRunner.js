@@ -45,10 +45,12 @@ DKCodeRunner.prototype.create = function DKCodeRunner_create(parent, top, bottom
 	div.appendChild(textarea)
 	
 	dk.file.fileToString("cache.txt", function(str){
+		if(!str)
+			console.error("dk.file.fileToString(cache.txt): failed")
+		else
 		textarea.value = str
 	})
-	
-	
+
 	textarea.oncontextmenu = function textarea_oncontextmenu(event) {
 		event.preventDefault();
 		const dkmenu = DKMenu.prototype.create(textarea)
@@ -64,13 +66,13 @@ DKCodeRunner.prototype.create = function DKCodeRunner_create(parent, top, bottom
 	// CEF ///////////////////////////////////////////////
 	textarea.oninput = function textarea_oninput(event) {
 		console.log("input")
+		dk.coderunner.saveCache(textarea.value)
 	}
 	// RML /////////////////////////////////////////////////
 	textarea.onchange = function textarea_onchange(event) {
 		console.log("change")
+		dk.coderunner.saveCache(textarea.value)
 	}
-	
-	
 	
 	dk.gui.createButton(document.body, "Run Code", "4rem", "", "50rem", "", "100rem", "20rem", function() {
         console.log("*** Running Code ***")
@@ -113,6 +115,13 @@ DKCodeRunner.prototype.create = function DKCodeRunner_create(parent, top, bottom
 			CPP_DKCef_ShowDevTools()
 	})
 }
+
+DKCodeRunner.prototype.saveCache = function DKCodeRunner_saveCache(str){
+	dk.file.stringToFile(str, "cache.txt", 0, function(result){
+		DUMP({result})
+	})
+}
+
 
 DKCodeRunner.prototype.close = function DKCodeRunner_close(){
 	console.log("DKCodeRunner.prototype.close()")

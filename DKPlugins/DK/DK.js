@@ -75,6 +75,72 @@ const ok = function ok(callback, result) {
     return result;
 }
 
+const DUMP = function dk_dumpVariable(variable) {
+	if (typeof variable !== "object")
+            throw new Error(" Must use {} around variables when using dump. EXAMPLE: dk.dump({myVariable})");
+		
+    const pink = "color:rgb(220,120,220);"
+    const white = "color:rgb(213.213.213);"
+    const blue = "color:rgb(113,113,263); font-style:italic;"
+    const color = "color:rgb(100,100,250);"
+    const lightBlue = "color:rgb(91,171,209);"
+    const grey = "color:rgb(142,142,142);"
+    const orange = "color:rgb(226,131,81);"
+    let name;
+    if (typeof variable === "object") {
+        console.group("%c" + variable.constructor.name + " {}", "color:rgb(213,213,213);font-style:italic;")
+        //const type = Object.prototype.toString.call(variable).slice(8, -1);
+        //console.log("%c valueOf: %c"+ variable.valueOf(), pink, color);
+        //console.log("%c typeof: %c" + typeof variable, pink, color);
+        for (let key in variable) {
+            if (variable[key] === variable) {
+                continue;
+                return error("infinate loop")
+            }
+            if (typeof variable[key] === "function")
+                console.log("%c " + key + "%c: %c f %c" + variable[key].name + "()", pink, white, blue, white);
+            else if (typeof variable[key] === "object") {
+                if (variable[key]instanceof HTMLElement)
+                    console.log("%c " + key + "%c: %c" + variable[key].localName, pink, white, lightBlue);
+                else if (variable[key] && variable[key].constructor && variable[key].constructor.name === "Array")
+                    console.log("%c " + key + "%c: %c" + variable[key], pink, white, grey);
+                else
+                    console.log("%c " + key + "%c: %c" + variable[key], pink, white, grey);
+            } else if (typeof variable[key] === "string") {
+                console.log("%c " + key + "%c: %c\"" + variable[key] + "\"", pink, white, orange);
+            } else
+                console.log("%c " + key + "%c: " + variable[key], pink, white);
+        }
+        //console.log("%c variable = " + variable, color);
+        console.log("%c variable.constructor = " + variable.constructor, color);
+        console.log("%c variable.constructor.name = " + variable.constructor.name, color);
+        console.log("%c variable.__proto__ = " + variable.__proto__, color);
+        console.log("%c variable.__proto__.constructor = " + variable.__proto__.constructor, color);
+        console.log("%c variable.prototype = " + variable.prototype, color);
+        console.groupEnd();
+    }
+    if (typeof variable === "function")
+        console.group("%c" + variable, "color:rgb(213,213,213);font-style:italic;")
+    if (typeof variable === "array")
+        console.group("%c" + variable, "color:rgb(213,213,213);font-style:italic;")
+    //for(let key in variable)
+    //    console.log("%c variable."+key+" = "+variable[key], color);
+
+    //for(let key in variable.__proto__.constructor)
+    //console.log("%c variable.__proto__."+key+" = "+variable.__proto__[key], color);
+	const variable_name = Object.keys({variable})[0]
+    console.log(variable_name+" = "+variable)
+    /*
+    if (typeof variable === "object")
+        console.log(variable)
+    if (typeof variable === "function")
+        console.log(variable.prototype)
+    if (typeof variable === "array")
+        console.log(variable)
+    */
+}
+
+
 //prevent screen highlighting while dragging
 document.onselectstart = function document_onselectstart() {
     return false;
@@ -1387,65 +1453,5 @@ dk.classExtends = function dk_classExtends(child_class, parent_class) {
     return child_class
 }
 
-dk.dump = function dk_dumpVariable(variable) {
-    const pink = "color:rgb(220,120,220);"
-    const white = "color:rgb(213.213.213);"
-    const blue = "color:rgb(113,113,263); font-style:italic;"
-    const color = "color:rgb(100,100,250);"
-    const lightBlue = "color:rgb(91,171,209);"
-    const grey = "color:rgb(142,142,142);"
-    const orange = "color:rgb(226,131,81);"
-    let name;
-    if (typeof variable === "object") {
-        console.group("%c" + variable.constructor.name + " {}", "color:rgb(213,213,213);font-style:italic;")
-        //const type = Object.prototype.toString.call(variable).slice(8, -1);
-        //console.log("%c valueOf: %c"+ variable.valueOf(), pink, color);
-        //console.log("%c typeof: %c" + typeof variable, pink, color);
-        for (let key in variable) {
-            if (variable[key] === variable) {
-                continue;
-                return error("infinate loop")
-            }
-            if (typeof variable[key] === "function")
-                console.log("%c " + key + "%c: %c f %c" + variable[key].name + "()", pink, white, blue, white);
-            else if (typeof variable[key] === "object") {
-                if (variable[key]instanceof HTMLElement)
-                    console.log("%c " + key + "%c: %c" + variable[key].localName, pink, white, lightBlue);
-                else if (variable[key] && variable[key].constructor && variable[key].constructor.name === "Array")
-                    console.log("%c " + key + "%c: %c" + variable[key], pink, white, grey);
-                else
-                    console.log("%c " + key + "%c: %c" + variable[key], pink, white, grey);
-            } else if (typeof variable[key] === "string") {
-                console.log("%c " + key + "%c: %c\"" + variable[key] + "\"", pink, white, orange);
-            } else
-                console.log("%c " + key + "%c: " + variable[key], pink, white);
-        }
-        //console.log("%c variable = " + variable, color);
-        console.log("%c variable.constructor = " + variable.constructor, color);
-        console.log("%c variable.constructor.name = " + variable.constructor.name, color);
-        console.log("%c variable.__proto__ = " + variable.__proto__, color);
-        console.log("%c variable.__proto__.constructor = " + variable.__proto__.constructor, color);
-        console.log("%c variable.prototype = " + variable.prototype, color);
-        console.groupEnd();
-    }
-    if (typeof variable === "function")
-        console.group("%c" + variable, "color:rgb(213,213,213);font-style:italic;")
-    if (typeof variable === "array")
-        console.group("%c" + variable, "color:rgb(213,213,213);font-style:italic;")
-    //for(let key in variable)
-    //    console.log("%c variable."+key+" = "+variable[key], color);
-
-    //for(let key in variable.__proto__.constructor)
-    //console.log("%c variable.__proto__."+key+" = "+variable.__proto__[key], color);
-    console.log(variable)
-    /*
-    if (typeof variable === "object")
-        console.log(variable)
-    if (typeof variable === "function")
-        console.log(variable.prototype)
-    if (typeof variable === "array")
-        console.log(variable)
-    */
-}
 
 dk.init();
