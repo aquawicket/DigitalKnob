@@ -35,6 +35,7 @@ if(!DUKTAPE) {
     }
 }
 
+// required({args})
 const required = function required() {
     for (let n = 0; n < arguments.length; n++) {
         if (typeof arguments[n] !== "object")
@@ -46,10 +47,12 @@ const required = function required() {
     }
 }
 
+// byId(id)
 const byId = function byId(id) {
     return document.getElementById(id);
 }
 
+// error(str, callback, result)
 const error = function error(str, callback, result) {
     !result && (result = false);
     console.error(str);
@@ -62,6 +65,7 @@ const error = function error(str, callback, result) {
     return result;
 }
 
+// warn(str, callback, result)
 const warn = function warn(str, callback, result) {
     !result && (result = false);
     console.warn(str);
@@ -69,12 +73,14 @@ const warn = function warn(str, callback, result) {
     return result;
 }
 
+// ok(callback, result)
 const ok = function ok(callback, result) {
     !result && (result = true);
     callback && callback(result);
     return result;
 }
 
+// DUMP({variable})
 const DUMP = function dk_dumpVariable(variable) {
 	if (typeof variable !== "object")
             throw new Error(" Must use {} around variables when using dump. EXAMPLE: dk.dump({myVariable})");
@@ -140,12 +146,13 @@ const DUMP = function dk_dumpVariable(variable) {
     */
 }
 
-
+// document.onselectstart()
 //prevent screen highlighting while dragging
 document.onselectstart = function document_onselectstart() {
     return false;
 }
 
+// document.addEventListener("mousemove", calback)
 document.addEventListener("mousemove", function document_addEventListener(event) {
     if (dk.iE()) {
         // grab the x-y pos.s if browser is IE
@@ -172,6 +179,7 @@ document.addEventListener("mousemove", function document_addEventListener(event)
     return true;
 });
 
+// dk.init()
 dk.init = function dk_init() {
 	!DUKTAPE && eval("var __temp = null");
 	const use_strict = (typeof __temp === "undefined");
@@ -182,6 +190,7 @@ dk.init = function dk_init() {
     dk.create("DK/DK.css");
 }
 
+// dk.hasCPP()
 dk.hasCPP = function dk_hasCPP() {
     if (dk.useCPP === false) {
         return false;
@@ -206,6 +215,7 @@ dk.hasCPP = function dk_hasCPP() {
     return dk.cpp;
 }
 
+// dk.create(data, callback)
 dk.create = function dk_create(data, dk_create_callback) {
     if (dk.hasCPP())
         CPP_DK_Create(data);
@@ -251,6 +261,7 @@ dk.create = function dk_create(data, dk_create_callback) {
     return true;
 }
 
+// dk.close(data)
 dk.close = function dk_close(data) {
     required({
         data
@@ -302,6 +313,7 @@ dk.close = function dk_close(data) {
     return error("data[1] invalid");
 }
 
+// dk.getPlugin(url)
 dk.getPlugin = function dk_getPlugin(url) {
     required({
         url
@@ -341,6 +353,7 @@ dk.getPlugin = function dk_getPlugin(url) {
     return plugin;
 }
 
+// dk.loadJs(url, callback)
 dk.loadJs = function dk_loadJs(url, dk_loadJs_callback) {
     console.warn("Use DKPlugin() instead of dk.create to load .js files now");
     required({
@@ -410,6 +423,7 @@ dk.loadJs = function dk_loadJs(url, dk_loadJs_callback) {
     return true;
 }
 
+// dk.loadHtml(url, parent, callback)
 dk.loadHtml = function dk_loadHtml(url, parent, dk_loadHtml_callback) {
     required({
         url
@@ -450,6 +464,7 @@ dk.loadHtml = function dk_loadHtml(url, parent, dk_loadHtml_callback) {
     return true;
 }
 
+// dk.loadCss(url, calback)
 dk.loadCss = function dk_loadCss(url, dk_loadCss_callback) {
     required({
         url
@@ -475,6 +490,7 @@ dk.loadCss = function dk_loadCss(url, dk_loadCss_callback) {
     return link;
 }
 
+// dk.checkFileSupport()
 dk.checkFileSupport = function dk_checkFileSupport() {
     if (window.File && window.FileReader && window.FileList && window.Blob) {
         console.log("File support OK");
@@ -484,6 +500,7 @@ dk.checkFileSupport = function dk_checkFileSupport() {
 }
 
 /*
+// dk.preventDefault(event)
 dk.preventDefault = function dk_preventDefault(event){
     required({event});
 	if(event.stopPropagation) {
@@ -493,6 +510,7 @@ dk.preventDefault = function dk_preventDefault(event){
     }
 }
 
+// dk.stopPropagation(event)
 dk.stopPropagation = function dk_stopPropagation(event){
     required({event});
 	if(event.stopPropagation) {
@@ -503,6 +521,7 @@ dk.stopPropagation = function dk_stopPropagation(event){
 }
 */
 
+// dk.setCookie(cname, cvalue, exdays)
 dk.setCookie = function dk_setCookie(cname, cvalue, exdays) {
     required({
         cname
@@ -517,6 +536,7 @@ dk.setCookie = function dk_setCookie(cname, cvalue, exdays) {
     document.cookie = cname + "=" + cvalue + "; " + expires;
 }
 
+// dk.getCookie(cname)
 dk.getCookie = function dk_getCookie(cname) {
     required({
         cname
@@ -533,6 +553,7 @@ dk.getCookie = function dk_getCookie(cname) {
     return "";
 }
 
+// dk.makeStruct(names)
 dk.makeStruct = function dk_makeStruct(names) {
     required({
         names
@@ -551,6 +572,7 @@ dk.makeStruct = function dk_makeStruct(names) {
     //alert(row.speaker); // displays: john
 }
 
+// dk.replace(str, old, newstr)
 /*
 dk.replace = function dk_replace(str, old, newstr) {
     required({str},{old},{newstr});
@@ -559,6 +581,7 @@ dk.replace = function dk_replace(str, old, newstr) {
 }
 */
 
+// dk.isLocal()
 /*
 This is a misleading function.
 dk.isLocal = function dk_isLocal() {
@@ -578,14 +601,12 @@ dk.isLocal = function dk_isLocal() {
 }
 */
 
+// dk.available(name)
+// FIXME: This function needs to be investigated
 dk.available = function dk_available(name) {
-    required({
-        name
-    });
-    //FIXME: This function needs to be investigated
-    if (name === "DKWidget") {
+    required({name});
+    if (name === "DKWidget")
         return true;
-    }
     if (name === "DKWidgetJS") {
         //FIXME: is this needed?
         console.log("DKAvailable(" + name + "): name === DKWidgetJS!  check DK.js line 235");
@@ -594,15 +615,16 @@ dk.available = function dk_available(name) {
     return false;
 }
 
-dk.getObjects = function dk_getObjects() {
+// dk.getObjects()
+dk.getObjects = function dk_getObjects() 
+{
     // Search the Dom for all scripts (.js files)
     var jsfiles = "";
     var elements = document.getElementsByTagName("script");
     for (var i = 0; elements && i < elements.length; i++) {
         if (!elements[i].id) {
-            if (elements[i].src) {
+            if (elements[i].src)
                 elements[i].id = elements[i].src;
-            }
             //console.warn(elements[i].src+": script object has no id");
             //continue;
         }
@@ -632,14 +654,26 @@ dk.getObjects = function dk_getObjects() {
                 //console.warn(div + ": html object has no id");
                 continue;
             }
-            if (div.id.indexOf(".html") > -1) {
+            if (div.id.indexOf(".html") > -1)
                 htmlfiles += div.id + ",";
-            }
         }
     }
     return jsfiles + cssfiles + htmlfiles;
 }
 
+// dk.getEvents()
+dk.getEvents = function dk_getEvents() {
+	console.log("dk.getEvents: not implemented")
+	return ""
+}
+
+// dk.getFunctions()
+dk.getFunctions = function dk_getFunctions() {
+	console.log("dk.getFunctions: not implemented")
+	return ""
+}
+
+// dk.getOS()
 dk.getOS = function dk_GetOS() {
     var userAgent = navigator.userAgent || navigator.vendor || window.opera;
     // Windows Phone must come first because its UA also contains "Android"
@@ -664,6 +698,7 @@ dk.getOS = function dk_GetOS() {
     return os_value;
 }
 
+// dk.getBrowser()
 dk.getBrowser = function dk_getBrowser() {
     if (navigator.userAgent.indexOf("Rml") !== -1) {
         dk.rml = true;
@@ -686,6 +721,7 @@ dk.getBrowser = function dk_getBrowser() {
     }
 }
 
+// dk.getJSEngine()
 dk.getJSEngine = function dk_getJSEngine() {
     if (navigator.product === "Duktape") {
         dk.duktape = true;
@@ -705,6 +741,7 @@ dk.getJSEngine = function dk_getJSEngine() {
     return "UNKNOWN JAVASCRIPT ENGINE"
 }
 
+// dk.getIE()
 dk.iE = function dk_iE() {
     var rv = 0;
     if (navigator.appName === 'Microsoft Internet Explorer') {
@@ -723,6 +760,7 @@ dk.iE = function dk_iE() {
     return rv;
 }
 
+// dk.fileToString()
 if(typeof CPP_DKFile_FileToString === "function"){
 	dk.fileToString = function DKFile_fileToString(path, callback) {
 		console.log("dk.fileToString()")
@@ -744,6 +782,7 @@ if(typeof CPP_DKFile_FileToString === "function"){
 	}
 }
 
+// dk.sleep()
 dk.sleep = function dk_sleep(milliseconds) {
     required({
         milliseconds
@@ -756,6 +795,7 @@ dk.sleep = function dk_sleep(milliseconds) {
     }
 }
 
+// dk.clearSelection()
 dk.clearSelection = function dk_clearSelection() {
     //Clear text selection
     if (document.selection) {
@@ -765,6 +805,7 @@ dk.clearSelection = function dk_clearSelection() {
     }
 }
 
+// dk.getElements()
 dk.getElements = function dk_getElements(element) {
     required({
         element
@@ -783,6 +824,7 @@ dk.getElements = function dk_getElements(element) {
     return string;
 }
 
+// dk.getAvailableId()
 dk.getAvailableId = function dk_getAvailableId(id) {
     required({
         id
@@ -803,8 +845,10 @@ dk.getAvailableId = function dk_getAvailableId(id) {
     return out;
 }
 
+
 // *** UNKNOWN *please test* *** //
 
+// dk.getInnerHtmlString()
 dk.getInnerHtmlString = function dk_getInnerHtmlString(id) {
     required({
         id
@@ -818,6 +862,7 @@ dk.getInnerHtmlString = function dk_getInnerHtmlString(id) {
     }
 }
 
+// dk.setInnerHtmlString()
 dk.setInnerHtmlString = function dk_setInnerHtmlString(id, string) {
     required({
         id
@@ -836,6 +881,7 @@ dk.setInnerHtmlString = function dk_setInnerHtmlString(id, string) {
 
 // *** EVENTS & VALUES *** //
 /*
+// dk.getValue()
 dk.getValue = function dk_getValue(variable) {
     //FIXME: phase this function out. This function will become obsolete.
     console.error("dk.getValue(): this function is deprecated and will be obsolete");
@@ -969,6 +1015,7 @@ dk.getValue = function dk_getValue(variable) {
 }
 */
 
+// dk.preloadFile()
 dk.preloadFile = function dk_preloadFile(url) {
     required({
         url
@@ -978,6 +1025,7 @@ dk.preloadFile = function dk_preloadFile(url) {
     return file;
 }
 
+// dk.preloadImage()
 dk.preloadImage = function dk_preloadImage(url) {
     required({
         url
@@ -989,6 +1037,7 @@ dk.preloadImage = function dk_preloadImage(url) {
     }
 }
 
+// dk.saveToLocalStorage()
 dk.saveToLocalStorage = function dk_saveToLocalStorage(name, string) {
     required({
         name
@@ -998,6 +1047,7 @@ dk.saveToLocalStorage = function dk_saveToLocalStorage(name, string) {
     localStorage.setItem(name, string);
 }
 
+// dk.loadFromLocalStorage()
 dk.loadFromLocalStorage = function dk_loadFromLocalStorage(name) {
     required({
         name
@@ -1005,6 +1055,7 @@ dk.loadFromLocalStorage = function dk_loadFromLocalStorage(name) {
     return localStorage.getItem(name);
 }
 
+// dk.removeFromLocalStorage()
 dk.removeFromLocalStorage = function dk_removeFromLocalStorage(name) {
     required({
         name
@@ -1017,6 +1068,8 @@ dk.removeFromLocalStorage = function dk_removeFromLocalStorage(name) {
 //https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods
 //https://developer.mozilla.org/en-US/docs/Web/HTTP/Status
 //https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy
+
+// dk.sendRequest()
 dk.sendRequest = function dk_sendRequest(httpMethod, url, dk_sendRequest_callback) {
     required({
         httpMethod
@@ -1116,6 +1169,7 @@ dk.sendRequest = function dk_sendRequest(httpMethod, url, dk_sendRequest_callbac
     xhr.send();
 }
 
+// dk.checkForUNICODE()
 dk.checkForUNICODE = function dk_checkForUNICODE(str) {
     required({
         str
@@ -1130,6 +1184,7 @@ dk.checkForUNICODE = function dk_checkForUNICODE(str) {
     return false;
 }
 
+// dk.validateStrict()
 dk.validateStrict = function dk_validateStrict(str) {
     required({
         str
@@ -1137,6 +1192,8 @@ dk.validateStrict = function dk_validateStrict(str) {
     return str;
 }
 
+
+// dk.stringToBinary()
 //https://stackoverflow.com/a/54430417/688352
 dk.stringToBinary = function dk_sringToBinary(string) {
     //for BINARY maxBytes = 255
@@ -1150,6 +1207,7 @@ dk.stringToBinary = function dk_sringToBinary(string) {
     return binaryOutput;
 }
 
+// dk.binaryToString
 dk.binaryToString = function dk_binaryToString(binary) {
     const arrayOfBytes = binary.split(' ');
     let stringOutput = '';
@@ -1158,6 +1216,7 @@ dk.binaryToString = function dk_binaryToString(binary) {
     return stringOutput;
 }
 
+// dk.hide
 dk.hide = function dk_hide(id){
 	var element = byId(id)
 	if(!element)
@@ -1165,6 +1224,7 @@ dk.hide = function dk_hide(id){
 	element.style.display = "none"
 }
 
+// dk.show
 dk.show = function dk_show(id){
 	var element = byId(id)
 	if(!element)
@@ -1173,6 +1233,7 @@ dk.show = function dk_show(id){
 	element.style.visibility = "visible"
 }
 
+// dk.toggle
 dk.toggle = function dk_toggle(id){
 	var element = byId(id);
 	if(!element)
@@ -1188,6 +1249,7 @@ dk.toggle = function dk_toggle(id){
 			   
 ///// Pollyfils and Prototypes
 
+// String.prototype.trim()
 // trim for IE8
 if (typeof String.prototype.trim !== 'function') {
     String.prototype.trim = function String_trim() {
@@ -1195,6 +1257,7 @@ if (typeof String.prototype.trim !== 'function') {
     }
 }
 
+// Array.prototype.includes(searchElement, fromIndex)
 if (!Array.prototype.includes) {
     Array.prototype.includes = function(searchElement /*, fromIndex*/
     ) {
@@ -1232,6 +1295,7 @@ if (!Array.prototype.includes) {
     }
 }
 
+// Number.prototype.clamp(min, max)
 /**
  * Returns a number whose value is limited to the given range.
  *
@@ -1253,6 +1317,7 @@ Number.prototype.clamp = function Number_clamp(min, max) {
 }
 
 /*
+// Object.prototype.clone()
 Object.prototype.clone = Array.prototype.clone = function() {
     if (Object.prototype.toString.call(this) === '[object Array]') {
         var clone = [];
@@ -1270,6 +1335,7 @@ Object.prototype.clone = Array.prototype.clone = function() {
 }
 */
 
+// dk.errorCatcher(obj, name)
 //https://humanwhocodes.com/blog/2009/04/28/javascript-error-handling-anti-pattern/
 dk.errorCatcher = function dk_errorCatcher(obj, name) {
     required({
@@ -1310,6 +1376,7 @@ dk.errorCatcher = function dk_errorCatcher(obj, name) {
     }
 }
 
+// dk.testSyntax(code)
 // https://stackoverflow.com/a/63785848/688352
 dk.testSyntax = function dk_testSyntax(code) {
     required({
@@ -1322,6 +1389,7 @@ dk.testSyntax = function dk_testSyntax(code) {
     }
 }
 
+//dk.getNewFuncs()
 dk.getNewFuncs = function dk_getNewFuncs() {
     !dk.windowfuncs && (dk.windowfuncs = new Array)
     const newfuncs = new Array
@@ -1348,7 +1416,7 @@ dk.getNewFuncs = function dk_getNewFuncs() {
     return newfuncs;
 }
 
-//Useage: Object.byString(someObj, 'part3[0].name');  
+// Object.byString(someObj, 'part3[0].name');  
 Object.byString = function(o, s) {
     // convert indexes to properties
     s = s.replace(/\[(\w+)\]/g, '.$1');
@@ -1365,10 +1433,12 @@ Object.byString = function(o, s) {
     return o;
 }
 
+// dk.insert(str, index, value)
 dk.insert = function dk_insert(str, index, value) {
     return str.substr(0, index) + value + str.substr(index);
 }
 
+// dk.renameFunction(func, name)
 // https://stackoverflow.com/a/24032179/688352
 dk.renameFunction = function dk_renameFunction(func, name) {
     const oldName = func.name;
@@ -1394,6 +1464,7 @@ dk.renameFunction = function dk_renameFunction(func, name) {
     return parent[name]
 }
 
+// dk.editFunctionBody(func, newBody)
 // https://stackoverflow.com/a/24032179/688352
 dk.editFunctionBody = function dk_editFunctionBody(func, newBody) {
     const name = func.name;
@@ -1418,6 +1489,7 @@ dk.editFunctionBody = function dk_editFunctionBody(func, newBody) {
     return parent[name]
 }
 
+// dk.StringToFunction(name, str)
 // https://stackoverflow.com/a/24032179/688352
 dk.StringToFunction = function dk_StringToFunction(name, str) {
     str = str.replace("function(", "function " + name + "(")
@@ -1441,6 +1513,7 @@ dk.StringToFunction = function dk_StringToFunction(name, str) {
     return parent[name]
 }
 
+// dk.classExtends(child_class, parent_class)
 // https://eli.thegreenplace.net/2013/10/22/classical-inheritance-in-javascript-es5
 dk.classExtends = function dk_classExtends(child_class, parent_class) {
     const child_prototype = child_class.prototype;
@@ -1454,4 +1527,5 @@ dk.classExtends = function dk_classExtends(child_class, parent_class) {
 }
 
 
+// initialize an instance of dk
 dk.init();

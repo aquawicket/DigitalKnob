@@ -703,7 +703,7 @@ DKDebug.prototype.printInfo = function DKDebug_printInfo() {
     }
     console.log("\n");
 
-    console.log("**** DKEVENTS ****");
+    console.log("**** DKFUNCTIONS ****");
     var events = dk.getFunctions();
     var arry = events.split(",");
     for (var n = 0; n < arry.length; n++) {
