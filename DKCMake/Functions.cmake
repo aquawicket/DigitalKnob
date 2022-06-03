@@ -2681,9 +2681,9 @@ function(DKIMPORT_GITHUB url) #branch #PATCH
 		DKCOMMAND(git clone ${url} ${${LIBVAR}})
 	endif()
 	DKSET(CURRENT_DIR ${${LIBVAR}})
-	DKCOMMAND("git checkout -- .")
-	DKCOMMAND("git checkout ${branch}")
-	DKCOMMAND("git pull")
+	DKCOMMAND(git checkout -- .)
+	DKCOMMAND(git checkout ${branch})
+	DKCOMMAND(git pull)
 	
 	set(arg_list "${ARGN}")
 	foreach(arg IN LISTS arg_list)
