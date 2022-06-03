@@ -185,11 +185,11 @@ bool DKLog::Log(const char* file, int line, const char* func, const DKString& in
 		}
 	}
 	if (!force) {
-		if (log_fatal == false && lvl == DK_FATAL) { return false; }
-		if (log_errors == false && lvl == DK_ERROR) { return false; }
-		if (log_warnings == false && lvl == DK_WARN) { return true; }
-		if (log_info == false && lvl == DK_INFO) { return true; }
-		if (log_debug == false && lvl == DK_DEBUG) { return true; }
+		if (log_fatal == false && lvl == DK_FATAL)     { return false; }
+		if (log_errors == false && lvl == DK_ERROR)    { return false; }
+		if (log_warnings == false && lvl == DK_WARN)   { return true; }
+		if (log_info == false && lvl == DK_INFO)       { return true; }
+		if (log_debug == false && lvl == DK_DEBUG)     { return true; }
 		if (log_verbose == false && lvl == DK_VERBOSE) { return true; }
 	}
 
@@ -218,12 +218,12 @@ bool DKLog::Log(const char* file, int line, const char* func, const DKString& in
 #	ifdef WIN32
 		WORD color;
 		if (!color_override) {
-			if (lvl == DK_ASSERT) { color = DKASSERT_COLOR; }
-			if (lvl == DK_FATAL) { color = DKFATAL_COLOR; }
-			if (lvl == DK_ERROR) { color = DKERROR_COLOR; }
-			if (lvl == DK_WARN) { color = DKWARN_COLOR; }
-			if (lvl == DK_INFO) { color = DKINFO_COLOR; }
-			if (lvl == DK_DEBUG) { color = DKDEBUG_COLOR; }
+			if (lvl == DK_ASSERT)  { color = DKASSERT_COLOR; }
+			if (lvl == DK_FATAL)   { color = DKFATAL_COLOR; }
+			if (lvl == DK_ERROR)   { color = DKERROR_COLOR; }
+			if (lvl == DK_WARN)    { color = DKWARN_COLOR; }
+			if (lvl == DK_INFO)    { color = DKINFO_COLOR; }
+			if (lvl == DK_DEBUG)   { color = DKDEBUG_COLOR; }
 			if (lvl == DK_VERBOSE) { color = DKVERBOSE_COLOR; }
 		}
 		else {
@@ -237,12 +237,12 @@ bool DKLog::Log(const char* file, int line, const char* func, const DKString& in
 			SetConsoleTextAttribute(hConsole, color);
 #	elif !defined(LINUX)
 		char color[10];
-		if(lvl == DK_ASSERT){ strcpy(color, DKASSERT_COLOR); }
-		if(lvl == DK_FATAL){ strcpy(color, DKFATAL_COLOR); }
-		if(lvl == DK_ERROR){ strcpy(color, DKERROR_COLOR); }
-		if(lvl == DK_WARN){ strcpy(color, DKWARN_COLOR); }
-		if(lvl == DK_INFO){ strcpy(color, DKINFO_COLOR); }
-		if(lvl == DK_DEBUG){ strcpy(color, DKDEBUG_COLOR); }
+		if(lvl == DK_ASSERT) { strcpy(color, DKASSERT_COLOR); }
+		if(lvl == DK_FATAL)  { strcpy(color, DKFATAL_COLOR); }
+		if(lvl == DK_ERROR)  { strcpy(color, DKERROR_COLOR); }
+		if(lvl == DK_WARN)   { strcpy(color, DKWARN_COLOR); }
+		if(lvl == DK_INFO)   { strcpy(color, DKINFO_COLOR); }
+		if(lvl == DK_DEBUG)  { strcpy(color, DKDEBUG_COLOR); }
 		if(lvl == DK_VERBOSE){ strcpy(color, DKVERBOSE_COLOR); }
 #	endif
 
@@ -270,10 +270,9 @@ bool DKLog::Log(const char* file, int line, const char* func, const DKString& in
 #	if defined(MAC) || defined (IOS)
 		if(log_xcode)
 			NSLog(@"%s", string.c_str()); //Output to XCode
-	#endif
+#	endif
 #	ifdef ANDROID
 		// https://developer.android.com/ndk/reference/group/logging
-
 		if(lvl == DK_FATAL) //Android Studio 
 			__android_log_write(ANDROID_LOG_FATAL, "DKAndroid", output.c_str());
 		else if(lvl == DK_ERROR) //Android Studio 
