@@ -226,7 +226,7 @@ void signal_handler(int signal);
 #define    DKINFO(message) DKLog::Log(__FILE__, __LINE__, __FUNCTION__, message, DK_INFO);
 #define   DKDEBUG(message) DKLog::Log(__FILE__, __LINE__, __FUNCTION__, message, DK_DEBUG);
 #define DKVERBOSE(message) DKLog::Log(__FILE__, __LINE__, __FUNCTION__, message, DK_VERBOSE);
-#define DKREDINFO(message) DKLog::Log(__FILE__, __LINE__, __FUNCTION__, message, DK_INFO, DKERROR_COLOR);
+#define DKREDINFO(message) DKLog::Log(__FILE__, __LINE__, __FUNCTION__, message, DK_INFO, (int)DKERROR_COLOR);
 
 #define DEBUG_METHOD() logy _logy(__FUNCTION__);
 
