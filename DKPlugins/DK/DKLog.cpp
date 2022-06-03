@@ -269,7 +269,7 @@ bool DKLog::Log(const char* file, int line, const char* func, const DKString& in
 #	endif
 #	if defined(MAC) || defined (IOS)
 		if(log_xcode)
-			NSLog(@"%s", string.c_str()); //Output to XCode
+			NSLog(@"%s", output.c_str()); //Output to XCode
 #	endif
 #	ifdef ANDROID
 		// https://developer.android.com/ndk/reference/group/logging
