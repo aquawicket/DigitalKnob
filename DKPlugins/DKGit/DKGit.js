@@ -396,8 +396,8 @@ function DKGit_RevertToCommit(tag){
 	console.log("This section of code is for reference. These actions must be preformed manually")	
 	return;
 	
-	git reset --hard <tag>  //tag = revision_id_of_last_known_good_commit
-	git push --force
+	//git reset --hard <tag>  //tag = revision_id_of_last_known_good_commit
+	//git push --force
 }
 
 // https://stackoverflow.com/a/5608860/688352
