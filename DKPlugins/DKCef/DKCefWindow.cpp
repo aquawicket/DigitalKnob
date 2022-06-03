@@ -846,29 +846,7 @@ void DKCefWindow::OnBeforeDownload(CefRefPtr<CefBrowser> browser, CefRefPtr<CefD
 
 bool DKCefWindow::OnConsoleMessage(CefRefPtr<CefBrowser> browser, cef_log_severity_t level, const CefString& message, const CefString& source, int line)
 {
-	//DKDEBUGFUNC(browser, level, "const CefString&", "const CefString&", line);
-	CEF_REQUIRE_UI_THREAD();
-	DKString msg = message.ToString();
-	replace(msg, "%c", "");
-	//DKINFO("DKSDLCefHandler::OnConsoleMessage("+msg+","+source.ToString()+","+toString(line)+")\n");
-	DKString string = message.ToString();
-	replace(string, "%c", "");
-	int identifier = browser->GetIdentifier();
-	if (level == LOGSEVERITY_VERBOSE)
-		DKDEBUG("[CEF:" + toString(identifier) + "] " + string + "\n");
-	if (level == LOGSEVERITY_DEBUG)
-		DKDEBUG("[CEF:" + toString(identifier) + "] " + string + "\n");
-	if (level == LOGSEVERITY_DEFAULT)
-		DKINFO("[CEF:" + toString(identifier) + "] " + string + "\n");
-	if (level == LOGSEVERITY_INFO)
-		DKINFO("[CEF:" + toString(identifier) + "] " + string + "\n");
-	if (level == LOGSEVERITY_WARNING)
-		DKWARN("[CEF:" + toString(identifier) + "] " + string + "\n");
-	if (level == LOGSEVERITY_ERROR)
-		DKWARN("[CEF:" + toString(identifier) + "] " + string + "\n");  //NOTE: Not DKERROR: We don't need javascript to throw C++ exceptions
-	if (level == LOGSEVERITY_DISABLE)
-		return true;
-	return true;
+	return dkCef->OnConsoleMessage(browser, level, message, source, line);
 }
 
 bool DKCefWindow::OnContextMenuCommand(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefContextMenuParams> params, int command_id, CefContextMenuHandler::EventFlags event_flags)

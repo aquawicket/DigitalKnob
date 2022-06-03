@@ -64,6 +64,7 @@ public:
 	bool Stop(const int& browser);
 	bool ViewPageSource(const int& browser);
 	void Test();
+	bool OnConsoleMessage(CefRefPtr<CefBrowser> browser, cef_log_severity_t level, const CefString& message, const CefString& source, int line);
 
 	bool SendEvent(const DKString& id, const DKString& type, const DKString& value);
 	bool RunDuktape(const DKString& string, DKString& rval);

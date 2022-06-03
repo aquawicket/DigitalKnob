@@ -94,7 +94,6 @@ public:
 	DKSDLCef* dkSdlCef;
 	std::vector<SDL_Texture*> cef_texture;
 
-
 	// CefAccessibilityHandler
 	//void OnAccessibilityTreeChange(CefRefPtr<CefValue> value) override;
 	//void OnAccessibilityLocationChange(CefRefPtr<CefValue> value) override;
@@ -259,7 +258,6 @@ public:
 	//CefRefPtr<CefResponseFilter> GetResourceResponseFilter(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefRequest> request, CefRefPtr<CefResponse> response) override;
 	//void OnResourceLoadComplete(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefRequest> request, CefRefPtr<CefResponse> response, URLRequestStatus status, int64 received_content_length) override;
 	//void OnProtocolExecution(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefRequest> request, bool& allow_os_execution) override;
-
 
 
 	// Miscellaneous
