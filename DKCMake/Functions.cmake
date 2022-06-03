@@ -2678,7 +2678,7 @@ function(DKIMPORT_GITHUB url) #branch #PATCH
 			dk_makeDirectory(${${LIBVAR}})
 		endif()
 		DKSET(CURRENT_DIR ${${LIBVAR}})
-		DKCOMMAND("git clone ${url} ${${LIBVAR}}")
+		DKCOMMAND(git clone ${url} ${${LIBVAR}})
 	endif()
 	DKSET(CURRENT_DIR ${${LIBVAR}})
 	DKCOMMAND("git checkout -- .")
