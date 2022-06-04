@@ -6,7 +6,6 @@
 #include <SDL.h>
 #include "DK/DK.h"
 
-///////////////////////////////////////////////////////////
 class RmlSDL2SystemInterface : public Rml::SystemInterface
 {
 public:
