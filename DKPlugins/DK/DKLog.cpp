@@ -6,6 +6,10 @@
 	#include <boxer/boxer.h>
 #endif
 #include <fstream>
+
+#ifdef MAC
+#	import <Foundation/Foundation.h>  //NSLog()
+#endif
 //#include <debugapi.h> //OutputDebugString()
 
 bool DKLog::log_fatal = true;      //console.assert()
