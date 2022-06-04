@@ -1,15 +1,14 @@
-/* 
-#ifndef RENDERINTERFACE_H
-#define RENDERINTERFACE_H
+#ifndef DKSDLRMLRENDERER_H
+#define DKSDLRMLRENDERER_H
 
 #include <SDL.h>
 #include <RmlUi/Core/RenderInterface.h>
 
 
-class RenderInterface : public Rml::RenderInterface
+class DKSDLRmlRenderer : public Rml::RenderInterface
 {
 public:
-    RenderInterface(SDL_Renderer* renderer, SDL_Window* screen);
+    DKSDLRmlRenderer(SDL_Renderer* renderer, SDL_Window* screen);
 
 	/// Called by RmlUi when it wants to render geometry that it does not wish to optimise.
 	void RenderGeometry(Rml::Vertex* vertices, int num_vertices, int* indices, int num_indices, Rml::TextureHandle texture, const Rml::Vector2f& translation) override;
@@ -45,5 +44,4 @@ private:
     SDL_Rect mScisorRect;
 };
 
-#endif
-*/
+#endif //DKSDLRMLRENDERER_H
