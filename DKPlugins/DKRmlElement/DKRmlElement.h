@@ -13,4 +13,5 @@ public:
 };
 
 REGISTER_OBJECT(DKRmlElement, true)
-#endif
+
+#endif //DKRmlElement_H

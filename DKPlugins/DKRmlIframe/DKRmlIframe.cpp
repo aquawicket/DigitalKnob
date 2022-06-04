@@ -1,6 +1,6 @@
 #include "DK/stdafx.h"
 #include "DKRmlIframe/DKRmlIframe.h"
-#include "../include/RmlUi/Core/Factory.h"
+#include "../Include/RmlUi/Core/Factory.h"
 
 bool DKRmlIframe::Init(){
 	DKDEBUGFUNC();
