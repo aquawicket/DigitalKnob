@@ -15,16 +15,16 @@
 class RmlElement : public Rml::Element 
 {
 public:
-	RmlElement::RmlElement(const Rml::String& tag) : Rml::Element(tag), dimensions(-1, -1), rect_source(RectSource::None), geometry(this){
+	RmlElement(const Rml::String& tag) : Rml::Element(tag), dimensions(-1, -1), rect_source(RectSource::None), geometry(this){
 		dimensions_scale = 1.0f;
 		geometry_dirty = false;
 		texture_dirty = true;
 	}
 
-	RmlElement::~RmlElement(){}
+	~RmlElement(){}
 
 	// Sizes the box to the element's inherent size.
-	bool RmlElement::GetIntrinsicDimensions(Rml::Vector2f& _dimensions, float& _ratio){
+	bool GetIntrinsicDimensions(Rml::Vector2f& _dimensions, float& _ratio){
 		// Check if we need to reload the texture.
 		if (texture_dirty)
 			LoadTexture();
@@ -51,7 +51,7 @@ public:
 	}
 
 	// Renders the element.
-	void RmlElement::OnRender(){
+	void OnRender(){
 		// Regenerate the geometry if required (this will be set if 'rect' changes but does not result in a resize).
 		if (geometry_dirty)
 			GenerateGeometry();
@@ -60,7 +60,7 @@ public:
 	}
 
 	// Called when attributes on the element are changed.
-	void RmlElement::OnAttributeChange(const Rml::ElementAttributes& changed_attributes){
+	void OnAttributeChange(const Rml::ElementAttributes& changed_attributes){
 		// Call through to the base element's OnAttributeChange().
 		Element::OnAttributeChange(changed_attributes);
 		bool dirty_layout = false;
@@ -82,13 +82,13 @@ public:
 			DirtyLayout();
 	}
 
-	void RmlElement::OnPropertyChange(const Rml::PropertyIdSet& changed_properties){
+	void OnPropertyChange(const Rml::PropertyIdSet& changed_properties){
 		Element::OnPropertyChange(changed_properties);
 		if (changed_properties.Contains(Rml::PropertyId::ImageColor) || changed_properties.Contains(Rml::PropertyId::Opacity))
 			GenerateGeometry();
 	}
 
-	void RmlElement::OnChildAdd(Element* child){
+	void OnChildAdd(Element* child){
 		// Load the texture once we have attached to the document so that it can immediately be found during the call to `Rml::GetTextureSourceList`. The
 		// texture won't actually be loaded from the backend before it is shown. However, only do this if we have an active context so that the dp-ratio
 		// can be retrieved. If there is no context now the texture loading will be deferred until the next layout update.
@@ -96,23 +96,23 @@ public:
 			LoadTexture();
 	}
 
-	void RmlElement::OnResize(){ // Regenerates the element's geometry.
+	void OnResize(){ // Regenerates the element's geometry.
 		GenerateGeometry();
 	}
 
-	void RmlElement::OnDpRatioChange(){
+	void OnDpRatioChange(){
 		texture_dirty = true;
 		DirtyLayout();
 	}
 
-	void RmlElement::OnStyleSheetChange(){
+	void OnStyleSheetChange(){
 		if (HasAttribute("sprite")){
 			texture_dirty = true;
 			DirtyLayout();
 		}
 	}
 
-	void RmlElement::GenerateGeometry(){
+	void GenerateGeometry(){
 		// Release the old geometry before specifying the new vertices.
 		geometry.Release(true);
 		Rml::Vector< Rml::Vertex >& vertices = geometry.GetVertices();
@@ -145,7 +145,7 @@ public:
 		geometry_dirty = false;
 	}
 
-	bool RmlElement::LoadTexture(){
+	bool LoadTexture(){
 		texture_dirty = false;
 		geometry_dirty = true;
 		dimensions_scale = 1.0f;
@@ -193,7 +193,7 @@ public:
 		return true;
 	}
 
-	void RmlElement::UpdateRect(){
+	void UpdateRect(){
 		if (rect_source != RectSource::Sprite){
 			bool valid_rect = false;
 			Rml::String rect_string = GetAttribute< Rml::String >("rect", "");
