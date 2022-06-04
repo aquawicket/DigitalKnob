@@ -7,10 +7,13 @@
 #endif
 #include <fstream>
 
+#ifdef WIN
+	#include <debugapi.h> //OutputDebugString()
+#endif
 #ifdef MAC
 #	import <Foundation/Foundation.h>  //NSLog()
 #endif
-//#include <debugapi.h> //OutputDebugString()
+
 
 bool DKLog::log_fatal = true;      //console.assert()
 bool DKLog::log_errors = true;     //console.error()
@@ -126,20 +129,21 @@ bool DKLog::Clear(int& rtnvalue){
 
 // https://www.lihaoyi.com/post/BuildyourownCommandLinewithANSIescapecodes.html
 bool DKLog::ColorMap(){
-#ifdef WIN32
-	// Save Current Colors
-	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-	CONSOLE_SCREEN_BUFFER_INFO consoleInfo;
-	GetConsoleScreenBufferInfo(hConsole, &consoleInfo);
-	WORD saved_attributes = consoleInfo.wAttributes;  
-	for(int k = 1; k < 255; k++){
-		SetConsoleTextAttribute(hConsole, k);
-		std::cout << k << "   Pick This Color ! :D   " << std::endl;
-		//printf("   Pick This Color ! :D   ");
-	}
-	// Restore Original Colors
-	SetConsoleTextAttribute(hConsole, saved_attributes); 
-#endif
+#	ifdef WIN
+		// Save Current Colors
+		HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+		CONSOLE_SCREEN_BUFFER_INFO consoleInfo;
+		GetConsoleScreenBufferInfo(hConsole, &consoleInfo);
+		WORD saved_attributes = consoleInfo.wAttributes;  
+		for(int k = 1; k < 255; k++){
+			SetConsoleTextAttribute(hConsole, k);
+			std::cout << k << "   Pick This Color ! :D   " << std::endl;
+			//printf("   Pick This Color ! :D   ");
+		}
+		// Restore Original Colors
+		SetConsoleTextAttribute(hConsole, saved_attributes);
+		return true;
+#	endif
 	return DKERROR("not implemented on this system");
 }
 

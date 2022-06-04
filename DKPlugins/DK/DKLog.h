@@ -37,15 +37,15 @@
 	#define DKDEBUG_COLOR   DKDRKBLUE
 	#define DKVERBOSE_COLOR DKLTBLUE	
 #else
-	#define DKNORMAL  "\x1B[0m"
-	#define DKRED     "\x1B[31m"
-	#define DKGREEN   "\x1B[32m"
-	#define DKYELLOW  "\x1B[33m"
-	#define DKBLUE    "\x1B[34m"
-	#define DKDRKBLUE "\x1B[34m"
-	#define DKMAG     "\x1B[35m"
-	#define DKCYN     "\x1B[36m"
-	#define DKWHITE   "\x1B[37m"
+	#define DKNORMAL  0  //"\x1B[0m"
+	#define DKRED     31 //"\x1B[31m"
+	#define DKGREEN   32 //"\x1B[32m"
+	#define DKYELLOW  33 //"\x1B[33m"
+	#define DKBLUE    34 //"\x1B[34m"
+	#define DKDRKBLUE 34 //"\x1B[34m"
+	#define DKMAG     35 //"\x1B[35m"
+	#define DKCYN     36 //"\x1B[36m"
+	#define DKWHITE   37 //"\x1B[37m"
 
 	#define DKASSERT_COLOR  DKCYN
 	#define DKFATAL_COLOR   DKCYN
