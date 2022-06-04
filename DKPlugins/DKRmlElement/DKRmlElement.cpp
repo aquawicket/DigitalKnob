@@ -1,6 +1,7 @@
 #include "DK/stdafx.h"
 #include "DKRmlElement/DKRmlElement.h"
-#include "../include/RmlUi/Core/Factory.h"
+//#include "../include/RmlUi/Core/Factory.h"
+#include "RmlUi/Core/Factory.h"
 
 bool DKRmlElement::Init(){
 	DKDEBUGFUNC();
