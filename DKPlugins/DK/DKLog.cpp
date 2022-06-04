@@ -245,6 +245,7 @@ bool DKLog::Log(const char* file, int line, const char* func, const DKString& in
 			SetConsoleTextAttribute(hConsole, color);
 #	elif !defined(LINUX)
 		char color[10];
+		/*
 		if(lvl == DK_ASSERT) { strcpy(color, (char*)DKASSERT_COLOR); }
 		if(lvl == DK_FATAL)  { strcpy(color, (char*)DKFATAL_COLOR); }
 		if(lvl == DK_ERROR)  { strcpy(color, (char*)DKERROR_COLOR); }
@@ -252,13 +253,14 @@ bool DKLog::Log(const char* file, int line, const char* func, const DKString& in
 		if(lvl == DK_INFO)   { strcpy(color, (char*)DKINFO_COLOR); }
 		if(lvl == DK_DEBUG)  { strcpy(color, (char*)DKDEBUG_COLOR); }
 		if(lvl == DK_VERBOSE){ strcpy(color, (char*)DKVERBOSE_COLOR); }
+		*/
 #	endif
 
-	/// /// ///  OUTPUTS /// /// ///
 
-	//CONSOLE WINDOW OUTPUT
+	//CONSOLE/TERMINAL WINDOW OUTPUT
 	printf("%s", output.c_str()); 
-	//stdout << string;
+	//stdout << output;
+
 						
 	// File Output (log.txt)
 	if(log_file && !DKFile::local_assets.empty()){
@@ -270,7 +272,7 @@ bool DKLog::Log(const char* file, int line, const char* func, const DKString& in
 		}
 	}
 
-	// // // IDE Software Output
+	// // // IDE Software Console Output
 #	ifdef WIN
 		if(log_msvc)
 			OutputDebugString(output.c_str()); //Output to Visual Studio
