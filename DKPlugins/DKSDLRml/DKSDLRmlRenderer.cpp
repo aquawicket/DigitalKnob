@@ -1,3 +1,5 @@
+//#ifdef USE_DKSDLRMLRENDERER
+
 #include "DKSDLRmlRenderer.h"
 #include <SDL_image.h>
 #include <RmlUi/Core.h>
@@ -150,3 +152,5 @@ void DKSDLRmlRenderer::ReleaseTexture(Rml::TextureHandle texture_handle){
 
 void DKSDLRmlRenderer::SetTransform(const Rml::Matrix4f* transform){
 }
+
+//#endif //USE_DKSDLRMLRENDERER

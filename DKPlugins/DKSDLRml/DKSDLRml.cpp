@@ -13,10 +13,12 @@ bool DKSDLRml::Init(){
 	dkRml = DKRml::Instance("DKRml0");
 	if(!dkSdlWindow || !dkRml)
 		return DKERROR("DKSDLRml::Init(): INVALID OBJECTS\n");
-#ifdef RML_SHELL_RENDER
-	Renderer = new ShellRenderInterfaceOpenGL();
-#else
+#ifdef USE_DKSDLRMLRENDERER
+	Renderer = new DKSDLRmlRenderer(dkSdlWindow->renderer, dkSdlWindow->window);
+#elif USE_DKSDLRMLOPENGL
 	Renderer = new DKSDLRmlOpenGL(dkSdlWindow->renderer, dkSdlWindow->window);
+#elif USE_DKSDLRMLSHELL
+	Renderer = new ShellRenderInterfaceOpenGL();
 #endif
 	SystemInterface = new RmlSDL2SystemInterface();
 	Rml::SetRenderInterface(Renderer);

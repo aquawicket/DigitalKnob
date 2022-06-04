@@ -1,3 +1,5 @@
+//#if USE_DKSDLRMLRENDERER
+
 #ifndef DKSDLRMLRENDERER_H
 #define DKSDLRMLRENDERER_H
 
@@ -45,3 +47,5 @@ private:
 };
 
 #endif //DKSDLRMLRENDERER_H
+
+//#endif //USE_DKSDLRMLRENDERER

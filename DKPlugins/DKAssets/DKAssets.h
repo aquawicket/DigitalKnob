@@ -13,7 +13,6 @@ public:
 	bool Init();
 	bool End();
 
-	
 	//static bool AppendDataPath(const DKString& datapath);
 	static bool DeployAssets();
 	static bool GetAssetsPath(DKString& path);

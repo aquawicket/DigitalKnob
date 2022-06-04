@@ -1,3 +1,5 @@
+//#ifdef USE_DKSDLRMLOPENGL
+
 #include <RmlUi/Core.h>
 #include <SDL_image.h>
 #include "DK/DK.h"
@@ -258,3 +260,5 @@ void DKSDLRmlOpenGL::ReleaseTexture(Rml::TextureHandle texture_handle)
 	//DKDEBUGFUNC(texture_handle);
     SDL_DestroyTexture((SDL_Texture*) texture_handle);
 }
+
+//#endif //USE_DKSDLRMLOPENGL

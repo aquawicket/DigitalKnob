@@ -7,12 +7,22 @@
 #include "DKSDLWindow/DKSDLWindow.h"
 #include "DKRml/DKRml.h"
 #include "DKSDLRml/DKSDLRmlSystem.h"
-#include "DKSDLRml/DKSDLRmlOpenGL.h"
 
-//#include "ShellRenderInterfaceOpenGL.h"
-//#define RML_SHELL_RENDER 1
+//#define USE_DKSDLRMLRENDERER 1
+#define USE_DKSDLRMLOPENGL 1
+//#define USE_DKSDLRMLSHELL 1
 
-///////////////////////////////////////////
+#if USE_DKSDLRMLRENDERER
+#	include "DKSDLRml/DKSDLRmlRenderer.h"
+#endif
+#if USE_DKSDLRMLOPENGL
+#	include "DKSDLRml/DKSDLRmlOpenGL.h"
+#endif
+#if USE_DKSDLRMLSHELL
+#	include "ShellRenderInterfaceOpenGL.h"
+#endif
+
+
 class DKSDLRml : public DKObjectT<DKSDLRml>
 {
 public:
@@ -24,13 +34,16 @@ public:
 	void Update();
 	//void ProcessEvent(Rml::Core::Event& event);
 	
-	DKSDLWindow* dkSdlWindow;
 	DKRml* dkRml;
-#ifdef RML_SHELL_RENDER
-	ShellRenderInterfaceOpenGL* Renderer;
-#else
-	DKSDLRmlOpenGL* Renderer;
-#endif
+	DKSDLWindow* dkSdlWindow;
+	
+#	if USE_DKSDLRMLRENDERER
+		DKSDLRmlRenderer* Renderer;
+#	elif USE_DKSDLRMLOPENGL
+		DKSDLRmlOpenGL* Renderer;
+#	elif USE_DKSDLRMLSHELL
+		ShellRenderInterfaceOpenGL* Renderer;
+#	endif
 	RmlSDL2SystemInterface* SystemInterface;
 };
 

@@ -1,3 +1,5 @@
+//#ifdef USE_DKSDLRMLOPENGL
+
 #pragma once
 #ifndef DKSDLRmlOpenGL_H
 #define DKSDLRmlOpenGL_H
@@ -49,4 +51,6 @@ private:
 #endif
 };
 
-#endif //DKSDLRmlRenderer_H
+#endif //USE_DKSDLRMLOPENGL
+
+//#endif //DKSDLRmlRenderer_H
