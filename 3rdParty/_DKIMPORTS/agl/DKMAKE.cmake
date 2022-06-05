@@ -1,9 +1,8 @@
+# https://developer.apple.com/documentation/agl/agl
+
 if(NOT MAC_HOST)
 	return()
 endif()
-
-# https://developer.apple.com/documentation/agl/agl
-
 
 DKDEPEND(carbon)
 DKDEPEND(opengl)

@@ -1,7 +1,3 @@
-if(NOT WIN_HOST)
-	return()
-endif()
-
 # Information
 # https://androidsdkmanager.azurewebsites.net/
 # https://developer.android.com/studio/releases/cmdline-tools
@@ -12,8 +8,11 @@ endif()
 # https://dl.google.com/android/repository/commandlinetools-win-7302050_latest.zip
 # https://dl.google.com/android/repository/commandlinetools-mac-7302050_latest.zip
 # https://dl.google.com/android/repository/commandlinetools-linux-7302050_latest.zip
+# https://dl.google.com/android/repository/commandlinetools-win-7583922_latest.zip
 
-#https://dl.google.com/android/repository/commandlinetools-win-7583922_latest.zip
+if(NOT WIN_HOST)
+	return()
+endif()
 
 ### DEPENDS ###
 #DKDEPEND(jdk8)
@@ -21,7 +20,8 @@ endif()
 ### VERSION ###
 #DKSET(ANDROIDTOOLS ${3RDPARTY}/android-cmdline-tools)
 DKSET(ANDROIDTOOLS ${3RDPARTY}/android-sdk/cmdline-tools/latest)
-file(MAKE_DIRECTORY ${3RDPARTY}/android-sdk/cmdline-tools/latest)
+#file(MAKE_DIRECTORY ${3RDPARTY}/android-sdk/cmdline-tools/latest)
+dk_makeDirectory(${3RDPARTY}/android-sdk/cmdline-tools/latest)
 
 DKSET(SDKMANAGER_EXE ${ANDROIDTOOLS}/bin/sdkmanager.bat)
 WIN_HOST_DKSET(ANDROIDTOOLS_DL https://dl.google.com/android/repository/commandlinetools-win-7583922_latest.zip)
