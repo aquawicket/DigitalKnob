@@ -41,7 +41,6 @@ DKFrame.prototype.create = function DKFrame_create(obj) {
     else {
         for (let key in obj) {
             if (obj[key]instanceof HTMLElement) {
-                //obj.id && (id = obj.id);
                 element = obj[key];
                 if (element.id && element.id.includes(".html"))
                     break;
@@ -68,6 +67,7 @@ DKFrame.prototype.create = function DKFrame_create(obj) {
         width: "unset",
         height: "unset"
     })
+	instance.frame.content.setAttribute("id", "dk_frame_content");
     instance.frame.content.setAttribute("dk_frame", "content");
     instance.frame.appendChild(instance.frame.content);
 	DKPlugin("DKGui/DKResize.js", function(DKClass) {
@@ -105,7 +105,8 @@ DKFrame.prototype.createFrame = function DKFrame_createFrame(title, width, heigh
     let frame = dk.gui.createElement(document.body, "div", "dk_frame_box");
     this.frame = frame;
 
-    //See DKFrame.css for styling    
+    //See DKFrame.css for styling
+	frame.setAttribute("id", "dk_frame_frame");
     frame.setAttribute("dk_frame", "frame");
     frame.style.position = "absolute";
 	frame.style.top = newtop + "px";
@@ -123,6 +124,7 @@ DKFrame.prototype.createFrame = function DKFrame_createFrame(title, width, heigh
 
     //See DKFrame.css for styling
     frame.titlebar = dk.gui.createElement(frame, "div", "dk_frame_titlebar");
+	frame.titlebar.setAttribute("id", "dk_frame_titlebar");
     frame.titlebar.setAttribute("dk_frame", "titlebar");
     frame.titlebar.ondblclick = function DKFrame_titlebar_ondblclick(event) {
         event.stopPropagation();
@@ -136,10 +138,12 @@ DKFrame.prototype.createFrame = function DKFrame_createFrame(title, width, heigh
 
     //See DKFrame.css for styling
     frame.titlebartext = dk.gui.createElement(frame.titlebar, "div", "dk_frame_titlebartext");
+	frame.titlebartext.setAttribute("id", "dk_frame_titlebartext");
     frame.titlebartext.setAttribute("dk_frame", "titlebartext");
     frame.titlebartext.innerHTML = title;
 
     frame.reload = dk.gui.createElement(frame.titlebar, "img", "dk_frame_reload");
+	frame.reload.setAttribute("id", "dk_frame_reload");
     frame.reload.setAttribute("dk_frame", "reload");
     frame.reload.setAttribute("src", "DKGui/reload.png");
     frame.reload.onmousedown = function DKFrame_reload_onmousedown(event) {
@@ -148,6 +152,7 @@ DKFrame.prototype.createFrame = function DKFrame_createFrame(title, width, heigh
     }
 
     frame.minimize = dk.gui.createElement(frame.titlebar, "img", "dk_frame_minimize");
+	frame.minimize.setAttribute("id", "dk_frame_minimize");
     frame.minimize.setAttribute("dk_frame", "minimize");
     frame.minimize.setAttribute("src", "DKGui/minimize.png");
     frame.minimize.onmousedown = function DKFrame_minimize_onmousedown(event) {
@@ -156,6 +161,7 @@ DKFrame.prototype.createFrame = function DKFrame_createFrame(title, width, heigh
     }
 
     frame.maximize = dk.gui.createElement(frame.titlebar, "img", "dk_frame_maximize");
+	frame.maximize.setAttribute("id", "dk_frame_maximize");
     frame.maximize.setAttribute("dk_frame", "maximize");
     frame.maximize.setAttribute("src", "DKGui/maximize.png");
     frame.maximize.onmousedown = function DKFrame_maximize_onmousedown(event) {
@@ -164,6 +170,7 @@ DKFrame.prototype.createFrame = function DKFrame_createFrame(title, width, heigh
     }
 
     frame.close = dk.gui.createElement(frame.titlebar, "img", "dk_frame_close");
+	frame.close.setAttribute("id", "dk_frame_close");
     frame.close.setAttribute("dk_frame", "close");
     frame.close.setAttribute("src", "DKGui/close.png");
     frame.close.onmousedown = function DKFrame_close_onmousedown(event) {
