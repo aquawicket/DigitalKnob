@@ -103,21 +103,23 @@ bool GetBuildSecond(const char* buildTime, DKString& buildSecond);
 
 
 template<typename S, typename T, typename = void>
-struct is_streamable : std::false_type {
-};
+struct is_streamable : std::false_type {};
 
 template<typename S, typename T>
-struct is_streamable<S, T, decltype(std::declval<S&>() << std::declval<T&>(), void())> : std::true_type {
-};
+struct is_streamable<S, T, decltype(std::declval<S&>() << std::declval<T&>(), void())> : std::true_type {};
 
 template<typename T, typename std::enable_if<is_streamable<std::ostream, T>::value>::type* = nullptr>
 void printVariable(T t, std::ostringstream& out) {
-	out << "[" << typeid(t).name() << " == " << t << "]";
+	DKString type = typeid(t).name();
+	replace(type, " *", "*");
+	out << "[" << type << " == " << t << "]";
 }
 
 template<typename T, typename std::enable_if<!is_streamable<std::ostream, T>::value>::type* = nullptr>
 void printVariable(T t, std::ostringstream& out) {
-	out << "[" << typeid(t).name() << " == NonStreamable]";
+	DKString type = typeid(t).name();
+	replace(type, " *", "*");
+	out << "[" << type << " == NonStreamable]";
 }
 
 //#ifndef ANDROID
