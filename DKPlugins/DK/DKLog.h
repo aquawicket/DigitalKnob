@@ -5,9 +5,7 @@
 #include "DKString.h"
 #include <stdio.h>
 #include <iostream>
-//#if defined (MAC) || defined(IOS)
-//	#import <Foundation/Foundation.h>
-//#endif
+#include <type_traits>
 #if !defined(IOS)
     #include <fstream>
 #endif
@@ -104,11 +102,6 @@ bool GetBuildMinute(const char* buildTime, DKString& buildMinute);
 bool GetBuildSecond(const char* buildTime, DKString& buildSecond);
 
 
-#include <cmath>
-#include <iostream>
-#include <type_traits>
-
-
 template<typename S, typename T, typename = void>
 struct is_streamable : std::false_type {
 };
@@ -119,12 +112,12 @@ struct is_streamable<S, T, decltype(std::declval<S&>() << std::declval<T&>(), vo
 
 template<typename T, typename std::enable_if<is_streamable<std::ostream, T>::value>::type* = nullptr>
 void printVariable(T t, std::ostringstream& out) {
-	out << typeid(t).name() << "=" << t;
+	out << "[" << typeid(t).name() << " == " << t << "]";
 }
 
 template<typename T, typename std::enable_if<!is_streamable<std::ostream, T>::value>::type* = nullptr>
 void printVariable(T t, std::ostringstream& out) {
-	out << typeid(t).name() << "=NonStreamable";
+	out << "[" << typeid(t).name() << " == NonStreamable]";
 }
 
 //#ifndef ANDROID
@@ -135,76 +128,34 @@ void getTemplateArgs(std::ostringstream& out, A arg1, Args&&... args) {
 	int arg_count = sizeof...(Args);
 	printVariable(arg1, out);
 	if(arg_count)
-		out << ",";
+		out << ", ";
     getTemplateArgs(out, args...);
 }
 
 template <typename... Args>
-void DebugFunc(const char* file, int line, const char* func, const DKString& /*names*/, Args&&... args) {
+void DebugFunc(const char* file, int line, const char* func, Args&&... args) {
 	if(DKLog::log_show.empty() && !DKLog::log_debug)
 		return;
 	int arg_count = sizeof...(Args);
-	//DKStringArray arg_names;
-	//if(!names.empty())
-	//	toStringArray(arg_names, names, ",");
 	std::ostringstream out;
 	getTemplateArgs(out, args...);
-	DKStringArray arg_values;
-	toStringArray(arg_values, out.str(), ",");
 	DKString func_string = func;
-	//if (arg_count)
-	//	func_string += "( ";
-	//else
-		func_string += "(";
-	for(int i=0; i<arg_count; ++i){
-		//if(!names.empty()){
-		//	func_string += arg_names[i];
-		//	func_string += ":";
-		//}
-		func_string += arg_values[i];
-		if(i < (arg_count-1))
-			func_string += ", ";
-	}
-	//if (arg_count)
-	//	func_string += " )\n";
-	//else
-		func_string += ")\n";
+	func_string += "(";
+	func_string += out.str();
+	func_string += ")\n";
 	DKLog::Log(file, line, "", func_string, DK_DEBUG);
 }
 
 template <typename... Args>
-bool DebugReturn(const char* file, int line, const char* func, const DKString& /*names*/, Args&&... args) {
+bool DebugReturn(const char* file, int line, const char* func, Args&&... args) {
 	if (DKLog::log_show.empty() && !DKLog::log_debug)
 		return true;
 	int arg_count = sizeof...(Args);
-	//DKStringArray arg_names;
-	//if (!names.empty())
-	//	toStringArray(arg_names, names, ",");
 	std::ostringstream out;
 	getTemplateArgs(out, args...);
-	DKStringArray arg_values;
-	toStringArray(arg_values, out.str(), ",");
 	DKString func_string = func;
-	//if (arg_count)
-	//	func_string += "( ";
-	//else
-		func_string += "(";
-	for (int i = 0; i < arg_count; ++i) {
-		if (i < (arg_count - 1)) {
-			//if (!names.empty()) {
-			//	func_string += arg_names[i];
-			//	func_string += ":";
-			//}
-			func_string += arg_values[i];
-			func_string += ", ";
-		}
-		else {
-			func_string += ") -> ";
-			//func_string += arg_names[i];
-			//func_string += ":";
-			func_string += arg_values[i];
-		}
-	}
+	func_string += "(";
+	func_string += out.str();
 	if (arg_count)
 		func_string += "\n";
 	else

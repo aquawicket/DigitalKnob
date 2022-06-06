@@ -3,14 +3,14 @@
 #include "DKFile.h"
 #include <cstring>
 #ifdef HAVE_boxer
-	#include <boxer/boxer.h>
+#	include <boxer/boxer.h>
 #endif
 #include <fstream>
 
 #ifdef WIN
-	#include <debugapi.h> //OutputDebugString()
+#	include <debugapi.h> //OutputDebugString()
 #endif
-#ifdef MAC
+#if defined (MAC) || defined(IOS)
 #	import <Foundation/Foundation.h>  //NSLog()
 #endif
 
