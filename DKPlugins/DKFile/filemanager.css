@@ -1,11 +1,13 @@
-[dk_filemanager="box"] {
+/*[dk_filemanager="box"] {*/
+#dk_filemanager_box {
     position: absolute;
     overflow: hidden;
     background-color: rgb(70,70,70);
 	/* font-size:20rem; */
 }
 
-[dk_filemanager="up"] {
+/*[dk_filemanager="up"] {*/
+#dk_filemanager_up {
     position: absolute;
     top: 1px;
     top: 1rem;
@@ -15,7 +17,8 @@
     width: 19rem;
 }
 
-[dk_filemanager="pathdiv"] {
+/*[dk_filemanager="pathdiv"] {*/
+#dk_filemanager_pathdiv {	
     position: absolute;
     top: 3px;
     top: 3rem;
@@ -27,7 +30,8 @@
     right: 3rem;
 }
 
-[dk_filemanager="path"] {
+/*[dk_filemanager="path"] {*/
+#dk_filemanager_path {
     position: absolute;
     font-size: 16rem;
 	font-weight: bold;
@@ -41,7 +45,8 @@
     border-color: rgb(60,60,60);
 }
 
-[dk_filemanager="drives"] {
+/*[dk_filemanager="drives"] {*/
+#dk_filemanager_drives {
     position: absolute;
     font-size: 14rem;
 	font-weight: bold;
@@ -60,7 +65,8 @@
     border-color: rgb(60,60,60);
 }
 
-[dk_filemanager="list"] {
+/*[dk_filemanager="list"] {*/
+#dk_filemanager_list {
     position: absolute;
     font-size: 14rem;
 	font-weight: bold;
@@ -79,11 +85,13 @@
     border-color: rgb(60,60,60);
 }
 
-[dk_filemanager="list"]:hover {
+/*[dk_filemanager="list"]:hover {*/
+#dk_filemanager_list:hover {
     border-color: rgb(60,60,120);
 }
 
-[dk_filemanager="folder"] {
+/*[dk_filemanager="folder"] {*/
+#dk_filemanager_folder {
     white-space: nowrap;
     padding-left: 17px;
     /* background-image: url("folder.png"); */
@@ -91,14 +99,16 @@
     cursor: default;
 }
 
-[dk_filemanager="file"] {
+/*[dk_filemanager="file"] {*/
+#dk_filemanager_file {
     white-space: nowrap;
     padding-left: 17px;
     background-repeat: no-repeat;
     cursor: default;
 }
 
-[dk_filemanager="cancel"] {
+/*[dk_filemanager="cancel"] {*/
+#dk_filemanager_cancel {
     visibility: hidden;
     position: absolute;
     right:93rem;
@@ -106,7 +116,8 @@
     width:60rem;
 }
 
-[dk_filemanager="ok"] {
+/*[dk_filemanager="ok"] {*/
+#dk_filemanager_ok {
     visibility: hidden;
     position: absolute;
     right:30rem;

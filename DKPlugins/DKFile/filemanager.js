@@ -341,6 +341,7 @@ DKFileManager.prototype.updatePath = function DKFileManager_updatePath(instance,
                             }
                         })
 						folder.style.backgroundImage = "url(\"DKFile/folder.png\")";
+						folder.setAttribute("id", "dk_filemanager_folder")
                         folder.setAttribute("dk_filemanager", "folder")
                         folder.setAttribute("path", folderpath)
                     }
@@ -352,6 +353,7 @@ DKFileManager.prototype.updatePath = function DKFileManager_updatePath(instance,
                         //Files
                         const filepath = path.aPath + items[n];
                         const file = dk.gui.createElement(instance.list, "div", "managerFile")
+						file.setAttribute("id", "dk_filemanager_file")
                         file.setAttribute("dk_filemanager", "file")
                         file.setAttribute("path", filepath)
                         file.innerHTML = items[n];
