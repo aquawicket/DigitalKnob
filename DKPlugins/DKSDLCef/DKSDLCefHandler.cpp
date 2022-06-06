@@ -10,7 +10,7 @@ DKSDLCefHandler* DKSDLCefHandler::g_instance = NULL;
 
 
 void SourceCallback::Visit(const CefString& string){
-	DKDEBUGFUNC("const CefString&");
+	DKDEBUGFUNC(string);
 	source = string.ToString();
 	//replace(source, "<", "&lt;");
 	//replace(source, ">", "&gt;");
@@ -91,7 +91,7 @@ void DKSDLCefHandler::DoFrame(){
 }
 
 void DKSDLCefHandler::GetViewRect(CefRefPtr<CefBrowser> browser, CefRect& rect){
-	//DKDEBUGFUNC(browser, "CefRect&");
+	DKDEBUGFUNC(browser, rect);
 	if(dkCef->dkBrowsers.size() < 1){ //No Browsers
 		DKERROR("DKSDLCefHandler::GetViewRect: No browsers found.");
 		return; 

@@ -104,6 +104,28 @@ bool GetBuildMinute(const char* buildTime, DKString& buildMinute);
 bool GetBuildSecond(const char* buildTime, DKString& buildSecond);
 
 
+#include <cmath>
+#include <iostream>
+#include <type_traits>
+
+
+template<typename S, typename T, typename = void>
+struct is_streamable : std::false_type {
+};
+
+template<typename S, typename T>
+struct is_streamable<S, T, decltype(std::declval<S&>() << std::declval<T&>(), void())> : std::true_type {
+};
+
+template<typename T, typename std::enable_if<is_streamable<std::ostream, T>::value>::type* = nullptr>
+void printVariable(T t, std::ostringstream& out) {
+	out << typeid(t).name() << "=" << t;
+}
+
+template<typename T, typename std::enable_if<!is_streamable<std::ostream, T>::value>::type* = nullptr>
+void printVariable(T t, std::ostringstream& out) {
+	out << typeid(t).name() << "=NonStreamable";
+}
 
 //#ifndef ANDROID
 void getTemplateArgs(std::ostringstream& out);
@@ -111,15 +133,7 @@ void getTemplateArgs(std::ostringstream& out);
 template <typename A, typename... Args>
 void getTemplateArgs(std::ostringstream& out, A arg1, Args&&... args) {
 	int arg_count = sizeof...(Args);
-
-	std::cout << typeid(arg1).name();
-
-	std::ostringstream check_str;
-	check_str << arg1;
-	if(!check_str.str().empty())
-		out << arg1;
-	else
-		out << "undefined";
+	printVariable(arg1, out);
 	if(arg_count)
 		out << ",";
     getTemplateArgs(out, args...);
