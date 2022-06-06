@@ -17,38 +17,32 @@ DKCodeRunner.prototype.end = function DKCodeRunner_end() {
 DKCodeRunner.prototype.create = function DKCodeRunner_create(parent, top, bottom, left, right, width, height) {
 	console.log("DKCodeRunner.prototype.create()")
 	
-	const div = document.createElement("div")
-	div.style.position = "absolute"
-	div.style.top = "35px"
-	div.style.left = "5px"
-	div.style.bottom = "5px"
-	div.style.right = "5px"
-	div.style.backgroundColor = "rgb(250,250,250)"
-	document.body.appendChild(div)
-	/*	
-	const div = dk.gui.createElement(document.body, "div", "main_content", "35rem", "5rem", "5rem", "5rem", "", "", function(){})
-	div.style.position = "absolute"
-	div.style.backgroundColor = "rgb(250,250,250)"
-	*/
+	const textareaDiv = document.createElement("div")
+	textareaDiv.style.position = "absolute"
+	textareaDiv.style.top = "35rem"
+	textareaDiv.style.left = "5rem"
+	textareaDiv.style.bottom = "5rem"
+	textareaDiv.style.right = "5rem"
+	document.body.appendChild(textareaDiv)
 	
 	const textarea = document.createElement("textarea")
 	textarea.style.position = "absolute"
-	textarea.style.top = "0px"
-	textarea.style.left = "0px"
-	textarea.style.bottom = "0px"
-	textarea.style.right = "000px"
+	textarea.style.top = "0rem"
+	textarea.style.left = "0rem"
+	textarea.style.bottom = "0rem"
+	textarea.style.right = "0rem"
 	textarea.style.width = "100%"
 	textarea.style.height = "100%"
 	textarea.style.fontSize = "18rem"
 	textarea.style.color = "rgb(200,200,200)"
 	textarea.style.backgroundColor = "rgb(30,30,30)"
-	div.appendChild(textarea)
+	textareaDiv.appendChild(textarea)
 	
-	dk.file.fileToString("cache.txt", function(str){
+	dk.file.fileToString("USER/cache.txt", function(str){
 		if(!str)
-			console.error("dk.file.fileToString(cache.txt): failed")
+			console.error("dk.file.fileToString(USER/cache.txt): failed")
 		else
-		textarea.value = str
+			textarea.value = str
 	})
 
 	textarea.oncontextmenu = function textarea_oncontextmenu(event) {
@@ -117,8 +111,8 @@ DKCodeRunner.prototype.create = function DKCodeRunner_create(parent, top, bottom
 }
 
 DKCodeRunner.prototype.saveCache = function DKCodeRunner_saveCache(str){
-	dk.file.stringToFile(str, "cache.txt", 0, function(result){
-		DUMP({result})
+	dk.file.stringToFile(str, "USER/cache.txt", 0, function(result){
+		//DUMP({result})
 	})
 }
 

@@ -21,7 +21,8 @@ const cef_width_offset = +16
 const cef_height_offset = +9
 CPP_DK_Create("DKCef")
 CPP_DKCef_NewBrowser("Cef", cef_y+cef_y_offset, cef_x+cef_x_offset, cef_width+cef_width_offset, cef_height+cef_height_offset, url)
-CPP_DK_SendEvent = function(){} //just consume the message from CEF for now
+//CPP_DK_SendEvent = function(){} //just consume the message from CEF for now
+
 /*
 window.addEventListener("keydown", function window_onkeydown(event){
 	if(event.code === "F11")
@@ -41,7 +42,6 @@ const sdl_x_offset = 0
 const sdl_y_offest = 30
 const sdl_width_offset = 1
 const sdl_height_offset = -30
-//CPP_DK_Create("DKWindow")
 CPP_DK_Create("DKSDLWindow")
 CPP_DK_Create("DKRml")
 window.resizeTo(sdl_width+sdl_width_offset, sdl_height+sdl_height_offset)

@@ -136,7 +136,9 @@ DKFileManager.prototype.rightclickmenu = function(instance, event) {
     const node = event.currentTarget;
     const path = event.currentTarget.getAttribute("path")
     DKPlugin("DKGui/DKMenu.js", function(DKClass) {
+		DUMP(DKClass)
         const dkmenu = DKClass.prototype.create()
+		DUMP(dkmenu)
         file && dkmenu.addItem("Edit", function dk_menu_edit() {
             instance.editFile(instance, path)
         })
