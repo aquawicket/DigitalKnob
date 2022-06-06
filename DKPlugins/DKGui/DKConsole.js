@@ -169,12 +169,15 @@ DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left
     dk.console.container.setAttribute("dk_console", "container");
 
     dk.console.toolbar = dk.gui.createTag("div", dk.console.container, {});
+	dk.console.toolbar.setAttribute("id", "dk_console_toolbar");
     dk.console.toolbar.setAttribute("dk_console", "toolbar");
 
     dk.console.logDiv = dk.gui.createTag("div", dk.console.container, {});
+	dk.console.logDiv.setAttribute("id", "dk_console_logDiv");
     dk.console.logDiv.setAttribute("dk_console", "logDiv");
 
     dk.console.commandDiv = dk.gui.createTag("div", dk.console.logDiv, {});
+	dk.console.commandDiv.setAttribute("id", "dk_console_commandDiv");
     dk.console.commandDiv.setAttribute("dk_console", "commandDiv");
 
     dk.console.command = dk.gui.createTag("input", dk.console.commandDiv, {
@@ -196,6 +199,7 @@ DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left
             }
         }
     }).setAttribute("dk_console", "command");
+	dk.console.command.setAttribute("id", "dk_console_command")
 
     //FIXME: initiating before dk.console.commandDiv
     /*
@@ -206,9 +210,10 @@ DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left
     }
     */
 
-    dk.gui.createTag("img", dk.console.commandDiv, {
+    dk.console.cmnd = dk.gui.createTag("img", dk.console.commandDiv, {
         src: "DKGui/cmndArrow.png",
     }).setAttribute("dk_console", "cmnd");
+	dk.console.cmnd.setAttribute("id", "dk_console_cmnd")
 
     function _toArray(arr) {
         return _arrayWithHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableRest();
@@ -335,6 +340,7 @@ DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left
         else
             dk.console.logDiv.scroll = false;
         const msgDiv = document.createElement("div");
+		msgDiv.setAttribute("id", "dk_console_msgDiv");
         msgDiv.setAttribute("dk_console", "msgDiv");
         if (logLevel !== "group" && logLevel !== "groupCollapsed" && dk.console.currentGroup) {
             msgDiv.setAttribute("group", dk.console.currentGroup.id);
@@ -350,6 +356,7 @@ DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left
         })
 
         const msgSpan = document.createElement("span")
+		msgSpan.setAttribute("id", "dk_console_msgSpan")
         msgSpan.setAttribute("dk_console", "msgSpan")
 
         //If the message is the same as the last, just increase a count next to the original.
@@ -424,19 +431,27 @@ DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left
         }
 
         if (logLevel === "error") {
+			msgDiv.setAttribute("id", "dk_console_msgDivError");
             msgDiv.setAttribute("dk_console", "msgDivError");
+			msgSpan.setAttribute("id", "dk_console_msgSpanError");
             msgSpan.setAttribute("dk_console", "msgSpanError");
         }
         if (logLevel === "warn") {
+			msgDiv.setAttribute("id", "dk_console_msgDivWarn");
             msgDiv.setAttribute("dk_console", "msgDivWarn");
+			msgSpan.setAttribute("id", "dk_console_msgSpanWarn");
             msgSpan.setAttribute("dk_console", "msgSpanWarn");
         }
         if (logLevel === "debug") {
+			msgDiv.setAttribute("id", "dk_console_msgDivDebug");
             msgDiv.setAttribute("dk_console", "msgDivDebug");
+			msgSpan.setAttribute("id", "dk_console_msgSpanDebug");
             msgSpan.setAttribute("dk_console", "msgSpanDebug");
         }
         if (logLevel === "green") {
+			msgDiv.setAttribute("id", "dk_console_msgDivGreen");
             msgDiv.setAttribute("dk_console", "msgDivGreen");
+			msgSpan.setAttribute("id", "dk_console_msgSpanGreen");
             msgSpan.setAttribute("dk_console", "msgSpanGreen");
         }
 		
