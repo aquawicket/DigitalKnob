@@ -24,12 +24,17 @@ DKFileManager.prototype.create = function DKFileManager_create(DKFileManager_cre
 		if(!instance)
 			return error("instance invalid")
         instance.html = html;
-		instance.up = html.querySelector("[dk_filemanager='up']")
-        instance.path = html.querySelector("[dk_filemanager='path']")
-        instance.list = html.querySelector("[dk_filemanager='list']")
-        instance.cancel = html.querySelector("[dk_filemanager='cancel']")
-        instance.ok = html.querySelector("[dk_filemanager='ok']")
-        instance.up.onclick = function(event) {
+		//instance.up = html.querySelector("[dk_filemanager='up']")
+		instance.up = byId("dk_filemanager_up")
+        //instance.path = html.querySelector("[dk_filemanager='path']")
+        instance.path = byId("dk_filemanager_path")
+		//instance.list = html.querySelector("[dk_filemanager='list']")
+        instance.list = byId("dk_filemanager_list")
+		//instance.cancel = html.querySelector("[dk_filemanager='cancel']")
+		instance.cancel = byId("dk_filemanager_cancel")
+        //instance.ok = html.querySelector("[dk_filemanager='ok']")
+        instance.ok = byId("dk_filemanager_ok")
+		instance.up.onclick = function(event) {
             instance.upDir(instance, event)
         }
         instance.list.onclick = function(event) {
