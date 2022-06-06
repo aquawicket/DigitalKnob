@@ -835,28 +835,29 @@ bool DKCef::OnConsoleMessage(CefRefPtr<CefBrowser> browser, cef_log_severity_t l
 	//DKDEBUGFUNC(browser, level, "const CefString&", "const CefString&", line);
 	CEF_REQUIRE_UI_THREAD();
 	DKString msg = message.ToString();
-	replace(msg, "%c", "");
-	DKString string = message.ToString();
-	replace(string, "%c", "");
 	int identifier = browser->GetIdentifier();
+	
+	//Remove color symbols
+	replace(msg, "%c", "");
+	
 
 	if (level == LOGSEVERITY_DEFAULT) {
-		DKINFO("[CEF:" + toString(identifier) + "] " + string + "\n");
+		DKINFO("[CEF:" + toString(identifier) + "] " + msg + "\n");
 	}
 	else if (level == LOGSEVERITY_VERBOSE) {
-		DKDEBUG("[CEF:" + toString(identifier) + "] " + string + "\n");
+		DKDEBUG("[CEF:" + toString(identifier) + "] " + msg + "\n");
 	}
 	else if (level == LOGSEVERITY_DEBUG) {
-		DKDEBUG("[CEF:" + toString(identifier) + "] " + string + "\n");
+		DKDEBUG("[CEF:" + toString(identifier) + "] " + msg + "\n");
 	}
 	else if (level == LOGSEVERITY_INFO) {
-		DKINFO("[CEF:" + toString(identifier) + "] " + string + "\n");
+		DKINFO("[CEF:" + toString(identifier) + "] " + msg + "\n");
 	}
 	else if (level == LOGSEVERITY_WARNING) {
-		DKWARN("[CEF:" + toString(identifier) + "] " + string + "\n");
+		DKWARN("[CEF:" + toString(identifier) + "] " + msg + "\n");
 	}
 	else if (level == LOGSEVERITY_ERROR) {
-		DKERROR("[CEF:" + toString(identifier) + "] " + string + "\n");
+		DKERROR("[CEF:" + toString(identifier) + "] " + msg + "\n");
 	}
 	//else if(level == LOGSEVERITY_DISABLE){
 	//	return true; 

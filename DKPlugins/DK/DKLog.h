@@ -111,6 +111,9 @@ void getTemplateArgs(std::ostringstream& out);
 template <typename A, typename... Args>
 void getTemplateArgs(std::ostringstream& out, A arg1, Args&&... args) {
 	int arg_count = sizeof...(Args);
+
+	std::cout << typeid(arg1).name();
+
 	std::ostringstream check_str;
 	check_str << arg1;
 	if(!check_str.str().empty())

@@ -325,12 +325,12 @@ bool DKLog::Log(const char* file, int line, const char* func, const DKString& in
 				catch(...){
 #			endif
 #			ifdef HAVE_boxer
-				output += "\n\n Would you like to exit the application?";
-				boxer::Selection sel = boxer::show(output.c_str(), "EXCEPTION", boxer::Style::Error, boxer::Buttons::YesNo);
-				if(sel == boxer::Selection::Yes){
-					DKApp::Exit();
-					return false;
-				}
+					output += "\n\n Would you like to exit the application?";
+					boxer::Selection sel = boxer::show(output.c_str(), "EXCEPTION", boxer::Style::Error, boxer::Buttons::YesNo);
+					if(sel == boxer::Selection::Yes){
+						DKApp::Exit();
+						return false;
+					}
 #			endif
 #			ifndef ANDROID
 				}

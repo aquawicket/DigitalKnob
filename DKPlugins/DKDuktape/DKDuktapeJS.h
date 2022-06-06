@@ -106,7 +106,7 @@ public:
 	static int VirtualMemoryUsed(duk_context* ctx);
 	static int VirtualMemoryUsedByApp(duk_context* ctx);
 	static int WaitForImage(duk_context* ctx);
-	
+	static int ColorMap(duk_context* ctx);
 
 	//screen
 	static int availTop(duk_context* ctx);
