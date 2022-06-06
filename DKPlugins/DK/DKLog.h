@@ -111,6 +111,9 @@ struct is_streamable<S, T, decltype(std::declval<S&>() << std::declval<T&>(), vo
 template<typename T, typename std::enable_if<is_streamable<std::ostream, T>::value>::type* = nullptr>
 void printVariable(T t, std::ostringstream& out) {
 	DKString type = typeid(t).name();
+	if (typeid(t) == typeid(std::string))
+		type = "DKString";
+	
 	replace(type, " *", "*");
 	out << "[" << type << " == " << t << "]";
 }
