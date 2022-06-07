@@ -455,8 +455,10 @@ int DKDuktapeJS::Execute(duk_context* ctx){
 	DKString mode = "r"; //default
 	if (duk_is_string(ctx, 1))
 		mode = duk_to_string(ctx, 1);
+	int return_code = -1; //default
+	if (duk_is_number(ctx, 2))
+		return_code = duk_to_int(ctx, 2);
 	DKString message;
-	int return_code;
 	if(!DKUtil::Execute(command, mode, message, return_code))
 		return DKERROR("DKUtil::Execute() failed");
 	if(return_code == 0){

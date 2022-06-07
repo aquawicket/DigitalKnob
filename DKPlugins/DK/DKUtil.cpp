@@ -224,7 +224,9 @@ bool DKUtil::Execute(const DKString& command, const DKString& mode, DKString& st
 	}
 	if(!feof(pipe))
 		DKERROR("feof(pipe) failed\n");
-	rtncode = dk_pclose(pipe);
+	if(rtncode == -1) //Skip if rtncode is overwritten, send in 0 to bypass error
+		rtncode = dk_pclose(pipe);
+
 	if(rtncode != 0)
 		DKERROR("rtncode -> "+toString(rtncode)+": "+toString(strerror(errno))+"\n");
 	trim(stdouterr);
