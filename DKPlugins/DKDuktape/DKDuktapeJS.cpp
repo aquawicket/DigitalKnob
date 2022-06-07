@@ -7,6 +7,7 @@
 #include "DK/DKPlugin.h"
 #include "DK/DKUnix.h"
 #include "DK/DKUtil.h"
+#include "DK/DKTextColor.h"
 #include "DKDuktape/DKDuktapeJS.h"
 #include <signal.h>
 #if WIN32
@@ -1158,7 +1159,7 @@ int DKDuktapeJS::WaitForImage(duk_context* ctx){
 
 int DKDuktapeJS::ColorMap(duk_context* ctx) {
 	DKDEBUGFUNC();
-	DKLog::ColorMap();
+	DKTextColor::PrintColors();
 	return 1;
 }
 

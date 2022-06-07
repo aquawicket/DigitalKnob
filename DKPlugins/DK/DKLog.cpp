@@ -127,27 +127,6 @@ bool DKLog::Clear(int& rtnvalue){
     return DKUtil::System("cls", rtnvalue);
 }
 
-// https://www.lihaoyi.com/post/BuildyourownCommandLinewithANSIescapecodes.html
-bool DKLog::ColorMap(){
-#	ifdef WIN
-		// Save Current Colors
-		HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-		CONSOLE_SCREEN_BUFFER_INFO consoleInfo;
-		GetConsoleScreenBufferInfo(hConsole, &consoleInfo);
-		WORD saved_attributes = consoleInfo.wAttributes;  
-		for(int k = 1; k < 255; k++){
-			SetConsoleTextAttribute(hConsole, k);
-			std::cout << k << "   Pick This Color ! :D   " << std::endl;
-		}
-		// Restore Original Colors
-		SetConsoleTextAttribute(hConsole, saved_attributes);
-		return true;
-#	endif
-	return DKERROR("not implemented on this system");
-}
-
-
-
 /*
 void signal_handler(int signal) {
 	gSignalStatus = signal;
@@ -238,12 +217,9 @@ bool DKLog::Log(const char* file, int line, const char* func, const DKString& in
 		else {
 			color = color_override;
 		}
-		HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-		CONSOLE_SCREEN_BUFFER_INFO consoleInfo;
-		GetConsoleScreenBufferInfo(hConsole, &consoleInfo);
-		WORD saved_attributes = consoleInfo.wAttributes;  // Save current attributes
-		if(color)
-			SetConsoleTextAttribute(hConsole, color);
+		DKTextColor::StoreColor();
+		if (color)
+			DKTextColor::RestoreColor(color);
 #	elif !defined(LINUX)
 		char color[10];
 		/*
@@ -302,7 +278,7 @@ bool DKLog::Log(const char* file, int line, const char* func, const DKString& in
 
 	// // // Restore Default Color Decorators
 #	ifdef WIN32
-		SetConsoleTextAttribute(hConsole, saved_attributes);
+		DKTextColor::RestoreColor();
 #	endif
 
 //	if(log_gui_console && DKUtil::InMainThread() && DKApp::active){

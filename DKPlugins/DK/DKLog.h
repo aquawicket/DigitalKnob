@@ -2,7 +2,8 @@
 #ifndef DKLog_H
 #define DKLog_H
 
-#include "DKString.h"
+#include "DK/DKString.h"
+#include "DK/DKTextColor.h"
 #include <stdio.h>
 #include <iostream>
 #include <type_traits>
@@ -11,47 +12,6 @@
 #endif
 #ifdef ANDROID
 	#include <android/log.h>
-#endif
-
-#ifdef WIN32
-	#define DKNORMAL   FOREGROUND_RED|FOREGROUND_GREEN|FOREGROUND_BLUE
-	#define DKWHITE    FOREGROUND_RED|FOREGROUND_GREEN|FOREGROUND_BLUE|FOREGROUND_INTENSITY
-	#define DKLTRED    FOREGROUND_RED|FOREGROUND_INTENSITY|BACKGROUND_INTENSITY
-	#define DKRED      FOREGROUND_RED|FOREGROUND_INTENSITY
-	#define DKDRKRED   FOREGROUND_RED
-	#define DKLTBLUE   FOREGROUND_BLUE|FOREGROUND_GREEN|BACKGROUND_BLUE|FOREGROUND_INTENSITY
-	#define DKBLUE     FOREGROUND_BLUE|FOREGROUND_GREEN|FOREGROUND_INTENSITY
-	#define DKDRKBLUE  FOREGROUND_BLUE|FOREGROUND_GREEN
-	#define DKGREEN    FOREGROUND_GREEN|FOREGROUND_INTENSITY
-	#define DKDRKGREEN FOREGROUND_GREEN
-	#define DKYELLOW   FOREGROUND_RED|FOREGROUND_GREEN|FOREGROUND_INTENSITY
-	#define DKBROWN    FOREGROUND_RED|FOREGROUND_GREEN
-
-	#define DKASSERT_COLOR  DKLTRED
-	#define DKFATAL_COLOR   DKLTRED
-	#define DKERROR_COLOR   DKRED
-	#define DKWARN_COLOR    DKYELLOW
-	#define DKINFO_COLOR    DKWHITE
-	#define DKDEBUG_COLOR   DKDRKBLUE
-	#define DKVERBOSE_COLOR DKLTBLUE	
-#else
-	#define DKNORMAL  0  //"\x1B[0m"
-	#define DKRED     31 //"\x1B[31m"
-	#define DKGREEN   32 //"\x1B[32m"
-	#define DKYELLOW  33 //"\x1B[33m"
-	#define DKBLUE    34 //"\x1B[34m"
-	#define DKDRKBLUE 34 //"\x1B[34m"
-	#define DKMAG     35 //"\x1B[35m"
-	#define DKCYN     36 //"\x1B[36m"
-	#define DKWHITE   37 //"\x1B[37m"
-
-	#define DKASSERT_COLOR  DKCYN
-	#define DKFATAL_COLOR   DKCYN
-	#define DKERROR_COLOR   DKRED
-	#define DKWARN_COLOR    DKYELLOW
-	#define DKINFO_COLOR    DKWHITE
-	#define DKDEBUG_COLOR   DKDRKBLUE
-	#define DKVERBOSE_COLOR DKDRKBLUE
 #endif
 
 #define DK_ASSERT  1
@@ -68,7 +28,6 @@
 class DKLog {
 public:
 	static bool Clear(int& rtnvalue);
-	static bool ColorMap();
 	static bool Log(const char* file, int line, const char* func, const DKString& input, const int lvl = DK_INFO, const int color_override = 0);
 	static bool SetLog(const int lvl, const DKString& text);
 
@@ -275,6 +234,8 @@ void Runit(){
 	TEST();
 }
 */
+
+
 
 
 #endif //DKLog_H

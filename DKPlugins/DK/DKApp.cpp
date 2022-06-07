@@ -34,6 +34,13 @@ catch (...){
 }
 */
 
+
+/*
+DKApp::DKApp(_argc, _argv)
+	(Main entry point)
+	_argc: (int) The number of arguments provided
+	_argv: (char**) The values of the arguments
+*/
 DKApp::DKApp(int _argc, char** _argv){
 	DKDEBUGFUNC(_argc, _argv);
 	DKApp::argc = _argc;
@@ -109,13 +116,11 @@ void DKApp::Init(){
 
 void DKApp::Loop(){
 	DKDEBUGFUNC();
-	DKINFO("DKApp::Loop()\n");
 	while(active)
 		DoFrame();
 }
 
 void DKApp::DoFrame(){
-	//DKDEBUGFUNC(); //DON'T DO THIS
 	if(paused){ 
 		DKUtil::Sleep(100);
 		return;
@@ -133,7 +138,6 @@ void DKApp::CallLoops(){
 
 void DKApp::Exit(){
 	DKDEBUGFUNC();
-	DKINFO("DKApp::Exit():\n");
 	active = false;
 	DKUtil::CallExit();
 	//exit(0);

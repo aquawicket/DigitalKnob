@@ -44,6 +44,6 @@ if(ANDROID)
 	DKDEPEND(sdl)
 endif()
 
-
+DKDEPEND(fmt)
 generateCmake(DK)
 DKASSETS(DK)
