@@ -208,7 +208,6 @@ bool DebugReturn(const char* file, int line, const char* func, const DKString& n
 	}
 	if (!arg_count)
 		func_string += "\n";
-	
 	DKLog::Log(file, line, "", func_string, DK_DEBUG);
 	return true;
 }
