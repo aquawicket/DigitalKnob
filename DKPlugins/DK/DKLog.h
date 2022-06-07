@@ -130,7 +130,6 @@ void printVariable(const DKString& name, T t, std::ostringstream& out) {
 		value << t;
 	}
 	replace(type, " *", "*");
-	//out << "[" << type << " == " << value.str() << "]";
 	out << "<" << type << ">\"" << name << "\":" << value.str();
 }
 
@@ -159,11 +158,9 @@ void DebugFunc(const char* file, int line, const char* func, const DKString& nam
 		return;
 	int arg_count = sizeof...(Args);	
 	std::ostringstream out;
-
 	DKStringArray name_array;
 	toStringArray(name_array, names, ",");
 	getTemplateArgs(out, name_array, args...);
-
 	DKString func_string = func;
 	func_string += "({ ";
 	func_string += out.str();
@@ -177,7 +174,6 @@ bool DebugReturn(const char* file, int line, const char* func, const DKString& n
 		return true;
 	int arg_count = sizeof...(Args);
 	std::ostringstream out;
-	
 	DKStringArray name_array;
 	toStringArray(name_array, names, ","); 
 	getTemplateArgs(out, name_array, args...);

@@ -138,7 +138,6 @@ bool DKLog::ColorMap(){
 		for(int k = 1; k < 255; k++){
 			SetConsoleTextAttribute(hConsole, k);
 			std::cout << k << "   Pick This Color ! :D   " << std::endl;
-			//printf("   Pick This Color ! :D   ");
 		}
 		// Restore Original Colors
 		SetConsoleTextAttribute(hConsole, saved_attributes);
@@ -146,6 +145,8 @@ bool DKLog::ColorMap(){
 #	endif
 	return DKERROR("not implemented on this system");
 }
+
+
 
 /*
 void signal_handler(int signal) {
