@@ -3,7 +3,7 @@
 
 HANDLE DKTextColor::hConsole = NULL;
 WORD DKTextColor::storedColorScheme = NULL;
-std::ostringstream DKTextColor::out = NULL;
+std::ostringstream DKTextColor::out;
 
 /* DKTextColor::GetConsoleHandle( &handle )
 	Print text colors to the console/terminal
