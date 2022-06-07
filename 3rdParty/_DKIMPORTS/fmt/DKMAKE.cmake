@@ -8,7 +8,7 @@ DKINCLUDE(${FMT}/include)
 #TODO: this library can be compiled
 
 ### LINK ###
-WIN_DEBUG_DKLIB(${FMT}/${OS}/${DEBUG_DIR}/fmt.lib)
+WIN_DEBUG_DKLIB(${FMT}/${OS}/${DEBUG_DIR}/fmtd.lib)
 WIN_RELEASE_DKLIB(${FMT}/${OS}/${RELEASE_DIR}/fmt.lib)
 UNIX_DEBUG_DKLIB(${FMT}/${OS}/${DEBUG_DIR}/fmt.a)
 UNIX_RELEASE_DKLIB(${FMT}/${OS}/${RELEASE_DIR}/fmt.a)
