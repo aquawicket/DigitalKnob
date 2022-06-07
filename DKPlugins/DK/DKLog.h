@@ -163,9 +163,13 @@ void DebugFunc(const char* file, int line, const char* func, const DKString& nam
 	toStringArray(name_array, names, ",");
 	getTemplateArgs(out, name_array, args...);
 	DKString func_string = func;
-	func_string += "({ ";
+	func_string += "(";
+	if(arg_count)
+		func_string += "{ ";
 	func_string += out.str();
-	func_string += " })\n";
+	if (arg_count)
+		func_string += " }";
+	func_string += ")\n";
 	DKLog::Log(file, line, "", func_string, DK_DEBUG);
 }
 
@@ -178,13 +182,33 @@ bool DebugReturn(const char* file, int line, const char* func, const DKString& n
 	DKStringArray name_array;
 	toStringArray(name_array, names, ","); 
 	getTemplateArgs(out, name_array, args...);
+
+	DKStringArray argArray;
+	toStringArray(argArray, out.str(), ",");
+
 	DKString func_string = func;
-	func_string += "({ ";
-	func_string += out.str();
-	if (arg_count)
+	func_string += "(";
+	if (arg_count > 1)
+		func_string += "{ ";
+	for (int i = 0; i < arg_count; ++i) {
+		if (i < (arg_count - 1)) {
+			func_string += argArray[i];
+			func_string += ", ";
+		}
+		else {
+			if (arg_count > 1)
+				func_string += " }";
+			func_string += ")";
+			if (arg_count) {
+				func_string += " -> { ";
+				func_string += argArray[i];
+				func_string += " }\n";
+			}
+		}
+	}
+	if (!arg_count)
 		func_string += "\n";
-	else
-		func_string += " })\n";
+	
 	DKLog::Log(file, line, "", func_string, DK_DEBUG);
 	return true;
 }
