@@ -140,6 +140,7 @@ void printVariable(const DKString& name, T t, std::ostringstream& out) {
 	out << "<" << type << ">\"" << name << "\":" << ":[Object]";
 }
 
+void getTemplateArgs(std::ostringstream& out);
 void getTemplateArgs(std::ostringstream& out, DKStringArray& name_array);
 
 template <typename A, typename... Args>
