@@ -134,6 +134,7 @@ if (!DUKTAPE) {
     }
 }
 
+// dk.file.pullDKAssets(callback)
 DKFile.prototype.pullDKAssets = function DKFile_pullDKAssets(callback) {
     console.log("Pulling assets from local repository");
     dk.php.call("POST", "DKFile/DKFile.php", "pullDKAssets", function dk_php_pullDKAssets_callback(result) {
@@ -144,33 +145,44 @@ DKFile.prototype.pullDKAssets = function DKFile_pullDKAssets(callback) {
     });
 }
 
-DKFile.prototype.exists = function DKFile_exists(url, callback, usePhp) {
-    url = dk.file.validatepath(url);
-    if (!url.includes(dk.file.onlineAssets))
-        url = dk.file.onlineAssets + url;
-    if (dk.php) {
-        dk.php.call("GET", "DKFile/DKFile.php", "exists", url, function dk_php_exists_callback(result) {
-            if (result) {
-                callback && callback(true);
-                return true;
-            } else {
-                callback && callback(false);
-                return false;
-            }
-        });
-    } else {
-        dk.sendRequest("GET", url, function dk_sendRequest_callback(success, url, result) {
-            if (success && url && result) {
-                callback && callback(true);
-                return true;
-            } else {
-                callback && callback(false);
-                return false;
-            }
-        });
+// dk.file.exists(path, callback)
+if(typeof CPP_DKFile_Exists === "function") {
+	DKFile.prototype.exists = function DKFile_Exists(path, callback) {
+        path = dk.file.validatepath(path);
+        const result = CPP_DKFile_Exists(path);
+        return callback(result);
     }
+} 
+else {
+	DKFile.prototype.exists = function DKFile_exists(url, callback/*, usePhp*/) { //FIXME: usephp currently does nothing
+		url = dk.file.validatepath(url);
+		if (!url.includes(dk.file.onlineAssets))
+			url = dk.file.onlineAssets + url;
+		if (dk.php) {
+			dk.php.call("GET", "DKFile/DKFile.php", "exists", url, function dk_php_exists_callback(result) {
+				if (result) {
+					callback && callback(true);
+					return true;
+				} else {
+					callback && callback(false);
+					return false;
+				}
+			});
+		} else {
+			dk.sendRequest("GET", url, function dk_sendRequest_callback(success, url, result) {
+				if (success && url && result) {
+					callback && callback(true);
+					return true;
+				} else {
+					callback && callback(false);
+					return false;
+				}
+			});
+		}
+	}
 }
 
+// dk.file.getShortName(path)
 if (typeof CPP_DKFile_GetShortName === "function") {
     DKFile.prototype.getShortName = function DKFile_getShortName(path) {
         path = dk.file.validatepath(path);

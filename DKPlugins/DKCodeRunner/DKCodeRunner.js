@@ -38,12 +38,16 @@ DKCodeRunner.prototype.create = function DKCodeRunner_create(parent, top, bottom
 	textarea.style.backgroundColor = "rgb(30,30,30)"
 	textareaDiv.appendChild(textarea)
 	
-	dk.file.fileToString("USER/cache.txt", function(str){
-		if(!str)
-			console.error("dk.file.fileToString(USER/cache.txt): failed")
-		else
-			textarea.value = str
-	})
+	dk.file.exists("USER/cache.txt", function(result){
+		if(result){
+			dk.file.fileToString("USER/cache.txt", function(str){
+				if(!str)
+					console.error("dk.file.fileToString(USER/cache.txt): failed")
+				else
+					textarea.value = str
+			})
+		}
+	}, 0)
 
 	textarea.oncontextmenu = function textarea_oncontextmenu(event) {
 		event.preventDefault();
