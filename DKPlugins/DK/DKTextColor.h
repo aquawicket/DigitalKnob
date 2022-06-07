@@ -86,10 +86,10 @@
 
 class DKTextColor{
 public:
-	static bool GetConsoleHandle(HANDLE& handle = hConsole);
+	static bool GetConsoleHandle(HANDLE& handle = DKTextColor::hConsole);
 	static bool PrintColors();
-	static bool StoreColor(WORD& colorScheme = storedColorScheme);
-	static bool RestoreColor(WORD& colorScheme = storedColorScheme);
+	static bool StoreColor(WORD& colorScheme = DKTextColor::storedColorScheme);
+	static bool RestoreColor(WORD& colorScheme = DKTextColor::storedColorScheme);
 	static HANDLE hConsole;
 	static WORD storedColorScheme;
 	static std::ostringstream out;
