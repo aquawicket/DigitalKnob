@@ -27,19 +27,23 @@
 #include "DK/stdafx.h"
 #include "DKTextColor.h"
 
-HANDLE DKTextColor::hConsole = NULL;
-WORD DKTextColor::storedColorScheme = NULL;
+#ifdef WIN
+	HANDLE DKTextColor::hConsole = NULL;
+	WORD DKTextColor::storedColorScheme = NULL;
+#endif
 std::ostringstream DKTextColor::out;
 
 /* DKTextColor::GetConsoleHandle( &handle )
 	Print text colors to the console/terminal
 	https://www.lihaoyi.com/post/BuildyourownCommandLinewithANSIescapecodes.html
 */
+#ifdef WIN
 bool DKTextColor::GetConsoleHandle(HANDLE& handle){
 	if (!handle)
 		handle = GetStdHandle(STD_OUTPUT_HANDLE);
 	return true;
 }
+#endif
 
 
 /* DKTextColor::PrintColors()
