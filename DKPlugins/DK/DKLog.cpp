@@ -368,4 +368,4 @@ logy::~logy(){
 	stream->flush();
 }
 
-void getTemplateArgs(std::ostringstream& /*out*/) {}
+void getTemplateArgs(std::ostringstream& /*out*/, DKStringArray& /*names*/) {}

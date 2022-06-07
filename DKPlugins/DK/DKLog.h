@@ -109,66 +109,89 @@ template<typename S, typename T>
 struct is_streamable<S, T, decltype(std::declval<S&>() << std::declval<T&>(), void())> : std::true_type {};
 
 template<typename T, typename std::enable_if<is_streamable<std::ostream, T>::value>::type* = nullptr>
-void printVariable(T t, std::ostringstream& out) {
-	DKString type = typeid(t).name();
-	if (typeid(t) == typeid(std::string))
-		type = "DKString";
-	
+void printVariable(const DKString& name, T t, std::ostringstream& out) {
+	DKString type = "";
+	DKString constant = "";
+	std::ostringstream value;
+	if (std::is_const<T>::value)
+		constant = "const ";
+	if (typeid(t) == typeid(DKString)) {
+		type = constant;
+		type += "DKString";
+		value << "\"" << t << "\"";
+	}
+	else if (typeid(t) == typeid(char *)) {
+		type = constant;
+		type += "char*";
+		value << "\"" << t << "\"";
+	}
+	else {
+		type = typeid(t).name();
+		value << t;
+	}
 	replace(type, " *", "*");
-	out << "[" << type << " == " << t << "]";
+	//out << "[" << type << " == " << value.str() << "]";
+	out << "<" << type << ">\"" << name << "\":" << value.str();
 }
 
 template<typename T, typename std::enable_if<!is_streamable<std::ostream, T>::value>::type* = nullptr>
-void printVariable(T t, std::ostringstream& out) {
+void printVariable(const DKString& name, T t, std::ostringstream& out) {
 	DKString type = typeid(t).name();
 	replace(type, " *", "*");
-	out << "[" << type << " == NonStreamable]";
+	out << "<" << type << ">\"" << name << "\":" << ":[Object]";
 }
 
-//#ifndef ANDROID
-void getTemplateArgs(std::ostringstream& out);
+void getTemplateArgs(std::ostringstream& out, DKStringArray& name_array);
 
 template <typename A, typename... Args>
-void getTemplateArgs(std::ostringstream& out, A arg1, Args&&... args) {
+void getTemplateArgs(std::ostringstream& out, DKStringArray& name_array, A arg1, Args&&... args) {
 	int arg_count = sizeof...(Args);
-	printVariable(arg1, out);
+	printVariable(name_array[0], arg1, out); //use first name element
+	name_array.erase(name_array.begin()); //remove first name element
 	if(arg_count)
-		out << ", ";
-    getTemplateArgs(out, args...);
+		out << ",  ";
+    getTemplateArgs(out, name_array, args...);
 }
 
 template <typename... Args>
-void DebugFunc(const char* file, int line, const char* func, Args&&... args) {
+void DebugFunc(const char* file, int line, const char* func, const DKString& names, Args&&... args) {
 	if(DKLog::log_show.empty() && !DKLog::log_debug)
 		return;
-	int arg_count = sizeof...(Args);
+	int arg_count = sizeof...(Args);	
 	std::ostringstream out;
-	getTemplateArgs(out, args...);
+
+	DKStringArray name_array;
+	toStringArray(name_array, names, ",");
+	getTemplateArgs(out, name_array, args...);
+
 	DKString func_string = func;
-	func_string += "(";
+	func_string += "({ ";
 	func_string += out.str();
-	func_string += ")\n";
+	func_string += " })\n";
 	DKLog::Log(file, line, "", func_string, DK_DEBUG);
 }
 
 template <typename... Args>
-bool DebugReturn(const char* file, int line, const char* func, Args&&... args) {
+bool DebugReturn(const char* file, int line, const char* func, const DKString& names, Args&&... args) {
 	if (DKLog::log_show.empty() && !DKLog::log_debug)
 		return true;
 	int arg_count = sizeof...(Args);
 	std::ostringstream out;
-	getTemplateArgs(out, args...);
+	
+	DKStringArray name_array;
+	toStringArray(name_array, names, ","); 
+	getTemplateArgs(out, name_array, args...);
 	DKString func_string = func;
-	func_string += "(";
+	func_string += "({ ";
 	func_string += out.str();
 	if (arg_count)
 		func_string += "\n";
 	else
-		func_string += ")\n";
+		func_string += " })\n";
 	DKLog::Log(file, line, "", func_string, DK_DEBUG);
 	return true;
 }
-//#endif
+
 
 class logy{
 	public:
