@@ -152,7 +152,7 @@ function DKGit_GitCommit() {
 				//CPP_DK_Execute(GIT + " diff git diff --color-words & echo. & echo. & echo Press any key to proceed with commit")
 				
 				console.log("\n########## Changed Files ##########")
-				CPP_DK_Execute(GIT + " diff --stat --color-words")
+				CPP_DK_Execute(GIT + " diff --stat --color-words", "r", 0)
 				
 				/*
 				console.log("\nPress c to proceed with the commit,     Press any other key to cancel")
@@ -163,8 +163,8 @@ function DKGit_GitCommit() {
 				}
 				*/
 
-				CPP_DK_Execute(GIT + " commit -a -m \"commit from git\"")
-                CPP_DK_Execute(GIT + " push")
+				CPP_DK_Execute(GIT + " commit -a -m \"commit from git\"", "r", 0)
+                CPP_DK_Execute(GIT + " push", "r", 0)
             }
         }
     }

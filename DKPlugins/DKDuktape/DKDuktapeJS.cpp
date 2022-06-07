@@ -442,9 +442,22 @@ int DKDuktapeJS::DumpError(duk_context* ctx){
 	return 1;
 }
 
-/*//////////////////////////
-    Javascript Example:
+/*	CPP_DK_Execute(command, mode, return_code)
+	command:        The command to be executed
+	mode:"r"        STDOUT_FILENO will be the writable, end of the pipe when the child process is started. 
+					The file descriptor fileno(stream) in the calling process, where stream is the stream pointer returned by popen(), will be the writable end of the pipe.
+	mode:"w"        STDIN_FILENO will be the readable, end of the pipe when the child process is started. 
+					The file descriptor fileno(stream) in the calling process, where stream is the stream pointer returned by popen(), will be the writable end of the pipe.
+	mode:any_other  A NULL pointer is returned and errno is set to EINVAL.
+	errMsg:      The returned error message if an error occures
+	rtncode:        The return code of the command at exit. Default -1 is set and will evaluate the return error. May be overwritten. I.E. set to 0 to ignore errors 
 
+	Return: {"command":"string", "errMsg":"string", "code":int }
+		command:  A copy of the command executed
+		errMsg:   The error message
+		code:     The return code 
+
+    Example:
 	const rtn = CPP_DK_Execute("cd TestError")
 	if(rtn.error)
 		console.error("\n\n "+rtn.command+" \n   ERROR:("+rtn.code+"): "+rtn.error)
@@ -458,20 +471,20 @@ int DKDuktapeJS::Execute(duk_context* ctx){
 	int return_code = -1; //default
 	if (duk_is_number(ctx, 2))
 		return_code = duk_to_int(ctx, 2);
-	DKString message;
-	if(!DKUtil::Execute(command, mode, message, return_code))
-		return DKERROR("DKUtil::Execute() failed");
+	DKString errMsg;
+	if(!DKUtil::Execute(command, mode, errMsg, return_code))
+		return DKERROR("failed");
 	if(return_code == 0){
-		duk_push_string(ctx, message.c_str());
+		duk_push_string(ctx, errMsg.c_str());
 	}
 	else{
-		DKERROR("\n    DKUtil::Execute("+command+") ->\n\n        ERROR:("+toString(return_code)+")  "+message+"\n");
+		DKERROR("\n    DKUtil::Execute("+command+") ->\n\n        ERROR:("+toString(return_code)+")  "+errMsg+"\n");
 		//create json object: { "command":"string", "error":"string", "code":int }
 		duk_idx_t obj_idx;
 		obj_idx = duk_push_object(ctx);
 		duk_push_string(ctx, command.c_str());
 		duk_put_prop_string(ctx, obj_idx, "command");
-		duk_push_string(ctx, message.c_str());
+		duk_push_string(ctx, errMsg.c_str());
 		duk_put_prop_string(ctx, obj_idx, "error");
 		duk_push_int(ctx, return_code);
 		duk_put_prop_string(ctx, obj_idx, "code");

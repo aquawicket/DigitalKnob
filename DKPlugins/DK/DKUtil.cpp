@@ -5,26 +5,26 @@
 #include <iostream>
 #include <cstring>
 #ifndef WIN32
-	#include <sys/time.h>
+#	include <sys/time.h>
 #endif
 
 #ifdef WIN32
-	#include "DKWindows.h"
-	#include <shellapi.h> //DKFile::Execute()
+#	include "DKWindows.h"
+#	include <shellapi.h> //DKFile::Execute()
 #else
-	#include "DKUnix.h"
+#	include "DKUnix.h"
 #endif
 
 #ifdef LINUX
-	#include "DKLinux.h"
+#	include "DKLinux.h"
 #endif 
 
 #ifdef ANDROID
-	#include "DKAndroid.h"
+#	include "DKAndroid.h"
 #endif 
 
 #ifdef MAC
-	#include "DKMac.h"
+#	include "DKMac.h"
 #endif
 	
 //#include <boost/asio.hpp> //Boost deprecated in the DKCore library
@@ -60,158 +60,166 @@ bool DKUtil::Beep(){
 
 bool DKUtil::Bin2C(const DKString& input, const DKString& output){
 	DKDEBUGFUNC(input, output);
-#ifndef MAC
-	char *buf;
-	//const char* ident  = "assets";
-	unsigned int i, need_comma;
-    //long file_size;
-	size_t file_size;
-	FILE* f_input = fopen(input.c_str(), "rb");
-	if (!f_input)
-		return DKERROR("can't open file for reading\n");
-	// Get the file length
-	fseek(f_input, 0, SEEK_END);
-	file_size = ftell(f_input);
-	fseek(f_input, 0, SEEK_SET);
-	file_size++;
-	buf = (char *)malloc(file_size);
-	assert(buf);   
-	fread(buf, file_size, 1, f_input);
-	if(fclose(f_input))
-		return DKERROR("fclose(f_input) failed\n");
-	FILE* f_output = fopen(output.c_str(), "w");
-	if(!f_output)
-		return DKERROR("can't open file for writing\n");
-	//ident = "assets";
-	need_comma = 0;
-	//fprintf (f_output, "const unsigned char %s[%i] = {", ident, file_size); //verbos
-	for(i = 0; i < file_size; ++i){
-		if (need_comma) fprintf(f_output, ", ");
-		else need_comma = 1;
-		if (( i % 11 ) == 0) fprintf(f_output, "\n\t");
-		//fprintf(f_output, "0x%.2x", buf[i] & 0xff); //verbos
-	}
-	//fprintf(f_output, "\n};\n\n"); //verbos
-	//fprintf(f_output, "const int %s_size = %i;\n", ident, file_size); //verbos
-	if (fclose(f_output))
-		return DKERROR("fclose(f_output) failed\n");
-	return true;
-#else //!MAC
-	return DKERROR("not implemented on Mac OSX\n");
-#endif
+#	ifndef MAC
+		char *buf;
+		//const char* ident  = "assets";
+		unsigned int i, need_comma;
+		//long file_size;
+		size_t file_size;
+		FILE* f_input = fopen(input.c_str(), "rb");
+		if (!f_input)
+			return DKERROR("can't open file for reading\n");
+		// Get the file length
+		fseek(f_input, 0, SEEK_END);
+		file_size = ftell(f_input);
+		fseek(f_input, 0, SEEK_SET);
+		file_size++;
+		buf = (char *)malloc(file_size);
+		assert(buf);   
+		fread(buf, file_size, 1, f_input);
+		if(fclose(f_input))
+			return DKERROR("fclose(f_input) failed\n");
+		FILE* f_output = fopen(output.c_str(), "w");
+		if(!f_output)
+			return DKERROR("can't open file for writing\n");
+		//ident = "assets";
+		need_comma = 0;
+		//fprintf (f_output, "const unsigned char %s[%i] = {", ident, file_size); //verbos
+		for(i = 0; i < file_size; ++i){
+			if (need_comma) fprintf(f_output, ", ");
+			else need_comma = 1;
+			if (( i % 11 ) == 0) fprintf(f_output, "\n\t");
+			//fprintf(f_output, "0x%.2x", buf[i] & 0xff); //verbos
+		}
+		//fprintf(f_output, "\n};\n\n"); //verbos
+		//fprintf(f_output, "const int %s_size = %i;\n", ident, file_size); //verbos
+		if (fclose(f_output))
+			return DKERROR("fclose(f_output) failed\n");
+		return true;
+#	else //!MAC
+		return DKERROR("not implemented on Mac OSX\n");
+#	endif
 }
 
-bool DKUtil::C2Bin(const DKString hex, std::streamsize /*size*/, const char* fileOut) {
-	//DKDEBUGFUNC(header, size, "fileOut");
-#ifndef MAC
-	//NOTES: 
-	//https://caiorss.github.io/C-Cpp-Notes/resources-executable.html
-	//https://stackoverflow.com/questions/27878495/ofstream-not-working-on-linux
-	//https://stackoverflow.com/questions/55444139/stdbasic-ofstreamstduint8-t-write-fails-at-check-facet
-	
-	//https://stackoverflow.com/a/49273626/688352
-	std::basic_string<uint8_t> bytes;
-	for(size_t i = 0; i < hex.length(); i += 2){
-		uint16_t byte;
-		// Get current pair and store in nextbyte
-		std::string nextbyte = hex.substr(i, 2);
-		// Put the pair into an istringstream and stream it through std::hex for
-    	// conversion into an integer value.
-    	// This will calculate the byte value of the string-represented hex value.
-    	std::istringstream(nextbyte) >> std::hex >> byte;
-		// As the stream above does not work with uint8 directly,
-    	// we have to cast it now.
-    	// As every pair can have a maximum value of "ff",
-    	// which is "11111111" (8 bits), we will not lose any information during this cast.
-    	// This line adds the current byte value to our final byte "array".
-    	bytes.push_back(static_cast<uint8_t>(byte));	
-	}
-	// Generating a string obj from our bytes-"array"
-	// Output it into a binary file
-	std::string result(begin(bytes), end(bytes));
-	std::ofstream output_file(fileOut, std::ios::binary | std::ios::out);
-	if(output_file.is_open()){
-    	output_file << result;
-    	output_file.close();
-	}
-	else
-    	return DKERROR("could not create file\n");
-	return true;
+bool DKUtil::C2Bin(const DKString hex, std::streamsize size, const char* fileOut) {
+	DKDEBUGFUNC(hex, size, fileOut);
+#	ifndef MAC
+		//NOTES: 
+		//https://caiorss.github.io/C-Cpp-Notes/resources-executable.html
+		//https://stackoverflow.com/questions/27878495/ofstream-not-working-on-linux
+		//https://stackoverflow.com/questions/55444139/stdbasic-ofstreamstduint8-t-write-fails-at-check-facet
+		
+		//https://stackoverflow.com/a/49273626/688352
+		std::basic_string<uint8_t> bytes;
+		for(size_t i = 0; i < hex.length(); i += 2){
+			uint16_t byte;
+			// Get current pair and store in nextbyte
+			std::string nextbyte = hex.substr(i, 2);
+			// Put the pair into an istringstream and stream it through std::hex for
+			// conversion into an integer value.
+			// This will calculate the byte value of the string-represented hex value.
+			std::istringstream(nextbyte) >> std::hex >> byte;
+			// As the stream above does not work with uint8 directly,
+			// we have to cast it now.
+			// As every pair can have a maximum value of "ff",
+			// which is "11111111" (8 bits), we will not lose any information during this cast.
+			// This line adds the current byte value to our final byte "array".
+			bytes.push_back(static_cast<uint8_t>(byte));	
+		}
+		// Generating a string obj from our bytes-"array"
+		// Output it into a binary file
+		std::string result(begin(bytes), end(bytes));
+		std::ofstream output_file(fileOut, std::ios::binary | std::ios::out);
+		if(output_file.is_open()){
+			output_file << result;
+			output_file.close();
+		}
+		else
+			return DKERROR("could not create file\n");
+		return true;
 
-#else //!MAC
-	return DKERROR("not implemented on Mac OSX\n");
-#endif
+#	else //!MAC
+		return DKERROR("not implemented on Mac OSX\n");
+#	endif
 }
 
 bool DKUtil::CallExit(){
 	DKDEBUGFUNC();
-#ifdef ANDROID
-	CallJavaFunction("Exit","");
-#endif
-#ifdef WIN32
-	if(GetCurrentThreadId() != DKUtil::mainThreadId){   //GetCurrentThreadId not available for android
-		DKWARN("DKApp::Exit(): Not called from the main thread\n");
-	}
-#endif
+#	ifdef ANDROID
+		CallJavaFunction("Exit","");
+#	endif
+#	ifdef WIN32
+		if(GetCurrentThreadId() != DKUtil::mainThreadId){   //GetCurrentThreadId not available for android
+			DKWARN("DKApp::Exit(): Not called from the main thread\n");
+		}
+#	endif
 	DKClass::CloseAll();
 	return true;
 }
 
 bool DKUtil::CpuUsed(int& cpu){
 	DKDEBUGFUNC(cpu);
-#if WIN32
-	return DKWindows::CpuUsed(cpu);
-#elif MAC
-	return DKMac::CpuUsed(cpu);
-#elif LINUX
-	return DKLinux::CpuUsed(cpu);
-#else
-	return DKERROR("not implemented on this OS\n");
-#endif
+#	if WIN32
+		return DKWindows::CpuUsed(cpu);
+#	elif MAC
+		return DKMac::CpuUsed(cpu);
+#	elif LINUX
+		return DKLinux::CpuUsed(cpu);
+#	else
+		return DKERROR("not implemented on this OS\n");
+#	endif
 }
 
 bool DKUtil::CpuUsedByApp(int& cpu){
 	DKDEBUGFUNC(cpu);
-#if WIN32
-	return DKWindows::CpuUsedByApp(cpu);
-#elif MAC
-	return DKMac::CpuUsedByApp(cpu);
-#elif LINUX
-	return DKLinux::CpuUsedByApp(cpu);
-#else
-	return DKERROR("not implemented on this OS\n");
-#endif
+#	if WIN32
+		return DKWindows::CpuUsedByApp(cpu);
+#	elif MAC
+		return DKMac::CpuUsedByApp(cpu);
+#	elif LINUX
+		return DKLinux::CpuUsedByApp(cpu);
+#	else
+		return DKERROR("not implemented on this OS\n");
+#	endif
 }
 
 bool DKUtil::DoubleClick(){
 	DKDEBUGFUNC();
-#if WIN32
-	DKWindows::LeftClick();
-	return DKWindows::LeftClick();
-#else
-	return DKERROR("not implemented on this OS\n");
-#endif
+#	if WIN32
+		DKWindows::LeftClick();
+		return DKWindows::LeftClick();
+#	else
+		return DKERROR("not implemented on this OS\n");
+#	endif
 }
 
 bool DKUtil::DrawTextOnScreen(const DKString& text){
 	DKDEBUGFUNC(text);
-#if WIN32
-	return DKWindows::DrawTextOnScreen(text);
-#else
-	return DKERROR("not implemented on this OS\n");
-#endif
+#	if WIN32
+		return DKWindows::DrawTextOnScreen(text);
+#	else
+		return DKERROR("not implemented on this OS\n");
+#	endif
 }
 
-
+// bool DKUTil::Execute(command, mode, stdouterr, rtncode)
+// command:        The command to be executed
+// mode:"r"        STDOUT_FILENO will be the writable, end of the pipe when the child process is started. 
+//		           The file descriptor fileno(stream) in the calling process, where stream is the stream pointer returned by popen(), will be the writable end of the pipe.
+// mode:"w"        STDIN_FILENO will be the readable, end of the pipe when the child process is started. 
+//		           The file descriptor fileno(stream) in the calling process, where stream is the stream pointer returned by popen(), will be the writable end of the pipe.
+// mode:any_other  A NULL pointer is returned and errno is set to EINVAL.
+// stdouterr:      The returned error message if an error occures
+// rtncode:        The return code of the command at exit. Default -1 is set and will evaluate the return error. May be overwritten. I.E. set to 0 to ignore errors 
 bool DKUtil::Execute(const DKString& command, const DKString& mode, DKString& stdouterr, int& rtncode){
 	DKDEBUGFUNC(command, mode);
-#if WIN32
-	auto& dk_popen = _popen;
-	auto& dk_pclose = _pclose;
-#else
-	auto& dk_popen = popen;
-	auto& dk_pclose = pclose;
-#endif
+#	if WIN32
+		auto& dk_popen = _popen;
+		auto& dk_pclose = _pclose;
+#	else
+		auto& dk_popen = popen;
+		auto& dk_pclose = pclose;
+#	endif
 	// https://stackoverflow.com/q/52164723/688352
 	const DKString commandWithErr = command+" 2>&1"; //get stdout and stderr together
 	FILE* pipe = dk_popen(commandWithErr.c_str(), mode.c_str());
@@ -235,22 +243,22 @@ bool DKUtil::Execute(const DKString& command, const DKString& mode, DKString& st
 
 bool DKUtil::FindImageOnScreen(const DKString& file, int& x, int& y){
 	DKDEBUGFUNC(file, x, y);
-#if WIN32
-	return DKWindows::FindImageOnScreen(file, x, y);
-#else
-	return DKERROR("not implemented on this OS\n");
-#endif
+#	if WIN32
+		return DKWindows::FindImageOnScreen(file, x, y);
+#	else
+		return DKERROR("not implemented on this OS\n");
+#	endif
 }
 
 bool DKUtil::GetClipboard(DKString& text){
 	DKDEBUGFUNC(text);
-#ifdef WIN32
-	return DKWindows::GetClipboard(text);
-#elif LINUX
-	return DKLinux::GetClipboard(text);
-#else
-	return DKERROR("not implemented on this OS\n");
-#endif
+#	ifdef WIN32
+		return DKWindows::GetClipboard(text);
+#	elif LINUX
+		return DKLinux::GetClipboard(text);
+#	else
+		return DKERROR("not implemented on this OS\n");
+#	endif
 }
 
 bool DKUtil::GetDate(DKString& date){
@@ -289,13 +297,13 @@ bool DKUtil::GetFrames(unsigned long& frames){
 
 bool DKUtil::GetKey(int& key){
 	DKDEBUGFUNC("key");
-#ifdef WIN32
-	return DKWindows::GetKey(key);
-#elif !WIN32
-	return DKUnix::GetKey(key);
-#else
-	return DKERROR("not implemented on this OS\n");
-#endif
+#	ifdef WIN32
+		return DKWindows::GetKey(key);
+#	elif !WIN32
+		return DKUnix::GetKey(key);
+#	else
+		return DKERROR("not implemented on this OS\n");
+#	endif
 }
 
 bool DKUtil::GetLocalIP(DKString& ip){
@@ -315,17 +323,17 @@ bool DKUtil::GetLocalIP(DKString& ip){
 
 bool DKUtil::GetMousePos(int& x, int& y){
 	DKDEBUGFUNC(x, y);
-#ifdef WIN32
-	return DKWindows::GetMousePos(x, y);
-#elif MAC
-	return DKMac::GetMousePos(x, y);
-#elif LINUX
-	return DKLinux::GetMousePos(x, y);
-#elif ANDROID
-	return DKAndroid::GetMousePos(x, y);
-#else
-	return DKERROR("not implemented on this OS\n");
-#endif
+#	ifdef WIN32
+		return DKWindows::GetMousePos(x, y);
+#	elif MAC
+		return DKMac::GetMousePos(x, y);
+#	elif LINUX
+		return DKLinux::GetMousePos(x, y);
+#	elif ANDROID
+		return DKAndroid::GetMousePos(x, y);
+#	else
+		return DKERROR("not implemented on this OS\n");
+#	endif
 }
 
 bool DKUtil::GetPixelFromImage(const DKString& image, int x, int y){
