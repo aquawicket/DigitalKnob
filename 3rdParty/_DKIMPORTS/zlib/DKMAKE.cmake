@@ -4,15 +4,6 @@
 
 DKIMPORT(https://github.com/madler/zlib.git)
 
-#DKIMPORT(https://github.com/madler/zlib)
-#DKIMPORT(https://github.com/madler/zlib/archive/cacf7f1d4e3d44d871b605da3b647f07d718623f.zip)
-
-#DKSET(ZLIB_VERSION 1.2.11)
-#DKSET(ZLIB_NAME zlib-${ZLIB_VERSION})
-#DKSET(ZLIB_DL https://www.zlib.net/fossils/zlib-1.2.11.tar.gz)
-#DKSET(ZLIB ${3RDPARTY}/${ZLIB_NAME})
-#DKINSTALL(${ZLIB_DL} zlib ${ZLIB})
-
 
 ### DKPLUGINS LINK ###
 DKINCLUDE(${ZLIB})
@@ -38,17 +29,7 @@ DKSETPATH(${ZLIB}/${BUILD_DIR})
 DKQCOMMAND(${DKCMAKE_BUILD} ${ZLIB})
 
 
-WIN_VS(${ZLIB_NAME} zlib.sln zlibstatic)
-MAC_XCODE(${ZLIB_NAME} zlibstatic)
-IOS_XCODE(${ZLIB_NAME} zlibstatic)
-IOSSIM_XCODE(${ZLIB_NAME} zlibstatic)
+VS(${ZLIB_NAME} zlib.sln zlibstatic) # windows, android
+XCODE(${ZLIB_NAME} zlibstatic)       # mac, ios, iossim
 LINUX_DKQCOMMAND(make zlibstatic)
 RASPBERRY_DKQCOMMAND(make zlibstatic)
-ANDROID_VS(${ZLIB_NAME} zlib.sln zlibstatic)
-
-
-#DKCOMPILE(WIN          MSBUILD   zlib-1.2.11  zlib.sln   zlibstatic   zlibstatic.lib)
-#DKCOMPILE(APPLE        XCODE     zlib-1.2.11             zlibstatic   libz.a)
-#DKCOMPILE(LINUX        MAKE      zlib-1.2.11             zlibstatic   libz.a)
-#DKCOMPILE(RASPBERRY    MAKE      zlib-1.2.11             zlibstatic   libz.a)
-#DKCOMPILE(ANDROID      ANDROID   zlib-1.2.11  zlib.sln   zlibstatic   libz.a)
