@@ -2583,11 +2583,6 @@ endfunction()
 ##  lib url DL:  https://website.com/library.zip                DKIMPORT_DL(url) #lib #id #PATCH
 ##  exe url DL:  https://website.com/executable.exe				DKIMPORT_DL(url) #lib #id #PATCH
 
-function(DKGITCLONE url)  # to be renaed to DKIMPORT
-	DKIMPORT(${ARGV})
-	DKASSERT("${url} \n Change DKGITCLONE() to DKIMPORT()")
-endfunction()
-
 function(DKIMPORT url) #Lib #ID #Patch
 	#string(FIND ${url} "github.com" github)
 	#string(FIND ${url} "gitlab.com" gitlab)

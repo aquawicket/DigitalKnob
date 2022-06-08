@@ -28,6 +28,7 @@
 #ifndef DKFmt_H
 #define DKFmt_H
 
+#include <DK/DK.h>
 #include <fmt/core.h>
 
 class DKFmt : public DKObjectT<DKFmt>
