@@ -4,7 +4,7 @@
 # https://github.com/htacg/tidy-html5/archive/refs/tags/5.8.0.zip
 
 
-DKGITCLONE(https://github.com/htacg/tidy-html5.git)
+DKIMPORT(https://github.com/htacg/tidy-html5.git)
 
 #DKSET(TIDY-HTML5_DL https://github.com/htacg/tidy-html5/archive/refs/tags/5.8.0.zip)
 #DKSET(TIDY-HTML5_VERSION 5.8.0)

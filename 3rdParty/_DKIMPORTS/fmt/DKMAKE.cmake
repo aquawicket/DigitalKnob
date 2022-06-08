@@ -1,6 +1,7 @@
 # https://github.com/fmtlib/fmt
+# https://fmt.dev/latest/index.html
 
-DKGITCLONE(https://github.com/fmtlib/fmt.git)
+DKIMPORT(https://github.com/fmtlib/fmt.git)
 
 # Head only includes
 DKINCLUDE(${FMT}/include)

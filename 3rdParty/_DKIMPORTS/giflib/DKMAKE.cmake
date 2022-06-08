@@ -13,7 +13,7 @@ WIN_DKDEPEND(msys)
 #WIN_DKDEPEND(msys2)
 
 
-DKGITCLONE(https://github.com/mirrorer/giflib.git PATCH)
+DKIMPORT(https://github.com/mirrorer/giflib.git PATCH)
 
 #DKIMPORT(https://github.com/mirrorer/giflib/archive/fa37672085ce4b3d62c51627ab3c8cf2dda8009a.zip PATCH)
 

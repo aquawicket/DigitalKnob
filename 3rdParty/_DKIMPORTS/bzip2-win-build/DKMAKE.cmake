@@ -10,7 +10,7 @@ DKDEPEND(mingw64)
 DKDEPEND(msys2)
 DKDEPEND(libgcc)
 
-DKGITCLONE(https://github.com/kiyolee/bzip2-win-build.git)
+DKIMPORT(https://github.com/kiyolee/bzip2-win-build.git)
 #DKIMPORT(https://github.com/kiyolee/bzip2-win-build/archive/c0242ad14ecc4e8c04e72bc6c980393be80e7bbd.zip)
 
 

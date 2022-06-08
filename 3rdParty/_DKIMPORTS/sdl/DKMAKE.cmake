@@ -56,7 +56,7 @@ ANDROID_DKDEPEND(opensles)
 # SDL_DL      = https://github.com/libsdl-org/SDL/archive/18032979d892639ad4e03584a40a4d205cd2f5fd.zip    :the library  download link 
 
 
-DKGITCLONE(https://github.com/libsdl-org/SDL.git main)
+DKIMPORT(https://github.com/libsdl-org/SDL.git main)
 #DKIMPORT(https://github.com/libsdl-org/SDL/archive/d9009388c8924b15f74ec38a26cc62ea42b40110.zip)
 #DKIMPORT(https://github.com/libsdl-org/SDL/archive/d9009388c8924b15f74ec38a26cc62ea42b40110.zip)
 #DKIMPORT(https://github.com/libsdl-org/SDL/archive/9d86ec85730e98f6f4d7827f4fda806e9c134f0d.zip)

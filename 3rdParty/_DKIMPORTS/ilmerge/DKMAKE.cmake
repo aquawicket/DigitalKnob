@@ -3,7 +3,7 @@
 
 
 
-DKGITCLONE(https://github.com/dotnet/ILMerge.git)
+DKIMPORT(https://github.com/dotnet/ILMerge.git)
 
 #DKIMPORT(https://github.com/dotnet/ILMerge/archive/9ec1b3f29f6f11b8fc2ddcca4c055dae7b10d9e3.zip)
 

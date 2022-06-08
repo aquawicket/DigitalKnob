@@ -1,4 +1,4 @@
 # https://github.com/lvandeve/lodepng
 #
 
-DKGITCLONE(https://github.com/lvandeve/lodepng.git)
+DKIMPORT(https://github.com/lvandeve/lodepng.git)

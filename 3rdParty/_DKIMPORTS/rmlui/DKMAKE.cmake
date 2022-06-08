@@ -10,8 +10,8 @@ DKDEPEND(freetype)
 #DKDEPEND(sfml)
 
 
-DKGITCLONE(https://github.com/aquawicket/RmlUi.git PATCH)
-#DKGITCLONE(https://github.com/aquawicket/RmlUi.git RCSS_attribute_selector_support PATCH)
+DKIMPORT(https://github.com/aquawicket/RmlUi.git PATCH)
+#DKIMPORT(https://github.com/aquawicket/RmlUi.git RCSS_attribute_selector_support PATCH)
 
 
 ### LINK ###

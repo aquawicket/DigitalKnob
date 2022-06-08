@@ -5,7 +5,7 @@
 
 
 
-DKGITCLONE(https://github.com/Samsung/rlottie.git)
+DKIMPORT(https://github.com/Samsung/rlottie.git)
 
 #DKIMPORT(https://github.com/Samsung/rlottie/archive/875626965959d8e269ca22175c8e1ad190696c43.zip)
 #DKSET(RLOTTIE_VERSION 0.2)

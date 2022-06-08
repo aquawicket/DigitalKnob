@@ -4,7 +4,7 @@
 # https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/bullet/bullet-2.82-r2704.zip
 
 ### IMPORT ###
-DKGITCLONE(https://github.com/bulletphysics/bullet3.git)
+DKIMPORT(https://github.com/bulletphysics/bullet3.git)
 #DKIMPORT(https://github.com/bulletphysics/bullet3/archive/refs/tags/2.82.zip)
 
 ### VERSION ###

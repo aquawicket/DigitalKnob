@@ -2,7 +2,7 @@
 #
 # https://github.com/google/diff-match-patch/archive/refs/heads/master.zip
 
-DKGITCLONE(https://github.com/google/diff-match-patch.git)
+DKIMPORT(https://github.com/google/diff-match-patch.git)
 #DKIMPORT(https://github.com/google/diff-match-patch/archive/62f2e689f498f9c92dbc588c58750addec9b1654.zip)
 
 #DKSET(DIFF_MATCH_PATCH_VERSION 62f2e68)

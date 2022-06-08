@@ -2574,23 +2574,33 @@ endif()
 endfunction()
 
 
-######### TODO ###########
+######### TODO ###########################################
 ##
 ##   DKIMPORT(url) #args
 ##  
-##  github GIT:  https://github.com/orginization/library.git    DKIMPORT_GITHUB(url) #branch #PATCH
-##  github DL:   https://github.com/orginization/library        DKIMPORT_GITHUB(url) #lib #id #PATCH
+##  github GIT:  https://github.com/orginization/library.git    DKIMPORT_GIT(url) #branch #PATCH
+##  github DL:   https://github.com/orginization/library        DKIMPORT_GIT(url) #lib #id #PATCH
 ##  lib url DL:  https://website.com/library.zip                DKIMPORT_DL(url) #lib #id #PATCH
 ##  exe url DL:  https://website.com/executable.exe				DKIMPORT_DL(url) #lib #id #PATCH
 
 function(DKGITCLONE url)  # to be renaed to DKIMPORT
-	DKIMPORT_GITHUB(${ARGV})
+	DKIMPORT(${ARGV})
+	DKASSERT("${url} \n Change DKGITCLONE() to DKIMPORT()")
 endfunction()
-#############
 
+function(DKIMPORT url) #Lib #ID #Patch
+	#string(FIND ${url} "github.com" github)
+	#string(FIND ${url} "gitlab.com" gitlab)
+	string(FIND ${url} ".git" dotgit)
+	if(${dotgit} GREATER -1)
+		DKIMPORT_GIT(${ARGV})
+	else()
+		DKIMPORT_DL(${ARGV})
+	endif()
+endfunction()
+#######################################################
 
-function(DKIMPORT_GITHUB url) #branch #PATCH
-
+function(DKIMPORT_GIT url) #branch #PATCH
 	string(REPLACE "/" ";" url_list ${url})  #split url path into list
 	#foreach(item ${url_list})
 	#	DKDEBUG("item = ${item}")
@@ -2719,7 +2729,7 @@ endfunction()
 
 
 
-function(DKIMPORT url) #Lib #ID #Patch
+function(DKIMPORT_DL url) #Lib #ID #Patch
 # IS THE URL VALID           Example https://github.com/aquawicket/DigitalKnob/archive/01c17f6a9cd66068f7890ea887ab3b9a673f0434.zip)
 	# must contain https://github.com/
 	#split into list converting / to divider ;
@@ -2867,6 +2877,8 @@ function(DKIMPORT url) #Lib #ID #Patch
 	endif()
 endfunction()
 
+
+
 function(dk_DownloadAll3rdParty)
 	DKDEPEND_ALL() ## ADD any and all plugins here
 	
@@ -2996,6 +3008,9 @@ function(dk_GetFileType path rtn-type)
 	return()
 endfunction()
 
+
+
+# TESTING
 function(DKIMPORT2 url)
 	DKDEBUG("DKIMPORT2(${ARGV})")
 	DKDEBUG("     ARGC = ${ARGC}")
