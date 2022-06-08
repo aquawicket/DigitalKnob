@@ -1289,6 +1289,9 @@ AliasFunctions("DKQCOMMAND")
 
 ################# Visual Studio Build ################
 function(DEBUG_VS folder sln_file) #target #arch
+	if(NOT WIN_HOST)
+		return()
+	endif()
 	if(DEBUG AND QUEUE_BUILD)
 		if(NOT EXISTS ${3RDPARTY}/${folder}/${OS}/${sln_file})
 			DKERROR("CANNOT FIND: ${3RDPARTY}/${folder}/${OS}/${sln_file}" )
@@ -1306,6 +1309,9 @@ endfunction()
 AliasFunctions("DEBUG_VS" "NO_DEBUG_RELEASE_TAGS")
 
 function(RELEASE_VS folder sln_file) #target #arch
+	if(NOT WIN_HOST)
+		return()
+	endif()
 	if(RELEASE AND QUEUE_BUILD)
 		if(NOT EXISTS ${3RDPARTY}/${folder}/${OS}/${sln_file})
 			DKERROR("CANNOT FIND: ${3RDPARTY}/${folder}/${OS}/${sln_file}" )
@@ -1322,11 +1328,17 @@ function(RELEASE_VS folder sln_file) #target #arch
 endfunction()
 AliasFunctions("RELEASE_VS" "NO_DEBUG_RELEASE_TAGS")
 
+
+
 function(VS)
 	DEBUG_VS(${ARGV})
 	RELEASE_VS(${ARGV})
 endfunction()
 AliasFunctions("VS" "NO_DEBUG_RELEASE_TAGS")
+
+macro(VISUAL_STUDIO)
+	VS(${ARGV})
+endmacro()
 
 
 ################### Xcode Build ###################
@@ -1390,7 +1402,10 @@ function(NDK)
 endfunction()
 AliasFunctions("NDK" "NO_DEBUG_RELEASE_TAGS")
 
-
+####################### Make Build #################
+function(MAKE lib)
+	DKQCOMMAND(make ${ARGV})
+endfunction()
 
 ###################### DKPlugin Link Libraries #####################
 function(DKLIB lib_path)
@@ -2580,8 +2595,8 @@ endfunction()
 ##  
 ##  github GIT:  https://github.com/orginization/library.git    DKIMPORT_GIT(url) #branch #PATCH
 ##  github DL:   https://github.com/orginization/library        DKIMPORT_GIT(url) #lib #id #PATCH
-##  lib url DL:  https://website.com/library.zip                DKIMPORT_DL(url) #lib #id #PATCH
-##  exe url DL:  https://website.com/executable.exe				DKIMPORT_DL(url) #lib #id #PATCH
+##  lib url DL:  https://website.com/library.zip                 DKIMPORT_DL(url) #lib #id #PATCH
+##  exe url DL:  https://website.com/executable.exe		    	 DKIMPORT_DL(url) #lib #id #PATCH
 
 function(DKIMPORT url) #Lib #ID #Patch
 	#string(FIND ${url} "github.com" github)

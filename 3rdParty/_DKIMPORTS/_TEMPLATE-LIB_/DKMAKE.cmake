@@ -1,35 +1,29 @@
-# https://github.com/name/library
-#
-# http://www.library.com/downloads/library-1.0.0.zip
+# https://github.com/organization/package
 
 
 ### DEPENDS ###
-#DKDEPEND(depend_name)
+#DKDEPEND(libname)
 
 
 ### DOWNLOAD ###
-DKIMPORT(https://github.com/name/library.git)
-#DKIMPORT(https://github.com/name/library/releases/download/1.0.0/library-1.0.0.zip)
+DKIMPORT(https://github.com/organization/package.git)
+#DKIMPORT(https://organization.com/download/package-1.0.zip)
 
 
 ### LINK ###
-DKINCLUDE(${LIBRARY}/include)
-WIN_DEBUG_DKLIB(${LIBRARY}/${OS}/${DEBUG_DIR}/library.lib)
-WIN_RELEASE_DKLIB(${LIBRARY}/${OS}/${RELEASE_DIR}/library.lib)
-UNIX_DEBUG_DKLIB(${LIBRARY}/${OS}/${DEBUG_DIR}/liblibrary.a)
-UNIX_RELEASE_DKLIB(${LIBRARY}/${OS}/${RELEASE_DIR}/liblibrary.a)
+DKINCLUDE(${PACKAGE}/include)
+WIN_DEBUG_DKLIB(${PACKAGE}/${OS}/${DEBUG_DIR}/package.lib)
+WIN_RELEASE_DKLIB(${PACKAGE}/${OS}/${RELEASE_DIR}/package.lib)
+UNIX_DEBUG_DKLIB(${PACKAGE}/${OS}/${DEBUG_DIR}/libpackage.a)
+UNIX_RELEASE_DKLIB(${PACKAGE}/${OS}/${RELEASE_DIR}/libpackage.a)
 
 
 ### GENERATE ###
-DKSETPATH(${LIBRARY}/${BUILD_DIR})
-DKQCOMMAND(${DKCMAKE_BUILD} ${LIBRARY})
+DKSETPATH(${PACKAGE}/${BUILD_DIR})
+DKQCOMMAND(${DKCMAKE_BUILD} ${PACKAGE})
 
 
 ### COMPILE ###
-WIN_VS(${LIBRARY_NAME} library.sln library)
-MAC_XCODE(${LIBRARY_NAME} library)
-IOS_XCODE(${LIBRARY_NAME} library)
-IOSSIM_XCODE(${LIBRARY_NAME} library)
-LINUX_DKQCOMMAND(make library)
-RASPBERRY_DKQCOMMAND(make library)
-ANDROID_VS(${LIBRARY_NAME} library.sln library)
+VISUAL_STUDIO(${PACKAGE_NAME} package.sln package)  # WIN_VS(), ANDROID_VS()
+XCODE(${PACKAGE_NAME} package) 						# MAC_XCODE(), IOS_XCODE, IOSSIM_XCODE()
+MAKE(package) 										# LINUX_DKQCOMMAND(make), RASPBERRY_DKQCOMMAND(make)
