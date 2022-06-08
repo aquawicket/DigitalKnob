@@ -26,11 +26,15 @@
 
 #include "DK/stdafx.h"
 #include "DKFmt/DKFmt.h"
+#include "fmt/core.h"
 
 bool DKFmt::Init(){
 	DKDEBUGFUNC();	
 	DKClass::DKCreate("DKFmtJS");
 	DKClass::DKCreate("DKFmtV8");
+
+	DKString variable = "love";
+	Funktion(variable);
 	return true;
 }
 
@@ -43,6 +47,7 @@ bool DKFmt::End(){
 
 bool DKFmt::Funktion(DKString& variable){
 	DKDEBUGFUNC(variable);
-	stdout << "variable = " << variable << "\n";
+	DKString s = fmt::format("variable = {}", variable);
+	fmt::print(s);
 	return true;
 }
