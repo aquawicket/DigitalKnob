@@ -16,8 +16,8 @@ DKIMPORT(https://github.com/name/library.git)
 DKINCLUDE(${LIBRARY}/include)
 WIN_DEBUG_DKLIB(${LIBRARY}/${OS}/${DEBUG_DIR}/library.lib)
 WIN_RELEASE_DKLIB(${LIBRARY}/${OS}/${RELEASE_DIR}/library.lib)
-UNIX_DEBUG_DKLIB(${LIBRARY}/${OS}/${DEBUG_DIR}/library.a)
-UNIX_RELEASE_DKLIB(${LIBRARY}/${OS}/${RELEASE_DIR}/library.a)
+UNIX_DEBUG_DKLIB(${LIBRARY}/${OS}/${DEBUG_DIR}/liblibrary.a)
+UNIX_RELEASE_DKLIB(${LIBRARY}/${OS}/${RELEASE_DIR}/liblibrary.a)
 
 
 ### GENERATE ###

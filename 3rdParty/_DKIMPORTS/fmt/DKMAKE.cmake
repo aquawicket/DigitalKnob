@@ -10,8 +10,8 @@ DKINCLUDE(${FMT}/include)
 ### LINK ###
 WIN_DEBUG_DKLIB(${FMT}/${OS}/${DEBUG_DIR}/fmtd.lib)
 WIN_RELEASE_DKLIB(${FMT}/${OS}/${RELEASE_DIR}/fmt.lib)
-UNIX_DEBUG_DKLIB(${FMT}/${OS}/${DEBUG_DIR}/fmt.a)
-UNIX_RELEASE_DKLIB(${FMT}/${OS}/${RELEASE_DIR}/fmt.a)
+UNIX_DEBUG_DKLIB(${FMT}/${OS}/${DEBUG_DIR}/libfmt.a)
+UNIX_RELEASE_DKLIB(${FMT}/${OS}/${RELEASE_DIR}/libfmt.a)
 
 
 ### GENERATE ###
