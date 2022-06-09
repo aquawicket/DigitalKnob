@@ -58,6 +58,8 @@
 # https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_linuxarm64_client.tar.bz2
 
 MAC_DKDEPEND(appkit)
+LINUX_DKDEPEND(build-essential)
+LINUX_DKDEPEND(libgtk2.0-dev)
 
 
 ### VERSION ###

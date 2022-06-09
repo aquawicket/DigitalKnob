@@ -70,6 +70,7 @@ public:
 #	elif USE_DKSDLRMLSHELL
 		ShellRenderInterfaceOpenGL* Renderer;
 #	endif
+
 	RmlSDL2SystemInterface* SystemInterface;
 };
 

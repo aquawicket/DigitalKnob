@@ -31,8 +31,7 @@
 #include <RmlUi/Core.h>
 #include "GifAnimate.h"
 
-DKSDLRmlRenderer::DKSDLRmlRenderer(SDL_Renderer* sdlRenderer, SDL_Window* sdlWindow)
-{
+DKSDLRmlRenderer::DKSDLRmlRenderer(SDL_Renderer* sdlRenderer, SDL_Window* sdlWindow) {
     mSdlRenderer = sdlRenderer;
     mSdlWindow = sdlWindow;
 
@@ -45,8 +44,7 @@ DKSDLRmlRenderer::DKSDLRmlRenderer(SDL_Renderer* sdlRenderer, SDL_Window* sdlWin
 }
 
 // Called by RmlUi when it wants to render geometry that it does not wish to optimise.
-void DKSDLRmlRenderer::RenderGeometry(Rml::Vertex* vertices, int num_vertices, int* indices, int num_indices, const Rml::TextureHandle texture, const Rml::Vector2f& translation)
-{
+void DKSDLRmlRenderer::RenderGeometry(Rml::Vertex* vertices, int num_vertices, int* indices, int num_indices, const Rml::TextureHandle texture, const Rml::Vector2f& translation) {
     SDL_Texture* sdlTexture = GetGifAnimation(texture);
     if (sdlTexture == nullptr)
         sdlTexture = (SDL_Texture*)texture;
@@ -71,20 +69,20 @@ void DKSDLRmlRenderer::RenderGeometry(Rml::Vertex* vertices, int num_vertices, i
 }
 
 // Called by RmlUi when it wants to compile geometry it believes will be static for the foreseeable future.
-Rml::CompiledGeometryHandle DKSDLRmlRenderer::CompileGeometry(Rml::Vertex* vertices, int num_vertices, int* indices, int num_indices, Rml::TextureHandle texture){
+Rml::CompiledGeometryHandle DKSDLRmlRenderer::CompileGeometry(Rml::Vertex* vertices, int num_vertices, int* indices, int num_indices, Rml::TextureHandle texture) {
     return (Rml::CompiledGeometryHandle) nullptr;
 }
 
 // Called by RmlUi when it wants to render application-compiled geometry.
-void DKSDLRmlRenderer::RenderCompiledGeometry(Rml::CompiledGeometryHandle geometry, const Rml::Vector2f& translation){
+void DKSDLRmlRenderer::RenderCompiledGeometry(Rml::CompiledGeometryHandle geometry, const Rml::Vector2f& translation) {
 }
 
 // Called by RmlUi when it wants to release application-compiled geometry.
-void DKSDLRmlRenderer::ReleaseCompiledGeometry(Rml::CompiledGeometryHandle geometry){
+void DKSDLRmlRenderer::ReleaseCompiledGeometry(Rml::CompiledGeometryHandle geometry) {
 }
 
 // Called by RmlUi when it wants to enable or disable scissoring to clip content.		
-void DKSDLRmlRenderer::EnableScissorRegion(bool enable){
+void DKSDLRmlRenderer::EnableScissorRegion(bool enable) {
     if (enable) {
        SDL_RenderSetClipRect(mSdlRenderer, &mScisorRect);
     } else {
