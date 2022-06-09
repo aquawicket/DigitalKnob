@@ -30,7 +30,7 @@ include_guard()
 
 ################## SETTINGS ##################
 ##############################################
-set(ENABLE_DKDEBUGFUNC ON CACHE INTERNAL "") #See macro(DKDEBUGFUNC) line# 162
+set(ENABLE_DKDEBUGFUNC OFF CACHE INTERNAL "") #See macro(DKDEBUGFUNC) line# 162
 
 # Extra Log Info Variables
 set(PRINT_CALL_DETAILS 1)
@@ -405,17 +405,38 @@ endmacro()
 #	MyDynamicFunc("myStringData" "My;List;Data" "${myVariable}" 17 moreData)
 ##################################################
 
-# Wait(message)  
-#############################
-# Wait until keypress or timeout (60 seconds). The 'message' parameter is optional
-macro(Wait)
+###########################################################################
+##	dk_wait()
+# 
+#	Wait until a keypress or timeout reached
+#
+#	@ARGV0:timeout (Optional)(Number) default=60
+#	@ARGV1:msg     (Optional)(String) default = "press and key to continue."
+#
+macro(dk_wait) 
+	set(timeout ${ARGV0})
+	set(msg ${ARGV1})
 	DKDEBUGFUNC(${ARGV})
-	set(msg ${ARGV})
-	if(NOT msg)
-		set(msg "press and key to continue") #default
+	
+	if(timeout MATCHES "^[0-9]+$")
+		set(timeout ${timeout})
+	else()
+		set(timeout 60) # default
 	endif()
+	
+	if(NOT msg)
+		set(msg "press and key to continue.") # default
+	endif()
+
+	if(${timeout} GREATER 0)
+		set(timeout_str && timeout /t ${timeout}) 
+		set(msg "${msg}. Waiting ${timeout} seconds...")
+	else()
+		set(timeout_str && timeout /t -1) #no timeout
+	endif()
+	
 	if(WIN_HOST)	
-		execute_process(COMMAND cmd /c echo ${msg} && timeout /t 60 > nul WORKING_DIRECTORY C:/)
+		execute_process(COMMAND cmd /c echo ${msg} ${timeout_str} > nul WORKING_DIRECTORY C:/)
 		return()
 	endif()
 	if(CMAKE_HOST_UNIX)
@@ -425,7 +446,14 @@ macro(Wait)
 	DKINFO("Wait() Not implemented for this platform")
 endmacro()
 
-# DUMP(<variable_name>)
+
+###########################################################################
+##	DUMP(dumpvar)
+# 
+#	Print the contents of a variable to the screen
+#
+#	@dumpvar: (Required) The variable to print to the screen
+#
 macro(DUMP dmpvar)
 	DKDEBUGFUNC(${ARGV})
 	DKINFO(" \n")
@@ -448,26 +476,55 @@ macro(DUMP dmpvar)
 endmacro()
 
 
-# dk_debug_watch(<variable_name>)  "ALIASL WATCH(<variable_name>)"
-macro(WATCH var)
+###########################################################################
+##	dk_watch(var)
+# 
+#	Watch a varible reading and writing access events
+#
+#	@var: (Required) The variable to watch
+#
+macro(dk_watch var)
 	DKDEBUGFUNC(${ARGV})
 	variable_watch(var varwatch)
 endmacro()
 
+
+###########################################################################
+##	varwatch(var access val 1st stack)
+# 
+#	Description:  TODO
+#
+#	@var: 		(Required) The variable to watch
+#	@access: 	(Required) TODO
+#	@val:       (Required) TODO
+#   @1st: 		(Required) TODO
+#	@stack:		(Required) TODO
+#
 macro(varwatch var access val lst stack)
 	DKDEBUGFUNC(${ARGV})
     DKINFO("Variable watch: var=${var} access=${access} val=${val} 1st=${1st} stack=${stack}")
 	Wait()
 endmacro()
 
-
-# set a XCode specific property
+###########################################################################
+##	varwatch(var access val 1st stack)
+# 
+#	Set a XCode specific property
+#
+#	@ARGV: 	(Required) TODO
+#
+# 
 macro(set_xcode_property TARGET XCODE_PROPERTY XCODE_VALUE)
 	DKDEBUGFUNC(${ARGV})
     set_property (TARGET ${TARGET} PROPERTY XCODE_ATTRIBUTE_${XCODE_PROPERTY} ${XCODE_VALUE})
 endmacro(set_xcode_property)
 
 
+###########################################################################
+##	deleteCache()
+# 
+#	Set a XCode specific property
+# 
 function(DELETE_CACHE)
 	DKDEBUGFUNC(${ARGV})
 	DKINFO("####### Deleteing CMake cache . . .")
@@ -3176,12 +3233,7 @@ function(TEST myVarA myVarB)
 endfunction()
 
 TEST(13 "Hi I'm a String" "81")	
-wait()
-wait()
-wait()
-wait()
-wait()
-wait()
+wait(0)
 	
 function(DKIMPORT2 url)
 	DKDEBUGFUNC(${ARGV})
