@@ -19,7 +19,7 @@ DKSETPATH(${FMT}/${BUILD_DIR})
 DKQCOMMAND(${DKCMAKE_BUILD} -DCMAKE_POSITION_INDEPENDENT_CODE=TRUE ${FMT})
 
 ### COMPILE ###
-VS(${FMT_NAME} fmt.sln fmt)  # windows, android
+VS(${FMT_NAME} FMT.sln fmt)  # windows, android
 XCODE(${FMT_NAME} fmt)       # mac, ios, iossim
 LINUX_DKQCOMMAND(make fmt)   
 RASPBERRY_DKQCOMMAND(make fmt)
