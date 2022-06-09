@@ -102,6 +102,7 @@ include_guard()
 # 
 #      result: (string) A string representing the unicode character(s).
 function(fromCharCode)
+	DKDEBUGFUNC(${ARGV})
 endfunction()
 
 
@@ -113,6 +114,7 @@ endfunction()
 #      result: (boolean) true if the string contains the value, otherwise false.
 #
 function(includes str searchvalue) #start #result
+	DKDEBUGFUNC(${ARGV})
 	string(FIND "${${str}}" "${searchvalue}" index)
 	if(${ARGC} GREATER 3)
 		if(${index} GREATER ${ARGV2})
@@ -490,6 +492,7 @@ if(string_Ext)
 	file(APPEND ${DIGITALKNOB}/DK/DKCMake/string_Ext.cmake "### This file was automatically generated from Functions.cmake ###\n")
 
 	function(CreateStringFunc str)
+		DKDEBUGFUNC(${ARGV})
 		if(0)
 			cmake_language(EVAL CODE ${str}) # only available on cmake 3.18+
 		else()
@@ -499,12 +502,14 @@ if(string_Ext)
 
 	set(stringified "test" CACHE INTERNAL "")
 	function(stringify str)
+		DKDEBUGFUNC(${ARGV})
 		CreateStringFunc("macro(${str}_includes searchstr)\n	includes(${str} \${searchstr} \${ARGN})\nendmacro()\n")
 		include(${DIGITALKNOB}/DK/DKCMake/string_Ext.cmake)
 	endfunction()
 
 	set(string_set TRUE)
 	macro(set)
+		DKDEBUGFUNC(${ARGV})
 		_set(${ARGV})
 		if(string_set)
 			string(FIND "${stringified}" "${ARGV0}" stringified_index)
