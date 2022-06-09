@@ -22,21 +22,22 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-include_guard()
+# Extra Documentation
 # https://asitdhal.medium.com/cmake-functions-and-macros-22293041519f
 
-########### SETTINGS ##############
-###################################
-set(DKCMAKE_DEBUG_LINE OFF CACHE INTERNAL "") # ON = DEBUG_LINE prints the File : lineNumber : Function( variables )
+include_guard()
+
+
+################## SETTINGS ##################
+##############################################
+set(ENABLE_DKDEBUGFUNC OFF CACHE INTERNAL "") #See macro(DKDEBUGFUNC) line# 162
 
 # Extra Log Info Variables
 set(PRINT_CALL_DETAILS 1)
-set(PRINT_FILE_NAMES 0)
-set(PRINT_LINE_NUMBERS 0)
+set(PRINT_FILE_NAMES 1)
+set(PRINT_LINE_NUMBERS 1)
 set(PRINT_FUNCTION_NAMES 1)
-set(PRINT_FUNCTION_ ARGUMENTS 0)
-
-
+set(PRINT_FUNCTION_ ARGUMENTS 1)
 
 if(CMAKE_HOST_WIN32)
 	set(WIN_HOST TRUE CACHE INTERNAL "")
@@ -52,7 +53,7 @@ if(CMAKE_HOST_UNIX AND NOT CMAKE_HOST_APPLE)
 endif()
 
 set(dkdepend_disable_list "" CACHE INTERNAL "")
-
+###############################################
 
 ###################################################################
 # dk_FunctionName( ${arg0} ${arg1} rtn-var )
@@ -151,8 +152,18 @@ macro(DKTRACE msg)
 	message(WARNING "${H_black}${STACK_HEADER}${CLR}${B_blue}${msg}${CLR}")
 endmacro()
 
-macro(DEBUG_LINE)
-	if(DKCMAKE_DEBUG_LINE)
+# DKDEBUGFUNC(args)
+# Prints the current file name, line number, function or macro and arguments
+# Place this at the first line of every function you want to see debug output for.
+# 
+# Example:
+#	function(MyFunction myArg1 myArg2)
+#		DKDEBUGFUNC(myArg1 myArg2) 
+#		## user code
+#	endfunction()
+#
+macro(DKDEBUGFUNC)
+	if(ENABLE_DKDEBUGFUNC)
 		#dk_getFilename(${CMAKE_CURRENT_FUNCTION_LIST_FILE} FILENAME)
 		if(NOT CMAKE_CURRENT_FUNCTION_LIST_FILE)
 			set(CMAKE_CURRENT_FUNCTION_LIST_FILE "unknown")
@@ -303,8 +314,7 @@ endfunction()
 
 
 macro(dk_exit)
-	#DKINFO("dk_exit()")
-	DEBUG_LINE()
+	DKDEBUGFUNC()
 	if(WIN_HOST)
 		execute_process(COMMAND taskkill /IM cmake.exe /F WORKING_DIRECTORY ${CMAKE_CURRENT_LIST_DIR})
 	else()
@@ -369,7 +379,7 @@ endmacro()
 #############################
 # Wait until keypress or timeout (60 seconds). The 'message' parameter is optional
 macro(Wait)
-	DEBUG_LINE()
+	DKDEBUGFUNC()
 	set(msg ${ARGV})
 	if(NOT msg)
 		set(msg "press and key to continue") #default
@@ -1178,7 +1188,7 @@ AliasFunctions("DKSETPATH")
 
 ###################  Windows MSYS  ######################
 function(MSYS)
-	DEBUG_LINE()
+	DKDEBUGFUNC()
 	if(QUEUE_BUILD)
 		string(REPLACE ";" " " str "${ARGV}")
 		set(bash "#!/bin/bash")
@@ -1205,7 +1215,7 @@ AliasFunctions("MSYS")
 
 ###################  Windows MSYS2  ######################
 function(MSYS2)
-	DEBUG_LINE()
+	DKDEBUGFUNC()
 	if(QUEUE_BUILD)
 		string(REPLACE ";" " " str "${ARGV}")
 		set(bash "#!/bin/bash")
@@ -1492,7 +1502,7 @@ AliasFunctions("RELEASE_DKLIB" "NO_DEBUG_RELEASE_TAGS")
 
 
 function(generateCmake plugin_name)
-	DEBUG_LINE()
+	DKDEBUGFUNC(plugin_name)
 	dk_getPathToPlugin(${plugin_name} plugin_path)
 	if(NOT EXISTS "${plugin_path}")
 		DKERROR("generateCmake(${plugin_name}): plugin not found")
@@ -1590,7 +1600,7 @@ endfunction()
 
 
 function(DKDLL name)
-	DEBUG_LINE()
+	DKDEBUGFUNC(name)
 	dk_getPathToPlugin(${name} plugin_path)
 	if(NOT EXISTS "${plugin_path}")
 		DKINFO("DKDLL(): ${name} plugin not found")
@@ -1665,7 +1675,7 @@ endfunction()
 
 # TODO
 function(DKEXECUTABLE name)
-	DEBUG_LINE()
+	DKDEBUGFUNC(name)
 	dk_getPathToPlugin(${name} plugin_path)
 	if(NOT EXISTS "${plugin_path}")
 		DKERROR("DKEXECUTABLE(): ${name} plugin not found")
@@ -1686,7 +1696,7 @@ endfunction()
 
 
 function(DKTESTAPP name)
-	DEBUG_LINE()
+	DKDEBUGFUNC(name)
 	dk_getPathToPlugin(${name} plugin_path)
 	if(NOT EXISTS "${plugin_path}/test")
 		DKINFO("DKTESTAPP(): ${name}_test app not found")
@@ -1713,7 +1723,7 @@ endfunction()
 
 
 function(ADDTO_DKPLUGIN_LIST name)
-	DEBUG_LINE()
+	DKDEBUGFUNC(name)
 	dk_getPathToPlugin(${name} plugin_path)
 	if(NOT EXISTS "${plugin_path}")
 		DKERROR("DKEXECUTABLE(): ${name} plugin not found")
@@ -1768,7 +1778,7 @@ SET(ASSETS
 
 # Add a library's files to the App's assets
 function(DKASSETS name)
-	DEBUG_LINE()
+	DKDEBUGFUNC(name)
 	if(NOT DKAPP)
 		return()
 	endif()	
@@ -1784,7 +1794,7 @@ endfunction()
 
 
 function(dk_getPathToPlugin name result)
-	DEBUG_LINE()
+	DKDEBUGFUNC(name result)
 	list(FIND dkdepend_disable_list "${ARGV}" index)
 	if(${index} GREATER -1)
 		DKINFO("${ARGV} IS DISABLED")
@@ -1809,8 +1819,8 @@ endfunction()
 
 # Add a library or plugin to the dependency list
 function(DKDEPEND name)
-	DEBUG_LINE()
-	DKDEBUG("CMAKE_CURRENT_LIST_DIR = ${CMAKE_CURRENT_LIST_DIR}")
+	DKDEBUGFUNC(name)
+	#DKDEBUG("CMAKE_CURRENT_LIST_DIR = ${CMAKE_CURRENT_LIST_DIR}")
 	
 	if(${ARGC} GREATER 1)
 		DKINFO("ARGV = ${ARGV}")
@@ -1879,7 +1889,7 @@ endfunction()
 ### WARNING: BE CAREFULL WRITING NEW VARIABLES TO USE WITH CONDITIONALS, AS THEY MIGHT BE IGNORED 
 ##########################
 function(DKRUNDEPENDS name)
-	DEBUG_LINE()
+	DKDEBUGFUNC()
 	dk_getPathToPlugin(${name} plugin_path)
 	if(NOT plugin_path)
 		DKERROR("DKRUNDEPENDS() ${name} plugin not found")
