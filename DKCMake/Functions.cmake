@@ -3130,62 +3130,39 @@ endfunction()
 
 
 # TESTING
-
-#****************************************************
-#-- Functions.cmake:3135: DKDEBUGFUNC_B()
-#-- Functions.cmake:3135->DKDEBUGFUNC_B(): {ARGV} = 13;Hi I'm a String;81
-#-- Functions.cmake:3135: DKDEBUGFUNC_B()
-#-- Functions.cmake:3135->DKDEBUGFUNC_B(): {arg] = 13
-#-- Functions.cmake:3135: DKDEBUGFUNC_B()
-#-- Functions.cmake:3135->DKDEBUGFUNC_B(): firstItem = ARGN
-#-- Functions.cmake:3135: DKDEBUGFUNC_B()
-#-- Functions.cmake:3135->DKDEBUGFUNC_B(): firstItem = ARGV
-#-- Functions.cmake:3135: DKDEBUGFUNC_B()
-#-- Functions.cmake:3135->DKDEBUGFUNC_B(): firstItem = ARGV0
-#-- Functions.cmake:3135: DKDEBUGFUNC_B()
-#-- Functions.cmake:3135->DKDEBUGFUNC_B(): firstItem = myVarA
-#-- Functions.cmake:3135: DKDEBUGFUNC_B()
-#-- Functions.cmake:3135->DKDEBUGFUNC_B(): myVarA = 13
-#-- Functions.cmake:3135: DKDEBUGFUNC_B()
-#-- Functions.cmake:3135->DKDEBUGFUNC_B(): {arg] = Hi I'm a String
-#-- Functions.cmake:3135: DKDEBUGFUNC_B()
-#-- Functions.cmake:3135->DKDEBUGFUNC_B(): {arg] = 81
-#-- Functions.cmake:3135: DKDEBUGFUNC_B()
-#-- Functions.cmake:3135->DKDEBUGFUNC_B(): firstItem = ARGV2
-#****************************************************
-
 function(DKDEBUGFUNC_B)
-	
-	#DKDEBUG("{ARGV} = ${ARGV}")
+	DKDEBUG("ARGV = ${ARGV}")
 	if(ARGC GREATER 0)
 		set(index 0)
 		get_cmake_property(variableNames VARIABLES)
 		foreach(arg ${ARGV})
 			message(STATUS "****************************************************")
-			DKDEBUG("index:${index}  {arg] = ${arg}")
+			#DKDEBUG("arg:${index} = ${arg}")
 			foreach(variableName ${variableNames})
-				if(${arg} EQUAL ${variableName})
-					list(GET variableName ${index} firstItem)
-					DKDEBUG("index:${index}  firstItem = ${firstItem}")
-					if("${firstItem}" STREQUAL "ARGN")
-						#DKDEBUG("index:${index}  firstItem STREQUAL ARGN")
+				DKDEBUG("arg:${index}  {ARGV${index}}:${ARGV${index}}  variableName:${variableName}")
+				if(${ARGV${index}} EQUAL ${variableName})
+				#if(${arg} EQUAL ${variableName})
+					#list(GET variableName ${index} indexItem)
+					list(GET variableName 0 indexItem)
+					DKDEBUG("arg:${index}  indexItem:${indexItem}")
+					if("${indexItem}" STREQUAL "ARGN")
+						DKDEBUG("arg:${index} -> indexItem STREQUAL ARGN")
 						#math(EXPR index "${index}+1")
 						continue()
 					endif()
-					if("${firstItem}" STREQUAL "ARGV")
-						#DKDEBUG("index:${index}  firstItem STREQUAL ARGV")
+					if("${indexItem}" STREQUAL "ARGV")
+						DKDEBUG("arg:${index} -> indexItem STREQUAL ARGV")
 						#math(EXPR index "${index}+1")
 						continue()
 					endif()
-					if("${firstItem}" STREQUAL "ARGV${index}")
-						#DKDEBUG("index:${index}  firstItem STREQUAL ARGV${index}")
-						math(EXPR index "${index}+1")
-						message(STATUS "\n****************************************************")
+					if("${indexItem}" STREQUAL "ARGV${index}")
+						DKDEBUG("arg:${index} -> indexItem STREQUAL ARGV${index}")
+						#math(EXPR index "${index}+1")
+						#message(STATUS "\n****************************************************")
 						continue()
 					endif()
+					DKDEBUG("!!! arg:${index}  name:${variableName}  value:${${variableName}} !!!")
 					math(EXPR index "${index}+1")
-					
-					DKDEBUG("index:${index}   !!!${variableName}:${${variableName}}!!! ")
 					message(STATUS "****************************************************\n")
 					continue()
 				endif()
