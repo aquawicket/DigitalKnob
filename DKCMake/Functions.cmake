@@ -87,14 +87,14 @@ macro(DKDEBUGFUNC)
 		else()
 			set(argIndex 0)
 			set(argString " {")
-			set(argString "${argString}${ARGV}")
-			#foreach(arg ${ARGV})
-			#	set(argString "${argString}\"${arg}\":\"${${arg}}\"")
-			#	math(EXPR argIndex "${argIndex}+1")
-			#	if(${argIndex} LESS ${ARGC})
-			#		set(argString "${argString},  ")
-			#	endif()
-			#endforeach()
+			#set(argString "${argString}${ARGV}")
+			foreach(arg ${ARGV})
+				set(argString "${argString}\"${ARGV${argIndex}}\":\"${arg}\"")
+				math(EXPR argIndex "${argIndex}+1")
+				if(${argIndex} LESS ${ARGC})
+					set(argString "${argString},  ")
+				endif()
+			endforeach()
 			set(argString "${argString}} ")
 			message(STATUS "${cyan}${FILENAME}:${CMAKE_CURRENT_FUNCTION_LIST_LINE}: ${CMAKE_CURRENT_FUNCTION}(${argString})${CLR}")
 		endif()
@@ -424,7 +424,6 @@ macro(Wait)
 	endif()	
 	DKINFO("Wait() Not implemented for this platform")
 endmacro()
-
 
 # DUMP(<variable_name>)
 macro(DUMP dmpvar)
@@ -3131,6 +3130,77 @@ endfunction()
 
 
 # TESTING
+
+	
+function(dump_cmake_variables)
+	#DKDEBUGFUNC(${ARGV})
+	#DKDEBUG("{ARGC} = ${ARGC}")
+	#DKDEBUG("{ARGN} = ${ARGN}")
+	#DKDEBUG("{ARGV} = ${ARGV}")	
+	#DKDEBUG("{ARGV0} = ${ARGV0}")
+	#DKDEBUG("{ARGV1} = ${ARGV1}")
+	#math(EXPR ARGC_LAST "${ARGC}-1") #OUTPUT_FORMAT DECIMAL) #CMake 3.13+
+	#DKDEBUG("\${ARGC_LAST} = ${ARGC_LAST}")
+	#set(ARGV_LAST ${ARGV${ARGC_LAST}})
+	#DKDEBUG("\${ARGV_LAST} = ${ARGV_LAST}")
+	
+****************************************************
+# {ARGN} = 13;Hi I'm a String;81
+# {ARGV} = 13;Hi I'm a String;81
+# {ARGV0} = 13
+# {{ARGN}} =
+# {{ARGV}} =
+# {{ARGV0}} =
+# ARGN
+# 13
+# {_variableName} = ARGN
+# {{_variableName} = 13;Hi I'm a String;81
+# ARGV
+# 13
+# {_variableName} = ARGV
+# {{_variableName} = 13;Hi I'm a String;81
+# ARGV0
+# 13
+# {_variableName} = ARGV0
+# {{_variableName} = 13
+# myVarA
+# 13
+# {_variableName} = myVarA
+# {{_variableName} = 13
+-- ****************************************************
+
+    get_cmake_property(_variableNames VARIABLES)
+	message(STATUS "****************************************************")
+	if(ARGV0)
+		DKDEBUG("{ARGN} = ${ARGN}")
+		DKDEBUG("{ARGV} = ${ARGV}")	
+		DKDEBUG("{ARGV0} = ${ARGV0}")
+		DKDEBUG("{{ARGN}} = ${${ARGN}}")
+		DKDEBUG("{{ARGV}} = ${${ARGV}}")	
+		DKDEBUG("{{ARGV0}} = ${${ARGV0}}")
+		foreach(_variableName ${_variableNames})
+			if(${_variableName} EQUAL ${ARGV0})
+				#if(${_variableName} EQUAL "ARGN")
+				#	DKDEBUG("MATCH")
+				#endif()
+				DKDEBUG(${_variableName})
+				DKDEBUG(${${_variableName}})
+				DKDEBUG("{_variableName} = ${_variableName}")
+				DKDEBUG("{{_variableName} = ${${_variableName}}")
+			endif()
+		endforeach()
+	endif()
+	message(STATUS "****************************************************")
+endfunction()
+	
+function(TEST myVarA myVarB)
+	#DKDEBUGFUNC(${ARGV})
+	dump_cmake_variables(${ARGV})
+endfunction()
+
+TEST(13 "Hi I'm a String" "81")	
+wait()
+	
 function(DKIMPORT2 url)
 	DKDEBUGFUNC(${ARGV})
 	DKDEBUG("DKIMPORT2(${ARGV})")
