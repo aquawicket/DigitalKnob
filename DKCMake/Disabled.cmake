@@ -101,6 +101,7 @@ endif()
 if(WIN) # Disabled for Windows targets
 	DKDISABLE(build-essential)
 	#DKDISABLE(bzip2)
+	DKDISABLE(DKFmt)
 	DKDISABLE(DKOcr)
 	DKDISABLE(DKWebSockets)
 	DKDISABLE(freealut)

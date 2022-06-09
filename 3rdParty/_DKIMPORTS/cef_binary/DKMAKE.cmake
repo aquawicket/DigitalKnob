@@ -1,14 +1,61 @@
 # https://en.wikipedia.org/wiki/Google_Chrome_version_history
 #
 # https://cef-builds.spotifycdn.com/index.html
+#
+# WINDOWS 32
 # https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_windows32.tar.bz2
+# https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_windows32_minimal.tar.bz2
+# https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_windows32_client.tar.bz2
+# https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_windows32_debug_symbols.tar.bz2
+# https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_windows32_release_symbols.tar.bz2
+#
+# WINDOWS 64
 # https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_windows64.tar.bz2
+# https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_windows64_minimal.tar.bz2
+# https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_windows64_client.tar.bz2
+# https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_windows64_debug_symbols.tar.bz2
+# https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_windows64_release_symbols.tar.bz2
+#
+# WINDOWS ARM64
+# https://cef-builds.spotifycdn.com/cef_binary_88.1.4+g5a6ab23+chromium-88.0.4324.96_windowsarm64.tar.bz2
+# https://cef-builds.spotifycdn.com/cef_binary_88.1.4+g5a6ab23+chromium-88.0.4324.96_windowsarm64_minimal.tar.bz2
+# https://cef-builds.spotifycdn.com/cef_binary_88.1.4+g5a6ab23+chromium-88.0.4324.96_windowsarm64_client.tar.bz2
+# https://cef-builds.spotifycdn.com/cef_binary_88.1.4+g5a6ab23+chromium-88.0.4324.96_windowsarm64_debug_symbols.tar.bz2
+# https://cef-builds.spotifycdn.com/cef_binary_88.1.4+g5a6ab23+chromium-88.0.4324.96_windowsarm64_release_symbols.tar.bz2
+#
+# MACOS 64
 # https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_macosx64.tar.bz2
+# https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_macosx64_minimal.tar.bz2
+# https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_macosx64_client.tar.bz2
+# https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_macosx64_debug_symbols.tar.bz2
+# https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_macosx64_release_symbols.tar.bz2
+#
+# MACOS ARM64
+# https://cef-builds.spotifycdn.com/cef_binary_88.1.6+g4fe33a1+chromium-88.0.4324.96_macosarm64.tar.bz2
+# https://cef-builds.spotifycdn.com/cef_binary_88.1.6+g4fe33a1+chromium-88.0.4324.96_macosarm64_minimal.tar.bz2
+# https://cef-builds.spotifycdn.com/cef_binary_88.1.6+g4fe33a1+chromium-88.0.4324.96_macosarm64_client.tar.bz2
+# https://cef-builds.spotifycdn.com/cef_binary_88.1.6+g4fe33a1+chromium-88.0.4324.96_macosarm64_debug_symbols.tar.bz2
+# https://cef-builds.spotifycdn.com/cef_binary_88.1.6+g4fe33a1+chromium-88.0.4324.96_macosarm64_release_symbols.tar.bz2
+#
+# LINUX 32
 # https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_linux32.tar.bz2
+# https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_linux32_minimal.tar.bz2
+# https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_linux32_client.tar.bz2
+#
+# LINUX 64
 # https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_linux64.tar.bz2
+# https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_linux64_minimal.tar.bz2
+# https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_linux64_client.tar.bz2
+#
+# LINUX ARM32
 # https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_linuxarm.tar.bz2
+# https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_linuxarm_minimal.tar.bz2
+# https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_linuxarm_client.tar.bz2
+#
+# LINUX ARM64
 # https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_linuxarm64.tar.bz2
-
+# https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_linuxarm64_minimal.tar.bz2
+# https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_linuxarm64_client.tar.bz2
 
 MAC_DKDEPEND(appkit)
 
