@@ -3135,7 +3135,7 @@ endfunction()
 #-- Functions.cmake:3135: DKDEBUGFUNC_B()
 #-- Functions.cmake:3135->DKDEBUGFUNC_B(): {ARGV} = 13;Hi I'm a String;81
 #-- Functions.cmake:3135: DKDEBUGFUNC_B()
-#-- Functions.cmake:3135->DKDEBUGFUNC_B(): {argName] = 13
+#-- Functions.cmake:3135->DKDEBUGFUNC_B(): {arg] = 13
 #-- Functions.cmake:3135: DKDEBUGFUNC_B()
 #-- Functions.cmake:3135->DKDEBUGFUNC_B(): firstItem = ARGN
 #-- Functions.cmake:3135: DKDEBUGFUNC_B()
@@ -3147,9 +3147,9 @@ endfunction()
 #-- Functions.cmake:3135: DKDEBUGFUNC_B()
 #-- Functions.cmake:3135->DKDEBUGFUNC_B(): myVarA = 13
 #-- Functions.cmake:3135: DKDEBUGFUNC_B()
-#-- Functions.cmake:3135->DKDEBUGFUNC_B(): {argName] = Hi I'm a String
+#-- Functions.cmake:3135->DKDEBUGFUNC_B(): {arg] = Hi I'm a String
 #-- Functions.cmake:3135: DKDEBUGFUNC_B()
-#-- Functions.cmake:3135->DKDEBUGFUNC_B(): {argName] = 81
+#-- Functions.cmake:3135->DKDEBUGFUNC_B(): {arg] = 81
 #-- Functions.cmake:3135: DKDEBUGFUNC_B()
 #-- Functions.cmake:3135->DKDEBUGFUNC_B(): firstItem = ARGV2
 #****************************************************
@@ -3160,10 +3160,10 @@ function(DKDEBUGFUNC_B)
 	if(ARGC GREATER 0)
 		set(index 0)
 		get_cmake_property(variableNames VARIABLES)
-		foreach(argName ${ARGV})
-			DKDEBUG("index:${index}  {argName] = ${argName}")
+		foreach(arg ${ARGV})
+			DKDEBUG("index:${index}  {arg] = ${arg}")
 			foreach(variableName ${variableNames})
-				if(${argName} EQUAL ${variableName})
+				if(${arg} EQUAL ${variableName})
 					list(SUBLIST variableName 0 1 firstItem)
 					DKDEBUG("index:${index}  firstItem = ${firstItem}")
 					if("${firstItem}" STREQUAL "ARGN")
@@ -3182,7 +3182,7 @@ function(DKDEBUGFUNC_B)
 						continue()
 					endif()
 					math(EXPR index "${index}+1")
-					DKDEBUG("${variableName} = ${${variableName}}")
+					DKDEBUG(" ${variableName}:${${variableName}} ")
 					continue()
 				endif()
 			endforeach()
