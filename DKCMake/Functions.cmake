@@ -3132,70 +3132,43 @@ endfunction()
 # TESTING
 
 	
-function(dump_cmake_variables)
-	#DKDEBUGFUNC(${ARGV})
-	#DKDEBUG("{ARGC} = ${ARGC}")
-	#DKDEBUG("{ARGN} = ${ARGN}")
-	#DKDEBUG("{ARGV} = ${ARGV}")	
-	#DKDEBUG("{ARGV0} = ${ARGV0}")
-	#DKDEBUG("{ARGV1} = ${ARGV1}")
-	#math(EXPR ARGC_LAST "${ARGC}-1") #OUTPUT_FORMAT DECIMAL) #CMake 3.13+
-	#DKDEBUG("\${ARGC_LAST} = ${ARGC_LAST}")
-	#set(ARGV_LAST ${ARGV${ARGC_LAST}})
-	#DKDEBUG("\${ARGV_LAST} = ${ARGV_LAST}")
-	
-****************************************************
-# {ARGN} = 13;Hi I'm a String;81
-# {ARGV} = 13;Hi I'm a String;81
-# {ARGV0} = 13
-# {{ARGN}} =
-# {{ARGV}} =
-# {{ARGV0}} =
-# ARGN
-# 13
-# {_variableName} = ARGN
-# {{_variableName} = 13;Hi I'm a String;81
-# ARGV
-# 13
-# {_variableName} = ARGV
-# {{_variableName} = 13;Hi I'm a String;81
-# ARGV0
-# 13
-# {_variableName} = ARGV0
-# {{_variableName} = 13
-# myVarA
-# 13
-# {_variableName} = myVarA
-# {{_variableName} = 13
--- ****************************************************
-
-    get_cmake_property(_variableNames VARIABLES)
+function(DKDEBUGFUNC_B)
 	message(STATUS "****************************************************")
-	if(ARGV0)
-		DKDEBUG("{ARGN} = ${ARGN}")
-		DKDEBUG("{ARGV} = ${ARGV}")	
-		DKDEBUG("{ARGV0} = ${ARGV0}")
-		DKDEBUG("{{ARGN}} = ${${ARGN}}")
-		DKDEBUG("{{ARGV}} = ${${ARGV}}")	
-		DKDEBUG("{{ARGV0}} = ${${ARGV0}}")
-		foreach(_variableName ${_variableNames})
-			if(${_variableName} EQUAL ${ARGV0})
-				#if(${_variableName} EQUAL "ARGN")
-				#	DKDEBUG("MATCH")
-				#endif()
-				DKDEBUG(${_variableName})
-				DKDEBUG(${${_variableName}})
-				DKDEBUG("{_variableName} = ${_variableName}")
-				DKDEBUG("{{_variableName} = ${${_variableName}}")
-			endif()
+	DKDEBUG("{ARGV} = ${ARGV}")
+	if(ARGC GREATER 0)
+		set(index 0)
+		get_cmake_property(variableNames VARIABLES)
+		foreach(argName ${ARGV})
+			DKDEBUG("{argName] = ${argName}")
+			foreach(variableName ${variableNames})
+				if(${argName} EQUAL ${variableName})
+					list(SUBLIST variableName 0 1 firstItem)
+						DKDEBUG("firstItem = ${firstItem}")
+					if("${firstItem}" STREQUAL "ARGN")
+						#DKDEBUG("firstItem STREQUAL ARGN")
+						continue()
+					endif()
+					if("${firstItem}" STREQUAL "ARGV")
+						#DKDEBUG("firstItem STREQUAL ARGV")
+						continue()
+					endif()
+					if("${firstItem}" STREQUAL "ARGV${index}")
+						#DKDEBUG("firstItem STREQUAL ARGV${index}")
+						math(EXPR index "${index}+1")
+						continue()
+					endif()
+					math(EXPR index "${index}+1")
+					DKDEBUG("${variableName} = ${${variableName}}")
+					continue()
+				endif()
+			endforeach()
 		endforeach()
 	endif()
 	message(STATUS "****************************************************")
 endfunction()
 	
 function(TEST myVarA myVarB)
-	#DKDEBUGFUNC(${ARGV})
-	dump_cmake_variables(${ARGV})
+	DKDEBUGFUNC_B(${ARGV})
 endfunction()
 
 TEST(13 "Hi I'm a String" "81")	
