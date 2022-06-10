@@ -165,7 +165,7 @@ macro(DKERROR msg)
 	message(STATUS "${H_black}${STACK_HEADER}${CLR}${red}${msg}${CLR}")
 	#message(FATAL_ERROR "${H_black}${STACK_HEADER}${CLR}${red}${msg}${CLR}")
 	#dk_exit()
-	#Wait()
+	#dk_wait()
 endmacro()
 macro(DKWARN msg)
 	#DKDEBUGFUNC(${ARGV})
@@ -443,7 +443,7 @@ macro(dk_wait)
 		execute_process(COMMAND bash -c "read -n 1 -s -r -p \"${msg}\"" OUTPUT_VARIABLE outVar)
 		return()
 	endif()	
-	DKINFO("Wait() Not implemented for this platform")
+	DKINFO("dk_wait() Not implemented for this platform")
 endmacro()
 
 
@@ -485,12 +485,12 @@ endmacro()
 #
 macro(dk_watch var)
 	DKDEBUGFUNC(${ARGV})
-	variable_watch(var varwatch)
+	variable_watch(var dk_watchVariable)
 endmacro()
 
 
 ###########################################################################
-##	varwatch(var access val 1st stack)
+##	dk_watchVariable(var access val 1st stack)
 # 
 #	Description:  TODO
 #
@@ -500,32 +500,32 @@ endmacro()
 #   @1st: 		(Required) TODO
 #	@stack:		(Required) TODO
 #
-macro(varwatch var access val lst stack)
+macro(dk_watchVariable var access val lst stack)
 	DKDEBUGFUNC(${ARGV})
     DKINFO("Variable watch: var=${var} access=${access} val=${val} 1st=${1st} stack=${stack}")
-	Wait()
+	dk_wait()
 endmacro()
 
 ###########################################################################
-##	varwatch(var access val 1st stack)
+##	dk_watchVariable(var access val 1st stack)
 # 
 #	Set a XCode specific property
 #
 #	@ARGV: 	(Required) TODO
 #
 # 
-macro(set_xcode_property TARGET XCODE_PROPERTY XCODE_VALUE)
+macro(dk_setXcodeProperty TARGET XCODE_PROPERTY XCODE_VALUE)
 	DKDEBUGFUNC(${ARGV})
-    set_property (TARGET ${TARGET} PROPERTY XCODE_ATTRIBUTE_${XCODE_PROPERTY} ${XCODE_VALUE})
-endmacro(set_xcode_property)
+    set_property(TARGET ${TARGET} PROPERTY XCODE_ATTRIBUTE_${XCODE_PROPERTY} ${XCODE_VALUE})
+endmacro(dk_setXcodeProperty)
 
 
 ###########################################################################
-##	deleteCache()
+##	dk_deleteCache()
 # 
 #	Set a XCode specific property
 # 
-function(DELETE_CACHE)
+function(dk_deleteCache)
 	DKDEBUGFUNC(${ARGV})
 	DKINFO("####### Deleteing CMake cache . . .")
 	dk_file_getDigitalknobPath(DIGITALKNOB)
@@ -538,7 +538,12 @@ function(DELETE_CACHE)
 	endif()
 endfunction()
 
-function(DELETE_TMP_FILES)
+###########################################################################
+##	dk_deleteTempFiles()
+# 
+#	TODO
+# 
+function(dk_deleteTempFiles)
 	DKDEBUGFUNC(${ARGV})
 	DKINFO("####### Deleteing Temporary files . . .")
 	dk_file_getDigitalknobPath(DIGITALKNOB)
@@ -553,22 +558,32 @@ function(DELETE_TMP_FILES)
 	endif()
 endfunction()
 
-function(DeleteEmptyDirectories path)
+###########################################################################
+##	dk_deleteEmptyDirectories()
+# 
+#	TODO
+# 
+function(dk_deleteEmptyDirectories path)
 	DKDEBUGFUNC(${ARGV})
 	if(NOT EXISTS ${path})
-		DKINFO("DeleteEmptyDirectories(): path does not exist")
+		DKINFO("dk_deleteEmptyDirectories(): path does not exist")
 		return()
 	endif()
 	if(WIN_HOST)
 		execute_process(COMMAND for /f "delims=" %d in ('dir /s /b /ad ^| sort /r') do rd "%d" WORKING_DIRECTORY ${path})
 	else()
-		DKINFO("DeleteEmptyDirectories() Not implemented for this platform")
+		DKINFO("dk_deleteEmptyDirectories() Not implemented for this platform")
 	endif()
 endfunction()
 
-function(DKSETENV name value)
+###########################################################################
+##	dk_setEnv()
+# 
+#	TODO
+# 
+function(dk_setEnv name value)
 	DKDEBUGFUNC(${ARGV})
-	#DKINFO("DKSETENV(${name} ${value})")
+	#DKINFO("dk_setEnv(${name} ${value})")
 	#DKINFO("ENVname = $ENV{${name}}")
 	#DKINFO("value = ${value}")
 	if(ENV{${name}})
@@ -583,7 +598,7 @@ function(DKSETENV name value)
 			DKINFO("Setting %${name}% environment variable to ${value}")
 			DKEXECUTE_PROCESS(setx ${name} ${value}) # https://stackoverflow.com/a/69246810
 		else()
-			DKWARN("DKSETENV() not implemented on this system")
+			DKWARN("dk_setEnv() not implemented on this system")
 		endif()
 	endif()
 endfunction()
@@ -2674,7 +2689,7 @@ function(log args)
 		endif()
 			DKINFO("${output}")
 	endforeach()
-	Wait()
+	dk_wait()
 endfunction()
 
 
@@ -3233,7 +3248,7 @@ function(TEST myVarA myVarB)
 endfunction()
 
 TEST(13 "Hi I'm a String" "81")	
-wait(0)
+dk_wait(0)
 	
 function(DKIMPORT2 url)
 	DKDEBUGFUNC(${ARGV})
