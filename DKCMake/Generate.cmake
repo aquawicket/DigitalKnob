@@ -21,8 +21,8 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
-
 include_guard()
+
 include(Functions.cmake)
 include(filesystem.cmake)
 include(Variables.cmake)
@@ -33,7 +33,6 @@ DKINFO("############################################################")
 DKINFO("######################  DigitalKnob  #######################")
 DKINFO("############################################################")
 DKINFO("\n")
-	
 get_filename_component(APP_NAME ${DKPROJECT} NAME)
 string(REPLACE " " "_" APP_NAME ${APP_NAME})
 
@@ -44,6 +43,7 @@ if(NOT TARGET)
 	PROJECT(${APP_NAME})
 	DKSET(DKAPP ON)
 endif()
+
 ##################################################
 ##### Scan the DKPlugins and build the lists #####
 ##################################################
@@ -64,8 +64,7 @@ DKBUILD_LOG("\n")
 
 foreach(plugin ${dkdepend_list})
 	DKSET(QUEUE_BUILD OFF)
-	DKSET(LIBLIST "") 
-	## used for double checking
+	DKSET(LIBLIST "") # used for double checking
 	#DKSET(CMAKE_FILE "")
 	
 	DKINFO("############################################################")
@@ -303,7 +302,6 @@ foreach(plugin ${dkdepend_list})
 					
 				endif()
 			endforeach()
-			
 			
 		endif()
 	endif()
