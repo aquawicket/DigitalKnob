@@ -54,6 +54,68 @@ set(PRINT_FUNCTION_ ARGUMENTS 1)
 set(dkdepend_disable_list "" CACHE INTERNAL "")
 
 
+###############################################################################
+# dk_listReplace(LIST old_value new_value)
+#  
+#	Replace a list item with a new value
+#
+#	@old_value: The value to replace
+#	@new_value: The new value to replace with
+#
+macro(dk_listReplace LIST old_value new_value)
+    list(FIND ${LIST} ${old_value} old_value_INDEX)
+    if(old_value_INDEX GREATER_EQUAL 0)
+        list(REMOVE_AT ${LIST} ${old_value_INDEX})
+        list(INSERT ${LIST} ${old_value_INDEX} ${new_value})
+    endif()
+endmacro()
+
+
+###############################################################################
+# dk_getArgIdentifiers(ARGV)
+#  
+#	Get the variable names from function parameters
+#
+#	@ARGV: The ARGV data within a function that contains the parameter values
+#
+function(dk_getArgIdentifiers ARGV)
+	#message(STATUS "dk_getArgIdentifiers(${ARGV})")
+	list(LENGTH ARGV ARGV_LENGTH)
+	if(ARGV_LENGTH LESS 1)
+		return()
+	endif()
+	
+	get_cmake_property(variableNames VARIABLES)
+	set(index 0)
+	
+	#DKUNSET(names)
+	set(names "" CACHE INTERNAL "")
+	unset(names)
+	
+	#DKUNSET(ARGI)
+	set(ARGI "" CACHE INTERNAL "")
+	unset(ARGI)
+	
+	while(${index} LESS ${ARGV_LENGTH})
+		list(APPEND names ARGV${index})
+		set(ARGI${index} ARGV${index} CACHE INTERNAL "")
+		foreach(variableName ${variableNames} REVERSE)
+			if(ARGV${index} STREQUAL ${variableName})
+				if(NOT "ARGV${index}" STREQUAL "${variableName}") #exclude variables with the same name like ARGV0
+					dk_listReplace(names ARGV${index} ${variableName})
+					set(ARGI${index} ${variableName} CACHE INTERNAL "")
+					#message(STATUS "ARGI${index} == ${ARGI${index}}")
+					break()
+				endif()
+			endif()
+		endforeach()
+		math(EXPR index "${index}+1")
+	endwhile()
+	#DKSET(ARGI ${names})
+	set(ARGI ${names} CACHE INTERNAL "")
+endfunction()
+
+
 ##################################################################################
 # DKDEBUGFUNC(${ARGV})
 #	Prints the current file name, line number, function or macro and arguments
@@ -3646,60 +3708,6 @@ function(dk_GetFileType path rtn-type)
 		set(${rtn-type} UNKNOWN PARENT_SCOPE)
 	endif()
 	return()
-endfunction()
-
-
-###############################################################################
-# dk_listReplace(LIST old_value new_value)
-#  
-#	Replace a list item with a new value
-#
-#	@old_value: The value to replace
-#	@new_value: The new value to replace with
-#
-macro(dk_listReplace LIST old_value new_value)
-    list(FIND ${LIST} ${old_value} old_value_INDEX)
-    if(old_value_INDEX GREATER_EQUAL 0)
-        list(REMOVE_AT ${LIST} ${old_value_INDEX})
-        list(INSERT ${LIST} ${old_value_INDEX} ${new_value})
-    endif()
-endmacro()
-
-
-###############################################################################
-# dk_getArgIdentifiers(ARGV)
-#  
-#	Get the variable names from function parameters
-#
-#	@ARGV: The ARGV data within a function that contains the parameter values
-#
-function(dk_getArgIdentifiers ARGV)
-	DKDEBUGFUNC(${ARGV})
-	list(LENGTH ARGV ARGV_LENGTH)
-	if(ARGV_LENGTH LESS 1)
-		return()
-	endif()
-	
-	get_cmake_property(variableNames VARIABLES)
-	set(index 0)
-	DKUNSET(names)
-	DKUNSET(ARGI)
-	while(${index} LESS ${ARGV_LENGTH})
-		list(APPEND names ARGV${index})
-		DKSET(ARGI${index} ARGV${index})
-		foreach(variableName ${variableNames} REVERSE)
-			if(ARGV${index} STREQUAL ${variableName})
-				if(NOT "ARGV${index}" STREQUAL "${variableName}") #exclude variables with the same name like ARGV0
-					dk_listReplace(names ARGV${index} ${variableName})
-					DKSET(ARGI${index} ${variableName})
-					DKDEBUG("ARGI${index} == ${ARGI${index}}")
-					break()
-				endif()
-			endif()
-		endforeach()
-		math(EXPR index "${index}+1")
-	endwhile()
-	DKSET(ARGI ${names})
 endfunction()
 
 
