@@ -3267,9 +3267,8 @@ function(DK_GetParameterNames_BACKUP ARGV)
 endfunction()
 	
 function(TEST myVarA myVarB)
-	DK_GetParameterNames(${ARGV}, result)
+	DK_GetParameterNames(${ARGV})
 	DKDEBUG("ARGI=\"${ARGI}\"")
-	
 	set(index 0)
 	while(ARGI${index})
 		DKDEBUG("ARGI${index}=\"${ARGI${index}}\"")
