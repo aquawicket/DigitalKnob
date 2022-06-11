@@ -27,9 +27,7 @@
 
 include_guard()
 
-
-################## SETTINGS ##################
-##############################################
+################## SETTINGS ####################################
 set(ENABLE_DKDEBUGFUNC ON CACHE INTERNAL "") #See macro(DKDEBUGFUNC) line# 162
 
 # Extra Log Info Variables
@@ -53,18 +51,18 @@ if(CMAKE_HOST_UNIX AND NOT CMAKE_HOST_APPLE)
 endif()
 
 set(dkdepend_disable_list "" CACHE INTERNAL "")
-###############################################
 
-###################################################################
+
+############################################################################
 # dk_FunctionName( ${arg0} ${arg1} rtn-var )
 #  
-# Description
+#	Description
 #
-#  ${arg0}: Description
-#  rtn-var: Description
+#	${arg0}: Description
+#	rtn-var: Description
 #          
-# Reference: https://website.com
-###################################################################
+#	Reference: https://website.com
+#########################################################################
 # DKDEBUGFUNC(${ARGV})
 # Prints the current file name, line number, function or macro and arguments
 # Place this at the first line of every function you want to see debug output for.
@@ -74,7 +72,6 @@ set(dkdepend_disable_list "" CACHE INTERNAL "")
 #		DKDEBUGFUNC(${ARGV}) 
 #		## user code
 #	endfunction()
-#
 macro(DKDEBUGFUNC)
 	if(ENABLE_DKDEBUGFUNC)
 		#dk_getFilename(${CMAKE_CURRENT_FUNCTION_LIST_FILE} FILENAME)
@@ -102,6 +99,13 @@ macro(DKDEBUGFUNC)
 	endif()
 endmacro()
 
+
+##################################################################################
+# function(args)
+#
+#	description
+#
+#	args:	
 function(dk_file_getDigitalknobPath result)
 	DKDEBUGFUNC(${ARGV})
 	get_filename_component(DIGITALKNOB ${CMAKE_SOURCE_DIR} ABSOLUTE)
@@ -118,6 +122,12 @@ endfunction()
 dk_file_getDigitalknobPath(DIGITALKNOB)
 
 
+##################################################################################
+# function(args)
+#
+#	description
+#
+#	args:	
 macro(updateLogInfo)
 	DKDEBUGFUNC(${ARGV})
 	if(PRINT_CALL_DETAILS)
@@ -153,6 +163,14 @@ endmacro()
 
 ####  message log
 include(${DIGITALKNOB}/DK/DKCMake/Color.cmake)
+
+
+##################################################################################
+# function(args)
+#
+#	description
+#
+#	args:	
 macro(DKASSERT msg)
 	#DKDEBUGFUNC(${ARGV})
 	updateLogInfo()
@@ -160,6 +178,14 @@ macro(DKASSERT msg)
 	#message(FATAL_ERROR "${H_black}${STACK_HEADER}${CLR}${red}${msg}${CLR}")
 	dk_exit()
 endmacro()
+
+
+##################################################################################
+# function(args)
+#
+#	description
+#
+#	args:	
 macro(DKERROR msg)
 	#DKDEBUGFUNC(${ARGV})
 	updateLogInfo()
@@ -168,29 +194,69 @@ macro(DKERROR msg)
 	#dk_exit()
 	#dk_wait()
 endmacro()
+
+
+##################################################################################
+# function(args)
+#
+#	description
+#
+#	args:	
 macro(DKWARN msg)
 	#DKDEBUGFUNC(${ARGV})
 	updateLogInfo()
 	#message(WARNING "${H_black}${STACK_HEADER}${CLR}${yellow}${msg}${CLR}")
 	message(STATUS "${H_black}${STACK_HEADER}${CLR}${yellow}${msg}${CLR}")
 endmacro()
+
+
+##################################################################################
+# function(args)
+#
+#	description
+#
+#	args:	
 macro(DKINFO msg)
 	#DKDEBUGFUNC(${ARGV})
 	updateLogInfo()
 	message(STATUS "${H_black}${STACK_HEADER}${CLR}${white}${msg}${CLR}")
 endmacro()
+
+
+##################################################################################
+# function(args)
+#
+#	description
+#
+#	args:	
 macro(DKDEBUG msg)
 	#DKDEBUGFUNC(${ARGV})
 	updateLogInfo()
 	#message(DEBUG "${H_black}${STACK_HEADER}${CLR}${cyan}${msg}${CLR}")  # DEBUG FLAG NOT WORKING
 	message(STATUS "${H_black}${STACK_HEADER}${CLR}${cyan}${msg}${CLR}")
 endmacro()
+
+
+##################################################################################
+# function(args)
+#
+#	description
+#
+#	args:	
 macro(DKVERBOSE msg)
 	#DKDEBUGFUNC(${ARGV})
 	updateLogInfo()
 	#message(VERBOSE "${H_black}${STACK_HEADER}${CLR}${magenta}${msg}${CLR}") # VERBOSE FLAG NOT WORKING
 	message(STATUS "${H_black}${STACK_HEADER}${CLR}${magenta}${msg}${CLR}")
 endmacro()
+
+
+##################################################################################
+# function(args)
+#
+#	description
+#
+#	args:	
 macro(DKTRACE msg)
 	#DKDEBUGFUNC(${ARGV})
 	updateLogInfo()
@@ -198,6 +264,13 @@ macro(DKTRACE msg)
 	message(WARNING "${H_black}${STACK_HEADER}${CLR}${B_blue}${msg}${CLR}")
 endmacro()
 
+
+##################################################################################
+# function(args)
+#
+#	description
+#
+#	args:	
 execute_process(COMMAND ${CMAKE_COMMAND} -E remove ${DIGITALKNOB}/DK/DKCMake/Functions_Ext.cmake)
 file(APPEND ${DIGITALKNOB}/DK/DKCMake/Functions_Ext.cmake "### Don't make changes in this file. They will not save. ###\n")
 file(APPEND ${DIGITALKNOB}/DK/DKCMake/Functions_Ext.cmake "### This file was automatically generated from Functions.cmake ###\n")
@@ -211,6 +284,12 @@ function(CreateFunc str)
 endfunction()
 
 
+###############################################################################
+# function(args)
+#
+#	description
+#
+#	args:	
 function(AliasFunctions name)
 	DKDEBUGFUNC(${ARGV})
 	CreateFunc("macro(WIN_HOST_${name})\n   if(WIN_HOST)\n      ${name}(\${ARGV})\n  endif()\nendmacro()\n")
@@ -302,6 +381,13 @@ function(AliasFunctions name)
 	CreateFunc("macro(ANDROID64_RELEASE_${name})\n   if(ANDROID_64 AND RELEASE)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")	
 endfunction()
 
+
+###############################################################################
+# function(args)
+#
+#	description
+#
+#	args:	
 ### print all variables
 function(dk_printAllVariables)
 	DKDEBUGFUNC(${ARGV})
@@ -313,6 +399,13 @@ function(dk_printAllVariables)
 	endforeach()
 endfunction()
 
+
+###############################################################################
+# function(args)
+#
+#	description
+#
+#	args:	
 # dk_string_has
 function(dk_includes str substr result)
 	DKDEBUGFUNC(${ARGV})
@@ -324,6 +417,13 @@ function(dk_includes str substr result)
 	endif()
 endfunction()
 
+
+###############################################################################
+# function(args)
+#
+#	description
+#
+#	args:	
 # https://stackoverflow.com/a/29250496/688352
 function(DKSET variable value)
 	DKDEBUGFUNC(${ARGV})
@@ -337,6 +437,12 @@ endfunction()
 AliasFunctions("DKSET")
 
 
+###############################################################################
+# function(args)
+#
+#	description
+#
+#	args:	
 function(DKUNSET variable)
 	DKDEBUGFUNC(${ARGV})
 	set(${variable} "" CACHE INTERNAL "")
@@ -344,6 +450,12 @@ function(DKUNSET variable)
 endfunction()
 
 
+###############################################################################
+# function(args)
+#
+#	description
+#
+#	args:	
 macro(dk_exit)
 	DKDEBUGFUNC(${ARGV})
 	if(WIN_HOST)
@@ -353,10 +465,11 @@ macro(dk_exit)
 	endif()
 endmacro()
 
-#####################################################################
+########################################################################
 ###################         DKFUNCTIONS           ###################
-#####################################################################
+########################################################################
 ## TOREAD:    https://foonathan.net/2016/03/cmake-install/ 
+
 
 # TestReturnValue(args result)
 #####################################################
@@ -373,6 +486,7 @@ endmacro()
 #	TestReturnValue("ABC" "123" 5 myResult)
 #	message(STATUS "TestReturnValue() -> myResult = ${myResult}") # should print->  return value = ABC;123;5
 #####################################################
+
 
 # CreateFunction(name contents args)
 ######################################################
@@ -406,14 +520,13 @@ endmacro()
 #	MyDynamicFunc("myStringData" "My;List;Data" "${myVariable}" 17 moreData)
 ##################################################
 
-###########################################################################
-##	dk_wait()
+##############################################################################
+# dk_wait()
 # 
 #	Wait until a keypress or timeout reached
 #
 #	@ARGV0:timeout (Optional)(Number) default=60
 #	@ARGV1:msg     (Optional)(String) default = "press and key to continue."
-#
 macro(dk_wait) 
 	set(timeout ${ARGV0})
 	set(msg ${ARGV1})
@@ -448,13 +561,12 @@ macro(dk_wait)
 endmacro()
 
 
-###########################################################################
-##	DUMP(dumpvar)
+##############################################################################
+# DUMP(dumpvar)
 # 
 #	Print the contents of a variable to the screen
 #
 #	@dumpvar: (Required) The variable to print to the screen
-#
 macro(DUMP dmpvar)
 	DKDEBUGFUNC(${ARGV})
 	DKINFO(" \n")
@@ -484,21 +596,20 @@ macro(DUMP dmpvar)
 endmacro()
 
 
-###########################################################################
-##	dk_watch(var)
+##############################################################################
+# dk_watch(var)
 # 
 #	Watch a varible reading and writing access events
 #
 #	@var: (Required) The variable to watch
-#
 macro(dk_watch var)
 	DKDEBUGFUNC(${ARGV})
 	variable_watch(var dk_watchVariable)
 endmacro()
 
 
-###########################################################################
-##	dk_watchVariable(var access val 1st stack)
+##############################################################################
+# dk_watchVariable(var access val 1st stack)
 # 
 #	Description:  TODO
 #
@@ -507,32 +618,31 @@ endmacro()
 #	@val:       (Required) TODO
 #   @1st: 		(Required) TODO
 #	@stack:		(Required) TODO
-#
 macro(dk_watchVariable var access val lst stack)
 	DKDEBUGFUNC(${ARGV})
     DKINFO("Variable watch: var=${var} access=${access} val=${val} 1st=${1st} stack=${stack}")
 	dk_wait()
 endmacro()
 
-###########################################################################
-##	dk_watchVariable(var access val 1st stack)
+
+##############################################################################
+# dk_watchVariable(var access val 1st stack)
 # 
 #	Set a XCode specific property
 #
 #	@ARGV: 	(Required) TODO
-#
-# 
 macro(dk_setXcodeProperty TARGET XCODE_PROPERTY XCODE_VALUE)
 	DKDEBUGFUNC(${ARGV})
     set_property(TARGET ${TARGET} PROPERTY XCODE_ATTRIBUTE_${XCODE_PROPERTY} ${XCODE_VALUE})
 endmacro(dk_setXcodeProperty)
 
 
-###########################################################################
-##	dk_deleteCache()
-# 
-#	Set a XCode specific property
-# 
+###############################################################################
+# function(args)
+#
+#	description
+#
+#	args:	
 function(dk_deleteCache)
 	DKDEBUGFUNC(${ARGV})
 	DKINFO("####### Deleteing CMake cache . . .")
@@ -546,11 +656,13 @@ function(dk_deleteCache)
 	endif()
 endfunction()
 
-###########################################################################
-##	dk_deleteTempFiles()
-# 
-#	TODO
-# 
+
+###############################################################################
+# function(args)
+#
+#	description
+#
+#	args:	
 function(dk_deleteTempFiles)
 	DKDEBUGFUNC(${ARGV})
 	DKINFO("####### Deleteing Temporary files . . .")
@@ -566,11 +678,13 @@ function(dk_deleteTempFiles)
 	endif()
 endfunction()
 
-###########################################################################
-##	dk_deleteEmptyDirectories()
-# 
-#	TODO
-# 
+
+###############################################################################
+# function(args)
+#
+#	description
+#
+#	args:	
 function(dk_deleteEmptyDirectories path)
 	DKDEBUGFUNC(${ARGV})
 	if(NOT EXISTS ${path})
@@ -584,11 +698,13 @@ function(dk_deleteEmptyDirectories path)
 	endif()
 endfunction()
 
-###########################################################################
-##	dk_setEnv()
-# 
-#	TODO
-# 
+
+###############################################################################
+# function(args)
+#
+#	description
+#
+#	args:	
 function(dk_setEnv name value)
 	DKDEBUGFUNC(${ARGV})
 	#DKINFO("dk_setEnv(${name} ${value})")
@@ -612,6 +728,12 @@ function(dk_setEnv name value)
 endfunction()
 
 
+###############################################################################
+# function(args)
+#
+#	description
+#
+#	args:	
 ##https://cmake.org/pipermail/cmake/2012-September/052205.html/
 # dk_file_download
 function(DOWNLOAD src_path dest_path) # ARGV1 = dest_path
@@ -741,6 +863,12 @@ endfunction()
 AliasFunctions("DOWNLOAD")
 
 
+###############################################################################
+# function(args)
+#
+#	description
+#
+#	args:	
 # dk_file_extract
 function(DKEXTRACT src dest)
 	DKDEBUGFUNC(${ARGV})
@@ -755,6 +883,12 @@ function(DKEXTRACT src dest)
 endfunction()
 
 
+###############################################################################
+# function(args)
+#
+#	description
+#
+#	args:	
 # dk_file_compress
 function(DKZIP path)
 	DKDEBUGFUNC(${ARGV})
@@ -766,6 +900,12 @@ function(DKZIP path)
 endfunction()
 
 
+###############################################################################
+# function(args)
+#
+#	description
+#
+#	args:	
 # dk_file_copy
 function(DKCOPY from to overwrite)
 	DKDEBUGFUNC(${ARGV})
@@ -811,6 +951,12 @@ function(DKCOPY from to overwrite)
 endfunction()
 
 
+###############################################################################
+# function(args)
+#
+#	description
+#
+#	args:	
 # dk_file_compair
 function(DKCOMPAREFILES fileA fileB)
 	DKDEBUGFUNC(${ARGV})
@@ -825,6 +971,12 @@ function(DKCOMPAREFILES fileA fileB)
 endfunction()
 
 
+###############################################################################
+# function(args)
+#
+#	description
+#
+#	args:	
 # dk_file_rename
 function(DKRENAME from to overwrite)
 	DKDEBUGFUNC(${ARGV})
@@ -842,6 +994,12 @@ function(DKRENAME from to overwrite)
 endfunction()
 
 
+###############################################################################
+# function(args)
+#
+#	description
+#
+#	args:	
 # dk_file_remove
 function(DKREMOVE path)
 	DKDEBUGFUNC(${ARGV})
@@ -857,6 +1015,12 @@ function(DKREMOVE path)
 endfunction()
 
 
+###############################################################################
+# function(args)
+#
+#	description
+#
+#	args:	
 function(UPX_COMPRESS path)
 	DKDEBUGFUNC(${ARGV})
 	DKINFO("UPX compressing ${path}...")
@@ -865,6 +1029,12 @@ function(UPX_COMPRESS path)
 endfunction()
 
 
+###############################################################################
+# function(args)
+#
+#	description
+#
+#	args:	
 function(DKENABLE plugin)
 	DKDEBUGFUNC(${ARGV})
 	if(NOT ${plugin})
@@ -887,6 +1057,12 @@ function(DKENABLE plugin)
 endfunction()
 
 
+###############################################################################
+# function(args)
+#
+#	description
+#
+#	args:	
 function(DKDISABLE plugin)
 	DKDEBUGFUNC(${ARGV})
 	if(BYPASS_DISABLE)
@@ -922,6 +1098,12 @@ function(DKDISABLE plugin)
 endfunction()
 
 
+###############################################################################
+# function(args)
+#
+#	description
+#
+#	args:	
 function(DKDEFINE str)
 	DKDEBUGFUNC(${ARGV})
 	if(CMAKE_SCRIPT_MODE_FILE)
@@ -936,6 +1118,13 @@ function(DKDEFINE str)
 endfunction()
 AliasFunctions("DKDEFINE")
 
+
+###############################################################################
+# function(args)
+#
+#	description
+#
+#	args:	
 function(DKUNDEFINE str)
 	DKDEBUGFUNC(${ARGV})
 	if(NOT DKDEFINES_LIST)
@@ -946,6 +1135,12 @@ function(DKUNDEFINE str)
 endfunction()
 
 
+###############################################################################
+# function(args)
+#
+#	description
+#
+#	args:	
 function(DKINCLUDE path)
 	DKDEBUGFUNC(${ARGV})
 	foreach(item ${ARGV})
@@ -966,6 +1161,12 @@ endfunction()
 AliasFunctions("DKINCLUDE")
 
 
+###############################################################################
+# function(args)
+#
+#	description
+#
+#	args:	
 function(DKLINKDIR path)
 	DKDEBUGFUNC(${ARGV})
 	foreach(item ${ARGV})
@@ -980,6 +1181,12 @@ endfunction()
 AliasFunctions("DKLINKDIR")
 
 
+###############################################################################
+# function(args)
+#
+#	description
+#
+#	args:	
 #function(dk_getCurrentDirectory result)
 #	DKDEBUGFUNC(${ARGV})
 #	if(WIN_HOST)
@@ -993,6 +1200,12 @@ AliasFunctions("DKLINKDIR")
 #endfunction()
 
 
+###############################################################################
+# function(args)
+#
+#	description
+#
+#	args:	
 function(dk_makeDirectory path)
 	DKDEBUGFUNC(${ARGV})
 	make_directory(${path})  #requires full path
@@ -1021,6 +1234,12 @@ function(dk_makeDirectory path)
 endfunction()
 
 
+###############################################################################
+# function(args)
+#
+#	description
+#
+#	args:	
 function(dk_getDirectory path result)
 	DKDEBUGFUNC(${ARGV})
 	string(FIND ${path} "/" index REVERSE)
@@ -1032,6 +1251,12 @@ function(dk_getDirectory path result)
 endfunction()
 
 
+###############################################################################
+# function(args)
+#
+#	description
+#
+#	args:	
 function(dk_getFilename path result)
 	DKDEBUGFUNC(${ARGV})
 	string(FIND ${path} "/" index REVERSE)
@@ -1045,6 +1270,12 @@ function(dk_getFilename path result)
 endfunction()
 
 
+###############################################################################
+# function(args)
+#
+#	description
+#
+#	args:	
 function(dk_getExtension path result)
 	DKDEBUGFUNC(${ARGV})
 	# WHY A NEW GET EXTENSION FUNCTION ?
@@ -1060,6 +1291,12 @@ function(dk_getExtension path result)
 endfunction()
 
 
+###############################################################################
+# function(args)
+#
+#	description
+#
+#	args:	
 function(dk_dirIsEmpty path result)
 	DKDEBUGFUNC(${ARGV})
 	if(EXISTS ${path})
@@ -1074,12 +1311,25 @@ function(dk_dirIsEmpty path result)
 endfunction()
 
 
+###############################################################################
+# function(args)
+#
+#	description
+#
+#	args:	
 function(DKREFRESH_ICONS)
 	DKDEBUGFUNC(${ARGV})
 	DKEXECUTE_PROCESS(ie4uinit.exe -ClearIconCache)
 	DKEXECUTE_PROCESS(ie4uinit.exe -show)   ##Windows 10
 endfunction()
 
+
+###############################################################################
+# function(args)
+#
+#	description
+#
+#	args:	
 function(DKPATCH import_name dest_path)
 	DKDEBUGFUNC(${ARGV})
 	DKINFO("\nCOPYING PATCH FILES FROM _IMPORTS/${import_name} TO ${dest_path}")
@@ -1088,6 +1338,13 @@ function(DKPATCH import_name dest_path)
 	DKCOPY(${DKIMPORTS}/${import_name}/ ${dest_path}/ TRUE)
 endfunction()
 
+
+###############################################################################
+# function(args)
+#
+#	description
+#
+#	args:	
 # For archive files such as libraries and assets, the arguments are:  The download src_path, the name of its _DKIMPORTS folder, The name given to the installed 3rdParty/folder  
 # For executable files such as software amd IDE's the arguments are:  The download src_path, the name of the final name of the dl file, The installation path to check for installation.
 function(DKINSTALL src_path import_name dest_path)
@@ -1236,6 +1493,13 @@ function(DKINSTALL src_path import_name dest_path)
 endfunction()
 AliasFunctions("DKINSTALL" "NO_DEBUG_RELEASE_TAGS")
 
+
+###############################################################################
+# function(args)
+#
+#	description
+#
+#	args:	
 function(dk_validatePath path result)
 	DKDEBUGFUNC(${ARGV})
 	get_filename_component(path ${path} ABSOLUTE)
@@ -1243,6 +1507,12 @@ function(dk_validatePath path result)
 endfunction()
 
 
+###############################################################################
+# function(args)
+#
+#	description
+#
+#	args:	
 function(WIN_GetShortPath path result)
 	DKDEBUGFUNC(${ARGV})
 	if(WIN_HOST)
@@ -1254,7 +1524,12 @@ function(WIN_GetShortPath path result)
 endfunction()
 
 
-
+###############################################################################
+# function(args)
+#
+#	description
+#
+#	args:	
 function(DKEXECUTE_PROCESS commands)
 	DKDEBUGFUNC(${ARGV})
 	set(commands ${ARGV})
@@ -1289,7 +1564,12 @@ function(DKEXECUTE_PROCESS commands)
 endfunction()
 
 
-
+###############################################################################
+# function(args)
+#
+#	description
+#
+#	args:	
 ###################### DK_PATH ####################
 function(DKSETPATH path)
 	DKDEBUGFUNC(${ARGV})
@@ -1327,6 +1607,12 @@ endfunction()
 AliasFunctions("DKSETPATH")
 
 
+###############################################################################
+# function(args)
+#
+#	description
+#
+#	args:	
 ###################  Windows MSYS  ######################
 function(MSYS)
 	DKDEBUGFUNC(${ARGV})
@@ -1354,6 +1640,13 @@ function(MSYS)
 endfunction()
 AliasFunctions("MSYS")
 
+
+###############################################################################
+# function(args)
+#
+#	description
+#
+#	args:	
 ###################  Windows MSYS2  ######################
 function(MSYS2)
 	DKDEBUGFUNC(${ARGV})
@@ -1382,6 +1675,12 @@ endfunction()
 AliasFunctions("MSYS2")
 
 
+###############################################################################
+# function(args)
+#
+#	description
+#
+#	args:	
 function(DKMERGE_FLAGS args result)
 	DKDEBUGFUNC(${ARGV})
 	set(args ${args} ${result} ${ARGN})
@@ -1418,6 +1717,12 @@ function(DKMERGE_FLAGS args result)
 endfunction()
 
 
+###############################################################################
+# function(args)
+#
+#	description
+#
+#	args:	
 function(DKCOMMAND)
 	DKDEBUGFUNC(${ARGV})
 	if(NOT EXISTS ${CURRENT_DIR})
@@ -1431,6 +1736,13 @@ endfunction()
 AliasFunctions("DKCOMMAND")
 
 
+
+###############################################################################
+# function(args)
+#
+#	description
+#
+#	args:	
 function(DKQCOMMAND)
 	DKDEBUGFUNC(${ARGV})
 	if(QUEUE_BUILD)
@@ -1440,7 +1752,12 @@ endfunction()
 AliasFunctions("DKQCOMMAND")
 
 
-
+###############################################################################
+# function(args)
+#
+#	description
+#
+#	args:	
 ################# Visual Studio Build ################
 function(DEBUG_VS folder sln_file) #target #arch
 	DKDEBUGFUNC(${ARGV})
@@ -1463,6 +1780,13 @@ function(DEBUG_VS folder sln_file) #target #arch
 endfunction()
 AliasFunctions("DEBUG_VS" "NO_DEBUG_RELEASE_TAGS")
 
+
+###############################################################################
+# function(args)
+#
+#	description
+#
+#	args:	
 function(RELEASE_VS folder sln_file) #target #arch
 	DKDEBUGFUNC(${ARGV})
 	if(NOT WIN_HOST)
@@ -1485,7 +1809,12 @@ endfunction()
 AliasFunctions("RELEASE_VS" "NO_DEBUG_RELEASE_TAGS")
 
 
-
+###############################################################################
+# function(args)
+#
+#	description
+#
+#	args:	
 function(VS)
 	DKDEBUGFUNC(${ARGV})
 	DEBUG_VS(${ARGV})
@@ -1493,12 +1822,25 @@ function(VS)
 endfunction()
 AliasFunctions("VS" "NO_DEBUG_RELEASE_TAGS")
 
+
+###############################################################################
+# function(args)
+#
+#	description
+#
+#	args:	
 macro(VISUAL_STUDIO)
 	DKDEBUGFUNC(${ARGV})
 	VS(${ARGV})
 endmacro()
 
 
+###############################################################################
+# function(args)
+#
+#	description
+#
+#	args:	
 ################### Xcode Build ###################
 function(DEBUG_XCODE folder)
 	DKDEBUGFUNC(${ARGV})
@@ -1515,6 +1857,13 @@ function(DEBUG_XCODE folder)
 endfunction()
 AliasFunctions("DEBUG_XCODE" "NO_DEBUG_RELEASE_TAGS")
 
+
+###############################################################################
+# function(args)
+#
+#	description
+#
+#	args:	
 function(RELEASE_XCODE folder)
 	DKDEBUGFUNC(${ARGV})
 	if(NOT MAC_HOST)
@@ -1530,6 +1879,13 @@ function(RELEASE_XCODE folder)
 endfunction()
 AliasFunctions("RELEASE_XCODE" "NO_DEBUG_RELEASE_TAGS")
 
+
+###############################################################################
+# function(args)
+#
+#	description
+#
+#	args:	
 function(XCODE)
 	DKDEBUGFUNC(${ARGV})
 	DEBUG_XCODE(${ARGV})
@@ -1538,6 +1894,12 @@ endfunction()
 AliasFunctions("XCODE" "NO_DEBUG_RELEASE_TAGS")
 
 
+###############################################################################
+# function(args)
+#
+#	description
+#
+#	args:	
 ####################### Android NDK Build #################
 function(DEBUG_NDK folder)
 	DKDEBUGFUNC(${ARGV})
@@ -1552,6 +1914,13 @@ function(DEBUG_NDK folder)
 endfunction()
 AliasFunctions("DEBUG_NDK" "NO_DEBUG_RELEASE_TAGS")
 
+
+###############################################################################
+# function(args)
+#
+#	description
+#
+#	args:	
 function(RELEASE_NDK folder)
 	DKDEBUGFUNC(${ARGV})
 	if(RELEASE AND QUEUE_BUILD)
@@ -1565,6 +1934,13 @@ function(RELEASE_NDK folder)
 endfunction()
 AliasFunctions("RELEASE_NDK" "NO_DEBUG_RELEASE_TAGS")
 
+
+###############################################################################
+# function(args)
+#
+#	description
+#
+#	args:	
 function(NDK)
 	DKDEBUGFUNC(${ARGV})
 	DEBUG_NDK(${ARGV})
@@ -1572,12 +1948,26 @@ function(NDK)
 endfunction()
 AliasFunctions("NDK" "NO_DEBUG_RELEASE_TAGS")
 
+
+###############################################################################
+# function(args)
+#
+#	description
+#
+#	args:	
 ####################### Make Build #################
 function(MAKE lib)
 	DKDEBUGFUNC(${ARGV})
 	DKQCOMMAND(make ${ARGV})
 endfunction()
 
+
+###############################################################################
+# function(args)
+#
+#	description
+#
+#	args:	
 ###################### DKPlugin Link Libraries #####################
 function(DKLIB lib_path)
 	DKDEBUGFUNC(${ARGV})
@@ -1602,6 +1992,13 @@ function(DKLIB lib_path)
 endfunction()
 AliasFunctions("DKLIB" "NO_DEBUG_RELEASE_TAGS")
 
+
+###############################################################################
+# function(args)
+#
+#	description
+#
+#	args:	
 function(DEBUG_DKLIB lib_path)
 	DKDEBUGFUNC(${ARGV})
 	if(NOT DEBUG)
@@ -1630,6 +2027,13 @@ function(DEBUG_DKLIB lib_path)
 endfunction()
 AliasFunctions("DEBUG_DKLIB" "NO_DEBUG_RELEASE_TAGS")
 
+
+###############################################################################
+# function(args)
+#
+#	description
+#
+#	args:	
 function(RELEASE_DKLIB lib_path)
 	DKDEBUGFUNC(${ARGV})
 	if(NOT RELEASE)
@@ -1659,6 +2063,12 @@ endfunction()
 AliasFunctions("RELEASE_DKLIB" "NO_DEBUG_RELEASE_TAGS")
 
 
+###############################################################################
+# function(args)
+#
+#	description
+#
+#	args:	
 function(generateCmake plugin_name)
 	DKDEBUGFUNC(${ARGV})
 	dk_getPathToPlugin(${plugin_name} plugin_path)
@@ -1757,6 +2167,12 @@ function(generateCmake plugin_name)
 endfunction()
 
 
+###############################################################################
+# function(args)
+#
+#	description
+#
+#	args:	
 function(DKDLL name)
 	DKDEBUGFUNC(${ARGV})
 	dk_getPathToPlugin(${name} plugin_path)
@@ -1831,7 +2247,13 @@ function(DKDLL name)
 	ADDTO_DKPLUGIN_LIST(${name})
 endfunction()
 
-# TODO
+
+###############################################################################
+# function(args)
+#
+#	description
+#
+#	args:	
 function(DKEXECUTABLE name)
 	DKDEBUGFUNC(${ARGV})
 	dk_getPathToPlugin(${name} plugin_path)
@@ -1853,6 +2275,12 @@ function(DKEXECUTABLE name)
 endfunction()
 
 
+###############################################################################
+# function(args)
+#
+#	description
+#
+#	args:	
 function(DKTESTAPP name)
 	DKDEBUGFUNC(${ARGV})
 	dk_getPathToPlugin(${name} plugin_path)
@@ -1880,6 +2308,12 @@ function(DKTESTAPP name)
 endfunction()
 
 
+###############################################################################
+# function(args)
+#
+#	description
+#
+#	args:	
 function(ADDTO_DKPLUGIN_LIST name)
 	DKDEBUGFUNC(${ARGV})
 	dk_getPathToPlugin(${name} plugin_path)
@@ -1891,6 +2325,13 @@ function(ADDTO_DKPLUGIN_LIST name)
 	DKSET(DKPLUGIN_LIST ${DKPLUGIN_LIST} ${name})
 endfunction()
 
+
+###############################################################################
+# function(args)
+#
+#	description
+#
+#	args:	
 function(DKAPPEND_CMAKE str)
 	DKDEBUGFUNC(${ARGV})
 	file(APPEND ${plugin_path}/CMakeLists.txt "${str}")
@@ -1934,6 +2375,13 @@ SET(ASSETS
 	PATTERN raspberry64 EXCLUDE
 	PATTERN dktest EXCLUDE)
 
+
+###############################################################################
+# function(args)
+#
+#	description
+#
+#	args:	
 # Add a library's files to the App's assets
 function(DKASSETS name)
 	DKDEBUGFUNC(${ARGV})
@@ -1951,6 +2399,12 @@ function(DKASSETS name)
 endfunction()
 
 
+###############################################################################
+# function(args)
+#
+#	description
+#
+#	args:	
 function(dk_getPathToPlugin name result)
 	DKDEBUGFUNC(${ARGV})
 	list(FIND dkdepend_disable_list "${ARGV}" index)
@@ -1975,6 +2429,12 @@ function(dk_getPathToPlugin name result)
 endfunction()
 
 
+###############################################################################
+# function(args)
+#
+#	description
+#
+#	args:	
 # Add a library or plugin to the dependency list
 function(DKDEPEND name)
 	DKDEBUGFUNC(${ARGV})
@@ -2027,6 +2487,12 @@ endfunction()
 AliasFunctions("DKDEPEND")
 
 
+###############################################################################
+# function(args)
+#
+#	description
+#
+#	args:	
 # Remove a library or plugin from the dependency list
 function(DKUNDEPEND name)
 	DKDEBUGFUNC(${ARGV})
@@ -2042,6 +2508,12 @@ function(DKUNDEPEND name)
 endfunction()
 
 
+###############################################################################
+# function(args)
+#
+#	description
+#
+#	args:	
 ### DKRUNDEPENDS() will strip everything from the library's DKMAKE.cmake file except DKDEPEND() commands AND conditionals.
 ### Conditionals such as if(), else(), elseif(), endif(), return() will remain included during the sorting process. 
 ### WARNING: BE CAREFULL WRITING NEW VARIABLES TO USE WITH CONDITIONALS, AS THEY MIGHT BE IGNORED 
@@ -2277,6 +2749,12 @@ function(DKRUNDEPENDS name)
 endfunction()
 
 
+###############################################################################
+# function(args)
+#
+#	description
+#
+#	args:	
 function(DKDEPEND_ALL)
 	DKDEBUGFUNC(${ARGV})
 	DKINFO("***** DKDEPEND_ALL() *****")
@@ -2315,6 +2793,12 @@ function(DKDEPEND_ALL)
 endfunction()
 
 
+###############################################################################
+# function(args)
+#
+#	description
+#
+#	args:	
 function (dkFileReplace filePath find replace)
 	DKDEBUGFUNC(${ARGV})
 	file(READ ${filePath} fileString)
@@ -2328,6 +2812,12 @@ function (dkFileReplace filePath find replace)
 endfunction()
 
 
+###############################################################################
+# function(args)
+#
+#	description
+#
+#	args:	
 function(DKUPDATE_ANDROID_NAME name)
 	DKDEBUGFUNC(${ARGV})
 	string(TOLOWER ${name} name)
@@ -2372,6 +2862,12 @@ function(DKUPDATE_ANDROID_NAME name)
 endfunction()
 
 
+###############################################################################
+# function(args)
+#
+#	description
+#
+#	args:	
 function(DKUPDATE_INFO_PLIST name)
 	DKDEBUGFUNC(${ARGV})
 	if(MAC)
@@ -2409,6 +2905,13 @@ function(DKUPDATE_INFO_PLIST name)
 	endif()
 endfunction()
 
+
+###############################################################################
+# function(args)
+#
+#	description
+#
+#	args:	
 function(DKBUILD_LOG entry)
 	DKDEBUGFUNC(${ARGV})
 	#DKSET(DKBUILD_LOG_FILE "${DKBUILD_LOG_FILE}${entry}\n")
@@ -2416,16 +2919,31 @@ function(DKBUILD_LOG entry)
 	file(APPEND ${DKPROJECT}/${OS}/DKBUILD.log "${entry}\n")
 endfunction()
 
+
+###############################################################################
+# function(args)
+#
+#	description
+#
+#	args:	
 function(ADD_SOURCE regex)
 	DKDEBUGFUNC(${ARGV})
 	DKSET(SRC_INCLUDE ${SRC_INCLUDE} ${ARGV})
 endfunction()
 
+
+###############################################################################
+# function(args)
+#
+#	description
+#
+#	args:	
 function(REMOVE_SOURCE regex)
 	DKDEBUGFUNC(${ARGV})
 	DKSET(SRC_EXCLUDE ${SRC_EXCLUDE} ${ARGV})
 endfunction()
 
+###############################################################################
 # Function to wrap a given string into multiple lines at the given column position.
 # Parameters:
 #   VARIABLE    - The name of the CMake variable holding the string.
@@ -2451,7 +2969,7 @@ function(WRAP_STRING)
 endfunction()
 
 
-
+###############################################################################
 ## https://gist.github.com/sivachandran/3a0de157dccef822a230#file-bin2h-cmake
 # Function to embed contents of a file as byte array in C/C++ header file(.h). The header file
 # will contain a byte array and integer variable holding the size of the array.
@@ -2500,6 +3018,13 @@ function(BIN2H)
     endif()
 endfunction()
 
+
+###############################################################################
+# function(args)
+#
+#	description
+#
+#	args:	
 # https://cmake.org/cmake/help/latest/manual/cmake-variables.7.html
 function(dk_printSettings)
 	DKDEBUGFUNC(${ARGV})
@@ -2642,6 +3167,13 @@ function(dk_printSettings)
 	DKBUILD_LOG("\n") 
 endfunction()
 
+
+###############################################################################
+# function(args)
+#
+#	description
+#
+#	args:	
 function(dk_addTarget name target)
 	DKDEBUGFUNC(${ARGV})
 	DKINFO("dk_addTarget( ${ARGV} )")
@@ -2659,6 +3191,13 @@ function(dk_addTarget name target)
 	endif()
 endfunction()
 
+
+###############################################################################
+# function(args)
+#
+#	description
+#
+#	args:	
 function(dk_removeTarget name target)
 	DKDEBUGFUNC(${ARGV})
 	DKINFO("dk_removeTarget( ${ARGV} )")
@@ -2676,15 +3215,28 @@ function(dk_removeTarget name target)
 endfunction()
 
 
+###############################################################################
+# function(args)
+#
+#	description
+#	 
 # TODO
 # We can scan each plugin and attempt to create it's variable and infomation manually here
+###############################################################################
 function(dk_createSmartObject object)
 	DKDEBUGFUNC(${ARGV})
 	DKINFO("dk_createSmartObject(${object})")
 	# We require something that can resolve to a full, valid path containing a DKMAKE.cmake file 
 endfunction()
 
-# A simple, quick and easy logger
+
+###############################################################################
+# function(args)
+#
+#	A simple, quick and easy logger
+#
+#	args:	 
+###############################################################################
 function(log args)
 	DKDEBUGFUNC(${ARGV})
 	DKINFO("${ARGV}")
@@ -2701,6 +3253,12 @@ function(log args)
 endfunction()
 
 
+###############################################################################
+# function(args)
+#
+#	description
+#
+#	args:	 
 function(dk_RemoveSubstring removethis fromthis result)
 	DKDEBUGFUNC(${ARGV})
 	foreach(item ${fromthis})
@@ -2712,6 +3270,12 @@ function(dk_RemoveSubstring removethis fromthis result)
 endfunction()
 
 
+###############################################################################
+# function(args)
+#
+#	description
+#
+#	args:	 
 function(dk_FindTarget target result_path result_type)
 	DKDEBUGFUNC(${ARGV})
 	## search up to 4 levels deep
@@ -2738,6 +3302,12 @@ function(dk_FindTarget target result_path result_type)
 endfunction()
 
 
+###############################################################################
+# function(args)
+#
+#	description
+#
+#	args:	 
 macro(set_readonly VAR)                      # set_readonly(var value)
 	DKDEBUGFUNC(${ARGV})
 	set("${VAR}" "${ARGN}")                  # Set the variable itself
@@ -2745,6 +3315,13 @@ macro(set_readonly VAR)                      # set_readonly(var value)
 	variable_watch("${VAR}" readonly_guard)  # Register a watcher for a variable
 endmacro()
 
+
+###############################################################################
+# function(args)
+#
+#	description
+#
+#	args:	 
 macro(readonly_guard VAR access value current_list_file stack)   # Watcher for readonly property.
 	DKDEBUGFUNC(${ARGV})
 	if ("${access}" STREQUAL "MODIFIED_ACCESS")
@@ -2753,6 +3330,13 @@ macro(readonly_guard VAR access value current_list_file stack)   # Watcher for r
 	endif()
 endmacro()
 
+
+###############################################################################
+# function(args)
+#
+#	description
+#
+#	args:	 
 function(dk_prependFile path string)
 	DKDEBUGFUNC(${ARGV})
 	file(READ "${path}" file_data)
@@ -2760,6 +3344,12 @@ function(dk_prependFile path string)
 endfunction()
 
 
+###############################################################################
+# function(args)
+#
+#	description
+#
+#	args:	 
 function(dk_addRegistryKey key value data)
 	DKDEBUGFUNC(${ARGV})
 if(WIN_HOST)
@@ -2773,15 +3363,15 @@ endif()
 endfunction()
 
 
-######### TODO ###########################################
-##
-##   DKIMPORT(url) #args
-##  
-##  github GIT:  https://github.com/orginization/library.git    DKIMPORT_GIT(url) #branch #PATCH
-##  github DL:   https://github.com/orginization/library        DKIMPORT_GIT(url) #lib #id #PATCH
-##  lib url DL:  https://website.com/library.zip                 DKIMPORT_DL(url) #lib #id #PATCH
-##  exe url DL:  https://website.com/executable.exe		    	 DKIMPORT_DL(url) #lib #id #PATCH
-
+###############################################################################
+# DKIMPORT(url) #args
+#  
+#	github GIT:  https://github.com/orginization/library.git    DKIMPORT_GIT(url) #branch #PATCH
+#	github DL:   https://github.com/orginization/library        DKIMPORT_GIT(url) #lib #id #PATCH
+#	lib url DL:  https://website.com/library.zip                 DKIMPORT_DL(url) #lib #id #PATCH
+#	exe url DL:  https://website.com/executable.exe		    	 DKIMPORT_DL(url) #lib #id #PATCH
+#
+#	url:	 
 function(DKIMPORT url) #Lib #ID #Patch
 	DKDEBUGFUNC(${ARGV})
 	#string(FIND ${url} "github.com" github)
@@ -2793,8 +3383,14 @@ function(DKIMPORT url) #Lib #ID #Patch
 		DKIMPORT_DL(${ARGV})
 	endif()
 endfunction()
-#######################################################
 
+
+###############################################################################
+# function(args)
+#
+#	description
+#
+#	args:	 
 function(DKIMPORT_GIT url) #branch #PATCH
 	DKDEBUGFUNC(${ARGV})
 	string(REPLACE "/" ";" url_list ${url})  #split url path into list
@@ -2861,7 +3457,6 @@ function(DKIMPORT_GIT url) #branch #PATCH
 		return()
 	endif()
 	
-	############################################
 	string(TOUPPER ${Lib} LIBVAR)
 	if(NOT LIBVAR)
 		DKINFO("$(LIBVAR) is invalid")
@@ -2897,7 +3492,6 @@ function(DKIMPORT_GIT url) #branch #PATCH
 	endif()
 	DKDEBUG("${${LIBVAR}} = ${${LIBVAR}}")
 	
-	#############################################
 	#DKSET(CURRENT_DIR ${${LIBVAR}})
 	if(NOT EXISTS ${${LIBVAR}}/.git)
 		DKSET(CURRENT_DIR ${DIGITALKNOB})
@@ -2924,7 +3518,12 @@ function(DKIMPORT_GIT url) #branch #PATCH
 endfunction()
 
 
-
+###############################################################################
+# function(args)
+#
+#	description
+#
+#	args:	 
 function(DKIMPORT_DL url) #Lib #ID #Patch
 	DKDEBUGFUNC(${ARGV})
 # IS THE URL VALID           Example https://github.com/aquawicket/DigitalKnob/archive/01c17f6a9cd66068f7890ea887ab3b9a673f0434.zip)
@@ -3056,7 +3655,6 @@ function(DKIMPORT_DL url) #Lib #ID #Patch
 		return()
 	endif()
 		
-	############################################
 	DKSET(${LIBVAR}_BRANCH ${ID})
 	DKSET(${LIBVAR}_NAME ${FOLDER}-${${LIBVAR}_BRANCH})
 	DKSET(${LIBVAR} ${3RDPARTY}/${${LIBVAR}_NAME})
@@ -3075,7 +3673,12 @@ function(DKIMPORT_DL url) #Lib #ID #Patch
 endfunction()
 
 
-
+###############################################################################
+# function(args)
+#
+#	description
+#
+#	args:	 
 function(dk_DownloadAll3rdParty)
 	DKDEBUGFUNC(${ARGV})
 	DKDEPEND_ALL() ## ADD any and all plugins here
@@ -3140,7 +3743,8 @@ function(dk_DownloadAll3rdParty)
 	endforeach()
 endfunction()
 
-###################################################################
+
+######################################################################
 # dk_GetFileType( ${path} rtn-type )
 #  
 # Takes a path and checks the extension to return the file type.
@@ -3150,7 +3754,6 @@ endfunction()
 #           Possible results are ARCHIVE, EXECUTABLE, IMAGE, SCRIPT,
 #           UNKNOWN, WEB, ...TODO
 # Reference: https://en.wikipedia.org/wiki/List_of_file_formats
-###################################################################
 function(dk_GetFileType path rtn-type)
 	DKDEBUGFUNC(${ARGV})
 	dk_getExtension(${path} ext)
@@ -3207,25 +3810,29 @@ function(dk_GetFileType path rtn-type)
 	return()
 endfunction()
 
-###################################################################
-# dk_GetFileType( ${path} rtn-type )
+
+###############################################################################
+# dk_listReplace(LIST old_value new_value)
 #  
-# Takes a path and checks the extension to return the file type.
+#	Replace a list item with a new value
 #
-#  ${path}: A string value of the path to identify
-# rtn-type: returns a string representing the  type of file.
-#           Possible results are ARCHIVE, EXECUTABLE, IMAGE, SCRIPT,
-#           UNKNOWN, WEB, ...TODO
-# Reference: https://en.wikipedia.org/wiki/List_of_file_formats
-###################################################################
-macro(dk_listReplace LIST OLD_VALUE NEW_VALUE)
-    list(FIND ${LIST} ${OLD_VALUE} OLD_VALUE_INDEX)
-    if(OLD_VALUE_INDEX GREATER_EQUAL 0)
-        list(REMOVE_AT ${LIST} ${OLD_VALUE_INDEX})
-        list(INSERT ${LIST} ${OLD_VALUE_INDEX} ${NEW_VALUE})
+#	old_value: The value to replace
+#	new_value: The new value to replace with
+macro(dk_listReplace LIST old_value new_value)
+    list(FIND ${LIST} ${old_value} old_value_INDEX)
+    if(old_value_INDEX GREATER_EQUAL 0)
+        list(REMOVE_AT ${LIST} ${old_value_INDEX})
+        list(INSERT ${LIST} ${old_value_INDEX} ${new_value})
     endif()
 endmacro()
 
+
+###############################################################################
+# dk_getArgIdentifiers(ARGV)
+#  
+#	Get the variable names from function parameters
+#
+#	ARGV: The ARGV data within a function that contains the parameter values
 function(dk_getArgIdentifiers ARGV)
 	DKDEBUGFUNC(${ARGV})
 	list(LENGTH ARGV ARGV_LENGTH)
@@ -3256,35 +3863,10 @@ function(dk_getArgIdentifiers ARGV)
 endfunction()
 
 
-
-function(DK_GetParameterNames_BACKUP ARGV)
-	DKDEBUGFUNC(${ARGV})
-	list(LENGTH ARGV ARGV_LENGTH)
-	if(ARGV_LENGTH LESS 1)
-		return()
-	endif()
-	
-	get_cmake_property(variableNames VARIABLES)
-	set(index 0)
-	DKUNSET(ARGI)
-	while(${index} LESS ${ARGV_LENGTH})
-		foreach(variableName ${variableNames} REVERSE)
-			if(ARGV${index} STREQUAL ${variableName})
-				if(NOT "ARGV${index}" STREQUAL "${variableName}") #exclude variables with the same name like ARGV0
-					DKDEBUG("ARGV${index} == ${variableName}")
-					list(APPEND names ${variableName})
-					DKSET(ARGI${index} ${variableName})
-					break()
-				endif()
-			endif()
-		endforeach()
-		DKSET(ARGI${index} ARGI${index})
-		math(EXPR index "${index}+1")
-	endwhile()
-	DKSET(ARGI ${names})
-endfunction()
-	
-function(TEST myVarA myVarB)
+###############################################################################
+# TEST_dk_getArgIdentifiers(myVarA myVarB)
+# 	 
+function(TEST_dk_getArgIdentifiers myVarA myVarB)
 	dk_getArgIdentifiers(${ARGV})
 	DKDEBUG("ARGI=\"${ARGI}\"")
 	set(index 0)
@@ -3294,9 +3876,13 @@ function(TEST myVarA myVarB)
 	endwhile()
 endfunction()
 
-TEST(13 "Hi I'm a String" "81")	
-dk_wait(0)
-	
+
+###############################################################################
+# function(args)
+#
+#	description
+#
+#	args:	 
 function(DKIMPORT2 url)
 	DKDEBUGFUNC(${ARGV})
 	DKDEBUG("DKIMPORT2(${ARGV})")
