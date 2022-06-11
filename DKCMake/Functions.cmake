@@ -30,7 +30,7 @@ include_guard()
 
 ################## SETTINGS ##################
 ##############################################
-set(ENABLE_DKDEBUGFUNC OFF CACHE INTERNAL "") #See macro(DKDEBUGFUNC) line# 162
+set(ENABLE_DKDEBUGFUNC ON CACHE INTERNAL "") #See macro(DKDEBUGFUNC) line# 162
 
 # Extra Log Info Variables
 set(PRINT_CALL_DETAILS 1)
@@ -88,8 +88,9 @@ macro(DKDEBUGFUNC)
 			set(argIndex 0)
 			set(argString " {")
 			#set(argString "${argString}${ARGV}")
+			dk_getArgIdentifiers(${ARGV})
 			foreach(arg ${ARGV})
-				set(argString "${argString}\"${ARGV${argIndex}}\":\"${arg}\"")
+				set(argString "${argString}\"${ARGI${argIndex}}\":\"${arg}\"")
 				math(EXPR argIndex "${argIndex}+1")
 				if(${argIndex} LESS ${ARGC})
 					set(argString "${argString},  ")
@@ -3206,10 +3207,18 @@ function(dk_GetFileType path rtn-type)
 	return()
 endfunction()
 
-
-
-# TESTING
-macro(replace_list_item LIST OLD_VALUE NEW_VALUE)
+###################################################################
+# dk_GetFileType( ${path} rtn-type )
+#  
+# Takes a path and checks the extension to return the file type.
+#
+#  ${path}: A string value of the path to identify
+# rtn-type: returns a string representing the  type of file.
+#           Possible results are ARCHIVE, EXECUTABLE, IMAGE, SCRIPT,
+#           UNKNOWN, WEB, ...TODO
+# Reference: https://en.wikipedia.org/wiki/List_of_file_formats
+###################################################################
+macro(dk_listReplace LIST OLD_VALUE NEW_VALUE)
     list(FIND ${LIST} ${OLD_VALUE} OLD_VALUE_INDEX)
     if(OLD_VALUE_INDEX GREATER_EQUAL 0)
         list(REMOVE_AT ${LIST} ${OLD_VALUE_INDEX})
@@ -3217,7 +3226,7 @@ macro(replace_list_item LIST OLD_VALUE NEW_VALUE)
     endif()
 endmacro()
 
-function(DK_GetParameterNames ARGV)
+function(dk_getArgIdentifiers ARGV)
 	DKDEBUGFUNC(${ARGV})
 	list(LENGTH ARGV ARGV_LENGTH)
 	if(ARGV_LENGTH LESS 1)
@@ -3234,7 +3243,7 @@ function(DK_GetParameterNames ARGV)
 		foreach(variableName ${variableNames} REVERSE)
 			if(ARGV${index} STREQUAL ${variableName})
 				if(NOT "ARGV${index}" STREQUAL "${variableName}") #exclude variables with the same name like ARGV0
-					replace_list_item(names ARGV${index} ${variableName})
+					dk_listReplace(names ARGV${index} ${variableName})
 					DKSET(ARGI${index} ${variableName})
 					DKDEBUG("ARGI${index} == ${ARGI${index}}")
 					break()
@@ -3268,7 +3277,6 @@ function(DK_GetParameterNames_BACKUP ARGV)
 					break()
 				endif()
 			endif()
-			#DKDEBUG("ARGV${index} == ARGV${index}")
 		endforeach()
 		DKSET(ARGI${index} ARGI${index})
 		math(EXPR index "${index}+1")
@@ -3277,7 +3285,7 @@ function(DK_GetParameterNames_BACKUP ARGV)
 endfunction()
 	
 function(TEST myVarA myVarB)
-	DK_GetParameterNames(${ARGV})
+	dk_getArgIdentifiers(${ARGV})
 	DKDEBUG("ARGI=\"${ARGI}\"")
 	set(index 0)
 	while(ARGI${index})
