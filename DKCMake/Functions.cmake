@@ -26,30 +26,28 @@
 # https://asitdhal.medium.com/cmake-functions-and-macros-22293041519f
 include_guard()
 
-
 ### DKVARIABLES ##################################################################
 if(CMAKE_HOST_WIN32)
-	set(WIN_HOST TRUE CACHE INTERNAL "")
-endif()
-if(CMAKE_HOST_UNIX)
-	set(UNIX_HOST TRUE CACHE INTERNAL "")
+	set(WIN_HOST 	TRUE 	CACHE INTERNAL "")
 endif()
 if(CMAKE_HOST_APPLE)
-	set(MAC_HOST TRUE CACHE INTERNAL "")
+	set(UNIX_HOST 	TRUE 	CACHE INTERNAL "")
+	set(MAC_HOST 	TRUE 	CACHE INTERNAL "")
 endif()
 if(CMAKE_HOST_UNIX AND NOT CMAKE_HOST_APPLE)
-	set(LINUX_HOST TRUE CACHE INTERNAL "")
+	set(UNIX_HOST 	TRUE 	CACHE INTERNAL "")
+	set(LINUX_HOST 	TRUE 	CACHE INTERNAL "")
 endif()
 
 
 ### SETTINGS #####################################################################
-set(ENABLE_DKDEBUGFUNC ON CACHE INTERNAL "")
-set(PRINT_CALL_DETAILS 1 "" CACHE INTERNAL "")
-set(PRINT_FILE_NAMES 1 "" CACHE INTERNAL "")
-set(PRINT_LINE_NUMBERS 1 "" CACHE INTERNAL "")
-set(PRINT_FUNCTION_NAMES 1 "" CACHE INTERNAL "")
-set(PRINT_FUNCTION_ ARGUMENTS 1 "" CACHE INTERNAL "")
-set(dkdepend_disable_list "" CACHE INTERNAL "")
+set(ENABLE_DKDEBUGFUNC 			0		CACHE INTERNAL "")
+set(PRINT_CALL_DETAILS 			1		CACHE INTERNAL "")
+set(PRINT_FILE_NAMES 			1 		CACHE INTERNAL "")
+set(PRINT_LINE_NUMBERS 			1		CACHE INTERNAL "")
+set(PRINT_FUNCTION_NAMES 		1 		CACHE INTERNAL "")
+set(PRINT_FUNCTION_ ARGUMENTS 	1 		CACHE INTERNAL "")
+set(dkdepend_disable_list 		""		CACHE INTERNAL "")
 
 
 ##################################################################################
@@ -75,7 +73,14 @@ function(dk_file_getDigitalknobPath result)
 endfunction()
 dk_file_getDigitalknobPath(DIGITALKNOB)
 
+macro(DKCall func)
+	include(${DIGITALKNOB}/DK/DKCMake/${func}.cmake)
+	cmake_language(CALL ${func} ${ARGV})
+endmacro()
+
+### INCLUDES ##################################################################
 include(${DIGITALKNOB}/DK/DKCMake/Color.cmake)
+
 
 ###############################################################################
 # dk_listReplace(LIST old_value new_value)
@@ -85,13 +90,13 @@ include(${DIGITALKNOB}/DK/DKCMake/Color.cmake)
 #	@old_value: The value to replace
 #	@new_value: The new value to replace with
 #
-macro(dk_listReplace LIST old_value new_value)
-    list(FIND ${LIST} ${old_value} old_value_INDEX)
-    if(old_value_INDEX GREATER_EQUAL 0)
-        list(REMOVE_AT ${LIST} ${old_value_INDEX})
-        list(INSERT ${LIST} ${old_value_INDEX} ${new_value})
-    endif()
-endmacro()
+#macro(dk_listReplace LIST old_value new_value)
+#    list(FIND ${LIST} ${old_value} old_value_INDEX)
+#    if(old_value_INDEX GREATER_EQUAL 0)
+#        list(REMOVE_AT ${LIST} ${old_value_INDEX})
+#        list(INSERT ${LIST} ${old_value_INDEX} ${new_value})
+#    endif()
+#endmacro()
 
 
 ###############################################################################
@@ -101,33 +106,33 @@ endmacro()
 #
 #	@ARGV: The ARGV data within a function that contains the parameter values
 #
-function(dk_getArgIdentifiers ARGV)
-	#message(STATUS "dk_getArgIdentifiers(${ARGV})")
-	list(LENGTH ARGV ARGV_LENGTH)
-	if(ARGV_LENGTH LESS 1)
-		return()
-	endif()
-	get_cmake_property(variableNames VARIABLES)
-	set(index 0)
-	unset(names)
-	unset(ARGI)
-	while(${index} LESS ${ARGV_LENGTH})
-		list(APPEND names ARGV${index})
-		set(ARGI${index} ARGV${index} CACHE INTERNAL "")
-		foreach(variableName ${variableNames} REVERSE)
-			if(ARGV${index} STREQUAL ${variableName})
-				if(NOT "ARGV${index}" STREQUAL "${variableName}") #exclude variables with the same name like ARGV0
-					dk_listReplace(names ARGV${index} ${variableName})
-					set(ARGI${index} ${variableName} CACHE INTERNAL "")
-					#message(STATUS "ARGI${index} == ${ARGI${index}}")
-					break()
-				endif()
-			endif()
-		endforeach()
-		math(EXPR index "${index}+1")
-	endwhile()
-	set(ARGI ${names} CACHE INTERNAL "")
-endfunction()
+#function(dk_getArgIdentifiers ARGV)
+#	#message(STATUS "dk_getArgIdentifiers(${ARGV})")
+#	list(LENGTH ARGV ARGV_LENGTH)
+#	if(ARGV_LENGTH LESS 1)
+#		return()
+#	endif()
+#	get_cmake_property(variableNames VARIABLES)
+#	set(index 0)
+#	unset(names)
+#	unset(ARGI)
+#	while(${index} LESS ${ARGV_LENGTH})
+#		list(APPEND names ARGV${index})
+#		set(ARGI${index} ARGV${index} CACHE INTERNAL "")
+#		foreach(variableName ${variableNames} REVERSE)
+#			if(ARGV${index} STREQUAL ${variableName})
+#				if(NOT "ARGV${index}" STREQUAL "${variableName}") #exclude variables with the same name like ARGV0
+#					DKCall(dk_listReplace names ARGV${index} ${variableName})
+#					set(ARGI${index} ${variableName} CACHE INTERNAL "")
+#					#message(STATUS "ARGI${index} == ${ARGI${index}}")
+#					break()
+#				endif()
+#			endif()
+#		endforeach()
+#		math(EXPR index "${index}+1")
+#	endwhile()
+#	set(ARGI ${names} CACHE INTERNAL "")
+#endfunction()
 
 
 ##################################################################################
@@ -153,7 +158,7 @@ macro(DKDEBUGFUNC)
 		else()
 			set(argIndex 0)
 			set(argString " {")
-			dk_getArgIdentifiers(${ARGV})
+			DKCall(dk_getArgIdentifiers ${ARGV})
 			foreach(arg ${ARGV})
 				set(argString "${argString}\"${ARGI${argIndex}}\":\"${arg}\"")
 				if(${argIndex} LESS ${ARGC})
