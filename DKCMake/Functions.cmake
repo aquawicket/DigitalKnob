@@ -73,7 +73,12 @@ function(dk_file_getDigitalknobPath result)
 endfunction()
 dk_file_getDigitalknobPath(DIGITALKNOB)
 
+include(${DIGITALKNOB}/DK/DKCMake/DKLoad.cmake)
+include(${DIGITALKNOB}/DK/DKCMake/DKCall.cmake)
 
+DKLoad(DKDEBUGFUNC)
+
+#[[
 ##################################################################################
 # dk_Load(filename)
 #
@@ -82,8 +87,10 @@ dk_file_getDigitalknobPath(DIGITALKNOB)
 macro(DKLoad filename)
 	include(${DIGITALKNOB}/DK/DKCMake/${filename}.cmake)
 endmacro()
+]]
 
 
+#[[
 ##################################################################################
 # dk_Call(func)
 #
@@ -93,12 +100,15 @@ macro(DKCall func)
 	DKLoad(${func})
 	cmake_language(CALL ${func} ${ARGV})
 endmacro()
+]]
+
 
 ### INCLUDES ##################################################################
 #include(${DIGITALKNOB}/DK/DKCMake/Color.cmake)
 DKLoad(Color)
 
 
+#[[
 ###############################################################################
 # dk_listReplace(LIST old_value new_value)
 #  
@@ -107,13 +117,14 @@ DKLoad(Color)
 #	@old_value: The value to replace
 #	@new_value: The new value to replace with
 #
-#macro(dk_listReplace LIST old_value new_value)
-#    list(FIND ${LIST} ${old_value} old_value_INDEX)
-#    if(old_value_INDEX GREATER_EQUAL 0)
-#        list(REMOVE_AT ${LIST} ${old_value_INDEX})
-#        list(INSERT ${LIST} ${old_value_INDEX} ${new_value})
-#    endif()
-#endmacro()
+macro(dk_listReplace LIST old_value new_value)
+    list(FIND ${LIST} ${old_value} old_value_INDEX)
+    if(old_value_INDEX GREATER_EQUAL 0)
+        list(REMOVE_AT ${LIST} ${old_value_INDEX})
+        list(INSERT ${LIST} ${old_value_INDEX} ${new_value})
+    endif()
+endmacro()
+]]
 
 
 ###############################################################################
