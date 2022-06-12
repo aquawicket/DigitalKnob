@@ -1,0 +1,1629 @@
+00_DKCore_BINARY_DIR ==           C:/Users/Administrator/digitalknob/DKTestApps/DKApps/00_DKCore/win32
+00_DKCore_DESCRIPTION ==           
+00_DKCore_HOMEPAGE_URL ==           
+00_DKCore_IS_TOP_LEVEL ==           ON
+00_DKCore_SOURCE_DIR ==           C:/Users/Administrator/digitalknob/DK/DKCMake
+3RDPARTY ==           C:/Users/Administrator/digitalknob/DK/3rdParty
+APP_NAME ==           00_DKCore
+APP_VERSION ==           22.06.11
+ARGI ==           ARGV0;ARGV1
+ARGI0 ==           CMAKE_CURRENT_FUNCTION
+ARGI1 ==           ARGN
+ARGI10 ==           ARGV10
+ARGI11 ==           ARGV11
+ARGI12 ==           ARGV12
+ARGI13 ==           ARGV13
+ARGI14 ==           ARGV14
+ARGI15 ==           ARGV15
+ARGI16 ==           ARGV16
+ARGI17 ==           ARGV17
+ARGI18 ==           ARGV18
+ARGI19 ==           ARGV19
+ARGI2 ==           ARGV2
+ARGI20 ==           ARGV20
+ARGI21 ==           ARGV21
+ARGI22 ==           ARGV22
+ARGI23 ==           ARGV23
+ARGI24 ==           ARGV24
+ARGI25 ==           ARGV25
+ARGI26 ==           ARGV26
+ARGI27 ==           ARGV27
+ARGI28 ==           ARGV28
+ARGI29 ==           ARGV29
+ARGI3 ==           ARGV3
+ARGI30 ==           ARGV30
+ARGI31 ==           ARGV31
+ARGI32 ==           ARGV32
+ARGI33 ==           ARGV33
+ARGI34 ==           ARGV34
+ARGI35 ==           ARGV35
+ARGI36 ==           ARGV36
+ARGI37 ==           ARGV37
+ARGI38 ==           ARGV38
+ARGI39 ==           ARGV39
+ARGI4 ==           ARGV4
+ARGI40 ==           ARGV40
+ARGI41 ==           ARGV41
+ARGI42 ==           ARGV42
+ARGI43 ==           ARGV43
+ARGI44 ==           ARGV44
+ARGI45 ==           ARGV45
+ARGI46 ==           ARGV46
+ARGI47 ==           ARGV68
+ARGI48 ==           ARGV48
+ARGI49 ==           ARGV49
+ARGI5 ==           ARGV5
+ARGI50 ==           ARGV50
+ARGI51 ==           ARGV51
+ARGI52 ==           ARGV52
+ARGI53 ==           ARGV53
+ARGI54 ==           ARGV54
+ARGI55 ==           ARGV55
+ARGI56 ==           ARGV56
+ARGI57 ==           ARGV57
+ARGI58 ==           ARGV58
+ARGI59 ==           ARGV59
+ARGI6 ==           ARGV6
+ARGI60 ==           ARGV60
+ARGI61 ==           ARGV61
+ARGI62 ==           ARGV62
+ARGI63 ==           ARGV63
+ARGI64 ==           ARGV64
+ARGI65 ==           ARGV2
+ARGI66 ==           ARGV66
+ARGI67 ==           ARGV67
+ARGI68 ==           ARGV47
+ARGI69 ==           ARGV69
+ARGI7 ==           ARGV7
+ARGI70 ==           ARGV70
+ARGI71 ==           ARGV71
+ARGI72 ==           ARGV72
+ARGI73 ==           ARGV73
+ARGI74 ==           ARGV74
+ARGI75 ==           ARGV75
+ARGI76 ==           ARGV76
+ARGI77 ==           ARGV77
+ARGI78 ==           ARGV78
+ARGI79 ==           ARGV79
+ARGI8 ==           ARGV8
+ARGI80 ==           ARGV80
+ARGI81 ==           ARGV81
+ARGI82 ==           name
+ARGI9 ==           ARGV9
+ASSETS ==           PATTERN;*.h;EXCLUDE;PATTERN;*.c;EXCLUDE;PATTERN;*.cmake;EXCLUDE;PATTERN;*.cpp;EXCLUDE;PATTERN;*.dir;EXCLUDE;PATTERN;*.filters;EXCLUDE;PATTERN;*.lib;EXCLUDE;PATTERN;*.manifest;EXCLUDE;PATTERN;*.mm;EXCLUDE;PATTERN;*.pdb;EXCLUDE;PATTERN;*.plist;EXCLUDE;PATTERN;*.rc;EXCLUDE;PATTERN;*.sln;EXCLUDE;PATTERN;*.tmp;EXCLUDE;PATTERN;*.TMP;EXCLUDE;PATTERN;*.temp;EXCLUDE;PATTERN;*.TEMP;EXCLUDE;PATTERN;*.vcxproj;EXCLUDE;PATTERN;CMakeFiles;EXCLUDE;PATTERN;CMakeLists.txt;EXCLUDE;PATTERN;temp.txt;EXCLUDE;PATTERN;win32;EXCLUDE;PATTERN;win64;EXCLUDE;PATTERN;mac32;EXCLUDE;PATTERN;mac64;EXCLUDE;PATTERN;ios32;EXCLUDE;PATTERN;ios64;EXCLUDE;PATTERN;iossim32;EXCLUDE;PATTERN;iossim64;EXCLUDE;PATTERN;linux32;EXCLUDE;PATTERN;linux64;EXCLUDE;PATTERN;android32;EXCLUDE;PATTERN;android64;EXCLUDE;PATTERN;raspberry32;EXCLUDE;PATTERN;raspberry64;EXCLUDE;PATTERN;dktest;EXCLUDE
+App_SRC ==           C:/Users/Administrator/digitalknob/DKTestApps/DKApps/00_DKCore/DKPlugins.h;C:/Users/Administrator/digitalknob/DKTestApps/DKApps/00_DKCore/main.cpp;C:/Users/Administrator/digitalknob/DKTestApps/DKApps/00_DKCore/resource.h;C:/Users/Administrator/digitalknob/DKTestApps/DKApps/00_DKCore/resource.rc
+BOXER ==           C:/Users/Administrator/digitalknob/DK/3rdParty/boxer-master
+BOXER_BRANCH ==           master
+BOXER_FOLDER ==           boxer
+BOXER_NAME ==           boxer-master
+BUILD ==           OFF
+BUILD_DIR ==           win32
+CMAKE ==           C:/Progra~2/CMake/bin
+CMAKE_AR ==           C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.30.30705/bin/Hostx64/x86/lib.exe
+CMAKE_AR ==           C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.30.30705/bin/Hostx64/x86/lib.exe
+CMAKE_AUTOGEN_ORIGIN_DEPENDS ==           ON
+CMAKE_AUTOMOC_COMPILER_PREDEFINES ==           ON
+CMAKE_AUTOMOC_MACRO_NAMES ==           Q_OBJECT;Q_GADGET;Q_NAMESPACE;Q_NAMESPACE_EXPORT
+CMAKE_AUTOMOC_PATH_PREFIX ==           OFF
+CMAKE_BASE_NAME ==           cl
+CMAKE_BINARY_DIR ==           C:/Users/Administrator/digitalknob/DKTestApps/DKApps/00_DKCore/win32
+CMAKE_BUILD_TOOL ==           C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe
+CMAKE_BUILD_TYPE ==           DEBUG;RELEASE
+CMAKE_BUILD_TYPE_INIT ==           Debug
+CMAKE_C11_COMPILE_FEATURES ==           c_std_11;c_static_assert
+CMAKE_C11_EXTENSION_COMPILE_OPTION ==           -std:c11
+CMAKE_C11_STANDARD_COMPILE_OPTION ==           -std:c11
+CMAKE_C17_COMPILE_FEATURES ==           
+CMAKE_C23_COMPILE_FEATURES ==           
+CMAKE_C90_COMPILE_FEATURES ==           c_std_90;c_function_prototypes
+CMAKE_C90_EXTENSION_COMPILE_OPTION ==           
+CMAKE_C90_STANDARD_COMPILE_OPTION ==           
+CMAKE_C99_COMPILE_FEATURES ==           c_std_99;c_variadic_macros;c_restrict
+CMAKE_C99_EXTENSION_COMPILE_OPTION ==           
+CMAKE_C99_STANDARD_COMPILE_OPTION ==           
+CMAKE_CFG_INTDIR ==           $(Configuration)
+CMAKE_CL_64 ==           0
+CMAKE_CL_NOLOGO ==           /nologo
+CMAKE_COMMAND ==           C:/Program Files (x86)/CMake/bin/cmake.exe
+CMAKE_CONFIGURATION_TYPES ==           Debug;Release;MinSizeRel;RelWithDebInfo
+CMAKE_CPACK_COMMAND ==           C:/Program Files (x86)/CMake/bin/cpack.exe
+CMAKE_CROSSCOMPILING ==           FALSE
+CMAKE_CTEST_COMMAND ==           C:/Program Files (x86)/CMake/bin/ctest.exe
+CMAKE_CURRENT_BINARY_DIR ==           C:/Users/Administrator/digitalknob/DKTestApps/DKApps/00_DKCore/win32
+CMAKE_CURRENT_LIST_DIR ==           C:/Users/Administrator/digitalknob/DK/DKCMake
+CMAKE_CURRENT_LIST_FILE ==           C:/Users/Administrator/digitalknob/DK/DKCMake/CMakeLists.txt
+CMAKE_CURRENT_SOURCE_DIR ==           C:/Users/Administrator/digitalknob/DK/DKCMake
+CMAKE_CXX11_COMPILE_FEATURES ==           cxx_std_11;cxx_alias_templates;cxx_alignas;cxx_alignof;cxx_attributes;cxx_auto_type;cxx_constexpr;cxx_decltype;cxx_decltype_incomplete_return_types;cxx_default_function_template_args;cxx_defaulted_functions;cxx_defaulted_move_initializers;cxx_delegating_constructors;cxx_deleted_functions;cxx_enum_forward_declarations;cxx_explicit_conversions;cxx_extended_friend_declarations;cxx_extern_templates;cxx_final;cxx_func_identifier;cxx_generalized_initializers;cxx_inheriting_constructors;cxx_inline_namespaces;cxx_lambdas;cxx_local_type_template_args;cxx_long_long_type;cxx_noexcept;cxx_nonstatic_member_init;cxx_nullptr;cxx_override;cxx_range_for;cxx_raw_string_literals;cxx_reference_qualified_functions;cxx_right_angle_brackets;cxx_rvalue_references;cxx_sizeof_member;cxx_static_assert;cxx_strong_enums;cxx_thread_local;cxx_trailing_return_types;cxx_unicode_literals;cxx_uniform_initialization;cxx_unrestricted_unions;cxx_user_literals;cxx_variadic_macros;cxx_variadic_templates
+CMAKE_CXX11_EXTENSION_COMPILE_OPTION ==           
+CMAKE_CXX11_STANDARD_COMPILE_OPTION ==           
+CMAKE_CXX11_STANDARD__HAS_FULL_SUPPORT ==           ON
+CMAKE_CXX14_COMPILE_FEATURES ==           cxx_std_14;cxx_aggregate_default_initializers;cxx_attribute_deprecated;cxx_binary_literals;cxx_contextual_conversions;cxx_decltype_auto;cxx_digit_separators;cxx_generic_lambdas;cxx_lambda_init_captures;cxx_relaxed_constexpr;cxx_return_type_deduction;cxx_variable_templates
+CMAKE_CXX14_EXTENSION_COMPILE_OPTION ==           -std:c++14
+CMAKE_CXX14_STANDARD_COMPILE_OPTION ==           -std:c++14
+CMAKE_CXX14_STANDARD__HAS_FULL_SUPPORT ==           ON
+CMAKE_CXX17_COMPILE_FEATURES ==           cxx_std_17
+CMAKE_CXX17_EXTENSION_COMPILE_OPTION ==           -std:c++17
+CMAKE_CXX17_STANDARD_COMPILE_OPTION ==           -std:c++17
+CMAKE_CXX20_COMPILE_FEATURES ==           cxx_std_20
+CMAKE_CXX20_EXTENSION_COMPILE_OPTION ==           -std:c++20
+CMAKE_CXX20_STANDARD_COMPILE_OPTION ==           -std:c++20
+CMAKE_CXX23_COMPILE_FEATURES ==           cxx_std_23
+CMAKE_CXX23_EXTENSION_COMPILE_OPTION ==           -std:c++latest
+CMAKE_CXX23_STANDARD_COMPILE_OPTION ==           -std:c++latest
+CMAKE_CXX98_COMPILE_FEATURES ==           cxx_std_98;cxx_template_template_parameters
+CMAKE_CXX98_EXTENSION_COMPILE_OPTION ==           
+CMAKE_CXX98_STANDARD_COMPILE_OPTION ==           
+CMAKE_CXX98_STANDARD__HAS_FULL_SUPPORT ==           ON
+CMAKE_CXX_ABI_COMPILED ==           TRUE
+CMAKE_CXX_ARCHIVE_APPEND ==           <CMAKE_AR> q <TARGET> <LINK_FLAGS> <OBJECTS>
+CMAKE_CXX_ARCHIVE_CREATE ==           <CMAKE_AR> qc <TARGET> <LINK_FLAGS> <OBJECTS>
+CMAKE_CXX_ARCHIVE_FINISH ==           <CMAKE_RANLIB> <TARGET>
+CMAKE_CXX_BYTE_ORDER ==           LITTLE_ENDIAN
+CMAKE_CXX_CLANG_TIDY_DRIVER_MODE ==           cl
+CMAKE_CXX_CL_SHOWINCLUDES_PREFIX ==           
+CMAKE_CXX_COMPILER ==           C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.30.30705/bin/Hostx64/x86/cl.exe
+CMAKE_CXX_COMPILER_ABI ==           
+CMAKE_CXX_COMPILER_AR ==           
+CMAKE_CXX_COMPILER_ARCHITECTURE_ID ==           X86
+CMAKE_CXX_COMPILER_ARG1 ==           
+CMAKE_CXX_COMPILER_ENV_VAR ==           CXX
+CMAKE_CXX_COMPILER_EXCLUDE ==           CC;aCC;xlC
+CMAKE_CXX_COMPILER_FRONTEND_VARIANT ==           
+CMAKE_CXX_COMPILER_ID ==           MSVC
+CMAKE_CXX_COMPILER_ID_PLATFORM_CONTENT ==           #define STRINGIFY_HELPER(X) #X
+#define STRINGIFY(X) STRINGIFY_HELPER(X)
+
+/* Identify known platforms by name.  */
+#if defined(__linux) || defined(__linux__) || defined(linux)
+# define PLATFORM_ID "Linux"
+
+#elif defined(__MSYS__)
+# define PLATFORM_ID "MSYS"
+
+#elif defined(__CYGWIN__)
+# define PLATFORM_ID "Cygwin"
+
+#elif defined(__MINGW32__)
+# define PLATFORM_ID "MinGW"
+
+#elif defined(__APPLE__)
+# define PLATFORM_ID "Darwin"
+
+#elif defined(_WIN32) || defined(__WIN32__) || defined(WIN32)
+# define PLATFORM_ID "Windows"
+
+#elif defined(__FreeBSD__) || defined(__FreeBSD)
+# define PLATFORM_ID "FreeBSD"
+
+#elif defined(__NetBSD__) || defined(__NetBSD)
+# define PLATFORM_ID "NetBSD"
+
+#elif defined(__OpenBSD__) || defined(__OPENBSD)
+# define PLATFORM_ID "OpenBSD"
+
+#elif defined(__sun) || defined(sun)
+# define PLATFORM_ID "SunOS"
+
+#elif defined(_AIX) || defined(__AIX) || defined(__AIX__) || defined(__aix) || defined(__aix__)
+# define PLATFORM_ID "AIX"
+
+#elif defined(__hpux) || defined(__hpux__)
+# define PLATFORM_ID "HP-UX"
+
+#elif defined(__HAIKU__)
+# define PLATFORM_ID "Haiku"
+
+#elif defined(__BeOS) || defined(__BEOS__) || defined(_BEOS)
+# define PLATFORM_ID "BeOS"
+
+#elif defined(__QNX__) || defined(__QNXNTO__)
+# define PLATFORM_ID "QNX"
+
+#elif defined(__tru64) || defined(_tru64) || defined(__TRU64__)
+# define PLATFORM_ID "Tru64"
+
+#elif defined(__riscos) || defined(__riscos__)
+# define PLATFORM_ID "RISCos"
+
+#elif defined(__sinix) || defined(__sinix__) || defined(__SINIX__)
+# define PLATFORM_ID "SINIX"
+
+#elif defined(__UNIX_SV__)
+# define PLATFORM_ID "UNIX_SV"
+
+#elif defined(__bsdos__)
+# define PLATFORM_ID "BSDOS"
+
+#elif defined(_MPRAS) || defined(MPRAS)
+# define PLATFORM_ID "MP-RAS"
+
+#elif defined(__osf) || defined(__osf__)
+# define PLATFORM_ID "OSF1"
+
+#elif defined(_SCO_SV) || defined(SCO_SV) || defined(sco_sv)
+# define PLATFORM_ID "SCO_SV"
+
+#elif defined(__ultrix) || defined(__ultrix__) || defined(_ULTRIX)
+# define PLATFORM_ID "ULTRIX"
+
+#elif defined(__XENIX__) || defined(_XENIX) || defined(XENIX)
+# define PLATFORM_ID "Xenix"
+
+#elif defined(__WATCOMC__)
+# if defined(__LINUX__)
+#  define PLATFORM_ID "Linux"
+
+# elif defined(__DOS__)
+#  define PLATFORM_ID "DOS"
+
+# elif defined(__OS2__)
+#  define PLATFORM_ID "OS2"
+
+# elif defined(__WINDOWS__)
+#  define PLATFORM_ID "Windows3x"
+
+# elif defined(__VXWORKS__)
+#  define PLATFORM_ID "VxWorks"
+
+# else /* unknown platform */
+#  define PLATFORM_ID
+# endif
+
+#elif defined(__INTEGRITY)
+# if defined(INT_178B)
+#  define PLATFORM_ID "Integrity178"
+
+# else /* regular Integrity */
+#  define PLATFORM_ID "Integrity"
+# endif
+
+#else /* unknown platform */
+# define PLATFORM_ID
+
+#endif
+
+/* For windows compilers MSVC and Intel we can determine
+   the architecture of the compiler being used.  This is because
+   the compilers do not have flags that can change the architecture,
+   but rather depend on which compiler is being used
+*/
+#if defined(_WIN32) && defined(_MSC_VER)
+# if defined(_M_IA64)
+#  define ARCHITECTURE_ID "IA64"
+
+# elif defined(_M_ARM64EC)
+#  define ARCHITECTURE_ID "ARM64EC"
+
+# elif defined(_M_X64) || defined(_M_AMD64)
+#  define ARCHITECTURE_ID "x64"
+
+# elif defined(_M_IX86)
+#  define ARCHITECTURE_ID "X86"
+
+# elif defined(_M_ARM64)
+#  define ARCHITECTURE_ID "ARM64"
+
+# elif defined(_M_ARM)
+#  if _M_ARM == 4
+#   define ARCHITECTURE_ID "ARMV4I"
+#  elif _M_ARM == 5
+#   define ARCHITECTURE_ID "ARMV5I"
+#  else
+#   define ARCHITECTURE_ID "ARMV" STRINGIFY(_M_ARM)
+#  endif
+
+# elif defined(_M_MIPS)
+#  define ARCHITECTURE_ID "MIPS"
+
+# elif defined(_M_SH)
+#  define ARCHITECTURE_ID "SHx"
+
+# else /* unknown architecture */
+#  define ARCHITECTURE_ID ""
+# endif
+
+#elif defined(__WATCOMC__)
+# if defined(_M_I86)
+#  define ARCHITECTURE_ID "I86"
+
+# elif defined(_M_IX86)
+#  define ARCHITECTURE_ID "X86"
+
+# else /* unknown architecture */
+#  define ARCHITECTURE_ID ""
+# endif
+
+#elif defined(__IAR_SYSTEMS_ICC__) || defined(__IAR_SYSTEMS_ICC)
+# if defined(__ICCARM__)
+#  define ARCHITECTURE_ID "ARM"
+
+# elif defined(__ICCRX__)
+#  define ARCHITECTURE_ID "RX"
+
+# elif defined(__ICCRH850__)
+#  define ARCHITECTURE_ID "RH850"
+
+# elif defined(__ICCRL78__)
+#  define ARCHITECTURE_ID "RL78"
+
+# elif defined(__ICCRISCV__)
+#  define ARCHITECTURE_ID "RISCV"
+
+# elif defined(__ICCAVR__)
+#  define ARCHITECTURE_ID "AVR"
+
+# elif defined(__ICC430__)
+#  define ARCHITECTURE_ID "MSP430"
+
+# elif defined(__ICCV850__)
+#  define ARCHITECTURE_ID "V850"
+
+# elif defined(__ICC8051__)
+#  define ARCHITECTURE_ID "8051"
+
+# elif defined(__ICCSTM8__)
+#  define ARCHITECTURE_ID "STM8"
+
+# else /* unknown architecture */
+#  define ARCHITECTURE_ID ""
+# endif
+
+#elif defined(__ghs__)
+# if defined(__PPC64__)
+#  define ARCHITECTURE_ID "PPC64"
+
+# elif defined(__ppc__)
+#  define ARCHITECTURE_ID "PPC"
+
+# elif defined(__ARM__)
+#  define ARCHITECTURE_ID "ARM"
+
+# elif defined(__x86_64__)
+#  define ARCHITECTURE_ID "x64"
+
+# elif defined(__i386__)
+#  define ARCHITECTURE_ID "X86"
+
+# else /* unknown architecture */
+#  define ARCHITECTURE_ID ""
+# endif
+
+#elif defined(__TI_COMPILER_VERSION__)
+# if defined(__TI_ARM__)
+#  define ARCHITECTURE_ID "ARM"
+
+# elif defined(__MSP430__)
+#  define ARCHITECTURE_ID "MSP430"
+
+# elif defined(__TMS320C28XX__)
+#  define ARCHITECTURE_ID "TMS320C28x"
+
+# elif defined(__TMS320C6X__) || defined(_TMS320C6X)
+#  define ARCHITECTURE_ID "TMS320C6x"
+
+# else /* unknown architecture */
+#  define ARCHITECTURE_ID ""
+# endif
+
+#else
+#  define ARCHITECTURE_ID
+#endif
+
+/* Convert integer to decimal digit literals.  */
+#define DEC(n)                   \
+  ('0' + (((n) / 10000000)%10)), \
+  ('0' + (((n) / 1000000)%10)),  \
+  ('0' + (((n) / 100000)%10)),   \
+  ('0' + (((n) / 10000)%10)),    \
+  ('0' + (((n) / 1000)%10)),     \
+  ('0' + (((n) / 100)%10)),      \
+  ('0' + (((n) / 10)%10)),       \
+  ('0' +  ((n) % 10))
+
+/* Convert integer to hex digit literals.  */
+#define HEX(n)             \
+  ('0' + ((n)>>28 & 0xF)), \
+  ('0' + ((n)>>24 & 0xF)), \
+  ('0' + ((n)>>20 & 0xF)), \
+  ('0' + ((n)>>16 & 0xF)), \
+  ('0' + ((n)>>12 & 0xF)), \
+  ('0' + ((n)>>8  & 0xF)), \
+  ('0' + ((n)>>4  & 0xF)), \
+  ('0' + ((n)     & 0xF))
+
+/* Construct a string literal encoding the version number. */
+#ifdef COMPILER_VERSION
+char const* info_version = "INFO" ":" "compiler_version[" COMPILER_VERSION "]";
+
+/* Construct a string literal encoding the version number components. */
+#elif defined(COMPILER_VERSION_MAJOR)
+char const info_version[] = {
+  'I', 'N', 'F', 'O', ':',
+  'c','o','m','p','i','l','e','r','_','v','e','r','s','i','o','n','[',
+  COMPILER_VERSION_MAJOR,
+# ifdef COMPILER_VERSION_MINOR
+  '.', COMPILER_VERSION_MINOR,
+#  ifdef COMPILER_VERSION_PATCH
+   '.', COMPILER_VERSION_PATCH,
+#   ifdef COMPILER_VERSION_TWEAK
+    '.', COMPILER_VERSION_TWEAK,
+#   endif
+#  endif
+# endif
+  ']','\0'};
+#endif
+
+/* Construct a string literal encoding the internal version number. */
+#ifdef COMPILER_VERSION_INTERNAL
+char const info_version_internal[] = {
+  'I', 'N', 'F', 'O', ':',
+  'c','o','m','p','i','l','e','r','_','v','e','r','s','i','o','n','_',
+  'i','n','t','e','r','n','a','l','[',
+  COMPILER_VERSION_INTERNAL,']','\0'};
+#elif defined(COMPILER_VERSION_INTERNAL_STR)
+char const* info_version_internal = "INFO" ":" "compiler_version_internal[" COMPILER_VERSION_INTERNAL_STR "]";
+#endif
+
+/* Construct a string literal encoding the version number components. */
+#ifdef SIMULATE_VERSION_MAJOR
+char const info_simulate_version[] = {
+  'I', 'N', 'F', 'O', ':',
+  's','i','m','u','l','a','t','e','_','v','e','r','s','i','o','n','[',
+  SIMULATE_VERSION_MAJOR,
+# ifdef SIMULATE_VERSION_MINOR
+  '.', SIMULATE_VERSION_MINOR,
+#  ifdef SIMULATE_VERSION_PATCH
+   '.', SIMULATE_VERSION_PATCH,
+#   ifdef SIMULATE_VERSION_TWEAK
+    '.', SIMULATE_VERSION_TWEAK,
+#   endif
+#  endif
+# endif
+  ']','\0'};
+#endif
+
+/* Construct the string literal in pieces to prevent the source from
+   getting matched.  Store it in a pointer rather than an array
+   because some compilers will just produce instructions to fill the
+   array rather than assigning a pointer to a static array.  */
+char const* info_platform = "INFO" ":" "platform[" PLATFORM_ID "]";
+char const* info_arch = "INFO" ":" "arch[" ARCHITECTURE_ID "]";
+
+CMAKE_CXX_COMPILER_ID_RUN ==           1
+CMAKE_CXX_COMPILER_ID_TOOL_MATCH_INDEX ==           2
+CMAKE_CXX_COMPILER_ID_TOOL_MATCH_REGEX ==           
+Ld[^
+]*(
+[ 	]+[^
+]*)*
+[ 	]+([^ 	
+]+)[^
+]*-o[^
+]*CompilerIdCXX/(\./)?(CompilerIdCXX.(framework|xctest|build/[^ 	
+]+)/)?CompilerIdCXX[ 	
+\"]
+CMAKE_CXX_COMPILER_ID_VENDORS ==           IAR
+CMAKE_CXX_COMPILER_ID_VENDOR_REGEX_IAR ==           IAR .+ Compiler
+CMAKE_CXX_COMPILER_LOADED ==           1
+CMAKE_CXX_COMPILER_NAMES ==           c++
+CMAKE_CXX_COMPILER_PRODUCED_FILES ==           CompilerIdCXX.exe;CompilerIdCXX.vcxproj
+CMAKE_CXX_COMPILER_PRODUCED_OUTPUT ==           Microsoft (R) Build Engine version 17.0.0+c9eb9dd64 for .NET Framework
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Build started 6/11/2022 7:07:03 PM.
+Project "C:\Users\Administrator\digitalknob\DKTestApps\DKApps\00_DKCore\win32\CMakeFiles\3.21.1\CompilerIdCXX\CompilerIdCXX.vcxproj" on node 1 (default targets).
+PrepareForBuild:
+  Creating directory "Debug\".
+  Creating directory "Debug\CompilerIdCXX.tlog\".
+InitializeBuildStatus:
+  Creating "Debug\CompilerIdCXX.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
+ClCompile:
+  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.30.30705\bin\HostX64\x86\CL.exe /c /nologo /W0 /WX- /diagnostics:column /Od /Oy- /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\" /Fd"Debug\vc143.pdb" /external:W0 /Gd /TP /analyze- /FC /errorReport:queue CMakeCXXCompilerId.cpp
+  CMakeCXXCompilerId.cpp
+Link:
+  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.30.30705\bin\HostX64\x86\link.exe /ERRORREPORT:QUEUE /OUT:".\CompilerIdCXX.exe" /INCREMENTAL:NO /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /PDB:".\CompilerIdCXX.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:".\CompilerIdCXX.lib" /MACHINE:X86 /SAFESEH Debug\CMakeCXXCompilerId.obj
+  CompilerIdCXX.vcxproj -> C:\Users\Administrator\digitalknob\DKTestApps\DKApps\00_DKCore\win32\CMakeFiles\3.21.1\CompilerIdCXX\CompilerIdCXX.exe
+PostBuildEvent:
+  for %%i in (cl.exe) do @echo CMAKE_CXX_COMPILER=%%~$PATH:i
+  :VCEnd
+  CMAKE_CXX_COMPILER=C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.30.30705\bin\Hostx64\x86\cl.exe
+FinalizeBuildStatus:
+  Deleting file "Debug\CompilerIdCXX.tlog\unsuccessfulbuild".
+  Touching "Debug\CompilerIdCXX.tlog\CompilerIdCXX.lastbuildstate".
+Done Building Project "C:\Users\Administrator\digitalknob\DKTestApps\DKApps\00_DKCore\win32\CMakeFiles\3.21.1\CompilerIdCXX\CompilerIdCXX.vcxproj" (default targets).
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:00.71
+
+CMAKE_CXX_COMPILER_RANLIB ==           
+CMAKE_CXX_COMPILER_VERSION ==           19.30.30709.0
+CMAKE_CXX_COMPILER_VERSION_INTERNAL ==           
+CMAKE_CXX_COMPILER_WORKS ==           TRUE
+CMAKE_CXX_COMPILER_WRAPPER ==           
+CMAKE_CXX_COMPILE_FEATURES ==           cxx_std_98;cxx_template_template_parameters;cxx_std_11;cxx_alias_templates;cxx_alignas;cxx_alignof;cxx_attributes;cxx_auto_type;cxx_constexpr;cxx_decltype;cxx_decltype_incomplete_return_types;cxx_default_function_template_args;cxx_defaulted_functions;cxx_defaulted_move_initializers;cxx_delegating_constructors;cxx_deleted_functions;cxx_enum_forward_declarations;cxx_explicit_conversions;cxx_extended_friend_declarations;cxx_extern_templates;cxx_final;cxx_func_identifier;cxx_generalized_initializers;cxx_inheriting_constructors;cxx_inline_namespaces;cxx_lambdas;cxx_local_type_template_args;cxx_long_long_type;cxx_noexcept;cxx_nonstatic_member_init;cxx_nullptr;cxx_override;cxx_range_for;cxx_raw_string_literals;cxx_reference_qualified_functions;cxx_right_angle_brackets;cxx_rvalue_references;cxx_sizeof_member;cxx_static_assert;cxx_strong_enums;cxx_thread_local;cxx_trailing_return_types;cxx_unicode_literals;cxx_uniform_initialization;cxx_unrestricted_unions;cxx_user_literals;cxx_variadic_macros;cxx_variadic_templates;cxx_std_14;cxx_aggregate_default_initializers;cxx_attribute_deprecated;cxx_binary_literals;cxx_contextual_conversions;cxx_decltype_auto;cxx_digit_separators;cxx_generic_lambdas;cxx_lambda_init_captures;cxx_relaxed_constexpr;cxx_return_type_deduction;cxx_variable_templates;cxx_std_17;cxx_std_20;cxx_std_23
+CMAKE_CXX_COMPILE_OBJECT ==           <CMAKE_CXX_COMPILER>  /nologo /TP <DEFINES> <INCLUDES> <FLAGS> /Fo<OBJECT> /Fd<TARGET_COMPILE_PDB> /FS -c <SOURCE>
+CMAKE_CXX_COMPILE_OPTIONS_CREATE_PCH ==           /Yc<PCH_HEADER>;/Fp<PCH_FILE>;/FI<PCH_HEADER>
+CMAKE_CXX_COMPILE_OPTIONS_IPO ==           /GL
+CMAKE_CXX_COMPILE_OPTIONS_JMC ==           -JMC
+CMAKE_CXX_COMPILE_OPTIONS_MSVC_RUNTIME_LIBRARY_MultiThreaded ==           -MT
+CMAKE_CXX_COMPILE_OPTIONS_MSVC_RUNTIME_LIBRARY_MultiThreadedDLL ==           -MD
+CMAKE_CXX_COMPILE_OPTIONS_MSVC_RUNTIME_LIBRARY_MultiThreadedDebug ==           -MTd
+CMAKE_CXX_COMPILE_OPTIONS_MSVC_RUNTIME_LIBRARY_MultiThreadedDebugDLL ==           -MDd
+CMAKE_CXX_COMPILE_OPTIONS_USE_PCH ==           /Yu<PCH_HEADER>;/Fp<PCH_FILE>;/FI<PCH_HEADER>
+CMAKE_CXX_CREATE_ASSEMBLY_SOURCE ==           <CMAKE_CXX_COMPILER>  /nologo /TP <DEFINES> <INCLUDES> <FLAGS> /FoNUL /FAs /Fa<ASSEMBLY_SOURCE> /c <SOURCE>
+CMAKE_CXX_CREATE_CONSOLE_EXE ==           /subsystem:console
+CMAKE_CXX_CREATE_PREPROCESSED_SOURCE ==           <CMAKE_CXX_COMPILER> > <PREPROCESSED_SOURCE>  /nologo /TP <DEFINES> <INCLUDES> <FLAGS> -E <SOURCE>
+CMAKE_CXX_CREATE_SHARED_LIBRARY ==           <CMAKE_COMMAND> -E vs_link_dll --intdir=<OBJECT_DIR> --rc=<CMAKE_RC_COMPILER> --mt=<CMAKE_MT> --manifests <MANIFESTS> -- <CMAKE_LINKER> /nologo <OBJECTS>  /out:<TARGET> /implib:<TARGET_IMPLIB> /pdb:<TARGET_PDB> /dll /version:<TARGET_VERSION_MAJOR>.<TARGET_VERSION_MINOR> <LINK_FLAGS> <LINK_LIBRARIES> 
+CMAKE_CXX_CREATE_SHARED_MODULE ==           <CMAKE_COMMAND> -E vs_link_dll --intdir=<OBJECT_DIR> --rc=<CMAKE_RC_COMPILER> --mt=<CMAKE_MT> --manifests <MANIFESTS> -- <CMAKE_LINKER> /nologo <OBJECTS>  /out:<TARGET> /implib:<TARGET_IMPLIB> /pdb:<TARGET_PDB> /dll /version:<TARGET_VERSION_MAJOR>.<TARGET_VERSION_MINOR> <LINK_FLAGS> <LINK_LIBRARIES> 
+CMAKE_CXX_CREATE_STATIC_LIBRARY ==           <CMAKE_AR> /nologo <LINK_FLAGS> /out:<TARGET> <OBJECTS> 
+CMAKE_CXX_CREATE_STATIC_LIBRARY_IPO ==           <CMAKE_AR> /nologo /LTCG <LINK_FLAGS> /out:<TARGET> <OBJECTS> 
+CMAKE_CXX_CREATE_WIN32_EXE ==           /subsystem:windows
+CMAKE_CXX_DEPFILE_FORMAT ==           msvc
+CMAKE_CXX_FLAGS ==           /DWIN32 /D_WINDOWS /W3 /GR /EHsc /DWIN /DWIN32 /D_WINDOWS /D_CRT_SECURE_NO_WARNINGS /D_USING_V110_SDK71_ /std:c++17 /nologo /GR /EHsc /Zm500 /Zc:__cplusplus /W3 /wd4244 /wd5105
+CMAKE_CXX_FLAGS_DEBUG ==           /MDd /Zi /Ob0 /Od /RTC1 /MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG
+CMAKE_CXX_FLAGS_DEBUG_INIT ==            /MDd /Zi /Ob0 /Od /RTC1
+CMAKE_CXX_FLAGS_INIT ==             /DWIN32 /D_WINDOWS /W3 /GR /EHsc
+CMAKE_CXX_FLAGS_MINSIZEREL ==           /MD /O1 /Ob1 /DNDEBUG
+CMAKE_CXX_FLAGS_MINSIZEREL_INIT ==            /MD /O1 /Ob1 /DNDEBUG
+CMAKE_CXX_FLAGS_RELEASE ==           /MD /O2 /Ob2 /DNDEBUG /MT /O2 /Ob2 /DNDEBUG /DRELEASE
+CMAKE_CXX_FLAGS_RELEASE_INIT ==            /MD /O2 /Ob2 /DNDEBUG
+CMAKE_CXX_FLAGS_RELWITHDEBINFO ==           /MD /Zi /O2 /Ob1 /DNDEBUG
+CMAKE_CXX_FLAGS_RELWITHDEBINFO_INIT ==            /MD /Zi /O2 /Ob1 /DNDEBUG
+CMAKE_CXX_IGNORE_EXTENSIONS ==           inl;h;hpp;HPP;H;o;O;obj;OBJ;def;DEF;rc;RC
+CMAKE_CXX_IMPLICIT_INCLUDE_DIRECTORIES ==           
+CMAKE_CXX_IMPLICIT_LINK_DIRECTORIES ==           
+CMAKE_CXX_IMPLICIT_LINK_FRAMEWORK_DIRECTORIES ==           
+CMAKE_CXX_IMPLICIT_LINK_LIBRARIES ==           
+CMAKE_CXX_INFORMATION_LOADED ==           1
+CMAKE_CXX_LIBRARY_ARCHITECTURE ==           
+CMAKE_CXX_LINKER_PREFERENCE ==           30
+CMAKE_CXX_LINKER_PREFERENCE_PROPAGATES ==           1
+CMAKE_CXX_LINKER_SUPPORTS_PDB ==           ON
+CMAKE_CXX_LINK_EXECUTABLE ==           <CMAKE_COMMAND> -E vs_link_exe --intdir=<OBJECT_DIR> --rc=<CMAKE_RC_COMPILER> --mt=<CMAKE_MT> --manifests <MANIFESTS> -- <CMAKE_LINKER> /nologo <OBJECTS>  /out:<TARGET> /implib:<TARGET_IMPLIB> /pdb:<TARGET_PDB> /version:<TARGET_VERSION_MAJOR>.<TARGET_VERSION_MINOR> <CMAKE_CXX_LINK_FLAGS> <LINK_FLAGS> <LINK_LIBRARIES>
+CMAKE_CXX_LINK_OPTIONS_IPO ==           /INCREMENTAL:NO;/LTCG
+CMAKE_CXX_OUTPUT_EXTENSION ==           .obj
+CMAKE_CXX_PLATFORM_ID ==           Windows
+CMAKE_CXX_SIMULATE_ID ==           
+CMAKE_CXX_SIMULATE_VERSION ==           
+CMAKE_CXX_SIZEOF_DATA_PTR ==           4
+CMAKE_CXX_SOURCE_FILE_EXTENSIONS ==           C;M;c++;cc;cpp;cxx;mm;mpp;CPP;ixx;cppm
+CMAKE_CXX_STANDARD_COMPUTED_DEFAULT ==           14
+CMAKE_CXX_STANDARD_DEFAULT ==           14
+CMAKE_CXX_STANDARD_LIBRARIES ==           kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib
+CMAKE_CXX_STANDARD_LIBRARIES_INIT ==           kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib
+CMAKE_CXX_USE_RESPONSE_FILE_FOR_OBJECTS ==           1
+CMAKE_CXX_XCODE_ARCHS ==           
+CMAKE_C_ABI_COMPILED ==           TRUE
+CMAKE_C_ARCHIVE_APPEND ==           <CMAKE_AR> q <TARGET> <LINK_FLAGS> <OBJECTS>
+CMAKE_C_ARCHIVE_CREATE ==           <CMAKE_AR> qc <TARGET> <LINK_FLAGS> <OBJECTS>
+CMAKE_C_ARCHIVE_FINISH ==           <CMAKE_RANLIB> <TARGET>
+CMAKE_C_BYTE_ORDER ==           LITTLE_ENDIAN
+CMAKE_C_CLANG_TIDY_DRIVER_MODE ==           cl
+CMAKE_C_CL_SHOWINCLUDES_PREFIX ==           
+CMAKE_C_COMPILER ==           C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.30.30705/bin/Hostx64/x86/cl.exe
+CMAKE_C_COMPILER_ABI ==           
+CMAKE_C_COMPILER_AR ==           
+CMAKE_C_COMPILER_ARCHITECTURE_ID ==           X86
+CMAKE_C_COMPILER_ARG1 ==           
+CMAKE_C_COMPILER_ENV_VAR ==           CC
+CMAKE_C_COMPILER_FRONTEND_VARIANT ==           
+CMAKE_C_COMPILER_ID ==           MSVC
+CMAKE_C_COMPILER_ID_PLATFORM_CONTENT ==           #define STRINGIFY_HELPER(X) #X
+#define STRINGIFY(X) STRINGIFY_HELPER(X)
+
+/* Identify known platforms by name.  */
+#if defined(__linux) || defined(__linux__) || defined(linux)
+# define PLATFORM_ID "Linux"
+
+#elif defined(__MSYS__)
+# define PLATFORM_ID "MSYS"
+
+#elif defined(__CYGWIN__)
+# define PLATFORM_ID "Cygwin"
+
+#elif defined(__MINGW32__)
+# define PLATFORM_ID "MinGW"
+
+#elif defined(__APPLE__)
+# define PLATFORM_ID "Darwin"
+
+#elif defined(_WIN32) || defined(__WIN32__) || defined(WIN32)
+# define PLATFORM_ID "Windows"
+
+#elif defined(__FreeBSD__) || defined(__FreeBSD)
+# define PLATFORM_ID "FreeBSD"
+
+#elif defined(__NetBSD__) || defined(__NetBSD)
+# define PLATFORM_ID "NetBSD"
+
+#elif defined(__OpenBSD__) || defined(__OPENBSD)
+# define PLATFORM_ID "OpenBSD"
+
+#elif defined(__sun) || defined(sun)
+# define PLATFORM_ID "SunOS"
+
+#elif defined(_AIX) || defined(__AIX) || defined(__AIX__) || defined(__aix) || defined(__aix__)
+# define PLATFORM_ID "AIX"
+
+#elif defined(__hpux) || defined(__hpux__)
+# define PLATFORM_ID "HP-UX"
+
+#elif defined(__HAIKU__)
+# define PLATFORM_ID "Haiku"
+
+#elif defined(__BeOS) || defined(__BEOS__) || defined(_BEOS)
+# define PLATFORM_ID "BeOS"
+
+#elif defined(__QNX__) || defined(__QNXNTO__)
+# define PLATFORM_ID "QNX"
+
+#elif defined(__tru64) || defined(_tru64) || defined(__TRU64__)
+# define PLATFORM_ID "Tru64"
+
+#elif defined(__riscos) || defined(__riscos__)
+# define PLATFORM_ID "RISCos"
+
+#elif defined(__sinix) || defined(__sinix__) || defined(__SINIX__)
+# define PLATFORM_ID "SINIX"
+
+#elif defined(__UNIX_SV__)
+# define PLATFORM_ID "UNIX_SV"
+
+#elif defined(__bsdos__)
+# define PLATFORM_ID "BSDOS"
+
+#elif defined(_MPRAS) || defined(MPRAS)
+# define PLATFORM_ID "MP-RAS"
+
+#elif defined(__osf) || defined(__osf__)
+# define PLATFORM_ID "OSF1"
+
+#elif defined(_SCO_SV) || defined(SCO_SV) || defined(sco_sv)
+# define PLATFORM_ID "SCO_SV"
+
+#elif defined(__ultrix) || defined(__ultrix__) || defined(_ULTRIX)
+# define PLATFORM_ID "ULTRIX"
+
+#elif defined(__XENIX__) || defined(_XENIX) || defined(XENIX)
+# define PLATFORM_ID "Xenix"
+
+#elif defined(__WATCOMC__)
+# if defined(__LINUX__)
+#  define PLATFORM_ID "Linux"
+
+# elif defined(__DOS__)
+#  define PLATFORM_ID "DOS"
+
+# elif defined(__OS2__)
+#  define PLATFORM_ID "OS2"
+
+# elif defined(__WINDOWS__)
+#  define PLATFORM_ID "Windows3x"
+
+# elif defined(__VXWORKS__)
+#  define PLATFORM_ID "VxWorks"
+
+# else /* unknown platform */
+#  define PLATFORM_ID
+# endif
+
+#elif defined(__INTEGRITY)
+# if defined(INT_178B)
+#  define PLATFORM_ID "Integrity178"
+
+# else /* regular Integrity */
+#  define PLATFORM_ID "Integrity"
+# endif
+
+#else /* unknown platform */
+# define PLATFORM_ID
+
+#endif
+
+/* For windows compilers MSVC and Intel we can determine
+   the architecture of the compiler being used.  This is because
+   the compilers do not have flags that can change the architecture,
+   but rather depend on which compiler is being used
+*/
+#if defined(_WIN32) && defined(_MSC_VER)
+# if defined(_M_IA64)
+#  define ARCHITECTURE_ID "IA64"
+
+# elif defined(_M_ARM64EC)
+#  define ARCHITECTURE_ID "ARM64EC"
+
+# elif defined(_M_X64) || defined(_M_AMD64)
+#  define ARCHITECTURE_ID "x64"
+
+# elif defined(_M_IX86)
+#  define ARCHITECTURE_ID "X86"
+
+# elif defined(_M_ARM64)
+#  define ARCHITECTURE_ID "ARM64"
+
+# elif defined(_M_ARM)
+#  if _M_ARM == 4
+#   define ARCHITECTURE_ID "ARMV4I"
+#  elif _M_ARM == 5
+#   define ARCHITECTURE_ID "ARMV5I"
+#  else
+#   define ARCHITECTURE_ID "ARMV" STRINGIFY(_M_ARM)
+#  endif
+
+# elif defined(_M_MIPS)
+#  define ARCHITECTURE_ID "MIPS"
+
+# elif defined(_M_SH)
+#  define ARCHITECTURE_ID "SHx"
+
+# else /* unknown architecture */
+#  define ARCHITECTURE_ID ""
+# endif
+
+#elif defined(__WATCOMC__)
+# if defined(_M_I86)
+#  define ARCHITECTURE_ID "I86"
+
+# elif defined(_M_IX86)
+#  define ARCHITECTURE_ID "X86"
+
+# else /* unknown architecture */
+#  define ARCHITECTURE_ID ""
+# endif
+
+#elif defined(__IAR_SYSTEMS_ICC__) || defined(__IAR_SYSTEMS_ICC)
+# if defined(__ICCARM__)
+#  define ARCHITECTURE_ID "ARM"
+
+# elif defined(__ICCRX__)
+#  define ARCHITECTURE_ID "RX"
+
+# elif defined(__ICCRH850__)
+#  define ARCHITECTURE_ID "RH850"
+
+# elif defined(__ICCRL78__)
+#  define ARCHITECTURE_ID "RL78"
+
+# elif defined(__ICCRISCV__)
+#  define ARCHITECTURE_ID "RISCV"
+
+# elif defined(__ICCAVR__)
+#  define ARCHITECTURE_ID "AVR"
+
+# elif defined(__ICC430__)
+#  define ARCHITECTURE_ID "MSP430"
+
+# elif defined(__ICCV850__)
+#  define ARCHITECTURE_ID "V850"
+
+# elif defined(__ICC8051__)
+#  define ARCHITECTURE_ID "8051"
+
+# elif defined(__ICCSTM8__)
+#  define ARCHITECTURE_ID "STM8"
+
+# else /* unknown architecture */
+#  define ARCHITECTURE_ID ""
+# endif
+
+#elif defined(__ghs__)
+# if defined(__PPC64__)
+#  define ARCHITECTURE_ID "PPC64"
+
+# elif defined(__ppc__)
+#  define ARCHITECTURE_ID "PPC"
+
+# elif defined(__ARM__)
+#  define ARCHITECTURE_ID "ARM"
+
+# elif defined(__x86_64__)
+#  define ARCHITECTURE_ID "x64"
+
+# elif defined(__i386__)
+#  define ARCHITECTURE_ID "X86"
+
+# else /* unknown architecture */
+#  define ARCHITECTURE_ID ""
+# endif
+
+#elif defined(__TI_COMPILER_VERSION__)
+# if defined(__TI_ARM__)
+#  define ARCHITECTURE_ID "ARM"
+
+# elif defined(__MSP430__)
+#  define ARCHITECTURE_ID "MSP430"
+
+# elif defined(__TMS320C28XX__)
+#  define ARCHITECTURE_ID "TMS320C28x"
+
+# elif defined(__TMS320C6X__) || defined(_TMS320C6X)
+#  define ARCHITECTURE_ID "TMS320C6x"
+
+# else /* unknown architecture */
+#  define ARCHITECTURE_ID ""
+# endif
+
+#else
+#  define ARCHITECTURE_ID
+#endif
+
+/* Convert integer to decimal digit literals.  */
+#define DEC(n)                   \
+  ('0' + (((n) / 10000000)%10)), \
+  ('0' + (((n) / 1000000)%10)),  \
+  ('0' + (((n) / 100000)%10)),   \
+  ('0' + (((n) / 10000)%10)),    \
+  ('0' + (((n) / 1000)%10)),     \
+  ('0' + (((n) / 100)%10)),      \
+  ('0' + (((n) / 10)%10)),       \
+  ('0' +  ((n) % 10))
+
+/* Convert integer to hex digit literals.  */
+#define HEX(n)             \
+  ('0' + ((n)>>28 & 0xF)), \
+  ('0' + ((n)>>24 & 0xF)), \
+  ('0' + ((n)>>20 & 0xF)), \
+  ('0' + ((n)>>16 & 0xF)), \
+  ('0' + ((n)>>12 & 0xF)), \
+  ('0' + ((n)>>8  & 0xF)), \
+  ('0' + ((n)>>4  & 0xF)), \
+  ('0' + ((n)     & 0xF))
+
+/* Construct a string literal encoding the version number. */
+#ifdef COMPILER_VERSION
+char const* info_version = "INFO" ":" "compiler_version[" COMPILER_VERSION "]";
+
+/* Construct a string literal encoding the version number components. */
+#elif defined(COMPILER_VERSION_MAJOR)
+char const info_version[] = {
+  'I', 'N', 'F', 'O', ':',
+  'c','o','m','p','i','l','e','r','_','v','e','r','s','i','o','n','[',
+  COMPILER_VERSION_MAJOR,
+# ifdef COMPILER_VERSION_MINOR
+  '.', COMPILER_VERSION_MINOR,
+#  ifdef COMPILER_VERSION_PATCH
+   '.', COMPILER_VERSION_PATCH,
+#   ifdef COMPILER_VERSION_TWEAK
+    '.', COMPILER_VERSION_TWEAK,
+#   endif
+#  endif
+# endif
+  ']','\0'};
+#endif
+
+/* Construct a string literal encoding the internal version number. */
+#ifdef COMPILER_VERSION_INTERNAL
+char const info_version_internal[] = {
+  'I', 'N', 'F', 'O', ':',
+  'c','o','m','p','i','l','e','r','_','v','e','r','s','i','o','n','_',
+  'i','n','t','e','r','n','a','l','[',
+  COMPILER_VERSION_INTERNAL,']','\0'};
+#elif defined(COMPILER_VERSION_INTERNAL_STR)
+char const* info_version_internal = "INFO" ":" "compiler_version_internal[" COMPILER_VERSION_INTERNAL_STR "]";
+#endif
+
+/* Construct a string literal encoding the version number components. */
+#ifdef SIMULATE_VERSION_MAJOR
+char const info_simulate_version[] = {
+  'I', 'N', 'F', 'O', ':',
+  's','i','m','u','l','a','t','e','_','v','e','r','s','i','o','n','[',
+  SIMULATE_VERSION_MAJOR,
+# ifdef SIMULATE_VERSION_MINOR
+  '.', SIMULATE_VERSION_MINOR,
+#  ifdef SIMULATE_VERSION_PATCH
+   '.', SIMULATE_VERSION_PATCH,
+#   ifdef SIMULATE_VERSION_TWEAK
+    '.', SIMULATE_VERSION_TWEAK,
+#   endif
+#  endif
+# endif
+  ']','\0'};
+#endif
+
+/* Construct the string literal in pieces to prevent the source from
+   getting matched.  Store it in a pointer rather than an array
+   because some compilers will just produce instructions to fill the
+   array rather than assigning a pointer to a static array.  */
+char const* info_platform = "INFO" ":" "platform[" PLATFORM_ID "]";
+char const* info_arch = "INFO" ":" "arch[" ARCHITECTURE_ID "]";
+
+CMAKE_C_COMPILER_ID_RUN ==           1
+CMAKE_C_COMPILER_ID_TOOL_MATCH_INDEX ==           2
+CMAKE_C_COMPILER_ID_TOOL_MATCH_REGEX ==           
+Ld[^
+]*(
+[ 	]+[^
+]*)*
+[ 	]+([^ 	
+]+)[^
+]*-o[^
+]*CompilerIdC/(\./)?(CompilerIdC.(framework|xctest|build/[^ 	
+]+)/)?CompilerIdC[ 	
+\"]
+CMAKE_C_COMPILER_ID_VENDORS ==           IAR
+CMAKE_C_COMPILER_ID_VENDOR_REGEX_IAR ==           IAR .+ Compiler
+CMAKE_C_COMPILER_LOADED ==           1
+CMAKE_C_COMPILER_NAMES ==           cc
+CMAKE_C_COMPILER_PRODUCED_FILES ==           CompilerIdC.exe;CompilerIdC.vcxproj
+CMAKE_C_COMPILER_PRODUCED_OUTPUT ==           Microsoft (R) Build Engine version 17.0.0+c9eb9dd64 for .NET Framework
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Build started 6/11/2022 7:07:02 PM.
+Project "C:\Users\Administrator\digitalknob\DKTestApps\DKApps\00_DKCore\win32\CMakeFiles\3.21.1\CompilerIdC\CompilerIdC.vcxproj" on node 1 (default targets).
+PrepareForBuild:
+  Creating directory "Debug\".
+  Creating directory "Debug\CompilerIdC.tlog\".
+InitializeBuildStatus:
+  Creating "Debug\CompilerIdC.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
+ClCompile:
+  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.30.30705\bin\HostX64\x86\CL.exe /c /nologo /W0 /WX- /diagnostics:column /Od /Oy- /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\" /Fd"Debug\vc143.pdb" /external:W0 /Gd /TC /analyze- /FC /errorReport:queue CMakeCCompilerId.c
+  CMakeCCompilerId.c
+Link:
+  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.30.30705\bin\HostX64\x86\link.exe /ERRORREPORT:QUEUE /OUT:".\CompilerIdC.exe" /INCREMENTAL:NO /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /PDB:".\CompilerIdC.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:".\CompilerIdC.lib" /MACHINE:X86 /SAFESEH Debug\CMakeCCompilerId.obj
+  CompilerIdC.vcxproj -> C:\Users\Administrator\digitalknob\DKTestApps\DKApps\00_DKCore\win32\CMakeFiles\3.21.1\CompilerIdC\CompilerIdC.exe
+PostBuildEvent:
+  for %%i in (cl.exe) do @echo CMAKE_C_COMPILER=%%~$PATH:i
+  :VCEnd
+  CMAKE_C_COMPILER=C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.30.30705\bin\Hostx64\x86\cl.exe
+FinalizeBuildStatus:
+  Deleting file "Debug\CompilerIdC.tlog\unsuccessfulbuild".
+  Touching "Debug\CompilerIdC.tlog\CompilerIdC.lastbuildstate".
+Done Building Project "C:\Users\Administrator\digitalknob\DKTestApps\DKApps\00_DKCore\win32\CMakeFiles\3.21.1\CompilerIdC\CompilerIdC.vcxproj" (default targets).
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:00.99
+
+CMAKE_C_COMPILER_RANLIB ==           
+CMAKE_C_COMPILER_VERSION ==           19.30.30709.0
+CMAKE_C_COMPILER_VERSION_INTERNAL ==           
+CMAKE_C_COMPILER_WORKS ==           TRUE
+CMAKE_C_COMPILER_WRAPPER ==           
+CMAKE_C_COMPILE_FEATURES ==           c_std_90;c_std_99;c_std_11;c_function_prototypes;c_variadic_macros;c_restrict;c_static_assert
+CMAKE_C_COMPILE_OBJECT ==           <CMAKE_C_COMPILER>  /nologo <DEFINES> <INCLUDES> <FLAGS> /Fo<OBJECT> /Fd<TARGET_COMPILE_PDB> /FS -c <SOURCE>
+CMAKE_C_COMPILE_OPTIONS_CREATE_PCH ==           /Yc<PCH_HEADER>;/Fp<PCH_FILE>;/FI<PCH_HEADER>
+CMAKE_C_COMPILE_OPTIONS_EXPLICIT_LANGUAGE ==           -TC
+CMAKE_C_COMPILE_OPTIONS_IPO ==           /GL
+CMAKE_C_COMPILE_OPTIONS_JMC ==           -JMC
+CMAKE_C_COMPILE_OPTIONS_MSVC_RUNTIME_LIBRARY_MultiThreaded ==           -MT
+CMAKE_C_COMPILE_OPTIONS_MSVC_RUNTIME_LIBRARY_MultiThreadedDLL ==           -MD
+CMAKE_C_COMPILE_OPTIONS_MSVC_RUNTIME_LIBRARY_MultiThreadedDebug ==           -MTd
+CMAKE_C_COMPILE_OPTIONS_MSVC_RUNTIME_LIBRARY_MultiThreadedDebugDLL ==           -MDd
+CMAKE_C_COMPILE_OPTIONS_USE_PCH ==           /Yu<PCH_HEADER>;/Fp<PCH_FILE>;/FI<PCH_HEADER>
+CMAKE_C_CREATE_ASSEMBLY_SOURCE ==           <CMAKE_C_COMPILER>  /nologo <DEFINES> <INCLUDES> <FLAGS> /FoNUL /FAs /Fa<ASSEMBLY_SOURCE> /c <SOURCE>
+CMAKE_C_CREATE_CONSOLE_EXE ==           /subsystem:console
+CMAKE_C_CREATE_PREPROCESSED_SOURCE ==           <CMAKE_C_COMPILER> > <PREPROCESSED_SOURCE>  /nologo <DEFINES> <INCLUDES> <FLAGS> -E <SOURCE>
+CMAKE_C_CREATE_SHARED_LIBRARY ==           <CMAKE_COMMAND> -E vs_link_dll --intdir=<OBJECT_DIR> --rc=<CMAKE_RC_COMPILER> --mt=<CMAKE_MT> --manifests <MANIFESTS> -- <CMAKE_LINKER> /nologo <OBJECTS>  /out:<TARGET> /implib:<TARGET_IMPLIB> /pdb:<TARGET_PDB> /dll /version:<TARGET_VERSION_MAJOR>.<TARGET_VERSION_MINOR> <LINK_FLAGS> <LINK_LIBRARIES> 
+CMAKE_C_CREATE_SHARED_MODULE ==           <CMAKE_COMMAND> -E vs_link_dll --intdir=<OBJECT_DIR> --rc=<CMAKE_RC_COMPILER> --mt=<CMAKE_MT> --manifests <MANIFESTS> -- <CMAKE_LINKER> /nologo <OBJECTS>  /out:<TARGET> /implib:<TARGET_IMPLIB> /pdb:<TARGET_PDB> /dll /version:<TARGET_VERSION_MAJOR>.<TARGET_VERSION_MINOR> <LINK_FLAGS> <LINK_LIBRARIES> 
+CMAKE_C_CREATE_STATIC_LIBRARY ==           <CMAKE_AR> /nologo <LINK_FLAGS> /out:<TARGET> <OBJECTS> 
+CMAKE_C_CREATE_STATIC_LIBRARY_IPO ==           <CMAKE_AR> /nologo /LTCG <LINK_FLAGS> /out:<TARGET> <OBJECTS> 
+CMAKE_C_CREATE_WIN32_EXE ==           /subsystem:windows
+CMAKE_C_DEPFILE_FORMAT ==           msvc
+CMAKE_C_FLAGS ==           /DWIN32 /D_WINDOWS /W3 /DWIN /DWIN32 /D_WINDOWS /D_CRT_SECURE_NO_WARNINGS /D_USING_V110_SDK71_ /std:c17 /nologo /GR /EHsc /Zm500 /Zc:__cplusplus /W3 /wd4244 /wd5105
+CMAKE_C_FLAGS_DEBUG ==           /MDd /Zi /Ob0 /Od /RTC1 /MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG
+CMAKE_C_FLAGS_DEBUG_INIT ==            /MDd /Zi /Ob0 /Od /RTC1
+CMAKE_C_FLAGS_INIT ==             /DWIN32 /D_WINDOWS /W3
+CMAKE_C_FLAGS_MINSIZEREL ==           /MD /O1 /Ob1 /DNDEBUG
+CMAKE_C_FLAGS_MINSIZEREL_INIT ==            /MD /O1 /Ob1 /DNDEBUG
+CMAKE_C_FLAGS_RELEASE ==           /MD /O2 /Ob2 /DNDEBUG /MT /O2 /Ob2 /DNDEBUG /DRELEASE
+CMAKE_C_FLAGS_RELEASE_INIT ==            /MD /O2 /Ob2 /DNDEBUG
+CMAKE_C_FLAGS_RELWITHDEBINFO ==           /MD /Zi /O2 /Ob1 /DNDEBUG
+CMAKE_C_FLAGS_RELWITHDEBINFO_INIT ==            /MD /Zi /O2 /Ob1 /DNDEBUG
+CMAKE_C_IGNORE_EXTENSIONS ==           h;H;o;O;obj;OBJ;def;DEF;rc;RC
+CMAKE_C_IMPLICIT_INCLUDE_DIRECTORIES ==           
+CMAKE_C_IMPLICIT_LINK_DIRECTORIES ==           
+CMAKE_C_IMPLICIT_LINK_FRAMEWORK_DIRECTORIES ==           
+CMAKE_C_IMPLICIT_LINK_LIBRARIES ==           
+CMAKE_C_INFORMATION_LOADED ==           1
+CMAKE_C_LIBRARY_ARCHITECTURE ==           
+CMAKE_C_LINKER_PREFERENCE ==           10
+CMAKE_C_LINKER_SUPPORTS_PDB ==           ON
+CMAKE_C_LINK_EXECUTABLE ==           <CMAKE_COMMAND> -E vs_link_exe --intdir=<OBJECT_DIR> --rc=<CMAKE_RC_COMPILER> --mt=<CMAKE_MT> --manifests <MANIFESTS> -- <CMAKE_LINKER> /nologo <OBJECTS>  /out:<TARGET> /implib:<TARGET_IMPLIB> /pdb:<TARGET_PDB> /version:<TARGET_VERSION_MAJOR>.<TARGET_VERSION_MINOR> <CMAKE_C_LINK_FLAGS> <LINK_FLAGS> <LINK_LIBRARIES>
+CMAKE_C_LINK_OPTIONS_IPO ==           /INCREMENTAL:NO;/LTCG
+CMAKE_C_OUTPUT_EXTENSION ==           .obj
+CMAKE_C_PLATFORM_ID ==           Windows
+CMAKE_C_SIMULATE_ID ==           
+CMAKE_C_SIMULATE_VERSION ==           
+CMAKE_C_SIZEOF_DATA_PTR ==           4
+CMAKE_C_SOURCE_FILE_EXTENSIONS ==           c;m
+CMAKE_C_STANDARD_COMPUTED_DEFAULT ==           90
+CMAKE_C_STANDARD_DEFAULT ==           90
+CMAKE_C_STANDARD_LIBRARIES ==           kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib
+CMAKE_C_STANDARD_LIBRARIES_INIT ==           kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib
+CMAKE_C_USE_RESPONSE_FILE_FOR_OBJECTS ==           1
+CMAKE_C_XCODE_ARCHS ==           
+CMAKE_DEPFILE_FLAGS_C ==           /showIncludes
+CMAKE_DEPFILE_FLAGS_CXX ==           /showIncludes
+CMAKE_DL ==           https://github.com/Kitware/CMake/releases/download/v3.21.1/cmake-3.21.1-windows-i386.msi
+CMAKE_DL_LIBS ==           
+CMAKE_EFFECTIVE_SYSTEM_NAME ==           Windows
+CMAKE_EXE ==           C:/Progra~2/CMake/bin/cmake.exe
+CMAKE_EXECUTABLE_FORMAT ==           Unknown
+CMAKE_EXECUTABLE_SUFFIX ==           .exe
+CMAKE_EXE_LINKER_FLAGS ==           /machine:X86
+CMAKE_EXE_LINKER_FLAGS_DEBUG ==           /debug /INCREMENTAL
+CMAKE_EXE_LINKER_FLAGS_DEBUG_INIT ==            /debug /INCREMENTAL
+CMAKE_EXE_LINKER_FLAGS_INIT ==            /machine:X86  
+CMAKE_EXE_LINKER_FLAGS_MINSIZEREL ==           /INCREMENTAL:NO
+CMAKE_EXE_LINKER_FLAGS_MINSIZEREL_INIT ==            /INCREMENTAL:NO
+CMAKE_EXE_LINKER_FLAGS_RELEASE ==           /INCREMENTAL:NO
+CMAKE_EXE_LINKER_FLAGS_RELEASE_INIT ==            /INCREMENTAL:NO
+CMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO ==           /debug /INCREMENTAL
+CMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO_INIT ==            /debug /INCREMENTAL
+CMAKE_EXTRA_GENERATOR ==           
+CMAKE_EXTRA_LINK_EXTENSIONS ==           .targets
+CMAKE_FILES_DIRECTORY ==           /CMakeFiles
+CMAKE_FIND_LIBRARY_PREFIXES ==           
+CMAKE_FIND_LIBRARY_SUFFIXES ==           .lib
+CMAKE_GENERATOR ==           Visual Studio 17 2022
+CMAKE_GENERATOR_INSTANCE ==           C:/Program Files/Microsoft Visual Studio/2022/Community
+CMAKE_GENERATOR_NO_COMPILER_ENV ==           1
+CMAKE_GENERATOR_PLATFORM ==           Win32
+CMAKE_GENERATOR_RC ==           rc
+CMAKE_GENERATOR_TOOLSET ==           
+CMAKE_HOME_DIRECTORY ==           C:/Users/Administrator/digitalknob/DK/DKCMake
+CMAKE_HOST_SYSTEM ==           Windows-10.0.19043
+CMAKE_HOST_SYSTEM_NAME ==           Windows
+CMAKE_HOST_SYSTEM_PROCESSOR ==           AMD64
+CMAKE_HOST_SYSTEM_VERSION ==           10.0.19043
+CMAKE_HOST_WIN32 ==           1
+CMAKE_IMPORT_LIBRARY_PREFIX ==           
+CMAKE_IMPORT_LIBRARY_SUFFIX ==           .lib
+CMAKE_INCLUDE_FLAG_C ==           -I
+CMAKE_INCLUDE_FLAG_CXX ==           -I
+CMAKE_INCLUDE_FLAG_RC ==           -I 
+CMAKE_INSTALL_DEFAULT_COMPONENT_NAME ==           Unspecified
+CMAKE_INSTALL_PREFIX ==           C:/Program Files (x86)/DigitalKnob
+CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT ==           1
+CMAKE_LIBRARY_PATH_FLAG ==           -LIBPATH:
+CMAKE_LIBRARY_PATH_TERMINATOR ==           
+CMAKE_LINKER ==           C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.30.30705/bin/Hostx64/x86/link.exe
+CMAKE_LINKER ==           C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.30.30705/bin/Hostx64/x86/link.exe
+CMAKE_LINK_DEF_FILE_FLAG ==           /DEF:
+CMAKE_LINK_LIBRARY_FLAG ==           
+CMAKE_LINK_LIBRARY_SUFFIX ==           .lib
+CMAKE_LINK_PCH ==           ON
+CMAKE_MAJOR_VERSION ==           3
+CMAKE_MAKE_PROGRAM ==           C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe
+CMAKE_MATCH_0 ==           
+CMAKE_MATCH_1 ==           
+CMAKE_MATCH_2 ==           
+CMAKE_MATCH_COUNT ==           0
+CMAKE_MINIMUM_REQUIRED_VERSION ==           3.10
+CMAKE_MINOR_VERSION ==           21
+CMAKE_MODULE_LINKER_FLAGS ==           /machine:X86
+CMAKE_MODULE_LINKER_FLAGS_DEBUG ==           /debug /INCREMENTAL
+CMAKE_MODULE_LINKER_FLAGS_DEBUG_INIT ==            /debug /INCREMENTAL
+CMAKE_MODULE_LINKER_FLAGS_INIT ==            /machine:X86  
+CMAKE_MODULE_LINKER_FLAGS_MINSIZEREL ==           /INCREMENTAL:NO
+CMAKE_MODULE_LINKER_FLAGS_MINSIZEREL_INIT ==            /INCREMENTAL:NO
+CMAKE_MODULE_LINKER_FLAGS_RELEASE ==           /INCREMENTAL:NO
+CMAKE_MODULE_LINKER_FLAGS_RELEASE_INIT ==            /INCREMENTAL:NO
+CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO ==           /debug /INCREMENTAL
+CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO_INIT ==            /debug /INCREMENTAL
+CMAKE_MSVC_RUNTIME_LIBRARY_DEFAULT ==           
+CMAKE_MT ==           CMAKE_MT-NOTFOUND
+CMAKE_MT ==           CMAKE_MT-NOTFOUND
+CMAKE_NAME ==           cmake-3.21.1-windows-i386
+CMAKE_NINJA_CMCLDEPS_RC ==           1
+CMAKE_NO_BUILD_TYPE ==           1
+CMAKE_PARENT_LIST_FILE ==           C:/Users/Administrator/digitalknob/DK/DKCMake/CMakeLists.txt
+CMAKE_PATCH_VERSION ==           1
+CMAKE_PCH_COPY_COMPILE_PDB ==           ON
+CMAKE_PCH_EXTENSION ==           .pch
+CMAKE_PCH_PROLOGUE ==           #pragma system_header
+CMAKE_PLATFORM_INFO_DIR ==           C:/Users/Administrator/digitalknob/DKTestApps/DKApps/00_DKCore/win32/CMakeFiles/3.21.1
+CMAKE_PLATFORM_INFO_INITIALIZED ==           1
+CMAKE_PROJECT_DESCRIPTION ==           
+CMAKE_PROJECT_HOMEPAGE_URL ==           
+CMAKE_PROJECT_NAME ==           00_DKCore
+CMAKE_RANLIB ==           :
+CMAKE_RANLIB ==           :
+CMAKE_RC_COMPILER ==           rc
+CMAKE_RC_COMPILER ==           rc
+CMAKE_RC_COMPILER_ARG1 ==           
+CMAKE_RC_COMPILER_ENV_VAR ==           RC
+CMAKE_RC_COMPILER_INIT ==           rc
+CMAKE_RC_COMPILER_LIST ==           rc
+CMAKE_RC_COMPILER_LOADED ==           1
+CMAKE_RC_COMPILER_WORKS ==           1
+CMAKE_RC_COMPILE_OBJECT ==           <CMAKE_RC_COMPILER> <DEFINES> <INCLUDES> <FLAGS> /fo <OBJECT> <SOURCE>
+CMAKE_RC_FLAGS ==           -DWIN32
+CMAKE_RC_FLAGS_DEBUG ==           -D_DEBUG
+CMAKE_RC_FLAGS_DEBUG_INIT ==            -D_DEBUG
+CMAKE_RC_FLAGS_INIT ==              -DWIN32 
+CMAKE_RC_FLAGS_MINSIZEREL ==           
+CMAKE_RC_FLAGS_RELEASE ==           
+CMAKE_RC_FLAGS_RELWITHDEBINFO ==           
+CMAKE_RC_FLAG_REGEX ==           ^[-/](D|I)
+CMAKE_RC_INFORMATION_LOADED ==           1
+CMAKE_RC_OUTPUT_EXTENSION ==           .res
+CMAKE_RC_SOURCE_FILE_EXTENSIONS ==           rc;RC
+CMAKE_ROOT ==           C:/Program Files (x86)/CMake/share/cmake-3.21
+CMAKE_SHARED_LIBRARY_CREATE_CXX_FLAGS ==           -shared
+CMAKE_SHARED_LIBRARY_CREATE_C_FLAGS ==           -shared
+CMAKE_SHARED_LIBRARY_C_FLAGS ==           
+CMAKE_SHARED_LIBRARY_LINK_C_FLAGS ==           
+CMAKE_SHARED_LIBRARY_PREFIX ==           
+CMAKE_SHARED_LIBRARY_RUNTIME_C_FLAG ==           
+CMAKE_SHARED_LIBRARY_RUNTIME_C_FLAG_SEP ==           
+CMAKE_SHARED_LIBRARY_SUFFIX ==           .dll
+CMAKE_SHARED_LINKER_FLAGS ==           /machine:X86
+CMAKE_SHARED_LINKER_FLAGS_DEBUG ==           /debug /INCREMENTAL
+CMAKE_SHARED_LINKER_FLAGS_DEBUG_INIT ==            /debug /INCREMENTAL
+CMAKE_SHARED_LINKER_FLAGS_INIT ==            /machine:X86  
+CMAKE_SHARED_LINKER_FLAGS_MINSIZEREL ==           /INCREMENTAL:NO
+CMAKE_SHARED_LINKER_FLAGS_MINSIZEREL_INIT ==            /INCREMENTAL:NO
+CMAKE_SHARED_LINKER_FLAGS_RELEASE ==           /INCREMENTAL:NO
+CMAKE_SHARED_LINKER_FLAGS_RELEASE_INIT ==            /INCREMENTAL:NO
+CMAKE_SHARED_LINKER_FLAGS_RELWITHDEBINFO ==           /debug /INCREMENTAL
+CMAKE_SHARED_LINKER_FLAGS_RELWITHDEBINFO_INIT ==            /debug /INCREMENTAL
+CMAKE_SHARED_MODULE_CREATE_CXX_FLAGS ==           -shared
+CMAKE_SHARED_MODULE_CREATE_C_FLAGS ==           -shared
+CMAKE_SHARED_MODULE_PREFIX ==           
+CMAKE_SHARED_MODULE_SUFFIX ==           .dll
+CMAKE_SIZEOF_VOID_P ==           4
+CMAKE_SKIP_INSTALL_RPATH ==           NO
+CMAKE_SKIP_RPATH ==           ON
+CMAKE_SOURCE_DIR ==           C:/Users/Administrator/digitalknob/DK/DKCMake
+CMAKE_STATIC_LIBRARY_PREFIX ==           
+CMAKE_STATIC_LIBRARY_SUFFIX ==           .lib
+CMAKE_STATIC_LINKER_FLAGS ==           /machine:X86
+CMAKE_STATIC_LINKER_FLAGS_DEBUG ==           
+CMAKE_STATIC_LINKER_FLAGS_INIT ==            /machine:X86
+CMAKE_STATIC_LINKER_FLAGS_MINSIZEREL ==           
+CMAKE_STATIC_LINKER_FLAGS_RELEASE ==           
+CMAKE_STATIC_LINKER_FLAGS_RELWITHDEBINFO ==           
+CMAKE_SUPPORT_WINDOWS_EXPORT_ALL_SYMBOLS ==           1
+CMAKE_SUPPRESS_REGENERATION ==           true
+CMAKE_SYSTEM ==           Windows-10.0.19043
+CMAKE_SYSTEM_AND_RC_COMPILER_INFO_FILE ==           C:/Program Files (x86)/CMake/share/cmake-3.21/Modules/Platform/Windows-rc.cmake
+CMAKE_SYSTEM_INFO_FILE ==           Platform/Windows
+CMAKE_SYSTEM_LIBRARY_PATH ==           C:/Program Files (x86)/DigitalKnob/bin;C:/Program Files (x86)/CMake/bin;/bin
+CMAKE_SYSTEM_LOADED ==           1
+CMAKE_SYSTEM_NAME ==           Windows
+CMAKE_SYSTEM_PREFIX_PATH ==           C:/Program Files;C:/Program Files (x86);C:/Program Files (x86)/CMake;C:/Program Files (x86)/DigitalKnob
+CMAKE_SYSTEM_PROCESSOR ==           AMD64
+CMAKE_SYSTEM_SPECIFIC_INFORMATION_LOADED ==           1
+CMAKE_SYSTEM_SPECIFIC_INITIALIZE_LOADED ==           1
+CMAKE_SYSTEM_VERSION ==           10.0.19043
+CMAKE_TWEAK_VERSION ==           0
+CMAKE_VERBOSE_MAKEFILE ==           FALSE
+CMAKE_VERSION ==           3.21.1
+CMAKE_VERSION ==           3.21.1
+CMAKE_VS_DEVENV_COMMAND ==           C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/devenv.com
+CMAKE_VS_INTEL_Fortran_PROJECT_VERSION ==           11.0
+CMAKE_VS_MSBUILD_COMMAND ==           C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe
+CMAKE_VS_PLATFORM_NAME ==           Win32
+CMAKE_VS_PLATFORM_NAME_DEFAULT ==           x64
+CMAKE_VS_PLATFORM_TOOLSET ==           v143
+CMAKE_VS_PLATFORM_TOOLSET_HOST_ARCHITECTURE ==           x64
+CMAKE_VS_WINDOWS_TARGET_PLATFORM_VERSION ==           10.0.19041.0
+COMPILE_CMAKE ==           0
+CURRENT_DIR ==           C:/Users/Administrator/digitalknob/DK/3rdParty/fmt-master/win32
+DEBUG ==           ON
+DEBUG_DIR ==           Debug
+DEBUG_FLAGS ==           /MANIFEST:NO /MANIFESTUAC:NO /level='highestAvailable' /uiAccess='true' /SUBSYSTEM:CONSOLE,5.01 /SAFESEH:NO
+DEBUG_LIBS ==           debug;C:/Users/Administrator/digitalknob/DK/3rdParty/boxer-master/win32/Debug/Boxer.lib;debug;C:/Users/Administrator/digitalknob/DK/3rdParty/fmt-master/win32/Debug/fmtd.lib;debug;C:/Users/Administrator/digitalknob/DK/DKPlugins/DK/win32/Debug/DK.lib
+DEBUG_LINK_FLAGS ==           /MANIFEST:NO;/MANIFESTUAC:NO;/level='highestAvailable';/uiAccess='true';/SUBSYSTEM:CONSOLE,5.01;/SAFESEH:NO
+DIGITALKNOB ==           C:/Users/Administrator/digitalknob
+DK ==           ON
+DKAPP ==           ON
+DKCEF ==           OFF
+DKCMAKE ==           C:/Users/Administrator/digitalknob/DK/DKCMake
+DKCMAKELIST_INCLUDED ==           1
+DKCMAKE_BUILD ==           C:/Progra~2/CMake/bin/cmake.exe;-G;Visual Studio 17 2022;-A;Win32;-DBUILD_SHARED_LIBS=OFF;-DBUILD_STATIC_LIBS=ON;-DCMAKE_POSITION_INDEPENDENT_CODE=ON;-DCMAKE_C_FLAGS=/DWIN /DWIN32 /D_WINDOWS /D_CRT_SECURE_NO_WARNINGS /D_USING_V110_SDK71_ /std:c17 /nologo /GR /EHsc /Zm500 /Zc:__cplusplus /W3 /wd4244 /wd5105;-DCMAKE_CXX_FLAGS=/DWIN /DWIN32 /D_WINDOWS /D_CRT_SECURE_NO_WARNINGS /D_USING_V110_SDK71_ /std:c++17 /nologo /GR /EHsc /Zm500 /Zc:__cplusplus /W3 /wd4244 /wd5105;-DCMAKE_C_FLAGS_DEBUG=/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG;-DCMAKE_C_FLAGS_RELEASE=/MT /O2 /Ob2 /DNDEBUG /DRELEASE;-DCMAKE_CXX_FLAGS_DEBUG=/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG;-DCMAKE_CXX_FLAGS_RELEASE=/MT /O2 /Ob2 /DNDEBUG /DRELEASE
+DKCMAKE_CXX_COMPILER ==           C:/Program;Files/Microsoft;Visual;Studio/2022/Community/VC/Tools/MSVC/14.30.30705/bin/Hostx64/x86/cl.exe
+DKCMAKE_CXX_FLAGS ==           /DWIN /DWIN32 /D_WINDOWS /D_CRT_SECURE_NO_WARNINGS /D_USING_V110_SDK71_ /std:c++17 /nologo /GR /EHsc /Zm500 /Zc:__cplusplus /W3 /wd4244 /wd5105
+DKCMAKE_CXX_FLAGS_DEBUG ==           /MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG
+DKCMAKE_CXX_FLAGS_RELEASE ==           /MT /O2 /Ob2 /DNDEBUG /DRELEASE
+DKCMAKE_C_COMPILER ==           C:/Program;Files/Microsoft;Visual;Studio/2022/Community/VC/Tools/MSVC/14.30.30705/bin/Hostx64/x86/cl.exe
+DKCMAKE_C_FLAGS ==           /DWIN /DWIN32 /D_WINDOWS /D_CRT_SECURE_NO_WARNINGS /D_USING_V110_SDK71_ /std:c17 /nologo /GR /EHsc /Zm500 /Zc:__cplusplus /W3 /wd4244 /wd5105
+DKCMAKE_C_FLAGS_DEBUG ==           /MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG
+DKCMAKE_C_FLAGS_RELEASE ==           /MT /O2 /Ob2 /DNDEBUG /DRELEASE
+DKCMAKE_FLAGS ==           -DBUILD_SHARED_LIBS=OFF;-DBUILD_STATIC_LIBS=ON;-DCMAKE_POSITION_INDEPENDENT_CODE=ON;-DCMAKE_C_FLAGS=/DWIN /DWIN32 /D_WINDOWS /D_CRT_SECURE_NO_WARNINGS /D_USING_V110_SDK71_ /std:c17 /nologo /GR /EHsc /Zm500 /Zc:__cplusplus /W3 /wd4244 /wd5105;-DCMAKE_CXX_FLAGS=/DWIN /DWIN32 /D_WINDOWS /D_CRT_SECURE_NO_WARNINGS /D_USING_V110_SDK71_ /std:c++17 /nologo /GR /EHsc /Zm500 /Zc:__cplusplus /W3 /wd4244 /wd5105;-DCMAKE_C_FLAGS_DEBUG=/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG;-DCMAKE_C_FLAGS_RELEASE=/MT /O2 /Ob2 /DNDEBUG /DRELEASE;-DCMAKE_CXX_FLAGS_DEBUG=/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG;-DCMAKE_CXX_FLAGS_RELEASE=/MT /O2 /Ob2 /DNDEBUG /DRELEASE
+DKCONFIGURE_BUILD ==           ../../configure;--build=i686-w64-mingw32;--disable-shared;--enable-static;CC=C:/Users/Administrator/digitalknob/DK/3rdParty/mingw32-8.1.0/bin/gcc.exe;CXX=C:/Users/Administrator/digitalknob/DK/3rdParty/mingw32-8.1.0/bin/g++.exe;CFLAGS="-march=i686 -DWIN -DWIN32 -D_WINDOWS -D_CRT_SECURE_NO_WARNINGS -D_USING_V110_SDK71_ -std=gnu17 -fexceptions";CXXFLAGS="-march=i686 -DWIN -DWIN32 -D_WINDOWS -D_CRT_SECURE_NO_WARNINGS -D_USING_V110_SDK71_ -std=gnu++17 -frtti -fexceptions"
+DKCONFIGURE_CC ==           C:/Users/Administrator/digitalknob/DK/3rdParty/mingw32-8.1.0/bin/gcc.exe
+DKCONFIGURE_CFLAGS ==           -march=i686 -DWIN -DWIN32 -D_WINDOWS -D_CRT_SECURE_NO_WARNINGS -D_USING_V110_SDK71_ -std=gnu17 -fexceptions
+DKCONFIGURE_CFLAGS_DEBUG ==           -DDEBUG -D_DEBUG -g
+DKCONFIGURE_CFLAGS_RELEASE ==           -DNDEBUG -DRELEASE -O3
+DKCONFIGURE_CXX ==           C:/Users/Administrator/digitalknob/DK/3rdParty/mingw32-8.1.0/bin/g++.exe
+DKCONFIGURE_CXXFLAGS ==           -march=i686 -DWIN -DWIN32 -D_WINDOWS -D_CRT_SECURE_NO_WARNINGS -D_USING_V110_SDK71_ -std=gnu++17 -frtti -fexceptions
+DKCONFIGURE_CXXFLAGS_DEBUG ==           -DDEBUG -D_DEBUG -g
+DKCONFIGURE_CXXFLAGS_RELEASE ==           -DNDEBUG -DRELEASE -O3
+DKCONFIGURE_FLAGS ==           --build=i686-w64-mingw32;--disable-shared;--enable-static;CC=C:/Users/Administrator/digitalknob/DK/3rdParty/mingw32-8.1.0/bin/gcc.exe;CXX=C:/Users/Administrator/digitalknob/DK/3rdParty/mingw32-8.1.0/bin/g++.exe;CFLAGS="-march=i686 -DWIN -DWIN32 -D_WINDOWS -D_CRT_SECURE_NO_WARNINGS -D_USING_V110_SDK71_ -std=gnu17 -fexceptions";CXXFLAGS="-march=i686 -DWIN -DWIN32 -D_WINDOWS -D_CRT_SECURE_NO_WARNINGS -D_USING_V110_SDK71_ -std=gnu++17 -frtti -fexceptions"
+DKDEFINES_LIST ==           HAVE_git;HAVE_cmake;HAVE_visualstudio;HAVE_imagemagick;HAVE_DK;HAVE_boxer;HAVE_fmt;HAVE_python
+DKDOWNLOAD ==           C:/Users/Administrator/digitalknob/Download
+DKIMPORTS ==           C:/Users/Administrator/digitalknob/DK/3rdParty/_DKIMPORTS
+DKINCLUDES_LIST ==           C:/Users/Administrator/digitalknob/DK/3rdParty/boxer-master/include;C:/Users/Administrator/digitalknob/DK/3rdParty/boxer-master/win32;C:/Users/Administrator/digitalknob/DK/3rdParty/fmt-master/include
+DKJerryscript ==           
+DKOFWindow ==           
+DKOcr ==           
+DKPLUGINS ==           C:/Users/Administrator/digitalknob/DK/DKPlugins
+DKPLUGIN_LIST ==           DK
+DKPLUGIN_LIST_lower ==           dk
+DKPROJECT ==           C:/Users/Administrator/digitalknob/DKTestApps/DKApps/00_DKCore
+DKPlugin1 ==           
+DKPlugin2 ==           
+DKRestart ==           
+DKSDLAudio ==           
+DKSDLVideo ==           
+DKSDLWav ==           
+DKSFMLRml ==           
+DKScreenRecorder ==           
+DKThread ==           
+DKTorrent ==           
+DKUpdate ==           
+DKVncClient ==           
+DKVncServer ==           
+DKWEB ==           http://127.0.0.1
+DKWebSockets ==           
+DK_BINARY_DIR ==           C:/Users/Administrator/digitalknob/DK/DKPlugins/DK/win32
+DK_IS_TOP_LEVEL ==           OFF
+DK_SOURCE_DIR ==           C:/Users/Administrator/digitalknob/DK/DKPlugins/DK
+DK_all ==           1
+DUMPBIN ==           C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.30.30705/bin/Hostx86/x86/dumpbin.exe
+DigitalKnob_BINARY_DIR ==           C:/Users/Administrator/digitalknob/DKTestApps/DKApps/00_DKCore/win32
+DigitalKnob_DESCRIPTION ==           
+DigitalKnob_HOMEPAGE_URL ==           
+DigitalKnob_IS_TOP_LEVEL ==           ON
+DigitalKnob_SOURCE_DIR ==           C:/Users/Administrator/digitalknob/DK/DKCMake
+ENABLE_DKDEBUGFUNC ==           1
+FMT ==           C:/Users/Administrator/digitalknob/DK/3rdParty/fmt-master
+FMT_BRANCH ==           master
+FMT_FOLDER ==           fmt
+FMT_NAME ==           fmt-master
+GIT ==           C:/Program Files (x86)/Git
+GIT_DL ==           https://github.com/git-for-windows/git/releases/download/v2.31.1.windows.1/Git-2.31.1-32-bit.exe
+GIT_EXE ==           C:/Program Files (x86)/Git/bin/git.exe
+GIT_NAME ==           Git-2.31.1-32-bit
+GIT_VERSION ==           2.31.1
+HAVE_DK ==           ON
+HAVE_DKJerryscript ==           
+HAVE_DKOFWindow ==           
+HAVE_DKOcr ==           
+HAVE_DKPlugin1 ==           
+HAVE_DKPlugin2 ==           
+HAVE_DKRestart ==           
+HAVE_DKSDLAudio ==           
+HAVE_DKSDLVideo ==           
+HAVE_DKSDLWav ==           
+HAVE_DKSFMLRml ==           
+HAVE_DKScreenRecorder ==           
+HAVE_DKThread ==           
+HAVE_DKTorrent ==           
+HAVE_DKUpdate ==           
+HAVE_DKVncClient ==           
+HAVE_DKVncServer ==           
+HAVE_DKWebSockets ==           
+HAVE__TEMPLATE-APP_ ==           
+HAVE__TEMPLATE-LIB_ ==           
+HAVE_android-java-tools ==           
+HAVE_astyle ==           
+HAVE_boxer ==           ON
+HAVE_build-essential ==           
+HAVE_cmake ==           ON
+HAVE_conio-for-linux ==           
+HAVE_emsdk ==           
+HAVE_emsdk-portable ==           
+HAVE_ffmpeg-dev ==           
+HAVE_ffmpeg-shared ==           
+HAVE_ffmpeg-static ==           
+HAVE_fmt ==           ON
+HAVE_freealut ==           
+HAVE_freealut-master ==           
+HAVE_git ==           ON
+HAVE_gradle ==           
+HAVE_imagemagick ==           ON
+HAVE_java ==           
+HAVE_jerryscript ==           
+HAVE_jpeg ==           
+HAVE_kdevelop ==           
+HAVE_leptonica ==           
+HAVE_libasound2-dev ==           
+HAVE_libcaca ==           
+HAVE_libgl1-mesa-dev ==           
+HAVE_libglib2.0-dev ==           
+HAVE_libglu1-mesa-dev ==           
+HAVE_libgtk2.0-dev ==           
+HAVE_librocket ==           
+HAVE_libsndfile1-dev ==           
+HAVE_libsystemd-dev ==           
+HAVE_libtorrent ==           
+HAVE_libudev-dev ==           
+HAVE_libvncserver ==           
+HAVE_libvncserver-master-win ==           
+HAVE_libwebp ==           
+HAVE_libwebsockets ==           
+HAVE_libx11 ==           
+HAVE_libx11-dev ==           
+HAVE_libxcursor-dev ==           
+HAVE_libxrandr-dev ==           
+HAVE_libxtst-dev ==           
+HAVE_lighttpd ==           
+HAVE_lua ==           
+HAVE_mesa-common-dev ==           
+HAVE_miniweb ==           
+HAVE_msys2 ==           
+HAVE_notepadpp ==           
+HAVE_openal ==           
+HAVE_openal-android ==           
+HAVE_opencv ==           
+HAVE_openframeworks ==           
+HAVE_openscenegraph ==           
+HAVE_opensles ==           
+HAVE_osgaudio ==           
+HAVE_osgbullet ==           
+HAVE_osgworks ==           
+HAVE_podofo ==           
+HAVE_python ==           ON
+HAVE_sdl2_gif ==           
+HAVE_sdl2_giflib_sa ==           
+HAVE_simple-getch ==           
+HAVE_tesseract ==           
+HAVE_tiff ==           
+HAVE_uwebsockets ==           
+HAVE_visualstudio ==           ON
+HAVE_waave ==           
+IMAGEMAGICK ==           C:/Users/Administrator/digitalknob/DK/3rdParty/ImageMagick-7.1.0-portable-Q16-x86
+IMAGEMAGICK_CONVERT ==           C:/Users/Administrator/digitalknob/DK/3rdParty/ImageMagick-7.1.0-portable-Q16-x86/convert.exe
+IMAGEMAGICK_DL ==           http://ftp.icm.edu.pl/packages/ImageMagick/binaries/ImageMagick-7.1.0-portable-Q16-x86.zip
+IMAGEMAGICK_NAME ==           ImageMagick-7.1.0-portable-Q16-x86
+IMAGEMAGICK_VERSION ==           7.1.0-portable-Q16-x86
+INSTALL_DKLIBS ==           0
+IOSSIM_SYSROOT ==           /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator15.0.sdk
+IOS_DARWIN ==           darwin20.6.0
+IOS_MIN_SDK ==           13.0
+IOS_SYSROOT ==           /Applications/Xcode.app/Contents/Developer/Platforms/iPhone.platform/Developer/SDKs/iPhone15.0.sdk
+LIBLIST ==           C:/Users/Administrator/digitalknob/DK/DKPlugins/DK/win32/Debug/DK.lib;C:/Users/Administrator/digitalknob/DK/DKPlugins/DK/win32/Release/DK.lib
+LIBS ==           Psapi.lib;pdh.lib;Dxva2.dll
+LINUX_GCC ==           /usr/bin/gcc
+LINUX_GXX ==           /usr/bin/g++
+MINGW32_GCC ==           C:/Users/Administrator/digitalknob/DK/3rdParty/mingw32-8.1.0/bin/gcc.exe
+MINGW32_GXX ==           C:/Users/Administrator/digitalknob/DK/3rdParty/mingw32-8.1.0/bin/g++.exe
+MINGW64_GCC ==           C:/Users/Administrator/digitalknob/DK/3rdParty/mingw64-8.1.0/bin/gcc.exe
+MINGW64_GXX ==           C:/Users/Administrator/digitalknob/DK/3rdParty/mingw64-8.1.0/bin/g++.exe
+MSBUILD ==           C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/MSBuild.exe
+MSVC ==           1
+MSVC14 ==           1
+MSVC_CL ==           C:/Program;Files/Microsoft;Visual;Studio/2022/Community/VC/Tools/MSVC/14.30.30705/bin/Hostx64/x86/cl.exe
+MSVC_CXX_ARCHITECTURE_ID ==           X86
+MSVC_C_ARCHITECTURE_ID ==           X86
+MSVC_IDE ==           1
+MSVC_INCREMENTAL_DEFAULT ==           ON
+MSVC_INCREMENTAL_YES_FLAG ==           /INCREMENTAL
+MSVC_TOOLSET_VERSION ==           142
+MSVC_VERSION ==           1930
+OS ==           win32
+PLUGINS_FILE ==           #include "DK/DK.h"
+#include "DK/DKAndroid.h"
+#include "DK/DKApp.h"
+#include "DK/DKClass.h"
+#include "DK/DKEvents.h"
+#include "DK/DKFile.h"
+#include "DK/DKIos.h"
+#include "DK/DKLinux.h"
+#include "DK/DKLog.h"
+#include "DK/DKMac.h"
+#include "DK/DKObject.h"
+#include "DK/DKOsInfo.h"
+#include "DK/DKPlugin.h"
+#include "DK/DKPreprocessor.h"
+#include "DK/DKString.h"
+#include "DK/DKTextColor.h"
+#include "DK/DKUnix.h"
+#include "DK/DKUtil.h"
+#include "DK/DKWindows.h"
+#include "DK/stdafx.h"
+
+PLUGINS_FILE ==           #include "DK/DK.h"
+#include "DK/DKAndroid.h"
+#include "DK/DKApp.h"
+#include "DK/DKClass.h"
+#include "DK/DKEvents.h"
+#include "DK/DKFile.h"
+#include "DK/DKIos.h"
+#include "DK/DKLinux.h"
+#include "DK/DKLog.h"
+#include "DK/DKMac.h"
+#include "DK/DKObject.h"
+#include "DK/DKOsInfo.h"
+#include "DK/DKPlugin.h"
+#include "DK/DKPreprocessor.h"
+#include "DK/DKString.h"
+#include "DK/DKTextColor.h"
+#include "DK/DKUnix.h"
+#include "DK/DKUtil.h"
+#include "DK/DKWindows.h"
+#include "DK/stdafx.h"
+
+PRESET_CMAKE_SYSTEM_NAME ==           FALSE
+PRINT_CALL_DETAILS ==           1
+PRINT_FILE_NAMES ==           1
+PRINT_FUNCTION_ ==           ARGUMENTS;1
+PRINT_FUNCTION_NAMES ==           1
+PRINT_LINE_NUMBERS ==           1
+PROJECT_BINARY_DIR ==           C:/Users/Administrator/digitalknob/DKTestApps/DKApps/00_DKCore/win32
+PROJECT_DESCRIPTION ==           
+PROJECT_HOMEPAGE_URL ==           
+PROJECT_IS_TOP_LEVEL ==           ON
+PROJECT_NAME ==           00_DKCore
+PROJECT_SOURCE_DIR ==           C:/Users/Administrator/digitalknob/DK/DKCMake
+PYTHON ==           C:/Users/Administrator/digitalknob/DK/3rdParty/python-2.7.18
+PYTHON_DL ==           https://www.python.org/ftp/python/2.7.18/python-2.7.18.msi
+PYTHON_EXE ==           C:/Users/Administrator/digitalknob/DK/3rdParty/python-2.7.18/python.exe
+PYTHON_NAME ==           python-2.7.18
+PYTHON_VERSION ==           2.7.18
+QUEUE_BUILD ==           ON
+REBUILD ==           OFF
+REBUILDALL ==           ON
+RELEASE ==           ON
+RELEASE_DIR ==           Release
+RELEASE_FLAGS ==           /INCREMENTAL:NO /OPT:NOREF /MANIFEST:NO /MANIFESTUAC:NO /level='highestAvailable' /uiAccess='true' /SUBSYSTEM:CONSOLE,5.01 /SAFESEH:NO
+RELEASE_LIBS ==           optimized;C:/Users/Administrator/digitalknob/DK/3rdParty/boxer-master/win32/Release/Boxer.lib;optimized;C:/Users/Administrator/digitalknob/DK/3rdParty/fmt-master/win32/Release/fmt.lib;optimized;C:/Users/Administrator/digitalknob/DK/DKPlugins/DK/win32/Release/DK.lib
+RELEASE_LINK_FLAGS ==           /INCREMENTAL:NO;/OPT:NOREF;/MANIFEST:NO;/MANIFESTUAC:NO;/level='highestAvailable';/uiAccess='true';/SUBSYSTEM:CONSOLE,5.01;/SAFESEH:NO
+RUN_CONFIGURE ==           ON
+SET_MSVC_CXX_ARCHITECTURE_ID ==           set(MSVC_CXX_ARCHITECTURE_ID X86)
+SET_MSVC_C_ARCHITECTURE_ID ==           set(MSVC_C_ARCHITECTURE_ID X86)
+SHARED ==           OFF
+STACK_FILENAME ==           Generate.cmake
+STACK_HEADER ==           Generate.cmake:14->(): 
+STATIC ==           ON
+VISUALSTUDIO ==           C:/Program Files/Microsoft Visual Studio/2022/Community
+VISUALSTUDIO_BUILD ==           17
+VISUALSTUDIO_DL ==           https://aka.ms/vs/17/release/vs_community.exe
+VISUALSTUDIO_PROGRAM_FILES ==           Program Files
+VISUALSTUDIO_VERSION ==           2022
+VS_GENERATOR ==           Visual Studio 17 2022
+WARNINGS_AS_ERRORS ==           OFF
+WARNING_4244 ==           ON
+WARNING_5105 ==           ON
+WARNING_LEVEL ==           3
+WIN ==           ON
+WIN32 ==           1
+WIN_32 ==           ON
+WIN_HOST ==           TRUE
+XCODE_CLANG ==           /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang
+XCODE_CLANGXX ==           /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++
+XCODE_DEVROOT ==           /Applications/Xcode.app/Contents/Developer
+XCODE_LIBTOOL ==           /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/libtool
+_CMAKE_CXX_IPO_MAY_BE_SUPPORTED_BY_COMPILER ==           YES
+_CMAKE_CXX_IPO_SUPPORTED_BY_CMAKE ==           YES
+_CMAKE_C_IPO_MAY_BE_SUPPORTED_BY_COMPILER ==           YES
+_CMAKE_C_IPO_SUPPORTED_BY_CMAKE ==           YES
+_CMAKE_INSTALL_DIR ==           C:/Program Files (x86)/CMake
+_CMAKE_RC_COMPILER_NAME_WE ==           rc
+_CMAKE_TOOLCHAIN_LOCATION ==           C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.30.30705/bin/Hostx64/x86
+_CMAKE_VS_LINK_DLL ==           <CMAKE_COMMAND> -E vs_link_dll --intdir=<OBJECT_DIR> --rc=<CMAKE_RC_COMPILER> --mt=<CMAKE_MT> --manifests <MANIFESTS> -- 
+_CMAKE_VS_LINK_EXE ==           <CMAKE_COMMAND> -E vs_link_exe --intdir=<OBJECT_DIR> --rc=<CMAKE_RC_COMPILER> --mt=<CMAKE_MT> --manifests <MANIFESTS> -- 
+_COMPILE_CXX ==            /TP
+_FLAGS_CXX ==            /GR /EHsc
+_FS_C ==            /FS
+_FS_CXX ==            /FS
+_INCLUDED_FILE ==           C:/Program Files (x86)/CMake/share/cmake-3.21/Modules/Platform/Windows-MSVC-CXX.cmake
+_INCLUDED_SYSTEM_INFO_FILE ==           C:/Program Files (x86)/CMake/share/cmake-3.21/Modules/Platform/Windows.cmake
+_MSVC_CXX_ARCHITECTURE_FAMILY ==           X86
+_MSVC_C_ARCHITECTURE_FAMILY ==           X86
+_PLATFORM_DEFINES ==           /DWIN32
+_PLATFORM_LINK_FLAGS ==           
+_RTC1 ==           /RTC1
+_SET_CMAKE_CXX_COMPILER_ARCHITECTURE_ID ==           set(CMAKE_CXX_COMPILER_ARCHITECTURE_ID X86)
+_SET_CMAKE_CXX_COMPILER_SYSROOT ==           
+_SET_CMAKE_C_COMPILER_ARCHITECTURE_ID ==           set(CMAKE_C_COMPILER_ARCHITECTURE_ID X86)
+_SET_CMAKE_C_COMPILER_SYSROOT ==           
+_TEMPLATE-APP_ ==           
+_TEMPLATE-LIB_ ==           
+__COMPILER_CMAKE_COMMON_COMPILER_MACROS ==           1
+__INCGUARD_2879baac9414af69cd9b3d9455b1b4e9__ ==           ON
+__INCGUARD_43a00cd6eae0b772ce0a789147df34a0__ ==           ON
+__INCGUARD_b766bf0c5038e06e08ff4be9bd1e6a58__ ==           ON
+__INCGUARD_bb872b2227d4904aa4f88072704b1beb__ ==           ON
+__INCGUARD_cc173f1b214bb0e2b67ba46aa13cedcb__ ==           ON
+__INCGUARD_cd14acda42ad050c118745306aa05724__ ==           ON
+__INCGUARD_f5bc78645402f1b3541a76740d198208__ ==           ON
+__WINDOWS_MSVC ==           1
+__WINDOWS_PATHS_INCLUDED ==           1
+_compiler_version ==           19.30.30709.0
+android-java-tools ==           
+astyle ==           
+boxer ==           ON
+boxer_all ==           1
+build-essential ==           
+cmake ==           ON
+cmake_all ==           1
+conio-for-linux ==           
+d ==           
+day ==           11
+dir ==           
+dkdepend_disable_list ==           tiff;msys2;_TEMPLATE-APP_;_TEMPLATE-LIB_;android-java-tools;astyle;conio-for-linux;DKJerryscript;DKOFWindow;DKPlugin1;DKPlugin2;DKRestart;DKScreenRecorder;DKSDLAudio;DKSDLWav;DKSDLVideo;DKSFMLRml;DKThread;DKTorrent;DKUpdate;DKVncClient;DKVncServer;emsdk;emsdk-portable;ffmpeg-dev;ffmpeg-shared;ffmpeg-static;gradle;jpeg;libcaca;librocket;libvncserver;libvncserver-master-win;libx11;miniweb;notepadpp;openframeworks;openscenegraph;osgaudio;osgbullet;osgworks;sdl2_gif;sdl2_giflib_sa;simple-getch;opencv;build-essential;DKOcr;DKWebSockets;freealut;freealut-master;java;jerryscript;leptonica;libtorrent;libwebp;libwebsockets;lighttpd;lua;openal;openal-android;opensles;podofo;tesseract;tiff;uwebsockets;waave;build-essential;kdevelop;libasound2-dev;libgl1-mesa-dev;libglib2.0-dev;libglu1-mesa-dev;libgtk2.0-dev;libsndfile1-dev;libsystemd-dev;libudev-dev;libx11-dev;libxcursor-dev;libxrandr-dev;libxtst-dev;mesa-common-dev
+dkdepend_list ==           git;cmake;visualstudio;imagemagick;boxer;python;fmt;DK
+dkdepend_list ==           git;cmake;visualstudio;imagemagick;boxer;python;fmt;DK
+emsdk ==           
+emsdk-portable ==           
+extension ==           
+ffmpeg-dev ==           
+ffmpeg-shared ==           
+ffmpeg-static ==           
+fixed_flags ==            -DWIN32 
+fmt ==           ON
+fmt_all ==           1
+freealut ==           
+freealut-master ==           
+git ==           ON
+git_all ==           1
+gradle ==           
+imagemagick ==           ON
+imagemagick_all ==           1
+index ==           -1
+isDKPlugin ==           0
+java ==           
+jerryscript ==           
+jpeg ==           
+kdevelop ==           
+lang ==           
+leptonica ==           
+lib ==           
+libasound2-dev ==           
+libcaca ==           
+libgl1-mesa-dev ==           
+libglib2.0-dev ==           
+libglu1-mesa-dev ==           
+libgtk2.0-dev ==           
+librocket ==           
+libsndfile1-dev ==           
+libsystemd-dev ==           
+libtorrent ==           
+libudev-dev ==           
+libvncserver ==           
+libvncserver-master-win ==           
+libwebp ==           
+libwebsockets ==           
+libx11 ==           
+libx11-dev ==           
+libxcursor-dev ==           
+libxrandr-dev ==           
+libxtst-dev ==           
+lighttpd ==           
+lua ==           
+mesa-common-dev ==           
+miniweb ==           
+month ==           06
+msys2 ==           
+notepadpp ==           
+openal ==           
+openal-android ==           
+opencv ==           
+openframeworks ==           
+openscenegraph ==           
+opensles ==           
+osgaudio ==           
+osgbullet ==           
+osgworks ==           
+plugin ==           
+plugin_lower ==           dk
+plugin_path ==           C:/Users/Administrator/digitalknob/DK/DKPlugins/DK
+podofo ==           
+python ==           ON
+python_all ==           1
+resources_SRC ==           C:/Users/Administrator/digitalknob/DKTestApps/DKApps/00_DKCore/resource.rc
+sdl2_gif ==           
+sdl2_giflib_sa ==           
+simple-getch ==           
+src ==           
+t ==           
+tesseract ==           
+tiff ==           
+type ==           
+uwebsockets ==           
+v ==           
+var ==           var
+vars ==           00_DKCore_BINARY_DIR;00_DKCore_DESCRIPTION;00_DKCore_HOMEPAGE_URL;00_DKCore_IS_TOP_LEVEL;00_DKCore_SOURCE_DIR;3RDPARTY;APP_NAME;APP_VERSION;ARGI;ARGI0;ARGI1;ARGI10;ARGI11;ARGI12;ARGI13;ARGI14;ARGI15;ARGI16;ARGI17;ARGI18;ARGI19;ARGI2;ARGI20;ARGI21;ARGI22;ARGI23;ARGI24;ARGI25;ARGI26;ARGI27;ARGI28;ARGI29;ARGI3;ARGI30;ARGI31;ARGI32;ARGI33;ARGI34;ARGI35;ARGI36;ARGI37;ARGI38;ARGI39;ARGI4;ARGI40;ARGI41;ARGI42;ARGI43;ARGI44;ARGI45;ARGI46;ARGI47;ARGI48;ARGI49;ARGI5;ARGI50;ARGI51;ARGI52;ARGI53;ARGI54;ARGI55;ARGI56;ARGI57;ARGI58;ARGI59;ARGI6;ARGI60;ARGI61;ARGI62;ARGI63;ARGI64;ARGI65;ARGI66;ARGI67;ARGI68;ARGI69;ARGI7;ARGI70;ARGI71;ARGI72;ARGI73;ARGI74;ARGI75;ARGI76;ARGI77;ARGI78;ARGI79;ARGI8;ARGI80;ARGI81;ARGI82;ARGI9;ASSETS;App_SRC;BOXER;BOXER_BRANCH;BOXER_FOLDER;BOXER_NAME;BUILD;BUILD_DIR;CMAKE;CMAKE_AR;CMAKE_AR;CMAKE_AUTOGEN_ORIGIN_DEPENDS;CMAKE_AUTOMOC_COMPILER_PREDEFINES;CMAKE_AUTOMOC_MACRO_NAMES;CMAKE_AUTOMOC_PATH_PREFIX;CMAKE_BASE_NAME;CMAKE_BINARY_DIR;CMAKE_BUILD_TOOL;CMAKE_BUILD_TYPE;CMAKE_BUILD_TYPE_INIT;CMAKE_C11_COMPILE_FEATURES;CMAKE_C11_EXTENSION_COMPILE_OPTION;CMAKE_C11_STANDARD_COMPILE_OPTION;CMAKE_C17_COMPILE_FEATURES;CMAKE_C23_COMPILE_FEATURES;CMAKE_C90_COMPILE_FEATURES;CMAKE_C90_EXTENSION_COMPILE_OPTION;CMAKE_C90_STANDARD_COMPILE_OPTION;CMAKE_C99_COMPILE_FEATURES;CMAKE_C99_EXTENSION_COMPILE_OPTION;CMAKE_C99_STANDARD_COMPILE_OPTION;CMAKE_CFG_INTDIR;CMAKE_CL_64;CMAKE_CL_NOLOGO;CMAKE_COMMAND;CMAKE_CONFIGURATION_TYPES;CMAKE_CPACK_COMMAND;CMAKE_CROSSCOMPILING;CMAKE_CTEST_COMMAND;CMAKE_CURRENT_BINARY_DIR;CMAKE_CURRENT_LIST_DIR;CMAKE_CURRENT_LIST_FILE;CMAKE_CURRENT_SOURCE_DIR;CMAKE_CXX11_COMPILE_FEATURES;CMAKE_CXX11_EXTENSION_COMPILE_OPTION;CMAKE_CXX11_STANDARD_COMPILE_OPTION;CMAKE_CXX11_STANDARD__HAS_FULL_SUPPORT;CMAKE_CXX14_COMPILE_FEATURES;CMAKE_CXX14_EXTENSION_COMPILE_OPTION;CMAKE_CXX14_STANDARD_COMPILE_OPTION;CMAKE_CXX14_STANDARD__HAS_FULL_SUPPORT;CMAKE_CXX17_COMPILE_FEATURES;CMAKE_CXX17_EXTENSION_COMPILE_OPTION;CMAKE_CXX17_STANDARD_COMPILE_OPTION;CMAKE_CXX20_COMPILE_FEATURES;CMAKE_CXX20_EXTENSION_COMPILE_OPTION;CMAKE_CXX20_STANDARD_COMPILE_OPTION;CMAKE_CXX23_COMPILE_FEATURES;CMAKE_CXX23_EXTENSION_COMPILE_OPTION;CMAKE_CXX23_STANDARD_COMPILE_OPTION;CMAKE_CXX98_COMPILE_FEATURES;CMAKE_CXX98_EXTENSION_COMPILE_OPTION;CMAKE_CXX98_STANDARD_COMPILE_OPTION;CMAKE_CXX98_STANDARD__HAS_FULL_SUPPORT;CMAKE_CXX_ABI_COMPILED;CMAKE_CXX_ARCHIVE_APPEND;CMAKE_CXX_ARCHIVE_CREATE;CMAKE_CXX_ARCHIVE_FINISH;CMAKE_CXX_BYTE_ORDER;CMAKE_CXX_CLANG_TIDY_DRIVER_MODE;CMAKE_CXX_CL_SHOWINCLUDES_PREFIX;CMAKE_CXX_COMPILER;CMAKE_CXX_COMPILER_ABI;CMAKE_CXX_COMPILER_AR;CMAKE_CXX_COMPILER_ARCHITECTURE_ID;CMAKE_CXX_COMPILER_ARG1;CMAKE_CXX_COMPILER_ENV_VAR;CMAKE_CXX_COMPILER_EXCLUDE;CMAKE_CXX_COMPILER_FRONTEND_VARIANT;CMAKE_CXX_COMPILER_ID;CMAKE_CXX_COMPILER_ID_PLATFORM_CONTENT;CMAKE_CXX_COMPILER_ID_RUN;CMAKE_CXX_COMPILER_ID_TOOL_MATCH_INDEX;CMAKE_CXX_COMPILER_ID_TOOL_MATCH_REGEX;CMAKE_CXX_COMPILER_ID_VENDORS;CMAKE_CXX_COMPILER_ID_VENDOR_REGEX_IAR;CMAKE_CXX_COMPILER_LOADED;CMAKE_CXX_COMPILER_NAMES;CMAKE_CXX_COMPILER_PRODUCED_FILES;CMAKE_CXX_COMPILER_PRODUCED_OUTPUT;CMAKE_CXX_COMPILER_RANLIB;CMAKE_CXX_COMPILER_VERSION;CMAKE_CXX_COMPILER_VERSION_INTERNAL;CMAKE_CXX_COMPILER_WORKS;CMAKE_CXX_COMPILER_WRAPPER;CMAKE_CXX_COMPILE_FEATURES;CMAKE_CXX_COMPILE_OBJECT;CMAKE_CXX_COMPILE_OPTIONS_CREATE_PCH;CMAKE_CXX_COMPILE_OPTIONS_IPO;CMAKE_CXX_COMPILE_OPTIONS_JMC;CMAKE_CXX_COMPILE_OPTIONS_MSVC_RUNTIME_LIBRARY_MultiThreaded;CMAKE_CXX_COMPILE_OPTIONS_MSVC_RUNTIME_LIBRARY_MultiThreadedDLL;CMAKE_CXX_COMPILE_OPTIONS_MSVC_RUNTIME_LIBRARY_MultiThreadedDebug;CMAKE_CXX_COMPILE_OPTIONS_MSVC_RUNTIME_LIBRARY_MultiThreadedDebugDLL;CMAKE_CXX_COMPILE_OPTIONS_USE_PCH;CMAKE_CXX_CREATE_ASSEMBLY_SOURCE;CMAKE_CXX_CREATE_CONSOLE_EXE;CMAKE_CXX_CREATE_PREPROCESSED_SOURCE;CMAKE_CXX_CREATE_SHARED_LIBRARY;CMAKE_CXX_CREATE_SHARED_MODULE;CMAKE_CXX_CREATE_STATIC_LIBRARY;CMAKE_CXX_CREATE_STATIC_LIBRARY_IPO;CMAKE_CXX_CREATE_WIN32_EXE;CMAKE_CXX_DEPFILE_FORMAT;CMAKE_CXX_FLAGS;CMAKE_CXX_FLAGS_DEBUG;CMAKE_CXX_FLAGS_DEBUG_INIT;CMAKE_CXX_FLAGS_INIT;CMAKE_CXX_FLAGS_MINSIZEREL;CMAKE_CXX_FLAGS_MINSIZEREL_INIT;CMAKE_CXX_FLAGS_RELEASE;CMAKE_CXX_FLAGS_RELEASE_INIT;CMAKE_CXX_FLAGS_RELWITHDEBINFO;CMAKE_CXX_FLAGS_RELWITHDEBINFO_INIT;CMAKE_CXX_IGNORE_EXTENSIONS;CMAKE_CXX_IMPLICIT_INCLUDE_DIRECTORIES;CMAKE_CXX_IMPLICIT_LINK_DIRECTORIES;CMAKE_CXX_IMPLICIT_LINK_FRAMEWORK_DIRECTORIES;CMAKE_CXX_IMPLICIT_LINK_LIBRARIES;CMAKE_CXX_INFORMATION_LOADED;CMAKE_CXX_LIBRARY_ARCHITECTURE;CMAKE_CXX_LINKER_PREFERENCE;CMAKE_CXX_LINKER_PREFERENCE_PROPAGATES;CMAKE_CXX_LINKER_SUPPORTS_PDB;CMAKE_CXX_LINK_EXECUTABLE;CMAKE_CXX_LINK_OPTIONS_IPO;CMAKE_CXX_OUTPUT_EXTENSION;CMAKE_CXX_PLATFORM_ID;CMAKE_CXX_SIMULATE_ID;CMAKE_CXX_SIMULATE_VERSION;CMAKE_CXX_SIZEOF_DATA_PTR;CMAKE_CXX_SOURCE_FILE_EXTENSIONS;CMAKE_CXX_STANDARD_COMPUTED_DEFAULT;CMAKE_CXX_STANDARD_DEFAULT;CMAKE_CXX_STANDARD_LIBRARIES;CMAKE_CXX_STANDARD_LIBRARIES_INIT;CMAKE_CXX_USE_RESPONSE_FILE_FOR_OBJECTS;CMAKE_CXX_XCODE_ARCHS;CMAKE_C_ABI_COMPILED;CMAKE_C_ARCHIVE_APPEND;CMAKE_C_ARCHIVE_CREATE;CMAKE_C_ARCHIVE_FINISH;CMAKE_C_BYTE_ORDER;CMAKE_C_CLANG_TIDY_DRIVER_MODE;CMAKE_C_CL_SHOWINCLUDES_PREFIX;CMAKE_C_COMPILER;CMAKE_C_COMPILER_ABI;CMAKE_C_COMPILER_AR;CMAKE_C_COMPILER_ARCHITECTURE_ID;CMAKE_C_COMPILER_ARG1;CMAKE_C_COMPILER_ENV_VAR;CMAKE_C_COMPILER_FRONTEND_VARIANT;CMAKE_C_COMPILER_ID;CMAKE_C_COMPILER_ID_PLATFORM_CONTENT;CMAKE_C_COMPILER_ID_RUN;CMAKE_C_COMPILER_ID_TOOL_MATCH_INDEX;CMAKE_C_COMPILER_ID_TOOL_MATCH_REGEX;CMAKE_C_COMPILER_ID_VENDORS;CMAKE_C_COMPILER_ID_VENDOR_REGEX_IAR;CMAKE_C_COMPILER_LOADED;CMAKE_C_COMPILER_NAMES;CMAKE_C_COMPILER_PRODUCED_FILES;CMAKE_C_COMPILER_PRODUCED_OUTPUT;CMAKE_C_COMPILER_RANLIB;CMAKE_C_COMPILER_VERSION;CMAKE_C_COMPILER_VERSION_INTERNAL;CMAKE_C_COMPILER_WORKS;CMAKE_C_COMPILER_WRAPPER;CMAKE_C_COMPILE_FEATURES;CMAKE_C_COMPILE_OBJECT;CMAKE_C_COMPILE_OPTIONS_CREATE_PCH;CMAKE_C_COMPILE_OPTIONS_EXPLICIT_LANGUAGE;CMAKE_C_COMPILE_OPTIONS_IPO;CMAKE_C_COMPILE_OPTIONS_JMC;CMAKE_C_COMPILE_OPTIONS_MSVC_RUNTIME_LIBRARY_MultiThreaded;CMAKE_C_COMPILE_OPTIONS_MSVC_RUNTIME_LIBRARY_MultiThreadedDLL;CMAKE_C_COMPILE_OPTIONS_MSVC_RUNTIME_LIBRARY_MultiThreadedDebug;CMAKE_C_COMPILE_OPTIONS_MSVC_RUNTIME_LIBRARY_MultiThreadedDebugDLL;CMAKE_C_COMPILE_OPTIONS_USE_PCH;CMAKE_C_CREATE_ASSEMBLY_SOURCE;CMAKE_C_CREATE_CONSOLE_EXE;CMAKE_C_CREATE_PREPROCESSED_SOURCE;CMAKE_C_CREATE_SHARED_LIBRARY;CMAKE_C_CREATE_SHARED_MODULE;CMAKE_C_CREATE_STATIC_LIBRARY;CMAKE_C_CREATE_STATIC_LIBRARY_IPO;CMAKE_C_CREATE_WIN32_EXE;CMAKE_C_DEPFILE_FORMAT;CMAKE_C_FLAGS;CMAKE_C_FLAGS_DEBUG;CMAKE_C_FLAGS_DEBUG_INIT;CMAKE_C_FLAGS_INIT;CMAKE_C_FLAGS_MINSIZEREL;CMAKE_C_FLAGS_MINSIZEREL_INIT;CMAKE_C_FLAGS_RELEASE;CMAKE_C_FLAGS_RELEASE_INIT;CMAKE_C_FLAGS_RELWITHDEBINFO;CMAKE_C_FLAGS_RELWITHDEBINFO_INIT;CMAKE_C_IGNORE_EXTENSIONS;CMAKE_C_IMPLICIT_INCLUDE_DIRECTORIES;CMAKE_C_IMPLICIT_LINK_DIRECTORIES;CMAKE_C_IMPLICIT_LINK_FRAMEWORK_DIRECTORIES;CMAKE_C_IMPLICIT_LINK_LIBRARIES;CMAKE_C_INFORMATION_LOADED;CMAKE_C_LIBRARY_ARCHITECTURE;CMAKE_C_LINKER_PREFERENCE;CMAKE_C_LINKER_SUPPORTS_PDB;CMAKE_C_LINK_EXECUTABLE;CMAKE_C_LINK_OPTIONS_IPO;CMAKE_C_OUTPUT_EXTENSION;CMAKE_C_PLATFORM_ID;CMAKE_C_SIMULATE_ID;CMAKE_C_SIMULATE_VERSION;CMAKE_C_SIZEOF_DATA_PTR;CMAKE_C_SOURCE_FILE_EXTENSIONS;CMAKE_C_STANDARD_COMPUTED_DEFAULT;CMAKE_C_STANDARD_DEFAULT;CMAKE_C_STANDARD_LIBRARIES;CMAKE_C_STANDARD_LIBRARIES_INIT;CMAKE_C_USE_RESPONSE_FILE_FOR_OBJECTS;CMAKE_C_XCODE_ARCHS;CMAKE_DEPFILE_FLAGS_C;CMAKE_DEPFILE_FLAGS_CXX;CMAKE_DL;CMAKE_DL_LIBS;CMAKE_EFFECTIVE_SYSTEM_NAME;CMAKE_EXE;CMAKE_EXECUTABLE_FORMAT;CMAKE_EXECUTABLE_SUFFIX;CMAKE_EXE_LINKER_FLAGS;CMAKE_EXE_LINKER_FLAGS_DEBUG;CMAKE_EXE_LINKER_FLAGS_DEBUG_INIT;CMAKE_EXE_LINKER_FLAGS_INIT;CMAKE_EXE_LINKER_FLAGS_MINSIZEREL;CMAKE_EXE_LINKER_FLAGS_MINSIZEREL_INIT;CMAKE_EXE_LINKER_FLAGS_RELEASE;CMAKE_EXE_LINKER_FLAGS_RELEASE_INIT;CMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO;CMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO_INIT;CMAKE_EXTRA_GENERATOR;CMAKE_EXTRA_LINK_EXTENSIONS;CMAKE_FILES_DIRECTORY;CMAKE_FIND_LIBRARY_PREFIXES;CMAKE_FIND_LIBRARY_SUFFIXES;CMAKE_GENERATOR;CMAKE_GENERATOR_INSTANCE;CMAKE_GENERATOR_NO_COMPILER_ENV;CMAKE_GENERATOR_PLATFORM;CMAKE_GENERATOR_RC;CMAKE_GENERATOR_TOOLSET;CMAKE_HOME_DIRECTORY;CMAKE_HOST_SYSTEM;CMAKE_HOST_SYSTEM_NAME;CMAKE_HOST_SYSTEM_PROCESSOR;CMAKE_HOST_SYSTEM_VERSION;CMAKE_HOST_WIN32;CMAKE_IMPORT_LIBRARY_PREFIX;CMAKE_IMPORT_LIBRARY_SUFFIX;CMAKE_INCLUDE_FLAG_C;CMAKE_INCLUDE_FLAG_CXX;CMAKE_INCLUDE_FLAG_RC;CMAKE_INSTALL_DEFAULT_COMPONENT_NAME;CMAKE_INSTALL_PREFIX;CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT;CMAKE_LIBRARY_PATH_FLAG;CMAKE_LIBRARY_PATH_TERMINATOR;CMAKE_LINKER;CMAKE_LINKER;CMAKE_LINK_DEF_FILE_FLAG;CMAKE_LINK_LIBRARY_FLAG;CMAKE_LINK_LIBRARY_SUFFIX;CMAKE_LINK_PCH;CMAKE_MAJOR_VERSION;CMAKE_MAKE_PROGRAM;CMAKE_MATCH_0;CMAKE_MATCH_1;CMAKE_MATCH_2;CMAKE_MATCH_COUNT;CMAKE_MINIMUM_REQUIRED_VERSION;CMAKE_MINOR_VERSION;CMAKE_MODULE_LINKER_FLAGS;CMAKE_MODULE_LINKER_FLAGS_DEBUG;CMAKE_MODULE_LINKER_FLAGS_DEBUG_INIT;CMAKE_MODULE_LINKER_FLAGS_INIT;CMAKE_MODULE_LINKER_FLAGS_MINSIZEREL;CMAKE_MODULE_LINKER_FLAGS_MINSIZEREL_INIT;CMAKE_MODULE_LINKER_FLAGS_RELEASE;CMAKE_MODULE_LINKER_FLAGS_RELEASE_INIT;CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO;CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO_INIT;CMAKE_MSVC_RUNTIME_LIBRARY_DEFAULT;CMAKE_MT;CMAKE_MT;CMAKE_NAME;CMAKE_NINJA_CMCLDEPS_RC;CMAKE_NO_BUILD_TYPE;CMAKE_PARENT_LIST_FILE;CMAKE_PATCH_VERSION;CMAKE_PCH_COPY_COMPILE_PDB;CMAKE_PCH_EXTENSION;CMAKE_PCH_PROLOGUE;CMAKE_PLATFORM_INFO_DIR;CMAKE_PLATFORM_INFO_INITIALIZED;CMAKE_PROJECT_DESCRIPTION;CMAKE_PROJECT_HOMEPAGE_URL;CMAKE_PROJECT_NAME;CMAKE_RANLIB;CMAKE_RANLIB;CMAKE_RC_COMPILER;CMAKE_RC_COMPILER;CMAKE_RC_COMPILER_ARG1;CMAKE_RC_COMPILER_ENV_VAR;CMAKE_RC_COMPILER_INIT;CMAKE_RC_COMPILER_LIST;CMAKE_RC_COMPILER_LOADED;CMAKE_RC_COMPILER_WORKS;CMAKE_RC_COMPILE_OBJECT;CMAKE_RC_FLAGS;CMAKE_RC_FLAGS_DEBUG;CMAKE_RC_FLAGS_DEBUG_INIT;CMAKE_RC_FLAGS_INIT;CMAKE_RC_FLAGS_MINSIZEREL;CMAKE_RC_FLAGS_RELEASE;CMAKE_RC_FLAGS_RELWITHDEBINFO;CMAKE_RC_FLAG_REGEX;CMAKE_RC_INFORMATION_LOADED;CMAKE_RC_OUTPUT_EXTENSION;CMAKE_RC_SOURCE_FILE_EXTENSIONS;CMAKE_ROOT;CMAKE_SHARED_LIBRARY_CREATE_CXX_FLAGS;CMAKE_SHARED_LIBRARY_CREATE_C_FLAGS;CMAKE_SHARED_LIBRARY_C_FLAGS;CMAKE_SHARED_LIBRARY_LINK_C_FLAGS;CMAKE_SHARED_LIBRARY_PREFIX;CMAKE_SHARED_LIBRARY_RUNTIME_C_FLAG;CMAKE_SHARED_LIBRARY_RUNTIME_C_FLAG_SEP;CMAKE_SHARED_LIBRARY_SUFFIX;CMAKE_SHARED_LINKER_FLAGS;CMAKE_SHARED_LINKER_FLAGS_DEBUG;CMAKE_SHARED_LINKER_FLAGS_DEBUG_INIT;CMAKE_SHARED_LINKER_FLAGS_INIT;CMAKE_SHARED_LINKER_FLAGS_MINSIZEREL;CMAKE_SHARED_LINKER_FLAGS_MINSIZEREL_INIT;CMAKE_SHARED_LINKER_FLAGS_RELEASE;CMAKE_SHARED_LINKER_FLAGS_RELEASE_INIT;CMAKE_SHARED_LINKER_FLAGS_RELWITHDEBINFO;CMAKE_SHARED_LINKER_FLAGS_RELWITHDEBINFO_INIT;CMAKE_SHARED_MODULE_CREATE_CXX_FLAGS;CMAKE_SHARED_MODULE_CREATE_C_FLAGS;CMAKE_SHARED_MODULE_PREFIX;CMAKE_SHARED_MODULE_SUFFIX;CMAKE_SIZEOF_VOID_P;CMAKE_SKIP_INSTALL_RPATH;CMAKE_SKIP_RPATH;CMAKE_SOURCE_DIR;CMAKE_STATIC_LIBRARY_PREFIX;CMAKE_STATIC_LIBRARY_SUFFIX;CMAKE_STATIC_LINKER_FLAGS;CMAKE_STATIC_LINKER_FLAGS_DEBUG;CMAKE_STATIC_LINKER_FLAGS_INIT;CMAKE_STATIC_LINKER_FLAGS_MINSIZEREL;CMAKE_STATIC_LINKER_FLAGS_RELEASE;CMAKE_STATIC_LINKER_FLAGS_RELWITHDEBINFO;CMAKE_SUPPORT_WINDOWS_EXPORT_ALL_SYMBOLS;CMAKE_SUPPRESS_REGENERATION;CMAKE_SYSTEM;CMAKE_SYSTEM_AND_RC_COMPILER_INFO_FILE;CMAKE_SYSTEM_INFO_FILE;CMAKE_SYSTEM_LIBRARY_PATH;CMAKE_SYSTEM_LOADED;CMAKE_SYSTEM_NAME;CMAKE_SYSTEM_PREFIX_PATH;CMAKE_SYSTEM_PROCESSOR;CMAKE_SYSTEM_SPECIFIC_INFORMATION_LOADED;CMAKE_SYSTEM_SPECIFIC_INITIALIZE_LOADED;CMAKE_SYSTEM_VERSION;CMAKE_TWEAK_VERSION;CMAKE_VERBOSE_MAKEFILE;CMAKE_VERSION;CMAKE_VERSION;CMAKE_VS_DEVENV_COMMAND;CMAKE_VS_INTEL_Fortran_PROJECT_VERSION;CMAKE_VS_MSBUILD_COMMAND;CMAKE_VS_PLATFORM_NAME;CMAKE_VS_PLATFORM_NAME_DEFAULT;CMAKE_VS_PLATFORM_TOOLSET;CMAKE_VS_PLATFORM_TOOLSET_HOST_ARCHITECTURE;CMAKE_VS_WINDOWS_TARGET_PLATFORM_VERSION;COMPILE_CMAKE;CURRENT_DIR;DEBUG;DEBUG_DIR;DEBUG_FLAGS;DEBUG_LIBS;DEBUG_LINK_FLAGS;DIGITALKNOB;DK;DKAPP;DKCEF;DKCMAKE;DKCMAKELIST_INCLUDED;DKCMAKE_BUILD;DKCMAKE_CXX_COMPILER;DKCMAKE_CXX_FLAGS;DKCMAKE_CXX_FLAGS_DEBUG;DKCMAKE_CXX_FLAGS_RELEASE;DKCMAKE_C_COMPILER;DKCMAKE_C_FLAGS;DKCMAKE_C_FLAGS_DEBUG;DKCMAKE_C_FLAGS_RELEASE;DKCMAKE_FLAGS;DKCONFIGURE_BUILD;DKCONFIGURE_CC;DKCONFIGURE_CFLAGS;DKCONFIGURE_CFLAGS_DEBUG;DKCONFIGURE_CFLAGS_RELEASE;DKCONFIGURE_CXX;DKCONFIGURE_CXXFLAGS;DKCONFIGURE_CXXFLAGS_DEBUG;DKCONFIGURE_CXXFLAGS_RELEASE;DKCONFIGURE_FLAGS;DKDEFINES_LIST;DKDOWNLOAD;DKIMPORTS;DKINCLUDES_LIST;DKJerryscript;DKOFWindow;DKOcr;DKPLUGINS;DKPLUGIN_LIST;DKPLUGIN_LIST_lower;DKPROJECT;DKPlugin1;DKPlugin2;DKRestart;DKSDLAudio;DKSDLVideo;DKSDLWav;DKSFMLRml;DKScreenRecorder;DKThread;DKTorrent;DKUpdate;DKVncClient;DKVncServer;DKWEB;DKWebSockets;DK_BINARY_DIR;DK_IS_TOP_LEVEL;DK_SOURCE_DIR;DK_all;DUMPBIN;DigitalKnob_BINARY_DIR;DigitalKnob_DESCRIPTION;DigitalKnob_HOMEPAGE_URL;DigitalKnob_IS_TOP_LEVEL;DigitalKnob_SOURCE_DIR;ENABLE_DKDEBUGFUNC;FMT;FMT_BRANCH;FMT_FOLDER;FMT_NAME;GIT;GIT_DL;GIT_EXE;GIT_NAME;GIT_VERSION;HAVE_DK;HAVE_DKJerryscript;HAVE_DKOFWindow;HAVE_DKOcr;HAVE_DKPlugin1;HAVE_DKPlugin2;HAVE_DKRestart;HAVE_DKSDLAudio;HAVE_DKSDLVideo;HAVE_DKSDLWav;HAVE_DKSFMLRml;HAVE_DKScreenRecorder;HAVE_DKThread;HAVE_DKTorrent;HAVE_DKUpdate;HAVE_DKVncClient;HAVE_DKVncServer;HAVE_DKWebSockets;HAVE__TEMPLATE-APP_;HAVE__TEMPLATE-LIB_;HAVE_android-java-tools;HAVE_astyle;HAVE_boxer;HAVE_build-essential;HAVE_cmake;HAVE_conio-for-linux;HAVE_emsdk;HAVE_emsdk-portable;HAVE_ffmpeg-dev;HAVE_ffmpeg-shared;HAVE_ffmpeg-static;HAVE_fmt;HAVE_freealut;HAVE_freealut-master;HAVE_git;HAVE_gradle;HAVE_imagemagick;HAVE_java;HAVE_jerryscript;HAVE_jpeg;HAVE_kdevelop;HAVE_leptonica;HAVE_libasound2-dev;HAVE_libcaca;HAVE_libgl1-mesa-dev;HAVE_libglib2.0-dev;HAVE_libglu1-mesa-dev;HAVE_libgtk2.0-dev;HAVE_librocket;HAVE_libsndfile1-dev;HAVE_libsystemd-dev;HAVE_libtorrent;HAVE_libudev-dev;HAVE_libvncserver;HAVE_libvncserver-master-win;HAVE_libwebp;HAVE_libwebsockets;HAVE_libx11;HAVE_libx11-dev;HAVE_libxcursor-dev;HAVE_libxrandr-dev;HAVE_libxtst-dev;HAVE_lighttpd;HAVE_lua;HAVE_mesa-common-dev;HAVE_miniweb;HAVE_msys2;HAVE_notepadpp;HAVE_openal;HAVE_openal-android;HAVE_opencv;HAVE_openframeworks;HAVE_openscenegraph;HAVE_opensles;HAVE_osgaudio;HAVE_osgbullet;HAVE_osgworks;HAVE_podofo;HAVE_python;HAVE_sdl2_gif;HAVE_sdl2_giflib_sa;HAVE_simple-getch;HAVE_tesseract;HAVE_tiff;HAVE_uwebsockets;HAVE_visualstudio;HAVE_waave;IMAGEMAGICK;IMAGEMAGICK_CONVERT;IMAGEMAGICK_DL;IMAGEMAGICK_NAME;IMAGEMAGICK_VERSION;INSTALL_DKLIBS;IOSSIM_SYSROOT;IOS_DARWIN;IOS_MIN_SDK;IOS_SYSROOT;LIBLIST;LIBS;LINUX_GCC;LINUX_GXX;MINGW32_GCC;MINGW32_GXX;MINGW64_GCC;MINGW64_GXX;MSBUILD;MSVC;MSVC14;MSVC_CL;MSVC_CXX_ARCHITECTURE_ID;MSVC_C_ARCHITECTURE_ID;MSVC_IDE;MSVC_INCREMENTAL_DEFAULT;MSVC_INCREMENTAL_YES_FLAG;MSVC_TOOLSET_VERSION;MSVC_VERSION;OS;PLUGINS_FILE;PLUGINS_FILE;PRESET_CMAKE_SYSTEM_NAME;PRINT_CALL_DETAILS;PRINT_FILE_NAMES;PRINT_FUNCTION_;PRINT_FUNCTION_NAMES;PRINT_LINE_NUMBERS;PROJECT_BINARY_DIR;PROJECT_DESCRIPTION;PROJECT_HOMEPAGE_URL;PROJECT_IS_TOP_LEVEL;PROJECT_NAME;PROJECT_SOURCE_DIR;PYTHON;PYTHON_DL;PYTHON_EXE;PYTHON_NAME;PYTHON_VERSION;QUEUE_BUILD;REBUILD;REBUILDALL;RELEASE;RELEASE_DIR;RELEASE_FLAGS;RELEASE_LIBS;RELEASE_LINK_FLAGS;RUN_CONFIGURE;SET_MSVC_CXX_ARCHITECTURE_ID;SET_MSVC_C_ARCHITECTURE_ID;SHARED;STACK_FILENAME;STACK_HEADER;STATIC;VISUALSTUDIO;VISUALSTUDIO_BUILD;VISUALSTUDIO_DL;VISUALSTUDIO_PROGRAM_FILES;VISUALSTUDIO_VERSION;VS_GENERATOR;WARNINGS_AS_ERRORS;WARNING_4244;WARNING_5105;WARNING_LEVEL;WIN;WIN32;WIN_32;WIN_HOST;XCODE_CLANG;XCODE_CLANGXX;XCODE_DEVROOT;XCODE_LIBTOOL;_CMAKE_CXX_IPO_MAY_BE_SUPPORTED_BY_COMPILER;_CMAKE_CXX_IPO_SUPPORTED_BY_CMAKE;_CMAKE_C_IPO_MAY_BE_SUPPORTED_BY_COMPILER;_CMAKE_C_IPO_SUPPORTED_BY_CMAKE;_CMAKE_INSTALL_DIR;_CMAKE_RC_COMPILER_NAME_WE;_CMAKE_TOOLCHAIN_LOCATION;_CMAKE_VS_LINK_DLL;_CMAKE_VS_LINK_EXE;_COMPILE_CXX;_FLAGS_CXX;_FS_C;_FS_CXX;_INCLUDED_FILE;_INCLUDED_SYSTEM_INFO_FILE;_MSVC_CXX_ARCHITECTURE_FAMILY;_MSVC_C_ARCHITECTURE_FAMILY;_PLATFORM_DEFINES;_PLATFORM_LINK_FLAGS;_RTC1;_SET_CMAKE_CXX_COMPILER_ARCHITECTURE_ID;_SET_CMAKE_CXX_COMPILER_SYSROOT;_SET_CMAKE_C_COMPILER_ARCHITECTURE_ID;_SET_CMAKE_C_COMPILER_SYSROOT;_TEMPLATE-APP_;_TEMPLATE-LIB_;__COMPILER_CMAKE_COMMON_COMPILER_MACROS;__INCGUARD_2879baac9414af69cd9b3d9455b1b4e9__;__INCGUARD_43a00cd6eae0b772ce0a789147df34a0__;__INCGUARD_b766bf0c5038e06e08ff4be9bd1e6a58__;__INCGUARD_bb872b2227d4904aa4f88072704b1beb__;__INCGUARD_cc173f1b214bb0e2b67ba46aa13cedcb__;__INCGUARD_cd14acda42ad050c118745306aa05724__;__INCGUARD_f5bc78645402f1b3541a76740d198208__;__WINDOWS_MSVC;__WINDOWS_PATHS_INCLUDED;_compiler_version;android-java-tools;astyle;boxer;boxer_all;build-essential;cmake;cmake_all;conio-for-linux;d;day;dir;dkdepend_disable_list;dkdepend_list;dkdepend_list;emsdk;emsdk-portable;extension;ffmpeg-dev;ffmpeg-shared;ffmpeg-static;fixed_flags;fmt;fmt_all;freealut;freealut-master;git;git_all;gradle;imagemagick;imagemagick_all;index;isDKPlugin;java;jerryscript;jpeg;kdevelop;lang;leptonica;lib;libasound2-dev;libcaca;libgl1-mesa-dev;libglib2.0-dev;libglu1-mesa-dev;libgtk2.0-dev;librocket;libsndfile1-dev;libsystemd-dev;libtorrent;libudev-dev;libvncserver;libvncserver-master-win;libwebp;libwebsockets;libx11;libx11-dev;libxcursor-dev;libxrandr-dev;libxtst-dev;lighttpd;lua;mesa-common-dev;miniweb;month;msys2;notepadpp;openal;openal-android;opencv;openframeworks;openscenegraph;opensles;osgaudio;osgbullet;osgworks;plugin;plugin_lower;plugin_path;podofo;python;python_all;resources_SRC;sdl2_gif;sdl2_giflib_sa;simple-getch;src;t;tesseract;tiff;type;uwebsockets;v;var;vars;visualstudio;visualstudio_all;waave;year
+visualstudio ==           ON
+visualstudio_all ==           1
+waave ==           
+year ==           22
