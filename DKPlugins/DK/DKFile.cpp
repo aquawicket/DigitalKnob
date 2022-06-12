@@ -46,10 +46,12 @@ bool DKFile::DebugPath(const DKString& path){
 		DKWARN("DKFile::DebugPath("+path+"): Found obscurities in the path. Please debug to find the out where is starts for this path \n");
 		return false;
 	}
+	/*
 	if(has(path, "//") && !has(path, "://")){
 		DKWARN("DKFile::DebugPath("+path+"): Found obscurities in the path. Please debug to find out where it starts for this path \n");
 		return false;
 	}
+	*/
 	return true;
 }
 

@@ -30,9 +30,9 @@
 #ifndef DKSDLRmlOpenGL_H
 #define DKSDLRmlOpenGL_H
 
-#include <RmlUi/Core.h>
+#include "RmlUi/Core.h"
 //#include <RmlUi/Core/RenderInterface.h>
-#include <SDL.h>
+#include "SDL.h"
 
 #if !defined(ANDROID) && !defined(IOS)
 #include "SDL_opengl.h"

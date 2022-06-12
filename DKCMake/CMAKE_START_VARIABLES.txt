@@ -1,8 +1,8 @@
-CMAKE_BINARY_DIR ==           C:/Users/Administrator/digitalknob/DK/DKApps/DKSDLRmlUi/win32
+CMAKE_BINARY_DIR ==           C:/Users/Administrator/digitalknob/DK/DKApps/DKTestAll/win32
 CMAKE_COMMAND ==           C:/Program Files (x86)/CMake/bin/cmake.exe
 CMAKE_CPACK_COMMAND ==           C:/Program Files (x86)/CMake/bin/cpack.exe
 CMAKE_CTEST_COMMAND ==           C:/Program Files (x86)/CMake/bin/ctest.exe
-CMAKE_CURRENT_BINARY_DIR ==           C:/Users/Administrator/digitalknob/DK/DKApps/DKSDLRmlUi/win32
+CMAKE_CURRENT_BINARY_DIR ==           C:/Users/Administrator/digitalknob/DK/DKApps/DKTestAll/win32
 CMAKE_CURRENT_LIST_DIR ==           C:/Users/Administrator/digitalknob/DK/DKCMake
 CMAKE_CURRENT_LIST_FILE ==           C:/Users/Administrator/digitalknob/DK/DKCMake/CMakeLists.txt
 CMAKE_CURRENT_SOURCE_DIR ==           C:/Users/Administrator/digitalknob/DK/DKCMake

@@ -38,7 +38,8 @@ static PFNGLUSEPROGRAMOBJECTARBPROC glUseProgramObjectARB;
 #endif
 
 DKSDLRmlOpenGL::DKSDLRmlOpenGL(SDL_Renderer* renderer, SDL_Window* screen) {
-	//DKDEBUGFUNC(renderer, screen);
+	DKDEBUGFUNC(renderer, screen);
+    DKINFO("Using DKSDLRmlOpenGL\n");
     mRenderer = renderer;
     mScreen = screen;
 }

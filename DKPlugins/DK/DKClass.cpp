@@ -75,7 +75,7 @@ DKObject* DKClass::_Get(const DKString& data){
 }
 
 bool DKClass::_Valid(const DKString& data){
-	//DKDEBUGFUNC(data);
+	DKDEBUGFUNC(data);
 	DKStringArray arry;
 	toStringArray(arry, data, ",");
 	if(classes && (*classes)[arry[0]]){
@@ -146,7 +146,7 @@ void DKClass::CloseAll(){
 }
 
 void DKClass::GetClassList(DKStringArray& list){
-	DKDEBUGFUNC();
+	DKDEBUGFUNC(list);
 	std::map<DKString, DKClass*>::reverse_iterator rit;
 	if(!classes)
 		return;
@@ -157,7 +157,7 @@ void DKClass::GetClassList(DKStringArray& list){
 }
 
 void DKClass::GetObjects(DKStringArray& list){
-	DKDEBUGFUNC();
+	DKDEBUGFUNC(list);
 	list.clear();
 	std::map<DKString, DKClass*>::iterator it;
 	if(!classes)

@@ -29,8 +29,8 @@
 #ifndef DKSDLRMLRENDERER_H
 #define DKSDLRMLRENDERER_H
 
-#include <SDL.h>
-#include <RmlUi/Core/RenderInterface.h>
+#include "SDL.h"
+#include "RmlUi/Core/RenderInterface.h"
 
 
 class DKSDLRmlRenderer : public Rml::RenderInterface

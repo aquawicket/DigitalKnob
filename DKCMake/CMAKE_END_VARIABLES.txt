@@ -1,8 +1,52 @@
 3RDPARTY ==           C:/Users/Administrator/digitalknob/DK/3rdParty
-APP_NAME ==           DKSDLRmlUi
+ANDROIDBUILDTOOLS ==           C:/Users/Administrator/digitalknob/DK/3rdParty/android-sdk/build-tools/30.0.3
+ANDROIDBUILDTOOLS_DL ==           https://dl.google.com/android/repository/91936d4ee3ccc839f0addd53c9ebf087b1e39251.build-tools_r30.0.3-windows.zip
+ANDROIDBUILDTOOLS_VERSION ==           30.0.3
+ANDROIDIMAGES ==           C:/Users/Administrator/digitalknob/DK/3rdParty/android-sdk/system-images/24
+ANDROIDIMAGES_VERSION ==           24
+ANDROIDNDK ==           C:/Users/Administrator/digitalknob/DK/3rdParty/android-sdk/ndk/22.1.7171670
+ANDROIDNDK_BUILD ==           22.1.7171670
+ANDROIDNDK_DL ==           https://dl.google.com/android/repository/android-ndk-r22b-windows-x86_64.zip
+ANDROIDNDK_VERSION ==           r22b
+ANDROIDPLATFORMS ==           C:/Users/Administrator/digitalknob/DK/3rdParty/android-sdk/platforms/android-26
+ANDROIDPLATFORMS_DL ==           https://dl.google.com/android/repository/platform-26_r02.zip
+ANDROIDPLATFORMS_FOLDER ==           android-26
+ANDROIDPLATFORMS_VERSION ==           26_r02
+ANDROIDPLATFORMTOOLS ==           C:/Users/Administrator/digitalknob/DK/3rdParty/android-sdk/platform-tools
+ANDROIDPLATFORMTOOLS_DL ==           https://dl.google.com/android/repository/platform-tools_r31.0.3-windows.zip
+ANDROIDPLATFORMTOOLS_VERSION ==           31.0.3
+ANDROIDSDK ==           C:/Users/Administrator/digitalknob/DK/3rdParty/android-sdk
+ANDROIDSDKTOOLS ==           C:/Users/Administrator/digitalknob/DK/3rdParty/android-sdk/tools
+ANDROIDSDKTOOLS_BUILD ==           4333796
+ANDROIDSDKTOOLS_DL ==           https://dl.google.com/android/repository/sdk-tools-windows-4333796.zip
+ANDROIDSDKTOOLS_VERSION ==           26.2.0
+ANDROIDSOURCES ==           C:/Users/Administrator/digitalknob/DK/3rdParty/android-sdk/sources/android-26
+ANDROIDSOURCES_DL ==           https://dl.google.com/android/repository/sources-26_r01.zip
+ANDROIDSOURCES_FOLDER ==           android-26
+ANDROIDSOURCES_VERSION ==           26_r01
+ANDROIDSTUDIO ==           C:/Program Files/Android/Android Studio/bin
+ANDROIDSTUDIO_DL ==           https://redirector.gvt1.com/edgedl/android/studio/install/2020.3.1.26/android-studio-2020.3.1.26-windows.exe
+ANDROIDSTUDIO_EXE ==           C:/Program Files/Android/Android Studio/bin/studio.exe
+ANDROIDSTUDIO_NAME ==           android-studio-2020.3.1.26-windows.exe
+ANDROIDSTUDIO_VERSION ==           2020.3.1.26-windows
+ANDROIDTOOLS ==           C:/Users/Administrator/digitalknob/DK/3rdParty/android-sdk/cmdline-tools/latest
+ANDROIDTOOLS_DL ==           https://dl.google.com/android/repository/commandlinetools-win-7583922_latest.zip
+ANDROID_CMAKE ==           C:/Users/Administrator/digitalknob/DK/3rdParty/android-sdk/cmake
+ANDROID_CMAKE_DL ==           https://dl.google.com/android/repository/7c386a739f915f5bd60051f2572c24782388e807.cmake-3.18.1-windows.zip
+ANDROID_CMAKE_NAME ==           android-sdk/cmake
+ANDROID_CMAKE_VERSION ==           3.18.1
+ANT ==           C:/Users/Administrator/digitalknob/DK/3rdParty/ant-master
+ANT_BRANCH ==           master
+ANT_FOLDER ==           ant
+ANT_NAME ==           ant-master
+APP_NAME ==           DKTestAll
 APP_VERSION ==           22.06.12
 ASSETS ==           PATTERN;*.h;EXCLUDE;PATTERN;*.c;EXCLUDE;PATTERN;*.cmake;EXCLUDE;PATTERN;*.cpp;EXCLUDE;PATTERN;*.dir;EXCLUDE;PATTERN;*.filters;EXCLUDE;PATTERN;*.lib;EXCLUDE;PATTERN;*.manifest;EXCLUDE;PATTERN;*.mm;EXCLUDE;PATTERN;*.pdb;EXCLUDE;PATTERN;*.plist;EXCLUDE;PATTERN;*.rc;EXCLUDE;PATTERN;*.sln;EXCLUDE;PATTERN;*.tmp;EXCLUDE;PATTERN;*.TMP;EXCLUDE;PATTERN;*.temp;EXCLUDE;PATTERN;*.TEMP;EXCLUDE;PATTERN;*.vcxproj;EXCLUDE;PATTERN;CMakeFiles;EXCLUDE;PATTERN;CMakeLists.txt;EXCLUDE;PATTERN;temp.txt;EXCLUDE;PATTERN;win32;EXCLUDE;PATTERN;win64;EXCLUDE;PATTERN;mac32;EXCLUDE;PATTERN;mac64;EXCLUDE;PATTERN;ios32;EXCLUDE;PATTERN;ios64;EXCLUDE;PATTERN;iossim32;EXCLUDE;PATTERN;iossim64;EXCLUDE;PATTERN;linux32;EXCLUDE;PATTERN;linux64;EXCLUDE;PATTERN;android32;EXCLUDE;PATTERN;android64;EXCLUDE;PATTERN;raspberry32;EXCLUDE;PATTERN;raspberry64;EXCLUDE;PATTERN;dktest;EXCLUDE
-App_SRC ==           C:/Users/Administrator/digitalknob/DK/DKApps/DKSDLRmlUi/DKPlugins.h;C:/Users/Administrator/digitalknob/DK/DKApps/DKSDLRmlUi/main.cpp;C:/Users/Administrator/digitalknob/DK/DKApps/DKSDLRmlUi/resource.h;C:/Users/Administrator/digitalknob/DK/DKApps/DKSDLRmlUi/resource.rc
+App_SRC ==           C:/Users/Administrator/digitalknob/DK/DKApps/DKTestAll/DKPlugins.h;C:/Users/Administrator/digitalknob/DK/DKApps/DKTestAll/main.cpp;C:/Users/Administrator/digitalknob/DK/DKApps/DKTestAll/resource.h;C:/Users/Administrator/digitalknob/DK/DKApps/DKTestAll/resource.rc
+BABEL ==           C:/Users/Administrator/digitalknob/DK/3rdParty/babel-7.14.4
+BABEL_DL ==           https://unpkg.com/@babel/standalone@7.14.4/babel.min.js
+BABEL_NAME ==           babel-7.14.4
+BABEL_VERSION ==           7.14.4
 BG_black ==           [40m
 BG_blue ==           [44m
 BG_cyan ==           [30;46m
@@ -11,12 +55,28 @@ BG_magenta ==           [45m
 BG_red ==           [41m
 BG_white ==           [30;47m
 BG_yellow ==           [30;43m
+BOOST ==           C:/Users/Administrator/digitalknob/DK/3rdParty/boost_1_78_0
+BOOST_BUILD ==           0
+BOOST_DL ==           https://versaweb.dl.sourceforge.net/project/boost/boost/1.78.0/boost_1_78_0.zip
+BOOST_MAJOR ==           1
+BOOST_MINOR ==           78
+BOOST_NAME ==           boost_1_78_0
+BOOST_VERSION ==           1_78_0
 BOXER ==           C:/Users/Administrator/digitalknob/DK/3rdParty/boxer-master
 BOXER_BRANCH ==           master
 BOXER_FOLDER ==           boxer
 BOXER_NAME ==           boxer-master
 BUILD ==           OFF
 BUILD_DIR ==           win32
+BULLET3 ==           C:/Users/Administrator/digitalknob/DK/3rdParty/bullet3-master
+BULLET3_BRANCH ==           master
+BULLET3_FOLDER ==           bullet3
+BULLET3_NAME ==           bullet3-master
+BZIP2-WIN-BUILD ==           C:/Users/Administrator/digitalknob/DK/3rdParty/bzip2-win-build-master
+BZIP2-WIN-BUILD_BRANCH ==           master
+BZIP2-WIN-BUILD_CMAKE ==           -DBZIP2_INCLUDE_DIR=C:/Users/Administrator/digitalknob/DK/3rdParty/bzip2-win-build-master;-DBZIP2_LIBRARY_DEBUG=C:/Users/Administrator/digitalknob/DK/3rdParty/bzip2-win-build-master/win32/Debug/libbz2-static.lib;-DBZIP2_LIBRARY_RELEASE=C:/Users/Administrator/digitalknob/DK/3rdParty/bzip2-win-build-master/win32/Release/libbz2-static.lib
+BZIP2-WIN-BUILD_FOLDER ==           bzip2-win-build
+BZIP2-WIN-BUILD_NAME ==           bzip2-win-build-master
 B_black ==           [1;30m
 B_blue ==           [1;34m
 B_cyan ==           [1;36m
@@ -25,6 +85,15 @@ B_magenta ==           [1;35m
 B_red ==           [1;31m
 B_white ==           [1;37m
 B_yellow ==           [1;33m
+CEF ==           C:/Users/Administrator/digitalknob/DK/3rdParty/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_windows32
+CEF_DL ==           https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_windows32.tar.bz2
+CEF_NAME ==           cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_windows32
+CEF_VERSION ==           81.3.3+g072a5f5+chromium-81.0.4044.138
+CHART.JS ==           C:/Users/Administrator/digitalknob/DK/3rdParty/chart.js-Chart.min
+CHART.JS_BRANCH ==           Chart.min
+CHART.JS_DL ==           https://github.com/chartjs/Chart.js/releases/download/v2.9.3/Chart.min.js
+CHART.JS_FOLDER ==           chart.js
+CHART.JS_NAME ==           chart.js-Chart.min
 CLR ==           [0m
 CMAKE ==           C:/Progra~2/CMake/bin
 CMAKE_AR ==           C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.30.30705/bin/Hostx64/x86/lib.exe
@@ -34,7 +103,7 @@ CMAKE_AUTOMOC_COMPILER_PREDEFINES ==           ON
 CMAKE_AUTOMOC_MACRO_NAMES ==           Q_OBJECT;Q_GADGET;Q_NAMESPACE;Q_NAMESPACE_EXPORT
 CMAKE_AUTOMOC_PATH_PREFIX ==           OFF
 CMAKE_BASE_NAME ==           cl
-CMAKE_BINARY_DIR ==           C:/Users/Administrator/digitalknob/DK/DKApps/DKSDLRmlUi/win32
+CMAKE_BINARY_DIR ==           C:/Users/Administrator/digitalknob/DK/DKApps/DKTestAll/win32
 CMAKE_BUILD_TOOL ==           C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe
 CMAKE_BUILD_TYPE ==           DEBUG;RELEASE
 CMAKE_BUILD_TYPE_INIT ==           Debug
@@ -57,7 +126,7 @@ CMAKE_CONFIGURATION_TYPES ==           Debug;Release;MinSizeRel;RelWithDebInfo
 CMAKE_CPACK_COMMAND ==           C:/Program Files (x86)/CMake/bin/cpack.exe
 CMAKE_CROSSCOMPILING ==           FALSE
 CMAKE_CTEST_COMMAND ==           C:/Program Files (x86)/CMake/bin/ctest.exe
-CMAKE_CURRENT_BINARY_DIR ==           C:/Users/Administrator/digitalknob/DK/DKApps/DKSDLRmlUi/win32
+CMAKE_CURRENT_BINARY_DIR ==           C:/Users/Administrator/digitalknob/DK/DKApps/DKTestAll/win32
 CMAKE_CURRENT_LIST_DIR ==           C:/Users/Administrator/digitalknob/DK/DKCMake
 CMAKE_CURRENT_LIST_FILE ==           C:/Users/Administrator/digitalknob/DK/DKCMake/CMakeLists.txt
 CMAKE_CURRENT_SOURCE_DIR ==           C:/Users/Administrator/digitalknob/DK/DKCMake
@@ -438,8 +507,8 @@ CMAKE_CXX_COMPILER_PRODUCED_FILES ==           CompilerIdCXX.exe;CompilerIdCXX.v
 CMAKE_CXX_COMPILER_PRODUCED_OUTPUT ==           Microsoft (R) Build Engine version 17.0.0+c9eb9dd64 for .NET Framework
 Copyright (C) Microsoft Corporation. All rights reserved.
 
-Build started 6/12/2022 2:46:38 AM.
-Project "C:\Users\Administrator\digitalknob\DK\DKApps\DKSDLRmlUi\win32\CMakeFiles\3.21.1\CompilerIdCXX\CompilerIdCXX.vcxproj" on node 1 (default targets).
+Build started 6/12/2022 10:32:20 AM.
+Project "C:\Users\Administrator\digitalknob\DK\DKApps\DKTestAll\win32\CMakeFiles\3.21.1\CompilerIdCXX\CompilerIdCXX.vcxproj" on node 1 (default targets).
 PrepareForBuild:
   Creating directory "Debug\".
   Creating directory "Debug\CompilerIdCXX.tlog\".
@@ -450,7 +519,7 @@ ClCompile:
   CMakeCXXCompilerId.cpp
 Link:
   C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.30.30705\bin\HostX64\x86\link.exe /ERRORREPORT:QUEUE /OUT:".\CompilerIdCXX.exe" /INCREMENTAL:NO /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /PDB:".\CompilerIdCXX.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:".\CompilerIdCXX.lib" /MACHINE:X86 /SAFESEH Debug\CMakeCXXCompilerId.obj
-  CompilerIdCXX.vcxproj -> C:\Users\Administrator\digitalknob\DK\DKApps\DKSDLRmlUi\win32\CMakeFiles\3.21.1\CompilerIdCXX\CompilerIdCXX.exe
+  CompilerIdCXX.vcxproj -> C:\Users\Administrator\digitalknob\DK\DKApps\DKTestAll\win32\CMakeFiles\3.21.1\CompilerIdCXX\CompilerIdCXX.exe
 PostBuildEvent:
   for %%i in (cl.exe) do @echo CMAKE_CXX_COMPILER=%%~$PATH:i
   :VCEnd
@@ -458,13 +527,13 @@ PostBuildEvent:
 FinalizeBuildStatus:
   Deleting file "Debug\CompilerIdCXX.tlog\unsuccessfulbuild".
   Touching "Debug\CompilerIdCXX.tlog\CompilerIdCXX.lastbuildstate".
-Done Building Project "C:\Users\Administrator\digitalknob\DK\DKApps\DKSDLRmlUi\win32\CMakeFiles\3.21.1\CompilerIdCXX\CompilerIdCXX.vcxproj" (default targets).
+Done Building Project "C:\Users\Administrator\digitalknob\DK\DKApps\DKTestAll\win32\CMakeFiles\3.21.1\CompilerIdCXX\CompilerIdCXX.vcxproj" (default targets).
 
 Build succeeded.
     0 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:00.73
+Time Elapsed 00:00:00.70
 
 CMAKE_CXX_COMPILER_RANLIB ==           
 CMAKE_CXX_COMPILER_VERSION ==           19.30.30709.0
@@ -879,8 +948,8 @@ CMAKE_C_COMPILER_PRODUCED_FILES ==           CompilerIdC.exe;CompilerIdC.vcxproj
 CMAKE_C_COMPILER_PRODUCED_OUTPUT ==           Microsoft (R) Build Engine version 17.0.0+c9eb9dd64 for .NET Framework
 Copyright (C) Microsoft Corporation. All rights reserved.
 
-Build started 6/12/2022 2:46:37 AM.
-Project "C:\Users\Administrator\digitalknob\DK\DKApps\DKSDLRmlUi\win32\CMakeFiles\3.21.1\CompilerIdC\CompilerIdC.vcxproj" on node 1 (default targets).
+Build started 6/12/2022 10:32:18 AM.
+Project "C:\Users\Administrator\digitalknob\DK\DKApps\DKTestAll\win32\CMakeFiles\3.21.1\CompilerIdC\CompilerIdC.vcxproj" on node 1 (default targets).
 PrepareForBuild:
   Creating directory "Debug\".
   Creating directory "Debug\CompilerIdC.tlog\".
@@ -891,7 +960,7 @@ ClCompile:
   CMakeCCompilerId.c
 Link:
   C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.30.30705\bin\HostX64\x86\link.exe /ERRORREPORT:QUEUE /OUT:".\CompilerIdC.exe" /INCREMENTAL:NO /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /PDB:".\CompilerIdC.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:".\CompilerIdC.lib" /MACHINE:X86 /SAFESEH Debug\CMakeCCompilerId.obj
-  CompilerIdC.vcxproj -> C:\Users\Administrator\digitalknob\DK\DKApps\DKSDLRmlUi\win32\CMakeFiles\3.21.1\CompilerIdC\CompilerIdC.exe
+  CompilerIdC.vcxproj -> C:\Users\Administrator\digitalknob\DK\DKApps\DKTestAll\win32\CMakeFiles\3.21.1\CompilerIdC\CompilerIdC.exe
 PostBuildEvent:
   for %%i in (cl.exe) do @echo CMAKE_C_COMPILER=%%~$PATH:i
   :VCEnd
@@ -899,7 +968,7 @@ PostBuildEvent:
 FinalizeBuildStatus:
   Deleting file "Debug\CompilerIdC.tlog\unsuccessfulbuild".
   Touching "Debug\CompilerIdC.tlog\CompilerIdC.lastbuildstate".
-Done Building Project "C:\Users\Administrator\digitalknob\DK\DKApps\DKSDLRmlUi\win32\CMakeFiles\3.21.1\CompilerIdC\CompilerIdC.vcxproj" (default targets).
+Done Building Project "C:\Users\Administrator\digitalknob\DK\DKApps\DKTestAll\win32\CMakeFiles\3.21.1\CompilerIdC\CompilerIdC.vcxproj" (default targets).
 
 Build succeeded.
     0 Warning(s)
@@ -1045,11 +1114,11 @@ CMAKE_PATCH_VERSION ==           1
 CMAKE_PCH_COPY_COMPILE_PDB ==           ON
 CMAKE_PCH_EXTENSION ==           .pch
 CMAKE_PCH_PROLOGUE ==           #pragma system_header
-CMAKE_PLATFORM_INFO_DIR ==           C:/Users/Administrator/digitalknob/DK/DKApps/DKSDLRmlUi/win32/CMakeFiles/3.21.1
+CMAKE_PLATFORM_INFO_DIR ==           C:/Users/Administrator/digitalknob/DK/DKApps/DKTestAll/win32/CMakeFiles/3.21.1
 CMAKE_PLATFORM_INFO_INITIALIZED ==           1
 CMAKE_PROJECT_DESCRIPTION ==           
 CMAKE_PROJECT_HOMEPAGE_URL ==           
-CMAKE_PROJECT_NAME ==           DKSDLRmlUi
+CMAKE_PROJECT_NAME ==           DKTestAll
 CMAKE_RANLIB ==           :
 CMAKE_RANLIB ==           :
 CMAKE_RC_COMPILER ==           rc
@@ -1132,7 +1201,21 @@ CMAKE_VS_PLATFORM_NAME_DEFAULT ==           x64
 CMAKE_VS_PLATFORM_TOOLSET ==           v143
 CMAKE_VS_PLATFORM_TOOLSET_HOST_ARCHITECTURE ==           x64
 CMAKE_VS_WINDOWS_TARGET_PLATFORM_VERSION ==           10.0.19041.0
+CODEMIRROR ==           C:/Users/Administrator/digitalknob/DK/3rdParty/codemirror-master
+CODEMIRROR_BRANCH ==           master
+CODEMIRROR_FOLDER ==           codemirror
+CODEMIRROR_NAME ==           codemirror-master
 COMPILE_CMAKE ==           0
+CONTENT ==           C:/Users/Administrator/digitalknob/DK/3rdParty/content-4a616cb539e1ccece651e171c00e8f8db64fb570
+CONTENT_BRANCH ==           4a616cb539e1ccece651e171c00e8f8db64fb570
+CONTENT_DL ==           https://github.com/mdn/content/archive/4a616cb539e1ccece651e171c00e8f8db64fb570.zip
+CONTENT_FOLDER ==           content
+CONTENT_NAME ==           content-4a616cb539e1ccece651e171c00e8f8db64fb570
+CPP-SUBPROCESS ==           C:/Users/Administrator/digitalknob/DK/3rdParty/cpp-subprocess-2e91c3945df3894648ecdcdbd1c197eedb22e63a
+CPP-SUBPROCESS_BRANCH ==           2e91c3945df3894648ecdcdbd1c197eedb22e63a
+CPP-SUBPROCESS_DL ==           https://github.com/tsaarni/cpp-subprocess/archive/2e91c3945df3894648ecdcdbd1c197eedb22e63a.zip
+CPP-SUBPROCESS_FOLDER ==           cpp-subprocess
+CPP-SUBPROCESS_NAME ==           cpp-subprocess-2e91c3945df3894648ecdcdbd1c197eedb22e63a
 CRYPTOPP ==           C:/Users/Administrator/digitalknob/DK/3rdParty/cryptopp-27b7b8e4e6b3e54cca13b2faae87eb95faa0d819
 CRYPTOPP_BRANCH ==           27b7b8e4e6b3e54cca13b2faae87eb95faa0d819
 CRYPTOPP_DL ==           https://github.com/weidai11/cryptopp/archive/27b7b8e4e6b3e54cca13b2faae87eb95faa0d819.zip
@@ -1143,16 +1226,22 @@ CURL_BRANCH ==           curl-7_43_0
 CURL_DL ==           https://github.com/curl/curl/archive/refs/tags/curl-7_43_0.zip
 CURL_FOLDER ==           curl
 CURL_NAME ==           curl-curl-7_43_0
-CURRENT_DIR ==           C:/Users/Administrator/digitalknob/DK/3rdParty/sdl_ttf-main/win32
+CURRENT_DIR ==           C:/Users/Administrator/digitalknob/DK/DKPlugins/DKEmscripten
 ColourBold ==           [1m
 DEBUG ==           ON
 DEBUG_DIR ==           Debug
-DEBUG_FLAGS ==           /MANIFEST:NO /MANIFESTUAC:NO /level='highestAvailable' /uiAccess='true' /SUBSYSTEM:CONSOLE,5.01 /SAFESEH:NO
-DEBUG_LIBS ==           debug;C:/Users/Administrator/digitalknob/DK/3rdParty/boxer-master/win32/Debug/Boxer.lib;debug;C:/Users/Administrator/digitalknob/DK/DKPlugins/DK/win32/Debug/DK.lib;debug;C:/Users/Administrator/digitalknob/DK/3rdParty/zlib-master/win32/Debug/zlibstaticd.lib;debug;C:/Users/Administrator/digitalknob/DK/3rdParty/xz-20e7a33e2d59c6a814447d3991f21e2702174b20/win32/Debug/liblzma.lib;debug;C:/Users/Administrator/digitalknob/DK/3rdParty/libiconv-1.14/win32/Debug/iconv.lib;debug;C:/Users/Administrator/digitalknob/DK/3rdParty/libiconv-1.14/win32/Debug/charset.lib;debug;C:/Users/Administrator/digitalknob/DK/3rdParty/libxml2-f2ad86fa600885429a6083aaf6926c7e2e5b24d6/win32/Debug/xml2.lib;debug;C:/Users/Administrator/digitalknob/DK/3rdParty/cryptopp-27b7b8e4e6b3e54cca13b2faae87eb95faa0d819/win32/Debug/cryptopp-static.lib;debug;C:/Users/Administrator/digitalknob/DK/3rdParty/openssl-1.0.2h-vs2015/lib/libeay32MTd.lib;debug;C:/Users/Administrator/digitalknob/DK/3rdParty/openssl-1.0.2h-vs2015/lib/ssleay32MTd.lib;debug;C:/Users/Administrator/digitalknob/DK/3rdParty/libarchive-93f03b0f5d7316714df9b289a49150ab7a63bfaf/win32/libarchive/Debug/archive_static.lib;debug;C:/Users/Administrator/digitalknob/DK/DKPlugins/DKDuktape/win32/Debug/DKDuktape.lib;debug;C:/Users/Administrator/digitalknob/DK/DKPlugins/DKArchive/win32/Debug/DKArchive.lib;debug;C:/Users/Administrator/digitalknob/DK/DKPlugins/DKAssets/win32/Debug/DKAssets.lib;debug;C:/Users/Administrator/digitalknob/DK/3rdParty/curl-curl-7_43_0/win32/lib/Debug/libcurl.lib;debug;C:/Users/Administrator/digitalknob/DK/DKPlugins/DKFile/win32/Debug/DKFile.lib;debug;C:/Users/Administrator/digitalknob/DK/DKPlugins/DKCurl/win32/Debug/DKCurl.lib;debug;C:/Users/Administrator/digitalknob/DK/DKPlugins/DKDebug/win32/Debug/DKDebug.lib;debug;C:/Users/Administrator/digitalknob/DK/DKPlugins/DKDuktapeDom/win32/Debug/DKDuktapeDom.lib;debug;C:/Users/Administrator/digitalknob/DK/3rdParty/freetype-2.5.5/win32/Debug/freetype.lib;debug;C:/Users/Administrator/digitalknob/DK/3rdParty/rmlui-master/win32/Debug/RmlCore.lib;debug;C:/Users/Administrator/digitalknob/DK/3rdParty/rmlui-master/win32/Debug/RmlDebugger.lib;debug;C:/Users/Administrator/digitalknob/DK/DKPlugins/DKWindow/win32/Debug/DKWindow.lib;debug;C:/Users/Administrator/digitalknob/DK/DKPlugins/DKXml/win32/Debug/DKXml.lib;debug;C:/Users/Administrator/digitalknob/DK/3rdParty/tidy-html5-master/win32/Debug/tidy_staticd.lib;debug;C:/Users/Administrator/digitalknob/DK/DKPlugins/DKRml/win32/Debug/DKRml.lib;debug;C:/Users/Administrator/digitalknob/DK/DKPlugins/DKDom/win32/Debug/DKDom.lib;debug;C:/Users/Administrator/digitalknob/DK/DKPlugins/DKHandles/win32/Debug/DKHandles.lib;debug;C:/Users/Administrator/digitalknob/DK/DKPlugins/DKMySql/win32/Debug/DKMySql.lib;debug;C:/Users/Administrator/digitalknob/DK/DKPlugins/DKRmlIframe/win32/Debug/DKRmlIframe.lib;debug;C:/Users/Administrator/digitalknob/DK/DKPlugins/DKVideo/win32/Debug/DKVideo.lib;debug;C:/Users/Administrator/digitalknob/DK/3rdParty/glew-glew-2.2.0/win32/lib/Debug/libglew32d.lib;debug;C:/Users/Administrator/digitalknob/DK/3rdParty/sdl-main/win32/Debug/SDL2-staticd.lib;debug;C:/Users/Administrator/digitalknob/DK/DKPlugins/DKSDLWindow/win32/Debug/DKSDLWindow.lib;debug;C:/Users/Administrator/digitalknob/DK/3rdParty/giflib-master/win32/Debug/lib/.libs/libgif.a;debug;C:/Users/Administrator/digitalknob/DK/3rdParty/libpng-v1.6.35/win32/Debug/libpng16_staticd.lib;debug;C:/Users/Administrator/digitalknob/DK/3rdParty/libjpeg-turbo-2.1.1/win32/Debug/turbojpeg-static.lib;debug;C:/Users/Administrator/digitalknob/DK/3rdParty/sdl_image-main/win32/lib/Debug/SDL_image.lib;debug;C:/Users/Administrator/digitalknob/DK/DKPlugins/DKSDLRml/win32/Debug/DKSDLRml.lib;debug;C:/Users/Administrator/digitalknob/DK/3rdParty/sdl_ttf-main/win32/lib/Debug/SDL_ttf.lib;debug;C:/Users/Administrator/digitalknob/DK/DKPlugins/DKSDLText/win32/Debug/DKSDLText.lib
-DEBUG_LINK_FLAGS ==           /MANIFEST:NO;/MANIFESTUAC:NO;/level='highestAvailable';/uiAccess='true';/SUBSYSTEM:CONSOLE,5.01;/SAFESEH:NO
+DEBUG_FLAGS ==           /DELAYLOAD:libcef.dll /DELAYLOAD:chrome_elf.dll /MANIFEST:NO /MANIFESTUAC:NO /level='highestAvailable' /uiAccess='true' /SUBSYSTEM:CONSOLE,5.01 /SAFESEH:NO
+DEBUG_LIBS ==           debug;C:/Users/Administrator/digitalknob/DK/3rdParty/boost_1_78_0/win32/Debug/lib/libboost_atomic.lib;debug;C:/Users/Administrator/digitalknob/DK/3rdParty/boost_1_78_0/win32/Debug/lib/libboost_chrono.lib;debug;C:/Users/Administrator/digitalknob/DK/3rdParty/boost_1_78_0/win32/Debug/lib/libboost_container.lib;debug;C:/Users/Administrator/digitalknob/DK/3rdParty/boost_1_78_0/win32/Debug/lib/libboost_context.lib;debug;C:/Users/Administrator/digitalknob/DK/3rdParty/boost_1_78_0/win32/Debug/lib/libboost_contract.lib;debug;C:/Users/Administrator/digitalknob/DK/3rdParty/boost_1_78_0/win32/Debug/lib/libboost_coroutine.lib;debug;C:/Users/Administrator/digitalknob/DK/3rdParty/boost_1_78_0/win32/Debug/lib/libboost_date_time.lib;debug;C:/Users/Administrator/digitalknob/DK/3rdParty/boost_1_78_0/win32/Debug/lib/libboost_exception.lib;debug;C:/Users/Administrator/digitalknob/DK/3rdParty/boost_1_78_0/win32/Debug/lib/libboost_filesystem.lib;debug;C:/Users/Administrator/digitalknob/DK/3rdParty/boost_1_78_0/win32/Debug/lib/libboost_graph.lib;debug;C:/Users/Administrator/digitalknob/DK/3rdParty/boost_1_78_0/win32/Debug/lib/libboost_iostreams.lib;debug;C:/Users/Administrator/digitalknob/DK/3rdParty/boost_1_78_0/win32/Debug/lib/libboost_json.lib;debug;C:/Users/Administrator/digitalknob/DK/3rdParty/boost_1_78_0/win32/Debug/lib/libboost_locale.lib;debug;C:/Users/Administrator/digitalknob/DK/3rdParty/boost_1_78_0/win32/Debug/lib/libboost_log.lib;debug;C:/Users/Administrator/digitalknob/DK/3rdParty/boost_1_78_0/win32/Debug/lib/libboost_nowide.lib;debug;C:/Users/Administrator/digitalknob/DK/3rdParty/boost_1_78_0/win32/Debug/lib/libboost_program_options.lib;debug;C:/Users/Administrator/digitalknob/DK/3rdParty/boost_1_78_0/win32/Debug/lib/libboost_random.lib;debug;C:/Users/Administrator/digitalknob/DK/3rdParty/boost_1_78_0/win32/Debug/lib/libboost_regex.lib;debug;C:/Users/Administrator/digitalknob/DK/3rdParty/boost_1_78_0/win32/Debug/lib/libboost_serialization.lib;debug;C:/Users/Administrator/digitalknob/DK/3rdParty/boost_1_78_0/win32/Debug/lib/libboost_system.lib;debug;C:/Users/Administrator/digitalknob/DK/3rdParty/boost_1_78_0/win32/Debug/lib/libboost_thread.lib;debug;C:/Users/Administrator/digitalknob/DK/3rdParty/boost_1_78_0/win32/Debug/lib/libboost_timer.lib;debug;C:/Users/Administrator/digitalknob/DK/3rdParty/boost_1_78_0/win32/Debug/lib/libboost_type_erasure.lib;debug;C:/Users/Administrator/digitalknob/DK/3rdParty/boost_1_78_0/win32/Debug/lib/libboost_wave.lib;debug;C:/Users/Administrator/digitalknob/DK/3rdParty/boxer-master/win32/Debug/Boxer.lib;debug;C:/Users/Administrator/digitalknob/DK/3rdParty/mingw32-8.1.0/lib/gcc/i686-w64-mingw32/8.1.0/libgcc.a;debug;C:/Users/Administrator/digitalknob/DK/3rdParty/bzip2-win-build-master/win32/Debug/libbz2-static.lib;debug;C:/Users/Administrator/digitalknob/DK/3rdParty/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_windows32/Debug/libcef.lib;debug;C:/Users/Administrator/digitalknob/DK/3rdParty/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_windows32/win32/libcef_dll_wrapper/Debug/libcef_dll_wrapper.lib;debug;C:/Users/Administrator/digitalknob/DK/3rdParty/cryptopp-27b7b8e4e6b3e54cca13b2faae87eb95faa0d819/win32/Debug/cryptopp-static.lib;debug;C:/Users/Administrator/digitalknob/DK/3rdParty/zlib-master/win32/Debug/zlibstaticd.lib;debug;C:/Users/Administrator/digitalknob/DK/3rdParty/openssl-1.0.2h-vs2015/lib/libeay32MTd.lib;debug;C:/Users/Administrator/digitalknob/DK/3rdParty/openssl-1.0.2h-vs2015/lib/ssleay32MTd.lib;debug;C:/Users/Administrator/digitalknob/DK/3rdParty/curl-curl-7_43_0/win32/lib/Debug/libcurl.lib;debug;C:/Users/Administrator/digitalknob/DK/3rdParty/libogg-1.3.5/win32/Debug/src/.libs/libogg.a;debug;C:/Users/Administrator/digitalknob/DK/3rdParty/flac-1.3.2/win32/Debug/src/libFLAC/.libs/libFLAC-static.a;debug;C:/Users/Administrator/digitalknob/DK/3rdParty/freetype-2.5.5/win32/Debug/freetype.lib;debug;C:/Users/Administrator/digitalknob/DK/3rdParty/giflib-master/win32/Debug/lib/.libs/libgif.a;debug;C:/Users/Administrator/digitalknob/DK/3rdParty/glew-glew-2.2.0/win32/lib/Debug/libglew32d.lib;debug;C:/Users/Administrator/digitalknob/DK/3rdParty/xz-20e7a33e2d59c6a814447d3991f21e2702174b20/win32/Debug/liblzma.lib;debug;C:/Users/Administrator/digitalknob/DK/3rdParty/libiconv-1.14/win32/Debug/iconv.lib;debug;C:/Users/Administrator/digitalknob/DK/3rdParty/libiconv-1.14/win32/Debug/charset.lib;debug;C:/Users/Administrator/digitalknob/DK/3rdParty/libxml2-f2ad86fa600885429a6083aaf6926c7e2e5b24d6/win32/Debug/xml2.lib;debug;C:/Users/Administrator/digitalknob/DK/3rdParty/libarchive-93f03b0f5d7316714df9b289a49150ab7a63bfaf/win32/libarchive/Debug/archive_static.lib;debug;C:/Users/Administrator/digitalknob/DK/3rdParty/libjpeg-turbo-2.1.1/win32/Debug/turbojpeg-static.lib;debug;C:/Users/Administrator/digitalknob/DK/3rdParty/libpng-v1.6.35/win32/Debug/libpng16_staticd.lib;debug;C:/Users/Administrator/digitalknob/DK/3rdParty/libuv-2bc22c40eb68f3b38d1ae3ea68ef2f180cbe9fef/win32/Debug/uv_a.lib;debug;C:/Users/Administrator/digitalknob/DK/3rdParty/rlottie-master/win32/Debug/rlottie.lib;debug;C:/Users/Administrator/digitalknob/DK/3rdParty/rmlui-master/win32/Debug/RmlCore.lib;debug;C:/Users/Administrator/digitalknob/DK/3rdParty/rmlui-master/win32/Debug/RmlDebugger.lib;debug;C:/Users/Administrator/digitalknob/DK/3rdParty/rtmidi-2.1.0/win32/Debug/RtMidi.lib;debug;C:/Users/Administrator/digitalknob/DK/3rdParty/sdl-main/win32/Debug/SDL2-staticd.lib;debug;C:/Users/Administrator/digitalknob/DK/3rdParty/sdl-gpu-master/win32/SDL_gpu-VS/lib/Debug/SDL2_gpu_s.lib;debug;C:/Users/Administrator/digitalknob/DK/3rdParty/sdl_image-main/win32/lib/Debug/SDL_image.lib;debug;C:/Users/Administrator/digitalknob/DK/3rdParty/smpeg2-2.0.0;debug;C:/Users/Administrator/digitalknob/DK/3rdParty/libvorbis-1.3.7/win32/Debug/lib/.libs/libvorbis.a;debug;C:/Users/Administrator/digitalknob/DK/3rdParty/libvorbis-1.3.7/win32/Debug/lib/.libs/libvorbisfile.a;debug;C:/Users/Administrator/digitalknob/DK/3rdParty/libvorbis-1.3.7/win32/Debug/lib/.libs/libvorbisenc.a;debug;C:/Users/Administrator/digitalknob/DK/3rdParty/SDL2_mixer-2.0.1/win32/lib/Debug/SDL_mixer.lib;debug;C:/Users/Administrator/digitalknob/DK/3rdParty/sdl_ttf-main/win32/lib/Debug/SDL_ttf.lib;debug;C:/Users/Administrator/digitalknob/DK/3rdParty/sfml-a733e4cd7e0056922e4f74f1932749b4d6a5744d/win32/lib/Debug/sfml-audio-s-d.lib;debug;C:/Users/Administrator/digitalknob/DK/3rdParty/sfml-a733e4cd7e0056922e4f74f1932749b4d6a5744d/win32/lib/Debug/sfml-graphics-s-d.lib;debug;C:/Users/Administrator/digitalknob/DK/3rdParty/sfml-a733e4cd7e0056922e4f74f1932749b4d6a5744d/win32/lib/Debug/sfml-main-d.lib;debug;C:/Users/Administrator/digitalknob/DK/3rdParty/sfml-a733e4cd7e0056922e4f74f1932749b4d6a5744d/win32/lib/Debug/sfml-network-s-d.lib;debug;C:/Users/Administrator/digitalknob/DK/3rdParty/sfml-a733e4cd7e0056922e4f74f1932749b4d6a5744d/win32/lib/Debug/sfml-system-s-d.lib;debug;C:/Users/Administrator/digitalknob/DK/3rdParty/sfml-a733e4cd7e0056922e4f74f1932749b4d6a5744d/win32/lib/Debug/sfml-window-s-d.lib;debug;C:/Users/Administrator/digitalknob/DK/3rdParty/tidy-html5-master/win32/Debug/tidy_staticd.lib;debug;C:/Users/Administrator/digitalknob/DK/DKPlugins/DK/win32/Debug/DK.lib;debug;C:/Users/Administrator/digitalknob/DK/DKPlugins/DKDuktape/win32/Debug/DKDuktape.lib;debug;C:/Users/Administrator/digitalknob/DK/DKPlugins/DKCef/win32/Debug/DKCef.lib;debug;C:/Users/Administrator/digitalknob/DK/DKPlugins/DKArchive/win32/Debug/DKArchive.lib;debug;C:/Users/Administrator/digitalknob/DK/DKPlugins/DKAssets/win32/Debug/DKAssets.lib;debug;C:/Users/Administrator/digitalknob/DK/DKPlugins/DKAudio/win32/Debug/DKAudio.lib;debug;C:/Users/Administrator/digitalknob/DK/DKPlugins/DKFile/win32/Debug/DKFile.lib;debug;C:/Users/Administrator/digitalknob/DK/DKPlugins/DKCurl/win32/Debug/DKCurl.lib;debug;C:/Users/Administrator/digitalknob/DK/DKPlugins/DKCrypto/win32/Debug/DKCrypto.lib;debug;C:/Users/Administrator/digitalknob/DK/DKPlugins/DKDebug/win32/Debug/DKDebug.lib;debug;C:/Users/Administrator/digitalknob/DK/DKPlugins/DKWindow/win32/Debug/DKWindow.lib;debug;C:/Users/Administrator/digitalknob/DK/DKPlugins/DKXml/win32/Debug/DKXml.lib;debug;C:/Users/Administrator/digitalknob/DK/DKPlugins/DKRml/win32/Debug/DKRml.lib;debug;C:/Users/Administrator/digitalknob/DK/DKPlugins/DKDom/win32/Debug/DKDom.lib;debug;C:/Users/Administrator/digitalknob/DK/DKPlugins/DKDuktapeDom/win32/Debug/DKDuktapeDom.lib;debug;C:/Users/Administrator/digitalknob/DK/DKPlugins/DKHandles/win32/Debug/DKHandles.lib;debug;C:/Users/Administrator/digitalknob/DK/DKPlugins/DKHook/win32/Debug/DKHook.lib;debug;C:/Users/Administrator/digitalknob/DK/DKPlugins/DKImageMagick/win32/Debug/DKImageMagick.lib;debug;C:/Users/Administrator/digitalknob/DK/DKPlugins/DKMidi/win32/Debug/DKMidi.lib;debug;C:/Users/Administrator/digitalknob/DK/DKPlugins/DKMySql/win32/Debug/DKMySql.lib;debug;C:/Users/Administrator/digitalknob/DK/DKPlugins/DKRmlElement/win32/Debug/DKRmlElement.lib;debug;C:/Users/Administrator/digitalknob/DK/DKPlugins/DKRmlIframe/win32/Debug/DKRmlIframe.lib;debug;C:/Users/Administrator/digitalknob/DK/DKPlugins/DKVideo/win32/Debug/DKVideo.lib;debug;C:/Users/Administrator/digitalknob/DK/DKPlugins/DKSDLWindow/win32/Debug/DKSDLWindow.lib;debug;C:/Users/Administrator/digitalknob/DK/DKPlugins/DKSDLCef/win32/Debug/DKSDLCef.lib;debug;C:/Users/Administrator/digitalknob/DK/DKPlugins/DKSDLMetalWindow/win32/Debug/DKSDLMetalWindow.lib;debug;C:/Users/Administrator/digitalknob/DK/DKPlugins/DKSDLRml/win32/Debug/DKSDLRml.lib;debug;C:/Users/Administrator/digitalknob/DK/DKPlugins/DKSDLText/win32/Debug/DKSDLText.lib;debug;C:/Users/Administrator/digitalknob/DK/DKPlugins/DKSFMLWindow/win32/Debug/DKSFMLWindow.lib;debug;C:/Users/Administrator/digitalknob/DK/DKPlugins/DKTray/win32/Debug/DKTray.lib
+DEBUG_LINK_FLAGS ==           /DELAYLOAD:libcef.dll;/DELAYLOAD:chrome_elf.dll;/MANIFEST:NO;/MANIFESTUAC:NO;/level='highestAvailable';/uiAccess='true';/SUBSYSTEM:CONSOLE,5.01;/SAFESEH:NO
+DIFF-MATCH-PATCH ==           C:/Users/Administrator/digitalknob/DK/3rdParty/diff-match-patch-master
+DIFF-MATCH-PATCH_BRANCH ==           master
+DIFF-MATCH-PATCH_FOLDER ==           diff-match-patch
+DIFF-MATCH-PATCH_NAME ==           diff-match-patch-master
 DIGITALKNOB ==           C:/Users/Administrator/digitalknob
 DK ==           ON
 DKAPP ==           ON
+DKAdmin ==           ON
+DKAdmin_all ==           1
 DKArchive ==           ON
 DKArchive_BINARY_DIR ==           C:/Users/Administrator/digitalknob/DK/DKPlugins/DKArchive/win32
 DKArchive_IS_TOP_LEVEL ==           OFF
@@ -1163,6 +1252,11 @@ DKAssets_BINARY_DIR ==           C:/Users/Administrator/digitalknob/DK/DKPlugins
 DKAssets_IS_TOP_LEVEL ==           OFF
 DKAssets_SOURCE_DIR ==           C:/Users/Administrator/digitalknob/DK/DKPlugins/DKAssets
 DKAssets_all ==           1
+DKAudio ==           ON
+DKAudio_BINARY_DIR ==           C:/Users/Administrator/digitalknob/DK/DKPlugins/DKAudio/win32
+DKAudio_IS_TOP_LEVEL ==           OFF
+DKAudio_SOURCE_DIR ==           C:/Users/Administrator/digitalknob/DK/DKPlugins/DKAudio
+DKAudio_all ==           1
 DKBuild ==           ON
 DKBuild_all ==           1
 DKCEF ==           OFF
@@ -1189,14 +1283,34 @@ DKCONFIGURE_CXXFLAGS ==           -march=i686 -DWIN -DWIN32 -D_WINDOWS -D_CRT_SE
 DKCONFIGURE_CXXFLAGS_DEBUG ==           -DDEBUG -D_DEBUG -g
 DKCONFIGURE_CXXFLAGS_RELEASE ==           -DNDEBUG -DRELEASE -O3
 DKCONFIGURE_FLAGS ==           --build=i686-w64-mingw32;--disable-shared;--enable-static;CC=C:/Users/Administrator/digitalknob/DK/3rdParty/mingw32-8.1.0/bin/gcc.exe;CXX=C:/Users/Administrator/digitalknob/DK/3rdParty/mingw32-8.1.0/bin/g++.exe;CFLAGS="-march=i686 -DWIN -DWIN32 -D_WINDOWS -D_CRT_SECURE_NO_WARNINGS -D_USING_V110_SDK71_ -std=gnu17 -fexceptions";CXXFLAGS="-march=i686 -DWIN -DWIN32 -D_WINDOWS -D_CRT_SECURE_NO_WARNINGS -D_USING_V110_SDK71_ -std=gnu++17 -frtti -fexceptions"
+DKCef ==           ON
+DKCefChild ==           ON
+DKCefChild_BINARY_DIR ==           C:/Users/Administrator/digitalknob/DK/DKPlugins/DKCefChild/win32
+DKCefChild_IS_TOP_LEVEL ==           OFF
+DKCefChild_SOURCE_DIR ==           C:/Users/Administrator/digitalknob/DK/DKPlugins/DKCefChild
+DKCefChild_all ==           1
+DKCef_BINARY_DIR ==           C:/Users/Administrator/digitalknob/DK/DKPlugins/DKCef/win32
+DKCef_IS_TOP_LEVEL ==           OFF
+DKCef_SOURCE_DIR ==           C:/Users/Administrator/digitalknob/DK/DKPlugins/DKCef
+DKCef_all ==           1
+DKChart ==           ON
+DKChart_all ==           1
+DKCodeMirror ==           ON
+DKCodeMirror_all ==           1
 DKCodeRunner ==           ON
 DKColorPicker ==           ON
+DKCrypto ==           ON
+DKCrypto_BINARY_DIR ==           C:/Users/Administrator/digitalknob/DK/DKPlugins/DKCrypto/win32
+DKCrypto_IS_TOP_LEVEL ==           OFF
+DKCrypto_SOURCE_DIR ==           C:/Users/Administrator/digitalknob/DK/DKPlugins/DKCrypto
+DKCrypto_all ==           1
 DKCurl ==           ON
 DKCurl_BINARY_DIR ==           C:/Users/Administrator/digitalknob/DK/DKPlugins/DKCurl/win32
 DKCurl_IS_TOP_LEVEL ==           OFF
 DKCurl_SOURCE_DIR ==           C:/Users/Administrator/digitalknob/DK/DKPlugins/DKCurl
 DKCurl_all ==           1
-DKDEFINES_LIST ==           HAVE_git;HAVE_cmake;HAVE_visualstudio;HAVE_imagemagick;HAVE_DK;HAVE_boxer;HAVE_DKArchive;HAVE_libarchive;HAVE_zlib;HAVE_xz;HAVE_bzip2;HAVE_libxml2;HAVE_libiconv;HAVE_cryptopp;HAVE_openssl;HAVE_DKDuktape;HAVE_duktape;HAVE_python;HAVE_nodejs;HAVE_DKAssets;HAVE_DKBuild;HAVE_DKCurl;HAVE_curl;HAVE_ws2_32_lib;HAVE_DKFile;HAVE_DKCodeRunner;HAVE_DKColorPicker;HAVE_DKDebug;HAVE_stackwalker;HAVE_DKDevTools;HAVE_DKDuktapeDom;HAVE_DKDom;HAVE_DKRml;HAVE_rmlui;HAVE_freetype;HAVE_DKWindow;HAVE_DKXml;HAVE_pugixml;HAVE_tidy_html5;HAVE_DKEditor;HAVE_DKGui;HAVE_DKWidget;HAVE_DKGit;HAVE_DKHandles;HAVE_DKInputTest;HAVE_DKLogin;HAVE_DKMySql;HAVE_DKNotepad;HAVE_DKOS;HAVE_DKPaint;HAVE_DKPhp;HAVE_php_binary;HAVE_vc_redist;HAVE_DKRmlIframe;HAVE_DKRmlVideo;HAVE_DKVideo;HAVE_DKSDLRml;HAVE_DKSDLWindow;HAVE_glew;HAVE_sdl;HAVE_opengl;HAVE_winmm_lib;HAVE_sdl_image;HAVE_imageio;HAVE_mobile_core_services;HAVE_giflib;HAVE_mingw32;HAVE_msys;HAVE_libpng;HAVE_libjpeg_turbo;HAVE_DKSDLText;HAVE_sdl_ttf;HAVE_DKStats;HAVE_DKWebTest;HAVE_DKTooltip;LZMA_API_STATIC;LIBARCHIVE_STATIC;DUK_F_VBCC;CURL_STATICLIB;RMLUI_STATIC_LIB;HAVE_rmlui_debugger;GLEW_STATIC;__WINDOWS_MM__;PNG_STATIC
+DKDEBUG_ENABLED ==           0
+DKDEFINES_LIST ==           HAVE_git;HAVE_cmake;HAVE_visualstudio;HAVE_imagemagick;HAVE_HAVE_DKCef;HAVE_agl;HAVE_android_build_tools;HAVE_android_cmake;HAVE_android_cmdline_tools;HAVE_android_ndk;HAVE_android_platform_tools;HAVE_android_platforms;HAVE_android_sdk;HAVE_jdk;HAVE_jdk8;HAVE_jdk9;HAVE_ant;HAVE_android_sources;HAVE_android_sdk_tools;HAVE_android_studio;HAVE_android_system_images;HAVE_appkit;HAVE_audio_toolbox;HAVE_audiounit;HAVE_autotools;HAVE_av_foundation;HAVE_av_kit;HAVE_avf_audio;HAVE_babel;HAVE_boost;HAVE_boxer;HAVE_bullet3;HAVE_bzip2;HAVE_bzip2_win_build;HAVE_mingw32;HAVE_mingw64;HAVE_libgcc;HAVE_carbon;HAVE_cef_binary;HAVE_chart_js;HAVE_cocoa;HAVE_codemirror;HAVE_command_line_tools;HAVE_content;HAVE_core_audio;HAVE_core_foundation;HAVE_core_graphics;HAVE_core_haptics;HAVE_core_motion;HAVE_core_services;HAVE_core_video;HAVE_cpp_subprocess;HAVE_crosswalk;HAVE_nodejs;HAVE_cryptopp;HAVE_curl;HAVE_ws2_32_lib;HAVE_zlib;HAVE_openssl;HAVE_diff_match_patch;HAVE_dl;HAVE_doxygen;HAVE_dukluv;HAVE_duktape;HAVE_python;HAVE_far;HAVE_flac;HAVE_nasm;HAVE_ogg;HAVE_msys;HAVE_force_feedback;HAVE_foundation;HAVE_freetype;HAVE_game_controller;HAVE_ghostscript;HAVE_giflib;HAVE_gl_kit;HAVE_glew;HAVE_glintercept;HAVE_homebrew;HAVE_ilmerge;HAVE_imageio;HAVE_iokit;HAVE_ios_cmake;HAVE_jdk11;HAVE_js_yaml;HAVE_json;HAVE_libarchive;HAVE_xz;HAVE_libxml2;HAVE_libiconv;HAVE_libexpat;HAVE_libglfw3_dev;HAVE_libgtkglext1_dev;HAVE_libjpeg_turbo;HAVE_libmd;HAVE_libpng;HAVE_libusb;HAVE_libuv;HAVE_lodepng;HAVE_macports;HAVE_media_player;HAVE_metal;HAVE_metal_cpp;HAVE_metalKit;HAVE_mlocate;HAVE_mobile_core_services;HAVE_moment;HAVE_msinttypes;HAVE_ncurses;HAVE_opengl;HAVE_opengles;HAVE_openssl_binary;HAVE_osgrmlui;HAVE_pako;HAVE_php;HAVE_php_binary;HAVE_vc_redist;HAVE_pugixml;HAVE_quartz_core;HAVE_rlottie;HAVE_rmlui;HAVE_rmlui_d3d11;HAVE_rmluieditor;HAVE_rocketship;HAVE_rtmidi;HAVE_winmm_lib;HAVE_sdl;HAVE_sdl_gpu;HAVE_sdl_image;HAVE_sdl_mixer;HAVE_smpeg2;HAVE_vorbis;HAVE_sdl_ttf;HAVE_sfml;HAVE_shlwapi_lib;HAVE_stackwalker;HAVE_sun_js;HAVE_terminator;HAVE_threadpool;HAVE_tidy_html5;HAVE_uikit;HAVE_upx;HAVE_vcpkg;HAVE_verysleepy;HAVE_xcode;HAVE_xquartz;HAVE_zstd;HAVE_DK;HAVE_DKAdmin;HAVE_DKGit;HAVE_DKNotepad;HAVE_DKArchive;HAVE_DKDuktape;HAVE_DKCef;HAVE_DKAssets;HAVE_DKAudio;HAVE_DKBuild;HAVE_DKCurl;HAVE_DKFile;HAVE_DKCefChild;HAVE_DKChart;HAVE_DKCodeMirror;HAVE_DKCodeRunner;HAVE_DKColorPicker;HAVE_DKCrypto;HAVE_DKDebug;HAVE_DKDevTools;HAVE_DKDisplay;HAVE_DKDom;HAVE_DKRml;HAVE_DKWindow;HAVE_DKXml;HAVE_DKDuktapeDom;HAVE_DKEditor;HAVE_DKGui;HAVE_DKWidget;HAVE_DKEmscripten;HAVE_DKFpsTest;HAVE_DKHandles;HAVE_DKHook;HAVE_DKImageMagick;HAVE_DKInputTest;HAVE_DKLoading;HAVE_DKLogin;HAVE_DKMidi;HAVE_DKMySql;HAVE_DKOS;HAVE_DKPaint;HAVE_DKPhp;HAVE_DKRmlElement;HAVE_DKRmlIframe;HAVE_DKRmlVideo;HAVE_DKVideo;HAVE_DKSDLCef;HAVE_DKSDLWindow;HAVE_DKSDLMetalRml;HAVE_DKSDLMetalWindow;HAVE_DKSDLRml;HAVE_DKSDLText;HAVE_DKSFMLWindow;HAVE_DKStats;HAVE_DKSvn;HAVE_DKTooltip;HAVE_DKTray;HAVE_DKTriggers;HAVE_DKWebTest;HAVE_DKWebview;BOOST_ALL_NO_LIB=1;BOOST_REGEX_DYN_LINK=1;BZ_NO_STDIO;__STDC_CONSTANT_MACROS;__STDC_FORMAT_MACROS;PSAPI_VERSION=1;NOMINMAX;CEF_ATL;CURL_STATICLIB;DUK_F_VBCC;GLEW_STATIC;LZMA_API_STATIC;LIBARCHIVE_STATIC;PNG_STATIC;RMLUI_STATIC_LIB;HAVE_rmlui_debugger;__WINDOWS_MM__;SFML_STATIC
 DKDOWNLOAD ==           C:/Users/Administrator/digitalknob/Download
 DKDebug ==           ON
 DKDebug_BINARY_DIR ==           C:/Users/Administrator/digitalknob/DK/DKPlugins/DKDebug/win32
@@ -1204,6 +1318,7 @@ DKDebug_IS_TOP_LEVEL ==           OFF
 DKDebug_SOURCE_DIR ==           C:/Users/Administrator/digitalknob/DK/DKPlugins/DKDebug
 DKDebug_all ==           1
 DKDevTools ==           ON
+DKDisplay ==           ON
 DKDom ==           ON
 DKDom_BINARY_DIR ==           C:/Users/Administrator/digitalknob/DK/DKPlugins/DKDom/win32
 DKDom_IS_TOP_LEVEL ==           OFF
@@ -1221,12 +1336,15 @@ DKDuktape_SOURCE_DIR ==           C:/Users/Administrator/digitalknob/DK/DKPlugin
 DKDuktape_all ==           1
 DKEditor ==           ON
 DKEditor_all ==           1
+DKEmscripten ==           ON
+DKEmscripten_all ==           1
 DKFile ==           ON
 DKFile_BINARY_DIR ==           C:/Users/Administrator/digitalknob/DK/DKPlugins/DKFile/win32
 DKFile_IS_TOP_LEVEL ==           OFF
 DKFile_SOURCE_DIR ==           C:/Users/Administrator/digitalknob/DK/DKPlugins/DKFile
 DKFile_all ==           1
 DKFmt ==           
+DKFpsTest ==           ON
 DKGit ==           ON
 DKGui ==           ON
 DKHandles ==           ON
@@ -1234,11 +1352,28 @@ DKHandles_BINARY_DIR ==           C:/Users/Administrator/digitalknob/DK/DKPlugin
 DKHandles_IS_TOP_LEVEL ==           OFF
 DKHandles_SOURCE_DIR ==           C:/Users/Administrator/digitalknob/DK/DKPlugins/DKHandles
 DKHandles_all ==           1
+DKHook ==           ON
+DKHook_BINARY_DIR ==           C:/Users/Administrator/digitalknob/DK/DKPlugins/DKHook/win32
+DKHook_IS_TOP_LEVEL ==           OFF
+DKHook_SOURCE_DIR ==           C:/Users/Administrator/digitalknob/DK/DKPlugins/DKHook
+DKHook_all ==           1
 DKIMPORTS ==           C:/Users/Administrator/digitalknob/DK/3rdParty/_DKIMPORTS
-DKINCLUDES_LIST ==           C:/Users/Administrator/digitalknob/DK/3rdParty/boxer-master/include;C:/Users/Administrator/digitalknob/DK/3rdParty/boxer-master/win32;C:/Users/Administrator/digitalknob/DK/3rdParty/zlib-master;C:/Users/Administrator/digitalknob/DK/3rdParty/zlib-master/win32;C:/Users/Administrator/digitalknob/DK/3rdParty/xz-20e7a33e2d59c6a814447d3991f21e2702174b20/src/liblzma/api;C:/Users/Administrator/digitalknob/DK/3rdParty/libiconv-1.14;C:/Users/Administrator/digitalknob/DK/3rdParty/libiconv-1.14/include;C:/Users/Administrator/digitalknob/DK/3rdParty/libiconv-1.14/win32;C:/Users/Administrator/digitalknob/DK/3rdParty/libiconv-1.14/win32/Release;C:/Users/Administrator/digitalknob/DK/3rdParty/libxml2-f2ad86fa600885429a6083aaf6926c7e2e5b24d6;C:/Users/Administrator/digitalknob/DK/3rdParty/libxml2-f2ad86fa600885429a6083aaf6926c7e2e5b24d6/include;C:/Users/Administrator/digitalknob/DK/3rdParty/libxml2-f2ad86fa600885429a6083aaf6926c7e2e5b24d6/win32;C:/Users/Administrator/digitalknob/DK/3rdParty/openssl-1.0.2h-vs2015/include;C:/Users/Administrator/digitalknob/DK/3rdParty/libarchive-93f03b0f5d7316714df9b289a49150ab7a63bfaf/libarchive;C:/Users/Administrator/digitalknob/DK/3rdParty/libarchive-93f03b0f5d7316714df9b289a49150ab7a63bfaf/win32;C:/Users/Administrator/digitalknob/DK/DKPlugins/DKDuktape;C:/Users/Administrator/digitalknob/DK/3rdParty/duktape-master/src;C:/Users/Administrator/digitalknob/DK/3rdParty/curl-curl-7_43_0/include;C:/Users/Administrator/digitalknob/DK/3rdParty/curl-curl-7_43_0/win32/include/curl;C:/Users/Administrator/digitalknob/DK/3rdParty/curl-curl-7_43_0/win32/Debug/include/curl;C:/Users/Administrator/digitalknob/DK/3rdParty/stackwalker-2013-01-07-v14/StackWalker;C:/Users/Administrator/digitalknob/DK/3rdParty/stackwalker/StackWalker;C:/Users/Administrator/digitalknob/DK/3rdParty/freetype-2.5.5/include;C:/Users/Administrator/digitalknob/DK/3rdParty/freetype-2.5.5/win32/include/freetype2;C:/Users/Administrator/digitalknob/DK/3rdParty/rmlui-master/Include;C:/Users/Administrator/digitalknob/DK/3rdParty/rmlui-master/Source;C:/Users/Administrator/digitalknob/DK/3rdParty/pugixml-pugixml-1.6/src;/include;C:/Users/Administrator/digitalknob/DK/3rdParty/tidy-html5-master;C:/Users/Administrator/digitalknob/DK/3rdParty/tidy-html5-master/include;C:/Users/Administrator/digitalknob/DK/3rdParty/tidy-html5-master/win32;C:/Users/Administrator/digitalknob/DK/3rdParty/glew-glew-2.2.0/include;C:/Users/Administrator/digitalknob/DK/3rdParty/sdl-main/include;C:/Users/Administrator/digitalknob/DK/3rdParty/giflib-master/lib;C:/Users/Administrator/digitalknob/DK/3rdParty/libpng-v1.6.35;C:/Users/Administrator/digitalknob/DK/3rdParty/libpng-v1.6.35/win32;C:/Users/Administrator/digitalknob/DK/3rdParty/libpng-v1.6.35/win32/Release;C:/Users/Administrator/digitalknob/DK/3rdParty/libjpeg-turbo-2.1.1;C:/Users/Administrator/digitalknob/DK/3rdParty/libjpeg-turbo-2.1.1/win32;C:/Users/Administrator/digitalknob/DK/3rdParty/libjpeg-turbo-2.1.1/win32/Debug;C:/Users/Administrator/digitalknob/DK/3rdParty/libjpeg-turbo-2.1.1/win32/Release;C:/Users/Administrator/digitalknob/DK/3rdParty/sdl_image-main;C:/Users/Administrator/digitalknob/DK/3rdParty/sdl_ttf-main
+DKINCLUDES_LIST ==           C:/Users/Administrator/digitalknob/DK/3rdParty/openjdk-11/;C:/Users/Administrator/digitalknob/DK/3rdParty/boost_1_78_0;C:/Users/Administrator/digitalknob/DK/3rdParty/boxer-master/include;C:/Users/Administrator/digitalknob/DK/3rdParty/boxer-master/win32;C:/Users/Administrator/digitalknob/DK/3rdParty/bullet3-master/src;C:/Users/Administrator/digitalknob/DK/3rdParty/bzip2-win-build-master;C:/Users/Administrator/digitalknob/DK/3rdParty/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_windows32;C:/Users/Administrator/digitalknob/DK/3rdParty/zlib-master;C:/Users/Administrator/digitalknob/DK/3rdParty/zlib-master/win32;C:/Users/Administrator/digitalknob/DK/3rdParty/openssl-1.0.2h-vs2015/include;C:/Users/Administrator/digitalknob/DK/3rdParty/curl-curl-7_43_0/include;C:/Users/Administrator/digitalknob/DK/3rdParty/curl-curl-7_43_0/win32/include/curl;C:/Users/Administrator/digitalknob/DK/3rdParty/curl-curl-7_43_0/win32/Debug/include/curl;C:/Users/Administrator/digitalknob/DK/3rdParty/libogg-1.3.5/include;C:/Users/Administrator/digitalknob/DK/3rdParty/libogg-1.3.5/win32/Debug/include;C:/Users/Administrator/digitalknob/DK/3rdParty/libogg-1.3.5/win32/Release/include;C:/Users/Administrator/digitalknob/DK/3rdParty/flac-1.3.2;C:/Users/Administrator/digitalknob/DK/3rdParty/freetype-2.5.5/include;C:/Users/Administrator/digitalknob/DK/3rdParty/freetype-2.5.5/win32/include/freetype2;C:/Users/Administrator/digitalknob/DK/3rdParty/giflib-master/lib;C:/Users/Administrator/digitalknob/DK/3rdParty/glew-glew-2.2.0/include;C:/Users/Administrator/digitalknob/DK/3rdParty/json-d8a63291cbe50411a2c513d06f3ae7c8c1a43c33/include/nlohmann;C:/Users/Administrator/digitalknob/DK/3rdParty/xz-20e7a33e2d59c6a814447d3991f21e2702174b20/src/liblzma/api;C:/Users/Administrator/digitalknob/DK/3rdParty/libiconv-1.14;C:/Users/Administrator/digitalknob/DK/3rdParty/libiconv-1.14/include;C:/Users/Administrator/digitalknob/DK/3rdParty/libiconv-1.14/win32;C:/Users/Administrator/digitalknob/DK/3rdParty/libiconv-1.14/win32/Release;C:/Users/Administrator/digitalknob/DK/3rdParty/libxml2-f2ad86fa600885429a6083aaf6926c7e2e5b24d6;C:/Users/Administrator/digitalknob/DK/3rdParty/libxml2-f2ad86fa600885429a6083aaf6926c7e2e5b24d6/include;C:/Users/Administrator/digitalknob/DK/3rdParty/libxml2-f2ad86fa600885429a6083aaf6926c7e2e5b24d6/win32;C:/Users/Administrator/digitalknob/DK/3rdParty/libarchive-93f03b0f5d7316714df9b289a49150ab7a63bfaf/libarchive;C:/Users/Administrator/digitalknob/DK/3rdParty/libarchive-93f03b0f5d7316714df9b289a49150ab7a63bfaf/win32;C:/Users/Administrator/digitalknob/DK/3rdParty/libjpeg-turbo-2.1.1;C:/Users/Administrator/digitalknob/DK/3rdParty/libjpeg-turbo-2.1.1/win32;C:/Users/Administrator/digitalknob/DK/3rdParty/libjpeg-turbo-2.1.1/win32/Debug;C:/Users/Administrator/digitalknob/DK/3rdParty/libjpeg-turbo-2.1.1/win32/Release;C:/Users/Administrator/digitalknob/DK/3rdParty/libpng-v1.6.35;C:/Users/Administrator/digitalknob/DK/3rdParty/libpng-v1.6.35/win32;C:/Users/Administrator/digitalknob/DK/3rdParty/libpng-v1.6.35/win32/Release;C:/Users/Administrator/digitalknob/DK/3rdParty/libuv-2bc22c40eb68f3b38d1ae3ea68ef2f180cbe9fef/include;C:/Users/Administrator/digitalknob/DK/3rdParty/libuv-2bc22c40eb68f3b38d1ae3ea68ef2f180cbe9fef/win32;C:/Users/Administrator/digitalknob/DK/3rdParty/rlottie-master/inc;C:/Users/Administrator/digitalknob/DK/3rdParty/rlottie-master/win32;C:/Users/Administrator/digitalknob/DK/3rdParty/rmlui-master/Include;C:/Users/Administrator/digitalknob/DK/3rdParty/rmlui-master/Source;C:/Users/Administrator/digitalknob/DK/3rdParty/rtmidi-2.1.0;C:/Users/Administrator/digitalknob/DK/3rdParty/sdl-main/include;C:/Users/Administrator/digitalknob/DK/3rdParty/sdl-gpu-master/include;C:/Users/Administrator/digitalknob/DK/3rdParty/sdl_image-main;C:/Users/Administrator/digitalknob/DK/3rdParty/smpeg2-2.0.0;PATCH;C:/Users/Administrator/digitalknob/DK/3rdParty/libvorbis-1.3.7/include;C:/Users/Administrator/digitalknob/DK/3rdParty/SDL2_mixer-2.0.1;C:/Users/Administrator/digitalknob/DK/3rdParty/sdl_ttf-main;C:/Users/Administrator/digitalknob/DK/3rdParty/sfml-a733e4cd7e0056922e4f74f1932749b4d6a5744d/include;C:/Users/Administrator/digitalknob/DK/3rdParty/stackwalker-2013-01-07-v14/StackWalker;C:/Users/Administrator/digitalknob/DK/3rdParty/threadpool-0_2_5-src;C:/Users/Administrator/digitalknob/DK/3rdParty/tidy-html5-master;C:/Users/Administrator/digitalknob/DK/3rdParty/tidy-html5-master/include;C:/Users/Administrator/digitalknob/DK/3rdParty/tidy-html5-master/win32;C:/Users/Administrator/digitalknob/DK/DKPlugins/DKDuktape;C:/Users/Administrator/digitalknob/DK/3rdParty/duktape-master/src;C:/Users/Administrator/digitalknob/DK/DKPlugins/DKCefChild;C:/Users/Administrator/digitalknob/DK/3rdParty/stackwalker/StackWalker;C:/Users/Administrator/digitalknob/DK/3rdParty/pugixml-pugixml-1.6/src;/include
+DKImageMagick ==           ON
+DKImageMagick_BINARY_DIR ==           C:/Users/Administrator/digitalknob/DK/DKPlugins/DKImageMagick/win32
+DKImageMagick_IS_TOP_LEVEL ==           OFF
+DKImageMagick_SOURCE_DIR ==           C:/Users/Administrator/digitalknob/DK/DKPlugins/DKImageMagick
+DKImageMagick_all ==           1
 DKInputTest ==           ON
 DKJerryscript ==           
+DKLINKDIRS_LIST ==           C:/Users/Administrator/digitalknob/DK/3rdParty/boost_1_78_0/win32/Debug/lib;C:/Users/Administrator/digitalknob/DK/3rdParty/boost_1_78_0/win32/Release/lib
+DKLoading ==           ON
 DKLogin ==           ON
+DKMidi ==           ON
+DKMidi_BINARY_DIR ==           C:/Users/Administrator/digitalknob/DK/DKPlugins/DKMidi/win32
+DKMidi_IS_TOP_LEVEL ==           OFF
+DKMidi_SOURCE_DIR ==           C:/Users/Administrator/digitalknob/DK/DKPlugins/DKMidi
+DKMidi_all ==           1
 DKMySql ==           ON
 DKMySql_BINARY_DIR ==           C:/Users/Administrator/digitalknob/DK/DKPlugins/DKMySql/win32
 DKMySql_IS_TOP_LEVEL ==           OFF
@@ -1249,9 +1384,9 @@ DKOFWindow ==
 DKOS ==           ON
 DKOcr ==           
 DKPLUGINS ==           C:/Users/Administrator/digitalknob/DK/DKPlugins
-DKPLUGIN_LIST ==           DK;DKDuktape;DKArchive;DKAssets;DKFile;DKCurl;DKDebug;DKDuktapeDom;DKWindow;DKXml;DKRml;DKDom;DKHandles;DKMySql;DKRmlIframe;DKVideo;DKSDLWindow;DKSDLRml;DKSDLText
-DKPLUGIN_LIST_lower ==           dk;dkduktape;dkarchive;dkassets;dkfile;dkcurl;dkdebug;dkduktapedom;dkwindow;dkxml;dkrml;dkdom;dkhandles;dkmysql;dkrmliframe;dkvideo;dksdlwindow;dksdlrml;dksdltext
-DKPROJECT ==           C:/Users/Administrator/digitalknob/DK/DKApps/DKSDLRmlUi
+DKPLUGIN_LIST ==           DK;DKDuktape;DKCef;DKArchive;DKAssets;DKAudio;DKFile;DKCurl;DKCefChild;DKCrypto;DKDebug;DKWindow;DKXml;DKRml;DKDom;DKDuktapeDom;DKHandles;DKHook;DKImageMagick;DKMidi;DKMySql;DKRmlElement;DKRmlIframe;DKVideo;DKSDLWindow;DKSDLCef;DKSDLMetalWindow;DKSDLRml;DKSDLText;DKSFMLWindow;DKTray
+DKPLUGIN_LIST_lower ==           dk;dkduktape;dkcef;dkarchive;dkassets;dkaudio;dkfile;dkcurl;dkcefchild;dkcrypto;dkdebug;dkwindow;dkxml;dkrml;dkdom;dkduktapedom;dkhandles;dkhook;dkimagemagick;dkmidi;dkmysql;dkrmlelement;dkrmliframe;dkvideo;dksdlwindow;dksdlcef;dksdlmetalwindow;dksdlrml;dksdltext;dksfmlwindow;dktray
+DKPROJECT ==           C:/Users/Administrator/digitalknob/DK/DKApps/DKTestAll
 DKPaint ==           ON
 DKPhp ==           ON
 DKPhp_all ==           1
@@ -1259,6 +1394,11 @@ DKPlugin1 ==
 DKPlugin2 ==           
 DKRestart ==           
 DKRml ==           ON
+DKRmlElement ==           ON
+DKRmlElement_BINARY_DIR ==           C:/Users/Administrator/digitalknob/DK/DKPlugins/DKRmlElement/win32
+DKRmlElement_IS_TOP_LEVEL ==           OFF
+DKRmlElement_SOURCE_DIR ==           C:/Users/Administrator/digitalknob/DK/DKPlugins/DKRmlElement
+DKRmlElement_all ==           1
 DKRmlIframe ==           ON
 DKRmlIframe_BINARY_DIR ==           C:/Users/Administrator/digitalknob/DK/DKPlugins/DKRmlIframe/win32
 DKRmlIframe_IS_TOP_LEVEL ==           OFF
@@ -1271,12 +1411,19 @@ DKRml_IS_TOP_LEVEL ==           OFF
 DKRml_SOURCE_DIR ==           C:/Users/Administrator/digitalknob/DK/DKPlugins/DKRml
 DKRml_all ==           1
 DKSDLAudio ==           
+DKSDLCef ==           ON
+DKSDLCef_BINARY_DIR ==           C:/Users/Administrator/digitalknob/DK/DKPlugins/DKSDLCef/win32
+DKSDLCef_IS_TOP_LEVEL ==           OFF
+DKSDLCef_SOURCE_DIR ==           C:/Users/Administrator/digitalknob/DK/DKPlugins/DKSDLCef
+DKSDLCef_all ==           1
+DKSDLMetalRml ==           ON
+DKSDLMetalRml_all ==           1
+DKSDLMetalWindow ==           ON
+DKSDLMetalWindow_BINARY_DIR ==           C:/Users/Administrator/digitalknob/DK/DKPlugins/DKSDLMetalWindow/win32
+DKSDLMetalWindow_IS_TOP_LEVEL ==           OFF
+DKSDLMetalWindow_SOURCE_DIR ==           C:/Users/Administrator/digitalknob/DK/DKPlugins/DKSDLMetalWindow
+DKSDLMetalWindow_all ==           1
 DKSDLRml ==           ON
-DKSDLRmlUi_BINARY_DIR ==           C:/Users/Administrator/digitalknob/DK/DKApps/DKSDLRmlUi/win32
-DKSDLRmlUi_DESCRIPTION ==           
-DKSDLRmlUi_HOMEPAGE_URL ==           
-DKSDLRmlUi_IS_TOP_LEVEL ==           ON
-DKSDLRmlUi_SOURCE_DIR ==           C:/Users/Administrator/digitalknob/DK/DKCMake
 DKSDLRml_BINARY_DIR ==           C:/Users/Administrator/digitalknob/DK/DKPlugins/DKSDLRml/win32
 DKSDLRml_IS_TOP_LEVEL ==           OFF
 DKSDLRml_SOURCE_DIR ==           C:/Users/Administrator/digitalknob/DK/DKPlugins/DKSDLRml
@@ -1294,11 +1441,29 @@ DKSDLWindow_IS_TOP_LEVEL ==           OFF
 DKSDLWindow_SOURCE_DIR ==           C:/Users/Administrator/digitalknob/DK/DKPlugins/DKSDLWindow
 DKSDLWindow_all ==           1
 DKSFMLRml ==           
+DKSFMLWindow ==           ON
+DKSFMLWindow_BINARY_DIR ==           C:/Users/Administrator/digitalknob/DK/DKPlugins/DKSFMLWindow/win32
+DKSFMLWindow_IS_TOP_LEVEL ==           OFF
+DKSFMLWindow_SOURCE_DIR ==           C:/Users/Administrator/digitalknob/DK/DKPlugins/DKSFMLWindow
+DKSFMLWindow_all ==           1
 DKScreenRecorder ==           
 DKStats ==           ON
+DKSvn ==           ON
+DKTestAll_BINARY_DIR ==           C:/Users/Administrator/digitalknob/DK/DKApps/DKTestAll/win32
+DKTestAll_DESCRIPTION ==           
+DKTestAll_HOMEPAGE_URL ==           
+DKTestAll_IS_TOP_LEVEL ==           ON
+DKTestAll_SOURCE_DIR ==           C:/Users/Administrator/digitalknob/DK/DKCMake
 DKThread ==           
 DKTooltip ==           ON
 DKTorrent ==           
+DKTray ==           ON
+DKTray_BINARY_DIR ==           C:/Users/Administrator/digitalknob/DK/DKPlugins/DKTray/win32
+DKTray_IS_TOP_LEVEL ==           OFF
+DKTray_SOURCE_DIR ==           C:/Users/Administrator/digitalknob/DK/DKPlugins/DKTray
+DKTray_all ==           1
+DKTriggers ==           ON
+DKTriggers_all ==           1
 DKUpdate ==           
 DKVideo ==           ON
 DKVideo_BINARY_DIR ==           C:/Users/Administrator/digitalknob/DK/DKPlugins/DKVideo/win32
@@ -1310,6 +1475,8 @@ DKVncServer ==
 DKWEB ==           http://127.0.0.1
 DKWebSockets ==           
 DKWebTest ==           ON
+DKWebview ==           ON
+DKWebview_all ==           1
 DKWidget ==           ON
 DKWidget_all ==           1
 DKWindow ==           ON
@@ -1326,12 +1493,25 @@ DK_BINARY_DIR ==           C:/Users/Administrator/digitalknob/DK/DKPlugins/DK/wi
 DK_IS_TOP_LEVEL ==           OFF
 DK_SOURCE_DIR ==           C:/Users/Administrator/digitalknob/DK/DKPlugins/DK
 DK_all ==           1
+DOXYGEN ==           C:/Program Files/doxygen/bin
+DOXYGEN_BUILD ==           13
+DOXYGEN_DL ==           https://sourceforge.net/projects/doxygen/files/rel-1.8.13/doxygen-1.8.13-setup.exe
+DOXYGEN_EXE ==           C:/Program Files/doxygen/bin/doxygen.exe
+DOXYGEN_MAJOR ==           1
+DOXYGEN_MINOR ==           8
+DOXYGEN_NAME ==           doxygen-1.8.13
+DOXYGEN_VERSION ==           1.8.13
+DUKLUV ==           C:/Users/Administrator/digitalknob/DK/3rdParty/dukluv-f02103bcadd5a5b9280b7a07064649d0a465f70c
+DUKLUV_BRANCH ==           f02103bcadd5a5b9280b7a07064649d0a465f70c
+DUKLUV_DL ==           https://github.com/creationix/dukluv/archive/f02103bcadd5a5b9280b7a07064649d0a465f70c.zip
+DUKLUV_FOLDER ==           dukluv
+DUKLUV_NAME ==           dukluv-f02103bcadd5a5b9280b7a07064649d0a465f70c
 DUKTAPE ==           C:/Users/Administrator/digitalknob/DK/3rdParty/duktape-master
 DUKTAPE_BRANCH ==           master
 DUKTAPE_FOLDER ==           duktape
 DUKTAPE_NAME ==           duktape-master
 DUMPBIN ==           C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.30.30705/bin/Hostx86/x86/dumpbin.exe
-DigitalKnob_BINARY_DIR ==           C:/Users/Administrator/digitalknob/DK/DKApps/DKSDLRmlUi/win32
+DigitalKnob_BINARY_DIR ==           C:/Users/Administrator/digitalknob/DK/DKApps/DKTestAll/win32
 DigitalKnob_DESCRIPTION ==           
 DigitalKnob_HOMEPAGE_URL ==           
 DigitalKnob_IS_TOP_LEVEL ==           ON
@@ -1349,6 +1529,15 @@ ESC_6 ==           [6;37m
 ESC_7 ==           [7;37m
 ESC_8 ==           [8;37m
 ESC_9 ==           [9;37m
+FAR ==           C:/Users/Administrator/digitalknob/DK/3rdParty/FAR-2.0.3-win
+FAR_DL ==           https://sourceforge.net/projects/findandreplace/files/findandreplace/2.0.3/FAR-2.0.3-win.zip
+FAR_NAME ==           FAR-2.0.3-win
+FAR_VERSION ==           2.0.3
+FLAC ==           C:/Users/Administrator/digitalknob/DK/3rdParty/flac-1.3.2
+FLAC_CMAKE ==           -DFLAC_INCLUDE_DIR=C:/Users/Administrator/digitalknob/DK/3rdParty/flac-1.3.2/include;-DFLAC_LIBRARY_DEBUG=C:/Users/Administrator/digitalknob/DK/3rdParty/flac-1.3.2/win32/Debug/src/libFLAC/.libs/libFLAC-static.a;-DFLAC_LIBRARY_RELEASE=C:/Users/Administrator/digitalknob/DK/3rdParty/flac-1.3.2/win32/Release/src/libFLAC/.libs/libFLAC-static.a
+FLAC_DL ==           https://ftp.osuosl.org/pub/xiph/releases/flac/flac-1.3.2.tar.xz
+FLAC_NAME ==           flac-1.3.2
+FLAC_VERSION ==           1.3.2
 FREETYPE ==           C:/Users/Administrator/digitalknob/DK/3rdParty/freetype-2.5.5
 FREETYPE_BUILD ==           5
 FREETYPE_CMAKE ==           -DFREETYPE_INCLUDE_DIRS=C:/Users/Administrator/digitalknob/DK/3rdParty/freetype-2.5.5/include;-DFREETYPE_INCLUDE_DIR_freetype2=C:/Users/Administrator/digitalknob/DK/3rdParty/freetype-2.5.5/win32/include/freetype2;-DFREETYPE_INCLUDE_DIR_ft2build=C:/Users/Administrator/digitalknob/DK/3rdParty/freetype-2.5.5/include;-DFREETYPE_LIBRARY_DEBUG=C:/Users/Administrator/digitalknob/DK/3rdParty/freetype-2.5.5/win32/Debug/freetype.lib;-DFREETYPE_LIBRARY_RELEASE=C:/Users/Administrator/digitalknob/DK/3rdParty/freetype-2.5.5/win32/Release/freetype.lib
@@ -1357,6 +1546,12 @@ FREETYPE_MAJOR ==           2
 FREETYPE_MINOR ==           5
 FREETYPE_NAME ==           freetype-2.5.5
 FREETYPE_VERSION ==           2.5.5
+GHOSTSCRIPT ==           C:/Program Files/gs/gs9.22/bin
+GHOSTSCRIPT_DL ==           https://github.com/ArtifexSoftware/ghostpdl-downloads/releases/download/gs922/gs922w64.exe
+GHOSTSCRIPT_MAJOR ==           9
+GHOSTSCRIPT_MINOR ==           22
+GHOSTSCRIPT_NAME ==           gs922w64
+GHOSTSCRIPT_VERSION ==           922
 GIFLIB ==           C:/Users/Administrator/digitalknob/DK/3rdParty/giflib-master
 GIFLIB_BRANCH ==           master
 GIFLIB_CMAKE ==           -DGIF_INCLUDE_DIR=C:/Users/Administrator/digitalknob/DK/3rdParty/giflib-master/lib;-DGIF_INCLUDE_DIR2=C:/Users/Administrator/digitalknob/DK/3rdParty/giflib-master/win32;-DGIF_LIBRARY=C:/Users/Administrator/digitalknob/DK/3rdParty/giflib-master/win32/Release/lib/.libs/libgif.a
@@ -1372,27 +1567,45 @@ GLEW_BRANCH ==           glew-2.2.0
 GLEW_DL ==           https://github.com/nigels-com/glew/releases/download/glew-2.2.0/glew-2.2.0.zip
 GLEW_FOLDER ==           glew
 GLEW_NAME ==           glew-glew-2.2.0
+GLINTERCEPT ==           C:/Users/Administrator/digitalknob/DK/3rdParty/glintercept-master
+GLINTERCEPT_BRANCH ==           master
+GLINTERCEPT_FOLDER ==           glintercept
+GLINTERCEPT_NAME ==           glintercept-master
 HAVE_DK ==           ON
+HAVE_DKAdmin ==           ON
 HAVE_DKArchive ==           ON
 HAVE_DKAssets ==           ON
+HAVE_DKAudio ==           ON
 HAVE_DKBuild ==           ON
+HAVE_DKCef ==           ON
+HAVE_DKCefChild ==           ON
+HAVE_DKChart ==           ON
+HAVE_DKCodeMirror ==           ON
 HAVE_DKCodeRunner ==           ON
 HAVE_DKColorPicker ==           ON
+HAVE_DKCrypto ==           ON
 HAVE_DKCurl ==           ON
 HAVE_DKDebug ==           ON
 HAVE_DKDevTools ==           ON
+HAVE_DKDisplay ==           ON
 HAVE_DKDom ==           ON
 HAVE_DKDuktape ==           ON
 HAVE_DKDuktapeDom ==           ON
 HAVE_DKEditor ==           ON
+HAVE_DKEmscripten ==           ON
 HAVE_DKFile ==           ON
 HAVE_DKFmt ==           
+HAVE_DKFpsTest ==           ON
 HAVE_DKGit ==           ON
 HAVE_DKGui ==           ON
 HAVE_DKHandles ==           ON
+HAVE_DKHook ==           ON
+HAVE_DKImageMagick ==           ON
 HAVE_DKInputTest ==           ON
 HAVE_DKJerryscript ==           
+HAVE_DKLoading ==           ON
 HAVE_DKLogin ==           ON
+HAVE_DKMidi ==           ON
 HAVE_DKMySql ==           ON
 HAVE_DKNotepad ==           ON
 HAVE_DKOFWindow ==           
@@ -1404,76 +1617,155 @@ HAVE_DKPlugin1 ==
 HAVE_DKPlugin2 ==           
 HAVE_DKRestart ==           
 HAVE_DKRml ==           ON
+HAVE_DKRmlElement ==           ON
 HAVE_DKRmlIframe ==           ON
 HAVE_DKRmlVideo ==           ON
 HAVE_DKSDLAudio ==           
+HAVE_DKSDLCef ==           ON
+HAVE_DKSDLMetalRml ==           ON
+HAVE_DKSDLMetalWindow ==           ON
 HAVE_DKSDLRml ==           ON
 HAVE_DKSDLText ==           ON
 HAVE_DKSDLVideo ==           
 HAVE_DKSDLWav ==           
 HAVE_DKSDLWindow ==           ON
 HAVE_DKSFMLRml ==           
+HAVE_DKSFMLWindow ==           ON
 HAVE_DKScreenRecorder ==           
 HAVE_DKStats ==           ON
+HAVE_DKSvn ==           ON
 HAVE_DKThread ==           
 HAVE_DKTooltip ==           ON
 HAVE_DKTorrent ==           
+HAVE_DKTray ==           ON
+HAVE_DKTriggers ==           ON
 HAVE_DKUpdate ==           
 HAVE_DKVideo ==           ON
 HAVE_DKVncClient ==           
 HAVE_DKVncServer ==           
 HAVE_DKWebSockets ==           
 HAVE_DKWebTest ==           ON
+HAVE_DKWebview ==           ON
 HAVE_DKWidget ==           ON
 HAVE_DKWindow ==           ON
 HAVE_DKXml ==           ON
+HAVE_HAVE_DKCef ==           ON
 HAVE__TEMPLATE-APP_ ==           
 HAVE__TEMPLATE-LIB_ ==           
+HAVE_agl ==           ON
+HAVE_android-build-tools ==           ON
+HAVE_android-cmake ==           ON
+HAVE_android-cmdline-tools ==           ON
 HAVE_android-java-tools ==           
+HAVE_android-ndk ==           ON
+HAVE_android-platform-tools ==           ON
+HAVE_android-platforms ==           ON
+HAVE_android-sdk ==           ON
+HAVE_android-sdk-tools ==           ON
+HAVE_android-sources ==           ON
+HAVE_android-studio ==           ON
+HAVE_android-system-images ==           ON
+HAVE_ant ==           ON
+HAVE_appkit ==           ON
 HAVE_astyle ==           
+HAVE_audio_toolbox ==           ON
+HAVE_audiounit ==           ON
+HAVE_autotools ==           ON
+HAVE_av_foundation ==           ON
+HAVE_av_kit ==           ON
+HAVE_avf_audio ==           ON
+HAVE_babel ==           ON
+HAVE_boost ==           ON
 HAVE_boxer ==           ON
 HAVE_build-essential ==           
+HAVE_bullet3 ==           ON
 HAVE_bzip2 ==           ON
+HAVE_bzip2-win-build ==           ON
+HAVE_carbon ==           ON
+HAVE_cef_binary ==           ON
+HAVE_chart.js ==           ON
 HAVE_cmake ==           ON
+HAVE_cocoa ==           ON
+HAVE_codemirror ==           ON
+HAVE_command_line_tools ==           ON
 HAVE_conio-for-linux ==           
+HAVE_content ==           ON
+HAVE_core_audio ==           ON
+HAVE_core_foundation ==           ON
+HAVE_core_graphics ==           ON
+HAVE_core_haptics ==           ON
+HAVE_core_motion ==           ON
+HAVE_core_services ==           ON
+HAVE_core_video ==           ON
+HAVE_cpp-subprocess ==           ON
+HAVE_crosswalk ==           ON
 HAVE_cryptopp ==           ON
 HAVE_curl ==           ON
+HAVE_diff-match-patch ==           ON
+HAVE_dl ==           ON
+HAVE_doxygen ==           ON
+HAVE_dukluv ==           ON
 HAVE_duktape ==           ON
 HAVE_emsdk ==           
 HAVE_emsdk-portable ==           
+HAVE_far ==           ON
 HAVE_ffmpeg-dev ==           
 HAVE_ffmpeg-shared ==           
 HAVE_ffmpeg-static ==           
+HAVE_flac ==           ON
 HAVE_fmt ==           
+HAVE_force_feedback ==           ON
+HAVE_foundation ==           ON
 HAVE_freealut ==           
 HAVE_freealut-master ==           
 HAVE_freetype ==           ON
+HAVE_game_controller ==           ON
+HAVE_ghostscript ==           ON
 HAVE_giflib ==           ON
 HAVE_git ==           ON
+HAVE_gl_kit ==           ON
 HAVE_glew ==           ON
+HAVE_glintercept ==           ON
 HAVE_gradle ==           
+HAVE_homebrew ==           ON
+HAVE_ilmerge ==           ON
 HAVE_imageio ==           ON
 HAVE_imagemagick ==           ON
+HAVE_iokit ==           ON
+HAVE_ios-cmake ==           ON
 HAVE_java ==           
+HAVE_jdk ==           ON
+HAVE_jdk11 ==           ON
+HAVE_jdk8 ==           ON
+HAVE_jdk9 ==           ON
 HAVE_jerryscript ==           
 HAVE_jpeg ==           
+HAVE_js-yaml ==           ON
+HAVE_json ==           ON
 HAVE_kdevelop ==           
 HAVE_leptonica ==           
 HAVE_libarchive ==           ON
 HAVE_libasound2-dev ==           
 HAVE_libcaca ==           
+HAVE_libexpat ==           ON
+HAVE_libgcc ==           ON
 HAVE_libgl1-mesa-dev ==           
+HAVE_libglfw3-dev ==           ON
 HAVE_libglib2.0-dev ==           
 HAVE_libglu1-mesa-dev ==           
 HAVE_libgtk2.0-dev ==           
+HAVE_libgtkglext1-dev ==           ON
 HAVE_libiconv ==           ON
 HAVE_libjpeg-turbo ==           ON
+HAVE_libmd ==           ON
 HAVE_libpng ==           ON
 HAVE_librocket ==           
 HAVE_libsndfile1-dev ==           
 HAVE_libsystemd-dev ==           
 HAVE_libtorrent ==           
 HAVE_libudev-dev ==           
+HAVE_libusb ==           ON
+HAVE_libuv ==           ON
 HAVE_libvncserver ==           
 HAVE_libvncserver-master-win ==           
 HAVE_libwebp ==           
@@ -1485,49 +1777,89 @@ HAVE_libxml2 ==           ON
 HAVE_libxrandr-dev ==           
 HAVE_libxtst-dev ==           
 HAVE_lighttpd ==           
+HAVE_lodepng ==           ON
 HAVE_lua ==           
+HAVE_macports ==           ON
+HAVE_media_player ==           ON
 HAVE_mesa-common-dev ==           
+HAVE_metal ==           ON
+HAVE_metal-cpp ==           ON
+HAVE_metalKit ==           ON
 HAVE_mingw32 ==           ON
+HAVE_mingw64 ==           ON
 HAVE_miniweb ==           
+HAVE_mlocate ==           ON
 HAVE_mobile_core_services ==           ON
+HAVE_moment ==           ON
+HAVE_msinttypes ==           ON
 HAVE_msys ==           ON
 HAVE_msys2 ==           
+HAVE_nasm ==           ON
+HAVE_ncurses ==           ON
 HAVE_nodejs ==           ON
 HAVE_notepadpp ==           
+HAVE_ogg ==           ON
 HAVE_openal ==           
 HAVE_openal-android ==           
 HAVE_opencv ==           
 HAVE_openframeworks ==           
 HAVE_opengl ==           ON
+HAVE_opengles ==           ON
 HAVE_openscenegraph ==           
 HAVE_opensles ==           
 HAVE_openssl ==           ON
+HAVE_openssl_binary ==           ON
 HAVE_osgaudio ==           
 HAVE_osgbullet ==           
+HAVE_osgrmlui ==           ON
 HAVE_osgworks ==           
+HAVE_pako ==           ON
+HAVE_php ==           ON
 HAVE_php_binary ==           ON
 HAVE_podofo ==           
 HAVE_pugixml ==           ON
 HAVE_python ==           ON
+HAVE_quartz_core ==           ON
+HAVE_rlottie ==           ON
 HAVE_rmlui ==           ON
+HAVE_rmlui-d3d11 ==           ON
+HAVE_rmluieditor ==           ON
+HAVE_rocketship ==           ON
+HAVE_rtmidi ==           ON
 HAVE_sdl ==           ON
+HAVE_sdl-gpu ==           ON
 HAVE_sdl2_gif ==           
 HAVE_sdl2_giflib_sa ==           
 HAVE_sdl_image ==           ON
+HAVE_sdl_mixer ==           ON
 HAVE_sdl_ttf ==           ON
+HAVE_sfml ==           ON
+HAVE_shlwapi.lib ==           ON
 HAVE_simple-getch ==           
+HAVE_smpeg2 ==           ON
 HAVE_stackwalker ==           ON
+HAVE_sun-js ==           ON
+HAVE_terminator ==           ON
 HAVE_tesseract ==           
+HAVE_threadpool ==           ON
 HAVE_tidy-html5 ==           ON
 HAVE_tiff ==           
+HAVE_uikit ==           ON
+HAVE_upx ==           ON
 HAVE_uwebsockets ==           
 HAVE_vc_redist ==           ON
+HAVE_vcpkg ==           ON
+HAVE_verysleepy ==           ON
 HAVE_visualstudio ==           ON
+HAVE_vorbis ==           ON
 HAVE_waave ==           
 HAVE_winmm.lib ==           ON
 HAVE_ws2_32.lib ==           ON
+HAVE_xcode ==           ON
+HAVE_xquartz ==           ON
 HAVE_xz ==           ON
 HAVE_zlib ==           ON
+HAVE_zstd ==           ON
 HBG_black ==           [0;30;100m
 HBG_blue ==           [0;30;104m
 HBG_cyan ==           [0;30;106m
@@ -1552,21 +1884,63 @@ H_magenta ==           [0;95m
 H_red ==           [0;91m
 H_white ==           [0;97m
 H_yellow ==           [0;93m
+ILMERGE ==           C:/Users/Administrator/digitalknob/DK/3rdParty/ilmerge-master
+ILMERGE_BRANCH ==           master
+ILMERGE_FOLDER ==           ilmerge
+ILMERGE_NAME ==           ilmerge-master
 IMAGEMAGICK ==           C:/Users/Administrator/digitalknob/DK/3rdParty/ImageMagick-7.1.0-portable-Q16-x86
 IMAGEMAGICK_CONVERT ==           C:/Users/Administrator/digitalknob/DK/3rdParty/ImageMagick-7.1.0-portable-Q16-x86/convert.exe
 IMAGEMAGICK_DL ==           http://ftp.icm.edu.pl/packages/ImageMagick/binaries/ImageMagick-7.1.0-portable-Q16-x86.zip
 IMAGEMAGICK_NAME ==           ImageMagick-7.1.0-portable-Q16-x86
 IMAGEMAGICK_VERSION ==           7.1.0-portable-Q16-x86
 INSTALL_DKLIBS ==           0
+IOS-CMAKE ==           C:/Users/Administrator/digitalknob/DK/3rdParty/ios-cmake-master
+IOS-CMAKE_BRANCH ==           master
+IOS-CMAKE_FOLDER ==           ios-cmake
+IOS-CMAKE_NAME ==           ios-cmake-master
 IOSSIM_SYSROOT ==           /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator15.0.sdk
 IOS_DARWIN ==           darwin20.6.0
 IOS_MIN_SDK ==           13.0
 IOS_SYSROOT ==           /Applications/Xcode.app/Contents/Developer/Platforms/iPhone.platform/Developer/SDKs/iPhone15.0.sdk
+JDK ==           C:/Users/Administrator/digitalknob/DK/3rdParty/openjdk-11
+JDK11 ==           C:/Users/Administrator/digitalknob/DK/3rdParty/openjdk-11
+JDK11_DL ==           https://download.java.net/java/ga/jdk11/openjdk-11_windows-x64_bin.zip
+JDK11_NAME ==           openjdk-11
+JDK11_VERSION ==           11
+JDK8 ==           C:/Users/Administrator/digitalknob/DK/3rdParty/openjdk-1.8.0_41
+JDK8_DL ==           https://download.java.net/openjdk/jdk8u41/ri/openjdk-8u41-b04-windows-i586-14_jan_2020.zip
+JDK8_NAME ==           openjdk-1.8.0_41
+JDK8_VERSION ==           1.8.0_41
+JDK9 ==           C:/Users/Administrator/digitalknob/DK/3rdParty/openjdk-9.0.4
+JDK9_DL ==           https://download.java.net/java/GA/jdk9/9.0.4/binaries/openjdk-9.0.4_windows-x64_bin.tar.gz
+JDK9_NAME ==           openjdk-9.0.4
+JDK9_VERSION ==           9.0.4
+JDK_DL ==           https://download.java.net/java/ga/jdk11/openjdk-11_windows-x64_bin.zip
+JDK_NAME ==           openjdk-11
+JDK_VERSION ==           11
+JS-YAML ==           C:/Users/Administrator/digitalknob/DK/3rdParty/js-yaml-49baadd52af887d2991e2c39a6639baa56d6c71b
+JS-YAML_BRANCH ==           49baadd52af887d2991e2c39a6639baa56d6c71b
+JS-YAML_DL ==           https://github.com/nodeca/js-yaml/archive/49baadd52af887d2991e2c39a6639baa56d6c71b.zip
+JS-YAML_FOLDER ==           js-yaml
+JS-YAML_NAME ==           js-yaml-49baadd52af887d2991e2c39a6639baa56d6c71b
+JSON ==           C:/Users/Administrator/digitalknob/DK/3rdParty/json-d8a63291cbe50411a2c513d06f3ae7c8c1a43c33
+JSON_BRANCH ==           d8a63291cbe50411a2c513d06f3ae7c8c1a43c33
+JSON_DL ==           https://github.com/nlohmann/json/archive/d8a63291cbe50411a2c513d06f3ae7c8c1a43c33.zip
+JSON_FOLDER ==           json
+JSON_NAME ==           json-d8a63291cbe50411a2c513d06f3ae7c8c1a43c33
 LIBARCHIVE ==           C:/Users/Administrator/digitalknob/DK/3rdParty/libarchive-93f03b0f5d7316714df9b289a49150ab7a63bfaf
 LIBARCHIVE_BRANCH ==           93f03b0f5d7316714df9b289a49150ab7a63bfaf
 LIBARCHIVE_DL ==           https://github.com/libarchive/libarchive/archive/93f03b0f5d7316714df9b289a49150ab7a63bfaf.zip
 LIBARCHIVE_FOLDER ==           libarchive
 LIBARCHIVE_NAME ==           libarchive-93f03b0f5d7316714df9b289a49150ab7a63bfaf
+LIBEXPAT ==           C:/Users/Administrator/digitalknob/DK/3rdParty/libexpat-f1a444ef64680ebd4ff89091a2c388cd046ece2d
+LIBEXPAT_BRANCH ==           f1a444ef64680ebd4ff89091a2c388cd046ece2d
+LIBEXPAT_DL ==           https://github.com/libexpat/libexpat/archive/f1a444ef64680ebd4ff89091a2c388cd046ece2d.zip
+LIBEXPAT_FOLDER ==           libexpat
+LIBEXPAT_NAME ==           libexpat-f1a444ef64680ebd4ff89091a2c388cd046ece2d
+LIBGCC ==           C:/Users/Administrator/digitalknob/DK/3rdParty/mingw32-8.1.0/lib/gcc/i686-w64-mingw32/8.1.0
+LIBGCC_CMAKE ==           -DLIBGCC_LIBRARIES=C:/Users/Administrator/digitalknob/DK/3rdParty/mingw32-8.1.0/lib/gcc/i686-w64-mingw32/8.1.0
+LIBGCC_NAME ==           libgcc
 LIBICONV ==           C:/Users/Administrator/digitalknob/DK/3rdParty/libiconv-1.14
 LIBICONV_CMAKE ==           -DICONV_DIR=C:/Users/Administrator/digitalknob/DK/3rdParty/libiconv-1.14;-DICONV_LIBRARIES=C:/Users/Administrator/digitalknob/DK/3rdParty/libiconv-1.14/win32/Release;-DICONV_INCLUDE_DIR=C:/Users/Administrator/digitalknob/DK/3rdParty/libiconv-1.14/include
 LIBICONV_DL ==           https://ftp.gnu.org/gnu/libiconv/libiconv-1.14.tar.gz
@@ -1587,8 +1961,19 @@ LIBPNG_FOLDER ==           libpng
 LIBPNG_MAJOR ==           1
 LIBPNG_MINOR ==           6
 LIBPNG_NAME ==           libpng-v1.6.35
-LIBS ==           Psapi.lib;pdh.lib;Dxva2.dll;Ws2_32.lib;opengl32.lib;winmm.lib;imm32.lib;version.lib;Setupapi.lib
-LIBVAR ==           LIBPNG
+LIBS ==           Ws2_32.lib;Iphlpapi.lib;Userenv.lib;opengl32.lib;winmm.lib;imm32.lib;version.lib;Setupapi.lib;shlwapi.lib;Psapi.lib;pdh.lib;Dxva2.dll
+LIBUSB ==           C:/Users/Administrator/digitalknob/DK/3rdParty/libusb-4622bfcf44db373c53502e3fe873bd611e8332f6
+LIBUSB_BRANCH ==           4622bfcf44db373c53502e3fe873bd611e8332f6
+LIBUSB_DL ==           https://github.com/libusb/libusb/archive/4622bfcf44db373c53502e3fe873bd611e8332f6.zip
+LIBUSB_FOLDER ==           libusb
+LIBUSB_NAME ==           libusb-4622bfcf44db373c53502e3fe873bd611e8332f6
+LIBUV ==           C:/Users/Administrator/digitalknob/DK/3rdParty/libuv-2bc22c40eb68f3b38d1ae3ea68ef2f180cbe9fef
+LIBUV_BRANCH ==           2bc22c40eb68f3b38d1ae3ea68ef2f180cbe9fef
+LIBUV_CMAKE ==           -DLIBUV_INCLUDE_DIR=C:/Users/Administrator/digitalknob/DK/3rdParty/libuv-2bc22c40eb68f3b38d1ae3ea68ef2f180cbe9fef;-DLIBUV_LIBRARY=C:/Users/Administrator/digitalknob/DK/3rdParty/libuv-2bc22c40eb68f3b38d1ae3ea68ef2f180cbe9fef/win32/Release/uv_a.lib
+LIBUV_DL ==           https://github.com/libuv/libuv/archive/2bc22c40eb68f3b38d1ae3ea68ef2f180cbe9fef.zip
+LIBUV_FOLDER ==           libuv
+LIBUV_NAME ==           libuv-2bc22c40eb68f3b38d1ae3ea68ef2f180cbe9fef
+LIBVAR ==           ZSTD
 LIBXML2 ==           C:/Users/Administrator/digitalknob/DK/3rdParty/libxml2-f2ad86fa600885429a6083aaf6926c7e2e5b24d6
 LIBXML2_BRANCH ==           f2ad86fa600885429a6083aaf6926c7e2e5b24d6
 LIBXML2_CMAKE ==           -DLIBXML2_INCLUDE_DIR=C:/Users/Administrator/digitalknob/DK/3rdParty/libxml2-f2ad86fa600885429a6083aaf6926c7e2e5b24d6/include;-DLIBXML2_LIBRARIES=C:/Users/Administrator/digitalknob/DK/3rdParty/libxml2-f2ad86fa600885429a6083aaf6926c7e2e5b24d6/win32/Release/xml2.lib
@@ -1597,15 +1982,35 @@ LIBXML2_FOLDER ==           libxml2
 LIBXML2_NAME ==           libxml2-f2ad86fa600885429a6083aaf6926c7e2e5b24d6
 LINUX_GCC ==           /usr/bin/gcc
 LINUX_GXX ==           /usr/bin/g++
+LODEPNG ==           C:/Users/Administrator/digitalknob/DK/3rdParty/lodepng-master
+LODEPNG_BRANCH ==           master
+LODEPNG_FOLDER ==           lodepng
+LODEPNG_NAME ==           lodepng-master
+MACPORTS_DL ==           https://github.com/macports/macports-base/releases/download/v2.7.1/MacPorts-2.7.1-11-BigSur.pkg
+MACPORTS_NAME ==           MacPorts-2.7.1-11-BigSur.pkg
+MACPORTS_VERSION ==           2.7.1-11-BigSur
 MINGW32 ==           C:/Users/Administrator/digitalknob/DK/3rdParty/mingw32-8.1.0
 MINGW32_DL ==           https://sourceforge.net/projects/mingw-w64/files/Toolchains%20targetting%20Win32/Personal%20Builds/mingw-builds/8.1.0/threads-posix/dwarf/i686-8.1.0-release-posix-dwarf-rt_v6-rev0.7z
 MINGW32_GCC ==           C:/Users/Administrator/digitalknob/DK/3rdParty/mingw32-8.1.0/bin/gcc.exe
 MINGW32_GXX ==           C:/Users/Administrator/digitalknob/DK/3rdParty/mingw32-8.1.0/bin/g++.exe
 MINGW32_NAME ==           mingw32-8.1.0
 MINGW32_VERSION ==           8.1.0
+MINGW64 ==           C:/Users/Administrator/digitalknob/DK/3rdParty/mingw64-8.1.0
+MINGW64_DL ==           https://sourceforge.net/projects/mingw-w64/files/Toolchains%20targetting%20Win64/Personal%20Builds/mingw-builds/8.1.0/threads-posix/seh/x86_64-8.1.0-release-posix-seh-rt_v6-rev0.7z
 MINGW64_GCC ==           C:/Users/Administrator/digitalknob/DK/3rdParty/mingw64-8.1.0/bin/gcc.exe
 MINGW64_GXX ==           C:/Users/Administrator/digitalknob/DK/3rdParty/mingw64-8.1.0/bin/g++.exe
+MINGW64_NAME ==           mingw64-8.1.0
+MINGW64_VERSION ==           8.1.0
+MOMENT ==           C:/Users/Administrator/digitalknob/DK/3rdParty/moment-moment
+MOMENT_BRANCH ==           moment
+MOMENT_DL ==           https://github.com/moment/moment/raw/e96809208c9d1b1bbe22d605e76985770024de42/moment.js
+MOMENT_FOLDER ==           moment
+MOMENT_NAME ==           moment-moment
 MSBUILD ==           C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/MSBuild.exe
+MSINTTYPES ==           C:/Users/Administrator/digitalknob/DK/3rdParty/msinttypes-r26
+MSINTTYPES_DL ==           https://raw.githubusercontent.com/SummersEpsilon/msinttypes/master/msinttypes-r26.zip
+MSINTTYPES_NAME ==           msinttypes-r26
+MSINTTYPES_VERSION ==           r26
 MSVC ==           1
 MSVC14 ==           1
 MSVC_CL ==           C:/Program;Files/Microsoft;Visual;Studio/2022/Community/VC/Tools/MSVC/14.30.30705/bin/Hostx64/x86/cl.exe
@@ -1620,17 +2025,41 @@ MSYS ==           C:/Users/Administrator/digitalknob/DK/3rdParty/msys2-20111123
 MSYS_DL ==           https://sourceforge.net/projects/mingw-w64/files/External%20binary%20packages%20%28Win64%20hosted%29/MSYS%20%2832-bit%29/MSYS-20111123.zip
 MSYS_NAME ==           msys2-20111123
 MSYS_VERSION ==           20111123
+NASM ==           C:/Users/Administrator/digitalknob/DK/3rdParty/nasm-2.15.05-win32
+NASM_DL ==           https://www.nasm.us/pub/nasm/releasebuilds/2.15.05/win32/nasm-2.15.05-win32.zip
+NASM_EXE ==           C:/Users/Administrator/digitalknob/DK/3rdParty/nasm-2.15.05-win32/nasm.exe
+NASM_NAME ==           nasm-2.15.05-win32
+NASM_VERSION ==           2.15.05
 NODEJS ==           C:/Users/Administrator/digitalknob/DK/3rdParty/node-v14.16.1-win-x86
 NODEJS_DL ==           https://nodejs.org/dist/v14.16.1/node-v14.16.1-win-x86.zip
 NODEJS_NAME ==           node-v14.16.1-win-x86
 NODEJS_VERSION ==           v14.16.1
 NODE_EXE ==           C:/Users/Administrator/digitalknob/DK/3rdParty/node-v14.16.1-win-x86/node.exe
+OGG ==           C:/Users/Administrator/digitalknob/DK/3rdParty/libogg-1.3.5
+OGG_CMAKE ==           -DCMAKE_CXX_FLAGS=-IC:/Users/Administrator/digitalknob/DK/3rdParty/libogg-1.3.5/win32/Release/include;-DOGG_INCLUDE_DIR=C:/Users/Administrator/digitalknob/DK/3rdParty/libogg-1.3.5/include;-DOGG_LIBRARY=C:/Users/Administrator/digitalknob/DK/3rdParty/libogg-1.3.5/win32/Release/src/.libs/libogg.a
+OGG_CONFIGURE ==           CFLAGS=-IC:/Users/Administrator/digitalknob/DK/3rdParty/libogg-1.3.5/include;--with-ogg-includes=C:/Users/Administrator/digitalknob/DK/3rdParty/libogg-1.3.5/include;--with-ogg-libraries=C:/Users/Administrator/digitalknob/DK/3rdParty/libogg-1.3.5/win32/Release/src/.libs
+OGG_DL ==           https://ftp.osuosl.org/pub/xiph/releases/ogg/libogg-1.3.5.zip
+OGG_NAME ==           libogg-1.3.5
+OGG_VERSION ==           1.3.5
 OPENSSL ==           C:/Users/Administrator/digitalknob/DK/3rdParty/openssl-1.0.2h-vs2015
+OPENSSL_BINARY ==           C:/Program Files/OpenSSL-Win64
+OPENSSL_BINARY_DL ==           https://slproweb.com/download/Win64OpenSSL-3_0_3.exe
+OPENSSL_BINARY_EXE ==           C:/Program Files/OpenSSL-Win64/bin/openssl.exe
+OPENSSL_BINARY_NAME ==           Win64OpenSSL-3.0.1
+OPENSSL_BINARY_VERSION ==           3.0.1
 OPENSSL_CMAKE ==           -DCMAKE_USE_OPENSSL=ON;-DOPENSSL_INCLUDE_DIR=C:/Users/Administrator/digitalknob/DK/3rdParty/openssl-1.0.2h-vs2015/include;-DLIB_EAY_DEBUG=C:/Users/Administrator/digitalknob/DK/3rdParty/openssl-1.0.2h-vs2015/lib/libeay32MTd.lib;-DLIB_EAY_RELEASE=C:/Users/Administrator/digitalknob/DK/3rdParty/openssl-1.0.2h-vs2015/lib/libeay32MT.lib;-DSSL_EAY_DEBUG=C:/Users/Administrator/digitalknob/DK/3rdParty/openssl-1.0.2h-vs2015/lib/ssleay32MTd.lib;-DSSL_EAY_RELEASE=C:/Users/Administrator/digitalknob/DK/3rdParty/openssl-1.0.2h-vs2015/lib/ssleay32MT.lib
 OPENSSL_DL ==           https://www.npcglib.org/~stathis/downloads/openssl-1.0.2h-vs2015.7z
 OPENSSL_NAME ==           openssl-1.0.2h-vs2015
 OPENSSL_VERSION ==           1.0.2h-vs2015
 OS ==           win32
+OSGRMLUI ==           C:/Users/Administrator/digitalknob/DK/3rdParty/osgrmlui-master
+OSGRMLUI_BRANCH ==           master
+OSGRMLUI_FOLDER ==           osgrmlui
+OSGRMLUI_NAME ==           osgrmlui-master
+PAKO ==           C:/Users/Administrator/digitalknob/DK/3rdParty/pako-master
+PAKO_BRANCH ==           master
+PAKO_FOLDER ==           pako
+PAKO_NAME ==           pako-master
 PHP_BINARY ==           C:/Users/Administrator/digitalknob/DK/3rdParty/php_binary-php-8.0.20-Win32-vs16-x86
 PHP_BINARY_BRANCH ==           php-8.0.20-Win32-vs16-x86
 PHP_BINARY_DL ==           https://windows.php.net/downloads/releases/php-8.0.20-Win32-vs16-x86.zip
@@ -1670,28 +2099,27 @@ PLUGINS_FILE ==           #include "DK/DK.h"
 #include "DKDuktape/DKXMLHttpRequest.h"
 #include "DKDuktape/android_poll.h"
 #include "DKDuktape/poll.h"
+#include "DKCef/DKCef.h"
+#include "DKCef/DKCefApp.h"
+#include "DKCef/DKCefJS.h"
+#include "DKCef/DKCefV8.h"
+#include "DKCef/DKCefWindow.h"
 #include "DKArchive/DKArchive.h"
 #include "DKArchive/DKArchiveJS.h"
 #include "DKAssets/DKAssets.h"
 #include "DKAssets/DKAssetsJS.h"
 #include "DKAssets/DKAssetsV8.h"
+#include "DKAudio/DKAudio.h"
+#include "DKAudio/DKAudioJS.h"
 #include "DKFile/DKFileJS.h"
 #include "DKFile/DKFileV8.h"
 #include "DKCurl/DKCurl.h"
 #include "DKCurl/DKCurlJS.h"
 #include "DKCurl/DKCurlV8.h"
+#include "DKCrypto/DKCrypto.h"
 #include "DKDebug/DKDebug.h"
 #include "DKDebug/DKDebugJS.h"
 #include "DKDebug/DKDebugV8.h"
-#include "DKDuktapeDom/DKConsole.h"
-#include "DKDuktapeDom/DKDuktapeDom.h"
-#include "DKDuktapeDom/DKEvent.h"
-#include "DKDuktapeDom/DKEventTarget.h"
-#include "DKDuktapeDom/DKKeyboardEvent.h"
-#include "DKDuktapeDom/DKNavigator.h"
-#include "DKDuktapeDom/DKScreen.h"
-#include "DKDuktapeDom/DKUIEvent.h"
-#include "DKDuktapeDom/DKXMLHttpRequest.h"
 #include "DKWindow/DKWindow.h"
 #include "DKWindow/DKWindowJS.h"
 #include "DKWindow/DKWindowV8.h"
@@ -1728,23 +2156,49 @@ PLUGINS_FILE ==           #include "DK/DK.h"
 #include "DKDom/DKDomWindowEventHandlers.h"
 #include "DKDom/DKDomXMLHttpRequest.h"
 #include "DKDom/DKDomXMLHttpRequestEventTarget.h"
+#include "DKDuktapeDom/DKConsole.h"
+#include "DKDuktapeDom/DKDuktapeDom.h"
+#include "DKDuktapeDom/DKEvent.h"
+#include "DKDuktapeDom/DKEventTarget.h"
+#include "DKDuktapeDom/DKKeyboardEvent.h"
+#include "DKDuktapeDom/DKNavigator.h"
+#include "DKDuktapeDom/DKScreen.h"
+#include "DKDuktapeDom/DKUIEvent.h"
+#include "DKDuktapeDom/DKXMLHttpRequest.h"
 #include "DKHandles/DKHandles.h"
 #include "DKHandles/DKHandlesJS.h"
 #include "DKHandles/DKHandlesV8.h"
+#include "DKHook/DKHook.h"
+#include "DKImageMagick/DKImageMagick.h"
+#include "DKMidi/DKMidi.h"
+#include "DKMidi/DKMidiJS.h"
+#include "DKMidi/DKMidiV8.h"
 #include "DKMySql/DKMySql.h"
 #include "DKMySql/DKMySqlJS.h"
+#include "DKRmlElement/DKRmlElement.h"
+#include "DKRmlElement/RmlElementInstancer.h"
 #include "DKRmlIframe/DKRmlIframe.h"
 #include "DKRmlIframe/RmlIframeInstancer.h"
 #include "DKVideo/DKVideo.h"
 #include "DKVideo/DKVideoJS.h"
 #include "DKSDLWindow/DKSDLWindow.h"
 #include "DKSDLWindow/DKSDLWindowAndroid.h"
+#include "DKSDLCef/DKSDLCef.h"
+#include "DKSDLCef/DKSDLCefHandler.h"
+#include "DKSDLCef/DKSDLCefKeyboard.h"
+#include "DKSDLMetalWindow/DKSDLMetalWindow.h"
 #include "DKSDLRml/DKSDLRml.h"
 #include "DKSDLRml/DKSDLRmlOpenGL.h"
 #include "DKSDLRml/DKSDLRmlRenderer.h"
 #include "DKSDLRml/DKSDLRmlSystem.h"
 #include "DKSDLRml/GifAnimate.h"
 #include "DKSDLText/DKSDLText.h"
+#include "DKSFMLWindow/DKSFMLWindow.h"
+#include "DKTray/DKTray.h"
+#include "DKTray/DKTrayJS.h"
+#include "DKTray/DKTrayV8.h"
+#include "DKTray/SystemTraySDK.h"
+#include "DKTray/resource.h"
 
 PLUGINS_FILE ==           #include "DK/DK.h"
 #include "DK/DKAndroid.h"
@@ -1780,28 +2234,27 @@ PLUGINS_FILE ==           #include "DK/DK.h"
 #include "DKDuktape/DKXMLHttpRequest.h"
 #include "DKDuktape/android_poll.h"
 #include "DKDuktape/poll.h"
+#include "DKCef/DKCef.h"
+#include "DKCef/DKCefApp.h"
+#include "DKCef/DKCefJS.h"
+#include "DKCef/DKCefV8.h"
+#include "DKCef/DKCefWindow.h"
 #include "DKArchive/DKArchive.h"
 #include "DKArchive/DKArchiveJS.h"
 #include "DKAssets/DKAssets.h"
 #include "DKAssets/DKAssetsJS.h"
 #include "DKAssets/DKAssetsV8.h"
+#include "DKAudio/DKAudio.h"
+#include "DKAudio/DKAudioJS.h"
 #include "DKFile/DKFileJS.h"
 #include "DKFile/DKFileV8.h"
 #include "DKCurl/DKCurl.h"
 #include "DKCurl/DKCurlJS.h"
 #include "DKCurl/DKCurlV8.h"
+#include "DKCrypto/DKCrypto.h"
 #include "DKDebug/DKDebug.h"
 #include "DKDebug/DKDebugJS.h"
 #include "DKDebug/DKDebugV8.h"
-#include "DKDuktapeDom/DKConsole.h"
-#include "DKDuktapeDom/DKDuktapeDom.h"
-#include "DKDuktapeDom/DKEvent.h"
-#include "DKDuktapeDom/DKEventTarget.h"
-#include "DKDuktapeDom/DKKeyboardEvent.h"
-#include "DKDuktapeDom/DKNavigator.h"
-#include "DKDuktapeDom/DKScreen.h"
-#include "DKDuktapeDom/DKUIEvent.h"
-#include "DKDuktapeDom/DKXMLHttpRequest.h"
 #include "DKWindow/DKWindow.h"
 #include "DKWindow/DKWindowJS.h"
 #include "DKWindow/DKWindowV8.h"
@@ -1838,36 +2291,64 @@ PLUGINS_FILE ==           #include "DK/DK.h"
 #include "DKDom/DKDomWindowEventHandlers.h"
 #include "DKDom/DKDomXMLHttpRequest.h"
 #include "DKDom/DKDomXMLHttpRequestEventTarget.h"
+#include "DKDuktapeDom/DKConsole.h"
+#include "DKDuktapeDom/DKDuktapeDom.h"
+#include "DKDuktapeDom/DKEvent.h"
+#include "DKDuktapeDom/DKEventTarget.h"
+#include "DKDuktapeDom/DKKeyboardEvent.h"
+#include "DKDuktapeDom/DKNavigator.h"
+#include "DKDuktapeDom/DKScreen.h"
+#include "DKDuktapeDom/DKUIEvent.h"
+#include "DKDuktapeDom/DKXMLHttpRequest.h"
 #include "DKHandles/DKHandles.h"
 #include "DKHandles/DKHandlesJS.h"
 #include "DKHandles/DKHandlesV8.h"
+#include "DKHook/DKHook.h"
+#include "DKImageMagick/DKImageMagick.h"
+#include "DKMidi/DKMidi.h"
+#include "DKMidi/DKMidiJS.h"
+#include "DKMidi/DKMidiV8.h"
 #include "DKMySql/DKMySql.h"
 #include "DKMySql/DKMySqlJS.h"
+#include "DKRmlElement/DKRmlElement.h"
+#include "DKRmlElement/RmlElementInstancer.h"
 #include "DKRmlIframe/DKRmlIframe.h"
 #include "DKRmlIframe/RmlIframeInstancer.h"
 #include "DKVideo/DKVideo.h"
 #include "DKVideo/DKVideoJS.h"
 #include "DKSDLWindow/DKSDLWindow.h"
 #include "DKSDLWindow/DKSDLWindowAndroid.h"
+#include "DKSDLCef/DKSDLCef.h"
+#include "DKSDLCef/DKSDLCefHandler.h"
+#include "DKSDLCef/DKSDLCefKeyboard.h"
+#include "DKSDLMetalWindow/DKSDLMetalWindow.h"
 #include "DKSDLRml/DKSDLRml.h"
 #include "DKSDLRml/DKSDLRmlOpenGL.h"
 #include "DKSDLRml/DKSDLRmlRenderer.h"
 #include "DKSDLRml/DKSDLRmlSystem.h"
 #include "DKSDLRml/GifAnimate.h"
 #include "DKSDLText/DKSDLText.h"
+#include "DKSFMLWindow/DKSFMLWindow.h"
+#include "DKTray/DKTray.h"
+#include "DKTray/DKTrayJS.h"
+#include "DKTray/DKTrayV8.h"
+#include "DKTray/SystemTraySDK.h"
+#include "DKTray/resource.h"
 
 PNG_VCPROJ ==           png16_static
+PREBUILD ==           OFF
+PREBUILD ==           OFF
 PRESET_CMAKE_SYSTEM_NAME ==           FALSE
 PRINT_CALL_DETAILS ==           1
 PRINT_FILE_NAMES ==           1
 PRINT_FUNCTION_ ==           ARGUMENTS;1
 PRINT_FUNCTION_NAMES ==           1
 PRINT_LINE_NUMBERS ==           1
-PROJECT_BINARY_DIR ==           C:/Users/Administrator/digitalknob/DK/DKApps/DKSDLRmlUi/win32
+PROJECT_BINARY_DIR ==           C:/Users/Administrator/digitalknob/DK/DKApps/DKTestAll/win32
 PROJECT_DESCRIPTION ==           
 PROJECT_HOMEPAGE_URL ==           
 PROJECT_IS_TOP_LEVEL ==           ON
-PROJECT_NAME ==           DKSDLRmlUi
+PROJECT_NAME ==           DKTestAll
 PROJECT_SOURCE_DIR ==           C:/Users/Administrator/digitalknob/DK/DKCMake
 PUGIXML ==           C:/Users/Administrator/digitalknob/DK/3rdParty/pugixml-pugixml-1.6
 PUGIXML_BRANCH ==           pugixml-1.6
@@ -1884,15 +2365,42 @@ REBUILD ==           OFF
 REBUILDALL ==           ON
 RELEASE ==           ON
 RELEASE_DIR ==           Release
-RELEASE_FLAGS ==           /DEBUG /INCREMENTAL:NO /OPT:NOREF /MANIFEST:NO /MANIFESTUAC:NO /level='highestAvailable' /uiAccess='true' /SUBSYSTEM:CONSOLE,5.01 /SAFESEH:NO
-RELEASE_LIBS ==           optimized;C:/Users/Administrator/digitalknob/DK/3rdParty/boxer-master/win32/Release/Boxer.lib;optimized;C:/Users/Administrator/digitalknob/DK/DKPlugins/DK/win32/Release/DK.lib;optimized;C:/Users/Administrator/digitalknob/DK/3rdParty/zlib-master/win32/Release/zlibstatic.lib;optimized;C:/Users/Administrator/digitalknob/DK/3rdParty/xz-20e7a33e2d59c6a814447d3991f21e2702174b20/win32/Release/liblzma.lib;optimized;C:/Users/Administrator/digitalknob/DK/3rdParty/libiconv-1.14/win32/Release/iconv.lib;optimized;C:/Users/Administrator/digitalknob/DK/3rdParty/libiconv-1.14/win32/Release/charset.lib;optimized;C:/Users/Administrator/digitalknob/DK/3rdParty/libxml2-f2ad86fa600885429a6083aaf6926c7e2e5b24d6/win32/Release/xml2.lib;optimized;C:/Users/Administrator/digitalknob/DK/3rdParty/cryptopp-27b7b8e4e6b3e54cca13b2faae87eb95faa0d819/win32/Release/cryptopp-static.lib;optimized;C:/Users/Administrator/digitalknob/DK/3rdParty/openssl-1.0.2h-vs2015/lib/libeay32MT.lib;optimized;C:/Users/Administrator/digitalknob/DK/3rdParty/openssl-1.0.2h-vs2015/lib/ssleay32MT.lib;optimized;C:/Users/Administrator/digitalknob/DK/3rdParty/libarchive-93f03b0f5d7316714df9b289a49150ab7a63bfaf/win32/libarchive/Release/archive_static.lib;optimized;C:/Users/Administrator/digitalknob/DK/DKPlugins/DKDuktape/win32/Release/DKDuktape.lib;optimized;C:/Users/Administrator/digitalknob/DK/DKPlugins/DKArchive/win32/Release/DKArchive.lib;optimized;C:/Users/Administrator/digitalknob/DK/DKPlugins/DKAssets/win32/Release/DKAssets.lib;optimized;C:/Users/Administrator/digitalknob/DK/3rdParty/curl-curl-7_43_0/win32/lib/Release/libcurl.lib;optimized;C:/Users/Administrator/digitalknob/DK/DKPlugins/DKFile/win32/Release/DKFile.lib;optimized;C:/Users/Administrator/digitalknob/DK/DKPlugins/DKCurl/win32/Release/DKCurl.lib;optimized;C:/Users/Administrator/digitalknob/DK/DKPlugins/DKDebug/win32/Release/DKDebug.lib;optimized;C:/Users/Administrator/digitalknob/DK/DKPlugins/DKDuktapeDom/win32/Release/DKDuktapeDom.lib;optimized;C:/Users/Administrator/digitalknob/DK/3rdParty/freetype-2.5.5/win32/Release/freetype.lib;optimized;C:/Users/Administrator/digitalknob/DK/3rdParty/rmlui-master/win32/Release/RmlCore.lib;optimized;C:/Users/Administrator/digitalknob/DK/3rdParty/rmlui-master/win32/Release/RmlDebugger.lib;optimized;C:/Users/Administrator/digitalknob/DK/DKPlugins/DKWindow/win32/Release/DKWindow.lib;optimized;C:/Users/Administrator/digitalknob/DK/DKPlugins/DKXml/win32/Release/DKXml.lib;optimized;C:/Users/Administrator/digitalknob/DK/3rdParty/tidy-html5-master/win32/Release/tidy_static.lib;optimized;C:/Users/Administrator/digitalknob/DK/DKPlugins/DKRml/win32/Release/DKRml.lib;optimized;C:/Users/Administrator/digitalknob/DK/DKPlugins/DKDom/win32/Release/DKDom.lib;optimized;C:/Users/Administrator/digitalknob/DK/DKPlugins/DKHandles/win32/Release/DKHandles.lib;optimized;C:/Users/Administrator/digitalknob/DK/DKPlugins/DKMySql/win32/Release/DKMySql.lib;optimized;C:/Users/Administrator/digitalknob/DK/DKPlugins/DKRmlIframe/win32/Release/DKRmlIframe.lib;optimized;C:/Users/Administrator/digitalknob/DK/DKPlugins/DKVideo/win32/Release/DKVideo.lib;optimized;C:/Users/Administrator/digitalknob/DK/3rdParty/glew-glew-2.2.0/win32/lib/Release/libglew32.lib;optimized;C:/Users/Administrator/digitalknob/DK/3rdParty/sdl-main/win32/Release/SDL2-static.lib;optimized;C:/Users/Administrator/digitalknob/DK/DKPlugins/DKSDLWindow/win32/Release/DKSDLWindow.lib;optimized;C:/Users/Administrator/digitalknob/DK/3rdParty/giflib-master/win32/Release/lib/.libs/libgif.a;optimized;C:/Users/Administrator/digitalknob/DK/3rdParty/libpng-v1.6.35/win32/Release/libpng16_static.lib;optimized;C:/Users/Administrator/digitalknob/DK/3rdParty/libjpeg-turbo-2.1.1/win32/Release/turbojpeg-static.lib;optimized;C:/Users/Administrator/digitalknob/DK/3rdParty/sdl_image-main/win32/lib/Release/SDL_image.lib;optimized;C:/Users/Administrator/digitalknob/DK/DKPlugins/DKSDLRml/win32/Release/DKSDLRml.lib;optimized;C:/Users/Administrator/digitalknob/DK/3rdParty/sdl_ttf-main/win32/lib/Release/SDL_ttf.lib;optimized;C:/Users/Administrator/digitalknob/DK/DKPlugins/DKSDLText/win32/Release/DKSDLText.lib
-RELEASE_LINK_FLAGS ==           /DEBUG;/INCREMENTAL:NO;/OPT:NOREF;/MANIFEST:NO;/MANIFESTUAC:NO;/level='highestAvailable';/uiAccess='true';/SUBSYSTEM:CONSOLE,5.01;/SAFESEH:NO
+RELEASE_FLAGS ==           /DELAYLOAD:libcef.dll /DELAYLOAD:chrome_elf.dll /DEBUG /INCREMENTAL:NO /OPT:NOREF /MANIFEST:NO /MANIFESTUAC:NO /level='highestAvailable' /uiAccess='true' /SUBSYSTEM:CONSOLE,5.01 /SAFESEH:NO
+RELEASE_LIBS ==           optimized;C:/Users/Administrator/digitalknob/DK/3rdParty/boost_1_78_0/win32/Release/lib/libboost_atomic.lib;optimized;C:/Users/Administrator/digitalknob/DK/3rdParty/boost_1_78_0/win32/Release/lib/libboost_chrono.lib;optimized;C:/Users/Administrator/digitalknob/DK/3rdParty/boost_1_78_0/win32/Release/lib/libboost_container.lib;optimized;C:/Users/Administrator/digitalknob/DK/3rdParty/boost_1_78_0/win32/Release/lib/libboost_context.lib;optimized;C:/Users/Administrator/digitalknob/DK/3rdParty/boost_1_78_0/win32/Release/lib/libboost_contract.lib;optimized;C:/Users/Administrator/digitalknob/DK/3rdParty/boost_1_78_0/win32/Release/lib/libboost_coroutine.lib;optimized;C:/Users/Administrator/digitalknob/DK/3rdParty/boost_1_78_0/win32/Release/lib/libboost_date_time.lib;optimized;C:/Users/Administrator/digitalknob/DK/3rdParty/boost_1_78_0/win32/Release/lib/libboost_exception.lib;optimized;C:/Users/Administrator/digitalknob/DK/3rdParty/boost_1_78_0/win32/Release/lib/libboost_filesystem.lib;optimized;C:/Users/Administrator/digitalknob/DK/3rdParty/boost_1_78_0/win32/Release/lib/libboost_graph.lib;optimized;C:/Users/Administrator/digitalknob/DK/3rdParty/boost_1_78_0/win32/Release/lib/libboost_iostreams.lib;optimized;C:/Users/Administrator/digitalknob/DK/3rdParty/boost_1_78_0/win32/Release/lib/libboost_json.lib;optimized;C:/Users/Administrator/digitalknob/DK/3rdParty/boost_1_78_0/win32/Release/lib/libboost_locale.lib;optimized;C:/Users/Administrator/digitalknob/DK/3rdParty/boost_1_78_0/win32/Release/lib/libboost_log.lib;optimized;C:/Users/Administrator/digitalknob/DK/3rdParty/boost_1_78_0/win32/Release/lib/libboost_nowide.lib;optimized;C:/Users/Administrator/digitalknob/DK/3rdParty/boost_1_78_0/win32/Release/lib/libboost_program_options.lib;optimized;C:/Users/Administrator/digitalknob/DK/3rdParty/boost_1_78_0/win32/Release/lib/libboost_random.lib;optimized;C:/Users/Administrator/digitalknob/DK/3rdParty/boost_1_78_0/win32/Release/lib/libboost_regex.lib;optimized;C:/Users/Administrator/digitalknob/DK/3rdParty/boost_1_78_0/win32/Release/lib/libboost_serialization.lib;optimized;C:/Users/Administrator/digitalknob/DK/3rdParty/boost_1_78_0/win32/Release/lib/libboost_system.lib;optimized;C:/Users/Administrator/digitalknob/DK/3rdParty/boost_1_78_0/win32/Release/lib/libboost_thread.lib;optimized;C:/Users/Administrator/digitalknob/DK/3rdParty/boost_1_78_0/win32/Release/lib/libboost_timer.lib;optimized;C:/Users/Administrator/digitalknob/DK/3rdParty/boost_1_78_0/win32/Release/lib/libboost_type_erasure.lib;optimized;C:/Users/Administrator/digitalknob/DK/3rdParty/boost_1_78_0/win32/Release/lib/libboost_wave.lib;optimized;C:/Users/Administrator/digitalknob/DK/3rdParty/boxer-master/win32/Release/Boxer.lib;optimized;C:/Users/Administrator/digitalknob/DK/3rdParty/mingw32-8.1.0/lib/gcc/i686-w64-mingw32/8.1.0/libgcc.a;optimized;C:/Users/Administrator/digitalknob/DK/3rdParty/bzip2-win-build-master/win32/Release/libbz2-static.lib;optimized;C:/Users/Administrator/digitalknob/DK/3rdParty/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_windows32/Release/libcef.lib;optimized;C:/Users/Administrator/digitalknob/DK/3rdParty/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_windows32/win32/libcef_dll_wrapper/Release/libcef_dll_wrapper.lib;optimized;C:/Users/Administrator/digitalknob/DK/3rdParty/cryptopp-27b7b8e4e6b3e54cca13b2faae87eb95faa0d819/win32/Release/cryptopp-static.lib;optimized;C:/Users/Administrator/digitalknob/DK/3rdParty/zlib-master/win32/Release/zlibstatic.lib;optimized;C:/Users/Administrator/digitalknob/DK/3rdParty/openssl-1.0.2h-vs2015/lib/libeay32MT.lib;optimized;C:/Users/Administrator/digitalknob/DK/3rdParty/openssl-1.0.2h-vs2015/lib/ssleay32MT.lib;optimized;C:/Users/Administrator/digitalknob/DK/3rdParty/curl-curl-7_43_0/win32/lib/Release/libcurl.lib;optimized;C:/Users/Administrator/digitalknob/DK/3rdParty/libogg-1.3.5/win32/Release/src/.libs/libogg.a;optimized;C:/Users/Administrator/digitalknob/DK/3rdParty/flac-1.3.2/win32/Release/src/libFLAC/.libs/libFLAC-static.a;optimized;C:/Users/Administrator/digitalknob/DK/3rdParty/freetype-2.5.5/win32/Release/freetype.lib;optimized;C:/Users/Administrator/digitalknob/DK/3rdParty/giflib-master/win32/Release/lib/.libs/libgif.a;optimized;C:/Users/Administrator/digitalknob/DK/3rdParty/glew-glew-2.2.0/win32/lib/Release/libglew32.lib;optimized;C:/Users/Administrator/digitalknob/DK/3rdParty/xz-20e7a33e2d59c6a814447d3991f21e2702174b20/win32/Release/liblzma.lib;optimized;C:/Users/Administrator/digitalknob/DK/3rdParty/libiconv-1.14/win32/Release/iconv.lib;optimized;C:/Users/Administrator/digitalknob/DK/3rdParty/libiconv-1.14/win32/Release/charset.lib;optimized;C:/Users/Administrator/digitalknob/DK/3rdParty/libxml2-f2ad86fa600885429a6083aaf6926c7e2e5b24d6/win32/Release/xml2.lib;optimized;C:/Users/Administrator/digitalknob/DK/3rdParty/libarchive-93f03b0f5d7316714df9b289a49150ab7a63bfaf/win32/libarchive/Release/archive_static.lib;optimized;C:/Users/Administrator/digitalknob/DK/3rdParty/libjpeg-turbo-2.1.1/win32/Release/turbojpeg-static.lib;optimized;C:/Users/Administrator/digitalknob/DK/3rdParty/libpng-v1.6.35/win32/Release/libpng16_static.lib;optimized;C:/Users/Administrator/digitalknob/DK/3rdParty/libuv-2bc22c40eb68f3b38d1ae3ea68ef2f180cbe9fef/win32/Release/uv_a.lib;optimized;C:/Users/Administrator/digitalknob/DK/3rdParty/rlottie-master/win32/Release/rlottie.lib;optimized;C:/Users/Administrator/digitalknob/DK/3rdParty/rmlui-master/win32/Release/RmlCore.lib;optimized;C:/Users/Administrator/digitalknob/DK/3rdParty/rmlui-master/win32/Release/RmlDebugger.lib;optimized;C:/Users/Administrator/digitalknob/DK/3rdParty/rtmidi-2.1.0/win32/Release/RtMidi.lib;optimized;C:/Users/Administrator/digitalknob/DK/3rdParty/sdl-main/win32/Release/SDL2-static.lib;optimized;C:/Users/Administrator/digitalknob/DK/3rdParty/sdl-gpu-master/win32/SDL_gpu-VS/lib/Release/SDL2_gpu_s.lib;optimized;C:/Users/Administrator/digitalknob/DK/3rdParty/sdl_image-main/win32/lib/Release/SDL_image.lib;optimized;C:/Users/Administrator/digitalknob/DK/3rdParty/smpeg2-2.0.0;optimized;C:/Users/Administrator/digitalknob/DK/3rdParty/libvorbis-1.3.7/win32/Release/lib/.libs/libvorbis.a;optimized;C:/Users/Administrator/digitalknob/DK/3rdParty/libvorbis-1.3.7/win32/Release/lib/.libs/libvorbisfile.a;optimized;C:/Users/Administrator/digitalknob/DK/3rdParty/libvorbis-1.3.7/win32/Release/lib/.libs/libvorbisenc.a;optimized;C:/Users/Administrator/digitalknob/DK/3rdParty/SDL2_mixer-2.0.1/win32/lib/Release/SDL_mixer.lib;optimized;C:/Users/Administrator/digitalknob/DK/3rdParty/sdl_ttf-main/win32/lib/Release/SDL_ttf.lib;optimized;C:/Users/Administrator/digitalknob/DK/3rdParty/sfml-a733e4cd7e0056922e4f74f1932749b4d6a5744d/win32/lib/Release/sfml-audio-s.lib;optimized;C:/Users/Administrator/digitalknob/DK/3rdParty/sfml-a733e4cd7e0056922e4f74f1932749b4d6a5744d/win32/lib/Release/sfml-graphics-s.lib;optimized;C:/Users/Administrator/digitalknob/DK/3rdParty/sfml-a733e4cd7e0056922e4f74f1932749b4d6a5744d/win32/lib/Release/sfml-main.lib;optimized;C:/Users/Administrator/digitalknob/DK/3rdParty/sfml-a733e4cd7e0056922e4f74f1932749b4d6a5744d/win32/lib/Release/sfml-network-s.lib;optimized;C:/Users/Administrator/digitalknob/DK/3rdParty/sfml-a733e4cd7e0056922e4f74f1932749b4d6a5744d/win32/lib/Release/sfml-system-s.lib;optimized;C:/Users/Administrator/digitalknob/DK/3rdParty/sfml-a733e4cd7e0056922e4f74f1932749b4d6a5744d/win32/lib/Release/sfml-window-s.lib;optimized;C:/Users/Administrator/digitalknob/DK/3rdParty/tidy-html5-master/win32/Release/tidy_static.lib;optimized;C:/Users/Administrator/digitalknob/DK/DKPlugins/DK/win32/Release/DK.lib;optimized;C:/Users/Administrator/digitalknob/DK/DKPlugins/DKDuktape/win32/Release/DKDuktape.lib;optimized;C:/Users/Administrator/digitalknob/DK/DKPlugins/DKCef/win32/Release/DKCef.lib;optimized;C:/Users/Administrator/digitalknob/DK/DKPlugins/DKArchive/win32/Release/DKArchive.lib;optimized;C:/Users/Administrator/digitalknob/DK/DKPlugins/DKAssets/win32/Release/DKAssets.lib;optimized;C:/Users/Administrator/digitalknob/DK/DKPlugins/DKAudio/win32/Release/DKAudio.lib;optimized;C:/Users/Administrator/digitalknob/DK/DKPlugins/DKFile/win32/Release/DKFile.lib;optimized;C:/Users/Administrator/digitalknob/DK/DKPlugins/DKCurl/win32/Release/DKCurl.lib;optimized;C:/Users/Administrator/digitalknob/DK/DKPlugins/DKCrypto/win32/Release/DKCrypto.lib;optimized;C:/Users/Administrator/digitalknob/DK/DKPlugins/DKDebug/win32/Release/DKDebug.lib;optimized;C:/Users/Administrator/digitalknob/DK/DKPlugins/DKWindow/win32/Release/DKWindow.lib;optimized;C:/Users/Administrator/digitalknob/DK/DKPlugins/DKXml/win32/Release/DKXml.lib;optimized;C:/Users/Administrator/digitalknob/DK/DKPlugins/DKRml/win32/Release/DKRml.lib;optimized;C:/Users/Administrator/digitalknob/DK/DKPlugins/DKDom/win32/Release/DKDom.lib;optimized;C:/Users/Administrator/digitalknob/DK/DKPlugins/DKDuktapeDom/win32/Release/DKDuktapeDom.lib;optimized;C:/Users/Administrator/digitalknob/DK/DKPlugins/DKHandles/win32/Release/DKHandles.lib;optimized;C:/Users/Administrator/digitalknob/DK/DKPlugins/DKHook/win32/Release/DKHook.lib;optimized;C:/Users/Administrator/digitalknob/DK/DKPlugins/DKImageMagick/win32/Release/DKImageMagick.lib;optimized;C:/Users/Administrator/digitalknob/DK/DKPlugins/DKMidi/win32/Release/DKMidi.lib;optimized;C:/Users/Administrator/digitalknob/DK/DKPlugins/DKMySql/win32/Release/DKMySql.lib;optimized;C:/Users/Administrator/digitalknob/DK/DKPlugins/DKRmlElement/win32/Release/DKRmlElement.lib;optimized;C:/Users/Administrator/digitalknob/DK/DKPlugins/DKRmlIframe/win32/Release/DKRmlIframe.lib;optimized;C:/Users/Administrator/digitalknob/DK/DKPlugins/DKVideo/win32/Release/DKVideo.lib;optimized;C:/Users/Administrator/digitalknob/DK/DKPlugins/DKSDLWindow/win32/Release/DKSDLWindow.lib;optimized;C:/Users/Administrator/digitalknob/DK/DKPlugins/DKSDLCef/win32/Release/DKSDLCef.lib;optimized;C:/Users/Administrator/digitalknob/DK/DKPlugins/DKSDLMetalWindow/win32/Release/DKSDLMetalWindow.lib;optimized;C:/Users/Administrator/digitalknob/DK/DKPlugins/DKSDLRml/win32/Release/DKSDLRml.lib;optimized;C:/Users/Administrator/digitalknob/DK/DKPlugins/DKSDLText/win32/Release/DKSDLText.lib;optimized;C:/Users/Administrator/digitalknob/DK/DKPlugins/DKSFMLWindow/win32/Release/DKSFMLWindow.lib;optimized;C:/Users/Administrator/digitalknob/DK/DKPlugins/DKTray/win32/Release/DKTray.lib
+RELEASE_LINK_FLAGS ==           /DELAYLOAD:libcef.dll;/DELAYLOAD:chrome_elf.dll;/DEBUG;/INCREMENTAL:NO;/OPT:NOREF;/MANIFEST:NO;/MANIFESTUAC:NO;/level='highestAvailable';/uiAccess='true';/SUBSYSTEM:CONSOLE,5.01;/SAFESEH:NO
+RLOTTIE ==           C:/Users/Administrator/digitalknob/DK/3rdParty/rlottie-master
+RLOTTIE_BRANCH ==           master
+RLOTTIE_FOLDER ==           rlottie
+RLOTTIE_NAME ==           rlottie-master
 RMLUI ==           C:/Users/Administrator/digitalknob/DK/3rdParty/rmlui-master
+RMLUI-D3D11 ==           C:/Users/Administrator/digitalknob/DK/3rdParty/rmlui-d3d11-master
+RMLUI-D3D11_BRANCH ==           master
+RMLUI-D3D11_FOLDER ==           rmlui-d3d11
+RMLUI-D3D11_NAME ==           rmlui-d3d11-master
+RMLUIEDITOR ==           C:/Users/Administrator/digitalknob/DK/3rdParty/rmluieditor-master
+RMLUIEDITOR_BRANCH ==           master
+RMLUIEDITOR_FOLDER ==           rmluieditor
+RMLUIEDITOR_NAME ==           rmluieditor-master
 RMLUI_BRANCH ==           master
 RMLUI_FOLDER ==           rmlui
 RMLUI_NAME ==           rmlui-master
+ROCKETSHIP ==           C:/Users/Administrator/digitalknob/DK/3rdParty/rocketship-main
+ROCKETSHIP_BRANCH ==           main
+ROCKETSHIP_FOLDER ==           rocketship
+ROCKETSHIP_NAME ==           rocketship-main
+RTMIDI ==           C:/Users/Administrator/digitalknob/DK/3rdParty/rtmidi-2.1.0
+RTMIDI_DL ==           http://www.music.mcgill.ca/~gary/rtmidi/release/rtmidi-2.1.0.tar.gz
+RTMIDI_NAME ==           rtmidi-2.1.0
+RTMIDI_SLN ==           Project.sln
+RTMIDI_TARGET ==           RtMidi
+RTMIDI_VERSION ==           2.1.0
 RUN_CONFIGURE ==           ON
+SDKMANAGER_EXE ==           C:/Users/Administrator/digitalknob/DK/3rdParty/android-sdk/cmdline-tools/latest/bin/sdkmanager.bat
 SDL ==           C:/Users/Administrator/digitalknob/DK/3rdParty/sdl-main
+SDL-GPU ==           C:/Users/Administrator/digitalknob/DK/3rdParty/sdl-gpu-master
+SDL-GPU_BRANCH ==           master
+SDL-GPU_FOLDER ==           sdl-gpu
+SDL-GPU_NAME ==           sdl-gpu-master
 SDLMAIN_CMAKE ==           -DSDL2MAIN_LIBRARY_DEBUG=C:/Users/Administrator/digitalknob/DK/3rdParty/sdl-main/win32/Debug/SDL2maind.lib;-DSDL2MAIN_LIBRARY_RELEASE=C:/Users/Administrator/digitalknob/DK/3rdParty/sdl-main/win32/Release/SDL2main.lib
 SDL_BRANCH ==           main
 SDL_CMAKE ==           -DSDL2_DIR=C:/Users/Administrator/digitalknob/DK/3rdParty/sdl-main;-DSDL2_INCLUDE_DIR=C:/Users/Administrator/digitalknob/DK/3rdParty/sdl-main/include;-DSDL2_LIBRARY_TEMP=C:/Users/Administrator/digitalknob/DK/3rdParty/sdl-main/win32/Release/SDL2.lib;-DSDL2_LIBRARY=C:/Users/Administrator/digitalknob/DK/3rdParty/sdl-main/win32/Release/SDL2.lib;-DSDL2_LIBRARY_DEBUG=C:/Users/Administrator/digitalknob/DK/3rdParty/sdl-main/win32/Debug/SDL2d.lib;-DSDL2_LIBRARY_RELEASE=C:/Users/Administrator/digitalknob/DK/3rdParty/sdl-main/win32/Release/SDL2.lib
@@ -1902,6 +2410,10 @@ SDL_IMAGE_BRANCH ==           main
 SDL_IMAGE_CMAKE ==           -DSDL2_IMAGE_INCLUDE_DIR=C:/Users/Administrator/digitalknob/DK/3rdParty/sdl_image-main;-DSDL2_IMAGE_LIBRARY_TEMP=C:/Users/Administrator/digitalknob/DK/3rdParty/sdl_image-main/win32/lib/Release/SDL_image.lib;-DSDL2_IMAGE_LIBRARY_DEBUG=C:/Users/Administrator/digitalknob/DK/3rdParty/sdl_image-main/win32/lib/Debug/SDL_image.lib;-DSDL2_IMAGE_LIBRARY_RELEASE=C:/Users/Administrator/digitalknob/DK/3rdParty/sdl_image-main/win32/lib/Release/SDL_image.lib
 SDL_IMAGE_FOLDER ==           sdl_image
 SDL_IMAGE_NAME ==           sdl_image-main
+SDL_MIXER ==           C:/Users/Administrator/digitalknob/DK/3rdParty/SDL2_mixer-2.0.1
+SDL_MIXER_DL ==           https://www.libsdl.org/projects/SDL_mixer/release/SDL2_mixer-2.0.1.zip
+SDL_MIXER_NAME ==           SDL2_mixer-2.0.1
+SDL_MIXER_VERSION ==           2.0.1
 SDL_NAME ==           sdl-main
 SDL_TTF ==           C:/Users/Administrator/digitalknob/DK/3rdParty/sdl_ttf-main
 SDL_TTF_BRANCH ==           main
@@ -1909,7 +2421,18 @@ SDL_TTF_FOLDER ==           sdl_ttf
 SDL_TTF_NAME ==           sdl_ttf-main
 SET_MSVC_CXX_ARCHITECTURE_ID ==           set(MSVC_CXX_ARCHITECTURE_ID X86)
 SET_MSVC_C_ARCHITECTURE_ID ==           set(MSVC_C_ARCHITECTURE_ID X86)
+SFML ==           C:/Users/Administrator/digitalknob/DK/3rdParty/sfml-a733e4cd7e0056922e4f74f1932749b4d6a5744d
+SFML_BRANCH ==           a733e4cd7e0056922e4f74f1932749b4d6a5744d
+SFML_CMAKE ==           -DSFML_INCLUDE_DIR=C:/Users/Administrator/digitalknob/DK/3rdParty/sfml-a733e4cd7e0056922e4f74f1932749b4d6a5744d/include;-DSFML_MAIN_LIBRARY_DEBUG=C:/Users/Administrator/digitalknob/DK/3rdParty/sfml-a733e4cd7e0056922e4f74f1932749b4d6a5744d/win32/lib/Debug/sfml-main-d.lib;-DSFML_MAIN_LIBRARY_RELEASE=C:/Users/Administrator/digitalknob/DK/3rdParty/sfml-a733e4cd7e0056922e4f74f1932749b4d6a5744d/win32/lib/Release/sfml-main.lib;-DSFML_SYSTEM_LIBRARY_DEBUG=C:/Users/Administrator/digitalknob/DK/3rdParty/sfml-a733e4cd7e0056922e4f74f1932749b4d6a5744d/win32/lib/Debug/sfml-system-s-d.lib;-DSFML_SYSTEM_LIBRARY_RELEASE=C:/Users/Administrator/digitalknob/DK/3rdParty/sfml-a733e4cd7e0056922e4f74f1932749b4d6a5744d/win32/lib/Release/sfml-system-s.lib;-DSFML_WINDOW_LIBRARY_DEBUG=C:/Users/Administrator/digitalknob/DK/3rdParty/sfml-a733e4cd7e0056922e4f74f1932749b4d6a5744d/win32/lib/Debug/sfml-window-s-d.lib;-DSFML_WINDOW_LIBRARY_RELEASE=C:/Users/Administrator/digitalknob/DK/3rdParty/sfml-a733e4cd7e0056922e4f74f1932749b4d6a5744d/win32/lib/Release/sfml-window-s.lib;-DSFML_GRAPHICS_LIBRARY_DEBUG=C:/Users/Administrator/digitalknob/DK/3rdParty/sfml-a733e4cd7e0056922e4f74f1932749b4d6a5744d/win32/lib/Debug/sfml-graphics-s-d.lib;-DSFML_GRAPHICS_LIBRARY_RELEASE=C:/Users/Administrator/digitalknob/DK/3rdParty/sfml-a733e4cd7e0056922e4f74f1932749b4d6a5744d/win32/lib/Release/sfml-graphics-s.lib;-DSFML_AUDIO_LIBRARY_DEBUG=C:/Users/Administrator/digitalknob/DK/3rdParty/sfml-a733e4cd7e0056922e4f74f1932749b4d6a5744d/win32/lib/Debug/sfml-audio-s-d.lib;-DSFML_AUDIO_LIBRARY_RELEASE=C:/Users/Administrator/digitalknob/DK/3rdParty/sfml-a733e4cd7e0056922e4f74f1932749b4d6a5744d/win32/lib/Release/sfml-audio-s.lib
+SFML_DL ==           https://github.com/SFML/SFML/archive/a733e4cd7e0056922e4f74f1932749b4d6a5744d.zip
+SFML_FOLDER ==           sfml
+SFML_NAME ==           sfml-a733e4cd7e0056922e4f74f1932749b4d6a5744d
 SHARED ==           OFF
+SMPEG2 ==           C:/Users/Administrator/digitalknob/DK/3rdParty/smpeg2-2.0.0;PATCH
+SMPEG2_CMAKE ==           -DSMPEG_INCLUDE_DIR=C:/Users/Administrator/digitalknob/DK/3rdParty/smpeg2-2.0.0;PATCH
+SMPEG2_DL ==           https://www.libsdl.org/projects/smpeg/release/smpeg2-2.0.0.tar.gz
+SMPEG2_NAME ==           smpeg2-2.0.0
+SMPEG2_VERSION ==           2.0.0
 STACKWALKER ==           C:/Users/Administrator/digitalknob/DK/3rdParty/stackwalker-2013-01-07-v14
 STACKWALKER_DL ==           https://github.com/ConnectedVision/connectedvision/raw/master/build_env/Conan/packages/StackWalker/2014.12.28/2.3.0/stackwalker-2014-12-28.zip
 STACKWALKER_NAME ==           stackwalker-2013-01-07-v14
@@ -1917,10 +2440,22 @@ STACKWALKER_VERSION ==           2013-01-07-v14
 STACK_FILENAME ==           Generate.cmake
 STACK_HEADER ==           Generate.cmake:14->(): 
 STATIC ==           ON
+SUN-JS ==           C:/Users/Administrator/digitalknob/DK/3rdParty/sun-js-master
+SUN-JS_BRANCH ==           master
+SUN-JS_FOLDER ==           sun-js
+SUN-JS_NAME ==           sun-js-master
+THREADPOOL ==           C:/Users/Administrator/digitalknob/DK/3rdParty/threadpool-0_2_5-src
+THREADPOOL_DL ==           https://sourceforge.net/projects/threadpool/files/threadpool/0.2.5%20%28Stable%29/threadpool-0_2_5-src.zip
+THREADPOOL_VERSION ==           0_2_5-src
 TIDY-HTML5 ==           C:/Users/Administrator/digitalknob/DK/3rdParty/tidy-html5-master
 TIDY-HTML5_BRANCH ==           master
 TIDY-HTML5_FOLDER ==           tidy-html5
 TIDY-HTML5_NAME ==           tidy-html5-master
+UPX ==           C:/Users/Administrator/digitalknob/DK/3rdParty/upx-3.96
+UPX_DL ==           https://github.com/upx/upx/releases/download/v3.96/upx-3.96-win32.zip
+UPX_EXE ==           C:/Users/Administrator/digitalknob/DK/3rdParty/upx-3.96/upx.exe
+UPX_NAME ==           upx-3.96
+UPX_VERSION ==           3.96
 U_black ==           [4;30;100m
 U_blue ==           [4;34m
 U_cyan ==           [4;36m
@@ -1929,16 +2464,28 @@ U_magenta ==           [4;35m
 U_red ==           [4;31m
 U_white ==           [4;37m
 U_yellow ==           [4;33m
+VCPKG ==           C:/Users/Administrator/digitalknob/DK/3rdParty/vcpkg
+VCPKG_NAME ==           vcpkg
 VC_REDIST ==           C:/Windows/System32/vcruntime140.dll
 VC_REDIST_DL ==           https://aka.ms/vs/16/release/vc_redist.x86.exe
 VC_REDIST_NAME ==           vc_redist.x86
 VC_REDIST_PLATFORM ==           x86
 VC_REDIST_VERSION ==           14.29.30133
+VERYSLEEPY ==           C:/Program Files/Very Sleepy/32
+VERYSLEEPY_DL ==           https://github.com/VerySleepy/verysleepy/releases/download/v0.91/verysleepy-0.91.exe
+VERYSLEEPY_EXE ==           C:/Program Files/Very Sleepy/32/sleepy.exe
+VERYSLEEPY_NAME ==           verysleepy-0.91
+VERYSLEEPY_VERSION ==           0.91
 VISUALSTUDIO ==           C:/Program Files/Microsoft Visual Studio/2022/Community
 VISUALSTUDIO_BUILD ==           17
 VISUALSTUDIO_DL ==           https://aka.ms/vs/17/release/vs_community.exe
 VISUALSTUDIO_PROGRAM_FILES ==           Program Files
 VISUALSTUDIO_VERSION ==           2022
+VORBIS ==           C:/Users/Administrator/digitalknob/DK/3rdParty/libvorbis-1.3.7
+VORBIS_CMAKE ==           -DVORBIS_INCLUDE_DIR=C:/Users/Administrator/digitalknob/DK/3rdParty/libvorbis-1.3.7/include;-DVORBIS_LIBRARY=C:/Users/Administrator/digitalknob/DK/3rdParty/libvorbis-1.3.7/win32/Release/lib/.libs/libvorbis.a;-DVORBISFILE_LIBRARY=C:/Users/Administrator/digitalknob/DK/3rdParty/libvorbis-1.3.7/win32/Release/lib/.libs/libvorbisfile.a;-DVORBISENC_LIBRARY=C:/Users/Administrator/digitalknob/DK/3rdParty/libvorbis-1.3.7/win32/Release/lib/.libs/libvorbisenc.a
+VORBIS_DL ==           https://ftp.osuosl.org/pub/xiph/releases/vorbis/libvorbis-1.3.7.zip
+VORBIS_NAME ==           libvorbis-1.3.7
+VORBIS_VERSION ==           1.3.7
 VS_GENERATOR ==           Visual Studio 17 2022
 WARNINGS_AS_ERRORS ==           OFF
 WARNING_4244 ==           ON
@@ -1963,6 +2510,11 @@ ZLIB_BRANCH ==           master
 ZLIB_CMAKE ==           -DCMAKE_C_FLAGS=/IC:/Users/Administrator/digitalknob/DK/3rdParty/zlib-master/win32;-DCMAKE_CXX_FLAGS=/IC:/Users/Administrator/digitalknob/DK/3rdParty/zlib-master/win32;-DZLIB_INCLUDE_DIR=C:/Users/Administrator/digitalknob/DK/3rdParty/zlib-master;-DZLIB_LIBRARY=C:/Users/Administrator/digitalknob/DK/3rdParty/zlib-master/win32/Release/zlibstatic.lib;-DZLIB_LIBRARY_DEBUG=C:/Users/Administrator/digitalknob/DK/3rdParty/zlib-master/win32/Debug/zlibstatic.lib;-DZLIB_LIBRARY_RELEASE=C:/Users/Administrator/digitalknob/DK/3rdParty/zlib-master/win32/Release/zlibstatic.lib
 ZLIB_FOLDER ==           zlib
 ZLIB_NAME ==           zlib-master
+ZSTD ==           C:/Users/Administrator/digitalknob/DK/3rdParty/zstd-621d79898811d42529dbabebe7a2d7d5cb0e8dcd
+ZSTD_BRANCH ==           621d79898811d42529dbabebe7a2d7d5cb0e8dcd
+ZSTD_DL ==           https://github.com/facebook/zstd/archive/621d79898811d42529dbabebe7a2d7d5cb0e8dcd.zip
+ZSTD_FOLDER ==           zstd
+ZSTD_NAME ==           zstd-621d79898811d42529dbabebe7a2d7d5cb0e8dcd
 _CMAKE_CXX_IPO_MAY_BE_SUPPORTED_BY_COMPILER ==           YES
 _CMAKE_CXX_IPO_SUPPORTED_BY_CMAKE ==           YES
 _CMAKE_C_IPO_MAY_BE_SUPPORTED_BY_COMPILER ==           YES
@@ -2001,18 +2553,136 @@ __INCGUARD_f5bc78645402f1b3541a76740d198208__ ==           ON
 __WINDOWS_MSVC ==           1
 __WINDOWS_PATHS_INCLUDED ==           1
 _compiler_version ==           19.30.30709.0
+agl ==           ON
+agl_all ==           1
+android-build-tools ==           ON
+android-build-tools_all ==           1
+android-cmake ==           ON
+android-cmake_all ==           1
+android-cmdline-tools ==           ON
+android-cmdline-tools_all ==           1
 android-java-tools ==           
+android-ndk ==           ON
+android-ndk_all ==           1
+android-platform-tools ==           ON
+android-platform-tools_all ==           1
+android-platforms ==           ON
+android-platforms_all ==           1
+android-sdk ==           ON
+android-sdk-tools ==           ON
+android-sdk-tools_all ==           1
+android-sdk_all ==           1
+android-sources ==           ON
+android-sources_all ==           1
+android-studio ==           ON
+android-studio_all ==           1
+android-system-images ==           ON
+android-system-images_all ==           1
+ant ==           ON
+ant_all ==           1
+appkit ==           ON
+appkit_all ==           1
 astyle ==           
+audio_toolbox ==           ON
+audio_toolbox_all ==           1
+audiounit ==           ON
+audiounit_all ==           1
+autotools ==           ON
+autotools_all ==           1
+av_foundation ==           ON
+av_foundation_all ==           1
+av_kit ==           ON
+av_kit_all ==           1
+avf_audio ==           ON
+avf_audio_all ==           1
+babel ==           ON
+babel_all ==           1
 black ==           [30;100m
 blue ==           [34m
+boost ==           ON
+boost_all ==           1
+boost_atomic ==           1
+boost_chrono ==           1
+boost_container ==           1
+boost_context ==           1
+boost_contract ==           1
+boost_coroutine ==           1
+boost_date_time ==           1
+boost_exception ==           1
+boost_fiber ==           1
+boost_fiber_nolib ==           1
+boost_filesystem ==           1
+boost_graph ==           1
+boost_graph_parallel ==           1
+boost_graph_parallel_nolib ==           1
+boost_headers ==           1
+boost_headers_nolib ==           1
+boost_iostreams ==           1
+boost_json ==           1
+boost_locale ==           1
+boost_log ==           1
+boost_math ==           1
+boost_math_nolib ==           1
+boost_mpi ==           1
+boost_mpi_nolib ==           1
+boost_nowide ==           1
+boost_program_options ==           1
+boost_python ==           1
+boost_python_nolib ==           1
+boost_random ==           1
+boost_regex ==           1
+boost_serialization ==           1
+boost_stacktrace ==           1
+boost_stacktrace_nolib ==           1
+boost_system ==           1
+boost_targets ==           atomic;chrono;container;context;contract;coroutine;date_time;exception;fiber;filesystem;graph;graph_parallel;headers;iostreams;json;locale;log;math;mpi;nowide;program_options;python;random;regex;serialization;stacktrace;system;test;thread;timer;type_erasure;wave
+boost_test ==           1
+boost_test_nolib ==           1
+boost_thread ==           1
+boost_timer ==           1
+boost_type_erasure ==           1
+boost_wave ==           1
 boxer ==           ON
 boxer_all ==           1
 build-essential ==           
+bullet3 ==           ON
+bullet3_all ==           1
 bzip2 ==           ON
+bzip2-win-build ==           ON
+bzip2-win-build_all ==           1
 bzip2_all ==           1
+carbon ==           ON
+carbon_all ==           1
+cef_binary ==           ON
+cef_binary_all ==           1
+chart.js ==           ON
+chart.js_all ==           1
 cmake ==           ON
 cmake_all ==           1
+cocoa ==           ON
+cocoa_all ==           1
+codemirror ==           ON
+codemirror_all ==           1
+command_line_tools ==           ON
 conio-for-linux ==           
+content ==           ON
+core_audio ==           ON
+core_audio_all ==           1
+core_foundation ==           ON
+core_foundation_all ==           1
+core_graphics ==           ON
+core_graphics_all ==           1
+core_haptics ==           ON
+core_haptics_all ==           1
+core_motion ==           ON
+core_motion_all ==           1
+core_services ==           ON
+core_services_all ==           1
+core_video ==           ON
+core_video_all ==           1
+cpp-subprocess ==           ON
+crosswalk ==           ON
+crosswalk_all ==           1
 cryptopp ==           ON
 cryptopp_all ==           1
 curl ==           ON
@@ -2020,41 +2690,84 @@ curl_all ==           1
 cyan ==           [36m
 d ==           
 day ==           12
+diff-match-patch ==           ON
+diff-match-patch_all ==           1
 dir ==           
 dkdepend_disable_list ==           DKFmt;fmt;tiff;msys2;_TEMPLATE-APP_;_TEMPLATE-LIB_;android-java-tools;astyle;conio-for-linux;DKJerryscript;DKOFWindow;DKPlugin1;DKPlugin2;DKRestart;DKScreenRecorder;DKSDLAudio;DKSDLWav;DKSDLVideo;DKSFMLRml;DKThread;DKTorrent;DKUpdate;DKVncClient;DKVncServer;emsdk;emsdk-portable;ffmpeg-dev;ffmpeg-shared;ffmpeg-static;gradle;jpeg;libcaca;librocket;libvncserver;libvncserver-master-win;libx11;miniweb;notepadpp;openframeworks;openscenegraph;osgaudio;osgbullet;osgworks;sdl2_gif;sdl2_giflib_sa;simple-getch;opencv;build-essential;DKOcr;DKWebSockets;freealut;freealut-master;java;jerryscript;leptonica;libtorrent;libwebp;libwebsockets;lighttpd;lua;openal;openal-android;opensles;podofo;tesseract;tiff;uwebsockets;waave;build-essential;kdevelop;libasound2-dev;libgl1-mesa-dev;libglib2.0-dev;libglu1-mesa-dev;libgtk2.0-dev;libsndfile1-dev;libsystemd-dev;libudev-dev;libx11-dev;libxcursor-dev;libxrandr-dev;libxtst-dev;mesa-common-dev
-dkdepend_list ==           git;cmake;visualstudio;imagemagick;boxer;DK;zlib;xz;bzip2;libiconv;libxml2;cryptopp;openssl;libarchive;python;nodejs;duktape;DKDuktape;DKArchive;DKAssets;ws2_32.lib;curl;DKFile;DKCurl;DKBuild;DKCodeRunner;DKColorPicker;stackwalker;DKDebug;DKDevTools;DKDuktapeDom;freetype;rmlui;DKWindow;pugixml;DKXml;tidy-html5;DKRml;DKDom;DKGui;DKWidget;DKEditor;DKGit;DKHandles;DKInputTest;DKLogin;DKMySql;DKNotepad;DKOS;DKPaint;vc_redist;php_binary;DKPhp;DKRmlIframe;DKVideo;DKRmlVideo;glew;opengl;winmm.lib;sdl;DKSDLWindow;imageio;mobile_core_services;mingw32;msys;giflib;libpng;libjpeg-turbo;sdl_image;DKSDLRml;sdl_ttf;DKSDLText;DKStats;DKWebTest;DKTooltip
-dkdepend_list ==           git;cmake;visualstudio;imagemagick;boxer;DK;zlib;xz;bzip2;libiconv;libxml2;cryptopp;openssl;libarchive;python;nodejs;duktape;DKDuktape;DKArchive;DKAssets;ws2_32.lib;curl;DKFile;DKCurl;DKBuild;DKCodeRunner;DKColorPicker;stackwalker;DKDebug;DKDevTools;DKDuktapeDom;freetype;rmlui;DKWindow;pugixml;DKXml;tidy-html5;DKRml;DKDom;DKGui;DKWidget;DKEditor;DKGit;DKHandles;DKInputTest;DKLogin;DKMySql;DKNotepad;DKOS;DKPaint;vc_redist;php_binary;DKPhp;DKRmlIframe;DKVideo;DKRmlVideo;glew;opengl;winmm.lib;sdl;DKSDLWindow;imageio;mobile_core_services;mingw32;msys;giflib;libpng;libjpeg-turbo;sdl_image;DKSDLRml;sdl_ttf;DKSDLText;DKStats;DKWebTest;DKTooltip
+dkdepend_list ==           git;cmake;visualstudio;imagemagick;agl;android-build-tools;android-cmake;android-cmdline-tools;android-ndk;android-platform-tools;android-platforms;jdk;jdk8;jdk9;ant;android-sources;android-sdk-tools;android-sdk;android-studio;android-system-images;appkit;audio_toolbox;audiounit;autotools;av_foundation;av_kit;avf_audio;babel;boost;boxer;bullet3;bzip2;mingw32;mingw64;libgcc;bzip2-win-build;carbon;cef_binary;chart.js;cocoa;codemirror;command_line_tools;content;core_audio;core_foundation;core_graphics;core_haptics;core_motion;core_services;core_video;cpp-subprocess;nodejs;crosswalk;cryptopp;ws2_32.lib;zlib;openssl;curl;diff-match-patch;dl;doxygen;dukluv;python;duktape;far;nasm;msys;ogg;flac;force_feedback;foundation;freetype;game_controller;ghostscript;giflib;gl_kit;glew;glintercept;homebrew;ilmerge;imageio;iokit;ios-cmake;jdk11;js-yaml;json;xz;libiconv;libxml2;libarchive;libexpat;libglfw3-dev;libgtkglext1-dev;libjpeg-turbo;libmd;libpng;libusb;libuv;lodepng;macports;media_player;metal;metal-cpp;metalKit;mlocate;mobile_core_services;moment;msinttypes;ncurses;opengl;opengles;openssl_binary;osgrmlui;pako;php;vc_redist;php_binary;pugixml;quartz_core;rlottie;rmlui;rmlui-d3d11;rmluieditor;rocketship;winmm.lib;rtmidi;sdl;sdl-gpu;sdl_image;smpeg2;vorbis;sdl_mixer;sdl_ttf;sfml;shlwapi.lib;stackwalker;sun-js;terminator;threadpool;tidy-html5;uikit;upx;vcpkg;verysleepy;xcode;xquartz;zstd;DK;DKGit;DKNotepad;DKAdmin;DKDuktape;DKCef;DKArchive;DKAssets;DKAudio;DKFile;DKCurl;DKBuild;DKCefChild;DKChart;DKCodeMirror;DKCodeRunner;DKColorPicker;DKCrypto;DKDebug;DKDevTools;DKDisplay;DKWindow;DKXml;DKRml;DKDom;DKDuktapeDom;DKGui;DKWidget;DKEditor;DKEmscripten;DKFpsTest;DKHandles;DKHook;DKImageMagick;DKInputTest;DKLoading;DKLogin;DKMidi;DKMySql;DKOS;DKPaint;DKPhp;DKRmlElement;DKRmlIframe;DKVideo;DKRmlVideo;DKSDLWindow;DKSDLCef;DKSDLMetalRml;DKSDLMetalWindow;DKSDLRml;DKSDLText;DKSFMLWindow;DKStats;DKSvn;DKTooltip;DKTray;DKTriggers;DKWebTest;DKWebview
+dkdepend_list ==           git;cmake;visualstudio;imagemagick;agl;android-build-tools;android-cmake;android-cmdline-tools;android-ndk;android-platform-tools;android-platforms;jdk;jdk8;jdk9;ant;android-sources;android-sdk-tools;android-sdk;android-studio;android-system-images;appkit;audio_toolbox;audiounit;autotools;av_foundation;av_kit;avf_audio;babel;boost;boxer;bullet3;bzip2;mingw32;mingw64;libgcc;bzip2-win-build;carbon;cef_binary;chart.js;cocoa;codemirror;command_line_tools;content;core_audio;core_foundation;core_graphics;core_haptics;core_motion;core_services;core_video;cpp-subprocess;nodejs;crosswalk;cryptopp;ws2_32.lib;zlib;openssl;curl;diff-match-patch;dl;doxygen;dukluv;python;duktape;far;nasm;msys;ogg;flac;force_feedback;foundation;freetype;game_controller;ghostscript;giflib;gl_kit;glew;glintercept;homebrew;ilmerge;imageio;iokit;ios-cmake;jdk11;js-yaml;json;xz;libiconv;libxml2;libarchive;libexpat;libglfw3-dev;libgtkglext1-dev;libjpeg-turbo;libmd;libpng;libusb;libuv;lodepng;macports;media_player;metal;metal-cpp;metalKit;mlocate;mobile_core_services;moment;msinttypes;ncurses;opengl;opengles;openssl_binary;osgrmlui;pako;php;vc_redist;php_binary;pugixml;quartz_core;rlottie;rmlui;rmlui-d3d11;rmluieditor;rocketship;winmm.lib;rtmidi;sdl;sdl-gpu;sdl_image;smpeg2;vorbis;sdl_mixer;sdl_ttf;sfml;shlwapi.lib;stackwalker;sun-js;terminator;threadpool;tidy-html5;uikit;upx;vcpkg;verysleepy;xcode;xquartz;zstd;DK;DKGit;DKNotepad;DKAdmin;DKDuktape;DKCef;DKArchive;DKAssets;DKAudio;DKFile;DKCurl;DKBuild;DKCefChild;DKChart;DKCodeMirror;DKCodeRunner;DKColorPicker;DKCrypto;DKDebug;DKDevTools;DKDisplay;DKWindow;DKXml;DKRml;DKDom;DKDuktapeDom;DKGui;DKWidget;DKEditor;DKEmscripten;DKFpsTest;DKHandles;DKHook;DKImageMagick;DKInputTest;DKLoading;DKLogin;DKMidi;DKMySql;DKOS;DKPaint;DKPhp;DKRmlElement;DKRmlIframe;DKVideo;DKRmlVideo;DKSDLWindow;DKSDLCef;DKSDLMetalRml;DKSDLMetalWindow;DKSDLRml;DKSDLText;DKSFMLWindow;DKStats;DKSvn;DKTooltip;DKTray;DKTriggers;DKWebTest;DKWebview
+dl ==           ON
+dl_all ==           1
+doxygen ==           ON
+doxygen_all ==           1
+dukluv ==           ON
 duktape ==           ON
 duktape_all ==           1
 emsdk ==           
 emsdk-portable ==           
 extension ==           
+far ==           ON
+far_all ==           1
 ffmpeg-dev ==           
 ffmpeg-shared ==           
 ffmpeg-static ==           
 fixed_flags ==            -DWIN32 
+flac ==           ON
+flac_all ==           1
 fmt ==           
+force_feedback ==           ON
+force_feedback_all ==           1
+foundation ==           ON
+foundation_all ==           1
 freealut ==           
 freealut-master ==           
 freetype ==           ON
 freetype_all ==           1
+game_controller ==           ON
+game_controller_all ==           1
+ghostscript ==           ON
+ghostscript_all ==           1
 giflib ==           ON
 giflib_all ==           1
 git ==           ON
 git_all ==           1
+gl_kit ==           ON
+gl_kit_all ==           1
 glew ==           ON
 glew_all ==           1
+glintercept ==           ON
+glintercept_all ==           1
 gradle ==           
 green ==           [32m
+homebrew ==           ON
+homebrew_all ==           1
+ilmerge ==           ON
+ilmerge_all ==           1
 imageio ==           ON
 imageio_all ==           1
 imagemagick ==           ON
 imagemagick_all ==           1
 index ==           -1
+iokit ==           ON
+iokit_all ==           1
+ios-cmake ==           ON
+ios-cmake_all ==           1
 isDKPlugin ==           -1
 java ==           
+jdk ==           ON
+jdk11 ==           ON
+jdk11_all ==           1
+jdk8 ==           ON
+jdk8_all ==           1
+jdk9 ==           ON
+jdk9_all ==           1
+jdk_all ==           1
 jerryscript ==           
 jpeg ==           
+js-yaml ==           ON
+js-yaml_all ==           1
+json ==           ON
+json_all ==           1
 kdevelop ==           
 lang ==           
 leptonica ==           
@@ -2063,14 +2776,27 @@ libarchive ==           ON
 libarchive_all ==           1
 libasound2-dev ==           
 libcaca ==           
+libcefD ==           C:/Users/Administrator/digitalknob/DK/3rdParty/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_windows32/Debug/libcef.lib
+libcefR ==           C:/Users/Administrator/digitalknob/DK/3rdParty/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_windows32/Release/libcef.lib
+libcef_dll_wrapperD ==           C:/Users/Administrator/digitalknob/DK/3rdParty/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_windows32/win32/libcef_dll_wrapper/Debug/libcef_dll_wrapper.lib
+libcef_dll_wrapperR ==           C:/Users/Administrator/digitalknob/DK/3rdParty/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_windows32/win32/libcef_dll_wrapper/Release/libcef_dll_wrapper.lib
+libexpat ==           ON
+libgcc ==           ON
+libgcc_all ==           1
 libgl1-mesa-dev ==           
+libglfw3-dev ==           ON
+libglfw3-dev_all ==           1
 libglib2.0-dev ==           
 libglu1-mesa-dev ==           
 libgtk2.0-dev ==           
+libgtkglext1-dev ==           ON
+libgtkglext1-dev_all ==           1
 libiconv ==           ON
 libiconv_all ==           1
 libjpeg-turbo ==           ON
 libjpeg-turbo_all ==           1
+libmd ==           ON
+libmd_all ==           1
 libpng ==           ON
 libpng_all ==           1
 librocket ==           
@@ -2078,6 +2804,9 @@ libsndfile1-dev ==
 libsystemd-dev ==           
 libtorrent ==           
 libudev-dev ==           
+libusb ==           ON
+libuv ==           ON
+libuv_all ==           1
 libvncserver ==           
 libvncserver-master-win ==           
 libwebp ==           
@@ -2090,86 +2819,165 @@ libxml2_all ==           1
 libxrandr-dev ==           
 libxtst-dev ==           
 lighttpd ==           
+lodepng ==           ON
 lua ==           
+macports ==           ON
+macports_all ==           1
 magenta ==           [35m
+media_player ==           ON
+media_player_all ==           1
 mesa-common-dev ==           
+metal ==           ON
+metal-cpp ==           ON
+metal-cpp_all ==           1
+metalKit ==           ON
+metalKit_all ==           1
+metal_all ==           1
 mingw32 ==           ON
 mingw32_all ==           1
+mingw64 ==           ON
+mingw64_all ==           1
 miniweb ==           
+mlocate ==           ON
+mlocate_all ==           1
 mobile_core_services ==           ON
 mobile_core_services_all ==           1
+moment ==           ON
+moment_all ==           1
 month ==           06
+msinttypes ==           ON
+msinttypes_all ==           1
 msys ==           ON
 msys2 ==           
 msys_all ==           1
+nasm ==           ON
+nasm_all ==           1
+ncurses ==           ON
+ncurses_all ==           1
 nodejs ==           ON
 nodejs_all ==           1
 notepadpp ==           
+ogg ==           ON
+ogg_all ==           1
 openal ==           
 openal-android ==           
 opencv ==           
 openframeworks ==           
 opengl ==           ON
 opengl_all ==           1
+opengles ==           ON
+opengles_all ==           1
 openscenegraph ==           
 opensles ==           
 openssl ==           ON
 openssl_all ==           1
+openssl_binary ==           ON
+openssl_binary_all ==           1
 osgaudio ==           
 osgbullet ==           
+osgrmlui ==           ON
 osgworks ==           
+pako ==           ON
+php ==           ON
+php_all ==           1
 php_binary ==           ON
 php_binary_all ==           1
 plugin ==           
-plugin_lower ==           dktooltip
-plugin_path ==           C:/Users/Administrator/digitalknob/DK/DKPlugins/DKTooltip
+plugin_lower ==           dkwebview
+plugin_path ==           C:/Users/Administrator/digitalknob/DK/DKPlugins/DKWebview
 podofo ==           
 pugixml ==           ON
 pugixml_all ==           1
 python ==           ON
 python_all ==           1
+quartz_core ==           ON
+quartz_core_all ==           1
 red ==           [31m
-resources_SRC ==           C:/Users/Administrator/digitalknob/DK/DKApps/DKSDLRmlUi/resource.rc
+resources_SRC ==           C:/Users/Administrator/digitalknob/DK/DKApps/DKTestAll/resource.rc
+rlottie ==           ON
+rlottie_all ==           1
 rmlui ==           ON
+rmlui-d3d11 ==           ON
 rmlui_RmlCore ==           1
 rmlui_RmlDebugger ==           1
 rmlui_all ==           1
 rmlui_targets ==           RmlCore;RmlDebugger
+rmluieditor ==           ON
+rocketship ==           ON
+rtmidi ==           ON
+rtmidi_all ==           1
 sdl ==           ON
+sdl-gpu ==           ON
+sdl-gpu_all ==           1
 sdl2_gif ==           
 sdl2_giflib_sa ==           
 sdl_all ==           1
 sdl_image ==           ON
 sdl_image_all ==           1
+sdl_mixer ==           ON
+sdl_mixer_all ==           1
 sdl_ttf ==           ON
 sdl_ttf_all ==           1
+sfml ==           ON
+sfml_all ==           1
+sfml_sfml-audio ==           1
+sfml_sfml-graphics ==           1
+sfml_sfml-main ==           1
+sfml_sfml-network ==           1
+sfml_sfml-system ==           1
+sfml_sfml-window ==           1
+sfml_targets ==           sfml-audio;sfml-graphics;sfml-main;sfml-network;sfml-system;sfml-window
+shlwapi.lib ==           ON
+shlwapi.lib_all ==           1
 simple-getch ==           
+smpeg2 ==           ON
+smpeg2_all ==           1
 src ==           
 stackwalker ==           ON
 stackwalker_all ==           1
+sun-js ==           ON
 t ==           
+terminator ==           ON
+terminator_all ==           1
 tesseract ==           
+threadpool ==           ON
+threadpool_all ==           1
 tidy-html5 ==           ON
 tidy-html5_all ==           1
 tiff ==           
 type ==           
+uikit ==           ON
+uikit_all ==           1
+upx ==           ON
+upx_all ==           1
 uwebsockets ==           
 v ==           
 var ==           var
-vars ==           3RDPARTY;APP_NAME;APP_VERSION;ASSETS;App_SRC;BG_black;BG_blue;BG_cyan;BG_green;BG_magenta;BG_red;BG_white;BG_yellow;BOXER;BOXER_BRANCH;BOXER_FOLDER;BOXER_NAME;BUILD;BUILD_DIR;B_black;B_blue;B_cyan;B_green;B_magenta;B_red;B_white;B_yellow;CLR;CMAKE;CMAKE_AR;CMAKE_AR;CMAKE_AUTOGEN_ORIGIN_DEPENDS;CMAKE_AUTOMOC_COMPILER_PREDEFINES;CMAKE_AUTOMOC_MACRO_NAMES;CMAKE_AUTOMOC_PATH_PREFIX;CMAKE_BASE_NAME;CMAKE_BINARY_DIR;CMAKE_BUILD_TOOL;CMAKE_BUILD_TYPE;CMAKE_BUILD_TYPE_INIT;CMAKE_C11_COMPILE_FEATURES;CMAKE_C11_EXTENSION_COMPILE_OPTION;CMAKE_C11_STANDARD_COMPILE_OPTION;CMAKE_C17_COMPILE_FEATURES;CMAKE_C23_COMPILE_FEATURES;CMAKE_C90_COMPILE_FEATURES;CMAKE_C90_EXTENSION_COMPILE_OPTION;CMAKE_C90_STANDARD_COMPILE_OPTION;CMAKE_C99_COMPILE_FEATURES;CMAKE_C99_EXTENSION_COMPILE_OPTION;CMAKE_C99_STANDARD_COMPILE_OPTION;CMAKE_CFG_INTDIR;CMAKE_CL_64;CMAKE_CL_NOLOGO;CMAKE_COMMAND;CMAKE_CONFIGURATION_TYPES;CMAKE_CPACK_COMMAND;CMAKE_CROSSCOMPILING;CMAKE_CTEST_COMMAND;CMAKE_CURRENT_BINARY_DIR;CMAKE_CURRENT_LIST_DIR;CMAKE_CURRENT_LIST_FILE;CMAKE_CURRENT_SOURCE_DIR;CMAKE_CXX11_COMPILE_FEATURES;CMAKE_CXX11_EXTENSION_COMPILE_OPTION;CMAKE_CXX11_STANDARD_COMPILE_OPTION;CMAKE_CXX11_STANDARD__HAS_FULL_SUPPORT;CMAKE_CXX14_COMPILE_FEATURES;CMAKE_CXX14_EXTENSION_COMPILE_OPTION;CMAKE_CXX14_STANDARD_COMPILE_OPTION;CMAKE_CXX14_STANDARD__HAS_FULL_SUPPORT;CMAKE_CXX17_COMPILE_FEATURES;CMAKE_CXX17_EXTENSION_COMPILE_OPTION;CMAKE_CXX17_STANDARD_COMPILE_OPTION;CMAKE_CXX20_COMPILE_FEATURES;CMAKE_CXX20_EXTENSION_COMPILE_OPTION;CMAKE_CXX20_STANDARD_COMPILE_OPTION;CMAKE_CXX23_COMPILE_FEATURES;CMAKE_CXX23_EXTENSION_COMPILE_OPTION;CMAKE_CXX23_STANDARD_COMPILE_OPTION;CMAKE_CXX98_COMPILE_FEATURES;CMAKE_CXX98_EXTENSION_COMPILE_OPTION;CMAKE_CXX98_STANDARD_COMPILE_OPTION;CMAKE_CXX98_STANDARD__HAS_FULL_SUPPORT;CMAKE_CXX_ABI_COMPILED;CMAKE_CXX_ARCHIVE_APPEND;CMAKE_CXX_ARCHIVE_CREATE;CMAKE_CXX_ARCHIVE_FINISH;CMAKE_CXX_BYTE_ORDER;CMAKE_CXX_CLANG_TIDY_DRIVER_MODE;CMAKE_CXX_CL_SHOWINCLUDES_PREFIX;CMAKE_CXX_COMPILER;CMAKE_CXX_COMPILER_ABI;CMAKE_CXX_COMPILER_AR;CMAKE_CXX_COMPILER_ARCHITECTURE_ID;CMAKE_CXX_COMPILER_ARG1;CMAKE_CXX_COMPILER_ENV_VAR;CMAKE_CXX_COMPILER_EXCLUDE;CMAKE_CXX_COMPILER_FRONTEND_VARIANT;CMAKE_CXX_COMPILER_ID;CMAKE_CXX_COMPILER_ID_PLATFORM_CONTENT;CMAKE_CXX_COMPILER_ID_RUN;CMAKE_CXX_COMPILER_ID_TOOL_MATCH_INDEX;CMAKE_CXX_COMPILER_ID_TOOL_MATCH_REGEX;CMAKE_CXX_COMPILER_ID_VENDORS;CMAKE_CXX_COMPILER_ID_VENDOR_REGEX_IAR;CMAKE_CXX_COMPILER_LOADED;CMAKE_CXX_COMPILER_NAMES;CMAKE_CXX_COMPILER_PRODUCED_FILES;CMAKE_CXX_COMPILER_PRODUCED_OUTPUT;CMAKE_CXX_COMPILER_RANLIB;CMAKE_CXX_COMPILER_VERSION;CMAKE_CXX_COMPILER_VERSION_INTERNAL;CMAKE_CXX_COMPILER_WORKS;CMAKE_CXX_COMPILER_WRAPPER;CMAKE_CXX_COMPILE_FEATURES;CMAKE_CXX_COMPILE_OBJECT;CMAKE_CXX_COMPILE_OPTIONS_CREATE_PCH;CMAKE_CXX_COMPILE_OPTIONS_IPO;CMAKE_CXX_COMPILE_OPTIONS_JMC;CMAKE_CXX_COMPILE_OPTIONS_MSVC_RUNTIME_LIBRARY_MultiThreaded;CMAKE_CXX_COMPILE_OPTIONS_MSVC_RUNTIME_LIBRARY_MultiThreadedDLL;CMAKE_CXX_COMPILE_OPTIONS_MSVC_RUNTIME_LIBRARY_MultiThreadedDebug;CMAKE_CXX_COMPILE_OPTIONS_MSVC_RUNTIME_LIBRARY_MultiThreadedDebugDLL;CMAKE_CXX_COMPILE_OPTIONS_USE_PCH;CMAKE_CXX_CREATE_ASSEMBLY_SOURCE;CMAKE_CXX_CREATE_CONSOLE_EXE;CMAKE_CXX_CREATE_PREPROCESSED_SOURCE;CMAKE_CXX_CREATE_SHARED_LIBRARY;CMAKE_CXX_CREATE_SHARED_MODULE;CMAKE_CXX_CREATE_STATIC_LIBRARY;CMAKE_CXX_CREATE_STATIC_LIBRARY_IPO;CMAKE_CXX_CREATE_WIN32_EXE;CMAKE_CXX_DEPFILE_FORMAT;CMAKE_CXX_FLAGS;CMAKE_CXX_FLAGS_DEBUG;CMAKE_CXX_FLAGS_DEBUG_INIT;CMAKE_CXX_FLAGS_INIT;CMAKE_CXX_FLAGS_MINSIZEREL;CMAKE_CXX_FLAGS_MINSIZEREL_INIT;CMAKE_CXX_FLAGS_RELEASE;CMAKE_CXX_FLAGS_RELEASE_INIT;CMAKE_CXX_FLAGS_RELWITHDEBINFO;CMAKE_CXX_FLAGS_RELWITHDEBINFO_INIT;CMAKE_CXX_IGNORE_EXTENSIONS;CMAKE_CXX_IMPLICIT_INCLUDE_DIRECTORIES;CMAKE_CXX_IMPLICIT_LINK_DIRECTORIES;CMAKE_CXX_IMPLICIT_LINK_FRAMEWORK_DIRECTORIES;CMAKE_CXX_IMPLICIT_LINK_LIBRARIES;CMAKE_CXX_INFORMATION_LOADED;CMAKE_CXX_LIBRARY_ARCHITECTURE;CMAKE_CXX_LINKER_PREFERENCE;CMAKE_CXX_LINKER_PREFERENCE_PROPAGATES;CMAKE_CXX_LINKER_SUPPORTS_PDB;CMAKE_CXX_LINK_EXECUTABLE;CMAKE_CXX_LINK_OPTIONS_IPO;CMAKE_CXX_OUTPUT_EXTENSION;CMAKE_CXX_PLATFORM_ID;CMAKE_CXX_SIMULATE_ID;CMAKE_CXX_SIMULATE_VERSION;CMAKE_CXX_SIZEOF_DATA_PTR;CMAKE_CXX_SOURCE_FILE_EXTENSIONS;CMAKE_CXX_STANDARD_COMPUTED_DEFAULT;CMAKE_CXX_STANDARD_DEFAULT;CMAKE_CXX_STANDARD_LIBRARIES;CMAKE_CXX_STANDARD_LIBRARIES_INIT;CMAKE_CXX_USE_RESPONSE_FILE_FOR_OBJECTS;CMAKE_CXX_XCODE_ARCHS;CMAKE_C_ABI_COMPILED;CMAKE_C_ARCHIVE_APPEND;CMAKE_C_ARCHIVE_CREATE;CMAKE_C_ARCHIVE_FINISH;CMAKE_C_BYTE_ORDER;CMAKE_C_CLANG_TIDY_DRIVER_MODE;CMAKE_C_CL_SHOWINCLUDES_PREFIX;CMAKE_C_COMPILER;CMAKE_C_COMPILER_ABI;CMAKE_C_COMPILER_AR;CMAKE_C_COMPILER_ARCHITECTURE_ID;CMAKE_C_COMPILER_ARG1;CMAKE_C_COMPILER_ENV_VAR;CMAKE_C_COMPILER_FRONTEND_VARIANT;CMAKE_C_COMPILER_ID;CMAKE_C_COMPILER_ID_PLATFORM_CONTENT;CMAKE_C_COMPILER_ID_RUN;CMAKE_C_COMPILER_ID_TOOL_MATCH_INDEX;CMAKE_C_COMPILER_ID_TOOL_MATCH_REGEX;CMAKE_C_COMPILER_ID_VENDORS;CMAKE_C_COMPILER_ID_VENDOR_REGEX_IAR;CMAKE_C_COMPILER_LOADED;CMAKE_C_COMPILER_NAMES;CMAKE_C_COMPILER_PRODUCED_FILES;CMAKE_C_COMPILER_PRODUCED_OUTPUT;CMAKE_C_COMPILER_RANLIB;CMAKE_C_COMPILER_VERSION;CMAKE_C_COMPILER_VERSION_INTERNAL;CMAKE_C_COMPILER_WORKS;CMAKE_C_COMPILER_WRAPPER;CMAKE_C_COMPILE_FEATURES;CMAKE_C_COMPILE_OBJECT;CMAKE_C_COMPILE_OPTIONS_CREATE_PCH;CMAKE_C_COMPILE_OPTIONS_EXPLICIT_LANGUAGE;CMAKE_C_COMPILE_OPTIONS_IPO;CMAKE_C_COMPILE_OPTIONS_JMC;CMAKE_C_COMPILE_OPTIONS_MSVC_RUNTIME_LIBRARY_MultiThreaded;CMAKE_C_COMPILE_OPTIONS_MSVC_RUNTIME_LIBRARY_MultiThreadedDLL;CMAKE_C_COMPILE_OPTIONS_MSVC_RUNTIME_LIBRARY_MultiThreadedDebug;CMAKE_C_COMPILE_OPTIONS_MSVC_RUNTIME_LIBRARY_MultiThreadedDebugDLL;CMAKE_C_COMPILE_OPTIONS_USE_PCH;CMAKE_C_CREATE_ASSEMBLY_SOURCE;CMAKE_C_CREATE_CONSOLE_EXE;CMAKE_C_CREATE_PREPROCESSED_SOURCE;CMAKE_C_CREATE_SHARED_LIBRARY;CMAKE_C_CREATE_SHARED_MODULE;CMAKE_C_CREATE_STATIC_LIBRARY;CMAKE_C_CREATE_STATIC_LIBRARY_IPO;CMAKE_C_CREATE_WIN32_EXE;CMAKE_C_DEPFILE_FORMAT;CMAKE_C_FLAGS;CMAKE_C_FLAGS_DEBUG;CMAKE_C_FLAGS_DEBUG_INIT;CMAKE_C_FLAGS_INIT;CMAKE_C_FLAGS_MINSIZEREL;CMAKE_C_FLAGS_MINSIZEREL_INIT;CMAKE_C_FLAGS_RELEASE;CMAKE_C_FLAGS_RELEASE_INIT;CMAKE_C_FLAGS_RELWITHDEBINFO;CMAKE_C_FLAGS_RELWITHDEBINFO_INIT;CMAKE_C_IGNORE_EXTENSIONS;CMAKE_C_IMPLICIT_INCLUDE_DIRECTORIES;CMAKE_C_IMPLICIT_LINK_DIRECTORIES;CMAKE_C_IMPLICIT_LINK_FRAMEWORK_DIRECTORIES;CMAKE_C_IMPLICIT_LINK_LIBRARIES;CMAKE_C_INFORMATION_LOADED;CMAKE_C_LIBRARY_ARCHITECTURE;CMAKE_C_LINKER_PREFERENCE;CMAKE_C_LINKER_SUPPORTS_PDB;CMAKE_C_LINK_EXECUTABLE;CMAKE_C_LINK_OPTIONS_IPO;CMAKE_C_OUTPUT_EXTENSION;CMAKE_C_PLATFORM_ID;CMAKE_C_SIMULATE_ID;CMAKE_C_SIMULATE_VERSION;CMAKE_C_SIZEOF_DATA_PTR;CMAKE_C_SOURCE_FILE_EXTENSIONS;CMAKE_C_STANDARD_COMPUTED_DEFAULT;CMAKE_C_STANDARD_DEFAULT;CMAKE_C_STANDARD_LIBRARIES;CMAKE_C_STANDARD_LIBRARIES_INIT;CMAKE_C_USE_RESPONSE_FILE_FOR_OBJECTS;CMAKE_C_XCODE_ARCHS;CMAKE_DEPFILE_FLAGS_C;CMAKE_DEPFILE_FLAGS_CXX;CMAKE_DL;CMAKE_DL_LIBS;CMAKE_EFFECTIVE_SYSTEM_NAME;CMAKE_EXE;CMAKE_EXECUTABLE_FORMAT;CMAKE_EXECUTABLE_SUFFIX;CMAKE_EXE_LINKER_FLAGS;CMAKE_EXE_LINKER_FLAGS_DEBUG;CMAKE_EXE_LINKER_FLAGS_DEBUG_INIT;CMAKE_EXE_LINKER_FLAGS_INIT;CMAKE_EXE_LINKER_FLAGS_MINSIZEREL;CMAKE_EXE_LINKER_FLAGS_MINSIZEREL_INIT;CMAKE_EXE_LINKER_FLAGS_RELEASE;CMAKE_EXE_LINKER_FLAGS_RELEASE_INIT;CMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO;CMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO_INIT;CMAKE_EXTRA_GENERATOR;CMAKE_EXTRA_LINK_EXTENSIONS;CMAKE_FILES_DIRECTORY;CMAKE_FIND_LIBRARY_PREFIXES;CMAKE_FIND_LIBRARY_SUFFIXES;CMAKE_GENERATOR;CMAKE_GENERATOR_INSTANCE;CMAKE_GENERATOR_NO_COMPILER_ENV;CMAKE_GENERATOR_PLATFORM;CMAKE_GENERATOR_RC;CMAKE_GENERATOR_TOOLSET;CMAKE_HOME_DIRECTORY;CMAKE_HOST_SYSTEM;CMAKE_HOST_SYSTEM_NAME;CMAKE_HOST_SYSTEM_PROCESSOR;CMAKE_HOST_SYSTEM_VERSION;CMAKE_HOST_WIN32;CMAKE_IMPORT_LIBRARY_PREFIX;CMAKE_IMPORT_LIBRARY_SUFFIX;CMAKE_INCLUDE_FLAG_C;CMAKE_INCLUDE_FLAG_CXX;CMAKE_INCLUDE_FLAG_RC;CMAKE_INSTALL_DEFAULT_COMPONENT_NAME;CMAKE_INSTALL_PREFIX;CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT;CMAKE_LIBRARY_PATH_FLAG;CMAKE_LIBRARY_PATH_TERMINATOR;CMAKE_LINKER;CMAKE_LINKER;CMAKE_LINK_DEF_FILE_FLAG;CMAKE_LINK_LIBRARY_FLAG;CMAKE_LINK_LIBRARY_SUFFIX;CMAKE_LINK_PCH;CMAKE_MAJOR_VERSION;CMAKE_MAKE_PROGRAM;CMAKE_MATCH_0;CMAKE_MATCH_1;CMAKE_MATCH_2;CMAKE_MATCH_COUNT;CMAKE_MINIMUM_REQUIRED_VERSION;CMAKE_MINOR_VERSION;CMAKE_MODULE_LINKER_FLAGS;CMAKE_MODULE_LINKER_FLAGS_DEBUG;CMAKE_MODULE_LINKER_FLAGS_DEBUG_INIT;CMAKE_MODULE_LINKER_FLAGS_INIT;CMAKE_MODULE_LINKER_FLAGS_MINSIZEREL;CMAKE_MODULE_LINKER_FLAGS_MINSIZEREL_INIT;CMAKE_MODULE_LINKER_FLAGS_RELEASE;CMAKE_MODULE_LINKER_FLAGS_RELEASE_INIT;CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO;CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO_INIT;CMAKE_MSVC_RUNTIME_LIBRARY_DEFAULT;CMAKE_MT;CMAKE_MT;CMAKE_NAME;CMAKE_NINJA_CMCLDEPS_RC;CMAKE_NO_BUILD_TYPE;CMAKE_PARENT_LIST_FILE;CMAKE_PATCH_VERSION;CMAKE_PCH_COPY_COMPILE_PDB;CMAKE_PCH_EXTENSION;CMAKE_PCH_PROLOGUE;CMAKE_PLATFORM_INFO_DIR;CMAKE_PLATFORM_INFO_INITIALIZED;CMAKE_PROJECT_DESCRIPTION;CMAKE_PROJECT_HOMEPAGE_URL;CMAKE_PROJECT_NAME;CMAKE_RANLIB;CMAKE_RANLIB;CMAKE_RC_COMPILER;CMAKE_RC_COMPILER;CMAKE_RC_COMPILER_ARG1;CMAKE_RC_COMPILER_ENV_VAR;CMAKE_RC_COMPILER_INIT;CMAKE_RC_COMPILER_LIST;CMAKE_RC_COMPILER_LOADED;CMAKE_RC_COMPILER_WORKS;CMAKE_RC_COMPILE_OBJECT;CMAKE_RC_FLAGS;CMAKE_RC_FLAGS_DEBUG;CMAKE_RC_FLAGS_DEBUG_INIT;CMAKE_RC_FLAGS_INIT;CMAKE_RC_FLAGS_MINSIZEREL;CMAKE_RC_FLAGS_RELEASE;CMAKE_RC_FLAGS_RELWITHDEBINFO;CMAKE_RC_FLAG_REGEX;CMAKE_RC_INFORMATION_LOADED;CMAKE_RC_OUTPUT_EXTENSION;CMAKE_RC_SOURCE_FILE_EXTENSIONS;CMAKE_ROOT;CMAKE_SHARED_LIBRARY_CREATE_CXX_FLAGS;CMAKE_SHARED_LIBRARY_CREATE_C_FLAGS;CMAKE_SHARED_LIBRARY_C_FLAGS;CMAKE_SHARED_LIBRARY_LINK_C_FLAGS;CMAKE_SHARED_LIBRARY_PREFIX;CMAKE_SHARED_LIBRARY_RUNTIME_C_FLAG;CMAKE_SHARED_LIBRARY_RUNTIME_C_FLAG_SEP;CMAKE_SHARED_LIBRARY_SUFFIX;CMAKE_SHARED_LINKER_FLAGS;CMAKE_SHARED_LINKER_FLAGS_DEBUG;CMAKE_SHARED_LINKER_FLAGS_DEBUG_INIT;CMAKE_SHARED_LINKER_FLAGS_INIT;CMAKE_SHARED_LINKER_FLAGS_MINSIZEREL;CMAKE_SHARED_LINKER_FLAGS_MINSIZEREL_INIT;CMAKE_SHARED_LINKER_FLAGS_RELEASE;CMAKE_SHARED_LINKER_FLAGS_RELEASE_INIT;CMAKE_SHARED_LINKER_FLAGS_RELWITHDEBINFO;CMAKE_SHARED_LINKER_FLAGS_RELWITHDEBINFO_INIT;CMAKE_SHARED_MODULE_CREATE_CXX_FLAGS;CMAKE_SHARED_MODULE_CREATE_C_FLAGS;CMAKE_SHARED_MODULE_PREFIX;CMAKE_SHARED_MODULE_SUFFIX;CMAKE_SIZEOF_VOID_P;CMAKE_SKIP_INSTALL_RPATH;CMAKE_SKIP_RPATH;CMAKE_SOURCE_DIR;CMAKE_STATIC_LIBRARY_PREFIX;CMAKE_STATIC_LIBRARY_SUFFIX;CMAKE_STATIC_LINKER_FLAGS;CMAKE_STATIC_LINKER_FLAGS_DEBUG;CMAKE_STATIC_LINKER_FLAGS_INIT;CMAKE_STATIC_LINKER_FLAGS_MINSIZEREL;CMAKE_STATIC_LINKER_FLAGS_RELEASE;CMAKE_STATIC_LINKER_FLAGS_RELWITHDEBINFO;CMAKE_SUPPORT_WINDOWS_EXPORT_ALL_SYMBOLS;CMAKE_SUPPRESS_REGENERATION;CMAKE_SYSTEM;CMAKE_SYSTEM_AND_RC_COMPILER_INFO_FILE;CMAKE_SYSTEM_INFO_FILE;CMAKE_SYSTEM_LIBRARY_PATH;CMAKE_SYSTEM_LOADED;CMAKE_SYSTEM_NAME;CMAKE_SYSTEM_PREFIX_PATH;CMAKE_SYSTEM_PROCESSOR;CMAKE_SYSTEM_SPECIFIC_INFORMATION_LOADED;CMAKE_SYSTEM_SPECIFIC_INITIALIZE_LOADED;CMAKE_SYSTEM_VERSION;CMAKE_TWEAK_VERSION;CMAKE_VERBOSE_MAKEFILE;CMAKE_VERSION;CMAKE_VERSION;CMAKE_VS_DEVENV_COMMAND;CMAKE_VS_INTEL_Fortran_PROJECT_VERSION;CMAKE_VS_MSBUILD_COMMAND;CMAKE_VS_PLATFORM_NAME;CMAKE_VS_PLATFORM_NAME_DEFAULT;CMAKE_VS_PLATFORM_TOOLSET;CMAKE_VS_PLATFORM_TOOLSET_HOST_ARCHITECTURE;CMAKE_VS_WINDOWS_TARGET_PLATFORM_VERSION;COMPILE_CMAKE;CRYPTOPP;CRYPTOPP_BRANCH;CRYPTOPP_DL;CRYPTOPP_FOLDER;CRYPTOPP_NAME;CURL;CURL_BRANCH;CURL_DL;CURL_FOLDER;CURL_NAME;CURRENT_DIR;ColourBold;DEBUG;DEBUG_DIR;DEBUG_FLAGS;DEBUG_LIBS;DEBUG_LINK_FLAGS;DIGITALKNOB;DK;DKAPP;DKArchive;DKArchive_BINARY_DIR;DKArchive_IS_TOP_LEVEL;DKArchive_SOURCE_DIR;DKArchive_all;DKAssets;DKAssets_BINARY_DIR;DKAssets_IS_TOP_LEVEL;DKAssets_SOURCE_DIR;DKAssets_all;DKBuild;DKBuild_all;DKCEF;DKCMAKE;DKCMAKE;DKCMAKELIST_INCLUDED;DKCMAKE_BUILD;DKCMAKE_CXX_COMPILER;DKCMAKE_CXX_FLAGS;DKCMAKE_CXX_FLAGS_DEBUG;DKCMAKE_CXX_FLAGS_RELEASE;DKCMAKE_C_COMPILER;DKCMAKE_C_FLAGS;DKCMAKE_C_FLAGS_DEBUG;DKCMAKE_C_FLAGS_RELEASE;DKCMAKE_FLAGS;DKCONFIGURE_BUILD;DKCONFIGURE_CC;DKCONFIGURE_CFLAGS;DKCONFIGURE_CFLAGS_DEBUG;DKCONFIGURE_CFLAGS_RELEASE;DKCONFIGURE_CXX;DKCONFIGURE_CXXFLAGS;DKCONFIGURE_CXXFLAGS_DEBUG;DKCONFIGURE_CXXFLAGS_RELEASE;DKCONFIGURE_FLAGS;DKCodeRunner;DKColorPicker;DKCurl;DKCurl_BINARY_DIR;DKCurl_IS_TOP_LEVEL;DKCurl_SOURCE_DIR;DKCurl_all;DKDEFINES_LIST;DKDOWNLOAD;DKDebug;DKDebug_BINARY_DIR;DKDebug_IS_TOP_LEVEL;DKDebug_SOURCE_DIR;DKDebug_all;DKDevTools;DKDom;DKDom_BINARY_DIR;DKDom_IS_TOP_LEVEL;DKDom_SOURCE_DIR;DKDom_all;DKDuktape;DKDuktapeDom;DKDuktapeDom_BINARY_DIR;DKDuktapeDom_IS_TOP_LEVEL;DKDuktapeDom_SOURCE_DIR;DKDuktapeDom_all;DKDuktape_BINARY_DIR;DKDuktape_IS_TOP_LEVEL;DKDuktape_SOURCE_DIR;DKDuktape_all;DKEditor;DKEditor_all;DKFile;DKFile_BINARY_DIR;DKFile_IS_TOP_LEVEL;DKFile_SOURCE_DIR;DKFile_all;DKFmt;DKGit;DKGui;DKHandles;DKHandles_BINARY_DIR;DKHandles_IS_TOP_LEVEL;DKHandles_SOURCE_DIR;DKHandles_all;DKIMPORTS;DKINCLUDES_LIST;DKInputTest;DKJerryscript;DKLogin;DKMySql;DKMySql_BINARY_DIR;DKMySql_IS_TOP_LEVEL;DKMySql_SOURCE_DIR;DKMySql_all;DKNotepad;DKOFWindow;DKOS;DKOcr;DKPLUGINS;DKPLUGIN_LIST;DKPLUGIN_LIST_lower;DKPROJECT;DKPaint;DKPhp;DKPhp_all;DKPlugin1;DKPlugin2;DKRestart;DKRml;DKRmlIframe;DKRmlIframe_BINARY_DIR;DKRmlIframe_IS_TOP_LEVEL;DKRmlIframe_SOURCE_DIR;DKRmlIframe_all;DKRmlVideo;DKRmlVideo_all;DKRml_BINARY_DIR;DKRml_IS_TOP_LEVEL;DKRml_SOURCE_DIR;DKRml_all;DKSDLAudio;DKSDLRml;DKSDLRmlUi_BINARY_DIR;DKSDLRmlUi_DESCRIPTION;DKSDLRmlUi_HOMEPAGE_URL;DKSDLRmlUi_IS_TOP_LEVEL;DKSDLRmlUi_SOURCE_DIR;DKSDLRml_BINARY_DIR;DKSDLRml_IS_TOP_LEVEL;DKSDLRml_SOURCE_DIR;DKSDLRml_all;DKSDLText;DKSDLText_BINARY_DIR;DKSDLText_IS_TOP_LEVEL;DKSDLText_SOURCE_DIR;DKSDLText_all;DKSDLVideo;DKSDLWav;DKSDLWindow;DKSDLWindow_BINARY_DIR;DKSDLWindow_IS_TOP_LEVEL;DKSDLWindow_SOURCE_DIR;DKSDLWindow_all;DKSFMLRml;DKScreenRecorder;DKStats;DKThread;DKTooltip;DKTorrent;DKUpdate;DKVideo;DKVideo_BINARY_DIR;DKVideo_IS_TOP_LEVEL;DKVideo_SOURCE_DIR;DKVideo_all;DKVncClient;DKVncServer;DKWEB;DKWebSockets;DKWebTest;DKWidget;DKWidget_all;DKWindow;DKWindow_BINARY_DIR;DKWindow_IS_TOP_LEVEL;DKWindow_SOURCE_DIR;DKWindow_all;DKXml;DKXml_BINARY_DIR;DKXml_IS_TOP_LEVEL;DKXml_SOURCE_DIR;DKXml_all;DK_BINARY_DIR;DK_IS_TOP_LEVEL;DK_SOURCE_DIR;DK_all;DUKTAPE;DUKTAPE_BRANCH;DUKTAPE_FOLDER;DUKTAPE_NAME;DUMPBIN;DigitalKnob_BINARY_DIR;DigitalKnob_DESCRIPTION;DigitalKnob_HOMEPAGE_URL;DigitalKnob_IS_TOP_LEVEL;DigitalKnob_SOURCE_DIR;ENABLE_DKDEBUGFUNC;ESC;ESC_0;ESC_1;ESC_10;ESC_2;ESC_3;ESC_4;ESC_5;ESC_6;ESC_7;ESC_8;ESC_9;FREETYPE;FREETYPE_BUILD;FREETYPE_CMAKE;FREETYPE_DL;FREETYPE_MAJOR;FREETYPE_MINOR;FREETYPE_NAME;FREETYPE_VERSION;GIFLIB;GIFLIB_BRANCH;GIFLIB_CMAKE;GIFLIB_FOLDER;GIFLIB_NAME;GIT;GIT_DL;GIT_EXE;GIT_NAME;GIT_VERSION;GLEW;GLEW_BRANCH;GLEW_DL;GLEW_FOLDER;GLEW_NAME;HAVE_DK;HAVE_DKArchive;HAVE_DKAssets;HAVE_DKBuild;HAVE_DKCodeRunner;HAVE_DKColorPicker;HAVE_DKCurl;HAVE_DKDebug;HAVE_DKDevTools;HAVE_DKDom;HAVE_DKDuktape;HAVE_DKDuktapeDom;HAVE_DKEditor;HAVE_DKFile;HAVE_DKFmt;HAVE_DKGit;HAVE_DKGui;HAVE_DKHandles;HAVE_DKInputTest;HAVE_DKJerryscript;HAVE_DKLogin;HAVE_DKMySql;HAVE_DKNotepad;HAVE_DKOFWindow;HAVE_DKOS;HAVE_DKOcr;HAVE_DKPaint;HAVE_DKPhp;HAVE_DKPlugin1;HAVE_DKPlugin2;HAVE_DKRestart;HAVE_DKRml;HAVE_DKRmlIframe;HAVE_DKRmlVideo;HAVE_DKSDLAudio;HAVE_DKSDLRml;HAVE_DKSDLText;HAVE_DKSDLVideo;HAVE_DKSDLWav;HAVE_DKSDLWindow;HAVE_DKSFMLRml;HAVE_DKScreenRecorder;HAVE_DKStats;HAVE_DKThread;HAVE_DKTooltip;HAVE_DKTorrent;HAVE_DKUpdate;HAVE_DKVideo;HAVE_DKVncClient;HAVE_DKVncServer;HAVE_DKWebSockets;HAVE_DKWebTest;HAVE_DKWidget;HAVE_DKWindow;HAVE_DKXml;HAVE__TEMPLATE-APP_;HAVE__TEMPLATE-LIB_;HAVE_android-java-tools;HAVE_astyle;HAVE_boxer;HAVE_build-essential;HAVE_bzip2;HAVE_cmake;HAVE_conio-for-linux;HAVE_cryptopp;HAVE_curl;HAVE_duktape;HAVE_emsdk;HAVE_emsdk-portable;HAVE_ffmpeg-dev;HAVE_ffmpeg-shared;HAVE_ffmpeg-static;HAVE_fmt;HAVE_freealut;HAVE_freealut-master;HAVE_freetype;HAVE_giflib;HAVE_git;HAVE_glew;HAVE_gradle;HAVE_imageio;HAVE_imagemagick;HAVE_java;HAVE_jerryscript;HAVE_jpeg;HAVE_kdevelop;HAVE_leptonica;HAVE_libarchive;HAVE_libasound2-dev;HAVE_libcaca;HAVE_libgl1-mesa-dev;HAVE_libglib2.0-dev;HAVE_libglu1-mesa-dev;HAVE_libgtk2.0-dev;HAVE_libiconv;HAVE_libjpeg-turbo;HAVE_libpng;HAVE_librocket;HAVE_libsndfile1-dev;HAVE_libsystemd-dev;HAVE_libtorrent;HAVE_libudev-dev;HAVE_libvncserver;HAVE_libvncserver-master-win;HAVE_libwebp;HAVE_libwebsockets;HAVE_libx11;HAVE_libx11-dev;HAVE_libxcursor-dev;HAVE_libxml2;HAVE_libxrandr-dev;HAVE_libxtst-dev;HAVE_lighttpd;HAVE_lua;HAVE_mesa-common-dev;HAVE_mingw32;HAVE_miniweb;HAVE_mobile_core_services;HAVE_msys;HAVE_msys2;HAVE_nodejs;HAVE_notepadpp;HAVE_openal;HAVE_openal-android;HAVE_opencv;HAVE_openframeworks;HAVE_opengl;HAVE_openscenegraph;HAVE_opensles;HAVE_openssl;HAVE_osgaudio;HAVE_osgbullet;HAVE_osgworks;HAVE_php_binary;HAVE_podofo;HAVE_pugixml;HAVE_python;HAVE_rmlui;HAVE_sdl;HAVE_sdl2_gif;HAVE_sdl2_giflib_sa;HAVE_sdl_image;HAVE_sdl_ttf;HAVE_simple-getch;HAVE_stackwalker;HAVE_tesseract;HAVE_tidy-html5;HAVE_tiff;HAVE_uwebsockets;HAVE_vc_redist;HAVE_visualstudio;HAVE_waave;HAVE_winmm.lib;HAVE_ws2_32.lib;HAVE_xz;HAVE_zlib;HBG_black;HBG_blue;HBG_cyan;HBG_green;HBG_magenta;HBG_red;HBG_white;HBG_yellow;HB_black;HB_blue;HB_cyan;HB_green;HB_magenta;HB_red;HB_white;HB_yellow;H_black;H_blue;H_cyan;H_green;H_magenta;H_red;H_white;H_yellow;IMAGEMAGICK;IMAGEMAGICK_CONVERT;IMAGEMAGICK_DL;IMAGEMAGICK_NAME;IMAGEMAGICK_VERSION;INSTALL_DKLIBS;IOSSIM_SYSROOT;IOS_DARWIN;IOS_MIN_SDK;IOS_SYSROOT;LIBARCHIVE;LIBARCHIVE_BRANCH;LIBARCHIVE_DL;LIBARCHIVE_FOLDER;LIBARCHIVE_NAME;LIBICONV;LIBICONV_CMAKE;LIBICONV_DL;LIBICONV_NAME;LIBICONV_VERSION;LIBJPEG-TURBO;LIBJPEG-TURBO_CMAKE;LIBJPEG-TURBO_DL;LIBJPEG-TURBO_NAME;LIBJPEG-TURBO_VERSION;LIBLIST;LIBPNG;LIBPNG_BRANCH;LIBPNG_BUILD;LIBPNG_CMAKE;LIBPNG_DL;LIBPNG_FOLDER;LIBPNG_MAJOR;LIBPNG_MINOR;LIBPNG_NAME;LIBS;LIBVAR;LIBXML2;LIBXML2_BRANCH;LIBXML2_CMAKE;LIBXML2_DL;LIBXML2_FOLDER;LIBXML2_NAME;LINUX_GCC;LINUX_GXX;MINGW32;MINGW32_DL;MINGW32_GCC;MINGW32_GXX;MINGW32_NAME;MINGW32_VERSION;MINGW64_GCC;MINGW64_GXX;MSBUILD;MSVC;MSVC14;MSVC_CL;MSVC_CXX_ARCHITECTURE_ID;MSVC_C_ARCHITECTURE_ID;MSVC_IDE;MSVC_INCREMENTAL_DEFAULT;MSVC_INCREMENTAL_YES_FLAG;MSVC_TOOLSET_VERSION;MSVC_VERSION;MSYS;MSYS_DL;MSYS_NAME;MSYS_VERSION;NODEJS;NODEJS_DL;NODEJS_NAME;NODEJS_VERSION;NODE_EXE;OPENSSL;OPENSSL_CMAKE;OPENSSL_DL;OPENSSL_NAME;OPENSSL_VERSION;OS;PHP_BINARY;PHP_BINARY_BRANCH;PHP_BINARY_DL;PHP_BINARY_FOLDER;PHP_BINARY_NAME;PLUGINS_FILE;PLUGINS_FILE;PNG_VCPROJ;PRESET_CMAKE_SYSTEM_NAME;PRINT_CALL_DETAILS;PRINT_FILE_NAMES;PRINT_FUNCTION_;PRINT_FUNCTION_NAMES;PRINT_LINE_NUMBERS;PROJECT_BINARY_DIR;PROJECT_DESCRIPTION;PROJECT_HOMEPAGE_URL;PROJECT_IS_TOP_LEVEL;PROJECT_NAME;PROJECT_SOURCE_DIR;PUGIXML;PUGIXML_BRANCH;PUGIXML_DL;PUGIXML_FOLDER;PUGIXML_NAME;PYTHON;PYTHON_DL;PYTHON_EXE;PYTHON_NAME;PYTHON_VERSION;QUEUE_BUILD;REBUILD;REBUILDALL;RELEASE;RELEASE_DIR;RELEASE_FLAGS;RELEASE_LIBS;RELEASE_LINK_FLAGS;RMLUI;RMLUI_BRANCH;RMLUI_FOLDER;RMLUI_NAME;RUN_CONFIGURE;SDL;SDLMAIN_CMAKE;SDL_BRANCH;SDL_CMAKE;SDL_FOLDER;SDL_IMAGE;SDL_IMAGE_BRANCH;SDL_IMAGE_CMAKE;SDL_IMAGE_FOLDER;SDL_IMAGE_NAME;SDL_NAME;SDL_TTF;SDL_TTF_BRANCH;SDL_TTF_FOLDER;SDL_TTF_NAME;SET_MSVC_CXX_ARCHITECTURE_ID;SET_MSVC_C_ARCHITECTURE_ID;SHARED;STACKWALKER;STACKWALKER_DL;STACKWALKER_NAME;STACKWALKER_VERSION;STACK_FILENAME;STACK_HEADER;STATIC;TIDY-HTML5;TIDY-HTML5_BRANCH;TIDY-HTML5_FOLDER;TIDY-HTML5_NAME;U_black;U_blue;U_cyan;U_green;U_magenta;U_red;U_white;U_yellow;VC_REDIST;VC_REDIST_DL;VC_REDIST_NAME;VC_REDIST_PLATFORM;VC_REDIST_VERSION;VISUALSTUDIO;VISUALSTUDIO_BUILD;VISUALSTUDIO_DL;VISUALSTUDIO_PROGRAM_FILES;VISUALSTUDIO_VERSION;VS_GENERATOR;WARNINGS_AS_ERRORS;WARNING_4244;WARNING_5105;WARNING_LEVEL;WIN;WIN32;WIN_32;WIN_HOST;XCODE_CLANG;XCODE_CLANGXX;XCODE_DEVROOT;XCODE_LIBTOOL;XZ;XZ_BRANCH;XZ_CMAKE;XZ_DL;XZ_FOLDER;XZ_NAME;ZLIB;ZLIB_BRANCH;ZLIB_CMAKE;ZLIB_FOLDER;ZLIB_NAME;_CMAKE_CXX_IPO_MAY_BE_SUPPORTED_BY_COMPILER;_CMAKE_CXX_IPO_SUPPORTED_BY_CMAKE;_CMAKE_C_IPO_MAY_BE_SUPPORTED_BY_COMPILER;_CMAKE_C_IPO_SUPPORTED_BY_CMAKE;_CMAKE_INSTALL_DIR;_CMAKE_RC_COMPILER_NAME_WE;_CMAKE_TOOLCHAIN_LOCATION;_CMAKE_VS_LINK_DLL;_CMAKE_VS_LINK_EXE;_COMPILE_CXX;_FLAGS_CXX;_FS_C;_FS_CXX;_INCLUDED_FILE;_INCLUDED_SYSTEM_INFO_FILE;_MSVC_CXX_ARCHITECTURE_FAMILY;_MSVC_C_ARCHITECTURE_FAMILY;_PLATFORM_DEFINES;_PLATFORM_LINK_FLAGS;_RTC1;_SET_CMAKE_CXX_COMPILER_ARCHITECTURE_ID;_SET_CMAKE_CXX_COMPILER_SYSROOT;_SET_CMAKE_C_COMPILER_ARCHITECTURE_ID;_SET_CMAKE_C_COMPILER_SYSROOT;_TEMPLATE-APP_;_TEMPLATE-LIB_;__COMPILER_CMAKE_COMMON_COMPILER_MACROS;__INCGUARD_2879baac9414af69cd9b3d9455b1b4e9__;__INCGUARD_43a00cd6eae0b772ce0a789147df34a0__;__INCGUARD_b766bf0c5038e06e08ff4be9bd1e6a58__;__INCGUARD_bb872b2227d4904aa4f88072704b1beb__;__INCGUARD_cc173f1b214bb0e2b67ba46aa13cedcb__;__INCGUARD_cd14acda42ad050c118745306aa05724__;__INCGUARD_de3932faa10eca398dd321e2ffc64830__;__INCGUARD_f5bc78645402f1b3541a76740d198208__;__WINDOWS_MSVC;__WINDOWS_PATHS_INCLUDED;_compiler_version;android-java-tools;astyle;black;blue;boxer;boxer_all;build-essential;bzip2;bzip2_all;cmake;cmake_all;conio-for-linux;cryptopp;cryptopp_all;curl;curl_all;cyan;d;day;dir;dkdepend_disable_list;dkdepend_list;dkdepend_list;duktape;duktape_all;emsdk;emsdk-portable;extension;ffmpeg-dev;ffmpeg-shared;ffmpeg-static;fixed_flags;fmt;freealut;freealut-master;freetype;freetype_all;giflib;giflib_all;git;git_all;glew;glew_all;gradle;green;imageio;imageio_all;imagemagick;imagemagick_all;index;isDKPlugin;java;jerryscript;jpeg;kdevelop;lang;leptonica;lib;libarchive;libarchive_all;libasound2-dev;libcaca;libgl1-mesa-dev;libglib2.0-dev;libglu1-mesa-dev;libgtk2.0-dev;libiconv;libiconv_all;libjpeg-turbo;libjpeg-turbo_all;libpng;libpng_all;librocket;libsndfile1-dev;libsystemd-dev;libtorrent;libudev-dev;libvncserver;libvncserver-master-win;libwebp;libwebsockets;libx11;libx11-dev;libxcursor-dev;libxml2;libxml2_all;libxrandr-dev;libxtst-dev;lighttpd;lua;magenta;mesa-common-dev;mingw32;mingw32_all;miniweb;mobile_core_services;mobile_core_services_all;month;msys;msys2;msys_all;nodejs;nodejs_all;notepadpp;openal;openal-android;opencv;openframeworks;opengl;opengl_all;openscenegraph;opensles;openssl;openssl_all;osgaudio;osgbullet;osgworks;php_binary;php_binary_all;plugin;plugin_lower;plugin_path;podofo;pugixml;pugixml_all;python;python_all;red;resources_SRC;rmlui;rmlui_RmlCore;rmlui_RmlDebugger;rmlui_all;rmlui_targets;sdl;sdl2_gif;sdl2_giflib_sa;sdl_all;sdl_image;sdl_image_all;sdl_ttf;sdl_ttf_all;simple-getch;src;stackwalker;stackwalker_all;t;tesseract;tidy-html5;tidy-html5_all;tiff;type;uwebsockets;v;var;vars;vc_redist;vc_redist_all;visualstudio;visualstudio_all;waave;white;winmm.lib;winmm.lib_all;ws2_32.lib;ws2_32.lib_all;xz;xz_all;year;yellow;zlib;zlib_all
+vars ==           3RDPARTY;ANDROIDBUILDTOOLS;ANDROIDBUILDTOOLS_DL;ANDROIDBUILDTOOLS_VERSION;ANDROIDIMAGES;ANDROIDIMAGES_VERSION;ANDROIDNDK;ANDROIDNDK_BUILD;ANDROIDNDK_DL;ANDROIDNDK_VERSION;ANDROIDPLATFORMS;ANDROIDPLATFORMS_DL;ANDROIDPLATFORMS_FOLDER;ANDROIDPLATFORMS_VERSION;ANDROIDPLATFORMTOOLS;ANDROIDPLATFORMTOOLS_DL;ANDROIDPLATFORMTOOLS_VERSION;ANDROIDSDK;ANDROIDSDKTOOLS;ANDROIDSDKTOOLS_BUILD;ANDROIDSDKTOOLS_DL;ANDROIDSDKTOOLS_VERSION;ANDROIDSOURCES;ANDROIDSOURCES_DL;ANDROIDSOURCES_FOLDER;ANDROIDSOURCES_VERSION;ANDROIDSTUDIO;ANDROIDSTUDIO_DL;ANDROIDSTUDIO_EXE;ANDROIDSTUDIO_NAME;ANDROIDSTUDIO_VERSION;ANDROIDTOOLS;ANDROIDTOOLS_DL;ANDROID_CMAKE;ANDROID_CMAKE_DL;ANDROID_CMAKE_NAME;ANDROID_CMAKE_VERSION;ANT;ANT_BRANCH;ANT_FOLDER;ANT_NAME;APP_NAME;APP_VERSION;ASSETS;App_SRC;BABEL;BABEL_DL;BABEL_NAME;BABEL_VERSION;BG_black;BG_blue;BG_cyan;BG_green;BG_magenta;BG_red;BG_white;BG_yellow;BOOST;BOOST_BUILD;BOOST_DL;BOOST_MAJOR;BOOST_MINOR;BOOST_NAME;BOOST_VERSION;BOXER;BOXER_BRANCH;BOXER_FOLDER;BOXER_NAME;BUILD;BUILD_DIR;BULLET3;BULLET3_BRANCH;BULLET3_FOLDER;BULLET3_NAME;BZIP2-WIN-BUILD;BZIP2-WIN-BUILD_BRANCH;BZIP2-WIN-BUILD_CMAKE;BZIP2-WIN-BUILD_FOLDER;BZIP2-WIN-BUILD_NAME;B_black;B_blue;B_cyan;B_green;B_magenta;B_red;B_white;B_yellow;CEF;CEF_DL;CEF_NAME;CEF_VERSION;CHART.JS;CHART.JS_BRANCH;CHART.JS_DL;CHART.JS_FOLDER;CHART.JS_NAME;CLR;CMAKE;CMAKE_AR;CMAKE_AR;CMAKE_AUTOGEN_ORIGIN_DEPENDS;CMAKE_AUTOMOC_COMPILER_PREDEFINES;CMAKE_AUTOMOC_MACRO_NAMES;CMAKE_AUTOMOC_PATH_PREFIX;CMAKE_BASE_NAME;CMAKE_BINARY_DIR;CMAKE_BUILD_TOOL;CMAKE_BUILD_TYPE;CMAKE_BUILD_TYPE_INIT;CMAKE_C11_COMPILE_FEATURES;CMAKE_C11_EXTENSION_COMPILE_OPTION;CMAKE_C11_STANDARD_COMPILE_OPTION;CMAKE_C17_COMPILE_FEATURES;CMAKE_C23_COMPILE_FEATURES;CMAKE_C90_COMPILE_FEATURES;CMAKE_C90_EXTENSION_COMPILE_OPTION;CMAKE_C90_STANDARD_COMPILE_OPTION;CMAKE_C99_COMPILE_FEATURES;CMAKE_C99_EXTENSION_COMPILE_OPTION;CMAKE_C99_STANDARD_COMPILE_OPTION;CMAKE_CFG_INTDIR;CMAKE_CL_64;CMAKE_CL_NOLOGO;CMAKE_COMMAND;CMAKE_CONFIGURATION_TYPES;CMAKE_CPACK_COMMAND;CMAKE_CROSSCOMPILING;CMAKE_CTEST_COMMAND;CMAKE_CURRENT_BINARY_DIR;CMAKE_CURRENT_LIST_DIR;CMAKE_CURRENT_LIST_FILE;CMAKE_CURRENT_SOURCE_DIR;CMAKE_CXX11_COMPILE_FEATURES;CMAKE_CXX11_EXTENSION_COMPILE_OPTION;CMAKE_CXX11_STANDARD_COMPILE_OPTION;CMAKE_CXX11_STANDARD__HAS_FULL_SUPPORT;CMAKE_CXX14_COMPILE_FEATURES;CMAKE_CXX14_EXTENSION_COMPILE_OPTION;CMAKE_CXX14_STANDARD_COMPILE_OPTION;CMAKE_CXX14_STANDARD__HAS_FULL_SUPPORT;CMAKE_CXX17_COMPILE_FEATURES;CMAKE_CXX17_EXTENSION_COMPILE_OPTION;CMAKE_CXX17_STANDARD_COMPILE_OPTION;CMAKE_CXX20_COMPILE_FEATURES;CMAKE_CXX20_EXTENSION_COMPILE_OPTION;CMAKE_CXX20_STANDARD_COMPILE_OPTION;CMAKE_CXX23_COMPILE_FEATURES;CMAKE_CXX23_EXTENSION_COMPILE_OPTION;CMAKE_CXX23_STANDARD_COMPILE_OPTION;CMAKE_CXX98_COMPILE_FEATURES;CMAKE_CXX98_EXTENSION_COMPILE_OPTION;CMAKE_CXX98_STANDARD_COMPILE_OPTION;CMAKE_CXX98_STANDARD__HAS_FULL_SUPPORT;CMAKE_CXX_ABI_COMPILED;CMAKE_CXX_ARCHIVE_APPEND;CMAKE_CXX_ARCHIVE_CREATE;CMAKE_CXX_ARCHIVE_FINISH;CMAKE_CXX_BYTE_ORDER;CMAKE_CXX_CLANG_TIDY_DRIVER_MODE;CMAKE_CXX_CL_SHOWINCLUDES_PREFIX;CMAKE_CXX_COMPILER;CMAKE_CXX_COMPILER_ABI;CMAKE_CXX_COMPILER_AR;CMAKE_CXX_COMPILER_ARCHITECTURE_ID;CMAKE_CXX_COMPILER_ARG1;CMAKE_CXX_COMPILER_ENV_VAR;CMAKE_CXX_COMPILER_EXCLUDE;CMAKE_CXX_COMPILER_FRONTEND_VARIANT;CMAKE_CXX_COMPILER_ID;CMAKE_CXX_COMPILER_ID_PLATFORM_CONTENT;CMAKE_CXX_COMPILER_ID_RUN;CMAKE_CXX_COMPILER_ID_TOOL_MATCH_INDEX;CMAKE_CXX_COMPILER_ID_TOOL_MATCH_REGEX;CMAKE_CXX_COMPILER_ID_VENDORS;CMAKE_CXX_COMPILER_ID_VENDOR_REGEX_IAR;CMAKE_CXX_COMPILER_LOADED;CMAKE_CXX_COMPILER_NAMES;CMAKE_CXX_COMPILER_PRODUCED_FILES;CMAKE_CXX_COMPILER_PRODUCED_OUTPUT;CMAKE_CXX_COMPILER_RANLIB;CMAKE_CXX_COMPILER_VERSION;CMAKE_CXX_COMPILER_VERSION_INTERNAL;CMAKE_CXX_COMPILER_WORKS;CMAKE_CXX_COMPILER_WRAPPER;CMAKE_CXX_COMPILE_FEATURES;CMAKE_CXX_COMPILE_OBJECT;CMAKE_CXX_COMPILE_OPTIONS_CREATE_PCH;CMAKE_CXX_COMPILE_OPTIONS_IPO;CMAKE_CXX_COMPILE_OPTIONS_JMC;CMAKE_CXX_COMPILE_OPTIONS_MSVC_RUNTIME_LIBRARY_MultiThreaded;CMAKE_CXX_COMPILE_OPTIONS_MSVC_RUNTIME_LIBRARY_MultiThreadedDLL;CMAKE_CXX_COMPILE_OPTIONS_MSVC_RUNTIME_LIBRARY_MultiThreadedDebug;CMAKE_CXX_COMPILE_OPTIONS_MSVC_RUNTIME_LIBRARY_MultiThreadedDebugDLL;CMAKE_CXX_COMPILE_OPTIONS_USE_PCH;CMAKE_CXX_CREATE_ASSEMBLY_SOURCE;CMAKE_CXX_CREATE_CONSOLE_EXE;CMAKE_CXX_CREATE_PREPROCESSED_SOURCE;CMAKE_CXX_CREATE_SHARED_LIBRARY;CMAKE_CXX_CREATE_SHARED_MODULE;CMAKE_CXX_CREATE_STATIC_LIBRARY;CMAKE_CXX_CREATE_STATIC_LIBRARY_IPO;CMAKE_CXX_CREATE_WIN32_EXE;CMAKE_CXX_DEPFILE_FORMAT;CMAKE_CXX_FLAGS;CMAKE_CXX_FLAGS_DEBUG;CMAKE_CXX_FLAGS_DEBUG_INIT;CMAKE_CXX_FLAGS_INIT;CMAKE_CXX_FLAGS_MINSIZEREL;CMAKE_CXX_FLAGS_MINSIZEREL_INIT;CMAKE_CXX_FLAGS_RELEASE;CMAKE_CXX_FLAGS_RELEASE_INIT;CMAKE_CXX_FLAGS_RELWITHDEBINFO;CMAKE_CXX_FLAGS_RELWITHDEBINFO_INIT;CMAKE_CXX_IGNORE_EXTENSIONS;CMAKE_CXX_IMPLICIT_INCLUDE_DIRECTORIES;CMAKE_CXX_IMPLICIT_LINK_DIRECTORIES;CMAKE_CXX_IMPLICIT_LINK_FRAMEWORK_DIRECTORIES;CMAKE_CXX_IMPLICIT_LINK_LIBRARIES;CMAKE_CXX_INFORMATION_LOADED;CMAKE_CXX_LIBRARY_ARCHITECTURE;CMAKE_CXX_LINKER_PREFERENCE;CMAKE_CXX_LINKER_PREFERENCE_PROPAGATES;CMAKE_CXX_LINKER_SUPPORTS_PDB;CMAKE_CXX_LINK_EXECUTABLE;CMAKE_CXX_LINK_OPTIONS_IPO;CMAKE_CXX_OUTPUT_EXTENSION;CMAKE_CXX_PLATFORM_ID;CMAKE_CXX_SIMULATE_ID;CMAKE_CXX_SIMULATE_VERSION;CMAKE_CXX_SIZEOF_DATA_PTR;CMAKE_CXX_SOURCE_FILE_EXTENSIONS;CMAKE_CXX_STANDARD_COMPUTED_DEFAULT;CMAKE_CXX_STANDARD_DEFAULT;CMAKE_CXX_STANDARD_LIBRARIES;CMAKE_CXX_STANDARD_LIBRARIES_INIT;CMAKE_CXX_USE_RESPONSE_FILE_FOR_OBJECTS;CMAKE_CXX_XCODE_ARCHS;CMAKE_C_ABI_COMPILED;CMAKE_C_ARCHIVE_APPEND;CMAKE_C_ARCHIVE_CREATE;CMAKE_C_ARCHIVE_FINISH;CMAKE_C_BYTE_ORDER;CMAKE_C_CLANG_TIDY_DRIVER_MODE;CMAKE_C_CL_SHOWINCLUDES_PREFIX;CMAKE_C_COMPILER;CMAKE_C_COMPILER_ABI;CMAKE_C_COMPILER_AR;CMAKE_C_COMPILER_ARCHITECTURE_ID;CMAKE_C_COMPILER_ARG1;CMAKE_C_COMPILER_ENV_VAR;CMAKE_C_COMPILER_FRONTEND_VARIANT;CMAKE_C_COMPILER_ID;CMAKE_C_COMPILER_ID_PLATFORM_CONTENT;CMAKE_C_COMPILER_ID_RUN;CMAKE_C_COMPILER_ID_TOOL_MATCH_INDEX;CMAKE_C_COMPILER_ID_TOOL_MATCH_REGEX;CMAKE_C_COMPILER_ID_VENDORS;CMAKE_C_COMPILER_ID_VENDOR_REGEX_IAR;CMAKE_C_COMPILER_LOADED;CMAKE_C_COMPILER_NAMES;CMAKE_C_COMPILER_PRODUCED_FILES;CMAKE_C_COMPILER_PRODUCED_OUTPUT;CMAKE_C_COMPILER_RANLIB;CMAKE_C_COMPILER_VERSION;CMAKE_C_COMPILER_VERSION_INTERNAL;CMAKE_C_COMPILER_WORKS;CMAKE_C_COMPILER_WRAPPER;CMAKE_C_COMPILE_FEATURES;CMAKE_C_COMPILE_OBJECT;CMAKE_C_COMPILE_OPTIONS_CREATE_PCH;CMAKE_C_COMPILE_OPTIONS_EXPLICIT_LANGUAGE;CMAKE_C_COMPILE_OPTIONS_IPO;CMAKE_C_COMPILE_OPTIONS_JMC;CMAKE_C_COMPILE_OPTIONS_MSVC_RUNTIME_LIBRARY_MultiThreaded;CMAKE_C_COMPILE_OPTIONS_MSVC_RUNTIME_LIBRARY_MultiThreadedDLL;CMAKE_C_COMPILE_OPTIONS_MSVC_RUNTIME_LIBRARY_MultiThreadedDebug;CMAKE_C_COMPILE_OPTIONS_MSVC_RUNTIME_LIBRARY_MultiThreadedDebugDLL;CMAKE_C_COMPILE_OPTIONS_USE_PCH;CMAKE_C_CREATE_ASSEMBLY_SOURCE;CMAKE_C_CREATE_CONSOLE_EXE;CMAKE_C_CREATE_PREPROCESSED_SOURCE;CMAKE_C_CREATE_SHARED_LIBRARY;CMAKE_C_CREATE_SHARED_MODULE;CMAKE_C_CREATE_STATIC_LIBRARY;CMAKE_C_CREATE_STATIC_LIBRARY_IPO;CMAKE_C_CREATE_WIN32_EXE;CMAKE_C_DEPFILE_FORMAT;CMAKE_C_FLAGS;CMAKE_C_FLAGS_DEBUG;CMAKE_C_FLAGS_DEBUG_INIT;CMAKE_C_FLAGS_INIT;CMAKE_C_FLAGS_MINSIZEREL;CMAKE_C_FLAGS_MINSIZEREL_INIT;CMAKE_C_FLAGS_RELEASE;CMAKE_C_FLAGS_RELEASE_INIT;CMAKE_C_FLAGS_RELWITHDEBINFO;CMAKE_C_FLAGS_RELWITHDEBINFO_INIT;CMAKE_C_IGNORE_EXTENSIONS;CMAKE_C_IMPLICIT_INCLUDE_DIRECTORIES;CMAKE_C_IMPLICIT_LINK_DIRECTORIES;CMAKE_C_IMPLICIT_LINK_FRAMEWORK_DIRECTORIES;CMAKE_C_IMPLICIT_LINK_LIBRARIES;CMAKE_C_INFORMATION_LOADED;CMAKE_C_LIBRARY_ARCHITECTURE;CMAKE_C_LINKER_PREFERENCE;CMAKE_C_LINKER_SUPPORTS_PDB;CMAKE_C_LINK_EXECUTABLE;CMAKE_C_LINK_OPTIONS_IPO;CMAKE_C_OUTPUT_EXTENSION;CMAKE_C_PLATFORM_ID;CMAKE_C_SIMULATE_ID;CMAKE_C_SIMULATE_VERSION;CMAKE_C_SIZEOF_DATA_PTR;CMAKE_C_SOURCE_FILE_EXTENSIONS;CMAKE_C_STANDARD_COMPUTED_DEFAULT;CMAKE_C_STANDARD_DEFAULT;CMAKE_C_STANDARD_LIBRARIES;CMAKE_C_STANDARD_LIBRARIES_INIT;CMAKE_C_USE_RESPONSE_FILE_FOR_OBJECTS;CMAKE_C_XCODE_ARCHS;CMAKE_DEPFILE_FLAGS_C;CMAKE_DEPFILE_FLAGS_CXX;CMAKE_DL;CMAKE_DL_LIBS;CMAKE_EFFECTIVE_SYSTEM_NAME;CMAKE_EXE;CMAKE_EXECUTABLE_FORMAT;CMAKE_EXECUTABLE_SUFFIX;CMAKE_EXE_LINKER_FLAGS;CMAKE_EXE_LINKER_FLAGS_DEBUG;CMAKE_EXE_LINKER_FLAGS_DEBUG_INIT;CMAKE_EXE_LINKER_FLAGS_INIT;CMAKE_EXE_LINKER_FLAGS_MINSIZEREL;CMAKE_EXE_LINKER_FLAGS_MINSIZEREL_INIT;CMAKE_EXE_LINKER_FLAGS_RELEASE;CMAKE_EXE_LINKER_FLAGS_RELEASE_INIT;CMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO;CMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO_INIT;CMAKE_EXTRA_GENERATOR;CMAKE_EXTRA_LINK_EXTENSIONS;CMAKE_FILES_DIRECTORY;CMAKE_FIND_LIBRARY_PREFIXES;CMAKE_FIND_LIBRARY_SUFFIXES;CMAKE_GENERATOR;CMAKE_GENERATOR_INSTANCE;CMAKE_GENERATOR_NO_COMPILER_ENV;CMAKE_GENERATOR_PLATFORM;CMAKE_GENERATOR_RC;CMAKE_GENERATOR_TOOLSET;CMAKE_HOME_DIRECTORY;CMAKE_HOST_SYSTEM;CMAKE_HOST_SYSTEM_NAME;CMAKE_HOST_SYSTEM_PROCESSOR;CMAKE_HOST_SYSTEM_VERSION;CMAKE_HOST_WIN32;CMAKE_IMPORT_LIBRARY_PREFIX;CMAKE_IMPORT_LIBRARY_SUFFIX;CMAKE_INCLUDE_FLAG_C;CMAKE_INCLUDE_FLAG_CXX;CMAKE_INCLUDE_FLAG_RC;CMAKE_INSTALL_DEFAULT_COMPONENT_NAME;CMAKE_INSTALL_PREFIX;CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT;CMAKE_LIBRARY_PATH_FLAG;CMAKE_LIBRARY_PATH_TERMINATOR;CMAKE_LINKER;CMAKE_LINKER;CMAKE_LINK_DEF_FILE_FLAG;CMAKE_LINK_LIBRARY_FLAG;CMAKE_LINK_LIBRARY_SUFFIX;CMAKE_LINK_PCH;CMAKE_MAJOR_VERSION;CMAKE_MAKE_PROGRAM;CMAKE_MATCH_0;CMAKE_MATCH_1;CMAKE_MATCH_2;CMAKE_MATCH_COUNT;CMAKE_MINIMUM_REQUIRED_VERSION;CMAKE_MINOR_VERSION;CMAKE_MODULE_LINKER_FLAGS;CMAKE_MODULE_LINKER_FLAGS_DEBUG;CMAKE_MODULE_LINKER_FLAGS_DEBUG_INIT;CMAKE_MODULE_LINKER_FLAGS_INIT;CMAKE_MODULE_LINKER_FLAGS_MINSIZEREL;CMAKE_MODULE_LINKER_FLAGS_MINSIZEREL_INIT;CMAKE_MODULE_LINKER_FLAGS_RELEASE;CMAKE_MODULE_LINKER_FLAGS_RELEASE_INIT;CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO;CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO_INIT;CMAKE_MSVC_RUNTIME_LIBRARY_DEFAULT;CMAKE_MT;CMAKE_MT;CMAKE_NAME;CMAKE_NINJA_CMCLDEPS_RC;CMAKE_NO_BUILD_TYPE;CMAKE_PARENT_LIST_FILE;CMAKE_PATCH_VERSION;CMAKE_PCH_COPY_COMPILE_PDB;CMAKE_PCH_EXTENSION;CMAKE_PCH_PROLOGUE;CMAKE_PLATFORM_INFO_DIR;CMAKE_PLATFORM_INFO_INITIALIZED;CMAKE_PROJECT_DESCRIPTION;CMAKE_PROJECT_HOMEPAGE_URL;CMAKE_PROJECT_NAME;CMAKE_RANLIB;CMAKE_RANLIB;CMAKE_RC_COMPILER;CMAKE_RC_COMPILER;CMAKE_RC_COMPILER_ARG1;CMAKE_RC_COMPILER_ENV_VAR;CMAKE_RC_COMPILER_INIT;CMAKE_RC_COMPILER_LIST;CMAKE_RC_COMPILER_LOADED;CMAKE_RC_COMPILER_WORKS;CMAKE_RC_COMPILE_OBJECT;CMAKE_RC_FLAGS;CMAKE_RC_FLAGS_DEBUG;CMAKE_RC_FLAGS_DEBUG_INIT;CMAKE_RC_FLAGS_INIT;CMAKE_RC_FLAGS_MINSIZEREL;CMAKE_RC_FLAGS_RELEASE;CMAKE_RC_FLAGS_RELWITHDEBINFO;CMAKE_RC_FLAG_REGEX;CMAKE_RC_INFORMATION_LOADED;CMAKE_RC_OUTPUT_EXTENSION;CMAKE_RC_SOURCE_FILE_EXTENSIONS;CMAKE_ROOT;CMAKE_SHARED_LIBRARY_CREATE_CXX_FLAGS;CMAKE_SHARED_LIBRARY_CREATE_C_FLAGS;CMAKE_SHARED_LIBRARY_C_FLAGS;CMAKE_SHARED_LIBRARY_LINK_C_FLAGS;CMAKE_SHARED_LIBRARY_PREFIX;CMAKE_SHARED_LIBRARY_RUNTIME_C_FLAG;CMAKE_SHARED_LIBRARY_RUNTIME_C_FLAG_SEP;CMAKE_SHARED_LIBRARY_SUFFIX;CMAKE_SHARED_LINKER_FLAGS;CMAKE_SHARED_LINKER_FLAGS_DEBUG;CMAKE_SHARED_LINKER_FLAGS_DEBUG_INIT;CMAKE_SHARED_LINKER_FLAGS_INIT;CMAKE_SHARED_LINKER_FLAGS_MINSIZEREL;CMAKE_SHARED_LINKER_FLAGS_MINSIZEREL_INIT;CMAKE_SHARED_LINKER_FLAGS_RELEASE;CMAKE_SHARED_LINKER_FLAGS_RELEASE_INIT;CMAKE_SHARED_LINKER_FLAGS_RELWITHDEBINFO;CMAKE_SHARED_LINKER_FLAGS_RELWITHDEBINFO_INIT;CMAKE_SHARED_MODULE_CREATE_CXX_FLAGS;CMAKE_SHARED_MODULE_CREATE_C_FLAGS;CMAKE_SHARED_MODULE_PREFIX;CMAKE_SHARED_MODULE_SUFFIX;CMAKE_SIZEOF_VOID_P;CMAKE_SKIP_INSTALL_RPATH;CMAKE_SKIP_RPATH;CMAKE_SOURCE_DIR;CMAKE_STATIC_LIBRARY_PREFIX;CMAKE_STATIC_LIBRARY_SUFFIX;CMAKE_STATIC_LINKER_FLAGS;CMAKE_STATIC_LINKER_FLAGS_DEBUG;CMAKE_STATIC_LINKER_FLAGS_INIT;CMAKE_STATIC_LINKER_FLAGS_MINSIZEREL;CMAKE_STATIC_LINKER_FLAGS_RELEASE;CMAKE_STATIC_LINKER_FLAGS_RELWITHDEBINFO;CMAKE_SUPPORT_WINDOWS_EXPORT_ALL_SYMBOLS;CMAKE_SUPPRESS_REGENERATION;CMAKE_SYSTEM;CMAKE_SYSTEM_AND_RC_COMPILER_INFO_FILE;CMAKE_SYSTEM_INFO_FILE;CMAKE_SYSTEM_LIBRARY_PATH;CMAKE_SYSTEM_LOADED;CMAKE_SYSTEM_NAME;CMAKE_SYSTEM_PREFIX_PATH;CMAKE_SYSTEM_PROCESSOR;CMAKE_SYSTEM_SPECIFIC_INFORMATION_LOADED;CMAKE_SYSTEM_SPECIFIC_INITIALIZE_LOADED;CMAKE_SYSTEM_VERSION;CMAKE_TWEAK_VERSION;CMAKE_VERBOSE_MAKEFILE;CMAKE_VERSION;CMAKE_VERSION;CMAKE_VS_DEVENV_COMMAND;CMAKE_VS_INTEL_Fortran_PROJECT_VERSION;CMAKE_VS_MSBUILD_COMMAND;CMAKE_VS_PLATFORM_NAME;CMAKE_VS_PLATFORM_NAME_DEFAULT;CMAKE_VS_PLATFORM_TOOLSET;CMAKE_VS_PLATFORM_TOOLSET_HOST_ARCHITECTURE;CMAKE_VS_WINDOWS_TARGET_PLATFORM_VERSION;CODEMIRROR;CODEMIRROR_BRANCH;CODEMIRROR_FOLDER;CODEMIRROR_NAME;COMPILE_CMAKE;CONTENT;CONTENT_BRANCH;CONTENT_DL;CONTENT_FOLDER;CONTENT_NAME;CPP-SUBPROCESS;CPP-SUBPROCESS_BRANCH;CPP-SUBPROCESS_DL;CPP-SUBPROCESS_FOLDER;CPP-SUBPROCESS_NAME;CRYPTOPP;CRYPTOPP_BRANCH;CRYPTOPP_DL;CRYPTOPP_FOLDER;CRYPTOPP_NAME;CURL;CURL_BRANCH;CURL_DL;CURL_FOLDER;CURL_NAME;CURRENT_DIR;ColourBold;DEBUG;DEBUG_DIR;DEBUG_FLAGS;DEBUG_LIBS;DEBUG_LINK_FLAGS;DIFF-MATCH-PATCH;DIFF-MATCH-PATCH_BRANCH;DIFF-MATCH-PATCH_FOLDER;DIFF-MATCH-PATCH_NAME;DIGITALKNOB;DK;DKAPP;DKAdmin;DKAdmin_all;DKArchive;DKArchive_BINARY_DIR;DKArchive_IS_TOP_LEVEL;DKArchive_SOURCE_DIR;DKArchive_all;DKAssets;DKAssets_BINARY_DIR;DKAssets_IS_TOP_LEVEL;DKAssets_SOURCE_DIR;DKAssets_all;DKAudio;DKAudio_BINARY_DIR;DKAudio_IS_TOP_LEVEL;DKAudio_SOURCE_DIR;DKAudio_all;DKBuild;DKBuild_all;DKCEF;DKCMAKE;DKCMAKE;DKCMAKELIST_INCLUDED;DKCMAKE_BUILD;DKCMAKE_CXX_COMPILER;DKCMAKE_CXX_FLAGS;DKCMAKE_CXX_FLAGS_DEBUG;DKCMAKE_CXX_FLAGS_RELEASE;DKCMAKE_C_COMPILER;DKCMAKE_C_FLAGS;DKCMAKE_C_FLAGS_DEBUG;DKCMAKE_C_FLAGS_RELEASE;DKCMAKE_FLAGS;DKCONFIGURE_BUILD;DKCONFIGURE_CC;DKCONFIGURE_CFLAGS;DKCONFIGURE_CFLAGS_DEBUG;DKCONFIGURE_CFLAGS_RELEASE;DKCONFIGURE_CXX;DKCONFIGURE_CXXFLAGS;DKCONFIGURE_CXXFLAGS_DEBUG;DKCONFIGURE_CXXFLAGS_RELEASE;DKCONFIGURE_FLAGS;DKCef;DKCefChild;DKCefChild_BINARY_DIR;DKCefChild_IS_TOP_LEVEL;DKCefChild_SOURCE_DIR;DKCefChild_all;DKCef_BINARY_DIR;DKCef_IS_TOP_LEVEL;DKCef_SOURCE_DIR;DKCef_all;DKChart;DKChart_all;DKCodeMirror;DKCodeMirror_all;DKCodeRunner;DKColorPicker;DKCrypto;DKCrypto_BINARY_DIR;DKCrypto_IS_TOP_LEVEL;DKCrypto_SOURCE_DIR;DKCrypto_all;DKCurl;DKCurl_BINARY_DIR;DKCurl_IS_TOP_LEVEL;DKCurl_SOURCE_DIR;DKCurl_all;DKDEBUG_ENABLED;DKDEFINES_LIST;DKDOWNLOAD;DKDebug;DKDebug_BINARY_DIR;DKDebug_IS_TOP_LEVEL;DKDebug_SOURCE_DIR;DKDebug_all;DKDevTools;DKDisplay;DKDom;DKDom_BINARY_DIR;DKDom_IS_TOP_LEVEL;DKDom_SOURCE_DIR;DKDom_all;DKDuktape;DKDuktapeDom;DKDuktapeDom_BINARY_DIR;DKDuktapeDom_IS_TOP_LEVEL;DKDuktapeDom_SOURCE_DIR;DKDuktapeDom_all;DKDuktape_BINARY_DIR;DKDuktape_IS_TOP_LEVEL;DKDuktape_SOURCE_DIR;DKDuktape_all;DKEditor;DKEditor_all;DKEmscripten;DKEmscripten_all;DKFile;DKFile_BINARY_DIR;DKFile_IS_TOP_LEVEL;DKFile_SOURCE_DIR;DKFile_all;DKFmt;DKFpsTest;DKGit;DKGui;DKHandles;DKHandles_BINARY_DIR;DKHandles_IS_TOP_LEVEL;DKHandles_SOURCE_DIR;DKHandles_all;DKHook;DKHook_BINARY_DIR;DKHook_IS_TOP_LEVEL;DKHook_SOURCE_DIR;DKHook_all;DKIMPORTS;DKINCLUDES_LIST;DKImageMagick;DKImageMagick_BINARY_DIR;DKImageMagick_IS_TOP_LEVEL;DKImageMagick_SOURCE_DIR;DKImageMagick_all;DKInputTest;DKJerryscript;DKLINKDIRS_LIST;DKLoading;DKLogin;DKMidi;DKMidi_BINARY_DIR;DKMidi_IS_TOP_LEVEL;DKMidi_SOURCE_DIR;DKMidi_all;DKMySql;DKMySql_BINARY_DIR;DKMySql_IS_TOP_LEVEL;DKMySql_SOURCE_DIR;DKMySql_all;DKNotepad;DKOFWindow;DKOS;DKOcr;DKPLUGINS;DKPLUGIN_LIST;DKPLUGIN_LIST_lower;DKPROJECT;DKPaint;DKPhp;DKPhp_all;DKPlugin1;DKPlugin2;DKRestart;DKRml;DKRmlElement;DKRmlElement_BINARY_DIR;DKRmlElement_IS_TOP_LEVEL;DKRmlElement_SOURCE_DIR;DKRmlElement_all;DKRmlIframe;DKRmlIframe_BINARY_DIR;DKRmlIframe_IS_TOP_LEVEL;DKRmlIframe_SOURCE_DIR;DKRmlIframe_all;DKRmlVideo;DKRmlVideo_all;DKRml_BINARY_DIR;DKRml_IS_TOP_LEVEL;DKRml_SOURCE_DIR;DKRml_all;DKSDLAudio;DKSDLCef;DKSDLCef_BINARY_DIR;DKSDLCef_IS_TOP_LEVEL;DKSDLCef_SOURCE_DIR;DKSDLCef_all;DKSDLMetalRml;DKSDLMetalRml_all;DKSDLMetalWindow;DKSDLMetalWindow_BINARY_DIR;DKSDLMetalWindow_IS_TOP_LEVEL;DKSDLMetalWindow_SOURCE_DIR;DKSDLMetalWindow_all;DKSDLRml;DKSDLRml_BINARY_DIR;DKSDLRml_IS_TOP_LEVEL;DKSDLRml_SOURCE_DIR;DKSDLRml_all;DKSDLText;DKSDLText_BINARY_DIR;DKSDLText_IS_TOP_LEVEL;DKSDLText_SOURCE_DIR;DKSDLText_all;DKSDLVideo;DKSDLWav;DKSDLWindow;DKSDLWindow_BINARY_DIR;DKSDLWindow_IS_TOP_LEVEL;DKSDLWindow_SOURCE_DIR;DKSDLWindow_all;DKSFMLRml;DKSFMLWindow;DKSFMLWindow_BINARY_DIR;DKSFMLWindow_IS_TOP_LEVEL;DKSFMLWindow_SOURCE_DIR;DKSFMLWindow_all;DKScreenRecorder;DKStats;DKSvn;DKTestAll_BINARY_DIR;DKTestAll_DESCRIPTION;DKTestAll_HOMEPAGE_URL;DKTestAll_IS_TOP_LEVEL;DKTestAll_SOURCE_DIR;DKThread;DKTooltip;DKTorrent;DKTray;DKTray_BINARY_DIR;DKTray_IS_TOP_LEVEL;DKTray_SOURCE_DIR;DKTray_all;DKTriggers;DKTriggers_all;DKUpdate;DKVideo;DKVideo_BINARY_DIR;DKVideo_IS_TOP_LEVEL;DKVideo_SOURCE_DIR;DKVideo_all;DKVncClient;DKVncServer;DKWEB;DKWebSockets;DKWebTest;DKWebview;DKWebview_all;DKWidget;DKWidget_all;DKWindow;DKWindow_BINARY_DIR;DKWindow_IS_TOP_LEVEL;DKWindow_SOURCE_DIR;DKWindow_all;DKXml;DKXml_BINARY_DIR;DKXml_IS_TOP_LEVEL;DKXml_SOURCE_DIR;DKXml_all;DK_BINARY_DIR;DK_IS_TOP_LEVEL;DK_SOURCE_DIR;DK_all;DOXYGEN;DOXYGEN_BUILD;DOXYGEN_DL;DOXYGEN_EXE;DOXYGEN_MAJOR;DOXYGEN_MINOR;DOXYGEN_NAME;DOXYGEN_VERSION;DUKLUV;DUKLUV_BRANCH;DUKLUV_DL;DUKLUV_FOLDER;DUKLUV_NAME;DUKTAPE;DUKTAPE_BRANCH;DUKTAPE_FOLDER;DUKTAPE_NAME;DUMPBIN;DigitalKnob_BINARY_DIR;DigitalKnob_DESCRIPTION;DigitalKnob_HOMEPAGE_URL;DigitalKnob_IS_TOP_LEVEL;DigitalKnob_SOURCE_DIR;ENABLE_DKDEBUGFUNC;ESC;ESC_0;ESC_1;ESC_10;ESC_2;ESC_3;ESC_4;ESC_5;ESC_6;ESC_7;ESC_8;ESC_9;FAR;FAR_DL;FAR_NAME;FAR_VERSION;FLAC;FLAC_CMAKE;FLAC_DL;FLAC_NAME;FLAC_VERSION;FREETYPE;FREETYPE_BUILD;FREETYPE_CMAKE;FREETYPE_DL;FREETYPE_MAJOR;FREETYPE_MINOR;FREETYPE_NAME;FREETYPE_VERSION;GHOSTSCRIPT;GHOSTSCRIPT_DL;GHOSTSCRIPT_MAJOR;GHOSTSCRIPT_MINOR;GHOSTSCRIPT_NAME;GHOSTSCRIPT_VERSION;GIFLIB;GIFLIB_BRANCH;GIFLIB_CMAKE;GIFLIB_FOLDER;GIFLIB_NAME;GIT;GIT_DL;GIT_EXE;GIT_NAME;GIT_VERSION;GLEW;GLEW_BRANCH;GLEW_DL;GLEW_FOLDER;GLEW_NAME;GLINTERCEPT;GLINTERCEPT_BRANCH;GLINTERCEPT_FOLDER;GLINTERCEPT_NAME;HAVE_DK;HAVE_DKAdmin;HAVE_DKArchive;HAVE_DKAssets;HAVE_DKAudio;HAVE_DKBuild;HAVE_DKCef;HAVE_DKCefChild;HAVE_DKChart;HAVE_DKCodeMirror;HAVE_DKCodeRunner;HAVE_DKColorPicker;HAVE_DKCrypto;HAVE_DKCurl;HAVE_DKDebug;HAVE_DKDevTools;HAVE_DKDisplay;HAVE_DKDom;HAVE_DKDuktape;HAVE_DKDuktapeDom;HAVE_DKEditor;HAVE_DKEmscripten;HAVE_DKFile;HAVE_DKFmt;HAVE_DKFpsTest;HAVE_DKGit;HAVE_DKGui;HAVE_DKHandles;HAVE_DKHook;HAVE_DKImageMagick;HAVE_DKInputTest;HAVE_DKJerryscript;HAVE_DKLoading;HAVE_DKLogin;HAVE_DKMidi;HAVE_DKMySql;HAVE_DKNotepad;HAVE_DKOFWindow;HAVE_DKOS;HAVE_DKOcr;HAVE_DKPaint;HAVE_DKPhp;HAVE_DKPlugin1;HAVE_DKPlugin2;HAVE_DKRestart;HAVE_DKRml;HAVE_DKRmlElement;HAVE_DKRmlIframe;HAVE_DKRmlVideo;HAVE_DKSDLAudio;HAVE_DKSDLCef;HAVE_DKSDLMetalRml;HAVE_DKSDLMetalWindow;HAVE_DKSDLRml;HAVE_DKSDLText;HAVE_DKSDLVideo;HAVE_DKSDLWav;HAVE_DKSDLWindow;HAVE_DKSFMLRml;HAVE_DKSFMLWindow;HAVE_DKScreenRecorder;HAVE_DKStats;HAVE_DKSvn;HAVE_DKThread;HAVE_DKTooltip;HAVE_DKTorrent;HAVE_DKTray;HAVE_DKTriggers;HAVE_DKUpdate;HAVE_DKVideo;HAVE_DKVncClient;HAVE_DKVncServer;HAVE_DKWebSockets;HAVE_DKWebTest;HAVE_DKWebview;HAVE_DKWidget;HAVE_DKWindow;HAVE_DKXml;HAVE_HAVE_DKCef;HAVE__TEMPLATE-APP_;HAVE__TEMPLATE-LIB_;HAVE_agl;HAVE_android-build-tools;HAVE_android-cmake;HAVE_android-cmdline-tools;HAVE_android-java-tools;HAVE_android-ndk;HAVE_android-platform-tools;HAVE_android-platforms;HAVE_android-sdk;HAVE_android-sdk-tools;HAVE_android-sources;HAVE_android-studio;HAVE_android-system-images;HAVE_ant;HAVE_appkit;HAVE_astyle;HAVE_audio_toolbox;HAVE_audiounit;HAVE_autotools;HAVE_av_foundation;HAVE_av_kit;HAVE_avf_audio;HAVE_babel;HAVE_boost;HAVE_boxer;HAVE_build-essential;HAVE_bullet3;HAVE_bzip2;HAVE_bzip2-win-build;HAVE_carbon;HAVE_cef_binary;HAVE_chart.js;HAVE_cmake;HAVE_cocoa;HAVE_codemirror;HAVE_command_line_tools;HAVE_conio-for-linux;HAVE_content;HAVE_core_audio;HAVE_core_foundation;HAVE_core_graphics;HAVE_core_haptics;HAVE_core_motion;HAVE_core_services;HAVE_core_video;HAVE_cpp-subprocess;HAVE_crosswalk;HAVE_cryptopp;HAVE_curl;HAVE_diff-match-patch;HAVE_dl;HAVE_doxygen;HAVE_dukluv;HAVE_duktape;HAVE_emsdk;HAVE_emsdk-portable;HAVE_far;HAVE_ffmpeg-dev;HAVE_ffmpeg-shared;HAVE_ffmpeg-static;HAVE_flac;HAVE_fmt;HAVE_force_feedback;HAVE_foundation;HAVE_freealut;HAVE_freealut-master;HAVE_freetype;HAVE_game_controller;HAVE_ghostscript;HAVE_giflib;HAVE_git;HAVE_gl_kit;HAVE_glew;HAVE_glintercept;HAVE_gradle;HAVE_homebrew;HAVE_ilmerge;HAVE_imageio;HAVE_imagemagick;HAVE_iokit;HAVE_ios-cmake;HAVE_java;HAVE_jdk;HAVE_jdk11;HAVE_jdk8;HAVE_jdk9;HAVE_jerryscript;HAVE_jpeg;HAVE_js-yaml;HAVE_json;HAVE_kdevelop;HAVE_leptonica;HAVE_libarchive;HAVE_libasound2-dev;HAVE_libcaca;HAVE_libexpat;HAVE_libgcc;HAVE_libgl1-mesa-dev;HAVE_libglfw3-dev;HAVE_libglib2.0-dev;HAVE_libglu1-mesa-dev;HAVE_libgtk2.0-dev;HAVE_libgtkglext1-dev;HAVE_libiconv;HAVE_libjpeg-turbo;HAVE_libmd;HAVE_libpng;HAVE_librocket;HAVE_libsndfile1-dev;HAVE_libsystemd-dev;HAVE_libtorrent;HAVE_libudev-dev;HAVE_libusb;HAVE_libuv;HAVE_libvncserver;HAVE_libvncserver-master-win;HAVE_libwebp;HAVE_libwebsockets;HAVE_libx11;HAVE_libx11-dev;HAVE_libxcursor-dev;HAVE_libxml2;HAVE_libxrandr-dev;HAVE_libxtst-dev;HAVE_lighttpd;HAVE_lodepng;HAVE_lua;HAVE_macports;HAVE_media_player;HAVE_mesa-common-dev;HAVE_metal;HAVE_metal-cpp;HAVE_metalKit;HAVE_mingw32;HAVE_mingw64;HAVE_miniweb;HAVE_mlocate;HAVE_mobile_core_services;HAVE_moment;HAVE_msinttypes;HAVE_msys;HAVE_msys2;HAVE_nasm;HAVE_ncurses;HAVE_nodejs;HAVE_notepadpp;HAVE_ogg;HAVE_openal;HAVE_openal-android;HAVE_opencv;HAVE_openframeworks;HAVE_opengl;HAVE_opengles;HAVE_openscenegraph;HAVE_opensles;HAVE_openssl;HAVE_openssl_binary;HAVE_osgaudio;HAVE_osgbullet;HAVE_osgrmlui;HAVE_osgworks;HAVE_pako;HAVE_php;HAVE_php_binary;HAVE_podofo;HAVE_pugixml;HAVE_python;HAVE_quartz_core;HAVE_rlottie;HAVE_rmlui;HAVE_rmlui-d3d11;HAVE_rmluieditor;HAVE_rocketship;HAVE_rtmidi;HAVE_sdl;HAVE_sdl-gpu;HAVE_sdl2_gif;HAVE_sdl2_giflib_sa;HAVE_sdl_image;HAVE_sdl_mixer;HAVE_sdl_ttf;HAVE_sfml;HAVE_shlwapi.lib;HAVE_simple-getch;HAVE_smpeg2;HAVE_stackwalker;HAVE_sun-js;HAVE_terminator;HAVE_tesseract;HAVE_threadpool;HAVE_tidy-html5;HAVE_tiff;HAVE_uikit;HAVE_upx;HAVE_uwebsockets;HAVE_vc_redist;HAVE_vcpkg;HAVE_verysleepy;HAVE_visualstudio;HAVE_vorbis;HAVE_waave;HAVE_winmm.lib;HAVE_ws2_32.lib;HAVE_xcode;HAVE_xquartz;HAVE_xz;HAVE_zlib;HAVE_zstd;HBG_black;HBG_blue;HBG_cyan;HBG_green;HBG_magenta;HBG_red;HBG_white;HBG_yellow;HB_black;HB_blue;HB_cyan;HB_green;HB_magenta;HB_red;HB_white;HB_yellow;H_black;H_blue;H_cyan;H_green;H_magenta;H_red;H_white;H_yellow;ILMERGE;ILMERGE_BRANCH;ILMERGE_FOLDER;ILMERGE_NAME;IMAGEMAGICK;IMAGEMAGICK_CONVERT;IMAGEMAGICK_DL;IMAGEMAGICK_NAME;IMAGEMAGICK_VERSION;INSTALL_DKLIBS;IOS-CMAKE;IOS-CMAKE_BRANCH;IOS-CMAKE_FOLDER;IOS-CMAKE_NAME;IOSSIM_SYSROOT;IOS_DARWIN;IOS_MIN_SDK;IOS_SYSROOT;JDK;JDK11;JDK11_DL;JDK11_NAME;JDK11_VERSION;JDK8;JDK8_DL;JDK8_NAME;JDK8_VERSION;JDK9;JDK9_DL;JDK9_NAME;JDK9_VERSION;JDK_DL;JDK_NAME;JDK_VERSION;JS-YAML;JS-YAML_BRANCH;JS-YAML_DL;JS-YAML_FOLDER;JS-YAML_NAME;JSON;JSON_BRANCH;JSON_DL;JSON_FOLDER;JSON_NAME;LIBARCHIVE;LIBARCHIVE_BRANCH;LIBARCHIVE_DL;LIBARCHIVE_FOLDER;LIBARCHIVE_NAME;LIBEXPAT;LIBEXPAT_BRANCH;LIBEXPAT_DL;LIBEXPAT_FOLDER;LIBEXPAT_NAME;LIBGCC;LIBGCC_CMAKE;LIBGCC_NAME;LIBICONV;LIBICONV_CMAKE;LIBICONV_DL;LIBICONV_NAME;LIBICONV_VERSION;LIBJPEG-TURBO;LIBJPEG-TURBO_CMAKE;LIBJPEG-TURBO_DL;LIBJPEG-TURBO_NAME;LIBJPEG-TURBO_VERSION;LIBLIST;LIBPNG;LIBPNG_BRANCH;LIBPNG_BUILD;LIBPNG_CMAKE;LIBPNG_DL;LIBPNG_FOLDER;LIBPNG_MAJOR;LIBPNG_MINOR;LIBPNG_NAME;LIBS;LIBUSB;LIBUSB_BRANCH;LIBUSB_DL;LIBUSB_FOLDER;LIBUSB_NAME;LIBUV;LIBUV_BRANCH;LIBUV_CMAKE;LIBUV_DL;LIBUV_FOLDER;LIBUV_NAME;LIBVAR;LIBXML2;LIBXML2_BRANCH;LIBXML2_CMAKE;LIBXML2_DL;LIBXML2_FOLDER;LIBXML2_NAME;LINUX_GCC;LINUX_GXX;LODEPNG;LODEPNG_BRANCH;LODEPNG_FOLDER;LODEPNG_NAME;MACPORTS_DL;MACPORTS_NAME;MACPORTS_VERSION;MINGW32;MINGW32_DL;MINGW32_GCC;MINGW32_GXX;MINGW32_NAME;MINGW32_VERSION;MINGW64;MINGW64_DL;MINGW64_GCC;MINGW64_GXX;MINGW64_NAME;MINGW64_VERSION;MOMENT;MOMENT_BRANCH;MOMENT_DL;MOMENT_FOLDER;MOMENT_NAME;MSBUILD;MSINTTYPES;MSINTTYPES_DL;MSINTTYPES_NAME;MSINTTYPES_VERSION;MSVC;MSVC14;MSVC_CL;MSVC_CXX_ARCHITECTURE_ID;MSVC_C_ARCHITECTURE_ID;MSVC_IDE;MSVC_INCREMENTAL_DEFAULT;MSVC_INCREMENTAL_YES_FLAG;MSVC_TOOLSET_VERSION;MSVC_VERSION;MSYS;MSYS_DL;MSYS_NAME;MSYS_VERSION;NASM;NASM_DL;NASM_EXE;NASM_NAME;NASM_VERSION;NODEJS;NODEJS_DL;NODEJS_NAME;NODEJS_VERSION;NODE_EXE;OGG;OGG_CMAKE;OGG_CONFIGURE;OGG_DL;OGG_NAME;OGG_VERSION;OPENSSL;OPENSSL_BINARY;OPENSSL_BINARY_DL;OPENSSL_BINARY_EXE;OPENSSL_BINARY_NAME;OPENSSL_BINARY_VERSION;OPENSSL_CMAKE;OPENSSL_DL;OPENSSL_NAME;OPENSSL_VERSION;OS;OSGRMLUI;OSGRMLUI_BRANCH;OSGRMLUI_FOLDER;OSGRMLUI_NAME;PAKO;PAKO_BRANCH;PAKO_FOLDER;PAKO_NAME;PHP_BINARY;PHP_BINARY_BRANCH;PHP_BINARY_DL;PHP_BINARY_FOLDER;PHP_BINARY_NAME;PLUGINS_FILE;PLUGINS_FILE;PNG_VCPROJ;PREBUILD;PREBUILD;PRESET_CMAKE_SYSTEM_NAME;PRINT_CALL_DETAILS;PRINT_FILE_NAMES;PRINT_FUNCTION_;PRINT_FUNCTION_NAMES;PRINT_LINE_NUMBERS;PROJECT_BINARY_DIR;PROJECT_DESCRIPTION;PROJECT_HOMEPAGE_URL;PROJECT_IS_TOP_LEVEL;PROJECT_NAME;PROJECT_SOURCE_DIR;PUGIXML;PUGIXML_BRANCH;PUGIXML_DL;PUGIXML_FOLDER;PUGIXML_NAME;PYTHON;PYTHON_DL;PYTHON_EXE;PYTHON_NAME;PYTHON_VERSION;QUEUE_BUILD;REBUILD;REBUILDALL;RELEASE;RELEASE_DIR;RELEASE_FLAGS;RELEASE_LIBS;RELEASE_LINK_FLAGS;RLOTTIE;RLOTTIE_BRANCH;RLOTTIE_FOLDER;RLOTTIE_NAME;RMLUI;RMLUI-D3D11;RMLUI-D3D11_BRANCH;RMLUI-D3D11_FOLDER;RMLUI-D3D11_NAME;RMLUIEDITOR;RMLUIEDITOR_BRANCH;RMLUIEDITOR_FOLDER;RMLUIEDITOR_NAME;RMLUI_BRANCH;RMLUI_FOLDER;RMLUI_NAME;ROCKETSHIP;ROCKETSHIP_BRANCH;ROCKETSHIP_FOLDER;ROCKETSHIP_NAME;RTMIDI;RTMIDI_DL;RTMIDI_NAME;RTMIDI_SLN;RTMIDI_TARGET;RTMIDI_VERSION;RUN_CONFIGURE;SDKMANAGER_EXE;SDL;SDL-GPU;SDL-GPU_BRANCH;SDL-GPU_FOLDER;SDL-GPU_NAME;SDLMAIN_CMAKE;SDL_BRANCH;SDL_CMAKE;SDL_FOLDER;SDL_IMAGE;SDL_IMAGE_BRANCH;SDL_IMAGE_CMAKE;SDL_IMAGE_FOLDER;SDL_IMAGE_NAME;SDL_MIXER;SDL_MIXER_DL;SDL_MIXER_NAME;SDL_MIXER_VERSION;SDL_NAME;SDL_TTF;SDL_TTF_BRANCH;SDL_TTF_FOLDER;SDL_TTF_NAME;SET_MSVC_CXX_ARCHITECTURE_ID;SET_MSVC_C_ARCHITECTURE_ID;SFML;SFML_BRANCH;SFML_CMAKE;SFML_DL;SFML_FOLDER;SFML_NAME;SHARED;SMPEG2;SMPEG2_CMAKE;SMPEG2_DL;SMPEG2_NAME;SMPEG2_VERSION;STACKWALKER;STACKWALKER_DL;STACKWALKER_NAME;STACKWALKER_VERSION;STACK_FILENAME;STACK_HEADER;STATIC;SUN-JS;SUN-JS_BRANCH;SUN-JS_FOLDER;SUN-JS_NAME;THREADPOOL;THREADPOOL_DL;THREADPOOL_VERSION;TIDY-HTML5;TIDY-HTML5_BRANCH;TIDY-HTML5_FOLDER;TIDY-HTML5_NAME;UPX;UPX_DL;UPX_EXE;UPX_NAME;UPX_VERSION;U_black;U_blue;U_cyan;U_green;U_magenta;U_red;U_white;U_yellow;VCPKG;VCPKG_NAME;VC_REDIST;VC_REDIST_DL;VC_REDIST_NAME;VC_REDIST_PLATFORM;VC_REDIST_VERSION;VERYSLEEPY;VERYSLEEPY_DL;VERYSLEEPY_EXE;VERYSLEEPY_NAME;VERYSLEEPY_VERSION;VISUALSTUDIO;VISUALSTUDIO_BUILD;VISUALSTUDIO_DL;VISUALSTUDIO_PROGRAM_FILES;VISUALSTUDIO_VERSION;VORBIS;VORBIS_CMAKE;VORBIS_DL;VORBIS_NAME;VORBIS_VERSION;VS_GENERATOR;WARNINGS_AS_ERRORS;WARNING_4244;WARNING_5105;WARNING_LEVEL;WIN;WIN32;WIN_32;WIN_HOST;XCODE_CLANG;XCODE_CLANGXX;XCODE_DEVROOT;XCODE_LIBTOOL;XZ;XZ_BRANCH;XZ_CMAKE;XZ_DL;XZ_FOLDER;XZ_NAME;ZLIB;ZLIB_BRANCH;ZLIB_CMAKE;ZLIB_FOLDER;ZLIB_NAME;ZSTD;ZSTD_BRANCH;ZSTD_DL;ZSTD_FOLDER;ZSTD_NAME;_CMAKE_CXX_IPO_MAY_BE_SUPPORTED_BY_COMPILER;_CMAKE_CXX_IPO_SUPPORTED_BY_CMAKE;_CMAKE_C_IPO_MAY_BE_SUPPORTED_BY_COMPILER;_CMAKE_C_IPO_SUPPORTED_BY_CMAKE;_CMAKE_INSTALL_DIR;_CMAKE_RC_COMPILER_NAME_WE;_CMAKE_TOOLCHAIN_LOCATION;_CMAKE_VS_LINK_DLL;_CMAKE_VS_LINK_EXE;_COMPILE_CXX;_FLAGS_CXX;_FS_C;_FS_CXX;_INCLUDED_FILE;_INCLUDED_SYSTEM_INFO_FILE;_MSVC_CXX_ARCHITECTURE_FAMILY;_MSVC_C_ARCHITECTURE_FAMILY;_PLATFORM_DEFINES;_PLATFORM_LINK_FLAGS;_RTC1;_SET_CMAKE_CXX_COMPILER_ARCHITECTURE_ID;_SET_CMAKE_CXX_COMPILER_SYSROOT;_SET_CMAKE_C_COMPILER_ARCHITECTURE_ID;_SET_CMAKE_C_COMPILER_SYSROOT;_TEMPLATE-APP_;_TEMPLATE-LIB_;__COMPILER_CMAKE_COMMON_COMPILER_MACROS;__INCGUARD_2879baac9414af69cd9b3d9455b1b4e9__;__INCGUARD_43a00cd6eae0b772ce0a789147df34a0__;__INCGUARD_b766bf0c5038e06e08ff4be9bd1e6a58__;__INCGUARD_bb872b2227d4904aa4f88072704b1beb__;__INCGUARD_cc173f1b214bb0e2b67ba46aa13cedcb__;__INCGUARD_cd14acda42ad050c118745306aa05724__;__INCGUARD_de3932faa10eca398dd321e2ffc64830__;__INCGUARD_f5bc78645402f1b3541a76740d198208__;__WINDOWS_MSVC;__WINDOWS_PATHS_INCLUDED;_compiler_version;agl;agl_all;android-build-tools;android-build-tools_all;android-cmake;android-cmake_all;android-cmdline-tools;android-cmdline-tools_all;android-java-tools;android-ndk;android-ndk_all;android-platform-tools;android-platform-tools_all;android-platforms;android-platforms_all;android-sdk;android-sdk-tools;android-sdk-tools_all;android-sdk_all;android-sources;android-sources_all;android-studio;android-studio_all;android-system-images;android-system-images_all;ant;ant_all;appkit;appkit_all;astyle;audio_toolbox;audio_toolbox_all;audiounit;audiounit_all;autotools;autotools_all;av_foundation;av_foundation_all;av_kit;av_kit_all;avf_audio;avf_audio_all;babel;babel_all;black;blue;boost;boost_all;boost_atomic;boost_chrono;boost_container;boost_context;boost_contract;boost_coroutine;boost_date_time;boost_exception;boost_fiber;boost_fiber_nolib;boost_filesystem;boost_graph;boost_graph_parallel;boost_graph_parallel_nolib;boost_headers;boost_headers_nolib;boost_iostreams;boost_json;boost_locale;boost_log;boost_math;boost_math_nolib;boost_mpi;boost_mpi_nolib;boost_nowide;boost_program_options;boost_python;boost_python_nolib;boost_random;boost_regex;boost_serialization;boost_stacktrace;boost_stacktrace_nolib;boost_system;boost_targets;boost_test;boost_test_nolib;boost_thread;boost_timer;boost_type_erasure;boost_wave;boxer;boxer_all;build-essential;bullet3;bullet3_all;bzip2;bzip2-win-build;bzip2-win-build_all;bzip2_all;carbon;carbon_all;cef_binary;cef_binary_all;chart.js;chart.js_all;cmake;cmake_all;cocoa;cocoa_all;codemirror;codemirror_all;command_line_tools;conio-for-linux;content;core_audio;core_audio_all;core_foundation;core_foundation_all;core_graphics;core_graphics_all;core_haptics;core_haptics_all;core_motion;core_motion_all;core_services;core_services_all;core_video;core_video_all;cpp-subprocess;crosswalk;crosswalk_all;cryptopp;cryptopp_all;curl;curl_all;cyan;d;day;diff-match-patch;diff-match-patch_all;dir;dkdepend_disable_list;dkdepend_list;dkdepend_list;dl;dl_all;doxygen;doxygen_all;dukluv;duktape;duktape_all;emsdk;emsdk-portable;extension;far;far_all;ffmpeg-dev;ffmpeg-shared;ffmpeg-static;fixed_flags;flac;flac_all;fmt;force_feedback;force_feedback_all;foundation;foundation_all;freealut;freealut-master;freetype;freetype_all;game_controller;game_controller_all;ghostscript;ghostscript_all;giflib;giflib_all;git;git_all;gl_kit;gl_kit_all;glew;glew_all;glintercept;glintercept_all;gradle;green;homebrew;homebrew_all;ilmerge;ilmerge_all;imageio;imageio_all;imagemagick;imagemagick_all;index;iokit;iokit_all;ios-cmake;ios-cmake_all;isDKPlugin;java;jdk;jdk11;jdk11_all;jdk8;jdk8_all;jdk9;jdk9_all;jdk_all;jerryscript;jpeg;js-yaml;js-yaml_all;json;json_all;kdevelop;lang;leptonica;lib;libarchive;libarchive_all;libasound2-dev;libcaca;libcefD;libcefR;libcef_dll_wrapperD;libcef_dll_wrapperR;libexpat;libgcc;libgcc_all;libgl1-mesa-dev;libglfw3-dev;libglfw3-dev_all;libglib2.0-dev;libglu1-mesa-dev;libgtk2.0-dev;libgtkglext1-dev;libgtkglext1-dev_all;libiconv;libiconv_all;libjpeg-turbo;libjpeg-turbo_all;libmd;libmd_all;libpng;libpng_all;librocket;libsndfile1-dev;libsystemd-dev;libtorrent;libudev-dev;libusb;libuv;libuv_all;libvncserver;libvncserver-master-win;libwebp;libwebsockets;libx11;libx11-dev;libxcursor-dev;libxml2;libxml2_all;libxrandr-dev;libxtst-dev;lighttpd;lodepng;lua;macports;macports_all;magenta;media_player;media_player_all;mesa-common-dev;metal;metal-cpp;metal-cpp_all;metalKit;metalKit_all;metal_all;mingw32;mingw32_all;mingw64;mingw64_all;miniweb;mlocate;mlocate_all;mobile_core_services;mobile_core_services_all;moment;moment_all;month;msinttypes;msinttypes_all;msys;msys2;msys_all;nasm;nasm_all;ncurses;ncurses_all;nodejs;nodejs_all;notepadpp;ogg;ogg_all;openal;openal-android;opencv;openframeworks;opengl;opengl_all;opengles;opengles_all;openscenegraph;opensles;openssl;openssl_all;openssl_binary;openssl_binary_all;osgaudio;osgbullet;osgrmlui;osgworks;pako;php;php_all;php_binary;php_binary_all;plugin;plugin_lower;plugin_path;podofo;pugixml;pugixml_all;python;python_all;quartz_core;quartz_core_all;red;resources_SRC;rlottie;rlottie_all;rmlui;rmlui-d3d11;rmlui_RmlCore;rmlui_RmlDebugger;rmlui_all;rmlui_targets;rmluieditor;rocketship;rtmidi;rtmidi_all;sdl;sdl-gpu;sdl-gpu_all;sdl2_gif;sdl2_giflib_sa;sdl_all;sdl_image;sdl_image_all;sdl_mixer;sdl_mixer_all;sdl_ttf;sdl_ttf_all;sfml;sfml_all;sfml_sfml-audio;sfml_sfml-graphics;sfml_sfml-main;sfml_sfml-network;sfml_sfml-system;sfml_sfml-window;sfml_targets;shlwapi.lib;shlwapi.lib_all;simple-getch;smpeg2;smpeg2_all;src;stackwalker;stackwalker_all;sun-js;t;terminator;terminator_all;tesseract;threadpool;threadpool_all;tidy-html5;tidy-html5_all;tiff;type;uikit;uikit_all;upx;upx_all;uwebsockets;v;var;vars;vc_redist;vc_redist_all;vcpkg;vcpkg_all;verysleepy;verysleepy_all;visualstudio;visualstudio_all;vorbis;vorbis_all;waave;white;winmm.lib;winmm.lib_all;ws2_32.lib;ws2_32.lib_all;xcode;xcode_all;xquartz;xquartz_all;xz;xz_all;year;yellow;zlib;zlib_all;zstd
 vc_redist ==           ON
 vc_redist_all ==           1
+vcpkg ==           ON
+vcpkg_all ==           1
+verysleepy ==           ON
+verysleepy_all ==           1
 visualstudio ==           ON
 visualstudio_all ==           1
+vorbis ==           ON
+vorbis_all ==           1
 waave ==           
 white ==           [37m
 winmm.lib ==           ON
 winmm.lib_all ==           1
 ws2_32.lib ==           ON
 ws2_32.lib_all ==           1
+xcode ==           ON
+xcode_all ==           1
+xquartz ==           ON
+xquartz_all ==           1
 xz ==           ON
 xz_all ==           1
 year ==           22
 yellow ==           [33m
 zlib ==           ON
 zlib_all ==           1
+zstd ==           ON
