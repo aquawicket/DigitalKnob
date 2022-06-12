@@ -28,7 +28,6 @@ include_guard()
 
 
 ### DKVARIABLES ##################################################################
-#
 if(CMAKE_HOST_WIN32)
 	set(WIN_HOST TRUE CACHE INTERNAL "")
 endif()
@@ -41,17 +40,40 @@ endif()
 if(CMAKE_HOST_UNIX AND NOT CMAKE_HOST_APPLE)
 	set(LINUX_HOST TRUE CACHE INTERNAL "")
 endif()
+include(${DIGITALKNOB}/DK/DKCMake/Color.cmake)
 
 
 ### SETTINGS #####################################################################
-#
-set(ENABLE_DKDEBUGFUNC ON CACHE INTERNAL "") #See macro(DKDEBUGFUNC) line# 162
-set(PRINT_CALL_DETAILS 1)
-set(PRINT_FILE_NAMES 1)
-set(PRINT_LINE_NUMBERS 1)
-set(PRINT_FUNCTION_NAMES 1)
-set(PRINT_FUNCTION_ ARGUMENTS 1)
+set(ENABLE_DKDEBUGFUNC ON CACHE INTERNAL "")
+set(PRINT_CALL_DETAILS 1 "" CACHE INTERNAL "")
+set(PRINT_FILE_NAMES 1 "" CACHE INTERNAL "")
+set(PRINT_LINE_NUMBERS 1 "" CACHE INTERNAL "")
+set(PRINT_FUNCTION_NAMES 1 "" CACHE INTERNAL "")
+set(PRINT_FUNCTION_ ARGUMENTS 1 "" CACHE INTERNAL "")
 set(dkdepend_disable_list "" CACHE INTERNAL "")
+
+
+##################################################################################
+# dk_file_getDigitalknobPath(result)
+#
+#	Get the digitalknob root directory
+#
+#	@result: string containing full path
+#
+function(dk_file_getDigitalknobPath result)
+	DKDEBUGFUNC(${ARGV})
+	get_filename_component(DIGITALKNOB ${CMAKE_SOURCE_DIR} ABSOLUTE)
+	get_filename_component(FOLDER_NAME ${DIGITALKNOB} NAME)
+	while(NOT FOLDER_NAME STREQUAL "digitalknob")
+		get_filename_component(DIGITALKNOB ${DIGITALKNOB} DIRECTORY)
+		get_filename_component(FOLDER_NAME ${DIGITALKNOB} NAME)
+		if(NOT FOLDER_NAME)
+			DKASSERT("Could not locate digitalknob root path")
+		endif()
+	endwhile()
+	set(${result} ${DIGITALKNOB} PARENT_SCOPE)
+endfunction()
+dk_file_getDigitalknobPath(DIGITALKNOB)
 
 
 ###############################################################################
@@ -84,18 +106,14 @@ function(dk_getArgIdentifiers ARGV)
 	if(ARGV_LENGTH LESS 1)
 		return()
 	endif()
-	
 	get_cmake_property(variableNames VARIABLES)
 	set(index 0)
-	
 	#DKUNSET(names)
-	set(names "" CACHE INTERNAL "")
+	#set(names "" CACHE INTERNAL "")
 	unset(names)
-	
 	#DKUNSET(ARGI)
-	set(ARGI "" CACHE INTERNAL "")
+	#set(ARGI "" CACHE INTERNAL "")
 	unset(ARGI)
-	
 	while(${index} LESS ${ARGV_LENGTH})
 		list(APPEND names ARGV${index})
 		set(ARGI${index} ARGV${index} CACHE INTERNAL "")
@@ -139,14 +157,13 @@ macro(DKDEBUGFUNC)
 		else()
 			set(argIndex 0)
 			set(argString " {")
-			#set(argString "${argString}${ARGV}")
 			dk_getArgIdentifiers(${ARGV})
 			foreach(arg ${ARGV})
 				set(argString "${argString}\"${ARGI${argIndex}}\":\"${arg}\"")
-				math(EXPR argIndex "${argIndex}+1")
 				if(${argIndex} LESS ${ARGC})
 					set(argString "${argString},  ")
 				endif()
+				math(EXPR argIndex "${argIndex}+1")
 			endforeach()
 			set(argString "${argString}} ")
 			message(STATUS "${cyan}${FILENAME}:${CMAKE_CURRENT_FUNCTION_LIST_LINE}: ${CMAKE_CURRENT_FUNCTION}(${argString})${CLR}")
@@ -156,33 +173,10 @@ endmacro()
 
 
 ##################################################################################
-# dk_file_getDigitalknobPath(result)
-#
-#	Get the digitalknob root directory
-#
-#	@result: string containing full path
-#
-function(dk_file_getDigitalknobPath result)
-	DKDEBUGFUNC(${ARGV})
-	get_filename_component(DIGITALKNOB ${CMAKE_SOURCE_DIR} ABSOLUTE)
-	get_filename_component(FOLDER_NAME ${DIGITALKNOB} NAME)
-	while(NOT FOLDER_NAME STREQUAL "digitalknob")
-		get_filename_component(DIGITALKNOB ${DIGITALKNOB} DIRECTORY)
-		get_filename_component(FOLDER_NAME ${DIGITALKNOB} NAME)
-		if(NOT FOLDER_NAME)
-			DKASSERT("Could not locate digitalknob root path")
-		endif()
-	endwhile()
-	set(${result} ${DIGITALKNOB} PARENT_SCOPE)
-endfunction()
-dk_file_getDigitalknobPath(DIGITALKNOB)
-
-
-##################################################################################
 # updateLogInfo()
-#	
+#
 macro(updateLogInfo)
-	DKDEBUGFUNC(${ARGV})
+	#DKDEBUGFUNC(${ARGV})
 	if(PRINT_CALL_DETAILS)
 		set(STACK_HEADER "")
 		if(NOT CMAKE_CURRENT_FUNCTION_LIST_FILE)
@@ -213,27 +207,15 @@ macro(updateLogInfo)
 	endif()
 endmacro()
 
-
-include(${DIGITALKNOB}/DK/DKCMake/Color.cmake)
-
-
-##################################################################################
 # DKASSERT(msg)
-#
 macro(DKASSERT msg)
-	#DKDEBUGFUNC(${ARGV})
 	updateLogInfo()
 	message(FATAL_ERROR "${H_black}${STACK_HEADER}${CLR}${BG_red}${msg}${CLR}")
-	#message(FATAL_ERROR "${H_black}${STACK_HEADER}${CLR}${red}${msg}${CLR}")
 	dk_exit()
 endmacro()
 
-
-##################################################################################
-# function(args)
-#
+# DKERROR(msg)
 macro(DKERROR msg)
-	#DKDEBUGFUNC(${ARGV})
 	updateLogInfo()
 	message(STATUS "${H_black}${STACK_HEADER}${CLR}${red}${msg}${CLR}")
 	#message(FATAL_ERROR "${H_black}${STACK_HEADER}${CLR}${red}${msg}${CLR}")
@@ -241,69 +223,42 @@ macro(DKERROR msg)
 	#dk_wait()
 endmacro()
 
-
-##################################################################################
-# function(args)
-#
+# DKWARN(msg)
 macro(DKWARN msg)
-	#DKDEBUGFUNC(${ARGV})
 	updateLogInfo()
-	#message(WARNING "${H_black}${STACK_HEADER}${CLR}${yellow}${msg}${CLR}")
 	message(STATUS "${H_black}${STACK_HEADER}${CLR}${yellow}${msg}${CLR}")
 endmacro()
 
-
-##################################################################################
-# function(args)
-#
-#	
+# DKINFO(msg)
 macro(DKINFO msg)
-	#DKDEBUGFUNC(${ARGV})
 	updateLogInfo()
 	message(STATUS "${H_black}${STACK_HEADER}${CLR}${white}${msg}${CLR}")
 endmacro()
 
-
-##################################################################################
-# function(args)
-#
-#	
+# DKDEBUG(msg)
 macro(DKDEBUG msg)
-	#DKDEBUGFUNC(${ARGV})
 	updateLogInfo()
-	#message(DEBUG "${H_black}${STACK_HEADER}${CLR}${cyan}${msg}${CLR}")  # DEBUG FLAG NOT WORKING
 	message(STATUS "${H_black}${STACK_HEADER}${CLR}${cyan}${msg}${CLR}")
 endmacro()
 
-
-##################################################################################
-# function(args)
-#
-#	
+# DKVERBOSE(msg)
 macro(DKVERBOSE msg)
-	#DKDEBUGFUNC(${ARGV})
 	updateLogInfo()
-	#message(VERBOSE "${H_black}${STACK_HEADER}${CLR}${magenta}${msg}${CLR}") # VERBOSE FLAG NOT WORKING
 	message(STATUS "${H_black}${STACK_HEADER}${CLR}${magenta}${msg}${CLR}")
 endmacro()
 
-
-##################################################################################
-# function(args)
-#
-#	
+# DKTRACE(msg)
 macro(DKTRACE msg)
-	#DKDEBUGFUNC(${ARGV})
 	updateLogInfo()
-	#message(TRACE "${H_black}${STACK_HEADER}${CLR}${B_blue}${msg}${CLR}") # TRACE FLAG NOT WORKING
 	message(WARNING "${H_black}${STACK_HEADER}${CLR}${B_blue}${msg}${CLR}")
 endmacro()
 
 
 ##################################################################################
-# function(args)
+# CreateFunc(str)
 #
-#	
+#	@str:
+#
 execute_process(COMMAND ${CMAKE_COMMAND} -E remove ${DIGITALKNOB}/DK/DKCMake/Functions_Ext.cmake)
 file(APPEND ${DIGITALKNOB}/DK/DKCMake/Functions_Ext.cmake "### Don't make changes in this file. They will not save. ###\n")
 file(APPEND ${DIGITALKNOB}/DK/DKCMake/Functions_Ext.cmake "### This file was automatically generated from Functions.cmake ###\n")
