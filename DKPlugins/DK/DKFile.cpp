@@ -42,6 +42,7 @@ DKString DKFile::local_assets;  //EXAMPLE:  C:/Users/aquawicket/digitalknob/DK/D
 DKString DKFile::online_assets; //EXAMPLE:  http://aquawicket.github.io/DigitalKnob/DKPlugins/
 
 bool DKFile::DebugPath(const DKString& path){
+	DKDEBUGFUNC(path);
 	if(has(path, "\\")){
 		DKWARN("DKFile::DebugPath("+path+"): Found obscurities in the path. Please debug to find the out where is starts for this path \n");
 		return false;
@@ -75,7 +76,7 @@ bool DKFile::NormalizePath(DKString& path){
 	return false;
 }
 
-#ifdef WIN32
+#if WIN32
 bool DKFile::AppendSystemPath(const DKString& path){
 	DKDEBUGFUNC(path);
 	DebugPath(path);
@@ -204,6 +205,7 @@ bool DKFile::Delete(const DKString& path){
 }
 
 bool DKFile::FileToString(const DKString& file, DKString& string){
+	DKDEBUGFUNC(file, string);
 	DebugPath(file);
 	if(!PathExists(file))
 		return DKERROR("file:("+file+") path does not exist \n");
@@ -235,10 +237,11 @@ bool DKFile::FindFile(DKString& filename, const DKString& path, const DKString& 
 }
 
 bool DKFile::GetAbsolutePath(const DKString& in, DKString& out){
+	DKDEBUGFUNC(in, out);
 	//GetAbsolutePath is allowed to recieve obscure paths, it will return normalized paths.
 	if(!PathExists(in))
 		return DKERROR("("+in+"): Path does not exits \n");
-#ifdef WIN32
+#if WIN32
 	char *fileExt;
 	char resolved_path[256];
 	GetFullPathName(in.c_str(), 256, resolved_path, &fileExt);
@@ -257,6 +260,7 @@ bool DKFile::GetAbsolutePath(const DKString& in, DKString& out){
 }
 
 bool DKFile::GetAppName(DKString& appname){
+	DKDEBUGFUNC(appname);
 	if (!DKFile::PathExists(DKFile::exe_path))
 		DKFile::GetExePath(DKFile::exe_path);
 	DKFile::GetExeName(appname);
@@ -266,11 +270,11 @@ bool DKFile::GetAppName(DKString& appname){
 }
 
 bool DKFile::GetAppPath(DKString& apppath){
-	//DKDEBUGFUNC(apppath);
+	DKDEBUGFUNC(apppath);
 	if (!DKFile::PathExists(DKFile::exe_path))
 		DKFile::GetExePath(DKFile::exe_path);
 	std::string::size_type found = 0;
-#ifdef WIN32
+#if WIN32
 	apppath = DKFile::exe_path;
 	found = apppath.find_last_of("/");
 	apppath.erase (apppath.begin()+found+1, apppath.end()); 
@@ -302,6 +306,7 @@ bool DKFile::GetAppPath(DKString& apppath){
 }
 
 bool DKFile::GetBasename(const DKString& path, DKString& basename){
+	DKDEBUGFUNC(path, basename);
 	basename = path;
 	if (basename.back() == '/')
 		basename.pop_back();
@@ -314,6 +319,7 @@ bool DKFile::GetBasename(const DKString& path, DKString& basename){
 }
 
 bool DKFile::GetDirectoryContents(const DKString& path, DKStringArray& strings){
+	DKDEBUGFUNC(path, strings);
 	DebugPath(path);
 	if(!PathExists(path))
 		return DKERROR("path does not exist \n");
@@ -339,7 +345,8 @@ bool DKFile::GetDirectoryContents(const DKString& path, DKStringArray& strings){
 }
 
 bool DKFile::GetDrives(DKStringArray& strings){
-#ifdef WIN32
+	DKDEBUGFUNC(strings);
+#if WIN32
 	//TCHAR szDrive[] = " A:";
 	DWORD drives = GetLogicalDrives();
 	if(drives == 0)
@@ -368,6 +375,7 @@ bool DKFile::GetExeName(DKString& exename){
 }
 
 bool DKFile::GetExePath(DKString& exepath){
+	DKDEBUGFUNC(exepath);
 	//DKFile::exe_path should hold the full file path of this executable from argv[0];
 	//If is doesn't, we should fill that now and figure out why it didn't get assigned.
 
@@ -375,7 +383,7 @@ bool DKFile::GetExePath(DKString& exepath){
 		DKWARN("GetExePath(): DKFile::exe_path is invalid. It should have been set by argv[0] at app start \n");
 		DKClass::DKCreate("DKDebug");
 		DKClass::CallFunc("DKDebug::ShowStackTrace");
-#ifdef WIN32
+#if WIN32
 		TCHAR fullpath[MAX_PATH];
 		GetModuleFileName(NULL, fullpath, MAX_PATH);
 		DKFile::exe_path = fullpath;
@@ -391,6 +399,7 @@ bool DKFile::GetExePath(DKString& exepath){
 }
 
 bool DKFile::GetExtention(const DKString& file, DKString& extension){
+	DKDEBUGFUNC(file, extension);
 	DebugPath(file);
 	if(!has(file,".")){
 		DKWARN("file ("+file+") has no extension \n");
@@ -402,6 +411,7 @@ bool DKFile::GetExtention(const DKString& file, DKString& extension){
 }
 
 bool DKFile::GetFileName(const DKString& path, DKString& filename){
+	DKDEBUGFUNC(path, filename);
 	DebugPath(path);
 	filename = path;
 	if (filename.back() == '/')
@@ -417,6 +427,7 @@ bool DKFile::GetFileName(const DKString& path, DKString& filename){
 }
 
 bool DKFile::GetFilePath(const DKString& file, DKString& path){
+	DKDEBUGFUNC(file, path);
 	DebugPath(file);
 	path = file;
 	if(path.back() == '/')
@@ -432,6 +443,7 @@ bool DKFile::GetFilePath(const DKString& file, DKString& path){
 }
 
 bool DKFile::GetLocalCreationDate(const DKString& path, DKString& filedate){
+	DKDEBUGFUNC(path, filedate);
 	DebugPath(path);
 	if(!PathExists(path))
 		return false;
@@ -459,6 +471,7 @@ bool DKFile::GetLocalCreationDate(const DKString& path, DKString& filedate){
 }
 
 bool DKFile::GetLocalModifiedDate(const DKString& path, DKString& filedate){
+	DKDEBUGFUNC(path, filedate);
 	DebugPath(path);
 	if(!PathExists(path))
 		return false;
@@ -486,10 +499,11 @@ bool DKFile::GetLocalModifiedDate(const DKString& path, DKString& filedate){
 }
 
 bool DKFile::GetModifiedTime(const DKString& path, DKString& time){
+	DKDEBUGFUNC(path, time);
 	DebugPath(path);
 	if(!PathExists(path))
 		return false;
-#ifdef WIN32 
+#if WIN32 
 	WIN32_FILE_ATTRIBUTE_DATA fileInfo;
 	if(GetFileAttributesEx(path.c_str(), GetFileExInfoStandard, &fileInfo)){
 		FILETIME localFiletime;
@@ -559,15 +573,16 @@ bool DKFile::GetModifiedTime(const DKString& path, DKString& time){
 }
 
 bool DKFile::GetPath(DKString& path) {
+	DKDEBUGFUNC(path);
 	if (path.empty() || same(path, "/") || same(path, "."))
 		path = DKFile::local_assets;
 	DKFile::GetAbsolutePath(path, path);
 	DKFile::ValidatePath(path);
-	DKDEBUGRETURN(path);
-	return true;
+	return true && DKDEBUGRETURN(path);
 }
 
 bool DKFile::GetRelativePath(const DKString& file, const DKString& path, DKString& out){
+	DKDEBUGRETURN(file, path, out);
 	DebugPath(file);
 	DebugPath(path);
 	if (same(file, path))
@@ -667,11 +682,12 @@ bool DKFile::GetRelativePath(const DKString& file, const DKString& path, DKStrin
 }
 
 bool DKFile::GetSetting(const DKString& file, const DKString& setting, DKString& value){
+	DKDEBUGRETURN(file, setting, value);
 	DebugPath(file);
 	DKString path = file;
 	replace(path, "file:///", "");
 	if(!PathExists(path)){
-		DKWARN("DKFile::GetSetting("+path+","+setting+",DKString&): path does not exist \n");
+		DKWARN("path does not exist \n");
 		return false; 
 	}
 	DKString filestring;
@@ -698,10 +714,11 @@ bool DKFile::GetSettings(const DKString& file, const DKString& setting, DKString
 
 
 bool DKFile::GetShortName(const DKString& file, DKString& shortname){
+	DKDEBUGRETURN(file, shortname);
 	DebugPath(file);
 	if(!PathExists(file))
 		return DKERROR("("+file+") path does not exist \n");
-#ifdef WIN32
+#if WIN32
 	long length = 0;
 	TCHAR* buffer = NULL;
 	length = GetShortPathName(file.c_str(), NULL, 0);
@@ -722,6 +739,7 @@ bool DKFile::GetShortName(const DKString& file, DKString& shortname){
 }
 
 bool DKFile::IsDirectory(const DKString& file){
+	DKDEBUGRETURN(file);
 	DebugPath(file);
 	if(!PathExists(file))
 		return DKERROR("("+file+") path does not exist \n");
@@ -884,6 +902,7 @@ bool DKFile::VerifyPath(DKString& path){
 }
 
 bool DKFile::ValidatePath(DKString& path){
+	DKDEBUGRETURN(path);
 	if (has(path, "\\"))
 		replace(path, "\\", "/");
 	if (has(path, "://") && (substr_count(path, "//") > 0))

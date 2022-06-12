@@ -24,7 +24,7 @@
 * SOFTWARE.
 */
 
-//#ifdef USE_DKSDLRMLOPENGL
+//#if USE_DKSDLRMLOPENGL
 
 #include <RmlUi/Core.h>
 #include <SDL_image.h>
@@ -136,7 +136,7 @@ void DKSDLRmlOpenGL::RenderGeometry(Rml::Vertex* vertices, int num_vertices, int
     }
     glColor4f(1.0, 1.0, 1.0, 1.0);
     glPopMatrix();
-#ifdef USE_SDL2_gif
+#if USE_SDL2_gif
 	for(unsigned int i=0; i<animations.size(); ++i){
 		SDL_GIFAnimAuto(animations[i]);
 	}
@@ -194,7 +194,7 @@ bool DKSDLRmlOpenGL::LoadTexture(Rml::TextureHandle& texture_handle, Rml::Vector
     file_interface->Read(buffer, buffer_size, file_handle);
     file_interface->Close(file_handle);
 
-#ifdef USE_SDL2_gif
+#if USE_SDL2_gif
 	std::string src = source;
 	if(has(src,".gif")){
 		animations.push_back(SDL_GIFAnimLoad_RW(SDL_RWFromMem(buffer, buffer_size), mRenderer));
@@ -250,7 +250,7 @@ bool DKSDLRmlOpenGL::LoadTexture(Rml::TextureHandle& texture_handle, Rml::Vector
         //texture_name[texture_handle] = source;
         return true;
     }
-#ifdef USE_SDL2_gif
+#if USE_SDL2_gif
 	}
     
 #endif

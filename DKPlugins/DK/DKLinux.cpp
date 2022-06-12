@@ -25,7 +25,7 @@
 */
 
 #include "DK/stdafx.h"
-#ifdef LINUX
+#if LINUX
 #include "DKLinux.h"
 #include "DKUnix.h"
 #include "DKLog.h"
@@ -40,6 +40,7 @@
 
 
 bool DKLinux::GetKey(int& key) {
+	DKDEBUGRETURN(key);
 	return DKUnix::GetKey(key);
 }
 
@@ -171,7 +172,7 @@ bool DKLinux::GetScreenHeight(int& h){
 }
 
 bool DKLinux::Run(const DKString& command, int& rtnvalue){
-	DKDEBUGFUNC(command);
+	DKDEBUGFUNC(command, rtnvalue);
 	DKString cmd = command;
 	cmd = "xdg-open "+cmd+" &";
 	return DKUtil::System(cmd.c_str(), rtnvalue);
@@ -475,7 +476,7 @@ bool DKLinux::CpuUsedByApp(int& cpu){
 }
 
 bool DKLinux::TurnOffMonitor(int& rtnvalue){
-	DKDEBUGFUNC();
+	DKDEBUGFUNC(rtnvalue);
 	return DKUtil::System("xset dpms force off", rtnvalue);
 }
 

@@ -25,7 +25,7 @@
 */
 
 #include "DK/stdafx.h"
-#ifdef WIN32
+#if WIN32
 #include "DKWindows.h"
 #include "DKFile.h"
 #include "DKLog.h"
@@ -368,6 +368,7 @@ bool DKWindows::GetProcessList(DKString& list){
 }
 
 bool DKWindows::GetScreenWidth(int& w){
+	DKDEBUGFUNC(w);
 	RECT desktop;
 	const HWND hDesktop = GetDesktopWindow();
 	if(!GetWindowRect(hDesktop, &desktop))
@@ -377,6 +378,7 @@ bool DKWindows::GetScreenWidth(int& w){
 }
 
 bool DKWindows::GetScreenHeight(int& h){
+	DKDEBUGFUNC(h);
 	RECT desktop;
 	const HWND hDesktop = GetDesktopWindow();
 	if(!GetWindowRect(hDesktop, &desktop))
@@ -386,6 +388,7 @@ bool DKWindows::GetScreenHeight(int& h){
 }
 
 bool DKWindows::GetUsername(DKString& username){
+	DKDEBUGFUNC(username);
 	if(const char* usr_a = std::getenv("USERname")){
 		username = usr_a;
 		return true && DKDEBUGRETURN(username);
@@ -422,14 +425,14 @@ bool DKWindows::GetVolume(int& percent){
 	endpointVolume->GetMasterVolumeLevel(&volume);
 	hr = endpointVolume->GetMasterVolumeLevelScalar(&volume);
 	percent = (int)(volume * 100);
-	return true;
+	return true && DKDEBUGRETURN(percent);
 }
 
 bool DKWindows::KeyIsDown(const int& key){
 	DKDEBUGFUNC(key);
 	if(GetKeyState(key) & 0x8000)
-		return true;
-	return false;
+		return true && DKDEBUGRETURN(true);
+	return false && DKDEBUGRETURN(false);
 }
 
 bool DKWindows::LeftClick(){

@@ -24,7 +24,7 @@
 * SOFTWARE.
 */
 
-//#ifdef USE_DKSDLRMLRENDERER
+//#if USE_DKSDLRMLRENDERER
 
 #include "DK/DK.h"
 #include "DKSDLRml/DKSDLRmlRenderer.h"
