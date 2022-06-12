@@ -37,67 +37,6 @@ set(dkdepend_disable_list 		""		CACHE INTERNAL "")
 
 include(DK.cmake)
 
-#[[
-# DKERROR(msg)
-#
-macro(DKERROR msg)
-	DKCall(dk_updateLogInfo)
-	message(STATUS "${H_black}${STACK_HEADER}${CLR}${red}${msg}${CLR}")
-	#message(FATAL_ERROR "${H_black}${STACK_HEADER}${CLR}${red}${msg}${CLR}")
-	#dk_exit()
-	#dk_wait()
-endmacro()
-]]
-
-#[[
-# DKWARN(msg)
-#
-macro(DKWARN msg)
-	DKCall(dk_updateLogInfo)
-	message(STATUS "${H_black}${STACK_HEADER}${CLR}${yellow}${msg}${CLR}")
-endmacro()
-]]
-
-
-#[[
-# DKINFO(msg)
-#
-macro(DKINFO msg)
-	DKCall(dk_updateLogInfo)
-	message(STATUS "${H_black}${STACK_HEADER}${CLR}${white}${msg}${CLR}")
-endmacro()
-]]
-
-
-#[[
-# DKDEBUG(msg)
-#
-macro(DKDEBUG msg)
-	DKCall(dk_updateLogInfo)
-	message(STATUS "${H_black}${STACK_HEADER}${CLR}${cyan}${msg}${CLR}")
-endmacro()
-]]
-
-
-#[[
-# DKVERBOSE(msg)
-#
-macro(DKVERBOSE msg)
-	DKCall(dk_updateLogInfo)
-	message(STATUS "${H_black}${STACK_HEADER}${CLR}${magenta}${msg}${CLR}")
-endmacro()
-]]
-
-
-#[[
-# DKTRACE(msg)
-#
-macro(DKTRACE msg)
-	DKCall(dk_updateLogInfo)
-	message(WARNING "${H_black}${STACK_HEADER}${CLR}${B_blue}${msg}${CLR}")
-endmacro()
-]]
-
 
 
 ##################################################################################
