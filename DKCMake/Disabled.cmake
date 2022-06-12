@@ -24,6 +24,8 @@
 
 include_guard()
 
+DKDISABLE(DKFmt)
+DKDISABLE(fmt)
 DKDISABLE(tiff)
 DKDISABLE(msys2)
 

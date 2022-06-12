@@ -26,6 +26,24 @@
 # https://asitdhal.medium.com/cmake-functions-and-macros-22293041519f
 include_guard()
 
+function(dk_getDigitalknobPath result)
+	get_filename_component(DIGITALKNOB ${CMAKE_SOURCE_DIR} ABSOLUTE)
+	get_filename_component(FOLDER_NAME ${DIGITALKNOB} NAME)
+	while(NOT FOLDER_NAME STREQUAL "digitalknob")
+		get_filename_component(DIGITALKNOB ${DIGITALKNOB} DIRECTORY)
+		get_filename_component(FOLDER_NAME ${DIGITALKNOB} NAME)
+		if(NOT FOLDER_NAME)
+			message(FATAL_ERROR "Could not locate digitalknob root path")
+		endif()
+	endwhile()
+	set(${result} ${DIGITALKNOB} PARENT_SCOPE)
+endfunction()
+dk_getDigitalknobPath(DIGITALKNOB)
+set(DKCMAKE ${DIGITALKNOB}/DK/DKCMake)
+
+
+
+
 ### SETTINGS #####################################################################
 set(ENABLE_DKDEBUGFUNC 			0		CACHE INTERNAL "")
 set(PRINT_CALL_DETAILS 			1		CACHE INTERNAL "")
@@ -35,9 +53,7 @@ set(PRINT_FUNCTION_NAMES 		1 		CACHE INTERNAL "")
 set(PRINT_FUNCTION_ ARGUMENTS 	1 		CACHE INTERNAL "")
 set(dkdepend_disable_list 		""		CACHE INTERNAL "")
 
-include(DK.cmake)
-
-
+include(${DKCMAKE}/DK.cmake)
 
 ##################################################################################
 # CreateFunc(str)

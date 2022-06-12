@@ -408,7 +408,7 @@ CMAKE_CXX_COMPILER_PRODUCED_FILES ==           CompilerIdCXX.exe;CompilerIdCXX.v
 CMAKE_CXX_COMPILER_PRODUCED_OUTPUT ==           Microsoft (R) Build Engine version 17.0.0+c9eb9dd64 for .NET Framework
 Copyright (C) Microsoft Corporation. All rights reserved.
 
-Build started 6/11/2022 9:25:18 PM.
+Build started 6/12/2022 12:29:02 AM.
 Project "C:\Users\Administrator\digitalknob\DK\DKApps\DKTestAll\win32\CMakeFiles\3.21.1\CompilerIdCXX\CompilerIdCXX.vcxproj" on node 1 (default targets).
 PrepareForBuild:
   Creating directory "Debug\".
@@ -434,7 +434,7 @@ Build succeeded.
     0 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:00.69
+Time Elapsed 00:00:00.72
 
 CMAKE_CXX_COMPILER_RANLIB ==           
 CMAKE_CXX_COMPILER_VERSION ==           19.30.30709.0
@@ -849,7 +849,7 @@ CMAKE_C_COMPILER_PRODUCED_FILES ==           CompilerIdC.exe;CompilerIdC.vcxproj
 CMAKE_C_COMPILER_PRODUCED_OUTPUT ==           Microsoft (R) Build Engine version 17.0.0+c9eb9dd64 for .NET Framework
 Copyright (C) Microsoft Corporation. All rights reserved.
 
-Build started 6/11/2022 9:25:17 PM.
+Build started 6/12/2022 12:29:01 AM.
 Project "C:\Users\Administrator\digitalknob\DK\DKApps\DKTestAll\win32\CMakeFiles\3.21.1\CompilerIdC\CompilerIdC.vcxproj" on node 1 (default targets).
 PrepareForBuild:
   Creating directory "Debug\".
@@ -875,7 +875,7 @@ Build succeeded.
     0 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:01.01
+Time Elapsed 00:00:00.93
 
 CMAKE_C_COMPILER_RANLIB ==           
 CMAKE_C_COMPILER_VERSION ==           19.30.30709.0

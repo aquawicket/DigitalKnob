@@ -5,7 +5,7 @@
 #
 #	@result: string containing full path
 #
-function(dk_file_getDigitalknobPath result)
+function(dk_getDigitalknobPath result)
 	#DKDEBUGFUNC(${ARGV})
 	get_filename_component(DIGITALKNOB ${CMAKE_SOURCE_DIR} ABSOLUTE)
 	get_filename_component(FOLDER_NAME ${DIGITALKNOB} NAME)
@@ -13,10 +13,10 @@ function(dk_file_getDigitalknobPath result)
 		get_filename_component(DIGITALKNOB ${DIGITALKNOB} DIRECTORY)
 		get_filename_component(FOLDER_NAME ${DIGITALKNOB} NAME)
 		if(NOT FOLDER_NAME)
-			#DKASSERT("Could not locate digitalknob root path")
 			message(FATAL_ERROR "Could not locate digitalknob root path")
 		endif()
 	endwhile()
 	set(${result} ${DIGITALKNOB} PARENT_SCOPE)
 endfunction()
-#dk_getDigitalknobPath(DIGITALKNOB)
+dk_getDigitalknobPath(DIGITALKNOB)
+set(DKCMAKE ${DIGITALKNOB}/DK/DKCMake)
