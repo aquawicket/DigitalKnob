@@ -75,184 +75,9 @@ dk_file_getDigitalknobPath(DIGITALKNOB)
 
 include(${DIGITALKNOB}/DK/DKCMake/DK.cmake)
 
-
-#[[
-##################################################################################
-# dk_Load(filename)
-#
-#	load a ${filename}.cmake file located in the DKCMake path 
-#
-macro(DKLoad filename)
-	include(${DIGITALKNOB}/DK/DKCMake/${filename}.cmake)
-endmacro()
-]]
-
-
-#[[
-##################################################################################
-# dk_Call(func)
-#
-#	load a ${func}.cmake file located in the DKCMake path amd call the function 
-#
-macro(DKCall func)
-	DKLoad(${func})
-	cmake_language(CALL ${func} ${ARGV})
-endmacro()
-]]
-
-
-### INCLUDES ##################################################################
-#DKLoad(Color)
-
-
-#[[
-###############################################################################
-# dk_listReplace(LIST old_value new_value)
-#  
-#	Replace a list item with a new value
-#
-#	@old_value: The value to replace
-#	@new_value: The new value to replace with
-#
-macro(dk_listReplace LIST old_value new_value)
-    list(FIND ${LIST} ${old_value} old_value_INDEX)
-    if(old_value_INDEX GREATER_EQUAL 0)
-        list(REMOVE_AT ${LIST} ${old_value_INDEX})
-        list(INSERT ${LIST} ${old_value_INDEX} ${new_value})
-    endif()
-endmacro()
-]]
-
-
-#[[
-###############################################################################
-# dk_getArgIdentifiers(ARGV)
-#  
-#	Get the variable names from function parameters
-#
-#	@ARGV: The ARGV data within a function that contains the parameter values
-#
-function(dk_getArgIdentifiers ARGV)
-	#message(STATUS "dk_getArgIdentifiers(${ARGV})")
-	list(LENGTH ARGV ARGV_LENGTH)
-	if(ARGV_LENGTH LESS 1)
-		return()
-	endif()
-	get_cmake_property(variableNames VARIABLES)
-	set(index 0)
-	unset(names)
-	unset(ARGI)
-	while(${index} LESS ${ARGV_LENGTH})
-		list(APPEND names ARGV${index})
-		set(ARGI${index} ARGV${index} CACHE INTERNAL "")
-		foreach(variableName ${variableNames} REVERSE)
-			if(ARGV${index} STREQUAL ${variableName})
-				if(NOT "ARGV${index}" STREQUAL "${variableName}") #exclude variables with the same name like ARGV0
-					DKCall(dk_listReplace names ARGV${index} ${variableName})
-					set(ARGI${index} ${variableName} CACHE INTERNAL "")
-					#message(STATUS "ARGI${index} == ${ARGI${index}}")
-					break()
-				endif()
-			endif()
-		endforeach()
-		math(EXPR index "${index}+1")
-	endwhile()
-	set(ARGI ${names} CACHE INTERNAL "")
-endfunction()
-]]
-
-
-#[[
-##################################################################################
-# DKDEBUGFUNC(${ARGV})
-#	Prints the current file name, line number, function or macro and arguments
-#	Place this at the first line of every function you want to see debug output for.
-# 
-#	Example:
-#		function(MyFunction myArg1 myArg2)
-#			DKDEBUGFUNC(${ARGV}) 
-#			## user code
-#		endfunction()
-#
-macro(DKDEBUGFUNC)
-	if(ENABLE_DKDEBUGFUNC)
-		if(NOT CMAKE_CURRENT_FUNCTION_LIST_FILE)
-			set(CMAKE_CURRENT_FUNCTION_LIST_FILE "unknown")
-		endif()
-		get_filename_component(FILENAME ${CMAKE_CURRENT_FUNCTION_LIST_FILE} NAME)
-		DKLoad(Color)
-		if(${ARGC} LESS 1)
-			message(STATUS "${cyan}${FILENAME}:${CMAKE_CURRENT_FUNCTION_LIST_LINE}: ${CMAKE_CURRENT_FUNCTION}()${CLR}")
-		else()
-			set(argIndex 0)
-			set(argString " {")
-			DKCall(dk_getArgIdentifiers ${ARGV})
-			foreach(arg ${ARGV})
-				set(argString "${argString}\"${ARGI${argIndex}}\":\"${arg}\"")
-				if(${argIndex} LESS ${ARGC})
-					set(argString "${argString},  ")
-				endif()
-				math(EXPR argIndex "${argIndex}+1")
-			endforeach()
-			set(argString "${argString}} ")
-			message(STATUS "${cyan}${FILENAME}:${CMAKE_CURRENT_FUNCTION_LIST_LINE}: ${CMAKE_CURRENT_FUNCTION}(${argString})${CLR}")
-		endif()
-	endif()
-endmacro()
-]]
-
-
-#[[
-##################################################################################
-# dk_updateLogInfo()
-#
-macro(dk_updateLogInfo)
-	#DKDEBUGFUNC(${ARGV})
-	if(PRINT_CALL_DETAILS)
-		set(STACK_HEADER "")
-		if(NOT CMAKE_CURRENT_FUNCTION_LIST_FILE)
-			if(PRINT_FILE_NAMES)
-				get_filename_component(STACK_FILENAME ${CMAKE_CURRENT_LIST_FILE} NAME)
-				set(STACK_HEADER "${STACK_FILENAME}:")
-			endif()
-			if(PRINT_LINE_NUMBERS)		
-				set(STACK_HEADER "${STACK_HEADER}${CMAKE_CURRENT_LIST_LINE}->")
-			endif()	
-		else()
-			if(PRINT_FILE_NAMES)
-				get_filename_component(STACK_FILENAME ${CMAKE_CURRENT_FUNCTION_LIST_FILE} NAME)
-				set(STACK_HEADER "${STACK_FILENAME}:")
-			endif()
-			if(PRINT_LINE_NUMBERS)	
-				set(STACK_HEADER "${STACK_HEADER}${CMAKE_CURRENT_FUNCTION_LIST_LINE}->")
-			endif()
-		endif()
-		if(PRINT_FUNCTION_NAMES)
-			set(STACK_HEADER "${STACK_HEADER}${CMAKE_CURRENT_FUNCTION}")
-			if(PRINT_FUNCTION_ARGUMENTS)
-				set(STACK_HEADER "${STACK_HEADER}(${ARGV}): ")
-			else()
-				set(STACK_HEADER "${STACK_HEADER}(): ")
-			endif()
-		endif()
-	endif()
-endmacro()
-]]
-
-
-#[[
-# DKASSERT(msg)
-macro(DKASSERT msg)
-	dk_updateLogInfo()
-	message(FATAL_ERROR "${H_black}${STACK_HEADER}${CLR}${BG_red}${msg}${CLR}")
-	dk_exit()
-endmacro()
-]]
-
-
 # DKERROR(msg)
 macro(DKERROR msg)
-	dk_updateLogInfo()
+	DKCall(dk_updateLogInfo)
 	message(STATUS "${H_black}${STACK_HEADER}${CLR}${red}${msg}${CLR}")
 	#message(FATAL_ERROR "${H_black}${STACK_HEADER}${CLR}${red}${msg}${CLR}")
 	#dk_exit()
@@ -261,31 +86,31 @@ endmacro()
 
 # DKWARN(msg)
 macro(DKWARN msg)
-	dk_updateLogInfo()
+	DKCall(dk_updateLogInfo)
 	message(STATUS "${H_black}${STACK_HEADER}${CLR}${yellow}${msg}${CLR}")
 endmacro()
 
 # DKINFO(msg)
 macro(DKINFO msg)
-	dk_updateLogInfo()
+	DKCall(dk_updateLogInfo)
 	message(STATUS "${H_black}${STACK_HEADER}${CLR}${white}${msg}${CLR}")
 endmacro()
 
 # DKDEBUG(msg)
 macro(DKDEBUG msg)
-	dk_updateLogInfo()
+	DKCall(dk_updateLogInfo)
 	message(STATUS "${H_black}${STACK_HEADER}${CLR}${cyan}${msg}${CLR}")
 endmacro()
 
 # DKVERBOSE(msg)
 macro(DKVERBOSE msg)
-	dk_updateLogInfo()
+	DKCall(dk_updateLogInfo)
 	message(STATUS "${H_black}${STACK_HEADER}${CLR}${magenta}${msg}${CLR}")
 endmacro()
 
 # DKTRACE(msg)
 macro(DKTRACE msg)
-	dk_updateLogInfo()
+	DKCall(dk_updateLogInfo)
 	message(WARNING "${H_black}${STACK_HEADER}${CLR}${B_blue}${msg}${CLR}")
 endmacro()
 
