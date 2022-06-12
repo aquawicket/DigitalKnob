@@ -41,7 +41,7 @@ endif()
 
 
 ### SETTINGS #####################################################################
-set(ENABLE_DKDEBUGFUNC 			0		CACHE INTERNAL "")
+set(ENABLE_DKDEBUGFUNC 			1		CACHE INTERNAL "")
 set(PRINT_CALL_DETAILS 			1		CACHE INTERNAL "")
 set(PRINT_FILE_NAMES 			1 		CACHE INTERNAL "")
 set(PRINT_LINE_NUMBERS 			1		CACHE INTERNAL "")
