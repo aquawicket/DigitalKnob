@@ -1,5 +1,5 @@
 ##################################################################################
-# dk_Load(filename)
+# DKLoad(filename)
 #
 #	load a ${filename}.cmake file located in the DKCMake path 
 #
