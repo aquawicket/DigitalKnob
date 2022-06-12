@@ -8,7 +8,7 @@ endif()
 
 
 ### DEPENDS ###
-DKDEPEND(vs16-redistributable)
+DKDEPEND(vc_redist) #for VCRUNTIME140.dll
 
 DKIMPORT(https://windows.php.net/downloads/releases/php-8.0.20-Win32-vs16-x86.zip php_binary)
 
