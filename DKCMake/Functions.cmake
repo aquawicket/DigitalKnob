@@ -26,20 +26,6 @@
 # https://asitdhal.medium.com/cmake-functions-and-macros-22293041519f
 include_guard()
 
-### DKVARIABLES ##################################################################
-if(CMAKE_HOST_WIN32)
-	set(WIN_HOST 	TRUE 	CACHE INTERNAL "")
-endif()
-if(CMAKE_HOST_APPLE)
-	set(UNIX_HOST 	TRUE 	CACHE INTERNAL "")
-	set(MAC_HOST 	TRUE 	CACHE INTERNAL "")
-endif()
-if(CMAKE_HOST_UNIX AND NOT CMAKE_HOST_APPLE)
-	set(UNIX_HOST 	TRUE 	CACHE INTERNAL "")
-	set(LINUX_HOST 	TRUE 	CACHE INTERNAL "")
-endif()
-
-
 ### SETTINGS #####################################################################
 set(ENABLE_DKDEBUGFUNC 			1		CACHE INTERNAL "")
 set(PRINT_CALL_DETAILS 			1		CACHE INTERNAL "")
@@ -49,33 +35,11 @@ set(PRINT_FUNCTION_NAMES 		1 		CACHE INTERNAL "")
 set(PRINT_FUNCTION_ ARGUMENTS 	1 		CACHE INTERNAL "")
 set(dkdepend_disable_list 		""		CACHE INTERNAL "")
 
+include(DK.cmake)
 
-##################################################################################
-# dk_file_getDigitalknobPath(result)
-#
-#	Get the digitalknob root directory
-#
-#	@result: string containing full path
-#
-function(dk_file_getDigitalknobPath result)
-	#DKDEBUGFUNC(${ARGV})
-	get_filename_component(DIGITALKNOB ${CMAKE_SOURCE_DIR} ABSOLUTE)
-	get_filename_component(FOLDER_NAME ${DIGITALKNOB} NAME)
-	while(NOT FOLDER_NAME STREQUAL "digitalknob")
-		get_filename_component(DIGITALKNOB ${DIGITALKNOB} DIRECTORY)
-		get_filename_component(FOLDER_NAME ${DIGITALKNOB} NAME)
-		if(NOT FOLDER_NAME)
-			#DKASSERT("Could not locate digitalknob root path")
-			message(FATAL_ERROR "Could not locate digitalknob root path")
-		endif()
-	endwhile()
-	set(${result} ${DIGITALKNOB} PARENT_SCOPE)
-endfunction()
-dk_file_getDigitalknobPath(DIGITALKNOB)
-
-include(${DIGITALKNOB}/DK/DKCMake/DK.cmake)
-
+#[[
 # DKERROR(msg)
+#
 macro(DKERROR msg)
 	DKCall(dk_updateLogInfo)
 	message(STATUS "${H_black}${STACK_HEADER}${CLR}${red}${msg}${CLR}")
@@ -83,36 +47,57 @@ macro(DKERROR msg)
 	#dk_exit()
 	#dk_wait()
 endmacro()
+]]
 
+#[[
 # DKWARN(msg)
+#
 macro(DKWARN msg)
 	DKCall(dk_updateLogInfo)
 	message(STATUS "${H_black}${STACK_HEADER}${CLR}${yellow}${msg}${CLR}")
 endmacro()
+]]
 
+
+#[[
 # DKINFO(msg)
+#
 macro(DKINFO msg)
 	DKCall(dk_updateLogInfo)
 	message(STATUS "${H_black}${STACK_HEADER}${CLR}${white}${msg}${CLR}")
 endmacro()
+]]
 
+
+#[[
 # DKDEBUG(msg)
+#
 macro(DKDEBUG msg)
 	DKCall(dk_updateLogInfo)
 	message(STATUS "${H_black}${STACK_HEADER}${CLR}${cyan}${msg}${CLR}")
 endmacro()
+]]
 
+
+#[[
 # DKVERBOSE(msg)
+#
 macro(DKVERBOSE msg)
 	DKCall(dk_updateLogInfo)
 	message(STATUS "${H_black}${STACK_HEADER}${CLR}${magenta}${msg}${CLR}")
 endmacro()
+]]
 
+
+#[[
 # DKTRACE(msg)
+#
 macro(DKTRACE msg)
 	DKCall(dk_updateLogInfo)
 	message(WARNING "${H_black}${STACK_HEADER}${CLR}${B_blue}${msg}${CLR}")
 endmacro()
+]]
+
 
 
 ##################################################################################
