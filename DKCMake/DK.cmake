@@ -13,6 +13,12 @@ endif()
 
 include(dk_getDigitalknobPath.cmake)
 dk_file_getDigitalknobPath(DIGITALKNOB)
-
 include(${DIGITALKNOB}/DK/DKCMake/DKCall.cmake)
 DKLoad(DKDEBUGFUNC)
+DKLoad(DKASSERT)
+DKLoad(DKERROR)
+DKLoad(DKWARN)
+DKLoad(DKINFO)
+DKLoad(DKDEBUG)
+DKLoad(DKVERBOSE)
+DKLoad(DKTRACE)
