@@ -73,10 +73,8 @@ function(dk_file_getDigitalknobPath result)
 endfunction()
 dk_file_getDigitalknobPath(DIGITALKNOB)
 
-include(${DIGITALKNOB}/DK/DKCMake/DKLoad.cmake)
-include(${DIGITALKNOB}/DK/DKCMake/DKCall.cmake)
+include(${DIGITALKNOB}/DK/DKCMake/DK.cmake)
 
-DKLoad(DKDEBUGFUNC)
 
 #[[
 ##################################################################################
@@ -104,8 +102,7 @@ endmacro()
 
 
 ### INCLUDES ##################################################################
-#include(${DIGITALKNOB}/DK/DKCMake/Color.cmake)
-DKLoad(Color)
+#DKLoad(Color)
 
 
 #[[
@@ -127,6 +124,7 @@ endmacro()
 ]]
 
 
+#[[
 ###############################################################################
 # dk_getArgIdentifiers(ARGV)
 #  
@@ -134,33 +132,35 @@ endmacro()
 #
 #	@ARGV: The ARGV data within a function that contains the parameter values
 #
-#function(dk_getArgIdentifiers ARGV)
-#	#message(STATUS "dk_getArgIdentifiers(${ARGV})")
-#	list(LENGTH ARGV ARGV_LENGTH)
-#	if(ARGV_LENGTH LESS 1)
-#		return()
-#	endif()
-#	get_cmake_property(variableNames VARIABLES)
-#	set(index 0)
-#	unset(names)
-#	unset(ARGI)
-#	while(${index} LESS ${ARGV_LENGTH})
-#		list(APPEND names ARGV${index})
-#		set(ARGI${index} ARGV${index} CACHE INTERNAL "")
-#		foreach(variableName ${variableNames} REVERSE)
-#			if(ARGV${index} STREQUAL ${variableName})
-#				if(NOT "ARGV${index}" STREQUAL "${variableName}") #exclude variables with the same name like ARGV0
-#					DKCall(dk_listReplace names ARGV${index} ${variableName})
-#					set(ARGI${index} ${variableName} CACHE INTERNAL "")
-#					#message(STATUS "ARGI${index} == ${ARGI${index}}")
-#					break()
-#				endif()
-#			endif()
-#		endforeach()
-#		math(EXPR index "${index}+1")
-#	endwhile()
-#	set(ARGI ${names} CACHE INTERNAL "")
-#endfunction()
+function(dk_getArgIdentifiers ARGV)
+	#message(STATUS "dk_getArgIdentifiers(${ARGV})")
+	list(LENGTH ARGV ARGV_LENGTH)
+	if(ARGV_LENGTH LESS 1)
+		return()
+	endif()
+	get_cmake_property(variableNames VARIABLES)
+	set(index 0)
+	unset(names)
+	unset(ARGI)
+	while(${index} LESS ${ARGV_LENGTH})
+		list(APPEND names ARGV${index})
+		set(ARGI${index} ARGV${index} CACHE INTERNAL "")
+		foreach(variableName ${variableNames} REVERSE)
+			if(ARGV${index} STREQUAL ${variableName})
+				if(NOT "ARGV${index}" STREQUAL "${variableName}") #exclude variables with the same name like ARGV0
+					DKCall(dk_listReplace names ARGV${index} ${variableName})
+					set(ARGI${index} ${variableName} CACHE INTERNAL "")
+					#message(STATUS "ARGI${index} == ${ARGI${index}}")
+					break()
+				endif()
+			endif()
+		endforeach()
+		math(EXPR index "${index}+1")
+	endwhile()
+	set(ARGI ${names} CACHE INTERNAL "")
+endfunction()
+]]
+
 
 #[[
 ##################################################################################
@@ -176,11 +176,11 @@ endmacro()
 #
 macro(DKDEBUGFUNC)
 	if(ENABLE_DKDEBUGFUNC)
-		#dk_getFilename(${CMAKE_CURRENT_FUNCTION_LIST_FILE} FILENAME)
 		if(NOT CMAKE_CURRENT_FUNCTION_LIST_FILE)
 			set(CMAKE_CURRENT_FUNCTION_LIST_FILE "unknown")
 		endif()
 		get_filename_component(FILENAME ${CMAKE_CURRENT_FUNCTION_LIST_FILE} NAME)
+		DKLoad(Color)
 		if(${ARGC} LESS 1)
 			message(STATUS "${cyan}${FILENAME}:${CMAKE_CURRENT_FUNCTION_LIST_LINE}: ${CMAKE_CURRENT_FUNCTION}()${CLR}")
 		else()
@@ -202,10 +202,11 @@ endmacro()
 ]]
 
 
+#[[
 ##################################################################################
-# updateLogInfo()
+# dk_updateLogInfo()
 #
-macro(updateLogInfo)
+macro(dk_updateLogInfo)
 	#DKDEBUGFUNC(${ARGV})
 	if(PRINT_CALL_DETAILS)
 		set(STACK_HEADER "")
@@ -236,17 +237,22 @@ macro(updateLogInfo)
 		endif()
 	endif()
 endmacro()
+]]
 
+
+#[[
 # DKASSERT(msg)
 macro(DKASSERT msg)
-	updateLogInfo()
+	dk_updateLogInfo()
 	message(FATAL_ERROR "${H_black}${STACK_HEADER}${CLR}${BG_red}${msg}${CLR}")
 	dk_exit()
 endmacro()
+]]
+
 
 # DKERROR(msg)
 macro(DKERROR msg)
-	updateLogInfo()
+	dk_updateLogInfo()
 	message(STATUS "${H_black}${STACK_HEADER}${CLR}${red}${msg}${CLR}")
 	#message(FATAL_ERROR "${H_black}${STACK_HEADER}${CLR}${red}${msg}${CLR}")
 	#dk_exit()
@@ -255,31 +261,31 @@ endmacro()
 
 # DKWARN(msg)
 macro(DKWARN msg)
-	updateLogInfo()
+	dk_updateLogInfo()
 	message(STATUS "${H_black}${STACK_HEADER}${CLR}${yellow}${msg}${CLR}")
 endmacro()
 
 # DKINFO(msg)
 macro(DKINFO msg)
-	updateLogInfo()
+	dk_updateLogInfo()
 	message(STATUS "${H_black}${STACK_HEADER}${CLR}${white}${msg}${CLR}")
 endmacro()
 
 # DKDEBUG(msg)
 macro(DKDEBUG msg)
-	updateLogInfo()
+	dk_updateLogInfo()
 	message(STATUS "${H_black}${STACK_HEADER}${CLR}${cyan}${msg}${CLR}")
 endmacro()
 
 # DKVERBOSE(msg)
 macro(DKVERBOSE msg)
-	updateLogInfo()
+	dk_updateLogInfo()
 	message(STATUS "${H_black}${STACK_HEADER}${CLR}${magenta}${msg}${CLR}")
 endmacro()
 
 # DKTRACE(msg)
 macro(DKTRACE msg)
-	updateLogInfo()
+	dk_updateLogInfo()
 	message(WARNING "${H_black}${STACK_HEADER}${CLR}${B_blue}${msg}${CLR}")
 endmacro()
 
