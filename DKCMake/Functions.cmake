@@ -73,13 +73,30 @@ function(dk_file_getDigitalknobPath result)
 endfunction()
 dk_file_getDigitalknobPath(DIGITALKNOB)
 
+
+##################################################################################
+# dk_Load(filename)
+#
+#	load a ${filename}.cmake file located in the DKCMake path 
+#
+macro(DKLoad filename)
+	include(${DIGITALKNOB}/DK/DKCMake/${filename}.cmake)
+endmacro()
+
+
+##################################################################################
+# dk_Call(func)
+#
+#	load a ${func}.cmake file located in the DKCMake path amd call the function 
+#
 macro(DKCall func)
-	include(${DIGITALKNOB}/DK/DKCMake/${func}.cmake)
+	DKLoad(${func})
 	cmake_language(CALL ${func} ${ARGV})
 endmacro()
 
 ### INCLUDES ##################################################################
-include(${DIGITALKNOB}/DK/DKCMake/Color.cmake)
+#include(${DIGITALKNOB}/DK/DKCMake/Color.cmake)
+DKLoad(Color)
 
 
 ###############################################################################
@@ -134,7 +151,7 @@ include(${DIGITALKNOB}/DK/DKCMake/Color.cmake)
 #	set(ARGI ${names} CACHE INTERNAL "")
 #endfunction()
 
-
+#[[
 ##################################################################################
 # DKDEBUGFUNC(${ARGV})
 #	Prints the current file name, line number, function or macro and arguments
@@ -171,6 +188,7 @@ macro(DKDEBUGFUNC)
 		endif()
 	endif()
 endmacro()
+]]
 
 
 ##################################################################################
