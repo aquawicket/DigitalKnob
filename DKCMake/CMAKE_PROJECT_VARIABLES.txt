@@ -5,7 +5,7 @@ CMAKE_AUTOMOC_COMPILER_PREDEFINES ==           ON
 CMAKE_AUTOMOC_MACRO_NAMES ==           Q_OBJECT;Q_GADGET;Q_NAMESPACE;Q_NAMESPACE_EXPORT
 CMAKE_AUTOMOC_PATH_PREFIX ==           OFF
 CMAKE_BASE_NAME ==           cl
-CMAKE_BINARY_DIR ==           C:/Users/Administrator/digitalknob/DK/DKApps/DKTestAll/win32
+CMAKE_BINARY_DIR ==           C:/Users/Administrator/digitalknob/DK/DKApps/DKSDLRmlUi/win32
 CMAKE_BUILD_TOOL ==           C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe
 CMAKE_BUILD_TYPE_INIT ==           Debug
 CMAKE_C11_COMPILE_FEATURES ==           c_std_11;c_static_assert
@@ -27,7 +27,7 @@ CMAKE_CONFIGURATION_TYPES ==           Debug;Release;MinSizeRel;RelWithDebInfo
 CMAKE_CPACK_COMMAND ==           C:/Program Files (x86)/CMake/bin/cpack.exe
 CMAKE_CROSSCOMPILING ==           FALSE
 CMAKE_CTEST_COMMAND ==           C:/Program Files (x86)/CMake/bin/ctest.exe
-CMAKE_CURRENT_BINARY_DIR ==           C:/Users/Administrator/digitalknob/DK/DKApps/DKTestAll/win32
+CMAKE_CURRENT_BINARY_DIR ==           C:/Users/Administrator/digitalknob/DK/DKApps/DKSDLRmlUi/win32
 CMAKE_CURRENT_LIST_DIR ==           C:/Users/Administrator/digitalknob/DK/DKCMake
 CMAKE_CURRENT_LIST_FILE ==           C:/Users/Administrator/digitalknob/DK/DKCMake/CMakeLists.txt
 CMAKE_CURRENT_SOURCE_DIR ==           C:/Users/Administrator/digitalknob/DK/DKCMake
@@ -408,8 +408,8 @@ CMAKE_CXX_COMPILER_PRODUCED_FILES ==           CompilerIdCXX.exe;CompilerIdCXX.v
 CMAKE_CXX_COMPILER_PRODUCED_OUTPUT ==           Microsoft (R) Build Engine version 17.0.0+c9eb9dd64 for .NET Framework
 Copyright (C) Microsoft Corporation. All rights reserved.
 
-Build started 6/12/2022 3:28:25 PM.
-Project "C:\Users\Administrator\digitalknob\DK\DKApps\DKTestAll\win32\CMakeFiles\3.21.1\CompilerIdCXX\CompilerIdCXX.vcxproj" on node 1 (default targets).
+Build started 6/12/2022 6:45:30 PM.
+Project "C:\Users\Administrator\digitalknob\DK\DKApps\DKSDLRmlUi\win32\CMakeFiles\3.21.1\CompilerIdCXX\CompilerIdCXX.vcxproj" on node 1 (default targets).
 PrepareForBuild:
   Creating directory "Debug\".
   Creating directory "Debug\CompilerIdCXX.tlog\".
@@ -420,7 +420,7 @@ ClCompile:
   CMakeCXXCompilerId.cpp
 Link:
   C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.30.30705\bin\HostX64\x86\link.exe /ERRORREPORT:QUEUE /OUT:".\CompilerIdCXX.exe" /INCREMENTAL:NO /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /PDB:".\CompilerIdCXX.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:".\CompilerIdCXX.lib" /MACHINE:X86 /SAFESEH Debug\CMakeCXXCompilerId.obj
-  CompilerIdCXX.vcxproj -> C:\Users\Administrator\digitalknob\DK\DKApps\DKTestAll\win32\CMakeFiles\3.21.1\CompilerIdCXX\CompilerIdCXX.exe
+  CompilerIdCXX.vcxproj -> C:\Users\Administrator\digitalknob\DK\DKApps\DKSDLRmlUi\win32\CMakeFiles\3.21.1\CompilerIdCXX\CompilerIdCXX.exe
 PostBuildEvent:
   for %%i in (cl.exe) do @echo CMAKE_CXX_COMPILER=%%~$PATH:i
   :VCEnd
@@ -428,13 +428,13 @@ PostBuildEvent:
 FinalizeBuildStatus:
   Deleting file "Debug\CompilerIdCXX.tlog\unsuccessfulbuild".
   Touching "Debug\CompilerIdCXX.tlog\CompilerIdCXX.lastbuildstate".
-Done Building Project "C:\Users\Administrator\digitalknob\DK\DKApps\DKTestAll\win32\CMakeFiles\3.21.1\CompilerIdCXX\CompilerIdCXX.vcxproj" (default targets).
+Done Building Project "C:\Users\Administrator\digitalknob\DK\DKApps\DKSDLRmlUi\win32\CMakeFiles\3.21.1\CompilerIdCXX\CompilerIdCXX.vcxproj" (default targets).
 
 Build succeeded.
     0 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:00.72
+Time Elapsed 00:00:00.68
 
 CMAKE_CXX_COMPILER_RANLIB ==           
 CMAKE_CXX_COMPILER_VERSION ==           19.30.30709.0
@@ -849,8 +849,8 @@ CMAKE_C_COMPILER_PRODUCED_FILES ==           CompilerIdC.exe;CompilerIdC.vcxproj
 CMAKE_C_COMPILER_PRODUCED_OUTPUT ==           Microsoft (R) Build Engine version 17.0.0+c9eb9dd64 for .NET Framework
 Copyright (C) Microsoft Corporation. All rights reserved.
 
-Build started 6/12/2022 3:28:24 PM.
-Project "C:\Users\Administrator\digitalknob\DK\DKApps\DKTestAll\win32\CMakeFiles\3.21.1\CompilerIdC\CompilerIdC.vcxproj" on node 1 (default targets).
+Build started 6/12/2022 6:45:28 PM.
+Project "C:\Users\Administrator\digitalknob\DK\DKApps\DKSDLRmlUi\win32\CMakeFiles\3.21.1\CompilerIdC\CompilerIdC.vcxproj" on node 1 (default targets).
 PrepareForBuild:
   Creating directory "Debug\".
   Creating directory "Debug\CompilerIdC.tlog\".
@@ -861,7 +861,7 @@ ClCompile:
   CMakeCCompilerId.c
 Link:
   C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.30.30705\bin\HostX64\x86\link.exe /ERRORREPORT:QUEUE /OUT:".\CompilerIdC.exe" /INCREMENTAL:NO /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /PDB:".\CompilerIdC.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:".\CompilerIdC.lib" /MACHINE:X86 /SAFESEH Debug\CMakeCCompilerId.obj
-  CompilerIdC.vcxproj -> C:\Users\Administrator\digitalknob\DK\DKApps\DKTestAll\win32\CMakeFiles\3.21.1\CompilerIdC\CompilerIdC.exe
+  CompilerIdC.vcxproj -> C:\Users\Administrator\digitalknob\DK\DKApps\DKSDLRmlUi\win32\CMakeFiles\3.21.1\CompilerIdC\CompilerIdC.exe
 PostBuildEvent:
   for %%i in (cl.exe) do @echo CMAKE_C_COMPILER=%%~$PATH:i
   :VCEnd
@@ -869,13 +869,13 @@ PostBuildEvent:
 FinalizeBuildStatus:
   Deleting file "Debug\CompilerIdC.tlog\unsuccessfulbuild".
   Touching "Debug\CompilerIdC.tlog\CompilerIdC.lastbuildstate".
-Done Building Project "C:\Users\Administrator\digitalknob\DK\DKApps\DKTestAll\win32\CMakeFiles\3.21.1\CompilerIdC\CompilerIdC.vcxproj" (default targets).
+Done Building Project "C:\Users\Administrator\digitalknob\DK\DKApps\DKSDLRmlUi\win32\CMakeFiles\3.21.1\CompilerIdC\CompilerIdC.vcxproj" (default targets).
 
 Build succeeded.
     0 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:00.95
+Time Elapsed 00:00:01.01
 
 CMAKE_C_COMPILER_RANLIB ==           
 CMAKE_C_COMPILER_VERSION ==           19.30.30709.0
@@ -1012,7 +1012,7 @@ CMAKE_PATCH_VERSION ==           1
 CMAKE_PCH_COPY_COMPILE_PDB ==           ON
 CMAKE_PCH_EXTENSION ==           .pch
 CMAKE_PCH_PROLOGUE ==           #pragma system_header
-CMAKE_PLATFORM_INFO_DIR ==           C:/Users/Administrator/digitalknob/DK/DKApps/DKTestAll/win32/CMakeFiles/3.21.1
+CMAKE_PLATFORM_INFO_DIR ==           C:/Users/Administrator/digitalknob/DK/DKApps/DKSDLRmlUi/win32/CMakeFiles/3.21.1
 CMAKE_PLATFORM_INFO_INITIALIZED ==           1
 CMAKE_PROJECT_DESCRIPTION ==           
 CMAKE_PROJECT_HOMEPAGE_URL ==           
@@ -1099,7 +1099,7 @@ CMAKE_VS_PLATFORM_TOOLSET_HOST_ARCHITECTURE ==           x64
 CMAKE_VS_WINDOWS_TARGET_PLATFORM_VERSION ==           10.0.19041.0
 DEBUG ==           ON
 DKCMAKELIST_INCLUDED ==           1
-DigitalKnob_BINARY_DIR ==           C:/Users/Administrator/digitalknob/DK/DKApps/DKTestAll/win32
+DigitalKnob_BINARY_DIR ==           C:/Users/Administrator/digitalknob/DK/DKApps/DKSDLRmlUi/win32
 DigitalKnob_DESCRIPTION ==           
 DigitalKnob_HOMEPAGE_URL ==           
 DigitalKnob_IS_TOP_LEVEL ==           ON
@@ -1114,7 +1114,7 @@ MSVC_INCREMENTAL_YES_FLAG ==           /INCREMENTAL
 MSVC_TOOLSET_VERSION ==           142
 MSVC_VERSION ==           1930
 PRESET_CMAKE_SYSTEM_NAME ==           FALSE
-PROJECT_BINARY_DIR ==           C:/Users/Administrator/digitalknob/DK/DKApps/DKTestAll/win32
+PROJECT_BINARY_DIR ==           C:/Users/Administrator/digitalknob/DK/DKApps/DKSDLRmlUi/win32
 PROJECT_DESCRIPTION ==           
 PROJECT_HOMEPAGE_URL ==           
 PROJECT_IS_TOP_LEVEL ==           ON
