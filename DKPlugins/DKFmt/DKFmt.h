@@ -29,7 +29,8 @@
 #define DKFmt_H
 
 #include <DK/DK.h>
-#include <fmt/core.h>
+#include <fmt/format.h> // header only
+//#include <fmt/core.h> // compiled api
 
 class DKFmt : public DKObjectT<DKFmt>
 {

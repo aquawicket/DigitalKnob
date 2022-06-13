@@ -8,6 +8,7 @@ DKDEPEND(python)
 DKIMPORT(https://github.com/fmtlib/fmt.git PATCH)
 
 ### INCLUDE/LINK ###
+DKDEFINE(FMT_HEADER_ONLY)
 DKINCLUDE(${FMT}/include)
 #WIN_DEBUG_DKLIB(${FMT}/${OS}/${DEBUG_DIR}/fmtd.lib)
 #WIN_RELEASE_DKLIB(${FMT}/${OS}/${RELEASE_DIR}/fmt.lib)
