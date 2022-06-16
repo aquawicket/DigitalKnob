@@ -310,9 +310,9 @@ endmacro()
 #
 macro(dk_isNumber variable result)
 	if(variable MATCHES "^[0-9]+$")
-		set(${result} true PARENT_SCOPE)
+		set(${result} TRUE PARENT_SCOPE)
 	else()
-		set(${result} false PARENT_SCOPE)
+		set(${result} FALSE PARENT_SCOPE)
 	endif()
 endmacro()
 
@@ -368,13 +368,13 @@ endmacro()
 
 
 ##############################################################################
-# DUMP(variable)
+# dk_dump(variable)
 # 
 #	Print the contents of a variable to the screen
 #
-#	@variable:(Required) The variable to print to the screen. Without brackets variable ${ }'
+#	@variable:(Required)	The variable to print to the screen. Without variable brackets ${ }'
 #
-macro(DUMP variable)
+macro(dk_dump variable)
 	DKDEBUGFUNC(${ARGV})
 	DKINFO(" \n")
 	DKINFO("************** DUMP ****************")
@@ -382,21 +382,21 @@ macro(DUMP variable)
 		dk_getFilename(${CMAKE_CURRENT_FUNCTION_LIST_FILE} FILENAME)
 	endif()
 	if(NOT DEFINED ${variable})
-		DKINFO("DUMP(${variable}) variable not defined. The correct syntax is \"DUMP(varname)\", using the variable name")
-		DKINFO("DUMP(varname): CORRECT        DUMP(\${varname}): INCORRECT")
+		DKERROR("dk_dump(${variable}) variable not defined. The correct syntax is \"DUMP(varname)\", using the variable name")
+		DKERROR("dk_dump(varname): CORRECT SYNTAX        DUMP(\${varname}): INCORRECT SYNTAX")
 	endif()
 	DKINFO("${FILENAME}:${CMAKE_CURRENT_FUNCTION_LIST_LINE} -> ${CMAKE_CURRENT_FUNCTION}(${ARGV})")
-	list(LENGTH ${variable} variable_LENGTH)
-	if(${variable_LENGTH} GREATER 1)
-		set(varType "list")
+	list(LENGTH ${variable} variableLength)
+	if(${variableLength} GREATER 1)
+		set(variableType "list")
 	elseif(variable MATCHES "^[0-9]+$")
-		set(varType "number")
+		set(variableType "number")
 	else()
-		set(varType "string")
+		set(variableType "string")
 	endif()
 	DKINFO("NAME:    ${variable}")
-	DKINFO("TYPE:    ${varType}")
-	DKINFO("LENGTH:  ${variable_LENGTH}")
+	DKINFO("TYPE:    ${variableType}")
+	DKINFO("LENGTH:  ${variableLength}")
 	DKINFO("VALUE:   ${${variable}}")
 	DKINFO("************************************")
 	DKINFO("\n")
@@ -405,14 +405,15 @@ endmacro()
 
 
 ##############################################################################
-# dk_watch(var)
+# dk_watch(variable)
 # 
 #	Watch a varible reading and writing access events
 #
-#	@var: (Required) The variable to watch
-macro(dk_watch var)
+#	@variable: (Required) The variable to watch
+#
+macro(dk_watch variable)
 	DKDEBUGFUNC(${ARGV})
-	variable_watch(var dk_watchVariable)
+	variable_watch(variable dk_watchVariable)
 endmacro()
 
 
@@ -421,32 +422,38 @@ endmacro()
 # 
 #	Description:  TODO
 #
-#	@var: 		(Required) The variable to watch
-#	@access: 	(Required) TODO
-#	@val:       (Required) TODO
-#   @1st: 		(Required) TODO
-#	@stack:		(Required) TODO
-macro(dk_watchVariable var access val lst stack)
+#	@variable:(Required)	The variable to watch
+#	@access:(Required) 		TODO
+#	@val:(Required) 		TODO
+#   @1st:(Required) 		TODO
+#	@stack:(Required) 		TODO
+#
+macro(dk_watchVariable variable access val lst stack)
 	DKDEBUGFUNC(${ARGV})
-    DKINFO("Variable watch: var=${var} access=${access} val=${val} 1st=${1st} stack=${stack}")
+    DKINFO("Variable watch: variable=${variable} access=${access} val=${val} 1st=${1st} stack=${stack}")
 	dk_wait()
 endmacro()
 
 
 ##############################################################################
-# dk_watchVariable(var access val 1st stack)
+# dk_setXcodeProperty(TARGET property value)
 # 
 #	Set a XCode specific property
 #
-#	@ARGV: 	(Required) TODO
-macro(dk_setXcodeProperty TARGET XCODE_PROPERTY XCODE_VALUE)
+#   @TARGET:(Required)		The project target name to set the property for
+#	@property:(Required)	The name of the property to set
+#   @value:(Required)		The value to set the property to
+#
+macro(dk_setXcodeProperty TARGET property value)
 	DKDEBUGFUNC(${ARGV})
-    set_property(TARGET ${TARGET} PROPERTY XCODE_ATTRIBUTE_${XCODE_PROPERTY} ${XCODE_VALUE})
-endmacro(dk_setXcodeProperty)
+    set_property(TARGET ${TARGET} PROPERTY XCODE_ATTRIBUTE_${property} ${value})
+endmacro()
 
 
 ###############################################################################
 # dk_deleteCache()
+#
+#	Delete all CMake cache files thoughout the digitalknob directory
 #
 function(dk_deleteCache)
 	DKDEBUGFUNC(${ARGV})
@@ -464,6 +471,8 @@ endfunction()
 
 ###############################################################################
 # dk_deleteTempFiles()
+#
+#	Delete all .tmp files thoughout the digitalknob directory
 #
 function(dk_deleteTempFiles)
 	DKDEBUGFUNC(${ARGV})
@@ -484,16 +493,20 @@ endfunction()
 ###############################################################################
 # dk_deleteEmptyDirectories(path)
 #
+#	Delete all empty directories with a path
+#
+#	@path:(Required)	The path to search for empty folders to delete
+#
 function(dk_deleteEmptyDirectories path)
 	DKDEBUGFUNC(${ARGV})
 	if(NOT EXISTS ${path})
-		DKINFO("dk_deleteEmptyDirectories(): path does not exist")
+		DKERROR("dk_deleteEmptyDirectories(): path does not exist")
 		return()
 	endif()
 	if(WIN_HOST)
 		execute_process(COMMAND for /f "delims=" %d in ('dir /s /b /ad ^| sort /r') do rd "%d" WORKING_DIRECTORY ${path})
 	else()
-		DKINFO("dk_deleteEmptyDirectories() Not implemented for this platform")
+		DKERROR("dk_deleteEmptyDirectories() Not implemented for this platform")
 	endif()
 endfunction()
 
@@ -501,11 +514,16 @@ endfunction()
 ###############################################################################
 # dk_setEnv(name value)
 #
+#	Set a system environment variable
+#
+#	@name:(Required)	The name of the system environment variable to set
+#	@value:(Required)	The value to set the system environment vairable to
+#
 function(dk_setEnv name value)
 	DKDEBUGFUNC(${ARGV})
-	#DKINFO("dk_setEnv(${name} ${value})")
-	#DKINFO("ENVname = $ENV{${name}}")
-	#DKINFO("value = ${value}")
+	#DKDEBUG("dk_setEnv(${name} ${value})")
+	#DKDEBUG("ENVname = $ENV{${name}}")
+	#DKDEBUG("value = ${value}")
 	if(ENV{${name}})
 		string(FIND $ENV{${name}} ${value} index)
 	else()
@@ -518,7 +536,7 @@ function(dk_setEnv name value)
 			DKINFO("Setting %${name}% environment variable to ${value}")
 			DKEXECUTE_PROCESS(setx ${name} ${value}) # https://stackoverflow.com/a/69246810
 		else()
-			DKWARN("dk_setEnv() not implemented on this system")
+			DKERROR("dk_setEnv() not implemented on this system")
 		endif()
 	endif()
 endfunction()
@@ -529,7 +547,13 @@ endmacro()
 ###############################################################################
 # DOWNLOAD(src_path dest_path)
 #
-# https://cmake.org/pipermail/cmake/2012-September/052205.html/
+#	Download a file
+#
+#	@src_path:(Required)	The url of the file to download
+#	@dest_path:(Required)	The path to download the file to
+#
+#	Notes: https://cmake.org/pipermail/cmake/2012-September/052205.html/
+#
 function(DOWNLOAD src_path dest_path) # ARGV1 = dest_path
 	DKDEBUGFUNC(${ARGV})
 	#FIXME: Will not download if only 1 argument
@@ -548,28 +572,28 @@ function(DOWNLOAD src_path dest_path) # ARGV1 = dest_path
 		DKASSERT("src_path is invalid")
 		return()
 	endif()
-	DKDEBUG("DOWNLOAD(): src_path = ${src_path}")
+	DKDEBUG("src_path = ${src_path}")
 	
 	get_filename_component(src_dir ${src_path} DIRECTORY)
 	if(NOT src_dir)
 		DKASSERT("src_dir is invalid")
 		return()
 	endif()
-	DKDEBUG("DOWNLOAD(): src_dir = ${src_dir}")
+	DKDEBUG("src_dir = ${src_dir}")
 	
 	get_filename_component(src_filename ${src_path} NAME)
 	if(NOT src_filename)
 		DKASSERT("src_filename is invalid")
 		return()
 	endif()
-	DKDEBUG("DOWNLOAD(): src_filename = ${src_filename}")
+	DKDEBUG("src_filename = ${src_filename}")
 	
 	dk_getExtension(${src_path} src_ext)	
 	if(NOT src_ext)
 		DKASSERT("src_ext is invalid")
 		return()
 	endif()
-	DKDEBUG("DOWNLOAD(): src_ext = ${src_ext}")
+	DKDEBUG("src_ext = ${src_ext}")
 	
 	## Setup all dest_path variables
 	if(NOT dest_path)
@@ -582,7 +606,7 @@ function(DOWNLOAD src_path dest_path) # ARGV1 = dest_path
 	if(IS_DIRECTORY ${dest_path})
 		set(dest_path "${dest_path}/${src_filename}")
 	endif()
-	DKDEBUG("DOWNLOAD(): dest_path = ${dest_path}")
+	DKDEBUG("dest_path = ${dest_path}")
 	
 	get_filename_component(dest_dir ${dest_path} DIRECTORY)
 	if(NOT dest_dir)
@@ -594,24 +618,24 @@ function(DOWNLOAD src_path dest_path) # ARGV1 = dest_path
 		dk_makeDirectory(${dest_dir})
 	endif()
 	DKSET(CURRENT_DIR ${dest_dir})
-	DKDEBUG("DOWNLOAD(): dest_dir = ${dest_dir}")
+	DKDEBUG("dest_dir = ${dest_dir}")
 	
 	get_filename_component(dest_filename ${dest_path} NAME)
 	if(NOT dest_filename)
 		DKASSERT("dest_filename is invalid")
 		return()
 	endif()
-	DKDEBUG("DOWNLOAD(): dest_filename = ${dest_filename}")
+	DKDEBUG("dest_filename = ${dest_filename}")
 	
 	dk_getExtension(${dest_path} dest_ext)
 	if(NOT dest_ext)
 		DKASSERT("dest_ext is invalid")
 		return()
 	endif()
-	DKDEBUG("DOWNLOAD(): dest_ext = ${dest_ext}")
+	DKDEBUG("dest_ext = ${dest_ext}")
 	
 	if(EXISTS ${dest_path})
-		DKWARN("DOWNLOAD(): The destination path already exists \n ${dest_path}")
+		DKWARN("The destination path already exists \n ${dest_path}")
 		return()
 	endif()
 	
@@ -3219,7 +3243,9 @@ function(DKIMPORT_DL url) #Lib #ID #Patch
 	math(EXPR last "${url_length}-1")  #OUTPUT_FORMAT DECIMAL)")  CMake 3.13+
 	list(GET url_list ${last} url${last})
 	
-	string(FIND ${url${last}} ".zip" index)
+	
+	######### add recognizable file extensions ##########
+	string(FIND ${url${last}} ".7z" index)
 	if(${index} GREATER -1)
 		if(NOT ID)
 			string(SUBSTRING ${url${last}} 0 ${index} ID)
@@ -3227,7 +3253,7 @@ function(DKIMPORT_DL url) #Lib #ID #Patch
 		DKSET(${LIBVAR}_DL ${url})
 	endif()
 	
-	string(FIND ${url${last}} ".tar.gz" index)
+	string(FIND ${url${last}} ".js" index)
 	if(${index} GREATER -1)
 		if(NOT ID)
 			string(SUBSTRING ${url${last}} 0 ${index} ID)
@@ -3243,7 +3269,7 @@ function(DKIMPORT_DL url) #Lib #ID #Patch
 		DKSET(${LIBVAR}_DL ${url})
 	endif()
 	
-	string(FIND ${url${last}} ".js" index)
+	string(FIND ${url${last}} ".tar.gz" index)
 	if(${index} GREATER -1)
 		if(NOT ID)
 			string(SUBSTRING ${url${last}} 0 ${index} ID)
@@ -3251,6 +3277,15 @@ function(DKIMPORT_DL url) #Lib #ID #Patch
 		DKSET(${LIBVAR}_DL ${url})
 	endif()
 
+	string(FIND ${url${last}} ".zip" index)
+	if(${index} GREATER -1)
+		if(NOT ID)
+			string(SUBSTRING ${url${last}} 0 ${index} ID)
+		endif()
+		DKSET(${LIBVAR}_DL ${url})
+	endif()
+	######################################################
+	
 	
 	if(NOT ${LIBVAR}_DL)
 		string(FIND ${url} "github.com" result)
