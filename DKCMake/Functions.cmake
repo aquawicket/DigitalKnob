@@ -1464,9 +1464,8 @@ AliasFunctions("RELEASE_VS" "NO_DEBUG_RELEASE_TAGS")
 
 
 ###############################################################################
-# function(args)
+# VS(args)
 #
-#	
 function(VS)
 	DKDEBUGFUNC(${ARGV})
 	DEBUG_VS(${ARGV})
@@ -1476,9 +1475,8 @@ AliasFunctions("VS" "NO_DEBUG_RELEASE_TAGS")
 
 
 ###############################################################################
-# function(args)
+# VISUAL_STUDIO(args)
 #
-#	
 macro(VISUAL_STUDIO)
 	DKDEBUGFUNC(${ARGV})
 	VS(${ARGV})
@@ -1486,10 +1484,8 @@ endmacro()
 
 
 ###############################################################################
-# function(args)
+# DEBUG_XCODE(folder)
 #
-#	
-################### Xcode Build ###################
 function(DEBUG_XCODE folder)
 	DKDEBUGFUNC(${ARGV})
 	if(NOT MAC_HOST)
@@ -1507,9 +1503,8 @@ AliasFunctions("DEBUG_XCODE" "NO_DEBUG_RELEASE_TAGS")
 
 
 ###############################################################################
-# function(args)
+# RELEASE_XCODE(folder)
 #
-#	
 function(RELEASE_XCODE folder)
 	DKDEBUGFUNC(${ARGV})
 	if(NOT MAC_HOST)
@@ -1527,9 +1522,8 @@ AliasFunctions("RELEASE_XCODE" "NO_DEBUG_RELEASE_TAGS")
 
 
 ###############################################################################
-# function(args)
+# XCODE(args)
 #
-#	
 function(XCODE)
 	DKDEBUGFUNC(${ARGV})
 	DEBUG_XCODE(${ARGV})
@@ -1539,10 +1533,8 @@ AliasFunctions("XCODE" "NO_DEBUG_RELEASE_TAGS")
 
 
 ###############################################################################
-# function(args)
+# DEBUG_NDK(folder)
 #
-#	
-####################### Android NDK Build #################
 function(DEBUG_NDK folder)
 	DKDEBUGFUNC(${ARGV})
 	if(DEBUG AND QUEUE_BUILD)
@@ -1558,9 +1550,8 @@ AliasFunctions("DEBUG_NDK" "NO_DEBUG_RELEASE_TAGS")
 
 
 ###############################################################################
-# function(args)
+# RELEASE_NDK(folder)
 #
-#	
 function(RELEASE_NDK folder)
 	DKDEBUGFUNC(${ARGV})
 	if(RELEASE AND QUEUE_BUILD)
@@ -1576,9 +1567,8 @@ AliasFunctions("RELEASE_NDK" "NO_DEBUG_RELEASE_TAGS")
 
 
 ###############################################################################
-# function(args)
+# NDK(args)
 #
-#	
 function(NDK)
 	DKDEBUGFUNC(${ARGV})
 	DEBUG_NDK(${ARGV})
@@ -1588,10 +1578,8 @@ AliasFunctions("NDK" "NO_DEBUG_RELEASE_TAGS")
 
 
 ###############################################################################
-# function(args)
+# MAKE(lib)
 #
-#	
-####################### Make Build #################
 function(MAKE lib)
 	DKDEBUGFUNC(${ARGV})
 	DKQCOMMAND(make ${ARGV})
@@ -1599,10 +1587,8 @@ endfunction()
 
 
 ###############################################################################
-# function(args)
+# DKLIB(lib_path)
 #
-#	
-###################### DKPlugin Link Libraries #####################
 function(DKLIB lib_path)
 	DKDEBUGFUNC(${ARGV})
 	foreach(item ${ARGV})
@@ -1628,9 +1614,8 @@ AliasFunctions("DKLIB" "NO_DEBUG_RELEASE_TAGS")
 
 
 ###############################################################################
-# function(args)
+# DEBUG_DKLI(lib_path)
 #
-#	
 function(DEBUG_DKLIB lib_path)
 	DKDEBUGFUNC(${ARGV})
 	if(NOT DEBUG)
@@ -1661,9 +1646,8 @@ AliasFunctions("DEBUG_DKLIB" "NO_DEBUG_RELEASE_TAGS")
 
 
 ###############################################################################
-# function(args)
+# RELEASE_DKLIB(lib_path)
 #
-#	
 function(RELEASE_DKLIB lib_path)
 	DKDEBUGFUNC(${ARGV})
 	if(NOT RELEASE)
@@ -1694,9 +1678,8 @@ AliasFunctions("RELEASE_DKLIB" "NO_DEBUG_RELEASE_TAGS")
 
 
 ###############################################################################
-# function(args)
+# generateCmake(plugin_name)
 #
-#	
 function(generateCmake plugin_name)
 	DKDEBUGFUNC(${ARGV})
 	dk_getPathToPlugin(${plugin_name} plugin_path)
@@ -1796,9 +1779,8 @@ endfunction()
 
 
 ###############################################################################
-# function(args)
+# DKDLL(name)
 #
-#	
 function(DKDLL name)
 	DKDEBUGFUNC(${ARGV})
 	dk_getPathToPlugin(${name} plugin_path)

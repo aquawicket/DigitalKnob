@@ -1053,8 +1053,8 @@ if(ANDROID)
 	endif()
 	set(CMAKE_ANDROID_GUI 1)
 	
-	DKSET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -frtti")
-	#DUMP(CMAKE_CXX_FLAGS)
+	DKSET(CMAKE_C_FLAGS ${CMAKE_C_FLAGS} -frtti)
+	DKSET(CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS} -frtti)
 	
 	#add_library(${APP_NAME} SHARED ${App_SRC})
 	add_library(main SHARED ${App_SRC})
