@@ -4,4 +4,5 @@ if(NOT WIN_HOST)
 endif()
 
 
+#DKIMPORT(shlwapi.lib)
 WIN_DKLIB(shlwapi.lib)

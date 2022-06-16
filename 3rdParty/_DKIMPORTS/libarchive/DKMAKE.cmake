@@ -1,6 +1,5 @@
 # https://github.com/libarchive/libarchive
 #
-#
 # INSTALL TARGETS given no BUNDLE DESTINATION for MACOSX_BUNDLE executabletarget "bsdcat".
 # https://github.com/libarchive/libarchive/issues/1563
 
@@ -15,14 +14,8 @@ DKDEPEND(cryptopp)
 WIN_DKDEPEND(openssl)
 
 
-#DKIMPORT(https://github.com/libarchive/libarchive)
+#DKIMPORT(https://github.com/libarchive/libarchive.git PATCH)
 DKIMPORT(https://github.com/libarchive/libarchive/archive/93f03b0f5d7316714df9b289a49150ab7a63bfaf.zip PATCH)
-
-#DKSET(LIBARCHIVE_VERSION 3.6.0)
-#DKSET(LIBARCHIVE_DL https://github.com/libarchive/libarchive/releases/download/v3.6.0/libarchive-3.6.0.zip)
-#DKSET(LIBARCHIVE_NAME libarchive-${LIBARCHIVE_VERSION})
-#DKSET(LIBARCHIVE ${3RDPARTY}/${LIBARCHIVE_NAME})
-#DKINSTALL(${LIBARCHIVE_DL} libarchive ${LIBARCHIVE})
 
 
 ### DKPLUGINS LINK ###
@@ -40,7 +33,6 @@ RASPBERRY_DEBUG_DKLIB(${LIBARCHIVE}/${OS}/${DEBUG_DIR}/libarchive/libarchive.a)
 RASPBERRY_RELEASE_DKLIB(${LIBARCHIVE}/${OS}/${RELEASE_DIR}/libarchive/libarchive.a)
 ANDROID_DEBUG_DKLIB(${LIBARCHIVE}/${OS}/libarchive/${DEBUG_DIR}/libarchive.a)
 ANDROID_RELEASE_DKLIB(${LIBARCHIVE}/${OS}/libarchive/${RELEASE_DIR}/libarchive.a)
-
 
 
 ### COMPILE ###

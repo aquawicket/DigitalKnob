@@ -4,6 +4,8 @@ if(NOT IOS)
 endif()
 
 
+#DKIMPORT(UIKit)
+
 FIND_LIBRARY(UIKit_lib UIKit)
 if(NOT UIKit_lib)
 	DKWARN("Could not locate UIKit framework")

@@ -9,13 +9,6 @@ DKDEPEND(sdl)
 DKIMPORT(https://sourceforge.net/projects/waave/files/waave/waave-3.01.tar.gz)
 
 
-#DKSET(WAAVE_VERSION 3.01)
-#DKSET(WAAVE_NAME waave-${WAAVE_VERSION})
-#DKSET(WAAVE_DL https://sourceforge.net/projects/waave/files/waave/${WAAVE_NAME}.tar.gz)
-#DKSET(WAAVE ${3RDPARTY}/${WAAVE_NAME})
-#DKINSTALL(${WAAVE_DL} waave ${WAAVE})
-
-
 ### LINK ###
 DKINCLUDE(${WAAVE}/src)
 WIN_DEBUG_DKLIB(${WAAVE}/${OS}/${DEBUG_DIR}/waave.lib)

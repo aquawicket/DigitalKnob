@@ -28,5 +28,4 @@ RASPBERRY_DKIMPORT(https://github.com/upx/upx/releases/download/v3.96/upx-3.96-a
 #DKINSTALL(${UPX_DL} upx ${UPX})
 
 
-WIN32_DKSET(UPX_EXE ${UPX}/upx.exe)
-WIN64_DKSET(UPX_EXE ${UPX}/upx.exe)
+WIN_DKSET(UPX_EXE ${UPX}/upx.exe)
