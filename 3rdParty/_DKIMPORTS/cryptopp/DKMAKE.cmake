@@ -7,7 +7,7 @@ if(IOSSIM)
 endif()
 
 if(WIN)
-	#DKIMPORT(https://github.com/weidai11/cryptopp)
+	#DKIMPORT(https://github.com/weidai11/cryptopp.git)
 	DKIMPORT(https://github.com/weidai11/cryptopp/archive/27b7b8e4e6b3e54cca13b2faae87eb95faa0d819.zip PATCH)
 else()
 	DKSET(CRYPTOPP_VERSION 8_5_0)

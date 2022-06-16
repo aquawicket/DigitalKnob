@@ -1,13 +1,12 @@
 # https://www.sourceware.org/bzip2
 # https://gitlab.com/bzip2/bzip2
 # https://github.com/kiyolee/bzip2-win-build
-
 # https://github.com/kiyolee/bzip2-win-build/archive/refs/tags/v1.0.8.zip
 # https://gitlab.com/bzip2/bzip2/-/archive/bzip2-1.0.8/bzip2-bzip2-1.0.8.zip
-
 if(WIN)
 	return()
 endif()
+
 
 DKDEPEND(mingw32)
 DKDEPEND(mingw64)
@@ -15,14 +14,19 @@ DKDEPEND(msys2)
 DKDEPEND(libgcc)
 
 
-DKSET(BZIP2_VERSION 1.0.8)
-DKSET(BZIP2_NAME bzip2-${BZIP2_VERSION})
-WIN_DKSET(BZIP2_DL https://github.com/kiyolee/bzip2-win-build/archive/refs/tags/v1.0.8.zip)
-LINUX_DKSET(BZIP2_DL ftp://sourceware.org/pub/bzip2/bzip2-1.0.8.tar.gz)
-RASPBERRY_DKSET(BZIP2_DL ftp://sourceware.org/pub/bzip2/bzip2-1.0.8.tar.gz)
-ANDROID_DKSET(BZIP2_DL ftp://sourceware.org/pub/bzip2/bzip2-1.0.8.tar.gz)
-DKSET(BZIP2 ${3RDPARTY}/${BZIP2_NAME})
-DKINSTALL(${BZIP2_DL} bzip2 ${BZIP2})
+WIN_DKIMPORT		(BZIP2_DL https://github.com/kiyolee/bzip2-win-build/archive/refs/tags/v1.0.8.zip)
+LINUX_DKIMPORT		(BZIP2_DL ftp://sourceware.org/pub/bzip2/bzip2-1.0.8.tar.gz)
+RASPBERRY_DKIMPORT	(BZIP2_DL ftp://sourceware.org/pub/bzip2/bzip2-1.0.8.tar.gz)
+ANDROID_DKIMPORT	(BZIP2_DL ftp://sourceware.org/pub/bzip2/bzip2-1.0.8.tar.gz)
+
+#DKSET(BZIP2_VERSION 1.0.8)
+#DKSET(BZIP2_NAME bzip2-${BZIP2_VERSION})
+#WIN_DKSET(BZIP2_DL https://github.com/kiyolee/bzip2-win-build/archive/refs/tags/v1.0.8.zip)
+#LINUX_DKSET(BZIP2_DL ftp://sourceware.org/pub/bzip2/bzip2-1.0.8.tar.gz)
+#RASPBERRY_DKSET(BZIP2_DL ftp://sourceware.org/pub/bzip2/bzip2-1.0.8.tar.gz)
+#ANDROID_DKSET(BZIP2_DL ftp://sourceware.org/pub/bzip2/bzip2-1.0.8.tar.gz)
+#DKSET(BZIP2 ${3RDPARTY}/${BZIP2_NAME})
+#DKINSTALL(${BZIP2_DL} bzip2 ${BZIP2})
 
 
 if(NOT EXISTS ${BZIP2}/copy)

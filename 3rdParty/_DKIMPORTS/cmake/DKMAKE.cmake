@@ -11,7 +11,7 @@ if(COMPILE_CMAKE)
 	DKDEPEND(msys2)
 	#DKIMPORT(https://github.com/Kitware/CMake)
 	
-	DKGITCLONE(https://github.com/Kitware/CMake.git)
+	DKIMPORT(https://github.com/Kitware/CMake.git)
 	#WIN_HOST_DKSET(CMAKE_VERSION 3a169af9524339e8b2e82130da7605040daf7925)
 	#DKIMPORT(https://github.com/Kitware/CMake/archive/3a169af9524339e8b2e82130da7605040daf7925.zip)
 

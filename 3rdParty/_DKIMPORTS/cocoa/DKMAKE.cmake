@@ -1,8 +1,8 @@
+# https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/CocoaFundamentals/WhatIsCocoa/WhatIsCocoa.html
 if(NOT MAC)
 	return()
 endif()
 
-# https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/CocoaFundamentals/WhatIsCocoa/WhatIsCocoa.html
 
 FIND_LIBRARY(Cocoa_lib Cocoa)
 if(NOT Cocoa_lib)

@@ -1,17 +1,14 @@
+# https://github.com/nowres/conio-for-linux
+# https://github.com/nowres/conio-for-linux/archive/refs/heads/master.zip
 if(NOT UNIX_HOST)
 	return()
 endif()
 
-# https://github.com/nowres/conio-for-linux
-#
-# https://github.com/nowres/conio-for-linux/archive/refs/heads/master.zip
 
 ### DEPENDS ###
 DKDEPEND(ncurses)
 
-DKGITCLONE(https://github.com/nowres/conio-for-linux.git)
-
-#DKIMPORT(https://github.com/nowres/conio-for-linux)
+DKIMPORT(https://github.com/nowres/conio-for-linux.git)
 
 #DKSET(CONIO-FOR-LINUX_VERSION master)
 #DKSET(CONIO-FOR-LINUX_NAME conio-${CONIO-FOR-LINUX_VERSION})

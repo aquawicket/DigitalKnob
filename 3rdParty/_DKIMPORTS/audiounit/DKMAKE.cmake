@@ -1,8 +1,7 @@
+# https://developer.apple.com/documentation/audiounit
 if(NOT MAC_HOST)
 	return()
 endif()
-
-# https://developer.apple.com/documentation/audiounit
 
 FIND_LIBRARY(AudioUnit_lib AudioUnit)
 if(NOT AudioUnit_lib)

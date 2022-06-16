@@ -1,8 +1,8 @@
+# https://developer.apple.com/documentation/audiotoolbox
 if(NOT MAC_HOST)
 	return()
 endif()
 
-# https://developer.apple.com/documentation/audiotoolbox
 
 FIND_LIBRARY(AudioToolbox_lib AudioToolbox)
 if(NOT AudioToolbox_lib)

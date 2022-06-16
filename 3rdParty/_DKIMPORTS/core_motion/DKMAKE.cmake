@@ -1,8 +1,8 @@
+# https://developer.apple.com/documentation/coremotion?language=objc
 if(NOT MAC_HOST)
 	return()
 endif()
 
-# https://developer.apple.com/documentation/coremotion?language=objc
 
 FIND_LIBRARY(coremotion_lib CoreMotion)
 if(NOT coremotion_lib)

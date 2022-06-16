@@ -1,8 +1,8 @@
+# https://developer.apple.com/documentation/coregraphics?language=objc
 if(NOT MAC_HOST)
 	return()
 endif()
 
-# https://developer.apple.com/documentation/coregraphics?language=objc
 
 FIND_LIBRARY(CoreGraphics_lib CoreGraphics)
 if(NOT CoreGraphics_lib)

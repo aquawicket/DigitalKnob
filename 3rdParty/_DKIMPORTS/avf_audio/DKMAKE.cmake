@@ -1,8 +1,8 @@
+# https://developer.apple.com/documentation/avfaudio?language=objc
 if(NOT MAC_HOST)
 	return()
 endif()
 
-# https://developer.apple.com/documentation/avfaudio?language=objc
 
 FIND_LIBRARY(AVFAaudio_lib AVFAudio)
 if(NOT AVFAaudio_lib)
