@@ -62,36 +62,36 @@ LINUX_DKDEPEND(build-essential)
 LINUX_DKDEPEND(libgtk2.0-dev)
 
 
-WIN32_DKIMPORT(https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_windows32.tar.bz2)
-WIN64_DKIMPORT(https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_windows64.tar.bz2)
-MAC64(https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_macosx64.tar.bz2)
-LINUX32_DKIMPORT(https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_linux32.tar.bz2)
-LINUX64_DKIMPORT(https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_linux64.tar.bz2)
+WIN32_DKIMPORT		(https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_windows32.tar.bz2)
+WIN64_DKIMPORT		(https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_windows64.tar.bz2)
+MAC64_DKIMPORT		(https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_macosx64.tar.bz2)
+LINUX32_DKIMPORT	(https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_linux32.tar.bz2)
+LINUX64_DKIMPORT	(https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_linux64.tar.bz2)
 RASPBERRY32_DKIMPORT(https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_linuxarm.tar.bz2)
 RASPBERRY64_DKIMPORT(https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_linuxarm64.tar.bz2)
 
 ### VERSION ###
-#DKSET(CEF_VERSION 81.3.3+g072a5f5+chromium-81.0.4044.138)
-#WIN32_DKSET(CEF_DL https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_windows32.tar.bz2)
-#WIN64_DKSET(CEF_DL https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_windows64.tar.bz2)
-#MAC64_DKSET(CEF_DL https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_macosx64.tar.bz2)
-#LINUX32_DKSET(CEF_DL https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_linux32.tar.bz2)
-#LINUX64_DKSET(CEF_DL https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_linux64.tar.bz2)
-#RASPBERRY32_DKSET(CEF_DL https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_linuxarm.tar.bz2)
-#RASPBERRY64_DKSET(CEF_DL https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_linuxarm64.tar.bz2)
+#DKSET				(CEF_VERSION 81.3.3+g072a5f5+chromium-81.0.4044.138)
+#WIN32_DKSET		(CEF_DL https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_windows32.tar.bz2)
+#WIN64_DKSET		(CEF_DL https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_windows64.tar.bz2)
+#MAC64_DKSET		(CEF_DL https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_macosx64.tar.bz2)
+#LINUX32_DKSET		(CEF_DL https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_linux32.tar.bz2)
+#LINUX64_DKSET		(CEF_DL https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_linux64.tar.bz2)
+#RASPBERRY32_DKSET	(CEF_DL https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_linuxarm.tar.bz2)
+#RASPBERRY64_DKSET	(CEF_DL https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_linuxarm64.tar.bz2)
 
 
 
 ### INSTALL ###
-#WIN32_DKSET(CEF_NAME cef_binary_${CEF_VERSION}_windows32)
-#WIN64_DKSET(CEF_NAME cef_binary_${CEF_VERSION}_windows64)
-#MAC64_DKSET(CEF_NAME cef_binary_${CEF_VERSION}_macosx64)
-#LINUX32_DKSET(CEF_NAME cef_binary_${CEF_VERSION}_linux32)
-#LINUX64_DKSET(CEF_NAME cef_binary_${CEF_VERSION}_linux64)
-#RASPBERRY32_DKSET(CEF_NAME cef_binary_${CEF_VERSION}_linuxarm)
-#RASPBERRY64_DKSET(CEF_NAME cef_binary_${CEF_VERSION}_linuxarm64)
-#DKSET(CEF ${3RDPARTY}/${CEF_NAME})
-#DKINSTALL(${CEF_DL} cef_binary ${CEF})
+#WIN32_DKSET		(CEF_NAME cef_binary_${CEF_VERSION}_windows32)
+#WIN64_DKSET		(CEF_NAME cef_binary_${CEF_VERSION}_windows64)
+#MAC64_DKSET		(CEF_NAME cef_binary_${CEF_VERSION}_macosx64)
+#LINUX32_DKSET		(CEF_NAME cef_binary_${CEF_VERSION}_linux32)
+#LINUX64_DKSET		(CEF_NAME cef_binary_${CEF_VERSION}_linux64)
+#RASPBERRY32_DKSET	(CEF_NAME cef_binary_${CEF_VERSION}_linuxarm)
+#RASPBERRY64_DKSET	(CEF_NAME cef_binary_${CEF_VERSION}_linuxarm64)
+#DKSET				(CEF ${3RDPARTY}/${CEF_NAME})
+#DKINSTALL			(${CEF_DL} cef_binary ${CEF})
 
 
 ### DKPLUGINS LINK ###

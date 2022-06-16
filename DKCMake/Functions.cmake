@@ -2977,6 +2977,7 @@ function(DKIMPORT url) #Lib #ID #Patch
 		DKIMPORT_DL(${ARGV})
 	endif()
 endfunction()
+AliasFunctions("DKIMPORT")
 
 
 ###############################################################################
