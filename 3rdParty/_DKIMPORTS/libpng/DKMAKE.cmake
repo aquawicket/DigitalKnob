@@ -5,7 +5,7 @@
 DKDEPEND(zlib)
 
 if(MAC)
-	DKIMPORT(https://github.com/glennrp/libpng)
+	DKIMPORT(https://github.com/glennrp/libpng.git)
 else()
 	DKIMPORT(https://github.com/glennrp/libpng/archive/refs/tags/v1.6.35.zip)
 	DKSET(LIBPNG_MAJOR 1)
