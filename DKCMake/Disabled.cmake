@@ -134,9 +134,9 @@ endif()
 
 
 if(MAC)  # Disabled on Mac host machines
-    #DKDISABLE(android-build-tools)
-	#DKDISABLE(android-ndk)
-	#DKDISABLE(android-platform-tools)
+	DKDISABLE(android-build-tools)
+	DKDISABLE(android-ndk)
+	DKDISABLE(android-platform-tools)
 	DKDISABLE(boxer)
 	DKDISABLE(build-essential)
 	DKDISABLE(bzip2)
