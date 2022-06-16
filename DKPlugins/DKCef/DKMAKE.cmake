@@ -17,7 +17,7 @@ if(RASPBERRY)
 	DKDEPEND(libglib2.0-dev)
 	DKDEPEND(libgtk2.0-dev)
 endif()
-DKDEPEND(cef_binary)
+DKDEPEND(cef)
 DKDEPEND(DK)
 DKDEPEND(DKDuktape)
 
