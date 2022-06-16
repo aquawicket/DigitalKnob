@@ -244,7 +244,7 @@ void signal_handler(int signal);
 
 #define DEBUG_METHOD() logy _logy(__FUNCTION__);
 
-#if WIN32
+#ifdef WIN32
 	#define DKDEBUGFUNC1(__FILE__, __LINE__, __FUNCTION__, ...) DebugFunc(__FILE__, __LINE__, __FUNCTION__, #__VA_ARGS__, __VA_ARGS__)
 	#define DKDEBUGRETURN1(__FILE__, __LINE__, __FUNCTION__, ...) DebugReturn(__FILE__, __LINE__, __FUNCTION__, #__VA_ARGS__, __VA_ARGS__)
 	#define DKDEBUGFUNC(...) DKDEBUGFUNC1(__FILE__, __LINE__, __FUNCTION__, __VA_ARGS__)
