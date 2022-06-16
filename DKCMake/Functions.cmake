@@ -1857,7 +1857,7 @@ endfunction()
 
 
 ###############################################################################
-# function(args)
+# DKEXECUTABLE(name)
 #
 #	
 function(DKEXECUTABLE name)
