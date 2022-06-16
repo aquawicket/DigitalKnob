@@ -14,10 +14,10 @@ DKDEPEND(msys2)
 DKDEPEND(libgcc)
 
 
-WIN_DKIMPORT		(BZIP2_DL https://github.com/kiyolee/bzip2-win-build/archive/refs/tags/v1.0.8.zip)
-LINUX_DKIMPORT		(BZIP2_DL ftp://sourceware.org/pub/bzip2/bzip2-1.0.8.tar.gz)
-RASPBERRY_DKIMPORT	(BZIP2_DL ftp://sourceware.org/pub/bzip2/bzip2-1.0.8.tar.gz)
-ANDROID_DKIMPORT	(BZIP2_DL ftp://sourceware.org/pub/bzip2/bzip2-1.0.8.tar.gz)
+WIN_DKIMPORT		(https://github.com/kiyolee/bzip2-win-build/archive/refs/tags/v1.0.8.zip)
+LINUX_DKIMPORT		(ftp://sourceware.org/pub/bzip2/bzip2-1.0.8.tar.gz)
+RASPBERRY_DKIMPORT	(ftp://sourceware.org/pub/bzip2/bzip2-1.0.8.tar.gz)
+ANDROID_DKIMPORT	(ftp://sourceware.org/pub/bzip2/bzip2-1.0.8.tar.gz)
 
 #DKSET(BZIP2_VERSION 1.0.8)
 #DKSET(BZIP2_NAME bzip2-${BZIP2_VERSION})
