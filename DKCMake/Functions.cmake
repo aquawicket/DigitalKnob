@@ -26,6 +26,7 @@
 # https://asitdhal.medium.com/cmake-functions-and-macros-22293041519f
 include_guard()
 
+
 function(dk_getDigitalknobPath result)
 	get_filename_component(DIGITALKNOB ${CMAKE_SOURCE_DIR} ABSOLUTE)
 	get_filename_component(FOLDER_NAME ${DIGITALKNOB} NAME)
@@ -43,10 +44,9 @@ set(DKCMAKE ${DIGITALKNOB}/DK/DKCMake)
 
 
 
-
 ### SETTINGS #####################################################################
 set(DKDEBUG_ENABLED				0		CACHE INTERNAL "")
-set(ENABLE_DKDEBUGFUNC 			0		CACHE INTERNAL "")
+set(DKDEBUGFUNC_ENABLED			0		CACHE INTERNAL "")
 set(PRINT_CALL_DETAILS 			1		CACHE INTERNAL "")
 set(PRINT_FILE_NAMES 			1 		CACHE INTERNAL "")
 set(PRINT_LINE_NUMBERS 			1		CACHE INTERNAL "")
@@ -75,9 +75,8 @@ endfunction()
 
 
 ###############################################################################
-# function(args)
+# AliasFunctions(name)
 #
-#	
 function(AliasFunctions name)
 	DKDEBUGFUNC(${ARGV})
 	CreateFunc("macro(WIN_HOST_${name})\n   if(WIN_HOST)\n      ${name}(\${ARGV})\n  endif()\nendmacro()\n")
@@ -171,10 +170,10 @@ endfunction()
 
 
 ###############################################################################
-# function(args)
+# dk_printAllVariables()
 #
-#	
-### print all variables
+#	Prints all cmake varibles
+#
 function(dk_printAllVariables)
 	DKDEBUGFUNC(${ARGV})
 	get_cmake_property(_variableNames VARIABLES)
@@ -187,10 +186,8 @@ endfunction()
 
 
 ###############################################################################
-# function(args)
+# dk_includes(str substr result)
 #
-#	
-# dk_string_has
 function(dk_includes str substr result)
 	DKDEBUGFUNC(${ARGV})
 	string(FIND "${str}" "${substr}" index)
@@ -203,7 +200,7 @@ endfunction()
 
 
 ###############################################################################
-# function(args)
+# DKSET(variable value)
 #
 #	
 # https://stackoverflow.com/a/29250496/688352
@@ -220,9 +217,8 @@ AliasFunctions("DKSET")
 
 
 ###############################################################################
-# function(args)
+# DKUNSET(variable)
 #
-#	
 function(DKUNSET variable)
 	DKDEBUGFUNC(${ARGV})
 	set(${variable} "" CACHE INTERNAL "")
@@ -231,9 +227,8 @@ endfunction()
 
 
 ###############################################################################
-# function(args)
+# dk_exit()
 #
-#	
 macro(dk_exit)
 	DKDEBUGFUNC(${ARGV})
 	if(WIN_HOST)
@@ -249,54 +244,56 @@ endmacro()
 ## TOREAD:    https://foonathan.net/2016/03/cmake-install/ 
 
 
+
+##############################################################################
 # TestReturnValue(args result)
-#####################################################
-# 	Example function that uses returns value with a supplied variable 
-# Implementation: 
-#	function(TestReturnValue args result)
-#		set(args ${ARGV})
-#		list(GET args -1 result)
-#		list(REMOVE_AT args -1)
-#		set(${result} ${args} PARENT_SCOPE) #just relay the arguments
-#	endfunction()
 #
-# Usage:
-#	TestReturnValue("ABC" "123" 5 myResult)
-#	message(STATUS "TestReturnValue() -> myResult = ${myResult}") # should print->  return value = ABC;123;5
-#####################################################
+#	Example function that uses returns value with a supplied variable 
+#	Implementation: 
+#		function(TestReturnValue args result)
+#			set(args ${ARGV})
+#			list(GET args -1 result)
+#			list(REMOVE_AT args -1)
+#			set(${result} ${args} PARENT_SCOPE) #just relay the arguments
+#		endfunction()
+#
+#	Usage:
+#		TestReturnValue("ABC" "123" 5 myResult)
+#		message(STATUS "TestReturnValue() -> myResult = ${myResult}") # should print->  return value = ABC;123;5
 
 
+##############################################################################
 # CreateFunction(name contents args)
-######################################################
-# 	Example that creates functions dynamicaly at run time
-# Implementation:	
-#	function(CreateFunction name contents) #args)
-#		if(CMAKE_VERSION VERSION_LESS 3.18)
-#			if(NOT extFileCleared)
-#				file(WRITE ext_functions.cmake "")
-#				set(extFileCleared 1 CACHE INTERNAL "")
-#			endif()
-#			file(APPEND ext_functions.cmake "function(${name}) ${contents} \nendfunction() \n")
-#			include(ext_functions.cmake)
-#		else()
-#			cmake_language(EVAL CODE "function(${name}) \n${contents} endfunction()")
-#		endif()	
-#	endfunction()
-	
-# Usage:
-#	CreateFunction(MyDynamicFunc 
-#		"message(STATUS \"Test message\")") 
-#		"foreach(arg IN LIST ${ARGN})
-#			set(count 0) 
-#			message(STATUS \"arg:${count} = ${arg}\")
-#			MATH(EXPR count \"${cound}+1\")
-#		endforeach()"
-#		${ARGN}
-#	)
+#
+#	Example that creates functions dynamicaly at run time
+#	Implementation:	
+#		function(CreateFunction name contents) #args)
+#			if(CMAKE_VERSION VERSION_LESS 3.18)
+#				if(NOT extFileCleared)
+#					file(WRITE ext_functions.cmake "")
+#					set(extFileCleared 1 CACHE INTERNAL "")
+#				endif()
+#				file(APPEND ext_functions.cmake "function(${name}) ${contents} \nendfunction() \n")
+#				include(ext_functions.cmake)
+#			else()
+#				cmake_language(EVAL CODE "function(${name}) \n${contents} endfunction()")
+#			endif()	
+#		endfunction()
+#
+#	Usage:
+#		CreateFunction(MyDynamicFunc 
+#			"message(STATUS \"Test message\")") 
+#			"foreach(arg IN LIST ${ARGN})
+#				set(count 0) 
+#				message(STATUS \"arg:${count} = ${arg}\")
+#				MATH(EXPR count \"${cound}+1\")
+#			endforeach()"
+#			${ARGN}
+#		)
 #	
 #	set(myVariable "myVariable")
 #	MyDynamicFunc("myStringData" "My;List;Data" "${myVariable}" 17 moreData)
-##################################################
+
 
 ##############################################################################
 # dk_wait()

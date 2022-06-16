@@ -21,11 +21,14 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
-
 include_guard()
+
 
 #     dk.filesystem.js - %DIGITALKNOB%/DK/Api/filesystem/filesystem.js
 #    dk.filesystem.cpp - %DIGITALKNOB%/DK/Api/filesystem/filesystem.cpp
+#   DKBatch filesystem - %DIGITALKNOB%/DKBatch/filesystem
+#    DKBash filesystem - %DIGITALKNOB%/DKBash/filesystem
+#   DKCMake filesystem - %DIGITALKNOB%/DKCMake/filesystem/filesystem.cmake
 #      javascript FSAA - https://developer.mozilla.org/en-US/docs/Web/API/filesystem
 #       Php filesystem - https://www.php.net/manual/en/book.filesystem.php
 #    NodeJS filesystem - https://nodejs.org/api/fs.html
@@ -37,9 +40,3 @@ include_guard()
 #   Apple NSfilesystem - https://developer.apple.com/documentation/foundation/nsfilemanager
 # Liunx GNU filesystem - https://www.gnu.org/software/libc/manual/html_node/File-System-Interface.html
 #           CMake File - https://cmake.org/cmake/help/latest/command/file.html
-#   DKBatch filesystem - %DIGITALKNOB%/DKBatch/filesysten
-#    DKBash filesystem - %DIGITALKNOB%/DKBash/filesysten
-#   DKCMake filesystem - %DIGITALKNOB%/DKCMake/filesystem/filesystem.cmake
-
-
-
