@@ -6,12 +6,11 @@ if(NOT WIN_HOST)
 endif()
 
 
-### VERSION ####
-DKSET(ANDROIDJAVA_VERSION 2.8)
-DKSET(ANDROIDJAVA_NAME androoidjavatools-${ANDROIDJAVA_VERSION})
-DKSET(ANDROIDJAVA_DL https://marketplace.visualstudio.com/_apis/public/gallery/publishers/VisualCPPTeam/vsextensions/JavaToolsForAndroidProjVS2019/2.8/vspackage)
-DKSET(ANDROIDJAVA ${3RDPARTY}/${ANDROIDJAVA_NAME})
+DKIMPORT(https://marketplace.visualstudio.com/_apis/public/gallery/publishers/VisualCPPTeam/vsextensions/JavaToolsForAndroidProjVS2019/2.8/vspackage)
 
 
-### INSTALL ###
-DKINSTALL(${ANDROIDJAVA_DL} android-java-tools ${ANDROIDJAVA})
+#DKSET(ANDROIDJAVA_VERSION 2.8)
+#DKSET(ANDROIDJAVA_NAME androoidjavatools-${ANDROIDJAVA_VERSION})
+#DKSET(ANDROIDJAVA_DL https://marketplace.visualstudio.com/_apis/public/gallery/publishers/VisualCPPTeam/vsextensions/JavaToolsForAndroidProjVS2019/2.8/vspackage)
+#DKSET(ANDROIDJAVA ${3RDPARTY}/${ANDROIDJAVA_NAME})
+#DKINSTALL(${ANDROIDJAVA_DL} android-java-tools ${ANDROIDJAVA})

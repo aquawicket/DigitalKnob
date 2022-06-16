@@ -15,7 +15,6 @@
 # https://dl.google.com/android/repository/android-ndk-r23b-windows.zip        LTS
 # https://dl.google.com/android/repository/android-ndk-r23b-darwin-x86_64.dmg  LTS
 # https://dl.google.com/android/repository/android-ndk-r23b-linux-x86_64.zip   LTS
-
 if(NOT WIN_HOST)
 	return()
 endif()
@@ -28,7 +27,11 @@ endif()
 #MAC_HOST_DKSET(ANDROIDNDK_DL https://dl.google.com/android/repository/android-ndk-r21e-darwin-x86_64.dmg)
 #LINUX_HOST_DKSET(ANDROIDNDK_DL https://dl.google.com/android/repository/android-ndk-r21e-linux-x86_64.zip)
 
+
 # r23b
+#WIN_HOST_DKIMPORT(ANDROIDNDK_DL https://dl.google.com/android/repository/android-ndk-r22b-windows-x86_64.zip)
+#MAC_HOST_DKIMPORT(ANDROIDNDK_DL https://dl.google.com/android/repository/android-ndk-r22b-darwin-x86_64.dmg)
+#LINUX_HOST_DKIMPORT(ANDROIDNDK_DL https://dl.google.com/android/repository/android-ndk-r22b-linux-x86_64.zip)
 DKSET(ANDROIDNDK_VERSION r22b)
 DKSET(ANDROIDNDK_BUILD 22.1.7171670)
 WIN_HOST_DKSET(ANDROIDNDK_DL https://dl.google.com/android/repository/android-ndk-r22b-windows-x86_64.zip)

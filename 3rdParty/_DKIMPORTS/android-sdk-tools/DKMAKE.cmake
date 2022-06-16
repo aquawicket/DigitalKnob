@@ -11,17 +11,19 @@ endif()
 ### DEPENDS ###
 #DKDEPEND(JDK)
 
-### VERSION ###
+
+#WIN_HOST_DKIMPORT	(ANDROIDSDKTOOLS_DL https://dl.google.com/android/repository/sdk-tools-windows-4333796.zip)
+#MAC_HOST_DKIMPORT	(ANDROIDSDKTOOLS_DL https://dl.google.com/android/repository/sdk-tools-darwin-4333796.zip)
+#LINUX_HOST_DKIMPORT	(ANDROIDSDKTOOLS_DL https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip)
+
+
 DKSET(ANDROIDSDKTOOLS_VERSION 26.2.0) #revision
 DKSET(ANDROIDSDKTOOLS_BUILD 4333796)
 WIN_HOST_DKSET(ANDROIDSDKTOOLS_DL https://dl.google.com/android/repository/sdk-tools-windows-${ANDROIDSDKTOOLS_BUILD}.zip)
 MAC_HOST_DKSET(ANDROIDSDKTOOLS_DL https://dl.google.com/android/repository/sdk-tools-darwin-${ANDROIDSDKTOOLS_BUILD}.zip)
 LINUX_HOST_DKSET(ANDROIDSDKTOOLS_DL https://dl.google.com/android/repository/sdk-tools-linux-${ANDROIDSDKTOOLS_BUILD}.zip)
 DKSET(ANDROIDSDKTOOLS ${ANDROIDSDK}/tools)
-
-
-### INSTALL ###
-file(MAKE_DIRECTORY ${ANDROIDSDKTOOLS})
+dk_makeDirectory(${ANDROIDSDKTOOLS})
 DKINSTALL(${ANDROIDSDKTOOLS_DL} android-sdk-tools ${ANDROIDSDKTOOLS} PATCH)
 
 

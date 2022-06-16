@@ -1,10 +1,9 @@
-if(NOT WIN_HOST)
-	return()
-endif()
-
 # https://developer.android.com/studio/archive
 # https://developer.android.com/studio#downloads
 # 
+if(NOT WIN_HOST)
+	return()
+endif()
 
 
 #DKDEPEND(jdk)
@@ -12,7 +11,8 @@ DKDEPEND(android-sdk)
 DKDEPEND(android-ndk)
 
 
-### VERSION ###
+#DKIMPORT(https://redirector.gvt1.com/edgedl/android/studio/install/2020.3.1.26/android-studio-2020.3.1.26-windows.exe)
+
 DKSET(ANDROIDSTUDIO_VERSION "2020.3.1.26-windows")
 DKSET(ANDROIDSTUDIO_NAME "android-studio-2020.3.1.26-windows.exe")
 WIN_HOST_DKSET(ANDROIDSTUDIO_DL "https://redirector.gvt1.com/edgedl/android/studio/install/2020.3.1.26/android-studio-2020.3.1.26-windows.exe")
