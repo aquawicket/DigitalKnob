@@ -12,12 +12,12 @@ DKDEPEND(libgcc)
 DKDEPEND(ogg)
 
 
-#DKIMPORT(https://github.com/xiph/vorbis)
-DKSET(VORBIS_VERSION 1.3.7)
-DKSET(VORBIS_DL https://ftp.osuosl.org/pub/xiph/releases/vorbis/libvorbis-1.3.7.zip)
-DKSET(VORBIS_NAME libvorbis-${VORBIS_VERSION})
-DKSET(VORBIS ${3RDPARTY}/${VORBIS_NAME})
-DKINSTALL(${VORBIS_DL} vorbis ${VORBIS})
+DKIMPORT(https://ftp.osuosl.org/pub/xiph/releases/vorbis/libvorbis-1.3.7.zip)
+#DKSET(VORBIS_VERSION 1.3.7)
+#DKSET(VORBIS_DL https://ftp.osuosl.org/pub/xiph/releases/vorbis/libvorbis-1.3.7.zip)
+#DKSET(VORBIS_NAME libvorbis-${VORBIS_VERSION})
+#DKSET(VORBIS ${3RDPARTY}/${VORBIS_NAME})
+#DKINSTALL(${VORBIS_DL} vorbis ${VORBIS})
 
 
 ### dkplugin LINK ###

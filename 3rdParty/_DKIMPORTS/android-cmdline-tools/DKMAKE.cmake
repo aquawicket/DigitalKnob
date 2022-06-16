@@ -17,22 +17,23 @@ endif()
 ### DEPENDS ###
 #DKDEPEND(jdk8)
 
-### VERSION ###
-#DKSET(ANDROIDTOOLS ${3RDPARTY}/android-cmdline-tools)
-DKSET(ANDROIDTOOLS ${3RDPARTY}/android-sdk/cmdline-tools/latest)
-#file(MAKE_DIRECTORY ${3RDPARTY}/android-sdk/cmdline-tools/latest)
-dk_makeDirectory(${3RDPARTY}/android-sdk/cmdline-tools/latest)
 
+#WIN_HOST_DKIMPORT(https://dl.google.com/android/repository/commandlinetools-win-7583922_latest.zip)
+#MAC_HOST_DKIMPORT(https://dl.google.com/android/repository/commandlinetools-mac-7302050_latest.zip)
+#LINUX_HOST_DKIMPORT(https://dl.google.com/android/repository/commandlinetools-linux-7302050_latest.zip)
+
+DKSET(ANDROIDTOOLS ${3RDPARTY}/android-sdk/cmdline-tools/latest)
+dk_makeDirectory(${3RDPARTY}/android-sdk/cmdline-tools/latest)
 DKSET(SDKMANAGER_EXE ${ANDROIDTOOLS}/bin/sdkmanager.bat)
 WIN_HOST_DKSET(ANDROIDTOOLS_DL https://dl.google.com/android/repository/commandlinetools-win-7583922_latest.zip)
 MAC_HOST_DKSET(ANDROIDTOOLS_DL https://dl.google.com/android/repository/commandlinetools-mac-7302050_latest.zip)
 LINUX_HOST_DKSET(ANDROIDTOOLS_DL https://dl.google.com/android/repository/commandlinetools-linux-7302050_latest.zip)
-
-
-### INSTALL ###
 DKINSTALL(${ANDROIDTOOLS_DL} android-cmdline-tools ${ANDROIDTOOLS})
 
+
+## FIXME
 return()
+
 if(WIN_HOST)
 	DKEXECUTE_PROCESS(sdkmanager --sdk_root=${ANDROIDSDK} WORKING_DIRECTORY ${ANDROIDTOOLS}/bin)
 	if(NOT EXISTS ${ANDROIDSDK}/build-tools/${ANDROIDBUILDTOOLS_VERSION})

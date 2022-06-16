@@ -2,9 +2,8 @@
 # https://www.xquartz.org/releases/index.html
 #
 # https://github.com/XQuartz/XQuartz/releases/download/XQuartz-2.8.1/XQuartz-2.8.1.dmg
-if(MAC)
-	DKDEPEND(homebrew)
-endif()
+
+MAC_DKDEPEND(homebrew)
 
 
 ### INSTALL ###

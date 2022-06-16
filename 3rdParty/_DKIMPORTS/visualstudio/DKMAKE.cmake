@@ -15,10 +15,8 @@ endif()
 
 
 ### DEPENDS ###
-if(ANDROID)
-	DKDEPEND(ant)
-	DKDEPEND(android-sdk)
-endif()
+ANDROID_DKDEPEND(ant)
+ANDROID_DKDEPEND(android-sdk)
  
 ### VERSION ###
 DKSET(VISUALSTUDIO_BUILD 17)
