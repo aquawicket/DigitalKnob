@@ -1016,7 +1016,7 @@ endif()
 if(ANDROID)
 	########################## CREATE ICONS ###############################
 	if(IMAGEMAGICK_CONVERT)
-		DKINFO("Building icons for ${APP_NAME} . . .")
+		DKINFO("Building android icons for ${APP_NAME} . . .")
 		dk_makeDirectory(${DKPROJECT}/icons/android/drawable-hdpi)
 		DKEXECUTE_PROCESS(${IMAGEMAGICK_CONVERT} ${DKPROJECT}/icons/icon.png -resize 72x72 ${DKPROJECT}/icons/android/drawable-hdpi/icon.png)
 		dk_makeDirectory(${DKPROJECT}/icons/android/drawable-ldpi)
@@ -1052,6 +1052,8 @@ if(ANDROID)
 		DKCOPY(${DKPLUGINS}/_DKIMPORT/android64/ ${DKPROJECT}/android64/ FALSE)
 	endif()
 	set(CMAKE_ANDROID_GUI 1)
+	DUMP(CMAKE_CXX_FLAGS)
+	
 	#add_library(${APP_NAME} SHARED ${App_SRC})
 	add_library(main SHARED ${App_SRC})
 		

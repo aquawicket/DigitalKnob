@@ -371,6 +371,7 @@ macro(DUMP dmpvar)
 	DKINFO("VALUE:   ${${dmpvar}}")
 	DKINFO("************************************")
 	DKINFO("\n")
+	dk_wait()
 endmacro()
 
 
@@ -416,7 +417,7 @@ endmacro(dk_setXcodeProperty)
 
 
 ###############################################################################
-# function(args)
+# dk_deleteCache()
 #
 #	
 function(dk_deleteCache)
@@ -434,7 +435,7 @@ endfunction()
 
 
 ###############################################################################
-# function(args)
+# dk_deleteTempFiles()
 #
 #	
 function(dk_deleteTempFiles)
@@ -454,7 +455,7 @@ endfunction()
 
 
 ###############################################################################
-# function(args)
+# dk_deleteEmptyDirectories(path)
 #
 #	
 function(dk_deleteEmptyDirectories path)
@@ -472,7 +473,7 @@ endfunction()
 
 
 ###############################################################################
-# function(args)
+# dk_setEnv(name value)
 #
 #	
 function(dk_setEnv name value)
@@ -501,11 +502,9 @@ macro(DKSETENV)
 endmacro()
 
 ###############################################################################
-# function(args)
+# DOWNLOAD(src_path dest_path)
 #
-#	
-##https://cmake.org/pipermail/cmake/2012-September/052205.html/
-# dk_file_download
+# https://cmake.org/pipermail/cmake/2012-September/052205.html/
 function(DOWNLOAD src_path dest_path) # ARGV1 = dest_path
 	DKDEBUGFUNC(${ARGV})
 	#FIXME: Will not download if only 1 argument
@@ -634,10 +633,8 @@ AliasFunctions("DOWNLOAD")
 
 
 ###############################################################################
-# function(args)
+# DKEXTRACT(src dest)
 #
-#	
-# dk_file_extract
 function(DKEXTRACT src dest)
 	DKDEBUGFUNC(${ARGV})
 	if(NOT EXISTS ${dest})
@@ -652,10 +649,8 @@ endfunction()
 
 
 ###############################################################################
-# function(args)
+# DKZIP(path)
 #
-#	
-# dk_file_compress
 function(DKZIP path)
 	DKDEBUGFUNC(${ARGV})
 	DKINFO("Zipping: ${path}")
@@ -667,10 +662,8 @@ endfunction()
 
 
 ###############################################################################
-# function(args)
+# DKCOPY(from to overwrite)
 #
-#	
-# dk_file_copy
 function(DKCOPY from to overwrite)
 	DKDEBUGFUNC(${ARGV})
 	if(EXISTS ${from})
@@ -716,10 +709,8 @@ endfunction()
 
 
 ###############################################################################
-# function(args)
+# DKCOMPAREFILES(fileA fileB)
 #
-#	
-# dk_file_compair
 function(DKCOMPAREFILES fileA fileB)
 	DKDEBUGFUNC(${ARGV})
 	execute_process(COMMAND ${CMAKE_COMMAND} -E compare_files ${fileA} ${fileB} RESULT_VARIABLE compare_result)
@@ -734,10 +725,8 @@ endfunction()
 
 
 ###############################################################################
-# function(args)
+# DKRENAME(from to overwrite)
 #
-#	
-# dk_file_rename
 function(DKRENAME from to overwrite)
 	DKDEBUGFUNC(${ARGV})
 	DKINFO("Renameing ${from} to ${to}")
@@ -755,10 +744,8 @@ endfunction()
 
 
 ###############################################################################
-# function(args)
+# DKREMOVE(path)
 #
-#	
-# dk_file_remove
 function(DKREMOVE path)
 	DKDEBUGFUNC(${ARGV})
 	if(NOT EXISTS ${path})
@@ -774,7 +761,7 @@ endfunction()
 
 
 ###############################################################################
-# function(args)
+# UPX_COMPRESS(path)
 #
 #	
 function(UPX_COMPRESS path)
