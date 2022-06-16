@@ -154,6 +154,7 @@ if(MAC)  # Disabled on Mac host machines
 	DKDISABLE(jdk11)
 	DKDISABLE(jerryscript)
 	DKDISABLE(leptonica)
+	DKDISABLE(libgtkglext1-dev)
 	DKDISABLE(libtorrent)
 	DKDISABLE(libuv)
 	DKDISABLE(libwebp)
