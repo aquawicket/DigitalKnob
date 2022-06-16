@@ -1024,9 +1024,9 @@ endfunction()
 #
 function(DKPATCH import_name dest_path)
 	DKDEBUGFUNC(${ARGV})
-	DKINFO("\nCOPYING PATCH FILES FROM _IMPORTS/${import_name} TO ${dest_path}")
-	DKINFO("To stop patch files from overwriting install files, remove the \"PATCH\" argument from the end of the DKIMPORT or DKINSTALL command\n")
-	DKINFO("located in ${DKIMPORTS}/${import_name}/DKMAKE.cmake")
+	DKWARN("\nCOPYING PATCH FILES FROM _IMPORTS/${import_name} TO ${dest_path}")
+	DKWARN("To stop patch files from overwriting install files, remove the \"PATCH\" argument from the end of the DKIMPORT or DKINSTALL command\n")
+	DKWARN("located in ${DKIMPORTS}/${import_name}/DKMAKE.cmake")
 	DKCOPY(${DKIMPORTS}/${import_name}/ ${dest_path}/ TRUE)
 endfunction()
 
