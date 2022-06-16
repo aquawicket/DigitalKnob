@@ -28,7 +28,7 @@
 #ifndef DKSFMLRml_H
 #define DKSFMLRml_H
 
-#include <RmlUi/Core.h>
+#include "RmlUi/Core.h"
 #include "DK/DK.h"
 #include "DKSFMLWindow/DKSFMLWindow.h"
 #include "DKRml/DKRml.h"
