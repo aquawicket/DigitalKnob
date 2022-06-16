@@ -3203,6 +3203,14 @@ function(DKIMPORT_DL url) #Lib #ID #Patch
 		DKSET(${LIBVAR}_DL ${url})
 	endif()
 	
+	string(FIND ${url${last}} ".tar.bz2" index)
+	if(${index} GREATER -1)
+		if(NOT ID)
+			string(SUBSTRING ${url${last}} 0 ${index} ID)
+		endif()
+		DKSET(${LIBVAR}_DL ${url})
+	endif()
+	
 	string(FIND ${url${last}} ".js" index)
 	if(${index} GREATER -1)
 		if(NOT ID)
