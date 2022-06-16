@@ -3122,61 +3122,69 @@ function(DKIMPORT_DL url) #Lib #ID #Patch
 	#	DKDEBUG("item = ${item}")
 	#endforeach()
 
-	list(LENGTH url_list count)
-	#DKDEBUG("url_list is ${count}")
-	if(${count} LESS 5)
-		DKERROR("url_list doesn't contain enough elements to have a 'orginization/library'")
-		return()
-	endif()	
+	list(LENGTH url_list url_length)
+	DKDEBUG("url_length = ${url_length}")
+	
+	#if(${url_length} LESS 5)
+	#	DKERROR("url_list doesn't contain enough elements to have a 'orginization/library'")
+	#	return()
+	#endif()	
 	
 	if(${ARGC} GREATER 1)
 		if(NOT "${ARGV1}" STREQUAL "PATCH")
 			set(Lib ${ARGV1})
+			DKDEBUG("Lib = ${Lib}")
 		endif()
 	endif()
 	
 	if(${ARGC} GREATER 2)
 		if(NOT "${ARGV2}" STREQUAL "PATCH")
 			set(ID ${ARGV2})
+			DKDEBUG("ID = ${ID}")
 		endif()
 	endif()
 	
 	if(NOT Lib)
-		string(FIND ${url} "github.com" result)
-		if(${result} EQUAL -1)
-			string(FIND ${url} "gitlab.com" result)
-			if(${result} EQUAL -1)
-				DKASSERT("Lib invalid and The url does not contain 'github.com' OR 'gitlab.com'")
-				return()
-			endif()
-		endif()
+		DKDEBUG("CMAKE_CURRENT_LIST_DIR = ${CMAKE_CURRENT_LIST_DIR}")
+		get_filename_component(Lib ${CMAKE_CURRENT_LIST_DIR} NAME)
+		DKDEBUG("Lib = ${Lib}")
+		
+		#DKASSERT("Lib invalid")
+		
+		#string(FIND ${url} "github.com" result)
+		#if(${result} EQUAL -1)
+		#	string(FIND ${url} "gitlab.com" result)
+		#	if(${result} EQUAL -1)
+		#		DKASSERT("Lib invalid and The url does not contain 'github.com' OR 'gitlab.com'")
+		#		return()
+		#	endif()
+		#endif()
 	
-		list(GET url_list 3 org)
+		#list(GET url_list 3 org)
 		#DKDEBUG("org = ${org}")
 	
-		list(GET url_list 4 Lib)
+		#list(GET url_list 4 Lib)
 		#DKDEBUG("Lib = ${Lib}")
 	endif()
 	
 	string(TOUPPER ${Lib} LIB)
 	DKSET(LIBVAR ${LIB})
-	#DKDEBUG("LIBVAR = ${LIBVAR}")
+	DKDEBUG("LIBVAR = ${LIBVAR}")
 	
 	string(TOLOWER ${Lib} FOLDER)
 	DKSET(${LIBVAR}_FOLDER ${FOLDER})
-	#DKDEBUG("${LIBVAR}_FOLDER = ${FOLDER}")
+	DKDEBUG("${LIBVAR}_FOLDER = ${${LIBVAR}_FOLDER}}")
 	
 	## check current folder name
-	#DKDEBUG("CMAKE_CURRENT_LIST_DIR = ${CMAKE_CURRENT_LIST_DIR}")
-	#DKDEBUG("\${DKIMPORTS}/\${FOLDER} = ${DKIMPORTS}/${FOLDER}")
+	
+	DKDEBUG("\${DKIMPORTS}/\${${LIBVAR}_FOLDER}} = ${DKIMPORTS}/${${LIBVAR}_FOLDER}}")
 	if(NOT "${DKIMPORTS}/${FOLDER}" STREQUAL "${CMAKE_CURRENT_LIST_DIR}")
-		DKERROR("The Imports folder is named inncorrectly. \n CURRENTLY: ${CMAKE_CURRENT_LIST_DIR} \n SHOULD BE: ${DKIMPORTS}/${FOLDER}")
+		DKERROR("The Imports folder is named inncorrectly. \n CURRENTLY: ${CMAKE_CURRENT_LIST_DIR} \n SHOULD BE: ${DKIMPORTS}/${${LIBVAR}_FOLDER}}")
 		return()
 	endif()
 	
-	math(EXPR last "${count}-1")  #OUTPUT_FORMAT DECIMAL)")  CMake 3.13+
+	math(EXPR last "${url_length}-1")  #OUTPUT_FORMAT DECIMAL)")  CMake 3.13+
 	list(GET url_list ${last} url${last})
-	
 	
 	string(FIND ${url${last}} ".zip" index)
 	if(${index} GREATER -1)

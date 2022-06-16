@@ -4,6 +4,7 @@ DKDEPEND(sdl)
 
 
 DKIMPORT(https://www.libsdl.org/projects/smpeg/release/smpeg2-2.0.0.tar.gz smpeg2 PATCH)
+DKPATCH(smpeg2 ${SMPEG2})
 
 #DKSET(SMPEG2_VERSION 2.0.0)
 #DKSET(SMPEG2_DL https://www.libsdl.org/projects/smpeg/release/smpeg2-2.0.0.tar.gz)

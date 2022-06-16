@@ -4,7 +4,7 @@
 # https://github.com/chartjs/Chart.js/releases/download/v2.9.3/Chart.min.js
 # https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js
 
-DKIMPORT(https://github.com/chartjs/Chart.js/releases/download/v2.9.3/Chart.min.js)
+DKIMPORT(https://github.com/chartjs/Chart.js/releases/download/v2.9.3/Chart.min.js chart.js)
 
 ### VERSION ###
 #DKSET(CHART.JS_VERSION 2.9.4)
