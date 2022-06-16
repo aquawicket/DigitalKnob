@@ -1,4 +1,4 @@
-### DKVARIABLES ##################################################################
+# Get the /digitalknob path 
 function(dk_getDigitalknobPath result)
 	get_filename_component(DIGITALKNOB ${CMAKE_SOURCE_DIR} ABSOLUTE)
 	get_filename_component(FOLDER_NAME ${DIGITALKNOB} NAME)
@@ -14,6 +14,8 @@ endfunction()
 dk_getDigitalknobPath(DIGITALKNOB)
 set(DKCMAKE ${DIGITALKNOB}/DK/DKCMake)
 
+
+# Set the system host variables
 if(CMAKE_HOST_WIN32)
 	set(WIN_HOST 	TRUE 	CACHE INTERNAL "")
 endif()
@@ -26,8 +28,12 @@ if(CMAKE_HOST_UNIX AND NOT CMAKE_HOST_APPLE)
 	set(LINUX_HOST 	TRUE 	CACHE INTERNAL "")
 endif()
 
+
+# include the DKCall function
 include(${DKCMAKE}/DKCall.cmake)
 
+
+# include other dk funtions
 DKLoad(DKDEBUGFUNC)
 DKLoad(DKASSERT)
 DKLoad(DKERROR)
@@ -36,7 +42,3 @@ DKLoad(DKINFO)
 DKLoad(DKDEBUG)
 DKLoad(DKVERBOSE)
 DKLoad(DKTRACE)
-#DKLoad(Functions)
-#DKLoad(filesystem)
-#DKLoad(Variables)
-#DKLoad(Disabled)

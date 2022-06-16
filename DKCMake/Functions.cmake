@@ -56,6 +56,7 @@ set(dkdepend_disable_list 		""		CACHE INTERNAL "")
 
 include(${DKCMAKE}/DK.cmake)
 
+
 ##################################################################################
 # CreateFunc(str)
 #
@@ -177,10 +178,10 @@ endfunction()
 function(dk_printAllVariables)
 	DKDEBUGFUNC(${ARGV})
 	get_cmake_property(_variableNames VARIABLES)
-	list (SORT _variableNames)
-	foreach (_variableName ${_variableNames})
+	list(SORT _variableNames)
+	foreach(_variableName ${_variableNames})
 		message(STATUS "${_variableName}=${${_variableName}}")
-		file(APPEND ${CMAKE_BINARY_DIR}/cmake_variables.txt "${_variableName} ==           ${${_variableName}}\n")
+		file(APPEND ${CMAKE_BINARY_DIR}/cmake_variables.txt "${_variableName}				==				${${_variableName}}\n")
 	endforeach()
 endfunction()
 
@@ -201,17 +202,19 @@ endfunction()
 
 ###############################################################################
 # DKSET(variable value)
-#
 #	
 # https://stackoverflow.com/a/29250496/688352
+#
 function(DKSET variable value)
 	DKDEBUGFUNC(${ARGV})
 	set(${variable} ${value} ${ARGN} CACHE INTERNAL "")
-	#show library versions
+	
+	###### print library versions ############
 	dk_includes(${variable} "_VERSION" result)
 	if(${result})
 		DKINFO("${variable}: ${value}")
 	endif()
+	##########################################
 endfunction()
 AliasFunctions("DKSET")
 
@@ -237,6 +240,8 @@ macro(dk_exit)
 		execute_process(COMMAND killall -9 cmake WORKING_DIRECTORY ${CMAKE_CURRENT_LIST_DIR})
 	endif()
 endmacro()
+
+
 
 ########################################################################
 ###################         DKFUNCTIONS           ###################
@@ -296,25 +301,51 @@ endmacro()
 
 
 ##############################################################################
+# dk_isNumber(variable result)
+# 
+#	Test is a varaible is a number
+#
+#	@variable: (Required) The variable to test
+#	@result: True if the variable is a number, False if otherwise.
+#
+macro(dk_isNumber variable result)
+	if(variable MATCHES "^[0-9]+$")
+		set(${result} true PARENT_SCOPE)
+	else()
+		set(${result} false PARENT_SCOPE)
+	endif()
+endmacro()
+
+
+##############################################################################
 # dk_wait()
 # 
-#	Wait until a keypress or timeout reached
+#	Wait until a keypress or timeout has elapsed in seconds
 #
-#	@ARGV0:timeout (Optional)(Number) default=60
+#	@ARGV0:timeout (Optional)(Number) default = 60
 #	@ARGV1:msg     (Optional)(String) default = "press and key to continue."
+#
 macro(dk_wait) 
-	set(timeout ${ARGV0})
-	set(msg ${ARGV1})
 	DKDEBUGFUNC(${ARGV})
+	set(argv_0 ${ARGV0})
+	set(argv_1 ${ARGV1})
 	
-	if(timeout MATCHES "^[0-9]+$")
-		set(timeout ${timeout})
+	dk_isNumber(argv_0, isNumber)
+	if(isNumber)
+		set(timeout ${argv_0})
 	else()
 		set(timeout 60) # default
 	endif()
+	#if(argv_0 MATCHES "^[0-9]+$")
+	#	set(timeout ${argv_0})
+	#else()
+	#	set(timeout 60) # default
+	#endif()
 	
-	if(NOT msg)
+	if(NOT argv_1)
 		set(msg "press and key to continue.") # default
+	else()
+		set(msg ${argv_1})
 	endif()
 
 	if(${timeout} GREATER 0)
@@ -328,44 +359,45 @@ macro(dk_wait)
 		execute_process(COMMAND cmd /c echo ${msg} ${timeout_str} > nul WORKING_DIRECTORY C:/)
 		return()
 	endif()
-	if(CMAKE_HOST_UNIX)
+	if(UNIX_HOST)
 		execute_process(COMMAND bash -c "read -n 1 -s -r -p \"${msg}\"" OUTPUT_VARIABLE outVar)
 		return()
 	endif()	
-	DKINFO("dk_wait() Not implemented for this platform")
+	DKERROR("dk_wait() Not implemented for this platform")
 endmacro()
 
 
 ##############################################################################
-# DUMP(dumpvar)
+# DUMP(variable)
 # 
 #	Print the contents of a variable to the screen
 #
-#	@dumpvar: (Required) The variable to print to the screen
-macro(DUMP dmpvar)
+#	@variable:(Required) The variable to print to the screen. Without brackets variable ${ }'
+#
+macro(DUMP variable)
 	DKDEBUGFUNC(${ARGV})
 	DKINFO(" \n")
 	DKINFO("************** DUMP ****************")
 	if(CMAKE_CURRENT_FUNCTION_LIST_FILE)
 		dk_getFilename(${CMAKE_CURRENT_FUNCTION_LIST_FILE} FILENAME)
 	endif()
-	if(NOT DEFINED ${dmpvar})
-		DKINFO("DUMP(${dmpvar}) variable not defined. The correct syntax is \"DUMP(varname)\", using the variable name")
+	if(NOT DEFINED ${variable})
+		DKINFO("DUMP(${variable}) variable not defined. The correct syntax is \"DUMP(varname)\", using the variable name")
 		DKINFO("DUMP(varname): CORRECT        DUMP(\${varname}): INCORRECT")
 	endif()
 	DKINFO("${FILENAME}:${CMAKE_CURRENT_FUNCTION_LIST_LINE} -> ${CMAKE_CURRENT_FUNCTION}(${ARGV})")
-	list(LENGTH ${dmpvar} dmpvar_LENGTH)
-	if(${dmpvar_LENGTH} GREATER 1)
+	list(LENGTH ${variable} variable_LENGTH)
+	if(${variable_LENGTH} GREATER 1)
 		set(varType "list")
-	elseif(dmpvar MATCHES "^[0-9]+$")
+	elseif(variable MATCHES "^[0-9]+$")
 		set(varType "number")
 	else()
 		set(varType "string")
 	endif()
-	DKINFO("NAME:    ${dmpvar}")
+	DKINFO("NAME:    ${variable}")
 	DKINFO("TYPE:    ${varType}")
-	DKINFO("LENGTH:  ${dmpvar_LENGTH}")
-	DKINFO("VALUE:   ${${dmpvar}}")
+	DKINFO("LENGTH:  ${variable_LENGTH}")
+	DKINFO("VALUE:   ${${variable}}")
 	DKINFO("************************************")
 	DKINFO("\n")
 	dk_wait()
@@ -2834,7 +2866,7 @@ function(log args)
 	set(output " ")
 	foreach(arg ${ARGV})
 		if(DEFINED ${arg})
-			set(output "${output} ${arg}=${${dmpvar}} ")
+			set(output "${output} ${arg}=${${arg}} ")
 		else()
 			set(output "${output} ${arg}")
 		endif()
