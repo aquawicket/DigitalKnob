@@ -5,7 +5,7 @@
 #DKSET(RTMIDI_SLN RtMidi.sln)
 #DKSET(RTMIDI_TARGET rtmidi)
 
-DKIMPORT(http://www.music.mcgill.ca/~gary/rtmidi/release/rtmidi-2.1.0.tar.gz)
+DKIMPORT(http://www.music.mcgill.ca/~gary/rtmidi/release/rtmidi-2.1.0.tar.gz PATCH)
 
 #DKSET(RTMIDI_VERSION 2.1.0)
 #DKSET(RTMIDI_DL http://www.music.mcgill.ca/~gary/rtmidi/release/rtmidi-2.1.0.tar.gz)
