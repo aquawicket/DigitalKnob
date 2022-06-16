@@ -1052,7 +1052,9 @@ if(ANDROID)
 		DKCOPY(${DKPLUGINS}/_DKIMPORT/android64/ ${DKPROJECT}/android64/ FALSE)
 	endif()
 	set(CMAKE_ANDROID_GUI 1)
-	DUMP(CMAKE_CXX_FLAGS)
+	
+	DKSET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -frtti")
+	#DUMP(CMAKE_CXX_FLAGS)
 	
 	#add_library(${APP_NAME} SHARED ${App_SRC})
 	add_library(main SHARED ${App_SRC})

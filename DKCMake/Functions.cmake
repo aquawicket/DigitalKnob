@@ -419,7 +419,6 @@ endmacro(dk_setXcodeProperty)
 ###############################################################################
 # dk_deleteCache()
 #
-#	
 function(dk_deleteCache)
 	DKDEBUGFUNC(${ARGV})
 	DKINFO("####### Deleteing CMake cache . . .")
@@ -437,7 +436,6 @@ endfunction()
 ###############################################################################
 # dk_deleteTempFiles()
 #
-#	
 function(dk_deleteTempFiles)
 	DKDEBUGFUNC(${ARGV})
 	DKINFO("####### Deleteing Temporary files . . .")
@@ -457,7 +455,6 @@ endfunction()
 ###############################################################################
 # dk_deleteEmptyDirectories(path)
 #
-#	
 function(dk_deleteEmptyDirectories path)
 	DKDEBUGFUNC(${ARGV})
 	if(NOT EXISTS ${path})
@@ -475,7 +472,6 @@ endfunction()
 ###############################################################################
 # dk_setEnv(name value)
 #
-#	
 function(dk_setEnv name value)
 	DKDEBUGFUNC(${ARGV})
 	#DKINFO("dk_setEnv(${name} ${value})")
@@ -763,7 +759,6 @@ endfunction()
 ###############################################################################
 # UPX_COMPRESS(path)
 #
-#	
 function(UPX_COMPRESS path)
 	DKDEBUGFUNC(${ARGV})
 	DKINFO("UPX compressing ${path}...")
@@ -773,8 +768,7 @@ endfunction()
 
 
 ###############################################################################
-# function(args)
-#
+# DKENABLE(plugin)
 #	
 function(DKENABLE plugin)
 	DKDEBUGFUNC(${ARGV})
@@ -799,9 +793,8 @@ endfunction()
 
 
 ###############################################################################
-# function(args)
+# DKDISABLE(plugin)
 #
-#	
 function(DKDISABLE plugin)
 	DKDEBUGFUNC(${ARGV})
 	if(BYPASS_DISABLE)
@@ -838,9 +831,8 @@ endfunction()
 
 
 ###############################################################################
-# function(args)
+# DKDEFINE(str)
 #
-#	
 function(DKDEFINE str)
 	DKDEBUGFUNC(${ARGV})
 	if(CMAKE_SCRIPT_MODE_FILE)
@@ -857,9 +849,8 @@ AliasFunctions("DKDEFINE")
 
 
 ###############################################################################
-# function(args)
+# DKUNDEFINE(str)
 #
-#	
 function(DKUNDEFINE str)
 	DKDEBUGFUNC(${ARGV})
 	if(NOT DKDEFINES_LIST)
@@ -871,9 +862,8 @@ endfunction()
 
 
 ###############################################################################
-# function(args)
+# DKINCLUDE(path)
 #
-#	
 function(DKINCLUDE path)
 	DKDEBUGFUNC(${ARGV})
 	foreach(item ${ARGV})
@@ -888,16 +878,14 @@ function(DKINCLUDE path)
 			dk_getFilename(${CMAKE_CURRENT_LIST_DIR} LIB_NAME)
 			file(INSTALL DIRECTORY ${path}/ DESTINATION ${CMAKE_INSTALL_PREFIX}/${LIB_NAME}/include FILES_MATCHING PATTERN "*.h")
 		endif()
-		
 	endforeach()
 endfunction()
 AliasFunctions("DKINCLUDE")
 
 
 ###############################################################################
-# function(args)
+# DKLINKDIR(path)
 #
-#	
 function(DKLINKDIR path)
 	DKDEBUGFUNC(${ARGV})
 	foreach(item ${ARGV})
@@ -913,9 +901,8 @@ AliasFunctions("DKLINKDIR")
 
 
 ###############################################################################
-# function(args)
+# dk_getCurrentDirectory(result)
 #
-#	
 #function(dk_getCurrentDirectory result)
 #	DKDEBUGFUNC(${ARGV})
 #	if(WIN_HOST)
@@ -930,9 +917,8 @@ AliasFunctions("DKLINKDIR")
 
 
 ###############################################################################
-# function(args)
+# dk_makeDirectory(path)
 #
-#	
 function(dk_makeDirectory path)
 	DKDEBUGFUNC(${ARGV})
 	make_directory(${path})  #requires full path
@@ -962,9 +948,8 @@ endfunction()
 
 
 ###############################################################################
-# function(args)
+# dk_getDirectory(path result)
 #
-#	
 function(dk_getDirectory path result)
 	DKDEBUGFUNC(${ARGV})
 	string(FIND ${path} "/" index REVERSE)
@@ -977,9 +962,8 @@ endfunction()
 
 
 ###############################################################################
-# function(args)
+# dk_getFilename(path result)
 #
-#	
 function(dk_getFilename path result)
 	DKDEBUGFUNC(${ARGV})
 	string(FIND ${path} "/" index REVERSE)
@@ -994,9 +978,8 @@ endfunction()
 
 
 ###############################################################################
-# function(args)
+# dk_getExtension(path result)
 #
-#	
 function(dk_getExtension path result)
 	DKDEBUGFUNC(${ARGV})
 	# WHY A NEW GET EXTENSION FUNCTION ?
@@ -1013,9 +996,8 @@ endfunction()
 
 
 ###############################################################################
-# function(args)
+# dk_dirIsEmpty(path result)
 #
-#	
 function(dk_dirIsEmpty path result)
 	DKDEBUGFUNC(${ARGV})
 	if(EXISTS ${path})
@@ -1031,9 +1013,8 @@ endfunction()
 
 
 ###############################################################################
-# function(args)
+# DKREFRESH_ICONS()
 #
-#	
 function(DKREFRESH_ICONS)
 	DKDEBUGFUNC(${ARGV})
 	DKEXECUTE_PROCESS(ie4uinit.exe -ClearIconCache)
@@ -1042,9 +1023,8 @@ endfunction()
 
 
 ###############################################################################
-# function(args)
+# DKPATCH(import_name dest_path)
 #
-#	
 function(DKPATCH import_name dest_path)
 	DKDEBUGFUNC(${ARGV})
 	DKINFO("\nCOPYING PATCH FILES FROM _IMPORTS/${import_name} TO ${dest_path}")
@@ -1055,9 +1035,8 @@ endfunction()
 
 
 ###############################################################################
-# function(args)
+# DKINSTALL(src_path import_name dest_path)
 #
-#	
 # For archive files such as libraries and assets, the arguments are:  The download src_path, the name of its _DKIMPORTS folder, The name given to the installed 3rdParty/folder  
 # For executable files such as software amd IDE's the arguments are:  The download src_path, the name of the final name of the dl file, The installation path to check for installation.
 function(DKINSTALL src_path import_name dest_path)
@@ -1208,9 +1187,8 @@ AliasFunctions("DKINSTALL" "NO_DEBUG_RELEASE_TAGS")
 
 
 ###############################################################################
-# function(args)
+# dk_validatePath(path result)
 #
-#	
 function(dk_validatePath path result)
 	DKDEBUGFUNC(${ARGV})
 	get_filename_component(path ${path} ABSOLUTE)
@@ -1219,9 +1197,8 @@ endfunction()
 
 
 ###############################################################################
-# function(args)
+# WIN_GetShortPath(path result)
 #
-#	
 function(WIN_GetShortPath path result)
 	DKDEBUGFUNC(${ARGV})
 	if(WIN_HOST)
@@ -1234,9 +1211,8 @@ endfunction()
 
 
 ###############################################################################
-# function(args)
+# DKEXECUTE_PROCESS(commands)
 #
-#	
 function(DKEXECUTE_PROCESS commands)
 	DKDEBUGFUNC(${ARGV})
 	set(commands ${ARGV})
@@ -1272,10 +1248,8 @@ endfunction()
 
 
 ###############################################################################
-# function(args)
+# DKSETPATH(path)
 #
-#	
-###################### DK_PATH ####################
 function(DKSETPATH path)
 	DKDEBUGFUNC(${ARGV})
 	if(path STREQUAL "OFF")
@@ -1313,10 +1287,8 @@ AliasFunctions("DKSETPATH")
 
 
 ###############################################################################
-# function(args)
+# MSYS(args)
 #
-#	
-###################  Windows MSYS  ######################
 function(MSYS)
 	DKDEBUGFUNC(${ARGV})
 	if(QUEUE_BUILD)
@@ -1345,10 +1317,8 @@ AliasFunctions("MSYS")
 
 
 ###############################################################################
-# function(args)
+# MSYS2(args)
 #
-#	
-###################  Windows MSYS2  ######################
 function(MSYS2)
 	DKDEBUGFUNC(${ARGV})
 	if(QUEUE_BUILD)
@@ -1377,15 +1347,13 @@ AliasFunctions("MSYS2")
 
 
 ###############################################################################
-# function(args)
+# DKMERGE_FLAGS(args result)
 #
-#	
 function(DKMERGE_FLAGS args result)
 	DKDEBUGFUNC(${ARGV})
 	set(args ${args} ${result} ${ARGN})
 	list(GET args -1 result)
 	list(REMOVE_AT args -1)
-	
 	set(search "-DCMAKE_C_FLAGS=" "-DCMAKE_C_FLAGS_DEBUG=" "-DCMAKE_C_FLAGS_RELEASE=" "-DCMAKE_CXX_FLAGS=" "-DCMAKE_CXX_FLAGS_DEBUG=" "-DCMAKE_CXX_FLAGS_RELEASE=" "CFLAGS=" "CXXFLAGS=")
 	foreach(word ${search})
 		set(DK_${word} "${word}")
@@ -1417,9 +1385,8 @@ endfunction()
 
 
 ###############################################################################
-# function(args)
+# DKCOMMAND(args)
 #
-#	
 function(DKCOMMAND)
 	DKDEBUGFUNC(${ARGV})
 	if(NOT EXISTS ${CURRENT_DIR})
@@ -1435,8 +1402,7 @@ AliasFunctions("DKCOMMAND")
 
 
 ###############################################################################
-# function(args)
-#
+# DKQCOMMAND(args)
 #	
 function(DKQCOMMAND)
 	DKDEBUGFUNC(${ARGV})
@@ -1448,10 +1414,8 @@ AliasFunctions("DKQCOMMAND")
 
 
 ###############################################################################
-# function(args)
+# DEBUG_VS(folder sln_file)
 #
-#	
-################# Visual Studio Build ################
 function(DEBUG_VS folder sln_file) #target #arch
 	DKDEBUGFUNC(${ARGV})
 	if(NOT WIN_HOST)
@@ -1475,9 +1439,8 @@ AliasFunctions("DEBUG_VS" "NO_DEBUG_RELEASE_TAGS")
 
 
 ###############################################################################
-# function(args)
+# RELEASE_VS(folder sln_file)
 #
-#	
 function(RELEASE_VS folder sln_file) #target #arch
 	DKDEBUGFUNC(${ARGV})
 	if(NOT WIN_HOST)
