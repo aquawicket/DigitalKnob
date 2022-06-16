@@ -611,7 +611,7 @@ bool DKUtil::PhysicalMemory(unsigned long long& physicalMemory){
 #	elif LINUX
 		return DKLinux::PhysicalMemory(physicalMemory) && DKDEBUGRETURN(physicalMemory);
 #	else
-		return DKERROR("not implemented on this OS\n") && DKDEBUGRETURN(physicalMemory);
+	return DKERROR("not implemented on this OS\n");//&& DKDEBUGRETURN(physicalMemory);
 #	endif
 }
 
