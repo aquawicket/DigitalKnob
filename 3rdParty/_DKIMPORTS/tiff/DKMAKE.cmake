@@ -5,7 +5,7 @@
 #DKSET(TIFF_DL https://download.osgeo.org/libtiff/old/tiff-4.0.3.zip PATCH)
 
 
-DKGITCLONE(https://gitlab.com/libtiff/libtiff.git)
+DKIMPORT(https://gitlab.com/libtiff/libtiff.git)
 
 #DKSET(TIFF_VERSION 4.2.0)
 #DKSET(TIFF_DL https://gitlab.com/libtiff/libtiff/-/archive/v4.2.0/libtiff-v4.2.0.zip)

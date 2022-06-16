@@ -1,16 +1,22 @@
 # https://docs.python.org/3/using/windows.html
 
-# Windows ttps://www.python.org/ftp/python/2.7.18/python-2.7.18.msi
-# Mac      https://www.python.org/ftp/python/2.7.18/python-2.7.18-macosx10.9.pkg
-# Linux    https://www.python.org/ftp/python/2.7.18/Python-2.7.18.tgz
+# Windows	https://www.python.org/ftp/python/2.7.18/python-2.7.18.msi
+# Mac		https://www.python.org/ftp/python/2.7.18/python-2.7.18-macosx10.9.pkg
+# Linux		https://www.python.org/ftp/python/2.7.18/Python-2.7.18.tgz
 
-### VERSION ###
-DKSET(PYTHON_VERSION 2.7.18)
-DKSET(PYTHON_NAME python-${PYTHON_VERSION})
-WIN_DKSET(PYTHON_DL https://www.python.org/ftp/python/${PYTHON_VERSION}/${PYTHON_NAME}.msi)
-MAC_DKSET(PYTHON_DL https://www.python.org/ftp/python/2.7.18/python-2.7.18-macosx10.9.pkg)
-LINUX_DKSET(PYTHON_DL https://www.python.org/ftp/python/2.7.18/Python-2.7.18.tgz)
-RASPBERRY_DKSET(PYTHON_DL https://www.python.org/ftp/python/2.7.18/Python-2.7.18.tgz)
+
+
+#WIN_HOST_DKIMPORT		(PYTHON_DL https://www.python.org/ftp/python/2.7.18/python-2.7.18.msi)
+#MAC_HOST_DKIMPORT		(PYTHON_DL https://www.python.org/ftp/python/2.7.18/python-2.7.18-macosx10.9.pkg)
+#LINUX_HOST_DKIMPORT		(PYTHON_DL https://www.python.org/ftp/python/2.7.18/Python-2.7.18.tgz)
+#RASPBERRY_HOST_DKIMPORT	(PYTHON_DL https://www.python.org/ftp/python/2.7.18/Python-2.7.18.tgz)
+
+
+WIN_DKSET		(PYTHON_DL https://www.python.org/ftp/python/2.7.18/python-2.7.18.msi)
+MAC_DKSET		(PYTHON_DL https://www.python.org/ftp/python/2.7.18/python-2.7.18-macosx10.9.pkg)
+LINUX_DKSET		(PYTHON_DL https://www.python.org/ftp/python/2.7.18/Python-2.7.18.tgz)
+RASPBERRY_DKSET	(PYTHON_DL https://www.python.org/ftp/python/2.7.18/Python-2.7.18.tgz)
+
 DKSET(PYTHON ${3RDPARTY}/${PYTHON_NAME})
 WIN_DKSET(PYTHON_EXE ${PYTHON}/python.exe)
 MAC_DKSET(PYTHON_APP ${PYTHON}/python.app)

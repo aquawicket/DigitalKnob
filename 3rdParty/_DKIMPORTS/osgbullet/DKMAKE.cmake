@@ -3,7 +3,11 @@
 DKDEPEND(bullet3)
 DKDEPEND(osgworks)
 
-### INSTALL ###
+
+
+#DKIMPORT(http://TODO.com/osgbullet-master.zip)
+
+
 DKINSTALL(http://TODO.com/osgbullet-master.zip osgbullet-master)
 DKSET(OSGBULLET ${3RDPARTY}/osgbullet-master)
 

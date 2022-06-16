@@ -6,11 +6,12 @@ DKDEPEND(freetype)
 DKDEPEND(libpng)
 
 
+DKIMPORT(http://sourceforge.net/projects/podofo/files/podofo/0.9.7/podofo-0.9.7.tar.gz)
 
-DKSET(PODOFO_VERSION 0.9.5)
-DKSET(POFODO_DL http://sourceforge.net/projects/podofo/files/podofo/0.9.7/podofo-0.9.7.tar.gz/download)
-DKSET(PODOFO ${3RDPARTY}/podofo-${PODOFO_VERSION})
-DKINSTALL(${POFODO_DL} podofo ${PODOFO})
+#DKSET(PODOFO_VERSION 0.9.5)
+#DKSET(POFODO_DL http://sourceforge.net/projects/podofo/files/podofo/0.9.7/podofo-0.9.7.tar.gz/download)
+#DKSET(PODOFO ${3RDPARTY}/podofo-${PODOFO_VERSION})
+#DKINSTALL(${POFODO_DL} podofo ${PODOFO})
 
 
 

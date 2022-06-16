@@ -10,7 +10,9 @@ DKDEPEND(freealut)
 DKDEPEND(openal)
 
 
-### VERSION ###
+#DKIMPORT(http://TODO.com/osgaudio-master.zip)
+
+
 ${OSGAUDIO_VERSION master}
 ${OSGAUDIO_DL http://TODO.com/${OSGAUDIO_NAME}.zip}
 ${OSGAUDIO_NAME osgaudio-${OSG_VERSION}}

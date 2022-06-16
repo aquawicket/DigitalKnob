@@ -56,7 +56,7 @@ DKDEPEND(vorbis)
 DKDEPEND(libjpeg-turbo)
 
 
-#DKGITCLONE(https://github.com/SFML/SFML.git)
+#DKIMPORT(https://github.com/SFML/SFML.git)
 
 #DKIMPORT(https://github.com/SFML/SFML/archive/c7705a8d9a79bb2c8868518c32ae54f14220793c.zip PATCH)
 DKIMPORT(https://github.com/SFML/SFML/archive/a733e4cd7e0056922e4f74f1932749b4d6a5744d.zip)

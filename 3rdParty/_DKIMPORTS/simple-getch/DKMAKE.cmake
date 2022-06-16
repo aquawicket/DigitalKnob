@@ -1,12 +1,10 @@
 # https://github.com/mouuff/simple-getch
-
 if(NOT UNIX_HOST)
 	return()
 endif()
 
 
-
-DKGITCLONE(https://github.com/mouuff/simple-getch.git)
+DKIMPORT(https://github.com/mouuff/simple-getch.git)
 
 #DKSET(GETCH_VERSION master)
 #DKSET(GETCH_DL https://github.com/mouuff/simple-getch/archive/refs/heads/master.zip)

@@ -3,24 +3,24 @@
 #
 # https://github.com/ConnectedVision/connectedvision/raw/master/build_env/Conan/packages/StackWalker/2014.12.28/2.3.0/stackwalker-2014-12-28.zip
 # https://www.codeproject.com/KB/threads/StackWalker/stackwalker.zip
-
+# 
+# FIXME: Let's replace this with boost::stacktrace for cross platform support.
+# https://www.boost.org/doc/libs/1_75_0/doc/html/stacktrace.html
+#
 if(NOT WIN_HOST)
 	return()
 endif()
 
-# FIXME: Let's replace this with boost::stacktrace for cross platform support.
-# https://www.boost.org/doc/libs/1_75_0/doc/html/stacktrace.html
+
+
+DKIMPORT(https://github.com/ConnectedVision/connectedvision/raw/master/build_env/Conan/packages/StackWalker/2014.12.28/2.3.0/stackwalker-2014-12-28.zip)
 
 ### VERSION ###
-DKSET(STACKWALKER_VERSION 2013-01-07-v14)
-DKSET(STACKWALKER_NAME stackwalker-${STACKWALKER_VERSION})
-DKSET(STACKWALKER_DL https://github.com/ConnectedVision/connectedvision/raw/master/build_env/Conan/packages/StackWalker/2014.12.28/2.3.0/stackwalker-2014-12-28.zip)
-DKSET(STACKWALKER ${3RDPARTY}/${STACKWALKER_NAME})
-
-
-### INSTALL ###
-
-DKINSTALL(${STACKWALKER_DL} stackwalker ${STACKWALKER})
+#DKSET(STACKWALKER_VERSION 2013-01-07-v14)
+#DKSET(STACKWALKER_NAME stackwalker-${STACKWALKER_VERSION})
+#DKSET(STACKWALKER_DL https://github.com/ConnectedVision/connectedvision/raw/master/build_env/Conan/packages/StackWalker/2014.12.28/2.3.0/stackwalker-2014-12-28.zip)
+#DKSET(STACKWALKER ${3RDPARTY}/${STACKWALKER_NAME})
+#DKINSTALL(${STACKWALKER_DL} stackwalker ${STACKWALKER})
 
 
 ### LINK ###

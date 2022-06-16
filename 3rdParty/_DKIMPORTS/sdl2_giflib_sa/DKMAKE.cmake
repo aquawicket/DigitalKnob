@@ -5,7 +5,7 @@ DKDEPEND(giflib)
 DKDEPEND(DKSDLWindow)
 
 
-DKGITCLONE(https://github.com/theMealena/SDL2_giflib_sa.git)
+DKIMPORT(https://github.com/theMealena/SDL2_giflib_sa.git)
 
 #DKSET(SDLGIF_VERSION master)
 #DKSET(SDLGIF_NAME SDL2_giflib_sa-${SDLGIF_VERSION})

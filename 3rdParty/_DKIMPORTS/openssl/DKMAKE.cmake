@@ -4,15 +4,14 @@
 # https://www.npcglib.org/~stathis/downloads/openssl-1.0.2h-vs2015.7z
 
 
+DKIMPORT(https://www.npcglib.org/~stathis/downloads/openssl-1.0.2h-vs2015.7z)
+
 ### VERSION ###
-WIN_DKSET(OPENSSL_VERSION 1.0.2h-vs2015)
-WIN_DKSET(OPENSSL_DL https://www.npcglib.org/~stathis/downloads/${OPENSSL_NAME}.7z)
-
-
-### INSTALL ###
-DKSET(OPENSSL_NAME openssl-${OPENSSL_VERSION})
-DKSET(OPENSSL ${3RDPARTY}/${OPENSSL_NAME})
-DKINSTALL(${OPENSSL_DL} openssl ${OPENSSL})
+#WIN_DKSET(OPENSSL_VERSION 1.0.2h-vs2015)
+#WIN_DKSET(OPENSSL_DL https://www.npcglib.org/~stathis/downloads/openssl-1.0.2h-vs2015.7z)
+#DKSET(OPENSSL_NAME openssl-${OPENSSL_VERSION})
+#DKSET(OPENSSL ${3RDPARTY}/${OPENSSL_NAME})
+#DKINSTALL(${OPENSSL_DL} openssl ${OPENSSL})
 
 
 ### DKPLUGINS LINK ###

@@ -5,13 +5,15 @@
 #DKSET(RTMIDI_SLN RtMidi.sln)
 #DKSET(RTMIDI_TARGET rtmidi)
 
-DKSET(RTMIDI_VERSION 2.1.0)
-DKSET(RTMIDI_DL http://www.music.mcgill.ca/~gary/rtmidi/release/rtmidi-2.1.0.tar.gz)
-DKSET(RTMIDI_NAME rtmidi-${RTMIDI_VERSION})
-DKSET(RTMIDI ${3RDPARTY}/${RTMIDI_NAME})
-DKINSTALL(${RTMIDI_DL} rtmidi ${RTMIDI} PATCH)
-DKSET(RTMIDI_SLN Project.sln)
+DKIMPORT(http://www.music.mcgill.ca/~gary/rtmidi/release/rtmidi-2.1.0.tar.gz)
 
+#DKSET(RTMIDI_VERSION 2.1.0)
+#DKSET(RTMIDI_DL http://www.music.mcgill.ca/~gary/rtmidi/release/rtmidi-2.1.0.tar.gz)
+#DKSET(RTMIDI_NAME rtmidi-${RTMIDI_VERSION})
+#DKSET(RTMIDI ${3RDPARTY}/${RTMIDI_NAME})
+#DKINSTALL(${RTMIDI_DL} rtmidi ${RTMIDI} PATCH)
+
+DKSET(RTMIDI_SLN Project.sln)
 DKSET(RTMIDI_TARGET RtMidi)
 
 
