@@ -3,11 +3,13 @@
 DKDEPEND(sdl)
 
 
-DKSET(SMPEG2_VERSION 2.0.0)
-DKSET(SMPEG2_DL https://www.libsdl.org/projects/smpeg/release/smpeg2-2.0.0.tar.gz)
-DKSET(SMPEG2_NAME smpeg2-${SMPEG2_VERSION})
-DKINSTALL(${SMPEG2_DL} smpeg2 ${SMPEG2})
-DKSET(SMPEG2 ${3RDPARTY}/${SMPEG2_NAME} PATCH)
+DKIMPORT(https://www.libsdl.org/projects/smpeg/release/smpeg2-2.0.0.tar.gz)
+
+#DKSET(SMPEG2_VERSION 2.0.0)
+#DKSET(SMPEG2_DL https://www.libsdl.org/projects/smpeg/release/smpeg2-2.0.0.tar.gz)
+#DKSET(SMPEG2_NAME smpeg2-${SMPEG2_VERSION})
+#DKINSTALL(${SMPEG2_DL} smpeg2 ${SMPEG2} PATCH)
+#DKSET(SMPEG2 ${3RDPARTY}/${SMPEG2_NAME})
 
 
 ### DKPLUGINS LINK ###
