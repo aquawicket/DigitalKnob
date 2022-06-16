@@ -6,14 +6,7 @@ DKDEPEND(libuv)
 DKDEPEND(openssl)
 
 
-DKGITCLONE(https://github.com/uNetworking/uWebSockets.git)
-
-#DKSET(UWEBSOCKETS_VERSION 0.14)
-#DKSET(UWEBSOCKETS_NAME uWebSockets-${UWEBSOCKETS_VERSION})
-#DKSET(UWEBSOCKETS_DL https://github.com/uNetworking/uWebSockets/archive/v0.14.zip)
-#DKSET(UWEBSOCKETS ${3RDPARTY}/${UWEBSOCKETS_NAME})
-#DKINSTALL(${UWEBSOCKETS_DL} uwebsockets ${UWEBSOCKETS})
-
+DKIMPORT(https://github.com/uNetworking/uWebSockets.git)
 
 
 ### LINK ###
