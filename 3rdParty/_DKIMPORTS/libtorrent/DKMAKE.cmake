@@ -7,14 +7,14 @@ DKDEPEND(boost boost_system)
 DKDEPEND(openssl)
 
 
-DKIMPORT(https://github.com/arvidn/libtorrent)
-#DKSET(TORRENT_MAJOR 2)
-#DKSET(TORRENT_MINOR 0)
-#DKSET(TORRENT_BUILD 4)
-#DKSET(TORRENT_VERSION ${TORRENT_MAJOR}.${TORRENT_MINOR}.${TORRENT_BUILD})
-#DKSET(TORRENT_NAME libtorrent-${TORRENT_VERSION})
-#DKSET(TORRENT_DL https://github.com/arvidn/libtorrent/archive/refs/tags/v${TORRENT_VERSION}.zip)
-#DKSET(TORRENT ${3RDPARTY}/${TORRENT_NAME})
+dk_import(https://github.com/arvidn/libtorrent)
+#dk_set(TORRENT_MAJOR 2)
+#dk_set(TORRENT_MINOR 0)
+#dk_set(TORRENT_BUILD 4)
+#dk_set(TORRENT_VERSION ${TORRENT_MAJOR}.${TORRENT_MINOR}.${TORRENT_BUILD})
+#dk_set(TORRENT_NAME libtorrent-${TORRENT_VERSION})
+#dk_set(TORRENT_DL https://github.com/arvidn/libtorrent/archive/refs/tags/v${TORRENT_VERSION}.zip)
+#dk_set(TORRENT ${3RDPARTY}/${TORRENT_NAME})
 #DKINSTALL(${TORRENT_DL} libtorrent ${TORRENT})
 
 

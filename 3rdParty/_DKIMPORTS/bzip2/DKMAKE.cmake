@@ -19,13 +19,13 @@ LINUX_DKIMPORT		(ftp://sourceware.org/pub/bzip2/bzip2-1.0.8.tar.gz)
 RASPBERRY_DKIMPORT	(ftp://sourceware.org/pub/bzip2/bzip2-1.0.8.tar.gz)
 ANDROID_DKIMPORT	(ftp://sourceware.org/pub/bzip2/bzip2-1.0.8.tar.gz)
 
-#DKSET(BZIP2_VERSION 1.0.8)
-#DKSET(BZIP2_NAME bzip2-${BZIP2_VERSION})
-#WIN_DKSET(BZIP2_DL https://github.com/kiyolee/bzip2-win-build/archive/refs/tags/v1.0.8.zip)
-#LINUX_DKSET(BZIP2_DL ftp://sourceware.org/pub/bzip2/bzip2-1.0.8.tar.gz)
-#RASPBERRY_DKSET(BZIP2_DL ftp://sourceware.org/pub/bzip2/bzip2-1.0.8.tar.gz)
-#ANDROID_DKSET(BZIP2_DL ftp://sourceware.org/pub/bzip2/bzip2-1.0.8.tar.gz)
-#DKSET(BZIP2 ${3RDPARTY}/${BZIP2_NAME})
+#dk_set(BZIP2_VERSION 1.0.8)
+#dk_set(BZIP2_NAME bzip2-${BZIP2_VERSION})
+#WIN_dk_set(BZIP2_DL https://github.com/kiyolee/bzip2-win-build/archive/refs/tags/v1.0.8.zip)
+#LINUX_dk_set(BZIP2_DL ftp://sourceware.org/pub/bzip2/bzip2-1.0.8.tar.gz)
+#RASPBERRY_dk_set(BZIP2_DL ftp://sourceware.org/pub/bzip2/bzip2-1.0.8.tar.gz)
+#ANDROID_dk_set(BZIP2_DL ftp://sourceware.org/pub/bzip2/bzip2-1.0.8.tar.gz)
+#dk_set(BZIP2 ${3RDPARTY}/${BZIP2_NAME})
 #DKINSTALL(${BZIP2_DL} bzip2 ${BZIP2})
 
 
@@ -52,11 +52,11 @@ ANDROID_RELEASE_DKLIB(${BZIP2}/${OS}/libbz2.a)
 
 
 ### 3RDPARTY LINK ###
-WIN_DKSET(BZIP2_CMAKE -DBZIP2_INCLUDE_DIR=${BZIP2} -DBZIP2_LIBRARY_DEBUG=${BZIP2}/${OS}/${DEBUG_DIR}/libbz2-static.lib -DBZIP2_LIBRARY_RELEASE=${BZIP2}/${OS}/${RELEASE_DIR}/libbz2-static.lib)
-APPLE_DKSET(BZIP2_CMAKE -DBZIP2_INCLUDE_DIR=${BZIP2}/${OS} -DBZIP2_LIBRARY_DEBUG=${BZIP2}/${OS}/libbz2.a -DBZIP2_LIBRARY_RELEASE=${BZIP2}/${OS}/libbz2.a)
-LINUX_DKSET(BZIP2_CMAKE -DBZIP2_INCLUDE_DIR=${BZIP2}/${OS} -DBZIP2_LIBRARY_DEBUG=${BZIP2}/${OS}/libbz2.a -DBZIP2_LIBRARY_RELEASE=${BZIP2}/${OS}/libbz2.a)
-RASPBERRY_DKSET(BZIP2_CMAKE -DBZIP2_INCLUDE_DIR=${BZIP2}/${OS} -DBZIP2_LIBRARY_DEBUG=${BZIP2}/${OS}/libbz2.a -DBZIP2_LIBRARY_RELEASE=${BZIP2}/${OS}/libbz2.a)
-ANDROID_DKSET(BZIP2_CMAKE -DBZIP2_INCLUDE_DIR=${BZIP2}/${OS} -DBZIP2_LIBRARY_DEBUG=${BZIP2}/${OS}/libbz2.a -DBZIP2_LIBRARY_RELEASE=${BZIP2}/${OS}/libbz2.a)
+WIN_dk_set(BZIP2_CMAKE -DBZIP2_INCLUDE_DIR=${BZIP2} -DBZIP2_LIBRARY_DEBUG=${BZIP2}/${OS}/${DEBUG_DIR}/libbz2-static.lib -DBZIP2_LIBRARY_RELEASE=${BZIP2}/${OS}/${RELEASE_DIR}/libbz2-static.lib)
+APPLE_dk_set(BZIP2_CMAKE -DBZIP2_INCLUDE_DIR=${BZIP2}/${OS} -DBZIP2_LIBRARY_DEBUG=${BZIP2}/${OS}/libbz2.a -DBZIP2_LIBRARY_RELEASE=${BZIP2}/${OS}/libbz2.a)
+LINUX_dk_set(BZIP2_CMAKE -DBZIP2_INCLUDE_DIR=${BZIP2}/${OS} -DBZIP2_LIBRARY_DEBUG=${BZIP2}/${OS}/libbz2.a -DBZIP2_LIBRARY_RELEASE=${BZIP2}/${OS}/libbz2.a)
+RASPBERRY_dk_set(BZIP2_CMAKE -DBZIP2_INCLUDE_DIR=${BZIP2}/${OS} -DBZIP2_LIBRARY_DEBUG=${BZIP2}/${OS}/libbz2.a -DBZIP2_LIBRARY_RELEASE=${BZIP2}/${OS}/libbz2.a)
+ANDROID_dk_set(BZIP2_CMAKE -DBZIP2_INCLUDE_DIR=${BZIP2}/${OS} -DBZIP2_LIBRARY_DEBUG=${BZIP2}/${OS}/libbz2.a -DBZIP2_LIBRARY_RELEASE=${BZIP2}/${OS}/libbz2.a)
 	
 
 

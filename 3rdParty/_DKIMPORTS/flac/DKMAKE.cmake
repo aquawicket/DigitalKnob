@@ -6,11 +6,11 @@
 DKDEPEND(nasm)
 DKDEPEND(ogg)
 
-#DKIMPORT(https://github.com/xiph/flac)
-DKSET(FLAC_VERSION 1.3.2)
-DKSET(FLAC_DL https://ftp.osuosl.org/pub/xiph/releases/flac/flac-1.3.2.tar.xz)
-DKSET(FLAC_NAME flac-${FLAC_VERSION})
-DKSET(FLAC ${3RDPARTY}/${FLAC_NAME})
+#dk_import(https://github.com/xiph/flac)
+dk_set(FLAC_VERSION 1.3.2)
+dk_set(FLAC_DL https://ftp.osuosl.org/pub/xiph/releases/flac/flac-1.3.2.tar.xz)
+dk_set(FLAC_NAME flac-${FLAC_VERSION})
+dk_set(FLAC ${3RDPARTY}/${FLAC_NAME})
 DKINSTALL(${FLAC_DL} flac ${FLAC})
 
 
@@ -27,31 +27,31 @@ ANDROID_RELEASE_DKLIB(${FLAC}/${OS}/${RELEASE_DIR}/src/libFLAC/.libs/libFLAC-sta
 
 
 ### 3rd Party Link ###
-WIN_DKSET(FLAC_CMAKE
+WIN_dk_set(FLAC_CMAKE
 	-DFLAC_INCLUDE_DIR=${FLAC}/include 
 	-DFLAC_LIBRARY_DEBUG=${FLAC}/${OS}/${DEBUG_DIR}/src/libFLAC/.libs/libFLAC-static.a 
 	-DFLAC_LIBRARY_RELEASE=${FLAC}/${OS}/${RELEASE_DIR}/src/libFLAC/.libs/libFLAC-static.a)
-APPLE_DKSET(FLAC_CMAKE
+APPLE_dk_set(FLAC_CMAKE
 	-DFLAC_INCLUDE_DIR=${FLAC}/include 
 	-DFLAC_LIBRARY_DEBUG=${FLAC}/${OS}/${DEBUG_DIR}/src/libFLAC/.libs/libFLAC-static.a 
 	-DFLAC_LIBRARY_RELEASE=${FLAC}/${OS}/${RELEASE_DIR}/src/libFLAC/.libs/libFLAC-static.a)
-LINUX_DEBUG_DKSET(FLAC_CMAKE 
+LINUX_DEBUG_dk_set(FLAC_CMAKE 
 	-DFLAC_INCLUDE_DIR=${FLAC}/include
 	-DFLAC_LIBRARY=${FLAC}/${OS}/${DEBUG_DIR}/src/libFLAC/.libs/libFLAC-static.a
 	-DFLAC_LIBRARY_DEBUG=${FLAC}/${OS}/${DEBUG_DIR}/src/libFLAC/.libs/libFLAC-static.a)
-LINUX_RELEASE_DKSET(FLAC_CMAKE 
+LINUX_RELEASE_dk_set(FLAC_CMAKE 
 	-DFLAC_INCLUDE_DIR=${FLAC}/include
 	-DFLAC_LIBRARY=${FLAC}/${OS}/${RELEASE_DIR}/src/libFLAC/.libs/libFLAC-static.a
 	-DFLAC_LIBRARY_RELEASE=${FLAC}/${OS}/${RELEASE_DIR}/src/libFLAC/.libs/libFLAC-static.a)
-RASPBERRY_DEBUG_DKSET(FLAC_CMAKE 
+RASPBERRY_DEBUG_dk_set(FLAC_CMAKE 
 	-DFLAC_INCLUDE_DIR=${FLAC}/include
 	-DFLAC_LIBRARY=${FLAC}/${OS}/${DEBUG_DIR}/src/libFLAC/.libs/libFLAC-static.a
 	-DFLAC_LIBRARY_DEBUG=${FLAC}/${OS}/${DEBUG_DIR}/src/libFLAC/.libs/libFLAC-static.a)
-RASPBERRY_RELEASE_DKSET(FLAC_CMAKE 
+RASPBERRY_RELEASE_dk_set(FLAC_CMAKE 
 	-DFLAC_INCLUDE_DIR=${FLAC}/include
 	-DFLAC_LIBRARY=${FLAC}/${OS}/${RELEASE_DIR}/src/libFLAC/.libs/libFLAC-static.a
 	-DFLAC_LIBRARY_RELEASE=${FLAC}/${OS}/${RELEASE_DIR}/src/libFLAC/.libs/libFLAC-static.a)
-ANDROID_DKSET(FLAC_CMAKE 
+ANDROID_dk_set(FLAC_CMAKE 
 	-DFLAC_INCLUDE_DIR=${FLAC}/include 
 	-DFLAC_LIBRARY_DEBUG=${FLAC}/${OS}/${DEBUG_DIR}/src/libFLAC/.libs/libFLAC-static.a 
 	-DFLAC_LIBRARY_RELEASE=${FLAC}/${OS}/${RELEASE_DIR}/src/libFLAC/.libs/libFLAC-static.a)

@@ -7,12 +7,12 @@ endif()
 
 #DKGITCLONE(https://github.com/nigels-com/glew.git)
 
-DKIMPORT(https://github.com/nigels-com/glew/releases/download/glew-2.2.0/glew-2.2.0.zip)
+dk_import(https://github.com/nigels-com/glew/releases/download/glew-2.2.0/glew-2.2.0.zip)
 
-#DKSET(GLEW_VERSION 2.2.0)
-#DKSET(GLEW_NAME glew-${GLEW_VERSION})
-#DKSET(GLEW_DL https://github.com/nigels-com/glew/releases/download/glew-2.2.0/glew-2.2.0.zip)
-#DKSET(GLEW ${3RDPARTY}/${GLEW_NAME})
+#dk_set(GLEW_VERSION 2.2.0)
+#dk_set(GLEW_NAME glew-${GLEW_VERSION})
+#dk_set(GLEW_DL https://github.com/nigels-com/glew/releases/download/glew-2.2.0/glew-2.2.0.zip)
+#dk_set(GLEW ${3RDPARTY}/${GLEW_NAME})
 #DKINSTALL(${GLEW_DL} glew ${GLEW})
 
 
@@ -38,7 +38,7 @@ RASPBERRY_RELEASE_DKLIB(${GLEW}/${OS}//${RELEASE_DIR}/lib/libGLEW.a)
 
 
 ### INJECT ###
-#DKSET(GLEW_WIN32 
+#dk_set(GLEW_WIN32 
 #	-DGLEW_USE_STATIC_LIB=ON
 #	-DGLEW_DIR=${GLEW}/${OS}/CMakeFiles/Export/lib/cmake/glew
 #	-DGLEW_LIBRARY=${GLEW}/${OS}/lib/${DEBUG_DIR}/libglew32.lib

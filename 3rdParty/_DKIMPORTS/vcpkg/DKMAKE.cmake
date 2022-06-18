@@ -5,7 +5,7 @@
 DKDEPEND(git)
 
 
-DKIMPORT(https://github.com/Microsoft/vcpkg.git)
+dk_import(https://github.com/Microsoft/vcpkg.git)
 
 
 DKSETPATH(${VCPKG})

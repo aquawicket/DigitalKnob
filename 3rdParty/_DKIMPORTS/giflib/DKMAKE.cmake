@@ -13,14 +13,14 @@ WIN_DKDEPEND(msys)
 #WIN_DKDEPEND(msys2)
 
 
-DKIMPORT(https://github.com/mirrorer/giflib.git PATCH)
+dk_import(https://github.com/mirrorer/giflib.git PATCH)
 
-#DKIMPORT(https://github.com/mirrorer/giflib/archive/fa37672085ce4b3d62c51627ab3c8cf2dda8009a.zip PATCH)
+#dk_import(https://github.com/mirrorer/giflib/archive/fa37672085ce4b3d62c51627ab3c8cf2dda8009a.zip PATCH)
 
-#DKSET(GIFLIB_VERSION 5.1.1)
-#DKSET(GIFLIB_DL https://sourceforge.net/projects/giflib/files/giflib-5.1.1.tar.gz)
-#DKSET(GIFLIB_NAME giflib-${GIFLIB_VERSION})
-#DKSET(GIFLIB ${3RDPARTY}/${GIFLIB_NAME})
+#dk_set(GIFLIB_VERSION 5.1.1)
+#dk_set(GIFLIB_DL https://sourceforge.net/projects/giflib/files/giflib-5.1.1.tar.gz)
+#dk_set(GIFLIB_NAME giflib-${GIFLIB_VERSION})
+#dk_set(GIFLIB ${3RDPARTY}/${GIFLIB_NAME})
 #DKINSTALL(${GIFLIB_DL} giflib ${GIFLIB} PATCH)
 
 
@@ -41,11 +41,11 @@ ANDROID_RELEASE_DKLIB(${GIFLIB}/${OS}/${RELEASE_DIR}/libgiflib.a)
 
 
 ### 3RDPARTY LINK ###
-WIN_DKSET(GIFLIB_CMAKE -DGIF_INCLUDE_DIR=${GIFLIB}/lib -DGIF_INCLUDE_DIR2=${GIFLIB}/${OS} -DGIF_LIBRARY=${GIFLIB}/${OS}/${RELEASE_DIR}/lib/.libs/libgif.a)
-APPLE_DKSET(GIF_CMAKE -DGIF_INCLUDE_DIR=${GIFLIB}/lib -DGIF_INCLUDE_DIR2=${GIFLIB}/${OS} -DGIF_LIBRARY=${GIFLIB}/${OS}/${RELEASE_DIR}/lib/.libs/libgif.a)
-LINUX_DKSET(GIF_CMAKE -DGIF_INCLUDE_DIR=${GIFLIB}/lib -DGIF_INCLUDE_DIR2=${GIFLIB}/${OS} -DGIF_LIBRARY=${GIFLIB}/${OS}/${RELEASE_DIR}/lib/.libs/libgif.a)
-RASPBERRY_DKSET(GIF_CMAKE -DGIF_INCLUDE_DIR=${GIFLIB}/lib -DGIF_INCLUDE_DIR2=${GIFLIB}/${OS} -DGIF_LIBRARY=${GIFLIB}/${OS}/${RELEASE_DIR}/lib/.libs/libgif.a)
-ANDROID_DKSET(GIF_CMAKE -DGIF_INCLUDE_DIR=${GIFLIB}/lib -DGIF_INCLUDE_DIR2=${GIFLIB}/${OS} -DGIF_LIBRARY=${GIFLIB}/${OS}/${RELEASE_DIR}/libgiflib.a)	
+WIN_dk_set(GIFLIB_CMAKE -DGIF_INCLUDE_DIR=${GIFLIB}/lib -DGIF_INCLUDE_DIR2=${GIFLIB}/${OS} -DGIF_LIBRARY=${GIFLIB}/${OS}/${RELEASE_DIR}/lib/.libs/libgif.a)
+APPLE_dk_set(GIF_CMAKE -DGIF_INCLUDE_DIR=${GIFLIB}/lib -DGIF_INCLUDE_DIR2=${GIFLIB}/${OS} -DGIF_LIBRARY=${GIFLIB}/${OS}/${RELEASE_DIR}/lib/.libs/libgif.a)
+LINUX_dk_set(GIF_CMAKE -DGIF_INCLUDE_DIR=${GIFLIB}/lib -DGIF_INCLUDE_DIR2=${GIFLIB}/${OS} -DGIF_LIBRARY=${GIFLIB}/${OS}/${RELEASE_DIR}/lib/.libs/libgif.a)
+RASPBERRY_dk_set(GIF_CMAKE -DGIF_INCLUDE_DIR=${GIFLIB}/lib -DGIF_INCLUDE_DIR2=${GIFLIB}/${OS} -DGIF_LIBRARY=${GIFLIB}/${OS}/${RELEASE_DIR}/lib/.libs/libgif.a)
+ANDROID_dk_set(GIF_CMAKE -DGIF_INCLUDE_DIR=${GIFLIB}/lib -DGIF_INCLUDE_DIR2=${GIFLIB}/${OS} -DGIF_LIBRARY=${GIFLIB}/${OS}/${RELEASE_DIR}/libgiflib.a)	
 
 
 ### COMPILE ###

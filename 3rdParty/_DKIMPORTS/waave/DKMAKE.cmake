@@ -6,7 +6,7 @@ DKDEPEND(ffmpeg-shared)
 DKDEPEND(ffmpeg-static)
 DKDEPEND(sdl)
 
-DKIMPORT(https://sourceforge.net/projects/waave/files/waave/waave-3.01.tar.gz)
+dk_import(https://sourceforge.net/projects/waave/files/waave/waave-3.01.tar.gz)
 
 
 ### LINK ###

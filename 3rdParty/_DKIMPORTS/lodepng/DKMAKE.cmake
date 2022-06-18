@@ -1,4 +1,4 @@
 # https://github.com/lvandeve/lodepng
 #
 
-DKIMPORT(https://github.com/lvandeve/lodepng.git)
+dk_import(https://github.com/lvandeve/lodepng.git)

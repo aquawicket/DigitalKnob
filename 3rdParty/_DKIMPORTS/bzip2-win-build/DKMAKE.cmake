@@ -10,8 +10,8 @@ DKDEPEND(mingw64)
 DKDEPEND(msys2)
 DKDEPEND(libgcc)
 
-DKIMPORT(https://github.com/kiyolee/bzip2-win-build.git)
-#DKIMPORT(https://github.com/kiyolee/bzip2-win-build/archive/c0242ad14ecc4e8c04e72bc6c980393be80e7bbd.zip)
+dk_import(https://github.com/kiyolee/bzip2-win-build.git)
+#dk_import(https://github.com/kiyolee/bzip2-win-build/archive/c0242ad14ecc4e8c04e72bc6c980393be80e7bbd.zip)
 
 
 #if(NOT EXISTS ${BZIP2-WIN-BUILD}/copy)
@@ -29,7 +29,7 @@ WIN64_RELEASE_DKLIB(${BZIP2-WIN-BUILD}/${OS}/x64/${RELEASE_DIR}/libbz2-static.li
 
 
 ### 3RDPARTY LINK ###
-WIN_DKSET(BZIP2-WIN-BUILD_CMAKE -DBZIP2_INCLUDE_DIR=${BZIP2-WIN-BUILD} -DBZIP2_LIBRARY_DEBUG=${BZIP2-WIN-BUILD}/${OS}/${DEBUG_DIR}/libbz2-static.lib -DBZIP2_LIBRARY_RELEASE=${BZIP2-WIN-BUILD}/${OS}/${RELEASE_DIR}/libbz2-static.lib)
+WIN_dk_set(BZIP2-WIN-BUILD_CMAKE -DBZIP2_INCLUDE_DIR=${BZIP2-WIN-BUILD} -DBZIP2_LIBRARY_DEBUG=${BZIP2-WIN-BUILD}/${OS}/${DEBUG_DIR}/libbz2-static.lib -DBZIP2_LIBRARY_RELEASE=${BZIP2-WIN-BUILD}/${OS}/${RELEASE_DIR}/libbz2-static.lib)
 	
 ### COMPILE ###
 if(WIN_32)

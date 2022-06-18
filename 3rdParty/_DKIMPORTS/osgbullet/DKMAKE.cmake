@@ -5,17 +5,17 @@ DKDEPEND(osgworks)
 
 
 
-#DKIMPORT(http://TODO.com/osgbullet-master.zip)
+#dk_import(http://TODO.com/osgbullet-master.zip)
 
 
 DKINSTALL(http://TODO.com/osgbullet-master.zip osgbullet-master)
-DKSET(OSGBULLET ${3RDPARTY}/osgbullet-master)
+dk_set(OSGBULLET ${3RDPARTY}/osgbullet-master)
 
 
 ### LINK ###
-DKSET(OSGBULLET_GL2 ${3RDPARTY}/osgbullet-master-GL2)
+dk_set(OSGBULLET_GL2 ${3RDPARTY}/osgbullet-master-GL2)
 IF(OpenGL2)
-	DKSET(OSGBULLET OSGBULLET_GL2)
+	dk_set(OSGBULLET OSGBULLET_GL2)
 ENDIF(OpenGL2)
 
 DKINCLUDE(${OSGBULLET}/include)

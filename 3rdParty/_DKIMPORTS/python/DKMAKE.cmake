@@ -14,8 +14,8 @@ MAC_DKSET		(PYTHON_DL https://www.python.org/ftp/python/2.7.18/python-2.7.18-mac
 LINUX_DKSET		(PYTHON_DL https://www.python.org/ftp/python/2.7.18/Python-2.7.18.tgz)
 RASPBERRY_DKSET	(PYTHON_DL https://www.python.org/ftp/python/2.7.18/Python-2.7.18.tgz)
 
-DKSET(PYTHON_NAME python-2.7.18)
-DKSET(PYTHON ${3RDPARTY}/${PYTHON_NAME})
+dk_set(PYTHON_NAME python-2.7.18)
+dk_set(PYTHON ${3RDPARTY}/${PYTHON_NAME})
 
 WIN_DKSET		(PYTHON_APP ${PYTHON}/python.exe)
 MAC_DKSET		(PYTHON_APP ${PYTHON}/python.app)

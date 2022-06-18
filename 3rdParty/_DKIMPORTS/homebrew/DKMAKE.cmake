@@ -6,7 +6,7 @@ if(NOT MAC_HOST)
 endif()
 
 
-#DKIMPORT(https://github.com/Homebrew/brew)
+#dk_import(https://github.com/Homebrew/brew)
 
 MAC_DKQCOMMAND("ruby -e \"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)\"")
 # https://github.com/Homebrew/brew/issues/10368

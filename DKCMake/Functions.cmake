@@ -190,11 +190,11 @@ endfunction()
 
 
 ###############################################################################
-# DKSET(variable value)
+# dk_set(variable value)
 #	
 # https://stackoverflow.com/a/29250496/688352
 #
-function(DKSET variable value)
+function(dk_set variable value)
 	DKDEBUGFUNC(${ARGV})
 	set(${variable} ${value} ${ARGN} CACHE INTERNAL "")
 	
@@ -205,7 +205,7 @@ function(DKSET variable value)
 	endif()
 	##########################################
 endfunction()
-dk_aliasFunctions("DKSET")
+dk_aliasFunctions("dk_set")
 
 
 ###############################################################################
@@ -606,7 +606,7 @@ function(dk_download src_path dest_path) # ARGV1 = dest_path
 		DKWARN("dest_dir:(${dest_dir}) does not exists. It will be created")
 		dk_makeDirectory(${dest_dir})
 	endif()
-	DKSET(CURRENT_DIR ${dest_dir})
+	dk_set(CURRENT_DIR ${dest_dir})
 	DKDEBUG("dest_dir = ${dest_dir}")
 	
 	get_filename_component(dest_filename ${dest_path} NAME)
@@ -659,7 +659,7 @@ function(dk_download src_path dest_path) # ARGV1 = dest_path
 			DKASSERT("temp_path:(${temp_path}) could not locate temporary download file")
 			return()
 		endif()
-		DKRENAME(${temp_path} ${dest_path} false)
+		dk_rename(${temp_path} ${dest_path} false)
 		if(NOT EXISTS ${dest_path})
 			DKASSERT("dest_path:(${dest_path}) Could not locate downloaded file")
 			return()
@@ -746,9 +746,9 @@ endfunction()
 
 
 ###############################################################################
-# DKCOMPAREFILES(fileA fileB)
+# dk_filesMatch(fileA fileB)
 #
-function(DKCOMPAREFILES fileA fileB)
+function(dk_filesMatch fileA fileB)
 	DKDEBUGFUNC(${ARGV})
 	execute_process(COMMAND ${CMAKE_COMMAND} -E compare_files ${fileA} ${fileB} RESULT_VARIABLE compare_result)
 	if(compare_result EQUAL 0)
@@ -762,9 +762,9 @@ endfunction()
 
 
 ###############################################################################
-# DKRENAME(from to overwrite)
+# dk_rename(from to overwrite)
 #
-function(DKRENAME from to overwrite)
+function(dk_rename from to overwrite)
 	DKDEBUGFUNC(${ARGV})
 	DKINFO("Renameing ${from} to ${to}")
 	if(EXISTS ${from})
@@ -781,9 +781,9 @@ endfunction()
 
 
 ###############################################################################
-# DKREMOVE(path)
+# dk_remove(path)
 #
-function(DKREMOVE path)
+function(dk_remove path)
 	DKDEBUGFUNC(${ARGV})
 	if(NOT EXISTS ${path})
 		DKWARN("Path:(${path}) does not exist")
@@ -820,15 +820,15 @@ function(dk_enable plugin)
 	DKDEBUGFUNC(${ARGV})
 	if(NOT ${plugin})
 		if(${ARGC} GREATER 1)
-			DKSET(${${ARGV1}} ON)
-			DKSET(HAVE_${${ARGV1}} ON)
+			dk_set(${${ARGV1}} ON)
+			dk_set(HAVE_${${ARGV1}} ON)
 			#In c++ we can't use certian symbals in the preprocess or for macros. - must be turned to _
 			string(REPLACE "-" "_" argv1_macro "${ARGV1}")
 			string(REPLACE "." "_" argv1_macro "${argv1_macro}")
 			DKDEFINE(HAVE_${argv1_macro})
 		else()
-			DKSET(${plugin} ON)
-			DKSET(HAVE_${plugin} ON)
+			dk_set(${plugin} ON)
+			dk_set(HAVE_${plugin} ON)
 			#In c++ we can't use certian symbals in the preprocess or for macros. - must be turned to _
 			string(REPLACE "-" "_" plugin_macro "${plugin}")
 			string(REPLACE "." "_" plugin_macro "${plugin_macro}")
@@ -839,21 +839,21 @@ endfunction()
 
 
 ###############################################################################
-# DKDISABLE(plugin)
+# dk_disable(plugin)
 #
-function(DKDISABLE plugin)
+function(dk_disable plugin)
 	DKDEBUGFUNC(${ARGV})
 	if(BYPASS_DISABLE)
-		DKINFO("* DKDISABLE(${plugin}) ignored.  BYPASS_DISABLE is set to ON. ${plugin} will not be disabled *")
+		DKINFO("* dk_disable(${plugin}) ignored.  BYPASS_DISABLE is set to ON. ${plugin} will not be disabled *")
 		return()
 	endif()
 	if(NOT ${CMAKE_CURRENT_LIST_DIR} STREQUAL ${DKCMAKE} AND NOT ${CMAKE_CURRENT_LIST_DIR} STREQUAL ${DKPROJECT}) # /from DKCMake or curremt Project directory only
-		DKERROR("DKDISABLE() Can only be used from the DKCMake/Disabled.cmake file. This is to avoid having disabled libraries hideing everywhere")
+		DKERROR("dk_disable() Can only be used from the DKCMake/Disabled.cmake file. This is to avoid having disabled libraries hideing everywhere")
 	endif()
 	
 	if(NOT EXISTS ${DKIMPORTS}/${plugin}/DKMAKE.cmake)
 	if(NOT EXISTS ${DKPLUGINS}/${plugin}/DKMAKE.cmake)
-		DKWARN("DKDISABLE(${plugin}):  unable to locate plugin in /3rdParty/_DKIMPORTS  or /DKPlugins")
+		DKWARN("dk_disable(${plugin}):  unable to locate plugin in /3rdParty/_DKIMPORTS  or /DKPlugins")
 		return()
 	endif()
 	endif()
@@ -888,7 +888,7 @@ function(DKDEFINE str)
 	if(${index} GREATER -1)
 		return() ## already in the list, return.
 	endif()
-	DKSET(DKDEFINES_LIST ${DKDEFINES_LIST} ${str})
+	dk_set(DKDEFINES_LIST ${DKDEFINES_LIST} ${str})
 	add_definitions(-D${str})
 endfunction()
 dk_aliasFunctions("DKDEFINE")
@@ -917,7 +917,7 @@ function(DKINCLUDE path)
 		if(${index} GREATER -1)
 			continue()  #item is already in the list
 		endif()
-		DKSET(DKINCLUDES_LIST ${DKINCLUDES_LIST} ${item})
+		dk_set(DKINCLUDES_LIST ${DKINCLUDES_LIST} ${item})
 		include_directories(${item})
 		
 		if(INSTALL_DKLIBS)
@@ -939,7 +939,7 @@ function(DKLINKDIR path)
 		if(${index} GREATER -1)
 			continue()  #item is already in the list
 		endif()
-		DKSET(DKLINKDIRS_LIST ${DKLINKDIRS_LIST} ${item})
+		dk_set(DKLINKDIRS_LIST ${DKLINKDIRS_LIST} ${item})
 		link_directories(${item})
 	endforeach()
 endfunction()
@@ -1192,10 +1192,10 @@ function(DKINSTALL src_path import_name dest_path)
 		list(LENGTH items count)
 		if(${count} GREATER 2) ##NOTE: This should be "${count} GREATER 1" but msys has a readme file in it next to the inner msys folder and that messes things up for more than 1
 			#Zip extracted with no root folder, Rename UNZIPPED and move to 3rdParty
-			DKRENAME(${DKDOWNLOAD}/UNZIPPED ${dest_path} true)
+			dk_rename(${DKDOWNLOAD}/UNZIPPED ${dest_path} true)
 		else()
 			if(EXISTS ${DKDOWNLOAD}/UNZIPPED/${dest_filename}) ##Zip extracted to expected folder. Move the folder to 3rdParty
-				DKRENAME(${DKDOWNLOAD}/UNZIPPED/${dest_filename} ${dest_path} true)
+				dk_rename(${DKDOWNLOAD}/UNZIPPED/${dest_filename} ${dest_path} true)
 				file(REMOVE ${DKDOWNLOAD}/UNZIPPED)
 			else() #Zip extracted to a root folder, but not named what we expected. Rename and move folder to 3rdParty
 				foreach(item ${items})
@@ -1203,13 +1203,13 @@ function(DKINSTALL src_path import_name dest_path)
 						list(REMOVE_ITEM items ${item}) #remove any readme.txt or other non-directory items
 					endif()
 				endforeach()
-				DKRENAME(${DKDOWNLOAD}/UNZIPPED/${items} ${dest_path} true)
+				dk_rename(${DKDOWNLOAD}/UNZIPPED/${items} ${dest_path} true)
 				file(REMOVE ${DKDOWNLOAD}/UNZIPPED)
 			endif() 
 		endif()
 	#elseif(${FILETYPE} STREQUAL "Executable")
 	#	DKSETPATH(${DKDOWNLOAD})
-	#	DKSET(QUEUE_BUILD ON)
+	#	dk_set(QUEUE_BUILD ON)
 	#	DKEXECUTE(${DKDOWNLOAD}/${src_filename})
 	else() #NOT ARCHIVE, just copy the file into it's 3rdParty folder
 		dk_copy(${DKDOWNLOAD}/${dl_filename} ${dest_path}/${dl_filename} TRUE)
@@ -1296,7 +1296,7 @@ function(DKSETPATH path)
 	if(path STREQUAL "OFF")
 		return() 
 	endif()	
-	DKSET(CURRENT_DIR ${path})
+	dk_set(CURRENT_DIR ${path})
 	if(NOT EXISTS ${CURRENT_DIR})
 		DKINFO("Creating directory: ${CURRENT_DIR})")
 		dk_makeDirectory(${CURRENT_DIR})
@@ -1321,7 +1321,7 @@ function(DKSETPATH path)
 	#			list(REMOVE_ITEM DKCMAKE_BUILD ${item})
 	#		endif()
 	#	endforeach()
-	#	DKSET(DKCMAKE_BUILD ${DKCMAKE_BUILD} -DCMAKE_ARCHIVE_OUTPUT_DIRECTORY=${CURRENT_DIR} -DCMAKE_LIBRARY_OUTPUT_DIRECTORY=${CURRENT_DIR} -DCMAKE_RUNTIME_OUTPUT_DIRECTORY=${CURRENT_DIR})
+	#	dk_set(DKCMAKE_BUILD ${DKCMAKE_BUILD} -DCMAKE_ARCHIVE_OUTPUT_DIRECTORY=${CURRENT_DIR} -DCMAKE_LIBRARY_OUTPUT_DIRECTORY=${CURRENT_DIR} -DCMAKE_RUNTIME_OUTPUT_DIRECTORY=${CURRENT_DIR})
 	#endif()
 endfunction()
 dk_aliasFunctions("DKSETPATH")
@@ -1431,7 +1431,7 @@ endfunction()
 function(DKCOMMAND)
 	DKDEBUGFUNC(${ARGV})
 	if(NOT EXISTS ${CURRENT_DIR})
-		DKSET(CURRENT_DIR ${DIGITALKNOB})
+		dk_set(CURRENT_DIR ${DIGITALKNOB})
 	endif()
 	#DKDEBUG("${ARGV}")
 	DKMERGE_FLAGS("${ARGV}" merged_args)
@@ -1633,12 +1633,12 @@ endfunction()
 function(DKLIB lib_path)
 	DKDEBUGFUNC(${ARGV})
 	foreach(item ${ARGV})
-		#DKSET(LIBLIST "${LIBLIST} ${lib_path}") ## used for double checking
+		#dk_set(LIBLIST "${LIBLIST} ${lib_path}") ## used for double checking
 		string(FIND "${LIBS}" "${item}" index)
 		if(NOT ${index} EQUAL -1)
 			continue() # item is already in the list
 		endif()
-		DKSET(LIBS "${LIBS};${item}")
+		dk_set(LIBS "${LIBS};${item}")
 
 		if(INSTALL_DKLIBS)
 			if(EXISTS ${lib_path})
@@ -1662,19 +1662,19 @@ function(DEBUG_DKLIB lib_path)
 	if(NOT DEBUG)
 		return()
 	endif()	
-	DKSET(LIBLIST ${LIBLIST} ${lib_path}) ## used for double checking
+	dk_set(LIBLIST ${LIBLIST} ${lib_path}) ## used for double checking
 	if(NOT EXISTS ${lib_path})
 		DKINFO("MISSING: ${lib_path}")
-		DKSET(QUEUE_BUILD ON) 
+		dk_set(QUEUE_BUILD ON) 
 	endif()
 	string(FIND "${DEBUG_LIBS}" "${lib_path}" index)
 	if(NOT ${index} EQUAL -1)
 		return() ## The library is already in the list
 	endif()
 	if(LINUX OR RASPBERRY OR ANDROID)
-		DKSET(DEBUG_LIBS debug ${lib_path} ${DEBUG_LIBS})  #Add to beginning of list
+		dk_set(DEBUG_LIBS debug ${lib_path} ${DEBUG_LIBS})  #Add to beginning of list
 	else()
-		DKSET(DEBUG_LIBS ${DEBUG_LIBS} debug ${lib_path})  #Add to end of list
+		dk_set(DEBUG_LIBS ${DEBUG_LIBS} debug ${lib_path})  #Add to end of list
 	endif()
 
 	if(INSTALL_DKLIBS)
@@ -1694,19 +1694,19 @@ function(RELEASE_DKLIB lib_path)
 	if(NOT RELEASE)
 		return()
 	endif()
-	DKSET(LIBLIST ${LIBLIST} ${lib_path}) ## used for double checking
+	dk_set(LIBLIST ${LIBLIST} ${lib_path}) ## used for double checking
 	if(NOT EXISTS ${lib_path})
 		DKINFO("MISSING: ${lib_path}")
-		DKSET(QUEUE_BUILD ON)
+		dk_set(QUEUE_BUILD ON)
 	endif()
 	string(FIND "${RELEASE_LIBS}" "${lib_path}" index)
 	if(NOT ${index} EQUAL -1)
 		return() ## The library is already in the list
 	endif()	
 	if(LINUX OR RASPBERRY OR ANDROID)
-		DKSET(RELEASE_LIBS optimized ${lib_path} ${RELEASE_LIBS})  #Add to beginning of list
+		dk_set(RELEASE_LIBS optimized ${lib_path} ${RELEASE_LIBS})  #Add to beginning of list
 	else()
-		DKSET(RELEASE_LIBS ${RELEASE_LIBS} optimized ${lib_path})  #Add to end of list
+		dk_set(RELEASE_LIBS ${RELEASE_LIBS} optimized ${lib_path})  #Add to end of list
 	endif()
 	
 	if(INSTALL_DKLIBS)
@@ -1795,7 +1795,7 @@ function(generateCmake plugin_name)
 			string(FIND "${PLUGINS_FILE}" "${header}" index)
 			if(${index} EQUAL -1)
 				DKINFO("Adding ${header} to header file.")
-				DKSET(PLUGINS_FILE ${PLUGINS_FILE} "#include \"${header}\"\\n")
+				dk_set(PLUGINS_FILE ${PLUGINS_FILE} "#include \"${header}\"\\n")
 			endif()
 		endforeach()
 	endif()
@@ -1812,10 +1812,10 @@ function(generateCmake plugin_name)
 	ANDROID_DEBUG_DKLIB(${plugin_path}/${OS}/${DEBUG_DIR}/lib${plugin_name}.a)
 	ANDROID_RELEASE_DKLIB(${plugin_path}/${OS}/${RELEASE_DIR}/lib${plugin_name}.a)
 	if(REBUILD OR REBUILDALL)
-		DKSET(QUEUE_BUILD ON)
+		dk_set(QUEUE_BUILD ON)
 	endif()
 	
-	DKSET(DKPLUGIN_LIST ${DKPLUGIN_LIST} ${plugin_name})  #Add to list
+	dk_set(DKPLUGIN_LIST ${DKPLUGIN_LIST} ${plugin_name})  #Add to list
 endfunction()
 
 
@@ -1935,7 +1935,7 @@ function(DKTESTAPP name)
 		return()
 	endif()
 	DKINFO("building ${name}_test app")
-	DKSET(test_path "${plugin_path}/test")
+	dk_set(test_path "${plugin_path}/test")
 	
 	##Create CmakeLists.txt file
 	file(REMOVE "${test_path}/CMakeLists.txt")
@@ -1966,7 +1966,7 @@ function(ADDTO_DKPLUGIN_LIST name)
 		return()
 	endif()
 	DKINCLUDE(${plugin_path})
-	DKSET(DKPLUGIN_LIST ${DKPLUGIN_LIST} ${name})
+	dk_set(DKPLUGIN_LIST ${DKPLUGIN_LIST} ${name})
 endfunction()
 
 
@@ -2143,7 +2143,7 @@ function(DKUNDEPEND name)
 		DKASSERT("DKUNDEPEND() Can only be used from the Disabled.cmake file. This is to avoid having disabled libraries hideing everywhere")
 	endif()
 	DKINFO("DISABLING ${ARGV}")
-	DKSET(dkdepend_disable_list ${dkdepend_disable_list} "${ARGV}")
+	dk_set(dkdepend_disable_list ${dkdepend_disable_list} "${ARGV}")
 	if(${ARGC} GREATER 1)
 		dk_removeTarget(${name} ${ARGV1})
 	endif()
@@ -2211,7 +2211,7 @@ function(DKRUNDEPENDS name)
 			set(KEEPLINE 1)
 		endif()
 		
-		string(FIND "${line}" "DKDISABLE(" index)
+		string(FIND "${line}" "dk_disable(" index)
 		if(${index} GREATER -1)
 			set(KEEPLINE 1)
 		endif()
@@ -2221,7 +2221,7 @@ function(DKRUNDEPENDS name)
 		#	set(KEEPLINE 1)
 		#endif()
 		
-		#string(FIND "${line}" "DKSET(" index) # taken care of by SET( sytax above
+		#string(FIND "${line}" "dk_set(" index) # taken care of by SET( sytax above
 		#if(${index} GREATER -1)
 		#	set(KEEPLINE 1)
 		#endif()
@@ -2280,7 +2280,7 @@ function(DKRUNDEPENDS name)
 			set(KEEPLINE 1)
 		endif()
 		
-		string(FIND "${line}" "DKDISABLE(" index)
+		string(FIND "${line}" "dk_disable(" index)
 		if(${index} GREATER -1)
 			set(KEEPLINE 1)
 		endif()	
@@ -2290,7 +2290,7 @@ function(DKRUNDEPENDS name)
 			set(KEEPLINE 1)
 		endif()
 		
-		string(FIND "${line}" "DKSET(" index)
+		string(FIND "${line}" "dk_set(" index)
 		if(${index} GREATER -1)
 			set(KEEPLINE 1)
 		endif()
@@ -2357,14 +2357,14 @@ function(DKRUNDEPENDS name)
 		if(${ARGC} GREATER 1)
 			dk_enable(${ARGV1})
 		else()
-			DKSET(${ARGV0}_all 1)
+			dk_set(${ARGV0}_all 1)
 		endif()
 		file(WRITE ${plugin_path}/DEPENDS.TMP "${depends_script}")
 		INCLUDE(${plugin_path}/DEPENDS.TMP)
 		#file(APPEND ${filepath} "${depends_script}")    #cmake 3.18+
 		file(REMOVE ${plugin_path}/DEPENDS.TMP)
 		if(${ARGC} GREATER 1)
-			DKSET(${ARGV1} OFF)
+			dk_set(${ARGV1} OFF)
 		endif()
 	endif()
 	
@@ -2380,11 +2380,11 @@ function(DKRUNDEPENDS name)
 		endif()
 	endif()
 	
-	DKSET(dkdepend_list ${dkdepend_list} "${ARGV}")  #Add sublibrary to list
+	dk_set(dkdepend_list ${dkdepend_list} "${ARGV}")  #Add sublibrary to list
 	#if(${ARGC} GREATER 1)
-	#	DKSET(dkdepend_list ${dkdepend_list} "${name} ${ARGV1}")  #Add sublibrary to list
+	#	dk_set(dkdepend_list ${dkdepend_list} "${name} ${ARGV1}")  #Add sublibrary to list
 	#else()
-	#	DKSET(dkdepend_list ${dkdepend_list} ${name})  #Add library to list
+	#	dk_set(dkdepend_list ${dkdepend_list} ${name})  #Add library to list
 	#endif()	
 	list(REMOVE_DUPLICATES dkdepend_list)
 endfunction()
@@ -2421,7 +2421,7 @@ function(dk_dependAll)
 		endif()
   	endforeach()
 	
-	#To exclude libraries, use DKDISABLE(lib) in your app DKMAKE.cmake file or in Disabled.cmake
+	#To exclude libraries, use dk_disable(lib) in your app DKMAKE.cmake file or in Disabled.cmake
 	string (REPLACE ";" "" DEPENDALL_FILE "${DEPENDALL_FILE}")
 	file(WRITE ${DKPROJECT}/DEPEND_ALL.txt "${DEPENDALL_FILE}")
 	unset(DEPENDALL_FILE)
@@ -2489,7 +2489,7 @@ function(dk_updateAndroidName name)
 				set(new_name ${each_file})
 				string(REPLACE "dkapp" "${name}" new_name "${new_name}")
 				DKINFO("Renaming ${each_file} to ${new_name}")
-				DKRENAME(${DKPROJECT}/${OS}/${each_file} ${DKPROJECT}/${OS}/${new_name} true)
+				dk_rename(${DKPROJECT}/${OS}/${each_file} ${DKPROJECT}/${OS}/${new_name} true)
 			endif()
 		endforeach()
 	endif()
@@ -2557,7 +2557,7 @@ endfunction()
 #
 function(dk_addSource regex)
 	DKDEBUGFUNC(${ARGV})
-	DKSET(SRC_INCLUDE ${SRC_INCLUDE} ${ARGV})
+	dk_set(SRC_INCLUDE ${SRC_INCLUDE} ${ARGV})
 endfunction()
 
 
@@ -2568,7 +2568,7 @@ endfunction()
 #
 function(dk_removeSource regex)
 	DKDEBUGFUNC(${ARGV})
-	DKSET(SRC_EXCLUDE ${SRC_EXCLUDE} ${ARGV})
+	dk_set(SRC_EXCLUDE ${SRC_EXCLUDE} ${ARGV})
 endfunction()
 
 ###############################################################################
@@ -2813,13 +2813,13 @@ function(dk_addTarget name target)
 		list(REMOVE_ITEM ${name}_targets_OFF ${target})
 	endif()
 	if(${name}_targets)
-		DKSET(${name}_targets ${${name}_targets} ${target})
+		dk_set(${name}_targets ${${name}_targets} ${target})
 	else()
-		DKSET(${name}_targets ${target})
+		dk_set(${name}_targets ${target})
 	endif()
 	if(${name}_all)
-		DKSET(${name}_${target} 1)
-		# DKSET(${name}::${target} 1) # TESTME
+		dk_set(${name}_${target} 1)
+		# dk_set(${name}::${target} 1) # TESTME
 	endif()
 endfunction()
 
@@ -2837,11 +2837,11 @@ function(dk_removeTarget name target)
 		list(REMOVE_ITEM ${name}_targets ${target})
 	endif()
 	if(${name}_targets_OFF)
-		DKSET(${name}_targets_OFF ${${name}_targets_OFF} ${target})
+		dk_set(${name}_targets_OFF ${${name}_targets_OFF} ${target})
 	else()
-		DKSET(${name}_targets_OFF ${target})
+		dk_set(${name}_targets_OFF ${target})
 	endif()
-	DKSET(${name}_${target} 0)
+	dk_set(${name}_${target} 0)
 	dk_unset(${name}_${target})
 	#dk_unset(${name}::${target}) # TESTME
 endfunction()
@@ -2999,7 +2999,7 @@ endfunction()
 
 
 ###############################################################################
-# DKIMPORT(url) #args
+# dk_import(url) #args
 #  
 #	github GIT:  https://github.com/orginization/library.git    dk_importGIT(url) #branch #PATCH
 #	github DL:   https://github.com/orginization/library        dk_importGIT(url) #lib #id #PATCH
@@ -3007,7 +3007,7 @@ endfunction()
 #	exe url DL:  https://website.com/executable.exe		    	 dk_importDL(url) #lib #id #PATCH
 #
 #	@url: The online path the .git or file to import	 
-function(DKIMPORT url) #Lib #ID #Patch
+function(dk_import url) #Lib #ID #Patch
 	DKDEBUGFUNC(${ARGV})
 	string(FIND ${url} ".git" dotgit)
 	if(${dotgit} GREATER -1)
@@ -3016,7 +3016,7 @@ function(DKIMPORT url) #Lib #ID #Patch
 		dk_importDL(${ARGV})
 	endif()
 endfunction()
-dk_aliasFunctions("DKIMPORT")
+dk_aliasFunctions("dk_import")
 
 
 ###############################################################################
@@ -3095,28 +3095,28 @@ function(dk_importGIT url) #branch #PATCH
 	endif()
 	DKDEBUG("LIBVAR = ${LIBVAR}")
 	
-	DKSET(${LIBVAR}_FOLDER ${FOLDER})
+	dk_set(${LIBVAR}_FOLDER ${FOLDER})
 	if(NOT ${LIBVAR}_FOLDER)
 		DKERROR("${LIBVAR}_FOLDER is invalid")
 		return()
 	endif()
 	DKDEBUG("${LIBVAR}_FOLDER = ${${LIBVAR}_FOLDER}")
 	
-	DKSET(${LIBVAR}_BRANCH ${branch})
+	dk_set(${LIBVAR}_BRANCH ${branch})
 	if(NOT ${LIBVAR}_BRANCH)
 		DKERROR("${LIBVAR}_BRANCH is invalid")
 		return()
 	endif()
 	DKDEBUG("${LIBVAR}_BRANCH = ${${LIBVAR}_BRANCH}")
 	
-	DKSET(${LIBVAR}_NAME ${FOLDER}-${${LIBVAR}_BRANCH})
+	dk_set(${LIBVAR}_NAME ${FOLDER}-${${LIBVAR}_BRANCH})
 	if(NOT ${LIBVAR}_NAME)
 		DKERROR("${LIBVAR}_NAME is invalid")
 		return()
 	endif()
 	DKDEBUG("${LIBVAR}_NAME = ${${LIBVAR}_NAME}")
 	
-	DKSET(${LIBVAR} ${3RDPARTY}/${${LIBVAR}_NAME})
+	dk_set(${LIBVAR} ${3RDPARTY}/${${LIBVAR}_NAME})
 	if(NOT ${LIBVAR})
 		DKERROR("${${LIBVAR}} is invalid")
 		return()
@@ -3124,17 +3124,17 @@ function(dk_importGIT url) #branch #PATCH
 	DKDEBUG("${${LIBVAR}} = ${${LIBVAR}}")
 	
 	if(NOT EXISTS ${${LIBVAR}}/.git)
-		DKSET(CURRENT_DIR ${DIGITALKNOB})
+		dk_set(CURRENT_DIR ${DIGITALKNOB})
 		if(EXISTS ${${LIBVAR}})
 			file(REMOVE ${${LIBVAR}})
 		endif()
 		if(NOT EXISTS ${${LIBVAR}})
 			dk_makeDirectory(${${LIBVAR}})
 		endif()
-		DKSET(CURRENT_DIR ${${LIBVAR}})
+		dk_set(CURRENT_DIR ${${LIBVAR}})
 		DKCOMMAND(git clone ${url} ${${LIBVAR}})
 	endif()
-	DKSET(CURRENT_DIR ${${LIBVAR}})
+	dk_set(CURRENT_DIR ${${LIBVAR}})
 	DKCOMMAND(git checkout -- .)
 	DKCOMMAND(git checkout ${branch})
 	DKCOMMAND(git pull)
@@ -3207,11 +3207,11 @@ function(dk_importDL url) #Lib #ID #Patch
 	endif()
 	
 	string(TOUPPER ${Lib} LIB)
-	DKSET(LIBVAR ${LIB})
+	dk_set(LIBVAR ${LIB})
 	DKDEBUG("LIBVAR = ${LIBVAR}")
 	
 	string(TOLOWER ${Lib} FOLDER)
-	DKSET(${LIBVAR}_FOLDER ${FOLDER})
+	dk_set(${LIBVAR}_FOLDER ${FOLDER})
 	DKDEBUG("${LIBVAR}_FOLDER = ${${LIBVAR}_FOLDER}}")
 	
 	## check current folder name
@@ -3232,7 +3232,7 @@ function(dk_importDL url) #Lib #ID #Patch
 		if(NOT ID)
 			string(SUBSTRING ${url${last}} 0 ${index} ID)
 		endif()
-		DKSET(${LIBVAR}_DL ${url})
+		dk_set(${LIBVAR}_DL ${url})
 	endif()
 	
 	string(FIND ${url${last}} ".js" index)
@@ -3240,7 +3240,7 @@ function(dk_importDL url) #Lib #ID #Patch
 		if(NOT ID)
 			string(SUBSTRING ${url${last}} 0 ${index} ID)
 		endif()
-		DKSET(${LIBVAR}_DL ${url})
+		dk_set(${LIBVAR}_DL ${url})
 	endif()
 	
 	string(FIND ${url${last}} ".tar.bz2" index)
@@ -3248,7 +3248,7 @@ function(dk_importDL url) #Lib #ID #Patch
 		if(NOT ID)
 			string(SUBSTRING ${url${last}} 0 ${index} ID)
 		endif()
-		DKSET(${LIBVAR}_DL ${url})
+		dk_set(${LIBVAR}_DL ${url})
 	endif()
 	
 	string(FIND ${url${last}} ".tar.gz" index)
@@ -3256,7 +3256,7 @@ function(dk_importDL url) #Lib #ID #Patch
 		if(NOT ID)
 			string(SUBSTRING ${url${last}} 0 ${index} ID)
 		endif()
-		DKSET(${LIBVAR}_DL ${url})
+		dk_set(${LIBVAR}_DL ${url})
 	endif()
 
 	string(FIND ${url${last}} ".zip" index)
@@ -3264,7 +3264,7 @@ function(dk_importDL url) #Lib #ID #Patch
 		if(NOT ID)
 			string(SUBSTRING ${url${last}} 0 ${index} ID)
 		endif()
-		DKSET(${LIBVAR}_DL ${url})
+		dk_set(${LIBVAR}_DL ${url})
 	endif()
 	######################################################
 	
@@ -3293,14 +3293,14 @@ function(dk_importDL url) #Lib #ID #Patch
 		string(SUBSTRING "${PAGE}" ${value} 40 ID)
 		set(ZIP ${ID}.zip)
 		#string(SUBSTRING ${ZIP} 0 7 TAG)
-		DKSET(${LIBVAR}_DL https://github.com/${org}/${Lib}/archive/${ZIP})
+		dk_set(${LIBVAR}_DL https://github.com/${org}/${Lib}/archive/${ZIP})
 		#DKDEBUG("ID = ${ID}")
 		
 		## update DKMAKE.cmake file
 		dk_copy(${CMAKE_CURRENT_LIST_FILE} ${CMAKE_CURRENT_LIST_FILE}.BACKUP TRUE)
 		file(READ ${CMAKE_CURRENT_LIST_FILE} DKMAKE_FILE)
-		string(REPLACE "DKIMPORT(${url})" "#DKIMPORT(${url})\nDKIMPORT(${${LIBVAR}_DL})" DKMAKE_FILE ${DKMAKE_FILE})
-		string(REPLACE "DKIMPORT(${url} PATCH)" "#DKIMPORT(${url} PATCH)\nDKIMPORT(${${LIBVAR}_DL} PATCH)" DKMAKE_FILE ${DKMAKE_FILE})
+		string(REPLACE "dk_import(${url})" "#dk_import(${url})\ndk_import(${${LIBVAR}_DL})" DKMAKE_FILE ${DKMAKE_FILE})
+		string(REPLACE "dk_import(${url} PATCH)" "#dk_import(${url} PATCH)\ndk_import(${${LIBVAR}_DL} PATCH)" DKMAKE_FILE ${DKMAKE_FILE})
         file(WRITE ${CMAKE_CURRENT_LIST_FILE} ${DKMAKE_FILE})
 	endif()
 	
@@ -3309,9 +3309,9 @@ function(dk_importDL url) #Lib #ID #Patch
 		return()
 	endif()
 		
-	DKSET(${LIBVAR}_BRANCH ${ID})
-	DKSET(${LIBVAR}_NAME ${FOLDER}-${${LIBVAR}_BRANCH})
-	DKSET(${LIBVAR} ${3RDPARTY}/${${LIBVAR}_NAME})
+	dk_set(${LIBVAR}_BRANCH ${ID})
+	dk_set(${LIBVAR}_NAME ${FOLDER}-${${LIBVAR}_BRANCH})
+	dk_set(${LIBVAR} ${3RDPARTY}/${${LIBVAR}_NAME})
 	
 	if(${LIBVAR} AND ${LIBVAR}_BRANCH AND ${LIBVAR}_NAME AND ${LIBVAR}_DL)
 		DKDEBUG("${LIBVAR}_BRANCH = ${${LIBVAR}_BRANCH}") 
@@ -3362,7 +3362,7 @@ function(dk_DownloadAll3rdParty)
 				if(${index} GREATER -1)
 					set(KEEPLINE 1)
 				endif()
-				string(FIND "${line}" "DKIMPORT(" index)
+				string(FIND "${line}" "dk_import(" index)
 				if(${index} GREATER -1)
 					set(KEEPLINE 1)
 				endif()

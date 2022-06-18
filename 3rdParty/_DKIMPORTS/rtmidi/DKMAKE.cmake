@@ -1,20 +1,20 @@
 # https://github.com/thestk/rtmidi
 
 
-#DKIMPORT(https://github.com/thestk/rtmidi)
-#DKSET(RTMIDI_SLN RtMidi.sln)
-#DKSET(RTMIDI_TARGET rtmidi)
+#dk_import(https://github.com/thestk/rtmidi)
+#dk_set(RTMIDI_SLN RtMidi.sln)
+#dk_set(RTMIDI_TARGET rtmidi)
 
-DKIMPORT(http://www.music.mcgill.ca/~gary/rtmidi/release/rtmidi-2.1.0.tar.gz PATCH)
+dk_import(http://www.music.mcgill.ca/~gary/rtmidi/release/rtmidi-2.1.0.tar.gz PATCH)
 
-#DKSET(RTMIDI_VERSION 2.1.0)
-#DKSET(RTMIDI_DL http://www.music.mcgill.ca/~gary/rtmidi/release/rtmidi-2.1.0.tar.gz)
-#DKSET(RTMIDI_NAME rtmidi-${RTMIDI_VERSION})
-#DKSET(RTMIDI ${3RDPARTY}/${RTMIDI_NAME})
+#dk_set(RTMIDI_VERSION 2.1.0)
+#dk_set(RTMIDI_DL http://www.music.mcgill.ca/~gary/rtmidi/release/rtmidi-2.1.0.tar.gz)
+#dk_set(RTMIDI_NAME rtmidi-${RTMIDI_VERSION})
+#dk_set(RTMIDI ${3RDPARTY}/${RTMIDI_NAME})
 #DKINSTALL(${RTMIDI_DL} rtmidi ${RTMIDI} PATCH)
 
-DKSET(RTMIDI_SLN Project.sln)
-DKSET(RTMIDI_TARGET RtMidi)
+dk_set(RTMIDI_SLN Project.sln)
+dk_set(RTMIDI_TARGET RtMidi)
 
 
 ### LINK ###

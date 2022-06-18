@@ -3,15 +3,15 @@
 # https://github.com/nlohmann/json/archive/refs/tags/v3.9.1.zip
 
 
-#DKIMPORT(https://github.com/nlohmann/json)
-DKIMPORT(https://github.com/nlohmann/json/archive/d8a63291cbe50411a2c513d06f3ae7c8c1a43c33.zip)
-#DKSET(JSON_MAJOR 3)
-#DKSET(JSON_MINOR 9)
-#DKSET(JSON_BUILD 1)
-#DKSET(JSON_VERSION ${JSON_MAJOR}.${JSON_MINOR}.${JSON_BUILD})
-#DKSET(JSON_NAME json-${JSON_VERSION})
-#DKSET(JSON_DL https://github.com/nlohmann/json/archive/refs/tags/v3.9.1.zip)
-#DKSET(JSON ${3RDPARTY}/${JSON_NAME})
+#dk_import(https://github.com/nlohmann/json)
+dk_import(https://github.com/nlohmann/json/archive/d8a63291cbe50411a2c513d06f3ae7c8c1a43c33.zip)
+#dk_set(JSON_MAJOR 3)
+#dk_set(JSON_MINOR 9)
+#dk_set(JSON_BUILD 1)
+#dk_set(JSON_VERSION ${JSON_MAJOR}.${JSON_MINOR}.${JSON_BUILD})
+#dk_set(JSON_NAME json-${JSON_VERSION})
+#dk_set(JSON_DL https://github.com/nlohmann/json/archive/refs/tags/v3.9.1.zip)
+#dk_set(JSON ${3RDPARTY}/${JSON_NAME})
 #DKINSTALL(${JSON_DL} json ${JSON})
 
 

@@ -13,7 +13,7 @@ LINUX_DKDEPEND(libsystemd-dev)
 
 
 
-DKIMPORT(https://github.com/LibVNC/libvncserver)
+dk_import(https://github.com/LibVNC/libvncserver)
 
 
 

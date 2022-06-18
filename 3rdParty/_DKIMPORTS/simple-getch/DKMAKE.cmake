@@ -4,12 +4,12 @@ if(NOT UNIX_HOST)
 endif()
 
 
-DKIMPORT(https://github.com/mouuff/simple-getch.git)
+dk_import(https://github.com/mouuff/simple-getch.git)
 
-#DKSET(GETCH_VERSION master)
-#DKSET(GETCH_DL https://github.com/mouuff/simple-getch/archive/refs/heads/master.zip)
-#DKSET(GETCH_NAME simple-getch-${GETCH_VERSION})
-#DKSET(GETCH ${3RDPARTY}/${GETCH_NAME})
+#dk_set(GETCH_VERSION master)
+#dk_set(GETCH_DL https://github.com/mouuff/simple-getch/archive/refs/heads/master.zip)
+#dk_set(GETCH_NAME simple-getch-${GETCH_VERSION})
+#dk_set(GETCH ${3RDPARTY}/${GETCH_NAME})
 #DKINSTALL(${GETCH_DL} simple-getch ${GETCH})
 
 

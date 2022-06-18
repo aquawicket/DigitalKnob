@@ -9,10 +9,10 @@ endif()
 # https://openal.org/downloads/OpenAL11CoreSDK.zip
 
 ### VERSION ###
-DKSET(OPENAL_VERSION 11)
-DKSET(OPENAL_NAME openal-${OPENAL_VERSION})
-DKSET(OPENAL_DL https://openal.org/downloads/OpenAL${OPENAL_VERSION}CoreSDK.zip)
-DKSET(OPENAL ${3RDPARTY}/${OPENAL_NAME})
+dk_set(OPENAL_VERSION 11)
+dk_set(OPENAL_NAME openal-${OPENAL_VERSION})
+dk_set(OPENAL_DL https://openal.org/downloads/OpenAL${OPENAL_VERSION}CoreSDK.zip)
+dk_set(OPENAL ${3RDPARTY}/${OPENAL_NAME})
 
 
 ### INSTALL ###

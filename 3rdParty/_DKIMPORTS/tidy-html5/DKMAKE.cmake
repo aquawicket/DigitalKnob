@@ -4,12 +4,12 @@
 # https://github.com/htacg/tidy-html5/archive/refs/tags/5.8.0.zip
 
 
-DKIMPORT(https://github.com/htacg/tidy-html5.git)
+dk_import(https://github.com/htacg/tidy-html5.git)
 
-#DKSET(TIDY-HTML5_DL https://github.com/htacg/tidy-html5/archive/refs/tags/5.8.0.zip)
-#DKSET(TIDY-HTML5_VERSION 5.8.0)
-#DKSET(TIDY-HTML5_NAME tidy_html5_${TIDY-HTML5_VERSION})
-#DKSET(TIDY-HTML5 ${3RDPARTY}/${TIDY-HTML5_NAME})
+#dk_set(TIDY-HTML5_DL https://github.com/htacg/tidy-html5/archive/refs/tags/5.8.0.zip)
+#dk_set(TIDY-HTML5_VERSION 5.8.0)
+#dk_set(TIDY-HTML5_NAME tidy_html5_${TIDY-HTML5_VERSION})
+#dk_set(TIDY-HTML5 ${3RDPARTY}/${TIDY-HTML5_NAME})
 #DKINSTALL(${TIDY-HTML5_DL} tidy-html5 ${TIDY-HTML5})
 
 

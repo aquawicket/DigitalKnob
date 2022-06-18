@@ -6,14 +6,14 @@
 
 ### VERSION ###
 # jre1.8.0_311
-WIN_HOST_DKSET(JAVA_VERSION 8u311)
-WIN_HOST_DKSET(JAVA_NAME jre-${JAVA_VERSION}-windows-x64)
-WIN_HOST_DKSET(JAVA_DL http://deb.sambaedu.org/wpkg/files/jre/jre-8u311-windows-x64.exe)
-#WIN_HOST_DKSET(JAVA "C:/Program Files/Java/bin/jre1.8.0_311")
-WIN_HOST_DKSET(JAVA ${3RDPARTY}/${JAVA_NAME})
+WIN_HOST_dk_set(JAVA_VERSION 8u311)
+WIN_HOST_dk_set(JAVA_NAME jre-${JAVA_VERSION}-windows-x64)
+WIN_HOST_dk_set(JAVA_DL http://deb.sambaedu.org/wpkg/files/jre/jre-8u311-windows-x64.exe)
+#WIN_HOST_dk_set(JAVA "C:/Program Files/Java/bin/jre1.8.0_311")
+WIN_HOST_dk_set(JAVA ${3RDPARTY}/${JAVA_NAME})
 #dk_getShortPath(${JAVA} JAVA)
-#DKSET(JAVA "${JAVA}")
-WIN_HOST_DKSET(JAVA_EXE ${JAVA}/bin/java.exe)
+#dk_set(JAVA "${JAVA}")
+WIN_HOST_dk_set(JAVA_EXE ${JAVA}/bin/java.exe)
 
 
 ### INSTALL ###

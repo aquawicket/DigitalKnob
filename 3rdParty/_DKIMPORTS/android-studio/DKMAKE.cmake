@@ -11,21 +11,21 @@ DKDEPEND(android-sdk)
 DKDEPEND(android-ndk)
 
 
-#DKIMPORT(https://redirector.gvt1.com/edgedl/android/studio/install/2020.3.1.26/android-studio-2020.3.1.26-windows.exe)
+#dk_import(https://redirector.gvt1.com/edgedl/android/studio/install/2020.3.1.26/android-studio-2020.3.1.26-windows.exe)
 
-DKSET(ANDROIDSTUDIO_VERSION "2020.3.1.26-windows")
-DKSET(ANDROIDSTUDIO_NAME "android-studio-2020.3.1.26-windows.exe")
-WIN_HOST_DKSET(ANDROIDSTUDIO_DL "https://redirector.gvt1.com/edgedl/android/studio/install/2020.3.1.26/android-studio-2020.3.1.26-windows.exe")
+dk_set(ANDROIDSTUDIO_VERSION "2020.3.1.26-windows")
+dk_set(ANDROIDSTUDIO_NAME "android-studio-2020.3.1.26-windows.exe")
+WIN_HOST_dk_set(ANDROIDSTUDIO_DL "https://redirector.gvt1.com/edgedl/android/studio/install/2020.3.1.26/android-studio-2020.3.1.26-windows.exe")
 
 
-WIN_HOST_DKSET(ANDROIDSTUDIO "C:/Program Files/Android/Android Studio/bin")
-WIN_HOST_DKSET(ANDROIDSTUDIO_EXE "${ANDROIDSTUDIO}/studio.exe")
+WIN_HOST_dk_set(ANDROIDSTUDIO "C:/Program Files/Android/Android Studio/bin")
+WIN_HOST_dk_set(ANDROIDSTUDIO_EXE "${ANDROIDSTUDIO}/studio.exe")
 
-MAC_HOST_DKSET(ANDROIDSTUDIO "/Applications")
-MAC_HOST_DKSET(ANDROIDSTUDIO_EXE "${ANDROIDSTUDIO}/Android Studio.app")
+MAC_HOST_dk_set(ANDROIDSTUDIO "/Applications")
+MAC_HOST_dk_set(ANDROIDSTUDIO_EXE "${ANDROIDSTUDIO}/Android Studio.app")
 
-LINUX_HOST_DKSET(ANDROIDSTUDIO "${3RDPARTY}/android-studio/bin")
-LINUX_HOST_DKSET(ANDROIDSTUDIO_EXE "${ANDROIDSTUDIO}/Android Studio.app")
+LINUX_HOST_dk_set(ANDROIDSTUDIO "${3RDPARTY}/android-studio/bin")
+LINUX_HOST_dk_set(ANDROIDSTUDIO_EXE "${ANDROIDSTUDIO}/Android Studio.app")
 
 DKSETENV("STUDIO_JDK" ${JDK8})
 DKSETENV("STUDIO_GRADLE_JDK" ${JDK8})

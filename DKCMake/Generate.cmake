@@ -42,7 +42,7 @@ string(REPLACE " " "_" APP_NAME ${APP_NAME})
 ############################################################################################
 if(NOT TARGET)
 	PROJECT(${APP_NAME})
-	DKSET(DKAPP ON)
+	dk_set(DKAPP ON)
 endif()
 
 ##################################################
@@ -64,9 +64,9 @@ endforeach()
 dk_buildLog("\n")
 
 foreach(plugin ${dkdepend_list})
-	DKSET(QUEUE_BUILD OFF)
-	DKSET(LIBLIST "") # used for double checking
-	#DKSET(CMAKE_FILE "")
+	dk_set(QUEUE_BUILD OFF)
+	dk_set(LIBLIST "") # used for double checking
+	#dk_set(CMAKE_FILE "")
 	
 	DKINFO("############################################################")
 	DKINFO("######  Processing   ${plugin} . . .                        ")
@@ -147,15 +147,15 @@ foreach(plugin ${dkdepend_list})
 		## Only prebuild if the library binaries are missing
 		foreach(lib ${LIBLIST})
 			if(NOT EXISTS ${lib})
-				DKSET(PREBUILD ON)
-				DKSET(QUEUE_BUILD ON)
+				dk_set(PREBUILD ON)
+				dk_set(QUEUE_BUILD ON)
 			endif()
 		endforeach()
 		
-		#DKSET(PREBUILD ON)
+		#dk_set(PREBUILD ON)
 		if(PREBUILD)
 			DKINFO("******* Prebuilding ${plugin} *******")
-			#DKSET(CURRENT_DIR ${plugin_path}/${OS})
+			#dk_set(CURRENT_DIR ${plugin_path}/${OS})
 			#dk_makeDirectory(${CURRENT_DIR})
 			DKSETPATH(${plugin_path}/${BUILD_DIR})
 			if(WIN_32)
@@ -323,7 +323,7 @@ DKINFO("***************************************\n")
 string(TIMESTAMP year "%y")
 string(TIMESTAMP month "%m")
 string(TIMESTAMP day "%d")
-DKSET(APP_VERSION "${year}.${month}.${day}")
+dk_set(APP_VERSION "${year}.${month}.${day}")
 
 ## Create the DKPlugins.h header file
 if(PLUGINS_FILE)
@@ -395,10 +395,10 @@ if(WIN_32)
 		
 	###################### Backup Executable ###########################
 	if(DEBUG)
-		DKRENAME(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.exe ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.exe.backup true)
+		dk_rename(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.exe ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.exe.backup true)
 	endif()
 	if(RELEASE)
-		DKRENAME(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.exe ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.exe.backup true)
+		dk_rename(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.exe ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.exe.backup true)
 	endif()
 		
 	####################### Create Executable Target ###################
@@ -446,7 +446,7 @@ if(WIN_32)
 	set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT ${APP_NAME})
 	
 	
-	#DKSET(CMAKE_BUILD_TYPE "")
+	#dk_set(CMAKE_BUILD_TYPE "")
 	####################### Do Post Build Stuff #######################
 	# "https://gist.github.com/baiwfg2/39881ba703e9c74e95366ed422641609"
 	# TEST
@@ -503,10 +503,10 @@ if(WIN_64)
 
 	###################### Backup Executable ###########################
 	if(DEBUG)
-		DKRENAME(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.exe ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.exe.backup true)
+		dk_rename(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.exe ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.exe.backup true)
 	endif()
 	if(RELEASE)
-		DKRENAME(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.exe ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.exe.backup true)
+		dk_rename(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.exe ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.exe.backup true)
 	endif()
 		
 	####################### Create Executable Target ###################
@@ -622,25 +622,25 @@ if(MAC)
 	endforeach()
 		
 	######################### Create Info.plist #######################
-	DKSET(PRODUCT_BUNDLE_IDENTIFIER com.digitalknob.${APP_NAME})
-	DKSET(CFBundleDevelopmentRegion en)
-	DKSET(CFBundleDisplayName ${APP_NAME})
-	DKSET(CFBundleExecutable wrapper) ##${APP_NAME})
-	DKSET(CFBundleGetInfoString "DigitalKnob")
-	DKSET(CFBundleIconFile "icons.icns")
-	#DKSET(CFBundleIconFiles "icons.icns")
-	DKSET(CFBundleIdentifier ${PRODUCT_BUNDLE_IDENTIFIER})
-	DKSET(CFBundleInfoDictionaryVersion 6.0)
-	DKSET(CFBundleLongVersionString "${APP_NAME}-${APP_VERSION}")
-	DKSET(CFBundleName ${APP_NAME})
-	DKSET(CFBundlePackageType APPL)
-	DKSET(CFBundleShortVersionString ${APP_VERSION})
-	DKSET(CFBundleSignature ????)
-	DKSET(CFBundleVersion 1.0)
-	#DKSET(LSRequiresIPhoneOS NO)
-	DKSET(NSMainNibFile "")
-	#DKSET(UILaunchStoryboardName dk)
-	#DKSET(UIMainStoryboardFile dk.storyboard)
+	dk_set(PRODUCT_BUNDLE_IDENTIFIER com.digitalknob.${APP_NAME})
+	dk_set(CFBundleDevelopmentRegion en)
+	dk_set(CFBundleDisplayName ${APP_NAME})
+	dk_set(CFBundleExecutable wrapper) ##${APP_NAME})
+	dk_set(CFBundleGetInfoString "DigitalKnob")
+	dk_set(CFBundleIconFile "icons.icns")
+	#dk_set(CFBundleIconFiles "icons.icns")
+	dk_set(CFBundleIdentifier ${PRODUCT_BUNDLE_IDENTIFIER})
+	dk_set(CFBundleInfoDictionaryVersion 6.0)
+	dk_set(CFBundleLongVersionString "${APP_NAME}-${APP_VERSION}")
+	dk_set(CFBundleName ${APP_NAME})
+	dk_set(CFBundlePackageType APPL)
+	dk_set(CFBundleShortVersionString ${APP_VERSION})
+	dk_set(CFBundleSignature ????)
+	dk_set(CFBundleVersion 1.0)
+	#dk_set(LSRequiresIPhoneOS NO)
+	dk_set(NSMainNibFile "")
+	#dk_set(UILaunchStoryboardName dk)
+	#dk_set(UIMainStoryboardFile dk.storyboard)
 	set_target_properties(${APP_NAME} PROPERTIES 
 		MACOSX_BUNDLE TRUE 
 		XCODE_ATTRIBUTE_CODE_SIGN_IDENTITY ""
@@ -734,10 +734,10 @@ if(IOS OR IOSSIM)
 	
 	###################### Backup Executable ###########################
 	if(DEBUG)
-		DKRENAME(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app.backup true)
+		dk_rename(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app.backup true)
 	endif()
 	if(RELEASE)
-		DKRENAME(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.app ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.app.backup true)
+		dk_rename(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.app ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.app.backup true)
 	endif()
 	
 	###################### BACKUP USERDATA ###############################
@@ -794,24 +794,24 @@ if(IOS OR IOSSIM)
 	endforeach()
 		
 	######################### Create Info.plist #######################
-	DKSET(PRODUCT_BUNDLE_IDENTIFIER com.digitalknob.${APP_NAME})
-	DKSET(CFBundleDevelopmentRegion en)
-	DKSET(CFBundleDisplayName ${APP_NAME})
-	DKSET(CFBundleExecutable ${APP_NAME})
-	DKSET(CFBundleGetInfoString DigitalKnob)
-	DKSET(CFBundleIconFile "icons.icns")
-	DKSET(CFBundleIdentifier ${PRODUCT_BUNDLE_IDENTIFIER})
-	DKSET(CFBundleInfoDictionaryVersion 6.0)
-	DKSET(CFBundleLongVersionString 1.0.0)
-	DKSET(CFBundleName ${APP_NAME})
-	DKSET(CFBundlePackageType APPL)
-	DKSET(CFBundleShortVersionString 1.0)
-	DKSET(CFBundleSignature ????)
-	DKSET(CFBundleVersion 1.0)
-	#DKSET(LSRequiresIPhoneOS NO)
-	DKSET(NSMainNibFile "")
-	#DKSET(UILaunchStoryboardName dk)
-	#DKSET(UIMainStoryboardFile dk.storyboard)
+	dk_set(PRODUCT_BUNDLE_IDENTIFIER com.digitalknob.${APP_NAME})
+	dk_set(CFBundleDevelopmentRegion en)
+	dk_set(CFBundleDisplayName ${APP_NAME})
+	dk_set(CFBundleExecutable ${APP_NAME})
+	dk_set(CFBundleGetInfoString DigitalKnob)
+	dk_set(CFBundleIconFile "icons.icns")
+	dk_set(CFBundleIdentifier ${PRODUCT_BUNDLE_IDENTIFIER})
+	dk_set(CFBundleInfoDictionaryVersion 6.0)
+	dk_set(CFBundleLongVersionString 1.0.0)
+	dk_set(CFBundleName ${APP_NAME})
+	dk_set(CFBundlePackageType APPL)
+	dk_set(CFBundleShortVersionString 1.0)
+	dk_set(CFBundleSignature ????)
+	dk_set(CFBundleVersion 1.0)
+	#dk_set(LSRequiresIPhoneOS NO)
+	dk_set(NSMainNibFile "")
+	#dk_set(UILaunchStoryboardName dk)
+	#dk_set(UIMainStoryboardFile dk.storyboard)
 	set_target_properties(${APP_NAME} PROPERTIES MACOSX_BUNDLE TRUE MACOSX_BUNDLE_INFO_PLIST ${DKPLUGINS}/_DKIMPORT/ios/Info.plist)
 			
 	###################### Add Assets to Bundle #######################
@@ -883,7 +883,7 @@ if(NOT RASPBERRY)
 	
 	############# Create .desktop Icon Files / Install ################
 	if(DEBUG)
-		DKSET(DESKTOP_FILE
+		dk_set(DESKTOP_FILE
 			"[Desktop Entry]\n"
 			"Encoding=UTF-8\n"
 			"Version=1.0\n"
@@ -894,7 +894,7 @@ if(NOT RASPBERRY)
 			"Icon=${DKPROJECT}/icons/icon.png\n")
 		file(WRITE ${DKPROJECT}/${OS}/Debug/${APP_NAME}.desktop ${DESKTOP_FILE})
 	elseif(RELEASE)
-		DKSET(DESKTOP_FILE
+		dk_set(DESKTOP_FILE
 			"[Desktop Entry]\n"
 			"Encoding=UTF-8\n"
 			"Version=1.0\n"
@@ -947,9 +947,9 @@ if(RASPBERRY)
 	
 	###################### Backup Executable ###########################
 	if(DEBUG)
-		DKRENAME(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME} ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.backup true)
+		dk_rename(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME} ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.backup true)
 	elseif(RELEASE)
-		DKRENAME(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME} ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.backup true)
+		dk_rename(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME} ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.backup true)
 	endif()
 	
 	####################### Create Executable Target ###################
@@ -970,7 +970,7 @@ if(RASPBERRY)
 	############# Create .desktop Icon Files and Install ##############
 	if(DEBUG)
 	# Create .desktop file for Debug
-	DKSET(DESKTOP_FILE
+	dk_set(DESKTOP_FILE
 		"[Desktop Entry]\n"
 		"Encoding=UTF-8\n"
 		"Version=1.0\n"
@@ -983,7 +983,7 @@ if(RASPBERRY)
 	endif()
 	if(RELEASE)
 	# Create .desktop file for Release
-	DKSET(DESKTOP_FILE
+	dk_set(DESKTOP_FILE
 		"[Desktop Entry]\n"
 		"Encoding=UTF-8\n"
 		"Version=1.0\n"
@@ -1034,10 +1034,10 @@ if(ANDROID)
 		
 	###################### Backup Executable ###########################
 	if(DEBUG)
-		DKRENAME(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.apk ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.apk.backup true)
+		dk_rename(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.apk ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.apk.backup true)
 	endif()
 	if(RELEASE)
-		DKRENAME(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.apk ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.apk.backup true)
+		dk_rename(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.apk ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.apk.backup true)
 	endif()
 		
 	####################### Create Library Target ###################
@@ -1054,8 +1054,8 @@ if(ANDROID)
 	endif()
 	set(CMAKE_ANDROID_GUI 1)
 	
-	DKSET(CMAKE_C_FLAGS ${CMAKE_C_FLAGS} -frtti)
-	DKSET(CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS} -frtti)
+	dk_set(CMAKE_C_FLAGS ${CMAKE_C_FLAGS} -frtti)
+	dk_set(CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS} -frtti)
 	
 	#add_library(${APP_NAME} SHARED ${App_SRC})
 	add_library(main SHARED ${App_SRC})

@@ -56,10 +56,10 @@ DKDEPEND(vorbis)
 DKDEPEND(libjpeg-turbo)
 
 
-#DKIMPORT(https://github.com/SFML/SFML.git)
+#dk_import(https://github.com/SFML/SFML.git)
 
-#DKIMPORT(https://github.com/SFML/SFML/archive/c7705a8d9a79bb2c8868518c32ae54f14220793c.zip PATCH)
-DKIMPORT(https://github.com/SFML/SFML/archive/a733e4cd7e0056922e4f74f1932749b4d6a5744d.zip PATCH)
+#dk_import(https://github.com/SFML/SFML/archive/c7705a8d9a79bb2c8868518c32ae54f14220793c.zip PATCH)
+dk_import(https://github.com/SFML/SFML/archive/a733e4cd7e0056922e4f74f1932749b4d6a5744d.zip PATCH)
 
 
 ### LINK ###
@@ -164,7 +164,7 @@ endif()
 
 
 ### 3RDPARTY LINK ###
-WIN_DKSET(SFML_CMAKE
+WIN_dk_set(SFML_CMAKE
 	-DSFML_INCLUDE_DIR=${SFML}/include
 	-DSFML_MAIN_LIBRARY_DEBUG=${SFML}/${OS}/lib/${DEBUG_DIR}/sfml-main-d.lib
 	-DSFML_MAIN_LIBRARY_RELEASE=${SFML}/${OS}/lib/${RELEASE_DIR}/sfml-main.lib

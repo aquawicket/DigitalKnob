@@ -2,11 +2,11 @@
 # http://caca.zoy.org/wiki/libcaca
 
 
-DKIMPORT(https://github.com/cacalabs/libcaca)
-#DKSET(CACA_VERSION 0.99.beta19)
-#DKSET(CACA_NAME libcaca-${CACA_VERSION})
-#DKSET(CACA_DL http://caca.zoy.org/files/libcaca/libcaca-0.99.beta19.tar.gz)
-#DKSET(CACA ${3RDPARTY}/${CACA_NAME})
+dk_import(https://github.com/cacalabs/libcaca)
+#dk_set(CACA_VERSION 0.99.beta19)
+#dk_set(CACA_NAME libcaca-${CACA_VERSION})
+#dk_set(CACA_DL http://caca.zoy.org/files/libcaca/libcaca-0.99.beta19.tar.gz)
+#dk_set(CACA ${3RDPARTY}/${CACA_NAME})
 #DKINSTALL(${CACA_DL} libcaca ${CACA})
 
 

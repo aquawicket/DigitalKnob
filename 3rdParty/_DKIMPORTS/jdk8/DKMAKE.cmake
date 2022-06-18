@@ -2,19 +2,19 @@
 # https://jdk.java.net/archive/
 
 
-WIN_HOST_DKSET(JDK8_VERSION 1.8.0_41)
-WIN_HOST_DKSET(JDK8_DL https://download.java.net/openjdk/jdk8u41/ri/openjdk-8u41-b04-windows-i586-14_jan_2020.zip)
+WIN_HOST_dk_set(JDK8_VERSION 1.8.0_41)
+WIN_HOST_dk_set(JDK8_DL https://download.java.net/openjdk/jdk8u41/ri/openjdk-8u41-b04-windows-i586-14_jan_2020.zip)
 
-MAC_HOST_DKSET(JDK8_VERSION 1.8.0_41)
-MAC_HOST_DKSET(JDK8_DL https://download.java.net/openjdk/jdk8u41/ri/openjdk-8u41-b04_osx-x64_14_jan_2020.tar.gz)
+MAC_HOST_dk_set(JDK8_VERSION 1.8.0_41)
+MAC_HOST_dk_set(JDK8_DL https://download.java.net/openjdk/jdk8u41/ri/openjdk-8u41-b04_osx-x64_14_jan_2020.tar.gz)
 
-LINUX_HOST_DKSET(JDK8_VERSION 1.8.0_41)
-LINUX_HOST_DKSET(JDK8_DL https://download.java.net/openjdk/jdk8u41/ri/openjdk-8u41-b04-linux-x64-14_jan_2020.tar.gz)
+LINUX_HOST_dk_set(JDK8_VERSION 1.8.0_41)
+LINUX_HOST_dk_set(JDK8_DL https://download.java.net/openjdk/jdk8u41/ri/openjdk-8u41-b04-linux-x64-14_jan_2020.tar.gz)
 
 
 ### INSTALL ###
-DKSET(JDK8_NAME openjdk-${JDK8_VERSION})
-DKSET(JDK8 ${3RDPARTY}/${JDK8_NAME})
+dk_set(JDK8_NAME openjdk-${JDK8_VERSION})
+dk_set(JDK8 ${3RDPARTY}/${JDK8_NAME})
 DKINSTALL(${JDK8_DL} jdk8 ${JDK8} PATCH)
 
 

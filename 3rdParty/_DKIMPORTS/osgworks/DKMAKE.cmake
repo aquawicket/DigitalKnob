@@ -2,15 +2,15 @@
 DKDEPEND(openscenegraph)
 
 
-#DKIMPORT(http://TODO.com/osgworks-master.zip)
+#dk_import(http://TODO.com/osgworks-master.zip)
 
-DKSET(OSGWORKS_VERSION master)
-DKSET(OSGWORKS_NAME osgworks-${OSGWORKS_VERSION})
-DKSET(OSGWORKS_DL http://TODO.com/osgworks-master)
-DKSET(OSGWORKS ${3RDPARTY}/${OSGWORKS_NAME})
-DKSET(OSGWORKS_GL2 ${3RDPARTY}/${OSGWORKS_NAME}-GL2)
+dk_set(OSGWORKS_VERSION master)
+dk_set(OSGWORKS_NAME osgworks-${OSGWORKS_VERSION})
+dk_set(OSGWORKS_DL http://TODO.com/osgworks-master)
+dk_set(OSGWORKS ${3RDPARTY}/${OSGWORKS_NAME})
+dk_set(OSGWORKS_GL2 ${3RDPARTY}/${OSGWORKS_NAME}-GL2)
 IF(OpenGL2)
-	DKSET(OSGWORKS OSGWORKS_GL2)
+	dk_set(OSGWORKS OSGWORKS_GL2)
 ENDIF(OpenGL2)
 DKINSTALL(${OSGWORKS_DL} osgworks ${OSGWORKS})
 

@@ -7,5 +7,5 @@ dk_enable(HAVE_DKCef) ##FIXME: Find a way to remove this requirement
 dk_dependAll() ## ADD any and all plugins here
 
 if(LINUX_HOST)
-	DKSET(EXCLUDE_ASSETS ON) #assets are too large to embed on my old 1gb x86 dell laptop
+	dk_set(EXCLUDE_ASSETS ON) #assets are too large to embed on my old 1gb x86 dell laptop
 endif()

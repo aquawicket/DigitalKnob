@@ -2,13 +2,13 @@
 #
 # https://github.com/google/diff-match-patch/archive/refs/heads/master.zip
 
-DKIMPORT(https://github.com/google/diff-match-patch.git)
-#DKIMPORT(https://github.com/google/diff-match-patch/archive/62f2e689f498f9c92dbc588c58750addec9b1654.zip)
+dk_import(https://github.com/google/diff-match-patch.git)
+#dk_import(https://github.com/google/diff-match-patch/archive/62f2e689f498f9c92dbc588c58750addec9b1654.zip)
 
-#DKSET(DIFF_MATCH_PATCH_VERSION 62f2e68)
-#DKSET(DIFF_MATCH_PATCH_DL https://github.com/google/diff-match-patch/archive/62f2e689f498f9c92dbc588c58750addec9b1654.zip)
-#DKSET(DIFF_MATCH_PATCH_NAME diff-match-patch-${DIFF_MATCH_PATCH_VERSION})
-#DKSET(DIFF_MATCH_PATCH ${3RDPARTY}/${DIFF_MATCH_PATCH_NAME})
+#dk_set(DIFF_MATCH_PATCH_VERSION 62f2e68)
+#dk_set(DIFF_MATCH_PATCH_DL https://github.com/google/diff-match-patch/archive/62f2e689f498f9c92dbc588c58750addec9b1654.zip)
+#dk_set(DIFF_MATCH_PATCH_NAME diff-match-patch-${DIFF_MATCH_PATCH_VERSION})
+#dk_set(DIFF_MATCH_PATCH ${3RDPARTY}/${DIFF_MATCH_PATCH_NAME})
 #DKINSTALL(${DIFF_MATCH_PATCH_DL} diff-match-patch ${DIFF_MATCH_PATCH})
 
 

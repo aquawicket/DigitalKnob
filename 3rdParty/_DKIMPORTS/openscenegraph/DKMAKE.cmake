@@ -4,16 +4,16 @@ DKDEPEND(zlib)
 DKGITCLONE(https://github.com/openscenegraph/OpenSceneGraph.git)
 
 ### INSTALL ###
-#DKSET(OSG_VERSION 3.6.5)
-#DKSET(OSG_NAME OpenSceneGraph-${OSG_VERSION})
-#DKSET(OSG_DL https://github.com/openscenegraph/OpenSceneGraph/tree/${OSG_NAME})
-#DKSET(OSG ${3RDPARTY}/${OSG_NAME})
+#dk_set(OSG_VERSION 3.6.5)
+#dk_set(OSG_NAME OpenSceneGraph-${OSG_VERSION})
+#dk_set(OSG_DL https://github.com/openscenegraph/OpenSceneGraph/tree/${OSG_NAME})
+#dk_set(OSG ${3RDPARTY}/${OSG_NAME})
 #DKINSTALL(${OSG_DL} openscenegraph ${OSG})
 
-DKSET(OSG_GL2 ${3RDPARTY}/${OSG_NAME}-GL2)
-DKSET(OSG_PLUGINS osgPlugins-3.4.0)
+dk_set(OSG_GL2 ${3RDPARTY}/${OSG_NAME}-GL2)
+dk_set(OSG_PLUGINS osgPlugins-3.4.0)
 IF(OpenGL2)
-	DKSET(OSG OSG_GL2)
+	dk_set(OSG OSG_GL2)
 ENDIF(OpenGL2)
 
 

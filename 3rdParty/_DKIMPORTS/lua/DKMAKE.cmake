@@ -4,10 +4,10 @@
 
 
 ### VERSION ###
-DKSET(LUA_VERSION 5.4.3)
-DKSET(LUA_NAME lua-${LUA_VERSION})
-DKSET(LUA_DL https://www.lua.org/ftp/lua-${LUA_VERSION}.tar.gzp)
-DKSET(LUA ${3RDPARTY}/${LUA_NAME})
+dk_set(LUA_VERSION 5.4.3)
+dk_set(LUA_NAME lua-${LUA_VERSION})
+dk_set(LUA_DL https://www.lua.org/ftp/lua-${LUA_VERSION}.tar.gzp)
+dk_set(LUA ${3RDPARTY}/${LUA_NAME})
 
 
 ### INSTALL ###

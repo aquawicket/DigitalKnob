@@ -6,8 +6,8 @@
 
 
 ### DOWNLOAD ###
-DKIMPORT(https://github.com/organization/package.git)
-#DKIMPORT(https://organization.com/download/package-1.0.zip)
+dk_import(https://github.com/organization/package.git)
+#dk_import(https://organization.com/download/package-1.0.zip)
 
 
 ### LINK ###

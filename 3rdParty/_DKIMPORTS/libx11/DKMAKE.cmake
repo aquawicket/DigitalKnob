@@ -8,10 +8,10 @@
 
 
 ### VERSION ###
-DKSET(LIBX11_VERSION 1.7.0)
-DKSET(LIBX11_NAME libx11-${LIBX11_VERSION})
-DKSET(LIBX11_DL https://github.com/mirror/libX11/archive/refs/tags/${LIBX11_NAME}.zip)
-DKSET(LIBX11 ${3RDPARTY}/${LIBX11_NAME})
+dk_set(LIBX11_VERSION 1.7.0)
+dk_set(LIBX11_NAME libx11-${LIBX11_VERSION})
+dk_set(LIBX11_DL https://github.com/mirror/libX11/archive/refs/tags/${LIBX11_NAME}.zip)
+dk_set(LIBX11 ${3RDPARTY}/${LIBX11_NAME})
 
 
 ### INSTALL ###

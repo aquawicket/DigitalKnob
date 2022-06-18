@@ -4,7 +4,7 @@ if(NOT IOS)
 endif()
 
 
-#DKIMPORT(UIKit)
+#dk_import(UIKit)
 
 FIND_LIBRARY(UIKit_lib UIKit)
 if(NOT UIKit_lib)

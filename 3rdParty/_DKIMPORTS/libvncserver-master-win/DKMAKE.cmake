@@ -1,4 +1,4 @@
-#DKSET(VNCSERVER_DL https://github.com/LibVNC/libvncserver/archive/refs/heads/master-win.zip)
+#dk_set(VNCSERVER_DL https://github.com/LibVNC/libvncserver/archive/refs/heads/master-win.zip)
 
 ### DEPENDS ###
 DKDEPEND(zlib)
@@ -11,10 +11,10 @@ ENDIF()
 DKDEPEND(openssl)
 
 
-DKSET(VNCSERVER_VERSION master-win)
-DKSET(VNCSERVER_NAME libvncserver-${VNCSERVER_VERSION})
-DKSET(VNCSERVER_DL https://github.com/LibVNC/libvncserver/archive/refs/heads/${VNCSERVER_VERSION}.zip)
-DKSET(VNCSERVER ${3RDPARTY}/${VNCSERVER_NAME})
+dk_set(VNCSERVER_VERSION master-win)
+dk_set(VNCSERVER_NAME libvncserver-${VNCSERVER_VERSION})
+dk_set(VNCSERVER_DL https://github.com/LibVNC/libvncserver/archive/refs/heads/${VNCSERVER_VERSION}.zip)
+dk_set(VNCSERVER ${3RDPARTY}/${VNCSERVER_NAME})
 
 
 ### INSTALL ###

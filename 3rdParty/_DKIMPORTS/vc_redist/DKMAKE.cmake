@@ -13,12 +13,12 @@ if(VISUALSTUDIO)
 endif()
 
 ### VERSION ###
-DKSET(VC_REDIST_VERSION 14.29.30133)
-DKSET(VC_REDIST_PLATFORM x86)
-DKSET(VC_REDIST_NAME vc_redist.${VC_REDIST_PLATFORM})
-DKSET(VC_REDIST_DL https://aka.ms/vs/16/release/${VC_REDIST_NAME}.exe)
-#DKSET(VC_REDIST "C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Redist/MSVC/${VC_REDIST_VERSION}")
-DKSET(VC_REDIST "C:/Windows/System32/vcruntime140.dll")
+dk_set(VC_REDIST_VERSION 14.29.30133)
+dk_set(VC_REDIST_PLATFORM x86)
+dk_set(VC_REDIST_NAME vc_redist.${VC_REDIST_PLATFORM})
+dk_set(VC_REDIST_DL https://aka.ms/vs/16/release/${VC_REDIST_NAME}.exe)
+#dk_set(VC_REDIST "C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Redist/MSVC/${VC_REDIST_VERSION}")
+dk_set(VC_REDIST "C:/Windows/System32/vcruntime140.dll")
 
 ### INSTALL ###
 IF(NOT EXISTS "${VC_REDIST}")

@@ -10,14 +10,14 @@ DKDEPEND(freealut)
 DKDEPEND(openal)
 
 
-#DKIMPORT(http://TODO.com/osgaudio-master.zip)
+#dk_import(http://TODO.com/osgaudio-master.zip)
 
 
 ${OSGAUDIO_VERSION master}
 ${OSGAUDIO_DL http://TODO.com/${OSGAUDIO_NAME}.zip}
 ${OSGAUDIO_NAME osgaudio-${OSG_VERSION}}
 ${OSGAUDIO ${3RDPARTY}/${OSG_NAME})
-DKSET(OSGAUDIO ${3RDPARTY}/osgaudio-master)
+dk_set(OSGAUDIO ${3RDPARTY}/osgaudio-master)
 
 
 ### INSTALL ###

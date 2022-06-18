@@ -56,14 +56,14 @@ ANDROID_DKDEPEND(opensles)
 # SDL_DL      = https://github.com/libsdl-org/SDL/archive/18032979d892639ad4e03584a40a4d205cd2f5fd.zip    :the library  download link 
 
 
-DKIMPORT(https://github.com/libsdl-org/SDL.git main)
-#DKIMPORT(https://github.com/libsdl-org/SDL/archive/d9009388c8924b15f74ec38a26cc62ea42b40110.zip)
-#DKIMPORT(https://github.com/libsdl-org/SDL/archive/d9009388c8924b15f74ec38a26cc62ea42b40110.zip)
-#DKIMPORT(https://github.com/libsdl-org/SDL/archive/9d86ec85730e98f6f4d7827f4fda806e9c134f0d.zip)
-#DKSET(SDL_VERSION 1803297)
-#DKSET(SDL_DL https://github.com/libsdl-org/SDL/archive/18032979d892639ad4e03584a40a4d205cd2f5fd.zip)
-#DKSET(SDL_NAME SDL2-${SDL_VERSION})
-#DKSET(SDL ${3RDPARTY}/${SDL_NAME})
+dk_import(https://github.com/libsdl-org/SDL.git main)
+#dk_import(https://github.com/libsdl-org/SDL/archive/d9009388c8924b15f74ec38a26cc62ea42b40110.zip)
+#dk_import(https://github.com/libsdl-org/SDL/archive/d9009388c8924b15f74ec38a26cc62ea42b40110.zip)
+#dk_import(https://github.com/libsdl-org/SDL/archive/9d86ec85730e98f6f4d7827f4fda806e9c134f0d.zip)
+#dk_set(SDL_VERSION 1803297)
+#dk_set(SDL_DL https://github.com/libsdl-org/SDL/archive/18032979d892639ad4e03584a40a4d205cd2f5fd.zip)
+#dk_set(SDL_NAME SDL2-${SDL_VERSION})
+#dk_set(SDL ${3RDPARTY}/${SDL_NAME})
 #DKINSTALL(${SDL_DL} sdl ${SDL})
 
 
@@ -120,7 +120,7 @@ LINUX_DKINCLUDE(${SDL}/${OS}/${RELEASE_DIR}/include)
 
 
 ### 3RDPARTY LINK ###
-WIN_DKSET(SDL_CMAKE
+WIN_dk_set(SDL_CMAKE
 	-DSDL2_DIR=${SDL}
 	-DSDL2_INCLUDE_DIR=${SDL}/include
 	-DSDL2_LIBRARY_TEMP=${SDL}/${OS}/${RELEASE_DIR}/SDL2.lib
@@ -128,11 +128,11 @@ WIN_DKSET(SDL_CMAKE
 	-DSDL2_LIBRARY_DEBUG=${SDL}/${OS}/${DEBUG_DIR}/SDL2d.lib
 	-DSDL2_LIBRARY_RELEASE=${SDL}/${OS}/${RELEASE_DIR}/SDL2.lib)
 	
-WIN_DKSET(SDLMAIN_CMAKE
+WIN_dk_set(SDLMAIN_CMAKE
 	-DSDL2MAIN_LIBRARY_DEBUG=${SDL}/${OS}/${DEBUG_DIR}/SDL2maind.lib
 	-DSDL2MAIN_LIBRARY_RELEASE=${SDL}/${OS}/${RELEASE_DIR}/SDL2main.lib)
 	
-APPLE_DKSET(SDL_CMAKE
+APPLE_dk_set(SDL_CMAKE
 	-DSDL2_DIR=${SDL}
 	-DSDL2_INCLUDE_DIR=${SDL}/include
 	-DSDL2_LIBRARY_TEMP=${SDL}/${OS}/${RELEASE_DIR}/libSDL2.a
@@ -140,11 +140,11 @@ APPLE_DKSET(SDL_CMAKE
 	-DSDL2_LIBRARY_DEBUG=${SDL}/${OS}/${DEBUG_DIR}/libSDL2d.a
 	-DSDL2_LIBRARY_RELEASE=${SDL}/${OS}/${RELEASE_DIR}/libSDL2.a)
 	
-APPLE_DKSET(SDLMAIN_CMAKE
+APPLE_dk_set(SDLMAIN_CMAKE
 	-DSDL2MAIN_LIBRARY_DEBUG=${SDL}/${OS}/${DEBUG_DIR}/libSDL2maind.a
 	-DSDL2MAIN_LIBRARY_RELEASE=${SDL}/${OS}/${RELEASE_DIR}/libSDL2main.a)
 	
-LINUX_DKSET(SDL_CMAKE
+LINUX_dk_set(SDL_CMAKE
 	-DSDL2_DIR=${SDL}
 	-DSDL2_INCLUDE_DIR=${SDL}/include
 	-DSDL2_LIBRARY_TEMP=${SDL}/${OS}/${RELEASE_DIR}/libSDL2.a
@@ -152,7 +152,7 @@ LINUX_DKSET(SDL_CMAKE
 	-DSDL2_LIBRARY_DEBUG=${SDL}/${OS}/${DEBUG_DIR}/libSDL2.a
 	-DSDL2_LIBRARY_RELEASE=${SDL}/${OS}/${RELEASE_DIR}/libSDL2.a)
 	
-RASPBERRY_DKSET(SDL_CMAKE
+RASPBERRY_dk_set(SDL_CMAKE
 	"-DCMAKE_C_FLAGS=-I${SDL}/include" 
 	-DSDL2_INCLUDE_DIR=${SDL}/include
 	-DSDL2_LIBRARY_TEMP=${SDL}/${OS}/${RELEASE_DIR}/libSDL2.a
@@ -160,7 +160,7 @@ RASPBERRY_DKSET(SDL_CMAKE
 	-DSDL2_LIBRARY_DEBUG=${SDL}/${OS}/${DEBUG_DIR}/libSDL2.a
 	-DSDL2_LIBRARY_RELEASE=${SDL}/${OS}/${RELEASE_DIR}/libSDL2.a)
 	
-ANDROID_DKSET(SDL_CMAKE
+ANDROID_dk_set(SDL_CMAKE
 	"-DCMAKE_C_FLAGS=-I${SDL}/include" 
 	-DSDL2_DIR=${SDL}/cmake
 	-DSDL2_INCLUDE_DIR=${SDL}/include

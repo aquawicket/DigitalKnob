@@ -1,9 +1,9 @@
 # https://web.archive.org/web/20200916125901if_/https://ffmpeg.zeranoe.com/builds/win32/static/ffmpeg-20200831-4a11a6f-win32-static.zip
 
-DKSET(FFMPEG_VERSION 20200831-4a11a6f)
-DKSET(FFMPEG_NAME ffmpeg-${FFMPEG_VERSION}-${OS}-static)
-DKSET(FFMPEG_DL https://web.archive.org/web/20200916125901if_/https://ffmpeg.zeranoe.com/builds/${OS}/static/${FFMPEG_NAME}.zip)
-DKSET(FFMPEG ${3RDPARTY}/${FFMPEG_NAME})
+dk_set(FFMPEG_VERSION 20200831-4a11a6f)
+dk_set(FFMPEG_NAME ffmpeg-${FFMPEG_VERSION}-${OS}-static)
+dk_set(FFMPEG_DL https://web.archive.org/web/20200916125901if_/https://ffmpeg.zeranoe.com/builds/${OS}/static/${FFMPEG_NAME}.zip)
+dk_set(FFMPEG ${3RDPARTY}/${FFMPEG_NAME})
 
 ### INSTALL ###
 DKINSTALL(${FFMPEG_DL} ffmpeg_static ${FFMPEG})

@@ -7,10 +7,10 @@ endif()
 
 
 ### VERSION ###
-DKSET(NCURSES_VERSION 6.2)
-DKSET(NCURSES_NAME ncurses-${NCURSES_VERSION})
-DKSET(NCURSES_DL https://invisible-island.net/datafiles/release/ncurses.tar.gz)
-DKSET(NCURSES ${3RDPARTY}/${NCURSES_NAME})
+dk_set(NCURSES_VERSION 6.2)
+dk_set(NCURSES_NAME ncurses-${NCURSES_VERSION})
+dk_set(NCURSES_DL https://invisible-island.net/datafiles/release/ncurses.tar.gz)
+dk_set(NCURSES ${3RDPARTY}/${NCURSES_NAME})
 
 
 ### INSTALL ###

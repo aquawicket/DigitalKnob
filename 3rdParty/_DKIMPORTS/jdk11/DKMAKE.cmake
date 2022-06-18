@@ -2,20 +2,20 @@
 # https://jdk.java.net/archive/
 
 
-WIN_HOST_DKSET(JDK11_VERSION 11)
-WIN_HOST_DKSET(JDK11_DL https://download.java.net/java/ga/jdk11/openjdk-11_windows-x64_bin.zip)
+WIN_HOST_dk_set(JDK11_VERSION 11)
+WIN_HOST_dk_set(JDK11_DL https://download.java.net/java/ga/jdk11/openjdk-11_windows-x64_bin.zip)
 
-MAC_HOST_DKSET(JDK11_VERSION 11)
-MAC_HOST_DKSET(JDK11_DL https://download.java.net/openjdk/jdk11/ri/openjdk-11+28_osx-x64_bin.tar.gz)
+MAC_HOST_dk_set(JDK11_VERSION 11)
+MAC_HOST_dk_set(JDK11_DL https://download.java.net/openjdk/jdk11/ri/openjdk-11+28_osx-x64_bin.tar.gz)
 
-LINUX_HOST_DKSET(JDK11_VERSION 11)
-LINUX_HOST_DKSET(JDK11_DL https://download.java.net/openjdk/jdk11/ri/openjdk-11+28_linux-x64_bin.tar.gz)
+LINUX_HOST_dk_set(JDK11_VERSION 11)
+LINUX_HOST_dk_set(JDK11_DL https://download.java.net/openjdk/jdk11/ri/openjdk-11+28_linux-x64_bin.tar.gz)
 
 
 
 ### INSTALL ###
-DKSET(JDK11_NAME openjdk-${JDK11_VERSION})
-DKSET(JDK11 ${3RDPARTY}/${JDK11_NAME})
+dk_set(JDK11_NAME openjdk-${JDK11_VERSION})
+dk_set(JDK11 ${3RDPARTY}/${JDK11_NAME})
 DKINSTALL(${JDK11_DL} jdk11 ${JDK11} PATCH)
 
 

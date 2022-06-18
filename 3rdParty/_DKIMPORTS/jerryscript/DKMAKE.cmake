@@ -3,11 +3,11 @@
 
 
 
-DKIMPORT(https://github.com/jerryscript-project/jerryscript)
-#DKSET(JERRYSCRIPT_VERSION 2.4.0)
-#DKSET(JERRYSCRIPT_NAME jerryscript-${JERRYSCRIPT_VERSION})
-#DKSET(JERRYSCRIPT_DL https://github.com/jerryscript-project/jerryscript/archive/refs/tags/v2.4.0.zip)
-#DKSET(JERRYSCRIPT ${3RDPARTY}/${JERRYSCRIPT_NAME})
+dk_import(https://github.com/jerryscript-project/jerryscript)
+#dk_set(JERRYSCRIPT_VERSION 2.4.0)
+#dk_set(JERRYSCRIPT_NAME jerryscript-${JERRYSCRIPT_VERSION})
+#dk_set(JERRYSCRIPT_DL https://github.com/jerryscript-project/jerryscript/archive/refs/tags/v2.4.0.zip)
+#dk_set(JERRYSCRIPT ${3RDPARTY}/${JERRYSCRIPT_NAME})
 #DKINSTALL(${JERRYSCRIPT_DL} jerryscript ${JERRYSCRIPT})
 
 

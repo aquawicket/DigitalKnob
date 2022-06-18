@@ -10,20 +10,20 @@
 DKDEPEND(python)
 DKDEPEND(nodejs)
 
-DKIMPORT(https://github.com/aquawicket/duktape.git PATCH)
+dk_import(https://github.com/aquawicket/duktape.git PATCH)
 
-#DKIMPORT(https://github.com/aquawicket/duktape/archive/0701a460ca25c2dc76a96bd3187849ca278d1865.zip PATCH)
+#dk_import(https://github.com/aquawicket/duktape/archive/0701a460ca25c2dc76a96bd3187849ca278d1865.zip PATCH)
 
-#DKSET(DUKTAPE_VERSION let-support)
-#DKSET(DUKTAPE_NAME duktape-${DUKTAPE_VERSION})
-#DKSET(DUKTAPE_DL https://github.com/aquawicket/duktape/archive/refs/heads/${DUKTAPE_VERSION}.zip)
-#DKSET(DUKTAPE ${3RDPARTY}/${DUKTAPE_NAME})
+#dk_set(DUKTAPE_VERSION let-support)
+#dk_set(DUKTAPE_NAME duktape-${DUKTAPE_VERSION})
+#dk_set(DUKTAPE_DL https://github.com/aquawicket/duktape/archive/refs/heads/${DUKTAPE_VERSION}.zip)
+#dk_set(DUKTAPE ${3RDPARTY}/${DUKTAPE_NAME})
 #DKINSTALL(${DUKTAPE_DL} duktape ${DUKTAPE})
 
 
 if(NOT EXISTS ${DUKTAPE}/src)
 DKSETPATH(${DUKTAPE})
-DKSET(QUEUE_BUILD ON)
+dk_set(QUEUE_BUILD ON)
 
 LINUX_DKQCOMMAND(sudo apt-get -y install python python-yaml)
 LINUX_DKQCOMMAND(python ${DUKTAPE}/util/dist.py)

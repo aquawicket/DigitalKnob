@@ -12,7 +12,7 @@ if(WIN)
 	dk_copy(${STACKWALKER}/StackWalker/StackWalker.cpp ${DKPLUGINS}/DKDebug/StackWalker.cpp FALSE)
 	WIN_DKINCLUDE(${3RDPARTY}/stackwalker/StackWalker)
 else()
-	DKREMOVE(${DKPLUGINS}/DKDebug/StackWalker.cpp)
+	dk_remove(${DKPLUGINS}/DKDebug/StackWalker.cpp)
 endif()
 
 generateCmake(DKDebug)

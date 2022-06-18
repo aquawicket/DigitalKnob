@@ -5,7 +5,7 @@
 DKDEPEND(python)
 
 ### IMPORT ###
-DKIMPORT(https://github.com/fmtlib/fmt.git PATCH)
+dk_import(https://github.com/fmtlib/fmt.git PATCH)
 
 ### INCLUDE/LINK ###
 DKDEFINE(FMT_HEADER_ONLY)

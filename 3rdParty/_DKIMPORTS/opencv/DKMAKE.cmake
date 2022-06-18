@@ -9,20 +9,20 @@ DKDEPEND(libpng)
 
 
 ### VERSION ###
-DKSET(OPENCV_MAJOR 4)
-DKSET(OPENCV_MINOR 5)
-DKSET(OPENCV_BUILD 3)
-#DKSET(OPENCV_VERSION 3.4.1)
-#DKSET(OPENCV_VERSION 4.5.3)
+dk_set(OPENCV_MAJOR 4)
+dk_set(OPENCV_MINOR 5)
+dk_set(OPENCV_BUILD 3)
+#dk_set(OPENCV_VERSION 3.4.1)
+#dk_set(OPENCV_VERSION 4.5.3)
 
 
 DKGITCLONE(https://github.com/opencv/opencv.git)
 
 
-DKSET(OPENCV_NAME opencv-${OPENCV_VERSION})
-#DKSET(OPENCV_DL https://sourceforge.net/projects/opencvlibrary/files/opencv-unix/${OPENCV_VERSION}/${OPENCV_NAME}.zip)
-DKSET(OPENCV_DL https://github.com/opencv/opencv/archive/refs/tags/${OPENCV_VERSION}.zip)
-DKSET(OPENCV ${3RDPARTY}/${OPENCV_NAME})
+dk_set(OPENCV_NAME opencv-${OPENCV_VERSION})
+#dk_set(OPENCV_DL https://sourceforge.net/projects/opencvlibrary/files/opencv-unix/${OPENCV_VERSION}/${OPENCV_NAME}.zip)
+dk_set(OPENCV_DL https://github.com/opencv/opencv/archive/refs/tags/${OPENCV_VERSION}.zip)
+dk_set(OPENCV ${3RDPARTY}/${OPENCV_NAME})
 DKINSTALL(${OPENCV_DL} opencv ${OPENCV})
 
 

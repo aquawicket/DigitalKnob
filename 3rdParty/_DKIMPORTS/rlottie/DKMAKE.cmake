@@ -5,13 +5,13 @@
 
 
 
-DKIMPORT(https://github.com/Samsung/rlottie.git)
+dk_import(https://github.com/Samsung/rlottie.git)
 
-#DKIMPORT(https://github.com/Samsung/rlottie/archive/875626965959d8e269ca22175c8e1ad190696c43.zip)
-#DKSET(RLOTTIE_VERSION 0.2)
-#DKSET(RLOTTIE_DL https://github.com/Samsung/rlottie/archive/refs/tags/v0.2.zip)
-#DKSET(RLOTTIE_NAME rlottie-${RLOTTIE_VERSION})
-#DKSET(RLOTTIE ${3RDPARTY}/${RLOTTIE_NAME})
+#dk_import(https://github.com/Samsung/rlottie/archive/875626965959d8e269ca22175c8e1ad190696c43.zip)
+#dk_set(RLOTTIE_VERSION 0.2)
+#dk_set(RLOTTIE_DL https://github.com/Samsung/rlottie/archive/refs/tags/v0.2.zip)
+#dk_set(RLOTTIE_NAME rlottie-${RLOTTIE_VERSION})
+#dk_set(RLOTTIE ${3RDPARTY}/${RLOTTIE_NAME})
 #DKINSTALL(${RLOTTIE_DL} rlottie ${RLOTTIE})#
 
 

@@ -14,8 +14,8 @@ DKDEPEND(cryptopp)
 WIN_DKDEPEND(openssl)
 
 
-#DKIMPORT(https://github.com/libarchive/libarchive.git PATCH)
-DKIMPORT(https://github.com/libarchive/libarchive/archive/93f03b0f5d7316714df9b289a49150ab7a63bfaf.zip PATCH)
+#dk_import(https://github.com/libarchive/libarchive.git PATCH)
+dk_import(https://github.com/libarchive/libarchive/archive/93f03b0f5d7316714df9b289a49150ab7a63bfaf.zip PATCH)
 
 
 ### DKPLUGINS LINK ###

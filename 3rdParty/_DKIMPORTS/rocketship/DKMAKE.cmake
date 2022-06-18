@@ -1,3 +1,3 @@
 # https://github.com/netpipe/RocketShip
 
-DKIMPORT(https://github.com/netpipe/RocketShip.git main)
+dk_import(https://github.com/netpipe/RocketShip.git main)

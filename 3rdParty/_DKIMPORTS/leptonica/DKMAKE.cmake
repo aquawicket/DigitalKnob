@@ -18,14 +18,14 @@ ENDIF()
 DKDEPEND(giflib)
 
 
-DKIMPORT(https://github.com/DanBloomberg/leptonica)
-#DKSET(LEPTONICA_MAJOR 1)
-#DKSET(LEPTONICA_MINOR 82)
-#DKSET(LEPTONICA_BUILD 0)
-#DKSET(LEPTONICA_VERSION ${LEPTONICA_MAJOR}.${LEPTONICA_MINOR}.${LEPTONICA_BUILD})
-#DKSET(LEPTONICA_NAME leptonica-${LEPTONICA_VERSION})
-#DKSET(LEPTONICA_DL https://github.com/DanBloomberg/leptonica/archive/refs/tags/${LEPTONICA_VERSION}.zip)
-#DKSET(LEPTONICA ${3RDPARTY}/${LEPTONICA_NAME})
+dk_import(https://github.com/DanBloomberg/leptonica)
+#dk_set(LEPTONICA_MAJOR 1)
+#dk_set(LEPTONICA_MINOR 82)
+#dk_set(LEPTONICA_BUILD 0)
+#dk_set(LEPTONICA_VERSION ${LEPTONICA_MAJOR}.${LEPTONICA_MINOR}.${LEPTONICA_BUILD})
+#dk_set(LEPTONICA_NAME leptonica-${LEPTONICA_VERSION})
+#dk_set(LEPTONICA_DL https://github.com/DanBloomberg/leptonica/archive/refs/tags/${LEPTONICA_VERSION}.zip)
+#dk_set(LEPTONICA ${3RDPARTY}/${LEPTONICA_NAME})
 #DKINSTALL(${LEPTONICA_DL} leptonica ${LEPTONICA})
 
 
@@ -44,7 +44,7 @@ ANDROID_RELEASE_DKLIB(${LEPTONICA}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/li
 
 
 ### 3rdParty Link ###
-WIN_DKSET(LEPTONICA_CMAKE -DLeptonica_DIR=${LEPTONICA}/${OS})
+WIN_dk_set(LEPTONICA_CMAKE -DLeptonica_DIR=${LEPTONICA}/${OS})
 
 
 ### COMPILE ###

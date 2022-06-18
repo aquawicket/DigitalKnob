@@ -5,12 +5,12 @@ DKDEPEND(giflib)
 DKDEPEND(DKSDLWindow)
 
 
-DKIMPORT(https://github.com/theMealena/SDL2_giflib_sa.git)
+dk_import(https://github.com/theMealena/SDL2_giflib_sa.git)
 
-#DKSET(SDLGIF_VERSION master)
-#DKSET(SDLGIF_NAME SDL2_giflib_sa-${SDLGIF_VERSION})
-#DKSET(SDLGIF_DL https://github.com/theMealena/SDL2_giflib_sa/archive/${SDLGIF_VERSION}.zip)
-#DKSET(SDLGIF ${3RDPARTY}/${SDLGIF_NAME})
+#dk_set(SDLGIF_VERSION master)
+#dk_set(SDLGIF_NAME SDL2_giflib_sa-${SDLGIF_VERSION})
+#dk_set(SDLGIF_DL https://github.com/theMealena/SDL2_giflib_sa/archive/${SDLGIF_VERSION}.zip)
+#dk_set(SDLGIF ${3RDPARTY}/${SDLGIF_NAME})
 #DKINSTALL(${SDLGIF_DL} SDL2_giflib_sa ${SDLGIF})
 
 

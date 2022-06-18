@@ -4,5 +4,5 @@
 # https://www.php.net/distributions/php-8.0.9.tar.gz
 # https://github.com/php/php-src/archive/refs/tags/php-8.0.14.zip
 
-DKIMPORT(https://github.com/php/php-src.git)
+dk_import(https://github.com/php/php-src.git)
 

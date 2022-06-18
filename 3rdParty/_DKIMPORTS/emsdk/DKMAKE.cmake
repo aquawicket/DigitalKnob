@@ -5,10 +5,10 @@
 
 DKGITCLONE(https://github.com/emscripten-core/emsdk.git)
 
-#DKSET(EMSCRIPTEN_VERSION 2.0.26)
-#DKSET(EMSCRIPTEN_NAME emsdk-${EMSCRIPTEN_VERSION})
-#DKSET(EMSCRIPTEN_DL https://github.com/emscripten-core/emsdk/archive/refs/tags/${EMSCRIPTEN_VERSION}.zip)
-#DKSET(EMSCRIPTEN ${3RDPARTY}/${EMSCRIPTEN_NAME})
+#dk_set(EMSCRIPTEN_VERSION 2.0.26)
+#dk_set(EMSCRIPTEN_NAME emsdk-${EMSCRIPTEN_VERSION})
+#dk_set(EMSCRIPTEN_DL https://github.com/emscripten-core/emsdk/archive/refs/tags/${EMSCRIPTEN_VERSION}.zip)
+#dk_set(EMSCRIPTEN ${3RDPARTY}/${EMSCRIPTEN_NAME})
 #DKINSTALL(${EMSCRIPTEN_DL} emsdk ${EMSCRIPTEN})
 
 DKCOMMAND("${EMSCRIPTEN}/emsdk update")

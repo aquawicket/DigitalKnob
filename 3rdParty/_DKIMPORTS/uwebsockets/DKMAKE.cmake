@@ -6,7 +6,7 @@ DKDEPEND(libuv)
 DKDEPEND(openssl)
 
 
-DKIMPORT(https://github.com/uNetworking/uWebSockets.git)
+dk_import(https://github.com/uNetworking/uWebSockets.git)
 
 
 ### LINK ###

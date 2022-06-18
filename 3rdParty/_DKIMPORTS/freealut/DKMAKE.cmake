@@ -10,10 +10,10 @@ DKDEPEND(openal)
 ### VERSION ###
 DKGITCLONE(https://github.com/vancegroup/freealut)
 
-#DKSET(FREEALUT_VERSION 1.1.0)
-#DKSET(FREEALUT_NAME freealut-${FREEALUT_VERSION})
-#DKSET(FREEALUT_DL http://distro.ibiblio.org/rootlinux/rootlinux-ports/more/freealut/${FREEALUT_NAME}.tar.gz)
-#DKSET(FREEALUT ${3RDPARTY}/${FREEALUT_NAME})
+#dk_set(FREEALUT_VERSION 1.1.0)
+#dk_set(FREEALUT_NAME freealut-${FREEALUT_VERSION})
+#dk_set(FREEALUT_DL http://distro.ibiblio.org/rootlinux/rootlinux-ports/more/freealut/${FREEALUT_NAME}.tar.gz)
+#dk_set(FREEALUT ${3RDPARTY}/${FREEALUT_NAME})
 #DKINSTALL(${FREEALUT_DL} freealut ${FREEALUT})
 
 

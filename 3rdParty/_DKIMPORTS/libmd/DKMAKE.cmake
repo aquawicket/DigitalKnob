@@ -9,11 +9,11 @@ endif()
 DKDEPEND(autotools)
 
 
-DKIMPORT(https://github.com/guillemj/libmd)
-#DKSET(LIBMD_VERSION 1.0.4)
-#DKSET(LIBMD_NAME libmd-${LIBMD_VERSION})
-#DKSET(LIBMD_DL https://github.com/guillemj/libmd/archive/refs/tags/1.0.4.zip)
-#DKSET(LIBMD ${3RDPARTY}/${LIBMD_NAME})
+dk_import(https://github.com/guillemj/libmd)
+#dk_set(LIBMD_VERSION 1.0.4)
+#dk_set(LIBMD_NAME libmd-${LIBMD_VERSION})
+#dk_set(LIBMD_DL https://github.com/guillemj/libmd/archive/refs/tags/1.0.4.zip)
+#dk_set(LIBMD ${3RDPARTY}/${LIBMD_NAME})
 #DKINSTALL(${LIBMD_DL} libmd ${LIBMD} NOPATCH)
 
 
@@ -32,11 +32,11 @@ ANDROID_RELEASE_DKLIB(${LIBMD}/${OS}/${RELEASE_DIR}/liblibmd.a)
 
 
 ### 3RDPARTY LINK ###
-WIN_DKSET(LIBMD_CMAKE -DLIBMD_LIBRARY=${LIBMD}/${OS}/${DEBUG_DIR}/libmd.a)
-APPLE_DKSET(LIBMD_CMAKE -DLIBMD_LIBRARY=${LIBMD}/${OS}/${DEBUG_DIR}/libmd.a)
-LINUX_DKSET(LIBMD_CMAKE -DLIBMD_LIBRARY=${LIBMD}/${OS}/${DEBUG_DIR}/libmd.a)
-RASPBERRY_DKSET(LIBMD_CMAKE -DLIBMD_LIBRARY=${LIBMD}/${OS}/${DEBUG_DIR}/libmd.a)
-ANDROID_DKSET(LIBMD_CMAKE -DLIBMD_LIBRARY=${LIBMD}/${OS}/${DEBUG_DIR}/libmd.a)
+WIN_dk_set(LIBMD_CMAKE -DLIBMD_LIBRARY=${LIBMD}/${OS}/${DEBUG_DIR}/libmd.a)
+APPLE_dk_set(LIBMD_CMAKE -DLIBMD_LIBRARY=${LIBMD}/${OS}/${DEBUG_DIR}/libmd.a)
+LINUX_dk_set(LIBMD_CMAKE -DLIBMD_LIBRARY=${LIBMD}/${OS}/${DEBUG_DIR}/libmd.a)
+RASPBERRY_dk_set(LIBMD_CMAKE -DLIBMD_LIBRARY=${LIBMD}/${OS}/${DEBUG_DIR}/libmd.a)
+ANDROID_dk_set(LIBMD_CMAKE -DLIBMD_LIBRARY=${LIBMD}/${OS}/${DEBUG_DIR}/libmd.a)
 
 
 ### COMPILE ###

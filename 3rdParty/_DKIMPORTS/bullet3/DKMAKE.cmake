@@ -4,14 +4,14 @@
 # https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/bullet/bullet-2.82-r2704.zip
 
 ### IMPORT ###
-DKIMPORT(https://github.com/bulletphysics/bullet3.git)
-#DKIMPORT(https://github.com/bulletphysics/bullet3/archive/refs/tags/2.82.zip)
+dk_import(https://github.com/bulletphysics/bullet3.git)
+#dk_import(https://github.com/bulletphysics/bullet3/archive/refs/tags/2.82.zip)
 
 ### VERSION ###
-#DKSET(BULLET3_VERSION 2.82-r2704)
-#DKSET(BULLET3_NAME bullet-${BULLET3_VERSION})
-#DKSET(BULLET3_DL https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/bullet/${BULLET3_NAME}.zip)
-#DKSET(BULLET3 ${3RDPARTY}/${BULLET3_NAME})
+#dk_set(BULLET3_VERSION 2.82-r2704)
+#dk_set(BULLET3_NAME bullet-${BULLET3_VERSION})
+#dk_set(BULLET3_DL https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/bullet/${BULLET3_NAME}.zip)
+#dk_set(BULLET3 ${3RDPARTY}/${BULLET3_NAME})
 #DKINSTALL(${BULLET3_DL} bullet ${BULLET3})
 
 

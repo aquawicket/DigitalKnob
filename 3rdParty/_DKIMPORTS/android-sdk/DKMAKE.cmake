@@ -3,7 +3,7 @@ if(NOT WIN_HOST)
 endif()
 
 ### VERSION ###
-DKSET(ANDROIDSDK ${3RDPARTY}/android-sdk)
+dk_set(ANDROIDSDK ${3RDPARTY}/android-sdk)
 
 DKSETENV("ANDROID_HOME" ${ANDROIDSDK})
 DKSETENV("VS_AndroidHome" ${ANDROIDSDK})
