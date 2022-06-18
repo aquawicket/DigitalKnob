@@ -277,7 +277,7 @@ if(SHARED)
 #	WIN32_RELEASE_DKLIB(${BOOST}/${OS}/lib/boost_system.lib)
 #endif()
 
-#WIN_dk_setPATH(${BOOST})
+#WIN_DKSETPATH(${BOOST})
 #WIN32_DKQCOMMAND(bootstrap.bat)
 #WIN_DKQCOMMAND(b2 toolset=msvc-14.0 link=shared variant=debug runtime-debugging=on runtime-link=shared --threading=multi --layout=system --build-dir=${BOOST}/${OS}/${DEBUG_DIR} --stagedir=${BOOST}/${OS}/${DEBUG_DIR})
 #WIN_DKQCOMMAND(b2 toolset=msvc-14.0 link=shared variant=release runtime-debugging=off runtime-link=shared --threading=multi --layout=system --build-dir=${BOOST}/${OS}/${RELEASE_DIR} --stagedir=${BOOST}/${OS}/${RELEASE_DIR})
