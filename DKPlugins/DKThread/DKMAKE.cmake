@@ -8,6 +8,6 @@ IF(HAVE_DKCef)
 ENDIF()
 
 
-generateCmake(DKThread)
+dk_generateCmake(DKThread)
 dk_assets(DKThread)
 dk_include(${THREADPOOL})

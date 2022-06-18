@@ -5,5 +5,5 @@ IF(HAVE_DKCef)
 	dk_depend(DKCef)
 ENDIF()
 
-generateCmake(DKAudio)
+dk_generateCmake(DKAudio)
 dk_assets(DKAudio)

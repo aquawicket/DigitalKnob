@@ -37,5 +37,5 @@ endif()
 dk_depend(boxer)
 dk_depend(fmt)
 
-generateCmake(DK)
+dk_generateCmake(DK)
 dk_assets(DK)

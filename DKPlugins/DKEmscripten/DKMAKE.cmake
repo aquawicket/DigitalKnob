@@ -2,7 +2,7 @@
 
 dk_depend(emsdk)
 
-##generateCmake(DKEmscripten)
+##dk_generateCmake(DKEmscripten)
 ##dk_assets(DKEmscripten)
 
 dk_set(CURRENT_DIR ${DKPLUGINS}/DKEmscripten)

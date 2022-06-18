@@ -6,5 +6,5 @@ IF(HAVE_DKCef)
 	dk_depend(DKCef)
 ENDIF()
 
-generateCmake(DKWindow)
+dk_generateCmake(DKWindow)
 dk_assets(DKWindow)

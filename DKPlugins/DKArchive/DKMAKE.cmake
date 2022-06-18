@@ -7,4 +7,4 @@ IF(HAVE_DKCef)
 	dk_depend(DKCef)
 ENDIF()
 
-generateCmake(DKArchive)
+dk_generateCmake(DKArchive)

@@ -10,5 +10,5 @@ IF(HAVE_DKCef)
 ENDIF()
 
 
-## generateCmake(DKWidget)
+## dk_generateCmake(DKWidget)
 ## dk_assets(DKWidget)

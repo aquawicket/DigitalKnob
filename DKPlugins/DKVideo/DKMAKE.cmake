@@ -6,5 +6,5 @@ IF(HAVE_DKCef)
 ENDIF()
 
 
-generateCmake(DKVideo)
+dk_generateCmake(DKVideo)
 dk_assets(DKVideo)

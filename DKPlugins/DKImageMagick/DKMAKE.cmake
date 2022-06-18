@@ -1,6 +1,6 @@
 dk_depend(imagemagick)
 
-generateCmake(DKImageMagick)
+dk_generateCmake(DKImageMagick)
 dk_assets(DKImageMagick)
 
 IF(WIN_32)

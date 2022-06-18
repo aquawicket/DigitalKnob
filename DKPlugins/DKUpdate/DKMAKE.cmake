@@ -11,4 +11,4 @@ IF(HAVE_DKCef)
 ENDIF()
 
 
-generateCmake(DKUpdate)
+dk_generateCmake(DKUpdate)

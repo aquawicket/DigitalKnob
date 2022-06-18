@@ -9,5 +9,5 @@ IF(HAVE_DKCef)
 ENDIF()
 
 
-generateCmake(DKHandles)
+dk_generateCmake(DKHandles)
 dk_assets(DKHandles)

@@ -9,5 +9,5 @@ IF(HAVE_DKCef)
 ENDIF()
 
 
-generateCmake(DKOcr)
+dk_generateCmake(DKOcr)
 dk_assets(DKOcr)

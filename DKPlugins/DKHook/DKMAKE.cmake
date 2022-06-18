@@ -1,7 +1,7 @@
 IF(HAVE_DKCef)
 	dk_depend(DKCef)
 ENDIF()
-generateCmake(DKHook)
+dk_generateCmake(DKHook)
 dk_assets(DKHook)
 
 ## hookdll windows

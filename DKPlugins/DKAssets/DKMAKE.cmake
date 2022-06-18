@@ -7,5 +7,5 @@ IF(HAVE_DKCef)
 	dk_depend(DKCef)
 ENDIF()
 
-generateCmake(DKAssets)
+dk_generateCmake(DKAssets)
 dk_assets(DKAssets)

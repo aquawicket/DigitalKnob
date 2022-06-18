@@ -16,5 +16,5 @@ IF(HAVE_DKCef)
 ENDIF()
 
 
-generateCmake(DKWebSockets)
+dk_generateCmake(DKWebSockets)
 dk_assets(DKWebSockets)

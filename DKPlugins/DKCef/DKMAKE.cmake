@@ -22,7 +22,7 @@ dk_depend(DK)
 dk_depend(DKDuktape)
 
 
-generateCmake(DKCef)
+dk_generateCmake(DKCef)
 dk_assets(DKCef)
 
 

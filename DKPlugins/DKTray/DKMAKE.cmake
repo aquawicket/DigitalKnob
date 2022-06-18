@@ -5,5 +5,5 @@ IF(HAVE_DKCef)
 	dk_depend(DKCef)
 ENDIF()
 
-generateCmake(DKTray)
+dk_generateCmake(DKTray)
 dk_assets(DKTray)

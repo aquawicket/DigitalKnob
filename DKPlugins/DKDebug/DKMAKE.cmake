@@ -15,7 +15,7 @@ else()
 	dk_remove(${DKPLUGINS}/DKDebug/StackWalker.cpp)
 endif()
 
-generateCmake(DKDebug)
+dk_generateCmake(DKDebug)
 dk_assets(DKDebug)
 
 IF(DKAPP)

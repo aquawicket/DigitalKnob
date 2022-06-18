@@ -15,4 +15,4 @@ dk_depend(DKCef)
 dk_depend(DKCefChild)
 dk_depend(DKAssets)
 
-generateCmake(DKSDLCef)
+dk_generateCmake(DKSDLCef)

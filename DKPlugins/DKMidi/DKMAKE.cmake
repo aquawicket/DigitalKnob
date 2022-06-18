@@ -17,5 +17,5 @@ IF(HAVE_DKCef)
 ENDIF()
 
 
-generateCmake(DKMidi)
+dk_generateCmake(DKMidi)
 dk_assets(DKMidi)

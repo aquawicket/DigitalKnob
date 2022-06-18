@@ -8,7 +8,7 @@ IF(HAVE_DKCef)
 ENDIF()
 
 
-generateCmake(DKMySql)
+dk_generateCmake(DKMySql)
 dk_assets(DKMySql)
 
 #DKENABLE(mysql) ##MySql library

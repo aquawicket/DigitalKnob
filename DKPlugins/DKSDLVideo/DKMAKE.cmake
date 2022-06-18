@@ -6,5 +6,5 @@ dk_depend(waave)
 dk_depend(DKVideo)
 dk_depend(DKSDLWindow)
 
-generateCmake(DKSDLVideo)
+dk_generateCmake(DKSDLVideo)
 dk_assets(DKSDLVideo)

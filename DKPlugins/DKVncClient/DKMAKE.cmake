@@ -8,4 +8,4 @@ IF(HAVE_DKCef)
 ENDIF()
 
 
-generateCmake(DKVncClient)
+dk_generateCmake(DKVncClient)

@@ -9,4 +9,4 @@ dk_depend(sdl_image)
 ## dk_depend(sdl2_gif) ##Deprecated
 ## dk_depend(sdl2_giflib_sa-master) ##FIXME
 
-generateCmake(DKSDLMetalRml)
+dk_generateCmake(DKSDLMetalRml)

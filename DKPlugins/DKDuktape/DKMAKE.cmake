@@ -44,5 +44,5 @@ dk_include(${DKPLUGINS}/DKDuktape)
 dk_include(${DUKTAPE}/src)
 dk_define(HAVE_DKDuktape)
 
-generateCmake(DKDuktape)
+dk_generateCmake(DKDuktape)
 dk_assets(DKDuktape)

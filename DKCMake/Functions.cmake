@@ -121,9 +121,9 @@ function(dk_aliasFunctions name)
 	DKDEBUGFUNC(${ARGV})
 	if(NOT EXISTS ${Functions_Ext})
 		file(APPEND ${Functions_Ext} "### Don't make changes in this file. They will be overwritten. ###\n")
-		file(APPEND ${Functions_Ext} "### This file was automatically generated from Functions.cmake ###\n\n")
+		file(APPEND ${Functions_Ext} "### This file was automatically generated from Functions.cmake ###\n")
 	endif()
-	file(APPEND ${Functions_Ext} "## ${name} ##\n")
+	file(APPEND ${Functions_Ext} "\n## ${name} ##\n")
 	file(APPEND ${Functions_Ext} "macro(WIN_HOST_${name})\n   if(WIN_HOST)\n      ${name}(\${ARGV})\n  endif()\nendmacro()\n")
 	file(APPEND ${Functions_Ext} "macro(WIN32_HOST_${name})\n   if(WIN_HOST AND X86)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
 	file(APPEND ${Functions_Ext} "macro(WIN64_HOST_${name})\n   if(WIN_HOST AND X64)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
@@ -211,7 +211,6 @@ function(dk_aliasFunctions name)
 	file(APPEND ${Functions_Ext} "macro(ANDROID_RELEASE_${name})\n   if(ANDROID AND RELEASE)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
 	file(APPEND ${Functions_Ext} "macro(ANDROID32_RELEASE_${name})\n   if(ANDROID_32 AND RELEASE)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
 	file(APPEND ${Functions_Ext} "macro(ANDROID64_RELEASE_${name})\n   if(ANDROID_64 AND RELEASE)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	file(APPEND ${Functions_Ext} "\n")	
 endfunction()
 
 
@@ -1706,13 +1705,13 @@ dk_aliasFunctions("dk_libRelease" "NO_DEBUG_RELEASE_TAGS")
 
 
 ###############################################################################
-# generateCmake(plugin_name)
+# dk_generateCmake(plugin_name)
 #
-function(generateCmake plugin_name)
+function(dk_generateCmake plugin_name)
 	DKDEBUGFUNC(${ARGV})
 	dk_getPathToPlugin(${plugin_name} plugin_path)
 	if(NOT EXISTS "${plugin_path}")
-		DKERROR("generateCmake(${plugin_name}): plugin not found")
+		DKERROR("dk_generateCmake(${plugin_name}): plugin not found")
 		return()
 	endif()
 
@@ -1910,15 +1909,15 @@ endfunction()
 
 
 ###############################################################################
-# DKTESTAPP(name)
+# dk_testApp(name)
 #
 #	@name:
 #
-function(DKTESTAPP name)
+function(dk_testApp name)
 	DKDEBUGFUNC(${ARGV})
 	dk_getPathToPlugin(${name} plugin_path)
 	if(NOT EXISTS "${plugin_path}/test")
-		DKINFO("DKTESTAPP(): ${name}_test app not found")
+		DKINFO("dk_testApp(): ${name}_test app not found")
 		return()
 	endif()
 	DKINFO("building ${name}_test app")
@@ -2104,13 +2103,13 @@ function(dk_depend name)
 	endif()
 	
 	dk_enable(${name})
-	DKRUNDEPENDS(${name}) # strip everything from the file except if() else() elseif() endif() and dk_depend() before sorting.
+	dk_runDepends(${name}) # strip everything from the file except if() else() elseif() endif() and dk_depend() before sorting.
 	# else()
 	#	list(FIND dkdepend_list "${name}" index)
 	#	if(${index} GREATER -1)
 	#		return() #library is already in the list
 	#	endif()
-	#	DKRUNDEPENDS(${name}) # strip everything from the file except if() else() elseif() endif() and dk_depend() before sorting.
+	#	dk_runDepends(${name}) # strip everything from the file except if() else() elseif() endif() and dk_depend() before sorting.
 	# endif()
 endfunction()
 dk_aliasFunctions("dk_depend")
@@ -2138,7 +2137,7 @@ endfunction()
 
 
 ###############################################################################
-# DKRUNDEPENDS(name)
+# dk_runDepends(name)
 #
 #	Strip everything from the library's DKMAKE.cmake file except dk_depend() commands AND conditionals.
 #	Conditionals such as if(), else(), elseif(), endif(), return() will remain included during the sorting process. 
@@ -2146,7 +2145,7 @@ endfunction()
 #
 #	@name:
 #
-function(DKRUNDEPENDS name)
+function(dk_runDepends name)
 	DKDEBUGFUNC(${ARGV})
 	dk_getPathToPlugin(${name} plugin_path)
 	if(NOT plugin_path)
@@ -2930,12 +2929,12 @@ macro(dk_setReadOnly VAR)
 	DKDEBUGFUNC(${ARGV})
 	set("${VAR}" "${ARGN}")						# Set the variable itself
 	set("_${VAR}_readonly_val" "${ARGN}")		# Store the variable's value for restore it upon modifications.
-	variable_watch("${VAR}" dk_readOnlyGuard)	# Register a watcher for a variable
+	variable_watch("${VAR}" dk_readOnlyCallback)	# Register a watcher for a variable
 endmacro()
 
 
 ###############################################################################
-# dk_readOnlyGuard(VAR access value current_list_file stack)
+# dk_readOnlyCallback(VAR access value current_list_file stack)
 #
 #	@VAR:
 #	@access:
@@ -2943,7 +2942,7 @@ endmacro()
 #	@current_list_file:
 #	@stack:
 #	 
-macro(dk_readOnlyGuard VAR access value current_list_file stack)   # Watcher for readonly property.
+macro(dk_readOnlyCallback VAR access value current_list_file stack)   # Watcher for readonly property.
 	DKDEBUGFUNC(${ARGV})
 	if ("${access}" STREQUAL "MODIFIED_ACCESS")
 		DKWARN("'${VAR}' is READONLY")
@@ -2988,28 +2987,29 @@ endfunction()
 ###############################################################################
 # dk_import(url) #args
 #  
-#	github GIT:  https://github.com/orginization/library.git    dk_importGIT(url) #branch #PATCH
-#	github DL:   https://github.com/orginization/library        dk_importGIT(url) #lib #id #PATCH
-#	lib url DL:  https://website.com/library.zip                 dk_importDL(url) #lib #id #PATCH
-#	exe url DL:  https://website.com/executable.exe		    	 dk_importDL(url) #lib #id #PATCH
+#	github GIT:	https://github.com/orginization/library.git		dk_importGit(url) #branch #PATCH
+#	github DL:	https://github.com/orginization/library			dk_importGit(url) #lib #id #PATCH
+#	lib url DL:	https://website.com/library.zip					dk_importDownload(url) #lib #id #PATCH
+#	exe url DL:	https://website.com/executable.exe 				dk_importDownload(url) #lib #id #PATCH
 #
-#	@url: The online path the .git or file to import	 
+#	@url: The online path the .git or file to import
+# 
 function(dk_import url) #Lib #ID #Patch
 	DKDEBUGFUNC(${ARGV})
 	string(FIND ${url} ".git" dotgit)
 	if(${dotgit} GREATER -1)
-		dk_importGIT(${ARGV})
+		dk_importGit(${ARGV})
 	else()
-		dk_importDL(${ARGV})
+		dk_importDownload(${ARGV})
 	endif()
 endfunction()
 dk_aliasFunctions("dk_import")
 
 
 ###############################################################################
-# dk_importGIT(url)
+# dk_importGit(url)
 #
-function(dk_importGIT url) #branch #PATCH
+function(dk_importGit url) #branch #PATCH
 	DKDEBUGFUNC(${ARGV})
 	string(REPLACE "/" ";" url_list ${url})  #split url path into list
 	#foreach(item ${url_list})
@@ -3136,9 +3136,9 @@ endfunction()
 
 
 ###############################################################################
-# dk_importDL(url)
+# dk_importDownload(url)
 # 
-function(dk_importDL url) #Lib #ID #Patch
+function(dk_importDownload url) #Lib #ID #Patch
 	DKDEBUGFUNC(${ARGV})
 # IS THE URL VALID           Example https://github.com/aquawicket/DigitalKnob/archive/01c17f6a9cd66068f7890ea887ab3b9a673f0434.zip)
 	# must contain https://github.com/
@@ -3373,7 +3373,7 @@ endfunction()
 
 
 ######################################################################
-# dk_GetFileType(path result)
+# dk_getFileType(path result)
 #  
 # Takes a path and checks the extension to return the file type.
 #
@@ -3383,7 +3383,7 @@ endfunction()
 #           UNKNOWN, WEB, ...TODO
 # Reference: https://en.wikipedia.org/wiki/List_of_file_formats
 #
-function(dk_GetFileType path rtn-type)
+function(dk_getFileType path rtn-type)
 	DKDEBUGFUNC(${ARGV})
 	dk_getExtension(${path} ext)
 	if(NOT ext)
@@ -3469,7 +3469,7 @@ function(dk_import2 url)
 	DKDEBUG("url_length = ${url_length}")
 	DKDEBUG("url_end = ${url_end}")
 	DKDEBUG("url{url_end} = ${url${url_end}}")
-	dk_GetFileType(${url} type)
+	dk_getFileType(${url} type)
 	if(NOT ${type} STREQUAL ARCHIVE) 
 	DKDEBUG("NO")
 		DKDEBUG("Is the url a website we can determine a download file link from?")

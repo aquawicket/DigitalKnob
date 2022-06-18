@@ -10,5 +10,5 @@ IF(HAVE_DKCef)
 	dk_depend(DKCef)
 ENDIF()
 
-generateCmake(DKRmlIframe)
+dk_generateCmake(DKRmlIframe)
 dk_assets(DKRmlIframe)
