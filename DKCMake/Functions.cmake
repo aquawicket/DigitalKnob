@@ -3018,28 +3018,28 @@ endfunction()
 ###############################################################################
 # DKIMPORT(url) #args
 #  
-#	github GIT:  https://github.com/orginization/library.git    DKIMPORT_GIT(url) #branch #PATCH
-#	github DL:   https://github.com/orginization/library        DKIMPORT_GIT(url) #lib #id #PATCH
-#	lib url DL:  https://website.com/library.zip                 DKIMPORT_DL(url) #lib #id #PATCH
-#	exe url DL:  https://website.com/executable.exe		    	 DKIMPORT_DL(url) #lib #id #PATCH
+#	github GIT:  https://github.com/orginization/library.git    dk_importGIT(url) #branch #PATCH
+#	github DL:   https://github.com/orginization/library        dk_importGIT(url) #lib #id #PATCH
+#	lib url DL:  https://website.com/library.zip                 dk_importDL(url) #lib #id #PATCH
+#	exe url DL:  https://website.com/executable.exe		    	 dk_importDL(url) #lib #id #PATCH
 #
 #	@url: The online path the .git or file to import	 
 function(DKIMPORT url) #Lib #ID #Patch
 	DKDEBUGFUNC(${ARGV})
 	string(FIND ${url} ".git" dotgit)
 	if(${dotgit} GREATER -1)
-		DKIMPORT_GIT(${ARGV})
+		dk_importGIT(${ARGV})
 	else()
-		DKIMPORT_DL(${ARGV})
+		dk_importDL(${ARGV})
 	endif()
 endfunction()
 AliasFunctions("DKIMPORT")
 
 
 ###############################################################################
-# DKIMPORT_GIT(url)
+# dk_importGIT(url)
 #
-function(DKIMPORT_GIT url) #branch #PATCH
+function(dk_importGIT url) #branch #PATCH
 	DKDEBUGFUNC(${ARGV})
 	string(REPLACE "/" ";" url_list ${url})  #split url path into list
 	#foreach(item ${url_list})
@@ -3167,9 +3167,9 @@ endfunction()
 
 
 ###############################################################################
-# DKIMPORT_DL(url)
+# dk_importDL(url)
 # 
-function(DKIMPORT_DL url) #Lib #ID #Patch
+function(dk_importDL url) #Lib #ID #Patch
 	DKDEBUGFUNC(${ARGV})
 # IS THE URL VALID           Example https://github.com/aquawicket/DigitalKnob/archive/01c17f6a9cd66068f7890ea887ab3b9a673f0434.zip)
 	# must contain https://github.com/
@@ -3496,9 +3496,11 @@ endfunction()
 
 
 ###############################################################################
-# DKIMPORT2(url)
+# dk_import2(url)
 #
-function(DKIMPORT2 url)
+#	Rework of dk_import()
+#
+function(dk_import2 url)
 	DKDEBUGFUNC(${ARGV})
 	DKDEBUG("DKIMPORT2(${ARGV})")
 	DKDEBUG("     ARGC = ${ARGC}")
