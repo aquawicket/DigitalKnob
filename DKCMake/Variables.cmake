@@ -55,7 +55,7 @@ endif()
 ###########################################################################
 if(TARGET)
 	DKINFO("Building ${TARGET}\n")
-	dk_FindTarget("${TARGET}" target_path target_type)
+	dk_findTarget("${TARGET}" target_path target_type)
 	if(NOT target_path)
 		DKINFO("ERROR: Could not find target ${TARGET}")
 		Wait("press any key to exit")

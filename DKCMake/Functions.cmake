@@ -209,9 +209,9 @@ dk_aliasFunctions("DKSET")
 
 
 ###############################################################################
-# DKUNSET(variable)
+# dk_unset(variable)
 #
-function(DKUNSET variable)
+function(dk_unset variable)
 	DKDEBUGFUNC(${ARGV})
 	set(${variable} "" CACHE INTERNAL "")
 	unset(${variable})
@@ -671,9 +671,9 @@ dk_aliasFunctions("DOWNLOAD")
 
 
 ###############################################################################
-# DKEXTRACT(src dest)
+# dk_extract(src dest)
 #
-function(DKEXTRACT src dest)
+function(dk_extract src dest)
 	DKDEBUGFUNC(${ARGV})
 	if(NOT EXISTS ${dest})
 		dk_makeDirectory(${dest})
@@ -860,15 +860,15 @@ function(DKDISABLE plugin)
 	endif()
 	
 	if(${ARGC} GREATER 1)
-		DKUNSET(${ARGV1})
-		DKUNSET(HAVE_${ARGV1})
+		dk_unset(${ARGV1})
+		dk_unset(HAVE_${ARGV1})
 		#In c++ we can't use certian symbals in the preprocess or for macros. - must be turned to _
 		string(REPLACE "-" "_" argv1_macro "${ARGV1}")
 		DKUNDEFINE(HAVE_${argv1_macro})
 		DKUNDEPEND(${ARGV1})
 	else()
-		DKUNSET(${plugin})
-		DKUNSET(HAVE_${plugin})
+		dk_unset(${plugin})
+		dk_unset(HAVE_${plugin})
 		#In c++ we can't use certian symbals in the preprocess or for macros. - must be turned to _
 		string(REPLACE "-" "_" plugin_macro "${plugin}")
 		DKUNDEFINE(HAVE_${plugin_macro})
@@ -1187,7 +1187,7 @@ function(DKINSTALL src_path import_name dest_path)
 	endif()
 	if(${FILETYPE} STREQUAL "Archive")
 		file(REMOVE ${DKDOWNLOAD}/UNZIPPED)
-		DKEXTRACT(${DKDOWNLOAD}/${dl_filename} ${DKDOWNLOAD}/UNZIPPED)
+		dk_extract(${DKDOWNLOAD}/${dl_filename} ${DKDOWNLOAD}/UNZIPPED)
 		#We either have a root folder in /UNZIPPED, or multiple files without a root folder
 		file(GLOB items RELATIVE "${DKDOWNLOAD}/UNZIPPED/" "${DKDOWNLOAD}/UNZIPPED/*")
 		list(LENGTH items count)
@@ -2843,8 +2843,8 @@ function(dk_removeTarget name target)
 		DKSET(${name}_targets_OFF ${target})
 	endif()
 	DKSET(${name}_${target} 0)
-	DKUNSET(${name}_${target})
-	#DKUNSET(${name}::${target}) # TESTME
+	dk_unset(${name}_${target})
+	#dk_unset(${name}::${target}) # TESTME
 endfunction()
 
 
@@ -2885,13 +2885,13 @@ endfunction()
 
 
 ###############################################################################
-# dk_RemoveSubstring(removethis fromthis result)
+# dk_removeSubstring(removethis fromthis result)
 #
 #	@removethis:
 #	@fromthis:
 #	@result:
 #
-function(dk_RemoveSubstring removethis fromthis result)
+function(dk_removeSubstring removethis fromthis result)
 	DKDEBUGFUNC(${ARGV})
 	foreach(item ${fromthis})
 		string(REPLACE ${removethis} "" item ${item})
@@ -2903,13 +2903,13 @@ endfunction()
 
 
 ###############################################################################
-# dk_FindTarget(target result_path result_type)
+# dk_findTarget(target result_path result_type)
 #
 #	@target:
 #	@result_path:
 #	@result_type:
 #
-function(dk_FindTarget target result_path result_type)
+function(dk_findTarget target result_path result_type)
 	DKDEBUGFUNC(${ARGV})
 	## search up to 4 levels deep
 	file(GLOB children RELATIVE ${DIGITALKNOB}/ 

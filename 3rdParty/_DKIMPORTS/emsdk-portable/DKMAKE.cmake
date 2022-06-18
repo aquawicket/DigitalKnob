@@ -3,7 +3,7 @@
 #
 # https://github.com/emscripten-core/emsdk/archive/refs/tags/2.0.26.zip
 
-DKGITCLONE(https://github.com/emscripten-core/emsdk.git)
+DKIMPORT(https://github.com/emscripten-core/emsdk.git)
 
 #DKSET(EMSCRIPTEN_VERSION 2.0.26)
 #DKSET(EMSCRIPTEN_NAME emsdk-${EMSCRIPTEN_VERSION})
@@ -14,7 +14,7 @@ IF(WIN_HOST)
 	IF(NOT EXISTS ${EMSCRIPTEN})
 		DKSET(CURRENT_DIR ${DKDOWNLOAD})
 		## DOWNLOAD(www.internet.com/emsdk-portable-64bit.zip) ## find an online link
-		DKEXTRACT(${DKDOWNLOAD}/emsdk-portable-64bit.zip ${3RDPARTY}/emsdk-portable-64bit)
+		dk_extract(${DKDOWNLOAD}/emsdk-portable-64bit.zip ${3RDPARTY}/emsdk-portable-64bit)
 		DKCOPY(${DKIMPORTS}/emsdk-portable-64bit/.emscripten ${3RDPARTY}/emsdk-portable-64bit/.emscripten true)
 		DKSET(CURRENT_DIR ${3RDPARTY}/emsdk-portable-64bit)
 		DKCOMMAND(${3RDPARTY}/emsdk-portable-64bit/emsdk update)
@@ -25,7 +25,7 @@ IF(WIN_HOST)
 else()
 	DKSET(CURRENT_DIR ${DKDOWNLOAD})
 	## DOWNLOAD(www.internet.com/emsdk-portable.tar.gz) ## find an online link
-	DKEXTRACT(${DKDOWNLOAD}/emsdk-portable.tar.gz ${3RDPARTY}/emsdk-portable)
+	dk_extract(${DKDOWNLOAD}/emsdk-portable.tar.gz ${3RDPARTY}/emsdk-portable)
 	DKCOPY(${DKIMPORTS}/emsdk-portable/.emscripten ${3RDPARTY}/emsdk-portable/.emscripten true)
 	DKSET(CURRENT_DIR ${3RDPARTY}/emsdk-portable)
 	DKCOMMAND(${3RDPARTY}/emsdk-portable/emsdk update)
