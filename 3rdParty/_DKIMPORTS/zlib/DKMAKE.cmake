@@ -26,10 +26,10 @@ ANDROID_dk_set(ZLIB_CMAKE "-DCMAKE_C_FLAGS=-I${ZLIB}/${OS}" "-DCMAKE_CXX_FLAGS=-
 
 ### COMPILE ###
 dk_setPath(${ZLIB}/${BUILD_DIR})
-DKQCOMMAND(${DKCMAKE_BUILD} ${ZLIB})
+dk_queueCommand(${DKCMAKE_BUILD} ${ZLIB})
 
 
 VS(${ZLIB_NAME} zlib.sln zlibstatic) # windows, android
 XCODE(${ZLIB_NAME} zlibstatic)       # mac, ios, iossim
-LINUX_DKQCOMMAND(make zlibstatic)
-RASPBERRY_DKQCOMMAND(make zlibstatic)
+LINUX_dk_queueCommand(make zlibstatic)
+RASPBERRY_dk_queueCommand(make zlibstatic)

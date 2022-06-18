@@ -12,7 +12,7 @@ dk_set(MACPORTS_DL https://github.com/macports/macports-base/releases/download/v
 if(NOT EXISTS ${DKDOWNLOAD}/${MACPORTS_NAME})
 	dk_download(${MACPORTS_DL} ${DKDOWNLOAD}/${MACPORTS_NAME})
 		
-	MAC_DKCOMMAND(chmod +x ${DKDOWNLOAD}/${MACPORTS_NAME})
+	MAC_dk_command(chmod +x ${DKDOWNLOAD}/${MACPORTS_NAME})
 	dk_set(QUEUE_BUILD ON)
-	#MAC_DKQCOMMAND(${DKDOWNLOAD}/${MACPORTS_NAME}) #FIXME
+	#MAC_dk_queueCommand(${DKDOWNLOAD}/${MACPORTS_NAME}) #FIXME
 endif()

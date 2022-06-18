@@ -6,4 +6,4 @@ dk_depend(jdk)
 
 
 dk_set(CURRENT_DIR /usr)
-DKCOMMAND(sudo apt -y install build-essential)
+dk_command(sudo apt -y install build-essential)

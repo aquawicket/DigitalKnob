@@ -10,7 +10,7 @@ endif()
 
 if(LINUX OR RASPBERRY)
 	dk_set(CURRENT_DIR /usr)
-	DKCOMMAND(sudo apt -y install libx11-dev)
+	dk_command(sudo apt -y install libx11-dev)
 
 	### LINK ###
 	dk_include(/usr/include/X11)

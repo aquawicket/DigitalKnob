@@ -58,7 +58,7 @@ RASPBERRY_RELEASE_DKLIB(${GLEW}/${OS}//${RELEASE_DIR}/lib/libGLEW.a)
 ### COMPILE ###
 dk_setPath(${GLEW}/${BUILD_DIR})
 
-WIN_DKQCOMMAND(${DKCMAKE_BUILD} ${GLEW}/build/cmake)
+WIN_dk_queueCommand(${DKCMAKE_BUILD} ${GLEW}/build/cmake)
 WIN_VS(${GLEW_NAME} glew.sln glew_s)
 #dk_copy(${GLEW}/${OS}/lib/${DEBUG_DIR} ${GLEW}/${OS}/CMakeFiles/Export/lib/ TRUE)
 #dk_copy(${GLEW}/${OS}/lib/${RELEASE_DIR} ${GLEW}/${OS}/CMakeFiles/Export/lib/ TRUE)
@@ -66,17 +66,17 @@ WIN_VS(${GLEW_NAME} glew.sln glew_s)
 #dk_copy(${GLEW}/${OS}/bin/${RELEASE_DIR} ${GLEW}/${OS}/CMakeFiles/Export/bin/ TRUE)
 
 
-MAC_DKQCOMMAND(${DKCMAKE_BUILD} ${GLEW}/build/cmake)
+MAC_dk_queueCommand(${DKCMAKE_BUILD} ${GLEW}/build/cmake)
 MAC_XCODE(${GLEW_NAME} glew_s)
 
 
-IOSSIM_DKQCOMMAND(${DKCMAKE_BUILD} ${GLEW}/build/cmake)
+IOSSIM_dk_queueCommand(${DKCMAKE_BUILD} ${GLEW}/build/cmake)
 IOSSIM_XCODE(${GLEW_NAME} glew_s)
 
 
-LINUX_DKQCOMMAND(${DKCMAKE_BUILD} ${GLEW}/build/cmake)
-LINUX_DKQCOMMAND(make glew_s)
+LINUX_dk_queueCommand(${DKCMAKE_BUILD} ${GLEW}/build/cmake)
+LINUX_dk_queueCommand(make glew_s)
 
 
-RASPBERRY_DKQCOMMAND(${DKCMAKE_BUILD} ${GLEW}/build/cmake)
-RASPBERRY_DKQCOMMAND(make glew_s)
+RASPBERRY_dk_queueCommand(${DKCMAKE_BUILD} ${GLEW}/build/cmake)
+RASPBERRY_dk_queueCommand(make glew_s)

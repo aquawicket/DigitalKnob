@@ -30,14 +30,14 @@ RASPBERRY_RELEASE_DKLIB(${GETCH}/getch/libgetch.a)
 dk_setPath(${GETCH}/${BUILD_DIR})
 
 #LINUX_DEBUG_dk_setPath(${GETCH}/${OS}/${DEBUG_DIR})
-LINUX_DEBUG_DKQCOMMAND(../../make)
+LINUX_DEBUG_dk_queueCommand(../../make)
 
 #LINUX_RELEASE_dk_setPath(${GETCH}/${OS}/${RELEASE_DIR})
-LINUX_RELEASE_DKQCOMMAND(../../make)
+LINUX_RELEASE_dk_queueCommand(../../make)
 
 
 #RASPBERRY_DEBUG_dk_setPath(${GETCH}/${OS}/${DEBUG_DIR})
-RASPBERRY_DEBUG_DKQCOMMAND(../../make)
+RASPBERRY_DEBUG_dk_queueCommand(../../make)
 
 #RASPBERRY_RELEASE_dk_setPath(${GETCH}/${OS}/${RELEASE_DIR})
-RASPBERRY_RELEASE_DKQCOMMAND(../../make)
+RASPBERRY_RELEASE_dk_queueCommand(../../make)

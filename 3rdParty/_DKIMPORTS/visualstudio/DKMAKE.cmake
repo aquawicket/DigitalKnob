@@ -38,10 +38,10 @@ else()  #install
 	MESSAGE(STATUS "Installing Visual Studio ${VISUALSTUDIO_VERSION}")
 	if(EXISTS ${DKDOWNLOAD}/VisualStudio/vs_setup.exe)
 		# offline installer
-		DKCOMMAND(${3RDPARTY}/_DKIMPORTS/visualstudio/InstallVisualStudio.cmd)
+		dk_command(${3RDPARTY}/_DKIMPORTS/visualstudio/InstallVisualStudio.cmd)
 	else()
 		# online installer
 		dk_download(${VISUALSTUDIO_DL} ${DKDOWNLOAD}/vs_Community.exe)
-		DKCOMMAND(${DKDOWNLOAD}/vs_Community.exe)
+		dk_command(${DKDOWNLOAD}/vs_Community.exe)
 	endif()
 ENDIF()

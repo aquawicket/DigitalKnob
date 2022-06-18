@@ -16,6 +16,6 @@ dk_set(DOXYGEN_EXE ${DOXYGEN}/doxygen.exe)
 IF(NOT EXISTS ${DOXYGEN_EXE})
 	dk_download(${DOXYGEN_DL} ${DKDOWNLOAD}/${DOXYGEN_NAME}-setup.exe)
 	dk_set(QUEUE_BUILD ON)
-	WIN32_DKQCOMMAND(${DKDOWNLOAD}/${DOXYGEN_NAME}-setup.exe)
+	WIN32_dk_queueCommand(${DKDOWNLOAD}/${DOXYGEN_NAME}-setup.exe)
 ENDIF()
 

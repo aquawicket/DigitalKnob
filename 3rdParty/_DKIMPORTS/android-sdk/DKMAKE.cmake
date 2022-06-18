@@ -25,5 +25,5 @@ dk_depend(android-cmake)
 
 if(NOT EXISTS ${ANDROIDSDK}/SignLicenses.cmd)
 	dk_copy(${DKIMPORTS}/android-sdk/SignLicenses.cmd ${ANDROIDSDK}/SignLicenses.cmd false)
-	DKCOMMAND(${ANDROIDSDK}/SignLicenses.cmd)
+	dk_command(${ANDROIDSDK}/SignLicenses.cmd)
 endif()

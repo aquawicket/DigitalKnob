@@ -17,10 +17,10 @@ dk_include(${FMT}/include)
 
 ### GENERATE ###
 #dk_setPath(${FMT}/${BUILD_DIR})
-#DKQCOMMAND(${DKCMAKE_BUILD} -DCMAKE_POSITION_INDEPENDENT_CODE=TRUE ${FMT})
+#dk_queueCommand(${DKCMAKE_BUILD} -DCMAKE_POSITION_INDEPENDENT_CODE=TRUE ${FMT})
 
 ### COMPILE ###
 #VS(${FMT_NAME} FMT.sln fmt)  # windows, android
 #XCODE(${FMT_NAME} fmt)       # mac, ios, iossim
-#LINUX_DKQCOMMAND(make fmt)   
-#RASPBERRY_DKQCOMMAND(make fmt)
+#LINUX_dk_queueCommand(make fmt)   
+#RASPBERRY_dk_queueCommand(make fmt)

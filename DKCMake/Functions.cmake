@@ -1057,9 +1057,9 @@ endfunction()
 
 
 ###############################################################################
-# DKREFRESH_ICONS()
+# dk_refreshIcons()
 #
-function(DKREFRESH_ICONS)
+function(dk_refreshIcons)
 	DKDEBUGFUNC(${ARGV})
 	dk_executeProcess(ie4uinit.exe -ClearIconCache)
 	dk_executeProcess(ie4uinit.exe -show)   ##Windows 10
@@ -1326,9 +1326,9 @@ dk_aliasFunctions("dk_setPath")
 
 
 ###############################################################################
-# MSYS(args)
+# dk_msys(args)
 #
-function(MSYS)
+function(dk_msys)
 	DKDEBUGFUNC(${ARGV})
 	if(QUEUE_BUILD)
 		string(REPLACE ";" " " str "${ARGV}")
@@ -1339,7 +1339,7 @@ function(MSYS)
 		elseif(WIN_64 OR ANDROID_64)
 			list(APPEND bash "export PATH=${MINGW64}/bin:$PATH")
 		else()
-			DKERROR("MSYS(): ERROR: not WIN_32, WIN_64, ANDROID_32 or ANDROID_64")
+			DKERROR("dk_msys(): ERROR: not WIN_32, WIN_64, ANDROID_32 or ANDROID_64")
 		endif()
 		list(APPEND bash "export PATH=${MSYS}/bin:$PATH")
 		list(APPEND bash "${str}")
@@ -1348,17 +1348,17 @@ function(MSYS)
 		string(REPLACE ";" "\n"	bash "${bash}")
 		string(REPLACE "C:/" "/c/" bash ${bash})
 		file(WRITE ${MSYS}/dkscript.tmp ${bash})
-		DKINFO("MSYS -> ${bash}")
+		DKINFO("dk_msys -> ${bash}")
 		dk_executeProcess(${MSYS}/bin/bash ${MSYS}/dkscript.tmp)
 	endif()
 endfunction()
-dk_aliasFunctions("MSYS")
+dk_aliasFunctions("dk_msys")
 
 
 ###############################################################################
-# MSYS2(args)
+# dk_msys2(args)
 #
-function(MSYS2)
+function(dk_msys2)
 	DKDEBUGFUNC(${ARGV})
 	if(QUEUE_BUILD)
 		string(REPLACE ";" " " str "${ARGV}")
@@ -1369,7 +1369,7 @@ function(MSYS2)
 		elseif(WIN_64 OR ANDROID_64)
 			list(APPEND bash "export PATH=${MINGW64}/bin:$PATH")
 		else()
-			DKERROR("MSYS2(): ERROR: not WIN_32, WIN_64, ANDROID_32 or ANDROID_64")
+			DKERROR("dk_msys2(): ERROR: not WIN_32, WIN_64, ANDROID_32 or ANDROID_64")
 		endif()
 		list(APPEND bash "export PATH=${MSYS2}/usr/bin:$PATH")
 		list(APPEND bash "${str}")
@@ -1378,17 +1378,17 @@ function(MSYS2)
 		string(REPLACE ";" "\n"	bash "${bash}")
 		string(REPLACE "C:/" "/c/" bash ${bash})
 		file(WRITE ${MSYS2}/dkscript.tmp ${bash})
-		DKINFO("MSYS2 -> ${bash}")
+		DKINFO("dk_msys2 -> ${bash}")
 		dk_executeProcess(${MSYS2}/usr/bin/bash ${MSYS2}/dkscript.tmp)
 	endif()
 endfunction()
-dk_aliasFunctions("MSYS2")
+dk_aliasFunctions("dk_msys2")
 
 
 ###############################################################################
-# DKMERGE_FLAGS(args result)
+# dk_mergeFlags(args result)
 #
-function(DKMERGE_FLAGS args result)
+function(dk_mergeFlags args result)
 	DKDEBUGFUNC(${ARGV})
 	set(args ${args} ${result} ${ARGN})
 	list(GET args -1 result)
@@ -1424,32 +1424,32 @@ endfunction()
 
 
 ###############################################################################
-# DKCOMMAND(args)
+# dk_command(args)
 #
-function(DKCOMMAND)
+function(dk_command)
 	DKDEBUGFUNC(${ARGV})
 	if(NOT EXISTS ${CURRENT_DIR})
 		dk_set(CURRENT_DIR ${DIGITALKNOB})
 	endif()
 	#DKDEBUG("${ARGV}")
-	DKMERGE_FLAGS("${ARGV}" merged_args)
+	dk_mergeFlags("${ARGV}" merged_args)
 	#DKDEBUG("${ARGV}")
 	dk_executeProcess(${merged_args} WORKING_DIRECTORY ${CURRENT_DIR})
 endfunction()
-dk_aliasFunctions("DKCOMMAND")
+dk_aliasFunctions("dk_command")
 
 
 
 ###############################################################################
-# DKQCOMMAND(args)
+# dk_queueCommand(args)
 #	
-function(DKQCOMMAND)
+function(dk_queueCommand)
 	DKDEBUGFUNC(${ARGV})
 	if(QUEUE_BUILD)
-		DKCOMMAND(${ARGV})
+		dk_command(${ARGV})
 	endif()	
 endfunction()
-dk_aliasFunctions("DKQCOMMAND")
+dk_aliasFunctions("dk_queueCommand")
 
 
 ###############################################################################
@@ -1621,7 +1621,7 @@ dk_aliasFunctions("NDK" "NO_DEBUG_RELEASE_TAGS")
 #
 function(MAKE lib)
 	DKDEBUGFUNC(${ARGV})
-	DKQCOMMAND(make ${ARGV})
+	dk_queueCommand(make ${ARGV})
 endfunction()
 
 
@@ -3130,12 +3130,12 @@ function(dk_importGIT url) #branch #PATCH
 			dk_makeDirectory(${${LIBVAR}})
 		endif()
 		dk_set(CURRENT_DIR ${${LIBVAR}})
-		DKCOMMAND(git clone ${url} ${${LIBVAR}})
+		dk_command(git clone ${url} ${${LIBVAR}})
 	endif()
 	dk_set(CURRENT_DIR ${${LIBVAR}})
-	DKCOMMAND(git checkout -- .)
-	DKCOMMAND(git checkout ${branch})
-	DKCOMMAND(git pull)
+	dk_command(git checkout -- .)
+	dk_command(git checkout ${branch})
+	dk_command(git pull)
 	
 	set(arg_list "${ARGN}")
 	foreach(arg IN LISTS arg_list)

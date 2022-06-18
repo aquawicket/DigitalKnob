@@ -4,7 +4,7 @@ endif()
 
 ### INSTALL ###
 dk_set(CURRENT_DIR /usr)
-DKCOMMAND(sudo apt -y install libgtk2.0-dev)
+dk_command(sudo apt -y install libgtk2.0-dev)
 
 
 find_package(PkgConfig REQUIRED)

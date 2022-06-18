@@ -9,4 +9,4 @@ dk_import(https://github.com/Microsoft/vcpkg.git)
 
 
 dk_setPath(${VCPKG})
-WIN_DKQCOMMAND(bootstrap-vcpkg.bat)
+WIN_dk_queueCommand(bootstrap-vcpkg.bat)

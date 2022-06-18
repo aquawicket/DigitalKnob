@@ -16,6 +16,6 @@ dk_install(${KDEVELOP_DL} kdevelop ${KDEVELOP})
 
 
 LINUX_dk_setPath(${KDEVELOP})
-LINUX_DKQCOMMAND(chmod +x KDevelop.AppImage)
-LINUX_DKQCOMMAND(./KDevelop.AppImage)
+LINUX_dk_queueCommand(chmod +x KDevelop.AppImage)
+LINUX_dk_queueCommand(./KDevelop.AppImage)
 

@@ -20,10 +20,10 @@ UNIX_RELEASE_DKLIB(${PACKAGE}/${OS}/${RELEASE_DIR}/libpackage.a)
 
 ### GENERATE ###
 dk_setPath(${PACKAGE}/${BUILD_DIR})
-DKQCOMMAND(${DKCMAKE_BUILD} ${PACKAGE})
+dk_queueCommand(${DKCMAKE_BUILD} ${PACKAGE})
 
 
 ### COMPILE ###
 VISUAL_STUDIO(${PACKAGE_NAME} package.sln package)  # WIN_VS(), ANDROID_VS()
 XCODE(${PACKAGE_NAME} package) 						# MAC_XCODE(), IOS_XCODE, IOSSIM_XCODE()
-MAKE(package) 										# LINUX_DKQCOMMAND(make), RASPBERRY_DKQCOMMAND(make)
+MAKE(package) 										# LINUX_dk_queueCommand(make), RASPBERRY_dk_queueCommand(make)

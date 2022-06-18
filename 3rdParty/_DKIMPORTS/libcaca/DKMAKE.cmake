@@ -27,12 +27,12 @@ ANDROID_RELEASE_DKLIB(${CACA}/${OS}/${RELEASE_DIR}/libcaca.a)
 
 ### COMPILE ###
 dk_setPath(${CACA}/${OS})
-DKQCOMMAND(${DKCMAKE_BUILD} ${CACA})
+dk_queueCommand(${DKCMAKE_BUILD} ${CACA})
 
 WIN_VS(${CACA_NAME} libcaca.sln libcaca)
 MAC_XCODE(${CACA_NAME} libcaca)
 IOS_XCODE(${CACA_NAME} libcaca)
 IOSSIM_XCODE(${CACA_NAME} libcaca)
-LINUX_DKQCOMMAND(make libcaca)
-RASPBERRY_DKQCOMMAND(make libcaca)
+LINUX_dk_queueCommand(make libcaca)
+RASPBERRY_dk_queueCommand(make libcaca)
 ANDROID_VS(${CACA_NAME} libcaca.sln libcaca)

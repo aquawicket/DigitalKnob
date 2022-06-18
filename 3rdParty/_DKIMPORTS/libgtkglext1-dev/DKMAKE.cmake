@@ -4,5 +4,5 @@ endif()
 
 ### INSTALL ###
 dk_set(CURRENT_DIR /usr)
-DKCOMMAND(sudo apt -y install libgtkglext1-dev)
+dk_command(sudo apt -y install libgtkglext1-dev)
 

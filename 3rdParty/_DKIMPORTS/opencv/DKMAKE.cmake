@@ -159,60 +159,60 @@ ANDROID_RELEASE_DKLIB(${OPENCV}/${OS}/lib/${RELEASE_DIR}/libopencv_videoio.a)
 
 ### COMPILE ###
 WIN_dk_setPath(${OPENCV}/${OS})
-WIN32_DKQCOMMAND(${DKCMAKE_BUILD} ${OPENCV})
-WIN64_DKQCOMMAND(${DKCMAKE_BUILD} -DCV_DISABLE_OPTIMIZATION=ON -DCPU_BASELINE="" -DCPU_DISPATCH="" ${OPENCV})
+WIN32_dk_queueCommand(${DKCMAKE_BUILD} ${OPENCV})
+WIN64_dk_queueCommand(${DKCMAKE_BUILD} -DCV_DISABLE_OPTIMIZATION=ON -DCPU_BASELINE="" -DCPU_DISPATCH="" ${OPENCV})
 WIN_VS(${OPENCV_NAME} OpenCV.sln)
 
 
 MAC_dk_setPath(${OPENCV}/${OS})
-MAC64_DKQCOMMAND(${DKCMAKE_BUILD} "-DCMAKE_CXX_FLAGS=-stdlib=libc++" ${OPENCV})
+MAC64_dk_queueCommand(${DKCMAKE_BUILD} "-DCMAKE_CXX_FLAGS=-stdlib=libc++" ${OPENCV})
 MAC_XCODE(${OPENCV_NAME} opencv_core)
 MAC_XCODE(${OPENCV_NAME} opencv_imgcodecs)
 MAC_XCODE(${OPENCV_NAME} opencv_videoio)
 
 
 IOS_dk_setPath(${OPENCV}/${OS})
-IOS64_DKQCOMMAND(${DKCMAKE_BUILD} ${OPENCV})
+IOS64_dk_queueCommand(${DKCMAKE_BUILD} ${OPENCV})
 IOS_XCODE(${OPENCV_NAME} opencv_core)
 IOS_XCODE(${OPENCV_NAME} opencv_imgcodecs)
 IOS_XCODE(${OPENCV_NAME} opencv_videoio)
 
 
 IOSSIM_dk_setPath(${OPENCV}/${OS})
-IOSSIM64_DKQCOMMAND(${DKCMAKE_BUILD} ${OPENCV})
+IOSSIM64_dk_queueCommand(${DKCMAKE_BUILD} ${OPENCV})
 IOSSIM_XCODE(${OPENCV_NAME} opencv_core)
 IOSSIM_XCODE(${OPENCV_NAME} opencv_imgcodecs)
 IOSSIM_XCODE(${OPENCV_NAME} opencv_videoio)
 
 
 LINUX_DEBUG_dk_setPath(${OPENCV}/${OS}/${DEBUG_DIR})
-LINUX_DEBUG_DKQCOMMAND(${DKCMAKE_BUILD} ${OPENCV})
-LINUX_DEBUG_DKQCOMMAND(make opencv_core)
-LINUX_DEBUG_DKQCOMMAND(make opencv_imgcodecs)
-LINUX_DEBUG_DKQCOMMAND(make opencv_videoio)
+LINUX_DEBUG_dk_queueCommand(${DKCMAKE_BUILD} ${OPENCV})
+LINUX_DEBUG_dk_queueCommand(make opencv_core)
+LINUX_DEBUG_dk_queueCommand(make opencv_imgcodecs)
+LINUX_DEBUG_dk_queueCommand(make opencv_videoio)
 
 LINUX_RELEASE_dk_setPath(${OPENCV}/${OS}/${RELEASE_DIR})
-LINUX_RELEASE_DKQCOMMAND(${DKCMAKE_BUILD} ${OPENCV})
-LINUX_RELEASE_DKQCOMMAND(make opencv_core)
-LINUX_RELEASE_DKQCOMMAND(make opencv_imgcodecs)
-LINUX_RELEASE_DKQCOMMAND(make opencv_videoio)
+LINUX_RELEASE_dk_queueCommand(${DKCMAKE_BUILD} ${OPENCV})
+LINUX_RELEASE_dk_queueCommand(make opencv_core)
+LINUX_RELEASE_dk_queueCommand(make opencv_imgcodecs)
+LINUX_RELEASE_dk_queueCommand(make opencv_videoio)
 
 
 RASPBERRY_DEBUG_dk_setPath(${OPENCV}/${OS}/${DEBUG_DIR})
-RASPBERRY_DEBUG_DKQCOMMAND(${DKCMAKE_BUILD} -DWITH_IPP=ON ${OPENCV})
-RASPBERRY_DEBUG_DKQCOMMAND(make opencv_core)
-RASPBERRY_DEBUG_DKQCOMMAND(make opencv_imgcodecs)
-RASPBERRY_DEBUG_DKQCOMMAND(make opencv_videoio)
+RASPBERRY_DEBUG_dk_queueCommand(${DKCMAKE_BUILD} -DWITH_IPP=ON ${OPENCV})
+RASPBERRY_DEBUG_dk_queueCommand(make opencv_core)
+RASPBERRY_DEBUG_dk_queueCommand(make opencv_imgcodecs)
+RASPBERRY_DEBUG_dk_queueCommand(make opencv_videoio)
 
 RASPBERRY_RELEASE_dk_setPath(${OPENCV}/${OS}/${RELEASE_DIR})
-RASPBERRY_RELEASE_DKQCOMMAND(${DKCMAKE_BUILD} -DWITH_IPP=ON ${OPENCV})
-RASPBERRY_RELEASE_DKQCOMMAND(make opencv_core)
-RASPBERRY_RELEASE_DKQCOMMAND(make opencv_imgcodecs)
-RASPBERRY_RELEASE_DKQCOMMAND(make opencv_videoio)
+RASPBERRY_RELEASE_dk_queueCommand(${DKCMAKE_BUILD} -DWITH_IPP=ON ${OPENCV})
+RASPBERRY_RELEASE_dk_queueCommand(make opencv_core)
+RASPBERRY_RELEASE_dk_queueCommand(make opencv_imgcodecs)
+RASPBERRY_RELEASE_dk_queueCommand(make opencv_videoio)
 
 
 ##ANDROID_NDK(${OPENCV_NAME})
 ANDROID_dk_setPath(${OPENCV}/${OS})
-ANDROID32_DKQCOMMAND(${DKCMAKE_BUILD} ${OPENCV})
-ANDROID64_DKQCOMMAND(${DKCMAKE_BUILD} ${OPENCV})
+ANDROID32_dk_queueCommand(${DKCMAKE_BUILD} ${OPENCV})
+ANDROID64_dk_queueCommand(${DKCMAKE_BUILD} ${OPENCV})
 ANDROID_VS(${OPENCV_NAME} OpenCV.sln)

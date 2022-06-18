@@ -49,15 +49,15 @@ RASPBERRY_dk_set	(XZ_CMAKE -DCMAKE_C_FLAGS=-DLZMA_API_STATIC -DCMAKE_CXX_FLAGS=-
 ANDROID_dk_set	(XZ_CMAKE -DCMAKE_C_FLAGS=-DLZMA_API_STATIC -DCMAKE_CXX_FLAGS=-DLZMA_API_STATIC -DLIBLZMA_INCLUDE_DIR=${XZ}/src/liblzma/api -DLIBLZMA_LIBRARY_DEBUG=${XZ}/${OS}/${DEBUG}/liblzma.a -DLIBLZMA_LIBRARY_RELEASE=${XZ}/${OS}/${DEBUG}/liblzma.a)
 
 dk_setPath(${XZ}/${BUILD_DIR})
-DKQCOMMAND(${DKCMAKE_BUILD} ${XZ})
+dk_queueCommand(${DKCMAKE_BUILD} ${XZ})
 VS(${XZ_NAME} xz.sln liblzma)
 #WIN_VS(${XZ_NAME} xz.sln liblzma)
 XCODE(${XZ_NAME} liblzma)
 #MAC_XCODE(${XZ_NAME} liblzma)
 #IOS_XCODE(${XZ_NAME} liblzma)
 #IOSSIM_XCODE(${XZ_NAME} liblzma)
-LINUX_DKQCOMMAND(make liblzma)
-RASPBERRY_DKQCOMMAND(make liblzma)
+LINUX_dk_queueCommand(make liblzma)
+RASPBERRY_dk_queueCommand(make liblzma)
 #ANDROID_VS(${XZ_NAME} xz.sln liblzma)	
 ############################################################
 
@@ -91,70 +91,70 @@ ANDROID_dk_set(XZ_CMAKE -DCMAKE_C_FLAGS=-DLZMA_API_STATIC -DCMAKE_CXX_FLAGS=-DLZ
 
 ### COMPILE ###
 WIN32_DEBUG_dk_setPath(${XZ}/${OS}/${DEBUG_DIR})
-WIN32_DEBUG_MSYS(${DKCONFIGURE_BUILD})
-WIN32_DEBUG_MSYS(make)
+WIN32_DEBUG_dk_msys(${DKCONFIGURE_BUILD})
+WIN32_DEBUG_dk_msys(make)
 WIN32_RELEASE_dk_setPath(${XZ}/${OS}/${RELEASE_DIR})
-WIN32_RELEASE_MSYS(${DKCONFIGURE_BUILD})
-WIN32_RELEASE_MSYS(make)
+WIN32_RELEASE_dk_msys(${DKCONFIGURE_BUILD})
+WIN32_RELEASE_dk_msys(make)
 
 
 # look at xz/windows/build.bash for details
 WIN64_DEBUG_dk_setPath(${XZ}/${OS}/${DEBUG_DIR})
-WIN64_DEBUG_MSYS(${DKCONFIGURE_BUILD} --prefix= --enable-silent-rules --disable-dependency-tracking --disable-nls --disable-scripts)
-WIN64_DEBUG_MSYS(make)
+WIN64_DEBUG_dk_msys(${DKCONFIGURE_BUILD} --prefix= --enable-silent-rules --disable-dependency-tracking --disable-nls --disable-scripts)
+WIN64_DEBUG_dk_msys(make)
 WIN64_RELEASE_dk_setPath(${XZ}/${OS}/${RELEASE_DIR})
-WIN64_DEBUG_MSYS(${DKCONFIGURE_BUILD}  --prefix= --enable-silent-rules --disable-dependency-tracking --disable-nls --disable-scripts)
-WIN64_RELEASE_MSYS(make)
+WIN64_DEBUG_dk_msys(${DKCONFIGURE_BUILD}  --prefix= --enable-silent-rules --disable-dependency-tracking --disable-nls --disable-scripts)
+WIN64_RELEASE_dk_msys(make)
 
 
 MAC_DEBUG_dk_setPath(${XZ}/${OS}/${DEBUG_DIR})
-MAC_DEBUG_DKQCOMMAND(${DKCONFIGURE_BUILD})
-MAC_DEBUG_DKQCOMMAND(make)
+MAC_DEBUG_dk_queueCommand(${DKCONFIGURE_BUILD})
+MAC_DEBUG_dk_queueCommand(make)
 MAC_RELEASE_dk_setPath(${XZ}/${OS}/${RELEASE_DIR})
-MAC_RELEASE_DKQCOMMAND(${DKCONFIGURE_BUILD})
-MAC_RELEASE_DKQCOMMAND(make)
+MAC_RELEASE_dk_queueCommand(${DKCONFIGURE_BUILD})
+MAC_RELEASE_dk_queueCommand(make)
 
 
 IOS_DEBUG_dk_setPath(${XZ}/${OS}/${DEBUG_DIR})
-IOS_DEBUG_DKQCOMMAND(${DKCONFIGURE_BUILD})
-IOS_DEBUG_DKQCOMMAND(make)
+IOS_DEBUG_dk_queueCommand(${DKCONFIGURE_BUILD})
+IOS_DEBUG_dk_queueCommand(make)
 IOS_RELEASE_dk_setPath(${XZ}/${OS}/${RELEASE_DIR})
-IOS_RELEASE_DKQCOMMAND(${DKCONFIGURE_BUILD})
-IOS_RELEASE_DKQCOMMAND(make)
+IOS_RELEASE_dk_queueCommand(${DKCONFIGURE_BUILD})
+IOS_RELEASE_dk_queueCommand(make)
 
 
 
 IOSSIM_DEBUG_dk_setPath(${XZ}/${OS}/${DEBUG_DIR})
-IOSSIM_DEBUG_DKQCOMMAND(${DKCONFIGURE_BUILD})
-IOSSIM_DEBUG_DKQCOMMAND(make)
+IOSSIM_DEBUG_dk_queueCommand(${DKCONFIGURE_BUILD})
+IOSSIM_DEBUG_dk_queueCommand(make)
 IOSSIM_RELEASE_dk_setPath(${XZ}/${OS}/${RELEASE_DIR})
-IOSSIM_RELEASE_DKQCOMMAND(${DKCONFIGURE_BUILD})
-IOSSIM_RELEASE_DKQCOMMAND(make)
+IOSSIM_RELEASE_dk_queueCommand(${DKCONFIGURE_BUILD})
+IOSSIM_RELEASE_dk_queueCommand(make)
 
 
 LINUX_DEBUG_dk_setPath(${XZ}/${OS}/${DEBUG_DIR})
-LINUX_DEBUG_DKQCOMMAND(${DKCONFIGURE_BUILD})
-LINUX_DEBUG_DKQCOMMAND(make)
+LINUX_DEBUG_dk_queueCommand(${DKCONFIGURE_BUILD})
+LINUX_DEBUG_dk_queueCommand(make)
 LINUX_RELEASE_dk_setPath(${XZ}/${OS}/${RELEASE_DIR})
-LINUX_RELEASE_DKQCOMMAND(${DKCONFIGURE_BUILD})
-LINUX_RELEASE_DKQCOMMAND(make)
+LINUX_RELEASE_dk_queueCommand(${DKCONFIGURE_BUILD})
+LINUX_RELEASE_dk_queueCommand(make)
 
 
 RASPBERRY_DEBUG_dk_setPath(${XZ}/${OS}/${DEBUG_DIR})
-RASPBERRY_DEBUG_DKQCOMMAND(${DKCONFIGURE_BUILD})
-RASPBERRY_DEBUG_DKQCOMMAND(make)
+RASPBERRY_DEBUG_dk_queueCommand(${DKCONFIGURE_BUILD})
+RASPBERRY_DEBUG_dk_queueCommand(make)
 RASPBERRY_RELEASE_dk_setPath(${XZ}/${OS}/${RELEASE_DIR})
-RASPBERRY_RELEASE_DKQCOMMAND(${DKCONFIGURE_BUILD})
-RASPBERRY_RELEASE_DKQCOMMAND(make)
+RASPBERRY_RELEASE_dk_queueCommand(${DKCONFIGURE_BUILD})
+RASPBERRY_RELEASE_dk_queueCommand(make)
 
 
-ANDROID_DEBUG_MSYS(${DKCONFIGURE_BUILD})
-ANDROID_DEBUG_MSYS(make)
-ANDROID_RELEASE_MSYS(${DKCONFIGURE_BUILD})
-ANDROID_RELEASE_MSYS(make)
+ANDROID_DEBUG_dk_msys(${DKCONFIGURE_BUILD})
+ANDROID_DEBUG_dk_msys(make)
+ANDROID_RELEASE_dk_msys(${DKCONFIGURE_BUILD})
+ANDROID_RELEASE_dk_msys(make)
 
 ANDROID_dk_setPath(${XZ}/${OS})
-ANDROID_DKQCOMMAND(${DKCMAKE_BUILD} ${XZ})
+ANDROID_dk_queueCommand(${DKCMAKE_BUILD} ${XZ})
 ANDROID_VS(${XZ_NAME} xz.sln liblzma)
 
 

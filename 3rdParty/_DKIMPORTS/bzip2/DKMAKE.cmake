@@ -85,7 +85,7 @@ if(MAC_64)
 		dk_copy(${BZIP2}/copy ${BZIP2}/${OS} TRUE)
 	endif()
 	MAC_dk_setPath(${BZIP2}/${OS})
-	MAC_DKQCOMMAND(make)
+	MAC_dk_queueCommand(make)
 endif()
 
 
@@ -94,7 +94,7 @@ if(LINUX)
 		dk_copy(${BZIP2}/copy ${BZIP2}/${OS} TRUE)
 	endif()
 	LINUX_dk_setPath(${BZIP2}/${OS})
-	LINUX_DKQCOMMAND(make)
+	LINUX_dk_queueCommand(make)
 endif()
 
 
@@ -103,7 +103,7 @@ if(RASPBERRY)
 		dk_copy(${BZIP2}/copy ${BZIP2}/${OS} TRUE)
 	endif()
 	RASPBERRY_dk_setPath(${BZIP2}/${OS})
-	RASPBERRY_DKQCOMMAND(make)
+	RASPBERRY_dk_queueCommand(make)
 endif()
 
 
@@ -112,5 +112,5 @@ if(ANDROID)
 		dk_copy(${BZIP2}/copy ${BZIP2}/${OS} TRUE)
 	endif()
 	ANDROID_dk_setPath(${BZIP2}/${OS})
-	ANDROID_DKQCOMMAND(make)
+	ANDROID_dk_queueCommand(make)
 endif()

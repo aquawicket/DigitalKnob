@@ -38,5 +38,5 @@ dk_install(${ANDROIDSDKTOOLS_DL} android-sdk-tools ${ANDROIDSDKTOOLS} PATCH)
 #license signing
 #if(EXISTS ${ANDROIDSDKTOOLS}/installed)
 #dk_depend(java)
-#DKCOMMAND(${ANDROIDSDKTOOLS}/bin/sdkmanager.bat --licenses)
+#dk_command(${ANDROIDSDKTOOLS}/bin/sdkmanager.bat --licenses)
 #endif()

@@ -26,12 +26,12 @@ UNIX_RELEASE_DKLIB(${BOXER}/${OS}/${RELEASE_DIR}/libBoxer.a)
 
 ### COMPILE ###
 dk_setPath(${BOXER}/${BUILD_DIR})
-DKCOMMAND(${DKCMAKE_BUILD} ${BOXER})
+dk_command(${DKCMAKE_BUILD} ${BOXER})
 
 WIN_VS(${BOXER_NAME} boxer.sln boxer)
 MAC_XCODE(${BOXER_NAME} boxer)
 IOS_XCODE(${BOXER_NAME} boxer)
 IOSSIM_XCODE(${BOXER_NAME} boxer)
-LINUX_DKQCOMMAND(make boxer)
-RASPBERRY_DKQCOMMAND(make boxer)
+LINUX_dk_queueCommand(make boxer)
+RASPBERRY_dk_queueCommand(make boxer)
 ANDROID_VS(${BOXER_NAME} boxer.sln boxer)

@@ -43,13 +43,13 @@ ANDROID_dk_set(LIBJPEG-TURBO_CMAKE -DJPEG_INCLUDE_DIR=${LIBJPEG-TURBO} -DJPEG_IN
 
 ### COMPILE ###
 dk_setPath(${LIBJPEG-TURBO}/${BUILD_DIR})
-DKQCOMMAND(${DKCMAKE_BUILD} -DWITH_SIMD=OFF ${LIBJPEG-TURBO})
+dk_queueCommand(${DKCMAKE_BUILD} -DWITH_SIMD=OFF ${LIBJPEG-TURBO})
 
 
 WIN_VS(${LIBJPEG-TURBO_NAME} libjpeg-turbo.sln turbojpeg-static)
 MAC_XCODE(${LIBJPEG-TURBO_NAME} turbojpeg-static)
 IOS_XCODE(${LIBJPEG-TURBO_NAME} turbojpeg-static)
 IOSSIM_XCODE(${LIBJPEG-TURBO_NAME} turbojpeg-static)
-LINUX_DKQCOMMAND(make turbojpeg-static)
-RASPBERRY_DKQCOMMAND(make turbojpeg-static)
+LINUX_dk_queueCommand(make turbojpeg-static)
+RASPBERRY_dk_queueCommand(make turbojpeg-static)
 ANDROID_VS(${LIBJPEG-TURBO_NAME} libjpeg-turbo.sln turbojpeg-static)

@@ -38,12 +38,12 @@ RASPBERRY_dk_set(JPEG_CMAKE -DJPEG_INCLUDE_DIR=${JPEG} -DJPEG_INCLUDE_DIR2=${JPE
 
 ### COMPILE ###
 dk_setPath(${JPEG}/${BUILD_DIR})
-DKQCOMMAND(${DKCMAKE_BUILD} ${JPEG})
+dk_queueCommand(${DKCMAKE_BUILD} ${JPEG})
 
 
 WIN_VS(${JPEG_NAME} jpeg.sln jpeg-static)
 MAC_XCODE(${JPEG_NAME} jpeg-static)
 IOS_XCODE(${JPEG_NAME} jpeg-static)
 IOSSIM_XCODE(${JPEG_NAME} jpeg-static)
-LINUX_DKQCOMMAND(make jpeg-static)
+LINUX_dk_queueCommand(make jpeg-static)
 ANDROID_VS(${JPEG_NAME} jpeg.sln jpeg-static)

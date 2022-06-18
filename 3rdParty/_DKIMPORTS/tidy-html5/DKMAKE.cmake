@@ -33,7 +33,7 @@ ANDROID_RELEASE_DKLIB(${TIDY-HTML5}/${OS}/${RELEASE_DIR}/libtidy.a)
 
 ### COMPILE ###
 dk_setPath(${TIDY-HTML5}/${BUILD_DIR})
-DKQCOMMAND(${DKCMAKE_BUILD} -DBUILD_SHARED_LIB=OFF ${ZLIB_CMAKE} ${TIDY-HTML5})
+dk_queueCommand(${DKCMAKE_BUILD} -DBUILD_SHARED_LIB=OFF ${ZLIB_CMAKE} ${TIDY-HTML5})
 
 
 VS(${TIDY-HTML5_NAME} tidy.sln tidy-static)
@@ -42,6 +42,6 @@ XCODE(${TIDY-HTML5_NAME} tidy-static)
 #MAC_XCODE(${TIDY-HTML5_NAME} tidy-static)
 #IOS_XCODE(${TIDY-HTML5_NAME} tidy-static)
 #IOSSIM_XCODE(${TIDY-HTML5_NAME} tidy-static)
-LINUX_DKQCOMMAND(make tidy-static)
-RASPBERRY_DKQCOMMAND(make tidy-static)
+LINUX_dk_queueCommand(make tidy-static)
+RASPBERRY_dk_queueCommand(make tidy-static)
 #ANDROID_VS(${TIDY-HTML5_NAME} tidy.sln tidy-static)
