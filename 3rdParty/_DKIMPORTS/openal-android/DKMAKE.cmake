@@ -24,9 +24,9 @@ dk_define(AL_LIBTYPE_STATIC)
 ANDROID_dk_include(${OPENAL}/include)
 ANDROID_dk_include(${OPENAL}/include/AL)
 ANDROID_dk_include(${OPENAL}/${OS}/${RELEASE_DIR}/jni)
-ANDROID_DEBUG_DKLIB(${OPENAL}/${OS}/${DEBUG_DIR}/obj/local/armeabi-v7a/libopenal.a)
-ANDROID_RELEASE_DKLIB(${OPENAL}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/libopenal.a)
+ANDROID_dk_libDebug(${OPENAL}/${OS}/${DEBUG_DIR}/obj/local/armeabi-v7a/libopenal.a)
+ANDROID_dk_libRelease(${OPENAL}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/libopenal.a)
 
 
 ### COMPILE ###
-ANDROID_NDK(${OPENAL_NAME})
+ANDROID_dk_ndk(${OPENAL_NAME})

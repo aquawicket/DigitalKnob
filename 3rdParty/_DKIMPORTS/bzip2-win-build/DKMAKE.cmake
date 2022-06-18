@@ -21,10 +21,10 @@ dk_import(https://github.com/kiyolee/bzip2-win-build.git)
 
 ### DKPLUGINS LINK ###
 dk_include(${BZIP2-WIN-BUILD})
-WIN32_DEBUG_DKLIB(${BZIP2-WIN-BUILD}/${OS}/${DEBUG_DIR}/libbz2-static.lib)
-WIN32_RELEASE_DKLIB(${BZIP2-WIN-BUILD}/${OS}/${RELEASE_DIR}/libbz2-static.lib)
-WIN64_DEBUG_DKLIB(${BZIP2-WIN-BUILD}/${OS}/x64/${DEBUG_DIR}/libbz2-static.lib)
-WIN64_RELEASE_DKLIB(${BZIP2-WIN-BUILD}/${OS}/x64/${RELEASE_DIR}/libbz2-static.lib)
+WIN32_dk_libDebug(${BZIP2-WIN-BUILD}/${OS}/${DEBUG_DIR}/libbz2-static.lib)
+WIN32_dk_libRelease(${BZIP2-WIN-BUILD}/${OS}/${RELEASE_DIR}/libbz2-static.lib)
+WIN64_dk_libDebug(${BZIP2-WIN-BUILD}/${OS}/x64/${DEBUG_DIR}/libbz2-static.lib)
+WIN64_dk_libRelease(${BZIP2-WIN-BUILD}/${OS}/x64/${RELEASE_DIR}/libbz2-static.lib)
 
 
 

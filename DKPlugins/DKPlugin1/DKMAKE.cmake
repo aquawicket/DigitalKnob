@@ -1,5 +1,5 @@
 dk_depend(DK)
-DKDLL(DKPlugin1)
+dk_dll(DKPlugin1)
 dk_assets(DKPlugin1)
 
 IF(WIN_32)

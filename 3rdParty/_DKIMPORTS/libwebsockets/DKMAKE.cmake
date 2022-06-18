@@ -11,14 +11,14 @@ dk_import(https://github.com/warmcat/libwebsockets)
 ### LINK ###
 dk_include(${LIBWEBSOCKETS}/lib)
 dk_include(${LIBWEBSOCKETS}/${OS})
-WIN_DEBUG_DKLIB(${LIBWEBSOCKETS}/${OS}/lib/${DEBUG_DIR}/websockets_static.lib)
-WIN_RELEASE_DKLIB(${LIBWEBSOCKETS}/${OS}/lib/${RELEASE_DIR}/websockets_static.lib)
-## APPLE_DEBUG_DKLIB(${LIBWEBSOCKETS}/${OS}/lib/${DEBUG_DIR}/libwebsockets.a)
-## APPLE_RELEASE_DKLIB(${LIBWEBSOCKETS}/${OS}/lib/${RELEASE_DIR}/libwebsockets.a)
-LINUX_DEBUG_DKLIB(${LIBWEBSOCKETS}/${OS}/${DEBUG_DIR}/lib/libwebsockets.a)
-LINUX_RELEASE_DKLIB(${LIBWEBSOCKETS}/${OS}/${RELEASE_DIR}/lib/libwebsockets.a)
-## ANDROID_DEBUG_DKLIB(${LIBWEBSOCKETS}/${OS}/${DEBUG_DIR}/obj/local/armeabi-v7a/libwebsockets.a)
-## ANDROID_RELEASE_DKLIB(${LIBWEBSOCKETS}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/libwebsockets.a)
+WIN_dk_libDebug(${LIBWEBSOCKETS}/${OS}/lib/${DEBUG_DIR}/websockets_static.lib)
+WIN_dk_libRelease(${LIBWEBSOCKETS}/${OS}/lib/${RELEASE_DIR}/websockets_static.lib)
+## APPLE_dk_libDebug(${LIBWEBSOCKETS}/${OS}/lib/${DEBUG_DIR}/libwebsockets.a)
+## APPLE_dk_libRelease(${LIBWEBSOCKETS}/${OS}/lib/${RELEASE_DIR}/libwebsockets.a)
+LINUX_dk_libDebug(${LIBWEBSOCKETS}/${OS}/${DEBUG_DIR}/lib/libwebsockets.a)
+LINUX_dk_libRelease(${LIBWEBSOCKETS}/${OS}/${RELEASE_DIR}/lib/libwebsockets.a)
+## ANDROID_dk_libDebug(${LIBWEBSOCKETS}/${OS}/${DEBUG_DIR}/obj/local/armeabi-v7a/libwebsockets.a)
+## ANDROID_dk_libRelease(${LIBWEBSOCKETS}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/libwebsockets.a)
 
 
 ### COMPILE ###

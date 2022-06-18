@@ -20,12 +20,12 @@ DKGITCLONE(https://github.com/vancegroup/freealut)
 ### LINK ###
 dk_define(AL_LIBTYPE_STATIC)
 dk_include(${FREEALUT}/include)
-WIN_DEBUG_DKLIB(${FREEALUT}/${OS}/${DEBUG_DIR}/alut_static.lib)
-WIN_RELEASE_DKLIB(${FREEALUT}/${OS}/${RELEASE_DIR}/alut_static.lib)
-APPLE_DEBUG_DKLIB(${FREEALUT}/${OS}/${DEBUG_DIR}/libalut_static.a)
-APPLE_RELEASE_DKLIB(${FREEALUT}/${OS}/${RELEASE_DIR}/libalut_static.a)
-LINUX_DEBUG_DKLIB(${FREEALUT}/${OS}/${DEBUG_DIR}/libalut_static.a)
-LINUX_RELEASE_DKLIB(${FREEALUT}/${OS}/${RELEASE_DIR}/libalut_static.a)
+WIN_dk_libDebug(${FREEALUT}/${OS}/${DEBUG_DIR}/alut_static.lib)
+WIN_dk_libRelease(${FREEALUT}/${OS}/${RELEASE_DIR}/alut_static.lib)
+APPLE_dk_libDebug(${FREEALUT}/${OS}/${DEBUG_DIR}/libalut_static.a)
+APPLE_dk_libRelease(${FREEALUT}/${OS}/${RELEASE_DIR}/libalut_static.a)
+LINUX_dk_libDebug(${FREEALUT}/${OS}/${DEBUG_DIR}/libalut_static.a)
+LINUX_dk_libRelease(${FREEALUT}/${OS}/${RELEASE_DIR}/libalut_static.a)
 
 
 
@@ -37,7 +37,7 @@ WIN_dk_VisualStudio(${FREEALUT_NAME} Alut.sln alut_static)
 
 
 MAC64_dk_queueCommand(${DKCMAKE_BUILD} ${OPENAL_MAC} ${FREEALUT})
-MAC_XCODE(${FREEALUT_NAME} alut_static)
+MAC_dk_xcode(${FREEALUT_NAME} alut_static)
 
 
 LINUX_dk_queueCommand(${DKCMAKE_BUILD} ${OPENAL_LINUX} ${FREEALUT})

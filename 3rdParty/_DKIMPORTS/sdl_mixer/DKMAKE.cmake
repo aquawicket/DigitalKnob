@@ -23,16 +23,16 @@ dk_import(https://www.libsdl.org/projects/SDL_mixer/release/SDL2_mixer-2.0.1.zip
 
 ### DKPLUGINS LINK ###
 dk_include(${SDL_MIXER})
-WIN_DEBUG_DKLIB(${SDL_MIXER}/${OS}/lib/${DEBUG_DIR}/SDL_mixer.lib)
-WIN_RELEASE_DKLIB(${SDL_MIXER}/${OS}/lib/${RELEASE_DIR}/SDL_mixer.lib)
-APPLE_DEBUG_DKLIB(${SDL_MIXER}/${OS}/lib/Debug/SDL_mixer.a)
-APPLE_RELEASE_DKLIB(${SDL_MIXER}/${OS}/lib/Release/SDL_mixer.a)
-LINUX_DEBUG_DKLIB(${SDL_MIXER}/${OS}/${DEBUG_DIR}/lib/SDL_mixer.a)
-LINUX_RELEASE_DKLIB(${SDL_MIXER}/${OS}/${RELEASE_DIR}/lib/SDL_mixer.a)
-RASPBERRY_DEBUG_DKLIB(${SDL_MIXER}/${OS}/${DEBUG_DIR}/lib/SDL_mixer.a)
-RASPBERRY_RELEASE_DKLIB(${SDL_MIXER}/${OS}/${RELEASE_DIR}/lib/SDL_mixer.a)
-ANDROID_DEBUG_DKLIB(${SDL_MIXER}/${OS}/${DEBUG_DIR}/obj/local/armeabi-v7a/libSDL2_mixer.a)
-ANDROID_RELEASE_DKLIB(${SDL_MIXER}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/libSDL2_mixer.a)
+WIN_dk_libDebug(${SDL_MIXER}/${OS}/lib/${DEBUG_DIR}/SDL_mixer.lib)
+WIN_dk_libRelease(${SDL_MIXER}/${OS}/lib/${RELEASE_DIR}/SDL_mixer.lib)
+APPLE_dk_libDebug(${SDL_MIXER}/${OS}/lib/Debug/SDL_mixer.a)
+APPLE_dk_libRelease(${SDL_MIXER}/${OS}/lib/Release/SDL_mixer.a)
+LINUX_dk_libDebug(${SDL_MIXER}/${OS}/${DEBUG_DIR}/lib/SDL_mixer.a)
+LINUX_dk_libRelease(${SDL_MIXER}/${OS}/${RELEASE_DIR}/lib/SDL_mixer.a)
+RASPBERRY_dk_libDebug(${SDL_MIXER}/${OS}/${DEBUG_DIR}/lib/SDL_mixer.a)
+RASPBERRY_dk_libRelease(${SDL_MIXER}/${OS}/${RELEASE_DIR}/lib/SDL_mixer.a)
+ANDROID_dk_libDebug(${SDL_MIXER}/${OS}/${DEBUG_DIR}/obj/local/armeabi-v7a/libSDL2_mixer.a)
+ANDROID_dk_libRelease(${SDL_MIXER}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/libSDL2_mixer.a)
 
 
 
@@ -43,10 +43,10 @@ dk_queueCommand(${DKCMAKE_BUILD} ${SDL_CMAKE} ${VORBIS_CMAKE} ${OGG_CMAKE} ${SMP
 
 dk_VisualStudio(${SDL_MIXER_NAME} SDLMIXER.sln SDLMIXER)
 #WIN_dk_VisualStudio(${SDL_MIXER_NAME} SDLMIXER.sln SDLMIXER)
-XCODE(${SDL_MIXER_NAME} SDLMIXER)
-#MAC_XCODE(${SDL_MIXER_NAME} SDLMIXER)
-#IOS_XCODE(${SDL_MIXER_NAME} SDLMIXER)
-#IOSSIM_XCODE(${SDL_MIXER_NAME} SDLMIXER)
+dk_xcode(${SDL_MIXER_NAME} SDLMIXER)
+#MAC_dk_xcode(${SDL_MIXER_NAME} SDLMIXER)
+#IOS_dk_xcode(${SDL_MIXER_NAME} SDLMIXER)
+#IOSSIM_dk_xcode(${SDL_MIXER_NAME} SDLMIXER)
 LINUX_dk_queueCommand(make SDLMIXER)
 RASPBERRY_dk_queueCommand(make SDLMIXER)
 #ANDROID_dk_VisualStudio(${SDL_MIXER_NAME} SDLMIXER.sln SDLMIXER)

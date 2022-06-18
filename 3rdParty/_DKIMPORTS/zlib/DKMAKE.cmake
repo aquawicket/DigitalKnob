@@ -8,10 +8,10 @@ dk_import(https://github.com/madler/zlib.git)
 ### DKPLUGINS LINK ###
 dk_include(${ZLIB})
 dk_include(${ZLIB}/${OS})
-WIN_DEBUG_DKLIB(${ZLIB}/${OS}/${DEBUG_DIR}/zlibstaticd.lib)
-WIN_RELEASE_DKLIB(${ZLIB}/${OS}/${RELEASE_DIR}/zlibstatic.lib)
-UNIX_DEBUG_DKLIB(${ZLIB}/${OS}/${DEBUG_DIR}/libz.a)
-UNIX_RELEASE_DKLIB(${ZLIB}/${OS}/${RELEASE_DIR}/libz.a)
+WIN_dk_libDebug(${ZLIB}/${OS}/${DEBUG_DIR}/zlibstaticd.lib)
+WIN_dk_libRelease(${ZLIB}/${OS}/${RELEASE_DIR}/zlibstatic.lib)
+UNIX_dk_libDebug(${ZLIB}/${OS}/${DEBUG_DIR}/libz.a)
+UNIX_dk_libRelease(${ZLIB}/${OS}/${RELEASE_DIR}/libz.a)
 
 
 ## 3RDPARTY LINK ##
@@ -30,6 +30,6 @@ dk_queueCommand(${DKCMAKE_BUILD} ${ZLIB})
 
 
 dk_VisualStudio(${ZLIB_NAME} zlib.sln zlibstatic) # windows, android
-XCODE(${ZLIB_NAME} zlibstatic)       # mac, ios, iossim
+dk_xcode(${ZLIB_NAME} zlibstatic)       # mac, ios, iossim
 LINUX_dk_queueCommand(make zlibstatic)
 RASPBERRY_dk_queueCommand(make zlibstatic)

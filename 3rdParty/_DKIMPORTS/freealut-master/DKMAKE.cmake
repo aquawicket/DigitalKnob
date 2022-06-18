@@ -11,9 +11,9 @@ dk_install(${FREEALUT_DL} freealut_master ${FREEALUT})
 
 ### LINK ###
 dk_include(${FREEALUT}/include)
-ANDROID_DEBUG_DKLIB(${FREEALUT}/${OS}/${DEBUG_DIR}/obj/local/armeabi-v7a/libalut.a)
-ANDROID_RELEASE_DKLIB(${FREEALUT}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/libalut.a)
+ANDROID_dk_libDebug(${FREEALUT}/${OS}/${DEBUG_DIR}/obj/local/armeabi-v7a/libalut.a)
+ANDROID_dk_libRelease(${FREEALUT}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/libalut.a)
 
 
 ### COMPILE ###
-ANDROID_NDK(${FREEALUT_NAME})
+ANDROID_dk_ndk(${FREEALUT_NAME})

@@ -19,16 +19,16 @@ dk_import(https://github.com/guillemj/libmd)
 
 ### LINK ###
 dk_include(${LIBMD}/include)
-WIN_DEBUG_DKLIB(${LIBMD}/${OS}/${DEBUG_DIR}/libmdd.lib)
-WIN_RELEASE_DKLIB(${LIBMD}/${OS}/${RELEASE_DIR}/libmd.lib)
-APPLE_DEBUG_DKLIB(${LIBMD}/${OS}/${DEBUG_DIR}/liblibmdd.a)
-APPLE_RELEASE_DKLIB(${LIBMD}/${OS}/${RELEASE_DIR}/liblibmd.a)
-LINUX_DEBUG_DKLIB(${LIBMD}/${OS}/${DEBUG_DIR}/liblibmdd.a)
-LINUX_RELEASE_DKLIB(${LIBMD}/${OS}/${RELEASE_DIR}/liblibmd.a)
-RASPBERRY_DEBUG_DKLIB(${LIBMD}/${OS}/${DEBUG_DIR}/liblibmdd.a)
-RASPBERRY_RELEASE_DKLIB(${LIBMD}/${OS}/${RELEASE_DIR}/liblibmd.a)
-ANDROID_DEBUG_DKLIB(${LIBMD}/${OS}/${DEBUG_DIR}/liblibmdd.a)
-ANDROID_RELEASE_DKLIB(${LIBMD}/${OS}/${RELEASE_DIR}/liblibmd.a)
+WIN_dk_libDebug(${LIBMD}/${OS}/${DEBUG_DIR}/libmdd.lib)
+WIN_dk_libRelease(${LIBMD}/${OS}/${RELEASE_DIR}/libmd.lib)
+APPLE_dk_libDebug(${LIBMD}/${OS}/${DEBUG_DIR}/liblibmdd.a)
+APPLE_dk_libRelease(${LIBMD}/${OS}/${RELEASE_DIR}/liblibmd.a)
+LINUX_dk_libDebug(${LIBMD}/${OS}/${DEBUG_DIR}/liblibmdd.a)
+LINUX_dk_libRelease(${LIBMD}/${OS}/${RELEASE_DIR}/liblibmd.a)
+RASPBERRY_dk_libDebug(${LIBMD}/${OS}/${DEBUG_DIR}/liblibmdd.a)
+RASPBERRY_dk_libRelease(${LIBMD}/${OS}/${RELEASE_DIR}/liblibmd.a)
+ANDROID_dk_libDebug(${LIBMD}/${OS}/${DEBUG_DIR}/liblibmdd.a)
+ANDROID_dk_libRelease(${LIBMD}/${OS}/${RELEASE_DIR}/liblibmd.a)
 
 
 ### 3RDPARTY LINK ###
@@ -98,7 +98,7 @@ RASPBERRY_RELEASE_dk_queueCommand(${DKCONFIGURE_BUILD})
 RASPBERRY_RELEASE_dk_queueCommand(make)
 
 
-ANDROID_NDK(${LIBMD_NAME})
+ANDROID_dk_ndk(${LIBMD_NAME})
 #ANDROID_DEBUG_dk_setPath(${LIBMD}/${OS}/${DEBUG_DIR})
 #ANDROID_DEBUG_dk_msys(${DKCONFIGURE_BUILD})
 #ANDROID_DEBUG_dk_msys(make)

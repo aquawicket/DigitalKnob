@@ -24,14 +24,14 @@ WIN_dk_set(IMAGEMAGICK_CONVERT ${IMAGEMAGICK}/convert.exe)
 
 ### LINK ###
 #dk_include(${IMAGEMAGICK}/${OS})
-#WIN_DEBUG_DKLIB(${IMAGEMAGICK}/${OS}/${DEBUG_DIR}/imagemagickd.lib)
-#WIN_RELEASE_DKLIB(${IMAGEMAGICK}/${OS}/${RELEASE_DIR}/imagemagick.lib)
-APPLE_DEBUG_DKLIB(${IMAGEMAGICK}/${OS}/${DEBUG_DIR}/libimagemagick.a)
-APPLE_RELEASE_DKLIB(${IMAGEMAGICK}/${OS}/${RELEASE_DIR}/libimagemagick.a)
-LINUX_DEBUG_DKLIB(${IMAGEMAGICK}/${OS}/${DEBUG_DIR}/libimagemagick.a)
-LINUX_RELEASE_DKLIB(${IMAGEMAGICK}/${OS}/${RELEASE_DIR}/libimagemagick.a)
-ANDROID_DEBUG_DKLIB(${IMAGEMAGICK}/${OS}/${DEBUG_DIR}/obj/local/armeabi-v7a/libimagemagick.a)
-ANDROID_RELEASE_DKLIB(${IMAGEMAGICK}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/libimagemagick.a)
+#WIN_dk_libDebug(${IMAGEMAGICK}/${OS}/${DEBUG_DIR}/imagemagickd.lib)
+#WIN_dk_libRelease(${IMAGEMAGICK}/${OS}/${RELEASE_DIR}/imagemagick.lib)
+APPLE_dk_libDebug(${IMAGEMAGICK}/${OS}/${DEBUG_DIR}/libimagemagick.a)
+APPLE_dk_libRelease(${IMAGEMAGICK}/${OS}/${RELEASE_DIR}/libimagemagick.a)
+LINUX_dk_libDebug(${IMAGEMAGICK}/${OS}/${DEBUG_DIR}/libimagemagick.a)
+LINUX_dk_libRelease(${IMAGEMAGICK}/${OS}/${RELEASE_DIR}/libimagemagick.a)
+ANDROID_dk_libDebug(${IMAGEMAGICK}/${OS}/${DEBUG_DIR}/obj/local/armeabi-v7a/libimagemagick.a)
+ANDROID_dk_libRelease(${IMAGEMAGICK}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/libimagemagick.a)
 
 
 ### COMPILE ###

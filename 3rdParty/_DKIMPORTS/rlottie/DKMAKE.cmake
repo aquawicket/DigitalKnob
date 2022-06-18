@@ -18,20 +18,20 @@ dk_import(https://github.com/Samsung/rlottie.git)
 ### LINK ###
 dk_include(${RLOTTIE}/inc)
 dk_include(${RLOTTIE}/${OS})
-WIN_DEBUG_DKLIB(${RLOTTIE}/${OS}/${DEBUG_DIR}/rlottie.lib)
-WIN_RELEASE_DKLIB(${RLOTTIE}/${OS}/${RELEASE_DIR}/rlottie.lib)
-MAC_DEBUG_DKLIB(${RLOTTIE}/${OS}/${DEBUG_DIR}/librlottie.a)
-MAC_RELEASE_DKLIB(${RLOTTIE}/${OS}/${RELEASE_DIR}/librlottie.a)
-IOS_DEBUG_DKLIB(${RLOTTIE}/${OS}/${DEBUG_DIR}/librlottie.a)
-IOS_RELEASE_DKLIB(${RLOTTIE}/${OS}/${RELEASE_DIR}/librlottie.a)
-IOSSIM_DEBUG_DKLIB(${RLOTTIE}/${OS}/${DEBUG_DIR}/librlottie.a)
-IOSSIM_RELEASE_DKLIB(${RLOTTIE}/${OS}/${RELEASE_DIR}/librlottie.a)
-LINUX_DEBUG_DKLIB(${RLOTTIE}/${OS}/${DEBUG_DIR}/librlottie.a)
-LINUX_RELEASE_DKLIB(${RLOTTIE}/${OS}/${RELEASE_DIR}/librlottie.a)
-RASPBERRY_DEBUG_DKLIB(${RLOTTIE}/${OS}/${DEBUG_DIR}/librlottie.a)
-RASPBERRY_RELEASE_DKLIB(${RLOTTIE}/${OS}/${RELEASE_DIR}/librlottie.a)
-ANDROID_DEBUG_DKLIB(${RLOTTIE}/${OS}/${DEBUG_DIR}/librlottie.a)
-ANDROID_RELEASE_DKLIB(${RLOTTIE}/${OS}/${RELEASE_DIR}/librlottie.a)
+WIN_dk_libDebug(${RLOTTIE}/${OS}/${DEBUG_DIR}/rlottie.lib)
+WIN_dk_libRelease(${RLOTTIE}/${OS}/${RELEASE_DIR}/rlottie.lib)
+MAC_dk_libDebug(${RLOTTIE}/${OS}/${DEBUG_DIR}/librlottie.a)
+MAC_dk_libRelease(${RLOTTIE}/${OS}/${RELEASE_DIR}/librlottie.a)
+IOS_dk_libDebug(${RLOTTIE}/${OS}/${DEBUG_DIR}/librlottie.a)
+IOS_dk_libRelease(${RLOTTIE}/${OS}/${RELEASE_DIR}/librlottie.a)
+IOSSIM_dk_libDebug(${RLOTTIE}/${OS}/${DEBUG_DIR}/librlottie.a)
+IOSSIM_dk_libRelease(${RLOTTIE}/${OS}/${RELEASE_DIR}/librlottie.a)
+LINUX_dk_libDebug(${RLOTTIE}/${OS}/${DEBUG_DIR}/librlottie.a)
+LINUX_dk_libRelease(${RLOTTIE}/${OS}/${RELEASE_DIR}/librlottie.a)
+RASPBERRY_dk_libDebug(${RLOTTIE}/${OS}/${DEBUG_DIR}/librlottie.a)
+RASPBERRY_dk_libRelease(${RLOTTIE}/${OS}/${RELEASE_DIR}/librlottie.a)
+ANDROID_dk_libDebug(${RLOTTIE}/${OS}/${DEBUG_DIR}/librlottie.a)
+ANDROID_dk_libRelease(${RLOTTIE}/${OS}/${RELEASE_DIR}/librlottie.a)
 
 
 ### COMPILE ###
@@ -43,15 +43,15 @@ WIN_dk_VisualStudio(${RLOTTIE_NAME} rlottie.sln rlottie)
 
 
 MAC_dk_queueCommand(${DKCMAKE_BUILD} ${RLOTTIE})
-MAC_XCODE(${RLOTTIE_NAME} rlottie)
+MAC_dk_xcode(${RLOTTIE_NAME} rlottie)
 
 
 IOS_dk_queueCommand(${DKCMAKE_BUILD} ${RLOTTIE})
-IOS_XCODE(${RLOTTIE_NAME} rlottie)
+IOS_dk_xcode(${RLOTTIE_NAME} rlottie)
 
 
 IOSSIM_dk_queueCommand(${DKCMAKE_BUILD} ${RLOTTIE})
-IOSSIM_XCODE(${RLOTTIE_NAME} rlottie)
+IOSSIM_dk_xcode(${RLOTTIE_NAME} rlottie)
 
 
 LINUX_DEBUG_dk_queueCommand(${DKCMAKE_BUILD} ${RLOTTIE})

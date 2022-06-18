@@ -396,7 +396,7 @@ endmacro()
 # 
 #	Watch a varible reading and writing access events
 #
-#	@variable: (Required) The variable to watch
+#	@variable:(Required)	The variable to watch
 #
 macro(dk_watch variable)
 	DKDEBUGFUNC(${ARGV})
@@ -409,7 +409,7 @@ endmacro()
 # 
 #	Description:  TODO
 #
-#	@variable:(Required)	The variable to watch
+#	@var:(Required)			The variable to watch
 #	@access:(Required) 		TODO
 #	@val:(Required) 		TODO
 #   @1st:(Required) 		TODO
@@ -663,7 +663,7 @@ function(dk_download src_path dest_path) # ARGV1 = dest_path
 		DKINFO("Finnished downloading ${dest_filename}")
 	endif() 
 endfunction()
-dk_aliasFunctions("DOWNLOAD")
+dk_aliasFunctions("dk_download")
 
 
 ###############################################################################
@@ -1100,21 +1100,21 @@ function(dk_install src_path import_name dest_path)
 		return()
 	endif()
 	DKDEBUG(" ")
-	DKDEBUG("dk_install((): src_path = ${src_path}")
+	DKDEBUG("src_path = ${src_path}")
 	dk_getDirectory(${src_path} src_directory)
-	DKDEBUG("dk_install((): src_directory = ${src_directory}")
+	DKDEBUG("src_directory = ${src_directory}")
 	dk_getFilename(${src_path} src_filename)
-	DKDEBUG("dk_install((): src_filename = ${src_filename}")
+	DKDEBUG("src_filename = ${src_filename}")
 	dk_getExtension(${src_filename} src_extension)
-	DKDEBUG("dk_install((): src_extension = ${src_extension}")
+	DKDEBUG("src_extension = ${src_extension}")
 	DKDEBUG(" ")
-	DKDEBUG("dk_install((): dest_path = ${dest_path}")
+	DKDEBUG("dest_path = ${dest_path}")
 	dk_getDirectory(${dest_path} dest_directory)
-	DKDEBUG("dk_install((): dest_directory = ${dest_directory}")
+	DKDEBUG("dest_directory = ${dest_directory}")
 	dk_getFilename(${dest_path} dest_filename)
-	DKDEBUG("dk_install((): dest_filename = ${dest_filename}")
+	DKDEBUG("dest_filename = ${dest_filename}")
 	dk_getExtension(${dest_filename} dest_extension)
-	DKDEBUG("dk_install((): dest_extension = ${dest_extension}")
+	DKDEBUG("dest_extension = ${dest_extension}")
 	DKDEBUG(" ")
 	
 	# let's check that the scr_filename has at least the name of the target in it somewhere, or else we gotta rename it
@@ -1264,7 +1264,7 @@ function(dk_executeProcess commands)
 	endif()	
 	
 	DKINFO("")
-	DKINFO("*** Commands ***")
+	DKINFO("*** dk_executeProcess ***")
 	DKINFO("-> ${commands}")
 	DKINFO("")
 	
@@ -1512,18 +1512,9 @@ dk_aliasFunctions("dk_VisualStudio" "NO_DEBUG_RELEASE_TAGS")
 
 
 ###############################################################################
-# VISUAL_STUDIO(args)
+# dk_xcodeDebug(folder)
 #
-macro(VISUAL_STUDIO)
-	DKDEBUGFUNC(${ARGV})
-	dk_VisualStudio(${ARGV})
-endmacro()
-
-
-###############################################################################
-# DEBUG_XCODE(folder)
-#
-function(DEBUG_XCODE folder)
+function(dk_xcodeDebug folder)
 	DKDEBUGFUNC(${ARGV})
 	if(NOT MAC_HOST)
 		return()
@@ -1536,13 +1527,13 @@ function(DEBUG_XCODE folder)
 		endif()
 	endif()
 endfunction()
-dk_aliasFunctions("DEBUG_XCODE" "NO_DEBUG_RELEASE_TAGS")
+dk_aliasFunctions("dk_xcodeDebug" "NO_DEBUG_RELEASE_TAGS")
 
 
 ###############################################################################
-# RELEASE_XCODE(folder)
+# dk_xcodeRelease(folder)
 #
-function(RELEASE_XCODE folder)
+function(dk_xcodeRelease folder)
 	DKDEBUGFUNC(${ARGV})
 	if(NOT MAC_HOST)
 		return()
@@ -1555,24 +1546,24 @@ function(RELEASE_XCODE folder)
 		endif()
 	endif()
 endfunction()
-dk_aliasFunctions("RELEASE_XCODE" "NO_DEBUG_RELEASE_TAGS")
+dk_aliasFunctions("dk_xcodeRelease" "NO_DEBUG_RELEASE_TAGS")
 
 
 ###############################################################################
-# XCODE(args)
+# dk_xcode(args)
 #
-function(XCODE)
+function(dk_xcode)
 	DKDEBUGFUNC(${ARGV})
-	DEBUG_XCODE(${ARGV})
-	RELEASE_XCODE(${ARGV})
+	dk_xcodeDebug(${ARGV})
+	dk_xcodeRelease(${ARGV})
 endfunction()
-dk_aliasFunctions("XCODE" "NO_DEBUG_RELEASE_TAGS")
+dk_aliasFunctions("dk_xcode" "NO_DEBUG_RELEASE_TAGS")
 
 
 ###############################################################################
-# DEBUG_NDK(folder)
+# dk_ndkDebug(folder)
 #
-function(DEBUG_NDK folder)
+function(dk_ndkDebug folder)
 	DKDEBUGFUNC(${ARGV})
 	if(DEBUG AND QUEUE_BUILD)
 		if(WIN_HOST)
@@ -1583,13 +1574,13 @@ function(DEBUG_NDK folder)
 		endif()
 	endif()
 endfunction()
-dk_aliasFunctions("DEBUG_NDK" "NO_DEBUG_RELEASE_TAGS")
+dk_aliasFunctions("dk_ndkDebug" "NO_DEBUG_RELEASE_TAGS")
 
 
 ###############################################################################
-# RELEASE_NDK(folder)
+# dk_ndkRelease(folder)
 #
-function(RELEASE_NDK folder)
+function(dk_ndkRelease folder)
 	DKDEBUGFUNC(${ARGV})
 	if(RELEASE AND QUEUE_BUILD)
 		if(WIN_HOST)
@@ -1600,33 +1591,33 @@ function(RELEASE_NDK folder)
 		endif()
 	endif()
 endfunction()
-dk_aliasFunctions("RELEASE_NDK" "NO_DEBUG_RELEASE_TAGS")
+dk_aliasFunctions("dk_ndkRelease" "NO_DEBUG_RELEASE_TAGS")
 
 
 ###############################################################################
-# NDK(args)
+# dk_ndk(args)
 #
-function(NDK)
+function(dk_ndk)
 	DKDEBUGFUNC(${ARGV})
-	DEBUG_NDK(${ARGV})
-	RELEASE_NDK(${ARGV})
+	dk_ndkDebug(${ARGV})
+	dk_ndkRelease(${ARGV})
 endfunction()
-dk_aliasFunctions("NDK" "NO_DEBUG_RELEASE_TAGS")
+dk_aliasFunctions("dk_ndk" "NO_DEBUG_RELEASE_TAGS")
 
 
 ###############################################################################
-# MAKE(lib)
+# dk_make(lib)
 #
-function(MAKE lib)
+function(dk_make lib)
 	DKDEBUGFUNC(${ARGV})
 	dk_queueCommand(make ${ARGV})
 endfunction()
 
 
 ###############################################################################
-# DKLIB(lib_path)
+# dk_lib(lib_path)
 #
-function(DKLIB lib_path)
+function(dk_lib lib_path)
 	DKDEBUGFUNC(${ARGV})
 	foreach(item ${ARGV})
 		#dk_set(LIBLIST "${LIBLIST} ${lib_path}") ## used for double checking
@@ -1647,13 +1638,13 @@ function(DKLIB lib_path)
 		
 	endforeach()
 endfunction()
-dk_aliasFunctions("DKLIB" "NO_DEBUG_RELEASE_TAGS")
+dk_aliasFunctions("dk_lib" "NO_DEBUG_RELEASE_TAGS")
 
 
 ###############################################################################
-# DEBUG_DKLI(lib_path)
+# dk_libDebug(lib_path)
 #
-function(DEBUG_DKLIB lib_path)
+function(dk_libDebug lib_path)
 	DKDEBUGFUNC(${ARGV})
 	if(NOT DEBUG)
 		return()
@@ -1679,13 +1670,13 @@ function(DEBUG_DKLIB lib_path)
 	endif()
 	
 endfunction()
-dk_aliasFunctions("DEBUG_DKLIB" "NO_DEBUG_RELEASE_TAGS")
+dk_aliasFunctions("dk_libDebug" "NO_DEBUG_RELEASE_TAGS")
 
 
 ###############################################################################
-# RELEASE_DKLIB(lib_path)
+# dk_libRelease(lib_path)
 #
-function(RELEASE_DKLIB lib_path)
+function(dk_libRelease lib_path)
 	DKDEBUGFUNC(${ARGV})
 	if(NOT RELEASE)
 		return()
@@ -1711,7 +1702,7 @@ function(RELEASE_DKLIB lib_path)
 	endif()
 	
 endfunction()
-dk_aliasFunctions("RELEASE_DKLIB" "NO_DEBUG_RELEASE_TAGS")
+dk_aliasFunctions("dk_libRelease" "NO_DEBUG_RELEASE_TAGS")
 
 
 ###############################################################################
@@ -1797,16 +1788,16 @@ function(generateCmake plugin_name)
 	endif()
 	
 	dk_enable(${plugin_name})
-	WIN_DEBUG_DKLIB(${plugin_path}/${OS}/${DEBUG_DIR}/${plugin_name}.lib)
-	WIN_RELEASE_DKLIB(${plugin_path}/${OS}/${RELEASE_DIR}/${plugin_name}.lib)
-	APPLE_DEBUG_DKLIB(${plugin_path}/${OS}/${DEBUG_DIR}/lib${plugin_name}.a)
-	APPLE_RELEASE_DKLIB(${plugin_path}/${OS}/${RELEASE_DIR}/lib${plugin_name}.a)
-	LINUX_DEBUG_DKLIB(${plugin_path}/${OS}/${DEBUG_DIR}/lib${plugin_name}.a)
-	LINUX_RELEASE_DKLIB(${plugin_path}/${OS}/${RELEASE_DIR}/lib${plugin_name}.a)
-	RASPBERRY_DEBUG_DKLIB(${plugin_path}/${OS}/${DEBUG_DIR}/lib${plugin_name}.a)
-	RASPBERRY_RELEASE_DKLIB(${plugin_path}/${OS}/${RELEASE_DIR}/lib${plugin_name}.a)
-	ANDROID_DEBUG_DKLIB(${plugin_path}/${OS}/${DEBUG_DIR}/lib${plugin_name}.a)
-	ANDROID_RELEASE_DKLIB(${plugin_path}/${OS}/${RELEASE_DIR}/lib${plugin_name}.a)
+	WIN_dk_libDebug(${plugin_path}/${OS}/${DEBUG_DIR}/${plugin_name}.lib)
+	WIN_dk_libRelease(${plugin_path}/${OS}/${RELEASE_DIR}/${plugin_name}.lib)
+	APPLE_dk_libDebug(${plugin_path}/${OS}/${DEBUG_DIR}/lib${plugin_name}.a)
+	APPLE_dk_libRelease(${plugin_path}/${OS}/${RELEASE_DIR}/lib${plugin_name}.a)
+	LINUX_dk_libDebug(${plugin_path}/${OS}/${DEBUG_DIR}/lib${plugin_name}.a)
+	LINUX_dk_libRelease(${plugin_path}/${OS}/${RELEASE_DIR}/lib${plugin_name}.a)
+	RASPBERRY_dk_libDebug(${plugin_path}/${OS}/${DEBUG_DIR}/lib${plugin_name}.a)
+	RASPBERRY_dk_libRelease(${plugin_path}/${OS}/${RELEASE_DIR}/lib${plugin_name}.a)
+	ANDROID_dk_libDebug(${plugin_path}/${OS}/${DEBUG_DIR}/lib${plugin_name}.a)
+	ANDROID_dk_libRelease(${plugin_path}/${OS}/${RELEASE_DIR}/lib${plugin_name}.a)
 	if(REBUILD OR REBUILDALL)
 		dk_set(QUEUE_BUILD ON)
 	endif()
@@ -1816,13 +1807,13 @@ endfunction()
 
 
 ###############################################################################
-# DKDLL(name)
+# dk_dll(name)
 #
-function(DKDLL name)
+function(dk_dll name)
 	DKDEBUGFUNC(${ARGV})
 	dk_getPathToPlugin(${name} plugin_path)
 	if(NOT EXISTS "${plugin_path}")
-		DKINFO("DKDLL(): ${name} plugin not found")
+		DKERROR("${name} plugin not found")
 		return()
 	endif()
 	dk_include(${plugin_path})
@@ -1894,14 +1885,14 @@ endfunction()
 
 
 ###############################################################################
-# DKEXECUTABLE(name)
+# dk_executable(name)
 #
 #	
-function(DKEXECUTABLE name)
+function(dk_executable name)
 	DKDEBUGFUNC(${ARGV})
 	dk_getPathToPlugin(${name} plugin_path)
 	if(NOT EXISTS "${plugin_path}")
-		DKERROR("DKEXECUTABLE(): ${name} plugin not found")
+		DKERROR("${name} plugin not found")
 		return()
 	endif()
 	dk_include(${plugin_path})
@@ -1958,7 +1949,7 @@ function(dk_addToPluginList name)
 	DKDEBUGFUNC(${ARGV})
 	dk_getPathToPlugin(${name} plugin_path)
 	if(NOT EXISTS "${plugin_path}")
-		DKERROR("DKEXECUTABLE(): ${name} plugin not found")
+		DKERROR("${name} plugin not found")
 		return()
 	endif()
 	dk_include(${plugin_path})
@@ -2159,10 +2150,10 @@ function(DKRUNDEPENDS name)
 	DKDEBUGFUNC(${ARGV})
 	dk_getPathToPlugin(${name} plugin_path)
 	if(NOT plugin_path)
-		DKERROR("DKRUNDEPENDS() ${name} plugin not found")
+		DKERROR("${name} plugin not found")
 		return()
 	endif()
-	#DKINFO("FOUND ${name} DK makefile at ${plugin_path}")
+	#DKDEBUG("FOUND ${name} DK makefile at ${plugin_path}")
 	
 	file(STRINGS ${plugin_path}/DKMAKE.cmake lines)
 	unset(disable_script)

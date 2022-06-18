@@ -1,5 +1,5 @@
 dk_set(QUEUE_BUILD ON)
-DKEXECUTABLE(DKRestart)
+dk_executable(DKRestart)
 
 if(WIN)
 	if(DEBUG)

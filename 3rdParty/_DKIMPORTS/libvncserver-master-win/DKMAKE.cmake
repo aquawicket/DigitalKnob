@@ -27,10 +27,10 @@ dk_include(${VNCSERVER})
 dk_include(${VNCSERVER}/examples)
 dk_include(${VNCSERVER}/${OS})
 dk_include(${VNCSERVER}/${OS}/${RELEASE_DIR})
-WIN_DEBUG_DKLIB(${VNCSERVER}/${OS}/${DEBUG_DIR}/vncserver.lib)
-WIN_RELEASE_DKLIB(${VNCSERVER}/${OS}/${RELEASE_DIR}/vncserver.lib)
-WIN_DEBUG_DKLIB(${VNCSERVER}/${OS}/${DEBUG_DIR}/vncclient.lib)
-WIN_RELEASE_DKLIB(${VNCSERVER}/${OS}/${RELEASE_DIR}/vncclient.lib)
+WIN_dk_libDebug(${VNCSERVER}/${OS}/${DEBUG_DIR}/vncserver.lib)
+WIN_dk_libRelease(${VNCSERVER}/${OS}/${RELEASE_DIR}/vncserver.lib)
+WIN_dk_libDebug(${VNCSERVER}/${OS}/${DEBUG_DIR}/vncclient.lib)
+WIN_dk_libRelease(${VNCSERVER}/${OS}/${RELEASE_DIR}/vncclient.lib)
 
 
 ### COMPILE ###

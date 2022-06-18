@@ -18,10 +18,10 @@ dk_import(https://github.com/aaronmjacobs/Boxer.git)
 ### LINK ###
 dk_include(${BOXER}/include)
 dk_include(${BOXER}/${OS})
-WIN_DEBUG_DKLIB(${BOXER}/${OS}/${DEBUG_DIR}/Boxer.lib)
-WIN_RELEASE_DKLIB(${BOXER}/${OS}/${RELEASE_DIR}/Boxer.lib)
-UNIX_DEBUG_DKLIB(${BOXER}/${OS}/${DEBUG_DIR}/libBoxer.a)
-UNIX_RELEASE_DKLIB(${BOXER}/${OS}/${RELEASE_DIR}/libBoxer.a)
+WIN_dk_libDebug(${BOXER}/${OS}/${DEBUG_DIR}/Boxer.lib)
+WIN_dk_libRelease(${BOXER}/${OS}/${RELEASE_DIR}/Boxer.lib)
+UNIX_dk_libDebug(${BOXER}/${OS}/${DEBUG_DIR}/libBoxer.a)
+UNIX_dk_libRelease(${BOXER}/${OS}/${RELEASE_DIR}/libBoxer.a)
 
 
 ### COMPILE ###
@@ -29,9 +29,9 @@ dk_setPath(${BOXER}/${BUILD_DIR})
 dk_command(${DKCMAKE_BUILD} ${BOXER})
 
 WIN_dk_VisualStudio(${BOXER_NAME} boxer.sln boxer)
-MAC_XCODE(${BOXER_NAME} boxer)
-IOS_XCODE(${BOXER_NAME} boxer)
-IOSSIM_XCODE(${BOXER_NAME} boxer)
+MAC_dk_xcode(${BOXER_NAME} boxer)
+IOS_dk_xcode(${BOXER_NAME} boxer)
+IOSSIM_dk_xcode(${BOXER_NAME} boxer)
 LINUX_dk_queueCommand(make boxer)
 RASPBERRY_dk_queueCommand(make boxer)
 ANDROID_dk_VisualStudio(${BOXER_NAME} boxer.sln boxer)

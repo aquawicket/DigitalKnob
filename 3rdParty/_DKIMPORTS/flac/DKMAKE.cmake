@@ -16,14 +16,14 @@ dk_install(${FLAC_DL} flac ${FLAC})
 
 ### LINK ###
 dk_include(${FLAC})
-WIN_DEBUG_DKLIB(${FLAC}/${OS}/${DEBUG_DIR}/src/libFLAC/.libs/libFLAC-static.a)
-WIN_RELEASE_DKLIB(${FLAC}/${OS}/${RELEASE_DIR}/src/libFLAC/.libs/libFLAC-static.a)
-APPLE_DEBUG_DKLIB(${FLAC}/${OS}/${DEBUG_DIR}/src/libFLAC/.libs/libFLAC-static.a)
-APPLE_RELEASE_DKLIB(${FLAC}/${OS}/${RELEASE_DIR}/src/libFLAC/.libs/libFLAC-static.a)
-LINUX_DEBUG_DKLIB(${FLAC}/${OS}/${DEBUG_DIR}/src/libFLAC/.libs/libFLAC-static.a)
-LINUX_RELEASE_DKLIB(${FLAC}/${OS}/${RELEASE_DIR}/src/libFLAC/.libs/libFLAC-static.a)
-ANDROID_DEBUG_DKLIB(${FLAC}/${OS}/${DEBUG_DIR}/src/libFLAC/.libs/libFLAC-static.a)
-ANDROID_RELEASE_DKLIB(${FLAC}/${OS}/${RELEASE_DIR}/src/libFLAC/.libs/libFLAC-static.a)
+WIN_dk_libDebug(${FLAC}/${OS}/${DEBUG_DIR}/src/libFLAC/.libs/libFLAC-static.a)
+WIN_dk_libRelease(${FLAC}/${OS}/${RELEASE_DIR}/src/libFLAC/.libs/libFLAC-static.a)
+APPLE_dk_libDebug(${FLAC}/${OS}/${DEBUG_DIR}/src/libFLAC/.libs/libFLAC-static.a)
+APPLE_dk_libRelease(${FLAC}/${OS}/${RELEASE_DIR}/src/libFLAC/.libs/libFLAC-static.a)
+LINUX_dk_libDebug(${FLAC}/${OS}/${DEBUG_DIR}/src/libFLAC/.libs/libFLAC-static.a)
+LINUX_dk_libRelease(${FLAC}/${OS}/${RELEASE_DIR}/src/libFLAC/.libs/libFLAC-static.a)
+ANDROID_dk_libDebug(${FLAC}/${OS}/${DEBUG_DIR}/src/libFLAC/.libs/libFLAC-static.a)
+ANDROID_dk_libRelease(${FLAC}/${OS}/${RELEASE_DIR}/src/libFLAC/.libs/libFLAC-static.a)
 
 
 ### 3rd Party Link ###

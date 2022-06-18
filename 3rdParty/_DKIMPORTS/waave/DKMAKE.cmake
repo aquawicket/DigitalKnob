@@ -11,14 +11,14 @@ dk_import(https://sourceforge.net/projects/waave/files/waave/waave-3.01.tar.gz)
 
 ### LINK ###
 dk_include(${WAAVE}/src)
-WIN_DEBUG_DKLIB(${WAAVE}/${OS}/${DEBUG_DIR}/waave.lib)
-WIN_RELEASE_DKLIB(${WAAVE}/${OS}/${RELEASE_DIR}/waave.lib)
-APPLE_DEBUG_DKLIB(${WAAVE}/${OS}/${DEBUG_DIR}/libwaave.a)
-APPLE_RELEASE_DKLIB(${WAAVE}/${OS}/${RELEASE_DIR}/libwaave.a)
-LINUX_DEBUG_DKLIB(${WAAVE}/${OS}/${DEBUG_DIR}/libwaave.a)
-LINUX_RELEASE_DKLIB(${WAAVE}/${OS}/${RELEASE_DIR}/libwaave.a)
-ANDROID_DEBUG_DKLIB(${WAAVE}/${OS}/${DEBUG_DIR}/obj/local/armeabi-v7a/libwaave.a)
-ANDROID_RELEASE_DKLIB(${WAAVE}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/libwaave.a)
+WIN_dk_libDebug(${WAAVE}/${OS}/${DEBUG_DIR}/waave.lib)
+WIN_dk_libRelease(${WAAVE}/${OS}/${RELEASE_DIR}/waave.lib)
+APPLE_dk_libDebug(${WAAVE}/${OS}/${DEBUG_DIR}/libwaave.a)
+APPLE_dk_libRelease(${WAAVE}/${OS}/${RELEASE_DIR}/libwaave.a)
+LINUX_dk_libDebug(${WAAVE}/${OS}/${DEBUG_DIR}/libwaave.a)
+LINUX_dk_libRelease(${WAAVE}/${OS}/${RELEASE_DIR}/libwaave.a)
+ANDROID_dk_libDebug(${WAAVE}/${OS}/${DEBUG_DIR}/obj/local/armeabi-v7a/libwaave.a)
+ANDROID_dk_libRelease(${WAAVE}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/libwaave.a)
 
 
 ### COMPILE ###
@@ -31,17 +31,17 @@ WIN_dk_VisualStudio(${WAAVE_NAME} waave.sln waave)
 
 
 MAC64_dk_queueCommand(${DKCMAKE_BUILD} ${WAAVE})
-MAC_XCODE(${WAAVE_NAME} waave)
+MAC_dk_xcode(${WAAVE_NAME} waave)
 
 
 
 IOS64_dk_queueCommand(${DKCMAKE_BUILD} ${WAAVE})
-IOS_XCODE(${WAAVE_NAME} waave)
+IOS_dk_xcode(${WAAVE_NAME} waave)
 
 
 
 IOSSIM64_dk_queueCommand(${DKCMAKE_BUILD} ${WAAVE})
-IOSSIM_XCODE(${WAAVE_NAME} waave)
+IOSSIM_dk_xcode(${WAAVE_NAME} waave)
 
 
 
@@ -53,4 +53,4 @@ LINUX_RELEASE_dk_queueCommand(${DKCMAKE_BUILD} ${WAAVE})
 LINUX_RELEASE_dk_queueCommand(make waave)
 
 
-ANDROID_NDK(${WAAVE_NAME})
+ANDROID_dk_ndk(${WAAVE_NAME})

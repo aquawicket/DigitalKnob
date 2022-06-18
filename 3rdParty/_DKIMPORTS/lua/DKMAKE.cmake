@@ -17,16 +17,16 @@ dk_install(${LUA_DL} lua ${LUA})
 ### LINK ###
 dk_include(${LUA}/include)
 dk_include(${LUA}/${OS})
-WIN_DEBUG_DKLIB(${LUA}/${OS}/${DEBUG_DIR}/luad.lib)
-WIN_RELEASE_DKLIB(${LUA}/${OS}/${RELEASE_DIR}/lua.lib)
-APPLE_DEBUG_DKLIB(${LUA}/${OS}/${DEBUG_DIR}/luad.a)
-APPLE_RELEASE_DKLIB(${LUA}/${OS}/${RELEASE_DIR}/lua.a)
-LINUX_DEBUG_DKLIB(${LUA}/${OS}/${DEBUG_DIR}/luad.a)
-LINUX_RELEASE_DKLIB(${LUA}/${OS}/${RELEASE_DIR}/lua.a)
-RASPBERRY_DEBUG_DKLIB(${LUA}/${OS}/${DEBUG_DIR}/luad.a)
-RASPBERRY_RELEASE_DKLIB(${LUA}/${OS}/${RELEASE_DIR}/lua.a)
-ANDROID_DEBUG_DKLIB(${LUA}/${OS}/${DEBUG_DIR}/luad.a)
-ANDROID_RELEASE_DKLIB(${LUA}/${OS}/${RELEASE_DIR}/lua.a)
+WIN_dk_libDebug(${LUA}/${OS}/${DEBUG_DIR}/luad.lib)
+WIN_dk_libRelease(${LUA}/${OS}/${RELEASE_DIR}/lua.lib)
+APPLE_dk_libDebug(${LUA}/${OS}/${DEBUG_DIR}/luad.a)
+APPLE_dk_libRelease(${LUA}/${OS}/${RELEASE_DIR}/lua.a)
+LINUX_dk_libDebug(${LUA}/${OS}/${DEBUG_DIR}/luad.a)
+LINUX_dk_libRelease(${LUA}/${OS}/${RELEASE_DIR}/lua.a)
+RASPBERRY_dk_libDebug(${LUA}/${OS}/${DEBUG_DIR}/luad.a)
+RASPBERRY_dk_libRelease(${LUA}/${OS}/${RELEASE_DIR}/lua.a)
+ANDROID_dk_libDebug(${LUA}/${OS}/${DEBUG_DIR}/luad.a)
+ANDROID_dk_libRelease(${LUA}/${OS}/${RELEASE_DIR}/lua.a)
 
 
 ### COMPILE ###
@@ -39,19 +39,19 @@ WIN_dk_VisualStudio(${LUA_NAME} lua.sln lua)
 MAC_dk_setPath(${LUA}/${OS})
 MAC32_dk_queueCommand(${DKCMAKE_BUILD} ${LUA})
 MAC64_dk_queueCommand(${DKCMAKE_BUILD} ${LUA})
-MAC_XCODE(${LUA_NAME} lua)
+MAC_dk_xcode(${LUA_NAME} lua)
 
 
 IOS_dk_setPath(${LUA}/${OS})
 IOS32_dk_queueCommand(${DKCMAKE_BUILD} ${LUA})
 IOS64_dk_queueCommand(${DKCMAKE_BUILD} ${LUA})
-IOS_XCODE(${LUA_NAME} lua)
+IOS_dk_xcode(${LUA_NAME} lua)
 
 
 IOSSIM_dk_setPath(${LUA}/${OS})
 IOSSIM32_dk_queueCommand(${DKCMAKE_BUILD} ${LUA})
 IOSSIM64_dk_queueCommand(${DKCMAKE_BUILD} ${LUA})
-IOSSIM_XCODE(${LUA_NAME} lua)
+IOSSIM_dk_xcode(${LUA_NAME} lua)
 
 
 LINUX_DEBUG_dk_setPath(${LUA}/${OS}/${DEBUG_DIR})
@@ -72,7 +72,7 @@ RASPBERRY_RELEASE_dk_queueCommand(${DKCMAKE_BUILD} ${LUA})
 RASPBERRY_RELEASE_dk_queueCommand(make lua)
 
 
-##ANDROID_NDK(${LUA_NAME})
+##ANDROID_dk_ndk(${LUA_NAME})
 ANDROID_dk_setPath(${LUA}/${OS})
 ANDROID32_dk_queueCommand(${DKCMAKE_BUILD} ${LUA})
 ANDROID64_dk_queueCommand(${DKCMAKE_BUILD} ${LUA})

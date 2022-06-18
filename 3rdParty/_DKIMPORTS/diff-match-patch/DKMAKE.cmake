@@ -14,16 +14,16 @@ dk_import(https://github.com/google/diff-match-patch.git)
 
 ### LINK ###
 # dk_include(${DIFF_MATCH_PATCH}/include)
-# WIN_DEBUG_DKLIB(${DIFF_MATCH_PATCH}/${OS}/${DEBUG_DIR}/diff-match-patchd.lib)
-# WIN_RELEASE_DKLIB(${DIFF_MATCH_PATCH}/${OS}/${RELEASE_DIR}/diff-match-patch.lib)
-# APPLE_DEBUG_DKLIB(${DIFF_MATCH_PATCH}/${OS}/${DEBUG_DIR}/libdiff-match-patchd.a)
-# APPLE_RELEASE_DKLIB(${DIFF_MATCH_PATCH}/${OS}/${RELEASE_DIR}/libdiff-match-patch.a)
-# LINUX_DEBUG_DKLIB(${DIFF_MATCH_PATCH}/${OS}/${DEBUG_DIR}/libdiff-match-patchd.a)
-# LINUX_RELEASE_DKLIB(${DIFF_MATCH_PATCH}/${OS}/${RELEASE_DIR}/libdiff-match-patch.a)
-# RASPBERRY_DEBUG_DKLIB(${DIFF_MATCH_PATCH}/${OS}/${DEBUG_DIR}/libdiff-match-patchd.a)
-# RASPBERRY_RELEASE_DKLIB(${DIFF_MATCH_PATCH}/${OS}/${RELEASE_DIR}/libdiff-match-patch.a)
-# ANDROID_DEBUG_DKLIB(${DIFF_MATCH_PATCH}/${OS}/${DEBUG_DIR}/libdiff-match-patchd.a)
-# ANDROID_RELEASE_DKLIB(${DIFF_MATCH_PATCH}/${OS}/${RELEASE_DIR}/libdiff-match-patch.a)
+# WIN_dk_libDebug(${DIFF_MATCH_PATCH}/${OS}/${DEBUG_DIR}/diff-match-patchd.lib)
+# WIN_dk_libRelease(${DIFF_MATCH_PATCH}/${OS}/${RELEASE_DIR}/diff-match-patch.lib)
+# APPLE_dk_libDebug(${DIFF_MATCH_PATCH}/${OS}/${DEBUG_DIR}/libdiff-match-patchd.a)
+# APPLE_dk_libRelease(${DIFF_MATCH_PATCH}/${OS}/${RELEASE_DIR}/libdiff-match-patch.a)
+# LINUX_dk_libDebug(${DIFF_MATCH_PATCH}/${OS}/${DEBUG_DIR}/libdiff-match-patchd.a)
+# LINUX_dk_libRelease(${DIFF_MATCH_PATCH}/${OS}/${RELEASE_DIR}/libdiff-match-patch.a)
+# RASPBERRY_dk_libDebug(${DIFF_MATCH_PATCH}/${OS}/${DEBUG_DIR}/libdiff-match-patchd.a)
+# RASPBERRY_dk_libRelease(${DIFF_MATCH_PATCH}/${OS}/${RELEASE_DIR}/libdiff-match-patch.a)
+# ANDROID_dk_libDebug(${DIFF_MATCH_PATCH}/${OS}/${DEBUG_DIR}/libdiff-match-patchd.a)
+# ANDROID_dk_libRelease(${DIFF_MATCH_PATCH}/${OS}/${RELEASE_DIR}/libdiff-match-patch.a)
 
 
 ### COMPILE ###
@@ -36,19 +36,19 @@ dk_import(https://github.com/google/diff-match-patch.git)
 # MAC_dk_setPath(${DIFF_MATCH_PATCH}/${OS})
 # MAC32_dk_queueCommand(${DKCMAKE_BUILD} ${DIFF_MATCH_PATCH})
 # MAC64_dk_queueCommand(${DKCMAKE_BUILD} ${DIFF_MATCH_PATCH})
-# MAC_XCODE(${DIFF_MATCH_PATCH_NAME} diff-match-patch)
+# MAC_dk_xcode(${DIFF_MATCH_PATCH_NAME} diff-match-patch)
 
 
 # IOS_dk_setPath(${DIFF_MATCH_PATCH}/${OS})
 # IOS32_dk_queueCommand(${DKCMAKE_BUILD} ${DIFF_MATCH_PATCH})
 # IOS64_dk_queueCommand(${DKCMAKE_BUILD} ${DIFF_MATCH_PATCH})
-# IOS_XCODE(${DIFF_MATCH_PATCH_NAME} diff-match-patch)
+# IOS_dk_xcode(${DIFF_MATCH_PATCH_NAME} diff-match-patch)
 
 
 # IOSSIM_dk_setPath(${DIFF_MATCH_PATCH}/${OS})
 # IOSSIM32_dk_queueCommand(${DKCMAKE_BUILD} ${DIFF_MATCH_PATCH})
 # IOSSIM64_dk_queueCommand(${DKCMAKE_BUILD} ${DIFF_MATCH_PATCH})
-# IOSSIM_XCODE(${DIFF_MATCH_PATCH_NAME} diff-match-patch)
+# IOSSIM_dk_xcode(${DIFF_MATCH_PATCH_NAME} diff-match-patch)
 
 
 # LINUX_DEBUG_dk_setPath(${DIFF_MATCH_PATCH}/${OS}/${DEBUG_DIR})
@@ -69,7 +69,7 @@ dk_import(https://github.com/google/diff-match-patch.git)
 # RASPBERRY_RELEASE_dk_queueCommand(make diff-match-patch)
 
 
-##ANDROID_NDK(${DIFF_MATCH_PATCH_NAME})
+##ANDROID_dk_ndk(${DIFF_MATCH_PATCH_NAME})
 # ANDROID_dk_setPath(${DIFF_MATCH_PATCH}/${OS})
 # ANDROID32_dk_queueCommand(${DKCMAKE_BUILD} ${DIFF_MATCH_PATCH})
 # ANDROID64_dk_queueCommand(${DKCMAKE_BUILD} ${DIFF_MATCH_PATCH})

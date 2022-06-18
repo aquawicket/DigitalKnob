@@ -27,16 +27,16 @@ dk_import(https://github.com/mirrorer/giflib.git PATCH)
 
 ### DKPLUGINS LINK ###
 dk_include(${GIFLIB}/lib)
-WIN_DEBUG_DKLIB(${GIFLIB}/${OS}/${DEBUG_DIR}/lib/.libs/libgif.a)
-WIN_RELEASE_DKLIB(${GIFLIB}/${OS}/${RELEASE_DIR}/lib/.libs/libgif.a)
-APPLE_DEBUG_DKLIB(${GIFLIB}/${OS}/${DEBUG_DIR}/lib/.libs/libgif.a)
-APPLE_RELEASE_DKLIB(${GIFLIB}/${OS}/${RELEASE_DIR}/lib/.libs/libgif.a)
-LINUX_DEBUG_DKLIB(${GIFLIB}/${OS}/${DEBUG_DIR}/lib/.libs/libgif.a)
-LINUX_RELEASE_DKLIB(${GIFLIB}/${OS}/${RELEASE_DIR}/lib/.libs/libgif.a)
-RASPBERRY_DEBUG_DKLIB(${GIFLIB}/${OS}/${DEBUG_DIR}/lib/.libs/libgif.a)
-RASPBERRY_RELEASE_DKLIB(${GIFLIB}/${OS}/${RELEASE_DIR}/lib/.libs/libgif.a)
-ANDROID_DEBUG_DKLIB(${GIFLIB}/${OS}/${DEBUG_DIR}/libgiflib.a)
-ANDROID_RELEASE_DKLIB(${GIFLIB}/${OS}/${RELEASE_DIR}/libgiflib.a)
+WIN_dk_libDebug(${GIFLIB}/${OS}/${DEBUG_DIR}/lib/.libs/libgif.a)
+WIN_dk_libRelease(${GIFLIB}/${OS}/${RELEASE_DIR}/lib/.libs/libgif.a)
+APPLE_dk_libDebug(${GIFLIB}/${OS}/${DEBUG_DIR}/lib/.libs/libgif.a)
+APPLE_dk_libRelease(${GIFLIB}/${OS}/${RELEASE_DIR}/lib/.libs/libgif.a)
+LINUX_dk_libDebug(${GIFLIB}/${OS}/${DEBUG_DIR}/lib/.libs/libgif.a)
+LINUX_dk_libRelease(${GIFLIB}/${OS}/${RELEASE_DIR}/lib/.libs/libgif.a)
+RASPBERRY_dk_libDebug(${GIFLIB}/${OS}/${DEBUG_DIR}/lib/.libs/libgif.a)
+RASPBERRY_dk_libRelease(${GIFLIB}/${OS}/${RELEASE_DIR}/lib/.libs/libgif.a)
+ANDROID_dk_libDebug(${GIFLIB}/${OS}/${DEBUG_DIR}/libgiflib.a)
+ANDROID_dk_libRelease(${GIFLIB}/${OS}/${RELEASE_DIR}/libgiflib.a)
 
 
 

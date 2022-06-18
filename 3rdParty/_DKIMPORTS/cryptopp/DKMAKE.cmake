@@ -18,16 +18,16 @@ else()
 endif()
 
 ### LINK ###
-WIN_DEBUG_DKLIB(${CRYPTOPP}/${OS}/${DEBUG_DIR}/cryptopp-static.lib)
-WIN_RELEASE_DKLIB(${CRYPTOPP}/${OS}/${RELEASE_DIR}/cryptopp-static.lib)
-APPLE_DEBUG_DKLIB(${CRYPTOPP}/${OS}/cryptopp.build/Debug/cryptopp-object.build/libcryptopp-object.a)
-APPLE_RELEASE_DKLIB(${CRYPTOPP}/${OS}/cryptopp.build/Release/cryptopp-object.build/libcryptopp-object.a)
-LINUX_DEBUG_DKLIB(${CRYPTOPP}/${OS}/${DEBUG_DIR}/libcryptopp.a)
-LINUX_RELEASE_DKLIB(${CRYPTOPP}/${OS}/${RELEASE_DIR}/libcryptopp.a)
-RASPBERRY_DEBUG_DKLIB(${CRYPTOPP}/${OS}/${DEBUG_DIR}/libcryptopp.a)
-RASPBERRY_RELEASE_DKLIB(${CRYPTOPP}/${OS}/${RELEASE_DIR}/libcryptopp.a)
-ANDROID_DEBUG_DKLIB(${CRYPTOPP}/${OS}/${DEBUG_DIR}/libcryptopp.a)
-ANDROID_RELEASE_DKLIB(${CRYPTOPP}/${OS}/${RELEASE_DIR}/libcryptopp.a)
+WIN_dk_libDebug(${CRYPTOPP}/${OS}/${DEBUG_DIR}/cryptopp-static.lib)
+WIN_dk_libRelease(${CRYPTOPP}/${OS}/${RELEASE_DIR}/cryptopp-static.lib)
+APPLE_dk_libDebug(${CRYPTOPP}/${OS}/cryptopp.build/Debug/cryptopp-object.build/libcryptopp-object.a)
+APPLE_dk_libRelease(${CRYPTOPP}/${OS}/cryptopp.build/Release/cryptopp-object.build/libcryptopp-object.a)
+LINUX_dk_libDebug(${CRYPTOPP}/${OS}/${DEBUG_DIR}/libcryptopp.a)
+LINUX_dk_libRelease(${CRYPTOPP}/${OS}/${RELEASE_DIR}/libcryptopp.a)
+RASPBERRY_dk_libDebug(${CRYPTOPP}/${OS}/${DEBUG_DIR}/libcryptopp.a)
+RASPBERRY_dk_libRelease(${CRYPTOPP}/${OS}/${RELEASE_DIR}/libcryptopp.a)
+ANDROID_dk_libDebug(${CRYPTOPP}/${OS}/${DEBUG_DIR}/libcryptopp.a)
+ANDROID_dk_libRelease(${CRYPTOPP}/${OS}/${RELEASE_DIR}/libcryptopp.a)
 
 
 ### COMPILE ###
@@ -41,15 +41,15 @@ if(MAC)
 	string(REPLACE "-DMAC " " " DKCMAKE_BUILD_CRYPTOPP "${DKCMAKE_BUILD}") #fix of class named MAC in cryptopp
 endif()
 MAC_dk_queueCommand(${DKCMAKE_BUILD_CRYPTOPP} -DBUILD_STATIC=ON -DBUILD_SHARED=OFF -DBUILD_TESTING=OFF -DCRYPTOPP_DISABLE_MIXED_ASM=ON ${CRYPTOPP})
-MAC_XCODE(${CRYPTOPP_NAME} cryptopp-static)
+MAC_dk_xcode(${CRYPTOPP_NAME} cryptopp-static)
 
 
 IOS_dk_queueCommand(${DKCMAKE_BUILD} -DBUILD_STATIC=ON -DBUILD_SHARED=OFF -DBUILD_TESTING=OFF ${CRYPTOPP})
-IOS_XCODE(${CRYPTOPP_NAME} cryptopp-static)
+IOS_dk_xcode(${CRYPTOPP_NAME} cryptopp-static)
 
 
 IOSSIM_dk_queueCommand(${DKCMAKE_BUILD} -DBUILD_STATIC=ON -DBUILD_SHARED=OFF -DBUILD_TESTING=OFF ${LIBMD_CMAKE} ${CRYPTOPP})
-IOSSIM_XCODE(${CRYPTOPP_NAME} cryptopp-static)
+IOSSIM_dk_xcode(${CRYPTOPP_NAME} cryptopp-static)
 
 
 LINUX_dk_queueCommand(${DKCMAKE_BUILD} -DBUILD_STATIC=ON -DBUILD_SHARED=OFF -DBUILD_TESTING=OFF ${CRYPTOPP})

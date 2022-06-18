@@ -5,7 +5,7 @@ dk_assets(DKCefChild)
 
 #dk_set(QUEUE_BUILD ON)
 dk_addToPluginList(DKCefChild)
-#DKEXECUTABLE(DKCefChild)
+#dk_executable(DKCefChild)
 
 
 if(WIN)

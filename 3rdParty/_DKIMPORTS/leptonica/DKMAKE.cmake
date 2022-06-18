@@ -33,14 +33,14 @@ dk_import(https://github.com/DanBloomberg/leptonica)
 dk_include(${LEPTONICA})
 dk_include(${LEPTONICA}/${OS}/src)
 dk_include(${LEPTONICA}/${OS}/${RELEASE_DIR}/src)
-WIN_DEBUG_DKLIB(${LEPTONICA}/${OS}/src/${DEBUG_DIR}/${LEPTONICA_NAME}d.lib)
-WIN_RELEASE_DKLIB(${LEPTONICA}/${OS}/src/${RELEASE_DIR}/${LEPTONICA_NAME}.lib)
-APPLE_DEBUG_DKLIB(${LEPTONICA}/${OS}/src/${DEBUG_DIR}/libleptonica.a)
-APPLE_RELEASE_DKLIB(${LEPTONICA}/${OS}/src/${RELEASE_DIR}/libleptonica.a)
-LINUX_DEBUG_DKLIB(${LEPTONICA}/${OS}/${DEBUG_DIR}/src/libleptonica.a)
-LINUX_RELEASE_DKLIB(${LEPTONICA}/${OS}/${RELEASE_DIR}/src/libleptonica.a)
-ANDROID_DEBUG_DKLIB(${LEPTONICA}/${OS}/${DEBUG_DIR}/obj/local/armeabi-v7a/libleptonica.a)
-ANDROID_RELEASE_DKLIB(${LEPTONICA}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/libleptonica.a)
+WIN_dk_libDebug(${LEPTONICA}/${OS}/src/${DEBUG_DIR}/${LEPTONICA_NAME}d.lib)
+WIN_dk_libRelease(${LEPTONICA}/${OS}/src/${RELEASE_DIR}/${LEPTONICA_NAME}.lib)
+APPLE_dk_libDebug(${LEPTONICA}/${OS}/src/${DEBUG_DIR}/libleptonica.a)
+APPLE_dk_libRelease(${LEPTONICA}/${OS}/src/${RELEASE_DIR}/libleptonica.a)
+LINUX_dk_libDebug(${LEPTONICA}/${OS}/${DEBUG_DIR}/src/libleptonica.a)
+LINUX_dk_libRelease(${LEPTONICA}/${OS}/${RELEASE_DIR}/src/libleptonica.a)
+ANDROID_dk_libDebug(${LEPTONICA}/${OS}/${DEBUG_DIR}/obj/local/armeabi-v7a/libleptonica.a)
+ANDROID_dk_libRelease(${LEPTONICA}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/libleptonica.a)
 
 
 ### 3rdParty Link ###
@@ -54,15 +54,15 @@ WIN_dk_queueCommand(${DKCMAKE_BUILD} -DSTATIC=ON -DCMAKE_INSTALL_PREFIX=${LEPTON
 WIN_dk_VisualStudio(${LEPTONICA_NAME} LEPTONICA.sln leptonica)
 
 MAC_dk_queueCommand(${DKCMAKE_BUILD} -DSTATIC=ON -DCMAKE_INSTALL_PREFIX=${LEPTONICA} ${ZLIB_CMAKE} ${TIFF_CMAKE} ${PNG_CMAKE} ${JPEG_CMAKE} ${GIF_CMAKE} ${LEPTONICA})
-MAC_XCODE(${LEPTONICA_NAME} leptonica)
+MAC_dk_xcode(${LEPTONICA_NAME} leptonica)
 
 
 IOS_dk_queueCommand(${DKCMAKE_BUILD} -DSTATIC=ON -DCMAKE_INSTALL_PREFIX=${LEPTONICA} ${ZLIB_CMAKE} ${TIFF_CMAKE} ${PNG_CMAKE} ${JPEG_CMAKE} ${GIF_CMAKE} ${LEPTONICA})
-IOS_XCODE(${LEPTONICA_NAME} leptonica)
+IOS_dk_xcode(${LEPTONICA_NAME} leptonica)
 
 
 IOSSIM_dk_queueCommand(${DKCMAKE_BUILD} -DSTATIC=ON -DCMAKE_INSTALL_PREFIX=${LEPTONICA} ${SDL2_CMAKE} ${TIFF_CMAKE} ${PNG_CMAKE} ${JPEG_CMAKE} ${GIF_CMAKE} ${LEPTONICA})
-IOSSIM_XCODE(${LEPTONICA_NAME} leptonica)
+IOSSIM_dk_xcode(${LEPTONICA_NAME} leptonica)
 
 
 LINUX_dk_queueCommand(${DKCMAKE_BUILD} -DSTATIC=ON -DCMAKE_INSTALL_PREFIX=${LEPTONICA} ${ZLIB_CMAKE} ${TIFF_CMAKE} ${PNG_CMAKE} ${JPEG_CMAKE} ${GIF_CMAKE} ${LEPTONICA})

@@ -15,12 +15,12 @@ endif()
 
 
 ### LINK ###
-WIN_DEBUG_DKLIB(${LIBGCC}/libgcc.a)
-WIN_RELEASE_DKLIB(${LIBGCC}/libgcc.a)
-#WIN32_DEBUG_DKLIB(${MINGW32}/lib/gcc/i686-w64-mingw32/${MINGW32_VERSION}/libgcc.a)
-#WIN32_RELEASE_DKLIB(${MINGW32}/lib/gcc/i686-w64-mingw32/${MINGW32_VERSION}/libgcc.a)
-#WIN64_DEBUG_DKLIB(${MINGW64}/lib/gcc/x86_64-w64-mingw32/${MINGW32_VERSION}/libgcc.a)
-#WIN64_RELEASE_DKLIB(${MINGW64}/lib/gcc/x86_64-w64-mingw32/${MINGW32_VERSION}/libgcc.a)
+WIN_dk_libDebug(${LIBGCC}/libgcc.a)
+WIN_dk_libRelease(${LIBGCC}/libgcc.a)
+#WIN32_dk_libDebug(${MINGW32}/lib/gcc/i686-w64-mingw32/${MINGW32_VERSION}/libgcc.a)
+#WIN32_dk_libRelease(${MINGW32}/lib/gcc/i686-w64-mingw32/${MINGW32_VERSION}/libgcc.a)
+#WIN64_dk_libDebug(${MINGW64}/lib/gcc/x86_64-w64-mingw32/${MINGW32_VERSION}/libgcc.a)
+#WIN64_dk_libRelease(${MINGW64}/lib/gcc/x86_64-w64-mingw32/${MINGW32_VERSION}/libgcc.a)
 
 
 ### 3RDPARTY LINK ###

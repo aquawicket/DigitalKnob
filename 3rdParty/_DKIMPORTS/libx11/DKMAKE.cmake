@@ -20,16 +20,16 @@ dk_install(${LIBX11_DL} libx11 ${LIBX11})
 
 ### LINK ###
 dk_include(${LIBX11}/include)
-WIN_DEBUG_DKLIB(${LIBX11}/${OS}/${DEBUG_DIR}/libx11d.lib)
-WIN_RELEASE_DKLIB(${LIBX11}/${OS}/${RELEASE_DIR}/libx11.lib)
-APPLE_DEBUG_DKLIB(${LIBX11}/${OS}/${DEBUG_DIR}/liblibx11d.a)
-APPLE_RELEASE_DKLIB(${LIBX11}/${OS}/${RELEASE_DIR}/liblibx11.a)
-LINUX_DEBUG_DKLIB(${LIBX11}/${OS}/${DEBUG_DIR}/liblibx11d.a)
-LINUX_RELEASE_DKLIB(${LIBX11}/${OS}/${RELEASE_DIR}/liblibx11.a)
-RASPBERRY_DEBUG_DKLIB(${LIBX11}/${OS}/${DEBUG_DIR}/liblibx11d.a)
-RASPBERRY_RELEASE_DKLIB(${LIBX11}/${OS}/${RELEASE_DIR}/liblibx11.a)
-ANDROID_DEBUG_DKLIB(${LIBX11}/${OS}/${DEBUG_DIR}/liblibx11d.a)
-ANDROID_RELEASE_DKLIB(${LIBX11}/${OS}/${RELEASE_DIR}/liblibx11.a)
+WIN_dk_libDebug(${LIBX11}/${OS}/${DEBUG_DIR}/libx11d.lib)
+WIN_dk_libRelease(${LIBX11}/${OS}/${RELEASE_DIR}/libx11.lib)
+APPLE_dk_libDebug(${LIBX11}/${OS}/${DEBUG_DIR}/liblibx11d.a)
+APPLE_dk_libRelease(${LIBX11}/${OS}/${RELEASE_DIR}/liblibx11.a)
+LINUX_dk_libDebug(${LIBX11}/${OS}/${DEBUG_DIR}/liblibx11d.a)
+LINUX_dk_libRelease(${LIBX11}/${OS}/${RELEASE_DIR}/liblibx11.a)
+RASPBERRY_dk_libDebug(${LIBX11}/${OS}/${DEBUG_DIR}/liblibx11d.a)
+RASPBERRY_dk_libRelease(${LIBX11}/${OS}/${RELEASE_DIR}/liblibx11.a)
+ANDROID_dk_libDebug(${LIBX11}/${OS}/${DEBUG_DIR}/liblibx11d.a)
+ANDROID_dk_libRelease(${LIBX11}/${OS}/${RELEASE_DIR}/liblibx11.a)
 
 
 ### COMPILE ###
