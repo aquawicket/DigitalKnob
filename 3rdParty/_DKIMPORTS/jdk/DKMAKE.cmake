@@ -30,9 +30,9 @@ dk_install(${JDK_DL} jdk ${JDK} PATCH)
 
 ### LINK ###
 dk_include(${JDK}/)	
-DKSETENV("JAVA_HOME" ${JDK})
-DKSETENV("JAVA_VERSION" ${JDK_VERSION})
-DKSETENV("VS_JavaHome" ${JDK})
+dk_setEnv("JAVA_HOME" ${JDK})
+dk_setEnv("JAVA_VERSION" ${JDK_VERSION})
+dk_setEnv("VS_JavaHome" ${JDK})
 
 #Add registry entries
 dk_addRegistryKey("HKLM/SOFTWARE/JavaSoft/Java Runtime Environment" "CurrentVersion" "${JDK_VERSION}")

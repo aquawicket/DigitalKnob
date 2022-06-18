@@ -13,4 +13,4 @@ dk_set(NASM_EXE ${NASM}/nasm.exe)
 
 ### INSTALL ###
 dk_install(${NASM_DL} nasm ${NASM})
-DKSETENV("PATH" "${NASM_EXE}")
+dk_setEnv("PATH" "${NASM_EXE}")

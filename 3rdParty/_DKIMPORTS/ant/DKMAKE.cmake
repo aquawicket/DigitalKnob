@@ -14,5 +14,5 @@ dk_import(https://github.com/apache/ant.git)
 #dk_install(${ANT_DL} apache-ant ${ANT})
 
 
-DKSETENV("ANT_HOME" ${ANT})
-DKSETENV("VS_AntHome" ${ANT})
+dk_setEnv("ANT_HOME" ${ANT})
+dk_setEnv("VS_AntHome" ${ANT})

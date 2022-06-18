@@ -21,9 +21,9 @@ dk_install(${JDK11_DL} jdk11 ${JDK11} PATCH)
 
 ### LINK ###
 #dk_include(${JDK11}/)	
-#DKSETENV("JAVA_HOME" ${JDK11})
-#DKSETENV("JAVA_VERSION" ${JDK11_VERSION})
-#DKSETENV("VS_JavaHome" ${JDK11})
+#dk_setEnv("JAVA_HOME" ${JDK11})
+#dk_setEnv("JAVA_VERSION" ${JDK11_VERSION})
+#dk_setEnv("VS_JavaHome" ${JDK11})
 
 #Add registry entries
 #dk_addRegistryKey("HKLM/SOFTWARE/JavaSoft/Java Runtime Environment" "CurrentVersion" "${JDK11_VERSION}")

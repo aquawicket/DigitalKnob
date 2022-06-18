@@ -5,8 +5,8 @@ endif()
 ### VERSION ###
 dk_set(ANDROIDSDK ${3RDPARTY}/android-sdk)
 
-DKSETENV("ANDROID_HOME" ${ANDROIDSDK})
-DKSETENV("VS_AndroidHome" ${ANDROIDSDK})
+dk_setEnv("ANDROID_HOME" ${ANDROIDSDK})
+dk_setEnv("VS_AndroidHome" ${ANDROIDSDK})
 
 ### DEPENDS ###
 dk_depend(jdk)

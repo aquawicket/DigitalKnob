@@ -20,9 +20,9 @@ dk_install(${JDK8_DL} jdk8 ${JDK8} PATCH)
 
 ### LINK ###
 #dk_include(${JDK8}/)	
-#DKSETENV("JAVA_HOME" ${JDK8})
-#DKSETENV("JAVA_VERSION" ${JDK8_VERSION})
-#DKSETENV("VS_JavaHome" ${JDK8})
+#dk_setEnv("JAVA_HOME" ${JDK8})
+#dk_setEnv("JAVA_VERSION" ${JDK8_VERSION})
+#dk_setEnv("VS_JavaHome" ${JDK8})
 
 #Add registry entries
 #dk_addRegistryKey("HKLM/SOFTWARE/JavaSoft/Java Runtime Environment" "CurrentVersion" "${JDK8_VERSION}")
