@@ -54,119 +54,117 @@ set(PRINT_FUNCTION_NAMES 		1 		CACHE INTERNAL "")
 set(PRINT_FUNCTION_ ARGUMENTS 	1 		CACHE INTERNAL "")
 set(dkdepend_disable_list 		""		CACHE INTERNAL "")
 
+
+### DK.cmake #####################################################################
 include(${DKCMAKE}/DK.cmake)
 
-
+set(Functions_Ext ${DIGITALKNOB}/DK/DKCMake/Functions_Ext.cmake)
+execute_process(COMMAND ${CMAKE_COMMAND} -E remove ${Functions_Ext})
+file(APPEND ${Functions_Ext} "### Don't make changes in this file. They will be overwritten. ###\n")
+file(APPEND ${Functions_Ext} "### This file was automatically generated from Functions.cmake ###\n")
 ##################################################################################
-# CreateFunc(str)
+# dk_appendFile(path str)
 #
 #	@str:
 #
-execute_process(COMMAND ${CMAKE_COMMAND} -E remove ${DIGITALKNOB}/DK/DKCMake/Functions_Ext.cmake)
-file(APPEND ${DIGITALKNOB}/DK/DKCMake/Functions_Ext.cmake "### Don't make changes in this file. They will be overwritten. ###\n")
-file(APPEND ${DIGITALKNOB}/DK/DKCMake/Functions_Ext.cmake "### This file was automatically generated from Functions.cmake ###\n")
-function(CreateFunc str)
+function(dk_appendFile path str)
 	DKDEBUGFUNC(${ARGV})
-	if(0)
-		cmake_language(EVAL CODE ${str}) # only available on cmake 3.18+
-	else()
-		file(APPEND ${DIGITALKNOB}/DK/DKCMake/Functions_Ext.cmake "${str}")
-	endif()
+	file(APPEND ${path} "${str}")
 endfunction()
 
 
 ###############################################################################
-# AliasFunctions(name)
+# dk_aliasFunctions(name)
 #
-function(AliasFunctions name)
+function(dk_aliasFunctions name)
 	DKDEBUGFUNC(${ARGV})
-	CreateFunc("macro(WIN_HOST_${name})\n   if(WIN_HOST)\n      ${name}(\${ARGV})\n  endif()\nendmacro()\n")
-	CreateFunc("macro(WIN32_HOST_${name})\n   if(WIN_HOST AND X86)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	CreateFunc("macro(WIN64_HOST_${name})\n   if(WIN_HOST AND X64)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	CreateFunc("macro(UNIX_HOST_${name})\n   if(UNIX_HOST)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	CreateFunc("macro(MAC_HOST_${name})\n   if(MAC_HOST)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	CreateFunc("macro(MAC32_HOST_${name})\n   if(MAC_HOST AND X86)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	CreateFunc("macro(MAC64_HOST_${name})\n   if(MAC_HOST AND X64)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	CreateFunc("macro(LINUX_HOST_${name})\n   if(LINUX_HOST)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	CreateFunc("macro(LINUX32_HOST_${name})\n   if(LINUX_HOST AND X86)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	CreateFunc("macro(LINUX64_HOST_${name})\n   if(LINUX_HOST AND X64)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
+	dk_appendFile(${Functions_Ext} "macro(WIN_HOST_${name})\n   if(WIN_HOST)\n      ${name}(\${ARGV})\n  endif()\nendmacro()\n")
+	dk_appendFile(${Functions_Ext} "macro(WIN32_HOST_${name})\n   if(WIN_HOST AND X86)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
+	dk_appendFile(${Functions_Ext} "macro(WIN64_HOST_${name})\n   if(WIN_HOST AND X64)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
+	dk_appendFile(${Functions_Ext} "macro(UNIX_HOST_${name})\n   if(UNIX_HOST)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
+	dk_appendFile(${Functions_Ext} "macro(MAC_HOST_${name})\n   if(MAC_HOST)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
+	dk_appendFile(${Functions_Ext} "macro(MAC32_HOST_${name})\n   if(MAC_HOST AND X86)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
+	dk_appendFile(${Functions_Ext} "macro(MAC64_HOST_${name})\n   if(MAC_HOST AND X64)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
+	dk_appendFile(${Functions_Ext} "macro(LINUX_HOST_${name})\n   if(LINUX_HOST)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
+	dk_appendFile(${Functions_Ext} "macro(LINUX32_HOST_${name})\n   if(LINUX_HOST AND X86)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
+	dk_appendFile(${Functions_Ext} "macro(LINUX64_HOST_${name})\n   if(LINUX_HOST AND X64)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
 	
-	CreateFunc("macro(WIN_${name})\n   if(WIN)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	CreateFunc("macro(WIN32_${name})\n   if(WIN_32)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	CreateFunc("macro(WIN64_${name})\n   if(WIN_64)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	CreateFunc("macro(UNIX_${name})\n   if(NOT WIN)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	CreateFunc("macro(APPLE_${name})\n   if(MAC OR IOS OR IOSSIM)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	CreateFunc("macro(MAC_${name})\n   if(MAC)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	CreateFunc("macro(MAC32_${name})\n   if(MAC_32)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	CreateFunc("macro(MAC64_${name})\n   if(MAC_64)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	CreateFunc("macro(IOS_${name})\n   if(IOS AND NOT IOSSIM)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	CreateFunc("macro(IOS32_${name})\n   if(IOS_32 AND NOT IOSSIM)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	CreateFunc("macro(IOS64_${name})\n   if(IOS_64 AND NOT IOSSIM)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	CreateFunc("macro(IOSSIM_${name})\n   if(IOSSIM)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	CreateFunc("macro(IOSSIM32_${name})\n   if(IOSSIM_32)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	CreateFunc("macro(IOSSIM64_${name})\n   if(IOSSIM_64)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	CreateFunc("macro(LINUX_${name})\n   if(LINUX)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	CreateFunc("macro(LINUX32_${name})\n   if(LINUX_32)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	CreateFunc("macro(LINUX64_${name})\n   if(LINUX_64)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	CreateFunc("macro(RASPBERRY_${name})\n   if(RASPBERRY)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	CreateFunc("macro(RASPBERRY32_${name})\n   if(RASPBERRY_32)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	CreateFunc("macro(RASPBERRY64_${name})\n   if(RASPBERRY_64)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	CreateFunc("macro(ANDROID_${name})\n   if(ANDROID)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	CreateFunc("macro(ANDROID32_${name})\n   if(ANDROID_32)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	CreateFunc("macro(ANDROID64_${name})\n   if(ANDROID_64)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
+	dk_appendFile(${Functions_Ext} "macro(WIN_${name})\n   if(WIN)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
+	dk_appendFile(${Functions_Ext} "macro(WIN32_${name})\n   if(WIN_32)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
+	dk_appendFile(${Functions_Ext} "macro(WIN64_${name})\n   if(WIN_64)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
+	dk_appendFile(${Functions_Ext} "macro(UNIX_${name})\n   if(NOT WIN)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
+	dk_appendFile(${Functions_Ext} "macro(APPLE_${name})\n   if(MAC OR IOS OR IOSSIM)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
+	dk_appendFile(${Functions_Ext} "macro(MAC_${name})\n   if(MAC)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
+	dk_appendFile(${Functions_Ext} "macro(MAC32_${name})\n   if(MAC_32)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
+	dk_appendFile(${Functions_Ext} "macro(MAC64_${name})\n   if(MAC_64)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
+	dk_appendFile(${Functions_Ext} "macro(IOS_${name})\n   if(IOS AND NOT IOSSIM)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
+	dk_appendFile(${Functions_Ext} "macro(IOS32_${name})\n   if(IOS_32 AND NOT IOSSIM)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
+	dk_appendFile(${Functions_Ext} "macro(IOS64_${name})\n   if(IOS_64 AND NOT IOSSIM)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
+	dk_appendFile(${Functions_Ext} "macro(IOSSIM_${name})\n   if(IOSSIM)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
+	dk_appendFile(${Functions_Ext} "macro(IOSSIM32_${name})\n   if(IOSSIM_32)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
+	dk_appendFile(${Functions_Ext} "macro(IOSSIM64_${name})\n   if(IOSSIM_64)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
+	dk_appendFile(${Functions_Ext} "macro(LINUX_${name})\n   if(LINUX)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
+	dk_appendFile(${Functions_Ext} "macro(LINUX32_${name})\n   if(LINUX_32)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
+	dk_appendFile(${Functions_Ext} "macro(LINUX64_${name})\n   if(LINUX_64)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
+	dk_appendFile(${Functions_Ext} "macro(RASPBERRY_${name})\n   if(RASPBERRY)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
+	dk_appendFile(${Functions_Ext} "macro(RASPBERRY32_${name})\n   if(RASPBERRY_32)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
+	dk_appendFile(${Functions_Ext} "macro(RASPBERRY64_${name})\n   if(RASPBERRY_64)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
+	dk_appendFile(${Functions_Ext} "macro(ANDROID_${name})\n   if(ANDROID)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
+	dk_appendFile(${Functions_Ext} "macro(ANDROID32_${name})\n   if(ANDROID_32)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
+	dk_appendFile(${Functions_Ext} "macro(ANDROID64_${name})\n   if(ANDROID_64)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
 	
 	if("${ARGN}" STREQUAL "NO_DEBUG_RELEASE_TAGS")
 		return()
 	endif()
-	CreateFunc("macro(DEBUG_${name})\n   if(DEBUG)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	CreateFunc("macro(WIN_DEBUG_${name})\n   if(WIN AND DEBUG)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	CreateFunc("macro(WIN32_DEBUG_${name})\n   if(WIN_32 AND DEBUG)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	CreateFunc("macro(WIN64_DEBUG_${name})\n   if(WIN_64 AND DEBUG)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	CreateFunc("macro(UNIX_DEBUG_${name})\n   if(NOT WIN AND DEBUG)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	CreateFunc("macro(APPLE_DEBUG_${name})\n   if(MAC OR IOS OR IOSSIM AND DEBUG)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	CreateFunc("macro(MAC_DEBUG_${name})\n   if(MAC AND DEBUG)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	CreateFunc("macro(MAC32_DEBUG_${name})\n   if(MAC_32 AND DEBUG)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	CreateFunc("macro(MAC64_DEBUG_${name})\n   if(MAC_64 AND DEBUG)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	CreateFunc("macro(IOS_DEBUG_${name})\n   if(IOS AND DEBUG AND NOT IOSSIM)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	CreateFunc("macro(IOS32_DEBUG_${name})\n   if(IOS_32 AND DEBUG AND NOT IOSSIM)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	CreateFunc("macro(IOS64_DEBUG_${name})\n   if(IOS_64 AND DEBUG AND NOT IOSSIM)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	CreateFunc("macro(IOSSIM_DEBUG_${name})\n   if(IOSSIM AND DEBUG)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	CreateFunc("macro(IOSSIM32_DEBUG_${name})\n   if(IOSSIM_32 AND DEBUG)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	CreateFunc("macro(IOSSIM64_DEBUG_${name})\n   if(IOSSIM_64 AND DEBUG)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	CreateFunc("macro(LINUX_DEBUG_${name})\n   if(LINUX AND DEBUG)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	CreateFunc("macro(LINUX32_DEBUG_${name})\n   if(LINUX_32 AND DEBUG)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	CreateFunc("macro(LINUX64_DEBUG_${name})\n   if(LINUX_64 AND DEBUG)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	CreateFunc("macro(RASPBERRY_DEBUG_${name})\n   if(RASPBERRY AND DEBUG)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	CreateFunc("macro(RASPBERRY32_DEBUG_${name})\n   if(RASPBERRY_32 AND DEBUG)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	CreateFunc("macro(RASPBERRY64_DEBUG_${name})\n   if(RASPBERRY_64 AND DEBUG)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	CreateFunc("macro(ANDROID_DEBUG_${name})\n   if(ANDROID AND DEBUG)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	CreateFunc("macro(ANDROID32_DEBUG_${name})\n   if(ANDROID_32 AND DEBUG)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	CreateFunc("macro(ANDROID64_DEBUG_${name})\n   if(ANDROID_64 AND DEBUG)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
+	dk_appendFile(${Functions_Ext} "macro(DEBUG_${name})\n   if(DEBUG)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
+	dk_appendFile(${Functions_Ext} "macro(WIN_DEBUG_${name})\n   if(WIN AND DEBUG)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
+	dk_appendFile(${Functions_Ext} "macro(WIN32_DEBUG_${name})\n   if(WIN_32 AND DEBUG)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
+	dk_appendFile(${Functions_Ext} "macro(WIN64_DEBUG_${name})\n   if(WIN_64 AND DEBUG)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
+	dk_appendFile(${Functions_Ext} "macro(UNIX_DEBUG_${name})\n   if(NOT WIN AND DEBUG)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
+	dk_appendFile(${Functions_Ext} "macro(APPLE_DEBUG_${name})\n   if(MAC OR IOS OR IOSSIM AND DEBUG)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
+	dk_appendFile(${Functions_Ext} "macro(MAC_DEBUG_${name})\n   if(MAC AND DEBUG)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
+	dk_appendFile(${Functions_Ext} "macro(MAC32_DEBUG_${name})\n   if(MAC_32 AND DEBUG)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
+	dk_appendFile(${Functions_Ext} "macro(MAC64_DEBUG_${name})\n   if(MAC_64 AND DEBUG)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
+	dk_appendFile(${Functions_Ext} "macro(IOS_DEBUG_${name})\n   if(IOS AND DEBUG AND NOT IOSSIM)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
+	dk_appendFile(${Functions_Ext} "macro(IOS32_DEBUG_${name})\n   if(IOS_32 AND DEBUG AND NOT IOSSIM)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
+	dk_appendFile(${Functions_Ext} "macro(IOS64_DEBUG_${name})\n   if(IOS_64 AND DEBUG AND NOT IOSSIM)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
+	dk_appendFile(${Functions_Ext} "macro(IOSSIM_DEBUG_${name})\n   if(IOSSIM AND DEBUG)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
+	dk_appendFile(${Functions_Ext} "macro(IOSSIM32_DEBUG_${name})\n   if(IOSSIM_32 AND DEBUG)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
+	dk_appendFile(${Functions_Ext} "macro(IOSSIM64_DEBUG_${name})\n   if(IOSSIM_64 AND DEBUG)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
+	dk_appendFile(${Functions_Ext} "macro(LINUX_DEBUG_${name})\n   if(LINUX AND DEBUG)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
+	dk_appendFile(${Functions_Ext} "macro(LINUX32_DEBUG_${name})\n   if(LINUX_32 AND DEBUG)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
+	dk_appendFile(${Functions_Ext} "macro(LINUX64_DEBUG_${name})\n   if(LINUX_64 AND DEBUG)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
+	dk_appendFile(${Functions_Ext} "macro(RASPBERRY_DEBUG_${name})\n   if(RASPBERRY AND DEBUG)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
+	dk_appendFile(${Functions_Ext} "macro(RASPBERRY32_DEBUG_${name})\n   if(RASPBERRY_32 AND DEBUG)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
+	dk_appendFile(${Functions_Ext} "macro(RASPBERRY64_DEBUG_${name})\n   if(RASPBERRY_64 AND DEBUG)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
+	dk_appendFile(${Functions_Ext} "macro(ANDROID_DEBUG_${name})\n   if(ANDROID AND DEBUG)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
+	dk_appendFile(${Functions_Ext} "macro(ANDROID32_DEBUG_${name})\n   if(ANDROID_32 AND DEBUG)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
+	dk_appendFile(${Functions_Ext} "macro(ANDROID64_DEBUG_${name})\n   if(ANDROID_64 AND DEBUG)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
 	
-	CreateFunc("macro(RELEASE_${name})\n   if(RELEASE)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	CreateFunc("macro(WIN_RELEASE_${name})\n   if(WIN AND RELEASE)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	CreateFunc("macro(WIN32_RELEASE_${name})\n   if(WIN_32 AND RELEASE)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	CreateFunc("macro(WIN64_RELEASE_${name})\n   if(WIN_64 AND RELEASE)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	CreateFunc("macro(UNIX_RELEASE_${name})\n   if(NOT WIN AND RELEASE)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	CreateFunc("macro(APPLE_RELEASE_${name})\n   if(MAC OR IOS OR IOSSIM AND RELEASE)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	CreateFunc("macro(MAC_RELEASE_${name})\n   if(MAC AND RELEASE)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	CreateFunc("macro(MAC32_RELEASE_${name})\n   if(MAC_32 AND RELEASE)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	CreateFunc("macro(MAC64_RELEASE_${name})\n   if(MAC_64 AND RELEASE)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	CreateFunc("macro(IOS_RELEASE_${name})\n   if(IOS AND RELEASE AND NOT IOSSIM)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	CreateFunc("macro(IOS32_RELEASE_${name})\n   if(IOS_32 AND RELEASE AND NOT IOSSIM)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	CreateFunc("macro(IOS64_RELEASE_${name})\n   if(IOS_64 AND RELEASE AND NOT IOSSIM)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	CreateFunc("macro(IOSSIM_RELEASE_${name})\n   if(IOSSIM AND RELEASE)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	CreateFunc("macro(IOSSIM32_RELEASE_${name})\n   if(IOSSIM_32 AND RELEASE)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	CreateFunc("macro(IOSSIM64_RELEASE_${name})\n   if(IOSSIM_64 AND RELEASE)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	CreateFunc("macro(LINUX_RELEASE_${name})\n   if(LINUX AND RELEASE)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	CreateFunc("macro(LINUX32_RELEASE_${name})\n   if(LINUX_32 AND RELEASE)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	CreateFunc("macro(LINUX64_RELEASE_${name})\n   if(LINUX_64 AND RELEASE)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	CreateFunc("macro(RASPBERRY_RELEASE_${name})\n   if(RASPBERRY AND RELEASE)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	CreateFunc("macro(RASPBERRY32_RELEASE_${name})\n   if(RASPBERRY_32 AND RELEASE)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	CreateFunc("macro(RASPBERRY64_RELEASE_${name})\n   if(RASPBERRY_64 AND RELEASE)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	CreateFunc("macro(ANDROID_RELEASE_${name})\n   if(ANDROID AND RELEASE)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	CreateFunc("macro(ANDROID32_RELEASE_${name})\n   if(ANDROID_32 AND RELEASE)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	CreateFunc("macro(ANDROID64_RELEASE_${name})\n   if(ANDROID_64 AND RELEASE)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")	
+	dk_appendFile(${Functions_Ext} "macro(RELEASE_${name})\n   if(RELEASE)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
+	dk_appendFile(${Functions_Ext} "macro(WIN_RELEASE_${name})\n   if(WIN AND RELEASE)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
+	dk_appendFile(${Functions_Ext} "macro(WIN32_RELEASE_${name})\n   if(WIN_32 AND RELEASE)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
+	dk_appendFile(${Functions_Ext} "macro(WIN64_RELEASE_${name})\n   if(WIN_64 AND RELEASE)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
+	dk_appendFile(${Functions_Ext} "macro(UNIX_RELEASE_${name})\n   if(NOT WIN AND RELEASE)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
+	dk_appendFile(${Functions_Ext} "macro(APPLE_RELEASE_${name})\n   if(MAC OR IOS OR IOSSIM AND RELEASE)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
+	dk_appendFile(${Functions_Ext} "macro(MAC_RELEASE_${name})\n   if(MAC AND RELEASE)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
+	dk_appendFile(${Functions_Ext} "macro(MAC32_RELEASE_${name})\n   if(MAC_32 AND RELEASE)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
+	dk_appendFile(${Functions_Ext} "macro(MAC64_RELEASE_${name})\n   if(MAC_64 AND RELEASE)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
+	dk_appendFile(${Functions_Ext} "macro(IOS_RELEASE_${name})\n   if(IOS AND RELEASE AND NOT IOSSIM)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
+	dk_appendFile(${Functions_Ext} "macro(IOS32_RELEASE_${name})\n   if(IOS_32 AND RELEASE AND NOT IOSSIM)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
+	dk_appendFile(${Functions_Ext} "macro(IOS64_RELEASE_${name})\n   if(IOS_64 AND RELEASE AND NOT IOSSIM)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
+	dk_appendFile(${Functions_Ext} "macro(IOSSIM_RELEASE_${name})\n   if(IOSSIM AND RELEASE)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
+	dk_appendFile(${Functions_Ext} "macro(IOSSIM32_RELEASE_${name})\n   if(IOSSIM_32 AND RELEASE)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
+	dk_appendFile(${Functions_Ext} "macro(IOSSIM64_RELEASE_${name})\n   if(IOSSIM_64 AND RELEASE)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
+	dk_appendFile(${Functions_Ext} "macro(LINUX_RELEASE_${name})\n   if(LINUX AND RELEASE)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
+	dk_appendFile(${Functions_Ext} "macro(LINUX32_RELEASE_${name})\n   if(LINUX_32 AND RELEASE)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
+	dk_appendFile(${Functions_Ext} "macro(LINUX64_RELEASE_${name})\n   if(LINUX_64 AND RELEASE)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
+	dk_appendFile(${Functions_Ext} "macro(RASPBERRY_RELEASE_${name})\n   if(RASPBERRY AND RELEASE)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
+	dk_appendFile(${Functions_Ext} "macro(RASPBERRY32_RELEASE_${name})\n   if(RASPBERRY_32 AND RELEASE)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
+	dk_appendFile(${Functions_Ext} "macro(RASPBERRY64_RELEASE_${name})\n   if(RASPBERRY_64 AND RELEASE)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
+	dk_appendFile(${Functions_Ext} "macro(ANDROID_RELEASE_${name})\n   if(ANDROID AND RELEASE)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
+	dk_appendFile(${Functions_Ext} "macro(ANDROID32_RELEASE_${name})\n   if(ANDROID_32 AND RELEASE)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
+	dk_appendFile(${Functions_Ext} "macro(ANDROID64_RELEASE_${name})\n   if(ANDROID_64 AND RELEASE)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")	
 endfunction()
 
 
@@ -216,7 +214,7 @@ function(DKSET variable value)
 	endif()
 	##########################################
 endfunction()
-AliasFunctions("DKSET")
+dk_aliasFunctions("DKSET")
 
 
 ###############################################################################
@@ -678,7 +676,7 @@ function(DOWNLOAD src_path dest_path) # ARGV1 = dest_path
 		DKINFO("Finnished downloading ${dest_filename} \n")
 	endif() 
 endfunction()
-AliasFunctions("DOWNLOAD")
+dk_aliasFunctions("DOWNLOAD")
 
 
 ###############################################################################
@@ -898,7 +896,7 @@ function(DKDEFINE str)
 	DKSET(DKDEFINES_LIST ${DKDEFINES_LIST} ${str})
 	add_definitions(-D${str})
 endfunction()
-AliasFunctions("DKDEFINE")
+dk_aliasFunctions("DKDEFINE")
 
 
 ###############################################################################
@@ -933,7 +931,7 @@ function(DKINCLUDE path)
 		endif()
 	endforeach()
 endfunction()
-AliasFunctions("DKINCLUDE")
+dk_aliasFunctions("DKINCLUDE")
 
 
 ###############################################################################
@@ -950,7 +948,7 @@ function(DKLINKDIR path)
 		link_directories(${item})
 	endforeach()
 endfunction()
-AliasFunctions("DKLINKDIR")
+dk_aliasFunctions("DKLINKDIR")
 
 
 ###############################################################################
@@ -1233,7 +1231,7 @@ function(DKINSTALL src_path import_name dest_path)
 	endif()
 	file(WRITE ${dest_path}/installed "${dest_filename}\n")
 endfunction()
-AliasFunctions("DKINSTALL" "NO_DEBUG_RELEASE_TAGS")
+dk_aliasFunctions("DKINSTALL" "NO_DEBUG_RELEASE_TAGS")
 
 
 ###############################################################################
@@ -1333,7 +1331,7 @@ function(DKSETPATH path)
 	#	DKSET(DKCMAKE_BUILD ${DKCMAKE_BUILD} -DCMAKE_ARCHIVE_OUTPUT_DIRECTORY=${CURRENT_DIR} -DCMAKE_LIBRARY_OUTPUT_DIRECTORY=${CURRENT_DIR} -DCMAKE_RUNTIME_OUTPUT_DIRECTORY=${CURRENT_DIR})
 	#endif()
 endfunction()
-AliasFunctions("DKSETPATH")
+dk_aliasFunctions("DKSETPATH")
 
 
 ###############################################################################
@@ -1363,7 +1361,7 @@ function(MSYS)
 		DKEXECUTE_PROCESS(${MSYS}/bin/bash ${MSYS}/dkscript.tmp)
 	endif()
 endfunction()
-AliasFunctions("MSYS")
+dk_aliasFunctions("MSYS")
 
 
 ###############################################################################
@@ -1393,7 +1391,7 @@ function(MSYS2)
 		DKEXECUTE_PROCESS(${MSYS2}/usr/bin/bash ${MSYS2}/dkscript.tmp)
 	endif()
 endfunction()
-AliasFunctions("MSYS2")
+dk_aliasFunctions("MSYS2")
 
 
 ###############################################################################
@@ -1447,7 +1445,7 @@ function(DKCOMMAND)
 	#DKDEBUG("${ARGV}")
 	DKEXECUTE_PROCESS(${merged_args} WORKING_DIRECTORY ${CURRENT_DIR})
 endfunction()
-AliasFunctions("DKCOMMAND")
+dk_aliasFunctions("DKCOMMAND")
 
 
 
@@ -1460,7 +1458,7 @@ function(DKQCOMMAND)
 		DKCOMMAND(${ARGV})
 	endif()	
 endfunction()
-AliasFunctions("DKQCOMMAND")
+dk_aliasFunctions("DKQCOMMAND")
 
 
 ###############################################################################
@@ -1485,7 +1483,7 @@ function(DEBUG_VS folder sln_file) #target #arch
 		DKEXECUTE_PROCESS(${EXECUTE_COMMAND} WORKING_DIRECTORY ${3RDPARTY}/${folder}/${OS})
 	endif()
 endfunction()
-AliasFunctions("DEBUG_VS" "NO_DEBUG_RELEASE_TAGS")
+dk_aliasFunctions("DEBUG_VS" "NO_DEBUG_RELEASE_TAGS")
 
 
 ###############################################################################
@@ -1510,7 +1508,7 @@ function(RELEASE_VS folder sln_file) #target #arch
 		DKEXECUTE_PROCESS(${EXECUTE_COMMAND} WORKING_DIRECTORY ${3RDPARTY}/${folder}/${OS})
 	endif()
 endfunction()
-AliasFunctions("RELEASE_VS" "NO_DEBUG_RELEASE_TAGS")
+dk_aliasFunctions("RELEASE_VS" "NO_DEBUG_RELEASE_TAGS")
 
 
 ###############################################################################
@@ -1521,7 +1519,7 @@ function(VS)
 	DEBUG_VS(${ARGV})
 	RELEASE_VS(${ARGV})
 endfunction()
-AliasFunctions("VS" "NO_DEBUG_RELEASE_TAGS")
+dk_aliasFunctions("VS" "NO_DEBUG_RELEASE_TAGS")
 
 
 ###############################################################################
@@ -1549,7 +1547,7 @@ function(DEBUG_XCODE folder)
 		endif()
 	endif()
 endfunction()
-AliasFunctions("DEBUG_XCODE" "NO_DEBUG_RELEASE_TAGS")
+dk_aliasFunctions("DEBUG_XCODE" "NO_DEBUG_RELEASE_TAGS")
 
 
 ###############################################################################
@@ -1568,7 +1566,7 @@ function(RELEASE_XCODE folder)
 		endif()
 	endif()
 endfunction()
-AliasFunctions("RELEASE_XCODE" "NO_DEBUG_RELEASE_TAGS")
+dk_aliasFunctions("RELEASE_XCODE" "NO_DEBUG_RELEASE_TAGS")
 
 
 ###############################################################################
@@ -1579,7 +1577,7 @@ function(XCODE)
 	DEBUG_XCODE(${ARGV})
 	RELEASE_XCODE(${ARGV})
 endfunction()
-AliasFunctions("XCODE" "NO_DEBUG_RELEASE_TAGS")
+dk_aliasFunctions("XCODE" "NO_DEBUG_RELEASE_TAGS")
 
 
 ###############################################################################
@@ -1596,7 +1594,7 @@ function(DEBUG_NDK folder)
 		endif()
 	endif()
 endfunction()
-AliasFunctions("DEBUG_NDK" "NO_DEBUG_RELEASE_TAGS")
+dk_aliasFunctions("DEBUG_NDK" "NO_DEBUG_RELEASE_TAGS")
 
 
 ###############################################################################
@@ -1613,7 +1611,7 @@ function(RELEASE_NDK folder)
 		endif()
 	endif()
 endfunction()
-AliasFunctions("RELEASE_NDK" "NO_DEBUG_RELEASE_TAGS")
+dk_aliasFunctions("RELEASE_NDK" "NO_DEBUG_RELEASE_TAGS")
 
 
 ###############################################################################
@@ -1624,7 +1622,7 @@ function(NDK)
 	DEBUG_NDK(${ARGV})
 	RELEASE_NDK(${ARGV})
 endfunction()
-AliasFunctions("NDK" "NO_DEBUG_RELEASE_TAGS")
+dk_aliasFunctions("NDK" "NO_DEBUG_RELEASE_TAGS")
 
 
 ###############################################################################
@@ -1660,7 +1658,7 @@ function(DKLIB lib_path)
 		
 	endforeach()
 endfunction()
-AliasFunctions("DKLIB" "NO_DEBUG_RELEASE_TAGS")
+dk_aliasFunctions("DKLIB" "NO_DEBUG_RELEASE_TAGS")
 
 
 ###############################################################################
@@ -1692,7 +1690,7 @@ function(DEBUG_DKLIB lib_path)
 	endif()
 	
 endfunction()
-AliasFunctions("DEBUG_DKLIB" "NO_DEBUG_RELEASE_TAGS")
+dk_aliasFunctions("DEBUG_DKLIB" "NO_DEBUG_RELEASE_TAGS")
 
 
 ###############################################################################
@@ -1724,7 +1722,7 @@ function(RELEASE_DKLIB lib_path)
 	endif()
 	
 endfunction()
-AliasFunctions("RELEASE_DKLIB" "NO_DEBUG_RELEASE_TAGS")
+dk_aliasFunctions("RELEASE_DKLIB" "NO_DEBUG_RELEASE_TAGS")
 
 
 ###############################################################################
@@ -2135,7 +2133,7 @@ function(DKDEPEND name)
 	#	DKRUNDEPENDS(${name}) # strip everything from the file except if() else() elseif() endif() and DKDEPEND() before sorting.
 	# endif()
 endfunction()
-AliasFunctions("DKDEPEND")
+dk_aliasFunctions("DKDEPEND")
 
 
 ###############################################################################
@@ -2358,7 +2356,7 @@ function(DKRUNDEPENDS name)
 	if(disable_script)
 		file(WRITE ${plugin_path}/DISABLES.TMP "${disable_script}")
 		INCLUDE(${plugin_path}/DISABLES.TMP)
-		#CreateFunc("${disable_script}")   #cmake 3.18+
+		#dk_appendFile(${filepath} "${disable_script}")   #cmake 3.18+
 		DKREMOVE(${plugin_path}/DISABLES.TMP)
 	endif()
 	
@@ -2370,7 +2368,7 @@ function(DKRUNDEPENDS name)
 		endif()
 		file(WRITE ${plugin_path}/DEPENDS.TMP "${depends_script}")
 		INCLUDE(${plugin_path}/DEPENDS.TMP)
-		#CreateFunc("${depends_script}")    #cmake 3.18+
+		#dk_appendFile(${filepath} "${depends_script}")    #cmake 3.18+
 		DKREMOVE(${plugin_path}/DEPENDS.TMP)
 		if(${ARGC} GREATER 1)
 			DKSET(${ARGV1} OFF)
@@ -3029,7 +3027,7 @@ function(DKIMPORT url) #Lib #ID #Patch
 		dk_importDL(${ARGV})
 	endif()
 endfunction()
-AliasFunctions("DKIMPORT")
+dk_aliasFunctions("DKIMPORT")
 
 
 ###############################################################################
@@ -3136,7 +3134,6 @@ function(dk_importGIT url) #branch #PATCH
 	endif()
 	DKDEBUG("${${LIBVAR}} = ${${LIBVAR}}")
 	
-	#DKSET(CURRENT_DIR ${${LIBVAR}})
 	if(NOT EXISTS ${${LIBVAR}}/.git)
 		DKSET(CURRENT_DIR ${DIGITALKNOB})
 		if(EXISTS ${${LIBVAR}})
@@ -3346,64 +3343,54 @@ endfunction()
 #
 function(dk_DownloadAll3rdParty)
 	DKDEBUGFUNC(${ARGV})
-	DKDEPEND_ALL() ## ADD any and all plugins here
+	DKDEPEND_ALL()
 	
 	# Get a list of all /3rdParty/DKMAKE.cmake paths
 	file(GLOB All3rdParty ${DKIMPORTS}/*)
 	foreach(item ${All3rdParty})
 		if(EXISTS ${item}/DKMAKE.cmake)
-	
 			DKINFO("item = ${item}")
 			file(STRINGS ${item}/DKMAKE.cmake lines)
-			
 			unset(temp_import_script)
 			unset(index)
 			unset(indexB)
 			set(KEEPLINE 0)
 	
 			foreach(line ${lines})
-				
 				string(FIND "${line}" "set(" index)
 				if(${index} GREATER -1)
 					set(KEEPLINE 1)
 				endif()
-				
 				string(FIND "${line}" "SET(" index)
 				if(${index} GREATER -1)
 					set(KEEPLINE 1)
 				endif()
-		
 				string(FIND "${line}" "DOWNLOAD(" index)
 				if(${index} GREATER -1)
 					set(KEEPLINE 1)
 				endif()
-				
 				string(FIND "${line}" "DKINSTALL(" index)
 				if(${index} GREATER -1)
 					set(KEEPLINE 1)
 				endif()
-				
 				string(FIND "${line}" "DKIMPORT(" index)
 				if(${index} GREATER -1)
 					set(KEEPLINE 1)
 				endif()
-				
 				if(KEEPLINE)
 					set(dl_import_script "${dl_import_script}${line}\n")
 				endif()
-			
 				string(FIND "${line}" ")" indexB) 
 				if(${indexB} GREATER -1)
 					set(KEEPLINE 0)
 				endif()
 			endforeach()
-
+			
 			if(dl_import_script)
 				file(WRITE ${DKDOWNLOAD}/TEMP/dl_import.TMP "${dl_import_script}")
 				INCLUDE(${DKDOWNLOAD}/TEMP/dl_import.TMP)
 				DKREMOVE(${DKDOWNLOAD}/TEMP/dl_import.TMP)
 			endif()
-
 		endif()
 	endforeach()
 endfunction()
@@ -3473,21 +3460,6 @@ function(dk_GetFileType path rtn-type)
 	else()
 		set(${rtn-type} UNKNOWN PARENT_SCOPE)
 	endif()
-	return()
-endfunction()
-
-
-###############################################################################
-# TEST_dk_getArgIdentifiers(myVarA myVarB)
-# 	 
-function(TEST_dk_getArgIdentifiers myVarA myVarB)
-	dk_getArgIdentifiers(${ARGV})
-	DKDEBUG("ARGI=\"${ARGI}\"")
-	set(index 0)
-	while(ARGI${index})
-		DKDEBUG("ARGI${index}=\"${ARGI${index}}\"")
-		math(EXPR index "${index}+1")
-	endwhile()
 endfunction()
 
 
@@ -3508,7 +3480,6 @@ function(dk_import2 url)
 	DKDEBUG("ARGC_LAST = ${ARGC_LAST}")
 	set(ARGV_LAST ${ARGV${ARGC_LAST}})
 	DKDEBUG("ARGV_LAST = ${ARGV_LAST}")
-	
 	DKDEBUG("Is ${url} a file download link or a local path to a container?  archive, .zip, .tar.gz, .7z, .rar, folder, package, etc?")
 	string(REPLACE "/" ";" url_list ${url})
 	set(n -1)
@@ -3522,7 +3493,6 @@ function(dk_import2 url)
 	DKDEBUG("url_length = ${url_length}")
 	DKDEBUG("url_end = ${url_end}")
 	DKDEBUG("url{url_end} = ${url${url_end}}")
-	
 	dk_GetFileType(${url} type)
 	if(NOT ${type} STREQUAL ARCHIVE) 
 	DKDEBUG("NO")
@@ -3573,5 +3543,4 @@ function(dk_import2 url)
 endfunction()
 
 
-
-include(${DIGITALKNOB}/DK/DKCMake/Functions_Ext.cmake)
+include(${Functions_Ext})
