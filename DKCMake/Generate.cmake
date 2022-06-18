@@ -386,7 +386,7 @@ if(WIN_32)
 		DKREMOVE(${DKPROJECT}/assets/USER)
 		#Compress the assets, they will be included by resource.rc
 		DKINFO("Creating assets.zip . . .")
-		DKZIP(${DKPROJECT}/assets)
+		dk_zip(${DKPROJECT}/assets)
 		# Restore the backed up files, excluded from assets
 		DKCOPY(${DKPROJECT}/Backup ${DKPROJECT}/assets TRUE)
 		DKREMOVE(${DKPROJECT}/Backup)
@@ -493,7 +493,7 @@ if(WIN_64)
 		DKREMOVE(${DKPROJECT}/assets/USER)
 		#Compress the assets, they will be included by resource.rc
 		DKINFO("Creating assets.zip . . .")
-		DKZIP(${DKPROJECT}/assets)
+		dk_zip(${DKPROJECT}/assets)
 		# Restore the backed up files
 		DKCOPY(${DKPROJECT}/Backup/ ${DKPROJECT}/assets/ TRUE)
 		DKREMOVE(${DKPROJECT}/Backup)
@@ -858,7 +858,7 @@ if(NOT RASPBERRY)
 		DKREMOVE(${DKPROJECT}/assets/USER)
 		# Remove excluded files and folders before packaging
 		DKINFO("Creating assets.zip . . .")
-		DKZIP(${DKPROJECT}/assets)
+		dk_zip(${DKPROJECT}/assets)
 		#DKINFO("Creating assets.h . . .")
 		bin2h(SOURCE_FILE ${DKPROJECT}/assets.zip HEADER_FILE ${DKPROJECT}/assets.h VARIABLE_NAME "ASSETS_H")
 		# Restore the backed up assets
@@ -937,7 +937,7 @@ if(RASPBERRY)
 		# Remove excluded files and folders before packaging
 		DKREMOVE(${DKPROJECT}/assets/USER)
 		DKINFO("Creating assets.zip . . .")
-		DKZIP(${DKPROJECT}/assets)
+		dk_zip(${DKPROJECT}/assets)
 		#DKINFO("Creating assets.h . . .")
 		bin2h(SOURCE_FILE ${DKPROJECT}/assets.zip HEADER_FILE ${DKPROJECT}/assets.h VARIABLE_NAME "ASSETS_H")
 		# Restore the backed up assets

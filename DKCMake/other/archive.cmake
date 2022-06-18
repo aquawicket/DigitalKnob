@@ -46,7 +46,7 @@
 #if(ANDROID)
 #   message(STATUS "Creating Android.mk file for ${APP_NAME}....")
 #	#update app name
-#	DKUPDATE_ANDROID_NAME(${APP_NAME})
+#	dk_updateAndroidName(${APP_NAME})
 #	
 #	DKSET(ANDROID_APPMK ${ANDROID_APPMK} "LOCAL_PATH := $(call my-dir)\n")
 #	if(SDL)

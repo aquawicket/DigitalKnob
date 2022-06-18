@@ -376,7 +376,7 @@ endmacro()
 #
 macro(dk_dump variable)
 	DKDEBUGFUNC(${ARGV})
-	DKINFO(" \n")
+	DKINFO(" ")
 	DKINFO("************** DUMP ****************")
 	if(CMAKE_CURRENT_FUNCTION_LIST_FILE)
 		dk_getFilename(${CMAKE_CURRENT_FUNCTION_LIST_FILE} FILENAME)
@@ -399,7 +399,7 @@ macro(dk_dump variable)
 	DKINFO("LENGTH:  ${variableLength}")
 	DKINFO("VALUE:   ${${variable}}")
 	DKINFO("************************************")
-	DKINFO("\n")
+	DKINFO(" ")
 	dk_wait()
 endmacro()
 
@@ -698,13 +698,13 @@ endfunction()
 
 
 ###############################################################################
-# DKZIP(path)
+# dk_zip(path)
 #
-function(DKZIP path)
+function(dk_zip path)
 	DKDEBUGFUNC(${ARGV})
 	DKINFO("Zipping: ${path}")
 	if(NOT EXISTS ${path})
-		DKERROR("ERROR: DKZIP(): the path ${path} does not exist")
+		DKERROR("The path ${path} does not exist")
 	endif()
 	execute_process(COMMAND ${CMAKE_COMMAND} -E tar "cfv" "${DKPROJECT}/assets.zip" --format=zip "." WORKING_DIRECTORY ${path}/)
 endfunction()
@@ -810,9 +810,9 @@ endfunction()
 
 
 ###############################################################################
-# UPX_COMPRESS(path)
+# dk_upxCompress(path)
 #
-function(UPX_COMPRESS path)
+function(dk_upxCompress path)
 	DKDEBUGFUNC(${ARGV})
 	DKINFO("UPX compressing ${path}...")
 	DKINFO("Please wait...")
@@ -1080,8 +1080,8 @@ endfunction()
 #
 function(DKPATCH import_name dest_path)
 	DKDEBUGFUNC(${ARGV})
-	DKWARN("\nCOPYING PATCH FILES FROM _IMPORTS/${import_name} TO ${dest_path}")
-	DKWARN("To stop patch files from overwriting install files, remove the \"PATCH\" argument from the end of the DKIMPORT or DKINSTALL command\n")
+	DKWARN("COPYING PATCH FILES FROM _IMPORTS/${import_name} TO ${dest_path}")
+	DKWARN("To stop patch files from overwriting install files, remove the \"PATCH\" argument from the end of the DKIMPORT or DKINSTALL command")
 	DKWARN("located in ${DKIMPORTS}/${import_name}/DKMAKE.cmake")
 	DKCOPY(${DKIMPORTS}/${import_name}/ ${dest_path}/ TRUE)
 endfunction()
@@ -1106,10 +1106,7 @@ function(DKINSTALL src_path import_name dest_path)
 	if(EXISTS ${dest_path}/installed)
 		#DKINFO("${import_name} already installed")
 		if("${ARGN}" STREQUAL "PATCH")
-			DKINFO("\nCOPYING PATCH FILES FROM _IMPORTS/${import_name} TO COMPLETE INSTALL.")
-			DKINFO("To stop patch files from overwriting install files, remove the \"PATCH\" argument from the end of the DKIMPORT or DKINSTALL command\n")
-			DKINFO("located in ${DKIMPORTS}/${import_name}/DKMAKE.cmake")
-			DKCOPY(${DKIMPORTS}/${import_name}/ ${dest_path}/ TRUE)
+			DKPATCH(${import_name} ${dest_path})
 		endif()
 		return()
 	endif()
@@ -2463,22 +2460,22 @@ endfunction()
 
 
 ###############################################################################
-# DKUPDATE_ANDROID_NAME(name)
+# dk_updateAndroidName(name)
 #
 #	@name:
 #
-function(DKUPDATE_ANDROID_NAME name)
+function(dk_updateAndroidName name)
 	DKDEBUGFUNC(${ARGV})
 	string(TOLOWER ${name} name)
 	if(ANDROID)
 		## update all files and folders recursivley
 		file(GLOB_RECURSE allfiles LIST_DIRECTORIES true RELATIVE "${DKPROJECT}/${OS}/" "${DKPROJECT}/${OS}/*")
-		#DKINFO("\n Getting a list of files in ${DKPROJECT}/${OS} \n")
+		#DKDEBUG("\n Getting a list of files in ${DKPROJECT}/${OS} \n")
 		list(REVERSE allfiles)
 		foreach(each_file ${allfiles})
-			##DKINFO("#####  each_file = ${each_file}")
+			##DKDEBUG("#####  each_file = ${each_file}")
 			set(filepath "${DKPROJECT}/${OS}/${each_file}")
-			##DKINFO("### each_file = ${each_file}")
+			##DKDEBUG("### each_file = ${each_file}")
 			
 			if(NOT IS_DIRECTORY ${filepath})
 				string(FIND "${each_file}" "opendb" indexD)
@@ -2512,11 +2509,11 @@ endfunction()
 
 
 ###############################################################################
-# DKUPDATE_INFO_PLIST(name)
+# dk_updateInfoPlist(name)
 #
 #	@name:
 #
-function(DKUPDATE_INFO_PLIST name)
+function(dk_updateInfoPlist name)
 	DKDEBUGFUNC(${ARGV})
 	if(MAC)
 		## FIXME
@@ -2568,57 +2565,57 @@ endfunction()
 
 
 ###############################################################################
-# ADD_SOURCE(regex)
+# dk_addSource(regex)
 #
 #	@regex:
 #
-function(ADD_SOURCE regex)
+function(dk_addSource regex)
 	DKDEBUGFUNC(${ARGV})
 	DKSET(SRC_INCLUDE ${SRC_INCLUDE} ${ARGV})
 endfunction()
 
 
 ###############################################################################
-# REMOVE_SOURCE(regex)
+# dk_removeSource(regex)
 #
 #	@regex:
 #
-function(REMOVE_SOURCE regex)
+function(dk_removeSource regex)
 	DKDEBUGFUNC(${ARGV})
 	DKSET(SRC_EXCLUDE ${SRC_EXCLUDE} ${ARGV})
 endfunction()
 
 ###############################################################################
-# WRAP_STRING()
+# dk_wrapString()
 #
 #	Function to wrap a given string into multiple lines at the given column position.
 #
 #	@VARIABLE:	The name of the CMake variable holding the string.
 #	@AT_COLUMN:	The column position at which string will be wrapped.
 #
-function(WRAP_STRING)
+function(dk_wrapString)
 	DKDEBUGFUNC(${ARGV})
 	set(oneValueArgs VARIABLE AT_COLUMN)
-	cmake_parse_arguments(WRAP_STRING "${options}" "${oneValueArgs}" "" ${ARGN})
-    string(LENGTH ${${WRAP_STRING_VARIABLE}} stringLength)
+	cmake_parse_arguments(dk_wrapString "${options}" "${oneValueArgs}" "" ${ARGN})
+    string(LENGTH ${${DK_WRAPSTRING_VARIABLE}} stringLength)
     math(EXPR offset "0")
     while(stringLength GREATER 0)
-        if(stringLength GREATER ${WRAP_STRING_AT_COLUMN})
-            math(EXPR length "${WRAP_STRING_AT_COLUMN}")
+        if(stringLength GREATER ${DK_WRAPSTRING_AT_COLUMN})
+            math(EXPR length "${DK_WRAPSTRING_AT_COLUMN}")
         else()
             math(EXPR length "${stringLength}")
         endif()
-        string(SUBSTRING ${${WRAP_STRING_VARIABLE}} ${offset} ${length} line)
+        string(SUBSTRING ${${DK_WRAPSTRING_VARIABLE}} ${offset} ${length} line)
         set(lines "${lines}\n${line}")
         math(EXPR stringLength "${stringLength} - ${length}")
         math(EXPR offset "${offset} + ${length}")
     endwhile()
-    set(${WRAP_STRING_VARIABLE} "${lines}" PARENT_SCOPE)
+    set(${DK_WRAPSTRING_VARIABLE} "${lines}" PARENT_SCOPE)
 endfunction()
 
 
 ###############################################################################
-# BIN2H()
+# dk_bin2h()
 #
 #	https://gist.github.com/sivachandran/3a0de157dccef822a230#file-bin2h-cmake
 #	Function to embed contents of a file as byte array in C/C++ header file(.h). The header file
@@ -2634,38 +2631,38 @@ endfunction()
 #                      as string. But the size variable holds size of the byte array without this
 #                      null byte.
 #	Usage:
-#		BIN2H(SOURCE_FILE "Logo.png" HEADER_FILE "Logo.h" VARIABLE_NAME "LOGO_PNG")
+#		dk_bin2h(SOURCE_FILE "Logo.png" HEADER_FILE "Logo.h" VARIABLE_NAME "LOGO_PNG")
 #
-function(BIN2H)
+function(dk_bin2h)
 	DKDEBUGFUNC(${ARGV})
     set(options APPEND NULL_TERMINATE)
     set(oneValueArgs SOURCE_FILE VARIABLE_NAME HEADER_FILE)
-    cmake_parse_arguments(BIN2H "${options}" "${oneValueArgs}" "" ${ARGN})
+    cmake_parse_arguments(dk_bin2h "${options}" "${oneValueArgs}" "" ${ARGN})
     # reads source file contents as hex string
-    file(READ ${BIN2H_SOURCE_FILE} hexString HEX)
+    file(READ ${DK_BIN2H_SOURCE_FILE} hexString HEX)
     string(LENGTH ${hexString} hexStringLength)
     # appends null byte if asked
-    if(BIN2H_NULL_TERMINATE)
+    if(DK_BIN2H_NULL_TERMINATE)
         set(hexString "${hexString}00")
     endif()
     # wraps the hex string into multiple lines at column 32(i.e. 16 bytes per line)
-    ##wrap_string(VARIABLE hexString AT_COLUMN 32)
+    ##dk_wrapString(VARIABLE hexString AT_COLUMN 32)
     math(EXPR arraySize "${hexStringLength} / 2")
     # adds '0x' prefix and comma suffix before and after every byte respectively
     ##string(REGEX REPLACE "([0-9a-f][0-9a-f])" "\\1" arrayValues ${hexString})
     # removes trailing comma
     ##string(REGEX REPLACE ", $" "" arrayValues ${arrayValues})
     # converts the variable name into proper C identifier
-    string(MAKE_C_IDENTIFIER "${BIN2H_VARIABLE_NAME}" BIN2H_VARIABLE_NAME)
-    string(TOUPPER "${BIN2H_VARIABLE_NAME}" BIN2H_VARIABLE_NAME)
+    string(MAKE_C_IDENTIFIER "${DK_BIN2H_VARIABLE_NAME}" DK_BIN2H_VARIABLE_NAME)
+    string(TOUPPER "${DK_BIN2H_VARIABLE_NAME}" DK_BIN2H_VARIABLE_NAME)
     # declares byte array and the length variables
-    set(arrayDefinition "std::string ${BIN2H_VARIABLE_NAME} = \"${hexString}\";")
-    set(arraySizeDefinition "size_t ${BIN2H_VARIABLE_NAME}_SIZE = ${arraySize};")
+    set(arrayDefinition "std::string ${DK_BIN2H_VARIABLE_NAME} = \"${hexString}\";")
+    set(arraySizeDefinition "size_t ${DK_BIN2H_VARIABLE_NAME}_SIZE = ${arraySize};")
     set(declarations "${arrayDefinition}\n\n${arraySizeDefinition}\n\n")
-    if(BIN2H_APPEND)
-        file(APPEND ${BIN2H_HEADER_FILE} "${declarations}")
+    if(DK_BIN2H_APPEND)
+        file(APPEND ${DK_BIN2H_HEADER_FILE} "${declarations}")
     else()
-        file(WRITE ${BIN2H_HEADER_FILE} "${declarations}")
+        file(WRITE ${DK_BIN2H_HEADER_FILE} "${declarations}")
     endif()
 endfunction()
 
@@ -2825,7 +2822,7 @@ endfunction()
 #
 function(dk_addTarget name target)
 	DKDEBUGFUNC(${ARGV})
-	DKINFO("dk_addTarget( ${ARGV} )")
+	DKDEBUG("dk_addTarget( ${ARGV} )")
 	if(${name}_targets_OFF)
 		list(REMOVE_ITEM ${name}_targets_OFF ${target})
 	endif()
@@ -2849,7 +2846,7 @@ endfunction()
 #
 function(dk_removeTarget name target)
 	DKDEBUGFUNC(${ARGV})
-	DKINFO("dk_removeTarget( ${ARGV} )")
+	DKDEBUG("dk_removeTarget( ${ARGV} )")
 	if(${name}_targets)
 		list(REMOVE_ITEM ${name}_targets ${target})
 	endif()
@@ -2872,21 +2869,21 @@ endfunction()
 #
 function(dk_createSmartObject object)
 	DKDEBUGFUNC(${ARGV})
-	DKINFO("dk_createSmartObject(${object})")
+	DKDEBUG("dk_createSmartObject(${object})")
 	# We require something that can resolve to a full, valid path containing a DKMAKE.cmake file 
 endfunction()
 
 
 ###############################################################################
-# log(args)
+# dk_log(args)
 #
 #	A simple, quick and easy logger
 #
 #	@args:
 #
-function(log args)
+function(dk_log args)
 	DKDEBUGFUNC(${ARGV})
-	DKINFO("${ARGV}")
+	DKDEBUG("${ARGV}")
 	set(output " ")
 	foreach(arg ${ARGV})
 		if(DEFINED ${arg})
@@ -2944,28 +2941,28 @@ function(dk_FindTarget target result_path result_type)
 		if(${index} GREATER -1)
 			set(${result_type} APP PARENT_SCOPE) 
 		else()
-			set(${result_type} LIBRARY PARENT_SCOPE) #LIBRARY is default, we need to label executables to detect them
+			set(${result_type} LIBRARY PARENT_SCOPE)	#LIBRARY is default, we need to label executables to detect them
 		endif()
-		return() #return the found occurance
+		return()
 	endforeach()
 endfunction()
 
 
 ###############################################################################
-# set_readonly(VAR)
+# dk_setReadOnly(VAR)
 #
 #	@VAR:
 #	 
-macro(set_readonly VAR)                      # set_readonly(var value)
+macro(dk_setReadOnly VAR)
 	DKDEBUGFUNC(${ARGV})
-	set("${VAR}" "${ARGN}")                  # Set the variable itself
-	set("_${VAR}_readonly_val" "${ARGN}")    # Store the variable's value for restore it upon modifications.
-	variable_watch("${VAR}" readonly_guard)  # Register a watcher for a variable
+	set("${VAR}" "${ARGN}")						# Set the variable itself
+	set("_${VAR}_readonly_val" "${ARGN}")		# Store the variable's value for restore it upon modifications.
+	variable_watch("${VAR}" dk_readOnlyGuard)	# Register a watcher for a variable
 endmacro()
 
 
 ###############################################################################
-# readonly_guard(VAR access value current_list_file stack)
+# dk_readOnlyGuard(VAR access value current_list_file stack)
 #
 #	@VAR:
 #	@access:
@@ -2973,11 +2970,11 @@ endmacro()
 #	@current_list_file:
 #	@stack:
 #	 
-macro(readonly_guard VAR access value current_list_file stack)   # Watcher for readonly property.
+macro(dk_readOnlyGuard VAR access value current_list_file stack)   # Watcher for readonly property.
 	DKDEBUGFUNC(${ARGV})
 	if ("${access}" STREQUAL "MODIFIED_ACCESS")
 		DKWARN("'${VAR}' is READONLY")
-		set(${VAR} "${_${VAR}_readonly_val}")                    # Restore a value of the variable to the initial one.
+		set(${VAR} "${_${VAR}_readonly_val}")	# Restore a value of the variable to the initial one.
 	endif()
 endmacro()
 
@@ -3009,8 +3006,8 @@ function(dk_addRegistryKey key value data)
 		string(REPLACE "/" "\\" value ${value})
 		string(REPLACE "/" "\\" data  ${data})
 		execute_process(COMMAND reg add "${key}" /v "${value}" /t REG_SZ /d "${data}" /f /reg:64 OUTPUT_VARIABLE _output ERROR_VARIABLE _output RESULT_VARIABLE _failed)
-		DKINFO("_output = ${_output}")
-		DKINFO("_failed = ${_failed}")
+		DKDEBUG("_output = ${_output}")
+		DKDEBUG("_failed = ${_failed}")
 	endif()
 endfunction()
 
@@ -3107,35 +3104,35 @@ function(dk_importGIT url) #branch #PATCH
 	
 	string(TOUPPER ${Lib} LIBVAR)
 	if(NOT LIBVAR)
-		DKINFO("$(LIBVAR) is invalid")
+		DKERROR("$(LIBVAR) is invalid")
 		return()
 	endif()
 	DKDEBUG("LIBVAR = ${LIBVAR}")
 	
 	DKSET(${LIBVAR}_FOLDER ${FOLDER})
 	if(NOT ${LIBVAR}_FOLDER)
-		DKINFO("${LIBVAR}_FOLDER is invalid")
+		DKERROR("${LIBVAR}_FOLDER is invalid")
 		return()
 	endif()
 	DKDEBUG("${LIBVAR}_FOLDER = ${${LIBVAR}_FOLDER}")
 	
 	DKSET(${LIBVAR}_BRANCH ${branch})
 	if(NOT ${LIBVAR}_BRANCH)
-		DKINFO("${LIBVAR}_BRANCH is invalid")
+		DKERROR("${LIBVAR}_BRANCH is invalid")
 		return()
 	endif()
 	DKDEBUG("${LIBVAR}_BRANCH = ${${LIBVAR}_BRANCH}")
 	
 	DKSET(${LIBVAR}_NAME ${FOLDER}-${${LIBVAR}_BRANCH})
 	if(NOT ${LIBVAR}_NAME)
-		DKINFO("${LIBVAR}_NAME is invalid")
+		DKERROR("${LIBVAR}_NAME is invalid")
 		return()
 	endif()
 	DKDEBUG("${LIBVAR}_NAME = ${${LIBVAR}_NAME}")
 	
 	DKSET(${LIBVAR} ${3RDPARTY}/${${LIBVAR}_NAME})
 	if(NOT ${LIBVAR})
-		DKINFO("${${LIBVAR}} is invalid")
+		DKERROR("${${LIBVAR}} is invalid")
 		return()
 	endif()
 	DKDEBUG("${${LIBVAR}} = ${${LIBVAR}}")
@@ -3297,7 +3294,7 @@ function(dk_importDL url) #Lib #ID #Patch
 			#endif()
 		endif()
 		
-		DKINFO("The url doesn't end in .zip or .tar.gz")
+		DKERROR("The url doesn't end in .zip or .tar.gz")
 		DKINFO("We will try to get the master commit id from the page")
 		DOWNLOAD(${url} ${DKDOWNLOAD}/TEMP/${FOLDER}.html)
 		file(READ ${DKDOWNLOAD}/TEMP/${FOLDER}.html PAGE)
