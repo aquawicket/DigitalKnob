@@ -23,4 +23,4 @@
 # SOFTWARE.
 
 
-DKDEPEND(DK)
+dk_depend(DK)

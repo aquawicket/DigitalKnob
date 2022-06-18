@@ -8,15 +8,15 @@ dk_set(JPEG_VERSION 9d)
 dk_set(JPEG_NAME jpeg-${JPEG_VERSION})
 dk_set(JPEG_DL http://www.ijg.org/files/jpegsr${JPEG_VERSION}.zip)
 dk_set(JPEG ${3RDPARTY}/${JPEG_NAME})
-DKINSTALL(${JPEG_DL} jpeg ${JPEG})
+dk_install(${JPEG_DL} jpeg ${JPEG})
 
 
 
 ### LINK ###
-DKINCLUDE(${JPEG})
-DKINCLUDE(${JPEG}/${OS})
-DKINCLUDE(${JPEG}/${OS}/${RELEASE_DIR})
-ANDROID_DKINCLUDE(${JPEG}/${OS}/$(BUILD_TYPE)/jni)
+dk_include(${JPEG})
+dk_include(${JPEG}/${OS})
+dk_include(${JPEG}/${OS}/${RELEASE_DIR})
+ANDROID_dk_include(${JPEG}/${OS}/$(BUILD_TYPE)/jni)
 WIN_DEBUG_DKLIB(${JPEG}/${OS}/${DEBUG_DIR}/jpeg-static.lib)
 WIN_RELEASE_DKLIB(${JPEG}/${OS}/${RELEASE_DIR}/jpeg-static.lib)
 APPLE_DEBUG_DKLIB(${JPEG}/${OS}/${DEBUG_DIR}/libjpeg-static.a)
@@ -37,7 +37,7 @@ RASPBERRY_dk_set(JPEG_CMAKE -DJPEG_INCLUDE_DIR=${JPEG} -DJPEG_INCLUDE_DIR2=${JPE
 
 
 ### COMPILE ###
-DKSETPATH(${JPEG}/${BUILD_DIR})
+dk_setPath(${JPEG}/${BUILD_DIR})
 DKQCOMMAND(${DKCMAKE_BUILD} ${JPEG})
 
 

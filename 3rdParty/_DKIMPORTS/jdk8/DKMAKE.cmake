@@ -15,11 +15,11 @@ LINUX_HOST_dk_set(JDK8_DL https://download.java.net/openjdk/jdk8u41/ri/openjdk-8
 ### INSTALL ###
 dk_set(JDK8_NAME openjdk-${JDK8_VERSION})
 dk_set(JDK8 ${3RDPARTY}/${JDK8_NAME})
-DKINSTALL(${JDK8_DL} jdk8 ${JDK8} PATCH)
+dk_install(${JDK8_DL} jdk8 ${JDK8} PATCH)
 
 
 ### LINK ###
-#DKINCLUDE(${JDK8}/)	
+#dk_include(${JDK8}/)	
 #DKSETENV("JAVA_HOME" ${JDK8})
 #DKSETENV("JAVA_VERSION" ${JDK8_VERSION})
 #DKSETENV("VS_JavaHome" ${JDK8})

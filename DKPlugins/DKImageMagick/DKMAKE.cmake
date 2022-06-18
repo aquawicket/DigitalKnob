@@ -1,7 +1,7 @@
-DKDEPEND(imagemagick)
+dk_depend(imagemagick)
 
 generateCmake(DKImageMagick)
-DKASSETS(DKImageMagick)
+dk_assets(DKImageMagick)
 
 IF(WIN_32)
 	dk_copy(${IMAGEMAGICK}/magick.exe ${DKPROJECT}/assets/DKImageMagick/magick.exe TRUE)

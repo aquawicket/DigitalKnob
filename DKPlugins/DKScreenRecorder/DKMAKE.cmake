@@ -1,9 +1,9 @@
-DKDEPEND(opencv)
+dk_depend(opencv)
 IF(HAVE_DKDuktape)
-	DKDEPEND(DKDuktape)
+	dk_depend(DKDuktape)
 ENDIF()
 IF(HAVE_DKCef)
-	DKDEPEND(DKCef)
+	dk_depend(DKCef)
 ENDIF()
 
 

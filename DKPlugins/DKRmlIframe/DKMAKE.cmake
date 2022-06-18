@@ -2,13 +2,13 @@
 #	RETURN()
 #ENDIF()
 
-DKDEPEND(DKRml)
+dk_depend(DKRml)
 IF(HAVE_DKDuktape)
-	DKDEPEND(DKDuktape)
+	dk_depend(DKDuktape)
 ENDIF()
 IF(HAVE_DKCef)
-	DKDEPEND(DKCef)
+	dk_depend(DKCef)
 ENDIF()
 
 generateCmake(DKRmlIframe)
-DKASSETS(DKRmlIframe)
+dk_assets(DKRmlIframe)

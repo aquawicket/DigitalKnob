@@ -3,14 +3,14 @@
 #
 # https://github.com/XQuartz/XQuartz/releases/download/XQuartz-2.8.1/XQuartz-2.8.1.dmg
 
-MAC_DKDEPEND(homebrew)
+MAC_dk_depend(homebrew)
 
 
 ### INSTALL ###
 #if(NOT EXISTS ${XQUARTZ})
 if(MAC)
 	DKCOMMAND(brew install --cask xquartz)
-	DKINCLUDE(/opt/X11/include)
+	dk_include(/opt/X11/include)
 endif()
 #endif()
 

@@ -1,17 +1,17 @@
 # https://github.com/uNetworking/uWebSockets
 
 
-DKDEPEND(zlib)
-DKDEPEND(libuv)
-DKDEPEND(openssl)
+dk_depend(zlib)
+dk_depend(libuv)
+dk_depend(openssl)
 
 
 dk_import(https://github.com/uNetworking/uWebSockets.git)
 
 
 ### LINK ###
-DKINCLUDE(${UWEBSOCKETS})
-DKINCLUDE(${UWEBSOCKETS}/${OS})
+dk_include(${UWEBSOCKETS})
+dk_include(${UWEBSOCKETS}/${OS})
 WIN_DEBUG_DKLIB(${UWEBSOCKETS}/${OS}/${DEBUG_DIR}/uWS.lib)
 WIN_RELEASE_DKLIB(${UWEBSOCKETS}/${OS}/${RELEASE_DIR}/uWS.lib)
 MAC_DEBUG_DKLIB(${UWEBSOCKETS}/${OS}/lib/${DEBUG_DIR}/uWS.a)
@@ -29,7 +29,7 @@ ANDROID_RELEASE_DKLIB(${UWEBSOCKETS}/${OS}/${RELEASE_DIR}/uWS.a)
 
 
 ### COMPILE ###
-DKSETPATH(${UWEBSOCKETS}/${BUILD_DIR})
+dk_setPath(${UWEBSOCKETS}/${BUILD_DIR})
 DKQCOMMAND(${DKCMAKE_BUILD} ${ZLIB_CMAKE} ${LIBUV_CMAKE} ${OPENSSL_CMAKE} ${UWEBSOCKETS})
 
 

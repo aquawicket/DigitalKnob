@@ -1,1 +1,1 @@
-DKASSETS(DKDisplay)
+dk_assets(DKDisplay)

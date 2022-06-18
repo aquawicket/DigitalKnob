@@ -1,14 +1,14 @@
 ### DKDEPENDS ###
-#DKDEPEND(bullet)
-DKDEPEND(bullet3)
-DKDEPEND(osgworks)
+#dk_depend(bullet)
+dk_depend(bullet3)
+dk_depend(osgworks)
 
 
 
 #dk_import(http://TODO.com/osgbullet-master.zip)
 
 
-DKINSTALL(http://TODO.com/osgbullet-master.zip osgbullet-master)
+dk_install(http://TODO.com/osgbullet-master.zip osgbullet-master)
 dk_set(OSGBULLET ${3RDPARTY}/osgbullet-master)
 
 
@@ -18,11 +18,11 @@ IF(OpenGL2)
 	dk_set(OSGBULLET OSGBULLET_GL2)
 ENDIF(OpenGL2)
 
-DKINCLUDE(${OSGBULLET}/include)
-DKDEFINE(OSGBULLET_STATIC)
+dk_include(${OSGBULLET}/include)
+dk_define(OSGBULLET_STATIC)
 
 IF(osgbCollision)
-	DKDEFINE(OSGBCOLLISION_LIBRARY)	
+	dk_define(OSGBCOLLISION_LIBRARY)	
 	WIN_DEBUG_DKLIB(${OSGBULLET}/${OS}/lib/Debug/osgbCollisiond.lib)
 	WIN_RELEASE_DKLIB(${OSGBULLET}/${OS}/lib/Release/osgbCollision.lib)
 	APPLE_DEBUG_DKLIB(${OSGBULLET}/${OS}/lib/${DEBUG}/libosgbCollision.a)
@@ -34,7 +34,7 @@ IF(osgbCollision)
 ENDIF(osgbCollision)
 	
 IF(osgbDynamics)
-	DKDEFINE(OSGBDYNAMICS_LIBRARY)
+	dk_define(OSGBDYNAMICS_LIBRARY)
 	WIN_DEBUG_DKLIB(${OSGBULLET}/${OS}/lib/Debug/osgbDynamicsd.lib)
 	WIN_RELEASE_DKLIB(${OSGBULLET}/${OS}/lib/Release/osgbDynamics.lib)
 	APPLE_DEBUG_DKLIB(${OSGBULLET}/${OS}/lib/${DEBUG}/libosgbDynamics.a)
@@ -46,7 +46,7 @@ IF(osgbDynamics)
 ENDIF(osgbDynamics)
 	
 IF(osgbInteraction)
-	DKDEFINE(OSGBINTERACTION_LIBRARY)
+	dk_define(OSGBINTERACTION_LIBRARY)
 	WIN_DEBUG_DKLIB(${OSGBULLET}/${OS}/lib/Debug/osgbInteractiond.lib)
 	WIN_RELEASE_DKLIB(${OSGBULLET}/${OS}/lib/Release/osgbInteraction.lib)
 	APPLE_DEBUG_DKLIB(${OSGBULLET}/${OS}/lib/${DEBUG}/libosgbInteraction.a)
@@ -81,7 +81,7 @@ ENDIF(osgdb_sgb)
 
 
 ### COMPILE ###
-DKSETPATH(${OSGBULLET}/${BUILD_DIR})
+dk_setPath(${OSGBULLET}/${BUILD_DIR})
 
 WIN_DKQCOMMAND(${DKCMAKE_BUILD} "-DOSGInstallType=Source And Build Tree" -DOSGBuildRoot=${OSG}/${OS} -DOSGSourceRoot=${OSG} "-DBulletInstallType=Source And Build Tree" -DBulletBuildRoot=${BULLET}/${OS} -DBulletSourceRoot=${BULLET} -DosgWorks_DIR=${OSGWORKS}/${OS}/lib -DOSGBULLET_BUILD_APPLICATIONS=OFF -DOSGBULLET_BUILD_EXAMPLES=OFF -DOSGBULLET_INSTALL_DATA=OFF ${OSGBULLET})
 WIN_DEBUG_VS(osgbullet-master osgBullet.sln)

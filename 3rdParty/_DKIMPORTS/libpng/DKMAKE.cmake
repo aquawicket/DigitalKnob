@@ -2,7 +2,7 @@
 # http://www.libpng.org/pub/png/libpng.html
 
 
-DKDEPEND(zlib)
+dk_depend(zlib)
 
 if(MAC)
 	dk_import(https://github.com/glennrp/libpng.git)
@@ -15,15 +15,15 @@ else()
 	#dk_set(LIBPNG_NAME libpng-${LIBPNG_VERSION})
 	#dk_set(LIBPNG_DL https://github.com/glennrp/libpng/archive/refs/tags/v1.6.35.zip)
 	#dk_set(LIBPNG ${3RDPARTY}/${LIBPNG_NAME})
-	#DKINSTALL(${LIBPNG_DL} libpng ${LIBPNG})
+	#dk_install(${LIBPNG_DL} libpng ${LIBPNG})
 endif()
 
 ### DKPLUGINS LINK ###
-DKDEFINE(PNG_STATIC)
-DKINCLUDE(${LIBPNG})
-DKINCLUDE(${LIBPNG}/${OS})
-DKINCLUDE(${LIBPNG}/${OS}/${RELEASE_DIR})
-ANDROID_DKINCLUDE(${LIBPNG}/${OS}/$(BUILD_TYPE)/jni)
+dk_define(PNG_STATIC)
+dk_include(${LIBPNG})
+dk_include(${LIBPNG}/${OS})
+dk_include(${LIBPNG}/${OS}/${RELEASE_DIR})
+ANDROID_dk_include(${LIBPNG}/${OS}/$(BUILD_TYPE)/jni)
 WIN_DEBUG_DKLIB(${LIBPNG}/${OS}/${DEBUG_DIR}/libpng${LIBPNG_MAJOR}${LIBPNG_MINOR}_staticd.lib)
 WIN_RELEASE_DKLIB(${LIBPNG}/${OS}/${RELEASE_DIR}/libpng${LIBPNG_MAJOR}${LIBPNG_MINOR}_static.lib)
 APPLE_DEBUG_DKLIB(${LIBPNG}/${OS}/${DEBUG_DIR}/libpng.a)
@@ -45,7 +45,7 @@ ANDROID_dk_set(LIBPNG_CMAKE -DPNG_INCLUDE_DIR=${LIBPNG} -DPNG_INCLUDE_DIR2=${LIB
 	
 
 ### COMPILE ###
-DKSETPATH(${LIBPNG}/${BUILD_DIR})
+dk_setPath(${LIBPNG}/${BUILD_DIR})
 
 
 if(MAC_HOST)

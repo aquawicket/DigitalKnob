@@ -5,13 +5,13 @@
 
 
 ### DEPENDS ###
-DKDEPEND(zlib)
-DKDEPEND(xz)
-DKDEPEND(bzip2)
-DKDEPEND(libxml2)
-DKDEPEND(libiconv)
-DKDEPEND(cryptopp)
-WIN_DKDEPEND(openssl)
+dk_depend(zlib)
+dk_depend(xz)
+dk_depend(bzip2)
+dk_depend(libxml2)
+dk_depend(libiconv)
+dk_depend(cryptopp)
+WIN_dk_depend(openssl)
 
 
 #dk_import(https://github.com/libarchive/libarchive.git PATCH)
@@ -19,10 +19,10 @@ dk_import(https://github.com/libarchive/libarchive/archive/93f03b0f5d7316714df9b
 
 
 ### DKPLUGINS LINK ###
-DKDEFINE(LIBARCHIVE_STATIC)
-DKINCLUDE(${LIBARCHIVE}/libarchive)
-DKINCLUDE(${LIBARCHIVE}/${OS})
-ANDROID_DKINCLUDE(${LIBARCHIVE}/contrib/android/include)
+dk_define(LIBARCHIVE_STATIC)
+dk_include(${LIBARCHIVE}/libarchive)
+dk_include(${LIBARCHIVE}/${OS})
+ANDROID_dk_include(${LIBARCHIVE}/contrib/android/include)
 WIN_DEBUG_DKLIB(${LIBARCHIVE}/${OS}/libarchive/${DEBUG_DIR}/archive_static.lib)
 WIN_RELEASE_DKLIB(${LIBARCHIVE}/${OS}/libarchive/${RELEASE_DIR}/archive_static.lib)
 APPLE_DEBUG_DKLIB(${LIBARCHIVE}/${OS}/libarchive/${DEBUG_DIR}/libarchive.a)
@@ -36,7 +36,7 @@ ANDROID_RELEASE_DKLIB(${LIBARCHIVE}/${OS}/libarchive/${RELEASE_DIR}/libarchive.a
 
 
 ### COMPILE ###
-DKSETPATH(${LIBARCHIVE}/${BUILD_DIR})
+dk_setPath(${LIBARCHIVE}/${BUILD_DIR})
 
 #dk_removeSubstring("-std=c17" "${DKCMAKE_BUILD}" DKCMAKE_BUILD_ARCHIVE)
 #dk_removeSubstring("-std=c++1z" "${DKCMAKE_BUILD}" DKCMAKE_BUILD_ARCHIVE)

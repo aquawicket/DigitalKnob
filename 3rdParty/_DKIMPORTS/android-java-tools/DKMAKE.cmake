@@ -13,4 +13,4 @@ dk_import(https://marketplace.visualstudio.com/_apis/public/gallery/publishers/V
 #dk_set(ANDROIDJAVA_NAME androoidjavatools-${ANDROIDJAVA_VERSION})
 #dk_set(ANDROIDJAVA_DL https://marketplace.visualstudio.com/_apis/public/gallery/publishers/VisualCPPTeam/vsextensions/JavaToolsForAndroidProjVS2019/2.8/vspackage)
 #dk_set(ANDROIDJAVA ${3RDPARTY}/${ANDROIDJAVA_NAME})
-#DKINSTALL(${ANDROIDJAVA_DL} android-java-tools ${ANDROIDJAVA})
+#dk_install(${ANDROIDJAVA_DL} android-java-tools ${ANDROIDJAVA})

@@ -10,9 +10,9 @@ if(MAC)
 	APPLE_DKLIB(${OpenGL_lib})
 endif()
 
-IOS_DKDEPEND(opengles)
+IOS_dk_depend(opengles)
 
-IOSSIM_DKDEPEND(opengles)
+IOSSIM_dk_depend(opengles)
 
 if(LINUX)
 	find_package(OpenGL REQUIRED)
@@ -36,4 +36,4 @@ if(RASPBERRY)
 	RASPBERRY_DKLIB(${OPENGL_LIBRARIES})
 endif()	
 
-ANDROID_DKDEPEND(opengles)
+ANDROID_dk_depend(opengles)

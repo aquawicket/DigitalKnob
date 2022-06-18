@@ -2,7 +2,7 @@
 
 
 ### DEPENDS ###
-#DKDEPEND(libname)
+#dk_depend(libname)
 
 
 ### DOWNLOAD ###
@@ -11,7 +11,7 @@ dk_import(https://github.com/organization/package.git)
 
 
 ### LINK ###
-DKINCLUDE(${PACKAGE}/include)
+dk_include(${PACKAGE}/include)
 WIN_DEBUG_DKLIB(${PACKAGE}/${OS}/${DEBUG_DIR}/package.lib)
 WIN_RELEASE_DKLIB(${PACKAGE}/${OS}/${RELEASE_DIR}/package.lib)
 UNIX_DEBUG_DKLIB(${PACKAGE}/${OS}/${DEBUG_DIR}/libpackage.a)
@@ -19,7 +19,7 @@ UNIX_RELEASE_DKLIB(${PACKAGE}/${OS}/${RELEASE_DIR}/libpackage.a)
 
 
 ### GENERATE ###
-DKSETPATH(${PACKAGE}/${BUILD_DIR})
+dk_setPath(${PACKAGE}/${BUILD_DIR})
 DKQCOMMAND(${DKCMAKE_BUILD} ${PACKAGE})
 
 

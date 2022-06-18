@@ -3,7 +3,7 @@
 # https://github.com/GNOME/libxml2/archive/refs/tags/v2.9.8.zip
 
 ### DEPENDS ###
-DKDEPEND(libiconv)
+dk_depend(libiconv)
 
 
 #dk_import(https://github.com/GNOME/libxml2 PATCH)
@@ -12,13 +12,13 @@ dk_import(https://github.com/GNOME/libxml2/archive/f2ad86fa600885429a6083aaf6926
 #dk_set(LIBXML2_NAME libxml2-${LIBXML2_VERSION})
 #dk_set(LIBXML2_DL https://github.com/GNOME/libxml2/archive/refs/tags/v${LIBXML2_VERSION}.zip)
 #dk_set(LIBXML2 ${3RDPARTY}/${LIBXML2_NAME})
-#DKINSTALL(${LIBXML2_DL} libxml2 ${LIBXML2})
+#dk_install(${LIBXML2_DL} libxml2 ${LIBXML2})
 
 
 ### LINK ###
-DKINCLUDE(${LIBXML2})
-DKINCLUDE(${LIBXML2}/include)
-DKINCLUDE(${LIBXML2}/${OS})
+dk_include(${LIBXML2})
+dk_include(${LIBXML2}/include)
+dk_include(${LIBXML2}/${OS})
 WIN_DEBUG_DKLIB(${LIBXML2}/${OS}/${DEBUG_DIR}/xml2.lib)
 WIN_RELEASE_DKLIB(${LIBXML2}/${OS}/${RELEASE_DIR}/xml2.lib)
 APPLE_DEBUG_DKLIB(${LIBXML2}/${OS}/${DEBUG_DIR}/libxml2.a)
@@ -40,7 +40,7 @@ ANDROID_dk_set(LIBXML2_CMAKE -DLIBXML2_INCLUDE_DIR=${LIBXML2}/include -DLIBXML2_
 
 
 ### COMPILE ###
-DKSETPATH(${LIBXML2}/${BUILD_DIR})
+dk_setPath(${LIBXML2}/${BUILD_DIR})
 
 
 WIN_DKQCOMMAND(${DKCMAKE_BUILD} ${LIBICONV_CMAKE} ${ZLIB_CMAKE} ${LIBXML2})

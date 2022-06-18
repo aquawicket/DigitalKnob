@@ -1,1 +1,1 @@
-DKASSETS(DKLoading)
+dk_assets(DKLoading)

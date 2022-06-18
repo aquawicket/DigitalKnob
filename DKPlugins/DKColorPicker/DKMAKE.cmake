@@ -1,1 +1,1 @@
-DKASSETS(DKColorPicker)
+dk_assets(DKColorPicker)

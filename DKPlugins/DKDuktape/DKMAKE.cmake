@@ -1,7 +1,7 @@
-DKDEPEND(duktape)
-DKDEPEND(DK)
+dk_depend(duktape)
+dk_depend(DK)
 if(USE_babel)
-	DKDEPEND(babel)
+	dk_depend(babel)
 endif()
 
 
@@ -11,7 +11,7 @@ endif()
 	
 #dk_set(ENABLE_eventloop ON)
 if(ENABLE_eventloop)
-	DKDEFINE(HAVE_eventloop)
+	dk_define(HAVE_eventloop)
 	if(NOT EXISTS ${DKPLUGINS}/DKDuktape/poll.cpp)
 		dk_copy(${DUKTAPE}/examples/eventloop/poll.c ${DKPLUGINS}/DKDuktape/poll.cpp FALSE)
 	endif()
@@ -40,9 +40,9 @@ else()
 endif()
 
 
-DKINCLUDE(${DKPLUGINS}/DKDuktape)
-DKINCLUDE(${DUKTAPE}/src)
-DKDEFINE(HAVE_DKDuktape)
+dk_include(${DKPLUGINS}/DKDuktape)
+dk_include(${DUKTAPE}/src)
+dk_define(HAVE_DKDuktape)
 
 generateCmake(DKDuktape)
-DKASSETS(DKDuktape)
+dk_assets(DKDuktape)

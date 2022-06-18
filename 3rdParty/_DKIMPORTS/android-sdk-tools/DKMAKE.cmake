@@ -9,7 +9,7 @@ endif()
 # https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip
 
 ### DEPENDS ###
-#DKDEPEND(JDK)
+#dk_depend(JDK)
 
 
 #WIN_HOST_DKIMPORT	(ANDROIDSDKTOOLS_DL https://dl.google.com/android/repository/sdk-tools-windows-4333796.zip)
@@ -24,7 +24,7 @@ MAC_HOST_dk_set(ANDROIDSDKTOOLS_DL https://dl.google.com/android/repository/sdk-
 LINUX_HOST_dk_set(ANDROIDSDKTOOLS_DL https://dl.google.com/android/repository/sdk-tools-linux-${ANDROIDSDKTOOLS_BUILD}.zip)
 dk_set(ANDROIDSDKTOOLS ${ANDROIDSDK}/tools)
 dk_makeDirectory(${ANDROIDSDKTOOLS})
-DKINSTALL(${ANDROIDSDKTOOLS_DL} android-sdk-tools ${ANDROIDSDKTOOLS} PATCH)
+dk_install(${ANDROIDSDKTOOLS_DL} android-sdk-tools ${ANDROIDSDKTOOLS} PATCH)
 
 
 # TODO
@@ -37,6 +37,6 @@ DKINSTALL(${ANDROIDSDKTOOLS_DL} android-sdk-tools ${ANDROIDSDKTOOLS} PATCH)
 
 #license signing
 #if(EXISTS ${ANDROIDSDKTOOLS}/installed)
-#DKDEPEND(java)
+#dk_depend(java)
 #DKCOMMAND(${ANDROIDSDKTOOLS}/bin/sdkmanager.bat --licenses)
 #endif()

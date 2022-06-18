@@ -2,7 +2,7 @@ if(NOT LINUX_HOST)
 	return()
 endif()
 
-DKDEPEND(jdk)
+dk_depend(jdk)
 
 
 dk_set(CURRENT_DIR /usr)

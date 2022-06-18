@@ -2,9 +2,9 @@
 # https://www.libsdl.org/projects/SDL_mixer
 
 ### DEPENDS ###
-DKDEPEND(smpeg2)
-DKDEPEND(ogg)
-DKDEPEND(vorbis)
+dk_depend(smpeg2)
+dk_depend(ogg)
+dk_depend(vorbis)
 
 
 
@@ -17,12 +17,12 @@ dk_import(https://www.libsdl.org/projects/SDL_mixer/release/SDL2_mixer-2.0.1.zip
 #dk_set(SDL_MIXER_NAME SDL2_mixer-${SDL_MIXER_VERSION})
 #dk_set(SDL_MIXER_DL https://www.libsdl.org/projects/SDL_mixer/release/SDL2_mixer-2.0.1.zip)
 #dk_set(SDL_MIXER ${3RDPARTY}/SDL2_mixer-${SDL_MIXER_VERSION})
-#DKINSTALL(${SDL_MIXER_DL} sdl_mixer ${SDL_MIXER} PATCH)
+#dk_install(${SDL_MIXER_DL} sdl_mixer ${SDL_MIXER} PATCH)
 
 
 
 ### DKPLUGINS LINK ###
-DKINCLUDE(${SDL_MIXER})
+dk_include(${SDL_MIXER})
 WIN_DEBUG_DKLIB(${SDL_MIXER}/${OS}/lib/${DEBUG_DIR}/SDL_mixer.lib)
 WIN_RELEASE_DKLIB(${SDL_MIXER}/${OS}/lib/${RELEASE_DIR}/SDL_mixer.lib)
 APPLE_DEBUG_DKLIB(${SDL_MIXER}/${OS}/lib/Debug/SDL_mixer.a)
@@ -37,7 +37,7 @@ ANDROID_RELEASE_DKLIB(${SDL_MIXER}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/li
 
 
 ### COMPILE ###
-DKSETPATH(${SDL_MIXER}/${BUILD_DIR})
+dk_setPath(${SDL_MIXER}/${BUILD_DIR})
 DKQCOMMAND(${DKCMAKE_BUILD} ${SDL_CMAKE} ${VORBIS_CMAKE} ${OGG_CMAKE} ${SMPEG2_CMAKE} ${SDL_MIXER})
 
 

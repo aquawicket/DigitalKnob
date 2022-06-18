@@ -1,1 +1,1 @@
-DKASSETS(DKTooltip)
+dk_assets(DKTooltip)

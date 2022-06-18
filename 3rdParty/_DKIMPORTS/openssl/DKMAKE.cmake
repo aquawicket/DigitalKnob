@@ -8,7 +8,7 @@ dk_import(https://www.npcglib.org/~stathis/downloads/openssl-1.0.2h-vs2015.7z)
 
 
 ### DKPLUGINS LINK ###
-DKINCLUDE(${OPENSSL}/include)
+dk_include(${OPENSSL}/include)
 WIN32_DEBUG_DKLIB(${OPENSSL}/lib/libeay32MTd.lib)
 WIN32_RELEASE_DKLIB(${OPENSSL}/lib/libeay32MT.lib)
 WIN64_DEBUG_DKLIB(${OPENSSL}/lib64/libeay32MTd.lib)

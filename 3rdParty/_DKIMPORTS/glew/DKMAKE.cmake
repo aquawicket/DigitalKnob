@@ -13,7 +13,7 @@ dk_import(https://github.com/nigels-com/glew/releases/download/glew-2.2.0/glew-2
 #dk_set(GLEW_NAME glew-${GLEW_VERSION})
 #dk_set(GLEW_DL https://github.com/nigels-com/glew/releases/download/glew-2.2.0/glew-2.2.0.zip)
 #dk_set(GLEW ${3RDPARTY}/${GLEW_NAME})
-#DKINSTALL(${GLEW_DL} glew ${GLEW})
+#dk_install(${GLEW_DL} glew ${GLEW})
 
 
 
@@ -21,8 +21,8 @@ dk_copy(${GLEW}/build/cmake ${GLEW}/${OS}/CMakeFiles/Export/lib/cmake/glew TRUE)
 
 
 ### LINK ###
-DKDEFINE(GLEW_STATIC)
-DKINCLUDE(${GLEW}/include)
+dk_define(GLEW_STATIC)
+dk_include(${GLEW}/include)
 WIN_DEBUG_DKLIB(${GLEW}/${OS}/lib/${DEBUG_DIR}/libglew32d.lib)
 WIN_RELEASE_DKLIB(${GLEW}/${OS}/lib/${RELEASE_DIR}/libglew32.lib)
 #WIN_DEBUG_SHARED_LIB(${GLEW}/${OS}/bin/${DEBUG_DIR}/glew32d.lib)
@@ -56,7 +56,7 @@ RASPBERRY_RELEASE_DKLIB(${GLEW}/${OS}//${RELEASE_DIR}/lib/libGLEW.a)
 # -DGLEW_STATIC=ON -DGLEW_USE_STATIC_LIBS=ON
 
 ### COMPILE ###
-DKSETPATH(${GLEW}/${BUILD_DIR})
+dk_setPath(${GLEW}/${BUILD_DIR})
 
 WIN_DKQCOMMAND(${DKCMAKE_BUILD} ${GLEW}/build/cmake)
 WIN_VS(${GLEW_NAME} glew.sln glew_s)

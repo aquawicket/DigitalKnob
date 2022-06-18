@@ -4,10 +4,10 @@
 # https://github.com/curl/curl
 
 ### DEPENDS ###
-WIN_DKDEPEND(ws2_32.lib)
-ANDROID_DKDEPEND(dl)
-DKDEPEND(zlib)
-DKDEPEND(openssl)
+WIN_dk_depend(ws2_32.lib)
+ANDROID_dk_depend(dl)
+dk_depend(zlib)
+dk_depend(openssl)
 
 #DKGITCLONE(https://github.com/curl/curl.git curl-7_83_1)
 dk_import(https://github.com/curl/curl/archive/refs/tags/curl-7_43_0.zip)
@@ -16,17 +16,17 @@ dk_import(https://github.com/curl/curl/archive/refs/tags/curl-7_43_0.zip)
 #dk_set(CURL_NAME curl-${CURL_VERSION})
 #dk_set(CURL_DL https://curl.haxx.se/download/${CURL_NAME}.zip)
 #dk_set(CURL ${3RDPARTY}/${CURL_NAME})
-#DKINSTALL(${CURL_DL} curl ${CURL})
+#dk_install(${CURL_DL} curl ${CURL})
 
 
 ### DKPLUGINS LINK ###
-DKDEFINE(CURL_STATICLIB)
-DKINCLUDE(${CURL}/include)
-DKINCLUDE(${CURL}/${OS}/include/curl)
+dk_define(CURL_STATICLIB)
+dk_include(${CURL}/include)
+dk_include(${CURL}/${OS}/include/curl)
 if(DEBUG)
-	DKINCLUDE(${CURL}/${OS}/${DEBUG_DIR}/include/curl)
+	dk_include(${CURL}/${OS}/${DEBUG_DIR}/include/curl)
 elseif(RELEASE)
-	DKINCLUDE(${CURL}/${OS}/${RELEASE_DIR}/include/curl)
+	dk_include(${CURL}/${OS}/${RELEASE_DIR}/include/curl)
 endif()
 WIN_DEBUG_DKLIB(${CURL}/${OS}/lib/${DEBUG_DIR}/libcurl.lib)
 WIN_RELEASE_DKLIB(${CURL}/${OS}/lib/${RELEASE_DIR}/libcurl.lib)
@@ -43,7 +43,7 @@ ANDROID_RELEASE_DKLIB(${CURL}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/libcurl
 
 
 ### COMPILE ###
-DKSETPATH(${CURL}/${BUILD_DIR})
+dk_setPath(${CURL}/${BUILD_DIR})
 
 WIN_DKQCOMMAND(${DKCMAKE_BUILD} -DCURL_STATICLIB=ON -DBUILD_CURL_EXE=OFF -DBUILD_CURL_TESTS=OFF ${OPENSSL_CMAKE} ${ZLIB_CMAKE} ${CURL})
 WIN_VS(${CURL_NAME} CURL.sln libcurl)

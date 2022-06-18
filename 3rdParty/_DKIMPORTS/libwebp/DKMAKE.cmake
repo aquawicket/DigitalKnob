@@ -2,12 +2,12 @@
  
 
 ### DEPENDS ###
-DKDEPEND(zlib)
-DKDEPEND(libpng)
-DKDEPEND(tiff)
-DKDEPEND(libjpeg-turbo)
-DKDEPEND(giflib)
-DKDEPEND(sdl)
+dk_depend(zlib)
+dk_depend(libpng)
+dk_depend(tiff)
+dk_depend(libjpeg-turbo)
+dk_depend(giflib)
+dk_depend(sdl)
 
 dk_import(https://github.com/webmproject/libwebp)
 #dk_set(LIBWEBP_MAJOR 1)
@@ -17,11 +17,11 @@ dk_import(https://github.com/webmproject/libwebp)
 #dk_set(LIBWEBP_NAME libwebp-${LIBWEBP_VERSION})
 #dk_set(LIBWEBP_DL https://github.com/webmproject/libwebp/archive/refs/tags/v1.0.3.zip)
 #dk_set(LIBWEBP ${3RDPARTY}/${LIBWEBP_NAME})
-#DKINSTALL(${LIBWEBP_DL} libwebp ${LIBWEBP})
+#dk_install(${LIBWEBP_DL} libwebp ${LIBWEBP})
 
 
 ### DKPLUGINS LINK ###
-DKINCLUDE(${LIBWEBP})
+dk_include(${LIBWEBP})
 WIN_DEBUG_DKLIB(${LIBWEBP}/${OS}/${DEBUG_DIR}/webp.lib)
 WIN_RELEASE_DKLIB(${LIBWEBP}/${OS}/${RELEASE_DIR}/webp.lib)
 APPLE_DEBUG_DKLIB(${LIBWEBP}/${OS}/WebP.build/${DEBUG_DIR}/webpdecode.build/libwebpdecode.a)
@@ -50,7 +50,7 @@ ANDROID_RELEASE_DKLIB(${LIBWEBP}/${OS}/${RELEASE_DIR}/libwebp.a)
 	
 
 ### COMPILE ###
-DKSETPATH(${LIBWEBP}/${BUILD_DIR})
+dk_setPath(${LIBWEBP}/${BUILD_DIR})
 DKQCOMMAND(${DKCMAKE_BUILD} ${ZLIB_CMAKE} ${LIBPNG_CMAKE} ${LIBJPEG-TURBO_CMAKE} ${TIFF_CMAKE} ${GIFLIB_CMAKE} ${SDL_CMAKE} ${LIBWEBP})
 
 

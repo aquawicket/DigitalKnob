@@ -1,3 +1,3 @@
-DKDEPEND(cryptopp)
+dk_depend(cryptopp)
 
 generateCmake(DKCrypto)

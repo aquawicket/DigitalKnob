@@ -3,13 +3,13 @@ if(NOT MAC_HOST)
 	return()
 endif()
 
-DKDEPEND(carbon)
-DKDEPEND(opengl)
+dk_depend(carbon)
+dk_depend(opengl)
 
 FIND_LIBRARY(AGL_Lib AGL)
 if(NOT AGL_Lib)
 	DKWARN("Could not locate AGL framework")
 endif()
 
-DKDEFINE(GL_SILENCE_DEPRECATION)
+dk_define(GL_SILENCE_DEPRECATION)
 APPLE_DKLIB(${AGL_Lib})

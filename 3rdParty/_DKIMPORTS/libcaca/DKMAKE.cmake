@@ -7,12 +7,12 @@ dk_import(https://github.com/cacalabs/libcaca)
 #dk_set(CACA_NAME libcaca-${CACA_VERSION})
 #dk_set(CACA_DL http://caca.zoy.org/files/libcaca/libcaca-0.99.beta19.tar.gz)
 #dk_set(CACA ${3RDPARTY}/${CACA_NAME})
-#DKINSTALL(${CACA_DL} libcaca ${CACA})
+#dk_install(${CACA_DL} libcaca ${CACA})
 
 
 ### LINK ###
-DKINCLUDE(${CACA}/include)
-DKINCLUDE(${CACA}/${OS})
+dk_include(${CACA}/include)
+dk_include(${CACA}/${OS})
 WIN_DEBUG_DKLIB(${CACA}/${OS}/${DEBUG_DIR}/libcacad.lib)
 WIN_RELEASE_DKLIB(${CACA}/${OS}/${RELEASE_DIR}/libcaca.lib)
 APPLE_DEBUG_DKLIB(${CACA}/${OS}/${DEBUG_DIR}/libcacad.a)
@@ -26,7 +26,7 @@ ANDROID_RELEASE_DKLIB(${CACA}/${OS}/${RELEASE_DIR}/libcaca.a)
 
 
 ### COMPILE ###
-DKSETPATH(${CACA}/${OS})
+dk_setPath(${CACA}/${OS})
 DKQCOMMAND(${DKCMAKE_BUILD} ${CACA})
 
 WIN_VS(${CACA_NAME} libcaca.sln libcaca)

@@ -9,4 +9,4 @@ dk_import(https://github.com/nodeca/js-yaml/archive/49baadd52af887d2991e2c39a663
 #dk_set(JSYAML_NAME js-yaml-${JSYAML_VERSION})
 #dk_set(JSYAML_DL https://codeload.github.com/nodeca/js-yaml/zip/refs/tags/${JSYAML_VERSION})
 #dk_set(JSYAML ${3RDPARTY}/${JSYAML_NAME})
-#DKINSTALL(${JSYAML_DL} js-yaml ${JSYAML})
+#dk_install(${JSYAML_DL} js-yaml ${JSYAML})

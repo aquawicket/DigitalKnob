@@ -1,13 +1,13 @@
 ## https://www.libsdl.org/projects/smpeg/release/smpeg2-2.0.0.tar.gz
 
-DKDEPEND(sdl)
+dk_depend(sdl)
 
 
 dk_import(https://www.libsdl.org/projects/smpeg/release/smpeg2-2.0.0.tar.gz PATCH)
 
 
 ### DKPLUGINS LINK ###
-DKINCLUDE(${SMPEG2})
+dk_include(${SMPEG2})
 WIN_DEBUG_DKLIB			(${SMPEG2}/${OS}/lib/${DEBUG_DIR}/libsmpeg2.lib)
 WIN_RELEASE_DKLIB		(${SMPEG2}/${OS}/lib/${RELEASE_DIR}/libsmpeg2.lib)
 APPLE_DEBUG_DKLIB		(${SMPEG2}/${OS}/lib/${DEBUG_DIR}/libsmpeg2.a)
@@ -30,7 +30,7 @@ DKSET			(SMPEG2_CMAKE -DSMPEG_INCLUDE_DIR=${SMPEG2})
 	
 	
 ### COMPILE ###
-DKSETPATH(${SMPEG2}/${BUILD_DIR})
+dk_setPath(${SMPEG2}/${BUILD_DIR})
 
 WIN_DKQCOMMAND		(${DKCMAKE_BUILD} ${SDL_CMAKE} ${SMPEG2})
 MAC_DKQCOMMAND		(${DKCMAKE_BUILD} -DCMAKE_CXX_FLAGS=-Wno-narrowing ${SDL_CMAKE} ${SMPEG2})

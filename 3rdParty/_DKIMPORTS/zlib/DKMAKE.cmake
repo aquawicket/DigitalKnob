@@ -6,8 +6,8 @@ dk_import(https://github.com/madler/zlib.git)
 
 
 ### DKPLUGINS LINK ###
-DKINCLUDE(${ZLIB})
-DKINCLUDE(${ZLIB}/${OS})
+dk_include(${ZLIB})
+dk_include(${ZLIB}/${OS})
 WIN_DEBUG_DKLIB(${ZLIB}/${OS}/${DEBUG_DIR}/zlibstaticd.lib)
 WIN_RELEASE_DKLIB(${ZLIB}/${OS}/${RELEASE_DIR}/zlibstatic.lib)
 UNIX_DEBUG_DKLIB(${ZLIB}/${OS}/${DEBUG_DIR}/libz.a)
@@ -25,7 +25,7 @@ ANDROID_dk_set(ZLIB_CMAKE "-DCMAKE_C_FLAGS=-I${ZLIB}/${OS}" "-DCMAKE_CXX_FLAGS=-
 
 
 ### COMPILE ###
-DKSETPATH(${ZLIB}/${BUILD_DIR})
+dk_setPath(${ZLIB}/${BUILD_DIR})
 DKQCOMMAND(${DKCMAKE_BUILD} ${ZLIB})
 
 

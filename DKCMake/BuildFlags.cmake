@@ -499,12 +499,12 @@ endif()
 
 
 ############ CORE DEPENDENCIES ############
-DKDEPEND(git)
-DKDEPEND(cmake)
+dk_depend(git)
+dk_depend(cmake)
 
 ### WINDOWS ###	
-WIN_DKDEPEND(visualstudio)
-WIN_DKDEPEND(imagemagick)
+WIN_dk_depend(visualstudio)
+WIN_dk_depend(imagemagick)
 
 
 WIN32_dk_set(DKCMAKE_BUILD ${CMAKE_EXE} -G ${CMAKE_GENERATOR} -A Win32 ${DKCMAKE_FLAGS})
@@ -512,13 +512,13 @@ WIN64_dk_set(DKCMAKE_BUILD ${CMAKE_EXE} -G ${CMAKE_GENERATOR} -A x64 ${DKCMAKE_F
 WIN_dk_set(DKCONFIGURE_BUILD ../../configure ${DKCONFIGURE_FLAGS})
 
 
-MAC_HOST_DKDEPEND(xcode)
+MAC_HOST_dk_depend(xcode)
 MAC_HOST_dk_set(DKCMAKE_BUILD ${CMAKE_COMMAND} -G "Xcode" -T buildsystem=1 ${DKCMAKE_FLAGS})
 MAC_HOST_dk_set(DKCONFIGURE_BUILD ../../configure ${DKCONFIGURE_FLAGS})
 
 
-##LINUX_DKDEPEND(kdevelop)
-LINUX_DKDEPEND(libx11-dev)
+##LINUX_dk_depend(kdevelop)
+LINUX_dk_depend(libx11-dev)
 LINUX_DKLIB(pthread)
 LINUX_DKLIB(dl)
 LINUX_DKLIB(libstdc++fs.a)
@@ -527,11 +527,11 @@ LINUX_RELEASE_dk_set(DKCMAKE_BUILD ${CMAKE_COMMAND} -G "Unix Makefiles" -DCMAKE_
 LINUX_dk_set(DKCONFIGURE_BUILD ../../configure ${DKCONFIGURE_FLAGS})  
 
 
-RASPBERRY_DKDEPEND(libx11-dev)
+RASPBERRY_dk_depend(libx11-dev)
 RASPBERRY_DKLIB(pthread)
 RASPBERRY_DKLIB(dl)
 RASPBERRY_DKLIB(libstdc++fs.a)
-RASPBERRY_DKLINKDIR(/opt/vc/lib)
+RASPBERRY_dk_linkDir(/opt/vc/lib)
 RASPBERRY_DKLIB(bcm_host)
 RASPBERRY_DEBUG_dk_set(DKCMAKE_BUILD ${CMAKE_COMMAND} -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Debug ${DKCMAKE_FLAGS})
 RASPBERRY_RELEASE_dk_set(DKCMAKE_BUILD ${CMAKE_COMMAND} -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release ${DKCMAKE_FLAGS})
@@ -542,19 +542,19 @@ ANDROID_DKLIB(dl)
 ANDROID_DKLIB(log)
 ANDROID_DKLIB(android)
 ANDROID_DKLIB(m)
-ANDROID_DKDEPEND(jdk8)
-ANDROID_DKDEPEND(jdk)
-ANDROID_DKDEPEND(ant)
-ANDROID_DKDEPEND(android-sdk)
-#ANDROID_DKDEPEND(android-studio)
-ANDROID_DKDEPEND(android-ndk)
-ANDROID_DKDEPEND(android-cmake)
-ANDROID_DKDEPEND(visualstudio)
-ANDROID32_DKDEPEND(mingw32)
-ANDROID64_DKDEPEND(mingw64)
-ANDROID_DKDEPEND(msys2)
-ANDROID_DKDEPEND(openssl)
-ANDROID_DKDEPEND(openssl_binary)
+ANDROID_dk_depend(jdk8)
+ANDROID_dk_depend(jdk)
+ANDROID_dk_depend(ant)
+ANDROID_dk_depend(android-sdk)
+#ANDROID_dk_depend(android-studio)
+ANDROID_dk_depend(android-ndk)
+ANDROID_dk_depend(android-cmake)
+ANDROID_dk_depend(visualstudio)
+ANDROID32_dk_depend(mingw32)
+ANDROID64_dk_depend(mingw64)
+ANDROID_dk_depend(msys2)
+ANDROID_dk_depend(openssl)
+ANDROID_dk_depend(openssl_binary)
 
 if(WIN_HOST)
 	ANDROID32_dk_set(DKCMAKE_BUILD ${CMAKE_EXE} -G ${CMAKE_GENERATOR} -A ARM ${DKCMAKE_FLAGS})

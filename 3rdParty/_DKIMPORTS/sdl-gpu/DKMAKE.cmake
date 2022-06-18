@@ -1,7 +1,7 @@
 # https://github.com/grimfang4/sdl-gpu
 
 
-DKDEPEND(sdl)
+dk_depend(sdl)
 
 dk_import(https://github.com/grimfang4/sdl-gpu.git)
 
@@ -11,11 +11,11 @@ dk_import(https://github.com/grimfang4/sdl-gpu.git)
 #dk_set(SDL-GPU_NAME sdl-gpu-${SDL-GPU_VERSION})
 #dk_set(SDL-GPU_DL https://github.com/grimfang4/sdl-gpu/archive/refs/heads/master.zip)
 #dk_set(SDL-GPU ${3RDPARTY}/${SDL-GPU_NAME})
-#DKINSTALL(${SDL-GPU_DL} sdl-gpu ${SDL-GPU})
+#dk_install(${SDL-GPU_DL} sdl-gpu ${SDL-GPU})
 
 
 ### DKPLUGINS LINK ###
-DKINCLUDE(${SDL-GPU}/include)
+dk_include(${SDL-GPU}/include)
 WIN_DEBUG_DKLIB(${SDL-GPU}/${OS}/SDL_gpu-VS/lib/Debug/SDL2_gpu_s.lib)
 WIN_RELEASE_DKLIB(${SDL-GPU}/${OS}/SDL_gpu-VS/lib/Release/SDL2_gpu_s.lib)
 MAC_DEBUG_DKLIB(${SDL-GPU}/${OS}/SDL_gpu/lib/Debug/libSDL2_gpu.a)
@@ -35,7 +35,7 @@ ANDROID_RELEASE_DKLIB(${SDL-GPU}/${OS}/SDL_gpu-VS/lib/Release/libSDL2_gpu_s.a)
 
 
 ### COMPILE ###
-DKSETPATH(${SDL-GPU}/${BUILD_DIR})
+dk_setPath(${SDL-GPU}/${BUILD_DIR})
 DKQCOMMAND(${DKCMAKE_BUILD} ${SDL_CMAKE} ${SDL-GPU})
 
 

@@ -2,10 +2,10 @@
 # https://github.com/opencv/opencv/archive/refs/tags/4.5.3.zip
 
 ### DEPENDS ###
-DKDEPEND(python)
-DKDEPEND(libjpeg-turbo)
-DKDEPEND(tiff)
-DKDEPEND(libpng)
+dk_depend(python)
+dk_depend(libjpeg-turbo)
+dk_depend(tiff)
+dk_depend(libpng)
 
 
 ### VERSION ###
@@ -23,16 +23,16 @@ dk_set(OPENCV_NAME opencv-${OPENCV_VERSION})
 #dk_set(OPENCV_DL https://sourceforge.net/projects/opencvlibrary/files/opencv-unix/${OPENCV_VERSION}/${OPENCV_NAME}.zip)
 dk_set(OPENCV_DL https://github.com/opencv/opencv/archive/refs/tags/${OPENCV_VERSION}.zip)
 dk_set(OPENCV ${3RDPARTY}/${OPENCV_NAME})
-DKINSTALL(${OPENCV_DL} opencv ${OPENCV})
+dk_install(${OPENCV_DL} opencv ${OPENCV})
 
 
 ### LINK ###
-DKINCLUDE(${OPENCV})
-DKINCLUDE(${OPENCV}/modules/core/include)
-DKINCLUDE(${OPENCV}/modules/videoio/include)
-DKINCLUDE(${OPENCV}/${OS})
-DKINCLUDE(${OPENCV}/${OS}/${DEBUG_DIR})
-DKINCLUDE(${OPENCV}/${OS}/${RELEASE_DIR})
+dk_include(${OPENCV})
+dk_include(${OPENCV}/modules/core/include)
+dk_include(${OPENCV}/modules/videoio/include)
+dk_include(${OPENCV}/${OS})
+dk_include(${OPENCV}/${OS}/${DEBUG_DIR})
+dk_include(${OPENCV}/${OS}/${RELEASE_DIR})
 
 WIN_DEBUG_DKLIB(${OPENCV}/${OS}/lib/${DEBUG_DIR}/opencv_core${OPENCV_MAJOR}${OPENCV_MINOR}${OPENCV_BUILD}d.lib)
 WIN_RELEASE_DKLIB(${OPENCV}/${OS}/lib/${RELEASE_DIR}/opencv_core${OPENCV_MAJOR}${OPENCV_MINOR}${OPENCV_BUILD}.lib)
@@ -158,53 +158,53 @@ ANDROID_RELEASE_DKLIB(${OPENCV}/${OS}/lib/${RELEASE_DIR}/libopencv_videoio.a)
 
 
 ### COMPILE ###
-WIN_DKSETPATH(${OPENCV}/${OS})
+WIN_dk_setPath(${OPENCV}/${OS})
 WIN32_DKQCOMMAND(${DKCMAKE_BUILD} ${OPENCV})
 WIN64_DKQCOMMAND(${DKCMAKE_BUILD} -DCV_DISABLE_OPTIMIZATION=ON -DCPU_BASELINE="" -DCPU_DISPATCH="" ${OPENCV})
 WIN_VS(${OPENCV_NAME} OpenCV.sln)
 
 
-MAC_DKSETPATH(${OPENCV}/${OS})
+MAC_dk_setPath(${OPENCV}/${OS})
 MAC64_DKQCOMMAND(${DKCMAKE_BUILD} "-DCMAKE_CXX_FLAGS=-stdlib=libc++" ${OPENCV})
 MAC_XCODE(${OPENCV_NAME} opencv_core)
 MAC_XCODE(${OPENCV_NAME} opencv_imgcodecs)
 MAC_XCODE(${OPENCV_NAME} opencv_videoio)
 
 
-IOS_DKSETPATH(${OPENCV}/${OS})
+IOS_dk_setPath(${OPENCV}/${OS})
 IOS64_DKQCOMMAND(${DKCMAKE_BUILD} ${OPENCV})
 IOS_XCODE(${OPENCV_NAME} opencv_core)
 IOS_XCODE(${OPENCV_NAME} opencv_imgcodecs)
 IOS_XCODE(${OPENCV_NAME} opencv_videoio)
 
 
-IOSSIM_DKSETPATH(${OPENCV}/${OS})
+IOSSIM_dk_setPath(${OPENCV}/${OS})
 IOSSIM64_DKQCOMMAND(${DKCMAKE_BUILD} ${OPENCV})
 IOSSIM_XCODE(${OPENCV_NAME} opencv_core)
 IOSSIM_XCODE(${OPENCV_NAME} opencv_imgcodecs)
 IOSSIM_XCODE(${OPENCV_NAME} opencv_videoio)
 
 
-LINUX_DEBUG_DKSETPATH(${OPENCV}/${OS}/${DEBUG_DIR})
+LINUX_DEBUG_dk_setPath(${OPENCV}/${OS}/${DEBUG_DIR})
 LINUX_DEBUG_DKQCOMMAND(${DKCMAKE_BUILD} ${OPENCV})
 LINUX_DEBUG_DKQCOMMAND(make opencv_core)
 LINUX_DEBUG_DKQCOMMAND(make opencv_imgcodecs)
 LINUX_DEBUG_DKQCOMMAND(make opencv_videoio)
 
-LINUX_RELEASE_DKSETPATH(${OPENCV}/${OS}/${RELEASE_DIR})
+LINUX_RELEASE_dk_setPath(${OPENCV}/${OS}/${RELEASE_DIR})
 LINUX_RELEASE_DKQCOMMAND(${DKCMAKE_BUILD} ${OPENCV})
 LINUX_RELEASE_DKQCOMMAND(make opencv_core)
 LINUX_RELEASE_DKQCOMMAND(make opencv_imgcodecs)
 LINUX_RELEASE_DKQCOMMAND(make opencv_videoio)
 
 
-RASPBERRY_DEBUG_DKSETPATH(${OPENCV}/${OS}/${DEBUG_DIR})
+RASPBERRY_DEBUG_dk_setPath(${OPENCV}/${OS}/${DEBUG_DIR})
 RASPBERRY_DEBUG_DKQCOMMAND(${DKCMAKE_BUILD} -DWITH_IPP=ON ${OPENCV})
 RASPBERRY_DEBUG_DKQCOMMAND(make opencv_core)
 RASPBERRY_DEBUG_DKQCOMMAND(make opencv_imgcodecs)
 RASPBERRY_DEBUG_DKQCOMMAND(make opencv_videoio)
 
-RASPBERRY_RELEASE_DKSETPATH(${OPENCV}/${OS}/${RELEASE_DIR})
+RASPBERRY_RELEASE_dk_setPath(${OPENCV}/${OS}/${RELEASE_DIR})
 RASPBERRY_RELEASE_DKQCOMMAND(${DKCMAKE_BUILD} -DWITH_IPP=ON ${OPENCV})
 RASPBERRY_RELEASE_DKQCOMMAND(make opencv_core)
 RASPBERRY_RELEASE_DKQCOMMAND(make opencv_imgcodecs)
@@ -212,7 +212,7 @@ RASPBERRY_RELEASE_DKQCOMMAND(make opencv_videoio)
 
 
 ##ANDROID_NDK(${OPENCV_NAME})
-ANDROID_DKSETPATH(${OPENCV}/${OS})
+ANDROID_dk_setPath(${OPENCV}/${OS})
 ANDROID32_DKQCOMMAND(${DKCMAKE_BUILD} ${OPENCV})
 ANDROID64_DKQCOMMAND(${DKCMAKE_BUILD} ${OPENCV})
 ANDROID_VS(${OPENCV_NAME} OpenCV.sln)

@@ -1,5 +1,5 @@
-DKDEPEND(codemirror)
+dk_depend(codemirror)
 dk_copy(${CODEMIRROR}/lib/ ${DKPLUGINS}/DKCodeMirror/lib/ TRUE)
 dk_copy(${CODEMIRROR}/theme/ ${DKPLUGINS}/DKCodeMirror/theme/ TRUE)
 dk_copy(${CODEMIRROR}/mode/ ${DKPLUGINS}/DKCodeMirror/mode/ TRUE)
-DKASSETS(DKCodeMirror)
+dk_assets(DKCodeMirror)

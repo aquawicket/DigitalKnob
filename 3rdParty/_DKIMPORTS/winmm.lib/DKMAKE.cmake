@@ -4,5 +4,5 @@ if(NOT WIN_HOST)
 endif()
 
 
-DKDEFINE(__WINDOWS_MM__)
+dk_define(__WINDOWS_MM__)
 WIN_DKLIB(winmm.lib)

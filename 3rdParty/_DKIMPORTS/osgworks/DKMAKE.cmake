@@ -1,5 +1,5 @@
 ### DEPENDS ###
-DKDEPEND(openscenegraph)
+dk_depend(openscenegraph)
 
 
 #dk_import(http://TODO.com/osgworks-master.zip)
@@ -12,13 +12,13 @@ dk_set(OSGWORKS_GL2 ${3RDPARTY}/${OSGWORKS_NAME}-GL2)
 IF(OpenGL2)
 	dk_set(OSGWORKS OSGWORKS_GL2)
 ENDIF(OpenGL2)
-DKINSTALL(${OSGWORKS_DL} osgworks ${OSGWORKS})
+dk_install(${OSGWORKS_DL} osgworks ${OSGWORKS})
 
 
 
 ### LINK ###
-DKINCLUDE(${OSGWORKS}/include)
-DKDEFINE(OSGWORKS_STATIC)
+dk_include(${OSGWORKS}/include)
+dk_define(OSGWORKS_STATIC)
 
 IF(osgdb_osgobjects)
 	WIN_DEBUG_DKLIB(${OSGWORKS}/${OS}/lib/Debug/osgdb_osgobjectsd.lib)
@@ -99,7 +99,7 @@ ENDIF(osgwTools)
 
 
 ### COMPILE ###
-DKSETPATH(${OSGWORKS}/${BUILD_DIR})
+dk_setPath(${OSGWORKS}/${BUILD_DIR})
 
 WIN_DKQCOMMAND(${DKCMAKE_BUILD} "-DOSGInstallType=Source And Build Tree" -DOSGBuildRoot=${OSG}/${OS} -DOSGSourceRoot=${OSG} -DOSGWORKS_BUILD_APPS=OFF -DOSGWORKS_INSTALL_DATA=OFF -DDIRECTINPUT_ARCH_x64=OFF -DBoost_INCLUDE_DIR=OFF ${OSGWORKS})
 WIN_VS(osgworks-master osgWorks.sln)

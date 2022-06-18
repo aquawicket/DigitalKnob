@@ -25,7 +25,7 @@ RASPBERRY_dk_import(https://github.com/upx/upx/releases/download/v3.96/upx-3.96-
 #LINUX64_dk_set(UPX_DL https://github.com/upx/upx/releases/download/v3.96/upx-3.96-amd64_linux.tar.xz)
 #RASPBERRY_dk_set(UPX_DL https://github.com/upx/upx/releases/download/v${UPX_VERSION}/${UPX_NAME}-arm_linux.tar.xz)
 #dk_set(UPX ${3RDPARTY}/${UPX_NAME})
-#DKINSTALL(${UPX_DL} upx ${UPX})
+#dk_install(${UPX_DL} upx ${UPX})
 
 
 WIN_dk_set(UPX_EXE ${UPX}/upx.exe)

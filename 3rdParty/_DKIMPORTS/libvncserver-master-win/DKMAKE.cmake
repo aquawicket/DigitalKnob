@@ -1,14 +1,14 @@
 #dk_set(VNCSERVER_DL https://github.com/LibVNC/libvncserver/archive/refs/heads/master-win.zip)
 
 ### DEPENDS ###
-DKDEPEND(zlib)
-DKDEPEND(libpng)
+dk_depend(zlib)
+dk_depend(libpng)
 IF(ANDROID)
-	DKDEPEND(jpeg)
+	dk_depend(jpeg)
 ELSE()
-	DKDEPEND(libjpeg-turbo)
+	dk_depend(libjpeg-turbo)
 ENDIF()
-DKDEPEND(openssl)
+dk_depend(openssl)
 
 
 dk_set(VNCSERVER_VERSION master-win)
@@ -18,15 +18,15 @@ dk_set(VNCSERVER ${3RDPARTY}/${VNCSERVER_NAME})
 
 
 ### INSTALL ###
-DKINSTALL(${VNCSERVER_DL} libvncserver-master_win ${VNCSERVER})
+dk_install(${VNCSERVER_DL} libvncserver-master_win ${VNCSERVER})
 
 
 
 ### LINK ###
-DKINCLUDE(${VNCSERVER})
-DKINCLUDE(${VNCSERVER}/examples)
-DKINCLUDE(${VNCSERVER}/${OS})
-DKINCLUDE(${VNCSERVER}/${OS}/${RELEASE_DIR})
+dk_include(${VNCSERVER})
+dk_include(${VNCSERVER}/examples)
+dk_include(${VNCSERVER}/${OS})
+dk_include(${VNCSERVER}/${OS}/${RELEASE_DIR})
 WIN_DEBUG_DKLIB(${VNCSERVER}/${OS}/${DEBUG_DIR}/vncserver.lib)
 WIN_RELEASE_DKLIB(${VNCSERVER}/${OS}/${RELEASE_DIR}/vncserver.lib)
 WIN_DEBUG_DKLIB(${VNCSERVER}/${OS}/${DEBUG_DIR}/vncclient.lib)
@@ -34,7 +34,7 @@ WIN_RELEASE_DKLIB(${VNCSERVER}/${OS}/${RELEASE_DIR}/vncclient.lib)
 
 
 ### COMPILE ###
-WIN_DKSETPATH(${VNCSERVER}/${OS})
+WIN_dk_setPath(${VNCSERVER}/${OS})
 WIN_DKQCOMMAND(${DKCMAKE_BUILD} -DWITH_JPEG=ON ${OPENSSL_CMAKE} ${PNG_CMAKE} ${JPEG_CMAKE} ${ZLIB_CMAKE} ${VNCSERVER})
 WIN_VS(${VNCSERVER_NAME} LibVNCServer.sln vncserver)
 WIN_VS(${VNCSERVER_NAME} LibVNCServer.sln vncclient)

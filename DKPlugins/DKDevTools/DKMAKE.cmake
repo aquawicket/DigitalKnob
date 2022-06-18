@@ -1,1 +1,1 @@
-DKASSETS(DKDevTools)
+dk_assets(DKDevTools)

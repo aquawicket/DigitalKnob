@@ -9,4 +9,4 @@ dk_import(https://github.com/moment/moment/raw/e96809208c9d1b1bbe22d605e76985770
 #dk_set(MOMENTJS_DL https://github.com/moment/moment/raw/2.29.1/moment.js)
 #dk_set(MOMENTJS_DL https://momentjs.com/downloads/moment.min.js)
 #dk_set(MOMENTJS ${3RDPARTY}/${MOMENTJS_NAME})
-#DKINSTALL(${MOMENTJS_DL} moment ${MOMENTJS})
+#dk_install(${MOMENTJS_DL} moment ${MOMENTJS})

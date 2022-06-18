@@ -7,15 +7,15 @@
 # http://www.leptonica.org/source/leptonica-1.74.4.tar.gz
 
 ### DEPENDS ###
-DKDEPEND(zlib)
-DKDEPEND(tiff)
-DKDEPEND(libpng)
+dk_depend(zlib)
+dk_depend(tiff)
+dk_depend(libpng)
 IF(ANDROID)
-	DKDEPEND(jpeg)
+	dk_depend(jpeg)
 ELSE()
-	DKDEPEND(libjpeg-turbo)
+	dk_depend(libjpeg-turbo)
 ENDIF()
-DKDEPEND(giflib)
+dk_depend(giflib)
 
 
 dk_import(https://github.com/DanBloomberg/leptonica)
@@ -26,13 +26,13 @@ dk_import(https://github.com/DanBloomberg/leptonica)
 #dk_set(LEPTONICA_NAME leptonica-${LEPTONICA_VERSION})
 #dk_set(LEPTONICA_DL https://github.com/DanBloomberg/leptonica/archive/refs/tags/${LEPTONICA_VERSION}.zip)
 #dk_set(LEPTONICA ${3RDPARTY}/${LEPTONICA_NAME})
-#DKINSTALL(${LEPTONICA_DL} leptonica ${LEPTONICA})
+#dk_install(${LEPTONICA_DL} leptonica ${LEPTONICA})
 
 
 ### LINK ###
-DKINCLUDE(${LEPTONICA})
-DKINCLUDE(${LEPTONICA}/${OS}/src)
-DKINCLUDE(${LEPTONICA}/${OS}/${RELEASE_DIR}/src)
+dk_include(${LEPTONICA})
+dk_include(${LEPTONICA}/${OS}/src)
+dk_include(${LEPTONICA}/${OS}/${RELEASE_DIR}/src)
 WIN_DEBUG_DKLIB(${LEPTONICA}/${OS}/src/${DEBUG_DIR}/${LEPTONICA_NAME}d.lib)
 WIN_RELEASE_DKLIB(${LEPTONICA}/${OS}/src/${RELEASE_DIR}/${LEPTONICA_NAME}.lib)
 APPLE_DEBUG_DKLIB(${LEPTONICA}/${OS}/src/${DEBUG_DIR}/libleptonica.a)
@@ -48,7 +48,7 @@ WIN_dk_set(LEPTONICA_CMAKE -DLeptonica_DIR=${LEPTONICA}/${OS})
 
 
 ### COMPILE ###
-DKSETPATH(${LEPTONICA}/${BUILD_DIR})
+dk_setPath(${LEPTONICA}/${BUILD_DIR})
 
 WIN_DKQCOMMAND(${DKCMAKE_BUILD} -DSTATIC=ON -DCMAKE_INSTALL_PREFIX=${LEPTONICA} ${ZLIB_CMAKE} ${TIFF_CMAKE} ${PNG_CMAKE} ${JPEG_CMAKE} ${GIF_CMAKE} ${LEPTONICA})
 WIN_VS(${LEPTONICA_NAME} LEPTONICA.sln leptonica)

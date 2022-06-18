@@ -1,6 +1,6 @@
-DKDEPEND(DK)
+dk_depend(DK)
 DKDLL(DKPlugin1)
-DKASSETS(DKPlugin1)
+dk_assets(DKPlugin1)
 
 IF(WIN_32)
 	dk_copy(${DKPLUGINS}/DKPlugin1/win32/Release/DKPlugin1.dll ${DKPROJECT}/assets/DKPlugin1 TRUE)

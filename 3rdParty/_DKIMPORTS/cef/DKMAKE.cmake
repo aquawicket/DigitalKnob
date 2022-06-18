@@ -57,9 +57,9 @@
 # https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_linuxarm64_minimal.tar.bz2
 # https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_linuxarm64_client.tar.bz2
 
-MAC_DKDEPEND(appkit)
-LINUX_DKDEPEND(build-essential)
-LINUX_DKDEPEND(libgtk2.0-dev)
+MAC_dk_depend(appkit)
+LINUX_dk_depend(build-essential)
+LINUX_dk_depend(libgtk2.0-dev)
 
 
 WIN32_DKIMPORT		(https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_windows32.tar.bz2)
@@ -95,34 +95,34 @@ RASPBERRY64_dk_import(https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5
 
 
 ### DKPLUGINS LINK ###
-DKDEFINE(__STDC_CONSTANT_MACROS)
-DKDEFINE(__STDC_FORMAT_MACROS)
-DKDEFINE(PSAPI_VERSION=1)
-DKDEFINE(NOMINMAX)
-#DKDEFINE(CEF_SANDBOX)
-DKDEFINE(CEF_ATL)
-WIN_DKINCLUDE(${CEF})
+dk_define(__STDC_CONSTANT_MACROS)
+dk_define(__STDC_FORMAT_MACROS)
+dk_define(PSAPI_VERSION=1)
+dk_define(NOMINMAX)
+#dk_define(CEF_SANDBOX)
+dk_define(CEF_ATL)
+WIN_dk_include(${CEF})
 WIN_DEBUG_DKLIB(${CEF}/${DEBUG_DIR}/libcef.lib)
 WIN_RELEASE_DKLIB(${CEF}/${RELEASE_DIR}/libcef.lib)
 WIN_DEBUG_DKLIB(${CEF}/${OS}/libcef_dll_wrapper/${DEBUG_DIR}/libcef_dll_wrapper.lib)
 WIN_RELEASE_DKLIB(${CEF}/${OS}/libcef_dll_wrapper/${RELEASE_DIR}/libcef_dll_wrapper.lib)
 #WIN_DEBUG_DKLIB(${CEF}/${DEBUG_DIR}/cef_sandbox.lib)
 #WIN_RELEASE_DKLIB(${CEF}/${RELEASE_DIR}/cef_sandbox.lib)
-MAC_DKINCLUDE(${CEF})
+MAC_dk_include(${CEF})
 #MAC_DEBUG_DKLIB("${CEF}${DEBUG_DIR}/Chromium Embedded Framework.framework")
 #MAC_RELEASE_DKLIB("${CEF}/${RELEASE_DIR}/Chromium Embedded Framework.framework")
 MAC_DEBUG_DKLIB(${CEF}/${OS}/libcef_dll_wrapper/${DEBUG_DIR}/libcef_dll_wrapper.a)
 MAC_RELEASE_DKLIB(${CEF}/${OS}/libcef_dll_wrapper/${RELEASE_DIR}/libcef_dll_wrapper.a)
 ## MAC_DEBUG_DKLIB(${CEF}${DEBUG_DIR}/cef_sandbox.a)
 ## MAC_RELEASE_DKLIB(${CEF}/${RELEASE_DIR}/cef_sandbox.a)
-LINUX_DKINCLUDE(${CEF})
+LINUX_dk_include(${CEF})
 LINUX_DEBUG_DKLIB(${CEF}/${DEBUG_DIR}/libcef.so)
 LINUX_RELEASE_DKLIB(${CEF}/${RELEASE_DIR}/libcef.so)
 LINUX_DEBUG_DKLIB(${CEF}/${OS}/${DEBUG_DIR}/libcef_dll_wrapper/libcef_dll_wrapper.a)
 LINUX_RELEASE_DKLIB(${CEF}/${OS}/${RELEASE_DIR}/libcef_dll_wrapper/libcef_dll_wrapper.a)
 ## LINUX_DEBUG_DKLIB(${CEF}/${DEBUG_DIR}/cef_sandbox.a)
 ## LINUX_RELEASE_DKLIB(${CEF}/${RELEASE_DIR}/cef_sandbox.a)
-RASPBERRY_DKINCLUDE(${CEF})
+RASPBERRY_dk_include(${CEF})
 RASPBERRY_DEBUG_DKLIB(${CEF}/${DEBUG_DIR}/libcef.so)
 RASPBERRY_RELEASE_DKLIB(${CEF}/${RELEASE_DIR}/libcef.so)
 RASPBERRY_DEBUG_DKLIB(${CEF}/${OS}/${DEBUG_DIR}/libcef_dll_wrapper/libcef_dll_wrapper.a)
@@ -132,7 +132,7 @@ RASPBERRY_RELEASE_DKLIB(${CEF}/${OS}/${RELEASE_DIR}/libcef_dll_wrapper/libcef_dl
 
 
 ### COMPILE ###
-DKSETPATH(${CEF}/${BUILD_DIR})
+dk_setPath(${CEF}/${BUILD_DIR})
 
 WIN_DKQCOMMAND(${DKCMAKE_BUILD} -DUSE_SANDBOX=Off ${CEF})
 WIN_VS(${CEF_NAME} cef.sln libcef_dll_wrapper)

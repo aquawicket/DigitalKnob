@@ -1,16 +1,16 @@
 # https://sourceforge.net/projects/waave/files/waave/waave-3.01.tar.gz
 
 ### DEPENDS ###
-DKDEPEND(ffmpeg-dev)
-DKDEPEND(ffmpeg-shared)
-DKDEPEND(ffmpeg-static)
-DKDEPEND(sdl)
+dk_depend(ffmpeg-dev)
+dk_depend(ffmpeg-shared)
+dk_depend(ffmpeg-static)
+dk_depend(sdl)
 
 dk_import(https://sourceforge.net/projects/waave/files/waave/waave-3.01.tar.gz)
 
 
 ### LINK ###
-DKINCLUDE(${WAAVE}/src)
+dk_include(${WAAVE}/src)
 WIN_DEBUG_DKLIB(${WAAVE}/${OS}/${DEBUG_DIR}/waave.lib)
 WIN_RELEASE_DKLIB(${WAAVE}/${OS}/${RELEASE_DIR}/waave.lib)
 APPLE_DEBUG_DKLIB(${WAAVE}/${OS}/${DEBUG_DIR}/libwaave.a)
@@ -22,7 +22,7 @@ ANDROID_RELEASE_DKLIB(${WAAVE}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/libwaa
 
 
 ### COMPILE ###
-DKSETPATH(${WAAVE}/${BUILD_DIR})
+dk_setPath(${WAAVE}/${BUILD_DIR})
 
 WIN32_DKQCOMMAND(${DKCMAKE_BUILD} ${FFMPEG_WIN} ${SDL2_WIN} ${WAAVE})
 WIN64_DKQCOMMAND(${DKCMAKE_BUILD} ${FFMPEG_WIN} ${SDL2_WIN} ${WAAVE})

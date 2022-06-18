@@ -1,9 +1,9 @@
 if(WIN)
-	DKDEPEND(opengl)
+	dk_depend(opengl)
 endif()
 
 if(MAC)
-	DKDEPEND(opengl)
+	dk_depend(opengl)
 endif()
 
 if(IOS)
@@ -23,15 +23,15 @@ if(IOSSIM)
 endif()
 
 if(LINUX)
-	DKDEPEND(opengl)
+	dk_depend(opengl)
 endif()
 
 if(RASPBERRY)
-	DKDEPEND(opengl)
+	dk_depend(opengl)
 endif()	
 
 if(ANDROID)
-	DKDEFINE(GL_GLEXT_PROTOTYPES)
+	dk_define(GL_GLEXT_PROTOTYPES)
 	ANDROID_DKLIB(GLESv1_CM)
 	ANDROID_DKLIB(GLESv2)
 endif()

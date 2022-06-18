@@ -11,7 +11,7 @@ dk_import(https://github.com/apache/ant.git)
 #dk_set(ANT_NAME apache-ant-${ANT_VERSION})
 #dk_set(ANT_DL https://mirror.cogentco.com/pub/apache/ant/binaries/apache-ant-1.9.15-bin.zip)
 #dk_set(ANT ${3RDPARTY}/${ANT_NAME})
-#DKINSTALL(${ANT_DL} apache-ant ${ANT})
+#dk_install(${ANT_DL} apache-ant ${ANT})
 
 
 DKSETENV("ANT_HOME" ${ANT})

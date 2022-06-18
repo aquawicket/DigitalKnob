@@ -12,12 +12,12 @@ dk_import(https://github.com/Samsung/rlottie.git)
 #dk_set(RLOTTIE_DL https://github.com/Samsung/rlottie/archive/refs/tags/v0.2.zip)
 #dk_set(RLOTTIE_NAME rlottie-${RLOTTIE_VERSION})
 #dk_set(RLOTTIE ${3RDPARTY}/${RLOTTIE_NAME})
-#DKINSTALL(${RLOTTIE_DL} rlottie ${RLOTTIE})#
+#dk_install(${RLOTTIE_DL} rlottie ${RLOTTIE})#
 
 
 ### LINK ###
-DKINCLUDE(${RLOTTIE}/inc)
-DKINCLUDE(${RLOTTIE}/${OS})
+dk_include(${RLOTTIE}/inc)
+dk_include(${RLOTTIE}/${OS})
 WIN_DEBUG_DKLIB(${RLOTTIE}/${OS}/${DEBUG_DIR}/rlottie.lib)
 WIN_RELEASE_DKLIB(${RLOTTIE}/${OS}/${RELEASE_DIR}/rlottie.lib)
 MAC_DEBUG_DKLIB(${RLOTTIE}/${OS}/${DEBUG_DIR}/librlottie.a)
@@ -35,7 +35,7 @@ ANDROID_RELEASE_DKLIB(${RLOTTIE}/${OS}/${RELEASE_DIR}/librlottie.a)
 
 
 ### COMPILE ###
-DKSETPATH(${RLOTTIE}/${BUILD_DIR})
+dk_setPath(${RLOTTIE}/${BUILD_DIR})
 
 
 WIN_DKQCOMMAND(${DKCMAKE_BUILD} /EHsc ${RLOTTIE})

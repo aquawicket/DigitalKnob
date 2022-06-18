@@ -1,9 +1,9 @@
 # http://podofo.sourceforge.net
 
 
-DKDEPEND(zlib)
-DKDEPEND(freetype)
-DKDEPEND(libpng)
+dk_depend(zlib)
+dk_depend(freetype)
+dk_depend(libpng)
 
 
 dk_import(http://sourceforge.net/projects/podofo/files/podofo/0.9.7/podofo-0.9.7.tar.gz)
@@ -11,15 +11,15 @@ dk_import(http://sourceforge.net/projects/podofo/files/podofo/0.9.7/podofo-0.9.7
 #dk_set(PODOFO_VERSION 0.9.5)
 #dk_set(POFODO_DL http://sourceforge.net/projects/podofo/files/podofo/0.9.7/podofo-0.9.7.tar.gz/download)
 #dk_set(PODOFO ${3RDPARTY}/podofo-${PODOFO_VERSION})
-#DKINSTALL(${POFODO_DL} podofo ${PODOFO})
+#dk_install(${POFODO_DL} podofo ${PODOFO})
 
 
 
 ### LINK ###
-DKINCLUDE(${PODOFO})
-DKINCLUDE(${PODOFO}/podofo)
-DKINCLUDE(${PODOFO}/${OS})
-DKINCLUDE(${PODOFO}/${OS}/${RELEASE_DIR})
+dk_include(${PODOFO})
+dk_include(${PODOFO}/podofo)
+dk_include(${PODOFO}/${OS})
+dk_include(${PODOFO}/${OS}/${RELEASE_DIR})
 WIN_DEBUG_DKLIB(${PODOFO}/${OS}/src/Debug/podofo.lib)
 WIN_RELEASE_DKLIB(${PODOFO}/${OS}/src/${RELEASE_DIR}/podofo.lib)
 MAC_DEBUG_DKLIB(${PODOFO}/${OS}/src/${DEBUG_DIR}/libpodofo.a)
@@ -35,7 +35,7 @@ ANDROID_RELEASE_DKLIB(${PODOFO}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/libpo
 
 
 ### COMPILE ###
-WIN_DKSETPATH(${PODOFO}/${BUILD_DIR})
+WIN_dk_setPath(${PODOFO}/${BUILD_DIR})
 
 WIN_DKQCOMMAND(${DKCMAKE_BUILD} "-DCMAKE_CXX_FLAGS=/I${ZLIB}/${OS}" -DPODOFO_BUILD_STATIC=ON ${ZLIB_CMAKE} ${FREETYPE_CMAKE} ${PNG_CMAKE} ${PODOFO})
 WIN_VS(podofo-${PODOFO_VERSION} PoDoFo.sln podofo_static)

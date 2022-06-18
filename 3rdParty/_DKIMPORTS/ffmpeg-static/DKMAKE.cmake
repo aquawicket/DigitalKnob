@@ -6,14 +6,14 @@ dk_set(FFMPEG_DL https://web.archive.org/web/20200916125901if_/https://ffmpeg.ze
 dk_set(FFMPEG ${3RDPARTY}/${FFMPEG_NAME})
 
 ### INSTALL ###
-DKINSTALL(${FFMPEG_DL} ffmpeg_static ${FFMPEG})
+dk_install(${FFMPEG_DL} ffmpeg_static ${FFMPEG})
 
 
 
 ### LINK ###
-DKDEFINE(__STDC_CONSTANT_MACROS)
+dk_define(__STDC_CONSTANT_MACROS)
 IF(DKAPP)
-	DKSETPATH(${DKPROJECT}/assets/DKFfmpeg)
+	dk_setPath(${DKPROJECT}/assets/DKFfmpeg)
 	#dk_copy(${FFMPEG_DLL}/bin/avcodec-56.dll ${DKPROJECT}/assets/DKFfmpeg TRUE)
 	#dk_copy(${FFMPEG_DLL}/bin/avdevice-56.dll ${DKPROJECT}/assets/DKFfmpeg TRUE)
 	#dk_copy(${FFMPEG_DLL}/bin/avfilter-5.dll ${DKPROJECT}/assets/DKFfmpeg TRUE)

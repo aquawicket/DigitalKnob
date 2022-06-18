@@ -7,7 +7,7 @@ endif()
 #dk_set(MSYS2_DL https://sourceforge.net/projects/mingw-w64/files/External%20binary%20packages%20%28Win64%20hosted%29/MSYS%20%2832-bit%29/MSYS-20111123.zip)
 #dk_set(MSYS2_NAME msys2-${MSYS2_VERSION})
 #dk_set(MSYS2 ${3RDPARTY}/${MSYS2_NAME})
-#DKINSTALL(${MSYS2_DL} msys2 ${MSYS2})
+#dk_install(${MSYS2_DL} msys2 ${MSYS2})
 
 dk_set(MSYS2_VERSION base-x86_64-20220128)
 dk_set(MSYS2_DL https://github.com/msys2/msys2-installer/releases/download/2022-01-28/msys2-base-x86_64-20220128.sfx.exe)

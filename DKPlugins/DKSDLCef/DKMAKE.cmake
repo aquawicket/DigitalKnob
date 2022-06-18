@@ -10,9 +10,9 @@ IF(IOSSIM)
 	RETURN()
 ENDIF()
 
-DKDEPEND(DKSDLWindow)
-DKDEPEND(DKCef)
-DKDEPEND(DKCefChild)
-DKDEPEND(DKAssets)
+dk_depend(DKSDLWindow)
+dk_depend(DKCef)
+dk_depend(DKCefChild)
+dk_depend(DKAssets)
 
 generateCmake(DKSDLCef)

@@ -15,7 +15,7 @@ if(NOT WIN_HOST)
 endif()
 
 ### DEPENDS ###
-#DKDEPEND(jdk8)
+#dk_depend(jdk8)
 
 
 #WIN_HOST_dk_import(https://dl.google.com/android/repository/commandlinetools-win-7583922_latest.zip)
@@ -28,7 +28,7 @@ dk_set(SDKMANAGER_EXE ${ANDROIDTOOLS}/bin/sdkmanager.bat)
 WIN_HOST_dk_set(ANDROIDTOOLS_DL https://dl.google.com/android/repository/commandlinetools-win-7583922_latest.zip)
 MAC_HOST_dk_set(ANDROIDTOOLS_DL https://dl.google.com/android/repository/commandlinetools-mac-7302050_latest.zip)
 LINUX_HOST_dk_set(ANDROIDTOOLS_DL https://dl.google.com/android/repository/commandlinetools-linux-7302050_latest.zip)
-DKINSTALL(${ANDROIDTOOLS_DL} android-cmdline-tools ${ANDROIDTOOLS})
+dk_install(${ANDROIDTOOLS_DL} android-cmdline-tools ${ANDROIDTOOLS})
 
 
 ## FIXME

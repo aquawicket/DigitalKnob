@@ -1,1 +1,1 @@
-DKASSETS(DKCodeRunner)
+dk_assets(DKCodeRunner)

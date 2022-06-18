@@ -3,7 +3,7 @@
 # http://www.app.com/downloads/app-1.0.exe
 
 ### DEPENDS ###
-#DKDEPEND(depend_name)
+#dk_depend(depend_name)
 
 ### VERSION ###
 dk_set(APP_VERSION 1.0)

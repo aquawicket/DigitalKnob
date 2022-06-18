@@ -6,9 +6,9 @@ if(NOT WIN_HOST)
 endif()
 
 
-#DKDEPEND(jdk)
-DKDEPEND(android-sdk)
-DKDEPEND(android-ndk)
+#dk_depend(jdk)
+dk_depend(android-sdk)
+dk_depend(android-ndk)
 
 
 #dk_import(https://redirector.gvt1.com/edgedl/android/studio/install/2020.3.1.26/android-studio-2020.3.1.26-windows.exe)
@@ -32,7 +32,7 @@ DKSETENV("STUDIO_GRADLE_JDK" ${JDK8})
 
 
 ### INSTALL ###
-#DKINSTALL(${ANDROIDSTUDIO_DL} android-studio ${ANDROIDSTUDIO_EXE})
+#dk_install(${ANDROIDSTUDIO_DL} android-studio ${ANDROIDSTUDIO_EXE})
 
 if(NOT EXISTS ${ANDROIDSTUDIO_EXE})
 	dk_download(${ANDROIDSTUDIO_DL} ${DKDOWNLOAD}/${ANDROIDSTUDIO_NAME})

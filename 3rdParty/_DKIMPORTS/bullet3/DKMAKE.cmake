@@ -12,11 +12,11 @@ dk_import(https://github.com/bulletphysics/bullet3.git)
 #dk_set(BULLET3_NAME bullet-${BULLET3_VERSION})
 #dk_set(BULLET3_DL https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/bullet/${BULLET3_NAME}.zip)
 #dk_set(BULLET3 ${3RDPARTY}/${BULLET3_NAME})
-#DKINSTALL(${BULLET3_DL} bullet ${BULLET3})
+#dk_install(${BULLET3_DL} bullet ${BULLET3})
 
 
 ### DKPLUGINS LINK ###
-DKINCLUDE(${BULLET3}/src)
+dk_include(${BULLET3}/src)
 IF(BulletCollision)
 	WIN_DEBUG_DKLIB(${BULLET3}/${OS}/lib/Debug/BulletCollision_Debug.lib)
 	WIN_RELEASE_DKLIB(${BULLET3}/${OS}/lib/${RELEASE_DIR}/BulletCollision.lib)
@@ -85,7 +85,7 @@ ENDIF(MiniCL)
 
 
 ### COMPILE ###
-DKSETPATH(${BOXER}/${BUILD_DIR})
+dk_setPath(${BOXER}/${BUILD_DIR})
 
 WIN_DKQCOMMAND(${DKCMAKE_BUILD} -DBUILD_DEMOS=OFF -DBUILD_EXTRAS=OFF -DUSE_GLUT=OFF ${BULLET3})
 WIN_VS(${BULLET3_NAME} BULLET3_PHYSICS.sln)

@@ -1,1 +1,1 @@
-DKASSETS(DKFpsTest)
+dk_assets(DKFpsTest)

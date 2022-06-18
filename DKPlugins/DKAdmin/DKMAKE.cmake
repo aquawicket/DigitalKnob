@@ -1,4 +1,4 @@
-DKDEPEND(DKGit)
-DKDEPEND(DKNotepad)
+dk_depend(DKGit)
+dk_depend(DKNotepad)
 
-DKASSETS(DKAdmin)
+dk_assets(DKAdmin)

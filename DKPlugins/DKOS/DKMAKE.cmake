@@ -1,1 +1,1 @@
-DKASSETS(DKOS)
+dk_assets(DKOS)

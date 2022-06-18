@@ -1,1 +1,1 @@
-DKASSETS(DKLogin)
+dk_assets(DKLogin)

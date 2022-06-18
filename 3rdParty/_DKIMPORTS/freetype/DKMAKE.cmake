@@ -14,12 +14,12 @@ dk_set(FREETYPE ${3RDPARTY}/${FREETYPE_NAME})
 
 
 ### INSTALL ###
-DKINSTALL(${FREETYPE_DL} freetype ${FREETYPE} PATCH)
+dk_install(${FREETYPE_DL} freetype ${FREETYPE} PATCH)
 
 
 ### DKPLUGINS LINK ###
-DKINCLUDE(${FREETYPE}/include)
-DKINCLUDE(${FREETYPE}/${OS}/include/freetype2)
+dk_include(${FREETYPE}/include)
+dk_include(${FREETYPE}/${OS}/include/freetype2)
 WIN_DEBUG_DKLIB(${FREETYPE}/${OS}/${DEBUG_DIR}/freetype.lib)
 WIN_RELEASE_DKLIB(${FREETYPE}/${OS}/${RELEASE_DIR}/freetype.lib)
 MAC_DEBUG_DKLIB(${FREETYPE}/${OS}/${DEBUG_DIR}/libfreetype.a)
@@ -47,7 +47,7 @@ ANDROID_dk_set(FREETYPE_CMAKE -DFREETYPE_INCLUDE_DIRS=${FREETYPE}/include -DFREE
 	
 	
 ### COMPILE ###
-DKSETPATH(${FREETYPE}/${BUILD_DIR})
+dk_setPath(${FREETYPE}/${BUILD_DIR})
 DKQCOMMAND(${DKCMAKE_BUILD} ${FREETYPE})
 
 

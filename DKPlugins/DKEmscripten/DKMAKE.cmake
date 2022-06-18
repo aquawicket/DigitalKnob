@@ -1,9 +1,9 @@
 ## https://emscripten.org/docs/getting_started/downloads.html
 
-DKDEPEND(emsdk)
+dk_depend(emsdk)
 
 ##generateCmake(DKEmscripten)
-##DKASSETS(DKEmscripten)
+##dk_assets(DKEmscripten)
 
 dk_set(CURRENT_DIR ${DKPLUGINS}/DKEmscripten)
 dk_set(QUEUE_BUILD ON)

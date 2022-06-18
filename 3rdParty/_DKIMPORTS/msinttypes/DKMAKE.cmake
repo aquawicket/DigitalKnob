@@ -11,4 +11,4 @@ dk_set(MSINTTYPES ${3RDPARTY}/${MSINTTYPES_NAME})
 
 
 ### INSTALL ###
-DKINSTALL(${MSINTTYPES_DL} msinttypes ${MSINTTYPES})
+dk_install(${MSINTTYPES_DL} msinttypes ${MSINTTYPES})

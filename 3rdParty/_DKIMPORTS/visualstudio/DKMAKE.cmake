@@ -15,8 +15,8 @@ endif()
 
 
 ### DEPENDS ###
-ANDROID_DKDEPEND(ant)
-ANDROID_DKDEPEND(android-sdk)
+ANDROID_dk_depend(ant)
+ANDROID_dk_depend(android-sdk)
  
 ### VERSION ###
 dk_set(VISUALSTUDIO_BUILD 17)

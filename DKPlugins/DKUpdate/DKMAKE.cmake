@@ -1,13 +1,13 @@
-DKDEPEND(DKCurl)
-DKDEPEND(DKArchive)
+dk_depend(DKCurl)
+dk_depend(DKArchive)
 IF(HAVE_DKDuktape)
-	DKDEPEND(DKDuktape)
+	dk_depend(DKDuktape)
 ENDIF()
 IF(HAVE_DKDuktape)
-	DKDEPEND(DKDuktape)
+	dk_depend(DKDuktape)
 ENDIF()
 IF(HAVE_DKCef)
-	DKDEPEND(DKCef)
+	dk_depend(DKCef)
 ENDIF()
 
 

@@ -2,7 +2,7 @@
 #
 # https://github.com/libRocket/libRocket/archive/master.zip
 
-DKDEPEND(freetype)
+dk_depend(freetype)
 
 
 dk_import(https://github.com/libRocket/libRocket)
@@ -10,7 +10,7 @@ dk_import(https://github.com/libRocket/libRocket)
 #dk_set(ROCKET_NAME libRocket-${ROCKET_VERSION})
 #dk_set(ROCKET_DL https://github.com/libRocket/libRocket/archive/${ROCKET_VERSION}.zip)
 #dk_set(ROCKET ${3RDPARTY}/${ROCKET_NAME})
-#DKINSTALL(${ROCLET_DL} libRocket ${ROCKET})
+#dk_install(${ROCLET_DL} libRocket ${ROCKET})
 
 
 #dk_rename(${DKDOWNLOAD}/${ROCKET_VERSION}.zip ${DKDOWNLOAD}/${ROCKET_NAME}.zip)
@@ -23,8 +23,8 @@ dk_import(https://github.com/libRocket/libRocket)
 
 
 ### LINK ###
-DKDEFINE(ROCKET_STATIC_LIB)
-DKINCLUDE(${ROCKET}/Include)
+dk_define(ROCKET_STATIC_LIB)
+dk_include(${ROCKET}/Include)
 
 WIN_DEBUG_DKLIB(${ROCKET}/${OS}/Debug/RocketDebugger.lib)
 WIN_RELEASE_DKLIB(${ROCKET}/${OS}/${RELEASE_DIR}/RocketDebugger.lib)
@@ -62,7 +62,7 @@ ANDROID_RELEASE_DKLIB(${ROCKET}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/libRo
 
 
 ### COMPILE ###
-DKSETPATH(${ROCKET}/${BUILD_DIR})
+dk_setPath(${ROCKET}/${BUILD_DIR})
 
 WIN_DKQCOMMAND(${DKCMAKE_BUILD} "-DCMAKE_CXX_FLAGS=/I${ROCKET}/Include" ${FREETYPE_CMAKE} ${ROCKET})
 WIN_VS(${ROCKET_NAME} libRocket.sln)

@@ -11,9 +11,9 @@
 # Notes: abi=aapcs and binary-format=elf were added to android build to supress "No best alternative for libs/context/build/asm_sources"
 
 ### DEPENDS ###
-ANDROID_DKDEPEND(android-ndk) #version 21e or newer required
-ANDROID_DKDEPEND(mingw32)
-ANDROID_DKDEPEND(mingw64)
+ANDROID_dk_depend(android-ndk) #version 21e or newer required
+ANDROID_dk_depend(mingw32)
+ANDROID_dk_depend(mingw64)
 
 ### IMPORT ###
 #DKINPORT_GIT(https://github.com/boostorg/boost.git)
@@ -27,16 +27,16 @@ dk_set(BOOST_DL https://versaweb.dl.sourceforge.net/project/boost/boost/1.78.0/b
 dk_set(BOOST_VERSION ${BOOST_MAJOR}_${BOOST_MINOR}_${BOOST_BUILD})
 dk_set(BOOST_NAME boost_${BOOST_VERSION})
 dk_set(BOOST ${3RDPARTY}/${BOOST_NAME})
-DKINSTALL(${BOOST_DL} boost ${BOOST} PATCH)
+dk_install(${BOOST_DL} boost ${BOOST} PATCH)
 
 
 ### DKPLUGINS LINK ###
-##DKDEFINE(HAVE_Boost)
-DKDEFINE(BOOST_ALL_NO_LIB=1)
-DKDEFINE(BOOST_REGEX_DYN_LINK=1)
-DKINCLUDE(${BOOST})
-DKLINKDIR(${BOOST}/${OS}/${DEBUG_DIR}/lib)
-DKLINKDIR(${BOOST}/${OS}/${RELEASE_DIR}/lib)
+##dk_define(HAVE_Boost)
+dk_define(BOOST_ALL_NO_LIB=1)
+dk_define(BOOST_REGEX_DYN_LINK=1)
+dk_include(${BOOST})
+dk_linkDir(${BOOST}/${OS}/${DEBUG_DIR}/lib)
+dk_linkDir(${BOOST}/${OS}/${RELEASE_DIR}/lib)
 
 dk_addTarget(boost atomic)
 dk_addTarget(boost chrono)
@@ -130,7 +130,7 @@ endforeach()
 
 
 ### COMPILE ###
-DKSETPATH(${BOOST})
+dk_setPath(${BOOST})
 if(NOT EXISTS ${BOOST}/b2.exe)
 	WIN_HOST_DKQCOMMAND(bootstrap.bat vc143)
 endif()
@@ -277,7 +277,7 @@ if(SHARED)
 #	WIN32_RELEASE_DKLIB(${BOOST}/${OS}/lib/boost_system.lib)
 #endif()
 
-#WIN_DKSETPATH(${BOOST})
+#WIN_dk_setPath(${BOOST})
 #WIN32_DKQCOMMAND(bootstrap.bat)
 #WIN_DKQCOMMAND(b2 toolset=msvc-14.0 link=shared variant=debug runtime-debugging=on runtime-link=shared --threading=multi --layout=system --build-dir=${BOOST}/${OS}/${DEBUG_DIR} --stagedir=${BOOST}/${OS}/${DEBUG_DIR})
 #WIN_DKQCOMMAND(b2 toolset=msvc-14.0 link=shared variant=release runtime-debugging=off runtime-link=shared --threading=multi --layout=system --build-dir=${BOOST}/${OS}/${RELEASE_DIR} --stagedir=${BOOST}/${OS}/${RELEASE_DIR})

@@ -17,4 +17,4 @@ MAC_HOST_dk_set(ANDROIDPLATFORMTOOLS_DL https://dl.google.com/android/repository
 LINUX_HOST_dk_set(ANDROIDPLATFORMTOOLS_DL https://dl.google.com/android/repository/platform-tools_r${ANDROIDPLATFORMTOOLS_VERSION}-linux.zip)
 dk_set(ANDROIDPLATFORMTOOLS ${ANDROIDSDK}/platform-tools)
 dk_makeDirectory(${ANDROIDSDK}/platform-tools)
-DKINSTALL(${ANDROIDPLATFORMTOOLS_DL} android-platform-tools ${ANDROIDPLATFORMTOOLS})
+dk_install(${ANDROIDPLATFORMTOOLS_DL} android-platform-tools ${ANDROIDPLATFORMTOOLS})

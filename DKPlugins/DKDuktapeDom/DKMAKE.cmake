@@ -1,4 +1,4 @@
-DKDEPEND(DKDuktape)
+dk_depend(DKDuktape)
 
 generateCmake(DKDuktapeDom)
-DKASSETS(DKDuktapeDom)
+dk_assets(DKDuktapeDom)

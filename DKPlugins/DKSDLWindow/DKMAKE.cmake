@@ -1,6 +1,6 @@
-DKDEPEND(glew)
-DKDEPEND(sdl)
-DKDEPEND(DKWindow)
+dk_depend(glew)
+dk_depend(sdl)
+dk_depend(DKWindow)
 
 # add SDL_main to the top of the DKPlugins.h file for iOS
 if(IOS)

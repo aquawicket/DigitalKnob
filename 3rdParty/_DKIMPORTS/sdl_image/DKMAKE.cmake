@@ -23,16 +23,16 @@
 
 ### DEPENDS ###
 #if(IOS OR IOSSIM)
-	DKDEPEND(imageio)
-	DKDEPEND(mobile_core_services)
+	dk_depend(imageio)
+	dk_depend(mobile_core_services)
 #endif()
-DKDEPEND(zlib)
-DKDEPEND(giflib)
-DKDEPEND(libpng)
-DKDEPEND(libjpeg-turbo)
-DKDEPEND(libwebp)
-DKDEPEND(tiff)
-DKDEPEND(sdl)
+dk_depend(zlib)
+dk_depend(giflib)
+dk_depend(libpng)
+dk_depend(libjpeg-turbo)
+dk_depend(libwebp)
+dk_depend(tiff)
+dk_depend(sdl)
 
 
 dk_import(https://github.com/libsdl-org/SDL_image.git main PATCH)
@@ -41,11 +41,11 @@ dk_import(https://github.com/libsdl-org/SDL_image.git main PATCH)
 #dk_set(SDL_IMAGE_VERSION main)
 #dk_set(SDL_IMAGE_NAME SDL2_image-${SDL_IMAGE_VERSION})
 #dk_set(SDL_IMAGE ${3RDPARTY}/${SDL_IMAGE_NAME})
-#DKINSTALL(${SDL_IMAGE_DL} sdl_image ${SDL_IMAGE}) #NOPATCH)
+#dk_install(${SDL_IMAGE_DL} sdl_image ${SDL_IMAGE}) #NOPATCH)
 
 
 ### DKPLUGINS LINK ###
-DKINCLUDE(${SDL_IMAGE})
+dk_include(${SDL_IMAGE})
 WIN_DEBUG_DKLIB(${SDL_IMAGE}/${OS}/lib/${DEBUG_DIR}/SDL_image.lib)
 WIN_RELEASE_DKLIB(${SDL_IMAGE}/${OS}/lib/${RELEASE_DIR}/SDL_image.lib)
 APPLE_DEBUG_DKLIB(${SDL_IMAGE}/${OS}/lib/Debug/SDL_image.a)
@@ -84,7 +84,7 @@ ANDROID_dk_set(SDL_IMAGE_CMAKE
 
 
 ### COMPILE ###
-DKSETPATH(${SDL_IMAGE}/${BUILD_DIR})
+dk_setPath(${SDL_IMAGE}/${BUILD_DIR})
 DKQCOMMAND(${DKCMAKE_BUILD} -DSDLIMAGE_SUPPORT_GIF=ON -DSDLIMAGE_SUPPORT_JPEG=ON -DSDLIMAGE_SUPPORT_PNG=ON -DSDLIMAGE_SUPPORT_WEBP=OFF ${SDL_CMAKE} ${ZLIB_CMAKE} ${TIFF_CMAKE} ${LIBPNG_CMAKE} ${LIBJPEG-TURBO_CMAKE} ${GIF_CMAKE} ${SDL_IMAGE})
 
 WIN_VS(${SDL_IMAGE_NAME} SDLIMAGE.sln SDLIMAGE)

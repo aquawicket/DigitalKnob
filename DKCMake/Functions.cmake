@@ -529,9 +529,7 @@ function(dk_setEnv name value)
 		endif()
 	endif()
 endfunction()
-macro(DKSETENV)
-	dk_setEnv(${ARGV})
-endmacro()
+
 
 ###############################################################################
 # dk_download(src_path dest_path)
@@ -825,14 +823,14 @@ function(dk_enable plugin)
 			#In c++ we can't use certian symbals in the preprocess or for macros. - must be turned to _
 			string(REPLACE "-" "_" argv1_macro "${ARGV1}")
 			string(REPLACE "." "_" argv1_macro "${argv1_macro}")
-			DKDEFINE(HAVE_${argv1_macro})
+			dk_define(HAVE_${argv1_macro})
 		else()
 			dk_set(${plugin} ON)
 			dk_set(HAVE_${plugin} ON)
 			#In c++ we can't use certian symbals in the preprocess or for macros. - must be turned to _
 			string(REPLACE "-" "_" plugin_macro "${plugin}")
 			string(REPLACE "." "_" plugin_macro "${plugin_macro}")
-			DKDEFINE(HAVE_${plugin_macro})
+			dk_define(HAVE_${plugin_macro})
 		endif()
 	endif()
 endfunction()
@@ -863,23 +861,23 @@ function(dk_disable plugin)
 		dk_unset(HAVE_${ARGV1})
 		#In c++ we can't use certian symbals in the preprocess or for macros. - must be turned to _
 		string(REPLACE "-" "_" argv1_macro "${ARGV1}")
-		DKUNDEFINE(HAVE_${argv1_macro})
-		DKUNDEPEND(${ARGV1})
+		dk_undefine(HAVE_${argv1_macro})
+		dk_undepend(${ARGV1})
 	else()
 		dk_unset(${plugin})
 		dk_unset(HAVE_${plugin})
 		#In c++ we can't use certian symbals in the preprocess or for macros. - must be turned to _
 		string(REPLACE "-" "_" plugin_macro "${plugin}")
-		DKUNDEFINE(HAVE_${plugin_macro})
-		DKUNDEPEND(${plugin})
+		dk_undefine(HAVE_${plugin_macro})
+		dk_undepend(${plugin})
 	endif()
 endfunction()
 
 
 ###############################################################################
-# DKDEFINE(str)
+# dk_define(str)
 #
-function(DKDEFINE str)
+function(dk_define str)
 	DKDEBUGFUNC(${ARGV})
 	if(CMAKE_SCRIPT_MODE_FILE)
 		return()
@@ -891,13 +889,13 @@ function(DKDEFINE str)
 	dk_set(DKDEFINES_LIST ${DKDEFINES_LIST} ${str})
 	add_definitions(-D${str})
 endfunction()
-dk_aliasFunctions("DKDEFINE")
+dk_aliasFunctions("dk_define")
 
 
 ###############################################################################
-# DKUNDEFINE(str)
+# dk_undefine(str)
 #
-function(DKUNDEFINE str)
+function(dk_undefine str)
 	DKDEBUGFUNC(${ARGV})
 	if(NOT DKDEFINES_LIST)
 		return()
@@ -908,9 +906,9 @@ endfunction()
 
 
 ###############################################################################
-# DKINCLUDE(path)
+# dk_include(path)
 #
-function(DKINCLUDE path)
+function(dk_include path)
 	DKDEBUGFUNC(${ARGV})
 	foreach(item ${ARGV})
 		list(FIND DKINCLUDES_LIST "${item}" index)
@@ -926,13 +924,13 @@ function(DKINCLUDE path)
 		endif()
 	endforeach()
 endfunction()
-dk_aliasFunctions("DKINCLUDE")
+dk_aliasFunctions("dk_include")
 
 
 ###############################################################################
-# DKLINKDIR(path)
+# dk_linkDir(path)
 #
-function(DKLINKDIR path)
+function(dk_linkDir path)
 	DKDEBUGFUNC(${ARGV})
 	foreach(item ${ARGV})
 		list(FIND DKLINKDIRS_LIST "${item}" index)
@@ -943,7 +941,7 @@ function(DKLINKDIR path)
 		link_directories(${item})
 	endforeach()
 endfunction()
-dk_aliasFunctions("DKLINKDIR")
+dk_aliasFunctions("dk_linkDir")
 
 
 ###############################################################################
@@ -1069,56 +1067,56 @@ endfunction()
 
 
 ###############################################################################
-# DKPATCH(import_name dest_path)
+# dk_patch(import_name dest_path)
 #
-function(DKPATCH import_name dest_path)
+function(dk_patch import_name dest_path)
 	DKDEBUGFUNC(${ARGV})
 	DKWARN("COPYING PATCH FILES FROM _IMPORTS/${import_name} TO ${dest_path}")
-	DKWARN("To stop patch files from overwriting install files, remove the \"PATCH\" argument from the end of the DKIMPORT or DKINSTALL command")
+	DKWARN("To stop patch files from overwriting install files, remove the \"PATCH\" argument from the end of the DKIMPORT or dk_install command")
 	DKWARN("located in ${DKIMPORTS}/${import_name}/DKMAKE.cmake")
 	dk_copy(${DKIMPORTS}/${import_name}/ ${dest_path}/ TRUE)
 endfunction()
 
 
 ###############################################################################
-# DKINSTALL(src_path import_name dest_path)
+# dk_install(src_path import_name dest_path)
 #
 # For archive files such as libraries and assets, the arguments are:  The download src_path, the name of its _DKIMPORTS folder, The name given to the installed 3rdParty/folder  
 # For executable files such as software amd IDE's the arguments are:  The download src_path, the name of the final name of the dl file, The installation path to check for installation.
-function(DKINSTALL src_path import_name dest_path)
+function(dk_install src_path import_name dest_path)
 	DKDEBUGFUNC(${ARGV})
 	DKINFO(" ")
 	string(TOLOWER ${import_name} import_name_lower)
 	if(NOT ${import_name} STREQUAL ${import_name_lower})
-		DKERROR("ERROR: 2nd parameter in DKINSTALL() (${import_name}) must be all lowercase")
+		DKERROR("ERROR: 2nd parameter in dk_install() (${import_name}) must be all lowercase")
 	endif()
 	
 	if(NOT EXISTS ${DKIMPORTS}/${import_name})
-		DKERROR("ERROR: 2nd parameter in DKINSTALL() (${DKIMPORTS}/${import_name}) does not exist")
+		DKERROR("ERROR: 2nd parameter in dk_install() (${DKIMPORTS}/${import_name}) does not exist")
 	endif()
 	if(EXISTS ${dest_path}/installed)
 		#DKINFO("${import_name} already installed")
 		if("${ARGN}" STREQUAL "PATCH")
-			DKPATCH(${import_name} ${dest_path})
+			dk_patch(${import_name} ${dest_path})
 		endif()
 		return()
 	endif()
 	DKDEBUG(" ")
-	DKDEBUG("DKINSTALL((): src_path = ${src_path}")
+	DKDEBUG("dk_install((): src_path = ${src_path}")
 	dk_getDirectory(${src_path} src_directory)
-	DKDEBUG("DKINSTALL((): src_directory = ${src_directory}")
+	DKDEBUG("dk_install((): src_directory = ${src_directory}")
 	dk_getFilename(${src_path} src_filename)
-	DKDEBUG("DKINSTALL((): src_filename = ${src_filename}")
+	DKDEBUG("dk_install((): src_filename = ${src_filename}")
 	dk_getExtension(${src_filename} src_extension)
-	DKDEBUG("DKINSTALL((): src_extension = ${src_extension}")
+	DKDEBUG("dk_install((): src_extension = ${src_extension}")
 	DKDEBUG(" ")
-	DKDEBUG("DKINSTALL((): dest_path = ${dest_path}")
+	DKDEBUG("dk_install((): dest_path = ${dest_path}")
 	dk_getDirectory(${dest_path} dest_directory)
-	DKDEBUG("DKINSTALL((): dest_directory = ${dest_directory}")
+	DKDEBUG("dk_install((): dest_directory = ${dest_directory}")
 	dk_getFilename(${dest_path} dest_filename)
-	DKDEBUG("DKINSTALL((): dest_filename = ${dest_filename}")
+	DKDEBUG("dk_install((): dest_filename = ${dest_filename}")
 	dk_getExtension(${dest_filename} dest_extension)
-	DKDEBUG("DKINSTALL((): dest_extension = ${dest_extension}")
+	DKDEBUG("dk_install((): dest_extension = ${dest_extension}")
 	DKDEBUG(" ")
 	
 	# let's check that the scr_filename has at least the name of the target in it somewhere, or else we gotta rename it
@@ -1208,25 +1206,25 @@ function(DKINSTALL src_path import_name dest_path)
 			endif() 
 		endif()
 	#elseif(${FILETYPE} STREQUAL "Executable")
-	#	DKSETPATH(${DKDOWNLOAD})
+	#	dk_setPath(${DKDOWNLOAD})
 	#	dk_set(QUEUE_BUILD ON)
 	#	DKEXECUTE(${DKDOWNLOAD}/${src_filename})
 	else() #NOT ARCHIVE, just copy the file into it's 3rdParty folder
 		dk_copy(${DKDOWNLOAD}/${dl_filename} ${dest_path}/${dl_filename} TRUE)
 	endif()
 	if("${ARGN}" STREQUAL "PATCH")
-		DKPATCH(${import_name} ${dest_path})
+		dk_patch(${import_name} ${dest_path})
 	else()
 		file(GLOB ITEMS ${DKIMPORTS}/${import_name}/*)
 		list(LENGTH ITEMS count)
 		DKDEBUG(${count})
 		if(${count} GREATER 1)
-			DKWARN(" Found ${count} items in the ${import_name} import folder. DKINSTALL has not requested to PATCH to the install files. If needed, add PATCH as the last argument to the DKINSTALL or DKIMPORT command in ${DKIMPORTS}/${import_name}/DKMAKE.cmake ")
+			DKWARN(" Found ${count} items in the ${import_name} import folder. dk_install has not requested to PATCH to the install files. If needed, add PATCH as the last argument to the dk_install or DKIMPORT command in ${DKIMPORTS}/${import_name}/DKMAKE.cmake ")
 		endif()
 	endif()
 	file(WRITE ${dest_path}/installed "${dest_filename} ")
 endfunction()
-dk_aliasFunctions("DKINSTALL" "NO_DEBUG_RELEASE_TAGS")
+dk_aliasFunctions("dk_install" "NO_DEBUG_RELEASE_TAGS")
 
 
 ###############################################################################
@@ -1289,9 +1287,9 @@ endfunction()
 
 
 ###############################################################################
-# DKSETPATH(path)
+# dk_setPath(path)
 #
-function(DKSETPATH path)
+function(dk_setPath path)
 	DKDEBUGFUNC(${ARGV})
 	if(path STREQUAL "OFF")
 		return() 
@@ -1324,7 +1322,7 @@ function(DKSETPATH path)
 	#	dk_set(DKCMAKE_BUILD ${DKCMAKE_BUILD} -DCMAKE_ARCHIVE_OUTPUT_DIRECTORY=${CURRENT_DIR} -DCMAKE_LIBRARY_OUTPUT_DIRECTORY=${CURRENT_DIR} -DCMAKE_RUNTIME_OUTPUT_DIRECTORY=${CURRENT_DIR})
 	#endif()
 endfunction()
-dk_aliasFunctions("DKSETPATH")
+dk_aliasFunctions("dk_setPath")
 
 
 ###############################################################################
@@ -1829,7 +1827,7 @@ function(DKDLL name)
 		DKINFO("DKDLL(): ${name} plugin not found")
 		return()
 	endif()
-	DKINCLUDE(${plugin_path})
+	dk_include(${plugin_path})
 			
 	##Create CmakeLists.txt file
 	file(REMOVE ${plugin_path}/CMakeLists.txt)
@@ -1893,7 +1891,7 @@ function(DKDLL name)
 	file(APPEND ${plugin_path}/CMakeLists.txt "		set_target_properties(${name} PROPERTIES LINKER_LANGUAGE CPP)\n")
 	file(APPEND ${plugin_path}/CMakeLists.txt "endif()\n")
 	endif()
-	ADDTO_DKPLUGIN_LIST(${name})
+	dk_addToPluginList(${name})
 endfunction()
 
 
@@ -1908,7 +1906,7 @@ function(DKEXECUTABLE name)
 		DKERROR("DKEXECUTABLE(): ${name} plugin not found")
 		return()
 	endif()
-	DKINCLUDE(${plugin_path})
+	dk_include(${plugin_path})
 	file(REMOVE ${plugin_path}/CMakeLists.txt)
 	if(NOT EXISTS "${plugin_path}/CMakeLists.txt")
 	#file(APPEND ${plugin_path}/CMakeLists.txt "### ${name} ###\n")
@@ -1918,7 +1916,7 @@ function(DKEXECUTABLE name)
 	#file(APPEND ${plugin_path}/CMakeLists.txt "include(${DKCMAKE}/Variables.cmake)\n")
 	#file(APPEND ${plugin_path}/CMakeLists.txt "project(${name})\n")
 	endif()
-	ADDTO_DKPLUGIN_LIST(${name})
+	dk_addToPluginList(${name})
 endfunction()
 
 
@@ -1945,37 +1943,37 @@ function(DKTESTAPP name)
 	file(APPEND ${test_path}/CMakeLists.txt "cmake_policy(SET CMP0054 NEW)\n")
 	file(APPEND ${test_path}/CMakeLists.txt "include(${DKCMAKE}/Functions.cmake)\n")
 	file(APPEND ${test_path}/CMakeLists.txt "include(${DKCMAKE}/Variables.cmake)\n")
-	DKAPPEND_CMAKE("project(${name}_test)\n")
-	DKAPPEND_CMAKE("include_directories(${DKPLUGINS})\n")
+	dk_appendCmake("project(${name}_test)\n")
+	dk_appendCmake("include_directories(${DKPLUGINS})\n")
 		
 	#TODO		
-	ADDTO_DKPLUGIN_LIST(${name})
+	dk_addToPluginList(${name})
 endfunction()
 
 
 ###############################################################################
-# ADDTO_DKPLUGIN_LIST(name)
+# dk_addToPluginList(name)
 #
 # @name:
 #
-function(ADDTO_DKPLUGIN_LIST name)
+function(dk_addToPluginList name)
 	DKDEBUGFUNC(${ARGV})
 	dk_getPathToPlugin(${name} plugin_path)
 	if(NOT EXISTS "${plugin_path}")
 		DKERROR("DKEXECUTABLE(): ${name} plugin not found")
 		return()
 	endif()
-	DKINCLUDE(${plugin_path})
+	dk_include(${plugin_path})
 	dk_set(DKPLUGIN_LIST ${DKPLUGIN_LIST} ${name})
 endfunction()
 
 
 ###############################################################################
-# DKAPPEND_CMAKE(str)
+# dk_appendCmake(str)
 #
 #	@str:
 #
-function(DKAPPEND_CMAKE str)
+function(dk_appendCmake str)
 	DKDEBUGFUNC(${ARGV})
 	file(APPEND ${plugin_path}/CMakeLists.txt "${str}")
 endfunction()
@@ -2020,13 +2018,13 @@ SET(ASSETS
 
 
 ###############################################################################
-# DKASSETS(name)
+# dk_assets(name)
 #
 #	Add a library's files to the App's assets
 #
 #	@name:
 #
-function(DKASSETS name)
+function(dk_assets name)
 	DKDEBUGFUNC(${ARGV})
 	if(NOT DKAPP)
 		return()
@@ -2073,13 +2071,13 @@ endfunction()
 
 
 ###############################################################################
-# DKDEPEND(name)
+# dk_depend(name)
 #
 #	Add a library or plugin to the dependency list
 #
 #	@name:
 #
-function(DKDEPEND name)
+function(dk_depend name)
 	DKDEBUGFUNC(${ARGV})
 	#DKDEBUG("CMAKE_CURRENT_LIST_DIR = ${CMAKE_CURRENT_LIST_DIR}")
 	
@@ -2098,7 +2096,7 @@ function(DKDEPEND name)
 	# dk_createSmartObject(${name}) #TODO:  automatically determin plugin, create variables, setup auto compiles, etc 
 	# TODO TODO TODO TODO 
 	
-	# If DKDEPEND had second variable (a sub library), set that variable to ON
+	# If dk_depend had second variable (a sub library), set that variable to ON
 	# if(${ARGC} GREATER 1)
 	#	list(FIND dkdepend_list "${name} ${args}" index)
 	#	if(${index} GREATER -1) #library is already in the list
@@ -2117,30 +2115,30 @@ function(DKDEPEND name)
 	endif()
 	
 	dk_enable(${name})
-	DKRUNDEPENDS(${name}) # strip everything from the file except if() else() elseif() endif() and DKDEPEND() before sorting.
+	DKRUNDEPENDS(${name}) # strip everything from the file except if() else() elseif() endif() and dk_depend() before sorting.
 	# else()
 	#	list(FIND dkdepend_list "${name}" index)
 	#	if(${index} GREATER -1)
 	#		return() #library is already in the list
 	#	endif()
-	#	DKRUNDEPENDS(${name}) # strip everything from the file except if() else() elseif() endif() and DKDEPEND() before sorting.
+	#	DKRUNDEPENDS(${name}) # strip everything from the file except if() else() elseif() endif() and dk_depend() before sorting.
 	# endif()
 endfunction()
-dk_aliasFunctions("DKDEPEND")
+dk_aliasFunctions("dk_depend")
 
 
 ###############################################################################
-# DKUNDEPEND(name)
+# dk_undepend(name)
 #
 #	Remove a library or plugin from the dependency list
 #
 #	@name:
 #
-function(DKUNDEPEND name)
+function(dk_undepend name)
 	DKDEBUGFUNC(${ARGV})
-	## Only allow DKUNDEPEND command from these filters	
+	## Only allow dk_undepend command from these filters	
 	if(NOT ${CMAKE_CURRENT_LIST_DIR} STREQUAL ${DKCMAKE} AND NOT ${CMAKE_CURRENT_LIST_DIR} STREQUAL ${DKPROJECT}) # /DKCMake or /App directory only
-		DKASSERT("DKUNDEPEND() Can only be used from the Disabled.cmake file. This is to avoid having disabled libraries hideing everywhere")
+		DKASSERT("dk_undepend() Can only be used from the Disabled.cmake file. This is to avoid having disabled libraries hideing everywhere")
 	endif()
 	DKINFO("DISABLING ${ARGV}")
 	dk_set(dkdepend_disable_list ${dkdepend_disable_list} "${ARGV}")
@@ -2153,7 +2151,7 @@ endfunction()
 ###############################################################################
 # DKRUNDEPENDS(name)
 #
-#	Strip everything from the library's DKMAKE.cmake file except DKDEPEND() commands AND conditionals.
+#	Strip everything from the library's DKMAKE.cmake file except dk_depend() commands AND conditionals.
 #	Conditionals such as if(), else(), elseif(), endif(), return() will remain included during the sorting process. 
 #	WARNING: BE CAREFULL WRITING NEW VARIABLES TO USE WITH CONDITIONALS, AS THEY MIGHT BE IGNORED 
 #
@@ -2285,7 +2283,7 @@ function(DKRUNDEPENDS name)
 			set(KEEPLINE 1)
 		endif()	
 		
-		string(FIND "${line}" "DKDEPEND(" index)
+		string(FIND "${line}" "dk_depend(" index)
 		if(${index} GREATER -1)
 			set(KEEPLINE 1)
 		endif()
@@ -2401,7 +2399,7 @@ function(dk_dependAll)
 		file(GLOB allfiles RELATIVE "${DKIMPORTS}/" "${DKIMPORTS}/*")
 		foreach(each_file ${allfiles})
 			if(EXISTS ${DKIMPORTS}/${each_file}/DKMAKE.cmake)
-				set(DEPENDALL_FILE ${DEPENDALL_FILE} "DKDEPEND(${each_file})\n")
+				set(DEPENDALL_FILE ${DEPENDALL_FILE} "dk_depend(${each_file})\n")
 			endif()
 		endforeach()
     endif()
@@ -2414,7 +2412,7 @@ function(dk_dependAll)
 			foreach(plugin ${plugins})
 				if(EXISTS ${DIGITALKNOB}/${child}/DKPlugins/${plugin}/DKMAKE.cmake)
 					if(NOT ${plugin} STREQUAL "_DKIMPORT")
-						set(DEPENDALL_FILE ${DEPENDALL_FILE} "DKDEPEND(${plugin})\n")
+						set(DEPENDALL_FILE ${DEPENDALL_FILE} "dk_depend(${plugin})\n")
 					endif()
 				endif()
 			endforeach()
@@ -3142,7 +3140,7 @@ function(dk_importGIT url) #branch #PATCH
 	set(arg_list "${ARGN}")
 	foreach(arg IN LISTS arg_list)
 		if("${arg}" STREQUAL "PATCH")
-			DKPATCH(${Lib} ${${LIBVAR}})
+			dk_patch(${Lib} ${${LIBVAR}})
 		endif()
 	endforeach()
 endfunction()
@@ -3318,8 +3316,8 @@ function(dk_importDL url) #Lib #ID #Patch
 		DKDEBUG("${LIBVAR}_DL = ${${LIBVAR}_DL}")
 		DKDEBUG("${LIBVAR}_NAME = ${${LIBVAR}_NAME}")
 		DKDEBUG("${LIBVAR} = ${${LIBVAR}}") 
-		DKDEBUG("DKINSTALL(${${LIBVAR}_DL} ${FOLDER} ${${LIBVAR}})")
-		DKINSTALL(${${LIBVAR}_DL} ${FOLDER} ${${LIBVAR}} ${ARGN})
+		DKDEBUG("dk_install(${${LIBVAR}_DL} ${FOLDER} ${${LIBVAR}})")
+		dk_install(${${LIBVAR}_DL} ${FOLDER} ${${LIBVAR}} ${ARGN})
 	else()
 		DKERROR("One of the required LIBVAR variables vas not satisfied")
 		return()
@@ -3358,7 +3356,7 @@ function(dk_DownloadAll3rdParty)
 				if(${index} GREATER -1)
 					set(KEEPLINE 1)
 				endif()
-				string(FIND "${line}" "DKINSTALL(" index)
+				string(FIND "${line}" "dk_install(" index)
 				if(${index} GREATER -1)
 					set(KEEPLINE 1)
 				endif()
@@ -3528,7 +3526,7 @@ function(dk_import2 url)
 							#YES - use generated version and goto D ->
 							#NO - DKERROR("Con not determin the version")
 		#We have DL, NAME and VERSION
-		#Goto DKINSTALL(DL, name, VERSION)
+		#Goto dk_install(DL, name, VERSION)
 endfunction()
 
 

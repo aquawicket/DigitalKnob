@@ -8,12 +8,12 @@ dk_import(https://github.com/jerryscript-project/jerryscript)
 #dk_set(JERRYSCRIPT_NAME jerryscript-${JERRYSCRIPT_VERSION})
 #dk_set(JERRYSCRIPT_DL https://github.com/jerryscript-project/jerryscript/archive/refs/tags/v2.4.0.zip)
 #dk_set(JERRYSCRIPT ${3RDPARTY}/${JERRYSCRIPT_NAME})
-#DKINSTALL(${JERRYSCRIPT_DL} jerryscript ${JERRYSCRIPT})
+#dk_install(${JERRYSCRIPT_DL} jerryscript ${JERRYSCRIPT})
 
 
 ### LINK ###
-DKINCLUDE(${JERRYSCRIPT}/jerry-core/include)
-DKINCLUDE(${JERRYSCRIPT}/${OS})
+dk_include(${JERRYSCRIPT}/jerry-core/include)
+dk_include(${JERRYSCRIPT}/${OS})
 WIN_DEBUG_DKLIB(${JERRYSCRIPT}/${OS}/lib/${DEBUG_DIR}/jerry-core.lib)
 WIN_RELEASE_DKLIB(${JERRYSCRIPT}/${OS}/lib/${RELEASE_DIR}/jerry-core.lib)
 WIN_DEBUG_DKLIB(${JERRYSCRIPT}/${OS}/lib/${DEBUG_DIR}/jerry-ext.lib)
@@ -47,7 +47,7 @@ ANDROID_RELEASE_DKLIB(${JERRYSCRIPT}/${OS}/${RELEASE_DIR}/lib/libjerry-port-defa
 
 
 ### COMPILE ###
-DKSETPATH(${JERRYSCRIPT}/${BUILD_DIR})
+dk_setPath(${JERRYSCRIPT}/${BUILD_DIR})
 DKQCOMMAND(${DKCMAKE_BUILD} ${JERRYSCRIPT})
 
 

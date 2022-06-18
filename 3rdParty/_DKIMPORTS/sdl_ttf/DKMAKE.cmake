@@ -3,8 +3,8 @@
 # https://www.libsdl.org/projects/SDL_ttf/release/SDL2_ttf-2.0.15.zip
 
 ### DEPENDS ###
-DKDEPEND(sdl)
-DKDEPEND(freetype)
+dk_depend(sdl)
+dk_depend(freetype)
 
 
 dk_import(https://github.com/libsdl-org/SDL_ttf.git main PATCH)
@@ -13,12 +13,12 @@ dk_import(https://github.com/libsdl-org/SDL_ttf.git main PATCH)
 #dk_set(SDL_TTF_VERSION main)
 #dk_set(SDL_TTF_NAME SDL2_ttf-${SDL_TTF_VERSION})
 #dk_set(SDL_TTF ${3RDPARTY}/${SDL_TTF_NAME})
-#DKINSTALL(${SDL_TTF_DL} sdl_ttf ${SDL_TTF} PATCH)
+#dk_install(${SDL_TTF_DL} sdl_ttf ${SDL_TTF} PATCH)
 
 
 
 ### LINK ###
-DKINCLUDE(${SDL_TTF})
+dk_include(${SDL_TTF})
 WIN_DEBUG_DKLIB(${SDL_TTF}/${OS}/lib/${DEBUG_DIR}/SDL_ttf.lib)
 WIN_RELEASE_DKLIB(${SDL_TTF}/${OS}/lib/${RELEASE_DIR}/SDL_ttf.lib)
 APPLE_DEBUG_DKLIB(${SDL_TTF}/${OS}/lib/Debug/SDL_ttf.a)
@@ -34,7 +34,7 @@ ANDROID_RELEASE_DKLIB(${SDL_TTF}/${OS}/lib/${RELEASE_DIR}/SDL_ttf.a)
 
 
 ### COMPILE ###
-DKSETPATH(${SDL_TTF}/${BUILD_DIR})
+dk_setPath(${SDL_TTF}/${BUILD_DIR})
 DKQCOMMAND(${DKCMAKE_BUILD} -DBUILD_SHARED_LIBS=OFF -DSDLTTF_SUPPORT_WEBP=OFF ${SDL_CMAKE} ${FREETYPE_CMAKE} ${SDL_TTF})
 
 

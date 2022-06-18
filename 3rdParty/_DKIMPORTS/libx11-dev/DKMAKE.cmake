@@ -4,7 +4,7 @@ endif()
 
 ### INSTALL ###
 if(MAC)
-	DKINCLUDE(/opt/X11/include)
+	dk_include(/opt/X11/include)
 endif()
 
 
@@ -13,7 +13,7 @@ if(LINUX OR RASPBERRY)
 	DKCOMMAND(sudo apt -y install libx11-dev)
 
 	### LINK ###
-	DKINCLUDE(/usr/include/X11)
+	dk_include(/usr/include/X11)
 	
 	#dynamic linking
 	SET(CMAKE_CXX_LINK_EXECUTABLE "${CMAKE_CXX_LINK_EXECUTABLE} -lX11")

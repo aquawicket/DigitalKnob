@@ -8,7 +8,7 @@ set(COMPILE_CMAKE 0)
 
 if(COMPILE_CMAKE)
 	################################################################################################################
-	DKDEPEND(msys2)
+	dk_depend(msys2)
 	#dk_import(https://github.com/Kitware/CMake)
 	
 	dk_import(https://github.com/Kitware/CMake.git)
@@ -42,7 +42,7 @@ else()
 	### INSTALL ###
 	DKINFO("looking for cmake at ${CMAKE_EXE}")
 	if(NOT EXISTS "${CMAKE_EXE}")
-		MAC_DKDEPEND(homebrew)
+		MAC_dk_depend(homebrew)
 		DKINFO("cmake NOT FOUND")
 		DKINFO("Installing ${CMAKE_NAME}")
 		WIN_HOST_dk_download(${CMAKE_DL} ${DKDOWNLOAD})

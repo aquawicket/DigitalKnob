@@ -2,9 +2,9 @@ IF(WIN)
 	RETURN()
 ENDIF()
 
-DKDEPEND(waave)
-DKDEPEND(DKVideo)
-DKDEPEND(DKSDLWindow)
+dk_depend(waave)
+dk_depend(DKVideo)
+dk_depend(DKSDLWindow)
 
 generateCmake(DKSDLVideo)
-DKASSETS(DKSDLVideo)
+dk_assets(DKSDLVideo)

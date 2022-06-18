@@ -12,17 +12,17 @@ dk_set(OPENAL_DL https://www.openal-soft.org/openal-releases/openal-soft-${OPENA
 dk_set(OPENAL ${3RDPARTY}/${OPENAL_NAME})
 
 
-WIN_DKDEPEND(winmm.lib)
+WIN_dk_depend(winmm.lib)
 
 
 ### INSTALL ###
-DKINSTALL(${OPENAL_DL} openal ${OPENAL})
+dk_install(${OPENAL_DL} openal ${OPENAL})
 
 
 ### LINK ###
-DKINCLUDE(${OPENAL}/include)
-DKINCLUDE(${OPENAL}/include/AL)
-DKDEFINE(AL_LIBTYPE_STATIC)
+dk_include(${OPENAL}/include)
+dk_include(${OPENAL}/include/AL)
+dk_define(AL_LIBTYPE_STATIC)
 file(REMOVE ${OPENAL}/include/AL/stdint.h)
 file(REMOVE ${OPENAL}/include/AL/inttypes.h)
 WIN_DEBUG_DKLIB(${OPENAL}/${OS}/${DEBUG_DIR}/OpenAL32.lib)
@@ -45,7 +45,7 @@ ANDROID_dk_set(OPENAL_CMAKE -DOPENAL_INCLUDE_DIR=${OPENAL}/include/AL -DOPENAL_L
 
 
 ### COMPILE ###
-DKSETPATH(${OPENAL}/${BUILD_DIR})
+dk_setPath(${OPENAL}/${BUILD_DIR})
 
 
 WIN_DKQCOMMAND(${DKCMAKE_BUILD} "-DCMAKE_C_FLAGS=/DAL_LIBTYPE_STATIC" -DLIBTYPE=STATIC -DEXAMPLES=OFF -DFORCE_STATIC_VCRT=ON ${OGG_CMAKE} ${VORBIS_CMAKE} ${FLAC_CMAKE} ${OPENAL})

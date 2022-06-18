@@ -1,7 +1,7 @@
-DKDEPEND(DKCurl)
-DKDEPEND(DKArchive)
+dk_depend(DKCurl)
+dk_depend(DKArchive)
 if(WIN)
-	DKDEPEND(imagemagick)
+	dk_depend(imagemagick)
 endif()
 
-DKASSETS(DKBuild)
+dk_assets(DKBuild)

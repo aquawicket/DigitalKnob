@@ -6,7 +6,7 @@ endif()
 
 ### DEPENDS ###
 if(APPLE)
-	DKDEPEND(cocoa)
+	dk_depend(cocoa)
 endif()
 
 
@@ -16,8 +16,8 @@ dk_import(https://github.com/aaronmjacobs/Boxer.git)
 
 
 ### LINK ###
-DKINCLUDE(${BOXER}/include)
-DKINCLUDE(${BOXER}/${OS})
+dk_include(${BOXER}/include)
+dk_include(${BOXER}/${OS})
 WIN_DEBUG_DKLIB(${BOXER}/${OS}/${DEBUG_DIR}/Boxer.lib)
 WIN_RELEASE_DKLIB(${BOXER}/${OS}/${RELEASE_DIR}/Boxer.lib)
 UNIX_DEBUG_DKLIB(${BOXER}/${OS}/${DEBUG_DIR}/libBoxer.a)
@@ -25,7 +25,7 @@ UNIX_RELEASE_DKLIB(${BOXER}/${OS}/${RELEASE_DIR}/libBoxer.a)
 
 
 ### COMPILE ###
-DKSETPATH(${BOXER}/${BUILD_DIR})
+dk_setPath(${BOXER}/${BUILD_DIR})
 DKCOMMAND(${DKCMAKE_BUILD} ${BOXER})
 
 WIN_VS(${BOXER_NAME} boxer.sln boxer)

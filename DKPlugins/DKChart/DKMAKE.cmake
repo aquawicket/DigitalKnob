@@ -1,5 +1,5 @@
-DKDEPEND(moment)
-DKDEPEND(chart.js)
+dk_depend(moment)
+dk_depend(chart.js)
 
 if(MOMENT)
 	dk_copy(${MOMENT}/ ${DKPLUGINS}/DKChart/ FALSE)
@@ -9,4 +9,4 @@ if(CHART.JS)
 	dk_copy(${CHART.JS}/ ${DKPLUGINS}/DKChart/ FALSE)
 	dk_rename(${DKPLUGINS}/DKChart/chart.js-Chart.min.js ${DKPLUGINS}/DKChart/chart.min.js TRUE)
 endif()
-DKASSETS(DKChart)
+dk_assets(DKChart)

@@ -2,11 +2,11 @@
 # Documentation    https://vcpkg.io/en/docs/README.html
 #
 
-DKDEPEND(git)
+dk_depend(git)
 
 
 dk_import(https://github.com/Microsoft/vcpkg.git)
 
 
-DKSETPATH(${VCPKG})
+dk_setPath(${VCPKG})
 WIN_DKQCOMMAND(bootstrap-vcpkg.bat)

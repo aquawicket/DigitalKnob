@@ -2,8 +2,8 @@
 # https://github.com/weidai11/cryptopp
 
 if(IOSSIM)
-	#DKDEPEND(libmd)
-	#DKDEPEND(macports)
+	#dk_depend(libmd)
+	#dk_depend(macports)
 endif()
 
 if(WIN)
@@ -14,7 +14,7 @@ else()
 	dk_set(CRYPTOPP_DL https://github.com/weidai11/cryptopp/archive/refs/tags/CRYPTOPP_8_5_0.zip)
 	dk_set(CRYPTOPP_NAME CRYPTOPP_${CRYPTOPP_VERSION})
 	dk_set(CRYPTOPP ${3RDPARTY}/${CRYPTOPP_NAME})
-	DKINSTALL(${CRYPTOPP_DL} cryptopp ${CRYPTOPP} PATCH)
+	dk_install(${CRYPTOPP_DL} cryptopp ${CRYPTOPP} PATCH)
 endif()
 
 ### LINK ###
@@ -31,7 +31,7 @@ ANDROID_RELEASE_DKLIB(${CRYPTOPP}/${OS}/${RELEASE_DIR}/libcryptopp.a)
 
 
 ### COMPILE ###
-DKSETPATH(${CRYPTOPP}/${BUILD_DIR})
+dk_setPath(${CRYPTOPP}/${BUILD_DIR})
 
 WIN_DKQCOMMAND(${DKCMAKE_BUILD} -DBUILD_STATIC=ON -DBUILD_SHARED=OFF -DBUILD_TESTING=OFF ${CRYPTOPP})
 WIN_VS(${CRYPTOPP_NAME} cryptopp.sln cryptopp-static)

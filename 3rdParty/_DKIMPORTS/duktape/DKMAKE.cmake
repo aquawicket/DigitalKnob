@@ -7,8 +7,8 @@
 #
 # https://wiki.duktape.org/projectsusingduktape
 
-DKDEPEND(python)
-DKDEPEND(nodejs)
+dk_depend(python)
+dk_depend(nodejs)
 
 dk_import(https://github.com/aquawicket/duktape.git PATCH)
 
@@ -18,11 +18,11 @@ dk_import(https://github.com/aquawicket/duktape.git PATCH)
 #dk_set(DUKTAPE_NAME duktape-${DUKTAPE_VERSION})
 #dk_set(DUKTAPE_DL https://github.com/aquawicket/duktape/archive/refs/heads/${DUKTAPE_VERSION}.zip)
 #dk_set(DUKTAPE ${3RDPARTY}/${DUKTAPE_NAME})
-#DKINSTALL(${DUKTAPE_DL} duktape ${DUKTAPE})
+#dk_install(${DUKTAPE_DL} duktape ${DUKTAPE})
 
 
 if(NOT EXISTS ${DUKTAPE}/src)
-DKSETPATH(${DUKTAPE})
+dk_setPath(${DUKTAPE})
 dk_set(QUEUE_BUILD ON)
 
 LINUX_DKQCOMMAND(sudo apt-get -y install python python-yaml)
@@ -32,7 +32,7 @@ WIN_DKQCOMMAND(${PYTHON}/Scripts/pip install PyYAML)
 WIN_DKQCOMMAND(${PYTHON_EXE} ${DUKTAPE}/util/dist.py)
 dk_copy(${DUKTAPE}/dist/src/ ${DUKTAPE}/src TRUE)
 
-#DKINSTALL(https://codeload.github.com/nodeca/js-yaml/zip/refs/tags/3.14.1 js-yaml-3.14.1 ${DUKTAPE_NAME}/src-tools/lib/extdeps/js-yaml)
+#dk_install(https://codeload.github.com/nodeca/js-yaml/zip/refs/tags/3.14.1 js-yaml-3.14.1 ${DUKTAPE_NAME}/src-tools/lib/extdeps/js-yaml)
 #WIN32_DKQCOMMAND(${NODE_EXE} ${DUKTAPE}/src-tools/index.js configure --output-directory ${DUKTAPE}/src --source-directory ${DUKTAPE}/src-input --config-directory ${DUKTAPE}/config)
 endif()
 
@@ -51,8 +51,8 @@ endif()
 
 ### LINK ###
 IF(WIN)
-	DKDEFINE(DUK_F_VBCC)
+	dk_define(DUK_F_VBCC)
 ENDIF()
 IF(ANDROID)
-	##DKDEFINE(DUK_F_32BIT_PTRS)
+	##dk_define(DUK_F_32BIT_PTRS)
 ENDIF()

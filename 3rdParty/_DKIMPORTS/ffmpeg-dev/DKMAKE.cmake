@@ -8,12 +8,12 @@ dk_set(FFMPEG_DL https://web.archive.org/web/20200918193140/https://ffmpeg.zeran
 dk_set(FFMPEG ${3RDPARTY}/${FFMPEG_NAME})
 
 ### INSTALL ###
-DKINSTALL(${FFMPEG_DL} ffmpeg_dev ${FFMPEG})
+dk_install(${FFMPEG_DL} ffmpeg_dev ${FFMPEG})
 dk_rename(${FFMPEG}/include/libavutil/time.h ${FFMPEG}/include/libavutil/time.h.EXCLUDE)
 
 
 ### LINK ###
-DKDEFINE(__STDC_CONSTANT_MACROS)
+dk_define(__STDC_CONSTANT_MACROS)
 WIN32_INCLUDE(${FFMPEG})
 WIN32_INCLUDE(${FFMPEG}/include)
 WIN32_INCLUDE(${FFMPEG}/include/libavcodec)

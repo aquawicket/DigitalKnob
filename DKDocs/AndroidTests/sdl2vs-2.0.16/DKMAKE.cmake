@@ -1,4 +1,4 @@
-DKDEPEND(freetype)
-DKDEPEND(sdl)
-DKDEPEND(sdl_ttf)
-DKDEPEND(sdl_image)
+dk_depend(freetype)
+dk_depend(sdl)
+dk_depend(sdl_ttf)
+dk_depend(sdl_image)

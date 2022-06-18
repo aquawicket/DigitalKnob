@@ -10,13 +10,13 @@ dk_import(https://gitlab.com/libtiff/libtiff.git)
 #dk_set(TIFF_DL https://gitlab.com/libtiff/libtiff/-/archive/v4.2.0/libtiff-v4.2.0.zip)
 #dk_set(TIFF_NAME tiff-${TIFF_VERSION})
 #dk_set(TIFF ${3RDPARTY}/${TIFF_NAME})
-#DKINSTALL(${TIFF_DL} tiff ${TIFF})
+#dk_install(${TIFF_DL} tiff ${TIFF})
 
 
 ### DKPLUGINS LINK ###
-DKINCLUDE(${TIFF}/libtiff)
-DEBUG_DKINCLUDE(${TIFF}/${OS}/${DEBUG_DIR}/libtiff)
-RELEASE_DKINCLUDE(${TIFF}/${OS}/${RELEASE_DIR}/libtiff)
+dk_include(${TIFF}/libtiff)
+DEBUG_dk_include(${TIFF}/${OS}/${DEBUG_DIR}/libtiff)
+RELEASE_dk_include(${TIFF}/${OS}/${RELEASE_DIR}/libtiff)
 #RASPBERRY_RELEASE_DKLIB(${TIFF}/${OS}/${RELEASE_DIR}/
 WIN_DEBUG_DKLIB(${TIFF}/${OS}/${DEBUG_DIR}/tiff-static.lib)
 WIN_RELEASE_DKLIB(${TIFF}/${OS}/${RELEASE_DIR}/tiff-static.lib)
@@ -43,7 +43,7 @@ ANDROID_dk_set(TIFF_CMAKE -DTIFF_INCLUDE_DIR=${TIFF}/libtiff -DTIFF_INCLUDE_DIR2
 	
 
 ### COMPILE ###
-DKSETPATH(${TIFF}/${BUILD_DIR})
+dk_setPath(${TIFF}/${BUILD_DIR})
 DKQCOMMAND(${DKCMAKE_BUILD} ${TIFF})
 
 WIN_VS(${TIFF_NAME} tiff.sln tiff-static)

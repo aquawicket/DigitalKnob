@@ -1,1 +1,1 @@
-DKASSETS(DKGit)
+dk_assets(DKGit)

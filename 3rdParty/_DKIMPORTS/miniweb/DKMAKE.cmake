@@ -4,7 +4,7 @@
 # https://sourceforge.net/code-snapshots/svn/m/mi/miniweb/code/miniweb-code-r208.zip    (source code)
 
 ### DEPENDS ###
-#DKDEPEND(depend_name)
+#dk_depend(depend_name)
 
 ### VERSION ###
 dk_set(MINIWEB_VERSION 20130309)

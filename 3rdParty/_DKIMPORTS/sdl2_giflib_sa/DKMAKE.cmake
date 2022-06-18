@@ -1,8 +1,8 @@
 # https://github.com/theMealena/SDL2_giflib_sa/archive/master.zip
 
 ### DEPENDS ###
-DKDEPEND(giflib)
-DKDEPEND(DKSDLWindow)
+dk_depend(giflib)
+dk_depend(DKSDLWindow)
 
 
 dk_import(https://github.com/theMealena/SDL2_giflib_sa.git)
@@ -11,15 +11,15 @@ dk_import(https://github.com/theMealena/SDL2_giflib_sa.git)
 #dk_set(SDLGIF_NAME SDL2_giflib_sa-${SDLGIF_VERSION})
 #dk_set(SDLGIF_DL https://github.com/theMealena/SDL2_giflib_sa/archive/${SDLGIF_VERSION}.zip)
 #dk_set(SDLGIF ${3RDPARTY}/${SDLGIF_NAME})
-#DKINSTALL(${SDLGIF_DL} SDL2_giflib_sa ${SDLGIF})
+#dk_install(${SDLGIF_DL} SDL2_giflib_sa ${SDLGIF})
 
 
 
 
 
 ### LINK ###
-DKDEFINE(USE_SDL2_gif)
-DKINCLUDE(${SDLGIF})
+dk_define(USE_SDL2_gif)
+dk_include(${SDLGIF})
 WIN_DEBUG_DKLIB(${SDLGIF}/${OS}/${DEBUG_DIR}/SDL2_gif.lib)
 WIN_RELEASE_DKLIB(${SDLGIF}/${OS}/${RELEASE_DIR}/SDL2_gif.lib)
 MAC_DEBUG_DKLIB(${SDLGIF}/${OS}/${DEBUG_DIR}/libSDL2_gif.a)
@@ -33,7 +33,7 @@ ANDROID_RELEASE_DKLIB(${SDLGIF}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/libSD
 
 
 ### COMPILE ###
-DKSETPATH(${SDLGIF}/${BUILD_DIR})
+dk_setPath(${SDLGIF}/${BUILD_DIR})
 DKQCOMMAND(${DKCMAKE_BUILD} ${SDL2_CMAKE} ${SDLGIF})
 
 

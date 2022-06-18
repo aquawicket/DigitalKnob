@@ -1,5 +1,5 @@
-DKDEPEND(DKDuktape)
-DKDEPEND(DKRml)  #let's make the Dom only require javascript
+dk_depend(DKDuktape)
+dk_depend(DKRml)  #let's make the Dom only require javascript
 
 generateCmake(DKDom)
-DKASSETS(DKDom)
+dk_assets(DKDom)

@@ -1,4 +1,4 @@
-DKDEPEND(DKSDLWindow)
+dk_depend(DKSDLWindow)
 
 
 dk_set(SDLGIF_NAME SDL2_gif)
@@ -12,8 +12,8 @@ ENDIF()
 
 
 ### LINK ###
-DKDEFINE(USE_SDL2_gif)
-DKINCLUDE(${SDLGIF})
+dk_define(USE_SDL2_gif)
+dk_include(${SDLGIF})
 WIN_DEBUG_DKLIB(${SDLGIF}/${OS}/${DEBUG_DIR}/SDL2_gif.lib)
 WIN_RELEASE_DKLIB(${SDLGIF}/${OS}/${RELEASE_DIR}/SDL2_gif.lib)
 MAC_DEBUG_DKLIB(${SDLGIF}/${OS}/${DEBUG_DIR}/libSDL2_gif.a)
@@ -32,7 +32,7 @@ ANDROID_RELEASE_DKLIB(${SDLGIF}/${OS}/${RELEASE_DIR}/libSDL2_gif.a)
 
 
 ### COMPILE ###
-DKSETPATH(${SDLGIF}/${BUILD_DIR})
+dk_setPath(${SDLGIF}/${BUILD_DIR})
 DKQCOMMAND(${DKCMAKE_BUILD} ${SDL2_CMAKE} ${SDLGIF})
 
 

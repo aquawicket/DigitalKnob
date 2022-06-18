@@ -8,5 +8,5 @@ DKCOMMAND(sudo apt -y install libsystemd-dev)
 
 
 ### LINK ###
-DKINCLUDE(/usr/include/systemd)
+dk_include(/usr/include/systemd)
 SET(CMAKE_CXX_LINK_EXECUTABLE "${CMAKE_CXX_LINK_EXECUTABLE} -lsystemd")

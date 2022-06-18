@@ -1,2 +1,2 @@
-DKDEPEND(DKAssets)
-DKASSETS(DKTriggers)
+dk_depend(DKAssets)
+dk_assets(DKTriggers)

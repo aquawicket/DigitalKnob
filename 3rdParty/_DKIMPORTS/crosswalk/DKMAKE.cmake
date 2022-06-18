@@ -1,7 +1,7 @@
 ### DEPENDS ###
-#DKDEPEND(jdk)
-DKDEPEND(ant)
-DKDEPEND(nodejs)
+#dk_depend(jdk)
+dk_depend(ant)
+dk_depend(nodejs)
 
 
 ### INSTALL ###
