@@ -79,7 +79,7 @@ foreach(plugin ${dkdepend_list})
 		string(SUBSTRING ${plugin} ${index} -1 arg2)
 		math(EXPR index "${index}-1")
 		string(SUBSTRING ${plugin} 0 ${index} plugin)
-		DKENABLE(${arg2})
+		dk_enable(${arg2})
 	endif()
 	
 	#################### 3rdParty libs #####################
