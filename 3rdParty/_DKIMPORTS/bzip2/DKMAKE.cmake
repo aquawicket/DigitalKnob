@@ -30,7 +30,7 @@ ANDROID_DKIMPORT	(ftp://sourceware.org/pub/bzip2/bzip2-1.0.8.tar.gz)
 
 
 if(NOT EXISTS ${BZIP2}/copy)
-	DKCOPY(${BZIP2} ${BZIP2}/copy TRUE)
+	dk_copy(${BZIP2} ${BZIP2}/copy TRUE)
 endif()
 
 
@@ -63,18 +63,18 @@ ANDROID_DKSET(BZIP2_CMAKE -DBZIP2_INCLUDE_DIR=${BZIP2}/${OS} -DBZIP2_LIBRARY_DEB
 ### COMPILE ###
 if(WIN_32)
 	DKDEFINE(BZ_NO_STDIO)
-	DKCOPY(${BZIP2}/build-VS2019 ${BZIP2}/${OS} FALSE)
+	dk_copy(${BZIP2}/build-VS2019 ${BZIP2}/${OS} FALSE)
 	WIN32_DKSETPATH(${BZIP2}/${OS})
 	WIN32_VS(${BZIP2_NAME} bzip2.sln libbz2-static)
 endif()
 
 
 if(WIN_64)
-	DKCOPY(${BZIP2}/win32/bzip2.rc ${BZIP2}/${OS}/bzip2.rc FALSE) #copy project files that came with bzip
-	DKCOPY(${BZIP2}/win32/bzip2recover.rc ${BZIP2}/${OS}/bzip2recover.rc FALSE)
-	DKCOPY(${BZIP2}/win32/bzip2_version.h ${BZIP2}/${OS}/bzip2_version.h FALSE)
-	DKCOPY(${BZIP2}/win32/libbz2.rc ${BZIP2}/${OS}/libbz2.rc FALSE)
-	DKCOPY(${BZIP2}/build-VS2019 ${BZIP2}/${OS} FALSE)
+	dk_copy(${BZIP2}/win32/bzip2.rc ${BZIP2}/${OS}/bzip2.rc FALSE) #copy project files that came with bzip
+	dk_copy(${BZIP2}/win32/bzip2recover.rc ${BZIP2}/${OS}/bzip2recover.rc FALSE)
+	dk_copy(${BZIP2}/win32/bzip2_version.h ${BZIP2}/${OS}/bzip2_version.h FALSE)
+	dk_copy(${BZIP2}/win32/libbz2.rc ${BZIP2}/${OS}/libbz2.rc FALSE)
+	dk_copy(${BZIP2}/build-VS2019 ${BZIP2}/${OS} FALSE)
 	WIN64_DKSETPATH(${BZIP2}/${OS})
 	WIN64_VS(${BZIP2_NAME} bzip2.sln libbz2-static x64)
 endif()
@@ -82,7 +82,7 @@ endif()
 
 if(MAC_64)
 	if(NOT EXISTS ${BZIP2}/${OS}/bzip2.c)
-		DKCOPY(${BZIP2}/copy ${BZIP2}/${OS} TRUE)
+		dk_copy(${BZIP2}/copy ${BZIP2}/${OS} TRUE)
 	endif()
 	MAC_DKSETPATH(${BZIP2}/${OS})
 	MAC_DKQCOMMAND(make)
@@ -91,7 +91,7 @@ endif()
 
 if(LINUX)
 	if(NOT EXISTS ${BZIP2}/${OS}/bzip2.c)
-		DKCOPY(${BZIP2}/copy ${BZIP2}/${OS} TRUE)
+		dk_copy(${BZIP2}/copy ${BZIP2}/${OS} TRUE)
 	endif()
 	LINUX_DKSETPATH(${BZIP2}/${OS})
 	LINUX_DKQCOMMAND(make)
@@ -100,7 +100,7 @@ endif()
 
 if(RASPBERRY)
 	if(NOT EXISTS ${BZIP2}/${OS}/bzip2.c)
-		DKCOPY(${BZIP2}/copy ${BZIP2}/${OS} TRUE)
+		dk_copy(${BZIP2}/copy ${BZIP2}/${OS} TRUE)
 	endif()
 	RASPBERRY_DKSETPATH(${BZIP2}/${OS})
 	RASPBERRY_DKQCOMMAND(make)
@@ -109,7 +109,7 @@ endif()
 
 if(ANDROID)
 	if(NOT EXISTS ${BZIP2}/${OS}/bzip2.c)
-		DKCOPY(${BZIP2}/copy ${BZIP2}/${OS} TRUE)
+		dk_copy(${BZIP2}/copy ${BZIP2}/${OS} TRUE)
 	endif()
 	ANDROID_DKSETPATH(${BZIP2}/${OS})
 	ANDROID_DKQCOMMAND(make)

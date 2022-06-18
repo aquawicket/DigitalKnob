@@ -9,7 +9,7 @@ IF(HAVE_DKCef)
 ENDIF()
 
 if(WIN)
-	DKCOPY(${STACKWALKER}/StackWalker/StackWalker.cpp ${DKPLUGINS}/DKDebug/StackWalker.cpp FALSE)
+	dk_copy(${STACKWALKER}/StackWalker/StackWalker.cpp ${DKPLUGINS}/DKDebug/StackWalker.cpp FALSE)
 	WIN_DKINCLUDE(${3RDPARTY}/stackwalker/StackWalker)
 else()
 	DKREMOVE(${DKPLUGINS}/DKDebug/StackWalker.cpp)

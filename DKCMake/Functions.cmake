@@ -402,12 +402,12 @@ endmacro()
 #
 macro(dk_watch variable)
 	DKDEBUGFUNC(${ARGV})
-	variable_watch(variable dk_watchVariable)
+	variable_watch(variable dk_watchCallback)
 endmacro()
 
 
 ##############################################################################
-# dk_watchVariable(var access val 1st stack)
+# dk_watchCallback(var access val 1st stack)
 # 
 #	Description:  TODO
 #
@@ -417,7 +417,7 @@ endmacro()
 #   @1st:(Required) 		TODO
 #	@stack:(Required) 		TODO
 #
-macro(dk_watchVariable variable access val lst stack)
+macro(dk_watchCallback variable access val lst stack)
 	DKDEBUGFUNC(${ARGV})
     DKINFO("Variable watch: variable=${variable} access=${access} val=${val} 1st=${1st} stack=${stack}")
 	dk_wait()
@@ -681,7 +681,6 @@ function(dk_extract src dest)
 	if(NOT EXISTS ${CMAKE_COMMAND})
 		DKERROR("CMAKE_COMMAND not found: \${CMAKE_COMMAND} = ${CMAKE_COMMAND}")
 	endif()
-	#execute_process(COMMAND ${CMAKE_COMMAND} -E tar xvf ${src} WORKING_DIRECTORY ${dest})
 	dk_executeProcess(${CMAKE_COMMAND} -E tar xvf ${src} WORKING_DIRECTORY ${dest})
 endfunction()
 
@@ -700,9 +699,9 @@ endfunction()
 
 
 ###############################################################################
-# DKCOPY(from to overwrite)
+# dk_copy(from to overwrite)
 #
-function(DKCOPY from to overwrite)
+function(dk_copy from to overwrite)
 	DKDEBUGFUNC(${ARGV})
 	if(EXISTS ${from})
 		if(IS_DIRECTORY ${from})
@@ -724,7 +723,7 @@ function(DKCOPY from to overwrite)
 					elseif(compare_result EQUAL 0)
 						#DKINFO("${sourcefile} No Copy, The files are identical.")
 					else()
-						DKWARN( "DKCOPY(${from} ${to} ${overwrite}): \n ERROR: compare_result = ${compare_result}")
+						DKWARN( "dk_copy(${from} ${to} ${overwrite}): \n ERROR: compare_result = ${compare_result}")
 					endif()
 				elseif(NOT EXISTS ${destinationfile})
 					execute_process(COMMAND ${CMAKE_COMMAND} -E copy ${sourcefile} ${destinationfile})
@@ -1077,7 +1076,7 @@ function(DKPATCH import_name dest_path)
 	DKWARN("COPYING PATCH FILES FROM _IMPORTS/${import_name} TO ${dest_path}")
 	DKWARN("To stop patch files from overwriting install files, remove the \"PATCH\" argument from the end of the DKIMPORT or DKINSTALL command")
 	DKWARN("located in ${DKIMPORTS}/${import_name}/DKMAKE.cmake")
-	DKCOPY(${DKIMPORTS}/${import_name}/ ${dest_path}/ TRUE)
+	dk_copy(${DKIMPORTS}/${import_name}/ ${dest_path}/ TRUE)
 endfunction()
 
 
@@ -1213,7 +1212,7 @@ function(DKINSTALL src_path import_name dest_path)
 	#	DKSET(QUEUE_BUILD ON)
 	#	DKEXECUTE(${DKDOWNLOAD}/${src_filename})
 	else() #NOT ARCHIVE, just copy the file into it's 3rdParty folder
-		DKCOPY(${DKDOWNLOAD}/${dl_filename} ${dest_path}/${dl_filename} TRUE)
+		dk_copy(${DKDOWNLOAD}/${dl_filename} ${dest_path}/${dl_filename} TRUE)
 	endif()
 	if("${ARGN}" STREQUAL "PATCH")
 		DKPATCH(${import_name} ${dest_path})
@@ -3298,7 +3297,7 @@ function(dk_importDL url) #Lib #ID #Patch
 		#DKDEBUG("ID = ${ID}")
 		
 		## update DKMAKE.cmake file
-		DKCOPY(${CMAKE_CURRENT_LIST_FILE} ${CMAKE_CURRENT_LIST_FILE}.BACKUP TRUE)
+		dk_copy(${CMAKE_CURRENT_LIST_FILE} ${CMAKE_CURRENT_LIST_FILE}.BACKUP TRUE)
 		file(READ ${CMAKE_CURRENT_LIST_FILE} DKMAKE_FILE)
 		string(REPLACE "DKIMPORT(${url})" "#DKIMPORT(${url})\nDKIMPORT(${${LIBVAR}_DL})" DKMAKE_FILE ${DKMAKE_FILE})
 		string(REPLACE "DKIMPORT(${url} PATCH)" "#DKIMPORT(${url} PATCH)\nDKIMPORT(${${LIBVAR}_DL} PATCH)" DKMAKE_FILE ${DKMAKE_FILE})

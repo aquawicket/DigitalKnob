@@ -6,7 +6,7 @@ DKSET(SDLGIF ${3RDPARTY}/${SDLGIF_NAME})
 IF(NOT EXISTS ${SDLGIF})
 	dk_extract(${DKIMPORTS}/sdl2_gif/gif_2_lib.zip ${3RDPARTY})
 	DKRENAME(${3RDPARTY}/SDL2 ${SDLGIF})
-	DKCOPY(${DKIMPORTS}/sdl2_gif ${SDLGIF} TRUE)
+	dk_copy(${DKIMPORTS}/sdl2_gif ${SDLGIF} TRUE)
 ENDIF()
 
 
