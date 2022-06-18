@@ -135,8 +135,8 @@ RASPBERRY_RELEASE_DKLIB(${CEF}/${OS}/${RELEASE_DIR}/libcef_dll_wrapper/libcef_dl
 dk_setPath(${CEF}/${BUILD_DIR})
 
 WIN_dk_queueCommand(${DKCMAKE_BUILD} -DUSE_SANDBOX=Off ${CEF})
-WIN_VS(${CEF_NAME} cef.sln libcef_dll_wrapper)
-WIN_VS(${CEF_NAME} cef.sln cefsimple)
+WIN_dk_VisualStudio(${CEF_NAME} cef.sln libcef_dll_wrapper)
+WIN_dk_VisualStudio(${CEF_NAME} cef.sln cefsimple)
 
 MAC_dk_queueCommand(${DKCMAKE_BUILD} ${CEF})
 MAC_XCODE(${CEF_NAME} libcef_dll_wrapper)

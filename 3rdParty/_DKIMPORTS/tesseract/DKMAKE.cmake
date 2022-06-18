@@ -34,7 +34,7 @@ dk_setPath(${TESSERACT}/${BUILD_DIR})
 #WIN_dk_setPath(${TESSERACT}/${OS})
 WIN32_dk_queueCommand(${DKCMAKE_BUILD} -DSTATIC=ON -DBUILD_TRAINING_TOOLS=OFF ${LEPTONICA_WIN} ${TESSERACT})
 WIN64_dk_queueCommand(${DKCMAKE_BUILD} -DSTATIC=ON -DBUILD_TRAINING_TOOLS=OFF ${LEPTONICA_WIN} ${TESSERACT})
-WIN_VS(${TESSERACT_NAME} tesseract.sln libtesseract)
+WIN_dk_VisualStudio(${TESSERACT_NAME} tesseract.sln libtesseract)
 
 
 #MAC_dk_setPath(${TESSERACT}/${OS})

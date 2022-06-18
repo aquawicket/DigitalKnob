@@ -50,15 +50,15 @@ ANDROID_dk_set	(XZ_CMAKE -DCMAKE_C_FLAGS=-DLZMA_API_STATIC -DCMAKE_CXX_FLAGS=-DL
 
 dk_setPath(${XZ}/${BUILD_DIR})
 dk_queueCommand(${DKCMAKE_BUILD} ${XZ})
-VS(${XZ_NAME} xz.sln liblzma)
-#WIN_VS(${XZ_NAME} xz.sln liblzma)
+dk_VisualStudio(${XZ_NAME} xz.sln liblzma)
+#WIN_dk_VisualStudio(${XZ_NAME} xz.sln liblzma)
 XCODE(${XZ_NAME} liblzma)
 #MAC_XCODE(${XZ_NAME} liblzma)
 #IOS_XCODE(${XZ_NAME} liblzma)
 #IOSSIM_XCODE(${XZ_NAME} liblzma)
 LINUX_dk_queueCommand(make liblzma)
 RASPBERRY_dk_queueCommand(make liblzma)
-#ANDROID_VS(${XZ_NAME} xz.sln liblzma)	
+#ANDROID_dk_VisualStudio(${XZ_NAME} xz.sln liblzma)	
 ############################################################
 
 
@@ -155,7 +155,7 @@ ANDROID_RELEASE_dk_msys(make)
 
 ANDROID_dk_setPath(${XZ}/${OS})
 ANDROID_dk_queueCommand(${DKCMAKE_BUILD} ${XZ})
-ANDROID_VS(${XZ_NAME} xz.sln liblzma)
+ANDROID_dk_VisualStudio(${XZ_NAME} xz.sln liblzma)
 
 
 ############################################################################

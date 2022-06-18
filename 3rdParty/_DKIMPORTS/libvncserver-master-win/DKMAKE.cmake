@@ -36,5 +36,5 @@ WIN_RELEASE_DKLIB(${VNCSERVER}/${OS}/${RELEASE_DIR}/vncclient.lib)
 ### COMPILE ###
 WIN_dk_setPath(${VNCSERVER}/${OS})
 WIN_dk_queueCommand(${DKCMAKE_BUILD} -DWITH_JPEG=ON ${OPENSSL_CMAKE} ${PNG_CMAKE} ${JPEG_CMAKE} ${ZLIB_CMAKE} ${VNCSERVER})
-WIN_VS(${VNCSERVER_NAME} LibVNCServer.sln vncserver)
-WIN_VS(${VNCSERVER_NAME} LibVNCServer.sln vncclient)
+WIN_dk_VisualStudio(${VNCSERVER_NAME} LibVNCServer.sln vncserver)
+WIN_dk_VisualStudio(${VNCSERVER_NAME} LibVNCServer.sln vncclient)

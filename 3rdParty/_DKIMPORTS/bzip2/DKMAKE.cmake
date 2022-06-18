@@ -65,7 +65,7 @@ if(WIN_32)
 	dk_define(BZ_NO_STDIO)
 	dk_copy(${BZIP2}/build-VS2019 ${BZIP2}/${OS} FALSE)
 	WIN32_dk_setPath(${BZIP2}/${OS})
-	WIN32_VS(${BZIP2_NAME} bzip2.sln libbz2-static)
+	WIN32_dk_VisualStudio(${BZIP2_NAME} bzip2.sln libbz2-static)
 endif()
 
 
@@ -76,7 +76,7 @@ if(WIN_64)
 	dk_copy(${BZIP2}/win32/libbz2.rc ${BZIP2}/${OS}/libbz2.rc FALSE)
 	dk_copy(${BZIP2}/build-VS2019 ${BZIP2}/${OS} FALSE)
 	WIN64_dk_setPath(${BZIP2}/${OS})
-	WIN64_VS(${BZIP2_NAME} bzip2.sln libbz2-static x64)
+	WIN64_dk_VisualStudio(${BZIP2_NAME} bzip2.sln libbz2-static x64)
 endif()
 
 

@@ -84,13 +84,13 @@ ENDIF(osgdb_sgb)
 dk_setPath(${OSGBULLET}/${BUILD_DIR})
 
 WIN_dk_queueCommand(${DKCMAKE_BUILD} "-DOSGInstallType=Source And Build Tree" -DOSGBuildRoot=${OSG}/${OS} -DOSGSourceRoot=${OSG} "-DBulletInstallType=Source And Build Tree" -DBulletBuildRoot=${BULLET}/${OS} -DBulletSourceRoot=${BULLET} -DosgWorks_DIR=${OSGWORKS}/${OS}/lib -DOSGBULLET_BUILD_APPLICATIONS=OFF -DOSGBULLET_BUILD_EXAMPLES=OFF -DOSGBULLET_INSTALL_DATA=OFF ${OSGBULLET})
-WIN_DEBUG_VS(osgbullet-master osgBullet.sln)
-WIN_RELEASE_VS(osgbullet-master osgBullet.sln)
+WIN_dk_VisualStudioDebug(osgbullet-master osgBullet.sln)
+WIN_dk_VisualStudioRelease(osgbullet-master osgBullet.sln)
 
 
 WIN_dk_queueCommand(${DKCMAKE_BUILD} "-DOSGInstallType=Source And Build Tree" -DOSGBuildRoot=${OSG}/${OS} -DOSGSourceRoot=${OSG} "-DBulletInstallType=Source And Build Tree" -DBulletBuildRoot=${BULLET}/${OS} -DBulletSourceRoot=${BULLET} -DosgWorks_DIR=${OSGWORKS}/${OS}/lib -DOSGBULLET_BUILD_APPLICATIONS=OFF -DOSGBULLET_BUILD_EXAMPLES=OFF -DOSGBULLET_INSTALL_DATA=OFF ${OSGBULLET})
-WIN_DEBUG_VS(osgbullet-master osgBullet.sln)
-WIN_RELEASE_VS(osgbullet-master osgBullet.sln)
+WIN_dk_VisualStudioDebug(osgbullet-master osgBullet.sln)
+WIN_dk_VisualStudioRelease(osgbullet-master osgBullet.sln)
 
 
 MAC_dk_queueCommand(${DKCMAKE_BUILD} "-DOSGInstallType=Source And Build Tree" -DOSGBuildRoot=${OSG}/${OS} -DOSGSourceRoot=${OSG} "-DBulletInstallType=Source And Build Tree" -DBulletBuildRoot=${BULLET}/${OS} -DBulletSourceRoot=${BULLET} -DosgWorks_DIR=${OSGWORKS}/${OS}/lib -DOSGBULLET_BUILD_APPLICATIONS=OFF -DOSGBULLET_BUILD_EXAMPLES=OFF -DOSGBULLET_INSTALL_DATA=OF ${OSGBULLET})
@@ -116,5 +116,5 @@ LINUX_RELEASE_dk_queueCommand(make)
 
 
 ANDROID_dk_queueCommand(${DKCMAKE_BUILD} "-DOSGInstallType=Source And Build Tree" -DOSGBuildRoot=${OSG}/${OS} -DOSGSourceRoot=${OSG} "-DBulletInstallType=Source And Build Tree" -DBulletBuildRoot=${BULLET}/${OS} -DBulletSourceRoot=${BULLET} -DosgWorks_DIR=${OSGWORKS}/${OS}/lib -DOSGBULLET_BUILD_APPLICATIONS=OFF -DOSGBULLET_BUILD_EXAMPLES=OFF -DOSGBULLET_INSTALL_DATA=OFF ${OSGBULLET})
-ANDROID_DEBUG_VS(osgbullet-master osgBullet.sln)
-ANDROID_RELEASE_VS(osgbullet-master osgBullet.sln)
+ANDROID_dk_VisualStudioDebug(osgbullet-master osgBullet.sln)
+ANDROID_dk_VisualStudioRelease(osgbullet-master osgBullet.sln)

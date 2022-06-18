@@ -46,10 +46,10 @@ ANDROID_dk_set(TIFF_CMAKE -DTIFF_INCLUDE_DIR=${TIFF}/libtiff -DTIFF_INCLUDE_DIR2
 dk_setPath(${TIFF}/${BUILD_DIR})
 dk_queueCommand(${DKCMAKE_BUILD} ${TIFF})
 
-WIN_VS(${TIFF_NAME} tiff.sln tiff-static)
+WIN_dk_VisualStudio(${TIFF_NAME} tiff.sln tiff-static)
 MAC_XCODE(${TIFF_NAME} tiff-static)
 IOS_XCODE(${TIFF_NAME} tiff-static)
 IOSSIM_XCODE(${TIFF_NAME} tiff-static)
 LINUX_dk_queueCommand(make) #tiff-static)
 RASPBERRY_dk_queueCommand(make) #tiff-static)
-ANDROID_VS(${TIFF_NAME} tiff.sln tiff-static)
+ANDROID_dk_VisualStudio(${TIFF_NAME} tiff.sln tiff-static)

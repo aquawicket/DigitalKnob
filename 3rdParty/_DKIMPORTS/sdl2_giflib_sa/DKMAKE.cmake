@@ -37,7 +37,7 @@ dk_setPath(${SDLGIF}/${BUILD_DIR})
 dk_queueCommand(${DKCMAKE_BUILD} ${SDL2_CMAKE} ${SDLGIF})
 
 
-WIN_VS(${SDLGIF_NAME} SDL2_gif.sln SDL2_gif)
+WIN_dk_VisualStudio(${SDLGIF_NAME} SDL2_gif.sln SDL2_gif)
 MAC_XCODE(${SDLGIF_NAME} SDL2_gif)
 IOS_XCODE(${SDLGIF_NAME} SDL2_gif)
 IOSSIM_XCODE(${SDLGIF_NAME} SDL2_gif)

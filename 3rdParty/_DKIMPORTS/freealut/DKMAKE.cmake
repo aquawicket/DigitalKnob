@@ -33,7 +33,7 @@ LINUX_RELEASE_DKLIB(${FREEALUT}/${OS}/${RELEASE_DIR}/libalut_static.a)
 dk_setPath(${CRYPTO}/${BUILD_DIR})
 WIN_dk_queueCommand(${DKCMAKE_BUILD} "-DCMAKE_C_FLAGS=/DAL_LIBTYPE_STATIC /I${OPENAL}/include/AL /I${MSINTTYPES}" ${OPENAL_WIN} ${FREEALUT})
 #WIN_dk_queueCommand(${DKCMAKE_BUILD} "-DCMAKE_C_FLAGS=/DWIN64 /D_WINDOWS /W3 /nologo /GR /EHsc /I${OPENAL}/include/AL /I${MSINTTYPES} /DAL_LIBTYPE_STATIC" ${OPENAL_WIN} ${FREEALUT})
-WIN_VS(${FREEALUT_NAME} Alut.sln alut_static)
+WIN_dk_VisualStudio(${FREEALUT_NAME} Alut.sln alut_static)
 
 
 MAC64_dk_queueCommand(${DKCMAKE_BUILD} ${OPENAL_MAC} ${FREEALUT})

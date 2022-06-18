@@ -26,7 +26,7 @@ dk_setPath(${WAAVE}/${BUILD_DIR})
 
 WIN32_dk_queueCommand(${DKCMAKE_BUILD} ${FFMPEG_WIN} ${SDL2_WIN} ${WAAVE})
 WIN64_dk_queueCommand(${DKCMAKE_BUILD} ${FFMPEG_WIN} ${SDL2_WIN} ${WAAVE})
-WIN_VS(${WAAVE_NAME} waave.sln waave)
+WIN_dk_VisualStudio(${WAAVE_NAME} waave.sln waave)
 
 
 

@@ -39,10 +39,10 @@ dk_setPath(${SDL-GPU}/${BUILD_DIR})
 dk_queueCommand(${DKCMAKE_BUILD} ${SDL_CMAKE} ${SDL-GPU})
 
 
-WIN_VS(${SDL-GPU_NAME} SDL_gpu.sln SDL_gpu)
+WIN_dk_VisualStudio(${SDL-GPU_NAME} SDL_gpu.sln SDL_gpu)
 MAC_XCODE(${SDL-GPU_NAME} SDL_gpu)
 IOS_XCODE(${SDL-GPU_NAME} SDL_gpu)
 IOSSIM_XCODE(${SDL-GPU_NAME} SDL_gpu)
 LINUX_dk_queueCommand(make SDL_gpu)
 RASPBERRY_dk_queueCommand(make SDL_gpu)
-ANDROID_VS(${SDL-GPU_NAME} SDL_gpu.sln SDL_gpu)
+ANDROID_dk_VisualStudio(${SDL-GPU_NAME} SDL_gpu.sln SDL_gpu)

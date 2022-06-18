@@ -49,7 +49,7 @@ ANDROID_dk_set(LIBUV_CMAKE -DLIBUV_INCLUDE_DIR=${LIBUV} -DLIBUV_LIBRARY=${LIBUV}
 WIN_dk_setPath(${LIBUV}/${OS})
 WIN32_dk_queueCommand(${DKCMAKE_BUILD} ${LIBUV})
 WIN64_dk_queueCommand(${DKCMAKE_BUILD} ${LIBUV})
-WIN_VS(${LIBUV_NAME} libuv.sln uv_a)
+WIN_dk_VisualStudio(${LIBUV_NAME} libuv.sln uv_a)
 
 
 MAC_dk_setPath(${LIBUV}/${OS})
@@ -89,4 +89,4 @@ RASPBERRY_RELEASE_dk_queueCommand(make uv_a)
 ANDROID_dk_setPath(${LIBUV}/${OS})
 ANDROID32_dk_queueCommand(${DKCMAKE_BUILD} ${LIBUV})
 ANDROID64_dk_queueCommand(${DKCMAKE_BUILD} ${LIBUV})
-ANDROID_VS(${LIBUV_NAME} libuv.sln uv_a)
+ANDROID_dk_VisualStudio(${LIBUV_NAME} libuv.sln uv_a)

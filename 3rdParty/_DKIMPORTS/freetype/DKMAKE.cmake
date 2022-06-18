@@ -51,10 +51,10 @@ dk_setPath(${FREETYPE}/${BUILD_DIR})
 dk_queueCommand(${DKCMAKE_BUILD} ${FREETYPE})
 
 
-WIN_VS(${FREETYPE_NAME} freetype.sln freetype)
+WIN_dk_VisualStudio(${FREETYPE_NAME} freetype.sln freetype)
 MAC_XCODE(${FREETYPE_NAME} freetype)
 IOS_XCODE(${FREETYPE_NAME} freetype)
 IOSSIM_XCODE(${FREETYPE_NAME} freetype)
 LINUX_dk_queueCommand(make freetype)
 RASPBERRY_dk_queueCommand(make freetype)
-ANDROID_VS(${FREETYPE_NAME} freetype.sln freetype)
+ANDROID_dk_VisualStudio(${FREETYPE_NAME} freetype.sln freetype)

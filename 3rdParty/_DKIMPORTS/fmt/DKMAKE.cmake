@@ -20,7 +20,7 @@ dk_include(${FMT}/include)
 #dk_queueCommand(${DKCMAKE_BUILD} -DCMAKE_POSITION_INDEPENDENT_CODE=TRUE ${FMT})
 
 ### COMPILE ###
-#VS(${FMT_NAME} FMT.sln fmt)  # windows, android
+#dk_VisualStudio(${FMT_NAME} FMT.sln fmt)  # windows, android
 #XCODE(${FMT_NAME} fmt)       # mac, ios, iossim
 #LINUX_dk_queueCommand(make fmt)   
 #RASPBERRY_dk_queueCommand(make fmt)

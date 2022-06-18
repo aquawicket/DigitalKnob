@@ -54,10 +54,10 @@ dk_setPath(${LIBWEBP}/${BUILD_DIR})
 dk_queueCommand(${DKCMAKE_BUILD} ${ZLIB_CMAKE} ${LIBPNG_CMAKE} ${LIBJPEG-TURBO_CMAKE} ${TIFF_CMAKE} ${GIFLIB_CMAKE} ${SDL_CMAKE} ${LIBWEBP})
 
 
-WIN_VS(${LIBWEBP_NAME} WebP.sln webp)
+WIN_dk_VisualStudio(${LIBWEBP_NAME} WebP.sln webp)
 MAC_XCODE(${LIBWEBP_NAME} webp)
 IOS_XCODE(${LIBWEBP_NAME} webp)
 IOSSIM_XCODE(${LIBWEBP_NAME} webp)
 LINUX_dk_queueCommand(make webp)
 RASPBERRY_dk_queueCommand(make webp)
-ANDROID_VS(${LIBWEBP_NAME} libwebp.sln webp)
+ANDROID_dk_VisualStudio(${LIBWEBP_NAME} libwebp.sln webp)

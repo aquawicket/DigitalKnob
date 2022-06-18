@@ -50,10 +50,10 @@ ANDROID_dk_set(LIBICONV_CMAKE -DICONV_DIR=${LIBICONV} -DICONV_LIBRARIES=${LIBICO
 dk_setPath(${LIBICONV}/${BUILD_DIR})
 dk_queueCommand(${DKCMAKE_BUILD} ${LIBICONV})
 
-WIN_VS(${LIBICONV_NAME} libiconv.sln iconv)
+WIN_dk_VisualStudio(${LIBICONV_NAME} libiconv.sln iconv)
 MAC_XCODE(${LIBICONV_NAME} iconv)
 IOS_XCODE(${LIBICONV_NAME} iconv)
 IOSSIM_XCODE(${LIBICONV_NAME} iconv)
 LINUX_dk_queueCommand(make iconv)
 RASPBERRY_dk_queueCommand(make iconv)
-ANDROID_VS(${LIBICONV_NAME} libiconv.sln iconv)
+ANDROID_dk_VisualStudio(${LIBICONV_NAME} libiconv.sln iconv)

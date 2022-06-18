@@ -34,7 +34,7 @@ ANDROID_RELEASE_DKLIB(${CRYPTOPP}/${OS}/${RELEASE_DIR}/libcryptopp.a)
 dk_setPath(${CRYPTOPP}/${BUILD_DIR})
 
 WIN_dk_queueCommand(${DKCMAKE_BUILD} -DBUILD_STATIC=ON -DBUILD_SHARED=OFF -DBUILD_TESTING=OFF ${CRYPTOPP})
-WIN_VS(${CRYPTOPP_NAME} cryptopp.sln cryptopp-static)
+WIN_dk_VisualStudio(${CRYPTOPP_NAME} cryptopp.sln cryptopp-static)
 
 
 if(MAC)
@@ -64,4 +64,4 @@ if(ANDROID)
 	string(REPLACE "-DANDROID_CPP_FEATURES=\"rtti exceptions\"" "" DKCMAKE_BUILD_CRYPTOPP "${DKCMAKE_BUILD}")
 endif(ANDROID)
 ANDROID_dk_queueCommand(${DKCMAKE_BUILD_CRYPTOPP} "-DCMAKE_CXX_FLAGS=/I${ANDROIDNDK}/sources/android/cpufeatures" -DBUILD_STATIC=ON -DBUILD_SHARED=OFF -DBUILD_TESTING=OFF ${CRYPTOPP})
-ANDROID_VS(${CRYPTOPP_NAME} cryptopp.sln cryptopp-static)
+ANDROID_dk_VisualStudio(${CRYPTOPP_NAME} cryptopp.sln cryptopp-static)
