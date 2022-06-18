@@ -9,18 +9,18 @@
 #LINUX_HOST_DKIMPORT		(PYTHON_DL https://www.python.org/ftp/python/2.7.18/Python-2.7.18.tgz)
 #RASPBERRY_HOST_DKIMPORT	(PYTHON_DL https://www.python.org/ftp/python/2.7.18/Python-2.7.18.tgz)
 
-WIN_DKSET		(PYTHON_DL https://www.python.org/ftp/python/2.7.18/python-2.7.18.msi)
-MAC_DKSET		(PYTHON_DL https://www.python.org/ftp/python/2.7.18/python-2.7.18-macosx10.9.pkg)
-LINUX_DKSET		(PYTHON_DL https://www.python.org/ftp/python/2.7.18/Python-2.7.18.tgz)
-RASPBERRY_DKSET	(PYTHON_DL https://www.python.org/ftp/python/2.7.18/Python-2.7.18.tgz)
+WIN_dk_set		(PYTHON_DL https://www.python.org/ftp/python/2.7.18/python-2.7.18.msi)
+MAC_dk_set		(PYTHON_DL https://www.python.org/ftp/python/2.7.18/python-2.7.18-macosx10.9.pkg)
+LINUX_dk_set		(PYTHON_DL https://www.python.org/ftp/python/2.7.18/Python-2.7.18.tgz)
+RASPBERRY_dk_set	(PYTHON_DL https://www.python.org/ftp/python/2.7.18/Python-2.7.18.tgz)
 
 dk_set(PYTHON_NAME python-2.7.18)
 dk_set(PYTHON ${3RDPARTY}/${PYTHON_NAME})
 
-WIN_DKSET		(PYTHON_APP ${PYTHON}/python.exe)
-MAC_DKSET		(PYTHON_APP ${PYTHON}/python.app)
-LINUX_DKSET		(PYTHON_APP ${PYTHON}/python)
-RASPBERRY_DKSET	(PYTHON_APP ${PYTHON}/python)
+WIN_dk_set		(PYTHON_APP ${PYTHON}/python.exe)
+MAC_dk_set		(PYTHON_APP ${PYTHON}/python.app)
+LINUX_dk_set		(PYTHON_APP ${PYTHON}/python)
+RASPBERRY_dk_set	(PYTHON_APP ${PYTHON}/python)
 
 ### INSTALL ###
 IF(WIN AND NOT EXISTS ${PYTHON_APP})
