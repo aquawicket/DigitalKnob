@@ -33,25 +33,23 @@ WIN_DKSET(BZIP2-WIN-BUILD_CMAKE -DBZIP2_INCLUDE_DIR=${BZIP2-WIN-BUILD} -DBZIP2_L
 	
 ### COMPILE ###
 if(WIN_32)
-	dkFileReplace(${BZIP2-WIN-BUILD}/${OS}/bzip2-static/bzip2-static.vcxproj "v142" "v143")
-	dkFileReplace(${BZIP2-WIN-BUILD}/${OS}/libbz2-static/libbz2-static.vcxproj "v142" "v143")
-	
 	DKDEFINE(BZ_NO_STDIO)
 	DKCOPY(${BZIP2-WIN-BUILD}/build-VS2019 ${BZIP2-WIN-BUILD}/${OS} FALSE)
+	dkFileReplace(${BZIP2-WIN-BUILD}/${OS}/bzip2-static/bzip2-static.vcxproj "v142" "v143")
+	dkFileReplace(${BZIP2-WIN-BUILD}/${OS}/libbz2-static/libbz2-static.vcxproj "v142" "v143")
 	WIN32_DKSETPATH(${BZIP2-WIN-BUILD}/${OS})
 	WIN32_VS(${BZIP2-WIN-BUILD_NAME} bzip2.sln libbz2-static)
 endif()
 
 
 if(WIN_64)
-	dkFileReplace(${BZIP2-WIN-BUILD}/${OS}/bzip2-static/bzip2-static.vcxproj v142 v143)
-	dkFileReplace(${BZIP2-WIN-BUILD}/${OS}/libbz2-static/libbz2-static.vcxproj v142 v143)
-	
 	DKCOPY(${BZIP2-WIN-BUILD}/win32/bzip2.rc ${BZIP2-WIN-BUILD}/${OS}/bzip2.rc FALSE) #copy project files that came with bzip
 	DKCOPY(${BZIP2-WIN-BUILD}/win32/bzip2recover.rc ${BZIP2-WIN-BUILD}/${OS}/bzip2recover.rc FALSE)
 	DKCOPY(${BZIP2-WIN-BUILD}/win32/bzip2_version.h ${BZIP2-WIN-BUILD}/${OS}/bzip2_version.h FALSE)
 	DKCOPY(${BZIP2-WIN-BUILD}/win32/libbz2.rc ${BZIP2-WIN-BUILD}/${OS}/libbz2.rc FALSE)
 	DKCOPY(${BZIP2-WIN-BUILD}/build-VS2019 ${BZIP2-WIN-BUILD}/${OS} FALSE)
+	dkFileReplace(${BZIP2-WIN-BUILD}/${OS}/bzip2-static/bzip2-static.vcxproj "v142" "v143")
+	dkFileReplace(${BZIP2-WIN-BUILD}/${OS}/libbz2-static/libbz2-static.vcxproj "v142" "v143")
 	WIN64_DKSETPATH(${BZIP2-WIN-BUILD}/${OS})
 	WIN64_VS(${BZIP2-WIN-BUILD_NAME} bzip2.sln libbz2-static x64)
 endif()
