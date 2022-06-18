@@ -50,7 +50,7 @@ endif()
 ##################################################
 include(${DKCMAKE}/BuildFlags.cmake)
 include(${DKPROJECT}/DKMAKE.cmake)
-DKREMOVE(${DKPROJECT}/${OS}/DKBUILD.log)
+file(REMOVE ${DKPROJECT}/${OS}/DKBUILD.log)
 dk_printSettings()
 #dk_printAllVariables()
 
@@ -99,7 +99,7 @@ foreach(plugin ${dkdepend_list})
 	# We want to to use this to refresh 3rdParty Plugins
 	#if(REBUILDALL)
 		#foreach(lib ${LIBLIST})
-		#	DKREMOVE(${lib})
+		#	file(REMOVE ${lib})
 		#	DKINFO("######  Removed ${lib}")
 		#endforeach()
 	#endif()
@@ -383,13 +383,13 @@ if(WIN_32)
 		# Backup files and folders excluded from the package
 		DKCOPY(${DKPROJECT}/assets/USER ${DKPROJECT}/Backup/USER TRUE)
 		# Remove excluded files and folders before packaging
-		DKREMOVE(${DKPROJECT}/assets/USER)
+		file(REMOVE ${DKPROJECT}/assets/USER)
 		#Compress the assets, they will be included by resource.rc
 		DKINFO("Creating assets.zip . . .")
 		dk_zip(${DKPROJECT}/assets)
 		# Restore the backed up files, excluded from assets
 		DKCOPY(${DKPROJECT}/Backup ${DKPROJECT}/assets TRUE)
-		DKREMOVE(${DKPROJECT}/Backup)
+		file(REMOVE ${DKPROJECT}/Backup)
 		DKCOPY(${DKPLUGINS}/_DKIMPORT/assets.h ${DKPROJECT}/assets.h TRUE) #required
 	endif()	
 		
@@ -490,13 +490,13 @@ if(WIN_64)
 	################# BACKUP USERDATA / INJECT ASSETS #####################
 	if(HAVE_DK)
 		DKCOPY(${DKPROJECT}/assets/USER ${DKPROJECT}/Backup/USER TRUE)
-		DKREMOVE(${DKPROJECT}/assets/USER)
+		file(REMOVE ${DKPROJECT}/assets/USER)
 		#Compress the assets, they will be included by resource.rc
 		DKINFO("Creating assets.zip . . .")
 		dk_zip(${DKPROJECT}/assets)
 		# Restore the backed up files
 		DKCOPY(${DKPROJECT}/Backup/ ${DKPROJECT}/assets/ TRUE)
-		DKREMOVE(${DKPROJECT}/Backup)
+		file(REMOVE ${DKPROJECT}/Backup)
 		#dummy assets.h file, or the builder wil complain about assets.h missing
 		DKCOPY(${DKPLUGINS}/_DKIMPORT/assets.h ${DKPROJECT}/assets.h TRUE)
 	endif()
@@ -601,9 +601,9 @@ if(MAC)
 		
 	################# BACKUP USERDATA / INJECT ASSETS #####################	
 	DKCOPY(${DKPROJECT}/assets/USER ${DKPROJECT}/Backup/USER TRUE)
-	DKREMOVE(${DKPROJECT}/assets/USER)
+	file(REMOVE ${DKPROJECT}/assets/USER)
 	DKCOPY(${DKPROJECT}/Backup/ ${DKPROJECT}/assets/ FALSE)
-	DKREMOVE(${DKPROJECT}/Backup)
+	file(REMOVE ${DKPROJECT}/Backup)
 	
 	####################### Create Executable Target ###################
 	file(GLOB_RECURSE m_SRC 
@@ -648,8 +648,8 @@ if(MAC)
 		
 	##############Delete Exlusions and Copy Assets to Bundle #######################
 	
-	DKREMOVE(${DKPROJECT}/assets/log.txt)
-	DKREMOVE(${DKPROJECT}/assets/cef.txt)
+	file(REMOVE ${DKPROJECT}/assets/log.txt)
+	file(REMOVE ${DKPROJECT}/assets/cef.txt)
 	add_custom_command(TARGET ${APP_NAME} PRE_BUILD COMMAND ${CMAKE_COMMAND} -E copy_directory ${DKPROJECT}/assets $<TARGET_BUNDLE_CONTENT_DIR:${APP_NAME}>/Resources)
 		
 	############# Link Libraries, Set Startup Project #################
@@ -744,10 +744,10 @@ if(IOS OR IOSSIM)
 	# Backup files and folders excluded from the package
 	#DKCOPY(${DKPROJECT}/assets/USER ${DKPROJECT}/Backup/USER TRUE)
 	# Remove excluded files and folders before packaging
-	#DKREMOVE(${DKPROJECT}/assets/USER)
+	#file(REMOVE ${DKPROJECT}/assets/USER)
 	# Restore the backed up files, excluded from assets
 	#DKCOPY(${DKPROJECT}/Backup/ ${DKPROJECT}/assets/ FALSE)
-	#DKREMOVE(${DKPROJECT}/Backup)
+	#file(REMOVE ${DKPROJECT}/Backup)
 		
 	########################## Images ##############################
 	#TODO
@@ -855,7 +855,7 @@ if(NOT RASPBERRY)
 	if(false)
 		# backup files not going in the package
 		DKCOPY(${DKPROJECT}/assets/USER ${DKPROJECT}/Backup/USER TRUE)
-		DKREMOVE(${DKPROJECT}/assets/USER)
+		file(REMOVE ${DKPROJECT}/assets/USER)
 		# Remove excluded files and folders before packaging
 		DKINFO("Creating assets.zip . . .")
 		dk_zip(${DKPROJECT}/assets)
@@ -863,7 +863,7 @@ if(NOT RASPBERRY)
 		bin2h(SOURCE_FILE ${DKPROJECT}/assets.zip HEADER_FILE ${DKPROJECT}/assets.h VARIABLE_NAME "ASSETS_H")
 		# Restore the backed up assets
 		DKCOPY(${DKPROJECT}/Backup/ ${DKPROJECT}/assets/ FALSE)
-		DKREMOVE(${DKPROJECT}/Backup)
+		file(REMOVE ${DKPROJECT}/Backup)
 	endif()
 	
 	####################### Create Executable Target ###################
@@ -935,14 +935,14 @@ if(RASPBERRY)
 		# backup files not going in the package
 		DKCOPY(${DKPROJECT}/assets/USER ${DKPROJECT}/Backup/USER TRUE)
 		# Remove excluded files and folders before packaging
-		DKREMOVE(${DKPROJECT}/assets/USER)
+		file(REMOVE ${DKPROJECT}/assets/USER)
 		DKINFO("Creating assets.zip . . .")
 		dk_zip(${DKPROJECT}/assets)
 		#DKINFO("Creating assets.h . . .")
 		bin2h(SOURCE_FILE ${DKPROJECT}/assets.zip HEADER_FILE ${DKPROJECT}/assets.h VARIABLE_NAME "ASSETS_H")
 		# Restore the backed up assets
 		DKCOPY(${DKPROJECT}/Backup/ ${DKPROJECT}/assets/ FALSE)
-		DKREMOVE(${DKPROJECT}/Backup)
+		file(REMOVE ${DKPROJECT}/Backup)
 	endif()
 	
 	###################### Backup Executable ###########################
