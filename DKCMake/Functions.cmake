@@ -24,9 +24,24 @@
 
 # Extra Documentation
 # https://asitdhal.medium.com/cmake-functions-and-macros-22293041519f
+# https://foonathan.net/2016/03/cmake-install/ 
 include_guard()
 
 
+### SETTINGS ##################################################################
+set(DKDEBUG_ENABLED				0		CACHE INTERNAL "")
+set(DKDEBUGFUNC_ENABLED			0		CACHE INTERNAL "")
+set(PRINT_CALL_DETAILS 			1		CACHE INTERNAL "")
+set(PRINT_FILE_NAMES 			1 		CACHE INTERNAL "")
+set(PRINT_LINE_NUMBERS 			1		CACHE INTERNAL "")
+set(PRINT_FUNCTION_NAMES 		1 		CACHE INTERNAL "")
+set(PRINT_FUNCTION_ ARGUMENTS 	1 		CACHE INTERNAL "")
+set(dkdepend_disable_list 		""		CACHE INTERNAL "")
+
+
+###############################################################################
+# dk_getDigitalknobPath(result)
+#
 function(dk_getDigitalknobPath result)
 	get_filename_component(DIGITALKNOB ${CMAKE_SOURCE_DIR} ABSOLUTE)
 	get_filename_component(FOLDER_NAME ${DIGITALKNOB} NAME)
@@ -43,25 +58,60 @@ dk_getDigitalknobPath(DIGITALKNOB)
 set(DKCMAKE ${DIGITALKNOB}/DK/DKCMake)
 
 
-
-### SETTINGS #####################################################################
-set(DKDEBUG_ENABLED				0		CACHE INTERNAL "")
-set(DKDEBUGFUNC_ENABLED			0		CACHE INTERNAL "")
-set(PRINT_CALL_DETAILS 			1		CACHE INTERNAL "")
-set(PRINT_FILE_NAMES 			1 		CACHE INTERNAL "")
-set(PRINT_LINE_NUMBERS 			1		CACHE INTERNAL "")
-set(PRINT_FUNCTION_NAMES 		1 		CACHE INTERNAL "")
-set(PRINT_FUNCTION_ ARGUMENTS 	1 		CACHE INTERNAL "")
-set(dkdepend_disable_list 		""		CACHE INTERNAL "")
-
-
-### DK.cmake #####################################################################
+### INIT ######################################################################
 include(${DKCMAKE}/DK.cmake)
-
-set(Functions_Ext ${DIGITALKNOB}/DK/DKCMake/Functions_Ext.cmake)
+set(Functions_Ext ${DKCMAKE}/Functions_Ext.cmake)
 file(REMOVE ${Functions_Ext})
-file(APPEND ${Functions_Ext} "### Don't make changes in this file. They will be overwritten. ###\n")
-file(APPEND ${Functions_Ext} "### This file was automatically generated from Functions.cmake ###\n")
+
+
+###############################################################################
+# TestReturnValue(args result)
+#
+#	Example function that uses returns value with a supplied variable 
+#	Implementation: 
+#		function(TestReturnValue args result)
+#			set(args ${ARGV})
+#			list(GET args -1 result)
+#			list(REMOVE_AT args -1)
+#			set(${result} ${args} PARENT_SCOPE) #just relay the arguments
+#		endfunction()
+#
+#	Usage:
+#		TestReturnValue("ABC" "123" 5 myResult)
+#		message(STATUS "TestReturnValue() -> myResult = ${myResult}") # should print->  return value = ABC;123;5
+
+
+###############################################################################
+# CreateFunction(name contents args)
+#
+#	Example that creates functions dynamicaly at run time
+#	Implementation:	
+#		function(CreateFunction name contents) #args)
+#			if(CMAKE_VERSION VERSION_LESS 3.18)
+#				if(NOT extFileCleared)
+#					file(WRITE ext_functions.cmake "")
+#					set(extFileCleared 1 CACHE INTERNAL "")
+#				endif()
+#				file(APPEND ext_functions.cmake "function(${name})\n	${contents}\nendfunction()\n")
+#				include(ext_functions.cmake)
+#			else()
+#				cmake_language(EVAL CODE "function(${name})\n	${contents}\nendfunction()\n")
+#			endif()	
+#		endfunction()
+#
+#	Usage:
+#		CreateFunction(MyDynamicFunc 
+#			"message(STATUS \"Test message\")") 
+#			"foreach(arg IN LIST ${ARGN})
+#				set(count 0) 
+#				message(STATUS \"arg:${count} = ${arg}\")
+#				MATH(EXPR count \"${cound}+1\")
+#			endforeach()"
+#			${ARGN}
+#		)
+#	
+#	set(myVariable "myVariable")
+#	MyDynamicFunc("myStringData" "My;List;Data" "${myVariable}" 17 moreData)
 
 
 ###############################################################################
@@ -69,6 +119,11 @@ file(APPEND ${Functions_Ext} "### This file was automatically generated from Fun
 #
 function(dk_aliasFunctions name)
 	DKDEBUGFUNC(${ARGV})
+	if(NOT EXISTS ${Functions_Ext})
+		file(APPEND ${Functions_Ext} "### Don't make changes in this file. They will be overwritten. ###\n")
+		file(APPEND ${Functions_Ext} "### This file was automatically generated from Functions.cmake ###\n\n")
+	endif()
+	file(APPEND ${Functions_Ext} "## ${name} ##\n")
 	file(APPEND ${Functions_Ext} "macro(WIN_HOST_${name})\n   if(WIN_HOST)\n      ${name}(\${ARGV})\n  endif()\nendmacro()\n")
 	file(APPEND ${Functions_Ext} "macro(WIN32_HOST_${name})\n   if(WIN_HOST AND X86)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
 	file(APPEND ${Functions_Ext} "macro(WIN64_HOST_${name})\n   if(WIN_HOST AND X64)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
@@ -155,7 +210,8 @@ function(dk_aliasFunctions name)
 	file(APPEND ${Functions_Ext} "macro(RASPBERRY64_RELEASE_${name})\n   if(RASPBERRY_64 AND RELEASE)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
 	file(APPEND ${Functions_Ext} "macro(ANDROID_RELEASE_${name})\n   if(ANDROID AND RELEASE)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
 	file(APPEND ${Functions_Ext} "macro(ANDROID32_RELEASE_${name})\n   if(ANDROID_32 AND RELEASE)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	file(APPEND ${Functions_Ext} "macro(ANDROID64_RELEASE_${name})\n   if(ANDROID_64 AND RELEASE)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")	
+	file(APPEND ${Functions_Ext} "macro(ANDROID64_RELEASE_${name})\n   if(ANDROID_64 AND RELEASE)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
+	file(APPEND ${Functions_Ext} "\n")	
 endfunction()
 
 
@@ -229,64 +285,6 @@ macro(dk_exit)
 		execute_process(COMMAND killall -9 cmake WORKING_DIRECTORY ${CMAKE_CURRENT_LIST_DIR})
 	endif()
 endmacro()
-
-
-
-########################################################################
-###################         DKFUNCTIONS           ###################
-########################################################################
-## TOREAD:    https://foonathan.net/2016/03/cmake-install/ 
-
-
-
-##############################################################################
-# TestReturnValue(args result)
-#
-#	Example function that uses returns value with a supplied variable 
-#	Implementation: 
-#		function(TestReturnValue args result)
-#			set(args ${ARGV})
-#			list(GET args -1 result)
-#			list(REMOVE_AT args -1)
-#			set(${result} ${args} PARENT_SCOPE) #just relay the arguments
-#		endfunction()
-#
-#	Usage:
-#		TestReturnValue("ABC" "123" 5 myResult)
-#		message(STATUS "TestReturnValue() -> myResult = ${myResult}") # should print->  return value = ABC;123;5
-
-
-##############################################################################
-# CreateFunction(name contents args)
-#
-#	Example that creates functions dynamicaly at run time
-#	Implementation:	
-#		function(CreateFunction name contents) #args)
-#			if(CMAKE_VERSION VERSION_LESS 3.18)
-#				if(NOT extFileCleared)
-#					file(WRITE ext_functions.cmake "")
-#					set(extFileCleared 1 CACHE INTERNAL "")
-#				endif()
-#				file(APPEND ext_functions.cmake "function(${name})\n	${contents}\nendfunction()\n")
-#				include(ext_functions.cmake)
-#			else()
-#				cmake_language(EVAL CODE "function(${name})\n	${contents}\nendfunction()\n")
-#			endif()	
-#		endfunction()
-#
-#	Usage:
-#		CreateFunction(MyDynamicFunc 
-#			"message(STATUS \"Test message\")") 
-#			"foreach(arg IN LIST ${ARGN})
-#				set(count 0) 
-#				message(STATUS \"arg:${count} = ${arg}\")
-#				MATH(EXPR count \"${cound}+1\")
-#			endforeach()"
-#			${ARGN}
-#		)
-#	
-#	set(myVariable "myVariable")
-#	MyDynamicFunc("myStringData" "My;List;Data" "${myVariable}" 17 moreData)
 
 
 ##############################################################################

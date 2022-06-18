@@ -1,5 +1,6 @@
 ### Don't make changes in this file. They will be overwritten. ###
 ### This file was automatically generated from Functions.cmake ###
+
 macro(WIN_HOST_dk_set)
    if(WIN_HOST)
       dk_set(${ARGV})
