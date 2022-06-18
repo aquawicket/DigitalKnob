@@ -12,4 +12,4 @@ if(NOT AGL_Lib)
 endif()
 
 dk_define(GL_SILENCE_DEPRECATION)
-APPLE_DKLIB(${AGL_Lib})
+APPLE_dk_lib(${AGL_Lib})

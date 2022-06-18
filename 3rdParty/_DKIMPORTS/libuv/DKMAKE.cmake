@@ -15,8 +15,8 @@ dk_import(https://github.com/libuv/libuv/archive/2bc22c40eb68f3b38d1ae3ea68ef2f1
 
 
 ### DKPLUGINS LINK ###
-WIN_DKLIB(Iphlpapi.lib)
-WIN_DKLIB(Userenv.lib)
+WIN_dk_lib(Iphlpapi.lib)
+WIN_dk_lib(Userenv.lib)
 dk_include(${LIBUV}/include)
 dk_include(${LIBUV}/${OS})
 WIN_dk_libDebug(${LIBUV}/${OS}/${DEBUG_DIR}/uv_a.lib)
@@ -49,7 +49,7 @@ ANDROID_dk_set(LIBUV_CMAKE -DLIBUV_INCLUDE_DIR=${LIBUV} -DLIBUV_LIBRARY=${LIBUV}
 WIN_dk_setPath(${LIBUV}/${OS})
 WIN32_dk_queueCommand(${DKCMAKE_BUILD} ${LIBUV})
 WIN64_dk_queueCommand(${DKCMAKE_BUILD} ${LIBUV})
-WIN_dk_VisualStudio(${LIBUV_NAME} libuv.sln uv_a)
+WIN_dk_visualStudio(${LIBUV_NAME} libuv.sln uv_a)
 
 
 MAC_dk_setPath(${LIBUV}/${OS})
@@ -89,4 +89,4 @@ RASPBERRY_RELEASE_dk_queueCommand(make uv_a)
 ANDROID_dk_setPath(${LIBUV}/${OS})
 ANDROID32_dk_queueCommand(${DKCMAKE_BUILD} ${LIBUV})
 ANDROID64_dk_queueCommand(${DKCMAKE_BUILD} ${LIBUV})
-ANDROID_dk_VisualStudio(${LIBUV_NAME} libuv.sln uv_a)
+ANDROID_dk_visualStudio(${LIBUV_NAME} libuv.sln uv_a)

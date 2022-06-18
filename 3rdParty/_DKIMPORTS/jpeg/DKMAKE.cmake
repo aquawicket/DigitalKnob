@@ -41,9 +41,9 @@ dk_setPath(${JPEG}/${BUILD_DIR})
 dk_queueCommand(${DKCMAKE_BUILD} ${JPEG})
 
 
-WIN_dk_VisualStudio(${JPEG_NAME} jpeg.sln jpeg-static)
+WIN_dk_visualStudio(${JPEG_NAME} jpeg.sln jpeg-static)
 MAC_dk_xcode(${JPEG_NAME} jpeg-static)
 IOS_dk_xcode(${JPEG_NAME} jpeg-static)
 IOSSIM_dk_xcode(${JPEG_NAME} jpeg-static)
 LINUX_dk_queueCommand(make jpeg-static)
-ANDROID_dk_VisualStudio(${JPEG_NAME} jpeg.sln jpeg-static)
+ANDROID_dk_visualStudio(${JPEG_NAME} jpeg.sln jpeg-static)

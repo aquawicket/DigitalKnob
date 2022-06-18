@@ -46,10 +46,10 @@ dk_setPath(${LIBJPEG-TURBO}/${BUILD_DIR})
 dk_queueCommand(${DKCMAKE_BUILD} -DWITH_SIMD=OFF ${LIBJPEG-TURBO})
 
 
-WIN_dk_VisualStudio(${LIBJPEG-TURBO_NAME} libjpeg-turbo.sln turbojpeg-static)
+WIN_dk_visualStudio(${LIBJPEG-TURBO_NAME} libjpeg-turbo.sln turbojpeg-static)
 MAC_dk_xcode(${LIBJPEG-TURBO_NAME} turbojpeg-static)
 IOS_dk_xcode(${LIBJPEG-TURBO_NAME} turbojpeg-static)
 IOSSIM_dk_xcode(${LIBJPEG-TURBO_NAME} turbojpeg-static)
 LINUX_dk_queueCommand(make turbojpeg-static)
 RASPBERRY_dk_queueCommand(make turbojpeg-static)
-ANDROID_dk_VisualStudio(${LIBJPEG-TURBO_NAME} libjpeg-turbo.sln turbojpeg-static)
+ANDROID_dk_visualStudio(${LIBJPEG-TURBO_NAME} libjpeg-turbo.sln turbojpeg-static)

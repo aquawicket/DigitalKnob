@@ -24,6 +24,6 @@ dk_queueCommand(${DKCMAKE_BUILD} ${PACKAGE})
 
 
 ### COMPILE ###
-VISUAL_STUDIO(${PACKAGE_NAME} package.sln package)  # WIN_dk_VisualStudio(), ANDROID_dk_VisualStudio()
+VISUAL_STUDIO(${PACKAGE_NAME} package.sln package)  # WIN_dk_visualStudio(), ANDROID_dk_visualStudio()
 dk_xcode(${PACKAGE_NAME} package) 						# MAC_dk_xcode(), IOS_XCODE, IOSSIM_dk_xcode()
 MAKE(package) 										# LINUX_dk_queueCommand(make), RASPBERRY_dk_queueCommand(make)

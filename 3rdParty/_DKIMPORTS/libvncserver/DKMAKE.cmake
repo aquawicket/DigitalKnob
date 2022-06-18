@@ -45,8 +45,8 @@ dk_setPath(${LIBVNCSERVER}/${BUILD_DIR})
 dk_queueCommand(${DKCMAKE_BUILD} ${OPENSSL_CMAKE} ${PNG_CMAKE} ${ZLIB_CMAKE} -DWITH_JPEG=ON ${JPEG_CMAKE} ${LIBVNCSERVER})
 
 
-WIN_dk_VisualStudio(${LIBVNCSERVER_NAME} LibVNCServer.sln vncserver)
-WIN_dk_VisualStudio(${LIBVNCSERVER_NAME} LibVNCServer.sln vncclient)
+WIN_dk_visualStudio(${LIBVNCSERVER_NAME} LibVNCServer.sln vncserver)
+WIN_dk_visualStudio(${LIBVNCSERVER_NAME} LibVNCServer.sln vncclient)
 
 MAC_dk_xcode(${LIBVNCSERVER_NAME} vncserver)
 MAC_dk_xcode(${LIBVNCSERVER_NAME} vncclient)
@@ -60,5 +60,5 @@ IOSSIM_dk_xcode(${LIBVNCSERVER_NAME} vncclient)
 LINUX_dk_queueCommand(make vncserver)
 LINUX_dk_queueCommand(make vncclient)
 
-ANDROID_dk_VisualStudio(${LIBVNCSERVER_NAME} LibVNCServer.sln vncserver)
-ANDROID_dk_VisualStudio(${LIBVNCSERVER_NAME} LibVNCServer.sln vncclient)
+ANDROID_dk_visualStudio(${LIBVNCSERVER_NAME} LibVNCServer.sln vncserver)
+ANDROID_dk_visualStudio(${LIBVNCSERVER_NAME} LibVNCServer.sln vncclient)

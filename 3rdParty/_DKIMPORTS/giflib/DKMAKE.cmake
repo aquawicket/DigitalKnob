@@ -108,4 +108,4 @@ RASPBERRY_RELEASE_dk_queueCommand(make -C lib)
 
 dk_setPath(${GIFLIB}/${BUILD_DIR})
 ANDROID_dk_queueCommand(${DKCMAKE_BUILD} ${GIFLIB})
-ANDROID_dk_VisualStudio(${GIFLIB_NAME} giflib.sln giflib)
+ANDROID_dk_visualStudio(${GIFLIB_NAME} giflib.sln giflib)

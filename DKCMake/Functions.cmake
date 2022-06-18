@@ -1451,9 +1451,9 @@ dk_aliasFunctions("dk_queueCommand")
 
 
 ###############################################################################
-# dk_VisualStudioDebug(folder sln_file)
+# dk_visualStudioDebug(folder sln_file)
 #
-function(dk_VisualStudioDebug folder sln_file) #target #arch
+function(dk_visualStudioDebug folder sln_file) #target #arch
 	DKDEBUGFUNC(${ARGV})
 	if(NOT WIN_HOST)
 		return()
@@ -1472,13 +1472,13 @@ function(dk_VisualStudioDebug folder sln_file) #target #arch
 		dk_executeProcess(${EXECUTE_COMMAND} WORKING_DIRECTORY ${3RDPARTY}/${folder}/${OS})
 	endif()
 endfunction()
-dk_aliasFunctions("dk_VisualStudioDebug" "NO_DEBUG_RELEASE_TAGS")
+dk_aliasFunctions("dk_visualStudioDebug" "NO_DEBUG_RELEASE_TAGS")
 
 
 ###############################################################################
-# dk_VisualStudioRelease(folder sln_file)
+# dk_visualStudioRelease(folder sln_file)
 #
-function(dk_VisualStudioRelease folder sln_file) #target #arch
+function(dk_visualStudioRelease folder sln_file) #target #arch
 	DKDEBUGFUNC(${ARGV})
 	if(NOT WIN_HOST)
 		return()
@@ -1497,18 +1497,18 @@ function(dk_VisualStudioRelease folder sln_file) #target #arch
 		dk_executeProcess(${EXECUTE_COMMAND} WORKING_DIRECTORY ${3RDPARTY}/${folder}/${OS})
 	endif()
 endfunction()
-dk_aliasFunctions("dk_VisualStudioRelease" "NO_DEBUG_RELEASE_TAGS")
+dk_aliasFunctions("dk_visualStudioRelease" "NO_DEBUG_RELEASE_TAGS")
 
 
 ###############################################################################
-# dk_VisualStudio(args)
+# dk_visualStudio(args)
 #
-function(dk_VisualStudio)
+function(dk_visualStudio)
 	DKDEBUGFUNC(${ARGV})
-	dk_VisualStudioDebug(${ARGV})
-	dk_VisualStudioRelease(${ARGV})
+	dk_visualStudioDebug(${ARGV})
+	dk_visualStudioRelease(${ARGV})
 endfunction()
-dk_aliasFunctions("dk_VisualStudio" "NO_DEBUG_RELEASE_TAGS")
+dk_aliasFunctions("dk_visualStudio" "NO_DEBUG_RELEASE_TAGS")
 
 
 ###############################################################################

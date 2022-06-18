@@ -19,7 +19,7 @@ if(LINUX OR RASPBERRY)
 	SET(CMAKE_CXX_LINK_EXECUTABLE "${CMAKE_CXX_LINK_EXECUTABLE} -lX11")
 	
 	#static linking
-	#RASPBERRY_DKLIB(/usr/lib/arm-linux-gnueabihf/libX11.a)
-	#RASPBERRY_DKLIB(/usr/lib/arm-linux-gnueabihf/libxcb.a)
-	#RASPBERRY_DKLIB(/usr/lib/arm-linux-gnueabihf/libXau.a)
+	#RASPBERRY_dk_lib(/usr/lib/arm-linux-gnueabihf/libX11.a)
+	#RASPBERRY_dk_lib(/usr/lib/arm-linux-gnueabihf/libxcb.a)
+	#RASPBERRY_dk_lib(/usr/lib/arm-linux-gnueabihf/libXau.a)
 endif()

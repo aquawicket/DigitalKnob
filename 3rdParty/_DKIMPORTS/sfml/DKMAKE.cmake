@@ -190,12 +190,12 @@ RASPBERRY_dk_queueCommand(${DKCMAKE_BUILD} -DBUILD_SHARED_LIBS=FALSE ${JPEG_CMAK
 ANDROID_dk_queueCommand(${DKCMAKE_BUILD} -DBUILD_SHARED_LIBS=FALSE ${JPEG_CMAKE} ${OPENAL_CMAKE} ${OGG_CMAKE} ${VORBIS_CMAKE} ${FLAC_CMAKE} ${SFML})
 
 
-dk_VisualStudio(${SFML_NAME} SFML.sln)
-#WIN_dk_VisualStudio(${SFML_NAME} SFML.sln)
+dk_visualStudio(${SFML_NAME} SFML.sln)
+#WIN_dk_visualStudio(${SFML_NAME} SFML.sln)
 dk_xcode(${SFML_NAME})
 #MAC_dk_xcode(${SFML_NAME})
 #IOS_dk_xcode(${SFML_NAME})
 #IOSSIM_dk_xcode(${SFML_NAME})
 LINUX_dk_queueCommand(make)
 RASPBERRY_dk_queueCommand(make)
-#ANDROID_dk_VisualStudio(${SFML_NAME} SFML.sln)
+#ANDROID_dk_visualStudio(${SFML_NAME} SFML.sln)

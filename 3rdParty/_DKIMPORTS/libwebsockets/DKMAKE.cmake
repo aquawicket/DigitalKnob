@@ -25,7 +25,7 @@ LINUX_dk_libRelease(${LIBWEBSOCKETS}/${OS}/${RELEASE_DIR}/lib/libwebsockets.a)
 WIN_dk_setPath(${LIBWEBSOCKETS}/${OS})
 WIN32_dk_queueCommand(${DKCMAKE_BUILD} -LWS_WITH_SSL=OFF ${LIBWEBSOCKETS})
 WIN64_dk_queueCommand(${DKCMAKE_BUILD} -LWS_WITH_SSL=OFF ${LIBWEBSOCKETS})
-WIN_dk_VisualStudio(${LIBWEBSOCKETS_NAME} libwebsockets.sln websockets)
+WIN_dk_visualStudio(${LIBWEBSOCKETS_NAME} libwebsockets.sln websockets)
 
 dk_setPath(${LIBWEBSOCKETS}/${OS}/Debug)
 LINUX_DEBUG_dk_queueCommand(${DKCMAKE_BUILD} -DLWS_WITH_SSL=OFF ${LIBWEBSOCKETS})

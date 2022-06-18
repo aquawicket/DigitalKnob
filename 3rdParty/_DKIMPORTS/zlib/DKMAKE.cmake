@@ -29,7 +29,7 @@ dk_setPath(${ZLIB}/${BUILD_DIR})
 dk_queueCommand(${DKCMAKE_BUILD} ${ZLIB})
 
 
-dk_VisualStudio(${ZLIB_NAME} zlib.sln zlibstatic) # windows, android
+dk_visualStudio(${ZLIB_NAME} zlib.sln zlibstatic) # windows, android
 dk_xcode(${ZLIB_NAME} zlibstatic)       # mac, ios, iossim
 LINUX_dk_queueCommand(make zlibstatic)
 RASPBERRY_dk_queueCommand(make zlibstatic)

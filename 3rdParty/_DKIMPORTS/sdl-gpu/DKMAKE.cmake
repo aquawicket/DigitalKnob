@@ -30,7 +30,7 @@ RASPBERRY_dk_libDebug(${SDL-GPU}/${OS}/SDL_gpu/lib/Debug/libSDL2_gpu_s.a)
 RASPBERRY_dk_libRelease(${SDL-GPU}/${OS}/SDL_gpu/lib/Release/libSDL2_gpu_s.a)
 ANDROID_dk_libDebug(${SDL-GPU}/${OS}/SDL_gpu-VS/lib/Debug/libSDL2_gpu_s.a)
 ANDROID_dk_libRelease(${SDL-GPU}/${OS}/SDL_gpu-VS/lib/Release/libSDL2_gpu_s.a)
-#DKLIB(${SDL-GPU}/${OS}/${RELEASE_DIR}/libsdl-gpu.a)
+#dk_lib(${SDL-GPU}/${OS}/${RELEASE_DIR}/libsdl-gpu.a)
 
 
 
@@ -39,10 +39,10 @@ dk_setPath(${SDL-GPU}/${BUILD_DIR})
 dk_queueCommand(${DKCMAKE_BUILD} ${SDL_CMAKE} ${SDL-GPU})
 
 
-WIN_dk_VisualStudio(${SDL-GPU_NAME} SDL_gpu.sln SDL_gpu)
+WIN_dk_visualStudio(${SDL-GPU_NAME} SDL_gpu.sln SDL_gpu)
 MAC_dk_xcode(${SDL-GPU_NAME} SDL_gpu)
 IOS_dk_xcode(${SDL-GPU_NAME} SDL_gpu)
 IOSSIM_dk_xcode(${SDL-GPU_NAME} SDL_gpu)
 LINUX_dk_queueCommand(make SDL_gpu)
 RASPBERRY_dk_queueCommand(make SDL_gpu)
-ANDROID_dk_VisualStudio(${SDL-GPU_NAME} SDL_gpu.sln SDL_gpu)
+ANDROID_dk_visualStudio(${SDL-GPU_NAME} SDL_gpu.sln SDL_gpu)

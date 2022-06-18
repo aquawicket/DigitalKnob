@@ -44,7 +44,7 @@ dk_setPath(${LIBXML2}/${BUILD_DIR})
 
 
 WIN_dk_queueCommand(${DKCMAKE_BUILD} ${LIBICONV_CMAKE} ${ZLIB_CMAKE} ${LIBXML2})
-WIN_dk_VisualStudio(${LIBXML2_NAME} xml2.sln xml2)
+WIN_dk_visualStudio(${LIBXML2_NAME} xml2.sln xml2)
 
 MAC_dk_queueCommand(${DKCMAKE_BUILD} ${ZLIB_CMAKE} ${LIBXML2})
 MAC_dk_xcode(${LIBXML2_NAME} xml2)
@@ -65,4 +65,4 @@ RASPBERRY_dk_queueCommand(make xml2)
 
 ANDROID_dk_msys(${DKCONFIGURE_BUILD})
 ANDROID_dk_queueCommand(${DKCMAKE_BUILD} "-DANDROID_COMPILER_FLAGS=-I${LIBXML2}/${OS}" ${LIBICONV_CMAKE} ${ZLIB_CMAKE} ${LIBXML2})
-ANDROID_dk_VisualStudio(${LIBXML2_NAME} xml2.sln xml2)
+ANDROID_dk_visualStudio(${LIBXML2_NAME} xml2.sln xml2)

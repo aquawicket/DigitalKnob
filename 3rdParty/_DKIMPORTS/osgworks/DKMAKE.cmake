@@ -102,7 +102,7 @@ ENDIF(osgwTools)
 dk_setPath(${OSGWORKS}/${BUILD_DIR})
 
 WIN_dk_queueCommand(${DKCMAKE_BUILD} "-DOSGInstallType=Source And Build Tree" -DOSGBuildRoot=${OSG}/${OS} -DOSGSourceRoot=${OSG} -DOSGWORKS_BUILD_APPS=OFF -DOSGWORKS_INSTALL_DATA=OFF -DDIRECTINPUT_ARCH_x64=OFF -DBoost_INCLUDE_DIR=OFF ${OSGWORKS})
-WIN_dk_VisualStudio(osgworks-master osgWorks.sln)
+WIN_dk_visualStudio(osgworks-master osgWorks.sln)
 
 
 MAC_dk_queueCommand(${DKCMAKE_BUILD} "-DOSGInstallType=Source And Build Tree" -DOSGBuildRoot=${OSG}/${OS} -DOSGSourceRoot=${OSG} -DOSGWORKS_BUILD_APPS=OFF -DOSGWORKS_INSTALL_DATA=OFF -DDIRECTINPUT_ARCH_x64=OFF -DBoost_INCLUDE_DIR=OFF ${OSGWORKS})
@@ -126,5 +126,5 @@ LINUX_RELEASE_dk_queueCommand(make)
 
 
 ANDROID_dk_queueCommand(${DKCMAKE_BUILD} "-DOSGInstallType=Source And Build Tree" -DOSGBuildRoot=${OSG}/${OS} -DOSGSourceRoot=${OSG} -DOSGWORKS_BUILD_APPS=OFF -DOSGWORKS_INSTALL_DATA=OFF -DDIRECTINPUT_ARCH_x64=OFF -DBoost_INCLUDE_DIR=OFF ${OSGWORKS})
-ANDROID_dk_VisualStudio(osgworks-master osgWorks.sln)
+ANDROID_dk_visualStudio(osgworks-master osgWorks.sln)
 

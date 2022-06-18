@@ -5,4 +5,4 @@ endif()
 
 
 dk_define(__WINDOWS_MM__)
-WIN_DKLIB(winmm.lib)
+WIN_dk_lib(winmm.lib)

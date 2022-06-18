@@ -36,9 +36,9 @@ dk_setPath(${SDLGIF}/${BUILD_DIR})
 dk_queueCommand(${DKCMAKE_BUILD} ${SDL2_CMAKE} ${SDLGIF})
 
 
-WIN_dk_VisualStudio(${SDLGIF_NAME} SDL2_gif.sln SDL2_gif)
+WIN_dk_visualStudio(${SDLGIF_NAME} SDL2_gif.sln SDL2_gif)
 MAC_dk_xcode(${SDLGIF_NAME} SDL2_gif)
 IOSSIM_dk_xcode(${SDLGIF_NAME} SDL2_gif)
 LINUX_dk_queueCommand(make)
 RASPBERRY_dk_queueCommand(make)
-ANDROID_dk_VisualStudio(${SDLGIF_NAME} SDL2_gif.sln SDL2_gif)
+ANDROID_dk_visualStudio(${SDLGIF_NAME} SDL2_gif.sln SDL2_gif)

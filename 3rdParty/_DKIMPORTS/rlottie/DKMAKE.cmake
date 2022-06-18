@@ -39,7 +39,7 @@ dk_setPath(${RLOTTIE}/${BUILD_DIR})
 
 
 WIN_dk_queueCommand(${DKCMAKE_BUILD} /EHsc ${RLOTTIE})
-WIN_dk_VisualStudio(${RLOTTIE_NAME} rlottie.sln rlottie)
+WIN_dk_visualStudio(${RLOTTIE_NAME} rlottie.sln rlottie)
 
 
 MAC_dk_queueCommand(${DKCMAKE_BUILD} ${RLOTTIE})
@@ -67,4 +67,4 @@ RASPBERRY_RELEASE_dk_queueCommand(make rlottie)
 
 
 ANDROID_dk_queueCommand(${DKCMAKE_BUILD} ${RLOTTIE})
-ANDROID_dk_VisualStudio(${RLOTTIE_NAME} rlottie.sln rlottie)
+ANDROID_dk_visualStudio(${RLOTTIE_NAME} rlottie.sln rlottie)

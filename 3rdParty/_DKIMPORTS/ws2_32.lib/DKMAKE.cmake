@@ -10,4 +10,4 @@ endif()
 #endif()
 #DKINFO("Ws2_32.lib_path = ${Ws2_32.lib_path}")
 
-WIN_DKLIB(Ws2_32.lib)
+WIN_dk_lib(Ws2_32.lib)

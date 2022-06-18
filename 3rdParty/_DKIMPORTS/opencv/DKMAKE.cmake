@@ -58,7 +58,7 @@ WIN32_dk_libDebug(${OPENCV}/${OS}/3rdparty/ippicv/ippicv_win/icv/lib/ia32/ippicv
 WIN32_dk_libRelease(${OPENCV}/${OS}/3rdparty/ippicv/ippicv_win/icv/lib/ia32/ippicvmt.lib)
 WIN64_dk_libDebug(${OPENCV}/${OS}/3rdparty/ippicv/ippicv_win/icv/lib/intel64/ippicvmt.lib)
 WIN64_dk_libRelease(${OPENCV}/${OS}/3rdparty/ippicv/ippicv_win/icv/lib/intel64/ippicvmt.lib)
-WIN_DKLIB(vfw32.lib)
+WIN_dk_lib(vfw32.lib)
 
 APPLE32_dk_libDebug(${OPENCV}/${OS}/3rdparty/ippicv/ippicv_mac/icv/lib/intel32/libippicv.a)
 APPLE32_dk_libRelease(${OPENCV}/${OS}/3rdparty/ippicv/ippicv_mac/icv/lib/intel32/libippicv.a)
@@ -161,7 +161,7 @@ ANDROID_dk_libRelease(${OPENCV}/${OS}/lib/${RELEASE_DIR}/libopencv_videoio.a)
 WIN_dk_setPath(${OPENCV}/${OS})
 WIN32_dk_queueCommand(${DKCMAKE_BUILD} ${OPENCV})
 WIN64_dk_queueCommand(${DKCMAKE_BUILD} -DCV_DISABLE_OPTIMIZATION=ON -DCPU_BASELINE="" -DCPU_DISPATCH="" ${OPENCV})
-WIN_dk_VisualStudio(${OPENCV_NAME} OpenCV.sln)
+WIN_dk_visualStudio(${OPENCV_NAME} OpenCV.sln)
 
 
 MAC_dk_setPath(${OPENCV}/${OS})
@@ -215,4 +215,4 @@ RASPBERRY_RELEASE_dk_queueCommand(make opencv_videoio)
 ANDROID_dk_setPath(${OPENCV}/${OS})
 ANDROID32_dk_queueCommand(${DKCMAKE_BUILD} ${OPENCV})
 ANDROID64_dk_queueCommand(${DKCMAKE_BUILD} ${OPENCV})
-ANDROID_dk_VisualStudio(${OPENCV_NAME} OpenCV.sln)
+ANDROID_dk_visualStudio(${OPENCV_NAME} OpenCV.sln)

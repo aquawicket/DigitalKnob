@@ -5,4 +5,4 @@ endif()
 
 
 #dk_import(shlwapi.lib)
-WIN_DKLIB(shlwapi.lib)
+WIN_dk_lib(shlwapi.lib)
