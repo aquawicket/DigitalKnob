@@ -534,7 +534,7 @@ macro(DKSETENV)
 endmacro()
 
 ###############################################################################
-# DOWNLOAD(src_path dest_path)
+# dk_download(src_path dest_path)
 #
 #	Download a file
 #
@@ -543,7 +543,7 @@ endmacro()
 #
 #	Notes: https://cmake.org/pipermail/cmake/2012-September/052205.html/
 #
-function(DOWNLOAD src_path dest_path) # ARGV1 = dest_path
+function(dk_download src_path dest_path) # ARGV1 = dest_path
 	DKDEBUGFUNC(${ARGV})
 	#FIXME: Will not download if only 1 argument
 	#TODO: Let's supply the ability to add a primary root address to download from,  for fast downloading from local hard drives or storage 
@@ -1143,7 +1143,7 @@ function(DKINSTALL src_path import_name dest_path)
 		set(dl_filename ${src_filename})
 	endif()
 	
-	DOWNLOAD(${src_path} ${DKDOWNLOAD}/${dl_filename})
+	dk_download(${src_path} ${DKDOWNLOAD}/${dl_filename})
 	if(NOT EXISTS ${DKDOWNLOAD}/${dl_filename})
 		DKERROR("The download files does not exist")
 		return()
@@ -3282,7 +3282,7 @@ function(dk_importDL url) #Lib #ID #Patch
 		
 		DKERROR("The url doesn't end in .zip or .tar.gz")
 		DKINFO("We will try to get the master commit id from the page")
-		DOWNLOAD(${url} ${DKDOWNLOAD}/TEMP/${FOLDER}.html)
+		dk_download(${url} ${DKDOWNLOAD}/TEMP/${FOLDER}.html)
 		file(READ ${DKDOWNLOAD}/TEMP/${FOLDER}.html PAGE)
 		#file(REMOVE ${DKDOWNLOAD}/TEMP/${FOLDER}.html)
 		string(FIND "${PAGE}" "spoofed_commit_check" index)
@@ -3355,7 +3355,7 @@ function(dk_DownloadAll3rdParty)
 				if(${index} GREATER -1)
 					set(KEEPLINE 1)
 				endif()
-				string(FIND "${line}" "DOWNLOAD(" index)
+				string(FIND "${line}" "dk_download(" index)
 				if(${index} GREATER -1)
 					set(KEEPLINE 1)
 				endif()

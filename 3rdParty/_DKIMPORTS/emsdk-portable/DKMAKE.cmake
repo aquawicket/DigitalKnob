@@ -13,7 +13,7 @@ DKIMPORT(https://github.com/emscripten-core/emsdk.git)
 IF(WIN_HOST)
 	IF(NOT EXISTS ${EMSCRIPTEN})
 		DKSET(CURRENT_DIR ${DKDOWNLOAD})
-		## DOWNLOAD(www.internet.com/emsdk-portable-64bit.zip) ## find an online link
+		## dk_download(www.internet.com/emsdk-portable-64bit.zip) ## find an online link
 		dk_extract(${DKDOWNLOAD}/emsdk-portable-64bit.zip ${3RDPARTY}/emsdk-portable-64bit)
 		DKCOPY(${DKIMPORTS}/emsdk-portable-64bit/.emscripten ${3RDPARTY}/emsdk-portable-64bit/.emscripten true)
 		DKSET(CURRENT_DIR ${3RDPARTY}/emsdk-portable-64bit)
@@ -24,7 +24,7 @@ IF(WIN_HOST)
 	ENDIF()
 else()
 	DKSET(CURRENT_DIR ${DKDOWNLOAD})
-	## DOWNLOAD(www.internet.com/emsdk-portable.tar.gz) ## find an online link
+	## dk_download(www.internet.com/emsdk-portable.tar.gz) ## find an online link
 	dk_extract(${DKDOWNLOAD}/emsdk-portable.tar.gz ${3RDPARTY}/emsdk-portable)
 	DKCOPY(${DKIMPORTS}/emsdk-portable/.emscripten ${3RDPARTY}/emsdk-portable/.emscripten true)
 	DKSET(CURRENT_DIR ${3RDPARTY}/emsdk-portable)

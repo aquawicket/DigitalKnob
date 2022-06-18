@@ -41,7 +41,7 @@ else()  #install
 		DKCOMMAND(${3RDPARTY}/_DKIMPORTS/visualstudio/InstallVisualStudio.cmd)
 	else()
 		# online installer
-		DOWNLOAD(${VISUALSTUDIO_DL} ${DKDOWNLOAD}/vs_Community.exe)
+		dk_download(${VISUALSTUDIO_DL} ${DKDOWNLOAD}/vs_Community.exe)
 		DKCOMMAND(${DKDOWNLOAD}/vs_Community.exe)
 	endif()
 ENDIF()
