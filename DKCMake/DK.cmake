@@ -34,11 +34,11 @@ include(${DKCMAKE}/dk_call.cmake)
 
 
 # include other dk funtions
-dk_load(DKDEBUGFUNC)
+dk_load(dk_debugFunc)
 dk_load(dk_assert)
-dk_load(DKERROR)
-dk_load(DKWARN)
-dk_load(DKINFO)
-dk_load(DKDEBUG)
-dk_load(DKVERBOSE)
-dk_load(DKTRACE)
+dk_load(dk_error)
+dk_load(dk_warn)
+dk_load(dk_info)
+dk_load(dk_debug)
+dk_load(dk_verbose)
+dk_load(dk_trace)

@@ -1,8 +1,11 @@
 dk_load(Color)
 
-# DKVERBOSE(msg)
+# dk_verbose(msg)
 #
-macro(DKVERBOSE msg)
+macro(dk_verbose msg)
 	dk_call(dk_updateLogInfo)
 	message(STATUS "${H_black}${STACK_HEADER}${CLR}${magenta}${msg}${CLR}")
+endmacro()
+macro(DKVERBOSE)
+	dk_verbose(${ARGV})
 endmacro()

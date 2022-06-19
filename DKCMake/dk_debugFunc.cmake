@@ -1,15 +1,15 @@
 ##################################################################################
-# DKDEBUGFUNC(${ARGV})
+# dk_debugFunc(${ARGV})
 #	Prints the current file name, line number, function or macro and arguments
 #	Place this at the first line of every function you want to see debug output for.
 # 
 #	Example:
 #		function(MyFunction myArg1 myArg2)
-#			DKDEBUGFUNC(${ARGV}) 
+#			dk_debugFunc(${ARGV}) 
 #			## user code
 #		endfunction()
 #
-macro(DKDEBUGFUNC)
+macro(dk_debugFunc)
 	if(DKDEBUGFUNC_ENABLED)
 		#dk_getFilename(${CMAKE_CURRENT_FUNCTION_LIST_FILE} FILENAME)
 		if(NOT CMAKE_CURRENT_FUNCTION_LIST_FILE)
@@ -34,4 +34,7 @@ macro(DKDEBUGFUNC)
 			message(STATUS "${cyan}${FILENAME}:${CMAKE_CURRENT_FUNCTION_LIST_LINE}: ${CMAKE_CURRENT_FUNCTION}(${argString})${CLR}")
 		endif()
 	endif()
+endmacro()
+macro(DKDEBUGFUNC)
+	dk_debugFunc(${ARGV})
 endmacro()

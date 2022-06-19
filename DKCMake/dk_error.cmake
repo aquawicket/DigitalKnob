@@ -1,8 +1,11 @@
 dk_load(Color)
 
-# DKINFO(msg)
+# dk_error(msg)
 #
-macro(DKINFO msg)
+macro(dk_error msg)
 	dk_call(dk_updateLogInfo)
 	message(STATUS ${H_black}${STACK_HEADER}${CLR}${white}${msg}${CLR})
+endmacro()
+macro(DKERROR)
+	dk_error(${ARGV})
 endmacro()
