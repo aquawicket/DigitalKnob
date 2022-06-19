@@ -3,6 +3,6 @@ DKLoad(Color)
 # DKWARN(msg)
 #
 macro(DKWARN msg)
-	DKCall(dk_updateLogInfo)
+	dk_call(dk_updateLogInfo)
 	message(STATUS "${H_black}${STACK_HEADER}${CLR}${yellow}${msg}${CLR}")
 endmacro()

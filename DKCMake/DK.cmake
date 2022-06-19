@@ -30,7 +30,7 @@ endif()
 
 
 # include the DKCall function
-include(${DKCMAKE}/DKCall.cmake)
+include(${DKCMAKE}/dk_call.cmake)
 
 
 # include other dk funtions
