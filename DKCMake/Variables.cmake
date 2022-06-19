@@ -21,13 +21,14 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
-
 include_guard()
+
 
 # FIXME: work to remove this
 if(COMMAND cmake_policy)
 	cmake_policy(SET CMP0003 NEW) ##https://cmake.org/cmake/help/latest/policy/CMP0003.html
 endif(COMMAND cmake_policy)
+
 
 ###############################################################
 ## Set variables for paths
@@ -43,7 +44,7 @@ dk_set(CURRENT_DIR ${DIGITALKNOB})
 
 dk_set(CMAKE_SUPPRESS_REGENERATION true)
 
-### INSTALL DBIN ###
+### Install DBIN binary directory ###
 dk_set(INSTALL_DKLIBS 0)
 if(INSTALL_DKLIBS)
 	dk_set(CMAKE_INSTALL_PREFIX ${DIGITALKNOB}/DKBIN)
