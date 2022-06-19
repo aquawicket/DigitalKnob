@@ -1257,9 +1257,9 @@ function(dk_executeProcess commands)
 	list(REMOVE_ITEM commands COMMAND) # we can supply the cmake specific base commands
 	list(REMOVE_ITEM commands "cmd /c ")
 	
-	list(FIND commands "WORKING_DIRECTORY" index) #find WORKING_DRIECTORY
+	list(FIND commands "WORKING_DIRECTORY" index)
 	if(index EQUAL -1)
-		set(command ${commands} WORKING_DIRECTORY ${CURRENT_DIR}) #add it if missing
+		set(command ${commands} WORKING_DIRECTORY ${CURRENT_DIR}) #add WORKING_DIRECTORY if missing
 	endif()	
 	
 	DKINFO("")
