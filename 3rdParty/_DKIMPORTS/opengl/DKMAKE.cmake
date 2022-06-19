@@ -1,5 +1,5 @@
 
-WIN_DKLIB(opengl32.lib)
+WIN_dk_lib(opengl32.lib)
 
 
 if(MAC)
@@ -7,12 +7,12 @@ if(MAC)
 	if(NOT OpenGL_lib)
 		DKWARN("Could not locate OpenGL framework")
 	endif()
-	APPLE_DKLIB(${OpenGL_lib})
+	APPLE_dk_lib(${OpenGL_lib})
 endif()
 
-IOS_DKDEPEND(opengles)
+IOS_dk_depend(opengles)
 
-IOSSIM_DKDEPEND(opengles)
+IOSSIM_dk_depend(opengles)
 
 if(LINUX)
 	find_package(OpenGL REQUIRED)
@@ -22,7 +22,7 @@ if(LINUX)
 	if(NOT OPENGL_FOUND)
     	DKWARN("COULD NOT FIND OPENGL")
 	endif()
-	LINUX_DKLIB(${OPENGL_LIBRARIES})
+	LINUX_dk_lib(${OPENGL_LIBRARIES})
 endif()
 
 if(RASPBERRY)
@@ -33,7 +33,7 @@ if(RASPBERRY)
 	if(NOT OPENGL_FOUND)
     	DKWARN("COULD NOT FIND OPENGL")
 	endif()
-	RASPBERRY_DKLIB(${OPENGL_LIBRARIES})
+	RASPBERRY_dk_lib(${OPENGL_LIBRARIES})
 endif()	
 
-ANDROID_DKDEPEND(opengles)
+ANDROID_dk_depend(opengles)

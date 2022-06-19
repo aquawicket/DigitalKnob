@@ -3,8 +3,8 @@ if(NOT UNIX_HOST)
 endif()
 
 ### INSTALL ###
-DKSET(CURRENT_DIR /usr)
-DKCOMMAND(sudo apt -y install libsndfile1-dev)
+dk_set(CURRENT_DIR /usr)
+dk_command(sudo apt -y install libsndfile1-dev)
 
 
 ### LINK ###

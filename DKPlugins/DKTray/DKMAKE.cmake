@@ -1,9 +1,9 @@
 IF(HAVE_DKDuktape)
-	DKDEPEND(DKDuktape)
+	dk_depend(DKDuktape)
 ENDIF()
 IF(HAVE_DKCef)
-	DKDEPEND(DKCef)
+	dk_depend(DKCef)
 ENDIF()
 
-generateCmake(DKTray)
-DKASSETS(DKTray)
+dk_generateCmake(DKTray)
+dk_assets(DKTray)

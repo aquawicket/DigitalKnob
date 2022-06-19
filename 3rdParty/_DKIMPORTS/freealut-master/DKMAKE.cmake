@@ -2,18 +2,18 @@
 
 
 ### INSTALL ###
-DKSET(FREEALUT_VERSION master)
-DKSET(FREEALUT_NAME freealut-${FREEALUT_VERSION})
-#DKSET(FREEALUT_DL ???)
-DKSET(FREEALUT ${3RDPARTY}/${FREEALUT_NAME})
-DKINSTALL(${FREEALUT_DL} freealut_master ${FREEALUT})
+dk_set(FREEALUT_VERSION master)
+dk_set(FREEALUT_NAME freealut-${FREEALUT_VERSION})
+#dk_set(FREEALUT_DL ???)
+dk_set(FREEALUT ${3RDPARTY}/${FREEALUT_NAME})
+dk_install(${FREEALUT_DL} freealut_master ${FREEALUT})
 
 
 ### LINK ###
-DKINCLUDE(${FREEALUT}/include)
-ANDROID_DEBUG_DKLIB(${FREEALUT}/${OS}/${DEBUG_DIR}/obj/local/armeabi-v7a/libalut.a)
-ANDROID_RELEASE_DKLIB(${FREEALUT}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/libalut.a)
+dk_include(${FREEALUT}/include)
+ANDROID_dk_libDebug(${FREEALUT}/${OS}/${DEBUG_DIR}/obj/local/armeabi-v7a/libalut.a)
+ANDROID_dk_libRelease(${FREEALUT}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/libalut.a)
 
 
 ### COMPILE ###
-ANDROID_NDK(${FREEALUT_NAME})
+ANDROID_dk_ndk(${FREEALUT_NAME})

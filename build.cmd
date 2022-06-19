@@ -64,7 +64,7 @@ if NOT "%ERRORLEVEL%" == "0" goto error
 "%GIT%" checkout Development
 if NOT "%ERRORLEVEL%" == "0" (
 	echo Remote has no Development branch. Creating...
-	"%GIT%" checkout -b Development master
+	"%GIT%" checkout -b Development main
 	"%GIT%" push --set-upstream origin Development
 )
 

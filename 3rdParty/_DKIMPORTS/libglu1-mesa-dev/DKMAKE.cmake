@@ -3,5 +3,5 @@ if(NOT UNIX_HOST)
 endif()
 
 ### INSTALL ###
-DKSET(CURRENT_DIR /usr)
-DKCOMMAND(sudo apt -y install libglu1-mesa-dev)
+dk_set(CURRENT_DIR /usr)
+dk_command(sudo apt -y install libglu1-mesa-dev)

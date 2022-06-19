@@ -1,14 +1,14 @@
 ## https://emscripten.org/docs/getting_started/downloads.html
 
-DKDEPEND(emsdk)
+dk_depend(emsdk)
 
-##generateCmake(DKEmscripten)
-##DKASSETS(DKEmscripten)
+##dk_generateCmake(DKEmscripten)
+##dk_assets(DKEmscripten)
 
-DKSET(CURRENT_DIR ${DKPLUGINS}/DKEmscripten)
-DKSET(QUEUE_BUILD ON)
-##WIN32_DKQCOMMAND(${EMSCRIPTEN}/emscripten/1.37.33/emcc ${DKPLUGINS}/DKEmscripten/hello.c -o hello.html)
+dk_set(CURRENT_DIR ${DKPLUGINS}/DKEmscripten)
+dk_set(QUEUE_BUILD ON)
+##WIN32_dk_queueCommand(${EMSCRIPTEN}/emscripten/1.37.33/emcc ${DKPLUGINS}/DKEmscripten/hello.c -o hello.html)
 
 if(EXISTS ${EMSCRIPTEN}/emscripten/1.37.33/emcc)
-	WIN32_DKQCOMMAND(${EMSCRIPTEN}/emscripten/1.37.33/emcc --bind -o test.js ${DKPLUGINS}/DKEmscripten/test.cpp)
+	WIN32_dk_queueCommand(${EMSCRIPTEN}/emscripten/1.37.33/emcc --bind -o test.js ${DKPLUGINS}/DKEmscripten/test.cpp)
 endif()

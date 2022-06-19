@@ -6,16 +6,16 @@ endif()
 
 
 ### DEPENDS ###
-DKDEPEND(ncurses)
+dk_depend(ncurses)
 
-DKIMPORT(https://github.com/nowres/conio-for-linux.git)
+dk_import(https://github.com/nowres/conio-for-linux.git)
 
-#DKSET(CONIO-FOR-LINUX_VERSION master)
-#DKSET(CONIO-FOR-LINUX_NAME conio-${CONIO-FOR-LINUX_VERSION})
-#DKSET(CONIO-FOR-LINUX_DL https://github.com/nowres/conio-for-linux/archive/refs/heads/${CONIO-FOR-LINUX_VERSION}.zip)
-#DKSET(CONIO-FOR-LINUX ${3RDPARTY}/${CONIO-FOR-LINUX_NAME})
-#DKINSTALL(${CONIO-FOR-LINUX_DL} conio.h ${CONIO-FOR-LINUX})
+#dk_set(CONIO-FOR-LINUX_VERSION master)
+#dk_set(CONIO-FOR-LINUX_NAME conio-${CONIO-FOR-LINUX_VERSION})
+#dk_set(CONIO-FOR-LINUX_DL https://github.com/nowres/conio-for-linux/archive/refs/heads/${CONIO-FOR-LINUX_VERSION}.zip)
+#dk_set(CONIO-FOR-LINUX ${3RDPARTY}/${CONIO-FOR-LINUX_NAME})
+#dk_install(${CONIO-FOR-LINUX_DL} conio.h ${CONIO-FOR-LINUX})
 
 
 ### LINK ###
-DKINCLUDE(${CONIO-FOR-LINUX})
+dk_include(${CONIO-FOR-LINUX})

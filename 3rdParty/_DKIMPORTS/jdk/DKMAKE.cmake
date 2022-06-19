@@ -12,27 +12,27 @@
 # https://github.com/AdoptOpenJDK/openjdk8-upstream-binaries/releases/download/jdk8u312-b07/OpenJDK8U-jdk_x64_windows_8u312b07.zip
 # https://github.com/AdoptOpenJDK/openjdk11-upstream-binaries/releases/download/jdk-11.0.13%2B8/OpenJDK11U-jdk_x64_windows_11.0.13_8.zip
 
-WIN_HOST_DKSET(JDK_VERSION 11)
-WIN_HOST_DKSET(JDK_DL https://download.java.net/java/ga/jdk11/openjdk-11_windows-x64_bin.zip)
+WIN_HOST_dk_set(JDK_VERSION 11)
+WIN_HOST_dk_set(JDK_DL https://download.java.net/java/ga/jdk11/openjdk-11_windows-x64_bin.zip)
 
-MAC_HOST_DKSET(JDK_VERSION 9.0.4)
-MAC_HOST_DKSET(JDK_DL https://download.java.net/java/GA/jdk9/9.0.4/binaries/openjdk-9.0.4_osx-x64_bin.tar.gz)
+MAC_HOST_dk_set(JDK_VERSION 9.0.4)
+MAC_HOST_dk_set(JDK_DL https://download.java.net/java/GA/jdk9/9.0.4/binaries/openjdk-9.0.4_osx-x64_bin.tar.gz)
 
-LINUX_HOST_DKSET(JDK_VERSION 9.0.4)
-LINUX_HOST_DKSET(JDK_DL https://download.java.net/java/GA/jdk9/9.0.4/binaries/openjdk-9.0.4_linux-x64_bin.tar.gz)
+LINUX_HOST_dk_set(JDK_VERSION 9.0.4)
+LINUX_HOST_dk_set(JDK_DL https://download.java.net/java/GA/jdk9/9.0.4/binaries/openjdk-9.0.4_linux-x64_bin.tar.gz)
 
 
 
 ### INSTALL ###
-DKSET(JDK_NAME openjdk-${JDK_VERSION})
-DKSET(JDK ${3RDPARTY}/${JDK_NAME})
-DKINSTALL(${JDK_DL} jdk ${JDK} PATCH)
+dk_set(JDK_NAME openjdk-${JDK_VERSION})
+dk_set(JDK ${3RDPARTY}/${JDK_NAME})
+dk_install(${JDK_DL} jdk ${JDK} PATCH)
 
 ### LINK ###
-DKINCLUDE(${JDK}/)	
-DKSETENV("JAVA_HOME" ${JDK})
-DKSETENV("JAVA_VERSION" ${JDK_VERSION})
-DKSETENV("VS_JavaHome" ${JDK})
+dk_include(${JDK}/)	
+dk_setEnv("JAVA_HOME" ${JDK})
+dk_setEnv("JAVA_VERSION" ${JDK_VERSION})
+dk_setEnv("VS_JavaHome" ${JDK})
 
 #Add registry entries
 dk_addRegistryKey("HKLM/SOFTWARE/JavaSoft/Java Runtime Environment" "CurrentVersion" "${JDK_VERSION}")

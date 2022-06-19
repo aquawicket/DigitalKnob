@@ -9,7 +9,7 @@ endif()
 # https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip
 
 ### DEPENDS ###
-#DKDEPEND(JDK)
+#dk_depend(JDK)
 
 
 #WIN_HOST_DKIMPORT	(ANDROIDSDKTOOLS_DL https://dl.google.com/android/repository/sdk-tools-windows-4333796.zip)
@@ -17,14 +17,14 @@ endif()
 #LINUX_HOST_DKIMPORT	(ANDROIDSDKTOOLS_DL https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip)
 
 
-DKSET(ANDROIDSDKTOOLS_VERSION 26.2.0) #revision
-DKSET(ANDROIDSDKTOOLS_BUILD 4333796)
-WIN_HOST_DKSET(ANDROIDSDKTOOLS_DL https://dl.google.com/android/repository/sdk-tools-windows-${ANDROIDSDKTOOLS_BUILD}.zip)
-MAC_HOST_DKSET(ANDROIDSDKTOOLS_DL https://dl.google.com/android/repository/sdk-tools-darwin-${ANDROIDSDKTOOLS_BUILD}.zip)
-LINUX_HOST_DKSET(ANDROIDSDKTOOLS_DL https://dl.google.com/android/repository/sdk-tools-linux-${ANDROIDSDKTOOLS_BUILD}.zip)
-DKSET(ANDROIDSDKTOOLS ${ANDROIDSDK}/tools)
+dk_set(ANDROIDSDKTOOLS_VERSION 26.2.0) #revision
+dk_set(ANDROIDSDKTOOLS_BUILD 4333796)
+WIN_HOST_dk_set(ANDROIDSDKTOOLS_DL https://dl.google.com/android/repository/sdk-tools-windows-${ANDROIDSDKTOOLS_BUILD}.zip)
+MAC_HOST_dk_set(ANDROIDSDKTOOLS_DL https://dl.google.com/android/repository/sdk-tools-darwin-${ANDROIDSDKTOOLS_BUILD}.zip)
+LINUX_HOST_dk_set(ANDROIDSDKTOOLS_DL https://dl.google.com/android/repository/sdk-tools-linux-${ANDROIDSDKTOOLS_BUILD}.zip)
+dk_set(ANDROIDSDKTOOLS ${ANDROIDSDK}/tools)
 dk_makeDirectory(${ANDROIDSDKTOOLS})
-DKINSTALL(${ANDROIDSDKTOOLS_DL} android-sdk-tools ${ANDROIDSDKTOOLS} PATCH)
+dk_install(${ANDROIDSDKTOOLS_DL} android-sdk-tools ${ANDROIDSDKTOOLS} PATCH)
 
 
 # TODO
@@ -37,6 +37,6 @@ DKINSTALL(${ANDROIDSDKTOOLS_DL} android-sdk-tools ${ANDROIDSDKTOOLS} PATCH)
 
 #license signing
 #if(EXISTS ${ANDROIDSDKTOOLS}/installed)
-#DKDEPEND(java)
-#DKCOMMAND(${ANDROIDSDKTOOLS}/bin/sdkmanager.bat --licenses)
+#dk_depend(java)
+#dk_command(${ANDROIDSDKTOOLS}/bin/sdkmanager.bat --licenses)
 #endif()

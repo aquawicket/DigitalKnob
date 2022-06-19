@@ -1,1 +1,1 @@
-DKASSETS(DKPaint)
+dk_assets(DKPaint)

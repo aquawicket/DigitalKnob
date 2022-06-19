@@ -1,1 +1,1 @@
-DKASSETS(DKNotepad)
+dk_assets(DKNotepad)

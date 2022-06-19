@@ -8,13 +8,13 @@ endif()
 
 
 ### DEPENDS ###
-DKDEPEND(vc_redist) #for VCRUNTIME140.dll
+dk_depend(vc_redist) #for VCRUNTIME140.dll
 
-DKIMPORT(https://windows.php.net/downloads/releases/php-8.0.20-Win32-vs16-x86.zip)
+dk_import(https://windows.php.net/downloads/releases/php-8.0.20-Win32-vs16-x86.zip)
 
 ### INSTALL ###
-#DKSET(PHP_BINARY_VERSION 8.0.20-Win32-vs16-x86)
-#DKSET(PHP_BINARY_DL https://windows.php.net/downloads/releases/php-${PHP_BINARY_VERSION}.zip)
-#DKSET(PHP_BINARY_NAME php_binary-${PHP_BINARY_VERSION})
-#DKSET(PHP_BINARY ${3RDPARTY}/${PHP_BINARY_NAME})
-#DKINSTALL(${PHP_BINARY_DL} php_binary ${PHP_BINARY})
+#dk_set(PHP_BINARY_VERSION 8.0.20-Win32-vs16-x86)
+#dk_set(PHP_BINARY_DL https://windows.php.net/downloads/releases/php-${PHP_BINARY_VERSION}.zip)
+#dk_set(PHP_BINARY_NAME php_binary-${PHP_BINARY_VERSION})
+#dk_set(PHP_BINARY ${3RDPARTY}/${PHP_BINARY_NAME})
+#dk_install(${PHP_BINARY_DL} php_binary ${PHP_BINARY})

@@ -7,11 +7,11 @@ endif()
 # Apple Frameworks https://developer.apple.com/library/archive/documentation/MacOSX/Conceptual/OSX_Technology_Overview/SystemFrameworks/SystemFrameworks.html
 
 ### VERSION ###
-#DKSET(XCODE_VERSION ???)
-#DKSET(XCODE_NAME ???)
-#DKSET(XCODE_DL ???)
-#DKSET(XCODE ???)
-#DKSET(XCODE_EXE ???)
+#dk_set(XCODE_VERSION ???)
+#dk_set(XCODE_NAME ???)
+#dk_set(XCODE_DL ???)
+#dk_set(XCODE ???)
+#dk_set(XCODE_EXE ???)
 
 ### INSTALL ###
-#DKINSTALL(${XCODE_DL} Xcode ${XCODE})
+#dk_install(${XCODE_DL} Xcode ${XCODE})

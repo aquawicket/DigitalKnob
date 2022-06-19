@@ -5,13 +5,13 @@
 
 DKGITCLONE(https://github.com/emscripten-core/emsdk.git)
 
-#DKSET(EMSCRIPTEN_VERSION 2.0.26)
-#DKSET(EMSCRIPTEN_NAME emsdk-${EMSCRIPTEN_VERSION})
-#DKSET(EMSCRIPTEN_DL https://github.com/emscripten-core/emsdk/archive/refs/tags/${EMSCRIPTEN_VERSION}.zip)
-#DKSET(EMSCRIPTEN ${3RDPARTY}/${EMSCRIPTEN_NAME})
-#DKINSTALL(${EMSCRIPTEN_DL} emsdk ${EMSCRIPTEN})
+#dk_set(EMSCRIPTEN_VERSION 2.0.26)
+#dk_set(EMSCRIPTEN_NAME emsdk-${EMSCRIPTEN_VERSION})
+#dk_set(EMSCRIPTEN_DL https://github.com/emscripten-core/emsdk/archive/refs/tags/${EMSCRIPTEN_VERSION}.zip)
+#dk_set(EMSCRIPTEN ${3RDPARTY}/${EMSCRIPTEN_NAME})
+#dk_install(${EMSCRIPTEN_DL} emsdk ${EMSCRIPTEN})
 
-DKCOMMAND("${EMSCRIPTEN}/emsdk update")
-DKCOMMAND(${EMSCRIPTEN}/emsdk install latest)
-DKCOMMAND(${EMSCRIPTEN}/emsdk install activate latest)
-DKCOMMAND(${EMSCRIPTEN}/emsdk_env.bat)
+dk_command("${EMSCRIPTEN}/emsdk update")
+dk_command(${EMSCRIPTEN}/emsdk install latest)
+dk_command(${EMSCRIPTEN}/emsdk install activate latest)
+dk_command(${EMSCRIPTEN}/emsdk_env.bat)

@@ -7,38 +7,38 @@ endif()
 
 #DKGITCLONE(https://github.com/nigels-com/glew.git)
 
-DKIMPORT(https://github.com/nigels-com/glew/releases/download/glew-2.2.0/glew-2.2.0.zip)
+dk_import(https://github.com/nigels-com/glew/releases/download/glew-2.2.0/glew-2.2.0.zip)
 
-#DKSET(GLEW_VERSION 2.2.0)
-#DKSET(GLEW_NAME glew-${GLEW_VERSION})
-#DKSET(GLEW_DL https://github.com/nigels-com/glew/releases/download/glew-2.2.0/glew-2.2.0.zip)
-#DKSET(GLEW ${3RDPARTY}/${GLEW_NAME})
-#DKINSTALL(${GLEW_DL} glew ${GLEW})
+#dk_set(GLEW_VERSION 2.2.0)
+#dk_set(GLEW_NAME glew-${GLEW_VERSION})
+#dk_set(GLEW_DL https://github.com/nigels-com/glew/releases/download/glew-2.2.0/glew-2.2.0.zip)
+#dk_set(GLEW ${3RDPARTY}/${GLEW_NAME})
+#dk_install(${GLEW_DL} glew ${GLEW})
 
 
 
-DKCOPY(${GLEW}/build/cmake ${GLEW}/${OS}/CMakeFiles/Export/lib/cmake/glew TRUE)
+dk_copy(${GLEW}/build/cmake ${GLEW}/${OS}/CMakeFiles/Export/lib/cmake/glew TRUE)
 
 
 ### LINK ###
-DKDEFINE(GLEW_STATIC)
-DKINCLUDE(${GLEW}/include)
-WIN_DEBUG_DKLIB(${GLEW}/${OS}/lib/${DEBUG_DIR}/libglew32d.lib)
-WIN_RELEASE_DKLIB(${GLEW}/${OS}/lib/${RELEASE_DIR}/libglew32.lib)
+dk_define(GLEW_STATIC)
+dk_include(${GLEW}/include)
+WIN_dk_libDebug(${GLEW}/${OS}/lib/${DEBUG_DIR}/libglew32d.lib)
+WIN_dk_libRelease(${GLEW}/${OS}/lib/${RELEASE_DIR}/libglew32.lib)
 #WIN_DEBUG_SHARED_LIB(${GLEW}/${OS}/bin/${DEBUG_DIR}/glew32d.lib)
 #WIN_RELEASE_SHARED_LIB(${GLEW}/${OS}/bin/${RELEASE_DIR}/glew32.lib)
-MAC_DEBUG_DKLIB(${GLEW}/${OS}/lib/${DEBUG_DIR}/libGLEWd.a)
-MAC_RELEASE_DKLIB(${GLEW}/${OS}/lib/${RELEASE_DIR}/libGLEW.a)
-IOSSIM_DEBUG_DKLIB(${GLEW}/${OS}/lib/${DEBUG_DIR}/libGLEWd.a)
-IOSSIM_RELEASE_DKLIB(${GLEW}/${OS}/lib/${RELEASE_DIR}/libGLEW.a)
-LINUX_DEBUG_DKLIB(${GLEW}/${OS}/${DEBUG_DIR}/lib/libGLEWd.a)
-LINUX_RELEASE_DKLIB(${GLEW}/${OS}/${RELEASE_DIR}/lib/libGLEW.a)
-RASPBERRY_DEBUG_DKLIB(${GLEW}/${OS}/${DEBUG_DIR}/lib/libGLEWd.a)
-RASPBERRY_RELEASE_DKLIB(${GLEW}/${OS}//${RELEASE_DIR}/lib/libGLEW.a)
+MAC_dk_libDebug(${GLEW}/${OS}/lib/${DEBUG_DIR}/libGLEWd.a)
+MAC_dk_libRelease(${GLEW}/${OS}/lib/${RELEASE_DIR}/libGLEW.a)
+IOSSIM_dk_libDebug(${GLEW}/${OS}/lib/${DEBUG_DIR}/libGLEWd.a)
+IOSSIM_dk_libRelease(${GLEW}/${OS}/lib/${RELEASE_DIR}/libGLEW.a)
+LINUX_dk_libDebug(${GLEW}/${OS}/${DEBUG_DIR}/lib/libGLEWd.a)
+LINUX_dk_libRelease(${GLEW}/${OS}/${RELEASE_DIR}/lib/libGLEW.a)
+RASPBERRY_dk_libDebug(${GLEW}/${OS}/${DEBUG_DIR}/lib/libGLEWd.a)
+RASPBERRY_dk_libRelease(${GLEW}/${OS}//${RELEASE_DIR}/lib/libGLEW.a)
 
 
 ### INJECT ###
-#DKSET(GLEW_WIN32 
+#dk_set(GLEW_WIN32 
 #	-DGLEW_USE_STATIC_LIB=ON
 #	-DGLEW_DIR=${GLEW}/${OS}/CMakeFiles/Export/lib/cmake/glew
 #	-DGLEW_LIBRARY=${GLEW}/${OS}/lib/${DEBUG_DIR}/libglew32.lib
@@ -56,27 +56,27 @@ RASPBERRY_RELEASE_DKLIB(${GLEW}/${OS}//${RELEASE_DIR}/lib/libGLEW.a)
 # -DGLEW_STATIC=ON -DGLEW_USE_STATIC_LIBS=ON
 
 ### COMPILE ###
-DKSETPATH(${GLEW}/${BUILD_DIR})
+dk_setPath(${GLEW}/${BUILD_DIR})
 
-WIN_DKQCOMMAND(${DKCMAKE_BUILD} ${GLEW}/build/cmake)
-WIN_VS(${GLEW_NAME} glew.sln glew_s)
-#DKCOPY(${GLEW}/${OS}/lib/${DEBUG_DIR} ${GLEW}/${OS}/CMakeFiles/Export/lib/ TRUE)
-#DKCOPY(${GLEW}/${OS}/lib/${RELEASE_DIR} ${GLEW}/${OS}/CMakeFiles/Export/lib/ TRUE)
-#DKCOPY(${GLEW}/${OS}/bin/${DEBUG_DIR} ${GLEW}/${OS}/CMakeFiles/Export/bin/ TRUE)
-#DKCOPY(${GLEW}/${OS}/bin/${RELEASE_DIR} ${GLEW}/${OS}/CMakeFiles/Export/bin/ TRUE)
-
-
-MAC_DKQCOMMAND(${DKCMAKE_BUILD} ${GLEW}/build/cmake)
-MAC_XCODE(${GLEW_NAME} glew_s)
+WIN_dk_queueCommand(${DKCMAKE_BUILD} ${GLEW}/build/cmake)
+WIN_dk_visualStudio(${GLEW_NAME} glew.sln glew_s)
+#dk_copy(${GLEW}/${OS}/lib/${DEBUG_DIR} ${GLEW}/${OS}/CMakeFiles/Export/lib/ TRUE)
+#dk_copy(${GLEW}/${OS}/lib/${RELEASE_DIR} ${GLEW}/${OS}/CMakeFiles/Export/lib/ TRUE)
+#dk_copy(${GLEW}/${OS}/bin/${DEBUG_DIR} ${GLEW}/${OS}/CMakeFiles/Export/bin/ TRUE)
+#dk_copy(${GLEW}/${OS}/bin/${RELEASE_DIR} ${GLEW}/${OS}/CMakeFiles/Export/bin/ TRUE)
 
 
-IOSSIM_DKQCOMMAND(${DKCMAKE_BUILD} ${GLEW}/build/cmake)
-IOSSIM_XCODE(${GLEW_NAME} glew_s)
+MAC_dk_queueCommand(${DKCMAKE_BUILD} ${GLEW}/build/cmake)
+MAC_dk_xcode(${GLEW_NAME} glew_s)
 
 
-LINUX_DKQCOMMAND(${DKCMAKE_BUILD} ${GLEW}/build/cmake)
-LINUX_DKQCOMMAND(make glew_s)
+IOSSIM_dk_queueCommand(${DKCMAKE_BUILD} ${GLEW}/build/cmake)
+IOSSIM_dk_xcode(${GLEW_NAME} glew_s)
 
 
-RASPBERRY_DKQCOMMAND(${DKCMAKE_BUILD} ${GLEW}/build/cmake)
-RASPBERRY_DKQCOMMAND(make glew_s)
+LINUX_dk_queueCommand(${DKCMAKE_BUILD} ${GLEW}/build/cmake)
+LINUX_dk_queueCommand(make glew_s)
+
+
+RASPBERRY_dk_queueCommand(${DKCMAKE_BUILD} ${GLEW}/build/cmake)
+RASPBERRY_dk_queueCommand(make glew_s)

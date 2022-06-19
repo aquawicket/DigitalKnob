@@ -1,1 +1,1 @@
-DKASSETS(DKWebTest)
+dk_assets(DKWebTest)

@@ -1,6 +1,6 @@
-DKDEPEND(DKAssets)
-DKDEPEND(DKSDLWindow)
-DKDEPEND(sdl_ttf)
+dk_depend(DKAssets)
+dk_depend(DKSDLWindow)
+dk_depend(sdl_ttf)
 
-generateCmake(DKSDLText)
-DKASSETS(DKSDLText)
+dk_generateCmake(DKSDLText)
+dk_assets(DKSDLText)

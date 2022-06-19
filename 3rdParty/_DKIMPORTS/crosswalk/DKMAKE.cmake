@@ -1,8 +1,8 @@
 ### DEPENDS ###
-#DKDEPEND(jdk)
-DKDEPEND(ant)
-DKDEPEND(nodejs)
+#dk_depend(jdk)
+dk_depend(ant)
+dk_depend(nodejs)
 
 
 ### INSTALL ###
-WIN_DKQCOMMAND("npm install -g crosswalk-app-tools")
+WIN_dk_queueCommand("npm install -g crosswalk-app-tools")

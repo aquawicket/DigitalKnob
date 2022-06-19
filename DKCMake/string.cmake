@@ -21,97 +21,53 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
-
 include_guard()
-# string.cmake
-# https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String
 
+
+# https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String
 # https://www.w3schools.com/jsref/jsref_obj_string.asp
+
 
 #####################################################
 # charAt()
 #
-# [Syntax]: charAt()
-#
-# [Parameters]
-#  			:
-# 
-#     result:
-#
-#charAt()
 
 
 #####################################################
-# func()
+# charCodeAt()
 #
-# [Syntax]: 
-#
-# [Parameters]
-#  			:
-# 
-#     result:
-#
-#charCodeAt()
 
 
 #####################################################
-# func()
+# concat()
 #
-# [Syntax]: 
-#
-# [Parameters]
-#  			:
-# 
-#     result:
-#
-#concat()
 
 
 #####################################################
-# func()
+# constructor
 #
-# [Syntax]: 
-#
-# [Parameters]
-#  			:
-# 
-#     result:
-#
-#constructor
+
 
 #####################################################
-# func()
-#
-# [Syntax]: 
-#
-# [Parameters]
-#  			:
-# 
-#     result:
-#
-
-#endsWith()
+# endsWith()
 
 #####################################################
-# fromCharCode()
+# fromCharCode(n1, n2, ..., nX)
 #
-# [Syntax]: String.fromCharCode(n1, n2, ..., nX)
+#  n1, n2, nX:(required)	One or more Unicode values to be converted
+#      result:(string)		A string representing the unicode character(s)
 #
-# [Parameters]
-#  n1, n2, nX: (required) One or more Unicode values to be converted.
-# 
-#      result: (string) A string representing the unicode character(s).
 function(fromCharCode)
 	DKDEBUGFUNC(${ARGV})
 endfunction()
 
 
 #####################################################
-# includes()
-#    [Syntax]: includes(string searchvalue start result)
-# searchvalue: (required) The string to search for.
-#       start: (optional) The position to start from. Default value is 0.
-#      result: (boolean) true if the string contains the value, otherwise false.
+# includes(string searchvalue start result)
+#
+# searchvalue:(required)	The string to search for.
+#       start:(optional)	The position to start from. Default value is 0.
+#      result:(boolean)		true if the string contains the value, otherwise false.
 #
 function(includes str searchvalue) #start #result
 	DKDEBUGFUNC(${ARGV})
@@ -133,350 +89,108 @@ endfunction()
 
 
 #####################################################
-# func()
-#
-# [Syntax]: 
-#
-# [Parameters]
-#  			:
-# 
-#     result:
-#
-#indexOf()
-
-
-#####################################################
-# func()
-#
-# [Syntax]: 
-#
-# [Parameters]
-#  			:
-# 
-#     result:
-#
-#lastIndexOf()
-
-
-
-#####################################################
-# func()
-#
-# [Syntax]: 
-#
-# [Parameters]
-#  			:
-# 
-#     result:
-#
-
-
-
-#####################################################
-# func()
-#
-# [Syntax]: 
-#
-# [Parameters]
-#  			:
-# 
-#     result:
-#
-
-
-
-#####################################################
-# func()
-#
-# [Syntax]: 
-#
-# [Parameters]
-#  			:
-# 
-#     result:
-#
-
-
-
-
-#####################################################
-# func()
-#
-# [Syntax]: 
-#
-# [Parameters]
-#  			:
-# 
-#     result:
-#
-#length
-
-
-
-#####################################################
-# func()
-#
-# [Syntax]: 
-#
-# [Parameters]
-#  			:
-# 
-#     result:
-#
-#localeCompare()
-
-
-
-#####################################################
-# func()
-#
-# [Syntax]: 
-#
-# [Parameters]
-#  			:
-# 
-#     result:
-#
-#match()
-
-
-
-#####################################################
-# func()
-#
-# [Syntax]: 
-#
-# [Parameters]
-#  			:
-# 
-#     result:
-#
-#prototype
-
-
-#####################################################
-# func()
-#
-# [Syntax]: 
-#
-# [Parameters]
-#  			:
-# 
-#     result:
+# indexOf()
 #
 
 
 #####################################################
-# func()
+# lastIndexOf()
 #
-# [Syntax]: 
-#
-# [Parameters]
-#  			:
-# 
-#     result:
-#
-#repeat()
 
 
 #####################################################
-# func()
+# length()
 #
-# [Syntax]: 
-#
-# [Parameters]
-#  			:
-# 
-#     result:
-#
-#replace()
-
 
 
 #####################################################
-# func()
+# localeCompare()
 #
-# [Syntax]: 
-#
-# [Parameters]
-#  			:
-# 
-#     result:
-#
-#search()
-
 
 
 #####################################################
-# func()
+# match()
 #
-# [Syntax]: 
-#
-# [Parameters]
-#  			:
-# 
-#     result:
-#
-#slice()
-
-
 
 
 #####################################################
-# func()
+# prototype()
 #
-# [Syntax]: 
-#
-# [Parameters]
-#  			:
-# 
-#     result:
-##split()
-
-
 
 
 #####################################################
-# func()
+# repeat()
 #
-# [Syntax]: 
-#
-# [Parameters]
-#  			:
-# 
-#     result:
-##startsWith()
-
-
 
 
 #####################################################
-# func()
+# replace()
 #
-# [Syntax]: 
-#
-# [Parameters]
-#  			:
-# 
-#     result:
-##substr()
-
-
 
 
 #####################################################
-# func()
+# search()
 #
-# [Syntax]: 
-#
-# [Parameters]
-#  			:
-# 
-#     result:
-##substring()
-
-
 
 
 #####################################################
-# func()
+# slice()
 #
-# [Syntax]: 
-#
-# [Parameters]
-#  			:
-# 
-#     result:
-#
-#toLocaleLowerCase()
-
 
 
 #####################################################
-# func()
+# split()
 #
-# [Syntax]: 
-#
-# [Parameters]
-#  			:
-# 
-#     result:
-#
-#toLocaleUpperCase()
-
-
 
 
 #####################################################
-# func()
+# startsWith()
 #
-# [Syntax]: 
-#
-# [Parameters]
-#  			:
-# 
-#     result:
-#
-#toLowerCase()
-
 
 
 #####################################################
-# func()
+# substr()
 #
-# [Syntax]: 
-#
-# [Parameters]
-#  			:
-# 
-#     result:
-#
-#toString()
-
 
 
 #####################################################
-# func()
+# substring()
 #
-# [Syntax]: 
-#
-# [Parameters]
-#  			:
-# 
-#     result:
-#
-#toUpperCase()
-
-
 
 
 #####################################################
-# func()
+# toLocaleLowerCase()
 #
-# [Syntax]: 
-#
-# [Parameters]
-#  			:
-# 
-#     result:
-#
-#trim()
-
 
 
 #####################################################
-# func()
+# toLocaleUpperCase()
 #
-# [Syntax]: 
-#
-# [Parameters]
-#  			:
-# 
-#     result:
-#
-#valueOf()
 
 
+#####################################################
+# toLowerCase()
+#
+
+
+#####################################################
+# toString()
+#
+
+
+#####################################################
+# toUpperCase()
+#
+
+
+#####################################################
+# trim()
+#
+
+
+#####################################################
+# valueOf()
+#
 
 
 
@@ -489,22 +203,18 @@ set(string_Ext OFF)
 if(string_Ext)
 	execute_process(COMMAND ${CMAKE_COMMAND} -E remove ${DIGITALKNOB}/DK/DKCMake/)
 	file(APPEND ${DIGITALKNOB}/DK/DKCMake/string_Ext.cmake "### Don't make changes in this file. They will not save. ###\n")
-	file(APPEND ${DIGITALKNOB}/DK/DKCMake/string_Ext.cmake "### This file was automatically generated from Functions.cmake ###\n")
+	file(APPEND ${DIGITALKNOB}/DK/DKCMake/string_Ext.cmake "### This file was automatically generated from Functions.cmake ###\n\n")
 
 	function(CreateStringFunc str)
 		DKDEBUGFUNC(${ARGV})
-		if(0)
-			cmake_language(EVAL CODE ${str}) # only available on cmake 3.18+
-		else()
-			file(APPEND ${DIGITALKNOB}/DK/DKCMake/string_Ext.cmake "${str}")
-		endif()
+		file(APPEND ${DIGITALKNOB}/DK/DKCMake/string_Ext.cmake "${str}")
+		include(${DIGITALKNOB}/DK/DKCMake/string_Ext.cmake)
 	endfunction()
 
 	set(stringified "test" CACHE INTERNAL "")
 	function(stringify str)
 		DKDEBUGFUNC(${ARGV})
 		CreateStringFunc("macro(${str}_includes searchstr)\n	includes(${str} \${searchstr} \${ARGN})\nendmacro()\n")
-		include(${DIGITALKNOB}/DK/DKCMake/string_Ext.cmake)
 	endfunction()
 
 	set(string_set TRUE)
@@ -520,17 +230,3 @@ if(string_Ext)
 		endif()
 	endmacro(set)
 endif()
-
-
-
-
-#####################################################
-# func()
-#
-# [Syntax]: 
-#
-# [Parameters]
-#  			:
-# 
-#     result:
-#

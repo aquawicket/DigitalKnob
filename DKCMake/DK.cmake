@@ -30,15 +30,15 @@ endif()
 
 
 # include the DKCall function
-include(${DKCMAKE}/DKCall.cmake)
+include(${DKCMAKE}/dk_call.cmake)
 
 
 # include other dk funtions
-DKLoad(DKDEBUGFUNC)
-DKLoad(DKASSERT)
-DKLoad(DKERROR)
-DKLoad(DKWARN)
-DKLoad(DKINFO)
-DKLoad(DKDEBUG)
-DKLoad(DKVERBOSE)
-DKLoad(DKTRACE)
+dk_load(dk_debugFunc)
+dk_load(dk_assert)
+dk_load(dk_error)
+dk_load(dk_warn)
+dk_load(dk_info)
+dk_load(dk_debug)
+dk_load(dk_verbose)
+dk_load(dk_trace)

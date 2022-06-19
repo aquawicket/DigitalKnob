@@ -2,66 +2,66 @@
 # https://github.com/weidai11/cryptopp
 
 if(IOSSIM)
-	#DKDEPEND(libmd)
-	#DKDEPEND(macports)
+	#dk_depend(libmd)
+	#dk_depend(macports)
 endif()
 
 if(WIN)
-	#DKIMPORT(https://github.com/weidai11/cryptopp.git)
-	DKIMPORT(https://github.com/weidai11/cryptopp/archive/27b7b8e4e6b3e54cca13b2faae87eb95faa0d819.zip PATCH)
+	#dk_import(https://github.com/weidai11/cryptopp.git)
+	dk_import(https://github.com/weidai11/cryptopp/archive/27b7b8e4e6b3e54cca13b2faae87eb95faa0d819.zip PATCH)
 else()
-	DKSET(CRYPTOPP_VERSION 8_5_0)
-	DKSET(CRYPTOPP_DL https://github.com/weidai11/cryptopp/archive/refs/tags/CRYPTOPP_8_5_0.zip)
-	DKSET(CRYPTOPP_NAME CRYPTOPP_${CRYPTOPP_VERSION})
-	DKSET(CRYPTOPP ${3RDPARTY}/${CRYPTOPP_NAME})
-	DKINSTALL(${CRYPTOPP_DL} cryptopp ${CRYPTOPP} PATCH)
+	dk_set(CRYPTOPP_VERSION 8_5_0)
+	dk_set(CRYPTOPP_DL https://github.com/weidai11/cryptopp/archive/refs/tags/CRYPTOPP_8_5_0.zip)
+	dk_set(CRYPTOPP_NAME CRYPTOPP_${CRYPTOPP_VERSION})
+	dk_set(CRYPTOPP ${3RDPARTY}/${CRYPTOPP_NAME})
+	dk_install(${CRYPTOPP_DL} cryptopp ${CRYPTOPP} PATCH)
 endif()
 
 ### LINK ###
-WIN_DEBUG_DKLIB(${CRYPTOPP}/${OS}/${DEBUG_DIR}/cryptopp-static.lib)
-WIN_RELEASE_DKLIB(${CRYPTOPP}/${OS}/${RELEASE_DIR}/cryptopp-static.lib)
-APPLE_DEBUG_DKLIB(${CRYPTOPP}/${OS}/cryptopp.build/Debug/cryptopp-object.build/libcryptopp-object.a)
-APPLE_RELEASE_DKLIB(${CRYPTOPP}/${OS}/cryptopp.build/Release/cryptopp-object.build/libcryptopp-object.a)
-LINUX_DEBUG_DKLIB(${CRYPTOPP}/${OS}/${DEBUG_DIR}/libcryptopp.a)
-LINUX_RELEASE_DKLIB(${CRYPTOPP}/${OS}/${RELEASE_DIR}/libcryptopp.a)
-RASPBERRY_DEBUG_DKLIB(${CRYPTOPP}/${OS}/${DEBUG_DIR}/libcryptopp.a)
-RASPBERRY_RELEASE_DKLIB(${CRYPTOPP}/${OS}/${RELEASE_DIR}/libcryptopp.a)
-ANDROID_DEBUG_DKLIB(${CRYPTOPP}/${OS}/${DEBUG_DIR}/libcryptopp.a)
-ANDROID_RELEASE_DKLIB(${CRYPTOPP}/${OS}/${RELEASE_DIR}/libcryptopp.a)
+WIN_dk_libDebug(${CRYPTOPP}/${OS}/${DEBUG_DIR}/cryptopp-static.lib)
+WIN_dk_libRelease(${CRYPTOPP}/${OS}/${RELEASE_DIR}/cryptopp-static.lib)
+APPLE_dk_libDebug(${CRYPTOPP}/${OS}/cryptopp.build/Debug/cryptopp-object.build/libcryptopp-object.a)
+APPLE_dk_libRelease(${CRYPTOPP}/${OS}/cryptopp.build/Release/cryptopp-object.build/libcryptopp-object.a)
+LINUX_dk_libDebug(${CRYPTOPP}/${OS}/${DEBUG_DIR}/libcryptopp.a)
+LINUX_dk_libRelease(${CRYPTOPP}/${OS}/${RELEASE_DIR}/libcryptopp.a)
+RASPBERRY_dk_libDebug(${CRYPTOPP}/${OS}/${DEBUG_DIR}/libcryptopp.a)
+RASPBERRY_dk_libRelease(${CRYPTOPP}/${OS}/${RELEASE_DIR}/libcryptopp.a)
+ANDROID_dk_libDebug(${CRYPTOPP}/${OS}/${DEBUG_DIR}/libcryptopp.a)
+ANDROID_dk_libRelease(${CRYPTOPP}/${OS}/${RELEASE_DIR}/libcryptopp.a)
 
 
 ### COMPILE ###
-DKSETPATH(${CRYPTOPP}/${BUILD_DIR})
+dk_setPath(${CRYPTOPP}/${BUILD_DIR})
 
-WIN_DKQCOMMAND(${DKCMAKE_BUILD} -DBUILD_STATIC=ON -DBUILD_SHARED=OFF -DBUILD_TESTING=OFF ${CRYPTOPP})
-WIN_VS(${CRYPTOPP_NAME} cryptopp.sln cryptopp-static)
+WIN_dk_queueCommand(${DKCMAKE_BUILD} -DBUILD_STATIC=ON -DBUILD_SHARED=OFF -DBUILD_TESTING=OFF ${CRYPTOPP})
+WIN_dk_visualStudio(${CRYPTOPP_NAME} cryptopp.sln cryptopp-static)
 
 
 if(MAC)
 	string(REPLACE "-DMAC " " " DKCMAKE_BUILD_CRYPTOPP "${DKCMAKE_BUILD}") #fix of class named MAC in cryptopp
 endif()
-MAC_DKQCOMMAND(${DKCMAKE_BUILD_CRYPTOPP} -DBUILD_STATIC=ON -DBUILD_SHARED=OFF -DBUILD_TESTING=OFF -DCRYPTOPP_DISABLE_MIXED_ASM=ON ${CRYPTOPP})
-MAC_XCODE(${CRYPTOPP_NAME} cryptopp-static)
+MAC_dk_queueCommand(${DKCMAKE_BUILD_CRYPTOPP} -DBUILD_STATIC=ON -DBUILD_SHARED=OFF -DBUILD_TESTING=OFF -DCRYPTOPP_DISABLE_MIXED_ASM=ON ${CRYPTOPP})
+MAC_dk_xcode(${CRYPTOPP_NAME} cryptopp-static)
 
 
-IOS_DKQCOMMAND(${DKCMAKE_BUILD} -DBUILD_STATIC=ON -DBUILD_SHARED=OFF -DBUILD_TESTING=OFF ${CRYPTOPP})
-IOS_XCODE(${CRYPTOPP_NAME} cryptopp-static)
+IOS_dk_queueCommand(${DKCMAKE_BUILD} -DBUILD_STATIC=ON -DBUILD_SHARED=OFF -DBUILD_TESTING=OFF ${CRYPTOPP})
+IOS_dk_xcode(${CRYPTOPP_NAME} cryptopp-static)
 
 
-IOSSIM_DKQCOMMAND(${DKCMAKE_BUILD} -DBUILD_STATIC=ON -DBUILD_SHARED=OFF -DBUILD_TESTING=OFF ${LIBMD_CMAKE} ${CRYPTOPP})
-IOSSIM_XCODE(${CRYPTOPP_NAME} cryptopp-static)
+IOSSIM_dk_queueCommand(${DKCMAKE_BUILD} -DBUILD_STATIC=ON -DBUILD_SHARED=OFF -DBUILD_TESTING=OFF ${LIBMD_CMAKE} ${CRYPTOPP})
+IOSSIM_dk_xcode(${CRYPTOPP_NAME} cryptopp-static)
 
 
-LINUX_DKQCOMMAND(${DKCMAKE_BUILD} -DBUILD_STATIC=ON -DBUILD_SHARED=OFF -DBUILD_TESTING=OFF ${CRYPTOPP})
-LINUX_DKQCOMMAND(make cryptopp-static)
+LINUX_dk_queueCommand(${DKCMAKE_BUILD} -DBUILD_STATIC=ON -DBUILD_SHARED=OFF -DBUILD_TESTING=OFF ${CRYPTOPP})
+LINUX_dk_queueCommand(make cryptopp-static)
 
 
-RASPBERRY_DKQCOMMAND(${DKCMAKE_BUILD} -DBUILD_STATIC=ON -DBUILD_SHARED=OFF -DBUILD_TESTING=OFF ${CRYPTOPP})
-RASPBERRY_DKQCOMMAND(make cryptopp-static)
+RASPBERRY_dk_queueCommand(${DKCMAKE_BUILD} -DBUILD_STATIC=ON -DBUILD_SHARED=OFF -DBUILD_TESTING=OFF ${CRYPTOPP})
+RASPBERRY_dk_queueCommand(make cryptopp-static)
 
 
 if(ANDROID)
 	string(REPLACE "-DANDROID_CPP_FEATURES=\"rtti exceptions\"" "" DKCMAKE_BUILD_CRYPTOPP "${DKCMAKE_BUILD}")
 endif(ANDROID)
-ANDROID_DKQCOMMAND(${DKCMAKE_BUILD_CRYPTOPP} "-DCMAKE_CXX_FLAGS=/I${ANDROIDNDK}/sources/android/cpufeatures" -DBUILD_STATIC=ON -DBUILD_SHARED=OFF -DBUILD_TESTING=OFF ${CRYPTOPP})
-ANDROID_VS(${CRYPTOPP_NAME} cryptopp.sln cryptopp-static)
+ANDROID_dk_queueCommand(${DKCMAKE_BUILD_CRYPTOPP} "-DCMAKE_CXX_FLAGS=/I${ANDROIDNDK}/sources/android/cpufeatures" -DBUILD_STATIC=ON -DBUILD_SHARED=OFF -DBUILD_TESTING=OFF ${CRYPTOPP})
+ANDROID_dk_visualStudio(${CRYPTOPP_NAME} cryptopp.sln cryptopp-static)

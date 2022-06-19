@@ -2,5 +2,5 @@ IF(NOT ANDROID)
 	RETURN()
 ENDIF()
 
-generateCmake(DKWebview)
-DKASSETS(DKWebview)
+dk_generateCmake(DKWebview)
+dk_assets(DKWebview)

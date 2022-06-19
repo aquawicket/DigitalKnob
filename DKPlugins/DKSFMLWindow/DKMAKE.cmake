@@ -1,4 +1,4 @@
-DKDEPEND(sfml)
-DKDEPEND(DKWindow)
+dk_depend(sfml)
+dk_depend(DKWindow)
 
-generateCmake(DKSFMLWindow)
+dk_generateCmake(DKSFMLWindow)

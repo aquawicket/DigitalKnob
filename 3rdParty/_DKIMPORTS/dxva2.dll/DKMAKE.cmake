@@ -2,4 +2,4 @@ if(NOT WIN_HOST)
 	return()
 endif()
 
-WIN_DKLIB(Dxva2.dll)
+WIN_dk_lib(Dxva2.dll)

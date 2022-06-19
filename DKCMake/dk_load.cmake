@@ -1,8 +1,8 @@
 ##################################################################################
-# DKLoad(filename)
+# dk_load(filename)
 #
 #	load a ${filename}.cmake file located in the DKCMake path 
 #
-macro(DKLoad filename)
+macro(dk_load filename)
 	include(${DIGITALKNOB}/DK/DKCMake/${filename}.cmake)
 endmacro()

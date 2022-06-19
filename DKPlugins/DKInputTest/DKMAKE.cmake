@@ -1,1 +1,1 @@
-DKASSETS(DKInputTest)
+dk_assets(DKInputTest)

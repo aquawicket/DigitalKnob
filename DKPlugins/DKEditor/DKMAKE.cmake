@@ -1,5 +1,5 @@
-DKDEPEND(DKDuktape)
-DKDEPEND(DKGui)
-DKDEPEND(DKWidget)
+dk_depend(DKDuktape)
+dk_depend(DKGui)
+dk_depend(DKWidget)
 
-DKASSETS(DKEditor)
+dk_assets(DKEditor)

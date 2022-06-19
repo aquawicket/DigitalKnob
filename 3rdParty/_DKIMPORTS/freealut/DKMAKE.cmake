@@ -3,42 +3,42 @@
 # http://distro.ibiblio.org/rootlinux/rootlinux-ports/more/freealut/freealut-1.1.0.tar.gz
 
 ### DEPENDS ###
-DKDEPEND(msinttypes)
-DKDEPEND(openal)
+dk_depend(msinttypes)
+dk_depend(openal)
 
 
 ### VERSION ###
 DKGITCLONE(https://github.com/vancegroup/freealut)
 
-#DKSET(FREEALUT_VERSION 1.1.0)
-#DKSET(FREEALUT_NAME freealut-${FREEALUT_VERSION})
-#DKSET(FREEALUT_DL http://distro.ibiblio.org/rootlinux/rootlinux-ports/more/freealut/${FREEALUT_NAME}.tar.gz)
-#DKSET(FREEALUT ${3RDPARTY}/${FREEALUT_NAME})
-#DKINSTALL(${FREEALUT_DL} freealut ${FREEALUT})
+#dk_set(FREEALUT_VERSION 1.1.0)
+#dk_set(FREEALUT_NAME freealut-${FREEALUT_VERSION})
+#dk_set(FREEALUT_DL http://distro.ibiblio.org/rootlinux/rootlinux-ports/more/freealut/${FREEALUT_NAME}.tar.gz)
+#dk_set(FREEALUT ${3RDPARTY}/${FREEALUT_NAME})
+#dk_install(${FREEALUT_DL} freealut ${FREEALUT})
 
 
 ### LINK ###
-DKDEFINE(AL_LIBTYPE_STATIC)
-DKINCLUDE(${FREEALUT}/include)
-WIN_DEBUG_DKLIB(${FREEALUT}/${OS}/${DEBUG_DIR}/alut_static.lib)
-WIN_RELEASE_DKLIB(${FREEALUT}/${OS}/${RELEASE_DIR}/alut_static.lib)
-APPLE_DEBUG_DKLIB(${FREEALUT}/${OS}/${DEBUG_DIR}/libalut_static.a)
-APPLE_RELEASE_DKLIB(${FREEALUT}/${OS}/${RELEASE_DIR}/libalut_static.a)
-LINUX_DEBUG_DKLIB(${FREEALUT}/${OS}/${DEBUG_DIR}/libalut_static.a)
-LINUX_RELEASE_DKLIB(${FREEALUT}/${OS}/${RELEASE_DIR}/libalut_static.a)
+dk_define(AL_LIBTYPE_STATIC)
+dk_include(${FREEALUT}/include)
+WIN_dk_libDebug(${FREEALUT}/${OS}/${DEBUG_DIR}/alut_static.lib)
+WIN_dk_libRelease(${FREEALUT}/${OS}/${RELEASE_DIR}/alut_static.lib)
+APPLE_dk_libDebug(${FREEALUT}/${OS}/${DEBUG_DIR}/libalut_static.a)
+APPLE_dk_libRelease(${FREEALUT}/${OS}/${RELEASE_DIR}/libalut_static.a)
+LINUX_dk_libDebug(${FREEALUT}/${OS}/${DEBUG_DIR}/libalut_static.a)
+LINUX_dk_libRelease(${FREEALUT}/${OS}/${RELEASE_DIR}/libalut_static.a)
 
 
 
 ### COMPILE ###
-DKSETPATH(${CRYPTO}/${BUILD_DIR})
-WIN_DKQCOMMAND(${DKCMAKE_BUILD} "-DCMAKE_C_FLAGS=/DAL_LIBTYPE_STATIC /I${OPENAL}/include/AL /I${MSINTTYPES}" ${OPENAL_WIN} ${FREEALUT})
-#WIN_DKQCOMMAND(${DKCMAKE_BUILD} "-DCMAKE_C_FLAGS=/DWIN64 /D_WINDOWS /W3 /nologo /GR /EHsc /I${OPENAL}/include/AL /I${MSINTTYPES} /DAL_LIBTYPE_STATIC" ${OPENAL_WIN} ${FREEALUT})
-WIN_VS(${FREEALUT_NAME} Alut.sln alut_static)
+dk_setPath(${CRYPTO}/${BUILD_DIR})
+WIN_dk_queueCommand(${DKCMAKE_BUILD} "-DCMAKE_C_FLAGS=/DAL_LIBTYPE_STATIC /I${OPENAL}/include/AL /I${MSINTTYPES}" ${OPENAL_WIN} ${FREEALUT})
+#WIN_dk_queueCommand(${DKCMAKE_BUILD} "-DCMAKE_C_FLAGS=/DWIN64 /D_WINDOWS /W3 /nologo /GR /EHsc /I${OPENAL}/include/AL /I${MSINTTYPES} /DAL_LIBTYPE_STATIC" ${OPENAL_WIN} ${FREEALUT})
+WIN_dk_visualStudio(${FREEALUT_NAME} Alut.sln alut_static)
 
 
-MAC64_DKQCOMMAND(${DKCMAKE_BUILD} ${OPENAL_MAC} ${FREEALUT})
-MAC_XCODE(${FREEALUT_NAME} alut_static)
+MAC64_dk_queueCommand(${DKCMAKE_BUILD} ${OPENAL_MAC} ${FREEALUT})
+MAC_dk_xcode(${FREEALUT_NAME} alut_static)
 
 
-LINUX_DKQCOMMAND(${DKCMAKE_BUILD} ${OPENAL_LINUX} ${FREEALUT})
-LINUX_DKQCOMMAND(make alut_static)
+LINUX_dk_queueCommand(${DKCMAKE_BUILD} ${OPENAL_LINUX} ${FREEALUT})
+LINUX_dk_queueCommand(make alut_static)

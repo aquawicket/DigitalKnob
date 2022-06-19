@@ -1,11 +1,11 @@
-DKDEPEND(libvncserver-master)
-DKDEPEND(DKSDLWindow)
+dk_depend(libvncserver-master)
+dk_depend(DKSDLWindow)
 IF(HAVE_DKDuktape)
-	DKDEPEND(DKDuktape)
+	dk_depend(DKDuktape)
 ENDIF()
 IF(HAVE_DKCef)
-	DKDEPEND(DKCef)
+	dk_depend(DKCef)
 ENDIF()
 
 
-generateCmake(DKVncClient)
+dk_generateCmake(DKVncClient)

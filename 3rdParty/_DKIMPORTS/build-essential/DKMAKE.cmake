@@ -2,8 +2,8 @@ if(NOT LINUX_HOST)
 	return()
 endif()
 
-DKDEPEND(jdk)
+dk_depend(jdk)
 
 
-DKSET(CURRENT_DIR /usr)
-DKCOMMAND(sudo apt -y install build-essential)
+dk_set(CURRENT_DIR /usr)
+dk_command(sudo apt -y install build-essential)

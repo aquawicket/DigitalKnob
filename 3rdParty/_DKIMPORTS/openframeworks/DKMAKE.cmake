@@ -1,19 +1,19 @@
 # https://github.com/openframeworks/openFrameworks/archive/refs/tags/0.10.0.zip
 
 ### VERSION ###
-DKSET(OPENFRAMEWORKS_VERSION 0.10.0)
-DKSET(OPENFRAMEWORKS_NAME openFrameworks-${OPENFRAMEWORKS_VERSION})
-DKSET(OPENFRAMEWORKS_DL https://github.com/openframeworks/openFrameworks/archive/refs/tags/${OPENFRAMEWORKS_VERSION}.zip)
-DKSET(OPENFRAMEWORKS ${3RDPARTY}/${OPENFRAMEWORKS_NAME})
+dk_set(OPENFRAMEWORKS_VERSION 0.10.0)
+dk_set(OPENFRAMEWORKS_NAME openFrameworks-${OPENFRAMEWORKS_VERSION})
+dk_set(OPENFRAMEWORKS_DL https://github.com/openframeworks/openFrameworks/archive/refs/tags/${OPENFRAMEWORKS_VERSION}.zip)
+dk_set(OPENFRAMEWORKS ${3RDPARTY}/${OPENFRAMEWORKS_NAME})
 
 
 ### INSTALL ###
-DKINSTALL(${OPENFRAMEWORKS_DL} openFrameworks ${OPENFRAMEWORKS})
+dk_install(${OPENFRAMEWORKS_DL} openFrameworks ${OPENFRAMEWORKS})
 
 
 
 ### LINK ###
-DKINCLUDE(${OPENFRAMEWORKS})
+dk_include(${OPENFRAMEWORKS})
 WIN32_INCLUDE(${OPENFRAMEWORKS}/libs/openFrameworks)
 WIN32_INCLUDE(${OPENFRAMEWORKS}/libs/openFrameworks/utils)
 WIN32_INCLUDE(${OPENFRAMEWORKS}/libs/glew/include)
@@ -36,12 +36,12 @@ WIN32_INCLUDE(${OPENFRAMEWORKS}/libs/openFrameworks/sound)
 WIN32_INCLUDE(${OPENFRAMEWORKS}/libs/fmodex/include)
 WIN32_INCLUDE(${OPENFRAMEWORKS}/libs/openFrameworks/video)
 WIN32_INCLUDE(${OPENFRAMEWORKS}/libs/videoInput/include)
-WIN_DEBUG_DKLIB(${OPENFRAMEWORKS}/${OS}/lib/${DEBUG_DIR}/openFrameworks.lib)
-WIN_RELEASE_DKLIB(${OPENFRAMEWORKS}/${OS}/lib/${RELEASE_DIR}/openFrameworks.lib)
+WIN_dk_libDebug(${OPENFRAMEWORKS}/${OS}/lib/${DEBUG_DIR}/openFrameworks.lib)
+WIN_dk_libRelease(${OPENFRAMEWORKS}/${OS}/lib/${RELEASE_DIR}/openFrameworks.lib)
 
 
 ### COMPILE ###
-WIN_DKSETPATH(${OPENFRAMEWORKS}/${OS})
-WIN32_DKQCOMMAND(${DKCMAKE_BUILD} -DOF_PATH=${OPENFRAMEWORKS} ${OPENFRAMEWORKS})
-WIN64_DKQCOMMAND(${DKCMAKE_BUILD} -DOF_PATH=${OPENFRAMEWORKS} ${OPENFRAMEWORKS})
-WIN_VS(${OPENFRAMEWORKS_NAME} openFrameworks.sln openFrameworks)
+WIN_dk_setPath(${OPENFRAMEWORKS}/${OS})
+WIN32_dk_queueCommand(${DKCMAKE_BUILD} -DOF_PATH=${OPENFRAMEWORKS} ${OPENFRAMEWORKS})
+WIN64_dk_queueCommand(${DKCMAKE_BUILD} -DOF_PATH=${OPENFRAMEWORKS} ${OPENFRAMEWORKS})
+WIN_dk_visualStudio(${OPENFRAMEWORKS_NAME} openFrameworks.sln openFrameworks)

@@ -12,11 +12,11 @@ endif()
 
 
 ### VERSION ###
-DKSET(FAR_VERSION 2.0.3)
-DKSET(FAR_NAME FAR-${FAR_VERSION}-win)
-DKSET(FAR_DL https://sourceforge.net/projects/findandreplace/files/findandreplace/${FAR_VERSION}/${FAR_NAME}.zip)
-DKSET(FAR ${3RDPARTY}/${FAR_NAME})
+dk_set(FAR_VERSION 2.0.3)
+dk_set(FAR_NAME FAR-${FAR_VERSION}-win)
+dk_set(FAR_DL https://sourceforge.net/projects/findandreplace/files/findandreplace/${FAR_VERSION}/${FAR_NAME}.zip)
+dk_set(FAR ${3RDPARTY}/${FAR_NAME})
 
 
 ### INSTALL ###
-DKINSTALL(${FAR_DL} far ${FAR})
+dk_install(${FAR_DL} far ${FAR})

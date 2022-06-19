@@ -7,52 +7,52 @@
 #
 # https://wiki.duktape.org/projectsusingduktape
 
-DKDEPEND(python)
-DKDEPEND(nodejs)
+dk_depend(python)
+dk_depend(nodejs)
 
-DKIMPORT(https://github.com/aquawicket/duktape.git PATCH)
+dk_import(https://github.com/aquawicket/duktape.git PATCH)
 
-#DKIMPORT(https://github.com/aquawicket/duktape/archive/0701a460ca25c2dc76a96bd3187849ca278d1865.zip PATCH)
+#dk_import(https://github.com/aquawicket/duktape/archive/0701a460ca25c2dc76a96bd3187849ca278d1865.zip PATCH)
 
-#DKSET(DUKTAPE_VERSION let-support)
-#DKSET(DUKTAPE_NAME duktape-${DUKTAPE_VERSION})
-#DKSET(DUKTAPE_DL https://github.com/aquawicket/duktape/archive/refs/heads/${DUKTAPE_VERSION}.zip)
-#DKSET(DUKTAPE ${3RDPARTY}/${DUKTAPE_NAME})
-#DKINSTALL(${DUKTAPE_DL} duktape ${DUKTAPE})
+#dk_set(DUKTAPE_VERSION let-support)
+#dk_set(DUKTAPE_NAME duktape-${DUKTAPE_VERSION})
+#dk_set(DUKTAPE_DL https://github.com/aquawicket/duktape/archive/refs/heads/${DUKTAPE_VERSION}.zip)
+#dk_set(DUKTAPE ${3RDPARTY}/${DUKTAPE_NAME})
+#dk_install(${DUKTAPE_DL} duktape ${DUKTAPE})
 
 
 if(NOT EXISTS ${DUKTAPE}/src)
-DKSETPATH(${DUKTAPE})
-DKSET(QUEUE_BUILD ON)
+dk_setPath(${DUKTAPE})
+dk_set(QUEUE_BUILD ON)
 
-LINUX_DKQCOMMAND(sudo apt-get -y install python python-yaml)
-LINUX_DKQCOMMAND(python ${DUKTAPE}/util/dist.py)
+LINUX_dk_queueCommand(sudo apt-get -y install python python-yaml)
+LINUX_dk_queueCommand(python ${DUKTAPE}/util/dist.py)
 
-WIN_DKQCOMMAND(${PYTHON}/Scripts/pip install PyYAML)
-WIN_DKQCOMMAND(${PYTHON_EXE} ${DUKTAPE}/util/dist.py)
-DKCOPY(${DUKTAPE}/dist/src/ ${DUKTAPE}/src TRUE)
+WIN_dk_queueCommand(${PYTHON}/Scripts/pip install PyYAML)
+WIN_dk_queueCommand(${PYTHON_EXE} ${DUKTAPE}/util/dist.py)
+dk_copy(${DUKTAPE}/dist/src/ ${DUKTAPE}/src TRUE)
 
-#DKINSTALL(https://codeload.github.com/nodeca/js-yaml/zip/refs/tags/3.14.1 js-yaml-3.14.1 ${DUKTAPE_NAME}/src-tools/lib/extdeps/js-yaml)
-#WIN32_DKQCOMMAND(${NODE_EXE} ${DUKTAPE}/src-tools/index.js configure --output-directory ${DUKTAPE}/src --source-directory ${DUKTAPE}/src-input --config-directory ${DUKTAPE}/config)
+#dk_install(https://codeload.github.com/nodeca/js-yaml/zip/refs/tags/3.14.1 js-yaml-3.14.1 ${DUKTAPE_NAME}/src-tools/lib/extdeps/js-yaml)
+#WIN32_dk_queueCommand(${NODE_EXE} ${DUKTAPE}/src-tools/index.js configure --output-directory ${DUKTAPE}/src --source-directory ${DUKTAPE}/src-input --config-directory ${DUKTAPE}/config)
 endif()
 
 
 #if(NOT EXISTS ${DUKTAPE}/src/duktape.cpp)
-#	DKCOPY(${DUKTAPE}/src/duktape.c ${DUKTAPE}/src/duktape.cpp FALSE)
+#	dk_copy(${DUKTAPE}/src/duktape.c ${DUKTAPE}/src/duktape.cpp FALSE)
 #endif()
 #if(NOT EXISTS ${DUKTAPE}/examples/eventloop/poll.cpp)
-#	DKCOPY(${DUKTAPE}/examples/eventloop/poll.c ${DUKTAPE}/examples/eventloop/poll.cpp FALSE)
+#	dk_copy(${DUKTAPE}/examples/eventloop/poll.c ${DUKTAPE}/examples/eventloop/poll.cpp FALSE)
 #endif()
 #if(NOT EXISTS ${DUKTAPE}/examples/eventloop/c_eventloop.cpp)
-#	DKCOPY(${DUKTAPE}/examples/eventloop/c_eventloop.c ${DUKTAPE}/examples/eventloop/c_eventloop.cpp FALSE)
+#	dk_copy(${DUKTAPE}/examples/eventloop/c_eventloop.c ${DUKTAPE}/examples/eventloop/c_eventloop.cpp FALSE)
 #endif()
 
 
 
 ### LINK ###
 IF(WIN)
-	DKDEFINE(DUK_F_VBCC)
+	dk_define(DUK_F_VBCC)
 ENDIF()
 IF(ANDROID)
-	##DKDEFINE(DUK_F_32BIT_PTRS)
+	##dk_define(DUK_F_32BIT_PTRS)
 ENDIF()

@@ -68,7 +68,7 @@ while :
 					echo "Development branch selected"
 				else
 					echo "Remote has no Development branch. Creating..."
-					git checkout -b Development master
+					git checkout -b Development main
 					git push --set-upstream origin Development
 				fi
 								

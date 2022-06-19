@@ -4,5 +4,5 @@ if(NOT WIN_HOST)
 endif()
 
 
-#DKIMPORT(shlwapi.lib)
-WIN_DKLIB(shlwapi.lib)
+#dk_import(shlwapi.lib)
+WIN_dk_lib(shlwapi.lib)

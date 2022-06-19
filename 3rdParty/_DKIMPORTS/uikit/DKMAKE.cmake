@@ -4,10 +4,10 @@ if(NOT IOS)
 endif()
 
 
-#DKIMPORT(UIKit)
+#dk_import(UIKit)
 
 FIND_LIBRARY(UIKit_lib UIKit)
 if(NOT UIKit_lib)
 	DKWARN("Could not locate UIKit framework")
 endif()
-APPLE_DKLIB(${UIKit_lib})
+APPLE_dk_lib(${UIKit_lib})

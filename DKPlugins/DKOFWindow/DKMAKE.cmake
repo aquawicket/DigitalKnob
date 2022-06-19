@@ -1,4 +1,4 @@
-DKDEPEND(openframeworks)
-DKDEPEND(DKWindow)
+dk_depend(openframeworks)
+dk_depend(DKWindow)
 
-generateCmake(DKOFWindow)
+dk_generateCmake(DKOFWindow)

@@ -2,4 +2,4 @@ if(NOT WIN_HOST)
 	return()
 endif()
 
-WIN_DKLIB(pdh.lib)
+WIN_dk_lib(pdh.lib)

@@ -3,10 +3,10 @@ if(NOT UNIX_HOST)
 endif()
 
 ### INSTALL ###
-DKSET(CURRENT_DIR /usr)
-DKCOMMAND(sudo apt -y install libasound2-dev)
+dk_set(CURRENT_DIR /usr)
+dk_command(sudo apt -y install libasound2-dev)
 
 
 ### LINK ###
-DKINCLUDE(/usr/include/alsa)
+dk_include(/usr/include/alsa)
 SET(CMAKE_CXX_LINK_EXECUTABLE "${CMAKE_CXX_LINK_EXECUTABLE} -lasound")

@@ -1,3 +1,3 @@
-DKDEPEND(libtorrent)
+dk_depend(libtorrent)
 
-generateCmake(DKTorrent)
+dk_generateCmake(DKTorrent)

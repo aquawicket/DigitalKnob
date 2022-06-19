@@ -6,6 +6,6 @@ if(NOT UNIX_HOST)
 endif()
 
 ### INSTALL ###
-DKSET(CURRENT_DIR /usr)
-DKCOMMAND(sudo apt -y install mlocate)
-DKCOMMAND(sudo updatedb)
+dk_set(CURRENT_DIR /usr)
+dk_command(sudo apt -y install mlocate)
+dk_command(sudo updatedb)

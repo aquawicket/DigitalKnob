@@ -1,1 +1,1 @@
-generateCmake(DKJerryscript)
+dk_generateCmake(DKJerryscript)

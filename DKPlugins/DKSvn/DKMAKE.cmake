@@ -1,1 +1,1 @@
-DKASSETS(DKSvn)
+dk_assets(DKSvn)

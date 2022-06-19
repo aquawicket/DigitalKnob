@@ -3,34 +3,34 @@
 # https://slproweb.com/download/Win64OpenSSL-3_0_2.exe
 
 
-#DKIMPORT(https://slproweb.com/download/Win64OpenSSL-3_0_3.exe)
+#dk_import(https://slproweb.com/download/Win64OpenSSL-3_0_3.exe)
 
-DKSET(OPENSSL_BINARY_VERSION 3.0.1)
-WIN_HOST_DKSET(OPENSSL_BINARY_DL https://slproweb.com/download/Win64OpenSSL-3_0_3.exe)
+dk_set(OPENSSL_BINARY_VERSION 3.0.1)
+WIN_HOST_dk_set(OPENSSL_BINARY_DL https://slproweb.com/download/Win64OpenSSL-3_0_3.exe)
 
 
 ### INSTALL ###
-DKSET(OPENSSL_BINARY_NAME Win64OpenSSL-${OPENSSL_BINARY_VERSION})
-WIN_HOST_DKSET(OPENSSL_BINARY "C:/Program Files/OpenSSL-Win64")
-#MAC_HOST_DKSET(OPENSSL_BINARY /usr/bin)
-#LINUX_HOST_DKSET(OPENSSL_BINARY /usr/bin)
-WIN_HOST_DKSET(OPENSSL_BINARY_EXE ${OPENSSL_BINARY}/bin/openssl.exe)
-#MAC_HOST_DKSET(OPENSSL_BINARY_EXE ${OPENSSL_BINARY}/git)
-#LINUX_HOST_DKSET(OPENSSL_BINARY_EXE ${OPENSSL_BINARY}/git)
+dk_set(OPENSSL_BINARY_NAME Win64OpenSSL-${OPENSSL_BINARY_VERSION})
+WIN_HOST_dk_set(OPENSSL_BINARY "C:/Program Files/OpenSSL-Win64")
+#MAC_HOST_dk_set(OPENSSL_BINARY /usr/bin)
+#LINUX_HOST_dk_set(OPENSSL_BINARY /usr/bin)
+WIN_HOST_dk_set(OPENSSL_BINARY_EXE ${OPENSSL_BINARY}/bin/openssl.exe)
+#MAC_HOST_dk_set(OPENSSL_BINARY_EXE ${OPENSSL_BINARY}/git)
+#LINUX_HOST_dk_set(OPENSSL_BINARY_EXE ${OPENSSL_BINARY}/git)
 
 DKINFO("looking for ${OPENSSL_BINARY_NAME} at ${OPENSSL_BINARY_EXE}")
 if(NOT EXISTS ${OPENSSL_BINARY_EXE})
 	DKINFO("${OPENSSL_BINARY_NAME} NOT FOUND")
 	DKINFO("Installing ${OPENSSL_BINARY_NAME}")
 	if(WIN_HOST)	
-		DOWNLOAD(${OPENSSL_BINARY_DL} ${DKDOWNLOAD}/${OPENSSL_BINARY_NAME}.exe)
-		DKCOMMAND(${DKDOWNLOAD}/${OPENSSL_BINARY_NAME}.exe)
+		dk_download(${OPENSSL_BINARY_DL} ${DKDOWNLOAD}/${OPENSSL_BINARY_NAME}.exe)
+		dk_command(${DKDOWNLOAD}/${OPENSSL_BINARY_NAME}.exe)
 	endif()
 #	if(MAC_HOST)
-#		DKCOMMAND(brew install git)
+#		dk_command(brew install git)
 #	endif()
 #	if(LINUX_HOST)
-#		DKCOMMAND(sudo apt-get -y install git)
+#		dk_command(sudo apt-get -y install git)
 #	endif()
 else()
 	DKINFO("Found git at ${OPENSSL_BINARY_EXE}")

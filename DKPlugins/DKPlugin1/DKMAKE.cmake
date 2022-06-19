@@ -1,11 +1,11 @@
-DKDEPEND(DK)
-DKDLL(DKPlugin1)
-DKASSETS(DKPlugin1)
+dk_depend(DK)
+dk_dll(DKPlugin1)
+dk_assets(DKPlugin1)
 
 IF(WIN_32)
-	DKCOPY(${DKPLUGINS}/DKPlugin1/win32/Release/DKPlugin1.dll ${DKPROJECT}/assets/DKPlugin1 TRUE)
+	dk_copy(${DKPLUGINS}/DKPlugin1/win32/Release/DKPlugin1.dll ${DKPROJECT}/assets/DKPlugin1 TRUE)
 ENDIF()
 
 IF(WIN_64)
-	DKCOPY(${DKPLUGINS}/DKPlugin1/win64/Release/DKPlugin1.dll ${DKPROJECT}/assets/DKPlugin1 TRUE)
+	dk_copy(${DKPLUGINS}/DKPlugin1/win64/Release/DKPlugin1.dll ${DKPROJECT}/assets/DKPlugin1 TRUE)
 ENDIF()

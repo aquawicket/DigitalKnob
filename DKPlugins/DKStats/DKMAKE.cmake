@@ -1,1 +1,1 @@
-DKASSETS(DKStats)
+dk_assets(DKStats)

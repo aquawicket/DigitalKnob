@@ -13,15 +13,15 @@ endif()
 
 
 
-DKIMPORT(https://github.com/ConnectedVision/connectedvision/raw/master/build_env/Conan/packages/StackWalker/2014.12.28/2.3.0/stackwalker-2014-12-28.zip)
+dk_import(https://github.com/ConnectedVision/connectedvision/raw/master/build_env/Conan/packages/StackWalker/2014.12.28/2.3.0/stackwalker-2014-12-28.zip)
 
 ### VERSION ###
-#DKSET(STACKWALKER_VERSION 2013-01-07-v14)
-#DKSET(STACKWALKER_NAME stackwalker-${STACKWALKER_VERSION})
-#DKSET(STACKWALKER_DL https://github.com/ConnectedVision/connectedvision/raw/master/build_env/Conan/packages/StackWalker/2014.12.28/2.3.0/stackwalker-2014-12-28.zip)
-#DKSET(STACKWALKER ${3RDPARTY}/${STACKWALKER_NAME})
-#DKINSTALL(${STACKWALKER_DL} stackwalker ${STACKWALKER})
+#dk_set(STACKWALKER_VERSION 2013-01-07-v14)
+#dk_set(STACKWALKER_NAME stackwalker-${STACKWALKER_VERSION})
+#dk_set(STACKWALKER_DL https://github.com/ConnectedVision/connectedvision/raw/master/build_env/Conan/packages/StackWalker/2014.12.28/2.3.0/stackwalker-2014-12-28.zip)
+#dk_set(STACKWALKER ${3RDPARTY}/${STACKWALKER_NAME})
+#dk_install(${STACKWALKER_DL} stackwalker ${STACKWALKER})
 
 
 ### LINK ###
-DKINCLUDE(${STACKWALKER}/StackWalker)
+dk_include(${STACKWALKER}/StackWalker)

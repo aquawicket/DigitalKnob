@@ -3,14 +3,14 @@ if(NOT UNIX_HOST)
 endif()
 
 ### INSTALL ###
-DKSET(CURRENT_DIR /usr)
-DKCOMMAND(sudo apt -y install libglib2.0-dev)
+dk_set(CURRENT_DIR /usr)
+dk_command(sudo apt -y install libglib2.0-dev)
 
 
 find_package(PkgConfig REQUIRED)
 pkg_check_modules(GLIB REQUIRED glib-2.0)
 
 #DKINFO("GLIB_INCLUDE_DIRS = ${GLIB_INCLUDE_DIRS}")
-DKINCLUDE(${GLIB_INCLUDE_DIRS})
+dk_include(${GLIB_INCLUDE_DIRS})
 #DKINFO("GLIB_LIBRARIES = ${GLIB_LIBRARIES}")
-DKLIB(${GLIB_LIBRARIES})
+dk_lib(${GLIB_LIBRARIES})

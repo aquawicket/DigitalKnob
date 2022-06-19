@@ -3,15 +3,15 @@ if(NOT UNIX_HOST)
 endif()
 
 ### INSTALL ###
-DKSET(CURRENT_DIR /usr)
-DKCOMMAND(sudo apt -y install libgtk2.0-dev)
+dk_set(CURRENT_DIR /usr)
+dk_command(sudo apt -y install libgtk2.0-dev)
 
 
 find_package(PkgConfig REQUIRED)
 pkg_check_modules(GTK REQUIRED gtk+-2.0)
 
-DKDEFINE(USE_GDK)
+dk_define(USE_GDK)
 #DKINFO("GTK_INCLUDE_DIRS = ${GTK_INCLUDE_DIRS}")
-DKINCLUDE(${GTK_INCLUDE_DIRS})
+dk_include(${GTK_INCLUDE_DIRS})
 #DKINFO("GTK_LIBRARIES = ${GTK_LIBRARIES}")
-DKLIB(${GTK_LIBRARIES})
+dk_lib(${GTK_LIBRARIES})

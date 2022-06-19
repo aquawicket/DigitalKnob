@@ -2,28 +2,28 @@
 
 
 ### DEPENDS ###
-#DKDEPEND(libname)
+#dk_depend(libname)
 
 
 ### DOWNLOAD ###
-DKIMPORT(https://github.com/organization/package.git)
-#DKIMPORT(https://organization.com/download/package-1.0.zip)
+dk_import(https://github.com/organization/package.git)
+#dk_import(https://organization.com/download/package-1.0.zip)
 
 
 ### LINK ###
-DKINCLUDE(${PACKAGE}/include)
-WIN_DEBUG_DKLIB(${PACKAGE}/${OS}/${DEBUG_DIR}/package.lib)
-WIN_RELEASE_DKLIB(${PACKAGE}/${OS}/${RELEASE_DIR}/package.lib)
-UNIX_DEBUG_DKLIB(${PACKAGE}/${OS}/${DEBUG_DIR}/libpackage.a)
-UNIX_RELEASE_DKLIB(${PACKAGE}/${OS}/${RELEASE_DIR}/libpackage.a)
+dk_include(${PACKAGE}/include)
+WIN_dk_libDebug(${PACKAGE}/${OS}/${DEBUG_DIR}/package.lib)
+WIN_dk_libRelease(${PACKAGE}/${OS}/${RELEASE_DIR}/package.lib)
+UNIX_dk_libDebug(${PACKAGE}/${OS}/${DEBUG_DIR}/libpackage.a)
+UNIX_dk_libRelease(${PACKAGE}/${OS}/${RELEASE_DIR}/libpackage.a)
 
 
 ### GENERATE ###
-DKSETPATH(${PACKAGE}/${BUILD_DIR})
-DKQCOMMAND(${DKCMAKE_BUILD} ${PACKAGE})
+dk_setPath(${PACKAGE}/${BUILD_DIR})
+dk_queueCommand(${DKCMAKE_BUILD} ${PACKAGE})
 
 
 ### COMPILE ###
-VISUAL_STUDIO(${PACKAGE_NAME} package.sln package)  # WIN_VS(), ANDROID_VS()
-XCODE(${PACKAGE_NAME} package) 						# MAC_XCODE(), IOS_XCODE, IOSSIM_XCODE()
-MAKE(package) 										# LINUX_DKQCOMMAND(make), RASPBERRY_DKQCOMMAND(make)
+VISUAL_STUDIO(${PACKAGE_NAME} package.sln package)  # WIN_dk_visualStudio(), ANDROID_dk_visualStudio()
+dk_xcode(${PACKAGE_NAME} package) 						# MAC_dk_xcode(), IOS_XCODE, IOSSIM_dk_xcode()
+MAKE(package) 										# LINUX_dk_queueCommand(make), RASPBERRY_dk_queueCommand(make)

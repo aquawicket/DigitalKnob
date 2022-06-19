@@ -1,1 +1,1 @@
-DKASSETS(DKGui)
+dk_assets(DKGui)

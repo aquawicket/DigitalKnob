@@ -1,7 +1,7 @@
 IF(WIN)
-	DKDEPEND(libvncserver-master-win)
+	dk_depend(libvncserver-master-win)
 ELSE()
-	DKDEPEND(libvncserver-master)
+	dk_depend(libvncserver-master)
 ENDIF()
 
-generateCmake(DKVncServer)
+dk_generateCmake(DKVncServer)

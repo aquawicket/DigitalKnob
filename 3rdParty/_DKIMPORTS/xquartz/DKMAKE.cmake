@@ -3,14 +3,14 @@
 #
 # https://github.com/XQuartz/XQuartz/releases/download/XQuartz-2.8.1/XQuartz-2.8.1.dmg
 
-MAC_DKDEPEND(homebrew)
+MAC_dk_depend(homebrew)
 
 
 ### INSTALL ###
 #if(NOT EXISTS ${XQUARTZ})
 if(MAC)
-	DKCOMMAND(brew install --cask xquartz)
-	DKINCLUDE(/opt/X11/include)
+	dk_command(brew install --cask xquartz)
+	dk_include(/opt/X11/include)
 endif()
 #endif()
 
@@ -22,14 +22,14 @@ endif()
 # brew install --cask xquartz
 
 # Build fill library method
-#DKSET(XQUARTZ_VERSION 2.8.1)
-#DKSET(XQUARTZ_NAME XQuartz-${XQUARTZ_VERSION})
-#DKSET(XQUARTZ_DL https://github.com/XQuartz/XQuartz/releases/download/${XQUARTZ_NAME}/${XQUARTZ_NAME}.dmg)
-#DKSET(XQUARTZ FIXME)
+#dk_set(XQUARTZ_VERSION 2.8.1)
+#dk_set(XQUARTZ_NAME XQuartz-${XQUARTZ_VERSION})
+#dk_set(XQUARTZ_DL https://github.com/XQuartz/XQuartz/releases/download/${XQUARTZ_NAME}/${XQUARTZ_NAME}.dmg)
+#dk_set(XQUARTZ FIXME)
 
 ### INSTALL ###
 #IF(NOT EXISTS ${XQUARTZ})
-#	DOWNLOAD(${XQUARTZ_DL} ${DKDOWNLOAD}/${XQUARTZ_NAME}.dmg)
-#	DKSET(QUEUE_BUILD ON)
-#	MAC_DKQCOMMAND(${DKDOWNLOAD}/${XQUARTZ_NAME}.dmg)
+#	dk_download(${XQUARTZ_DL} ${DKDOWNLOAD}/${XQUARTZ_NAME}.dmg)
+#	dk_set(QUEUE_BUILD ON)
+#	MAC_dk_queueCommand(${DKDOWNLOAD}/${XQUARTZ_NAME}.dmg)
 #ENDIF()
