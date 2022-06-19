@@ -6,6 +6,6 @@
 include(${DIGITALKNOB}/DK/DKCMake/DKLoad.cmake)
 
 macro(dk_call func)
-	DKLoad(${func})
+	dk_load(${func})
 	cmake_language(CALL ${func} ${ARGV})
 endmacro()

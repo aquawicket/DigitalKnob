@@ -1,4 +1,4 @@
-DKLoad(Color)
+dk_load(Color)
 
 # DKINFO(msg)
 #
