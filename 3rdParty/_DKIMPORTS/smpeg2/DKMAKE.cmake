@@ -8,16 +8,16 @@ dk_import(https://www.libsdl.org/projects/smpeg/release/smpeg2-2.0.0.tar.gz PATC
 
 ### DKPLUGINS LINK ###
 dk_include(${SMPEG2})
-WIN_DEBUG_dk_lib			(${SMPEG2}/${OS}/lib/${DEBUG_DIR}/libsmpeg2.lib)
-WIN_RELEASE_dk_lib		(${SMPEG2}/${OS}/lib/${RELEASE_DIR}/libsmpeg2.lib)
-APPLE_DEBUG_dk_lib		(${SMPEG2}/${OS}/lib/${DEBUG_DIR}/libsmpeg2.a)
-APPLE_RELEASE_dk_lib		(${SMPEG2}/${OS}/lib/${RELEASE_DIR}/libsmpeg2.a)
-LINUX_DEBUG_dk_lib		(${SMPEG2}/${OS}/${DEBUG_DIR}/lib/libsmpeg2.a)
-LINUX_RELEASE_dk_lib		(${SMPEG2}/${OS}/${RELEASE_DIR}/lib/libsmpeg2.a)
-RASPBERRY_DEBUG_dk_lib	(${SMPEG2}/${OS}/${DEBUG_DIR}/lib/libsmpeg2.a)
-RASPBERRY_RELEASE_dk_lib	(${SMPEG2}/${OS}/${RELEASE_DIR}/lib/libsmpeg2.a)
-ANDROID_DEBUG_dk_lib		(${SMPEG2}/${OS}/${DEBUG_DIR}/lib/libsmpeg2.a)
-ANDROID_RELEASE_dk_lib	(${SMPEG2}/${OS}/${RELEASE_DIR}/lib/libsmpeg2.a)
+WIN_dk_libDebug			(${SMPEG2}/${OS}/lib/${DEBUG_DIR}/libsmpeg2.lib)
+WIN_dk_libRelease		(${SMPEG2}/${OS}/lib/${RELEASE_DIR}/libsmpeg2.lib)
+APPLE_dk_libDebug		(${SMPEG2}/${OS}/lib/${DEBUG_DIR}/libsmpeg2.a)
+APPLE_dk_libRelease		(${SMPEG2}/${OS}/lib/${RELEASE_DIR}/libsmpeg2.a)
+LINUX_dk_libDebug		(${SMPEG2}/${OS}/${DEBUG_DIR}/lib/libsmpeg2.a)
+LINUX_dk_libRelease		(${SMPEG2}/${OS}/${RELEASE_DIR}/lib/libsmpeg2.a)
+RASPBERRY_dk_libDebug	(${SMPEG2}/${OS}/${DEBUG_DIR}/lib/libsmpeg2.a)
+RASPBERRY_dk_libRelease	(${SMPEG2}/${OS}/${RELEASE_DIR}/lib/libsmpeg2.a)
+ANDROID_dk_libDebug		(${SMPEG2}/${OS}/${DEBUG_DIR}/lib/libsmpeg2.a)
+ANDROID_dk_libRelease	(${SMPEG2}/${OS}/${RELEASE_DIR}/lib/libsmpeg2.a)
 
 
 ### 3RDPARTY LINK ###
