@@ -1,8 +1,8 @@
 # dk_assert(msg)
 #
-macro(dk_assert msg)
+macro(dk_assert)
 	dk_call(dk_updateLogInfo)
-	message(FATAL_ERROR "${H_black}${STACK_HEADER}${CLR}${BG_red}${msg}${CLR}")
+	message(FATAL_ERROR "${H_black}${STACK_HEADER}${CLR}${BG_red}${ARGV}${CLR}")
 	dk_call(dk_exit)
 endmacro()
 macro(DKASSERT)
