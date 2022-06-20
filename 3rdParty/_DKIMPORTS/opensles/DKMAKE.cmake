@@ -20,7 +20,7 @@ if(IOS)
 	if(opensles_lib)
 		APPLE_dk_lib(${opensles_lib})
 	else()
-		DKINFO("Could not locate OpenSLES framework")
+		dk_info("Could not locate OpenSLES framework")
 	endif()
 endif()
 

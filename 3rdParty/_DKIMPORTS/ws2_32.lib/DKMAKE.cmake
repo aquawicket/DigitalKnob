@@ -8,6 +8,6 @@ endif()
 #if(NOT Ws2_32.lib_path)
 #	DKWARN("Could not locate Ws2_32.lib")
 #endif()
-#DKINFO("Ws2_32.lib_path = ${Ws2_32.lib_path}")
+#dk_info("Ws2_32.lib_path = ${Ws2_32.lib_path}")
 
 WIN_dk_lib(Ws2_32.lib)
