@@ -8,7 +8,7 @@ include_guard()
 #	@ARGV: The ARGV data within a function that contains the parameter values
 #
 function(dk_getArgIdentifiers ARGV)
-	#dk_call(dk_message "dk_getArgIdentifiers(${ARGV})")
+	#message(STATUS "dk_getArgIdentifiers(${ARGV})")
 	list(LENGTH ARGV ARGV_LENGTH)
 	if(ARGV_LENGTH LESS 1)
 		return()
