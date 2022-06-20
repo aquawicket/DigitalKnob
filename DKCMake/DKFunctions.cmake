@@ -416,20 +416,21 @@ endmacro()
 
 
 ##############################################################################
-# dk_watchCallback(var access val 1st stack)
+# dk_watchCallback(VAR access val 1st stack)
 # 
 #	Description:  TODO
 #
-#	@var:(required)			The variable to watch
+#	@VAR:(required)			The variable to watch
 #	@access:(required) 		TODO
 #	@val:(required) 		TODO
 #   @1st:(required) 		TODO
 #	@stack:(required) 		TODO
 #
-macro(dk_watchCallback variable access val lst stack)
+macro(dk_watchCallback VAR access val lst stack)
 	DKDEBUGFUNC(${ARGV})
+	message(STATUS "${H_black}${STACK_HEADER}${CLR}${cyan}${ARGV}${CLR}")
 	dk_info("##########################################################################################")
-    dk_info("Variable watch: variable=${variable} access=${access} val=${val} 1st=${1st} stack=${stack}")
+    dk_info("Variable watch: VAR=${VAR} access=${access} val=${val} 1st=${1st} stack=${stack}")
 	dk_info("##########################################################################################")
 	dk_wait()
 endmacro()
