@@ -25,7 +25,10 @@ function(dk_getArgIdentifiers ARGV)
 				if("ARGV${index}" STREQUAL "${variableName}") #exclude variables with the same name like ARGV0
 					continue()
 				endif()
-				if("CMAKE_CURRENT_FUNCTION" STREQUAL "${variableName}") #exclude variables with the same name like ARGV0
+				if("ARGN" STREQUAL "${variableName}")
+					continue()
+				endif()
+				if("CMAKE_CURRENT_FUNCTION" STREQUAL "${variableName}")
 					continue()
 				endif()
 				dk_call(dk_listReplace names ARGV${index} ${variableName})
