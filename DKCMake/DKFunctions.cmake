@@ -1249,8 +1249,8 @@ function(dk_getShortPath path result)
 	endif()
 endfunction()
 # TEST_dk_getShortPath
-dk_getShortPath("C:/Program Files (x86)/CMake/bin/cmake.exe" result)
-dk_dump(result)
+# dk_getShortPath("C:/Program Files (x86)/CMake/bin/cmake.exe" result)
+# dk_dump(result)
 
 
 ###############################################################################
