@@ -301,7 +301,7 @@ endmacro()
 ##############################################################################
 # dk_isNumber(variable result)
 # 
-#	Test is a varaible is a number
+#	Test if a varaible is a number
 #
 #	@variable:(required) The variable to test
 #	@result: True if the variable is a number, False if otherwise.
@@ -472,7 +472,7 @@ endfunction()
 ###############################################################################
 # dk_deleteTempFiles()
 #
-#	Delete all .tmp files thoughout the digitalknob directory
+#	Delete all .tmp files recursivly thoughout the digitalknob directory
 #
 function(dk_deleteTempFiles)
 	DKDEBUGFUNC(${ARGV})
@@ -521,9 +521,7 @@ endfunction()
 #
 function(dk_setEnv name value)
 	DKDEBUGFUNC(${ARGV})
-#	dk_debug("dk_setEnv(${name} ${value})")
-#	dk_debug("ENVname = $ENV{${name}}")
-#	dk_debug("value = ${value}")
+	dk_debug("ENVname = $ENV{${name}}")
 	if(ENV{${name}})
 		string(FIND $ENV{${name}} ${value} index)
 	else()
@@ -531,6 +529,8 @@ function(dk_setEnv name value)
 	endif()
 	
 	if(${index} EQUAL -1)
+	dk_debug("ENV{${name}} = $ENV{${name}}")
+	dk_debug("value = ${value}")
 #	if(NOT "$ENV{${name}}" STREQUAL "${value}")
 		if(WIN_HOST)
 			dk_info("Setting %${name}% environment variable to ${value}")
