@@ -28,7 +28,7 @@ include_guard()
 #    dk.filesystem.cpp - %DIGITALKNOB%/DK/Api/filesystem/filesystem.cpp
 #   DKBatch filesystem - %DIGITALKNOB%/DKBatch/filesystem
 #    DKBash filesystem - %DIGITALKNOB%/DKBash/filesystem
-#   DKCMake filesystem - %DIGITALKNOB%/DKCMake/filesystem/filesystem.cmake
+#   DKCMake filesystem - %DIGITALKNOB%/DKCMake/filesystem/DKFileSystem.cmake
 #      javascript FSAA - https://developer.mozilla.org/en-US/docs/Web/API/filesystem
 #       Php filesystem - https://www.php.net/manual/en/book.filesystem.php
 #    NodeJS filesystem - https://nodejs.org/api/fs.html

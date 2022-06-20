@@ -24,9 +24,9 @@
 
 CMAKE_MINIMUM_REQUIRED(VERSION 3.10)
 CMAKE_POLICY(SET CMP0007 NEW)
-include(../Functions.cmake)
-include(../Variables.cmake)
-include(../string.cmake)
+include(../DKFunctions.cmake)
+include(../DKVariables.cmake)
+include(../DKString.cmake)
 
 message(STATUS " ")
 message(STATUS "###############################")
@@ -43,10 +43,10 @@ dk_DownloadAll3rdParty()
 
 
 macro(Test_String)
-	message(STATUS "With the string.cmake class, we overwrite the set() function to intercept and \"stringify\" variables. That will add _function style macros to the variable name so we can access the function much like javascript. Instead of string.function() we use string_function(). CMake functions lack returning values directly, So, we use the last parameter as he return variable.\n")
+	message(STATUS "With the DKString.cmake class, we overwrite the set() function to intercept and \"stringify\" variables. That will add _function style macros to the variable name so we can access the function much like javascript. Instead of string.function() we use string_function(). CMake functions lack returning values directly, So, we use the last parameter as he return variable.\n")
 	message(STATUS "EXAMPLE:  set(MyString \"the text within the string\")\n")
 	set(MyString "the text within the string")
-	message(STATUS "string.cmake will automatically listen for the set() function and use it to stringify that variable, and add string _functions to it.")
+	message(STATUS "DKString.cmake will automatically listen for the set() function and use it to stringify that variable, and add string _functions to it.")
 	message(STATUS "For example, now we can use the string includes() function like this...\n")
 	message(STATUS "MyString_includes(\"within\" 15 result)")
 	MyString_includes("within" 3 result)

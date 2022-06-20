@@ -1,4 +1,4 @@
-dk_load(Color)
+dk_load(dk_color)
 
 # dk_debug(msg)
 #

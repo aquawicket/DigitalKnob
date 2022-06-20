@@ -21,8 +21,8 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
-
 include_guard()
+
 
 # https://en.wikipedia.org/wiki/ANSI_escape_code#Colors
 # 
@@ -115,6 +115,10 @@ set(ESC_8    "${ESC}[8;37m")
 set(ESC_9    "${ESC}[9;37m")
 set(ESC_10   "${ESC}[10;37m")
 
+
+###############################################################################
+# dk_printColorChart()
+#
 macro(printColorChart)
 	DKDEBUGFUNC(${ARGV})
 	message(" ")
@@ -189,8 +193,13 @@ macro(printColorChart)
 	message(  "${HBG_white}     HBG_white      ${CLR}")
 	message(" ")
 endmacro()
+# dk_printColorChart()
 
-macro(printStyleChart)
+
+###############################################################################
+# dk_printStyleChart()
+#
+macro(dk_printStyleChart)
 	DKDEBUGFUNC(${ARGV})
 	message(" ")
 	message(       "Style Chart")
@@ -206,6 +215,4 @@ macro(printStyleChart)
 	message(       "${ESC_9}     ESC_9         ${CLR}")
 	message(      "${ESC_10}     ESC_10        ${CLR}")
 endmacro()
-
-# printColorChart()
-# printStyleChart()
+# dk_printStyleChart()
