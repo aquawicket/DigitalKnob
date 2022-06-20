@@ -239,7 +239,7 @@ endmacro()
 #	result:(required)
 #
 function(dk_includes str substr result)
-	DKDEBUGFUNC(${ARGV})
+	#DKDEBUGFUNC(${ARGV})
 	string(FIND "${str}" "${substr}" index)
 	if(${index} GREATER -1)
 		set(${result} true PARENT_SCOPE)
