@@ -6,6 +6,6 @@ endif()
 
 FIND_LIBRARY(MetalKit_lib MetalKit)
 if(NOT MetalKit_lib)
-	DKWARN("Could not locate MetalKit framework")
+	dk_warn("Could not locate MetalKit framework")
 endif()
 APPLE_dk_lib(${MetalKit_lib})

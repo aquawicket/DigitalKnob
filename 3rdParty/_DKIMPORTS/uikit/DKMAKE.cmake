@@ -8,6 +8,6 @@ endif()
 
 FIND_LIBRARY(UIKit_lib UIKit)
 if(NOT UIKit_lib)
-	DKWARN("Could not locate UIKit framework")
+	dk_warn("Could not locate UIKit framework")
 endif()
 APPLE_dk_lib(${UIKit_lib})

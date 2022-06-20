@@ -6,6 +6,6 @@ endif()
 
 FIND_LIBRARY(MobileCoreServices_lib MobileCoreServices)
 if(NOT MobileCoreServices_lib)
-	DKWARN("Could not locate MobileCoreServices framework")
+	dk_warn("Could not locate MobileCoreServices framework")
 endif()
 APPLE_dk_lib(${MobileCoreServices_lib})

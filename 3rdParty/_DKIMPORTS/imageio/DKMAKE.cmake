@@ -6,6 +6,6 @@ endif()
 
 FIND_LIBRARY(ImageIO_lib ImageIO)
 if(NOT ImageIO_lib)
-	DKWARN("Could not locate ImageIO framework")
+	dk_warn("Could not locate ImageIO framework")
 endif()
 APPLE_dk_lib(${ImageIO_lib})

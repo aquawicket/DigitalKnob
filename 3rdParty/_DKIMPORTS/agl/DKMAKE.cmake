@@ -8,7 +8,7 @@ dk_depend(opengl)
 
 FIND_LIBRARY(AGL_Lib AGL)
 if(NOT AGL_Lib)
-	DKWARN("Could not locate AGL framework")
+	dk_warn("Could not locate AGL framework")
 endif()
 
 dk_define(GL_SILENCE_DEPRECATION)

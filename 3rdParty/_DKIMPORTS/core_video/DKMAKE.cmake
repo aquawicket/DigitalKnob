@@ -6,6 +6,6 @@ endif()
 
 FIND_LIBRARY(CoreVideo_lib CoreVideo)
 if(NOT CoreVideo_lib)
-	DKWARN("Could not locate CoreVideo framework")
+	dk_warn("Could not locate CoreVideo framework")
 endif()
 APPLE_dk_lib(${CoreVideo_lib})

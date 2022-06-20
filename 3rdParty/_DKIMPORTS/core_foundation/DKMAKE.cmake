@@ -6,6 +6,6 @@ endif()
 
 FIND_LIBRARY(CoreFoundation_lib CoreFoundation)
 if(NOT CoreFoundation_lib)
-	DKWARN("Could not locate CoreFoundation framework")
+	dk_warn("Could not locate CoreFoundation framework")
 endif()
 APPLE_dk_lib(${CoreFoundation_lib})

@@ -6,6 +6,6 @@ endif()
 
 FIND_LIBRARY(Foundation_lib Foundation)
 if(NOT Foundation_lib)
-	DKWARN("Could not location Foundation framework")
+	dk_warn("Could not location Foundation framework")
 endif()
 APPLE_dk_lib(${Foundation_lib})

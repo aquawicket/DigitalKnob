@@ -6,6 +6,6 @@ endif()
 
 FIND_LIBRARY(Carbon_lib Carbon)
 if(NOT Carbon_lib)
-	DKWARN("Could not locate Carbon framework")
+	dk_warn("Could not locate Carbon framework")
 endif()
 APPLE_dk_lib(${Carbon_lib})

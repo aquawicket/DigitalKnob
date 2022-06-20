@@ -6,6 +6,6 @@ endif()
 
 FIND_LIBRARY(CoreAudio_lib CoreAudio)
 if(NOT CoreAudio_lib)
-	DKWARN("Could not locate CoreAudio framework")
+	dk_warn("Could not locate CoreAudio framework")
 endif()
 APPLE_dk_lib(${CoreAudio_lib})

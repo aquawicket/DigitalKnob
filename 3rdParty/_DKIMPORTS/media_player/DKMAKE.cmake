@@ -6,6 +6,6 @@ endif()
 
 FIND_LIBRARY(MediaPlayer_lib MediaPlayer)
 if(NOT MediaPlayer_lib)
-	DKWARN("Could not locate MediaPlayer framework")
+	dk_warn("Could not locate MediaPlayer framework")
 endif()
 APPLE_dk_lib(${MediaPlayer_lib})

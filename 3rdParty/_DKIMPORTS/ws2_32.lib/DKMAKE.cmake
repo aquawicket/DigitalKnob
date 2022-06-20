@@ -6,7 +6,7 @@ endif()
 
 #FIND_LIBRARY(Ws2_32.lib_path Ws2_32.lib)
 #if(NOT Ws2_32.lib_path)
-#	DKWARN("Could not locate Ws2_32.lib")
+#	dk_warn("Could not locate Ws2_32.lib")
 #endif()
 #dk_info("Ws2_32.lib_path = ${Ws2_32.lib_path}")
 

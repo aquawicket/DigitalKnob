@@ -5,6 +5,6 @@ endif()
 
 FIND_LIBRARY(appkit_lib AppKit)
 if(NOT appkit_lib)
-	DKWARN("Could not locate AppKit framework")
+	dk_warn("Could not locate AppKit framework")
 endif()
 APPLE_dk_lib(${appkit_lib})

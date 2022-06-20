@@ -55,6 +55,6 @@ else()
 	endif()
 
 	if(NOT EXISTS "${CMAKE_EXE}")
-		DKERROR("CMAKE IS NOT FOUND OR INVALID")
+		dk_error("CMAKE IS NOT FOUND OR INVALID")
 	endif()
 endif()
