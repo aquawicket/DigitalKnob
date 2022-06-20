@@ -1040,6 +1040,11 @@ endfunction()
 ###############################################################################
 # dk_getFilename(path result)
 #
+#	Get the filename portion of a path
+#
+#	@path:(required) The path to use
+#	@result:	Returns the file name upon success: False upon error
+#
 function(dk_getFilename path result)
 	DKDEBUGFUNC(${ARGV})
 	#string(FIND ${path} "/" index REVERSE)
@@ -1057,6 +1062,11 @@ endfunction()
 
 ###############################################################################
 # dk_getExtension(path result)
+#
+#	Get the extension portion of a path
+#
+#	@path:(required) The path to use
+#	@result:	Returns the extension upon success: False upon error
 #
 function(dk_getExtension path result)
 	DKDEBUGFUNC(${ARGV})
@@ -1078,6 +1088,11 @@ endfunction()
 ###############################################################################
 # dk_dirIsEmpty(path result)
 #
+#	Get weather or not a directory is empty
+#
+#	@path: The full path to the directory to check
+#	@result: Returns true if the directory is empty. False if the directory is not empty
+#
 function(dk_dirIsEmpty path result)
 	DKDEBUGFUNC(${ARGV})
 	if(EXISTS ${path})
@@ -1095,6 +1110,8 @@ endfunction()
 ###############################################################################
 # dk_refreshIcons()
 #
+#	Refresh the icons on a windows operating system
+#
 function(dk_refreshIcons)
 	DKDEBUGFUNC(${ARGV})
 	dk_executeProcess(ie4uinit.exe -ClearIconCache)
@@ -1104,6 +1121,11 @@ endfunction()
 
 ###############################################################################
 # dk_patch(import_name dest_path)
+#
+#	Copy files from a DK/3rdParty/_DKIMPORTS/library to the DK/3rdParty/library install location
+#
+#	@import_name:(required)	The name of the 3rdParty DKIMPORT library
+#	@dest_path:(required)	The location of the installed library under /3rdParty
 #
 function(dk_patch import_name dest_path)
 	DKDEBUGFUNC(${ARGV})
@@ -1117,11 +1139,16 @@ endfunction()
 ###############################################################################
 # dk_install(src_path import_name dest_path)
 #
-# For archive files such as libraries and assets, the arguments are:  The download src_path, the name of its _DKIMPORTS folder, The name given to the installed 3rdParty/folder  
-# For executable files such as software amd IDE's the arguments are:  The download src_path, the name of the final name of the dl file, The installation path to check for installation.
+#	Install a 3rdParty library, executable or package
+#	For archive files such as libraries and assets, the arguments are:  The download src_path, the name of its _DKIMPORTS folder, The name given to the installed 3rdParty/folder  
+#	For executable files such as software amd IDE's the arguments are:  The download src_path, the name of the final name of the dl file, The installation path to check for installation.
+#
+#	@src_path:(required)	
+#	@import_name:(required)	
+#	@dest_path:(required)	
+#
 function(dk_install src_path import_name dest_path)
 	DKDEBUGFUNC(${ARGV})
-	
 	dk_info(" ")
 	string(TOLOWER ${import_name} import_name_lower)
 	if(NOT ${import_name} STREQUAL ${import_name_lower})
@@ -3428,10 +3455,10 @@ function(dk_importDownload url) #Lib #ID #Patch
 		dk_debug("${LIBVAR}_DL = ${${LIBVAR}_DL}")
 		dk_debug("${LIBVAR}_NAME = ${${LIBVAR}_NAME}")
 		dk_debug("${LIBVAR} = ${${LIBVAR}}") 
-		dk_debug("dk_install(${${LIBVAR}_DL} ${FOLDER} ${${LIBVAR}})")
+		#dk_debug("dk_install(${${LIBVAR}_DL} ${FOLDER} ${${LIBVAR}})")
 		dk_install(${${LIBVAR}_DL} ${FOLDER} ${${LIBVAR}} ${ARGN})
 	else()
-		dk_error("One of the required LIBVAR variables vas not satisfied")
+		dk_error("One of the required LIBVAR:(${LIBVAR}) variables vas not satisfied")
 		return()
 	endif()
 endfunction()
