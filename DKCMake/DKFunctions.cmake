@@ -3662,12 +3662,5 @@ function(dk_import2 url)
 		#Goto dk_install(DL, name, VERSION)
 endfunction()
 
-macro(dk_message msg)
-	message(STATUS "${msg}")
-endmacro()
-
-
 include(${DKFunctions_ext})
-
-
 #dk_watch(dk_getExtension)
