@@ -428,7 +428,9 @@ endmacro()
 #
 macro(dk_watchCallback variable access val lst stack)
 	DKDEBUGFUNC(${ARGV})
+	dk_info("##########################################################################################")
     dk_info("Variable watch: variable=${variable} access=${access} val=${val} 1st=${1st} stack=${stack}")
+	dk_info("##########################################################################################")
 	dk_wait()
 endmacro()
 
@@ -1143,9 +1145,9 @@ endfunction()
 #	For archive files such as libraries and assets, the arguments are:  The download src_path, the name of its _DKIMPORTS folder, The name given to the installed 3rdParty/folder  
 #	For executable files such as software amd IDE's the arguments are:  The download src_path, the name of the final name of the dl file, The installation path to check for installation.
 #
-#	@src_path:(required)	
-#	@import_name:(required)	
-#	@dest_path:(required)	
+#	@src_path:(required)	The download url or local path to an install file. May be .zip, .exe, .msi, .tar.gz etc. 
+#	@import_name:(required)	The name of the 3rdParty package being installed
+#	@dest_path:(required)	The path to the install location under DK/3rdParty
 #
 function(dk_install src_path import_name dest_path)
 	DKDEBUGFUNC(${ARGV})
@@ -3668,5 +3670,12 @@ function(dk_import2 url)
 		#Goto dk_install(DL, name, VERSION)
 endfunction()
 
+macro(dk_message msg)
+	message(STATUS "${msg}")
+endmacro()
+
 
 include(${DKFunctions_ext})
+
+
+dk_watch(dk_getExtension)
