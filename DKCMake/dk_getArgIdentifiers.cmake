@@ -25,7 +25,7 @@ function(dk_getArgIdentifiers ARGV)
 				if(NOT "ARGV${index}" STREQUAL "${variableName}") #exclude variables with the same name like ARGV0
 					dk_call(dk_listReplace names ARGV${index} ${variableName})
 					set(ARGI${index} ${variableName} CACHE INTERNAL "")
-					#message(STATUS "ARGI${index} == ${ARGI${index}}")
+					dk_call(dk_message "ARGI${index} == ${ARGI${index}}")
 					break()
 				endif()
 			endif()
