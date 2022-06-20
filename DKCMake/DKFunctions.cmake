@@ -917,6 +917,10 @@ endfunction()
 ###############################################################################
 # dk_include(path)
 #
+#	Add a directory to the compiler include paths
+#
+#	@path:(required)	The path to add to the compiler include paths
+#
 function(dk_include path)
 	DKDEBUGFUNC(${ARGV})
 	foreach(item ${ARGV})
@@ -939,6 +943,10 @@ dk_aliasFunctions("dk_include")
 ###############################################################################
 # dk_linkDir(path)
 #
+#	Add a directory to the compiler library paths
+#
+#	@path:(required)	The path to add to the compiler library paths
+#
 function(dk_linkDir path)
 	DKDEBUGFUNC(${ARGV})
 	foreach(item ${ARGV})
@@ -956,6 +964,10 @@ dk_aliasFunctions("dk_linkDir")
 ###############################################################################
 # dk_getCurrentDirectory(result)
 #
+#	Retrieve the current working directory
+#
+#	@result: returns the current working directory upon success. False upon error
+#
 #function(dk_getCurrentDirectory result)
 #	DKDEBUGFUNC(${ARGV})
 #	if(WIN_HOST)
@@ -971,6 +983,10 @@ dk_aliasFunctions("dk_linkDir")
 
 ###############################################################################
 # dk_makeDirectory(path)
+#
+#	Create a directory 
+#
+#	@path:(required)	The full path to the direcotory to be created
 #
 function(dk_makeDirectory path)
 	DKDEBUGFUNC(${ARGV})
@@ -1002,6 +1018,11 @@ endfunction()
 
 ###############################################################################
 # dk_getDirectory(path result)
+#
+#	Get the directory portion of a path
+#
+#	@path:(required)	The path to use
+#	@result:	Returns the directory upon success: False upon error
 #
 function(dk_getDirectory path result)
 	DKDEBUGFUNC(${ARGV})
