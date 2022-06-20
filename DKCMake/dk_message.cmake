@@ -9,5 +9,5 @@ dk_load(dk_color)
 #	@msg:(required)	The message to print
 #
 macro(dk_message msg)
-	message(STATUS "${msg}")
+	message(STATUS "${H_black}${STACK_HEADER}${CLR}${msg}")
 endmacro()

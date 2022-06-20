@@ -218,10 +218,9 @@ endfunction()
 ###############################################################################
 # dk_printAllVariables()
 #
-#	Prints all cmake varibles
+#	Print all cmake varibles
 #
 macro(dk_printAllVariables)
-#function(dk_printAllVariables)
 	DKDEBUGFUNC(${ARGV})
 	get_cmake_property(varNames VARIABLES)
 	list(SORT varNames)
@@ -229,7 +228,6 @@ macro(dk_printAllVariables)
 		message(STATUS "${varName}=${${varName}}")
 		file(APPEND ${CMAKE_BINARY_DIR}/cmake_variables.temp "${varName}				==				${${varName}}\n")
 	endforeach()
-#endfunction()
 endmacro()
 
 
@@ -238,12 +236,14 @@ endmacro()
 #
 #	str:(required)
 #	substr:(required)
-#	result:
+#	result:(required)
 #
 function(dk_includes str substr result)
 	DKDEBUGFUNC(${ARGV})
-	string(FIND "${str}" "${substr}" index)
-	if(${index} GREATER -1)
+	#string(FIND "${str}" "${substr}" index)
+	dk_includes("${str}" "${substr}" result)
+	#if(${index} GREATER -1)
+	if(${result})
 		set(${result} true PARENT_SCOPE)
 	else()
 		set(${result} false PARENT_SCOPE)
@@ -254,7 +254,7 @@ endfunction()
 ###############################################################################
 # dk_set(variable value)
 #	
-# https://stackoverflow.com/a/29250496/688352
+#	https://stackoverflow.com/a/29250496/688352
 #
 #	@variable:(required)
 #	@value:(required)
@@ -307,10 +307,11 @@ endmacro()
 #	@result: True if the variable is a number, False if otherwise.
 #
 macro(dk_isNumber variable result)
+	DKDEBUGFUNC(${ARGV})
 	if(variable MATCHES "^[0-9]+$")
-		set(${result} TRUE) # PARENT_SCOPE)
+		set(${result} TRUE)
 	else()
-		set(${result} FALSE) # PARENT_SCOPE)
+		set(${result} FALSE)
 	endif()
 endmacro()
 
@@ -334,11 +335,6 @@ macro(dk_wait)
 	else()
 		set(timeout 60) # default
 	endif()
-#	if(argv_0 MATCHES "^[0-9]+$")
-#		set(timeout ${argv_0})
-#	else()
-#		set(timeout 60) # default
-#	endif()
 	
 	if(NOT argv_1)
 		set(msg "press and key to continue.") # default
@@ -361,7 +357,7 @@ macro(dk_wait)
 		execute_process(COMMAND bash -c "read -n 1 -s -r -p \"${msg}\"" OUTPUT_VARIABLE outVar)
 		return()
 	endif()	
-	dk_error("dk_wait() Not implemented for this platform")
+	dk_error("Not implemented for this platform")
 endmacro()
 
 
@@ -374,14 +370,13 @@ endmacro()
 #
 macro(dk_dump variable)
 	DKDEBUGFUNC(${ARGV})
-	dk_info(" ")
-	dk_info("************** DUMP ****************")
+	dk_message("\n${cyan}############################### Variable DUMP ##############################################${CLR}")	
 	if(CMAKE_CURRENT_FUNCTION_LIST_FILE)
 		dk_getFilename(${CMAKE_CURRENT_FUNCTION_LIST_FILE} FILENAME)
 	endif()
 	if(NOT DEFINED ${variable})
-		dk_error("dk_dump(${variable}) variable not defined. The correct syntax is \"DUMP(varname)\", using the variable name")
-		dk_error("dk_dump(varname): CORRECT SYNTAX        DUMP(\${varname}): INCORRECT SYNTAX")
+		dk_error("variable not defined. The correct syntax is \"DUMP(variable_name)\", using the variable name")
+		dk_error("dk_dump(variable): CORRECT SYNTAX        DUMP(\${variable}): INCORRECT SYNTAX")
 	endif()
 	dk_info("${FILENAME}:${CMAKE_CURRENT_FUNCTION_LIST_LINE} -> ${CMAKE_CURRENT_FUNCTION}(${ARGV})")
 	list(LENGTH ${variable} variableLength)
@@ -392,12 +387,11 @@ macro(dk_dump variable)
 	else()
 		set(variableType "string")
 	endif()
-	dk_info("NAME:    ${variable}")
-	dk_info("TYPE:    ${variableType}")
-	dk_info("LENGTH:  ${variableLength}")
-	dk_info("VALUE:   ${${variable}}")
-	dk_info("************************************")
-	dk_info(" ")
+	dk_message("${cyan}   NAME:    ${variable} ${CLR}")
+	dk_message("${cyan}   TYPE:    ${variableType} ${CLR}")
+	dk_message("${cyan}   LENGTH:  ${variableLength} ${CLR}")
+	dk_message("${cyan}   VALUE:   ${${variable}} ${CLR}")
+	dk_message("${cyan}############################################################################################${CLR}\n")
 	dk_wait()
 endmacro()
 
@@ -416,22 +410,21 @@ endmacro()
 
 
 ##############################################################################
-# dk_watchCallback(VAR access val 1st stack)
+# dk_watchCallback(variable access val 1st stack)
 # 
 #	Description:  TODO
 #
-#	@VAR:(required)			The variable to watch
+#	@variable:(required)			The variable to watch
 #	@access:(required) 		TODO
 #	@val:(required) 		TODO
 #   @1st:(required) 		TODO
 #	@stack:(required) 		TODO
 #
-macro(dk_watchCallback VAR access val lst stack)
+macro(dk_watchCallback variable access val lst stack)
 	DKDEBUGFUNC(${ARGV})
-	message(STATUS "${H_black}${STACK_HEADER}${CLR}${cyan}${ARGV}${CLR}")
-	dk_info("##########################################################################################")
-    dk_info("Variable watch: VAR=${VAR} access=${access} val=${val} 1st=${1st} stack=${stack}")
-	dk_info("##########################################################################################")
+	dk_message("${cyan}################################################################################################${CLR}")
+	dk_message("${cyan}   Variable watch: variable=${variable} access=${access} val=${val} 1st=${1st} stack=${stack}${CLR}")
+	dk_message("${cyan}################################################################################################${CLR}")
 	dk_wait()
 endmacro()
 
@@ -458,7 +451,7 @@ endmacro()
 #
 function(dk_deleteCache)
 	DKDEBUGFUNC(${ARGV})
-	dk_info("####### Deleteing CMake cache . . .")
+	dk_info("Deleteing CMake cache . . .")
 	dk_file_getDigitalknobPath(DIGITALKNOB)
 	if(WIN_HOST)
 		dk_executeProcess(for /r %%i in (CMakeCache.*) do del "%%i" WORKING_DIRECTORY ${DIGITALKNOB})
@@ -477,7 +470,7 @@ endfunction()
 #
 function(dk_deleteTempFiles)
 	DKDEBUGFUNC(${ARGV})
-	dk_info("####### Deleteing Temporary files . . .")
+	dk_info("Deleteing Temporary files . . .")
 	dk_file_getDigitalknobPath(DIGITALKNOB)
 	if(WIN_HOST)
 		dk_executeProcess(for /r %%i in (*.TMP) do del "%%i" WORKING_DIRECTORY ${DIGITALKNOB})
@@ -501,13 +494,13 @@ endfunction()
 function(dk_deleteEmptyDirectories path)
 	DKDEBUGFUNC(${ARGV})
 	if(NOT EXISTS ${path})
-		dk_error("dk_deleteEmptyDirectories(): path does not exist")
+		dk_error("path does not exist")
 		return()
 	endif()
 	if(WIN_HOST)
 		execute_process(COMMAND for /f "delims=" %d in ('dir /s /b /ad ^| sort /r') do rd "%d" WORKING_DIRECTORY ${path})
 	else()
-		dk_error("dk_deleteEmptyDirectories() Not implemented for this platform")
+		dk_error("Not implemented for this platform")
 	endif()
 endfunction()
 
