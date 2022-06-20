@@ -422,9 +422,9 @@ endmacro()
 #
 macro(dk_watchCallback variable access val lst stack)
 	DKDEBUGFUNC(${ARGV})
-	dk_message("${cyan}################################################################################################${CLR}")
-	dk_message("${cyan}   Variable watch: variable=${variable} access=${access} val=${val} 1st=${1st} stack=${stack}${CLR}")
-	dk_message("${cyan}################################################################################################${CLR}")
+	dk_message("${cyan}##################################################################################################${CLR}")
+	dk_message("${cyan}   Variable watch: variable=${${variable}} access=${access} val=${val} 1st=${1st} stack=${stack}${CLR}")
+	dk_message("${cyan}##################################################################################################${CLR}")
 	dk_wait()
 endmacro()
 
@@ -3672,4 +3672,4 @@ endmacro()
 include(${DKFunctions_ext})
 
 
-dk_watch(dk_getExtension)
+#dk_watch(dk_getExtension)
