@@ -30,8 +30,8 @@ include_guard()
 
 
 ### SETTINGS ##################################################################
-set(DKDEBUG_ENABLED				1		CACHE INTERNAL "")
-set(DKDEBUGFUNC_ENABLED			1		CACHE INTERNAL "")
+set(DKDEBUG_ENABLED				0		CACHE INTERNAL "")
+set(DKDEBUGFUNC_ENABLED			0		CACHE INTERNAL "")
 set(PRINT_CALL_DETAILS 			1		CACHE INTERNAL "")
 set(PRINT_FILE_NAMES 			1 		CACHE INTERNAL "")
 set(PRINT_LINE_NUMBERS 			1		CACHE INTERNAL "")
