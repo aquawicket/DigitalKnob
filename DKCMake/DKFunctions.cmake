@@ -297,9 +297,9 @@ endmacro()
 #
 macro(dk_isNumber variable result)
 	if(variable MATCHES "^[0-9]+$")
-		set(${result} TRUE PARENT_SCOPE)
+		set(${result} TRUE) # PARENT_SCOPE)
 	else()
-		set(${result} FALSE PARENT_SCOPE)
+		set(${result} FALSE) # PARENT_SCOPE)
 	endif()
 endmacro()
 
