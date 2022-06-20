@@ -1020,10 +1020,8 @@ endfunction()
 #
 function(dk_getDirectory path result)
 	DKDEBUGFUNC(${ARGV})
-	#string(FIND ${path} "/" index REVERSE)
-	dk_includes(${path} "/" result)
-	#if(${index} EQUAL -1)
-	if(NOT ${result})
+	string(FIND ${path} "/" index REVERSE)
+	if(${index} EQUAL -1)
 		return() # no path dividers found
 	endif()
 	string(SUBSTRING ${path} 0 ${index} directory) 
@@ -1041,10 +1039,8 @@ endfunction()
 #
 function(dk_getFilename path result)
 	DKDEBUGFUNC(${ARGV})
-	#string(FIND ${path} "/" index REVERSE)
-	dk_includes(${path} "/" result)
-	#if(${index} EQUAL -1)
-	if(NOT ${result})
+	string(FIND ${path} "/" index REVERSE)
+	if(${index} EQUAL -1)
 		dk_error("No Path Dividers found")
 		return()
 	endif()
@@ -1068,10 +1064,8 @@ function(dk_getExtension path result)
 #	get_filename_component(extension ${url} EXT)       #Gets the large part of the extension of everything after the first .
 #	get_filename_component(extension ${url} LAST_EXT)  #LAST_EXT only available with cmake 3.14+ 
 #	cmake_path(GET url EXTENSION LAST_ONLY extension)  #LAST_ONLY only available with cmake 3.19+
-	#string(FIND ${path} "." index REVERSE)
-	dk_includes(${path} "." result)
-	#if(${index} EQUAL -1)
-	if(NOT ${result})
+	string(FIND ${path} "." index REVERSE)
+	if(${index} EQUAL -1)
 		return() # no extension found
 	endif()
 	string(SUBSTRING ${path} ${index} -1 ext) 
