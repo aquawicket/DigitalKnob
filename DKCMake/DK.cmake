@@ -1,3 +1,5 @@
+include_guard()
+
 # Get the /digitalknob path 
 function(dk_getDigitalknobPath result)
 	get_filename_component(DIGITALKNOB ${CMAKE_SOURCE_DIR} ABSOLUTE)

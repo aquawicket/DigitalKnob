@@ -1,5 +1,7 @@
+include_guard()
 dk_load(dk_color)
 
+##################################################################################
 # dk_verbose(msg)
 #
 macro(dk_verbose)

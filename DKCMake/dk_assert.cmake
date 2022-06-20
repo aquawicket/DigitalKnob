@@ -1,3 +1,7 @@
+include_guard()
+dk_load(dk_color)
+
+##################################################################################
 # dk_assert(msg)
 #
 macro(dk_assert)

@@ -1,3 +1,5 @@
+include_guard()
+
 ##################################################################################
 # dk_debugFunc(${ARGV})
 #	Prints the current file name, line number, function or macro and arguments

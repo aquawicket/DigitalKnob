@@ -30,8 +30,8 @@ include_guard()
 
 
 ### SETTINGS ##################################################################
-set(DKDEBUG_ENABLED				0		CACHE INTERNAL "")
-set(DKDEBUGFUNC_ENABLED			0		CACHE INTERNAL "")
+set(DKDEBUG_ENABLED				1		CACHE INTERNAL "")
+set(DKDEBUGFUNC_ENABLED			1		CACHE INTERNAL "")
 set(PRINT_CALL_DETAILS 			1		CACHE INTERNAL "")
 set(PRINT_FILE_NAMES 			1 		CACHE INTERNAL "")
 set(PRINT_LINE_NUMBERS 			1		CACHE INTERNAL "")
@@ -1100,6 +1100,7 @@ endfunction()
 # For executable files such as software amd IDE's the arguments are:  The download src_path, the name of the final name of the dl file, The installation path to check for installation.
 function(dk_install src_path import_name dest_path)
 	DKDEBUGFUNC(${ARGV})
+	
 	dk_info(" ")
 	string(TOLOWER ${import_name} import_name_lower)
 	if(NOT ${import_name} STREQUAL ${import_name_lower})
@@ -3094,7 +3095,8 @@ endfunction()
 #
 #	@url: The online path the .git or file to import
 # 
-function(dk_import url) #Lib #ID #Patch
+function(dk_import) #url #Lib #ID #Patch
+	set(url ${ARGV0})
 	DKDEBUGFUNC(${ARGV})
 	string(FIND ${url} ".git" dotgit)
 	if(${dotgit} GREATER -1)
