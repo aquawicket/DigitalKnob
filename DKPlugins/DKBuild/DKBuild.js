@@ -8,7 +8,7 @@ let LEVEL = ""  //Build, Rebuild, RebuildAll
 let DIGITALKNOB = ""
 let DKDOWNLOAD = ""
 let CMAKE = ""
-let ANDROIDNDK = ""  //filled by DKBuild_ValidateNDK()
+let ANDROID_NDK = ""  //filled by DKBuild_ValidateNDK()
 //let VISUALSTUDIO_VERSION = "2019"
 let VISUALSTUDIO_VERSION = "2022"
 let VISUALSTUDIO = ""
@@ -217,25 +217,25 @@ function DKBuild_InstallXcode(){
 }
 
 function DKBuild_ValidateNDK(){
-	const ANDROIDNDK_BUILD = DKBuild_GetDKMakeVariable(DIGITALKNOB+"DK/3rdParty/_DKIMPORTS/android-ndk/DKMAKE.cmake", "ANDROIDNDK_BUILD")
-	const ANDROIDNDK_DL = DKBuild_GetDKMakeVariable(DIGITALKNOB+"DK/3rdParty/_DKIMPORTS/android-ndk/DKMAKE.cmake", "ANDROIDNDK_DL")
-	ANDROIDNDK = DIGITALKNOB+"DK/3rdParty/android-sdk/ndk/"+ANDROIDNDK_BUILD
+	const ANDROID_NDK_BUILD = DKBuild_GetDKMakeVariable(DIGITALKNOB+"DK/3rdParty/_DKIMPORTS/android-ndk/DKMAKE.cmake", "ANDROID-NDK_BUILD")
+	const ANDROID_NDK_DL = DKBuild_GetDKMakeVariable(DIGITALKNOB+"DK/3rdParty/_DKIMPORTS/android-ndk/DKMAKE.cmake", "ANDROID-NDK_DL")
+	ANDROID_NDK = DIGITALKNOB+"DK/3rdParty/android-sdk/ndk/"+ANDROID_NDK_BUILD
 	
 	//set environment variables
-	if(ANDROIDNDK !== CPP_DK_Execute("echo %VS_NdkRoot%", "rt"))
-		CPP_DK_Execute("setx VS_NdkRoot "+ANDROIDNDK) //https://stackoverflow.com/a/54350289/688352
+	if(ANDROID_NDK !== CPP_DK_Execute("echo %VS_NdkRoot%", "rt"))
+		CPP_DK_Execute("setx VS_NdkRoot "+ANDROID_NDK) //https://stackoverflow.com/a/54350289/688352
 		
 	// Validate install
-	if(!CPP_DKFile_Exists(ANDROIDNDK+"/installed")){
-		console.log("Installing Android NDK "+ANDROIDNDK_BUILD+" . . .")
-		CPP_DKCurl_Download(ANDROIDNDK_DL, DKDOWNLOAD)
-		const index = ANDROIDNDK_DL.lastIndexOf("/")
-		const filename = ANDROIDNDK_DL.substring(index+1)
+	if(!CPP_DKFile_Exists(ANDROID_NDK+"/installed")){
+		console.log("Installing Android NDK "+ANDROID_NDK_BUILD+" . . .")
+		CPP_DKCurl_Download(ANDROID_NDK_DL, DKDOWNLOAD)
+		const index = ANDROID_NDK_DL.lastIndexOf("/")
+		const filename = ANDROID_NDK_DL.substring(index+1)
 		CPP_DKArchive_Extract(DKDOWNLOAD+"/"+filename, DIGITALKNOB+"DK/3rdParty/android-sdk/ndk")
-		CPP_DKFile_Rename(DIGITALKNOB+"DK/3rdParty/android-sdk/ndk/android-ndk-r22b", ANDROIDNDK, true)
-		CPP_DKFile_Copy(DIGITALKNOB+"DK/3rdParty/_DKIMPORTS/android-ndk/", ANDROIDNDK, true)
-		CPP_DKFile_Delete(ANDROIDNDK+"/DKMAKE.cmake")
-		CPP_DKFile_StringToFile(ANDROIDNDK_BUILD, ANDROIDNDK+"/installed")
+		CPP_DKFile_Rename(DIGITALKNOB+"DK/3rdParty/android-sdk/ndk/android-ndk-r22b", ANDROID_NDK, true)
+		CPP_DKFile_Copy(DIGITALKNOB+"DK/3rdParty/_DKIMPORTS/android-ndk/", ANDROID_NDK, true)
+		CPP_DKFile_Delete(ANDROID_NDK+"/DKMAKE.cmake")
+		CPP_DKFile_StringToFile(ANDROID_NDK_BUILD, ANDROID_NDK+"/installed")
 	}
 }
 
@@ -530,7 +530,7 @@ function DKBuild_DoResults(){
 			return false
 	
 		if(CPP_DK_GetOS() === "Windows"){
-			if(!DKBuild_Command(CMAKE+" -G \""+VS_GENERATOR+"\" -A ARM -DANDROID_ABI=armeabi-v7a -DANDROID_PLATFORM=26 -DANDROIDNDK="+ANDROIDNDK+" -DCMAKE_TOOLCHAIN_FILE="+ANDROIDNDK+"/build/cmake/android.toolchain.cmake -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS=-std=c++1z "+cmake_string+" -S"+DIGITALKNOB+"DK/DKCMake -B"+app_path+"android32"))
+			if(!DKBuild_Command(CMAKE+" -G \""+VS_GENERATOR+"\" -A ARM -DANDROID_ABI=armeabi-v7a -DANDROID_PLATFORM=26 -DANDROID-NDK="+ANDROID_NDK+" -DCMAKE_TOOLCHAIN_FILE="+ANDROID_NDK+"/build/cmake/android.toolchain.cmake -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS=-std=c++1z "+cmake_string+" -S"+DIGITALKNOB+"DK/DKCMake -B"+app_path+"android32"))
 				return false
 		}
 		
@@ -565,7 +565,7 @@ function DKBuild_DoResults(){
 			return false
 		
 		if(CPP_DK_GetOS() === "Windows"){
-			if(!DKBuild_Command(CMAKE+" -G \""+VS_GENERATOR+"\" -A ARM64 -DANDROID_ABI=arm64-v8a -DANDROID_PLATFORM=26 -DANDROIDNDK="+ANDROIDNDK+" -DCMAKE_TOOLCHAIN_FILE="+ANDROIDNDK+"/build/cmake/android.toolchain.cmake -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS=-std=c++1z "+cmake_string+" -S"+DIGITALKNOB+"DK/DKCMake -B"+app_path+"android64"))
+			if(!DKBuild_Command(CMAKE+" -G \""+VS_GENERATOR+"\" -A ARM64 -DANDROID_ABI=arm64-v8a -DANDROID_PLATFORM=26 -DANDROID-NDK="+ANDROID_NDK+" -DCMAKE_TOOLCHAIN_FILE="+ANDROID_NDK+"/build/cmake/android.toolchain.cmake -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS=-std=c++1z "+cmake_string+" -S"+DIGITALKNOB+"DK/DKCMake -B"+app_path+"android64"))
 				return false
 		}
 		
