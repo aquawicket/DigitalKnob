@@ -290,8 +290,7 @@ foreach(plugin ${dkdepend_list})
 			## double check that the missing libs were built
 			foreach(lib ${LIBLIST})
 				if(NOT EXISTS ${lib})
-					dk_info("\n\n\n****************************\nFAILED to find: ${lib} \n***********************************")
-					#dk_error(" ")
+					dk_warn("\n\n\n****************************\nFAILED to find: ${lib} \n***********************************")
 				else()
 				
 					# Install DKPlugin Libs
