@@ -448,7 +448,7 @@ diff -ruN boost_1_54_0-boot/tools/build/v2/tools/android.jam boost_1_54_0-patche
 +
 +toolset.flags android.compile OPTIONS <debug-symbols>on : -g ;
 +toolset.flags android.compile OPTIONS <profiling>on : -pg ;
-+toolset.flags android.compile OPTIONS <rtti>off : -fno-rtti ;
++toolset.flags android.compile OPTIONS <rtti>off : -frtti ;
 +
 +rule setup-fpic ( targets * : sources * : properties * )
 +{
@@ -1489,7 +1489,7 @@ diff -ruN boost_1_54_0-boot/tools/build/v2/tools/android.py boost_1_54_0-patched
 +
 +flags('android.compile', 'OPTIONS', ['<debug-symbols>on'], ['-g'])
 +flags('android.compile', 'OPTIONS', ['<profiling>on'], ['-pg'])
-+flags('android.compile', 'OPTIONS', ['<rtti>off'], ['-fno-rtti'])
++flags('android.compile', 'OPTIONS', ['<rtti>off'], ['-frtti'])
 +
 +# On cygwin and mingw, android generates position independent code by default, and
 +# warns if -fPIC is specified. This might not be the right way of checking if

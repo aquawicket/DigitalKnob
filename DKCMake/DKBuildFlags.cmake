@@ -51,7 +51,7 @@ include_guard()
 # common flags for compilers
 #										GCC					CLANG/LLVM			MSVC														NOTES
 # Enable runtime type information		-frtti				-frtti				/GR                                                         
-# Disable runtime type information		-fno-rtti			-fno-rtti			/GR-                                                         
+# Disable runtime type information		-frtti			-frtti			/GR-                                                         
 # Standard C++ exception handling		-fexceptions		-fexceptions		/EHsc														#https://stackoverflow.com/a/4574319/688352
 # No Exceptions							-fno-exceptions		-fno-exceptions		/D_HAS_EXCEPTIONS=0											#https://stackoverflow.com/a/65513682/688352
 # Use address sanatizer					-fsanitize=address	-fsanitize=address	/fsanitize=address											incompatable with /RTC1 
@@ -339,6 +339,7 @@ ANDROID32_dk_set(DKCMAKE_FLAGS
 	-DANDROID_TOOLCHAIN=clang
 	-DANDROID_ABI=armeabi-v7a
 	-DANDROID_STL=c++_static
+	-DANDROID_STL_FORCE_FEATURES=1
 	-DANDROID_CPP_FEATURES=rtti
 	-DCMAKE_ANDROID_STL_TYPE=c++_static) # exceptions")
 #ANDROID32_dk_set(DKCMAKE_C_COMPILER			"")
