@@ -1,6 +1,6 @@
-IF(ANDROID)
-	RETURN()
-ENDIF()
+if(ANDROID)
+	return()
+endif()
 
 dk_depend(openscenegraph osgdb_ffmpeg)
 dk_depend(DKOSGWindow)

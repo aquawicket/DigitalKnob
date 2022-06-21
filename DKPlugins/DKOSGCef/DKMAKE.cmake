@@ -1,4 +1,4 @@
-DKENABLE(DKCef)
+dk_enable(DKCef)
 
 dk_depend(DKOSGWindow)
 dk_depend(DKCef)
