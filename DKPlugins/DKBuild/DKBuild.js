@@ -92,7 +92,7 @@ function DKBuild_init(){
 		GCC = "/usr/bin/g++"
 	}
 	
-	DKDOWNLOAD = DIGITALKNOB+"Download"
+	DKDOWNLOAD = DIGITALKNOB+"download"
 	CPP_DKFile_MkDir(DKDOWNLOAD) //FIXME: code DKCurl to create directories automatically
 	
 	/* Error handling example 
