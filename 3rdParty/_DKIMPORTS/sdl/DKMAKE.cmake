@@ -4,7 +4,7 @@
 # https://www.libsdl.org/release/SDL2-2.0.16.zip
 # https://www.libsdl.org/release/SDL2-2.0.18.zip
 
-### DEPENDS ###
+
 WIN_dk_depend(opengl)
 WIN_dk_depend(winmm.lib)
 WIN_dk_lib(imm32.lib)
@@ -42,14 +42,14 @@ if(IOS OR IOSSIM)
 	dk_depend(metal)
 	#dk_define(SDL_VIDEO_RENDER_OGL)
 endif()
-LINUX_dk_depend(opengl)
+    LINUX_dk_depend(opengl)
 RASPBERRY_dk_depend(opengl)
-ANDROID_dk_depend(opengles)
-ANDROID_dk_depend(opensles)
+  ANDROID_dk_depend(opengles)
+  ANDROID_dk_depend(opensles)
 
 
 ## TODO: we can set up everything and from this we can extract all of the information needed to import the library
-# IMPORT_GIT(https://github.com/libsdl-org/SDL)
+# dk_import(https://github.com/libsdl-org/SDL)
 # SDL         = /3rdParty/SDL                                                                             :the library name and the plugin folder it resides in 
 # SDL_main    = 18032979d892639ad4e03584a40a4d205cd2f5fd                                                  :the id of the origin head
 # SDL_version = 1803297                                                                                   :the first 7 digits of the head id
@@ -57,14 +57,6 @@ ANDROID_dk_depend(opensles)
 
 
 dk_import(https://github.com/libsdl-org/SDL.git main)
-#dk_import(https://github.com/libsdl-org/SDL/archive/d9009388c8924b15f74ec38a26cc62ea42b40110.zip)
-#dk_import(https://github.com/libsdl-org/SDL/archive/d9009388c8924b15f74ec38a26cc62ea42b40110.zip)
-#dk_import(https://github.com/libsdl-org/SDL/archive/9d86ec85730e98f6f4d7827f4fda806e9c134f0d.zip)
-#dk_set(SDL_VERSION 1803297)
-#dk_set(SDL_DL https://github.com/libsdl-org/SDL/archive/18032979d892639ad4e03584a40a4d205cd2f5fd.zip)
-#dk_set(SDL_NAME SDL2-${SDL_VERSION})
-#dk_set(SDL ${3RDPARTY}/${SDL_NAME})
-#dk_install(${SDL_DL} sdl ${SDL})
 
 
 ### DKPLUGINS LINK ###
