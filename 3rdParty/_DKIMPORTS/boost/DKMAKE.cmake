@@ -180,7 +180,7 @@ RASPBERRY64_RELEASE_dk_queueCommand(./b2 toolset=gcc address-model=64 variant=re
 ANDROID_dk_msys(./SetupAndroid.sh)
 
 ANDROID32_DEBUG_dk_queueCommand(
-	#setx NDK_ROOT ${ANDROIDNDK} &&
+	#setx NDK_ROOT ${ANDROID-NDK} &&
 	b2.exe
 	toolset=clang-armeabiv7a
 	architecture=arm
@@ -200,7 +200,7 @@ ANDROID32_DEBUG_dk_queueCommand(
 	binary-format=elf )
 
 ANDROID32_RELEASE_dk_queueCommand(
-	#setx NDK_ROOT ${ANDROIDNDK} &&
+	#setx NDK_ROOT ${ANDROID-NDK} &&
 	b2.exe
 	toolset=clang-armeabiv7a
 	architecture=arm
@@ -220,7 +220,7 @@ ANDROID32_RELEASE_dk_queueCommand(
 	binary-format=elf )
 
 ANDROID64_DEBUG_dk_queueCommand(
-	#setx NDK_ROOT ${ANDROIDNDK} &&
+	#setx NDK_ROOT ${ANDROID-NDK} &&
 	b2.exe
 	toolset=clang-arm64v8a
 	architecture=arm
@@ -241,7 +241,7 @@ ANDROID64_DEBUG_dk_queueCommand(
 	binary-format=elf )
 	
 ANDROID64_RELEASE_dk_queueCommand(
-	#setx NDK_ROOT ${ANDROIDNDK} &&
+	#setx NDK_ROOT ${ANDROID-NDK} &&
 	b2.exe
 	toolset=clang-arm64v8a
 	architecture=arm
