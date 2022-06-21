@@ -236,9 +236,11 @@ endmacro()
 ###############################################################################
 # dk_includes(str substr result)
 #
-#	str:(required)
-#	substr:(required)
-#	result:(required)
+#	Test if a string contains a substring
+#
+#	str:(required)		The string to search 
+#	substr:(required)	The substring to search for
+#	result:(required)	Returns true if the str contains the substr. Otherwise returns false
 #
 function(dk_includes str substr result)
 	#DKDEBUGFUNC(${ARGV})
@@ -256,8 +258,8 @@ endfunction()
 #	
 #	https://stackoverflow.com/a/29250496/688352
 #
-#	@variable:(required)
-#	@value:(required)
+#	@variable:(required)	The name of a variable to declair
+#	@value:(required)		The value to set the variable to. 
 #
 function(dk_set variable value)
 	DKDEBUGFUNC(${ARGV})
@@ -350,7 +352,7 @@ macro(dk_dump variable)
 	message(STATUS "${cyan}   LENGTH:  ${variableLength} ${CLR}")
 	message(STATUS "${cyan}   VALUE:   ${${variable}} ${CLR}")
 	message(STATUS "${cyan}############################################################################################${CLR}\n")
-	dk_wait()
+	dk_call(dk_wait)
 endmacro()
 
 
@@ -383,7 +385,7 @@ macro(dk_watchCallback variable access val lst stack)
 	message(STATUS "${cyan}##################################################################################################${CLR}")
 	message(STATUS "${cyan}   Variable watch: variable=${${variable}} access=${access} val=${val} 1st=${1st} stack=${stack}${CLR}")
 	message(STATUS "${cyan}##################################################################################################${CLR}")
-	dk_wait()
+	dk_call(dk_wait)
 endmacro()
 
 
@@ -1237,7 +1239,7 @@ function(dk_install src_path import_name dest_path)
 		list(LENGTH ITEMS count)
 		dk_debug(${count})
 		if(${count} GREATER 1)
-			dk_warn(" Found ${count} items in the ${import_name} import folder. dk_install has not requested to PATCH to the install files. If needed, add PATCH as the last argument to the dk_install or DKIMPORT command in ${DKIMPORTS}/${import_name}/DKMAKE.cmake ")
+			dk_warn(" Found ${count} items in the ${import_name} import folder. dk_install has not requested to PATCH the installed files. If needed, add PATCH as the last argument to the dk_install or dk_import command in ${DKIMPORTS}/${import_name}/DKMAKE.cmake ")
 		endif()
 	endif()
 	file(WRITE ${dest_path}/installed "${dest_filename} ")
@@ -2962,7 +2964,7 @@ function(dk_log args)
 		endif()
 			dk_info("${output}")
 	endforeach()
-	dk_wait()
+	dk_call(dk_wait)
 endfunction()
 
 
