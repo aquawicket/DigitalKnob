@@ -53,7 +53,7 @@ set(dk_disabled_list	 		""		CACHE INTERNAL "")
 #	@msg:(Optional)		A header message to print
 #
 function(dk_todo)
-	if(NOT TODO_ENABLED)
+	if(NOT DKTODO_ENABLED)
 		return()
 	endif()
 	if(${ARGV} GREATER 0)
@@ -64,6 +64,11 @@ function(dk_todo)
 	dk_debug(msg)
 	dk_wait(10)
 endfunction()
+
+function(TEST_dk_todo())
+	dk_todo() #TODO
+endfunction()
+TEST_dk_todo()
 
 ###############################################################################
 # TestReturnValue(args result)
