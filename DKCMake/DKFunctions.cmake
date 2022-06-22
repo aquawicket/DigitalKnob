@@ -1337,8 +1337,8 @@ function(dk_setEnv name value)
 		if(WIN_HOST)
 			dk_info("Setting %${name}% environment variable to ${value}")
 			set(ENV{${name}} ${value})
-			#dk_executeProcess(setx ${name} ${value}) # https://stackoverflow.com/a/69246810
-			execute_process(COMMAND cmd /c setx ${name} ${value})
+			#dk_executeProcess(COMMAND cmd /c setx ${name} ${value}) # https://stackoverflow.com/a/69246810
+			execute_process(COMMAND cmd /c setx ${name} ${value}) # https://stackoverflow.com/a/69246810
 		else()
 			dk_error("dk_setEnv() not implemented on this system")
 		endif()
