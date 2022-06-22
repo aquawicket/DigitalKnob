@@ -4,12 +4,14 @@
 
 dk_depend(msys)
 
-#DKIMORT(https://github.com/xiph/ogg)
-dk_set(OGG_VERSION 1.3.5)
-dk_set(OGG_DL https://ftp.osuosl.org/pub/xiph/releases/ogg/libogg-1.3.5.zip)
-dk_set(OGG_NAME libogg-${OGG_VERSION})
-dk_set(OGG ${3RDPARTY}/${OGG_NAME})
-dk_install(${OGG_DL} ogg ${OGG})
+#dk_import(https://github.com/xiph/ogg)
+dk_import(https://ftp.osuosl.org/pub/xiph/releases/ogg/libogg-1.3.5.zip)
+
+#dk_set(OGG_VERSION 1.3.5)
+#dk_set(OGG_DL https://ftp.osuosl.org/pub/xiph/releases/ogg/libogg-1.3.5.zip)
+#dk_set(OGG_NAME libogg-${OGG_VERSION})
+#dk_set(OGG ${3RDPARTY}/${OGG_NAME})
+#dk_install(${OGG_DL} ogg ${OGG})
 
 
 ### DKPLUGINS LINK ###
