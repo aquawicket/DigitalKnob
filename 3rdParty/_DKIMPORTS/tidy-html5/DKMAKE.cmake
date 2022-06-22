@@ -4,14 +4,12 @@
 # https://github.com/htacg/tidy-html5/archive/refs/tags/5.8.0.zip
 
 
-dk_import(https://github.com/htacg/tidy-html5.git)
-
 #dk_set(TIDY-HTML5_DL https://github.com/htacg/tidy-html5/archive/refs/tags/5.8.0.zip)
 #dk_set(TIDY-HTML5_VERSION 5.8.0)
 #dk_set(TIDY-HTML5_NAME tidy_html5_${TIDY-HTML5_VERSION})
 #dk_set(TIDY-HTML5 ${3RDPARTY}/${TIDY-HTML5_NAME})
 #dk_install(${TIDY-HTML5_DL} tidy-html5 ${TIDY-HTML5})
-
+dk_import(https://github.com/htacg/tidy-html5.git)
 
 
 ### LINK ###
@@ -31,11 +29,12 @@ ANDROID_dk_libDebug(${TIDY-HTML5}/${OS}/${DEBUG_DIR}/libtidy.a)
 ANDROID_dk_libRelease(${TIDY-HTML5}/${OS}/${RELEASE_DIR}/libtidy.a)
 
 
-### COMPILE ###
+### GENERATE ###
 dk_setPath(${TIDY-HTML5}/${BUILD_DIR})
 dk_queueCommand(${DKCMAKE_BUILD} -DBUILD_SHARED_LIB=OFF ${ZLIB_CMAKE} ${TIDY-HTML5})
 
 
+### COMPILE ###
 dk_visualStudio(${TIDY-HTML5_NAME} tidy.sln tidy-static)
 #WIN_dk_visualStudio(${TIDY-HTML5_NAME} tidy.sln tidy-static)
 dk_xcode(${TIDY-HTML5_NAME} tidy-static)

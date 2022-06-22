@@ -6,21 +6,18 @@
 # 
 # FIXME: Let's replace this with boost::stacktrace for cross platform support.
 # https://www.boost.org/doc/libs/1_75_0/doc/html/stacktrace.html
-#
+
 if(NOT WIN_HOST)
 	return()
 endif()
 
 
-
-dk_import(https://github.com/ConnectedVision/connectedvision/raw/master/build_env/Conan/packages/StackWalker/2014.12.28/2.3.0/stackwalker-2014-12-28.zip)
-
-### VERSION ###
 #dk_set(STACKWALKER_VERSION 2013-01-07-v14)
 #dk_set(STACKWALKER_NAME stackwalker-${STACKWALKER_VERSION})
 #dk_set(STACKWALKER_DL https://github.com/ConnectedVision/connectedvision/raw/master/build_env/Conan/packages/StackWalker/2014.12.28/2.3.0/stackwalker-2014-12-28.zip)
 #dk_set(STACKWALKER ${3RDPARTY}/${STACKWALKER_NAME})
 #dk_install(${STACKWALKER_DL} stackwalker ${STACKWALKER})
+dk_import(https://github.com/ConnectedVision/connectedvision/raw/master/build_env/Conan/packages/StackWalker/2014.12.28/2.3.0/stackwalker-2014-12-28.zip)
 
 
 ### LINK ###

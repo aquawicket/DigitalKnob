@@ -16,7 +16,7 @@ LINUX_HOST_dk_set(GIT_EXE ${GIT}/git)
 ### INSTALL ###
 dk_info("looking for git at ${GIT_EXE}")
 if(NOT EXISTS ${GIT_EXE})
-	dk_info("git NOT FOUND")
+	dk_debug("git NOT FOUND")
 	dk_info("Installing git ${CMAKE_VERSION}")
 	if(WIN_HOST)	
 		WIN_dk_setPath(${DKDOWNLOAD})

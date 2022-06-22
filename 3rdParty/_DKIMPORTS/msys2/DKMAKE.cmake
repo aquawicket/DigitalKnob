@@ -25,5 +25,4 @@ if(NOT EXISTS ${MSYS2}/msys2.exe)
 	dk_command(${MSYS2}/usr/bin/bash.exe -c "pacman -Sy --noconfirm")
 	dk_command(${MSYS2}/usr/bin/bash.exe -c "pacman -S --noconfirm --needed base-devel mingw-w64-x86_64-make")
 	dk_command(${MSYS2}/usr/bin/bash.exe -c "pacman -S --noconfirm --needed base-devel mingw-w64-x86_64-diffutils")
-	
 endif()

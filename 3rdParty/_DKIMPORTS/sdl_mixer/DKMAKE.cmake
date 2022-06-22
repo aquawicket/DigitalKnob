@@ -1,24 +1,19 @@
 # https://github.com/libsdl-org/SDL_mixer
 # https://www.libsdl.org/projects/SDL_mixer
 
-### DEPENDS ###
+
 dk_depend(smpeg2)
 dk_depend(ogg)
 dk_depend(vorbis)
 
-
-
-#dk_import(https://github.com/libsdl-org/SDL_mixer.git main PATCH)
-#dk_import(https://github.com/libsdl-org/SDL_mixer PATCH)
-
-dk_import(https://www.libsdl.org/projects/SDL_mixer/release/SDL2_mixer-2.0.1.zip PATCH)
 
 #dk_set(SDL_MIXER_VERSION 2.0.1)
 #dk_set(SDL_MIXER_NAME SDL2_mixer-${SDL_MIXER_VERSION})
 #dk_set(SDL_MIXER_DL https://www.libsdl.org/projects/SDL_mixer/release/SDL2_mixer-2.0.1.zip)
 #dk_set(SDL_MIXER ${3RDPARTY}/SDL2_mixer-${SDL_MIXER_VERSION})
 #dk_install(${SDL_MIXER_DL} sdl_mixer ${SDL_MIXER} PATCH)
-
+dk_import(https://www.libsdl.org/projects/SDL_mixer/release/SDL2_mixer-2.0.1.zip PATCH)
+#dk_import(https://github.com/libsdl-org/SDL_mixer.git main PATCH)
 
 
 ### DKPLUGINS LINK ###
@@ -35,12 +30,12 @@ ANDROID_dk_libDebug(${SDL_MIXER}/${OS}/${DEBUG_DIR}/obj/local/armeabi-v7a/libSDL
 ANDROID_dk_libRelease(${SDL_MIXER}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/libSDL2_mixer.a)
 
 
-
-### COMPILE ###
+### GENERATE ###
 dk_setPath(${SDL_MIXER}/${BUILD_DIR})
 dk_queueCommand(${DKCMAKE_BUILD} ${SDL_CMAKE} ${VORBIS_CMAKE} ${OGG_CMAKE} ${SMPEG2_CMAKE} ${SDL_MIXER})
 
 
+### COMPILE ###
 dk_visualStudio(${SDL_MIXER_NAME} SDLMIXER.sln SDLMIXER)
 #WIN_dk_visualStudio(${SDL_MIXER_NAME} SDLMIXER.sln SDLMIXER)
 dk_xcode(${SDL_MIXER_NAME} SDLMIXER)

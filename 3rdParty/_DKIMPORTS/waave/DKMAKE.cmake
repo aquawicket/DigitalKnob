@@ -1,6 +1,5 @@
 # https://sourceforge.net/projects/waave/files/waave/waave-3.01.tar.gz
 
-### DEPENDS ###
 dk_depend(ffmpeg-dev)
 dk_depend(ffmpeg-shared)
 dk_depend(ffmpeg-static)
@@ -24,30 +23,28 @@ ANDROID_dk_libRelease(${WAAVE}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/libwaa
 ### COMPILE ###
 dk_setPath(${WAAVE}/${BUILD_DIR})
 
-WIN32_dk_queueCommand(${DKCMAKE_BUILD} ${FFMPEG_WIN} ${SDL2_WIN} ${WAAVE})
-WIN64_dk_queueCommand(${DKCMAKE_BUILD} ${FFMPEG_WIN} ${SDL2_WIN} ${WAAVE})
+WIN_dk_queueCommand(${DKCMAKE_BUILD} ${FFMPEG_WIN} ${SDL2_WIN} ${WAAVE})
+#WIN64_dk_queueCommand(${DKCMAKE_BUILD} ${FFMPEG_WIN} ${SDL2_WIN} ${WAAVE})
 WIN_dk_visualStudio(${WAAVE_NAME} waave.sln waave)
 
 
-
-MAC64_dk_queueCommand(${DKCMAKE_BUILD} ${WAAVE})
+#MAC64_dk_queueCommand(${DKCMAKE_BUILD} ${WAAVE})
+MAC_dk_queueCommand(${DKCMAKE_BUILD} ${WAAVE})
 MAC_dk_xcode(${WAAVE_NAME} waave)
 
 
-
-IOS64_dk_queueCommand(${DKCMAKE_BUILD} ${WAAVE})
+#IOS64_dk_queueCommand(${DKCMAKE_BUILD} ${WAAVE})
+IOS_dk_queueCommand(${DKCMAKE_BUILD} ${WAAVE})
 IOS_dk_xcode(${WAAVE_NAME} waave)
 
 
-
-IOSSIM64_dk_queueCommand(${DKCMAKE_BUILD} ${WAAVE})
+#IOSSIM64_dk_queueCommand(${DKCMAKE_BUILD} ${WAAVE})
+IOSSIM_dk_queueCommand(${DKCMAKE_BUILD} ${WAAVE})
 IOSSIM_dk_xcode(${WAAVE_NAME} waave)
-
 
 
 LINUX_DEBUG_dk_queueCommand(${DKCMAKE_BUILD} ${WAAVE})
 LINUX_DEBUG_dk_queueCommand(make waave)
-
 
 LINUX_RELEASE_dk_queueCommand(${DKCMAKE_BUILD} ${WAAVE})
 LINUX_RELEASE_dk_queueCommand(make waave)

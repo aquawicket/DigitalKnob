@@ -4,9 +4,6 @@
 # https://github.com/xz-mirror/xz/archive/refs/tags/v5.2.5.zip
 
 
-
-
-### cmake ###
 dk_import(https://github.com/xz-mirror/xz/archive/20e7a33e2d59c6a814447d3991f21e2702174b20.zip)
 
 
@@ -19,7 +16,6 @@ dk_import(https://github.com/xz-mirror/xz/archive/20e7a33e2d59c6a814447d3991f21e
 #dk_set(XZ_NAME xz-${XZ_VERSION})
 #dk_set(XZ ${3RDPARTY}/${XZ_NAME})
 #dk_install(${XZ_DL} xz ${XZ})
-
 
 
 dk_define(LZMA_API_STATIC)

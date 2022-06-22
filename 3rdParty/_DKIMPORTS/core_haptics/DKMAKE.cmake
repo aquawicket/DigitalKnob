@@ -1,4 +1,5 @@
 # https://developer.apple.com/documentation/corehaptics?language=objc
+
 if(NOT MAC_HOST)
 	return()
 endif()
@@ -6,6 +7,6 @@ endif()
 
 FIND_LIBRARY(CoreHaptics_lib CoreHaptics)
 if(NOT CoreHaptics_lib)
-	dk_warn("Could not locate CoreHaptics framework")
+	dk_error("Could not locate CoreHaptics framework")
 endif()
 APPLE_dk_lib(${CoreHaptics_lib})

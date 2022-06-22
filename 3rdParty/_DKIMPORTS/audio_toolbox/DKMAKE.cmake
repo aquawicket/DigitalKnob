@@ -1,4 +1,5 @@
 # https://developer.apple.com/documentation/audiotoolbox
+
 if(NOT MAC_HOST)
 	return()
 endif()
@@ -6,6 +7,6 @@ endif()
 
 FIND_LIBRARY(AudioToolbox_lib AudioToolbox)
 if(NOT AudioToolbox_lib)
-	dk_warn("Could not locate AudioToolbox framework")
+	dk_error("Could not locate AudioToolbox framework")
 endif()
 APPLE_dk_lib(${AudioToolbox_lib})

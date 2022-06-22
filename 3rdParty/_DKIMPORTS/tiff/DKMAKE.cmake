@@ -3,14 +3,13 @@
 # https://download.osgeo.org/libtiff/
 
 
-dk_import(https://gitlab.com/libtiff/libtiff.git)
-#dk_import(https://gitlab.com/libtiff/libtiff/-/archive/v4.2.0/libtiff-v4.2.0.zip)
-
 #dk_set(TIFF_VERSION 4.2.0)
 #dk_set(TIFF_DL https://gitlab.com/libtiff/libtiff/-/archive/v4.2.0/libtiff-v4.2.0.zip)
 #dk_set(TIFF_NAME tiff-${TIFF_VERSION})
 #dk_set(TIFF ${3RDPARTY}/${TIFF_NAME})
 #dk_install(${TIFF_DL} tiff ${TIFF})
+#dk_import(https://gitlab.com/libtiff/libtiff/-/archive/v4.2.0/libtiff-v4.2.0.zip)
+dk_import(https://gitlab.com/libtiff/libtiff.git)
 
 
 ### DKPLUGINS LINK ###
@@ -42,10 +41,12 @@ RASPBERRY_dk_set(TIFF_CMAKE "-DCMAKE_C_FLAGS_DEBUG=-I${TIFF}/${OS}/${DEBUG_DIR}"
 ANDROID_dk_set(TIFF_CMAKE -DTIFF_INCLUDE_DIR=${TIFF}/libtiff -DTIFF_INCLUDE_DIR2=${TIFF}/${OS} -DTIFF_LIBRARY_DEBUG=${TIFF}/${OS}/${DEBUG_DIR}/libtiff-static.a -DTIFF_LIBRARY_RELEASE=${TIFF}/${OS}/${RELEASE_DIR}/libtiff-static.a)
 	
 
-### COMPILE ###
+### GENERATE ###
 dk_setPath(${TIFF}/${BUILD_DIR})
 dk_queueCommand(${DKCMAKE_BUILD} ${TIFF})
 
+
+### COMPILE ###
 WIN_dk_visualStudio(${TIFF_NAME} tiff.sln tiff-static)
 MAC_dk_xcode(${TIFF_NAME} tiff-static)
 IOS_dk_xcode(${TIFF_NAME} tiff-static)

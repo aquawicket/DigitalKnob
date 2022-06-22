@@ -1,6 +1,3 @@
-if(NOT WIN_HOST)
-	return()
-endif()
 # Information
 # https://docs.microsoft.com/en-us/cpp/build/building-on-the-command-line?view=msvc-160
 # https://docs.microsoft.com/en-us/visualstudio/msbuild/msbuild?view=vs-2019
@@ -13,8 +10,11 @@ endif()
 # VS2019  https://aka.ms/vs/16/release/vs_community.exe
 # VS2022  https://aka.ms/vs/17/release/vs_community.exe
 
+if(NOT WIN_HOST)
+	return()
+endif()
 
-### DEPENDS ###
+
 ANDROID_dk_depend(ant)
 ANDROID_dk_depend(android-sdk)
  
