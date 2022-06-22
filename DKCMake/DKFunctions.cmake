@@ -65,7 +65,7 @@ function(dk_todo)
 	dk_wait(10)
 endfunction()
 
-function(TEST_dk_todo())
+function(TEST_dk_todo)
 	dk_todo() #TODO
 endfunction()
 TEST_dk_todo()
