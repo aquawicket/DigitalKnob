@@ -1798,7 +1798,7 @@ function(dk_generateCmake plugin_name)
 #	file(APPEND ${plugin_path}/CMakeLists.txt "cmake_policy(SET CMP0002 OLD)\n")
 #	file(APPEND ${plugin_path}/CMakeLists.txt "include(${DKCMAKE}/DKFunctions.cmake)\n")
 #	file(APPEND ${plugin_path}/CMakeLists.txt "include(${DKCMAKE}/DKVariables.cmake)\n")
-	file(APPEND ${plugin_path}/CMakeLists.txt "include(\$ENV{DKCMAKE}/DK.cmake)\n")
+	file(APPEND ${plugin_path}/CMakeLists.txt "include(\$ENV{DKCMAKE}DK.cmake)\n")
 		
 	file(APPEND ${plugin_path}/CMakeLists.txt "project(${plugin_name})\n")
 
