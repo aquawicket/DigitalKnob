@@ -23,7 +23,7 @@
 # SOFTWARE.
 include_guard()
 
-include($ENV{DKCMAKE}DK.cmake)
+include($ENV{DKCMAKE}/DK.cmake)
 #include(DKFunctions.cmake)
 #include(DKFileSystem.cmake)
 #include(DKVariables.cmake)
