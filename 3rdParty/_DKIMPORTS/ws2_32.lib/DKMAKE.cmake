@@ -5,9 +5,8 @@ endif()
 
 
 #FIND_LIBRARY(libWs2_32 Ws2_32.lib) #does not work
-if(NOT EXISTS Ws2_32.lib)
-	dk_error("Could not locate Ws2_32.lib")
-endif()
+#	dk_error("Could not locate Ws2_32.lib")
+#endif()
 #dk_debug("libWs2_32 = ${libWs2_32}")
 
 WIN_dk_lib(Ws2_32.lib)
