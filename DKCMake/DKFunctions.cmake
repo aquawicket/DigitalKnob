@@ -22,7 +22,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 include_guard()
-
+include($ENV{DKCMAKE}DK.cmake)
 
 # Extra Documentation
 # https://asitdhal.medium.com/cmake-functions-and-macros-22293041519f
@@ -41,13 +41,6 @@ set(PRINT_FUNCTION_NAMES 		1 		CACHE INTERNAL "")
 set(PRINT_FUNCTION_ ARGUMENTS 	1 		CACHE INTERNAL "")
 set(dk_disabled_list	 		""		CACHE INTERNAL "")
 
-
-## Load DK.cmake ##############################################################
-get_filename_component(path ${CMAKE_SOURCE_DIR} ABSOLUTE)
-string(FIND "${path}" "digitalknob" pos)
-string(SUBSTRING ${path} 0 ${pos} path)
-set(ENV{DIGITALKNOB} ${path}digitalknob)
-include($ENV{DIGITALKNOB}/DK/DKCMake/DK.cmake)
 
 
 ###############################################################################
@@ -1350,7 +1343,6 @@ function(dk_setEnv name value)
 		endif()
 	endif()
 endfunction()
-dk_setEnv(DIGITALKNOB ${DIGITALKNOB})
 
 
 ###############################################################################

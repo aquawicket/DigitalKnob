@@ -22,6 +22,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 include_guard()
+include($ENV{DKCMAKE}DK.cmake)
 
 
 # FIXME: work to remove this
@@ -33,7 +34,6 @@ endif(COMMAND cmake_policy)
 ###############################################################
 ## Set variables for paths
 ###############################################################
-dk_setDigitalknobPath()
 dk_set(DKCMAKE ${DIGITALKNOB}/DK/DKCMake)
 dk_set(DKPLUGINS ${DIGITALKNOB}/DK/DKPlugins)
 dk_set(3RDPARTY ${DIGITALKNOB}/DK/3rdParty)
