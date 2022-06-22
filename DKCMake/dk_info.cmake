@@ -9,6 +9,12 @@ dk_load(dk_color) #TODO:  move this into the function
 #	@msg:(required) The message to print
 #
 macro(dk_info msg)
+	#message(STATUS "dk_info(${ARGV})")
+	string(REPLACE " " "" var ${msg})
 	dk_call(dk_updateLogInfo)
-	message(STATUS ${H_black}${STACK_HEADER}${CLR}${white}${msg}${CLR})
+	if(${var})
+		message(STATUS "${H_black}${STACK_HEADER}${CLR}${white}VARIABLE: \${${var}} = ${${var}}${CLR}")
+	else()
+		message(STATUS ${H_black}${STACK_HEADER}${CLR}${white}${msg}${CLR})
+	endif()
 endmacro()

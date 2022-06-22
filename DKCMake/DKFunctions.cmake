@@ -44,6 +44,8 @@ set(PRINT_FUNCTION_NAMES 		1 		CACHE INTERNAL "")
 set(PRINT_FUNCTION_ ARGUMENTS 	1 		CACHE INTERNAL "")
 set(dk_disabled_list	 		""		CACHE INTERNAL "")
 
+# Test varaiable printing
+dk_info(DIGITALKNOB)
 
 ###############################################################################
 # dk_todo(msg)
