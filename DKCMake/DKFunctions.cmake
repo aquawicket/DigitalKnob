@@ -61,16 +61,13 @@ set(dk_disabled_list	 		""		CACHE INTERNAL "")
 #set(DKCMAKE ${DIGITALKNOB}/DK/DKCMake)
 
 get_filename_component(path ${CMAKE_SOURCE_DIR} ABSOLUTE)			# path			= %USERNAME%/digitalknob/DK/DKCMake OR %USERNAME%/DK/DKPlugin/DKLibName
-string(FIND "${path}" "digitalknob" pos)							# pos			= 23
-string(SUBSTRING ${path} 0 ${pos} output)							# output		= %USERNAME%/
-set(DIGITALKNOB "${output}digitalknob")								# DIGITALKNOB	= %USERNAME%/digitalknob
-set(DKCMAKE ${DIGITALKNOB}/DK/DKCMake)								# DKCMAKE		= %USERNAME%/digitalknob/DK/DKCMake
-message(STATUS "DIGITALKNOB = ${DIGITALKNOB}")
-message(STATUS "DKCMAKE = ${DKCMAKE}")
+string(FIND "${path}" "digitalknob" pos)
+string(SUBSTRING ${path} 0 ${pos} path)								# output		= %USERNAME%/
+include(${path}digitalknob/DK/DKCMake/DK.cmake)
 
 
 ### INIT ######################################################################
-include(${DKCMAKE}/DK.cmake)
+
 set(DKFunctions_ext ${DKCMAKE}/DKFunctions_ext.cmake)
 file(REMOVE ${DKFunctions_ext})
 
