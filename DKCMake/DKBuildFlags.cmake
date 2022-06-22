@@ -90,10 +90,14 @@ dk_set(LINUX_GXX   /usr/bin/g++)
 
 # Visual C++ variables 
 dk_set(MSVC_CL      C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.30.30705/bin/Hostx64/x86/cl.exe)
-dk_set(MINGW32_GCC  C:/Users/Administrator/digitalknob/DK/3rdParty/mingw32-8.1.0/bin/gcc.exe)
-dk_set(MINGW32_GXX  C:/Users/Administrator/digitalknob/DK/3rdParty/mingw32-8.1.0/bin/g++.exe)
-dk_set(MINGW64_GCC  C:/Users/Administrator/digitalknob/DK/3rdParty/mingw64-8.1.0/bin/gcc.exe)
-dk_set(MINGW64_GXX  C:/Users/Administrator/digitalknob/DK/3rdParty/mingw64-8.1.0/bin/g++.exe)
+#dk_set(MINGW32_GCC  C:/Users/Administrator/digitalknob/DK/3rdParty/mingw32-8.1.0/bin/gcc.exe)
+#dk_set(MINGW32_GXX  C:/Users/Administrator/digitalknob/DK/3rdParty/mingw32-8.1.0/bin/g++.exe)
+#dk_set(MINGW64_GCC  C:/Users/Administrator/digitalknob/DK/3rdParty/mingw64-8.1.0/bin/gcc.exe)
+#dk_set(MINGW64_GXX  C:/Users/Administrator/digitalknob/DK/3rdParty/mingw64-8.1.0/bin/g++.exe)
+dk_set(MINGW32_GCC  ${MINGW32}/bin/gcc.exe)
+dk_set(MINGW32_GXX  ${MINGW32}/bin/g++.exe)
+dk_set(MINGW64_GCC  ${MINGW64}/bin/gcc.exe)
+dk_set(MINGW64_GXX  ${MINGW64}/bin/g++.exe)
  
 
 # Windows i686 (32)
