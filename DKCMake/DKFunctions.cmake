@@ -43,10 +43,11 @@ set(dk_disabled_list	 		""		CACHE INTERNAL "")
 
 
 ## Load DK.cmake ##############################################################
-get_filename_component(path ${CMAKE_SOURCE_DIR} ABSOLUTE)	# path = %USERNAME%/digitalknob/DK/DKCMake OR %USERNAME%/DK/DKPlugin/DKLibName
+get_filename_component(path ${CMAKE_SOURCE_DIR} ABSOLUTE)
 string(FIND "${path}" "digitalknob" pos)
-string(SUBSTRING ${path} 0 ${pos} path)						# path	= %USERNAME%/
-include(${path}digitalknob/DK/DKCMake/DK.cmake)
+string(SUBSTRING ${path} 0 ${pos} path)
+set(ENV{DIGITALKNOB} ${path}digitalknob)
+include($ENV{DIGITALKNOB}/DK/DKCMake/DK.cmake)
 
 
 ###############################################################################
@@ -501,38 +502,7 @@ endfunction()
 function(dk_getEnv name result)
 	DKDEBUGFUNC(${ARGV})
 	dk_debug("ENVname = $ENV{${name}}")
-	set(${result} ENV{${name}} PARENT_SCOPE)
-endfunction()
-
-
-###############################################################################
-# dk_setEnv(name value)
-#
-#	Set a system environment variable
-#
-#	@name:(required)	The name of the system environment variable to set
-#	@value:(required)	The value to set the system environment vairable to
-#
-function(dk_setEnv name value)
-	DKDEBUGFUNC(${ARGV})
-	dk_debug("ENVname = $ENV{${name}}")
-	if(ENV{${name}})
-		string(FIND $ENV{${name}} ${value} index)
-	else()
-		set(index -1)
-	endif()
-	
-	if(${index} EQUAL -1)
-		dk_debug("ENV{${name}} = $ENV{${name}}")
-		dk_debug("value = ${value}")
-#		if(NOT "$ENV{${name}}" STREQUAL "${value}")
-		if(WIN_HOST)
-			dk_info("Setting %${name}% environment variable to ${value}")
-			dk_executeProcess(setx ${name} ${value}) # https://stackoverflow.com/a/69246810
-		else()
-			dk_error("dk_setEnv() not implemented on this system")
-		endif()
-	endif()
+	set(${result} $ENV{${name}} PARENT_SCOPE)
 endfunction()
 
 
@@ -1348,6 +1318,39 @@ function(dk_executeProcess commands)
 		dk_assert("ERROR: command=${commands}\n  result=${result}\n   error=${error}")
 	endif()
 endfunction()
+
+
+###############################################################################
+# dk_setEnv(name value)
+#
+#	Set a system environment variable
+#
+#	@name:(required)	The name of the system environment variable to set
+#	@value:(required)	The value to set the system environment vairable to
+#
+function(dk_setEnv name value)
+	DKDEBUGFUNC(${ARGV})
+	dk_debug("ENVname = $ENV{${name}}")
+	if(ENV{${name}})
+		string(FIND $ENV{${name}} ${value} index)
+	else()
+		set(index -1)
+	endif()
+	
+	if(${index} EQUAL -1)
+		dk_debug("ENV{${name}} = $ENV{${name}}")
+		dk_debug("value = ${value}")
+#		if(NOT "$ENV{${name}}" STREQUAL "${value}")
+		if(WIN_HOST)
+			dk_info("Setting %${name}% environment variable to ${value}")
+			set(ENV{${name}} ${value})
+			#dk_executeProcess(setx ${name} ${value}) # https://stackoverflow.com/a/69246810
+		else()
+			dk_error("dk_setEnv() not implemented on this system")
+		endif()
+	endif()
+endfunction()
+dk_setEnv(DIGITALKNOB ${DIGITALKNOB})
 
 
 ###############################################################################
