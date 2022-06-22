@@ -19,15 +19,17 @@ get_filename_component(path ${CMAKE_SOURCE_DIR} ABSOLUTE)
 string(FIND "${path}" "digitalknob" pos)
 string(SUBSTRING ${path} 0 ${pos} path)
 set(DIGITALKNOB ${path}digitalknob CACHE INTERNAL "")
-set(ENV{DIGITALKNOB} ${DIGITALKNOB})
-execute_process(COMMAND cmd /c setx DIGITALKNOB ${DIGITALKNOB})
 set(DKCMAKE ${DIGITALKNOB}/DK/DKCMake/ CACHE INTERNAL "")
+set(ENV{DIGITALKNOB} ${DIGITALKNOB})
 set(ENV{DKCMAKE} ${DKCMAKE})
-execute_process(COMMAND cmd /c setx DKCMAKE ${DKCMAKE})
+if(WIN_HOST)
+	execute_process(COMMAND cmd /c setx DIGITALKNOB ${DIGITALKNOB})
+	execute_process(COMMAND cmd /c setx DKCMAKE ${DKCMAKE})
+endif()
 
+
+# include dk funtions
 include(${DKCMAKE}/dk_call.cmake)
-
-# include other dk funtions
 dk_load(dk_debugFunc)
 dk_load(dk_assert)
 dk_load(dk_error)
