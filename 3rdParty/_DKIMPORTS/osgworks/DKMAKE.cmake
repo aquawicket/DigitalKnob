@@ -1,25 +1,23 @@
-### DEPENDS ###
+# osgworks
+
 dk_depend(openscenegraph)
 
 
-#dk_import(http://TODO.com/osgworks-master.zip)
-
-dk_set(OSGWORKS_VERSION master)
-dk_set(OSGWORKS_NAME osgworks-${OSGWORKS_VERSION})
-dk_set(OSGWORKS_DL http://TODO.com/osgworks-master)
-dk_set(OSGWORKS ${3RDPARTY}/${OSGWORKS_NAME})
-dk_set(OSGWORKS_GL2 ${3RDPARTY}/${OSGWORKS_NAME}-GL2)
-IF(OpenGL2)
-	dk_set(OSGWORKS OSGWORKS_GL2)
-ENDIF(OpenGL2)
-dk_install(${OSGWORKS_DL} osgworks ${OSGWORKS})
-
+#dk_set(OSGWORKS_VERSION master)
+#dk_set(OSGWORKS_NAME osgworks-${OSGWORKS_VERSION})
+#dk_set(OSGWORKS_DL http://TODO.com/osgworks-master)
+#dk_set(OSGWORKS ${3RDPARTY}/${OSGWORKS_NAME})
+#dk_set(OSGWORKS_GL2 ${3RDPARTY}/${OSGWORKS_NAME}-GL2)
+#IF(OpenGL2)
+#	dk_set(OSGWORKS OSGWORKS_GL2)
+#ENDIF(OpenGL2)
+#dk_install(${OSGWORKS_DL} osgworks ${OSGWORKS})
+dk_import(http://TODO.com/osgworks-master.zip)
 
 
 ### LINK ###
 dk_include(${OSGWORKS}/include)
 dk_define(OSGWORKS_STATIC)
-
 IF(osgdb_osgobjects)
 	WIN_dk_libDebug(${OSGWORKS}/${OS}/lib/Debug/osgdb_osgobjectsd.lib)
 	WIN_dk_libRelease(${OSGWORKS}/${OS}/lib/${RELEASE}/osgdb_osgobjects.lib)
@@ -27,10 +25,11 @@ IF(osgdb_osgobjects)
 	APPLE_dk_libRelease(${OSGWORKS}/${OS}/lib/${RELEASE}/osgdb_osgobjects.a)
 	LINUX_dk_libDebug(${OSGWORKS}/${OS}/Debug/lib/osgdb_osgobjects.a)
 	LINUX_dk_libRelease(${OSGWORKS}/${OS}/Release/lib/osgdb_osgobjects.a)
+	RASPBERRY_dk_libDebug(${OSGWORKS}/${OS}/Debug/lib/osgdb_osgobjects.a)
+	RASPBERRY_dk_libRelease(${OSGWORKS}/${OS}/Release/lib/osgdb_osgobjects.a)
 	ANDROID_dk_libDebug(${OSGWORKS}/${OS}/Debug/obj/local/armeabi-v7a/libosgdb_osgobjects.a)
 	ANDROID_dk_libRelease(${OSGWORKS}/${OS}/Release/obj/local/armeabi-v7a/libosgdb_osgobjects.a)
-ENDIF(osgdb_osgobjects)
-	
+ENDIF()
 IF(osgdb_osgwTools)
 	WIN_dk_libDebug(${OSGWORKS}/${OS}/lib/Debug/osgdb_osgwToolsd.lib)
 	WIN_dk_libRelease(${OSGWORKS}/${OS}/lib/Release/osgdb_osgwTools.lib)
@@ -38,10 +37,11 @@ IF(osgdb_osgwTools)
 	APPLE_dk_libRelease(${OSGWORKS}/${OS}/lib/${RELEASE}/osgdb_osgwTools.a)
 	LINUX_dk_libDebug(${OSGWORKS}/${OS}/Debug/lib/osgdb_osgwTools.a)
 	LINUX_dk_libRelease(${OSGWORKS}/${OS}/Release/lib/osgdb_osgwTools.a)
+	RASPBERRY_dk_libDebug(${OSGWORKS}/${OS}/Debug/lib/osgdb_osgwTools.a)
+	RASPBERRY_dk_libRelease(${OSGWORKS}/${OS}/Release/lib/osgdb_osgwTools.a)
 	ANDROID_dk_libDebug(${OSGWORKS}/${OS}/Debug/obj/local/armeabi-v7a/libosgdb_osgwTools.a)
 	ANDROID_dk_libRelease(${OSGWORKS}/${OS}/Release/obj/local/armeabi-v7a/libosgdb_osgwTools.a)
-ENDIF(osgdb_osgwTools)
-	
+ENDIF()
 IF(osgdb_skeleton)
 	WIN_dk_libDebug(${OSGWORKS}/${OS}/lib/Debug/osgdb_skeletond.lib)
 	WIN_dk_libRelease(${OSGWORKS}/${OS}/lib/Release/osgdb_skeleton.lib)
@@ -49,10 +49,11 @@ IF(osgdb_skeleton)
 	APPLE_dk_libRelease(${OSGWORKS}/${OS}/lib/${RELEASE}/osgdb_skeleton.a)
 	LINUX_dk_libDebug(${OSGWORKS}/${OS}/Debug/lib/osgdb_skeleton.a)
 	LINUX_dk_libRelease(${OSGWORKS}/${OS}/Release/lib/osgdb_skeleton.a)
+	RASPBERRY_dk_libDebug(${OSGWORKS}/${OS}/Debug/lib/osgdb_skeleton.a)
+	RASPBERRY_dk_libRelease(${OSGWORKS}/${OS}/Release/lib/osgdb_skeleton.a)
 	ANDROID_dk_libDebug(${OSGWORKS}/${OS}/Debug/obj/local/armeabi-v7a/libosgdb_skeleton.a)
 	ANDROID_dk_libRelease(${OSGWORKS}/${OS}/Release/obj/local/armeabi-v7a/libosgdb_skeleton.a)
-ENDIF(osgdb_skeleton)
-	
+ENDIF()
 IF(osgwControls)
 	WIN_dk_libDebug(${OSGWORKS}/${OS}/lib/Debug/osgwControlsd.lib)
 	WIN_dk_libRelease(${OSGWORKS}/${OS}/lib/Release/osgwControls.lib)
@@ -60,10 +61,11 @@ IF(osgwControls)
 	APPLE_dk_libRelease(${OSGWORKS}/${OS}/lib/${RELEASE}/libosgwControls.a)
 	LINUX_dk_libDebug(${OSGWORKS}/${OS}/Debug/lib/libosgwControls.a)
 	LINUX_dk_libRelease(${OSGWORKS}/${OS}/Release/lib/libosgwControls.a)
+	RASPBERRY_dk_libDebug(${OSGWORKS}/${OS}/Debug/lib/libosgwControls.a)
+	RASPBERRY_dk_libRelease(${OSGWORKS}/${OS}/Release/lib/libosgwControls.a)
 	ANDROID_dk_libDebug(${OSGWORKS}/${OS}/Debug/obj/local/armeabi-v7a/libosgwControls.a)
 	ANDROID_dk_libRelease(${OSGWORKS}/${OS}/Release/obj/local/armeabi-v7a/libosgwControls.a)
-ENDIF(osgwControls)
-	
+ENDIF()
 IF(osgwMx)
 	WIN_dk_libDebug(${OSGWORKS}/${OS}/lib/Debug/osgwMxd.lib)
 	WIN_dk_libRelease(${OSGWORKS}/${OS}/lib/Release/osgwMx.lib)
@@ -71,10 +73,11 @@ IF(osgwMx)
 	APPLE_dk_libRelease(${OSGWORKS}/${OS}/lib/${RELEASE}/libosgwMx.a)
 	LINUX_dk_libDebug(${OSGWORKS}/${OS}/Debug/lib/libosgwMx.a)
 	LINUX_dk_libRelease(${OSGWORKS}/${OS}/Release/lib/libosgwMx.a)
+	RASPBERRY_dk_libDebug(${OSGWORKS}/${OS}/Debug/lib/libosgwMx.a)
+	RASPBERRY_dk_libRelease(${OSGWORKS}/${OS}/Release/lib/libosgwMx.a)
 	ANDROID_dk_libDebug(${OSGWORKS}/${OS}/Debug/obj/local/armeabi-v7a/libosgwMx.a)
 	ANDROID_dk_libRelease(${OSGWORKS}/${OS}/Release/obj/local/armeabi-v7a/libosgwMx.a)
-ENDIF(osgwMx)
-	
+ENDIF()
 IF(osgwQuery)
 	WIN_dk_libDebug(${OSGWORKS}/${OS}/lib/Debug/osgwQueryd.lib)
 	WIN_dk_libRelease(${OSGWORKS}/${OS}/lib/Release/osgwQuery.lib)
@@ -82,10 +85,11 @@ IF(osgwQuery)
 	APPLE_dk_libRelease(${OSGWORKS}/${OS}/lib/${RELEASE}/libosgwQuery.a)
 	LINUX_dk_libDebug(${OSGWORKS}/${OS}/Debug/lib/libosgwQuery.a)
 	LINUX_dk_libRelease(${OSGWORKS}/${OS}/Release/lib/libosgwQuery.a)
+	RASPBERRY_dk_libDebug(${OSGWORKS}/${OS}/Debug/lib/libosgwQuery.a)
+	RASPBERRY_dk_libRelease(${OSGWORKS}/${OS}/Release/lib/libosgwQuery.a)
 	ANDROID_dk_libDebug(${OSGWORKS}/${OS}/Debug/obj/local/armeabi-v7a/libosgwQuery.a)
 	ANDROID_dk_libRelease(${OSGWORKS}/${OS}/Release/obj/local/armeabi-v7a/libosgwQuery.a)
-ENDIF(osgwQuery)
-	
+ENDIF()
 IF(osgwTools)
 	WIN_dk_libDebug(${OSGWORKS}/${OS}/lib/Debug/osgwToolsd.lib)
 	WIN_dk_libRelease(${OSGWORKS}/${OS}/lib/Release/osgwTools.lib)
@@ -93,38 +97,40 @@ IF(osgwTools)
 	APPLE_dk_libRelease(${OSGWORKS}/${OS}/lib/${RELEASE}/libosgwTools.a)
 	LINUX_dk_libDebug(${OSGWORKS}/${OS}/Debug/lib/libosgwTools.a)
 	LINUX_dk_libRelease(${OSGWORKS}/${OS}/Release/lib/libosgwTools.a)
+	RASPBERRY_dk_libDebug(${OSGWORKS}/${OS}/Debug/lib/libosgwTools.a)
+	RASPBERRY_dk_libRelease(${OSGWORKS}/${OS}/Release/lib/libosgwTools.a)
 	ANDROID_dk_libDebug(${OSGWORKS}/${OS}/Debug/obj/local/armeabi-v7a/libosgwTools.a)
 	ANDROID_dk_libRelease(${OSGWORKS}/${OS}/Release/obj/local/armeabi-v7a/libosgwTools.a)
-ENDIF(osgwTools)
+ENDIF()
 
 
-### COMPILE ###
+### generate ###
 dk_setPath(${OSGWORKS}/${BUILD_DIR})
 
 WIN_dk_queueCommand(${DKCMAKE_BUILD} "-DOSGInstallType=Source And Build Tree" -DOSGBuildRoot=${OSG}/${OS} -DOSGSourceRoot=${OSG} -DOSGWORKS_BUILD_APPS=OFF -DOSGWORKS_INSTALL_DATA=OFF -DDIRECTINPUT_ARCH_x64=OFF -DBoost_INCLUDE_DIR=OFF ${OSGWORKS})
-WIN_dk_visualStudio(osgworks-master osgWorks.sln)
 
+#MAC_dk_queueCommand(${DKCMAKE_BUILD} "-DOSGInstallType=Source And Build Tree" -DOSGBuildRoot=${OSG}/${OS} -DOSGSourceRoot=${OSG} -DOSGWORKS_BUILD_APPS=OFF -DOSGWORKS_INSTALL_DATA=OFF -DDIRECTINPUT_ARCH_x64=OFF -DBoost_INCLUDE_DIR=OFF ${OSGWORKS})
+#IOS_dk_queueCommand(${DKCMAKE_BUILD} "-DOSGInstallType=Source And Build Tree" -DOSGBuildRoot=${OSG}/${OS} -DOSGSourceRoot=${OSG} -DOSGWORKS_BUILD_APPS=OFF -DOSGWORKS_INSTALL_DATA=OFF -DDIRECTINPUT_ARCH_x64=OFF -DBoost_INCLUDE_DIR=OFF ${OSGWORKS})
+#IOSSIM_dk_queueCommand(${DKCMAKE_BUILD} "-DOSGInstallType=Source And Build Tree" -DOSGBuildRoot=${OSG}/${OS} -DOSGSourceRoot=${OSG} -DOSGWORKS_BUILD_APPS=OFF -DOSGWORKS_INSTALL_DATA=OFF -DDIRECTINPUT_ARCH_x64=OFF -DBoost_INCLUDE_DIR=OFF ${OSGWORKS})
 
-MAC_dk_queueCommand(${DKCMAKE_BUILD} "-DOSGInstallType=Source And Build Tree" -DOSGBuildRoot=${OSG}/${OS} -DOSGSourceRoot=${OSG} -DOSGWORKS_BUILD_APPS=OFF -DOSGWORKS_INSTALL_DATA=OFF -DDIRECTINPUT_ARCH_x64=OFF -DBoost_INCLUDE_DIR=OFF ${OSGWORKS})
-MAC_dk_xcodeDebug(osgworks-master)
-
-
-IOS_dk_queueCommand(${DKCMAKE_BUILD} "-DOSGInstallType=Source And Build Tree" -DOSGBuildRoot=${OSG}/${OS} -DOSGSourceRoot=${OSG} -DOSGWORKS_BUILD_APPS=OFF -DOSGWORKS_INSTALL_DATA=OFF -DDIRECTINPUT_ARCH_x64=OFF -DBoost_INCLUDE_DIR=OFF ${OSGWORKS})
-IOS_dk_xcodeDebug(osgworks-master)
-
-
-IOSSIM_dk_queueCommand(${DKCMAKE_BUILD} "-DOSGInstallType=Source And Build Tree" -DOSGBuildRoot=${OSG}/${OS} -DOSGSourceRoot=${OSG} -DOSGWORKS_BUILD_APPS=OFF -DOSGWORKS_INSTALL_DATA=OFF -DDIRECTINPUT_ARCH_x64=OFF -DBoost_INCLUDE_DIR=OFF ${OSGWORKS})
-IOSSIM_dk_xcodeDebug(osgworks-master)
-
+APPLE_dk_queueCommand(${DKCMAKE_BUILD} "-DOSGInstallType=Source And Build Tree" -DOSGBuildRoot=${OSG}/${OS} -DOSGSourceRoot=${OSG} -DOSGWORKS_BUILD_APPS=OFF -DOSGWORKS_INSTALL_DATA=OFF -DDIRECTINPUT_ARCH_x64=OFF -DBoost_INCLUDE_DIR=OFF ${OSGWORKS})
 
 LINUX_DEBUG_dk_queueCommand(${DKCMAKE_BUILD} "-DOSGInstallType=Source And Build Tree" -DOSGBuildRoot=${OSG}/${OS}/Debug -DOSGSourceRoot=${OSG} -DOSGWORKS_BUILD_APPS=OFF -DOSGWORKS_INSTALL_DATA=OFF -DDIRECTINPUT_ARCH_x64=OFF -DBoost_INCLUDE_DIR=OFF ${OSGWORKS})
-LINUX_DEBUG_dk_queueCommand(make)
-
 
 LINUX_RELEASE_dk_queueCommand(${DKCMAKE_BUILD} "-DOSGInstallType=Source And Build Tree" -DOSGBuildRoot=${OSG}/${OS}/Release -DOSGSourceRoot=${OSG} -DOSGWORKS_BUILD_APPS=OFF -DOSGWORKS_INSTALL_DATA=OFF -DDIRECTINPUT_ARCH_x64=OFF -DBoost_INCLUDE_DIR=OFF ${OSGWORKS})
-LINUX_RELEASE_dk_queueCommand(make)
-
 
 ANDROID_dk_queueCommand(${DKCMAKE_BUILD} "-DOSGInstallType=Source And Build Tree" -DOSGBuildRoot=${OSG}/${OS} -DOSGSourceRoot=${OSG} -DOSGWORKS_BUILD_APPS=OFF -DOSGWORKS_INSTALL_DATA=OFF -DDIRECTINPUT_ARCH_x64=OFF -DBoost_INCLUDE_DIR=OFF ${OSGWORKS})
-ANDROID_dk_visualStudio(osgworks-master osgWorks.sln)
 
+
+### COMPILE ###
+#WIN_dk_visualStudio(osgworks-master osgWorks.sln)
+dk_visualStudio(osgworks-master osgWorks.sln)
+#MAC_dk_xcodeDebug(osgworks-master)
+#IOS_dk_xcodeDebug(osgworks-master)
+#IOSSIM_dk_xcodeDebug(osgworks-master)
+dk_xcodeDebug(osgworks-master)
+#LINUX_DEBUG_dk_queueCommand(make)
+#LINUX_RELEASE_dk_queueCommand(make)
+LINUX_dk_queueCommand(make)
+RASPBERRY_dk_queueCommand(make)
+#ANDROID_dk_visualStudio(osgworks-master osgWorks.sln)

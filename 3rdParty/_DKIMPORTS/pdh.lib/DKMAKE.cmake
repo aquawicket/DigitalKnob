@@ -1,5 +1,5 @@
-if(NOT WIN_HOST)
-	return()
-endif()
+#if(NOT WIN_HOST)
+#	return()
+#endif()
 
 WIN_dk_lib(pdh.lib)
