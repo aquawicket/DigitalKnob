@@ -31,7 +31,7 @@ include($ENV{DKCMAKE}DK.cmake)
 
 ### SETTINGS ##################################################################
 set(DKTODO_ENABLED				1		CACHE INTERNAL "")
-set(DKDEBUG_ENABLED				0		CACHE INTERNAL "")
+set(DKDEBUG_ENABLED				1		CACHE INTERNAL "")
 set(DKDEBUGFUNC_ENABLED			0		CACHE INTERNAL "")
 set(WAIT_ON_ERRORS				1		CACHE INTERNAL "")
 set(WAIT_ON_WARNINGS			0		CACHE INTERNAL "")
