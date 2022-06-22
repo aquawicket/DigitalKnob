@@ -307,7 +307,9 @@ foreach(plugin ${dkdepend_list})
 	endif()
 endforeach()
 
-dk_deleteEmptyDirectories(${CMAKE_INSTALL_PREFIX})
+if(INSTALL_DKLIBS)
+	dk_deleteEmptyDirectories(${CMAKE_INSTALL_PREFIX})
+endif()
 
 if(NOT DKAPP)
 	return()
