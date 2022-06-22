@@ -30,8 +30,11 @@ include($ENV{DKCMAKE}DK.cmake)
 
 
 ### SETTINGS ##################################################################
+set(DKTODO_ENABLED				1		CACHE INTERNAL "")
 set(DKDEBUG_ENABLED				0		CACHE INTERNAL "")
 set(DKDEBUGFUNC_ENABLED			0		CACHE INTERNAL "")
+set(WAIT_ON_ERRORS				1		CACHE INTERNAL "")
+set(WAIT_ON_WARNINGS			0		CACHE INTERNAL "")
 set(HALT_ON_ERRORS				0		CACHE INTERNAL "")
 set(HALT_ON_WARNINGS			0		CACHE INTERNAL "")
 set(PRINT_CALL_DETAILS 			1		CACHE INTERNAL "")
@@ -42,6 +45,25 @@ set(PRINT_FUNCTION_ ARGUMENTS 	1 		CACHE INTERNAL "")
 set(dk_disabled_list	 		""		CACHE INTERNAL "")
 
 
+###############################################################################
+# dk_todo(msg)
+#
+#	print a TODO message and wait 10 seconds
+#
+#	@msg:(Optional)		A header message to print
+#
+function(dk_todo)
+	if(NOT TODO_ENABLED)
+		return()
+	endif()
+	if(${ARGV} GREATER 0)
+		set(msg ${ARGV0})
+	else()
+		set(msg "TODO:")
+	endif()
+	dk_debug(msg)
+	dk_wait(10)
+endfunction()
 
 ###############################################################################
 # TestReturnValue(args result)
@@ -1337,7 +1359,7 @@ function(dk_setEnv name value)
 		if(WIN_HOST)
 			dk_info("Setting %${name}% environment variable to ${value}")
 			set(ENV{${name}} ${value})
-			#dk_executeProcess(COMMAND cmd /c setx ${name} ${value}) # https://stackoverflow.com/a/69246810  #FIXME
+			#dk_executeProcess(setx ${name} ${value}) # https://stackoverflow.com/a/69246810		#FIXME
 			execute_process(COMMAND cmd /c setx ${name} ${value}) # https://stackoverflow.com/a/69246810
 		else()
 			dk_error("dk_setEnv() not implemented on this system")
@@ -3654,6 +3676,35 @@ function(dk_import2 url)
 		#We have DL, NAME and VERSION
 		#Goto dk_install(DL, name, VERSION)
 endfunction()
+
+
+function(dk_getAppDirectory result)
+	set(USE_32BIT 1)
+	if(WIN_HOST)
+		set(appDirectory "C:/Program Files")
+		if(${USE_32BIT} AND ${WIN64_HOST})
+			set(appDirectory "C:/Program Files (x86)")
+		endif()
+	elseif(MAC_HOST)
+		dk_todo() # TODO
+		set(appDirectory "/")
+	elseif(IOS_HOST)
+		dk_todo() # TODO
+		set(appDirectory "/")
+	elseif(LINUX_HOST)
+		dk_todo() # TODO
+		set(appDirectory "/")
+	elseif(RASPBERRY_HOST)
+		dk_todo() # TODO
+		set(appDirectory "/")
+	elseif(ANDROID_ANDROID)
+		dk_todo() # TODO
+		set(appDirectory "/")
+	endif()
+	set(${result} ${appDirectory} PARENT_SCOPE)
+endfunction()
+
+
 
 include(${DKFunctions_ext})
 
