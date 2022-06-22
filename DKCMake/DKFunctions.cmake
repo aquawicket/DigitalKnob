@@ -1314,10 +1314,10 @@ function(dk_executeProcess commands)
 		set(command ${commands} WORKING_DIRECTORY ${CURRENT_DIR}) # add WORKING_DIRECTORY if missing
 	endif()	
 	
-	dk_info("")
-	dk_info("*** dk_executeProcess ***")
-	dk_info("-> ${commands}")
-	dk_info("")
+	#dk_info("")
+	#dk_info("*** dk_executeProcess ***")
+	dk_info("\n-> ${commands}\n")
+	#dk_info("")
 	
 	if(WIN_HOST)
 		execute_process(COMMAND cmd /c ${commands} RESULT_VARIABLE result ERROR_VARIABLE error) # FIXME: Do we always need  cmd /c  here?
@@ -3678,6 +3678,11 @@ function(dk_import2 url)
 endfunction()
 
 
+###############################################################################
+# dk_getAppDirectory(result)
+#
+#	Get the OS default app directory
+#
 function(dk_getAppDirectory result)
 	set(USE_32BIT 1)
 	if(WIN_HOST)
@@ -3686,26 +3691,91 @@ function(dk_getAppDirectory result)
 			set(appDirectory "C:/Program Files (x86)")
 		endif()
 	elseif(MAC_HOST)
-		dk_todo() # TODO
+		dk_todo() #TODO
 		set(appDirectory "/")
 	elseif(IOS_HOST)
-		dk_todo() # TODO
+		dk_todo() #TODO
 		set(appDirectory "/")
 	elseif(LINUX_HOST)
-		dk_todo() # TODO
+		dk_todo() #TODO
 		set(appDirectory "/")
 	elseif(RASPBERRY_HOST)
-		dk_todo() # TODO
+		dk_todo() #TODO
 		set(appDirectory "/")
 	elseif(ANDROID_ANDROID)
-		dk_todo() # TODO
+		dk_todo() #TODO
 		set(appDirectory "/")
 	endif()
 	set(${result} ${appDirectory} PARENT_SCOPE)
 endfunction()
 
 
+###############################################################################
+# toLower(str result)
+#
+#	Convert a string to lower case
+#
+function(toLower str result)
+	string(TOLOWER "${str}" upper)
+	set(${result} ${out} PARENT_SCOPE)
+endfunction()
+
+
+###############################################################################
+# toUpper(str result)
+#
+#	Convert a string to upper case
+#
+function(toUpper str result)
+	string(TOUPPER "${str}" upper)
+	set(${result} ${upper} PARENT_SCOPE)
+endfunction()
+
+
+###############################################################################
+# dk_removeExtension(path result)
+#
+#	Remove the extension from a file path
+#
+function(dk_removeExtension path result)
+	dk_todo() #TODO
+	set(${result} ${out} PARENT_SCOPE)
+endfunction()
+
+
+###############################################################################
+# dk_getAppName(path result)
+#
+#	Get the app name from a file path
+#
+function(dk_getAppName path result)
+	dk_getFilename(${path} fileName)
+	dk_removeExtension(${fileName} fileNameNoExt)
+	dk_debug(fileNameNoExt = ${fileNameNoExt})
+	set(${result} ${fileNameNoExt} PARENT_SCOPE)
+endfunction()
+
+
+###############################################################################
+# dk_createPlugin(url)
+#
+#	Generate a folder/DKMAKE.cmake for a new plugin
+#
+function(dk_createPlugin url)
+	dk_todo() #TODO
+	dk_getAppName(${url} App_Name)
+	dk_debug(App_Name)					# My_App
+	dk_toLower(${App_Name} app_name)
+	dk_debug(app_name)					# my_app
+	dk_toUpper(${APP_NAME} APP_NAME)
+	dk_debug(APP_NAME)					# MY_APP
+	dk_getAppDirectory(appDirectory)
+	if(NOT exe_path)
+		dk_set(exe_path ${appDirectory}/${App_Name}/${App_Name}.exe)
+	endif()
+endfunction()
+
+
 
 include(${DKFunctions_ext})
-
 #dk_watch(dk_getExtension)
