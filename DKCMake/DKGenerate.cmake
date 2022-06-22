@@ -90,7 +90,7 @@ foreach(plugin ${dkdepend_list})
 		break()
 		
 	endif()
-	#dk_info("plugin_path = ${plugin_path}")
+	dk_debug(plugin_path)
 
 	#This executes the 3rdParty library builds, and dkplugin setup, creates CMakeLists.txt files
 	include(${plugin_path}/DKMAKE.cmake)
