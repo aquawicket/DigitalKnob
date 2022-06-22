@@ -20,12 +20,8 @@
 # Ommit frame pointers              OFF
 
 
-
-### DEPENDS ###
-#if(IOS OR IOSSIM)
-	dk_depend(imageio)
-	dk_depend(mobile_core_services)
-#endif()
+dk_depend(imageio)
+dk_depend(mobile_core_services)
 dk_depend(zlib)
 dk_depend(giflib)
 dk_depend(libpng)
@@ -35,13 +31,13 @@ dk_depend(tiff)
 dk_depend(sdl)
 
 
-dk_import(https://github.com/libsdl-org/SDL_image.git main PATCH)
-#dk_import(https://github.com/libsdl-org/SDL_image/archive/915b794f2c6d8247f775000ee0b96f660cbb9331.zip PATCH)
-#dk_import(https://github.com/libsdl-org/SDL_image/archive/fc370dc71d7726023c063618c7b04c1ed30637e2.zip PATCH)
 #dk_set(SDL_IMAGE_VERSION main)
 #dk_set(SDL_IMAGE_NAME SDL2_image-${SDL_IMAGE_VERSION})
 #dk_set(SDL_IMAGE ${3RDPARTY}/${SDL_IMAGE_NAME})
 #dk_install(${SDL_IMAGE_DL} sdl_image ${SDL_IMAGE}) #NOPATCH)
+#dk_import(https://github.com/libsdl-org/SDL_image/archive/915b794f2c6d8247f775000ee0b96f660cbb9331.zip PATCH)
+#dk_import(https://github.com/libsdl-org/SDL_image/archive/fc370dc71d7726023c063618c7b04c1ed30637e2.zip PATCH)
+dk_import(https://github.com/libsdl-org/SDL_image.git main PATCH)
 
 
 ### DKPLUGINS LINK ###
@@ -83,10 +79,12 @@ ANDROID_dk_set(SDL_IMAGE_CMAKE
 -DSDL2_IMAGE_LIBRARY_RELEASE=${SDL_IMAGE}/${OS}/lib/${RELEASE_DIR}/SDL_image.a)
 
 
-### COMPILE ###
+### GENERATE ###
 dk_setPath(${SDL_IMAGE}/${BUILD_DIR})
 dk_queueCommand(${DKCMAKE_BUILD} -DSDLIMAGE_SUPPORT_GIF=ON -DSDLIMAGE_SUPPORT_JPEG=ON -DSDLIMAGE_SUPPORT_PNG=ON -DSDLIMAGE_SUPPORT_WEBP=OFF ${SDL_CMAKE} ${ZLIB_CMAKE} ${TIFF_CMAKE} ${LIBPNG_CMAKE} ${LIBJPEG-TURBO_CMAKE} ${GIF_CMAKE} ${SDL_IMAGE})
 
+
+### COMPILE ###
 WIN_dk_visualStudio(${SDL_IMAGE_NAME} SDLIMAGE.sln SDLIMAGE)
 MAC_dk_xcode(${SDL_IMAGE_NAME} SDLIMAGE)
 IOS_dk_xcode(${SDL_IMAGE_NAME} SDLIMAGE)

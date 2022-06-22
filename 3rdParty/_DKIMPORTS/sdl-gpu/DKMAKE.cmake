@@ -1,17 +1,16 @@
 # https://github.com/grimfang4/sdl-gpu
 
-
 dk_depend(sdl)
 
-dk_import(https://github.com/grimfang4/sdl-gpu.git)
 
-#dk_import(https://github.com/grimfang4/sdl-gpu/archive/b21d5bed8d1bbbbc236060a04ce076950faac05c.zip)
-#dk_import(https://github.com/grimfang4/sdl-gpu/archive/b21d5bed8d1bbbbc236060a04ce076950faac05c.zip)
 #dk_set(SDL-GPU_VERSION master)
 #dk_set(SDL-GPU_NAME sdl-gpu-${SDL-GPU_VERSION})
 #dk_set(SDL-GPU_DL https://github.com/grimfang4/sdl-gpu/archive/refs/heads/master.zip)
 #dk_set(SDL-GPU ${3RDPARTY}/${SDL-GPU_NAME})
 #dk_install(${SDL-GPU_DL} sdl-gpu ${SDL-GPU})
+#dk_import(https://github.com/grimfang4/sdl-gpu/archive/b21d5bed8d1bbbbc236060a04ce076950faac05c.zip)
+#dk_import(https://github.com/grimfang4/sdl-gpu/archive/b21d5bed8d1bbbbc236060a04ce076950faac05c.zip)
+dk_import(https://github.com/grimfang4/sdl-gpu.git)
 
 
 ### DKPLUGINS LINK ###
@@ -33,16 +32,18 @@ ANDROID_dk_libRelease(${SDL-GPU}/${OS}/SDL_gpu-VS/lib/Release/libSDL2_gpu_s.a)
 #dk_lib(${SDL-GPU}/${OS}/${RELEASE_DIR}/libsdl-gpu.a)
 
 
-
-### COMPILE ###
+### GENERATE ###
 dk_setPath(${SDL-GPU}/${BUILD_DIR})
 dk_queueCommand(${DKCMAKE_BUILD} ${SDL_CMAKE} ${SDL-GPU})
 
 
-WIN_dk_visualStudio(${SDL-GPU_NAME} SDL_gpu.sln SDL_gpu)
-MAC_dk_xcode(${SDL-GPU_NAME} SDL_gpu)
-IOS_dk_xcode(${SDL-GPU_NAME} SDL_gpu)
-IOSSIM_dk_xcode(${SDL-GPU_NAME} SDL_gpu)
+### COMPILE ###
+#WIN_dk_visualStudio(${SDL-GPU_NAME} SDL_gpu.sln SDL_gpu)
+dk_visualStudio(${SDL-GPU_NAME} SDL_gpu.sln SDL_gpu)
+#MAC_dk_xcode(${SDL-GPU_NAME} SDL_gpu)
+#IOS_dk_xcode(${SDL-GPU_NAME} SDL_gpu)
+#IOSSIM_dk_xcode(${SDL-GPU_NAME} SDL_gpu)
+dk_xcode(${SDL-GPU_NAME} SDL_gpu)
 LINUX_dk_queueCommand(make SDL_gpu)
 RASPBERRY_dk_queueCommand(make SDL_gpu)
-ANDROID_dk_visualStudio(${SDL-GPU_NAME} SDL_gpu.sln SDL_gpu)
+#ANDROID_dk_visualStudio(${SDL-GPU_NAME} SDL_gpu.sln SDL_gpu)
