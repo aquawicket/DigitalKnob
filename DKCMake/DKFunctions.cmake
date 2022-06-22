@@ -1146,50 +1146,42 @@ function(dk_install src_path import_name dest_path)
 		dk_assert("ERROR: 2nd parameter in dk_install() (${DKIMPORTS}/${import_name}) does not exist")
 	endif()
 	if(EXISTS ${dest_path}/installed)
-#		dk_info("${import_name} already installed")
+		dk_info("${import_name} already installed")
 		if("${ARGN}" STREQUAL "PATCH")
 			dk_patch(${import_name} ${dest_path})
 		endif()
 		return()
 	endif()
 	dk_debug(" ")
-	#dk_debug("src_path = ${src_path}")
 	dk_debug(src_path)
 	dk_getDirectory(${src_path} src_directory)
-	#dk_debug("src_directory = ${src_directory}")
 	dk_debug(src_directory)
 	dk_getFilename(${src_path} src_filename)
-	#dk_debug("src_filename = ${src_filename}")
 	dk_debug(src_filename)
 	dk_getExtension(${src_filename} src_extension)
-	#dk_debug("src_extension = ${src_extension}")
 	dk_debug(src_extension)
 	dk_debug(" ")
-	#dk_debug("dest_path = ${dest_path}")
 	dk_debug(dest_path)
 	dk_getDirectory(${dest_path} dest_directory)
-	#dk_debug("dest_directory = ${dest_directory}")
 	dk_debug(dest_directory)
 	dk_getFilename(${dest_path} dest_filename)
-	#dk_debug("dest_filename = ${dest_filename}")
 	dk_debug(dest_filename)
 	dk_getExtension(${dest_filename} dest_extension)
-	#dk_debug("dest_extension = ${dest_extension}")
 	dk_debug(dest_extension)
 	dk_debug(" ")
 	
 	# let's check that the scr_filename has at least the name of the target in it somewhere, or else we gotta rename it
 	string(TOLOWER ${src_filename} src_filename_lower)
-	#string(FIND ${src_filename_lower} ${import_name} index)
-	dk_includes(${src_filename_lower} ${import_name} result)
-	#if(${index} EQUAL -1)
-	if(NOT ${result})
+	string(FIND ${src_filename_lower} ${import_name} index)
+	#dk_includes(${src_filename_lower} ${import_name} result)
+	if(${index} EQUAL -1)
+	#if(NOT ${result})
 		dk_debug("The download filename ${src_filename} does not contaian the import name ${import_name}")
 		string(TOLOWER ${dest_filename} dest_filename_lower)
-		#string(FIND ${dest_filename_lower} ${import_name} index)
-		dk_includes(${dest_filename_lower} ${import_name} result)
-		#if(${index} EQUAL -1)
-		if(NOT ${result})
+		string(FIND ${dest_filename_lower} ${import_name} index)
+		#dk_includes(${dest_filename_lower} ${import_name} result)
+		#if(NOT ${result})
+		if(${index} EQUAL -1)
 			set(dl_filename "${import_name}-${dest_filename}${src_extension}") 
 		else()
 			set(dl_filename "${dest_filename}${src_extension}")
@@ -1216,10 +1208,10 @@ function(dk_install src_path import_name dest_path)
 		elseif(${src_extension} STREQUAL ".bz2")
 			set(FILETYPE "Archive")
 		elseif(${src_extension} STREQUAL ".exe")
-			#string(FIND ${src_filename} ".sfx.exe" index)
-			dk_includes(${src_filename} ".sfx.exe" result)
-			#if(${index} GREATER -1)
-			if(${result})
+			string(FIND ${src_filename} ".sfx.exe" index)
+			#dk_includes(${src_filename} ".sfx.exe" result)
+			#if(${result})
+			if(${index} GREATER -1)
 				set(FILETYPE "Archive")
 			else()
 				set(FILETYPE "Executable")
@@ -3178,7 +3170,9 @@ endfunction()
 #	exe url DL:	https://website.com/executable.exe 				dk_importDownload(url) #lib #id #PATCH
 #
 #	@url: The online path the .git or file to import
-# 
+#
+#	TODO: https://cmake.org/cmake/help/latest/module/FetchContent.html 
+#
 function(dk_import) #url #Lib #ID #Patch
 	set(url ${ARGV0})
 	DKDEBUGFUNC(${ARGV})
@@ -3198,13 +3192,12 @@ dk_aliasFunctions("dk_import")
 function(dk_importGit url) #branch #PATCH
 	DKDEBUGFUNC(${ARGV})
 	string(REPLACE "/" ";" url_list ${url})  #split url path into list
-#	foreach(item ${url_list})
-#		#dk_debug("item = ${item}")
-#		dk_debug(item)
-#	endforeach()
+	foreach(item ${url_list})
+		dk_debug(item)
+	endforeach()
 	
 	list(LENGTH url_list url_list_size)
-#	dk_debug("url_list is ${url_list_size}")
+	dk_debug(url_list_size)
 
 	# GITHUB
 	if(${url_list_size} LESS 5)
@@ -3230,11 +3223,9 @@ function(dk_importGit url) #branch #PATCH
 		endif()
 	
 		list(GET url_list 3 org)
-#		#dk_debug("org = ${org}")
-#		dk_debug(org)
+		dk_debug(org)
 	
 		list(GET url_list 4 Lib)
-#		#dk_debug("Lib = ${Lib}")
 		dk_debug(Lib)
 		
 		string(FIND ${Lib} ".git" index)
@@ -3244,8 +3235,7 @@ function(dk_importGit url) #branch #PATCH
 	endif()
 	
 	string(TOLOWER ${Lib} Lib)
-#	#dk_debug("Lib = ${Lib}")
-#	dk_debug(Lib)
+	dk_debug(Lib)
 	
 	math(EXPR last "${url_list_size}-1")  #OUTPUT_FORMAT DECIMAL)")  CMake 3.13+
 	list(GET url_list ${last} url${last})
@@ -3255,8 +3245,7 @@ function(dk_importGit url) #branch #PATCH
 		if(NOT ID)
 			string(SUBSTRING ${url${last}} 0 ${index} ID)
 			string(TOLOWER ${ID} FOLDER)
-#			#dk_debug("$(FOLDER) = ${FOLDER}")
-#			dk_debug(FOLDER)
+			dk_debug(FOLDER)
 		endif()
 	endif()
 	
@@ -3271,7 +3260,6 @@ function(dk_importGit url) #branch #PATCH
 		dk_assert("$(LIBVAR) is invalid")
 		return()
 	endif()
-	#dk_debug("LIBVAR = ${LIBVAR}")
 	dk_debug(LIBVAR)
 	
 	dk_set(${LIBVAR}_FOLDER ${FOLDER})
@@ -3279,7 +3267,6 @@ function(dk_importGit url) #branch #PATCH
 		dk_assert("${LIBVAR}_FOLDER is invalid")
 		return()
 	endif()
-	#dk_debug("${LIBVAR}_FOLDER = ${${LIBVAR}_FOLDER}")
 	dk_debug(${LIBVAR}_FOLDER)
 	
 	dk_set(${LIBVAR}_BRANCH ${branch})
@@ -3287,7 +3274,6 @@ function(dk_importGit url) #branch #PATCH
 		dk_assert("${LIBVAR}_BRANCH is invalid")
 		return()
 	endif()
-	#dk_debug("${LIBVAR}_BRANCH = ${${LIBVAR}_BRANCH}")
 	dk_debug(${LIBVAR}_BRANCH)
 	
 	dk_set(${LIBVAR}_NAME ${FOLDER}-${${LIBVAR}_BRANCH})
@@ -3295,7 +3281,6 @@ function(dk_importGit url) #branch #PATCH
 		dk_assert("${LIBVAR}_NAME is invalid")
 		return()
 	endif()
-	#dk_debug("${LIBVAR}_NAME = ${${LIBVAR}_NAME}")
 	dk_debug(${LIBVAR}_NAME)
 	
 	dk_set(${LIBVAR} ${3RDPARTY}/${${LIBVAR}_NAME})
@@ -3303,7 +3288,6 @@ function(dk_importGit url) #branch #PATCH
 		dk_assert("${${LIBVAR}} is invalid")
 		return()
 	endif()
-	#dk_debug("${${LIBVAR}} = ${${LIBVAR}}")
 	dk_debug(${${LIBVAR}})
 	
 	if(NOT EXISTS ${${LIBVAR}}/.git)
@@ -3340,13 +3324,11 @@ function(dk_importDownload url) #Lib #ID #Patch
 	# must contain https://github.com/
 	# split into list converting / to divider ;
 	string(REPLACE "/" ";" url_list ${url})
-#	foreach(item ${url_list})
-#		#dk_debug("item = ${item}")
-#		dk_debug(item)
-#	endforeach()
+	foreach(item ${url_list})
+		dk_debug(item)
+	endforeach()
 
 	list(LENGTH url_list url_length)
-	#dk_debug("url_length = ${url_length}")
 	dk_debug(url_length)
 	
 #	if(${url_length} LESS 5)
@@ -3357,7 +3339,6 @@ function(dk_importDownload url) #Lib #ID #Patch
 	if(${ARGC} GREATER 1)
 		if(NOT "${ARGV1}" STREQUAL "PATCH")
 			set(Lib ${ARGV1})
-			#dk_debug("Lib = ${Lib}")
 			dk_debug(Lib)
 		endif()
 	endif()
@@ -3365,46 +3346,36 @@ function(dk_importDownload url) #Lib #ID #Patch
 	if(${ARGC} GREATER 2)
 		if(NOT "${ARGV2}" STREQUAL "PATCH")
 			set(ID ${ARGV2})
-			#dk_debug("ID = ${ID}")
 			dk_debug(ID)
 		endif()
 	endif()
 	
 	if(NOT Lib)
-		#dk_debug("CMAKE_CURRENT_LIST_DIR = ${CMAKE_CURRENT_LIST_DIR}")
 		dk_debug(CMAKE_CURRENT_LIST_DIR)
 		get_filename_component(Lib ${CMAKE_CURRENT_LIST_DIR} NAME)
-		#dk_debug("Lib = ${Lib}")
 		dk_debug(Lib)
+#		dk_assert("Lib invalid")
 		
-#	dk_assert("Lib invalid")
-		
-#	string(FIND ${url} "github.com" result)
-#	if(${result} EQUAL -1)
-#		string(FIND ${url} "gitlab.com" result)
+#		string(FIND ${url} "github.com" result)
 #		if(${result} EQUAL -1)
-#			dk_assert("Lib invalid and The url does not contain 'github.com' OR 'gitlab.com'")
-#			return()
+#			string(FIND ${url} "gitlab.com" result)
+#			if(${result} EQUAL -1)
+#				dk_assert("Lib invalid and The url does not contain 'github.com' OR 'gitlab.com'")
+#				return()
+#			endif()
 #		endif()
-#	endif()
-	
-#	list(GET url_list 3 org)
-#	#dk_debug("org = ${org}")
-#	dk_debug(org)
-	
-#	list(GET url_list 4 Lib)
-#	#dk_debug("Lib = ${Lib}")
-#	dk_debug(Lib)
+#		list(GET url_list 3 org)
+#		dk_debug(org)
+#		list(GET url_list 4 Lib)
+#		dk_debug(Lib)
 	endif()
 	
 	string(TOUPPER ${Lib} LIB)
 	dk_set(LIBVAR ${LIB})
-	#dk_debug("LIBVAR = ${LIBVAR}")
 	dk_debug(LIBVAR)
 	
 	string(TOLOWER ${Lib} FOLDER)
 	dk_set(${LIBVAR}_FOLDER ${FOLDER})
-	#dk_debug("${LIBVAR}_FOLDER = ${${LIBVAR}_FOLDER}}")
 	dk_debug(${LIBVAR}_FOLDER)
 	
 	# check current folder name
@@ -3416,7 +3387,6 @@ function(dk_importDownload url) #Lib #ID #Patch
 	
 	math(EXPR last "${url_length}-1")  #OUTPUT_FORMAT DECIMAL)")  CMake 3.13+
 	list(GET url_list ${last} url${last})
-	
 	
 	######### add recognizable file extensions ##########
 	string(FIND ${url${last}} ".7z" index)
@@ -3486,8 +3456,7 @@ function(dk_importDownload url) #Lib #ID #Patch
 		set(ZIP ${ID}.zip)
 #		string(SUBSTRING ${ZIP} 0 7 TAG)
 		dk_set(${LIBVAR}_DL https://github.com/${org}/${Lib}/archive/${ZIP})
-#		#dk_debug("ID = ${ID}")
-#		dk_debug(ID)
+		dk_debug(ID)
 		
 		## update DKMAKE.cmake file
 		dk_copy(${CMAKE_CURRENT_LIST_FILE} ${CMAKE_CURRENT_LIST_FILE}.BACKUP TRUE)
@@ -3507,16 +3476,10 @@ function(dk_importDownload url) #Lib #ID #Patch
 	dk_set(${LIBVAR} ${3RDPARTY}/${${LIBVAR}_NAME})
 	
 	if(${LIBVAR} AND ${LIBVAR}_BRANCH AND ${LIBVAR}_NAME AND ${LIBVAR}_DL)
-		#dk_debug("${LIBVAR}_BRANCH = ${${LIBVAR}_BRANCH}")
 		dk_debug(${LIBVAR}_BRANCH)
-		#dk_debug("${LIBVAR}_DL = ${${LIBVAR}_DL}")
 		dk_debug(${LIBVAR}_DL)
-		#dk_debug("${LIBVAR}_NAME = ${${LIBVAR}_NAME}")
 		dk_debug(${LIBVAR}_NAME)
-		#dk_debug("${LIBVAR} = ${${LIBVAR}}")
 		dk_debug(${LIBVAR})
-		
-		#dk_debug("dk_install(${${LIBVAR}_DL} ${FOLDER} ${${LIBVAR}})")
 		dk_install(${${LIBVAR}_DL} ${FOLDER} ${${LIBVAR}} ${ARGN})
 	else()
 		dk_assert("One of the required LIBVAR:(${LIBVAR}) variables vas not satisfied")
