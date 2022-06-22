@@ -1,5 +1,5 @@
 include_guard()
-dk_load(dk_color)
+dk_load(dk_color) #TODO:  move this into the function
 
 ##################################################################################
 # dk_trace(msg)

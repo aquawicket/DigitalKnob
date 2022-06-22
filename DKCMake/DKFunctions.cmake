@@ -45,20 +45,28 @@ set(dk_disabled_list	 		""		CACHE INTERNAL "")
 ###############################################################################
 # dk_getDigitalknobPath(result)
 #
-function(dk_getDigitalknobPath result)
-	get_filename_component(DIGITALKNOB ${CMAKE_SOURCE_DIR} ABSOLUTE)
-	get_filename_component(FOLDER_NAME ${DIGITALKNOB} NAME)
-	while(NOT FOLDER_NAME STREQUAL "digitalknob")
-		get_filename_component(DIGITALKNOB ${DIGITALKNOB} DIRECTORY)
-		get_filename_component(FOLDER_NAME ${DIGITALKNOB} NAME)
-		if(NOT FOLDER_NAME)
-			message(FATAL_ERROR "Could not locate digitalknob root path")
-		endif()
-	endwhile()
-	set(${result} ${DIGITALKNOB} PARENT_SCOPE)
-endfunction()
-dk_getDigitalknobPath(DIGITALKNOB)
-set(DKCMAKE ${DIGITALKNOB}/DK/DKCMake)
+#function(dk_getDigitalknobPath result)
+#	get_filename_component(DIGITALKNOB ${CMAKE_SOURCE_DIR} ABSOLUTE)
+#	get_filename_component(FOLDER_NAME ${DIGITALKNOB} NAME)
+#	while(NOT FOLDER_NAME STREQUAL "digitalknob")
+#		get_filename_component(DIGITALKNOB ${DIGITALKNOB} DIRECTORY)
+#		get_filename_component(FOLDER_NAME ${DIGITALKNOB} NAME)
+#		if(NOT FOLDER_NAME)
+#			message(FATAL_ERROR "Could not locate digitalknob root path")
+#		endif()
+#	endwhile()
+#	set(${result} ${DIGITALKNOB} PARENT_SCOPE)
+#endfunction()
+#dk_getDigitalknobPath(DIGITALKNOB)
+#set(DKCMAKE ${DIGITALKNOB}/DK/DKCMake)
+
+get_filename_component(path ${CMAKE_SOURCE_DIR} ABSOLUTE)			# path			= %USERNAME%/digitalknob/DK/DKCMake OR %USERNAME%/DK/DKPlugin/DKLibName
+string(FIND "${path}" "digitalknob" pos)							# pos			= 23
+string(SUBSTRING ${path} 0 ${pos} output)							# output		= %USERNAME%/
+set(DIGITALKNOB "${output}digitalknob")								# DIGITALKNOB	= %USERNAME%/digitalknob
+set(DKCMAKE ${DIGITALKNOB}/DK/DKCMake)								# DKCMAKE		= %USERNAME%/digitalknob/DK/DKCMake
+message(STATUS "DIGITALKNOB = ${DIGITALKNOB}")
+message(STATUS "DKCMAKE = ${DKCMAKE}")
 
 
 ### INIT ######################################################################

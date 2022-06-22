@@ -1,4 +1,5 @@
 include_guard()
+dk_load(dk_color) # TODO:  move this into the function
 
 ##################################################################################
 # dk_debugFunc(${ARGV})
@@ -13,12 +14,11 @@ include_guard()
 #
 macro(dk_debugFunc)
 	if(DKDEBUGFUNC_ENABLED)
-		#dk_getFilename(${CMAKE_CURRENT_FUNCTION_LIST_FILE} FILENAME)
 		if(NOT CMAKE_CURRENT_FUNCTION_LIST_FILE)
 			set(CMAKE_CURRENT_FUNCTION_LIST_FILE "unknown")
 		endif()
 		get_filename_component(FILENAME ${CMAKE_CURRENT_FUNCTION_LIST_FILE} NAME)
-		dk_load(dk_color)
+		#dk_getFilename(${CMAKE_CURRENT_FUNCTION_LIST_FILE} FILENAME)
 		if(${ARGC} LESS 1)
 			dk_call(dk_updateLogInfo)
 			message(STATUS "${H_black}${FILENAME}:${CMAKE_CURRENT_FUNCTION_LIST_LINE}->${CLR}${cyan}${CMAKE_CURRENT_FUNCTION}()${CLR}")
