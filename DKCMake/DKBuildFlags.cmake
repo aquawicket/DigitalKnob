@@ -94,8 +94,8 @@ dk_set(MSVC_CL      C:/Program Files/Microsoft Visual Studio/2022/Community/VC/T
 #dk_set(MINGW32_GXX  C:/Users/Administrator/digitalknob/DK/3rdParty/mingw32-i686-8.1.0-release-posix-dwarf-rt_v6-rev0/bin/g++.exe)
 #dk_set(MINGW64_GCC  C:/Users/Administrator/digitalknob/DK/3rdParty/mingw64-x86_64-8.1.0-release-posix-seh-rt_v6-rev0/bin/gcc.exe)
 #dk_set(MINGW64_GXX  C:/Users/Administrator/digitalknob/DK/3rdParty/mingw64-x86_64-8.1.0-release-posix-seh-rt_v6-rev0/bin/g++.exe)
-dk_set(MINGW32 mingw32-i686-8.1.0-release-posix-dwarf-rt_v6-rev0)
-dk_set(MINGW64 mingw64-x86_64-8.1.0-release-posix-seh-rt_v6-rev0)
+dk_set(MINGW32 ${3RDPARTY}/mingw32-i686-8.1.0-release-posix-dwarf-rt_v6-rev0)
+dk_set(MINGW64 ${3RDPARTY}/mingw64-x86_64-8.1.0-release-posix-seh-rt_v6-rev0)
 dk_set(MINGW32_GCC  ${MINGW32}/bin/gcc.exe)
 dk_set(MINGW32_GXX  ${MINGW32}/bin/g++.exe)
 dk_set(MINGW64_GCC  ${MINGW64}/bin/gcc.exe)
@@ -103,24 +103,24 @@ dk_set(MINGW64_GXX  ${MINGW64}/bin/g++.exe)
  
 
 # Windows i686 (32)
-WIN32_dk_set(DKCMAKE_FLAGS                -DBUILD_SHARED_LIBS=OFF -DBUILD_STATIC_LIBS=ON -DCMAKE_POSITION_INDEPENDENT_CODE=ON)
-WIN32_dk_set(DKCMAKE_C_COMPILER           "${MSVC_CL}")
-WIN32_dk_set(DKCMAKE_C_FLAGS              "/DWIN /DWIN32 /D_WINDOWS /D_CRT_SECURE_NO_WARNINGS /D_USING_V110_SDK71_ /std:c17 /nologo /GR /EHsc /Zm500 /Zc:__cplusplus") #/D_WIN32_WINNT=0x0600
-WIN32_dk_set(DKCMAKE_C_FLAGS_DEBUG        "/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG")
-WIN32_dk_set(DKCMAKE_C_FLAGS_RELEASE      "/MT /O2 /Ob2 /DNDEBUG /DRELEASE")
-WIN32_dk_set(DKCMAKE_CXX_COMPILER         "${MSVC_CL}")
-WIN32_dk_set(DKCMAKE_CXX_FLAGS            "/DWIN /DWIN32 /D_WINDOWS /D_CRT_SECURE_NO_WARNINGS /D_USING_V110_SDK71_ /std:c++17 /nologo /GR /EHsc /Zm500 /Zc:__cplusplus") #/D_WIN32_WINNT=0x0600
-WIN32_dk_set(DKCMAKE_CXX_FLAGS_DEBUG      "/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG")
-WIN32_dk_set(DKCMAKE_CXX_FLAGS_RELEASE    "/MT /O2 /Ob2 /DNDEBUG /DRELEASE")
-WIN32_dk_set(DKCONFIGURE_FLAGS            --build=i686-w64-mingw32 --disable-shared --enable-static)
-WIN32_dk_set(DKCONFIGURE_CC               ${MINGW32_GCC})
-WIN32_dk_set(DKCONFIGURE_CFLAGS           "-march=i686 -DWIN -DWIN32 -D_WINDOWS -D_CRT_SECURE_NO_WARNINGS -D_USING_V110_SDK71_ -std=gnu17 -fexceptions") #-D_WIN32_WINNT=0x0600 
-WIN32_dk_set(DKCONFIGURE_CFLAGS_DEBUG     "-DDEBUG -D_DEBUG -g")
-WIN32_dk_set(DKCONFIGURE_CFLAGS_RELEASE   "-DNDEBUG -DRELEASE -O3")
-WIN32_dk_set(DKCONFIGURE_CXX	             ${MINGW32_GXX})
-WIN32_dk_set(DKCONFIGURE_CXXFLAGS         "-march=i686 -DWIN -DWIN32 -D_WINDOWS -D_CRT_SECURE_NO_WARNINGS -D_USING_V110_SDK71_ -std=gnu++17 -frtti -fexceptions") #-D_WIN32_WINNT=0x0600
-WIN32_dk_set(DKCONFIGURE_CXXFLAGS_DEBUG   "-DDEBUG -D_DEBUG -g")
-WIN32_dk_set(DKCONFIGURE_CXXFLAGS_RELEASE "-DNDEBUG -DRELEASE -O3")
+WIN32_dk_set(DKCMAKE_FLAGS					-DBUILD_SHARED_LIBS=OFF -DBUILD_STATIC_LIBS=ON -DCMAKE_POSITION_INDEPENDENT_CODE=ON)
+WIN32_dk_set(DKCMAKE_C_COMPILER				"${MSVC_CL}")
+WIN32_dk_set(DKCMAKE_C_FLAGS				"/DWIN /DWIN32 /D_WINDOWS /D_CRT_SECURE_NO_WARNINGS /D_USING_V110_SDK71_ /std:c17 /nologo /GR /EHsc /Zm500 /Zc:__cplusplus") #/D_WIN32_WINNT=0x0600
+WIN32_dk_set(DKCMAKE_C_FLAGS_DEBUG			"/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG")
+WIN32_dk_set(DKCMAKE_C_FLAGS_RELEASE		"/MT /O2 /Ob2 /DNDEBUG /DRELEASE")
+WIN32_dk_set(DKCMAKE_CXX_COMPILER			"${MSVC_CL}")
+WIN32_dk_set(DKCMAKE_CXX_FLAGS				"/DWIN /DWIN32 /D_WINDOWS /D_CRT_SECURE_NO_WARNINGS /D_USING_V110_SDK71_ /std:c++17 /nologo /GR /EHsc /Zm500 /Zc:__cplusplus") #/D_WIN32_WINNT=0x0600
+WIN32_dk_set(DKCMAKE_CXX_FLAGS_DEBUG		"/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG")
+WIN32_dk_set(DKCMAKE_CXX_FLAGS_RELEASE		"/MT /O2 /Ob2 /DNDEBUG /DRELEASE")
+WIN32_dk_set(DKCONFIGURE_FLAGS				--build=i686-w64-mingw32 --disable-shared --enable-static)
+WIN32_dk_set(DKCONFIGURE_CC					${MINGW32_GCC})
+WIN32_dk_set(DKCONFIGURE_CFLAGS				"-march=i686 -DWIN -DWIN32 -D_WINDOWS -D_CRT_SECURE_NO_WARNINGS -D_USING_V110_SDK71_ -std=gnu17 -fexceptions") #-D_WIN32_WINNT=0x0600 
+WIN32_dk_set(DKCONFIGURE_CFLAGS_DEBUG		"-DDEBUG -D_DEBUG -g")
+WIN32_dk_set(DKCONFIGURE_CFLAGS_RELEASE		"-DNDEBUG -DRELEASE -O3")
+WIN32_dk_set(DKCONFIGURE_CXX				${MINGW32_GXX})
+WIN32_dk_set(DKCONFIGURE_CXXFLAGS			"-march=i686 -DWIN -DWIN32 -D_WINDOWS -D_CRT_SECURE_NO_WARNINGS -D_USING_V110_SDK71_ -std=gnu++17 -frtti -fexceptions") #-D_WIN32_WINNT=0x0600
+WIN32_dk_set(DKCONFIGURE_CXXFLAGS_DEBUG		"-DDEBUG -D_DEBUG -g")
+WIN32_dk_set(DKCONFIGURE_CXXFLAGS_RELEASE	"-DNDEBUG -DRELEASE -O3")
 		
 # Windows x86_64 (64)
 WIN64_dk_set(DKCMAKE_FLAGS                 -DBUILD_SHARED_LIBS=OFF -DBUILD_STATIC_LIBS=ON -DCMAKE_POSITION_INDEPENDENT_CODE=ON)
