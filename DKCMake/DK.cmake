@@ -20,8 +20,10 @@ string(FIND "${path}" "digitalknob" pos)
 string(SUBSTRING ${path} 0 ${pos} path)
 set(DIGITALKNOB ${path}digitalknob CACHE INTERNAL "")
 set(ENV{DIGITALKNOB} ${DIGITALKNOB})
+execute_process(COMMAND cmd /c setx DIGITALKNOB ${DIGITALKNOB})
 set(DKCMAKE ${DIGITALKNOB}/DK/DKCMake/ CACHE INTERNAL "")
 set(ENV{DKCMAKE} ${DKCMAKE})
+execute_process(COMMAND cmd /c setx DKCMAKE ${DKCMAKE})
 
 include(${DKCMAKE}/dk_call.cmake)
 
