@@ -1,21 +1,31 @@
 include_guard()
 
 # Get the /digitalknob path 
-function(dk_getDigitalknobPath result)
-	get_filename_component(DIGITALKNOB ${CMAKE_SOURCE_DIR} ABSOLUTE)
-	get_filename_component(FOLDER_NAME ${DIGITALKNOB} NAME)
-	while(NOT FOLDER_NAME STREQUAL "digitalknob")
-		get_filename_component(DIGITALKNOB ${DIGITALKNOB} DIRECTORY)
-		get_filename_component(FOLDER_NAME ${DIGITALKNOB} NAME)
-		if(NOT FOLDER_NAME)
-			message(FATAL_ERROR "Could not locate digitalknob root path")
-		endif()
-	endwhile()
-	set(${result} ${DIGITALKNOB} PARENT_SCOPE)
-endfunction()
-dk_getDigitalknobPath(DIGITALKNOB)
-set(DKCMAKE ${DIGITALKNOB}/DK/DKCMake)
+#function(dk_getDigitalknobPath result)
+#	get_filename_component(DIGITALKNOB ${CMAKE_SOURCE_DIR} ABSOLUTE)
+#	get_filename_component(FOLDER_NAME ${DIGITALKNOB} NAME)
+#	while(NOT FOLDER_NAME STREQUAL "digitalknob")
+#		get_filename_component(DIGITALKNOB ${DIGITALKNOB} DIRECTORY)
+#		get_filename_component(FOLDER_NAME ${DIGITALKNOB} NAME)
+#		if(NOT FOLDER_NAME)
+#			message(FATAL_ERROR "Could not locate digitalknob root path")
+#		endif()
+#	endwhile()
+#	set(${result} ${DIGITALKNOB} PARENT_SCOPE)
+#endfunction()
+#dk_getDigitalknobPath(DIGITALKNOB)
+#set(DKCMAKE ${DIGITALKNOB}/DK/DKCMake)
 
+
+function(dk_setDigitalknobPath)
+	get_filename_component(path ${CMAKE_SOURCE_DIR} ABSOLUTE)
+	string(FIND "${path}" "digitalknob" pos)
+	string(SUBSTRING ${path} 0 ${pos} path)
+	set(ENV{DIGITALKNOB} ${path}digitalknob)
+	set(DIGITALKNOB $ENV{DIGITALKNOB} CACHE INTERNAL "")
+endfunction()
+dk_setDigitalknobPath()
+#set(DKCMAKE ${DIGITALKNOB}/DK/DKCMake CACHE INTERNAL "")
 
 # Set the system host variables
 if(CMAKE_HOST_WIN32)
@@ -32,7 +42,7 @@ endif()
 
 
 # include the DKCall function
-include(${DKCMAKE}/dk_call.cmake)
+include(${DIGITALKNOB}/DK/DKCMake/dk_call.cmake)
 
 
 # include other dk funtions

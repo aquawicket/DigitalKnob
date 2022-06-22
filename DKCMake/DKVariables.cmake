@@ -33,7 +33,7 @@ endif(COMMAND cmake_policy)
 ###############################################################
 ## Set variables for paths
 ###############################################################
-dk_getDigitalknobPath(DIGITALKNOB)
+dk_setDigitalknobPath()
 dk_set(DKCMAKE ${DIGITALKNOB}/DK/DKCMake)
 dk_set(DKPLUGINS ${DIGITALKNOB}/DK/DKPlugins)
 dk_set(3RDPARTY ${DIGITALKNOB}/DK/3rdParty)

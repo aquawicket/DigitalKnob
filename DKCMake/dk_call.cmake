@@ -1,5 +1,5 @@
 include_guard()
-include(${DKCMAKE}/dk_load.cmake)
+include(${DIGITALKNOB}/DK/DKCMake/dk_load.cmake)
 
 ##################################################################################
 # dk_Call(func)

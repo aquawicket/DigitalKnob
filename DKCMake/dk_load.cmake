@@ -6,5 +6,5 @@ include_guard()
 #	load a ${filename}.cmake file located in the DKCMake path 
 #
 macro(dk_load filename)
-	include(${DKCMAKE}/${filename}.cmake)
+	include(${DIGITALKNOB}/DK/DKCMake/${filename}.cmake)
 endmacro()
