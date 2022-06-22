@@ -42,34 +42,11 @@ set(PRINT_FUNCTION_ ARGUMENTS 	1 		CACHE INTERNAL "")
 set(dk_disabled_list	 		""		CACHE INTERNAL "")
 
 
-###############################################################################
-# dk_getDigitalknobPath(result)
-#
-#function(dk_getDigitalknobPath result)
-#	get_filename_component(DIGITALKNOB ${CMAKE_SOURCE_DIR} ABSOLUTE)
-#	get_filename_component(FOLDER_NAME ${DIGITALKNOB} NAME)
-#	while(NOT FOLDER_NAME STREQUAL "digitalknob")
-#		get_filename_component(DIGITALKNOB ${DIGITALKNOB} DIRECTORY)
-#		get_filename_component(FOLDER_NAME ${DIGITALKNOB} NAME)
-#		if(NOT FOLDER_NAME)
-#			message(FATAL_ERROR "Could not locate digitalknob root path")
-#		endif()
-#	endwhile()
-#	set(${result} ${DIGITALKNOB} PARENT_SCOPE)
-#endfunction()
-#dk_getDigitalknobPath(DIGITALKNOB)
-#set(DKCMAKE ${DIGITALKNOB}/DK/DKCMake)
-
-get_filename_component(path ${CMAKE_SOURCE_DIR} ABSOLUTE)			# path			= %USERNAME%/digitalknob/DK/DKCMake OR %USERNAME%/DK/DKPlugin/DKLibName
+## Load DK.cmake ##############################################################
+get_filename_component(path ${CMAKE_SOURCE_DIR} ABSOLUTE)	# path = %USERNAME%/digitalknob/DK/DKCMake OR %USERNAME%/DK/DKPlugin/DKLibName
 string(FIND "${path}" "digitalknob" pos)
-string(SUBSTRING ${path} 0 ${pos} path)								# output		= %USERNAME%/
+string(SUBSTRING ${path} 0 ${pos} path)						# path	= %USERNAME%/
 include(${path}digitalknob/DK/DKCMake/DK.cmake)
-
-
-### INIT ######################################################################
-
-set(DKFunctions_ext ${DKCMAKE}/DKFunctions_ext.cmake)
-file(REMOVE ${DKFunctions_ext})
 
 
 ###############################################################################
@@ -220,7 +197,8 @@ function(dk_aliasFunctions name)
 	file(APPEND ${DKFunctions_ext} "macro(ANDROID32_RELEASE_${name})\n   if(ANDROID_32 AND RELEASE)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
 	file(APPEND ${DKFunctions_ext} "macro(ANDROID64_RELEASE_${name})\n   if(ANDROID_64 AND RELEASE)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
 endfunction()
-
+set(DKFunctions_ext ${DKCMAKE}/DKFunctions_ext.cmake)
+file(REMOVE ${DKFunctions_ext})
 
 ###############################################################################
 # dk_printAllVariables()
@@ -509,6 +487,21 @@ function(dk_deleteEmptyDirectories path)
 	else()
 		dk_error("Not implemented for this platform")
 	endif()
+endfunction()
+
+
+###############################################################################
+# dk_getEnv(name result)
+#
+#	Get a system environment variable
+#
+#	@name:(required)	The name of the system environment variable to get
+#	@result:			Returns the value of the system environment vairable
+#
+function(dk_getEnv name result)
+	DKDEBUGFUNC(${ARGV})
+	dk_debug("ENVname = $ENV{${name}}")
+	set(${result} ENV{${name}} PARENT_SCOPE)
 endfunction()
 
 
@@ -3666,4 +3659,5 @@ function(dk_import2 url)
 endfunction()
 
 include(${DKFunctions_ext})
+
 #dk_watch(dk_getExtension)
