@@ -47,7 +47,7 @@ set(PRINT_LINE_NUMBERS 			1		CACHE INTERNAL "")
 set(PRINT_FUNCTION_NAMES 		1 		CACHE INTERNAL "")
 set(PRINT_FUNCTION_ ARGUMENTS 	1 		CACHE INTERNAL "")
 set(dk_disabled_list	 		""		CACHE INTERNAL "")
-set(INSTALL_DKLIBS              1		CACHE INTERNAL "")
+set(INSTALL_DKLIBS              0		CACHE INTERNAL "")
 
 
 ###############################################################################

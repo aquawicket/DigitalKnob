@@ -95,7 +95,7 @@ foreach(plugin ${dkdepend_list})
 	
 	#check that each library is using the proper variables. Should be UPPERCASE plugin name.   I.E. boost = BOOST
 	if(NOT ${plugin})
-		dk_assert("${plugin} variable is invalid")
+		dk_error("${plugin} variable is invalid")
 	endif()
 	
 	#NOTE: we won't have the library paths to remove until we've run DKCMake.cmake for the library
