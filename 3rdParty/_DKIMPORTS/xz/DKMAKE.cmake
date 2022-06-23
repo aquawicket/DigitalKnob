@@ -152,6 +152,3 @@ ANDROID_RELEASE_dk_msys(make)
 ANDROID_dk_setPath(${XZ}/${OS})
 ANDROID_dk_queueCommand(${DKCMAKE_BUILD} ${XZ})
 ANDROID_dk_visualStudio(${XZ_NAME} xz.sln liblzma)
-
-
-############################################################################

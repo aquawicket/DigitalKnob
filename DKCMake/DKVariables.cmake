@@ -49,7 +49,6 @@ dk_set(CURRENT_DIR ${DIGITALKNOB})
 dk_set(CMAKE_SUPPRESS_REGENERATION true)
 
 ### Install DBIN binary directory ###
-dk_set(INSTALL_DKLIBS 0)
 if(INSTALL_DKLIBS)
 	dk_set(CMAKE_INSTALL_PREFIX ${DIGITALKNOB}/DKBIN)
 endif()

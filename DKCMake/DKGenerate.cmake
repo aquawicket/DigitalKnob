@@ -66,7 +66,6 @@ dk_buildLog("\n")
 foreach(plugin ${dkdepend_list})
 	dk_set(QUEUE_BUILD OFF)
 	dk_set(LIBLIST "") # used for double checking
-	#dk_set(CMAKE_FILE "")
 	
 	dk_info("############################################################")
 	dk_info("######  Processing   ${plugin} . . .                        ")
@@ -88,12 +87,16 @@ foreach(plugin ${dkdepend_list})
 		DEBUG_LINE()
 		Wait()
 		break()
-		
 	endif()
 	dk_debug(plugin_path)
 
 	#This executes the 3rdParty library builds, and dkplugin setup, creates CMakeLists.txt files
 	include(${plugin_path}/DKMAKE.cmake)
+	
+	#check that each library is using the proper variables. Should be UPPERCASE plugin name.   I.E. boost = BOOST
+	if(NOT ${plugin})
+		dk_assert("${plugin} variable is invalid")
+	endif()
 	
 	#NOTE: we won't have the library paths to remove until we've run DKCMake.cmake for the library
 	# We want to to use this to refresh 3rdParty Plugins

@@ -20,10 +20,12 @@ ANDROID_dk_depend(mingw64)
 dk_set(BOOST_MAJOR 1)
 dk_set(BOOST_MINOR 78)
 dk_set(BOOST_BUILD 0)
-dk_set(BOOST_DL https://versaweb.dl.sourceforge.net/project/boost/boost/1.78.0/boost_1_78_0.zip)
 dk_set(BOOST_VERSION ${BOOST_MAJOR}_${BOOST_MINOR}_${BOOST_BUILD})
 dk_set(BOOST_NAME boost_${BOOST_VERSION})
 dk_set(BOOST ${3RDPARTY}/${BOOST_NAME})
+dk_set(BOOST_DL https://versaweb.dl.sourceforge.net/project/boost/boost/1.78.0/boost_1_78_0.zip)
+
+
 dk_install(${BOOST_DL} boost ${BOOST} PATCH)
 #dk_import(https://versaweb.dl.sourceforge.net/project/boost/boost/1.78.0/boost_1_78_0.zip PATCH)
 #dk_import(https://github.com/boostorg/boost.git)

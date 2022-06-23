@@ -47,6 +47,7 @@ set(PRINT_LINE_NUMBERS 			1		CACHE INTERNAL "")
 set(PRINT_FUNCTION_NAMES 		1 		CACHE INTERNAL "")
 set(PRINT_FUNCTION_ ARGUMENTS 	1 		CACHE INTERNAL "")
 set(dk_disabled_list	 		""		CACHE INTERNAL "")
+set(INSTALL_DKLIBS              1		CACHE INTERNAL "")
 
 
 ###############################################################################
@@ -1745,7 +1746,7 @@ function(dk_lib lib_path)
 				dk_getFilename(${CMAKE_CURRENT_LIST_DIR} LIB_NAME)
 				file(INSTALL ${lib_path} DESTINATION ${CMAKE_INSTALL_PREFIX}/${LIB_NAME}/lib/${OS})
 			else()
-				dk_assert("Could not locate ${lib_path}")
+				dk_error("Could not locate ${lib_path}")
 			endif()
 		endif()
 		

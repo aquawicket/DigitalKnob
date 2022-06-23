@@ -2,16 +2,17 @@
 # https://www.xquartz.org/releases/index.html
 #
 # https://github.com/XQuartz/XQuartz/releases/download/XQuartz-2.8.1/XQuartz-2.8.1.dmg
+if(NOT MAC)
+	return()
+endif()
 
-MAC_dk_depend(homebrew)
+dk_depend(homebrew)
 
 
 ### INSTALL ###
 #if(NOT EXISTS ${XQUARTZ})
-if(MAC)
 	dk_command(brew install --cask xquartz)
 	dk_include(/opt/X11/include)
-endif()
 #endif()
 
 # Other install methods
