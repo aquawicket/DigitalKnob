@@ -24,9 +24,9 @@
 include_guard()
 
 if(EXISTS $ENV{DKCMAKE})
-	set(DKCMAKE "$ENV{DKCMAKE}/")
+	set(ENV{DKCMAKE} "$ENV{DKCMAKE}/")
 endif()
-include("${DKCMAKE}DK.cmake")
+include("$ENV{DKCMAKE}DK.cmake")
 
 
 dk_info("\n")

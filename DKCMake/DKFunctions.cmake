@@ -22,7 +22,11 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 include_guard()
-include($ENV{DKCMAKE}DK.cmake)
+
+if(EXISTS $ENV{DKCMAKE})
+	set(ENV{DKCMAKE} "$ENV{DKCMAKE}/")
+endif()
+include("$ENV{DKCMAKE}DK.cmake")
 
 # Extra Documentation
 # https://asitdhal.medium.com/cmake-functions-and-macros-22293041519f
