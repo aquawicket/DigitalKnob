@@ -50,6 +50,8 @@ public:
 	static void Loop();
 	static void DoFrame();
 	static void CallLoops();
+	
+	//TODO: https://en.cppreference.com/w/cpp/utility/program/exit
 	static void Exit();
 
 	static bool   active;

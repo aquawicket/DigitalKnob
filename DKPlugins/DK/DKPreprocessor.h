@@ -261,3 +261,9 @@
 #else
 #	define DKBUILD_TYPE "UNKNOWN"
 #endif
+
+#ifdef __has_include
+
+#else
+	static_assert(false, "__has_include not supported");
+#endif
