@@ -19,7 +19,7 @@ endif()
 #dk_depend(jdk8)
 
 dk_set(ANDROID-CMDLINE-TOOLS ${3RDPARTY}/android-sdk/cmdline-tools/latest)
-dk_makeDirectory(${ANDROID-CMDLINE-TOOLS})
+dk_makeDirectory(${3RDPARTY}/android-sdk/cmdline-tools)
 dk_set(SDKMANAGER_BAT ${ANDROID-CMDLINE-TOOLS}/bin/sdkmanager.bat)
 WIN_HOST_dk_set(ANDROID-CMDLINE-TOOLS_DL https://dl.google.com/android/repository/commandlinetools-win-7583922_latest.zip)
 MAC_HOST_dk_set(ANDROID-CMDLINE-TOOLS_DL https://dl.google.com/android/repository/commandlinetools-mac-7302050_latest.zip)
