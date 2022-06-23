@@ -25,6 +25,6 @@ macro(dk_error msg)
 	endif()
 	
 	if(${WAIT_ON_ERRORS})
-		dk_wait(30)
+		dk_wait(5)
 	endif()
 endmacro()

@@ -11,28 +11,28 @@ dk_depend(android-sdk)
 dk_depend(android-ndk)
 
 
-dk_set(ANDROIDSTUDIO_VERSION "2020.3.1.26-windows")
-dk_set(ANDROIDSTUDIO_NAME "android-studio-2020.3.1.26-windows.exe")
-WIN_HOST_dk_set(ANDROIDSTUDIO_DL "https://redirector.gvt1.com/edgedl/android/studio/install/2020.3.1.26/android-studio-2020.3.1.26-windows.exe")
+dk_set(ANDROID-STUDIO_VERSION "2020.3.1.26-windows")
+dk_set(ANDROID-STUDIO_NAME "android-studio-2020.3.1.26-windows.exe")
+WIN_HOST_dk_set(ANDROID-STUDIO_DL "https://redirector.gvt1.com/edgedl/android/studio/install/2020.3.1.26/android-studio-2020.3.1.26-windows.exe")
 #WIN_dk_import(https://redirector.gvt1.com/edgedl/android/studio/install/2020.3.1.26/android-studio-2020.3.1.26-windows.exe)
 
-WIN_HOST_dk_set(ANDROIDSTUDIO "C:/Program Files/Android/Android Studio/bin")
-WIN_HOST_dk_set(ANDROIDSTUDIO_EXE "${ANDROIDSTUDIO}/studio.exe")
+WIN_HOST_dk_set(ANDROID-STUDIO "C:/Program Files/Android/Android Studio/bin")
+WIN_HOST_dk_set(ANDROID-STUDIO_EXE "${ANDROID-STUDIO}/studio.exe")
 
-MAC_HOST_dk_set(ANDROIDSTUDIO "/Applications")
-MAC_HOST_dk_set(ANDROIDSTUDIO_EXE "${ANDROIDSTUDIO}/Android Studio.app")
+MAC_HOST_dk_set(ANDROID-STUDIO "/Applications")
+MAC_HOST_dk_set(ANDROID-STUDIO_EXE "${ANDROID-STUDIO}/Android Studio.app")
 
-LINUX_HOST_dk_set(ANDROIDSTUDIO "${3RDPARTY}/android-studio/bin")
-LINUX_HOST_dk_set(ANDROIDSTUDIO_EXE "${ANDROIDSTUDIO}/Android Studio.app")
+LINUX_HOST_dk_set(ANDROID-STUDIO "${3RDPARTY}/android-studio/bin")
+LINUX_HOST_dk_set(ANDROID-STUDIO_EXE "${ANDROID-STUDIO}/Android Studio.app")
 
 dk_setEnv("STUDIO_JDK" ${JDK8})
 dk_setEnv("STUDIO_GRADLE_JDK" ${JDK8})
 
 
 ### INSTALL ###
-#dk_install(${ANDROIDSTUDIO_DL} android-studio ${ANDROIDSTUDIO_EXE})
+#dk_install(${ANDROID-STUDIO_DL} android-studio ${ANDROID-STUDIO_EXE})
 
-if(NOT EXISTS ${ANDROIDSTUDIO_EXE})
-	dk_download(${ANDROIDSTUDIO_DL} ${DKDOWNLOAD}/${ANDROIDSTUDIO_NAME})
-	dk_command(${DKDOWNLOAD}/${ANDROIDSTUDIO_NAME})
+if(NOT EXISTS ${ANDROID-STUDIO_EXE})
+	dk_download(${ANDROID-STUDIO_DL} ${DKDOWNLOAD}/${ANDROID-STUDIO_NAME})
+	dk_command(${DKDOWNLOAD}/${ANDROID-STUDIO_NAME})
 endif()
