@@ -1,5 +1,5 @@
 include_guard()
-dk_load(dk_color) #TODO:  move this into the function
+dk_load(dk_color)
 
 ##################################################################################
 # dk_warn(msg)
@@ -25,6 +25,6 @@ macro(dk_warn msg)
 	endif()
 	
 	if(${WAIT_ON_WARNINGS})
-		dk_wait(30)
+		dk_wait(10)
 	endif()
 endmacro()
