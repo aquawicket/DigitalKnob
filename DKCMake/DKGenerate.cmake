@@ -23,11 +23,11 @@
 # SOFTWARE.
 include_guard()
 
-include($ENV{DKCMAKE}DK.cmake)
-#include(DKFunctions.cmake)
-#include(DKFileSystem.cmake)
-#include(DKVariables.cmake)
-#include(DKDisabled.cmake)
+if(EXISTS $ENV{DKCMAKE})
+	set(DKCMAKE "$ENV{DKCMAKE}/")
+endif()
+include("${DKCMAKE}DK.cmake")
+
 
 dk_info("\n")
 dk_info("############################################################")
