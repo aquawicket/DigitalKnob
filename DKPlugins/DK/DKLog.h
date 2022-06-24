@@ -39,8 +39,9 @@
 
 #if ANDROID
 	#include <android/log.h>
-#else
-#	define RTTI 1
+#endif
+
+#if RTTI_ENABLED
 #	include <type_traits>
 #endif
 
@@ -105,7 +106,7 @@ void printVariable(const DKString& name, T t, std::ostringstream& out) {
 	if (std::is_const<T>::value)
 		constant = "const ";
 	type = constant;
-#	if RTTI
+#	if RTTI_ENABLED
 		if (typeid(t) == typeid(DKString))
 			type += "DKString";
 		else if (typeid(t) == typeid(char *))
@@ -128,7 +129,7 @@ void printVariable(const DKString& name, T t, std::ostringstream& out) {
 	if (std::is_const<T>::value)
 		constant = "const ";
 	type = constant;
-#	if RTTI
+#	if RTTI_ENABLED
 		if (typeid(t) == typeid(DKString))
 			type += "DKString";
 		else if (typeid(t) == typeid(char*))
