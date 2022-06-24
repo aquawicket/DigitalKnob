@@ -24,16 +24,21 @@
 * SOFTWARE.
 */
 
+// https://clang.llvm.org/docs/LanguageExtensions.html
 // https://sourceforge.net/p/predef/wiki/Home/
 // https://github.com/nemequ/pre-defined-macros
 // https://stackoverflow.com/a/3672331/688352
-
+#pragma once
+#ifndef DKPreprocessor_H
+#define DKPreprocessor_H
 
 #define STR(x) #x
+#define DKMSG(x) __pragma(message(STR(x)))
 //#define TOSTRING(x) STR(x)
 #define PRNT_NAME(x) printf("%s", #x)
 #define PRNT_NAME_VALUE(x) printf("%s=%s", #x, STR(x))
 #define PRNT_VALUE(x) printf(%s, STR(x))
+
 //#define JOIN(a,b) a ## b
 // https://stackoverflow.com/a/59157875/688352
 //#define JOIN_TWO(_1, _2) STR(_1) "." STR(_2)
@@ -262,8 +267,40 @@
 #	define DKBUILD_TYPE "UNKNOWN"
 #endif
 
-#ifdef __has_include
+// RTTI
+#if defined(__clang__)
+#	if __has_feature(cxx_rtti)
+#		define RTTI_ENABLED 1
+#	endif
+#elif defined(__GNUG__)
+#	if defined(__GXX_RTTI)
+#		define RTTI_ENABLED 1
+#	endif
+#elif defined(_MSC_VER)
+#	if defined(_CPPRTTI)
+#		define RTTI_ENABLED 1
+#	endif
+#endif
 
+
+// https://en.cppreference.com/w/cpp/keyword
+#ifdef __has_builtin
+	//TODO
 #else
+	//TODO
+#endif
+
+#ifdef __has_include
+	//TODO
+#else
+	//#define __has_include(x) 0 
 	static_assert(false, "__has_include not supported");
 #endif
+
+
+class DKPreprocessor {
+public:
+	static bool PrintPreprocessor();
+};
+
+#endif //DKPreprocessor_H

@@ -73,6 +73,8 @@ DKApp::DKApp(int _argc, char** _argv){
 	DKApp::argv = _argv;
 	DKUtil::SetMainThreadNow();
 
+	DKPreprocessor::PrintPreprocessor();
+
 	if (argc)
 		DKFile::exe_path = argv[0];
 #	if ANDROID

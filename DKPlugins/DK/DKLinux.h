@@ -28,7 +28,7 @@
 #pragma once
 #ifndef DKLinux_H
 #define DKLinux_H
-#define DESKTOP //FIXME: Linux could potentially be an embedded device
+//#define DESKTOP //FIXME: Linux could potentially be an embedded device
 #include "DKString.h"
 
 // http://xahlee.info/linux/linux_show_keycode_keysym.html
