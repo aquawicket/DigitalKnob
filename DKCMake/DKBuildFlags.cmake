@@ -36,6 +36,7 @@ include_guard()
 # https://docs.microsoft.com/en-us/cpp/build/reference/eh-exception-handling-model?view=msvc-170
 # https://stackoverflow.com/a/24836566/688352
 # https://docs.microsoft.com/en-us/cpp/c-runtime-library/crt-library-features?view=msvc-170
+# https://developer.android.com/ndk/guides
 
 # Get the definition of any shell command                                             https://explainshell.com          
 # helpful terminal commands
@@ -51,7 +52,7 @@ include_guard()
 # common flags for compilers
 #										GCC					CLANG/LLVM			MSVC														NOTES
 # Enable runtime type information		-frtti				-frtti				/GR                                                         
-# Disable runtime type information		-frtti			-frtti			/GR-                                                         
+# Disable runtime type information		-frtti				-frtti				/GR-                                                         
 # Standard C++ exception handling		-fexceptions		-fexceptions		/EHsc														#https://stackoverflow.com/a/4574319/688352
 # No Exceptions							-fno-exceptions		-fno-exceptions		/D_HAS_EXCEPTIONS=0											#https://stackoverflow.com/a/65513682/688352
 # Use address sanatizer					-fsanitize=address	-fsanitize=address	/fsanitize=address											incompatable with /RTC1 
@@ -235,7 +236,7 @@ IOSSIM32_dk_set(DKCMAKE_CXX_FLAGS_RELEASE  "-DNDEBUG -DRELEASE -O3")
 IOSSIM32_dk_set(DKCONFIGURE_FLAGS          --disable-shared --enable-static --host i686-apple-${IOS_DARWIN})
 IOSSIM32_dk_set(DKCONFIGURE_CC             ${XCODE_CLANG})
 IOSSIM32_dk_set(DKCONFIGURE_CFLAGS         "-arch i686 -DIOS -DIOS32 -DIOSSIM -DIOSSIM32 -mios-version-min=${IOS_MIN_SDK} -isysroot ${IOSSIM_SYSROOT}")
-IOSSIM32_dk_set(DKCONFIGURE_CXX	          ${XCODE_CLANGXX})
+IOSSIM32_dk_set(DKCONFIGURE_CXX				${XCODE_CLANGXX})
 IOSSIM32_dk_set(DKCONFIGURE_CXXFLAGS       "-arch i686 -DIOS -DIOS32 -DIOSSIM -DIOSSIM32 -mios-version-min=${IOS_MIN_SDK} -isysroot ${IOSSIM_SYSROOT}")
 
 # iOS Simulator x86_64 (64)
