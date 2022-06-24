@@ -32,10 +32,22 @@
 bool DKPreprocessor::PrintPreprocessor(){
 	printf("DKPreprocessor::PrintPreprocessor()\n");
 
+#ifdef RTTI_ENABLED
+	printf("RTTI_ENABLED = TRUE\n");
+#else
+	printf("RTTI_ENABLED = FALSE\n");
+#endif
+
 #ifdef __has_builtin
 	printf("__has_builtin = TRUE\n");
 #else
 	printf("__has_builtin = FALSE\n");
+#endif
+
+#ifdef __has_feature
+	printf("__has_feature = TRUE\n");
+#else
+	printf("__has_feature = FALSE\n");
 #endif
 
 #ifdef __has_include

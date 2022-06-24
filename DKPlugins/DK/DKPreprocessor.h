@@ -293,7 +293,6 @@
 #ifdef __has_include
 	//TODO
 #else
-	//#define __has_include(x) 0 
 	static_assert(false, "__has_include not supported");
 #endif
 
