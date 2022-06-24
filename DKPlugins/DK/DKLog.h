@@ -32,12 +32,16 @@
 #include "DK/DKTextColor.h"
 #include <stdio.h>
 #include <iostream>
-#include <type_traits>
+
 #if !defined(IOS)
     #include <fstream>
 #endif
+
 #if ANDROID
 	#include <android/log.h>
+#else
+#	define RTTI 1
+#	include <type_traits>
 #endif
 
 #define DK_ASSERT  1
@@ -100,29 +104,43 @@ void printVariable(const DKString& name, T t, std::ostringstream& out) {
 	std::ostringstream value;
 	if (std::is_const<T>::value)
 		constant = "const ";
-	if (typeid(t) == typeid(DKString)) {
-		type = constant;
-		type += "DKString";
-		value << "\"" << t << "\"";
-	}
-	else if (typeid(t) == typeid(char *)) {
-		type = constant;
-		type += "char*";
-		value << "\"" << t << "\"";
-	}
-	else {
-		type = typeid(t).name();
-		value << t;
-	}
+	type = constant;
+#	if RTTI
+		if (typeid(t) == typeid(DKString))
+			type += "DKString";
+		else if (typeid(t) == typeid(char *))
+			type += "char*";
+		else
+			type += typeid(t).name();
+#	else
+		type += "unknown";
+#	endif
+	value << "\"" << t << "\"";
 	replace(type, " *", "*");
 	out << "<" << type << ">\"" << name << "\":" << value.str();
 }
 
 template<typename T, typename std::enable_if<!is_streamable<std::ostream, T>::value>::type* = nullptr>
 void printVariable(const DKString& name, T t, std::ostringstream& out) {
-	DKString type = typeid(t).name();
+	DKString type = "";
+	DKString constant = "";
+	std::ostringstream value;
+	if (std::is_const<T>::value)
+		constant = "const ";
+	type = constant;
+#	if RTTI
+		if (typeid(t) == typeid(DKString))
+			type += "DKString";
+		else if (typeid(t) == typeid(char*))
+			type += "char*";
+		else
+			type += typeid(t).name();
+#	else
+		type += "unknown";
+#	endif
+	value << "\"" << "[Object]" << "\"";
 	replace(type, " *", "*");
-	out << "<" << type << ">\"" << name << "\":" << ":[Object]";
+	out << "<" << type << ">\"" << name << "\":" << value.str();
 }
 
 void getTemplateArgs(std::ostringstream& out);
