@@ -18,29 +18,11 @@ set "TYPE="
 if NOT exist "%DIGITALKNOB%" mkdir "%DIGITALKNOB%"
 if NOT exist "%DKDOWNLOAD%" mkdir "%DKDOWNLOAD%"
 
-:pickapp
-ECHO.
-ECHO 1. Git Update
-ECHO 2. Git Commit
-ECHO 3. DKBuilder
-ECHO 4. DKSDLRmlUi
-ECHO 5. DKTestAll
-ECHO 6. Clear Screen
-ECHO 7. Exit
-set choice=
-set /p choice=Please select an app to build: 
-if not '%choice%'=='' set choice=%choice:~0,1%
-if '%choice%'=='1' goto gitupdate
-if '%choice%'=='2' goto gitcommit
-if '%choice%'=='3' goto dkbuilder
-if '%choice%'=='4' goto dksdlrmlui
-if '%choice%'=='5' goto dktestall
-if '%choice%'=='6' goto clearscreen
-if '%choice%'=='7' goto end
-ECHO "%choice%" is not valid, try again
-goto pickapp
+cd "%DIGITALKNOB%"
+rmdir /s "%DKPATH%"
+rmdir /s "%DKDOWNLOAD%"
 
-:gitupdate
+:checkGit
 if exist "C:\Program Files\Git\bin\git.exe" set "GIT=C:\Program Files\Git\bin\git.exe"
 if exist "C:\Program Files (x86)\Git\bin\git.exe" set "GIT=C:\Program Files (x86)\Git\bin\git.exe"
 if NOT exist "%GIT%" (
@@ -52,11 +34,12 @@ if NOT exist "%GIT%" (
 	if exist "C:\Program Files\Git\bin\git.exe" set "GIT=C:\Program Files\Git\bin\git.exe"
 	if exist "C:\Program Files (x86)\Git\bin\git.exe" set "GIT=C:\Program Files (x86)\Git\bin\git.exe"
 )
+
+:gitupdate
 if NOT exist "%DKPATH%\.git" (
 	"%GIT%" clone https://github.com/aquawicket/DigitalKnob.git "%DKPATH%"
 )
 if NOT "%ERRORLEVEL%" == "0" goto error
-
 cd "%DKPATH%"
 "%GIT%" pull --all
 "%GIT%" checkout -- .
@@ -69,108 +52,19 @@ if NOT "%ERRORLEVEL%" == "0" (
 )
 
 
-::if NOT "%ERRORLEVEL%" == "0" goto error
-goto pickapp
-
-:gitcommit
-if exist "C:\Program Files\Git\bin\git.exe" set "GIT=C:\Program Files\Git\bin\git.exe"
-if exist "C:\Program Files (x86)\Git\bin\git.exe" set "GIT=C:\Program Files (x86)\Git\bin\git.exe"
-if NOT exist "%GIT%" (
-	ECHO "installing git"
-	%download% %GIT_DL% "%DKDOWNLOAD%\Git-2.30.1-32-bit.exe"
-	::if NOT "%ERRORLEVEL%" == "0" goto error
-	"%DKDOWNLOAD%\Git-2.30.1-32-bit.exe /VERYSILENT /NORESTART"
-	::if NOT "%ERRORLEVEL%" == "0" goto error
-	if exist "C:\Program Files\Git\bin\git.exe" set "GIT=C:\Program Files\Git\bin\git.exe"
-	if exist "C:\Program Files (x86)\Git\bin\git.exe" set "GIT=C:\Program Files (x86)\Git\bin\git.exe"
-)
-cd %DKPATH%
-"%GIT%" config user.email "aquawicket@hotmail.com"
-"%GIT%" config user.name "aquawicket"
-"%GIT%" commit -a -m "git commit"
-::if NOT "%ERRORLEVEL%" == "0" goto error
-"%GIT%" push
-::if NOT "%ERRORLEVEL%" == "0" goto error
-goto pickapp
-
-:clearscreen
-cls
-goto pickapp
-
-:dkbuilder
+:pickapp
 set APP=DKBuilder
-goto pickos
-
-:dksdlrmlui
-set APP=DKSDLRmlUi
-goto pickos
-
-:dktestall
-set APP=DKTestAll
-goto pickos
-
 
 
 :pickos
-ECHO %APP%
-ECHO.
-ECHO 1. Windows 32
-ECHO 2. Windows 64
-ECHO 3. Go Back
-ECHO 4. Exit
-set choice=
-set /p choice=Please select an OS to build for: 
-if not '%choice%'=='' set choice=%choice:~0,1%
-if '%choice%'=='1' goto win32
-if '%choice%'=='2' goto win64
-if '%choice%'=='3' goto pickapp
-if '%choice%'=='4' goto end
-ECHO "%choice%" is not valid, try again
-goto pickos
-
-:win32
 set OS="win32"
-goto build
-
-:win64
-set OS="win64"
-goto build
 
 
 :type
-ECHO %APP% - %OS%
-ECHO.
-ECHO 1. Debug
-ECHO 2. Release
-ECHO 3. All
-ECHO 4. Go Back
-ECHO 5. Exit
-set choice=
-set /p choice=Please select a build type: 
-if not '%choice%'=='' set choice=%choice:~0,1%
-if '%choice%'=='1' goto debug
-if '%choice%'=='2' goto release
-if '%choice%'=='3' goto all
-if '%choice%'=='4' goto pickos
-if '%choice%'=='5' goto end
-ECHO "%choice%" is not valid, try again
-goto type
-
-:debug
-set TYPE="Debug"
-goto build
-
-:release
-set TYPE="Release"
-goto build
-
-:all
 set TYPE="All"
-goto build
 
 
-
-:build
+:deleteCache
 echo Deleteing CMake cache . . .
 cd "%DIGITALKNOB%"
 for /r %%i in (CMakeCache.*) do del "%%i"
@@ -186,7 +80,7 @@ for /r %%i in (*.TMP) do del "%%i"
 ::if NOT "%ERRORLEVEL%" == "0" goto error
 
 
-echo ****** BUILDING %APP% - %OS% ******
+:checkCmake
 if exist "C:\Program Files\CMake\bin\cmake.exe" set "CMAKE=C:\Program Files\CMake\bin\cmake.exe"
 if exist "C:\Program Files (x86)\CMake\bin\cmake.exe" set "CMAKE=C:\Program Files (x86)\CMake\bin\cmake.exe"
 if NOT exist "%CMAKE%" (
@@ -199,6 +93,9 @@ if NOT exist "%CMAKE%" (
 	if exist "C:\Program Files\CMake\bin\cmake.exe" set "CMAKE=C:\Program Files\CMake\bin\cmake.exe"
 	if exist "C:\Program Files (x86)\CMake\bin\cmake.exe" set "CMAKE=C:\Program Files (x86)\CMake\bin\cmake.exe"
 )
+
+
+:checkVisualStudio
 if exist "C:\Program Files\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe" set "MSBUILD=C:\Program Files\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe"
 if exist "C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe" set "MSBUILD=C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe"
 if exist "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe" set "MSBUILD=C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe"
@@ -216,6 +113,9 @@ if NOT exist "%MSBUILD%" (
 	if exist "C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe" set "MSBUILD=C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe"
 	if exist "C:\Program Files (x86)\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe" set "MSBUILD=C:\Program Files (x86)\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe"
 )
+
+:build
+echo ****** BUILDING %APP% - %OS% ******
 set "APP_PATH=%DKPATH%\DKApps\%APP%"
 ECHO %APP_PATH%
 if NOT exist "%APP_PATH%\%OS%" mkdir "%APP_PATH%\%OS%"
@@ -229,8 +129,7 @@ cd "%APP_PATH%\%OS%"
 "%MSBUILD%" %APP%.sln /p:Configuration=Release
 ::if NOT "%ERRORLEVEL%" == "0" goto error
 
-goto pickapp
-
+goto end
 
 :error
 echo Failed with error code: %ERRORLEVEL%
