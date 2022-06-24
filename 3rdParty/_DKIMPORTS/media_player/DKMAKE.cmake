@@ -1,11 +1,12 @@
+# https://developer.apple.com/documentation/MediaPlayer?language=objc
+
 if(NOT MAC_HOST)
 	return()
 endif()
 
-# https://developer.apple.com/documentation/MediaPlayer?language=objc
 
 FIND_LIBRARY(MediaPlayer_lib MediaPlayer)
 if(NOT MediaPlayer_lib)
-	DKWARN("Could not locate MediaPlayer framework")
+	dk_error("Could not locate MediaPlayer framework")
 endif()
 APPLE_dk_lib(${MediaPlayer_lib})

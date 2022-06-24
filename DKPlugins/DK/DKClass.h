@@ -32,19 +32,24 @@
 #include "DKObject.h"
 #include "DKUtil.h"
 
-#define STD_FUNCTION //or BOOST_FUNCTION
-#ifdef STD_FUNCTION
-    #include <functional>
-    typedef std::function<bool(const void*, void*)> DKFunction;
-    typedef std::map<DKString, DKFunction> DKFunctionMap;
-    namespace dk_placeholders = std::placeholders;
-#elif defined (BOOST_FUNCTION)
-    #include <boost/function.hpp>
-    #include <boost/bind/bind.hpp>
-    typedef boost::function<bool(const void*, void*)> DKFunction;
-    namespace dk_placeholders = boost::placeholders;
+#ifdef __has_include
+#	if __has_include(<functional>)
+#		include <functional>
+		typedef std::function<bool(const void*, void*)> DKFunction;
+		typedef std::map<DKString, DKFunction> DKFunctionMap;
+		namespace dk_placeholders = std::placeholders;
+#	elif __has_include(<boost/function.hpp>) && __has_include(<boost/bind/bind.hpp> && __has_include(<map>)
+		#include <boost/function.hpp>
+		#include <boost/bind/bind.hpp>
+		#include <map> //std::map
+		typedef boost::function<bool(const void*, void*)> DKFunction;
+		typedef std::map<DKString, DKFunction> DKFunctionMap;
+		namespace dk_placeholders = boost::placeholders;
+#	else
+		static_assert(false, "No ::Function or ::Bind interface available");
+#	endif
 #else
-    DKERROR("No ::Function or ::Bind interface available");
+	static_assert(false, "__has_include not supported");
 #endif
 
 

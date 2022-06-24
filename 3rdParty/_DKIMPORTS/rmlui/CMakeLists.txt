@@ -539,7 +539,7 @@ endif()
 
 if(DISABLE_RTTI_AND_EXCEPTIONS)
     if( CMAKE_COMPILER_IS_GNUCXX )
-		add_definitions( -fno-rtti -fno-exceptions )
+		add_definitions( -frtti -fno-exceptions )
     elseif( MSVC )
 		add_definitions( -D_HAS_EXCEPTIONS=0 /GR- )
 		if(CMAKE_CXX_FLAGS MATCHES "/EHsc ")

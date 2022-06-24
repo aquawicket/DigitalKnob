@@ -1,10 +1,11 @@
+# https://developer.apple.com/xcode/
+# https://pewpewthespells.com/blog/buildsettings.html
+# Apple Frameworks https://developer.apple.com/library/archive/documentation/MacOSX/Conceptual/OSX_Technology_Overview/SystemFrameworks/SystemFrameworks.html
+
 if(NOT MAC_HOST)
 	return()
 endif()
 
-# https://developer.apple.com/xcode/
-# https://pewpewthespells.com/blog/buildsettings.html
-# Apple Frameworks https://developer.apple.com/library/archive/documentation/MacOSX/Conceptual/OSX_Technology_Overview/SystemFrameworks/SystemFrameworks.html
 
 ### VERSION ###
 #dk_set(XCODE_VERSION ???)
@@ -15,3 +16,4 @@ endif()
 
 ### INSTALL ###
 #dk_install(${XCODE_DL} Xcode ${XCODE})
+#dk_import(${XCODE_DL})

@@ -12,7 +12,7 @@ if(VISUALSTUDIO)
 	#return()
 endif()
 
-### VERSION ###
+
 dk_set(VC_REDIST_VERSION 14.29.30133)
 dk_set(VC_REDIST_PLATFORM x86)
 dk_set(VC_REDIST_NAME vc_redist.${VC_REDIST_PLATFORM})

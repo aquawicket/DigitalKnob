@@ -1,10 +1,9 @@
 ## https://www.libsdl.org/projects/smpeg/release/smpeg2-2.0.0.tar.gz
 
+
 dk_depend(sdl)
 
-
 dk_import(https://www.libsdl.org/projects/smpeg/release/smpeg2-2.0.0.tar.gz PATCH)
-
 
 ### DKPLUGINS LINK ###
 dk_include(${SMPEG2})
@@ -29,9 +28,8 @@ dk_set			(SMPEG2_CMAKE -DSMPEG_INCLUDE_DIR=${SMPEG2})
 #ANDROID_dk_set	(SMPEG2_CMAKE -DSMPEG_INCLUDE_DIR=${SMPEG2})
 	
 	
-### COMPILE ###
+### GENERATE ###
 dk_setPath(${SMPEG2}/${BUILD_DIR})
-
 WIN_dk_queueCommand			(${DKCMAKE_BUILD} ${SDL_CMAKE} ${SMPEG2})
 MAC_dk_queueCommand			(${DKCMAKE_BUILD} -DCMAKE_CXX_FLAGS=-Wno-narrowing ${SDL_CMAKE} ${SMPEG2})
 IOS_dk_queueCommand			(${DKCMAKE_BUILD} -DCMAKE_CXX_FLAGS=-Wno-narrowing ${SDL_CMAKE} ${SMPEG2})
@@ -41,6 +39,7 @@ RASPBERRY_dk_queueCommand	(${DKCMAKE_BUILD} -DCMAKE_CXX_FLAGS=-Wno-narrowing ${S
 ANDROID_dk_queueCommand		(${DKCMAKE_BUILD} ${SDL_CMAKE} ${SMPEG2})
 
 
+### COMPILE ###
 dk_visualStudio				(${SMPEG2_NAME} SMPEG.sln SMPEG)
 #WIN_dk_visualStudio		(${SMPEG2_NAME} SMPEG.sln SMPEG)
 dk_xcode					(${SMPEG2_NAME} SMPEG)

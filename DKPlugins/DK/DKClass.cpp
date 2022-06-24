@@ -139,10 +139,10 @@ void DKClass::CloseAll(){
 			(*classes)[rit->first]->Close("");
 		}
 	}
-#if WIN32
-	if(IsWindowVisible(GetConsoleWindow()))
-		ShowWindow(GetConsoleWindow(),SW_HIDE);
-#endif
+#	if WIN32
+		if(IsWindowVisible(GetConsoleWindow()))
+			ShowWindow(GetConsoleWindow(),SW_HIDE);
+#	endif
 }
 
 void DKClass::GetClassList(DKStringArray& list){

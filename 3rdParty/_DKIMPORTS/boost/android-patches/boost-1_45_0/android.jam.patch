@@ -309,7 +309,7 @@
 +
 +toolset.flags android.compile OPTIONS <debug-symbols>on : -g ;
 +toolset.flags android.compile OPTIONS <profiling>on : -pg ;
-+toolset.flags android.compile OPTIONS <rtti>off : -fno-rtti ;
++toolset.flags android.compile OPTIONS <rtti>off : -frtti ;
 +
 +rule setup-fpic ( targets * : sources * : properties * )
 +{

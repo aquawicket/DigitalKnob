@@ -1,4 +1,5 @@
 # https://developer.apple.com/documentation/corevideo
+
 if(NOT MAC_HOST)
 	return()
 endif()
@@ -6,6 +7,6 @@ endif()
 
 FIND_LIBRARY(CoreVideo_lib CoreVideo)
 if(NOT CoreVideo_lib)
-	DKWARN("Could not locate CoreVideo framework")
+	dk_error("Could not locate CoreVideo framework")
 endif()
 APPLE_dk_lib(${CoreVideo_lib})

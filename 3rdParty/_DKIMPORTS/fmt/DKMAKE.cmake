@@ -2,6 +2,7 @@
 # https://fmt.dev/latest/index.html
 
 ### DEPENDS ###
+dk_depend(git)
 dk_depend(python)
 
 ### IMPORT ###

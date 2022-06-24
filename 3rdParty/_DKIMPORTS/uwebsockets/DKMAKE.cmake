@@ -5,7 +5,6 @@ dk_depend(zlib)
 dk_depend(libuv)
 dk_depend(openssl)
 
-
 dk_import(https://github.com/uNetworking/uWebSockets.git)
 
 
@@ -28,11 +27,12 @@ ANDROID_dk_libDebug(${UWEBSOCKETS}/${OS}/${DEBUG_DIR}/uWS.a)
 ANDROID_dk_libRelease(${UWEBSOCKETS}/${OS}/${RELEASE_DIR}/uWS.a)
 
 
-### COMPILE ###
+### GENERATE ###
 dk_setPath(${UWEBSOCKETS}/${BUILD_DIR})
 dk_queueCommand(${DKCMAKE_BUILD} ${ZLIB_CMAKE} ${LIBUV_CMAKE} ${OPENSSL_CMAKE} ${UWEBSOCKETS})
 
 
+### COMPILE ###
 dk_visualStudio(${UWEBSOCKETS_NAME} µWebSockets.sln uWS)
 #WIN_dk_visualStudio(${UWEBSOCKETS_NAME} µWebSockets.sln uWS)
 dk_xcode(${UWEBSOCKETS_NAME} libuWS)

@@ -4,24 +4,21 @@
 # https://github.com/SFML/SFML/archive/refs/heads/master.zip
 # https://www.sfml-dev.org/files/SFML-2.5.1-sources.zip
 
-### DEPENDS ###
-if(WIN)
-	dk_depend(opengl)
-	dk_depend(winmm.lib)
-endif()
-if(MAC)
-	dk_depend(core_foundation)
-	dk_depend(cocoa)
-	dk_depend(carbon)
-	dk_depend(audio_toolbox)
-	dk_depend(audiounit)
-	dk_depend(core_audio)
-	dk_depend(core_video)
-	dk_depend(iokit)
-	dk_depend(opengl)
-	dk_depend(force_feedback)
-	dk_depend(appkit)
-endif()
+
+WIN_dk_depend(opengl)
+WIN_dk_depend(winmm.lib)
+
+MAC_dk_depend(core_foundation)
+MAC_dk_depend(cocoa)
+MAC_dk_depend(carbon)
+MAC_dk_depend(audio_toolbox)
+MAC_dk_depend(audiounit)
+MAC_dk_depend(core_audio)
+MAC_dk_depend(core_video)
+MAC_dk_depend(iokit)
+MAC_dk_depend(opengl)
+MAC_dk_depend(force_feedback)
+MAC_dk_depend(appkit)
 if(IOS OR IOSSIM)
 	dk_depend(audio_toolbox)
 	dk_depend(av_foundation)
@@ -46,9 +43,7 @@ if(LINUX OR RASPBERRY)
 	dk_depend(openal)
 	dk_depend(opengl)
 endif()
-if(ANDROID)
-	dk_depend(freetype)
-endif()
+ANDROID_dk_depend(freetype)
 dk_depend(openal)
 dk_depend(flac)
 dk_depend(ogg)
@@ -56,10 +51,9 @@ dk_depend(vorbis)
 dk_depend(libjpeg-turbo)
 
 
-#dk_import(https://github.com/SFML/SFML.git)
-
 #dk_import(https://github.com/SFML/SFML/archive/c7705a8d9a79bb2c8868518c32ae54f14220793c.zip PATCH)
 dk_import(https://github.com/SFML/SFML/archive/a733e4cd7e0056922e4f74f1932749b4d6a5744d.zip PATCH)
+#dk_import(https://github.com/SFML/SFML.git)
 
 
 ### LINK ###
@@ -177,10 +171,9 @@ WIN_dk_set(SFML_CMAKE
 	-DSFML_AUDIO_LIBRARY_DEBUG=${SFML}/${OS}/lib/${DEBUG_DIR}/sfml-audio-s-d.lib
 	-DSFML_AUDIO_LIBRARY_RELEASE=${SFML}/${OS}/lib/${RELEASE_DIR}/sfml-audio-s.lib)
 
-### COMPILE ###
+
+### GENERATE ###
 dk_setPath(${SFML}/${BUILD_DIR})
-
-
 WIN_dk_queueCommand(${DKCMAKE_BUILD} -DSFML_OS_WINDOWS=1 -DBUILD_SHARED_LIBS=FALSE -DSFML_USE_STATIC_STD_LIBS=TRUE ${JPEG_CMAKE} ${OPENAL_CMAKE} ${OGG_CMAKE} ${VORBIS_CMAKE} ${FLAC_CMAKE} ${SFML})
 MAC_dk_queueCommand(${DKCMAKE_BUILD} -DSFML_OS_MACOSX=1 -DBUILD_SHARED_LIBS=FALSE ${JPEG_CMAKE} ${OPENAL_CMAKE} ${OGG_CMAKE} ${VORBIS_CMAKE} ${FLAC_CMAKE} ${SFML})
 IOS_dk_queueCommand(${DKCMAKE_BUILD} -DBUILD_SHARED_LIBS=FALSE ${JPEG_CMAKE} ${OPENAL_CMAKE} ${OGG_CMAKE} ${VORBIS_CMAKE} ${FLAC_CMAKE} ${SFML})
@@ -190,6 +183,7 @@ RASPBERRY_dk_queueCommand(${DKCMAKE_BUILD} -DBUILD_SHARED_LIBS=FALSE ${JPEG_CMAK
 ANDROID_dk_queueCommand(${DKCMAKE_BUILD} -DBUILD_SHARED_LIBS=FALSE ${JPEG_CMAKE} ${OPENAL_CMAKE} ${OGG_CMAKE} ${VORBIS_CMAKE} ${FLAC_CMAKE} ${SFML})
 
 
+### COMPILE ###
 dk_visualStudio(${SFML_NAME} SFML.sln)
 #WIN_dk_visualStudio(${SFML_NAME} SFML.sln)
 dk_xcode(${SFML_NAME})

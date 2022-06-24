@@ -1,4 +1,5 @@
 # https://developer.apple.com/documentation/corefoundation
+
 if(NOT MAC_HOST)
 	return()
 endif()
@@ -6,6 +7,6 @@ endif()
 
 FIND_LIBRARY(CoreFoundation_lib CoreFoundation)
 if(NOT CoreFoundation_lib)
-	DKWARN("Could not locate CoreFoundation framework")
+	dk_error("Could not locate CoreFoundation framework")
 endif()
 APPLE_dk_lib(${CoreFoundation_lib})

@@ -72,7 +72,7 @@
 #	dk_set(ANDROID_APPMK ${ANDROID_APPMK} "LOCAL_MODULE := DKAndroid\n")
 #	dk_set(ANDROID_APPMK ${ANDROID_APPMK} "SRC_DIR := $(LOCAL_PATH)/../../..\n")
 #	dk_set(ANDROID_APPMK ${ANDROID_APPMK} "DK_DIR := C:/Users/$ENV{USERNAME}/digitalknob\n")
-#	dk_set(ANDROID_APPMK ${ANDROID_APPMK} "NDKLIBDIR := ${ANDROIDNDK}/sources/cxx-stl/gnu-libstdc++/4.8/libs/armeabi-v7a\n")
+#	dk_set(ANDROID_APPMK ${ANDROID_APPMK} "NDKLIBDIR := ${ANDROID-NDK}/sources/cxx-stl/gnu-libstdc++/4.8/libs/armeabi-v7a\n")
 #	dk_set(ANDROID_APPMK ${ANDROID_APPMK} "DKPLUGINS := $(DK_DIR)/DKPlugins\n")
 #	dk_set(ANDROID_APPMK ${ANDROID_APPMK} "3RDPARTY := $(DKPLUGINS)/3rdParty\n\n")
 #

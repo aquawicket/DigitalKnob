@@ -1,3 +1,6 @@
+include_guard()
+dk_load(dk_color) # TODO:  move this into the function
+
 ##################################################################################
 # dk_debugFunc(${ARGV})
 #	Prints the current file name, line number, function or macro and arguments
@@ -11,16 +14,16 @@
 #
 macro(dk_debugFunc)
 	if(DKDEBUGFUNC_ENABLED)
-		#dk_getFilename(${CMAKE_CURRENT_FUNCTION_LIST_FILE} FILENAME)
 		if(NOT CMAKE_CURRENT_FUNCTION_LIST_FILE)
 			set(CMAKE_CURRENT_FUNCTION_LIST_FILE "unknown")
 		endif()
 		get_filename_component(FILENAME ${CMAKE_CURRENT_FUNCTION_LIST_FILE} NAME)
-		dk_load(Color)
+		#dk_getFilename(${CMAKE_CURRENT_FUNCTION_LIST_FILE} FILENAME)
 		if(${ARGC} LESS 1)
-			message(STATUS "${cyan}${FILENAME}:${CMAKE_CURRENT_FUNCTION_LIST_LINE}: ${CMAKE_CURRENT_FUNCTION}()${CLR}")
+			dk_call(dk_updateLogInfo)
+			message(STATUS "${H_black}${FILENAME}:${CMAKE_CURRENT_FUNCTION_LIST_LINE}->${CLR}${cyan}${CMAKE_CURRENT_FUNCTION}()${CLR}")
 		else()
-			set(argIndex 0)
+			set(argIndex 1)
 			set(argString " {")
 			dk_call(dk_getArgIdentifiers ${ARGV})
 			foreach(arg ${ARGV})
@@ -31,7 +34,7 @@ macro(dk_debugFunc)
 				math(EXPR argIndex "${argIndex}+1")
 			endforeach()
 			set(argString "${argString}} ")
-			message(STATUS "${cyan}${FILENAME}:${CMAKE_CURRENT_FUNCTION_LIST_LINE}: ${CMAKE_CURRENT_FUNCTION}(${argString})${CLR}")
+			message(STATUS "${H_black}${FILENAME}:${CMAKE_CURRENT_FUNCTION_LIST_LINE}->${CLR}${cyan}${CMAKE_CURRENT_FUNCTION}(${argString})${CLR}")
 		endif()
 	endif()
 endmacro()

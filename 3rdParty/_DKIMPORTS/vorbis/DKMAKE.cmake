@@ -3,7 +3,7 @@
 #
 # https://ftp.osuosl.org/pub/xiph/releases/vorbis/libvorbis-1.3.7.zip
 
-### DEPENDS ###
+
 WIN_dk_depend(mingw32)
 WIN_dk_depend(mingw64)
 WIN_dk_depend(msys)

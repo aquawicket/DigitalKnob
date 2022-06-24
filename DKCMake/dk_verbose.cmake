@@ -1,11 +1,20 @@
-dk_load(Color)
+include_guard()
+dk_load(dk_color)
 
+##################################################################################
 # dk_verbose(msg)
 #
-macro(dk_verbose)
+#	Print a verbose message to the console
+#
+#	@msg:(required) The message to print
+#
+macro(dk_verbose msg)
+	#message(STATUS "dk_verbose(${ARGV})")
+	string(REPLACE " " "" var ${msg})
 	dk_call(dk_updateLogInfo)
-	message(STATUS "${H_black}${STACK_HEADER}${CLR}${magenta}${ARGV}${CLR}")
-endmacro()
-macro(DKVERBOSE)
-	dk_verbose(${ARGV})
+	if(${var})
+		message(STATUS "${H_black}${STACK_HEADER}${CLR}${magenta}VARIABLE: \${${var}} = ${${var}}${CLR}")
+	else()
+		message(STATUS "${H_black}${STACK_HEADER}${CLR}${magenta}${msg}${CLR}")
+	endif()
 endmacro()

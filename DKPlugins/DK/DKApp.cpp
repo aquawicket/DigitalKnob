@@ -73,14 +73,16 @@ DKApp::DKApp(int _argc, char** _argv){
 	DKApp::argv = _argv;
 	DKUtil::SetMainThreadNow();
 
+	DKPreprocessor::PrintPreprocessor();
+
 	if (argc)
 		DKFile::exe_path = argv[0];
-#if ANDROID
-	if (!SDL_AndroidGetExternalStorageState())
-		DKERROR("SDL_AndroidGetExternalStorageState(): failed");
-	const char* externalStoragePath = SDL_AndroidGetExternalStoragePath();
-	DKFile::exe_path = externalStoragePath;
-#endif
+#	if ANDROID
+		if (!SDL_AndroidGetExternalStorageState())
+			DKERROR("SDL_AndroidGetExternalStorageState(): failed");
+		const char* externalStoragePath = SDL_AndroidGetExternalStoragePath();
+		DKFile::exe_path = externalStoragePath;
+#	endif
 	DKFile::NormalizePath(DKFile::exe_path);
 
 	DKString appName;
@@ -101,10 +103,10 @@ DKApp::DKApp(int _argc, char** _argv){
 	DKINFO("C++ Version: " + toString(DKCPP_LANGUAGE_VERSION) + "\n");
 	DKINFO("Build type:  " + toString(DKBUILD_TYPE) + "\n");
 
-#if WIN32
-	DKWindows::CreateConsoleHandler();
-	DKWindows::SetTitle(appName + " " + version + " " + osFlag + " " + toString(DKBUILD_TYPE));
-#endif
+#	if WIN32
+		DKWindows::CreateConsoleHandler();
+		DKWindows::SetTitle(appName + " " + version + " " + osFlag + " " + toString(DKBUILD_TYPE));
+#	endif
 	DKString osInfo;
 	GetOSInfo(osInfo);
 	DKINFO(osInfo + "\n");

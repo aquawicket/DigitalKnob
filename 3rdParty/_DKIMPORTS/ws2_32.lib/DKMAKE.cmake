@@ -4,10 +4,9 @@ if(NOT WIN_HOST)
 endif()
 
 
-#FIND_LIBRARY(Ws2_32.lib_path Ws2_32.lib)
-#if(NOT Ws2_32.lib_path)
-#	DKWARN("Could not locate Ws2_32.lib")
+#FIND_LIBRARY(libWs2_32 Ws2_32.lib) #does not work
+#	dk_error("Could not locate Ws2_32.lib")
 #endif()
-#DKINFO("Ws2_32.lib_path = ${Ws2_32.lib_path}")
+#dk_debug("libWs2_32 = ${libWs2_32}")
 
 WIN_dk_lib(Ws2_32.lib)
