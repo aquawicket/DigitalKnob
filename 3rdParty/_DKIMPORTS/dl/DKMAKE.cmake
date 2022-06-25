@@ -7,7 +7,7 @@ endif()
 
 FIND_LIBRARY(dl_Lib dl)
 if(NOT dl_Lib)
-	dk_error("Could not locate dl libraries")
+	#dk_error("Could not locate dl libraries") 
 else()
 	message(STATUS "Found dl libraries ${dl_lib}")
 endif()
