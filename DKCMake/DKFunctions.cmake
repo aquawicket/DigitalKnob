@@ -1553,9 +1553,9 @@ function(dk_visualStudioDebug folder sln_file) #target #arch
 	if(NOT WIN_HOST)
 		return()
 	endif()
-	
 	set(target ${ARGV2})
 	set(arch ${ARGV3})
+	
 	if(DEBUG AND QUEUE_BUILD)
 		if(NOT EXISTS ${3RDPARTY}/${folder}/${OS}/${sln_file})
 			dk_assert("CANNOT FIND: ${3RDPARTY}/${folder}/${OS}/${sln_file}" )
@@ -1581,9 +1581,9 @@ function(dk_visualStudioRelease folder sln_file) #target #arch
 	if(NOT WIN_HOST)
 		return()
 	endif()
-	
 	set(target ${ARGV2})
 	set(arch ${ARGV3})
+	
 	if(RELEASE AND QUEUE_BUILD)
 		if(NOT EXISTS ${3RDPARTY}/${folder}/${OS}/${sln_file})
 			dk_assert("CANNOT FIND: ${3RDPARTY}/${folder}/${OS}/${sln_file}" )
@@ -1620,9 +1620,11 @@ function(dk_xcodeDebug folder) #target
 	if(NOT MAC_HOST)
 		return()
 	endif()
+	set(target ${ARGV1})
+	
 	if(DEBUG AND QUEUE_BUILD)
-		if(${ARGC} GREATER 1)
-			dk_executeProcess(xcodebuild -target ${ARGV1} -configuration Debug build WORKING_DIRECTORY ${3RDPARTY}/${folder}/${OS})
+		if(target)
+			dk_executeProcess(xcodebuild -target ${target} -configuration Debug build WORKING_DIRECTORY ${3RDPARTY}/${folder}/${OS})
 		else()
 			dk_executeProcess(xcodebuild -configuration Debug build WORKING_DIRECTORY ${3RDPARTY}/${folder}/${OS})
 		endif()
@@ -1632,16 +1634,18 @@ dk_aliasFunctions("dk_xcodeDebug" "NO_DEBUG_RELEASE_TAGS")
 
 
 ###############################################################################
-# dk_xcodeRelease(folder)
+# dk_xcodeRelease(folder) #target
 #
 function(dk_xcodeRelease folder)
 	DKDEBUGFUNC(${ARGV})
 	if(NOT MAC_HOST)
 		return()
 	endif()
+	set(target ${ARGV1})
+	
 	if(RELEASE AND QUEUE_BUILD)
-		if(${ARGC} GREATER 1)
-			dk_executeProcess(xcodebuild -target ${ARGV1} -configuration Release build WORKING_DIRECTORY ${3RDPARTY}/${folder}/${OS})
+		if(target)
+			dk_executeProcess(xcodebuild -target ${target} -configuration Release build WORKING_DIRECTORY ${3RDPARTY}/${folder}/${OS})
 		else()
 			dk_executeProcess(xcodebuild -configuration Release build WORKING_DIRECTORY ${3RDPARTY}/${folder}/${OS})
 		endif()
@@ -2153,15 +2157,14 @@ endfunction()
 #
 #	@name:
 #
-function(dk_depend name)
+function(dk_depend name) #sublibrary
 	DKDEBUGFUNC(${ARGV})
+	set(sublibrary ${ARGV1})
+	if(sublibrary)
+		dk_dump(sublibrary)
+	endif()
 #	dk_debug(CMAKE_CURRENT_LIST_DIR)
 	
-#	if(${ARGC} GREATER 1)
-#		dk_info(ARGV)
-#		dk_dump(ARGV) # FIXME: DUMP not working here, show 2 for the ARGC count, but only shows variable name ARGV, no value
-#	endif()
-
 	list(FIND dk_disabled_list ${name} index)
 	if(${index} GREATER -1)
 		dk_warn("${name} IS DISABLED")
@@ -2173,32 +2176,20 @@ function(dk_depend name)
 # 	TODO TODO TODO TODO 
 	
 #	If dk_depend had second variable (a sub library), set that variable to ON
-#	if(${ARGC} GREATER 1)
-#	list(FIND dkdepend_list "${name} ${args}" index)
-#	if(${index} GREATER -1) #library is already in the list
-#		return()
-#	endif()
-#	else()
-#		list(FIND dkdepend_list "${name}" index)
-#		if(${index} GREATER -1)
-#			return() #library is already in the list
+#	if(sublibrary)
+#		list(FIND dkdepend_list "${name} ${sublibrary}" index)
+#		if(${index} GREATER -1) 
+#			return() # already in the list
 #		endif()
-#	endif()
-		
-	list(FIND dkdepend_list ${name} index)
-	if(${index} GREATER -1)
-		return()  #library is already in the list
-	endif()
-	
+#	else()
+		list(FIND dkdepend_list ${name} index)
+		if(${index} GREATER -1)
+			return()  #library is already in the list
+		endif()
+#	endif()	
 	dk_enable(${name})
-	dk_runDepends(${name}) # strip everything from the file except if() else() elseif() endif() and dk_depend() before sorting.
-#	else()
-#		list(FIND dkdepend_list "${name}" index)
-#		if(${index} GREATER -1)
-#			return() #library is already in the list
-#		endif()
-#		dk_runDepends(${name}) # strip everything from the file except if() else() elseif() endif() and dk_depend() before sorting.
-#	endif()
+	dk_runDepends(${name}) # strip everything from the file except if() else() elseif() endif() and dk_depend() before sorting
+	
 endfunction()
 dk_aliasFunctions("dk_depend")
 
@@ -2210,8 +2201,9 @@ dk_aliasFunctions("dk_depend")
 #
 #	@name:
 #
-function(dk_undepend plugin)
+function(dk_undepend plugin) #sublibrary
 	DKDEBUGFUNC(${ARGV})
+	set(sublibrary ${ARGV1})
 	
 	# Only allow dk_undepend command from these filters	
 	#if(NOT ${CMAKE_CURRENT_LIST_DIR} STREQUAL ${DKCMAKE})
@@ -2222,8 +2214,8 @@ function(dk_undepend plugin)
 	
 	dk_info("DISABLING ${ARGV}")
 	dk_set(dk_disabled_list ${dk_disabled_list} "${ARGV}")
-	if(${ARGC} GREATER 1)
-		dk_removeTarget(${plugin} ${ARGV1})
+	if(sublibrary)
+		dk_removeTarget(${plugin} ${sublibrary})
 	endif()
 endfunction()
 
@@ -2239,60 +2231,69 @@ endfunction()
 #
 function(dk_runDepends plugin)
 	DKDEBUGFUNC(${ARGV})
+	
 	dk_getPathToPlugin(${plugin} plugin_path)
 	if(NOT plugin_path)
 		dk_assert("${plugin} plugin not found")
 		return()
 	endif()
-	
-#	dk_debug("FOUND ${plugin} DK makefile at ${plugin_path}")
+
 	file(STRINGS ${plugin_path}/DKMAKE.cmake lines)
 	unset(disable_script)
 	unset(depends_script)
-	unset(index)
 	
+	
+	set(keep_commands "else;ELSE;if;IF;return;RETURN;dk_disable")
 	set(KEEPLINE 0)
 	foreach(line ${lines})
-		dk_includes("${line}" "if(" result)
-		if(${result})
-			set(KEEPLINE 1)
-		endif()
+	
+		foreach(keep_command ${keep_commands})
+			dk_includes("${line}" "${keep_command}(" result)
+			if(${result})
+				set(KEEPLINE 1)
+			endif()
+		endforeach()
 		
-		dk_includes("${line}" "IF(" result)
-		if(${result})
-			set(KEEPLINE 1)
-		endif()
+#		dk_includes("${line}" "if(" result)
+#		if(${result})
+#			set(KEEPLINE 1)
+#		endif()
+		
+#		dk_includes("${line}" "IF(" result)
+#		if(${result})
+#			set(KEEPLINE 1)
+#		endif()
 		
 		## elseif(
 		##NOTE: The 'if(' search commands take care of elseif() and endif() since 'if' is already in those words 
 		
-		dk_includes("${line}" "else(" result)
-		if(${result})
-			set(KEEPLINE 1)
-		endif()
+#		dk_includes("${line}" "else(" result)
+#		if(${result})
+#			set(KEEPLINE 1)
+#		endif()
 		
-		dk_includes("${line}" "ELSE(" result)
-		if(${result})
-			set(KEEPLINE 1)
-		endif()
+#		dk_includes("${line}" "ELSE(" result)
+#		if(${result})
+#			set(KEEPLINE 1)
+#		endif()
 		
 		## endif(
 		##NOTE: The 'if(' search commands take care of elseif() and endif() since 'if' is already in those words 
 		
-		dk_includes("${line}" "return(" result)
-		if(${result})
-			set(KEEPLINE 1)
-		endif()
+#		dk_includes("${line}" "return(" result)
+#		if(${result})
+#			set(KEEPLINE 1)
+#		endif()
 		
-		dk_includes("${line}" "RETURN(" result)
-		if(${result})
-			set(KEEPLINE 1)
-		endif()
+#		dk_includes("${line}" "RETURN(" result)
+#		if(${result})
+#			set(KEEPLINE 1)
+#		endif()
 		
-		dk_includes("${line}" "dk_disable(" result)
-		if(${result})
-			set(KEEPLINE 1)
-		endif()
+#		dk_includes("${line}" "dk_disable(" result)
+#		if(${result})
+#			set(KEEPLINE 1)
+#		endif()
 		
 #		dk_includes("${line}" "SET(" result)
 #		if(${result})
@@ -2316,90 +2317,97 @@ function(dk_runDepends plugin)
 		endif()
 	endforeach()
 	
+	set(keep_commands "else;ELSE;if;IF;message;MESSAGE;return;RETURN;dk_assert;dk_debug;dk_depend;dk_disable;dk_enable;dk_error;dk_info;dk_set;dk_trace;dk_verbose;dk_warn")
 	set(KEEPLINE 0)
 	foreach(line ${lines})
-		dk_includes("${line}" "if(" result)
-		if(${result})
-			set(KEEPLINE 1)
-		endif()
+	
+		foreach(keep_command ${keep_commands})
+			dk_includes("${line}" "${keep_command}(" result)
+			if(${result})
+				set(KEEPLINE 1)
+			endif()
+		endforeach()
 		
-		dk_includes("${line}" "IF(" result)
-		if(${result})
-			set(KEEPLINE 1)
-		endif()
+#		dk_includes("${line}" "if(" result)
+#		if(${result})
+#			set(KEEPLINE 1)
+#		endif()
+		
+#		dk_includes("${line}" "IF(" result)
+#		if(${result})
+#			set(KEEPLINE 1)
+#		endif()
 		
 		## elseif(
 		##NOTE: The 'if(' search commands take care of elseif() and endif() since 'if' is already in those words 
 		
-		dk_includes("${line}" "else(" result)
-		if(${result})
-			set(KEEPLINE 1)
-		endif()
+#		dk_includes("${line}" "else(" result)
+#		if(${result})
+#			set(KEEPLINE 1)
+#		endif()
 		
-		dk_includes("${line}" "ELSE(" result)
-		if(${result})
-			set(KEEPLINE 1)
-		endif()
+#		dk_includes("${line}" "ELSE(" result)
+#		if(${result})
+#			set(KEEPLINE 1)
+#		endif()
 		
 		## endif(
 		##NOTE: The 'if(' search commands take care of elseif() and endif() since 'if' is already in those words 
 		
+#		dk_includes("${line}" "dk_enable(" result)
+#		if(${result})
+#			set(KEEPLINE 1)
+#		endif()
 		
+#		dk_includes("${line}" "dk_disable(" result)
+#		if(${result})
+#			set(KEEPLINE 1)
+#		endif()	
 		
-		dk_includes("${line}" "dk_enable(" result)
-		if(${result})
-			set(KEEPLINE 1)
-		endif()
+#		dk_includes("${line}" "dk_depend(" result)
+#		if(${result})
+#			set(KEEPLINE 1)
+#		endif()
 		
-		dk_includes("${line}" "dk_disable(" result)
-		if(${result})
-			set(KEEPLINE 1)
-		endif()	
+#		dk_includes("${line}" "dk_set(" result)
+#		if(${result})
+#			set(KEEPLINE 1)
+#		endif()
 		
-		dk_includes("${line}" "dk_depend(" result)
-		if(${result})
-			set(KEEPLINE 1)
-		endif()
+#		dk_includes("${line}" "dk_assert(" result)
+#		if(${result})
+#			set(KEEPLINE 1)
+#		endif()
 		
-		dk_includes("${line}" "dk_set(" result)
-		if(${result})
-			set(KEEPLINE 1)
-		endif()
+#		dk_includes("${line}" "dk_error(" result)
+#		if(${result})
+#			set(KEEPLINE 1)
+#		endif()
 		
-		dk_includes("${line}" "dk_assert(" result)
-		if(${result})
-			set(KEEPLINE 1)
-		endif()
+#		dk_includes("${line}" "dk_warn(" result)
+#		if(${result})
+#			set(KEEPLINE 1)
+#		endif()
 		
-		dk_includes("${line}" "dk_error(" result)
-		if(${result})
-			set(KEEPLINE 1)
-		endif()
+#		dk_includes("${line}" "dkinfo(" result)
+#		if(${result})
+#			set(KEEPLINE 1)
+#		endif()
 		
-		dk_includes("${line}" "dk_warn(" result)
-		if(${result})
-			set(KEEPLINE 1)
-		endif()
-		
-		dk_includes("${line}" "dkinfo(" result)
-		if(${result})
-			set(KEEPLINE 1)
-		endif()
-		
-		dk_includes("${line}" "dk_debug(" result)
-		if(${result})
-			set(KEEPLINE 1)
-		endif()
+#		dk_includes("${line}" "dk_debug(" result)
+#		if(${result})
+#			set(KEEPLINE 1)
+#		endif()
 
-		dk_includes("${line}" "dk_verbose(" result)
-		if(${result})
-			set(KEEPLINE 1)
-		endif()
+#		dk_includes("${line}" "dk_verbose(" result)
+#		if(${result})
+#			set(KEEPLINE 1)
+#		endif()
 		
-		dk_includes("${line}" "dk_trace(" result)
-		if(${result})
-			set(KEEPLINE 1)
-		endif()
+#		dk_includes("${line}" "dk_trace(" result)
+#		if(${result})
+#			set(KEEPLINE 1)
+#		endif()
 		
 		dk_includes("${line}" "message(" result)
 		if(${result})
