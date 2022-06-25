@@ -18,8 +18,7 @@ if(IOS)
 	FIND_LIBRARY(opensles_lib OpenSLES)
 	if(NOT opensles_lib)
 		dk_error("Could not locate OpenSLES framework")
-		
-	else()
+	endif()
 	APPLE_dk_lib(${opensles_lib})
 endif()
 
