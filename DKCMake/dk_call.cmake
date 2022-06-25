@@ -4,9 +4,9 @@ include(${DKCMAKE}/dk_load.cmake)
 ##################################################################################
 # dk_Call(func)
 #
-#	load a ${func}.cmake file located in the DKCMake path amd call the function 
+#	load a ${func}.cmake file located in the DKCMake path amd call the function and pass arguments
 #
 macro(dk_call func)
 	dk_load(${func})
-	cmake_language(CALL ${func} ${ARGV})
+	cmake_language(CALL ${ARGV})
 endmacro()

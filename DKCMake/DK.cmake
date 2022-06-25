@@ -14,7 +14,7 @@ if(CMAKE_HOST_UNIX AND NOT CMAKE_HOST_APPLE)
 endif()
 
 
-# Set the DIGITALKNOB environment variable 
+# Set the DIGITALKNOB and DKCMAKE environment variables 
 get_filename_component(path ${CMAKE_SOURCE_DIR} ABSOLUTE)
 string(FIND "${path}" "digitalknob" pos)
 string(SUBSTRING ${path} 0 ${pos} path)
@@ -26,10 +26,6 @@ if(WIN_HOST)
 	execute_process(COMMAND cmd /c setx DIGITALKNOB ${DIGITALKNOB})
 	execute_process(COMMAND cmd /c setx DKCMAKE ${DKCMAKE})
 endif()
-#message(STATUS "DIGITALKNOB = ${DIGITALKNOB}")
-#message(STATUS "DKCMAKE = ${DKCMAKE}")
-#message(STATUS "ENV{DIGITALKNOB} = $ENV{DIGITALKNOB}")
-#message(STATUS "ENV{DKCMAKE} = $ENV{DKCMAKE}")
 
 
 # include dk funtions
