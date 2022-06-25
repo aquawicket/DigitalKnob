@@ -2209,9 +2209,27 @@ function(dk_undepend plugin) #sublibrary
 		dk_removeTarget(${plugin} ${sublibrary})
 	endif()
 	
-	#dk_debug(dkdepend_list)
-	#dk_debug("REMOVE_ITEM dkdepend_list ${ARGV}")
-	list(REMOVE_ITEM dkdepend_list ${ARGV})
+	
+	if(${ARGV} STREQUAL mobile_core_services)
+		foreach(dkdepend_item ${dkdepend_list})
+			dk_debug("dkdepend_item = ${dkdepend_item}")
+			if(${plugin} STREQUAL "mobile_core_services")
+				dk_assert("mobile_core_services is still in the list")
+			endif()
+		endforeach()
+	
+		list(REMOVE_ITEM dkdepend_list ${plugin} CACHE INTERNAL "")
+	
+		dk_debug("list(FIND dkdepend_list ${plugin} index)")
+		list(FIND dkdepend_list "${plugin}" index)
+		dk_debug(index)
+		dk_wait()
+		if(${index} GREATER -1)
+			list(REMOVE_AT dkdepend_list ${index})
+			dk_wait()
+		endif()
+	endif()
+	
 endfunction()
 
 
@@ -2226,6 +2244,7 @@ endfunction()
 #
 function(dk_runDepends plugin)
 	DKDEBUGFUNC(${ARGV})
+	set(sublibrary ${ARGV1})
 	
 	dk_getPathToPlugin(${plugin} plugin_path)
 	if(NOT plugin_path)
@@ -2236,7 +2255,7 @@ function(dk_runDepends plugin)
 	unset(disable_script)
 	unset(depends_script)
 	
-	set(keep_commands "else;ELSE;if;IF;return;RETURN;dk_disable")
+	set(keep_commands "else;ELSE;if;IF;return;RETURN;dk_disable;dk_undepend")
 	set(KEEPLINE 0)
 	foreach(line ${lines})
 		foreach(keep_command ${keep_commands})
@@ -2255,7 +2274,7 @@ function(dk_runDepends plugin)
 		endif()
 	endforeach()
 	
-	set(keep_commands "else;ELSE;if;IF;message;MESSAGE;return;RETURN;dk_assert;dk_debug;dk_depend;dk_disable;dk_enable;dk_error;dk_info;dk_set;dk_trace;dk_verbose;dk_warn")
+	set(keep_commands "else;ELSE;if;IF;message;MESSAGE;return;RETURN;dk_assert;dk_debug;dk_depend;dk_disable;dk_enable;dk_error;dk_info;dk_set;dk_trace;dk_undepend;dk_verbose;dk_warn")
 	set(KEEPLINE 0)
 	foreach(line ${lines})
 		foreach(keep_command ${keep_commands})
@@ -2281,34 +2300,34 @@ function(dk_runDepends plugin)
 	endif()
 	
 	if(depends_script)
-		if(${ARGC} GREATER 1)
-			dk_enable(${ARGV1})
+		if(sublibrary)
+			dk_enable(${sublibrary})
 		else()
 			dk_set(${ARGV0}_all 1)
 		endif()
 		file(WRITE ${plugin_path}/DEPENDS.TMP "${depends_script}")
 		INCLUDE(${plugin_path}/DEPENDS.TMP)
 		file(REMOVE ${plugin_path}/DEPENDS.TMP)
-		if(${ARGC} GREATER 1)
-			dk_set(${ARGV1} OFF)
+		if(sublibrary)
+			dk_set(${sublibrary} OFF)
 		endif()
 	endif()
 	
-	if(${ARGC} GREATER 1)
-		list(FIND dkdepend_list "${plugin} ${ARGV1}" index)
+	if(sublibrary)
+		list(FIND dkdepend_list "${plugin} ${sublibrary}" index)
 		if(${index} GREATER -1)
-			return()
+			return() # already in the list
 		endif()
 	else()
 		list(FIND dkdepend_list "${plugin}" index)
 		if(${index} GREATER -1)
-			return() # already on the list
+			return() # already in the list
 		endif()
 	endif()
 	
 	dk_set(dkdepend_list ${dkdepend_list} "${ARGV}")  #Add sublibrary to list
-#	if(${ARGC} GREATER 1)
-#		dk_set(dkdepend_list ${dkdepend_list} "${plugin} ${ARGV1}")  #Add sublibrary to list
+#	if(sublibrary)
+#		dk_set(dkdepend_list ${dkdepend_list} "${plugin} ${sublibrary}")  #Add sublibrary to list
 #	else()
 #		dk_set(dkdepend_list ${dkdepend_list} ${plugin})  #Add library to list
 #	endif()	
