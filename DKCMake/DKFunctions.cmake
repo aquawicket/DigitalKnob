@@ -818,21 +818,25 @@ endfunction()
 
 
 ###############################################################################
-# dk_disable(plugin)
+# dk_disable(plugin) #sublibrary
 #
-function(dk_disable plugin)
+function(dk_disable plugin) #sublibrary
 	DKDEBUGFUNC(${ARGV})
+	set(sublibrary ${ARGV1})
+	
 	if(BYPASS_DISABLE)
 		dk_info("* dk_disable(${plugin}) ignored.  BYPASS_DISABLE is set to ON. ${plugin} will not be disabled *")
 		return()
 	endif()
 	
 	if(NOT ${CMAKE_CURRENT_LIST_DIR} STREQUAL ${DKCMAKE})
-	if(NOT ${CMAKE_CURRENT_LIST_DIR} STREQUAL ${DKPROJECT})
-	if(NOT ${CMAKE_CURRENT_LIST_DIR} STREQUAL ${DKIMPORTS}/${plugin})
-		dk_assert("dk_disable() Can only be used from the DKCMake/DKDisabled.cmake file. This is to avoid having disabled libraries hideing everywhere")
-	endif()
-	endif()
+		if(NOT ${CMAKE_CURRENT_LIST_DIR} STREQUAL ${DKPROJECT})
+			if(NOT ${CMAKE_CURRENT_LIST_DIR} STREQUAL ${DKIMPORTS}/${plugin})
+				if(NOT ${CMAKE_CURRENT_LIST_DIR} STREQUAL ${DKPLUGINS}/${plugin})
+					dk_assert("dk_disable() Can only be used from the DKCMake/DKDisabled.cmake file. This is to avoid having disabled libraries hideing everywhere")
+				endif()
+			endif()
+		endif()
 	endif()
 	
 	if(NOT EXISTS ${DKIMPORTS}/${plugin}/DKMAKE.cmake)
@@ -842,20 +846,22 @@ function(dk_disable plugin)
 	endif()
 	endif()
 	
-	if(${ARGC} GREATER 1)
-		dk_unset(${ARGV1})
-		dk_unset(HAVE_${ARGV1})
+	if(sublibrary)
+		dk_unset(${sublibrary})
+		dk_unset(HAVE_${sublibrary})
+		dk_undepend(${sublibrary})
+		
 		# In c++ we can't use certian symbals in the preprocess or for macros. - must be turned to _
-		string(REPLACE "-" "_" argv1_macro "${ARGV1}")
-		dk_undefine(HAVE_${argv1_macro})
-		dk_undepend(${ARGV1})
+		string(REPLACE "-" "_" sublibrary_macro "${sublibrary}")
+		dk_undefine(HAVE_${sublibrary_macro})
 	else()
 		dk_unset(${plugin})
 		dk_unset(HAVE_${plugin})
+		dk_undepend(${plugin})
+		
 		# In c++ we can't use certian symbals in the preprocess or for macros. - must be turned to _
 		string(REPLACE "-" "_" plugin_macro "${plugin}")
 		dk_undefine(HAVE_${plugin_macro})
-		dk_undepend(${plugin})
 	endif()
 endfunction()
 
@@ -2187,17 +2193,25 @@ function(dk_undepend plugin) #sublibrary
 	set(sublibrary ${ARGV1})
 	
 	# Only allow dk_undepend command from these filters	
-	#if(NOT ${CMAKE_CURRENT_LIST_DIR} STREQUAL ${DKCMAKE})
-	#if(NOT ${CMAKE_CURRENT_LIST_DIR} STREQUAL ${DKPROJECT})
-	#	dk_assert("dk_undepend() Can only be used from the DKDisabled.cmake file. This is to avoid having disabled libraries hideing everywhere")
-	#endif()
-	#endif()
+	if(NOT ${CMAKE_CURRENT_LIST_DIR} STREQUAL ${DKCMAKE})
+		if(NOT ${CMAKE_CURRENT_LIST_DIR} STREQUAL ${DKPROJECT})
+			if(NOT ${CMAKE_CURRENT_LIST_DIR} STREQUAL ${DKIMPORTS}/${plugin})
+				if(NOT ${CMAKE_CURRENT_LIST_DIR} STREQUAL ${DKPLUGINS}/${plugin})
+					dk_assert("dk_undepend() Can only be used from the DKDisabled.cmake file. This is to avoid having disabled libraries hideing everywhere")
+				endif()
+			endif()
+		endif()
+	endif()
 	
 	dk_info("DISABLING ${ARGV}")
 	dk_set(dk_disabled_list ${dk_disabled_list} "${ARGV}")
 	if(sublibrary)
 		dk_removeTarget(${plugin} ${sublibrary})
 	endif()
+	
+	#dk_debug(dkdepend_list)
+	#dk_debug("REMOVE_ITEM dkdepend_list ${ARGV}")
+	list(REMOVE_ITEM dkdepend_list ${ARGV})
 endfunction()
 
 
@@ -2737,25 +2751,25 @@ endfunction()
 
 
 ###############################################################################
-# dk_removeTarget(name target)
+# dk_removeTarget(plugin target)
 #
-#	@name:
+#	@plugin:
 #	@target:
 #
-function(dk_removeTarget name target)
+function(dk_removeTarget plugin target)
 	DKDEBUGFUNC(${ARGV})
 	dk_debug("dk_removeTarget( ${ARGV} )")
-	if(${name}_targets)
-		list(REMOVE_ITEM ${name}_targets ${target})
+	if(${plugin}_targets)
+		list(REMOVE_ITEM ${plugin}_targets ${target})
 	endif()
-	if(${name}_targets_OFF)
-		dk_set(${name}_targets_OFF ${${name}_targets_OFF} ${target})
+	if(${plugin}_targets_OFF)
+		dk_set(${plugin}_targets_OFF ${${plugin}_targets_OFF} ${target})
 	else()
-		dk_set(${name}_targets_OFF ${target})
+		dk_set(${plugin}_targets_OFF ${target})
 	endif()
-	dk_set(${name}_${target} 0)
-	dk_unset(${name}_${target})
-#	dk_unset(${name}::${target}) # TESTME
+	dk_set(${plugin}_${target} 0)
+	dk_unset(${plugin}_${target})
+#	dk_unset(${plugin}::${target}) # TESTME
 endfunction()
 
 
@@ -3485,8 +3499,14 @@ endfunction()
 #	Remove the extension from a file path
 #
 function(dk_removeExtension path result)
-	dk_todo() #TODO
-	set(${result} ${out} PARENT_SCOPE)
+	DKDEBUGFUNC(${ARGV})
+	string(FIND ${path} "." index REVERSE)
+	if(${index} EQUAL -1)
+		dk_warn("no extension found")
+		return()
+	endif()
+	string(SUBSTRING ${path} 0 ${index} fileNameNoExt) 
+    set(${result} ${fileNameNoExt} PARENT_SCOPE)
 endfunction()
 
 
