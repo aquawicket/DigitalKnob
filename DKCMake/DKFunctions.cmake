@@ -2254,63 +2254,11 @@ function(dk_runDepends plugin)
 			endif()
 		endforeach()
 		
-#		dk_includes("${line}" "if(" result)
-#		if(${result})
-#			set(KEEPLINE 1)
-#		endif()
-		
-#		dk_includes("${line}" "IF(" result)
-#		if(${result})
-#			set(KEEPLINE 1)
-#		endif()
-		
-		## elseif(
-		##NOTE: The 'if(' search commands take care of elseif() and endif() since 'if' is already in those words 
-		
-#		dk_includes("${line}" "else(" result)
-#		if(${result})
-#			set(KEEPLINE 1)
-#		endif()
-		
-#		dk_includes("${line}" "ELSE(" result)
-#		if(${result})
-#			set(KEEPLINE 1)
-#		endif()
-		
-		## endif(
-		##NOTE: The 'if(' search commands take care of elseif() and endif() since 'if' is already in those words 
-		
-#		dk_includes("${line}" "return(" result)
-#		if(${result})
-#			set(KEEPLINE 1)
-#		endif()
-		
-#		dk_includes("${line}" "RETURN(" result)
-#		if(${result})
-#			set(KEEPLINE 1)
-#		endif()
-		
-#		dk_includes("${line}" "dk_disable(" result)
-#		if(${result})
-#			set(KEEPLINE 1)
-#		endif()
-		
-#		dk_includes("${line}" "SET(" result)
-#		if(${result})
-#			set(KEEPLINE 1)
-#		endif()
-		
-#		# taken care of by SET( sytax above
-#		dk_includes("${line}" "dk_set(" result)
-#		if(${result})
-#			set(KEEPLINE 1)
-#		endif()
-		
 		if(KEEPLINE)
 			set(disable_script "${disable_script}${line}\n")
 		endif()
 		
-		# FIXME: we need to get a proper count of openeing (  before we can determine that we have actually reached the closing )
+		# FIXME: we need to get a proper count of openeing ( for nested occurences before we can determine that we have actually reached the commands closing )
 		dk_includes("${line}" ")" result)
 		if(${result})
 			set(KEEPLINE 0)
@@ -2327,107 +2275,6 @@ function(dk_runDepends plugin)
 				set(KEEPLINE 1)
 			endif()
 		endforeach()
-		
-#		dk_includes("${line}" "if(" result)
-#		if(${result})
-#			set(KEEPLINE 1)
-#		endif()
-		
-#		dk_includes("${line}" "IF(" result)
-#		if(${result})
-#			set(KEEPLINE 1)
-#		endif()
-		
-		## elseif(
-		##NOTE: The 'if(' search commands take care of elseif() and endif() since 'if' is already in those words 
-		
-#		dk_includes("${line}" "else(" result)
-#		if(${result})
-#			set(KEEPLINE 1)
-#		endif()
-		
-#		dk_includes("${line}" "ELSE(" result)
-#		if(${result})
-#			set(KEEPLINE 1)
-#		endif()
-		
-		## endif(
-		##NOTE: The 'if(' search commands take care of elseif() and endif() since 'if' is already in those words 
-		
-#		dk_includes("${line}" "dk_enable(" result)
-#		if(${result})
-#			set(KEEPLINE 1)
-#		endif()
-		
-#		dk_includes("${line}" "dk_disable(" result)
-#		if(${result})
-#			set(KEEPLINE 1)
-#		endif()	
-		
-#		dk_includes("${line}" "dk_depend(" result)
-#		if(${result})
-#			set(KEEPLINE 1)
-#		endif()
-		
-#		dk_includes("${line}" "dk_set(" result)
-#		if(${result})
-#			set(KEEPLINE 1)
-#		endif()
-		
-#		dk_includes("${line}" "dk_assert(" result)
-#		if(${result})
-#			set(KEEPLINE 1)
-#		endif()
-		
-#		dk_includes("${line}" "dk_error(" result)
-#		if(${result})
-#			set(KEEPLINE 1)
-#		endif()
-		
-#		dk_includes("${line}" "dk_warn(" result)
-#		if(${result})
-#			set(KEEPLINE 1)
-#		endif()
-		
-#		dk_includes("${line}" "dkinfo(" result)
-#		if(${result})
-#			set(KEEPLINE 1)
-#		endif()
-		
-#		dk_includes("${line}" "dk_debug(" result)
-#		if(${result})
-#			set(KEEPLINE 1)
-#		endif()
-
-#		dk_includes("${line}" "dk_verbose(" result)
-#		if(${result})
-#			set(KEEPLINE 1)
-#		endif()
-		
-#		dk_includes("${line}" "dk_trace(" result)
-#		if(${result})
-#			set(KEEPLINE 1)
-#		endif()
-		
-		dk_includes("${line}" "message(" result)
-		if(${result})
-			set(KEEPLINE 1)
-		endif()
-		
-		dk_includes("${line}" "MESSAGE(" result)
-		if(${result})
-			set(KEEPLINE 1)
-		endif()
-		
-		dk_includes("${line}" "return(" result)
-		if(${result})
-			set(KEEPLINE 1)
-		endif()
-		
-		dk_includes("${line}" "RETURN(" result)
-		if(${result})
-			set(KEEPLINE 1)
-		endif()
 		
 		if(KEEPLINE)
 			set(depends_script "${depends_script}${line}\n")
