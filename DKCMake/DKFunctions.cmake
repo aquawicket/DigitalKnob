@@ -2379,10 +2379,10 @@ function(dk_depend plugin) #sublibrary
 #			return() # already in the list
 #		endif()
 #	else()
-		list(FIND dkdepend_list ${plugin} includes)
-		if(${includes} GREATER -1)
-		#dk_includes(dkdepend_list ${plugin} includes)
-		#if(includes)
+		#list(FIND dkdepend_list ${plugin} includesB)
+		#if(${includesB} GREATER -1)
+		dk_includes(dkdepend_list ${plugin} includes)
+		if(includes)
 			return()  #library is already in the list
 		endif()
 #	endif()	
