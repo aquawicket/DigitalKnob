@@ -1895,20 +1895,20 @@ endfunction()
 
 
 ###############################################################################
-# dk_dll(name)
+# dk_dll(plugin)
 #
-function(dk_dll name)
+function(dk_dll plugin)
 	DKDEBUGFUNC(${ARGV})
-	dk_getPathToPlugin(${name} plugin_path)
+	dk_getPathToPlugin(${plugin} plugin_path)
 	if(NOT EXISTS "${plugin_path}")
-		dk_assert("${name} plugin not found")
+		dk_assert("${plugin} plugin not found")
 	endif()
 	dk_include(${plugin_path})
 			
 	# Create CmakeLists.txt file
 	file(REMOVE ${plugin_path}/CMakeLists.txt)
 	if(NOT EXISTS "${plugin_path}/CMakeLists.txt")
-	file(APPEND ${plugin_path}/CMakeLists.txt "### ${name} ###\n")
+	file(APPEND ${plugin_path}/CMakeLists.txt "### ${plugin} ###\n")
 	file(APPEND ${plugin_path}/CMakeLists.txt "cmake_minimum_required(VERSION 3.10)\n")
 	file(APPEND ${plugin_path}/CMakeLists.txt "cmake_policy(SET CMP0054 NEW)\n")
 	file(APPEND ${plugin_path}/CMakeLists.txt "include(${DKCMAKE}/DKFunctions.cmake)\n")
@@ -1923,7 +1923,7 @@ function(dk_dll name)
 	file(APPEND ${plugin_path}/CMakeLists.txt "		include(${DKCMAKE}/ios.toolchain.cmake)\n")
 	file(APPEND ${plugin_path}/CMakeLists.txt "		add_definitions(-DIOS)\n")
 	file(APPEND ${plugin_path}/CMakeLists.txt "endif()\n")
-	file(APPEND ${plugin_path}/CMakeLists.txt "project(${name})\n")
+	file(APPEND ${plugin_path}/CMakeLists.txt "project(${plugin})\n")
 	foreach(each_include ${DKINCLUDES_LIST})
 		file(APPEND ${plugin_path}/CMakeLists.txt "include_directories(${each_include})\n")
 	endforeach()
@@ -1933,7 +1933,7 @@ function(dk_dll name)
 	foreach(each_linkdir ${DKLINKDIRS_LIST})
 		file(APPEND ${plugin_path}/CMakeLists.txt "link_directories(${each_linkdir})\n")
 	endforeach()
-	file(APPEND ${plugin_path}/CMakeLists.txt "file(GLOB ${name}_SRC \n")
+	file(APPEND ${plugin_path}/CMakeLists.txt "file(GLOB ${plugin}_SRC \n")
 	file(APPEND ${plugin_path}/CMakeLists.txt "		${plugin_path}/*.h\n")
 	file(APPEND ${plugin_path}/CMakeLists.txt "    	${plugin_path}/*.c\n")
 	file(APPEND ${plugin_path}/CMakeLists.txt "    	${plugin_path}/*.cpp\n")
@@ -1943,10 +1943,10 @@ function(dk_dll name)
 		file(APPEND ${plugin_path}/CMakeLists.txt "		${plugin_path}/*.mm\n")
 	endif()
 	file(APPEND ${plugin_path}/CMakeLists.txt ")\n")
-	file(APPEND ${plugin_path}/CMakeLists.txt "add_library(${name} SHARED \${${name}_SRC})\n")
+	file(APPEND ${plugin_path}/CMakeLists.txt "add_library(${plugin} SHARED \${${plugin}_SRC})\n")
 	file(APPEND ${plugin_path}/CMakeLists.txt "add_definitions(-D_WIN32_WINNT=0x0600)\n")
-	file(APPEND ${plugin_path}/CMakeLists.txt "set_target_properties(${name} PROPERTIES LINK_FLAGS_DEBUG \"/NODEFAULTLIB:libc.lib /NODEFAULTLIB:LIBCMTD.lib /SAFESEH:NO\" LINK_FLAGS \"/NODEFAULTLIB:libc.lib /NODEFAULTLIB:LIBCMT.lib /SAFESEH:NO\") \n")
-	file(APPEND ${plugin_path}/CMakeLists.txt "target_compile_options(${name} PRIVATE $<$<CONFIG:Debug>:/MDd /Od /Ob0 /EHsc /Zi /RTC1 /DDEBUG /D_DEBUG> $<$<CONFIG:Release>:/MD /O2 /Ob2 /EHsc /DNDEBUG>)\n")
+	file(APPEND ${plugin_path}/CMakeLists.txt "set_target_properties(${plugin} PROPERTIES LINK_FLAGS_DEBUG \"/NODEFAULTLIB:libc.lib /NODEFAULTLIB:LIBCMTD.lib /SAFESEH:NO\" LINK_FLAGS \"/NODEFAULTLIB:libc.lib /NODEFAULTLIB:LIBCMT.lib /SAFESEH:NO\") \n")
+	file(APPEND ${plugin_path}/CMakeLists.txt "target_compile_options(${plugin} PRIVATE $<$<CONFIG:Debug>:/MDd /Od /Ob0 /EHsc /Zi /RTC1 /DDEBUG /D_DEBUG> $<$<CONFIG:Release>:/MD /O2 /Ob2 /EHsc /DNDEBUG>)\n")
 	if(DEBUG_LIBS)
 		string(REPLACE "debug" " debug " DLL_DEBUG_LIBS ${DEBUG_LIBS})
 	endif()
@@ -1957,83 +1957,83 @@ function(dk_dll name)
 		string(REPLACE ".lib" ".lib " DLL_LIBS ${LIBS})
 	endif()
 	if(DLL_DEBUG_LIBS AND DLL_RELEASE_LIBS)
-#		file(APPEND ${plugin_path}/CMakeLists.txt "target_link_libraries(${name} debug ${DKPLUGINS}/DK/${OS}/${DEBUG_DIR}/DK.lib optimized ${DKPLUGINS}/DK/${OS}/${RELEASE_DIR}/DK.lib) \n")
-		file(APPEND ${plugin_path}/CMakeLists.txt "target_link_libraries(${name} ${DLL_DEBUG_LIBS} ${DLL_RELEASE_LIBS} ${DLL_LIBS}) \n")
+#		file(APPEND ${plugin_path}/CMakeLists.txt "target_link_libraries(${plugin} debug ${DKPLUGINS}/DK/${OS}/${DEBUG_DIR}/DK.lib optimized ${DKPLUGINS}/DK/${OS}/${RELEASE_DIR}/DK.lib) \n")
+		file(APPEND ${plugin_path}/CMakeLists.txt "target_link_libraries(${plugin} ${DLL_DEBUG_LIBS} ${DLL_RELEASE_LIBS} ${DLL_LIBS}) \n")
 	endif()
 	file(APPEND ${plugin_path}/CMakeLists.txt "if(WIN_HOST)\n")
-	file(APPEND ${plugin_path}/CMakeLists.txt "		set_target_properties(${name} PROPERTIES LINKER_LANGUAGE CPP)\n")
+	file(APPEND ${plugin_path}/CMakeLists.txt "		set_target_properties(${plugin} PROPERTIES LINKER_LANGUAGE CPP)\n")
 	file(APPEND ${plugin_path}/CMakeLists.txt "endif()\n")
 	endif()
-	dk_addToPluginList(${name})
+	dk_addToPluginList(${plugin})
 endfunction()
 
 
 ###############################################################################
-# dk_executable(name)
+# dk_executable(plugin)
 #
 #	
-function(dk_executable name)
+function(dk_executable plugin)
 	DKDEBUGFUNC(${ARGV})
-	dk_getPathToPlugin(${name} plugin_path)
+	dk_getPathToPlugin(${plugin} plugin_path)
 	if(NOT EXISTS "${plugin_path}")
-		dk_assert("${name} plugin not found")
+		dk_assert("${plugin} plugin not found")
 	endif()
 	dk_include(${plugin_path})
 	file(REMOVE ${plugin_path}/CMakeLists.txt)
 	if(NOT EXISTS "${plugin_path}/CMakeLists.txt")
-#	file(APPEND ${plugin_path}/CMakeLists.txt "### ${name} ###\n")
+#	file(APPEND ${plugin_path}/CMakeLists.txt "### ${plugin} ###\n")
 #	file(APPEND ${plugin_path}/CMakeLists.txt "cmake_minimum_required(VERSION 3.10)\n")
 #	file(APPEND ${plugin_path}/CMakeLists.txt "cmake_policy(SET CMP0054 NEW)\n")
 #	file(APPEND ${plugin_path}/CMakeLists.txt "include(${DKCMAKE}/DK.cmake)\n")
-#	file(APPEND ${plugin_path}/CMakeLists.txt "project(${name})\n")
+#	file(APPEND ${plugin_path}/CMakeLists.txt "project(${plugin})\n")
 	endif()
-	dk_addToPluginList(${name})
+	dk_addToPluginList(${plugin})
 endfunction()
 
 
 ###############################################################################
-# dk_testApp(name)
+# dk_testApp(plugin)
 #
-#	@name:
+#	@plugin:
 #
-function(dk_testApp name)
+function(dk_testApp plugin)
 	DKDEBUGFUNC(${ARGV})
-	dk_getPathToPlugin(${name} plugin_path)
+	dk_getPathToPlugin(${plugin} plugin_path)
 	if(NOT EXISTS "${plugin_path}/test")
-		dk_info("dk_testApp(): ${name}_test app not found")
+		dk_info("dk_testApp(): ${plugin}_test app not found")
 		return()
 	endif()
-	dk_info("building ${name}_test app")
+	dk_info("building ${plugin}_test app")
 	dk_set(test_path "${plugin_path}/test")
 	
 	# Create CmakeLists.txt file
 	file(REMOVE "${test_path}/CMakeLists.txt")
 	file(APPEND ${test_path}/CMakeLists.txt "### This file is generated by DKCMake. Any Changes here, will be overwritten. ###\n")
-	file(APPEND ${test_path}/CMakeLists.txt "### ${name} ###\n")
+	file(APPEND ${test_path}/CMakeLists.txt "### ${plugin} ###\n")
 	file(APPEND ${test_path}/CMakeLists.txt "cmake_minimum_required(VERSION 3.10)\n")
 	file(APPEND ${test_path}/CMakeLists.txt "cmake_policy(SET CMP0054 NEW)\n")
 	file(APPEND ${test_path}/CMakeLists.txt "include(${DKCMAKE}/DK.cmake)\n")
-	dk_appendCmake("project(${name}_test)\n")
+	dk_appendCmake("project(${plugin}_test)\n")
 	dk_appendCmake("include_directories(${DKPLUGINS})\n")
 		
 	# TODO		
-	dk_addToPluginList(${name})
+	dk_addToPluginList(${plugin})
 endfunction()
 
 
 ###############################################################################
-# dk_addToPluginList(name)
+# dk_addToPluginList(plugin)
 #
-# @name:
+# @plugin:
 #
-function(dk_addToPluginList name)
+function(dk_addToPluginList plugin)
 	DKDEBUGFUNC(${ARGV})
-	dk_getPathToPlugin(${name} plugin_path)
+	dk_getPathToPlugin(${plugin} plugin_path)
 	if(NOT EXISTS "${plugin_path}")
-		dk_assert("${name} plugin not found")
+		dk_assert("${plugin} plugin not found")
 	endif()
 	dk_include(${plugin_path})
-	dk_set(DKPLUGIN_LIST ${DKPLUGIN_LIST} ${name})
+	dk_set(DKPLUGIN_LIST ${DKPLUGIN_LIST} ${plugin})
 endfunction()
 
 
@@ -2087,34 +2087,34 @@ SET(ASSETS
 
 
 ###############################################################################
-# dk_assets(name)
+# dk_assets(plugin)
 #
 #	Add a library's files to the App's assets
 #
-#	@name:
+#	@plugin:
 #
-function(dk_assets name)
+function(dk_assets plugin)
 	DKDEBUGFUNC(${ARGV})
 	if(NOT DKAPP)
 		return()
 	endif()	
-	dk_getPathToPlugin(${name} plugin_path)
+	dk_getPathToPlugin(${plugin} plugin_path)
 	if(NOT plugin_path)
-		dk_assert("${name} plugin not found")
+		dk_assert("${plugin} plugin not found")
 	endif()
-	dk_info("Importing ${name} assets...")
+	dk_info("Importing ${plugin} assets...")
 	file(COPY ${plugin_path} DESTINATION ${DKPROJECT}/assets ${ASSETS})
 #	file(COPY ${plugin_path}/${OS}/${DEBUG_DIR}/*.exe DESTINATION ${DKPROJECT}/assets/${OS}/Debug)
 endfunction()
 
 
 ###############################################################################
-# dk_getPathToPlugin(name result)
+# dk_getPathToPlugin(plugin result)
 #
-#	@name:
+#	@plugin:
 #	@result:
 #
-function(dk_getPathToPlugin name result)
+function(dk_getPathToPlugin plugin result)
 	DKDEBUGFUNC(${ARGV})
 	list(FIND dk_disabled_list "${ARGV}" index)
 	if(${index} GREATER -1)
@@ -2123,28 +2123,28 @@ function(dk_getPathToPlugin name result)
 	endif()
 	file(GLOB children RELATIVE ${DIGITALKNOB} ${DIGITALKNOB}/*)
  	foreach(child ${children})
-		if(EXISTS ${DIGITALKNOB}/${child}/3rdParty/_DKIMPORTS/${name}/DKMAKE.cmake)
-			set(${result} "${DIGITALKNOB}/${child}/3rdParty/_DKIMPORTS/${name}" PARENT_SCOPE)
+		if(EXISTS ${DIGITALKNOB}/${child}/3rdParty/_DKIMPORTS/${plugin}/DKMAKE.cmake)
+			set(${result} "${DIGITALKNOB}/${child}/3rdParty/_DKIMPORTS/${plugin}" PARENT_SCOPE)
 			return()
     	endif()
-		if(EXISTS ${DIGITALKNOB}/${child}/DKPlugins/${name}/DKMAKE.cmake)
-			set(${result} "${DIGITALKNOB}/${child}/DKPlugins/${name}" PARENT_SCOPE)
+		if(EXISTS ${DIGITALKNOB}/${child}/DKPlugins/${plugin}/DKMAKE.cmake)
+			set(${result} "${DIGITALKNOB}/${child}/DKPlugins/${plugin}" PARENT_SCOPE)
 			return()
     	endif()
   	endforeach()
 	set(${result} "")
-	dk_assert("Could not find ${name} Plugin.")
+	dk_assert("Could not find ${plugin} Plugin.")
 endfunction()
 
 
 ###############################################################################
-# dk_depend(name)
+# dk_depend(plugin)
 #
 #	Add a library or plugin to the dependency list
 #
-#	@name:
+#	@plugin:
 #
-function(dk_depend name) #sublibrary
+function(dk_depend plugin) #sublibrary
 	DKDEBUGFUNC(${ARGV})
 	set(sublibrary ${ARGV1})
 	if(sublibrary)
@@ -2152,30 +2152,31 @@ function(dk_depend name) #sublibrary
 	endif()
 #	dk_debug(CMAKE_CURRENT_LIST_DIR)
 	
-	list(FIND dk_disabled_list ${name} index)
+	list(FIND dk_disabled_list ${plugin} index)
 	if(${index} GREATER -1)
-		dk_warn("${name} IS DISABLED")
+		list(REMOVE_ITEM dkdepend_list ${plugin})
+		dk_warn("${plugin} IS DISABLED")
 		return()
 	endif()
 	
 # 	TODO TODO TODO TODO 
-# 	dk_createSmartObject(${name}) #TODO:  automatically determin plugin, create variables, setup auto compiles, etc 
+# 	dk_createSmartObject(${plugin}) #TODO:  automatically determin plugin, create variables, setup auto compiles, etc 
 # 	TODO TODO TODO TODO 
 	
 #	If dk_depend had second variable (a sub library), set that variable to ON
 #	if(sublibrary)
-#		list(FIND dkdepend_list "${name} ${sublibrary}" index)
+#		list(FIND dkdepend_list "${plugin} ${sublibrary}" index)
 #		if(${index} GREATER -1) 
 #			return() # already in the list
 #		endif()
 #	else()
-		list(FIND dkdepend_list ${name} index)
+		list(FIND dkdepend_list ${plugin} index)
 		if(${index} GREATER -1)
 			return()  #library is already in the list
 		endif()
 #	endif()	
-	dk_enable(${name})
-	dk_runDepends(${name}) # strip everything from the file except if() else() elseif() endif() and dk_depend() before sorting
+	dk_enable(${plugin})
+	dk_runDepends(${plugin}) # strip everything from the file except if() else() elseif() endif() and dk_depend() before sorting
 	
 endfunction()
 dk_aliasFunctions("dk_depend")
@@ -2186,7 +2187,7 @@ dk_aliasFunctions("dk_depend")
 #
 #	Remove a library or plugin from the dependency list
 #
-#	@name:
+#	@plugin:
 #
 function(dk_undepend plugin) #sublibrary
 	DKDEBUGFUNC(${ARGV})
@@ -2257,7 +2258,6 @@ function(dk_undepend plugin) #sublibrary
 		#dk_wait()
 		#dk_debug("POST dkdepend_list = ${dkdepend_list}")
 	#endif()
-	
 endfunction()
 
 
@@ -2774,25 +2774,25 @@ endfunction()
 
 
 ###############################################################################
-# dk_addTarget(name target)
+# dk_addTarget(plugin target)
 #
-#	@name:
+#	@plugin:
 #	@target:
 #
-function(dk_addTarget name target)
+function(dk_addTarget plugin target)
 	DKDEBUGFUNC(${ARGV})
 	dk_debug("dk_addTarget( ${ARGV} )")
-	if(${name}_targets_OFF)
-		list(REMOVE_ITEM ${name}_targets_OFF ${target})
+	if(${plugin}_targets_OFF)
+		list(REMOVE_ITEM ${plugin}_targets_OFF ${target})
 	endif()
-	if(${name}_targets)
-		dk_set(${name}_targets ${${name}_targets} ${target})
+	if(${plugin}_targets)
+		dk_set(${plugin}_targets ${${plugin}_targets} ${target})
 	else()
-		dk_set(${name}_targets ${target})
+		dk_set(${plugin}_targets ${target})
 	endif()
-	if(${name}_all)
-		dk_set(${name}_${target} 1)
-#		dk_set(${name}::${target} 1) # TESTME
+	if(${plugin}_all)
+		dk_set(${plugin}_${target} 1)
+#		dk_set(${plugin}::${target} 1) # TESTME
 	endif()
 endfunction()
 
