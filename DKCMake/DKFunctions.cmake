@@ -51,15 +51,15 @@ set(dk_disabled_list	 		""		CACHE INTERNAL "")
 
 
 ###############################################################################
-# TestReturnValue(args result)
+# TestReturnValue(args RESULT)
 #
 #	Example function that uses returns value with a supplied variable 
 #	Implementation: 
-#		function(TestReturnValue args result)
+#		function(TestReturnValue args RESULT)
 #			set(args ${ARGV})
-#			list(GET args -1 result)
+#			list(GET args -1 RESULT)
 #			list(REMOVE_AT args -1)
-#			set(${result} ${args} PARENT_SCOPE) #just relay the arguments
+#			set(${RESULT} ${args} PARENT_SCOPE) #just relay the arguments
 #		endfunction()
 #
 #	Usage:
@@ -240,20 +240,20 @@ endmacro()
 
 
 ###############################################################################
-# dk_includes(str substr result)
+# dk_includes(str substr RESULT)
 #
 #	Test if a string contains a substring
 #
 #	str:(required)		The string to search 
 #	substr:(required)	The substring to search for
-#	result:(required)	Returns true if the str contains the substr. Otherwise returns false
+#	RESULT:(required)	Returns true if the str contains the substr. Otherwise returns false
 #
-function(dk_includes str substr result) #REVERSE
+function(dk_includes str substr RESULT) #REVERSE
 	#DKDEBUGFUNC(${ARGV})
 	set(reverse ${ARG3})
-	unset(${result} PARENT_SCOPE)
+	unset(${RESULT} PARENT_SCOPE)
 	
-	list(LENGTH ${str} variableLength)
+	list(LENGTH str variableLength)
 	if(${variableLength} GREATER 1)
 		if(reverse)
 			#FIXME: make sure reverse is equal to REVERSE
@@ -262,10 +262,10 @@ function(dk_includes str substr result) #REVERSE
 			list(FIND "${str}" "${substr}" index)
 		endif()
 		if(${index} EQUAL 0)
-			set(${result} true PARENT_SCOPE)
+			set(${RESULT} true PARENT_SCOPE)
 		endif()
 		if(${index} GREATER 0)
-			set(${result} ${index} PARENT_SCOPE)
+			set(${RESULT} ${index} PARENT_SCOPE)
 		endif()
 	else()
 		if(reverse)
@@ -275,10 +275,10 @@ function(dk_includes str substr result) #REVERSE
 			string(FIND "${str}" "${substr}" index)
 		endif()
 		if(${index} EQUAL 0)
-			set(${result} true PARENT_SCOPE)
+			set(${RESULT} true PARENT_SCOPE)
 		endif()
 		if(${index} GREATER 0)
-			set(${result} ${index} PARENT_SCOPE)
+			set(${RESULT} ${index} PARENT_SCOPE)
 		endif()
 	endif()
 endfunction()
@@ -332,19 +332,19 @@ endmacro()
 
 
 ##############################################################################
-# dk_isNumber(variable result)
+# dk_isNumber(variable RESULT)
 # 
 #	Test if a varaible is a number
 #
 #	@variable:(required) The variable to test
-#	@result: True if the variable is a number, False if otherwise.
+#	@RESULT: True if the variable is a number, False if otherwise.
 #
-macro(dk_isNumber variable result)
+macro(dk_isNumber variable RESULT)
 	DKDEBUGFUNC(${ARGV})
 	if(variable MATCHES "^[0-9]+$")
-		set(${result} TRUE)
+		set(${RESULT} TRUE)
 	else()
-		set(${result} FALSE)
+		set(${RESULT} FALSE)
 	endif()
 endmacro()
 
@@ -539,17 +539,17 @@ endfunction()
 
 
 ###############################################################################
-# dk_getEnv(name result)
+# dk_getEnv(name RESULT)
 #
 #	Get a system environment variable
 #
 #	@name:(required)	The name of the system environment variable to get
-#	@result:			Returns the value of the system environment vairable
+#	@RESULT:			Returns the value of the system environment vairable
 #
-function(dk_getEnv name result)
+function(dk_getEnv name RESULT)
 	DKDEBUGFUNC(${ARGV})
 	dk_debug(ENV{${name}})
-	set(${result} $ENV{${name}} PARENT_SCOPE)
+	set(${RESULT} $ENV{${name}} PARENT_SCOPE)
 endfunction()
 
 
@@ -980,13 +980,13 @@ dk_aliasFunctions("dk_linkDir")
 
 
 ###############################################################################
-# dk_getCurrentDirectory(result)
+# dk_getCurrentDirectory(RESULT)
 #
 #	Retrieve the current working directory
 #
-#	@result: returns the current working directory upon success. False upon error
+#	@RESULT: returns the current working directory upon success. False upon error
 #
-#function(dk_getCurrentDirectory result)
+#function(dk_getCurrentDirectory RESULT)
 #	DKDEBUGFUNC(${ARGV})
 #	if(WIN_HOST)
 #		execute_process(COMMAND echo "hello world" ECHO_OUTPUT_VARIABLE output WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
@@ -996,7 +996,7 @@ dk_aliasFunctions("dk_linkDir")
 #	execute_process(COMMAND timeout /t 2 /nobreak WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})  ##wait 2 seconds for the stdout to flush
 #	#dk_info("output = ${output}")
 #	dk_info(output)
-#	set(${result} ${output} PARENT_SCOPE)
+#	set(${RESULT} ${output} PARENT_SCOPE)
 #endfunction()
 
 
@@ -1036,14 +1036,14 @@ endfunction()
 
 
 ###############################################################################
-# dk_getDirectory(path result)
+# dk_getDirectory(path RESULT)
 #
 #	Get the directory portion of a path
 #
 #	@path:(required)	The path to use
-#	@result:	Returns the directory upon success: False upon error
+#	@RESULT:	Returns the directory upon success: False upon error
 #
-function(dk_getDirectory path result)
+function(dk_getDirectory path RESULT)
 	DKDEBUGFUNC(${ARGV})
 	string(FIND ${path} "/" slash REVERSE)
 	if(${slash} EQUAL -1)
@@ -1052,19 +1052,19 @@ function(dk_getDirectory path result)
 		dk_assert("No Path Dividers found")
 	endif()
 	string(SUBSTRING ${path} 0 ${slash} directory) 
-    set(${result} ${directory} PARENT_SCOPE)
+    set(${RESULT} ${directory} PARENT_SCOPE)
 endfunction()
 
 
 ###############################################################################
-# dk_getFilename(path result)
+# dk_getFilename(path RESULT)
 #
 #	Get the filename portion of a path
 #
 #	@path:(required) The path to use
-#	@result:	Returns the file name upon success: False upon error
+#	@RESULT:	Returns the file name upon success: False upon error
 #
-function(dk_getFilename path result)
+function(dk_getFilename path RESULT)
 	DKDEBUGFUNC(${ARGV})
 	string(FIND ${path} "/" slash REVERSE)
 	if(${slash} EQUAL -1)
@@ -1074,19 +1074,19 @@ function(dk_getFilename path result)
 	endif()
 	MATH(EXPR slash "${slash}+1")
 	string(SUBSTRING ${path} ${slash} -1 filename) 
-    set(${result} ${filename} PARENT_SCOPE)
+    set(${RESULT} ${filename} PARENT_SCOPE)
 endfunction()
 
 
 ###############################################################################
-# dk_getExtension(path result)
+# dk_getExtension(path RESULT)
 #
 #	Get the extension portion of a path
 #
 #	@path:(required) The path to use
-#	@result:	Returns the extension upon success: False upon error
+#	@RESULT:	Returns the extension upon success: False upon error
 #
-function(dk_getExtension path result)
+function(dk_getExtension path RESULT)
 	DKDEBUGFUNC(${ARGV})
 	# WHY A NEW GET EXTENSION FUNCTION ?
 #	get_filename_component(extension ${url} EXT)       #Gets the large part of the extension of everything after the first .
@@ -1099,29 +1099,29 @@ function(dk_getExtension path result)
 		return() # no extension found
 	endif()
 	string(SUBSTRING ${path} ${dot} -1 ext) 
-    set(${result} ${ext} PARENT_SCOPE)
+    set(${RESULT} ${ext} PARENT_SCOPE)
 endfunction()
 
 
 ###############################################################################
-# dk_dirIsEmpty(path result)
+# dk_dirIsEmpty(path RESULT)
 #
 #	Get weather or not a directory is empty
 #
 #	@path: The full path to the directory to check
-#	@result: Returns true if the directory is empty. False if the directory is not empty
+#	@RESULT: Returns true if the directory is empty. False if the directory is not empty
 #
-function(dk_dirIsEmpty path result)
+function(dk_dirIsEmpty path RESULT)
 	DKDEBUGFUNC(${ARGV})
 	if(EXISTS ${path})
 		file(GLOB items RELATIVE "${path}/" "${path}/*")
 		list(LENGTH items count)
 		if(${count} GREATER 0)
-			set(${result} false PARENT_SCOPE)
+			set(${RESULT} false PARENT_SCOPE)
 			return()
 		endif()
 	endif()
-	set(${result} true PARENT_SCOPE)
+	set(${RESULT} true PARENT_SCOPE)
 endfunction()
 
 
@@ -1203,14 +1203,10 @@ function(dk_install src_path import_name dest_path)
 	
 	# let's check that the scr_filename has at least the name of the target in it somewhere, or else we gotta rename it
 	string(TOLOWER ${src_filename} src_filename_lower)
-	#string(FIND ${src_filename_lower} ${import_name} includesA)
-	#if(${includesA EQUAL -1)
 	dk_includes(${src_filename_lower} ${import_name} includesA)
 	if(NOT includesA)
 		dk_debug("The download filename ${src_filename} does not contaian the import name ${import_name}")
 		string(TOLOWER ${dest_filename} dest_filename_lower)
-		#string(FIND ${dest_filename_lower} ${import_name} includesB)
-		#if(${includesB} EQUAL -1)
 		dk_includes(${dest_filename_lower} ${import_name} includesB)
 		if(includesB)
 			set(dl_filename "${dest_filename}${src_extension}")
@@ -1314,26 +1310,26 @@ dk_aliasFunctions("dk_install" "NO_DEBUG_RELEASE_TAGS")
 
 
 ###############################################################################
-# dk_validatePath(path result)
+# dk_validatePath(path RESULT)
 #
-function(dk_validatePath path result)
+function(dk_validatePath path RESULT)
 	DKDEBUGFUNC(${ARGV})
 	get_filename_component(path ${path} ABSOLUTE)
-	set(${result} ${path} PARENT_SCOPE)
+	set(${RESULT} ${path} PARENT_SCOPE)
 endfunction()
 
 
 ###############################################################################
-# dk_getShortPath(path result)
+# dk_getShortPath(path RESULT)
 #
-function(dk_getShortPath path result)
+function(dk_getShortPath path RESULT)
 	DKDEBUGFUNC(${ARGV})
 	if(WIN_HOST)
 		file(WRITE ${DKCMAKE}/dk_getShortPath.cmd "@ECHO OFF \necho %~s1")
 		execute_process(COMMAND ${DKCMAKE}/dk_getShortPath.cmd ${path} OUTPUT_VARIABLE path WORKING_DIRECTORY ${DIGITALKNOB})
 		string(REPLACE "\\" "/" path ${path})
 		string(REPLACE "\n" "" path ${path})
-		set(${result} ${path} PARENT_SCOPE)
+		set(${RESULT} ${path} PARENT_SCOPE)
 	endif()
 endfunction()
 
@@ -1384,13 +1380,9 @@ function(dk_setEnv name value)
 	DKDEBUGFUNC(${ARGV})
 	dk_debug(ENV{${name}})
 	if(ENV{${name}})
-		#string(FIND $ENV{${name}} ${value} includes)
 		dk_includes($ENV{${name}} ${value} includes)
-	else()
-		#set(includes -1)
 	endif()
 	
-	#if(${includes} EQUAL -1)
 	if(NOT includes)
 		dk_debug(ENV{${name}})
 		dk_debug(value)
@@ -1505,12 +1497,12 @@ dk_aliasFunctions("dk_msys2")
 
 
 ###############################################################################
-# dk_mergeFlags(args result)
+# dk_mergeFlags(args RESULT)
 #
-function(dk_mergeFlags args result)
+function(dk_mergeFlags args RESULT)
 	DKDEBUGFUNC(${ARGV})
-	set(args ${args} ${result} ${ARGN})
-	list(GET args -1 result)
+	set(args ${args} ${RESULT} ${ARGN})
+	list(GET args -1 RESULT)
 	list(REMOVE_AT args -1)
 	set(search "-DCMAKE_C_FLAGS=" "-DCMAKE_C_FLAGS_DEBUG=" "-DCMAKE_C_FLAGS_RELEASE=" "-DCMAKE_CXX_FLAGS=" "-DCMAKE_CXX_FLAGS_DEBUG=" "-DCMAKE_CXX_FLAGS_RELEASE=" "CFLAGS=" "CXXFLAGS=")
 	foreach(word ${search})
@@ -1519,8 +1511,6 @@ function(dk_mergeFlags args result)
 		set(placeholder 0)
 		foreach(arg ${args})
 			math(EXPR index "${index}+1")
-			#string(FIND ${arg} ${word} hasWord)
-			#if(${hasWord} GREATER -1)
 			dk_includes(${arg} ${word} hasWord)
 			if(${hasword})
 				if(${placeholder} EQUAL 0)
@@ -1540,7 +1530,7 @@ function(dk_mergeFlags args result)
 			list(INSERT args ${placeholder} "${DK_${word}}")  # FIXME:  Error on Linux:  List index: 6 out of range (-6, 5)
 		endif()
 	endforeach()
-	set(${result} ${args} PARENT_SCOPE)
+	set(${RESULT} ${args} PARENT_SCOPE)
 endfunction()
 
 
@@ -1902,8 +1892,6 @@ function(dk_generateCmake plugin_name)
 	if(${plugin_name} STREQUAL DK OR STATIC)
 		file(GLOB HEADER_FILES RELATIVE ${DKPLUGINS} ${plugin_path}/*.h)
 		foreach(header ${HEADER_FILES})
-			#string(FIND "${PLUGINS_FILE}" "${header}" includes)
-			#if(${includes} EQUAL -1)
 			dk_includes("${PLUGINS_FILE}" "${header}" includes)
 			if(NOT includes)
 				dk_info("Adding ${header} to header file.")
@@ -2146,12 +2134,12 @@ endfunction()
 
 
 ###############################################################################
-# dk_getPathToPlugin(plugin result)
+# dk_getPathToPlugin(plugin RESULT)
 #
 #	@plugin:
-#	@result:
+#	@RESULT:
 #
-function(dk_getPathToPlugin plugin result)
+function(dk_getPathToPlugin plugin RESULT)
 	DKDEBUGFUNC(${ARGV})
 	list(FIND dk_disabled_list "${ARGV}" inList)
 	if(${inList} GREATER -1)
@@ -2163,15 +2151,15 @@ function(dk_getPathToPlugin plugin result)
 	file(GLOB children RELATIVE ${DIGITALKNOB} ${DIGITALKNOB}/*)
  	foreach(child ${children})
 		if(EXISTS ${DIGITALKNOB}/${child}/3rdParty/_DKIMPORTS/${plugin}/DKMAKE.cmake)
-			set(${result} "${DIGITALKNOB}/${child}/3rdParty/_DKIMPORTS/${plugin}" PARENT_SCOPE)
+			set(${RESULT} "${DIGITALKNOB}/${child}/3rdParty/_DKIMPORTS/${plugin}" PARENT_SCOPE)
 			return()
     	endif()
 		if(EXISTS ${DIGITALKNOB}/${child}/DKPlugins/${plugin}/DKMAKE.cmake)
-			set(${result} "${DIGITALKNOB}/${child}/DKPlugins/${plugin}" PARENT_SCOPE)
+			set(${RESULT} "${DIGITALKNOB}/${child}/DKPlugins/${plugin}" PARENT_SCOPE)
 			return()
     	endif()
   	endforeach()
-	unset(result)
+	unset(RESULT)
 	dk_assert("Could not find ${plugin} Plugin")
 endfunction()
 
@@ -2319,8 +2307,8 @@ function(dk_runDepends plugin)
 	endif()
 
 	file(STRINGS ${plugin_path}/DKMAKE.cmake lines)
-	set(disable_script " ")
-	set(depends_script " ")
+	unset(disable_script)
+	unset(depends_script)
 	
 	set(keep_commands "else;ELSE;if;IF;return;RETURN;dk_disable;dk_undepend")
 	set(unset KEEPLINE)
@@ -2331,12 +2319,11 @@ function(dk_runDepends plugin)
 				set(KEEPLINE 1)
 			endif()
 		endforeach()
-		#dk_wait()
 		if(KEEPLINE)
 			set(disable_script "${disable_script}${line}\n")
-			dk_debug(line)
+			#dk_debug(line)
 		else()
-			dk_info(line)
+			#dk_info(line)
 		endif()
 		# FIXME: we need to get a proper count of openeing ( for nested occurences before we can determine that we have actually reached the commands closing )
 		dk_includes("${line}" ")" includes)
@@ -2459,8 +2446,6 @@ endfunction()
 function(dkFileReplace filePath find replace)
 	DKDEBUGFUNC(${ARGV})
 	file(READ ${filePath} fileString)
-	#string(FIND "${fileString}" "${find}" includes)
-	#if(${includes} GREATER -1)
 	dk_includes("${fileString}" "${find}" includes)
 	if(includes)
 		string(REPLACE "${find}" "${replace}" fileString "${fileString}")
@@ -2489,21 +2474,15 @@ function(dk_updateAndroidName name)
 			set(filepath "${DKPROJECT}/${OS}/${each_file}")
 			dk_debug(each_file)
 			if(NOT IS_DIRECTORY ${filepath})
-				#string(FIND "${each_file}" "opendb" includesA)
-				#if(${includesA} GREATER -1)
 				dk_includes("${each_file}" "opendb" includesA)
 				if(${includesA})
 					continue()
 				endif()
-				#string(FIND "${each_file}" ".log" includesB)
-				#if(${includesB} GREATER -1)
 				dk_includes("${each_file}" ".log" includesB)
 				if(${includesB})
 					continue()
 				endif()
 				file(READ ${filepath} filestring)
-				#string(FIND "${filestring}" "dkapp" includesC)
-				#if(${includesC} GREATER -1)
 				dk_includes("${filestring}" "dkapp" includesC)
 				if(${includesC})
 					dk_info("Replacing 'dkapp' with '${name}' in ${filepath}")
@@ -2512,8 +2491,6 @@ function(dk_updateAndroidName name)
 				endif()
 			endif()
 			get_filename_component(fname ${each_file} NAME)
-			#string(FIND "${fname}" "dkapp" includesD)
-			#if(${includesD} GREATER -1)
 			dk_includes("${fname}" "dkapp" includesD)
 			if(${includesD})
 				set(new_name ${each_file})
@@ -2915,31 +2892,31 @@ endfunction()
 
 
 ###############################################################################
-# dk_removeSubstring(removethis fromthis result)
+# dk_removeSubstring(removethis fromthis RESULT)
 #
 #	@removethis:
 #	@fromthis:
-#	@result:
+#	@RESULT:
 #
-function(dk_removeSubstring removethis fromthis result)
+function(dk_removeSubstring removethis fromthis RESULT)
 	DKDEBUGFUNC(${ARGV})
 	foreach(item ${fromthis})
 		string(REPLACE ${removethis} "" item ${item})
 		list(APPEND rtn ${item})
 	endforeach()
 #	string(REPLACE "  " " " rtn "${rtn}") #replace doube spaces with single space
-	set(${result} ${rtn} PARENT_SCOPE)
+	set(${RESULT} ${rtn} PARENT_SCOPE)
 endfunction()
 
 
 ###############################################################################
-# dk_findTarget(target result_path result_type)
+# dk_findTarget(target RESULT_PATH RESULT_TYPE)
 #
 #	@target:
-#	@result_path:
-#	@result_type:
+#	@RESULT_PATH:
+#	@RESULT_TYPE:
 #
-function(dk_findTarget target result_path result_type)
+function(dk_findTarget target RESULT_PATH RESULT_TYPE)
 	DKDEBUGFUNC(${ARGV})
 	
 	## search up to 4 levels deep
@@ -2953,16 +2930,14 @@ function(dk_findTarget target result_path result_type)
 	foreach(child ${children})
 		dk_info("FOUND: ${DIGITALKNOB}/${child}")
 		string(REPLACE "/DKMAKE.cmake" "" path ${DIGITALKNOB}/${child})
-		set(${result_path} ${path} PARENT_SCOPE)
+		set(${RESULT_PATH} ${path} PARENT_SCOPE)
 		
 		file(STRINGS ${path}/DKMAKE.cmake dkmake_string)
-		#string(FIND "${dkmake_string}" "DKAPP" includes)
-		#if(${includes} GREATER -1)
 		dk_includes("${dkmake_string}" "DKAPP" includes)
 		if(includes)
-			set(${result_type} APP PARENT_SCOPE) 
+			set(${RESULT_TYPE} APP PARENT_SCOPE) 
 		else()
-			set(${result_type} LIBRARY PARENT_SCOPE)	#LIBRARY is default, we need to label executables to detect them
+			set(${RESULT_TYPE} LIBRARY PARENT_SCOPE)	#LIBRARY is default, we need to label executables to detect them
 		endif()
 		return()
 	endforeach()
@@ -3048,8 +3023,6 @@ endfunction()
 function(dk_import) #url #Lib #ID #Patch
 	DKDEBUGFUNC(${ARGV})
 	set(url ${ARGV0})
-	#string(FIND ${url} ".git" dotgit)
-	#if(${dotgit} GREATER -1)
 	dk_includes(${url} ".git" includes)
 	if(includes)
 		dk_importGit(${ARGV})
@@ -3085,12 +3058,8 @@ function(dk_importGit url) #branch #PATCH
 	endif()
 	
 	if(NOT Lib)
-		#string(FIND ${url} "github.com" includesA)
-		#if(${includesA} EQUAL -1)
 		dk_includes( ${url} "github.com" includesA)
 		if(${includesA})
-			#string(FIND ${url} "gitlab.com" includesB)
-			#if(${includesB} EQUAL -1)
 			dk_includes( ${url} "gitlab.com" includesB)
 			if(${includesB})
 				dk_assert("The url does not contain 'github.com' OR 'gitlab.com'")
@@ -3224,12 +3193,8 @@ function(dk_importDownload url) #Lib #ID #Patch
 		get_filename_component(Lib ${CMAKE_CURRENT_LIST_DIR} NAME)
 		dk_debug(Lib)
 #		dk_assert("Lib invalid")
-#		#string(FIND ${url} "github.com" includes)
-#		#if(${includes} EQUAL -1)
 #		dk_includes(${url} "github.com" includesA)
 #		if(${includesA})
-#			#string(FIND ${url} "gitlab.com" includes)
-#			#if(${includes} EQUAL -1)
 #			dk_includes(${url} "github.com" includesB)
 #			if(${includesB})
 #				dk_assert("Lib invalid and The url does not contain 'github.com' OR 'gitlab.com'")
@@ -3273,12 +3238,8 @@ function(dk_importDownload url) #Lib #ID #Patch
 	endforeach()
 		
 	if(NOT ${LIBVAR}_DL)
-		#string(FIND ${url} "github.com" includesA)
-		#if(${includesA} EQUAL -1)
 		dk_includes(${url} "github.com" includesA)
 		if(${includesA})
-#			string(FIND ${url} "gitlab.com" includesB)
-#			if(${includesB} EQUAL -1)
 			dk_includes(${url} "gitlab.com" includesB)
 			if(${includesB})
 				dk_assert("The url is not a 'github.com' address")
@@ -3356,8 +3317,6 @@ function(dk_DownloadAll3rdParty)
 						set(dl_import_script "${dl_import_script}${line}\n")
 					endif()
 					# FIXME: we need to get a proper count of openeing ( for nested occurences before we can determine that we have actually reached the commands closing )
-					#string(FIND "${line}" ")" includesB) 
-					#if(${includesB})
 					dk_includes("${line}" ")" includesB)
 					if(${includesB})
 						set(KEEPLINE 0)
@@ -3376,12 +3335,12 @@ endfunction()
 
 
 ######################################################################
-# dk_getFileType(path result)
+# dk_getFileType(path RESULT)
 #  
 # Takes a path and checks the extension to return the file type.
 #
 #	@path: A string value of the path to identify
-#	@result: returns a string representing the  type of file.
+#	@RESULT: returns a string representing the  type of file.
 #           Possible results are ARCHIVE, EXECUTABLE, IMAGE, SCRIPT,
 #           UNKNOWN, WEB, ...TODO
 # Reference: https://en.wikipedia.org/wiki/List_of_file_formats
@@ -3475,8 +3434,6 @@ function(dk_import2 url)
 	if(NOT ${type} STREQUAL ARCHIVE) 
 	dk_debug("NO")
 		dk_debug("Is the url a website we can determine a download file link from?")
-			#string(FIND ${url} "github.com" hasGithub)
-			#if(hasGithub)
 			dk_includes(${url} "github.com" hasGithub)
 			if(${hasGithub})
 				dk_debug(hasGithub)
@@ -3524,11 +3481,11 @@ endfunction()
 
 
 ###############################################################################
-# dk_getAppDirectory(result)
+# dk_getAppDirectory(RESULT)
 #
 #	Get the OS default app directory
 #
-function(dk_getAppDirectory result)
+function(dk_getAppDirectory RESULT)
 	set(USE_32BIT 1)
 	if(WIN_HOST)
 		set(appDirectory "C:/Program Files")
@@ -3551,38 +3508,38 @@ function(dk_getAppDirectory result)
 		dk_todo() #TODO
 		set(appDirectory "/")
 	endif()
-	set(${result} ${appDirectory} PARENT_SCOPE)
+	set(${RESULT} ${appDirectory} PARENT_SCOPE)
 endfunction()
 
 
 ###############################################################################
-# toLower(str result)
+# toLower(str RESULT)
 #
 #	Convert a string to lower case
 #
-function(toLower str result)
+function(toLower str RESULT)
 	string(TOLOWER "${str}" upper)
-	set(${result} ${out} PARENT_SCOPE)
+	set(${RESULT} ${out} PARENT_SCOPE)
 endfunction()
 
 
 ###############################################################################
-# toUpper(str result)
+# toUpper(str RESULT)
 #
 #	Convert a string to upper case
 #
-function(toUpper str result)
+function(toUpper str RESULT)
 	string(TOUPPER "${str}" upper)
-	set(${result} ${upper} PARENT_SCOPE)
+	set(${RESULT} ${upper} PARENT_SCOPE)
 endfunction()
 
 
 ###############################################################################
-# dk_removeExtension(path result)
+# dk_removeExtension(path RESULT)
 #
 #	Remove the extension from a file path
 #
-function(dk_removeExtension path result)
+function(dk_removeExtension path RESULT)
 	DKDEBUGFUNC(${ARGV})
 	string(FIND ${path} "." dot REVERSE)
 	if(${dot} EQUAL -1)
@@ -3592,20 +3549,20 @@ function(dk_removeExtension path result)
 		return()
 	endif()
 	string(SUBSTRING ${path} 0 ${dot} fileNameNoExt) 
-    set(${result} ${fileNameNoExt} PARENT_SCOPE)
+    set(${RESULT} ${fileNameNoExt} PARENT_SCOPE)
 endfunction()
 
 
 ###############################################################################
-# dk_getAppName(path result)
+# dk_getAppName(path RESULT)
 #
 #	Get the app name from a file path
 #
-function(dk_getAppName path result)
+function(dk_getAppName path RESULT)
 	dk_getFilename(${path} fileName)
 	dk_removeExtension(${fileName} fileNameNoExt)
 	dk_debug(fileNameNoExt)
-	set(${result} ${fileNameNoExt} PARENT_SCOPE)
+	set(${RESULT} ${fileNameNoExt} PARENT_SCOPE)
 endfunction()
 
 
