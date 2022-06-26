@@ -2413,11 +2413,12 @@ dk_aliasFunctions("dk_depend")
 #
 #	Remove a library or plugin from the dependency list
 #
-#	@plugin		- TODO
+#	@plugin				- TODO
+#	@target (optional)	- TODO
 #
 function(dk_undepend name)
 	DKDEBUGFUNC(${ARGV})
-	set(sublibrary ${ARGV1})
+	set(target ${ARGV1})
 	
 	# Only allow dk_undepend command from these filters	
 	if(NOT ${CMAKE_CURRENT_LIST_DIR} STREQUAL ${DKCMAKE})
