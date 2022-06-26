@@ -257,6 +257,7 @@ function(dk_includes variable find RESULT) #REVERSE
 	
 	list(LENGTH variable variableLength)
 	if(${variableLength} GREATER 1)
+		dk_debug("dk_includes(${ARGV})")
 		if(reverse)
 			#FIXME: make sure reverse is equal to REVERSE
 			list(FIND variable "${find}" index REVERSE)
@@ -265,9 +266,11 @@ function(dk_includes variable find RESULT) #REVERSE
 		endif()
 		if(${index} EQUAL 0)
 			set(${RESULT} true PARENT_SCOPE)
+			dk_debug("RESULT = true")
 		endif()
 		if(${index} GREATER 0)
 			set(${RESULT} ${index} PARENT_SCOPE)
+			dk_debug("RESULT = ${index}")
 		endif()
 	else()
 		if(reverse)
@@ -812,7 +815,8 @@ function(dk_rename from to) #overwrite
 	set(overwrite ${ARGV2})
 	dk_info("Renameing ${from} to ${to}")
 	if(NOT EXISTS ${from})
-		dk_assert("from:${from} not found")
+		dk_error("from:${from} not found")
+		return()
 	endif()
 	if(EXISTS ${to})
 		if(NOT overwrite)
@@ -2344,6 +2348,7 @@ function(dk_depend plugin) #sublibrary
 	set(sublibrary ${ARGV1})
 #	dk_debug(CMAKE_CURRENT_LIST_DIR)
 	
+	list(FIND dk_disabled_list ${plugin} includes)
 	list(FIND dk_disabled_list ${plugin} includes)
 	if(${includes} GREATER -1)
 	#dk_includes(dk_disabled_list ${plugin} includes)
