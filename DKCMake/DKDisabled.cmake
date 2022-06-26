@@ -67,6 +67,7 @@ dk_disable(ffmpeg-dev)
 dk_disable(ffmpeg-shared)
 dk_disable(ffmpeg-static)
 dk_disable(gradle)
+dk_disable(java)
 dk_disable(jpeg)                     # using libjpeg_turbo instead
 dk_disable(libcaca)
 dk_disable(librocket)                # replaced with RmlUi

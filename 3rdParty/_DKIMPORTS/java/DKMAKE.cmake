@@ -19,7 +19,7 @@ WIN_HOST_dk_set(JAVA_EXE ${JAVA}/bin/java.exe)
 ### INSTALL ###
 dk_info("looking for java at ${JAVA_EXE}")
 if(NOT EXISTS "${JAVA_EXE}")
-	dk_debug("java NOT FOUND")
+	dk_debug("${JAVA_EXE} NOT FOUND")
 	get_filename_component(filename ${JAVA_DL} NAME)
 	WIN_HOST_dk_download(${JAVA_DL} ${DKDOWNLOAD}/${filename})
 	dk_info("Installing ${filename} . . . please wait")
