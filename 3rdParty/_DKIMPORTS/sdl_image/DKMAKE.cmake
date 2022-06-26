@@ -19,7 +19,6 @@
 # Inline function expansion         Any Suitable (/Ob2)
 # Ommit frame pointers              OFF
 
-
 dk_depend(imageio)
 dk_depend(mobile_core_services)
 dk_depend(zlib)
@@ -31,12 +30,6 @@ dk_depend(tiff)
 dk_depend(sdl)
 
 
-#dk_set(SDL_IMAGE_VERSION main)
-#dk_set(SDL_IMAGE_NAME SDL2_image-${SDL_IMAGE_VERSION})
-#dk_set(SDL_IMAGE ${3RDPARTY}/${SDL_IMAGE_NAME})
-#dk_install(${SDL_IMAGE_DL} sdl_image ${SDL_IMAGE}) #NOPATCH)
-#dk_import(https://github.com/libsdl-org/SDL_image/archive/915b794f2c6d8247f775000ee0b96f660cbb9331.zip PATCH)
-#dk_import(https://github.com/libsdl-org/SDL_image/archive/fc370dc71d7726023c063618c7b04c1ed30637e2.zip PATCH)
 dk_import(https://github.com/libsdl-org/SDL_image.git main PATCH)
 
 

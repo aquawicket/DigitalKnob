@@ -1,3 +1,4 @@
+include_guard()
 # Information
 # https://androidsdkmanager.azurewebsites.net/
 # https://developer.android.com/studio/releases/cmdline-tools
