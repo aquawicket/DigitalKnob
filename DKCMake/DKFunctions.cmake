@@ -1156,7 +1156,7 @@ function(dk_getExtension path RESULT)
 #	cmake_path(GET url EXTENSION LAST_ONLY extension)  #LAST_ONLY only available with cmake 3.19+
 	#string(FIND ${path} "." includes REVERSE)
 	#if(${includes} EQUAL -1)
-	dk_includes(${path} "." includes REVERSE)
+	dk_includes(${path} "." includes TRUE)
 	if(NOT includes)
 		return() # no extension found
 	endif()
@@ -2358,7 +2358,6 @@ function(dk_depend plugin) #sublibrary
 #	dk_debug(CMAKE_CURRENT_LIST_DIR)
 	
 	list(FIND dk_disabled_list ${plugin} includes)
-	list(FIND dk_disabled_list ${plugin} includes)
 	if(${includes} GREATER -1)
 	#dk_includes(dk_disabled_list ${plugin} includes)
 	#if(includes)
@@ -2380,10 +2379,10 @@ function(dk_depend plugin) #sublibrary
 #			return() # already in the list
 #		endif()
 #	else()
-		#list(FIND dkdepend_list ${plugin} includes)
-		#if(${includes} GREATER -1)
-		dk_includes(dkdepend_list ${plugin} includes)
-		if(includes)
+		list(FIND dkdepend_list ${plugin} includes)
+		if(${includes} GREATER -1)
+		#dk_includes(dkdepend_list ${plugin} includes)
+		#if(includes)
 			return()  #library is already in the list
 		endif()
 #	endif()	
@@ -3445,7 +3444,7 @@ function(dk_importDownload url) #Lib #ID #Patch
 	list(GET url_list ${last} url${last})
 	
 	######### add recognizable file extensions ##########
-	set(extensions ".7z;.tar.bz2;.tar.gz;.zip")
+	set(extensions ".7z;.js;.tar.bz2;.tar.gz;.zip")
 	foreach(extension ${extensions})
 		#string(FIND ${url${last}} "${extension}" includes)
 		#if(${includes} GREATER -1)
