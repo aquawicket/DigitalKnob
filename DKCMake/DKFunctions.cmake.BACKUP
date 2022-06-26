@@ -49,7 +49,6 @@ set(PRINT_FUNCTION_ ARGUMENTS 	1 		CACHE INTERNAL "")
 set(INSTALL_DKLIBS              0		CACHE INTERNAL "")
 set(dk_disabled_list	 		""		CACHE INTERNAL "")
 
-
 ###############################################################################
 # TestReturnValue(args RESULT)
 #
@@ -317,14 +316,18 @@ dk_aliasFunctions("dk_set")
 ###############################################################################
 # dk_unset(variable)
 #
+#	TODO
+#
 #	@variable	- The name of the variable to unset
 #
 function(dk_unset variable)
 	DKDEBUGFUNC(${ARGV})
 	set(${variable} "" CACHE INTERNAL "")
-	set(variable "" CACHE INTERNAL "")
-	unset(${variable} CACHE)
-	unset(variable CACHE)
+	unset(${variable})
+	#set(${variable} "" CACHE INTERNAL "")
+	#set(variable "" CACHE INTERNAL "")
+	#unset(${variable} CACHE)
+	#unset(variable CACHE)
 endfunction()
 
 
@@ -925,10 +928,10 @@ function(dk_disable plugin) #sublibrary
 	endif()
 	
 	if(NOT EXISTS ${DKIMPORTS}/${plugin}/DKMAKE.cmake)
-	if(NOT EXISTS ${DKPLUGINS}/${plugin}/DKMAKE.cmake)
-		dk_warn("dk_disable(${plugin}):  unable to locate plugin in /3rdParty/_DKIMPORTS  or /DKPlugins")
-		return()
-	endif()
+		if(NOT EXISTS ${DKPLUGINS}/${plugin}/DKMAKE.cmake)
+			dk_warn("dk_disable(${plugin}):  unable to locate plugin in /3rdParty/_DKIMPORTS  or /DKPlugins")
+			return()
+		endif()
 	endif()
 	
 	if(sublibrary)
@@ -1105,7 +1108,7 @@ endfunction()
 #	Get the directory portion of a path
 #
 #	@path		- The path to use
-#	@RESULT:	- Returns the directory upon success: False upon error
+#	@RESULT 	- Returns the directory upon success: False upon error
 #
 function(dk_getDirectory path RESULT)
 	DKDEBUGFUNC(${ARGV})
@@ -1566,7 +1569,7 @@ dk_aliasFunctions("dk_msys")
 #
 #	TODO
 #
-#	@args		- TODO
+#	@args	- TODO
 #
 function(dk_msys2)
 	DKDEBUGFUNC(${ARGV})
@@ -1643,7 +1646,7 @@ endfunction()
 #
 #	TODO
 #
-#	@args		- TODO
+#	@args	- TODO
 #
 function(dk_command)
 	DKDEBUGFUNC(${ARGV})
@@ -1746,7 +1749,7 @@ dk_aliasFunctions("dk_visualStudioRelease" "NO_DEBUG_RELEASE_TAGS")
 #
 #	TODO
 #
-#	@args		- TODO
+#	@args	- TODO
 #
 function(dk_visualStudio)
 	DKDEBUGFUNC(${ARGV})
@@ -2251,7 +2254,7 @@ endfunction()
 #
 #	TODO
 #
-#	@str		- TODO
+#	@str	- TODO
 #
 function(dk_appendCmake str)
 	DKDEBUGFUNC(${ARGV})
@@ -2498,6 +2501,10 @@ function(dk_runDepends plugin)
 	foreach(line ${lines})
 		foreach(keep_command ${keep_commands})
 			dk_includes("${line}" "${keep_command}(" includes)
+									   
+									   
+  
+										 
 			if(includes)
 				set(KEEPLINE 1)
 			endif()
@@ -2856,6 +2863,8 @@ endfunction()
 
 ###############################################################################
 # dk_printSettings()
+#
+#	TODO
 #
 #	https://cmake.org/cmake/help/latest/manual/cmake-variables.7.html
 #
@@ -3222,6 +3231,8 @@ endfunction()
 
 ###############################################################################
 # dk_import(url) #args
+#
+#	TODO
 #
 #	@url	- The online path the .git or file to import
 #
