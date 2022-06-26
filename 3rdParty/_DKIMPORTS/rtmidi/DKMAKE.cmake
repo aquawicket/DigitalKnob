@@ -1,16 +1,12 @@
 # https://github.com/thestk/rtmidi
 
-#dk_set(RTMIDI_VERSION 2.1.0)
-#dk_set(RTMIDI_DL http://www.music.mcgill.ca/~gary/rtmidi/release/rtmidi-2.1.0.tar.gz)
-#dk_set(RTMIDI_NAME rtmidi-${RTMIDI_VERSION})
-#dk_set(RTMIDI ${3RDPARTY}/${RTMIDI_NAME})
-#dk_install(${RTMIDI_DL} rtmidi ${RTMIDI} PATCH)
-dk_import(http://www.music.mcgill.ca/~gary/rtmidi/release/rtmidi-2.1.0.tar.gz PATCH)
-dk_set(RTMIDI_SLN Project.sln)
-dk_set(RTMIDI_TARGET RtMidi)
-#dk_import(https://github.com/thestk/rtmidi.git)
-#dk_set(RTMIDI_SLN RtMidi.sln)
-#dk_set(RTMIDI_TARGET rtmidi)
+
+#dk_import(http://www.music.mcgill.ca/~gary/rtmidi/release/rtmidi-2.1.0.tar.gz PATCH)
+#dk_set(RTMIDI_SLN Project.sln)
+#dk_set(RTMIDI_TARGET RtMidi)
+dk_import(https://github.com/thestk/rtmidi.git)
+dk_set(RTMIDI_SLN RtMidi.sln)
+dk_set(RTMIDI_TARGET rtmidi)
 
 
 ### LINK ###
