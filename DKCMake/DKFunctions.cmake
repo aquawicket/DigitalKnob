@@ -2417,19 +2417,24 @@ dk_aliasFunctions("dk_depend")
 #
 function(dk_undepend name)
 	DKDEBUGFUNC(${ARGV})
+	set(sublibrary ${ARGV1})
+	
 	# Only allow dk_undepend command from these filters	
-	if(NOT ${CMAKE_CURRENT_LIST_DIR} STREQUAL ${DKCMAKE} AND NOT ${CMAKE_CURRENT_LIST_DIR} STREQUAL ${DKPROJECT}) # /DKCMake or /App directory only
-		dk_assert("dk_undepend() Can only be used from the DKDisabled.cmake file. This is to avoid having disabled libraries hideing everywhere")
+	if(NOT ${CMAKE_CURRENT_LIST_DIR} STREQUAL ${DKCMAKE})
+		if(NOT ${CMAKE_CURRENT_LIST_DIR} STREQUAL ${DKPROJECT})
+			if(NOT ${CMAKE_CURRENT_LIST_DIR} STREQUAL ${DKIMPORTS}/${plugin})
+				if(NOT ${CMAKE_CURRENT_LIST_DIR} STREQUAL ${DKPLUGINS}/${plugin})
+					dk_assert("dk_undepend() Can only be used from the DKDisabled.cmake file. This is to avoid having disabled libraries hideing everywhere")
+				endif()
+			endif()
+		endif()
 	endif()
+	
 	dk_info("DISABLING ${ARGV}")
 	dk_set(dk_disabled_list ${dk_disabled_list} "${ARGV}")
 	if(${ARGC} GREATER 1)
 		dk_removeTarget(${name} ${ARGV1})
-	endif()
-													 
-														  
-														   
-		   
+	endif()	   
 endfunction()
 
 
