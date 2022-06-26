@@ -19,7 +19,7 @@ macro(dk_warn msg)
 	
 	string(REPLACE " " "" var ${msg})
 	if(${var})
-		message(STATUS "${H_black}${STACK_HEADER}${CLR}${yellow} { \"${var}\":\"${${var}}\" } ${CLR}")
+		message(STATUS "${H_black}${STACK_HEADER}${CLR}${yellow} { \"${var}\" : \"${${var}}\" } ${CLR}")
 	else()
 		message(STATUS "${H_black}${STACK_HEADER}${CLR}${yellow} ${msg} ${CLR}")
 	endif()
