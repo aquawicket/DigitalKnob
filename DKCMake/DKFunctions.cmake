@@ -276,8 +276,8 @@ function(dk_set variable value)
 	set(${variable} ${value} ${ARGN} CACHE INTERNAL "")
 	
 #	###### print library versions ############
-#	dk_includes(${variable} "_VERSION" result)
-#	if(${result})
+#	dk_includes(${variable} "_VERSION" includes)
+#	if(${includes})
 #		dk_info("${variable}: ${value}")
 #	endif()
 #	##########################################
@@ -325,14 +325,14 @@ endmacro()
 #	Test if a varaible is a number
 #
 #	@variable	- The variable to test
-#	@RESULT 	- True if the variable is a number, False if otherwise.
+#	@RESULT: 	- True if the variable is a number, False if otherwise.
 #
-macro(dk_isNumber variable result)
+macro(dk_isNumber variable RESULT)
 	DKDEBUGFUNC(${ARGV})
 	if(variable MATCHES "^[0-9]+$")
-		set(${result} TRUE)
+		set(${RESULT} TRUE)
 	else()
-		set(${result} FALSE)
+		set(${RESULT} FALSE)
 	endif()
 endmacro()
 
@@ -1104,7 +1104,6 @@ endfunction()
 #	@path		- The path to use
 #	@RESULT:	- Returns the file name upon success: False upon error
 #
-fun
 function(dk_getFilename path result)
 	DKDEBUGFUNC(${ARGV})
 	string(FIND ${path} "/" index REVERSE)
