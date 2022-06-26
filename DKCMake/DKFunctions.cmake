@@ -105,7 +105,7 @@ set(dk_disabled_list	 		""		CACHE INTERNAL "")
 #
 #	print a TODO message and wait 10 seconds
 #
-#	@msg:(Optional)		A header message to print
+#	@msg:(Optional)		- A header message to print
 #
 macro(dk_todo)
 	if(NOT DKTODO_ENABLED)
@@ -124,7 +124,7 @@ endmacro()
 ###############################################################################
 # dk_aliasFunctions(name)
 #
-#	@name:(Required)	The name of the function to create aliases for
+#	@name:(Required)	- The name of the function to create aliases for
 #
 function(dk_aliasFunctions name)
 	DKDEBUGFUNC(${ARGV})
@@ -246,9 +246,9 @@ endmacro()
 #
 #	Test if a string contains a substring
 #
-#	str		-		The string to search 
-#	substr		-	The substring to search for
-#	RESULT		-	Returns true if the str contains the substr. Otherwise returns false
+#	str			- The string to search 
+#	substr		- The substring to search for
+#	RESULT		- Returns true if the str contains the substr. Otherwise returns false
 #
 function(dk_includes str substr RESULT) #REVERSE
 	#DKDEBUGFUNC(${ARGV})
@@ -291,8 +291,8 @@ endfunction()
 #	
 #	https://stackoverflow.com/a/29250496/688352
 #
-#	@variable		-	The name of a variable to declair
-#	@value		-		The value to set the variable to. 
+#	@variable	- The name of a variable to declair
+#	@value		- The value to set the variable to. 
 #
 function(dk_set variable value)
 	DKDEBUGFUNC(${ARGV})
@@ -311,7 +311,7 @@ dk_aliasFunctions("dk_set")
 ###############################################################################
 # dk_unset(variable)
 #
-#	@variable		-	The name of the variable to unset
+#	@variable	- The name of the variable to unset
 #
 function(dk_unset variable)
 	DKDEBUGFUNC(${ARGV})
@@ -342,8 +342,8 @@ endmacro()
 # 
 #	Test if a varaible is a number
 #
-#	@variable		- The variable to test
-#	@RESULT: True if the variable is a number, False if otherwise.
+#	@variable	- The variable to test
+#	@RESULT: 	- True if the variable is a number, False if otherwise.
 #
 macro(dk_isNumber variable RESULT)
 	DKDEBUGFUNC(${ARGV})
@@ -360,8 +360,8 @@ endmacro()
 # 
 #	Wait until a keypress or timeout has elapsed in seconds
 #
-#	@ARGV0:timeout (Optional)(Number) default = 60
-#	@ARGV1:msg     (Optional)(String) default = "press and key to continue."
+#	@ARGV0:timeout (Optional)	- default = 60
+#	@ARGV1:msg     (Optional)	- default = "press and key to continue."
 #
 macro(dk_wait) 
 	DKDEBUGFUNC(${ARGV})
@@ -405,7 +405,7 @@ endmacro()
 # 
 #	Print the contents of a variable to the screen
 #
-#	@variable		-	The variable to print to the screen. Without variable brackets ${ }'
+#	@variable	- The variable to print to the screen. Without variable brackets ${ }'
 #
 macro(dk_dump variable)
 	DKDEBUGFUNC(${ARGV})
@@ -440,7 +440,7 @@ endmacro()
 # 
 #	Watch a varible reading and writing access events
 #
-#	@variable		-	The variable to watch
+#	@variable	- The variable to watch
 #
 macro(dk_watch variable)
 	DKDEBUGFUNC(${ARGV})
@@ -453,11 +453,11 @@ endmacro()
 # 
 #	Description:  TODO
 #
-#	@variable		-	The variable to watch
-#	@access		- 		TODO
-#	@val		- 		TODO
-#   @1st		- 		TODO
-#	@stack		- 		TODO
+#	@variable	- The variable to watch
+#	@access		- TODO
+#	@val		- TODO
+#   @1st		- TODO
+#	@stack		- TODO
 #
 macro(dk_watchCallback variable access val lst stack)
 	DKDEBUGFUNC(${ARGV})
@@ -473,9 +473,9 @@ endmacro()
 # 
 #	Set a XCode specific property
 #
-#   @TARGET		-		The project target name to set the property for
-#	@property		-	The name of the property to set
-#   @value		-		The value to set the property to
+#   @TARGET		- The project target name to set the property for
+#	@property	- The name of the property to set
+#   @value		- The value to set the property to
 #
 macro(dk_setXcodeProperty TARGET property value)
 	DKDEBUGFUNC(${ARGV})
@@ -528,7 +528,7 @@ endfunction()
 #
 #	Delete all empty directories with a path
 #
-#	@path		-	The path to search for empty folders to delete
+#	@path	- The path to search for empty folders to delete
 #
 function(dk_deleteEmptyDirectories path)
 	DKDEBUGFUNC(${ARGV})
@@ -549,8 +549,8 @@ endfunction()
 #
 #	Get a system environment variable
 #
-#	@name		-	The name of the system environment variable to get
-#	@RESULT:			Returns the value of the system environment vairable
+#	@name		- The name of the system environment variable to get
+#	@RESULT:	- Returns the value of the system environment vairable
 #
 function(dk_getEnv name RESULT)
 	DKDEBUGFUNC(${ARGV})
@@ -564,8 +564,8 @@ endfunction()
 #
 #	Download a file
 #
-#	@src_path		-	The url of the file to download
-#	@dest_path		-	The path to download the file to
+#	@src_path	- The url of the file to download
+#	@dest_path	- The path to download the file to
 #
 #	Notes: https://cmake.org/pipermail/cmake/2012-September/052205.html/
 #
@@ -690,8 +690,8 @@ dk_aliasFunctions("dk_download")
 #
 #	Extract a archive file
 #
-#	@src		-		The full path of the archive file
-#	@dest		-	The folder path to extract the archive to
+#	@src	- The full path of the archive file
+#	@dest	- The folder path to extract the archive to
 #
 function(dk_extract src dest)
 	DKDEBUGFUNC(${ARGV})
@@ -710,7 +710,7 @@ endfunction()
 #
 #	Compress a path to a assets.zip archive
 #
-#	@path		-	The full path to add to the archive file
+#	@path	- The full path to add to the archive file
 #
 function(dk_zip path)
 	DKDEBUGFUNC(${ARGV})
@@ -727,9 +727,9 @@ endfunction()
 #
 #	Copy a file or directory to another location
 #
-#	@from		-		The source path to copy
-#	@to		-			The destination path to copy to
-#	@overwrite		-	The true or false to overwrite any files if they already exist
+#	@from		- The source path to copy
+#	@to			- The destination path to copy to
+#	@overwrite	- The true or false to overwrite any files if they already exist
 #
 function(dk_copy from to overwrite)
 	DKDEBUGFUNC(${ARGV})
@@ -781,8 +781,8 @@ endfunction()
 #
 #	TODO
 #
-#	@fileA		-
-#	@fileB		-
+#	@fileA	- TODO
+#	@fileB	- TODO
 #
 function(dk_filesMatch fileA fileB)
 	DKDEBUGFUNC(${ARGV})
@@ -802,11 +802,11 @@ endfunction()
 #
 #	Rename file or directory or move a file or directory to another location
 #
-#	@from			- The source path to copy
-#	@to				- The destination path to copy to
-#	@overwrite		- The true or false to overwrite any files if they already exist
+#	@from		- The source path to copy
+#	@to			- The destination path to copy to
+#	@overwrite	- The true or false to overwrite any files if they already exist
 #
-function(dk_rename from to) #
+function(dk_rename from to) #overwrite
 	DKDEBUGFUNC(${ARGV})
 	set(overwrite ${ARGV2})
 	dk_info("Renameing ${from} to ${to}")
@@ -828,7 +828,7 @@ endfunction()
 #
 #	Remove a file or directory
 #
-#	@path		-	The full path to the file or direcotory to remove
+#	@path		- The full path to the file or direcotory to remove
 #
 function(dk_remove path)
 	DKDEBUGFUNC(${ARGV})
@@ -851,7 +851,7 @@ endfunction()
 #
 #	UPX compress an executable or dynamic library file
 #
-#	@path		-	The full path to the binary file to compress with UPX
+#	@path		- The full path to the binary file to compress with UPX
 #
 function(dk_upxCompress path)
 	DKDEBUGFUNC(${ARGV})
@@ -895,8 +895,8 @@ endfunction()
 #
 #	TODO
 #
-#	@plugin		- TODO
-#	@sublibrary:(optional) TODO
+#	@plugin					- TODO
+#	@sublibrary:(optional)	- TODO
 #
 function(dk_disable plugin) #sublibrary
 	DKDEBUGFUNC(${ARGV})
@@ -949,7 +949,7 @@ endfunction()
 #
 #	TODO
 #
-#	@str		- TODO
+#	@str	- TODO
 #
 function(dk_define str)
 	DKDEBUGFUNC(${ARGV})
@@ -973,7 +973,7 @@ dk_aliasFunctions("dk_define")
 #
 #	TODO
 #
-#	@str		- TODO
+#	@str	- TODO
 #
 function(dk_undefine str)
 	DKDEBUGFUNC(${ARGV})
@@ -990,7 +990,7 @@ endfunction()
 #
 #	Add a directory to the compiler include paths
 #
-#	@path		-	The path to add to the compiler include paths
+#	@path	- The path to add to the compiler include paths
 #
 function(dk_include path)
 	DKDEBUGFUNC(${ARGV})
@@ -1018,7 +1018,7 @@ dk_aliasFunctions("dk_include")
 #
 #	Add a directory to the compiler library paths
 #
-#	@path		-	The path to add to the compiler library paths
+#	@path	- The path to add to the compiler library paths
 #
 function(dk_linkDir path)
 	DKDEBUGFUNC(${ARGV})
@@ -1062,7 +1062,7 @@ dk_aliasFunctions("dk_linkDir")
 #
 #	Create a directory 
 #
-#	@path		-	The full path to the direcotory to be created
+#	@path	- The full path to the direcotory to be created
 #
 function(dk_makeDirectory path)
 	DKDEBUGFUNC(${ARGV})
@@ -1097,8 +1097,8 @@ endfunction()
 #
 #	Get the directory portion of a path
 #
-#	@path		-	The path to use
-#	@RESULT:	Returns the directory upon success: False upon error
+#	@path		- The path to use
+#	@RESULT:	- Returns the directory upon success: False upon error
 #
 function(dk_getDirectory path RESULT)
 	DKDEBUGFUNC(${ARGV})
@@ -1119,7 +1119,7 @@ endfunction()
 #	Get the filename portion of a path
 #
 #	@path		- The path to use
-#	@RESULT:	Returns the file name upon success: False upon error
+#	@RESULT:	- Returns the file name upon success: False upon error
 #
 function(dk_getFilename path RESULT)
 	DKDEBUGFUNC(${ARGV})
@@ -1141,7 +1141,7 @@ endfunction()
 #	Get the extension portion of a path
 #
 #	@path		- The path to use
-#	@RESULT:	Returns the extension upon success: False upon error
+#	@RESULT:	- Returns the extension upon success: False upon error
 #
 function(dk_getExtension path RESULT)
 	DKDEBUGFUNC(${ARGV})
@@ -1165,8 +1165,8 @@ endfunction()
 #
 #	Get weather or not a directory is empty
 #
-#	@path: The full path to the directory to check
-#	@RESULT: Returns true if the directory is empty. False if the directory is not empty
+#	@path		- The full path to the directory to check
+#	@RESULT		- Returns true if the directory is empty. False if the directory is not empty
 #
 function(dk_dirIsEmpty path RESULT)
 	DKDEBUGFUNC(${ARGV})
@@ -1199,8 +1199,8 @@ endfunction()
 #
 #	Copy files from a DK/3rdParty/_DKIMPORTS/library to the DK/3rdParty/library install location
 #
-#	@import_name		-	The name of the 3rdParty DKIMPORT library
-#	@dest_path		-	The location of the installed library under /3rdParty
+#	@import_name	- The name of the 3rdParty DKIMPORT library
+#	@dest_path		- The location of the installed library under /3rdParty
 #
 function(dk_patch import_name dest_path)
 	DKDEBUGFUNC(${ARGV})
@@ -1218,9 +1218,9 @@ endfunction()
 #	For archive files such as libraries and assets, the arguments are:  The download src_path, the name of its _DKIMPORTS folder, The name given to the installed 3rdParty/folder  
 #	For executable files such as software amd IDE's the arguments are:  The download src_path, the name of the final name of the dl file, The installation path to check for installation.
 #
-#	@src_path		-	The download url or local path to an install file. May be .zip, .exe, .msi, .tar.gz etc. 
-#	@import_name		-	The name of the 3rdParty package being installed
-#	@dest_path		-	The path to the install location under DK/3rdParty
+#	@src_path		- The download url or local path to an install file. May be .zip, .exe, .msi, .tar.gz etc. 
+#	@import_name	- The name of the 3rdParty package being installed
+#	@dest_path		- The path to the install location under DK/3rdParty
 #
 function(dk_install src_path import_name dest_path)
 	DKDEBUGFUNC(${ARGV})
@@ -1406,7 +1406,7 @@ endfunction()
 #
 #	TODO
 #
-#	@commands		- TODO
+#	@commands	- TODO
 #
 function(dk_executeProcess commands)
 	DKDEBUGFUNC(${ARGV})
@@ -1444,8 +1444,8 @@ endfunction()
 #
 #	Set a system environment variable
 #
-#	@name		-	The name of the system environment variable to set
-#	@value		-	The value to set the system environment vairable to
+#	@name		- The name of the system environment variable to set
+#	@value		- The value to set the system environment vairable to
 #
 function(dk_setEnv name value)
 	DKDEBUGFUNC(${ARGV})
@@ -1664,7 +1664,7 @@ dk_aliasFunctions("dk_queueCommand")
 #
 #	TODO
 #
-#	@folder		-		TODO
+#	@folder			- TODO
 #	@sln_file		- TODO
 #
 function(dk_visualStudioDebug folder sln_file) #target #arch
@@ -1697,7 +1697,7 @@ dk_aliasFunctions("dk_visualStudioDebug" "NO_DEBUG_RELEASE_TAGS")
 #
 #	TODO
 #
-#	@folder		-		TODO
+#	@folder			- TODO
 #	@sln_file		- TODO
 #
 function(dk_visualStudioRelease folder sln_file) #target #arch
@@ -1730,7 +1730,7 @@ dk_aliasFunctions("dk_visualStudioRelease" "NO_DEBUG_RELEASE_TAGS")
 #
 #	TODO
 #
-#	@args		-		TODO
+#	@args		- TODO
 #
 function(dk_visualStudio)
 	DKDEBUGFUNC(${ARGV})
@@ -1745,8 +1745,8 @@ dk_aliasFunctions("dk_visualStudio" "NO_DEBUG_RELEASE_TAGS")
 #
 #	TODO
 #
-#	@folder		- TODO
-#	@target:(optional)	TODO
+#	@folder				- TODO
+#	@target:(optional)	- TODO
 #
 function(dk_xcodeDebug folder) #target
 	DKDEBUGFUNC(${ARGV})
@@ -1771,8 +1771,8 @@ dk_aliasFunctions("dk_xcodeDebug" "NO_DEBUG_RELEASE_TAGS")
 #
 #	TODO
 #
-#	@folder		- TODO
-#	@target:(optional)	TODO
+#	@folder				- TODO
+#	@target:(optional)	- TODO
 #
 function(dk_xcodeRelease folder)
 	DKDEBUGFUNC(${ARGV})
@@ -1797,8 +1797,8 @@ dk_aliasFunctions("dk_xcodeRelease" "NO_DEBUG_RELEASE_TAGS")
 #
 #	TODO
 #
-#	@args		- TODO
-#	@target:(optional)	TODO
+#	@args				- TODO
+#	@target:(optional)	- TODO
 #
 function(dk_xcode)
 	DKDEBUGFUNC(${ARGV})
@@ -1883,7 +1883,7 @@ endfunction()
 #
 #	TODO
 #
-#	@lib_path		- TODO
+#	@lib_path	- TODO
 #
 function(dk_lib lib_path)
 	DKDEBUGFUNC(${ARGV})
@@ -1914,7 +1914,7 @@ dk_aliasFunctions("dk_lib" "NO_DEBUG_RELEASE_TAGS")
 #
 #	TODO
 #
-#	@lib_path		- TODO
+#	@lib_path	- TODO
 #
 function(dk_libDebug lib_path)
 	DKDEBUGFUNC(${ARGV})
@@ -1950,7 +1950,7 @@ dk_aliasFunctions("dk_libDebug" "NO_DEBUG_RELEASE_TAGS")
 #
 #	TODO
 #
-#	@lib_path		- TODO
+#	@lib_path	- TODO
 #
 function(dk_libRelease lib_path)
 	DKDEBUGFUNC(${ARGV})
@@ -1986,7 +1986,7 @@ dk_aliasFunctions("dk_libRelease" "NO_DEBUG_RELEASE_TAGS")
 #
 #	TODO
 #
-#	@plugin_name		- TODO
+#	@plugin_name	- TODO
 #
 function(dk_generateCmake plugin_name)
 	DKDEBUGFUNC(${ARGV})
@@ -2608,9 +2608,9 @@ endfunction()
 #
 #	TODO
 #
-#	@filePath		- TODO
-#	@find		-		TODO
-#	@replace		-		TODO
+#	@filePath	- TODO
+#	@find		- TODO
+#	@replace	- TODO
 #
 function(dkFileReplace filePath find replace)
 	DKDEBUGFUNC(${ARGV})
@@ -2630,7 +2630,7 @@ endfunction()
 #
 #	TODO
 #
-#	@name		- TODO
+#	@name	- TODO
 #
 function(dk_updateAndroidName name)
 	DKDEBUGFUNC(${ARGV})
@@ -2679,7 +2679,7 @@ endfunction()
 #
 #	TODO
 #
-#	@name		- TODO
+#	@name	- TODO
 #
 function(dk_updateInfoPlist name)
 	DKDEBUGFUNC(${ARGV})
@@ -3083,7 +3083,7 @@ endfunction()
 #
 #	@removethis		- TODO
 #	@fromthis		- TODO
-#	@RESULT		- 		TODO
+#	@RESULT			- TODO
 #
 function(dk_removeSubstring removethis fromthis RESULT)
 	DKDEBUGFUNC(${ARGV})
@@ -3101,9 +3101,9 @@ endfunction()
 #
 #	TODO
 #
-#	@target		- 		TODO
-#	@RESULT_PATH		- TODO
-#	@RESULT_TYPE		- TODO
+#	@target			- TODO
+#	@RESULT_PATH	- TODO
+#	@RESULT_TYPE	- TODO
 #
 function(dk_findTarget target RESULT_PATH RESULT_TYPE)
 	DKDEBUGFUNC(${ARGV})
@@ -3138,7 +3138,7 @@ endfunction()
 #
 #	TODO
 #
-#	@VAR		- TODO
+#	@VAR	- TODO
 #	 
 macro(dk_setReadOnly VAR)
 	DKDEBUGFUNC(${ARGV})
@@ -3153,11 +3153,11 @@ endmacro()
 #
 #	TODO
 #
-#	@VAR		- 				TODO
-#	@access		- 				TODO
-# 	@value		- 				TODO
-#	@current_list_file		- TODO
-#	@stack		- 				TODO
+#	@VAR				- TODO
+#	@access				- TODO
+# 	@value				- TODO
+#	@current_list_file	- TODO
+#	@stack				- TODO
 #	 
 macro(dk_readOnlyCallback VAR access value current_list_file stack)   # Watcher for readonly property.
 	DKDEBUGFUNC(${ARGV})
