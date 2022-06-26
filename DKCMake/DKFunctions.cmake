@@ -2348,7 +2348,6 @@ function(dk_depend plugin) #sublibrary
 	if(${includes} GREATER -1)
 	#dk_includes(dk_disabled_list ${plugin} includes)
 	#if(includes)
-		dk_wait()
 		list(REMOVE_ITEM dkdepend_list ${plugin})
 		dk_warn("${plugin} IS DISABLED")
 		return()
@@ -3073,7 +3072,7 @@ function(dk_log args)
 		endif()
 			dk_info("${output}")
 	endforeach()
-	dk_wait()
+	#dk_wait()
 endfunction()
 
 
