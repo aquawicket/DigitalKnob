@@ -802,19 +802,19 @@ endfunction()
 #
 #	Rename file or directory or move a file or directory to another location
 #
-#	@from		-		The source path to copy
-#	@to		-			The destination path to copy to
-#	@overwrite		-	The true or false to overwrite any files if they already exist
+#	@from			- The source path to copy
+#	@to				- The destination path to copy to
+#	@overwrite		- The true or false to overwrite any files if they already exist
 #
-function(dk_rename from to overwrite)
+function(dk_rename from to) #
 	DKDEBUGFUNC(${ARGV})
+	set(overwrite ${ARGV2})
 	dk_info("Renameing ${from} to ${to}")
 	if(NOT EXISTS ${from})
-		dk_error("from:${from} not found")
-		return()
+		dk_assert("from:${from} not found")
 	endif()
 	if(EXISTS ${to})
-		if(NOT ${overwrite})
+		if(NOT overwrite)
 			dk_assert("Cannot rename file. Destiantion exists and not set to overwrite")
 		endif()
 		file(REMOVE ${to})
