@@ -28,29 +28,6 @@ if(EXISTS $ENV{DKCMAKE})
 endif()
 include("$ENV{DKCMAKE}DK.cmake")
 
-
-############ TEST #################
-set(MyString "one two three")
-dk_includes(${MyString} "two" result)
-dk_debug(result)
-if(result)
-	dk_debug("two = true")
-else()
-	dk_debug("two = false")
-endif()
-
-dk_includes(${MyString} "four" result)
-dk_debug(result)
-if(result)
-	dk_debug("four = true")
-else()
-	dk_debug("four = false")
-endif()
-#dk_wait()
-#dk_exit()
-###################################
-
-
 dk_info("\n")
 dk_info("############################################################")
 dk_info("######################  DigitalKnob  #######################")

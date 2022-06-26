@@ -5,7 +5,7 @@ include_guard()
 #  
 #	Get the variable names from function parameters
 #
-#	@ARGV: The ARGV data within a function that contains the parameter values
+#	@ARGV	- The ARGV data within a function that contains the parameter values
 #
 function(dk_getArgIdentifiers ARGV)
 	#message(STATUS "dk_getArgIdentifiers(${ARGV})")

@@ -6,7 +6,7 @@ dk_load(dk_color)
 #
 #	Print the trace stack with a message to the console
 #
-#	@msg:(required) The message to print
+#	@msg	- The message to print
 #
 macro(dk_trace msg)
 	#message(STATUS "dk_trace(${ARGV})")

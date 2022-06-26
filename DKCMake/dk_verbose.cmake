@@ -6,7 +6,7 @@ dk_load(dk_color)
 #
 #	Print a verbose message to the console
 #
-#	@msg:(required) The message to print
+#	@msg	- The message to print
 #
 macro(dk_verbose msg)
 	#message(STATUS "dk_verbose(${ARGV})")

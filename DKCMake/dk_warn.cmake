@@ -6,7 +6,7 @@ dk_load(dk_color)
 #
 #	Print a warning message to the console
 #
-#	@msg:(required) The message to print
+#	@msg	- The message to print
 #
 macro(dk_warn msg)
 	#message(STATUS "dk_warn(${ARGV})")

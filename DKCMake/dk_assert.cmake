@@ -6,7 +6,7 @@ dk_load(dk_color)
 #
 #	Print an assert message to the console and halts execution
 #
-#	@msg:(required) The message to print
+#	@msg	- The message to print
 #
 macro(dk_assert msg)
 	#message(STATUS "dk_assert(${ARGV})")

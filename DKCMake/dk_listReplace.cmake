@@ -5,8 +5,9 @@ include_guard()
 #  
 #	Replace a list item with a new value
 #
-#	@old_value: The value to replace
-#	@new_value: The new value to replace with
+#	@LIST		- TODO
+#	@old_value	- The value to replace
+#	@new_value	- The new value to replace with
 #
 macro(dk_listReplace LIST old_value new_value)
     list(FIND ${LIST} ${old_value} old_value_INDEX)
