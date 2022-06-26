@@ -257,7 +257,7 @@ function(dk_includes variable find RESULT) #REVERSE
 	
 	list(LENGTH variable variableLength)
 	if(${variableLength} GREATER 1)
-		dk_debug("dk_includes(${ARGV})")
+		#dk_debug("dk_includes(${ARGV})")
 		if(reverse)
 			#FIXME: make sure reverse is equal to REVERSE
 			list(FIND variable "${find}" index REVERSE)
