@@ -3445,7 +3445,7 @@ function(dk_importDownload url) #Lib #ID #Patch
 	list(GET url_list ${last} url${last})
 	
 	######### add recognizable file extensions ##########
-	set(extensions ".7z;.js;.tar.bz2;.tar.gz;.zip")
+	set(extensions ".7z;.tar.bz2;.tar.gz;.zip")
 	foreach(extension ${extensions})
 		#string(FIND ${url${last}} "${extension}" includes)
 		#if(${includes} GREATER -1)
