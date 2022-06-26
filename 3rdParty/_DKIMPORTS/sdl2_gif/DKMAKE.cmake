@@ -2,7 +2,6 @@
 
 dk_depend(DKSDLWindow)
 
-
 dk_set(SDL2_GIF_NAME SDL2_gif)
 dk_set(SDL2_GIF ${3RDPARTY}/${SDL2_GIF_NAME})
 IF(NOT EXISTS ${SDL2_GIF})
