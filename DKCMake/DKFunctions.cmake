@@ -2147,9 +2147,6 @@ endfunction()
 function(dk_depend plugin) #sublibrary
 	DKDEBUGFUNC(${ARGV})
 	set(sublibrary ${ARGV1})
-	if(sublibrary)
-		dk_dump(sublibrary)
-	endif()
 #	dk_debug(CMAKE_CURRENT_LIST_DIR)
 	
 	list(FIND dk_disabled_list ${plugin} index)
