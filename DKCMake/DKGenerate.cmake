@@ -60,6 +60,7 @@ dk_buildLog("##############################################")
 list(REMOVE_DUPLICATES dkdepend_list)
 foreach(plugin ${dkdepend_list})
 	dk_buildLog("${plugin}")
+	dk_debug("dk_buildLog(${plugin})")
 endforeach()
 dk_buildLog("\n")
 

@@ -2209,26 +2209,54 @@ function(dk_undepend plugin) #sublibrary
 		dk_removeTarget(${plugin} ${sublibrary})
 	endif()
 	
+	#FIXME: trying to remove an item from the list. Nothing works
+	#if(${plugin} STREQUAL mobile_core_services)
+	#	dk_debug(plugin)
+	#	dk_debug("PRE dkdepend_list = ${dkdepend_list}")
+	#	dk_wait()
+		
+		#foreach(dkdepend_item ${dkdepend_list})
+		#	dk_debug("PRE dkdepend_item = ${dkdepend_item}")
+		#	if(${dkdepend_item} STREQUAL ${plugin})
+		#		dk_error("${plugin} is in the list")
+		#	endif()
+		#endforeach()
 	
-	if(${ARGV} STREQUAL mobile_core_services)
-		foreach(dkdepend_item ${dkdepend_list})
-			dk_debug("dkdepend_item = ${dkdepend_item}")
-			if(${plugin} STREQUAL "mobile_core_services")
-				dk_assert("mobile_core_services is still in the list")
-			endif()
-		endforeach()
+		#dk_debug("\nREMOVE_ITEM dkdepend_list ${plugin}")
+		#list(REMOVE_ITEM dkdepend_list ${plugin})
 	
-		list(REMOVE_ITEM dkdepend_list ${plugin} CACHE INTERNAL "")
-	
-		dk_debug("list(FIND dkdepend_list ${plugin} index)")
-		list(FIND dkdepend_list "${plugin}" index)
-		dk_debug(index)
-		dk_wait()
-		if(${index} GREATER -1)
-			list(REMOVE_AT dkdepend_list ${index})
-			dk_wait()
-		endif()
-	endif()
+		#dk_debug("list(FIND dkdepend_list ${plugin} index)")
+		
+		#list(FIND "${dkdepend_list}" ${plugin} index)
+		#dk_debug(index)
+		#if(${index} GREATER -1)
+			#dk_debug("list(REMOVE_AT dkdepend_list ${index})")
+			#list(REMOVE_AT dkdepend_list ${index})
+		#	dk_wait()
+		#endif()
+		
+		#string(FIND "${dkdepend_list}" "mobile_core_services" index)
+		#if(${index} GREATER -1)
+		#	dk_debug(index)
+		#	dk_wait()
+		#endif()
+		
+		#dk_load(dk_listReplace)
+		#dk_listReplace(dkdepend_list ${plugin} "")
+		
+		#dk_removeSubstring(${plugin} dkdepend_list dkdepend_list)
+		
+		#string(REPLACE ${plugin} "" dkdepend_list ${dkdepend_list})
+		
+		#foreach(dkdepend_item ${dkdepend_list})
+		#	dk_debug("POST dkdepend_item = ${dkdepend_item}")
+		#	if("${dkdepend_item}" STREQUAL "mobile_core_services")
+		#		dk_assert("mobile_core_services is STILL in the list")
+		#	endif()
+		#endforeach()
+		#dk_wait()
+		#dk_debug("POST dkdepend_list = ${dkdepend_list}")
+	#endif()
 	
 endfunction()
 
