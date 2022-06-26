@@ -242,26 +242,26 @@ endmacro()
 
 
 ###############################################################################
-# dk_includes(str substr RESULT)
+# dk_includes(variable find RESULT)
 #
 #	Test if a string contains a substring
 #
-#	str			- The string to search 
-#	substr		- The substring to search for
+#	variable	- The variable
+#	find		- The substring to search for
 #	RESULT		- Returns true if the str contains the substr. Otherwise returns false
 #
-function(dk_includes str substr RESULT) #REVERSE
+function(dk_includes variable find RESULT) #REVERSE
 	#DKDEBUGFUNC(${ARGV})
 	set(reverse ${ARG3})
 	unset(${RESULT} PARENT_SCOPE)
 	
-	list(LENGTH str variableLength)
+	list(LENGTH variable variableLength)
 	if(${variableLength} GREATER 1)
 		if(reverse)
 			#FIXME: make sure reverse is equal to REVERSE
-			list(FIND "${str}" "${substr}" index REVERSE)
+			list(FIND variable "${find}" index REVERSE)
 		else()
-			list(FIND "${str}" "${substr}" index)
+			list(FIND variable "${find}" index)
 		endif()
 		if(${index} EQUAL 0)
 			set(${RESULT} true PARENT_SCOPE)
@@ -272,9 +272,9 @@ function(dk_includes str substr RESULT) #REVERSE
 	else()
 		if(reverse)
 			#FIXME: make sure reverse is equal to REVERSE
-			string(FIND "${str}" "${substr}" index REVERSE)
+			string(FIND "${variable}" "${find}" index REVERSE)
 		else()
-			string(FIND "${str}" "${substr}" index)
+			string(FIND "${variable}" "${find}" index)
 		endif()
 		if(${index} EQUAL 0)
 			set(${RESULT} true PARENT_SCOPE)
