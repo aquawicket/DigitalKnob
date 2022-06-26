@@ -1219,7 +1219,7 @@ function(dk_install src_path import_name dest_path)
 	endif()
 	
 	if(NOT "${DKIMPORTS}/${FOLDER}" STREQUAL "${DKIMPORTS}/${import_name}")
-		dk_error("The Imports folder is named inncorrectly. \n CURRENTLY: ${DKIMPORTS}/${FOLDER} \n SHOULD BE: ${DKIMPORTS}/${import_name}")
+		dk_assert("The Imports folder is named inncorrectly. \n CURRENTLY: ${DKIMPORTS}/${FOLDER} \n SHOULD BE: ${DKIMPORTS}/${import_name}")
 	endif()
 	
 	if(EXISTS ${dest_path}/installed)
