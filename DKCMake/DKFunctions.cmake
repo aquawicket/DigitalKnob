@@ -1204,6 +1204,10 @@ endfunction()
 #
 function(dk_install src_path import_name dest_path)
 	DKDEBUGFUNC(${ARGV})
+	
+	get_filename_component(plugin ${CMAKE_CURRENT_LIST_DIR} NAME)
+	string(TOLOWER ${plugin} FOLDER)
+	
 	dk_info(" ")
 	string(TOLOWER ${import_name} import_name_lower)
 	if(NOT ${import_name} STREQUAL ${import_name_lower})
@@ -1213,6 +1217,11 @@ function(dk_install src_path import_name dest_path)
 	if(NOT EXISTS ${DKIMPORTS}/${import_name})
 		dk_assert("ERROR: 2nd parameter in dk_install() (${DKIMPORTS}/${import_name}) does not exist")
 	endif()
+	
+	if(NOT "${DKIMPORTS}/${FOLDER}" STREQUAL "${DKIMPORTS}/${import_name}")
+		dk_error("The Imports folder is named inncorrectly. \n CURRENTLY: ${DKIMPORTS}/${FOLDER} \n SHOULD BE: ${DKIMPORTS}/${import_name}")
+	endif()
+	
 	if(EXISTS ${dest_path}/installed)
 		dk_info("${import_name} already installed")
 		if("${ARGN}" STREQUAL "PATCH")
