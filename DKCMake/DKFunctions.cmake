@@ -1203,17 +1203,18 @@ endfunction()
 #
 function(dk_install src_path dest_path)
 	DKDEBUGFUNC(${ARGV})
-	
+	dk_debug("dk_install(${ARGV})")
+	dk_wait()
 	get_filename_component(import_name ${CMAKE_CURRENT_LIST_DIR} NAME)
 	
 	dk_info(" ")
 	string(TOLOWER ${import_name} import_name_lower)
 	if(NOT ${import_name} STREQUAL ${import_name_lower})
-		dk_assert("ERROR: 2nd parameter in dk_install() (${import_name}) must be all lowercase")
+		dk_assert("ERROR:  dk_install() (${import_name}) must be all lowercase")
 	endif()
 	
 	if(NOT EXISTS ${DKIMPORTS}/${import_name})
-		dk_assert("ERROR: 2nd parameter in dk_install() (${DKIMPORTS}/${import_name}) does not exist")
+		dk_assert("ERROR: dk_install() (${DKIMPORTS}/${import_name}) does not exist")
 	endif()
 	
 	#if(NOT "${DKIMPORTS}/${FOLDER}" STREQUAL "${DKIMPORTS}/${import_name}")
@@ -3727,7 +3728,8 @@ function(dk_importDownload url) #Lib #ID #Patch
 		dk_debug(${LIBVAR}_DL)
 		dk_debug(${LIBVAR}_NAME)
 		dk_debug(${LIBVAR})
-		dk_install(${${LIBVAR}_DL} ${FOLDER} ${${LIBVAR}} ${ARGN})
+		#dk_install(${${LIBVAR}_DL} ${FOLDER} ${${LIBVAR}} ${ARGN})
+		dk_install(${${LIBVAR}_DL} ${${LIBVAR}} ${ARGN})
 	else()
 		dk_assert("One of the required LIBVAR:(${LIBVAR}) variables vas not satisfied")
 		return()

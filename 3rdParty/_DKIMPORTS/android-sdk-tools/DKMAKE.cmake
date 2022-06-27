@@ -1,30 +1,24 @@
-if(NOT WIN_HOST)
-	return()
-endif()
-
 # https://developer.android.com/studio/releases/sdk-tools
 #
 # https://dl.google.com/android/repository/sdk-tools-windows-4333796.zip
 # https://dl.google.com/android/repository/sdk-tools-darwin-4333796.zip
 # https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip
+if(NOT WIN_HOST)
+	return()
+endif()
+
 
 ### DEPENDS ###
 #dk_depend(JDK)
 
 
-#WIN_HOST_DKIMPORT	(ANDROID-SDK-TOOLS_DL https://dl.google.com/android/repository/sdk-tools-windows-4333796.zip)
-#MAC_HOST_DKIMPORT	(ANDROID-SDK-TOOLS_DL https://dl.google.com/android/repository/sdk-tools-darwin-4333796.zip)
-#LINUX_HOST_DKIMPORT	(ANDROID-SDK-TOOLS_DL https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip)
+WIN_HOST_dk_install(https://dl.google.com/android/repository/sdk-tools-windows-4333796.zip ${ANDROID-SDK}/tools PATCH)
+MAC_HOST_dk_install(https://dl.google.com/android/repository/sdk-tools-darwin-4333796.zip ${ANDROID-SDK}/tools PATCH)
+LINUX_HOST_dk_install(https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip ${ANDROID-SDK}/tools PATCH)
+#WIN_HOST_dk_import	(https://dl.google.com/android/repository/sdk-tools-windows-4333796.zip ${ANDROID-SDK}/tools PATCH)
+#MAC_HOST_dk_import	(https://dl.google.com/android/repository/sdk-tools-darwin-4333796.zip ${ANDROID-SDK}/tools PATCH)
+#LINUX_HOST_dk_import(https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip ${ANDROID-SDK}/tools PATCH)
 
-
-dk_set(ANDROID-SDK-TOOLS_VERSION 26.2.0) #revision
-dk_set(ANDROID-SDK-TOOLS_BUILD 4333796)
-WIN_HOST_dk_set(ANDROID-SDK-TOOLS_DL https://dl.google.com/android/repository/sdk-tools-windows-${ANDROID-SDK-TOOLS_BUILD}.zip)
-MAC_HOST_dk_set(ANDROID-SDK-TOOLS_DL https://dl.google.com/android/repository/sdk-tools-darwin-${ANDROID-SDK-TOOLS_BUILD}.zip)
-LINUX_HOST_dk_set(ANDROID-SDK-TOOLS_DL https://dl.google.com/android/repository/sdk-tools-linux-${ANDROID-SDK-TOOLS_BUILD}.zip)
-dk_set(ANDROID-SDK-TOOLS ${ANDROIDSDK}/tools)
-dk_makeDirectory(${ANDROID-SDK-TOOLS})
-dk_install(${ANDROID-SDK-TOOLS_DL} ${ANDROID-SDK-TOOLS} PATCH)
 
 
 # TODO

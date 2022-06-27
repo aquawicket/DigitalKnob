@@ -19,16 +19,14 @@ endif()
 ### DEPENDS ###
 #dk_depend(jdk8)
 
-dk_set(ANDROID-CMDLINE-TOOLS ${3RDPARTY}/android-sdk/cmdline-tools/latest)
-dk_makeDirectory(${3RDPARTY}/android-sdk/cmdline-tools)
-dk_set(SDKMANAGER_BAT ${ANDROID-CMDLINE-TOOLS}/bin/sdkmanager.bat)
-WIN_HOST_dk_set(ANDROID-CMDLINE-TOOLS_DL https://dl.google.com/android/repository/commandlinetools-win-7583922_latest.zip)
-MAC_HOST_dk_set(ANDROID-CMDLINE-TOOLS_DL https://dl.google.com/android/repository/commandlinetools-mac-7302050_latest.zip)
-LINUX_HOST_dk_set(ANDROID-CMDLINE-TOOLS_DL https://dl.google.com/android/repository/commandlinetools-linux-7302050_latest.zip)
-dk_install(${ANDROID-CMDLINE-TOOLS_DL} ${ANDROID-CMDLINE-TOOLS})
+
+WIN_HOST_dk_install(https://dl.google.com/android/repository/commandlinetools-win-7583922_latest.zip ${ANDROID-SDK}/cmdline-tools/latest)
+MAC_HOST_dk_install(https://dl.google.com/android/repository/commandlinetools-mac-7302050_latest.zip ${ANDROID-SDK}/cmdline-tools/latest)
+LINUX_HOST_dk_install(https://dl.google.com/android/repository/commandlinetools-linux-7302050_latest.zip ${ANDROID-SDK}/cmdline-tools/latest)
 #WIN_HOST_dk_import(https://dl.google.com/android/repository/commandlinetools-win-7583922_latest.zip)
 #MAC_HOST_dk_import(https://dl.google.com/android/repository/commandlinetools-mac-7302050_latest.zip)
 #LINUX_HOST_dk_import(https://dl.google.com/android/repository/commandlinetools-linux-7302050_latest.zip)
+dk_set(SDKMANAGER_BAT ${ANDROID-CMDLINE-TOOLS}/bin/sdkmanager.bat)
 
 ## FIXME
 return()
