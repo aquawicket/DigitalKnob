@@ -54,7 +54,7 @@ dk_set(ANDROID-NDK ${3RDPARTY}/android-sdk/ndk/${ANDROID-NDK_BUILD})
 ### INSTALL ###
 #file(MAKE_DIRECTORY ${3RDPARTY}/android-sdk/ndk)
 dk_makeDirectory(${3RDPARTY}/android-sdk/ndk)
-dk_install(${ANDROID-NDK_DL} android-ndk ${ANDROID-NDK} PATCH)
+dk_install(${ANDROID-NDK_DL} ${ANDROID-NDK} PATCH)
 
 dk_setEnv("NDK_ROOT" ${ANDROID-NDK})
 dk_setEnv("VS_NdkRoot" ${ANDROID-NDK})

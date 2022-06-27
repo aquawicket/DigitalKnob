@@ -26,7 +26,7 @@ dk_set(BOOST ${3RDPARTY}/${BOOST_NAME})
 dk_set(BOOST_DL https://versaweb.dl.sourceforge.net/project/boost/boost/1.78.0/boost_1_78_0.zip)
 
 
-dk_install(${BOOST_DL} boost ${BOOST} PATCH)
+dk_install(${BOOST_DL} ${BOOST} PATCH)
 #dk_import(https://versaweb.dl.sourceforge.net/project/boost/boost/1.78.0/boost_1_78_0.zip PATCH)
 #dk_import(https://github.com/boostorg/boost.git)
 

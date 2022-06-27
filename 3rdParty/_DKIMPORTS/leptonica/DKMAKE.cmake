@@ -26,7 +26,7 @@ dk_import(https://github.com/DanBloomberg/leptonica)
 #dk_set(LEPTONICA_NAME leptonica-${LEPTONICA_VERSION})
 #dk_set(LEPTONICA_DL https://github.com/DanBloomberg/leptonica/archive/refs/tags/${LEPTONICA_VERSION}.zip)
 #dk_set(LEPTONICA ${3RDPARTY}/${LEPTONICA_NAME})
-#dk_install(${LEPTONICA_DL} leptonica ${LEPTONICA})
+#dk_install(${LEPTONICA_DL} ${LEPTONICA})
 
 
 ### LINK ###

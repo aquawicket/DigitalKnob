@@ -23,7 +23,7 @@ dk_set(OPENCV_NAME opencv-${OPENCV_VERSION})
 #dk_set(OPENCV_DL https://sourceforge.net/projects/opencvlibrary/files/opencv-unix/${OPENCV_VERSION}/${OPENCV_NAME}.zip)
 dk_set(OPENCV_DL https://github.com/opencv/opencv/archive/refs/tags/${OPENCV_VERSION}.zip)
 dk_set(OPENCV ${3RDPARTY}/${OPENCV_NAME})
-dk_install(${OPENCV_DL} opencv ${OPENCV})
+dk_install(${OPENCV_DL} ${OPENCV})
 
 
 ### LINK ###

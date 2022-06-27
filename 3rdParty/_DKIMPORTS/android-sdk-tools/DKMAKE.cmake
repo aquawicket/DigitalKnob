@@ -24,7 +24,7 @@ MAC_HOST_dk_set(ANDROID-SDK-TOOLS_DL https://dl.google.com/android/repository/sd
 LINUX_HOST_dk_set(ANDROID-SDK-TOOLS_DL https://dl.google.com/android/repository/sdk-tools-linux-${ANDROID-SDK-TOOLS_BUILD}.zip)
 dk_set(ANDROID-SDK-TOOLS ${ANDROIDSDK}/tools)
 dk_makeDirectory(${ANDROID-SDK-TOOLS})
-dk_install(${ANDROID-SDK-TOOLS_DL} android-sdk-tools ${ANDROID-SDK-TOOLS} PATCH)
+dk_install(${ANDROID-SDK-TOOLS_DL} ${ANDROID-SDK-TOOLS} PATCH)
 
 
 # TODO

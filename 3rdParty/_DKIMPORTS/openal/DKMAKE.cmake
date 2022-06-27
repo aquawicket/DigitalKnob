@@ -16,7 +16,7 @@ WIN_dk_depend(winmm.lib)
 
 
 ### INSTALL ###
-dk_install(${OPENAL_DL} openal ${OPENAL})
+dk_install(${OPENAL_DL} ${OPENAL})
 
 
 ### LINK ###

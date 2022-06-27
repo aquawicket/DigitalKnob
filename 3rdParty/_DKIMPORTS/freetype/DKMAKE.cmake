@@ -14,7 +14,7 @@ dk_set(FREETYPE ${3RDPARTY}/${FREETYPE_NAME})
 
 
 ### INSTALL ###
-dk_install(${FREETYPE_DL} freetype ${FREETYPE} PATCH)
+dk_install(${FREETYPE_DL} ${FREETYPE} PATCH)
 
 
 ### DKPLUGINS LINK ###

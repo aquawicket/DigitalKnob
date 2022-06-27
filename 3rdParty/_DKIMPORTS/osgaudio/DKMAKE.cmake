@@ -14,7 +14,7 @@ dk_depend(openal)
 #${OSGAUDIO_NAME osgaudio-${OSG_VERSION}}
 #${OSGAUDIO ${3RDPARTY}/${OSG_NAME})
 #dk_set(OSGAUDIO ${3RDPARTY}/osgaudio-master)
-#dk_install(${OSG_AUDIODL} osgaudio ${OSGAUDIO})
+#dk_install(${OSG_AUDIODL} ${OSGAUDIO})
 dk_import(http://TODO.com/osgaudio-master.zip)
 
 

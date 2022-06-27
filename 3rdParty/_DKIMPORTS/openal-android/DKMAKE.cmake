@@ -16,7 +16,7 @@ dk_set(OPENAL ${3RDPARTY}/${OPENAL_NAME})
 
 
 ### INSTALL ###
-dk_install(${OPENAL_DL} OpenAL-android ${OPENAL})
+dk_install(${OPENAL_DL} ${OPENAL})
 
 
 ### LINK ###

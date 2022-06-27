@@ -21,7 +21,7 @@ dk_import(https://github.com/mirrorer/giflib.git PATCH)
 #dk_set(GIFLIB_DL https://sourceforge.net/projects/giflib/files/giflib-5.1.1.tar.gz)
 #dk_set(GIFLIB_NAME giflib-${GIFLIB_VERSION})
 #dk_set(GIFLIB ${3RDPARTY}/${GIFLIB_NAME})
-#dk_install(${GIFLIB_DL} giflib ${GIFLIB} PATCH)
+#dk_install(${GIFLIB_DL} ${GIFLIB} PATCH)
 
 
 

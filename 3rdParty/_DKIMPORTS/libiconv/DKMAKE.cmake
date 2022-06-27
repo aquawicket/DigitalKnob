@@ -8,7 +8,7 @@ dk_set(LIBICONV_VERSION 1.14)
 dk_set(LIBICONV_NAME libiconv-${LIBICONV_VERSION})
 dk_set(LIBICONV_DL https://ftp.gnu.org/gnu/libiconv/libiconv-1.14.tar.gz)
 dk_set(LIBICONV ${3RDPARTY}/${LIBICONV_NAME})
-dk_install(${LIBICONV_DL} libiconv ${LIBICONV} PATCH)
+dk_install(${LIBICONV_DL} ${LIBICONV} PATCH)
 
 
 ### LINK ###

@@ -8,7 +8,7 @@
 #dk_set(TIDY-HTML5_VERSION 5.8.0)
 #dk_set(TIDY-HTML5_NAME tidy_html5_${TIDY-HTML5_VERSION})
 #dk_set(TIDY-HTML5 ${3RDPARTY}/${TIDY-HTML5_NAME})
-#dk_install(${TIDY-HTML5_DL} tidy-html5 ${TIDY-HTML5})
+#dk_install(${TIDY-HTML5_DL} ${TIDY-HTML5})
 dk_import(https://github.com/htacg/tidy-html5.git)
 
 

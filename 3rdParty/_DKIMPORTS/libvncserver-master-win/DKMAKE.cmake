@@ -18,7 +18,7 @@ dk_set(VNCSERVER ${3RDPARTY}/${VNCSERVER_NAME})
 
 
 ### INSTALL ###
-dk_install(${VNCSERVER_DL} libvncserver-master_win ${VNCSERVER})
+dk_install(${VNCSERVER_DL} ${VNCSERVER})
 
 
 

@@ -9,7 +9,7 @@ endif()
 #dk_set(GETCH_DL https://github.com/mouuff/simple-getch/archive/refs/heads/master.zip)
 #dk_set(GETCH_NAME simple-getch-${GETCH_VERSION})
 #dk_set(GETCH ${3RDPARTY}/${GETCH_NAME})
-#dk_install(${GETCH_DL} simple-getch ${GETCH})
+#dk_install(${GETCH_DL} ${GETCH})
 dk_import(https://github.com/mouuff/simple-getch.git)
 
 

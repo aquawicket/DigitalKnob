@@ -14,7 +14,7 @@ dk_import(https://github.com/nowres/conio-for-linux.git)
 #dk_set(CONIO-FOR-LINUX_NAME conio-${CONIO-FOR-LINUX_VERSION})
 #dk_set(CONIO-FOR-LINUX_DL https://github.com/nowres/conio-for-linux/archive/refs/heads/${CONIO-FOR-LINUX_VERSION}.zip)
 #dk_set(CONIO-FOR-LINUX ${3RDPARTY}/${CONIO-FOR-LINUX_NAME})
-#dk_install(${CONIO-FOR-LINUX_DL} conio.h ${CONIO-FOR-LINUX})
+#dk_install(${CONIO-FOR-LINUX_DL} ${CONIO-FOR-LINUX})
 
 
 ### LINK ###

@@ -8,7 +8,7 @@ DKGITCLONE(https://github.com/openscenegraph/OpenSceneGraph.git)
 #dk_set(OSG_NAME OpenSceneGraph-${OSG_VERSION})
 #dk_set(OSG_DL https://github.com/openscenegraph/OpenSceneGraph/tree/${OSG_NAME})
 #dk_set(OSG ${3RDPARTY}/${OSG_NAME})
-#dk_install(${OSG_DL} openscenegraph ${OSG})
+#dk_install(${OSG_DL} ${OSG})
 
 dk_set(OSG_GL2 ${3RDPARTY}/${OSG_NAME}-GL2)
 dk_set(OSG_PLUGINS osgPlugins-3.4.0)

@@ -26,7 +26,7 @@ ANDROID_dk_import	(ftp://sourceware.org/pub/bzip2/bzip2-1.0.8.tar.gz)
 #RASPBERRY_dk_set(BZIP2_DL ftp://sourceware.org/pub/bzip2/bzip2-1.0.8.tar.gz)
 #ANDROID_dk_set(BZIP2_DL ftp://sourceware.org/pub/bzip2/bzip2-1.0.8.tar.gz)
 #dk_set(BZIP2 ${3RDPARTY}/${BZIP2_NAME})
-#dk_install(${BZIP2_DL} bzip2 ${BZIP2})
+#dk_install(${BZIP2_DL} ${BZIP2})
 
 
 if(NOT EXISTS ${BZIP2}/copy)

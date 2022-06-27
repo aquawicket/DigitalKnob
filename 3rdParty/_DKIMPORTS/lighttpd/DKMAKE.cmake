@@ -6,7 +6,7 @@ dk_set(LIGHTTPD ${3RDPARTY}/${LIGHTTPD_NAME})
 
 
 ### INSTALL ###
-dk_install(${LIGHTTPD_DL} lighttpd ${LIGHTTPD})
+dk_install(${LIGHTTPD_DL} ${LIGHTTPD})
 
 
 ### LINK ###

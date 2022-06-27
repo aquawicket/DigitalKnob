@@ -26,7 +26,7 @@ LINUX_HOST_dk_set(JDK_DL https://download.java.net/java/GA/jdk9/9.0.4/binaries/o
 ### INSTALL ###
 dk_set(JDK_NAME openjdk-${JDK_VERSION})
 dk_set(JDK ${3RDPARTY}/${JDK_NAME})
-dk_install(${JDK_DL} jdk ${JDK} PATCH)
+dk_install(${JDK_DL} ${JDK} PATCH)
 
 ### LINK ###
 dk_include(${JDK}/)	

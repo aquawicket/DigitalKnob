@@ -18,7 +18,7 @@ dk_import(https://github.com/aquawicket/duktape.git PATCH)
 #dk_set(DUKTAPE_NAME duktape-${DUKTAPE_VERSION})
 #dk_set(DUKTAPE_DL https://github.com/aquawicket/duktape/archive/refs/heads/${DUKTAPE_VERSION}.zip)
 #dk_set(DUKTAPE ${3RDPARTY}/${DUKTAPE_NAME})
-#dk_install(${DUKTAPE_DL} duktape ${DUKTAPE})
+#dk_install(${DUKTAPE_DL} ${DUKTAPE})
 
 
 if(NOT EXISTS ${DUKTAPE}/src)
@@ -32,7 +32,7 @@ WIN_dk_queueCommand(${PYTHON}/Scripts/pip install PyYAML)
 WIN_dk_queueCommand(${PYTHON_EXE} ${DUKTAPE}/util/dist.py)
 dk_copy(${DUKTAPE}/dist/src/ ${DUKTAPE}/src TRUE)
 
-#dk_install(https://codeload.github.com/nodeca/js-yaml/zip/refs/tags/3.14.1 js-yaml-3.14.1 ${DUKTAPE_NAME}/src-tools/lib/extdeps/js-yaml)
+#dk_install(https://codeload.github.com/nodeca/js-yaml/zip/refs/tags/3.14.1 ${DUKTAPE_NAME}/src-tools/lib/extdeps/js-yaml)
 #WIN32_dk_queueCommand(${NODE_EXE} ${DUKTAPE}/src-tools/index.js configure --output-directory ${DUKTAPE}/src --source-directory ${DUKTAPE}/src-input --config-directory ${DUKTAPE}/config)
 endif()
 

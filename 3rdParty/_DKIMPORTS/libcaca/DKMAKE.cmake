@@ -7,7 +7,7 @@ dk_import(https://github.com/cacalabs/libcaca)
 #dk_set(CACA_NAME libcaca-${CACA_VERSION})
 #dk_set(CACA_DL http://caca.zoy.org/files/libcaca/libcaca-0.99.beta19.tar.gz)
 #dk_set(CACA ${3RDPARTY}/${CACA_NAME})
-#dk_install(${CACA_DL} libcaca ${CACA})
+#dk_install(${CACA_DL} ${CACA})
 
 
 ### LINK ###

@@ -16,7 +16,7 @@ dk_import(https://github.com/curl/curl/archive/refs/tags/curl-7_43_0.zip)
 #dk_set(CURL_NAME curl-${CURL_VERSION})
 #dk_set(CURL_DL https://curl.haxx.se/download/${CURL_NAME}.zip)
 #dk_set(CURL ${3RDPARTY}/${CURL_NAME})
-#dk_install(${CURL_DL} curl ${CURL})
+#dk_install(${CURL_DL} ${CURL})
 
 
 ### DKPLUGINS LINK ###

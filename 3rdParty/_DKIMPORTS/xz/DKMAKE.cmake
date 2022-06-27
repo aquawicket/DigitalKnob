@@ -16,7 +16,7 @@ dk_import(https://github.com/xz-mirror/xz/archive/20e7a33e2d59c6a814447d3991f21e
 #dk_set(XZ_DL https://tukaani.org/xz/${XZ_NAME}.tar.gz)
 #dk_set(XZ_NAME xz-${XZ_VERSION})
 #dk_set(XZ ${3RDPARTY}/${XZ_NAME})
-#dk_install(${XZ_DL} xz ${XZ})
+#dk_install(${XZ_DL} ${XZ})
 
 
 ### LINK ###

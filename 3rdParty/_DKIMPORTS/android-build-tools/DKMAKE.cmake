@@ -24,4 +24,4 @@ WIN_HOST_dk_set(ANDROID-BUILD-TOOLS_DL https://dl.google.com/android/repository/
 MAC_HOST_dk_set(ANDROID-BUILD-TOOLS_DL https://dl.google.com/android/repository/build-tools_r${ANDROID-BUILD-TOOLS_VERSION}-darwin.zip)
 LINUX_HOST_dk_set(ANDROID-BUILD-TOOLS_DL https://dl.google.com/android/repository/cc6bd534c6c37604205171784ac5621.build-tools_r${ANDROID-BUILD-TOOLS_VERSION}-linux.zip)
 dk_makeDirectory(${ANDROID-SDK}/build-tools)
-dk_install(${ANDROID-BUILD-TOOLS_DL} android-build-tools ${ANDROID-BUILD-TOOLS})
+dk_install(${ANDROID-BUILD-TOOLS_DL} ${ANDROID-BUILD-TOOLS})

@@ -12,7 +12,7 @@ dk_import(https://github.com/bulletphysics/bullet3.git)
 #dk_set(BULLET3_NAME bullet-${BULLET3_VERSION})
 #dk_set(BULLET3_DL https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/bullet/${BULLET3_NAME}.zip)
 #dk_set(BULLET3 ${3RDPARTY}/${BULLET3_NAME})
-#dk_install(${BULLET3_DL} bullet ${BULLET3})
+#dk_install(${BULLET3_DL} ${BULLET3})
 
 
 ### DKPLUGINS LINK ###

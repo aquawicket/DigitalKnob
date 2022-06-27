@@ -12,5 +12,5 @@ dk_set(NASM ${3RDPARTY}/${NASM_NAME})
 dk_set(NASM_EXE ${NASM}/nasm.exe)
 
 ### INSTALL ###
-dk_install(${NASM_DL} nasm ${NASM})
+dk_install(${NASM_DL} ${NASM})
 dk_setEnv("PATH" "${NASM_EXE}")

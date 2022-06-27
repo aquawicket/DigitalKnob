@@ -7,7 +7,7 @@
 #dk_set(TIFF_DL https://gitlab.com/libtiff/libtiff/-/archive/v4.2.0/libtiff-v4.2.0.zip)
 #dk_set(TIFF_NAME tiff-${TIFF_VERSION})
 #dk_set(TIFF ${3RDPARTY}/${TIFF_NAME})
-#dk_install(${TIFF_DL} tiff ${TIFF})
+#dk_install(${TIFF_DL} ${TIFF})
 #dk_import(https://gitlab.com/libtiff/libtiff/-/archive/v4.2.0/libtiff-v4.2.0.zip)
 dk_import(https://gitlab.com/libtiff/libtiff.git)
 
