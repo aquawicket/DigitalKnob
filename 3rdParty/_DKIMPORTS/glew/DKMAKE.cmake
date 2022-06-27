@@ -5,7 +5,7 @@ if(IOS OR IOSSIM OR ANDROID)
 endif()
 
 
-#DKGITCLONE(https://github.com/nigels-com/glew.git)
+#dk_import(https://github.com/nigels-com/glew.git)
 
 dk_import(https://github.com/nigels-com/glew/releases/download/glew-2.2.0/glew-2.2.0.zip)
 

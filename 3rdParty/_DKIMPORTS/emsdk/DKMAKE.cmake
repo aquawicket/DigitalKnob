@@ -3,7 +3,7 @@
 #
 # https://github.com/emscripten-core/emsdk/archive/refs/tags/2.0.26.zip
 
-DKGITCLONE(https://github.com/emscripten-core/emsdk.git)
+dk_import(https://github.com/emscripten-core/emsdk.git)
 
 #dk_set(EMSCRIPTEN_VERSION 2.0.26)
 #dk_set(EMSCRIPTEN_NAME emsdk-${EMSCRIPTEN_VERSION})

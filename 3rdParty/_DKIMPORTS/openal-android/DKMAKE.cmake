@@ -16,7 +16,8 @@ dk_set(OPENAL ${3RDPARTY}/${OPENAL_NAME})
 
 
 ### INSTALL ###
-dk_install(${OPENAL_DL} ${OPENAL})
+#dk_install(${OPENAL_DL} ${OPENAL})
+dk_import(${OPENAL_DL} ${OPENAL})
 
 
 ### LINK ###

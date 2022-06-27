@@ -18,8 +18,8 @@ dk_set(VNCSERVER ${3RDPARTY}/${VNCSERVER_NAME})
 
 
 ### INSTALL ###
-dk_install(${VNCSERVER_DL} ${VNCSERVER})
-
+#dk_install(${VNCSERVER_DL} ${VNCSERVER})
+dk_import(${VNCSERVER_DL} ${VNCSERVER})
 
 
 ### LINK ###

@@ -6,7 +6,8 @@ dk_set(FREEALUT_VERSION master)
 dk_set(FREEALUT_NAME freealut-${FREEALUT_VERSION})
 #dk_set(FREEALUT_DL ???)
 dk_set(FREEALUT ${3RDPARTY}/${FREEALUT_NAME})
-dk_install(${FREEALUT_DL} ${FREEALUT})
+#dk_install(${FREEALUT_DL} ${FREEALUT})
+dk_import(${FREEALUT_DL} ${FREEALUT})
 
 
 ### LINK ###

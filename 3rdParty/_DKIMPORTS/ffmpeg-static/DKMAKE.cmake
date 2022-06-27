@@ -6,7 +6,8 @@ dk_set(FFMPEG_DL https://web.archive.org/web/20200916125901if_/https://ffmpeg.ze
 dk_set(FFMPEG ${3RDPARTY}/${FFMPEG_NAME})
 
 ### INSTALL ###
-dk_install(${FFMPEG_DL} ${FFMPEG})
+#dk_install(${FFMPEG_DL} ${FFMPEG})
+dk_import(${FFMPEG_DL} ${FFMPEG})
 
 
 

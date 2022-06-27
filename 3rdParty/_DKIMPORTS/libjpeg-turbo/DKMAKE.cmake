@@ -8,7 +8,8 @@ dk_set(LIBJPEG-TURBO_VERSION 2.1.1)
 dk_set(LIBJPEG-TURBO_NAME libjpeg-turbo-${LIBJPEG-TURBO_VERSION})
 dk_set(LIBJPEG-TURBO_DL https://sourceforge.net/projects/libjpeg-turbo/files/2.1.1/libjpeg-turbo-2.1.1.tar.gz)
 dk_set(LIBJPEG-TURBO ${3RDPARTY}/${LIBJPEG-TURBO_NAME})
-dk_install(${LIBJPEG-TURBO_DL} ${LIBJPEG-TURBO} NOPATCH)
+#dk_install(${LIBJPEG-TURBO_DL} ${LIBJPEG-TURBO} NOPATCH)
+dk_import(${LIBJPEG-TURBO_DL} ${LIBJPEG-TURBO} NOPATCH)
 
 
 ### DKPLUGINS LINK ###

@@ -6,7 +6,8 @@ dk_set(LIGHTTPD ${3RDPARTY}/${LIGHTTPD_NAME})
 
 
 ### INSTALL ###
-dk_install(${LIGHTTPD_DL} ${LIGHTTPD})
+#dk_install(${LIGHTTPD_DL} ${LIGHTTPD})
+dk_import(${LIGHTTPD_DL} ${LIGHTTPD})
 
 
 ### LINK ###

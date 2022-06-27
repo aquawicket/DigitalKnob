@@ -4,9 +4,6 @@ include_guard()
 # https://dl.google.com/android/repository/platform-tools_r31.0.3-linux.zip
 
 
-WIN_HOST_dk_install(https://dl.google.com/android/repository/platform-tools_r31.0.3-windows.zip ${ANDROID-SDK}/platform-tools)
-MAC_HOST_dk_install(https://dl.google.com/android/repository/platform-tools_r31.0.3-darwin.zip ${ANDROID-SDK}/platform-tools)
-LINUX_HOST_dk_install(https://dl.google.com/android/repository/platform-tools_r31.0.3-linux.zip ${ANDROID-SDK}/platform-tools)
-#WIN_HOST_dk_import(https://dl.google.com/android/repository/platform-tools_r31.0.3-windows.zip ${ANDROID-SDK}/platform-tools)
-#MAC_HOST_dk_import(https://dl.google.com/android/repository/platform-tools_r31.0.3-darwin.zip ${ANDROID-SDK}/platform-tools)
-#LINUX_HOST_dk_import(https://dl.google.com/android/repository/platform-tools_r31.0.3-linux.zip ${ANDROID-SDK}/platform-tools)
+WIN_HOST_dk_import(https://dl.google.com/android/repository/platform-tools_r31.0.3-windows.zip ${ANDROID-SDK}/platform-tools)
+MAC_HOST_dk_import(https://dl.google.com/android/repository/platform-tools_r31.0.3-darwin.zip ${ANDROID-SDK}/platform-tools)
+LINUX_HOST_dk_import(https://dl.google.com/android/repository/platform-tools_r31.0.3-linux.zip ${ANDROID-SDK}/platform-tools)

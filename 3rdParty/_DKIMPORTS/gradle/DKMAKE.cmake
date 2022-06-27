@@ -1,7 +1,7 @@
 # https://github.com/gradle/gradle
 
 
-DKGITCLONE(https://github.com/gradle/gradle.git)
+dk_import(https://github.com/gradle/gradle.git)
 
 #dk_set(GRADLE_VERSION 7.3-bin)
 #dk_set(GRADLE_NAME gradle-${GRADLE_VERSION})

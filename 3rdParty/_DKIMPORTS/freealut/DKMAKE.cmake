@@ -8,7 +8,7 @@ dk_depend(openal)
 
 
 ### VERSION ###
-DKGITCLONE(https://github.com/vancegroup/freealut)
+dk_import(https://github.com/vancegroup/freealut.git)
 
 #dk_set(FREEALUT_VERSION 1.1.0)
 #dk_set(FREEALUT_NAME freealut-${FREEALUT_VERSION})

@@ -1,7 +1,7 @@
 dk_depend(msinttypes)
 dk_depend(zlib)
 
-DKGITCLONE(https://github.com/openscenegraph/OpenSceneGraph.git)
+dk_import(https://github.com/openscenegraph/OpenSceneGraph.git)
 
 ### INSTALL ###
 #dk_set(OSG_VERSION 3.6.5)

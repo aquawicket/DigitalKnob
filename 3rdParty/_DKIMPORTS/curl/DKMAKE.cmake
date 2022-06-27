@@ -9,7 +9,7 @@ ANDROID_dk_depend(dl)
 dk_depend(zlib)
 dk_depend(openssl)
 
-#DKGITCLONE(https://github.com/curl/curl.git curl-7_83_1)
+#dk_import(https://github.com/curl/curl.git curl-7_83_1)
 dk_import(https://github.com/curl/curl/archive/refs/tags/curl-7_43_0.zip)
 
 #dk_set(CURL_VERSION 7.34.0)

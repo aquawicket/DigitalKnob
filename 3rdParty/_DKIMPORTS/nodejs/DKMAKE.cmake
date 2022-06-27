@@ -9,4 +9,5 @@ dk_set(NODE_EXE ${NODEJS}/node.exe)
 
 
 ### INSTALL ###
-dk_install(${NODEJS_DL} ${NODEJS})
+#dk_install(${NODEJS_DL} ${NODEJS})
+dk_import(${NODEJS_DL} ${NODEJS})

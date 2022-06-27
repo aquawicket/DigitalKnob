@@ -19,4 +19,5 @@ dk_set(FAR ${3RDPARTY}/${FAR_NAME})
 
 
 ### INSTALL ###
-dk_install(${FAR_DL} ${FAR})
+#dk_install(${FAR_DL} ${FAR})
+dk_import(${FAR_DL} ${FAR})
