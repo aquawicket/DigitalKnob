@@ -11,7 +11,6 @@ dk_set(FLAC_VERSION 1.3.2)
 dk_set(FLAC_DL https://ftp.osuosl.org/pub/xiph/releases/flac/flac-1.3.2.tar.xz)
 dk_set(FLAC_NAME flac-${FLAC_VERSION})
 dk_set(FLAC ${3RDPARTY}/${FLAC_NAME})
-#dk_install(${FLAC_DL} ${FLAC})
 dk_import(${FLAC_DL} ${FLAC})
 
 ### LINK ###

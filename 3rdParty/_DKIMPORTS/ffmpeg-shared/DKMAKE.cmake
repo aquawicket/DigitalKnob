@@ -7,7 +7,7 @@ dk_set(FFMPEGDLL_DL https://web.archive.org/web/20200918193207/https://ffmpeg.ze
 dk_set(FFMPEGDLL ${3RDPARTY}/${FFMPEGDLL_NAME})
 
 ### INSTALL ###
-#dk_install(${FFMPEGDLL_DL} ${FFMPEG_DLL})
+#dk_import(${FFMPEGDLL_DL} ${FFMPEG_DLL})
 dk_import(${FFMPEGDLL_DL} ${FFMPEG_DLL})
 
 ### LINK ###

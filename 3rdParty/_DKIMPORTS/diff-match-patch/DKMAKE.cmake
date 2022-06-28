@@ -11,7 +11,7 @@ dk_import(https://github.com/google/diff-match-patch.git)
 #dk_set(DIFF_MATCH_PATCH_DL https://github.com/google/diff-match-patch/archive/62f2e689f498f9c92dbc588c58750addec9b1654.zip)
 #dk_set(DIFF_MATCH_PATCH_NAME diff-match-patch-${DIFF_MATCH_PATCH_VERSION})
 #dk_set(DIFF_MATCH_PATCH ${3RDPARTY}/${DIFF_MATCH_PATCH_NAME})
-#dk_install(${DIFF_MATCH_PATCH_DL} ${DIFF_MATCH_PATCH})
+#dk_import(${DIFF_MATCH_PATCH_DL} ${DIFF_MATCH_PATCH})
 
 
 ### LINK ###
