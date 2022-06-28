@@ -3523,7 +3523,6 @@ function(dk_importGit url) #branch #PATCH
 	dk_set(${LIBVAR}_NAME ${FOLDER}-${${LIBVAR}_BRANCH})
 	if(NOT ${LIBVAR}_NAME)
 		dk_assert("${LIBVAR}_NAME is invalid")
-		return()
 	endif()
 	dk_debug(${LIBVAR}_NAME)
 	
@@ -3633,54 +3632,51 @@ function(dk_importDownload url) #install_path #Patch
 	dk_debug("\${DKIMPORTS}/\${${LIBVAR}_FOLDER}} = ${DKIMPORTS}/${${LIBVAR}_FOLDER}}")
 	if(NOT "${DKIMPORTS}/${FOLDER}" STREQUAL "${CMAKE_CURRENT_LIST_DIR}")
 		dk_assert("The Imports folder is named inncorrectly. \n CURRENTLY: ${CMAKE_CURRENT_LIST_DIR} \n SHOULD BE: ${DKIMPORTS}/${${LIBVAR}_FOLDER}}")
-		return()
 	endif()
 	
 	math(EXPR last "${url_length}-1")  #OUTPUT_FORMAT DECIMAL)")  CMake 3.13+
 	list(GET url_list ${last} url${last})
 	
-	######### add recognizable file extensions ##########
-												
-								 
-#	string(FIND ${url${last}} ".7z" index)
-#	if(${index} GREATER -1)
-#		if(NOT tag)
-#			string(SUBSTRING ${url${last}} 0 ${index} tag)
-#		endif()
-#		dk_set(${LIBVAR}_DL ${url})
-#	endif()
-#	
-#	string(FIND ${url${last}} ".js" index)
-#	if(${index} GREATER -1)
-#		if(NOT tag)
-#			string(SUBSTRING ${url${last}} 0 ${index} tag)
-#		endif()
-#		dk_set(${LIBVAR}_DL ${url})
-#	endif()
-#	
-#	string(FIND ${url${last}} ".tar.bz2" index)
-#	if(${index} GREATER -1)
-#		if(NOT tag)
-#			string(SUBSTRING ${url${last}} 0 ${index} tag)
-#		endif()
-#		dk_set(${LIBVAR}_DL ${url})
-#	endif()
-#	
-#	string(FIND ${url${last}} ".tar.gz" index)
-#	if(${index} GREATER -1)
-#		if(NOT tag)
-#			string(SUBSTRING ${url${last}} 0 ${index} tag)
-#		endif()
-#		dk_set(${LIBVAR}_DL ${url})
-#	endif()
-#
-#	string(FIND ${url${last}} ".zip" index)
-#	if(${index} GREATER -1)
-#		if(NOT tag)
-#			string(SUBSTRING ${url${last}} 0 ${index} tag)
-#		endif()
-#		dk_set(${LIBVAR}_DL ${url})
-#	endif()
+	######### add recognizable file extensions ########## 
+	string(FIND ${url${last}} ".7z" index)
+	if(${index} GREATER -1)
+		if(NOT tag)
+			string(SUBSTRING ${url${last}} 0 ${index} tag)
+		endif()
+		dk_set(${LIBVAR}_DL ${url})
+	endif()
+	
+	string(FIND ${url${last}} ".js" index)
+	if(${index} GREATER -1)
+		if(NOT tag)
+			string(SUBSTRING ${url${last}} 0 ${index} tag)
+		endif()
+		dk_set(${LIBVAR}_DL ${url})
+	endif()
+	
+	string(FIND ${url${last}} ".tar.bz2" index)
+	if(${index} GREATER -1)
+		if(NOT tag)
+			string(SUBSTRING ${url${last}} 0 ${index} tag)
+		endif()
+		dk_set(${LIBVAR}_DL ${url})
+	endif()
+	
+	string(FIND ${url${last}} ".tar.gz" index)
+	if(${index} GREATER -1)
+		if(NOT tag)
+			string(SUBSTRING ${url${last}} 0 ${index} tag)
+		endif()
+		dk_set(${LIBVAR}_DL ${url})
+	endif()
+
+	string(FIND ${url${last}} ".zip" index)
+	if(${index} GREATER -1)
+		if(NOT tag)
+			string(SUBSTRING ${url${last}} 0 ${index} tag)
+		endif()
+		dk_set(${LIBVAR}_DL ${url})
+	endif()
 	######################################################
 	dk_set(${LIBVAR}_DL ${url})
 	
@@ -3720,11 +3716,14 @@ function(dk_importDownload url) #install_path #Patch
 #       file(WRITE ${CMAKE_CURRENT_LIST_FILE} ${DKMAKE_FILE})
 #	endif()
 	
-	if(NOT tag)
-		set(tag "download")
+	if(tag)
+		dk_set(${LIBVAR}_BRANCH ${tag})
 	endif()
-	dk_set(${LIBVAR}_BRANCH ${tag})
-	dk_set(${LIBVAR}_NAME ${FOLDER}-${${LIBVAR}_BRANCH})
+	
+	if(FOLDER AND LIBVAR AND ${LIBVAR}_BRANCH)
+		dk_set(${LIBVAR}_NAME ${FOLDER}-${${LIBVAR}_BRANCH})
+	endif()
+	
 	if(install_path)
 		dk_set(${LIBVAR} ${install_path})
 	else()
@@ -3734,24 +3733,18 @@ function(dk_importDownload url) #install_path #Patch
 	if(NOT ${LIBVAR})
 		dk_assert("${LIBVAR} invalid")
 	endif()
-	dk_debug(${LIBVAR})
 	
 	if(NOT ${LIBVAR}_BRANCH)
 		dk_error("${LIBVAR}_BRANCH invalid")
 	endif()
-	dk_debug(${LIBVAR}_BRANCH)
 	
 	if(NOT ${LIBVAR}_NAME)
-		dk_error("${LIBVAR}_NAME invalid")
+		dk_assert("${LIBVAR}_NAME invalid")
 	endif()
-	dk_debug(${LIBVAR}_NAME)
 	
 	if(NOT ${LIBVAR}_DL)
 		dk_assert("${LIBVAR}_DL invalid")
 	endif()
-	dk_debug(${LIBVAR}_DL)
-	
-	dk_debug(ARGN)
 	
 	
 	dk_install(${${LIBVAR}_DL} ${${LIBVAR}} ${${LIBVAR}_FOLDER} ${ARGN})

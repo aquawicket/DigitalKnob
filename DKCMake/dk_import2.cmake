@@ -177,4 +177,4 @@ endfunction()
 #endfunction()
 
 #dk_import2(https://github.com/madler/zlib.git)
-dk_depend(dktest)
+#dk_depend(dktest)

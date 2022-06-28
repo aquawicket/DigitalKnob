@@ -1,6 +1,5 @@
 # https://developer.android.com/studio/archive
 # https://developer.android.com/studio#downloads
-# 
 if(NOT WIN_HOST)
 	return()
 endif()
