@@ -61,17 +61,17 @@ MAC_dk_depend(appkit)
 LINUX_dk_depend(build-essential)
 LINUX_dk_depend(libgtk2.0-dev)
 
-dk_set					(CEF_VERSION 81.3.3+g072a5f5+chromium-81.0.4044.138)
-WIN32_dk_import			(https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_windows32.tar.bz2 ${3RDPARTY}/${CEF_VERSION})
-WIN64_dk_import			(https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_windows64.tar.bz2 ${3RDPARTY}/${CEF_VERSION})
-MAC64_dk_import			(https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_macosx64.tar.bz2 ${3RDPARTY}/${CEF_VERSION})
-LINUX32_dk_import		(https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_linux32.tar.bz2 ${3RDPARTY}/${CEF_VERSION})
-LINUX64_dk_import		(https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_linux64.tar.bz2 ${3RDPARTY}/${CEF_VERSION})
-RASPBERRY32_dk_import	(https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_linuxarm.tar.bz2 ${3RDPARTY}/${CEF_VERSION})
-RASPBERRY64_dk_import	(https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_linuxarm64.tar.bz2 ${3RDPARTY}/${CEF_VERSION})
+
+WIN32_dk_import		(https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_windows32.tar.bz2)
+WIN64_dk_import		(https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_windows64.tar.bz2)
+MAC64_dk_import		(https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_macosx64.tar.bz2)
+LINUX32_dk_import	(https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_linux32.tar.bz2)
+LINUX64_dk_import	(https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_linux64.tar.bz2)
+RASPBERRY32_dk_import(https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_linuxarm.tar.bz2)
+RASPBERRY64_dk_import(https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_linuxarm64.tar.bz2)
 
 ### VERSION ###
-
+#DKSET				(CEF_VERSION 81.3.3+g072a5f5+chromium-81.0.4044.138)
 #WIN32_dk_set		(CEF_DL https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_windows32.tar.bz2)
 #WIN64_dk_set		(CEF_DL https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_windows64.tar.bz2)
 #MAC64_dk_set		(CEF_DL https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_macosx64.tar.bz2)
@@ -90,8 +90,8 @@ RASPBERRY64_dk_import	(https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a
 #LINUX64_dk_set		(CEF_NAME cef_binary_${CEF_VERSION}_linux64)
 #RASPBERRY32_dk_set	(CEF_NAME cef_binary_${CEF_VERSION}_linuxarm)
 #RASPBERRY64_dk_set	(CEF_NAME cef_binary_${CEF_VERSION}_linuxarm64)
-#dk_set				(CEF ${3RDPARTY}/${CEF_NAME})
-#dk_import			(${CEF_DL} ${CEF})
+#DKSET				(CEF ${3RDPARTY}/${CEF_NAME})
+#DKINSTALL			(${CEF_DL} cef_binary ${CEF})
 
 
 ### DKPLUGINS LINK ###
