@@ -13,7 +13,7 @@ dk_import(https://github.com/nigels-com/glew/releases/download/glew-2.2.0/glew-2
 #dk_set(GLEW_NAME glew-${GLEW_VERSION})
 #dk_set(GLEW_DL https://github.com/nigels-com/glew/releases/download/glew-2.2.0/glew-2.2.0.zip)
 #dk_set(GLEW ${3RDPARTY}/${GLEW_NAME})
-#dk_install(${GLEW_DL} ${GLEW})
+#dk_import(${GLEW_DL} ${GLEW})
 
 
 

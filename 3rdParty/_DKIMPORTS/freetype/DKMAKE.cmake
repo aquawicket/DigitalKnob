@@ -13,7 +13,7 @@
 #dk_set(FREETYPE ${3RDPARTY}/freetype-2.5.5)
 
 
-#dk_install(https://sourceforge.net/projects/freetype/files/freetype2/2.5.5/freetype-2.5.5.tar.gz ${3RDPARTY}/freetype-2.5.5 PATCH)
+#dk_import(https://sourceforge.net/projects/freetype/files/freetype2/2.5.5/freetype-2.5.5.tar.gz ${3RDPARTY}/freetype-2.5.5 PATCH)
 dk_import(https://sourceforge.net/projects/freetype/files/freetype2/2.5.5/freetype-2.5.5.tar.gz ${3RDPARTY}/freetype-2.5.5 PATCH)
 
 

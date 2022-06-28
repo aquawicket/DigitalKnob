@@ -8,7 +8,7 @@ dk_set(JPEG_VERSION 9d)
 dk_set(JPEG_NAME jpeg-${JPEG_VERSION})
 dk_set(JPEG_DL http://www.ijg.org/files/jpegsr${JPEG_VERSION}.zip)
 dk_set(JPEG ${3RDPARTY}/${JPEG_NAME})
-#dk_install(${JPEG_DL} ${JPEG})
+#dk_import(${JPEG_DL} ${JPEG})
 dk_import(${JPEG_DL} ${JPEG})
 
 
