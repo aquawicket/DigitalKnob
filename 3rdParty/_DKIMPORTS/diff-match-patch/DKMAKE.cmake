@@ -2,8 +2,10 @@
 # https://github.com/google/diff-match-patch/archive/refs/heads/master.zip
 # https://github.com/google/diff-match-patch/archive/62f2e689f498f9c92dbc588c58750addec9b1654.zip
 
-dk_import(https://github.com/google/diff-match-patch.git)
+
 #dk_import(https://github.com/google/diff-match-patch/archive/62f2e689f498f9c92dbc588c58750addec9b1654.zip)
+dk_import(https://github.com/google/diff-match-patch.git)
+
 
 #dk_set(DIFF_MATCH_PATCH_VERSION 62f2e68)
 #dk_set(DIFF_MATCH_PATCH_DL https://github.com/google/diff-match-patch/archive/62f2e689f498f9c92dbc588c58750addec9b1654.zip)

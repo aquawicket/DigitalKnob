@@ -1,5 +1,4 @@
 # https://developer.apple.com/documentation/agl/agl
-
 if(NOT MAC_HOST)
 	return()
 endif()
@@ -7,6 +6,7 @@ endif()
 
 dk_depend(carbon)
 dk_depend(opengl)
+
 
 FIND_LIBRARY(AGL_Lib AGL)
 if(NOT AGL_Lib)

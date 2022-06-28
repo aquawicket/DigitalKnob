@@ -1,10 +1,8 @@
 # https://duktape.org/duktape-2.6.0.tar.xz
 # https://github.com/Squareys/duktape/tree/let-support
-#
 # https://github.com/aquawicket/duktape/archive/refs/heads/let-support.zip
 # https://codeload.github.com/Squareys/duktape/zip/refs/heads/let-support
 # https://github.com/svaarala/duktape/archive/refs/heads/master.zip
-#
 # https://wiki.duktape.org/projectsusingduktape
 
 
@@ -14,13 +12,6 @@ dk_depend(nodejs)
 
 #dk_import(https://github.com/aquawicket/duktape/archive/0701a460ca25c2dc76a96bd3187849ca278d1865.zip PATCH)
 dk_import(https://github.com/aquawicket/duktape.git PATCH)
-
-
-#dk_set(DUKTAPE_VERSION let-support)
-#dk_set(DUKTAPE_NAME duktape-${DUKTAPE_VERSION})
-#dk_set(DUKTAPE_DL https://github.com/aquawicket/duktape/archive/refs/heads/${DUKTAPE_VERSION}.zip)
-#dk_set(DUKTAPE ${3RDPARTY}/${DUKTAPE_NAME})
-#dk_install(${DUKTAPE_DL} ${DUKTAPE})
 
 
 if(NOT EXISTS ${DUKTAPE}/src)

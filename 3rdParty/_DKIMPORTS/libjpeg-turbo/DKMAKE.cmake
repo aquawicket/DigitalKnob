@@ -3,10 +3,9 @@
 # For ANDROID - https://github.com/DeviceFarmer/android-libjpeg-turbo
 # https://sourceforge.net/projects/libjpeg-turbo/files/2.1.1/libjpeg-turbo-2.1.1.tar.gz/download
 
-#dk_import(https://github.com/libjpeg-turbo/libjpeg-turbo.git)
 
-#dk_install(https://sourceforge.net/projects/libjpeg-turbo/files/2.1.1/libjpeg-turbo-2.1.1.tar.gz ${3RDPARTY}/libjpeg-turbo-2.1.1 NOPATCH)
-dk_import(https://sourceforge.net/projects/libjpeg-turbo/files/2.1.1/libjpeg-turbo-2.1.1.tar.gz ${3RDPARTY}/libjpeg-turbo-2.1.1)
+#dk_import(https://sourceforge.net/projects/libjpeg-turbo/files/2.1.1/libjpeg-turbo-2.1.1.tar.gz ${3RDPARTY}/libjpeg-turbo-2.1.1)
+dk_import(https://github.com/libjpeg-turbo/libjpeg-turbo.git main)
 
 
 ### LINK ###
