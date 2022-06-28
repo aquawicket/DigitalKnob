@@ -7,7 +7,7 @@
 #dk_set(RLOTTIE_DL https://github.com/Samsung/rlottie/archive/refs/tags/v0.2.zip)
 #dk_set(RLOTTIE_NAME rlottie-${RLOTTIE_VERSION})
 #dk_set(RLOTTIE ${3RDPARTY}/${RLOTTIE_NAME})
-#dk_install(${RLOTTIE_DL} ${RLOTTIE})
+#dk_import(${RLOTTIE_DL} ${RLOTTIE})
 dk_import(https://github.com/Samsung/rlottie.git)
 
 

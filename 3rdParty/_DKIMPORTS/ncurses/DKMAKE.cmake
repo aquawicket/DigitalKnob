@@ -14,7 +14,6 @@ dk_set(NCURSES ${3RDPARTY}/${NCURSES_NAME})
 
 
 ### INSTALL ###
-#dk_install(${NCURSES_DL} ${NCURSES})
 dk_import(${NCURSES_DL} ${NCURSES})
 
 

@@ -8,7 +8,7 @@ dk_depend(DKSDLWindow)
 #dk_set(SDL2_GIFLIB_SA_NAME SDL2_giflib_sa-${SDL2_GIFLIB_SA_VERSION})
 #dk_set(SDL2_GIFLIB_SA_DL https://github.com/theMealena/SDL2_giflib_sa/archive/${SDL2_GIFLIB_SA_VERSION}.zip)
 #dk_set(SDL2_GIFLIB_SA ${3RDPARTY}/${SDL2_GIFLIB_SA_NAME})
-#dk_install(${SDL2_GIFLIB_SA_DL} ${SDL2_GIFLIB_SA})
+#dk_import(${SDL2_GIFLIB_SA_DL} ${SDL2_GIFLIB_SA})
 dk_import(https://github.com/theMealena/SDL2_giflib_sa.git)
 
 
