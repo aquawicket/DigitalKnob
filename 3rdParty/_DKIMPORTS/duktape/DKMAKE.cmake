@@ -7,12 +7,14 @@
 #
 # https://wiki.duktape.org/projectsusingduktape
 
+
 dk_depend(python)
 dk_depend(nodejs)
 
-dk_import(https://github.com/aquawicket/duktape.git PATCH)
 
 #dk_import(https://github.com/aquawicket/duktape/archive/0701a460ca25c2dc76a96bd3187849ca278d1865.zip PATCH)
+dk_import(https://github.com/aquawicket/duktape.git PATCH)
+
 
 #dk_set(DUKTAPE_VERSION let-support)
 #dk_set(DUKTAPE_NAME duktape-${DUKTAPE_VERSION})

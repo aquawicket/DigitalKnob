@@ -3,8 +3,7 @@
 # https://stackoverflow.com/a/57734435/688352
 
 
-dk_install(https://ftp.gnu.org/gnu/libiconv/libiconv-1.14.tar.gz ${3RDPARTY}/libiconv-1.14 PATCH)
-#dk_import(https://ftp.gnu.org/gnu/libiconv/libiconv-1.14.tar.gz ${3RDPARTY}/libiconv-1.14 PATCH)
+dk_import(https://ftp.gnu.org/gnu/libiconv/libiconv-1.14.tar.gz ${3RDPARTY}/libiconv-1.14 PATCH)
 
 
 ### LINK ###
