@@ -9,7 +9,7 @@ dk_depend(leptonica)
 #dk_set(TESSERACT_NAME tesseract-${TESSERACT_VERSION})
 #dk_set(TESSERACT_DL https://github.com/tesseract-ocr/tessdoc/archive/refs/heads/master.zip)
 #dk_set(TESSERACT ${3RDPARTY}/${TESSERACT_NAME})
-#dk_install(${TESSERACT_DL} ${TESSERACT})
+#dk_import(${TESSERACT_DL} ${TESSERACT})
 dk_import(https://github.com/tesseract-ocr/tessdoc.git)
 
 
