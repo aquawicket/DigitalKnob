@@ -3563,12 +3563,11 @@ endfunction()
 #
 #	TODO
 #
-#	@url	- TODO
+#	@url						- TODO
+#	@install_path (optional)	- TODO 
 #
-function(dk_importDownload url) #install_path #Patch
+function(dk_importDownload url) #install_path #PATCH
 	DKDEBUGFUNC(${ARGV})
-	# IS THE URL VALID           Example https://github.com/aquawicket/DigitalKnob/archive/01c17f6a9cd66068f7890ea887ab3b9a673f0434.zip)
-	# must contain https://github.com/
 	# split into list converting / to divider ;
 	string(REPLACE "/" ";" url_list ${url})
 	foreach(item ${url_list})
@@ -3577,11 +3576,6 @@ function(dk_importDownload url) #install_path #Patch
 
 	list(LENGTH url_list url_length)
 	dk_debug(url_length)
-	
-#	if(${url_length} LESS 5)
-#		dk_assert("url_list doesn't contain enough elements to have a 'orginization/library'")
-#		return()
-#	endif()	
 	
 	if(${ARGC} GREATER 1)
 		if(NOT "${ARGV1}" STREQUAL "PATCH")
@@ -3601,20 +3595,6 @@ function(dk_importDownload url) #install_path #Patch
 		dk_debug(CMAKE_CURRENT_LIST_DIR)
 		get_filename_component(Lib ${CMAKE_CURRENT_LIST_DIR} NAME)
 		dk_debug(Lib)
-#		dk_assert("Lib invalid")
-		
-#		string(FIND ${url} "github.com" includes)
-#		if(${includes} EQUAL -1)
-#			string(FIND ${url} "gitlab.com" includes)
-#			if(${includes} EQUAL -1)
-#				dk_assert("Lib invalid and The url does not contain 'github.com' OR 'gitlab.com'")
-#				return()
-#			endif()
-#		endif()
-#		list(GET url_list 3 org)
-#		dk_debug(org)
-#		list(GET url_list 4 Lib)
-#		dk_debug(Lib)
 	endif()
 	
 	string(TOUPPER ${Lib} LIB)
@@ -3634,7 +3614,7 @@ function(dk_importDownload url) #install_path #Patch
 		dk_assert("The Imports folder is named inncorrectly. \n CURRENTLY: ${CMAKE_CURRENT_LIST_DIR} \n SHOULD BE: ${DKIMPORTS}/${${LIBVAR}_FOLDER}}")
 	endif()
 	
-	math(EXPR last "${url_length}-1")  #OUTPUT_FORMAT DECIMAL)")  CMake 3.13+
+	math(EXPR last "${url_length}-1")
 	list(GET url_list ${last} url${last})
 	
 	######### add recognizable file extensions ########## 
@@ -3677,45 +3657,8 @@ function(dk_importDownload url) #install_path #Patch
 		endif()
 		dk_set(${LIBVAR}_DL ${url})
 	endif()
-	######################################################
-	dk_set(${LIBVAR}_DL ${url})
-	
-	
-#	if(NOT ${LIBVAR}_DL)
-#		string(FIND ${url} "github.com" includes)
-#		if(${includes} EQUAL -1)
-#			string(FIND ${url} "gitlab.com" includes)
-#			if(${includes} EQUAL -1)
-#				dk_assert("The url is not a 'github.com' address")
-#				return()
-#			endif()
-#		endif()
-#		
-#		dk_error("The url doesn't end in .zip or .tar.gz")
-#		dk_info("We will try to get the master commit id from the page")
-#		dk_download(${url} ${DKDOWNLOAD}/TEMP/${FOLDER}.html)
-#		file(READ ${DKDOWNLOAD}/TEMP/${FOLDER}.html PAGE)
-#		file(REMOVE ${DKDOWNLOAD}/TEMP/${FOLDER}.html)
-#		string(FIND "${PAGE}" "spoofed_commit_check" index)
-#		if(${index} EQUAL -1)
-#			dk_assert("The page doesn't contain a 'spoofed_commit_check' variable")
-#			return()
-#		endif()
-#		math(EXPR value "${index} + 21") #OUTPUT_FORMAT DECIMAL) # CMake 3.13+
-#		string(SUBSTRING "${PAGE}" ${value} 40 tag)
-#		set(ZIP ${tag}.zip)
-#		string(SUBSTRING ${ZIP} 0 7 TAG)
-#		dk_set(${LIBVAR}_DL https://github.com/${org}/${Lib}/archive/${ZIP})
-#		dk_debug(tag)
-#		
-#		## update DKMAKE.cmake file
-#		dk_copy(${CMAKE_CURRENT_LIST_FILE} ${CMAKE_CURRENT_LIST_FILE}.BACKUP TRUE)
-#		file(READ ${CMAKE_CURRENT_LIST_FILE} DKMAKE_FILE)
-#		string(REPLACE "dk_import(${url})" "#dk_import(${url})\ndk_import(${${LIBVAR}_DL})" DKMAKE_FILE ${DKMAKE_FILE})
-#		string(REPLACE "dk_import(${url} PATCH)" "#dk_import(${url} PATCH)\ndk_import(${${LIBVAR}_DL} PATCH)" DKMAKE_FILE ${DKMAKE_FILE})
-#       file(WRITE ${CMAKE_CURRENT_LIST_FILE} ${DKMAKE_FILE})
-#	endif()
-	
+
+
 	if(tag)
 		dk_set(${LIBVAR}_BRANCH ${tag})
 	endif()
