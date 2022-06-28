@@ -15,7 +15,7 @@ else()
 	#dk_set(LIBPNG_NAME libpng-${LIBPNG_VERSION})
 	#dk_set(LIBPNG_DL https://github.com/glennrp/libpng/archive/refs/tags/v1.6.35.zip)
 	#dk_set(LIBPNG ${3RDPARTY}/${LIBPNG_NAME})
-	#dk_install(${LIBPNG_DL} ${LIBPNG})
+	#dk_import(${LIBPNG_DL} ${LIBPNG})
 endif()
 
 ### DKPLUGINS LINK ###

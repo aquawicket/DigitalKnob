@@ -11,7 +11,7 @@ dk_set(LUA ${3RDPARTY}/${LUA_NAME})
 
 
 ### INSTALL ###
-#dk_install(${LUA_DL} ${LUA})
+#dk_import(${LUA_DL} ${LUA})
 dk_import(${LUA_DL} ${LUA})
 
 

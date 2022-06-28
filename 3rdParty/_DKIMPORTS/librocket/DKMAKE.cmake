@@ -10,7 +10,7 @@ dk_import(https://github.com/libRocket/libRocket)
 #dk_set(ROCKET_NAME libRocket-${ROCKET_VERSION})
 #dk_set(ROCKET_DL https://github.com/libRocket/libRocket/archive/${ROCKET_VERSION}.zip)
 #dk_set(ROCKET ${3RDPARTY}/${ROCKET_NAME})
-#dk_install(${ROCLET_DL} ${ROCKET})
+#dk_import(${ROCLET_DL} ${ROCKET})
 
 
 #dk_rename(${DKDOWNLOAD}/${ROCKET_VERSION}.zip ${DKDOWNLOAD}/${ROCKET_NAME}.zip)
