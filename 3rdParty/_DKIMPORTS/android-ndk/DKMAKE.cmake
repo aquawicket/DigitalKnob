@@ -30,6 +30,8 @@ endif()
 #LINUX_HOST_dk_import(https://dl.google.com/android/repository/android-ndk-r21e-linux-x86_64.zip ${ANDROID-SDK}/ndk/21.4.7075529 PATCH)
 
 # r22b
+dk_set(ANDROID-NDK_VERSION r22b)
+dk_set(ANDROID-NDK_BUILD 22.1.7171670)
 WIN_HOST_dk_import(https://dl.google.com/android/repository/android-ndk-r22b-windows-x86_64.zip ${ANDROID-SDK}/ndk/22.1.7171670 PATCH)
 MAC_HOST_dk_import(https://dl.google.com/android/repository/android-ndk-r22b-darwin-x86_64.dmg ${ANDROID-SDK}/ndk/22.1.7171670 PATCH)
 LINUX_HOST_dk_import(https://dl.google.com/android/repository/android-ndk-r22b-linux-x86_64.zip ${ANDROID-SDK}/ndk/22.1.7171670 PATCH)
