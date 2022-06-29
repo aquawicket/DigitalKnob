@@ -3629,8 +3629,7 @@ function(dk_importDownload url) #install_path #PATCH
 	math(EXPR last "${url_length}-1")
 	list(GET url_list ${last} url${last})
 	
-	dk_set(${LIBVAR}_DL ${url})
-	
+#	dk_set(${LIBVAR}_DL ${url})
 #	dk_removeExtension(${url${last}} tag)
 	######### add recognizable file extensions ########## 
 	string(FIND ${url${last}} ".7z" index)
@@ -3662,6 +3661,13 @@ function(dk_importDownload url) #install_path #PATCH
 		dk_set(${LIBVAR}_DL ${url})
 	endif()
 	string(FIND ${url${last}} ".zip" index)
+	if(${index} GREATER -1)
+		if(NOT tag)
+			string(SUBSTRING ${url${last}} 0 ${index} tag)
+		endif()
+		dk_set(${LIBVAR}_DL ${url})
+	endif()
+	string(FIND ${url${last}} ".tar.xz" index)
 	if(${index} GREATER -1)
 		if(NOT tag)
 			string(SUBSTRING ${url${last}} 0 ${index} tag)
