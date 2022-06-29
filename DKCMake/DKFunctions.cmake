@@ -207,7 +207,9 @@ function(dk_aliasFunctions func)
 	file(APPEND ${DKFunctions_ext} "macro(ANDROID32_RELEASE_${func})\n   if(ANDROID_32 AND RELEASE)\n      ${func}(\${ARGV})\n   endif()\nendmacro()\n")
 	file(APPEND ${DKFunctions_ext} "macro(ANDROID64_RELEASE_${func})\n   if(ANDROID_64 AND RELEASE)\n      ${func}(\${ARGV})\n   endif()\nendmacro()\n")
 endfunction()
-
+set(dk_disabled_list ""	CACHE INTERNAL "")
+set(DKFunctions_ext ${DKCMAKE}/DKFunctions_ext.cmake)
+file(REMOVE ${DKFunctions_ext})
 
 
 ###############################################################################

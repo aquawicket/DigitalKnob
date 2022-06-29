@@ -65,6 +65,4 @@ dk_load(dk_import2)
 
 
 # POST DEFINED VARIABLES
-set(dk_disabled_list ""	CACHE INTERNAL "")
-set(DKFunctions_ext ${DKCMAKE}/DKFunctions_ext.cmake)
-file(REMOVE ${DKFunctions_ext})
+
