@@ -1,4 +1,3 @@
-include_guard()
 # https://developer.android.com/ndk
 # https://github.com/android/ndk
 #
