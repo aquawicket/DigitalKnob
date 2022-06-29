@@ -56,12 +56,12 @@ endif()
 
 
 include(${CMAKE_SOURCE_DIR}/dk_dumpAllVariables.cmake)
-dk_dumpAllVariables(${CMAKE_SOURCE_DIR}/CMAKE_START_VARIABLES.temp)
+dk_dumpAllVariables(${CMAKE_BINARY_DIR}/CMAKE_START_VARIABLES.temp)
 
 PROJECT(DigitalKnob)
 
-dk_dumpAllVariables(${CMAKE_SOURCE_DIR}/CMAKE_PROJECT_VARIABLES.temp)
+dk_dumpAllVariables(${CMAKE_BINARY_DIR}/CMAKE_PROJECT_VARIABLES.temp)
 
 include(${CMAKE_SOURCE_DIR}/DKGenerate.cmake)
 
-dk_dumpAllVariables(${CMAKE_SOURCE_DIR}/CMAKE_END_VARIABLES.temp)
+dk_dumpAllVariables(${CMAKE_BINARY_DIR}/CMAKE_END_VARIABLES.temp)
