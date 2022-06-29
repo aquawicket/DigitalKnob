@@ -3,11 +3,10 @@
 # https://dl.google.com/android/repository/sdk-tools-darwin-4333796.zip
 # https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip
 if(NOT WIN_HOST)
-	return()
+#	return()
 endif()
 
-
-#dk_depend(JDK)
+dk_depend(android-sdk)
 
 
 WIN_HOST_dk_import	(https://dl.google.com/android/repository/sdk-tools-windows-4333796.zip ${ANDROID-SDK}/tools PATCH)

@@ -6,7 +6,7 @@ endif()
 
 
 #dk_depend(jdk)
-dk_depend(android-sdk)
+#dk_depend(android-sdk)
 dk_depend(android-ndk)
 
 

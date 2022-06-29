@@ -9,14 +9,12 @@
 # https://dl.google.com/android/repository/commandlinetools-mac-7302050_latest.zip
 # https://dl.google.com/android/repository/commandlinetools-linux-7302050_latest.zip
 # https://dl.google.com/android/repository/commandlinetools-win-7583922_latest.zip
-
 if(NOT WIN_HOST)
-	return()
+#	dk_return()
 endif()
 
-
-### DEPENDS ###
 #dk_depend(jdk8)
+dk_depend(android-sdk)
 
 
 WIN_HOST_dk_import(https://dl.google.com/android/repository/commandlinetools-win-7583922_latest.zip ${ANDROID-SDK}/cmdline-tools/latest)
