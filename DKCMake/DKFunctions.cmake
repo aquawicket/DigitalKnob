@@ -2643,6 +2643,12 @@ function(dk_runDepends plugin)
 			set(KEEPLINE 1)
 		endif()
 		
+		dk_includes("${line}" "find_library(" includes)
+		#if(${index} GREATER -1)
+		if(${includes})
+			set(KEEPLINE 1)
+		endif()
+		
 		#string(FIND "${line}" "dk_enable(" index)
 		dk_includes("${line}" "dk_enable(" includes)
 		#if(${index} GREATER -1)
