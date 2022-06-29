@@ -1,10 +1,8 @@
-if(NOT ANDROID)
-	return()
-endif()
+ANDROID_dk_depend(android-ndk)
 
-
-FIND_LIBRARY(log_Lib log)
-if(NOT log_Lib)
-	dk_error("Could not locate log libraries") 
+find_library(log_LIBRARY log)
+if(NOT log_LIBRARY)
+	dk_assert("Could not locate log libraries") 
 endif()
-dk_lib(${log_Lib})
+dk_info(log_LIBRARY)
+dk_lib(${log_LIBRARY})

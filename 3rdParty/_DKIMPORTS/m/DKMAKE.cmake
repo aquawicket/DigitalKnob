@@ -1,10 +1,8 @@
-if(NOT ANDROID)
-	return()
-endif()
+ANDROID_dk_depend(android-ndk)
 
-
-FIND_LIBRARY(m_Lib m)
-if(NOT m_Lib)
-	dk_error("Could not locate m libraries") 
+find_library(m_LIBRARY m)
+if(NOT m_LIBRARY)
+	dk_assert("Could not locate m libraries") 
 endif()
-dk_lib(${m_Lib})
+dk_info(m_LIBRARY)
+dk_lib(${m_LIBRARY})
