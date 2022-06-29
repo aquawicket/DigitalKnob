@@ -15,8 +15,8 @@ if(NOT WIN_HOST)
 endif()
 
 
-ANDROID_dk_depend(ant)
-ANDROID_dk_depend(android-sdk)
+#ANDROID_dk_depend(ant)
+#ANDROID_dk_depend(android-sdk)
  
 ### VERSION ###
 dk_set(VISUALSTUDIO_BUILD 17)

@@ -16,7 +16,7 @@ if(MAC)
 		dk_copy(${DKPLUGINS}/DKRestart/${OS}/${DEBUG_DIR}/DKRestart.app ${DKPROJECT}/assets/DKRestart/${OS}Debug/DKRestart.app TRUE)
 	endif()
 	if(RELEASE)
-		dk_copy(${DKPLUGINS}/DKRestart/${OS}/${RELEASE_DIR}/DKRestart.app ${DKPROJECT}/assets/DKRestart/${OS}Release/DKRestart.app" TRUE)
+		dk_copy(${DKPLUGINS}/DKRestart/${OS}/${RELEASE_DIR}/DKRestart.app ${DKPROJECT}/assets/DKRestart/${OS}Release/DKRestart.app TRUE)
 	endif()
 endif()
 
