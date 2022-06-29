@@ -1,10 +1,10 @@
 # https://github.com/aaronmjacobs/Boxer
-if(RASPBERRY OR ANDROID)
-	dk_return()
-endif()
+RASPBERRY_dk_return()
+ANDROID_return()
 
 
 APPLE_dk_depend(cocoa)
+
 
 dk_import(https://github.com/aaronmjacobs/Boxer.git)
 
