@@ -1138,7 +1138,6 @@ function(dk_getExtension path RESULT)
     set(${RESULT} ${ext} PARENT_SCOPE)
 endfunction()
 
-
 ###############################################################################
 # dk_dirIsEmpty(path RESULT)
 #
@@ -1689,6 +1688,12 @@ function(dk_visualStudioDebug folder sln_file) #target #arch
 	if(NOT WIN_HOST)
 		return()
 	endif()
+	
+	dk_getExtension(${sln_file} extension)
+	if(NOT ${extension} STREQUAL ".sln")
+		dk_assert("extension does not equal .sln")
+	endif()
+	
 	if(DEBUG AND QUEUE_BUILD)
 		if(NOT EXISTS ${3RDPARTY}/${folder}/${OS}/${sln_file})
 			dk_assert("CANNOT FIND: ${3RDPARTY}/${folder}/${OS}/${sln_file}" )
@@ -3421,9 +3426,7 @@ endfunction()
 function(dk_import url) #Lib #tag #Patch
 	DKDEBUGFUNC(${ARGV})
 	dk_import2(${ARGV})
-	
-	#string(FIND ${url} ".git" extension REVERSE)
-	#if(${extension} GREATER -1)
+
 	dk_getExtension(${url} extension)
 	if("${extension}" STREQUAL ".git")
 		dk_importGit(${ARGV})
@@ -3577,14 +3580,13 @@ endfunction()
 #
 function(dk_importDownload url) #install_path #PATCH
 	DKDEBUGFUNC(${ARGV})
-	# split into list converting / to divider ;
-	string(REPLACE "/" ";" url_list ${url})
-	foreach(item ${url_list})
-		dk_debug(item)
-	endforeach()
-
+	
+	string(REPLACE "/" ";" url_list ${url}) # split into list converting / to divider ;
+	#foreach(item ${url_list})
+	#	dk_debug(item)
+	#endforeach()
 	list(LENGTH url_list url_length)
-	dk_debug(url_length)
+	#dk_debug(url_length)
 	
 	if(${ARGC} GREATER 1)
 		if(NOT "${ARGV1}" STREQUAL "PATCH")
@@ -3626,6 +3628,9 @@ function(dk_importDownload url) #install_path #PATCH
 	math(EXPR last "${url_length}-1")
 	list(GET url_list ${last} url${last})
 	
+	dk_set(${LIBVAR}_DL ${url})
+	
+#	dk_removeExtension(${url${last}} tag)
 	######### add recognizable file extensions ########## 
 	string(FIND ${url${last}} ".7z" index)
 	if(${index} GREATER -1)
@@ -3634,7 +3639,6 @@ function(dk_importDownload url) #install_path #PATCH
 		endif()
 		dk_set(${LIBVAR}_DL ${url})
 	endif()
-	
 	string(FIND ${url${last}} ".js" index)
 	if(${index} GREATER -1)
 		if(NOT tag)
@@ -3642,7 +3646,6 @@ function(dk_importDownload url) #install_path #PATCH
 		endif()
 		dk_set(${LIBVAR}_DL ${url})
 	endif()
-	
 	string(FIND ${url${last}} ".tar.bz2" index)
 	if(${index} GREATER -1)
 		if(NOT tag)
@@ -3650,7 +3653,6 @@ function(dk_importDownload url) #install_path #PATCH
 		endif()
 		dk_set(${LIBVAR}_DL ${url})
 	endif()
-	
 	string(FIND ${url${last}} ".tar.gz" index)
 	if(${index} GREATER -1)
 		if(NOT tag)
@@ -3658,7 +3660,6 @@ function(dk_importDownload url) #install_path #PATCH
 		endif()
 		dk_set(${LIBVAR}_DL ${url})
 	endif()
-
 	string(FIND ${url${last}} ".zip" index)
 	if(${index} GREATER -1)
 		if(NOT tag)
@@ -3666,7 +3667,7 @@ function(dk_importDownload url) #install_path #PATCH
 		endif()
 		dk_set(${LIBVAR}_DL ${url})
 	endif()
-
+	######################################################
 
 	if(tag)
 		dk_set(${LIBVAR}_BRANCH ${tag})
