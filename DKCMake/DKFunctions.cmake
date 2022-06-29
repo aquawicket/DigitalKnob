@@ -232,6 +232,18 @@ file(REMOVE ${DKFunctions_ext})
 #
 #	Print all cmake varibles
 #
+macro(dk_return)
+	message(STATUS "dk_return()")
+	return()
+endmacro()
+dk_aliasFunctions("dk_return")
+
+
+###############################################################################
+# dk_printAllVariables()
+#
+#	Print all cmake varibles
+#
 macro(dk_printAllVariables)
 	DKDEBUGFUNC(${ARGV})
 	get_cmake_property(varNames VARIABLES)
