@@ -1,9 +1,8 @@
 # https://github.com/aaronmjacobs/Boxer
 if(RASPBERRY OR ANDROID)
-	return() 
+	dk_return()
 endif()
 
-dk_return()
 
 APPLE_dk_depend(cocoa)
 
