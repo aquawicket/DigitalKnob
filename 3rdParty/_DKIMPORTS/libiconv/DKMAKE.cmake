@@ -3,7 +3,7 @@
 # https://stackoverflow.com/a/57734435/688352
 
 
-dk_import(https://ftp.gnu.org/gnu/libiconv/libiconv-1.14.tar.gz ${3RDPARTY}/libiconv-1.14 PATCH)
+dk_import(https://ftp.gnu.org/gnu/libiconv/libiconv-1.14.tar.gz PATCH)
 
 
 ### LINK ###
@@ -21,30 +21,14 @@ UNIX_dk_libDebug		(${LIBICONV}/${OS}/${DEBUG_DIR}/libiconv.a)
 UNIX_dk_libRelease		(${LIBICONV}/${OS}/${RELEASE_DIR}/libiconv.a)
 UNIX_dk_libDebug		(${LIBICONV}/${OS}/${DEBUG_DIR}/libcharset.a)
 UNIX_dk_libRelease		(${LIBICONV}/${OS}/${RELEASE_DIR}/libcharset.a)
-#APPLE_dk_libDebug		(${LIBICONV}/${OS}/${DEBUG_DIR}/libiconv.a)
-#APPLE_dk_libRelease		(${LIBICONV}/${OS}/${RELEASE_DIR}/libiconv.a)
-#APPLE_dk_libDebug		(${LIBICONV}/${OS}/${DEBUG_DIR}/libcharset.a)
-#APPLE_dk_libRelease		(${LIBICONV}/${OS}/${RELEASE_DIR}/libcharset.a)
-#LINUX_dk_libDebug		(${LIBICONV}/${OS}/${DEBUG_DIR}/libiconv.a)
-#LINUX_dk_libRelease		(${LIBICONV}/${OS}/${RELEASE_DIR}/libiconv.a)
-#LINUX_dk_libDebug		(${LIBICONV}/${OS}/${DEBUG_DIR}/libcharset.a)
-#LINUX_dk_libRelease		(${LIBICONV}/${OS}/${RELEASE_DIR}/libcharset.a)
-#RASPBERRY_dk_libDebug	(${LIBICONV}/${OS}/${DEBUG_DIR}/libiconv.a)
-#RASPBERRY_dk_libRelease	(${LIBICONV}/${OS}/${RELEASE_DIR}/libiconv.a)
-#RASPBERRY_dk_libDebug	(${LIBICONV}/${OS}/${DEBUG_DIR}/libcharset.a)
-#RASPBERRY_dk_libRelease	(${LIBICONV}/${OS}/${RELEASE_DIR}/libcharset.a)
-#ANDROID_dk_libDebug		(${LIBICONV}/${OS}/${DEBUG_DIR}/libiconv.a)
-#ANDROID_dk_libRelease	(${LIBICONV}/${OS}/${RELEASE_DIR}/libiconv.a)
-#ANDROID_dk_libDebug		(${LIBICONV}/${OS}/${DEBUG_DIR}/libcharset.a)
-#ANDROID_dk_libRelease	(${LIBICONV}/${OS}/${RELEASE_DIR}/libcharset.a)
 
 
-
-WIN_dk_set(LIBICONV_CMAKE -DICONV_DIR=${LIBICONV} -DICONV_LIBRARIES=${LIBICONV}/${OS}/${RELEASE_DIR} -DICONV_INCLUDE_DIR=${LIBICONV}/include)
-APPLE_dk_set(LIBICONV_CMAKE "-DCMAKE_C_FLAGS=-I${LIBICONV}/include" -DICONV_DIR=${LIBICONV} -DICONV_LIBRARIES=${LIBICONV}/${OS}/${RELEASE_DIR} -DICONV_INCLUDE_DIR=${LIBICONV}/include)
-LINUX_dk_set(LIBICONV_CMAKE -DICONV_DIR=${LIBICONV} -DICONV_LIBRARIES=${LIBICONV}/${OS}/${RELEASE_DIR} -DICONV_INCLUDE_DIR=${LIBICONV}/include)
+### 3RDPARTY LINK ###
+WIN_dk_set		(LIBICONV_CMAKE -DICONV_DIR=${LIBICONV} -DICONV_LIBRARIES=${LIBICONV}/${OS}/${RELEASE_DIR} -DICONV_INCLUDE_DIR=${LIBICONV}/include)
+APPLE_dk_set	(LIBICONV_CMAKE -DICONV_DIR=${LIBICONV} -DICONV_LIBRARIES=${LIBICONV}/${OS}/${RELEASE_DIR} -DICONV_INCLUDE_DIR=${LIBICONV}/include "-DCMAKE_C_FLAGS=-I${LIBICONV}/include" )
+LINUX_dk_set	(LIBICONV_CMAKE -DICONV_DIR=${LIBICONV} -DICONV_LIBRARIES=${LIBICONV}/${OS}/${RELEASE_DIR} -DICONV_INCLUDE_DIR=${LIBICONV}/include)
 RASPBERRY_dk_set(LIBICONV_CMAKE -DICONV_DIR=${LIBICONV} -DICONV_LIBRARIES=${LIBICONV}/${OS}/${RELEASE_DIR} -DICONV_INCLUDE_DIR=${LIBICONV}/include)
-ANDROID_dk_set(LIBICONV_CMAKE -DICONV_DIR=${LIBICONV} -DICONV_LIBRARIES=${LIBICONV}/${OS}/${RELEASE_DIR} -DICONV_INCLUDE_DIR=${LIBICONV}/include)
+ANDROID_dk_set	(LIBICONV_CMAKE -DICONV_DIR=${LIBICONV} -DICONV_LIBRARIES=${LIBICONV}/${OS}/${RELEASE_DIR} -DICONV_INCLUDE_DIR=${LIBICONV}/include)
 
 
 ### GENERATE ###
@@ -53,12 +37,7 @@ dk_queueCommand(${DKCMAKE_BUILD} ${LIBICONV})
 
 
 ### COMPILE ###
-#WIN_dk_visualStudio(${LIBICONV_NAME} libiconv.sln iconv)
 dk_visualStudio(${LIBICONV_NAME} libiconv.sln iconv)
-#MAC_dk_xcode(${LIBICONV_NAME} iconv)
-#IOS_dk_xcode(${LIBICONV_NAME} iconv)
-#IOSSIM_dk_xcode(${LIBICONV_NAME} iconv)
 dk_xcode(${LIBICONV_NAME} iconv)
 LINUX_dk_queueCommand(make iconv)
 RASPBERRY_dk_queueCommand(make iconv)
-#ANDROID_dk_visualStudio(${LIBICONV_NAME} libiconv.sln iconv)

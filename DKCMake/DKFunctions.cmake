@@ -1719,6 +1719,12 @@ function(dk_visualStudioRelease folder sln_file) #target #arch
 	if(NOT WIN_HOST)
 		return()
 	endif()
+	
+	dk_getExtension(${sln_file} extension)
+	if(NOT ${extension} STREQUAL ".sln")
+		dk_assert("extension does not equal .sln")
+	endif()
+	
 	if(RELEASE AND QUEUE_BUILD)
 		if(NOT EXISTS ${3RDPARTY}/${folder}/${OS}/${sln_file})
 			dk_assert("CANNOT FIND: ${3RDPARTY}/${folder}/${OS}/${sln_file}" )
