@@ -38,6 +38,7 @@ dk_load(dk_info)
 dk_load(dk_debug)
 dk_load(dk_verbose)
 dk_load(dk_trace)
+dk_load(dk_return)
 
 dk_load(DKFunctions)
 dk_load(DKFileSystem)

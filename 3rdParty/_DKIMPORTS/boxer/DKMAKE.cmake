@@ -3,7 +3,6 @@ if(RASPBERRY OR ANDROID)
 	return() 
 endif()
 
-dk_load(dk_return)
 dk_return()
 
 APPLE_dk_depend(cocoa)
