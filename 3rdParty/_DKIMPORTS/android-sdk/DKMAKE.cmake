@@ -24,6 +24,6 @@ dk_setEnv("VS_AndroidHome" ${ANDROID-SDK})
 #dk_depend(android-cmake)
 
 if(NOT EXISTS ${ANDROID-SDK}/SignLicenses.cmd)
-	dk_copy(${DKIMPORTS}/android-sdk/SignLicenses.cmd ${ANDROID-SDK}/SignLicenses.cmd true)
+	dk_copy(${DKIMPORTS}/android-sdk/SignLicenses.cmd ${ANDROID-SDK}/SignLicenses.cmd OVERWRITE)
 	dk_command(${ANDROID-SDK}/SignLicenses.cmd)
 endif()

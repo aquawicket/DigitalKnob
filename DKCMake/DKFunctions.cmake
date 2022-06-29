@@ -712,16 +712,29 @@ endfunction()
 
 
 ###############################################################################
-# dk_copy(from to overwrite)
+# dk_copy(from to) OVERWRITE NOERROR
 #
 #	Copy a file or directory to another location
 #
 #	@from		- The source path to copy
 #	@to			- The destination path to copy to
-#	@overwrite	- The true or false to overwrite any files if they already exist
+#	OVERWRITE	- if any of the parameters equals OVERWRITE, overwritting existing files is enabled
+#   NOERROR     - if any of the parameters equals NOERROR, dk_error() messages will not be displayed
 #
-function(dk_copy from to overwrite)
+function(dk_copy from to) #overwrite)
 	DKDEBUGFUNC(${ARGV})
+	
+	set(overwrite ${ARGV2})
+	string(FIND "${ARGN}" "OVERWRITE" index)
+	if(${index} GREATER -1)
+		set(overwrite true)
+	endif()
+	
+	string(FIND "${ARGN}" "NOERROR" index)
+	if(${index} GREATER -1)
+		set(noerror true)
+	endif()
+	
 	if(EXISTS ${from})
 		if(IS_DIRECTORY ${from})
 			file(GLOB_RECURSE allfiles RELATIVE "${from}/" "${from}/*")
@@ -742,7 +755,7 @@ function(dk_copy from to overwrite)
 					elseif(compare_result EQUAL 0)
 #						dk_info("${sourcefile} No Copy, The files are identical.")
 					else()
-						dk_warn( "dk_copy(${from} ${to} ${overwrite}): \n ERROR: compare_result = ${compare_result}")
+						dk_error( "dk_copy(${from} ${to} ${overwrite}): \n ERROR: compare_result = ${compare_result}")
 					endif()
 				elseif(NOT EXISTS ${destinationfile})
 					execute_process(COMMAND ${CMAKE_COMMAND} -E copy ${sourcefile} ${destinationfile})
@@ -759,7 +772,9 @@ function(dk_copy from to overwrite)
 			endif()
 		endif()
 	else()
-		dk_warn("from:(${from}) The source path does not exist")
+		if(NOT noerror)
+			dk_error("from:(${from}) The source path does not exist")
+		endif()
 	endif()
 endfunction()
 
@@ -786,19 +801,33 @@ endfunction()
 
 
 ###############################################################################
-# dk_rename(from to overwrite)
+# dk_rename(from to) OVERWRITE NOERROR
 #
 #	Rename file or directory or move a file or directory to another location
 #
 #	@from		- The source path to copy
 #	@to			- The destination path to copy to
-#	@overwrite	- The true or false to overwrite any files if they already exist
+#	OVERWRITE	- if any of the parameters equals OVERWRITE, overwritting existing files is enabled
 #
-function(dk_rename from to overwrite)
+function(dk_rename from to)
 	DKDEBUGFUNC(${ARGV})
+	
+	set(overwrite ${ARGV2})
+	string(FIND "${ARGN}" "OVERWRITE" index)
+	if(${index} GREATER -1)
+		set(overwrite true)
+	endif()
+	
+	string(FIND "${ARGN}" "NOERROR" index)
+	if(${index} GREATER -1)
+		set(noerror true)
+	endif()
+	
 	dk_info("Renameing ${from} to ${to}")
 	if(NOT EXISTS ${from})
-		dk_error("from:${from} not found")
+		if(NOT noerror)
+			dk_error("from:${from} not found")
+		endif()
 		return()
 	endif()
 	if(EXISTS ${to})
@@ -2098,6 +2127,12 @@ function(dk_generateCmake plugin_name)
 				dk_info("Adding ${header} to header file.")
 				dk_set(PLUGINS_FILE ${PLUGINS_FILE} "#include \"${header}\"\\n")
 			endif()
+			
+#			dk_includes("${PLUGINS_FILE}" "DKHAVE_${plugin_name}" result)
+#			if(NOT ${result})
+#				dk_info("Adding #define DKHAVE_${plugin_name} 1 to header file.")
+#				dk_set(PLUGINS_FILE ${PLUGINS_FILE} "#define DKHAVE_${plugin_name} 1\\n")
+#			endif()
 		endforeach()
 	endif()
 	

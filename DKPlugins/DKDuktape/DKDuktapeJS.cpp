@@ -26,7 +26,8 @@
 
 //https://stackoverflow.com/questions/63166/how-to-determine-cpu-and-memory-consumption-from-inside-a-process
 
-#ifdef HAVE_DKDuktape 
+//#ifdef HAVE_DKDuktape 
+
 #include "DK/DKApp.h"
 #include "DK/DKFile.h"
 #include "DK/DKOsInfo.h"
@@ -1209,4 +1210,4 @@ int DKDuktapeJS::setConsolePosition(duk_context* ctx) {
 	return false;
 }
 
-#endif //HAVE_DKDuktape
+//#endif //HAVE_DKDuktape

@@ -32,6 +32,7 @@
 #include "DK/DK.h"
 #include "duktape.h"
 #include "DK/DKEvents.h"
+#define DKHAVE_DKDuktape 1
 
 /* Flags for duk_push_string_file_raw() */
 #define DUK_STRING_PUSH_SAFE              (1 << 0)    /* no error if file does not exist */

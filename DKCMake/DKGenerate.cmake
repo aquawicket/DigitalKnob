@@ -385,14 +385,14 @@ if(WIN_32)
 	if(HAVE_DK)
 		## ASSETS ##
 		# Backup files and folders excluded from the package
-		dk_copy(${DKPROJECT}/assets/USER ${DKPROJECT}/Backup/USER TRUE)
+		dk_copy(${DKPROJECT}/assets/USER ${DKPROJECT}/Backup/USER OVERWRITE NOERROR)
 		# Remove excluded files and folders before packaging
 		file(REMOVE ${DKPROJECT}/assets/USER)
 		#Compress the assets, they will be included by resource.rc
 		dk_info("Creating assets.zip . . .")
 		dk_zip(${DKPROJECT}/assets)
 		# Restore the backed up files, excluded from assets
-		dk_copy(${DKPROJECT}/Backup ${DKPROJECT}/assets TRUE)
+		dk_copy(${DKPROJECT}/Backup ${DKPROJECT}/assets OVERWRITE NOERROR)
 		file(REMOVE ${DKPROJECT}/Backup)
 		dk_copy(${DKPLUGINS}/_DKIMPORT/assets.h ${DKPROJECT}/assets.h TRUE) #required
 	endif()	
