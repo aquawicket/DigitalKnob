@@ -32,12 +32,12 @@ ANDROID_dk_set	(LIBICONV_CMAKE -DICONV_DIR=${LIBICONV} -DICONV_LIBRARIES=${LIBIC
 
 
 ### GENERATE ###
-dk_setPath(${LIBICONV}/${BUILD_DIR})
-dk_queueCommand(${DKCMAKE_BUILD} ${LIBICONV})
+dk_setPath		(${LIBICONV}/${BUILD_DIR})
+dk_queueCommand	(${DKCMAKE_BUILD} ${LIBICONV})
 
 
 ### COMPILE ###
-dk_visualStudio(${LIBICONV_NAME} libiconv.sln iconv)
-dk_xcode(${LIBICONV_NAME} iconv)
-LINUX_dk_queueCommand(make iconv)
-RASPBERRY_dk_queueCommand(make iconv)
+dk_visualStudio				(${LIBICONV_NAME} libiconv.sln iconv)
+dk_xcode					(${LIBICONV_NAME} iconv)
+LINUX_dk_queueCommand		(make iconv)
+RASPBERRY_dk_queueCommand	(make iconv)
