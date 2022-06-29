@@ -46,10 +46,7 @@ include_guard()
 ###
 ### https://cmake.org/cmake/help/git-master/guide/tutorial/index.html
 ###
-if(DKCMAKELIST_INCLUDED)
-  return()
-endif(DKCMAKELIST_INCLUDED)
-set(DKCMAKELIST_INCLUDED 1)
+
 
 message(STATUS "\nCMake version ${CMAKE_VERSION}\n")
 
@@ -62,8 +59,8 @@ macro(DUMP_ALL_VARIABLES file)
 		file(APPEND ${file} "${var} ==           ${${var}}\n")
 	endforeach()
 endmacro()
-####################################################################################################################
 DUMP_ALL_VARIABLES(${CMAKE_SOURCE_DIR}/CMAKE_START_VARIABLES.temp)
+####################################################################################################################
 
 #variable_watch(DKCMAKE_BUILD) 
 
