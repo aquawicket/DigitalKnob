@@ -1953,17 +1953,20 @@ function(dk_libDebug lib_path)
 	if(NOT DEBUG)
 		return()
 	endif()	
+	
 	dk_set(LIBLIST ${LIBLIST} ${lib_path}) # used for double checking
 	if(NOT EXISTS ${lib_path})
 		dk_info("MISSING: ${lib_path}")
 		dk_set(QUEUE_BUILD ON) 
 	endif()
-	#string(FIND "${DEBUG_LIBS}" "${lib_path}" index)
-	dk_includes("${DEBUG_LIBS}" "${lib_path}" result)
-	#if(NOT ${index} EQUAL -1)
-	if(${result})
+	
+	string(FIND "${DEBUG_LIBS}" "${lib_path}" index)
+	if(NOT ${index} EQUAL -1)
+	#dk_includes("${DEBUG_LIBS}" "${lib_path}" result)
+	#if(${result})
 		return() # The library is already in the list
 	endif()
+	
 	if(LINUX OR RASPBERRY OR ANDROID)
 		dk_set(DEBUG_LIBS debug ${lib_path} ${DEBUG_LIBS})  # Add to beginning of list
 	else()
@@ -1991,17 +1994,20 @@ function(dk_libRelease lib_path)
 	if(NOT RELEASE)
 		return()
 	endif()
+	
 	dk_set(LIBLIST ${LIBLIST} ${lib_path}) # used for double checking
 	if(NOT EXISTS ${lib_path})
 		dk_info("MISSING: ${lib_path}")
 		dk_set(QUEUE_BUILD ON)
 	endif()
-	#string(FIND "${RELEASE_LIBS}" "${lib_path}" index)
-	dk_includes("${RELEASE_LIBS}" "${lib_path}" result)
-	#if(NOT ${index} EQUAL -1)
-	if(${result})
+	
+	string(FIND "${RELEASE_LIBS}" "${lib_path}" index)
+	if(NOT ${index} EQUAL -1)
+	#dk_includes("${RELEASE_LIBS}" "${lib_path}" result)
+	#if(${result})
 		return() # The library is already in the list
 	endif()	
+	
 	if(LINUX OR RASPBERRY OR ANDROID)
 		dk_set(RELEASE_LIBS optimized ${lib_path} ${RELEASE_LIBS})  # Add to beginning of list
 	else()
