@@ -3415,13 +3415,16 @@ endfunction()
 function(dk_import url) #Lib #tag #Patch
 	DKDEBUGFUNC(${ARGV})
 	dk_import2(${ARGV})
-	#set(url ${ARGV0})
-	string(FIND ${url} ".git" dotgit)
-	if(${dotgit} GREATER -1)
+	
+	#string(FIND ${url} ".git" extension REVERSE)
+	#if(${extension} GREATER -1)
+	dk_getExtension(${url} extension)
+	if("${extension}" STREQUAL ".git")
 		dk_importGit(${ARGV})
 	else()
 		dk_importDownload(${ARGV})
 	endif()
+	
 endfunction()
 dk_aliasFunctions("dk_import")
 
