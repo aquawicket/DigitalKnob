@@ -3605,11 +3605,9 @@ function(dk_importDownload url) #install_path #PATCH
 		endif()
 	endif()
 	
-	if(NOT Lib)
-		dk_debug(CMAKE_CURRENT_LIST_DIR)
-		get_filename_component(Lib ${CMAKE_CURRENT_LIST_DIR} NAME)
-		dk_debug(Lib)
-	endif()
+	dk_debug(CMAKE_CURRENT_LIST_DIR)
+	get_filename_component(Lib ${CMAKE_CURRENT_LIST_DIR} NAME)
+	dk_debug(Lib)
 	
 	string(TOUPPER ${Lib} LIB)
 	dk_set(LIBVAR ${LIB})
@@ -3687,7 +3685,7 @@ function(dk_importDownload url) #install_path #PATCH
 	endif()
 	
 	if(NOT ${LIBVAR})
-		dk_assert("${LIBVAR} invalid")
+		dk_assert("LIBVAR invalid")
 	endif()
 	
 	if(NOT ${LIBVAR}_BRANCH)
