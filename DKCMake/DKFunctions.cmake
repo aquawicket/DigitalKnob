@@ -106,13 +106,13 @@ endmacro()
 
 
 ###############################################################################
-# dk_aliasFunctions(func)
+# dk_createOsMacros(func)
 #
 #	TODO
 #
 #	@func:(Required)	- The func of the function to create aliases for
 #
-function(dk_aliasFunctions func)
+function(dk_createOsMacros func)
 	DKDEBUGFUNC(${ARGV})
 	if(NOT EXISTS ${DKFunctions_ext})
 		file(APPEND ${DKFunctions_ext} "### Don't make changes in this file. They will be overwritten. ###\n")
@@ -221,7 +221,7 @@ macro(dk_return)
 	message(STATUS "dk_return()")
 	return()
 endmacro()
-dk_aliasFunctions("dk_return")
+dk_createOsMacros("dk_return")
 
 
 ###############################################################################
@@ -280,7 +280,7 @@ function(dk_set variable value)
 #	##########################################
 
 endfunction()
-dk_aliasFunctions("dk_set")
+dk_createOsMacros("dk_set")
 
 
 ###############################################################################
@@ -671,7 +671,7 @@ function(dk_download src_path dest_path) # ARGV1 = dest_path
 		dk_info("Finnished downloading ${dest_filename}")
 	endif() 
 endfunction()
-dk_aliasFunctions("dk_download")
+dk_createOsMacros("dk_download")
 
 
 ###############################################################################
@@ -951,7 +951,7 @@ function(dk_define str)
 	dk_set(DKDEFINES_LIST ${DKDEFINES_LIST} ${str})
 	add_definitions(-D${str})
 endfunction()
-dk_aliasFunctions("dk_define")
+dk_createOsMacros("dk_define")
 
 
 ###############################################################################
@@ -994,7 +994,7 @@ function(dk_include path)
 		endif()
 	endforeach()
 endfunction()
-dk_aliasFunctions("dk_include")
+dk_createOsMacros("dk_include")
 
 
 ###############################################################################
@@ -1015,7 +1015,7 @@ function(dk_linkDir path)
 		link_directories(${item})
 	endforeach()
 endfunction()
-dk_aliasFunctions("dk_linkDir")
+dk_createOsMacros("dk_linkDir")
 
 
 ###############################################################################
@@ -1366,7 +1366,7 @@ function(dk_install url_path dest_path) #plugin #PATCH
 	
 	file(WRITE ${dest_path}/installed "${dest_filename} ")
 endfunction()
-dk_aliasFunctions("dk_install" "NO_DEBUG_RELEASE_TAGS")
+dk_createOsMacros("dk_install" "NO_DEBUG_RELEASE_TAGS")
 
 
 ###############################################################################
@@ -1521,7 +1521,7 @@ function(dk_setPath path)
 #		dk_set(DKCMAKE_BUILD ${DKCMAKE_BUILD} -DCMAKE_ARCHIVE_OUTPUT_DIRECTORY=${CURRENT_DIR} -DCMAKE_LIBRARY_OUTPUT_DIRECTORY=${CURRENT_DIR} -DCMAKE_RUNTIME_OUTPUT_DIRECTORY=${CURRENT_DIR})
 #	endif()
 endfunction()
-dk_aliasFunctions("dk_setPath")
+dk_createOsMacros("dk_setPath")
 
 
 ###############################################################################
@@ -1555,7 +1555,23 @@ function(dk_msys)
 		dk_executeProcess(${MSYS}/bin/bash ${MSYS}/dkscript.tmp)
 	endif()
 endfunction()
-dk_aliasFunctions("dk_msys")
+dk_createOsMacros("dk_msys")
+
+
+###############################################################################
+# dk_queueMsys(args)
+#
+#	TODO
+#
+#	@args	- TODO
+#
+function(dk_queueMsys)
+	DKDEBUGFUNC(${ARGV})
+	if(QUEUE_BUILD)
+		dk_msys(${ARGV})
+	endif()	
+endfunction()
+dk_createOsMacros("dk_queueMsys")
 
 
 ###############################################################################
@@ -1589,7 +1605,7 @@ function(dk_msys2)
 		dk_executeProcess(${MSYS2}/usr/bin/bash ${MSYS2}/dkscript.tmp)
 	endif()
 endfunction()
-dk_aliasFunctions("dk_msys2")
+dk_createOsMacros("dk_msys2")
 
 
 ###############################################################################
@@ -1652,7 +1668,7 @@ function(dk_command)
 #	dk_debug("${ARGV}")
 	dk_executeProcess(${merged_args} WORKING_DIRECTORY ${CURRENT_DIR})
 endfunction()
-dk_aliasFunctions("dk_command")
+dk_createOsMacros("dk_command")
 
 
 
@@ -1669,7 +1685,7 @@ function(dk_queueCommand)
 		dk_command(${ARGV})
 	endif()	
 endfunction()
-dk_aliasFunctions("dk_queueCommand")
+dk_createOsMacros("dk_queueCommand")
 
 
 ###############################################################################
@@ -1705,7 +1721,7 @@ function(dk_visualStudioDebug folder sln_file) #target #arch
 		dk_executeProcess(${EXECUTE_COMMAND} WORKING_DIRECTORY ${3RDPARTY}/${folder}/${OS})
 	endif()
 endfunction()
-dk_aliasFunctions("dk_visualStudioDebug" "NO_DEBUG_RELEASE_TAGS")
+dk_createOsMacros("dk_visualStudioDebug" "NO_DEBUG_RELEASE_TAGS")
 
 
 ###############################################################################
@@ -1741,7 +1757,7 @@ function(dk_visualStudioRelease folder sln_file) #target #arch
 		dk_executeProcess(${EXECUTE_COMMAND} WORKING_DIRECTORY ${3RDPARTY}/${folder}/${OS})
 	endif()
 endfunction()
-dk_aliasFunctions("dk_visualStudioRelease" "NO_DEBUG_RELEASE_TAGS")
+dk_createOsMacros("dk_visualStudioRelease" "NO_DEBUG_RELEASE_TAGS")
 
 
 ###############################################################################
@@ -1756,7 +1772,7 @@ function(dk_visualStudio)
 	dk_visualStudioDebug(${ARGV})
 	dk_visualStudioRelease(${ARGV})
 endfunction()
-dk_aliasFunctions("dk_visualStudio" "NO_DEBUG_RELEASE_TAGS")
+dk_createOsMacros("dk_visualStudio" "NO_DEBUG_RELEASE_TAGS")
 
 
 ###############################################################################
@@ -1780,7 +1796,7 @@ function(dk_xcodeDebug folder)
 		endif()
 	endif()
 endfunction()
-dk_aliasFunctions("dk_xcodeDebug" "NO_DEBUG_RELEASE_TAGS")
+dk_createOsMacros("dk_xcodeDebug" "NO_DEBUG_RELEASE_TAGS")
 
 
 ###############################################################################
@@ -1804,7 +1820,7 @@ function(dk_xcodeRelease folder)
 		endif()
 	endif()
 endfunction()
-dk_aliasFunctions("dk_xcodeRelease" "NO_DEBUG_RELEASE_TAGS")
+dk_createOsMacros("dk_xcodeRelease" "NO_DEBUG_RELEASE_TAGS")
 
 
 ###############################################################################
@@ -1820,7 +1836,7 @@ function(dk_xcode)
 	dk_xcodeDebug(${ARGV})
 	dk_xcodeRelease(${ARGV})
 endfunction()
-dk_aliasFunctions("dk_xcode" "NO_DEBUG_RELEASE_TAGS")
+dk_createOsMacros("dk_xcode" "NO_DEBUG_RELEASE_TAGS")
 
 
 ###############################################################################
@@ -1841,7 +1857,7 @@ function(dk_ndkDebug folder)
 		endif()
 	endif()
 endfunction()
-dk_aliasFunctions("dk_ndkDebug" "NO_DEBUG_RELEASE_TAGS")
+dk_createOsMacros("dk_ndkDebug" "NO_DEBUG_RELEASE_TAGS")
 
 
 ###############################################################################
@@ -1862,7 +1878,7 @@ function(dk_ndkRelease folder)
 		endif()
 	endif()
 endfunction()
-dk_aliasFunctions("dk_ndkRelease" "NO_DEBUG_RELEASE_TAGS")
+dk_createOsMacros("dk_ndkRelease" "NO_DEBUG_RELEASE_TAGS")
 
 
 ###############################################################################
@@ -1877,7 +1893,7 @@ function(dk_ndk)
 	dk_ndkDebug(${ARGV})
 	dk_ndkRelease(${ARGV})
 endfunction()
-dk_aliasFunctions("dk_ndk" "NO_DEBUG_RELEASE_TAGS")
+dk_createOsMacros("dk_ndk" "NO_DEBUG_RELEASE_TAGS")
 
 
 ###############################################################################
@@ -1923,7 +1939,7 @@ function(dk_lib lib_path)
 		
 	endforeach()
 endfunction()
-dk_aliasFunctions("dk_lib" "NO_DEBUG_RELEASE_TAGS")
+dk_createOsMacros("dk_lib" "NO_DEBUG_RELEASE_TAGS")
 
 
 ###############################################################################
@@ -1964,7 +1980,7 @@ function(dk_libDebug lib_path)
 	endif()
 	
 endfunction()
-dk_aliasFunctions("dk_libDebug" "NO_DEBUG_RELEASE_TAGS")
+dk_createOsMacros("dk_libDebug" "NO_DEBUG_RELEASE_TAGS")
 
 
 ###############################################################################
@@ -2005,7 +2021,7 @@ function(dk_libRelease lib_path)
 	endif()
 	
 endfunction()
-dk_aliasFunctions("dk_libRelease" "NO_DEBUG_RELEASE_TAGS")
+dk_createOsMacros("dk_libRelease" "NO_DEBUG_RELEASE_TAGS")
 
 
 ###############################################################################
@@ -2436,7 +2452,7 @@ function(dk_depend plugin)
 #		dk_runDepends(${plugin}) # strip everything from the file except if() else() elseif() endif() and dk_depend() before sorting.
 #	endif()
 endfunction()
-dk_aliasFunctions("dk_depend")
+dk_createOsMacros("dk_depend")
 
 
 ###############################################################################
@@ -3438,7 +3454,7 @@ function(dk_import url) #Lib #tag #Patch
 	endif()
 	
 endfunction()
-dk_aliasFunctions("dk_import")
+dk_createOsMacros("dk_import")
 
 
 ###############################################################################
