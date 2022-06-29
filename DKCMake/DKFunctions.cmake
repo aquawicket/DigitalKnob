@@ -33,22 +33,6 @@ endif()
 include("$ENV{DKCMAKE}DK.cmake")
 
 
-### SETTINGS ##################################################################
-set(DKTODO_ENABLED				1		CACHE INTERNAL "")
-set(DKDEBUG_ENABLED				1		CACHE INTERNAL "")
-set(DKDEBUGFUNC_ENABLED			0		CACHE INTERNAL "")
-set(WAIT_ON_ERRORS				0		CACHE INTERNAL "")
-set(WAIT_ON_WARNINGS			0		CACHE INTERNAL "")
-set(HALT_ON_ERRORS				0		CACHE INTERNAL "")
-set(HALT_ON_WARNINGS			0		CACHE INTERNAL "")
-set(PRINT_CALL_DETAILS 			1		CACHE INTERNAL "")
-set(PRINT_FILE_NAMES 			1 		CACHE INTERNAL "")
-set(PRINT_LINE_NUMBERS 			1		CACHE INTERNAL "")
-set(PRINT_FUNCTION_NAMES 		1 		CACHE INTERNAL "")
-set(PRINT_FUNCTION_ ARGUMENTS 	1 		CACHE INTERNAL "")
-set(INSTALL_DKLIBS              0		CACHE INTERNAL "")
-set(dk_disabled_list	 		""		CACHE INTERNAL "")
-
 
 ###############################################################################
 # TestReturnValue(args RESULT)
@@ -223,8 +207,7 @@ function(dk_aliasFunctions func)
 	file(APPEND ${DKFunctions_ext} "macro(ANDROID32_RELEASE_${func})\n   if(ANDROID_32 AND RELEASE)\n      ${func}(\${ARGV})\n   endif()\nendmacro()\n")
 	file(APPEND ${DKFunctions_ext} "macro(ANDROID64_RELEASE_${func})\n   if(ANDROID_64 AND RELEASE)\n      ${func}(\${ARGV})\n   endif()\nendmacro()\n")
 endfunction()
-set(DKFunctions_ext ${DKCMAKE}/DKFunctions_ext.cmake)
-file(REMOVE ${DKFunctions_ext})
+
 
 
 ###############################################################################

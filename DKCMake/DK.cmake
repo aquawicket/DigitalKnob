@@ -1,6 +1,23 @@
 include_guard()
 
-# Set the system host variables
+### SETTINGS ##################################################################
+set(DKTODO_ENABLED				1		CACHE INTERNAL "")
+set(DKDEBUG_ENABLED				1		CACHE INTERNAL "")
+set(DKDEBUGFUNC_ENABLED			0		CACHE INTERNAL "")
+set(WAIT_ON_ERRORS				0		CACHE INTERNAL "")
+set(WAIT_ON_WARNINGS			0		CACHE INTERNAL "")
+set(HALT_ON_ERRORS				0		CACHE INTERNAL "")
+set(HALT_ON_WARNINGS			0		CACHE INTERNAL "")
+set(PRINT_CALL_DETAILS 			1		CACHE INTERNAL "")
+set(PRINT_FILE_NAMES 			1 		CACHE INTERNAL "")
+set(PRINT_LINE_NUMBERS 			1		CACHE INTERNAL "")
+set(PRINT_FUNCTION_NAMES 		1 		CACHE INTERNAL "")
+set(PRINT_FUNCTION_ ARGUMENTS 	1 		CACHE INTERNAL "")
+set(INSTALL_DKLIBS              0		CACHE INTERNAL "")
+
+
+
+# PRE DEFINED VARIABLES
 if(CMAKE_HOST_WIN32)
 	set(WIN_HOST 	TRUE 	CACHE INTERNAL "")
 endif()
@@ -12,7 +29,6 @@ if(CMAKE_HOST_UNIX AND NOT CMAKE_HOST_APPLE)
 	set(UNIX_HOST 	TRUE 	CACHE INTERNAL "")
 	set(LINUX_HOST 	TRUE 	CACHE INTERNAL "")
 endif()
-
 
 # Set the DIGITALKNOB and DKCMAKE environment variables 
 get_filename_component(path ${CMAKE_SOURCE_DIR} ABSOLUTE)
@@ -28,7 +44,8 @@ if(WIN_HOST)
 endif()
 
 
-# include dk funtions
+
+# FUNCTIONS 
 include(${DKCMAKE}/dk_call.cmake)
 dk_load(dk_debugFunc)
 dk_load(dk_assert)
@@ -38,11 +55,16 @@ dk_load(dk_info)
 dk_load(dk_debug)
 dk_load(dk_verbose)
 dk_load(dk_trace)
-
 dk_load(DKFunctions)
 dk_load(DKFileSystem)
 dk_load(DKVariables)
 dk_load(DKDisabled)
 
-
 dk_load(dk_import2)
+
+
+
+# POST DEFINED VARIABLES
+set(dk_disabled_list ""	CACHE INTERNAL "")
+set(DKFunctions_ext ${DKCMAKE}/DKFunctions_ext.cmake)
+file(REMOVE ${DKFunctions_ext})
