@@ -60,6 +60,7 @@ dk_load(DKFileSystem)
 dk_load(DKVariables)
 dk_load(DKDisabled)
 
+dk_load(dk_findLibrary)
 dk_load(dk_import2)
 
 
