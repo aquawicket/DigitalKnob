@@ -2597,6 +2597,13 @@ function(dk_runDepends plugin)
 			set(KEEPLINE 1)
 		endif()
 		
+		#string(FIND "${line}" "dk_trace(" index)
+		dk_includes("${line}" "dk_makeDirectory(" includes)
+		#if(${index} GREATER -1)
+		if(${includes})
+			set(KEEPLINE 1)
+		endif()
+		
 #		#string(FIND "${line}" "SET(" index)
 #		dk_includes("${line}" "SET(" includes)
 #		#if(${index} GREATER -1)
@@ -2763,6 +2770,14 @@ function(dk_runDepends plugin)
 		if(${includes})
 			set(KEEPLINE 1)
 		endif()
+		
+		#string(FIND "${line}" "dk_trace(" index)
+		dk_includes("${line}" "dk_makeDirectory(" includes)
+		#if(${index} GREATER -1)
+		if(${includes})
+			set(KEEPLINE 1)
+		endif()
+		
 		
 		if(KEEPLINE)
 			set(depends_script "${depends_script}${line}\n")
