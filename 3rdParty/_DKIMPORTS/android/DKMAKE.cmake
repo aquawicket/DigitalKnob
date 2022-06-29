@@ -1,3 +1,7 @@
+if(NOT ANDROID)
+	return()
+endif()
+
 ANDROID_dk_depend(android-ndk)
 
 find_library(android_LIBRARY android)

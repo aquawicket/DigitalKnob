@@ -1,3 +1,7 @@
+if(WIN)
+	return()
+endif()
+
 ANDROID_dk_depend(android-ndk)
 
 #find_library(dl_LIBRARY dl)

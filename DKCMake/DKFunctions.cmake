@@ -2565,6 +2565,14 @@ function(dk_runDepends plugin)
 			set(KEEPLINE 1)
 		endif()
 		
+		
+		dk_includes("${line}" "find_library(" includes)
+		#if(${index} GREATER -1)
+		if(${includes})
+			set(KEEPLINE 1)
+		endif()
+		
+		
 		## endif(
 		##NOTE: The 'if(' search commands take care of elseif() and endif() since 'if' is already in those words 
 		
