@@ -1,6 +1,7 @@
 # http://giflib.sourceforge.net
 # https://github.com/mirrorer/giflib
-#
+# https://github.com/mirrorer/giflib.git
+# https://github.com/mirrorer/giflib/archive/fa37672085ce4b3d62c51627ab3c8cf2dda8009a.zip
 # https://sourceforge.net/projects/giflib/files/giflib-5.1.1.tar.gz
 
 if(WIN_32)
@@ -16,12 +17,6 @@ WIN_dk_depend(msys)
 dk_import(https://github.com/mirrorer/giflib.git PATCH)
 
 #dk_import(https://github.com/mirrorer/giflib/archive/fa37672085ce4b3d62c51627ab3c8cf2dda8009a.zip PATCH)
-
-#dk_set(GIFLIB_VERSION 5.1.1)
-#dk_set(GIFLIB_DL https://sourceforge.net/projects/giflib/files/giflib-5.1.1.tar.gz)
-#dk_set(GIFLIB_NAME giflib-${GIFLIB_VERSION})
-#dk_set(GIFLIB ${3RDPARTY}/${GIFLIB_NAME})
-#dk_import(${GIFLIB_DL} ${GIFLIB} PATCH)
 
 
 
