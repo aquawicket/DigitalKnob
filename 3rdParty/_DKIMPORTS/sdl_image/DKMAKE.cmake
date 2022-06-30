@@ -78,10 +78,8 @@ dk_queueCommand	(${DKCMAKE_BUILD} -DSDLIMAGE_SUPPORT_GIF=ON -DSDLIMAGE_SUPPORT_J
 
 
 ### COMPILE ###
-WIN_dk_visualStudio			(${SDL_IMAGE_NAME} SDLIMAGE.sln SDLIMAGE)
-MAC_dk_xcode				(${SDL_IMAGE_NAME} SDLIMAGE)
-IOS_dk_xcode				(${SDL_IMAGE_NAME} SDLIMAGE)
-IOSSIM_dk_xcode				(${SDL_IMAGE_NAME} SDLIMAGE)
-LINUX_dk_queueCommand		(make SDLIMAGE)
-RASPBERRY_dk_queueCommand	(make SDLIMAGE)	
-ANDROID_dk_visualStudio		(${SDL_IMAGE_NAME} SDLIMAGE.sln SDLIMAGE)
+dk_visualStudio				(${SDL_IMAGE_NAME} SDL2_image.sln SDL2_image)
+dk_xcode					(${SDL_IMAGE_NAME} SDL2_image)
+LINUX_dk_queueCommand		(make SDL2_image)
+RASPBERRY_dk_queueCommand	(make SDL2_image)	
+#ANDROID_dk_visualStudio	(${SDL_IMAGE_NAME} SDL2_image.sln SDL2_image)
