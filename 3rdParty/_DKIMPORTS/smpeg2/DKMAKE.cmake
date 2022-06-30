@@ -3,7 +3,7 @@
 
 dk_depend(sdl)
 
-dk_import(https://www.libsdl.org/projects/smpeg/release/smpeg2-2.0.0.tar.gz) PATCH)
+dk_import(https://www.libsdl.org/projects/smpeg/release/smpeg2-2.0.0.tar.gz PATCH)
 
 ### DKPLUGINS LINK ###
 dk_include(${SMPEG2})
