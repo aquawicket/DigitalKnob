@@ -1380,16 +1380,13 @@ function(dk_executeProcess commands)
 	set(commands ${ARGV})
 	list(REMOVE_ITEM commands COMMAND) # we can supply the cmake specific base commands
 	list(REMOVE_ITEM commands "cmd /c ")
-	
 	list(FIND commands "WORKING_DIRECTORY" index)
 	if(index EQUAL -1)
 		set(command ${commands} WORKING_DIRECTORY ${CURRENT_DIR}) # add WORKING_DIRECTORY if missing
 	endif()	
 	
-	#dk_info("")
-	#dk_info("*** dk_executeProcess ***")
+	#TODO - create dk_message (colorless) and use it to introduce a custom color here
 	dk_info("\n-> ${commands}\n")
-	#dk_info("")
 	
 	if(WIN_HOST)
 		execute_process(COMMAND cmd /c ${commands} RESULT_VARIABLE result ERROR_VARIABLE error) # FIXME: Do we always need  cmd /c  here?
