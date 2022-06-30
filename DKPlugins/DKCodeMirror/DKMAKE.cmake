@@ -1,5 +1,5 @@
 dk_depend(codemirror)
-dk_copy(${CODEMIRROR}/lib/ ${DKPLUGINS}/DKCodeMirror/lib/ TRUE)
-dk_copy(${CODEMIRROR}/theme/ ${DKPLUGINS}/DKCodeMirror/theme/ TRUE)
-dk_copy(${CODEMIRROR}/mode/ ${DKPLUGINS}/DKCodeMirror/mode/ TRUE)
+dk_copy(${CODEMIRROR}/lib/ ${DKPLUGINS}/DKCodeMirror/lib/ OVERWRITE)
+dk_copy(${CODEMIRROR}/theme/ ${DKPLUGINS}/DKCodeMirror/theme/ OVERWRITE)
+dk_copy(${CODEMIRROR}/mode/ ${DKPLUGINS}/DKCodeMirror/mode/ OVERWRITE)
 dk_assets(DKCodeMirror)

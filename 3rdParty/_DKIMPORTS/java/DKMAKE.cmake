@@ -7,7 +7,7 @@
 ### VERSION ###
 # jre1.8.0_311
 WIN_HOST_dk_set(JAVA_VERSION 8u311)
-WIN_HOST_dk_set(JAVA_NAME jre-${JAVA_VERSION}-windows-x64)
+WIN_HOST_dk_set(JAVA_NAME jre-8u311-windows-x64)
 WIN_HOST_dk_set(JAVA_DL http://deb.sambaedu.org/wpkg/files/jre/jre-8u311-windows-x64.exe)
 #WIN_HOST_dk_set(JAVA "C:/Program Files/Java/bin/jre1.8.0_311")
 WIN_HOST_dk_set(JAVA ${3RDPARTY}/${JAVA_NAME})
@@ -23,6 +23,7 @@ if(NOT EXISTS "${JAVA_EXE}")
 	get_filename_component(filename ${JAVA_DL} NAME)
 	WIN_HOST_dk_download(${JAVA_DL} ${DKDOWNLOAD}/${filename})
 	dk_info("Installing ${filename} . . . please wait")
+	dk_debug(JAVA)
 	dk_makeDirectory(${JAVA})
 	WIN_HOST_dk_command(${DKDOWNLOAD}/${filename} INSTALLDIR=${JAVA} /L ${3RDPARTY}/java/install.log) # /s  = silent install (not working)
 else()

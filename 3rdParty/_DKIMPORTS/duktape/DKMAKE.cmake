@@ -23,7 +23,7 @@ LINUX_dk_queueCommand(python ${DUKTAPE}/util/dist.py)
 
 WIN_dk_queueCommand(${PYTHON}/Scripts/pip install PyYAML)
 WIN_dk_queueCommand(${PYTHON_EXE} ${DUKTAPE}/util/dist.py)
-dk_copy(${DUKTAPE}/dist/src/ ${DUKTAPE}/src TRUE)
+dk_copy(${DUKTAPE}/dist/src/ ${DUKTAPE}/src OVERWRITE)
 
 #dk_import(https://codeload.github.com/nodeca/js-yaml/zip/refs/tags/3.14.1 ${DUKTAPE_NAME}/src-tools/lib/extdeps/js-yaml)
 #WIN32_dk_queueCommand(${NODE_EXE} ${DUKTAPE}/src-tools/index.js configure --output-directory ${DUKTAPE}/src --source-directory ${DUKTAPE}/src-input --config-directory ${DUKTAPE}/config)
@@ -31,13 +31,13 @@ endif()
 
 
 #if(NOT EXISTS ${DUKTAPE}/src/duktape.cpp)
-#	dk_copy(${DUKTAPE}/src/duktape.c ${DUKTAPE}/src/duktape.cpp FALSE)
+#	dk_copy(${DUKTAPE}/src/duktape.c ${DUKTAPE}/src/duktape.cpp)
 #endif()
 #if(NOT EXISTS ${DUKTAPE}/examples/eventloop/poll.cpp)
-#	dk_copy(${DUKTAPE}/examples/eventloop/poll.c ${DUKTAPE}/examples/eventloop/poll.cpp FALSE)
+#	dk_copy(${DUKTAPE}/examples/eventloop/poll.c ${DUKTAPE}/examples/eventloop/poll.cpp)
 #endif()
 #if(NOT EXISTS ${DUKTAPE}/examples/eventloop/c_eventloop.cpp)
-#	dk_copy(${DUKTAPE}/examples/eventloop/c_eventloop.c ${DUKTAPE}/examples/eventloop/c_eventloop.cpp FALSE)
+#	dk_copy(${DUKTAPE}/examples/eventloop/c_eventloop.c ${DUKTAPE}/examples/eventloop/c_eventloop.cpp)
 #endif()
 
 

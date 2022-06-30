@@ -17,7 +17,7 @@ dk_import(https://github.com/nigels-com/glew/releases/download/glew-2.2.0/glew-2
 
 
 
-dk_copy(${GLEW}/build/cmake ${GLEW}/${OS}/CMakeFiles/Export/lib/cmake/glew TRUE)
+dk_copy(${GLEW}/build/cmake ${GLEW}/${OS}/CMakeFiles/Export/lib/cmake/glew OVERWRITE)
 
 
 ### LINK ###
@@ -60,10 +60,10 @@ dk_setPath(${GLEW}/${BUILD_DIR})
 
 WIN_dk_queueCommand(${DKCMAKE_BUILD} ${GLEW}/build/cmake)
 WIN_dk_visualStudio(${GLEW_NAME} glew.sln glew_s)
-#dk_copy(${GLEW}/${OS}/lib/${DEBUG_DIR} ${GLEW}/${OS}/CMakeFiles/Export/lib/ TRUE)
-#dk_copy(${GLEW}/${OS}/lib/${RELEASE_DIR} ${GLEW}/${OS}/CMakeFiles/Export/lib/ TRUE)
-#dk_copy(${GLEW}/${OS}/bin/${DEBUG_DIR} ${GLEW}/${OS}/CMakeFiles/Export/bin/ TRUE)
-#dk_copy(${GLEW}/${OS}/bin/${RELEASE_DIR} ${GLEW}/${OS}/CMakeFiles/Export/bin/ TRUE)
+#dk_copy(${GLEW}/${OS}/lib/${DEBUG_DIR} ${GLEW}/${OS}/CMakeFiles/Export/lib/ OVERWRITE)
+#dk_copy(${GLEW}/${OS}/lib/${RELEASE_DIR} ${GLEW}/${OS}/CMakeFiles/Export/lib/ OVERWRITE)
+#dk_copy(${GLEW}/${OS}/bin/${DEBUG_DIR} ${GLEW}/${OS}/CMakeFiles/Export/bin/ OVERWRITE)
+#dk_copy(${GLEW}/${OS}/bin/${RELEASE_DIR} ${GLEW}/${OS}/CMakeFiles/Export/bin/ OVERWRITE)
 
 
 MAC_dk_queueCommand(${DKCMAKE_BUILD} ${GLEW}/build/cmake)

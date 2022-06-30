@@ -8,8 +8,8 @@ IF(HAVE_DKCef)
 ENDIF()
 
 
-#dk_copy(${PUGIXML}/src/pugixml.hpp ${DKPLUGINS}/DKXml/pugixml.hpp FALSE)
-dk_copy(${PUGIXML}/src/pugixml.cpp ${DKPLUGINS}/DKXml/pugixml.cpp FALSE)
+#dk_copy(${PUGIXML}/src/pugixml.hpp ${DKPLUGINS}/DKXml/pugixml.hpp)
+dk_copy(${PUGIXML}/src/pugixml.cpp ${DKPLUGINS}/DKXml/pugixml.cpp)
 dk_include(${PUGIXML}/src)
 dk_include(${XML2}/include)
 dk_generateCmake(DKXml)
