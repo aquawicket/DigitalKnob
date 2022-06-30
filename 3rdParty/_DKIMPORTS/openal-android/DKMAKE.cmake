@@ -1,23 +1,13 @@
+# https://openal.org/
+# https://openal-soft.org/
+# https://github.com/native-toolkit/openal-android
+# https://openal.org/downloads/OpenAL11CoreSDK.zip
 if(NOT ANDROID)
 	return()
 endif()
 
-# https://openal.org/
-# https://openal-soft.org/
-#
-# https://github.com/native-toolkit/openal-android
-# https://openal.org/downloads/OpenAL11CoreSDK.zip
 
-### VERSION ###
-dk_set(OPENAL_VERSION 11)
-dk_set(OPENAL_NAME openal-${OPENAL_VERSION})
-dk_set(OPENAL_DL https://openal.org/downloads/OpenAL${OPENAL_VERSION}CoreSDK.zip)
-dk_set(OPENAL ${3RDPARTY}/${OPENAL_NAME})
-
-
-### INSTALL ###
-#dk_import(${OPENAL_DL} ${OPENAL})
-dk_import(${OPENAL_DL} ${OPENAL})
+dk_import(https://openal.org/downloads/OpenAL11CoreSDK.zip)
 
 
 ### LINK ###
