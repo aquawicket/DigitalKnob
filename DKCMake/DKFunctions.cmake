@@ -1170,12 +1170,7 @@ endfunction()
 #
 function(dk_install url_path dest_path) #plugin #PATCH
 	DKDEBUGFUNC(${ARGV})
-	dk_debug(ARGV)
-	dk_debug(ARGN)
 	
-	
-		
-		
 	if(NOT "${ARGV2}" STREQUAL "PATCH")
 		set(plugin ${ARGV2})
 	endif()
@@ -1224,8 +1219,8 @@ function(dk_install url_path dest_path) #plugin #PATCH
 	# let's check that the scr_filename has at least the name of the target in it somewhere, or else we gotta rename it
 	string(TOLOWER ${url_filename} url_filename_lower)
 	string(FIND ${url_filename_lower} ${plugin} index)
-	#dk_includes(${url_filename_lower} ${plugin} result)
 	if(${index} EQUAL -1)
+	#dk_includes(${url_filename_lower} ${plugin} result)
 	#if(NOT ${result})
 		dk_debug("The download filename ${url_filename} does not contaian the import name ${plugin}")
 		string(TOLOWER ${dest_filename} dest_filename_lower)

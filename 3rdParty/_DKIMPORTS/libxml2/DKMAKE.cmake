@@ -15,14 +15,17 @@ dk_import(https://github.com/GNOME/libxml2/archive/f2ad86fa600885429a6083aaf6926
 dk_include			(${LIBXML2})
 dk_include			(${LIBXML2}/include)
 dk_include			(${LIBXML2}/${OS})
-WIN_dk_libDebug		(${LIBXML2}/${OS}/${DEBUG_DIR}/xml2.lib)
-WIN_dk_libRelease	(${LIBXML2}/${OS}/${RELEASE_DIR}/xml2.lib)
+#WIN_dk_libDebug		(${LIBXML2}/${OS}/${DEBUG_DIR}/xml2.lib)
+WIN_dk_libDebug		(${LIBXML2}/${OS}/${DEBUG_DIR}/libxml2sd.lib)
+#WIN_dk_libRelease	(${LIBXML2}/${OS}/${RELEASE_DIR}/xml2.lib)
+WIN_dk_libRelease	(${LIBXML2}/${OS}/${RELEASE_DIR}/libxml2s.lib)
 UNIX_dk_libDebug	(${LIBXML2}/${OS}/${DEBUG_DIR}/libxml2.a)
 UNIX_dk_libRelease	(${LIBXML2}/${OS}/${RELEASE_DIR}/libxml2.a)
 
 
 ### 3RDPARTY LINK ###
-WIN_dk_set	(LIBXML2_CMAKE -DLIBXML2_INCLUDE_DIR=${LIBXML2}/include -DLIBXML2_LIBRARIES=${LIBXML2}/${OS}/${RELEASE_DIR}/xml2.lib)
+#WIN_dk_set	(LIBXML2_CMAKE -DLIBXML2_INCLUDE_DIR=${LIBXML2}/include -DLIBXML2_LIBRARIES=${LIBXML2}/${OS}/${RELEASE_DIR}/xml2.lib)
+WIN_dk_set	(LIBXML2_CMAKE -DLIBXML2_INCLUDE_DIR=${LIBXML2}/include -DLIBXML2_LIBRARIES=${LIBXML2}/${OS}/${RELEASE_DIR}/libxml2s.lib)
 UNIX_dk_set	(LIBXML2_CMAKE -DLIBXML2_INCLUDE_DIR=${LIBXML2}/include -DLIBXML2_LIBRARIES=${LIBXML2}/${OS}/${RELEASE_DIR}/libxml2.a)
 
 
