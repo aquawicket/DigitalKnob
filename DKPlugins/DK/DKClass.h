@@ -172,6 +172,5 @@ public:
         } \
     }; \
 static klass##Class global_##klass##Class;
-//#define DKHAVE_#klass 1 \
 
 #endif //DKClass_H
