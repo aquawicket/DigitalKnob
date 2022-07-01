@@ -600,7 +600,7 @@ function(dk_download src_path dest_path) # ARGV1 = dest_path
 	dk_debug(dest_ext)
 	
 	if(EXISTS ${dest_path})
-		dk_warn("dest_path:(${dest_path}) already exists")
+		dk_error("dest_path:(${dest_path}) already exists")
 		return()
 	endif()
 	
