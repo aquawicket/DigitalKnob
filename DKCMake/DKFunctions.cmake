@@ -83,10 +83,10 @@ endfunction()
 #	RESULT		-The value of the next parameter after the ID
 macro(dk_getParameter name RESULT)
 	dk_debug("dk_getParameter(${name}}")
-	set(index 1)
-	foreach(arg ${ARGV})
+	set(index 0)
+	foreach(arg ${ARGN})
 		math(EXPR index ${index}+1)
-		if("${arg}" STREQUAL "${name}")
+		if(${arg} STREQUAL ${name})
 			dk_debug(arg)
 			dk_debug(name)
 			if(ARGV${index})
@@ -3396,15 +3396,15 @@ endfunction()
 #
 function(dk_import url) #Lib #tag #Patch
 	DKDEBUGFUNC(${ARGV})
-	dk_importVariables(${ARGV})
+	dk_import2(${ARGV})
+	#dk_importVariables(${ARGV} plugin)
 
-	dk_getExtension(${url} extension)
-	if("${extension}" STREQUAL ".git")
-		dk_importGit2(${ARGV})
-	else()
-		dk_importDownload2(${ARGV})
-	endif()
-	
+	#dk_getExtension(${url} extension)
+	#if("${extension}" STREQUAL ".git")
+	#	dk_importGit2(${ARGV})
+	#else()
+	#	dk_importDownload2(${ARGV})
+	#endif()
 endfunction()
 dk_createOsMacros("dk_import")
 
@@ -3677,65 +3677,51 @@ function(dk_importDownload url) #install_path #PATCH
 
 endfunction()
 
+######################################
+function(dk_import2 url)
+	DKDEBUGFUNC(${ARGV})
 
-###############################################################################
-# dk_importGit2(url)
-#
-#	TODO
-#
-#	@url	- TODO
-#
-function(dk_importGit2 url)
-	dk_debug("[${PLUGIN_INSTALL_NAME}] 			= ${${PLUGIN_INSTALL_NAME}}")
-	dk_debug("[${PLUGIN_INSTALL_NAME}_URL] 		= ${${PLUGIN_INSTALL_NAME}_URL}")
-	dk_debug("[${PLUGIN_INSTALL_NAME}_VERSION] 	= ${${PLUGIN_INSTALL_NAME}_VERSION}")
-	dk_debug("[${PLUGIN_INSTALL_NAME}_FOLDER] 	= ${${PLUGIN_INSTALL_NAME}_FOLDER}")
-	dk_debug("[${PLUGIN_INSTALL_NAME}_PATH] 	= ${${PLUGIN_INSTALL_NAME}_PATH}")
-	dk_debug("[${PLUGIN_INSTALL_NAME}_BRANCH] 	= ${${PLUGIN_INSTALL_NAME}_BRANCH}")
-	if(NOT EXISTS ${${PLUGIN_INSTALL_NAME}}/.git)
-		dk_set(CURRENT_DIR ${DIGITALKNOB}/${3RDPARTY})
-		if(EXISTS ${${PLUGIN_INSTALL_NAME}})
-			dk_remove(${${PLUGIN_INSTALL_NAME}})
+	dk_importVariables(${ARGV} plugin)
+	dk_debug("[${plugin}] 			= ${${plugin}}")
+	dk_debug("[${plugin}_URL] 		= ${${plugin}_URL}")
+	dk_debug("[${plugin}_VERSION] 	= ${${plugin}_VERSION}")
+	dk_debug("[${plugin}_FOLDER] 	= ${${plugin}_FOLDER}")
+	dk_debug("[${plugin}_PATH] 		= ${${plugin}_PATH}")
+	dk_debug("[${plugin}_BRANCH] 	= ${${plugin}_BRANCH}")
+
+	### .git
+	dk_getExtension(${url} extension)
+	if("${extension}" STREQUAL ".git")
+		if(NOT EXISTS ${${plugin}}/.git)
+			dk_set(CURRENT_DIR ${DIGITALKNOB}/${3RDPARTY})
+			if(EXISTS ${${plugin}})
+				dk_remove(${${plugin}})
+			endif()
+			if(NOT EXISTS ${${plugin}})
+				dk_makeDirectory(${${plugin}})
+			endif()
+			dk_set(CURRENT_DIR ${${plugin}})
+			dk_command(${GIT_EXE} clone ${${plugin}_URL} ${${plugin}})
 		endif()
-		if(NOT EXISTS ${${PLUGIN_INSTALL_NAME}})
-			dk_makeDirectory(${${PLUGIN_INSTALL_NAME}})
-		endif()
-		dk_set(CURRENT_DIR ${${PLUGIN_INSTALL_NAME}})
-		dk_command(${GIT_EXE} clone ${${PLUGIN_INSTALL_NAME}_URL} ${${PLUGIN_INSTALL_NAME}})
+		dk_set(CURRENT_DIR ${${plugin}})
+		dk_command(${GIT_EXE} checkout -- .)
+		dk_command(${GIT_EXE} checkout ${${plugin}_BRANCH})
+		dk_command(${GIT_EXE} pull)
+	### download
+	else()
+		#dk_install(${${LIBVAR}_DL} ${${LIBVAR}} ${${LIBVAR}_FOLDER} ${ARGN})
+		dk_debug("dk_install(${${plugin}_URL} ${${plugin}} ${${plugin}_FOLDER} ${ARGN})")
+		dk_install(${${plugin}_URL} ${${plugin}} ${${plugin}_FOLDER} ${ARGN})
 	endif()
-	dk_set(CURRENT_DIR ${${PLUGIN_INSTALL_NAME}})
-	dk_command(${GIT_EXE} checkout -- .)
-	dk_command(${GIT_EXE} checkout ${${PLUGIN_INSTALL_NAME}_BRANCH})
-	dk_command(${GIT_EXE} pull)
+	
 	dk_includes("${ARGN}" "PATCH" includes)
 	if(${includes})
-		dk_patch(${Lib} ${${PLUGIN_INSTALL_NAME}})
+		dk_patch(${Lib} ${${plugin}})
 	endif()
 endfunction()
 
 
-###############################################################################
-# dk_importDownload2(url) #install_path #PATCH
-#
-#	TODO
-#
-#	@url						- TODO
-#	@install_path (optional)	- TODO 
-#
-function(dk_importDownload2 url) #install_path #PATCH
-	DKDEBUGFUNC(${ARGV})
-	
-	dk_debug("[${PLUGIN_INSTALL_NAME}] = ${${PLUGIN_INSTALL_NAME}}")
-	dk_debug("[${PLUGIN_INSTALL_NAME}_VERSION] = ${${PLUGIN_INSTALL_NAME}_VERSION}")
-	dk_debug("[${PLUGIN_INSTALL_NAME}_FOLDER] = ${${PLUGIN_INSTALL_NAME}_FOLDER}")
-	dk_debug("[${PLUGIN_INSTALL_NAME}_PATH] = ${${PLUGIN_INSTALL_NAME}_PATH}")
-		
-	#dk_install(${${LIBVAR}_DL} ${${LIBVAR}} ${${LIBVAR}_FOLDER} ${ARGN})
-	dk_debug("dk_install(${PLUGIN_URL} ${${PLUGIN_INSTALL_NAME}} ${${PLUGIN_INSTALL_NAME}_FOLDER} ${ARGN})")
-	#dk_wait()
-	#dk_install(${PLUGIN_URL} ${${PLUGIN_INSTALL_NAME}} ${${PLUGIN_INSTALL_NAME}_FOLDER} ${ARGN})
 
-endfunction()
 
 
 ###############################################################################

@@ -20,13 +20,13 @@
 
 
 ###############################################################################
-# dk_import2(url)
+# dk_importVariables(url RESULT)
 #
 #	Rework of dk_import()
 #
 #	@url	- TODO
 #
-function(dk_importVariables PLUGIN_URL)
+function(dk_importVariables PLUGIN_URL RESULT)
 	DKDEBUGFUNC(${ARGV})
 
 	### POPULATE VARIABLES ###
@@ -101,7 +101,7 @@ function(dk_importVariables PLUGIN_URL)
 		list(GET PLUGIN_URL_LIST 4 PLUGIN_GIT_FILENAME)							# PLUGIN_GIT_FILENAME
 		string(REPLACE ".git" "" PLUGIN_GIT_NAME ${PLUGIN_GIT_FILENAME})		# PLUGIN_GIT_NAME
 		#dk_getGitBranchName(${PLUGIN_URL} PLUGIN_GIT_BRANCH)					# PLUGIN_GIT_BRANCH
-		dk_set(PLUGIN_GIT_BRANCH master)
+		set(PLUGIN_GIT_BRANCH master)
 	endif()
 	if(PLUGIN_GIT_NAME)
 		string(TOLOWER ${PLUGIN_GIT_NAME} PLUGIN_GIT_NAME_LOWER)				# PLUGIN_GIT_NAME_LOWER
@@ -115,11 +115,11 @@ function(dk_importVariables PLUGIN_URL)
 	
 	if(NOT PLUGIN_INSTALL_NAME)
 		if(PLUGIN_GIT_NAME)
-			dk_set(PLUGIN_INSTALL_NAME ${PLUGIN_GIT_NAME})
+			set(PLUGIN_INSTALL_NAME ${PLUGIN_GIT_NAME})
 		elseif(PLUGIN_IMPORT_NAME)
-			dk_set(PLUGIN_INSTALL_NAME ${PLUGIN_IMPORT_NAME})
+			set(PLUGIN_INSTALL_NAME ${PLUGIN_IMPORT_NAME})
 		elseif(PLUGIN_URL_NAME)
-			dk_set(PLUGIN_INSTALL_NAME ${PLUGIN_URL_NAME})
+			set(PLUGIN_INSTALL_NAME ${PLUGIN_URL_NAME})
 		endif()
 	endif()
 	
@@ -128,7 +128,7 @@ function(dk_importVariables PLUGIN_URL)
 			# deduct the plugin version
 			string(REPLACE ${PLUGIN_IMPORT_NAME_LOWER} "" PLUGIN_INSTALL_VERSION ${PLUGIN_URL_FILE_LOWER})	
 			if(${PLUGIN_IMPORT_NAME_LOWER} STREQUAL ${PLUGIN_URL_FILE_LOWER})
-				set(PLUGIN_INSTALL_VERSION "")
+				set(PLUGIN_INSTALL_VERSION ${PLUGIN_GIT_BRANCH})
 			endif()
 			string(FIND ${PLUGIN_INSTALL_VERSION} - index)
 			if(${index} EQUAL 0)
@@ -226,6 +226,8 @@ function(dk_importVariables PLUGIN_URL)
 	dk_debug("[${PLUGIN_INSTALL_NAME}_FOLDER] 	= ${${PLUGIN_INSTALL_NAME}_FOLDER}")
 	dk_debug("[${PLUGIN_INSTALL_NAME}_PATH] 	= ${${PLUGIN_INSTALL_NAME}_PATH}")
 	dk_debug("[${PLUGIN_INSTALL_NAME}_BRANCH] 	= ${${PLUGIN_INSTALL_NAME}_BRANCH}")
+	set(${RESULT} ${PLUGIN_INSTALL_NAME} PARENT_SCOPE)
+	dk_debug(${${RESULT}})
 endfunction()
 
 
