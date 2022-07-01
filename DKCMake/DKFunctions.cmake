@@ -1203,27 +1203,31 @@ endfunction()
 #	@plugin (optional)	-The name of the 3rdParty package being installed
 #	PATCH				-Patch the install directory with files from the DKIMPORT path
 #
-function(dk_install url_path dest_path) #plugin #PATCH
+function(dk_install plugin)#url_path dest_path) #plugin #PATCH
 	DKDEBUGFUNC(${ARGV})
 	
-	if(NOT "${ARGV2}" STREQUAL "PATCH")
-		set(plugin ${ARGV2})
-	endif()
+	set(dest_path ${${plugin}})
+	set(url_path ${${plugin}_URL})
 	
-	if(NOT plugin)
-		get_filename_component(plugin ${CMAKE_CURRENT_LIST_DIR} NAME)
-	else()
-		get_filename_component(plugin ${plugin} NAME)
-	endif()
+	#if(NOT "${ARGV2}" STREQUAL "PATCH")
+	#	set(plugin ${ARGV2})
+	#endif()
 	
-	string(TOLOWER ${plugin} plugin_lower)
-	if(NOT ${plugin} STREQUAL ${plugin_lower})
-		dk_error("ERROR:  dk_install() (${plugin}) must be all lowercase")
-	endif()
+	#if(NOT plugin)
+	#	get_filename_component(plugin ${CMAKE_CURRENT_LIST_DIR} NAME)
+	#else()
+	#	get_filename_component(plugin ${plugin} NAME)
+	#endif()
+	
+	#string(TOLOWER ${plugin} plugin_lower)
+	#if(NOT ${plugin} STREQUAL ${plugin_lower})
+	#	dk_error("ERROR:  dk_install() (${plugin}) must be all lowercase")
+	#endif()
 	
 	if(NOT EXISTS ${DKIMPORTS}/${plugin})
 		dk_assert("ERROR: dk_install() (${DKIMPORTS}/${plugin}) does not exist")
 	endif()
+	
 	
 	if(EXISTS ${dest_path}/installed)
 		dk_info("${plugin} already installed")
@@ -3708,8 +3712,8 @@ function(dk_import2 url)
 	### download
 	else()
 		#dk_install(${${LIBVAR}_DL} ${${LIBVAR}} ${${LIBVAR}_FOLDER} ${ARGN})
-		dk_debug("dk_install(${${plugin}_URL} ${${plugin}} ${${plugin}_FOLDER} ${ARGN})")
-		dk_install(${${plugin}_URL} ${${plugin}} ${${plugin}_FOLDER} ${ARGN})
+		dk_debug("dk_install(${plugin} ${ARGN})") #${${plugin}_URL} ${${plugin}} ${${plugin}_FOLDER} ${ARGN})")
+		dk_install(${plugin} ${ARGN}) #${${plugin}_URL} ${${plugin}} ${${plugin}_FOLDER} ${ARGN})
 	endif()
 	
 	dk_includes("${ARGN}" "PATCH" includes)

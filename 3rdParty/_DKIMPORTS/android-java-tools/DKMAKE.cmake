@@ -7,4 +7,4 @@ endif()
 
 dk_depend(visualstudio)
 
-dk_import(https://marketplace.visualstudio.com/_apis/public/gallery/publishers/VisualCPPTeam/vsextensions/JavaToolsForAndroidProjVS2019/2.8/vspackage ${3RDPARTY}/androoidjavatools-2.8)
+dk_import(https://marketplace.visualstudio.com/_apis/public/gallery/publishers/VisualCPPTeam/vsextensions/JavaToolsForAndroidProjVS2019/2.8/vspackage PATH ${3RDPARTY}/androoidjavatools-2.8)

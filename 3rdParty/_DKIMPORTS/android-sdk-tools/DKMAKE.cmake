@@ -9,9 +9,9 @@ endif()
 dk_depend(android-sdk)
 
 
-WIN_HOST_dk_import	(https://dl.google.com/android/repository/sdk-tools-windows-4333796.zip ${ANDROID-SDK}/tools PATCH)
-MAC_HOST_dk_import	(https://dl.google.com/android/repository/sdk-tools-darwin-4333796.zip ${ANDROID-SDK}/tools PATCH)
-LINUX_HOST_dk_import(https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip ${ANDROID-SDK}/tools PATCH)
+WIN_HOST_dk_import	(https://dl.google.com/android/repository/sdk-tools-windows-4333796.zip PATH ${ANDROID-SDK}/tools PATCH)
+MAC_HOST_dk_import	(https://dl.google.com/android/repository/sdk-tools-darwin-4333796.zip PATH ${ANDROID-SDK}/tools PATCH)
+LINUX_HOST_dk_import(https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip PATH ${ANDROID-SDK}/tools PATCH)
 
 
 
