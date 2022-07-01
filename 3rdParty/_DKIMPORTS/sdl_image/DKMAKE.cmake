@@ -37,8 +37,8 @@ dk_import(https://github.com/libsdl-org/SDL_image.git main PATCH)
 dk_include				(${SDL_IMAGE})
 #WIN_dk_libDebug		(${SDL_IMAGE}/${OS}/lib/${DEBUG_DIR}/SDL_image.lib)
 #WIN_dk_libRelease		(${SDL_IMAGE}/${OS}/lib/${RELEASE_DIR}/SDL_image.lib)
-WIN_dk_libDebug			(${SDL_IMAGE}/${OS}/lib/${DEBUG_DIR}/SDL2_image-staticd.lib
-WIN_dk_libRelease		(${SDL_IMAGE}/${OS}/lib/${RELEASE_DIR}/SDL2_image-static.lib
+WIN_dk_libDebug			(${SDL_IMAGE}/${OS}/lib/${DEBUG_DIR}/SDL2_image-staticd.lib)
+WIN_dk_libRelease		(${SDL_IMAGE}/${OS}/lib/${RELEASE_DIR}/SDL2_image-static.lib)
 APPLE_dk_libDebug		(${SDL_IMAGE}/${OS}/lib/Debug/SDL_image.a)
 APPLE_dk_libRelease		(${SDL_IMAGE}/${OS}/lib/Release/SDL_image.a)
 LINUX_dk_libDebug		(${SDL_IMAGE}/${OS}/${DEBUG_DIR}/lib/SDL_image.a)
