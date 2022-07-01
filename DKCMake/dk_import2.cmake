@@ -43,7 +43,6 @@ function(dk_import2 PLUGIN_URL)
 	# PLUGIN_INSTALL_PATH		- from PLUGIN_URL_NAME and PLUGIN_VERSION
 	
 	
-	dk_debug(CMAKE_CURRENT_LIST_DIR)
 	#string(FIND ${CMAKE_CURRENT_LIST_DIR} ${DKIMPORTS} PLUGIN_IS_IMPORT) 
 	#if(${PLUGIN_IS_IMPORT} GREATER -1)
 	dk_includes(${CMAKE_CURRENT_LIST_DIR} ${DKIMPORTS} PLUGIN_IS_IMPORT) # is the current list directory our plugin path??

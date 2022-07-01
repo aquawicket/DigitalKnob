@@ -3834,12 +3834,13 @@ endfunction()
 
 
 ###############################################################################
-# dk_removeExtension(path RESULT)
+# dk_removeExtension(path RESULT) NOERROR
 #
 #	Remove the extension from a file path
 #
 #	@path		- TODO
 #	@RESULT		- TODO
+#   NOERROR     - if any of the parameters equals NOERROR, dk_error() messages will not be displayed
 #
 function(dk_removeExtension path RESULT)
 	DKDEBUGFUNC(${ARGV})
@@ -3847,7 +3848,10 @@ function(dk_removeExtension path RESULT)
 	if(${includes} EQUAL -1)
 	#dk_includes(${path} "." includes REVERSE)
 	#if(NOT includes)
-		dk_warn("no extension found")
+		dk_includes("${ARGN}" "NOERROR" includes)
+		if(${includes})
+			dk_error("no extension found")
+		endif()
 		return()
 	endif()
 	string(SUBSTRING ${path} 0 ${includes} fileNameNoExt) 
