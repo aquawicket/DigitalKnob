@@ -1203,7 +1203,7 @@ endfunction()
 #	@plugin (optional)	-The name of the 3rdParty package being installed
 #	PATCH				-Patch the install directory with files from the DKIMPORT path
 #
-function(dk_install plugin)#url_path dest_path) #plugin #PATCH
+function(dk_install plugin) #PATCH
 	DKDEBUGFUNC(${ARGV})
 	
 	set(dest_path ${${plugin}})
