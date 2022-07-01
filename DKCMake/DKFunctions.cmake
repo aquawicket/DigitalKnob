@@ -621,7 +621,7 @@ function(dk_download src_path dest_path) # ARGV1 = dest_path
 	dk_info("Downloading ${src_filename}. . . please wait")
 	file(DOWNLOAD ${src_path} ${temp_path} 
 		SHOW_PROGRESS 
-		INACTIVITY_TIMEOUT 60
+		INACTIVITY_TIMEOUT 70
 		STATUS status 
 	)
 	list(GET status 0 status_code) 
@@ -633,7 +633,7 @@ function(dk_download src_path dest_path) # ARGV1 = dest_path
 		if(NOT EXISTS ${temp_path})
 			dk_assert("temp_path:(${temp_path}) could not locate temporary download file")
 		endif()
-		dk_rename(${temp_path} ${dest_path} false)
+		dk_rename(${temp_path} ${dest_path})
 		if(NOT EXISTS ${dest_path})
 			dk_assert("dest_path:(${dest_path}) Could not locate downloaded file")
 		endif()
@@ -1160,7 +1160,7 @@ function(dk_patch import_name dest_path)
 	dk_warn("COPYING PATCH FILES FROM _IMPORTS/${import_name} TO ${dest_path}")
 	dk_warn("To stop patch files from overwriting install files, remove the \"PATCH\" argument from the end of the DKIMPORT or dk_install command")
 	dk_warn("located in ${DKIMPORTS}/${import_name}/DKMAKE.cmake")
-	dk_copy(${DKIMPORTS}/${import_name}/ ${dest_path}/ TRUE)
+	dk_copy(${DKIMPORTS}/${import_name}/ ${dest_path}/ OVERWRITE)
 endfunction()
 
 
@@ -1300,10 +1300,10 @@ function(dk_install url_path dest_path) #plugin #PATCH
 		list(LENGTH items count)
 		if(${count} GREATER 2) ##NOTE: This should be "${count} GREATER 1" but msys has a readme file in it next to the inner msys folder and that messes things up for more than 1
 			#vZip extracted with no root folder, Rename UNZIPPED and move to 3rdParty
-			dk_rename(${DKDOWNLOAD}/UNZIPPED ${dest_path} true)
+			dk_rename(${DKDOWNLOAD}/UNZIPPED ${dest_path} OVERWRITE)
 		else()
 			if(EXISTS ${DKDOWNLOAD}/UNZIPPED/${dest_filename}) ##Zip extracted to expected folder. Move the folder to 3rdParty
-				dk_rename(${DKDOWNLOAD}/UNZIPPED/${dest_filename} ${dest_path} true)
+				dk_rename(${DKDOWNLOAD}/UNZIPPED/${dest_filename} ${dest_path} OVERWRITE)
 				dk_remove(${DKDOWNLOAD}/UNZIPPED)
 			else() #vZip extracted to a root folder, but not named what we expected. Rename and move folder to 3rdParty
 				foreach(item ${items})
@@ -1311,7 +1311,7 @@ function(dk_install url_path dest_path) #plugin #PATCH
 						list(REMOVE_ITEM items ${item}) #remove any readme.txt or other non-directory items
 					endif()
 				endforeach()
-				dk_rename(${DKDOWNLOAD}/UNZIPPED/${items} ${dest_path} true)
+				dk_rename(${DKDOWNLOAD}/UNZIPPED/${items} ${dest_path} OVERWRITE)
 				dk_remove(${DKDOWNLOAD}/UNZIPPED)
 			endif() 
 		endif()
@@ -1320,8 +1320,8 @@ function(dk_install url_path dest_path) #plugin #PATCH
 #		dk_set(QUEUE_BUILD ON)
 #		DKEXECUTE(${DKDOWNLOAD}/${url_filename})
 	else() #NOT ARCHIVE, just copy the file into it's 3rdParty folder
-		dk_copy(${DKDOWNLOAD}/${dl_filename} ${dest_path}/${dl_filename} TRUE)
-		dk_debug("dk_copy(${DKDOWNLOAD}/${dl_filename} ${dest_path}/${dl_filename} TRUE)")
+		dk_copy(${DKDOWNLOAD}/${dl_filename} ${dest_path}/${dl_filename} OVERWRITE)
+		dk_debug("dk_copy(${DKDOWNLOAD}/${dl_filename} ${dest_path}/${dl_filename} OVERWRITE)")
 	endif()
 	
 	string(FIND "${ARGN}" "PATCH" index)
@@ -2814,7 +2814,7 @@ function(dk_updateAndroidName app_name)
 				set(new_name ${each_file})
 				string(REPLACE "dkapp" "${app_name}" new_name "${new_name}")
 				dk_info("Renaming ${each_file} to ${new_name}")
-				dk_rename(${DKPROJECT}/${OS}/${each_file} ${DKPROJECT}/${OS}/${new_name} true)
+				dk_rename(${DKPROJECT}/${OS}/${each_file} ${DKPROJECT}/${OS}/${new_name} OVERWRITE)
 			endif()
 		endforeach()
 	endif()
