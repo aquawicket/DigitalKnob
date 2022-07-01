@@ -55,6 +55,7 @@ function(dk_import2 PLUGIN_URL)
 	endif()
 	if(PLUGIN_NAME)
 		string(TOLOWER ${PLUGIN_NAME} PLUGIN_NAME_LOWER)					# PLUGIN_NAME_LOWER
+		string(TOUPPER ${PLUGIN_NAME} PLUGIN_NAME_LOWER)					# PLUGIN_NAME_UPPER
 	endif()
 	if(PLUGIN_URL)
 		get_filename_component(PLUGIN_URL_FILENAME ${PLUGIN_URL} NAME)		# PLUGIN_URL_FILENAME
@@ -67,6 +68,7 @@ function(dk_import2 PLUGIN_URL)
 	endif()
 	if(PLUGIN_URL_NAME)
 		string(TOLOWER ${PLUGIN_URL_NAME} PLUGIN_URL_NAME_LOWER)			# PLUGIN_URL_NAME_LOWER
+		string(TOUPPER ${PLUGIN_URL_NAME} PLUGIN_URL_NAME_UPPER)			# PLUGIN_URL_NAME_UPPER
 	endif()
 	if(PLUGIN_URL_LIST)
 		# split the url into list converting / to divider ;
@@ -82,6 +84,10 @@ function(dk_import2 PLUGIN_URL)
 		#dk_debug("This is a github address")
 		list(GET PLUGIN_URL_LIST 4 PLUGIN_GITHUB_FILENAME)					# PLUGIN_GITHUB_FILENAME
 		dk_removeExtension(${PLUGIN_GITHUB_FILENAME} PLUGIN_GITHUB_NAME)	# PLUGIN_GITHUB_NAME
+	endif()
+	if(PLUGIN_GITHUB_NAME)
+		string(TOLOWER ${PLUGIN_GITHUB_NAME} PLUGIN_GITHUB_NAME_LOWER)		# PLUGIN_GITHUB_NAME_LOWER
+		string(TOUPPER ${PLUGIN_GITHUB_NAME} PLUGIN_GITHUB_NAME_UPPER)		# PLUGIN_GITHUB_NAME_UPPER
 	endif()
 	if(PLUGIN_URL_NAME_LOWER)
 		# deduct the plugin version
@@ -109,6 +115,7 @@ function(dk_import2 PLUGIN_URL)
 	dk_debug(PLUGIN_IMPORT_PATH)
 	dk_debug(PLUGIN_NAME)
 	dk_debug(PLUGIN_NAME_LOWER)
+	dk_debug(PLUGIN_NAME_UPPER)
 	dk_debug(PLUGIN_URL)
 	dk_debug(PLUGIN_URL_LIST)
 	dk_debug(PLUGIN_URL_LENGTH)
@@ -122,11 +129,13 @@ function(dk_import2 PLUGIN_URL)
 	dk_debug(PLUGIN_URL_EXTENSION)
 	dk_debug(PLUGIN_URL_NAME)
 	dk_debug(PLUGIN_URL_NAME_LOWER)
+	dk_debug(PLUGIN_URL_NAME_UPPER)
 	dk_debug(PLUGIN_URL_LENGTH)
-	dk_debug(PLUGIN_URL_NAME_LOWER)
 	dk_debug(PLUGIN_GITHUB)
 	dk_debug(PLUGIN_GITHUB_FILENAME)
 	dk_debug(PLUGIN_GITHUB_NAME)
+	dk_debug(PLUGIN_GITHUB_NAME_LOWER)
+	dk_debug(PLUGIN_GITHUB_NAME_UPPER)
 	dk_debug(PLUGIN_VERSION)
 	dk_debug(PLUGIN_INSTALL_NAME)
 	dk_debug(PLUGIN_INSTALL_PATH)
