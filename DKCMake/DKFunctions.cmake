@@ -3720,7 +3720,7 @@ function(dk_import2 url)
 	
 	dk_includes("${ARGN}" "PATCH" includes)
 	if(${includes})
-		dk_patch(${Lib} ${${plugin}})
+		dk_patch(${plugin} ${${plugin}})
 	endif()
 endfunction()
 
