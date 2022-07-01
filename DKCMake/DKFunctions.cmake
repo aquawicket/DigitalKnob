@@ -3371,7 +3371,7 @@ endfunction()
 #
 function(dk_import url) #Lib #tag #Patch
 	DKDEBUGFUNC(${ARGV})
-	dk_import2(${ARGV})
+	dk_importVariables(${ARGV})
 
 	dk_getExtension(${url} extension)
 	if("${extension}" STREQUAL ".git")
