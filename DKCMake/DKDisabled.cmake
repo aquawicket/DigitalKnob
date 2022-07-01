@@ -53,6 +53,7 @@ dk_disable(DKPlugin2)
 dk_disable(DKRestart)
 dk_disable(DKScreenRecorder)
 dk_disable(DKSDLAudio)
+dk_disable(DKSDLText)
 dk_disable(DKSDLWav)
 dk_disable(DKSDLVideo)
 dk_disable(DKSFMLRml)               # incomplete
