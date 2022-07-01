@@ -3397,7 +3397,6 @@ endfunction()
 function(dk_import url) #Lib #tag #Patch
 	DKDEBUGFUNC(${ARGV})
 	dk_import2(${ARGV})
-	#dk_importVariables(${ARGV} plugin)
 
 	#dk_getExtension(${url} extension)
 	#if("${extension}" STREQUAL ".git")
@@ -3686,7 +3685,6 @@ function(dk_import2 url)
 	dk_debug("[${plugin}_URL] 		= ${${plugin}_URL}")
 	dk_debug("[${plugin}_VERSION] 	= ${${plugin}_VERSION}")
 	dk_debug("[${plugin}_FOLDER] 	= ${${plugin}_FOLDER}")
-	dk_debug("[${plugin}_PATH] 		= ${${plugin}_PATH}")
 	dk_debug("[${plugin}_BRANCH] 	= ${${plugin}_BRANCH}")
 
 	### .git
