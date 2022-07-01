@@ -45,84 +45,93 @@ function(dk_import2 PLUGIN_URL)
 	
 	#string(FIND ${CMAKE_CURRENT_LIST_DIR} ${DKIMPORTS} PLUGIN_IS_IMPORT) 
 	#if(${PLUGIN_IS_IMPORT} GREATER -1)
-	dk_includes(${CMAKE_CURRENT_LIST_DIR} ${DKIMPORTS} PLUGIN_IS_IMPORT) # is the current list directory our plugin path??
+	dk_includes(${CMAKE_CURRENT_LIST_DIR} ${DKIMPORTS} PLUGIN_IS_IMPORT)	# PLUGIN_IS_IMPORT 
 	if(PLUGIN_IS_IMPORT)
-		set(PLUGIN_IMPORT_PATH ${CMAKE_CURRENT_LIST_DIR})
-		#dk_getFilename(${PLUGIN_IMPORT_PATH} PLUGIN_NAME)
-		get_filename_component(PLUGIN_NAME ${PLUGIN_IMPORT_PATH} NAME)
-		string(TOLOWER ${PLUGIN_NAME} PLUGIN_NAME_LOWER)
-	else()
-		dk_assert("is NOT a DKIMPORT")
+		set(PLUGIN_IMPORT_PATH ${CMAKE_CURRENT_LIST_DIR})					# PLUGIN_IMPORT_PATH
+		#dk_getFilename(${PLUGIN_IMPORT_PATH} PLUGIN_NAME)		
 	endif()
-	dk_debug(PLUGIN_IS_IMPORT)
-	dk_debug(PLUGIN_IMPORT_PATH)
-	dk_debug(PLUGIN_NAME)
-	dk_debug(PLUGIN_NAME_LOWER)
-	
-	#set(PLUGIN_URL ${url})
+	if(PLUGIN_IMPORT_PATH)
+		get_filename_component(PLUGIN_NAME ${PLUGIN_IMPORT_PATH} NAME)		# PLUGIN_NAME
+	endif()
+	if(PLUGIN_NAME)
+		string(TOLOWER ${PLUGIN_NAME} PLUGIN_NAME_LOWER)					# PLUGIN_NAME_LOWER
+	endif()
 	if(PLUGIN_URL)
-		get_filename_component(PLUGIN_URL_FILENAME ${PLUGIN_URL} NAME)
+		get_filename_component(PLUGIN_URL_FILENAME ${PLUGIN_URL} NAME)		# PLUGIN_URL_FILENAME
+		string(REPLACE "/" ";" PLUGIN_URL_LIST ${PLUGIN_URL})				# PLUGIN_URL_LIST
+		dk_includes(${PLUGIN_URL} https://github.com PLUGIN_GITHUB)			# PLUGIN_GITHUB
 	endif()
-	dk_debug(PLUGIN_URL)
-	dk_debug(PLUGIN_URL_FILENAME)
 	if(PLUGIN_URL_FILENAME)
-		dk_getExtension(${PLUGIN_URL_FILENAME} PLUGIN_URL_EXTENSION)
-		dk_removeExtension(${PLUGIN_URL_FILENAME} PLUGIN_URL_NAME)
+		dk_getExtension(${PLUGIN_URL_FILENAME} PLUGIN_URL_EXTENSION)		# PLUGIN_URL_EXTENSION
+		dk_removeExtension(${PLUGIN_URL_FILENAME} PLUGIN_URL_NAME)			# PLUGIN_URL_NAME
 	endif()
-	dk_debug(PLUGIN_URL_EXTENSION)
-	dk_debug(PLUGIN_URL_NAME)
 	if(PLUGIN_URL_NAME)
-		string(TOLOWER ${PLUGIN_URL_NAME} PLUGIN_URL_NAME_LOWER)
+		string(TOLOWER ${PLUGIN_URL_NAME} PLUGIN_URL_NAME_LOWER)			# PLUGIN_URL_NAME_LOWER
 	endif()
-	dk_debug(PLUGIN_URL_NAME_LOWER)
-	
-	if(url)
+	if(PLUGIN_URL_LIST)
 		# split the url into list converting / to divider ;
-		string(REPLACE "/" ";" PLUGIN_URL_LIST ${PLUGIN_URL})
-		foreach(PLUGIN_URL_ITEM ${PLUGIN_URL_LIST})
-			dk_debug(PLUGIN_URL_ITEM)
+		set(index 0 )
+		foreach(PLUGIN_URL_ITEM ${PLUGIN_URL_LIST})							# PLUGIN_URL_ITEM
+			set(PLUGIN_URL_NODE${index} ${PLUGIN_URL_ITEM})					# PLUGIN_URL_NODE(n)
+			dk_debug(${PLUGIN_URL_NODE${index}})
 		endforeach()
-		list(LENGTH PLUGIN_URL_LIST PLUGIN_URL_LENGTH)
+		list(LENGTH PLUGIN_URL_LIST PLUGIN_URL_LENGTH)						# PLUGIN_URL_LENGTH
 	endif()
-	dk_debug(PLUGIN_URL_LENGTH)
-	
-	if(PLUGIN_URL)
-		# github library name
-		#string(FIND ${PLUGIN_URL} https://github.com index)
-		#if(${index} GREATER -1)
-		dk_includes(${PLUGIN_URL} https://github.com isGithub)
-		if(isGithub)
-			#dk_debug("This is a github address")
-			list(GET PLUGIN_URL_LIST 4 PLUGIN_GITHUB_FILENAME)
-			dk_removeExtension(${PLUGIN_GITHUB_FILENAME} PLUGIN_GITHUB_NAME)
-		endif()
+	if(PLUGIN_GITHUB)
+		#dk_debug("This is a github address")
+		list(GET PLUGIN_URL_LIST 4 PLUGIN_GITHUB_FILENAME)					# PLUGIN_GITHUB_FILENAME
+		dk_removeExtension(${PLUGIN_GITHUB_FILENAME} PLUGIN_GITHUB_NAME)	# PLUGIN_GITHUB_NAME
 	endif()
-	dk_debug(PLUGIN_GITHUB_FILENAME)
-	dk_debug(PLUGIN_GITHUB_NAME)
-	
 	if(PLUGIN_URL_NAME_LOWER)
 		# deduct the plugin version
-		string(REPLACE ${PLUGIN_NAME_LOWER} "" PLUGIN_VERSION ${PLUGIN_URL_NAME_LOWER})
+		string(REPLACE ${PLUGIN_NAME_LOWER} "" PLUGIN_VERSION ${PLUGIN_URL_NAME_LOWER})	
 		if(${PLUGIN_NAME_LOWER} STREQUAL ${PLUGIN_URL_NAME_LOWER})
 			set(PLUGIN_VERSION "none")
 		endif()
 		string(FIND ${PLUGIN_VERSION} - index)
 		if(${index} EQUAL 0)
-		#dk_includes(${PLUGIN_VERSION} - includes)
-		#if(includes AND ${includes} EQUAL 0)
 			string(SUBSTRING ${PLUGIN_VERSION} 1 -1 PLUGIN_VERSION)
 		endif()
 		string(FIND ${PLUGIN_VERSION} _ index)
 		if(${index} EQUAL 0)
-		#dk_includes(${PLUGIN_VERSION} - includes)
-		#if(includes AND ${includes} EQUAL 0)
 			string(SUBSTRING ${PLUGIN_VERSION} 1 -1 PLUGIN_VERSION)
 		endif()
+	endif()																	# PLUGIN_VERSION
+	if(PLUGIN_VERSION)
+		set(PLUGIN_INSTALL_NAME ${PLUGIN_NAME}-${PLUGIN_VERSION})			# PLUGIN_INSTALL_NAME
 	endif()
+	if(3RDPARTY)
+		set(PLUGIN_INSTALL_PATH ${3RDPARTY}/${PLUGIN_INSTALL_NAME})			# PLUGIN_INSTALL_PATH
+	endif()
+			
+	dk_debug(PLUGIN_IS_IMPORT)
+	dk_debug(PLUGIN_IMPORT_PATH)
+	dk_debug(PLUGIN_NAME)
+	dk_debug(PLUGIN_NAME_LOWER)
+	dk_debug(PLUGIN_URL)
+	dk_debug(PLUGIN_URL_LIST)
+	dk_debug(PLUGIN_URL_LENGTH)
+	dk_debug(PLUGIN_URL_NODE0)
+	dk_debug(PLUGIN_URL_NODE1)
+	dk_debug(PLUGIN_URL_NODE2)
+	dk_debug(PLUGIN_URL_NODE3)
+	dk_debug(PLUGIN_URL_NODE4)
+	dk_debug(PLUGIN_URL_NODE5)
+	dk_debug(PLUGIN_URL_FILENAME)
+	dk_debug(PLUGIN_URL_EXTENSION)
+	dk_debug(PLUGIN_URL_NAME)
+	dk_debug(PLUGIN_URL_NAME_LOWER)
+	dk_debug(PLUGIN_URL_LENGTH)
+	dk_debug(PLUGIN_URL_NAME_LOWER)
+	dk_debug(PLUGIN_GITHUB)
+	dk_debug(PLUGIN_GITHUB_FILENAME)
+	dk_debug(PLUGIN_GITHUB_NAME)
 	dk_debug(PLUGIN_VERSION)
 	
-	#dk_wait()
-	#dk_exit()
+	## Create Plugin Variables
+	
+	
+	
 endfunction()
 
 
