@@ -3685,6 +3685,8 @@ function(dk_import2 url)
 	DKDEBUGFUNC(${ARGV})
 
 	dk_importVariables(${ARGV} plugin)
+	string(TOUPPER ${plugin} plugin)
+	
 	dk_debug("[${plugin}] 			= ${${plugin}}")
 	dk_debug("[${plugin}_URL] 		= ${${plugin}_URL}")
 	dk_debug("[${plugin}_VERSION] 	= ${${plugin}_VERSION}")
