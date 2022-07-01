@@ -3490,12 +3490,17 @@ function(dk_importGit url) #branch #PATCH
 	dk_command(${GIT_EXE} checkout ${branch})
 	dk_command(${GIT_EXE} pull)
 	
-	set(arg_list "${ARGN}")
-	foreach(arg IN LISTS arg_list)
-		if("${arg}" STREQUAL "PATCH")
-			dk_patch(${Lib} ${${LIBVAR}})
-		endif()
-	endforeach()
+	#set(arg_list "${ARGN}")
+	#foreach(arg IN LISTS arg_list)
+	#	if("${arg}" STREQUAL "PATCH")
+	#		dk_patch(${Lib} ${${LIBVAR}})
+	#	endif()
+	#endforeach()
+	
+	dk_includes("${ARGN}" "PATCH" includes)
+	if(${includes})
+		dk_patch(${Lib} ${${LIBVAR}})
+	endif()
 endfunction()
 
 
