@@ -85,6 +85,7 @@ dk_disable(osgbullet)               # Openscenegraph
 dk_disable(osgworks)                # Openscenegraph
 dk_disable(sdl2_gif)                # use SDL_Image animation
 dk_disable(sdl2_giflib_sa)          # updated version of sdl2_gif
+dk_disable(sdl_ttf)
 dk_disable(simple-getch)            # kept for reference
 dk_disable(tiff)
 
