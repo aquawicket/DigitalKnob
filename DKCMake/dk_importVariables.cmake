@@ -18,17 +18,17 @@
 #	plugin_path - The full path to the plugin
 #		obtained: 1. from current cmake directory
 macro(dk_getParameter name RESULT)
-	dk_debug("dk_getParameter(${name}}")
-	set(index 0)
+	#dk_debug("dk_getParameter(${name}}")
+	set(index 1)
 	foreach(arg ${ARGV})
 		math(EXPR index ${index}+1)
 		if("${arg}" STREQUAL "${name}")
-			dk_debug(arg)
-			dk_debug(name)
+			#dk_debug(arg)
+			#dk_debug(name)
 			if(ARGV${index})
-				dk_debug(ARGV${index})
+				#dk_debug(ARGV${index})
 				set(${RESULT} ${ARGV${index}})
-				dk_debug(${${RESULT}})
+				#dk_debug(${${RESULT}})
 			endif()
 		endif()
 	endforeach()
@@ -70,10 +70,10 @@ function(dk_importVariables PLUGIN_URL)
 	# PLUGIN_INSTALL_VERSION	- from PLUGIN_URL_FILE_LOWER and PLUGIN_IMPORT_NAME_LOWER
 	# PLUGIN_INSTALL_FULLNAME
 	# PLUGIN_INSTALL_PATH		- from PLUGIN_URL_FILE and PLUGIN_INSTALL_VERSION
-	dk_getParameter(PLUGIN_INSTALL_PATH PLUGIN_INSTALL_PATH)
-	if(PLUGIN_INSTALL_PATH)
-		dk_assert(PLUGIN_INSTALL_PATH)
-	endif()
+	dk_getParameter(NAME PLUGIN_INSTALL_NAME)
+	dk_getParameter(VERSION PLUGIN_INSTALL_VERSION)
+	dk_getParameter(FULLNAME PLUGIN_INSTALL_FULLNAME)
+	dk_getParameter(PATH PLUGIN_INSTALL_PATH)
 	
 	if(PLUGIN_URL)																# PLUGIN_URL
 		get_filename_component(PLUGIN_URL_FILENAME ${PLUGIN_URL} NAME)			# PLUGIN_URL_FILENAME
@@ -121,35 +121,48 @@ function(dk_importVariables PLUGIN_URL)
 		string(TOLOWER ${PLUGIN_GITHUB_NAME} PLUGIN_GITHUB_NAME_LOWER)			# PLUGIN_GITHUB_NAME_LOWER
 		string(TOUPPER ${PLUGIN_GITHUB_NAME} PLUGIN_GITHUB_NAME_UPPER)			# PLUGIN_GITHUB_NAME_UPPER
 	endif()
-	if(PLUGIN_GITHUB_NAME)
-		set(PLUGIN_INSTALL_NAME ${PLUGIN_GITHUB_NAME})
-	elseif(PLUGIN_IMPORT_NAME)
-		set(PLUGIN_INSTALL_NAME ${PLUGIN_IMPORT_NAME})
-	elseif(PLUGIN_URL_NAME)
-		set(PLUGIN_INSTALL_NAME ${PLUGIN_URL_NAME})
+	
+	### PLUGIN_INSTALL VARIABLES ###
+	if(NOT PLUGIN_INSTALL_NAME)
+		if(PLUGIN_GITHUB_NAME)
+			set(PLUGIN_INSTALL_NAME ${PLUGIN_GITHUB_NAME})
+		elseif(PLUGIN_IMPORT_NAME)
+			set(PLUGIN_INSTALL_NAME ${PLUGIN_IMPORT_NAME})
+		elseif(PLUGIN_URL_NAME)
+			set(PLUGIN_INSTALL_NAME ${PLUGIN_URL_NAME})
+		endif()
 	endif()
-	if(PLUGIN_IMPORT_NAME_LOWER AND PLUGIN_URL_FILE_LOWER)
-		# deduct the plugin version
-		string(REPLACE ${PLUGIN_IMPORT_NAME_LOWER} "" PLUGIN_INSTALL_VERSION ${PLUGIN_URL_FILE_LOWER})	
-		if(${PLUGIN_IMPORT_NAME_LOWER} STREQUAL ${PLUGIN_URL_FILE_LOWER})
-			set(PLUGIN_INSTALL_VERSION "none")
-		endif()
-		string(FIND ${PLUGIN_INSTALL_VERSION} - index)
-		if(${index} EQUAL 0)
-			string(SUBSTRING ${PLUGIN_INSTALL_VERSION} 1 -1 PLUGIN_INSTALL_VERSION)
-		endif()
-		string(FIND ${PLUGIN_INSTALL_VERSION} _ index)
-		if(${index} EQUAL 0)
-			string(SUBSTRING ${PLUGIN_INSTALL_VERSION} 1 -1 PLUGIN_INSTALL_VERSION)
+	
+	if(NOT PLUGIN_INSTALL_VERSION)
+		if(PLUGIN_IMPORT_NAME_LOWER AND PLUGIN_URL_FILE_LOWER)
+			# deduct the plugin version
+			string(REPLACE ${PLUGIN_IMPORT_NAME_LOWER} "" PLUGIN_INSTALL_VERSION ${PLUGIN_URL_FILE_LOWER})	
+			if(${PLUGIN_IMPORT_NAME_LOWER} STREQUAL ${PLUGIN_URL_FILE_LOWER})
+				set(PLUGIN_INSTALL_VERSION "none")
+			endif()
+			string(FIND ${PLUGIN_INSTALL_VERSION} - index)
+			if(${index} EQUAL 0)
+				string(SUBSTRING ${PLUGIN_INSTALL_VERSION} 1 -1 PLUGIN_INSTALL_VERSION)
+			endif()
+			string(FIND ${PLUGIN_INSTALL_VERSION} _ index)
+			if(${index} EQUAL 0)
+				string(SUBSTRING ${PLUGIN_INSTALL_VERSION} 1 -1 PLUGIN_INSTALL_VERSION)
+			endif()
 		endif()
 	endif()																				# PLUGIN_INSTALL_VERSION
-	if(PLUGIN_INSTALL_VERSION)
-		set(PLUGIN_INSTALL_FULLNAME ${PLUGIN_INSTALL_NAME}-${PLUGIN_INSTALL_VERSION})	# PLUGIN_INSTALL_FULLNAME
+
+	if(NOT PLUGIN_INSTALL_FULLNAME)		
+		if(PLUGIN_INSTALL_VERSION)
+			set(PLUGIN_INSTALL_FULLNAME ${PLUGIN_INSTALL_NAME}-${PLUGIN_INSTALL_VERSION})	# PLUGIN_INSTALL_FULLNAME
+		endif()
 	endif()
-	if(3RDPARTY)
-		set(PLUGIN_INSTALL_PATH ${3RDPARTY}/${PLUGIN_INSTALL_FULLNAME})					# PLUGIN_INSTALL_PATH
+	
+	if(NOT PLUGIN_INSTALL_PATH)
+		if(3RDPARTY)
+			set(PLUGIN_INSTALL_PATH ${3RDPARTY}/${PLUGIN_INSTALL_FULLNAME})					# PLUGIN_INSTALL_PATH
+		endif()
 	endif()
-		
+	
 	dk_debug(PLUGIN_URL)
 	dk_debug(PLUGIN_URL_LIST)
 	dk_debug(PLUGIN_URL_LENGTH)
@@ -184,7 +197,7 @@ function(dk_importVariables PLUGIN_URL)
 	
 	if(PLUGIN_IMPORT AND PLUGIN_GITHUB)
 		if(NOT ${PLUGIN_IMPORT_NAME_LOWER} STREQUAL ${PLUGIN_GITHUB_NAME_LOWER})
-			dk_assert("PLUGIN_IMPORT_NAME_LOWER:${PLUGIN_IMPORT_NAME_LOWER} and PLUGIN_GITHUB_NAME_LOWER:${PLUGIN_GITHUB_NAME_LOWER} do not match ")
+			dk_error("PLUGIN_IMPORT_NAME_LOWER:${PLUGIN_IMPORT_NAME_LOWER} and PLUGIN_GITHUB_NAME_LOWER:${PLUGIN_GITHUB_NAME_LOWER} do not match ")
 		endif()
 	endif()
 	
