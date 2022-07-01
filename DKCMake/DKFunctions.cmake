@@ -1063,6 +1063,7 @@ function(dk_getDirectory path RESULT)
 endfunction()
 
 
+# FIXME:  not working
 ###############################################################################
 # dk_getFilename(path RESULT)
 #
