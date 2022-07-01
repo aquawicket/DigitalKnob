@@ -62,7 +62,7 @@ dk_load(DKVariables)
 dk_load(DKDisabled)
 
 dk_load(dk_findLibrary)
-dk_load(dk_import2)
+dk_load(dk_importVariables)
 
 
 
