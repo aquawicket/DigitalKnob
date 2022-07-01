@@ -17,7 +17,22 @@
 #				  4. Supplied by user in dk_import() call   I.E. dk_import(url PLUGIN MyLib)
 #	plugin_path - The full path to the plugin
 #		obtained: 1. from current cmake directory
-
+macro(dk_getParameter name RESULT)
+	dk_debug("dk_getParameter(${name}}")
+	set(index 0)
+	foreach(arg ${ARGV})
+		math(EXPR index ${index}+1)
+		if("${arg}" STREQUAL "${name}")
+			dk_debug(arg)
+			dk_debug(name)
+			if(ARGV${index})
+				dk_debug(ARGV${index})
+				set(${RESULT} ${ARGV${index}})
+				dk_debug(${${RESULT}})
+			endif()
+		endif()
+	endforeach()
+endmacro()
 ###############################################################################
 # dk_import2(url)
 #
@@ -55,7 +70,10 @@ function(dk_importVariables PLUGIN_URL)
 	# PLUGIN_INSTALL_VERSION	- from PLUGIN_URL_FILE_LOWER and PLUGIN_IMPORT_NAME_LOWER
 	# PLUGIN_INSTALL_FULLNAME
 	# PLUGIN_INSTALL_PATH		- from PLUGIN_URL_FILE and PLUGIN_INSTALL_VERSION
-	
+	dk_getParameter(PLUGIN_INSTALL_PATH PLUGIN_INSTALL_PATH)
+	if(PLUGIN_INSTALL_PATH)
+		dk_assert(PLUGIN_INSTALL_PATH)
+	endif()
 	
 	if(PLUGIN_URL)																# PLUGIN_URL
 		get_filename_component(PLUGIN_URL_FILENAME ${PLUGIN_URL} NAME)			# PLUGIN_URL_FILENAME
@@ -131,9 +149,7 @@ function(dk_importVariables PLUGIN_URL)
 	if(3RDPARTY)
 		set(PLUGIN_INSTALL_PATH ${3RDPARTY}/${PLUGIN_INSTALL_FULLNAME})					# PLUGIN_INSTALL_PATH
 	endif()
-	
-	
-			
+		
 	dk_debug(PLUGIN_URL)
 	dk_debug(PLUGIN_URL_LIST)
 	dk_debug(PLUGIN_URL_LENGTH)
