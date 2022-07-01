@@ -17,22 +17,8 @@
 #				  4. Supplied by user in dk_import() call   I.E. dk_import(url PLUGIN MyLib)
 #	plugin_path - The full path to the plugin
 #		obtained: 1. from current cmake directory
-macro(dk_getParameter name RESULT)
-	dk_debug("dk_getParameter(${name}}")
-	set(index 1)
-	foreach(arg ${ARGV})
-		math(EXPR index ${index}+1)
-		if("${arg}" STREQUAL "${name}")
-			dk_debug(arg)
-			dk_debug(name)
-			if(ARGV${index})
-				dk_debug(ARGV${index})
-				set(${RESULT} ${ARGV${index}})
-				dk_debug(${${RESULT}})
-			endif()
-		endif()
-	endforeach()
-endmacro()
+
+
 ###############################################################################
 # dk_import2(url)
 #
@@ -68,34 +54,14 @@ function(dk_importVariables PLUGIN_URL)
 	
 	# PLUGIN_INSTALL_NAME
 	# PLUGIN_INSTALL_VERSION	- from PLUGIN_URL_FILE_LOWER and PLUGIN_IMPORT_NAME_LOWER
-	# PLUGIN_INSTALL_FULLNAME
+	# PLUGIN_INSTALL_FOLDER
 	# PLUGIN_INSTALL_PATH		- from PLUGIN_URL_FILE and PLUGIN_INSTALL_VERSION
 	dk_getParameter(NAME PLUGIN_INSTALL_NAME)
 	dk_getParameter(VERSION PLUGIN_INSTALL_VERSION)
-	dk_getParameter(FULLNAME PLUGIN_INSTALL_FULLNAME)
+	dk_getParameter(FOLDER PLUGIN_INSTALL_FOLDER)
 	dk_getParameter(PATH PLUGIN_INSTALL_PATH)
 	dk_getParameter(BRANCH PLUGIN_GIT_BRANCH)
 	dk_getParameter(TAG PLUGIN_GIT_TAG)
-	
-	(PLUGIN_URL_FILENAME)
-	(PLUGIN_URL_EXTENSION)
-	(PLUGIN_URL_FILE)
-	(PLUGIN_URL_FILE_LOWER)
-	(PLUGIN_URL_FILE_UPPER)
-	(PLUGIN_URL_LENGTH)
-	(PLUGIN_IMPORT)
-	(PLUGIN_IMPORT_PATH)
-	(PLUGIN_IMPORT_NAME)
-	(PLUGIN_IMPORT_NAME_LOWER)
-	(PLUGIN_IMPORT_NAME_UPPER)
-	(PLUGIN_GIT)
-	(PLUGIN_GIT_FILENAME)
-	(PLUGIN_GIT_NAME)
-	(PLUGIN_GIT_NAME_LOWER)
-	(PLUGIN_GIT_NAME_UPPER)
-	(PLUGIN_GIT_BRANCH)
-	(PLUGIN_GIT_TAG)
-	(PLUGIN_INSTALL)
 	
 	if(PLUGIN_URL)																# PLUGIN_URL
 		get_filename_component(PLUGIN_URL_FILENAME ${PLUGIN_URL} NAME)			# PLUGIN_URL_FILENAME
@@ -134,7 +100,8 @@ function(dk_importVariables PLUGIN_URL)
 	if(PLUGIN_GIT)
 		list(GET PLUGIN_URL_LIST 4 PLUGIN_GIT_FILENAME)							# PLUGIN_GIT_FILENAME
 		string(REPLACE ".git" "" PLUGIN_GIT_NAME ${PLUGIN_GIT_FILENAME})		# PLUGIN_GIT_NAME
-		dk_getGitBranchName(${PLUGIN_URL} PLUGIN_GIT_BRANCH)					# PLUGIN_GIT_BRANCH
+		#dk_getGitBranchName(${PLUGIN_URL} PLUGIN_GIT_BRANCH)					# PLUGIN_GIT_BRANCH
+		dk_set(PLUGIN_GIT_BRANCH master)
 	endif()
 	if(PLUGIN_GIT_NAME)
 		string(TOLOWER ${PLUGIN_GIT_NAME} PLUGIN_GIT_NAME_LOWER)				# PLUGIN_GIT_NAME_LOWER
@@ -142,6 +109,10 @@ function(dk_importVariables PLUGIN_URL)
 	endif()
 	
 	### PLUGIN_INSTALL VARIABLES ###
+	if(NOT PLUGIN_INSTALL_URL)
+		set(PLUGIN_INSTALL_URL ${PLUGIN_URL})
+	endif()
+	
 	if(NOT PLUGIN_INSTALL_NAME)
 		if(PLUGIN_GIT_NAME)
 			set(PLUGIN_INSTALL_NAME ${PLUGIN_GIT_NAME})
@@ -170,48 +141,59 @@ function(dk_importVariables PLUGIN_URL)
 		endif()
 	endif()																				# PLUGIN_INSTALL_VERSION
 
-	if(NOT PLUGIN_INSTALL_FULLNAME)		
+	if(NOT PLUGIN_INSTALL_FOLDER)		
 		if(PLUGIN_INSTALL_VERSION)
-			set(PLUGIN_INSTALL_FULLNAME ${PLUGIN_INSTALL_NAME}-${PLUGIN_INSTALL_VERSION})	# PLUGIN_INSTALL_FULLNAME
+			set(PLUGIN_INSTALL_FOLDER ${PLUGIN_INSTALL_NAME}-${PLUGIN_INSTALL_VERSION})	# PLUGIN_INSTALL_FOLDER
+		endif()
+	endif()
+	
+	if(NOT PLUGIN_INSTALL_URL)
+		if(3RDPARTY)
+			set(PLUGIN_INSTALL_URL ${PLUGIN_URL})					# PLUGIN_INSTALL_PATH
 		endif()
 	endif()
 	
 	if(NOT PLUGIN_INSTALL_PATH)
 		if(3RDPARTY)
-			set(PLUGIN_INSTALL_PATH ${3RDPARTY}/${PLUGIN_INSTALL_FULLNAME})					# PLUGIN_INSTALL_PATH
+			set(PLUGIN_INSTALL_PATH ${3RDPARTY}/${PLUGIN_INSTALL_FOLDER})					# PLUGIN_INSTALL_PATH
 		endif()
 	endif()
 	
+	if(NOT PLUGIN_INSTALL_BRANCH)
+		set(PLUGIN_INSTALL_BRANCH "master")
+	endif()
+	
 	dk_debug(PLUGIN_URL)
-	#dk_debug(PLUGIN_URL_LIST)
-	#dk_debug(PLUGIN_URL_LENGTH)
-	#dk_debug(PLUGIN_URL_NODE0)
-	#dk_debug(PLUGIN_URL_NODE1)
-	#dk_debug(PLUGIN_URL_NODE2)
-	#dk_debug(PLUGIN_URL_NODE3)
-	#dk_debug(PLUGIN_URL_NODE4)
-	#dk_debug(PLUGIN_URL_NODE5)
-	#dk_debug(PLUGIN_URL_FILENAME)
-	#dk_debug(PLUGIN_URL_EXTENSION)
-	#dk_debug(PLUGIN_URL_FILE)
-	#dk_debug(PLUGIN_URL_FILE_LOWER)
-	#dk_debug(PLUGIN_URL_FILE_UPPER)
-	#dk_debug(PLUGIN_URL_LENGTH)
-	#dk_debug(PLUGIN_IMPORT)
-	#dk_debug(PLUGIN_IMPORT_PATH)
-	#dk_debug(PLUGIN_IMPORT_NAME)
-	#dk_debug(PLUGIN_IMPORT_NAME_LOWER)
-	#dk_debug(PLUGIN_IMPORT_NAME_UPPER)
-	#dk_debug(PLUGIN_GIT)
-	#dk_debug(PLUGIN_GIT_FILENAME)
-	#dk_debug(PLUGIN_GIT_NAME)
-	#dk_debug(PLUGIN_GIT_NAME_LOWER)
-	#dk_debug(PLUGIN_GIT_NAME_UPPER)
-	#dk_debug(PLUGIN_GIT_BRANCH)
-	#dk_debug(PLUGIN_INSTALL)
+	dk_debug(PLUGIN_URL_LIST)
+	dk_debug(PLUGIN_URL_LENGTH)
+	dk_debug(PLUGIN_URL_NODE0)
+	dk_debug(PLUGIN_URL_NODE1)
+	dk_debug(PLUGIN_URL_NODE2)
+	dk_debug(PLUGIN_URL_NODE3)
+	dk_debug(PLUGIN_URL_NODE4)
+	dk_debug(PLUGIN_URL_NODE5)
+	dk_debug(PLUGIN_URL_FILENAME)
+	dk_debug(PLUGIN_URL_EXTENSION)
+	dk_debug(PLUGIN_URL_FILE)
+	dk_debug(PLUGIN_URL_FILE_LOWER)
+	dk_debug(PLUGIN_URL_FILE_UPPER)
+	dk_debug(PLUGIN_URL_LENGTH)
+	dk_debug(PLUGIN_IMPORT)
+	dk_debug(PLUGIN_IMPORT_PATH)
+	dk_debug(PLUGIN_IMPORT_NAME)
+	dk_debug(PLUGIN_IMPORT_NAME_LOWER)
+	dk_debug(PLUGIN_IMPORT_NAME_UPPER)
+	dk_debug(PLUGIN_GIT)
+	dk_debug(PLUGIN_GIT_FILENAME)
+	dk_debug(PLUGIN_GIT_NAME)
+	dk_debug(PLUGIN_GIT_NAME_LOWER)
+	dk_debug(PLUGIN_GIT_NAME_UPPER)
+	dk_debug(PLUGIN_GIT_BRANCH)
+	dk_debug(PLUGIN_GIT_TAG)
+	dk_debug(PLUGIN_INSTALL)
 	dk_debug(PLUGIN_INSTALL_NAME)
 	dk_debug(PLUGIN_INSTALL_VERSION)
-	dk_debug(PLUGIN_INSTALL_FULLNAME)
+	dk_debug(PLUGIN_INSTALL_FOLDER)
 	dk_debug(PLUGIN_INSTALL_PATH)
 	
 	if(PLUGIN_IMPORT AND PLUGIN_GIT)
@@ -220,8 +202,30 @@ function(dk_importVariables PLUGIN_URL)
 		endif()
 	endif()
 	
-	
-	
+	if(PLUGIN_INSTALL_URL)
+		dk_set(${PLUGIN_INSTALL_NAME}_URL ${PLUGIN_INSTALL_PATH_URL})
+	endif()
+	if(PLUGIN_INSTALL_PATH)
+		dk_set(${PLUGIN_INSTALL_NAME} ${PLUGIN_INSTALL_PATH})
+	endif()
+	if(PLUGIN_INSTALL_VERSION)
+		dk_set(${PLUGIN_INSTALL_NAME}_VERSION ${PLUGIN_INSTALL_VERSION})
+	endif()
+	if(PLUGIN_INSTALL_FOLDER)
+		dk_set(${PLUGIN_INSTALL_NAME}_FOLDER ${PLUGIN_INSTALL_FOLDER})
+	endif()
+	if(PLUGIN_INSTALL_PATH)
+		dk_set(${PLUGIN_INSTALL_NAME}_PATH ${PLUGIN_INSTALL_PATH})
+	endif()
+	if(PLUGIN_INSTALL_BRANCH)
+		dk_set(${PLUGIN_INSTALL_NAME}_BRANCH ${PLUGIN_INSTALL_BRANCH})
+	endif()
+	dk_debug("[${PLUGIN_INSTALL_NAME}] = ${${PLUGIN_INSTALL_NAME}}")
+	dk_debug("[${PLUGIN_INSTALL_NAME}_URL] = ${${PLUGIN_INSTALL_NAME}_URL}")
+	dk_debug("[${PLUGIN_INSTALL_NAME}_VERSION] = ${${PLUGIN_INSTALL_NAME}_VERSION}")
+	dk_debug("[${PLUGIN_INSTALL_NAME}_FOLDER] = ${${PLUGIN_INSTALL_NAME}_FOLDER}")
+	dk_debug("[${PLUGIN_INSTALL_NAME}_PATH] = ${${PLUGIN_INSTALL_NAME}_PATH}")
+	dk_debug("[${PLUGIN_INSTALL_NAME}_BRANCH] = ${${PLUGIN_INSTALL_NAME}_BRANCH}")
 endfunction()
 
 
