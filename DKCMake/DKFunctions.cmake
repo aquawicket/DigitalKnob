@@ -1102,7 +1102,14 @@ function(dk_getExtension path RESULT)
 	if(${index} EQUAL -1)
 		return() # no extension found
 	endif()
-	string(SUBSTRING ${path} ${index} -1 ext) 
+	string(SUBSTRING ${path} ${index} -1 ext)
+
+	#look for .tar
+	math(EXPR tar ${index}-4)
+	string(SUBSTRING ${path} ${tar} -1 tarext)
+	if("${tarext}" STREQUAL ".tar${ext}")
+		set(ext ${tarext})
+	endif()
     set(${RESULT} ${ext} PARENT_SCOPE)
 endfunction()
 
@@ -3854,7 +3861,10 @@ function(dk_removeExtension path RESULT)
 		endif()
 		return()
 	endif()
-	string(SUBSTRING ${path} 0 ${includes} fileNameNoExt) 
+	
+	dk_getExtension(${path} ext)
+	string(REPLACE ${ext} "" fileNameNoExt ${path}) 
+	#string(SUBSTRING ${path} 0 ${includes} fileNameNoExt)
     set(${RESULT} ${fileNameNoExt} PARENT_SCOPE)
 endfunction()
 

@@ -55,7 +55,7 @@ function(dk_import2 PLUGIN_URL)
 	endif()
 	if(PLUGIN_NAME)
 		string(TOLOWER ${PLUGIN_NAME} PLUGIN_NAME_LOWER)					# PLUGIN_NAME_LOWER
-		string(TOUPPER ${PLUGIN_NAME} PLUGIN_NAME_LOWER)					# PLUGIN_NAME_UPPER
+		string(TOUPPER ${PLUGIN_NAME} PLUGIN_NAME_UPPER)					# PLUGIN_NAME_UPPER
 	endif()
 	if(PLUGIN_URL)
 		get_filename_component(PLUGIN_URL_FILENAME ${PLUGIN_URL} NAME)		# PLUGIN_URL_FILENAME
@@ -75,7 +75,6 @@ function(dk_import2 PLUGIN_URL)
 		set(index 0)
 		foreach(PLUGIN_URL_ITEM ${PLUGIN_URL_LIST})							# PLUGIN_URL_ITEM
 			set(PLUGIN_URL_NODE${index} ${PLUGIN_URL_ITEM})					# PLUGIN_URL_NODE(n)
-			dk_debug(PLUGIN_URL_NODE${index})
 			math(EXPR index ${index}+1)
 		endforeach()
 		list(LENGTH PLUGIN_URL_LIST PLUGIN_URL_LENGTH)						# PLUGIN_URL_LENGTH
