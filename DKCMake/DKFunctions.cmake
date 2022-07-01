@@ -3880,6 +3880,7 @@ endfunction()
 #	@RESULT		- TODO
 #
 function(dk_getAppName path RESULT)
+	DKDEBUGFUNC(${ARGV})
 	dk_getFilename(${path} fileName)
 	dk_removeExtension(${fileName} fileNameNoExt)
 	dk_debug(fileNameNoExt)
@@ -3895,6 +3896,7 @@ endfunction()
 #	@url		- TODO
 #
 function(dk_createPlugin url)
+	DKDEBUGFUNC(${ARGV})
 	dk_todo() #TODO
 	dk_getAppName(${url} App_Name)
 	dk_debug(App_Name)					# My_App
@@ -3909,5 +3911,19 @@ function(dk_createPlugin url)
 endfunction()
 
 
+###############################################################################
+# dk_getGitBranchName(url RESULT)
+#
+#	TODO
+#
+#	@url		- TODO
+#
+#	https://stackoverflow.com/a/31919435
+#
+function(dk_getGitBranchName url RESULT)
+	DKDEBUGFUNC(${ARGV})
+	execute_process(COMMAND ${GIT_EXE} ls-remote ${url} heads/* RESULT_VARIABLE result OUTPUT_VARIABLE output)
+	set(${RESULT} ${output} PARENT_SCOPE)
+endfunction()	
 
 include(${DKFunctions_ext})
