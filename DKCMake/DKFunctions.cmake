@@ -1192,7 +1192,7 @@ endfunction()
 
 
 ###############################################################################
-# dk_install(url_path dest_path) #plugin #PATCH
+# dk_install(plugin)
 #
 #	Install a 3rdParty library, executable or package
 #	For archive files such as libraries and assets, the arguments are:  The download url_path, the name of its _DKIMPORTS folder, The name given to the installed 3rdParty/folder  
@@ -3998,5 +3998,62 @@ function(dk_getGitBranchName url RESULT)
 	execute_process(COMMAND ${GIT_EXE} ls-remote ${url} heads/* RESULT_VARIABLE result OUTPUT_VARIABLE output)
 	set(${RESULT} ${output} PARENT_SCOPE)
 endfunction()	
+
+
+###############################################################################
+# dk_printArgData()
+#
+#	TODO
+#
+macro(dk_printArgData)
+	dk_debug(" ")
+	dk_debug(" ")
+	dk_debug("************************************************************")
+	dk_debug("	dk_import2(${ARGV})")
+	dk_debug(" ")
+	dk_debug(CMAKE_CURRENT_LIST_DIR)
+	dk_debug("*** ARG Variables ***")
+	dk_debug(ARGC)
+	dk_debug(ARGN)
+	dk_debug(ARGV)	
+	dk_debug(ARGV0)
+	dk_debug(ARGV1)
+	math(EXPR ARGC_LAST "${ARGC}-1")
+	dk_debug(ARGC_LAST)
+	set(ARGV_LAST ${ARGV${ARGC_LAST}})
+	dk_debug(ARGV_LAST)
+	dk_debug(" ")
+endmacro()
+
+
+###############################################################################
+# dk_printUrlData(url)
+#
+#	TODO
+#
+#	@url		- TODO
+#
+function(dk_printUrlData url)
+	if(NOT url)
+		dk_assert("url invalid")
+	endif()
+	dk_debug("*** url Variables ***")
+	dk_debug(url)
+	string(REPLACE "/" ";" PLUGIN_URL_LIST ${url}) # seperate the url nodes into a list 
+	dk_debug(PLUGIN_URL_LIST)
+	list(LENGTH PLUGIN_URL_LIST PLUGIN_URL_LENGTH)
+	dk_debug(PLUGIN_URL_LENGTH)
+	set(n -1)
+	foreach(PLUGIN_URL_ITEM ${PLUGIN_URL_LIST})
+		math(EXPR n "${n}+1")
+		set(url_${n} ${PLUGIN_URL_ITEM})
+		dk_debug(url_${n})
+		set(url_last ${url_${n}})
+	endforeach()
+	dk_debug(url_last)
+	dk_getFileType(${url} url_filetype)
+	dk_debug(url_filetype)
+endfunction()
+
 
 include(${DKFunctions_ext})
