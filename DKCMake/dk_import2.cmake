@@ -70,10 +70,11 @@ function(dk_import2 PLUGIN_URL)
 	endif()
 	if(PLUGIN_URL_LIST)
 		# split the url into list converting / to divider ;
-		set(index 0 )
+		set(index 0)
 		foreach(PLUGIN_URL_ITEM ${PLUGIN_URL_LIST})							# PLUGIN_URL_ITEM
 			set(PLUGIN_URL_NODE${index} ${PLUGIN_URL_ITEM})					# PLUGIN_URL_NODE(n)
-			dk_debug(${PLUGIN_URL_NODE${index}})
+			dk_debug(PLUGIN_URL_NODE${index})
+			math(EXPR index ${index}+1)
 		endforeach()
 		list(LENGTH PLUGIN_URL_LIST PLUGIN_URL_LENGTH)						# PLUGIN_URL_LENGTH
 	endif()
@@ -127,11 +128,10 @@ function(dk_import2 PLUGIN_URL)
 	dk_debug(PLUGIN_GITHUB_FILENAME)
 	dk_debug(PLUGIN_GITHUB_NAME)
 	dk_debug(PLUGIN_VERSION)
+	dk_debug(PLUGIN_INSTALL_NAME)
+	dk_debug(PLUGIN_INSTALL_PATH)
 	
-	## Create Plugin Variables
-	
-	
-	
+	## Create Plugin Variables	
 endfunction()
 
 
