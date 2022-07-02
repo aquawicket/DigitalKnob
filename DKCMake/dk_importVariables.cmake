@@ -28,7 +28,8 @@
 #
 function(dk_importVariables PLUGIN_URL RESULT)
 	DKDEBUGFUNC(${ARGV})
-
+	dk_debug("dk_importVariables(${ARGV})")
+	dk_debug("dk_importVariables(${ARGN})")
 	### POPULATE VARIABLES ###
 	# PLUGIN_URL				- from arguments
 	# PLUGIN_URL_LIST

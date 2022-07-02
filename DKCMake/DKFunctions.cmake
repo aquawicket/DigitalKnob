@@ -82,17 +82,17 @@ endfunction()
 #	@name		-The input MARKER name for the parameter
 #	RESULT		-The value of the next parameter after the ID
 macro(dk_getParameter name RESULT)
-	#dk_debug("dk_getParameter(${name}}")
+	dk_debug("dk_getParameter(${name})")
 	set(index 0)
 	foreach(arg ${ARGN})
 		math(EXPR index ${index}+1)
 		if(${arg} STREQUAL ${name})
-			#dk_debug(arg)
-			#dk_debug(name)
+			dk_debug(arg)
+			dk_debug(name)
 			if(ARGV${index})
-				#dk_debug(ARGV${index})
+				dk_debug(ARGV${index})
 				set(${RESULT} ${ARGV${index}})
-				#dk_debug(${${RESULT}})
+				dk_debug(${${RESULT}})
 			endif()
 		endif()
 	endforeach()
@@ -1204,7 +1204,7 @@ endfunction()
 #	PATCH				-Patch the install directory with files from the DKIMPORT path
 #
 function(dk_install plugin) #PATCH
-	DKDEBUGFUNC(${ARGV})
+	DKDEBUGFUNC(${ARGV} FORCE)
 	
 	set(dest_path ${${plugin}})
 	set(url_path ${${plugin}_URL})
@@ -1228,11 +1228,12 @@ function(dk_install plugin) #PATCH
 		dk_assert("ERROR: dk_install() (${DKIMPORTS}/${plugin}) does not exist")
 	endif()
 	
-	
 	if(EXISTS ${dest_path}/installed)
 		dk_info("${plugin} already installed")
-		string(FIND "${ARGN}" "PATCH" index)
-		if(${index} GREATER -1)
+		#string(FIND "${ARGN}" "PATCH" index)
+		#if(${index} GREATER -1)
+		dk_includes("${ARGN}" "PATCH" hadPATCH)
+		if(${hadPATCH})
 			dk_patch(${plugin} ${dest_path})
 		endif()
 		return()
