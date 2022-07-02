@@ -30,7 +30,7 @@ dk_depend(tiff)
 dk_depend(sdl)
 
 
-dk_import(https://github.com/libsdl-org/SDL_image.git main PATCH)
+dk_import(https://github.com/libsdl-org/SDL_image.git BRANCH main PATCH)
 
 
 ### DKPLUGINS LINK ###
