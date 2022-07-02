@@ -35,11 +35,10 @@ dk_import(https://github.com/libsdl-org/SDL_image.git BRANCH main PATCH)
 
 ### DKPLUGINS LINK ###
 dk_include				(${SDL_IMAGE})
-#WIN_dk_libDebug		(${SDL_IMAGE}/${OS}/lib/${DEBUG_DIR}/SDL_image.lib)
-#WIN_dk_libRelease		(${SDL_IMAGE}/${OS}/lib/${RELEASE_DIR}/SDL_image.lib)
-
-WIN_dk_libDebug			(${SDL_IMAGE}/${OS}/${DEBUG_DIR}/SDL2_image-staticd.lib)
-WIN_dk_libRelease		(${SDL_IMAGE}/${OS}/${RELEASE_DIR}/SDL2_image-static.lib)
+WIN_dk_libDebug			(${SDL_IMAGE}/${OS}/lib/${DEBUG_DIR}/SDL_image.lib)
+WIN_dk_libRelease		(${SDL_IMAGE}/${OS}/lib/${RELEASE_DIR}/SDL_image.lib)
+#WIN_dk_libDebug		(${SDL_IMAGE}/${OS}/${DEBUG_DIR}/SDL2_image-staticd.lib)
+#WIN_dk_libRelease		(${SDL_IMAGE}/${OS}/${RELEASE_DIR}/SDL2_image-static.lib)
 APPLE_dk_libDebug		(${SDL_IMAGE}/${OS}/lib/Debug/SDL_image.a)
 APPLE_dk_libRelease		(${SDL_IMAGE}/${OS}/lib/Release/SDL_image.a)
 LINUX_dk_libDebug		(${SDL_IMAGE}/${OS}/${DEBUG_DIR}/lib/SDL_image.a)
@@ -85,3 +84,6 @@ dk_xcode					(${SDL_IMAGE_NAME} SDLIMAGE)
 LINUX_dk_queueCommand		(make SDL2_image)
 RASPBERRY_dk_queueCommand	(make SDL2_image)	
 #ANDROID_dk_visualStudio	(${SDL_IMAGE_NAME} SDL2_image.sln SDL2_image)
+
+# fatal error LNK1104: cannot open file 'C:\Users\Administrator\digitalknob\DK\3rdParty\sdl_image-main\win32\Debug\SDL2_image-staticd.lib'
+# C:\Users\Administrator\digitalknob\DK\3rdParty\SDL_image-main\win32\lib\Debug
