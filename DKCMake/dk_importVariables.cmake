@@ -170,7 +170,11 @@ function(dk_importVariables PLUGIN_URL RESULT)
 	endif()
 	
 	if(NOT PLUGIN_INSTALL_BRANCH)
-		set(PLUGIN_INSTALL_BRANCH "master")
+		if(PLUGIN_GIT_BRANCH)
+			set(PLUGIN_INSTALL_BRANCH ${PLUGIN_GIT_BRANCH})
+		else()
+			set(PLUGIN_INSTALL_BRANCH master)
+		endif()
 	endif()
 	
 	#dk_debug(PLUGIN_URL)
