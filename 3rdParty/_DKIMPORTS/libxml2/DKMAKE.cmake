@@ -15,8 +15,8 @@ dk_import(https://github.com/GNOME/libxml2/archive/f2ad86fa600885429a6083aaf6926
 dk_include			(${LIBXML2})
 dk_include			(${LIBXML2}/include)
 dk_include			(${LIBXML2}/${OS})
-WIN_dk_libDebug		(${LIBXML2}/${OS}/${DEBUG_DIR}/libxml2sd.lib)
-WIN_dk_libRelease	(${LIBXML2}/${OS}/${RELEASE_DIR}/libxml2s.lib)
+WIN_dk_libDebug		(${LIBXML2}/${OS}/${DEBUG_DIR}/xml2.lib)
+WIN_dk_libRelease	(${LIBXML2}/${OS}/${RELEASE_DIR}/xml2.lib)
 UNIX_dk_libDebug	(${LIBXML2}/${OS}/${DEBUG_DIR}/libxml2.a)
 UNIX_dk_libRelease	(${LIBXML2}/${OS}/${RELEASE_DIR}/libxml2.a)
 
@@ -43,3 +43,6 @@ dk_visualStudio				(${LIBXML2_NAME} xml2.sln xml2)
 dk_xcode					(${LIBXML2_NAME} xml2)
 LINUX_dk_queueCommand		(make xml2)
 RASPBERRY_dk_queueCommand	(make xml2)
+
+
+# fatal error LNK1104: cannot open file 'C:\Users\Administrator\digitalknob\DK\3rdParty\libxml2-f2ad86fa600885429a6083aaf6926c7e2e5b24d6\win32\Debug\libxml2sd.lib'
