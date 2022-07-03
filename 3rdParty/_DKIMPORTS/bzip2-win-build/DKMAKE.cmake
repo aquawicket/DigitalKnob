@@ -15,7 +15,7 @@ dk_import(https://github.com/kiyolee/bzip2-win-build.git)
 
 
 #if(NOT EXISTS ${BZIP2-WIN-BUILD}/copy)
-#	dk_copy(${BZIP2-WIN-BUILD} ${BZIP2-WIN-BUILD}/copy TRUE)
+#	dk_copy(${BZIP2-WIN-BUILD} ${BZIP2-WIN-BUILD}/copy OVERWRITE)
 #endif()
 
 
@@ -34,7 +34,7 @@ WIN_dk_set(BZIP2-WIN-BUILD_CMAKE -DBZIP2_INCLUDE_DIR=${BZIP2-WIN-BUILD} -DBZIP2_
 ### COMPILE ###
 if(WIN_32)
 	dk_define(BZ_NO_STDIO)
-	dk_copy(${BZIP2-WIN-BUILD}/build-VS2019 ${BZIP2-WIN-BUILD}/${OS} FALSE)
+	dk_copy(${BZIP2-WIN-BUILD}/build-VS2019 ${BZIP2-WIN-BUILD}/${OS})
 	dkFileReplace(${BZIP2-WIN-BUILD}/${OS}/bzip2-static/bzip2-static.vcxproj "v142" "v143")
 	dkFileReplace(${BZIP2-WIN-BUILD}/${OS}/libbz2-static/libbz2-static.vcxproj "v142" "v143")
 	WIN32_dk_setPath(${BZIP2-WIN-BUILD}/${OS})
@@ -43,11 +43,11 @@ endif()
 
 
 if(WIN_64)
-	dk_copy(${BZIP2-WIN-BUILD}/win32/bzip2.rc ${BZIP2-WIN-BUILD}/${OS}/bzip2.rc FALSE) #copy project files that came with bzip
-	dk_copy(${BZIP2-WIN-BUILD}/win32/bzip2recover.rc ${BZIP2-WIN-BUILD}/${OS}/bzip2recover.rc FALSE)
-	dk_copy(${BZIP2-WIN-BUILD}/win32/bzip2_version.h ${BZIP2-WIN-BUILD}/${OS}/bzip2_version.h FALSE)
-	dk_copy(${BZIP2-WIN-BUILD}/win32/libbz2.rc ${BZIP2-WIN-BUILD}/${OS}/libbz2.rc FALSE)
-	dk_copy(${BZIP2-WIN-BUILD}/build-VS2019 ${BZIP2-WIN-BUILD}/${OS} FALSE)
+	dk_copy(${BZIP2-WIN-BUILD}/win32/bzip2.rc ${BZIP2-WIN-BUILD}/${OS}/bzip2.rc) #copy project files that came with bzip
+	dk_copy(${BZIP2-WIN-BUILD}/win32/bzip2recover.rc ${BZIP2-WIN-BUILD}/${OS}/bzip2recover.rc)
+	dk_copy(${BZIP2-WIN-BUILD}/win32/bzip2_version.h ${BZIP2-WIN-BUILD}/${OS}/bzip2_version.h)
+	dk_copy(${BZIP2-WIN-BUILD}/win32/libbz2.rc ${BZIP2-WIN-BUILD}/${OS}/libbz2.rc)
+	dk_copy(${BZIP2-WIN-BUILD}/build-VS2019 ${BZIP2-WIN-BUILD}/${OS})
 	dkFileReplace(${BZIP2-WIN-BUILD}/${OS}/bzip2-static/bzip2-static.vcxproj "v142" "v143")
 	dkFileReplace(${BZIP2-WIN-BUILD}/${OS}/libbz2-static/libbz2-static.vcxproj "v142" "v143")
 	WIN64_dk_setPath(${BZIP2-WIN-BUILD}/${OS})

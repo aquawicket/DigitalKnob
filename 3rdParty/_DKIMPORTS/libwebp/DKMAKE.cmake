@@ -17,7 +17,7 @@ dk_import(https://github.com/webmproject/libwebp)
 #dk_set(LIBWEBP_NAME libwebp-${LIBWEBP_VERSION})
 #dk_set(LIBWEBP_DL https://github.com/webmproject/libwebp/archive/refs/tags/v1.0.3.zip)
 #dk_set(LIBWEBP ${3RDPARTY}/${LIBWEBP_NAME})
-#dk_install(${LIBWEBP_DL} libwebp ${LIBWEBP})
+#dk_import(${LIBWEBP_DL} ${LIBWEBP})
 
 
 ### DKPLUGINS LINK ###

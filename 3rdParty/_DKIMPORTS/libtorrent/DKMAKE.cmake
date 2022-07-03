@@ -15,7 +15,7 @@ dk_import(https://github.com/arvidn/libtorrent)
 #dk_set(TORRENT_NAME libtorrent-${TORRENT_VERSION})
 #dk_set(TORRENT_DL https://github.com/arvidn/libtorrent/archive/refs/tags/v${TORRENT_VERSION}.zip)
 #dk_set(TORRENT ${3RDPARTY}/${TORRENT_NAME})
-#dk_install(${TORRENT_DL} libtorrent ${TORRENT})
+#dk_install(${TORRENT_DL} ${TORRENT})
 
 
 ### LINK ###

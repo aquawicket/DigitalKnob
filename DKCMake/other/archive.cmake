@@ -21,6 +21,7 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
+include_guard()
 
 # Depeciated and archived cmake code
 
@@ -29,7 +30,7 @@
 #    # Run after all other rules within the target have been executed
 #    POST_BUILD
 #    COMMAND echo -e "\texecuting a POST_BUILD command"
-#    COMMENT "This command will be executed after building bar"
+#    COMMENT "This command will be executed after building target"
 #    VERBATIM
 #)
 
@@ -37,7 +38,7 @@
 #   # Run after all other rules within the target have been executed
 #    POST_BUILD
 #    COMMAND "${3RDPARTY}/upx-3.96/upx.exe" "-9 -v ${DKPROJECT}/${OS}/Release/${APP_NAME}.exe"
-#    COMMENT "This command will be executed after building bar"
+#    COMMENT "This command will be executed after building target"
 #    VERBATIM
 #)
 

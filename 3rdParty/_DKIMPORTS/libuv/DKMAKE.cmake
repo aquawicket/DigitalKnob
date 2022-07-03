@@ -10,7 +10,7 @@ dk_import(https://github.com/libuv/libuv/archive/2bc22c40eb68f3b38d1ae3ea68ef2f1
 #dk_set(LIBUV_NAME libuv-${LIBUV_VERSION})
 #dk_set(LIBUV_DL https://github.com/libuv/libuv/archive/refs/tags/v1.42.0.zip)
 #dk_set(LIBUV ${3RDPARTY}/${LIBUV_NAME})
-#dk_install(${LIBUV_DL} libuv ${LIBUV})
+#dk_import(${LIBUV_DL} ${LIBUV})
 
 
 

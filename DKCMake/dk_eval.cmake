@@ -3,7 +3,7 @@ include_guard()
 ###############################################################################
 # dk_eval(code)
 #
-# evals the specified cmake code.
+# 	evals the specified cmake code.
 # 	WARNING: there is no way to set(<var> <value> PARENT_SCOPE) because of the extra function scope defined by eval.
 # 	WARNING: allowing eval can of course be dangerous.
 #

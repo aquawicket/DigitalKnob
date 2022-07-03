@@ -1,6 +1,24 @@
 include_guard()
 
-# Set the system host variables
+### SETTINGS ##################################################################
+set(DKTODO_ENABLED				1		CACHE INTERNAL "")
+set(DKDEBUG_ENABLED				1		CACHE INTERNAL "")
+set(DKDEBUGFUNC_ENABLED			0		CACHE INTERNAL "")
+set(WAIT_ON_ERRORS				0		CACHE INTERNAL "")
+set(WAIT_ON_WARNINGS			0		CACHE INTERNAL "")
+set(HALT_ON_ERRORS				0		CACHE INTERNAL "")
+set(HALT_ON_WARNINGS			0		CACHE INTERNAL "")
+set(PRINT_CALL_DETAILS 			1		CACHE INTERNAL "")
+set(PRINT_FILE_NAMES 			1 		CACHE INTERNAL "")
+set(PRINT_LINE_NUMBERS 			1		CACHE INTERNAL "")
+set(PRINT_FUNCTION_NAMES 		1 		CACHE INTERNAL "")
+set(PRINT_FUNCTION_ ARGUMENTS 	1 		CACHE INTERNAL "")
+set(INSTALL_DKLIBS              0		CACHE INTERNAL "")
+set(BYPASS_DISABLE				0		CACHE INTERNAL "")
+
+
+
+# PRE DEFINED VARIABLES
 if(CMAKE_HOST_WIN32)
 	set(WIN_HOST 	TRUE 	CACHE INTERNAL "")
 endif()
@@ -13,8 +31,7 @@ if(CMAKE_HOST_UNIX AND NOT CMAKE_HOST_APPLE)
 	set(LINUX_HOST 	TRUE 	CACHE INTERNAL "")
 endif()
 
-
-# Set the DIGITALKNOB environment variable 
+# Set the DIGITALKNOB and DKCMAKE environment variables 
 get_filename_component(path ${CMAKE_SOURCE_DIR} ABSOLUTE)
 string(FIND "${path}" "digitalknob" pos)
 string(SUBSTRING ${path} 0 ${pos} path)
@@ -26,15 +43,13 @@ if(WIN_HOST)
 	execute_process(COMMAND cmd /c setx DIGITALKNOB ${DIGITALKNOB})
 	execute_process(COMMAND cmd /c setx DKCMAKE ${DKCMAKE})
 endif()
-#message(STATUS "DIGITALKNOB = ${DIGITALKNOB}")
-#message(STATUS "DKCMAKE = ${DKCMAKE}")
-#message(STATUS "ENV{DIGITALKNOB} = $ENV{DIGITALKNOB}")
-#message(STATUS "ENV{DKCMAKE} = $ENV{DKCMAKE}")
 
 
-# include dk funtions
+
+# FUNCTIONS 
 include(${DKCMAKE}/dk_call.cmake)
 dk_load(dk_debugFunc)
+dk_load(dk_message)
 dk_load(dk_assert)
 dk_load(dk_error)
 dk_load(dk_warn)
@@ -42,8 +57,15 @@ dk_load(dk_info)
 dk_load(dk_debug)
 dk_load(dk_verbose)
 dk_load(dk_trace)
-
 dk_load(DKFunctions)
 dk_load(DKFileSystem)
 dk_load(DKVariables)
 dk_load(DKDisabled)
+
+dk_load(dk_findLibrary)
+dk_load(dk_importVariables)
+
+
+
+# POST DEFINED VARIABLES
+

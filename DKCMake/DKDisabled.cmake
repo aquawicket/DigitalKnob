@@ -24,16 +24,12 @@
 include_guard()
 
 
-#dk_disable(DKFmt)
-#dk_disable(fmt)
-dk_disable(tiff)
-dk_disable(msys2)
-
 # DISABLED FOR ALL
 dk_disable(_TEMPLATE-APP_)
 dk_disable(_TEMPLATE-LIB_)
 dk_disable(android-java-tools)
 dk_disable(astyle)
+dk_disable(bullet3)
 dk_disable(conio-for-linux)
 dk_disable(DKJerryscript)
 dk_disable(DKOFWindow)
@@ -57,6 +53,7 @@ dk_disable(DKPlugin2)
 dk_disable(DKRestart)
 dk_disable(DKScreenRecorder)
 dk_disable(DKSDLAudio)
+#dk_disable(DKSDLText)
 dk_disable(DKSDLWav)
 dk_disable(DKSDLVideo)
 dk_disable(DKSFMLRml)               # incomplete
@@ -71,6 +68,7 @@ dk_disable(ffmpeg-dev)
 dk_disable(ffmpeg-shared)
 dk_disable(ffmpeg-static)
 dk_disable(gradle)
+dk_disable(java)
 dk_disable(jpeg)                     # using libjpeg_turbo instead
 dk_disable(libcaca)
 dk_disable(librocket)                # replaced with RmlUi
@@ -78,19 +76,20 @@ dk_disable(libvncserver)
 dk_disable(libvncserver-master-win)
 dk_disable(libx11)
 dk_disable(miniweb)
+dk_disable(msys2)
 dk_disable(notepadpp)
+dk_disable(opencv)					#WORKING, just disabled because it takes so long to compile
 dk_disable(openframeworks)
 dk_disable(openscenegraph)          # Openscenegraph
 dk_disable(osgaudio)                # Openscenegraph
 dk_disable(osgbullet)               # Openscenegraph
 dk_disable(osgworks)                # Openscenegraph
-dk_disable(sdl2_gif)                # my use SDL_Image animation
+dk_disable(php-src)
+dk_disable(sdl2_gif)                # use SDL_Image animation
 dk_disable(sdl2_giflib_sa)          # updated version of sdl2_gif
+dk_disable(sdl_ttf)
 dk_disable(simple-getch)            # kept for reference
-
-
-# Temporarily disabled
-dk_disable(opencv)  #WORKING, just disabled because it takes so long to compile
+dk_disable(tiff)
 
 
 if(NOT WIN_HOST) # Disabled on Non-Windows host machines
@@ -102,8 +101,6 @@ if(NOT WIN_HOST) # Disabled on Non-Windows host machines
 endif()
 if(WIN) # Disabled for Windows targets
 	dk_disable(build-essential)
-	#dk_disable(bzip2)
-	#dk_disable(DKFmt)
 	dk_disable(DKOcr)
 	dk_disable(DKWebSockets)
 	dk_disable(freealut)
@@ -183,7 +180,6 @@ if(IOS OR IOSSIM)
 	dk_disable(boxer)
 	dk_disable(bzip2)
 	dk_disable(cef_binary)
-	#dk_disable(DKArchive)
 	dk_disable(DKCef)
 	dk_disable(DKCefChild)
 	dk_disable(DKMidi)
@@ -204,7 +200,6 @@ if(IOS OR IOSSIM)
 	dk_disable(jdk9)
 	dk_disable(jdk11)
 	dk_disable(jerryscript)
-	#dk_disable(libarchive)
 	dk_disable(libgtkglext1-dev)
 	dk_disable(libiconv)
 	dk_disable(libmd)
@@ -225,7 +220,6 @@ if(IOS OR IOSSIM)
 	dk_disable(podofo)
 	dk_disable(rtmidi)
 	dk_disable(sdl-gpu)
-	#dk_disable(sdl2_mixer)
 	dk_disable(sfml)
 	dk_disable(smpeg2)
 	dk_disable(tesseract)
@@ -281,7 +275,6 @@ if(LINUX) # Disabled for Linux targets
 	dk_disable(openssl)
 	dk_disable(podofo)
 	dk_disable(sdl-gpu)
-	#dk_disable(sdl2_mixer)
 	dk_disable(sfml)           # sfml_sfml-network)  #TODO: disabling individual sublibraries
 	dk_disable(stackwalker)
 	dk_disable(tesseract)
@@ -317,7 +310,6 @@ if(RASPBERRY) # Disabled for Raspberry Pi targets
 	dk_disable(podofo)
 	dk_disable(python)
 	dk_disable(sdl-gpu)
-	#dk_disable(sdl2_mixer)
 	dk_disable(stackwalker)
 	dk_disable(tesseract)
 	dk_disable(upx)
@@ -336,17 +328,13 @@ if(ANDROID) # Disabled for Android targets
 	dk_disable(DKCefChild)
 	dk_disable(DKCurl)
 	dk_disable(DKWebSockets)
-	#dk_disable(DKDom)
 	dk_disable(DKHandles)
 	dk_disable(DKHook)        # NOTE: this has linux functions too
 	dk_disable(DKMidi)
 	dk_disable(DKMySql)
 	dk_disable(DKOcr)
-	#dk_disable(DKRml)
 	dk_disable(DKRmlIframe)
 	dk_disable(DKSDLCef)
-	#dk_disable(DKSDLRml)
-	#dk_disable(DKSDLText)
 	dk_disable(DKSFMLWindow)
 	dk_disable(DKWebSockets)
 	dk_disable(DKWebview)

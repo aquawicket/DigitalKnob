@@ -19,7 +19,6 @@
 # Inline function expansion         Any Suitable (/Ob2)
 # Ommit frame pointers              OFF
 
-
 dk_depend(imageio)
 dk_depend(mobile_core_services)
 dk_depend(zlib)
@@ -31,64 +30,60 @@ dk_depend(tiff)
 dk_depend(sdl)
 
 
-#dk_set(SDL_IMAGE_VERSION main)
-#dk_set(SDL_IMAGE_NAME SDL2_image-${SDL_IMAGE_VERSION})
-#dk_set(SDL_IMAGE ${3RDPARTY}/${SDL_IMAGE_NAME})
-#dk_install(${SDL_IMAGE_DL} sdl_image ${SDL_IMAGE}) #NOPATCH)
-#dk_import(https://github.com/libsdl-org/SDL_image/archive/915b794f2c6d8247f775000ee0b96f660cbb9331.zip PATCH)
-#dk_import(https://github.com/libsdl-org/SDL_image/archive/fc370dc71d7726023c063618c7b04c1ed30637e2.zip PATCH)
-dk_import(https://github.com/libsdl-org/SDL_image.git main PATCH)
+dk_import(https://github.com/libsdl-org/SDL_image.git BRANCH main PATCH)
 
 
 ### DKPLUGINS LINK ###
-dk_include(${SDL_IMAGE})
-WIN_dk_libDebug(${SDL_IMAGE}/${OS}/lib/${DEBUG_DIR}/SDL_image.lib)
-WIN_dk_libRelease(${SDL_IMAGE}/${OS}/lib/${RELEASE_DIR}/SDL_image.lib)
-APPLE_dk_libDebug(${SDL_IMAGE}/${OS}/lib/Debug/SDL_image.a)
-APPLE_dk_libRelease(${SDL_IMAGE}/${OS}/lib/Release/SDL_image.a)
-LINUX_dk_libDebug(${SDL_IMAGE}/${OS}/${DEBUG_DIR}/lib/SDL_image.a)
-LINUX_dk_libRelease(${SDL_IMAGE}/${OS}/${RELEASE_DIR}/lib/SDL_image.a)
-RASPBERRY_dk_libDebug(${SDL_IMAGE}/${OS}/${DEBUG_DIR}/lib/SDL_image.a)
-RASPBERRY_dk_libRelease(${SDL_IMAGE}/${OS}/${RELEASE_DIR}/lib/SDL_image.a)
-ANDROID_dk_libDebug(${SDL_IMAGE}/${OS}/lib/${DEBUG_DIR}/SDL_image.a)
-ANDROID_dk_libRelease(${SDL_IMAGE}/${OS}/lib/${RELEASE_DIR}/SDL_image.a)
+dk_include				(${SDL_IMAGE})
+WIN_dk_libDebug			(${SDL_IMAGE}/${OS}/lib/${DEBUG_DIR}/SDL_image.lib)
+WIN_dk_libRelease		(${SDL_IMAGE}/${OS}/lib/${RELEASE_DIR}/SDL_image.lib)
+#WIN_dk_libDebug		(${SDL_IMAGE}/${OS}/${DEBUG_DIR}/SDL2_image-staticd.lib)
+#WIN_dk_libRelease		(${SDL_IMAGE}/${OS}/${RELEASE_DIR}/SDL2_image-static.lib)
+APPLE_dk_libDebug		(${SDL_IMAGE}/${OS}/lib/Debug/SDL_image.a)
+APPLE_dk_libRelease		(${SDL_IMAGE}/${OS}/lib/Release/SDL_image.a)
+LINUX_dk_libDebug		(${SDL_IMAGE}/${OS}/${DEBUG_DIR}/lib/SDL_image.a)
+LINUX_dk_libRelease		(${SDL_IMAGE}/${OS}/${RELEASE_DIR}/lib/SDL_image.a)
+RASPBERRY_dk_libDebug	(${SDL_IMAGE}/${OS}/${DEBUG_DIR}/lib/SDL_image.a)
+RASPBERRY_dk_libRelease	(${SDL_IMAGE}/${OS}/${RELEASE_DIR}/lib/SDL_image.a)
+ANDROID_dk_libDebug		(${SDL_IMAGE}/${OS}/lib/${DEBUG_DIR}/SDL_image.a)
+ANDROID_dk_libRelease	(${SDL_IMAGE}/${OS}/lib/${RELEASE_DIR}/SDL_image.a)
 
 
 ### 3RDPARTY LINK ###
-WIN_dk_set(SDL_IMAGE_CMAKE 
--DSDL2_IMAGE_INCLUDE_DIR=${SDL_IMAGE}
--DSDL2_IMAGE_LIBRARY_TEMP=${SDL_IMAGE}/${OS}/lib/${RELEASE_DIR}/SDL_image.lib
--DSDL2_IMAGE_LIBRARY_DEBUG=${SDL_IMAGE}/${OS}/lib/${DEBUG_DIR}/SDL_image.lib 
--DSDL2_IMAGE_LIBRARY_RELEASE=${SDL_IMAGE}/${OS}/lib/${RELEASE_DIR}/SDL_image.lib)
+WIN_dk_set(SDL_IMAGE_CMAKE -DSDL2_IMAGE_INCLUDE_DIR=${SDL_IMAGE} -DSDL2_IMAGE_LIBRARY_DEBUG=${SDL_IMAGE}/${OS}/lib/${DEBUG_DIR}/SDL2_image-staticd.lib -DSDL2_IMAGE_LIBRARY_TEMP=${SDL_IMAGE}/${OS}/lib/${RELEASE_DIR}/SDL2_image-static.lib -DSDL2_IMAGE_LIBRARY_RELEASE=${SDL_IMAGE}/${OS}/lib/${RELEASE_DIR}/SDL2_image-static.lib)
+	#-DSDL2_IMAGE_LIBRARY_DEBUG=${SDL_IMAGE}/${OS}/lib/${DEBUG_DIR}/SDL_image.lib
+	#-DSDL2_IMAGE_LIBRARY_TEMP=${SDL_IMAGE}/${OS}/lib/${RELEASE_DIR}/SDL_image.lib
+	#-DSDL2_IMAGE_LIBRARY_RELEASE=${SDL_IMAGE}/${OS}/lib/${RELEASE_DIR}/SDL_image.lib)
 APPLE_dk_set(SDL_IMAGE_CMAKE 
--DSDL2_IMAGE_INCLUDE_DIR=${SDL_IMAGE}
--DSDL2_IMAGE_LIBRARY_TEMP=${SDL_IMAGE}/${OS}/lib/Debug/SDL_image.a
--DSDL2_IMAGE_LIBRARY_DEBUG=${SDL_IMAGE}/${OS}/lib/Debug/SDL_image.a 
--DSDL2_IMAGE_LIBRARY_RELEASE=${SDL_IMAGE}/${OS}/lib/Release/SDL_image.a)
+	-DSDL2_IMAGE_INCLUDE_DIR=${SDL_IMAGE}
+	-DSDL2_IMAGE_LIBRARY_TEMP=${SDL_IMAGE}/${OS}/lib/Debug/SDL_image.a
+	-DSDL2_IMAGE_LIBRARY_DEBUG=${SDL_IMAGE}/${OS}/lib/Debug/SDL_image.a 
+	-DSDL2_IMAGE_LIBRARY_RELEASE=${SDL_IMAGE}/${OS}/lib/Release/SDL_image.a)
 LINUX_dk_set(SDL_IMAGE_CMAKE 
--DSDL2_IMAGE_INCLUDE_DIR=${SDL_IMAGE} 
--DSDL2_IMAGE_LIBRARY_DEBUG=${SDL_IMAGE}/${OS}/lib/${DEBUG_DIR}/SDL_image.a 
--DSDL2_IMAGE_LIBRARY_RELEASE=${SDL_IMAGE}/${OS}/lib/${RELEASE_DIR}/SDL_image.a)
+	-DSDL2_IMAGE_INCLUDE_DIR=${SDL_IMAGE} 
+	-DSDL2_IMAGE_LIBRARY_DEBUG=${SDL_IMAGE}/${OS}/lib/${DEBUG_DIR}/SDL_image.a 
+	-DSDL2_IMAGE_LIBRARY_RELEASE=${SDL_IMAGE}/${OS}/lib/${RELEASE_DIR}/SDL_image.a)
 RASPBERRY_dk_set(SDL_IMAGE_CMAKE 
--DSDL2_IMAGE_INCLUDE_DIR=${SDL_IMAGE} 
--DSDL2_IMAGE_LIBRARY_DEBUG=${SDL_IMAGE}/${OS}/lib/${DEBUG_DIR}/SDL_image.a 
--DSDL2_IMAGE_LIBRARY_RELEASE=${SDL_IMAGE}/${OS}/lib/${RELEASE_DIR}/SDL_image.a)
+	-DSDL2_IMAGE_INCLUDE_DIR=${SDL_IMAGE} 
+	-DSDL2_IMAGE_LIBRARY_DEBUG=${SDL_IMAGE}/${OS}/lib/${DEBUG_DIR}/SDL_image.a 
+	-DSDL2_IMAGE_LIBRARY_RELEASE=${SDL_IMAGE}/${OS}/lib/${RELEASE_DIR}/SDL_image.a)
 ANDROID_dk_set(SDL_IMAGE_CMAKE
--DSDL2_IMAGE_INCLUDE_DIR=${SDL_IMAGE} 
--DSDL2_IMAGE_LIBRARY_DEBUG=${SDL_IMAGE}/${OS}/lib/${DEBUG_DIR}/SDL_image.a 
--DSDL2_IMAGE_LIBRARY_RELEASE=${SDL_IMAGE}/${OS}/lib/${RELEASE_DIR}/SDL_image.a)
+	-DSDL2_IMAGE_INCLUDE_DIR=${SDL_IMAGE} 
+	-DSDL2_IMAGE_LIBRARY_DEBUG=${SDL_IMAGE}/${OS}/lib/${DEBUG_DIR}/SDL_image.a 
+	-DSDL2_IMAGE_LIBRARY_RELEASE=${SDL_IMAGE}/${OS}/lib/${RELEASE_DIR}/SDL_image.a)
 
 
 ### GENERATE ###
-dk_setPath(${SDL_IMAGE}/${BUILD_DIR})
-dk_queueCommand(${DKCMAKE_BUILD} -DSDLIMAGE_SUPPORT_GIF=ON -DSDLIMAGE_SUPPORT_JPEG=ON -DSDLIMAGE_SUPPORT_PNG=ON -DSDLIMAGE_SUPPORT_WEBP=OFF ${SDL_CMAKE} ${ZLIB_CMAKE} ${TIFF_CMAKE} ${LIBPNG_CMAKE} ${LIBJPEG-TURBO_CMAKE} ${GIF_CMAKE} ${SDL_IMAGE})
+dk_setPath		(${SDL_IMAGE}/${BUILD_DIR})
+dk_queueCommand	(${DKCMAKE_BUILD} -DSDLIMAGE_SUPPORT_GIF=ON -DSDLIMAGE_SUPPORT_JPEG=ON -DSDLIMAGE_SUPPORT_PNG=ON -DSDLIMAGE_SUPPORT_WEBP=OFF ${SDL_CMAKE} ${ZLIB_CMAKE} ${TIFF_CMAKE} ${LIBPNG_CMAKE} ${LIBJPEG-TURBO_CMAKE} ${GIF_CMAKE} ${SDL_IMAGE})
 
 
 ### COMPILE ###
-WIN_dk_visualStudio(${SDL_IMAGE_NAME} SDLIMAGE.sln SDLIMAGE)
-MAC_dk_xcode(${SDL_IMAGE_NAME} SDLIMAGE)
-IOS_dk_xcode(${SDL_IMAGE_NAME} SDLIMAGE)
-IOSSIM_dk_xcode(${SDL_IMAGE_NAME} SDLIMAGE)
-LINUX_dk_queueCommand(make SDLIMAGE)
-RASPBERRY_dk_queueCommand(make SDLIMAGE)	
-ANDROID_dk_visualStudio(${SDL_IMAGE_NAME} SDLIMAGE.sln SDLIMAGE)
+dk_visualStudio				(${SDL_IMAGE_NAME} SDLIMAGE.sln SDLIMAGE)
+dk_xcode					(${SDL_IMAGE_NAME} SDLIMAGE)
+LINUX_dk_queueCommand		(make SDL2_image)
+RASPBERRY_dk_queueCommand	(make SDL2_image)	
+#ANDROID_dk_visualStudio	(${SDL_IMAGE_NAME} SDL2_image.sln SDL2_image)
+
+# fatal error LNK1104: cannot open file 'C:\Users\Administrator\digitalknob\DK\3rdParty\sdl_image-main\win32\Debug\SDL2_image-staticd.lib'
+# C:\Users\Administrator\digitalknob\DK\3rdParty\SDL_image-main\win32\lib\Debug

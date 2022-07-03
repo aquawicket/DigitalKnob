@@ -1,21 +1,14 @@
-# https://code.google.com/archive/p/bullet/
 # https://github.com/bulletphysics/bullet3
-#
+# https://code.google.com/archive/p/bullet
+# https://github.com/bulletphysics/bullet3/archive/refs/tags/2.82.zip
 # https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/bullet/bullet-2.82-r2704.zip
 
-### IMPORT ###
-dk_import(https://github.com/bulletphysics/bullet3.git)
+
 #dk_import(https://github.com/bulletphysics/bullet3/archive/refs/tags/2.82.zip)
-
-### VERSION ###
-#dk_set(BULLET3_VERSION 2.82-r2704)
-#dk_set(BULLET3_NAME bullet-${BULLET3_VERSION})
-#dk_set(BULLET3_DL https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/bullet/${BULLET3_NAME}.zip)
-#dk_set(BULLET3 ${3RDPARTY}/${BULLET3_NAME})
-#dk_install(${BULLET3_DL} bullet ${BULLET3})
+dk_import(https://github.com/bulletphysics/bullet3.git)
 
 
-### DKPLUGINS LINK ###
+### LINK ###
 dk_include(${BULLET3}/src)
 IF(BulletCollision)
 	WIN_dk_libDebug(${BULLET3}/${OS}/lib/Debug/BulletCollision_Debug.lib)
@@ -84,31 +77,17 @@ IF(MiniCL)
 ENDIF(MiniCL)
 
 
-### COMPILE ###
+### GENERATE ###
 dk_setPath(${BOXER}/${BUILD_DIR})
+dk_queueCommand(${DKCMAKE_BUILD} -DBUILD_DEMOS=OFF -DBUILD_EXTRAS=OFF -DUSE_GLUT=OFF ${BULLET3})
 
-WIN_dk_queueCommand(${DKCMAKE_BUILD} -DBUILD_DEMOS=OFF -DBUILD_EXTRAS=OFF -DUSE_GLUT=OFF ${BULLET3})
+
+### COMPILE ###
 WIN_dk_visualStudio(${BULLET3_NAME} BULLET3_PHYSICS.sln)
-
-
-MAC_dk_queueCommand(${DKCMAKE_BUILD} -DBUILD_DEMOS=OFF -DBUILD_EXTRAS=OFF -DUSE_GLUT=OFF ${BULLET3})
-MAC_dk_xcode(${BULLET3_NAME})
-
-
-IOS64_dk_queueCommand(${DKCMAKE_BUILD} -DBUILD_DEMOS=OFF -DBUILD_EXTRAS=OFF -DUSE_GLUT=OFF ${BULLET3})
-IOS_dk_xcode(${BULLET3_NAME})
-
-
-IOSSIM64_dk_queueCommand(${DKCMAKE_BUILD} -DBUILD_DEMOS=OFF -DBUILD_EXTRAS=OFF -DUSE_GLUT=OFF ${BULLET3})
-IOSSIM_dk_xcode(${BULLET3_NAME})
-
-
-LINUX_dk_queueCommand(${DKCMAKE_BUILD} -DBUILD_DEMOS=OFF -DBUILD_EXTRAS=OFF -DUSE_GLUT=OFF ${BULLET3})
+#MAC_dk_xcode(${BULLET3_NAME})
+#IOS_dk_xcode(${BULLET3_NAME})
+#IOSSIM_dk_xcode(${BULLET3_NAME})
+dk_xcode(${BULLET3_NAME})
 LINUX_dk_queueCommand(make)
-
-
-RASPBERRY_dk_queueCommand(${DKCMAKE_BUILD} -DBUILD_DEMOS=OFF -DBUILD_EXTRAS=OFF -DUSE_GLUT=OFF ${BULLET3})
 RASPBERRY_dk_queueCommand(make)
-
-
 ANDROID_dk_ndk(${BULLET3_NAME})

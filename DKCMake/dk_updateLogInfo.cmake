@@ -3,6 +3,8 @@ include_guard()
 ##################################################################################
 # dk_updateLogInfo()
 #
+#	TODO
+#
 macro(dk_updateLogInfo)
 	#DKDEBUGFUNC(${ARGV})
 	if(PRINT_CALL_DETAILS)

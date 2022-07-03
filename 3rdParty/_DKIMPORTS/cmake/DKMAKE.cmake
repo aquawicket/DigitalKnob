@@ -40,7 +40,7 @@ else()
 	UNIX_HOST_dk_set(CMAKE_EXE ${CMAKE}/cmake)	
 
 	### INSTALL ###
-	dk_info("looking for cmake at ${CMAKE_EXE}")
+	#dk_info("looking for cmake at ${CMAKE_EXE}")
 	if(NOT EXISTS "${CMAKE_EXE}")
 		MAC_dk_depend(homebrew)
 		dk_info("cmake NOT FOUND")
@@ -50,7 +50,7 @@ else()
 		MAC_HOST_dk_command(brew install cmake)
 		LINUX_HOST_dk_command(sudo apt-get -y install cmake)
 	else()
-		dk_info("Found cmake at ${CMAKE_EXE}")
+		#dk_info("Found cmake at ${CMAKE_EXE}")
 		#dk_executeProcess(${CMAKE_EXE} --version ${CMAKE}/version.txt)
 	endif()
 

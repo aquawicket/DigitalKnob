@@ -56,7 +56,7 @@ RASPBERRY_dk_depend(opengl)
 # SDL_DL      = https://github.com/libsdl-org/SDL/archive/18032979d892639ad4e03584a40a4d205cd2f5fd.zip    :the library  download link 
 
 
-dk_import(https://github.com/libsdl-org/SDL.git main)
+dk_import(https://github.com/libsdl-org/SDL.git BRANCH main)
 
 
 ### DKPLUGINS LINK ###
@@ -75,7 +75,6 @@ LINUX_dk_include(${SDL}/${OS}/${RELEASE_DIR}/include)
 	WIN_dk_libDebug(${SDL}/${OS}/${DEBUG_DIR}/SDL2-staticd.lib)
 	#WIN_dk_libRelease(${SDL}/${OS}/${RELEASE_DIR}/SDL2.lib)
 	WIN_dk_libRelease(${SDL}/${OS}/${RELEASE_DIR}/SDL2-static.lib)
-	
 	MAC_dk_libDebug(${SDL}/${OS}/${DEBUG_DIR}/libSDL2d.a)
 	MAC_dk_libRelease(${SDL}/${OS}/${RELEASE_DIR}/libSDL2.a)
 	IOS_dk_libDebug(${SDL}/${OS}/${DEBUG_DIR}/libSDL2d.a)
@@ -118,7 +117,8 @@ WIN_dk_set(SDL_CMAKE
 	-DSDL2_LIBRARY_TEMP=${SDL}/${OS}/${RELEASE_DIR}/SDL2.lib
 	-DSDL2_LIBRARY=${SDL}/${OS}/${RELEASE_DIR}/SDL2.lib
 	-DSDL2_LIBRARY_DEBUG=${SDL}/${OS}/${DEBUG_DIR}/SDL2d.lib
-	-DSDL2_LIBRARY_RELEASE=${SDL}/${OS}/${RELEASE_DIR}/SDL2.lib)
+	-DSDL2_LIBRARY_RELEASE=${SDL}/${OS}/${RELEASE_DIR}/SDL2.lib
+	-DSDL2_MAIN_LIBRARY=${SDL}/${OS}/${RELEASE_DIR}/SDL2main.lib)
 	
 WIN_dk_set(SDLMAIN_CMAKE
 	-DSDL2MAIN_LIBRARY_DEBUG=${SDL}/${OS}/${DEBUG_DIR}/SDL2maind.lib

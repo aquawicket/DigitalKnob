@@ -46,45 +46,22 @@ include_guard()
 ###
 ### https://cmake.org/cmake/help/git-master/guide/tutorial/index.html
 ###
-if(DKCMAKELIST_INCLUDED)
-  return()
-endif(DKCMAKELIST_INCLUDED)
-set(DKCMAKELIST_INCLUDED 1)
 
 message(STATUS "\nCMake version ${CMAKE_VERSION}\n")
-
-#########  DUMP ALL STARTUP VARIABLES TO FILE  #####################################################################
-macro(DUMP_ALL_VARIABLES file)
-	execute_process(COMMAND ${CMAKE_COMMAND} -E remove ${file})
-	get_cmake_property(vars VARIABLES)
-	list (SORT vars)
-	foreach (var ${vars})
-		file(APPEND ${file} "${var} ==           ${${var}}\n")
-	endforeach()
-endmacro()
-####################################################################################################################
-DUMP_ALL_VARIABLES(${CMAKE_SOURCE_DIR}/CMAKE_START_VARIABLES.temp)
-
-#variable_watch(DKCMAKE_BUILD) 
-
+CMAKE_MINIMUM_REQUIRED(VERSION 3.10)
+CMAKE_POLICY(SET CMP0054 NEW)
 if(CMAKE_HOST_UNIX)
 	execute_process(COMMAND sudo echo WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}) #ask for sudo password ahead of time
 endif()
 
-CMAKE_MINIMUM_REQUIRED(VERSION 3.10)
-CMAKE_POLICY(SET CMP0054 NEW)
 
-DUMP_ALL_VARIABLES(${CMAKE_SOURCE_DIR}/CMAKE_MID_VARIABLES.temp)
+include(${CMAKE_SOURCE_DIR}/dk_dumpAllVariables.cmake)
+dk_dumpAllVariables(${CMAKE_BINARY_DIR}/DKCMAKE_START_VARIABLES.temp)
 
 
 PROJECT(DigitalKnob)
+dk_dumpAllVariables(${CMAKE_BINARY_DIR}/DKCMAKE_PROJECT_VARIABLES.temp)
 
 
-DUMP_ALL_VARIABLES(${CMAKE_SOURCE_DIR}/CMAKE_PROJECT_VARIABLES.temp)
-
-INCLUDE(${CMAKE_SOURCE_DIR}/DKGenerate.cmake)
-
-
-
-
-DUMP_ALL_VARIABLES(${CMAKE_SOURCE_DIR}/CMAKE_END_VARIABLES.temp)
+include(${CMAKE_SOURCE_DIR}/DKGenerate.cmake)
+dk_dumpAllVariables(${CMAKE_BINARY_DIR}/DKCMAKE_END_VARIABLES.temp)

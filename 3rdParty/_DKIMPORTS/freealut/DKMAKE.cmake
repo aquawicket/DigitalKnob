@@ -8,13 +8,13 @@ dk_depend(openal)
 
 
 ### VERSION ###
-DKGITCLONE(https://github.com/vancegroup/freealut)
+dk_import(https://github.com/vancegroup/freealut.git)
 
 #dk_set(FREEALUT_VERSION 1.1.0)
 #dk_set(FREEALUT_NAME freealut-${FREEALUT_VERSION})
 #dk_set(FREEALUT_DL http://distro.ibiblio.org/rootlinux/rootlinux-ports/more/freealut/${FREEALUT_NAME}.tar.gz)
 #dk_set(FREEALUT ${3RDPARTY}/${FREEALUT_NAME})
-#dk_install(${FREEALUT_DL} freealut ${FREEALUT})
+#dk_import(${FREEALUT_DL} ${FREEALUT})
 
 
 ### LINK ###

@@ -5,7 +5,7 @@ include_guard()
 #  
 #	Get the variable names from function parameters
 #
-#	@ARGV: The ARGV data within a function that contains the parameter values
+#	@ARGV	- The ARGV data within a function that contains the parameter values
 #
 function(dk_getArgIdentifiers ARGV)
 	#message(STATUS "dk_getArgIdentifiers(${ARGV})")
@@ -28,9 +28,9 @@ function(dk_getArgIdentifiers ARGV)
 				if("ARGN" STREQUAL "${varName}")
 					continue()
 				endif()
-				if("CMAKE_CURRENT_FUNCTION" STREQUAL "${varName}")
-					continue()
-				endif()
+				#if("CMAKE_CURRENT_FUNCTION" STREQUAL "${varName}")
+				#	continue()
+				#endif()
 				dk_call(dk_listReplace names ARGV${index} ${varName})
 				set(ARGI${index} ${varName} CACHE INTERNAL "")
 				#message(STATUS "ARGI${index} == ${ARGI${index}}")

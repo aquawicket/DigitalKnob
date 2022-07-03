@@ -24,7 +24,8 @@
 * SOFTWARE.
 */
 
-#ifdef HAVE_DKDuktape 
+//#ifdef HAVE_DKDuktape
+
 #pragma once
 #ifndef DKDuktapeJS_H
 #define DKDuktapeJS_H
@@ -157,4 +158,5 @@ public:
 REGISTER_OBJECT(DKDuktapeJS, true)
 
 #endif //DKDuktapeJS_H
-#endif //HAVE_DKDuktape
+
+//#endif //HAVE_DKDuktape

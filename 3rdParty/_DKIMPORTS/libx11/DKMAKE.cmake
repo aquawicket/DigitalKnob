@@ -15,7 +15,8 @@ dk_set(LIBX11 ${3RDPARTY}/${LIBX11_NAME})
 
 
 ### INSTALL ###
-dk_install(${LIBX11_DL} libx11 ${LIBX11})
+#dk_import(${LIBX11_DL} ${LIBX11})
+dk_import(${LIBX11_DL} ${LIBX11})
 
 
 ### LINK ###

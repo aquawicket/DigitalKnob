@@ -30,6 +30,7 @@
 #include <string>
 #include <iostream>
 #include <sstream>
+#define DKHAVE_DKDuktape 1
 
 duk_context* DKDuktape::ctx;
 DKStringArray DKDuktape::filelist;

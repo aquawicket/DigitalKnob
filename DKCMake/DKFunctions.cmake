@@ -21,6 +21,10 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
+
+# Extra Documentation
+# https://asitdhal.medium.com/cmake-functions-and-macros-22293041519f
+# https://foonathan.net/2016/03/cmake-install/ 
 include_guard()
 
 if(EXISTS $ENV{DKCMAKE})
@@ -28,198 +32,220 @@ if(EXISTS $ENV{DKCMAKE})
 endif()
 include("$ENV{DKCMAKE}DK.cmake")
 
-# Extra Documentation
-# https://asitdhal.medium.com/cmake-functions-and-macros-22293041519f
-# https://foonathan.net/2016/03/cmake-install/ 
-
-
-### SETTINGS ##################################################################
-set(DKTODO_ENABLED				1		CACHE INTERNAL "")
-set(DKDEBUG_ENABLED				1		CACHE INTERNAL "")
-set(DKDEBUGFUNC_ENABLED			0		CACHE INTERNAL "")
-set(WAIT_ON_ERRORS				0		CACHE INTERNAL "")
-set(WAIT_ON_WARNINGS			0		CACHE INTERNAL "")
-set(HALT_ON_ERRORS				0		CACHE INTERNAL "")
-set(HALT_ON_WARNINGS			0		CACHE INTERNAL "")
-set(PRINT_CALL_DETAILS 			1		CACHE INTERNAL "")
-set(PRINT_FILE_NAMES 			1 		CACHE INTERNAL "")
-set(PRINT_LINE_NUMBERS 			1		CACHE INTERNAL "")
-set(PRINT_FUNCTION_NAMES 		1 		CACHE INTERNAL "")
-set(PRINT_FUNCTION_ ARGUMENTS 	1 		CACHE INTERNAL "")
-set(dk_disabled_list	 		""		CACHE INTERNAL "")
-set(INSTALL_DKLIBS              0		CACHE INTERNAL "")
-
 
 ###############################################################################
 # dk_todo(msg)
 #
 #	print a TODO message and wait 10 seconds
 #
-#	@msg:(Optional)		A header message to print
+#	@msg:(Optional)		- A header message to print
 #
 macro(dk_todo)
 	if(NOT DKTODO_ENABLED)
 		return()
 	endif()
 	if(${ARGV})
-		set(msg ${ARGV0})
+		set(msg "TODO: ${ARGV0}")
 	else()
 		set(msg "TODO:")
 	endif()
 	dk_debug(msg)
+	#dk_wait(10)
 endmacro()
 
 
 ###############################################################################
-# TestReturnValue(args result)
+# dk_includes(variable find RESULT)
 #
-#	Example function that uses returns value with a supplied variable 
-#	Implementation: 
-#		function(TestReturnValue args result)
-#			set(args ${ARGV})
-#			list(GET args -1 result)
-#			list(REMOVE_AT args -1)
-#			set(${result} ${args} PARENT_SCOPE) #just relay the arguments
-#		endfunction()
+#	Test if a string contains a substring
 #
-#	Usage:
-#		TestReturnValue("ABC" "123" 5 myResult)
-#		message(STATUS "TestReturnValue() -> myResult = ${myResult}") # should print->  return value = ABC;123;5
+#	variable	- The variable
+#	find		- The substring to search for
+#	RESULT		- Returns true if the str contains the substr. Otherwise returns false
+#
+function(dk_includes variable find RESULT) #REVERSE
+	#DKDEBUGFUNC(${ARGV})
+	string(FIND "${variable}" "${find}" index)
+	if(${index} GREATER -1)
+		set(${RESULT} true PARENT_SCOPE)
+	else()
+		set(${RESULT} false PARENT_SCOPE)
+	endif()
+endfunction()
 
 
 ###############################################################################
-# CreateFunction(name contents args)
+# dk_getParameter(name RESULT)
 #
-#	Example that creates functions dynamicaly at run time
-#	Implementation:	
-#		function(CreateFunction name contents) #args)
-#			if(CMAKE_VERSION VERSION_LESS 3.18)
-#				if(NOT extFileCleared)
-#					file(WRITE functions_ext.cmake "")
-#					set(extFileCleared 1 CACHE INTERNAL "")
-#				endif()
-#				file(APPEND functions_ext.cmake "function(${name})\n	${contents}\nendfunction()\n")
-#				include(functions_ext.cmake)
-#			else()
-#				cmake_language(EVAL CODE "function(${name})\n	${contents}\nendfunction()\n")
-#			endif()	
-#		endfunction()
+#	get a parameter by name from within a function
 #
-#	Usage:
-#		CreateFunction(MyDynamicFunc 
-#			"message(STATUS \"Test message\")") 
-#			"foreach(arg IN LIST ${ARGN})
-#				set(count 0) 
-#				message(STATUS \"arg:${count} = ${arg}\")
-#				MATH(EXPR count \"${cound}+1\")
-#			endforeach()"
-#			${ARGN}
-#		)
-#	
-#	set(myVariable "myVariable")
-#	MyDynamicFunc("myStringData" "My;List;Data" "${myVariable}" 17 moreData)
+#	@name		-The input MARKER name for the parameter
+#	RESULT		-The value of the next parameter after the ID
+macro(dk_getParameter name RESULT)
+	dk_debug("dk_getParameter(${name})")
+	set(index 1)
+	foreach(arg ${ARGV})
+		if("${ARGV${index}}" STREQUAL "${name}")
+			math(EXPR index ${index}+1)
+			dk_debug("ARGV${index} = ${ARGV${index}}")
+			dk_debug("name = ${name}")
+			#if(ARGV${index})
+				#dk_debug(ARGV${index})
+				set(${RESULT} ${ARGV${index}})
+				dk_debug(${${RESULT}})
+			#endif()
+		endif()
+	endforeach()
+endmacro()
 
 
 ###############################################################################
-# dk_aliasFunctions(name)
+# dk_remove(path) NOERROR
 #
-function(dk_aliasFunctions name)
+#	Remove a file or directory
+#
+#	@path		- The full path to the file or direcotory to remove
+#   NOERROR     - if any of the parameters equals NOERROR, dk_error() messages will not be displayed
+#
+function(dk_remove path) # NOERROR
+	DKDEBUGFUNC(${ARGV})
+	dk_includes("${ARGN}" "NOERROR" includes)
+	if(${includes})
+		set(noerror true)
+	endif()
+	if(NOT EXISTS ${path})
+		if(NOT noerror)
+			dk_error("Path:(${path}) does not exist")
+		endif()
+		return()
+	endif()
+	file(REMOVE ${path})
+#	if(IS_DIRECTORY ${path})
+#		execute_process(COMMAND ${CMAKE_COMMAND} -E remove_directory ${path})
+#	else()
+#		execute_process(COMMAND ${CMAKE_COMMAND} -E remove ${path})
+#	endif()
+endfunction()
+
+
+###############################################################################
+# dk_createOsMacros(func)
+#
+#	TODO
+#
+#	@func:(Required)	- The func of the function to create aliases for
+#
+function(dk_createOsMacros func)
 	DKDEBUGFUNC(${ARGV})
 	if(NOT EXISTS ${DKFunctions_ext})
 		file(APPEND ${DKFunctions_ext} "### Don't make changes in this file. They will be overwritten. ###\n")
 		file(APPEND ${DKFunctions_ext} "### This file was automatically generated from DKFunctions.cmake ###\n")
 	endif()
-	file(APPEND ${DKFunctions_ext} "\n## ${name} ##\n")
-	file(APPEND ${DKFunctions_ext} "macro(WIN_HOST_${name})\n   if(WIN_HOST)\n      ${name}(\${ARGV})\n  endif()\nendmacro()\n")
-	file(APPEND ${DKFunctions_ext} "macro(WIN32_HOST_${name})\n   if(WIN_HOST AND X86)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	file(APPEND ${DKFunctions_ext} "macro(WIN64_HOST_${name})\n   if(WIN_HOST AND X64)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	file(APPEND ${DKFunctions_ext} "macro(UNIX_HOST_${name})\n   if(UNIX_HOST)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	file(APPEND ${DKFunctions_ext} "macro(MAC_HOST_${name})\n   if(MAC_HOST)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	file(APPEND ${DKFunctions_ext} "macro(MAC32_HOST_${name})\n   if(MAC_HOST AND X86)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	file(APPEND ${DKFunctions_ext} "macro(MAC64_HOST_${name})\n   if(MAC_HOST AND X64)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	file(APPEND ${DKFunctions_ext} "macro(LINUX_HOST_${name})\n   if(LINUX_HOST)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	file(APPEND ${DKFunctions_ext} "macro(LINUX32_HOST_${name})\n   if(LINUX_HOST AND X86)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	file(APPEND ${DKFunctions_ext} "macro(LINUX64_HOST_${name})\n   if(LINUX_HOST AND X64)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
+	file(APPEND ${DKFunctions_ext} "\n## ${func} ##\n")
+	file(APPEND ${DKFunctions_ext} "macro(WIN_HOST_${func})\n   if(WIN_HOST)\n      ${func}(\${ARGV})\n  endif()\nendmacro()\n")
+	file(APPEND ${DKFunctions_ext} "macro(WIN32_HOST_${func})\n   if(WIN_HOST AND X86)\n      ${func}(\${ARGV})\n   endif()\nendmacro()\n")
+	file(APPEND ${DKFunctions_ext} "macro(WIN64_HOST_${func})\n   if(WIN_HOST AND X64)\n      ${func}(\${ARGV})\n   endif()\nendmacro()\n")
+	file(APPEND ${DKFunctions_ext} "macro(UNIX_HOST_${func})\n   if(UNIX_HOST)\n      ${func}(\${ARGV})\n   endif()\nendmacro()\n")
+	file(APPEND ${DKFunctions_ext} "macro(MAC_HOST_${func})\n   if(MAC_HOST)\n      ${func}(\${ARGV})\n   endif()\nendmacro()\n")
+	file(APPEND ${DKFunctions_ext} "macro(MAC32_HOST_${func})\n   if(MAC_HOST AND X86)\n      ${func}(\${ARGV})\n   endif()\nendmacro()\n")
+	file(APPEND ${DKFunctions_ext} "macro(MAC64_HOST_${func})\n   if(MAC_HOST AND X64)\n      ${func}(\${ARGV})\n   endif()\nendmacro()\n")
+	file(APPEND ${DKFunctions_ext} "macro(LINUX_HOST_${func})\n   if(LINUX_HOST)\n      ${func}(\${ARGV})\n   endif()\nendmacro()\n")
+	file(APPEND ${DKFunctions_ext} "macro(LINUX32_HOST_${func})\n   if(LINUX_HOST AND X86)\n      ${func}(\${ARGV})\n   endif()\nendmacro()\n")
+	file(APPEND ${DKFunctions_ext} "macro(LINUX64_HOST_${func})\n   if(LINUX_HOST AND X64)\n      ${func}(\${ARGV})\n   endif()\nendmacro()\n")
 	
-	file(APPEND ${DKFunctions_ext} "macro(WIN_${name})\n   if(WIN)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	file(APPEND ${DKFunctions_ext} "macro(WIN32_${name})\n   if(WIN_32)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	file(APPEND ${DKFunctions_ext} "macro(WIN64_${name})\n   if(WIN_64)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	file(APPEND ${DKFunctions_ext} "macro(UNIX_${name})\n   if(NOT WIN)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	file(APPEND ${DKFunctions_ext} "macro(APPLE_${name})\n   if(MAC OR IOS OR IOSSIM)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	file(APPEND ${DKFunctions_ext} "macro(MAC_${name})\n   if(MAC)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	file(APPEND ${DKFunctions_ext} "macro(MAC32_${name})\n   if(MAC_32)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	file(APPEND ${DKFunctions_ext} "macro(MAC64_${name})\n   if(MAC_64)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	file(APPEND ${DKFunctions_ext} "macro(IOS_${name})\n   if(IOS AND NOT IOSSIM)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	file(APPEND ${DKFunctions_ext} "macro(IOS32_${name})\n   if(IOS_32 AND NOT IOSSIM)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	file(APPEND ${DKFunctions_ext} "macro(IOS64_${name})\n   if(IOS_64 AND NOT IOSSIM)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	file(APPEND ${DKFunctions_ext} "macro(IOSSIM_${name})\n   if(IOSSIM)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	file(APPEND ${DKFunctions_ext} "macro(IOSSIM32_${name})\n   if(IOSSIM_32)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	file(APPEND ${DKFunctions_ext} "macro(IOSSIM64_${name})\n   if(IOSSIM_64)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	file(APPEND ${DKFunctions_ext} "macro(LINUX_${name})\n   if(LINUX)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	file(APPEND ${DKFunctions_ext} "macro(LINUX32_${name})\n   if(LINUX_32)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	file(APPEND ${DKFunctions_ext} "macro(LINUX64_${name})\n   if(LINUX_64)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	file(APPEND ${DKFunctions_ext} "macro(RASPBERRY_${name})\n   if(RASPBERRY)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	file(APPEND ${DKFunctions_ext} "macro(RASPBERRY32_${name})\n   if(RASPBERRY_32)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	file(APPEND ${DKFunctions_ext} "macro(RASPBERRY64_${name})\n   if(RASPBERRY_64)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	file(APPEND ${DKFunctions_ext} "macro(ANDROID_${name})\n   if(ANDROID)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	file(APPEND ${DKFunctions_ext} "macro(ANDROID32_${name})\n   if(ANDROID_32)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	file(APPEND ${DKFunctions_ext} "macro(ANDROID64_${name})\n   if(ANDROID_64)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
+	file(APPEND ${DKFunctions_ext} "macro(WIN_${func})\n   if(WIN)\n      ${func}(\${ARGV})\n   endif()\nendmacro()\n")
+	file(APPEND ${DKFunctions_ext} "macro(WIN32_${func})\n   if(WIN_32)\n      ${func}(\${ARGV})\n   endif()\nendmacro()\n")
+	file(APPEND ${DKFunctions_ext} "macro(WIN64_${func})\n   if(WIN_64)\n      ${func}(\${ARGV})\n   endif()\nendmacro()\n")
+	file(APPEND ${DKFunctions_ext} "macro(UNIX_${func})\n   if(NOT WIN)\n      ${func}(\${ARGV})\n   endif()\nendmacro()\n")
+	file(APPEND ${DKFunctions_ext} "macro(APPLE_${func})\n   if(MAC OR IOS OR IOSSIM)\n      ${func}(\${ARGV})\n   endif()\nendmacro()\n")
+	file(APPEND ${DKFunctions_ext} "macro(MAC_${func})\n   if(MAC)\n      ${func}(\${ARGV})\n   endif()\nendmacro()\n")
+	file(APPEND ${DKFunctions_ext} "macro(MAC32_${func})\n   if(MAC_32)\n      ${func}(\${ARGV})\n   endif()\nendmacro()\n")
+	file(APPEND ${DKFunctions_ext} "macro(MAC64_${func})\n   if(MAC_64)\n      ${func}(\${ARGV})\n   endif()\nendmacro()\n")
+	file(APPEND ${DKFunctions_ext} "macro(IOS_${func})\n   if(IOS AND NOT IOSSIM)\n      ${func}(\${ARGV})\n   endif()\nendmacro()\n")
+	file(APPEND ${DKFunctions_ext} "macro(IOS32_${func})\n   if(IOS_32 AND NOT IOSSIM)\n      ${func}(\${ARGV})\n   endif()\nendmacro()\n")
+	file(APPEND ${DKFunctions_ext} "macro(IOS64_${func})\n   if(IOS_64 AND NOT IOSSIM)\n      ${func}(\${ARGV})\n   endif()\nendmacro()\n")
+	file(APPEND ${DKFunctions_ext} "macro(IOSSIM_${func})\n   if(IOSSIM)\n      ${func}(\${ARGV})\n   endif()\nendmacro()\n")
+	file(APPEND ${DKFunctions_ext} "macro(IOSSIM32_${func})\n   if(IOSSIM_32)\n      ${func}(\${ARGV})\n   endif()\nendmacro()\n")
+	file(APPEND ${DKFunctions_ext} "macro(IOSSIM64_${func})\n   if(IOSSIM_64)\n      ${func}(\${ARGV})\n   endif()\nendmacro()\n")
+	file(APPEND ${DKFunctions_ext} "macro(LINUX_${func})\n   if(LINUX)\n      ${func}(\${ARGV})\n   endif()\nendmacro()\n")
+	file(APPEND ${DKFunctions_ext} "macro(LINUX32_${func})\n   if(LINUX_32)\n      ${func}(\${ARGV})\n   endif()\nendmacro()\n")
+	file(APPEND ${DKFunctions_ext} "macro(LINUX64_${func})\n   if(LINUX_64)\n      ${func}(\${ARGV})\n   endif()\nendmacro()\n")
+	file(APPEND ${DKFunctions_ext} "macro(RASPBERRY_${func})\n   if(RASPBERRY)\n      ${func}(\${ARGV})\n   endif()\nendmacro()\n")
+	file(APPEND ${DKFunctions_ext} "macro(RASPBERRY32_${func})\n   if(RASPBERRY_32)\n      ${func}(\${ARGV})\n   endif()\nendmacro()\n")
+	file(APPEND ${DKFunctions_ext} "macro(RASPBERRY64_${func})\n   if(RASPBERRY_64)\n      ${func}(\${ARGV})\n   endif()\nendmacro()\n")
+	file(APPEND ${DKFunctions_ext} "macro(ANDROID_${func})\n   if(ANDROID)\n      ${func}(\${ARGV})\n   endif()\nendmacro()\n")
+	file(APPEND ${DKFunctions_ext} "macro(ANDROID32_${func})\n   if(ANDROID_32)\n      ${func}(\${ARGV})\n   endif()\nendmacro()\n")
+	file(APPEND ${DKFunctions_ext} "macro(ANDROID64_${func})\n   if(ANDROID_64)\n      ${func}(\${ARGV})\n   endif()\nendmacro()\n")
 	
 	if("${ARGN}" STREQUAL "NO_DEBUG_RELEASE_TAGS")
 		return()
 	endif()
-	file(APPEND ${DKFunctions_ext} "macro(DEBUG_${name})\n   if(DEBUG)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	file(APPEND ${DKFunctions_ext} "macro(WIN_DEBUG_${name})\n   if(WIN AND DEBUG)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	file(APPEND ${DKFunctions_ext} "macro(WIN32_DEBUG_${name})\n   if(WIN_32 AND DEBUG)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	file(APPEND ${DKFunctions_ext} "macro(WIN64_DEBUG_${name})\n   if(WIN_64 AND DEBUG)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	file(APPEND ${DKFunctions_ext} "macro(UNIX_DEBUG_${name})\n   if(NOT WIN AND DEBUG)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	file(APPEND ${DKFunctions_ext} "macro(APPLE_DEBUG_${name})\n   if(MAC OR IOS OR IOSSIM AND DEBUG)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	file(APPEND ${DKFunctions_ext} "macro(MAC_DEBUG_${name})\n   if(MAC AND DEBUG)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	file(APPEND ${DKFunctions_ext} "macro(MAC32_DEBUG_${name})\n   if(MAC_32 AND DEBUG)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	file(APPEND ${DKFunctions_ext} "macro(MAC64_DEBUG_${name})\n   if(MAC_64 AND DEBUG)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	file(APPEND ${DKFunctions_ext} "macro(IOS_DEBUG_${name})\n   if(IOS AND DEBUG AND NOT IOSSIM)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	file(APPEND ${DKFunctions_ext} "macro(IOS32_DEBUG_${name})\n   if(IOS_32 AND DEBUG AND NOT IOSSIM)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	file(APPEND ${DKFunctions_ext} "macro(IOS64_DEBUG_${name})\n   if(IOS_64 AND DEBUG AND NOT IOSSIM)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	file(APPEND ${DKFunctions_ext} "macro(IOSSIM_DEBUG_${name})\n   if(IOSSIM AND DEBUG)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	file(APPEND ${DKFunctions_ext} "macro(IOSSIM32_DEBUG_${name})\n   if(IOSSIM_32 AND DEBUG)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	file(APPEND ${DKFunctions_ext} "macro(IOSSIM64_DEBUG_${name})\n   if(IOSSIM_64 AND DEBUG)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	file(APPEND ${DKFunctions_ext} "macro(LINUX_DEBUG_${name})\n   if(LINUX AND DEBUG)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	file(APPEND ${DKFunctions_ext} "macro(LINUX32_DEBUG_${name})\n   if(LINUX_32 AND DEBUG)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	file(APPEND ${DKFunctions_ext} "macro(LINUX64_DEBUG_${name})\n   if(LINUX_64 AND DEBUG)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	file(APPEND ${DKFunctions_ext} "macro(RASPBERRY_DEBUG_${name})\n   if(RASPBERRY AND DEBUG)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	file(APPEND ${DKFunctions_ext} "macro(RASPBERRY32_DEBUG_${name})\n   if(RASPBERRY_32 AND DEBUG)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	file(APPEND ${DKFunctions_ext} "macro(RASPBERRY64_DEBUG_${name})\n   if(RASPBERRY_64 AND DEBUG)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	file(APPEND ${DKFunctions_ext} "macro(ANDROID_DEBUG_${name})\n   if(ANDROID AND DEBUG)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	file(APPEND ${DKFunctions_ext} "macro(ANDROID32_DEBUG_${name})\n   if(ANDROID_32 AND DEBUG)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	file(APPEND ${DKFunctions_ext} "macro(ANDROID64_DEBUG_${name})\n   if(ANDROID_64 AND DEBUG)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
+	file(APPEND ${DKFunctions_ext} "macro(DEBUG_${func})\n   if(DEBUG)\n      ${func}(\${ARGV})\n   endif()\nendmacro()\n")
+	file(APPEND ${DKFunctions_ext} "macro(WIN_DEBUG_${func})\n   if(WIN AND DEBUG)\n      ${func}(\${ARGV})\n   endif()\nendmacro()\n")
+	file(APPEND ${DKFunctions_ext} "macro(WIN32_DEBUG_${func})\n   if(WIN_32 AND DEBUG)\n      ${func}(\${ARGV})\n   endif()\nendmacro()\n")
+	file(APPEND ${DKFunctions_ext} "macro(WIN64_DEBUG_${func})\n   if(WIN_64 AND DEBUG)\n      ${func}(\${ARGV})\n   endif()\nendmacro()\n")
+	file(APPEND ${DKFunctions_ext} "macro(UNIX_DEBUG_${func})\n   if(NOT WIN AND DEBUG)\n      ${func}(\${ARGV})\n   endif()\nendmacro()\n")
+	file(APPEND ${DKFunctions_ext} "macro(APPLE_DEBUG_${func})\n   if(MAC OR IOS OR IOSSIM AND DEBUG)\n      ${func}(\${ARGV})\n   endif()\nendmacro()\n")
+	file(APPEND ${DKFunctions_ext} "macro(MAC_DEBUG_${func})\n   if(MAC AND DEBUG)\n      ${func}(\${ARGV})\n   endif()\nendmacro()\n")
+	file(APPEND ${DKFunctions_ext} "macro(MAC32_DEBUG_${func})\n   if(MAC_32 AND DEBUG)\n      ${func}(\${ARGV})\n   endif()\nendmacro()\n")
+	file(APPEND ${DKFunctions_ext} "macro(MAC64_DEBUG_${func})\n   if(MAC_64 AND DEBUG)\n      ${func}(\${ARGV})\n   endif()\nendmacro()\n")
+	file(APPEND ${DKFunctions_ext} "macro(IOS_DEBUG_${func})\n   if(IOS AND DEBUG AND NOT IOSSIM)\n      ${func}(\${ARGV})\n   endif()\nendmacro()\n")
+	file(APPEND ${DKFunctions_ext} "macro(IOS32_DEBUG_${func})\n   if(IOS_32 AND DEBUG AND NOT IOSSIM)\n      ${func}(\${ARGV})\n   endif()\nendmacro()\n")
+	file(APPEND ${DKFunctions_ext} "macro(IOS64_DEBUG_${func})\n   if(IOS_64 AND DEBUG AND NOT IOSSIM)\n      ${func}(\${ARGV})\n   endif()\nendmacro()\n")
+	file(APPEND ${DKFunctions_ext} "macro(IOSSIM_DEBUG_${func})\n   if(IOSSIM AND DEBUG)\n      ${func}(\${ARGV})\n   endif()\nendmacro()\n")
+	file(APPEND ${DKFunctions_ext} "macro(IOSSIM32_DEBUG_${func})\n   if(IOSSIM_32 AND DEBUG)\n      ${func}(\${ARGV})\n   endif()\nendmacro()\n")
+	file(APPEND ${DKFunctions_ext} "macro(IOSSIM64_DEBUG_${func})\n   if(IOSSIM_64 AND DEBUG)\n      ${func}(\${ARGV})\n   endif()\nendmacro()\n")
+	file(APPEND ${DKFunctions_ext} "macro(LINUX_DEBUG_${func})\n   if(LINUX AND DEBUG)\n      ${func}(\${ARGV})\n   endif()\nendmacro()\n")
+	file(APPEND ${DKFunctions_ext} "macro(LINUX32_DEBUG_${func})\n   if(LINUX_32 AND DEBUG)\n      ${func}(\${ARGV})\n   endif()\nendmacro()\n")
+	file(APPEND ${DKFunctions_ext} "macro(LINUX64_DEBUG_${func})\n   if(LINUX_64 AND DEBUG)\n      ${func}(\${ARGV})\n   endif()\nendmacro()\n")
+	file(APPEND ${DKFunctions_ext} "macro(RASPBERRY_DEBUG_${func})\n   if(RASPBERRY AND DEBUG)\n      ${func}(\${ARGV})\n   endif()\nendmacro()\n")
+	file(APPEND ${DKFunctions_ext} "macro(RASPBERRY32_DEBUG_${func})\n   if(RASPBERRY_32 AND DEBUG)\n      ${func}(\${ARGV})\n   endif()\nendmacro()\n")
+	file(APPEND ${DKFunctions_ext} "macro(RASPBERRY64_DEBUG_${func})\n   if(RASPBERRY_64 AND DEBUG)\n      ${func}(\${ARGV})\n   endif()\nendmacro()\n")
+	file(APPEND ${DKFunctions_ext} "macro(ANDROID_DEBUG_${func})\n   if(ANDROID AND DEBUG)\n      ${func}(\${ARGV})\n   endif()\nendmacro()\n")
+	file(APPEND ${DKFunctions_ext} "macro(ANDROID32_DEBUG_${func})\n   if(ANDROID_32 AND DEBUG)\n      ${func}(\${ARGV})\n   endif()\nendmacro()\n")
+	file(APPEND ${DKFunctions_ext} "macro(ANDROID64_DEBUG_${func})\n   if(ANDROID_64 AND DEBUG)\n      ${func}(\${ARGV})\n   endif()\nendmacro()\n")
 	
-	file(APPEND ${DKFunctions_ext} "macro(RELEASE_${name})\n   if(RELEASE)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	file(APPEND ${DKFunctions_ext} "macro(WIN_RELEASE_${name})\n   if(WIN AND RELEASE)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	file(APPEND ${DKFunctions_ext} "macro(WIN32_RELEASE_${name})\n   if(WIN_32 AND RELEASE)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	file(APPEND ${DKFunctions_ext} "macro(WIN64_RELEASE_${name})\n   if(WIN_64 AND RELEASE)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	file(APPEND ${DKFunctions_ext} "macro(UNIX_RELEASE_${name})\n   if(NOT WIN AND RELEASE)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	file(APPEND ${DKFunctions_ext} "macro(APPLE_RELEASE_${name})\n   if(MAC OR IOS OR IOSSIM AND RELEASE)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	file(APPEND ${DKFunctions_ext} "macro(MAC_RELEASE_${name})\n   if(MAC AND RELEASE)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	file(APPEND ${DKFunctions_ext} "macro(MAC32_RELEASE_${name})\n   if(MAC_32 AND RELEASE)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	file(APPEND ${DKFunctions_ext} "macro(MAC64_RELEASE_${name})\n   if(MAC_64 AND RELEASE)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	file(APPEND ${DKFunctions_ext} "macro(IOS_RELEASE_${name})\n   if(IOS AND RELEASE AND NOT IOSSIM)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	file(APPEND ${DKFunctions_ext} "macro(IOS32_RELEASE_${name})\n   if(IOS_32 AND RELEASE AND NOT IOSSIM)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	file(APPEND ${DKFunctions_ext} "macro(IOS64_RELEASE_${name})\n   if(IOS_64 AND RELEASE AND NOT IOSSIM)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	file(APPEND ${DKFunctions_ext} "macro(IOSSIM_RELEASE_${name})\n   if(IOSSIM AND RELEASE)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	file(APPEND ${DKFunctions_ext} "macro(IOSSIM32_RELEASE_${name})\n   if(IOSSIM_32 AND RELEASE)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	file(APPEND ${DKFunctions_ext} "macro(IOSSIM64_RELEASE_${name})\n   if(IOSSIM_64 AND RELEASE)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	file(APPEND ${DKFunctions_ext} "macro(LINUX_RELEASE_${name})\n   if(LINUX AND RELEASE)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	file(APPEND ${DKFunctions_ext} "macro(LINUX32_RELEASE_${name})\n   if(LINUX_32 AND RELEASE)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	file(APPEND ${DKFunctions_ext} "macro(LINUX64_RELEASE_${name})\n   if(LINUX_64 AND RELEASE)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	file(APPEND ${DKFunctions_ext} "macro(RASPBERRY_RELEASE_${name})\n   if(RASPBERRY AND RELEASE)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	file(APPEND ${DKFunctions_ext} "macro(RASPBERRY32_RELEASE_${name})\n   if(RASPBERRY_32 AND RELEASE)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	file(APPEND ${DKFunctions_ext} "macro(RASPBERRY64_RELEASE_${name})\n   if(RASPBERRY_64 AND RELEASE)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	file(APPEND ${DKFunctions_ext} "macro(ANDROID_RELEASE_${name})\n   if(ANDROID AND RELEASE)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	file(APPEND ${DKFunctions_ext} "macro(ANDROID32_RELEASE_${name})\n   if(ANDROID_32 AND RELEASE)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
-	file(APPEND ${DKFunctions_ext} "macro(ANDROID64_RELEASE_${name})\n   if(ANDROID_64 AND RELEASE)\n      ${name}(\${ARGV})\n   endif()\nendmacro()\n")
+	file(APPEND ${DKFunctions_ext} "macro(RELEASE_${func})\n   if(RELEASE)\n      ${func}(\${ARGV})\n   endif()\nendmacro()\n")
+	file(APPEND ${DKFunctions_ext} "macro(WIN_RELEASE_${func})\n   if(WIN AND RELEASE)\n      ${func}(\${ARGV})\n   endif()\nendmacro()\n")
+	file(APPEND ${DKFunctions_ext} "macro(WIN32_RELEASE_${func})\n   if(WIN_32 AND RELEASE)\n      ${func}(\${ARGV})\n   endif()\nendmacro()\n")
+	file(APPEND ${DKFunctions_ext} "macro(WIN64_RELEASE_${func})\n   if(WIN_64 AND RELEASE)\n      ${func}(\${ARGV})\n   endif()\nendmacro()\n")
+	file(APPEND ${DKFunctions_ext} "macro(UNIX_RELEASE_${func})\n   if(NOT WIN AND RELEASE)\n      ${func}(\${ARGV})\n   endif()\nendmacro()\n")
+	file(APPEND ${DKFunctions_ext} "macro(APPLE_RELEASE_${func})\n   if(MAC OR IOS OR IOSSIM AND RELEASE)\n      ${func}(\${ARGV})\n   endif()\nendmacro()\n")
+	file(APPEND ${DKFunctions_ext} "macro(MAC_RELEASE_${func})\n   if(MAC AND RELEASE)\n      ${func}(\${ARGV})\n   endif()\nendmacro()\n")
+	file(APPEND ${DKFunctions_ext} "macro(MAC32_RELEASE_${func})\n   if(MAC_32 AND RELEASE)\n      ${func}(\${ARGV})\n   endif()\nendmacro()\n")
+	file(APPEND ${DKFunctions_ext} "macro(MAC64_RELEASE_${func})\n   if(MAC_64 AND RELEASE)\n      ${func}(\${ARGV})\n   endif()\nendmacro()\n")
+	file(APPEND ${DKFunctions_ext} "macro(IOS_RELEASE_${func})\n   if(IOS AND RELEASE AND NOT IOSSIM)\n      ${func}(\${ARGV})\n   endif()\nendmacro()\n")
+	file(APPEND ${DKFunctions_ext} "macro(IOS32_RELEASE_${func})\n   if(IOS_32 AND RELEASE AND NOT IOSSIM)\n      ${func}(\${ARGV})\n   endif()\nendmacro()\n")
+	file(APPEND ${DKFunctions_ext} "macro(IOS64_RELEASE_${func})\n   if(IOS_64 AND RELEASE AND NOT IOSSIM)\n      ${func}(\${ARGV})\n   endif()\nendmacro()\n")
+	file(APPEND ${DKFunctions_ext} "macro(IOSSIM_RELEASE_${func})\n   if(IOSSIM AND RELEASE)\n      ${func}(\${ARGV})\n   endif()\nendmacro()\n")
+	file(APPEND ${DKFunctions_ext} "macro(IOSSIM32_RELEASE_${func})\n   if(IOSSIM_32 AND RELEASE)\n      ${func}(\${ARGV})\n   endif()\nendmacro()\n")
+	file(APPEND ${DKFunctions_ext} "macro(IOSSIM64_RELEASE_${func})\n   if(IOSSIM_64 AND RELEASE)\n      ${func}(\${ARGV})\n   endif()\nendmacro()\n")
+	file(APPEND ${DKFunctions_ext} "macro(LINUX_RELEASE_${func})\n   if(LINUX AND RELEASE)\n      ${func}(\${ARGV})\n   endif()\nendmacro()\n")
+	file(APPEND ${DKFunctions_ext} "macro(LINUX32_RELEASE_${func})\n   if(LINUX_32 AND RELEASE)\n      ${func}(\${ARGV})\n   endif()\nendmacro()\n")
+	file(APPEND ${DKFunctions_ext} "macro(LINUX64_RELEASE_${func})\n   if(LINUX_64 AND RELEASE)\n      ${func}(\${ARGV})\n   endif()\nendmacro()\n")
+	file(APPEND ${DKFunctions_ext} "macro(RASPBERRY_RELEASE_${func})\n   if(RASPBERRY AND RELEASE)\n      ${func}(\${ARGV})\n   endif()\nendmacro()\n")
+	file(APPEND ${DKFunctions_ext} "macro(RASPBERRY32_RELEASE_${func})\n   if(RASPBERRY_32 AND RELEASE)\n      ${func}(\${ARGV})\n   endif()\nendmacro()\n")
+	file(APPEND ${DKFunctions_ext} "macro(RASPBERRY64_RELEASE_${func})\n   if(RASPBERRY_64 AND RELEASE)\n      ${func}(\${ARGV})\n   endif()\nendmacro()\n")
+	file(APPEND ${DKFunctions_ext} "macro(ANDROID_RELEASE_${func})\n   if(ANDROID AND RELEASE)\n      ${func}(\${ARGV})\n   endif()\nendmacro()\n")
+	file(APPEND ${DKFunctions_ext} "macro(ANDROID32_RELEASE_${func})\n   if(ANDROID_32 AND RELEASE)\n      ${func}(\${ARGV})\n   endif()\nendmacro()\n")
+	file(APPEND ${DKFunctions_ext} "macro(ANDROID64_RELEASE_${func})\n   if(ANDROID_64 AND RELEASE)\n      ${func}(\${ARGV})\n   endif()\nendmacro()\n")
 endfunction()
+set(dk_disabled_list ""	CACHE INTERNAL "")
 set(DKFunctions_ext ${DKCMAKE}/DKFunctions_ext.cmake)
-file(REMOVE ${DKFunctions_ext})
+dk_remove(${DKFunctions_ext})
+
+
+###############################################################################
+# dk_printAllVariables()
+#
+#	Print all cmake varibles
+#
+macro(dk_return)
+	message(STATUS "dk_return()")
+	return()
+endmacro()
+dk_createOsMacros("dk_return")
+
 
 ###############################################################################
 # dk_printAllVariables()
@@ -231,7 +257,6 @@ macro(dk_printAllVariables)
 	get_cmake_property(varNames VARIABLES)
 	list(SORT varNames)
 	foreach(varName ${varNames})
-		#message(STATUS "${varName}=${${varName}}")
 		dk_info(varName)
 		file(APPEND ${CMAKE_BINARY_DIR}/cmake_variables.temp "${varName}				==				${${varName}}\n")
 	endforeach()
@@ -239,61 +264,50 @@ endmacro()
 
 
 ###############################################################################
-# dk_includes(str substr result)
-#
-#	Test if a string contains a substring
-#
-#	str:(required)		The string to search 
-#	substr:(required)	The substring to search for
-#	result:(required)	Returns true if the str contains the substr. Otherwise returns false
-#
-function(dk_includes str substr result)
-	#DKDEBUGFUNC(${ARGV})
-	string(FIND "${str}" "${substr}" index)
-	if(${index} GREATER -1)
-		set(${result} true PARENT_SCOPE)
-	else()
-		set(${result} false PARENT_SCOPE)
-	endif()
-endfunction()
-
-
-###############################################################################
 # dk_set(variable value)
 #	
 #	https://stackoverflow.com/a/29250496/688352
 #
-#	@variable:(required)	The name of a variable to declair
-#	@value:(required)		The value to set the variable to. 
+#	@variable	- The name of a variable to declair
+#	@value		- The value to set the variable to. 
 #
 function(dk_set variable value)
 	DKDEBUGFUNC(${ARGV})
 	set(${variable} ${value} ${ARGN} CACHE INTERNAL "")
 	
-	###### print library versions ############
-	dk_includes(${variable} "_VERSION" result)
-	if(${result})
-		dk_info("${variable}: ${value}")
-	endif()
-	##########################################
+#	###### print library versions ############
+#	dk_includes(${variable} "_VERSION" includes)
+#	if(${includes})
+#		dk_info("${variable}: ${value}")
+#	endif()
+#	##########################################
+
 endfunction()
-dk_aliasFunctions("dk_set")
+dk_createOsMacros("dk_set")
 
 
 ###############################################################################
 # dk_unset(variable)
 #
-#	@variable:(required)
+#	TODO
+#
+#	@variable	- The name of the variable to unset
 #
 function(dk_unset variable)
 	DKDEBUGFUNC(${ARGV})
 	set(${variable} "" CACHE INTERNAL "")
 	unset(${variable})
+	#set(${variable} "" CACHE INTERNAL "")
+	#set(variable "" CACHE INTERNAL "")
+	#unset(${variable} CACHE)
+	#unset(variable CACHE)
 endfunction()
 
 
 ###############################################################################
 # dk_exit()
+#
+#	Exit cmake
 #
 macro(dk_exit)
 	DKDEBUGFUNC(${ARGV})
@@ -306,19 +320,19 @@ endmacro()
 
 
 ##############################################################################
-# dk_isNumber(variable result)
+# dk_isNumber(variable RESULT)
 # 
 #	Test if a varaible is a number
 #
-#	@variable:(required) The variable to test
-#	@result: True if the variable is a number, False if otherwise.
+#	@variable	- The variable to test
+#	@RESULT: 	- True if the variable is a number, False if otherwise.
 #
-macro(dk_isNumber variable result)
+macro(dk_isNumber variable RESULT)
 	DKDEBUGFUNC(${ARGV})
 	if(variable MATCHES "^[0-9]+$")
-		set(${result} TRUE)
+		set(${RESULT} TRUE)
 	else()
-		set(${result} FALSE)
+		set(${RESULT} FALSE)
 	endif()
 endmacro()
 
@@ -328,8 +342,8 @@ endmacro()
 # 
 #	Wait until a keypress or timeout has elapsed in seconds
 #
-#	@ARGV0:timeout (Optional)(Number) default = 60
-#	@ARGV1:msg     (Optional)(String) default = "press and key to continue."
+#	@ARGV0:timeout (Optional)	- default = 60
+#	@ARGV1:msg     (Optional)	- default = "press and key to continue."
 #
 macro(dk_wait) 
 	DKDEBUGFUNC(${ARGV})
@@ -373,7 +387,7 @@ endmacro()
 # 
 #	Print the contents of a variable to the screen
 #
-#	@variable:(required)	The variable to print to the screen. Without variable brackets ${ }'
+#	@variable	- The variable to print to the screen. Without variable brackets ${ }'
 #
 macro(dk_dump variable)
 	DKDEBUGFUNC(${ARGV})
@@ -408,7 +422,7 @@ endmacro()
 # 
 #	Watch a varible reading and writing access events
 #
-#	@variable:(required)	The variable to watch
+#	@variable	- The variable to watch
 #
 macro(dk_watch variable)
 	DKDEBUGFUNC(${ARGV})
@@ -421,11 +435,11 @@ endmacro()
 # 
 #	Description:  TODO
 #
-#	@variable:(required)			The variable to watch
-#	@access:(required) 		TODO
-#	@val:(required) 		TODO
-#   @1st:(required) 		TODO
-#	@stack:(required) 		TODO
+#	@variable	- The variable to watch
+#	@access 	- TODO
+#	@val 		- TODO
+#   @1st 		- TODO
+#	@stack 		- TODO
 #
 macro(dk_watchCallback variable access val lst stack)
 	DKDEBUGFUNC(${ARGV})
@@ -441,9 +455,9 @@ endmacro()
 # 
 #	Set a XCode specific property
 #
-#   @TARGET:(required)		The project target name to set the property for
-#	@property:(required)	The name of the property to set
-#   @value:(required)		The value to set the property to
+#   @TARGET		- The project target name to set the property for
+#	@property	- The name of the property to set
+#   @value		- The value to set the property to
 #
 macro(dk_setXcodeProperty TARGET property value)
 	DKDEBUGFUNC(${ARGV})
@@ -496,7 +510,7 @@ endfunction()
 #
 #	Delete all empty directories with a path
 #
-#	@path:(required)	The path to search for empty folders to delete
+#	@path	- The path to search for empty folders to delete
 #
 function(dk_deleteEmptyDirectories path)
 	DKDEBUGFUNC(${ARGV})
@@ -513,18 +527,17 @@ endfunction()
 
 
 ###############################################################################
-# dk_getEnv(name result)
+# dk_getEnv(name RESULT)
 #
 #	Get a system environment variable
 #
-#	@name:(required)	The name of the system environment variable to get
-#	@result:			Returns the value of the system environment vairable
+#	@name		- The name of the system environment variable to get
+#	@RESULT		- Returns the value of the system environment vairable
 #
-function(dk_getEnv name result)
+function(dk_getEnv name RESULT)
 	DKDEBUGFUNC(${ARGV})
-	#dk_debug("ENVname = $ENV{${name}}")
 	dk_debug(ENV{${name}})
-	set(${result} $ENV{${name}} PARENT_SCOPE)
+	set(${RESULT} $ENV{${name}} PARENT_SCOPE)
 endfunction()
 
 
@@ -533,8 +546,8 @@ endfunction()
 #
 #	Download a file
 #
-#	@src_path:(required)	The url of the file to download
-#	@dest_path:(required)	The path to download the file to
+#	@src_path	- The url of the file to download
+#	@dest_path	- The path to download the file to
 #
 #	Notes: https://cmake.org/pipermail/cmake/2012-September/052205.html/
 #
@@ -554,33 +567,25 @@ function(dk_download src_path dest_path) # ARGV1 = dest_path
 	# Setup all src_path variables
 	if(NOT src_path)
 		dk_assert("src_path is invalid")
-		return()
 	endif()
-	#dk_debug("src_path = ${src_path}")
 	dk_debug(src_path)
 	
 	get_filename_component(src_dir ${src_path} DIRECTORY)
 	if(NOT src_dir)
 		dk_assert("src_dir is invalid")
-		return()
 	endif()
-	#dk_debug("src_dir = ${src_dir}")
 	dk_debug(src_dir)
 	
 	get_filename_component(src_filename ${src_path} NAME)
 	if(NOT src_filename)
 		dk_assert("src_filename is invalid")
-		return()
 	endif()
-	#dk_debug("src_filename = ${src_filename}")
 	dk_debug(src_filename)
 	
 	dk_getExtension(${src_path} src_ext)	
 	if(NOT src_ext)
 		dk_assert("src_ext is invalid")
-		return()
 	endif()
-	#dk_debug("src_ext = ${src_ext}")
 	dk_debug(src_ext)
 	
 	# Setup all dest_path variables
@@ -589,25 +594,21 @@ function(dk_download src_path dest_path) # ARGV1 = dest_path
 	endif()
 	if(NOT dest_path)
 		dk_assert("dest_path is invalid")
-		return()
 	endif()	
 	if(IS_DIRECTORY ${dest_path})
 		set(dest_path "${dest_path}/${src_filename}")
 	endif()
-	#dk_debug("dest_path = ${dest_path}")
 	dk_debug(dest_path)
 	
 	get_filename_component(dest_dir ${dest_path} DIRECTORY)
 	if(NOT dest_dir)
 		dk_assert("dest_dir is invalid")
-		return()
 	endif()
 	if(NOT EXISTS ${dest_dir})
 		dk_warn("dest_dir:(${dest_dir}) does not exists. It will be created")
 		dk_makeDirectory(${dest_dir})
 	endif()
 	dk_set(CURRENT_DIR ${dest_dir})
-	#dk_debug("dest_dir = ${dest_dir}")
 	dk_debug(dest_dir)
 	
 	get_filename_component(dest_filename ${dest_path} NAME)
@@ -615,19 +616,16 @@ function(dk_download src_path dest_path) # ARGV1 = dest_path
 		dk_assert("dest_filename is invalid")
 		return()
 	endif()
-	#dk_debug("dest_filename = ${dest_filename}")
 	dk_debug(dest_filename)
 	
 	dk_getExtension(${dest_path} dest_ext)
 	if(NOT dest_ext)
 		dk_assert("dest_ext is invalid")
-		return()
 	endif()
-	#dk_debug("dest_ext = ${dest_ext}")
 	dk_debug(dest_ext)
 	
 	if(EXISTS ${dest_path})
-		dk_warn("dest_path:(${dest_path}) already exists")
+		dk_error("dest_path:(${dest_path}) already exists")
 		return()
 	endif()
 	
@@ -637,45 +635,46 @@ function(dk_download src_path dest_path) # ARGV1 = dest_path
 	# setup temp_path variables
 	set(temp_filename "${dest_filename}.downloading")
 	set(temp_path ${dest_dir}/${temp_filename})
-	#dk_debug("temp_path = ${temp_path}")
 	dk_debug(temp_path)
 	if(EXISTS ${temp_path})
-		file(REMOVE ${temp_path})
+		dk_remove(${temp_path})
 	endif()
 	if(EXISTS ${temp_path})
 		dk_assert("temp_path:(${temp_path}) could not be removed")
-		return()
 	endif()
 	
 	dk_info("Downloading ${src_filename}. . . please wait")
 	file(DOWNLOAD ${src_path} ${temp_path} 
 		SHOW_PROGRESS 
-		INACTIVITY_TIMEOUT 60
+		INACTIVITY_TIMEOUT 70
 		STATUS status 
 	)
 	list(GET status 0 status_code) 
 	list(GET status 1 status_string)
 	if(NOT status_code EQUAL 0)
-		file(REMOVE ${temp_path})
+		dk_remove(${temp_path})
 		dk_assert("error: downloading ${src_path} \nstatus_code: ${status_code} \nstatus_string: ${status_string}")
 	else()
 		if(NOT EXISTS ${temp_path})
 			dk_assert("temp_path:(${temp_path}) could not locate temporary download file")
-			return()
 		endif()
-		dk_rename(${temp_path} ${dest_path} false)
+		dk_rename(${temp_path} ${dest_path})
 		if(NOT EXISTS ${dest_path})
 			dk_assert("dest_path:(${dest_path}) Could not locate downloaded file")
-			return()
 		endif()
-		dk_info("Finnished downloading ${dest_filename}")
+		dk_message("${green} Finnished downloading ${dest_filename} ${CLR}")
 	endif() 
 endfunction()
-dk_aliasFunctions("dk_download")
+dk_createOsMacros("dk_download")
 
 
 ###############################################################################
 # dk_extract(src dest)
+#
+#	Extract a archive file
+#
+#	@src	- The full path of the archive file
+#	@dest	- The folder path to extract the archive to
 #
 function(dk_extract src dest)
 	DKDEBUGFUNC(${ARGV})
@@ -692,6 +691,10 @@ endfunction()
 ###############################################################################
 # dk_zip(path)
 #
+#	Compress a path to a assets.zip archive
+#
+#	@path	- The full path to add to the archive file
+#
 function(dk_zip path)
 	DKDEBUGFUNC(${ARGV})
 	dk_info("Zipping: ${path}")
@@ -703,10 +706,28 @@ endfunction()
 
 
 ###############################################################################
-# dk_copy(from to overwrite)
+# dk_copy(from to) OVERWRITE NOERROR
 #
-function(dk_copy from to overwrite)
+#	Copy a file or directory to another location
+#
+#	@from		- The source path to copy
+#	@to			- The destination path to copy to
+#	OVERWRITE	- if any of the parameters equals OVERWRITE, overwritting existing files is enabled
+#   NOERROR     - if any of the parameters equals NOERROR, dk_error() messages will not be displayed
+#
+function(dk_copy from to) # OVERWRITE NOERROR
 	DKDEBUGFUNC(${ARGV})
+	
+	dk_includes("${ARGN}" "OVERWRITE" includes)
+	if(${includes})
+		set(overwrite true)
+	endif()
+	
+	dk_includes("${ARGN}" "NOERROR" includes)
+	if(${includes})
+		set(noerror true)
+	endif()
+	
 	if(EXISTS ${from})
 		if(IS_DIRECTORY ${from})
 			file(GLOB_RECURSE allfiles RELATIVE "${from}/" "${from}/*")
@@ -727,7 +748,7 @@ function(dk_copy from to overwrite)
 					elseif(compare_result EQUAL 0)
 #						dk_info("${sourcefile} No Copy, The files are identical.")
 					else()
-						dk_warn( "dk_copy(${from} ${to} ${overwrite}): \n ERROR: compare_result = ${compare_result}")
+						dk_error( "dk_copy(${from} ${to} ${overwrite}): \n ERROR: compare_result = ${compare_result}")
 					endif()
 				elseif(NOT EXISTS ${destinationfile})
 					execute_process(COMMAND ${CMAKE_COMMAND} -E copy ${sourcefile} ${destinationfile})
@@ -744,13 +765,20 @@ function(dk_copy from to overwrite)
 			endif()
 		endif()
 	else()
-		dk_warn("from:(${from}) The source path does not exist")
+		if(NOT noerror)
+			dk_error("from:(${from}) The source path does not exist")
+		endif()
 	endif()
 endfunction()
 
 
 ###############################################################################
 # dk_filesMatch(fileA fileB)
+#
+#	TODO
+#
+#	@fileA	- TODO
+#	@fileB	- TODO
 #
 function(dk_filesMatch fileA fileB)
 	DKDEBUGFUNC(${ARGV})
@@ -766,50 +794,48 @@ endfunction()
 
 
 ###############################################################################
-# dk_rename(from to overwrite)
+# dk_rename(from to) OVERWRITE NOERROR
 #
-function(dk_rename from to overwrite)
+#	Rename file or directory or move a file or directory to another location
+#
+#	@from		- The source path to copy
+#	@to			- The destination path to copy to
+#	OVERWRITE	- if any of the parameters equals OVERWRITE, overwritting existing files is enabled
+#   NOERROR     - if any of the parameters equals NOERROR, dk_error() messages will not be displayed
+#
+function(dk_rename from to) # OVERWRITE NOERROR
 	DKDEBUGFUNC(${ARGV})
+	dk_includes("${ARGN}" "OVERWRITE" includes)
+	if(${includes})
+		set(overwrite true)
+	endif()
+	dk_includes("${ARGN}" "NOERROR" includes)
+	if(${includes})
+		set(noerror true)
+	endif()
 	dk_info("Renameing ${from} to ${to}")
 	if(NOT EXISTS ${from})
-		dk_error("from:${from} not found")
+		if(NOT noerror)
+			dk_error("from:${from} not found")
+		endif()
 		return()
 	endif()
 	if(EXISTS ${to})
 		if(NOT ${overwrite})
 			dk_assert("Cannot rename file. Destiantion exists and not set to overwrite")
-			return()
 		endif()
-		file(REMOVE ${to})
+		dk_remove(${to})
 	endif()
 	file(RENAME ${from} ${to})
 endfunction()
 
 
 ###############################################################################
-# dk_remove(path)
-#
-function(dk_remove path)
-	DKDEBUGFUNC(${ARGV})
-	if(NOT EXISTS ${path})
-		dk_warn("Path:(${path}) does not exist")
-		return()
-	endif()
-	
-	file(REMOVE ${path})
-	return()
-	
-	
-	if(IS_DIRECTORY ${path})
-		execute_process(COMMAND ${CMAKE_COMMAND} -E remove_directory ${path})
-	else()
-		execute_process(COMMAND ${CMAKE_COMMAND} -E remove ${path})
-	endif()
-endfunction()
-
-
-###############################################################################
 # dk_upxCompress(path)
+#
+#	UPX compress an executable or dynamic library file
+#
+#	@path		- The full path to the binary file to compress with UPX
 #
 function(dk_upxCompress path)
 	DKDEBUGFUNC(${ARGV})
@@ -821,7 +847,11 @@ endfunction()
 
 ###############################################################################
 # dk_enable(plugin)
-#	
+#
+#	TODO
+#
+#	@plugin		- TODO
+#
 function(dk_enable plugin)
 	DKDEBUGFUNC(${ARGV})
 	if(NOT ${plugin})
@@ -845,26 +875,41 @@ endfunction()
 
 
 ###############################################################################
-# dk_disable(plugin)
+# dk_disable(plugin) #target
+#
+#	TODO
+#
+#	@plugin					- TODO
+#	@target:(optional)	- TODO
 #
 function(dk_disable plugin)
 	DKDEBUGFUNC(${ARGV})
+	set(target ${ARGV1})
+	
 	if(BYPASS_DISABLE)
 		dk_info("* dk_disable(${plugin}) ignored.  BYPASS_DISABLE is set to ON. ${plugin} will not be disabled *")
 		return()
 	endif()
-	if(NOT ${CMAKE_CURRENT_LIST_DIR} STREQUAL ${DKCMAKE} AND NOT ${CMAKE_CURRENT_LIST_DIR} STREQUAL ${DKPROJECT}) # /from DKCMake or curremt Project directory only
-		dk_assert("dk_disable() Can only be used from the DKCMake/DKDisabled.cmake file. This is to avoid having disabled libraries hideing everywhere")
+	
+	if(NOT ${CMAKE_CURRENT_LIST_DIR} STREQUAL ${DKCMAKE})
+		if(NOT ${CMAKE_CURRENT_LIST_DIR} STREQUAL ${DKPROJECT})
+			if(NOT ${CMAKE_CURRENT_LIST_DIR} STREQUAL ${DKIMPORTS}/${plugin})
+				if(NOT ${CMAKE_CURRENT_LIST_DIR} STREQUAL ${DKPLUGINS}/${plugin})
+					dk_assert("dk_disable() Can only be used from the DKCMake/DKDisabled.cmake file. This is to avoid having disabled libraries hideing everywhere")
+				endif()
+			endif()
+		endif()
 	endif()
 	
 	if(NOT EXISTS ${DKIMPORTS}/${plugin}/DKMAKE.cmake)
-	if(NOT EXISTS ${DKPLUGINS}/${plugin}/DKMAKE.cmake)
-		dk_warn("dk_disable(${plugin}):  unable to locate plugin in /3rdParty/_DKIMPORTS  or /DKPlugins")
-		return()
-	endif()
+		if(NOT EXISTS ${DKPLUGINS}/${plugin}/DKMAKE.cmake)
+			dk_warn("dk_disable(${plugin}):  unable to locate plugin in /3rdParty/_DKIMPORTS  or /DKPlugins")
+			return()
+		endif()
 	endif()
 	
 	if(${ARGC} GREATER 1)
+	#if(target)
 		dk_unset(${ARGV1})
 		dk_unset(HAVE_${ARGV1})
 		# In c++ we can't use certian symbals in the preprocess or for macros. - must be turned to _
@@ -885,6 +930,10 @@ endfunction()
 ###############################################################################
 # dk_define(str)
 #
+#	TODO
+#
+#	@str	- TODO
+#
 function(dk_define str)
 	DKDEBUGFUNC(${ARGV})
 	if(CMAKE_SCRIPT_MODE_FILE)
@@ -897,11 +946,15 @@ function(dk_define str)
 	dk_set(DKDEFINES_LIST ${DKDEFINES_LIST} ${str})
 	add_definitions(-D${str})
 endfunction()
-dk_aliasFunctions("dk_define")
+dk_createOsMacros("dk_define")
 
 
 ###############################################################################
 # dk_undefine(str)
+#
+#	TODO
+#
+#	@str	- TODO
 #
 function(dk_undefine str)
 	DKDEBUGFUNC(${ARGV})
@@ -918,7 +971,7 @@ endfunction()
 #
 #	Add a directory to the compiler include paths
 #
-#	@path:(required)	The path to add to the compiler include paths
+#	@path	- The path to add to the compiler include paths
 #
 function(dk_include path)
 	DKDEBUGFUNC(${ARGV})
@@ -936,7 +989,7 @@ function(dk_include path)
 		endif()
 	endforeach()
 endfunction()
-dk_aliasFunctions("dk_include")
+dk_createOsMacros("dk_include")
 
 
 ###############################################################################
@@ -944,7 +997,7 @@ dk_aliasFunctions("dk_include")
 #
 #	Add a directory to the compiler library paths
 #
-#	@path:(required)	The path to add to the compiler library paths
+#	@path	The path to add to the compiler library paths
 #
 function(dk_linkDir path)
 	DKDEBUGFUNC(${ARGV})
@@ -957,17 +1010,17 @@ function(dk_linkDir path)
 		link_directories(${item})
 	endforeach()
 endfunction()
-dk_aliasFunctions("dk_linkDir")
+dk_createOsMacros("dk_linkDir")
 
 
 ###############################################################################
-# dk_getCurrentDirectory(result)
+# dk_getCurrentDirectory(RESULT)
 #
 #	Retrieve the current working directory
 #
-#	@result: returns the current working directory upon success. False upon error
+#	@RESULT: returns the current working directory upon success. False upon error
 #
-#function(dk_getCurrentDirectory result)
+#function(dk_getCurrentDirectory RESULT)
 #	DKDEBUGFUNC(${ARGV})
 #	if(WIN_HOST)
 #		execute_process(COMMAND echo "hello world" ECHO_OUTPUT_VARIABLE output WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
@@ -977,7 +1030,7 @@ dk_aliasFunctions("dk_linkDir")
 #	execute_process(COMMAND timeout /t 2 /nobreak WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})  ##wait 2 seconds for the stdout to flush
 #	#dk_info("output = ${output}")
 #	dk_info(output)
-#	set(${result} ${output} PARENT_SCOPE)
+#	set(${RESULT} ${output} PARENT_SCOPE)
 #endfunction()
 
 
@@ -986,7 +1039,7 @@ dk_aliasFunctions("dk_linkDir")
 #
 #	Create a directory 
 #
-#	@path:(required)	The full path to the direcotory to be created
+#	@path	- The full path to the direcotory to be created
 #
 function(dk_makeDirectory path)
 	DKDEBUGFUNC(${ARGV})
@@ -1017,54 +1070,54 @@ endfunction()
 
 
 ###############################################################################
-# dk_getDirectory(path result)
+# dk_getDirectory(path RESULT)
 #
 #	Get the directory portion of a path
 #
-#	@path:(required)	The path to use
-#	@result:	Returns the directory upon success: False upon error
+#	@path		- The path to use
+#	@RESULT		- Returns the directory upon success: False upon error
 #
-function(dk_getDirectory path result)
+function(dk_getDirectory path RESULT)
 	DKDEBUGFUNC(${ARGV})
 	string(FIND ${path} "/" index REVERSE)
 	if(${index} EQUAL -1)
 		return() # no path dividers found
 	endif()
 	string(SUBSTRING ${path} 0 ${index} directory) 
-    set(${result} ${directory} PARENT_SCOPE)
+    set(${RESULT} ${directory} PARENT_SCOPE)
 endfunction()
 
 
+# FIXME:  not working
 ###############################################################################
-# dk_getFilename(path result)
+# dk_getFilename(path RESULT)
 #
 #	Get the filename portion of a path
 #
-#	@path:(required) The path to use
-#	@result:	Returns the file name upon success: False upon error
+#	@path		- The path to use
+#	@RESULT:	- Returns the file name upon success: False upon error
 #
-function(dk_getFilename path result)
+function(dk_getFilename path RESULT)
 	DKDEBUGFUNC(${ARGV})
 	string(FIND ${path} "/" index REVERSE)
 	if(${index} EQUAL -1)
-		dk_assert("No Path Dividers found")
-		return()
+		dk_error("No Path Dividers found")
 	endif()
 	MATH(EXPR index "${index}+1")
 	string(SUBSTRING ${path} ${index} -1 filename) 
-    set(${result} ${filename} PARENT_SCOPE)
+    set(${RESULT} ${filename} PARENT_SCOPE)
 endfunction()
 
 
 ###############################################################################
-# dk_getExtension(path result)
+# dk_getExtension(path RESULT)
 #
 #	Get the extension portion of a path
 #
-#	@path:(required) The path to use
-#	@result:	Returns the extension upon success: False upon error
+#	@path		- The path to use
+#	@RESULT:	- Returns the extension upon success: False upon error
 #
-function(dk_getExtension path result)
+function(dk_getExtension path RESULT)
 	DKDEBUGFUNC(${ARGV})
 	# WHY A NEW GET EXTENSION FUNCTION ?
 #	get_filename_component(extension ${url} EXT)       #Gets the large part of the extension of everything after the first .
@@ -1074,30 +1127,38 @@ function(dk_getExtension path result)
 	if(${index} EQUAL -1)
 		return() # no extension found
 	endif()
-	string(SUBSTRING ${path} ${index} -1 ext) 
-    set(${result} ${ext} PARENT_SCOPE)
+	string(SUBSTRING ${path} ${index} -1 ext)
+
+	#look for .tar
+	math(EXPR tar ${index}-4)
+	if(${tar} GREATER -1)
+		string(SUBSTRING ${path} ${tar} -1 tarext)
+		if("${tarext}" STREQUAL ".tar${ext}")
+			set(ext ${tarext})
+		endif()
+	endif()
+    set(${RESULT} ${ext} PARENT_SCOPE)
 endfunction()
 
-
 ###############################################################################
-# dk_dirIsEmpty(path result)
+# dk_dirIsEmpty(path RESULT)
 #
 #	Get weather or not a directory is empty
 #
-#	@path: The full path to the directory to check
-#	@result: Returns true if the directory is empty. False if the directory is not empty
+#	@path		- The full path to the directory to check
+#	@RESULT		- Returns true if the directory is empty. False if the directory is not empty
 #
-function(dk_dirIsEmpty path result)
+function(dk_dirIsEmpty path RESULT)
 	DKDEBUGFUNC(${ARGV})
 	if(EXISTS ${path})
 		file(GLOB items RELATIVE "${path}/" "${path}/*")
 		list(LENGTH items count)
 		if(${count} GREATER 0)
-			set(${result} false PARENT_SCOPE)
+			set(${RESULT} false PARENT_SCOPE)
 			return()
 		endif()
 	endif()
-	set(${result} true PARENT_SCOPE)
+	set(${RESULT} true PARENT_SCOPE)
 endfunction()
 
 
@@ -1118,55 +1179,73 @@ endfunction()
 #
 #	Copy files from a DK/3rdParty/_DKIMPORTS/library to the DK/3rdParty/library install location
 #
-#	@import_name:(required)	The name of the 3rdParty DKIMPORT library
-#	@dest_path:(required)	The location of the installed library under /3rdParty
+#	@import_name	- The name of the 3rdParty DKIMPORT library
+#	@dest_path		- The location of the installed library under /3rdParty
 #
 function(dk_patch import_name dest_path)
 	DKDEBUGFUNC(${ARGV})
 	dk_warn("COPYING PATCH FILES FROM _IMPORTS/${import_name} TO ${dest_path}")
 	dk_warn("To stop patch files from overwriting install files, remove the \"PATCH\" argument from the end of the DKIMPORT or dk_install command")
 	dk_warn("located in ${DKIMPORTS}/${import_name}/DKMAKE.cmake")
-	dk_copy(${DKIMPORTS}/${import_name}/ ${dest_path}/ TRUE)
+	dk_copy(${DKIMPORTS}/${import_name}/ ${dest_path}/ OVERWRITE)
 endfunction()
 
 
 ###############################################################################
-# dk_install(src_path import_name dest_path)
+# dk_install(plugin)
 #
 #	Install a 3rdParty library, executable or package
-#	For archive files such as libraries and assets, the arguments are:  The download src_path, the name of its _DKIMPORTS folder, The name given to the installed 3rdParty/folder  
-#	For executable files such as software amd IDE's the arguments are:  The download src_path, the name of the final name of the dl file, The installation path to check for installation.
+#	For archive files such as libraries and assets, the arguments are:  The download url_path, the name of its _DKIMPORTS folder, The name given to the installed 3rdParty/folder  
+#	For executable files such as software amd IDE's the arguments are:  The download url_path, the name of the final name of the dl file, The installation path to check for installation.
 #
-#	@src_path:(required)	The download url or local path to an install file. May be .zip, .exe, .msi, .tar.gz etc. 
-#	@import_name:(required)	The name of the 3rdParty package being installed
-#	@dest_path:(required)	The path to the install location under DK/3rdParty
+#	@url_path			-The download url or local path to an install file. May be .zip, .exe, .msi, .tar.gz etc. 
+#	@dest_path			-The path to the install location under DK/3rdParty
+#	@plugin (optional)	-The name of the 3rdParty package being installed
+#	PATCH				-Patch the install directory with files from the DKIMPORT path
 #
-function(dk_install src_path import_name dest_path)
-	DKDEBUGFUNC(${ARGV})
-	dk_info(" ")
-	string(TOLOWER ${import_name} import_name_lower)
-	if(NOT ${import_name} STREQUAL ${import_name_lower})
-		dk_assert("ERROR: 2nd parameter in dk_install() (${import_name}) must be all lowercase")
+function(dk_install plugin) #PATCH
+	DKDEBUGFUNC(${ARGV} FORCE)
+	
+	set(dest_path ${${plugin}})
+	set(url_path ${${plugin}_URL})
+	
+	#if(NOT "${ARGV2}" STREQUAL "PATCH")
+	#	set(plugin ${ARGV2})
+	#endif()
+	
+	#if(NOT plugin)
+	#	get_filename_component(plugin ${CMAKE_CURRENT_LIST_DIR} NAME)
+	#else()
+	#	get_filename_component(plugin ${plugin} NAME)
+	#endif()
+	
+	#string(TOLOWER ${plugin} plugin_lower)
+	#if(NOT ${plugin} STREQUAL ${plugin_lower})
+	#	dk_error("ERROR:  dk_install() (${plugin}) must be all lowercase")
+	#endif()
+	
+	if(NOT EXISTS ${DKIMPORTS}/${plugin})
+		dk_assert("ERROR: dk_install() (${DKIMPORTS}/${plugin}) does not exist")
 	endif()
 	
-	if(NOT EXISTS ${DKIMPORTS}/${import_name})
-		dk_assert("ERROR: 2nd parameter in dk_install() (${DKIMPORTS}/${import_name}) does not exist")
-	endif()
 	if(EXISTS ${dest_path}/installed)
-		dk_info("${import_name} already installed")
-		if("${ARGN}" STREQUAL "PATCH")
-			dk_patch(${import_name} ${dest_path})
+		dk_info("${plugin} already installed")
+		#string(FIND "${ARGN}" "PATCH" index)
+		#if(${index} GREATER -1)
+		dk_includes("${ARGN}" "PATCH" hadPATCH)
+		if(${hadPATCH})
+			dk_patch(${plugin} ${dest_path})
 		endif()
 		return()
 	endif()
 	dk_debug(" ")
-	dk_debug(src_path)
-	dk_getDirectory(${src_path} src_directory)
-	dk_debug(src_directory)
-	dk_getFilename(${src_path} src_filename)
-	dk_debug(src_filename)
-	dk_getExtension(${src_filename} src_extension)
-	dk_debug(src_extension)
+	dk_debug(url_path)
+	dk_getDirectory(${url_path} url_directory)
+	dk_debug(url_directory)
+	dk_getFilename(${url_path} url_filename)
+	dk_debug(url_filename)
+	dk_getExtension(${url_filename} url_extension)
+	dk_debug(url_extension)
 	dk_debug(" ")
 	dk_debug(dest_path)
 	dk_getDirectory(${dest_path} dest_directory)
@@ -1178,165 +1257,176 @@ function(dk_install src_path import_name dest_path)
 	dk_debug(" ")
 	
 	# let's check that the scr_filename has at least the name of the target in it somewhere, or else we gotta rename it
-	string(TOLOWER ${src_filename} src_filename_lower)
-	string(FIND ${src_filename_lower} ${import_name} index)
-	#dk_includes(${src_filename_lower} ${import_name} result)
+	string(TOLOWER ${url_filename} url_filename_lower)
+	string(FIND ${url_filename_lower} ${plugin} index)
 	if(${index} EQUAL -1)
+	#dk_includes(${url_filename_lower} ${plugin} result)
 	#if(NOT ${result})
-		dk_debug("The download filename ${src_filename} does not contaian the import name ${import_name}")
+		dk_debug("The download filename ${url_filename} does not contaian the import name ${plugin}")
 		string(TOLOWER ${dest_filename} dest_filename_lower)
-		string(FIND ${dest_filename_lower} ${import_name} index)
-		#dk_includes(${dest_filename_lower} ${import_name} result)
+		string(FIND ${dest_filename_lower} ${plugin} index)
+		#dk_includes(${dest_filename_lower} ${plugin} result)
 		#if(NOT ${result})
 		if(${index} EQUAL -1)
-			set(dl_filename "${import_name}-${dest_filename}${src_extension}") 
+			set(dl_filename "${plugin}-${dest_filename}${url_extension}") 
 		else()
-			set(dl_filename "${dest_filename}${src_extension}")
+			set(dl_filename "${dest_filename}${url_extension}")
 		endif()
-	elseif(NOT ${src_filename} MATCHES "[0-9]")
-		dk_debug("The download filename ${src_filename} does not contain any numbers to identify it's version")
-		dk_debug("Normally we would rename the downloaded filename to ${dest_filename}${src_extension}, but we'll let it pass.")
-# 		set(dl_filename "${dest_filename}${src_extension}")
-		set(dl_filename ${src_filename})
+	elseif(NOT ${url_filename} MATCHES "[0-9]")
+		dk_debug("The download filename ${url_filename} does not contain any numbers to identify it's version")
+		dk_debug("Normally we would rename the downloaded filename to ${dest_filename}${url_extension}, but we'll let it pass.")
+# 		set(dl_filename "${dest_filename}${url_extension}")
+		set(dl_filename ${url_filename})
 	else()
-		set(dl_filename ${src_filename})
+		set(dl_filename ${url_filename})
 	endif()
 	
-	dk_download(${src_path} ${DKDOWNLOAD}/${dl_filename})
+	dk_download(${url_path} ${DKDOWNLOAD}/${dl_filename})
 	if(NOT EXISTS ${DKDOWNLOAD}/${dl_filename})
 		dk_assert("The download files does not exist")
-		return()
 	endif()
 	
 	set(FILETYPE "UNKNOWN")
-	if(NOT ${src_extension} STREQUAL "")
-		if(${src_extension} STREQUAL ".bz")
+	if(NOT ${url_extension} STREQUAL "")
+		if(${url_extension} STREQUAL ".bz")
 			set(FILETYPE "Archive")
-		elseif(${src_extension} STREQUAL ".bz2")
+		elseif(${url_extension} STREQUAL ".bz2")
 			set(FILETYPE "Archive")
-		elseif(${src_extension} STREQUAL ".exe")
-			string(FIND ${src_filename} ".sfx.exe" index)
-			#dk_includes(${src_filename} ".sfx.exe" result)
-			#if(${result})
+		elseif(${url_extension} STREQUAL ".exe")
+			string(FIND ${url_filename} ".sfx.exe" index)
 			if(${index} GREATER -1)
+			#dk_includes(${url_filename} ".sfx.exe" result)
+			#if(${result})
 				set(FILETYPE "Archive")
 			else()
 				set(FILETYPE "Executable")
 			endif()
-		elseif(${src_extension} STREQUAL ".gz")
+		elseif(${url_extension} STREQUAL ".gz")
 			set(FILETYPE "Archive")
-		elseif(${src_extension} STREQUAL ".js")
+		elseif(${url_extension} STREQUAL ".js")
 			set(FILETYPE "Javascript")
-		elseif(${src_extension} STREQUAL ".rar")
+		elseif(${url_extension} STREQUAL ".rar")
 			set(FILETYPE "Archive")
-		elseif(${src_extension} STREQUAL ".tar")
+		elseif(${url_extension} STREQUAL ".tar")
 			set(FILETYPE "Archive")
-		elseif(${src_extension} STREQUAL ".xz")
+		elseif(${url_extension} STREQUAL ".xz")
 			set(FILETYPE "Archive")
-		elseif(${src_extension} STREQUAL ".zip")
+		elseif(${url_extension} STREQUAL ".zip")
 			set(FILETYPE "Archive")
-		elseif(${src_extension} STREQUAL ".AppImage")
+		elseif(${url_extension} STREQUAL ".AppImage")
 			set(FILETYPE "Executable")
 		endif()
 	endif()
 	# If the file type is unknown, we'll still try to extract it like a compressed file anyway
 	# It's better the have a chance at success.
-	dk_debug("The Downloaded file ${${dl_filename}} is a ${FILETYPE} file ${src_extension}")
+	dk_debug("The Downloaded file ${${dl_filename}} is a ${FILETYPE} file ${url_extension}")
 	if(${FILETYPE} STREQUAL "UNKNOWN")
 		set(FILETYPE "Archive")
 		dk_debug("We will try to extract it in case it's an archive, but it may fail.")
 	endif()
 	if(${FILETYPE} STREQUAL "Archive")
-		file(REMOVE ${DKDOWNLOAD}/UNZIPPED)
+		dk_remove(${DKDOWNLOAD}/UNZIPPED NOERROR)
 		dk_extract(${DKDOWNLOAD}/${dl_filename} ${DKDOWNLOAD}/UNZIPPED)
 		# We either have a root folder in /UNZIPPED, or multiple files without a root folder
 		file(GLOB items RELATIVE "${DKDOWNLOAD}/UNZIPPED/" "${DKDOWNLOAD}/UNZIPPED/*")
 		list(LENGTH items count)
 		if(${count} GREATER 2) ##NOTE: This should be "${count} GREATER 1" but msys has a readme file in it next to the inner msys folder and that messes things up for more than 1
 			#vZip extracted with no root folder, Rename UNZIPPED and move to 3rdParty
-			dk_rename(${DKDOWNLOAD}/UNZIPPED ${dest_path} true)
+			dk_rename(${DKDOWNLOAD}/UNZIPPED ${dest_path} OVERWRITE)
 		else()
 			if(EXISTS ${DKDOWNLOAD}/UNZIPPED/${dest_filename}) ##Zip extracted to expected folder. Move the folder to 3rdParty
-				dk_rename(${DKDOWNLOAD}/UNZIPPED/${dest_filename} ${dest_path} true)
-				file(REMOVE ${DKDOWNLOAD}/UNZIPPED)
+				dk_rename(${DKDOWNLOAD}/UNZIPPED/${dest_filename} ${dest_path} OVERWRITE)
+				dk_remove(${DKDOWNLOAD}/UNZIPPED)
 			else() #vZip extracted to a root folder, but not named what we expected. Rename and move folder to 3rdParty
 				foreach(item ${items})
 					if(NOT IS_DIRECTORY ${DKDOWNLOAD}/UNZIPPED/${item})
 						list(REMOVE_ITEM items ${item}) #remove any readme.txt or other non-directory items
 					endif()
 				endforeach()
-				dk_rename(${DKDOWNLOAD}/UNZIPPED/${items} ${dest_path} true)
-				file(REMOVE ${DKDOWNLOAD}/UNZIPPED)
+				dk_rename(${DKDOWNLOAD}/UNZIPPED/${items} ${dest_path} OVERWRITE)
+				dk_remove(${DKDOWNLOAD}/UNZIPPED)
 			endif() 
 		endif()
 #	elseif(${FILETYPE} STREQUAL "Executable")
 #		dk_setPath(${DKDOWNLOAD})
 #		dk_set(QUEUE_BUILD ON)
-#		DKEXECUTE(${DKDOWNLOAD}/${src_filename})
+#		DKEXECUTE(${DKDOWNLOAD}/${url_filename})
 	else() #NOT ARCHIVE, just copy the file into it's 3rdParty folder
-		dk_copy(${DKDOWNLOAD}/${dl_filename} ${dest_path}/${dl_filename} TRUE)
+		dk_copy(${DKDOWNLOAD}/${dl_filename} ${dest_path}/${dl_filename} OVERWRITE)
+		dk_debug("dk_copy(${DKDOWNLOAD}/${dl_filename} ${dest_path}/${dl_filename} OVERWRITE)")
 	endif()
-	if("${ARGN}" STREQUAL "PATCH")
-		dk_patch(${import_name} ${dest_path})
+	
+	string(FIND "${ARGN}" "PATCH" index)
+	if(${index} GREATER -1)
+		dk_patch(${plugin} ${dest_path})
 	else()
-		file(GLOB ITEMS ${DKIMPORTS}/${import_name}/*)
+		file(GLOB ITEMS ${DKIMPORTS}/${plugin}/*)
 		list(LENGTH ITEMS count)
 		dk_debug(${count})
 		if(${count} GREATER 1)
-			dk_warn(" Found ${count} items in the ${import_name} import folder. dk_install has not requested to PATCH the installed files. If needed, add PATCH as the last argument to the dk_install or dk_import command in ${DKIMPORTS}/${import_name}/DKMAKE.cmake ")
+			dk_warn(" Found ${count} items in the ${plugin} import folder. dk_install has not requested to PATCH the installed files. If needed, add PATCH as the last argument to the dk_install or dk_import command in ${DKIMPORTS}/${plugin}/DKMAKE.cmake ")
 		endif()
 	endif()
+	
 	file(WRITE ${dest_path}/installed "${dest_filename} ")
 endfunction()
-dk_aliasFunctions("dk_install" "NO_DEBUG_RELEASE_TAGS")
+dk_createOsMacros("dk_install" "NO_DEBUG_RELEASE_TAGS")
 
 
 ###############################################################################
-# dk_validatePath(path result)
+# dk_validatePath(path RESULT)
 #
-function(dk_validatePath path result)
+#	TODO
+#
+#	@path		- TODO
+#	@RESULT		- TODO
+#
+function(dk_validatePath path RESULT)
 	DKDEBUGFUNC(${ARGV})
 	get_filename_component(path ${path} ABSOLUTE)
-	set(${result} ${path} PARENT_SCOPE)
+	set(${RESULT} ${path} PARENT_SCOPE)
 endfunction()
 
 
 ###############################################################################
-# dk_getShortPath(path result)
+# dk_getShortPath(path RESULT)
 #
-function(dk_getShortPath path result)
+#	TODO
+#
+#	@path		- TODO
+#	@RESULT		- TODO
+#
+function(dk_getShortPath path RESULT)
 	DKDEBUGFUNC(${ARGV})
 	if(WIN_HOST)
 		file(WRITE ${DKCMAKE}/dk_getShortPath.cmd "@ECHO OFF \necho %~s1")
 		execute_process(COMMAND ${DKCMAKE}/dk_getShortPath.cmd ${path} OUTPUT_VARIABLE path WORKING_DIRECTORY ${DIGITALKNOB})
 		string(REPLACE "\\" "/" path ${path})
 		string(REPLACE "\n" "" path ${path})
-		set(${result} ${path} PARENT_SCOPE)
+		set(${RESULT} ${path} PARENT_SCOPE)
 	endif()
 endfunction()
-# TEST_dk_getShortPath
-# dk_getShortPath("C:/Program Files (x86)/CMake/bin/cmake.exe" result)
-# dk_dump(result)
 
 
 ###############################################################################
 # dk_executeProcess(commands)
+#
+#	TODO
+#
+#	@commands	- TODO
 #
 function(dk_executeProcess commands)
 	DKDEBUGFUNC(${ARGV})
 	set(commands ${ARGV})
 	list(REMOVE_ITEM commands COMMAND) # we can supply the cmake specific base commands
 	list(REMOVE_ITEM commands "cmd /c ")
-	
 	list(FIND commands "WORKING_DIRECTORY" index)
 	if(index EQUAL -1)
 		set(command ${commands} WORKING_DIRECTORY ${CURRENT_DIR}) # add WORKING_DIRECTORY if missing
 	endif()	
 	
-	#dk_info("")
-	#dk_info("*** dk_executeProcess ***")
+	#TODO - create dk_message (colorless) and use it to introduce a custom color here
 	dk_info("\n-> ${commands}\n")
-	#dk_info("")
 	
 	if(WIN_HOST)
 		execute_process(COMMAND cmd /c ${commands} RESULT_VARIABLE result ERROR_VARIABLE error) # FIXME: Do we always need  cmd /c  here?
@@ -1359,23 +1449,19 @@ endfunction()
 #
 #	Set a system environment variable
 #
-#	@name:(required)	The name of the system environment variable to set
-#	@value:(required)	The value to set the system environment vairable to
+#	@name	- The name of the system environment variable to set
+#	@value	- The value to set the system environment vairable to
 #
 function(dk_setEnv name value)
 	DKDEBUGFUNC(${ARGV})
-	#dk_debug("ENVname = $ENV{${name}}")
 	dk_debug(ENV{${name}})
 	if(ENV{${name}})
 		string(FIND $ENV{${name}} ${value} index)
 	else()
 		set(index -1)
 	endif()
-	
 	if(${index} EQUAL -1)
-		#dk_debug("ENV{${name}} = $ENV{${name}}")
 		dk_debug(ENV{${name}})
-		#dk_debug("value = ${value}")
 		dk_debug(value)
 #		if(NOT "$ENV{${name}}" STREQUAL "${value}")
 		if(WIN_HOST)
@@ -1392,6 +1478,10 @@ endfunction()
 
 ###############################################################################
 # dk_setPath(path)
+#
+#	TODO
+#
+#	@path	- TODO
 #
 function(dk_setPath path)
 	DKDEBUGFUNC(${ARGV})
@@ -1432,11 +1522,15 @@ function(dk_setPath path)
 #		dk_set(DKCMAKE_BUILD ${DKCMAKE_BUILD} -DCMAKE_ARCHIVE_OUTPUT_DIRECTORY=${CURRENT_DIR} -DCMAKE_LIBRARY_OUTPUT_DIRECTORY=${CURRENT_DIR} -DCMAKE_RUNTIME_OUTPUT_DIRECTORY=${CURRENT_DIR})
 #	endif()
 endfunction()
-dk_aliasFunctions("dk_setPath")
+dk_createOsMacros("dk_setPath")
 
 
 ###############################################################################
 # dk_msys(args)
+#
+#	TODO
+#
+#	@args	- TODO
 #
 function(dk_msys)
 	DKDEBUGFUNC(${ARGV})
@@ -1462,11 +1556,31 @@ function(dk_msys)
 		dk_executeProcess(${MSYS}/bin/bash ${MSYS}/dkscript.tmp)
 	endif()
 endfunction()
-dk_aliasFunctions("dk_msys")
+dk_createOsMacros("dk_msys")
+
+
+###############################################################################
+# dk_queueMsys(args)
+#
+#	TODO
+#
+#	@args	- TODO
+#
+function(dk_queueMsys)
+	DKDEBUGFUNC(${ARGV})
+	if(QUEUE_BUILD)
+		dk_msys(${ARGV})
+	endif()	
+endfunction()
+dk_createOsMacros("dk_queueMsys")
 
 
 ###############################################################################
 # dk_msys2(args)
+#
+#	TODO
+#
+#	@args	- TODO
 #
 function(dk_msys2)
 	DKDEBUGFUNC(${ARGV})
@@ -1492,16 +1606,21 @@ function(dk_msys2)
 		dk_executeProcess(${MSYS2}/usr/bin/bash ${MSYS2}/dkscript.tmp)
 	endif()
 endfunction()
-dk_aliasFunctions("dk_msys2")
+dk_createOsMacros("dk_msys2")
 
 
 ###############################################################################
-# dk_mergeFlags(args result)
+# dk_mergeFlags(args RESULT)
 #
-function(dk_mergeFlags args result)
+#	TODO
+#
+#	@args		- TODO
+#	@RESULT		- TODO
+#
+function(dk_mergeFlags args RESULT)
 	DKDEBUGFUNC(${ARGV})
-	set(args ${args} ${result} ${ARGN})
-	list(GET args -1 result)
+	set(args ${args} ${RESULT} ${ARGN})
+	list(GET args -1 RESULT)
 	list(REMOVE_AT args -1)
 	set(search "-DCMAKE_C_FLAGS=" "-DCMAKE_C_FLAGS_DEBUG=" "-DCMAKE_C_FLAGS_RELEASE=" "-DCMAKE_CXX_FLAGS=" "-DCMAKE_CXX_FLAGS_DEBUG=" "-DCMAKE_CXX_FLAGS_RELEASE=" "CFLAGS=" "CXXFLAGS=")
 	foreach(word ${search})
@@ -1529,12 +1648,16 @@ function(dk_mergeFlags args result)
 			list(INSERT args ${placeholder} "${DK_${word}}")  # FIXME:  Error on Linux:  List index: 6 out of range (-6, 5)
 		endif()
 	endforeach()
-	set(${result} ${args} PARENT_SCOPE)
+	set(${RESULT} ${args} PARENT_SCOPE)
 endfunction()
 
 
 ###############################################################################
 # dk_command(args)
+#
+#	TODO
+#
+#	@args	- TODO
 #
 function(dk_command)
 	DKDEBUGFUNC(${ARGV})
@@ -1546,30 +1669,45 @@ function(dk_command)
 #	dk_debug("${ARGV}")
 	dk_executeProcess(${merged_args} WORKING_DIRECTORY ${CURRENT_DIR})
 endfunction()
-dk_aliasFunctions("dk_command")
+dk_createOsMacros("dk_command")
 
 
 
 ###############################################################################
 # dk_queueCommand(args)
-#	
+#
+#	TODO
+#
+#	@args	- TODO
+#
 function(dk_queueCommand)
 	DKDEBUGFUNC(${ARGV})
 	if(QUEUE_BUILD)
 		dk_command(${ARGV})
 	endif()	
 endfunction()
-dk_aliasFunctions("dk_queueCommand")
+dk_createOsMacros("dk_queueCommand")
 
 
 ###############################################################################
 # dk_visualStudioDebug(folder sln_file)
+#
+#	TODO
+#
+#	@folder		- TODO
+#	@sln_file	- TODO
 #
 function(dk_visualStudioDebug folder sln_file) #target #arch
 	DKDEBUGFUNC(${ARGV})
 	if(NOT WIN_HOST)
 		return()
 	endif()
+	
+	dk_getExtension(${sln_file} extension)
+	if(NOT ${extension} STREQUAL ".sln")
+		dk_assert("extension does not equal .sln")
+	endif()
+	
 	if(DEBUG AND QUEUE_BUILD)
 		if(NOT EXISTS ${3RDPARTY}/${folder}/${OS}/${sln_file})
 			dk_assert("CANNOT FIND: ${3RDPARTY}/${folder}/${OS}/${sln_file}" )
@@ -1584,17 +1722,28 @@ function(dk_visualStudioDebug folder sln_file) #target #arch
 		dk_executeProcess(${EXECUTE_COMMAND} WORKING_DIRECTORY ${3RDPARTY}/${folder}/${OS})
 	endif()
 endfunction()
-dk_aliasFunctions("dk_visualStudioDebug" "NO_DEBUG_RELEASE_TAGS")
+dk_createOsMacros("dk_visualStudioDebug" "NO_DEBUG_RELEASE_TAGS")
 
 
 ###############################################################################
 # dk_visualStudioRelease(folder sln_file)
+#
+#	TODO
+#
+#	@folder		- TODO
+#	@sln_file	- TODO
 #
 function(dk_visualStudioRelease folder sln_file) #target #arch
 	DKDEBUGFUNC(${ARGV})
 	if(NOT WIN_HOST)
 		return()
 	endif()
+	
+	dk_getExtension(${sln_file} extension)
+	if(NOT ${extension} STREQUAL ".sln")
+		dk_assert("extension does not equal .sln")
+	endif()
+	
 	if(RELEASE AND QUEUE_BUILD)
 		if(NOT EXISTS ${3RDPARTY}/${folder}/${OS}/${sln_file})
 			dk_assert("CANNOT FIND: ${3RDPARTY}/${folder}/${OS}/${sln_file}" )
@@ -1609,22 +1758,31 @@ function(dk_visualStudioRelease folder sln_file) #target #arch
 		dk_executeProcess(${EXECUTE_COMMAND} WORKING_DIRECTORY ${3RDPARTY}/${folder}/${OS})
 	endif()
 endfunction()
-dk_aliasFunctions("dk_visualStudioRelease" "NO_DEBUG_RELEASE_TAGS")
+dk_createOsMacros("dk_visualStudioRelease" "NO_DEBUG_RELEASE_TAGS")
 
 
 ###############################################################################
 # dk_visualStudio(args)
+#
+#	TODO
+#
+#	@args	- TODO
 #
 function(dk_visualStudio)
 	DKDEBUGFUNC(${ARGV})
 	dk_visualStudioDebug(${ARGV})
 	dk_visualStudioRelease(${ARGV})
 endfunction()
-dk_aliasFunctions("dk_visualStudio" "NO_DEBUG_RELEASE_TAGS")
+dk_createOsMacros("dk_visualStudio" "NO_DEBUG_RELEASE_TAGS")
 
 
 ###############################################################################
-# dk_xcodeDebug(folder)
+# dk_xcodeDebug(folder) #target
+#
+#	TODO
+#
+#	@folder				- TODO
+#	@target:(optional)	- TODO
 #
 function(dk_xcodeDebug folder)
 	DKDEBUGFUNC(${ARGV})
@@ -1639,11 +1797,16 @@ function(dk_xcodeDebug folder)
 		endif()
 	endif()
 endfunction()
-dk_aliasFunctions("dk_xcodeDebug" "NO_DEBUG_RELEASE_TAGS")
+dk_createOsMacros("dk_xcodeDebug" "NO_DEBUG_RELEASE_TAGS")
 
 
 ###############################################################################
-# dk_xcodeRelease(folder)
+# dk_xcodeRelease(folder) #target
+#
+#	TODO
+#
+#	@folder				- TODO
+#	@target:(optional)	- TODO
 #
 function(dk_xcodeRelease folder)
 	DKDEBUGFUNC(${ARGV})
@@ -1658,22 +1821,31 @@ function(dk_xcodeRelease folder)
 		endif()
 	endif()
 endfunction()
-dk_aliasFunctions("dk_xcodeRelease" "NO_DEBUG_RELEASE_TAGS")
+dk_createOsMacros("dk_xcodeRelease" "NO_DEBUG_RELEASE_TAGS")
 
 
 ###############################################################################
-# dk_xcode(args)
+# dk_xcode(args) #target
+#
+#	TODO
+#
+#	@args				- TODO
+#	@target:(optional)	- TODO
 #
 function(dk_xcode)
 	DKDEBUGFUNC(${ARGV})
 	dk_xcodeDebug(${ARGV})
 	dk_xcodeRelease(${ARGV})
 endfunction()
-dk_aliasFunctions("dk_xcode" "NO_DEBUG_RELEASE_TAGS")
+dk_createOsMacros("dk_xcode" "NO_DEBUG_RELEASE_TAGS")
 
 
 ###############################################################################
 # dk_ndkDebug(folder)
+#
+#	TODO
+#
+#	@folder		- TODO
 #
 function(dk_ndkDebug folder)
 	DKDEBUGFUNC(${ARGV})
@@ -1686,11 +1858,15 @@ function(dk_ndkDebug folder)
 		endif()
 	endif()
 endfunction()
-dk_aliasFunctions("dk_ndkDebug" "NO_DEBUG_RELEASE_TAGS")
+dk_createOsMacros("dk_ndkDebug" "NO_DEBUG_RELEASE_TAGS")
 
 
 ###############################################################################
 # dk_ndkRelease(folder)
+#
+#	TODO
+#
+#	@folder		- TODO
 #
 function(dk_ndkRelease folder)
 	DKDEBUGFUNC(${ARGV})
@@ -1703,22 +1879,30 @@ function(dk_ndkRelease folder)
 		endif()
 	endif()
 endfunction()
-dk_aliasFunctions("dk_ndkRelease" "NO_DEBUG_RELEASE_TAGS")
+dk_createOsMacros("dk_ndkRelease" "NO_DEBUG_RELEASE_TAGS")
 
 
 ###############################################################################
-# dk_ndk(args)
+# dk_ndk(folder)
+#
+#	TODO
+#
+#	@folder		- TODO
 #
 function(dk_ndk)
 	DKDEBUGFUNC(${ARGV})
 	dk_ndkDebug(${ARGV})
 	dk_ndkRelease(${ARGV})
 endfunction()
-dk_aliasFunctions("dk_ndk" "NO_DEBUG_RELEASE_TAGS")
+dk_createOsMacros("dk_ndk" "NO_DEBUG_RELEASE_TAGS")
 
 
 ###############################################################################
 # dk_make(lib)
+#
+#	TODO
+#
+#	@lib	- TODO
 #
 function(dk_make lib)
 	DKDEBUGFUNC(${ARGV})
@@ -1728,6 +1912,10 @@ endfunction()
 
 ###############################################################################
 # dk_lib(lib_path)
+#
+#	TODO
+#
+#	@lib_path	- TODO
 #
 function(dk_lib lib_path)
 	DKDEBUGFUNC(${ARGV})
@@ -1752,28 +1940,35 @@ function(dk_lib lib_path)
 		
 	endforeach()
 endfunction()
-dk_aliasFunctions("dk_lib" "NO_DEBUG_RELEASE_TAGS")
+dk_createOsMacros("dk_lib" "NO_DEBUG_RELEASE_TAGS")
 
 
 ###############################################################################
 # dk_libDebug(lib_path)
+#
+#	TODO
+#
+#	@lib_path	- TODO
 #
 function(dk_libDebug lib_path)
 	DKDEBUGFUNC(${ARGV})
 	if(NOT DEBUG)
 		return()
 	endif()	
+	
 	dk_set(LIBLIST ${LIBLIST} ${lib_path}) # used for double checking
 	if(NOT EXISTS ${lib_path})
 		dk_info("MISSING: ${lib_path}")
 		dk_set(QUEUE_BUILD ON) 
 	endif()
-	#string(FIND "${DEBUG_LIBS}" "${lib_path}" index)
-	dk_includes("${DEBUG_LIBS}" "${lib_path}" result)
-	#if(NOT ${index} EQUAL -1)
-	if(${result})
+	
+	string(FIND "${DEBUG_LIBS}" "${lib_path}" index)
+	if(NOT ${index} EQUAL -1)
+	#dk_includes("${DEBUG_LIBS}" "${lib_path}" result)
+	#if(${result})
 		return() # The library is already in the list
 	endif()
+	
 	if(LINUX OR RASPBERRY OR ANDROID)
 		dk_set(DEBUG_LIBS debug ${lib_path} ${DEBUG_LIBS})  # Add to beginning of list
 	else()
@@ -1786,28 +1981,35 @@ function(dk_libDebug lib_path)
 	endif()
 	
 endfunction()
-dk_aliasFunctions("dk_libDebug" "NO_DEBUG_RELEASE_TAGS")
+dk_createOsMacros("dk_libDebug" "NO_DEBUG_RELEASE_TAGS")
 
 
 ###############################################################################
 # dk_libRelease(lib_path)
+#
+#	TODO
+#
+#	@lib_path		- TODO
 #
 function(dk_libRelease lib_path)
 	DKDEBUGFUNC(${ARGV})
 	if(NOT RELEASE)
 		return()
 	endif()
+	
 	dk_set(LIBLIST ${LIBLIST} ${lib_path}) # used for double checking
 	if(NOT EXISTS ${lib_path})
 		dk_info("MISSING: ${lib_path}")
 		dk_set(QUEUE_BUILD ON)
 	endif()
-	#string(FIND "${RELEASE_LIBS}" "${lib_path}" index)
-	dk_includes("${RELEASE_LIBS}" "${lib_path}" result)
-	#if(NOT ${index} EQUAL -1)
-	if(${result})
+	
+	string(FIND "${RELEASE_LIBS}" "${lib_path}" index)
+	if(NOT ${index} EQUAL -1)
+	#dk_includes("${RELEASE_LIBS}" "${lib_path}" result)
+	#if(${result})
 		return() # The library is already in the list
 	endif()	
+	
 	if(LINUX OR RASPBERRY OR ANDROID)
 		dk_set(RELEASE_LIBS optimized ${lib_path} ${RELEASE_LIBS})  # Add to beginning of list
 	else()
@@ -1820,33 +2022,31 @@ function(dk_libRelease lib_path)
 	endif()
 	
 endfunction()
-dk_aliasFunctions("dk_libRelease" "NO_DEBUG_RELEASE_TAGS")
+dk_createOsMacros("dk_libRelease" "NO_DEBUG_RELEASE_TAGS")
 
 
 ###############################################################################
 # dk_generateCmake(plugin_name)
+#
+#	TODO
+#
+#	@plugin_name	- TODO
 #
 function(dk_generateCmake plugin_name)
 	DKDEBUGFUNC(${ARGV})
 	dk_getPathToPlugin(${plugin_name} plugin_path)
 	if(NOT EXISTS "${plugin_path}")
 		dk_assert("dk_generateCmake(${plugin_name}): plugin not found")
-		return()
 	endif()
-
 	# Create CmakeLists.txt file
-	file(REMOVE ${plugin_path}/CMakeLists.txt)
+	dk_remove(${plugin_path}/CMakeLists.txt NOERROR)
 	file(APPEND ${plugin_path}/CMakeLists.txt "### This file is generated by DKCMake. Any Changes here, will be overwritten. ###\n")
 	file(APPEND ${plugin_path}/CMakeLists.txt "### ${plugin_name} ###\n")
 	file(APPEND ${plugin_path}/CMakeLists.txt "cmake_minimum_required(VERSION 3.10)\n")
 	file(APPEND ${plugin_path}/CMakeLists.txt "cmake_policy(SET CMP0054 NEW)\n")
 #	file(APPEND ${plugin_path}/CMakeLists.txt "cmake_policy(SET CMP0002 OLD)\n")
-#	file(APPEND ${plugin_path}/CMakeLists.txt "include(${DKCMAKE}/DKFunctions.cmake)\n")
-#	file(APPEND ${plugin_path}/CMakeLists.txt "include(${DKCMAKE}/DKVariables.cmake)\n")
 	file(APPEND ${plugin_path}/CMakeLists.txt "include(\$ENV{DKCMAKE}DK.cmake)\n")
-		
 	file(APPEND ${plugin_path}/CMakeLists.txt "project(${plugin_name})\n")
-
 	file(APPEND ${plugin_path}/CMakeLists.txt "include_directories(${DKPLUGINS})\n")
 	foreach(each_include ${DKINCLUDES_LIST})
 		file(APPEND ${plugin_path}/CMakeLists.txt "include_directories(${each_include})\n")
@@ -1857,13 +2057,11 @@ function(dk_generateCmake plugin_name)
 	foreach(each_linkdir ${DKLINKDIRS_LIST})
 		file(APPEND ${plugin_path}/CMakeLists.txt "link_directories(${each_linkdir})\n")
 	endforeach()	
-
 	file(APPEND ${plugin_path}/CMakeLists.txt "file(GLOB ${plugin_name}_SRC\n")
 	file(APPEND ${plugin_path}/CMakeLists.txt "		${plugin_path}/*.h\n")
 	file(APPEND ${plugin_path}/CMakeLists.txt "		${plugin_path}/*.c\n")
 	file(APPEND ${plugin_path}/CMakeLists.txt "		${plugin_path}/*.cpp\n")
 	file(APPEND ${plugin_path}/CMakeLists.txt ")\n")
-
 	file(APPEND ${plugin_path}/CMakeLists.txt "if(WIN)\n")
 	file(APPEND ${plugin_path}/CMakeLists.txt "		file(GLOB WIN_SRC\n")
 	file(APPEND ${plugin_path}/CMakeLists.txt "			${plugin_path}/*.rc\n")
@@ -1871,96 +2069,91 @@ function(dk_generateCmake plugin_name)
 	file(APPEND ${plugin_path}/CMakeLists.txt "		)\n")
 	file(APPEND ${plugin_path}/CMakeLists.txt "		list(APPEND ${plugin_name}_SRC \${WIN_SRC})\n")
 	file(APPEND ${plugin_path}/CMakeLists.txt "endif()\n")
-	
 	file(APPEND ${plugin_path}/CMakeLists.txt "if(IOS OR IOSSIM)\n")
 	file(APPEND ${plugin_path}/CMakeLists.txt "		file(GLOB IOS_SRC\n")
 	file(APPEND ${plugin_path}/CMakeLists.txt "			${plugin_path}/*.mm\n")
 	file(APPEND ${plugin_path}/CMakeLists.txt "		)\n")
 	file(APPEND ${plugin_path}/CMakeLists.txt "		list(APPEND ${plugin_name}_SRC \${IOS_SRC})\n")
 	file(APPEND ${plugin_path}/CMakeLists.txt "endif()\n")
-
 	file(APPEND ${plugin_path}/CMakeLists.txt "add_library(${plugin_name} STATIC \${${plugin_name}_SRC})\n")
 #	file(APPEND ${plugin_path}/CMakeLists.txt "target_compile_options(${plugin_name} PRIVATE \${CMAKE_CXX_FLAGS} $<$<CONFIG:Debug>:\${CMAKE_CXX_FLAGS_DEBUG}> $<$<CONFIG:Release>:\${CMAKE_CXX_FLAGS_RELEASE}>)\n")
 	file(APPEND ${plugin_path}/CMakeLists.txt "if(WIN_HOST)\n")
 	file(APPEND ${plugin_path}/CMakeLists.txt "		set_target_properties(${plugin_name} PROPERTIES LINKER_LANGUAGE CPP)\n")
 	file(APPEND ${plugin_path}/CMakeLists.txt "		set_property(DIRECTORY \${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT ${plugin_name})\n")
 	file(APPEND ${plugin_path}/CMakeLists.txt "endif()\n")
-	
 #	file(APPEND ${plugin_path}/CMakeLists.txt "install(TARGETS ${plugin_name} DESTINATION lib/\${OS})\n")
 #	file(APPEND ${plugin_path}/CMakeLists.txt "file(GLOB HEADER_FILES ${plugin_path}/*.h)\n")
 #	file(APPEND ${plugin_path}/CMakeLists.txt "install(FILES \${HEADER_FILES} DESTINATION include/${plugin_name})\n")
-	
 #	file(APPEND ${plugin_path}/CMakeLists.txt "if(NOT DKAPP)\n")
 #	file(APPEND ${plugin_path}/CMakeLists.txt "     set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT ${plugin_name})\n")
 #	file(APPEND ${plugin_path}/CMakeLists.txt "endif()\n")
-	
 	# add headers to DKPlugins.h
 	if(${plugin_name} STREQUAL DK OR STATIC)
 		file(GLOB HEADER_FILES RELATIVE ${DKPLUGINS} ${plugin_path}/*.h)
 		foreach(header ${HEADER_FILES})
-			#string(FIND "${PLUGINS_FILE}" "${header}" index)
 			dk_includes("${PLUGINS_FILE}" "${header}" result)
-			#if(${index} EQUAL -1)
 			if(NOT ${result})
 				dk_info("Adding ${header} to header file.")
 				dk_set(PLUGINS_FILE ${PLUGINS_FILE} "#include \"${header}\"\\n")
 			endif()
+#			dk_includes("${PLUGINS_FILE}" "DKHAVE_${plugin_name}" result)
+#			if(NOT ${result})
+#				dk_info("Adding #define DKHAVE_${plugin_name} 1 to header file.")
+#				dk_set(PLUGINS_FILE ${PLUGINS_FILE} "#define DKHAVE_${plugin_name} 1\\n")
+#			endif()
 		endforeach()
 	endif()
-	
-	dk_enable(${plugin_name})
-	WIN_dk_libDebug(${plugin_path}/${OS}/${DEBUG_DIR}/${plugin_name}.lib)
-	WIN_dk_libRelease(${plugin_path}/${OS}/${RELEASE_DIR}/${plugin_name}.lib)
-	APPLE_dk_libDebug(${plugin_path}/${OS}/${DEBUG_DIR}/lib${plugin_name}.a)
-	APPLE_dk_libRelease(${plugin_path}/${OS}/${RELEASE_DIR}/lib${plugin_name}.a)
-	LINUX_dk_libDebug(${plugin_path}/${OS}/${DEBUG_DIR}/lib${plugin_name}.a)
-	LINUX_dk_libRelease(${plugin_path}/${OS}/${RELEASE_DIR}/lib${plugin_name}.a)
-	RASPBERRY_dk_libDebug(${plugin_path}/${OS}/${DEBUG_DIR}/lib${plugin_name}.a)
-	RASPBERRY_dk_libRelease(${plugin_path}/${OS}/${RELEASE_DIR}/lib${plugin_name}.a)
-	ANDROID_dk_libDebug(${plugin_path}/${OS}/${DEBUG_DIR}/lib${plugin_name}.a)
-	ANDROID_dk_libRelease(${plugin_path}/${OS}/${RELEASE_DIR}/lib${plugin_name}.a)
+	dk_enable				(${plugin_name})
+	WIN_dk_libDebug			(${plugin_path}/${OS}/${DEBUG_DIR}/${plugin_name}.lib)
+	WIN_dk_libRelease		(${plugin_path}/${OS}/${RELEASE_DIR}/${plugin_name}.lib)
+	APPLE_dk_libDebug		(${plugin_path}/${OS}/${DEBUG_DIR}/lib${plugin_name}.a)
+	APPLE_dk_libRelease		(${plugin_path}/${OS}/${RELEASE_DIR}/lib${plugin_name}.a)
+	LINUX_dk_libDebug		(${plugin_path}/${OS}/${DEBUG_DIR}/lib${plugin_name}.a)
+	LINUX_dk_libRelease		(${plugin_path}/${OS}/${RELEASE_DIR}/lib${plugin_name}.a)
+	RASPBERRY_dk_libDebug	(${plugin_path}/${OS}/${DEBUG_DIR}/lib${plugin_name}.a)
+	RASPBERRY_dk_libRelease	(${plugin_path}/${OS}/${RELEASE_DIR}/lib${plugin_name}.a)
+	ANDROID_dk_libDebug		(${plugin_path}/${OS}/${DEBUG_DIR}/lib${plugin_name}.a)
+	ANDROID_dk_libRelease	(${plugin_path}/${OS}/${RELEASE_DIR}/lib${plugin_name}.a)
 	if(REBUILD OR REBUILDALL)
 		dk_set(QUEUE_BUILD ON)
 	endif()
-	
 	dk_set(DKPLUGIN_LIST ${DKPLUGIN_LIST} ${plugin_name})  #Add to list
 endfunction()
 
 
 ###############################################################################
-# dk_dll(name)
+# dk_dll(plugin_name)
 #
-function(dk_dll name)
+#	TODO
+#
+#	@plugin_name	- TODO
+#
+function(dk_dll plugin_name)
 	DKDEBUGFUNC(${ARGV})
-	dk_getPathToPlugin(${name} plugin_path)
+	dk_getPathToPlugin(${plugin_name} plugin_path)
 	if(NOT EXISTS "${plugin_path}")
-		dk_assert("${name} plugin not found")
-		return()
+		dk_assert("${plugin_name} plugin not found")
 	endif()
 	dk_include(${plugin_path})
-			
 	# Create CmakeLists.txt file
-	file(REMOVE ${plugin_path}/CMakeLists.txt)
+	dk_remove(${plugin_path}/CMakeLists.txt NOERROR)
 	if(NOT EXISTS "${plugin_path}/CMakeLists.txt")
-	file(APPEND ${plugin_path}/CMakeLists.txt "### ${name} ###\n")
+	file(APPEND ${plugin_path}/CMakeLists.txt "### ${plugin_name} ###\n")
 	file(APPEND ${plugin_path}/CMakeLists.txt "cmake_minimum_required(VERSION 3.10)\n")
 	file(APPEND ${plugin_path}/CMakeLists.txt "cmake_policy(SET CMP0054 NEW)\n")
 	file(APPEND ${plugin_path}/CMakeLists.txt "include(${DKCMAKE}/DKFunctions.cmake)\n")
 	file(APPEND ${plugin_path}/CMakeLists.txt "include(${DKCMAKE}/DKVariables.cmake)\n")
-	
 	file(APPEND ${plugin_path}/CMakeLists.txt "if(IOS)\n")
 	file(APPEND ${plugin_path}/CMakeLists.txt "		set(PLATFORM OS64)\n")
 	file(APPEND ${plugin_path}/CMakeLists.txt "		include(${DKCMAKE}/ios.toolchain.cmake)\n")
 	file(APPEND ${plugin_path}/CMakeLists.txt "		add_definitions(-DIOS)\n")
 	file(APPEND ${plugin_path}/CMakeLists.txt "endif()\n")
-	
 	file(APPEND ${plugin_path}/CMakeLists.txt "if(IOSSIM)\n")
 	file(APPEND ${plugin_path}/CMakeLists.txt "		set(PLATFORM SIMULATOR64)\n")
 	file(APPEND ${plugin_path}/CMakeLists.txt "		include(${DKCMAKE}/ios.toolchain.cmake)\n")
 	file(APPEND ${plugin_path}/CMakeLists.txt "		add_definitions(-DIOS)\n")
 	file(APPEND ${plugin_path}/CMakeLists.txt "endif()\n")
-	file(APPEND ${plugin_path}/CMakeLists.txt "project(${name})\n")
-	
+	file(APPEND ${plugin_path}/CMakeLists.txt "project(${plugin_name})\n")
 	foreach(each_include ${DKINCLUDES_LIST})
 		file(APPEND ${plugin_path}/CMakeLists.txt "include_directories(${each_include})\n")
 	endforeach()
@@ -1970,7 +2163,7 @@ function(dk_dll name)
 	foreach(each_linkdir ${DKLINKDIRS_LIST})
 		file(APPEND ${plugin_path}/CMakeLists.txt "link_directories(${each_linkdir})\n")
 	endforeach()
-	file(APPEND ${plugin_path}/CMakeLists.txt "file(GLOB ${name}_SRC \n")
+	file(APPEND ${plugin_path}/CMakeLists.txt "file(GLOB ${plugin_name}_SRC \n")
 	file(APPEND ${plugin_path}/CMakeLists.txt "		${plugin_path}/*.h\n")
 	file(APPEND ${plugin_path}/CMakeLists.txt "    	${plugin_path}/*.c\n")
 	file(APPEND ${plugin_path}/CMakeLists.txt "    	${plugin_path}/*.cpp\n")
@@ -1980,10 +2173,10 @@ function(dk_dll name)
 		file(APPEND ${plugin_path}/CMakeLists.txt "		${plugin_path}/*.mm\n")
 	endif()
 	file(APPEND ${plugin_path}/CMakeLists.txt ")\n")
-	file(APPEND ${plugin_path}/CMakeLists.txt "add_library(${name} SHARED \${${name}_SRC})\n")
+	file(APPEND ${plugin_path}/CMakeLists.txt "add_library(${plugin_name} SHARED \${${plugin_name}_SRC})\n")
 	file(APPEND ${plugin_path}/CMakeLists.txt "add_definitions(-D_WIN32_WINNT=0x0600)\n")
-	file(APPEND ${plugin_path}/CMakeLists.txt "set_target_properties(${name} PROPERTIES LINK_FLAGS_DEBUG \"/NODEFAULTLIB:libc.lib /NODEFAULTLIB:LIBCMTD.lib /SAFESEH:NO\" LINK_FLAGS \"/NODEFAULTLIB:libc.lib /NODEFAULTLIB:LIBCMT.lib /SAFESEH:NO\") \n")
-	file(APPEND ${plugin_path}/CMakeLists.txt "target_compile_options(${name} PRIVATE $<$<CONFIG:Debug>:/MDd /Od /Ob0 /EHsc /Zi /RTC1 /DDEBUG /D_DEBUG> $<$<CONFIG:Release>:/MD /O2 /Ob2 /EHsc /DNDEBUG>)\n")
+	file(APPEND ${plugin_path}/CMakeLists.txt "set_target_properties(${plugin_name} PROPERTIES LINK_FLAGS_DEBUG \"/NODEFAULTLIB:libc.lib /NODEFAULTLIB:LIBCMTD.lib /SAFESEH:NO\" LINK_FLAGS \"/NODEFAULTLIB:libc.lib /NODEFAULTLIB:LIBCMT.lib /SAFESEH:NO\") \n")
+	file(APPEND ${plugin_path}/CMakeLists.txt "target_compile_options(${plugin_name} PRIVATE $<$<CONFIG:Debug>:/MDd /Od /Ob0 /EHsc /Zi /RTC1 /DDEBUG /D_DEBUG> $<$<CONFIG:Release>:/MD /O2 /Ob2 /EHsc /DNDEBUG>)\n")
 	if(DEBUG_LIBS)
 		string(REPLACE "debug" " debug " DLL_DEBUG_LIBS ${DEBUG_LIBS})
 	endif()
@@ -1994,94 +2187,101 @@ function(dk_dll name)
 		string(REPLACE ".lib" ".lib " DLL_LIBS ${LIBS})
 	endif()
 	if(DLL_DEBUG_LIBS AND DLL_RELEASE_LIBS)
-#		file(APPEND ${plugin_path}/CMakeLists.txt "target_link_libraries(${name} debug ${DKPLUGINS}/DK/${OS}/${DEBUG_DIR}/DK.lib optimized ${DKPLUGINS}/DK/${OS}/${RELEASE_DIR}/DK.lib) \n")
-		file(APPEND ${plugin_path}/CMakeLists.txt "target_link_libraries(${name} ${DLL_DEBUG_LIBS} ${DLL_RELEASE_LIBS} ${DLL_LIBS}) \n")
+#		file(APPEND ${plugin_path}/CMakeLists.txt "target_link_libraries(${plugin_name} debug ${DKPLUGINS}/DK/${OS}/${DEBUG_DIR}/DK.lib optimized ${DKPLUGINS}/DK/${OS}/${RELEASE_DIR}/DK.lib) \n")
+		file(APPEND ${plugin_path}/CMakeLists.txt "target_link_libraries(${plugin_name} ${DLL_DEBUG_LIBS} ${DLL_RELEASE_LIBS} ${DLL_LIBS}) \n")
 	endif()
 	file(APPEND ${plugin_path}/CMakeLists.txt "if(WIN_HOST)\n")
-	file(APPEND ${plugin_path}/CMakeLists.txt "		set_target_properties(${name} PROPERTIES LINKER_LANGUAGE CPP)\n")
+	file(APPEND ${plugin_path}/CMakeLists.txt "		set_target_properties(${plugin_name} PROPERTIES LINKER_LANGUAGE CPP)\n")
 	file(APPEND ${plugin_path}/CMakeLists.txt "endif()\n")
 	endif()
-	dk_addToPluginList(${name})
+	dk_addToPluginList(${plugin_name})
 endfunction()
 
 
 ###############################################################################
-# dk_executable(name)
+# dk_executable(plugin_name)
 #
-#	
-function(dk_executable name)
+#	TODO
+#
+#	@plugin_name	- TODO
+#
+function(dk_executable plugin_name)
 	DKDEBUGFUNC(${ARGV})
-	dk_getPathToPlugin(${name} plugin_path)
+	dk_getPathToPlugin(${plugin_name} plugin_path)
 	if(NOT EXISTS "${plugin_path}")
-		dk_assert("${name} plugin not found")
-		return()
+		dk_assert("${plugin_name} plugin not found")
 	endif()
 	dk_include(${plugin_path})
-	file(REMOVE ${plugin_path}/CMakeLists.txt)
+	dk_remove(${plugin_path}/CMakeLists.txt)
 	if(NOT EXISTS "${plugin_path}/CMakeLists.txt")
-#	file(APPEND ${plugin_path}/CMakeLists.txt "### ${name} ###\n")
+#	file(APPEND ${plugin_path}/CMakeLists.txt "### ${plugin_name} ###\n")
 #	file(APPEND ${plugin_path}/CMakeLists.txt "cmake_minimum_required(VERSION 3.10)\n")
 #	file(APPEND ${plugin_path}/CMakeLists.txt "cmake_policy(SET CMP0054 NEW)\n")
 #	file(APPEND ${plugin_path}/CMakeLists.txt "include(${DKCMAKE}/DKFunctions.cmake)\n")
 #	file(APPEND ${plugin_path}/CMakeLists.txt "include(${DKCMAKE}/DKVariables.cmake)\n")
-#	file(APPEND ${plugin_path}/CMakeLists.txt "project(${name})\n")
+#	file(APPEND ${plugin_path}/CMakeLists.txt "project(${plugin_name})\n")
 	endif()
-	dk_addToPluginList(${name})
+	dk_addToPluginList(${plugin_name})
 endfunction()
 
 
 ###############################################################################
-# dk_testApp(name)
+# dk_testApp(plugin_name)
 #
-#	@name:
+#	TODO
 #
-function(dk_testApp name)
+#	@plugin_name	- TODO
+#
+function(dk_testApp plugin_name)
 	DKDEBUGFUNC(${ARGV})
-	dk_getPathToPlugin(${name} plugin_path)
+	dk_getPathToPlugin(${plugin_name} plugin_path)
 	if(NOT EXISTS "${plugin_path}/test")
-		dk_info("dk_testApp(): ${name}_test app not found")
+		dk_info("dk_testApp(): ${plugin_name}_test app not found")
 		return()
 	endif()
-	dk_info("building ${name}_test app")
+	dk_info("building ${plugin_name}_test app")
 	dk_set(test_path "${plugin_path}/test")
 	
 	# Create CmakeLists.txt file
-	file(REMOVE "${test_path}/CMakeLists.txt")
+	dk_remove("${test_path}/CMakeLists.txt")
 	file(APPEND ${test_path}/CMakeLists.txt "### This file is generated by DKCMake. Any Changes here, will be overwritten. ###\n")
-	file(APPEND ${test_path}/CMakeLists.txt "### ${name} ###\n")
+	file(APPEND ${test_path}/CMakeLists.txt "### ${plugin_name} ###\n")
 	file(APPEND ${test_path}/CMakeLists.txt "cmake_minimum_required(VERSION 3.10)\n")
 	file(APPEND ${test_path}/CMakeLists.txt "cmake_policy(SET CMP0054 NEW)\n")
 	file(APPEND ${test_path}/CMakeLists.txt "include(${DKCMAKE}/DKFunctions.cmake)\n")
 	file(APPEND ${test_path}/CMakeLists.txt "include(${DKCMAKE}/DKVariables.cmake)\n")
-	dk_appendCmake("project(${name}_test)\n")
+	dk_appendCmake("project(${plugin_name}_test)\n")
 	dk_appendCmake("include_directories(${DKPLUGINS})\n")
 		
 	# TODO		
-	dk_addToPluginList(${name})
+	dk_addToPluginList(${plugin_name})
 endfunction()
 
 
 ###############################################################################
-# dk_addToPluginList(name)
+# dk_addToPluginList(plugin_name)
 #
-# @name:
+#	TODO
 #
-function(dk_addToPluginList name)
+#	@plugin_name	- TODO
+#
+function(dk_addToPluginList plugin_name)
 	DKDEBUGFUNC(${ARGV})
-	dk_getPathToPlugin(${name} plugin_path)
+	dk_getPathToPlugin(${plugin_name} plugin_path)
 	if(NOT EXISTS "${plugin_path}")
-		dk_assert("${name} plugin not found")
-		return()
+		dk_assert("${plugin_name} plugin not found")
 	endif()
 	dk_include(${plugin_path})
-	dk_set(DKPLUGIN_LIST ${DKPLUGIN_LIST} ${name})
+	dk_set(DKPLUGIN_LIST ${DKPLUGIN_LIST} ${plugin_name})
 endfunction()
 
 
 ###############################################################################
 # dk_appendCmake(str)
 #
-#	@str:
+#	TODO
+#
+#	@str	- TODO
 #
 function(dk_appendCmake str)
 	DKDEBUGFUNC(${ARGV})
@@ -2128,35 +2328,34 @@ SET(ASSETS
 
 
 ###############################################################################
-# dk_assets(name)
+# dk_assets(plugin)
 #
 #	Add a library's files to the App's assets
 #
-#	@name:
+#	@plugin		- TODO
 #
-function(dk_assets name)
+function(dk_assets plugin)
 	DKDEBUGFUNC(${ARGV})
 	if(NOT DKAPP)
 		return()
 	endif()	
-	dk_getPathToPlugin(${name} plugin_path)
+	dk_getPathToPlugin(${plugin} plugin_path)
 	if(NOT plugin_path)
-		dk_assert("${name} plugin not found")
-		return()
+		dk_assert("${plugin} plugin not found")
 	endif()
-	dk_info("Importing ${name} assets...")
+	dk_info("Importing ${plugin} assets...")
 	file(COPY ${plugin_path} DESTINATION ${DKPROJECT}/assets ${ASSETS})
 #	file(COPY ${plugin_path}/${OS}/${DEBUG_DIR}/*.exe DESTINATION ${DKPROJECT}/assets/${OS}/Debug)
 endfunction()
 
 
 ###############################################################################
-# dk_getPathToPlugin(name result)
+# dk_getPathToPlugin(plugin RESULT)
 #
-#	@name:
-#	@result:
+#	@plugin		- TODO
+#	@RESULT		- TODO
 #
-function(dk_getPathToPlugin name result)
+function(dk_getPathToPlugin plugin RESULT)
 	DKDEBUGFUNC(${ARGV})
 	list(FIND dk_disabled_list "${ARGV}" index)
 	if(${index} GREATER -1)
@@ -2165,116 +2364,124 @@ function(dk_getPathToPlugin name result)
 	endif()
 	file(GLOB children RELATIVE ${DIGITALKNOB} ${DIGITALKNOB}/*)
  	foreach(child ${children})
-		if(EXISTS ${DIGITALKNOB}/${child}/3rdParty/_DKIMPORTS/${name}/DKMAKE.cmake)
-			set(${result} "${DIGITALKNOB}/${child}/3rdParty/_DKIMPORTS/${name}" PARENT_SCOPE)
+		if(EXISTS ${DIGITALKNOB}/${child}/3rdParty/_DKIMPORTS/${plugin}/DKMAKE.cmake)
+			set(${RESULT} "${DIGITALKNOB}/${child}/3rdParty/_DKIMPORTS/${plugin}" PARENT_SCOPE)
 			return()
     	endif()
-		if(EXISTS ${DIGITALKNOB}/${child}/DKPlugins/${name}/DKMAKE.cmake)
-			set(${result} "${DIGITALKNOB}/${child}/DKPlugins/${name}" PARENT_SCOPE)
+		if(EXISTS ${DIGITALKNOB}/${child}/DKPlugins/${plugin}/DKMAKE.cmake)
+			set(${RESULT} "${DIGITALKNOB}/${child}/DKPlugins/${plugin}" PARENT_SCOPE)
 			return()
     	endif()
   	endforeach()
-	set(${result} "")
-#	dk_error("Could not find ${name} Plugin.")
-	dk_assert("Could not find ${name} Plugin.")
+	set(${RESULT} "")
+	dk_assert("Could not find ${plugin} Plugin.")
 endfunction()
 
 
 ###############################################################################
-# dk_depend(name)
+# dk_depend(plugin)
 #
 #	Add a library or plugin to the dependency list
 #
-#	@name:
+#	@plugin		- TODO
 #
-function(dk_depend name)
+function(dk_depend plugin)
 	DKDEBUGFUNC(${ARGV})
 #	dk_debug(CMAKE_CURRENT_LIST_DIR)
 	
 #	if(${ARGC} GREATER 1)
 #		dk_info(ARGV)
-#		dk_dump(ARGV) # FIXME: DUMP not working here, show 2 for the ARGC count, but only shows variable name ARGV, no value
+#		dk_dump(ARGV) # FIXME: DUMP not working here, show 2 for the ARGC count, but only shows variable plugin ARGV, no value
 #	endif()
 
-	list(FIND dk_disabled_list ${name} index)
+	list(FIND dk_disabled_list ${plugin} index)
 	if(${index} GREATER -1)
-		dk_warn("${name} IS DISABLED")
+		dk_warn("${plugin} IS DISABLED")
 		return()
 	endif()
 	
 # 	TODO TODO TODO TODO 
-# 	dk_createSmartObject(${name}) #TODO:  automatically determin plugin, create variables, setup auto compiles, etc 
+# 	dk_createSmartObject(${plugin}) #TODO:  automatically determin plugin, create variables, setup auto compiles, etc 
 # 	TODO TODO TODO TODO 
 	
 #	If dk_depend had second variable (a sub library), set that variable to ON
 #	if(${ARGC} GREATER 1)
-#	list(FIND dkdepend_list "${name} ${args}" index)
+#	list(FIND dkdepend_list "${plugin} ${args}" index)
 #	if(${index} GREATER -1) #library is already in the list
 #		return()
 #	endif()
 #	else()
-#		list(FIND dkdepend_list "${name}" index)
+#		list(FIND dkdepend_list "${plugin}" index)
 #		if(${index} GREATER -1)
 #			return() #library is already in the list
 #		endif()
 #	endif()
 		
-	list(FIND dkdepend_list ${name} index)
+	list(FIND dkdepend_list ${plugin} index)
 	if(${index} GREATER -1)
 		return()  #library is already in the list
 	endif()
 	
-	dk_enable(${name})
-	dk_runDepends(${name}) # strip everything from the file except if() else() elseif() endif() and dk_depend() before sorting.
+	dk_enable(${plugin})
+	dk_runDepends(${plugin}) # strip everything from the file except if() else() elseif() endif() and dk_depend() before sorting.
 #	else()
-#		list(FIND dkdepend_list "${name}" index)
+#		list(FIND dkdepend_list "${plugin}" index)
 #		if(${index} GREATER -1)
 #			return() #library is already in the list
 #		endif()
-#		dk_runDepends(${name}) # strip everything from the file except if() else() elseif() endif() and dk_depend() before sorting.
+#		dk_runDepends(${plugin}) # strip everything from the file except if() else() elseif() endif() and dk_depend() before sorting.
 #	endif()
 endfunction()
-dk_aliasFunctions("dk_depend")
+dk_createOsMacros("dk_depend")
 
 
 ###############################################################################
-# dk_undepend(name)
+# dk_undepend(plugin)
 #
 #	Remove a library or plugin from the dependency list
 #
-#	@name:
+#	@plugin				- TODO
+#	@target (optional)	- TODO
 #
-function(dk_undepend name)
+function(dk_undepend plugin)
 	DKDEBUGFUNC(${ARGV})
+	set(target ${ARGV1})
+	
 	# Only allow dk_undepend command from these filters	
-	if(NOT ${CMAKE_CURRENT_LIST_DIR} STREQUAL ${DKCMAKE} AND NOT ${CMAKE_CURRENT_LIST_DIR} STREQUAL ${DKPROJECT}) # /DKCMake or /App directory only
-		dk_assert("dk_undepend() Can only be used from the DKDisabled.cmake file. This is to avoid having disabled libraries hideing everywhere")
+	if(NOT ${CMAKE_CURRENT_LIST_DIR} STREQUAL ${DKCMAKE})
+		if(NOT ${CMAKE_CURRENT_LIST_DIR} STREQUAL ${DKPROJECT})
+			if(NOT ${CMAKE_CURRENT_LIST_DIR} STREQUAL ${DKIMPORTS}/${plugin})
+				if(NOT ${CMAKE_CURRENT_LIST_DIR} STREQUAL ${DKPLUGINS}/${plugin})
+					dk_assert("dk_undepend() Can only be used from the DKDisabled.cmake file. This is to avoid having disabled libraries hideing everywhere")
+				endif()
+			endif()
+		endif()
 	endif()
+	
 	dk_info("DISABLING ${ARGV}")
 	dk_set(dk_disabled_list ${dk_disabled_list} "${ARGV}")
 	if(${ARGC} GREATER 1)
-		dk_removeTarget(${name} ${ARGV1})
-	endif()
+		dk_removeTarget(${plugin} ${ARGV1})
+	endif()	   
 endfunction()
 
 
 ###############################################################################
-# dk_runDepends(name)
+# dk_runDepends(plugin)
 #
 #	Strip everything from the library's DKMAKE.cmake file except dk_depend() commands AND conditionals.
 #	Conditionals such as if(), else(), elseif(), endif(), return() will remain included during the sorting process. 
 #	WARNING: BE CAREFULL WRITING NEW VARIABLES TO USE WITH CONDITIONALS, AS THEY MIGHT BE IGNORED 
 #
-#	@name:
+#	@plugin		- TODO
 #
-function(dk_runDepends name)
+function(dk_runDepends plugin)
 	DKDEBUGFUNC(${ARGV})
-	dk_getPathToPlugin(${name} plugin_path)
+	dk_getPathToPlugin(${plugin} plugin_path)
 	if(NOT plugin_path)
-		dk_assert("${name} plugin not found")
-		return()
+		dk_assert("${plugin} plugin not found")
 	endif()
-#	dk_debug("FOUND ${name} DK makefile at ${plugin_path}")
+#	dk_debug("FOUND ${plugin} DK makefile at ${plugin_path}")
 	
 	file(STRINGS ${plugin_path}/DKMAKE.cmake lines)
 	unset(disable_script)
@@ -2283,71 +2490,74 @@ function(dk_runDepends name)
 	
 	set(KEEPLINE 0)
 	foreach(line ${lines})
-		#string(FIND "${line}" "if(" index)
-		dk_includes("${line}" "if(" result)
-		#if(${index} GREATER -1)
-		if(${result})
+		dk_includes("${line}" "if(" includes)
+		if(${includes})
 			set(KEEPLINE 1)
 		endif()
 		
-		#string(FIND "${line}" "IF(" index)
-		dk_includes("${line}" "IF(" result)
-		#if(${index} GREATER -1)
-		if(${result})
+		dk_includes("${line}" "IF(" includes)
+		if(${includes})
 			set(KEEPLINE 1)
 		endif()
 		
 		## elseif(
 		##NOTE: The 'if(' search commands take care of elseif() and endif() since 'if' is already in those words 
 		
-		#string(FIND "${line}" "else(" index)
-		dk_includes("${line}" "else(" result)
-		#if(${index} GREATER -1)
-		if(${result})
+		dk_includes("${line}" "else(" includes)
+		if(${includes})
 			set(KEEPLINE 1)
 		endif()
 		
-		#string(FIND "${line}" "ELSE(" index)
-		dk_includes("${line}" "ELSE(" result)
-		#if(${index} GREATER -1)
-		if(${result})
+		dk_includes("${line}" "ELSE(" includes)
+		if(${includes})
+			set(KEEPLINE 1)
+		endif()
+		
+		dk_includes("${line}" "find_library(" includes)
+		if(${includes})
+			set(KEEPLINE 1)
+		endif()
+		
+		dk_includes("${line}" "FIND_LIBRARY(" includes)
+		if(${includes})
 			set(KEEPLINE 1)
 		endif()
 		
 		## endif(
 		##NOTE: The 'if(' search commands take care of elseif() and endif() since 'if' is already in those words 
 		
-		#string(FIND "${line}" "return(" index)
-		dk_includes("${line}" "return(" result)
-		#if(${index} GREATER -1)
-		if(${result})
+		dk_includes("${line}" "return(" includes)
+		if(${includes})
 			set(KEEPLINE 1)
 		endif()
 		
-		#string(FIND "${line}" "RETURN(" index)
-		dk_includes("${line}" "RETURN(" result)
-		#if(${index} GREATER -1)
-		if(${result})
+		dk_includes("${line}" "RETURN(" includes)
+		if(${includes})
 			set(KEEPLINE 1)
 		endif()
 		
-		#string(FIND "${line}" "dk_disable(" index)
-		dk_includes("${line}" "dk_disable(" result)
-		#if(${index} GREATER -1)
-		if(${result})
+		dk_includes("${line}" "dk_disable(" includes)
+		if(${includes})
 			set(KEEPLINE 1)
 		endif()
 		
-#		#string(FIND "${line}" "SET(" index)
-#		dk_includes("${line}" "SET(" result)
-#		#if(${index} GREATER -1)
-#		if(${result})
+		dk_includes("${line}" "dk_set(" includes)
+		if(${includes})
+			set(KEEPLINE 1)
+		endif()
+		
+		dk_includes("${line}" "dk_makeDirectory(" includes)
+		if(${includes})
+			set(KEEPLINE 1)
+		endif()
+		
+#		dk_includes("${line}" "SET(" includes)
+#		if(${includes})
 #			set(KEEPLINE 1)
 #		endif()
 		
 #		#string(FIND "${line}" "dk_set(" index) # taken care of by SET( sytax above
-#		dk_includes("${line}" "dk_set(" result)
-#		#if(${index} GREATER -1)
+#		dk_includes("${line}" "dk_set(" includes)
 #		if(${result})
 #			set(KEEPLINE 1)
 #		endif()
@@ -2357,145 +2567,122 @@ function(dk_runDepends name)
 		endif()
 		
 		# FIXME: we need to get a proper count of openeing (  before we can determine that we have actually reached the closing )
-		#string(FIND "${line}" ")" indexB)
-		dk_includes("${line}" ")" result)
-		#if(${indexB} GREATER -1)
-		if(${result})
+		dk_includes("${line}" ")" includes)
+		if(${includes})
 			set(KEEPLINE 0)
 		endif()
 	endforeach()
 	
 	set(KEEPLINE 0)
 	foreach(line ${lines})
-		#string(FIND "${line}" "if(" index)
-		dk_includes("${line}" "if(" result)
-		#if(${index} GREATER -1)
-		if(${result})
+		dk_includes("${line}" "if(" includes)
+		if(${includes})
 			set(KEEPLINE 1)
 		endif()
 		
-		#string(FIND "${line}" "IF(" index)
-		dk_includes("${line}" "IF(" result)
-		#if(${index} GREATER -1)
-		if(${result})
+		dk_includes("${line}" "IF(" includes)
+		if(${includes})
 			set(KEEPLINE 1)
 		endif()
 		
 		## elseif(
 		##NOTE: The 'if(' search commands take care of elseif() and endif() since 'if' is already in those words 
 		
-		#string(FIND "${line}" "else(" index)
-		dk_includes("${line}" "else(" result)
-		#if(${index} GREATER -1)
-		if(${result})
+		dk_includes("${line}" "else(" includes)
+		if(${includes})
 			set(KEEPLINE 1)
 		endif()
 		
-		#string(FIND "${line}" "ELSE(" index)
-		dk_includes("${line}" "ELSE(" result)
-		#if(${index} GREATER -1)
-		if(${result})
+		dk_includes("${line}" "ELSE(" includes)
+		if(${includes})
 			set(KEEPLINE 1)
 		endif()
 		
 		## endif(
 		##NOTE: The 'if(' search commands take care of elseif() and endif() since 'if' is already in those words 
 		
-		#string(FIND "${line}" "return(" index)
-		dk_includes("${line}" "return(" result)
-		#if(${index} GREATER -1)
-		if(${result})
+		dk_includes("${line}" "return(" includes)
+		if(${includes})
 			set(KEEPLINE 1)
 		endif()
 		
-		#string(FIND "${line}" "RETURN(" index)
-		dk_includes("${line}" "RETURN(" result)
-		#if(${index} GREATER -1)
-		if(${result})
+		dk_includes("${line}" "RETURN(" includes)
+		if(${includes})
 			set(KEEPLINE 1)
 		endif()
 		
-		#string(FIND "${line}" "dk_enable(" index)
-		dk_includes("${line}" "dk_enable(" result)
-		#if(${index} GREATER -1)
-		if(${result})
+		dk_includes("${line}" "find_library(" includes)
+		if(${includes})
 			set(KEEPLINE 1)
 		endif()
 		
-		#string(FIND "${line}" "dk_disable(" index)
-		dk_includes("${line}" "dk_disable(" result)
-		#if(${index} GREATER -1)
-		if(${result})
+		dk_includes("${line}" "FIND_LIBRARY(" includes)
+		if(${includes})
+			set(KEEPLINE 1)
+		endif()
+		
+		dk_includes("${line}" "dk_enable(" includes)
+		if(${includes})
+			set(KEEPLINE 1)
+		endif()
+		
+		dk_includes("${line}" "dk_disable(" includes)
+		if(${includes})
 			set(KEEPLINE 1)
 		endif()	
 		
-		#string(FIND "${line}" "dk_depend(" index)
-		dk_includes("${line}" "dk_depend(" result)
-		#if(${index} GREATER -1)
-		if(${result})
-			set(KEEPLINE 1)
-		endif()
-		
-		#string(FIND "${line}" "dk_set(" index)
-		dk_includes("${line}" "dk_set(" result)
-		#if(${index} GREATER -1)
-		if(${result})
-			set(KEEPLINE 1)
-		endif()
-		
-		#string(FIND "${line}" "message(" index)
-		dk_includes("${line}" "message(" result)
-		#if(${index} GREATER -1)
-		if(${result})
-			set(KEEPLINE 1)
-		endif()
-		
-		#string(FIND "${line}" "dk_assert(" index)
-		dk_includes("${line}" "dk_assert(" result)
-		#if(${index} GREATER -1)
-		if(${result})
-			set(KEEPLINE 1)
-		endif()
-		
-		#string(FIND "${line}" "dk_error(" index)
-		dk_includes("${line}" "dk_error(" result)
-		#if(${index} GREATER -1)
-		if(${result})
-			set(KEEPLINE 1)
-		endif()
-		
-		#string(FIND "${line}" "dk_warn(" index)
-		dk_includes("${line}" "dk_warn(" result)
-		#if(${index} GREATER -1)
-		if(${result})
-			set(KEEPLINE 1)
-		endif()
-		
-		#string(FIND "${line}" "dk_info(" index)
-		dk_includes("${line}" "dkinfo(" result)
-		#if(${index} GREATER -1)
-		if(${result})
-			set(KEEPLINE 1)
-		endif()
-		
-		#string(FIND "${line}" "dk_debug(" index)
-		dk_includes("${line}" "dk_debug(" result)
-		#if(${index} GREATER -1)
-		if(${result})
+		dk_includes("${line}" "dk_depend(" includes)
+		if(${includes})
 			set(KEEPLINE 1)
 		endif()
 
-		#string(FIND "${line}" "dk_verbose(" index)
-		dk_includes("${line}" "dk_verbose(" result)
-		#if(${index} GREATER -1)
-		if(${result})
+		dk_includes("${line}" "dk_set(" includes)
+		if(${includes})
 			set(KEEPLINE 1)
 		endif()
 		
-		#string(FIND "${line}" "dk_trace(" index)
-		dk_includes("${line}" "dk_trace(" result)
-		#if(${index} GREATER -1)
-		if(${result})
+		dk_includes("${line}" "message(" includes)
+		if(${includes})
+			set(KEEPLINE 1)
+		endif()
+		
+		#dk_includes("${line}" "dk_assert(" includes)
+		#if(${includes})
+		#	set(KEEPLINE 1)
+		#endif()
+		
+		dk_includes("${line}" "dk_error(" includes)
+		if(${includes})
+			set(KEEPLINE 1)
+		endif()
+		
+		dk_includes("${line}" "dk_warn(" includes)
+		if(${includes})
+			set(KEEPLINE 1)
+		endif()
+		
+		dk_includes("${line}" "dkinfo(" includes)
+		if(${includes})
+			set(KEEPLINE 1)
+		endif()
+		
+		dk_includes("${line}" "dk_debug(" includes)
+		if(${includes})
+			set(KEEPLINE 1)
+		endif()
+
+		dk_includes("${line}" "dk_verbose(" includes)
+		if(${includes})
+			set(KEEPLINE 1)
+		endif()
+		
+		dk_includes("${line}" "dk_trace(" includes)
+		if(${includes})
+			set(KEEPLINE 1)
+		endif()
+		
+		dk_includes("${line}" "dk_makeDirectory(" includes)
+		if(${includes})
 			set(KEEPLINE 1)
 		endif()
 		
@@ -2504,19 +2691,17 @@ function(dk_runDepends name)
 		endif()
 		
 		# FIXME: we need to get a proper count of openeing (  before we can determine that we have actually reached the closing )
-		#string(FIND "${line}" ")" indexB)
-		dk_includes("${line}" ")" result)
-		#if(${indexB} GREATER -1)
-		if(${result})
+		dk_includes("${line}" ")" includes)
+		if(${includes})
 			set(KEEPLINE 0)
 		endif()
 	endforeach()
 	
 	if(disable_script)
+		dk_remove(${plugin_path}/DISABLES.TMP NOERROR)
 		file(WRITE ${plugin_path}/DISABLES.TMP "${disable_script}")
 		INCLUDE(${plugin_path}/DISABLES.TMP)
-#		file(APPEND ${filepath} "${disable_script}")   #cmake 3.18+
-		file(REMOVE ${plugin_path}/DISABLES.TMP)
+#		dk_remove(${plugin_path}/DISABLES.TMP)
 	endif()
 	
 	if(depends_script)
@@ -2525,32 +2710,32 @@ function(dk_runDepends name)
 		else()
 			dk_set(${ARGV0}_all 1)
 		endif()
+		dk_remove(${plugin_path}/DEPENDS.TMP NOERROR)
 		file(WRITE ${plugin_path}/DEPENDS.TMP "${depends_script}")
 		INCLUDE(${plugin_path}/DEPENDS.TMP)
-#		file(APPEND ${filepath} "${depends_script}")    #cmake 3.18+
-		file(REMOVE ${plugin_path}/DEPENDS.TMP)
+#		dk_remove(${plugin_path}/DEPENDS.TMP)
 		if(${ARGC} GREATER 1)
 			dk_set(${ARGV1} OFF)
 		endif()
 	endif()
 	
 	if(${ARGC} GREATER 1)
-		list(FIND dkdepend_list "${name} ${ARGV1}" index)
+		list(FIND dkdepend_list "${plugin} ${ARGV1}" index)
 		if(${index} GREATER -1)
 			return()
 		endif()
 	else()
-		list(FIND dkdepend_list "${name}" index)
+		list(FIND dkdepend_list "${plugin}" index)
 		if(${index} GREATER -1)
 			return() # already on the list
 		endif()
 	endif()
 	
-	dk_set(dkdepend_list ${dkdepend_list} "${ARGV}")  #Add sublibrary to list
+	dk_set(dkdepend_list ${dkdepend_list} "${ARGV}")  #Add target to list
 #	if(${ARGC} GREATER 1)
-#		dk_set(dkdepend_list ${dkdepend_list} "${name} ${ARGV1}")  #Add sublibrary to list
+#		dk_set(dkdepend_list ${dkdepend_list} "${plugin} ${ARGV1}")  #Add target to list
 #	else()
-#		dk_set(dkdepend_list ${dkdepend_list} ${name})  #Add library to list
+#		dk_set(dkdepend_list ${dkdepend_list} ${plugin})  #Add library to list
 #	endif()	
 	list(REMOVE_DUPLICATES dkdepend_list)
 endfunction()
@@ -2558,6 +2743,8 @@ endfunction()
 
 ###############################################################################
 # dk_dependAll()
+#
+#	TODO
 #
 function(dk_dependAll)
 	DKDEBUGFUNC(${ARGV})
@@ -2598,9 +2785,11 @@ endfunction()
 ###############################################################################
 # dkFileReplace(filePath find replace)
 #
-#	@filePath:
-#	@find:
-#	@replace:
+#	TODO
+#
+#	@filePath	- TODO
+#	@find		- TODO
+#	@replace	- TODO
 #
 function(dkFileReplace filePath find replace)
 	DKDEBUGFUNC(${ARGV})
@@ -2616,23 +2805,23 @@ endfunction()
 
 
 ###############################################################################
-# dk_updateAndroidName(name)
+# dk_updateAndroidName(app_name)
 #
-#	@name:
+#	TODO
 #
-function(dk_updateAndroidName name)
+#	@app_name	- TODO
+#
+function(dk_updateAndroidName app_name)
 	DKDEBUGFUNC(${ARGV})
-	string(TOLOWER ${name} name)
+	string(TOLOWER ${app_name} app_name)
 	if(ANDROID)
 		# update all files and folders recursivley
 		file(GLOB_RECURSE allfiles LIST_DIRECTORIES true RELATIVE "${DKPROJECT}/${OS}/" "${DKPROJECT}/${OS}/*")
 		dk_debug("Getting a list of files in ${DKPROJECT}/${OS}")
 		list(REVERSE allfiles)
 		foreach(each_file ${allfiles})
-			#dk_debug("#####  each_file = ${each_file}")
 			dk_debug(each_file)
 			set(filepath "${DKPROJECT}/${OS}/${each_file}")
-			#dk_debug("### each_file = ${each_file}")
 			dk_debug(each_file)
 			if(NOT IS_DIRECTORY ${filepath})
 				string(FIND "${each_file}" "opendb" indexD)
@@ -2646,8 +2835,8 @@ function(dk_updateAndroidName name)
 				file(READ ${filepath} filestring)
 				string(FIND "${filestring}" "dkapp" index)
 				if(${index} GREATER -1)
-					dk_info("Replacing 'dkapp' with '${name}' in ${filepath}")
-					string(REPLACE "dkapp" "${name}" filestring "${filestring}")
+					dk_info("Replacing 'dkapp' with '${app_name}' in ${filepath}")
+					string(REPLACE "dkapp" "${app_name}" filestring "${filestring}")
 					file(WRITE ${filepath} "${filestring}")
 				endif()
 			endif()
@@ -2655,9 +2844,9 @@ function(dk_updateAndroidName name)
 			string(FIND "${fname}" "dkapp" indexB)
 			if(${indexB} GREATER -1)
 				set(new_name ${each_file})
-				string(REPLACE "dkapp" "${name}" new_name "${new_name}")
+				string(REPLACE "dkapp" "${app_name}" new_name "${new_name}")
 				dk_info("Renaming ${each_file} to ${new_name}")
-				dk_rename(${DKPROJECT}/${OS}/${each_file} ${DKPROJECT}/${OS}/${new_name} true)
+				dk_rename(${DKPROJECT}/${OS}/${each_file} ${DKPROJECT}/${OS}/${new_name} OVERWRITE)
 			endif()
 		endforeach()
 	endif()
@@ -2665,42 +2854,44 @@ endfunction()
 
 
 ###############################################################################
-# dk_updateInfoPlist(name)
+# dk_updateInfoPlist(app_name)
 #
-#	@name:
+#	TODO
 #
-function(dk_updateInfoPlist name)
+#	@app_name	- TODO
+#
+function(dk_updateInfoPlist app_name)
 	DKDEBUGFUNC(${ARGV})
 	if(MAC)
 		# FIXME
 		dk_info("Updating MAC info.plist . . .")
 		if(DEBUG)
-			if(EXISTS ${DKPROJECT}/${OS}/${DEBUG_DIR}/${name}.app/Contents/info.plist)
-				file(READ ${DKPROJECT}/${OS}/${DEBUG_DIR}/${name}.app/Contents/info.plist plist)
+			if(EXISTS ${DKPROJECT}/${OS}/${DEBUG_DIR}/${app_name}.app/Contents/info.plist)
+				file(READ ${DKPROJECT}/${OS}/${DEBUG_DIR}/${app_name}.app/Contents/info.plist plist)
 				string(REPLACE "<key>CFBundleIconFile</key>" "" plist ${plist})
 				string(REPLACE "<string>logo</string>" "" plist ${plist})
 				string(REPLACE "<dict>" "<dict><key>CFBundleIconFile</key><string>logo</string>" plist ${plist})
-				file(WRITE "${plist}" ${DKPROJECT}/${OS}/${DEBUG_DIR}/${name}.app/Contents/info.plist)
+				file(WRITE "${plist}" ${DKPROJECT}/${OS}/${DEBUG_DIR}/${app_name}.app/Contents/info.plist)
 			endif()
 		endif()
 		if(RELEASE)
-			if(EXISTS ${DKPROJECT}/${OS}/${RELEASE_DIR}/${name}.app/Contents/info.plist)
-				file(READ ${DKPROJECT}/${OS}/${RELEASE_DIR}/${name}.app/Contents/info.plist plist)
+			if(EXISTS ${DKPROJECT}/${OS}/${RELEASE_DIR}/${app_name}.app/Contents/info.plist)
+				file(READ ${DKPROJECT}/${OS}/${RELEASE_DIR}/${app_name}.app/Contents/info.plist plist)
 				string(REPLACE "<key>CFBundleIconFile</key>" "" plist ${plist})
 				string(REPLACE "<string>logo</string>" "" plist ${plist})
 				string(REPLACE "<dict>" "<dict><key>CFBundleIconFile</key><string>logo</string>" plist ${plist})
-				file(WRITE "${plist}" ${DKPROJECT}/${OS}/${RELEASE_DIR}/${name}.app/Contents/info.plist)
+				file(WRITE "${plist}" ${DKPROJECT}/${OS}/${RELEASE_DIR}/${app_name}.app/Contents/info.plist)
 			endif()	
 		endif()
 	endif()
 	if(IOS OR IOSSIM)
 		dk_info("Updating IOS Info.plist . . .")
-		dk_info("CHECKING FOR... ${DKPROJECT}/${OS}/${DEBUG_DIR}/${name}.app/Info.plist")
-		if(EXISTS ${DKPROJECT}/${OS}/${DEBUG_DIR}/${name}.app/Info.plist)
+		dk_info("CHECKING FOR... ${DKPROJECT}/${OS}/${DEBUG_DIR}/${app_name}.app/Info.plist")
+		if(EXISTS ${DKPROJECT}/${OS}/${DEBUG_DIR}/${app_name}.app/Info.plist)
 			dk_info("Updating IOS Debug Info.plist . . .")
-			file(READ ${DKPROJECT}/${OS}/${DEBUG_DIR}/${name}.app/Info.plist plist)
+			file(READ ${DKPROJECT}/${OS}/${DEBUG_DIR}/${app_name}.app/Info.plist plist)
 			string(REPLACE "<dict>" "<dict>\n<key>Icon files</key>\n<array>\n<string>Icon.png</string>\n<string>Icon@2x.png</string>\n<string>Icon-72.png</string>\n<string>Icon-Small-50.png</string>\n<string>Icon-Small.png</string>\n<string>Icon-Small@2x.png</string>\n</array>\n" plist ${plist})
-			file(WRITE "${plist}" ${DKPROJECT}/${OS}/${DEBUG_DIR}/${name}.app/Info.plist)
+			file(WRITE "${plist}" ${DKPROJECT}/${OS}/${DEBUG_DIR}/${app_name}.app/Info.plist)
 		endif()
 	endif()
 endfunction()
@@ -2709,7 +2900,9 @@ endfunction()
 ###############################################################################
 # dk_buildLog(entry)
 #
-#	@entry:
+#	TODO
+#
+#	@entry	- TODO
 #
 function(dk_buildLog entry)
 	DKDEBUGFUNC(${ARGV})
@@ -2721,7 +2914,9 @@ endfunction()
 ###############################################################################
 # dk_addSource(regex)
 #
-#	@regex:
+#	TODO
+#
+#	@regex	- TODO
 #
 function(dk_addSource regex)
 	DKDEBUGFUNC(${ARGV})
@@ -2732,7 +2927,9 @@ endfunction()
 ###############################################################################
 # dk_removeSource(regex)
 #
-#	@regex:
+#	TODO
+#
+#	@regex	- TODO
 #
 function(dk_removeSource regex)
 	DKDEBUGFUNC(${ARGV})
@@ -2744,8 +2941,8 @@ endfunction()
 #
 #	Function to wrap a given string into multiple lines at the given column position.
 #
-#	@VARIABLE:	The name of the CMake variable holding the string.
-#	@AT_COLUMN:	The column position at which string will be wrapped.
+#	@VARIABLE	- The name of the CMake variable holding the string.
+#	@AT_COLUMN	- The column position at which string will be wrapped.
 #
 function(dk_wrapString)
 	DKDEBUGFUNC(${ARGV})
@@ -2769,7 +2966,7 @@ endfunction()
 
 
 ###############################################################################
-# dk_bin2h()
+# dk_bin2h(SOURCE_FILE arg1 HEADER_FILE arg2 VARIABLE_NAME arg3)
 #
 #	https://gist.github.com/sivachandran/3a0de157dccef822a230#file-bin2h-cmake
 #	Function to embed contents of a file as byte array in C/C++ header file(.h). The header file
@@ -2823,6 +3020,8 @@ endfunction()
 
 ###############################################################################
 # dk_printSettings()
+#
+#	TODO
 #
 #	https://cmake.org/cmake/help/latest/manual/cmake-variables.7.html
 #
@@ -2969,49 +3168,53 @@ endfunction()
 
 
 ###############################################################################
-# dk_addTarget(name target)
+# dk_addTarget(plugin target)
 #
-#	@name:
-#	@target:
+#	TODO
 #
-function(dk_addTarget name target)
+#	@plugin		- TODO
+#	@target		- TODO
+#
+function(dk_addTarget plugin target)
 	DKDEBUGFUNC(${ARGV})
 	dk_debug("dk_addTarget( ${ARGV} )")
-	if(${name}_targets_OFF)
-		list(REMOVE_ITEM ${name}_targets_OFF ${target})
+	if(${plugin}_targets_OFF)
+		list(REMOVE_ITEM ${plugin}_targets_OFF ${target})
 	endif()
-	if(${name}_targets)
-		dk_set(${name}_targets ${${name}_targets} ${target})
+	if(${plugin}_targets)
+		dk_set(${plugin}_targets ${${plugin}_targets} ${target})
 	else()
-		dk_set(${name}_targets ${target})
+		dk_set(${plugin}_targets ${target})
 	endif()
-	if(${name}_all)
-		dk_set(${name}_${target} 1)
-#		dk_set(${name}::${target} 1) # TESTME
+	if(${plugin}_all)
+		dk_set(${plugin}_${target} 1)
+#		dk_set(${plugin}::${target} 1) # TESTME
 	endif()
 endfunction()
 
 
 ###############################################################################
-# dk_removeTarget(name target)
+# dk_removeTarget(plugin target)
 #
-#	@name:
-#	@target:
+#	TODO
 #
-function(dk_removeTarget name target)
+#	@plugin		- TODO
+#	@target		- TODO
+#
+function(dk_removeTarget plugin target)
 	DKDEBUGFUNC(${ARGV})
 	dk_debug("dk_removeTarget( ${ARGV} )")
-	if(${name}_targets)
-		list(REMOVE_ITEM ${name}_targets ${target})
+	if(${plugin}_targets)
+		list(REMOVE_ITEM ${plugin}_targets ${target})
 	endif()
-	if(${name}_targets_OFF)
-		dk_set(${name}_targets_OFF ${${name}_targets_OFF} ${target})
+	if(${plugin}_targets_OFF)
+		dk_set(${plugin}_targets_OFF ${${plugin}_targets_OFF} ${target})
 	else()
-		dk_set(${name}_targets_OFF ${target})
+		dk_set(${plugin}_targets_OFF ${target})
 	endif()
-	dk_set(${name}_${target} 0)
-	dk_unset(${name}_${target})
-#	dk_unset(${name}::${target}) # TESTME
+	dk_set(${plugin}_${target} 0)
+	dk_unset(${plugin}_${target})
+#	dk_unset(${plugin}::${target}) # TESTME
 endfunction()
 
 
@@ -3021,8 +3224,11 @@ endfunction()
 #	TODO
 #	We can scan each plugin and attempt to create it's variable and infomation manually here
 #
+#	@object		- TODO
+#
 function(dk_createSmartObject object)
 	DKDEBUGFUNC(${ARGV})
+	dk_todo()
 	dk_debug("dk_createSmartObject(${object})")
 	# We require something that can resolve to a full, valid path containing a DKMAKE.cmake file 
 endfunction()
@@ -3033,7 +3239,7 @@ endfunction()
 #
 #	A simple, quick and easy logger
 #
-#	@args:
+#	@args		- TODO
 #
 function(dk_log args)
 	DKDEBUGFUNC(${ARGV})
@@ -3052,31 +3258,35 @@ endfunction()
 
 
 ###############################################################################
-# dk_removeSubstring(removethis fromthis result)
+# dk_removeSubstring(removethis fromthis RESULT)
 #
-#	@removethis:
-#	@fromthis:
-#	@result:
+#	TODO
 #
-function(dk_removeSubstring removethis fromthis result)
+#	@removethis		- TODO
+#	@fromthis		- TODO
+#	@RESULT			- TODO
+#
+function(dk_removeSubstring removethis fromthis RESULT)
 	DKDEBUGFUNC(${ARGV})
 	foreach(item ${fromthis})
 		string(REPLACE ${removethis} "" item ${item})
 		list(APPEND rtn ${item})
 	endforeach()
 #	string(REPLACE "  " " " rtn "${rtn}") #replace doube spaces with single space
-	set(${result} ${rtn} PARENT_SCOPE) #return result
+	set(${RESULT} ${rtn} PARENT_SCOPE) #return RESULT
 endfunction()
 
 
 ###############################################################################
-# dk_findTarget(target result_path result_type)
+# dk_findTarget(target RESULT_PATH RESULT_TYPE)
 #
-#	@target:
-#	@result_path:
-#	@result_type:
+#	TODO
 #
-function(dk_findTarget target result_path result_type)
+#	@target			- TODO
+#	@RESULT_PATH	- TODO
+#	@RESULT_TYPE	- TODO
+#
+function(dk_findTarget target RESULT_PATH RESULT_TYPE)
 	DKDEBUGFUNC(${ARGV})
 	## search up to 4 levels deep
 	file(GLOB children RELATIVE ${DIGITALKNOB}/ 
@@ -3088,14 +3298,14 @@ function(dk_findTarget target result_path result_type)
 	foreach(child ${children})
 		dk_info("FOUND: ${DIGITALKNOB}/${child}")
 		string(REPLACE "/DKMAKE.cmake" "" path ${DIGITALKNOB}/${child})
-		set(${result_path} ${path} PARENT_SCOPE)
+		set(${RESULT_PATH} ${path} PARENT_SCOPE)
 		
 		file(STRINGS ${path}/DKMAKE.cmake dkmake_string)
 		string(FIND "${dkmake_string}" "DKAPP" index)
 		if(${index} GREATER -1)
-			set(${result_type} APP PARENT_SCOPE) 
+			set(${RESULT_TYPE} APP PARENT_SCOPE) 
 		else()
-			set(${result_type} LIBRARY PARENT_SCOPE)	#LIBRARY is default, we need to label executables to detect them
+			set(${RESULT_TYPE} LIBRARY PARENT_SCOPE)	#LIBRARY is default, we need to label executables to detect them
 		endif()
 		return()
 	endforeach()
@@ -3105,7 +3315,9 @@ endfunction()
 ###############################################################################
 # dk_setReadOnly(VAR)
 #
-#	@VAR:
+#	TODO
+#
+#	@VAR	- TODO
 #	 
 macro(dk_setReadOnly VAR)
 	DKDEBUGFUNC(${ARGV})
@@ -3118,11 +3330,13 @@ endmacro()
 ###############################################################################
 # dk_readOnlyCallback(VAR access value current_list_file stack)
 #
-#	@VAR:
-#	@access:
-# 	@value:
-#	@current_list_file:
-#	@stack:
+#	TODO
+#
+#	@VAR				- TODO
+#	@access:			- TODO
+# 	@value:				- TODO
+#	@current_list_file:	- TODO
+#	@stack:				- TODO
 #	 
 macro(dk_readOnlyCallback VAR access value current_list_file stack)   # Watcher for readonly property.
 	DKDEBUGFUNC(${ARGV})
@@ -3136,8 +3350,10 @@ endmacro()
 ###############################################################################
 # dk_prependFile(path string)
 #
-#	@path:
-#	@string:
+#	TODO
+#
+#	@path	- TODO
+#	@string	- TODO
 # 
 function(dk_prependFile path string)
 	DKDEBUGFUNC(${ARGV})
@@ -3149,9 +3365,11 @@ endfunction()
 ###############################################################################
 # dk_addRegistryKey(key value data)
 #
-#	@key:
-#	@value:
-#	@data:
+#	TODO
+#
+#	@key	- TODO
+#	@value	- TODO
+#	@data	- TODO
 #
 function(dk_addRegistryKey key value data)
 	DKDEBUGFUNC(${ARGV})
@@ -3160,9 +3378,7 @@ function(dk_addRegistryKey key value data)
 		string(REPLACE "/" "\\" value ${value})
 		string(REPLACE "/" "\\" data  ${data})
 		execute_process(COMMAND reg add "${key}" /v "${value}" /t REG_SZ /d "${data}" /f /reg:64 OUTPUT_VARIABLE _output ERROR_VARIABLE _output RESULT_VARIABLE _failed)
-		#dk_debug("_output = ${_output}")
 		dk_debug(output)
-		#dk_debug("_failed = ${_failed}")
 		dk_debug(_failed)
 	endif()
 endfunction()
@@ -3170,31 +3386,39 @@ endfunction()
 
 ###############################################################################
 # dk_import(url) #args
-#  
-#	github GIT:	https://github.com/orginization/library.git		dk_importGit(url) #branch #PATCH
-#	github DL:	https://github.com/orginization/library			dk_importGit(url) #lib #id #PATCH
-#	lib url DL:	https://website.com/library.zip					dk_importDownload(url) #lib #id #PATCH
-#	exe url DL:	https://website.com/executable.exe 				dk_importDownload(url) #lib #id #PATCH
 #
-#	@url: The online path the .git or file to import
+#	This is a flexable super function for importing just about anything into digitalknob
+#	The idea is to provide a url or path and dk_import will do the rest. 
+#
+#	@url	- The online path the .git or file to import
+#
+#	github GIT:	https://github.com/orginization/library.git		dk_importGit(url) #branch/tag #PATCH
+#	github DL:	https://github.com/orginization/library			dk_importGit(url) #branch/tag #PATCH
+#	lib url DL:	https://website.com/library.zip					dk_importDownload(url) #PATCH
+#	exe url DL:	https://website.com/executable.exe 				dk_importDownload(url) #PATCH
 #
 #	TODO: https://cmake.org/cmake/help/latest/module/FetchContent.html 
 #
-function(dk_import) #url #Lib #ID #Patch
-	set(url ${ARGV0})
+function(dk_import url) #Lib #tag #Patch
 	DKDEBUGFUNC(${ARGV})
-	string(FIND ${url} ".git" dotgit)
-	if(${dotgit} GREATER -1)
-		dk_importGit(${ARGV})
-	else()
-		dk_importDownload(${ARGV})
-	endif()
+	dk_import2(${ARGV})
+
+	#dk_getExtension(${url} extension)
+	#if("${extension}" STREQUAL ".git")
+	#	dk_importGit2(${ARGV})
+	#else()
+	#	dk_importDownload2(${ARGV})
+	#endif()
 endfunction()
-dk_aliasFunctions("dk_import")
+dk_createOsMacros("dk_import")
 
 
 ###############################################################################
-# dk_importGit(url)
+# dk_importGit(url) #tag #PATCH
+#
+#	TODO
+#
+#	@url	- TODO
 #
 function(dk_importGit url) #branch #PATCH
 	DKDEBUGFUNC(${ARGV})
@@ -3209,7 +3433,6 @@ function(dk_importGit url) #branch #PATCH
 	# GITHUB
 	if(${url_list_size} LESS 5)
 		dk_assert("url_list doesn't contain enough elements to have a 'orginization/library'")
-		return()
 	endif()	
 	
 	set(branch "master")
@@ -3220,12 +3443,11 @@ function(dk_importGit url) #branch #PATCH
 	endif()
 	
 	if(NOT Lib)
-		string(FIND ${url} "github.com" result)
-		if(${result} EQUAL -1)
-			string(FIND ${url} "gitlab.com" result)
-			if(${result} EQUAL -1)
+		string(FIND ${url} "github.com" includes)
+		if(${includes} EQUAL -1)
+			string(FIND ${url} "gitlab.com" includes)
+			if(${includes} EQUAL -1)
 				dk_assert("The url does not contain 'github.com' OR 'gitlab.com'")
-				return()
 			endif()
 		endif()
 	
@@ -3259,48 +3481,42 @@ function(dk_importGit url) #branch #PATCH
 	# check current folder name
 	if(NOT "${DKIMPORTS}/${FOLDER}" STREQUAL "${CMAKE_CURRENT_LIST_DIR}")
 		dk_assert("\n\nThe Imports folder is named inncorrectly. \n CURRENTLY: ${CMAKE_CURRENT_LIST_DIR} \n SHOULD BE: ${DKIMPORTS}/${FOLDER}\n\n")
-		return()
 	endif()
 	
 	string(TOUPPER ${Lib} LIBVAR)
 	if(NOT LIBVAR)
 		dk_assert("$(LIBVAR) is invalid")
-		return()
 	endif()
 	dk_debug(LIBVAR)
 	
 	dk_set(${LIBVAR}_FOLDER ${FOLDER})
 	if(NOT ${LIBVAR}_FOLDER)
 		dk_assert("${LIBVAR}_FOLDER is invalid")
-		return()
 	endif()
 	dk_debug(${LIBVAR}_FOLDER)
 	
 	dk_set(${LIBVAR}_BRANCH ${branch})
 	if(NOT ${LIBVAR}_BRANCH)
 		dk_assert("${LIBVAR}_BRANCH is invalid")
-		return()
 	endif()
 	dk_debug(${LIBVAR}_BRANCH)
 	
 	dk_set(${LIBVAR}_NAME ${FOLDER}-${${LIBVAR}_BRANCH})
 	if(NOT ${LIBVAR}_NAME)
 		dk_assert("${LIBVAR}_NAME is invalid")
-		return()
 	endif()
 	dk_debug(${LIBVAR}_NAME)
 	
 	dk_set(${LIBVAR} ${3RDPARTY}/${${LIBVAR}_NAME})
 	if(NOT ${LIBVAR})
 		dk_assert("${${LIBVAR}} is invalid")
-		return()
 	endif()
-	dk_debug(${${LIBVAR}})
+	dk_debug(${${LIBVAR}})	
 	
 	if(NOT EXISTS ${${LIBVAR}}/.git)
-		dk_set(CURRENT_DIR ${DIGITALKNOB})
+		dk_set(CURRENT_DIR ${DIGITALKNOB}/${3RDPARTY})
 		if(EXISTS ${${LIBVAR}})
-			file(REMOVE ${${LIBVAR}})
+			dk_remove(${${LIBVAR}})
 		endif()
 		if(NOT EXISTS ${${LIBVAR}})
 			dk_makeDirectory(${${LIBVAR}})
@@ -3313,69 +3529,55 @@ function(dk_importGit url) #branch #PATCH
 	dk_command(${GIT_EXE} checkout ${branch})
 	dk_command(${GIT_EXE} pull)
 	
-	set(arg_list "${ARGN}")
-	foreach(arg IN LISTS arg_list)
-		if("${arg}" STREQUAL "PATCH")
-			dk_patch(${Lib} ${${LIBVAR}})
-		endif()
-	endforeach()
+	#set(arg_list "${ARGN}")
+	#foreach(arg IN LISTS arg_list)
+	#	if("${arg}" STREQUAL "PATCH")
+	#		dk_patch(${Lib} ${${LIBVAR}})
+	#	endif()
+	#endforeach()
+	
+	dk_includes("${ARGN}" "PATCH" includes)
+	if(${includes})
+		dk_patch(${Lib} ${${LIBVAR}})
+	endif()
 endfunction()
 
 
 ###############################################################################
-# dk_importDownload(url)
-# 
-function(dk_importDownload url) #Lib #ID #Patch
+# dk_importDownload(url) #install_path #PATCH
+#
+#	TODO
+#
+#	@url						- TODO
+#	@install_path (optional)	- TODO 
+#
+function(dk_importDownload url) #install_path #PATCH
 	DKDEBUGFUNC(${ARGV})
-	# IS THE URL VALID           Example https://github.com/aquawicket/DigitalKnob/archive/01c17f6a9cd66068f7890ea887ab3b9a673f0434.zip)
-	# must contain https://github.com/
-	# split into list converting / to divider ;
-	string(REPLACE "/" ";" url_list ${url})
-	foreach(item ${url_list})
-		dk_debug(item)
-	endforeach()
-
-	list(LENGTH url_list url_length)
-	dk_debug(url_length)
 	
-#	if(${url_length} LESS 5)
-#		dk_assert("url_list doesn't contain enough elements to have a 'orginization/library'")
-#		return()
-#	endif()	
+	string(REPLACE "/" ";" url_list ${url}) # split into list converting / to divider ;
+	#foreach(item ${url_list})
+	#	dk_debug(item)
+	#endforeach()
+	list(LENGTH url_list url_length)
+	#dk_debug(url_length)
 	
 	if(${ARGC} GREATER 1)
 		if(NOT "${ARGV1}" STREQUAL "PATCH")
-			set(Lib ${ARGV1})
-			dk_debug(Lib)
+			set(install_path ${ARGV1})
+			dk_debug(install_path)
 		endif()
 	endif()
 	
 	if(${ARGC} GREATER 2)
 		if(NOT "${ARGV2}" STREQUAL "PATCH")
-			set(ID ${ARGV2})
-			dk_debug(ID)
+			set(tag ${ARGV2})
+			dk_debug(tag)
 		endif()
 	endif()
 	
-	if(NOT Lib)
-		dk_debug(CMAKE_CURRENT_LIST_DIR)
-		get_filename_component(Lib ${CMAKE_CURRENT_LIST_DIR} NAME)
-		dk_debug(Lib)
-#		dk_assert("Lib invalid")
-		
-#		string(FIND ${url} "github.com" result)
-#		if(${result} EQUAL -1)
-#			string(FIND ${url} "gitlab.com" result)
-#			if(${result} EQUAL -1)
-#				dk_assert("Lib invalid and The url does not contain 'github.com' OR 'gitlab.com'")
-#				return()
-#			endif()
-#		endif()
-#		list(GET url_list 3 org)
-#		dk_debug(org)
-#		list(GET url_list 4 Lib)
-#		dk_debug(Lib)
-	endif()
+	dk_debug(CMAKE_CURRENT_LIST_DIR)
+	get_filename_component(Lib ${CMAKE_CURRENT_LIST_DIR} NAME)
+	dk_debug(Lib)
 	
 	string(TOUPPER ${Lib} LIB)
 	dk_set(LIBVAR ${LIB})
@@ -3383,120 +3585,154 @@ function(dk_importDownload url) #Lib #ID #Patch
 	
 	string(TOLOWER ${Lib} FOLDER)
 	dk_set(${LIBVAR}_FOLDER ${FOLDER})
+	if(NOT ${LIBVAR}_FOLDER)
+		dk_assert("${LIBVAR}_FOLDER invalid")
+	endif()
 	dk_debug(${LIBVAR}_FOLDER)
 	
 	# check current folder name
 	dk_debug("\${DKIMPORTS}/\${${LIBVAR}_FOLDER}} = ${DKIMPORTS}/${${LIBVAR}_FOLDER}}")
 	if(NOT "${DKIMPORTS}/${FOLDER}" STREQUAL "${CMAKE_CURRENT_LIST_DIR}")
 		dk_assert("The Imports folder is named inncorrectly. \n CURRENTLY: ${CMAKE_CURRENT_LIST_DIR} \n SHOULD BE: ${DKIMPORTS}/${${LIBVAR}_FOLDER}}")
-		return()
 	endif()
 	
-	math(EXPR last "${url_length}-1")  #OUTPUT_FORMAT DECIMAL)")  CMake 3.13+
+	math(EXPR last "${url_length}-1")
 	list(GET url_list ${last} url${last})
 	
-	######### add recognizable file extensions ##########
+#	dk_set(${LIBVAR}_DL ${url})
+#	dk_removeExtension(${url${last}} tag)
+	######### add recognizable file extensions ########## 
 	string(FIND ${url${last}} ".7z" index)
 	if(${index} GREATER -1)
-		if(NOT ID)
-			string(SUBSTRING ${url${last}} 0 ${index} ID)
+		if(NOT tag)
+			string(SUBSTRING ${url${last}} 0 ${index} tag)
 		endif()
 		dk_set(${LIBVAR}_DL ${url})
 	endif()
-	
 	string(FIND ${url${last}} ".js" index)
 	if(${index} GREATER -1)
-		if(NOT ID)
-			string(SUBSTRING ${url${last}} 0 ${index} ID)
+		if(NOT tag)
+			string(SUBSTRING ${url${last}} 0 ${index} tag)
 		endif()
 		dk_set(${LIBVAR}_DL ${url})
 	endif()
-	
 	string(FIND ${url${last}} ".tar.bz2" index)
 	if(${index} GREATER -1)
-		if(NOT ID)
-			string(SUBSTRING ${url${last}} 0 ${index} ID)
+		if(NOT tag)
+			string(SUBSTRING ${url${last}} 0 ${index} tag)
 		endif()
 		dk_set(${LIBVAR}_DL ${url})
 	endif()
-	
 	string(FIND ${url${last}} ".tar.gz" index)
 	if(${index} GREATER -1)
-		if(NOT ID)
-			string(SUBSTRING ${url${last}} 0 ${index} ID)
+		if(NOT tag)
+			string(SUBSTRING ${url${last}} 0 ${index} tag)
 		endif()
 		dk_set(${LIBVAR}_DL ${url})
 	endif()
-
 	string(FIND ${url${last}} ".zip" index)
 	if(${index} GREATER -1)
-		if(NOT ID)
-			string(SUBSTRING ${url${last}} 0 ${index} ID)
+		if(NOT tag)
+			string(SUBSTRING ${url${last}} 0 ${index} tag)
+		endif()
+		dk_set(${LIBVAR}_DL ${url})
+	endif()
+	string(FIND ${url${last}} ".tar.xz" index)
+	if(${index} GREATER -1)
+		if(NOT tag)
+			string(SUBSTRING ${url${last}} 0 ${index} tag)
 		endif()
 		dk_set(${LIBVAR}_DL ${url})
 	endif()
 	######################################################
-	
-	
-	if(NOT ${LIBVAR}_DL)
-		string(FIND ${url} "github.com" result)
-		if(${result} EQUAL -1)
-#			string(FIND ${url} "gitlab.com" result)
-#			if(${result} EQUAL -1)
-				dk_assert("The url is not a 'github.com' address")
-				return()
-#			endif()
-		endif()
-		
-		dk_error("The url doesn't end in .zip or .tar.gz")
-		dk_info("We will try to get the master commit id from the page")
-		dk_download(${url} ${DKDOWNLOAD}/TEMP/${FOLDER}.html)
-		file(READ ${DKDOWNLOAD}/TEMP/${FOLDER}.html PAGE)
-#		file(REMOVE ${DKDOWNLOAD}/TEMP/${FOLDER}.html)
-		string(FIND "${PAGE}" "spoofed_commit_check" index)
-		if(${index} EQUAL -1)
-			dk_assert("The page doesn't contain a 'spoofed_commit_check' variable")
-			return()
-		endif()
-		math(EXPR value "${index} + 21") #OUTPUT_FORMAT DECIMAL) # CMake 3.13+
-		string(SUBSTRING "${PAGE}" ${value} 40 ID)
-		set(ZIP ${ID}.zip)
-#		string(SUBSTRING ${ZIP} 0 7 TAG)
-		dk_set(${LIBVAR}_DL https://github.com/${org}/${Lib}/archive/${ZIP})
-		dk_debug(ID)
-		
-		## update DKMAKE.cmake file
-		dk_copy(${CMAKE_CURRENT_LIST_FILE} ${CMAKE_CURRENT_LIST_FILE}.BACKUP TRUE)
-		file(READ ${CMAKE_CURRENT_LIST_FILE} DKMAKE_FILE)
-		string(REPLACE "dk_import(${url})" "#dk_import(${url})\ndk_import(${${LIBVAR}_DL})" DKMAKE_FILE ${DKMAKE_FILE})
-		string(REPLACE "dk_import(${url} PATCH)" "#dk_import(${url} PATCH)\ndk_import(${${LIBVAR}_DL} PATCH)" DKMAKE_FILE ${DKMAKE_FILE})
-        file(WRITE ${CMAKE_CURRENT_LIST_FILE} ${DKMAKE_FILE})
+
+	if(tag)
+		dk_set(${LIBVAR}_BRANCH ${tag})
 	endif()
 	
-	if(NOT ${LIBVAR}_DL)
-		dk_assert("The url is not a valid .zip or .tar.gz download from github.com and we could not get the master commit ID")
-		return()
+	if(FOLDER AND LIBVAR AND ${LIBVAR}_BRANCH)
+		dk_set(${LIBVAR}_NAME ${FOLDER}-${${LIBVAR}_BRANCH})
 	endif()
-		
-	dk_set(${LIBVAR}_BRANCH ${ID})
-	dk_set(${LIBVAR}_NAME ${FOLDER}-${${LIBVAR}_BRANCH})
-	dk_set(${LIBVAR} ${3RDPARTY}/${${LIBVAR}_NAME})
 	
-	if(${LIBVAR} AND ${LIBVAR}_BRANCH AND ${LIBVAR}_NAME AND ${LIBVAR}_DL)
-		dk_debug(${LIBVAR}_BRANCH)
-		dk_debug(${LIBVAR}_DL)
-		dk_debug(${LIBVAR}_NAME)
-		dk_debug(${LIBVAR})
-		dk_install(${${LIBVAR}_DL} ${FOLDER} ${${LIBVAR}} ${ARGN})
+	if(install_path)
+		dk_set(${LIBVAR} ${install_path})
 	else()
-		dk_assert("One of the required LIBVAR:(${LIBVAR}) variables vas not satisfied")
-		return()
+		dk_set(${LIBVAR} ${3RDPARTY}/${${LIBVAR}_NAME})
+	endif()
+	
+	if(NOT ${LIBVAR})
+		dk_assert("LIBVAR invalid")
+	endif()
+	
+	if(NOT ${LIBVAR}_BRANCH)
+		dk_error("${LIBVAR}_BRANCH invalid")
+	endif()
+	
+	if(NOT ${LIBVAR}_NAME)
+		dk_assert("${LIBVAR}_NAME invalid")
+	endif()
+	
+	if(NOT ${LIBVAR}_DL)
+		dk_assert("${LIBVAR}_DL invalid")
+	endif()
+	
+	
+	dk_install(${${LIBVAR}_DL} ${${LIBVAR}} ${${LIBVAR}_FOLDER} ${ARGN})
+
+endfunction()
+
+######################################
+function(dk_import2 url)
+	DKDEBUGFUNC(${ARGV})
+
+	dk_importVariables(${ARGV} plugin)
+	string(TOUPPER ${plugin} plugin)
+	
+	dk_debug("[${plugin}] 			= ${${plugin}}")
+	dk_debug("[${plugin}_URL] 		= ${${plugin}_URL}")
+	dk_debug("[${plugin}_VERSION] 	= ${${plugin}_VERSION}")
+	dk_debug("[${plugin}_FOLDER] 	= ${${plugin}_FOLDER}")
+	dk_debug("[${plugin}_BRANCH] 	= ${${plugin}_BRANCH}")
+
+	### .git
+	dk_getExtension(${url} extension)
+	if("${extension}" STREQUAL ".git")
+		if(NOT EXISTS ${${plugin}}/.git)
+			dk_set(CURRENT_DIR ${DIGITALKNOB}/${3RDPARTY})
+			if(EXISTS ${${plugin}})
+				dk_remove(${${plugin}})
+			endif()
+			if(NOT EXISTS ${${plugin}})
+				dk_makeDirectory(${${plugin}})
+			endif()
+			dk_set(CURRENT_DIR ${${plugin}})
+			dk_command(${GIT_EXE} clone ${${plugin}_URL} ${${plugin}})
+		endif()
+		dk_set(CURRENT_DIR ${${plugin}})
+		dk_command(${GIT_EXE} checkout -- .)
+		dk_command(${GIT_EXE} checkout ${${plugin}_BRANCH})
+		dk_command(${GIT_EXE} pull)
+	### download
+	else()
+		#dk_install(${${LIBVAR}_DL} ${${LIBVAR}} ${${LIBVAR}_FOLDER} ${ARGN})
+		dk_debug("dk_install(${plugin} ${ARGN})") #${${plugin}_URL} ${${plugin}} ${${plugin}_FOLDER} ${ARGN})")
+		dk_install(${plugin} ${ARGN}) #${${plugin}_URL} ${${plugin}} ${${plugin}_FOLDER} ${ARGN})
+	endif()
+	
+	dk_includes("${ARGN}" "PATCH" includes)
+	if(${includes})
+		dk_patch(${plugin} ${${plugin}})
 	endif()
 endfunction()
 
 
+
+
+
 ###############################################################################
 # dk_DownloadAll3rdParty()
+#
+#	TODO
 #
 function(dk_DownloadAll3rdParty)
 	DKDEBUGFUNC(${ARGV})
@@ -3547,7 +3783,7 @@ function(dk_DownloadAll3rdParty)
 			if(dl_import_script)
 				file(WRITE ${DKDOWNLOAD}/TEMP/dl_import.TMP "${dl_import_script}")
 				INCLUDE(${DKDOWNLOAD}/TEMP/dl_import.TMP)
-				file(REMOVE ${DKDOWNLOAD}/TEMP/dl_import.TMP)
+				dk_remove(${DKDOWNLOAD}/TEMP/dl_import.TMP)
 			endif()
 		endif()
 	endforeach()
@@ -3555,15 +3791,15 @@ endfunction()
 
 
 ######################################################################
-# dk_getFileType(path result)
+# dk_getFileType(path RESULT)
 #  
-# Takes a path and checks the extension to return the file type.
+#	Takes a path and checks the extension to return the file type.
 #
-#	@path: A string value of the path to identify
-#	@result: returns a string representing the  type of file.
-#           Possible results are ARCHIVE, EXECUTABLE, IMAGE, SCRIPT,
-#           UNKNOWN, WEB, ...TODO
-# Reference: https://en.wikipedia.org/wiki/List_of_file_formats
+#	@path		- A string value of the path to identify
+#	@RESULT		- returns a string representing the  type of file.
+#           	  Possible results are ARCHIVE, EXECUTABLE, IMAGE, SCRIPT, UNKNOWN, WEB, ...TODO
+#
+#	Reference: https://en.wikipedia.org/wiki/List_of_file_formats
 #
 function(dk_getFileType path rtn-type)
 	DKDEBUGFUNC(${ARGV})
@@ -3620,104 +3856,14 @@ function(dk_getFileType path rtn-type)
 	endif()
 endfunction()
 
-
 ###############################################################################
-# dk_import2(url)
-#
-#	Rework of dk_import()
-#
-function(dk_import2 url)
-	DKDEBUGFUNC(${ARGV})
-	dk_debug("DKIMPORT2(${ARGV})")
-	#dk_debug("     ARGC = ${ARGC}")
-	#dk_debug("     ARGN = ${ARGN}")
-	#dk_debug("     ARGV = ${ARGV}")	
-	#dk_debug("    ARGV0 = ${ARGV0}")
-	#dk_debug("    ARGV1 = ${ARGV1}")
-	dk_debug(ARGC)
-	dk_debug(ARGN)
-	dk_debug(ARGV)	
-	dk_debug(ARGV0)
-	dk_debug(ARGV1)
-	math(EXPR ARGC_LAST "${ARGC}-1") # OUTPUT_FORMAT DECIMAL) #CMake 3.13+
-	#dk_debug("ARGC_LAST = ${ARGC_LAST}")
-	dk_debug(ARGC_LAST)
-	set(ARGV_LAST ${ARGV${ARGC_LAST}})
-	#dk_debug("ARGV_LAST = ${ARGV_LAST}")
-	dk_debug(ARGV_LAST)
-	dk_debug("Is ${url} a file download link or a local path to a container?  archive, .zip, .tar.gz, .7z, .rar, folder, package, etc?")
-	string(REPLACE "/" ";" url_list ${url})
-	set(n -1)
-	foreach(item ${url_list})
-		math(EXPR n "${n}+1") # OUTPUT_FORMAT DECIMAL) #CMake 3.13+
-		set(url${n} ${item})
-		#dk_debug("url${n} = ${url${n}}")
-		dk_debug(url${n})
-		set(url_end ${n})
-	endforeach()
-	list(LENGTH url_list url_length)
-	#dk_debug("url_length = ${url_length}")
-	dk_debug(url_length)
-	#dk_debug("url_end = ${url_end}")
-	dk_debug(url_end)
-	#dk_debug("url{url_end} = ${url${url_end}}")
-	dk_debug(url{url_end})
-	dk_getFileType(${url} type)
-	if(NOT ${type} STREQUAL ARCHIVE) 
-	dk_debug("NO")
-		dk_debug("Is the url a website we can determine a download file link from?")
-			string(FIND ${url} "github.com" hasGithub)
-			if(hasGithub)
-				dk_debug(hasGithub)
-			else()
-				dk_debug(hasGithub)
-			endif()
-			#YES - github, gitlab, etc
-				#determin the download link. and goto B ->
-			#NO
-				#dk_assert("Not a valid download link")
-	endif()
-	dk_debug("YES")
-		dk_debug("Can the LIB_NAME be extracted from the url?")
-			#YES
-			#Do we have a LIB_NAME locally to compair it with?
-				#YES - (directory and or arg2)
-				#Do the LIB_NAME's match?
-					#YES - #use the LIB_NAME and goto C ->
-					#NO - dk_assert("LIB_NAME's do not match")
-				#NO
-				#use the extracted LIB_NAME and goto C ->
-			#NO
-			#Do we have a LIB_NAME locally 
-				#YES - (directory and or arg2) - #use the local LIB_NAME and goto C ->
-				#NO - dk_assert("cannot determine a LIB_NAME")
-		#Can the VERSION be extracted from the url? 
-			#YES
-			#Do we have a VERSION locally to compair it with?
-				#YES - (arg3)
-				#Does the compair match
-					#YES - use VERSION and goto D ->
-					#NO - ERROR("LIB_NAME's do not match")
-				#NO 
-				#use the extracted VERSION and goto D ->
-					#NO 
-					#Do we have a VERSION locally 
-						#YES - (arg3) - #use the local VERSION and goto D ->
-						#NO
-						#Cam we just use a generated version (time)
-							#YES - use generated version and goto D ->
-							#NO - dk_assert("Con not determin the version")
-		#We have DL, NAME and VERSION
-		#Goto dk_install(DL, name, VERSION)
-endfunction()
-
-
-###############################################################################
-# dk_getAppDirectory(result)
+# dk_getAppDirectory(RESULT)
 #
 #	Get the OS default app directory
 #
-function(dk_getAppDirectory result)
+#	@RESULT		- TODO
+#
+function(dk_getAppDirectory RESULT)
 	set(USE_32BIT 1)
 	if(WIN_HOST)
 		set(appDirectory "C:/Program Files")
@@ -3740,54 +3886,81 @@ function(dk_getAppDirectory result)
 		dk_todo() #TODO
 		set(appDirectory "/")
 	endif()
-	set(${result} ${appDirectory} PARENT_SCOPE)
+	set(${RESULT} ${appDirectory} PARENT_SCOPE)
 endfunction()
 
 
 ###############################################################################
-# toLower(str result)
+# toLower(str RESULT)
 #
 #	Convert a string to lower case
 #
-function(toLower str result)
+#	@str		- TODO
+#	@RESULT		- TODO
+#
+function(toLower str RESULT)
 	string(TOLOWER "${str}" upper)
-	set(${result} ${out} PARENT_SCOPE)
+	set(${RESULT} ${out} PARENT_SCOPE)
 endfunction()
 
 
 ###############################################################################
-# toUpper(str result)
+# toUpper(str RESULT)
 #
 #	Convert a string to upper case
 #
-function(toUpper str result)
+#	@str		- TODO
+#	@RESULT		- TODO
+#
+function(toUpper str RESULT)
 	string(TOUPPER "${str}" upper)
-	set(${result} ${upper} PARENT_SCOPE)
+	set(${RESULT} ${upper} PARENT_SCOPE)
 endfunction()
 
 
 ###############################################################################
-# dk_removeExtension(path result)
+# dk_removeExtension(path RESULT) NOERROR
 #
 #	Remove the extension from a file path
 #
-function(dk_removeExtension path result)
-	dk_todo() #TODO
-	set(${result} ${out} PARENT_SCOPE)
+#	@path		- TODO
+#	@RESULT		- TODO
+#   NOERROR     - if any of the parameters equals NOERROR, dk_error() messages will not be displayed
+#
+function(dk_removeExtension path RESULT)
+	DKDEBUGFUNC(${ARGV})
+	string(FIND ${path} "." includes REVERSE)
+	if(${includes} EQUAL -1)
+	#dk_includes(${path} "." includes REVERSE)
+	#if(NOT includes)
+		dk_includes("${ARGN}" "NOERROR" includes)
+		if(${includes})
+			dk_error("no extension found")
+		endif()
+		return()
+	endif()
+	
+	dk_getExtension(${path} ext)
+	string(REPLACE ${ext} "" fileNameNoExt ${path}) 
+	#string(SUBSTRING ${path} 0 ${includes} fileNameNoExt)
+    set(${RESULT} ${fileNameNoExt} PARENT_SCOPE)
 endfunction()
 
 
 ###############################################################################
-# dk_getAppName(path result)
+# dk_getAppName(path RESULT)
 #
 #	Get the app name from a file path
 #
-function(dk_getAppName path result)
+#	@path		- TODO
+#	@RESULT		- TODO
+#
+function(dk_getAppName path RESULT)
+	DKDEBUGFUNC(${ARGV})
 	dk_getFilename(${path} fileName)
 	dk_removeExtension(${fileName} fileNameNoExt)
-	#dk_debug(fileNameNoExt = ${fileNameNoExt})
 	dk_debug(fileNameNoExt)
-	set(${result} ${fileNameNoExt} PARENT_SCOPE)
+	set(${RESULT} ${fileNameNoExt} PARENT_SCOPE)
 endfunction()
 
 
@@ -3796,7 +3969,10 @@ endfunction()
 #
 #	Generate a folder/DKMAKE.cmake for a new plugin
 #
+#	@url		- TODO
+#
 function(dk_createPlugin url)
+	DKDEBUGFUNC(${ARGV})
 	dk_todo() #TODO
 	dk_getAppName(${url} App_Name)
 	dk_debug(App_Name)					# My_App
@@ -3811,6 +3987,76 @@ function(dk_createPlugin url)
 endfunction()
 
 
+###############################################################################
+# dk_getGitBranchName(url RESULT)
+#
+#	TODO
+#
+#	@url		- TODO
+#
+#	https://stackoverflow.com/a/31919435
+#
+function(dk_getGitBranchName url RESULT)
+	DKDEBUGFUNC(${ARGV})
+	execute_process(COMMAND ${GIT_EXE} ls-remote ${url} heads/* RESULT_VARIABLE result OUTPUT_VARIABLE output)
+	set(${RESULT} ${output} PARENT_SCOPE)
+endfunction()	
+
+
+###############################################################################
+# dk_printArgData()
+#
+#	TODO
+#
+macro(dk_printArgData)
+	dk_debug(" ")
+	dk_debug(" ")
+	dk_debug("************************************************************")
+	dk_debug("	dk_import2(${ARGV})")
+	dk_debug(" ")
+	dk_debug(CMAKE_CURRENT_LIST_DIR)
+	dk_debug("*** ARG Variables ***")
+	dk_debug(ARGC)
+	dk_debug(ARGN)
+	dk_debug(ARGV)	
+	dk_debug(ARGV0)
+	dk_debug(ARGV1)
+	math(EXPR ARGC_LAST "${ARGC}-1")
+	dk_debug(ARGC_LAST)
+	set(ARGV_LAST ${ARGV${ARGC_LAST}})
+	dk_debug(ARGV_LAST)
+	dk_debug(" ")
+endmacro()
+
+
+###############################################################################
+# dk_printUrlData(url)
+#
+#	TODO
+#
+#	@url		- TODO
+#
+function(dk_printUrlData url)
+	if(NOT url)
+		dk_assert("url invalid")
+	endif()
+	dk_debug("*** url Variables ***")
+	dk_debug(url)
+	string(REPLACE "/" ";" PLUGIN_URL_LIST ${url}) # seperate the url nodes into a list 
+	dk_debug(PLUGIN_URL_LIST)
+	list(LENGTH PLUGIN_URL_LIST PLUGIN_URL_LENGTH)
+	dk_debug(PLUGIN_URL_LENGTH)
+	set(n -1)
+	foreach(PLUGIN_URL_ITEM ${PLUGIN_URL_LIST})
+		math(EXPR n "${n}+1")
+		set(url_${n} ${PLUGIN_URL_ITEM})
+		dk_debug(url_${n})
+		set(url_last ${url_${n}})
+	endforeach()
+	dk_debug(url_last)
+	dk_getFileType(${url} url_filetype)
+	dk_debug(url_filetype)
+endfunction()
+
 
 include(${DKFunctions_ext})
-#dk_watch(dk_getExtension)

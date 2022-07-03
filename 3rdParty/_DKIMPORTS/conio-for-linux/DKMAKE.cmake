@@ -5,16 +5,13 @@ if(NOT UNIX_HOST)
 endif()
 
 
-### DEPENDS ###
 dk_depend(ncurses)
 
-dk_import(https://github.com/nowres/conio-for-linux.git)
 
 #dk_set(CONIO-FOR-LINUX_VERSION master)
 #dk_set(CONIO-FOR-LINUX_NAME conio-${CONIO-FOR-LINUX_VERSION})
-#dk_set(CONIO-FOR-LINUX_DL https://github.com/nowres/conio-for-linux/archive/refs/heads/${CONIO-FOR-LINUX_VERSION}.zip)
-#dk_set(CONIO-FOR-LINUX ${3RDPARTY}/${CONIO-FOR-LINUX_NAME})
-#dk_install(${CONIO-FOR-LINUX_DL} conio.h ${CONIO-FOR-LINUX})
+#dk_import(https://github.com/nowres/conio-for-linux/archive/refs/heads/master.zip ${3RDPARTY}/${CONIO-FOR-LINUX_NAME})
+dk_import(https://github.com/nowres/conio-for-linux.git)
 
 
 ### LINK ###

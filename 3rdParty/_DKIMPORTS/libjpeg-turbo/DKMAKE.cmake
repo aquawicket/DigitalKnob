@@ -3,15 +3,12 @@
 # For ANDROID - https://github.com/DeviceFarmer/android-libjpeg-turbo
 # https://sourceforge.net/projects/libjpeg-turbo/files/2.1.1/libjpeg-turbo-2.1.1.tar.gz/download
 
-#dk_import(https://github.com/libjpeg-turbo/libjpeg-turbo NOPATCH)
-dk_set(LIBJPEG-TURBO_VERSION 2.1.1)
-dk_set(LIBJPEG-TURBO_NAME libjpeg-turbo-${LIBJPEG-TURBO_VERSION})
-dk_set(LIBJPEG-TURBO_DL https://sourceforge.net/projects/libjpeg-turbo/files/2.1.1/libjpeg-turbo-2.1.1.tar.gz)
-dk_set(LIBJPEG-TURBO ${3RDPARTY}/${LIBJPEG-TURBO_NAME})
-dk_install(${LIBJPEG-TURBO_DL} libjpeg-turbo ${LIBJPEG-TURBO} NOPATCH)
+
+#dk_import(https://sourceforge.net/projects/libjpeg-turbo/files/2.1.1/libjpeg-turbo-2.1.1.tar.gz ${3RDPARTY}/libjpeg-turbo-2.1.1)
+dk_import(https://github.com/libjpeg-turbo/libjpeg-turbo.git BRANCH main)
 
 
-### DKPLUGINS LINK ###
+### LINK ###
 dk_include(${LIBJPEG-TURBO})
 dk_include(${LIBJPEG-TURBO}/${OS})
 dk_include(${LIBJPEG-TURBO}/${OS}/${DEBUG_DIR})
@@ -41,15 +38,17 @@ RASPBERRY_RELEASE_dk_set(LIBJPEG-TURBO_CMAKE -DJPEG_INCLUDE_DIR=${LIBJPEG-TURBO}
 ANDROID_dk_set(LIBJPEG-TURBO_CMAKE -DJPEG_INCLUDE_DIR=${LIBJPEG-TURBO} -DJPEG_INCLUDE_DIR2=${LIBJPEG-TURBO}/${OS} -DJPEG_LIBRARY=${LIBJPEG-TURBO}/${OS}/${RELEASE_DIR}/libturbojpeg.a)
 
 
-### COMPILE ###
+
 dk_setPath(${LIBJPEG-TURBO}/${BUILD_DIR})
 dk_queueCommand(${DKCMAKE_BUILD} -DWITH_SIMD=OFF ${LIBJPEG-TURBO})
 
 
-WIN_dk_visualStudio(${LIBJPEG-TURBO_NAME} libjpeg-turbo.sln turbojpeg-static)
-MAC_dk_xcode(${LIBJPEG-TURBO_NAME} turbojpeg-static)
-IOS_dk_xcode(${LIBJPEG-TURBO_NAME} turbojpeg-static)
-IOSSIM_dk_xcode(${LIBJPEG-TURBO_NAME} turbojpeg-static)
+#WIN_dk_visualStudio(${LIBJPEG-TURBO_NAME} libjpeg-turbo.sln turbojpeg-static)
+dk_visualStudio(${LIBJPEG-TURBO_NAME} libjpeg-turbo.sln turbojpeg-static)
+#MAC_dk_xcode(${LIBJPEG-TURBO_NAME} turbojpeg-static)
+#IOS_dk_xcode(${LIBJPEG-TURBO_NAME} turbojpeg-static)
+#IOSSIM_dk_xcode(${LIBJPEG-TURBO_NAME} turbojpeg-static)
+dk_xcode(${LIBJPEG-TURBO_NAME} turbojpeg-static)
 LINUX_dk_queueCommand(make turbojpeg-static)
 RASPBERRY_dk_queueCommand(make turbojpeg-static)
-ANDROID_dk_visualStudio(${LIBJPEG-TURBO_NAME} libjpeg-turbo.sln turbojpeg-static)
+#ANDROID_dk_visualStudio(${LIBJPEG-TURBO_NAME} libjpeg-turbo.sln turbojpeg-static)

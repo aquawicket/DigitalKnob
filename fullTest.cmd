@@ -137,4 +137,4 @@ pause
 
 :end
 ECHO Done
-exit
+::exit

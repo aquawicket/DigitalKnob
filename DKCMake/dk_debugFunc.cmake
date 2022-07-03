@@ -3,6 +3,7 @@ dk_load(dk_color) # TODO:  move this into the function
 
 ##################################################################################
 # dk_debugFunc(${ARGV})
+#
 #	Prints the current file name, line number, function or macro and arguments
 #	Place this at the first line of every function you want to see debug output for.
 # 

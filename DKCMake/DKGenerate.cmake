@@ -59,7 +59,10 @@ dk_buildLog("######  Enabled Dependencies (sorted)  #######")
 dk_buildLog("##############################################")
 list(REMOVE_DUPLICATES dkdepend_list)
 foreach(plugin ${dkdepend_list})
-	dk_buildLog("${plugin}")
+	dk_includes(${dk_disabled_list} ${plugin} isDisabled)
+	if(NOT isDisabled)
+		dk_buildLog("${plugin}")
+	endif()
 endforeach()
 dk_buildLog("\n")
 
@@ -385,14 +388,14 @@ if(WIN_32)
 	if(HAVE_DK)
 		## ASSETS ##
 		# Backup files and folders excluded from the package
-		dk_copy(${DKPROJECT}/assets/USER ${DKPROJECT}/Backup/USER TRUE)
+		dk_copy(${DKPROJECT}/assets/USER ${DKPROJECT}/Backup/USER OVERWRITE NOERROR)
 		# Remove excluded files and folders before packaging
 		file(REMOVE ${DKPROJECT}/assets/USER)
 		#Compress the assets, they will be included by resource.rc
 		dk_info("Creating assets.zip . . .")
 		dk_zip(${DKPROJECT}/assets)
 		# Restore the backed up files, excluded from assets
-		dk_copy(${DKPROJECT}/Backup ${DKPROJECT}/assets TRUE)
+		dk_copy(${DKPROJECT}/Backup ${DKPROJECT}/assets OVERWRITE NOERROR)
 		file(REMOVE ${DKPROJECT}/Backup)
 		dk_copy(${DKPLUGINS}/_DKIMPORT/assets.h ${DKPROJECT}/assets.h TRUE) #required
 	endif()	
@@ -474,9 +477,8 @@ if(WIN_32)
 	
 	#CPP_DKFile_Copy(app_path+OS+"/Release/"+APP+".pdb", app_path+"assets/"+APP+".pdb", true)
 	#CPP_DK_Execute(DIGITALKNOB+"DK/3rdParty/upx-3.95-win64/upx.exe -9 -v "+app_path+OS+"/Release/"+APP+".exe")
-	
-
 endif(WIN_32)
+	
 	
 ##########
 if(WIN_64)
@@ -561,13 +563,13 @@ if(WIN_64)
 	####################### Do Post Build Stuff #######################
 	# "https://gist.github.com/baiwfg2/39881ba703e9c74e95366ed422641609"
 	# TEST
-	add_custom_command(
-		TARGET ${APP_NAME}
-		POST_BUILD
-		COMMAND ${CMAKE_COMMAND} -E echo "!!!!!! TARGET_FILE:APP_NAME = $<TARGET_FILE:${APP_NAME}>"
-		COMMAND ${CMAKE_COMMAND} -E echo "!!!!!! TARGET_FILE_DIR:APP_NAME = $<TARGET_FILE_DIR:${APP_NAME}>"
-		COMMAND ${CMAKE_COMMAND} -E echo "!!!!!! CONFIG = $<CONFIG>"
-	)
+	#add_custom_command(
+	#	TARGET ${APP_NAME}
+	#	POST_BUILD
+	#	COMMAND ${CMAKE_COMMAND} -E echo "!!!!!! TARGET_FILE:APP_NAME = $<TARGET_FILE:${APP_NAME}>"
+	#	COMMAND ${CMAKE_COMMAND} -E echo "!!!!!! TARGET_FILE_DIR:APP_NAME = $<TARGET_FILE_DIR:${APP_NAME}>"
+	#	COMMAND ${CMAKE_COMMAND} -E echo "!!!!!! CONFIG = $<CONFIG>"
+	#)
 	#CPP_DKFile_Copy(app_path+OS+"/Release/"+APP+".pdb", app_path+"assets/"+APP+".pdb", true)
 	#CPP_DK_Execute(DIGITALKNOB+"DK/3rdParty/upx-3.95-win64/upx.exe -9 -v "+app_path+OS+"/Release/"+APP+".exe")
 endif(WIN_64)
@@ -831,13 +833,13 @@ if(IOS OR IOSSIM)
 	####################### Do Post Build Stuff #######################
 	# "https://gist.github.com/baiwfg2/39881ba703e9c74e95366ed422641609"
 	# TEST
-	add_custom_command(
-		TARGET ${APP_NAME}
-		POST_BUILD
-		COMMAND ${CMAKE_COMMAND} -E echo "!!!!!! TARGET_FILE:APP_NAME = $<TARGET_FILE:${APP_NAME}>"
-		COMMAND ${CMAKE_COMMAND} -E echo "!!!!!! TARGET_FILE_DIR:APP_NAME = $<TARGET_FILE_DIR:${APP_NAME}>"
-		COMMAND ${CMAKE_COMMAND} -E echo "!!!!!! CONFIG = $<CONFIG>"
-	)
+	#add_custom_command(
+	#	TARGET ${APP_NAME}
+	#	POST_BUILD
+	#	COMMAND ${CMAKE_COMMAND} -E echo "!!!!!! TARGET_FILE:APP_NAME = $<TARGET_FILE:${APP_NAME}>"
+	#	COMMAND ${CMAKE_COMMAND} -E echo "!!!!!! TARGET_FILE_DIR:APP_NAME = $<TARGET_FILE_DIR:${APP_NAME}>"
+	#	COMMAND ${CMAKE_COMMAND} -E echo "!!!!!! CONFIG = $<CONFIG>"
+	#)
 endif()
 
 
@@ -916,13 +918,13 @@ if(NOT RASPBERRY)
 	####################### Do Post Build Stuff #######################
 	# "https://gist.github.com/baiwfg2/39881ba703e9c74e95366ed422641609"
 	# TEST
-	add_custom_command(
-		TARGET ${APP_NAME}
-		POST_BUILD
-		COMMAND ${CMAKE_COMMAND} -E echo "!!!!!! TARGET_FILE:APP_NAME = $<TARGET_FILE:${APP_NAME}>"
-		COMMAND ${CMAKE_COMMAND} -E echo "!!!!!! TARGET_FILE_DIR:APP_NAME = $<TARGET_FILE_DIR:${APP_NAME}>"
-		COMMAND ${CMAKE_COMMAND} -E echo "!!!!!! CONFIG = $<CONFIG>"
-	)
+	#add_custom_command(
+	#	TARGET ${APP_NAME}
+	#	POST_BUILD
+	#	COMMAND ${CMAKE_COMMAND} -E echo "!!!!!! TARGET_FILE:APP_NAME = $<TARGET_FILE:${APP_NAME}>"
+	#	COMMAND ${CMAKE_COMMAND} -E echo "!!!!!! TARGET_FILE_DIR:APP_NAME = $<TARGET_FILE_DIR:${APP_NAME}>"
+	#	COMMAND ${CMAKE_COMMAND} -E echo "!!!!!! CONFIG = $<CONFIG>"
+	#)
 	#CPP_DK_Execute("chmod +x "+app_path+OS+"/Debug/"+APP)
 endif()
 endif()
@@ -1007,13 +1009,13 @@ if(RASPBERRY)
 	####################### Do Post Build Stuff #######################
 	# "https://gist.github.com/baiwfg2/39881ba703e9c74e95366ed422641609"
 	# TEST
-	add_custom_command(
-		TARGET ${APP_NAME}
-		POST_BUILD
-		COMMAND ${CMAKE_COMMAND} -E echo "!!!!!! TARGET_FILE:APP_NAME = $<TARGET_FILE:${APP_NAME}>"
-		COMMAND ${CMAKE_COMMAND} -E echo "!!!!!! TARGET_FILE_DIR:APP_NAME = $<TARGET_FILE_DIR:${APP_NAME}>"
-		COMMAND ${CMAKE_COMMAND} -E echo "!!!!!! CONFIG = $<CONFIG>"
-	)
+	#add_custom_command(
+	#	TARGET ${APP_NAME}
+	#	POST_BUILD
+	#	COMMAND ${CMAKE_COMMAND} -E echo "!!!!!! TARGET_FILE:APP_NAME = $<TARGET_FILE:${APP_NAME}>"
+	#	COMMAND ${CMAKE_COMMAND} -E echo "!!!!!! TARGET_FILE_DIR:APP_NAME = $<TARGET_FILE_DIR:${APP_NAME}>"
+	#	COMMAND ${CMAKE_COMMAND} -E echo "!!!!!! CONFIG = $<CONFIG>"
+	#)
 	#CPP_DK_Execute("chmod +x "+app_path+OS+"/Debug/"+APP)
 endif()
 
@@ -1085,13 +1087,13 @@ if(ANDROID)
 	####################### Do Post Build Stuff #######################
 	# "https://gist.github.com/baiwfg2/39881ba703e9c74e95366ed422641609"
 	# TEST
-	add_custom_command(
-		TARGET main
-		POST_BUILD
-		COMMAND ${CMAKE_COMMAND} -E echo "!!!!!! TARGET_FILE:APP_NAME = $<TARGET_FILE:main>"
-		COMMAND ${CMAKE_COMMAND} -E echo "!!!!!! TARGET_FILE_DIR:APP_NAME = $<TARGET_FILE_DIR:main>"
-		COMMAND ${CMAKE_COMMAND} -E echo "!!!!!! CONFIG = $<CONFIG>"
-	)
+	#add_custom_command(
+	#	TARGET main
+	#	POST_BUILD
+	#	COMMAND ${CMAKE_COMMAND} -E echo "!!!!!! TARGET_FILE:APP_NAME = $<TARGET_FILE:main>"
+	#	COMMAND ${CMAKE_COMMAND} -E echo "!!!!!! TARGET_FILE_DIR:APP_NAME = $<TARGET_FILE_DIR:main>"
+	#	COMMAND ${CMAKE_COMMAND} -E echo "!!!!!! CONFIG = $<CONFIG>"
+	#)
 	
 	#if(CPP_DK_Execute(app_path+OS+"/gradlew --project-dir "+app_path+OS+" --info clean build").error)
 	#	return

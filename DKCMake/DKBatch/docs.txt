@@ -10,7 +10,6 @@ https://www.dostips.com/DtTutoFunctions.php
 SS64
 https://ss64.com/nt/
 
-
 Operators
 EQU - equal
 NEQ - not equal
@@ -21,4 +20,3 @@ GEQ - greater than or equal
 
 If (conditionals)
 https://ss64.com/nt/if.html
-

@@ -1,13 +1,12 @@
 # https://developer.android.com/studio/archive
 # https://developer.android.com/studio#downloads
-# 
 if(NOT WIN_HOST)
 	return()
 endif()
 
 
 #dk_depend(jdk)
-dk_depend(android-sdk)
+#dk_depend(android-sdk)
 dk_depend(android-ndk)
 
 
@@ -30,7 +29,7 @@ dk_setEnv("STUDIO_GRADLE_JDK" ${JDK8})
 
 
 ### INSTALL ###
-#dk_install(${ANDROID-STUDIO_DL} android-studio ${ANDROID-STUDIO_EXE})
+#dk_import(${ANDROID-STUDIO_DL} ${ANDROID-STUDIO_EXE})
 
 if(NOT EXISTS ${ANDROID-STUDIO_EXE})
 	dk_download(${ANDROID-STUDIO_DL} ${DKDOWNLOAD}/${ANDROID-STUDIO_NAME})

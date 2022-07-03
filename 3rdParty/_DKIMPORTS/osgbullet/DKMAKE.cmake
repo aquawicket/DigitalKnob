@@ -5,7 +5,7 @@ dk_depend(bullet3)
 dk_depend(osgworks)
 
 
-#dk_install(http://TODO.com/osgbullet-master.zip osgbullet-master)
+#dk_import(http://TODO.com/osgbullet-master.zip osgbullet-master)
 #dk_set(OSGBULLET ${3RDPARTY}/osgbullet-master)
 dk_import(http://TODO.com/osgbullet-master.zip)
 

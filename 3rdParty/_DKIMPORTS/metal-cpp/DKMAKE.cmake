@@ -12,6 +12,7 @@ dk_set(METALCPP ${3RDPARTY}/${METALCPP_NAME})
 
 
 ### INSTALL ###
-dk_install(${METALCPP_DL} metal-cpp ${METALCPP})
+#dk_install(${METALCPP_DL} ${METALCPP})
+dk_import(${METALCPP_DL} ${METALCPP})
 
 dk_include(${METALCPP})

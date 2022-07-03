@@ -16,7 +16,7 @@ LINUX_HOST_dk_set(JDK11_DL https://download.java.net/openjdk/jdk11/ri/openjdk-11
 ### INSTALL ###
 dk_set(JDK11_NAME openjdk-${JDK11_VERSION})
 dk_set(JDK11 ${3RDPARTY}/${JDK11_NAME})
-dk_install(${JDK11_DL} jdk11 ${JDK11} PATCH)
+dk_import(${JDK11_DL} ${JDK11} PATCH)
 
 
 ### LINK ###

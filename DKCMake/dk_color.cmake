@@ -119,6 +119,8 @@ set(ESC_10   "${ESC}[10;37m")
 ###############################################################################
 # dk_printColorChart()
 #
+#	TODO
+#
 macro(printColorChart)
 	DKDEBUGFUNC(${ARGV})
 	message(" ")
@@ -198,6 +200,8 @@ endmacro()
 
 ###############################################################################
 # dk_printStyleChart()
+#
+#	TODO
 #
 macro(dk_printStyleChart)
 	DKDEBUGFUNC(${ARGV})

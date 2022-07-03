@@ -6,7 +6,7 @@ dk_load(dk_color)
 #
 #	Print a debug message to the console
 #
-#	@msg:(required) The message to print
+#	@msg	- The message to print
 #
 macro(dk_debug msg)
 	if(DKDEBUG_ENABLED)
@@ -14,9 +14,9 @@ macro(dk_debug msg)
 		string(REPLACE " " "" var ${msg})
 		dk_call(dk_updateLogInfo)
 		if(${var})
-			message(STATUS "${H_black}${STACK_HEADER}${CLR}${cyan}VARIABLE: \${${var}} = ${${var}}${CLR}")
+			message(STATUS "${H_black}${STACK_HEADER}${CLR}${cyan} { \"${var}\" : \"${${var}}\" } ${CLR}")
 		else()
-			message(STATUS "${H_black}${STACK_HEADER}${CLR}${cyan}${msg}${CLR}")
+			message(STATUS "${H_black}${STACK_HEADER}${CLR}${cyan} ${msg} ${CLR}")
 		endif()
 	endif()
 endmacro()

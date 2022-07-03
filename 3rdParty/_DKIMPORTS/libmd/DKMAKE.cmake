@@ -14,7 +14,7 @@ dk_import(https://github.com/guillemj/libmd)
 #dk_set(LIBMD_NAME libmd-${LIBMD_VERSION})
 #dk_set(LIBMD_DL https://github.com/guillemj/libmd/archive/refs/tags/1.0.4.zip)
 #dk_set(LIBMD ${3RDPARTY}/${LIBMD_NAME})
-#dk_install(${LIBMD_DL} libmd ${LIBMD} NOPATCH)
+#dk_import(${LIBMD_DL} ${LIBMD} NOPATCH)
 
 
 ### LINK ###

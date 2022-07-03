@@ -11,7 +11,7 @@ dk_depend(openscenegraph)
 #IF(OpenGL2)
 #	dk_set(OSGWORKS OSGWORKS_GL2)
 #ENDIF(OpenGL2)
-#dk_install(${OSGWORKS_DL} osgworks ${OSGWORKS})
+#dk_import(${OSGWORKS_DL} ${OSGWORKS})
 dk_import(http://TODO.com/osgworks-master.zip)
 
 

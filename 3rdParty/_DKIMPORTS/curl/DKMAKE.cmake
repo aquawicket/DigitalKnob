@@ -9,14 +9,8 @@ ANDROID_dk_depend(dl)
 dk_depend(zlib)
 dk_depend(openssl)
 
-#DKGITCLONE(https://github.com/curl/curl.git curl-7_83_1)
-dk_import(https://github.com/curl/curl/archive/refs/tags/curl-7_43_0.zip)
 
-#dk_set(CURL_VERSION 7.34.0)
-#dk_set(CURL_NAME curl-${CURL_VERSION})
-#dk_set(CURL_DL https://curl.haxx.se/download/${CURL_NAME}.zip)
-#dk_set(CURL ${3RDPARTY}/${CURL_NAME})
-#dk_install(${CURL_DL} curl ${CURL})
+dk_import(https://github.com/curl/curl/archive/refs/tags/curl-7_43_0.zip)
 
 
 ### DKPLUGINS LINK ###

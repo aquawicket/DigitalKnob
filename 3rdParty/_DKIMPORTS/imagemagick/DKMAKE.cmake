@@ -15,8 +15,8 @@ dk_set(IMAGEMAGICK_NAME ImageMagick-${IMAGEMAGICK_VERSION})
 WIN_dk_set(IMAGEMAGICK_DL http://ftp.icm.edu.pl/packages/ImageMagick/binaries/ImageMagick-7.1.0-portable-Q16-x86.zip)
 LINUX_dk_set(IMAGEMAGICK_DL https://github.com/ImageMagick/ImageMagick/archive/refs/tags/7.1.0-0.zip)
 MAC_dk_set(IMAGEMAGICK_DL https://github.com/ImageMagick/ImageMagick/archive/refs/tags/7.1.0-0.zip)
-dk_set(IMAGEMAGICK ${3RDPARTY}/${IMAGEMAGICK_NAME})
-dk_install(${IMAGEMAGICK_DL} imagemagick ${IMAGEMAGICK})
+#dk_set(IMAGEMAGICK ${3RDPARTY}/${IMAGEMAGICK_NAME})
+dk_import(${IMAGEMAGICK_DL}) #${IMAGEMAGICK})
 
 
 WIN_dk_set(IMAGEMAGICK_CONVERT ${IMAGEMAGICK}/convert.exe)

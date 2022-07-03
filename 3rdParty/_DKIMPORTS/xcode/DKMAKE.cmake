@@ -15,5 +15,5 @@ endif()
 #dk_set(XCODE_EXE ???)
 
 ### INSTALL ###
-#dk_install(${XCODE_DL} Xcode ${XCODE})
+#dk_import(${XCODE_DL} ${XCODE})
 #dk_import(${XCODE_DL})

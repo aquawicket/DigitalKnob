@@ -21,6 +21,7 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
+include_guard()
 
 function(generateAndroidMK)
 	if(ANDROID_LIBMK)
@@ -40,7 +41,7 @@ function(generateAndroidMK)
 			file(WRITE ${CURRENT_DIR}/jni/Application.mk ${APPMK_FILE})
 			
 			message(STATUS "Creating DEBUG Android.mk file for ${plugin}....")
-           foreach(each_define ${DKDEFINES_LIST})
+			foreach(each_define ${DKDEFINES_LIST})
 		        dk_set(ANDROID_LIBMK "${ANDROID_LIBMK} "LOCAL_LDFLAGS += ${each_define}\n")
 	        endforeach()
 			dk_set(ANDROID_LIBMK ${ANDROID_LIBMK} "LOCAL_C_INCLUDES += ${DKPLUGINS}\n")
@@ -86,4 +87,5 @@ function(generateAndroidMK)
 				EXECUTE_PROCESS(COMMAND ${ANDROID-NDK}/ndk-build NDK_DEBUG=0 WORKING_DIRECTORY ${CURRENT_DIR})
 			endif()
 		endif()
-	endif(ANDROID_LIBMK)
+	endif()
+endfunction()

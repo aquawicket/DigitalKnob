@@ -12,7 +12,7 @@ dk_import(https://github.com/nlohmann/json/archive/d8a63291cbe50411a2c513d06f3ae
 #dk_set(JSON_NAME json-${JSON_VERSION})
 #dk_set(JSON_DL https://github.com/nlohmann/json/archive/refs/tags/v3.9.1.zip)
 #dk_set(JSON ${3RDPARTY}/${JSON_NAME})
-#dk_install(${JSON_DL} json ${JSON})
+#dk_import(${JSON_DL} ${JSON})
 
 
 dk_include(${JSON}/include/nlohmann)
