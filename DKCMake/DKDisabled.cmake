@@ -164,6 +164,7 @@ if(MAC)  # Disabled on Mac host machines
 	dk_disable(mobile_core_services)
 	dk_disable(openal-android)
 	dk_disable(openssl)
+	dk_disable(openssl_binary)
 	dk_disable(podofo)
 	dk_disable(sdl-gpu)
 	dk_disable(smpeg2)
