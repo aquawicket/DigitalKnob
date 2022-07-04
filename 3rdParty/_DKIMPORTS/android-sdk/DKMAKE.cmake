@@ -1,12 +1,4 @@
-if(NOT WIN_HOST)
-	return()
-endif()
-
-### VERSION ###
-dk_set(ANDROID-SDK ${3RDPARTY}/android-sdk)
-
-dk_setEnv("ANDROID_HOME" ${ANDROID-SDK})
-dk_setEnv("VS_AndroidHome" ${ANDROID-SDK})
+# android-sdk
 
 ### DEPENDS ###
 #dk_depend(jdk)
@@ -23,7 +15,12 @@ dk_setEnv("VS_AndroidHome" ${ANDROID-SDK})
 #dk_depend(android-sdk-tools)
 #dk_depend(android-cmake)
 
+dk_set(ANDROID-SDK ${3RDPARTY}/android-sdk)
+
 if(WIN_HOST)
+	dk_setEnv("ANDROID_HOME" ${ANDROID-SDK})
+	dk_setEnv("VS_AndroidHome" ${ANDROID-SDK})
+
 	if(NOT EXISTS ${ANDROID-SDK}/SignLicenses.cmd)
 		dk_copy(${DKIMPORTS}/android-sdk/SignLicenses.cmd ${ANDROID-SDK}/SignLicenses.cmd OVERWRITE)
 		dk_command(${ANDROID-SDK}/SignLicenses.cmd)
