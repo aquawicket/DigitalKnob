@@ -1,30 +1,25 @@
 # https://docs.microsoft.com/en-us/java/openjdk/download
 # https://jdk.java.net/archive/
+# https://cfdownload.adobe.com/pub/adobe/coldfusion/java/java8/java8u333/jdk/jdk-8u333-linux-i586.tar.gz
+# https://cfdownload.adobe.com/pub/adobe/coldfusion/java/java8/java8u333/jdk/jdk-8u333-linux-x64.tar.gz
+# https://cfdownload.adobe.com/pub/adobe/coldfusion/java/java8/java8u333/jdk/jdk-8u333-macosx-x64.dmg
+# https://cfdownload.adobe.com/pub/adobe/coldfusion/java/java8/java8u333/jdk/jdk-8u333-solaris-sparcv9.tar.gz
+# https://cfdownload.adobe.com/pub/adobe/coldfusion/java/java8/java8u333/jdk/jdk-8u333-windows-i586.zip
+# https://cfdownload.adobe.com/pub/adobe/coldfusion/java/java8/java8u333/jdk/jdk-8u333-windows-x64.zip
 
 
-WIN_HOST_dk_set(JDK8_VERSION 1.8.0_41)
-WIN_HOST_dk_set(JDK8_DL https://download.java.net/openjdk/jdk8u41/ri/openjdk-8u41-b04-windows-i586-14_jan_2020.zip)
-
-MAC_HOST_dk_set(JDK8_VERSION 1.8.0_41)
-MAC_HOST_dk_set(JDK8_DL https://download.java.net/openjdk/jdk8u41/ri/openjdk-8u41-b04_osx-x64_14_jan_2020.tar.gz)
-
-LINUX_HOST_dk_set(JDK8_VERSION 1.8.0_41)
-LINUX_HOST_dk_set(JDK8_DL https://download.java.net/openjdk/jdk8u41/ri/openjdk-8u41-b04-linux-x64-14_jan_2020.tar.gz)
-
-
-### INSTALL ###
-dk_set(JDK8_NAME openjdk-${JDK8_VERSION})
-dk_set(JDK8 ${3RDPARTY}/${JDK8_NAME})
-dk_import(${JDK8_DL} ${JDK8} PATCH)
+WIN_HOST_dk_import	(https://download.java.net/openjdk/jdk8u41/ri/openjdk-8u41-b04-windows-i586-14_jan_2020.zip)
+MAC_HOST_dk_import	(https://cfdownload.adobe.com/pub/adobe/coldfusion/java/java8/java8u333/jdk/jdk-8u333-macosx-x64.dmg)
+LINUX_HOST_dk_import(https://download.java.net/openjdk/jdk8u41/ri/openjdk-8u41-b04-linux-x64-14_jan_2020.tar.gz)
 
 
 ### LINK ###
-#dk_include(${JDK8}/)	
-#dk_setEnv("JAVA_HOME" ${JDK8})
-#dk_setEnv("JAVA_VERSION" ${JDK8_VERSION})
-#dk_setEnv("VS_JavaHome" ${JDK8})
+#dk_include(${OPENJDK}/)	
+#dk_setEnv("JAVA_HOME" ${OPENJDK})
+#dk_setEnv("JAVA_VERSION" ${OPENJDK_VERSION})
+#dk_setEnv("VS_JavaHome" ${OPENJDK})
 
 #Add registry entries
-#dk_addRegistryKey("HKLM/SOFTWARE/JavaSoft/Java Runtime Environment" "CurrentVersion" "${JDK8_VERSION}")
-#dk_addRegistryKey("HKLM/SOFTWARE/JavaSoft/Java Runtime Environment/${JDK8_VERSION}" "JavaHome" "${JDK8}")
-#dk_addRegistryKey("HKLM/SOFTWARE/JavaSoft/Java Runtime Environment/${JDK8_VERSION}" "RuntimeLib" "${JDK8}/bin/server/jvm.dll")
+#dk_addRegistryKey("HKLM/SOFTWARE/JavaSoft/Java Runtime Environment" "CurrentVersion" "${OPENJDK_VERSION}")
+#dk_addRegistryKey("HKLM/SOFTWARE/JavaSoft/Java Runtime Environment/${OPENJDK_VERSION}" "JavaHome" "${OPENJDK}")
+#dk_addRegistryKey("HKLM/SOFTWARE/JavaSoft/Java Runtime Environment/${OPENJDK_VERSION}" "RuntimeLib" "${OPENJDK}/bin/server/jvm.dll")
