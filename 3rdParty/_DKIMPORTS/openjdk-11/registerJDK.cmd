@@ -1,6 +1,6 @@
 %dkbatch%
 
-set "Folder=openjdk-11"
+set "Folder=openjdk-11-windows-x64_bin"
 set "CurrentVersion=11"
 
 set "JAVA_VERSION=%CurrentVersion%"
@@ -14,6 +14,4 @@ reg add "HKLM\SOFTWARE\JavaSoft\Java Runtime Environment" /v CurrentVersion /t R
 reg add "HKLM\SOFTWARE\JavaSoft\Java Runtime Environment\%CurrentVersion%" /v JavaHome /t REG_SZ /d "%JAVA_HOME%" /f
 reg add "HKLM\SOFTWARE\JavaSoft\Java Runtime Environment\%CurrentVersion%" /v RuntimeLib /t REG_SZ /d "%JAVA_HOME%\bin\server\jvm.dll" /f
 
- 
- 
 %DKEND% 

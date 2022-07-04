@@ -526,7 +526,7 @@ function DKBuild_DoResults(){
 		DKBuild_ValidateVC2019()
 		CPP_DKFile_MkDir(app_path+OS)		
 		
-		if(!DKBuild_Command(DIGITALKNOB+"DK/3rdParty/_DKIMPORTS/jdk/registerJDK.cmd"))
+		if(!DKBuild_Command(DIGITALKNOB+"DK/3rdParty/_DKIMPORTS/openjdk/registerJDK.cmd"))
 			return false
 	
 		if(CPP_DK_GetOS() === "Windows"){
@@ -543,7 +543,7 @@ function DKBuild_DoResults(){
 				return false
 		}
 		
-		if(!DKBuild_Command(DIGITALKNOB+"DK/3rdParty/_DKIMPORTS/jdk/registerJDK.cmd"))
+		if(!DKBuild_Command(DIGITALKNOB+"DK/3rdParty/_DKIMPORTS/openjdk/registerJDK.cmd"))
 			return false
 		
 		if(!DKBuild_Command(app_path+OS+"/gradlew --project-dir "+app_path+OS+" --info clean build"))
@@ -561,7 +561,7 @@ function DKBuild_DoResults(){
 		DKBuild_ValidateVC2019()
 		CPP_DKFile_MkDir(app_path+OS)
 		
-		if(!DKBuild_Command(DIGITALKNOB+"DK/3rdParty/_DKIMPORTS/jdk/registerJDK.cmd"))
+		if(!DKBuild_Command(DIGITALKNOB+"DK/3rdParty/_DKIMPORTS/openjdk/registerJDK.cmd"))
 			return false
 		
 		if(CPP_DK_GetOS() === "Windows"){
@@ -578,7 +578,7 @@ function DKBuild_DoResults(){
 				return false
 		}
 		
-		if(!DKBuild_Command(DIGITALKNOB+"DK/3rdParty/_DKIMPORTS/jdk/registerJDK.cmd"))
+		if(!DKBuild_Command(DIGITALKNOB+"DK/3rdParty/_DKIMPORTS/openjdk/registerJDK.cmd"))
 			return false
 		
 		if(!DKBuild_Command(app_path+OS+"/gradlew --project-dir "+app_path+OS+" --info clean build"))

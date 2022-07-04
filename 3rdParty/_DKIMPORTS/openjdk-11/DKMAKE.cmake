@@ -2,21 +2,11 @@
 # https://jdk.java.net/archive/
 
 
-WIN_HOST_dk_set(JDK11_VERSION 11)
-WIN_HOST_dk_set(JDK11_DL https://download.java.net/java/ga/jdk11/openjdk-11_windows-x64_bin.zip)
+dk_set(JDK11_VERSION 11)
 
-MAC_HOST_dk_set(JDK11_VERSION 11)
-MAC_HOST_dk_set(JDK11_DL https://download.java.net/openjdk/jdk11/ri/openjdk-11+28_osx-x64_bin.tar.gz)
-
-LINUX_HOST_dk_set(JDK11_VERSION 11)
-LINUX_HOST_dk_set(JDK11_DL https://download.java.net/openjdk/jdk11/ri/openjdk-11+28_linux-x64_bin.tar.gz)
-
-
-
-### INSTALL ###
-dk_set(JDK11_NAME openjdk-${JDK11_VERSION})
-dk_set(JDK11 ${3RDPARTY}/${JDK11_NAME})
-dk_import(${JDK11_DL} ${JDK11} PATCH)
+WIN_HOST_dk_import(https://download.java.net/java/ga/jdk11/openjdk-11_windows-x64_bin.zip PATCH)
+MAC_HOST_dk_import(JDK11_DL https://download.java.net/openjdk/jdk11/ri/openjdk-11+28_osx-x64_bin.tar.gz PATCH)
+LINUX_HOST_dk_import(JDK11_DL https://download.java.net/openjdk/jdk11/ri/openjdk-11+28_linux-x64_bin.tar.gz PATCH)
 
 
 ### LINK ###
