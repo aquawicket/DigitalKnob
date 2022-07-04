@@ -36,7 +36,7 @@ LINUX_RELEASE_dk_queueCommand	(${DKCMAKE_BUILD} -DSTATIC=ON -DBUILD_TRAINING_TOO
 
 
 ### COMPILE ###
-WIN_dk_visualStudio				(${TESSERACT_NAME} tesseract.sln libtesseract)
+WIN_dk_visualStudio				(${TESSERACT_NAME} libtesseract)
 dk_xcode						(${TESSERACT_NAME} libtesseract)
 LINUX_dk_queueCommand			(make libtesseract)
 RASPBERRY_dk_queueCommand		(make libtesseract)

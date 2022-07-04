@@ -184,12 +184,12 @@ ANDROID_dk_queueCommand(${DKCMAKE_BUILD} -DBUILD_SHARED_LIBS=FALSE ${JPEG_CMAKE}
 
 
 ### COMPILE ###
-dk_visualStudio(${SFML_NAME} SFML.sln)
-#WIN_dk_visualStudio(${SFML_NAME} SFML.sln)
+dk_visualStudio(${SFML_NAME})
+#WIN_dk_visualStudio(${SFML_NAME})
 dk_xcode(${SFML_NAME})
 #MAC_dk_xcode(${SFML_NAME})
 #IOS_dk_xcode(${SFML_NAME})
 #IOSSIM_dk_xcode(${SFML_NAME})
 LINUX_dk_queueCommand(make)
 RASPBERRY_dk_queueCommand(make)
-#ANDROID_dk_visualStudio(${SFML_NAME} SFML.sln)
+#ANDROID_dk_visualStudio(${SFML_NAME})

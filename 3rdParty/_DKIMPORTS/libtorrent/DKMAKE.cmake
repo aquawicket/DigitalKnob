@@ -36,7 +36,7 @@ ANDROID_dk_libRelease(${TORRENT}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/libt
 WIN_dk_setPath(${TORRENT}/${OS})
 WIN32_dk_queueCommand(${DKCMAKE_BUILD} -Dshared=OFF -Dunicode=OFF -Dstatic_runtime=ON ${OPENSSL_CMAKE} -DBOOST_ROOT=${BOOST} -DBOOST_LIBRARYDIR=${BOOST}/${OS}/lib ${TORRENT})
 WIN64_dk_queueCommand(${DKCMAKE_BUILD} -Dshared=OFF -Dunicode=OFF -Dstatic_runtime=ON ${OPENSSL_CMAKE} -DBOOST_ROOT=${BOOST} -DBOOST_LIBRARYDIR=${BOOST}/${OS}/lib ${TORRENT})
-WIN_dk_visualStudio(${TORRENT_NAME} libtorrent.sln torrent-rasterbar)
+WIN_dk_visualStudio(${TORRENT_NAME} torrent-rasterbar)
 
 
 MAC_dk_setPath(${TORRENT}/${OS})

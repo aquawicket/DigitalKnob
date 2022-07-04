@@ -39,7 +39,7 @@ ANDROID_dk_queueCommand		(${DKCMAKE_BUILD} "-DANDROID_COMPILER_FLAGS=-I${LIBXML2
 
 
 ### COMPILE ###
-dk_visualStudio				(${LIBXML2_NAME} xml2.sln xml2)
+dk_visualStudio				(${LIBXML2_NAME} xml2)
 dk_xcode					(${LIBXML2_NAME} xml2)
 LINUX_dk_queueCommand		(make xml2)
 RASPBERRY_dk_queueCommand	(make xml2)

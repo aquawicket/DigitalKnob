@@ -32,7 +32,7 @@ dk_queueCommand	(${DKCMAKE_BUILD} -DBUILD_SHARED_LIBS=OFF -DSDLTTF_SUPPORT_WEBP=
 
 
 ### COMPILE ###
-dk_visualStudio				(${SDL_TTF_NAME} SDLTTF.sln SDLTTF)
+dk_visualStudio				(${SDL_TTF_NAME} SDLTTF)
 dk_xcode					(${SDL_TTF_NAME} SDLTTF)
 LINUX_dk_queueCommand		(make SDLTTF)
 RASPBERRY_dk_queueCommand	(make SDLTTF)

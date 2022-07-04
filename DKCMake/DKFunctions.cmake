@@ -542,16 +542,17 @@ endfunction()
 
 
 ###############################################################################
-# dk_download(src_path dest_path)
+# dk_download(src_path dest_path) #NOERROR
 #
 #	Download a file
 #
 #	@src_path	- The url of the file to download
 #	@dest_path	- The path to download the file to
+#   NOERROR     - if any of the parameters equals NOERROR, dk_error() messages will not be displayed
 #
 #	Notes: https://cmake.org/pipermail/cmake/2012-September/052205.html/
 #
-function(dk_download src_path dest_path) # ARGV1 = dest_path
+function(dk_download src_path dest_path) # ARGV1 = dest_path #NOERROR
 	DKDEBUGFUNC(${ARGV})
 	#FIXME: Will not download if only 1 argument
 	#TODO: Let's supply the ability to add a primary root address to download from,  for fast downloading from local hard drives or storage 
@@ -563,6 +564,11 @@ function(dk_download src_path dest_path) # ARGV1 = dest_path
 #	if(NOT SecondaryDownloadServer)
 #		dk_info("TODO: just set SecondaryDownloadServer to your mirror location and all file downoads that fail will attempt secondary location next")
 #	endif()
+
+	dk_includes("${ARGN}" "NOERROR" includes)
+	if(${includes})
+		set(noerror true)
+	endif()
 	
 	# Setup all src_path variables
 	if(NOT src_path)
@@ -625,7 +631,9 @@ function(dk_download src_path dest_path) # ARGV1 = dest_path
 	dk_debug(dest_ext)
 	
 	if(EXISTS ${dest_path})
-		dk_error("dest_path:(${dest_path}) already exists")
+		if(NOT noerror)
+			dk_error("dest_path:(${dest_path}) already exists")
+		endif()
 		return()
 	endif()
 	
@@ -1691,18 +1699,21 @@ dk_createOsMacros("dk_queueCommand")
 
 
 ###############################################################################
-# dk_visualStudioDebug(folder sln_file)
+# dk_visualStudioDebug(folder) #target #arch
 #
 #	TODO
 #
 #	@folder		- TODO
 #	@sln_file	- TODO
 #
-function(dk_visualStudioDebug folder sln_file) #target #arch
+function(dk_visualStudioDebug folder) #target #arch
 	DKDEBUGFUNC(${ARGV})
 	if(NOT WIN_HOST)
 		return()
 	endif()
+	
+	dk_findFiles(${3RDPARTY}/${folder}/${OS} *.sln sln_file)
+	dk_getFilename(${sln_file} sln_file)
 	
 	dk_getExtension(${sln_file} extension)
 	if(NOT ${extension} STREQUAL ".sln")
@@ -1727,18 +1738,21 @@ dk_createOsMacros("dk_visualStudioDebug" "NO_DEBUG_RELEASE_TAGS")
 
 
 ###############################################################################
-# dk_visualStudioRelease(folder sln_file)
+# dk_visualStudioRelease(folder) #target #arch
 #
 #	TODO
 #
 #	@folder		- TODO
 #	@sln_file	- TODO
 #
-function(dk_visualStudioRelease folder sln_file) #target #arch
+function(dk_visualStudioRelease folder) #target #arch
 	DKDEBUGFUNC(${ARGV})
 	if(NOT WIN_HOST)
 		return()
 	endif()
+	
+	dk_findFiles(${3RDPARTY}/${folder}/${OS} *.sln sln_file)
+	dk_getFilename(${sln_file} sln_file)
 	
 	dk_getExtension(${sln_file} extension)
 	if(NOT ${extension} STREQUAL ".sln")
@@ -1763,7 +1777,7 @@ dk_createOsMacros("dk_visualStudioRelease" "NO_DEBUG_RELEASE_TAGS")
 
 
 ###############################################################################
-# dk_visualStudio(args)
+# dk_visualStudio(folder sln_file)
 #
 #	TODO
 #

@@ -45,10 +45,10 @@ ANDROID_dk_queueCommand(${DKCMAKE_BUILD_CRYPTOPP} "-DCMAKE_CXX_FLAGS=/I${ANDROID
 
 
 ### COMPILE ###
-WIN_dk_visualStudio(${CRYPTOPP_NAME} cryptopp.sln cryptopp-static)
+WIN_dk_visualStudio(${CRYPTOPP_NAME} cryptopp-static)
 MAC_dk_xcode(${CRYPTOPP_NAME} cryptopp-static)
 IOS_dk_xcode(${CRYPTOPP_NAME} cryptopp-static)
 IOSSIM_dk_xcode(${CRYPTOPP_NAME} cryptopp-static)
 LINUX_dk_queueCommand(make cryptopp-static)
 RASPBERRY_dk_queueCommand(make cryptopp-static)
-ANDROID_dk_visualStudio(${CRYPTOPP_NAME} cryptopp.sln cryptopp-static)
+ANDROID_dk_visualStudio(${CRYPTOPP_NAME} cryptopp-static)

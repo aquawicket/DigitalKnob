@@ -44,12 +44,12 @@ dk_queueCommand(${DKCMAKE_BUILD} ${FREETYPE})
 
 
 ### COMPILE ###
-#WIN_dk_visualStudio(freetype-2.5.5 freetype.sln freetype)
-dk_visualStudio(freetype-2.5.5 freetype.sln freetype)
+#WIN_dk_visualStudio(freetype-2.5.5 freetype)
+dk_visualStudio(freetype-2.5.5 freetype)
 #MAC_dk_xcode(freetype-2.5.5 freetype)
 #IOS_dk_xcode(freetype-2.5.5 freetype)
 #IOSSIM_dk_xcode(freetype-2.5.5 freetype)
 dk_xcode(freetype-2.5.5 freetype)
 LINUX_dk_queueCommand(make freetype)
 RASPBERRY_dk_queueCommand(make freetype)
-#ANDROID_dk_visualStudio(freetype-2.5.5 freetype.sln freetype)
+#ANDROID_dk_visualStudio(freetype-2.5.5 freetype)

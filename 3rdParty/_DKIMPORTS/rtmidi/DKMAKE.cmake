@@ -3,10 +3,8 @@
 WIN_dk_depend(winmm.lib)
 
 #dk_import(http://www.music.mcgill.ca/~gary/rtmidi/release/rtmidi-2.1.0.tar.gz PATCH)
-#dk_set(RTMIDI_SLN Project.sln)
 #dk_set(RTMIDI_TARGET RtMidi)
 dk_import(https://github.com/thestk/rtmidi.git)
-dk_set(RTMIDI_SLN RtMidi.sln)
 dk_set(RTMIDI_TARGET rtmidi)
 
 
@@ -48,8 +46,8 @@ dk_queueCommand(${DKCMAKE_BUILD} ${RTMIDI})
 
 
 ### COMPILE ###
-#WIN_dk_visualStudio(${RTMIDI_NAME} ${RTMIDI_SLN} ${RTMIDI_TARGET})
-dk_visualStudio(${RTMIDI_NAME} ${RTMIDI_SLN} ${RTMIDI_TARGET})
+#WIN_dk_visualStudio(${RTMIDI_NAME} ${RTMIDI_TARGET})
+dk_visualStudio(${RTMIDI_NAME} ${RTMIDI_TARGET})
 #MAC_dk_xcode(${RTMIDI_NAME} ${RTMIDI_TARGET})
 #IOS_dk_xcode(${RTMIDI_NAME} ${RTMIDI_TARGET})
 #IOSSIM_dk_xcode(${RTMIDI_NAME} ${RTMIDI_TARGET})
@@ -60,4 +58,4 @@ LINUX_dk_queueCommand(make ${RTMIDI_TARGET})
 #RASPBERRY_DEBUG_dk_queueCommand(make ${RTMIDI_TARGET})
 #RASPBERRY_RELEASE_dk_queueCommand(make ${RTMIDI_TARGET})
 RASPBERRY_dk_queueCommand(make ${RTMIDI_TARGET})
-#ANDROID_dk_visualStudio(${RTMIDI_NAME} ${RTMIDI_SLN} ${RTMIDI_TARGET})
+#ANDROID_dk_visualStudio(${RTMIDI_NAME} ${RTMIDI_TARGET})

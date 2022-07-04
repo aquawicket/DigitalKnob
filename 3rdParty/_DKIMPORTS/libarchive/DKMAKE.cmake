@@ -101,10 +101,10 @@ ANDROID_dk_queueCommand(${DKCMAKE_BUILD} "-DCMAKE_C_FLAGS=-I${LIBARCHIVE}/${OS} 
 
 
 ### COMPILE ###
-WIN_dk_visualStudio(${LIBARCHIVE_NAME} libarchive.sln archive_static)
+WIN_dk_visualStudio(${LIBARCHIVE_NAME} archive_static)
 MAC_dk_xcode(${LIBARCHIVE_NAME} archive_static)
 IOS_dk_xcode(${LIBARCHIVE_NAME} archive_static)
 IOSSIM_dk_xcode(${LIBARCHIVE_NAME} archive_static)
 LINUX_dk_queueCommand(make archive_static)
 RASPBERRY_dk_queueCommand(make archive_static)
-ANDROID_dk_visualStudio(${LIBARCHIVE_NAME} libarchive.sln archive_static)
+ANDROID_dk_visualStudio(${LIBARCHIVE_NAME} archive_static)

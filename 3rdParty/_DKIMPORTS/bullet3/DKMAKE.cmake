@@ -83,7 +83,7 @@ dk_queueCommand(${DKCMAKE_BUILD} -DBUILD_DEMOS=OFF -DBUILD_EXTRAS=OFF -DUSE_GLUT
 
 
 ### COMPILE ###
-WIN_dk_visualStudio(${BULLET3_NAME} BULLET3_PHYSICS.sln)
+WIN_dk_visualStudio(${BULLET3_NAME})
 #MAC_dk_xcode(${BULLET3_NAME})
 #IOS_dk_xcode(${BULLET3_NAME})
 #IOSSIM_dk_xcode(${BULLET3_NAME})

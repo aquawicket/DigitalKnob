@@ -73,8 +73,8 @@ ANDROID_dk_queueCommand(${DKCMAKE_BUILD} "-DCMAKE_CXX_FLAGS=/DOSG_LIBRARY_STATIC
 
 
 ### COMPILE ###
-#WIN_dk_visualStudio(osgaudio-master osgAudio.sln)
-dk_visualStudio(osgaudio-master osgAudio.sln)
+#WIN_dk_visualStudio(osgaudio-master)
+dk_visualStudio(osgaudio-master)
 #MAC_dk_xcodeDebug(osgaudio-master)
 #MAC_dk_xcodeRelease(osgaudio-master)
 dk_xcode(osgaudio-master)
@@ -82,4 +82,4 @@ dk_xcode(osgaudio-master)
 #LINUX_RELEASE_dk_queueCommand(make)
 LINUX_dk_queueCommand(make)
 RASPBERRY_dk_queueCommand(make)
-#ANDROID_dk_visualStudio(osgaudio-master osgAudio.sln)
+#ANDROID_dk_visualStudio(osgaudio-master)

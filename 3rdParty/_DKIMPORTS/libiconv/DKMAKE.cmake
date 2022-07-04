@@ -37,7 +37,7 @@ dk_queueCommand	(${DKCMAKE_BUILD} ${LIBICONV})
 
 
 ### COMPILE ###
-dk_visualStudio				(${LIBICONV_NAME} libiconv.sln iconv)
+dk_visualStudio				(${LIBICONV_NAME} iconv)
 dk_xcode					(${LIBICONV_NAME} iconv)
 LINUX_dk_queueCommand		(make iconv)
 RASPBERRY_dk_queueCommand	(make iconv)

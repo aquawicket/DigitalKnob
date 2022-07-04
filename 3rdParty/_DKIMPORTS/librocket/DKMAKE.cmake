@@ -65,7 +65,7 @@ ANDROID_dk_libRelease(${ROCKET}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/libRo
 dk_setPath(${ROCKET}/${BUILD_DIR})
 
 WIN_dk_queueCommand(${DKCMAKE_BUILD} "-DCMAKE_CXX_FLAGS=/I${ROCKET}/Include" ${FREETYPE_CMAKE} ${ROCKET})
-WIN_dk_visualStudio(${ROCKET_NAME} libRocket.sln)
+WIN_dk_visualStudio(${ROCKET_NAME})
 
 MAC_dk_queueCommand(${DKCMAKE_BUILD} ${FREETYPE_CMAKE} ${ROCKET})
 MAC_dk_xcode(${ROCKET_NAME})

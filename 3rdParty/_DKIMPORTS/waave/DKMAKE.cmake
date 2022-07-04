@@ -38,7 +38,7 @@ LINUX_RELEASE_dk_queueCommand(${DKCMAKE_BUILD} ${WAAVE})
 
 
 ### COMPILE ###
-WIN_dk_visualStudio(${WAAVE_NAME} waave.sln waave)
+WIN_dk_visualStudio(${WAAVE_NAME} waave)
 MAC_dk_xcode(${WAAVE_NAME} waave)
 IOS_dk_xcode(${WAAVE_NAME} waave)
 IOSSIM_dk_xcode(${WAAVE_NAME} waave)

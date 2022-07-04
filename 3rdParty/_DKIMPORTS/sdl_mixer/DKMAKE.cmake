@@ -31,7 +31,7 @@ dk_queueCommand	(${DKCMAKE_BUILD} ${SDL_CMAKE} ${VORBIS_CMAKE} ${OGG_CMAKE} ${SM
 
 
 ### COMPILE ###
-dk_visualStudio				(${SDL_MIXER_NAME} SDLMIXER.sln SDLMIXER)
+dk_visualStudio				(${SDL_MIXER_NAME} SDLMIXER)
 dk_xcode					(${SDL_MIXER_NAME} SDLMIXER)
 LINUX_dk_queueCommand		(make SDLMIXER)
 RASPBERRY_dk_queueCommand	(make SDLMIXER)

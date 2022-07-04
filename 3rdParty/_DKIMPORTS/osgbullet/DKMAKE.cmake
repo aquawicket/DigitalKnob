@@ -96,8 +96,8 @@ ANDROID_dk_queueCommand(${DKCMAKE_BUILD} "-DOSGInstallType=Source And Build Tree
 
 
 ### COMPILE ###
-WIN_dk_visualStudioDebug(osgbullet-master osgBullet.sln)
-WIN_dk_visualStudioRelease(osgbullet-master osgBullet.sln)
+WIN_dk_visualStudioDebug(osgbullet-master)
+WIN_dk_visualStudioRelease(osgbullet-master)
 MAC_dk_xcodeDebug(osgbullet-master)
 MAC_dk_xcodeRelease(osgbullet-master)
 IOS_dk_xcodeDebug(osgbullet-master)
@@ -106,5 +106,5 @@ IOSSIM_dk_xcodeDebug(osgbullet-master)
 IOSSIM_dk_xcodeRelease(osgbullet-master)
 LINUX_DEBUG_dk_queueCommand(make)
 LINUX_RELEASE_dk_queueCommand(make)
-ANDROID_dk_visualStudioDebug(osgbullet-master osgBullet.sln)
-ANDROID_dk_visualStudioRelease(osgbullet-master osgBullet.sln)
+ANDROID_dk_visualStudioDebug(osgbullet-master)
+ANDROID_dk_visualStudioRelease(osgbullet-master)

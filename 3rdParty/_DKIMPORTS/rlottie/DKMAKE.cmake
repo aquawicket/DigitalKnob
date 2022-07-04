@@ -45,8 +45,8 @@ UNIX_dk_queueCommand(${DKCMAKE_BUILD} ${RLOTTIE})
 
 
 ### GENERATE ###
-#WIN_dk_visualStudio(${RLOTTIE_NAME} rlottie.sln rlottie)
-dk_visualStudio(${RLOTTIE_NAME} rlottie.sln rlottie)
+#WIN_dk_visualStudio(${RLOTTIE_NAME} rlottie)
+dk_visualStudio(${RLOTTIE_NAME} rlottie)
 #MAC_dk_xcode(${RLOTTIE_NAME} rlottie)
 #IOS_dk_xcode(${RLOTTIE_NAME} rlottie)
 #IOSSIM_dk_xcode(${RLOTTIE_NAME} rlottie)
@@ -55,4 +55,4 @@ dk_xcode(${RLOTTIE_NAME} rlottie)
 LINUX_dk_queueCommand(make rlottie)
 #RASPBERRY_DEBUG_dk_queueCommand(make rlottie)
 RASPBERRY_dk_queueCommand(make rlottie)
-#ANDROID_dk_visualStudio(${RLOTTIE_NAME} rlottie.sln rlottie)
+#ANDROID_dk_visualStudio(${RLOTTIE_NAME} rlottie)

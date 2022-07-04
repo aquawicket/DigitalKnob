@@ -58,15 +58,15 @@ dk_queueCommand(${DKCMAKE_BUILD} ${XZ})
 
 
 ### COMPILE ###
-dk_visualStudio(${XZ_NAME} xz.sln liblzma)
-#WIN_dk_visualStudio(${XZ_NAME} xz.sln liblzma)
+dk_visualStudio(${XZ_NAME} liblzma)
+#WIN_dk_visualStudio(${XZ_NAME} liblzma)
 dk_xcode(${XZ_NAME} liblzma)
 #MAC_dk_xcode(${XZ_NAME} liblzma)
 #IOS_dk_xcode(${XZ_NAME} liblzma)
 #IOSSIM_dk_xcode(${XZ_NAME} liblzma)
 LINUX_dk_queueCommand(make liblzma)
 RASPBERRY_dk_queueCommand(make liblzma)
-#ANDROID_dk_visualStudio(${XZ_NAME} xz.sln liblzma)	
+#ANDROID_dk_visualStudio(${XZ_NAME} liblzma)	
 ############################################################
 
 
@@ -163,4 +163,4 @@ ANDROID_RELEASE_dk_msys(make)
 
 ANDROID_dk_setPath(${XZ}/${OS})
 ANDROID_dk_queueCommand(${DKCMAKE_BUILD} ${XZ})
-ANDROID_dk_visualStudio(${XZ_NAME} xz.sln liblzma)
+ANDROID_dk_visualStudio(${XZ_NAME} liblzma)

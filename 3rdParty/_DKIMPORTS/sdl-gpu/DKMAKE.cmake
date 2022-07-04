@@ -38,12 +38,12 @@ dk_queueCommand(${DKCMAKE_BUILD} ${SDL_CMAKE} ${SDL-GPU})
 
 
 ### COMPILE ###
-#WIN_dk_visualStudio(${SDL-GPU_NAME} SDL_gpu.sln SDL_gpu)
-dk_visualStudio(${SDL-GPU_NAME} SDL_gpu.sln SDL_gpu)
+#WIN_dk_visualStudio(${SDL-GPU_NAME} SDL_gpu)
+dk_visualStudio(${SDL-GPU_NAME} SDL_gpu)
 #MAC_dk_xcode(${SDL-GPU_NAME} SDL_gpu)
 #IOS_dk_xcode(${SDL-GPU_NAME} SDL_gpu)
 #IOSSIM_dk_xcode(${SDL-GPU_NAME} SDL_gpu)
 dk_xcode(${SDL-GPU_NAME} SDL_gpu)
 LINUX_dk_queueCommand(make SDL_gpu)
 RASPBERRY_dk_queueCommand(make SDL_gpu)
-#ANDROID_dk_visualStudio(${SDL-GPU_NAME} SDL_gpu.sln SDL_gpu)
+#ANDROID_dk_visualStudio(${SDL-GPU_NAME} SDL_gpu)

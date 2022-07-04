@@ -51,10 +51,10 @@ dk_setPath(${JERRYSCRIPT}/${BUILD_DIR})
 dk_queueCommand(${DKCMAKE_BUILD} ${JERRYSCRIPT})
 
 
-WIN_dk_visualStudio(${JERRYSCRIPT_NAME} Jerry.sln jerry)
+WIN_dk_visualStudio(${JERRYSCRIPT_NAME} jerry)
 MAC_dk_xcode(${JERRYSCRIPT_NAME} jerry)
 IOS_dk_xcode(${JERRYSCRIPT_NAME} jerry)
 IOSSIM_dk_xcode(${JERRYSCRIPT_NAME} jerry)
 LINUX_dk_queueCommand(make jerry)
 RASPBERRY_dk_queueCommand(make jerry)
-ANDROID_dk_visualStudio(${JERRYSCRIPT_NAME} jerryscript.sln jerryscript)
+ANDROID_dk_visualStudio(${JERRYSCRIPT_NAME} jerryscript)

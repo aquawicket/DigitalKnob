@@ -59,7 +59,7 @@ RASPBERRY_dk_libRelease(${GLEW}/${OS}//${RELEASE_DIR}/lib/libGLEW.a)
 dk_setPath(${GLEW}/${BUILD_DIR})
 
 WIN_dk_queueCommand(${DKCMAKE_BUILD} ${GLEW}/build/cmake)
-WIN_dk_visualStudio(${GLEW_NAME} glew.sln glew_s)
+WIN_dk_visualStudio(${GLEW_NAME} glew_s)
 #dk_copy(${GLEW}/${OS}/lib/${DEBUG_DIR} ${GLEW}/${OS}/CMakeFiles/Export/lib/ OVERWRITE)
 #dk_copy(${GLEW}/${OS}/lib/${RELEASE_DIR} ${GLEW}/${OS}/CMakeFiles/Export/lib/ OVERWRITE)
 #dk_copy(${GLEW}/${OS}/bin/${DEBUG_DIR} ${GLEW}/${OS}/CMakeFiles/Export/bin/ OVERWRITE)
