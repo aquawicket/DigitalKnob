@@ -5,7 +5,7 @@ if(NOT WIN_HOST)
 endif()
 
 
-#dk_depend(jdk)
+#dk_depend(openjdk)
 #dk_depend(android-sdk)
 dk_depend(android-ndk)
 
