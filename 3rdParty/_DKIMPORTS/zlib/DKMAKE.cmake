@@ -31,6 +31,6 @@ dk_queueCommand(${DKCMAKE_BUILD} ${ZLIB})
 
 ### COMPILE ###
 dk_visualStudio(${ZLIB_NAME} zlibstatic) 	# windows, android
-dk_xcode(${ZLIB_NAME} zlibstatic)       			# mac, ios, iossim
+dk_xcode(${ZLIB_NAME} zlibstatic)       	# mac, ios, iossim
 LINUX_dk_queueCommand(make zlibstatic)
 RASPBERRY_dk_queueCommand(make zlibstatic)

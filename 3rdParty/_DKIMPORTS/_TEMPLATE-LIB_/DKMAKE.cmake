@@ -6,9 +6,9 @@ include_guard()
 #dk_depend(libname)
 
 
-### DOWNLOAD ###
-dk_import(https://github.com/organization/package.git)
+### INSTALL ###
 #dk_import(https://organization.com/download/package-1.0.zip)
+dk_import(https://github.com/organization/package.git)
 
 
 ### LINK ###
@@ -26,5 +26,5 @@ dk_queueCommand(${DKCMAKE_BUILD} ${PACKAGE})
 
 ### COMPILE ###
 VISUAL_STUDIO(${PACKAGE_NAME} package)  # WIN_dk_visualStudio(), ANDROID_dk_visualStudio()
-dk_xcode(${PACKAGE_NAME} package) 					# MAC_dk_xcode(), IOS_XCODE, IOSSIM_dk_xcode()
-MAKE(package) 										# LINUX_dk_queueCommand(make), RASPBERRY_dk_queueCommand(make)
+dk_xcode(${PACKAGE_NAME} package) 		# MAC_dk_xcode(), IOS_XCODE, IOSSIM_dk_xcode()
+MAKE(package) 							# LINUX_dk_queueCommand(make), RASPBERRY_dk_queueCommand(make)

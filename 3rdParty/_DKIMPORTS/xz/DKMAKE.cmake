@@ -44,8 +44,6 @@ WIN_dk_set(XZ_CMAKE
 	-DLIBLZMA_INCLUDE_DIR=${XZ}/src/liblzma/api 
 	-DLIBLZMA_LIBRARY_DEBUG=${XZ}/${OS}/${DEBUG_DIR}/liblzma.lib 
 	-DLIBLZMA_LIBRARY_RELEASE=${XZ}/${OS}/${RELEASE_DIR}/liblzma.lib)
-	#-DLIBLZMA_LIBRARY=${XZ}/${OS}/${RELEASE_DIR}/liblzma.lib)
-	#-DLIBLZMA_HAS_AUTO_DECODER=1)
 APPLE_dk_set		(XZ_CMAKE -DCMAKE_C_FLAGS=-DLZMA_API_STATIC -DCMAKE_CXX_FLAGS=-DLZMA_API_STATIC -DLIBLZMA_INCLUDE_DIR=${XZ}/src/liblzma/api -DLIBLZMA_LIBRARY_DEBUG=${XZ}/${OS}/${DEBUG_DIR}/liblzma.a -DLIBLZMA_LIBRARY_RELEASE=${XZ}/${OS}/${RELEASE_DIR}/liblzma.a)
 LINUX_dk_set		(XZ_CMAKE -DCMAKE_C_FLAGS=-DLZMA_API_STATIC -DCMAKE_CXX_FLAGS=-DLZMA_API_STATIC -DLIBLZMA_INCLUDE_DIR=${XZ}/src/liblzma/api -DLIBLZMA_LIBRARY_DEBUG=${XZ}/${OS}/${DEBUG_DIR}/liblzma.a -DLIBLZMA_LIBRARY_RELEASE=${XZ}/${OS}/${RELEASE_DIR}/liblzma.a)
 RASPBERRY_dk_set	(XZ_CMAKE -DCMAKE_C_FLAGS=-DLZMA_API_STATIC -DCMAKE_CXX_FLAGS=-DLZMA_API_STATIC -DLIBLZMA_INCLUDE_DIR=${XZ}/src/liblzma/api -DLIBLZMA_LIBRARY_DEBUG=${XZ}/${OS}/${DEBUG_DIR}/liblzma.a -DLIBLZMA_LIBRARY_RELEASE=${XZ}/${OS}/${RELEASE_DIR}/liblzma.a)
@@ -59,15 +57,9 @@ dk_queueCommand(${DKCMAKE_BUILD} ${XZ})
 
 ### COMPILE ###
 dk_visualStudio(${XZ_NAME} liblzma)
-#WIN_dk_visualStudio(${XZ_NAME} liblzma)
 dk_xcode(${XZ_NAME} liblzma)
-#MAC_dk_xcode(${XZ_NAME} liblzma)
-#IOS_dk_xcode(${XZ_NAME} liblzma)
-#IOSSIM_dk_xcode(${XZ_NAME} liblzma)
 LINUX_dk_queueCommand(make liblzma)
-RASPBERRY_dk_queueCommand(make liblzma)
-#ANDROID_dk_visualStudio(${XZ_NAME} liblzma)	
-############################################################
+RASPBERRY_dk_queueCommand(make liblzma)	
 
 
 #FIXME
