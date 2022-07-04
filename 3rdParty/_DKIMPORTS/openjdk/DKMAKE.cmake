@@ -18,9 +18,6 @@ MAC_HOST_dk_import(https://download.java.net/java/GA/jdk9/9.0.4/binaries/openjdk
 LINUX_HOST_dk_set(OPENJDK_VERSION 9.0.4)
 LINUX_HOST_dk_import(https://download.java.net/java/GA/jdk9/9.0.4/binaries/openjdk-9.0.4_linux-x64_bin.tar.gz)
 
-#dk_set(OPENJDK_NAME openjdk-${OPENJDK_VERSION})
-#dk_set(OPENJDK ${3RDPARTY}/${OPENJDK_NAME})
-#dk_import(${OPENJDK_DL} ${OPENJDK} PATCH)
 
 ### LINK ###
 dk_include(${OPENJDK}/)	
