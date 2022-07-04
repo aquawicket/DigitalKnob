@@ -1,5 +1,6 @@
 # https://github.com/thestk/rtmidi
 
+WIN_dk_depend(winmm.lib)
 
 #dk_import(http://www.music.mcgill.ca/~gary/rtmidi/release/rtmidi-2.1.0.tar.gz PATCH)
 #dk_set(RTMIDI_SLN Project.sln)
@@ -10,12 +11,11 @@ dk_set(RTMIDI_TARGET rtmidi)
 
 
 ### LINK ###
-dk_include(${RTMIDI})
-WIN_dk_depend(winmm.lib)
 APPLE_dk_define(__MACOSX_CORE__)
 if(LINUX OR RASPBERRY OR ANDROID)
 	dk_define(__LINUX_ALSA__)
 endif()
+dk_include(${RTMIDI})
 WIN_dk_libDebug(${RTMIDI}/${OS}/${DEBUG_DIR}/RtMidi.lib)
 WIN_dk_libRelease(${RTMIDI}/${OS}/${RELEASE_DIR}/RtMidi.lib)
 MAC_dk_libDebug(${RTMIDI}/${OS}/${DEBUG_DIR}/libRtMidi.a)
