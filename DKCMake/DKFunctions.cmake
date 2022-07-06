@@ -82,7 +82,7 @@ endfunction()
 #	@name		-The input MARKER name for the parameter
 #	RESULT		-The value of the next parameter after the ID
 macro(dk_getParameter name RESULT)
-	dk_debug("dk_getParameter(${name})")
+	#DKDEBUGFUNC(${ARGV})
 	set(index 1)
 	foreach(arg ${ARGV})
 		if("${ARGV${index}}" STREQUAL "${name}")
