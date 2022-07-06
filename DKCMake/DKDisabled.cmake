@@ -178,6 +178,7 @@ endif()
 
 if(IOS OR IOSSIM)
 	dk_disable(agl)
+	dk_disable(android-build-tools)
 	dk_disable(boost)
 	dk_disable(boxer)
 	dk_disable(bzip2)
