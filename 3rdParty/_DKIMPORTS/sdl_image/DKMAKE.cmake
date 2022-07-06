@@ -81,9 +81,8 @@ dk_queueCommand	(${DKCMAKE_BUILD} -DSDLIMAGE_SUPPORT_GIF=ON -DSDLIMAGE_SUPPORT_J
 ### COMPILE ###
 dk_visualStudio				(${SDL_IMAGE_NAME} SDLIMAGE)
 dk_xcode					(${SDL_IMAGE_NAME} SDLIMAGE)
-LINUX_dk_queueCommand		(make SDL2_image)
-RASPBERRY_dk_queueCommand	(make SDL2_image)	
-#ANDROID_dk_visualStudio	(${SDL_IMAGE_NAME} SDL2_image)
+LINUX_dk_queueCommand		(make SDLIMAGE)
+RASPBERRY_dk_queueCommand	(make SDLIMAGE)
 
 # fatal error LNK1104: cannot open file 'C:\Users\Administrator\digitalknob\DK\3rdParty\sdl_image-main\win32\Debug\SDL2_image-staticd.lib'
 # C:\Users\Administrator\digitalknob\DK\3rdParty\SDL_image-main\win32\lib\Debug
