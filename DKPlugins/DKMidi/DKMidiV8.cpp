@@ -24,14 +24,14 @@
 * SOFTWARE.
 */
 
+#ifdef HAVE_rtmidi
 #ifdef HAVE_DKCef
+
 #include "DK/DKApp.h"
 #include "DKMidi/DKMidi.h"
 #include "DKMidi/DKMidiV8.h"
 
-/////////////////////
-bool DKMidiV8::Init()
-{
+bool DKMidiV8::Init(){
 	DKDEBUGFUNC();
 	DKV8::AttachFunction("DKMidi_GetMidiInputs", DKMidiV8::GetMidiInputs);
 	DKV8::AttachFunction("DKMidi_GetMidiOutputs", DKMidiV8::GetMidiOutputs);
@@ -41,17 +41,12 @@ bool DKMidiV8::Init()
 	return true;
 }
 
-////////////////////
-bool DKMidiV8::End()
-{
+bool DKMidiV8::End(){
 	DKDEBUGFUNC();
 	return true;
 }
 
-
-////////////////////////////////////////////////////////////
-bool DKMidiV8::GetMidiInputs(CefArgs args, CefReturn retval)
-{
+bool DKMidiV8::GetMidiInputs(CefArgs args, CefReturn retval){
 	DKDEBUGFUNC(args, retval);
 	DKMidi::Instance("DKMidi");
 	DKStringArray inputs;
@@ -61,9 +56,7 @@ bool DKMidiV8::GetMidiInputs(CefArgs args, CefReturn retval)
 	return true;
 }
 
-/////////////////////////////////////////////////////////////
-bool DKMidiV8::GetMidiOutputs(CefArgs args, CefReturn retval)
-{
+bool DKMidiV8::GetMidiOutputs(CefArgs args, CefReturn retval){
 	DKDEBUGFUNC(args, retval);
 	DKMidi::Instance("DKMidi");
 	DKStringArray outputs;
@@ -73,14 +66,11 @@ bool DKMidiV8::GetMidiOutputs(CefArgs args, CefReturn retval)
 	return true;
 }
 
-///////////////////////////////////////////////////////
-bool DKMidiV8::SendMidi(CefArgs args, CefReturn retval)
-{
+bool DKMidiV8::SendMidi(CefArgs args, CefReturn retval){
 	DKDEBUGFUNC(args, retval);
 	int var1 = args->GetInt(0);
 	int var2 = args->GetInt(1);
 	int var3 = args->GetInt(2);
-
 	std::vector<unsigned char> message;
 	message.push_back(var1);
 	message.push_back(var2);
@@ -89,18 +79,14 @@ bool DKMidiV8::SendMidi(CefArgs args, CefReturn retval)
 	return true;
 }
 
-//////////////////////////////////////////////////////////////
-bool DKMidiV8::ToggleMidiInput(CefArgs args, CefReturn retval)
-{
+bool DKMidiV8::ToggleMidiInput(CefArgs args, CefReturn retval){
 	DKDEBUGFUNC(args, retval);
 	DKString input = args->GetString(0);
 	if(!DKMidi::Instance("DKMidi")->ToggleInput(input)){ return false; }
 	return true;
 }
 
-///////////////////////////////////////////////////////////////
-bool DKMidiV8::ToggleMidiOutput(CefArgs args, CefReturn retval)
-{
+bool DKMidiV8::ToggleMidiOutput(CefArgs args, CefReturn retval){
 	DKDEBUGFUNC(args, retval);
 	DKString output = args->GetString(0);
 	if(!DKMidi::Instance("DKMidi")->ToggleOutput(output)){ return false; }
@@ -108,3 +94,4 @@ bool DKMidiV8::ToggleMidiOutput(CefArgs args, CefReturn retval)
 }
 
 #endif //HAVE_DKCef
+#endif //HAVE_rtmidi

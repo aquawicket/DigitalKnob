@@ -166,7 +166,7 @@ if(MAC)  # Disabled on Mac host machines
 	dk_disable(openssl)
 	dk_disable(openssl_binary)
 	dk_disable(podofo)
-	#dk_disable(rtmidi)
+	dk_disable(rtmidi)
 	dk_disable(sdl-gpu)
 	dk_disable(smpeg2)
 	dk_disable(tesseract)

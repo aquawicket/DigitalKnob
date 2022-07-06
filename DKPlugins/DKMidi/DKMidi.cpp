@@ -24,6 +24,8 @@
 * SOFTWARE.
 */
 
+#ifdef HAVE_rtmidi
+
 #include "DK/stdafx.h"
 #include "DK/DKFile.h"
 #include "DKMidi/DKMidi.h"
@@ -32,7 +34,6 @@ bool DKMidi::Init(){
 	DKDEBUGFUNC();
 	DKClass::DKCreate("DKMidiJS");
 	DKClass::DKCreate("DKMidiV8");
-	
 	midiin = new RtMidiIn();
 	midiout = new RtMidiOut();
 	DKString inputs;
@@ -41,7 +42,6 @@ bool DKMidi::Init(){
 	DKString outputs;
 	DKFile::GetSetting(DKFile::local_assets+"USER/midi.txt", "[MIDIOUT]", outputs);
 	ToggleOutput(outputs);
-
 	midiin->setCallback(&DKMidi::midiCallback,(void *)this);
 	return true;
 }
@@ -53,51 +53,35 @@ bool DKMidi::End(){
 	return true;
 }
 
-/////////////////////////////////////////////
-bool DKMidi::GetInputs(DKStringArray& inputs)
-{
+bool DKMidi::GetInputs(DKStringArray& inputs){
 	DKDEBUGFUNC("DKStringArray&");
 	unsigned int nPorts = midiin->getPortCount();
-	if(nPorts == 0){
-		DKERROR("No Input ports available!\n");
-		return false;
-	}
-
+	if(nPorts == 0)
+		return DKERROR("No Input ports available!\n");
 	inputs.clear();
 	for(unsigned int i=0; i<nPorts; ++i){
 		inputs.push_back(midiin->getPortName(i));
 	}
-
 	return true;
 }
 
-///////////////////////////////////////////////
-bool DKMidi::GetOutputs(DKStringArray& outputs)
-{
+bool DKMidi::GetOutputs(DKStringArray& outputs){
 	DKDEBUGFUNC("DKStringArray&");
 	unsigned int nPorts = midiout->getPortCount();
-	if(nPorts == 0){
-		DKERROR("No Output ports available\n");
-		return false;
-	}
-
+	if(nPorts == 0)
+		return DKERROR("No Output ports available\n");
 	outputs.clear();
 	for(unsigned int i=0; i<nPorts; ++i){
 		outputs.push_back(midiout->getPortName(i));
 	}
-
 	return true;
 }
 
-//////////////////////////
-bool DKMidi::PrintInputs()
-{
+bool DKMidi::PrintInputs(){
 	DKDEBUGFUNC();
 	unsigned int nPorts = midiin->getPortCount();
-	if(nPorts == 0){
-		DKERROR("No Input ports available\n");
-		return false;
-	}
+	if(nPorts == 0)
+		return DKERROR("No Input ports available\n");
 	DKINFO("\nMIDI Input Ports\n");
 	DKINFO("----------------\n");
 	for(unsigned int i=0; i<nPorts; ++i){
@@ -107,15 +91,11 @@ bool DKMidi::PrintInputs()
 	return true;
 }
 
-///////////////////////////
-bool DKMidi::PrintOutputs()
-{
+bool DKMidi::PrintOutputs(){
 	DKDEBUGFUNC();
 	unsigned int nPorts = midiout->getPortCount();
-	if(nPorts == 0){
-		DKERROR("No Output ports available\n");
-		return false;
-	}
+	if(nPorts == 0)
+		return DKERROR("No Output ports available\n");
 	DKINFO("MIDI Output Ports\n");
 	DKINFO("-----------------\n");
 	for(unsigned int i=0; i<nPorts; ++i){
@@ -125,9 +105,7 @@ bool DKMidi::PrintOutputs()
 	return true;
 }
 
-//////////////////////////////////////////////
-bool DKMidi::ToggleInput(const DKString& name)
-{
+bool DKMidi::ToggleInput(const DKString& name){
 	DKDEBUGFUNC(name);
 	for(unsigned int i=0; i<midiin->getPortCount(); ++i){
 		if(same(name,midiin->getPortName(i))){
@@ -139,9 +117,7 @@ bool DKMidi::ToggleInput(const DKString& name)
 	return false;
 }
 
-///////////////////////////////////////////////
-bool DKMidi::ToggleOutput(const DKString& name)
-{
+bool DKMidi::ToggleOutput(const DKString& name){
 	DKDEBUGFUNC(name);
 	for(unsigned int i=0; i<midiout->getPortCount(); ++i){
 		if(same(name,midiout->getPortName(i))){
@@ -153,10 +129,7 @@ bool DKMidi::ToggleOutput(const DKString& name)
 	return false;
 }
 
-
-////////////////////////////////////////////////////////////////////////////////////////////////
-void DKMidi::midiCallback(double deltatime, std::vector<unsigned char>* message, void *userData)
-{
+void DKMidi::midiCallback(double deltatime, std::vector<unsigned char>* message, void *userData){
 	//DKDEBUGFUNC(deltatime, "std::vector<unsigned char>*", userData);
 	/*
 	unsigned int nBytes = message->size();
@@ -165,7 +138,6 @@ void DKMidi::midiCallback(double deltatime, std::vector<unsigned char>* message,
 	if ( nBytes > 0 )
 		std::cout << "stamp = " << deltatime << std::endl;
 	*/
-
 	if(message->size() > 2){
 		DKEvents::SendEvent("window", "midi", toString((int)message->at(0))+","+toString((int)message->at(1))+","+toString((int)message->at(2)) );
 	}
@@ -173,3 +145,5 @@ void DKMidi::midiCallback(double deltatime, std::vector<unsigned char>* message,
 		DKEvents::SendEvent("window", "midi", toString((int)message->at(0))+","+toString((int)message->at(1))+",0");
 	}
 }
+
+#endif //HAVE_rtmidi
