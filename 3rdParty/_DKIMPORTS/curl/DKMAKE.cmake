@@ -10,8 +10,8 @@ dk_depend			(zlib)
 dk_depend			(openssl)
 
 
-dk_import(https://github.com/curl/curl/archive/refs/tags/curl-7_43_0.zip)
-#dk_import(https://github.com/curl/curl.git)
+#dk_import(https://github.com/curl/curl/archive/refs/tags/curl-7_43_0.zip)
+dk_import(https://github.com/curl/curl.git)
 
 
 ### LINK ###
@@ -34,7 +34,7 @@ ANDROID_dk_libRelease	(${CURL}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/libcur
 
 ### GENERATE ###
 dk_setPath(${CURL}/${BUILD_DIR})
-WIN_dk_queueCommand			(${DKCMAKE_BUILD} -DCURL_STATICLIB=ON -DBUILD_CURL_EXE=OFF -DBUILD_CURL_TESTS=OFF ${OPENSSL_CMAKE} ${ZLIB_CMAKE} ${CURL})
+WIN_dk_queueCommand			(${DKCMAKE_BUILD} -DCURL_STATICLIB=ON -DBUILD_CURL_EXE=OFF -DBUILD_CURL_TESTS=OFF -DCURL_USE_OPENSSL=OFF ${OPENSSL_CMAKE} ${ZLIB_CMAKE} ${CURL})
 MAC_dk_queueCommand			(${DKCMAKE_BUILD} -DCURL_STATICLIB=ON -DBUILD_CURL_EXE=OFF -DBUILD_CURL_TESTS=OFF -DCURL_DISABLE_LDAP=ON -DCMAKE_USE_OPENSSL=OFF ${ZLIB_CMAKE} ${CURL})
 IOS_dk_queueCommand			(${DKCMAKE_BUILD} -DCURL_STATICLIB=ON -DBUILD_CURL_EXE=OFF -DBUILD_CURL_TESTS=OFF -DCURL_DISABLE_LDAP=ON -DCMAKE_USE_OPENSSL=OFF -DHAVE_POSIX_STRERROR_R=1 ${ZLIB_CMAKE} ${CURL})
 IOSSIM_dk_queueCommand		(${DKCMAKE_BUILD} -DCURL_STATICLIB=ON -DBUILD_CURL_EXE=OFF -DBUILD_CURL_TESTS=OFF -DCURL_DISABLE_LDAP=ON -DCMAKE_USE_OPENSSL=OFF -DHAVE_POSIX_STRERROR_R=0 ${ZLIB_CMAKE} ${CURL})
