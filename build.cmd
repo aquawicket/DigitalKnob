@@ -23,20 +23,18 @@ ECHO.
 ECHO 1. Git Update
 ECHO 2. Git Commit
 ECHO 3. DKBuilder
-ECHO 4. DKSDLRmlUi
-ECHO 5. DKTestAll
-ECHO 6. Clear Screen
-ECHO 7. Exit
+ECHO 4. DKTestAll
+ECHO 5. Clear Screen
+ECHO 6. Exit
 set choice=
 set /p choice=Please select an app to build: 
 if not '%choice%'=='' set choice=%choice:~0,1%
 if '%choice%'=='1' goto gitupdate
 if '%choice%'=='2' goto gitcommit
 if '%choice%'=='3' goto dkbuilder
-if '%choice%'=='4' goto dksdlrmlui
-if '%choice%'=='5' goto dktestall
-if '%choice%'=='6' goto clearscreen
-if '%choice%'=='7' goto end
+if '%choice%'=='4' goto dktestall
+if '%choice%'=='5' goto clearscreen
+if '%choice%'=='6' goto end
 ECHO "%choice%" is not valid, try again
 goto pickapp
 
@@ -99,10 +97,6 @@ goto pickapp
 
 :dkbuilder
 set APP=DKBuilder
-goto pickos
-
-:dksdlrmlui
-set APP=DKSDLRmlUi
 goto pickos
 
 :dktestall
