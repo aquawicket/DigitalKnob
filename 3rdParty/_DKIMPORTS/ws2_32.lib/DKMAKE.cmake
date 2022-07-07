@@ -3,5 +3,4 @@ if(NOT WIN_HOST)
 	return()
 endif()
 
-
-WIN_dk_findLibrary(ws2_32.lib)
+dk_findLibrary(ws2_32.lib)
