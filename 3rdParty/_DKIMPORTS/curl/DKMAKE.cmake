@@ -5,6 +5,7 @@
 
 
 dk_depend(ws2_32.lib)
+dk_depend(core_foundation)
 dk_depend(dl)
 dk_depend(zlib)
 dk_depend(openssl)
