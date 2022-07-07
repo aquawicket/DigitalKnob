@@ -273,16 +273,27 @@ endmacro()
 function(dk_set variable value)
 	DKDEBUGFUNC(${ARGV})
 	set(${variable} ${value} ${ARGN} CACHE INTERNAL "")
-	
 #	###### print library versions ############
 #	dk_includes(${variable} "_VERSION" includes)
 #	if(${includes})
 #		dk_info("${variable}: ${value}")
 #	endif()
 #	##########################################
-
 endfunction()
 dk_createOsMacros("dk_set")
+
+
+###############################################################################
+# dk_append(variable value)
+#
+#	@variable	- The name of a variable to declair
+#	@value		- The value to add to the variable.
+#
+function(dk_append variable value)
+	DKDEBUGFUNC(${ARGV})
+	set(${variable} "${${variable}} ${value} ${ARGN}" CACHE INTERNAL "")
+endfunction()
+dk_createOsMacros("dk_append")
 
 
 ###############################################################################
@@ -1913,15 +1924,18 @@ dk_createOsMacros("dk_ndk" "NO_DEBUG_RELEASE_TAGS")
 
 
 ###############################################################################
-# dk_make(lib)
+# dk_make(foleder lib)
 #
 #	TODO
 #
 #	@lib	- TODO
 #
-function(dk_make lib)
+function(dk_make folder lib)
 	DKDEBUGFUNC(${ARGV})
-	dk_queueCommand(make ${ARGV})
+	if(LINUX OR RASPBERRY)
+		dk_set(CURRENT_DIR ${3RDPARTY}/${folder}/${BUILD_DIR})
+		dk_queueCommand(make ${ARGV})
+	endif()
 endfunction()
 
 
