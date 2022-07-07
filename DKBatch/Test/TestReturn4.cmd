@@ -22,22 +22,11 @@
 :: OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 :: SOFTWARE.
 
-%DKBATCH%
-:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-:getKey output
-::
-:: getKey: get the character code of the next keystroke
-::
-:: output: variable(by ref) to receive the value
-::
-:: Example:  call getKey rval & echo getKey returned: %rval%
-:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-set "output=undefined"
-@echo off
-set /p "=> Single Key Prompt? " <nul
-PowerShell Exit($host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown').VirtualKeyCode);
-set "output=%ErrorLevel%"
-::echo KeyCode = %ErrorLevel%
-::pause
-endlocal & set "%1=%output%"
-%DKEND%
+%dkbatch%
+
+echo got %1, adding 4 more.
+echo I'm gonna return it to TestRetrun3
+
+set /A %0=%1+4  
+  
+%DKEND% 

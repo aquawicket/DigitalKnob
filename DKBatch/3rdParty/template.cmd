@@ -22,22 +22,14 @@
 :: OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 :: SOFTWARE.
 
-%DKBATCH%
-:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-:getKey output
-::
-:: getKey: get the character code of the next keystroke
-::
-:: output: variable(by ref) to receive the value
-::
-:: Example:  call getKey rval & echo getKey returned: %rval%
-:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-set "output=undefined"
-@echo off
-set /p "=> Single Key Prompt? " <nul
-PowerShell Exit($host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown').VirtualKeyCode);
-set "output=%ErrorLevel%"
-::echo KeyCode = %ErrorLevel%
-::pause
-endlocal & set "%1=%output%"
-%DKEND%
+:myFunctionName    -- function description here
+::                 -- %~1: argument description here
+SETLOCAL
+REM.--function body here
+set LocalVar1=...
+set LocalVar2=...
+(ENDLOCAL & REM -- RETURN VALUES
+    IF "%~1" NEQ "" SET %~1=%LocalVar1%
+    IF "%~2" NEQ "" SET %~2=%LocalVar2%
+)
+GOTO:EOF

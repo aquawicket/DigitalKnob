@@ -24,20 +24,18 @@
 
 %DKBATCH%
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-:getKey output
+:GetDirectories path
 ::
-:: getKey: get the character code of the next keystroke
+:: GetDirectories: List the directories in the given path
 ::
-:: output: variable(by ref) to receive the value
+:: path:  The path to list the directories in
 ::
-:: Example:  call getKey rval & echo getKey returned: %rval%
+:: Example:  call GetDirectories C:/Windows/Sysem32
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-set "output=undefined"
-@echo off
-set /p "=> Single Key Prompt? " <nul
-PowerShell Exit($host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown').VirtualKeyCode);
-set "output=%ErrorLevel%"
-::echo KeyCode = %ErrorLevel%
-::pause
-endlocal & set "%1=%output%"
+set "path=%~1"
+
+setlocal enabledelayedexpansion
+for /d %%D in (%path%*) do ( set "folders=!folders!;%%D" ) 
+endlocal & set "%1==%folders%"
+
 %DKEND%

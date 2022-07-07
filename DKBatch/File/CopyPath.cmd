@@ -23,21 +23,21 @@
 :: SOFTWARE.
 
 %DKBATCH%
-:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-:getKey output
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+:CopyPath path
 ::
-:: getKey: get the character code of the next keystroke
+:: CosyPath: Automatically turns / slashes into backslashes and creates directories as needed
+:: This is just for compatability and will not change your variables
 ::
-:: output: variable(by ref) to receive the value
+:: path:  The path to the directory to create
 ::
-:: Example:  call getKey rval & echo getKey returned: %rval%
-:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-set "output=undefined"
-@echo off
-set /p "=> Single Key Prompt? " <nul
-PowerShell Exit($host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown').VirtualKeyCode);
-set "output=%ErrorLevel%"
-::echo KeyCode = %ErrorLevel%
-::pause
-endlocal & set "%1=%output%"
+:: Example:  call MakeDirectory C:/Test/Folder
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+set "src=%~1"
+set "dest=%~2"
+set "src=%src:/=\%"
+set "dest=%dest:/=\%"
+echo f | xcopy /f "%src%" "%dest%"
+%IF_ERROR% ""
+
 %DKEND%

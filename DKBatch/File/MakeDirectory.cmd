@@ -24,20 +24,19 @@
 
 %DKBATCH%
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-:getKey output
+:MakeDirectory path
 ::
-:: getKey: get the character code of the next keystroke
+:: MakeDirectory: Automatically turns / slashes into backslashes to create directories
+:: This is just for compatability and will not change your variables
 ::
-:: output: variable(by ref) to receive the value
+:: path:  The path to the directory to create
 ::
-:: Example:  call getKey rval & echo getKey returned: %rval%
+:: Example:  call MakeDirectory C:/Test/Folder
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-set "output=undefined"
-@echo off
-set /p "=> Single Key Prompt? " <nul
-PowerShell Exit($host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown').VirtualKeyCode);
-set "output=%ErrorLevel%"
-::echo KeyCode = %ErrorLevel%
-::pause
-endlocal & set "%1=%output%"
+set "path=%~1"
+set "path=%path:/=\%"
+if not exist "%path%" ( mkdir "%path%" )
+::else ( echo %n~0(%*): path already exists )
+
+endlocal
 %DKEND%

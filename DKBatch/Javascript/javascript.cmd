@@ -22,22 +22,23 @@
 :: OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 :: SOFTWARE.
 
+@if (@X)==(@Y) @end /* 
+
+
+:: ******* BATCH SCRIPT HERE *********
 %DKBATCH%
-:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-:getKey output
-::
-:: getKey: get the character code of the next keystroke
-::
-:: output: variable(by ref) to receive the value
-::
-:: Example:  call getKey rval & echo getKey returned: %rval%
-:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-set "output=undefined"
 @echo off
-set /p "=> Single Key Prompt? " <nul
-PowerShell Exit($host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown').VirtualKeyCode);
-set "output=%ErrorLevel%"
-::echo KeyCode = %ErrorLevel%
-::pause
-endlocal & set "%1=%output%"
+echo This is Batch script (.bat)
+echo:
+cscript //nologo //E:jscript %0 %*
 %DKEND%
+exit /b
+
+
+
+********* Javascript Here **********/
+WScript.Echo("This is javascript (WScript)");
+//var fso = new ActiveXObject("Scripting.FileSystemObject");
+//WScript.Echo(fso.FolderExists("C:\\windows").toString());
+//fso = null;
+  

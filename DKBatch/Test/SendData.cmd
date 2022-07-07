@@ -24,20 +24,16 @@
 
 %DKBATCH%
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-:getKey output
+:SendData input
 ::
-:: getKey: get the character code of the next keystroke
+:: Func: Takes a parameter and prints the value to the screen
 ::
-:: output: variable(by ref) to receive the value
+:: input: The value to send to this function
 ::
-:: Example:  call getKey rval & echo getKey returned: %rval%
+:: Example:  call SendData apple
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-set "output=undefined"
-@echo off
-set /p "=> Single Key Prompt? " <nul
-PowerShell Exit($host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown').VirtualKeyCode);
-set "output=%ErrorLevel%"
-::echo KeyCode = %ErrorLevel%
-::pause
-endlocal & set "%1=%output%"
+set "input=%1"
+echo    SendData received the value: %input%
+endlocal
+
 %DKEND%

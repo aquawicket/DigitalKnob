@@ -24,20 +24,32 @@
 
 %DKBATCH%
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-:getKey output
+:AppendEnvPath path result
 ::
-:: getKey: get the character code of the next keystroke
+:: Func: Appends a path to the %PATH% environment variable
 ::
-:: output: variable(by ref) to receive the value
+:: path:  a string containing the new path
 ::
-:: Example:  call getKey rval & echo getKey returned: %rval%
+:: Example:  call AppendEnvPath C:\Windows\System32 result
+::           echo AppendEnvPath returned: %result%
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-set "output=undefined"
-@echo off
-set /p "=> Single Key Prompt? " <nul
-PowerShell Exit($host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown').VirtualKeyCode);
-set "output=%ErrorLevel%"
-::echo KeyCode = %ErrorLevel%
-::pause
-endlocal & set "%1=%output%"
+set "path=%~1"
+if %DEBUG%==1 echo AppendEnvPath(path: %path%)
+
+call Contains "%PATH%\" "%path%" result
+
+if not "%result%" == "1" (
+	setx PATH "%PATH%";"%path%" >nul
+)
+
+if not "%ERRORLEVEL%" == "0" (
+	echo ERROR:%ERRORLEVEL% & goto :EOF
+)
+
+if %DEBUG%==1 (
+	echo AppendEnvPath result: %result%
+)
+endlocal & set "%3=%result%"
+
+
 %DKEND%

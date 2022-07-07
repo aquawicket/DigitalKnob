@@ -24,20 +24,24 @@
 
 %DKBATCH%
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-:getKey output
+:EndProcess process error
 ::
-:: getKey: get the character code of the next keystroke
+:: Func:  Kill a process by process name
 ::
-:: output: variable(by ref) to receive the value
+:: process:  the name of the task to kill.  I.E. cale.exe
+:: error:    the error code if any
 ::
-:: Example:  call getKey rval & echo getKey returned: %rval%
+:: Example:  call EndProcess iexplore.exe error
+::           echo EndProcess returned: %error%
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-set "output=undefined"
-@echo off
-set /p "=> Single Key Prompt? " <nul
-PowerShell Exit($host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown').VirtualKeyCode);
-set "output=%ErrorLevel%"
-::echo KeyCode = %ErrorLevel%
-::pause
-endlocal & set "%1=%output%"
+if "%~1"=="" (
+	echo ERROR: arg1 "process" invalid
+	goto :EOF
+)
+set "process=%~1"
+
+tasklist /fi "imagename eq %process%" |find ":" >nul
+if errorlevel 1 taskkill /f /im "%process%
+
+
 %DKEND%

@@ -24,20 +24,20 @@
 
 %DKBATCH%
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-:getKey output
+:Contains "string" "searchVal" result
 ::
-:: getKey: get the character code of the next keystroke
+:: Func: returns true if searchVal is in string
 ::
-:: output: variable(by ref) to receive the value
-::
-:: Example:  call getKey rval & echo getKey returned: %rval%
+:: Example:  call Contains boy "see the boy run" result
+::           echo Contains returned: %result%
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-set "output=undefined"
-@echo off
-set /p "=> Single Key Prompt? " <nul
-PowerShell Exit($host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown').VirtualKeyCode);
-set "output=%ErrorLevel%"
-::echo KeyCode = %ErrorLevel%
-::pause
-endlocal & set "%1=%output%"
+set string=%~1
+set searchVal=%~2
+if %DEBUG%==1 echo Contains(string: %string%;  searchVal: %searchVal%;  result: %result%) & echo:
+set result=0
+if not "x!string:%searchVal%=!"=="x%string%" set result=1
+if "%string%"=="" set result=0
+if %DEBUG%==1 echo Contains()result: %result% & echo:
+endlocal & set %3=%result%
+
 %DKEND%

@@ -24,20 +24,17 @@
 
 %DKBATCH%
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-:getKey output
+:Sleep seconds
 ::
-:: getKey: get the character code of the next keystroke
+:: Func: Suspends batch execution for a number of seconds.
 ::
-:: output: variable(by ref) to receive the value
-::
-:: Example:  call getKey rval & echo getKey returned: %rval%
+:: Args: %1 Number of seconds to wait for (by val)
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-set "output=undefined"
-@echo off
-set /p "=> Single Key Prompt? " <nul
-PowerShell Exit($host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown').VirtualKeyCode);
-set "output=%ErrorLevel%"
-::echo KeyCode = %ErrorLevel%
-::pause
-endlocal & set "%1=%output%"
+set /a n=%1+1
+echo Sleeping for %1 seconds . . .
+ping -n %n% 127.0.0.1 >nul
+endlocal 
+
+
+:end
 %DKEND%
