@@ -3685,7 +3685,6 @@ function(dk_importDownload url) #install_path #PATCH
 		dk_assert("${LIBVAR}_DL invalid")
 	endif()
 	
-	
 	dk_install(${${LIBVAR}_DL} ${${LIBVAR}} ${${LIBVAR}_FOLDER} ${ARGN})
 
 endfunction()
@@ -3697,11 +3696,11 @@ function(dk_import2 url)
 	dk_importVariables(${ARGV} plugin)
 	string(TOUPPER ${plugin} plugin_var)
 	
-	dk_debug("[${plugin_var}] 			= ${${plugin_var}}")
-	dk_debug("[${plugin_var}_URL] 		= ${${plugin_var}_URL}")
-	dk_debug("[${plugin_var}_VERSION] 	= ${${plugin_var}_VERSION}")
-	dk_debug("[${plugin_var}_FOLDER] 	= ${${plugin_var}_FOLDER}")
-	dk_debug("[${plugin_var}_BRANCH] 	= ${${plugin_var}_BRANCH}")
+	dk_verbose("[${plugin_var}] 		= ${${plugin_var}}")
+	dk_verbose("[${plugin_var}_URL] 	= ${${plugin_var}_URL}")
+	dk_verbose("[${plugin_var}_VERSION] = ${${plugin_var}_VERSION}")
+	dk_verbose("[${plugin_var}_FOLDER] 	= ${${plugin_var}_FOLDER}")
+	dk_verbose("[${plugin_var}_BRANCH] 	= ${${plugin_var}_BRANCH}")
 
 	### .git
 	dk_getExtension(${url} extension)
