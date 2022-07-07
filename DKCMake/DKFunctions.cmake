@@ -82,6 +82,7 @@ endfunction()
 #
 #	@name		-The input MARKER name for the parameter
 #	@RESULT		-The value of the next parameter after the ID
+#
 macro(dk_getParameter name RESULT)
 	#DKDEBUGFUNC(${ARGV})
 	set(index 1)
@@ -287,7 +288,7 @@ dk_createOsMacros("dk_set")
 ###############################################################################
 # dk_unset(variable)
 #
-#	TODO
+#	Remove a variable definition. will become undefined. 
 #
 #	@variable	- The name of the variable to unset
 #
@@ -336,29 +337,25 @@ endmacro()
 
 
 ##############################################################################
-# dk_wait()
+# dk_wait([timeout] [msg])
 # 
 #	Wait until a keypress or timeout has elapsed in seconds
 #
-#	@ARGV0:timeout (Optional)	- default = 60
-#	@ARGV1:msg     (Optional)	- default = "press and key to continue."
+#	@timeout:(Optional)	- default = 60
+#	@msg:(Optional)		- default = "press and key to continue."
 #
 macro(dk_wait) 
 	DKDEBUGFUNC(${ARGV})
-	set(argv_0 ${ARGV0})
-	set(argv_1 ${ARGV1})
+	set(timeout ${ARGV0})
+	set(msg ${ARGV1})
 	
-	dk_isNumber(argv_0 isNumber)
-	if(isNumber)
-		set(timeout ${argv_0})
-	else()
+	dk_isNumber(timeout isNumber)
+	if(NOT isNumber)
 		set(timeout 60) # default
 	endif()
 	
-	if(NOT argv_1)
+	if(NOT msg)
 		set(msg "press and key to continue.") # default
-	else()
-		set(msg ${argv_1})
 	endif()
 
 	if(${timeout} GREATER 0)
@@ -394,23 +391,24 @@ macro(dk_dump variable)
 		dk_getFilename(${CMAKE_CURRENT_FUNCTION_LIST_FILE} FILENAME)
 	endif()
 	if(NOT DEFINED ${variable})
-		dk_error("variable not defined. The correct syntax is \"DUMP(variable_name)\", using the variable name")
-		dk_error("dk_dump(variable): CORRECT SYNTAX        DUMP(\${variable}): INCORRECT SYNTAX")
-	endif()
-	dk_info("${FILENAME}:${CMAKE_CURRENT_FUNCTION_LIST_LINE} -> ${CMAKE_CURRENT_FUNCTION}(${ARGV})")
-	list(LENGTH ${variable} variableLength)
-	if(${variableLength} GREATER 1)
-		set(variableType "list")
-	elseif(variable MATCHES "^[0-9]+$")
-		set(variableType "number")
+		dk_error("variable not defined. The syntax may be incorrect if using brackets - > \$ { variable } ")
+		dk_info("${green} dk_dump(variable): <- CORRECT SYNTAX ${CLR}")
 	else()
-		set(variableType "string")
+		dk_info("${FILENAME}:${CMAKE_CURRENT_FUNCTION_LIST_LINE} -> ${CMAKE_CURRENT_FUNCTION}(${ARGV})")
+		list(LENGTH ${variable} variableLength)
+		if(${variableLength} GREATER 1)
+			set(variableType "list")
+		elseif(variable MATCHES "^[0-9]+$")
+			set(variableType "number")
+		else()
+			set(variableType "string")
+		endif()
+		message(STATUS "${cyan}   NAME:    ${variable} ${CLR}")
+		message(STATUS "${cyan}   TYPE:    ${variableType} ${CLR}")
+		message(STATUS "${cyan}   LENGTH:  ${variableLength} ${CLR}")
+		message(STATUS "${cyan}   VALUE:   ${${variable}} ${CLR}")
+		message(STATUS "${cyan}############################################################################################${CLR}\n")
 	endif()
-	message(STATUS "${cyan}   NAME:    ${variable} ${CLR}")
-	message(STATUS "${cyan}   TYPE:    ${variableType} ${CLR}")
-	message(STATUS "${cyan}   LENGTH:  ${variableLength} ${CLR}")
-	message(STATUS "${cyan}   VALUE:   ${${variable}} ${CLR}")
-	message(STATUS "${cyan}############################################################################################${CLR}\n")
 	dk_wait()
 endmacro()
 
