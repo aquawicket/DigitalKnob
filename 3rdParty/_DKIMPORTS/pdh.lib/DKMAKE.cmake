@@ -1,4 +1,4 @@
-if(NOT WIN_HOST)
+if(NOT WIN)
 	return()
 endif()
 
