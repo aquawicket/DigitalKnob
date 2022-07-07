@@ -4,10 +4,10 @@
 # https://github.com/curl/curl
 
 
-WIN_dk_depend		(ws2_32.lib)
-ANDROID_dk_depend	(dl)
-dk_depend			(zlib)
-dk_depend			(openssl)
+dk_depend(ws2_32.lib)
+dk_depend(dl)
+dk_depend(zlib)
+dk_depend(openssl)
 
 
 #dk_import(https://github.com/curl/curl/archive/refs/tags/curl-7_43_0.zip)
