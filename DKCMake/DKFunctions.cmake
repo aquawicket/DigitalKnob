@@ -392,7 +392,7 @@ macro(dk_dump variable)
 	endif()
 	if(NOT DEFINED ${variable})
 		dk_error("variable not defined. The syntax may be incorrect if using brackets - > \$ { variable } ")
-		dk_info("${green} dk_dump(variable): <- CORRECT SYNTAX ${CLR}")
+		dk_info("${CLR}${green} dk_dump(variable): <- CORRECT SYNTAX")
 	else()
 		dk_info("${FILENAME}:${CMAKE_CURRENT_FUNCTION_LIST_LINE} -> ${CMAKE_CURRENT_FUNCTION}(${ARGV})")
 		list(LENGTH ${variable} variableLength)
@@ -666,7 +666,7 @@ function(dk_download src_path dest_path) # ARGV1 = dest_path #NOERROR
 		if(NOT EXISTS ${dest_path})
 			dk_assert("dest_path:(${dest_path}) Could not locate downloaded file")
 		endif()
-		dk_info("${green} Finnished downloading ${dest_filename} ${CLR}")
+		dk_info("${CLR}${green} Finnished downloading ${dest_filename}")
 	endif() 
 endfunction()
 dk_createOsMacros("dk_download")
@@ -1425,7 +1425,7 @@ function(dk_executeProcess commands)
 		set(command ${commands} WORKING_DIRECTORY ${CURRENT_DIR}) # add WORKING_DIRECTORY if missing
 	endif()	
 	
-	dk_info("\n${magenta} -> ${commands} ${CLR}\n")
+	dk_info("\n${CLR}${magenta} -> ${commands}\n")
 	
 	if(WIN_HOST)
 		execute_process(COMMAND cmd /c ${commands} RESULT_VARIABLE result ERROR_VARIABLE error) # FIXME: Do we always need  cmd /c  here?
