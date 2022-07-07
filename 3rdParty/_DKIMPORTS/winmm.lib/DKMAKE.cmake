@@ -1,9 +1,7 @@
 # https://docs.microsoft.com/en-us/windows/win32/multimedia/windows-multimedia-start-page?redirectedfrom=MSDN
-if(NOT WIN_HOST)
+if(NOT WIN)
 	return()
 endif()
-
-#dk_findLibrary(winmm.lib)
 
 dk_define(__WINDOWS_MM__)
 dk_findLibrary(winmm.lib)
