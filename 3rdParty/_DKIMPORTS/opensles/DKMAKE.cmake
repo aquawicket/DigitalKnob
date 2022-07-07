@@ -7,7 +7,8 @@ endif()
 #endif()
 
 if(IOS)
-	dk_findLibrary(OpenSLES)
+	return()
+	#dk_findLibrary(OpenSLES)
 endif()
 
 #if(LINUX)
