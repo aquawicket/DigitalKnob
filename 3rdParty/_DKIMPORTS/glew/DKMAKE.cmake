@@ -51,7 +51,7 @@ RASPBERRY_dk_libRelease(${GLEW}/${OS}//${RELEASE_DIR}/lib/libGLEW.a)
 	
 	
 
-##You need to link to other Windows libraries if you use GLFW as static library - gdi32.lib and user32.lib. Either add them in project properties for linker â€œAdditional Dependenciesâ€? setting. Or put #pragma comment (lib, "gdi32.lib") in your .c/.cpp source.
+##You need to link to other Windows libraries if you use GLFW as static library - gdi32.lib and user32.lib. Either add them in project properties for linker Additional Dependencies setting. Or put #pragma comment (lib, "gdi32.lib") in your .c/.cpp source.
 
 # -DGLEW_STATIC=ON -DGLEW_USE_STATIC_LIBS=ON
 
