@@ -4,6 +4,4 @@ if(NOT WIN_HOST)
 	return()
 endif()
 
-
-WIN_dk_lib(shlwapi.lib)
-#dk_import(shlwapi.lib)
+dk_findLibrary(shlwapi.lib)

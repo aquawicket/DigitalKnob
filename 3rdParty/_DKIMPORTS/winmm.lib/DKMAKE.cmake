@@ -6,4 +6,4 @@ endif()
 #dk_findLibrary(winmm.lib)
 
 dk_define(__WINDOWS_MM__)
-WIN_dk_lib(winmm.lib)
+dk_findLibrary(winmm.lib)

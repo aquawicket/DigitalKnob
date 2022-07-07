@@ -2,4 +2,4 @@
 #	return()
 #endif()
 
-WIN_dk_lib(pdh.lib)
+dk_findLibrary(pdh.lib)

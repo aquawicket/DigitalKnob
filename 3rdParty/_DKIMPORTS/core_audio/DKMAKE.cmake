@@ -5,8 +5,4 @@ if(NOT MAC_HOST)
 endif()
 
 
-FIND_LIBRARY(CoreAudio_lib CoreAudio)
-if(NOT CoreAudio_lib)
-	dk_error("Could not locate CoreAudio framework")
-endif()
-APPLE_dk_lib(${CoreAudio_lib})
+dk_findLibrary(CoreAudio)

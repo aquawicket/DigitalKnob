@@ -4,8 +4,4 @@ if(NOT MAC_HOST)
 endif()
 
 
-FIND_LIBRARY(QuartzCore_lib QuartzCore)
-if(NOT QuartzCore_lib)
-	dk_warn("Could not locate QuartzCore framework")
-endif()
-APPLE_dk_lib(${QuartzCore_lib})
+dk_findLibrary(QuartzCore)
