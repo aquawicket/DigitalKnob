@@ -10,7 +10,7 @@ dk_load(dk_color)
 #
 macro(dk_trace msg)
 	#message(STATUS "dk_trace(${ARGV})")
-	dk_call(dk_updateLogInfo)
+	dk_updateLogInfo()
 	string(REPLACE " " "" var ${msg})
 	if(${var})
 		message(STATUS "${H_black}${STACK_HEADER}${CLR}${B_blue} { \"${var}\" : \"${${var}}\" } ${CLR}")
