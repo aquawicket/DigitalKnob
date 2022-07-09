@@ -10,8 +10,6 @@
 # https://dl.google.com/android/repository/cc6bd534c6c37604205171784ac5621.build-tools_r30.0.3-linux.zip
 
 
-#dk_set(ANDROID-SDK ${3RDPARTY}/android-sdk)
-#dk_makeDirectory(${ANDROID-SDK})
 dk_depend(android-sdk)
 
 dk_makeDirectory(${ANDROID-SDK}/build-tools)

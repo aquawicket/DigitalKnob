@@ -18,8 +18,6 @@
 # https://dl.google.com/android/repository/android-ndk-r23b-darwin-x86_64.dmg  LTS
 # https://dl.google.com/android/repository/android-ndk-r23b-linux-x86_64.zip   LTS
 
-#dk_set(ANDROID-SDK ${3RDPARTY}/android-sdk)
-#dk_makeDirectory(${ANDROID-SDK})
 dk_depend(android-sdk)
 
 

@@ -4,8 +4,6 @@
 # https://dl.google.com/android/repository/sys-img/android/x86_64-24_r08.zip
 
 
-#dk_set(ANDROID-SDK ${3RDPARTY}/android-sdk)
-#dk_makeDirectory(${ANDROID-SDK})
 dk_depend(android-sdk)
 
 dk_makeDirectory(${ANDROID-SDK}/system-images)

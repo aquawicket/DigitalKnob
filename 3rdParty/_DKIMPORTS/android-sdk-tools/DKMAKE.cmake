@@ -4,8 +4,6 @@
 # https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip
 
 
-#dk_set(ANDROID-SDK ${3RDPARTY}/android-sdk)
-#dk_makeDirectory(${ANDROID-SDK})
 dk_depend(android-sdk)
 
 

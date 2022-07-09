@@ -2,9 +2,6 @@
 # https://dl.google.com/android/repository/sources-24_r01.zip
 # https://dl.google.com/android/repository/sources-26_r01.zip
 
-
-#dk_set(ANDROID-SDK ${3RDPARTY}/android-sdk)
-#dk_makeDirectory(${ANDROID-SDK})
 dk_depend(android-sdk)
 
 
