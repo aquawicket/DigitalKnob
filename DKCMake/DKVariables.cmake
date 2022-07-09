@@ -39,6 +39,7 @@ endif(COMMAND cmake_policy)
 ## Set variables for paths
 ###############################################################
 dk_set(DKCMAKE ${DIGITALKNOB}/DK/DKCMake)
+dk_set(DKBATCH ${DIGITALKNOB}/DK/DKBatch)
 dk_set(DKPLUGINS ${DIGITALKNOB}/DK/DKPlugins)
 dk_set(3RDPARTY ${DIGITALKNOB}/DK/3rdParty)
 dk_set(DKIMPORTS ${3RDPARTY}/_DKIMPORTS)
