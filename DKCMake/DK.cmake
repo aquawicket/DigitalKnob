@@ -48,7 +48,8 @@ endif()
 
 
 # FUNCTIONS 
-include(${DKCMAKE}/dk_call.cmake)
+#include(${DKCMAKE}/dk_call.cmake)
+include(${DKCMAKE}/dk_load.cmake)
 dk_load(dk_debugFunc)
 dk_load(dk_assert)
 dk_load(dk_error)

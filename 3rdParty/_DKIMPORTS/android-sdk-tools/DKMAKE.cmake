@@ -2,10 +2,10 @@
 # https://dl.google.com/android/repository/sdk-tools-windows-4333796.zip
 # https://dl.google.com/android/repository/sdk-tools-darwin-4333796.zip
 # https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip
-if(NOT WIN_HOST)
-#	return()
-endif()
 
+
+#dk_set(ANDROID-SDK ${3RDPARTY}/android-sdk)
+#dk_makeDirectory(${ANDROID-SDK})
 dk_depend(android-sdk)
 
 

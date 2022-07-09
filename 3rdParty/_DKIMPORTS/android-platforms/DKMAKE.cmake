@@ -1,8 +1,8 @@
 # https://dl.google.com/android/repository/platform-26_r02.zip
-if(NOT WIN_HOST)
-#	return()
-endif()
 
+
+#dk_set(ANDROID-SDK ${3RDPARTY}/android-sdk)
+#dk_makeDirectory(${ANDROID-SDK})
 dk_depend(android-sdk)
 
 dk_makeDirectory(${ANDROID-SDK}/platforms)

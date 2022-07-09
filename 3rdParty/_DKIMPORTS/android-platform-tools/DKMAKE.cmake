@@ -1,10 +1,10 @@
 # https://dl.google.com/android/repository/platform-tools_r31.0.3-windows.zip
 # https://dl.google.com/android/repository/platform-tools_r31.0.3-darwin.zip
 # https://dl.google.com/android/repository/platform-tools_r31.0.3-linux.zip
-if(NOT WIN_HOST)
-#	return()
-endif()
 
+
+#dk_set(ANDROID-SDK ${3RDPARTY}/android-sdk)
+#dk_makeDirectory(${ANDROID-SDK})
 dk_depend(android-sdk)
 
 WIN_HOST_dk_import(https://dl.google.com/android/repository/platform-tools_r31.0.3-windows.zip PATH ${ANDROID-SDK}/platform-tools)

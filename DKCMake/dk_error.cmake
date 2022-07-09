@@ -13,11 +13,11 @@ macro(dk_error msg)
 		string(REPLACE " " "" var ${msg})
 	endif()
 	
-	dk_call(dk_updateLogInfo)
+	dk_updateLogInfo()
 	if(${HALT_ON_ERRORS})
 		message(STATUS "${H_black}${STACK_HEADER}${CLR}${red} *** HALT_ON_ERRORS *** ${CLR}")
 		message(FATAL_ERROR "${H_black}${STACK_HEADER}${CLR}${red} ${msg} ${CLR}")
-		dk_call(dk_exit)
+		dk_exit()
 	endif()
 	
 	if(${var})
