@@ -8,7 +8,6 @@
 # https://cfdownload.adobe.com/pub/adobe/coldfusion/java/java8/java8u333/jdk/jdk-8u333-windows-x64.zip
 
 #dk_set(OPENJDK-8U41_VERSION 11)
-
 WIN_HOST_dk_import	(https://download.java.net/openjdk/jdk8u41/ri/openjdk-8u41-b04-windows-i586-14_jan_2020.zip PATCH)
 MAC_HOST_dk_import	(https://cfdownload.adobe.com/pub/adobe/coldfusion/java/java8/java8u333/jdk/jdk-8u333-macosx-x64.dmg PATCH)
 LINUX_HOST_dk_import(https://download.java.net/openjdk/jdk8u41/ri/openjdk-8u41-b04-linux-x64-14_jan_2020.tar.gz PATCH)
@@ -19,6 +18,7 @@ LINUX_HOST_dk_import(https://download.java.net/openjdk/jdk8u41/ri/openjdk-8u41-b
 #dk_setEnv("JAVA_HOME" ${OPENJDK-8U41})
 #dk_setEnv("JAVA_VERSION" ${OPENJDK-8U41_VERSION})
 #dk_setEnv("VS_JavaHome" ${OPENJDK-8U41})
+
 
 #Add registry entries
 #dk_addRegistryKey("HKLM/SOFTWARE/JavaSoft/Java Runtime Environment" "CurrentVersion" "${OPENJDK-8U41_VERSION}")
