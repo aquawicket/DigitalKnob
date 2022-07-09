@@ -231,7 +231,7 @@ function(dk_createOsMacros func)
 endfunction()
 set(dk_disabled_list ""	CACHE INTERNAL "")
 set(DKFunctions_ext ${DKCMAKE}/DKFunctions_ext.cmake)
-dk_remove(${DKFunctions_ext})
+dk_remove(${DKFunctions_ext} NOERROR)
 
 
 ###############################################################################
@@ -1428,16 +1428,23 @@ endfunction()
 
 
 ###############################################################################
-# dk_executeProcess(commands)
+# dk_executeProcess(commands) NOASSERT
 #
 #	TODO
 #
 #	@commands	- TODO
 #
-function(dk_executeProcess commands)
+function(dk_executeProcess commands) #NOASSERT
 	DKDEBUGFUNC(${ARGV})
 	set(commands ${ARGV})
-	list(REMOVE_ITEM commands COMMAND) # we can supply the cmake specific base commands
+	
+	dk_includes("${ARGN}" "NOASSERT" includes)
+	if(${includes})
+		set(noassert true)
+	endif()
+	
+	list(REMOVE_ITEM commands NOASSERT)
+	list(REMOVE_ITEM commands COMMAND)
 	list(REMOVE_ITEM commands "cmd /c ")
 	list(FIND commands "WORKING_DIRECTORY" index)
 	if(index EQUAL -1)
@@ -1457,7 +1464,15 @@ function(dk_executeProcess commands)
 		else()
 			execute_process(COMMAND sleep 2 WORKING_DIRECTORY ${CURRENT_DIR}) # wait 2 seconds for the stdout to flush before printing error
 		endif()
-		dk_assert("ERROR: command=${commands}\n  result=${result}\n   error=${error}")
+		if(${noassert})
+			dk_error(" ")
+			dk_error("   command: ${commands}")
+			dk_error("    result: ${result}")
+			dk_error("     error: ${error}")
+			dk_error(" ")
+		else()
+			dk_assert("\n     command=${commands}\n       result=${result}\n       error=${error}\n")
+		endif()
 	endif()
 endfunction()
 
@@ -3938,6 +3953,19 @@ function(dk_printUrlData url)
 	dk_getFileType(${url} url_filetype)
 	dk_verbose(url_filetype)
 endfunction()
+
+
+###############################################################################
+# dk_killProcess(name)
+#
+#	TODO
+#
+#	@url		- TODO
+#
+function(dk_killProcess name)
+	dk_executeProcess("taskkill /f /im ${name}" NOASSERT)
+endfunction()
+
 
 
 include(${DKFunctions_ext})

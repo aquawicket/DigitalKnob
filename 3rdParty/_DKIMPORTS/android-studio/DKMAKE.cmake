@@ -6,7 +6,6 @@ endif()
 
 
 dk_depend(openjdk-8u41)
-#dk_depend(android-sdk)
 dk_depend(android-ndk)
 
 

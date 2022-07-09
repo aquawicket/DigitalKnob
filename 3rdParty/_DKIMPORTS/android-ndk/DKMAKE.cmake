@@ -17,9 +17,7 @@
 # https://dl.google.com/android/repository/android-ndk-r23b-windows.zip        LTS
 # https://dl.google.com/android/repository/android-ndk-r23b-darwin-x86_64.dmg  LTS
 # https://dl.google.com/android/repository/android-ndk-r23b-linux-x86_64.zip   LTS
-if(NOT WIN_HOST)
-#	dk_return()
-endif()
+
 
 dk_depend(android-sdk)
 
