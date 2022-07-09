@@ -1,7 +1,9 @@
 # https://dl.google.com/android/repository/platform-tools_r31.0.3-windows.zip
 # https://dl.google.com/android/repository/platform-tools_r31.0.3-darwin.zip
 # https://dl.google.com/android/repository/platform-tools_r31.0.3-linux.zip
-
+if(NOT WIN_HOST)
+#	return()
+endif()
 
 dk_depend(android-sdk)
 

@@ -4,7 +4,7 @@ include_guard()
 set(DKTODO_ENABLED				1		CACHE INTERNAL "")
 set(DKDEBUG_ENABLED				1		CACHE INTERNAL "")
 set(DKVERBOSE_ENABLED			0		CACHE INTERNAL "")
-set(DKDEBUGFUNC_ENABLED			1		CACHE INTERNAL "")
+set(DKDEBUGFUNC_ENABLED			0		CACHE INTERNAL "") #TODO: Trade for DKVERBOSEFUNC()
 set(DKVERBOSEFUNC_ENABLED		0		CACHE INTERNAL "")
 set(WAIT_ON_ERRORS				0		CACHE INTERNAL "")
 set(WAIT_ON_WARNINGS			0		CACHE INTERNAL "")
@@ -48,8 +48,7 @@ endif()
 
 
 # FUNCTIONS 
-#include(${DKCMAKE}/dk_call.cmake)
-include(${DKCMAKE}/dk_load.cmake)
+include(${DKCMAKE}/dk_call.cmake)
 dk_load(dk_debugFunc)
 dk_load(dk_assert)
 dk_load(dk_error)

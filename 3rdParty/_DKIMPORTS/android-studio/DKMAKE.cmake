@@ -1,8 +1,12 @@
 # https://developer.android.com/studio/archive
 # https://developer.android.com/studio#downloads
+if(NOT WIN_HOST)
+	return()
+endif()
 
 
 dk_depend(openjdk-8u41)
+#dk_depend(android-sdk)
 dk_depend(android-ndk)
 
 

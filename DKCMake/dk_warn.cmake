@@ -10,11 +10,11 @@ dk_load(dk_color)
 #
 macro(dk_warn msg)
 	#message(STATUS "dk_warn(${ARGV})")
-	dk_updateLogInfo()
+	dk_call(dk_updateLogInfo)
 	if(${HALT_ON_WARNINGS})
 		message(STATUS "${H_black}${STACK_HEADER}${CLR}${yellow} *** HALT_ON_WARNINGS *** ${CLR}")
 		message(FATAL_ERROR "${H_black}${STACK_HEADER}${CLR}${yellow} ${msg} ${CLR}")
-		dk_exit()
+		dk_call(dk_exit)
 	endif()
 	
 	string(REPLACE " " "" var ${msg})

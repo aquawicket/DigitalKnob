@@ -1,6 +1,6 @@
-@echo off & %dkbatch%
+%dkbatch%
 
-set "Folder=openjdk-8u41-b04-windows-i586-14_jan_2020"
+set "Folder=openjdk-1.8.0_41"
 set "CurrentVersion=1.8.0_41"
 
 set "JAVA_VERSION=%CurrentVersion%"

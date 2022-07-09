@@ -1,7 +1,5 @@
 include_guard()
 dk_load(dk_color)
-dk_load(dk_updateLogInfo)
-
 
 ##################################################################################
 # dk_info(msg)
@@ -13,7 +11,7 @@ dk_load(dk_updateLogInfo)
 macro(dk_info msg)
 	#message(STATUS "dk_info(${ARGV})")
 	string(REPLACE " " "" var ${msg})
-	dk_updateLogInfo()
+	dk_call(dk_updateLogInfo)
 	if(${var})
 		message(STATUS "${H_black}${STACK_HEADER}${CLR}${white} { \"${var}\" : \"${${var}}\" } ${CLR}")
 	else()

@@ -1428,23 +1428,16 @@ endfunction()
 
 
 ###############################################################################
-# dk_executeProcess(commands) NOASSERT
+# dk_executeProcess(commands)
 #
 #	TODO
 #
 #	@commands	- TODO
 #
-function(dk_executeProcess commands) #NOASSERT
+function(dk_executeProcess commands)
 	DKDEBUGFUNC(${ARGV})
 	set(commands ${ARGV})
-	
-	dk_includes("${ARGN}" "NOASSERT" includes)
-	if(${includes})
-		set(noassert true)
-	endif()
-	
-	list(REMOVE_ITEM commands NOASSERT)
-	list(REMOVE_ITEM commands COMMAND)
+	list(REMOVE_ITEM commands COMMAND) # we can supply the cmake specific base commands
 	list(REMOVE_ITEM commands "cmd /c ")
 	list(FIND commands "WORKING_DIRECTORY" index)
 	if(index EQUAL -1)
@@ -1464,15 +1457,7 @@ function(dk_executeProcess commands) #NOASSERT
 		else()
 			execute_process(COMMAND sleep 2 WORKING_DIRECTORY ${CURRENT_DIR}) # wait 2 seconds for the stdout to flush before printing error
 		endif()
-		if(${noassert})
-			dk_error("")
-			dk_error("command: ${commands}")
-			dk_error("result: ${result}")
-			dk_error("error: ${error}")
-			dk_error("")
-		else()
-			dk_assert("\n     command=${commands}\n       result=${result}\n       error=${error}\n")
-		endif()
+		dk_assert("ERROR: command=${commands}\n  result=${result}\n   error=${error}")
 	endif()
 endfunction()
 
@@ -3952,18 +3937,6 @@ function(dk_printUrlData url)
 	dk_verbose(url_last)
 	dk_getFileType(${url} url_filetype)
 	dk_verbose(url_filetype)
-endfunction()
-
-
-###############################################################################
-# dk_killProcess(name) NOASSERT
-#
-#	TODO
-#
-#	@url		- TODO
-#
-function(dk_killProcess name) #NOASSERT
-	dk_executeProcess("taskkill /f /im ${name}" ${ARGN})
 endfunction()
 
 

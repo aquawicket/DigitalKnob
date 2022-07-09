@@ -10,5 +10,5 @@ include(${DKCMAKE}/dk_load.cmake)
 #
 macro(dk_call func)
 	dk_load(${func})
-	cmake_language(CALL ${ARGV}) # cmake 3.18
+	cmake_language(CALL ${ARGV})
 endmacro()

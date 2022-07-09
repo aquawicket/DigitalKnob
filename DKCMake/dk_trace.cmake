@@ -9,7 +9,8 @@ dk_load(dk_color)
 #	@msg	- The message to print
 #
 macro(dk_trace msg)
-	dk_updateLogInfo()
+	#message(STATUS "dk_trace(${ARGV})")
+	dk_call(dk_updateLogInfo)
 	string(REPLACE " " "" var ${msg})
 	if(${var})
 		message(STATUS "${H_black}${STACK_HEADER}${CLR}${B_blue} { \"${var}\" : \"${${var}}\" } ${CLR}")

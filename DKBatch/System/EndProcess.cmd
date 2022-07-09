@@ -22,7 +22,7 @@
 :: OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 :: SOFTWARE.
 
-@echo OFF & %DKBATCH%
+%DKBATCH%
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 :EndProcess process error
 ::
@@ -35,7 +35,7 @@
 ::           echo EndProcess returned: %error%
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 if "%~1"=="" (
-	echo ERROR: arg1:"process" invalid
+	echo ERROR: arg1 "process" invalid
 	goto :EOF
 )
 set "process=%~1"

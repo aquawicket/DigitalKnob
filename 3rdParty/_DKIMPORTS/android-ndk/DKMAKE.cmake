@@ -17,9 +17,11 @@
 # https://dl.google.com/android/repository/android-ndk-r23b-windows.zip        LTS
 # https://dl.google.com/android/repository/android-ndk-r23b-darwin-x86_64.dmg  LTS
 # https://dl.google.com/android/repository/android-ndk-r23b-linux-x86_64.zip   LTS
+if(NOT WIN_HOST)
+#	dk_return()
+endif()
 
 dk_depend(android-sdk)
-
 
 # r21e LTS
 #WIN_HOST_dk_import		(https://dl.google.com/android/repository/android-ndk-r21e-windows-x86_64.zip ${ANDROID-SDK}/ndk/21.4.7075529 PATCH)

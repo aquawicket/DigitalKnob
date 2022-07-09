@@ -1,6 +1,6 @@
 %dkbatch%
 
-set "Folder=openjdk-11_windows-x64_bin"
+set "Folder=openjdk-11-windows-x64_bin"
 set "CurrentVersion=11"
 
 set "JAVA_VERSION=%CurrentVersion%"

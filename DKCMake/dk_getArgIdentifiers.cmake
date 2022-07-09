@@ -1,5 +1,4 @@
 include_guard()
-dk_load(dk_listReplace)
 
 ###############################################################################
 # dk_getArgIdentifiers(ARGV)
@@ -32,7 +31,7 @@ function(dk_getArgIdentifiers ARGV)
 				#if("CMAKE_CURRENT_FUNCTION" STREQUAL "${varName}")
 				#	continue()
 				#endif()
-				dk_listReplace(names ARGV${index} ${varName})
+				dk_call(dk_listReplace names ARGV${index} ${varName})
 				set(ARGI${index} ${varName} CACHE INTERNAL "")
 				#message(STATUS "ARGI${index} == ${ARGI${index}}")
 				break()
