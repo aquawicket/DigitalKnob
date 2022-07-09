@@ -50,6 +50,8 @@ endif()
 # FUNCTIONS 
 include(${DKCMAKE}/dk_call.cmake)
 dk_load(dk_debugFunc)
+dk_load(dk_color)
+dk_load(dk_updateLogInfo)
 dk_load(dk_assert)
 dk_load(dk_error)
 dk_load(dk_warn)

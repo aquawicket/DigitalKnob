@@ -1,5 +1,4 @@
 include_guard()
-dk_load(dk_color) # TODO:  move this into the function
 
 ##################################################################################
 # dk_debugFunc(${ARGV})
