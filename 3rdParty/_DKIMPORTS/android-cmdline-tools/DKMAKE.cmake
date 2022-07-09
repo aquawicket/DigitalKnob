@@ -12,7 +12,7 @@
 
 #dk_depend(jdk8)
 
-
+set(ANDROID-SDK ${3RDPARTY}/android-sdk)
 dk_makeDirectory(${ANDROID-SDK})
 dk_makeDirectory(${ANDROID-SDK}/cmdline-tools)
 WIN_HOST_dk_import(https://dl.google.com/android/repository/commandlinetools-win-7583922_latest.zip PATH ${ANDROID-SDK}/cmdline-tools/latest)
