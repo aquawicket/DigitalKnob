@@ -1,5 +1,6 @@
 ### android-sdk ###
 
+dk_set(ANDROID-SDK ${3RDPARTY}/android-sdk)
 dk_depend(openjdk)
 dk_depend(openjdk-8u41)
 dk_depend(android-cmdline-tools)
