@@ -48,8 +48,8 @@ endif()
 
 
 # FUNCTIONS
-include(${DKCMAKE}/dk_load.cmake)
-#include(${DKCMAKE}/dk_call.cmake)
+include(${DKCMAKE}/functions/dk_load.cmake)
+#include(${DKCMAKE}/functions/dk_call.cmake)
 #dk_load(dk_listReplace)
 #dk_load(dk_getArgIdentifiers)
 #dk_load(dk_debugFunc)
@@ -68,7 +68,8 @@ dk_load(DKFileSystem)
 dk_load(DKVariables)
 #dk_load(DKDisabled)
 #dk_load(dk_findLibrary)
-dk_load(dk_importVariables)
+#dk_load(dk_importVariables)
+include(${DKCMAKE}/functions/dk_importVariables.cmake)
 #dk_load(dk_findFiles)
 
 # POST DEFINED VARIABLES

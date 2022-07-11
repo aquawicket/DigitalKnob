@@ -55,7 +55,7 @@ if(CMAKE_HOST_UNIX)
 endif()
 
 
-include(${CMAKE_SOURCE_DIR}/dk_dumpAllVariables.cmake)
+include(${CMAKE_SOURCE_DIR}/functions/dk_dumpAllVariables.cmake)
 dk_dumpAllVariables(${CMAKE_BINARY_DIR}/DKCMAKE_START_VARIABLES.temp)
 
 
