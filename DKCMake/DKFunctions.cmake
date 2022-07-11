@@ -2288,7 +2288,7 @@ function(dk_make folder lib)
 	DKDEBUGFUNC(${ARGV})
 	if(LINUX OR RASPBERRY)
 		dk_set(CURRENT_DIR ${3RDPARTY}/${folder}/${BUILD_DIR})
-		dk_queueCommand(make ${ARGV})
+		dk_queueCommand(make ${lib})
 	endif()
 endfunction()
 
