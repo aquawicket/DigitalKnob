@@ -21,11 +21,12 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
+include_guard()
+
 
 # Extra Documentation
 # https://asitdhal.medium.com/cmake-functions-and-macros-22293041519f
 # https://foonathan.net/2016/03/cmake-install/ 
-include_guard()
 
 if(EXISTS $ENV{DKCMAKE})
 	set(ENV{DKCMAKE} "$ENV{DKCMAKE}/")
