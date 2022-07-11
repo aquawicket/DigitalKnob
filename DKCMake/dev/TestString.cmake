@@ -26,6 +26,8 @@ include_guard()
 CMAKE_MINIMUM_REQUIRED(VERSION 3.10)
 CMAKE_POLICY(SET CMP0007 NEW)
 include(../DK.cmake)
+
+dk_set(string_Ext ON)
 include(../DKString.cmake)
 dk_clearScreen()
 

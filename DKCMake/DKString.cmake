@@ -194,16 +194,16 @@ endfunction()
 
 
 
-set(string_Ext ON)
+#set(string_Ext OFF)
 #########################################################
 #  string_Ext.cmake
 #
 #	Add javascript like access to functions. Experamental  
 #
 if(string_Ext)
-	execute_process(COMMAND ${CMAKE_COMMAND} -E remove ${DIGITALKNOB}/DK/DKCMake/)
-	file(APPEND ${DIGITALKNOB}/DK/DKCMake/string_Ext.cmake "### Don't make changes in this file. They will not save. ###\n")
-	file(APPEND ${DIGITALKNOB}/DK/DKCMake/string_Ext.cmake "### This file was automatically generated from DKFunctions.cmake ###\n\n")
+	#execute_process(COMMAND ${CMAKE_COMMAND} -E remove ${DIGITALKNOB}/DK/DKCMake/)
+	#file(APPEND ${DIGITALKNOB}/DK/DKCMake/string_Ext.cmake "### Don't make changes in this file. They will not save. ###\n")
+	#file(APPEND ${DIGITALKNOB}/DK/DKCMake/string_Ext.cmake "### This file was automatically generated from DKFunctions.cmake ###\n\n")
 
 	function(CreateStringFunc str)
 		DKDEBUGFUNC(${ARGV})

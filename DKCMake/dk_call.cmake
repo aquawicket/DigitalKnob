@@ -1,5 +1,5 @@
 include_guard()
-include(${DKCMAKE}/dk_load.cmake)
+#include(${DKCMAKE}/dk_load.cmake)
 
 ##################################################################################
 # dk_Call(func) parameters
@@ -9,6 +9,6 @@ include(${DKCMAKE}/dk_load.cmake)
 #	@func	- TODO
 #
 macro(dk_call func) #parameters
-	dk_load(${func})
+	#dk_load(${func})
 	dk_cmakeLanguage("${func}($ARGN)")
 endmacro()

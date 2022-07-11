@@ -33,6 +33,319 @@ endif()
 include("$ENV{DKCMAKE}DK.cmake")
 
 
+##################################################################################
+# dk_Call(func) parameters
+#
+#	load a ${func}.cmake file located in the DKCMake path amd call the function and pass arguments
+#
+#	@func	- TODO
+#
+macro(dk_call func) #parameters
+	dk_load(${func})
+	dk_cmakeLanguage("${func}($ARGN)")
+endmacro()
+
+
+###############################################################################
+# dk_listReplace(LIST old_value new_value)
+#  
+#	Replace a list item with a new value
+#
+#	@LIST		- TODO
+#	@old_value	- The value to replace
+#	@new_value	- The new value to replace with
+#
+macro(dk_listReplace LIST old_value new_value)
+    list(FIND ${LIST} ${old_value} old_value_INDEX)
+    if(old_value_INDEX GREATER_EQUAL 0)
+        list(REMOVE_AT ${LIST} ${old_value_INDEX})
+        list(INSERT ${LIST} ${old_value_INDEX} ${new_value})
+    endif()
+endmacro()
+
+
+###############################################################################
+# dk_getArgIdentifiers(ARGV)
+#  
+#	Get the variable names from function parameters
+#
+#	@ARGV	- The ARGV data within a function that contains the parameter values
+#
+function(dk_getArgIdentifiers ARGV)
+	#message(STATUS "dk_getArgIdentifiers(${ARGV})")
+	list(LENGTH ARGV ARGV_LENGTH)
+	if(ARGV_LENGTH LESS 1)
+		return()
+	endif()
+	get_cmake_property(varNames VARIABLES)
+	set(index 0)
+	unset(names)
+	unset(ARGI)
+	while(${index} LESS ${ARGV_LENGTH})
+		list(APPEND names ARGV${index})
+		set(ARGI${index} ARGV${index} CACHE INTERNAL "")
+		foreach(varName ${varNames} REVERSE)
+			if(ARGV${index} STREQUAL ${varName})
+				if("ARGV${index}" STREQUAL "${varName}") #exclude variables with the same name like ARGV0
+					continue()
+				endif()
+				if("ARGN" STREQUAL "${varName}")
+					continue()
+				endif()
+				#if("CMAKE_CURRENT_FUNCTION" STREQUAL "${varName}")
+				#	continue()
+				#endif()
+				dk_listReplace(names ARGV${index} ${varName})
+				set(ARGI${index} ${varName} CACHE INTERNAL "")
+				#message(STATUS "ARGI${index} == ${ARGI${index}}")
+				break()
+			endif()
+		endforeach()
+		math(EXPR index "${index}+1")
+	endwhile()
+	set(ARGI ${names} CACHE INTERNAL "")
+endfunction()
+
+
+##################################################################################
+# dk_debugFunc(${ARGV})
+#
+#	Prints the current file name, line number, function or macro and arguments
+#	Place this at the first line of every function you want to see debug output for.
+# 
+#	Example:
+#		function(MyFunction myArg1 myArg2)
+#			dk_debugFunc(${ARGV}) 
+#			## user code
+#		endfunction()
+#
+macro(dk_debugFunc)
+	if(DKDEBUGFUNC_ENABLED)
+		if(NOT CMAKE_CURRENT_FUNCTION_LIST_FILE)
+			set(CMAKE_CURRENT_FUNCTION_LIST_FILE "unknown")
+		endif()
+		get_filename_component(FILENAME ${CMAKE_CURRENT_FUNCTION_LIST_FILE} NAME)
+		#dk_getFilename(${CMAKE_CURRENT_FUNCTION_LIST_FILE} FILENAME)
+		if(${ARGC} LESS 1)
+			dk_updateLogInfo()
+			message(STATUS "${H_black}${FILENAME}:${CMAKE_CURRENT_FUNCTION_LIST_LINE}->${CLR}${cyan}${CMAKE_CURRENT_FUNCTION}()${CLR}")
+		else()
+			set(argIndex 1)
+			set(argString " {")
+			dk_getArgIdentifiers(${ARGV})
+			foreach(arg ${ARGV})
+				set(argString "${argString}\"${ARGI${argIndex}}\":\"${arg}\"")
+				if(${argIndex} LESS ${ARGC})
+					set(argString "${argString},  ")
+				endif()
+				math(EXPR argIndex "${argIndex}+1")
+			endforeach()
+			set(argString "${argString}} ")
+			message(STATUS "${H_black}${FILENAME}:${CMAKE_CURRENT_FUNCTION_LIST_LINE}->${CLR}${cyan}${CMAKE_CURRENT_FUNCTION}(${argString})${CLR}")
+		endif()
+	endif()
+endmacro()
+macro(DKDEBUGFUNC)
+	dk_debugFunc(${ARGV})
+endmacro()
+
+
+##################################################################################
+# dk_updateLogInfo()
+#
+#	TODO
+#
+macro(dk_updateLogInfo)
+	#DKDEBUGFUNC(${ARGV})
+	if(PRINT_CALL_DETAILS)
+		set(STACK_HEADER "")
+		if(NOT CMAKE_CURRENT_FUNCTION_LIST_FILE)
+			if(PRINT_FILE_NAMES)
+				get_filename_component(STACK_FILENAME ${CMAKE_CURRENT_LIST_FILE} NAME)
+				set(STACK_HEADER "${STACK_FILENAME}:")
+			endif()
+			if(PRINT_LINE_NUMBERS)		
+				set(STACK_HEADER "${STACK_HEADER}${CMAKE_CURRENT_LIST_LINE}->")
+			endif()	
+		else()
+			if(PRINT_FILE_NAMES)
+				get_filename_component(STACK_FILENAME ${CMAKE_CURRENT_FUNCTION_LIST_FILE} NAME)
+				set(STACK_HEADER "${STACK_FILENAME}:")
+			endif()
+			if(PRINT_LINE_NUMBERS)	
+				set(STACK_HEADER "${STACK_HEADER}${CMAKE_CURRENT_FUNCTION_LIST_LINE}->")
+			endif()
+		endif()
+		if(PRINT_FUNCTION_NAMES)
+			set(STACK_HEADER "${STACK_HEADER}${CMAKE_CURRENT_FUNCTION}")
+			if(PRINT_FUNCTION_ARGUMENTS)
+				set(STACK_HEADER "${STACK_HEADER}(${ARGV}): ")
+			else()
+				set(STACK_HEADER "${STACK_HEADER}(): ")
+			endif()
+		endif()
+	endif()
+endmacro()
+
+
+##################################################################################
+# dk_assert(msg)
+#
+#	Print an assert message to the console and halts execution
+#
+#	@msg	- The message to print
+#
+macro(dk_assert msg)
+	#message(STATUS "dk_assert(${ARGV})")
+	string(REPLACE " " "" var ${msg})
+	dk_updateLogInfo()
+	if(${var})
+		message(FATAL_ERROR "${H_black}${STACK_HEADER}${CLR}${BG_red} { \"${var}\" : \"${${var}}\" } ${CLR}")
+	else()
+		message(FATAL_ERROR "${H_black}${STACK_HEADER}${CLR}${BG_red} ${msg} ${CLR}")
+	endif()
+	dk_exit() #FIXME:  is this needed?
+endmacro()
+
+
+##################################################################################
+# dk_error(msg)
+#
+#	Print a error message to the console
+#
+#	@msg	- The message to print
+#
+macro(dk_error msg)
+	#message(STATUS "dk_error(${ARGV})")
+	dk_updateLogInfo()
+	if(${HALT_ON_ERRORS})
+		message(STATUS "${H_black}${STACK_HEADER}${CLR}${red} *** HALT_ON_ERRORS *** ${CLR}")
+		message(FATAL_ERROR "${H_black}${STACK_HEADER}${CLR}${red} ${msg} ${CLR}")
+		dk_exit()
+	endif()
+	
+	string(REPLACE " " "" var ${msg})
+	if(${var})
+		message(STATUS "${H_black}${STACK_HEADER}${CLR}${red} { \"${var}\" : \"${${var}}\" } ${CLR}")
+	else()
+		message(STATUS "${H_black}${STACK_HEADER}${CLR}${red} ${msg} ${CLR}")
+	endif()
+	
+	if(${WAIT_ON_ERRORS})
+		dk_wait(10)
+	endif()
+endmacro()
+
+
+##################################################################################
+# dk_warn(msg)
+#
+#	Print a warning message to the console
+#
+#	@msg	- The message to print
+#
+macro(dk_warn msg)
+	#message(STATUS "dk_warn(${ARGV})")
+	dk_updateLogInfo()
+	if(${HALT_ON_WARNINGS})
+		message(STATUS "${H_black}${STACK_HEADER}${CLR}${yellow} *** HALT_ON_WARNINGS *** ${CLR}")
+		message(FATAL_ERROR "${H_black}${STACK_HEADER}${CLR}${yellow} ${msg} ${CLR}")
+		dk_exit()
+	endif()
+	
+	string(REPLACE " " "" var ${msg})
+	if(${var})
+		message(STATUS "${H_black}${STACK_HEADER}${CLR}${yellow} { \"${var}\" : \"${${var}}\" } ${CLR}")
+	else()
+		message(STATUS "${H_black}${STACK_HEADER}${CLR}${yellow} ${msg} ${CLR}")
+	endif()
+	
+	if(${WAIT_ON_WARNINGS})
+		dk_wait(10)
+	endif()
+endmacro()
+
+
+##################################################################################
+# dk_info(msg)
+#
+#	Print a info message to the console
+#
+#	@msg	- The message to print
+#
+macro(dk_info msg)
+	#message(STATUS "dk_info(${ARGV})")
+	string(REPLACE " " "" var ${msg})
+	dk_updateLogInfo()
+	if(${var})
+		message(STATUS "${H_black}${STACK_HEADER}${CLR}${white} { \"${var}\" : \"${${var}}\" } ${CLR}")
+	else()
+		message(STATUS "${H_black}${STACK_HEADER}${CLR}${white} ${msg} ${CLR}")
+	endif()
+endmacro()
+
+
+##################################################################################
+# dk_debug(msg)
+#
+#	Print a debug message to the console
+#
+#	@msg	- The message to print
+#
+macro(dk_debug msg)
+	if(DKDEBUG_ENABLED)
+		#message(STATUS "dk_debug(${ARGV})")
+		string(REPLACE " " "" var ${msg})
+		dk_updateLogInfo()
+		if(${var})
+			message(STATUS "${H_black}${STACK_HEADER}${CLR}${cyan} { \"${var}\" : \"${${var}}\" } ${CLR}")
+		else()
+			message(STATUS "${H_black}${STACK_HEADER}${CLR}${cyan} ${msg} ${CLR}")
+		endif()
+	endif()
+endmacro()
+
+
+##################################################################################
+# dk_verbose(msg)
+#
+#	Print a verbose message to the console
+#
+#	@msg	- The message to print
+#
+macro(dk_verbose msg)
+	if(DKVERBOSE_ENABLED)
+		#message(STATUS "dk_verbose(${ARGV})")
+		string(REPLACE " " "" var ${msg})
+		dk_updateLogInfo()
+		if(${var})
+			message(STATUS "${H_black}${STACK_HEADER}${CLR}${blue} { \"${var}\" : \"${${var}}\" } ${CLR}")
+		else()
+			message(STATUS "${H_black}${STACK_HEADER}${CLR}${blue} ${msg} ${CLR}")
+		endif()
+	endif()
+endmacro()
+
+
+##################################################################################
+# dk_trace(msg)
+#
+#	Print the trace stack with a message to the console
+#
+#	@msg	- The message to print
+#
+macro(dk_trace msg)
+	#message(STATUS "dk_trace(${ARGV})")
+	dk_updateLogInfo()
+	string(REPLACE " " "" var ${msg})
+	if(${var})
+		message(STATUS "${H_black}${STACK_HEADER}${CLR}${B_blue} { \"${var}\" : \"${${var}}\" } ${CLR}")
+	else()
+		message(STATUS "${H_black}${STACK_HEADER}${CLR}${B_blue} ${msg} ${CLR}")
+	endif()
+endmacro()
+
+
 ###############################################################################
 # dk_todo([msg])
 #
@@ -155,7 +468,7 @@ endfunction()
 ###############################################################################
 # dk_createOsMacros(func)
 #
-#	TODO
+#	Prefix a function with OS_ macros. Calling the OS_function will only be called if the current OS or OS_HOST is true
 #
 #	@func	- The func of the function to create aliases for
 #
@@ -4004,6 +4317,54 @@ endfunction()
 function(dk_clearScreen)
 	dk_debug("clear screen")
 	execute_process(COMMAND "cmd /c cls")
+endfunction()
+
+
+###############################################################################
+# dk_findLibrary(name)
+#
+#	Search for a library and include it with dk_lib
+#
+#	@name		- The name of the library
+#
+function(dk_findLibrary name)
+	DKDEBUGFUNC(${ARGV})
+	find_library(${name}_LIBRARY ${name})
+	if(NOT WIN)
+		if(NOT ${name}_LIBRARY)
+			dk_assert("Could not locate ${name} Library")
+		endif()
+		dk_debug(${name}_LIBRARY)
+		dk_lib(${${name}_LIBRARY})
+	else()
+		dk_debug(${name})
+		dk_lib(${name})
+	endif()
+endfunction()
+dk_createOsMacros("dk_findLibrary")
+
+
+###############################################################################
+# dk_findFiles(path pattern) RECURSE RELATIVE
+#
+#	Search for a file using a pattern I.E. *.txt
+#
+#	@pattern		- The pattern to search for
+#
+function(dk_findFiles path pattern RESULT)
+	DKDEBUGFUNC(${ARGV})
+	dk_includes("${ARGN}" "RECURSE" recurse)
+	if(${recurse})
+		file(GLOB_RECURSE files "${path}/" "${path}/${pattern}")
+	else()
+		file(GLOB files "${path}/" "${path}/${pattern}")
+	endif()
+	if(NOT files)
+		dk_error("files is invalid")
+		return()
+	endif()
+	dk_debug(files)
+	set(${RESULT} ${files} PARENT_SCOPE)
 endfunction()
 
 
