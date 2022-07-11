@@ -23,18 +23,8 @@ dk_define				(LZMA_API_STATIC)
 dk_include				(${XZ}/src/liblzma/api)
 WIN_dk_libDebug			(${XZ}/${OS}/${DEBUG_DIR}/liblzma.lib)
 WIN_dk_libRelease		(${XZ}/${OS}/${RELEASE_DIR}/liblzma.lib)
-MAC_dk_libDebug			(${XZ}/${OS}/${DEBUG_DIR}/liblzma.a)
-MAC_dk_libRelease		(${XZ}/${OS}/${RELEASE_DIR}/liblzma.a)
-IOS_dk_libDebug			(${XZ}/${OS}/${DEBUG_DIR}/liblzma.a)
-IOS_dk_libRelease		(${XZ}/${OS}/${RELEASE_DIR}/liblzma.a)
-IOSSIM_dk_libDebug		(${XZ}/${OS}/${DEBUG_DIR}/liblzma.a)
-IOSSIM_dk_libRelease	(${XZ}/${OS}/${RELEASE_DIR}/liblzma.a)
-LINUX_dk_libDebug		(${XZ}/${OS}/${DEBUG_DIR}/liblzma.a)
-LINUX_dk_libRelease		(${XZ}/${OS}/${RELEASE_DIR}/liblzma.a)
-RASPBERRY_dk_libDebug	(${XZ}/${OS}/${DEBUG_DIR}/liblzma.a)
-RASPBERRY_dk_libRelease	(${XZ}/${OS}/${RELEASE_DIR}/liblzma.a)
-ANDROID_dk_libDebug		(${XZ}/${OS}/${DEBUG_DIR}/liblzma.a)
-ANDROID_dk_libRelease	(${XZ}/${OS}/${RELEASE_DIR}/liblzma.a)
+UNIX_dk_libDebug		(${XZ}/${OS}/${DEBUG_DIR}/liblzma.a)
+UNIX_dk_libRelease		(${XZ}/${OS}/${RELEASE_DIR}/liblzma.a)
 
 
 ### 3RDPARTY LINK ###
@@ -56,10 +46,9 @@ dk_queueCommand(${DKCMAKE_BUILD} ${XZ})
 
 
 ### COMPILE ###
-dk_visualStudio(${XZ_NAME} liblzma)
-dk_xcode(${XZ_NAME} liblzma)
-LINUX_dk_queueCommand(make liblzma)
-RASPBERRY_dk_queueCommand(make liblzma)	
+dk_visualStudio	(${XZ_NAME} liblzma)
+dk_xcode		(${XZ_NAME} liblzma)
+dk_make			(${XZ_NAME} liblzma)
 
 
 #FIXME

@@ -39,10 +39,6 @@ ANDROID_dk_queueCommand		(${DKCMAKE_BUILD} "-DANDROID_COMPILER_FLAGS=-I${LIBXML2
 
 
 ### COMPILE ###
-dk_visualStudio				(${LIBXML2_NAME} xml2)
-dk_xcode					(${LIBXML2_NAME} xml2)
-LINUX_dk_queueCommand		(make xml2)
-RASPBERRY_dk_queueCommand	(make xml2)
-
-
-# fatal error LNK1104: cannot open file 'C:\Users\Administrator\digitalknob\DK\3rdParty\libxml2-f2ad86fa600885429a6083aaf6926c7e2e5b24d6\win32\Debug\libxml2sd.lib'
+dk_visualStudio	(${LIBXML2_NAME} xml2)
+dk_xcode		(${LIBXML2_NAME} xml2)
+dk_make			(${LIBXML2_NAME} xml2)

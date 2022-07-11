@@ -45,7 +45,6 @@ ANDROID_dk_queueCommand		(${DKCMAKE_BUILD_CRYPTOPP} "-DCMAKE_CXX_FLAGS=/I${ANDRO
 
 
 ### COMPILE ###
-dk_visualStudio				(${CRYPTOPP_NAME} cryptopp-static)
-dk_xcode					(${CRYPTOPP_NAME} cryptopp-static)
-LINUX_dk_queueCommand		(make cryptopp-static)
-RASPBERRY_dk_queueCommand	(make cryptopp-static)
+dk_visualStudio	(${CRYPTOPP_NAME} cryptopp-static)
+dk_xcode		(${CRYPTOPP_NAME} cryptopp-static)
+dk_make			(${CRYPTOPP_NAME} cryptopp-static)
