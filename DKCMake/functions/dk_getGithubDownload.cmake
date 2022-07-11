@@ -1,12 +1,12 @@
 
 ###############################################################################
-# dk_importDownload(url) #install_path #PATCH
+# dk_getGithubDownload(url) #install_path #PATCH
 #
 #	TODO
 #
 #	@url	- TODO
 #
-function(dk_importDownload url) #install_path #Patch
+function(dk_getGithubDownload url) #install_path #Patch
 	DKDEBUGFUNC(${ARGV})
 	# IS THE URL VALID           Example https://github.com/aquawicket/DigitalKnob/archive/01c17f6a9cd66068f7890ea887ab3b9a673f0434.zip)
 	# must contain https://github.com/
