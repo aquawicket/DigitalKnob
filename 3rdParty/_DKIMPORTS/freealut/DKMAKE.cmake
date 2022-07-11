@@ -20,25 +20,21 @@ dk_import(https://github.com/vancegroup/freealut.git)
 ### LINK ###
 dk_define(AL_LIBTYPE_STATIC)
 dk_include(${FREEALUT}/include)
-WIN_dk_libDebug(${FREEALUT}/${OS}/${DEBUG_DIR}/alut_static.lib)
-WIN_dk_libRelease(${FREEALUT}/${OS}/${RELEASE_DIR}/alut_static.lib)
-APPLE_dk_libDebug(${FREEALUT}/${OS}/${DEBUG_DIR}/libalut_static.a)
-APPLE_dk_libRelease(${FREEALUT}/${OS}/${RELEASE_DIR}/libalut_static.a)
-LINUX_dk_libDebug(${FREEALUT}/${OS}/${DEBUG_DIR}/libalut_static.a)
-LINUX_dk_libRelease(${FREEALUT}/${OS}/${RELEASE_DIR}/libalut_static.a)
+WIN_dk_libDebug		(${FREEALUT}/${OS}/${DEBUG_DIR}/alut_static.lib)
+WIN_dk_libRelease	(${FREEALUT}/${OS}/${RELEASE_DIR}/alut_static.lib)
+UNIX_dk_libDebug	(${FREEALUT}/${OS}/${DEBUG_DIR}/libalut_static.a)
+UNIX_dk_libRelease	(${FREEALUT}/${OS}/${RELEASE_DIR}/libalut_static.a)
 
+
+### GENERATE ###
+dk_setPath(${CRYPTO}/${BUILD_DIR})
+#WIN_dk_queueCommand	(${DKCMAKE_BUILD} ${OPENAL_CMAKE} "-DCMAKE_C_FLAGS=/DWIN64 /D_WINDOWS /W3 /nologo /GR /EHsc /I${OPENAL}/include/AL /I${MSINTTYPES} /DAL_LIBTYPE_STATIC" ${FREEALUT})
+WIN_dk_queueCommand		(${DKCMAKE_BUILD} ${OPENAL_CMAKE} "-DCMAKE_C_FLAGS=/DAL_LIBTYPE_STATIC /I${OPENAL}/include/AL /I${MSINTTYPES}" ${FREEALUT})
+MAC64_dk_queueCommand	(${DKCMAKE_BUILD} ${OPENAL_CMAKE} ${FREEALUT})
+LINUX_dk_queueCommand	(${DKCMAKE_BUILD} ${OPENAL_CMAKE} ${FREEALUT})
 
 
 ### COMPILE ###
-dk_setPath(${CRYPTO}/${BUILD_DIR})
-WIN_dk_queueCommand(${DKCMAKE_BUILD} "-DCMAKE_C_FLAGS=/DAL_LIBTYPE_STATIC /I${OPENAL}/include/AL /I${MSINTTYPES}" ${OPENAL_WIN} ${FREEALUT})
-#WIN_dk_queueCommand(${DKCMAKE_BUILD} "-DCMAKE_C_FLAGS=/DWIN64 /D_WINDOWS /W3 /nologo /GR /EHsc /I${OPENAL}/include/AL /I${MSINTTYPES} /DAL_LIBTYPE_STATIC" ${OPENAL_WIN} ${FREEALUT})
-WIN_dk_visualStudio(${FREEALUT_NAME} alut_static)
-
-
-MAC64_dk_queueCommand(${DKCMAKE_BUILD} ${OPENAL_MAC} ${FREEALUT})
-MAC_dk_xcode(${FREEALUT_NAME} alut_static)
-
-
-LINUX_dk_queueCommand(${DKCMAKE_BUILD} ${OPENAL_LINUX} ${FREEALUT})
-LINUX_dk_queueCommand(make alut_static)
+dk_visualStudio	(${FREEALUT_NAME} alut_static)
+dk_xcode		(${FREEALUT_NAME} alut_static)
+dk_make			(${FREEALUT_NAME} alut_static)
