@@ -9,10 +9,11 @@ dk_depend(system_configuration)
 dk_depend(dl)
 dk_depend(zlib)
 dk_depend(openssl)
+#dk_depend(openssl_binary)
 
 
-#dk_import(https://github.com/curl/curl/archive/refs/tags/curl-7_43_0.zip)
-dk_import(https://github.com/curl/curl.git)
+dk_import(https://github.com/curl/curl/archive/refs/tags/curl-7_43_0.zip)
+#dk_import(https://github.com/curl/curl.git)
 
 
 ### LINK ###
@@ -21,6 +22,7 @@ dk_include				(${CURL}/include)
 dk_include				(${CURL}/${OS}/include/curl)
 DEBUG_dk_include		(${CURL}/${OS}/${DEBUG_DIR}/include/curl)
 RELEASE_dk_include		(${CURL}/${OS}/${RELEASE_DIR}/include/curl)
+
 WIN_dk_libDebug			(${CURL}/${OS}/lib/${DEBUG_DIR}/libcurl-d.lib)
 WIN_dk_libRelease		(${CURL}/${OS}/lib/${RELEASE_DIR}/libcurl.lib)
 APPLE_dk_libDebug		(${CURL}/${OS}/lib/Debug/libcurl-d.a)
@@ -35,7 +37,7 @@ ANDROID_dk_libRelease	(${CURL}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/libcur
 
 ### GENERATE ###
 dk_setPath(${CURL}/${BUILD_DIR})
-WIN_dk_queueCommand			(${DKCMAKE_BUILD} -DCURL_STATICLIB=ON -DBUILD_CURL_EXE=OFF -DBUILD_CURL_TESTS=OFF -DCURL_DISABLE_LDAP=ON -DCURL_USE_OPENSSL=OFF ${OPENSSL_CMAKE} ${ZLIB_CMAKE} -DCURL_STATIC_CRT=ON ${CURL}) #-DBUILD_SHARED_LIBS=OFF 
+WIN_dk_queueCommand			(${DKCMAKE_BUILD} -DCURL_STATICLIB=ON -DBUILD_CURL_EXE=OFF -DBUILD_CURL_TESTS=OFF -DCURL_DISABLE_LDAP=ON -DCURL_USE_OPENSSL=ON ${OPENSSL_CMAKE} ${ZLIB_CMAKE} -DCURL_STATIC_CRT=ON ${CURL})
 APPLE_dk_queueCommand		(${DKCMAKE_BUILD} -DCURL_STATICLIB=ON -DBUILD_CURL_EXE=OFF -DBUILD_CURL_TESTS=OFF -DCURL_DISABLE_LDAP=ON -DCURL_USE_OPENSSL=OFF ${OPENSSL_CMAKE} ${ZLIB_CMAKE} ${CURL})
 LINUX_dk_queueCommand		(${DKCMAKE_BUILD} -DCURL_STATICLIB=ON -DBUILD_CURL_EXE=OFF -DBUILD_CURL_TESTS=OFF -DCURL_DISABLE_LDAP=ON -DCURL_USE_OPENSSL=OFF ${OPENSSL_CMAKE} ${ZLIB_CMAKE} ${CURL})
 RASPBERRY_dk_queueCommand	(${DKCMAKE_BUILD} -DCURL_STATICLIB=ON -DBUILD_CURL_EXE=OFF -DBUILD_CURL_TESTS=OFF -DCURL_DISABLE_LDAP=ON -DCURL_USE_OPENSSL=OFF ${OPENSSL_CMAKE} ${ZLIB_CMAKE} ${CURL})
@@ -45,9 +47,6 @@ ANDROID_dk_queueCommand		(${DKCMAKE_BUILD} -DCURL_STATICLIB=ON -DBUILD_CURL_EXE=
 dk_visualStudio				(${CURL_NAME} libcurl) #windows, android
 dk_xcode					(${CURL_NAME} libcurl) #mac, ios, iossim
 dk_make						(${CURL_NAME} libcurl) #linux, raspberry
-#LINUX_dk_queueCommand		(make libcurl)
-#RASPBERRY_dk_queueCommand	(make libcurl)
-
 
 
 # arm64
