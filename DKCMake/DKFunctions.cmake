@@ -55,6 +55,31 @@ endmacro()
 
 
 ###############################################################################
+# dk_pad(str padchar length RESULT)
+#
+#	TODO
+#
+function(dk_pad str padchar length RESULT)
+  string(LENGTH "${str}" _strlen)
+  math(EXPR _strlen "${length} - ${_strlen}")
+
+  if(_strlen GREATER 0)
+    if(${CMAKE_VERSION} VERSION_LESS "3.14")
+      unset(_pad)
+      foreach(_i RANGE 1 ${_strlen}) # inclusive
+        string(APPEND _pad ${padchar})
+      endforeach()
+    else()
+      string(REPEAT ${padchar} ${_strlen} _pad)
+    endif()
+    string(APPEND str ${_pad})
+  endif()
+
+  set(${RESULT} "${str}" PARENT_SCOPE)
+endfunction()
+
+
+###############################################################################
 # dk_includes(variable find RESULT [REVERSE])
 #
 #	Test if a string contains a substring
