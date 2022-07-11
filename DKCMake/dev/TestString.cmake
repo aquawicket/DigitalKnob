@@ -27,6 +27,7 @@ CMAKE_MINIMUM_REQUIRED(VERSION 3.10)
 CMAKE_POLICY(SET CMP0007 NEW)
 include(../DK.cmake)
 include(../DKString.cmake)
+dk_clearScreen()
 
 message(STATUS " ")
 message(STATUS "#####################################")

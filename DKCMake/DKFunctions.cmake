@@ -3971,5 +3971,15 @@ function(dk_killProcess name)
 endfunction()
 
 
+###############################################################################
+# dk_clearScreen()
+#
+#	TODO
+#
+function(dk_clearScreen)
+	execute_process(COMMAND "cmd /c cls")
+endfunction()
+
+
 
 include(${DKFunctions_ext})
