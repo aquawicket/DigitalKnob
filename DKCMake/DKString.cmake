@@ -194,7 +194,7 @@ endfunction()
 
 
 
-set(string_Ext OFF)
+set(string_Ext ON)
 #########################################################
 #  string_Ext.cmake
 #

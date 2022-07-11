@@ -34,17 +34,17 @@ set(ColourBold  "${ESC}[1m")
 
 # Regular Colors
 set(black        "${ESC}[30;100m")
-set(red          "${ESC}[31m")
+set(red          "${ESC}[31m") # error
 set(green        "${ESC}[32m")
-set(yellow       "${ESC}[33m")
-set(blue         "${ESC}[34m")
-set(magenta      "${ESC}[35m")
-set(cyan         "${ESC}[36m")
-set(white        "${ESC}[37m")
+set(yellow       "${ESC}[33m") # warn
+set(blue         "${ESC}[34m") # debug
+set(magenta      "${ESC}[35m") 
+set(cyan         "${ESC}[36m") 
+set(white        "${ESC}[37m") # info
 
 # Bold
 set(B_black      "${ESC}[1;30m")
-set(B_red        "${ESC}[1;31m")
+set(B_red        "${ESC}[1;31m") # assert
 set(B_green      "${ESC}[1;32m")
 set(B_yellow     "${ESC}[1;33m")
 set(B_blue       "${ESC}[1;34m")
