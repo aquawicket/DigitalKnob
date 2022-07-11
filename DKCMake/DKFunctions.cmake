@@ -3977,6 +3977,7 @@ endfunction()
 #	TODO
 #
 function(dk_clearScreen)
+	dk_debug("clear screen")
 	execute_process(COMMAND "cmd /c cls")
 endfunction()
 

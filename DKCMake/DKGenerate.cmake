@@ -27,7 +27,7 @@ if(EXISTS $ENV{DKCMAKE})
 	set(ENV{DKCMAKE} "$ENV{DKCMAKE}/")
 endif()
 include("$ENV{DKCMAKE}DK.cmake")
-
+include("$ENV{DKCMAKE}DKDisabled.cmake") 
 
 dk_info("\n")
 dk_info("############################################################")
