@@ -1,7 +1,6 @@
 :: NOTE: you'll need to download and install openssl for this, link below
 :: https://slproweb.com/products/Win32OpenSSL.html
 :: https://slproweb.com/download/Win32OpenSSL-1_1_1L.exe
-
 @echo off & %dkbatch%
 
 

@@ -1,6 +1,5 @@
 @echo off & %dkbatch%
 
-
 set "GOOGLE_CERT=%JAVA_HOME%\google.cer"
 set "MAVEN_CERT=%JAVA_HOME%\maven.cer"
 set "KEYTOOL_EXE=%JAVA_HOME%\bin\keytool.exe"
