@@ -1,4 +1,3 @@
-include_guard()
 # https://github.com/organization/package
 
 
@@ -26,5 +25,5 @@ dk_queueCommand	(${DKCMAKE_BUILD} ${PACKAGE})
 
 ### COMPILE ###
 dk_visualStudio (${PACKAGE_NAME} package) # WIN_dk_visualStudio(), ANDROID_dk_visualStudio()
-dk_xcode		(${PACKAGE_NAME} package) # MAC_dk_xcode(), IOS_XCODE, IOSSIM_dk_xcode()
+dk_xcode		(${PACKAGE_NAME} package) # MAC_dk_xcode(), IOS_dk_xcode(), IOSSIM_dk_xcode()
 dk_make			(${PACKAGE_NAME} package) # LINUX_dk_queueCommand(make), RASPBERRY_dk_queueCommand(make)
