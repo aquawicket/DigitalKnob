@@ -8,8 +8,8 @@ dk_depend(ws2_32.lib)
 dk_depend(system_configuration)
 dk_depend(dl)
 dk_depend(zlib)
-dk_depend(openssl)
-#dk_depend(openssl_binary)
+#dk_depend(openssl)
+dk_depend(openssl_binary)
 
 
 dk_import(https://github.com/curl/curl/archive/refs/tags/curl-7_43_0.zip)
