@@ -77,7 +77,7 @@ dk_disable(libvncserver-master-win)
 dk_disable(libx11)
 dk_disable(miniweb)
 dk_disable(msys2)
-dk_disable(notepadpp)
+#dk_disable(notepadpp)
 dk_disable(opencv)					#WORKING, just disabled because it takes so long to compile
 dk_disable(openframeworks)
 dk_disable(openscenegraph)          # Openscenegraph
