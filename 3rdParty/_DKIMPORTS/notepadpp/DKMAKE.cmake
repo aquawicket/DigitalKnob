@@ -14,5 +14,4 @@ dk_set(NOTEPADPP ${3RDPARTY}/${NOTEPADPP_NAME})
 dk_set(NOTEPADPP_EXE ${NOTEPADPP}/notepadpp.exe)
 
 ### INSTALL ###
-#dk_import(${NOTEPADPP_DL} ${NOTEPADPP})
 dk_import(${NOTEPADPP_DL} ${NOTEPADPP})
