@@ -11,7 +11,7 @@ dk_depend(msys2)
 dk_depend(libgcc)
 
 
-dk_import(https://github.com/kiyolee/bzip2-win-build.git)
+dk_import(https://github.com/kiyolee/bzip2-win-build.git BRANCH main)
 
 
 ### LINK ###
