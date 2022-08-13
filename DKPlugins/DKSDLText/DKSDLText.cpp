@@ -23,7 +23,7 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */
-#ifdef HAVE_sdl_ttf
+//#ifdef HAVE_sdl_ttf
 
 #include "DK/stdafx.h"
 #include "DKSDLText.h"
@@ -96,4 +96,4 @@ bool DKSDLText::Render()
 	return true;
 }
 
-#endif //HAVE_sdl_ttf
+//#endif //HAVE_sdl_ttf

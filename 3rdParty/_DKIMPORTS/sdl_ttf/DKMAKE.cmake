@@ -6,8 +6,7 @@
 dk_depend(sdl)
 dk_depend(freetype)
 
-
-dk_import(https://codeload.github.com/libsdl-org/SDL_ttf/zip/455d885c33dd26a21486bc2a2ede51aca4541679 PATCH)
+dk_import(https://github.com/libsdl-org/SDL_ttf/archive/455d885c33dd26a21486bc2a2ede51aca4541679.zip PATCH)
 #dk_import(https://github.com/libsdl-org/SDL_ttf/archive/06f1158066a5556f074fe020e407e6efcc9ff8e1.zip PATCH)
 #dk_import(https://github.com/libsdl-org/SDL_ttf.git main PATCH)
 
