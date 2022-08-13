@@ -55,5 +55,3 @@ public:
 REGISTER_OBJECT(DKSDLText, true)
 
 #endif //DKSDLText_H
-
-//#endif //HAVE_sdl_ttf
