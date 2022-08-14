@@ -53,7 +53,6 @@ dk_disable(DKPlugin2)
 dk_disable(DKRestart)
 dk_disable(DKScreenRecorder)
 dk_disable(DKSDLAudio)
-#dk_disable(DKSDLText)
 dk_disable(DKSDLWav)
 dk_disable(DKSDLVideo)
 dk_disable(DKSFMLRml)               # incomplete
@@ -100,7 +99,7 @@ if(NOT WIN_HOST) # Disabled on Non-Windows host machines
 	dk_disable(vs16-redistributable)
 endif()
 if(WIN) # Disabled for Windows targets
-	dk_disable(build-essential)
+	#dk_disable(build-essential)
 	dk_disable(DKOcr)
 	dk_disable(DKWebSockets)
 	dk_disable(freealut)

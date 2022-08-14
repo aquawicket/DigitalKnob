@@ -4,6 +4,5 @@ endif()
 
 dk_depend(openjdk)
 
-
 dk_set(CURRENT_DIR /usr)
 dk_command(sudo apt -y install build-essential)
