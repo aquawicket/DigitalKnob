@@ -85,7 +85,8 @@ bool DKClass::_Valid(const DKString& data){
 	}
 	//DKLOG("DKClass::_Valid(): "+arry[0]+" not registered\n", DKWARN);
 	//DKLOG("   Open DKMAKE.cmake and add DKDEPEND("+arry[0]+"), and rebuild\n", DKWARN);
-	return NULL;
+	//return NULL;
+	return false;
 }
 
 bool DKClass::_Available(const DKString& data){
