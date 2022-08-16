@@ -596,16 +596,21 @@ bool DKFile::GetRelativePath(const DKString& file, const DKString& path, DKStrin
 	if (path2.back() == '/')
 		path2.pop_back();
 	DKINFO("DKFile::GetRelativePath("+file2+","+path2+",DKString&) \n");
-	int MAX_FILENAME_LEN = 512;
-	int ABSOLUTE_NAME_START = 1;
+	//int MAX_FILENAME_LEN = 512;
+	size_t MAX_FILENAME_LEN = 512;
+	//int ABSOLUTE_NAME_START = 1;
+	size_t ABSOLUTE_NAME_START = 1;
 	int SLASH = '/';
 	const char* absoluteFilename = file2.c_str();
 	const char* currentDirectory = path2.c_str();
 	// declarations - put here so this should work in a C compiler
 	int afMarker = 0, rfMarker = 0;
-	int cdLen = 0, afLen = 0;
-	int i = 0;
-	int levels = 0;
+	//int cdLen = 0, afLen = 0;
+	size_t cdLen = 0, afLen = 0;
+	//int i = 0;
+	size_t i = 0;
+	//int levels = 0;
+	size_t levels = 0;
 	static char relativeFilename[512];
 	cdLen = strlen(currentDirectory);
 	afLen = strlen(absoluteFilename);

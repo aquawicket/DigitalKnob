@@ -645,13 +645,15 @@ bool DKWindows::SetClipboardFiles(const DKString& filelist){
 	DKString sFiles = filelist;
 	replace(sFiles, ",", "\0"); //not working
 	DROPFILES dobj = { 20, { 0, 0 }, 0, 1 };
-	int nLen = sFiles.size(); //sizeof(sFiles);
+	//int nLen = sFiles.size(); //sizeof(sFiles);
+	size_t nLen = sFiles.size();
 	int nGblLen = sizeof(dobj) + nLen*2 + 5; //lots of nulls and multibyte_char
 	HGLOBAL hGbl = GlobalAlloc(GMEM_ZEROINIT|GMEM_MOVEABLE|GMEM_DDESHARE, nGblLen);
 	char* sData = (char*)::GlobalLock(hGbl);
 	memcpy(sData, &dobj, 20);
 	char* sWStr = sData+20;
-	for(int i = 0; i < nLen*2; i += 2)
+	//for(int i = 0; i < nLen*2; i += 2)
+	for (size_t i = 0; i < nLen * 2; i += 2)
 		sWStr[i] = sFiles[i/2];
 	::GlobalUnlock(hGbl);
 	if(OpenClipboard(NULL)){

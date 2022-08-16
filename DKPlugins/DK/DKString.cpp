@@ -346,7 +346,8 @@ bool getSettingFromString(const DKString& filestring, const DKString& setting, D
 	//then we return the rest of the line
 	DKString string = setting + " ";
 	std::string::size_type temp = filestring.find(string,0);
-    if(temp == std::string::npos){return false;}
+    if(temp == std::string::npos)
+		return false;
 	std::string::size_type start = filestring.find(" ",temp);
 	std::string::size_type end = filestring.find("\n",start);
 	DKString out = filestring.substr(start+1, end-start-1);
@@ -361,12 +362,14 @@ bool toStringArray(DKStringArray& output, const DKString& str, const DKString& s
 	//FIXME - while(1) loops are dangerous 
 	DKString text = str + seperator; //add a seperator at the end, or we won't get the last variable
 
-	int begin = 0;
+	//int begin = 0;
+	size_t begin = 0;
 	//int end;
 	while(1){
 	//while(end != std::string::npos){
 		std::string::size_type end = text.find(seperator, begin);
-		if(end==std::string::npos){return true;}
+		if(end==std::string::npos)
+			return true;
 		DKString temp = text.substr(begin, end-begin);
 		replace(temp,"\r","");
 		replace(temp,"\n"," ");
