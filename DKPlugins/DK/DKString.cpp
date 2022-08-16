@@ -279,7 +279,7 @@ std::wstring toWString(const DKString& str){
 HWND toHWND(const DKString& str){
 	DKString hex = str;
 	hex.erase(0,2);
-	unsigned int x;   
+	size_t x;
 	std::stringstream ss;
 	ss << std::hex << hex;
 	ss >> x;

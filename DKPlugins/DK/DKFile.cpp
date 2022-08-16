@@ -604,7 +604,8 @@ bool DKFile::GetRelativePath(const DKString& file, const DKString& path, DKStrin
 	const char* absoluteFilename = file2.c_str();
 	const char* currentDirectory = path2.c_str();
 	// declarations - put here so this should work in a C compiler
-	int afMarker = 0, rfMarker = 0;
+	//int afMarker = 0, rfMarker = 0;
+	size_t afMarker = 0, rfMarker = 0;
 	//int cdLen = 0, afLen = 0;
 	size_t cdLen = 0, afLen = 0;
 	//int i = 0;

@@ -143,7 +143,7 @@ bool DKWindows::DrawTextOnScreen(const DKString& text){
 	HDC screenDC = ::GetDC(GetDesktopWindow());
 	::SetBkColor(screenDC, TRANSPARENT);
 	::SetTextColor(screenDC, RGB(0, 255, 0));
-	::TextOut(screenDC, 10, 10, TEXT(text.c_str()), strlen(text.c_str()));
+	::TextOut(screenDC, 10, 10, TEXT(text.c_str()), (int)strlen(text.c_str()));
 	::ReleaseDC(0, screenDC);
 	return true;
 }
@@ -647,7 +647,8 @@ bool DKWindows::SetClipboardFiles(const DKString& filelist){
 	DROPFILES dobj = { 20, { 0, 0 }, 0, 1 };
 	//int nLen = sFiles.size(); //sizeof(sFiles);
 	size_t nLen = sFiles.size();
-	int nGblLen = sizeof(dobj) + nLen*2 + 5; //lots of nulls and multibyte_char
+	//int nGblLen = sizeof(dobj) + nLen*2 + 5; //lots of nulls and multibyte_char
+	size_t nGblLen = sizeof(dobj) + nLen * 2 + 5; //lots of nulls and multibyte_char
 	HGLOBAL hGbl = GlobalAlloc(GMEM_ZEROINIT|GMEM_MOVEABLE|GMEM_DDESHARE, nGblLen);
 	char* sData = (char*)::GlobalLock(hGbl);
 	memcpy(sData, &dobj, 20);
