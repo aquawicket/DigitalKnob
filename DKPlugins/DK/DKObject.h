@@ -110,8 +110,8 @@ public:
 	static void Close(const DKString& id = ""){
 		DKDEBUGFUNC(id);		
 		//if(id.empty()){ return; }
-		for(unsigned long i = instances.size() - 1; i >= 0 && i < instances.size(); --i) {
-		//for (size_t i = instances.size() - 1; i >= 0 && i < instances.size(); --i) {
+		//for(unsigned long i = instances.size() - 1; i >= 0 && i < instances.size(); --i) {
+		for (size_t i = instances.size() - 1; i >= 0 && i < instances.size(); --i) {
 			if(id.empty() || same(id, instances[i]->data[1])){
 				//if(has(id,"/"))
 				//	DKERROR("Close(): "+id+" contains a /\n");
@@ -170,7 +170,8 @@ public:
 		DKDEBUGFUNC();
 		_instances = instances;
 	}
-	static unsigned long instance_count;
+	//static unsigned long instance_count;
+	static size_t instance_count;
 private:
 	static std::vector<T*> instances;
 	static char* classname;
@@ -178,7 +179,8 @@ private:
 };
 
 template<class T, class R>	char* DKBaseT<T,R>::classname;
-template<class T, class R>	unsigned long DKBaseT<T,R>::instance_count;
+//template<class T, class R>	unsigned long DKBaseT<T,R>::instance_count;
+template<class T, class R>	size_t DKBaseT<T,R>::instance_count;
 template<class T, class R>	bool DKBaseT<T,R>::_singleton;
 template<class T, class R>	std::vector<T*> DKBaseT<T,R>::instances;
 template <class T>

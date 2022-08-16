@@ -96,7 +96,8 @@ bool DKDuktape::Init(){
 	DKDEBUGFUNC();
 	ctx = NULL;
 	if(!ctx){
-		void* my_udata = (void*)0xdeadbeef;  /* whatever's most useful, can be NULL */
+		//void* my_udata = (void*)0xdeadbeef;  /* whatever's most useful, can be NULL */
+		void* my_udata = NULL;
 		//ctx = duk_create_heap_default();
 		ctx = duk_create_heap(NULL, NULL, NULL, my_udata, my_fatal);
 		if(!ctx)
@@ -386,7 +387,8 @@ bool DKDuktape::Reload(){
 	filelist.clear();
 	DKStringArray list;
 	DKClass::GetObjects(list);
-	for(unsigned long i=list.size()-1; i>0; --i){
+	//for(unsigned long i=list.size()-1; i>0; --i){
+	for (size_t i = list.size() - 1; i > 0; --i) {
 		if(!has(list[i],"DKJavascript,")){
 			if(has(list[i],"App0")){ continue; }
 			if(has(list[i],"DKAssets")){ continue; }
