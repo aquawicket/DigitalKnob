@@ -505,9 +505,11 @@ size_t DKCurl::WriteToFile(void *ptr, size_t size, size_t nmemb, FILE *stream){
 	return fwrite(ptr, size, nmemb, stream);
 }
 
-int DKCurl::WriteToBuffer(char *data, size_t size, size_t nmemb, std::string *buffer){
+//int DKCurl::WriteToBuffer(char *data, size_t size, size_t nmemb, std::string *buffer){
+size_t DKCurl::WriteToBuffer(char* data, size_t size, size_t nmemb, std::string* buffer) {
 	//DKDEBUGFUNC(data, size, nmemb, buffer);
-    unsigned long result = 0;
+    //unsigned long result = 0;
+	size_t result = 0;
     if(buffer != NULL){
         buffer->append(data, size * nmemb);
 		result = size * nmemb;
