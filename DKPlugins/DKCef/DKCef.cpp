@@ -320,15 +320,15 @@ bool DKCef::End(){
 	DKClass::DKClose("DKCefJS");
 	DKClass::DKClose("DKCefV8");
 	
-	//FIXME - many crashes at CefShutdown
 	unsigned long threadId;
 	DKUtil::GetThreadId(threadId);
-	if(cefThreadId != threadId){
-		DKERROR("DKCef::End(): Error: not in the main cef thread\n");
-		return false;
-	}
+	if(cefThreadId != threadId)
+		return DKERROR("DKCef::End(): Error: not in the main cef thread\n");
 	DKINFO("DKCef::End(): CefShutdown();\n");
-	//CefShutdown(); //call on same thread as CefInitialize
+
+	//FIXME - many crashes at CefShutdown
+	CefShutdown(); //call on same thread as CefInitialize
+
 #	ifdef WIN32
 		//FreeLibrary(libcef);
 #	endif
