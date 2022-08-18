@@ -155,7 +155,10 @@ public:
 
 	// CefPrintHandler
 	bool OnPrintDialog(CefRefPtr<CefBrowser> browser, bool has_selection, CefRefPtr<CefPrintDialogCallback> callback) override;
-	bool OnPrintJob(CefRefPtr<CefBrowser> browser, const CefString& document_name, const CefString& pdf_file_path, CefRefPtr<CefPrintJobCallback> callback) override { return true; }
+	bool OnPrintJob(CefRefPtr<CefBrowser> browser, const CefString& document_name, const CefString& pdf_file_path, CefRefPtr<CefPrintJobCallback> callback) override { 
+		DKDEBUGFUNC(browser, document_name, pdf_file_path, callback);
+		return true; 
+	}
 	void OnPrintReset(CefRefPtr<CefBrowser> browser) override {}
 	void OnPrintSettings(CefRefPtr<CefBrowser> browser, CefRefPtr<CefPrintSettings> settings, bool get_defaults) override {}
 	void OnPrintStart(CefRefPtr<CefBrowser> browser) override {}

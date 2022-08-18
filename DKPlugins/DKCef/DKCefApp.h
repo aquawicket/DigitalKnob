@@ -116,10 +116,16 @@ public:
 
 	// CefApp
 	void OnBeforeCommandLineProcessing(const CefString& process_type, CefRefPtr<CefCommandLine> command_line) override;
-	void OnRegisterCustomSchemes(CefRawPtr<CefSchemeRegistrar> registrar) override {}
+	void OnRegisterCustomSchemes(CefRawPtr<CefSchemeRegistrar> registrar) override {
+		registrar;
+	}
 	//CefRefPtr<CefResourceBundleHandler> GetResourceBundleHandler() override;
-	CefRefPtr<CefBrowserProcessHandler> GetBrowserProcessHandler() override { return this; }
-	CefRefPtr<CefRenderProcessHandler> GetRenderProcessHandler() override { return this; }
+	CefRefPtr<CefBrowserProcessHandler> GetBrowserProcessHandler() override { 
+		return this; 
+	}
+	CefRefPtr<CefRenderProcessHandler> GetRenderProcessHandler() override { 
+		return this; 
+	}
 
 	// CefResourceBundleHandler
 	//bool GetLocalizedString(int string_id, CefString& string) override;

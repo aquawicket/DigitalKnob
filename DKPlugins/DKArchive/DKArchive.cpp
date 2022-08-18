@@ -115,7 +115,11 @@ bool DKArchive::Extract(const DKString& file, const DKString& path){
 
 bool DKArchive::Compress(const DKString& path, const DKString& file){
 	DKDEBUGFUNC(path, file);
-#ifndef ANDROID
+
+#	ifdef ANDROID
+		return DKERROR("not implemented on Android\n")
+#	endif //ANDROID
+
 	if(!DKFile::PathExists(path))
 		return DKERROR("path does not exist ("+path+")\n");
 	DKStringArray files;
@@ -145,7 +149,7 @@ bool DKArchive::Compress(const DKString& path, const DKString& file){
 			for (unsigned int s = 0; s < subfiles.size(); ++s){
 				files.push_back(files[i]+"/"+subfiles[s]);
 			}
-			//DKINFO("DKArchive::Compress() " + _path + files[i] + " :compressing recursive not supported\n");
+			//DKINFO(_path + files[i] + " :compressing recursive not supported\n");
 			continue; //can't compress inner folders at the moment
 		} 
 		stat((_path+files[i]).c_str(), &st);
@@ -168,12 +172,10 @@ bool DKArchive::Compress(const DKString& path, const DKString& file){
 		archive_entry_free(entry);
 	}
 	archive_write_close(a);
-#if !defined(MAC) && !defined(IOS)
-	archive_write_free(a);
-#endif
+#	if !defined(MAC) && !defined(IOS)
+		archive_write_free(a);
+#	endif //!defined(MAC) && !defined(IOS)
 	return true;
-#endif
-	return DKERROR("not implemented");
 }
 
 int DKArchive::copy_data(struct archive* ar, struct archive* aw){

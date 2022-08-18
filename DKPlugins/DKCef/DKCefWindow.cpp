@@ -834,7 +834,7 @@ bool DKCefWindow::Windowed(const void* input, void* output)
 
 void DKCefWindow::GetViewRect(CefRefPtr<CefBrowser> browser, CefRect& rect)
 {
-	DKDEBUGFUNC(browser, "CefRect&");
+	DKDEBUGFUNC(browser, rect);
 	CEF_REQUIRE_UI_THREAD();
 	//rect = CefRect(0, 0, dkCef->width, dkCef->height);
 }
@@ -848,7 +848,7 @@ void DKCefWindow::OnAfterCreated(CefRefPtr<CefBrowser> browser)
 
 bool DKCefWindow::OnBeforePopup(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, const CefString& target_url, const CefString& target_frame_name, CefLifeSpanHandler::WindowOpenDisposition target_disposition, bool user_gesture, const CefPopupFeatures& popupFeatures, CefWindowInfo& windowInfo, CefRefPtr<CefClient>& client, CefBrowserSettings& settings, CefRefPtr<CefDictionaryValue>& extra_info, bool* no_javascript_access)
 {
-	DKDEBUGFUNC(browser, frame, "const CefString&", "const CefString&", target_disposition, user_gesture, "const CefPopupFeatures&", "CefWindowInfo&", client, "CefBrowserSettings&", no_javascript_access);
+	DKDEBUGFUNC(browser, frame, target_url, "const CefString&", target_disposition, user_gesture, "const CefPopupFeatures&", "CefWindowInfo&", client, "CefBrowserSettings&", no_javascript_access);
 	CEF_REQUIRE_UI_THREAD();
 	return false;
 }

@@ -76,6 +76,7 @@ int DKCefJS::CloseDevTools(duk_context* ctx){
 
 
 int DKCefJS::Copy(duk_context* ctx){
+	ctx;
 	if(!DKCef::Get()->Copy())
 		return 0;
 	return 1;
@@ -89,6 +90,7 @@ int DKCefJS::CopyImage(duk_context* ctx){
 }
 
 int DKCefJS::Cut(duk_context* ctx){
+	ctx;
 	if(!DKCef::Get()->Cut())
 		return 0;
 	return 1;
@@ -184,6 +186,7 @@ int DKCefJS::NewBrowser(duk_context* ctx){
 }
 
 int DKCefJS::Paste(duk_context* ctx){
+	ctx;
 	if(!DKCef::Get()->Paste())
 		return 0;
 	return 1;

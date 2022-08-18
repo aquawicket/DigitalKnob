@@ -49,6 +49,8 @@ CefRefPtr<CefListValue> DKCefChildV8Handler::myRetval;
 
 int main(int argc, char* argv[]){
 	printf("[DKCefChild] main()\n");
+	argc;
+	argv;
 
 #ifdef CEF_USE_SANDBOX
 	CefScopedSandboxContext sandbox_context;
@@ -74,6 +76,8 @@ int main(int argc, char* argv[]){
 }
 
 bool DKCefChildV8Handler::Execute(const CefString& name, CefRefPtr<CefV8Value> object, const CefV8ValueList& arguments, CefRefPtr<CefV8Value>& retval, CefString& exception){
+	exception;
+	retval;
 	std::string func = name;
 	std::string text = "DKCefChildV8Handler::Execute("+func+", object, arguments, retval, exception)\n";
 	printf(text.c_str());
@@ -158,6 +162,8 @@ void DKCefChildApp::OnBeforeCommandLineProcessing(const CefString& process_type,
 #ifndef DEBUG
 	CEF_REQUIRE_UI_THREAD();
 #endif
+	process_type;
+
 #ifndef DKCefChild
 	printf("[DKCefChild] DKCefChildApp::OnBeforeCommandLineProcessing()\n");
 	if(same(DKV8::multi_process, "OFF"))
@@ -250,6 +256,7 @@ bool DKCefChildApp::OnProcessMessageReceived(CefRefPtr<CefBrowser> browser, CefP
 #ifndef DEBUG
 	CEF_REQUIRE_UI_THREAD();
 #endif
+	source_process;
 	std::string name = std::string(message->GetName());
 	printf("[DKCefChild] DKCefChildApp::OnProcessMessageReceived(");
 	printf(name.c_str());

@@ -135,7 +135,7 @@ bool DKAssets::End(){
 }
 
 bool DKAssets::GetAssetsPath(DKString& path){
-	DKDEBUGFUNC();
+	DKDEBUGFUNC(path);
 	//If there is an assets directory below the app directory, then we are in a development environment.
 	//and we will point to that location for assets
 	
@@ -155,8 +155,7 @@ bool DKAssets::GetAssetsPath(DKString& path){
 		}
 	}
 	return false;
-#endif
-#ifdef MAC
+#elif MAC
 	if (DKFile::PathExists(DKFile::app_path + "../../../../../assets/") && 
 		DKFile::PathExists(DKFile::app_path + "../../../../../DKMAKE.cmake")) {
 		if (DKFile::GetAbsolutePath(DKFile::app_path + "../../../../../assets/", path)) {
@@ -164,8 +163,7 @@ bool DKAssets::GetAssetsPath(DKString& path){
 		}
 	}
 	return false;
-#endif
-#ifdef IOS
+#elif IOS
     std::string::size_type pos = DKFile::app_path.find("/Library");
     DKString userpath = DKFile::app_path.substr(0, pos);
     DKStringArray folders;
@@ -178,19 +176,19 @@ bool DKAssets::GetAssetsPath(DKString& path){
         }
     }
 	return false;
-#endif
-#ifdef LINUX
+#elif LINUX
 	if (DKFile::PathExists(DKFile::app_path + "../../assets/") && DKFile::PathExists(DKFile::app_path + "../../DKMAKE.cmake")) {
 		if (DKFile::GetAbsolutePath(DKFile::app_path + "../../assets/", path))
 			return true;
 	}
 	return false;
-#endif
+#else
 	return DKERROR("DKAssets::GetAssetsPath() not implemented on this platform \n");
+#endif
 }
 
 bool DKAssets::GetDataPath(DKString& path){
-	DKDEBUGFUNC();
+	DKDEBUGFUNC(path);
 #ifdef WIN32
 	DKString apppath;
 	DKFile::GetAppPath(apppath);
@@ -201,8 +199,7 @@ bool DKAssets::GetDataPath(DKString& path){
 		return true;
 	DKFile::MakeDir(path);
 	return false;
-#endif
-#ifdef ANDROID
+#elif ANDROID
 	//TODO - folder should be named /appname_Data/
 	//CallJavaFunction("getApplicationName", "");
 	//path = "/mnt/sdcard/"+DKFile::exe_path;
@@ -210,22 +207,19 @@ bool DKAssets::GetDataPath(DKString& path){
 	
 	path = DKFile::exe_path +"/assets/";
 	return true;
-#endif
-#ifdef MAC
+#elif MAC
     path = DKFile::exe_path;
     std::string::size_type n = path.find_last_of("/");
     path.erase (path.begin()+n+1, path.end());
 	replace(path, "/MacOS", "/Resources");
 	return true;
-#endif
-#ifdef IOS //FIXME - double check that iOS doesn't have the MAC preprocessor definition.
+#elif IOS //FIXME - double check that iOS doesn't have the MAC preprocessor definition.
 	path = DKFile::exe_path;
     std::string::size_type n = path.find_last_of("/");
     path.erase(path.begin()+n+1, path.end());
 	path += "assets/";
 	return true;
-#endif
-#ifdef LINUX
+#elif LINUX
 	DKString apppath;
 	DKFile::GetAppPath(apppath);
 	DKString appname;
@@ -235,8 +229,9 @@ bool DKAssets::GetDataPath(DKString& path){
 		return true;
 	DKFile::MakeDir(path);
 	return false;
-#endif
+#else
 	return DKERROR("DKAssets::GetDataPath() not implemented on this OS \n");
+#endif
 }
 
 bool DKAssets::PackageAssets(DKString& dataFolder, DKString& headerFile){

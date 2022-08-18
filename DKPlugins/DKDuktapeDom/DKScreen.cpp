@@ -61,30 +61,36 @@ bool DKScreen::Init(){
 //Properties
 int DKScreen::availTop(duk_context* ctx){
 	//TODO
+	DKDEBUGFUNC(ctx);
 	return false;
 }
 
 int DKScreen::availLeft(duk_context* ctx){
 	//TODO
+	DKDEBUGFUNC(ctx);
 	return false;
 }
 
 int DKScreen::availHeight(duk_context* ctx){
 	//TODO
+	DKDEBUGFUNC(ctx);
 	return false;
 }
 
 int DKScreen::availWidth(duk_context* ctx){
 	//TODO
+	DKDEBUGFUNC(ctx);
 	return false;
 }
 
 int DKScreen::colorDepth(duk_context* ctx){
 	//TODO
+	DKDEBUGFUNC(ctx);
 	return false;
 }
 
 int DKScreen::height(duk_context* ctx){
+	DKDEBUGFUNC(ctx);
 	int height;
 	if(!DKUtil::GetScreenHeight(height)){ return 0; }
 	duk_push_number(ctx, height);
@@ -93,25 +99,30 @@ int DKScreen::height(duk_context* ctx){
 
 int DKScreen::left(duk_context* ctx){
 	//TODO
+	DKDEBUGFUNC(ctx);
 	return false;
 }
 
 int DKScreen::orientation(duk_context* ctx){
 	//TODO
+	DKDEBUGFUNC(ctx);
 	return false;
 }
 
 int DKScreen::pixelDepth(duk_context* ctx){
 	//TODO
+	DKDEBUGFUNC(ctx);
 	return false;
 }
 
 int DKScreen::top(duk_context* ctx){
 	//TODO
+	DKDEBUGFUNC(ctx);
 	return false;
 }
 
 int DKScreen::width(duk_context* ctx){
+	DKDEBUGFUNC(ctx);
 	int width;
 	if(!DKUtil::GetScreenWidth(width)) { return 0; }
 	duk_push_number(ctx, width);
@@ -120,11 +131,13 @@ int DKScreen::width(duk_context* ctx){
 
 int DKScreen::mozEnabled(duk_context* ctx){
 	//TODO
+	DKDEBUGFUNC(ctx);
 	return false;
 }
 
 int DKScreen::mozBrightness(duk_context* ctx){
 	//TODO
+	DKDEBUGFUNC(ctx);
 	return false;
 }
 
@@ -133,12 +146,14 @@ int DKScreen::mozBrightness(duk_context* ctx){
 //Methods
 int DKScreen::lockOrientation(duk_context* ctx) {
 	//TODO - https://developer.mozilla.org/en-US/docs/Web/API/Screen/lockOrientation
+	DKDEBUGFUNC(ctx);
 	DKString orientation = duk_require_string(ctx, 0);
 	return false;
 }
 
 int DKScreen::unlockOrientation(duk_context* ctx){
 	//TODO - https://developer.mozilla.org/en-US/docs/Web/API/Screen/unlockOrientation
+	DKDEBUGFUNC(ctx);
 	return false;
 }
 
