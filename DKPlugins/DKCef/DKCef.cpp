@@ -251,7 +251,7 @@ bool DKCef::Init(){
 #		endif
 
 		if(!DKFile::PathExists(ep)){
-		    DKWARN("DKCef::Init(): file not found: "+ep+"\n");
+		    DKWARN("file not found: "+ep+"\n");
 		    //TODO: disable multi-process
 		}
 		CefString(&settings.browser_subprocess_path) = ep.c_str(); //DKCefChild.exe
@@ -270,7 +270,7 @@ bool DKCef::Init(){
 #	ifdef LINUX
 		DKString ep = DKFile::local_assets + "DKCef/DKCefChild";
 		if(!DKFile::PathExists(ep)){
-		    DKERROR("DKCef::Init(): file not found: "+ep+"\n");
+		    DKERROR("file not found: "+ep+"\n");
 		    //TODO: disable multi-process
 		}
 		CefString(&settings.browser_subprocess_path) = ep.c_str(); //DKCefChild
@@ -323,8 +323,8 @@ bool DKCef::End(){
 	unsigned long threadId;
 	DKUtil::GetThreadId(threadId);
 	if(cefThreadId != threadId)
-		return DKERROR("DKCef::End(): Error: not in the main cef thread\n");
-	DKINFO("DKCef::End(): CefShutdown();\n");
+		return DKERROR("Error: not in the main cef thread\n");
+	DKINFO("CefShutdown();\n");
 
 	//FIXME - many crashes at CefShutdown
 	CefShutdown(); //call on same thread as CefInitialize
@@ -338,7 +338,7 @@ bool DKCef::End(){
 bool DKCef::CloseBrowser(const int& browser){
 	DKDEBUGFUNC(browser);
 	if((unsigned)browser > dkBrowsers.size()-1){
-		DKERROR("DKCef::CloseBrowser("+toString(browser)+"): ERROR: trying to delete a non-existent browser\n");
+		DKERROR("trying to delete a non-existent browser\n");
 		return false; 
 	}
 	dkBrowsers[browser].browser->GetHost()->CloseBrowser(true);
@@ -365,7 +365,7 @@ bool DKCef::CopyImage(const DKString& url){
 	NewBrowser();
 	int num;
 	GetBrowsers(num);
-	DKINFO("DKCef::CopyImage("+url+"): num = "+toString(num)+"\n");
+	DKINFO("num = "+toString(num)+"\n");
 	SetUrl(num-1, url);
 
 	//FIXME - we can't copy until the frame is loaded with the image. 
@@ -628,7 +628,7 @@ bool DKCef::NewBrowser(const DKString& id, const int& top, const int& left, cons
 				gdk_init(NULL, NULL);
 				GdkWindow* gdk_window = gdk_window_foreign_new(current_browser->GetHost()->GetWindowHandle());
 				if(!gdk_window)
-				      return DKERROR("DKCef::NewBrowser(): gdk_window invalid\n");
+				      return DKERROR("gdk_window invalid\n");
 				gdk_window_set_title(gdk_window, title.c_str());
 #			endif //USE_GDK
 #		endif //LINUX
@@ -689,10 +689,10 @@ bool DKCef::RunJavascript(const int& browser, DKString& string){
 	//	return false;
 	//}
 	if (!DKUtil::InMainThread())
-		DKWARN("DKCef::RunJavascript(" + string + "): not in the main thread\n");
+		DKWARN("not in the main thread\n");
 	CefRefPtr<CefFrame> frame = dkBrowsers[browser].browser->GetMainFrame();
 	if(!frame)
-		return DKERROR("DKCef::RunJavascript("+string+"): frame invalid\n");
+		return DKERROR("frame invalid\n");
 	frame->ExecuteJavaScript(string.c_str(), frame->GetURL(), 0);
 	return true;
 }
@@ -700,7 +700,7 @@ bool DKCef::RunJavascript(const int& browser, DKString& string){
 bool DKCef::SetFocus(const int& browser) {
 	DKDEBUGFUNC(browser);
 	if(browser > (int)dkBrowsers.size() - 1)
-		return DKERROR("DKCef::SetFocus(): browser > dkBrowsers.size()\n");
+		return DKERROR("browser > dkBrowsers.size()\n");
 	dkBrowsers[browser].browser->GetHost()->SendFocusEvent(true);
 	current_browser = dkBrowsers[browser].browser;
 	current_browser->GetHost()->Invalidate(PET_VIEW);
@@ -710,7 +710,7 @@ bool DKCef::SetFocus(const int& browser) {
 bool DKCef::SetKeyboardFocus(const int& browser){
 	DKDEBUGFUNC(browser);
 	if(browser > (int)dkBrowsers.size() - 1)
-		return DKERROR("DKCef::SetKeyboardFocus(): browser > dkBrowsers.size()\n");
+		return DKERROR("browser > dkBrowsers.size()\n");
 	keyboardFocus = browser;
 	return true;
 }
@@ -718,7 +718,7 @@ bool DKCef::SetKeyboardFocus(const int& browser){
 bool DKCef::SetUrl(const int& browser, const DKString& url){
 	DKDEBUGFUNC(browser, url);
 	if(browser > (int)dkBrowsers.size() - 1)
-		return DKERROR("DKCef::SetUrl(): browser > dkBrowsers.size()\n");
+		return DKERROR("browser > dkBrowsers.size()\n");
 	if(same(url, "chrome://plugins")){
 		RunPluginInfoTest(dkBrowsers[browser].browser);
 		return true;
@@ -744,7 +744,7 @@ bool DKCef::ShowDevTools(const int& browser){
 bool DKCef::Stop(const int& browser){
 	DKDEBUGFUNC(browser);
 	if(browser > (int)dkBrowsers.size() - 1)
-		return DKERROR("DKCef::Stop(): browser > dkBrowsers.size()\n");
+		return DKERROR("browser > dkBrowsers.size()\n");
 	dkBrowsers[browser].browser->StopLoad();
 	return true;
 }
@@ -771,14 +771,14 @@ bool DKCef::SendEvent(const DKString& id, const DKString& type, const DKString& 
 	if(same(type,"restore")){ return false; }
 
 	if(dkBrowsers.size() <= 0)
-		return DKERROR("DKCef::SendEvent(): dkBrowsers.size() <= 0\n");
+		return DKERROR("dkBrowsers.size() <= 0\n");
 
 	//FIXME - make this work on all the browsers
 	//DKSendEvent to first browsers only for now. 
 	/*
 	CefRefPtr<CefFrame> frame = dkBrowsers[0].browser->GetMainFrame();
 	if(!frame)
-		return DKERROR("DKCef::SendEvent(): frame invalid \n");
+		return DKERROR("frame invalid \n");
 	DKString string = "CPP_DK_SendEvent(\""+id+"\",\""+type+"\",\""+value+"\");";
 	frame->ExecuteJavaScript(string.c_str(), frame->GetURL(), 0);
 	*/
@@ -788,7 +788,7 @@ bool DKCef::SendEvent(const DKString& id, const DKString& type, const DKString& 
 	for(unsigned int i=0; i<dkcef->browsers.size(); ++i){
 		CefRefPtr<CefFrame> frame = dkcef->browsers[i]->GetMainFrame();
 		if(!frame)
-			return DKERROR("DKCef::SendEvent(): frame invalid\n");
+			return DKERROR("frame invalid\n");
 		DKString string = "DKSendEvent(\""+id+"\",\""+type+"\",\""+value+"\");";
 		frame->ExecuteJavaScript(string.c_str(), frame->GetURL(), 0);
 	}
