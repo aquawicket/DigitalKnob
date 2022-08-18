@@ -449,7 +449,7 @@ bool DKCef::GetBrowserNumber(const DKString& id, int& browser){
 }
 
 bool DKCef::GetBrowsers(int& num){
-	num = dkBrowsers.size();
+	num = (int)dkBrowsers.size();
 	DKDEBUGRETURN(num);
 	return true;
 }
@@ -567,7 +567,7 @@ bool DKCef::NewBrowser(const DKString& id, const int& top, const int& left, cons
 		dkBrowser.url = url;
 		dkBrowsers.push_back(dkBrowser);
 		*/
-		SetFocus(dkBrowsers.size()-1);
+		SetFocus((int)dkBrowsers.size()-1);
 
 		//current_browser->GetHost()->SetWindowlessFrameRate(60); //do we need this?
 	}

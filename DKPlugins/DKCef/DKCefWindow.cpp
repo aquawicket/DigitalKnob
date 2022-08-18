@@ -618,7 +618,7 @@ bool DKCefWindow::SetIcon(const void* input, void* output)
 		DKERROR("DKCefWindow::SetIcon(): hwnd is invalid \n");
 		return false;
 	}
-	HINSTANCE hinstance = (HINSTANCE)GetWindowLong(hwnd, GWLP_HINSTANCE); //WIN32 may require GWL_HINSTANCE
+	HINSTANCE hinstance = (HINSTANCE)(LONG_PTR)GetWindowLong(hwnd, GWLP_HINSTANCE); //WIN32 may require GWL_HINSTANCE
 	if(!hinstance){
 		DKERROR("DKCefWindow::SetIcon(): hinstance is invalid \n");
 		return false;
