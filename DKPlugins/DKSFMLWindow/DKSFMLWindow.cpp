@@ -92,7 +92,8 @@ void DKSFMLWindow::Process()
 	}
 
 	// Activate the window for OpenGL rendering
-	window.setActive();
+	if (!window.setActive()) //WARNING: discarding return value of function with 'nodiscard' attribute
+		DKERROR("window.setActive() failed");
 
 	// OpenGL drawing commands go here...
 

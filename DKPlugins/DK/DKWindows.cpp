@@ -691,8 +691,14 @@ bool DKWindows::SetClipboardImage(const DKString& file){
 		bi.biBitCount = 8;
 	else // if greater than 8-bit, force to 24-bit
 		bi.biBitCount = 24;
+
+	// https://docs.microsoft.com/en-us/cpp/error-messages/compiler-warnings/compiler-warning-level-3-c4334?view=msvc-170
 	// Get size of color table.
+#if WIN32 && !WIN64
 	SIZE_T dwColTableLen = (bi.biBitCount <= 8) ? (1 << bi.biBitCount) * sizeof(RGBQUAD) : 0;
+#else if WIN64
+	SIZE_T dwColTableLen = (bi.biBitCount <= 8) ? (1i64 << bi.biBitCount) * sizeof(RGBQUAD) : 0;
+#endif
 	// Create a device context with palette
 	HDC hDC = ::GetDC(NULL);
 	HPALETTE hPal = static_cast<HPALETTE>(::GetStockObject(DEFAULT_PALETTE));
