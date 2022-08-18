@@ -605,7 +605,8 @@ void DKSDLWindow::Process() {
         render_funcs[i](); //Call render functions     //TODO: add a duktape sheet here to manipulate SDL via javascript
     SDL_Event e;
     while(SDL_PollEvent(&e)) {
-        for(unsigned long i = 0; i < event_funcs.size(); ++i) {
+       // for(unsigned long i = 0; i < event_funcs.size(); ++i) {
+        for (size_t i = 0; i < event_funcs.size(); ++i) {
             if(event_funcs[i](&e)) //Call event functions
                 i = event_funcs.size();	//eat the event
         }
