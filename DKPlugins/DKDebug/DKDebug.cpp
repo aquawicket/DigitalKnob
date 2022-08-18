@@ -119,10 +119,12 @@ static LONG __stdcall CrashHandlerExceptionFilter(EXCEPTION_POINTERS* pExPtrs){
 		_T("   Please report!"),
 		pExPtrs->ExceptionRecord->ExceptionCode,
 		pExPtrs->ExceptionRecord->ExceptionFlags,
-		(unsigned int)pExPtrs->ExceptionRecord->ExceptionAddress);
+		//(unsigned int)pExPtrs->ExceptionRecord->ExceptionAddress);
+		PtrToUint(pExPtrs->ExceptionRecord->ExceptionAddress));
 	//Upload error file
 	TCHAR filename[500];
-	_stprintf_s(filename,_T("0x%8.8X"), (unsigned int)pExPtrs->ExceptionRecord->ExceptionAddress);
+	//_stprintf_s(filename,_T("0x%8.8X"), (unsigned int)pExPtrs->ExceptionRecord->ExceptionAddress);
+	_stprintf_s(filename, _T("0x%8.8X"), PtrToUint(pExPtrs->ExceptionRecord->ExceptionAddress));
 	if(!DKFile::Copy(DKFile::local_assets+"log.txt", DKFile::local_assets+DKString(filename)+".log", true, false))
 		return EXCEPTION_CONTINUE_SEARCH; 
 	//DKCurl* dkCurl = DKCurl::Instance("DKCurl0");
