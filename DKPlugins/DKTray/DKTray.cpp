@@ -34,7 +34,7 @@ DKString DKTray::icon;
 	CSystemTray DKTray::TrayIcon;
 #endif
 
-///////////////////
+
 bool DKTray::Init()
 {
 	DKDEBUGFUNC();
@@ -57,7 +57,7 @@ bool DKTray::Init()
 
 	DKWindows::hInstance = GetModuleHandle(0);
 	if (!TrayIcon.Create(DKWindows::hInstance, NULL, WM_ICON_NOTIFY, _T("DKTray Icon"), hIcon/*::LoadIcon(DKApp::hInstance, (LPCTSTR)IDI_TASKBARDEMO)*/, IDR_POPUP_MENU))
-		return DKERROR("DKTray::Init(): TrayIcon invalid\n");
+		return DKERROR("TrayIcon invalid\n");
 
 	setCallback(&OnTrayNotification);
 	//TrayIcon.SetTargetWnd(DKOSGWindow::Instance("DKOSGWindow")->hwnd); //This actually breaks it
@@ -71,17 +71,16 @@ bool DKTray::Init()
 		else if(DKClass::HasFunc("DKOSGWindow::Hide"))
 			DKClass::CallFunc("DKOSGWindow::Hide", NULL, NULL);
 		else
-			DKERROR("DKTray::Init(): DKWindow::Hide() - No function available\n");
+			DKERROR("DKWindow::Hide() - No function available\n");
 	}
 	
 	DKApp::AppendLoopFunc(&DKTray::Process, this);
 	return true;
 #else
-	return DKERROR("DKTray::Init() not implemented on this OS\n");
+	return DKERROR("not implemented on this OS\n");
 #endif
 }
 
-//////////////////
 bool DKTray::End()
 {
 	DKDEBUGFUNC();
@@ -92,8 +91,6 @@ bool DKTray::End()
 }
 
 
-
-///////////////////////////////////////////////////
 bool DKTray::AddItem(const DKString& name, int& id)
 {
 	DKDEBUGFUNC(name, id);
@@ -103,7 +100,6 @@ bool DKTray::AddItem(const DKString& name, int& id)
 	return true;
 }
 
-////////////////////////////////////
 bool DKTray::GetIcon(DKString& file)
 {
 	DKDEBUGFUNC(file);
@@ -111,7 +107,6 @@ bool DKTray::GetIcon(DKString& file)
 	return true;
 }
 
-//////////////////////////////////////////
 bool DKTray::SetIcon(const DKString& file)
 {
 	DKDEBUGFUNC(file);
@@ -121,12 +116,11 @@ bool DKTray::SetIcon(const DKString& file)
 	TrayIcon.SetIcon(hIcon);
 	return true;
 #else
-	DKWARN("DKTray::SetIcon(): not implemented on this system\n");
+	DKWARN("not implemented on this system\n");
 	return false;
 #endif
 }
 
-///////////////////////////////////////////////
 bool DKTray::SetTooltip(const DKString& string)
 {
 	DKDEBUGFUNC(string);
@@ -140,7 +134,6 @@ bool DKTray::SetTooltip(const DKString& string)
 #endif
 }
 
-/////////////////////////////////////////////////////////////////
 bool DKTray::ShowBalloon(const DKString& string/*, int seconds*/)
 {
 	DKDEBUGFUNC(string);
@@ -152,7 +145,6 @@ bool DKTray::ShowBalloon(const DKString& string/*, int seconds*/)
 #endif
 }
 
-//////////////////////
 void DKTray::Process()
 {
 	//DKDEBUGFUNC();
@@ -172,37 +164,28 @@ void DKTray::Process()
 
 
 #ifdef WIN32
-/////////////////////////////////////////////////
-void DKTray::setCallback(DKTrayCallback callback)
-{
-	DKDEBUGFUNC(callback);
-	TrayIcon.userCallback = callback;
-}
-
-//////////////////////////////////////////////////////////////////////////////
-LRESULT DKTray::OnTrayNotification(UINT message, WPARAM wParam, LPARAM lParam)
-{
-	DKDEBUGFUNC(message, wParam, lParam);
-	if(message == WM_ICON_NOTIFY){
-		//DKINFO("WM_ICON_NOTIFY:");
-		//DKINFO(toString(LOWORD(wParam))+" : ");
-		//DKINFO(toString(LOWORD(lParam))+"\n");
-		if(LOWORD(wParam) == 130 && LOWORD(lParam) == 513){
-			//DKINFO("Tray Icon Clicked\n");
-			DKEvents::SendEvent("DKTray", "click", toString(1));
-		}
-		if(LOWORD(wParam) == 130 && LOWORD(lParam) == 515){
-			//DKINFO("Tray Icon Double Clicked\n");
-			DKEvents::SendEvent("DKTray", "doubleclick", toString(1));
-		}
+	void DKTray::setCallback(DKTrayCallback callback)
+	{
+		DKDEBUGFUNC(callback);
+		TrayIcon.userCallback = callback;
 	}
 
-	if(message == WM_COMMAND){
-		//DKINFO("DKTray::OnTrayNotification(): LOWORD(wParam) = "+toString(LOWORD(wParam))+"\n");
-		DKEvents::SendEvent("DKTray", toString(LOWORD(wParam)), "");
-	}
+	LRESULT DKTray::OnTrayNotification(UINT message, WPARAM wParam, LPARAM lParam)
+	{
+		DKDEBUGFUNC(message, wParam, lParam);
+		if(message == WM_ICON_NOTIFY){
+			//DKINFO("WM_ICON_NOTIFY:");
+			//DKINFO(toString(LOWORD(wParam))+" : ");
+			//DKINFO(toString(LOWORD(lParam))+"\n");
+			if(LOWORD(wParam) == 130 && LOWORD(lParam) == 513)
+				DKEvents::SendEvent("DKTray", "click", toString(1));
+			if(LOWORD(wParam) == 130 && LOWORD(lParam) == 515)
+				DKEvents::SendEvent("DKTray", "doubleclick", toString(1));
+		}
 	
-	return 0;
-}
-
+		if(message == WM_COMMAND)
+			DKEvents::SendEvent("DKTray", toString(LOWORD(wParam)), "");
+		
+		return 0;
+	}
 #endif //WIN32

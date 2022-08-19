@@ -389,12 +389,11 @@ bool DKSDLWindow::GetHandle(const void* input, void* output) {
     SDL_SysWMinfo wmInfo;
     SDL_VERSION(&wmInfo.version);
     SDL_GetWindowWMInfo(window, &wmInfo);
-#ifdef WIN32
+#if WIN32
     HWND hwnd = wmInfo.info.win.window;
     *(HWND*)output = hwnd;
     return true;
-#endif
-#ifdef MAC
+#elif MAC
     //FIXME - we need a header for NSView
     /*
         NSView* nsview = NULL; //TODO - from SDL
@@ -403,23 +402,22 @@ bool DKSDLWindow::GetHandle(const void* input, void* output) {
         return true;
     */
     return false;
-#endif
-#ifdef LINUX
+#elif LINUX
     //FIXME
     //GdkWindow* gdk_window = NULL; //TODO - from SDL
     //if(!gdk_window){ return false; }
     //*(GdkWindow**)output = gdk_window;
     //return true;
-#endif
-    DKWARN("DKSDLWindow::GetHandle(): not implemented on this OS\n");
+#else
+    DKWARN("not implemented on this OS\n");
     return false;
+#endif
 }
 
 bool DKSDLWindow::GetHeight(const void* input, void* output) {
     DKDEBUGFUNC(input, output);
     int h;
     SDL_GetWindowSize(window, NULL, &h);
-    //DKINFO("DKSDLWindow::GetHeight() = "+toString(h)+"\n");
     if(h == 0)
         h = height;
     *(int*)output = h;
@@ -452,7 +450,6 @@ bool DKSDLWindow::GetWidth(const void* input, void* output) {
     DKDEBUGFUNC(input, output);
     int w;
     SDL_GetWindowSize(window, &w, NULL);
-    //DKINFO("DKSDLWindow::GetWidth() = "+toString(w)+"\n");
     if(w == 0)
         w = width;
     *(int*)output = w;
@@ -546,17 +543,17 @@ bool DKSDLWindow::SetIcon(const void* input, void* output) {
     HICON hIcon = (HICON)LoadImage(NULL, file.c_str(), IMAGE_ICON, 32, 32, LR_LOADFROMFILE);
     SendMessage(hwnd, WM_SETICON, ICON_SMALL, (LPARAM)hIcon);
     return true;
-#endif
-    DKWARN("DKSDLWindow::SetIcon is not implemented on this OS\n");
+#else
+    DKWARN("not implemented on this OS\n");
     return false;
+#endif
 }
 
 bool DKSDLWindow::SetTitle(const void* input, void* output) {
     DKDEBUGFUNC(input, output);
     DKString title = *(DKString*)input;
     SDL_SetWindowTitle(window, title.c_str());
-    DKWARN("DKSDLWindow::SetTitle is not implemented on this OS\n");
-    return false;
+    return true;
 }
 
 bool DKSDLWindow::SetWidth(const void* input, void* output) {
@@ -577,7 +574,8 @@ bool DKSDLWindow::SetX(const void* input, void* output) {
     return true;
 }
 
-bool DKSDLWindow::SetY(const void* input, void* output) {
+bool DKSDLWindow::SetY(const void* input, void* output) 
+{
     DKDEBUGFUNC(input, output);
     int y = *(int*)input;
     int x;
@@ -586,13 +584,15 @@ bool DKSDLWindow::SetY(const void* input, void* output) {
     return true;
 }
 
-bool DKSDLWindow::Show(const void* input, void* output) {
+bool DKSDLWindow::Show(const void* input, void* output) 
+{
     DKDEBUGFUNC(input, output);
     SDL_ShowWindow(window);
     return true;
 }
 
-bool DKSDLWindow::Windowed(const void* input, void* output) {
+bool DKSDLWindow::Windowed(const void* input, void* output) 
+{
     DKDEBUGFUNC(input, output);
     SDL_SetWindowFullscreen(window, 0);
     return true;
@@ -683,19 +683,18 @@ int DKSDLWindow::EventFilter(void* userdata, SDL_Event* event) {
         }
     }
     if(event->type == SDL_APP_WILLENTERBACKGROUND) {
-        DKINFO("DKSDLWindow::SDL_APP_WILLENTERBACKGROUND\n");
+        DKINFO("SDL_APP_WILLENTERBACKGROUND\n");
         DKApp::paused = true;
         return 1;
     }
     if(event->type == SDL_APP_DIDENTERFOREGROUND) {
-        DKINFO("DKSDLWindow::SDL_APP_DIDENTERFOREGROUND\n");
+        DKINFO("SDL_APP_DIDENTERFOREGROUND\n");
         DKApp::paused = false;
         return 1;
     }
-    if(event->type == SDL_TEXTINPUT) {
-        //DKINFO("DKSDLWindow::SDL_TEXTINPUT\n");
-        return 1;
-    }
+    if(event->type == SDL_TEXTINPUT) 
+        return 1; //DKINFO("SDL_TEXTINPUT\n");
+    
     return 1;
 }
 
