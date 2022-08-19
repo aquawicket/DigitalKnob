@@ -56,10 +56,8 @@ bool DKTray::Init()
 	HICON hIcon = (HICON)LoadImage(NULL, icon.c_str(), IMAGE_ICON, 32, 32, LR_LOADFROMFILE);
 
 	DKWindows::hInstance = GetModuleHandle(0);
-	if (!TrayIcon.Create(DKWindows::hInstance, NULL, WM_ICON_NOTIFY, _T("DKTray Icon"), hIcon/*::LoadIcon(DKApp::hInstance, (LPCTSTR)IDI_TASKBARDEMO)*/, IDR_POPUP_MENU)){
-		DKERROR("DKTray::Init(): TrayIcon invalid\n");
-		return false;
-	}
+	if (!TrayIcon.Create(DKWindows::hInstance, NULL, WM_ICON_NOTIFY, _T("DKTray Icon"), hIcon/*::LoadIcon(DKApp::hInstance, (LPCTSTR)IDI_TASKBARDEMO)*/, IDR_POPUP_MENU))
+		return DKERROR("DKTray::Init(): TrayIcon invalid\n");
 
 	setCallback(&OnTrayNotification);
 	//TrayIcon.SetTargetWnd(DKOSGWindow::Instance("DKOSGWindow")->hwnd); //This actually breaks it
@@ -68,23 +66,19 @@ bool DKTray::Init()
 	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[TRAYED]", trayed);
 	if(same(trayed,"ON")){
 		//CSystemTray::MinimiseToTray(hwnd);
-		if(DKClass::HasFunc("DKSDLWindow::Hide")){
+		if(DKClass::HasFunc("DKSDLWindow::Hide"))
 			DKClass::CallFunc("DKSDLWindow::Hide", NULL, NULL);
-		}
-		else if(DKClass::HasFunc("DKOSGWindow::Hide")){
+		else if(DKClass::HasFunc("DKOSGWindow::Hide"))
 			DKClass::CallFunc("DKOSGWindow::Hide", NULL, NULL);
-		}
-		else{
+		else
 			DKERROR("DKTray::Init(): DKWindow::Hide() - No function available\n");
-		}
 	}
 	
 	DKApp::AppendLoopFunc(&DKTray::Process, this);
 	return true;
+#else
+	return DKERROR("DKTray::Init() not implemented on this OS\n");
 #endif
-
-	DKERROR("DKTray::Init() not implemented on this OS\n");
-	return false; //TODO - double check this. 
 }
 
 //////////////////
@@ -126,9 +120,10 @@ bool DKTray::SetIcon(const DKString& file)
 	HICON hIcon = (HICON)LoadImage(NULL, icon.c_str(), IMAGE_ICON, 32, 32, LR_LOADFROMFILE);
 	TrayIcon.SetIcon(hIcon);
 	return true;
-#endif
+#else
 	DKWARN("DKTray::SetIcon(): not implemented on this system\n");
 	return false;
+#endif
 }
 
 ///////////////////////////////////////////////
@@ -140,8 +135,9 @@ bool DKTray::SetTooltip(const DKString& string)
 		return false;
 	}
 	return true;
-#endif
+#else
 	return false;
+#endif
 }
 
 /////////////////////////////////////////////////////////////////
@@ -151,8 +147,9 @@ bool DKTray::ShowBalloon(const DKString& string/*, int seconds*/)
 #ifdef WIN32
 	TrayIcon.ShowBalloon(string.c_str(), NULL, 0UL, 10);
 	return true;
-#endif
+#else
 	return false;
+#endif
 }
 
 //////////////////////

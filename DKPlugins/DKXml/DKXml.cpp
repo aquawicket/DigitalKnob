@@ -430,6 +430,7 @@ bool DKXml::RemoveInners(const DKString& xpath)
 	//TODO
 	return false;
 
+	/*
 	while(nodes.size()){
 		DKXmlNodes::const_iterator it = nodes.begin();
 		pugi::xpath_node node = *it;
@@ -437,6 +438,7 @@ bool DKXml::RemoveInners(const DKString& xpath)
 		nodes = doc.select_nodes(xpath.c_str());
 	}
 	return true;
+	*/
 }
 
 
