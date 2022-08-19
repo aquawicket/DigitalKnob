@@ -160,7 +160,9 @@ public:
 		return true; 
 	}
 	void OnPrintReset(CefRefPtr<CefBrowser> browser) override {}
-	void OnPrintSettings(CefRefPtr<CefBrowser> browser, CefRefPtr<CefPrintSettings> settings, bool get_defaults) override {}
+	void OnPrintSettings(CefRefPtr<CefBrowser> browser, CefRefPtr<CefPrintSettings> settings, bool get_defaults) override {
+		DKDEBUGFUNC(browser, settings, get_defaults);
+	}
 	void OnPrintStart(CefRefPtr<CefBrowser> browser) override {}
 
 	// CefRenderProcessHandler 

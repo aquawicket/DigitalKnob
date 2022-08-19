@@ -808,27 +808,24 @@ bool DKCefWindow::Windowed(const void* input, void* output)
 	DWORD dwStyle = GetWindowLong(hwnd, GWL_STYLE);
 	SetWindowLong(hwnd, GWL_STYLE, dwStyle | WS_OVERLAPPEDWINDOW);
 	SetWindowPlacement(hwnd, &g_wpPrev);
-	SetWindowPos(hwnd, NULL, 0, 0, 0, 0,
-		SWP_NOMOVE | SWP_NOSIZE | SWP_NOZORDER |
-		SWP_NOOWNERZORDER | SWP_FRAMECHANGED);
+	SetWindowPos(hwnd, NULL, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOZORDER | SWP_NOOWNERZORDER | SWP_FRAMECHANGED);
 	return true;
-#endif
-#ifdef MAC
+#elif MAC
 	//TODO
 	NSView* nsview = (NSView*)dkCef->current_browser->GetHost()->GetWindowHandle();
 	if(!nsview){ return false; }
-#endif
-#ifdef LINUX
-#ifdef USE_GDK
-	GdkWindow* gdk_window = gdk_window_foreign_new(dkCef->current_browser->GetHost()->GetWindowHandle());
-	if(!gdk_window){ return false;}
-	gdk_window_unfullscreen(gdk_window);
-	isFullscreen = false;
-	return true;
-#endif //USE_GDK
-#endif //LINUX
-	DKWARN("DKCefWindow::Windowed(): not implemented on this OS\n");
+#elif LINUX
+#	ifdef USE_GDK
+		GdkWindow* gdk_window = gdk_window_foreign_new(dkCef->current_browser->GetHost()->GetWindowHandle());
+		if(!gdk_window){ return false;}
+		gdk_window_unfullscreen(gdk_window);
+		isFullscreen = false;
+		return true;
+#	endif //USE_GDK
+#else //LINUX
+	DKWARN("not implemented on this OS\n");
 	return false;
+#endif
 }
 
 
@@ -841,28 +838,28 @@ void DKCefWindow::GetViewRect(CefRefPtr<CefBrowser> browser, CefRect& rect)
 
 void DKCefWindow::OnAfterCreated(CefRefPtr<CefBrowser> browser)
 {
-	DKDEBUGFUNC(browser);
 	CEF_REQUIRE_UI_THREAD();
+	DKDEBUGFUNC(browser);
 	//dkCef->browsers.push_back(browser);
 }
 
 bool DKCefWindow::OnBeforePopup(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, const CefString& target_url, const CefString& target_frame_name, CefLifeSpanHandler::WindowOpenDisposition target_disposition, bool user_gesture, const CefPopupFeatures& popupFeatures, CefWindowInfo& windowInfo, CefRefPtr<CefClient>& client, CefBrowserSettings& settings, CefRefPtr<CefDictionaryValue>& extra_info, bool* no_javascript_access)
 {
-	DKDEBUGFUNC(browser, frame, target_url, "const CefString&", target_disposition, user_gesture, "const CefPopupFeatures&", "CefWindowInfo&", client, "CefBrowserSettings&", no_javascript_access);
 	CEF_REQUIRE_UI_THREAD();
+	DKDEBUGFUNC(/*browser, frame, target_url, target_frame_name, target_disposition, user_gesture, popupFeatures, windowInfo, client, settings, extra_info, no_javascript_access*/);
 	return false;
 }
 
 void DKCefWindow::OnBeforeContextMenu(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefContextMenuParams> params, CefRefPtr<CefMenuModel> model)
 {
-	DKDEBUGFUNC(browser, frame, params, model);
 	CEF_REQUIRE_UI_THREAD();
+	DKDEBUGFUNC(browser, frame, params, model);
 }
 
 void DKCefWindow::OnBeforeDownload(CefRefPtr<CefBrowser> browser, CefRefPtr<CefDownloadItem> download_item, const CefString& suggested_name, CefRefPtr<CefBeforeDownloadCallback> callback)
 {
-	DKDEBUGFUNC(browser, download_item, "const CefString&", callback);
 	CEF_REQUIRE_UI_THREAD();
+	DKDEBUGFUNC(browser, download_item, "const CefString&", callback);
 #ifdef WIN32
 	UNREFERENCED_PARAMETER(browser);
 	UNREFERENCED_PARAMETER(download_item);
@@ -877,14 +874,14 @@ bool DKCefWindow::OnConsoleMessage(CefRefPtr<CefBrowser> browser, cef_log_severi
 
 bool DKCefWindow::OnContextMenuCommand(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefContextMenuParams> params, int command_id, CefContextMenuHandler::EventFlags event_flags)
 {
-	DKDEBUGFUNC(browser, frame, params, command_id, event_flags);
 	CEF_REQUIRE_UI_THREAD();
+	DKDEBUGFUNC(browser, frame, params, command_id, event_flags);
 	return false;
 }
 
 void DKCefWindow::OnCursorChange(CefRefPtr<CefBrowser> browser, CefCursorHandle cursor, CursorType type, const CefCursorInfo& custom_cursor_info)
 {
-	DKDEBUGFUNC(browser, cursor, type, "const CefCursorInfo&");
+	DKDEBUGFUNC(browser, cursor, type, custom_cursor_info);
 #ifdef WIN32
 	HWND hwnd;
 	if (!DKClass::CallFunc("DKSDLWindow::GetHandle", NULL, &hwnd)) { return; }
@@ -902,20 +899,20 @@ void DKCefWindow::OnCursorChange(CefRefPtr<CefBrowser> browser, CefCursorHandle 
 
 void DKCefWindow::OnFindResult(CefRefPtr<CefBrowser> browser, int identifier, int count, const CefRect& selectionRect, int activeMatchOrdinal, bool finalUpdate)
 {
-	DKDEBUGFUNC(browser, identifier, count, "const CefRect&", activeMatchOrdinal, finalUpdate);
 	CEF_REQUIRE_UI_THREAD();
+	DKDEBUGFUNC(browser, identifier, count, selectionRect, activeMatchOrdinal, finalUpdate);
 }
 
 bool DKCefWindow::OnFileDialog(CefRefPtr<CefBrowser> browser, CefDialogHandler::FileDialogMode mode, const CefString& title, const CefString& default_file_path, const std::vector<CefString>& accept_filters, int selected_accept_filter, CefRefPtr<CefFileDialogCallback> callback) 
 {
-	DKDEBUGFUNC(browser, mode, "const CefString&", "const CefString&", "const std::vector<CefString>&", selected_accept_filter, callback);
+	DKDEBUGFUNC(browser, mode, title, "const CefString&", "const std::vector<CefString>&", selected_accept_filter, callback);
 	return false;
 }
 
 void DKCefWindow::OnFullscreenModeChange(CefRefPtr<CefBrowser> browser, bool fullscreen)
 {
-	DKDEBUGFUNC(browser, fullscreen);
 	CEF_REQUIRE_UI_THREAD();
+	DKDEBUGFUNC(browser, fullscreen);
 #ifdef WIN32
 	HWND hwnd = GetActiveWindow();
 	DWORD dwStyle = GetWindowLong(hwnd, GWL_STYLE);
