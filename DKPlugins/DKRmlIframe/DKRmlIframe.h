@@ -28,7 +28,7 @@
 #ifndef DKRmlIframe_H
 #define DKRmlIframe_H
 
-#include "DKRmlIframe/RmlIframeInstancer.h"
+#include "DKRmlIframe/DKRmlIframeInstancer.h"
 
 class DKRmlIframe : public DKObjectT<DKRmlIframe>
 {

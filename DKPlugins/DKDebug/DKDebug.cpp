@@ -30,12 +30,12 @@
 #include "DKDebug/DKDebug.h"
 #include "DK/DKFile.h"
 #include "DKAssets/DKAssets.h"
-#ifdef HAVE_DKCurl 
+#if HAVE_DKCurl 
 	#include "DKCurl/DKCurl.h"
 #endif
 #include <stdio.h>
 
-#ifdef WIN32
+#if WIN32
 #include "StackWalker.h"
 #include <tchar.h>
 #include <fstream>
@@ -49,13 +49,14 @@
 
 static BOOL s_bUnhandledExeptionFilterSet = FALSE;
 
-#if defined _M_X64 || defined _M_IX86
+#if _M_X64 || _M_IX86
 static BOOL PreventSetUnhandledExceptionFilter(){
+	DKDEBUGFUNC();
 	HMODULE hKernel32 = LoadLibrary("kernel32.dll");
 	if(hKernel32 == NULL) return FALSE;
 	void *pOrgEntry = GetProcAddress(hKernel32, "SetUnhandledExceptionFilter");
 	if(pOrgEntry == NULL) return FALSE;
-#ifdef _M_IX86
+#if _M_IX86
 	// Code for x86:
 	// 33 C0                xor         eax,eax  
 	// C2 04 00             ret         4 
@@ -78,24 +79,29 @@ static BOOL PreventSetUnhandledExceptionFilter(){
 	return bRet;
 }
 #else
-#pragma message("This code works only for x86 and x64!")
+	#pragma message("This code works only for x86 and x64!")
 #endif
 
 
 class StackWalkerToConsole : public StackWalker{
 protected:
 	// do not print modules initialization
-	void OnLoadModule(LPCSTR, LPCSTR, DWORD64, DWORD, DWORD, LPCSTR, LPCSTR, ULONGLONG){}
+	void OnLoadModule(LPCSTR, LPCSTR, DWORD64, DWORD, DWORD, LPCSTR, LPCSTR, ULONGLONG){
+		DKDEBUGFUNC();
+	}
 	// do not print symbols initialization
-	void OnSymInit(LPCSTR, DWORD, LPCSTR){}
+	void OnSymInit(LPCSTR, DWORD, LPCSTR){
+		DKDEBUGFUNC();
+	}
 	virtual void OnOutput(LPCSTR szText){
-		//DKINFO("StackWalkerToConsole(): OnOutput\n");
+		DKDEBUGFUNC(szText);
 		DKWARN(szText);
 	}
 };
 
 static LONG __stdcall CrashHandlerExceptionFilter(EXCEPTION_POINTERS* pExPtrs){
-#ifdef _M_IX86
+	DKDEBUGFUNC(pExPtrs);
+#if _M_IX86
 	if(pExPtrs->ExceptionRecord->ExceptionCode == EXCEPTION_STACK_OVERFLOW){
 		static char MyStack[1024*128];  // be sure that we have enought space...
 		// it assumes that DS and SS are the same!!! (this is the case for Win32)
@@ -135,10 +141,11 @@ static LONG __stdcall CrashHandlerExceptionFilter(EXCEPTION_POINTERS* pExPtrs){
 }
 
 static void InitUnhandledExceptionFilter(){
+	DKDEBUGFUNC();
 	if(s_bUnhandledExeptionFilterSet == FALSE){
 		//set global exception handler (for handling all unhandled exceptions)
 		SetUnhandledExceptionFilter(CrashHandlerExceptionFilter);
-#if defined _M_X64 || defined _M_IX86
+#if _M_X64 || _M_IX86
 		PreventSetUnhandledExceptionFilter();
 #endif
 		s_bUnhandledExeptionFilterSet = TRUE;
@@ -147,19 +154,18 @@ static void InitUnhandledExceptionFilter(){
 #endif //WIN32
 
 // https://panthema.net/2008/0901-stacktrace-demangled/
-#if !defined(WIN32) && !defined(ANDROID)
+#if !WIN32 && !ANDROID
 #include <execinfo.h>
 #include <signal.h>
 #include <stdlib.h>
 #include <unistd.h>
 
-
 static inline void printStackTrace(FILE *out = stderr, unsigned int max_frames = 63){
+	DKDEBUGFUNC(out, max_frames);
 	DKString logfile = DKFile::local_assets+"log.txt";
 	FILE* log = fopen(logfile.c_str(),"a");
 	fprintf(out, "stack trace:\n");
 	fprintf(log, "stack trace:\n");
- 
 	// storage array for stack trace address data
 	void* addrlist[max_frames+1];
 	// retrieve current stack addresses
@@ -177,6 +183,7 @@ static inline void printStackTrace(FILE *out = stderr, unsigned int max_frames =
 }
 
 void handler(int signum) {
+	DKDEBUGFUNC(signum);
 	const char* name = NULL;
 	switch(signum){
 		case SIGABRT: name = "SIGABRT";  break;
@@ -217,7 +224,7 @@ bool DKDebug::Init(){
 #endif
 	InitUnhandledExceptionFilter();
 #endif
-#if !defined(WIN32) && !defined(ANDROID)
+#if !WIN32 && !ANDROID
 	signal(SIGABRT, handler);
 	signal(SIGSEGV, handler);
 	signal(SIGBUS,  handler);
@@ -248,12 +255,12 @@ bool DKDebug::SendBugReport(const DKString& filename){
 bool DKDebug::ShowStackTrace(const void* input, void* output){
 	DKDEBUGFUNC(input, output);
 	DKWARN("########## C++ CALL STACK ##########\n");
-#ifdef WIN32
+#if WIN32
 	StackWalkerToConsole sw;  // output to console
 	sw.ShowCallstack(GetCurrentThread(), NULL);
 	DKINFO("\n");
 	return true;
 #else
-	return DKERROR("DKDebug::ShowStackTrace(): no implemented on this OS\n");
+	return DKERROR("not implemented on this OS\n");
 #endif
 }
