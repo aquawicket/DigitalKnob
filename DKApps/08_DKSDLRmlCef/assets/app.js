@@ -9,20 +9,16 @@ var url = "chrome://gpu";
 	CPP_DK_Create("DKRml")
 //}
 
-var width = CPP_DKWindow_GetWidth()
-var height = CPP_DKWindow_GetHeight()
-console.log("width = "+width)
-console.log("height = "+height)
-
 
 ///// CEF
-console.log("dk = "+dk)
 var iframe = document.createElement("iframe")
 iframe.id = "CefBrowserTab0"//dk.getAvailableId("CefBrowserTab")
 iframe.setAttribute("src", url)
 iframe.style["position"] = "absolute"
 iframe.style["top"] = "0rem"
 iframe.style["left"] = "0rem"
+var width = CPP_DKWindow_GetWidth()
+var height = CPP_DKWindow_GetHeight()
 iframe.style["width"] = width+"px"
 iframe.style["height"] = height+"px"
 iframe.style["background-color"] = "white"
@@ -30,12 +26,11 @@ document.body.appendChild(iframe)
 CPP_DKRml_PostProcess()
 
 
-	
 //CPP_DK_Create("DKCef") 
 //CPP_DKCef_NewBrowser("Cef",0,0,width,height,url)
 //CPP_DKCef_ShowDevTools(0)
 
-/*
+
 window.addEventListener("keydown", function mykeydown(event){
 	if(event.key === "F12")
 		CPP_DKCef_ShowDevTools(0)	
@@ -48,4 +43,3 @@ window.addEventListener("resize", function onresize(event){
 	var height = CPP_DKWindow_GetHeight()
 	DK_CallFunc("CefSDL::OnResize", "0,0,"+String(width)+","+String(height))
 })
-*/
