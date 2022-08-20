@@ -50,6 +50,21 @@ void DKSDLRmlRenderer::RenderGeometry(Rml::Vertex* vertices, int num_vertices, i
     SDL_Texture* sdlTexture = GetGifAnimation(texture);
     if (sdlTexture == nullptr)
         sdlTexture = (SDL_Texture*)texture;
+
+    //Cef
+        //The id is mapped to the texture in texture_name
+        //If the id contains [CEF] , it is a cef image
+        //Update the texture with DKSDLCef::GetTexture(id);
+        ///////////////////////////////////////////////////////////
+    if (has(texture_name[texture], "[CEF]")) {
+        DKString id = texture_name[texture];
+        replace(id, "[CEF]", "");
+        struct DKTexture { SDL_Texture* texture; };
+        DKTexture output;
+        if (DKClass::CallFunc("DKSDLCef::GetTexture", &id, &output))
+            sdlTexture = output.texture;
+    }
+
     int sz = sizeof(vertices[0]);
     int off1 = offsetof(Rml::Vertex, position);
     int off2 = offsetof(Rml::Vertex, colour);
@@ -109,6 +124,15 @@ bool DKSDLRmlRenderer::LoadTexture(Rml::TextureHandle& texture_handle, Rml::Vect
     if(LoadGifAnimation(mSdlRenderer, source, texture_handle, texture_dimensions))
         return true;
     
+    //CEF Texture
+    //The source variable is the id of the iframe. It will contain [CEF] in it's id.
+    //We will map that id to the texture handle for later use. 
+    if (has(source, "[CEF]")) {
+        texture_handle = reinterpret_cast<Rml::TextureHandle>(&source);
+        texture_name[texture_handle] = source;
+        return true;
+    }
+
     Rml::FileInterface* fileInterface = Rml::GetFileInterface();
     Rml::FileHandle fileHandle = fileInterface->Open(source);
     if (!fileHandle){

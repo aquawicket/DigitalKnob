@@ -85,8 +85,8 @@ void DKSDLRmlOpenGL::RenderGeometry(Rml::Vertex* vertices, int num_vertices, int
             if (DKClass::CallFunc("DKSDLCef::GetTexture", &id, &output))
                 sdl_texture = output.texture;
 		}
-        
-		if(!sdl_texture){ return; }
+		if(!sdl_texture)
+            return;
         if(SDL_GL_BindTexture(sdl_texture, &texw, &texh) == -1)
 			DKREDINFO("SDL_GL_BindTexture: "+DKString(SDL_GetError())+"\n");
     }
@@ -103,8 +103,7 @@ void DKSDLRmlOpenGL::RenderGeometry(Rml::Vertex* vertices, int num_vertices, int
 
 #if defined(ANDROID) || defined(IOS)
 	unsigned short newIndicies[num_indices];
-    for (int i = 0; i < num_indices; i++)
-    {
+    for (int i = 0; i < num_indices; i++){
       newIndicies[i] = (unsigned short) indices[i];
     }
 #endif
@@ -149,8 +148,7 @@ void DKSDLRmlOpenGL::RenderGeometry(Rml::Vertex* vertices, int num_vertices, int
 
 
 // Called by Rml when it wants to enable or disable scissoring to clip content.
-void DKSDLRmlOpenGL::EnableScissorRegion(bool enable)
-{
+void DKSDLRmlOpenGL::EnableScissorRegion(bool enable){
 	//DKDEBUGFUNC(enable);
     if (enable)
         glEnable(GL_SCISSOR_TEST);
@@ -159,8 +157,7 @@ void DKSDLRmlOpenGL::EnableScissorRegion(bool enable)
 }
 
 // Called by Rml when it wants to change the scissor region.
-void DKSDLRmlOpenGL::SetScissorRegion(int x, int y, int width, int height)
-{
+void DKSDLRmlOpenGL::SetScissorRegion(int x, int y, int width, int height){
 	//DKDEBUGFUNC(x, y, width, height);
     int w_width, w_height;
     SDL_GetWindowSize(mScreen, &w_width, &w_height);
@@ -168,8 +165,7 @@ void DKSDLRmlOpenGL::SetScissorRegion(int x, int y, int width, int height)
 }
 
 // Called by Rml when a texture is required by the library.
-bool DKSDLRmlOpenGL::LoadTexture(Rml::TextureHandle& texture_handle, Rml::Vector2i& texture_dimensions, const Rml::String& source)
-{
+bool DKSDLRmlOpenGL::LoadTexture(Rml::TextureHandle& texture_handle, Rml::Vector2i& texture_dimensions, const Rml::String& source){
 	//DKDEBUGFUNC(texture_handle, texture_dimensions, "Rml::String&");
 
 	//CEF Texture
@@ -258,8 +254,7 @@ bool DKSDLRmlOpenGL::LoadTexture(Rml::TextureHandle& texture_handle, Rml::Vector
 }
 
 // Called by Rml when a texture is required to be built from an internally-generated sequence of pixels.
-bool DKSDLRmlOpenGL::GenerateTexture(Rml::TextureHandle& texture_handle, const Rml::byte* source, const Rml::Vector2i& source_dimensions)
-{
+bool DKSDLRmlOpenGL::GenerateTexture(Rml::TextureHandle& texture_handle, const Rml::byte* source, const Rml::Vector2i& source_dimensions){
 	//DKDEBUGFUNC(texture_handle, source, source_dimensions);
     #if SDL_BYTEORDER == SDL_BIG_ENDIAN
         Uint32 rmask = 0xff000000;
@@ -282,8 +277,7 @@ bool DKSDLRmlOpenGL::GenerateTexture(Rml::TextureHandle& texture_handle, const R
 }
 
 // Called by Rml when a loaded texture is no longer required.
-void DKSDLRmlOpenGL::ReleaseTexture(Rml::TextureHandle texture_handle)
-{
+void DKSDLRmlOpenGL::ReleaseTexture(Rml::TextureHandle texture_handle){
 	//DKDEBUGFUNC(texture_handle);
     SDL_DestroyTexture((SDL_Texture*) texture_handle);
 }
