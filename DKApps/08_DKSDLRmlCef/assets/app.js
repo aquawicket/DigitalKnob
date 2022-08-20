@@ -1,5 +1,6 @@
 var USE_CEF = 1
-var url = "chrome://gpu";
+//var url = "chrome://gpu";
+const url = CPP_DKAssets_LocalAssets()+"DKWebTest/index.html"
 //var url = "http://youtube.com";
 
 ////// RmlUi
