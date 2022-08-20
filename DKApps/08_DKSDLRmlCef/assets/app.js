@@ -11,6 +11,8 @@ var url = "chrome://gpu";
 
 var width = CPP_DKWindow_GetWidth()
 var height = CPP_DKWindow_GetHeight()
+console.log("width = "+width)
+console.log("height = "+height)
 
 
 ///// CEF
@@ -21,8 +23,8 @@ iframe.setAttribute("src", url)
 iframe.style["position"] = "absolute"
 iframe.style["top"] = "0rem"
 iframe.style["left"] = "0rem"
-iframe.style["width"] = "1000rem"
-iframe.style["height"] = "600%"
+iframe.style["width"] = width+"px"
+iframe.style["height"] = height+"px"
 iframe.style["background-color"] = "white"
 document.body.appendChild(iframe)
 CPP_DKRml_PostProcess()
