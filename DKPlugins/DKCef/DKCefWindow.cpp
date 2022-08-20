@@ -88,8 +88,8 @@ void DKCefWindow::DoFrame(){
 bool DKCefWindow::DoClose(CefRefPtr<CefBrowser> browser){
 	DKDEBUGFUNC(browser);
 	CEF_REQUIRE_UI_THREAD();
-	if(browser->IsPopup())
-		return false;
+	if (browser->IsPopup())
+		return DKERROR("browser->IsPopup() is true\n");
 	DKApp::Exit();
 	return false;
 }
@@ -156,8 +156,7 @@ bool DKCefWindow::Fullscreen(const void* input, void* output){
 		return true;
 #	endif //USE_GDK
 #else
-	DKWARN("not implemented on this OS\n");
-	return false;
+	return false && DKWARN("not implemented on this OS\n");
 #endif
 }
 
@@ -390,6 +389,7 @@ bool DKCefWindow::Hide(const void* input, void* output){
 	DKDEBUGFUNC(input, output);	
 #if WIN32
 	HWND hwnd = dkCef->current_browser->GetHost()->GetWindowHandle();
+	if(!hwnd)
 		return DKERROR("hwnd invalid\n")
 	if (!ShowWindow(hwnd, SW_HIDE))
 		return DKERROR("ShowWindow() failed\n");
@@ -997,7 +997,7 @@ void DKCefWindow::OnFullscreenModeChange(CefRefPtr<CefBrowser> browser, bool ful
 
 void DKCefWindow::OnLoadEnd(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, int httpStatusCode) {
 	DKDEBUGFUNC(browser, frame, httpStatusCode);
-	if (!frame->IsMain()){
+	if (!frame->IsMain()) {
 		DKERROR("frame in not main\n");
 		return;
 	}

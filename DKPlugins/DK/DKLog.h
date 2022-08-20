@@ -32,17 +32,14 @@
 #include "DK/DKTextColor.h"
 #include <stdio.h>
 #include <iostream>
-
-#if !defined(IOS)
+#if IOS
     #include <fstream>
 #endif
-
 #if ANDROID
 	#include <android/log.h>
 #endif
-
 #if RTTI_ENABLED
-#	include <type_traits>
+	#include <type_traits>
 #endif
 
 #define DK_ASSERT  1
@@ -55,13 +52,11 @@
 #define DK_SHOW    8
 #define DK_HIDE    9
 
-
 class DKLog {
 public:
 	static bool Clear(int& rtnvalue);
-	static bool Log(const char* file, int line, const char* func, const DKString& input, const int lvl = DK_INFO, const int color_override = 0);
+	static bool Log(const char* file, int line, const char* func, const DKString& input, const int lvl = DK_INFO, const int color_override = 0, const bool rtnval = true);
 	static bool SetLog(const int lvl, const DKString& text);
-
 	static bool log_assert;
 	static bool log_fatal;
 	static bool log_errors;
@@ -82,7 +77,6 @@ public:
 	static bool exception_on_errors;
 };
 
-
 bool GetVersion(DKString& version);
 bool GetBuildMonth(const char* buildDate, DKString& buildMonth);
 bool GetBuildDay(const char* buildDate, DKString& buildDay);
@@ -90,7 +84,6 @@ bool GetBuildYear(const char* buildDate, DKString& buildYear);
 bool GetBuildHour(const char* buildTime, DKString& buildHour);
 bool GetBuildMinute(const char* buildTime, DKString& buildMinute);
 bool GetBuildSecond(const char* buildTime, DKString& buildSecond);
-
 
 template<typename S, typename T, typename = void>
 struct is_streamable : std::false_type {};
@@ -183,20 +176,16 @@ bool DebugReturn(const char* file, int line, const char* func, const DKString& n
 		return true;
 	int arg_count = sizeof...(Args);
 	std::ostringstream out;
-	
 	DKString func_string = func;
 	func_string += "(";
-		
 	if(arg_count){
 		if(names.empty()) 
 			return DKLog::Log(__FILE__, __LINE__, __FUNCTION__, "arg_count is > 1, but names is empty\n", DK_ERROR);
 		DKStringArray name_array;
 		toStringArray(name_array, names, ","); 
 		getTemplateArgs(out, name_array, args...);
-
 		DKStringArray argArray;
 		toStringArray(argArray, out.str(), ",");
-
 		if (arg_count > 1){
 			func_string += "{ ";
 			for (int i = 0; i < arg_count; ++i) {
@@ -227,7 +216,6 @@ bool DebugReturn(const char* file, int line, const char* func, const DKString& n
 	return true;
 }
 
-
 class logy{
 	public:
 		logy(const std::string& context);
@@ -252,10 +240,11 @@ void signal_handler(int signal);
 #define DKBUILDHOUR(buildHour) GetBuildHour(__TIME__, buildHour);
 #define DKBUILDMINUTE(buildMinute) GetBuildMinute(__TIME__, buildMinute);
 #define DKBUILDSECOND(buildSecond) GetBuildSecond(__TIME__, buildSecond);
-#define  DKASSERT(message) DKLog::Log(__FILE__, __LINE__, __FUNCTION__, message, DK_ASSERT);
-#define   DKFATAL(message) DKLog::Log(__FILE__, __LINE__, __FUNCTION__, message, DK_FATAL);
-#define   DKERROR(message) DKLog::Log(__FILE__, __LINE__, __FUNCTION__, message, DK_ERROR);
+#define  DKASSERT(message) DKLog::Log(__FILE__, __LINE__, __FUNCTION__, message, DK_ASSERT, DKASSERT_COLOR, false);
+#define   DKFATAL(message) DKLog::Log(__FILE__, __LINE__, __FUNCTION__, message, DK_FATAL, DKFATAL_COLOR, false);
+#define   DKERROR(message) DKLog::Log(__FILE__, __LINE__, __FUNCTION__, message, DK_ERROR, DKERROR_COLOR, false);
 #define    DKWARN(message) DKLog::Log(__FILE__, __LINE__, __FUNCTION__, message, DK_WARN);
+//#define	   DKWARNRTN(message, rtnval) DKLog::Log(__FILE__, __LINE__, __FUNCTION__, message, DK_WARN, DKWARN_COLOR, rtnval);
 #define    DKINFO(message) DKLog::Log(__FILE__, __LINE__, __FUNCTION__, message, DK_INFO);
 #define   DKDEBUG(message) DKLog::Log(__FILE__, __LINE__, __FUNCTION__, message, DK_DEBUG);
 #define DKVERBOSE(message) DKLog::Log(__FILE__, __LINE__, __FUNCTION__, message, DK_VERBOSE);
@@ -263,12 +252,12 @@ void signal_handler(int signal);
 
 #define DEBUG_METHOD() logy _logy(__FUNCTION__);
 
-#ifdef WIN32
+#if WIN32
 	#define DKDEBUGFUNC1(__FILE__, __LINE__, __FUNCTION__, ...) DebugFunc(__FILE__, __LINE__, __FUNCTION__, #__VA_ARGS__, __VA_ARGS__)
 	#define DKDEBUGRETURN1(__FILE__, __LINE__, __FUNCTION__, ...) DebugReturn(__FILE__, __LINE__, __FUNCTION__, #__VA_ARGS__, __VA_ARGS__)
 	#define DKDEBUGFUNC(...) DKDEBUGFUNC1(__FILE__, __LINE__, __FUNCTION__, __VA_ARGS__)
 	#define DKDEBUGRETURN(...) DKDEBUGRETURN1(__FILE__, __LINE__, __FUNCTION__, __VA_ARGS__)
-#elif defined(APPLE) || defined(LINUX)
+#elif APPLE || LINUX
 	#define DKDEBUGFUNC(...) DebugFunc(__FILE__, __LINE__, __FUNCTION__, "", ##__VA_ARGS__)
 	#define DKDEBUGRETURN(...) DebugReturn(__FILE__, __LINE__, __FUNCTION__, "", ##__VA_ARGS__)
 #else
@@ -290,8 +279,5 @@ void Runit(){
 	TEST();
 }
 */
-
-
-
 
 #endif //DKLog_H

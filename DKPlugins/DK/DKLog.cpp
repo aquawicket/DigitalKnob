@@ -28,18 +28,17 @@
 #include "DKLog.h"
 #include "DKFile.h"
 #include <cstring>
-#ifdef HAVE_boxer
-#	include <boxer/boxer.h>
+#if HAVE_boxer
+	#include <boxer/boxer.h>
 #endif
 #include <fstream>
 
 #ifdef WIN
-#	include <debugapi.h> //OutputDebugString()
+	#include <debugapi.h> //OutputDebugString()
 #endif
-#if defined (MAC) || defined(IOS)
-#	import <Foundation/Foundation.h>  //NSLog()
+#if MAC || IOS
+	#import <Foundation/Foundation.h>  //NSLog()
 #endif
-
 
 bool DKLog::log_fatal = true;      //console.assert()
 bool DKLog::log_errors = true;     //console.error()
@@ -69,7 +68,6 @@ bool GetVersion(DKString& version) {
 	DKString day;
 	DKBUILDDAY(day);
 	version = version + "." + day;
-
 	DKString hour;
 	DKBUILDHOUR(hour);
 	version = version + hour;
@@ -81,7 +79,6 @@ bool GetVersion(DKString& version) {
 	DKBUILDMINUTE(second);
 	version = version + second;
 	*/
-
 	return true;
 }
 
@@ -115,6 +112,7 @@ bool GetBuildMonth(const char* buildDate, DKString& buildMonth) {
 		buildMonth = "12";
 	return true;
 }
+
 bool GetBuildDay(const char* buildDate, DKString& buildDay) {
 	buildDay = buildDate;
 	std::string::size_type foundA = buildDay.find_first_of(" ");
@@ -122,18 +120,21 @@ bool GetBuildDay(const char* buildDate, DKString& buildDay) {
 	buildDay = buildDay.substr(foundA+1, foundB-1);
 	return true;
 }
+
 bool GetBuildYear(const char* buildDate, DKString& buildYear) {
 	buildYear = buildDate;
 	std::string::size_type found = buildYear.find_last_of(" ");
 	buildYear = buildYear.substr(found+3);
 	return true;
 }
+
 bool GetBuildHour(const char* buildTime, DKString& buildHour) {
 	buildHour = buildTime;
 	std::string::size_type found = buildHour.find_first_of(":");
 	buildHour = buildHour.substr(0, found);
 	return true;
 }
+
 bool GetBuildMinute(const char* buildTime, DKString& buildMinute) {
 	buildMinute = buildTime;
 	std::string::size_type foundA = buildMinute.find_first_of(":");
@@ -141,13 +142,13 @@ bool GetBuildMinute(const char* buildTime, DKString& buildMinute) {
 	buildMinute = buildMinute.substr(foundA+1, foundB);
 	return true;
 }
+
 bool GetBuildSecond(const char* buildTime, DKString& buildSecond) {
 	buildSecond = buildTime;
 	std::string::size_type found = buildSecond.find_last_of(":");
 	buildSecond = buildSecond.substr(found+1);
 	return true;
 }
-
 
 bool DKLog::Clear(int& rtnvalue){
     return DKUtil::System("cls", rtnvalue);
@@ -160,8 +161,7 @@ void signal_handler(int signal) {
 */
 
 // https://stackoverflow.com/a/9371717/688352  - The command windows is slow, read this
-
-bool DKLog::Log(const char* file, int line, const char* func, const DKString& input, const int lvl, const int color_override) {
+bool DKLog::Log(const char* file, int line, const char* func, const DKString& input, const int lvl, const int color_override, const bool rtnval){
 	/*
 	if(lvl == DK_ASSERT){
 		// Install a signal handler
@@ -229,7 +229,7 @@ bool DKLog::Log(const char* file, int line, const char* func, const DKString& in
 	output += input;
 
 	/////// Main Console Color Decorators ///////
-#	ifdef WIN32
+#	if WIN32
 		WORD color;
 		if (!color_override) {
 			if (lvl == DK_ASSERT)  { color = DKASSERT_COLOR; }
@@ -246,7 +246,7 @@ bool DKLog::Log(const char* file, int line, const char* func, const DKString& in
 		DKTextColor::StoreColor();
 		if (color)
 			DKTextColor::RestoreColor(color);
-#	elif !defined(LINUX)
+#	elif !LINUX
 		char color[10];
 		/*
 		if(lvl == DK_ASSERT) { strcpy(color, (char*)DKASSERT_COLOR); }
@@ -259,12 +259,10 @@ bool DKLog::Log(const char* file, int line, const char* func, const DKString& in
 		*/
 #	endif
 
-
 	//CONSOLE/TERMINAL WINDOW OUTPUT
 	printf("%s", output.c_str()); 
 	//stdout << output;
-
-						
+					
 	// File Output (log.txt)
 	if(log_file && !DKFile::local_assets.empty()){
 		std::ofstream file_log;
@@ -276,11 +274,11 @@ bool DKLog::Log(const char* file, int line, const char* func, const DKString& in
 	}
 
 	// // // IDE Software Console Output
-#	ifdef WIN
+#	if WIN
 		if(log_msvc)
 			OutputDebugString(output.c_str()); //Output to Visual Studio
 #	endif
-#	if defined(MAC) || defined (IOS)
+#	if MAC || IOS
 		if(log_xcode)
 			NSLog(@"%s", output.c_str()); //Output to XCode
 #	endif
@@ -303,7 +301,7 @@ bool DKLog::Log(const char* file, int line, const char* func, const DKString& in
 #	endif
 
 	// // // Restore Default Color Decorators
-#	ifdef WIN32
+#	if WIN32
 		DKTextColor::RestoreColor();
 #	endif
 
@@ -341,13 +339,12 @@ bool DKLog::Log(const char* file, int line, const char* func, const DKString& in
 		}
 		return false;
 	}
-	return true;
+	return rtnval;// return true;
 }
-
 
 bool DKLog::SetLog(const int lvl, const DKString& text){
 	DKDEBUGFUNC(lvl, text);
-	((lvl == DK_ERROR) && same(text,"OFF")) ? log_errors = false :  log_errors = true;
+	((lvl == DK_ERROR) && same(text,"OFF")) ? log_errors = false : log_errors = true;
 	((lvl == DK_WARN)  && same(text,"OFF")) ? log_warnings = false : log_warnings = true;
 	((lvl == DK_INFO) && same(text,"OFF")) ? log_info = false : log_info = true;
 	((lvl == DK_DEBUG) && same(text,"ON")) ? log_debug = true : log_debug = false;
@@ -357,7 +354,6 @@ bool DKLog::SetLog(const int lvl, const DKString& text){
 		log_hide = text;
 	return true;
 }
-
 
 std::ostream* logy::stream = &std::cout;
 logy::logy(const std::string& ctx) : context(ctx), start_time(clock()){
