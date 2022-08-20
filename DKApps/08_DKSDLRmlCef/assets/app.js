@@ -1,5 +1,6 @@
 var USE_CEF = 1
 var url = "chrome://gpu";
+var url = "http://youtube.com";
 
 ////// RmlUi
 //if(CPP_DK_GetBrowser() === "RML"){
@@ -26,20 +27,17 @@ document.body.appendChild(iframe)
 CPP_DKRml_PostProcess()
 
 
-//CPP_DK_Create("DKCef") 
-//CPP_DKCef_NewBrowser("Cef",0,0,width,height,url)
-//CPP_DKCef_ShowDevTools(0)
-
-
 window.addEventListener("keydown", function mykeydown(event){
+	console.log("event.key = "+event.key)
 	if(event.key === "F12")
 		CPP_DKCef_ShowDevTools(0)	
 })
 
 window.addEventListener("resize", function onresize(event){
-	//console.log("User_OnEvent(): resize\n")
 	//CPP_DKCef_SetSize("CefSDL", 100, 100)
 	var width = CPP_DKWindow_GetWidth()
 	var height = CPP_DKWindow_GetHeight()
-	DK_CallFunc("CefSDL::OnResize", "0,0,"+String(width)+","+String(height))
+	var iframe = document.getElementById("CefBrowserTab0")
+	iframe.style["width"] = width+"px"
+	iframe.style["height"] = height+"px"
 })
