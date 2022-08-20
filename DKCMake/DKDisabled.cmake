@@ -168,6 +168,7 @@ if(MAC)  # Disabled on Mac host machines
 	dk_disable(rtmidi)
 	dk_disable(sdl-gpu)
 	dk_disable(smpeg2)
+	dk_disable(terminator)
 	dk_disable(tesseract)
 	dk_disable(tidy-html5)
 	dk_disable(tiff)
