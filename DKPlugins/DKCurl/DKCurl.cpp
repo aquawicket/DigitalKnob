@@ -527,7 +527,7 @@ size_t DKCurl::read_callback(void *ptr, size_t size, size_t nmemb, void *stream)
 }
 
 int DKCurl::progress_func(void* ptr, double TotalToDownload, double NowDownloaded, double TotalToUpload, double NowUploaded){
-	//DKDEBUGFUNC(ptr, TotalToDownload, NowDownloaded, TotalToUpload, NowUploaded);
+	DKDEBUGFUNC(ptr, TotalToDownload, NowDownloaded, TotalToUpload, NowUploaded);
     // how wide you want the progress meter to be
     int totaldotz=40;
     double fractiondownloaded = NowDownloaded / TotalToDownload;
