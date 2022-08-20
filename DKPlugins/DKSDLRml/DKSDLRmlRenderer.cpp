@@ -52,10 +52,10 @@ void DKSDLRmlRenderer::RenderGeometry(Rml::Vertex* vertices, int num_vertices, i
         sdlTexture = (SDL_Texture*)texture;
 
     //Cef
-        //The id is mapped to the texture in texture_name
-        //If the id contains [CEF] , it is a cef image
-        //Update the texture with DKSDLCef::GetTexture(id);
-        ///////////////////////////////////////////////////////////
+    //The id is mapped to the texture in texture_name
+    //If the id contains [CEF] , it is a cef image
+    //Update the texture with DKSDLCef::GetTexture(id);
+    ///////////////////////////////////////////////////////////
     if (has(texture_name[texture], "[CEF]")) {
         DKString id = texture_name[texture];
         replace(id, "[CEF]", "");
@@ -135,10 +135,8 @@ bool DKSDLRmlRenderer::LoadTexture(Rml::TextureHandle& texture_handle, Rml::Vect
 
     Rml::FileInterface* fileInterface = Rml::GetFileInterface();
     Rml::FileHandle fileHandle = fileInterface->Open(source);
-    if (!fileHandle){
-        printf("Error loading file\n");
-        return false;
-    }
+    if (!fileHandle)
+        return DKERROR("Error loading file\n");
 
     fileInterface->Seek(fileHandle, 0, SEEK_END);
     size_t bufferSize = fileInterface->Tell(fileHandle);

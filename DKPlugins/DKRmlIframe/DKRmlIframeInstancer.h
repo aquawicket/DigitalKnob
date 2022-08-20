@@ -174,7 +174,6 @@ public:
 		Rml::GeometryUtilities::GenerateQuad(&vertices[0], &indices[0], Rml::Vector2f(0, 0), quad_size, quad_colour, texcoords[0], texcoords[1]);
 		geometry_dirty = false;
 
-		
 		Rml::String id = GetAttribute< Rml::String >("id", "");
 		if (has(processed, id))
 			return; //allready processed

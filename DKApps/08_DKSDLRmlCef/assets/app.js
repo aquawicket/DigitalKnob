@@ -16,7 +16,7 @@ var height = CPP_DKWindow_GetHeight()
 ///// CEF
 console.log("dk = "+dk)
 var iframe = document.createElement("iframe")
-iframe.id = "CefBrowserTab"//dk.getAvailableId("CefBrowserTab")
+iframe.id = "CefBrowserTab0"//dk.getAvailableId("CefBrowserTab")
 iframe.setAttribute("src", url)
 iframe.style["position"] = "absolute"
 iframe.style["top"] = "0rem"
