@@ -21,8 +21,8 @@ iframe.setAttribute("src", url)
 iframe.style["position"] = "absolute"
 iframe.style["top"] = "0rem"
 iframe.style["left"] = "0rem"
-iframe.style["width"] = "100%"
-iframe.style["height"] = "100%"
+iframe.style["width"] = "1000rem"
+iframe.style["height"] = "600%"
 iframe.style["background-color"] = "white"
 document.body.appendChild(iframe)
 CPP_DKRml_PostProcess()
