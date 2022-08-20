@@ -65,6 +65,7 @@ int DKRmlJS::LoadUrl(duk_context* ctx) {
 }
 
 int DKRmlJS::PostProcess(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
 	Rml::ElementList elements;
 	DKRml::Get()->document->GetElementsByTagName(elements, "body");
 	if(!elements[0])

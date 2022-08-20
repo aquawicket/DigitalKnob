@@ -130,7 +130,7 @@ bool DKMidi::ToggleOutput(const DKString& name){
 }
 
 void DKMidi::midiCallback(double deltatime, std::vector<unsigned char>* message, void *userData){
-	//DKDEBUGFUNC(deltatime, "std::vector<unsigned char>*", userData);
+	DKDEBUGFUNC(deltatime, message, userData);
 	/*
 	unsigned int nBytes = message->size();
 	for ( unsigned int i=0; i<nBytes; i++ )

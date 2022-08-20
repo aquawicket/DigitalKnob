@@ -444,7 +444,7 @@ int DKDuktapeJS::Crash(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 #if	WIN32
 	abort();
-	return 1;
+	//return 1;
 #else
 	raise(SIGSEGV);
 	return 1;

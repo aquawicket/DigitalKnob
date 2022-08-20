@@ -37,9 +37,7 @@ DKSDLRmlRenderer::DKSDLRmlRenderer(SDL_Renderer* sdlRenderer, SDL_Window* sdlWin
     DKINFO("Using DKSDLRmlRenderer\n");
     mSdlRenderer = sdlRenderer;
     mSdlWindow = sdlWindow;
-
     SDL_GetRendererOutputSize(mSdlRenderer, &mWidth, &mHeight);
-
     mScisorRect.x = 0;
     mScisorRect.y = 0;
     mScisorRect.w = mWidth;
@@ -48,10 +46,10 @@ DKSDLRmlRenderer::DKSDLRmlRenderer(SDL_Renderer* sdlRenderer, SDL_Window* sdlWin
 
 // Called by RmlUi when it wants to render geometry that it does not wish to optimise.
 void DKSDLRmlRenderer::RenderGeometry(Rml::Vertex* vertices, int num_vertices, int* indices, int num_indices, const Rml::TextureHandle texture, const Rml::Vector2f& translation) {
+    DKDEBUGFUNC(vertices, num_vertices, indices, num_indices, texture, translation);
     SDL_Texture* sdlTexture = GetGifAnimation(texture);
     if (sdlTexture == nullptr)
         sdlTexture = (SDL_Texture*)texture;
-
     int sz = sizeof(vertices[0]);
     int off1 = offsetof(Rml::Vertex, position);
     int off2 = offsetof(Rml::Vertex, colour);
@@ -64,11 +62,8 @@ void DKSDLRmlRenderer::RenderGeometry(Rml::Vertex* vertices, int num_vertices, i
     Rml::Vector2f* position = &pos[0];
     int szPos = sizeof(position[0]);
 
-    SDL_RenderGeometryRaw(mSdlRenderer, sdlTexture,
-         (float*)(position), szPos,
-         (const SDL_Color*)((Uint8*)vertices + off2), sz,
-         (float*)((Uint8*)vertices + off3), sz,
-         num_vertices, indices, num_indices, 4);
+    SDL_RenderGeometryRaw(mSdlRenderer, sdlTexture, (float*)(position), szPos, (const SDL_Color*)((Uint8*)vertices + off2), 
+        sz, (float*)((Uint8*)vertices + off3), sz, num_vertices, indices, num_indices, 4);
 }
 
 // Called by RmlUi when it wants to compile geometry it believes will be static for the foreseeable future.
@@ -79,14 +74,17 @@ Rml::CompiledGeometryHandle DKSDLRmlRenderer::CompileGeometry(Rml::Vertex* verti
 
 // Called by RmlUi when it wants to render application-compiled geometry.
 void DKSDLRmlRenderer::RenderCompiledGeometry(Rml::CompiledGeometryHandle geometry, const Rml::Vector2f& translation) {
+    DKDEBUGFUNC(geometry, translation);
 }
 
 // Called by RmlUi when it wants to release application-compiled geometry.
 void DKSDLRmlRenderer::ReleaseCompiledGeometry(Rml::CompiledGeometryHandle geometry) {
+    DKDEBUGFUNC(geometry);
 }
 
 // Called by RmlUi when it wants to enable or disable scissoring to clip content.		
 void DKSDLRmlRenderer::EnableScissorRegion(bool enable) {
+    DKDEBUGFUNC(enable);
     if (enable) {
        SDL_RenderSetClipRect(mSdlRenderer, &mScisorRect);
     } else {
@@ -95,8 +93,8 @@ void DKSDLRmlRenderer::EnableScissorRegion(bool enable) {
 }
 
 // Called by RmlUi when it wants to change the scissor region.		
-void DKSDLRmlRenderer::SetScissorRegion(int x, int y, int width, int height)
-{
+void DKSDLRmlRenderer::SetScissorRegion(int x, int y, int width, int height){
+    DKDEBUGFUNC(x, y, width, height);
     //int w_width, w_height;
     //SDL_GetWindowSize(mScreen, &w_width, &w_height);
     mScisorRect.x = x;
@@ -106,8 +104,8 @@ void DKSDLRmlRenderer::SetScissorRegion(int x, int y, int width, int height)
 }
 
 // Called by RmlUi when a texture is required by the library.		
-bool DKSDLRmlRenderer::LoadTexture(Rml::TextureHandle& texture_handle, Rml::Vector2i& texture_dimensions, const Rml::String& source)
-{
+bool DKSDLRmlRenderer::LoadTexture(Rml::TextureHandle& texture_handle, Rml::Vector2i& texture_dimensions, const Rml::String& source){
+    DKDEBUGFUNC(texture_handle, texture_dimensions, source);
     if(LoadGifAnimation(mSdlRenderer, source, texture_handle, texture_dimensions))
         return true;
     
@@ -153,6 +151,7 @@ bool DKSDLRmlRenderer::LoadTexture(Rml::TextureHandle& texture_handle, Rml::Vect
 
 // Called by RmlUi when a texture is required to be built from an internally-generated sequence of pixels.
 bool DKSDLRmlRenderer::GenerateTexture(Rml::TextureHandle& texture_handle, const Rml::byte* source, const Rml::Vector2i& source_dimensions){
+    DKDEBUGFUNC(texture_handle, source, source_dimensions);
     #if SDL_BYTEORDER == SDL_BIG_ENDIAN
         Uint32 rmask = 0xff000000;
         Uint32 gmask = 0x00ff0000;
@@ -175,10 +174,12 @@ bool DKSDLRmlRenderer::GenerateTexture(Rml::TextureHandle& texture_handle, const
 
 // Called by RmlUi when a loaded texture is no longer required.		
 void DKSDLRmlRenderer::ReleaseTexture(Rml::TextureHandle texture_handle){
+    DKDEBUGFUNC(texture_handle);
     SDL_DestroyTexture( (SDL_Texture*)texture_handle);
 }
 
 void DKSDLRmlRenderer::SetTransform(const Rml::Matrix4f* transform){
+    DKDEBUGFUNC(transform);
 }
 
 //#endif //USE_DKSDLRMLRENDERER

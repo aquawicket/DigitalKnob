@@ -134,10 +134,16 @@ public:
 	
 	// CefBrowserProcessHandler
 	void OnContextInitialized() override;
-	void OnBeforeChildProcessLaunch(CefRefPtr<CefCommandLine> command_line) override {}
-	void OnRenderProcessThreadCreated(CefRefPtr<CefListValue> extra_info) override {}
+	void OnBeforeChildProcessLaunch(CefRefPtr<CefCommandLine> command_line) override {
+		DKDEBUGFUNC(command_line);
+	}
+	void OnRenderProcessThreadCreated(CefRefPtr<CefListValue> extra_info) override {
+		DKDEBUGFUNC(extra_info);
+	}
 	//CefRefPtr<CefPrintHandler> GetPrintHandler() override;
-	void OnScheduleMessagePumpWork(int64 delay_ms) override {}
+	void OnScheduleMessagePumpWork(int64 delay_ms) override {
+		DKDEBUGFUNC(delay_ms);
+	}
 
 	// CefRenderProcessHandler
 	void OnRenderThreadCreated(CefRefPtr<CefListValue> extra_info) override {}

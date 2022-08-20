@@ -770,13 +770,13 @@ bool DKFile::MakeDir(const DKString& dir){
 	DKString path = dir;
 	DKFile::NormalizePath(path);
 	if(path.empty())
-		return DKERROR("path is empty \n");
+		return DKERROR("path is empty\n");
 	if(PathExists(path))
 		return true;
 	if (!fs::create_directories(path)) {
 		fs::directory_iterator end_itr; // default construction yields past-the-end
 		for (fs::directory_iterator itr(path); itr != end_itr; ++itr)
-			return DKERROR("(" + path + ") failed! \n");
+			return DKERROR("(" + path + ") failed!\n");
 	}
 	return true;
 }
