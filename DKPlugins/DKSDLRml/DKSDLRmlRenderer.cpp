@@ -46,7 +46,7 @@ DKSDLRmlRenderer::DKSDLRmlRenderer(SDL_Renderer* sdlRenderer, SDL_Window* sdlWin
 
 // Called by RmlUi when it wants to render geometry that it does not wish to optimise.
 void DKSDLRmlRenderer::RenderGeometry(Rml::Vertex* vertices, int num_vertices, int* indices, int num_indices, const Rml::TextureHandle texture, const Rml::Vector2f& translation) {
-    DKDEBUGFUNC(vertices, num_vertices, indices, num_indices, texture, translation);
+    //DKDEBUGFUNC(vertices, num_vertices, indices, num_indices, texture, translation);
     SDL_Texture* sdlTexture = GetGifAnimation(texture);
     if (sdlTexture == nullptr)
         sdlTexture = (SDL_Texture*)texture;
@@ -84,7 +84,7 @@ void DKSDLRmlRenderer::ReleaseCompiledGeometry(Rml::CompiledGeometryHandle geome
 
 // Called by RmlUi when it wants to enable or disable scissoring to clip content.		
 void DKSDLRmlRenderer::EnableScissorRegion(bool enable) {
-    DKDEBUGFUNC(enable);
+    //DKDEBUGFUNC(enable);
     if (enable) {
        SDL_RenderSetClipRect(mSdlRenderer, &mScisorRect);
     } else {

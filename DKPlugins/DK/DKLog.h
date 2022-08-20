@@ -55,7 +55,7 @@
 class DKLog {
 public:
 	static bool Clear(int& rtnvalue);
-	static bool Log(const char* file, int line, const char* func, const DKString& input, const int lvl = DK_INFO, const int color_override = 0, const bool rtnval = true);
+	static bool Log(const char* file, int line, const char* func, const DKString& input, const int lvl = DK_INFO, const int color_override = 0/*, const bool rtnval = true*/);
 	static bool SetLog(const int lvl, const DKString& text);
 	static bool log_assert;
 	static bool log_fatal;
@@ -211,19 +211,9 @@ bool DebugReturn(const char* file, int line, const char* func, const DKString& n
 		func_string += ")";
 		func_string += "\n";
 	}
-	
 	DKLog::Log(file, line, "", func_string, DK_DEBUG);
 	return true;
 }
-
-class logy{
-	public:
-		logy(const std::string& context);
-		~logy();
-		static std::ostream* stream;
-		const std::string context;
-		const clock_t start_time;
-};
 
 /*
 #include <csignal>
@@ -240,17 +230,15 @@ void signal_handler(int signal);
 #define DKBUILDHOUR(buildHour) GetBuildHour(__TIME__, buildHour);
 #define DKBUILDMINUTE(buildMinute) GetBuildMinute(__TIME__, buildMinute);
 #define DKBUILDSECOND(buildSecond) GetBuildSecond(__TIME__, buildSecond);
-#define  DKASSERT(message) DKLog::Log(__FILE__, __LINE__, __FUNCTION__, message, DK_ASSERT, DKASSERT_COLOR, false);
-#define   DKFATAL(message) DKLog::Log(__FILE__, __LINE__, __FUNCTION__, message, DK_FATAL, DKFATAL_COLOR, false);
-#define   DKERROR(message) DKLog::Log(__FILE__, __LINE__, __FUNCTION__, message, DK_ERROR, DKERROR_COLOR, false);
+#define  DKASSERT(message) DKLog::Log(__FILE__, __LINE__, __FUNCTION__, message, DK_ASSERT);//, DKASSERT_COLOR, false);
+#define   DKFATAL(message) DKLog::Log(__FILE__, __LINE__, __FUNCTION__, message, DK_FATAL);//, DKFATAL_COLOR, false);
+#define   DKERROR(message) DKLog::Log(__FILE__, __LINE__, __FUNCTION__, message, DK_ERROR);//, DKERROR_COLOR, false);
 #define    DKWARN(message) DKLog::Log(__FILE__, __LINE__, __FUNCTION__, message, DK_WARN);
 #define    DKINFO(message) DKLog::Log(__FILE__, __LINE__, __FUNCTION__, message, DK_INFO);
 #define   DKDEBUG(message) DKLog::Log(__FILE__, __LINE__, __FUNCTION__, message, DK_DEBUG);
 #define DKVERBOSE(message) DKLog::Log(__FILE__, __LINE__, __FUNCTION__, message, DK_VERBOSE);
 #define DKREDINFO(message) DKLog::Log(__FILE__, __LINE__, __FUNCTION__, message, DK_INFO, DKERROR_COLOR);
 //#define DKWARNRTN(message, rtnval) DKLog::Log(__FILE__, __LINE__, __FUNCTION__, message, DK_WARN, DKWARN_COLOR, rtnval);
-
-#define DEBUG_METHOD() logy _logy(__FUNCTION__);
 
 #if WIN32
 	#define DKDEBUGFUNC1(__FILE__, __LINE__, __FUNCTION__, ...) DebugFunc(__FILE__, __LINE__, __FUNCTION__, #__VA_ARGS__, __VA_ARGS__)
@@ -264,6 +252,34 @@ void signal_handler(int signal);
 	#define DKDEBUGFUNC(...) DKLog::Log(__FILE__, __LINE__, __FUNCTION__, "", DK_DEBUG)
 	#define DKDEBUGRETURN(...) DKLog::Log(__FILE__, __LINE__, __FUNCTION__, "", DK_DEBUG)
 #endif
+
+
+///////////////////// logy test code /////////////////////////////////////////////////
+class logy {
+public:
+template <typename... Args>
+	logy(const char* file, int line, const char* func, const DKString& names, Args&&... args);
+	~logy();
+	static std::ostream* stream;
+	const DKString file;
+	const int line;
+	const DKString func;
+	const DKString names;
+	const clock_t start_time;
+
+	//https://stackoverflow.com/a/41201127
+	//const Args&&... args;
+};
+
+bool testLogyA(const DKString& str);
+bool testLogyB(const int& num);
+bool testLogyC(const double& dbl);
+
+#define DEBUG_METHOD1(__FILE__, __LINE__, __FUNCTION__, ...) logy _logy(__FILE__, __LINE__, __FUNCTION__, #__VA_ARGS__, __VA_ARGS__)
+#define DEBUG_METHOD(...) DEBUG_METHOD1(__FILE__, __LINE__, __FUNCTION__, __VA_ARGS__)
+//////////////////////////////////////////////////////////////////////////////////////
+
+
 
 /*
 template <typename... Args>

@@ -161,7 +161,7 @@ void signal_handler(int signal) {
 */
 
 // https://stackoverflow.com/a/9371717/688352  - The command windows is slow, read this
-bool DKLog::Log(const char* file, int line, const char* func, const DKString& input, const int lvl, const int color_override, const bool rtnval){
+bool DKLog::Log(const char* file, int line, const char* func, const DKString& input, const int lvl, const int color_override/*, const bool rtnval*/) {
 	/*
 	if(lvl == DK_ASSERT){
 		// Install a signal handler
@@ -339,7 +339,7 @@ bool DKLog::Log(const char* file, int line, const char* func, const DKString& in
 		}
 		return false;
 	}
-	return rtnval;// return true;
+	return true;
 }
 
 bool DKLog::SetLog(const int lvl, const DKString& text){
@@ -355,17 +355,57 @@ bool DKLog::SetLog(const int lvl, const DKString& text){
 	return true;
 }
 
+void getTemplateArgs(std::ostringstream& /*out*/) {}
+void getTemplateArgs(std::ostringstream& /*out*/, DKStringArray& /*names*/) {}
+
+///////////////////// logy test code /////////////////////////////////////////////////
 std::ostream* logy::stream = &std::cout;
-logy::logy(const std::string& ctx) : context(ctx), start_time(clock()){
-	*stream << "--> " << context << std::endl;
-	stream->flush();
+
+template <typename... Args>
+logy::logy(const char* file, int line, const char* func, const DKString& names, Args&&... args) : file(file), line(line), func(func), names(names), /*args(args...),*/ start_time(clock()) {
+	if (DKLog::log_show.empty() && !DKLog::log_debug)
+		return;
+	int arg_count = sizeof...(Args);
+	std::ostringstream out;
+	DKStringArray name_array;
+	toStringArray(name_array, names, ",");
+	getTemplateArgs(out, name_array, args...);
+	DKString func_string = "--> ";
+	func_string += func;
+	func_string += "(";
+	if (arg_count)
+		func_string += "{ ";
+	func_string += out.str();
+	if (arg_count)
+		func_string += " }";
+	func_string += ")\n";
+	DKLog::Log(file, line, "", func_string, DK_DEBUG);
+	//*stream << "--> " << file << ":" << line << "  " << func_string << std::endl;
+	//stream->flush();
 }
+
 logy::~logy(){
-	*stream << "<-- " << context;
+	*stream << file << " <-- " << func << "() ";
 	*stream << " in " << ((double)(clock() - start_time) / CLOCKS_PER_SEC) << "s";
 	*stream << std::endl;
 	stream->flush();
 }
 
-void getTemplateArgs(std::ostringstream& /*out*/) {}
-void getTemplateArgs(std::ostringstream& /*out*/, DKStringArray& /*names*/) {}
+bool testLogyA(const DKString& str) {
+	DEBUG_METHOD(str);
+	testLogyB(69);
+	return true;
+}
+
+bool testLogyB(const int& num) {
+	DEBUG_METHOD(num);
+	testLogyC(98.6);
+	return true;
+}
+
+bool testLogyC(const double& dbl) {
+	DEBUG_METHOD(dbl);
+	return true;
+}
+
+//////////////////////////////////////////////////////////////////////////////////////
