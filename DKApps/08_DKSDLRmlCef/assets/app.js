@@ -1,6 +1,6 @@
 var USE_CEF = 1
 var url = "chrome://gpu";
-var url = "http://youtube.com";
+//var url = "http://youtube.com";
 
 ////// RmlUi
 //if(CPP_DK_GetBrowser() === "RML"){
@@ -9,6 +9,11 @@ var url = "http://youtube.com";
 	CPP_DK_Create("DKSDLText")
 	CPP_DK_Create("DKRml")
 //}
+
+console.log("screen.width = "+screen.width)
+console.log("screen.height = "+screen.height)
+
+window.resizeTo(1000,600)
 
 
 ///// CEF
