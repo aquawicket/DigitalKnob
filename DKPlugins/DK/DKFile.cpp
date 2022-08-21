@@ -508,7 +508,7 @@ bool DKFile::GetModifiedTime(const DKString& path, DKString& time){
 	if(!PathExists(path))
 		return false;
 #if WIN32 
-	WIN32_FILE_ATTRIBUTE_DATA fileInfo;
+	WIN32_FILE_ATTRIBUTE_DATA fileInfo = WIN32_FILE_ATTRIBUTE_DATA();
 	if(GetFileAttributesEx(path.c_str(), GetFileExInfoStandard, &fileInfo)){
 		FILETIME localFiletime;
 		if(FileTimeToLocalFileTime(&fileInfo.ftLastWriteTime, &localFiletime)){
@@ -772,11 +772,11 @@ bool DKFile::MakeDir(const DKString& dir){
 	if(path.empty())
 		return DKERROR("path is empty\n");
 	if(PathExists(path))
-		return true;
+		return DKWARN("path already exists");
 	if (!fs::create_directories(path)) {
-		fs::directory_iterator end_itr; // default construction yields past-the-end
-		for (fs::directory_iterator itr(path); itr != end_itr; ++itr)
-			return DKERROR("(" + path + ") failed!\n");
+		//fs::directory_iterator end_itr; // default construction yields past-the-end
+		//for (fs::directory_iterator itr(path); itr != end_itr; ++itr)
+			return DKERROR("failed to create "+path+"\n");
 	}
 	return true;
 }

@@ -48,7 +48,7 @@ HWND DKWindows::consoleWindow;
 
 extern int main(int argc, char **argv);
 
-//////////// WIN32 MAIN //////////////////////////////////////////////////////////////////////////
+//////////// WIN32 MAIN ////////////////////////////////////////////////////////////////////////////
 int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLine, int nCmdShow) {
 	DKDEBUGFUNC(hInstance, hPrevInstance, lpCmdLine, nCmdShow);
 	UNREFERENCED_PARAMETER(hPrevInstance);
