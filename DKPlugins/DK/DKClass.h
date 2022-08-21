@@ -120,7 +120,6 @@ public:
         return true;
 	}
     
-
 	static bool UnregisterFunc(const DKString& name){
 		DKDEBUGFUNC(name);
 		functions->erase(name);
@@ -135,12 +134,11 @@ public:
 	}
 	
 	static bool CallFunc(const DKString& name, const void* input = NULL, void* output = NULL){
-		//DKDEBUGFUNC(name, input, output); //excessive logging
+		DKDEBUGFUNC(name, input, output); //excessive logging
 		if(!(*functions)[name])
-			return DKERROR("CallFunc("+name+") not registered\n");
+			return DKERROR("not registered\n");
 		return (*functions)[name](input, output);
 	}
-
 };
 
 
