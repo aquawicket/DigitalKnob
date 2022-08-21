@@ -80,7 +80,8 @@ public:
 	static std::map<DKString, DKClass*>* classes;
     static DKFunctionMap* functions;
 
-	/////  GLOBAL FUNCTIONS ////////////////// note: primarily for javascript access
+	/////  GLOBAL FUNCTIONS //////////////////////////////
+	//NOTE: primarily for javascript access to c++ classes
 	static DKObject* DKCreate(const DKString& data){
 		DKDEBUGFUNC(data); //data = (class,id,var1,var2,var3,etc)
 		return DKClass::_Instance(data);
@@ -109,14 +110,14 @@ public:
 	template<class T>
     static bool RegisterFunc(const DKString& name, bool (T::*func) (const void*, void*), T* _this){
 		DKDEBUGFUNC(name, func, _this);
-        //functions[name] = std::bind(func, _this, dk_placeholders::_1, dk_placeholders::_2); //member variable version
         if(!functions)
             functions = new DKFunctionMap();
         if((*functions)[name])
-            DKERROR("RegisterFunc(" + name + "): failed to register function \n");
-        (*functions)[name] = std::bind(func, _this, dk_placeholders::_1, dk_placeholders::_2); //member pointer version
+            DKERROR("failed to register "+name+"() function\n");
+		//functions[name] = std::bind(func, _this, dk_placeholders::_1, dk_placeholders::_2); //as variable
+        (*functions)[name] = std::bind(func, _this, dk_placeholders::_1, dk_placeholders::_2); //as pointer
         if(!(*functions)[name])
-            return DKERROR("RegisterFunc("+name+"): failed to register function \n");
+            return DKERROR("failed to register "+name+"() function\n");
         return true;
 	}
     
@@ -124,7 +125,7 @@ public:
 		DKDEBUGFUNC(name);
 		functions->erase(name);
         if((*functions)[name])
-			return DKERROR("UnegisterFunc("+name+"): failed to unregister function \n");
+			return DKERROR("failed to unregister "+name+"() function\n");
 		return true;
 	}
 
@@ -136,7 +137,7 @@ public:
 	static bool CallFunc(const DKString& name, const void* input = NULL, void* output = NULL){
 		DKDEBUGFUNC(name, input, output); //excessive logging
 		if(!(*functions)[name])
-			return DKERROR("not registered\n");
+			return DKERROR(name+"() function not registered\n");
 		return (*functions)[name](input, output);
 	}
 };

@@ -25,6 +25,7 @@
 */
 
 #include "DK/stdafx.h"
+
 #if WIN32
 #include "DKWindows.h"
 #include "DKFile.h"
@@ -534,7 +535,7 @@ bool DKWindows::PressKey(int key){
 
 bool DKWindows::RefreshWindowsEnvironment(){
 	DKDEBUGFUNC();
-#if !defined(WIN64)
+#if !WIN64
 	PDWORD_PTR dwReturnValue = 0;
 	::SendMessageTimeout(HWND_BROADCAST, WM_SETTINGCHANGE, 0, (LPARAM) "Environment", SMTO_ABORTIFHUNG, 5000, dwReturnValue);
 	return true;
@@ -696,7 +697,7 @@ bool DKWindows::SetClipboardImage(const DKString& file){
 	// Get size of color table.
 #if WIN32 && !WIN64
 	SIZE_T dwColTableLen = (bi.biBitCount <= 8) ? (1 << bi.biBitCount) * sizeof(RGBQUAD) : 0;
-#else if WIN64
+#elif WIN64
 	SIZE_T dwColTableLen = (bi.biBitCount <= 8) ? (1i64 << bi.biBitCount) * sizeof(RGBQUAD) : 0;
 #endif
 	// Create a device context with palette
@@ -861,7 +862,7 @@ bool DKWindows::WaitForImage(const DKString& file, int timeout){
 
 bool DKWindows::WheelDown(){
 	DKDEBUGFUNC();
-	mouse_event(MOUSEEVENTF_WHEEL, 0, 0, -WHEEL_DELTA, NULL);
+	mouse_event(MOUSEEVENTF_WHEEL, 0, 0, (DWORD)-WHEEL_DELTA, 0);
 	return true;
 }
 
