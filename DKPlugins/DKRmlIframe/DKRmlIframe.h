@@ -35,7 +35,7 @@ class DKRmlIframe : public DKObjectT<DKRmlIframe>
 public:
 	bool Init();
 	bool End();
-	std::shared_ptr<RmlIframeInstancer> ref;
+	std::shared_ptr<DKRmlIframeInstancer> ref;
 };
 
 REGISTER_OBJECT(DKRmlIframe, true)

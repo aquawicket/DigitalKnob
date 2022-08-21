@@ -24,8 +24,8 @@
 * SOFTWARE.
 */
 
-#ifndef RmlIframeInstancer_H
-#define RmlIframeInstancer_H
+#ifndef DKRmlIframeInstancer_H
+#define DKRmlIframeInstancer_H
 
 #include "../Include/RmlUi/Core/ComputedValues.h"
 #include "../Include/RmlUi/Core/Element.h"
@@ -46,10 +46,8 @@ public:
 		geometry_dirty = false;
 		texture_dirty = true;
 	}
-
-	DKString processed;
-
 	~RmlIframe(){}
+	DKString processed;
 
 	/*
 	// Sizes the box to the element's inherent size.
@@ -251,7 +249,6 @@ public:
 				rect_source = RectSource::None;
 			}
 		}
-
 	}
 
 	Rml::Texture texture; // The texture this element is rendering from.
@@ -264,10 +261,11 @@ public:
 	bool geometry_dirty;
 };
 
-class RmlIframeInstancer : public Rml::ElementInstancer
+
+class DKRmlIframeInstancer : public Rml::ElementInstancer
 {
 public:
-	virtual ~RmlIframeInstancer() {};
+	virtual ~DKRmlIframeInstancer(){};
 
 	// Instances an element given the tag name and attributes.
 	// @param[in] parent The element the new element is destined to be parented to.
@@ -275,9 +273,10 @@ public:
 	// @param[in] attributes Dictionary of attributes.
 	// @return A unique pointer to the instanced element.
 	Rml::ElementPtr InstanceElement(Rml::Element* RMLUI_UNUSED_PARAMETER(parent), const Rml::String& tag, const Rml::XMLAttributes& RMLUI_UNUSED_PARAMETER(attributes)) override{
-		RMLUI_UNUSED(parent);
-		RMLUI_UNUSED(attributes);
-		RMLUI_ZoneScopedN("RmlIframeInstance");
+		DKDEBUGFUNC(/*parent,*/ tag/*, attributes*/);
+		//RMLUI_UNUSED(parent);
+		//RMLUI_UNUSED(attributes);
+		RMLUI_ZoneScopedN("DKRmlIframeInstance");
 		RmlIframe* dkElement = new RmlIframe(tag);
 		return Rml::ElementPtr(static_cast<Rml::Element*>(dkElement));
 	}
@@ -285,9 +284,10 @@ public:
 	// Releases an element instanced by this instancer.
 	// @param[in] element The element to release.
 	void ReleaseElement(Rml::Element* element) override{
-		RMLUI_ZoneScopedN("RmlIframeRelease");
+		DKDEBUGFUNC(element);
+		RMLUI_ZoneScopedN("DKRmlIframeRelease");
 		delete element;
 	}
 };
 
-#endif //RmlIframeInstancer
+#endif //DKRmlIframeInstancer

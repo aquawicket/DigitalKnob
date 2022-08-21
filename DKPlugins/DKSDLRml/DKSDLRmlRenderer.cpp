@@ -64,6 +64,7 @@ void DKSDLRmlRenderer::RenderGeometry(Rml::Vertex* vertices, int num_vertices, i
         if (DKClass::CallFunc("DKSDLCef::GetTexture", &id, &output))
             sdlTexture = output.texture;
     }
+    ///////////////////////////////////////////////////////////
 
     int sz = sizeof(vertices[0]);
     int off1 = offsetof(Rml::Vertex, position);
@@ -127,11 +128,14 @@ bool DKSDLRmlRenderer::LoadTexture(Rml::TextureHandle& texture_handle, Rml::Vect
     //CEF Texture
     //The source variable is the id of the iframe. It will contain [CEF] in it's id.
     //We will map that id to the texture handle for later use. 
+    ///////////////////////////////////////////////////////////////////////////////
     if (has(source, "[CEF]")) {
         texture_handle = reinterpret_cast<Rml::TextureHandle>(&source);
         texture_name[texture_handle] = source;
         return true;
     }
+    //////////////////////////////////////////////////////////////////////////////
+
 
     Rml::FileInterface* fileInterface = Rml::GetFileInterface();
     Rml::FileHandle fileHandle = fileInterface->Open(source);

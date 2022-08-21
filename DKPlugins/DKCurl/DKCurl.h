@@ -35,11 +35,9 @@
 class DKCurl : public DKObjectT<DKCurl>
 {
 public:
-
 	//TODO: Persistant connecton
 	bool Init();
 	bool End();
-
 	bool CurlInit();
 	bool Download(const DKString& url, const DKString& dest/*, const bool overwrite*/);
 	bool FacebookLogin(const DKString& email, const DKString& password, DKString& output);
