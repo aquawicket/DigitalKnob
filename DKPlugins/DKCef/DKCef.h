@@ -27,6 +27,7 @@
 #pragma once
 #ifndef DKCef_H
 #define DKCef_H
+
 #include <include/cef_client.h>
 #include <include/cef_render_handler.h>
 #include <include/cef_browser_process_handler.h>
@@ -59,7 +60,6 @@ class DKCef : public DKObjectT<DKCef>
 public:
 	bool Init();
 	bool End();
-
 	bool CloseBrowser(const int& browser);
 	bool CloseDevTools(const int& browser);
 	bool Copy();

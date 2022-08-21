@@ -40,11 +40,11 @@
 #include "DKCef/DKCefWindow.h"
 #include "DKDuktape/DKDuktape.h"
 
-#ifdef MAC
+#if MAC
 #include "include/wrapper/cef_library_loader.h"
 #endif
 
-#ifdef WIN32
+#if WIN32
 #include <delayimp.h>
 #include <include/cef_sandbox_win.h>
 #include "DK/DKWindows.h"
@@ -96,7 +96,7 @@ bool DKCef::Init(){
 	}
 	*/
 	fullscreen = false;
-#	if defined(WIN32) && !defined(WIN64)
+#if WIN32 && !WIN64
 		DKString elf_dll;
 		DKString cef_dll;
 #		ifdef DEBUG
@@ -124,7 +124,7 @@ bool DKCef::Init(){
 		__HrLoadAllImportsForDll("libcef.dll"); //delay loading the DLL from another location 
 #	endif
 
-#	ifdef WIN64
+#if WIN64
 		DKString elf_dll;
 		DKString cef_dll;
 #		ifdef DEBUG
@@ -150,11 +150,11 @@ bool DKCef::Init(){
 			FreeLibrary(libcef);
 		}
 		__HrLoadAllImportsForDll("libcef.dll"); //delay loading the DLL to move it's locations  
-#	endif
+#endif
 
 	//IMPORTANT INFORMATION
 	//https://bitbucket.org/chromiumembedded/cef/wiki/GeneralUsage.md#markdown-header-application-structure
-#	ifdef MAC
+#if MAC
 		CefScopedLibraryLoader library_loader;
 		if(!library_loader.LoadInMain())
 			return 1;
@@ -314,9 +314,9 @@ bool DKCef::End(){
 	DKINFO("CefShutdown();\n");
 	//FIXME - many crashes at CefShutdown
 	CefShutdown(); //call on same thread as CefInitialize
-#	ifdef WIN32
+#if WIN32
 		//FreeLibrary(libcef);
-#	endif
+#endif
 	return true;
 }
 
@@ -493,10 +493,8 @@ bool DKCef::NewBrowser(const void* input, void* output){
 
 bool DKCef::NewBrowser(const DKString& id, const int& top, const int& left, const int& width, const int& height, const DKString& url){
 	DKDEBUGFUNC(id, top, left, width, height, url);
-
 	int _width = width ? width : 800;
 	int _height = height ? height : 600;
-
 	CefWindowInfo window_info;
 	CefBrowserSettings browserSettings;
 	if (DKClass::DKValid("DKWindow,DKWindow0")) {
@@ -592,7 +590,7 @@ bool DKCef::NewBrowser(const DKString& id, const int& top, const int& left, cons
 		DKString icon = DKFile::local_assets+"icon.ico";
 		DKClass::CallFunc("DKCefWindow::SetIcon", &icon, NULL);
 		
-#		ifdef LINUX
+#	if LINUX
 #			ifdef USE_GDK
 				gdk_init(NULL, NULL);
 				GdkWindow* gdk_window = gdk_window_foreign_new(current_browser->GetHost()->GetWindowHandle());
@@ -600,7 +598,7 @@ bool DKCef::NewBrowser(const DKString& id, const int& top, const int& left, cons
 				      return DKERROR("gdk_window invalid\n");
 				gdk_window_set_title(gdk_window, title.c_str());
 #			endif //USE_GDK
-#		endif //LINUX
+#	endif //LINUX
 	}
 	return true;
 }
@@ -701,7 +699,7 @@ bool DKCef::ShowDevTools(const int& browser){
 	CefWindowInfo window_info;
 	CefBrowserSettings settings;
 	CefPoint inspectElementAt;
-#	ifdef WIN32
+#	if WIN32
 		window_info.SetAsPopup(NULL, "DevTools"); //FIXME for mac
 #	endif
 	window_info.width = 800;

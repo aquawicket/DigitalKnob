@@ -27,6 +27,7 @@
 #pragma once
 #ifndef DKCefApp_H
 #define DKCefApp_H
+
 //#include <boost/function.hpp>
 //#include <boost/bind/bind.hpp>
 #include <include/cef_app.h>
@@ -54,7 +55,6 @@ public:
 	static bool AttachFunction(const DKString& name, bool (*func)(CefArgs, CefReturn));
 	static bool GetFunctions(CefRefPtr<CefBrowser> browser);
 	static bool Execute(CefRefPtr<CefBrowser> browser, std::string func, CefRefPtr<CefListValue> args);
-
 	static CefRefPtr<CefBrowser> _browser;
 	static CefRefPtr<DKCefV8Handler> v8handler;
 	static CefRefPtr<CefV8Value> ctx;
@@ -95,17 +95,13 @@ public:
 
 	// CefV8Handler
 	bool Execute(const CefString& name, CefRefPtr<CefV8Value> object, const CefV8ValueList& arguments, CefRefPtr<CefV8Value>& retval, CefString& exception) override;
-
 	void SetBrowser(CefRefPtr<CefBrowser> _browser);
 	CefRefPtr<CefBrowser> browser;
-
 	IMPLEMENT_REFCOUNTING(DKCefV8Handler);
 };
 
-
 // CefV8Accessor
 //bool Get(const CefString& name, const CefRefPtr<CefV8Value> object, CefRefPtr<CefV8Value>& retval, CefString& exception) override;
-
 
 class DKCefApp : public CefApp,
 					//public CefResourceBundleHandler,  //Error: cannot instantiate abstract class

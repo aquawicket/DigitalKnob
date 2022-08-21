@@ -32,7 +32,7 @@ CefRefPtr<CefBrowser> DKV8::_browser = NULL;
 CefRefPtr<DKCefV8Handler> DKV8::v8handler = NULL;
 CefRefPtr<CefV8Value> DKV8::ctx = NULL;
 //#ifdef MAC
-		//std::map<DKString, boost::function2<bool, CefArgs, CefReturn> > DKV8::functions;
+	//std::map<DKString, boost::function2<bool, CefArgs, CefReturn> > DKV8::functions;
 	//std::map<DKString, std::function2<bool, CefArgs, CefReturn> > DKV8::functions;
 //#else
 	//std::map<DKString, boost::function<bool(CefArgs, CefReturn)>> DKV8::functions;
@@ -57,7 +57,6 @@ DKString DKV8::remote_debugging_port;
 DKString DKV8::renderer_process_limit;
 DKString DKV8::sandbox;
 //DKString DKV8::off_screen_rendering_enabled;
-
 
 void DKV8::SetFlags(){
 	DKDEBUGFUNC();
@@ -114,7 +113,7 @@ void DKV8::SetFlags(){
 }
 
 bool DKV8::AttachFunction(const DKString& name, bool (*func)(CefArgs, CefReturn)){
-	DKDEBUGFUNC(name/*, func*/);
+	DKDEBUGFUNC(name, func);
 	//FIXME - this is very unstable, not thread safe
 	// 
 	//multi process will fail
@@ -122,14 +121,14 @@ bool DKV8::AttachFunction(const DKString& name, bool (*func)(CefArgs, CefReturn)
 		CefRefPtr<CefV8Value> value = CefV8Value::CreateFunction(name.c_str(), DKV8::v8handler);
 		if(!DKV8::ctx->SetValue(name.c_str(), value, V8_PROPERTY_ATTRIBUTE_NONE))
 			return DKERROR("DKV8::ctx->SetValue() failed");
-		DKINFO("DKV8::AttachFunction(): registered: "+name+"\n");
+		DKINFO("registered: "+name+"\n");
 	}
 	else{
 		//NOTE: this stores the function, it will be attached when OnContextCreated is called.
 		//functions[name] = boost::bind(func, boost::placeholders::_1, boost::placeholders::_2);
 		functions[name] = std::bind(func, std::placeholders::_1, std::placeholders::_2);
 		if(!functions[name])
-			return DKERROR("DKV8::AttachFunctions("+name+"): failed to register function\n");
+			return DKERROR("failed to register function\n");
 		DKV8::funcs.push_back(name);
 	}
 	return true;

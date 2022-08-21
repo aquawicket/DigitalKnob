@@ -39,25 +39,25 @@
 
 class DKCef;
 class DKCefWindow : public CefClient,
-					//public CefAccessibilityHandler, //Error: cannot instantiate abstract class
-					public CefContextMenuHandler,
-					public CefDialogHandler,
-					public CefDisplayHandler,
-					public CefDownloadHandler,
-					public CefDragHandler,
-					public CefExtensionHandler,
-					public CefFindHandler,
-					public CefFocusHandler,
-					public CefJSDialogHandler,
-					public CefKeyboardHandler,
-					public CefLifeSpanHandler,
-					public CefLoadHandler,
-					public CefPrintHandler,
-					public CefRenderHandler,
-					//public CefRequestContextHandler,
-					public CefRequestHandler,
-					//public CefResourceHandler,       //Error: cannot instantiate abstract class
-					public CefResourceRequestHandler
+		//public CefAccessibilityHandler, //Error: cannot instantiate abstract class
+		public CefContextMenuHandler,
+		public CefDialogHandler,
+		public CefDisplayHandler,
+		public CefDownloadHandler,
+		public CefDragHandler,
+		public CefExtensionHandler,
+		public CefFindHandler,
+		public CefFocusHandler,
+		public CefJSDialogHandler,
+		public CefKeyboardHandler,
+		public CefLifeSpanHandler,
+		public CefLoadHandler,
+		public CefPrintHandler,
+		public CefRenderHandler,
+		//public CefRequestContextHandler,
+		public CefRequestHandler,
+		//public CefResourceHandler,       //Error: cannot instantiate abstract class
+		public CefResourceRequestHandler
 {
 public:
 	DKCefWindow();
@@ -92,13 +92,13 @@ public:
 
 	DKCef* dkCef;
 
-#ifdef WIN32
+#if WIN32
 	WINDOWPLACEMENT g_wpPrev = { sizeof(g_wpPrev) };
 	WINDOWPLACEMENT wpc;
 	LONG HWNDStyle = 0;
 	LONG HWNDStyleEx = 0;
 #endif
-#ifdef LINUX
+#if LINUX
 	bool isFullscreen = false;
 #endif
 
@@ -167,8 +167,6 @@ public:
 
 	// CefRenderProcessHandler 
 	bool OnProcessMessageReceived(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefProcessId source_process, CefRefPtr<CefProcessMessage> message) override;
-
-
 
 	// CefGeolocationHandler
 	/*
