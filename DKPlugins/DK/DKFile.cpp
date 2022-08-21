@@ -682,7 +682,7 @@ bool DKFile::GetRelativePath(const DKString& file, const DKString& path, DKStrin
 	for(i = 0; i < levels; i++){
 		relativeFilename[rfMarker++] = '.';
 		relativeFilename[rfMarker++] = '.';
-		relativeFilename[rfMarker++] = SLASH;
+		relativeFilename[rfMarker++] = '/'; //SLASH;
 	}
 	// copy the rest of the filename into the result string
 	strcpy(&relativeFilename[rfMarker], &absoluteFilename[afMarker]);

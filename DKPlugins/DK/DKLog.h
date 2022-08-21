@@ -55,7 +55,7 @@
 class DKLog {
 public:
 	static bool Clear(int& rtnvalue);
-	static bool Log(const char* file, int line, const char* func, const DKString& input, const int lvl = DK_INFO, const int color_override = 0/*, const bool rtnval = true*/);
+	static bool Log(const char* file, int line, const char* func, const DKString& input, const int lvl = DK_INFO, const unsigned short color_override = 0/*, const bool rtnval = true*/);
 	static bool SetLog(const int lvl, const DKString& text);
 	static bool log_assert;
 	static bool log_fatal;

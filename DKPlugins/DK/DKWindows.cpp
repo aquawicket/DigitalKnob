@@ -156,7 +156,7 @@ bool DKWindows::FindImageOnScreen(const DKString& file, int& x, int& y){
 	int SCREEN_HEIGHT = 1024;
 	HDC hdc = GetDC(HWND_DESKTOP);
 	HDC hdcTemp = CreateCompatibleDC(hdc);
-	BITMAPINFO bitmap;
+	BITMAPINFO bitmap = BITMAPINFO();
 	bitmap.bmiHeader.biSize = sizeof(bitmap.bmiHeader);
 	bitmap.bmiHeader.biWidth = SCREEN_WIDTH;
 	bitmap.bmiHeader.biHeight = SCREEN_HEIGHT;
@@ -166,7 +166,7 @@ bool DKWindows::FindImageOnScreen(const DKString& file, int& x, int& y){
 	bitmap.bmiHeader.biSizeImage = SCREEN_WIDTH * 4 * SCREEN_HEIGHT;
 	bitmap.bmiHeader.biClrUsed = 0;
 	bitmap.bmiHeader.biClrImportant = 0;
-	BYTE* sP;
+	BYTE* sP = BYTE();
 	HBITMAP hBitmap = CreateDIBSection(hdcTemp, &bitmap, DIB_RGB_COLORS, (void**)(&sP), NULL, NULL);
 	SelectObject(hdcTemp, hBitmap);
 	BitBlt(hdcTemp, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, hdc, 0, 0, SRCCOPY);
@@ -183,9 +183,9 @@ bool DKWindows::FindImageOnScreen(const DKString& file, int& x, int& y){
 	HDC hDC = ::GetDC( 0 );
 	HDC memDC1 = ::CreateCompatibleDC(hDC);
 	HDC memDC2 = ::CreateCompatibleDC(hDC);
-	BITMAP bm;
+	BITMAP bm = BITMAP();
 	GetObject(hBmp, sizeof(bm), &bm);
-	BITMAPINFO bitmap2;
+	BITMAPINFO bitmap2 = BITMAPINFO();
 	bitmap2.bmiHeader.biSize = sizeof(bitmap2.bmiHeader);
 	bitmap2.bmiHeader.biWidth = bm.bmWidth;
 	bitmap2.bmiHeader.biHeight = bm.bmHeight;
@@ -195,7 +195,7 @@ bool DKWindows::FindImageOnScreen(const DKString& file, int& x, int& y){
 	bitmap2.bmiHeader.biSizeImage = bm.bmWidth * 4 * bm.bmHeight;
 	bitmap2.bmiHeader.biClrUsed = 0;
 	bitmap2.bmiHeader.biClrImportant = 0;
-	BYTE* iP;
+	BYTE* iP = BYTE();
 	HBITMAP hDIBMemBM  = ::CreateDIBSection( 0, &bitmap2, DIB_RGB_COLORS, (void**)&iP, NULL, NULL );
 	HBITMAP hOldBmp1  = (HBITMAP)::SelectObject(memDC1,hDIBMemBM);  
 	HBITMAP hOldBmp2  = (HBITMAP)::SelectObject(memDC2,hBmp);
@@ -317,7 +317,7 @@ bool DKWindows::GetPixelFromImage(const DKString& image, int x, int y){
 		DeleteDC(dcmem); 
 		return DKERROR("Could not select object\n");
 	}
-	BITMAP bm;
+	BITMAP bm = BITMAP();
 	GetObject(hBmp, sizeof(bm), &bm);
 	bm.bmWidth;
 	bm.bmHeight;
@@ -492,7 +492,7 @@ bool DKWindows::MiddleRelease(){
 
 bool DKWindows::PhysicalMemory(unsigned long long& physicalMemory){
 	DKDEBUGFUNC(physicalMemory);
-	MEMORYSTATUSEX memInfo;
+	MEMORYSTATUSEX memInfo = MEMORYSTATUSEX();
 	memInfo.dwLength = sizeof(MEMORYSTATUSEX);
 	GlobalMemoryStatusEx(&memInfo);
 	DWORDLONG totalPhysMem = memInfo.ullTotalPhys;
@@ -502,7 +502,7 @@ bool DKWindows::PhysicalMemory(unsigned long long& physicalMemory){
 
 bool DKWindows::PhysicalMemoryUsed(unsigned long long& physicalMemory){
 	DKDEBUGFUNC(physicalMemory);
-	MEMORYSTATUSEX memInfo;
+	MEMORYSTATUSEX memInfo = MEMORYSTATUSEX();
 	memInfo.dwLength = sizeof(MEMORYSTATUSEX);
 	GlobalMemoryStatusEx(&memInfo);
 	DWORDLONG physMemUsed = memInfo.ullTotalPhys - memInfo.ullAvailPhys;
@@ -510,7 +510,7 @@ bool DKWindows::PhysicalMemoryUsed(unsigned long long& physicalMemory){
 	return true;
 }
 
-bool DKWindows::PhysicalMemoryUsedByApp(unsigned int& physicalMemory){
+bool DKWindows::PhysicalMemoryUsedByApp(size_t& physicalMemory){
 	DKDEBUGFUNC(physicalMemory);
 	PROCESS_MEMORY_COUNTERS pmc;
 	GetProcessMemoryInfo(GetCurrentProcess(), &pmc, sizeof(pmc));
@@ -519,9 +519,9 @@ bool DKWindows::PhysicalMemoryUsedByApp(unsigned int& physicalMemory){
 	return true;
 }
 
-bool DKWindows::PressKey(int key){
+bool DKWindows::PressKey(WORD key){
 	DKDEBUGFUNC(key);
-	INPUT ip;
+	INPUT ip = INPUT();
 	// Set up a generic keyboard event.
 	ip.type = INPUT_KEYBOARD;
 	ip.ki.wScan = 0; // hardware scan code for key
@@ -544,9 +544,9 @@ bool DKWindows::RefreshWindowsEnvironment(){
 #endif
 }
 
-bool DKWindows::ReleaseKey(int key){
+bool DKWindows::ReleaseKey(WORD key){
 	DKDEBUGFUNC(key);
-	INPUT ip;
+	INPUT ip = INPUT();
 	// Set up a generic keyboard event.
 	ip.type = INPUT_KEYBOARD;
 	ip.ki.wScan = 0; // hardware scan code for key
@@ -674,7 +674,7 @@ bool DKWindows::SetClipboardImage(const DKString& file){
 	if(!::OpenClipboard(hWnd))
 		return DKERROR("file:("+file+"): ::OpenClipboard(hWnd) failed\n");
 	::EmptyClipboard();
-	BITMAP bm;
+	BITMAP bm = BITMAP();
 	::GetObject(hBM, sizeof(bm), &bm);
 	BITMAPINFOHEADER bi;
 	::ZeroMemory(&bi, sizeof(BITMAPINFOHEADER));
@@ -719,7 +719,7 @@ bool DKWindows::SetClipboardImage(const DKString& file){
 			LPBYTE             pByte;
 			LPBITMAPINFOHEADER pHdr;
 			LPBITMAPINFO       pInfo;
-		} Hdr;
+		} Hdr = tagHdr_u();
 		Hdr.p = ::GlobalLock(hDIB);
 		// Copy the header
 		::CopyMemory(Hdr.p, &bi, sizeof(BITMAPINFOHEADER));
@@ -801,7 +801,7 @@ bool DKWindows::Sleep(int milliseconds){
 	return true;;
 }
 
-bool DKWindows::StrokeKey(const int& key){
+bool DKWindows::StrokeKey(const WORD& key){
 	DKDEBUGFUNC(key);
 	PressKey(key);
 	return ReleaseKey(key);
@@ -820,7 +820,7 @@ bool DKWindows::TurnOnMonitor(){
 
 bool DKWindows::VirtualMemory(unsigned long long& virtualMemory){
 	DKDEBUGFUNC(virtualMemory);
-	MEMORYSTATUSEX memInfo;
+	MEMORYSTATUSEX memInfo = MEMORYSTATUSEX();
 	memInfo.dwLength = sizeof(MEMORYSTATUSEX);
 	GlobalMemoryStatusEx(&memInfo);
 	DWORDLONG totalVirtualMem = memInfo.ullTotalPageFile;
@@ -830,7 +830,7 @@ bool DKWindows::VirtualMemory(unsigned long long& virtualMemory){
 
 bool DKWindows::VirtualMemoryUsed(unsigned long long& virtualMemory){
 	DKDEBUGFUNC(virtualMemory);
-	MEMORYSTATUSEX memInfo;
+	MEMORYSTATUSEX memInfo = MEMORYSTATUSEX();
 	memInfo.dwLength = sizeof(MEMORYSTATUSEX);
 	GlobalMemoryStatusEx(&memInfo);
 	DWORDLONG virtualMemUsed = memInfo.ullTotalPageFile - memInfo.ullAvailPageFile;
@@ -838,7 +838,7 @@ bool DKWindows::VirtualMemoryUsed(unsigned long long& virtualMemory){
 	return true;
 }
 
-bool DKWindows::VirtualMemoryUsedByApp(unsigned int& virtualMemory){
+bool DKWindows::VirtualMemoryUsedByApp(size_t& virtualMemory){
 	DKDEBUGFUNC(virtualMemory);
 	PROCESS_MEMORY_COUNTERS pmc;
 	GetProcessMemoryInfo(GetCurrentProcess(), &pmc, sizeof(pmc));

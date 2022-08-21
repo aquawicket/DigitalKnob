@@ -96,10 +96,10 @@ include_guard()
 ### User Friendly Options ###
 dk_set(WARNINGS_AS_ERRORS	ON)
 dk_set(WARNING_LEVEL 		4)
-dk_set(WARNING_4244			ON)
-dk_set(WARNING_5105			ON)
+dk_set(WARNING_4244			OFF)
+dk_set(WARNING_5105			OFF)
 dk_set(STATIC				ON)
-#dk_set(SHARED				OFF)                                          
+dk_set(SHARED				OFF)                                          
 
 # xcode Variables
 dk_set(XCODE_DEVROOT	/Applications/Xcode.app/Contents/Developer)
@@ -422,13 +422,9 @@ ANDROID64_dk_set(DKCONFIGURE_CXXFLAGS		"-DANDROID -DANDROID64 -std=c++1z") #-U__
 ######### Extra Flags and Settings #########
 if(WARNINGS_AS_ERRORS)
 	WIN_dk_set		(DKCMAKE_C_FLAGS	"${DKCMAKE_C_FLAGS} /WX")
-	#WIN_dk_append	(DKCMAKE_C_FLAGS	"/WX")
 	WIN_dk_set		(DKCMAKE_CXX_FLAGS	"${DKCMAKE_CXX_FLAGS} /WX")
-	#WIN_dk_append	(DKCMAKE_CXX_FLAGS	"/WX")
 	UNIX_dk_set		(DCMAKE_C_FLAGS		"${DKCMAKE_C_FLAGS} -Werror")
-	#UNIX_dk_append	(DCMAKE_C_FLAGS		"-Werror")
 	UNIX_dk_set		(DCMAKE_CXX_FLAGS	"${DKCMAKE_CXX_FLAGS} -Werror")
-	#UNIX_dk_append	(DCMAKE_CXX_FLAGS	"-Werror")
 endif()
 if(WARNING_LEVEL)
 	WIN_dk_set	(DKCMAKE_C_FLAGS	"${DKCMAKE_C_FLAGS} /W${WARNING_LEVEL}")

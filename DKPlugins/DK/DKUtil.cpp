@@ -628,7 +628,7 @@ bool DKUtil::PhysicalMemoryUsed(unsigned long long& physicalMemory){
 #	endif
 }
 
-bool DKUtil::PhysicalMemoryUsedByApp(unsigned int& physicalMemory){
+bool DKUtil::PhysicalMemoryUsedByApp(unsigned long long& physicalMemory){
 	DKDEBUGFUNC(physicalMemory);
 #	if WIN32
 		return DKWindows::PhysicalMemoryUsedByApp(physicalMemory) && DKDEBUGRETURN(physicalMemory);
@@ -641,7 +641,7 @@ bool DKUtil::PhysicalMemoryUsedByApp(unsigned int& physicalMemory){
 #	endif
 }
 
-bool DKUtil::PressKey(const int& key){
+bool DKUtil::PressKey(const unsigned short& key){
 	DKDEBUGFUNC(key);
 #	if WIN32
 		return DKWindows::PressKey(key);
@@ -654,7 +654,7 @@ bool DKUtil::PressKey(const int& key){
 #	endif
 }
 
-bool DKUtil::ReleaseKey(const int& key){
+bool DKUtil::ReleaseKey(const unsigned short& key){
 	DKDEBUGFUNC(key);
 #	if WIN32
 		return DKWindows::ReleaseKey(key);
@@ -866,7 +866,7 @@ bool DKUtil::Sleep(const int& milliseconds){
 #	endif
 }
 
-bool DKUtil::StrokeKey(const int& key){
+bool DKUtil::StrokeKey(const unsigned short& key){
 	DKDEBUGFUNC(key);
 #	if WIN32
 		return DKWindows::StrokeKey(key);
@@ -964,7 +964,7 @@ bool DKUtil::VirtualMemoryUsed(unsigned long long& virtualMemory){
 #	endif
 }
 
-bool DKUtil::VirtualMemoryUsedByApp(unsigned int& virtualMemory){
+bool DKUtil::VirtualMemoryUsedByApp(unsigned long long& virtualMemory){
 	DKDEBUGFUNC(virtualMemory);
 #	if WIN32
 		return DKWindows::VirtualMemoryUsedByApp(virtualMemory);

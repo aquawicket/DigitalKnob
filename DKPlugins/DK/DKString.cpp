@@ -37,11 +37,15 @@ bool same(const DKString& str, const DKString& str2){
 }
 
 bool samei(const DKString& str, const DKString& str2){
-	DKString temp1 = str;
-	std::transform(temp1.begin(), temp1.end(), temp1.begin(), ::tolower);
-	DKString temp2 = str2;
-	std::transform(temp2.begin(), temp2.end(), temp2.begin(), ::tolower);
-	if(same(temp1, temp2))
+	DKString strA = toLower(str);
+	//std::transform(strA.begin(), strA.end(), strA.begin(), [](unsigned char c) {
+	//	return static_cast<char>(std::tolower(c));
+	//});
+	DKString strB = toLower(str2);
+	//std::transform(strB.begin(), strB.end(), strB.begin(), [](unsigned char c) {
+	//	return static_cast<char>(std::tolower(c));
+	//});
+	if(same(strA, strB))
 		return true;
 	return false;
 }
@@ -190,13 +194,17 @@ DKString toString(const DKStringArray& arry, const char* seperator){
 
 DKString toLower(const DKString& input){
     DKString output = input;
-    std::transform( output.begin(), output.end(), output.begin(), ::tolower );
+	std::transform(output.begin(), output.end(), output.begin(), [](unsigned char c) {
+		return static_cast<char>(std::tolower(c));
+	});
     return output;
 }
 
 DKString toUpper(const DKString& input){
     DKString output = input;
-    std::transform( output.begin(), output.end(), output.begin(), ::toupper );
+	std::transform(output.begin(), output.end(), output.begin(), [](unsigned char c) {
+		return static_cast<char>(std::toupper(c));
+	});
     return output;
 }
 
