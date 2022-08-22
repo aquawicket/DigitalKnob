@@ -167,7 +167,7 @@ bool DKMac::VirtualMemoryUsed(unsigned long long& virtualMemory){
 	return DKERROR("not implemented\n");
 }
 
-bool DKMac::VirtualMemoryUsedByApp(unsigned int& virtualMemory){
+bool DKMac::VirtualMemoryUsedByApp(unsigned long long& virtualMemory){
     //TODO
     /*
     #include<mach/mach.h>
@@ -228,7 +228,7 @@ bool DKMac::PhysicalMemoryUsed(unsigned long long& physicalMemory){
     return DKERROR("not implemented\n");
 }
 
-bool DKMac::PhysicalMemoryUsedByApp(unsigned int& physicalMemory){
+bool DKMac::PhysicalMemoryUsedByApp(unsigned long long& physicalMemory){
     //TODO
     /*
      #include<mach/mach.h>
