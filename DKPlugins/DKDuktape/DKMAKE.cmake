@@ -9,6 +9,7 @@ endif()
 	dk_copy(${DUKTAPE}/dist/src/duk_config.h ${DKPLUGINS}/DKDuktape/duk_config.h)
 	dk_copy(${DUKTAPE}/dist/src/duktape.h ${DKPLUGINS}/DKDuktape/duktape.h)
 	dk_copy(${DUKTAPE}/dist/src/duktape.c ${DKPLUGINS}/DKDuktape/duktape.cpp)
+	dkFileReplace(${DKPLUGINS}/DKDuktape/duk_config.h "#undef DUK_USE_GLOBAL_BINDING" "#define DUK_USE_GLOBAL_BINDING")
 #endif()
 	
 #dk_set(ENABLE_eventloop ON)
