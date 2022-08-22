@@ -277,7 +277,7 @@ DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left
     DKConsole.prototype.Formatter = function DKConsole_Formatter(args) {
         if (!args.length)
             return;
-        let target = args[0];
+        var target = args[0];
         if (!target.indexOf)
             return args;
         const current = args[1];
@@ -285,7 +285,7 @@ DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left
         if (index <= -1)
             return args;
         const specifier = target.substring(index, index + 2);
-        let converted = undefined;
+        var converted = undefined;
         if (specifier === "%s")
             converted = current.toString();
         if (specifier === "%d" || specifier === "%i") {
@@ -319,7 +319,7 @@ DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left
             target = target.replace(specifier, converted);
         const result = [];
         result.push(target);
-        let n = 2;
+        var n = 2;
         while (args[n]) {
             result.push(args[n]);
             n++;
@@ -420,7 +420,7 @@ DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left
                     group.display = "block";
                 }
                 const elements = dk.console.logDiv.querySelectorAll("[group='" + group.id + "']");
-                for (let n = 0; n < elements.length; n++)
+                for (var n = 0; n < elements.length; n++)
                     elements[n].style.display = group.display;
             }
 

@@ -254,7 +254,7 @@ path = dk.file.validatepath(path);
 
 //console.log("DKFile.prototype.SaveFile: "+path);
 
-    let send = dk.file.onlineAssets + "\\DKFile\\DKFile.php?SaveFile=";
+    var send = dk.file.onlineAssets + "\\DKFile\\DKFile.php?SaveFile=";
     send += path;
     send += "&data="
     send += data;
@@ -447,7 +447,7 @@ if (typeof CPP_DKFile_StringToFile === "function") {
 if(typeof CPP_DKFile_DirectoryContents === "function") {
     DKFile.prototype.directoryContents = function DKFile_directoryContents(path, callback) {
         path = dk.file.validatepath(path)
-		let results = CPP_DKFile_DirectoryContents(path)
+		var results = CPP_DKFile_DirectoryContents(path)
 		results = results.replace("..,","")
 		results = results.replace(".,","")
 		return callback(results)

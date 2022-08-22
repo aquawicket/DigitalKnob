@@ -5,7 +5,7 @@ function DKErrorHandler() {}
 
 DKErrorHandler.prototype.create = function dk_errorhandler_create() {
     // Capture error data for debugging in web console
-    let captures = [];
+    var captures = [];
 
     // Wait until `window.onload`, so any external scripts
     // you might load have a chance to set their own error handlers,
@@ -75,7 +75,7 @@ DKErrorHandler.prototype.create = function dk_errorhandler_create() {
         // New `Image` constructor. Might cause some problems,
         // but not sure yet. This is at least a start, and works on chrome.
         function ImageOverride() {
-            let img = new ImageOriginal;
+            var img = new ImageOriginal;
             onnext(function onnext() {
                 handleAsync(img);
             });
@@ -92,7 +92,7 @@ DKErrorHandler.prototype.create = function dk_errorhandler_create() {
         // Allows us to globally override onload.
         // Not ideal to override stuff, but it helps with debugging.
         function HTMLScriptElementOverride() {
-            let script = new HTMLScriptElement;
+            var script = new HTMLScriptElement;
             onnext(function onnext() {
                 handleAsync(script);
             });

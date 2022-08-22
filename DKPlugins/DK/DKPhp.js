@@ -8,7 +8,7 @@ function DKPhp() {}
 //DKPhp.prototype.call("GET", "DK/DK.php", "Function", "args", "args", dkphp_callback);
 DKPhp.prototype.call = function DKPhp_call(httpMethod, phpPath, funcName) {
     const args = arguments;
-    let dkphp_callback = null;
+    var dkphp_callback = null;
     if (args && typeof (args[args.length - 1]) === "function")
         dkphp_callback = args[args.length - 1];
 
@@ -29,16 +29,16 @@ DKPhp.prototype.call = function DKPhp_call(httpMethod, phpPath, funcName) {
         func: funcName,
         args: []
     };
-    for (let n = 3; arguments && n < arguments.length; n++) {
+    for (var n = 3; arguments && n < arguments.length; n++) {
         if (typeof (arguments[n]) === "function") {
             continue;
         }
-        let newArg = new Object;
+        var newArg = new Object;
         newArg[typeof (arguments[n])] = arguments[n];
         jsonData.args.push(newArg);
     }
 
-    let path = "";
+    var path = "";
     if (location.protocol == "file:" || dk.hasCPP())
         path = "http://127.0.0.1:2393/";
     const str = JSON.stringify(jsonData);
@@ -55,7 +55,7 @@ DKPhp.prototype.call = function DKPhp_call(httpMethod, phpPath, funcName) {
         if (beforeLastLine !== "" && beforeLastLine !== "\n")
             console.log(beforeLastLine);
         const lastLine = rval.substr(rval.lastIndexOf("\n") + 1);
-        let rJson;
+        var rJson;
         try {
             rJson = JSON.parse(lastLine);
         } catch (e) {
@@ -82,24 +82,24 @@ DKPhp.prototype.listen = function DKPhp_listen() {
 /*
 DKPhp.prototype.callPhpFunc = function DKPhp_callPhpFunc(args) {
     //const args = arguments;
-    let func = dk.trace.getCurrentFunctionName(1);
+    var func = dk.trace.getCurrentFunctionName(1);
     //const n = func.indexOf("_") + 1;
     //func = func.substring(n, func.length);
-    let funcName = func.replace("Object.DKPhp_", "");
+    var funcName = func.replace("Object.DKPhp_", "");
     const jsonData = {
         func: funcName,
         args: []
     };
-    for (let n = 0; args && n < args.length; n++) {
+    for (var n = 0; args && n < args.length; n++) {
         //console.log(typeof args[n]);
         if (typeof args[n] === "function") {
             continue;
         }
-        let newArg = new Object;
+        var newArg = new Object;
         newArg[typeof (args[n])] = args[n];
         jsonData.args.push(newArg);
     }
-    let path = "";
+    var path = "";
     if (location.protocol == "file:") {
         path = "";
         path = "http://"+dk.localIP+":"dk.port"/"

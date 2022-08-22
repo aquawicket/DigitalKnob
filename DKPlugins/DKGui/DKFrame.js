@@ -12,9 +12,9 @@ DKFrame.prototype.end = function DKFrame_end() {
 DKFrame.prototype.create = function DKFrame_create(obj) {
     //dk.dumpVariable(obj);
 
-    let instance;
-    let type;
-    let element;
+    var instance;
+    var type;
+    var element;
     if (obj && obj instanceof DKFrame)
         type = "DKFrame"
     else if (obj && obj instanceof HTMLElement) {
@@ -39,7 +39,7 @@ DKFrame.prototype.create = function DKFrame_create(obj) {
     if (obj instanceof HTMLElement)
         element = obj;
     else {
-        for (let key in obj) {
+        for (var key in obj) {
             if (obj[key]instanceof HTMLElement) {
                 element = obj[key];
                 if (element.id && element.id.includes(".html"))
@@ -102,7 +102,7 @@ DKFrame.prototype.createFrame = function DKFrame_createFrame(title, width, heigh
     var newheight = parseFloat(height) + 21;
     var newtop = parseFloat((window.innerHeight / 2) - (newheight / 2) - 1);
     var newleft = parseFloat((window.innerWidth / 2) - (width / 2) - 1)
-    let frame = dk.gui.createElement(document.body, "div", "dk_frame_box");
+    var frame = dk.gui.createElement(document.body, "div", "dk_frame_box");
     this.frame = frame;
 
     //See DKFrame.css for styling

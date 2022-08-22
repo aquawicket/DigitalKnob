@@ -1,23 +1,23 @@
 //CPP_DK_Execute("cmd /c echo press and key to continue && timeout /t 60 > nul") //Wait for key or 1 minute
-let UPDATE = "" //allow the first screen to loop
-let OS = ""   //win32,win64,mac32,mac64,linux32,linux64,ios32,ios64,iossim32,iossim64,android32,android64,raspberry32,raspberry64 
-let APP = ""  //DKAppname
-let TYPE = ""  //Debug, Release, ALL
-let LINK = "Static" //, Dynamic
-let LEVEL = ""  //Build, Rebuild, RebuildAll
-let DIGITALKNOB = ""
-let DKDOWNLOAD = ""
-let CMAKE = ""
-let ANDROID_NDK = ""  //filled by DKBuild_ValidateNDK()
-//let VISUALSTUDIO_VERSION = "2019"
-let VISUALSTUDIO_VERSION = "2022"
-let VISUALSTUDIO = ""
-//let VS_GENERATOR = "Visual Studio 16 2019"
-let VS_GENERATOR = "Visual Studio 17 2022"
-let MSBUILD = ""
-let GCC = ""
-let XCODE = ""
-let APP_LIST = []
+var UPDATE = "" //allow the first screen to loop
+var OS = ""   //win32,win64,mac32,mac64,linux32,linux64,ios32,ios64,iossim32,iossim64,android32,android64,raspberry32,raspberry64 
+var APP = ""  //DKAppname
+var TYPE = ""  //Debug, Release, ALL
+var LINK = "Static" //, Dynamic
+var LEVEL = ""  //Build, Rebuild, RebuildAll
+var DIGITALKNOB = ""
+var DKDOWNLOAD = ""
+var CMAKE = ""
+var ANDROID_NDK = ""  //filled by DKBuild_ValidateNDK()
+//var VISUALSTUDIO_VERSION = "2019"
+var VISUALSTUDIO_VERSION = "2022"
+var VISUALSTUDIO = ""
+//var VS_GENERATOR = "Visual Studio 16 2019"
+var VS_GENERATOR = "Visual Studio 17 2022"
+var MSBUILD = ""
+var GCC = ""
+var XCODE = ""
+var APP_LIST = []
 
 const USERNAME = CPP_DK_GetUsername()
 if(!USERNAME){
@@ -32,9 +32,9 @@ function DKBuild_GetDKMakeVariable(file, variable){
 	str = str.split("dkset(").join("set(")
 	str = str.split("DKSET(").join("set(")
 	str = str.split("SET(").join("set(")
-	let index = str.indexOf("set("+variable+" ")
-	let pos = index	
-	let marker = 0
+	var index = str.indexOf("set("+variable+" ")
+	var pos = index	
+	var marker = 0
 	while(index > -1 && pos > -1){
 		if(str.charAt(pos) === '\n' || pos === 0){
 			marker = str.indexOf(" ", index)
@@ -109,8 +109,8 @@ function DKBuild_end(){
 //This is and alternative way to get windows short paths
 function DKBuild_GetShortPath(fullPath){
 	const assets = CPP_DKAssets_LocalAssets()
-	let getShortPath = assets+"/DKFile/getShortPath.cmd"
-	let shortPath = CPP_DK_Execute(getShortPath+' "'+fullPath+'"')
+	var getShortPath = assets+"/DKFile/getShortPath.cmd"
+	var shortPath = CPP_DK_Execute(getShortPath+' "'+fullPath+'"')
 	//shortPath = shortPath.slice(0, -1)
 	while(shortPath.includes("\\")){
 		shortPath = shortPath.replace("\\","/")
@@ -240,14 +240,14 @@ function DKBuild_ValidateNDK(){
 }
 
 function DKBuild_ResetApps(){
-	let contents = CPP_DKFile_DirectoryContents(DIGITALKNOB)
-	let items = contents.split(",")
-	for(let n=0; n<items.length; n++){
+	var contents = CPP_DKFile_DirectoryContents(DIGITALKNOB)
+	var items = contents.split(",")
+	for(var n=0; n<items.length; n++){
 		if(CPP_DKFile_Exists(DIGITALKNOB+items[n]+"/.git")){
 			if(CPP_DKFile_Exists(DIGITALKNOB+items[n]+"/DKApps")){
-				let app_contents = CPP_DKFile_DirectoryContents(DIGITALKNOB+items[n]+"/DKApps")
-				let apps = app_contents.split(",")
-				for(let nn=0; nn<apps.length; nn++){
+				var app_contents = CPP_DKFile_DirectoryContents(DIGITALKNOB+items[n]+"/DKApps")
+				var apps = app_contents.split(",")
+				for(var nn=0; nn<apps.length; nn++){
 					if(CPP_DKFile_IsDirectory(DIGITALKNOB+items[n]+"/DKApps/"+apps[nn])){
 						if(apps[nn] !== "DKBuilder")
 							DKGit_CleanFolder(DIGITALKNOB+items[n]+"/DKApps/"+apps[nn])
@@ -259,9 +259,9 @@ function DKBuild_ResetApps(){
 }
 
 function DKBuild_ResetPlugins(){
-	let contents = CPP_DKFile_DirectoryContents(DIGITALKNOB)
-	let items = contents.split(",")
-	for(let n=0; n<items.length; n++){
+	var contents = CPP_DKFile_DirectoryContents(DIGITALKNOB)
+	var items = contents.split(",")
+	for(var n=0; n<items.length; n++){
 		if(CPP_DKFile_Exists(DIGITALKNOB+items[n]+"/.git")){
 			if(CPP_DKFile_Exists(DIGITALKNOB+items[n]+"/DKPlugins"))
 				DKGit_CleanFolder(DIGITALKNOB+items[n]+"/DKPlugins")
@@ -270,9 +270,9 @@ function DKBuild_ResetPlugins(){
 }
 
 function DKBuild_Reset3rdParty(){
-	let contents = CPP_DKFile_DirectoryContents(DIGITALKNOB)
-	let items = contents.split(",")
-	for(let n=0; n<items.length; n++){
+	var contents = CPP_DKFile_DirectoryContents(DIGITALKNOB)
+	var items = contents.split(",")
+	for(var n=0; n<items.length; n++){
 		if(CPP_DKFile_Exists(DIGITALKNOB+items[n]+"/.git")){
 			if(CPP_DKFile_Exists(DIGITALKNOB+items[n]+"/3rdPatry"))
 				DKGit_CleanFolder(DIGITALKNOB+items[n]+"/3rdParty")
@@ -281,9 +281,9 @@ function DKBuild_Reset3rdParty(){
 }
 
 function DKBuild_ResetEverything(){
-	let contents = CPP_DKFile_DirectoryContents(DIGITALKNOB)
-	let items = contents.split(",")
-	for(let n=0; n<items.length; n++){
+	var contents = CPP_DKFile_DirectoryContents(DIGITALKNOB)
+	var items = contents.split(",")
+	for(var n=0; n<items.length; n++){
 		if(CPP_DKFile_Exists(DIGITALKNOB+items[n]+"/.git")){
 			DKGit_CleanFolder(DIGITALKNOB+items[n])
 		}
@@ -292,14 +292,14 @@ function DKBuild_ResetEverything(){
 
 function DKBuild_GetAppList(){
 	APP_LIST = []
-	let contents = CPP_DKFile_DirectoryContents(DIGITALKNOB)
-	let items = contents.split(",")
-	for(let i=0; i<items.length; i++){
+	var contents = CPP_DKFile_DirectoryContents(DIGITALKNOB)
+	var items = contents.split(",")
+	for(var i=0; i<items.length; i++){
 		if(CPP_DKFile_Exists(DIGITALKNOB+items[i]+"/DKApps")){
 			if(CPP_DKFile_IsDirectory(DIGITALKNOB+items[i]+"/DKApps")){
-				let dkApps = CPP_DKFile_DirectoryContents(DIGITALKNOB+items[i]+"/DKApps")
-				let dkAppsArray = dkApps.split(",")
-				for(let nn=0; nn < dkAppsArray.length; nn++){
+				var dkApps = CPP_DKFile_DirectoryContents(DIGITALKNOB+items[i]+"/DKApps")
+				var dkAppsArray = dkApps.split(",")
+				for(var nn=0; nn < dkAppsArray.length; nn++){
 					if(CPP_DKFile_Exists(DIGITALKNOB+items[i]+"/DKApps/"+dkAppsArray[nn]+"/DKMAKE.cmake")){
 						APP_LIST.push(dkAppsArray[nn])
 					}
@@ -310,9 +310,9 @@ function DKBuild_GetAppList(){
 }
 
 function DKBuild_FindAppPath(name){
-	let contents = CPP_DKFile_DirectoryContents(DIGITALKNOB)
-	let files = contents.split(",")
-	for(let i=0; i<files.length; i++){ 
+	var contents = CPP_DKFile_DirectoryContents(DIGITALKNOB)
+	var files = contents.split(",")
+	for(var i=0; i<files.length; i++){ 
 		if(CPP_DKFile_Exists(DIGITALKNOB+files[i]+"/DKApps/"+name+"/DKMAKE.cmake"))
 			return DIGITALKNOB+files[i]+"/DKApps/"+name+"/"
 	}
@@ -346,7 +346,7 @@ function DKBuild_DoResults(){
 	DKBuild_ValidateCmake()
 	
 	////// Create the cmake string
-	let cmake_string = ""
+	var cmake_string = ""
 	//cmake_string = cmake_string+"--warn-uninitialized "
 	if(TYPE === "Debug" || TYPE === "ALL")
 		cmake_string = cmake_string+"-DDEBUG=ON "

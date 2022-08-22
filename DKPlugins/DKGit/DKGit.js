@@ -231,9 +231,9 @@ function DKGit_DeleteLocalBranch(branch){
 // the total number of "different" commits between the current branch and server branch
 function DKGit_CheckForDiff(){
 	//console.log("DKGit_CheckForDiff()")
-	let contents = CPP_DKFile_DirectoryContents(DIGITALKNOB)
-	let files = contents.split(",")
-	for(let i=0; i<files.length; i++){ 
+	var contents = CPP_DKFile_DirectoryContents(DIGITALKNOB)
+	var files = contents.split(",")
+	for(var i=0; i<files.length; i++){ 
 		if(CPP_DKFile_Exists(DIGITALKNOB+files[i]+"/DKApps")){
 				CPP_DKFile_ChDir(DIGITALKNOB + files[i])
 				console.log("Checking "+files[i]+" . . . ")
@@ -258,9 +258,9 @@ function DKGit_CheckForDiff(){
 
 function DKGit_DiffCount(){
 	console.log("DKGit_DiffCount()")
-	let contents = CPP_DKFile_DirectoryContents(DIGITALKNOB)
-	let files = contents.split(",")
-	for(let i=0; i<files.length; i++){ 
+	var contents = CPP_DKFile_DirectoryContents(DIGITALKNOB)
+	var files = contents.split(",")
+	for(var i=0; i<files.length; i++){ 
 		if(CPP_DKFile_Exists(DIGITALKNOB+files[i]+"/DKApps")){
 			CPP_DKFile_ChDir(DIGITALKNOB + "/" + files[i])
 			const default_branch = DKGit_GetDefaultBranch()

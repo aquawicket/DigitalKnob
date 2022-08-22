@@ -192,7 +192,7 @@ function DKBuildConsole_SelectOs() {
 		
 	console.log("\n")
 	console.log("**** SELECT OS TO BUILD ****")
-	for(let n=1; n<OSes.length+1; n++){
+	for(var n=1; n<OSes.length+1; n++){
 		console.log("    "+n+":  "+OSes[n-1])	
 	}
 
@@ -333,7 +333,7 @@ function DKBuildConsole_SelectType() {
 // launch iOS simulator app: https://stackoverflow.com/a/35262865/688352
 function BuildConsole_PostBuildOptions(){
 	console.log("**** Post-Build Options ****")
-	let num = 1
+	var num = 1
 	const exe_path = DKBuildConsole_FindAppExecutablePath(OS, APP, TYPE)
 	if(exe_path){
 		console.log("    "+num+":  Launch "+APP+" Executable")
@@ -446,7 +446,7 @@ function DKBuildConsole_FindAppExecutablePath(os, app, type){
 
 function DKBuildConsole_FindAppSolutionPath(os, app, type){
 	const app_path = DKBuild_FindAppPath(app)
-	let solution_path
+	var solution_path
 	if(os === "win32" || os === "win64"){
 		solution_path = app_path+os+"/"+app+".sln"
 	}

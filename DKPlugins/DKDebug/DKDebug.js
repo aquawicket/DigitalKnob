@@ -105,12 +105,12 @@ DKDebug.prototype.debugFunc = function DKDebug_debugFunc() {
         console.debug(objstrings.length + " suspected objects in the path");
 
         const objs = [window];
-        for (let n = 0; n < objstrings.length; n++) {
+        for (var n = 0; n < objstrings.length; n++) {
             //objs.push()
             objs.push(objs[n][objstrings[n]]);
             if (objs[n + 1] === undefined) {
-                let errmsg = "";
-                for (let nn = 0; nn < n + 1; nn++) {
+                var errmsg = "";
+                for (var nn = 0; nn < n + 1; nn++) {
                     if (nn === n)
                         errmsg += "(";
                     errmsg += objstrings[nn];
@@ -185,19 +185,19 @@ DKDebug.prototype.debugFunc = function DKDebug_debugFunc() {
     //dk.php.call('GET', "/DKFile/DKFile.php", "DirectoryContents", ".", console.log);
 
     /*
-    let address = "aquawicket@hotmail.com";
-    let subject = "Test PHP email";
-    let msg = "testing if php mail sending is still successful";
+    var address = "aquawicket@hotmail.com";
+    var subject = "Test PHP email";
+    var msg = "testing if php mail sending is still successful";
     dk.php.call('GET',"/DK/DK.php", "sendEmail", address, subject, msg, console.log);
     */
 
     /*
-    let path = ".";
+    var path = ".";
     dk.php.call('GET','/DKFile/DKFile.php', 'IsDirectory', path, console.log);
     */
 
     /*
-    let path = ".";
+    var path = ".";
     dk.php.call('GET','/DKFile/DKFile.php', 'IsDirectory', path, function dk_php_call_callback(rval){
         rval && console.debug("true");
         !rval && console.debug("false");
@@ -205,17 +205,17 @@ DKDebug.prototype.debugFunc = function DKDebug_debugFunc() {
     */
 
     /*
-    let path = "";
+    var path = "";
     dk.php.call('GET','/DKFile/DKFile.php', 'GetAbsolutePath', path, console.log);
     */
 
     /*
-    let path = "../DK/../";
+    var path = "../DK/../";
     dk.php.call('GET','/DKFile/DKFile.php', 'GetRelativePath', path, console.log);
     */
 
     /*
-    let path = ".";
+    var path = ".";
     dk.php.call('GET','/DKFile/DKFile.php', 'PathExists', path, function dk_php_call_callback(rval){
         rval && console.debug("true");
         !rval && console.debug("false");
@@ -352,7 +352,7 @@ DKDebug.prototype.debugFunc = function DKDebug_debugFunc() {
     /*
     //Update time on all Tasmota devices
     const dateInMilliseconds = GetDateInMilliseconds();
-    for (let n = 0; n < devices.length; n++) {
+    for (var n = 0; n < devices.length; n++) {
         const cmnd = "timezone -7";
         const url = "http://" + devices[n].ip + "/cm?cmnd=" + encodeURIComponent(cmnd).replace(";", "%3B");
         DK_SendRequest("GET", url, function DK_SendRequest_callback(success, url, data) {//console.log("DK_SendRequest("+success+","+url+","+data+")");
@@ -368,7 +368,7 @@ DKDebug.prototype.debugFunc = function DKDebug_debugFunc() {
 
     /*
     //Get time from all Tasmota devices
-    for (let n = 0; n < devices.length; n++) {
+    for (var n = 0; n < devices.length; n++) {
         const cmnd = "time";
         const url = "http://" + devices[n].ip + "/cm?cmnd=" + encodeURIComponent(cmnd).replace(";", "%3B");
         DK_SendRequest("GET", url, function DK_SendRequest_callback(success, url, data) {
@@ -426,11 +426,11 @@ DKDebug.prototype.debugFunc = function DKDebug_debugFunc() {
         f: null
     };
 
-    let myData = [];
+    var myData = [];
     const onDataReceived = function onDataReceived(input) {
         if (myData.length) {
-            for (let value in input) {
-                let skipUndefineds = (myData.length - 1);
+            for (var value in input) {
+                var skipUndefineds = (myData.length - 1);
                 while (skipUndefineds && !myData[skipUndefineds][value]) {
                     skipUndefineds--;
                 }
@@ -479,8 +479,8 @@ DKDebug.prototype.logKey = function DKDebug_logKey(code) {
 }
 
 DKDebug.prototype.checkKeys = function DKDebug_checkKeys() {
-    let string = "";
-    for (let n = 0; n < dk.debug.keyHistory.length; n++)
+    var string = "";
+    for (var n = 0; n < dk.debug.keyHistory.length; n++)
         string += dk.debug.keyToChar(dk.debug.keyHistory[n]);
     //check for commands
     if (string.includes("dkreload")) {

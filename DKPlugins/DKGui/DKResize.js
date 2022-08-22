@@ -130,8 +130,8 @@ DKResize.prototype.start = function DKResize_start(event, element, side) {
 DKResize.prototype.move = function DKResize_move(event, element, side) {
     if (!event)
         event = window.event;
-    let x;
-    let y;
+    var x;
+    var y;
     if (dk.iE()) {
         x = event.clientX + document.documentElement.scrollLeft + document.body.scrollLeft;
         y = event.clientY + document.documentElement.scrollTop + document.body.scrollTop;
@@ -170,7 +170,7 @@ DKResize.prototype.stop = function DKResize_stop() {
 /*
 DKResize.prototype.attachResizes = function DKResize_attachResizes(parent) {
     const elements = parent.getElementsByTagName('*');
-    for (let n = 0; n < elements.length; n++) {
+    for (var n = 0; n < elements.length; n++) {
         const element = elements[n];
         if (!dk.iE() && dk.getBrowser() !== "RML")
             element.style.setProperty("pointer-events", "all");
