@@ -94,7 +94,7 @@ dk_disable(tiff)
 if(NOT WIN_HOST) # Disabled on Non-Windows host machines
 	dk_disable(android-studio)
 	dk_disable(glintercept)
-	dk_disable(python)
+	#dk_disable(python)
 	dk_disable(php_binary)
 	dk_disable(vs16-redistributable)
 endif()
@@ -237,7 +237,7 @@ if(IOS OR IOSSIM)
 endif()
 
 
-if(NOT LINUX AND NOT RASPBERRY) # Disabled NON Linux targets
+if(NOT LINUX AND NOT RASPBERRY) # Disabled NON Linux targets -> "Disabled for: WINDOWS, MAC, IOS, ANDROID"
 	dk_disable(build-essential)
 	dk_disable(kdevelop)
 	dk_disable(libasound2-dev)
@@ -372,7 +372,6 @@ if(ANDROID) # Disabled for Android targets
 	dk_disable(openal-android)
 	dk_disable(openssl)
 	dk_disable(podofo)
-	dk_disable(python)
 	dk_disable(rlottie)
 	dk_disable(rtmidi)
 	dk_disable(sdl-gpu)
