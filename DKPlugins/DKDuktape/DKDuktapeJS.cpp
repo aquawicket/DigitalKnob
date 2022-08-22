@@ -957,16 +957,17 @@ int DKDuktapeJS::PhysicalMemoryUsed(duk_context* ctx){
 
 int DKDuktapeJS::PhysicalMemoryUsedByApp(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
-	unsigned int physicalMemory;
+	unsigned long long physicalMemory;
 	if(!DKUtil::PhysicalMemoryUsedByApp(physicalMemory))
 		return 0;
-	duk_push_number(ctx, physicalMemory);
+	duk_push_number(ctx, (double)physicalMemory);
 	return 1;
 }
 
 int DKDuktapeJS::PressKey(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
-	int key = duk_require_int(ctx, 0);
+	//unsigned short key = duk_require_int(ctx, 0);
+	unsigned short key = duk_to_uint16(ctx, 0);
 	if(!DKUtil::PressKey(key))
 		return 0;
 	return 1;
@@ -981,7 +982,8 @@ int DKDuktapeJS::QueueDuktape(duk_context* ctx){
 
 int DKDuktapeJS::ReleaseKey(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
-	int key = duk_require_int(ctx, 0);
+	//unsigned short key = duk_require_int(ctx, 0);
+	unsigned short key = duk_to_uint16(ctx, 0);
 	if(!DKUtil::ReleaseKey(key))
 		return 0;
 	return 1;
@@ -1100,7 +1102,8 @@ int DKDuktapeJS::StopPropagation(duk_context* ctx){
 
 int DKDuktapeJS::StrokeKey(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
-	int key = duk_require_int(ctx, 0);
+	//unsigned short key = duk_require_int(ctx, 0);
+	unsigned short key = duk_to_uint16(ctx, 0);
 	if(!DKUtil::StrokeKey(key))
 		return 0;
 	return 1;
@@ -1176,10 +1179,10 @@ int DKDuktapeJS::VirtualMemoryUsed(duk_context* ctx){
 
 int DKDuktapeJS::VirtualMemoryUsedByApp(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
-	unsigned int virtualMemory;
+	unsigned long long virtualMemory;
 	if(!DKUtil::VirtualMemoryUsedByApp(virtualMemory))
 		return 0;
-	duk_push_number(ctx, virtualMemory);
+	duk_push_number(ctx, (double)virtualMemory);
 	return 1;
 }
 
