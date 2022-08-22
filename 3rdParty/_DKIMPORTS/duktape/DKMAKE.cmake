@@ -23,7 +23,7 @@ WIN_dk_queueCommand(${PYTHON_EXE} ${DUKTAPE}/util/dist.py)
 #dk_copy(${DUKTAPE}/dist/src/ ${DUKTAPE}/src OVERWRITE)
 
 MAC_dk_queueCommand(pip install PyYAML)
-MAC_dk_queseCOmmand(python ${DUKTAPE}/util/dist.py) 
+MAC_dk_queueCommand(python ${DUKTAPE}/util/dist.py) 
 
 LINUX_dk_queueCommand(sudo apt-get -y install python python-yaml)
 LINUX_dk_queueCommand(python ${DUKTAPE}\util\dist.py)
