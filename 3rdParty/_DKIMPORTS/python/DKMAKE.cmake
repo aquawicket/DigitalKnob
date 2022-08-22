@@ -30,7 +30,7 @@ ENDIF()
 IF(MAC AND NOT EXISTS ${PYTHON_APP})
 	dk_download(${PYTHON_DL} ${DKDOWNLOAD}/python-2.7.18-macosx10.9.pkg)
 	dk_executeProcess(${DKDOWNLOAD}/python-2.7.18-macosx10.9.pkg)
-	#TODO
+	dk_executeProcess(sudo installer -pkg ${DKDOWNLOAD}/python-2.7.18-macosx10.9.pkg -target ${PYTHON})
 ENDIF()
 IF(LINUX AND NOT EXISTS ${PYTHON_APP})
 	dk_download(${PYTHON_DL} ${DKDOWNLOAD}/Python-2.7.18.tgz)
