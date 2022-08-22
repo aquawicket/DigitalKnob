@@ -5,9 +5,11 @@ if(USE_babel)
 endif()
 
 
-if(NOT EXISTS ${DKPLUGINS}/DKDuktape/duktape.cpp)
-	dk_copy(${DUKTAPE}/src/duktape.c ${DKPLUGINS}/DKDuktape/duktape.cpp)
-endif()
+#if(NOT EXISTS ${DKPLUGINS}/DKDuktape/duktape.cpp)
+	dk_copy(${DUKTAPE}/dist/src/duk_config.h ${DKPLUGINS}/DKDuktape/duk_config.h)
+	dk_copy(${DUKTAPE}/dist/src/duktape.h ${DKPLUGINS}/DKDuktape/duktape.h)
+	dk_copy(${DUKTAPE}/dist/src/duktape.c ${DKPLUGINS}/DKDuktape/duktape.cpp)
+#endif()
 	
 #dk_set(ENABLE_eventloop ON)
 if(ENABLE_eventloop)
