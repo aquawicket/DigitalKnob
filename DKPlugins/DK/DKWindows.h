@@ -72,7 +72,7 @@ public:
 	static bool MiddleRelease();
 	static bool PhysicalMemory(unsigned long long& physicalMemory);
 	static bool PhysicalMemoryUsed(unsigned long long& physicalMemory);
-	static bool PhysicalMemoryUsedByApp(size_t& physicalMemory);
+	static bool PhysicalMemoryUsedByApp(unsigned long long& physicalMemory);
 	static bool PressKey(WORD key);
 	static bool RefreshWindowsEnvironment();
 	static bool ReleaseKey(WORD key);
@@ -93,7 +93,7 @@ public:
 	static bool TurnOnMonitor();
 	static bool VirtualMemory(unsigned long long& virtualMemory);
 	static bool VirtualMemoryUsed(unsigned long long& virtualMemory);
-	static bool VirtualMemoryUsedByApp(size_t& virtualMemory);
+	static bool VirtualMemoryUsedByApp(unsigned long long& virtualMemory);
 	static bool WaitForImage(const DKString& file, int timeout);
 	static bool WheelDown();
 	static bool WheelUp();

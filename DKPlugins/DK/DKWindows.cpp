@@ -510,7 +510,7 @@ bool DKWindows::PhysicalMemoryUsed(unsigned long long& physicalMemory){
 	return true;
 }
 
-bool DKWindows::PhysicalMemoryUsedByApp(size_t& physicalMemory){
+bool DKWindows::PhysicalMemoryUsedByApp(unsigned long long& physicalMemory){
 	DKDEBUGFUNC(physicalMemory);
 	PROCESS_MEMORY_COUNTERS pmc;
 	GetProcessMemoryInfo(GetCurrentProcess(), &pmc, sizeof(pmc));
@@ -838,7 +838,7 @@ bool DKWindows::VirtualMemoryUsed(unsigned long long& virtualMemory){
 	return true;
 }
 
-bool DKWindows::VirtualMemoryUsedByApp(size_t& virtualMemory){
+bool DKWindows::VirtualMemoryUsedByApp(unsigned long long& virtualMemory){
 	DKDEBUGFUNC(virtualMemory);
 	PROCESS_MEMORY_COUNTERS pmc;
 	GetProcessMemoryInfo(GetCurrentProcess(), &pmc, sizeof(pmc));
