@@ -20,7 +20,6 @@ dk_set(QUEUE_BUILD ON)
 
 WIN_dk_queueCommand(${PYTHON}/Scripts/pip install PyYAML)
 WIN_dk_queueCommand(${PYTHON_EXE} ${DUKTAPE}/util/dist.py)
-#dk_copy(${DUKTAPE}/dist/src/ ${DUKTAPE}/src OVERWRITE)
 
 MAC_dk_queueCommand(pip install PyYAML)
 MAC_dk_queueCommand(python ${DUKTAPE}/util/dist.py) 
@@ -28,6 +27,7 @@ MAC_dk_queueCommand(python ${DUKTAPE}/util/dist.py)
 LINUX_dk_queueCommand(sudo apt-get -y install python python-yaml)
 LINUX_dk_queueCommand(python ${DUKTAPE}/util/dist.py)
 
+dk_copy(${DUKTAPE}/dist/src/ ${DUKTAPE}/src OVERWRITE)
 #dk_import(https://codeload.github.com/nodeca/js-yaml/zip/refs/tags/3.14.1 ${DUKTAPE_NAME}/src-tools/lib/extdeps/js-yaml)
 #WIN32_dk_queueCommand(${NODE_EXE} ${DUKTAPE}/src-tools/index.js configure --output-directory ${DUKTAPE}/src --source-directory ${DUKTAPE}/src-input --config-directory ${DUKTAPE}/config)
 endif()
