@@ -25,6 +25,7 @@ IF(WIN AND NOT EXISTS ${PYTHON_APP})
 	#dk_executeProcess(MsiExec.exe /i "${DKDOWNLOAD}/python-2.7.18.msi" ALLUSERS=1 ADDLOCAL=ALL TARGETDIR="${PYTHON}" /qn)
 	# string(REPLACE "/" "\\" PYTHON_PATH ${PYTHON})
 	dk_setEnv("PATH" "${PYTHON}") #FIXME
+	dk_executeProcess(cmd /c ${PYTHON_APP} -m ensurepip)
 ENDIF()
 IF(MAC AND NOT EXISTS ${PYTHON_APP})
 	dk_download(${PYTHON_DL} ${DKDOWNLOAD}/python-2.7.18-macosx10.9.pkg)
