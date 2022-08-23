@@ -32,7 +32,7 @@
 #include "duktape.h"
 #include "DKDuktape.h"
 
-
+/*
 // https://github.com/svaarala/duktape/blob/master/tests/api/test-set-global-object.c
 static void dump_global_object_keys(duk_context *ctx) {
 	DKDEBUGFUNC(ctx);
@@ -42,6 +42,7 @@ static void dump_global_object_keys(duk_context *ctx) {
 	"    for (var k in this) { print('key:', k); }\n"
 	"})()\n");
 }
+*/
 
 bool DKDomWindow::Init(){
 	DKDEBUGFUNC();
