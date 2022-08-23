@@ -12,9 +12,9 @@ MAC_dk_set			(PYTHON_DL https://www.python.org/ftp/python/2.7.18/python-2.7.18-m
 LINUX_dk_set		(PYTHON_DL https://www.python.org/ftp/python/2.7.18/Python-2.7.18.tgz)
 RASPBERRY_dk_set	(PYTHON_DL https://www.python.org/ftp/python/2.7.18/Python-2.7.18.tgz)
 WIN_dk_set			(PYTHON_APP ${PYTHON}/python.exe)
-MAC_dk_set			(PYTHON_APP ${PYTHON}/python.app)
-LINUX_dk_set		(PYTHON_APP ${PYTHON}/python)
-RASPBERRY_dk_set	(PYTHON_APP ${PYTHON}/python)
+MAC_dk_set			(PYTHON_APP python)
+LINUX_dk_set		(PYTHON_APP python)
+RASPBERRY_dk_set	(PYTHON_APP python)
 
 
 ### INSTALL ###

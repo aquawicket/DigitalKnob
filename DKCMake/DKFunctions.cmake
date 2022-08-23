@@ -1421,7 +1421,7 @@ function(dk_makeDirectory path)
 #		endforeach()
 #	endif()
 endfunction()
-
+dk_createOsMacros("dk_makeDirectory")
 
 ###############################################################################
 # dk_getDirectory(path RESULT)
@@ -1814,7 +1814,7 @@ function(dk_executeProcess commands) #NOASSERT
 		endif()
 	endif()
 endfunction()
-
+dk_createOsMacros("dk_executeProcess")
 
 ###############################################################################
 # dk_setEnv(name value)

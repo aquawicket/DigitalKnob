@@ -11,40 +11,52 @@ dk_depend(nodejs)
 
 
 #dk_import(https://github.com/aquawicket/duktape/archive/0701a460ca25c2dc76a96bd3187849ca278d1865.zip PATCH)
-dk_import(https://github.com/aquawicket/duktape.git PATCH)
+dk_import(https://github.com/aquawicket/duktape.git PATCH) #NOTE: PATCH is for CMakeLists.txt
 
 
-if(NOT EXISTS ${DUKTAPE}/src)
+if(NOT EXISTS ${DUKTAPE}/dist/src/duktape.c)
 	dk_setPath(${DUKTAPE})
-	dk_set(QUEUE_BUILD ON)
-	if(NOT EXISTS ${DUKTAPE}/dist)
-		WIN_dk_queueCommand(${PYTHON}/Scripts/pip install PyYAML)
-		WIN_dk_queueCommand(${PYTHON_EXE} ${DUKTAPE}/util/dist.py)
 	
-		MAC_dk_queueCommand(pip install PyYAML)
-		MAC_dk_queueCommand(python ${DUKTAPE}/util/dist.py) 
+	WIN_dk_executeProcess(${PYTHON}/Scripts/pip install PyYAML)
+	#WIN_dk_executeProcess(${PYTHON_EXE} ${DUKTAPE}/util/dist.py)  #default generator
+	WIN_dk_makeDirectory(${DUKTAPE}/dist)
+	WIN_dk_executeProcess(${PYTHON_APP} ${DUKTAPE}/tools/configure.py
+		--output-directory ${DUKTAPE}/dist/src
+		-DDUK_USE_GLOBAL_BINDING 
+		-DDUK_USE_FATAL_HANDLER 
+		-DDUK_USE_DEBUGGER_SUPPORT 
+		-DDUK_USE_INTERRUPT_COUNTER 
+		-DDUK_USE_DEBUGGER_DUMPHEAP 
+		-DDUK_USE_DEBUGGER_INSPECT)
+	
+	MAC_dk_executeProcess(pip install PyYAML)
+	#MAC_dk_executeProcess(python ${DUKTAPE}/util/dist.py) #default generator
+	MAC_dk_executeProcess(${PYTHON_APP} ${DUKTAPE}/tools/configure.py
+		--output-directory ${DUKTAPE}/dist/src
+		-DDUK_USE_GLOBAL_BINDING 
+		-DDUK_USE_FATAL_HANDLER 
+		-DDUK_USE_DEBUGGER_SUPPORT 
+		-DDUK_USE_INTERRUPT_COUNTER 
+		-DDUK_USE_DEBUGGER_DUMPHEAP 
+		-DDUK_USE_DEBUGGER_INSPECT)
 
-		LINUX_dk_queueCommand(sudo apt-get -y install python python-yaml)
-		LINUX_dk_queueCommand(python ${DUKTAPE}/util/dist.py)
+	LINUX_dk_executeProcess(sudo apt-get -y install python python-yaml)
+	#LINUX_dk_executeProcess(python ${DUKTAPE}/util/dist.py) #default generator
+	LINUX_dk_executeProcess(${PYTHON_APP} ${DUKTAPE}/tools/configure.py
+		--output-directory ${DUKTAPE}/dist/src
+		-DDUK_USE_GLOBAL_BINDING 
+		-DDUK_USE_FATAL_HANDLER 
+		-DDUK_USE_DEBUGGER_SUPPORT 
+		-DDUK_USE_INTERRUPT_COUNTER 
+		-DDUK_USE_DEBUGGER_DUMPHEAP 
+		-DDUK_USE_DEBUGGER_INSPECT)
 
-		dk_copy(${DUKTAPE}/dist/src/ ${DUKTAPE}/src OVERWRITE)
-	endif()
-#dk_import(https://codeload.github.com/nodeca/js-yaml/zip/refs/tags/3.14.1 ${DUKTAPE_NAME}/src-tools/lib/extdeps/js-yaml)
-#WIN32_dk_queueCommand(${NODE_EXE} ${DUKTAPE}/src-tools/index.js configure --output-directory ${DUKTAPE}/src --source-directory ${DUKTAPE}/src-input --config-directory ${DUKTAPE}/config)
+	#dk_copy(${DUKTAPE}/dist/src/ ${DUKTAPE}/src OVERWRITE)
 endif()
 
 
-#if(NOT EXISTS ${DUKTAPE}/src/duktape.cpp)
-#	dk_copy(${DUKTAPE}/src/duktape.c ${DUKTAPE}/src/duktape.cpp)
-#endif()
-#if(NOT EXISTS ${DUKTAPE}/examples/eventloop/poll.cpp)
-#	dk_copy(${DUKTAPE}/examples/eventloop/poll.c ${DUKTAPE}/examples/eventloop/poll.cpp)
-#endif()
-#if(NOT EXISTS ${DUKTAPE}/examples/eventloop/c_eventloop.cpp)
-#	dk_copy(${DUKTAPE}/examples/eventloop/c_eventloop.c ${DUKTAPE}/examples/eventloop/c_eventloop.cpp)
-#endif()
-
-
+#dk_import(https://codeload.github.com/nodeca/js-yaml/zip/refs/tags/3.14.1 ${DUKTAPE_NAME}/src-tools/lib/extdeps/js-yaml)
+#WIN32_dk_executeProcess(${NODE_EXE} ${DUKTAPE}/src-tools/index.js configure --output-directory ${DUKTAPE}/src --source-directory ${DUKTAPE}/src-input --config-directory ${DUKTAPE}/config)
 
 ### LINK ###
 IF(WIN)
