@@ -150,10 +150,9 @@ bool DKV8::GetFunctions(CefRefPtr<CefBrowser> browser){
 	return true;
 }
 
-bool DKV8::Execute(CefRefPtr<CefBrowser> browser, std::string func, CefRefPtr<CefListValue> args){
-	//Multi process Execute
-	DKDEBUGFUNC(browser, func);
-
+//Multi process Execute
+bool DKV8::Execute(CefRefPtr<CefBrowser> browser, std::string func, CefRefPtr<CefListValue> args) {
+	DKDEBUGFUNC(browser, func, args);
 	_browser = browser;
 	if(!functions[func])
 		return DKERROR("DKCefV8Handler::Execute(): "+func+" not registered\n");
@@ -187,7 +186,7 @@ bool DKCefV8Handler::Execute(const CefString& name, CefRefPtr<CefV8Value> object
 		if(!DKV8::functions[name])
 			return DKERROR(name.ToString()+" not registered\n");
 		//Set the function arguments and show the function in log
-		DKString text = "DKCefV8Handler::Execute(): "+name.ToString()+"(";
+		DKString text = name.ToString()+"(";
 		CefRefPtr<CefListValue> args = CefListValue::Create();
 		for(unsigned int i=0; i<arguments.size(); i++){
 			if(arguments[i]->IsString()){
@@ -322,7 +321,7 @@ void DKCefApp::OnBrowserCreated(CefRefPtr<CefBrowser> browser, CefRefPtr<CefDict
 #endif
 }
 
-void DKCefApp::OnContextInitialized(){
+void DKCefApp::OnContextInitialized() {
 	DKDEBUGFUNC();
 #ifndef DEBUG
 	CEF_REQUIRE_UI_THREAD();
@@ -330,7 +329,7 @@ void DKCefApp::OnContextInitialized(){
 	//CefRefreshWebPlugins(); //FIXME
 }
 
-void DKCefApp::OnContextCreated(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefV8Context> context){
+void DKCefApp::OnContextCreated(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefV8Context> context) {
 	DKDEBUGFUNC(browser, frame, context);
 #ifndef DEBUG
 	CEF_REQUIRE_UI_THREAD();
@@ -382,12 +381,13 @@ bool DKCefApp::OnProcessMessageReceived(CefRefPtr<CefBrowser> browser, CefRefPtr
 	return false;
 }
 
-void DKCefApp::OnUncaughtException(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefV8Context> context, CefRefPtr<CefV8Exception> exception, CefRefPtr<CefV8StackTrace> stackTrace){
+void DKCefApp::OnUncaughtException(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefV8Context> context, CefRefPtr<CefV8Exception> exception, CefRefPtr<CefV8StackTrace> stackTrace) {
+	//DKDEBUGFUNC(browser, frame, context, exception, stackTrace); //DON'T DO THIS
+	
 	//This isn't working so well, another Error handler is located in DK/Browser.js
 	return;
 
 	/*
-	//DKDEBUGFUNC(browser, frame, context, exception, stackTrace); //DON'T DO THIS
 	DKString msg = exception->GetMessage().ToString();
 	if(has(msg,"DKSendEvent is not defined")){ return; } //ignore DKSendEvent not existing
 

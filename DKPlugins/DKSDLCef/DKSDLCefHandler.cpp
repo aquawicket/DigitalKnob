@@ -31,6 +31,7 @@
 #include "include/wrapper/cef_closure_task.h"
 #include "include/wrapper/cef_helpers.h"
 #include "DKSDLCef/DKSDLCefHandler.h"
+#include "DKCef/DKCef.h"
 
 DKSDLCefHandler* DKSDLCefHandler::g_instance = NULL;
 
@@ -159,7 +160,6 @@ void DKSDLCefHandler::OnBeforeClose(CefRefPtr<CefBrowser> browser){
 	}
 }
 
-#include "DKCef/DKCef.h"
 void DKSDLCefHandler::OnAfterCreated(CefRefPtr<CefBrowser> browser){
 	DKDEBUGFUNC(browser);
 	CEF_REQUIRE_UI_THREAD();
@@ -188,16 +188,15 @@ void DKSDLCefHandler::OnBeforeContextMenu(CefRefPtr<CefBrowser> browser, CefRefP
 }
 
 void DKSDLCefHandler::OnBeforeDownload(CefRefPtr<CefBrowser> browser, CefRefPtr<CefDownloadItem> download_item, const CefString& suggested_name, CefRefPtr<CefBeforeDownloadCallback> callback){
-	DKDEBUGFUNC(browser, download_item, "const CefString&", callback);
+	DKDEBUGFUNC(browser, download_item, suggested_name, callback);
 	//DKINFO("OriginalUrl: "+download_item->GetOriginalUrl().ToString()+")\n");
-	UNREFERENCED_PARAMETER(browser);
-	UNREFERENCED_PARAMETER(download_item);
 	callback->Continue(suggested_name, true);
 }
 
 // TODO
 bool DKSDLCefHandler::OnBeforePopup(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, const CefString& target_url, const CefString& target_frame_name, CefLifeSpanHandler::WindowOpenDisposition target_disposition, bool user_gesture, const CefPopupFeatures& popupFeatures, CefWindowInfo& windowInfo, CefRefPtr<CefClient>& client, CefBrowserSettings& settings, bool* no_javascript_access){
 	DKDEBUGFUNC(browser, frame, target_url, target_frame_name, target_disposition, user_gesture, popupFeatures, /*windowInfo,*/ client, settings, no_javascript_access);
+	UNREFERENCED_PARAMETER(windowInfo);
 	return false; //DISABLED
 
 	/*

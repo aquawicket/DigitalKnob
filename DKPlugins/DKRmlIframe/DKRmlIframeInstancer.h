@@ -179,12 +179,12 @@ public:
 		Rml::String src = GetAttribute< Rml::String >("src", "");
 		float top = computed.top().value;
 		float left = computed.left().value;
-		float bottom = computed.bottom().value;
-		float right = computed.right().value;
+		//float bottom = computed.bottom().value;
+		//float right = computed.right().value;
 		float width = computed.width().value;
 		float height = computed.height().value;
-		int _width = width ? width : 800;
-		int _height = height ? height : 600;
+		float _width = width ? width : 800;
+		float _height = height ? height : 600;
 
 		replace(id, "[CEF]", "");
 		DKString data = id + ",";
