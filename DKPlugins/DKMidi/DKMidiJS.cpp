@@ -62,9 +62,9 @@ int DKMidiJS::GetMidiOutputs(duk_context* ctx){
 
 int DKMidiJS::SendMidi(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
-	int var1 = duk_require_int(ctx, 0);
-	int var2 = duk_require_int(ctx, 1);
-	int var3 = duk_require_int(ctx, 2);
+	unsigned char var1 = duk_require_int(ctx, 0);
+	unsigned char var2 = duk_require_int(ctx, 1);
+	unsigned char var3 = duk_require_int(ctx, 2);
 	std::vector<unsigned char> message;
 	message.push_back(var1);
 	message.push_back(var2);

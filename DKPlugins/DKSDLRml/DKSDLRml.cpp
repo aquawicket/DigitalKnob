@@ -89,7 +89,7 @@ bool DKSDLRml::Handle(SDL_Event *event) {
 			}
 			break;
         case SDL_MOUSEWHEEL:
-            dkRml->context->ProcessMouseWheel(event->wheel.y * -1.0, SystemInterface->GetKeyModifiers());
+            dkRml->context->ProcessMouseWheel(event->wheel.y * (float)- 1.0, SystemInterface->GetKeyModifiers());
             break;
 #ifdef ANDROID
         case SDL_KEYDOWN:

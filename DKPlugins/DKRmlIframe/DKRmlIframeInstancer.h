@@ -274,8 +274,8 @@ public:
 	// @return A unique pointer to the instanced element.
 	Rml::ElementPtr InstanceElement(Rml::Element* RMLUI_UNUSED_PARAMETER(parent), const Rml::String& tag, const Rml::XMLAttributes& RMLUI_UNUSED_PARAMETER(attributes)) override{
 		DKDEBUGFUNC(/*parent,*/ tag/*, attributes*/);
-		//RMLUI_UNUSED(parent);
-		//RMLUI_UNUSED(attributes);
+		RMLUI_UNUSED(parent);
+		RMLUI_UNUSED(attributes);
 		RMLUI_ZoneScopedN("DKRmlIframeInstance");
 		RmlIframe* dkElement = new RmlIframe(tag);
 		return Rml::ElementPtr(static_cast<Rml::Element*>(dkElement));

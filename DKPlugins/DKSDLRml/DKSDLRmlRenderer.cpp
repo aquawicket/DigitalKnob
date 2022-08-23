@@ -67,7 +67,7 @@ void DKSDLRmlRenderer::RenderGeometry(Rml::Vertex* vertices, int num_vertices, i
     ///////////////////////////////////////////////////////////
 
     int sz = sizeof(vertices[0]);
-    int off1 = offsetof(Rml::Vertex, position);
+    //int off1 = offsetof(Rml::Vertex, position);
     int off2 = offsetof(Rml::Vertex, colour);
     int off3 = offsetof(Rml::Vertex, tex_coord);
 

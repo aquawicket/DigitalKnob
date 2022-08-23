@@ -142,10 +142,8 @@ bool DKHandles::GetBottom(HWND handle, int& bottom) {
 bool DKHandles::GetClass(HWND handle, DKString& clas) {
 	DKDEBUGFUNC(handle, clas);
 	char classname[256];
-	if(!GetClassName(handle, classname, 256)){
-		DKWARN("GetClassName failed\n");
-		return false; 
-	}
+	if(!GetClassName(handle, classname, 256))
+		return DKERROR("GetClassName failed\n");
 	clas = classname;
 	return true;
 }
