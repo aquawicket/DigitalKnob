@@ -7,6 +7,7 @@
 
 
 dk_depend(python)
+dk_depend(pyyaml)
 dk_depend(nodejs)
 
 
@@ -17,10 +18,10 @@ dk_import(https://github.com/aquawicket/duktape.git PATCH) #NOTE: PATCH is for C
 if(NOT EXISTS ${DUKTAPE}/dist/src/duktape.c)
 	dk_setPath(${DUKTAPE})
 	
-	WIN_dk_executeProcess(${PYTHON}/Scripts/pip install PyYAML)
+	#WIN_dk_executeProcess(${PYTHON}/Scripts/pip install PyYAML)
 	#WIN_dk_executeProcess(${PYTHON_EXE} ${DUKTAPE}/util/dist.py)  #default generator
-	WIN_dk_makeDirectory(${DUKTAPE}/dist)
-	WIN_dk_executeProcess(${PYTHON_APP} ${DUKTAPE}/tools/configure.py
+	dk_makeDirectory(${DUKTAPE}/dist)
+	dk_executeProcess(${PYTHON_APP} ${DUKTAPE}/tools/configure.py
 		--output-directory ${DUKTAPE}/dist/src
 		-DDUK_USE_GLOBAL_BINDING 
 		-DDUK_USE_FATAL_HANDLER 
@@ -29,27 +30,27 @@ if(NOT EXISTS ${DUKTAPE}/dist/src/duktape.c)
 		-DDUK_USE_DEBUGGER_DUMPHEAP 
 		-DDUK_USE_DEBUGGER_INSPECT)
 	
-	MAC_dk_executeProcess(pip install PyYAML)
+	#MAC_dk_executeProcess(pip install PyYAML)
 	#MAC_dk_executeProcess(python ${DUKTAPE}/util/dist.py) #default generator
-	MAC_dk_executeProcess(${PYTHON_APP} ${DUKTAPE}/tools/configure.py
-		--output-directory ${DUKTAPE}/dist/src
-		-DDUK_USE_GLOBAL_BINDING 
-		-DDUK_USE_FATAL_HANDLER 
-		-DDUK_USE_DEBUGGER_SUPPORT 
-		-DDUK_USE_INTERRUPT_COUNTER 
-		-DDUK_USE_DEBUGGER_DUMPHEAP 
-		-DDUK_USE_DEBUGGER_INSPECT)
+	#MAC_dk_executeProcess(${PYTHON_APP} ${DUKTAPE}/tools/configure.py
+	#	--output-directory ${DUKTAPE}/dist/src
+	#	-DDUK_USE_GLOBAL_BINDING 
+	#	-DDUK_USE_FATAL_HANDLER 
+	#	-DDUK_USE_DEBUGGER_SUPPORT 
+	#	-DDUK_USE_INTERRUPT_COUNTER 
+	#	-DDUK_USE_DEBUGGER_DUMPHEAP 
+	#	-DDUK_USE_DEBUGGER_INSPECT)
 
-	LINUX_dk_executeProcess(sudo apt-get -y install python python-yaml)
+	#LINUX_dk_executeProcess(sudo apt-get -y install python python-yaml)
 	#LINUX_dk_executeProcess(python ${DUKTAPE}/util/dist.py) #default generator
-	LINUX_dk_executeProcess(${PYTHON_APP} ${DUKTAPE}/tools/configure.py
-		--output-directory ${DUKTAPE}/dist/src
-		-DDUK_USE_GLOBAL_BINDING 
-		-DDUK_USE_FATAL_HANDLER 
-		-DDUK_USE_DEBUGGER_SUPPORT 
-		-DDUK_USE_INTERRUPT_COUNTER 
-		-DDUK_USE_DEBUGGER_DUMPHEAP 
-		-DDUK_USE_DEBUGGER_INSPECT)
+	#LINUX_dk_executeProcess(${PYTHON_APP} ${DUKTAPE}/tools/configure.py
+	#	--output-directory ${DUKTAPE}/dist/src
+	#	-DDUK_USE_GLOBAL_BINDING 
+	#	-DDUK_USE_FATAL_HANDLER 
+	#	-DDUK_USE_DEBUGGER_SUPPORT 
+	#	-DDUK_USE_INTERRUPT_COUNTER 
+	#	-DDUK_USE_DEBUGGER_DUMPHEAP 
+	#	-DDUK_USE_DEBUGGER_INSPECT)
 
 	#dk_copy(${DUKTAPE}/dist/src/ ${DUKTAPE}/src OVERWRITE)
 endif()
