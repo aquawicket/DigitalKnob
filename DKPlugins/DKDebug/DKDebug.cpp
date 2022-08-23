@@ -136,7 +136,7 @@ static LONG __stdcall CrashHandlerExceptionFilter(EXCEPTION_POINTERS* pExPtrs){
 	//DKCurl* dkCurl = DKCurl::Instance("DKCurl0");
 	//dkCurl->FtpConnect("ftp.aquawicket.com","dkupload","DKPassword123!", "21");
 	//dkCurl->FtpUpload(DKFile::local_assets+DKString(filename)+".log", "ftp.aquawicket.com/"+DKString(filename)+".log");
-	FatalAppExit(-1, lString);
+	FatalAppExit((unsigned int)-1, lString);
 	return EXCEPTION_CONTINUE_SEARCH;
 }
 
