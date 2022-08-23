@@ -36,10 +36,7 @@
 // https://github.com/svaarala/duktape/blob/master/tests/api/test-set-global-object.c
 static void dump_global_object_keys(duk_context *ctx) {
 	DKDEBUGFUNC(ctx);
-	/* Prints only non-enumerable keys.  We can't use e.g.
-	 * Object.getOwnPropertyNames() here because we might
-	 * not have 'Object' any more.
-	 */
+	// Prints only non-enumerable keys.  We can't use Object.getOwnPropertyNames() here because we might not have 'Object' any more.
 	duk_eval_string_noresult(ctx,
 	"(function () {\n"
 	"    for (var k in this) { print('key:', k); }\n"

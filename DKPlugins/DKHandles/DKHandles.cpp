@@ -141,10 +141,10 @@ bool DKHandles::GetBottom(HWND handle, int& bottom) {
 
 bool DKHandles::GetClass(HWND handle, DKString& clas) {
 	DKDEBUGFUNC(handle, clas);
-	char classname[256];
-	if(!GetClassName(handle, classname, 256))
+	char _classname[256];
+	if(!GetClassName(handle, _classname, 256))
 		return DKERROR("GetClassName failed\n");
-	clas = classname;
+	clas = _classname;
 	return true;
 }
 
@@ -382,7 +382,7 @@ bool DKHandles::SetHandle(const DKString& clas, const DKString& value, unsigned 
 	DKDEBUGFUNC(clas, value, timeout);
 	unsigned int t = 0;
 	//unsigned int h = 0;
-	char classname[256];
+	char _classname[256];
 
 	while(t < timeout){
 		PopulateHandles();
@@ -395,9 +395,9 @@ bool DKHandles::SetHandle(const DKString& clas, const DKString& value, unsigned 
 			//if(value.empty())
 			//	int test = 0;
 			if(text == value){
-				if(!GetClassName(it->first, classname, 256))
+				if(!GetClassName(it->first, _classname, 256))
 					return DKERROR("GetClassName failed\n");
-				if(clas == (DKString)classname){
+				if(clas == (DKString)_classname){
 					currentHandle = it->first;
 					return true;
 				}
@@ -515,9 +515,9 @@ bool DKHandles::WaitForHandle(const DKString& clas, const DKString& value, int t
 	DKDEBUGFUNC(clas, value, timeout);
 	int i = 0;
 	//DKString text;
-	char classname[256];
+	char _classname[256];
 	
-	while(/*text != value && */clas != (DKString)classname && i < timeout) {
+	while(/*text != value && */clas != (DKString)_classname && i < timeout) {
 		PopulateHandles();
 		std::map<HWND,HWND>::iterator it;
 		for(it=handles.begin(); it!=handles.end(); it++){
@@ -526,7 +526,7 @@ bool DKHandles::WaitForHandle(const DKString& clas, const DKString& value, int t
 			SendMessage(it->first, WM_GETTEXT, (WPARAM)len+1, (LPARAM)buffer);
 			DKString text = buffer;
 			if(text == value){
-				if(!GetClassName(it->first, classname, 256))
+				if(!GetClassName(it->first, _classname, 256))
 					return DKERROR("GetClassName() failed\n");
 			}
 		}

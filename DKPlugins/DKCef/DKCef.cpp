@@ -485,9 +485,9 @@ bool DKCef::GoForward(const int& browser){
 
 bool DKCef::NewBrowser(const void* input, void* output){
 	DKDEBUGFUNC(input, output);
-	DKString data = *(DKString*)input;
+	DKString _data = *(DKString*)input;
 	DKStringArray arry;
-	toStringArray(arry, data, ",");
+	toStringArray(arry, _data, ",");
 	NewBrowser(arry[0], toInt(arry[1]), toInt(arry[2]), toInt(arry[3]), toInt(arry[4]), arry[5]);
 	return false;
 }
