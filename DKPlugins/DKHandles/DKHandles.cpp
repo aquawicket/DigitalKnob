@@ -254,7 +254,7 @@ bool DKHandles::HighlightFoundWindow(HWND hwnd) {
 	HGDIOBJ	hPrevPen = NULL;   // Handle of the existing pen in the DC of the found window.
 	HGDIOBJ	hPrevBrush = NULL; // Handle of the existing brush in the DC of the found window.
 	RECT rect;              // Rectangle area of the found window.
-	long lRet = 0;
+	//long lRet = 0;
 
 	// Get the screen coordinates of the rectangle of the found window.
 	GetWindowRect(hwnd, &rect);
@@ -381,8 +381,7 @@ bool DKHandles::SendHook(const DKString& window, const DKString& handle, const D
 bool DKHandles::SetHandle(const DKString& clas, const DKString& value, unsigned int timeout) {
 	DKDEBUGFUNC(clas, value, timeout);
 	unsigned int t = 0;
-	unsigned int h = 0;
-	DKString text;
+	//unsigned int h = 0;
 	char classname[256];
 
 	while(t < timeout){
@@ -393,14 +392,11 @@ bool DKHandles::SetHandle(const DKString& clas, const DKString& value, unsigned 
 			char* buffer = new char[len];
 			SendMessage(it->first, WM_GETTEXT, (WPARAM)len+1, (LPARAM)buffer);
 			DKString text = buffer;
-			if(value.empty()){
-				int test = 0;
-			}
+			//if(value.empty())
+			//	int test = 0;
 			if(text == value){
-				if(!GetClassName(it->first, classname, 256)){
-					DKWARN("GetClassName failed\n");
-					return false; 
-				}
+				if(!GetClassName(it->first, classname, 256))
+					return DKERROR("GetClassName failed\n");
 				if(clas == (DKString)classname){
 					currentHandle = it->first;
 					return true;
@@ -417,7 +413,7 @@ bool DKHandles::SetHandle(const DKString& clas, const DKString& value, unsigned 
 bool DKHandles::SetHandle(const DKString& value, unsigned int timeout) {
 	DKDEBUGFUNC(value, timeout);
 	unsigned int t = 0;
-	unsigned int h = 0;
+	//unsigned int h = 0;
 	DKString text;
 	while(t < timeout){
 		PopulateHandles();
@@ -518,10 +514,10 @@ bool DKHandles::ToggleHighlight() {
 bool DKHandles::WaitForHandle(const DKString& clas, const DKString& value, int timeout) {
 	DKDEBUGFUNC(clas, value, timeout);
 	int i = 0;
-	DKString text;
+	//DKString text;
 	char classname[256];
 	
-	while(text != value && clas != (DKString)classname && i < timeout){
+	while(/*text != value && */clas != (DKString)classname && i < timeout) {
 		PopulateHandles();
 		std::map<HWND,HWND>::iterator it;
 		for(it=handles.begin(); it!=handles.end(); it++){
@@ -530,19 +526,15 @@ bool DKHandles::WaitForHandle(const DKString& clas, const DKString& value, int t
 			SendMessage(it->first, WM_GETTEXT, (WPARAM)len+1, (LPARAM)buffer);
 			DKString text = buffer;
 			if(text == value){
-				if(!GetClassName(it->first, classname, 256)){
-					DKWARN("DKHandles::SetHandle("+clas+","+value+"): GetClassName failed\n");
-					return false; 
-				}
+				if(!GetClassName(it->first, classname, 256))
+					return DKERROR("GetClassName() failed\n");
 			}
 		}
 		Sleep(1000); //FIXME
 		++i;
 	}
-	if(i >= timeout){
-		DKWARN("DKHandles::WaitForHandle("+clas+","+value+","+toString(timeout)+"): timed out\n");
-		return false;
-	}
+	if(i >= timeout)
+		return DKERROR("timed out\n");
 	return true;
 }
 

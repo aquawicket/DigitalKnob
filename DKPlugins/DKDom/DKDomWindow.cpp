@@ -276,7 +276,7 @@ int DKDomWindow::devicePixelRatio(duk_context* ctx) {
 		return true;
 	}
 	//set
-	float ratio = duk_require_number(ctx, 1);
+	float ratio = (float)duk_require_number(ctx, 1);
 	DKRml::Get()->context->SetDensityIndependentPixelRatio(ratio);
 	return true;
 }
@@ -678,9 +678,9 @@ int DKDomWindow::getComputedStyle(duk_context* ctx){
 		duk_push_undefined(ctx);
 		return DKERROR("DKDomWindow::getComputedStyle(): element invalid\n");
 	}
-	const Rml::ComputedValues& computedValues = element->GetComputedValues();
+	//const Rml::ComputedValues& computedValues = element->GetComputedValues();
 	duk_push_undefined(ctx);
-	return DKERROR("DKDomWindow::getComputedStyle not implemented\n");
+	return DKERROR("not implemented\n");
 }
 
 int DKDomWindow::getDefaultComputedStyle(duk_context* ctx){

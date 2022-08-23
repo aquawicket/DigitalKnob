@@ -68,9 +68,9 @@ bool DKMidiV8::GetMidiOutputs(CefArgs args, CefReturn retval){
 
 bool DKMidiV8::SendMidi(CefArgs args, CefReturn retval){
 	DKDEBUGFUNC(args, retval);
-	unsigned char var1 = args->GetInt(0);
-	unsigned char var2 = args->GetInt(1);
-	unsigned char var3 = args->GetInt(2);
+	unsigned char var1 = (unsigned char)args->GetInt(0);
+	unsigned char var2 = (unsigned char)args->GetInt(1);
+	unsigned char var3 = (unsigned char)args->GetInt(2);
 	std::vector<unsigned char> message;
 	message.push_back(var1);
 	message.push_back(var2);

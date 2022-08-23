@@ -91,7 +91,7 @@ bool DKCefChildV8Handler::Execute(const CefString& name, CefRefPtr<CefV8Value> o
 			str += args->GetBool(i);
 		}
 		if(arguments[i]->IsDouble()){
-			args->SetInt(i, arguments[i]->GetDoubleValue());
+			args->SetDouble(i, arguments[i]->GetDoubleValue());
 			str += args->GetDouble(i);
 		}
 		if(arguments[i]->IsInt()){

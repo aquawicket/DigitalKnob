@@ -402,7 +402,7 @@ bool DKCefV8::PhysicalMemoryUsedByApp(CefArgs args, CefReturn retval){
 
 bool DKCefV8::PressKey(CefArgs args, CefReturn retval){
 	DKDEBUGFUNC(args, retval);
-	int key = args->GetInt(0);
+	unsigned short key = (unsigned short)args->GetInt(0);
 	return DKUtil::PressKey(key);
 }
 
@@ -415,7 +415,7 @@ bool DKCefV8::QueueDuktape(CefArgs args, CefReturn retval){
 
 bool DKCefV8::ReleaseKey(CefArgs args, CefReturn retval){
 	DKDEBUGFUNC(args, retval);
-	int key = args->GetInt(0);
+	unsigned short key = (unsigned short)args->GetInt(0);
 	return DKUtil::ReleaseKey(key);
 }
 
@@ -500,7 +500,7 @@ bool DKCefV8::ShowConsole(CefArgs args, CefReturn retval){
 
 bool DKCefV8::StrokeKey(CefArgs args, CefReturn retval){
 	DKDEBUGFUNC(args, retval);
-	int key = args->GetInt(0);
+	unsigned short key = (unsigned short)args->GetInt(0);
 	return DKUtil::StrokeKey(key);
 }
 
