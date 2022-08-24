@@ -22,7 +22,7 @@ IOS_dk_libRelease(${PODOFO}/${OS}/src/podofo/${RELEASE_DIR}/libpodofo.a)
 IOSSIM_dk_libDebug(${PODOFO}/${OS}/src/podofo/${DEBUG_DIR}/libpodofo.a)
 IOSSIM_dk_libRelease(${PODOFO}/${OS}/src/podofo/${RELEASE_DIR}/libpodofo.a)
 LINUX_dk_libDebug(${PODOFO}/${OS}/src/podofo/${DEBUG_DIR}/libpodofo.a)
-LINUX_dk_libRelease${PODOFO}/${OS}/src/podofo/${RELEASE_DIR}/libpodofo.a)
+LINUX_dk_libRelease(${PODOFO}/${OS}/src/podofo/${RELEASE_DIR}/libpodofo.a)
 ANDROID_dk_libDebug(${PODOFO}/${OS}/${DEBUG_DIR}/obj/local/armeabi-v7a/libpodofo.a)
 ANDROID_dk_libRelease(${PODOFO}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/libpodofo.a)
 
