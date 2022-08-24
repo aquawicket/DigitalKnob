@@ -115,7 +115,7 @@ if(WIN) # Disabled for Windows targets
 	dk_disable(openal)
 	dk_disable(openal-android)
 	dk_disable(opensles)
-	dk_disable(podofo)
+	#dk_disable(podofo)
 	dk_disable(tesseract)
 	dk_disable(tiff)
 	dk_disable(uwebsockets)

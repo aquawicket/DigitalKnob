@@ -42,6 +42,7 @@ include("$ENV{DKCMAKE}DK.cmake")
 #	@func	- TODO
 #
 macro(dk_call func) #parameters
+	#DKDEBUGFUNC(${ARGV})
 	dk_load(${func})
 	dk_cmakeLanguage("${func}($ARGN)")
 endmacro()
@@ -57,6 +58,7 @@ endmacro()
 #	@new_value	- The new value to replace with
 #
 macro(dk_listReplace LIST old_value new_value)
+	#DKDEBUGFUNC(${ARGV})
     list(FIND ${LIST} ${old_value} old_value_INDEX)
     if(old_value_INDEX GREATER_EQUAL 0)
         list(REMOVE_AT ${LIST} ${old_value_INDEX})
@@ -73,6 +75,7 @@ endmacro()
 #	@ARGV	- The ARGV data within a function that contains the parameter values
 #
 function(dk_getArgIdentifiers ARGV)
+	#DKDEBUGFUNC(${ARGV})
 	#message(STATUS "dk_getArgIdentifiers(${ARGV})")
 	list(LENGTH ARGV ARGV_LENGTH)
 	if(ARGV_LENGTH LESS 1)
@@ -121,6 +124,7 @@ endfunction()
 #		endfunction()
 #
 macro(dk_debugFunc)
+	#DKDEBUGFUNC(${ARGV})
 	if(DKDEBUGFUNC_ENABLED)
 		if(NOT CMAKE_CURRENT_FUNCTION_LIST_FILE)
 			set(CMAKE_CURRENT_FUNCTION_LIST_FILE "unknown")
@@ -197,6 +201,7 @@ endmacro()
 #	@msg	- The message to print
 #
 macro(dk_assert msg)
+	#DKDEBUGFUNC(${ARGV})
 	#message(STATUS "dk_assert(${ARGV})")
 	string(REPLACE " " "" var ${msg})
 	dk_updateLogInfo()
@@ -217,6 +222,7 @@ endmacro()
 #	@msg	- The message to print
 #
 macro(dk_error msg)
+	#DKDEBUGFUNC(${ARGV})
 	#message(STATUS "dk_error(${ARGV})")
 	dk_updateLogInfo()
 	if(${HALT_ON_ERRORS})
@@ -246,6 +252,7 @@ endmacro()
 #	@msg	- The message to print
 #
 macro(dk_warn msg)
+	#DKDEBUGFUNC(${ARGV})
 	#message(STATUS "dk_warn(${ARGV})")
 	dk_updateLogInfo()
 	if(${HALT_ON_WARNINGS})
@@ -275,6 +282,7 @@ endmacro()
 #	@msg	- The message to print
 #
 macro(dk_info msg)
+	#DKDEBUGFUNC(${ARGV})
 	#message(STATUS "dk_info(${ARGV})")
 	string(REPLACE " " "" var ${msg})
 	dk_updateLogInfo()
@@ -294,6 +302,7 @@ endmacro()
 #	@msg	- The message to print
 #
 macro(dk_debug msg)
+	#DKDEBUGFUNC(${ARGV})
 	if(DKDEBUG_ENABLED)
 		#message(STATUS "dk_debug(${ARGV})")
 		string(REPLACE " " "" var ${msg})
@@ -315,6 +324,7 @@ endmacro()
 #	@msg	- The message to print
 #
 macro(dk_verbose msg)
+	#DKDEBUGFUNC(${ARGV})
 	if(DKVERBOSE_ENABLED)
 		#message(STATUS "dk_verbose(${ARGV})")
 		string(REPLACE " " "" var ${msg})
@@ -336,6 +346,7 @@ endmacro()
 #	@msg	- The message to print
 #
 macro(dk_trace msg)
+	#DKDEBUGFUNC(${ARGV})
 	#message(STATUS "dk_trace(${ARGV})")
 	dk_updateLogInfo()
 	string(REPLACE " " "" var ${msg})
@@ -355,6 +366,7 @@ endmacro()
 #	msg:(optional)	- A header message to print
 #
 macro(dk_todo)
+	#DKDEBUGFUNC(${ARGV})
 	if(NOT DKTODO_ENABLED)
 		return()
 	endif()
@@ -374,18 +386,19 @@ endmacro()
 #	TODO
 #
 function(dk_pad str padchar length RESULT)
-  string(LENGTH "${str}" _strlen)
-  math(EXPR _strlen "${length} - ${_strlen}")
+	#DKDEBUGFUNC(${ARGV})
+	string(LENGTH "${str}" _strlen)
+	math(EXPR _strlen "${length} - ${_strlen}")
 
-  if(_strlen GREATER 0)
-    if(${CMAKE_VERSION} VERSION_LESS "3.14")
-      unset(_pad)
-      foreach(_i RANGE 1 ${_strlen}) # inclusive
-        string(APPEND _pad ${padchar})
-      endforeach()
-    else()
-      string(REPEAT ${padchar} ${_strlen} _pad)
-    endif()
+	if(_strlen GREATER 0)
+		if(${CMAKE_VERSION} VERSION_LESS "3.14")
+			unset(_pad)
+			foreach(_i RANGE 1 ${_strlen}) # inclusive
+				string(APPEND _pad ${padchar})
+			endforeach()
+		else()
+			string(REPEAT ${padchar} ${_strlen} _pad)
+		endif()
     string(APPEND str ${_pad})
   endif()
 
@@ -579,6 +592,7 @@ dk_remove(${DKFunctions_ext} NOERROR)
 #	Print all cmake varibles
 #
 macro(dk_return)
+	#DKDEBUGFUNC(${ARGV})
 	message(STATUS "dk_return()")
 	return()
 endmacro()
@@ -3632,7 +3646,6 @@ endfunction()
 function(dk_import url) #Lib #tag #Patch
 	DKDEBUGFUNC(${ARGV})
 	dk_import2(${ARGV})
-
 	#dk_getExtension(${url} extension)
 	#if("${extension}" STREQUAL ".git")
 	#	dk_importGit2(${ARGV})
@@ -3791,7 +3804,6 @@ endfunction()
 #
 function(dk_importDownload url) #install_path #PATCH
 	DKDEBUGFUNC(${ARGV})
-	
 	string(REPLACE "/" ";" url_list ${url}) # split into list converting / to divider ;
 	#foreach(item ${url_list})
 	#	dk_verbose(item)
@@ -3933,7 +3945,6 @@ endfunction()
 ######################################
 function(dk_import2 url)
 	DKDEBUGFUNC(${ARGV})
-
 	dk_importVariables(${ARGV} plugin)
 	string(TOUPPER ${plugin} plugin_var)
 	
@@ -3972,10 +3983,6 @@ function(dk_import2 url)
 		dk_patch(${plugin} ${${plugin_var}})
 	endif()
 endfunction()
-
-
-
-
 
 ###############################################################################
 # dk_DownloadAll3rdParty()
@@ -4103,6 +4110,7 @@ endfunction()
 #	@RESULT		- TODO
 #
 function(dk_getAppDirectory RESULT)
+	#DKDEBUGFUNC(${ARGV})
 	set(USE_32BIT 1)
 	if(WIN_HOST)
 		set(appDirectory "C:/Program Files")
@@ -4138,6 +4146,7 @@ endfunction()
 #	@RESULT		- TODO
 #
 function(toLower str RESULT)
+	#DKDEBUGFUNC(${ARGV})
 	string(TOLOWER "${str}" upper)
 	set(${RESULT} ${out} PARENT_SCOPE)
 endfunction()
@@ -4152,6 +4161,7 @@ endfunction()
 #	@RESULT		- TODO
 #
 function(toUpper str RESULT)
+	#DKDEBUGFUNC(${ARGV})
 	string(TOUPPER "${str}" upper)
 	set(${RESULT} ${upper} PARENT_SCOPE)
 endfunction()
@@ -4248,6 +4258,7 @@ endfunction()
 #	TODO
 #
 macro(dk_printArgData)
+	#DKDEBUGFUNC(${ARGV})
 	dk_debug(" ")
 	dk_debug(" ")
 	dk_debug("************************************************************")
@@ -4276,6 +4287,7 @@ endmacro()
 #	@url		- TODO
 #
 function(dk_printUrlData url)
+	#DKDEBUGFUNC(${ARGV})
 	if(NOT url)
 		dk_assert("url invalid")
 	endif()
@@ -4306,6 +4318,7 @@ endfunction()
 #	@url		- TODO
 #
 function(dk_killProcess name)
+	#DKDEBUGFUNC(${ARGV})
 	dk_executeProcess("taskkill /f /im ${name}" NOASSERT)
 endfunction()
 
@@ -4316,6 +4329,7 @@ endfunction()
 #	TODO
 #
 function(dk_clearScreen)
+	#DKDEBUGFUNC(${ARGV})
 	dk_debug("clear screen")
 	execute_process(COMMAND "cmd /c cls")
 endfunction()
@@ -4329,7 +4343,7 @@ endfunction()
 #	@name		- The name of the library
 #
 function(dk_findLibrary name)
-	DKDEBUGFUNC(${ARGV})
+	#DKDEBUGFUNC(${ARGV})
 	find_library(${name}_LIBRARY ${name})
 	if(NOT WIN)
 		if(NOT ${name}_LIBRARY)
