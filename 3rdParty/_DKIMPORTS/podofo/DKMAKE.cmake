@@ -13,7 +13,6 @@ dk_include(${PODOFO})
 dk_include(${PODOFO}/podofo)
 dk_include(${PODOFO}/${OS})
 dk_include(${PODOFO}/${OS}/${RELEASE_DIR})
-\win32\src\podofo\Release
 WIN_dk_libDebug(${PODOFO}/${OS}/src/podofo/${DEBUG_DIR}/podofo.lib)
 WIN_dk_libRelease(${PODOFO}/${OS}/src/podofo/${RELEASE_DIR}/podofo.lib)
 MAC_dk_libDebug(${PODOFO}/${OS}/src/podofo/${DEBUG_DIR}/libpodofo.a)
