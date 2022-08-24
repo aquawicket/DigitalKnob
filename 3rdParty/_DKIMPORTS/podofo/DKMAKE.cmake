@@ -1,17 +1,11 @@
 # http://podofo.sourceforge.net
 
-
 dk_depend(zlib)
 dk_depend(freetype)
 dk_depend(libpng)
 
-dk_import(http://sourceforge.net/projects/podofo/files/podofo/0.9.7/podofo-0.9.7.tar.gz PATCH)
 
-#dk_set(PODOFO_VERSION 0.9.5)
-#dk_set(POFODO_DL http://sourceforge.net/projects/podofo/files/podofo/0.9.7/podofo-0.9.7.tar.gz/download)
-#dk_set(PODOFO ${3RDPARTY}/podofo-${PODOFO_VERSION})
-#dk_import(${POFODO_DL} ${PODOFO})
-
+dk_import(http://sourceforge.net/projects/podofo/files/podofo/0.9.7/podofo-0.9.7.tar.gz)
 
 
 ### LINK ###
