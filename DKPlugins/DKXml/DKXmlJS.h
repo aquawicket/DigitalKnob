@@ -31,12 +31,11 @@
 
 #include "DKDuktape/DKDuktape.h"
 
-/////////////////////////////////////////
+
 class DKXmlJS : public DKObjectT<DKXmlJS>
 {
 public:
 	bool Init();
-
 	static int GetXmlNode(duk_context* ctx);
 };
 

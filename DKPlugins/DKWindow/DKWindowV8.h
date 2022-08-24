@@ -31,7 +31,7 @@
 
 #include "DKCef/DKCef.h"
 
-///////////////////////////////////////////////
+
 class DKWindowV8 : public DKObjectT<DKWindowV8>
 {
 public:

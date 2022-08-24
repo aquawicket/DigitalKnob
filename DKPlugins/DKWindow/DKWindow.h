@@ -33,7 +33,7 @@
 #define DKWindow_H
 #include "DK/DK.h"
 
-///////////////////////////////////////////
+
 class DKWindow : public DKObjectT<DKWindow>
 {
 public:

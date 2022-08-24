@@ -36,7 +36,7 @@
 typedef pugi::xml_node DKXmlNode;
 typedef pugi::xpath_node_set DKXmlNodes;
 
-/////////////////////////////////////
+
 class DKXml : public DKObjectT<DKXml>
 {
 public:
@@ -68,7 +68,6 @@ public:
 	bool SetAttributes(const DKString& xpath, const DKString& attrib, const DKString& value);
 	
 	pugi::xml_document doc;
-
 
 	//Test libmxl2
 #ifdef USE_libxml2

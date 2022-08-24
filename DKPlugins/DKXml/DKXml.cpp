@@ -31,17 +31,13 @@
 #define HEADER_ACCEPT "Accept:text/html,application/xhtml+xml,application/xml"
 #define HEADER_USER_AGENT "User-Agent:Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1312.70 Safari/537.17"
 
-//////////////////
-bool DKXml::Init()
-{
+bool DKXml::Init() {
 	DKDEBUGFUNC();
 	//test_libxml();
 	return true;
 }
 
-/////////////////
-bool DKXml::End()
-{
+bool DKXml::End() {
 	DKDEBUGFUNC();
 	return true;
 }
@@ -101,7 +97,7 @@ bool DKXml::SaveDocumentToString(DKString& string) {
 	return true;
 }
 
-bool DKXml::SaveNodes(const DKString& xpath, const DKString& path){
+bool DKXml::SaveNodes(const DKString& xpath, const DKString& path) {
 	DKDEBUGFUNC(xpath, path);
 	DKXmlNodes nodes = doc.select_nodes(xpath.c_str());
 	if(nodes.empty())
@@ -199,8 +195,7 @@ bool DKXml::GetFullNode(const DKString& xpath, DKString& string) {
 	return true;
 }
 
-bool DKXml::GetNodeValue(const DKString& xpath, DKString& string)
-{
+bool DKXml::GetNodeValue(const DKString& xpath, DKString& string) {
 	DKDEBUGFUNC(xpath, string);	
 	DKXmlNode node = doc.select_single_node(xpath.c_str()).node();
 	if(node.empty())
@@ -356,19 +351,17 @@ bool DKXml::traverse_dom_trees(xmlNode* a_node) {
 		return DKERROR("Invalid argument\n");
 	for(cur_node = a_node; cur_node; cur_node = cur_node->next){
 		if(!cur_node){ continue; }
-		if(cur_node->name){
+		if(cur_node->name)
 			DKINFO("Tag: "+toString((char*)cur_node->name)+"\n");
-		}
 		if(cur_node->properties){
 			if(cur_node->properties->atype)
 				DKINFO("  Properties: "+toString((char*)cur_node->properties->atype)+"\n");
 		}
-		if(cur_node->content){
+		if(cur_node->content)
 			DKINFO("    Content: "+toString((char*)cur_node->content)+"\n");
 			//DKINFO("Length: "+toString(strlen((char*)cur_node->content))+"\n");
-		}
 		/*
-		if (cur_node->type == XML_ELEMENT_NODE) {
+		if (cur_node->type == XML_ELEMENT_NODE){
 			DKINFO("Node type: Text, name: "+toString((char*)cur_node->name)+"\n");
 		}
 		else if(cur_node->type == XML_TEXT_NODE){
