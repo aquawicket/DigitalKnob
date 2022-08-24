@@ -70,6 +70,9 @@ var Screen = function(pointer) {
     Screen.prototype.lockOrientation = function(orientation) {
         return CPP_DKDomScreen_lockOrientation(orientation);
     }
+	Screen.prototype.toString = function(){
+		return "[object Screen]"
+	}
     Screen.prototype.unlockOrientation = function() {
         return CPP_DKDomScreen_unlockOrientation();
     }

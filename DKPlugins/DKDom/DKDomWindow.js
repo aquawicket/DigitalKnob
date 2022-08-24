@@ -356,6 +356,9 @@ var Window = function(pointer)
     Window.prototype.setResizable = function() {}
     Window.prototype.sizeToContent = function() {}
     Window.prototype.stop = function() {}
+	Window.prototype.toString = function(){
+		return "[object Window]"
+	}
     Window.prototype.updateCommands = function() {}
     Window.prototype.XMLHttpRequest = function(client) {
         return new XMLHttpRequest(client.pointer)
