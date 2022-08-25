@@ -11,7 +11,6 @@ MAC_HOST_dk_import	(https://dl.google.com/android/repository/sdk-tools-darwin-43
 LINUX_HOST_dk_import(https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip PATH ${ANDROID-SDK}/tools PATCH)
 
 
-
 # TODO
 #In tools/bin/sdkmanager.bat
 #replace this ...
