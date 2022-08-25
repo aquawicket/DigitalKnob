@@ -5,7 +5,7 @@ dk_depend(zlib)
 dk_depend(libuv)
 dk_depend(openssl)
 
-dk_import(https://github.com/uNetworking/uWebSockets.git)
+dk_import(https://github.com/uNetworking/uWebSockets.git BRANCH v0.14 PATCH)
 
 
 ### LINK ###
