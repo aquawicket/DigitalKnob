@@ -3948,11 +3948,11 @@ function(dk_import2 url)
 	dk_importVariables(${ARGV} plugin)
 	string(TOUPPER ${plugin} plugin_var)
 	
-	dk_verbose("[${plugin_var}] 		= ${${plugin_var}}")
-	dk_verbose("[${plugin_var}_URL] 	= ${${plugin_var}_URL}")
-	dk_verbose("[${plugin_var}_VERSION] = ${${plugin_var}_VERSION}")
-	dk_verbose("[${plugin_var}_FOLDER] 	= ${${plugin_var}_FOLDER}")
-	dk_verbose("[${plugin_var}_BRANCH] 	= ${${plugin_var}_BRANCH}")
+	dk_verbose("[${plugin_var}] =		${${plugin_var}}")
+	dk_verbose("[${plugin_var}_URL] =		${${plugin_var}_URL}")
+	dk_verbose("[${plugin_var}_VERSION] =		${${plugin_var}_VERSION}")
+	dk_verbose("[${plugin_var}_FOLDER] =		${${plugin_var}_FOLDER}")
+	dk_verbose("[${plugin_var}_BRANCH] =		${${plugin_var}_BRANCH}")
 
 	### .git
 	dk_getExtension(${url} extension)
