@@ -15,10 +15,12 @@ if(NOT EXISTS ${3RDPARTY}/android-sdk)
 	dk_setEnv("VS_AndroidHome" ${ANDROID-SDK})
 
 	### SignLicenses ###
+	dk_copy(${DKIMPORTS}/android-sdk/SignLicenses.cmd ${ANDROID-SDK}/SignLicenses.cmd OVERWRITE)
 	dk_killProcess(java.exe NOASSERT)
 	dk_killProcess(adb.exe NOASSERT)
 	dk_executeProcess(call "${OPENJDK-8U41}/registerJDK.cmd")
 	dk_executeProcess("${SDKMANAGER_BAT} --licenses")
 	#dk_executeProcess(call "${OPENJDK}/registerJDK.cmd")
+	dk_executeProcess(call ${ANDROID-SDK}/SignLicenses.cmd)
 	dk_executeProcess(call "${OPENJDK-11}/registerJDK.cmd")
 endif()
