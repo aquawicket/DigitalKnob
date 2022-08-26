@@ -153,7 +153,7 @@ if(MAC)  # Disabled on Mac host machines
 	dk_disable(leptonica)
 	dk_disable(libgtkglext1-dev)
 	dk_disable(libtorrent)
-	dk_disable(libuv)
+	#dk_disable(libuv)
 	dk_disable(libwebp)
 	dk_disable(libwebsockets)
 	dk_disable(libxml2)
