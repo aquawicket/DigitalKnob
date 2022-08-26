@@ -57,7 +57,7 @@ RASPBERRY_dk_depend(opengl)
 
 
 #dk_import(https://github.com/libsdl-org/SDL.git BRANCH main)
-dk_import(https://github.com/libsdl-org/SDL.git BRANCH release-2.24.0)
+dk_import(https://github.com/libsdl-org/SDL.git BRANCH 2.0.22)
 
 
 ### DKPLUGINS LINK ###
