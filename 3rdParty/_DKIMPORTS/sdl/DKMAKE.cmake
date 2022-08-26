@@ -1,8 +1,8 @@
 # https://github.com/libsdl-org/SDL
 # https://www.libsdl.org/
-# https://stackoverflow.com/a/57734435/688352
-# https://www.libsdl.org/release/SDL2-2.0.16.zip
 # https://www.libsdl.org/release/SDL2-2.0.18.zip
+# https://stackoverflow.com/a/57734435/688352		# _libiconv or _iconv undefined symbol on Mac OSX
+# https://github.com/libsdl-org/SDL/blob/53141a56b4520489ab64ad0ba2c49fbd1a456901/docs/README-cmake.md
 
 
 WIN_dk_depend(opengl)
@@ -57,7 +57,6 @@ RASPBERRY_dk_depend(opengl)
 
 
 dk_import(https://github.com/libsdl-org/SDL.git BRANCH main)
-#dk_import(https://github.com/libsdl-org/SDL.git BRANCH 2.0.22)
 
 
 ### DKPLUGINS LINK ###
@@ -80,8 +79,8 @@ LINUX_dk_include(${SDL}/${OS}/${RELEASE_DIR}/include)
 	MAC_dk_libRelease(${SDL}/${OS}/${RELEASE_DIR}/libSDL2.a)
 	IOS_dk_libDebug(${SDL}/${OS}/${DEBUG_DIR}/libSDL2d.a)
 	IOS_dk_libRelease(${SDL}/${OS}/${RELEASE_DIR}/libSDL2.a)
-	IOSSIM_dk_libDebug(${SDL}/${OS}/${DEBUG_DIR}/libSDL2d.a)
-	IOSSIM_dk_libRelease(${SDL}/${OS}/${RELEASE_DIR}/libSDL2.a)
+	IOSSIM_dk_libDebug(${SDL}/${OS}/Debug-iphonesimulator/libSDL2d.a)
+	IOSSIM_dk_libRelease(${SDL}/${OS}/Release-iphonesimulator/libSDL2.a)
 	LINUX_dk_libDebug(${SDL}/${OS}/${DEBUG_DIR}/libSDL2d.a)
 	LINUX_dk_libRelease(${SDL}/${OS}/${RELEASE_DIR}/libSDL2.a)
 	RASPBERRY_dk_libDebug(${SDL}/${OS}/${DEBUG_DIR}/libSDL2d.a)
@@ -100,8 +99,8 @@ LINUX_dk_include(${SDL}/${OS}/${RELEASE_DIR}/include)
 	#MAC_dk_libRelease(${SDL}/${OS}/${RELEASE_DIR}/libSDL2main.a)
 	IOS_dk_libDebug(${SDL}/${OS}/${DEBUG_DIR}/libSDL2maind.a)
 	IOS_dk_libRelease(${SDL}/${OS}/${RELEASE_DIR}/libSDL2main.a)
-	IOSSIM_dk_libDebug(${SDL}/${OS}/${DEBUG_DIR}/libSDL2maind.a)
-	IOSSIM_dk_libRelease(${SDL}/${OS}/${RELEASE_DIR}/libSDL2main.a)
+	IOSSIM_dk_libDebug(${SDL}/${OS}/Debug-iphonesimulator/libSDL2maind.a)
+	IOSSIM_dk_libRelease(${SDL}/${OS}/Release-iphonesimulator/libSDL2main.a)
 	#LINUX_dk_libDebug(${SDL}/${OS}/${DEBUG_DIR}/libSDL2maind.a)
 	#LINUX_dk_libRelease(${SDL}/${OS}/${RELEASE_DIR}/libSDL2main.a)
 	#RASPBERRY_dk_libDebug(${SDL}/${OS}/${DEBUG_DIR}/libSDL2maind.a)
@@ -125,7 +124,7 @@ WIN_dk_set(SDLMAIN_CMAKE
 	-DSDL2MAIN_LIBRARY_DEBUG=${SDL}/${OS}/${DEBUG_DIR}/SDL2maind.lib
 	-DSDL2MAIN_LIBRARY_RELEASE=${SDL}/${OS}/${RELEASE_DIR}/SDL2main.lib)
 	
-APPLE_dk_set(SDL_CMAKE
+MAC_dk_set(SDL_CMAKE
 	-DSDL2_DIR=${SDL}
 	-DSDL2_INCLUDE_DIR=${SDL}/include
 	-DSDL2_LIBRARY_TEMP=${SDL}/${OS}/${RELEASE_DIR}/libSDL2.a
@@ -133,9 +132,33 @@ APPLE_dk_set(SDL_CMAKE
 	-DSDL2_LIBRARY_DEBUG=${SDL}/${OS}/${DEBUG_DIR}/libSDL2d.a
 	-DSDL2_LIBRARY_RELEASE=${SDL}/${OS}/${RELEASE_DIR}/libSDL2.a)
 	
-APPLE_dk_set(SDLMAIN_CMAKE
+MAC_dk_set(SDLMAIN_CMAKE
 	-DSDL2MAIN_LIBRARY_DEBUG=${SDL}/${OS}/${DEBUG_DIR}/libSDL2maind.a
 	-DSDL2MAIN_LIBRARY_RELEASE=${SDL}/${OS}/${RELEASE_DIR}/libSDL2main.a)
+	
+IOS_dk_set(SDL_CMAKE
+	-DSDL2_DIR=${SDL}
+	-DSDL2_INCLUDE_DIR=${SDL}/include
+	-DSDL2_LIBRARY_TEMP=${SDL}/${OS}/${RELEASE_DIR}/libSDL2.a
+	-DSDL2_LIBRARY=${SDL}/${OS}/${RELEASE_DIR}/libSDL2.a
+	-DSDL2_LIBRARY_DEBUG=${SDL}/${OS}/${DEBUG_DIR}/libSDL2d.a
+	-DSDL2_LIBRARY_RELEASE=${SDL}/${OS}/${RELEASE_DIR}/libSDL2.a)
+	
+IOS_dk_set(SDLMAIN_CMAKE
+	-DSDL2MAIN_LIBRARY_DEBUG=${SDL}/${OS}/${DEBUG_DIR}/libSDL2maind.a
+	-DSDL2MAIN_LIBRARY_RELEASE=${SDL}/${OS}/${RELEASE_DIR}/libSDL2main.a)
+	
+IOSSIM_dk_set(SDL_CMAKE
+	-DSDL2_DIR=${SDL}
+	-DSDL2_INCLUDE_DIR=${SDL}/include
+	-DSDL2_LIBRARY_TEMP=${SDL}/${OS}/Release-iphonesimulator/libSDL2.a
+	-DSDL2_LIBRARY=${SDL}/${OS}/Release-iphonesimulator/libSDL2.a
+	-DSDL2_LIBRARY_DEBUG=${SDL}/${OS}/Debug-iphonesimulator/libSDL2d.a
+	-DSDL2_LIBRARY_RELEASE=${SDL}/${OS}/Release-iphonesimulator/libSDL2.a)
+	
+IOSSIM_dk_set(SDLMAIN_CMAKE
+	-DSDL2MAIN_LIBRARY_DEBUG=${SDL}/${OS}/Debug-iphonesimulator/libSDL2maind.a
+	-DSDL2MAIN_LIBRARY_RELEASE=${SDL}/${OS}/Release-iphonesimulator/libSDL2main.a)
 	
 LINUX_dk_set(SDL_CMAKE
 	-DSDL2_DIR=${SDL}
