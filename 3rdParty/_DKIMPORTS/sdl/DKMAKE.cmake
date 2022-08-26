@@ -56,8 +56,8 @@ RASPBERRY_dk_depend(opengl)
 # SDL_DL      = https://github.com/libsdl-org/SDL/archive/18032979d892639ad4e03584a40a4d205cd2f5fd.zip    :the library  download link 
 
 
-#dk_import(https://github.com/libsdl-org/SDL.git BRANCH main)
-dk_import(https://github.com/libsdl-org/SDL.git BRANCH 2.0.22)
+dk_import(https://github.com/libsdl-org/SDL.git BRANCH main)
+#dk_import(https://github.com/libsdl-org/SDL.git BRANCH 2.0.22)
 
 
 ### DKPLUGINS LINK ###
@@ -194,7 +194,7 @@ IOS_dk_queueCommand(${DKCMAKE_BUILD} -DSDL_SHARED=OFF -DSDL_OPENGLES=ON -DSDL_ME
 	IOS_dk_xcode(${SDL_NAME} SDL2main)
 #endif()
 
-IOSSIM_dk_queueCommand(${DKCMAKE_BUILD} -DSDL_SHARED=OFF -DSDL_OPENGLES=ON -DSDL_METAL=ON -DSDL_JOYSTICK=OFF -DSDL_HAPTIC=OFF ${SDL})
+IOSSIM_dk_queueCommand(${DKCMAKE_BUILD} -DSDL_SHARED=OFF -DSDL_OPENGLES=ON -DSDL_METAL=ON -DSDL_JOYSTICK=OFF -DSDL_HAPTIC=OFF -DTARGET_OS_IPHONE=ON ${SDL})
 #if(sdl2_SDL2static)
 	IOSSIM_dk_xcode(${SDL_NAME} SDL2-static)
 #endif()
