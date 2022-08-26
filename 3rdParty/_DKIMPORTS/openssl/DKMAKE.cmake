@@ -49,4 +49,11 @@ WIN64_dk_set		(OPENSSL_CMAKE -DOPENSSL_INCLUDE_DIR=${OPENSSL}/include -DLIB_EAY_
 
 
 ### GENERATE ###
+MAC_DEBUG_dk_setPath(${OPENSSL}/${OS}/${DEBUG_DIR})
+MAC_DEBUG_dk_queueCommand(${DKCONFIGURE_BUILD})
+MAC_DEBUG_dk_queueCommand(make)
+MAC_RELEASE_dk_setPath(${OPENSSL}/${OS}/${RELEASE_DIR})
+MAC_RELEASE_dk_queueCommand(${DKCONFIGURE_BUILD})
+MAC_RELEASE_dk_queueCommand(make)
+
 ### COMPILE ###

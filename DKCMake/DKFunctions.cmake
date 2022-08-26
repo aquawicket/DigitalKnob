@@ -1559,7 +1559,7 @@ endfunction()
 function(dk_patch import_name dest_path)
 	DKDEBUGFUNC(${ARGV})
 	dk_warn("COPYING PATCH FILES FROM _IMPORTS/${import_name} TO ${dest_path}")
-	dk_warn("To stop patch files from overwriting install files, remove the \"PATCH\" argument from the end of the DKIMPORT or dk_install command")
+	dk_warn("To stop patch files from overwriting install files, remove the \"PATCH\" argument from the end of the dk_import or dk_install command")
 	dk_warn("located in ${DKIMPORTS}/${import_name}/DKMAKE.cmake")
 	dk_copy(${DKIMPORTS}/${import_name}/ ${dest_path}/ OVERWRITE)
 endfunction()
@@ -1575,7 +1575,7 @@ endfunction()
 #	@url_path			-The download url or local path to an install file. May be .zip, .exe, .msi, .tar.gz etc. 
 #	@dest_path			-The path to the install location under DK/3rdParty
 #	@plugin (optional)	-The name of the 3rdParty package being installed
-#	PATCH				-Patch the install directory with files from the DKIMPORT path
+#	PATCH				-Patch the install directory with files from the DKIMPORTS path
 #
 function(dk_install plugin) #PATCH
 	DKDEBUGFUNC(${ARGV})
