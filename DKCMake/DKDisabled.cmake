@@ -139,7 +139,7 @@ if(MAC)  # Disabled on Mac host machines
 	dk_disable(bzip2)
 	dk_disable(DKMySql)
 	dk_disable(DKOcr)
-	dk_disable(DKWebSockets)
+	#dk_disable(DKWebSockets)
 	dk_disable(freealut)
 	dk_disable(freealut-master)
 	dk_disable(ghostscript)
