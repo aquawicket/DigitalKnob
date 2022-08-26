@@ -46,12 +46,19 @@ ANDROID_dk_set		(OPENSSL_CMAKE -DOPENSSL_ROOT_DIR=${OPENSSL})
 
 ### GENERATE ###
 ### COMPILE ###
-APPLE_DEBUG_dk_setPath(${OPENSSL}/${OS}/${DEBUG_DIR})
-APPLE_DEBUG_dk_queueCommand(../../Configure no-shared --debug)
-APPLE_DEBUG_dk_queueCommand(make)
-APPLE_RELEASE_dk_setPath(${OPENSSL}/${OS}/${RELEASE_DIR})
-APPLE_RELEASE_dk_queueCommand(../../Configure no-shared --release)
-APPLE_RELEASE_dk_queueCommand(make)
+MAC_DEBUG_dk_setPath(${OPENSSL}/${OS}/${DEBUG_DIR})
+MAC_DEBUG_dk_queueCommand(../../Configure no-shared --debug)
+MAC_DEBUG_dk_queueCommand(make)
+MAC_RELEASE_dk_setPath(${OPENSSL}/${OS}/${RELEASE_DIR})
+MAC_RELEASE_dk_queueCommand(../../Configure no-shared --release)
+MAC_RELEASE_dk_queueCommand(make)
+
+IOSSIM_DEBUG_dk_setPath(${OPENSSL}/${OS}/${DEBUG_DIR})
+IOSSIM_DEBUG_dk_queueCommand(../../Configure iossimulator-xcrun no-shared --debug)
+IOSSIM_DEBUG_dk_queueCommand(make)
+IOSSIM_RELEASE_dk_setPath(${OPENSSL}/${OS}/${RELEASE_DIR})
+IOSSIM_RELEASE_dk_queueCommand(../../Configure iossimulator-xcrun no-shared --release)
+IOSSIM_RELEASE_dk_queueCommand(make)
 
 LINUX_DEBUG_dk_setPath(${OPENSSL}/${OS}/${DEBUG_DIR})
 LINUX_DEBUG_dk_queueCommand(../../Configure --no-shared --debug)
