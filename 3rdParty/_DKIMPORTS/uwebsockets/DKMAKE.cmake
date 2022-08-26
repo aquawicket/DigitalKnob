@@ -34,6 +34,6 @@ dk_queueCommand(${DKCMAKE_BUILD} ${ZLIB_CMAKE} ${LIBUV_CMAKE} ${OPENSSL_CMAKE} $
 
 ### COMPILE ###
 dk_visualStudio(${UWEBSOCKETS_NAME} uWS)
-dk_xcode(${UWEBSOCKETS_NAME} libuWS)
+dk_xcode(${UWEBSOCKETS_NAME} uWS)
 LINUX_dk_queueCommand(make uWebSockets)
 RASPBERRY_dk_queueCommand(make uWebSockets)
