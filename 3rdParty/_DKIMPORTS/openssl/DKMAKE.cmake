@@ -1,6 +1,7 @@
 # https://github.com/openssl/openssl
 # https://www.openssl.org/
 # https://www.npcglib.org/~stathis/downloads/openssl-1.0.2h-vs2015.7z
+# https://github.com/openssl/openssl/issues/14131 # iOS & iOS-Simulator
 
 
 WIN_dk_import(https://www.npcglib.org/~stathis/downloads/openssl-1.0.2h-vs2015.7z)
@@ -52,6 +53,13 @@ MAC_DEBUG_dk_queueCommand(make)
 MAC_RELEASE_dk_setPath(${OPENSSL}/${OS}/${RELEASE_DIR})
 MAC_RELEASE_dk_queueCommand(../../Configure no-shared --release)
 MAC_RELEASE_dk_queueCommand(make)
+
+IOS64_DEBUG_dk_setPath(${OPENSSL}/${OS}/${DEBUG_DIR})
+IOS64_DEBUG_dk_queueCommand(../../Configure ios64-xcrun no-shared --debug)
+IOS64_DEBUG_dk_queueCommand(make)
+IOS64_RELEASE_dk_setPath(${OPENSSL}/${OS}/${RELEASE_DIR})
+IOS64_RELEASE_dk_queueCommand(../../Configure ios64-xcrun no-shared --release)
+IOS64_RELEASE_dk_queueCommand(make)
 
 IOSSIM_DEBUG_dk_setPath(${OPENSSL}/${OS}/${DEBUG_DIR})
 IOSSIM_DEBUG_dk_queueCommand(../../Configure iossimulator-xcrun no-shared --debug)
