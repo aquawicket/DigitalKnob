@@ -370,7 +370,7 @@ if(ANDROID) # Disabled for Android targets
 	dk_disable(lua)
 	dk_disable(openal)
 	dk_disable(openal-android)
-	#dk_disable(openssl)
+	dk_disable(openssl)
 	dk_disable(podofo)
 	dk_disable(rlottie)
 	dk_disable(rtmidi)
