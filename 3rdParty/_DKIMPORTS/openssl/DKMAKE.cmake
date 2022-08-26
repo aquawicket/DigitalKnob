@@ -45,10 +45,10 @@ ANDROID_dk_set		(OPENSSL_CMAKE -DOPENSSL_ROOT_DIR=${OPENSSL})
 ### GENERATE ###
 ### COMPILE ###
 APPLE_DEBUG_dk_setPath(${OPENSSL}/${OS}/${DEBUG_DIR})
-APPLE_DEBUG_dk_queueCommand("../../Configure --no-shared --debug")
+APPLE_DEBUG_dk_queueCommand(../../Configure --no-shared --debug)
 APPLE_DEBUG_dk_queueCommand(make)
 APPLE_RELEASE_dk_setPath(${OPENSSL}/${OS}/${RELEASE_DIR})
-APPLE_RELEASE_dk_queueCommand("../../Configure --no-shared --release")
+APPLE_RELEASE_dk_queueCommand(../../Configure --no-shared --release)
 APPLE_RELEASE_dk_queueCommand(make)
 
 LINUX_DEBUG_dk_setPath(${OPENSSL}/${OS}/${DEBUG_DIR})
