@@ -11,6 +11,7 @@ endif()
 
 ### LINK ###
 dk_include				(${OPENSSL}/include)
+dk_include              (${OPENSSL}/${OS}/${RELEASE_DIR}/include)
 WIN32_dk_libDebug		(${OPENSSL}/lib/libeay32MTd.lib)
 WIN32_dk_libRelease		(${OPENSSL}/lib/libeay32MT.lib)
 WIN64_dk_libDebug		(${OPENSSL}/lib64/libeay32MTd.lib)
