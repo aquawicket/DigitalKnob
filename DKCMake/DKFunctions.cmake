@@ -1804,7 +1804,7 @@ function(dk_executeProcess commands) #NOASSERT
 		set(command ${commands} WORKING_DIRECTORY ${CURRENT_DIR}) # add WORKING_DIRECTORY if missing
 	endif()	
 	
-	dk_info("\n${CLR}${magenta} -> ${commands}\n")
+	dk_info("\n${CLR}${magenta} $ ${commands}\n")
 	
 	if(WIN_HOST)
 		execute_process(COMMAND cmd /c ${commands} RESULT_VARIABLE result ERROR_VARIABLE error) # FIXME: Do we always need  cmd /c  here?
@@ -1938,7 +1938,7 @@ function(dk_msys)
 		string(REPLACE ";" "\n"	bash "${bash}")
 		string(REPLACE "C:/" "/c/" bash ${bash})
 		file(WRITE ${MSYS}/dkscript.tmp ${bash})
-		dk_info("dk_msys -> ${bash}")
+		dk_info("dk_msys $ ${bash}")
 		dk_executeProcess(${MSYS}/bin/bash ${MSYS}/dkscript.tmp)
 	endif()
 endfunction()
@@ -1988,7 +1988,7 @@ function(dk_msys2)
 		string(REPLACE ";" "\n"	bash "${bash}")
 		string(REPLACE "C:/" "/c/" bash ${bash})
 		file(WRITE ${MSYS2}/dkscript.tmp ${bash})
-		dk_info("dk_msys2 -> ${bash}")
+		dk_info("dk_msys2 $ ${bash}")
 		dk_executeProcess(${MSYS2}/usr/bin/bash ${MSYS2}/dkscript.tmp)
 	endif()
 endfunction()
