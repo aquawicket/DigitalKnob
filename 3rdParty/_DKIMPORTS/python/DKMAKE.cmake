@@ -37,11 +37,11 @@ if(MAC AND NOT EXISTS "/Applications/Python\ 2.7")
 	dk_download(${PYTHON_DL} ${DKDOWNLOAD}/python-2.7.18-macosx10.9.pkg)
 	dk_executeProcess(sudo installer -verbose -pkg ${DKDOWNLOAD}/python-2.7.18-macosx10.9.pkg -target /)
 endif()
-if(LINUX AND NOT EXISTS ${PYTHON_APP})
+if(LINUX AND NOT EXISTS ${PYTHON_APP}) #FIXME
 	dk_download(${PYTHON_DL} ${DKDOWNLOAD}/Python-2.7.18.tgz)
 	dk_executeProcess(${DKDOWNLOAD}/Python-2.7.18.tgz)
 endif()
-if(RASPBERRY AND NOT EXISTS ${PYTHON_APP})
+if(RASPBERRY AND NOT EXISTS ${PYTHON_APP}) #FIXME
 	dk_download(${PYTHON_DL} ${DKDOWNLOAD}/Python-2.7.18.tgz)
 	dk_executeProcess(${DKDOWNLOAD}/Python-2.7.18.tgz)
 endif()
