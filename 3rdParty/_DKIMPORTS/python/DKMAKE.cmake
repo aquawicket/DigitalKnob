@@ -8,11 +8,11 @@
 dk_set(PYTHON_NAME python-2.7.18)
 dk_set(PYTHON ${3RDPARTY}/${PYTHON_NAME})
 WIN_dk_set			(PYTHON_DL https://www.python.org/ftp/python/2.7.18/python-2.7.18.msi)
-MAC_dk_set			(PYTHON_DL https://www.python.org/ftp/python/2.7.18/python-2.7.18-macosx10.9.pkg)
+APPLE_dk_set		(PYTHON_DL https://www.python.org/ftp/python/2.7.18/python-2.7.18-macosx10.9.pkg)
 LINUX_dk_set		(PYTHON_DL https://www.python.org/ftp/python/2.7.18/Python-2.7.18.tgz)
 RASPBERRY_dk_set	(PYTHON_DL https://www.python.org/ftp/python/2.7.18/Python-2.7.18.tgz)
 WIN_dk_set			(PYTHON_APP ${PYTHON}/python.exe)
-MAC_dk_set			(PYTHON_APP python)
+APPLE_dk_set		(PYTHON_APP python)
 LINUX_dk_set		(PYTHON_APP python)
 RASPBERRY_dk_set	(PYTHON_APP python)
 
