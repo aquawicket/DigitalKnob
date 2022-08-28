@@ -1,3 +1,6 @@
+if(NOT WIN_HOST)
+	return()
+endif()
 # https://github.com/dtrebilco/glintercept
 #
 # https://github.com/dtrebilco/glintercept/releases/download/1.3.4/GLIntercept_1_3_4.exe
