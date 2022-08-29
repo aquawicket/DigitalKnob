@@ -26,7 +26,11 @@ ANDROID_dk_set	(ZLIB_CMAKE "-DCMAKE_C_FLAGS=-I${ZLIB}/${OS}" "-DCMAKE_CXX_FLAGS=
 
 ### GENERATE ###
 dk_setPath(${ZLIB}/${BUILD_DIR})
-dk_queueCommand(${DKCMAKE_BUILD} ${ZLIB})
+if(IOSSIM)
+	IOSSIM_dk_queueCommand(${DKCMAKE_BUILD} -DCMAKE_SYSTEM_NAME=iOS -DCMAKE_OSX_SYSROOT=iphonesimulator -DCMAKE_OSX_ARCHITECTURES=x86_64 ${ZLIB})
+else()
+	dk_queueCommand(${DKCMAKE_BUILD} ${ZLIB})
+endif()
 
 
 ### COMPILE ###
