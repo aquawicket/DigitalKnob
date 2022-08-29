@@ -1194,7 +1194,9 @@ function(dk_rename from to) # OVERWRITE NOERROR
 		endif()
 		dk_remove(${to})
 	endif()
-	file(RENAME ${from} ${to})
+	if(EXISTS ${from}) 
+		file(RENAME ${from} ${to})
+	endif()
 endfunction()
 
 
