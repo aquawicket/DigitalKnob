@@ -38,7 +38,7 @@ dk_queueCommand	(${DKCMAKE_BUILD} ${TIFF})
 
 
 ### COMPILE ###
-dk_visualStudio				(${TIFF_NAME} tiff-static)
-dk_xcode					(${TIFF_NAME} tiff-static)
+dk_visualStudio				(${TIFF_NAME} tiff) # tiff-static)
+dk_xcode					(${TIFF_NAME} tiff) # tiff-static)
 LINUX_dk_queueCommand		(make) #tiff-static)
 RASPBERRY_dk_queueCommand	(make) #tiff-static)
