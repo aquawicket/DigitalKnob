@@ -27,8 +27,6 @@ WIN_dk_libDebug			(${LIBARCHIVE}/${OS}/libarchive/${DEBUG_DIR}/archive_static.li
 WIN_dk_libRelease		(${LIBARCHIVE}/${OS}/libarchive/${RELEASE_DIR}/archive_static.lib)
 APPLE_dk_libDebug		(${LIBARCHIVE}/${OS}/libarchive/${DEBUG_DIR}/libarchive.a)
 APPLE_dk_libRelease		(${LIBARCHIVE}/${OS}/libarchive/${RELEASE_DIR}/libarchive.a)
-#IOSSIM_dk_libDebug		(${LIBARCHIVE}/${OS}/libarchive/Debug-iphonesimulator/libarchive.a)
-#IOSSIM_dk_libRelease	(${LIBARCHIVE}/${OS}/libarchive/Release-iphonesimulator/libarchive.a)
 LINUX_dk_libDebug		(${LIBARCHIVE}/${OS}/${DEBUG_DIR}/libarchive/libarchive.a)
 LINUX_dk_libRelease		(${LIBARCHIVE}/${OS}/${RELEASE_DIR}/libarchive/libarchive.a)
 RASPBERRY_dk_libDebug	(${LIBARCHIVE}/${OS}/${DEBUG_DIR}/libarchive/libarchive.a)
