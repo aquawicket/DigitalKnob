@@ -30,7 +30,7 @@
 bool DKDuktapeDom::Init(){
 	DKDEBUGFUNC();
 
-	DKINFO("DKDuktapeDom::Init()\n");
+	//DKINFO("DKDuktapeDom::Init()\n");
 	//Load the Duktape javascript DOM
 	DKClass::DKCreate("DKEventTarget");
 	DKClass::DKCreate("DKDuktapeDom/DKGlobalEventHandlers.js");

@@ -370,7 +370,7 @@ logy::logy(const char* file, int line, const char* func, const DKString& names, 
 	DKStringArray name_array;
 	toStringArray(name_array, names, ",");
 	getTemplateArgs(out, name_array, args...);
-	DKString func_string = "--> ";
+	DKString func_string = "--> \n";
 	/*
 	func_string += func;
 	func_string += "(";
@@ -382,7 +382,7 @@ logy::logy(const char* file, int line, const char* func, const DKString& names, 
 	func_string += ")\n";
 	*/
 	//DKLog::Log(file, line, "", func_string, DK_DEBUG);
-	DKDEBUG(func_string);
+	DKINFO(func_string);
 
 	//*stream << "--> " << file << ":" << line << "  " << func_string << std::endl;
 	//stream->flush();
@@ -392,10 +392,10 @@ logy::~logy(){
 	if (DKLog::log_show.empty() && !DKLog::log_debug)
 		return;
 	DKString func_string = " <-- ";
-	func_string += ((double)(clock() - start_time) / CLOCKS_PER_SEC);
-	func_string += "s\n";
+	func_string += toString(((double)(clock() - start_time) / CLOCKS_PER_SEC));
+	func_string += "s \n";
 	//DKLog::Log(file.c_str(), line, "", func_string.c_str(), DK_DEBUG);
-	DKDEBUG(func_string);
+	DKINFO(func_string);
 
 	//*stream << file << " <-- " << func << "() ";
 	//*stream << " in " << ((double)(clock() - start_time) / CLOCKS_PER_SEC) << "s";
