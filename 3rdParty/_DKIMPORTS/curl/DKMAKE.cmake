@@ -25,7 +25,7 @@ RELEASE_dk_include		(${CURL}/${OS}/${RELEASE_DIR}/include/curl)
 
 WIN_dk_libDebug			(${CURL}/${OS}/lib/${DEBUG_DIR}/libcurl.lib)
 WIN_dk_libRelease		(${CURL}/${OS}/lib/${RELEASE_DIR}/libcurl.lib)
-APPLE_dk_libDebug		(${CURL}/${OS}/lib/${DEBUG_DIR}/libcurl.a)
+APPLE_dk_libDebug		(${CURL}/${OS}/lib/${DEBUG_DIR}/libcurl-d.a)
 APPLE_dk_libRelease		(${CURL}/${OS}/lib/${RELEASE_DIR}/libcurl.a)
 LINUX_dk_libDebug		(${CURL}/${OS}/${DEBUG_DIR}/lib/libcurl.a)
 LINUX_dk_libRelease		(${CURL}/${OS}/${RELEASE_DIR}/lib/libcurl.a)
