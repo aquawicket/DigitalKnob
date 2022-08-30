@@ -8,8 +8,8 @@ dk_depend(ws2_32.lib)
 dk_depend(system_configuration)
 dk_depend(dl)
 dk_depend(zlib)
-#dk_depend(openssl)
-dk_depend(openssl_binary)
+dk_depend(openssl)
+#dk_depend(openssl_binary)
 
 
 dk_import(https://github.com/curl/curl/archive/refs/tags/curl-7_43_0.zip)
@@ -49,8 +49,11 @@ IOSSIM_dk_queueCommand(
 	-DCURL_USE_OPENSSL=OFF
 	${OPENSSL_CMAKE}
 	${ZLIB_CMAKE}
-	-DHAVE_POSIX_STRERROR_R=1
-	#-DHAVE_POSIX_STRERROR_R=advanced
+	#-DHAVE_POSIX_STRERROR_R=1
+	-DHAVE_POSIX_STRERROR_R=advanced
+	-DHAVE_POSIX_STRERROR_R__TRYRUN_OUTPUT=dvanced
+	-DHAVE_POLL_FINE_EXITCODE=advanced
+	-DHAVE_POLL_FINE_EXITCODE__TRYRUN_OUTPUT=advanced 
 	-DHAVE_GLIBC_STRERROR_R=advanced
 	-DHAVE_GLIBC_STRERROR_R__TRYRUN_OUTPUT=advanced
 	${CURL})
