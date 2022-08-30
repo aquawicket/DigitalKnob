@@ -137,7 +137,7 @@ bool DKAssets::Init(){
 #if DEBUG
 	if(!same(funcs, "OFF"))
 		DKLog::log_funcs = true;
-#edif
+#endif
 	if(same(funcs, "ON"))
 		DKLog::log_funcs = true;
 	
