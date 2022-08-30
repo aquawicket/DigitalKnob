@@ -78,9 +78,10 @@ bool DKAssets::Init(){
 #if DEBUG
 	if(!same(debug, "OFF"))
 		DKLog::log_debug = true;
-#endif 
+#else
 	if(same(debug, "ON"))
 		DKLog::log_debug = true;
+#endif
 
 	DKString info;
 	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[LOG_INFO]", info);
@@ -102,9 +103,10 @@ bool DKAssets::Init(){
 #if DEBUG
 	if(!same(stacktraceonerrors, "OFF"))
 		DKLog::stacktrace_on_errors = true;
-#endif
+#else
 	if(same(stacktraceonerrors, "ON"))
 		DKLog::stacktrace_on_errors = true;
+#endif
 
 	DKString exceptiononerrors;
 	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[EXCEPTION_ON_ERRORS]", exceptiononerrors);
@@ -119,27 +121,30 @@ bool DKAssets::Init(){
 #if DEBUG
 	if (!same(threads, "OFF"))
 		DKLog::log_thread = true;
-#endif
+#else
 	if (same(threads, "ON"))
 		DKLog::log_thread = true;
+#endif
 	
 	DKString lines;
 	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[LOG_LINES]", lines);
 #if DEBUG
 	if(!same(lines, "OFF"))
 		DKLog::log_lines = true;
-#endif
+#else
 	if(same(lines, "ON"))
 		DKLog::log_lines = true;
+#endif
 
 	DKString funcs;
 	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[LOG_FUNCS]", funcs);
 #if DEBUG
 	if(!same(funcs, "OFF"))
 		DKLog::log_funcs = true;
-#endif
+#else
 	if(same(funcs, "ON"))
 		DKLog::log_funcs = true;
+#endif
 	
 	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[ONLINE_ASSETS]", DKFile::online_assets);
 	if(DKFile::online_assets.empty())
