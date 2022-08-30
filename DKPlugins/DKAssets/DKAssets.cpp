@@ -63,15 +63,22 @@ bool DKAssets::Init(){
 
 #ifdef WIN32
 	DKString console;
-	//if (DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[CONSOLE]", console)) {
 	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[CONSOLE]", console);
-	if(!same(console, "ON"))
-		ShowWindow(GetConsoleWindow(), SW_HIDE);
-	//}
+#	if DEBUG
+		if(!same(console, "OFF"))
+			ShowWindow(GetConsoleWindow(), SW_SHOW);
+#	else
+		if(!same(console, "ON"))
+			ShowWindow(GetConsoleWindow(), SW_HIDE);
+#	endif
 #endif
 
 	DKString debug;
 	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[LOG_DEBUG]", debug);
+#if DEBUG
+	if(!same(debug, "OFF"))
+		DKLog::log_debug = true;
+#endif 
 	if(same(debug, "ON"))
 		DKLog::log_debug = true;
 
@@ -92,6 +99,10 @@ bool DKAssets::Init(){
 	
 	DKString stacktraceonerrors;
 	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[STACKTRACE_ON_ERRORS]", stacktraceonerrors);
+#if DEBUG
+	if(!same(stacktraceonerrors, "OFF"))
+		DKLog::stacktrace_on_errors = true;
+#endif
 	if(same(stacktraceonerrors, "ON"))
 		DKLog::stacktrace_on_errors = true;
 
@@ -105,16 +116,28 @@ bool DKAssets::Init(){
 
 	DKString threads;
 	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[LOG_THREAD]", threads);
+#if DEBUG
+	if (!same(threads, "OFF"))
+		DKLog::log_thread = true;
+#endif
 	if (same(threads, "ON"))
 		DKLog::log_thread = true;
 	
 	DKString lines;
 	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[LOG_LINES]", lines);
+#if DEBUG
+	if(!same(lines, "OFF"))
+		DKLog::log_lines = true;
+#endif
 	if(same(lines, "ON"))
 		DKLog::log_lines = true;
 
 	DKString funcs;
 	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[LOG_FUNCS]", funcs);
+#if DEBUG
+	if(!same(funcs, "OFF"))
+		DKLog::log_funcs = true;
+#edif
 	if(same(funcs, "ON"))
 		DKLog::log_funcs = true;
 	
