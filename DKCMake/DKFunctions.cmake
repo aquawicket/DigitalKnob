@@ -1171,7 +1171,7 @@ endfunction()
 #	OVERWRITE	- if any of the parameters equals OVERWRITE, overwritting existing files is enabled
 #   NOERROR     - if any of the parameters equals NOERROR, dk_error() messages will not be displayed
 #
-function(dk_rename from to) # OVERWRITE NOERROR
+function(dk_rename from to) # FLAGS: OVERWRITE, NOERROR
 	DKDEBUGFUNC(${ARGV})
 	dk_includes("${ARGN}" "OVERWRITE" includes)
 	if(${includes})
@@ -1194,9 +1194,7 @@ function(dk_rename from to) # OVERWRITE NOERROR
 		endif()
 		dk_remove(${to})
 	endif()
-	if(EXISTS ${from}) 
-		file(RENAME ${from} ${to})
-	endif()
+	file(RENAME ${from} ${to})
 endfunction()
 
 
