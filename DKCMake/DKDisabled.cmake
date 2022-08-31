@@ -83,7 +83,7 @@ dk_disable(openscenegraph)          # Openscenegraph
 dk_disable(osgaudio)                # Openscenegraph
 dk_disable(osgbullet)               # Openscenegraph
 dk_disable(osgworks)                # Openscenegraph
-dk_disable(php-src)
+#dk_disable(php-src)
 dk_disable(sdl2_gif)                # use SDL_Image animation
 dk_disable(sdl2_giflib_sa)          # updated version of sdl2_gif
 #dk_disable(sdl_ttf)
@@ -95,7 +95,8 @@ if(NOT WIN_HOST) # Disabled on Non-Windows host machines
 	dk_disable(android-studio)
 	#dk_disable(glintercept)
 	#dk_disable(python)
-	dk_disable(php_binary)
+	#dk_disable(php_binary)
+	dk_disable(php-src)
 	#dk_disable(vs16-redistributable)
 endif()
 if(WIN) # Disabled for Windows targets
