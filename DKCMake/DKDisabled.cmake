@@ -103,7 +103,7 @@ if(WIN) # Disabled for Windows targets
 	dk_disable(libwebsockets)
 	dk_disable(lighttpd)
 	dk_disable(lua)
-	dk_disable(openal)
+	#dk_disable(openal)
 	dk_disable(openal-android)
 	dk_disable(opensles)
 	dk_disable(tesseract)
