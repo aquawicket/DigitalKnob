@@ -17,9 +17,9 @@ dk_depend(visualstudio)
 #dk_import(${FFMPEG-DEV_DL} ${FFMPEG-DEV})
 
 
-WIN32_dk_import(FFMPEG-DEV_DL https://web.archive.org/web/20200918193140/https://ffmpeg.zeranoe.com/builds/win32/dev/ffmpeg-20200831-4a11a6f-win32-dev.zip)
-WIN64_dk_import(FFMPEG-DEV_DL https://web.archive.org/web/20200914204045/https://ffmpeg.zeranoe.com/builds/win64/dev/ffmpeg-20200831-4a11a6f-win64-dev.zip)
-MAC64_dk_import(FFMPEG-DEV_DL https://web.archive.org/web/20200919011114mp_/https://ffmpeg.zeranoe.com/builds/macos64/dev/ffmpeg-20200831-4a11a6f-macos64-dev.zip)
+WIN32_dk_import(https://web.archive.org/web/20200918193140/https://ffmpeg.zeranoe.com/builds/win32/dev/ffmpeg-20200831-4a11a6f-win32-dev.zip)
+WIN64_dk_import(https://web.archive.org/web/20200914204045/https://ffmpeg.zeranoe.com/builds/win64/dev/ffmpeg-20200831-4a11a6f-win64-dev.zip)
+MAC64_dk_import(https://web.archive.org/web/20200919011114mp_/https://ffmpeg.zeranoe.com/builds/macos64/dev/ffmpeg-20200831-4a11a6f-macos64-dev.zip)
 
 
 
