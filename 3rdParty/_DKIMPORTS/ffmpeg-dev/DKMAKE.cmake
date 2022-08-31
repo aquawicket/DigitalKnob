@@ -1,20 +1,28 @@
-if(NOT WIN)
-	return()
-endif()
+# https://web.archive.org/web/20200919011114/https://ffmpeg.zeranoe.com/builds/
 # https://web.archive.org/web/20200918193140/https://ffmpeg.zeranoe.com/builds/win32/dev/ffmpeg-20200831-4a11a6f-win32-dev.zip
 # https://web.archive.org/web/20200914204045/https://ffmpeg.zeranoe.com/builds/win64/dev/ffmpeg-20200831-4a11a6f-win64-dev.zip
+# https://web.archive.org/web/20200919011114mp_/https://ffmpeg.zeranoe.com/builds/macos64/dev/ffmpeg-20200831-4a11a6f-macos64-dev.zip
 
 dk_depend(visualstudio)
 
 ### VERSION ###
-dk_set(FFMPEG-DEV_VERSION 20200831-4a11a6f)
-dk_set(FFMPEG-DEV_NAME ffmpeg-${FFMPEG-DEV_VERSION}-${OS}-dev)
-dk_set(FFMPEG-DEV_DL https://web.archive.org/web/20200918193140/https://ffmpeg.zeranoe.com/builds/${OS}/dev/${FFMPEG-DEV_NAME}.zip)
-dk_set(FFMPEG-DEV ${3RDPARTY}/${FFMPEG-DEV_NAME})
-
+#dk_set(FFMPEG-DEV_VERSION 20200831-4a11a6f)
+#dk_set(FFMPEG-DEV_NAME ffmpeg-${FFMPEG-DEV_VERSION}-${OS}-dev)
+#WIN32_dk_set(FFMPEG-DEV_DL https://web.archive.org/web/20200918193140/https://ffmpeg.zeranoe.com/builds/win32/dev/ffmpeg-20200831-4a11a6f-win32-dev.zip)
+#WIN64_dk_set(FFMPEG-DEV_DL https://web.archive.org/web/20200914204045/https://ffmpeg.zeranoe.com/builds/win64/dev/ffmpeg-20200831-4a11a6f-win64-dev.zip)
+#MAC_64_dk_set(FFMPEG-DEV_DL https://web.archive.org/web/20200919011114mp_/https://ffmpeg.zeranoe.com/builds/macos64/dev/ffmpeg-20200831-4a11a6f-macos64-dev.zip)
+#dk_set(FFMPEG-DEV ${3RDPARTY}/${FFMPEG-DEV_NAME})
 ### INSTALL ###
 #dk_import(${FFMPEG-DEV_DL} ${FFMPEG-DEV})
-dk_import(${FFMPEG-DEV_DL} ${FFMPEG-DEV})
+#dk_import(${FFMPEG-DEV_DL} ${FFMPEG-DEV})
+
+
+WIN32_dk_import(FFMPEG-DEV_DL https://web.archive.org/web/20200918193140/https://ffmpeg.zeranoe.com/builds/win32/dev/ffmpeg-20200831-4a11a6f-win32-dev.zip)
+WIN64_dk_import(FFMPEG-DEV_DL https://web.archive.org/web/20200914204045/https://ffmpeg.zeranoe.com/builds/win64/dev/ffmpeg-20200831-4a11a6f-win64-dev.zip)
+MAC64_dk_import(FFMPEG-DEV_DL https://web.archive.org/web/20200919011114mp_/https://ffmpeg.zeranoe.com/builds/macos64/dev/ffmpeg-20200831-4a11a6f-macos64-dev.zip)
+
+
+
 dk_rename(${FFMPEG-DEV}/include/libavutil/time.h ${FFMPEG-DEV}/include/libavutil/time.h.EXCLUDE)
 
 
