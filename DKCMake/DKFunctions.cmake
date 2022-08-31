@@ -1673,7 +1673,7 @@ function(dk_install plugin) #PATCH
 				set(FILETYPE "Executable")
 			endif()
 		elseif(${url_extension} STREQUAL ".dmg")
-			set(FILETYPE "Executable")
+			set(FILETYPE "BYPASS")
 		elseif(${url_extension} STREQUAL ".gz")
 			set(FILETYPE "Archive")
 		elseif(${url_extension} STREQUAL ".js")
@@ -1724,6 +1724,8 @@ function(dk_install plugin) #PATCH
 		dk_setPath(${DKDOWNLOAD})
 		dk_set(QUEUE_BUILD ON)
 		dk_executeProcess(${DKDOWNLOAD}/${dl_filename})
+	elseif(${FILETYPE} STREQUAL "BYPASS")
+		# (BYPASS) do nothing
 	else() #NOT ARCHIVE, just copy the file into it's 3rdParty folder
 		dk_copy(${DKDOWNLOAD}/${dl_filename} ${dest_path}/${dl_filename} OVERWRITE)
 		dk_debug("dk_copy(${DKDOWNLOAD}/${dl_filename} ${dest_path}/${dl_filename} OVERWRITE)")
