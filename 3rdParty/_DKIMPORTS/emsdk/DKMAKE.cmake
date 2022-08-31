@@ -11,8 +11,10 @@ if(NOT MAC)
 	dk_command(${EMSDK}/emsdk update)
 endif()
 dk_command(${EMSDK}/emsdk install latest)
-dk_command(${EMSDK}/emsdk install activate latest)
-dk_command(${EMSDK}/emsdk_env.bat)
+if(NOT MAC)
+	dk_command(${EMSDK}/emsdk install activate latest)
+endif()
+WIN_dk_command(${EMSDK}/emsdk_env.bat)
 
 
 
