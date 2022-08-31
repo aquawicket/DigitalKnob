@@ -1,3 +1,4 @@
+return() # migrated to /_DKIMPORTS/emsdk/DKMAKE.cmake
 # https://emscripten.org/index.html
 # https://lyceum-allotments.github.io/2016/06/emscripten-and-sdl-2-tutorial-part-1/
 #
@@ -11,7 +12,7 @@ dk_import(https://github.com/emscripten-core/emsdk.git)
 #dk_set(EMSCRIPTEN ${3RDPARTY}/${EMSCRIPTEN_NAME})
 
 IF(WIN_HOST)
-	IF(NOT EXISTS ${EMSCRIPTEN})
+	IF(NOT EXISTS ${EMSDK-PORTABLE})
 		dk_set(CURRENT_DIR ${DKDOWNLOAD})
 		## dk_download(www.internet.com/emsdk-portable-64bit.zip) ## find an online link
 		dk_extract(${DKDOWNLOAD}/emsdk-portable-64bit.zip ${3RDPARTY}/emsdk-portable-64bit)
