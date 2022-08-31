@@ -24,7 +24,7 @@ dk_command(${DKCMAKE_BUILD} ${BOXER})
 
 
 ### COMPILE ###
-dk_visualStudio				(${BOXER_NAME} boxer)
-dk_xcode					(${BOXER_NAME} boxer)
-LINUX_dk_queueCommand		(make boxer)
-RASPBERRY_dk_queueCommand	(make boxer)
+dk_visualStudio				(${BOXER_NAME} Boxer)
+dk_xcode					(${BOXER_NAME} Boxer)
+LINUX_dk_queueCommand		(make Boxer)
+RASPBERRY_dk_queueCommand	(make Boxer)
