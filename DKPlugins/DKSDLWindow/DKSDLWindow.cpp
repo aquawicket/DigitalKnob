@@ -637,7 +637,12 @@ void DKSDLWindow::Process() {
     }
     for(unsigned int i = 0; i < update_funcs.size(); ++i)
         update_funcs[i](); //Call update functions
-    SDL_RenderPresent(renderer);
+
+    if (!renderer) {
+        DKERROR("renderer invalid");
+        return;
+    }
+    SDL_RenderPresent(renderer); //FIXME: is renderer valid?
 }
 
 int DKSDLWindow::EventFilter(void* userdata, SDL_Event* event) {

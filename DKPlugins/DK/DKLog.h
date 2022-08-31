@@ -109,10 +109,7 @@ void printVariable(const DKString& name, T t, std::ostringstream& out) {
 #	else
 		type += "unknown";
 #	endif
-		//value << "\"" << t << "\"";
-		value << "\"";
-		//value << t;
-		value << "\"";
+		value << "\"" << t << "\"";
 	replace(type, " *", "*");
 	if (same(value.str(), "\"")) {
 		out << "<" << type << ">\"" << name << "\":";
