@@ -11,8 +11,8 @@ dk_depend(zlib)
 dk_depend(openssl)
 
 
-#dk_import(https://github.com/curl/curl/archive/refs/tags/curl-7_43_0.zip)
-dk_import(https://github.com/curl/curl/archive/refs/tags/curl-7_84_0.zip)
+WIN_dk_import(https://github.com/curl/curl/archive/refs/tags/curl-7_43_0.zip)
+UNIX_dk_import(https://github.com/curl/curl/archive/refs/tags/curl-7_84_0.zip)
 #dk_import(https://github.com/curl/curl.git)
 
 
@@ -23,7 +23,7 @@ dk_include				(${CURL}/${OS}/include/curl)
 DEBUG_dk_include		(${CURL}/${OS}/${DEBUG_DIR}/include/curl)
 RELEASE_dk_include		(${CURL}/${OS}/${RELEASE_DIR}/include/curl)
 
-WIN_dk_libDebug			(${CURL}/${OS}/lib/${DEBUG_DIR}/libcurl-d.lib)
+WIN_dk_libDebug			(${CURL}/${OS}/lib/${DEBUG_DIR}/libcurl.lib)
 WIN_dk_libRelease		(${CURL}/${OS}/lib/${RELEASE_DIR}/libcurl.lib)
 APPLE_dk_libDebug		(${CURL}/${OS}/lib/${DEBUG_DIR}/libcurl-d.a)
 APPLE_dk_libRelease		(${CURL}/${OS}/lib/${RELEASE_DIR}/libcurl.a)
