@@ -3,7 +3,7 @@
 # https://github.com/emscripten-core/emsdk/archive/refs/tags/2.0.26.zip
 
 
-dk_import(https://github.com/emscripten-core/emsdk.git)
+dk_import(https://github.com/emscripten-core/emsdk.git BRANCH main)
 
 
 #dk_command("${EMSCRIPTEN}/emsdk update")
