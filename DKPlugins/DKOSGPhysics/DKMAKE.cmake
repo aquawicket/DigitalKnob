@@ -1,9 +1,9 @@
-if(LINUX)
-	return()
-endif()
-if(ANDROID)
-	return()
-endif()
+#if(LINUX)
+#	return()
+#endif()
+#if(ANDROID)
+#	return()
+#endif()
 
 dk_depend(osgbullet)
 dk_depend(DKOSGModel)
@@ -15,11 +15,17 @@ dk_depend(osgworks osgwTools)
 dk_depend(osgworks osgdb_osgobjects)
 dk_depend(osgworks osgdb_osgwTools)
 dk_depend(osgworks osgdb_skeleton)
+
 ##bullet
-dk_depend(bullet BulletCollision)
-dk_depend(bullet BulletDynamics)
-dk_depend(bullet BulletSoftBody)
-dk_depend(bullet LinearMath)
+#dk_depend(bullet BulletCollision)
+#dk_depend(bullet BulletDynamics)
+#dk_depend(bullet BulletSoftBody)
+#dk_depend(bullet LinearMath)
+dk_depend(bullet3 BulletCollision)
+dk_depend(bullet3 BulletDynamics)
+dk_depend(bullet3 BulletSoftBody)
+dk_depend(bullet3 LinearMath)
+
 #dk_depend(bullet BulletMultiThreaded)  ##  BROKEN
 #dk_depend(bullet MiniCL)  ##  BROKEN
 ##osgBullet
