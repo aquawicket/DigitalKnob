@@ -1,3 +1,4 @@
+return() #remove this
 # http://www.app.com
 # http://www.app.com/downloads/app-1.0.exe
 
