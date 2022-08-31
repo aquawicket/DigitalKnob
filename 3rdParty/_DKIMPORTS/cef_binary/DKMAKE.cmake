@@ -57,6 +57,10 @@
 # https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_linuxarm64_minimal.tar.bz2
 # https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_linuxarm64_client.tar.bz2
 
+if(IOS OR IOSSIM)
+	return()
+endif()
+
 MAC_dk_depend(appkit)
 LINUX_dk_depend(build-essential)
 LINUX_dk_depend(libgtk2.0-dev)
