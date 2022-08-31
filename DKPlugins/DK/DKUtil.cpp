@@ -411,9 +411,9 @@ bool DKUtil::GetScreenWidth(int& w){
 }
 
 bool DKUtil::GetThreadId(unsigned long int& id){
-	DKDEBUGFUNC(id);
+	//DKDEBUGFUNC(id);
 	id = DKUtil::mainThreadId;
-	return true && DKDEBUGRETURN(id);
+	return true;//&& DKDEBUGRETURN(id);
 }
 
 // https://people.cs.rutgers.edu/~pxk/416/notes/c-tutorials/gettime.html
@@ -508,9 +508,9 @@ bool DKUtil::InitFramerate(){
 bool DKUtil::KeyIsDown(int& key){
 	DKDEBUGFUNC(key);
 #	if WIN32
-		return DKWindows::KeyIsDown(key);
+		return DKWindows::KeyIsDown(key) && DKDEBUGRETURN(key);
 #	elif LINUX
-		return DKLinux::KeyIsDown(key);
+		return DKLinux::KeyIsDown(key) && DKDEBUGRETURN(key);
 #	else
 		return DKERROR("not implemented on this OS\n");
 #	endif
@@ -611,7 +611,7 @@ bool DKUtil::PhysicalMemory(unsigned long long& physicalMemory){
 #	elif LINUX
 		return DKLinux::PhysicalMemory(physicalMemory) && DKDEBUGRETURN(physicalMemory);
 #	else
-	return DKERROR("not implemented on this OS\n");//&& DKDEBUGRETURN(physicalMemory);
+	return DKERROR("not implemented on this OS\n");
 #	endif
 }
 
@@ -712,8 +712,8 @@ bool DKUtil::Round(double& num){
 	return true && DKDEBUGRETURN(num);
 }
 
-bool DKUtil::Run(const DKString& command, const DKString& params){
-	DKDEBUGFUNC(command, params);
+bool DKUtil::Run(const DKString& command, const DKString& params /*, rtnvalue*/) {
+	DKDEBUGFUNC(command, params/*, rtnvalue*/);
 #	if WIN32
 		DKString error;
 		PVOID OldValue = NULL;
@@ -722,13 +722,11 @@ bool DKUtil::Run(const DKString& command, const DKString& params){
 			DKWindows::GetLastError(error);
 			return DKERROR("Wow64DisableWow64FsRedirection() failed: "+error+"\n");
 		}
-
 		//https://msdn.microsoft.com/en-us/library/windows/desktop/bb762153(v=vs.85).aspx
 		if(ShellExecute(NULL, "open", command.c_str(), params.c_str(), NULL, SW_SHOWNORMAL) < (HINSTANCE)32){
 			DKWindows::GetLastError(error);
 			return DKERROR("ShellExecute() failed: "+error+"\n");
 		}
-
 		//  Immediately re-enable redirection. 
 		if(Wow64RevertWow64FsRedirection(OldValue) == FALSE){
 			DKWindows::GetLastError(error);
@@ -921,10 +919,10 @@ bool DKUtil::UpdateFps(){
 	// frametimesindex is the position in the array. It ranges from 0 to FRAME_VALUES.
 	// This value rotates back to 0 after it hits FRAME_VALUES.
 	frametimesindex = framecount % FRAME_VALUES;
-	DKUtil::GetTicks(getticks);// store the current time
-	frametimes[frametimesindex] = getticks - frametimelast; // save the frame time value
-	frametimelast = getticks; // save the last frame time for the next UpdateFps()
-	framecount++; // increment the frame count
+	DKUtil::GetTicks(getticks);								// store the current time
+	frametimes[frametimesindex] = getticks - frametimelast;	// save the frame time value
+	frametimelast = getticks;								// save the last frame time for the next UpdateFps()
+	framecount++;											// increment the frame count
 	if(framecount < FRAME_VALUES)
 		count = framecount;
 	else
@@ -941,11 +939,11 @@ bool DKUtil::UpdateFps(){
 bool DKUtil::VirtualMemory(unsigned long long& virtualMemory){
 	DKDEBUGFUNC(virtualMemory);
 #	if WIN32
-		return DKWindows::VirtualMemory(virtualMemory);
+		return DKWindows::VirtualMemory(virtualMemory) && DKDEBUGRETURN(virtualMemory);
 #	elif MAC
-		return DKMac::VirtualMemory(virtualMemory);
+		return DKMac::VirtualMemory(virtualMemory) && DKDEBUGRETURN(virtualMemory);
 #	elif LINUX
-		return DKLinux::VirtualMemory(virtualMemory);
+		return DKLinux::VirtualMemory(virtualMemory) && DKDEBUGRETURN(virtualMemory);
 #	else
 		return DKERROR("not implemented on this OS\n");
 #	endif
@@ -954,11 +952,11 @@ bool DKUtil::VirtualMemory(unsigned long long& virtualMemory){
 bool DKUtil::VirtualMemoryUsed(unsigned long long& virtualMemory){
 	DKDEBUGFUNC(virtualMemory);
 #	if WIN32
-		return DKWindows::VirtualMemoryUsed(virtualMemory);
+		return DKWindows::VirtualMemoryUsed(virtualMemory) && DKDEBUGRETURN(virtualMemory);
 #	elif MAC
-		return DKMac::VirtualMemoryUsed(virtualMemory);
+		return DKMac::VirtualMemoryUsed(virtualMemory) && DKDEBUGRETURN(virtualMemory);
 #	elif LINUX
-		return DKLinux::VirtualMemoryUsed(virtualMemory);
+		return DKLinux::VirtualMemoryUsed(virtualMemory) && DKDEBUGRETURN(virtualMemory);
 #	else
 		return DKERROR("not implemented on this OS\n");
 #	endif
@@ -967,11 +965,11 @@ bool DKUtil::VirtualMemoryUsed(unsigned long long& virtualMemory){
 bool DKUtil::VirtualMemoryUsedByApp(unsigned long long& virtualMemory){
 	DKDEBUGFUNC(virtualMemory);
 #	if WIN32
-		return DKWindows::VirtualMemoryUsedByApp(virtualMemory);
+		return DKWindows::VirtualMemoryUsedByApp(virtualMemory) && DKDEBUGRETURN(virtualMemory);
 #	elif MAC
-		return DKMac::VirtualMemoryUsedByApp(virtualMemory);
+		return DKMac::VirtualMemoryUsedByApp(virtualMemory) && DKDEBUGRETURN(virtualMemory);
 #	elif LINUX
-		return DKLinux::VirtualMemoryUsedByApp(virtualMemory);
+		return DKLinux::VirtualMemoryUsedByApp(virtualMemory) && DKDEBUGRETURN(virtualMemory);
 #	else
 		return DKERROR("not implemented on this OS\n");
 #	endif

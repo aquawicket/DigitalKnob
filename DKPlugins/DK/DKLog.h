@@ -109,9 +109,17 @@ void printVariable(const DKString& name, T t, std::ostringstream& out) {
 #	else
 		type += "unknown";
 #	endif
-	value << "\"" << t << "\"";
+		//value << "\"" << t << "\"";
+		value << "\"";
+		//value << t;
+		value << "\"";
 	replace(type, " *", "*");
-	out << "<" << type << ">\"" << name << "\":" << value.str();
+	if (same(value.str(), "\"")) {
+		out << "<" << type << ">\"" << name << "\":";
+	}
+	else {
+		out << "<" << type << ">\"" << name << "\":" << value.str();
+	}
 }
 
 template<typename T, typename std::enable_if<!is_streamable<std::ostream, T>::value>::type* = nullptr>
