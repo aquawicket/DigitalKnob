@@ -6,7 +6,8 @@
 dk_import(https://github.com/emscripten-core/emsdk.git)
 
 
-dk_command("${EMSCRIPTEN}/emsdk update")
-dk_command(${EMSCRIPTEN}/emsdk install latest)
-dk_command(${EMSCRIPTEN}/emsdk install activate latest)
-dk_command(${EMSCRIPTEN}/emsdk_env.bat)
+#dk_command("${EMSCRIPTEN}/emsdk update")
+dk_command(${EMSDK}/emsdk update)
+dk_command(${EMSDK}/emsdk install latest)
+dk_command(${EMSDK}/emsdk install activate latest)
+dk_command(${EMSDK}/emsdk_env.bat)
