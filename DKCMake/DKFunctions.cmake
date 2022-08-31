@@ -1672,6 +1672,8 @@ function(dk_install plugin) #PATCH
 			else()
 				set(FILETYPE "Executable")
 			endif()
+		elseif(${url_extension} STREQUAL ".dmg")
+			set(FILETYPE "Executable")
 		elseif(${url_extension} STREQUAL ".gz")
 			set(FILETYPE "Archive")
 		elseif(${url_extension} STREQUAL ".js")
