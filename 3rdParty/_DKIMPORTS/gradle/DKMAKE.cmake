@@ -1,5 +1,5 @@
 # https://github.com/gradle/gradle
 
-dk_depend(jdk11)
+dk_depend(openjdk)
 
 dk_import(https://github.com/gradle/gradle.git)
