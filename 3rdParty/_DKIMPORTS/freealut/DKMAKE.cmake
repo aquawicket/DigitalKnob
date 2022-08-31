@@ -25,7 +25,7 @@ UNIX_dk_libRelease	(${FREEALUT}/${OS}/${RELEASE_DIR}/libalut_static.a)
 
 
 ### GENERATE ###
-dk_setPath(${CRYPTO}/${BUILD_DIR})
+dk_setPath(${FREEALUT}/${BUILD_DIR})
 #WIN_dk_queueCommand	(${DKCMAKE_BUILD} ${OPENAL_CMAKE} "-DCMAKE_C_FLAGS=/DWIN64 /D_WINDOWS /W3 /nologo /GR /EHsc /I${OPENAL}/include/AL /I${MSINTTYPES} /DAL_LIBTYPE_STATIC" ${FREEALUT})
 WIN_dk_queueCommand		(${DKCMAKE_BUILD} ${OPENAL_CMAKE} "-DCMAKE_C_FLAGS=/DAL_LIBTYPE_STATIC /I${OPENAL}/include/AL /I${MSINTTYPES}" ${FREEALUT})
 MAC_dk_queueCommand		(${DKCMAKE_BUILD} ${OPENAL_CMAKE} ${FREEALUT})
