@@ -7,7 +7,9 @@
 dk_import(https://github.com/emscripten-core/emsdk.git BRANCH main)
 
 
-dk_command(${EMSDK}/emsdk update)
+if(NOT MAC) 
+	dk_command(${EMSDK}/emsdk update)
+endif()
 dk_command(${EMSDK}/emsdk install latest)
 dk_command(${EMSDK}/emsdk install activate latest)
 dk_command(${EMSDK}/emsdk_env.bat)
