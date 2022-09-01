@@ -3,6 +3,10 @@
 # https://web.archive.org/web/20200916073634/https://ffmpeg.zeranoe.com/builds/win64/shared/ffmpeg-20200828-ccc7120-win64-shared.zip
 # https://web.archive.org/web/20200919011114mp_/https://ffmpeg.zeranoe.com/builds/macos64/shared/ffmpeg-20200831-4a11a6f-macos64-shared.zip
 
+if(NOT WIN AND NOT MAC)
+	return()
+endif()
+
 #dk_set(FFMPEG-SHARED_VERSION 20200831-4a11a6f)
 #dk_set(FFMPEG-SHARED_NAME ffmpeg-${FFMPEG-SHARED_VERSION}-${OS}-shared)
 #WIN32_dk_set(FFMPEG-SHARED_DL https://web.archive.org/web/20200918193207/https://ffmpeg.zeranoe.com/builds/win32/shared/ffmpeg-20200831-4a11a6f-win32-shared.zip)

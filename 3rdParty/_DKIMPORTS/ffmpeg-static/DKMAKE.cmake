@@ -1,5 +1,9 @@
 # https://web.archive.org/web/20200916125901if_/https://ffmpeg.zeranoe.com/builds/win32/static/ffmpeg-20200831-4a11a6f-win32-static.zip
 
+if(NOT WIN AND NOT MAC)
+	return()
+endif()
+
 #dk_set(FFMPEG_VERSION 20200831-4a11a6f)
 #dk_set(FFMPEG_NAME ffmpeg-${FFMPEG_VERSION}-${OS}-static)
 #dk_set(FFMPEG_DL https://web.archive.org/web/20200916125901if_/https://ffmpeg.zeranoe.com/builds/${OS}/static/${FFMPEG_NAME}.zip)

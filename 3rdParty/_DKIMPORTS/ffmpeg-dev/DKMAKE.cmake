@@ -3,6 +3,11 @@
 # https://web.archive.org/web/20200914204045/https://ffmpeg.zeranoe.com/builds/win64/dev/ffmpeg-20200831-4a11a6f-win64-dev.zip
 # https://web.archive.org/web/20200919011114mp_/https://ffmpeg.zeranoe.com/builds/macos64/dev/ffmpeg-20200831-4a11a6f-macos64-dev.zip
 
+if(NOT WIN AND NOT MAC)
+	return()
+endif()
+
+
 dk_depend(visualstudio)
 
 ### VERSION ###
