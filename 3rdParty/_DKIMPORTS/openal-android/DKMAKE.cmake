@@ -1,3 +1,5 @@
+return() # migrated to /_DKIMPORTS/openal/DKMAKE.cmake
+
 # https://openal.org/
 # https://openal-soft.org/
 # https://github.com/native-toolkit/openal-android

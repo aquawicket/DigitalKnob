@@ -25,8 +25,8 @@ include_guard()
 
 
 # DISABLED FOR ALL
-dk_disable(_TEMPLATE-APP_)
-dk_disable(_TEMPLATE-LIB_)
+#dk_disable(_TEMPLATE-APP_)
+#dk_disable(_TEMPLATE-LIB_)
 dk_disable(android-java-tools)
 dk_disable(astyle)
 dk_disable(bullet3)
@@ -112,7 +112,6 @@ if(MAC)  # Disabled on Mac host machines
 	dk_disable(android-build-tools)
 	dk_disable(android-ndk)
 	dk_disable(android-platform-tools)
-	dk_disable(build-essential)
 	dk_disable(bzip2)
 	dk_disable(DKMySql)
 	dk_disable(DKOcr)
@@ -145,11 +144,6 @@ if(MAC)  # Disabled on Mac host machines
 endif()
 
 if(IOS OR IOSSIM)
-	#dk_disable(agl)
-	#dk_disable(android-build-tools)
-	#dk_disable(android-ndk)
-	#dk_disable(android-platform-tools)
-	#dk_disable(audiounit)
 	dk_disable(boost)
 	dk_disable(boxer)
 	dk_disable(bzip2)
@@ -200,8 +194,6 @@ endif()
 
 
 if(NOT LINUX AND NOT RASPBERRY) # Disabled NON Linux targets -> "Disabled for: WINDOWS, MAC, IOS, ANDROID"
-	dk_disable(build-essential)
-	dk_disable(kdevelop)
 	dk_disable(libasound2-dev)
 	dk_disable(libgl1-mesa-dev)
 	dk_disable(libglib2.0-dev)
