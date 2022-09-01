@@ -1,3 +1,5 @@
+return() # disabled for now
+
 # https://www.java.com/en/download/
 #
 # jre-8u311-windows-x64.exe

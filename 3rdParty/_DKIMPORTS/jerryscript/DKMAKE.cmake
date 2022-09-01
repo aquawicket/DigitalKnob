@@ -3,7 +3,7 @@
 
 
 
-dk_import(https://github.com/jerryscript-project/jerryscript)
+dk_import(https://github.com/jerryscript-project/jerryscript.git)
 #dk_set(JERRYSCRIPT_VERSION 2.4.0)
 #dk_set(JERRYSCRIPT_NAME jerryscript-${JERRYSCRIPT_VERSION})
 #dk_set(JERRYSCRIPT_DL https://github.com/jerryscript-project/jerryscript/archive/refs/tags/v2.4.0.zip)
