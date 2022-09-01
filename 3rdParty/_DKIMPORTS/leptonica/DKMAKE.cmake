@@ -18,7 +18,7 @@ ENDIF()
 dk_depend(giflib)
 
 
-dk_import(https://github.com/DanBloomberg/leptonica)
+dk_import(https://github.com/DanBloomberg/leptonica.git)
 #dk_set(LEPTONICA_MAJOR 1)
 #dk_set(LEPTONICA_MINOR 82)
 #dk_set(LEPTONICA_BUILD 0)
