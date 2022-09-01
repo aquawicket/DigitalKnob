@@ -1,6 +1,6 @@
 # https://developer.apple.com/documentation/audiounit
 
-if(NOT MAC_HOST)
+if(NOT MAC)
 	return()
 endif()
 
