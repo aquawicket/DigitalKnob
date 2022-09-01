@@ -1,3 +1,4 @@
+return() # FIXME: currently disabled
 # https://github.com/gradle/gradle
 
 dk_depend(openjdk)
