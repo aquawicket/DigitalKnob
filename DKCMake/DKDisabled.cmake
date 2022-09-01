@@ -61,7 +61,7 @@ dk_disable(DKTorrent)
 dk_disable(DKUpdate)
 dk_disable(DKVncClient)
 dk_disable(DKVncServer)
-dk_disable(emsdk)
+#dk_disable(emsdk)
 dk_disable(gradle)
 dk_disable(java)
 dk_disable(jpeg)                     # using libjpeg_turbo instead
@@ -89,8 +89,6 @@ if(NOT WIN_HOST) # Disabled on Non-Windows host machines
 endif()
 if(WIN) # Disabled for Windows targets
 	dk_disable(DKOcr)
-	dk_disable(freealut)
-	dk_disable(java)
 	dk_disable(jerryscript)
 	dk_disable(leptonica)
 	dk_disable(libtorrent)
@@ -98,7 +96,6 @@ if(WIN) # Disabled for Windows targets
 	dk_disable(libwebsockets)
 	dk_disable(lighttpd)
 	dk_disable(lua)
-	#dk_disable(openal)
 	dk_disable(openal-android)
 	dk_disable(opensles)
 	dk_disable(tesseract)
@@ -108,7 +105,6 @@ if(WIN_32) # Disabled for Windows 32bit targets
 	#
 endif()
 if(WIN_64) # Disabled for Windows 64bit targets
-	dk_disable(java)
 	dk_disable(smpeg2)
 endif()
 
@@ -117,7 +113,6 @@ if(MAC)  # Disabled on Mac host machines
 	dk_disable(android-build-tools)
 	dk_disable(android-ndk)
 	dk_disable(android-platform-tools)
-	dk_disable(boxer)
 	dk_disable(build-essential)
 	dk_disable(bzip2)
 	dk_disable(DKMySql)
