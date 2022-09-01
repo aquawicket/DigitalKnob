@@ -196,6 +196,7 @@ if(IOS OR IOSSIM)
 	dk_disable(smpeg2)
 	dk_disable(tesseract)
 	dk_disable(tidy-html5)
+	dk_disable(tiff)
 	dk_disable(waave)
 endif()
 
