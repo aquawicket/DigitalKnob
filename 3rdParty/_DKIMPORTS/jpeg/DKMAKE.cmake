@@ -1,5 +1,6 @@
+return() # USING libjpeg-turbo instead
+
 # http://www.ijg.org/
-#
 # https://www.ijg.org/files/jpegsr9d.zip
 
 
