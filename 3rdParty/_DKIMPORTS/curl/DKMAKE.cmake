@@ -4,11 +4,13 @@
 # https://robertying.io/posts/compile-openssl-and-curl-for-android
 
 
-dk_depend(ws2_32.lib)
-dk_depend(system_configuration)
 dk_depend(dl)
-dk_depend(zlib)
+dk_depend(libssh)
 dk_depend(openssl)
+dk_depend(system_configuration)
+dk_depend(ws2_32.lib)
+dk_depend(zlib)
+
 
 
 WIN_dk_import(https://github.com/curl/curl/archive/refs/tags/curl-7_43_0.zip)
