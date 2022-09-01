@@ -61,7 +61,6 @@ dk_disable(DKTorrent)
 dk_disable(DKUpdate)
 dk_disable(DKVncClient)
 dk_disable(DKVncServer)
-#dk_disable(emsdk)
 dk_disable(gradle)
 dk_disable(java)
 dk_disable(jpeg)                     # using libjpeg_turbo instead
