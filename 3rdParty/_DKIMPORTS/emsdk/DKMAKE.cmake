@@ -7,11 +7,11 @@
 dk_import(https://github.com/emscripten-core/emsdk.git BRANCH main)
 
 
-if(NOT MAC) 
+if(NOT MAC AND NOT IOS AND NOT IOSSIM) 
 	dk_command(${EMSDK}/emsdk update)
 endif()
 dk_command(${EMSDK}/emsdk install latest)
-if(NOT MAC)
+if(NOT MAC AND NOT IOS AND NOT IOSSIM) 
 	dk_command(${EMSDK}/emsdk install activate latest)
 endif()
 WIN_dk_command(${EMSDK}/emsdk_env.bat)
