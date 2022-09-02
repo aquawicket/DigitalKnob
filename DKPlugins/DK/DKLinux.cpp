@@ -288,7 +288,7 @@ bool DKLinux::VirtualMemoryUsed(unsigned long long& virtualMemory){
 	return DKERROR("not implemented\n");
 }
 
-bool DKLinux::VirtualMemoryUsedByApp(unsigned int& virtualMemory){
+bool DKLinux::VirtualMemoryUsedByApp(unsigned long long& virtualMemory){
 	DKDEBUGFUNC(virtualMemory);
 	//TODO
 	/*
@@ -345,7 +345,7 @@ bool DKLinux::PhysicalMemoryUsed(unsigned long long& physicalMemory){
 	return DKERROR("not implemented\n");
 }
 
-bool DKLinux::PhysicalMemoryUsedByApp(unsigned int& physicalMemory){
+bool DKLinux::PhysicalMemoryUsedByApp(unsigned long long& physicalMemory){
 	DKDEBUGFUNC(physicalMemory);
 	//TODO
 	/*

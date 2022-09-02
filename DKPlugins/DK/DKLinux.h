@@ -59,7 +59,7 @@ public:
 	static bool LowPowerMonitor();
 	static bool PhysicalMemory(unsigned long long& physicalMemory);
 	static bool PhysicalMemoryUsed(unsigned long long& physicalMemory);
-	static bool PhysicalMemoryUsedByApp(unsigned int& physicalMemory);
+	static bool PhysicalMemoryUsedByApp(unsigned long long& physicalMemory);
 	static bool Run(const DKString& command, int& rtnvalue);
 	static bool SetClipboard(const DKString& text);
 	static bool SetVolume(double nVolume);
@@ -68,7 +68,7 @@ public:
 	static bool TurnOnMonitor();
 	static bool VirtualMemory(unsigned long long& virtualMemory);
 	static bool VirtualMemoryUsed(unsigned long long& virtualMemory);
-	static bool VirtualMemoryUsedByApp(unsigned int& virtualMemory);
+	static bool VirtualMemoryUsedByApp(unsigned long long& virtualMemory);
 };
 
 #endif //DKLinux_H
