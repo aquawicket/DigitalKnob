@@ -83,8 +83,8 @@ dk_disable(simple-getch)            # kept for reference
 
 
 if(NOT WIN_HOST) # Disabled on Non-Windows host machines
-	dk_disable(android-studio)
-	dk_disable(php-src)
+	#dk_disable(android-studio)
+	#dk_disable(php-src)
 endif()
 if(WIN) # Disabled for Windows targets
 	dk_disable(DKOcr)
@@ -95,7 +95,7 @@ if(WIN) # Disabled for Windows targets
 	dk_disable(libwebsockets)
 	dk_disable(lighttpd)
 	dk_disable(lua)
-	dk_disable(openal-android)
+	#dk_disable(openal-android)
 	dk_disable(opensles)
 	dk_disable(tesseract)
 	dk_disable(waave)
