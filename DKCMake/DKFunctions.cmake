@@ -1700,6 +1700,7 @@ function(dk_install plugin) #PATCH
 		dk_debug("We will try to extract it in case it's an archive, but it may fail.")
 	endif()
 	if(${FILETYPE} STREQUAL "Archive")
+		dk_info("Extracting ${dl_filename}")
 		dk_remove(${DKDOWNLOAD}/UNZIPPED NOERROR)
 		dk_extract(${DKDOWNLOAD}/${dl_filename} ${DKDOWNLOAD}/UNZIPPED)
 		# We either have a root folder in /UNZIPPED, or multiple files without a root folder
