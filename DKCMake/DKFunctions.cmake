@@ -1682,6 +1682,8 @@ function(dk_install plugin) #PATCH
 			set(FILETYPE "Archive")
 		elseif(${url_extension} STREQUAL ".tar")
 			set(FILETYPE "Archive")
+		elseif(${url_extension} STREQUAL ".tgz")
+			set(FILETYPE "Archive")
 		elseif(${url_extension} STREQUAL ".xz")
 			set(FILETYPE "Archive")
 		elseif(${url_extension} STREQUAL ".zip")
