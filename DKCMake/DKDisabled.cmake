@@ -88,6 +88,7 @@ if(NOT WIN_HOST) # Disabled on Non-Windows host machines
 endif()
 if(WIN) # Disabled for Windows targets
 	dk_disable(DKOcr)
+	dk_disable(freealut)
 	dk_disable(jerryscript)
 	dk_disable(leptonica)
 	dk_disable(libtorrent)
@@ -230,7 +231,7 @@ if(LINUX) # Disabled for Linux targets
 	dk_disable(libxml2)
 	dk_disable(lighttpd)
 	dk_disable(lua)
-	dk_disable(python)
+	#dk_disable(python)
 	dk_disable(rtmidi)
 	dk_disable(sdl-gpu)
 	dk_disable(sfml)           # sfml_sfml-network)  #TODO: disabling individual sublibraries
