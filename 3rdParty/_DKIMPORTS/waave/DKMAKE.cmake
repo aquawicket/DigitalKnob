@@ -7,7 +7,7 @@ dk_depend(ffmpeg-static)
 dk_depend(sdl)
 
 
-dk_import(https://sourceforge.net/projects/waave/files/waave/waave-3.01.tar.gz)
+dk_import(https://sourceforge.net/projects/waave/files/waave/waave-3.01.tar.gz PATCH)
 #dk_import(git://git.code.sf.net/p/waave/code)
 
 
