@@ -323,6 +323,7 @@ if(ANDROID) # Disabled for Android targets
 	dk_disable(stackwalker)
 	dk_disable(tesseract)
 	dk_disable(tidy-html5)
+	dk_disable(tiff)
 	dk_disable(uwebsockets)
 	dk_disable(xz)
 	dk_disable(waave)
