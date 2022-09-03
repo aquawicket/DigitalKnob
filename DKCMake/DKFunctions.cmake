@@ -2899,15 +2899,15 @@ function(dk_runDepends plugin)
 	foreach(line ${lines})
 		
 		foreach(keepCommand ${keepCommands})
-			dk_includes("${line}" "${keepCommand}(" hasCommand)
+			dk_includes("${line}" "${keepCommand}(" hasCommand) # trailing (
 			if(${hasCommand})
 				set(KEEPLINE 1)
 			endif()
-			dk_includes("${line}" "${keepCommand} " hasCommand)
+			dk_includes("${line}" "${keepCommand} " hasCommand) # trailing space
 			if(${hasCommand})
 				set(KEEPLINE 1)
 			endif()
-			dk_includes("${line}" "${keepCommand}	" hasCommand)
+			dk_includes("${line}" "${keepCommand}	" hasCommand) # trailing tab
 			if(${hasCommand})
 				set(KEEPLINE 1)
 			endif()
@@ -2929,15 +2929,15 @@ function(dk_runDepends plugin)
 	foreach(line ${lines})
 	
 		foreach(keepCommand ${keepCommands})
-			dk_includes("${line}" "${keepCommand}(" hasCommand)
+			dk_includes("${line}" "${keepCommand}(" hasCommand) # trailing (
 			if(${hasCommand})
 				set(KEEPLINE 1)
 			endif()
-			dk_includes("${line}" "${keepCommand} " hasCommand)
+			dk_includes("${line}" "${keepCommand} " hasCommand) # trailing space
 			if(${hasCommand})
 				set(KEEPLINE 1)
 			endif()
-			dk_includes("${line}" "${keepCommand}	" hasCommand)
+			dk_includes("${line}" "${keepCommand}	" hasCommand) # trailing tab
 			if(${hasCommand})
 				set(KEEPLINE 1)
 			endif()
@@ -4032,15 +4032,15 @@ function(dk_DownloadAll3rdParty)
 			foreach(line ${lines})
 			
 				foreach(keepCommand ${keepCommands})
-					dk_includes("${line}" "${keepCommand}(" hasCommand)
+					dk_includes("${line}" "${keepCommand}(" hasCommand) # trailing (
 					if(${hasCommand})
 						set(KEEPLINE 1)
 					endif()
-					dk_includes("${line}" "${keepCommand} " hasCommand)
+					dk_includes("${line}" "${keepCommand} " hasCommand) # trailing space
 					if(${hasCommand})
 						set(KEEPLINE 1)
 					endif()
-					dk_includes("${line}" "${keepCommand}	" hasCommand)
+					dk_includes("${line}" "${keepCommand}	" hasCommand) # trailing tab
 					if(${hasCommand})
 						set(KEEPLINE 1)
 					endif()
