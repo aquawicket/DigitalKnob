@@ -99,7 +99,7 @@ if(WIN) # Disabled for Windows targets
 	#dk_disable(openal-android)
 	dk_disable(opensles)
 	dk_disable(tesseract)
-	dk_disable(waave)
+	#dk_disable(waave)
 endif()
 if(WIN_32) # Disabled for Windows 32bit targets
 	#
@@ -241,6 +241,7 @@ if(LINUX) # Disabled for Linux targets
 	dk_disable(tesseract)
 	dk_disable(tiff)
 	dk_disable(upx)
+	dk_disable(uwebsockets)
 	dk_disable(waave)
 endif()
 
