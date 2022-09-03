@@ -58,6 +58,11 @@ WIN_dk_libDebug(${FFMPEG-DEV}/lib/swscale.lib)
 WIN_dk_libRelease(${FFMPEG-DEV}/lib/swscale.lib)
 
 
+### 3RDPARTY LINK ###
+# TODO
+dk_set(FFMPEG-DEV_CMAKE -DFFMPEG_INCLUDE_DIR=${FFMPEG-DEV})
+
+
 ### COMPILE ###
 WIN_dk_queueCommand(call C:/Windows/System32/cmd.exe /K ${VISUALSTUDIO}/VC/vcvarsall.bat amd64)
 WIN_dk_queueCommand(${VISUALSTUDIO}/VC/bin/amd64_x86/lib.exe /machine:i386 /def:${FFMPEG-DEV}/lib/avcodec-56.def /out:${FFMPEG-DEV}/lib/avcodec.lib & 
