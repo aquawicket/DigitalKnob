@@ -116,10 +116,10 @@ dk_set(IOSSIM_SYSROOT	${XCODE_DEVROOT}/Platforms/iPhoneSimulator.platform/Develo
 # linux variables
 dk_set(LINUX_GCC		/usr/bin/gcc)
 dk_set(LINUX_GXX		/usr/bin/g++)
-if(LINUX)
-	set(CMAKE_C_COMPILER "/usr/bin/gcc")
-	set(CMAKE_CXX_COMPILER "/usr/bin/g++")
-endif()
+#if(LINUX)
+#	set(CMAKE_C_COMPILER "/usr/bin/gcc")
+#	set(CMAKE_CXX_COMPILER "/usr/bin/g++")
+#endif()
 
 # Visual C++ variables 
 dk_set(MSVC_CL			C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.30.30705/bin/Hostx64/x86/cl.exe)
