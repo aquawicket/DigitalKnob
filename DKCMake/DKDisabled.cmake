@@ -88,7 +88,7 @@ endif()
 if(WIN) # Disabled for Windows targets
 	dk_disable(android-java-tools)
 	dk_disable(DKOcr)
-	dk_disable(DKSDLWindow)
+	dk_disable(DKSFMLWindow)
 	dk_disable(freealut)
 	dk_disable(jerryscript)
 	dk_disable(leptonica)
