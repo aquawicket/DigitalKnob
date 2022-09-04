@@ -226,6 +226,7 @@ if(LINUX) # Disabled for Linux targets
 	dk_disable(libxml2)
 	dk_disable(lighttpd)
 	dk_disable(lua)
+	dk_disable(podofo)
 	dk_disable(rtmidi)
 	dk_disable(sdl-gpu)
 	dk_disable(sfml)           # sfml_sfml-network)  #TODO: disabling individual sublibraries
