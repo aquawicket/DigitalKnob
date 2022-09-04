@@ -602,7 +602,7 @@ bool DKCefWindow::SetHeight(const void* input, void* output){
 			return DKERROR("gdk_window invalid\n");
 		int width;
 		if (!GetWidth(NULL, &width))
-			return DKEROR("GetWidth() failed\n");
+			return DKERROR("GetWidth() failed\n");
 		int height = *(int*)input;
 		gdk_window_resize(gdk_window, width, height);
 		return true;
@@ -664,7 +664,7 @@ bool DKCefWindow::SetTitle(const void* input, void* output){
 #	ifdef USE_GDK
 		GdkWindow* gdk_window = gdk_window_foreign_new(dkCef->current_browser->GetHost()->GetWindowHandle());
 		if (!gdk_window)
-			return DKEROR("gdk_window invalid\n");
+			return DKERROR("gdk_window invalid\n");
 		gdk_window_set_title(gdk_window, "test");
 		return true;
 #	endif //USE_GDK
