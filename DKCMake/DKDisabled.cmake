@@ -219,6 +219,7 @@ if(LINUX) # Disabled for Linux targets
 	dk_disable(DKSFMLRml)
 	dk_disable(DKSFMLWindow)
 	dk_disable(DKTorrent)
+	dk_disable(DKWebSockets)
 	dk_disable(freealut)
 	dk_disable(giflib)
 	dk_disable(imagemagick)
