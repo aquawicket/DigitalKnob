@@ -113,7 +113,7 @@ endif()
 if(MAC)  # Disabled on Mac host machines
 	dk_disable(DKMySql)
 	dk_disable(DKOcr)
-	#dk_disable(freealut)
+	dk_disable(freealut)
 	dk_disable(imagemagick)
 	dk_disable(java)
 	dk_disable(openjdk)
@@ -132,7 +132,7 @@ if(MAC)  # Disabled on Mac host machines
 	dk_disable(smpeg2)
 	dk_disable(terminator)
 	dk_disable(tesseract)
-	dk_disable(tidy-html5)
+	#dk_disable(tidy-html5)
 	dk_disable(waave)
 endif()
 
