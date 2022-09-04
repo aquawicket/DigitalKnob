@@ -98,8 +98,9 @@ if(WIN) # Disabled for Windows targets
 	dk_disable(lua)
 	#dk_disable(openal-android)
 	dk_disable(opensles)
+	dk_disable(sfml)
 	dk_disable(tesseract)
-	#dk_disable(waave)
+	dk_disable(waave)
 endif()
 if(WIN_32) # Disabled for Windows 32bit targets
 	#
