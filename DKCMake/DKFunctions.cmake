@@ -1138,6 +1138,7 @@ function(dk_copy from to) # OVERWRITE NOERROR
 		endif()
 	endif()
 endfunction()
+dk_createOsMacros("dk_copy")
 
 
 ###############################################################################
