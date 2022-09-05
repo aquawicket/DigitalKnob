@@ -263,6 +263,7 @@ if(RASPBERRY) # Disabled for Raspberry Pi targets
 	dk_disable(lua)
 	dk_disable(openal-android)
 	#dk_disable(python)
+	dk_disbale(rtmidi)
 	dk_disable(sdl-gpu)
 	dk_disable(stackwalker)
 	dk_disable(tesseract)
