@@ -269,6 +269,7 @@ if(RASPBERRY) # Disabled for Raspberry Pi targets
 	dk_disable(tesseract)
 	dk_disable(tiff)
 	dk_disable(upx)
+	dk_disable(uwebsockets)
 	dk_disable(waave)
 endif()
 
