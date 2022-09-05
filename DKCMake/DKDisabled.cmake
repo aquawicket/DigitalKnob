@@ -246,6 +246,7 @@ if(RASPBERRY) # Disabled for Raspberry Pi targets
 	dk_disable(DKMidi)
 	dk_disable(DKOcr)
 	dk_disable(DKWebSockets)
+	dk_disable(emsdk)
 	dk_disable(freealut)
 	dk_disable(giflib)
 	dk_disable(imagemagick)
