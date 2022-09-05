@@ -269,6 +269,7 @@ endif()
 
 
 if(ANDROID) # Disabled for Android targets
+	dk_disable(android-java-tools)
 	dk_disable(boxer)
 	dk_disable(bzip2)
 	dk_disable(cef_binary)
