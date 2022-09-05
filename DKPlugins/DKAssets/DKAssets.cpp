@@ -52,7 +52,7 @@ bool DKAssets::Init(){
 		DKLog::log_file = false;
 	}
 	else{
-#ifndef ANDROID
+#if !ANDROID
 	//clear the log file
 	std::ofstream file_log;
     DKString path = DKFile::local_assets+"log.txt";
@@ -61,7 +61,7 @@ bool DKAssets::Init(){
 #endif		
 	}
 
-#ifdef WIN32
+#if WIN32
 	DKString console;
 	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[CONSOLE]", console);
 #	if DEBUG
@@ -167,7 +167,7 @@ bool DKAssets::GetAssetsPath(DKString& path){
 	//If there is an assets directory below the app directory, then we are in a development environment.
 	//and we will point to that location for assets
 	
-#ifdef WIN32
+#if WIN32
 	if (DKFile::PathExists(DKFile::app_path + "../assets/") && 
 	    DKFile::PathExists(DKFile::app_path + "../DKMAKE.cmake")) {
 		if (DKFile::GetAbsolutePath(DKFile::app_path + "../assets/", path)) {
@@ -211,13 +211,13 @@ bool DKAssets::GetAssetsPath(DKString& path){
 	}
 	return false;
 #else
-	return DKERROR("DKAssets::GetAssetsPath() not implemented on this platform \n");
+	return DKERROR("not implemented on this OS \n");
 #endif
 }
 
 bool DKAssets::GetDataPath(DKString& path){
 	DKDEBUGFUNC(path);
-#ifdef WIN32
+#if WIN32
 	DKString apppath;
 	DKFile::GetAppPath(apppath);
 	DKString appname;
@@ -258,7 +258,7 @@ bool DKAssets::GetDataPath(DKString& path){
 	DKFile::MakeDir(path);
 	return false;
 #else
-	return DKERROR("DKAssets::GetDataPath() not implemented on this OS \n");
+	return DKERROR("not implemented on this OS \n");
 #endif
 }
 
@@ -313,8 +313,8 @@ bool DKAssets::DeployAssets(){
 #endif
 
 //Windows will use the resources interface
-#ifdef WIN32
-	DKINFO("Extracting assets from executable windows resources . . .\n");	
+#if WIN32
+	DKINFO("Extracting assets from executable windows resources . . . \n");	
 	HGLOBAL hResourceLoaded;		// handle to loaded resource 
 	HRSRC hRes;					// handle/ptr. to res. info. 
 	char *lpResLock;				// pointer to resource data 
@@ -339,8 +339,8 @@ bool DKAssets::DeployAssets(){
 	//}
 #endif
 
-#ifdef ANDROID
-	DKERROR("DKAssets::DeployAssets() is not implemented on android yet"); //NOTE: we have a CopyAssets() function for android somewhere
+#if ANDROID
+	DKERROR("not implemented this OS \n"); //NOTE: we have a CopyAssets() function for android somewhere
 #endif
 
 	//Restore User data

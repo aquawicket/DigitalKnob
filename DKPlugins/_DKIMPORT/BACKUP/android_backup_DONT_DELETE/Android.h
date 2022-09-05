@@ -26,7 +26,7 @@
 
 // AUTO-GENERATED FILE. "dkapp" is renamed.
 
-#ifdef ANDROID
+#if ANDROID
 #ifndef AndroidApp_H
 #define AndroidApp_H
 #include "DK/DKAndroid.h"

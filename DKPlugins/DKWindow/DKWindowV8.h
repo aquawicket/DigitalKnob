@@ -24,7 +24,7 @@
 * SOFTWARE.
 */
 
-#ifdef HAVE_DKCef
+#if HAVE_DKCef
 #pragma once
 #ifndef DKWindowV8_H
 #define DKWindowV8_H
