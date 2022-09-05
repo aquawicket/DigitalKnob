@@ -251,6 +251,7 @@ if(RASPBERRY) # Disabled for Raspberry Pi targets
 	dk_disable(giflib)
 	dk_disable(imagemagick)
 	dk_disable(java)
+	dk_disable(kdevelop)
 	dk_disable(openjdk)
 	dk_disable(jerryscript)
 	dk_disable(leptonica)
