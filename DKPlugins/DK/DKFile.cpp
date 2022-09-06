@@ -770,9 +770,9 @@ bool DKFile::MakeDir(const DKString& dir){
 	DKString path = dir;
 	DKFile::NormalizePath(path);
 	if(path.empty())
-		return DKERROR("path is empty\n");
+		return DKERROR("path is empty \n");
 	if(PathExists(path))
-		return DKWARN("path already exists");
+		return DKWARN("path already exists \n");
 	if (!fs::create_directories(path)) {
 		//fs::directory_iterator end_itr; // default construction yields past-the-end
 		//for (fs::directory_iterator itr(path); itr != end_itr; ++itr)
@@ -786,7 +786,7 @@ bool DKFile::PathExists(const DKString& path){
 	DebugPath(path);
 	if(fs::exists(path)) 
 		return true;
-	//DKWARN("DKFile::PathExists("+path+"): Path does not exist \n");
+	//DKWARN("path does not exist \n");
 	return false;
 }
 

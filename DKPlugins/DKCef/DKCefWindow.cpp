@@ -26,7 +26,7 @@
 
 #include "DK/stdafx.h"
 #include "DKCef/DKCefWindow.h"
-#ifdef MAC
+#if MAC
 	#import <AppKit/AppKit.h>
 #endif
 
@@ -147,7 +147,7 @@ bool DKCefWindow::Fullscreen(const void* input, void* output){
 	if (!nsview)
 		return DKERROR("nsview invalid\n");
 #elif LINUX
-#	ifdef USE_GDK
+#	if USE_GDK
 		GdkWindow* gdk_window = gdk_window_foreign_new(dkCef->current_browser->GetHost()->GetWindowHandle());
 		if (!gdk_window)
 			return DKERROR("gdk_window invalid\n");
@@ -176,7 +176,7 @@ bool DKCefWindow::GetHandle(const void* input, void* output){
 	*(NSView**)output = nsview;
 	return true;
 #elif LINUX
-#	ifdef USE_GDK
+#	if USE_GDK
 		GdkWindow* gdk_window = gdk_window_foreign_new(dkCef->current_browser->GetHost()->GetWindowHandle());
 		if (!gdk_window)
 			return DKERROR("gdk_window invalid\n");
@@ -209,7 +209,7 @@ bool DKCefWindow::GetHeight(const void* input, void* output){
 	*(int*)output = height;
 	return true;
 #elif LINUX
-#	ifdef USE_GDK
+#	if USE_GDK
 		GdkWindow* gdk_window = gdk_window_foreign_new(dkCef->current_browser->GetHost()->GetWindowHandle());
 		if (!gdk_window)
 			return DKERROR("gdk_window invalid\n");
@@ -242,7 +242,7 @@ bool DKCefWindow::GetMouseX(const void* input, void* output){
 	if (!nsview)
 		return DKERROR("nsview invalid\n");
 #elif LINUX
-#	ifdef USE_GDK
+#	if USE_GDK
 		GdkWindow* gdk_window = gdk_window_foreign_new(dkCef->current_browser->GetHost()->GetWindowHandle());
 		if (!gdk_window)
 			return DKERROR("gdk_window invalid\n");
@@ -272,7 +272,7 @@ bool DKCefWindow::GetMouseY(const void* input, void* output){
 	if (!nsview)
 		return DKERROR("nsview invalid\n");
 #elif LINUX
-#	ifdef USE_GDK
+#	if USE_GDK
 		GdkWindow* gdk_window = gdk_window_foreign_new(dkCef->current_browser->GetHost()->GetWindowHandle());
 		if (!gdk_window)
 			return DKERROR("gdk_window invalid\n");
@@ -303,7 +303,7 @@ bool DKCefWindow::GetWidth(const void* input, void* output){
 	*(int*)output = width;
 	return true;
 #elif LINUX
-#	ifdef USE_GDK
+#	if USE_GDK
 		GdkWindow* gdk_window = gdk_window_foreign_new(dkCef->current_browser->GetHost()->GetWindowHandle());
 		if (!gdk_window)
 			return DKERROR("gdk_window invalid");
@@ -335,7 +335,7 @@ bool DKCefWindow::GetX(const void* input, void* output){
 	if (!nsview)
 		return DKERROR("nsview invalid\n");
 #elif LINUX
-#	ifdef USE_GDK
+#	if USE_GDK
 		GdkWindow* gdk_window = gdk_window_foreign_new(dkCef->current_browser->GetHost()->GetWindowHandle());
 		if (!gdk_window)
 			return DKERROR("gdk_window invalid\n");
@@ -369,7 +369,7 @@ bool DKCefWindow::GetY(const void* input, void* output){
 	if (!nsview)
 		return DKERROR("nsview invalid\n");
 #elif LINUX
-#	ifdef USE_GDK
+#	if USE_GDK
 		GdkWindow* gdk_window = gdk_window_foreign_new(dkCef->current_browser->GetHost()->GetWindowHandle());
 		if (!gdk_window)
 			return DKERROR("gdk_window invalid\n");
@@ -400,7 +400,7 @@ bool DKCefWindow::Hide(const void* input, void* output){
 	if (!nsview)
 		return DKERROR("nsview invalid\n");
 #elif LINUX
-#	ifdef USE_GDK
+#	if USE_GDK
 		GdkWindow* gdk_window = gdk_window_foreign_new(dkCef->current_browser->GetHost()->GetWindowHandle());
 		if (!gdk_window)
 			return DKERROR("gdk_window invalid\n");
@@ -433,7 +433,7 @@ bool DKCefWindow::IsFullscreen(const void* input, void* output){
 	if (!nsview)
 		return DKERROR("nsview invalid\n");
 #elif LINUX
-#	ifdef USE_GDK
+#	if USE_GDK
 		GdkWindow* gdk_window = gdk_window_foreign_new(dkCef->current_browser->GetHost()->GetWindowHandle());
 		if (!gdk_window)
 			return DKERROR("gdk_window invalid\n");
@@ -462,7 +462,7 @@ bool DKCefWindow::IsVisible(const void* input, void* output){
 	if (!nsview)
 		return DKERROR("nsview invalid\n");
 #elif LINUX
-#	ifdef USE_GDK
+#	if USE_GDK
 		GdkWindow* gdk_window = gdk_window_foreign_new(dkCef->current_browser->GetHost()->GetWindowHandle());
 		if (!gdk_window)
 			return DKERROR("gdk_window invalid\n");
@@ -491,7 +491,7 @@ bool DKCefWindow::Maximize(const void* input, void* output){
 	if (!nsview)
 		return DKERROR("nsview invalid\n");
 #elif LINUX
-#	ifdef USE_GDK
+#	if USE_GDK
 		GdkWindow* gdk_window = gdk_window_foreign_new(dkCef->current_browser->GetHost()->GetWindowHandle());
 		if (!gdk_window)
 			return DKERROR("gdk_window invalid\n");
@@ -533,7 +533,7 @@ bool DKCefWindow::Minimize(const void* input, void* output){
 	if (!nsview)
 		return DKERROR("nsview invalid\n");
 #elif LINUX
-#	ifdef USE_GDK
+#	if USE_GDK
 		GdkWindow* gdk_window = gdk_window_foreign_new(dkCef->current_browser->GetHost()->GetWindowHandle());
 		if (!gdk_window)
 			return DKERROR("gdk_window invalid\n");
@@ -563,7 +563,7 @@ bool DKCefWindow::Restore(const void* input, void* output){
 	if (!nsview)
 		return DKERROR("nsview invalid\n");
 #elif LINUX
-#	ifdef USE_GDK
+#	if USE_GDK
 		GdkWindow* gdk_window = gdk_window_foreign_new(dkCef->current_browser->GetHost()->GetWindowHandle());
 		if (!gdk_window)
 			return DKERROR("gdk_window invalid\n");
@@ -596,7 +596,7 @@ bool DKCefWindow::SetHeight(const void* input, void* output){
 	if (!nsview)
 		return DKERROR("nsview invalid\n");
 #elif LINUX
-#	ifdef USE_GDK
+#	if USE_GDK
 		GdkWindow* gdk_window = gdk_window_foreign_new(dkCef->current_browser->GetHost()->GetWindowHandle());
 		if (!gdk_window)
 			return DKERROR("gdk_window invalid\n");
@@ -634,7 +634,7 @@ bool DKCefWindow::SetIcon(const void* input, void* output){
 	if (!nsview)
 		return DKERROR("nsview invalid\n");
 #elif LINUX
-#	ifdef USE_GDK
+#	if USE_GDK
 		//TODO
 		GdkWindow* gdk_window = gdk_window_foreign_new(dkCef->current_browser->GetHost()->GetWindowHandle());
 		if (!gdk_window)
@@ -661,7 +661,7 @@ bool DKCefWindow::SetTitle(const void* input, void* output){
 	if (!nsview)
 		return DKERROR("nsview invalid\n");
 #elif LINUX
-#	ifdef USE_GDK
+#	if USE_GDK
 		GdkWindow* gdk_window = gdk_window_foreign_new(dkCef->current_browser->GetHost()->GetWindowHandle());
 		if (!gdk_window)
 			return DKERROR("gdk_window invalid\n");
@@ -694,7 +694,7 @@ bool DKCefWindow::SetWidth(const void* input, void* output){
 	if (!nsview)
 		return DKERROR("nsview invalid\n");
 #elif LINUX
-#	ifdef USE_GDK
+#	if USE_GDK
 	GdkWindow* gdk_window = gdk_window_foreign_new(dkCef->current_browser->GetHost()->GetWindowHandle());
 	if (!gdk_window)
 		return DKERROR("gdk_window invalid\n");
@@ -732,7 +732,7 @@ bool DKCefWindow::SetX(const void* input, void* output){
 	if (!nsview)
 		return DKERROR("nsview invalid\n");
 #elif LINUX
-#	ifdef USE_GDK
+#	if USE_GDK
 		GdkWindow* gdk_window = gdk_window_foreign_new(dkCef->current_browser->GetHost()->GetWindowHandle());
 		if (!gdk_window)
 			return DKERROR("gdk_window invalid\n");
@@ -770,7 +770,7 @@ bool DKCefWindow::SetY(const void* input, void* output){
 	if (!nsview)
 		return DKERROR("nsview invalid\n");
 #elif LINUX
-#	ifdef USE_GDK
+#	if USE_GDK
 		GdkWindow* gdk_window = gdk_window_foreign_new(dkCef->current_browser->GetHost()->GetWindowHandle());
 		if (!gdk_window)
 			return DKERROR("gdk_window invalid\n");
@@ -801,7 +801,7 @@ bool DKCefWindow::Show(const void* input, void* output){
 	if (!nsview)
 		return DKERROR("nsview invalid\n");
 #elif LINUX
-#	ifdef USE_GDK
+#	if USE_GDK
 		/* FIXME
 		GdkWindow* gdk_window = gdk_window_foreign_new(dkCef->current_browser->GetHost()->GetWindowHandle());
 		if(!gdk_window)
@@ -838,7 +838,7 @@ bool DKCefWindow::Windowed(const void* input, void* output){
 	if (!nsview)
 		return DKERROR("nsview invalid\n");
 #elif LINUX
-#	ifdef USE_GDK
+#	if USE_GDK
 		GdkWindow* gdk_window = gdk_window_foreign_new(dkCef->current_browser->GetHost()->GetWindowHandle());
 		if (!gdk_window)
 			return DKERROR("gdk_window invalid\n");
@@ -978,7 +978,7 @@ void DKCefWindow::OnFullscreenModeChange(CefRefPtr<CefBrowser> browser, bool ful
 		}
 	}
 #elif LINUX
-#	ifdef USE_GDK
+#	if USE_GDK
 		GdkWindow* gdk_window = gdk_window_foreign_new(browser->GetHost()->GetWindowHandle());
 		if (!gdk_window) {
 			DKERROR("gdk_window invalid\n");
@@ -1038,9 +1038,9 @@ bool DKCefWindow::OnPreKeyEvent(CefRefPtr<CefBrowser> browser, const CefKeyEvent
 	CEF_REQUIRE_UI_THREAD();
 	if (event.type == KEYEVENT_RAWKEYDOWN)
 		DKEvents::SendEvent("window", "keydown", toString(event.windows_key_code)); //DKKeyboardEvent event = new DKEvents();
-	if (event.type == KEYEVENT_KEYDOWN)
+	if (event.type == KEYEVENT_KEYDOWN) // TODO
 		DKINFO("OnPreKeyEvent(): KeyDown: " + toString(event.character) + "\n");
-	if (event.type == KEYEVENT_KEYUP)
+	if (event.type == KEYEVENT_KEYUP) // TODO
 		DKINFO("OnPreKeyEvent(): KeyUp: "+toString(event.character)+"\n");
 	if (event.type == KEYEVENT_CHAR)
 		DKEvents::SendEvent("window", "keypress", toString(event.character));
