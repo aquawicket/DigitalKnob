@@ -110,7 +110,7 @@ void DKSDLRmlRenderer::EnableScissorRegion(bool enable) {
 
 // Called by RmlUi when it wants to change the scissor region.		
 void DKSDLRmlRenderer::SetScissorRegion(int x, int y, int width, int height){
-    DKDEBUGFUNC(x, y, width, height);
+    //DKDEBUGFUNC(x, y, width, height);
     //int w_width, w_height;
     //SDL_GetWindowSize(mScreen, &w_width, &w_height);
     mScisorRect.x = x;
