@@ -7,6 +7,7 @@
 # http://www.leptonica.org/source/leptonica-1.74.4.tar.gz
 
 ### DEPENDS ###
+dk_depend(sw)
 dk_depend(zlib)
 dk_depend(tiff)
 dk_depend(libpng)

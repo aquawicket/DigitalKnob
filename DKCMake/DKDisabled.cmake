@@ -87,7 +87,7 @@ if(WIN) # Disabled for Windows targets
 	dk_disable(DKSFMLWindow)
 	dk_disable(freealut)
 	dk_disable(jerryscript)
-	dk_disable(leptonica)
+	#dk_disable(leptonica)
 	dk_disable(libtorrent)
 	dk_disable(libwebp)
 	dk_disable(libwebsockets)
