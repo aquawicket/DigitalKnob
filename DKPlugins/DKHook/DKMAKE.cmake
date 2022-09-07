@@ -1,6 +1,6 @@
-if(NOT WIN AND NOT LINUX)
-	return()
-endif()
+#if(NOT WIN AND NOT LINUX)
+#	return()
+#endif()
 
 IF(HAVE_DKCef)
 	dk_depend(DKCef)
