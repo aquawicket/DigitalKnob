@@ -6,7 +6,7 @@ dk_depend(leptonica)
 
 
 #dk_import(https://github.com/tesseract-ocr/tessdoc.git)
-dk_import(https://github.com/tesseract-ocr/tesseract.git)
+dk_import(https://github.com/tesseract-ocr/tesseract.git BRANCH main)
 
 
 ### LINK ###
