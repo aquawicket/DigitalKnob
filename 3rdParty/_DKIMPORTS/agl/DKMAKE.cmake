@@ -1,5 +1,6 @@
 # https://developer.apple.com/documentation/agl/agl
 if(NOT MAC)
+	dk_undepend(agl)
 	return()
 endif()
 

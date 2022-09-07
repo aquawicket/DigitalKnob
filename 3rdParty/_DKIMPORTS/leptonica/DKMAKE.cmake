@@ -7,7 +7,7 @@
 # http://www.leptonica.org/source/leptonica-1.74.4.tar.gz
 
 ### DEPENDS ###
-dk_depend(sw)
+#dk_depend(sw)
 dk_depend(zlib)
 dk_depend(tiff)
 dk_depend(libpng)
@@ -51,7 +51,7 @@ WIN_dk_set(LEPTONICA_CMAKE -DLeptonica_DIR=${LEPTONICA}/${OS})
 ### COMPILE ###
 dk_setPath(${LEPTONICA}/${BUILD_DIR})
 
-WIN_dk_queueCommand(${DKCMAKE_BUILD} -DSTATIC=ON -DCMAKE_INSTALL_PREFIX=${LEPTONICA} ${ZLIB_CMAKE} ${TIFF_CMAKE} ${PNG_CMAKE} ${JPEG_CMAKE} ${GIF_CMAKE} ${LEPTONICA})
+WIN_dk_queueCommand(${DKCMAKE_BUILD} -DSTATIC=ON -DCMAKE_INSTALL_PREFIX=${LEPTONICA} -DSW_BUILD=OFF ${ZLIB_CMAKE} ${TIFF_CMAKE} ${PNG_CMAKE} ${JPEG_CMAKE} ${GIF_CMAKE} ${LEPTONICA})
 WIN_dk_visualStudio(${LEPTONICA_NAME} leptonica)
 
 MAC_dk_queueCommand(${DKCMAKE_BUILD} -DSTATIC=ON -DCMAKE_INSTALL_PREFIX=${LEPTONICA} ${ZLIB_CMAKE} ${TIFF_CMAKE} ${PNG_CMAKE} ${JPEG_CMAKE} ${GIF_CMAKE} ${LEPTONICA})
