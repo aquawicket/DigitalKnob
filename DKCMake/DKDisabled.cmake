@@ -201,6 +201,7 @@ endif()
 if(LINUX) # Disabled for Linux targets
 	dk_disable(android-build-tools)
 	dk_disable(boxer)
+	dk_disable(DKHook)
 	dk_disable(DKOcr)
 	dk_disable(DKSDLWav)
 	dk_disable(DKSFMLRml)
