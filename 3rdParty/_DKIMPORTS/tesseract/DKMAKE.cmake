@@ -1,11 +1,11 @@
-# https://github.com/tesseract-ocr
+# https://github.com/tesseract-ocr/tesseract
 # https://tinsuke.wordpress.com/2011/02/17/how-to-cross-compiling-libraries-for-ios-armv6armv7i386/
 
 
+dk_depend(sw)
 dk_depend(leptonica)
 
 
-#dk_import(https://github.com/tesseract-ocr/tessdoc.git)
 dk_import(https://github.com/tesseract-ocr/tesseract.git BRANCH main)
 
 
