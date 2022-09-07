@@ -28,25 +28,25 @@ include_guard()
 #dk_disable(_TEMPLATE-APP_)
 #dk_disable(_TEMPLATE-LIB_)
 dk_disable(astyle)
-dk_disable(bullet3)
+dk_disable(bullet3)				# Openscenegraph 
 dk_disable(conio-for-linux)
 dk_disable(DKJerryscript)
 dk_disable(DKOFWindow)
-dk_disable(DKOSGAudio)               # Openscenegraph
-dk_disable(DKOSGCef)                 # Openscenegraph
-dk_disable(DKOSGLights)              # Openscenegraph
-dk_disable(DKOSGManipulator)         # Openscenegraph
-dk_disable(DKOSGModel)               # Openscenegraph
-dk_disable(DKOSGNotify)              # Openscenegraph
-dk_disable(DKOSGPhysics)             # Openscenegraph
-dk_disable(DKOSGPicker)              # Openscenegraph
-dk_disable(DKOSGRml)                 # Openscenegraph
-dk_disable(DKOSGStats)               # Openscenegraph
-dk_disable(DKOSGTerrain)             # Openscenegraph
-dk_disable(DKOSGVideo)               # Openscenegraph
-dk_disable(DKOSGViewer)              # Openscenegraph 
-dk_disable(DKOSGWidget)
-dk_disable(DKOSGWindow)
+dk_disable(DKOSGAudio)			# Openscenegraph
+dk_disable(DKOSGCef)			# Openscenegraph
+dk_disable(DKOSGLights)			# Openscenegraph
+dk_disable(DKOSGManipulator)	# Openscenegraph
+dk_disable(DKOSGModel)			# Openscenegraph
+dk_disable(DKOSGNotify)			# Openscenegraph
+dk_disable(DKOSGPhysics)		# Openscenegraph
+dk_disable(DKOSGPicker)			# Openscenegraph
+dk_disable(DKOSGRml)			# Openscenegraph
+dk_disable(DKOSGStats)			# Openscenegraph
+dk_disable(DKOSGTerrain)		# Openscenegraph
+dk_disable(DKOSGVideo)			# Openscenegraph
+dk_disable(DKOSGViewer)			# Openscenegraph 
+dk_disable(DKOSGWidget)			# Openscenegraph 
+dk_disable(DKOSGWindow)			# Openscenegraph 
 dk_disable(DKPlugin1)
 dk_disable(DKPlugin2)
 dk_disable(DKRestart)
@@ -54,7 +54,7 @@ dk_disable(DKScreenRecorder)
 dk_disable(DKSDLAudio)
 dk_disable(DKSDLWav)
 dk_disable(DKSDLVideo)
-dk_disable(DKSFMLRml)               # incomplete
+dk_disable(DKSFMLRml)			# Incomplete
 dk_disable(DKThread)
 dk_disable(DKTorrent)
 dk_disable(DKUpdate)
@@ -62,29 +62,25 @@ dk_disable(DKVncClient)
 dk_disable(DKVncServer)
 dk_disable(gradle)
 dk_disable(java)
-dk_disable(jpeg)                     # using libjpeg_turbo instead
+dk_disable(jpeg)				# DEPRECATED: using libjpeg_turbo instead
 dk_disable(libcaca)
-dk_disable(librocket)                # replaced with RmlUi
+dk_disable(librocket)			# OBSOLETE: replaced with RmlUi
 dk_disable(libvncserver)
 dk_disable(libvncserver-master-win)
 dk_disable(libx11)
 dk_disable(miniweb)
 dk_disable(msys2)
-dk_disable(opencv)					#WORKING, just disabled because it takes so long to compile
+dk_disable(opencv)				# WORKING, only disabled because it takes a long time to compile
 dk_disable(openframeworks)
-dk_disable(openscenegraph)          # Openscenegraph
-dk_disable(osgaudio)                # Openscenegraph
-dk_disable(osgbullet)               # Openscenegraph
-dk_disable(osgworks)                # Openscenegraph
-dk_disable(sdl2_gif)                # use SDL_Image animation
-dk_disable(sdl2_giflib_sa)          # updated version of sdl2_gif
-dk_disable(simple-getch)            # kept for reference
+dk_disable(openscenegraph)		# Openscenegraph
+dk_disable(osgaudio)			# Openscenegraph
+dk_disable(osgbullet)			# Openscenegraph
+dk_disable(osgworks)			# Openscenegraph
+dk_disable(sdl2_gif)			# DEPRECATED: using SDL_Image animation instead
+dk_disable(sdl2_giflib_sa)		# DEPRECATED: updated version of sdl2_gif. Using SDL_Image animation instead
+dk_disable(simple-getch)		# kept for reference
 
 
-if(NOT WIN_HOST) # Disabled on Non-Windows host machines
-	#dk_disable(android-studio)
-	#dk_disable(php-src)
-endif()
 if(WIN) # Disabled for Windows targets
 	dk_disable(android-java-tools)
 	dk_disable(DKOcr)
@@ -110,7 +106,7 @@ if(WIN_64) # Disabled for Windows 64bit targets
 endif()
 
 
-if(MAC)  # Disabled on Mac host machines
+if(MAC)  # Disabled for MAC builds
 	#dk_disable(DKMySql)
 	dk_disable(DKOcr)
 	dk_disable(freealut)
@@ -136,7 +132,7 @@ if(MAC)  # Disabled on Mac host machines
 	dk_disable(waave)
 endif()
 
-if(IOS OR IOSSIM)
+if(IOS OR IOSSIM)  # Disabled for iOS and iOS-Simulator builds
 	dk_disable(boost)
 	dk_disable(boxer)
 	dk_disable(bzip2)
@@ -173,7 +169,6 @@ if(IOS OR IOSSIM)
 	dk_disable(lua)
 	dk_disable(mlocate)
 	dk_disable(openal)
-	dk_disable(openal-android)
 	dk_disable(podofo)
 	dk_disable(rtmidi)
 	dk_disable(sdl-gpu)
@@ -204,7 +199,6 @@ endif()
 if(LINUX) # Disabled for Linux targets
 	dk_disable(android-build-tools)
 	dk_disable(boxer)
-	dk_disable(DKHook)         # NOTE: this has linux functions too
 	dk_disable(DKOcr)
 	dk_disable(DKSDLWav)
 	dk_disable(DKSFMLRml)
@@ -242,7 +236,6 @@ endif()
 if(RASPBERRY) # Disabled for Raspberry Pi targets
 	dk_disable(android-build-tools)
 	dk_disable(boxer)
-	dk_disable(DKHook)           # NOTE: this has linux functions too
 	dk_disable(DKMidi)
 	dk_disable(DKOcr)
 	dk_disable(DKWebSockets)
@@ -261,8 +254,6 @@ if(RASPBERRY) # Disabled for Raspberry Pi targets
 	dk_disable(libxml2)
 	dk_disable(lighttpd)
 	dk_disable(lua)
-	dk_disable(openal-android)
-	#dk_disable(python)
 	dk_disable(rtmidi)
 	dk_disable(sdl-gpu)
 	dk_disable(stackwalker)
@@ -275,7 +266,6 @@ endif()
 
 
 if(ANDROID) # Disabled for Android targets
-	dk_disable(android-java-tools)
 	dk_disable(boxer)
 	dk_disable(bzip2)
 	dk_disable(cef_binary)
@@ -286,7 +276,6 @@ if(ANDROID) # Disabled for Android targets
 	dk_disable(DKCurl)
 	dk_disable(DKWebSockets)
 	dk_disable(DKHandles)
-	dk_disable(DKHook)        # NOTE: this has linux functions too
 	dk_disable(DKMidi)
 	dk_disable(DKMySql)
 	dk_disable(DKOcr)
@@ -314,7 +303,6 @@ if(ANDROID) # Disabled for Android targets
 	dk_disable(lighttpd)
 	dk_disable(lua)
 	dk_disable(openal)
-	dk_disable(openal-android)
 	dk_disable(openssl)
 	dk_disable(podofo)
 	dk_disable(rlottie)
