@@ -21,9 +21,9 @@ IF(WIN)
 ENDIF()
 
 #IF(WIN_32)
-	WIN_32_dk_copy(${DKPLUGINS}/DKHook/win32/Release/hookdll.dll ${DKPROJECT}/assets/DKHook OVERWRITE)
+	WIN32_dk_copy(${DKPLUGINS}/DKHook/win32/Release/hookdll.dll ${DKPROJECT}/assets/DKHook OVERWRITE)
 #ENDIF()
 
 #IF(WIN_64)
-	WIN_64_dk_copy(${DKPLUGINS}/DKHook/win64/Release/hookdll.dll ${DKPROJECT}/assets/DKHook OVERWRITE)
+	WIN64_dk_copy(${DKPLUGINS}/DKHook/win64/Release/hookdll.dll ${DKPROJECT}/assets/DKHook OVERWRITE)
 #ENDIF()
