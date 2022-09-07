@@ -79,6 +79,8 @@ dk_disable(osgworks)			# Openscenegraph
 dk_disable(sdl2_gif)			# DEPRECATED: using SDL_Image animation instead
 dk_disable(sdl2_giflib_sa)		# DEPRECATED: updated version of sdl2_gif. Using SDL_Image animation instead
 dk_disable(simple-getch)		# kept for reference
+dk_disable(sw)
+dk_disable(sw-client)
 
 
 if(WIN) # Disabled for Windows targets
