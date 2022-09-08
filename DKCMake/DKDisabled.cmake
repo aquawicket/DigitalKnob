@@ -216,7 +216,6 @@ if(LINUX) # Disabled for Linux targets
 	dk_disable(jerryscript)
 	dk_disable(kdevelop)
 	dk_disable(leptonica)
-	#dk_disable(libjpeg-turbo)
 	dk_disable(libtorrent)
 	dk_disable(libwebp)
 	dk_disable(libwebsockets)
@@ -229,7 +228,7 @@ if(LINUX) # Disabled for Linux targets
 	dk_disable(sfml)           # sfml_sfml-network)  #TODO: disabling individual sublibraries
 	dk_disable(stackwalker)
 	dk_disable(tesseract)
-	dk_disable(tiff)
+	#dk_disable(tiff)
 	dk_disable(upx)
 	dk_disable(uwebsockets)
 	dk_disable(waave)
