@@ -216,7 +216,7 @@ if(LINUX) # Disabled for Linux targets
 	dk_disable(jerryscript)
 	dk_disable(kdevelop)
 	dk_disable(leptonica)
-	dk_disable(libjpeg-turbo)
+	#dk_disable(libjpeg-turbo)
 	dk_disable(libtorrent)
 	dk_disable(libwebp)
 	dk_disable(libwebsockets)
