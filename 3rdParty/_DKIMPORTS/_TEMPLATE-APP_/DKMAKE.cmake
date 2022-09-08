@@ -1,4 +1,9 @@
-return() #remove this
+# remove these
+dk_undepend(_TEMPLATE-APP_)
+return()
+
+
+
 # http://www.app.com
 # http://www.app.com/downloads/app-1.0.exe
 
