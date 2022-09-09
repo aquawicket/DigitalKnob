@@ -25,12 +25,11 @@ include_guard()
 
 
 # DISABLED FOR ALL
-#dk_disable(_TEMPLATE-APP_)
-#dk_disable(_TEMPLATE-LIB_)
 dk_disable(astyle)
 dk_disable(bullet3)				# Openscenegraph 
 dk_disable(conio-for-linux)
 dk_disable(DKJerryscript)
+dk_disable(DKOcr)
 dk_disable(DKOFWindow)
 dk_disable(DKOSGAudio)			# Openscenegraph
 dk_disable(DKOSGCef)			# Openscenegraph
@@ -85,7 +84,6 @@ dk_disable(sw-client)
 
 if(WIN) # Disabled for Windows targets
 	dk_disable(android-java-tools)
-	dk_disable(DKOcr)
 	dk_disable(DKSFMLWindow)
 	dk_disable(freealut)
 	dk_disable(jerryscript)
@@ -109,8 +107,6 @@ endif()
 
 
 if(MAC)  # Disabled for MAC builds
-	#dk_disable(DKMySql)
-	dk_disable(DKOcr)
 	dk_disable(freealut)
 	dk_disable(imagemagick)
 	dk_disable(java)
@@ -130,7 +126,6 @@ if(MAC)  # Disabled for MAC builds
 	dk_disable(smpeg2)
 	dk_disable(terminator)
 	dk_disable(tesseract)
-	#dk_disable(tidy-html5)
 	dk_disable(waave)
 endif()
 
@@ -143,8 +138,6 @@ if(IOS OR IOSSIM)  # Disabled for iOS and iOS-Simulator builds
 	dk_disable(DKCefChild)
 	dk_disable(DKMidi)
 	dk_disable(DKMySql)
-	dk_disable(DKOcr)
-	#dk_disable(DKRmlIframe)
 	dk_disable(DKSDLCef)
 	dk_disable(DKSFMLRml)
 	dk_disable(DKSFMLWindow)
@@ -152,8 +145,6 @@ if(IOS OR IOSSIM)  # Disabled for iOS and iOS-Simulator builds
 	dk_disable(glew)
 	dk_disable(imagemagick)
 	dk_disable(java)
-	dk_disable(openjdk)
-	dk_disable(openjdk-8u41)
 	dk_disable(jerryscript)
 	dk_disable(libgtkglext1-dev)
 	dk_disable(libiconv)
@@ -170,6 +161,8 @@ if(IOS OR IOSSIM)  # Disabled for iOS and iOS-Simulator builds
 	dk_disable(lua)
 	dk_disable(mlocate)
 	dk_disable(openal)
+	dk_disable(openjdk)
+	dk_disable(openjdk-8u41)
 	dk_disable(podofo)
 	dk_disable(rtmidi)
 	dk_disable(sdl-gpu)
@@ -201,14 +194,12 @@ if(LINUX) # Disabled for Linux targets
 	dk_disable(android-build-tools)
 	dk_disable(boxer)
 	dk_disable(DKHook)
-	dk_disable(DKOcr)
 	dk_disable(DKSDLWav)
 	dk_disable(DKSFMLRml)
 	dk_disable(DKSFMLWindow)
-	dk_disable(DKTorrent)
 	dk_disable(DKWebSockets)
 	dk_disable(freealut)
-	#dk_disable(giflib)
+	dk_disable(giflib)
 	dk_disable(imagemagick)
 	dk_disable(java)
 	dk_disable(openjdk)
@@ -237,7 +228,6 @@ if(RASPBERRY) # Disabled for Raspberry Pi targets
 	dk_disable(android-build-tools)
 	dk_disable(boxer)
 	dk_disable(DKMidi)
-	dk_disable(DKOcr)
 	dk_disable(DKWebSockets)
 	dk_disable(emsdk)
 	dk_disable(freealut)
@@ -278,7 +268,6 @@ if(ANDROID) # Disabled for Android targets
 	dk_disable(DKHandles)
 	dk_disable(DKMidi)
 	dk_disable(DKMySql)
-	dk_disable(DKOcr)
 	dk_disable(DKRmlIframe)
 	dk_disable(DKSDLCef)
 	dk_disable(DKSFMLWindow)
