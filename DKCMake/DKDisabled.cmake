@@ -115,7 +115,7 @@ if(MAC)  # Disabled for MAC targets
 	dk_disable(libtorrent)
 	dk_disable(libwebp)
 	dk_disable(libwebsockets)
-	dk_disable(libxml2)			# fatal error: 'extra/stricmp.h' file nt found
+	dk_disable(libxml2)			# fatal error: 'extra/stricmp.h' file not found
 	dk_disable(lighttpd)
 	dk_disable(lua)				# no CMakeLists.txt file
 	dk_disable(mlocate)			# Unable to locate a Java Runtime that supports apt
@@ -231,11 +231,11 @@ if(ANDROID) # Disabled for Android targets
 	dk_disable(curl)			# error : "strerror_r MUST be either POSIX, glibc style"
 	dk_disable(DKCef)
 	dk_disable(DKCefChild)
-	dk_disable(DKCurl)
+	dk_disable(DKCurl)			
 	dk_disable(DKWebSockets)
 	dk_disable(DKHandles)
 	dk_disable(DKMidi)
-	#dk_disable(DKMySql)
+	dk_disable(DKMySql)			# fatal error : 'curl/curl.h' file not found
 	#dk_disable(DKRmlIframe)
 	dk_disable(DKSDLCef)
 	dk_disable(DKSFMLWindow)
