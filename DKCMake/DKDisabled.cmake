@@ -150,10 +150,10 @@ if(IOS OR IOSSIM)  # Disabled for iOS and iOS-Simulator targets
 	dk_disable(libtorrent)
 	dk_disable(libwebp)			# TIFF is disabled when statically linking
 	dk_disable(libwebsockets)
-	#dk_disable(libxml2)
+	dk_disable(libxml2)			# fatal error: 'config.h' file not found
 	dk_disable(lighttpd)
 	dk_disable(lua)
-	dk_disable(mlocate)
+	#dk_disable(mlocate)
 	dk_disable(openal)
 	dk_disable(openjdk)
 	dk_disable(openjdk-8u41)
