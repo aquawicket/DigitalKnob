@@ -148,9 +148,9 @@ if(IOS OR IOSSIM)  # Disabled for iOS and iOS-Simulator targets
 	dk_disable(libpng)			# no such sysroot directory: 'iphonesimulator'
 	dk_disable(leptonica)
 	dk_disable(libtorrent)
-	#dk_disable(libwebp)
+	dk_disable(libwebp)			# TIFF is disabled when statically linking
 	dk_disable(libwebsockets)
-	dk_disable(libxml2)
+	#dk_disable(libxml2)
 	dk_disable(lighttpd)
 	dk_disable(lua)
 	dk_disable(mlocate)
@@ -194,8 +194,7 @@ if(LINUX) # Disabled for Linux targets
 	dk_disable(freealut)				# AL/al.h: No such file or directory
 	dk_disable(giflib)					# aclocal-1.15: command not found
 	dk_disable(imagemagick)				#libimagemagik.a not found
-	#dk_disable(java)
-	dk_disable(openjdk)
+	#dk_disable(openjdk)
 	dk_disable(jerryscript)
 	dk_disable(kdevelop)
 	dk_disable(leptonica)
