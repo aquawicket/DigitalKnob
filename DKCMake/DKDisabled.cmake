@@ -120,7 +120,7 @@ if(MAC)  # Disabled for MAC targets
 	dk_disable(lua)				# no CMakeLists.txt file
 	dk_disable(mlocate)			# Unable to locate a Java Runtime that supports apt
 	#dk_disable(rtmidi)
-	#dk_disable(sdl-gpu)
+	dk_disable(sdl-gpu)			# SDL for MAC OS X only supports deploying on 10.7 and above
 	#dk_disable(smpeg2)
 	#dk_disable(terminator)
 	dk_disable(tesseract)
@@ -235,13 +235,13 @@ if(ANDROID) # Disabled for Android targets
 	dk_disable(DKWebSockets)
 	dk_disable(DKHandles)
 	dk_disable(DKMidi)
-	dk_disable(DKMySql)
-	dk_disable(DKRmlIframe)
+	#dk_disable(DKMySql)
+	#dk_disable(DKRmlIframe)
 	dk_disable(DKSDLCef)
 	dk_disable(DKSFMLWindow)
 	dk_disable(DKWebSockets)
 	dk_disable(DKWebview)
-	dk_disable(flac)			# error: unrecognized option: `-DANDROID32'
+	dk_disable(flac)			# configure: error: unrecognized option: `-DANDROID32'
 	dk_disable(freealut)		# DKFunctions.cmake:4405->dk_findFiles():  files is invalid
 	dk_disable(imagemagick)		# dkscript.tmp: line 2: cd: /android32/Debug: No such file or directory
 	dk_disable(jerryscript)
@@ -249,9 +249,9 @@ if(ANDROID) # Disabled for Android targets
 	dk_disable(leptonica)
 	dk_disable(libtorrent)
 	#dk_disable(libiconv)
-	dk_disable(ogg)				# error: unrecognized option: `-DANDROID32'
+	dk_disable(ogg)				# configure: error: unrecognized option: `-DANDROID32'
 	dk_disable(libuv)			# error : incomplete definition of type 'struct ifaddrs'
-	#dk_disable(vorbis)
+	dk_disable(vorbis)			# configure: error: unrecognized option: `-DANDROID32'
 	dk_disable(libwebp)
 	dk_disable(libwebsockets)
 	dk_disable(libxml2)
