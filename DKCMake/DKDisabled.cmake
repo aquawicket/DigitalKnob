@@ -98,9 +98,7 @@ if(WIN) # Disabled for Windows targets
 	dk_disable(tesseract)
 	dk_disable(waave)
 endif()
-if(WIN_32) # Disabled for Windows 32bit targets
-	#
-endif()
+
 if(WIN_64) # Disabled for Windows 64bit targets
 	dk_disable(smpeg2)
 endif()
@@ -169,21 +167,6 @@ if(IOS OR IOSSIM)  # Disabled for iOS and iOS-Simulator targets
 endif()
 
 
-#if(NOT LINUX AND NOT RASPBERRY) # Disabled NON Linux targets -> "Disabled for: WINDOWS, MAC, IOS, ANDROID"
-	#dk_disable(libasound2-dev)
-	#dk_disable(libgl1-mesa-dev)
-	#dk_disable(libglib2.0-dev)
-	#dk_disable(libglu1-mesa-dev)
-	#dk_disable(libgtk2.0-dev)
-	#dk_disable(libsndfile1-dev)
-	#dk_disable(libsystemd-dev)
-	#dk_disable(libudev-dev)
-	#dk_disable(libx11-dev)
-	#dk_disable(libxcursor-dev)
-	#dk_disable(libxrandr-dev)
-	#dk_disable(libxtst-dev)
-	#dk_disable(mesa-common-dev)
-#endif()
 if(LINUX) # Disabled for Linux targets
 	dk_disable(android-build-tools) 	# download link invalid
 	dk_disable(boxer)					# no package gtk+-3.0 found
@@ -299,6 +282,7 @@ if(ANDROID) # Disabled for Android targets
 	dk_disable(xz)
 	dk_disable(waave)
 endif()
+
 if(ANDROID_64) # Disabled for Android 64bit targets
 	dk_disable(boost)
 endif()
