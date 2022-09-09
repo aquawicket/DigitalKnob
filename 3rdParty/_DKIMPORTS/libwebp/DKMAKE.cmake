@@ -9,7 +9,7 @@ dk_depend(libjpeg-turbo)
 dk_depend(giflib)
 dk_depend(sdl)
 
-dk_import(https://github.com/webmproject/libwebp)
+dk_import(https://github.com/webmproject/libwebp.git BRANCH main)
 #dk_set(LIBWEBP_MAJOR 1)
 #dk_set(LIBWEBP_MINOR 0)
 #dk_set(LIBWEBP_BUILD 3)
