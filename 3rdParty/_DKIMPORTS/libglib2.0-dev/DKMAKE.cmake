@@ -1,4 +1,5 @@
-if(NOT UNIX_HOST)
+if(NOT LINUX AND NOT RASPBERRY)
+	dk_undepend(libglib2.0-dev)
 	return()
 endif()
 

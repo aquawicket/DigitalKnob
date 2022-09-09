@@ -1,6 +1,8 @@
-if(NOT UNIX_HOST)
+if(NOT LINUX AND NOT RASPBERRY)
+	dk_undepend(mesa-common-dev)
 	return()
 endif()
+
 
 ### INSTALL ###
 dk_set(CURRENT_DIR /usr)

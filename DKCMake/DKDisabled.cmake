@@ -141,11 +141,10 @@ if(IOS OR IOSSIM)  # Disabled for iOS and iOS-Simulator targets
 	dk_disable(DKSFMLWindow)
 	dk_disable(freealut)		# freealut-master/iossim64 does not contain an Xcode project
 	dk_disable(imagemagick)		# No such file or directory
-	#dk_disable(java)
 	dk_disable(jerryscript)
 	dk_disable(libiconv)		# CMake Error at cmake/dist.cmake:144 (install): install TARGETS given no BUNDLE DESTINATION for MACOSX_BUNDLE executable target "iconvcli"
 	dk_disable(libjpeg-turbo)	# CMake Error at CMakeLists.txt:60 (string): string no output variable specified
-	dk_disable(libmd)
+	#dk_disable(libmd)
 	dk_disable(libpng)
 	dk_disable(leptonica)
 	dk_disable(libtorrent)
@@ -170,21 +169,21 @@ if(IOS OR IOSSIM)  # Disabled for iOS and iOS-Simulator targets
 endif()
 
 
-if(NOT LINUX AND NOT RASPBERRY) # Disabled NON Linux targets -> "Disabled for: WINDOWS, MAC, IOS, ANDROID"
-	dk_disable(libasound2-dev)
-	dk_disable(libgl1-mesa-dev)
-	dk_disable(libglib2.0-dev)
-	dk_disable(libglu1-mesa-dev)
-	dk_disable(libgtk2.0-dev)
-	dk_disable(libsndfile1-dev)
-	dk_disable(libsystemd-dev)
-	dk_disable(libudev-dev)
-	dk_disable(libx11-dev)
-	dk_disable(libxcursor-dev)
-	dk_disable(libxrandr-dev)
-	dk_disable(libxtst-dev)
-	dk_disable(mesa-common-dev)
-endif()
+#if(NOT LINUX AND NOT RASPBERRY) # Disabled NON Linux targets -> "Disabled for: WINDOWS, MAC, IOS, ANDROID"
+	#dk_disable(libasound2-dev)
+	#dk_disable(libgl1-mesa-dev)
+	#dk_disable(libglib2.0-dev)
+	#dk_disable(libglu1-mesa-dev)
+	#dk_disable(libgtk2.0-dev)
+	#dk_disable(libsndfile1-dev)
+	#dk_disable(libsystemd-dev)
+	#dk_disable(libudev-dev)
+	#dk_disable(libx11-dev)
+	#dk_disable(libxcursor-dev)
+	#dk_disable(libxrandr-dev)
+	#dk_disable(libxtst-dev)
+	#dk_disable(mesa-common-dev)
+#endif()
 if(LINUX) # Disabled for Linux targets
 	dk_disable(android-build-tools) 	# download link invalid
 	dk_disable(boxer)					# no package gtk+-3.0 found
@@ -250,8 +249,8 @@ endif()
 
 
 if(ANDROID) # Disabled for Android targets
-	#dk_disable(boxer)
-	dk_disable(bzip2)
+	dk_disable(boxer)			# fatal error : 'boxer/boxer.h' file not found
+	#dk_disable(bzip2)
 	dk_disable(cef_binary)
 	dk_disable(cryptopp)
 	dk_disable(curl)
