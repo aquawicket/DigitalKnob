@@ -163,27 +163,27 @@ endif()
 
 
 if(LINUX) # Disabled for Linux targets
-	dk_disable(boxer)					# no package gtk+-3.0 found
+	dk_disable(boxer)			# no package gtk+-3.0 found
 	dk_disable(DKHook)
 	dk_disable(DKSDLWav)
 	dk_disable(DKSFMLWindow)
 	dk_disable(DKWebSockets)
-	dk_disable(freealut)				# AL/al.h: No such file or directory
-	dk_disable(giflib)					# aclocal-1.15: command not found
-	dk_disable(imagemagick)				#libimagemagik.a not found
+	dk_disable(freealut)		# AL/al.h: No such file or directory
+	dk_disable(giflib)			# aclocal-1.15: command not found
+	dk_disable(imagemagick)		#libimagemagik.a not found
 	dk_disable(jerryscript)
 	dk_disable(kdevelop)
 	dk_disable(leptonica)
-	dk_disable(libtorrent)				# Could not find BOOST
+	dk_disable(libtorrent)		# Could not find BOOST
 	dk_disable(libwebp)
 	dk_disable(libwebsockets)
-	dk_disable(libxml2)					# Not such file or directory
+	dk_disable(libxml2)			# Not such file or directory
 	dk_disable(lighttpd)
 	dk_disable(lua)
 	#dk_disable(podofo)
 	#dk_disable(rtmidi)
 	#dk_disable(sdl-gpu)
-	dk_disable(sfml)           			# sfml_sfml-network)  #TODO: disabling individual sublibraries
+	dk_disable(sfml)           	# sfml_sfml-network)  #TODO: disabling individual sublibraries
 	dk_disable(stackwalker)
 	dk_disable(tesseract)
 	dk_disable(upx)
