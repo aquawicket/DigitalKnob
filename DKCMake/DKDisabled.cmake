@@ -149,7 +149,7 @@ if(IOS OR IOSSIM)  # Disabled for iOS and iOS-Simulator builds
 	dk_disable(DKSFMLRml)
 	dk_disable(DKSFMLWindow)
 	dk_disable(freealut)
-	dk_disable(giflib)
+	#dk_disable(giflib)
 	dk_disable(glew)
 	dk_disable(imagemagick)
 	dk_disable(java)
@@ -178,7 +178,7 @@ if(IOS OR IOSSIM)  # Disabled for iOS and iOS-Simulator builds
 	dk_disable(smpeg2)
 	dk_disable(tesseract)
 	dk_disable(tidy-html5)
-	#dk_disable(tiff)
+	dk_disable(tiff)
 	dk_disable(waave)
 endif()
 
