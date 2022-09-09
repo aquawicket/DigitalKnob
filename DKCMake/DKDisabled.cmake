@@ -106,7 +106,7 @@ endif()
 
 if(MAC)  # Disabled for MAC targets
 	dk_disable(freealut)		# ** BUILD FAILED **
-	#dk_disable(imagemagick)
+	dk_disable(imagemagick)		# no such file or directory: libimagemagik.a
 	#dk_disable(java)
 	#dk_disable(openjdk)
 	#dk_disable(openjdk-8u41)
@@ -226,7 +226,7 @@ endif()
 if(ANDROID) # Disabled for Android targets
 	dk_disable(boxer)			# fatal error : 'boxer/boxer.h' file not found
 	dk_disable(bzip2)			# 'make' is not recognized as an internal or external command
-	dk_disable(cef_binary)
+	#dk_disable(cef_binary)
 	dk_disable(cryptopp)		# error : cannot use 'throw' with exceptions disabled
 	dk_disable(curl)			# error : "strerror_r MUST be either POSIX, glibc style"
 	dk_disable(DKCef)

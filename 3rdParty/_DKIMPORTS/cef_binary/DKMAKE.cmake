@@ -57,7 +57,7 @@
 # https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_linuxarm64_minimal.tar.bz2
 # https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_linuxarm64_client.tar.bz2
 
-if(IOS OR IOSSIM)
+if(IOS OR IOSSIM OR ANDROID)
 	return()
 endif()
 
