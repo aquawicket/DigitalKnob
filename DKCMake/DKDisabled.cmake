@@ -144,8 +144,8 @@ if(IOS OR IOSSIM)  # Disabled for iOS and iOS-Simulator builds
 	dk_disable(imagemagick)
 	dk_disable(java)
 	dk_disable(jerryscript)
-	dk_disable(libiconv)
-	#dk_disable(libjpeg-turbo)
+	#dk_disable(libiconv)
+	dk_disable(libjpeg-turbo) # CMake Error at CMakeLists.txt:60 (string): string no output variable specified
 	dk_disable(libmd)
 	dk_disable(libpng)
 	dk_disable(leptonica)
