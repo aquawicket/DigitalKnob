@@ -153,12 +153,12 @@ if(IOS OR IOSSIM)  # Disabled for iOS and iOS-Simulator targets
 	dk_disable(lua)
 	dk_disable(mlocate)			# Unable to locate a Java Runtime that supports apt
 	dk_disable(podofo)			# Could not find FREETYPE
-	#dk_disable(sdl-gpu)
-	dk_disable(sfml)
-	dk_disable(smpeg2)
+	dk_disable(sdl-gpu)			# SDL2MAIN_LIBRARY is NOTFOUND
+	#dk_disable(sfml)
+	#dk_disable(smpeg2)
 	dk_disable(tesseract)
-	dk_disable(tidy-html5)
-	dk_disable(tiff)
+	#dk_disable(tidy-html5)
+	#dk_disable(tiff)
 	dk_disable(waave)
 endif()
 
