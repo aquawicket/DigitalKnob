@@ -8,56 +8,34 @@ dk_depend(openssl)
 
 
 dk_import(https://github.com/arvidn/libtorrent.git)
-#dk_set(TORRENT_MAJOR 2)
-#dk_set(TORRENT_MINOR 0)
-#dk_set(TORRENT_BUILD 4)
-#dk_set(TORRENT_VERSION ${TORRENT_MAJOR}.${TORRENT_MINOR}.${TORRENT_BUILD})
-#dk_set(TORRENT_NAME libtorrent-${TORRENT_VERSION})
-#dk_set(TORRENT_DL https://github.com/arvidn/libtorrent/archive/refs/tags/v${TORRENT_VERSION}.zip)
-#dk_set(TORRENT ${3RDPARTY}/${TORRENT_NAME})
-#dk_install(${TORRENT_DL} ${TORRENT})
 
 
 ### LINK ###
-dk_include(${TORRENT}/include)
-WIN_dk_libDebug(${TORRENT}/${OS}/${DEBUG_DIR}/torrent-rasterbar.lib)
-WIN_dk_libRelease(${TORRENT}/${OS}/${RELEASE_DIR}/torrent-rasterbar.lib)
-MAC_dk_libDebug(${TORRENT}/${OS}/lib/${DEBUG_DIR}/libtorrent-rasterbar.a)
-MAC_dk_libRelease(${TORRENT}/${OS}/lib/${RELEASE_DIR}/libtorrent-rasterbar.a)
-IOSSIM_dk_libDebug(${TORRENT}/${OS}/${DEBUG_DIR}/lib/.libs/libtorrent-rasterbar.a)
-IOSSIM_dk_libRelease(${TORRENT}/${OS}/${RELEASE_DIR}/lib/.libs/libtorrent-rasterbar.a)
-LINUX_dk_libDebug(${TORRENT}/${OS}/${DEBUG_DIR}/libtorrent-rasterbar.a)
-LINUX_dk_libRelease(${TORRENT}/${OS}/${RELEASE_DIR}/libtorrent-rasterbar.a)
-ANDROID_dk_libDebug(${TORRENT}/${OS}/${DEBUG_DIR}/obj/local/armeabi-v7a/libtorrent-rasterbar.a)
-ANDROID_dk_libRelease(${TORRENT}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/libtorrent-rasterbar.a)
+dk_include(${LIBTORRENT}/include)
+WIN_dk_libDebug(${LIBTORRENT}/${OS}/${DEBUG_DIR}/torrent-rasterbar.lib)
+WIN_dk_libRelease(${LIBTORRENT}/${OS}/${RELEASE_DIR}/torrent-rasterbar.lib)
+MAC_dk_libDebug(${LIBTORRENT}/${OS}/lib/${DEBUG_DIR}/libtorrent-rasterbar.a)
+MAC_dk_libRelease(${LIBTORRENT}/${OS}/lib/${RELEASE_DIR}/libtorrent-rasterbar.a)
+IOSSIM_dk_libDebug(${LIBTORRENT}/${OS}/${DEBUG_DIR}/lib/.libs/libtorrent-rasterbar.a)
+IOSSIM_dk_libRelease(${LIBTORRENT}/${OS}/${RELEASE_DIR}/lib/.libs/libtorrent-rasterbar.a)
+LINUX_dk_libDebug(${LIBTORRENT}/${OS}/${DEBUG_DIR}/libtorrent-rasterbar.a)
+LINUX_dk_libRelease(${LIBTORRENT}/${OS}/${RELEASE_DIR}/libtorrent-rasterbar.a)
+ANDROID_dk_libDebug(${LIBTORRENT}/${OS}/${DEBUG_DIR}/obj/local/armeabi-v7a/libtorrent-rasterbar.a)
+ANDROID_dk_libRelease(${LIBTORRENT}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/libtorrent-rasterbar.a)
+
+
+### GENERATE ###
+dk_setPath(${LIBTORRENT}/${BUILD_DIR})
+#WIN_dk_queueCommand(${DKCMAKE_BUILD} -Dshared=OFF -Dunicode=OFF -Dstatic_runtime=ON ${OPENSSL_CMAKE} -DBOOST_ROOT=${BOOST} -DBOOST_LIBRARYDIR=${BOOST}/${OS}/lib ${LIBTORRENT})
+WIN_dk_queueCommand(${DKCMAKE_BUILD} -Dshared=OFF -Dunicode=OFF -Dstatic_runtime=ON ${OPENSSL_CMAKE} ${LIBTORRENT})
+MAC_dk_queueCommand(${DKCMAKE_BUILD} -Dshared=OFF -Dunicode=OFF -Dstatic_runtime=ON ${OPENSSL_CMAKE} ${LIBTORRENT})
+IOS_dk_queueCommand(${DKCMAKE_BUILD} -Dshared=OFF -Dunicode=OFF -Dstatic_runtime=ON ${OPENSSL_CMAKE} ${LIBTORRENT})
+IOSSIM_dk_queueCommand(${DKCMAKE_BUILD} -Dshared=OFF -Dunicode=OFF -Dstatic_runtime=ON ${OPENSSL_CMAKE} ${LIBTORRENT})
+LINUX_dk_queueCommand(${DKCMAKE_BUILD} -Dshared=OFF -Dunicode=OFF -Dstatic_runtime=ON ${OPENSSL_CMAKE} ${LIBTORRENT})
+ANDROID_dk_queueCommand(${DKCMAKE_BUILD} -Dshared=OFF -Dunicode=OFF -Dstatic_runtime=ON ${OPENSSL_CMAKE} ${LIBTORRENT})
 
 
 ### COMPILE ###
-WIN_dk_setPath(${TORRENT}/${OS})
-WIN32_dk_queueCommand(${DKCMAKE_BUILD} -Dshared=OFF -Dunicode=OFF -Dstatic_runtime=ON ${OPENSSL_CMAKE} -DBOOST_ROOT=${BOOST} -DBOOST_LIBRARYDIR=${BOOST}/${OS}/lib ${TORRENT})
-WIN64_dk_queueCommand(${DKCMAKE_BUILD} -Dshared=OFF -Dunicode=OFF -Dstatic_runtime=ON ${OPENSSL_CMAKE} -DBOOST_ROOT=${BOOST} -DBOOST_LIBRARYDIR=${BOOST}/${OS}/lib ${TORRENT})
-WIN_dk_visualStudio(${TORRENT_NAME} torrent-rasterbar)
-
-
-MAC_dk_setPath(${TORRENT}/${OS})
-MAC64_dk_queueCommand(${DKCMAKE_BUILD} ${TORRENT})
-MAC_dk_xcodeDebug(${TORRENT_NAME} libtorrent-rasterbar)
-
-
-IOS_dk_setPath(${TORRENT}/${OS})
-IOS_dk_queueCommand(${DKCMAKE_BUILD} ${TORRENT})
-IOS_dk_xcode(${TORRENT_NAME} libtorrent-rasterbar)
-
-IOSSIM_dk_setPath(${TORRENT}/${OS})
-IOSSIM64_dk_queueCommand(${DKCMAKE_BUILD} ${TORRENT})
-IOSSIM_dk_xcode(${TORRENT_NAME} libtorrent-rasterbar)
-
-LINUX_DEBUG_dk_setPath(${TORRENT}/${OS}/${DEBUG_DIR})
-LINUX_DEBUG_dk_queueCommand(${DKCMAKE_BUILD} ${TORRENT})
-LINUX_DEBUG_dk_queueCommand(make torrent-rasterbar)
-
-LINUX_RELEASE_dk_setPath(${TORRENT}/${OS}/${RELEASE_DIR})
-LINUX_RELEASE_dk_queueCommand(${DKCMAKE_BUILD} ${TORRENT})
-LINUX_RELEASE_dk_queueCommand(make torrent-rasterbar)
-
-ANDROID_dk_ndk(${TORRENT_NAME})
+dk_visualStudio	(${LIBTORRENT_NAME} torrent-rasterbar) #windows, android
+dk_xcode		(${LIBTORRENT_NAME} torrent-rasterbar) #mac, ios, iossim
+dk_make			(${LIBTORRENT_NAME} torrent-rasterbar) #linux, raspberry
