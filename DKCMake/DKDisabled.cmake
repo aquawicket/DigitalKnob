@@ -249,8 +249,8 @@ if(ANDROID) # Disabled for Android targets
 	dk_disable(DKWebSockets)
 	dk_disable(DKWebview)
 	dk_disable(flac)			# error: unrecognized option: `-DANDROID32'
-	#dk_disable(freealut)
-	dk_disable(glew)
+	dk_disable(freealut)		# DKFunctions.cmake:4405->dk_findFiles():  files is invalid
+	#dk_disable(glew)
 	dk_disable(imagemagick)
 	dk_disable(java)
 	dk_disable(jerryscript)
