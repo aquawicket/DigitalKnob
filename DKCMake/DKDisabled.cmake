@@ -261,7 +261,7 @@ if(ANDROID) # Disabled for Android targets
 	dk_disable(libxml2)
 	dk_disable(lighttpd)
 	dk_disable(lua)
-	dk_disable(openal)
+	#dk_disable(openal)
 	dk_disable(openssl)
 	dk_disable(podofo)
 	dk_disable(rlottie)
