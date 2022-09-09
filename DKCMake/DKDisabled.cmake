@@ -180,13 +180,10 @@ if(LINUX) # Disabled for Linux targets
 	dk_disable(libxml2)			# Not such file or directory
 	dk_disable(lighttpd)
 	dk_disable(lua)
-	#dk_disable(podofo)
-	#dk_disable(rtmidi)
-	#dk_disable(sdl-gpu)
 	dk_disable(sfml)           	# sfml_sfml-network)  #TODO: disabling individual sublibraries
 	dk_disable(stackwalker)
 	dk_disable(tesseract)
-	dk_disable(upx)
+	#dk_disable(upx)
 	dk_disable(uwebsockets)
 	dk_disable(waave)
 endif()
@@ -226,7 +223,6 @@ endif()
 if(ANDROID) # Disabled for Android targets
 	dk_disable(boxer)			# fatal error : 'boxer/boxer.h' file not found
 	dk_disable(bzip2)			# 'make' is not recognized as an internal or external command
-	#dk_disable(cef_binary)
 	dk_disable(cryptopp)		# error : cannot use 'throw' with exceptions disabled
 	dk_disable(curl)			# error : "strerror_r MUST be either POSIX, glibc style"
 	dk_disable(DKCef)
@@ -236,7 +232,6 @@ if(ANDROID) # Disabled for Android targets
 	dk_disable(DKHandles)
 	dk_disable(DKMidi)
 	dk_disable(DKMySql)			# fatal error : 'curl/curl.h' file not found
-	#dk_disable(DKRmlIframe)
 	dk_disable(DKSDLCef)
 	dk_disable(DKSFMLWindow)
 	dk_disable(DKWebSockets)
@@ -248,29 +243,27 @@ if(ANDROID) # Disabled for Android targets
 	dk_disable(kdevelop)
 	dk_disable(leptonica)
 	dk_disable(libtorrent)
-	#dk_disable(libiconv)
 	dk_disable(ogg)				# configure: error: unrecognized option: `-DANDROID32'
 	dk_disable(libuv)			# error : incomplete definition of type 'struct ifaddrs'
 	dk_disable(vorbis)			# configure: error: unrecognized option: `-DANDROID32'
 	dk_disable(libwebp)
 	dk_disable(libwebsockets)
-	dk_disable(libxml2)
+	#dk_disable(libxml2)
 	dk_disable(lighttpd)
 	dk_disable(lua)
 	dk_disable(openal)			# The system cannot find the file specified
-	dk_disable(openssl)
-	dk_disable(podofo)
-	dk_disable(rlottie)
-	dk_disable(rtmidi)
-	dk_disable(sdl-gpu)
-	dk_disable(sdl_mixer)
+	#dk_disable(openssl)
+	#dk_disable(podofo)
+	#dk_disable(rlottie)
+	#dk_disable(rtmidi)
+	#dk_disable(sdl-gpu)
+	#dk_disable(sdl_mixer)
 	dk_disable(sfml)
 	dk_disable(smpeg2)
 	dk_disable(stackwalker)
 	dk_disable(tesseract)
-	#dk_disable(tidy-html5)
-	dk_disable(uwebsockets)
-	dk_disable(xz)
+	#dk_disable(uwebsockets)
+	#dk_disable(xz)
 	dk_disable(waave)
 endif()
 
