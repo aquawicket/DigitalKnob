@@ -95,7 +95,7 @@ if(WIN) # Disabled for Windows targets
 	dk_disable(lua)
 	dk_disable(opensles)
 	dk_disable(sfml)
-	dk_disable(tesseract)		# Requires libSW and leptonica
+	dk_disable(tesseract)
 	dk_disable(waave)
 endif()
 if(WIN_32) # Disabled for Windows 32bit targets
@@ -130,8 +130,8 @@ if(MAC)  # Disabled for MAC targets
 endif()
 
 if(IOS OR IOSSIM)  # Disabled for iOS and iOS-Simulator targets
-	#dk_disable(boost)
-	dk_disable(boxer)
+	dk_disable(boost)			# clang error: no such file or direcotry: libboost_atomic.a, libboost_chrono.a, etc, etc, etc
+	#dk_disable(boxer)
 	dk_disable(bzip2)			# dk_include Function invoked with incorrect arguments
 	dk_disable(cryptopp)		# ** BUILD FAILED ** /blake2b_simd.cpp
 	dk_disable(DKCef)
@@ -193,8 +193,8 @@ if(LINUX) # Disabled for Linux targets
 	dk_disable(DKSDLWav)
 	dk_disable(DKSFMLWindow)
 	dk_disable(DKWebSockets)
-	#dk_disable(freealut)
-	dk_disable(giflib)
+	dk_disable(freealut)				# AL/al.h: No such file or directory
+	#dk_disable(giflib)
 	dk_disable(imagemagick)
 	dk_disable(java)
 	dk_disable(openjdk)
