@@ -153,7 +153,7 @@ if(IOS OR IOSSIM)  # Disabled for iOS and iOS-Simulator targets
 	dk_disable(lua)
 	dk_disable(mlocate)			# Unable to locate a Java Runtime that supports apt
 	#dk_disable(podofo)
-	dk_disable(rtmidi)
+	#dk_disable(rtmidi)
 	dk_disable(sdl-gpu)
 	dk_disable(sfml)
 	dk_disable(smpeg2)
