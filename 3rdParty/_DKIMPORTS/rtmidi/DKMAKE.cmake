@@ -1,11 +1,12 @@
 # https://github.com/thestk/rtmidi
 
+
+### DEPENDS ###
 WIN_dk_depend(winmm.lib)
 
-#dk_import(http://www.music.mcgill.ca/~gary/rtmidi/release/rtmidi-2.1.0.tar.gz PATCH)
-#dk_set(RTMIDI_TARGET RtMidi)
+
+### IMPORT ###
 dk_import(https://github.com/thestk/rtmidi.git)
-dk_set(RTMIDI_TARGET rtmidi)
 
 
 ### LINK ###
@@ -22,8 +23,8 @@ IOS_dk_libDebug(${RTMIDI}/${OS}/${DEBUG_DIR}/libRtMidi.a)
 IOS_dk_libRelease(${RTMIDI}/${OS}/${RELEASE_DIR}/libRtMidi.a)
 IOSSIM_dk_libDebug(${RTMIDI}/${OS}/${DEBUG_DIR}/libRtMidi.a)
 IOSSIM_dk_libRelease(${RTMIDI}/${OS}/${RELEASE_DIR}/libRtMidi.a)
-LINUX_dk_libDebug(${RTMIDI}/${OS}/${DEBUG_DIR}/libRtMidi.a)
-LINUX_dk_libRelease(${RTMIDI}/${OS}/${RELEASE_DIR}/libRtMidi.a)
+LINUX_dk_libDebug(${RTMIDI}/${OS}/${DEBUG_DIR}/librtmidi.a)
+LINUX_dk_libRelease(${RTMIDI}/${OS}/${RELEASE_DIR}/librtmidi.a)
 RASPBERRY_dk_libDebug(${RTMIDI}/${OS}/${DEBUG_DIR}/libRtMidi.a)
 RASPBERRY_dk_libRelease(${RTMIDI}/${OS}/${RELEASE_DIR}/libRtMidi.a)
 ANDROID_dk_libDebug(${RTMIDI}/${OS}/${DEBUG_DIR}/libRtMidi.a)
@@ -32,30 +33,11 @@ ANDROID_dk_libRelease(${RTMIDI}/${OS}/${RELEASE_DIR}/libRtMidi.a)
 
 ### GENERATE ###
 dk_setPath(${RTMIDI}/${BUILD_DIR})
-#WIN_dk_queueCommand(${DKCMAKE_BUILD} ${RTMIDI})
-#MAC_dk_queueCommand(${DKCMAKE_BUILD} ${RTMIDI})
-#IOS_dk_queueCommand(${DKCMAKE_BUILD} ${RTMIDI})
-#IOSSIM_dk_queueCommand(${DKCMAKE_BUILD} ${RTMIDI})
-#LINUX_DEBUG_dk_queueCommand(${DKCMAKE_BUILD} ${RTMIDI})
-#LINUX_RELEASE_dk_queueCommand(${DKCMAKE_BUILD} ${RTMIDI})
-#RASPBERRY_DEBUG_dk_queueCommand(${DKCMAKE_BUILD} ${RTMIDI})
-#RASPBERRY_RELEASE_dk_queueCommand(${DKCMAKE_BUILD} ${RTMIDI})
-#ANDROID32_dk_queueCommand(${DKCMAKE_BUILD} ${RTMIDI})
-#ANDROID64_dk_queueCommand(${DKCMAKE_BUILD} ${RTMIDI})
 dk_queueCommand(${DKCMAKE_BUILD} ${RTMIDI})
 
 
 ### COMPILE ###
-#WIN_dk_visualStudio(${RTMIDI_NAME} ${RTMIDI_TARGET})
-dk_visualStudio(${RTMIDI_NAME} ${RTMIDI_TARGET})
-#MAC_dk_xcode(${RTMIDI_NAME} ${RTMIDI_TARGET})
-#IOS_dk_xcode(${RTMIDI_NAME} ${RTMIDI_TARGET})
-#IOSSIM_dk_xcode(${RTMIDI_NAME} ${RTMIDI_TARGET})
-dk_xcode(${RTMIDI_NAME} ${RTMIDI_TARGET})
-#LINUX_DEBUG_dk_queueCommand(make ${RTMIDI_TARGET})
-#LINUX_RELEASE_dk_queueCommand(make ${RTMIDI_TARGET})
-LINUX_dk_queueCommand(make ${RTMIDI_TARGET})
-#RASPBERRY_DEBUG_dk_queueCommand(make ${RTMIDI_TARGET})
-#RASPBERRY_RELEASE_dk_queueCommand(make ${RTMIDI_TARGET})
-RASPBERRY_dk_queueCommand(make ${RTMIDI_TARGET})
-#ANDROID_dk_visualStudio(${RTMIDI_NAME} ${RTMIDI_TARGET})
+dk_visualStudio(${RTMIDI_NAME} rtmidi)
+dk_xcode(${RTMIDI_NAME} rtmidi)
+LINUX_dk_queueCommand(make rtmidi)
+RASPBERRY_dk_queueCommand(make rtmidi)

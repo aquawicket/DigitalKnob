@@ -249,7 +249,7 @@ if(ANDROID) # Disabled for Android targets
 	dk_disable(leptonica)
 	dk_disable(libtorrent)
 	#dk_disable(libiconv)
-	#dk_disable(ogg)
+	dk_disable(ogg)				# error: unrecognized option: `-DANDROID32'
 	dk_disable(libuv)			# error : incomplete definition of type 'struct ifaddrs'
 	#dk_disable(vorbis)
 	dk_disable(libwebp)
