@@ -154,7 +154,7 @@ if(IOS OR IOSSIM)  # Disabled for iOS and iOS-Simulator targets
 	dk_disable(mlocate)			# Unable to locate a Java Runtime that supports apt
 	dk_disable(podofo)			# Could not find FREETYPE
 	dk_disable(sdl-gpu)			# SDL2MAIN_LIBRARY is NOTFOUND
-	#dk_disable(sfml)
+	dk_disable(sfml)			# Unknown CMake command "find_host_package"
 	dk_disable(smpeg2)			# ** BUILD FAILED ** MPEGstream.cpp
 	dk_disable(tesseract)
 	#dk_disable(tidy-html5)
@@ -261,7 +261,7 @@ if(ANDROID) # Disabled for Android targets
 	dk_disable(libxml2)
 	dk_disable(lighttpd)
 	dk_disable(lua)
-	#dk_disable(openal)
+	dk_disable(openal)			# The system cannot find the file specified
 	dk_disable(openssl)
 	dk_disable(podofo)
 	dk_disable(rlottie)
@@ -272,7 +272,7 @@ if(ANDROID) # Disabled for Android targets
 	dk_disable(smpeg2)
 	dk_disable(stackwalker)
 	dk_disable(tesseract)
-	dk_disable(tidy-html5)
+	#dk_disable(tidy-html5)
 	dk_disable(uwebsockets)
 	dk_disable(xz)
 	dk_disable(waave)
