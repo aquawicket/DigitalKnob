@@ -140,8 +140,7 @@ if(IOS OR IOSSIM)  # Disabled for iOS and iOS-Simulator targets
 	dk_disable(DKSDLCef)
 	dk_disable(DKSFMLWindow)
 	dk_disable(freealut)		# freealut-master/iossim64 does not contain an Xcode project
-	#dk_disable(glew)
-	dk_disable(imagemagick)
+	#dk_disable(imagemagick)
 	dk_disable(java)
 	dk_disable(jerryscript)
 	dk_disable(libiconv)		# CMake Error at cmake/dist.cmake:144 (install): install TARGETS given no BUNDLE DESTINATION for MACOSX_BUNDLE executable target "iconvcli"
@@ -195,8 +194,8 @@ if(LINUX) # Disabled for Linux targets
 	dk_disable(DKWebSockets)
 	dk_disable(freealut)				# AL/al.h: No such file or directory
 	dk_disable(giflib)					# aclocal-1.15: command not found
-	#dk_disable(imagemagick)
-	dk_disable(java)
+	dk_disable(imagemagick)				#libimagemagik.a not found
+	#dk_disable(java)
 	dk_disable(openjdk)
 	dk_disable(jerryscript)
 	dk_disable(kdevelop)
@@ -210,7 +209,7 @@ if(LINUX) # Disabled for Linux targets
 	dk_disable(podofo)
 	dk_disable(rtmidi)
 	dk_disable(sdl-gpu)
-	dk_disable(sfml)           # sfml_sfml-network)  #TODO: disabling individual sublibraries
+	dk_disable(sfml)           			# sfml_sfml-network)  #TODO: disabling individual sublibraries
 	dk_disable(stackwalker)
 	dk_disable(tesseract)
 	dk_disable(upx)
@@ -251,7 +250,7 @@ endif()
 
 
 if(ANDROID) # Disabled for Android targets
-	dk_disable(boxer)
+	#dk_disable(boxer)
 	dk_disable(bzip2)
 	dk_disable(cef_binary)
 	dk_disable(cryptopp)
