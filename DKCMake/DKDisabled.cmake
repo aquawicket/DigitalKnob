@@ -145,9 +145,9 @@ if(IOS OR IOSSIM)  # Disabled for iOS and iOS-Simulator targets
 	dk_disable(libiconv)		# CMake Error at cmake/dist.cmake:144 (install): install TARGETS given no BUNDLE DESTINATION for MACOSX_BUNDLE executable target "iconvcli"
 	dk_disable(libjpeg-turbo)	# CMake Error at CMakeLists.txt:60 (string): string no output variable specified
 	dk_disable(libmd)			# dk_getExtension Function invoked with incorrect arguments
-	#dk_disable(libpng)
+	dk_disable(libpng)			# no such sysroot directory: 'iphonesimulator'
 	dk_disable(leptonica)
-	dk_disable(libtorrent)
+	#dk_disable(libtorrent)
 	dk_disable(libwebp)
 	dk_disable(libwebsockets)
 	dk_disable(libxml2)
@@ -252,8 +252,8 @@ if(ANDROID) # Disabled for Android targets
 	dk_disable(boxer)			# fatal error : 'boxer/boxer.h' file not found
 	dk_disable(bzip2)			# 'make' is not recognized as an internal or external command
 	dk_disable(cef_binary)
-	#dk_disable(cryptopp)
-	dk_disable(curl)
+	dk_disable(cryptopp)		# error : cannot use 'throw' with exceptions disabled
+	#dk_disable(curl)
 	dk_disable(DKCef)
 	dk_disable(DKCefChild)
 	dk_disable(DKCurl)
