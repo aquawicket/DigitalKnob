@@ -130,9 +130,9 @@ if(MAC)  # Disabled for MAC targets
 endif()
 
 if(IOS OR IOSSIM)  # Disabled for iOS and iOS-Simulator targets
-	dk_disable(boost)
+	#dk_disable(boost)
 	dk_disable(boxer)
-	#dk_disable(bzip2)
+	dk_disable(bzip2)			# dk_include Function invoked with incorrect arguments
 	dk_disable(cryptopp)		# ** BUILD FAILED ** /blake2b_simd.cpp
 	dk_disable(DKCef)
 	dk_disable(DKCefChild)
