@@ -248,8 +248,8 @@ if(ANDROID) # Disabled for Android targets
 	dk_disable(flac)			# error: unrecognized option: `-DANDROID32'
 	dk_disable(freealut)		# DKFunctions.cmake:4405->dk_findFiles():  files is invalid
 	#dk_disable(glew)
-	#dk_disable(imagemagick)
-	dk_disable(java)
+	dk_disable(imagemagick)		# dkscript.tmp: line 2: cd: /android32/Debug: No such file or directory
+	#dk_disable(java)
 	dk_disable(jerryscript)
 	dk_disable(kdevelop)
 	dk_disable(leptonica)
