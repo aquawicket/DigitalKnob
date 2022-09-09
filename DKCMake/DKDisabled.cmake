@@ -145,7 +145,7 @@ if(IOS OR IOSSIM)  # Disabled for iOS and iOS-Simulator targets
 	dk_disable(libiconv)		# CMake Error at cmake/dist.cmake:144 (install): install TARGETS given no BUNDLE DESTINATION for MACOSX_BUNDLE executable target "iconvcli"
 	dk_disable(libjpeg-turbo)	# CMake Error at CMakeLists.txt:60 (string): string no output variable specified
 	#dk_disable(libmd)
-	dk_disable(libpng)
+	#dk_disable(libpng)
 	dk_disable(leptonica)
 	dk_disable(libtorrent)
 	dk_disable(libwebp)
