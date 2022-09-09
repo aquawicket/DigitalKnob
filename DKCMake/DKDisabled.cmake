@@ -187,8 +187,8 @@ if(NOT LINUX AND NOT RASPBERRY) # Disabled NON Linux targets -> "Disabled for: W
 	dk_disable(mesa-common-dev)
 endif()
 if(LINUX) # Disabled for Linux targets
-	dk_disable(android-build-tools)
-	#dk_disable(boxer)
+	#dk_disable(android-build-tools)
+	dk_disable(boxer)			# no package gtk+-3.0 found
 	dk_disable(DKHook)
 	dk_disable(DKSDLWav)
 	dk_disable(DKSFMLWindow)
