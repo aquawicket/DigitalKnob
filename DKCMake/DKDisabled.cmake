@@ -153,8 +153,8 @@ if(IOS OR IOSSIM)  # Disabled for iOS and iOS-Simulator targets
 	dk_disable(libxml2)			# fatal error: 'config.h' file not found
 	dk_disable(lighttpd)
 	dk_disable(lua)
-	#dk_disable(mlocate)
-	dk_disable(openal)
+	dk_disable(mlocate)			# Unable to locate a Java Runtime that supports apt
+	#dk_disable(openal)
 	dk_disable(openjdk)
 	dk_disable(openjdk-8u41)
 	dk_disable(podofo)
@@ -265,8 +265,8 @@ if(ANDROID) # Disabled for Android targets
 	dk_disable(DKSFMLWindow)
 	dk_disable(DKWebSockets)
 	dk_disable(DKWebview)
-	#dk_disable(flac)
-	dk_disable(freealut)
+	dk_disable(flac)			# error: unrecognized option: `-DANDROID32'
+	#dk_disable(freealut)
 	dk_disable(glew)
 	dk_disable(imagemagick)
 	dk_disable(java)
