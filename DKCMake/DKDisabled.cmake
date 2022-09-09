@@ -132,8 +132,8 @@ endif()
 if(IOS OR IOSSIM)  # Disabled for iOS and iOS-Simulator targets
 	dk_disable(boost)
 	dk_disable(boxer)
-	dk_disable(bzip2)
-	#dk_disable(cryptopp)
+	#dk_disable(bzip2)
+	dk_disable(cryptopp)		# ** BUILD FAILED ** /blake2b_simd.cpp
 	dk_disable(DKCef)
 	dk_disable(DKCefChild)
 	dk_disable(DKMidi)
