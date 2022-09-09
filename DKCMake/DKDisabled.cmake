@@ -148,7 +148,7 @@ if(IOS OR IOSSIM)  # Disabled for iOS and iOS-Simulator builds
 	dk_disable(DKSDLCef)
 	dk_disable(DKSFMLRml)
 	dk_disable(DKSFMLWindow)
-	#dk_disable(freealut)
+	dk_disable(freealut)
 	dk_disable(glew)
 	dk_disable(imagemagick)
 	dk_disable(java)
