@@ -147,8 +147,8 @@ if(IOS OR IOSSIM)  # Disabled for iOS and iOS-Simulator targets
 	dk_disable(libmd)			# dk_getExtension Function invoked with incorrect arguments
 	dk_disable(libpng)			# no such sysroot directory: 'iphonesimulator'
 	dk_disable(leptonica)
-	#dk_disable(libtorrent)
-	dk_disable(libwebp)
+	dk_disable(libtorrent)
+	#dk_disable(libwebp)
 	dk_disable(libwebsockets)
 	dk_disable(libxml2)
 	dk_disable(lighttpd)

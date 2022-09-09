@@ -7,7 +7,7 @@ dk_depend(boost boost_system)
 dk_depend(openssl)
 
 
-dk_import(https://github.com/arvidn/libtorrent)
+dk_import(https://github.com/arvidn/libtorrent.git)
 #dk_set(TORRENT_MAJOR 2)
 #dk_set(TORRENT_MINOR 0)
 #dk_set(TORRENT_BUILD 4)
