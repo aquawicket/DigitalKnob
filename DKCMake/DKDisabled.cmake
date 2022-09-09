@@ -115,7 +115,7 @@ if(MAC)  # Disabled for MAC targets
 	dk_disable(libtorrent)
 	dk_disable(libwebp)
 	dk_disable(libwebsockets)
-	#dk_disable(libxml2)
+	dk_disable(libxml2)			# fatal error: 'extra/stricmp.h' file nt found
 	dk_disable(lighttpd)
 	dk_disable(lua)				# no CMakeLists.txt file
 	#dk_disable(mlocate)
@@ -250,7 +250,7 @@ if(ANDROID) # Disabled for Android targets
 	dk_disable(libtorrent)
 	#dk_disable(libiconv)
 	#dk_disable(ogg)
-	#dk_disable(libuv)
+	dk_disable(libuv)			# error : incomplete definition of type 'struct ifaddrs'
 	#dk_disable(vorbis)
 	dk_disable(libwebp)
 	dk_disable(libwebsockets)
