@@ -118,7 +118,7 @@ if(MAC)  # Disabled for MAC targets
 	dk_disable(libxml2)			# fatal error: 'extra/stricmp.h' file nt found
 	dk_disable(lighttpd)
 	dk_disable(lua)				# no CMakeLists.txt file
-	#dk_disable(mlocate)
+	dk_disable(mlocate)			# Unable to locate a Java Runtime that supports apt
 	#dk_disable(rtmidi)
 	#dk_disable(sdl-gpu)
 	#dk_disable(smpeg2)
