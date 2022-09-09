@@ -164,7 +164,6 @@ endif()
 
 
 if(LINUX) # Disabled for Linux targets
-	#dk_disable(android-build-tools) 	# download link invalid
 	dk_disable(boxer)					# no package gtk+-3.0 found
 	dk_disable(DKHook)
 	dk_disable(DKSDLWav)
