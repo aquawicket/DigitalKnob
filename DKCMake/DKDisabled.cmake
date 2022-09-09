@@ -155,11 +155,11 @@ if(IOS OR IOSSIM)  # Disabled for iOS and iOS-Simulator targets
 	dk_disable(podofo)			# Could not find FREETYPE
 	dk_disable(sdl-gpu)			# SDL2MAIN_LIBRARY is NOTFOUND
 	#dk_disable(sfml)
-	#dk_disable(smpeg2)
+	dk_disable(smpeg2)			# ** BUILD FAILED ** MPEGstream.cpp
 	dk_disable(tesseract)
 	#dk_disable(tidy-html5)
 	dk_disable(tiff)			# install TARGETS given no BUNDLE DESTINATION for MACOSX_BUNDLE executable target "fax2ps"
-	dk_disable(waave)
+	#dk_disable(waave)
 endif()
 
 
