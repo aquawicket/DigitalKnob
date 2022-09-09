@@ -209,7 +209,7 @@ if(LINUX) # Disabled for Linux targets
 	dk_disable(DKTorrent)
 	dk_disable(DKWebSockets)
 	dk_disable(freealut)
-	dk_disable(giflib)
+	#dk_disable(giflib)
 	dk_disable(imagemagick)
 	dk_disable(java)
 	dk_disable(openjdk)
@@ -228,7 +228,6 @@ if(LINUX) # Disabled for Linux targets
 	dk_disable(sfml)           # sfml_sfml-network)  #TODO: disabling individual sublibraries
 	dk_disable(stackwalker)
 	dk_disable(tesseract)
-	#dk_disable(tiff)
 	dk_disable(upx)
 	dk_disable(uwebsockets)
 	dk_disable(waave)
