@@ -105,7 +105,7 @@ endif()
 
 
 if(MAC)  # Disabled for MAC targets
-	#dk_disable(freealut)
+	dk_disable(freealut)		# ** BUILD FAILED **
 	#dk_disable(imagemagick)
 	#dk_disable(java)
 	#dk_disable(openjdk)
