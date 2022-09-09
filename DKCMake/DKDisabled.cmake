@@ -131,7 +131,7 @@ endif()
 
 if(IOS OR IOSSIM)  # Disabled for iOS and iOS-Simulator targets
 	dk_disable(boost)			# clang error: no such file or direcotry: libboost_atomic.a, libboost_chrono.a, etc, etc, etc
-	#dk_disable(boxer)
+	dk_disable(boxer)			# COCOA_LIBRARY not found
 	dk_disable(bzip2)			# dk_include Function invoked with incorrect arguments
 	dk_disable(cryptopp)		# ** BUILD FAILED ** /blake2b_simd.cpp
 	dk_disable(DKCef)
@@ -139,7 +139,7 @@ if(IOS OR IOSSIM)  # Disabled for iOS and iOS-Simulator targets
 	dk_disable(DKMidi)
 	dk_disable(DKSDLCef)
 	dk_disable(DKSFMLWindow)
-	dk_disable(freealut)
+	#dk_disable(freealut)
 	dk_disable(glew)
 	dk_disable(imagemagick)
 	dk_disable(java)
@@ -194,8 +194,8 @@ if(LINUX) # Disabled for Linux targets
 	dk_disable(DKSFMLWindow)
 	dk_disable(DKWebSockets)
 	dk_disable(freealut)				# AL/al.h: No such file or directory
-	#dk_disable(giflib)
-	dk_disable(imagemagick)
+	dk_disable(giflib)					# aclocal-1.15: command not found
+	#dk_disable(imagemagick)
 	dk_disable(java)
 	dk_disable(openjdk)
 	dk_disable(jerryscript)
