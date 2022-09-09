@@ -121,7 +121,7 @@ if(MAC)  # Disabled for MAC targets
 	dk_disable(mlocate)			# Unable to locate a Java Runtime that supports apt
 	#dk_disable(rtmidi)
 	dk_disable(sdl-gpu)			# SDL for MAC OS X only supports deploying on 10.7 and above
-	#dk_disable(smpeg2)
+	dk_disable(smpeg2)			# ** BUILD FAILED ** MPEGstream.cpp
 	#dk_disable(terminator)
 	dk_disable(tesseract)
 	dk_disable(waave)
