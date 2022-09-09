@@ -158,7 +158,7 @@ if(IOS OR IOSSIM)  # Disabled for iOS and iOS-Simulator targets
 	#dk_disable(smpeg2)
 	dk_disable(tesseract)
 	#dk_disable(tidy-html5)
-	#dk_disable(tiff)
+	dk_disable(tiff)			# install TARGETS given no BUNDLE DESTINATION for MACOSX_BUNDLE executable target "fax2ps"
 	dk_disable(waave)
 endif()
 
