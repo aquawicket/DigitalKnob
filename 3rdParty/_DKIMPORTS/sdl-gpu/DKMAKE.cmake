@@ -1,8 +1,11 @@
 # https://github.com/grimfang4/sdl-gpu
 
+
+### DEPENDS ###
 dk_depend(sdl)
 
 
+### IMPORT ###
 dk_import(https://github.com/grimfang4/sdl-gpu.git)
 
 
