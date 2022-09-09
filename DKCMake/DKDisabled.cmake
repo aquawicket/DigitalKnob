@@ -139,8 +139,8 @@ if(IOS OR IOSSIM)  # Disabled for iOS and iOS-Simulator targets
 	dk_disable(DKMidi)
 	dk_disable(DKSDLCef)
 	dk_disable(DKSFMLWindow)
-	#dk_disable(freealut)
-	dk_disable(glew)
+	dk_disable(freealut)		# freealut-master/iossim64 does not contain an Xcode project
+	#dk_disable(glew)
 	dk_disable(imagemagick)
 	dk_disable(java)
 	dk_disable(jerryscript)
