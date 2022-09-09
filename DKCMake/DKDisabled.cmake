@@ -106,7 +106,7 @@ if(WIN_64) # Disabled for Windows 64bit targets
 endif()
 
 
-if(MAC)  # Disabled for MAC builds
+if(MAC)  # Disabled for MAC targets
 	dk_disable(freealut)
 	dk_disable(imagemagick)
 	dk_disable(java)
@@ -129,7 +129,7 @@ if(MAC)  # Disabled for MAC builds
 	dk_disable(waave)
 endif()
 
-if(IOS OR IOSSIM)  # Disabled for iOS and iOS-Simulator builds
+if(IOS OR IOSSIM)  # Disabled for iOS and iOS-Simulator targets
 	dk_disable(boost)
 	dk_disable(boxer)
 	dk_disable(bzip2)
@@ -145,7 +145,7 @@ if(IOS OR IOSSIM)  # Disabled for iOS and iOS-Simulator builds
 	dk_disable(java)
 	dk_disable(jerryscript)
 	#dk_disable(libiconv)
-	dk_disable(libjpeg-turbo) # CMake Error at CMakeLists.txt:60 (string): string no output variable specified
+	dk_disable(libjpeg-turbo)	# CMake Error at CMakeLists.txt:60 (string): string no output variable specified
 	dk_disable(libmd)
 	dk_disable(libpng)
 	dk_disable(leptonica)
@@ -188,7 +188,7 @@ if(NOT LINUX AND NOT RASPBERRY) # Disabled NON Linux targets -> "Disabled for: W
 endif()
 if(LINUX) # Disabled for Linux targets
 	dk_disable(android-build-tools)
-	dk_disable(boxer)
+	#dk_disable(boxer)
 	dk_disable(DKHook)
 	dk_disable(DKSDLWav)
 	dk_disable(DKSFMLWindow)
