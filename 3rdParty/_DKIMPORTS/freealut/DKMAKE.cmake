@@ -6,12 +6,7 @@ dk_depend(msinttypes)
 dk_depend(openal)
 
 
-### VERSION ###
-#dk_set(FREEALUT_VERSION 1.1.0)
-#dk_set(FREEALUT_NAME freealut-${FREEALUT_VERSION})
-#dk_set(FREEALUT_DL http://distro.ibiblio.org/rootlinux/rootlinux-ports/more/freealut/${FREEALUT_NAME}.tar.gz)
-#dk_set(FREEALUT ${3RDPARTY}/${FREEALUT_NAME})
-#dk_import(${FREEALUT_DL} ${FREEALUT})
+### IMPORT ###
 dk_import(https://github.com/vancegroup/freealut.git)
 
 
@@ -22,8 +17,6 @@ WIN_dk_libDebug		(${FREEALUT}/${OS}/${DEBUG_DIR}/alut_static.lib)
 WIN_dk_libRelease	(${FREEALUT}/${OS}/${RELEASE_DIR}/alut_static.lib)
 UNIX_dk_libDebug	(${FREEALUT}/${OS}/src/${DEBUG_DIR}/libalut_static.a)
 UNIX_dk_libRelease	(${FREEALUT}/${OS}/src/${RELEASE_DIR}/libalut_static.a)
-#UNIX_dk_libDebug	(${FREEALUT}/${OS}/${DEBUG_DIR}/libalut_static.a)
-#UNIX_dk_libRelease	(${FREEALUT}/${OS}/${RELEASE_DIR}/libalut_static.a)
 
 
 ### GENERATE ###

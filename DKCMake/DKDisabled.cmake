@@ -157,7 +157,6 @@ if(IOS OR IOSSIM)  # Disabled for iOS and iOS-Simulator targets
 	dk_disable(sfml)			# Unknown CMake command "find_host_package"
 	dk_disable(smpeg2)			# ** BUILD FAILED ** MPEGstream.cpp
 	dk_disable(tesseract)
-	#dk_disable(tidy-html5)
 	dk_disable(tiff)			# install TARGETS given no BUNDLE DESTINATION for MACOSX_BUNDLE executable target "fax2ps"
 	dk_disable(waave)			# ** BUILD FAILED ** src/audio_decoder.c
 endif()
