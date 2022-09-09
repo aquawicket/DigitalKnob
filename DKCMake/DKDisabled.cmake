@@ -152,7 +152,7 @@ if(IOS OR IOSSIM)  # Disabled for iOS and iOS-Simulator targets
 	dk_disable(lighttpd)
 	dk_disable(lua)
 	dk_disable(mlocate)			# Unable to locate a Java Runtime that supports apt
-	#dk_disable(podofo)
+	dk_disable(podofo)			# Could not find FREETYPE
 	#dk_disable(rtmidi)
 	dk_disable(sdl-gpu)
 	dk_disable(sfml)
@@ -178,7 +178,7 @@ if(LINUX) # Disabled for Linux targets
 	dk_disable(jerryscript)
 	dk_disable(kdevelop)
 	dk_disable(leptonica)
-	#dk_disable(libtorrent)
+	dk_disable(libtorrent)				# Could not find BOOST
 	dk_disable(libwebp)
 	dk_disable(libwebsockets)
 	dk_disable(libxml2)
