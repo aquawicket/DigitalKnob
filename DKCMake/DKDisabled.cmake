@@ -133,7 +133,7 @@ if(IOS OR IOSSIM)  # Disabled for iOS and iOS-Simulator targets
 	dk_disable(boost)
 	dk_disable(boxer)
 	dk_disable(bzip2)
-	dk_disable(cryptopp)
+	#dk_disable(cryptopp)
 	dk_disable(DKCef)
 	dk_disable(DKCefChild)
 	dk_disable(DKMidi)
@@ -144,7 +144,7 @@ if(IOS OR IOSSIM)  # Disabled for iOS and iOS-Simulator targets
 	dk_disable(imagemagick)
 	dk_disable(java)
 	dk_disable(jerryscript)
-	#dk_disable(libiconv)
+	dk_disable(libiconv)		# CMake Error at cmake/dist.cmake:144 (install): install TARGETS given no BUNDLE DESTINATION for MACOSX_BUNDLE executable targer "iconvcli"
 	dk_disable(libjpeg-turbo)	# CMake Error at CMakeLists.txt:60 (string): string no output variable specified
 	dk_disable(libmd)
 	dk_disable(libpng)
