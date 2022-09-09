@@ -183,7 +183,6 @@ if(LINUX) # Disabled for Linux targets
 	dk_disable(sfml)           	# sfml_sfml-network)  #TODO: disabling individual sublibraries
 	dk_disable(stackwalker)
 	dk_disable(tesseract)
-	#dk_disable(upx)
 	dk_disable(uwebsockets)
 	dk_disable(waave)
 endif()
@@ -248,7 +247,7 @@ if(ANDROID) # Disabled for Android targets
 	dk_disable(vorbis)			# configure: error: unrecognized option: `-DANDROID32'
 	dk_disable(libwebp)
 	dk_disable(libwebsockets)
-	#dk_disable(libxml2)
+	dk_disable(libxml2)			# ../../configure: No such file or directory
 	dk_disable(lighttpd)
 	dk_disable(lua)
 	dk_disable(openal)			# The system cannot find the file specified
