@@ -248,7 +248,7 @@ if(ANDROID) # Disabled for Android targets
 	dk_disable(lighttpd)
 	dk_disable(lua)				# no CMakeLists.txt
 	dk_disable(openal)			# The system cannot find the file specified
-	#dk_disable(openssl)
+	dk_disable(openssl)
 	#dk_disable(podofo)
 	#dk_disable(rlottie)
 	#dk_disable(rtmidi)
