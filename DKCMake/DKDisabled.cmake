@@ -249,7 +249,7 @@ if(ANDROID) # Disabled for Android targets
 	dk_disable(lua)				# no CMakeLists.txt
 	dk_disable(openal)			# The system cannot find the file specified
 	dk_disable(openssl)
-	#dk_disable(podofo)
+	dk_disable(podofo)			# error : cannot use 'throw' with exceptions disabled
 	#dk_disable(rlottie)
 	#dk_disable(rtmidi)
 	#dk_disable(sdl-gpu)
