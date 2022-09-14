@@ -92,8 +92,8 @@ if(WIN) # Disabled for Windows targets
 	dk_disable(libwebp)
 	dk_disable(libwebsockets)
 	dk_disable(lighttpd)
-	#dk_disable(lua)
-	dk_disable(opensles)
+	dk_disable(lua)				# no CMakeLists.txt
+	#dk_disable(opensles)
 	dk_disable(sfml)
 	dk_disable(tesseract)
 	dk_disable(waave)
@@ -107,9 +107,6 @@ endif()
 if(MAC)  # Disabled for MAC targets
 	dk_disable(freealut)		# ** BUILD FAILED **
 	dk_disable(imagemagick)		# no such file or directory: libimagemagik.a
-	#dk_disable(java)
-	#dk_disable(openjdk)
-	#dk_disable(openjdk-8u41)
 	dk_disable(jerryscript)
 	dk_disable(leptonica)
 	dk_disable(libtorrent)
@@ -122,7 +119,6 @@ if(MAC)  # Disabled for MAC targets
 	dk_disable(rtmidi)			# Undefined symbols for architecture x86_64
 	dk_disable(sdl-gpu)			# SDL for MAC OS X only supports deploying on 10.7 and above
 	dk_disable(smpeg2)			# ** BUILD FAILED ** MPEGstream.cpp
-	#dk_disable(terminator)
 	dk_disable(tesseract)
 	dk_disable(waave)
 endif()
@@ -150,7 +146,7 @@ if(IOS OR IOSSIM)  # Disabled for iOS and iOS-Simulator targets
 	dk_disable(libwebsockets)
 	dk_disable(libxml2)			# fatal error: 'config.h' file not found
 	dk_disable(lighttpd)
-	dk_disable(lua)
+	dk_disable(lua)				# no CMakeLists.txt
 	dk_disable(mlocate)			# Unable to locate a Java Runtime that supports apt
 	dk_disable(podofo)			# Could not find FREETYPE
 	dk_disable(sdl-gpu)			# SDL2MAIN_LIBRARY is NOTFOUND
@@ -179,7 +175,7 @@ if(LINUX) # Disabled for Linux targets
 	dk_disable(libwebsockets)
 	dk_disable(libxml2)			# Not such file or directory
 	dk_disable(lighttpd)
-	dk_disable(lua)
+	dk_disable(lua)				# no CMakeLists.txt
 	dk_disable(sfml)           	# sfml_sfml-network)  #TODO: disabling individual sublibraries
 	dk_disable(stackwalker)
 	dk_disable(tesseract)
@@ -207,7 +203,7 @@ if(RASPBERRY) # Disabled for Raspberry Pi targets
 	dk_disable(libwebsockets)
 	dk_disable(libxml2)
 	dk_disable(lighttpd)
-	dk_disable(lua)
+	dk_disable(lua)				# no CMakeLists.txt
 	dk_disable(rtmidi)
 	dk_disable(sdl-gpu)
 	dk_disable(stackwalker)
@@ -249,7 +245,7 @@ if(ANDROID) # Disabled for Android targets
 	dk_disable(libwebsockets)
 	dk_disable(libxml2)			# ../../configure: No such file or directory
 	dk_disable(lighttpd)
-	dk_disable(lua)
+	dk_disable(lua)				# no CMakeLists.txt
 	dk_disable(openal)			# The system cannot find the file specified
 	#dk_disable(openssl)
 	#dk_disable(podofo)

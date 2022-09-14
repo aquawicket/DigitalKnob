@@ -3,6 +3,11 @@
 # https://dl.google.com/android/repository/sdk-tools-darwin-4333796.zip
 # https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip
 
+if(NOT ANDROID)
+	dk_undepend(android-sdk-tools)
+	return()
+endif()
+
 dk_depend(android-sdk)
 
 

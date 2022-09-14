@@ -3,6 +3,11 @@
 # https://dl.google.com/android/repository/sys-img/android/x86-24_r08.zip
 # https://dl.google.com/android/repository/sys-img/android/x86_64-24_r08.zip
 
+if(NOT ANDROID)
+	dk_undepend(android-system-images)
+	return()
+endif()
+
 dk_depend(android-sdk)
 
 dk_makeDirectory(${ANDROID-SDK}/system-images)

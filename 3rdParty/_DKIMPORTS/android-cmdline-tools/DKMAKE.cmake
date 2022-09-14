@@ -10,6 +10,11 @@
 # https://dl.google.com/android/repository/commandlinetools-linux-7302050_latest.zip
 # https://dl.google.com/android/repository/commandlinetools-win-7583922_latest.zip
 
+if(NOT ANDROID)
+	dk_undepend(android-cmdline-tools)
+	return()
+endif()
+
 #dk_depend(jdk8)
 
 dk_set(ANDROID-SDK ${3RDPARTY}/android-sdk)

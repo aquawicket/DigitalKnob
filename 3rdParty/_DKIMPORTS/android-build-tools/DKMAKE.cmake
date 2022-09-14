@@ -11,6 +11,11 @@
 # https://mirrors.cloud.tencent.com/AndroidSDK/build-tools_r30.0.1-macosx.zip
 # https://dl.google.com/android/repository/cc6bd534c6c37604205171784ac5621.build-tools_r30.0.3-linux.zip
 
+if(NOT ANDROID)
+	dk_undepend(android-build-tools)
+	return()
+endif()
+
 dk_depend(android-sdk)
 
 dk_makeDirectory(${ANDROID-SDK}/build-tools)

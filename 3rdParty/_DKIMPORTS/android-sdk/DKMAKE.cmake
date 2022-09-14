@@ -1,5 +1,10 @@
 ### android-sdk ###
 
+if(NOT ANDROID)
+	dk_undepend(android-sdk)
+	return()
+endif()
+
 dk_set(ANDROID-SDK ${3RDPARTY}/android-sdk)
 dk_depend(openjdk)
 dk_depend(openjdk-8u41)

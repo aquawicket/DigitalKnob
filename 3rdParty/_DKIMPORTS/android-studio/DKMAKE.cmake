@@ -1,6 +1,8 @@
 # https://developer.android.com/studio/archive
 # https://developer.android.com/studio#downloads
-if(NOT WIN_HOST)
+
+if(NOT ANDROID AND NOT WIN_HOST)
+	dk_undepend(android-studio)
 	return()
 endif()
 

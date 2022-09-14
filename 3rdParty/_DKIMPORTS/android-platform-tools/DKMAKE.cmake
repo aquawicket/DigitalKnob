@@ -3,6 +3,11 @@
 # https://dl.google.com/android/repository/platform-tools_r31.0.3-linux.zip
 # https://mirrors.cloud.tencent.com/AndroidSDK/
 
+if(NOT ANDROID)
+	dk_undepend(android-platform-tools)
+	return()
+endif()
+
 dk_depend(android-sdk)
 
 WIN_HOST_dk_import(https://dl.google.com/android/repository/platform-tools_r31.0.3-windows.zip PATH ${ANDROID-SDK}/platform-tools)

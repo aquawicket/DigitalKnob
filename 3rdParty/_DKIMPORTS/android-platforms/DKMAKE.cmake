@@ -1,5 +1,10 @@
 # https://dl.google.com/android/repository/platform-26_r02.zip
 
+if(NOT ANDROID)
+	dk_undepend(android-platforms)
+	return()
+endif()
+
 dk_depend(android-sdk)
 
 dk_makeDirectory(${ANDROID-SDK}/platforms)

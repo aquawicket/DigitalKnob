@@ -2,6 +2,11 @@
 # https://dl.google.com/android/repository/sources-24_r01.zip
 # https://dl.google.com/android/repository/sources-26_r01.zip
 
+if(NOT ANDROID)
+	dk_undepend(android-sources)
+	return()
+endif()
+
 dk_depend(android-sdk)
 
 dk_makeDirectory(${ANDROID-SDK}/sources)
