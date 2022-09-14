@@ -176,6 +176,7 @@ if(LINUX) # Disabled for Linux targets
 	dk_disable(libxml2)			# Not such file or directory
 	dk_disable(lighttpd)
 	dk_disable(lua)				# no CMakeLists.txt
+	dk_disable(sdl_image)		# cannot locate tiffconf.h
 	dk_disable(sfml)           	# sfml_sfml-network)  #TODO: disabling individual sublibraries
 	dk_disable(stackwalker)
 	dk_disable(tesseract)
