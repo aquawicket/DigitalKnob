@@ -186,7 +186,7 @@ endif()
 
 
 if(RASPBERRY) # Disabled for Raspberry Pi targets
-	dk_disable(android-build-tools)
+	#dk_disable(android-build-tools)
 	dk_disable(boxer)
 	dk_disable(DKMidi)
 	dk_disable(DKWebSockets)
