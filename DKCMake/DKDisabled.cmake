@@ -258,7 +258,7 @@ if(ANDROID) # Disabled for Android targets
 	dk_disable(smpeg2)
 	dk_disable(stackwalker)
 	dk_disable(tesseract)
-	#dk_disable(uwebsockets)
+	dk_disable(uwebsockets)		# Could NOT find OpenSSL
 	#dk_disable(xz)
 	dk_disable(waave)
 endif()
