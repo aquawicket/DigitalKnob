@@ -1,24 +1,8 @@
-if(WIN)
-	dk_findLibrary(OpenSLES)
-endif()
+# opensles
 
-#if(MAC)
-#	dk_findLibrary(OpenSLES)
-#endif()
-
-if(IOS)
+if(NOT ANDROID AND NOT IOS AND NOT IOSSIM)
+	dk_undepend(opensles)
 	return()
-	#dk_findLibrary(OpenSLES)
 endif()
 
-#if(LINUX)
-#	dk_findLibrary(OpenSLES)
-#endif()
-
-#if(RASPBERRY)
-#	dk_findLibrary(OpenSLES)
-#endif()	
-
-if(ANDROID)
-	dk_findLibrary(OpenSLES)
-endif()
+dk_findLibrary(OpenSLES)
