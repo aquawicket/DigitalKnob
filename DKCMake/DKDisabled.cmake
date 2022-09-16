@@ -250,16 +250,13 @@ if(ANDROID) # Disabled for Android targets
 	dk_disable(openal)			# The system cannot find the file specified
 	dk_disable(openssl)
 	dk_disable(podofo)			# error : cannot use 'throw' with exceptions disabled
-	#dk_disable(rlottie)
 	dk_disable(rtmidi)			# ALSA API requested but no ALSA dev libraries found
 	dk_disable(sdl-gpu)			# The target "SDL_gpu" does not exist in the project
-	#dk_disable(sdl_mixer)
 	dk_disable(sfml)
 	dk_disable(smpeg2)
 	dk_disable(stackwalker)
 	dk_disable(tesseract)
 	dk_disable(uwebsockets)		# Could NOT find OpenSSL
-	#dk_disable(xz)
 	dk_disable(waave)
 endif()
 
