@@ -84,7 +84,7 @@ dk_disable(sw-client)
 
 if(WIN) # Disabled for Windows targets
 	dk_disable(android-java-tools)
-	dk_disable(DKSFMLWindow)
+	#dk_disable(DKSFMLWindow)
 	dk_disable(freealut)
 	dk_disable(jerryscript)
 	dk_disable(leptonica)
@@ -93,7 +93,6 @@ if(WIN) # Disabled for Windows targets
 	dk_disable(libwebsockets)
 	dk_disable(lighttpd)
 	dk_disable(lua)				# no CMakeLists.txt
-	#dk_disable(sfml)
 	dk_disable(tesseract)
 	dk_disable(waave)
 endif()
