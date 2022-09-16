@@ -23,8 +23,8 @@ RASPBERRY_dk_libDebug	(${SDL_MIXER}/${OS}/${DEBUG_DIR}/lib/SDL_mixer.a)
 RASPBERRY_dk_libRelease	(${SDL_MIXER}/${OS}/${RELEASE_DIR}/lib/SDL_mixer.a)
 #ANDROID_dk_libDebug	(${SDL_MIXER}/${OS}/${DEBUG_DIR}/obj/local/armeabi-v7a/libSDL2_mixer.a)
 #ANDROID_dk_libRelease	(${SDL_MIXER}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/libSDL2_mixer.a)
-ANDROID_dk_libDebug		(${SDL_MIXER}/${OS}/${DEBUG_DIR}/lib/SDL_mixer.a)
-ANDROID_dk_libRelease	(${SDL_MIXER}/${OS}/${RELEASE_DIR}/lib/SDL_mixer.a)
+ANDROID_dk_libDebug		(${SDL_MIXER}/${OS}/lib/${DEBUG_DIR}/SDL_mixer.a)
+ANDROID_dk_libRelease	(${SDL_MIXER}/${OS}/lib/${RELEASE_DIR}/SDL_mixer.a)
 
 
 ### GENERATE ###
