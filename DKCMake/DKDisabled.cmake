@@ -93,8 +93,7 @@ if(WIN) # Disabled for Windows targets
 	dk_disable(libwebsockets)
 	dk_disable(lighttpd)
 	dk_disable(lua)				# no CMakeLists.txt
-	#dk_disable(opensles)
-	dk_disable(sfml)
+	#dk_disable(sfml)
 	dk_disable(tesseract)
 	dk_disable(waave)
 endif()
@@ -176,7 +175,6 @@ if(LINUX) # Disabled for Linux targets
 	dk_disable(libxml2)			# Not such file or directory
 	dk_disable(lighttpd)
 	dk_disable(lua)				# no CMakeLists.txt
-	#dk_disable(sdl_image)		# cannot locate tiffconf.h
 	dk_disable(sfml)           	# sfml_sfml-network)  #TODO: disabling individual sublibraries
 	dk_disable(stackwalker)
 	dk_disable(tesseract)
@@ -236,7 +234,6 @@ if(ANDROID) # Disabled for Android targets
 	dk_disable(freealut)		# DKFunctions.cmake:4405->dk_findFiles():  files is invalid
 	dk_disable(imagemagick)		# dkscript.tmp: line 2: cd: /android32/Debug: No such file or directory
 	dk_disable(jerryscript)
-	dk_disable(kdevelop)
 	dk_disable(leptonica)
 	dk_disable(libtorrent)
 	dk_disable(ogg)				# configure: error: unrecognized option: `-DANDROID32'
