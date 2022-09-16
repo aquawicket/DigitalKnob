@@ -83,12 +83,10 @@ dk_disable(sw-client)
 
 
 if(WIN) # Disabled for Windows targets
-	dk_disable(android-java-tools)
-	#dk_disable(DKSFMLWindow)
 	dk_disable(freealut)
 	dk_disable(jerryscript)
 	dk_disable(leptonica)
-	dk_disable(libtorrent)
+	#dk_disable(libtorrent)		# Could NOT find Boost (missing: Boost_INCLUDE_DIR)
 	dk_disable(libwebp)
 	dk_disable(libwebsockets)
 	dk_disable(lighttpd)
