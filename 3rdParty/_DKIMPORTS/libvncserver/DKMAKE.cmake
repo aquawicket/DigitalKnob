@@ -13,7 +13,7 @@ LINUX_dk_depend(libsystemd-dev)
 
 
 
-dk_import(https://github.com/LibVNC/libvncserver)
+dk_import(https://github.com/LibVNC/libvncserver.git)
 
 
 

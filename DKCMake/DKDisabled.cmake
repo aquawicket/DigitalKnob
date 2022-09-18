@@ -64,7 +64,7 @@ dk_disable(java)
 dk_disable(jpeg)				# DEPRECATED: using libjpeg_turbo instead
 dk_disable(libcaca)
 dk_disable(librocket)			# OBSOLETE: replaced with RmlUi
-dk_disable(libvncserver)
+dk_disable(libvncserver)		# error C2065: 'nonBlocking': undeclared identifier
 dk_disable(libvncserver-master-win)
 dk_disable(libx11)
 dk_disable(miniweb)
