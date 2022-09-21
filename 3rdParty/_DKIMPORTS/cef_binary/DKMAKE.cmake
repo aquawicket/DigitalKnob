@@ -67,7 +67,7 @@ LINUX_dk_depend(libgtk2.0-dev)
 
 
 WIN32_dk_import			(https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_windows32.tar.bz2)
-#WIN32_dk_download		(https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_windows32_debug_symbols.tar.bz2)
+WIN32_dk_download		(https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_windows32_debug_symbols.tar.bz2)
 WIN64_dk_import			(https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_windows64.tar.bz2)
 #WIN64_dk_download		(https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_windows64_debug_symbols.tar.bz2)
 # WINARM64_dk_import	(https://cef-builds.spotifycdn.com/cef_binary_88.1.4+g5a6ab23+chromium-88.0.4324.96_windowsarm64.tar.bz2)

@@ -3,13 +3,17 @@ CPP_DK_Create("DKDebug")
 
 //const url = CPP_DKAssets_LocalAssets()+"index.html"
 const url = CPP_DKAssets_LocalAssets()+"DKWebTest/index.html"
+//const url = "chrome://"
 
 console.log("app.js: CPP_DK_GetOS() = "+CPP_DK_GetOS()+"\n")
+
+/*
 if(CPP_DK_GetOS() == "Windows"){
 	CPP_DKFile_ChDir(CPP_DKAssets_LocalAssets()+"DKPhp/")
 	const batch = CPP_DKAssets_LocalAssets()+"DKPhp/RunPhpServers.bat"
 	CPP_DK_System(batch)
 }
+*/
 	
 //// Create Cef window
 const cef_x = 0
