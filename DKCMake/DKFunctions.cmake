@@ -915,7 +915,7 @@ endfunction()
 #
 #	Notes: https://cmake.org/pipermail/cmake/2012-September/052205.html/
 #
-function(dk_download src_path dest_path) # ARGV1 = dest_path #NOERROR
+function(dk_download src_path) # ARGV1 = dest_path #NOERROR
 	DKDEBUGFUNC(${ARGV})
 	#FIXME: Will not download if only 1 argument
 	#TODO: Let's supply the ability to add a primary root address to download from,  for fast downloading from local hard drives or storage 
@@ -928,6 +928,8 @@ function(dk_download src_path dest_path) # ARGV1 = dest_path #NOERROR
 #		dk_info("TODO: just set SecondaryDownloadServer to your mirror location and all file downoads that fail will attempt secondary location next")
 #	endif()
 
+	set(dest_path ${ARGV1})
+	
 	dk_includes("${ARGN}" "NOERROR" includes)
 	if(${includes})
 		set(noerror true)

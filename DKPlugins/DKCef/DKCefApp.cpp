@@ -59,7 +59,7 @@ DKString DKV8::sandbox;
 //DKString DKV8::off_screen_rendering_enabled;
 
 void DKV8::SetFlags(){
-	DKDEBUGFUNC();
+	//DKDEBUGFUNC();
 	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[CEF_HOMEPAGE]", homepage);
 	DKINFO("DKV8::homepage = "+homepage+"\n");
 
@@ -113,7 +113,7 @@ void DKV8::SetFlags(){
 }
 
 bool DKV8::AttachFunction(const DKString& name, bool (*func)(CefArgs, CefReturn)){
-	DKDEBUGFUNC(name, func);
+	//DKDEBUGFUNC(name, func);
 	//FIXME - this is very unstable, not thread safe
 	// 
 	//multi process will fail
@@ -135,7 +135,7 @@ bool DKV8::AttachFunction(const DKString& name, bool (*func)(CefArgs, CefReturn)
 }
 
 bool DKV8::GetFunctions(CefRefPtr<CefBrowser> browser){
-	DKDEBUGFUNC(browser);
+	//DKDEBUGFUNC(browser);
 	CefRefPtr<CefProcessMessage> msg = CefProcessMessage::Create("GetFunctions");
 	CefRefPtr<CefListValue> args = msg->GetArgumentList();
 	int i=0;
@@ -152,7 +152,7 @@ bool DKV8::GetFunctions(CefRefPtr<CefBrowser> browser){
 
 //Multi process Execute
 bool DKV8::Execute(CefRefPtr<CefBrowser> browser, std::string func, CefRefPtr<CefListValue> args) {
-	DKDEBUGFUNC(browser, func, args);
+	//DKDEBUGFUNC(browser, func, args);
 	_browser = browser;
 	if(!functions[func])
 		return DKERROR("DKCefV8Handler::Execute(): "+func+" not registered\n");
@@ -181,7 +181,7 @@ bool DKV8::Execute(CefRefPtr<CefBrowser> browser, std::string func, CefRefPtr<Ce
 
 //Single process Execute
 bool DKCefV8Handler::Execute(const CefString& name, CefRefPtr<CefV8Value> object, const CefV8ValueList& arguments, CefRefPtr<CefV8Value>& retval, CefString& exception){
-	DKDEBUGFUNC(name, object, arguments, retval, exception);
+	//DKDEBUGFUNC(name, object, arguments, retval, exception);
 	if(DKV8::singleprocess == true){ //Single process
 		if(!DKV8::functions[name])
 			return DKERROR(name.ToString()+" not registered\n");
@@ -237,7 +237,7 @@ bool DKCefV8Handler::Execute(const CefString& name, CefRefPtr<CefV8Value> object
 }
 
 void DKCefV8Handler::SetBrowser(CefRefPtr<CefBrowser> _browser){
-	DKDEBUGFUNC(browser);
+	//DKDEBUGFUNC(browser);
 	browser = _browser;
 }
 
@@ -262,7 +262,7 @@ bool DKCefApp::SendEvent(const DKString& id, const DKString& type, const DKStrin
 */
 
 void DKCefApp::OnBeforeCommandLineProcessing(const CefString& process_type, CefRefPtr<CefCommandLine> command_line){
-	DKDEBUGFUNC(process_type, command_line);
+	//DKDEBUGFUNC(process_type, command_line);
 #ifndef DEBUG
 	CEF_REQUIRE_UI_THREAD();
 #endif
@@ -308,7 +308,7 @@ void DKCefApp::OnBeforeCommandLineProcessing(const CefString& process_type, CefR
 }
 
 void DKCefApp::OnBrowserCreated(CefRefPtr<CefBrowser> browser, CefRefPtr<CefDictionaryValue> extra_info) {
-	DKDEBUGFUNC(browser, extra_info);
+	//DKDEBUGFUNC(browser, extra_info);
 #ifndef DEBUG
 	CEF_REQUIRE_UI_THREAD();
 #endif
@@ -322,7 +322,7 @@ void DKCefApp::OnBrowserCreated(CefRefPtr<CefBrowser> browser, CefRefPtr<CefDict
 }
 
 void DKCefApp::OnContextInitialized() {
-	DKDEBUGFUNC();
+	//DKDEBUGFUNC();
 #ifndef DEBUG
 	CEF_REQUIRE_UI_THREAD();
 #endif
@@ -330,7 +330,7 @@ void DKCefApp::OnContextInitialized() {
 }
 
 void DKCefApp::OnContextCreated(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefV8Context> context) {
-	DKDEBUGFUNC(browser, frame, context);
+	//DKDEBUGFUNC(browser, frame, context);
 #ifndef DEBUG
 	CEF_REQUIRE_UI_THREAD();
 #endif
@@ -344,7 +344,7 @@ void DKCefApp::OnContextCreated(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFram
 }
 
 bool DKCefApp::OnProcessMessageReceived(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefProcessId source_process, CefRefPtr<CefProcessMessage> message) {
-	DKDEBUGFUNC(browser, source_process, message);
+	//DKDEBUGFUNC(browser, source_process, message);
 #ifndef DEBUG
 	CEF_REQUIRE_UI_THREAD();
 #endif

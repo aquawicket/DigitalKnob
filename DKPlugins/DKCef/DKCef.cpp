@@ -57,7 +57,7 @@ bool DKCef::initialized = false;
 
 
 bool DKCef::Init(){
-	DKDEBUGFUNC();
+	//DKDEBUGFUNC();
 	//CefEnableHighDPISupport();
 	DKClass::DKCreate("DKCefJS");
 	DKClass::DKCreate("DKCefV8");
@@ -176,7 +176,7 @@ bool DKCef::Init(){
 			//DKClass::_Close("DKWindow0"); //REVIEW: This coming after return ?
 		}
 	}
-	// checkout detailed settings options http://magpcss.org/ceforum/apidocs/projects/%28default%29/_cef_settings_t.html
+	// Detailed settings options http://magpcss.org/ceforum/apidocs/projects/%28default%29/_cef_settings_t.html
 	// CefString(&settings.log_file).FromASCII("");
 	DKV8::SetFlags();
 	CefSettings settings;
