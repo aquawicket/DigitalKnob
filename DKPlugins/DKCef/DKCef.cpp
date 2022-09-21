@@ -57,7 +57,7 @@ bool DKCef::initialized = false;
 
 
 bool DKCef::Init(){
-	//DKDEBUGFUNC();
+	DKDEBUGFUNC();
 	//CefEnableHighDPISupport();
 	DKClass::DKCreate("DKCefJS");
 	DKClass::DKCreate("DKCefV8");
@@ -122,7 +122,7 @@ bool DKCef::Init(){
 			FreeLibrary(libcef);
 		}
 		__HrLoadAllImportsForDll("libcef.dll"); //delay loading the DLL from another location 
-#endif
+#	endif
 
 #if WIN64
 		DKString elf_dll;
@@ -155,15 +155,15 @@ bool DKCef::Init(){
 	//IMPORTANT INFORMATION
 	//https://bitbucket.org/chromiumembedded/cef/wiki/GeneralUsage.md#markdown-header-application-structure
 #if MAC
-	CefScopedLibraryLoader library_loader;
-	if(!library_loader.LoadInMain())
-		return 1;
-#endif
-#if WIN32
-	CefMainArgs args(GetModuleHandle(NULL));
-#else
-	CefMainArgs args(DKApp::argc, DKApp::argv);
-#endif
+		CefScopedLibraryLoader library_loader;
+		if(!library_loader.LoadInMain())
+			return 1;
+#	endif
+#	ifdef WIN32
+		CefMainArgs args(GetModuleHandle(NULL));
+#	else
+		CefMainArgs args(DKApp::argc, DKApp::argv);
+#	endif
 	if(!initialized){
 		cefApp = new DKCefApp();
 		initialized = true;
@@ -176,7 +176,7 @@ bool DKCef::Init(){
 			//DKClass::_Close("DKWindow0"); //REVIEW: This coming after return ?
 		}
 	}
-	// Detailed settings options http://magpcss.org/ceforum/apidocs/projects/%28default%29/_cef_settings_t.html
+	// checkout detailed settings options http://magpcss.org/ceforum/apidocs/projects/%28default%29/_cef_settings_t.html
 	// CefString(&settings.log_file).FromASCII("");
 	DKV8::SetFlags();
 	CefSettings settings;
@@ -187,10 +187,10 @@ bool DKCef::Init(){
 		settings.no_sandbox = true;
 	else{
 		settings.no_sandbox = false;
-#if LINUX
-		//CefScopedSandboxInfo scoped_sandbox;
-		//sandbox_info = scoped_sandbox.sandbox_info();
-#endif
+#		ifndef LINUX
+			//CefScopedSandboxInfo scoped_sandbox;
+			//sandbox_info = scoped_sandbox.sandbox_info();
+#		endif
 	}
 	if(same(DKV8::multi_threaded_message_loop, "ON"))
 		settings.multi_threaded_message_loop = true;
@@ -211,57 +211,58 @@ bool DKCef::Init(){
 	//settings.persist_session_cookies;
 	//settings.persist_user_preferences;
 	//MAC's resources are in the bundle
-#if MAC
-	DKString rp = DKFile::local_assets + "DKCef";
-	CefString(&settings.resources_dir_path) = rp.c_str();
-	DKString lp = DKFile::local_assets + "DKCef/locales";
-	CefString(&settings.locales_dir_path) = lp.c_str();
-#endif
+#	ifndef MAC
+		DKString rp = DKFile::local_assets + "DKCef";
+		CefString(&settings.resources_dir_path) = rp.c_str();
+		DKString lp = DKFile::local_assets + "DKCef/locales";
+		CefString(&settings.locales_dir_path) = lp.c_str();
+#	endif
 	DKString cp = DKFile::local_assets + "USER";
 	CefString(&settings.cache_path) = cp.c_str();
 	DKString lf = DKFile::local_assets + "cef.log";
 	CefString(&settings.log_file) = lf.c_str();
-#if WIN32
-#	if !WIN64
-#		ifdef DEBUG
-			DKString ep = DKFile::local_assets + "DKCef/win32Debug/DKCefChild.exe";
-#		else
-			DKString ep = DKFile::local_assets + "DKCef/win32Release/DKCefChild.exe";
+#	ifdef WIN32
+#		if defined(WIN32) && !defined(WIN64)
+#			ifdef DEBUG
+				DKString ep = DKFile::local_assets + "DKCef/win32Debug/DKCefChild.exe";
+#			else
+				DKString ep = DKFile::local_assets + "DKCef/win32Release/DKCefChild.exe";
+#			endif
 #		endif
-#	endif
-#	if WIN64
-#		ifdef DEBUG
-			DKString ep = DKFile::local_assets + "DKCef/win64Debug/DKCefChild.exe";
-#		else
-			DKString ep = DKFile::local_assets + "DKCef/win64Release/DKCefChild.exe";
+
+#		ifdef WIN64
+#			ifdef DEBUG
+				DKString ep = DKFile::local_assets + "DKCef/win64Debug/DKCefChild.exe";
+#			else
+				DKString ep = DKFile::local_assets + "DKCef/win64Release/DKCefChild.exe";
+#			endif
 #		endif
+
+		if(!DKFile::PathExists(ep)){
+		    DKWARN("file not found: "+ep+"\n");
+		    //TODO: disable multi-process
+		}
+		CefString(&settings.browser_subprocess_path) = ep.c_str(); //DKCefChild.exe
 #	endif
 
-	if(!DKFile::PathExists(ep)){
-	    DKWARN("file not found: "+ep+"\n");
-	    //TODO: disable multi-process
-	}
-	CefString(&settings.browser_subprocess_path) = ep.c_str(); //DKCefChild.exe
-#endif
+#	ifdef MAC
+		DKString exepath;
+		DKFile::GetExePath(exepath);
+		DKINFO("exepath="+exepath+"\n");
+		DKString exename;
+		DKFile::GetExeName(exename);
+		DKString ep = exepath+"../Frameworks/"+exename+" Helper.app/Contents/MacOS/"+exename+" Helper";
+		CefString(&settings.browser_subprocess_path) = ep.c_str(); //helper
+#	endif
 
-#if MAC
-	DKString exepath;
-	DKFile::GetExePath(exepath);
-	DKINFO("exepath="+exepath+"\n");
-	DKString exename;
-	DKFile::GetExeName(exename);
-	DKString ep = exepath+"../Frameworks/"+exename+" Helper.app/Contents/MacOS/"+exename+" Helper";
-	CefString(&settings.browser_subprocess_path) = ep.c_str(); //helper
-#endif
-
-#if LINUX
-	DKString ep = DKFile::local_assets + "DKCef/DKCefChild";
-	if(!DKFile::PathExists(ep)){
-	    DKERROR("file not found: "+ep+"\n");
-	    //TODO: disable multi-process
-	}
-	CefString(&settings.browser_subprocess_path) = ep.c_str(); //DKCefChild
-#endif
+#	ifdef LINUX
+		DKString ep = DKFile::local_assets + "DKCef/DKCefChild";
+		if(!DKFile::PathExists(ep)){
+		    DKERROR("file not found: "+ep+"\n");
+		    //TODO: disable multi-process
+		}
+		CefString(&settings.browser_subprocess_path) = ep.c_str(); //DKCefChild
+#	endif
 
 	int major_version = cef_version_info(0);
 	int build_version = cef_version_info(4);
@@ -310,13 +311,11 @@ bool DKCef::End(){
 	DKUtil::GetThreadId(threadId);
 	if(cefThreadId != threadId)
 		return DKERROR("Error: not in the main cef thread\n");
-	
-	//FIXME - many crashes at CefShutdown
 	DKINFO("CefShutdown();\n");
+	//FIXME - many crashes at CefShutdown
 	CefShutdown(); //call on same thread as CefInitialize
-	
 #if WIN32
-	//FreeLibrary(libcef);
+		//FreeLibrary(libcef);
 #endif
 	return true;
 }
@@ -485,9 +484,9 @@ bool DKCef::GoForward(const int& browser){
 
 bool DKCef::NewBrowser(const void* input, void* output){
 	DKDEBUGFUNC(input, output);
-	DKString _data = *(DKString*)input;
+	DKString data = *(DKString*)input;
 	DKStringArray arry;
-	toStringArray(arry, _data, ",");
+	toStringArray(arry, data, ",");
 	NewBrowser(arry[0], toInt(arry[1]), toInt(arry[2]), toInt(arry[3]), toInt(arry[4]), arry[5]);
 	return false;
 }
@@ -544,19 +543,19 @@ bool DKCef::NewBrowser(const DKString& id, const int& top, const int& left, cons
 		DKString title; 
 		DKFile::GetExeName(title);
 		DKFile::RemoveExtention(title);
-#		if WIN32 && !WIN64
+#		if defined(WIN32) && !defined(WIN64)
 			title += " - WIN32";
 #		endif
-#		if WIN64
+#		ifdef WIN64
 			title += " - WIN64";
 #		endif
-#		if MAC
+#		ifdef MAC
 			title += " - MAC";
 #		endif
-#		if LINUX
+#		ifdef LINUX
 			title += " - LINUX";
 #		endif
-#		if DEBUG
+#		ifdef DEBUG
 			title += " DEBUG ";
 #		else
 			title += " RELEASE ";
@@ -566,7 +565,7 @@ bool DKCef::NewBrowser(const DKString& id, const int& top, const int& left, cons
 		DKFile::GetExePath(file);
 		DKFile::GetModifiedTime(file, mTime);
 		title += mTime;
-#		if WIN32
+#		ifdef WIN32
 			window_info.SetAsPopup(NULL, title.c_str());
 #		endif
 		window_info.y = top;
@@ -592,13 +591,13 @@ bool DKCef::NewBrowser(const DKString& id, const int& top, const int& left, cons
 		DKClass::CallFunc("DKCefWindow::SetIcon", &icon, NULL);
 		
 #	if LINUX
-#		ifdef USE_GDK
-			gdk_init(NULL, NULL);
-			GdkWindow* gdk_window = gdk_window_foreign_new(current_browser->GetHost()->GetWindowHandle());
-			if(!gdk_window)
-			      return DKERROR("gdk_window invalid\n");
-			gdk_window_set_title(gdk_window, title.c_str());
-#		endif //USE_GDK
+#			ifdef USE_GDK
+				gdk_init(NULL, NULL);
+				GdkWindow* gdk_window = gdk_window_foreign_new(current_browser->GetHost()->GetWindowHandle());
+				if(!gdk_window)
+				      return DKERROR("gdk_window invalid\n");
+				gdk_window_set_title(gdk_window, title.c_str());
+#			endif //USE_GDK
 #	endif //LINUX
 	}
 	return true;
@@ -632,8 +631,7 @@ bool DKCef::QueueDuktape(DKString& string){
 
 bool DKCef::Reload(const int& browser){
 	DKDEBUGFUNC(browser);
-	if(browser > (int)dkBrowsers.size()-1)
-		return DKERROR("browseris greater than dkBrowsers.size()\n"); 
+	if(browser > (int)dkBrowsers.size()-1){ return false; } //error
 	dkBrowsers[browser].browser->Reload();
 	return true;
 }
@@ -646,7 +644,7 @@ bool DKCef::RemoveFocus(const int& browser){
 }
 
 bool DKCef::RunDuktape(const DKString& string, DKString& rval){
-	DKDEBUGFUNC(string, rval);
+	DKDEBUGFUNC(string);
 	return DKDuktape::RunDuktape(string, rval);
 }
 
@@ -808,7 +806,7 @@ bool DKCef::ViewPageSource(const int& browser){
 }
 
 void DialogCallback::OnFileDialogDismissed(int selected_accept_filter, const std::vector<CefString>& file_paths){
-	DKDEBUGFUNC(selected_accept_filter, file_paths);
+	DKDEBUGFUNC(selected_accept_filter);
 	DKString files;
 	for(unsigned int i=0; i<file_paths.size(); ++i){
 		DKINFO(file_paths[i].ToString()+"\n");
@@ -830,7 +828,8 @@ bool DKCef::OnConsoleMessage(CefRefPtr<CefBrowser> browser, cef_log_severity_t l
 	DKString msg = message.ToString();
 	int identifier = browser->GetIdentifier();
 	
-	replace(msg, "%c", ""); //Remove color symbols
+	//Remove color symbols
+	replace(msg, "%c", "");
 	if (level == LOGSEVERITY_DEFAULT) {
 		DKINFO("[CEF:" + toString(identifier) + "] " + msg + "\n");
 	}
