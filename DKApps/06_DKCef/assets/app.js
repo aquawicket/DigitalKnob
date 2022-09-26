@@ -1,4 +1,4 @@
-CPP_DK_Create("DKDuktapeDom")
+//CPP_DK_Create("DKDuktapeDom")
 
 var USE_CEF = 1;
 CPP_DK_Create("DKCef");
