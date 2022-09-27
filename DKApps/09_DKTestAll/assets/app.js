@@ -1,4 +1,4 @@
-CPP_DK_Create("DKDuktapeDom")
+//CPP_DK_Create("DKDuktapeDom")
 CPP_DK_Create("DKDebug")
 
 //const url = CPP_DKAssets_LocalAssets()+"index.html"

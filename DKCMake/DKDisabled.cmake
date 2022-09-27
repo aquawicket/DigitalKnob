@@ -78,12 +78,12 @@ dk_disable(osgworks)			# Openscenegraph
 dk_disable(sdl2_gif)			# DEPRECATED: using SDL_Image animation instead
 dk_disable(sdl2_giflib_sa)		# DEPRECATED: updated version of sdl2_gif. Using SDL_Image animation instead
 dk_disable(simple-getch)		# kept for reference
-dk_disable(sw)
-dk_disable(sw-client)
+dk_disable(sw)					# NOT REQUIRED
+dk_disable(sw-client)			# NOT REQUIRED
 
 
 if(WIN) # Disabled for Windows targets
-	dk_disable(freealut)
+	#dk_disable(freealut)
 	dk_disable(jerryscript)
 	dk_disable(leptonica)
 	dk_disable(libtorrent)		# Could NOT find Boost (missing: Boost_INCLUDE_DIR)

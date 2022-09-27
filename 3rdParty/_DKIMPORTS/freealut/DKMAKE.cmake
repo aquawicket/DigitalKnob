@@ -13,8 +13,8 @@ dk_import(https://github.com/vancegroup/freealut.git)
 ### LINK ###
 dk_define			(AL_LIBTYPE_STATIC)
 dk_include			(${FREEALUT}/include)
-WIN_dk_libDebug		(${FREEALUT}/${OS}/${DEBUG_DIR}/alut_static.lib)
-WIN_dk_libRelease	(${FREEALUT}/${OS}/${RELEASE_DIR}/alut_static.lib)
+WIN_dk_libDebug		(${FREEALUT}/${OS}/src/${DEBUG_DIR}/alut_static.lib)
+WIN_dk_libRelease	(${FREEALUT}/${OS}/src/${RELEASE_DIR}/alut_static.lib)
 UNIX_dk_libDebug	(${FREEALUT}/${OS}/src/${DEBUG_DIR}/libalut_static.a)
 UNIX_dk_libRelease	(${FREEALUT}/${OS}/src/${RELEASE_DIR}/libalut_static.a)
 
