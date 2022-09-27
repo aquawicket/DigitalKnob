@@ -28,14 +28,13 @@
 #include "DKSDLText.h"
 #include "DK/DKFile.h"
 
-bool DKSDLText::Init()
-{
+bool DKSDLText::Init(){
 	DKDEBUGFUNC();
 	if(!DKSDLWindow::Valid("DKSDLWindow0"))
-		return false; 
+		return DKERROR("DKSDKWindow::Valid() failed\n");
 	dkSdlWindow = DKSDLWindow::Get("DKSDLWindow0");
 	if(!dkSdlWindow)
-		return false; //SDL window not available
+		return DKERROR("SDL window not available \n");
 	TTF_Init();
 	DKString file = DKFile::local_assets+"DKSDLText/arial.ttf";
 	font = TTF_OpenFont(file.c_str(), 20);
@@ -47,8 +46,7 @@ bool DKSDLText::Init()
 	return true;
 }
 
-bool DKSDLText::End()
-{
+bool DKSDLText::End(){
 	DKDEBUGFUNC();
 	//SDL_FreeSurface(surface);
 	//SDL_DestroyTexture(texture);
@@ -56,21 +54,20 @@ bool DKSDLText::End()
 	return true;
 }
 
-bool DKSDLText::SetText(const DKString& text)
-{
-	DKDEBUGFUNC();
+bool DKSDLText::SetText(const DKString& text){
+	//DKDEBUGFUNC(text);
 	surface = TTF_RenderText_Solid(font, text.c_str(), color);
 	texture = SDL_CreateTextureFromSurface(dkSdlWindow->renderer, surface);
 	SDL_FreeSurface(surface);
 	return true;
 }
 
-bool DKSDLText::Render()
-{
+bool DKSDLText::Render(){
 	//DKDEBUGFUNC();
 	
 	//DEBUG CODE
-	SetText(" ");
+	/*
+	SetText("TEST");
 	int dtexW = 0;
 	int dtexH = 0;
 	SDL_QueryTexture(texture, NULL, NULL, &dtexW, &dtexH);
@@ -79,6 +76,7 @@ bool DKSDLText::Render()
 	SDL_Rect ddstrect = {dleft, dtop, dtexW, dtexH};
 	SDL_RenderCopy(dkSdlWindow->renderer, texture, NULL, &ddstrect);
 	SDL_DestroyTexture(texture);
+	*/
 
 	//return; //remove to turn fps counter on
 
