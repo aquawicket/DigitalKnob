@@ -1,11 +1,7 @@
+# https://github.com/warmcat/libwebsockets
 # https://github.com/warmcat/libwebsockets/archive/v2.2.0.zip
 
-dk_import(https://github.com/warmcat/libwebsockets)
-#dk_set(LIBWEBSOCKETS_VERSION 2.2.0)
-#dk_set(LIBWEBSOCKETS_NAME libwebsockets-${LIBWEBSOCKETS_VERSION})
-#dk_set(LIBWEBSOCKETS_DL https://github.com/warmcat/libwebsockets/archive/v2.2.0.zip)
-#dk_set(LIBWEBSOCKETS ${3RDPARTY}/${LIBWEBSOCKETS_NAME})
-#dk_install(${LIBWEBSOCKETS_DL} ${LIBWEBSOCKETS})
+dk_import(https://github.com/warmcat/libwebsockets.git BRANCH main)
 
 
 ### LINK ###

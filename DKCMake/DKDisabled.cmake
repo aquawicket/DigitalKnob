@@ -83,12 +83,11 @@ dk_disable(sw-client)			# NOT REQUIRED
 
 
 if(WIN) # Disabled for Windows targets
-	#dk_disable(freealut)
 	dk_disable(jerryscript)
 	dk_disable(leptonica)
 	dk_disable(libtorrent)		# Could NOT find Boost (missing: Boost_INCLUDE_DIR)
 	dk_disable(libwebp)
-	dk_disable(libwebsockets)
+	#dk_disable(libwebsockets)
 	dk_disable(lighttpd)
 	dk_disable(lua)				# no CMakeLists.txt
 	dk_disable(tesseract)
@@ -144,6 +143,7 @@ if(IOS OR IOSSIM)  # Disabled for iOS and iOS-Simulator targets
 	dk_disable(lighttpd)
 	dk_disable(lua)				# no CMakeLists.txt
 	dk_disable(mlocate)			# Unable to locate a Java Runtime that supports apt
+	dk_disable(opensles)		
 	dk_disable(podofo)			# Could not find FREETYPE
 	dk_disable(sdl-gpu)			# SDL2MAIN_LIBRARY is NOTFOUND
 	dk_disable(sfml)			# Unknown CMake command "find_host_package"
