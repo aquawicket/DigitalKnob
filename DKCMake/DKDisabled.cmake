@@ -69,7 +69,7 @@ dk_disable(libvncserver-master-win)
 dk_disable(libx11)
 dk_disable(miniweb)
 dk_disable(msys2)
-dk_disable(opencv)				# WORKING, only disabled because it takes a long time to compile
+dk_disable(opencv)				# error C3861: 'random_shuffle': identifier not found
 dk_disable(openframeworks)
 dk_disable(openscenegraph)		# Openscenegraph
 dk_disable(osgaudio)			# Openscenegraph
@@ -87,7 +87,6 @@ if(WIN) # Disabled for Windows targets
 	dk_disable(leptonica)
 	dk_disable(libtorrent)		# Could NOT find Boost (missing: Boost_INCLUDE_DIR)
 	dk_disable(libwebp)
-	#dk_disable(libwebsockets)
 	dk_disable(lighttpd)
 	dk_disable(lua)				# no CMakeLists.txt
 	dk_disable(tesseract)
