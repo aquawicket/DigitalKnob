@@ -38,10 +38,12 @@ public:
 	~DKObject(){ 
 		/*DKEvent::RemoveEvents(this);*/ 
 	}	
-	virtual bool Init(){ 
+	virtual bool Init(){
+		DKDEBUGFUNC();
 		return true; 
 	}
-	virtual bool End(){ 
+	virtual bool End(){
+		DKDEBUGFUNC();
 		return true; 
 	}
 	DKStringArray data; //(class,id,var1,var2,var3,etc)
@@ -64,17 +66,16 @@ public:
 		_singleton = true;
 		instances.clear();
 	}
-	static T* Instance(const DKString& data){
+	static T* Instance(const DKString& data){ //data = (id,var1,var2,var3,etc)
 		//DKDEBUGFUNC(data);
 		//if(has(data, ".js"))
 		//	DKERROR("DKObject::Instance(): this is a .js file. Can't work for Cef\n");
-		//data = (id,var1,var2,var3,etc)
-		if(!instances.empty() && _singleton){
-			//DKWARN("DKClass singleton already created as "+instances[0]->data[0]+"\n");
-			return instances[0];
-		}
+		if(!instances.empty() && _singleton)
+			return instances[0]; //returning already created singleton instance
 		DKString name(classname);
 		//DKINFO("DKBaseT::classname = "+name+"\n");
+		DKINFO("DKObject::Instance(["+name+"]: "+data+")\n");
+		
  		DKStringArray arry;
 		toStringArray(arry,data,",");
 		if(!same(arry[0],name))
@@ -110,7 +111,6 @@ public:
 	static void Close(const DKString& id = ""){
 		DKDEBUGFUNC(id);		
 		//if(id.empty()){ return; }
-		//for(unsigned long i = instances.size() - 1; i >= 0 && i < instances.size(); --i) {
 		for (size_t i = instances.size() - 1; i >= 0 && i < instances.size(); --i) {
 			if(id.empty() || same(id, instances[i]->data[1])){
 				//if(has(id,"/"))
@@ -142,6 +142,7 @@ public:
 		return false;
 	}
 	static T* Get(const DKString& id = ""){
+		//DKDEBUGFUNC(id);
 		for(unsigned int i=0; i<instances.size(); ++i){
 			if(id.empty() || same(id, instances[i]->data[1])){
 				if (instances[i])
@@ -153,7 +154,7 @@ public:
 		return 0;
 	}
 	static void GetInstances(DKStringArray& list){
-		DKDEBUGFUNC("DKStringArray& list");
+		DKDEBUGFUNC(list);
 		/*
 		if(list.empty())
 			return DKWARN("DKObject::GetInstances(): list is empty\n");
@@ -170,7 +171,6 @@ public:
 		DKDEBUGFUNC();
 		_instances = instances;
 	}
-	//static unsigned long instance_count;
 	static size_t instance_count;
 private:
 	static std::vector<T*> instances;
@@ -179,7 +179,6 @@ private:
 };
 
 template<class T, class R>	char* DKBaseT<T,R>::classname;
-//template<class T, class R>	unsigned long DKBaseT<T,R>::instance_count;
 template<class T, class R>	size_t DKBaseT<T,R>::instance_count;
 template<class T, class R>	bool DKBaseT<T,R>::_singleton;
 template<class T, class R>	std::vector<T*> DKBaseT<T,R>::instances;
