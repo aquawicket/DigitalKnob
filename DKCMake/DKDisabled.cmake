@@ -71,7 +71,7 @@ dk_disable(miniweb)
 dk_disable(msys2)
 dk_disable(opencv)				# error C3861: 'random_shuffle': identifier not found
 dk_disable(openframeworks)
-dk_disable(openscenegraph)		# Openscenegraph
+#dk_disable(openscenegraph)		# Openscenegraph
 dk_disable(osgaudio)			# Openscenegraph
 dk_disable(osgbullet)			# Openscenegraph
 dk_disable(osgworks)			# Openscenegraph
