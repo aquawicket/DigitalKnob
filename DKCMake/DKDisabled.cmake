@@ -70,16 +70,16 @@ dk_disable(libx11)
 dk_disable(miniweb)
 dk_disable(msys2)
 dk_disable(opencv)				# error C3861: 'random_shuffle': identifier not found
-dk_disable(openframeworks)
-#dk_disable(openscenegraph)		# Openscenegraph
-dk_disable(osgaudio)			# Openscenegraph
-dk_disable(osgbullet)			# Openscenegraph
-dk_disable(osgworks)			# Openscenegraph
+#dk_disable(openframeworks)
+dk_disable(openscenegraph)		# error C2039: 'ptr_fun': is not a member of 'std'
+dk_disable(osgaudio)			# openscenegraph
+dk_disable(osgbullet)			# openscenegraph
+dk_disable(osgworks)			# openscenegraph
 dk_disable(sdl2_gif)			# DEPRECATED: using SDL_Image animation instead
 dk_disable(sdl2_giflib_sa)		# DEPRECATED: updated version of sdl2_gif. Using SDL_Image animation instead
 dk_disable(simple-getch)		# kept for reference
-dk_disable(sw)					# NOT REQUIRED
-dk_disable(sw-client)			# NOT REQUIRED
+dk_disable(sw)					# leptonica: NOT REQUIRED
+dk_disable(sw-client)			# leptonics: NOT REQUIRED
 
 
 if(WIN) # Disabled for Windows targets
