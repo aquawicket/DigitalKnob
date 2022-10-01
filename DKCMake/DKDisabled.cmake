@@ -26,26 +26,26 @@ include_guard()
 
 # DISABLED FOR ALL
 dk_disable(astyle)
-dk_disable(bullet3)				# Openscenegraph 
+dk_disable(bullet3)				# requires openscenegraph 
 dk_disable(conio-for-linux)
 dk_disable(DKJerryscript)
 dk_disable(DKOcr)
 dk_disable(DKOFWindow)
-dk_disable(DKOSGAudio)			# Openscenegraph
-dk_disable(DKOSGCef)			# Openscenegraph
-dk_disable(DKOSGLights)			# Openscenegraph
-dk_disable(DKOSGManipulator)	# Openscenegraph
-dk_disable(DKOSGModel)			# Openscenegraph
-dk_disable(DKOSGNotify)			# Openscenegraph
-dk_disable(DKOSGPhysics)		# Openscenegraph
-dk_disable(DKOSGPicker)			# Openscenegraph
-dk_disable(DKOSGRml)			# Openscenegraph
-dk_disable(DKOSGStats)			# Openscenegraph
-dk_disable(DKOSGTerrain)		# Openscenegraph
-dk_disable(DKOSGVideo)			# Openscenegraph
-dk_disable(DKOSGViewer)			# Openscenegraph 
-dk_disable(DKOSGWidget)			# Openscenegraph 
-dk_disable(DKOSGWindow)			# Openscenegraph 
+dk_disable(DKOSGAudio)			# requires openscenegraph
+dk_disable(DKOSGCef)			# requires openscenegraph
+dk_disable(DKOSGLights)			# requires openscenegraph
+dk_disable(DKOSGManipulator)	# requires openscenegraph
+dk_disable(DKOSGModel)			# requires openscenegraph
+dk_disable(DKOSGNotify)			# requires openscenegraph
+dk_disable(DKOSGPhysics)		# requires openscenegraph
+dk_disable(DKOSGPicker)			# requires openscenegraph
+dk_disable(DKOSGRml)			# requires openscenegraph
+dk_disable(DKOSGStats)			# requires openscenegraph
+dk_disable(DKOSGTerrain)		# requires openscenegraph
+dk_disable(DKOSGVideo)			# requires openscenegraph
+dk_disable(DKOSGViewer)			# requires openscenegraph 
+dk_disable(DKOSGWidget)			# requires openscenegraph 
+dk_disable(DKOSGWindow)			# requires openscenegraph 
 dk_disable(DKPlugin1)
 dk_disable(DKPlugin2)
 dk_disable(DKRestart)
@@ -63,23 +63,23 @@ dk_disable(gradle)
 dk_disable(java)
 dk_disable(jpeg)				# DEPRECATED: using libjpeg_turbo instead
 dk_disable(libcaca)
-dk_disable(librocket)			# OBSOLETE: replaced with RmlUi
+dk_disable(librocket)			# OBSOLETE: replaced by rmlui
 dk_disable(libvncserver)		# error C2065: 'nonBlocking': undeclared identifier
 dk_disable(libvncserver-master-win)
 dk_disable(libx11)
 dk_disable(miniweb)
 dk_disable(msys2)
 dk_disable(opencv)				# error C3861: 'random_shuffle': identifier not found
-#dk_disable(openframeworks)
+dk_disable(openframeworks)		# error: CMakeLists.txt broken
 dk_disable(openscenegraph)		# error C2039: 'ptr_fun': is not a member of 'std'
-dk_disable(osgaudio)			# openscenegraph
-dk_disable(osgbullet)			# openscenegraph
-dk_disable(osgworks)			# openscenegraph
+dk_disable(osgaudio)			# requires openscenegraph
+dk_disable(osgbullet)			# requires openscenegraph
+dk_disable(osgworks)			# requires openscenegraph
 dk_disable(sdl2_gif)			# DEPRECATED: using SDL_Image animation instead
 dk_disable(sdl2_giflib_sa)		# DEPRECATED: updated version of sdl2_gif. Using SDL_Image animation instead
-dk_disable(simple-getch)		# kept for reference
-dk_disable(sw)					# leptonica: NOT REQUIRED
-dk_disable(sw-client)			# leptonics: NOT REQUIRED
+dk_disable(simple-getch)		# DEPRECATED: kept for reference
+dk_disable(sw)					# DEPRECATED: requested by leptonica but not required
+dk_disable(sw-client)			# DEPRECATED: requested by leptonica but not required
 
 
 if(WIN) # Disabled for Windows targets

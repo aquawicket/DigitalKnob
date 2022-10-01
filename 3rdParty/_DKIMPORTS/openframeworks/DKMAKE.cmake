@@ -46,6 +46,5 @@ dk_command(${DKCMAKE_BUILD} -DOF_PATH=${OPENFRAMEWORKS} ${OPENFRAMEWORKS})
 ### COMPILE ###
 dk_visualStudio				(${OPENFRAMEWORKS_NAME} openFrameworks)
 dk_xcode					(${OPENFRAMEWORKS_NAME} openFrameworks)
-#LINUX_dk_queueCommand		(make openFrameworks)
-LINUX_dk_queueCommand		(make)
+LINUX_dk_queueCommand		(make openFrameworks)
 RASPBERRY_dk_queueCommand	(make openFrameworks)
