@@ -644,7 +644,7 @@ dk_createOsMacros("dk_set")
 ###############################################################################
 # dk_append(variable value)
 #
-#	@variable	- The name of a variable to declair
+#	@variable	- The name of a variable to declaire
 #	@value		- The value to add to the variable.
 #
 function(dk_append variable value)
@@ -3002,6 +3002,24 @@ function(dk_runDepends plugin)
 #	endif()	
 	list(REMOVE_DUPLICATES dkdepend_list)
 endfunction()
+
+
+###############################################################################
+# dk_require(plugin)
+#
+#	Require a plugin, return if plugin unavailable
+#
+#	@plugin				- TODO
+#	@target (optional)	- TODO
+#
+macro(dk_require plugin)
+	list(FIND dk_disabled_list ${plugin} index)
+	if(${index} GREATER -1)
+		dk_warn("${plugin} IS DISABLED")
+		return()
+	endif()
+	dk_depend(${plugin})
+endmacro()
 
 
 ###############################################################################
