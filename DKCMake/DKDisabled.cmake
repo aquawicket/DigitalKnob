@@ -56,7 +56,7 @@ dk_disable(DKSDLVideo)			# requires ffmpeg
 dk_disable(DKSFMLRml)			# requires sfml. Incomplete
 dk_disable(DKThread)			# requires threadpool
 dk_disable(DKTorrent)			# requires libtorrent
-#dk_disable(DKUpdate)
+dk_disable(DKUpdate)			# compiling errors
 dk_disable(DKVncClient)			# requires libvncserver
 dk_disable(DKVncServer)			# requires libvncserver
 dk_disable(gradle)
