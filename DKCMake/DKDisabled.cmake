@@ -25,12 +25,12 @@ include_guard()
 
 
 # DISABLED FOR ALL
-dk_disable(astyle)
+#dk_disable(astyle)
 dk_disable(bullet3)				# requires openscenegraph 
-dk_disable(conio-for-linux)
-dk_disable(DKJerryscript)
-dk_disable(DKOcr)
-dk_disable(DKOFWindow)
+#dk_disable(conio-for-linux)
+dk_disable(DKJerryscript)		# requires jerryscript
+dk_disable(DKOcr)				# requires leptonica, tesseract
+dk_disable(DKOFWindow)			# requires openframeworks
 dk_disable(DKOSGAudio)			# requires openscenegraph
 dk_disable(DKOSGCef)			# requires openscenegraph
 dk_disable(DKOSGLights)			# requires openscenegraph
@@ -46,29 +46,35 @@ dk_disable(DKOSGVideo)			# requires openscenegraph
 dk_disable(DKOSGViewer)			# requires openscenegraph 
 dk_disable(DKOSGWidget)			# requires openscenegraph 
 dk_disable(DKOSGWindow)			# requires openscenegraph 
-dk_disable(DKPlugin1)
-dk_disable(DKPlugin2)
-dk_disable(DKRestart)
-dk_disable(DKScreenRecorder)
-dk_disable(DKSDLAudio)
-dk_disable(DKSDLWav)
-dk_disable(DKSDLVideo)
-dk_disable(DKSFMLRml)			# Incomplete
-dk_disable(DKThread)
-dk_disable(DKTorrent)
-dk_disable(DKUpdate)
-dk_disable(DKVncClient)
-dk_disable(DKVncServer)
+dk_disable(DKPlugin1)			# TODO
+dk_disable(DKPlugin2)			# TODO
+#dk_disable(DKRestart)
+dk_disable(DKScreenRecorder)	# requires opencv
+#dk_disable(DKSDLAudio)
+#dk_disable(DKSDLWav)
+dk_disable(DKSDLVideo)			# requires ffmpeg
+dk_disable(DKSFMLRml)			# requires sfml. Incomplete
+dk_disable(DKThread)			# requires threadpool
+dk_disable(DKTorrent)			# requires libtorrent
+#dk_disable(DKUpdate)
+dk_disable(DKVncClient)			# requires libvncserver
+dk_disable(DKVncServer)			# requires libvncserver
 dk_disable(gradle)
 dk_disable(java)
+dk_disable(jerryscript)
 dk_disable(jpeg)				# DEPRECATED: using libjpeg_turbo instead
-dk_disable(libcaca)
+dk_disable(leptonica)
+#dk_disable(libcaca)
 dk_disable(librocket)			# OBSOLETE: replaced by rmlui
+dk_disable(libtorrent)
 dk_disable(libvncserver)		# error C2065: 'nonBlocking': undeclared identifier
 dk_disable(libvncserver-master-win)
-dk_disable(libx11)
-dk_disable(miniweb)
-dk_disable(msys2)
+dk_disable(libwebp)
+#dk_disable(libx11)
+dk_disable(lighttpd)
+dk_disable(lua)					# no CMakeLists.txt
+#dk_disable(miniweb)
+dk_disable(msys2)				# TODO: currently using msys
 dk_disable(opencv)				# error C3861: 'random_shuffle': identifier not found
 dk_disable(openframeworks)		# error: CMakeLists.txt broken
 dk_disable(openscenegraph)		# error C2039: 'ptr_fun': is not a member of 'std'
@@ -80,41 +86,28 @@ dk_disable(sdl2_giflib_sa)		# DEPRECATED: updated version of sdl2_gif. Using SDL
 dk_disable(simple-getch)		# DEPRECATED: kept for reference
 dk_disable(sw)					# DEPRECATED: requested by leptonica but not required
 dk_disable(sw-client)			# DEPRECATED: requested by leptonica but not required
+dk_disable(tesseract)
+dk_disable(waave)
 
 
 if(WIN) # Disabled for Windows targets
-	dk_disable(jerryscript)
-	dk_disable(leptonica)
-	dk_disable(libtorrent)		# Could NOT find Boost (missing: Boost_INCLUDE_DIR)
-	dk_disable(libwebp)
-	dk_disable(lighttpd)
-	dk_disable(lua)				# no CMakeLists.txt
-	dk_disable(tesseract)
-	dk_disable(waave)
+	#dk_disable(libtorrent)		# Could NOT find Boost (missing: Boost_INCLUDE_DIR)
 endif()
 
 if(WIN_64) # Disabled for Windows 64bit targets
-	dk_disable(smpeg2)
+	#dk_disable(smpeg2)
 endif()
 
 
 if(MAC)  # Disabled for MAC targets
 	dk_disable(freealut)		# ** BUILD FAILED **
 	dk_disable(imagemagick)		# no such file or directory: libimagemagik.a
-	dk_disable(jerryscript)
-	dk_disable(leptonica)
-	dk_disable(libtorrent)
-	dk_disable(libwebp)
 	dk_disable(libwebsockets)
 	dk_disable(libxml2)			# fatal error: 'extra/stricmp.h' file not found
-	dk_disable(lighttpd)
-	dk_disable(lua)				# no CMakeLists.txt file
 	dk_disable(mlocate)			# Unable to locate a Java Runtime that supports apt
 	dk_disable(rtmidi)			# Undefined symbols for architecture x86_64
 	dk_disable(sdl-gpu)			# SDL for MAC OS X only supports deploying on 10.7 and above
 	dk_disable(smpeg2)			# ** BUILD FAILED ** MPEGstream.cpp
-	dk_disable(tesseract)
-	dk_disable(waave)
 endif()
 
 if(IOS OR IOSSIM)  # Disabled for iOS and iOS-Simulator targets
@@ -129,27 +122,21 @@ if(IOS OR IOSSIM)  # Disabled for iOS and iOS-Simulator targets
 	dk_disable(DKSFMLWindow)
 	dk_disable(freealut)		# freealut-master/iossim64 does not contain an Xcode project
 	dk_disable(imagemagick)		# No such file or directory
-	dk_disable(jerryscript)
 	dk_disable(libiconv)		# CMake Error at cmake/dist.cmake:144 (install): install TARGETS given no BUNDLE DESTINATION for MACOSX_BUNDLE executable target "iconvcli"
 	dk_disable(libjpeg-turbo)	# CMake Error at CMakeLists.txt:60 (string): string no output variable specified
 	dk_disable(libmd)			# dk_getExtension Function invoked with incorrect arguments
 	dk_disable(libpng)			# no such sysroot directory: 'iphonesimulator'
-	dk_disable(leptonica)
-	dk_disable(libtorrent)
-	dk_disable(libwebp)			# TIFF is disabled when statically linking
+	#dk_disable(libwebp)		# TIFF is disabled when statically linking
 	dk_disable(libwebsockets)
 	dk_disable(libxml2)			# fatal error: 'config.h' file not found
-	dk_disable(lighttpd)
-	dk_disable(lua)				# no CMakeLists.txt
 	dk_disable(mlocate)			# Unable to locate a Java Runtime that supports apt
 	dk_disable(opensles)		
 	dk_disable(podofo)			# Could not find FREETYPE
 	dk_disable(sdl-gpu)			# SDL2MAIN_LIBRARY is NOTFOUND
 	dk_disable(sfml)			# Unknown CMake command "find_host_package"
 	dk_disable(smpeg2)			# ** BUILD FAILED ** MPEGstream.cpp
-	dk_disable(tesseract)
 	dk_disable(tiff)			# install TARGETS given no BUNDLE DESTINATION for MACOSX_BUNDLE executable target "fax2ps"
-	dk_disable(waave)			# ** BUILD FAILED ** src/audio_decoder.c
+	#dk_disable(waave)			# ** BUILD FAILED ** src/audio_decoder.c
 endif()
 
 
@@ -162,20 +149,13 @@ if(LINUX) # Disabled for Linux targets
 	dk_disable(freealut)		# AL/al.h: No such file or directory
 	dk_disable(giflib)			# aclocal-1.15: command not found
 	dk_disable(imagemagick)		#libimagemagik.a not found
-	dk_disable(jerryscript)
 	dk_disable(kdevelop)
-	dk_disable(leptonica)
-	dk_disable(libtorrent)		# Could not find BOOST
-	dk_disable(libwebp)
+	#dk_disable(libtorrent)		# Could not find BOOST
 	dk_disable(libwebsockets)
 	dk_disable(libxml2)			# Not such file or directory
-	dk_disable(lighttpd)
-	dk_disable(lua)				# no CMakeLists.txt
 	dk_disable(sfml)           	# sfml_sfml-network)  #TODO: disabling individual sublibraries
 	dk_disable(stackwalker)
-	dk_disable(tesseract)
 	dk_disable(uwebsockets)
-	dk_disable(waave)
 endif()
 
 
@@ -192,22 +172,14 @@ if(RASPBERRY) # Disabled for Raspberry Pi targets
 	dk_disable(java)
 	dk_disable(kdevelop)
 	dk_disable(openjdk)
-	dk_disable(jerryscript)
-	dk_disable(leptonica)
-	dk_disable(libtorrent)
-	dk_disable(libwebp)
 	dk_disable(libwebsockets)
 	dk_disable(libxml2)
-	dk_disable(lighttpd)
-	dk_disable(lua)				# no CMakeLists.txt
 	dk_disable(rtmidi)
 	dk_disable(sdl-gpu)
 	dk_disable(stackwalker)
-	dk_disable(tesseract)
 	dk_disable(tiff)
 	dk_disable(upx)
 	dk_disable(uwebsockets)
-	dk_disable(waave)
 endif()
 
 
@@ -230,17 +202,11 @@ if(ANDROID) # Disabled for Android targets
 	dk_disable(flac)			# configure: error: unrecognized option: `-DANDROID32'
 	dk_disable(freealut)		# DKFunctions.cmake:4405->dk_findFiles():  files is invalid
 	dk_disable(imagemagick)		# dkscript.tmp: line 2: cd: /android32/Debug: No such file or directory
-	dk_disable(jerryscript)
-	dk_disable(leptonica)
-	dk_disable(libtorrent)
 	dk_disable(ogg)				# configure: error: unrecognized option: `-DANDROID32'
 	dk_disable(libuv)			# error : incomplete definition of type 'struct ifaddrs'
 	dk_disable(vorbis)			# configure: error: unrecognized option: `-DANDROID32'
-	dk_disable(libwebp)
 	dk_disable(libwebsockets)
 	dk_disable(libxml2)			# ../../configure: No such file or directory
-	dk_disable(lighttpd)
-	dk_disable(lua)				# no CMakeLists.txt
 	dk_disable(openal)			# The system cannot find the file specified
 	dk_disable(openssl)
 	dk_disable(podofo)			# error : cannot use 'throw' with exceptions disabled
@@ -249,9 +215,7 @@ if(ANDROID) # Disabled for Android targets
 	dk_disable(sfml)
 	dk_disable(smpeg2)
 	dk_disable(stackwalker)
-	dk_disable(tesseract)
 	dk_disable(uwebsockets)		# Could NOT find OpenSSL
-	dk_disable(waave)
 endif()
 
 if(ANDROID_64) # Disabled for Android 64bit targets
