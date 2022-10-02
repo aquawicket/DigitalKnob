@@ -2,7 +2,7 @@
 # https://github.com/aquawicket/RmlUi
 
 
-### DEPENDS ###
+### DEPEND ###
 dk_depend(freetype)
 #dk_depend(glew)
 #dk_depend(sdl)
@@ -10,6 +10,7 @@ dk_depend(freetype)
 #dk_depend(sfml)
 
 
+### IMPORT ###
 dk_import(https://github.com/aquawicket/RmlUi.git PATCH)
 #dk_import(https://github.com/aquawicket/RmlUi.git RCSS_attribute_selector_support PATCH)
 
@@ -21,53 +22,53 @@ ANDROID_dk_define(RMLUI_USE_CUSTOM_RTTI)
 IF(IOS OR IOSSIM OR WIN)
 	#dk_define(RMLUI_NO_THIRDPARTY_CONTAINERS)
 ENDIF()
-dk_include(${RMLUI}/Include)
-dk_include(${RMLUI}/Source)
-dk_addTarget(rmlui RmlCore)
-dk_addTarget(rmlui RmlDebugger)
+dk_include		(${RMLUI}/Include)
+dk_include		(${RMLUI}/Source)
+dk_addTarget	(rmlui RmlCore)
+dk_addTarget	(rmlui RmlDebugger)
 
 if(rmlui_RmlCore)
-	WIN_dk_libDebug(${RMLUI}/${OS}/${DEBUG_DIR}/RmlCore.lib)
-	WIN_dk_libRelease(${RMLUI}/${OS}/${RELEASE_DIR}/RmlCore.lib)
-	MAC_dk_libDebug(${RMLUI}/${OS}/${DEBUG_DIR}/libRmlCore.a)
-	MAC_dk_libRelease(${RMLUI}/${OS}/${RELEASE_DIR}/libRmlCore.a)
-	IOS_dk_libDebug(${RMLUI}/${OS}/${DEBUG_DIR}/libRmlCore.a)
-	IOS_dk_libRelease(${RMLUI}/${OS}/${RELEASE_DIR}/libRmlCore.a)
-	IOSSIM_dk_libDebug(${RMLUI}/${OS}/${DEBUG_DIR}/libRmlCore.a)
-	IOSSIM_dk_libRelease(${RMLUI}/${OS}/${RELEASE_DIR}/libRmlCore.a)
-	LINUX_dk_libDebug(${RMLUI}/${OS}/${DEBUG_DIR}/libRmlCore.a)
-	LINUX_dk_libRelease(${RMLUI}/${OS}/${RELEASE_DIR}/libRmlCore.a)
-	RASPBERRY_dk_libDebug(${RMLUI}/${OS}/${DEBUG_DIR}/libRmlCore.a)
-	RASPBERRY_dk_libRelease(${RMLUI}/${OS}/${RELEASE_DIR}/libRmlCore.a)
-	ANDROID_dk_libDebug(${RMLUI}/${OS}/${DEBUG_DIR}/libRmlCore.a)
-	ANDROID_dk_libRelease(${RMLUI}/${OS}/${RELEASE_DIR}/libRmlCore.a)
+	WIN_dk_libDebug			(${RMLUI}/${OS}/${DEBUG_DIR}/RmlCore.lib)
+	WIN_dk_libRelease		(${RMLUI}/${OS}/${RELEASE_DIR}/RmlCore.lib)
+	MAC_dk_libDebug			(${RMLUI}/${OS}/${DEBUG_DIR}/libRmlCore.a)
+	MAC_dk_libRelease		(${RMLUI}/${OS}/${RELEASE_DIR}/libRmlCore.a)
+	IOS_dk_libDebug			(${RMLUI}/${OS}/${DEBUG_DIR}/libRmlCore.a)
+	IOS_dk_libRelease		(${RMLUI}/${OS}/${RELEASE_DIR}/libRmlCore.a)
+	IOSSIM_dk_libDebug		(${RMLUI}/${OS}/${DEBUG_DIR}/libRmlCore.a)
+	IOSSIM_dk_libRelease	(${RMLUI}/${OS}/${RELEASE_DIR}/libRmlCore.a)
+	LINUX_dk_libDebug		(${RMLUI}/${OS}/${DEBUG_DIR}/libRmlCore.a)
+	LINUX_dk_libRelease		(${RMLUI}/${OS}/${RELEASE_DIR}/libRmlCore.a)
+	RASPBERRY_dk_libDebug	(${RMLUI}/${OS}/${DEBUG_DIR}/libRmlCore.a)
+	RASPBERRY_dk_libRelease	(${RMLUI}/${OS}/${RELEASE_DIR}/libRmlCore.a)
+	ANDROID_dk_libDebug		(${RMLUI}/${OS}/${DEBUG_DIR}/libRmlCore.a)
+	ANDROID_dk_libRelease	(${RMLUI}/${OS}/${RELEASE_DIR}/libRmlCore.a)
 endif()
 
 if(rmlui_RmlDebugger)
-	dk_define(HAVE_rmlui_debugger)
-	WIN_dk_libDebug(${RMLUI}/${OS}/${DEBUG_DIR}/RmlDebugger.lib)
-	WIN_dk_libDebug(${RMLUI}/${OS}/${DEBUG_DIR}/RmlDebugger.lib)
-	WIN_dk_libRelease(${RMLUI}/${OS}/${RELEASE_DIR}/RmlDebugger.lib)
-	MAC_dk_libDebug(${RMLUI}/${OS}/${DEBUG_DIR}/libRmlDebugger.a)
-	MAC_dk_libRelease(${RMLUI}/${OS}/${RELEASE_DIR}/libRmlDebugger.a)
-	IOS_dk_libDebug(${RMLUI}/${OS}/${DEBUG_DIR}/libRmlDebugger.a)
-	IOS_dk_libRelease(${RMLUI}/${OS}/${RELEASE_DIR}/libRmlDebugger.a)
-	IOSSIM_dk_libDebug(${RMLUI}/${OS}/${DEBUG_DIR}/libRmlDebugger.a)
-	IOSSIM_dk_libRelease(${RMLUI}/${OS}/${RELEASE_DIR}/libRmlDebugger.a)
-	LINUX_dk_libDebug(${RMLUI}/${OS}/${DEBUG_DIR}/libRmlDebugger.a)
-	LINUX_dk_libRelease(${RMLUI}/${OS}/${RELEASE_DIR}/libRmlDebugger.a)
-	RASPBERRY_dk_libDebug(${RMLUI}/${OS}/${DEBUG_DIR}/libRmlDebugger.a)
-	RASPBERRY_dk_libRelease(${RMLUI}/${OS}/${RELEASE_DIR}/libRmlDebugger.a)
-	ANDROID_dk_libDebug(${RMLUI}/${OS}/${DEBUG_DIR}/libRmlDebugger.a)
-	ANDROID_dk_libRelease(${RMLUI}/${OS}/${RELEASE_DIR}/libRmlDebugger.a)
+	dk_define				(HAVE_rmlui_debugger)
+	WIN_dk_libDebug			(${RMLUI}/${OS}/${DEBUG_DIR}/RmlDebugger.lib)
+	WIN_dk_libDebug			(${RMLUI}/${OS}/${DEBUG_DIR}/RmlDebugger.lib)
+	WIN_dk_libRelease		(${RMLUI}/${OS}/${RELEASE_DIR}/RmlDebugger.lib)
+	MAC_dk_libDebug			(${RMLUI}/${OS}/${DEBUG_DIR}/libRmlDebugger.a)
+	MAC_dk_libRelease		(${RMLUI}/${OS}/${RELEASE_DIR}/libRmlDebugger.a)
+	IOS_dk_libDebug			(${RMLUI}/${OS}/${DEBUG_DIR}/libRmlDebugger.a)
+	IOS_dk_libRelease		(${RMLUI}/${OS}/${RELEASE_DIR}/libRmlDebugger.a)
+	IOSSIM_dk_libDebug		(${RMLUI}/${OS}/${DEBUG_DIR}/libRmlDebugger.a)
+	IOSSIM_dk_libRelease	(${RMLUI}/${OS}/${RELEASE_DIR}/libRmlDebugger.a)
+	LINUX_dk_libDebug		(${RMLUI}/${OS}/${DEBUG_DIR}/libRmlDebugger.a)
+	LINUX_dk_libRelease		(${RMLUI}/${OS}/${RELEASE_DIR}/libRmlDebugger.a)
+	RASPBERRY_dk_libDebug	(${RMLUI}/${OS}/${DEBUG_DIR}/libRmlDebugger.a)
+	RASPBERRY_dk_libRelease	(${RMLUI}/${OS}/${RELEASE_DIR}/libRmlDebugger.a)
+	ANDROID_dk_libDebug		(${RMLUI}/${OS}/${DEBUG_DIR}/libRmlDebugger.a)
+	ANDROID_dk_libRelease	(${RMLUI}/${OS}/${RELEASE_DIR}/libRmlDebugger.a)
 endif()
 
 
 ### GENERATE ###
-dk_setPath(${RMLUI}/${BUILD_DIR})
+dk_setPath					(${RMLUI}/${BUILD_DIR})
 
 ## RML minimal
-WIN_dk_queueCommand(${DKCMAKE_BUILD} "-DCMAKE_CXX_FLAGS=/DRMLUI_STATIC_LIB /DGLEW_STATIC /I${RMLUI}/Include /I${SDL}/include /I${GLEW}/include" -DBUILD_SHARED_LIBS=OFF -DBUILD_SAMPLES=OFF -DBUILD_TESTING=OFF -DENABLE_SVG_PLUGIN=OFF -DENABLE_LOTTIE_PLUGIN=OFF -DBUILD_LUA_BINDINGS=OFF ${FREETYPE_CMAKE} ${RMLUI})
+WIN_dk_queueCommand			(${DKCMAKE_BUILD} "-DCMAKE_CXX_FLAGS=/DRMLUI_STATIC_LIB /DGLEW_STATIC /I${RMLUI}/Include /I${SDL}/include /I${GLEW}/include" -DBUILD_SHARED_LIBS=OFF -DBUILD_SAMPLES=OFF -DBUILD_TESTING=OFF -DENABLE_SVG_PLUGIN=OFF -DENABLE_LOTTIE_PLUGIN=OFF -DBUILD_LUA_BINDINGS=OFF ${FREETYPE_CMAKE} ${RMLUI})
 
 ## RML + ALL Extras
 # WIN32_dk_queueCommand(${DKCMAKE_BUILD} 
@@ -89,36 +90,22 @@ WIN_dk_queueCommand(${DKCMAKE_BUILD} "-DCMAKE_CXX_FLAGS=/DRMLUI_STATIC_LIB /DGLE
 # make
 # exit")
 
-#MAC_dk_queueCommand(${DKCMAKE_BUILD} -DBUILD_SHARED_LIBS=OFF -DENABLE_PRECOMPILED_HEADERS=OFF ${FREETYPE_CMAKE} ${RMLUI})
-#IOS_dk_queueCommand(${DKCMAKE_BUILD} -DBUILD_SHARED_LIBS=OFF -DENABLE_PRECOMPILED_HEADERS=OFF ${FREETYPE_CMAKE} ${RMLUI})
-#IOSSIM_dk_queueCommand(${DKCMAKE_BUILD} -DBUILD_SHARED_LIBS=OFF -DENABLE_PRECOMPILED_HEADERS=OFF ${FREETYPE_CMAKE} ${RMLUI})
-APPLE_dk_queueCommand(${DKCMAKE_BUILD} -DBUILD_SHARED_LIBS=OFF -DENABLE_PRECOMPILED_HEADERS=OFF ${FREETYPE_CMAKE} ${RMLUI})
-LINUX_dk_queueCommand(${DKCMAKE_BUILD} ${FREETYPE_CMAKE} ${RMLUI})
-RASPBERRY_dk_queueCommand(${DKCMAKE_BUILD} ${FREETYPE_CMAKE} ${RMLUI})
-ANDROID_dk_queueCommand(${DKCMAKE_BUILD} "-DCMAKE_CXX_FLAGS=-DRMLUI_STATIC_LIB -DCHOBO_FLAT_MAP_NO_THROW -DRMLUI_USE_CUSTOM_RTTI -std=c++1z" -DENABLE_PRECOMPILED_HEADERS=OFF -DDISABLE_RTTI_AND_EXCEPTIONS=ON ${FREETYPE_CMAKE} ${RMLUI})
+
+APPLE_dk_queueCommand		(${DKCMAKE_BUILD} -DBUILD_SHARED_LIBS=OFF -DENABLE_PRECOMPILED_HEADERS=OFF ${FREETYPE_CMAKE} ${RMLUI})
+LINUX_dk_queueCommand		(${DKCMAKE_BUILD} ${FREETYPE_CMAKE} ${RMLUI})
+RASPBERRY_dk_queueCommand	(${DKCMAKE_BUILD} ${FREETYPE_CMAKE} ${RMLUI})
+ANDROID_dk_queueCommand		(${DKCMAKE_BUILD} "-DCMAKE_CXX_FLAGS=-DRMLUI_STATIC_LIB -DCHOBO_FLAT_MAP_NO_THROW -DRMLUI_USE_CUSTOM_RTTI -std=c++1z" -DENABLE_PRECOMPILED_HEADERS=OFF -DDISABLE_RTTI_AND_EXCEPTIONS=ON ${FREETYPE_CMAKE} ${RMLUI})
 
 
 ### COMPILE ###
 if(rmlui_RmlCore)
-	#WIN_dk_visualStudio(${RMLUI_NAME} RmlCore)
-	dk_visualStudio(${RMLUI_NAME} RmlCore)
-	#MAC_dk_xcode(${RMLUI_NAME} RmlCore)
-	#IOS_dk_xcode(${RMLUI_NAME} RmlCore)
-	#IOSSIM_dk_xcode(${RMLUI_NAME} RmlCore)
-	dk_xcode(${RMLUI_NAME} RmlCore)
-	LINUX_dk_queueCommand(make RmlCore)
-	RASPBERRY_dk_queueCommand(make RmlCore)
-	#ANDROID_dk_visualStudio(${RMLUI_NAME} RmlCore)
+	dk_visualStudio	(${RMLUI_NAME} RmlCore)	# windows, android
+	dk_xcode		(${RMLUI_NAME} RmlCore)	# mac, ios, iossim
+	dk_make			(${RMLUI_NAME} RmlCore)	# linux, raspberry
 endif()
 
 if(rmlui_RmlDebugger)
-	#WIN_dk_visualStudio(${RMLUI_NAME} RmlDebugger)
-	dk_visualStudio(${RMLUI_NAME} RmlDebugger)
-	#MAC_dk_xcode(${RMLUI_NAME} RmlDebugger)
-	#IOS_dk_xcode(${RMLUI_NAME} RmlDebugger)
-	#IOSSIM_dk_xcode(${RMLUI_NAME} RmlDebugger)
-	dk_xcode(${RMLUI_NAME} RmlDebugger)
-	LINUX_dk_queueCommand(make RmlDebugger)
-	RASPBERRY_dk_queueCommand(make RmlDebugger)
-	#ANDROID_dk_visualStudio(${RMLUI_NAME} RmlDebugger)
+	dk_visualStudio	(${RMLUI_NAME} RmlDebugger)	# windows, android
+	dk_xcode		(${RMLUI_NAME} RmlDebugger)	# mac, ios, iossim
+	dk_make			(${RMLUI_NAME} RmlDebugger)	# linux, raspberry
 endif()

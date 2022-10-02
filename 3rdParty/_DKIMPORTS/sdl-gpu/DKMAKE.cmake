@@ -1,7 +1,7 @@
 # https://github.com/grimfang4/sdl-gpu
 
 
-### DEPENDS ###
+### DEPEND ###
 dk_depend(sdl)
 
 
@@ -10,30 +10,29 @@ dk_import(https://github.com/grimfang4/sdl-gpu.git)
 
 
 ### LINK ###
-dk_include(${SDL-GPU}/include)
-WIN_dk_libDebug(${SDL-GPU}/${OS}/SDL_gpu-VS/lib/${DEBUG_DIR}/SDL2_gpu_s.lib)
-WIN_dk_libRelease(${SDL-GPU}/${OS}/SDL_gpu-VS/lib/${RELEASE_DIR}/SDL2_gpu_s.lib)
-MAC_dk_libDebug(${SDL-GPU}/${OS}/SDL_gpu/lib/${DEBUG_DIR}/libSDL2_gpu.a)
-MAC_dk_libRelease(${SDL-GPU}/${OS}/SDL_gpu/lib/${RELEASE_DIR}/libSDL2_gpu.a)
-IOS_dk_libDebug(${SDL-GPU}/${OS}/SDL_gpu/lib/${DEBUG_DIR}/libSDL2_gpu_s.a)
-IOS_dk_libRelease(${SDL-GPU}/${OS}/SDL_gpu/lib/${RELEASE_DIR}/libSDL2_gpu_s.a)
-IOSSIM_dk_libDebug(${SDL-GPU}/${OS}/SDL_gpu/lib/${DEBUG_DIR}/libSDL2_gpu_s.a)
-IOSSIM_dk_libRelease(${SDL-GPU}/${OS}/SDL_gpu/lib/${RELEASE_DIR}/libSDL2_gpu_s.a)
-LINUX_dk_libDebug(${SDL-GPU}/${OS}/${DEBUG_DIR}/SDL_gpu/lib/libSDL2_gpu.a)
-LINUX_dk_libRelease(${SDL-GPU}/${OS}/${RELEASE_DIR}/SDL_gpu/lib/libSDL2_gpu.a)
-RASPBERRY_dk_libDebug(${SDL-GPU}/${OS}/SDL_gpu/lib/${DEBUG_DIR}/libSDL2_gpu_s.a)
-RASPBERRY_dk_libRelease(${SDL-GPU}/${OS}/SDL_gpu/lib/${RELEASE_DIR}/libSDL2_gpu_s.a)
-ANDROID_dk_libDebug(${SDL-GPU}/${OS}/SDL_gpu-VS/lib/${DEBUG_DIR}/libSDL2_gpu_s.a)
-ANDROID_dk_libRelease(${SDL-GPU}/${OS}/SDL_gpu-VS/lib/${RELEASE_DIR}/libSDL2_gpu_s.a)
+dk_include				(${SDL-GPU}/include)
+WIN_dk_libDebug			(${SDL-GPU}/${OS}/SDL_gpu-VS/lib/${DEBUG_DIR}/SDL2_gpu_s.lib)
+WIN_dk_libRelease		(${SDL-GPU}/${OS}/SDL_gpu-VS/lib/${RELEASE_DIR}/SDL2_gpu_s.lib)
+MAC_dk_libDebug			(${SDL-GPU}/${OS}/SDL_gpu/lib/${DEBUG_DIR}/libSDL2_gpu.a)
+MAC_dk_libRelease		(${SDL-GPU}/${OS}/SDL_gpu/lib/${RELEASE_DIR}/libSDL2_gpu.a)
+IOS_dk_libDebug			(${SDL-GPU}/${OS}/SDL_gpu/lib/${DEBUG_DIR}/libSDL2_gpu_s.a)
+IOS_dk_libRelease		(${SDL-GPU}/${OS}/SDL_gpu/lib/${RELEASE_DIR}/libSDL2_gpu_s.a)
+IOSSIM_dk_libDebug		(${SDL-GPU}/${OS}/SDL_gpu/lib/${DEBUG_DIR}/libSDL2_gpu_s.a)
+IOSSIM_dk_libRelease	(${SDL-GPU}/${OS}/SDL_gpu/lib/${RELEASE_DIR}/libSDL2_gpu_s.a)
+LINUX_dk_libDebug		(${SDL-GPU}/${OS}/${DEBUG_DIR}/SDL_gpu/lib/libSDL2_gpu.a)
+LINUX_dk_libRelease		(${SDL-GPU}/${OS}/${RELEASE_DIR}/SDL_gpu/lib/libSDL2_gpu.a)
+RASPBERRY_dk_libDebug	(${SDL-GPU}/${OS}/SDL_gpu/lib/${DEBUG_DIR}/libSDL2_gpu_s.a)
+RASPBERRY_dk_libRelease	(${SDL-GPU}/${OS}/SDL_gpu/lib/${RELEASE_DIR}/libSDL2_gpu_s.a)
+ANDROID_dk_libDebug		(${SDL-GPU}/${OS}/SDL_gpu-VS/lib/${DEBUG_DIR}/libSDL2_gpu_s.a)
+ANDROID_dk_libRelease	(${SDL-GPU}/${OS}/SDL_gpu-VS/lib/${RELEASE_DIR}/libSDL2_gpu_s.a)
 
 
 ### GENERATE ###
-dk_setPath(${SDL-GPU}/${BUILD_DIR})
-dk_queueCommand(${DKCMAKE_BUILD} ${SDL_CMAKE} ${SDL-GPU})
+dk_setPath		(${SDL-GPU}/${BUILD_DIR})
+dk_queueCommand	(${DKCMAKE_BUILD} ${SDL_CMAKE} ${SDL-GPU})
 
 
 ### COMPILE ###
-dk_visualStudio(${SDL-GPU_NAME} SDL_gpu)
-dk_xcode(${SDL-GPU_NAME} SDL_gpu)
-LINUX_dk_queueCommand(make SDL_gpu)
-RASPBERRY_dk_queueCommand(make SDL_gpu)
+dk_visualStudio	(${SDL-GPU_NAME} SDL_gpu)	# windows, android
+dk_xcode		(${SDL-GPU_NAME} SDL_gpu)	# mac, ios, iossim
+dk_make			(${SDL-GPU_NAME} SDL_gpu)	# linux, raspbery
