@@ -153,6 +153,7 @@ if(LINUX) # Disabled for Linux targets
 	dk_disable(libxml2)			# Not such file or directory
 	dk_disable(openssl)			# compiling errors
 	dk_disable(sfml)           	# sfml_sfml-network)  #TODO: disabling individual sublibraries
+	dk_disable(uwebsockets)		# requires openssl
 endif()
 
 
