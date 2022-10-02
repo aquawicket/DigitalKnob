@@ -3013,13 +3013,15 @@ endfunction()
 #	@target (optional)	- TODO
 #
 macro(dk_require plugin)
-	dk_dump(CMAKE_CURRENT_LIST_DIR)
-#	list(FIND dk_disabled_list ${plugin} index)
-#	if(${index} GREATER -1)
-#		dk_warn("${plugin} IS DISABLED")
-#		return()
-#	endif()
-#	dk_depend(${plugin})
+	list(FIND dk_disabled_list ${plugin} index)
+	if(${index} GREATER -1)
+		get_filename_component(Lib ${CMAKE_CURRENT_LIST_DIR} NAME)
+		dk_warn("${Lib} requires ${plugin} which is DISABLED")
+		dk_warn("DISABLING ${Lib}")
+		dk_disable(${Lib})
+		return()
+	endif()
+	dk_depend(${plugin})
 endmacro()
 
 
@@ -3781,7 +3783,7 @@ function(dk_importGit url) #branch #PATCH
 	
 	# check current folder name
 	if(NOT "${DKIMPORTS}/${FOLDER}" STREQUAL "${CMAKE_CURRENT_LIST_DIR}")
-		dk_assert("\n\nThe Imports folder is named inncorrectly. \n CURRENTLY: ${CMAKE_CURRENT_LIST_DIR} \n SHOULD BE: ${DKIMPORTS}/${FOLDER}\n\n")
+		dk_assert("\n\nThe Imports folder is named incorrectly. \n CURRENTLY: ${CMAKE_CURRENT_LIST_DIR} \n SHOULD BE: ${DKIMPORTS}/${FOLDER}\n\n")
 	endif()
 	
 	string(TOUPPER ${Lib} LIBVAR)
