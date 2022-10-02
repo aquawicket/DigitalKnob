@@ -102,6 +102,7 @@ endif()
 if(MAC)  # Disabled for MAC targets
 	dk_disable(freealut)		# ** BUILD FAILED **
 	dk_disable(imagemagick)		# no such file or directory: libimagemagik.a
+	dk_disable(libwebsockets)	# error: unknown type name 'lws_mutex_t'
 	dk_disable(libxml2)			# fatal error: 'extra/stricmp.h' file not found
 	dk_disable(mlocate)			# Unable to locate a Java Runtime that supports apt
 	dk_disable(rtmidi)			# Undefined symbols for architecture x86_64
