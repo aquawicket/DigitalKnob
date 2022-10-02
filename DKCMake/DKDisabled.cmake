@@ -95,7 +95,7 @@ if(WIN) # Disabled for Windows targets
 endif()
 
 if(WIN_64) # Disabled for Windows 64bit targets
-	#dk_disable(smpeg2)
+	dk_disable(smpeg2)			# fatal error C1083: Cannot open include file: 'unistd.h'
 endif()
 
 
