@@ -48,7 +48,7 @@ dk_disable(DKOSGWidget)			# requires openscenegraph
 dk_disable(DKOSGWindow)			# requires openscenegraph 
 dk_disable(DKPlugin1)			# TODO
 dk_disable(DKPlugin2)			# TODO
-#dk_disable(DKRestart)
+dk_disable(DKRestart)			# error C3861: 'printf': identifier not found
 dk_disable(DKScreenRecorder)	# requires opencv
 #dk_disable(DKSDLAudio)
 dk_disable(DKSDLWav)			# compiling errors
