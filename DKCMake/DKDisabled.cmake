@@ -185,7 +185,7 @@ if(ANDROID) # Disabled for Android targets
 	dk_disable(DKCef)			# requires cef_binary
 	dk_disable(DKCefChild)		# requires cef_binary
 	dk_disable(DKCurl)			# requires curl
-	#dk_disable(DKHandles)		
+	dk_disable(DKHandles)		# could not find DKHandles
 	dk_disable(DKMidi)			# requires rtmidi
 	dk_disable(DKMySql)			# requires curl
 	dk_disable(DKSDLCef)		# requires sdl, cef_binary
