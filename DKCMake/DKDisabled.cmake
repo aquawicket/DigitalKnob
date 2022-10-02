@@ -51,7 +51,7 @@ dk_disable(DKPlugin2)			# TODO
 #dk_disable(DKRestart)
 dk_disable(DKScreenRecorder)	# requires opencv
 #dk_disable(DKSDLAudio)
-#dk_disable(DKSDLWav)
+dk_disable(DKSDLWav)			# compiling errors
 dk_disable(DKSDLVideo)			# requires ffmpeg
 dk_disable(DKSFMLRml)			# requires sfml. Incomplete
 dk_disable(DKThread)			# requires threadpool
