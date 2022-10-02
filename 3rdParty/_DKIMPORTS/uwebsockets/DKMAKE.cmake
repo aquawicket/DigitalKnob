@@ -22,8 +22,6 @@ LINUX_dk_libDebug(${UWEBSOCKETS}/${OS}/${DEBUG_DIR}/libuWS.a)
 LINUX_dk_libRelease(${UWEBSOCKETS}/${OS}/${RELEASE_DIR}/libuWS.a)
 RASPBERRY_dk_libDebug(${UWEBSOCKETS}/${OS}/${DEBUG_DIR}/libuWS.a)
 RASPBERRY_dk_libRelease(${UWEBSOCKETS}/${OS}/${RELEASE_DIR}/libuWS.a)
-##ANDROID_dk_libDebug(${UWEBSOCKETS}/${OS}/${DEBUG_DIR}/obj/local/armeabi-v7a/uWS.a)
-##ANDROID_dk_libRelease(${UWEBSOCKETS}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/uWS.a)
 ANDROID_dk_libDebug(${UWEBSOCKETS}/${OS}/${DEBUG_DIR}/libuWS.a)
 ANDROID_dk_libRelease(${UWEBSOCKETS}/${OS}/${RELEASE_DIR}/libuWS.a)
 

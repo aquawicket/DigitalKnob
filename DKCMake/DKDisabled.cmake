@@ -191,7 +191,7 @@ if(ANDROID) # Disabled for Android targets
 	dk_disable(DKSDLCef)		# requires sdl, cef_binary
 	dk_disable(DKSFMLWindow)	# requires sfml
 	dk_disable(DKWebSockets)	# requires libwebsockets or uwebsockets
-	dk_disable(DKWebview)		# DKWebview.cpp(34,2): error : use of undeclared identifier 'DKDebug'
+	#dk_disable(DKWebview)
 	dk_disable(flac)			# configure: error: unrecognized option: `-DANDROID32'
 	dk_disable(freealut)		# DKFunctions.cmake:4405->dk_findFiles():  files is invalid
 	dk_disable(imagemagick)		# dkscript.tmp: line 2: cd: /android32/Debug: No such file or directory
