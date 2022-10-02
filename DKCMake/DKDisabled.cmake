@@ -199,7 +199,7 @@ if(ANDROID) # Disabled for Android targets
 	dk_disable(ogg)				# configure: error: unrecognized option: `-DANDROID32'
 	dk_disable(libuv)			# error : incomplete definition of type 'struct ifaddrs'
 	dk_disable(vorbis)			# configure: error: unrecognized option: `-DANDROID32'
-	#dk_disable(libwebsockets)
+	dk_disable(libwebsockets)	# compiling errors
 	dk_disable(libxml2)			# ../../configure: No such file or directory
 	dk_disable(openal)			# The system cannot find the file specified
 	dk_disable(openssl)
