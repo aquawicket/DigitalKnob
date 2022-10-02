@@ -155,7 +155,7 @@ endif()
 
 
 if(RASPBERRY) # Disabled for Raspberry Pi targets
-	#dk_disable(boxer)
+	dk_disable(boxer)			# fatal error : 'boxer/boxer.h' file not found
 	dk_disable(DKHook)
 	dk_disable(DKMidi)			# requires rtmidi
 	dk_disable(DKWebSockets)	# requires libwebsocket, uwebsockets
