@@ -3,11 +3,11 @@
 #if(ANDROID)
 #	return()
 #endif()
-dk_require(cef_binary)
+#dk_require(cef_binary)
 
 ANDROID_dk_return()
-#IOS_dk_return()
-#IOSSIM_dk_return()
+IOS_dk_return()
+IOSSIM_dk_return()
 
 if(WIN)
 	dk_depend(winmm.lib)
