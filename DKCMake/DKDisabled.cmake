@@ -143,7 +143,7 @@ if(LINUX) # Disabled for Linux targets
 	dk_disable(boxer)			# no package gtk+-3.0 found
 	dk_disable(DKHook)
 	dk_disable(DKSFMLWindow)	# requires sfml
-	dk_disable(DKWebSockets)	# requires libwebsockets, uwebsockets
+	#dk_disable(DKWebSockets)	# requires libwebsockets, uwebsockets
 	dk_disable(freealut)		# AL/al.h: No such file or directory
 	dk_disable(giflib)			# aclocal-1.15: command not found
 	dk_disable(imagemagick)		#libimagemagik.a not found
