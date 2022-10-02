@@ -159,8 +159,7 @@ endif()
 
 
 if(RASPBERRY) # Disabled for Raspberry Pi targets
-	#dk_disable(android-build-tools)
-	dk_disable(boxer)
+	#dk_disable(boxer)
 	dk_disable(DKHook)
 	dk_disable(DKMidi)			# requires rtmidi
 	dk_disable(DKWebSockets)	# requires libwebsocket, uwebsockets
@@ -190,20 +189,20 @@ if(ANDROID) # Disabled for Android targets
 	dk_disable(DKCef)			# requires cef_binary
 	dk_disable(DKCefChild)		# requires cef_binary
 	dk_disable(DKCurl)			# requires curl
-	dk_disable(DKHandles)		
+	#dk_disable(DKHandles)		
 	dk_disable(DKMidi)			# requires rtmidi
 	dk_disable(DKMySql)			# requires curl
 	dk_disable(DKSDLCef)		# requires sdl, cef_binary
 	dk_disable(DKSFMLWindow)	# requires sfml
 	dk_disable(DKWebSockets)	# requires libwebsockets or uwebsockets
-	dk_disable(DKWebview)
+	#dk_disable(DKWebview)
 	dk_disable(flac)			# configure: error: unrecognized option: `-DANDROID32'
 	dk_disable(freealut)		# DKFunctions.cmake:4405->dk_findFiles():  files is invalid
 	dk_disable(imagemagick)		# dkscript.tmp: line 2: cd: /android32/Debug: No such file or directory
 	dk_disable(ogg)				# configure: error: unrecognized option: `-DANDROID32'
 	dk_disable(libuv)			# error : incomplete definition of type 'struct ifaddrs'
 	dk_disable(vorbis)			# configure: error: unrecognized option: `-DANDROID32'
-	dk_disable(libwebsockets)
+	#dk_disable(libwebsockets)
 	dk_disable(libxml2)			# ../../configure: No such file or directory
 	dk_disable(openal)			# The system cannot find the file specified
 	dk_disable(openssl)
