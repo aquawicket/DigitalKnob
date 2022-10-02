@@ -25,9 +25,7 @@ include_guard()
 
 
 # DISABLED FOR ALL
-#dk_disable(astyle)
 dk_disable(bullet3)				# requires openscenegraph 
-#dk_disable(conio-for-linux)
 dk_disable(DKJerryscript)		# requires jerryscript
 dk_disable(DKOcr)				# requires leptonica, tesseract
 dk_disable(DKOFWindow)			# requires openframeworks
@@ -50,7 +48,6 @@ dk_disable(DKPlugin1)			# TODO
 dk_disable(DKPlugin2)			# TODO
 dk_disable(DKRestart)			# error C3861: 'printf': identifier not found
 dk_disable(DKScreenRecorder)	# requires opencv
-#dk_disable(DKSDLAudio)
 dk_disable(DKSDLWav)			# compiling errors
 dk_disable(DKSDLVideo)			# requires ffmpeg
 dk_disable(DKSFMLRml)			# requires sfml. Incomplete
@@ -73,7 +70,6 @@ dk_disable(libwebp)
 dk_disable(libx11)
 dk_disable(lighttpd)
 dk_disable(lua)					# no CMakeLists.txt
-#dk_disable(miniweb)
 dk_disable(msys2)				# TODO: currently using msys
 dk_disable(opencv)				# error C3861: 'random_shuffle': identifier not found
 dk_disable(openframeworks)		# error: CMakeLists.txt broken
@@ -91,10 +87,12 @@ dk_disable(waave)
 
 
 if(WIN) # Disabled for Windows targets
+	dk_disable(DKWebview)
 	#dk_disable(libtorrent)		# Could NOT find Boost (missing: Boost_INCLUDE_DIR)
 endif()
 
 if(WIN_64) # Disabled for Windows 64bit targets
+	dk_disable(DKWebview)
 	dk_disable(smpeg2)			# fatal error C1083: Cannot open include file: 'unistd.h'
 endif()
 
