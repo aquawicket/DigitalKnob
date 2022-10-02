@@ -1255,7 +1255,7 @@ endfunction()
 #
 #	TODO
 #
-#	@plugin					- TODO
+#	@plugin				- TODO
 #	@target:(optional)	- TODO
 #
 function(dk_disable plugin)
@@ -3012,6 +3012,7 @@ endfunction()
 #	@plugin				- TODO
 #	@target (optional)	- TODO
 #
+# FIXME
 macro(dk_require plugin)
 	list(FIND dk_disabled_list ${plugin} index)
 	if(${index} GREATER -1)
