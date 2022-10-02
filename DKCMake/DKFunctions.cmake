@@ -3012,14 +3012,14 @@ endfunction()
 #	@plugin				- TODO
 #	@target (optional)	- TODO
 #
-macro(dk_require plugin)
-	list(FIND dk_disabled_list ${plugin} index)
-	if(${index} GREATER -1)
-		dk_warn("${plugin} IS DISABLED")
-		return()
-	endif()
-	dk_depend(${plugin})
-endmacro()
+#macro(dk_require plugin)
+#	list(FIND dk_disabled_list ${plugin} index)
+#	if(${index} GREATER -1)
+#		dk_warn("${plugin} IS DISABLED")
+#		return()
+#	endif()
+#	dk_depend(${plugin})
+#endmacro()
 
 
 ###############################################################################
