@@ -166,14 +166,14 @@ if(RASPBERRY) # Disabled for Raspberry Pi targets
 	dk_disable(java)
 	dk_disable(kdevelop)
 	dk_disable(openjdk)
-	dk_disable(libwebsockets)
+	#dk_disable(libwebsockets)
 	dk_disable(libxml2)
 	dk_disable(rtmidi)
 	dk_disable(sdl-gpu)
 	dk_disable(stackwalker)
 	dk_disable(tiff)
 	dk_disable(upx)
-	dk_disable(uwebsockets)
+	#dk_disable(uwebsockets)
 endif()
 
 
