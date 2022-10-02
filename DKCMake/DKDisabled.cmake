@@ -102,7 +102,7 @@ endif()
 if(MAC)  # Disabled for MAC targets
 	dk_disable(freealut)		# ** BUILD FAILED **
 	dk_disable(imagemagick)		# no such file or directory: libimagemagik.a
-	dk_disable(libwebsockets)
+	#dk_disable(libwebsockets)
 	dk_disable(libxml2)			# fatal error: 'extra/stricmp.h' file not found
 	dk_disable(mlocate)			# Unable to locate a Java Runtime that supports apt
 	dk_disable(rtmidi)			# Undefined symbols for architecture x86_64
@@ -150,11 +150,8 @@ if(LINUX) # Disabled for Linux targets
 	dk_disable(imagemagick)		#libimagemagik.a not found
 	dk_disable(kdevelop)
 	#dk_disable(libtorrent)		# Could not find BOOST
-	#dk_disable(libwebsockets)
 	dk_disable(libxml2)			# Not such file or directory
 	dk_disable(sfml)           	# sfml_sfml-network)  #TODO: disabling individual sublibraries
-	#dk_disable(stackwalker)
-	#dk_disable(uwebsockets)
 endif()
 
 
