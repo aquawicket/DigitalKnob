@@ -3,7 +3,7 @@
 
 
 #dk_import(http://caca.zoy.org/files/libcaca/libcaca-0.99.beta19.tar.gz)
-dk_import(https://github.com/cacalabs/libcaca.git)
+dk_import(https://github.com/cacalabs/libcaca.git BRANCH main)
 
 
 ### LINK ###
