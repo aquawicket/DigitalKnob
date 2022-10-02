@@ -70,7 +70,7 @@ dk_disable(libtorrent)
 dk_disable(libvncserver)		# error C2065: 'nonBlocking': undeclared identifier
 dk_disable(libvncserver-master-win)
 dk_disable(libwebp)
-#dk_disable(libx11)
+dk_disable(libx11)
 dk_disable(lighttpd)
 dk_disable(lua)					# no CMakeLists.txt
 #dk_disable(miniweb)
