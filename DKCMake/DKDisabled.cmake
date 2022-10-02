@@ -64,7 +64,7 @@ dk_disable(java)
 dk_disable(jerryscript)
 dk_disable(jpeg)				# DEPRECATED: using libjpeg_turbo instead
 dk_disable(leptonica)
-#dk_disable(libcaca)
+dk_disable(libcaca)				# no CMakeLists.txt
 dk_disable(librocket)			# OBSOLETE: replaced by rmlui
 dk_disable(libtorrent)
 dk_disable(libvncserver)		# error C2065: 'nonBlocking': undeclared identifier
