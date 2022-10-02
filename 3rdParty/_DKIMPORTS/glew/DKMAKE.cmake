@@ -54,8 +54,6 @@ dk_queueCommand	(${DKCMAKE_BUILD} ${GLEW}/build/cmake)
 #dk_copy(${GLEW}/${OS}/bin/${RELEASE_DIR} ${GLEW}/${OS}/CMakeFiles/Export/bin/ OVERWRITE)
 
 
-WIN_dk_visualStudio			(${GLEW_NAME} glew_s)
-MAC_dk_xcode				(${GLEW_NAME} glew_s)
-IOSSIM_dk_xcode				(${GLEW_NAME} glew_s)
-LINUX_dk_queueCommand		(make glew_s)
-RASPBERRY_dk_queueCommand	(make glew_s)
+dk_visualStudio	(${GLEW_NAME} glew_s)
+dk_xcode		(${GLEW_NAME} glew_s)
+dk_make			(${GLEW_NAME} glew_s)

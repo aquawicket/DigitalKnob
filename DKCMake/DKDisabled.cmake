@@ -25,7 +25,7 @@ include_guard()
 
 
 # DISABLED FOR ALL
-dk_disable(bullet3)				# requires openscenegraph 
+dk_disable(bullet3)				
 dk_disable(DKJerryscript)		# requires jerryscript
 dk_disable(DKOcr)				# requires leptonica, tesseract
 dk_disable(DKOFWindow)			# requires openframeworks
