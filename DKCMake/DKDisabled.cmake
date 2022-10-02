@@ -102,7 +102,6 @@ endif()
 if(MAC)  # Disabled for MAC targets
 	dk_disable(freealut)		# ** BUILD FAILED **
 	dk_disable(imagemagick)		# no such file or directory: libimagemagik.a
-	#dk_disable(libwebsockets)
 	dk_disable(libxml2)			# fatal error: 'extra/stricmp.h' file not found
 	dk_disable(mlocate)			# Unable to locate a Java Runtime that supports apt
 	dk_disable(rtmidi)			# Undefined symbols for architecture x86_64
@@ -127,7 +126,7 @@ if(IOS OR IOSSIM)  # Disabled for iOS and iOS-Simulator targets
 	dk_disable(libmd)			# dk_getExtension Function invoked with incorrect arguments
 	dk_disable(libpng)			# no such sysroot directory: 'iphonesimulator'
 	#dk_disable(libwebp)		# TIFF is disabled when statically linking
-	dk_disable(libwebsockets)
+	#dk_disable(libwebsockets)
 	dk_disable(libxml2)			# fatal error: 'config.h' file not found
 	dk_disable(mlocate)			# Unable to locate a Java Runtime that supports apt
 	dk_disable(opensles)		
