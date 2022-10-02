@@ -115,11 +115,11 @@ if(IOS OR IOSSIM)  # Disabled for iOS and iOS-Simulator targets
 	dk_disable(boxer)			# COCOA_LIBRARY not found
 	dk_disable(bzip2)			# dk_include Function invoked with incorrect arguments
 	dk_disable(cryptopp)		# ** BUILD FAILED ** /blake2b_simd.cpp
-	dk_disable(DKCef)
-	dk_disable(DKCefChild)
-	dk_disable(DKMidi)
-	dk_disable(DKSDLCef)
-	dk_disable(DKSFMLWindow)
+	dk_disable(DKCef)			# requires cef_binary
+	dk_disable(DKCefChild)		# requires cef_binary
+	dk_disable(DKMidi)			# requires rtmidi
+	dk_disable(DKSDLCef)		# requires cef_binary, sdl
+	dk_disable(DKSFMLWindow)	# requires sfml
 	dk_disable(freealut)		# freealut-master/iossim64 does not contain an Xcode project
 	dk_disable(imagemagick)		# No such file or directory
 	dk_disable(libiconv)		# CMake Error at cmake/dist.cmake:144 (install): install TARGETS given no BUNDLE DESTINATION for MACOSX_BUNDLE executable target "iconvcli"
@@ -143,9 +143,8 @@ endif()
 if(LINUX) # Disabled for Linux targets
 	dk_disable(boxer)			# no package gtk+-3.0 found
 	dk_disable(DKHook)
-	dk_disable(DKSDLWav)
-	dk_disable(DKSFMLWindow)
-	dk_disable(DKWebSockets)
+	dk_disable(DKSFMLWindow)	# requires sfml
+	dk_disable(DKWebSockets)	# requires libwebsockets, uwebsockets
 	dk_disable(freealut)		# AL/al.h: No such file or directory
 	dk_disable(giflib)			# aclocal-1.15: command not found
 	dk_disable(imagemagick)		#libimagemagik.a not found
@@ -163,8 +162,8 @@ if(RASPBERRY) # Disabled for Raspberry Pi targets
 	#dk_disable(android-build-tools)
 	dk_disable(boxer)
 	dk_disable(DKHook)
-	dk_disable(DKMidi)
-	dk_disable(DKWebSockets)
+	dk_disable(DKMidi)			# requires rtmidi
+	dk_disable(DKWebSockets)	# requires libwebsocket, uwebsockets
 	dk_disable(emsdk)
 	dk_disable(freealut)
 	dk_disable(giflib)
@@ -188,16 +187,15 @@ if(ANDROID) # Disabled for Android targets
 	dk_disable(bzip2)			# 'make' is not recognized as an internal or external command
 	dk_disable(cryptopp)		# error : cannot use 'throw' with exceptions disabled
 	dk_disable(curl)			# error : "strerror_r MUST be either POSIX, glibc style"
-	dk_disable(DKCef)
-	dk_disable(DKCefChild)
-	dk_disable(DKCurl)			
-	dk_disable(DKWebSockets)
-	dk_disable(DKHandles)
-	dk_disable(DKMidi)
-	dk_disable(DKMySql)			# fatal error : 'curl/curl.h' file not found
-	dk_disable(DKSDLCef)
-	dk_disable(DKSFMLWindow)
-	dk_disable(DKWebSockets)
+	dk_disable(DKCef)			# requires cef_binary
+	dk_disable(DKCefChild)		# requires cef_binary
+	dk_disable(DKCurl)			# requires curl
+	dk_disable(DKHandles)		
+	dk_disable(DKMidi)			# requires rtmidi
+	dk_disable(DKMySql)			# requires curl
+	dk_disable(DKSDLCef)		# requires sdl, cef_binary
+	dk_disable(DKSFMLWindow)	# requires sfml
+	dk_disable(DKWebSockets)	# requires libwebsockets or uwebsockets
 	dk_disable(DKWebview)
 	dk_disable(flac)			# configure: error: unrecognized option: `-DANDROID32'
 	dk_disable(freealut)		# DKFunctions.cmake:4405->dk_findFiles():  files is invalid

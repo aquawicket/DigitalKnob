@@ -31,7 +31,7 @@ ANDROID_dk_libRelease	(${CRYPTOPP}/${OS}/${RELEASE_DIR}/libcryptopp.a)
 dk_setPath(${CRYPTOPP}/${BUILD_DIR})
 WIN_dk_queueCommand			(${DKCMAKE_BUILD} -DBUILD_STATIC=ON -DBUILD_SHARED=OFF -DBUILD_TESTING=OFF ${CRYPTOPP})
 if(MAC)
-	string(REPLACE "-DMAC " " " DKCMAKE_BUILD_CRYPTOPP "${DKCMAKE_BUILD}") #fix of class named MAC in cryptopp
+	string(REPLACE "-DMAC " " " DKCMAKE_BUILD_CRYPTOPP "${DKCMAKE_BUILD}") #fix for class named MAC in cryptopp
 endif()
 MAC_dk_queueCommand			(${DKCMAKE_BUILD_CRYPTOPP} -DBUILD_STATIC=ON -DBUILD_SHARED=OFF -DBUILD_TESTING=OFF -DCRYPTOPP_DISABLE_MIXED_ASM=ON ${CRYPTOPP})
 IOS_dk_queueCommand			(${DKCMAKE_BUILD} -DBUILD_STATIC=ON -DBUILD_SHARED=OFF -DBUILD_TESTING=OFF ${LIBMD_CMAKE} ${CRYPTOPP})
@@ -45,6 +45,6 @@ ANDROID_dk_queueCommand		(${DKCMAKE_BUILD_CRYPTOPP} "-DCMAKE_CXX_FLAGS=/I${ANDRO
 
 
 ### COMPILE ###
-dk_visualStudio	(${CRYPTOPP_NAME} cryptopp-static)
-dk_xcode		(${CRYPTOPP_NAME} cryptopp-static)
-dk_make			(${CRYPTOPP_NAME} cryptopp-static)
+dk_visualStudio	(${CRYPTOPP_NAME} cryptopp-static) #windows, android
+dk_xcode		(${CRYPTOPP_NAME} cryptopp-static) #mac, ios, iossim
+dk_make			(${CRYPTOPP_NAME} cryptopp-static) #linux, raspberry

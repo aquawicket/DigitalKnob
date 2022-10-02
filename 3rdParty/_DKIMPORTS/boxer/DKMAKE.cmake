@@ -1,11 +1,16 @@
 # https://github.com/aaronmjacobs/Boxer
+
+
+### OS CHECK ###
 RASPBERRY_dk_return()
 ANDROID_dk_return()
 
 
+### DEPEND ###
 APPLE_dk_depend(cocoa)
 
 
+### IMPORT ###
 dk_import(https://github.com/aaronmjacobs/Boxer.git)
 
 
@@ -24,7 +29,6 @@ dk_command(${DKCMAKE_BUILD} ${BOXER})
 
 
 ### COMPILE ###
-dk_visualStudio				(${BOXER_NAME} Boxer)
-dk_xcode					(${BOXER_NAME} Boxer)
-LINUX_dk_queueCommand		(make Boxer)
-RASPBERRY_dk_queueCommand	(make Boxer)
+dk_visualStudio	(${BOXER_NAME} Boxer) #windows, android
+dk_xcode		(${BOXER_NAME} Boxer) #mac, ios, iossim
+dk_make			(${BOXER_NAME} Boxer) #linux, raspberry
