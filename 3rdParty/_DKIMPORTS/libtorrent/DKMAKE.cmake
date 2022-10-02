@@ -9,11 +9,12 @@ dk_depend(openssl)
 
 
 ### IMPORT ###
-dk_import(https://github.com/arvidn/libtorrent.git)
+dk_import(https://github.com/arvidn/libtorrent/archive/refs/tags/v2.0.7.zip)
+#dk_import(https://github.com/arvidn/libtorrent.git)
 
 
 ### LINK ###
-dk_include(${LIBTORRENT}/include)
+dk_include				(${LIBTORRENT}/include)
 WIN_dk_libDebug			(${LIBTORRENT}/${OS}/${DEBUG_DIR}/torrent-rasterbar.lib)
 WIN_dk_libRelease		(${LIBTORRENT}/${OS}/${RELEASE_DIR}/torrent-rasterbar.lib)
 MAC_dk_libDebug			(${LIBTORRENT}/${OS}/lib/${DEBUG_DIR}/libtorrent-rasterbar.a)
@@ -27,8 +28,7 @@ ANDROID_dk_libRelease	(${LIBTORRENT}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/
 
 
 ### GENERATE ###
-dk_setPath(${LIBTORRENT}/${BUILD_DIR})
-#dk_queueCommand(${DKCMAKE_BUILD} -Dshared=OFF -Dunicode=OFF -Dstatic_runtime=ON -DBOOST_ROOT=${BOOST} -DBOOST_LIBRARYDIR=${BOOST}/${OS}/lib ${OPENSSL_CMAKE} ${LIBTORRENT})
+dk_setPath		(${LIBTORRENT}/${BUILD_DIR})
 dk_queueCommand	(${DKCMAKE_BUILD} -Dshared=OFF -Dunicode=OFF -Dstatic_runtime=ON ${BOOST_CMAKE} ${OPENSSL_CMAKE} ${LIBTORRENT})
 
 

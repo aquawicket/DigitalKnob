@@ -598,7 +598,7 @@ dk_remove(${DKFunctions_ext} NOERROR)
 #
 macro(dk_return)
 	#DKDEBUGFUNC(${ARGV})
-	message(STATUS "dk_return()")
+	message(STATUS "${CMAKE_CURRENT_LIST_DIR} -> dk_return()")
 	return()
 endmacro()
 dk_createOsMacros("dk_return")
