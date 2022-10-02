@@ -3012,14 +3012,15 @@ endfunction()
 #	@plugin				- TODO
 #	@target (optional)	- TODO
 #
-#macro(dk_require plugin)
+macro(dk_require plugin)
+	dk_dump(CMAKE_CURRENT_LIST_DIR)
 #	list(FIND dk_disabled_list ${plugin} index)
 #	if(${index} GREATER -1)
 #		dk_warn("${plugin} IS DISABLED")
 #		return()
 #	endif()
 #	dk_depend(${plugin})
-#endmacro()
+endmacro()
 
 
 ###############################################################################
