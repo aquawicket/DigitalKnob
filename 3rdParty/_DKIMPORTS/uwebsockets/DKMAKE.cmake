@@ -1,10 +1,13 @@
 # https://github.com/uNetworking/uWebSockets
 
 
+### DEPEND ###
 dk_depend(zlib)
 dk_depend(libuv)
 dk_depend(openssl)
 
+
+### IMPORT ###
 dk_import(https://github.com/uNetworking/uWebSockets.git BRANCH v0.14 PATCH)
 
 
@@ -31,7 +34,6 @@ dk_queueCommand(${DKCMAKE_BUILD} ${ZLIB_CMAKE} ${LIBUV_CMAKE} ${OPENSSL_CMAKE} $
 
 
 ### COMPILE ###
-dk_visualStudio(${UWEBSOCKETS_NAME} uWS)
-dk_xcode(${UWEBSOCKETS_NAME} uWS)
-LINUX_dk_queueCommand(make uWebSockets)
-RASPBERRY_dk_queueCommand(make uWebSockets)
+dk_visualStudio	(${UWEBSOCKETS_NAME} uWS)
+dk_xcode		(${UWEBSOCKETS_NAME} uWS)
+dk_make			(${UWEBSOCKETS_NAME} uWS)
