@@ -13,7 +13,7 @@ endif()
 ### DEPENDS ###
 dk_depend(vc_redist) #for VCRUNTIME140.dll
 
-dk_import(https://windows.php.net/downloads/releases/php-8.0.22-Win32-vs16-x86.zip)
+dk_import(https://windows.php.net/downloads/releases/php-8.0.24-Win32-vs16-x86.zip)
 
 ### INSTALL ###
 #dk_set(PHP_BINARY_VERSION 8.0.20-Win32-vs16-x86)

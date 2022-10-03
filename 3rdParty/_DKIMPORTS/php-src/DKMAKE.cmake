@@ -21,7 +21,7 @@ if(NOT WIN_HOST)
 endif()
 ### DEPENDS ###
 dk_depend(vc_redist) #for VCRUNTIME140.dll
-dk_import(https://windows.php.net/downloads/releases/php-8.0.23-Win32-vs16-x86.zip)
+dk_import(https://windows.php.net/downloads/releases/php-8.0.24-Win32-vs16-x86.zip)
 
 ### INSTALL ###
 #dk_set(PHP-SRC_VERSION 8.0.23-Win32-vs16-x86)
