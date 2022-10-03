@@ -14,11 +14,6 @@ else()
 	dk_set(LIBPNG_MAJOR 1)
 	dk_set(LIBPNG_MINOR 6)
 	dk_set(LIBPNG_BUILD 35)
-	#dk_set(LIBPNG_VERSION ${LIBPNG_MAJOR}.${LIBPNG_MINOR}.${LIBPNG_BUILD})
-	#dk_set(LIBPNG_NAME libpng-${LIBPNG_VERSION})
-	#dk_set(LIBPNG_DL https://github.com/glennrp/libpng/archive/refs/tags/v1.6.35.zip)
-	#dk_set(LIBPNG ${3RDPARTY}/${LIBPNG_NAME})
-	#dk_import(${LIBPNG_DL} ${LIBPNG})
 endif()
 
 
@@ -58,11 +53,11 @@ endif()
 
 
 ### COMPILE ###
-if(PNG_MINOR LESS 7)
+#if(PNG_MINOR LESS 7)
 	dk_set(LIBPNG_PROJECT png_static)
-else()
-	dk_set(LIBPNG_PROJECT png${LIBPNG_MAJOR}${LIBPNG_MINOR}_static)
-endif()
+#else()
+#	dk_set(LIBPNG_PROJECT png${LIBPNG_MAJOR}${LIBPNG_MINOR}_static)
+#endif()
 dk_visualStudio	(${LIBPNG_NAME} ${LIBPNG_PROJECT})
 dk_xcode		(${LIBPNG_NAME} ${LIBPNG_PROJECT})
 dk_make			(${LIBPNG_NAME} ${LIBPNG_PROJECT})
