@@ -56,6 +56,7 @@ dk_disable(DKTorrent)			# requires libtorrent
 dk_disable(DKUpdate)			# compiling errors
 dk_disable(DKVncClient)			# requires libvncserver
 dk_disable(DKVncServer)			# requires libvncserver
+dk_disable(giflib)				# 'aclocal-1.15' is missing on your system
 dk_disable(gradle)
 dk_disable(java)
 dk_disable(jerryscript)
