@@ -6,13 +6,14 @@
 
 
 ### DEPEND ###
-if(WIN_32)
-	dk_depend(mingw32)
-endif()
-if(WIN_64)
-	dk_depend(mingw64)
-endif()
+#if(WIN_32)
+	WIN32_dk_depend(mingw32)
+#endif()
+#if(WIN_64)
+	WIN64_dk_depend(mingw64)
+#endif()
 WIN_dk_depend(msys)
+MAC_dk_depend(autotools)
 
 
 ### IMPORT ###
